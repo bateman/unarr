@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 320" width="880" height="320">
+  <defs>
+    <radialGradient id="core" cx="40%" cy="38%" r="70%">
+      <stop offset="0%" stop-color="#FFE48A"/><stop offset="55%" stop-color="#FFB627"/><stop offset="100%" stop-color="#E8780A"/>
+    </radialGradient>
+    <path id="ray" d="M160 20 L176 70 Q160 65 144 70 Z"/>
+  </defs>
+  <g>
+    <use href="#ray" fill="#35C5F4" transform="rotate(0 160 160)"/><use href="#ray" fill="#FFC230" transform="rotate(45 160 160)"/>
+    <use href="#ray" fill="#1DB954" transform="rotate(90 160 160)"/><use href="#ray" fill="#E66000" transform="rotate(135 160 160)"/>
+    <use href="#ray" fill="#8C5BBA" transform="rotate(180 160 160)"/><use href="#ray" fill="#A33B3B" transform="rotate(225 160 160)"/>
+    <use href="#ray" fill="#D34BA8" transform="rotate(270 160 160)"/><use href="#ray" fill="#4A90D9" transform="rotate(315 160 160)"/>
+  </g>
+  <circle cx="160" cy="160" r="74" fill="url(#core)"/>
+  <circle cx="160" cy="160" r="57" fill="none" stroke="#FFF6D6" stroke-opacity="0.85" stroke-width="7"/>
+  <text x="300" y="205" font-family="Inter, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="150" font-weight="700" letter-spacing="-4" fill="#1F2430">Sole<tspan fill="#E8780A">arr</tspan></text>
+</svg>

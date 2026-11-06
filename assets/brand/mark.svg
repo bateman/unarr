@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Solearr mark, draft 1.
+  A sun whose rays borrow the brand colours of the apps it replaces or talks to.
+  Colours are approximations taken from the public logos, not copies of the logos themselves.
+    Sonarr   #35C5F4   Radarr   #FFC230   Lidarr   #1DB954
+    Prowlarr #E66000   Bazarr   #8C5BBA   Readarr  #A33B3B
+    Whisparr #D34BA8   Mylar    #4A90D9
+-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <radialGradient id="core" cx="40%" cy="38%" r="70%">
+      <stop offset="0%"   stop-color="#FFE48A"/>
+      <stop offset="55%"  stop-color="#FFB627"/>
+      <stop offset="100%" stop-color="#E8780A"/>
+    </radialGradient>
+    <!-- one ray, pointing up, centred on x=256; rotated copies below -->
+    <path id="ray" d="M256 36 L284 118 Q256 110 228 118 Z" stroke-linejoin="round"/>
+  </defs>
+
+  <g transform="translate(0 0)">
+    <use href="#ray" fill="#35C5F4" transform="rotate(0   256 256)"/>
+    <use href="#ray" fill="#FFC230" transform="rotate(45  256 256)"/>
+    <use href="#ray" fill="#1DB954" transform="rotate(90  256 256)"/>
+    <use href="#ray" fill="#E66000" transform="rotate(135 256 256)"/>
+    <use href="#ray" fill="#8C5BBA" transform="rotate(180 256 256)"/>
+    <use href="#ray" fill="#A33B3B" transform="rotate(225 256 256)"/>
+    <use href="#ray" fill="#D34BA8" transform="rotate(270 256 256)"/>
+    <use href="#ray" fill="#4A90D9" transform="rotate(315 256 256)"/>
+  </g>
+
+  <!-- sun disc -->
+  <circle cx="256" cy="256" r="118" fill="url(#core)"/>
+  <!-- the "arr" ring: a thin orbit, the one thing every *arr logo shares -->
+  <circle cx="256" cy="256" r="92" fill="none" stroke="#FFF6D6" stroke-opacity="0.85" stroke-width="10"/>
+  <circle cx="256" cy="256" r="92" fill="none" stroke="#B85C00" stroke-opacity="0.25" stroke-width="10" stroke-dasharray="80 500" transform="rotate(-50 256 256)"/>
+</svg>
