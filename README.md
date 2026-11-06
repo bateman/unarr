@@ -1,5 +1,3 @@
-<p align="center"><img src="assets/brand/mark.svg" width="128" alt="Unarr"></p>
-
 # Unarr
 
 **One *arr, written in Rust.** A lightweight, single-binary reimplementation of
