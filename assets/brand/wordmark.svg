@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 880 320" width="880" height="320">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 320" width="760" height="320">
   <defs>
     <radialGradient id="core" cx="40%" cy="38%" r="70%">
       <stop offset="0%" stop-color="#FFE48A"/><stop offset="55%" stop-color="#FFB627"/><stop offset="100%" stop-color="#E8780A"/>
@@ -14,5 +14,5 @@
   </g>
   <circle cx="160" cy="160" r="74" fill="url(#core)"/>
   <circle cx="160" cy="160" r="57" fill="none" stroke="#FFF6D6" stroke-opacity="0.85" stroke-width="7"/>
-  <text x="300" y="205" font-family="Inter, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="150" font-weight="700" letter-spacing="-4" fill="#1F2430">Sole<tspan fill="#E8780A">arr</tspan></text>
+  <text x="300" y="205" font-family="Inter, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="150" font-weight="700" letter-spacing="-4" fill="#1F2430">Un<tspan fill="#E8780A">arr</tspan></text>
 </svg>

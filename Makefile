@@ -1,6 +1,6 @@
-# Solearr — project Makefile (bootstrap phase)
+# Unarr — project Makefile (bootstrap phase)
 .DEFAULT_GOAL := help
-NAME ?= solearr
+NAME ?= unarr
 
 .PHONY: help check-name logo
 
