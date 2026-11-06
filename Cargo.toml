@@ -1,0 +1,40 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/unarr-core",
+    "crates/unarr-import",
+    "crates/unarr-api",
+    "crates/unarrd",
+]
+
+[workspace.package]
+version = "0.0.1"
+edition = "2021"
+license = "GPL-3.0-or-later"
+repository = "https://github.com/bateman/Unarr"
+rust-version = "1.85"
+
+[workspace.dependencies]
+unarr-core = { path = "crates/unarr-core" }
+unarr-import = { path = "crates/unarr-import" }
+unarr-api = { path = "crates/unarr-api" }
+
+anyhow = "1"
+thiserror = "2"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+tokio = { version = "1", features = ["rt-multi-thread", "macros", "signal", "fs", "sync", "time"] }
+axum = "0.8"
+tower-http = { version = "0.7", features = ["trace", "cors"] }
+rusqlite = { version = "0.41", features = ["bundled"] }
+tracing = "0.1"
+tracing-subscriber = { version = "0.3", features = ["env-filter"] }
+clap = { version = "4", features = ["derive", "env"] }
+
+# Small, fast, lean: the non-functional requirements live here too.
+[profile.release]
+opt-level = 3
+lto = "fat"
+codegen-units = 1
+panic = "abort"
+strip = true

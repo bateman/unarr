@@ -1,0 +1,15 @@
+[package]
+name = "unarr-core"
+description = "Domain model shared by every *arr personality: media, quality, indexers, download clients, history"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+anyhow.workspace = true
+thiserror.workspace = true
+serde.workspace = true
+rusqlite.workspace = true
+tracing.workspace = true
