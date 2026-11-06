@@ -1,0 +1,15 @@
+[package]
+name = "unarr-import"
+description = "Reads the original sonarr.db / radarr.db / lidarr.db and config.xml into the Unarr model"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[dependencies]
+unarr-core.workspace = true
+anyhow.workspace = true
+thiserror.workspace = true
+rusqlite.workspace = true
+tracing.workspace = true

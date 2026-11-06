@@ -1,0 +1,23 @@
+[package]
+name = "unarrd"
+description = "Unarr daemon: one *arr, written in Rust"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+
+[[bin]]
+name = "unarrd"
+path = "src/main.rs"
+
+[dependencies]
+unarr-core.workspace = true
+unarr-api.workspace = true
+unarr-import.workspace = true
+anyhow.workspace = true
+tokio.workspace = true
+axum.workspace = true
+clap.workspace = true
+tracing.workspace = true
+tracing-subscriber.workspace = true
