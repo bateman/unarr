@@ -1,0 +1,77 @@
+{
+  "body": {
+    "customFormatScore": 1780,
+    "customFormats": [
+      {
+        "id": 22,
+        "name": "HBO"
+      },
+      {
+        "id": 36,
+        "name": "Language not Italian"
+      },
+      {
+        "id": 7,
+        "name": "Repack/Proper"
+      },
+      {
+        "id": 11,
+        "name": "WEB Tier 01"
+      }
+    ],
+    "dateAdded": "2026-03-07T15:32:45Z",
+    "id": 361,
+    "indexerFlags": 0,
+    "languages": [
+      {
+        "id": 1,
+        "name": "English"
+      }
+    ],
+    "mediaInfo": {
+      "audioBitrate": 384000,
+      "audioChannels": 5.1,
+      "audioCodec": "AC3",
+      "audioLanguages": "eng",
+      "audioStreamCount": 1,
+      "resolution": "1920x1080",
+      "runTime": "29:03",
+      "scanType": "Progressive",
+      "subtitles": "eng",
+      "videoBitDepth": 8,
+      "videoBitrate": 0,
+      "videoCodec": "h264",
+      "videoDynamicRange": "",
+      "videoDynamicRangeType": "",
+      "videoFps": 23.976
+    },
+    "path": "/tv/Silicon Valley/Season 04/Silicon Valley (2014) - S04E02 - Terms of Service [HBO][WEBDL-1080p Proper][AC3 5.1][h264]-monkee.mkv",
+    "quality": {
+      "quality": {
+        "id": 3,
+        "name": "WEBDL-1080p",
+        "resolution": 1080,
+        "source": "web"
+      },
+      "revision": {
+        "isRepack": true,
+        "real": 0,
+        "version": 2
+      }
+    },
+    "qualityCutoffNotMet": false,
+    "relativePath": "Season 04/Silicon Valley (2014) - S04E02 - Terms of Service [HBO][WEBDL-1080p Proper][AC3 5.1][h264]-monkee.mkv",
+    "releaseGroup": "monkee",
+    "releaseType": "singleEpisode",
+    "sceneName": "Silicon.Valley.S04E02.Terms.of.Service.REPACK.1080p.HBO.WEB-DL.DD5.1.H.264-monkee-Scrambled",
+    "seasonNumber": 4,
+    "seriesId": 22,
+    "size": 865765285
+  },
+  "recordedAt": "2026-11-07T08:04:07Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/episodefile/361"
+  },
+  "status": 200
+}

@@ -1,0 +1,15 @@
+{
+  "body": {
+    "autoRedownloadFailed": true,
+    "autoRedownloadFailedFromInteractiveSearch": true,
+    "downloadClientWorkingFolders": "_UNPACK_|_FAILED_",
+    "enableCompletedDownloadHandling": true,
+    "id": 1
+  },
+  "recordedAt": "2026-11-07T08:04:07Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/config/downloadclient"
+  },
+  "status": 200
+}

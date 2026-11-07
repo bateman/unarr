@@ -1,0 +1,77 @@
+{
+  "body": [
+    {
+      "airDate": "2026-09-04",
+      "airDateUtc": "2026-09-04T04:00:00Z",
+      "episodeFileId": 755,
+      "episodeNumber": 10,
+      "finaleType": "season",
+      "hasFile": true,
+      "id": 1351,
+      "monitored": true,
+      "overview": "A leader wakes to a new world.",
+      "runtime": 60,
+      "seasonNumber": 3,
+      "seriesId": 23,
+      "title": "Troy",
+      "tvdbId": 11751888,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "airDate": "2026-09-18",
+      "airDateUtc": "2026-09-18T07:00:00Z",
+      "episodeFileId": 795,
+      "episodeNumber": 1,
+      "hasFile": true,
+      "id": 524,
+      "lastSearchTime": "2026-10-31T13:17:56Z",
+      "monitored": true,
+      "overview": "Maeve and Conrad go to the dogs, leaving Harry to deal with the messy fallout. Jan makes a startling confession. Kevin and Seraphina both look to the future. Tattersall puts his cards on the table.",
+      "runtime": 48,
+      "seasonNumber": 2,
+      "seriesId": 18,
+      "title": "I Wanna Be Your Dog",
+      "tvdbId": 11542638,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "airDate": "2026-09-22",
+      "airDateUtc": "2026-09-23T01:00:00Z",
+      "episodeFileId": 0,
+      "episodeNumber": 1,
+      "hasFile": false,
+      "id": 1490,
+      "monitored": true,
+      "overview": "On Amy and Sonya's first day as Co-Chief Resident, they must coach a fresh crop of interns through a mysterious case that seems to defy medical logic. Jake and TJ adjust to new roles within the hospital. Meanwhile, Dr. Ben Grant returns to Westside with a secret plan to reshape the Surgical Department.",
+      "runtime": 0,
+      "seasonNumber": 3,
+      "seriesId": 9,
+      "title": "Wherefore Art Thou",
+      "tvdbId": 11870167,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "airDate": "2026-09-25",
+      "airDateUtc": "2026-09-25T07:00:00Z",
+      "episodeFileId": 819,
+      "episodeNumber": 2,
+      "hasFile": true,
+      "id": 525,
+      "lastSearchTime": "2026-10-31T13:17:56Z",
+      "monitored": true,
+      "overview": "With Conrad's self-control slipping, Maeve make plans of her own while Jan hits Harry with a hard truth. Smelling blood, Frankie and Tattersall circle like sharks.",
+      "runtime": 46,
+      "seasonNumber": 2,
+      "seriesId": 18,
+      "title": "Song 2",
+      "tvdbId": 11542639,
+      "unverifiedSceneNumbering": false
+    }
+  ],
+  "recordedAt": "2026-11-07T08:04:13Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/calendar?start=2026-09-01T00:00:00Z&end=2026-09-30T00:00:00Z"
+  },
+  "status": 200
+}

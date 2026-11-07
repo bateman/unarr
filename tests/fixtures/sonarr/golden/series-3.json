@@ -1,0 +1,151 @@
+{
+  "body": {
+    "added": "2026-03-07T11:22:23Z",
+    "airTime": "21:00",
+    "alternateTitles": [],
+    "certification": "TV-MA",
+    "cleanTitle": "deadwood",
+    "ended": true,
+    "firstAired": "2004-03-21T00:00:00Z",
+    "genres": [
+      "Crime",
+      "Drama",
+      "History",
+      "Western"
+    ],
+    "id": 3,
+    "images": [
+      {
+        "coverType": "banner",
+        "remoteUrl": "https://artworks.thetvdb.com/banners/graphical/72023-g.jpg",
+        "url": "/MediaCover/3/banner.jpg"
+      },
+      {
+        "coverType": "poster",
+        "remoteUrl": "https://artworks.thetvdb.com/banners/posters/72023-7.jpg",
+        "url": "/MediaCover/3/poster.jpg"
+      },
+      {
+        "coverType": "fanart",
+        "remoteUrl": "https://artworks.thetvdb.com/banners/fanart/original/72023-1.jpg",
+        "url": "/MediaCover/3/fanart.jpg"
+      },
+      {
+        "coverType": "clearlogo",
+        "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/72023/clearlogo/611b70226830e.png",
+        "url": "/MediaCover/3/clearlogo.png"
+      }
+    ],
+    "imdbId": "tt0348914",
+    "languageProfileId": 1,
+    "lastAired": "2006-08-27T00:00:00Z",
+    "monitorNewItems": "all",
+    "monitored": true,
+    "network": "HBO",
+    "originalLanguage": {
+      "id": 1,
+      "name": "English"
+    },
+    "overview": "In the Black Hills Indian Cession, the town of Deadwood is a settlement violating treaty obligations; a violent and uncivilized outpost that attracts outlaws and entrepreneurs, ex-soldiers and racketeers, Chinese laborers, prostitutes, city slickers and gunfighters.",
+    "path": "/tv/Deadwood",
+    "previousAiring": "2006-08-28T01:00:00Z",
+    "qualityProfileId": 1,
+    "ratings": {
+      "value": 8.6,
+      "votes": 130842
+    },
+    "rootFolderPath": "/tv",
+    "runtime": 53,
+    "seasonFolder": true,
+    "seasons": [
+      {
+        "monitored": false,
+        "seasonNumber": 0,
+        "statistics": {
+          "episodeCount": 0,
+          "episodeFileCount": 0,
+          "percentOfEpisodes": 0,
+          "releaseGroups": [],
+          "sizeOnDisk": 0,
+          "totalEpisodeCount": 17
+        }
+      },
+      {
+        "monitored": true,
+        "seasonNumber": 1,
+        "statistics": {
+          "episodeCount": 12,
+          "episodeFileCount": 12,
+          "percentOfEpisodes": 100,
+          "previousAiring": "2004-06-14T01:00:00Z",
+          "releaseGroups": [
+            "playWEB"
+          ],
+          "sizeOnDisk": 51011829460,
+          "totalEpisodeCount": 12
+        }
+      },
+      {
+        "monitored": true,
+        "seasonNumber": 2,
+        "statistics": {
+          "episodeCount": 12,
+          "episodeFileCount": 12,
+          "percentOfEpisodes": 100,
+          "previousAiring": "2005-05-23T01:00:00Z",
+          "releaseGroups": [
+            "playWEB"
+          ],
+          "sizeOnDisk": 46949067384,
+          "totalEpisodeCount": 12
+        }
+      },
+      {
+        "monitored": true,
+        "seasonNumber": 3,
+        "statistics": {
+          "episodeCount": 12,
+          "episodeFileCount": 12,
+          "percentOfEpisodes": 100,
+          "previousAiring": "2006-08-28T01:00:00Z",
+          "releaseGroups": [
+            "playWEB"
+          ],
+          "sizeOnDisk": 46154382723,
+          "totalEpisodeCount": 12
+        }
+      }
+    ],
+    "seriesType": "standard",
+    "sortTitle": "deadwood",
+    "statistics": {
+      "episodeCount": 36,
+      "episodeFileCount": 36,
+      "percentOfEpisodes": 100,
+      "releaseGroups": [
+        "playWEB"
+      ],
+      "seasonCount": 3,
+      "sizeOnDisk": 144115279567,
+      "totalEpisodeCount": 53
+    },
+    "status": "ended",
+    "tags": [
+      1
+    ],
+    "title": "Deadwood",
+    "titleSlug": "deadwood",
+    "tmdbId": 1406,
+    "tvMazeId": 565,
+    "tvRageId": 3267,
+    "tvdbId": 72023,
+    "useSceneNumbering": false,
+    "year": 2004
+  },
+  "recordedAt": "2026-11-07T08:04:07Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/series/3"
+  },
+  "status": 200
+}

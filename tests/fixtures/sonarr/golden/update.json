@@ -1,0 +1,115 @@
+{
+  "body": [
+    {
+      "branch": "main",
+      "changes": {
+        "fixed": [
+          "Update help text for Allowed Hosts",
+          "Improve logging for 'Allowed Hosts' and 'Trusted Networks'",
+          "Importing single files from Freebox",
+          "Re-run allowed hosts health check when config updated",
+          "Format of timestamps for Discord notifications from some systems",
+          "Avoid checking for free space if other specifications fail first",
+          "Connecting to Jellyfin 12+",
+          "Exclude streaming extensions for probing media info",
+          "Unexpected languages stored in DB will be treated as Unknown"
+        ],
+        "new": [
+          "Add Trusted Networks setting",
+          "Add hostname validation"
+        ]
+      },
+      "fileName": "Sonarr.main.4.0.20.3014.linux-x64.tar.gz",
+      "hash": "1fc48544b5a3401b2fc3df8d0642c1e6a73a28e41a351169edd9cd8f54770db5",
+      "installable": false,
+      "installed": true,
+      "installedOn": "2026-11-07T08:04:05Z",
+      "latest": true,
+      "releaseDate": "2026-09-16T16:40:21Z",
+      "url": "https://github.com/Sonarr/Sonarr/releases/download/v4.0.20.3014/Sonarr.main.4.0.20.3014.linux-x64.tar.gz",
+      "version": "4.0.20.3014"
+    },
+    {
+      "branch": "main",
+      "changes": {
+        "fixed": [
+          "Basic auth for qBittorrent",
+          "Bump FFprobe to 5.1.10"
+        ],
+        "new": []
+      },
+      "fileName": "Sonarr.main.4.0.19.2979.linux-x64.tar.gz",
+      "hash": "b691b3584c31c0b5514058dee81071c923f63d59a37d19e32f92fa13eaa153db",
+      "installable": false,
+      "installed": false,
+      "latest": false,
+      "releaseDate": "2026-06-26T17:24:52Z",
+      "url": "https://github.com/Sonarr/Sonarr/releases/download/v4.0.19.2979/Sonarr.main.4.0.19.2979.linux-x64.tar.gz",
+      "version": "4.0.19.2979"
+    },
+    {
+      "branch": "main",
+      "changes": {
+        "fixed": [
+          "Login with credentials on Qbittorrent 5.2",
+          "Testing qBittorrent after credentials change would always pass tests",
+          "Downloading backups when path contains a trailing slash"
+        ],
+        "new": [
+          "API key support for qBittorrent"
+        ]
+      },
+      "fileName": "Sonarr.main.4.0.18.2971.linux-x64.tar.gz",
+      "hash": "f7f0a6bd7761e9f4fd5bd9aa68989f0c8c2fdd25d0bac4c245d7d8f9201ecda7",
+      "installable": false,
+      "installed": false,
+      "latest": false,
+      "releaseDate": "2026-06-24T14:51:53Z",
+      "url": "https://github.com/Sonarr/Sonarr/releases/download/v4.0.18.2971/Sonarr.main.4.0.18.2971.linux-x64.tar.gz",
+      "version": "4.0.18.2971"
+    },
+    {
+      "branch": "main",
+      "changes": {
+        "fixed": [
+          "Plexmatch special episode numbers",
+          "Multiple XML declarations in kodi/xmbc episodes metadata"
+        ],
+        "new": []
+      },
+      "fileName": "Sonarr.main.4.0.17.2952.linux-x64.tar.gz",
+      "hash": "d5142372067d727979421ca7b1d60601ceecd9758af3a7dafacc6ebba831777a",
+      "installable": false,
+      "installed": false,
+      "latest": false,
+      "releaseDate": "2026-03-19T14:56:49Z",
+      "url": "https://github.com/Sonarr/Sonarr/releases/download/v4.0.17.2952/Sonarr.main.4.0.17.2952.linux-x64.tar.gz",
+      "version": "4.0.17.2952"
+    },
+    {
+      "branch": "main",
+      "changes": {
+        "fixed": [
+          "qBittorrent /login API success check",
+          "Prevent modals from overflowing screen width",
+          "Default runtime to 45 minutes if unavailable when importing episode files"
+        ],
+        "new": []
+      },
+      "fileName": "Sonarr.main.4.0.16.2944.linux-x64.tar.gz",
+      "hash": "1d4a74c763c5a236c0e6eb577534c5b1e53585e5d2ce189a3e901efb5b2adfcc",
+      "installable": false,
+      "installed": false,
+      "latest": false,
+      "releaseDate": "2025-11-05T01:57:31Z",
+      "url": "https://github.com/Sonarr/Sonarr/releases/download/v4.0.16.2944/Sonarr.main.4.0.16.2944.linux-x64.tar.gz",
+      "version": "4.0.16.2944"
+    }
+  ],
+  "recordedAt": "2026-11-07T08:04:06Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/update"
+  },
+  "status": 200
+}

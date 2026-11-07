@@ -1,0 +1,18 @@
+{
+  "body": {
+    "animeEpisodeExample": "The Series Title's! (2010) - S01E01 - 001 - Episode Title 1 [Surround Sound x264][WEBDL-1080p v2][DTS 5.1][JA][AVC 10bit]-RlsGrp",
+    "animeMultiEpisodeExample": "The Series Title's! (2010) - S01E01-E03 - 001-003 - Episode Title [Surround Sound x264][WEBDL-1080p v2][DTS 5.1][JA][AVC 10bit]-RlsGrp",
+    "dailyEpisodeExample": "The Series Title's! (2010) - 2013-10-30 - Episode Title 1 [Surround Sound x264][WEBDL-1080p Proper][DTS 5.1][AVC]-RlsGrp",
+    "multiEpisodeExample": "The Series Title's! (2010) - S01E01-E03 - Episode Title [Surround Sound x264][WEBDL-1080p Proper][DTS 5.1][AVC]-RlsGrp",
+    "seasonFolderExample": "Season 01",
+    "seriesFolderExample": "The Series Title's! (2010)",
+    "singleEpisodeExample": "The Series Title's! (2010) - S01E01 - Episode Title 1 [Surround Sound x264][WEBDL-1080p Proper][DTS 5.1][AVC]-RlsGrp",
+    "specialsFolderExample": "Specials"
+  },
+  "recordedAt": "2026-11-07T08:04:13Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/config/naming/examples"
+  },
+  "status": 200
+}

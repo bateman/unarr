@@ -1,0 +1,38 @@
+{
+  "body": {
+    "appData": "/home/user/unarr/.cache/sonarr/golden-data",
+    "appName": "Sonarr",
+    "authentication": "forms",
+    "branch": "main",
+    "buildTime": "2026-09-16T16:37:42Z",
+    "databaseType": "sqLite",
+    "databaseVersion": "3.45.1",
+    "instanceName": "Sonarr",
+    "isAdmin": false,
+    "isDebug": false,
+    "isDocker": false,
+    "isLinux": true,
+    "isNetCore": true,
+    "isOsx": false,
+    "isProduction": true,
+    "isUserInteractive": true,
+    "isWindows": false,
+    "migrationVersion": 217,
+    "mode": "console",
+    "osName": "ubuntu",
+    "osVersion": "24.04",
+    "packageUpdateMechanism": "builtIn",
+    "runtimeName": ".NET",
+    "runtimeVersion": "6.0.13",
+    "startTime": "2026-11-07T08:04:04Z",
+    "startupPath": "/home/user/unarr/.cache/sonarr/Sonarr",
+    "urlBase": "",
+    "version": "4.0.20.3014"
+  },
+  "recordedAt": "2026-11-07T08:04:06Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/system/status"
+  },
+  "status": 200
+}

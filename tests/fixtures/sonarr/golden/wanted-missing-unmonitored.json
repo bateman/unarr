@@ -1,0 +1,99 @@
+{
+  "body": {
+    "page": 1,
+    "pageSize": 5,
+    "records": [
+      {
+        "airDate": "2001-06-06",
+        "airDateUtc": "2001-06-06T04:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 1,
+        "hasFile": false,
+        "id": 131,
+        "monitored": false,
+        "overview": "An HBO Entertainment News piece about the premiere of the mini-series in Normandy for Easy Company vets, their families, friends and stars of the series.",
+        "runtime": 3,
+        "seasonNumber": 0,
+        "seriesId": 6,
+        "title": "Premiere in Normandy",
+        "tvdbId": 3705121,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "absoluteEpisodeNumber": 11,
+        "airDate": "2001-09-09",
+        "airDateUtc": "2001-09-09T04:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 2,
+        "hasFile": false,
+        "id": 132,
+        "monitored": false,
+        "overview": "Interviews made of the various actors and cast members that provide the knowledge and production skills and sets required to make the film a success.",
+        "runtime": 30,
+        "seasonNumber": 0,
+        "seriesId": 6,
+        "title": "Behind the Scenes - The Making of Band of Brothers",
+        "tvdbId": 312666,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "absoluteEpisodeNumber": 12,
+        "airDate": "2001-11-10",
+        "airDateUtc": "2001-11-10T05:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 3,
+        "hasFile": false,
+        "id": 133,
+        "monitored": false,
+        "overview": "We Stand Alone Together tells the remarkable story of the men of Easy Company in their own words. Featuring recent interviews with the real-life company members whose deeds are dramatized in the miniseries, combined with rare and archival photographs and film footage.",
+        "runtime": 78,
+        "seasonNumber": 0,
+        "seriesId": 6,
+        "title": "We Stand Alone Together: The Men of Easy Company",
+        "tvdbId": 333159,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2005-02-08",
+        "airDateUtc": "2005-02-09T02:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 2,
+        "hasFile": false,
+        "id": 64,
+        "monitored": false,
+        "overview": "A behind the scenes featurette with cast and crew about the creation of Deadwood's first season, included in The Complete First Season DVD set.",
+        "runtime": 14,
+        "seasonNumber": 0,
+        "seriesId": 3,
+        "title": "Making Deadwood: The Show Behind the Show",
+        "tvdbId": 7790465,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2005-02-08",
+        "airDateUtc": "2005-02-09T02:53:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 3,
+        "hasFile": false,
+        "id": 65,
+        "monitored": false,
+        "overview": "A historical short about the real Deadwood, with appearances from experts and members of the Deadwood cast and crew, included in The Complete First Season DVD set.",
+        "runtime": 26,
+        "seasonNumber": 0,
+        "seriesId": 3,
+        "title": "The Real Deadwood",
+        "tvdbId": 7790466,
+        "unverifiedSceneNumbering": false
+      }
+    ],
+    "sortDirection": "ascending",
+    "sortKey": "episodes.airDateUtc",
+    "totalRecords": 563
+  },
+  "recordedAt": "2026-11-07T08:04:13Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/wanted/missing?page=1&pageSize=5&sortKey=airDateUtc&sortDirection=ascending&monitored=false"
+  },
+  "status": 200
+}

@@ -1,0 +1,50 @@
+{
+  "body": [
+    {
+      "id": 1,
+      "name": "Freeleech",
+      "nameLower": "freeleech"
+    },
+    {
+      "id": 2,
+      "name": "Halfleech",
+      "nameLower": "halfleech"
+    },
+    {
+      "id": 4,
+      "name": "DoubleUpload",
+      "nameLower": "doubleupload"
+    },
+    {
+      "id": 8,
+      "name": "Internal",
+      "nameLower": "internal"
+    },
+    {
+      "id": 16,
+      "name": "Scene",
+      "nameLower": "scene"
+    },
+    {
+      "id": 32,
+      "name": "Freeleech75",
+      "nameLower": "freeleech75"
+    },
+    {
+      "id": 64,
+      "name": "Freeleech25",
+      "nameLower": "freeleech25"
+    },
+    {
+      "id": 128,
+      "name": "Nuked",
+      "nameLower": "nuked"
+    }
+  ],
+  "recordedAt": "2026-11-07T08:04:13Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/indexerflag"
+  },
+  "status": 200
+}

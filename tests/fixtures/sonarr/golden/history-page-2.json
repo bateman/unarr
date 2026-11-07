@@ -1,0 +1,521 @@
+{
+  "body": {
+    "page": 2,
+    "pageSize": 10,
+    "records": [
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 18,
+            "name": "ATVP"
+          },
+          {
+            "id": 15,
+            "name": "x265 (HD)"
+          }
+        ],
+        "data": {
+          "indexerFlags": "Freeleech",
+          "reason": "Manual",
+          "releaseGroup": "TBK",
+          "releaseType": "SingleEpisode",
+          "size": "2226362834"
+        },
+        "date": "2026-10-31T16:49:35Z",
+        "episodeId": 1465,
+        "eventType": "episodeFileDeleted",
+        "id": 2285,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "seriesId": 24,
+        "sourceTitle": "/tv/Slow Horses/Season 06/Slow Horses (2022) - S06E03 - Resurrection [ATVP][WEBDL-1080p][AC3 5.1][h265]-TBK.mkv"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 18,
+            "name": "ATVP"
+          }
+        ],
+        "data": {
+          "indexerFlags": "Freeleech",
+          "reason": "Manual",
+          "releaseGroup": "MeM",
+          "releaseType": "SingleEpisode",
+          "size": "3892175591"
+        },
+        "date": "2026-10-31T16:49:35Z",
+        "episodeId": 1464,
+        "eventType": "episodeFileDeleted",
+        "id": 2284,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "seriesId": 24,
+        "sourceTitle": "/tv/Slow Horses/Season 06/Slow Horses (2022) - S06E02 - Daddy Issues [ATVP][WEBDL-1080p][AC3 5.1][h264]-MeM.mkv"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 18,
+            "name": "ATVP"
+          },
+          {
+            "id": 15,
+            "name": "x265 (HD)"
+          }
+        ],
+        "data": {
+          "indexerFlags": "Freeleech",
+          "reason": "Manual",
+          "releaseGroup": "TBK",
+          "releaseType": "SingleEpisode",
+          "size": "2197232422"
+        },
+        "date": "2026-10-31T16:49:35Z",
+        "episodeId": 1463,
+        "eventType": "episodeFileDeleted",
+        "id": 2283,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "seriesId": 24,
+        "sourceTitle": "/tv/Slow Horses/Season 06/Slow Horses (2022) - S06E01 - Circle of Life [ATVP][WEBDL-1080p][AC3 5.1][h265]-TBK.mkv"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 29,
+            "name": "PMTP"
+          }
+        ],
+        "data": {
+          "customFormatScore": "0",
+          "downloadClient": "redacted",
+          "downloadClientName": "Download client",
+          "droppedPath": "/downloads/MobLand.S02E07.Ace.of.Spades.1080p.PMTP.WEB-DL.DDP5.1.ENG.Atmos.ITA.H264-TBK.mkv",
+          "fileId": "1072",
+          "importedPath": "/tv/MobLand/Season 02/MobLand (2025) - S02E07 - Ace of Spades [PMTP][WEBDL-1080p][EAC3 5.1][h264]-TBK.mkv",
+          "indexerFlags": "Freeleech",
+          "releaseGroup": "TBK",
+          "releaseType": "SingleEpisode",
+          "size": "1744183615"
+        },
+        "date": "2026-10-31T13:24:19Z",
+        "downloadId": "185764b847f67ca08657cd9b55679bfe1877a256",
+        "episodeId": 530,
+        "eventType": "downloadFolderImported",
+        "id": 2282,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "seriesId": 18,
+        "sourceTitle": "MobLand S02E07 Ace of Spades 1080p PMTP WEB-DL DDP5 1 ENG Atmos ITA H264-TBK"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 29,
+            "name": "PMTP"
+          }
+        ],
+        "data": {
+          "age": "0",
+          "ageHours": "23.023479679444446",
+          "ageMinutes": "1381.4087809166667",
+          "customFormatScore": "0",
+          "downloadClient": "redacted",
+          "downloadClientName": "Download client",
+          "downloadUrl": "http://indexer.invalid/1ac0c7be6489",
+          "guid": "http://indexer.invalid/edd79ceeff68",
+          "imdbId": null,
+          "indexer": "Indexer",
+          "indexerFlags": "Freeleech",
+          "nzbInfoUrl": "http://indexer.invalid/edd79ceeff68",
+          "protocol": "2",
+          "publishedDate": "2026-10-30T14:16:54Z",
+          "releaseGroup": null,
+          "releaseSource": "UserInvokedSearch",
+          "releaseType": "SingleEpisode",
+          "seriesMatchType": "Title",
+          "size": "1739461754",
+          "torrentInfoHash": "185764b847f67ca08657cd9b55679bfe1877a256",
+          "tvRageId": "0",
+          "tvdbId": "0"
+        },
+        "date": "2026-10-31T13:18:18Z",
+        "downloadId": "185764b847f67ca08657cd9b55679bfe1877a256",
+        "episodeId": 530,
+        "eventType": "grabbed",
+        "id": 2281,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "seriesId": 18,
+        "sourceTitle": "MobLand S02E07 Ace of Spades 1080p PMTP WEB DL DDP5 1 ENG Atmos ITA H264 TBK"
+      },
+      {
+        "customFormatScore": 2000,
+        "customFormats": [
+          {
+            "id": 35,
+            "name": "MULTi"
+          }
+        ],
+        "data": {
+          "indexerFlags": "0",
+          "reason": "Manual",
+          "releaseGroup": "COGLiONE",
+          "releaseType": "SingleEpisode",
+          "size": "4287879901"
+        },
+        "date": "2026-10-30T18:38:06Z",
+        "episodeId": 752,
+        "eventType": "episodeFileDeleted",
+        "id": 2280,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "seriesId": 24,
+        "sourceTitle": "/tv/Slow Horses/Season 05/Slow.Horses.S05E06.iTALiAN.MULTi.1080p.WEB.H264-COGLiONE.mkv"
+      },
+      {
+        "customFormatScore": 2000,
+        "customFormats": [
+          {
+            "id": 35,
+            "name": "MULTi"
+          }
+        ],
+        "data": {
+          "indexerFlags": "0",
+          "reason": "Manual",
+          "releaseGroup": "COGLiONE",
+          "releaseType": "SingleEpisode",
+          "size": "3741890465"
+        },
+        "date": "2026-10-30T18:38:05Z",
+        "episodeId": 751,
+        "eventType": "episodeFileDeleted",
+        "id": 2279,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "seriesId": 24,
+        "sourceTitle": "/tv/Slow Horses/Season 05/Slow.Horses.S05E05.iTALiAN.MULTi.1080p.WEB.H264-COGLiONE.mkv"
+      },
+      {
+        "customFormatScore": 2000,
+        "customFormats": [
+          {
+            "id": 35,
+            "name": "MULTi"
+          },
+          {
+            "id": 7,
+            "name": "Repack/Proper"
+          }
+        ],
+        "data": {
+          "indexerFlags": "0",
+          "reason": "Manual",
+          "releaseGroup": "COGLiONE",
+          "releaseType": "SingleEpisode",
+          "size": "3279236263"
+        },
+        "date": "2026-10-30T18:38:05Z",
+        "episodeId": 750,
+        "eventType": "episodeFileDeleted",
+        "id": 2278,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 2
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "seriesId": 24,
+        "sourceTitle": "/tv/Slow Horses/Season 05/Slow.Horses.S05E04.PROPER.iTALiAN.MULTi.1080p.WEB.H264-COGLiONE.mkv"
+      },
+      {
+        "customFormatScore": 2000,
+        "customFormats": [
+          {
+            "id": 35,
+            "name": "MULTi"
+          },
+          {
+            "id": 7,
+            "name": "Repack/Proper"
+          }
+        ],
+        "data": {
+          "indexerFlags": "0",
+          "reason": "Manual",
+          "releaseGroup": "COGLiONE",
+          "releaseType": "SingleEpisode",
+          "size": "3320210637"
+        },
+        "date": "2026-10-30T18:38:05Z",
+        "episodeId": 749,
+        "eventType": "episodeFileDeleted",
+        "id": 2277,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 2
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "seriesId": 24,
+        "sourceTitle": "/tv/Slow Horses/Season 05/Slow.Horses.S05E03.PROPER.iTALiAN.MULTi.1080p.WEB.H264-COGLiONE.mkv"
+      },
+      {
+        "customFormatScore": 2000,
+        "customFormats": [
+          {
+            "id": 35,
+            "name": "MULTi"
+          },
+          {
+            "id": 7,
+            "name": "Repack/Proper"
+          }
+        ],
+        "data": {
+          "indexerFlags": "0",
+          "reason": "Manual",
+          "releaseGroup": "COGLiONE",
+          "releaseType": "SingleEpisode",
+          "size": "4008444613"
+        },
+        "date": "2026-10-30T18:38:05Z",
+        "episodeId": 748,
+        "eventType": "episodeFileDeleted",
+        "id": 2276,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 2
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "seriesId": 24,
+        "sourceTitle": "/tv/Slow Horses/Season 05/Slow.Horses.S05E02.PROPER.iTALiAN.MULTi.1080p.WEB.H264-COGLiONE.mkv"
+      }
+    ],
+    "sortDirection": "descending",
+    "sortKey": "date",
+    "totalRecords": 1998
+  },
+  "recordedAt": "2026-11-07T08:04:08Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/history?page=2&pageSize=10&sortKey=date&sortDirection=descending"
+  },
+  "status": 200
+}

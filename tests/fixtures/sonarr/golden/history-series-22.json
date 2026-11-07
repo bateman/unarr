@@ -1,0 +1,406 @@
+{
+  "body": [
+    {
+      "customFormatScore": 1775,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 11,
+          "name": "WEB Tier 01"
+        }
+      ],
+      "data": {
+        "customFormatScore": "1775",
+        "downloadClient": "NZBGet",
+        "downloadClientName": "Download client",
+        "droppedPath": "/downloads/Silicon.Valley.S04E07.The.Patent.Troll.1080p.AMZN.WEBRip.DD5.1.x264-NTb-AsRequested.mkv",
+        "fileId": "393",
+        "importedPath": "/tv/Silicon Valley/Season 04/Silicon Valley (2014) - S04E07 - The Patent Troll [AMZN][WEBRip-1080p][EAC3 5.1][x264]-NTb.mkv",
+        "indexerFlags": "0",
+        "releaseGroup": "NTb",
+        "releaseType": "SingleEpisode",
+        "size": "2019979927"
+      },
+      "date": "2026-03-07T17:57:37Z",
+      "downloadId": "317e7255d6daa0b505099c5cee1add55",
+      "episodeId": 677,
+      "eventType": "downloadFolderImported",
+      "id": 426,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "quality": {
+        "quality": {
+          "id": 15,
+          "name": "WEBRip-1080p",
+          "resolution": 1080,
+          "source": "webRip"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "seriesId": 22,
+      "sourceTitle": "Silicon.Valley.S04E07.The.Patent.Troll.1080p.AMZN.WEBRip.DD5.1.x264-NTb-AsRequested"
+    },
+    {
+      "customFormatScore": 1775,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 11,
+          "name": "WEB Tier 01"
+        }
+      ],
+      "data": {
+        "customFormatScore": "1775",
+        "downloadClient": "NZBGet",
+        "downloadClientName": "Download client",
+        "droppedPath": "/downloads/Silicon.Valley.S04E05.The.Blood.Boy.1080p.AMZN.WEBRip.DD5.1.x264-NTb-AsRequested-Obfuscated.mkv",
+        "fileId": "383",
+        "importedPath": "/tv/Silicon Valley/Season 04/Silicon Valley (2014) - S04E05 - The Blood Boy [AMZN][WEBRip-1080p][EAC3 5.1][x264]-NTb.mkv",
+        "indexerFlags": "0",
+        "releaseGroup": "NTb",
+        "releaseType": "SingleEpisode",
+        "size": "2023524787"
+      },
+      "date": "2026-03-07T16:51:58Z",
+      "downloadId": "7649aa873658bb16adc7f4c120f22f25",
+      "episodeId": 675,
+      "eventType": "downloadFolderImported",
+      "id": 375,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "quality": {
+        "quality": {
+          "id": 15,
+          "name": "WEBRip-1080p",
+          "resolution": 1080,
+          "source": "webRip"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "seriesId": 22,
+      "sourceTitle": "Silicon.Valley.S04E05.The.Blood.Boy.1080p.AMZN.WEBRip.DD5.1.x264-NTb-AsRequested-Obfuscated"
+    },
+    {
+      "customFormatScore": 1775,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 11,
+          "name": "WEB Tier 01"
+        }
+      ],
+      "data": {
+        "customFormatScore": "1775",
+        "downloadClient": "NZBGet",
+        "downloadClientName": "Download client",
+        "droppedPath": "/downloads/Silicon.Valley.S04E03.Intellectual.Property.1080p.AMZN.WEBRip.DD5.1.x264-NTb-AsRequested-Obfuscated.mkv",
+        "fileId": "372",
+        "importedPath": "/tv/Silicon Valley/Season 04/Silicon Valley (2014) - S04E03 - Intellectual Property [AMZN][WEBRip-1080p][EAC3 5.1][x264]-NTb.mkv",
+        "indexerFlags": "0",
+        "releaseGroup": "NTb",
+        "releaseType": "SingleEpisode",
+        "size": "1814721857"
+      },
+      "date": "2026-03-07T16:08:54Z",
+      "downloadId": "8358c93ae0613584ad9d9a79d84ab299",
+      "episodeId": 673,
+      "eventType": "downloadFolderImported",
+      "id": 317,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "quality": {
+        "quality": {
+          "id": 15,
+          "name": "WEBRip-1080p",
+          "resolution": 1080,
+          "source": "webRip"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "seriesId": 22,
+      "sourceTitle": "Silicon.Valley.S04E03.Intellectual.Property.1080p.AMZN.WEBRip.DD5.1.x264-NTb-AsRequested-Obfuscated"
+    },
+    {
+      "customFormatScore": 1775,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 11,
+          "name": "WEB Tier 01"
+        }
+      ],
+      "data": {
+        "customFormatScore": "1775",
+        "downloadClient": "NZBGet",
+        "downloadClientName": "Download client",
+        "droppedPath": "/downloads/Silicon.Valley.S04E06.Customer.Service.1080p.AMZN.WEBRip.DD5.1.x264-NTb-Scrambled.mkv",
+        "fileId": "364",
+        "importedPath": "/tv/Silicon Valley/Season 04/Silicon Valley (2014) - S04E06 - Customer Service [AMZN][WEBRip-1080p][EAC3 5.1][x264]-NTb.mkv",
+        "indexerFlags": "0",
+        "releaseGroup": "NTb",
+        "releaseType": "SingleEpisode",
+        "size": "1913435038"
+      },
+      "date": "2026-03-07T15:41:46Z",
+      "downloadId": "1b05df0f615a07687ca2c0ed70b68dab",
+      "episodeId": 676,
+      "eventType": "downloadFolderImported",
+      "id": 307,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "quality": {
+        "quality": {
+          "id": 15,
+          "name": "WEBRip-1080p",
+          "resolution": 1080,
+          "source": "webRip"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "seriesId": 22,
+      "sourceTitle": "Silicon.Valley.S04E06.Customer.Service.1080p.AMZN.WEBRip.DD5.1.x264-NTb-Scrambled"
+    },
+    {
+      "customFormatScore": 1775,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 11,
+          "name": "WEB Tier 01"
+        }
+      ],
+      "data": {
+        "customFormatScore": "1775",
+        "downloadClient": "NZBGet",
+        "downloadClientName": "Download client",
+        "droppedPath": "/downloads/Silicon.Valley.S04E04.Teambuilding.Exercise.1080p.AMZN.WEB-DL.DDP5.1.H.264-NTb.mkv",
+        "fileId": "363",
+        "importedPath": "/tv/Silicon Valley/Season 04/Silicon Valley (2014) - S04E04 - Teambuilding Exercise [AMZN][WEBDL-1080p][EAC3 5.1][h264]-NTb.mkv",
+        "indexerFlags": "0",
+        "releaseGroup": "NTb",
+        "releaseType": "SingleEpisode",
+        "size": "1848367524"
+      },
+      "date": "2026-03-07T15:37:39Z",
+      "downloadId": "16c5e262da2ee1941e132c781d0828e5",
+      "episodeId": 674,
+      "eventType": "downloadFolderImported",
+      "id": 288,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "seriesId": 22,
+      "sourceTitle": "Silicon.Valley.S04E04.Teambuilding.Exercise.1080p.AMZN.WEB-DL.DDP5.1.H.264-NTb"
+    },
+    {
+      "customFormatScore": 1775,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 11,
+          "name": "WEB Tier 01"
+        }
+      ],
+      "data": {
+        "customFormatScore": "1775",
+        "downloadClient": "NZBGet",
+        "downloadClientName": "Download client",
+        "droppedPath": "/downloads/Silicon.Valley.S04E01.Success.Failure.1080p.AMZN.WEBRip.DD5.1.x264-NTb-Scrambled.mkv",
+        "fileId": "362",
+        "importedPath": "/tv/Silicon Valley/Season 04/Silicon Valley (2014) - S04E01 - Success Failure [AMZN][WEBRip-1080p][EAC3 5.1][x264]-NTb.mkv",
+        "indexerFlags": "0",
+        "releaseGroup": "NTb",
+        "releaseType": "SingleEpisode",
+        "size": "1912962015"
+      },
+      "date": "2026-03-07T15:34:55Z",
+      "downloadId": "5bcc47c5015a0f8161f802376a4fc06d",
+      "episodeId": 671,
+      "eventType": "downloadFolderImported",
+      "id": 250,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "quality": {
+        "quality": {
+          "id": 15,
+          "name": "WEBRip-1080p",
+          "resolution": 1080,
+          "source": "webRip"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "seriesId": 22,
+      "sourceTitle": "Silicon.Valley.S04E01.Success.Failure.1080p.AMZN.WEBRip.DD5.1.x264-NTb-Scrambled"
+    },
+    {
+      "customFormatScore": 1780,
+      "customFormats": [
+        {
+          "id": 22,
+          "name": "HBO"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 7,
+          "name": "Repack/Proper"
+        },
+        {
+          "id": 11,
+          "name": "WEB Tier 01"
+        }
+      ],
+      "data": {
+        "customFormatScore": "1780",
+        "downloadClient": "NZBGet",
+        "downloadClientName": "Download client",
+        "droppedPath": "/downloads/Silicon.Valley.S04E02.Terms.of.Service.REPACK.1080p.HBO.WEB-DL.DD5.1.H.264-monkee-Scrambled.mkv",
+        "fileId": "361",
+        "importedPath": "/tv/Silicon Valley/Season 04/Silicon Valley (2014) - S04E02 - Terms of Service [HBO][WEBDL-1080p Proper][AC3 5.1][h264]-monkee.mkv",
+        "indexerFlags": "0",
+        "releaseGroup": "monkee",
+        "releaseType": "SingleEpisode",
+        "size": "865765285"
+      },
+      "date": "2026-03-07T15:32:46Z",
+      "downloadId": "629eda5e9c82391d3fc87addbffff69c",
+      "episodeId": 672,
+      "eventType": "downloadFolderImported",
+      "id": 221,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": true,
+          "real": 0,
+          "version": 2
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "seriesId": 22,
+      "sourceTitle": "Silicon.Valley.S04E02.Terms.of.Service.REPACK.1080p.HBO.WEB-DL.DD5.1.H.264-monkee-Scrambled"
+    }
+  ],
+  "recordedAt": "2026-11-07T08:04:09Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/history/series?seriesId=22&eventType=3"
+  },
+  "status": 200
+}

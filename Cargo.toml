@@ -30,6 +30,9 @@ rusqlite = { version = "0.41", features = ["bundled"] }
 tracing = "0.1"
 tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 clap = { version = "4", features = ["derive", "env"] }
+roxmltree = "0.21"
+fancy-regex = "0.20"
+chrono = { version = "0.4", default-features = false, features = ["std", "clock", "serde"] }
 
 # Small, fast, lean: the non-functional requirements live here too.
 [profile.release]

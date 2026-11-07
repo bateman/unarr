@@ -1,0 +1,2438 @@
+{
+  "body": [
+    {
+      "airDate": "2026-10-02",
+      "airDateUtc": "2026-10-02T07:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 29,
+            "name": "PMTP"
+          }
+        ],
+        "dateAdded": "2026-10-02T12:53:41Z",
+        "id": 1045,
+        "indexerFlags": 1,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 192000,
+          "audioChannels": 5.1,
+          "audioCodec": "EAC3",
+          "audioLanguages": "ita/eng",
+          "audioStreamCount": 2,
+          "resolution": "1920x1080",
+          "runTime": "46:20",
+          "scanType": "Progressive",
+          "subtitles": "ita/ita/eng/ger/spa/fre/por",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/MobLand/Season 02/MobLand (2025) - S02E03 - Bonzo Goes to Bitburg [PMTP][WEBDL-1080p][EAC3 5.1][h264]-TBK.mkv",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Season 02/MobLand (2025) - S02E03 - Bonzo Goes to Bitburg [PMTP][WEBDL-1080p][EAC3 5.1][h264]-TBK.mkv",
+        "releaseGroup": "TBK",
+        "releaseType": "singleEpisode",
+        "sceneName": "MobLand S02E03 1080p PMTP WEB-DL DDP5 1 ENG Atmos ITA H264-TBK",
+        "seasonNumber": 2,
+        "seriesId": 18,
+        "size": 1810001482
+      },
+      "episodeFileId": 1045,
+      "episodeNumber": 3,
+      "hasFile": true,
+      "id": 526,
+      "lastSearchTime": "2026-10-31T13:17:56Z",
+      "monitored": true,
+      "overview": "Maeve probes Conrad for secrets, positioning herself against threats old and new. As Frankie forces a high-stakes sit-down, Kevin and Harry game out their strategy.",
+      "runtime": 45,
+      "seasonNumber": 2,
+      "series": {
+        "added": "2026-03-07T11:22:23Z",
+        "airTime": "03:00",
+        "certification": "TV-MA",
+        "cleanTitle": "mobland",
+        "ended": false,
+        "firstAired": "2025-03-30T00:00:00Z",
+        "genres": [
+          "Crime",
+          "Drama"
+        ],
+        "id": 18,
+        "images": [
+          {
+            "coverType": "banner",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/banners/68175c94c4974.jpg"
+          },
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/posters/6aa1c710a2a68.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/backgrounds/67e9845c46113.jpg"
+          },
+          {
+            "coverType": "clearlogo",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/clearlogo/68fd77028683b.png"
+          }
+        ],
+        "imdbId": "tt31510819",
+        "languageProfileId": 1,
+        "lastAired": "2026-11-20T00:00:00Z",
+        "monitorNewItems": "all",
+        "monitored": true,
+        "network": "Paramount+",
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "overview": "Two mob families clash in a war that threatens to topple empires and lives.",
+        "path": "/tv/MobLand",
+        "qualityProfileId": 10,
+        "ratings": {
+          "value": 8.3,
+          "votes": 138308
+        },
+        "runtime": 47,
+        "seasonFolder": true,
+        "seasons": [
+          {
+            "monitored": true,
+            "seasonNumber": 1
+          },
+          {
+            "monitored": true,
+            "seasonNumber": 2
+          }
+        ],
+        "seriesType": "standard",
+        "sortTitle": "mobland",
+        "status": "continuing",
+        "tags": [
+          1
+        ],
+        "title": "MobLand",
+        "titleSlug": "mobland",
+        "tmdbId": 247718,
+        "tvMazeId": 75026,
+        "tvRageId": 0,
+        "tvdbId": 446831,
+        "useSceneNumbering": false,
+        "year": 2025
+      },
+      "seriesId": 18,
+      "title": "Bonzo Goes to Bitburg",
+      "tvdbId": 11542640,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "airDate": "2026-10-04",
+      "airDateUtc": "2026-10-05T01:00:00Z",
+      "episodeFileId": 0,
+      "episodeNumber": 8,
+      "finaleType": "season",
+      "hasFile": false,
+      "id": 1522,
+      "monitored": false,
+      "overview": "As John and Hal draw closer to the truth, John comes to an unexpected understanding with Sheriff Kane... just as a chilling new discovery emerges.",
+      "runtime": 57,
+      "seasonNumber": 1,
+      "series": {
+        "added": "2026-08-17T12:58:57Z",
+        "airTime": "21:00",
+        "certification": "TV-MA",
+        "cleanTitle": "lanterns",
+        "ended": false,
+        "firstAired": "2026-08-16T00:00:00Z",
+        "genres": [
+          "Mystery",
+          "Science Fiction"
+        ],
+        "id": 44,
+        "images": [
+          {
+            "coverType": "banner",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/376098/banners/6a837b9445cbd.jpg"
+          },
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/376098/posters/6a260a39d7133.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/376098/backgrounds/6a2609cc83b3f.jpg"
+          },
+          {
+            "coverType": "clearlogo",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/376098/clearlogo/6a8306eb38dd4.png"
+          }
+        ],
+        "imdbId": "tt26545992",
+        "languageProfileId": 1,
+        "lastAired": "2026-10-04T00:00:00Z",
+        "monitorNewItems": "all",
+        "monitored": true,
+        "network": "HBO",
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "overview": "Follows intergalactic cops John Stewart and Hal Jordan as they uncover a dark mystery.",
+        "path": "/tv/Lanterns (2026)",
+        "qualityProfileId": 10,
+        "ratings": {
+          "value": 7.7,
+          "votes": 87352
+        },
+        "runtime": 53,
+        "seasonFolder": true,
+        "seasons": [
+          {
+            "monitored": false,
+            "seasonNumber": 0
+          },
+          {
+            "monitored": false,
+            "seasonNumber": 1
+          }
+        ],
+        "seriesType": "standard",
+        "sortTitle": "lanterns",
+        "status": "continuing",
+        "tags": [
+          2
+        ],
+        "title": "Lanterns",
+        "titleSlug": "lanterns",
+        "tmdbId": 95350,
+        "tvMazeId": 44776,
+        "tvRageId": 0,
+        "tvdbId": 376098,
+        "useSceneNumbering": false,
+        "year": 2026
+      },
+      "seriesId": 44,
+      "title": "Dirt and Stars",
+      "tvdbId": 11908194,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "airDate": "2026-10-04",
+      "airDateUtc": "2026-10-05T01:00:00Z",
+      "episodeFileId": 0,
+      "episodeNumber": 15,
+      "hasFile": false,
+      "id": 1616,
+      "monitored": false,
+      "overview": "Aaron Pierre, Kyle Chandler, Kelly Macdonald, and the creators of Lanterns discuss the shocking details around Hal's death and John Stewart officially stepping into his destiny.",
+      "runtime": 5,
+      "seasonNumber": 0,
+      "series": {
+        "added": "2026-08-17T12:58:57Z",
+        "airTime": "21:00",
+        "certification": "TV-MA",
+        "cleanTitle": "lanterns",
+        "ended": false,
+        "firstAired": "2026-08-16T00:00:00Z",
+        "genres": [
+          "Mystery",
+          "Science Fiction"
+        ],
+        "id": 44,
+        "images": [
+          {
+            "coverType": "banner",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/376098/banners/6a837b9445cbd.jpg"
+          },
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/376098/posters/6a260a39d7133.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/376098/backgrounds/6a2609cc83b3f.jpg"
+          },
+          {
+            "coverType": "clearlogo",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/376098/clearlogo/6a8306eb38dd4.png"
+          }
+        ],
+        "imdbId": "tt26545992",
+        "languageProfileId": 1,
+        "lastAired": "2026-10-04T00:00:00Z",
+        "monitorNewItems": "all",
+        "monitored": true,
+        "network": "HBO",
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "overview": "Follows intergalactic cops John Stewart and Hal Jordan as they uncover a dark mystery.",
+        "path": "/tv/Lanterns (2026)",
+        "qualityProfileId": 10,
+        "ratings": {
+          "value": 7.7,
+          "votes": 87352
+        },
+        "runtime": 53,
+        "seasonFolder": true,
+        "seasons": [
+          {
+            "monitored": false,
+            "seasonNumber": 0
+          },
+          {
+            "monitored": false,
+            "seasonNumber": 1
+          }
+        ],
+        "seriesType": "standard",
+        "sortTitle": "lanterns",
+        "status": "continuing",
+        "tags": [
+          2
+        ],
+        "title": "Lanterns",
+        "titleSlug": "lanterns",
+        "tmdbId": 95350,
+        "tvMazeId": 44776,
+        "tvRageId": 0,
+        "tvdbId": 376098,
+        "useSceneNumbering": false,
+        "year": 2026
+      },
+      "seriesId": 44,
+      "title": "Inside the Episode: S1 E8",
+      "tvdbId": 12023902,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "airDate": "2026-10-04",
+      "airDateUtc": "2026-10-05T01:53:00Z",
+      "episodeFileId": 0,
+      "episodeNumber": 16,
+      "hasFile": false,
+      "id": 1617,
+      "monitored": false,
+      "overview": "It’s the season finale of Lanterns: The Official Podcast. Juju Green sits down with showrunner, writer, co-creator and executive producer Chris Mundy, co-creator, writer and executive producer Damon Lindelof, and co-creator, writer and executive producer Tom King to break down Episode 8, “Dirt and Stars.” \r\n\r\nThe conversation goes deep on John Stewart accepting the Green Lantern mantle, Hal Jordan’s legacy, the emotional choices behind the finale, the new Green Lantern oath, Sinestro’s influence, the John Stewart and Noah Macon relationship, and the creative decisions that brought the season to a close.  \r\n\r\nThen, Juju talks with Shea Pritchard, who plays Noah Macon, about stepping into the role, working with Aaron Pierre and Kyle Chandler, Noah’s biggest choices in the finale, and the nature-versus-nurture themes at the heart of his character. Plus, Ulrich Thomsen delivers one final message as Sinestro.",
+      "runtime": 54,
+      "seasonNumber": 0,
+      "series": {
+        "added": "2026-08-17T12:58:57Z",
+        "airTime": "21:00",
+        "certification": "TV-MA",
+        "cleanTitle": "lanterns",
+        "ended": false,
+        "firstAired": "2026-08-16T00:00:00Z",
+        "genres": [
+          "Mystery",
+          "Science Fiction"
+        ],
+        "id": 44,
+        "images": [
+          {
+            "coverType": "banner",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/376098/banners/6a837b9445cbd.jpg"
+          },
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/376098/posters/6a260a39d7133.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/376098/backgrounds/6a2609cc83b3f.jpg"
+          },
+          {
+            "coverType": "clearlogo",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/376098/clearlogo/6a8306eb38dd4.png"
+          }
+        ],
+        "imdbId": "tt26545992",
+        "languageProfileId": 1,
+        "lastAired": "2026-10-04T00:00:00Z",
+        "monitorNewItems": "all",
+        "monitored": true,
+        "network": "HBO",
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "overview": "Follows intergalactic cops John Stewart and Hal Jordan as they uncover a dark mystery.",
+        "path": "/tv/Lanterns (2026)",
+        "qualityProfileId": 10,
+        "ratings": {
+          "value": 7.7,
+          "votes": 87352
+        },
+        "runtime": 53,
+        "seasonFolder": true,
+        "seasons": [
+          {
+            "monitored": false,
+            "seasonNumber": 0
+          },
+          {
+            "monitored": false,
+            "seasonNumber": 1
+          }
+        ],
+        "seriesType": "standard",
+        "sortTitle": "lanterns",
+        "status": "continuing",
+        "tags": [
+          2
+        ],
+        "title": "Lanterns",
+        "titleSlug": "lanterns",
+        "tmdbId": 95350,
+        "tvMazeId": 44776,
+        "tvRageId": 0,
+        "tvdbId": 376098,
+        "useSceneNumbering": false,
+        "year": 2026
+      },
+      "seriesId": 44,
+      "title": "Lanterns: The Official Podcast | Episode 8, \"Dirt and Stars\"",
+      "tvdbId": 12023903,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "airDate": "2026-10-06",
+      "airDateUtc": "2026-10-07T01:00:00Z",
+      "episodeFileId": 0,
+      "episodeNumber": 3,
+      "hasFile": false,
+      "id": 1540,
+      "monitored": true,
+      "overview": "Amy and Jake are paired together on a bizarre case that lays bare the still-raw feelings surrounding their fractured relationship. Old wounds also reopen for Michael when he and Sonya are thrust into a family crisis while trying to save a young addict. Meanwhile, Gina grapples with her life choices when Walter returns to Westside.",
+      "runtime": 0,
+      "seasonNumber": 3,
+      "series": {
+        "added": "2026-03-07T11:22:23Z",
+        "airTime": "21:00",
+        "certification": "12+",
+        "cleanTitle": "docus",
+        "ended": false,
+        "firstAired": "2025-01-07T00:00:00Z",
+        "genres": [
+          "Drama"
+        ],
+        "id": 9,
+        "images": [
+          {
+            "coverType": "banner",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/banners/675ec1dc40af9.jpg"
+          },
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/posters/68aa16885d5ee.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/backgrounds/696789f761136.jpg"
+          },
+          {
+            "coverType": "clearlogo",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/clearlogo/6aa994a538807.png"
+          }
+        ],
+        "imdbId": "tt26748321",
+        "languageProfileId": 1,
+        "lastAired": "2026-11-17T00:00:00Z",
+        "monitorNewItems": "all",
+        "monitored": true,
+        "network": "FOX",
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "overview": "After a brain injury erases the last eight years of Dr. Amy Larsen's life, she must navigate an unfamiliar world where she has no recollection of patients she's treated or the tragedy that caused her to push everyone away.",
+        "path": "/tv/Doc (US)",
+        "qualityProfileId": 10,
+        "ratings": {
+          "value": 7.3,
+          "votes": 7978
+        },
+        "runtime": 43,
+        "seasonFolder": true,
+        "seasons": [
+          {
+            "monitored": false,
+            "seasonNumber": 1
+          },
+          {
+            "monitored": true,
+            "seasonNumber": 2
+          },
+          {
+            "monitored": true,
+            "seasonNumber": 3
+          }
+        ],
+        "seriesType": "standard",
+        "sortTitle": "doc us",
+        "status": "continuing",
+        "tags": [],
+        "title": "Doc (US)",
+        "titleSlug": "doc-us",
+        "tmdbId": 255055,
+        "tvMazeId": 67884,
+        "tvRageId": 0,
+        "tvdbId": 433263,
+        "useSceneNumbering": false,
+        "year": 2025
+      },
+      "seriesId": 9,
+      "title": "I Know What I Want",
+      "tvdbId": 11936711,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "airDate": "2026-10-07",
+      "airDateUtc": "2026-10-07T04:00:00Z",
+      "episodeFileId": 0,
+      "episodeNumber": 10,
+      "finaleType": "season",
+      "hasFile": false,
+      "id": 1412,
+      "monitored": false,
+      "overview": "Big changes in bunches.",
+      "runtime": 55,
+      "seasonNumber": 4,
+      "series": {
+        "added": "2026-04-29T06:09:34Z",
+        "airTime": "00:00",
+        "certification": "TV-MA",
+        "cleanTitle": "tedlasso",
+        "ended": false,
+        "firstAired": "2020-08-14T00:00:00Z",
+        "genres": [
+          "Comedy",
+          "Drama",
+          "Sport"
+        ],
+        "id": 37,
+        "images": [
+          {
+            "coverType": "banner",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/383203/banners/60dfad53daf18.jpg"
+          },
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/383203/posters/61010b6167190.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/383203/backgrounds/60d5931c1f29c.jpg"
+          },
+          {
+            "coverType": "clearlogo",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/383203/clearlogo/611c3acf767fe.png"
+          }
+        ],
+        "imdbId": "tt10986410",
+        "languageProfileId": 1,
+        "lastAired": "2026-10-07T00:00:00Z",
+        "monitorNewItems": "all",
+        "monitored": true,
+        "network": "Apple TV",
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "overview": "Ted Lasso, an American football coach, moves to England when he’s hired to manage a soccer team—despite having no experience. With cynical players and a doubtful town, will he get them to see the Ted Lasso Way?",
+        "path": "/tv/Ted Lasso (2020)",
+        "qualityProfileId": 4,
+        "ratings": {
+          "value": 8.7,
+          "votes": 477987
+        },
+        "runtime": 43,
+        "seasonFolder": true,
+        "seasons": [
+          {
+            "monitored": false,
+            "seasonNumber": 0
+          },
+          {
+            "monitored": false,
+            "seasonNumber": 1
+          },
+          {
+            "monitored": false,
+            "seasonNumber": 2
+          },
+          {
+            "monitored": false,
+            "seasonNumber": 3
+          },
+          {
+            "monitored": false,
+            "seasonNumber": 4
+          }
+        ],
+        "seriesType": "standard",
+        "sortTitle": "ted lasso",
+        "status": "continuing",
+        "tags": [
+          2
+        ],
+        "title": "Ted Lasso",
+        "titleSlug": "ted-lasso",
+        "tmdbId": 97546,
+        "tvMazeId": 44458,
+        "tvRageId": 0,
+        "tvdbId": 383203,
+        "useSceneNumbering": false,
+        "year": 2020
+      },
+      "seriesId": 37,
+      "title": "Being Alive",
+      "tvdbId": 11767190,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "airDate": "2026-10-07",
+      "airDateUtc": "2026-10-07T04:00:00Z",
+      "episodeFileId": 0,
+      "episodeNumber": 4,
+      "hasFile": false,
+      "id": 1466,
+      "monitored": false,
+      "overview": "Lamb tries figuring out who Frank is working for. Sid, River, and Coe do everything to evade the hit squad.",
+      "runtime": 50,
+      "seasonNumber": 6,
+      "series": {
+        "added": "2026-03-07T11:22:23Z",
+        "airTime": "00:00",
+        "certification": "TV-MA",
+        "cleanTitle": "slowhorses",
+        "ended": false,
+        "firstAired": "2022-04-01T00:00:00Z",
+        "genres": [
+          "Suspense",
+          "Thriller"
+        ],
+        "id": 24,
+        "images": [
+          {
+            "coverType": "banner",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/banners/6572357383704.jpg"
+          },
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/posters/637d209da8190.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/backgrounds/63896cb293707.jpg"
+          },
+          {
+            "coverType": "clearlogo",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/clearlogo/656ea800b402e.png"
+          }
+        ],
+        "imdbId": "tt5875444",
+        "languageProfileId": 1,
+        "lastAired": "2026-10-21T00:00:00Z",
+        "monitorNewItems": "all",
+        "monitored": true,
+        "network": "Apple TV",
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "overview": "This quick-witted spy drama follows a dysfunctional team of MI5 agents – and their obnoxious boss, the notorious Jackson Lamb – as they navigate the espionage world's smoke and mirrors to defend England from sinister forces.",
+        "path": "/tv/Slow Horses",
+        "qualityProfileId": 10,
+        "ratings": {
+          "value": 8.4,
+          "votes": 168158
+        },
+        "runtime": 46,
+        "seasonFolder": true,
+        "seasons": [
+          {
+            "monitored": false,
+            "seasonNumber": 0
+          },
+          {
+            "monitored": false,
+            "seasonNumber": 1
+          },
+          {
+            "monitored": false,
+            "seasonNumber": 2
+          },
+          {
+            "monitored": false,
+            "seasonNumber": 3
+          },
+          {
+            "monitored": false,
+            "seasonNumber": 4
+          },
+          {
+            "monitored": false,
+            "seasonNumber": 5
+          },
+          {
+            "monitored": true,
+            "seasonNumber": 6
+          }
+        ],
+        "seriesType": "standard",
+        "sortTitle": "slow horses",
+        "status": "continuing",
+        "tags": [
+          1
+        ],
+        "title": "Slow Horses",
+        "titleSlug": "slow-horses",
+        "tmdbId": 95480,
+        "tvMazeId": 45039,
+        "tvRageId": 0,
+        "tvdbId": 372264,
+        "useSceneNumbering": false,
+        "year": 2022
+      },
+      "seriesId": 24,
+      "title": "Lost & Found",
+      "tvdbId": 11839915,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "airDate": "2026-10-09",
+      "airDateUtc": "2026-10-09T07:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 16,
+            "name": "AMZN"
+          }
+        ],
+        "dateAdded": "2026-10-09T11:45:24Z",
+        "id": 1063,
+        "indexerFlags": 1,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 640000,
+          "audioChannels": 5.1,
+          "audioCodec": "EAC3",
+          "audioLanguages": "ita/eng",
+          "audioStreamCount": 2,
+          "resolution": "1920x1080",
+          "runTime": "45:20",
+          "scanType": "Progressive",
+          "subtitles": "ita/ita/eng/eng/ger/spa/fre/por",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/MobLand/Season 02/MobLand (2025) - S02E04 - Blank Curtain [AMZN][WEBDL-1080p][EAC3 5.1][h264]-MeM.mkv",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Season 02/MobLand (2025) - S02E04 - Blank Curtain [AMZN][WEBDL-1080p][EAC3 5.1][h264]-MeM.mkv",
+        "releaseGroup": "MeM",
+        "releaseType": "singleEpisode",
+        "sceneName": "MobLand.S02E04.Blank.Curtain.ITA.ENG.1080p.AMZN.WEB-DL.DDP5.1.H.264-MeM.GP",
+        "seasonNumber": 2,
+        "seriesId": 18,
+        "size": 3502389136
+      },
+      "episodeFileId": 1063,
+      "episodeNumber": 4,
+      "hasFile": true,
+      "id": 527,
+      "lastSearchTime": "2026-10-31T13:17:56Z",
+      "monitored": true,
+      "overview": "The Harrigans reel from an unexpected turn of events, triggering Harry to do damage control before police scrutiny closes in. Maeve's unseen hand moves Eddie out of London as Seraphina makes a new alliance and Conrad re-asserts his dominance.",
+      "runtime": 44,
+      "seasonNumber": 2,
+      "series": {
+        "added": "2026-03-07T11:22:23Z",
+        "airTime": "03:00",
+        "certification": "TV-MA",
+        "cleanTitle": "mobland",
+        "ended": false,
+        "firstAired": "2025-03-30T00:00:00Z",
+        "genres": [
+          "Crime",
+          "Drama"
+        ],
+        "id": 18,
+        "images": [
+          {
+            "coverType": "banner",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/banners/68175c94c4974.jpg"
+          },
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/posters/6aa1c710a2a68.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/backgrounds/67e9845c46113.jpg"
+          },
+          {
+            "coverType": "clearlogo",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/clearlogo/68fd77028683b.png"
+          }
+        ],
+        "imdbId": "tt31510819",
+        "languageProfileId": 1,
+        "lastAired": "2026-11-20T00:00:00Z",
+        "monitorNewItems": "all",
+        "monitored": true,
+        "network": "Paramount+",
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "overview": "Two mob families clash in a war that threatens to topple empires and lives.",
+        "path": "/tv/MobLand",
+        "qualityProfileId": 10,
+        "ratings": {
+          "value": 8.3,
+          "votes": 138308
+        },
+        "runtime": 47,
+        "seasonFolder": true,
+        "seasons": [
+          {
+            "monitored": true,
+            "seasonNumber": 1
+          },
+          {
+            "monitored": true,
+            "seasonNumber": 2
+          }
+        ],
+        "seriesType": "standard",
+        "sortTitle": "mobland",
+        "status": "continuing",
+        "tags": [
+          1
+        ],
+        "title": "MobLand",
+        "titleSlug": "mobland",
+        "tmdbId": 247718,
+        "tvMazeId": 75026,
+        "tvRageId": 0,
+        "tvdbId": 446831,
+        "useSceneNumbering": false,
+        "year": 2025
+      },
+      "seriesId": 18,
+      "title": "Blank Curtain",
+      "tvdbId": 11542641,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "airDate": "2026-10-13",
+      "airDateUtc": "2026-10-14T01:00:00Z",
+      "episodeFileId": 0,
+      "episodeNumber": 4,
+      "hasFile": false,
+      "id": 1543,
+      "monitored": true,
+      "overview": "Amy and Ben go toe to toe when their cancer patient demands the impossible. Jake discovers a senior Westside surgeon has botched an operation and he must decide whether to speak out and risk his tenuous new position in cardiology. Sonya grapples with the weight of life-changing news.",
+      "runtime": 0,
+      "seasonNumber": 3,
+      "series": {
+        "added": "2026-03-07T11:22:23Z",
+        "airTime": "21:00",
+        "certification": "12+",
+        "cleanTitle": "docus",
+        "ended": false,
+        "firstAired": "2025-01-07T00:00:00Z",
+        "genres": [
+          "Drama"
+        ],
+        "id": 9,
+        "images": [
+          {
+            "coverType": "banner",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/banners/675ec1dc40af9.jpg"
+          },
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/posters/68aa16885d5ee.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/backgrounds/696789f761136.jpg"
+          },
+          {
+            "coverType": "clearlogo",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/clearlogo/6aa994a538807.png"
+          }
+        ],
+        "imdbId": "tt26748321",
+        "languageProfileId": 1,
+        "lastAired": "2026-11-17T00:00:00Z",
+        "monitorNewItems": "all",
+        "monitored": true,
+        "network": "FOX",
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "overview": "After a brain injury erases the last eight years of Dr. Amy Larsen's life, she must navigate an unfamiliar world where she has no recollection of patients she's treated or the tragedy that caused her to push everyone away.",
+        "path": "/tv/Doc (US)",
+        "qualityProfileId": 10,
+        "ratings": {
+          "value": 7.3,
+          "votes": 7978
+        },
+        "runtime": 43,
+        "seasonFolder": true,
+        "seasons": [
+          {
+            "monitored": false,
+            "seasonNumber": 1
+          },
+          {
+            "monitored": true,
+            "seasonNumber": 2
+          },
+          {
+            "monitored": true,
+            "seasonNumber": 3
+          }
+        ],
+        "seriesType": "standard",
+        "sortTitle": "doc us",
+        "status": "continuing",
+        "tags": [],
+        "title": "Doc (US)",
+        "titleSlug": "doc-us",
+        "tmdbId": 255055,
+        "tvMazeId": 67884,
+        "tvRageId": 0,
+        "tvdbId": 433263,
+        "useSceneNumbering": false,
+        "year": 2025
+      },
+      "seriesId": 9,
+      "title": "Great Expectations",
+      "tvdbId": 11966082,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "airDate": "2026-10-14",
+      "airDateUtc": "2026-10-14T04:00:00Z",
+      "episodeFileId": 0,
+      "episodeNumber": 5,
+      "hasFile": false,
+      "id": 1467,
+      "monitored": false,
+      "overview": "River goes after Sid. Lamb sets his sights on Cantor. Taverner carries on with a treacherous deal.",
+      "runtime": 47,
+      "seasonNumber": 6,
+      "series": {
+        "added": "2026-03-07T11:22:23Z",
+        "airTime": "00:00",
+        "certification": "TV-MA",
+        "cleanTitle": "slowhorses",
+        "ended": false,
+        "firstAired": "2022-04-01T00:00:00Z",
+        "genres": [
+          "Suspense",
+          "Thriller"
+        ],
+        "id": 24,
+        "images": [
+          {
+            "coverType": "banner",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/banners/6572357383704.jpg"
+          },
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/posters/637d209da8190.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/backgrounds/63896cb293707.jpg"
+          },
+          {
+            "coverType": "clearlogo",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/clearlogo/656ea800b402e.png"
+          }
+        ],
+        "imdbId": "tt5875444",
+        "languageProfileId": 1,
+        "lastAired": "2026-10-21T00:00:00Z",
+        "monitorNewItems": "all",
+        "monitored": true,
+        "network": "Apple TV",
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "overview": "This quick-witted spy drama follows a dysfunctional team of MI5 agents – and their obnoxious boss, the notorious Jackson Lamb – as they navigate the espionage world's smoke and mirrors to defend England from sinister forces.",
+        "path": "/tv/Slow Horses",
+        "qualityProfileId": 10,
+        "ratings": {
+          "value": 8.4,
+          "votes": 168158
+        },
+        "runtime": 46,
+        "seasonFolder": true,
+        "seasons": [
+          {
+            "monitored": false,
+            "seasonNumber": 0
+          },
+          {
+            "monitored": false,
+            "seasonNumber": 1
+          },
+          {
+            "monitored": false,
+            "seasonNumber": 2
+          },
+          {
+            "monitored": false,
+            "seasonNumber": 3
+          },
+          {
+            "monitored": false,
+            "seasonNumber": 4
+          },
+          {
+            "monitored": false,
+            "seasonNumber": 5
+          },
+          {
+            "monitored": true,
+            "seasonNumber": 6
+          }
+        ],
+        "seriesType": "standard",
+        "sortTitle": "slow horses",
+        "status": "continuing",
+        "tags": [
+          1
+        ],
+        "title": "Slow Horses",
+        "titleSlug": "slow-horses",
+        "tmdbId": 95480,
+        "tvMazeId": 45039,
+        "tvRageId": 0,
+        "tvdbId": 372264,
+        "useSceneNumbering": false,
+        "year": 2022
+      },
+      "seriesId": 24,
+      "title": "Sayonara",
+      "tvdbId": 11839916,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "airDate": "2026-10-15",
+      "airDateUtc": "2026-10-15T07:00:00Z",
+      "episodeFileId": 0,
+      "episodeNumber": 1,
+      "hasFile": false,
+      "id": 1621,
+      "lastSearchTime": "2026-10-24T18:53:24Z",
+      "monitored": true,
+      "overview": "Camp Crystal Lake's idyllic summer is cut short by Jason's death; as the town moves on, Pam continues looking for him; Levon invites her to Founder's Day, but it only triggers Pam's pain; as she runs from her present, Pam is soon met with her past.",
+      "runtime": 56,
+      "seasonNumber": 1,
+      "series": {
+        "added": "2026-10-24T18:52:53Z",
+        "airTime": "03:00",
+        "certification": "16",
+        "cleanTitle": "crystallake",
+        "ended": false,
+        "firstAired": "2026-10-15T00:00:00Z",
+        "genres": [
+          "Drama"
+        ],
+        "id": 49,
+        "images": [
+          {
+            "coverType": "banner",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/banners/6a97089173849.jpg"
+          },
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/posters/6a56eb4470204.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/backgrounds/6ad1e68f82f63.jpg"
+          },
+          {
+            "coverType": "clearlogo",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/clearlogo/6aaaeb6967ab7.png"
+          }
+        ],
+        "imdbId": "tt23148340",
+        "languageProfileId": 1,
+        "lastAired": "2026-10-15T00:00:00Z",
+        "monitorNewItems": "all",
+        "monitored": true,
+        "network": "Peacock",
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "overview": "Single mother Pam Voorhees has been unable to shake her grief after her young, sickly son Jason tragically drowned in the town lake almost a year before. When two strangers arrive at Pam's door digging into her past, a disturbing chain of events is set into motion, leaving the townspeople of Crystal Lake wondering: just who is Pam Voorhees?",
+        "path": "/tv/Crystal Lake (2026)",
+        "qualityProfileId": 10,
+        "ratings": {
+          "value": 7.6,
+          "votes": 20896
+        },
+        "runtime": 50,
+        "seasonFolder": true,
+        "seasons": [
+          {
+            "monitored": true,
+            "seasonNumber": 1
+          }
+        ],
+        "seriesType": "standard",
+        "sortTitle": "crystal lake",
+        "status": "continuing",
+        "tags": [
+          2
+        ],
+        "title": "Crystal Lake",
+        "titleSlug": "crystal-lake",
+        "tmdbId": 213562,
+        "tvMazeId": 64960,
+        "tvRageId": 0,
+        "tvdbId": 426669,
+        "useSceneNumbering": false,
+        "year": 2026
+      },
+      "seriesId": 49,
+      "title": "Camp Crystal",
+      "tvdbId": 9431113,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "airDate": "2026-10-15",
+      "airDateUtc": "2026-10-15T07:00:00Z",
+      "episodeFileId": 0,
+      "episodeNumber": 2,
+      "hasFile": false,
+      "id": 1622,
+      "lastSearchTime": "2026-10-24T18:53:24Z",
+      "monitored": true,
+      "overview": "While on a date with Levon, Pam bumps into Rita and is invited to a weekend seminar with a self-help guru; Grace goes to a high school party only to be sent away by Claudette; something sinister takes revenge for Grace.",
+      "runtime": 53,
+      "seasonNumber": 1,
+      "series": {
+        "added": "2026-10-24T18:52:53Z",
+        "airTime": "03:00",
+        "certification": "16",
+        "cleanTitle": "crystallake",
+        "ended": false,
+        "firstAired": "2026-10-15T00:00:00Z",
+        "genres": [
+          "Drama"
+        ],
+        "id": 49,
+        "images": [
+          {
+            "coverType": "banner",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/banners/6a97089173849.jpg"
+          },
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/posters/6a56eb4470204.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/backgrounds/6ad1e68f82f63.jpg"
+          },
+          {
+            "coverType": "clearlogo",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/clearlogo/6aaaeb6967ab7.png"
+          }
+        ],
+        "imdbId": "tt23148340",
+        "languageProfileId": 1,
+        "lastAired": "2026-10-15T00:00:00Z",
+        "monitorNewItems": "all",
+        "monitored": true,
+        "network": "Peacock",
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "overview": "Single mother Pam Voorhees has been unable to shake her grief after her young, sickly son Jason tragically drowned in the town lake almost a year before. When two strangers arrive at Pam's door digging into her past, a disturbing chain of events is set into motion, leaving the townspeople of Crystal Lake wondering: just who is Pam Voorhees?",
+        "path": "/tv/Crystal Lake (2026)",
+        "qualityProfileId": 10,
+        "ratings": {
+          "value": 7.6,
+          "votes": 20896
+        },
+        "runtime": 50,
+        "seasonFolder": true,
+        "seasons": [
+          {
+            "monitored": true,
+            "seasonNumber": 1
+          }
+        ],
+        "seriesType": "standard",
+        "sortTitle": "crystal lake",
+        "status": "continuing",
+        "tags": [
+          2
+        ],
+        "title": "Crystal Lake",
+        "titleSlug": "crystal-lake",
+        "tmdbId": 213562,
+        "tvMazeId": 64960,
+        "tvRageId": 0,
+        "tvdbId": 426669,
+        "useSceneNumbering": false,
+        "year": 2026
+      },
+      "seriesId": 49,
+      "title": "Part 2",
+      "tvdbId": 11252252,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "airDate": "2026-10-15",
+      "airDateUtc": "2026-10-15T07:00:00Z",
+      "episodeFileId": 0,
+      "episodeNumber": 3,
+      "hasFile": false,
+      "id": 1623,
+      "lastSearchTime": "2026-10-24T18:53:24Z",
+      "monitored": true,
+      "overview": "The townspeople go bear hunting against Levon's orders; Pam and Levon bond over the loss of their loved ones; Pam visits Grace at her apartment and suspects she is being abused, leading to a confrontation with her mother, Valerie.",
+      "runtime": 48,
+      "seasonNumber": 1,
+      "series": {
+        "added": "2026-10-24T18:52:53Z",
+        "airTime": "03:00",
+        "certification": "16",
+        "cleanTitle": "crystallake",
+        "ended": false,
+        "firstAired": "2026-10-15T00:00:00Z",
+        "genres": [
+          "Drama"
+        ],
+        "id": 49,
+        "images": [
+          {
+            "coverType": "banner",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/banners/6a97089173849.jpg"
+          },
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/posters/6a56eb4470204.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/backgrounds/6ad1e68f82f63.jpg"
+          },
+          {
+            "coverType": "clearlogo",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/clearlogo/6aaaeb6967ab7.png"
+          }
+        ],
+        "imdbId": "tt23148340",
+        "languageProfileId": 1,
+        "lastAired": "2026-10-15T00:00:00Z",
+        "monitorNewItems": "all",
+        "monitored": true,
+        "network": "Peacock",
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "overview": "Single mother Pam Voorhees has been unable to shake her grief after her young, sickly son Jason tragically drowned in the town lake almost a year before. When two strangers arrive at Pam's door digging into her past, a disturbing chain of events is set into motion, leaving the townspeople of Crystal Lake wondering: just who is Pam Voorhees?",
+        "path": "/tv/Crystal Lake (2026)",
+        "qualityProfileId": 10,
+        "ratings": {
+          "value": 7.6,
+          "votes": 20896
+        },
+        "runtime": 50,
+        "seasonFolder": true,
+        "seasons": [
+          {
+            "monitored": true,
+            "seasonNumber": 1
+          }
+        ],
+        "seriesType": "standard",
+        "sortTitle": "crystal lake",
+        "status": "continuing",
+        "tags": [
+          2
+        ],
+        "title": "Crystal Lake",
+        "titleSlug": "crystal-lake",
+        "tmdbId": 213562,
+        "tvMazeId": 64960,
+        "tvRageId": 0,
+        "tvdbId": 426669,
+        "useSceneNumbering": false,
+        "year": 2026
+      },
+      "seriesId": 49,
+      "title": "Part III",
+      "tvdbId": 11252253,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "airDate": "2026-10-15",
+      "airDateUtc": "2026-10-15T07:00:00Z",
+      "episodeFileId": 0,
+      "episodeNumber": 4,
+      "hasFile": false,
+      "id": 1624,
+      "lastSearchTime": "2026-10-24T18:53:24Z",
+      "monitored": true,
+      "overview": "Willow looks for her friends; Pam returns to work at the camp alongside a group of new counselors.",
+      "runtime": 53,
+      "seasonNumber": 1,
+      "series": {
+        "added": "2026-10-24T18:52:53Z",
+        "airTime": "03:00",
+        "certification": "16",
+        "cleanTitle": "crystallake",
+        "ended": false,
+        "firstAired": "2026-10-15T00:00:00Z",
+        "genres": [
+          "Drama"
+        ],
+        "id": 49,
+        "images": [
+          {
+            "coverType": "banner",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/banners/6a97089173849.jpg"
+          },
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/posters/6a56eb4470204.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/backgrounds/6ad1e68f82f63.jpg"
+          },
+          {
+            "coverType": "clearlogo",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/clearlogo/6aaaeb6967ab7.png"
+          }
+        ],
+        "imdbId": "tt23148340",
+        "languageProfileId": 1,
+        "lastAired": "2026-10-15T00:00:00Z",
+        "monitorNewItems": "all",
+        "monitored": true,
+        "network": "Peacock",
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "overview": "Single mother Pam Voorhees has been unable to shake her grief after her young, sickly son Jason tragically drowned in the town lake almost a year before. When two strangers arrive at Pam's door digging into her past, a disturbing chain of events is set into motion, leaving the townspeople of Crystal Lake wondering: just who is Pam Voorhees?",
+        "path": "/tv/Crystal Lake (2026)",
+        "qualityProfileId": 10,
+        "ratings": {
+          "value": 7.6,
+          "votes": 20896
+        },
+        "runtime": 50,
+        "seasonFolder": true,
+        "seasons": [
+          {
+            "monitored": true,
+            "seasonNumber": 1
+          }
+        ],
+        "seriesType": "standard",
+        "sortTitle": "crystal lake",
+        "status": "continuing",
+        "tags": [
+          2
+        ],
+        "title": "Crystal Lake",
+        "titleSlug": "crystal-lake",
+        "tmdbId": 213562,
+        "tvMazeId": 64960,
+        "tvRageId": 0,
+        "tvdbId": 426669,
+        "useSceneNumbering": false,
+        "year": 2026
+      },
+      "seriesId": 49,
+      "title": "A New Beginning",
+      "tvdbId": 11252254,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "airDate": "2026-10-15",
+      "airDateUtc": "2026-10-15T07:00:00Z",
+      "episodeFileId": 0,
+      "episodeNumber": 5,
+      "hasFile": false,
+      "id": 1625,
+      "lastSearchTime": "2026-10-24T18:53:24Z",
+      "monitored": true,
+      "overview": "Camp Crystal Lake reopens despite the mounting death toll; Pam discovers life-changing news.",
+      "runtime": 49,
+      "seasonNumber": 1,
+      "series": {
+        "added": "2026-10-24T18:52:53Z",
+        "airTime": "03:00",
+        "certification": "16",
+        "cleanTitle": "crystallake",
+        "ended": false,
+        "firstAired": "2026-10-15T00:00:00Z",
+        "genres": [
+          "Drama"
+        ],
+        "id": 49,
+        "images": [
+          {
+            "coverType": "banner",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/banners/6a97089173849.jpg"
+          },
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/posters/6a56eb4470204.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/backgrounds/6ad1e68f82f63.jpg"
+          },
+          {
+            "coverType": "clearlogo",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/clearlogo/6aaaeb6967ab7.png"
+          }
+        ],
+        "imdbId": "tt23148340",
+        "languageProfileId": 1,
+        "lastAired": "2026-10-15T00:00:00Z",
+        "monitorNewItems": "all",
+        "monitored": true,
+        "network": "Peacock",
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "overview": "Single mother Pam Voorhees has been unable to shake her grief after her young, sickly son Jason tragically drowned in the town lake almost a year before. When two strangers arrive at Pam's door digging into her past, a disturbing chain of events is set into motion, leaving the townspeople of Crystal Lake wondering: just who is Pam Voorhees?",
+        "path": "/tv/Crystal Lake (2026)",
+        "qualityProfileId": 10,
+        "ratings": {
+          "value": 7.6,
+          "votes": 20896
+        },
+        "runtime": 50,
+        "seasonFolder": true,
+        "seasons": [
+          {
+            "monitored": true,
+            "seasonNumber": 1
+          }
+        ],
+        "seriesType": "standard",
+        "sortTitle": "crystal lake",
+        "status": "continuing",
+        "tags": [
+          2
+        ],
+        "title": "Crystal Lake",
+        "titleSlug": "crystal-lake",
+        "tmdbId": 213562,
+        "tvMazeId": 64960,
+        "tvRageId": 0,
+        "tvdbId": 426669,
+        "useSceneNumbering": false,
+        "year": 2026
+      },
+      "seriesId": 49,
+      "title": "The New Blood",
+      "tvdbId": 11252255,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "airDate": "2026-10-15",
+      "airDateUtc": "2026-10-15T07:00:00Z",
+      "episodeFileId": 0,
+      "episodeNumber": 6,
+      "hasFile": false,
+      "id": 1626,
+      "lastSearchTime": "2026-10-24T18:53:24Z",
+      "monitored": true,
+      "overview": "The counselors' drug trip takes a chilling turn; Briana receives a mysterious envelope.",
+      "runtime": 44,
+      "seasonNumber": 1,
+      "series": {
+        "added": "2026-10-24T18:52:53Z",
+        "airTime": "03:00",
+        "certification": "16",
+        "cleanTitle": "crystallake",
+        "ended": false,
+        "firstAired": "2026-10-15T00:00:00Z",
+        "genres": [
+          "Drama"
+        ],
+        "id": 49,
+        "images": [
+          {
+            "coverType": "banner",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/banners/6a97089173849.jpg"
+          },
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/posters/6a56eb4470204.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/backgrounds/6ad1e68f82f63.jpg"
+          },
+          {
+            "coverType": "clearlogo",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/clearlogo/6aaaeb6967ab7.png"
+          }
+        ],
+        "imdbId": "tt23148340",
+        "languageProfileId": 1,
+        "lastAired": "2026-10-15T00:00:00Z",
+        "monitorNewItems": "all",
+        "monitored": true,
+        "network": "Peacock",
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "overview": "Single mother Pam Voorhees has been unable to shake her grief after her young, sickly son Jason tragically drowned in the town lake almost a year before. When two strangers arrive at Pam's door digging into her past, a disturbing chain of events is set into motion, leaving the townspeople of Crystal Lake wondering: just who is Pam Voorhees?",
+        "path": "/tv/Crystal Lake (2026)",
+        "qualityProfileId": 10,
+        "ratings": {
+          "value": 7.6,
+          "votes": 20896
+        },
+        "runtime": 50,
+        "seasonFolder": true,
+        "seasons": [
+          {
+            "monitored": true,
+            "seasonNumber": 1
+          }
+        ],
+        "seriesType": "standard",
+        "sortTitle": "crystal lake",
+        "status": "continuing",
+        "tags": [
+          2
+        ],
+        "title": "Crystal Lake",
+        "titleSlug": "crystal-lake",
+        "tmdbId": 213562,
+        "tvMazeId": 64960,
+        "tvRageId": 0,
+        "tvdbId": 426669,
+        "useSceneNumbering": false,
+        "year": 2026
+      },
+      "seriesId": 49,
+      "title": "Kill Them, Mommy",
+      "tvdbId": 11252256,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "airDate": "2026-10-15",
+      "airDateUtc": "2026-10-15T07:00:00Z",
+      "episodeFileId": 0,
+      "episodeNumber": 7,
+      "hasFile": false,
+      "id": 1627,
+      "lastSearchTime": "2026-10-24T18:53:24Z",
+      "monitored": true,
+      "overview": "In the past, a young Jason shows alarming symptoms that lead Pam to question life as she knows it.",
+      "runtime": 51,
+      "seasonNumber": 1,
+      "series": {
+        "added": "2026-10-24T18:52:53Z",
+        "airTime": "03:00",
+        "certification": "16",
+        "cleanTitle": "crystallake",
+        "ended": false,
+        "firstAired": "2026-10-15T00:00:00Z",
+        "genres": [
+          "Drama"
+        ],
+        "id": 49,
+        "images": [
+          {
+            "coverType": "banner",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/banners/6a97089173849.jpg"
+          },
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/posters/6a56eb4470204.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/backgrounds/6ad1e68f82f63.jpg"
+          },
+          {
+            "coverType": "clearlogo",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/clearlogo/6aaaeb6967ab7.png"
+          }
+        ],
+        "imdbId": "tt23148340",
+        "languageProfileId": 1,
+        "lastAired": "2026-10-15T00:00:00Z",
+        "monitorNewItems": "all",
+        "monitored": true,
+        "network": "Peacock",
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "overview": "Single mother Pam Voorhees has been unable to shake her grief after her young, sickly son Jason tragically drowned in the town lake almost a year before. When two strangers arrive at Pam's door digging into her past, a disturbing chain of events is set into motion, leaving the townspeople of Crystal Lake wondering: just who is Pam Voorhees?",
+        "path": "/tv/Crystal Lake (2026)",
+        "qualityProfileId": 10,
+        "ratings": {
+          "value": 7.6,
+          "votes": 20896
+        },
+        "runtime": 50,
+        "seasonFolder": true,
+        "seasons": [
+          {
+            "monitored": true,
+            "seasonNumber": 1
+          }
+        ],
+        "seriesType": "standard",
+        "sortTitle": "crystal lake",
+        "status": "continuing",
+        "tags": [
+          2
+        ],
+        "title": "Crystal Lake",
+        "titleSlug": "crystal-lake",
+        "tmdbId": 213562,
+        "tvMazeId": 64960,
+        "tvRageId": 0,
+        "tvdbId": 426669,
+        "useSceneNumbering": false,
+        "year": 2026
+      },
+      "seriesId": 49,
+      "title": "Friday...",
+      "tvdbId": 11252257,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "airDate": "2026-10-15",
+      "airDateUtc": "2026-10-15T07:00:00Z",
+      "episodeFileId": 0,
+      "episodeNumber": 8,
+      "finaleType": "season",
+      "hasFile": false,
+      "id": 1628,
+      "lastSearchTime": "2026-10-24T18:53:24Z",
+      "monitored": true,
+      "overview": "Elias arrives in Crystal Lake determined to find his family; Levon and Elias have a heated clash.",
+      "runtime": 43,
+      "seasonNumber": 1,
+      "series": {
+        "added": "2026-10-24T18:52:53Z",
+        "airTime": "03:00",
+        "certification": "16",
+        "cleanTitle": "crystallake",
+        "ended": false,
+        "firstAired": "2026-10-15T00:00:00Z",
+        "genres": [
+          "Drama"
+        ],
+        "id": 49,
+        "images": [
+          {
+            "coverType": "banner",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/banners/6a97089173849.jpg"
+          },
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/posters/6a56eb4470204.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/backgrounds/6ad1e68f82f63.jpg"
+          },
+          {
+            "coverType": "clearlogo",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/clearlogo/6aaaeb6967ab7.png"
+          }
+        ],
+        "imdbId": "tt23148340",
+        "languageProfileId": 1,
+        "lastAired": "2026-10-15T00:00:00Z",
+        "monitorNewItems": "all",
+        "monitored": true,
+        "network": "Peacock",
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "overview": "Single mother Pam Voorhees has been unable to shake her grief after her young, sickly son Jason tragically drowned in the town lake almost a year before. When two strangers arrive at Pam's door digging into her past, a disturbing chain of events is set into motion, leaving the townspeople of Crystal Lake wondering: just who is Pam Voorhees?",
+        "path": "/tv/Crystal Lake (2026)",
+        "qualityProfileId": 10,
+        "ratings": {
+          "value": 7.6,
+          "votes": 20896
+        },
+        "runtime": 50,
+        "seasonFolder": true,
+        "seasons": [
+          {
+            "monitored": true,
+            "seasonNumber": 1
+          }
+        ],
+        "seriesType": "standard",
+        "sortTitle": "crystal lake",
+        "status": "continuing",
+        "tags": [
+          2
+        ],
+        "title": "Crystal Lake",
+        "titleSlug": "crystal-lake",
+        "tmdbId": 213562,
+        "tvMazeId": 64960,
+        "tvRageId": 0,
+        "tvdbId": 426669,
+        "useSceneNumbering": false,
+        "year": 2026
+      },
+      "seriesId": 49,
+      "title": "The Final Chapter",
+      "tvdbId": 11252258,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "airDate": "2026-10-16",
+      "airDateUtc": "2026-10-16T07:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 16,
+            "name": "AMZN"
+          }
+        ],
+        "dateAdded": "2026-10-16T11:39:48Z",
+        "id": 1066,
+        "indexerFlags": 1,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 640000,
+          "audioChannels": 5.1,
+          "audioCodec": "EAC3",
+          "audioLanguages": "ita/eng",
+          "audioStreamCount": 2,
+          "resolution": "1920x1080",
+          "runTime": "39:38",
+          "scanType": "Progressive",
+          "subtitles": "ita/ita/eng",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/MobLand/Season 02/MobLand (2025) - S02E05 - Birdland [AMZN][WEBDL-1080p][EAC3 5.1][h264]-MeM.mkv",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Season 02/MobLand (2025) - S02E05 - Birdland [AMZN][WEBDL-1080p][EAC3 5.1][h264]-MeM.mkv",
+        "releaseGroup": "MeM",
+        "releaseType": "singleEpisode",
+        "sceneName": "MobLand S02E05 Birdland ITA ENG 1080p AMZN WEB-DL DDP5 1 H 264-MeM GP",
+        "seasonNumber": 2,
+        "seriesId": 18,
+        "size": 3018625384
+      },
+      "episodeFileId": 1066,
+      "episodeNumber": 5,
+      "hasFile": true,
+      "id": 528,
+      "lastSearchTime": "2026-10-31T13:17:56Z",
+      "monitored": true,
+      "overview": "Conrad declares war, stacking bodies and turning the Cotswolds into a fortress. Maeve plays puppet-master, sending Eddie on a mission before secrets start to spill and a hit hurtles the Harrigans into all‑out chaos.",
+      "runtime": 45,
+      "seasonNumber": 2,
+      "series": {
+        "added": "2026-03-07T11:22:23Z",
+        "airTime": "03:00",
+        "certification": "TV-MA",
+        "cleanTitle": "mobland",
+        "ended": false,
+        "firstAired": "2025-03-30T00:00:00Z",
+        "genres": [
+          "Crime",
+          "Drama"
+        ],
+        "id": 18,
+        "images": [
+          {
+            "coverType": "banner",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/banners/68175c94c4974.jpg"
+          },
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/posters/6aa1c710a2a68.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/backgrounds/67e9845c46113.jpg"
+          },
+          {
+            "coverType": "clearlogo",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/clearlogo/68fd77028683b.png"
+          }
+        ],
+        "imdbId": "tt31510819",
+        "languageProfileId": 1,
+        "lastAired": "2026-11-20T00:00:00Z",
+        "monitorNewItems": "all",
+        "monitored": true,
+        "network": "Paramount+",
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "overview": "Two mob families clash in a war that threatens to topple empires and lives.",
+        "path": "/tv/MobLand",
+        "qualityProfileId": 10,
+        "ratings": {
+          "value": 8.3,
+          "votes": 138308
+        },
+        "runtime": 47,
+        "seasonFolder": true,
+        "seasons": [
+          {
+            "monitored": true,
+            "seasonNumber": 1
+          },
+          {
+            "monitored": true,
+            "seasonNumber": 2
+          }
+        ],
+        "seriesType": "standard",
+        "sortTitle": "mobland",
+        "status": "continuing",
+        "tags": [
+          1
+        ],
+        "title": "MobLand",
+        "titleSlug": "mobland",
+        "tmdbId": 247718,
+        "tvMazeId": 75026,
+        "tvRageId": 0,
+        "tvdbId": 446831,
+        "useSceneNumbering": false,
+        "year": 2025
+      },
+      "seriesId": 18,
+      "title": "Birdland",
+      "tvdbId": 11542642,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "airDate": "2026-10-20",
+      "airDateUtc": "2026-10-21T01:00:00Z",
+      "episodeFileId": 0,
+      "episodeNumber": 5,
+      "hasFile": false,
+      "id": 1544,
+      "monitored": true,
+      "overview": "Amy must help a family process the news that their daughter's sudden illness could be fatal, while enduring a barrage of intrusive memory seizures. Despite unease in their relationship, TJ and Sonya are forced to work together to treat a man whose injuries appear to be self-inflicted.",
+      "runtime": 43,
+      "seasonNumber": 3,
+      "series": {
+        "added": "2026-03-07T11:22:23Z",
+        "airTime": "21:00",
+        "certification": "12+",
+        "cleanTitle": "docus",
+        "ended": false,
+        "firstAired": "2025-01-07T00:00:00Z",
+        "genres": [
+          "Drama"
+        ],
+        "id": 9,
+        "images": [
+          {
+            "coverType": "banner",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/banners/675ec1dc40af9.jpg"
+          },
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/posters/68aa16885d5ee.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/backgrounds/696789f761136.jpg"
+          },
+          {
+            "coverType": "clearlogo",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/clearlogo/6aa994a538807.png"
+          }
+        ],
+        "imdbId": "tt26748321",
+        "languageProfileId": 1,
+        "lastAired": "2026-11-17T00:00:00Z",
+        "monitorNewItems": "all",
+        "monitored": true,
+        "network": "FOX",
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "overview": "After a brain injury erases the last eight years of Dr. Amy Larsen's life, she must navigate an unfamiliar world where she has no recollection of patients she's treated or the tragedy that caused her to push everyone away.",
+        "path": "/tv/Doc (US)",
+        "qualityProfileId": 10,
+        "ratings": {
+          "value": 7.3,
+          "votes": 7978
+        },
+        "runtime": 43,
+        "seasonFolder": true,
+        "seasons": [
+          {
+            "monitored": false,
+            "seasonNumber": 1
+          },
+          {
+            "monitored": true,
+            "seasonNumber": 2
+          },
+          {
+            "monitored": true,
+            "seasonNumber": 3
+          }
+        ],
+        "seriesType": "standard",
+        "sortTitle": "doc us",
+        "status": "continuing",
+        "tags": [],
+        "title": "Doc (US)",
+        "titleSlug": "doc-us",
+        "tmdbId": 255055,
+        "tvMazeId": 67884,
+        "tvRageId": 0,
+        "tvdbId": 433263,
+        "useSceneNumbering": false,
+        "year": 2025
+      },
+      "seriesId": 9,
+      "title": "S.O.S.",
+      "tvdbId": 11966083,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "airDate": "2026-10-21",
+      "airDateUtc": "2026-10-21T04:00:00Z",
+      "episodeFileId": 0,
+      "episodeNumber": 6,
+      "finaleType": "season",
+      "hasFile": false,
+      "id": 1468,
+      "monitored": false,
+      "overview": "The safe house becomes unsafe as Lamb and Taverner finally join forces.",
+      "runtime": 62,
+      "seasonNumber": 6,
+      "series": {
+        "added": "2026-03-07T11:22:23Z",
+        "airTime": "00:00",
+        "certification": "TV-MA",
+        "cleanTitle": "slowhorses",
+        "ended": false,
+        "firstAired": "2022-04-01T00:00:00Z",
+        "genres": [
+          "Suspense",
+          "Thriller"
+        ],
+        "id": 24,
+        "images": [
+          {
+            "coverType": "banner",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/banners/6572357383704.jpg"
+          },
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/posters/637d209da8190.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/backgrounds/63896cb293707.jpg"
+          },
+          {
+            "coverType": "clearlogo",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/clearlogo/656ea800b402e.png"
+          }
+        ],
+        "imdbId": "tt5875444",
+        "languageProfileId": 1,
+        "lastAired": "2026-10-21T00:00:00Z",
+        "monitorNewItems": "all",
+        "monitored": true,
+        "network": "Apple TV",
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "overview": "This quick-witted spy drama follows a dysfunctional team of MI5 agents – and their obnoxious boss, the notorious Jackson Lamb – as they navigate the espionage world's smoke and mirrors to defend England from sinister forces.",
+        "path": "/tv/Slow Horses",
+        "qualityProfileId": 10,
+        "ratings": {
+          "value": 8.4,
+          "votes": 168158
+        },
+        "runtime": 46,
+        "seasonFolder": true,
+        "seasons": [
+          {
+            "monitored": false,
+            "seasonNumber": 0
+          },
+          {
+            "monitored": false,
+            "seasonNumber": 1
+          },
+          {
+            "monitored": false,
+            "seasonNumber": 2
+          },
+          {
+            "monitored": false,
+            "seasonNumber": 3
+          },
+          {
+            "monitored": false,
+            "seasonNumber": 4
+          },
+          {
+            "monitored": false,
+            "seasonNumber": 5
+          },
+          {
+            "monitored": true,
+            "seasonNumber": 6
+          }
+        ],
+        "seriesType": "standard",
+        "sortTitle": "slow horses",
+        "status": "continuing",
+        "tags": [
+          1
+        ],
+        "title": "Slow Horses",
+        "titleSlug": "slow-horses",
+        "tmdbId": 95480,
+        "tvMazeId": 45039,
+        "tvRageId": 0,
+        "tvdbId": 372264,
+        "useSceneNumbering": false,
+        "year": 2022
+      },
+      "seriesId": 24,
+      "title": "Judgement Day",
+      "tvdbId": 11839917,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "airDate": "2026-10-23",
+      "airDateUtc": "2026-10-23T07:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 16,
+            "name": "AMZN"
+          }
+        ],
+        "dateAdded": "2026-10-23T11:39:02Z",
+        "id": 1070,
+        "indexerFlags": 1,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 640000,
+          "audioChannels": 5.1,
+          "audioCodec": "EAC3",
+          "audioLanguages": "ita/eng",
+          "audioStreamCount": 2,
+          "resolution": "1920x1080",
+          "runTime": "43:29",
+          "scanType": "Progressive",
+          "subtitles": "ita/ita/eng/eng",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/MobLand/Season 02/MobLand (2025) - S02E06 - A Different Corner [AMZN][WEBDL-1080p][EAC3 5.1][h264]-MeM.mkv",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Season 02/MobLand (2025) - S02E06 - A Different Corner [AMZN][WEBDL-1080p][EAC3 5.1][h264]-MeM.mkv",
+        "releaseGroup": "MeM",
+        "releaseType": "singleEpisode",
+        "sceneName": "MobLand S02E06 A Different Corner ITA ENG 1080p AMZN WEB-DL DDP5 1 H 264-MeM GP",
+        "seasonNumber": 2,
+        "seriesId": 18,
+        "size": 3297773226
+      },
+      "episodeFileId": 1070,
+      "episodeNumber": 6,
+      "hasFile": true,
+      "id": 529,
+      "lastSearchTime": "2026-10-31T13:17:56Z",
+      "monitored": true,
+      "overview": "Licking wounds and turning on each other after fleeing Frankie's assault, Seraphina goes all in, pitching the Harrigans on a global power play, while Maeve and Harry square off over crossed lines.",
+      "runtime": 42,
+      "seasonNumber": 2,
+      "series": {
+        "added": "2026-03-07T11:22:23Z",
+        "airTime": "03:00",
+        "certification": "TV-MA",
+        "cleanTitle": "mobland",
+        "ended": false,
+        "firstAired": "2025-03-30T00:00:00Z",
+        "genres": [
+          "Crime",
+          "Drama"
+        ],
+        "id": 18,
+        "images": [
+          {
+            "coverType": "banner",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/banners/68175c94c4974.jpg"
+          },
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/posters/6aa1c710a2a68.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/backgrounds/67e9845c46113.jpg"
+          },
+          {
+            "coverType": "clearlogo",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/clearlogo/68fd77028683b.png"
+          }
+        ],
+        "imdbId": "tt31510819",
+        "languageProfileId": 1,
+        "lastAired": "2026-11-20T00:00:00Z",
+        "monitorNewItems": "all",
+        "monitored": true,
+        "network": "Paramount+",
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "overview": "Two mob families clash in a war that threatens to topple empires and lives.",
+        "path": "/tv/MobLand",
+        "qualityProfileId": 10,
+        "ratings": {
+          "value": 8.3,
+          "votes": 138308
+        },
+        "runtime": 47,
+        "seasonFolder": true,
+        "seasons": [
+          {
+            "monitored": true,
+            "seasonNumber": 1
+          },
+          {
+            "monitored": true,
+            "seasonNumber": 2
+          }
+        ],
+        "seriesType": "standard",
+        "sortTitle": "mobland",
+        "status": "continuing",
+        "tags": [
+          1
+        ],
+        "title": "MobLand",
+        "titleSlug": "mobland",
+        "tmdbId": 247718,
+        "tvMazeId": 75026,
+        "tvRageId": 0,
+        "tvdbId": 446831,
+        "useSceneNumbering": false,
+        "year": 2025
+      },
+      "seriesId": 18,
+      "title": "A Different Corner",
+      "tvdbId": 11542643,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "airDate": "2026-10-30",
+      "airDateUtc": "2026-10-30T07:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 29,
+            "name": "PMTP"
+          }
+        ],
+        "dateAdded": "2026-10-31T13:24:18Z",
+        "id": 1072,
+        "indexerFlags": 1,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 192000,
+          "audioChannels": 5.1,
+          "audioCodec": "EAC3",
+          "audioLanguages": "ita/eng",
+          "audioStreamCount": 2,
+          "resolution": "1920x1080",
+          "runTime": "54:40",
+          "scanType": "Progressive",
+          "subtitles": "ita/ita/eng/ger/spa/fre/por",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/MobLand/Season 02/MobLand (2025) - S02E07 - Ace of Spades [PMTP][WEBDL-1080p][EAC3 5.1][h264]-TBK.mkv",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Season 02/MobLand (2025) - S02E07 - Ace of Spades [PMTP][WEBDL-1080p][EAC3 5.1][h264]-TBK.mkv",
+        "releaseGroup": "TBK",
+        "releaseType": "singleEpisode",
+        "sceneName": "MobLand S02E07 Ace of Spades 1080p PMTP WEB-DL DDP5 1 ENG Atmos ITA H264-TBK",
+        "seasonNumber": 2,
+        "seriesId": 18,
+        "size": 1744183615
+      },
+      "episodeFileId": 1072,
+      "episodeNumber": 7,
+      "hasFile": true,
+      "id": 530,
+      "lastSearchTime": "2026-10-31T13:17:56Z",
+      "monitored": true,
+      "overview": "The Harrigans lock down the Cotswolds and roll back into London to shake the tree -- buying loyalty with cash, threats, and broken fingers. Maeve tightens the screws within the family, while Harry walks into a trap.",
+      "runtime": 55,
+      "seasonNumber": 2,
+      "series": {
+        "added": "2026-03-07T11:22:23Z",
+        "airTime": "03:00",
+        "certification": "TV-MA",
+        "cleanTitle": "mobland",
+        "ended": false,
+        "firstAired": "2025-03-30T00:00:00Z",
+        "genres": [
+          "Crime",
+          "Drama"
+        ],
+        "id": 18,
+        "images": [
+          {
+            "coverType": "banner",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/banners/68175c94c4974.jpg"
+          },
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/posters/6aa1c710a2a68.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/backgrounds/67e9845c46113.jpg"
+          },
+          {
+            "coverType": "clearlogo",
+            "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/clearlogo/68fd77028683b.png"
+          }
+        ],
+        "imdbId": "tt31510819",
+        "languageProfileId": 1,
+        "lastAired": "2026-11-20T00:00:00Z",
+        "monitorNewItems": "all",
+        "monitored": true,
+        "network": "Paramount+",
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "overview": "Two mob families clash in a war that threatens to topple empires and lives.",
+        "path": "/tv/MobLand",
+        "qualityProfileId": 10,
+        "ratings": {
+          "value": 8.3,
+          "votes": 138308
+        },
+        "runtime": 47,
+        "seasonFolder": true,
+        "seasons": [
+          {
+            "monitored": true,
+            "seasonNumber": 1
+          },
+          {
+            "monitored": true,
+            "seasonNumber": 2
+          }
+        ],
+        "seriesType": "standard",
+        "sortTitle": "mobland",
+        "status": "continuing",
+        "tags": [
+          1
+        ],
+        "title": "MobLand",
+        "titleSlug": "mobland",
+        "tmdbId": 247718,
+        "tvMazeId": 75026,
+        "tvRageId": 0,
+        "tvdbId": 446831,
+        "useSceneNumbering": false,
+        "year": 2025
+      },
+      "seriesId": 18,
+      "title": "Ace of Spades",
+      "tvdbId": 11542644,
+      "unverifiedSceneNumbering": false
+    }
+  ],
+  "recordedAt": "2026-11-07T08:04:13Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/calendar?start=2026-10-01T00:00:00Z&end=2026-10-31T00:00:00Z&includeSeries=true&includeEpisodeFile=true&unmonitored=true"
+  },
+  "status": 200
+}

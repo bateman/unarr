@@ -1,0 +1,1925 @@
+{
+  "body": {
+    "page": 1,
+    "pageSize": 20,
+    "records": [
+      {
+        "airDate": "2026-10-30",
+        "airDateUtc": "2026-10-30T07:00:00Z",
+        "episodeFileId": 1072,
+        "episodeNumber": 7,
+        "hasFile": true,
+        "id": 530,
+        "lastSearchTime": "2026-10-31T13:17:56Z",
+        "monitored": true,
+        "overview": "The Harrigans lock down the Cotswolds and roll back into London to shake the tree -- buying loyalty with cash, threats, and broken fingers. Maeve tightens the screws within the family, while Harry walks into a trap.",
+        "runtime": 55,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "03:00",
+          "certification": "TV-MA",
+          "cleanTitle": "mobland",
+          "ended": false,
+          "firstAired": "2025-03-30T00:00:00Z",
+          "genres": [
+            "Crime",
+            "Drama"
+          ],
+          "id": 18,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/banners/68175c94c4974.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/posters/6aa1c710a2a68.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/backgrounds/67e9845c46113.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/clearlogo/68fd77028683b.png"
+            }
+          ],
+          "imdbId": "tt31510819",
+          "languageProfileId": 1,
+          "lastAired": "2026-11-20T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Paramount+",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Two mob families clash in a war that threatens to topple empires and lives.",
+          "path": "/tv/MobLand",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.3,
+            "votes": 138308
+          },
+          "runtime": 47,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "mobland",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "MobLand",
+          "titleSlug": "mobland",
+          "tmdbId": 247718,
+          "tvMazeId": 75026,
+          "tvRageId": 0,
+          "tvdbId": 446831,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 18,
+        "title": "Ace of Spades",
+        "tvdbId": 11542644,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-10-23",
+        "airDateUtc": "2026-10-23T07:00:00Z",
+        "episodeFileId": 1070,
+        "episodeNumber": 6,
+        "hasFile": true,
+        "id": 529,
+        "lastSearchTime": "2026-10-31T13:17:56Z",
+        "monitored": true,
+        "overview": "Licking wounds and turning on each other after fleeing Frankie's assault, Seraphina goes all in, pitching the Harrigans on a global power play, while Maeve and Harry square off over crossed lines.",
+        "runtime": 42,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "03:00",
+          "certification": "TV-MA",
+          "cleanTitle": "mobland",
+          "ended": false,
+          "firstAired": "2025-03-30T00:00:00Z",
+          "genres": [
+            "Crime",
+            "Drama"
+          ],
+          "id": 18,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/banners/68175c94c4974.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/posters/6aa1c710a2a68.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/backgrounds/67e9845c46113.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/clearlogo/68fd77028683b.png"
+            }
+          ],
+          "imdbId": "tt31510819",
+          "languageProfileId": 1,
+          "lastAired": "2026-11-20T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Paramount+",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Two mob families clash in a war that threatens to topple empires and lives.",
+          "path": "/tv/MobLand",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.3,
+            "votes": 138308
+          },
+          "runtime": 47,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "mobland",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "MobLand",
+          "titleSlug": "mobland",
+          "tmdbId": 247718,
+          "tvMazeId": 75026,
+          "tvRageId": 0,
+          "tvdbId": 446831,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 18,
+        "title": "A Different Corner",
+        "tvdbId": 11542643,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-10-16",
+        "airDateUtc": "2026-10-16T07:00:00Z",
+        "episodeFileId": 1066,
+        "episodeNumber": 5,
+        "hasFile": true,
+        "id": 528,
+        "lastSearchTime": "2026-10-31T13:17:56Z",
+        "monitored": true,
+        "overview": "Conrad declares war, stacking bodies and turning the Cotswolds into a fortress. Maeve plays puppet-master, sending Eddie on a mission before secrets start to spill and a hit hurtles the Harrigans into all‑out chaos.",
+        "runtime": 45,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "03:00",
+          "certification": "TV-MA",
+          "cleanTitle": "mobland",
+          "ended": false,
+          "firstAired": "2025-03-30T00:00:00Z",
+          "genres": [
+            "Crime",
+            "Drama"
+          ],
+          "id": 18,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/banners/68175c94c4974.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/posters/6aa1c710a2a68.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/backgrounds/67e9845c46113.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/clearlogo/68fd77028683b.png"
+            }
+          ],
+          "imdbId": "tt31510819",
+          "languageProfileId": 1,
+          "lastAired": "2026-11-20T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Paramount+",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Two mob families clash in a war that threatens to topple empires and lives.",
+          "path": "/tv/MobLand",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.3,
+            "votes": 138308
+          },
+          "runtime": 47,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "mobland",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "MobLand",
+          "titleSlug": "mobland",
+          "tmdbId": 247718,
+          "tvMazeId": 75026,
+          "tvRageId": 0,
+          "tvdbId": 446831,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 18,
+        "title": "Birdland",
+        "tvdbId": 11542642,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-10-09",
+        "airDateUtc": "2026-10-09T07:00:00Z",
+        "episodeFileId": 1063,
+        "episodeNumber": 4,
+        "hasFile": true,
+        "id": 527,
+        "lastSearchTime": "2026-10-31T13:17:56Z",
+        "monitored": true,
+        "overview": "The Harrigans reel from an unexpected turn of events, triggering Harry to do damage control before police scrutiny closes in. Maeve's unseen hand moves Eddie out of London as Seraphina makes a new alliance and Conrad re-asserts his dominance.",
+        "runtime": 44,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "03:00",
+          "certification": "TV-MA",
+          "cleanTitle": "mobland",
+          "ended": false,
+          "firstAired": "2025-03-30T00:00:00Z",
+          "genres": [
+            "Crime",
+            "Drama"
+          ],
+          "id": 18,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/banners/68175c94c4974.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/posters/6aa1c710a2a68.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/backgrounds/67e9845c46113.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/clearlogo/68fd77028683b.png"
+            }
+          ],
+          "imdbId": "tt31510819",
+          "languageProfileId": 1,
+          "lastAired": "2026-11-20T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Paramount+",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Two mob families clash in a war that threatens to topple empires and lives.",
+          "path": "/tv/MobLand",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.3,
+            "votes": 138308
+          },
+          "runtime": 47,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "mobland",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "MobLand",
+          "titleSlug": "mobland",
+          "tmdbId": 247718,
+          "tvMazeId": 75026,
+          "tvRageId": 0,
+          "tvdbId": 446831,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 18,
+        "title": "Blank Curtain",
+        "tvdbId": 11542641,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-10-02",
+        "airDateUtc": "2026-10-02T07:00:00Z",
+        "episodeFileId": 1045,
+        "episodeNumber": 3,
+        "hasFile": true,
+        "id": 526,
+        "lastSearchTime": "2026-10-31T13:17:56Z",
+        "monitored": true,
+        "overview": "Maeve probes Conrad for secrets, positioning herself against threats old and new. As Frankie forces a high-stakes sit-down, Kevin and Harry game out their strategy.",
+        "runtime": 45,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "03:00",
+          "certification": "TV-MA",
+          "cleanTitle": "mobland",
+          "ended": false,
+          "firstAired": "2025-03-30T00:00:00Z",
+          "genres": [
+            "Crime",
+            "Drama"
+          ],
+          "id": 18,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/banners/68175c94c4974.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/posters/6aa1c710a2a68.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/backgrounds/67e9845c46113.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/clearlogo/68fd77028683b.png"
+            }
+          ],
+          "imdbId": "tt31510819",
+          "languageProfileId": 1,
+          "lastAired": "2026-11-20T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Paramount+",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Two mob families clash in a war that threatens to topple empires and lives.",
+          "path": "/tv/MobLand",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.3,
+            "votes": 138308
+          },
+          "runtime": 47,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "mobland",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "MobLand",
+          "titleSlug": "mobland",
+          "tmdbId": 247718,
+          "tvMazeId": 75026,
+          "tvRageId": 0,
+          "tvdbId": 446831,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 18,
+        "title": "Bonzo Goes to Bitburg",
+        "tvdbId": 11542640,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-09-25",
+        "airDateUtc": "2026-09-25T07:00:00Z",
+        "episodeFileId": 819,
+        "episodeNumber": 2,
+        "hasFile": true,
+        "id": 525,
+        "lastSearchTime": "2026-10-31T13:17:56Z",
+        "monitored": true,
+        "overview": "With Conrad's self-control slipping, Maeve make plans of her own while Jan hits Harry with a hard truth. Smelling blood, Frankie and Tattersall circle like sharks.",
+        "runtime": 46,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "03:00",
+          "certification": "TV-MA",
+          "cleanTitle": "mobland",
+          "ended": false,
+          "firstAired": "2025-03-30T00:00:00Z",
+          "genres": [
+            "Crime",
+            "Drama"
+          ],
+          "id": 18,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/banners/68175c94c4974.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/posters/6aa1c710a2a68.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/backgrounds/67e9845c46113.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/clearlogo/68fd77028683b.png"
+            }
+          ],
+          "imdbId": "tt31510819",
+          "languageProfileId": 1,
+          "lastAired": "2026-11-20T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Paramount+",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Two mob families clash in a war that threatens to topple empires and lives.",
+          "path": "/tv/MobLand",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.3,
+            "votes": 138308
+          },
+          "runtime": 47,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "mobland",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "MobLand",
+          "titleSlug": "mobland",
+          "tmdbId": 247718,
+          "tvMazeId": 75026,
+          "tvRageId": 0,
+          "tvdbId": 446831,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 18,
+        "title": "Song 2",
+        "tvdbId": 11542639,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-09-18",
+        "airDateUtc": "2026-09-18T07:00:00Z",
+        "episodeFileId": 795,
+        "episodeNumber": 1,
+        "hasFile": true,
+        "id": 524,
+        "lastSearchTime": "2026-10-31T13:17:56Z",
+        "monitored": true,
+        "overview": "Maeve and Conrad go to the dogs, leaving Harry to deal with the messy fallout. Jan makes a startling confession. Kevin and Seraphina both look to the future. Tattersall puts his cards on the table.",
+        "runtime": 48,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "03:00",
+          "certification": "TV-MA",
+          "cleanTitle": "mobland",
+          "ended": false,
+          "firstAired": "2025-03-30T00:00:00Z",
+          "genres": [
+            "Crime",
+            "Drama"
+          ],
+          "id": 18,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/banners/68175c94c4974.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/posters/6aa1c710a2a68.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/backgrounds/67e9845c46113.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/clearlogo/68fd77028683b.png"
+            }
+          ],
+          "imdbId": "tt31510819",
+          "languageProfileId": 1,
+          "lastAired": "2026-11-20T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Paramount+",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Two mob families clash in a war that threatens to topple empires and lives.",
+          "path": "/tv/MobLand",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.3,
+            "votes": 138308
+          },
+          "runtime": 47,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "mobland",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "MobLand",
+          "titleSlug": "mobland",
+          "tmdbId": 247718,
+          "tvMazeId": 75026,
+          "tvRageId": 0,
+          "tvdbId": 446831,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 18,
+        "title": "I Wanna Be Your Dog",
+        "tvdbId": 11542638,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-09-04",
+        "airDateUtc": "2026-09-04T04:00:00Z",
+        "episodeFileId": 755,
+        "episodeNumber": 10,
+        "finaleType": "season",
+        "hasFile": true,
+        "id": 1351,
+        "monitored": true,
+        "overview": "A leader wakes to a new world.",
+        "runtime": 60,
+        "seasonNumber": 3,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "00:00",
+          "certification": "TV-MA",
+          "cleanTitle": "silo",
+          "ended": false,
+          "firstAired": "2023-05-05T00:00:00Z",
+          "genres": [
+            "Drama",
+            "Science Fiction"
+          ],
+          "id": 23,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/banners/6449d56a60674.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/posters/64432dea72673.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/backgrounds/640bc23f1fa80.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/clearlogo/6455710e48c96.png"
+            }
+          ],
+          "imdbId": "tt14688458",
+          "languageProfileId": 1,
+          "lastAired": "2027-07-09T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "In a ruined and toxic future, thousands live in a giant silo deep underground. After its sheriff breaks a cardinal rule and residents die mysteriously, engineer Juliette starts to uncover shocking secrets and the truth about the silo.",
+          "path": "/tv/Silo",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.1,
+            "votes": 252993
+          },
+          "runtime": 51,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 3
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 4
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "silo",
+          "status": "continuing",
+          "tags": [
+            2
+          ],
+          "title": "Silo",
+          "titleSlug": "silo",
+          "tmdbId": 125988,
+          "tvMazeId": 38052,
+          "tvRageId": 0,
+          "tvdbId": 403245,
+          "useSceneNumbering": false,
+          "year": 2023
+        },
+        "seriesId": 23,
+        "title": "Troy",
+        "tvdbId": 11751888,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-08-28",
+        "airDateUtc": "2026-08-28T04:00:00Z",
+        "episodeFileId": 754,
+        "episodeNumber": 9,
+        "hasFile": true,
+        "id": 1350,
+        "monitored": true,
+        "overview": "The entire silo is stunned by an announcement from Camille. Daniel and Helen attend a special event.",
+        "runtime": 62,
+        "seasonNumber": 3,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "00:00",
+          "certification": "TV-MA",
+          "cleanTitle": "silo",
+          "ended": false,
+          "firstAired": "2023-05-05T00:00:00Z",
+          "genres": [
+            "Drama",
+            "Science Fiction"
+          ],
+          "id": 23,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/banners/6449d56a60674.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/posters/64432dea72673.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/backgrounds/640bc23f1fa80.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/clearlogo/6455710e48c96.png"
+            }
+          ],
+          "imdbId": "tt14688458",
+          "languageProfileId": 1,
+          "lastAired": "2027-07-09T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "In a ruined and toxic future, thousands live in a giant silo deep underground. After its sheriff breaks a cardinal rule and residents die mysteriously, engineer Juliette starts to uncover shocking secrets and the truth about the silo.",
+          "path": "/tv/Silo",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.1,
+            "votes": 252993
+          },
+          "runtime": 51,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 3
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 4
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "silo",
+          "status": "continuing",
+          "tags": [
+            2
+          ],
+          "title": "Silo",
+          "titleSlug": "silo",
+          "tmdbId": 125988,
+          "tvMazeId": 38052,
+          "tvRageId": 0,
+          "tvdbId": 403245,
+          "useSceneNumbering": false,
+          "year": 2023
+        },
+        "seriesId": 23,
+        "title": "Farewell",
+        "tvdbId": 11751887,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-08-21",
+        "airDateUtc": "2026-08-21T04:00:00Z",
+        "episodeFileId": 753,
+        "episodeNumber": 8,
+        "hasFile": true,
+        "id": 1349,
+        "monitored": true,
+        "overview": "Knox’s father Gus comes clean about a secret. Charlotte makes a life-changing decision.",
+        "runtime": 56,
+        "seasonNumber": 3,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "00:00",
+          "certification": "TV-MA",
+          "cleanTitle": "silo",
+          "ended": false,
+          "firstAired": "2023-05-05T00:00:00Z",
+          "genres": [
+            "Drama",
+            "Science Fiction"
+          ],
+          "id": 23,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/banners/6449d56a60674.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/posters/64432dea72673.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/backgrounds/640bc23f1fa80.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/clearlogo/6455710e48c96.png"
+            }
+          ],
+          "imdbId": "tt14688458",
+          "languageProfileId": 1,
+          "lastAired": "2027-07-09T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "In a ruined and toxic future, thousands live in a giant silo deep underground. After its sheriff breaks a cardinal rule and residents die mysteriously, engineer Juliette starts to uncover shocking secrets and the truth about the silo.",
+          "path": "/tv/Silo",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.1,
+            "votes": 252993
+          },
+          "runtime": 51,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 3
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 4
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "silo",
+          "status": "continuing",
+          "tags": [
+            2
+          ],
+          "title": "Silo",
+          "titleSlug": "silo",
+          "tmdbId": 125988,
+          "tvMazeId": 38052,
+          "tvRageId": 0,
+          "tvdbId": 403245,
+          "useSceneNumbering": false,
+          "year": 2023
+        },
+        "seriesId": 23,
+        "title": "Gray Goo",
+        "tvdbId": 11751886,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-08-14",
+        "airDateUtc": "2026-08-14T04:00:00Z",
+        "episodeFileId": 752,
+        "episodeNumber": 7,
+        "hasFile": true,
+        "id": 1348,
+        "monitored": true,
+        "overview": "Juliette sends Lukas and Kennedy on a mission, as a desperate Camille threatens Robert to tell the truth.",
+        "runtime": 55,
+        "seasonNumber": 3,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "00:00",
+          "certification": "TV-MA",
+          "cleanTitle": "silo",
+          "ended": false,
+          "firstAired": "2023-05-05T00:00:00Z",
+          "genres": [
+            "Drama",
+            "Science Fiction"
+          ],
+          "id": 23,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/banners/6449d56a60674.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/posters/64432dea72673.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/backgrounds/640bc23f1fa80.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/clearlogo/6455710e48c96.png"
+            }
+          ],
+          "imdbId": "tt14688458",
+          "languageProfileId": 1,
+          "lastAired": "2027-07-09T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "In a ruined and toxic future, thousands live in a giant silo deep underground. After its sheriff breaks a cardinal rule and residents die mysteriously, engineer Juliette starts to uncover shocking secrets and the truth about the silo.",
+          "path": "/tv/Silo",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.1,
+            "votes": 252993
+          },
+          "runtime": 51,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 3
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 4
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "silo",
+          "status": "continuing",
+          "tags": [
+            2
+          ],
+          "title": "Silo",
+          "titleSlug": "silo",
+          "tmdbId": 125988,
+          "tvMazeId": 38052,
+          "tvRageId": 0,
+          "tvdbId": 403245,
+          "useSceneNumbering": false,
+          "year": 2023
+        },
+        "seriesId": 23,
+        "title": "Radio",
+        "tvdbId": 11751885,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "absoluteEpisodeNumber": 16,
+        "airDate": "2026-08-07",
+        "airDateUtc": "2026-08-07T04:00:00Z",
+        "episodeFileId": 717,
+        "episodeNumber": 8,
+        "finaleType": "season",
+        "hasFile": true,
+        "id": 1333,
+        "monitored": true,
+        "overview": "Sugar attends an event that shakes him to his core.",
+        "runtime": 44,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T15:32:32Z",
+          "airTime": "00:00",
+          "certification": "TV-MA",
+          "cleanTitle": "sugar2024",
+          "ended": true,
+          "firstAired": "2024-04-05T00:00:00Z",
+          "genres": [
+            "Drama",
+            "Thriller"
+          ],
+          "id": 35,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/421070/banners/65dc08e382aeb.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/421070/posters/6a18881d42952.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/421070/backgrounds/6622312cecc2d.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/421070/clearlogo/65e80a5bd6e2c.png"
+            }
+          ],
+          "imdbId": "tt16418808",
+          "languageProfileId": 1,
+          "lastAired": "2026-08-07T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Sugar is a contemporary noir drama following an enigmatic Los Angeles private detective known for his sharp instincts and deep love of classic cinema. As he takes on complex cases across the city, his work is shaped by personal struggles with personal demons and a ongoing search for his missing sister.",
+          "path": "/tv/Sugar (2024)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.4,
+            "votes": 51231
+          },
+          "runtime": 38,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "sugar 2024",
+          "status": "ended",
+          "tags": [],
+          "title": "Sugar (2024)",
+          "titleSlug": "sugar-2024",
+          "tmdbId": 203744,
+          "tvMazeId": 62463,
+          "tvRageId": 0,
+          "tvdbId": 421070,
+          "useSceneNumbering": false,
+          "year": 2024
+        },
+        "seriesId": 35,
+        "title": "Like Sugar",
+        "tvdbId": 11585261,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-08-07",
+        "airDateUtc": "2026-08-07T04:00:00Z",
+        "episodeFileId": 749,
+        "episodeNumber": 6,
+        "hasFile": true,
+        "id": 1347,
+        "monitored": true,
+        "overview": "Billings and Hank stumble on a new mystery. Daniel and Helen receive a surprising proposition.",
+        "runtime": 54,
+        "seasonNumber": 3,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "00:00",
+          "certification": "TV-MA",
+          "cleanTitle": "silo",
+          "ended": false,
+          "firstAired": "2023-05-05T00:00:00Z",
+          "genres": [
+            "Drama",
+            "Science Fiction"
+          ],
+          "id": 23,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/banners/6449d56a60674.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/posters/64432dea72673.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/backgrounds/640bc23f1fa80.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/clearlogo/6455710e48c96.png"
+            }
+          ],
+          "imdbId": "tt14688458",
+          "languageProfileId": 1,
+          "lastAired": "2027-07-09T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "In a ruined and toxic future, thousands live in a giant silo deep underground. After its sheriff breaks a cardinal rule and residents die mysteriously, engineer Juliette starts to uncover shocking secrets and the truth about the silo.",
+          "path": "/tv/Silo",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.1,
+            "votes": 252993
+          },
+          "runtime": 51,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 3
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 4
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "silo",
+          "status": "continuing",
+          "tags": [
+            2
+          ],
+          "title": "Silo",
+          "titleSlug": "silo",
+          "tmdbId": 125988,
+          "tvMazeId": 38052,
+          "tvRageId": 0,
+          "tvdbId": 403245,
+          "useSceneNumbering": false,
+          "year": 2023
+        },
+        "seriesId": 23,
+        "title": "The Drive",
+        "tvdbId": 11751884,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "absoluteEpisodeNumber": 15,
+        "airDate": "2026-07-31",
+        "airDateUtc": "2026-07-31T04:00:00Z",
+        "episodeFileId": 696,
+        "episodeNumber": 7,
+        "hasFile": true,
+        "id": 1332,
+        "monitored": true,
+        "overview": "With every other option spent, Sugar plays one last card. Charlotte opens up to Sugar.",
+        "runtime": 47,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T15:32:32Z",
+          "airTime": "00:00",
+          "certification": "TV-MA",
+          "cleanTitle": "sugar2024",
+          "ended": true,
+          "firstAired": "2024-04-05T00:00:00Z",
+          "genres": [
+            "Drama",
+            "Thriller"
+          ],
+          "id": 35,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/421070/banners/65dc08e382aeb.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/421070/posters/6a18881d42952.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/421070/backgrounds/6622312cecc2d.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/421070/clearlogo/65e80a5bd6e2c.png"
+            }
+          ],
+          "imdbId": "tt16418808",
+          "languageProfileId": 1,
+          "lastAired": "2026-08-07T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Sugar is a contemporary noir drama following an enigmatic Los Angeles private detective known for his sharp instincts and deep love of classic cinema. As he takes on complex cases across the city, his work is shaped by personal struggles with personal demons and a ongoing search for his missing sister.",
+          "path": "/tv/Sugar (2024)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.4,
+            "votes": 51231
+          },
+          "runtime": 38,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "sugar 2024",
+          "status": "ended",
+          "tags": [],
+          "title": "Sugar (2024)",
+          "titleSlug": "sugar-2024",
+          "tmdbId": 203744,
+          "tvMazeId": 62463,
+          "tvRageId": 0,
+          "tvdbId": 421070,
+          "useSceneNumbering": false,
+          "year": 2024
+        },
+        "seriesId": 35,
+        "title": "What Else Can You Do?",
+        "tvdbId": 11585260,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-07-31",
+        "airDateUtc": "2026-07-31T04:00:00Z",
+        "episodeFileId": 748,
+        "episodeNumber": 5,
+        "hasFile": true,
+        "id": 1346,
+        "monitored": true,
+        "overview": "The events following Juliette’s return come to light—and unexpected allies are made.",
+        "runtime": 53,
+        "seasonNumber": 3,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "00:00",
+          "certification": "TV-MA",
+          "cleanTitle": "silo",
+          "ended": false,
+          "firstAired": "2023-05-05T00:00:00Z",
+          "genres": [
+            "Drama",
+            "Science Fiction"
+          ],
+          "id": 23,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/banners/6449d56a60674.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/posters/64432dea72673.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/backgrounds/640bc23f1fa80.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/clearlogo/6455710e48c96.png"
+            }
+          ],
+          "imdbId": "tt14688458",
+          "languageProfileId": 1,
+          "lastAired": "2027-07-09T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "In a ruined and toxic future, thousands live in a giant silo deep underground. After its sheriff breaks a cardinal rule and residents die mysteriously, engineer Juliette starts to uncover shocking secrets and the truth about the silo.",
+          "path": "/tv/Silo",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.1,
+            "votes": 252993
+          },
+          "runtime": 51,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 3
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 4
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "silo",
+          "status": "continuing",
+          "tags": [
+            2
+          ],
+          "title": "Silo",
+          "titleSlug": "silo",
+          "tmdbId": 125988,
+          "tvMazeId": 38052,
+          "tvRageId": 0,
+          "tvdbId": 403245,
+          "useSceneNumbering": false,
+          "year": 2023
+        },
+        "seriesId": 23,
+        "title": "Memory",
+        "tvdbId": 11751883,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "absoluteEpisodeNumber": 14,
+        "airDate": "2026-07-24",
+        "airDateUtc": "2026-07-24T04:00:00Z",
+        "episodeFileId": 687,
+        "episodeNumber": 6,
+        "hasFile": true,
+        "id": 1331,
+        "monitored": true,
+        "overview": "Sugar wrestles with his fear of contamination. Vega forces Sugar to make an impossible choice.",
+        "runtime": 35,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T15:32:32Z",
+          "airTime": "00:00",
+          "certification": "TV-MA",
+          "cleanTitle": "sugar2024",
+          "ended": true,
+          "firstAired": "2024-04-05T00:00:00Z",
+          "genres": [
+            "Drama",
+            "Thriller"
+          ],
+          "id": 35,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/421070/banners/65dc08e382aeb.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/421070/posters/6a18881d42952.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/421070/backgrounds/6622312cecc2d.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/421070/clearlogo/65e80a5bd6e2c.png"
+            }
+          ],
+          "imdbId": "tt16418808",
+          "languageProfileId": 1,
+          "lastAired": "2026-08-07T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Sugar is a contemporary noir drama following an enigmatic Los Angeles private detective known for his sharp instincts and deep love of classic cinema. As he takes on complex cases across the city, his work is shaped by personal struggles with personal demons and a ongoing search for his missing sister.",
+          "path": "/tv/Sugar (2024)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.4,
+            "votes": 51231
+          },
+          "runtime": 38,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "sugar 2024",
+          "status": "ended",
+          "tags": [],
+          "title": "Sugar (2024)",
+          "titleSlug": "sugar-2024",
+          "tmdbId": 203744,
+          "tvMazeId": 62463,
+          "tvRageId": 0,
+          "tvdbId": 421070,
+          "useSceneNumbering": false,
+          "year": 2024
+        },
+        "seriesId": 35,
+        "title": "Cautionary Tale",
+        "tvdbId": 11585259,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-07-24",
+        "airDateUtc": "2026-07-24T04:00:00Z",
+        "episodeFileId": 751,
+        "episodeNumber": 4,
+        "hasFile": true,
+        "id": 1345,
+        "monitored": true,
+        "overview": "The race to evade Camille leads Juliette to a shocking discovery. Daniel seeks help from a friend.",
+        "runtime": 48,
+        "seasonNumber": 3,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "00:00",
+          "certification": "TV-MA",
+          "cleanTitle": "silo",
+          "ended": false,
+          "firstAired": "2023-05-05T00:00:00Z",
+          "genres": [
+            "Drama",
+            "Science Fiction"
+          ],
+          "id": 23,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/banners/6449d56a60674.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/posters/64432dea72673.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/backgrounds/640bc23f1fa80.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/clearlogo/6455710e48c96.png"
+            }
+          ],
+          "imdbId": "tt14688458",
+          "languageProfileId": 1,
+          "lastAired": "2027-07-09T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "In a ruined and toxic future, thousands live in a giant silo deep underground. After its sheriff breaks a cardinal rule and residents die mysteriously, engineer Juliette starts to uncover shocking secrets and the truth about the silo.",
+          "path": "/tv/Silo",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.1,
+            "votes": 252993
+          },
+          "runtime": 51,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 3
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 4
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "silo",
+          "status": "continuing",
+          "tags": [
+            2
+          ],
+          "title": "Silo",
+          "titleSlug": "silo",
+          "tmdbId": 125988,
+          "tvMazeId": 38052,
+          "tvRageId": 0,
+          "tvdbId": 403245,
+          "useSceneNumbering": false,
+          "year": 2023
+        },
+        "seriesId": 23,
+        "title": "Whatever You Do, Don't Go Home",
+        "tvdbId": 11751882,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "absoluteEpisodeNumber": 13,
+        "airDate": "2026-07-17",
+        "airDateUtc": "2026-07-17T04:00:00Z",
+        "episodeFileId": 682,
+        "episodeNumber": 5,
+        "hasFile": true,
+        "id": 1330,
+        "monitored": true,
+        "overview": "Vega isn’t convinced his problem with Ji is solved. Sugar befriends someone in Pavich’s inner circle.",
+        "runtime": 40,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T15:32:32Z",
+          "airTime": "00:00",
+          "certification": "TV-MA",
+          "cleanTitle": "sugar2024",
+          "ended": true,
+          "firstAired": "2024-04-05T00:00:00Z",
+          "genres": [
+            "Drama",
+            "Thriller"
+          ],
+          "id": 35,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/421070/banners/65dc08e382aeb.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/421070/posters/6a18881d42952.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/421070/backgrounds/6622312cecc2d.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/421070/clearlogo/65e80a5bd6e2c.png"
+            }
+          ],
+          "imdbId": "tt16418808",
+          "languageProfileId": 1,
+          "lastAired": "2026-08-07T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Sugar is a contemporary noir drama following an enigmatic Los Angeles private detective known for his sharp instincts and deep love of classic cinema. As he takes on complex cases across the city, his work is shaped by personal struggles with personal demons and a ongoing search for his missing sister.",
+          "path": "/tv/Sugar (2024)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.4,
+            "votes": 51231
+          },
+          "runtime": 38,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "sugar 2024",
+          "status": "ended",
+          "tags": [],
+          "title": "Sugar (2024)",
+          "titleSlug": "sugar-2024",
+          "tmdbId": 203744,
+          "tvMazeId": 62463,
+          "tvRageId": 0,
+          "tvdbId": 421070,
+          "useSceneNumbering": false,
+          "year": 2024
+        },
+        "seriesId": 35,
+        "title": "Unknowns",
+        "tvdbId": 11585258,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-07-17",
+        "airDateUtc": "2026-07-17T04:00:00Z",
+        "episodeFileId": 750,
+        "episodeNumber": 3,
+        "hasFile": true,
+        "id": 1344,
+        "monitored": true,
+        "overview": "Juliette takes control of her recovery process. Helen suffers consequences of her investigation.",
+        "runtime": 49,
+        "seasonNumber": 3,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "00:00",
+          "certification": "TV-MA",
+          "cleanTitle": "silo",
+          "ended": false,
+          "firstAired": "2023-05-05T00:00:00Z",
+          "genres": [
+            "Drama",
+            "Science Fiction"
+          ],
+          "id": 23,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/banners/6449d56a60674.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/posters/64432dea72673.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/backgrounds/640bc23f1fa80.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/clearlogo/6455710e48c96.png"
+            }
+          ],
+          "imdbId": "tt14688458",
+          "languageProfileId": 1,
+          "lastAired": "2027-07-09T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "In a ruined and toxic future, thousands live in a giant silo deep underground. After its sheriff breaks a cardinal rule and residents die mysteriously, engineer Juliette starts to uncover shocking secrets and the truth about the silo.",
+          "path": "/tv/Silo",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.1,
+            "votes": 252993
+          },
+          "runtime": 51,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 3
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 4
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "silo",
+          "status": "continuing",
+          "tags": [
+            2
+          ],
+          "title": "Silo",
+          "titleSlug": "silo",
+          "tmdbId": 125988,
+          "tvMazeId": 38052,
+          "tvRageId": 0,
+          "tvdbId": 403245,
+          "useSceneNumbering": false,
+          "year": 2023
+        },
+        "seriesId": 23,
+        "title": "A Dark Web",
+        "tvdbId": 11751881,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-07-15",
+        "airDateUtc": "2026-07-15T04:00:00Z",
+        "episodeFileId": 845,
+        "episodeNumber": 10,
+        "finaleType": "season",
+        "hasFile": true,
+        "id": 1478,
+        "lastSearchTime": "2026-09-29T21:47:21Z",
+        "monitored": true,
+        "overview": "Everything everywhere all at once.",
+        "runtime": 38,
+        "seasonNumber": 1,
+        "series": {
+          "added": "2026-06-18T20:55:02Z",
+          "airTime": "00:00",
+          "cleanTitle": "maximumpleasureguaranteed",
+          "ended": false,
+          "firstAired": "2026-05-20T00:00:00Z",
+          "genres": [
+            "Comedy",
+            "Thriller"
+          ],
+          "id": 41,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/460793/banners/69f22700c0bcb.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/460793/posters/6a078bd29acd7.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/460793/backgrounds/6a0d9f8851250.jpg"
+            }
+          ],
+          "imdbId": "tt35946742",
+          "languageProfileId": 1,
+          "lastAired": "2026-07-15T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "A newly divorced mom falls down a dangerous rabbit hole of blackmail, murder and youth soccer.",
+          "path": "/tv/Maximum Pleasure Guaranteed (2026)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.4,
+            "votes": 11649
+          },
+          "runtime": 35,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "maximum pleasure guaranteed",
+          "status": "continuing",
+          "tags": [],
+          "title": "Maximum Pleasure Guaranteed",
+          "titleSlug": "maximum-pleasure-guaranteed",
+          "tmdbId": 285404,
+          "tvMazeId": 82915,
+          "tvRageId": 0,
+          "tvdbId": 460793,
+          "useSceneNumbering": false,
+          "year": 2026
+        },
+        "seriesId": 41,
+        "title": "Queens",
+        "tvdbId": 10991558,
+        "unverifiedSceneNumbering": false
+      }
+    ],
+    "sortDirection": "descending",
+    "sortKey": "episodes.airDateUtc",
+    "totalRecords": 83
+  },
+  "recordedAt": "2026-11-07T08:04:13Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/wanted/cutoff?page=1&pageSize=20&sortKey=airDateUtc&sortDirection=descending&includeSeries=true"
+  },
+  "status": 200
+}

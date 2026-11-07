@@ -1,0 +1,7 @@
+# Build context for the image: sources, the lock file and the fetched UI.
+.git
+.cache
+target
+tests/fixtures
+docs
+*.md

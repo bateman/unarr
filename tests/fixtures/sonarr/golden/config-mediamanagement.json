@@ -1,0 +1,31 @@
+{
+  "body": {
+    "autoUnmonitorPreviouslyDownloadedEpisodes": true,
+    "chmodFolder": "755",
+    "chownGroup": "",
+    "copyUsingHardlinks": true,
+    "createEmptySeriesFolders": false,
+    "deleteEmptyFolders": false,
+    "downloadPropersAndRepacks": "doNotPrefer",
+    "enableMediaInfo": true,
+    "episodeTitleRequired": "always",
+    "extraFileExtensions": "srt",
+    "fileDate": "none",
+    "id": 1,
+    "importExtraFiles": false,
+    "minimumFreeSpaceWhenImporting": 100,
+    "recycleBin": "",
+    "recycleBinCleanupDays": 7,
+    "rescanAfterRefresh": "always",
+    "scriptImportPath": "",
+    "setPermissionsLinux": false,
+    "skipFreeSpaceCheckWhenImporting": false,
+    "useScriptImport": false
+  },
+  "recordedAt": "2026-11-07T08:04:07Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/config/mediamanagement"
+  },
+  "status": 200
+}

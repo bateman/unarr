@@ -1,0 +1,9 @@
+{
+  "body": null,
+  "recordedAt": "2026-11-07T08:04:13Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/doesnotexist"
+  },
+  "status": 404
+}

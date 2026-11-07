@@ -1,2 +1,8 @@
 /target
 *.png
+/.cache
+*.db-wal
+*.db-shm
+/crates/unarr-api/ui/sonarr/*
+!/crates/unarr-api/ui/sonarr/.gitkeep
+__pycache__/

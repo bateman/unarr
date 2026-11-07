@@ -1,0 +1,34 @@
+{
+  "body": {
+    "availableTransports": [
+      {
+        "transferFormats": [
+          "Text",
+          "Binary"
+        ],
+        "transport": "WebSockets"
+      },
+      {
+        "transferFormats": [
+          "Text"
+        ],
+        "transport": "ServerSentEvents"
+      },
+      {
+        "transferFormats": [
+          "Text",
+          "Binary"
+        ],
+        "transport": "LongPolling"
+      }
+    ],
+    "connectionId": "MmNDZykBXV7TSkMPpoS2Yg",
+    "negotiateVersion": 0
+  },
+  "recordedAt": "2026-11-07T08:04:06Z",
+  "request": {
+    "method": "POST",
+    "path": "/signalr/messages/negotiate?access_token=0123456789abcdef0123456789abcdef"
+  },
+  "status": 200
+}

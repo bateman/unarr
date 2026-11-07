@@ -1,0 +1,108 @@
+# Requests replayed against the real Sonarr to record golden responses, and
+# against Unarr by the contract tests. Format: <name> <METHOD> <path>.
+# Names starting with "noauth" are sent without the X-Api-Key header.
+
+# system
+system-status GET /api/v3/system/status
+noauth-system-status GET /api/v3/system/status
+apikey-query-system-status GET /api/v3/system/status?apikey=0123456789abcdef0123456789abcdef
+health GET /api/v3/health
+diskspace GET /api/v3/diskspace
+system-task GET /api/v3/system/task
+log GET /api/v3/log?page=1&pageSize=10&sortKey=time&sortDirection=descending
+update GET /api/v3/update
+command GET /api/v3/command
+localization GET /api/v3/localization
+noauth-initialize-json GET /initialize.json
+session-initialize-json GET /initialize.json
+signalr-negotiate POST /signalr/messages/negotiate?access_token=0123456789abcdef0123456789abcdef
+
+# series
+series GET /api/v3/series
+series-include-images GET /api/v3/series?includeSeasonImages=true
+series-by-tvdb GET /api/v3/series?tvdbId=448176
+series-1 GET /api/v3/series/1
+series-2 GET /api/v3/series/2
+series-3 GET /api/v3/series/3
+series-5 GET /api/v3/series/5
+series-22 GET /api/v3/series/22
+series-404 GET /api/v3/series/999
+
+# episodes and files
+episode-series-1 GET /api/v3/episode?seriesId=1
+episode-series-1-full GET /api/v3/episode?seriesId=1&includeEpisodeFile=true&includeImages=true
+episode-series-2-season-1 GET /api/v3/episode?seriesId=2&seasonNumber=1
+episode-series-3 GET /api/v3/episode?seriesId=3
+episode-series-22-full GET /api/v3/episode?seriesId=22&includeEpisodeFile=true
+episode-1 GET /api/v3/episode/1
+episode-404 GET /api/v3/episode/99999
+episodefile-series-1 GET /api/v3/episodefile?seriesId=1
+episodefile-series-3 GET /api/v3/episodefile?seriesId=3
+episodefile-series-22 GET /api/v3/episodefile?seriesId=22
+episodefile-361 GET /api/v3/episodefile/361
+episodefile-404 GET /api/v3/episodefile/99999
+
+# catalogues and profiles
+qualityprofile GET /api/v3/qualityprofile
+qualityprofile-1 GET /api/v3/qualityprofile/1
+qualityprofile-10 GET /api/v3/qualityprofile/10
+qualitydefinition GET /api/v3/qualitydefinition
+customformat GET /api/v3/customformat
+customformat-1 GET /api/v3/customformat/1
+customformat-41 GET /api/v3/customformat/41
+rootfolder GET /api/v3/rootfolder
+rootfolder-1 GET /api/v3/rootfolder/1
+tag GET /api/v3/tag
+tag-detail GET /api/v3/tag/detail
+tag-1 GET /api/v3/tag/1
+language GET /api/v3/language
+delayprofile GET /api/v3/delayprofile
+releaseprofile GET /api/v3/releaseprofile
+remotepathmapping GET /api/v3/remotepathmapping
+customfilter GET /api/v3/customfilter
+
+# config
+config-naming GET /api/v3/config/naming
+config-mediamanagement GET /api/v3/config/mediamanagement
+config-host GET /api/v3/config/host
+config-ui GET /api/v3/config/ui
+config-downloadclient GET /api/v3/config/downloadclient
+config-importlist GET /api/v3/config/importlist
+
+# activity
+history GET /api/v3/history?page=1&pageSize=20&sortKey=date&sortDirection=descending&includeSeries=true&includeEpisode=true
+history-page-2 GET /api/v3/history?page=2&pageSize=10&sortKey=date&sortDirection=descending
+history-series-1 GET /api/v3/history/series?seriesId=1&includeEpisode=true
+history-series-22 GET /api/v3/history/series?seriesId=22&eventType=3
+history-since GET /api/v3/history/since?date=2020-01-01T00:00:00Z&includeSeries=true&includeEpisode=true
+queue GET /api/v3/queue?page=1&pageSize=20&includeUnknownSeriesItems=true&includeSeries=true&includeEpisode=true
+queue-status GET /api/v3/queue/status
+queue-details GET /api/v3/queue/details?includeSeries=true&includeEpisode=true
+blocklist GET /api/v3/blocklist?page=1&pageSize=20&sortKey=date&sortDirection=descending
+blocklist-page-3 GET /api/v3/blocklist?page=3&pageSize=50&sortKey=sourceTitle&sortDirection=ascending
+calendar GET /api/v3/calendar?start=2026-10-01T00:00:00Z&end=2026-10-31T00:00:00Z&includeSeries=true&includeEpisodeFile=true&unmonitored=true
+calendar-monitored GET /api/v3/calendar?start=2026-09-01T00:00:00Z&end=2026-09-30T00:00:00Z
+calendar-past GET /api/v3/calendar?start=2025-01-01T00:00:00Z&end=2025-01-31T00:00:00Z&includeEpisodeFile=true
+calendar-empty GET /api/v3/calendar?start=2030-01-01T00:00:00Z&end=2030-01-07T00:00:00Z
+wanted-missing GET /api/v3/wanted/missing?page=1&pageSize=20&sortKey=airDateUtc&sortDirection=descending&includeSeries=true
+wanted-missing-unmonitored GET /api/v3/wanted/missing?page=1&pageSize=5&sortKey=airDateUtc&sortDirection=ascending&monitored=false
+wanted-cutoff GET /api/v3/wanted/cutoff?page=1&pageSize=20&sortKey=airDateUtc&sortDirection=descending&includeSeries=true
+
+# providers
+indexer GET /api/v3/indexer
+indexer-1 GET /api/v3/indexer/1
+indexer-7 GET /api/v3/indexer/7
+downloadclient GET /api/v3/downloadclient
+notification GET /api/v3/notification
+importlist GET /api/v3/importlist
+importlistexclusion GET /api/v3/importlistexclusion
+metadata GET /api/v3/metadata
+autotagging GET /api/v3/autotagging
+
+# indexer flags and the UI bootstrap without a session (forms authentication)
+indexerflag GET /api/v3/indexerflag
+api-unknown-route GET /api/v3/doesnotexist
+config-indexer GET /api/v3/config/indexer
+config-naming-examples GET /api/v3/config/naming/examples
+languageprofile GET /api/v3/languageprofile
+languageprofile-1 GET /api/v3/languageprofile/1

@@ -1,0 +1,15 @@
+{
+  "body": [
+    {
+      "accessible": false,
+      "id": 1,
+      "path": "/tv"
+    }
+  ],
+  "recordedAt": "2026-11-07T08:04:07Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/rootfolder"
+  },
+  "status": 200
+}

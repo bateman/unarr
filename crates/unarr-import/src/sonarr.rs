@@ -1,0 +1,1005 @@
+//! Import of a Sonarr v4 `sonarr.db` into Unarr's schema.
+//!
+//! The legacy schema is read table by table through `SELECT *` and columns are
+//! fetched by name, so a column added by a later migration is simply absent
+//! (and defaulted) on older databases. Sonarr stores sub-documents as JSON
+//! text in the style of its Dapper mapping (`Images`, `Seasons`, `Quality`,
+//! `Items`, `Settings`...); each is decoded here into the matching model or
+//! kept verbatim where Unarr does not interpret it yet.
+
+use std::collections::BTreeMap;
+use std::path::Path;
+
+use anyhow::Context;
+use chrono::{DateTime, NaiveDate, Utc};
+use rusqlite::types::{FromSql, Value as SqlValue};
+use rusqlite::{Connection, OpenFlags, Row, Statement};
+use serde::de::DeserializeOwned;
+use serde_json::{json, Value};
+use unarr_core::model::*;
+use unarr_core::store;
+use unarr_core::{time, Db};
+
+/// Oldest migration level the mapping was written against (196 added
+/// `FinaleType`; everything older is best effort).
+pub const MIN_MIGRATION: i64 = 196;
+/// Newest migration level checked against the Sonarr sources (develop branch).
+pub const MAX_KNOWN_MIGRATION: i64 = 240;
+
+/// What an import did.
+#[derive(Debug, Default)]
+pub struct ImportReport {
+    pub migration_version: i64,
+    /// Rows imported per legacy table.
+    pub counts: BTreeMap<&'static str, usize>,
+    /// Human-readable notes about anything skipped or defaulted.
+    pub notes: Vec<String>,
+}
+
+/// Open the legacy database read-only, and only read-only: the original files
+/// are never modified, as the README promises. A leftover `-wal` is replayed
+/// by SQLite as long as the `-shm` can be created, which read-only mode allows
+/// when the directory is writable; a leftover rollback journal cannot be
+/// applied without writing, so that import stops with a message.
+fn open_legacy(path: &Path) -> anyhow::Result<Connection> {
+    let ro = OpenFlags::SQLITE_OPEN_READ_ONLY | OpenFlags::SQLITE_OPEN_NO_MUTEX;
+    let conn = Connection::open_with_flags(path, ro)
+        .with_context(|| format!("opening {} read-only", path.display()))?;
+    // Force a read so journal recovery problems surface here.
+    conn.query_row("SELECT count(*) FROM VersionInfo", [], |r| r.get::<_, i64>(0))
+        .with_context(|| {
+            format!(
+                "reading {} read-only; if the original application left a journal behind, \
+                 stop it or copy its files (the database with any -wal and -shm) and import the copy",
+                path.display()
+            )
+        })?;
+    Ok(conn)
+}
+
+/// Row with column lookup by name that tolerates absent columns.
+struct LegacyRow<'a> {
+    row: &'a Row<'a>,
+    names: &'a [String],
+    table: &'static str,
+}
+
+impl LegacyRow<'_> {
+    fn index(&self, name: &str) -> Option<usize> {
+        self.names.iter().position(|n| n == name)
+    }
+
+    /// Required column.
+    fn req<T: FromSql>(&self, name: &str) -> anyhow::Result<T> {
+        let i = self
+            .index(name)
+            .ok_or_else(|| anyhow::anyhow!("{}.{name} is missing in this database", self.table))?;
+        self.row
+            .get::<_, T>(i)
+            .with_context(|| format!("{}.{name}", self.table))
+    }
+
+    /// Column that may be NULL or absent.
+    fn opt<T: FromSql>(&self, name: &str) -> anyhow::Result<Option<T>> {
+        match self.index(name) {
+            None => Ok(None),
+            Some(i) => self
+                .row
+                .get::<_, Option<T>>(i)
+                .with_context(|| format!("{}.{name}", self.table)),
+        }
+    }
+
+    /// Column with a default when NULL or absent.
+    fn or<T: FromSql>(&self, name: &str, default: T) -> anyhow::Result<T> {
+        Ok(self.opt(name)?.unwrap_or(default))
+    }
+
+    fn text(&self, name: &str) -> anyhow::Result<Option<String>> {
+        // Sonarr stores the empty string for "no value" in several text
+        // columns; the API omits those, so they become None here.
+        Ok(self.opt::<String>(name)?.filter(|s| !s.is_empty()))
+    }
+
+    fn flag(&self, name: &str, default: bool) -> anyhow::Result<bool> {
+        Ok(self.or::<i64>(name, default as i64)? != 0)
+    }
+
+    fn json<T: DeserializeOwned + Default>(&self, name: &str) -> anyhow::Result<T> {
+        match self.opt::<String>(name)? {
+            Some(s) if !s.trim().is_empty() => {
+                serde_json::from_str(&s).with_context(|| format!("{}.{name} JSON", self.table))
+            }
+            _ => Ok(T::default()),
+        }
+    }
+
+    fn json_opt(&self, name: &str) -> anyhow::Result<Option<Value>> {
+        match self.opt::<String>(name)? {
+            Some(s) if !s.trim().is_empty() => Ok(Some(
+                serde_json::from_str(&s).with_context(|| format!("{}.{name} JSON", self.table))?,
+            )),
+            _ => Ok(None),
+        }
+    }
+
+    fn timestamp(&self, name: &str) -> anyhow::Result<Option<DateTime<Utc>>> {
+        match self.opt::<SqlValue>(name)? {
+            None | Some(SqlValue::Null) => Ok(None),
+            Some(SqlValue::Text(s)) => time::parse_utc(&s)
+                .map(Some)
+                .ok_or_else(|| anyhow::anyhow!("{}.{name}: bad timestamp {s:?}", self.table)),
+            Some(other) => anyhow::bail!("{}.{name}: unexpected {other:?}", self.table),
+        }
+    }
+
+    fn timestamp_req(&self, name: &str) -> anyhow::Result<DateTime<Utc>> {
+        self.timestamp(name)?
+            .ok_or_else(|| anyhow::anyhow!("{}.{name} is NULL", self.table))
+    }
+
+    fn date(&self, name: &str) -> anyhow::Result<Option<NaiveDate>> {
+        match self.text(name)? {
+            None => Ok(None),
+            Some(s) => time::parse_date(&s)
+                .map(Some)
+                .ok_or_else(|| anyhow::anyhow!("{}.{name}: bad date {s:?}", self.table)),
+        }
+    }
+}
+
+/// Run `SELECT * FROM table` and map every row.
+fn read_table<T>(
+    legacy: &Connection,
+    table: &'static str,
+    mut map: impl FnMut(&LegacyRow) -> anyhow::Result<T>,
+) -> anyhow::Result<Vec<T>> {
+    let exists: i64 = legacy.query_row(
+        "SELECT count(*) FROM sqlite_master WHERE type = 'table' AND name = ?1",
+        [table],
+        |r| r.get(0),
+    )?;
+    if exists == 0 {
+        tracing::warn!(table, "legacy table missing, skipping");
+        return Ok(Vec::new());
+    }
+    let mut stmt: Statement = legacy.prepare(&format!("SELECT * FROM \"{table}\" ORDER BY Id"))?;
+    let names: Vec<String> = stmt.column_names().map(|s| s.to_string()).collect();
+    let mut rows = stmt.query([])?;
+    let mut out = Vec::new();
+    while let Some(row) = rows.next()? {
+        out.push(map(&LegacyRow {
+            row,
+            names: &names,
+            table,
+        })?);
+    }
+    Ok(out)
+}
+
+/// `{"quality": 7, "revision": {"version": 1, "real": 0, "isRepack": false}}`
+fn quality_model(v: Option<Value>) -> QualityModel {
+    let Some(v) = v else {
+        return QualityModel::default();
+    };
+    QualityModel {
+        quality_id: v["quality"].as_i64().unwrap_or(0),
+        version: v["revision"]["version"].as_i64().unwrap_or(1),
+        real: v["revision"]["real"].as_i64().unwrap_or(0),
+        is_repack: v["revision"]["isRepack"].as_bool().unwrap_or(false),
+    }
+}
+
+fn series_status(v: i64) -> SeriesStatus {
+    match v {
+        -1 => SeriesStatus::Deleted,
+        1 => SeriesStatus::Ended,
+        2 => SeriesStatus::Upcoming,
+        _ => SeriesStatus::Continuing,
+    }
+}
+
+fn series_type(v: i64) -> SeriesType {
+    match v {
+        1 => SeriesType::Daily,
+        2 => SeriesType::Anime,
+        _ => SeriesType::Standard,
+    }
+}
+
+fn release_type(v: i64) -> ReleaseType {
+    match v {
+        1 => ReleaseType::SingleEpisode,
+        2 => ReleaseType::MultiEpisode,
+        3 => ReleaseType::SeasonPack,
+        4 => ReleaseType::MultiSeasonPack,
+        _ => ReleaseType::Unknown,
+    }
+}
+
+fn protocol(v: i64) -> Protocol {
+    match v {
+        1 => Protocol::Usenet,
+        2 => Protocol::Torrent,
+        _ => Protocol::Unknown,
+    }
+}
+
+fn history_event(v: i64) -> HistoryEvent {
+    HistoryEvent::from_number(v).unwrap_or(HistoryEvent::Unknown)
+}
+
+/// Sonarr's `MonitorTypes`, in declaration order.
+fn monitor_type(v: i64) -> &'static str {
+    [
+        "unknown",
+        "all",
+        "future",
+        "missing",
+        "existing",
+        "firstSeason",
+        "lastSeason",
+        "latestSeason",
+        "pilot",
+        "recent",
+        "monitorSpecials",
+        "unmonitorSpecials",
+        "none",
+        "skip",
+    ]
+    .get(v as usize)
+    .copied()
+    .unwrap_or("unknown")
+}
+
+/// Legacy season document: `{seasonNumber, monitored, images}`.
+#[derive(serde::Deserialize)]
+#[serde(rename_all = "camelCase")]
+struct LegacySeason {
+    season_number: i64,
+    monitored: bool,
+    #[serde(default)]
+    images: Vec<Image>,
+}
+
+/// Import `legacy_db` into `db`, replacing nothing: the target must be empty.
+pub fn import(legacy_db: &Path, db: &Db) -> anyhow::Result<ImportReport> {
+    let legacy = open_legacy(legacy_db).with_context(|| format!("opening {}", legacy_db.display()))?;
+    let migration_version: i64 = legacy
+        .query_row("SELECT max(Version) FROM VersionInfo", [], |r| r.get(0))
+        .context("reading VersionInfo: is this a Sonarr database?")?;
+    let mut report = ImportReport {
+        migration_version,
+        ..ImportReport::default()
+    };
+    tracing::info!(
+        version = report.migration_version,
+        "legacy database migration level"
+    );
+    anyhow::ensure!(
+        report.migration_version >= MIN_MIGRATION,
+        "sonarr.db is at migration {}, older than {} which this importer supports; upgrade Sonarr first",
+        report.migration_version,
+        MIN_MIGRATION
+    );
+    if report.migration_version > MAX_KNOWN_MIGRATION {
+        let note = format!(
+            "sonarr.db is at migration {}, newer than {} which this importer knows; unknown columns are ignored",
+            report.migration_version, MAX_KNOWN_MIGRATION
+        );
+        tracing::warn!("{note}");
+        report.notes.push(note);
+    }
+
+    // --- read everything first, so a mapping error leaves the target untouched
+    let tags = read_table(&legacy, "Tags", |r| {
+        Ok(Tag {
+            id: r.req("Id")?,
+            label: r.req("Label")?,
+        })
+    })?;
+    let root_folders = read_table(&legacy, "RootFolders", |r| {
+        Ok(RootFolder {
+            id: r.req("Id")?,
+            path: r.req("Path")?,
+        })
+    })?;
+    let quality_definitions = read_table(&legacy, "QualityDefinitions", |r| {
+        Ok(QualityDefinition {
+            id: r.req("Id")?,
+            quality_id: r.req("Quality")?,
+            title: r.req("Title")?,
+            min_size: r.opt("MinSize")?,
+            max_size: r.opt("MaxSize")?,
+            preferred_size: r.opt("PreferredSize")?,
+        })
+    })?;
+    let custom_formats = read_table(&legacy, "CustomFormats", |r| {
+        Ok(CustomFormat {
+            id: r.req("Id")?,
+            name: r.req("Name")?,
+            include_when_renaming: r.flag("IncludeCustomFormatWhenRenaming", false)?,
+            specifications: r.json_opt("Specifications")?.unwrap_or(json!([])),
+        })
+    })?;
+    let quality_profiles = read_table(&legacy, "QualityProfiles", |r| {
+        Ok(QualityProfile {
+            id: r.req("Id")?,
+            name: r.req("Name")?,
+            cutoff: r.req("Cutoff")?,
+            upgrade_allowed: r.flag("UpgradeAllowed", false)?,
+            items: r.json("Items")?,
+            format_items: r.json("FormatItems")?,
+            min_format_score: r.or("MinFormatScore", 0)?,
+            cutoff_format_score: r.or("CutoffFormatScore", 0)?,
+            min_upgrade_format_score: r.or("MinUpgradeFormatScore", 1)?,
+        })
+    })?;
+    let series = read_table(&legacy, "Series", |r| {
+        let seasons: Vec<LegacySeason> = r.json("Seasons")?;
+        let ratings: Ratings = r.json("Ratings")?;
+        Ok(Series {
+            id: r.req("Id")?,
+            tvdb_id: r.req("TvdbId")?,
+            tv_rage_id: r.or("TvRageId", 0)?,
+            tv_maze_id: r.or("TvMazeId", 0)?,
+            tmdb_id: r.or("TmdbId", 0)?,
+            imdb_id: r.text("ImdbId")?,
+            title: r.req("Title")?,
+            title_slug: r.req("TitleSlug")?,
+            clean_title: r.req("CleanTitle")?,
+            sort_title: r.text("SortTitle")?,
+            status: series_status(r.or("Status", 0)?),
+            overview: r.text("Overview")?,
+            air_time: r.text("AirTime")?,
+            network: r.text("Network")?,
+            certification: r.text("Certification")?,
+            images: r.json("Images")?,
+            genres: r.json("Genres")?,
+            actors: r.json_opt("Actors")?.unwrap_or(json!([])),
+            path: r.req("Path")?,
+            monitored: r.flag("Monitored", true)?,
+            season_folder: r.flag("SeasonFolder", true)?,
+            monitor_new_items: if r.or("MonitorNewItems", 0)? == 1 {
+                NewItemMonitor::None
+            } else {
+                NewItemMonitor::All
+            },
+            use_scene_numbering: r.flag("UseSceneNumbering", false)?,
+            runtime: r.or("Runtime", 0)?,
+            series_type: series_type(r.or("SeriesType", 0)?),
+            year: r.or("Year", 0)?,
+            first_aired: r.timestamp("FirstAired")?,
+            last_aired: r.timestamp("LastAired")?,
+            quality_profile_id: r.req("QualityProfileId")?,
+            original_language_id: r.or("OriginalLanguage", 1)?,
+            ratings,
+            added: r.timestamp_req("Added")?,
+            add_options: r.json_opt("AddOptions")?,
+            last_info_sync: r.timestamp("LastInfoSync")?,
+            last_disk_sync: r.timestamp("LastDiskSync")?,
+            mal_ids: r.json_opt("MalIds")?,
+            anilist_ids: r.json_opt("AniListIds")?,
+            seasons: seasons
+                .into_iter()
+                .map(|s| Season {
+                    season_number: s.season_number,
+                    monitored: s.monitored,
+                    images: s.images,
+                })
+                .collect(),
+            tags: r.json("Tags")?,
+        })
+    })?;
+    let episodes = read_table(&legacy, "Episodes", |r| {
+        Ok(Episode {
+            id: r.req("Id")?,
+            series_id: r.req("SeriesId")?,
+            tvdb_id: r.or("TvdbId", 0)?,
+            season_number: r.req("SeasonNumber")?,
+            episode_number: r.req("EpisodeNumber")?,
+            title: r.text("Title")?,
+            overview: r.text("Overview")?,
+            episode_file_id: r.or("EpisodeFileId", 0)?,
+            absolute_episode_number: r.opt("AbsoluteEpisodeNumber")?,
+            scene_absolute_episode_number: r.opt("SceneAbsoluteEpisodeNumber")?,
+            scene_season_number: r.opt("SceneSeasonNumber")?,
+            scene_episode_number: r.opt("SceneEpisodeNumber")?,
+            unverified_scene_numbering: r.flag("UnverifiedSceneNumbering", false)?,
+            monitored: r.flag("Monitored", true)?,
+            air_date: r.date("AirDate")?,
+            air_date_utc: r.timestamp("AirDateUtc")?,
+            runtime: r.or("Runtime", 0)?,
+            finale_type: r.text("FinaleType")?,
+            images: r.json("Images")?,
+            ratings: r.json("Ratings")?,
+            last_search_time: r.timestamp("LastSearchTime")?,
+            aired_after_season_number: r.opt("AiredAfterSeasonNumber")?,
+            aired_before_season_number: r.opt("AiredBeforeSeasonNumber")?,
+            aired_before_episode_number: r.opt("AiredBeforeEpisodeNumber")?,
+        })
+    })?;
+    let episode_files = read_table(&legacy, "EpisodeFiles", |r| {
+        Ok(EpisodeFile {
+            id: r.req("Id")?,
+            series_id: r.req("SeriesId")?,
+            season_number: r.req("SeasonNumber")?,
+            relative_path: r.req("RelativePath")?,
+            original_file_path: r.text("OriginalFilePath")?,
+            size: r.or("Size", 0)?,
+            date_added: r.timestamp_req("DateAdded")?,
+            scene_name: r.text("SceneName")?,
+            release_group: r.text("ReleaseGroup")?,
+            release_hash: r.text("ReleaseHash")?,
+            quality: quality_model(r.json_opt("Quality")?),
+            languages: r.json("Languages")?,
+            media_info: r.json_opt("MediaInfo")?,
+            indexer_flags: r.or("IndexerFlags", 0)?,
+            release_type: release_type(r.or("ReleaseType", 0)?),
+        })
+    })?;
+    let history = read_table(&legacy, "History", |r| {
+        Ok(HistoryEntry {
+            id: r.req("Id")?,
+            series_id: r.or("SeriesId", 0)?,
+            episode_id: r.or("EpisodeId", 0)?,
+            source_title: r.text("SourceTitle")?,
+            date: r.timestamp_req("Date")?,
+            event_type: history_event(r.or("EventType", 0)?),
+            quality: quality_model(r.json_opt("Quality")?),
+            languages: r.json("Languages")?,
+            data: r.json_opt("Data")?.unwrap_or(json!({})),
+            download_id: r.text("DownloadId")?,
+        })
+    })?;
+
+    let provider = |r: &LegacyRow, kind: ProviderKind, attributes: Value| -> anyhow::Result<Provider> {
+        Ok(Provider {
+            kind,
+            id: r.req("Id")?,
+            name: r.req("Name")?,
+            implementation: r.req("Implementation")?,
+            config_contract: r.or("ConfigContract", String::new())?,
+            settings: r.json_opt("Settings")?.unwrap_or(json!({})),
+            tags: r.json("Tags")?,
+            attributes,
+        })
+    };
+    let mut providers = read_table(&legacy, "Indexers", |r| {
+        let attributes = json!({
+            "enableRss": r.flag("EnableRss", false)?,
+            "enableAutomaticSearch": r.flag("EnableAutomaticSearch", false)?,
+            "enableInteractiveSearch": r.flag("EnableInteractiveSearch", false)?,
+            "priority": r.or("Priority", 25)?,
+            "downloadClientId": r.or("DownloadClientId", 0)?,
+            "seasonSearchMaximumSingleEpisodeAge": r.or("SeasonSearchMaximumSingleEpisodeAge", 0)?,
+        });
+        provider(r, ProviderKind::Indexer, attributes)
+    })?;
+    providers.extend(read_table(&legacy, "DownloadClients", |r| {
+        let attributes = json!({
+            "enable": r.flag("Enable", false)?,
+            "priority": r.or("Priority", 1)?,
+            "removeCompletedDownloads": r.flag("RemoveCompletedDownloads", true)?,
+            "removeFailedDownloads": r.flag("RemoveFailedDownloads", true)?,
+        });
+        provider(r, ProviderKind::DownloadClient, attributes)
+    })?);
+    providers.extend(read_table(&legacy, "Notifications", |r| {
+        let mut attributes = serde_json::Map::new();
+        for (column, name) in [
+            ("OnGrab", "onGrab"),
+            ("OnDownload", "onDownload"),
+            ("OnUpgrade", "onUpgrade"),
+            ("OnImportComplete", "onImportComplete"),
+            ("OnRename", "onRename"),
+            ("OnSeriesAdd", "onSeriesAdd"),
+            ("OnSeriesDelete", "onSeriesDelete"),
+            ("OnEpisodeFileDelete", "onEpisodeFileDelete"),
+            ("OnEpisodeFileDeleteForUpgrade", "onEpisodeFileDeleteForUpgrade"),
+            ("OnHealthIssue", "onHealthIssue"),
+            ("IncludeHealthWarnings", "includeHealthWarnings"),
+            ("OnHealthRestored", "onHealthRestored"),
+            ("OnApplicationUpdate", "onApplicationUpdate"),
+            ("OnManualInteractionRequired", "onManualInteractionRequired"),
+        ] {
+            attributes.insert(name.into(), json!(r.flag(column, false)?));
+        }
+        provider(r, ProviderKind::Notification, Value::Object(attributes))
+    })?);
+    providers.extend(read_table(&legacy, "ImportLists", |r| {
+        let attributes = json!({
+            "enableAutomaticAdd": r.flag("EnableAutomaticAdd", false)?,
+            "searchForMissingEpisodes": r.flag("SearchForMissingEpisodes", false)?,
+            "shouldMonitor": monitor_type(r.or("ShouldMonitor", 0)?),
+            "monitorNewItems": if r.or("MonitorNewItems", 0)? == 1 { "none" } else { "all" },
+            "rootFolderPath": r.text("RootFolderPath")?,
+            "qualityProfileId": r.or("QualityProfileId", 0)?,
+            "seriesType": series_type(r.or("SeriesType", 0)?),
+            "seasonFolder": r.flag("SeasonFolder", true)?,
+        });
+        provider(r, ProviderKind::ImportList, attributes)
+    })?);
+    providers.extend(read_table(&legacy, "Metadata", |r| {
+        let attributes = json!({ "enable": r.flag("Enable", false)? });
+        provider(r, ProviderKind::Metadata, attributes)
+    })?);
+
+    let delay_profiles = read_table(&legacy, "DelayProfiles", |r| {
+        Ok(DelayProfile {
+            id: r.req("Id")?,
+            enable_usenet: r.flag("EnableUsenet", true)?,
+            enable_torrent: r.flag("EnableTorrent", true)?,
+            preferred_protocol: protocol(r.or("PreferredProtocol", 1)?),
+            usenet_delay: r.or("UsenetDelay", 0)?,
+            torrent_delay: r.or("TorrentDelay", 0)?,
+            order: r.or("Order", i32::MAX as i64)?,
+            tags: r.json("Tags")?,
+            bypass_if_highest_quality: r.flag("BypassIfHighestQuality", false)?,
+            bypass_if_above_custom_format_score: r.flag("BypassIfAboveCustomFormatScore", false)?,
+            minimum_custom_format_score: r.or("MinimumCustomFormatScore", 0)?,
+        })
+    })?;
+    // Older schemas kept Required/Ignored as newline-separated text.
+    let term_list = |r: &LegacyRow, column: &str| -> anyhow::Result<Vec<String>> {
+        match r.opt::<String>(column)? {
+            None => Ok(Vec::new()),
+            Some(s) if s.trim_start().starts_with('[') => Ok(serde_json::from_str(&s)?),
+            Some(s) => Ok(s
+                .split(['\n', ','])
+                .map(|t| t.trim().to_string())
+                .filter(|t| !t.is_empty())
+                .collect()),
+        }
+    };
+    let release_profiles = read_table(&legacy, "ReleaseProfiles", |r| {
+        Ok(ReleaseProfile {
+            id: r.req("Id")?,
+            name: r.text("Name")?,
+            enabled: r.flag("Enabled", true)?,
+            required: term_list(r, "Required")?,
+            ignored: term_list(r, "Ignored")?,
+            indexer_id: r.or("IndexerId", 0)?,
+            tags: r.json("Tags")?,
+        })
+    })?;
+    let remote_path_mappings = read_table(&legacy, "RemotePathMappings", |r| {
+        Ok(RemotePathMapping {
+            id: r.req("Id")?,
+            host: r.req("Host")?,
+            remote_path: r.req("RemotePath")?,
+            local_path: r.req("LocalPath")?,
+        })
+    })?;
+    let custom_filters = read_table(&legacy, "CustomFilters", |r| {
+        Ok(CustomFilter {
+            id: r.req("Id")?,
+            filter_type: r.req("Type")?,
+            label: r.req("Label")?,
+            filters: r.json_opt("Filters")?.unwrap_or(json!([])),
+        })
+    })?;
+    let exclusions = read_table(&legacy, "ImportListExclusions", |r| {
+        Ok(ImportListExclusion {
+            id: r.req("Id")?,
+            tvdb_id: r.req("TvdbId")?,
+            title: r.or("Title", String::new())?,
+        })
+    })?;
+    let auto_tagging = read_table(&legacy, "AutoTagging", |r| {
+        Ok(AutoTagging {
+            id: r.req("Id")?,
+            name: r.req("Name")?,
+            remove_tags_automatically: r.flag("RemoveTagsAutomatically", false)?,
+            tags: r.json("Tags")?,
+            specifications: r.json_opt("Specifications")?.unwrap_or(json!([])),
+        })
+    })?;
+    let users = read_table(&legacy, "Users", |r| {
+        Ok(User {
+            id: r.req("Id")?,
+            identifier: r.req("Identifier")?,
+            username: r.req("Username")?,
+            password: r.req("Password")?,
+            salt: r.text("Salt")?,
+            iterations: r.opt("Iterations")?,
+        })
+    })?;
+    let scheduled_tasks = read_table(&legacy, "ScheduledTasks", |r| {
+        Ok(ScheduledTask {
+            id: r.req("Id")?,
+            type_name: r.req("TypeName")?,
+            interval_minutes: r.or("Interval", 0)?,
+            last_execution: r.timestamp("LastExecution")?,
+            last_start_time: r.timestamp("LastStartTime")?,
+        })
+    })?;
+    let blocklist = read_table(&legacy, "Blocklist", |r| {
+        Ok(BlocklistEntry {
+            id: r.req("Id")?,
+            series_id: r.or("SeriesId", 0)?,
+            episode_ids: r.json("EpisodeIds")?,
+            source_title: r.text("SourceTitle")?,
+            quality: quality_model(r.json_opt("Quality")?),
+            date: r.timestamp_req("Date")?,
+            published_date: r.timestamp("PublishedDate")?,
+            size: r.opt("Size")?,
+            protocol: protocol(r.or("Protocol", 0)?),
+            indexer: r.text("Indexer")?,
+            message: r.text("Message")?,
+            torrent_info_hash: r.text("TorrentInfoHash")?,
+            languages: r.json("Languages")?,
+            indexer_flags: r.or("IndexerFlags", 0)?,
+            release_type: release_type(r.or("ReleaseType", 0)?),
+        })
+    })?;
+    let scene_mappings = read_table(&legacy, "SceneMappings", |r| {
+        Ok(SceneMapping {
+            id: r.req("Id")?,
+            tvdb_id: r.req("TvdbId")?,
+            season_number: r.opt("SeasonNumber")?,
+            search_term: r.text("SearchTerm")?,
+            parse_term: r.text("ParseTerm")?,
+            title: r.or("Title", String::new())?,
+            mapping_type: r.text("Type")?,
+            scene_season_number: r.opt("SceneSeasonNumber")?,
+            filter_regex: r.text("FilterRegex")?,
+            scene_origin: r.text("SceneOrigin")?,
+            search_mode: r.opt("SearchMode")?,
+            comment: r.text("Comment")?,
+        })
+    })?;
+    let naming = read_table(&legacy, "NamingConfig", |r| {
+        let d = NamingConfig::default();
+        Ok(NamingConfig {
+            rename_episodes: r.flag("RenameEpisodes", d.rename_episodes)?,
+            replace_illegal_characters: r.flag("ReplaceIllegalCharacters", d.replace_illegal_characters)?,
+            colon_replacement_format: r.or("ColonReplacementFormat", d.colon_replacement_format)?,
+            custom_colon_replacement_format: r.or("CustomColonReplacementFormat", String::new())?,
+            multi_episode_style: r.or("MultiEpisodeStyle", d.multi_episode_style)?,
+            standard_episode_format: r.or("StandardEpisodeFormat", d.standard_episode_format)?,
+            daily_episode_format: r.or("DailyEpisodeFormat", d.daily_episode_format)?,
+            anime_episode_format: r.or("AnimeEpisodeFormat", d.anime_episode_format)?,
+            series_folder_format: r.or("SeriesFolderFormat", d.series_folder_format)?,
+            season_folder_format: r.or("SeasonFolderFormat", d.season_folder_format)?,
+            specials_folder_format: r.or("SpecialsFolderFormat", d.specials_folder_format)?,
+        })
+    })?;
+    let config = read_table(&legacy, "Config", |r| {
+        Ok((r.req::<String>("Key")?, r.or("Value", String::new())?))
+    })?;
+
+    // Tags referenced by a series but missing from Tags would break the
+    // foreign key; the originals tolerate that, so note and drop them.
+    let tag_ids: std::collections::HashSet<i64> = tags.iter().map(|t| t.id).collect();
+    let series: Vec<Series> = series
+        .into_iter()
+        .map(|mut s| {
+            let before = s.tags.len();
+            s.tags.retain(|t| tag_ids.contains(t));
+            if s.tags.len() != before {
+                report.notes.push(format!(
+                    "series {} ({}): dropped {} unknown tag id(s)",
+                    s.id,
+                    s.title,
+                    before - s.tags.len()
+                ));
+            }
+            s
+        })
+        .collect();
+
+    // The originals do not enforce the link between a series and its episodes
+    // and files; Unarr's schema does. Rows left behind by a removed series
+    // would stop the import, so note and drop them.
+    let series_ids: std::collections::HashSet<i64> = series.iter().map(|s| s.id).collect();
+    let before = episodes.len();
+    let episodes: Vec<Episode> = episodes
+        .into_iter()
+        .filter(|e| series_ids.contains(&e.series_id))
+        .collect();
+    if episodes.len() != before {
+        report.notes.push(format!(
+            "dropped {} episode(s) whose series no longer exists",
+            before - episodes.len()
+        ));
+    }
+    let before = episode_files.len();
+    let episode_files: Vec<EpisodeFile> = episode_files
+        .into_iter()
+        .filter(|f| series_ids.contains(&f.series_id))
+        .collect();
+    if episode_files.len() != before {
+        report.notes.push(format!(
+            "dropped {} episode file(s) whose series no longer exists",
+            before - episode_files.len()
+        ));
+    }
+
+    // --- write in one transaction
+    let counts = [
+        ("Tags", tags.len()),
+        ("RootFolders", root_folders.len()),
+        ("QualityDefinitions", quality_definitions.len()),
+        ("CustomFormats", custom_formats.len()),
+        ("QualityProfiles", quality_profiles.len()),
+        ("Series", series.len()),
+        ("Episodes", episodes.len()),
+        ("EpisodeFiles", episode_files.len()),
+        ("History", history.len()),
+        (
+            "Indexers",
+            providers
+                .iter()
+                .filter(|p| p.kind == ProviderKind::Indexer)
+                .count(),
+        ),
+        (
+            "DownloadClients",
+            providers
+                .iter()
+                .filter(|p| p.kind == ProviderKind::DownloadClient)
+                .count(),
+        ),
+        (
+            "Notifications",
+            providers
+                .iter()
+                .filter(|p| p.kind == ProviderKind::Notification)
+                .count(),
+        ),
+        (
+            "ImportLists",
+            providers
+                .iter()
+                .filter(|p| p.kind == ProviderKind::ImportList)
+                .count(),
+        ),
+        (
+            "Metadata",
+            providers
+                .iter()
+                .filter(|p| p.kind == ProviderKind::Metadata)
+                .count(),
+        ),
+        ("DelayProfiles", delay_profiles.len()),
+        ("ReleaseProfiles", release_profiles.len()),
+        ("RemotePathMappings", remote_path_mappings.len()),
+        ("CustomFilters", custom_filters.len()),
+        ("ImportListExclusions", exclusions.len()),
+        ("AutoTagging", auto_tagging.len()),
+        ("Users", users.len()),
+        ("ScheduledTasks", scheduled_tasks.len()),
+        ("Blocklist", blocklist.len()),
+        ("SceneMappings", scene_mappings.len()),
+        ("NamingConfig", naming.len()),
+        ("Config", config.len()),
+    ];
+    report.counts.extend(counts);
+    let migration_version = report.migration_version;
+    let source = legacy_db.display().to_string();
+
+    db.call_blocking(move |conn| {
+        anyhow::ensure!(
+            store::series::count(conn)? == 0,
+            "target database already holds data; import into an empty database"
+        );
+        let tx = conn.transaction()?;
+        for t in &tags {
+            store::catalog::insert_tag(&tx, t)?;
+        }
+        for r in &root_folders {
+            store::catalog::insert_root_folder(&tx, r)?;
+        }
+        for d in &quality_definitions {
+            store::catalog::insert_quality_definition(&tx, d)?;
+        }
+        for c in &custom_formats {
+            store::catalog::insert_custom_format(&tx, c)?;
+        }
+        for p in &quality_profiles {
+            store::catalog::insert_quality_profile(&tx, p)?;
+        }
+        for s in &series {
+            store::series::insert(&tx, s).with_context(|| format!("series {} ({})", s.id, s.title))?;
+        }
+        for f in &episode_files {
+            store::episodes::insert_file(&tx, f).with_context(|| format!("episode file {}", f.id))?;
+        }
+        for e in &episodes {
+            store::episodes::insert_episode(&tx, e).with_context(|| format!("episode {}", e.id))?;
+        }
+        for h in &history {
+            store::history::insert(&tx, h).with_context(|| format!("history {}", h.id))?;
+        }
+        for p in &providers {
+            store::providers::insert_provider(&tx, p)?;
+        }
+        for d in &delay_profiles {
+            store::providers::insert_delay_profile(&tx, d)?;
+        }
+        for r in &release_profiles {
+            store::providers::insert_release_profile(&tx, r)?;
+        }
+        for m in &remote_path_mappings {
+            store::providers::insert_remote_path_mapping(&tx, m)?;
+        }
+        for f in &custom_filters {
+            store::providers::insert_custom_filter(&tx, f)?;
+        }
+        for e in &exclusions {
+            store::providers::insert_import_list_exclusion(&tx, e)?;
+        }
+        for a in &auto_tagging {
+            store::providers::insert_auto_tagging(&tx, a)?;
+        }
+        for u in &users {
+            store::providers::insert_user(&tx, u)?;
+        }
+        for t in &scheduled_tasks {
+            store::providers::insert_scheduled_task(&tx, t)?;
+        }
+        for b in &blocklist {
+            store::history::insert_blocklist(&tx, b)?;
+        }
+        for m in &scene_mappings {
+            store::scene::insert(&tx, m)?;
+        }
+        if let Some(n) = naming.first() {
+            store::config::set_naming(&tx, n)?;
+        }
+        for (k, v) in &config {
+            store::config::set_config(&tx, k, v)?;
+        }
+        store::config::set_meta(&tx, "source.app", "Sonarr")?;
+        store::config::set_meta(&tx, "source.path", &source)?;
+        store::config::set_meta(&tx, "source.migration", &migration_version.to_string())?;
+        store::config::set_meta(&tx, "imported_at", &time::format_utc(Utc::now()))?;
+        tx.commit()?;
+        Ok(())
+    })?;
+
+    for (table, n) in &report.counts {
+        tracing::info!(table, rows = n, "imported");
+    }
+    for note in &report.notes {
+        tracing::warn!("{note}");
+    }
+    Ok(report)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    const FIXTURE: &str = concat!(
+        env!("CARGO_MANIFEST_DIR"),
+        "/../../tests/fixtures/sonarr/sonarr.db"
+    );
+
+    /// Episodes and files left behind by a removed series must not stop the
+    /// import: the originals have no foreign keys, Unarr does.
+    #[test]
+    fn drops_rows_whose_series_is_gone() {
+        let dir = std::env::temp_dir().join(format!("unarr-orphans-{}", std::process::id()));
+        std::fs::create_dir_all(&dir).unwrap();
+        let copy = dir.join("sonarr.db");
+        std::fs::copy(FIXTURE, &copy).unwrap();
+        {
+            let legacy = rusqlite::Connection::open(&copy).unwrap();
+            legacy
+                .execute_batch(
+                    "INSERT INTO Episodes (SeriesId, SeasonNumber, EpisodeNumber, Title, EpisodeFileId, Monitored, UnverifiedSceneNumbering, Runtime)
+                       VALUES (999999, 1, 1, 'Orphan', 0, 1, 0, 0);
+                     INSERT INTO EpisodeFiles (SeriesId, Quality, Size, DateAdded, SeasonNumber, RelativePath, Languages, IndexerFlags, ReleaseType)
+                       VALUES (999999, '{\"quality\": 1, \"revision\": {\"version\": 1, \"real\": 0, \"isRepack\": false}}', 1, '2026-01-01 00:00:00Z', 1, 'orphan.mkv', '[1]', 0, 1);",
+                )
+                .unwrap();
+        }
+        let db = Db::open_in_memory().unwrap();
+        let report = import(&copy, &db).unwrap();
+        assert_eq!(report.counts["Episodes"], 1012);
+        assert_eq!(report.counts["EpisodeFiles"], 346);
+        assert_eq!(
+            report.notes,
+            vec![
+                "dropped 1 episode(s) whose series no longer exists".to_string(),
+                "dropped 1 episode file(s) whose series no longer exists".to_string(),
+            ]
+        );
+        let _ = std::fs::remove_dir_all(&dir);
+    }
+
+    #[test]
+    fn imports_the_fixture_with_matching_row_counts() {
+        let db = Db::open_in_memory().unwrap();
+        let report = import(Path::new(FIXTURE), &db).unwrap();
+        assert_eq!(report.migration_version, 217);
+        assert!(report.notes.is_empty(), "{:?}", report.notes);
+        let expect = [
+            ("Series", 38),
+            ("Episodes", 1012),
+            ("EpisodeFiles", 346),
+            ("History", 1998),
+            ("Blocklist", 220),
+            ("QualityProfiles", 10),
+            ("QualityDefinitions", 22),
+            ("CustomFormats", 40),
+            ("Tags", 2),
+            ("RootFolders", 1),
+            ("Indexers", 15),
+            ("DownloadClients", 3),
+            ("Notifications", 3),
+            ("ImportLists", 1),
+            ("Metadata", 5),
+            ("ReleaseProfiles", 0),
+            ("DelayProfiles", 2),
+            ("CustomFilters", 1),
+            ("RemotePathMappings", 0),
+            ("ScheduledTasks", 11),
+            ("Config", 16),
+            ("NamingConfig", 1),
+            ("Users", 1),
+            ("SceneMappings", 16064),
+        ];
+        for (table, n) in expect {
+            assert_eq!(report.counts[table], n, "{table}");
+        }
+
+        db.call_blocking(|conn| {
+            // The Pitt: continuing, tagged, two seasons (specials and 1).
+            let pitt = store::series::get(conn, 1)?.unwrap();
+            assert_eq!(pitt.title, "The Pitt");
+            assert_eq!(pitt.status, SeriesStatus::Continuing);
+            assert_eq!(pitt.seasons.len(), 2);
+            assert_eq!(pitt.tags, vec![1]);
+            assert_eq!(pitt.quality_profile_id, 10);
+            assert_eq!(pitt.images.len(), 4);
+            assert_eq!(pitt.genres[0], "Drama");
+            assert_eq!(pitt.path, "/tv/The Pitt");
+            // Silicon Valley: ended, the series with most files.
+            let sv = store::series::get(conn, 22)?.unwrap();
+            assert_eq!(sv.status, SeriesStatus::Ended);
+            assert_eq!(sv.title_slug, "silicon-valley");
+
+            let eps = store::episodes::list_episodes(conn, 1, Some(1))?;
+            assert_eq!(eps.len(), 15);
+            assert_eq!(eps[0].title.as_deref(), Some("7:00 A.M."));
+            assert_eq!(
+                eps[0].air_date.map(|d| d.to_string()).as_deref(),
+                Some("2025-01-09")
+            );
+            let file = store::episodes::get_file(conn, 361)?.unwrap();
+            assert_eq!(file.series_id, 22);
+            assert_eq!(file.quality.quality_id, 3);
+            assert!(file.quality.is_repack);
+            assert_eq!(file.quality.version, 2);
+            assert_eq!(file.release_type, ReleaseType::SingleEpisode);
+            assert_eq!(file.languages, vec![1]);
+            Ok(())
+        })
+        .unwrap();
+    }
+
+    #[test]
+    fn refuses_a_non_empty_target() {
+        let db = Db::open_in_memory().unwrap();
+        import(Path::new(FIXTURE), &db).unwrap();
+        let err = import(Path::new(FIXTURE), &db).unwrap_err();
+        assert!(err.to_string().contains("already holds data"), "{err}");
+    }
+
+    #[test]
+    fn rejects_a_database_that_is_not_sonarr() {
+        let dir = std::env::temp_dir().join(format!("unarr-import-test-{}", std::process::id()));
+        std::fs::create_dir_all(&dir).unwrap();
+        let path = dir.join("other.db");
+        Connection::open(&path)
+            .unwrap()
+            .execute_batch("CREATE TABLE t (x)")
+            .unwrap();
+        let db = Db::open_in_memory().unwrap();
+        assert!(import(&path, &db).is_err());
+        std::fs::remove_dir_all(&dir).unwrap();
+    }
+}

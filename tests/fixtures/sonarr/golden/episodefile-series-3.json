@@ -1,0 +1,2350 @@
+{
+  "body": [
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "WEB Tier 02"
+        }
+      ],
+      "dateAdded": "2026-03-25T07:14:52Z",
+      "id": 472,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 224000,
+        "audioChannels": 2,
+        "audioCodec": "EAC3",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "1:01:34",
+        "scanType": "Progressive",
+        "subtitles": "eng/eng/spa",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 23.976
+      },
+      "path": "/tv/Deadwood/Season 01/Deadwood (2004) - S01E01 - Deadwood [AMZN][WEBDL-1080p][EAC3 2.0][h264]-playWEB.mkv",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Season 01/Deadwood (2004) - S01E01 - Deadwood [AMZN][WEBDL-1080p][EAC3 2.0][h264]-playWEB.mkv",
+      "releaseGroup": "playWEB",
+      "releaseType": "seasonPack",
+      "sceneName": "Deadwood.S01E01.Deadwood.1080p.AMZN.WEB-DL.DD+2.0.H.264-playWEB",
+      "seasonNumber": 1,
+      "seriesId": 3,
+      "size": 4543563403
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "WEB Tier 02"
+        }
+      ],
+      "dateAdded": "2026-03-25T07:14:52Z",
+      "id": 473,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 640000,
+        "audioChannels": 5.1,
+        "audioCodec": "EAC3",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "55:51",
+        "scanType": "Progressive",
+        "subtitles": "eng/eng/spa",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 23.976
+      },
+      "path": "/tv/Deadwood/Season 01/Deadwood (2004) - S01E02 - Deep Water [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Season 01/Deadwood (2004) - S01E02 - Deep Water [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "releaseGroup": "playWEB",
+      "releaseType": "seasonPack",
+      "sceneName": "Deadwood.S01E02.Deep.Water.1080p.AMZN.WEB-DL.DD+5.1.H.264-playWEB",
+      "seasonNumber": 1,
+      "seriesId": 3,
+      "size": 4267471718
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "WEB Tier 02"
+        }
+      ],
+      "dateAdded": "2026-03-25T07:14:52Z",
+      "id": 474,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 640000,
+        "audioChannels": 5.1,
+        "audioCodec": "EAC3",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "51:51",
+        "scanType": "Progressive",
+        "subtitles": "eng/eng/spa",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 24
+      },
+      "path": "/tv/Deadwood/Season 01/Deadwood (2004) - S01E03 - Reconnoitering the Rim [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Season 01/Deadwood (2004) - S01E03 - Reconnoitering the Rim [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "releaseGroup": "playWEB",
+      "releaseType": "seasonPack",
+      "sceneName": "Deadwood.S01E03.Reconnoitering.the.Rim.1080p.AMZN.WEB-DL.DD+5.1.H.264-playWEB",
+      "seasonNumber": 1,
+      "seriesId": 3,
+      "size": 3970584345
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "WEB Tier 02"
+        }
+      ],
+      "dateAdded": "2026-03-25T07:14:53Z",
+      "id": 475,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 640000,
+        "audioChannels": 5.1,
+        "audioCodec": "EAC3",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "58:20",
+        "scanType": "Progressive",
+        "subtitles": "eng/eng/spa",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 24
+      },
+      "path": "/tv/Deadwood/Season 01/Deadwood (2004) - S01E04 - Here Was a Man [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Season 01/Deadwood (2004) - S01E04 - Here Was a Man [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "releaseGroup": "playWEB",
+      "releaseType": "seasonPack",
+      "sceneName": "Deadwood.S01E04.Here.Was.a.Man.1080p.AMZN.WEB-DL.DD+5.1.H.264-playWEB",
+      "seasonNumber": 1,
+      "seriesId": 3,
+      "size": 4406979962
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "WEB Tier 02"
+        }
+      ],
+      "dateAdded": "2026-03-25T07:14:53Z",
+      "id": 476,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 640000,
+        "audioChannels": 5.1,
+        "audioCodec": "EAC3",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "54:59",
+        "scanType": "Progressive",
+        "subtitles": "eng/eng/spa",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 23.976
+      },
+      "path": "/tv/Deadwood/Season 01/Deadwood (2004) - S01E05 - The Trial of Jack McCall [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Season 01/Deadwood (2004) - S01E05 - The Trial of Jack McCall [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "releaseGroup": "playWEB",
+      "releaseType": "seasonPack",
+      "sceneName": "Deadwood.S01E05.The.Trial.of.Jack.McCall.1080p.AMZN.WEB-DL.DD+5.1.H.264-playWEB",
+      "seasonNumber": 1,
+      "seriesId": 3,
+      "size": 4202802713
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "WEB Tier 02"
+        }
+      ],
+      "dateAdded": "2026-03-25T07:14:53Z",
+      "id": 477,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 640000,
+        "audioChannels": 5.1,
+        "audioCodec": "EAC3",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "51:33",
+        "scanType": "Progressive",
+        "subtitles": "eng/eng/spa",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 24
+      },
+      "path": "/tv/Deadwood/Season 01/Deadwood (2004) - S01E06 - Plague [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Season 01/Deadwood (2004) - S01E06 - Plague [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "releaseGroup": "playWEB",
+      "releaseType": "seasonPack",
+      "sceneName": "Deadwood.S01E06.Plague.1080p.AMZN.WEB-DL.DD+5.1.H.264-playWEB",
+      "seasonNumber": 1,
+      "seriesId": 3,
+      "size": 3959298029
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "WEB Tier 02"
+        }
+      ],
+      "dateAdded": "2026-03-25T07:14:54Z",
+      "id": 478,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 640000,
+        "audioChannels": 5.1,
+        "audioCodec": "EAC3",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "49:21",
+        "scanType": "Progressive",
+        "subtitles": "eng/eng/spa",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 24
+      },
+      "path": "/tv/Deadwood/Season 01/Deadwood (2004) - S01E07 - Bullock Returns to the Camp [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Season 01/Deadwood (2004) - S01E07 - Bullock Returns to the Camp [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "releaseGroup": "playWEB",
+      "releaseType": "seasonPack",
+      "sceneName": "Deadwood.S01E07.Bullock.Returns.to.the.Camp.1080p.AMZN.WEB-DL.DD+5.1.H.264-playWEB",
+      "seasonNumber": 1,
+      "seriesId": 3,
+      "size": 3801547552
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "WEB Tier 02"
+        }
+      ],
+      "dateAdded": "2026-03-25T07:14:54Z",
+      "id": 479,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 640000,
+        "audioChannels": 5.1,
+        "audioCodec": "EAC3",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "55:24",
+        "scanType": "Progressive",
+        "subtitles": "eng/eng/spa",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 24
+      },
+      "path": "/tv/Deadwood/Season 01/Deadwood (2004) - S01E08 - Suffer the Little Children [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Season 01/Deadwood (2004) - S01E08 - Suffer the Little Children [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "releaseGroup": "playWEB",
+      "releaseType": "seasonPack",
+      "sceneName": "Deadwood.S01E08.Suffer.the.Little.Children.1080p.AMZN.WEB-DL.DD+5.1.H.264-playWEB",
+      "seasonNumber": 1,
+      "seriesId": 3,
+      "size": 4258306414
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "WEB Tier 02"
+        }
+      ],
+      "dateAdded": "2026-03-25T07:14:54Z",
+      "id": 480,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 640000,
+        "audioChannels": 5.1,
+        "audioCodec": "EAC3",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "57:48",
+        "scanType": "Progressive",
+        "subtitles": "eng/eng/spa",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 24
+      },
+      "path": "/tv/Deadwood/Season 01/Deadwood (2004) - S01E09 - No Other Sons or Daughters [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Season 01/Deadwood (2004) - S01E09 - No Other Sons or Daughters [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "releaseGroup": "playWEB",
+      "releaseType": "seasonPack",
+      "sceneName": "Deadwood.S01E09.No.Other.Sons.or.Daughters.1080p.AMZN.WEB-DL.DD+5.1.H.264-playWEB",
+      "seasonNumber": 1,
+      "seriesId": 3,
+      "size": 4437798657
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "WEB Tier 02"
+        }
+      ],
+      "dateAdded": "2026-03-25T07:14:54Z",
+      "id": 481,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 640000,
+        "audioChannels": 5.1,
+        "audioCodec": "EAC3",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "52:41",
+        "scanType": "Progressive",
+        "subtitles": "eng/eng/spa",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 24
+      },
+      "path": "/tv/Deadwood/Season 01/Deadwood (2004) - S01E10 - Mister Wu [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Season 01/Deadwood (2004) - S01E10 - Mister Wu [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "releaseGroup": "playWEB",
+      "releaseType": "seasonPack",
+      "sceneName": "Deadwood.S01E10.Mister.Wu.1080p.AMZN.WEB-DL.DD+5.1.H.264-playWEB",
+      "seasonNumber": 1,
+      "seriesId": 3,
+      "size": 4041475280
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "WEB Tier 02"
+        }
+      ],
+      "dateAdded": "2026-03-25T07:14:55Z",
+      "id": 482,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 640000,
+        "audioChannels": 5.1,
+        "audioCodec": "EAC3",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "58:24",
+        "scanType": "Progressive",
+        "subtitles": "eng/eng/spa",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 24
+      },
+      "path": "/tv/Deadwood/Season 01/Deadwood (2004) - S01E11 - Jewels Boot Is Made for Walking [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Season 01/Deadwood (2004) - S01E11 - Jewels Boot Is Made for Walking [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "releaseGroup": "playWEB",
+      "releaseType": "seasonPack",
+      "sceneName": "Deadwood.S01E11.Jewels.Boot.Is.Made.for.Walking.1080p.AMZN.WEB-DL.DD+5.1.H.264-playWEB",
+      "seasonNumber": 1,
+      "seriesId": 3,
+      "size": 4516659295
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "WEB Tier 02"
+        }
+      ],
+      "dateAdded": "2026-03-25T07:14:55Z",
+      "id": 483,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 640000,
+        "audioChannels": 5.1,
+        "audioCodec": "EAC3",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "59:51",
+        "scanType": "Progressive",
+        "subtitles": "eng/eng/spa",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 24
+      },
+      "path": "/tv/Deadwood/Season 01/Deadwood (2004) - S01E12 - Sold Under Sin [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Season 01/Deadwood (2004) - S01E12 - Sold Under Sin [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "releaseGroup": "playWEB",
+      "releaseType": "seasonPack",
+      "sceneName": "Deadwood.S01E12.Sold.Under.Sin.1080p.AMZN.WEB-DL.DD+5.1.H.264-playWEB",
+      "seasonNumber": 1,
+      "seriesId": 3,
+      "size": 4605342092
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "WEB Tier 02"
+        }
+      ],
+      "dateAdded": "2026-03-25T07:31:24Z",
+      "id": 484,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 640000,
+        "audioChannels": 5.1,
+        "audioCodec": "EAC3",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "48:59",
+        "scanType": "Progressive",
+        "subtitles": "eng/eng/spa",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 24
+      },
+      "path": "/tv/Deadwood/Season 02/Deadwood (2004) - S02E01 - A Lie Agreed Upon 1 [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Season 02/Deadwood (2004) - S02E01 - A Lie Agreed Upon 1 [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "releaseGroup": "playWEB",
+      "releaseType": "singleEpisode",
+      "sceneName": "Deadwood.S02E01.A.Lie.Agreed.Upon.Part.I.1080p.AMZN.WEB-DL.DD+5.1.H.264-playWEB",
+      "seasonNumber": 2,
+      "seriesId": 3,
+      "size": 3741553680
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "WEB Tier 02"
+        }
+      ],
+      "dateAdded": "2026-03-25T07:37:24Z",
+      "id": 485,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 640000,
+        "audioChannels": 5.1,
+        "audioCodec": "EAC3",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "50:54",
+        "scanType": "Progressive",
+        "subtitles": "eng/eng/spa",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 23.976
+      },
+      "path": "/tv/Deadwood/Season 02/Deadwood (2004) - S02E02 - A Lie Agreed Upon 2 [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Season 02/Deadwood (2004) - S02E02 - A Lie Agreed Upon 2 [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "releaseGroup": "playWEB",
+      "releaseType": "singleEpisode",
+      "sceneName": "Deadwood.S02E02.A.Lie.Agreed.Upon.Part.II.1080p.AMZN.WEB-DL.DD+5.1.H.264-playWEB",
+      "seasonNumber": 2,
+      "seriesId": 3,
+      "size": 3757723641
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "WEB Tier 02"
+        }
+      ],
+      "dateAdded": "2026-03-25T07:42:25Z",
+      "id": 486,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 640000,
+        "audioChannels": 5.1,
+        "audioCodec": "EAC3",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "58:21",
+        "scanType": "Progressive",
+        "subtitles": "eng/eng/spa",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 23.976
+      },
+      "path": "/tv/Deadwood/Season 02/Deadwood (2004) - S02E03 - New Money [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Season 02/Deadwood (2004) - S02E03 - New Money [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "releaseGroup": "playWEB",
+      "releaseType": "singleEpisode",
+      "sceneName": "Deadwood.S02E03.New.Money.1080p.AMZN.WEB-DL.DD+5.1.H.264-playWEB",
+      "seasonNumber": 2,
+      "seriesId": 3,
+      "size": 4501145210
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "WEB Tier 02"
+        }
+      ],
+      "dateAdded": "2026-03-25T07:48:25Z",
+      "id": 487,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 640000,
+        "audioChannels": 5.1,
+        "audioCodec": "EAC3",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "52:47",
+        "scanType": "Progressive",
+        "subtitles": "eng/eng/spa",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 23.976
+      },
+      "path": "/tv/Deadwood/Season 02/Deadwood (2004) - S02E04 - Requiem for a Gleet [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Season 02/Deadwood (2004) - S02E04 - Requiem for a Gleet [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "releaseGroup": "playWEB",
+      "releaseType": "singleEpisode",
+      "sceneName": "Deadwood.S02E04.Requiem.for.a.Gleet.1080p.AMZN.WEB-DL.DD+5.1.H.264-playWEB",
+      "seasonNumber": 2,
+      "seriesId": 3,
+      "size": 4066690666
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "WEB Tier 02"
+        }
+      ],
+      "dateAdded": "2026-03-25T07:52:56Z",
+      "id": 488,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 640000,
+        "audioChannels": 5.1,
+        "audioCodec": "EAC3",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "56:30",
+        "scanType": "Progressive",
+        "subtitles": "eng/eng/spa",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 24
+      },
+      "path": "/tv/Deadwood/Season 02/Deadwood (2004) - S02E05 - Complications [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Season 02/Deadwood (2004) - S02E05 - Complications [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "releaseGroup": "playWEB",
+      "releaseType": "singleEpisode",
+      "sceneName": "Deadwood.S02E05.Complications.1080p.AMZN.WEB-DL.DD+5.1.H.264-playWEB",
+      "seasonNumber": 2,
+      "seriesId": 3,
+      "size": 4277596432
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "WEB Tier 02"
+        }
+      ],
+      "dateAdded": "2026-03-25T07:59:28Z",
+      "id": 489,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 640000,
+        "audioChannels": 5.1,
+        "audioCodec": "EAC3",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "51:19",
+        "scanType": "Progressive",
+        "subtitles": "eng/eng/spa",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 24
+      },
+      "path": "/tv/Deadwood/Season 02/Deadwood (2004) - S02E06 - Something Very Expensive [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Season 02/Deadwood (2004) - S02E06 - Something Very Expensive [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "releaseGroup": "playWEB",
+      "releaseType": "singleEpisode",
+      "sceneName": "Deadwood.S02E06.Something.Very.Expensive.1080p.AMZN.WEB-DL.DD+5.1.H.264-playWEB",
+      "seasonNumber": 2,
+      "seriesId": 3,
+      "size": 3917440497
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "WEB Tier 02"
+        }
+      ],
+      "dateAdded": "2026-03-25T08:03:58Z",
+      "id": 490,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 640000,
+        "audioChannels": 5.1,
+        "audioCodec": "EAC3",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "50:41",
+        "scanType": "Progressive",
+        "subtitles": "eng/eng/spa",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 24
+      },
+      "path": "/tv/Deadwood/Season 02/Deadwood (2004) - S02E07 - E.B. Was Left Out [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Season 02/Deadwood (2004) - S02E07 - E.B. Was Left Out [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "releaseGroup": "playWEB",
+      "releaseType": "singleEpisode",
+      "sceneName": "Deadwood.S02E07.E.B.Was.Left.Out.1080p.AMZN.WEB-DL.DD+5.1.H.264-playWEB",
+      "seasonNumber": 2,
+      "seriesId": 3,
+      "size": 3845021290
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "WEB Tier 02"
+        }
+      ],
+      "dateAdded": "2026-03-25T08:08:28Z",
+      "id": 491,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 640000,
+        "audioChannels": 5.1,
+        "audioCodec": "EAC3",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "49:50",
+        "scanType": "Progressive",
+        "subtitles": "eng/eng/spa",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 24
+      },
+      "path": "/tv/Deadwood/Season 02/Deadwood (2004) - S02E08 - Childish Things [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Season 02/Deadwood (2004) - S02E08 - Childish Things [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "releaseGroup": "playWEB",
+      "releaseType": "singleEpisode",
+      "sceneName": "Deadwood.S02E08.Childish.Things.1080p.AMZN.WEB-DL.DD+5.1.H.264-playWEB",
+      "seasonNumber": 2,
+      "seriesId": 3,
+      "size": 3792070529
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "WEB Tier 02"
+        }
+      ],
+      "dateAdded": "2026-03-25T08:12:58Z",
+      "id": 492,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 640000,
+        "audioChannels": 5.1,
+        "audioCodec": "EAC3",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "47:34",
+        "scanType": "Progressive",
+        "subtitles": "eng/eng/spa",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 24
+      },
+      "path": "/tv/Deadwood/Season 02/Deadwood (2004) - S02E09 - Amalgamation and Capital [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Season 02/Deadwood (2004) - S02E09 - Amalgamation and Capital [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "releaseGroup": "playWEB",
+      "releaseType": "singleEpisode",
+      "sceneName": "Deadwood.S02E09.Amalgamation.and.Capital.1080p.AMZN.WEB-DL.DD+5.1.H.264-playWEB",
+      "seasonNumber": 2,
+      "seriesId": 3,
+      "size": 3642950586
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "WEB Tier 02"
+        }
+      ],
+      "dateAdded": "2026-03-25T08:17:29Z",
+      "id": 493,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 640000,
+        "audioChannels": 5.1,
+        "audioCodec": "EAC3",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "49:15",
+        "scanType": "Progressive",
+        "subtitles": "eng/eng/spa",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 23.976
+      },
+      "path": "/tv/Deadwood/Season 02/Deadwood (2004) - S02E10 - Advances None Miraculous [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Season 02/Deadwood (2004) - S02E10 - Advances None Miraculous [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "releaseGroup": "playWEB",
+      "releaseType": "singleEpisode",
+      "sceneName": "Deadwood.S02E10.Advances.None.Miraculous.1080p.AMZN.WEB-DL.DD+5.1.H.264-playWEB",
+      "seasonNumber": 2,
+      "seriesId": 3,
+      "size": 3693252590
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "WEB Tier 02"
+        }
+      ],
+      "dateAdded": "2026-03-25T08:22:00Z",
+      "id": 494,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 640000,
+        "audioChannels": 5.1,
+        "audioCodec": "EAC3",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "46:56",
+        "scanType": "Progressive",
+        "subtitles": "eng/eng/spa",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 24
+      },
+      "path": "/tv/Deadwood/Season 02/Deadwood (2004) - S02E11 - The Whores Can Come [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Season 02/Deadwood (2004) - S02E11 - The Whores Can Come [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "releaseGroup": "playWEB",
+      "releaseType": "singleEpisode",
+      "sceneName": "Deadwood.S02E11.The.Whores.Can.Come.1080p.AMZN.WEB-DL.DD+5.1.H.264-playWEB",
+      "seasonNumber": 2,
+      "seriesId": 3,
+      "size": 3568076338
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "WEB Tier 02"
+        }
+      ],
+      "dateAdded": "2026-03-25T08:28:00Z",
+      "id": 495,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 640000,
+        "audioChannels": 5.1,
+        "audioCodec": "EAC3",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "54:45",
+        "scanType": "Progressive",
+        "subtitles": "eng/eng/spa",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 23.976
+      },
+      "path": "/tv/Deadwood/Season 02/Deadwood (2004) - S02E12 - Boy-the-Earth-Talks-To [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Season 02/Deadwood (2004) - S02E12 - Boy-the-Earth-Talks-To [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "releaseGroup": "playWEB",
+      "releaseType": "singleEpisode",
+      "sceneName": "Deadwood.S02E12.Boy.the.Earth.Talks.To.1080p.AMZN.WEB-DL.DD+5.1.H.264-playWEB",
+      "seasonNumber": 2,
+      "seriesId": 3,
+      "size": 4145545925
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "WEB Tier 02"
+        }
+      ],
+      "dateAdded": "2026-03-25T08:32:30Z",
+      "id": 496,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 640000,
+        "audioChannels": 5.1,
+        "audioCodec": "EAC3",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "52:27",
+        "scanType": "Progressive",
+        "subtitles": "eng/eng/spa",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 24
+      },
+      "path": "/tv/Deadwood/Season 03/Deadwood (2004) - S03E02 - I Am Not the Man You Take Me For [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Season 03/Deadwood (2004) - S03E02 - I Am Not the Man You Take Me For [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "releaseGroup": "playWEB",
+      "releaseType": "singleEpisode",
+      "sceneName": "Deadwood.S03E02.I.Am.Not.the.Fine.Man.You.Take.Me.For.1080p.AMZN.WEB-DL.DD+5.1.H.264-playWEB",
+      "seasonNumber": 3,
+      "seriesId": 3,
+      "size": 4048409822
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "WEB Tier 02"
+        }
+      ],
+      "dateAdded": "2026-03-25T08:37:00Z",
+      "id": 497,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 640000,
+        "audioChannels": 5.1,
+        "audioCodec": "EAC3",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "51:07",
+        "scanType": "Progressive",
+        "subtitles": "eng/eng/spa",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 24
+      },
+      "path": "/tv/Deadwood/Season 03/Deadwood (2004) - S03E04 - Full Faith and Credit [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Season 03/Deadwood (2004) - S03E04 - Full Faith and Credit [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "releaseGroup": "playWEB",
+      "releaseType": "singleEpisode",
+      "sceneName": "Deadwood.S03E04.Full.Faith.and.Credit.1080p.AMZN.WEB-DL.DD+5.1.H.264-playWEB",
+      "seasonNumber": 3,
+      "seriesId": 3,
+      "size": 3888643347
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "WEB Tier 02"
+        }
+      ],
+      "dateAdded": "2026-03-25T08:41:31Z",
+      "id": 498,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 640000,
+        "audioChannels": 5.1,
+        "audioCodec": "EAC3",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "49:30",
+        "scanType": "Progressive",
+        "subtitles": "eng/eng/spa",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 24
+      },
+      "path": "/tv/Deadwood/Season 03/Deadwood (2004) - S03E07 - Unauthorized Cinnamon [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Season 03/Deadwood (2004) - S03E07 - Unauthorized Cinnamon [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "releaseGroup": "playWEB",
+      "releaseType": "singleEpisode",
+      "sceneName": "Deadwood.S03E07.Unauthorized.Cinnamon.1080p.AMZN.WEB-DL.DD+5.1.H.264-playWEB",
+      "seasonNumber": 3,
+      "seriesId": 3,
+      "size": 3467301880
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "WEB Tier 02"
+        }
+      ],
+      "dateAdded": "2026-03-25T08:46:01Z",
+      "id": 499,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 640000,
+        "audioChannels": 5.1,
+        "audioCodec": "EAC3",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "47:59",
+        "scanType": "Progressive",
+        "subtitles": "eng/eng/spa",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 23.976
+      },
+      "path": "/tv/Deadwood/Season 03/Deadwood (2004) - S03E10 - A Constant Throb [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Season 03/Deadwood (2004) - S03E10 - A Constant Throb [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "releaseGroup": "playWEB",
+      "releaseType": "singleEpisode",
+      "sceneName": "Deadwood.S03E10.A.Constant.Throb.1080p.AMZN.WEB-DL.DD+5.1.H.264-playWEB",
+      "seasonNumber": 3,
+      "seriesId": 3,
+      "size": 3619218873
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "WEB Tier 02"
+        }
+      ],
+      "dateAdded": "2026-03-25T08:52:02Z",
+      "id": 500,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 640000,
+        "audioChannels": 5.1,
+        "audioCodec": "EAC3",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "52:44",
+        "scanType": "Progressive",
+        "subtitles": "eng/eng/spa",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 24
+      },
+      "path": "/tv/Deadwood/Season 03/Deadwood (2004) - S03E01 - Tell Your God to Ready for Blood [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Season 03/Deadwood (2004) - S03E01 - Tell Your God to Ready for Blood [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "releaseGroup": "playWEB",
+      "releaseType": "singleEpisode",
+      "sceneName": "Deadwood.S03E01.Tell.Your.God.to.Ready.for.Blood.1080p.AMZN.WEB-DL.DD+5.1.H.264-playWEB",
+      "seasonNumber": 3,
+      "seriesId": 3,
+      "size": 4007878010
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "WEB Tier 02"
+        }
+      ],
+      "dateAdded": "2026-03-25T08:56:32Z",
+      "id": 501,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 640000,
+        "audioChannels": 5.1,
+        "audioCodec": "EAC3",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "50:58",
+        "scanType": "Progressive",
+        "subtitles": "eng/eng/spa",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 24
+      },
+      "path": "/tv/Deadwood/Season 03/Deadwood (2004) - S03E03 - True Colors [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Season 03/Deadwood (2004) - S03E03 - True Colors [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "releaseGroup": "playWEB",
+      "releaseType": "singleEpisode",
+      "sceneName": "Deadwood.S03E03.True.Colors.1080p.AMZN.WEB-DL.DD+5.1.H.264-playWEB",
+      "seasonNumber": 3,
+      "seriesId": 3,
+      "size": 3813641415
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "WEB Tier 02"
+        }
+      ],
+      "dateAdded": "2026-03-25T09:02:32Z",
+      "id": 502,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 640000,
+        "audioChannels": 5.1,
+        "audioCodec": "EAC3",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "53:12",
+        "scanType": "Progressive",
+        "subtitles": "eng/eng/spa",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 24
+      },
+      "path": "/tv/Deadwood/Season 03/Deadwood (2004) - S03E05 - A Two-Headed Beast [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Season 03/Deadwood (2004) - S03E05 - A Two-Headed Beast [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "releaseGroup": "playWEB",
+      "releaseType": "singleEpisode",
+      "sceneName": "Deadwood.S03E05.A.Two-Headed.Beast.1080p.AMZN.WEB-DL.DD+5.1.H.264-playWEB",
+      "seasonNumber": 3,
+      "seriesId": 3,
+      "size": 4101216366
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "WEB Tier 02"
+        }
+      ],
+      "dateAdded": "2026-03-25T09:07:02Z",
+      "id": 503,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 640000,
+        "audioChannels": 5.1,
+        "audioCodec": "EAC3",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "52:04",
+        "scanType": "Progressive",
+        "subtitles": "eng/eng/spa",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 23.976
+      },
+      "path": "/tv/Deadwood/Season 03/Deadwood (2004) - S03E06 - A Rich Find [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Season 03/Deadwood (2004) - S03E06 - A Rich Find [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "releaseGroup": "playWEB",
+      "releaseType": "singleEpisode",
+      "sceneName": "Deadwood.S03E06.A.Rich.Find.1080p.AMZN.WEB-DL.DD+5.1.H.264-playWEB",
+      "seasonNumber": 3,
+      "seriesId": 3,
+      "size": 3908377085
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "WEB Tier 02"
+        }
+      ],
+      "dateAdded": "2026-03-25T09:11:33Z",
+      "id": 504,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 640000,
+        "audioChannels": 5.1,
+        "audioCodec": "EAC3",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "53:01",
+        "scanType": "Progressive",
+        "subtitles": "eng/eng/spa",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 24
+      },
+      "path": "/tv/Deadwood/Season 03/Deadwood (2004) - S03E08 - Leviathan Smiles [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Season 03/Deadwood (2004) - S03E08 - Leviathan Smiles [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "releaseGroup": "playWEB",
+      "releaseType": "singleEpisode",
+      "sceneName": "Deadwood.S03E08.Leviathan.Smiles.1080p.AMZN.WEB-DL.DD+5.1.H.264-playWEB",
+      "seasonNumber": 3,
+      "seriesId": 3,
+      "size": 3999410430
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "WEB Tier 02"
+        }
+      ],
+      "dateAdded": "2026-03-25T09:16:03Z",
+      "id": 505,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 640000,
+        "audioChannels": 5.1,
+        "audioCodec": "EAC3",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "48:54",
+        "scanType": "Progressive",
+        "subtitles": "eng/eng/spa",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 23.976
+      },
+      "path": "/tv/Deadwood/Season 03/Deadwood (2004) - S03E09 - Amateur Night [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Season 03/Deadwood (2004) - S03E09 - Amateur Night [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "releaseGroup": "playWEB",
+      "releaseType": "singleEpisode",
+      "sceneName": "Deadwood.S03E09.Amateur.Night.1080p.AMZN.WEB-DL.DD+5.1.H.264-playWEB",
+      "seasonNumber": 3,
+      "seriesId": 3,
+      "size": 3733277841
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "WEB Tier 02"
+        }
+      ],
+      "dateAdded": "2026-03-25T09:22:04Z",
+      "id": 506,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 640000,
+        "audioChannels": 5.1,
+        "audioCodec": "EAC3",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "49:18",
+        "scanType": "Progressive",
+        "subtitles": "eng/eng/spa",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 23.976
+      },
+      "path": "/tv/Deadwood/Season 03/Deadwood (2004) - S03E11 - The Catbird Seat [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Season 03/Deadwood (2004) - S03E11 - The Catbird Seat [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "releaseGroup": "playWEB",
+      "releaseType": "singleEpisode",
+      "sceneName": "Deadwood.S03E11.The.Catbird.Seat.1080p.AMZN.WEB-DL.DD+5.1.H.264-playWEB",
+      "seasonNumber": 3,
+      "seriesId": 3,
+      "size": 3774840098
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "WEB Tier 02"
+        }
+      ],
+      "dateAdded": "2026-03-25T09:26:35Z",
+      "id": 507,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 640000,
+        "audioChannels": 5.1,
+        "audioCodec": "EAC3",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "49:43",
+        "scanType": "Progressive",
+        "subtitles": "eng/eng/spa",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 24
+      },
+      "path": "/tv/Deadwood/Season 03/Deadwood (2004) - S03E12 - Tell Him Something Pretty [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Season 03/Deadwood (2004) - S03E12 - Tell Him Something Pretty [AMZN][WEBDL-1080p][EAC3 5.1][h264]-playWEB.mkv",
+      "releaseGroup": "playWEB",
+      "releaseType": "singleEpisode",
+      "sceneName": "Deadwood.S03E12.Tell.Him.Something.Pretty.1080p.AMZN.WEB-DL.DD+5.1.H.264-playWEB",
+      "seasonNumber": 3,
+      "seriesId": 3,
+      "size": 3792167556
+    }
+  ],
+  "recordedAt": "2026-11-07T08:04:07Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/episodefile?seriesId=3"
+  },
+  "status": 200
+}

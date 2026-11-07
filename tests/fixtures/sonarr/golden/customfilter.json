@@ -1,0 +1,24 @@
+{
+  "body": [
+    {
+      "filters": [
+        {
+          "key": "protocol",
+          "type": "equal",
+          "value": [
+            "usenet"
+          ]
+        }
+      ],
+      "id": 1,
+      "label": "Usenet",
+      "type": "releases"
+    }
+  ],
+  "recordedAt": "2026-11-07T08:04:07Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/customfilter"
+  },
+  "status": 200
+}

@@ -1,0 +1,3087 @@
+{
+  "body": {
+    "page": 1,
+    "pageSize": 20,
+    "records": [
+      {
+        "customFormatScore": 2000,
+        "customFormats": [
+          {
+            "id": 35,
+            "name": "MULTi"
+          },
+          {
+            "id": 15,
+            "name": "x265 (HD)"
+          }
+        ],
+        "data": {
+          "indexerFlags": "0",
+          "reason": "Manual",
+          "releaseGroup": "V3SP4EV3R",
+          "releaseType": "SeasonPack",
+          "size": "499670136"
+        },
+        "date": "2026-10-31T16:51:09Z",
+        "episode": {
+          "airDate": "2026-09-03",
+          "airDateUtc": "2026-09-03T04:00:00Z",
+          "episodeFileId": 0,
+          "episodeNumber": 6,
+          "finaleType": "season",
+          "hasFile": false,
+          "id": 1556,
+          "lastSearchTime": "2026-09-13T21:23:55Z",
+          "monitored": false,
+          "overview": "Chad and the Catfish must beat Texas to make the Playoff, but Gerry has other plans.",
+          "runtime": 37,
+          "seasonNumber": 2,
+          "seriesId": 45,
+          "title": "12th Quarter",
+          "tvdbId": 11774121,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 1556,
+        "eventType": "episodeFileDeleted",
+        "id": 2295,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 15,
+            "name": "WEBRip-1080p",
+            "resolution": 1080,
+            "source": "webRip"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "series": {
+          "added": "2026-09-13T21:23:02Z",
+          "airTime": "00:00",
+          "certification": "TV-MA",
+          "cleanTitle": "chadpowers",
+          "ended": false,
+          "firstAired": "2025-09-30T00:00:00Z",
+          "genres": [
+            "Comedy",
+            "Sport"
+          ],
+          "id": 45,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446526/banners/68de3f6c12e31.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446526/posters/6a8a91872f132.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446526/backgrounds/6a9a76c1352ec.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446526/clearlogo/68de3f7b7faac.png"
+            }
+          ],
+          "imdbId": "tt31449991",
+          "languageProfileId": 1,
+          "lastAired": "2026-09-03T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Hulu",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Eight years after an unforgivable mistake nukes his promising college football career, hotshot quarterback Russ Holliday tries to resurrect his dreams by disguising himself as Chad Powers - a talented oddball who walks on to the struggling South Georgia Catfish.",
+          "path": "/tv/Chad Powers (2025)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.6,
+            "votes": 19631
+          },
+          "runtime": 33,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "chad powers",
+          "status": "continuing",
+          "tags": [
+            1,
+            2
+          ],
+          "title": "Chad Powers",
+          "titleSlug": "chad-powers",
+          "tmdbId": 247168,
+          "tvMazeId": 74865,
+          "tvRageId": 0,
+          "tvdbId": 446526,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 45,
+        "sourceTitle": "/tv/Chad Powers (2025)/Season 02/Chad Powers (2025) - S02E06 - 12th Quarter [MULTi][WEBRip-1080p][AAC 5.1][x265]-V3SP4EV3R.mkv"
+      },
+      {
+        "customFormatScore": 2000,
+        "customFormats": [
+          {
+            "id": 35,
+            "name": "MULTi"
+          },
+          {
+            "id": 15,
+            "name": "x265 (HD)"
+          }
+        ],
+        "data": {
+          "indexerFlags": "0",
+          "reason": "Manual",
+          "releaseGroup": "V3SP4EV3R",
+          "releaseType": "SeasonPack",
+          "size": "371024269"
+        },
+        "date": "2026-10-31T16:51:09Z",
+        "episode": {
+          "airDate": "2026-09-03",
+          "airDateUtc": "2026-09-03T04:00:00Z",
+          "episodeFileId": 0,
+          "episodeNumber": 5,
+          "hasFile": false,
+          "id": 1555,
+          "lastSearchTime": "2026-09-13T21:23:55Z",
+          "monitored": false,
+          "overview": "Gerry pursues the truth about Chad Powers, while Russ, Ricky, and Danny do everything they can to stop him.",
+          "runtime": 31,
+          "seasonNumber": 2,
+          "seriesId": 45,
+          "title": "11th Quarter",
+          "tvdbId": 11774120,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 1555,
+        "eventType": "episodeFileDeleted",
+        "id": 2294,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 15,
+            "name": "WEBRip-1080p",
+            "resolution": 1080,
+            "source": "webRip"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "series": {
+          "added": "2026-09-13T21:23:02Z",
+          "airTime": "00:00",
+          "certification": "TV-MA",
+          "cleanTitle": "chadpowers",
+          "ended": false,
+          "firstAired": "2025-09-30T00:00:00Z",
+          "genres": [
+            "Comedy",
+            "Sport"
+          ],
+          "id": 45,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446526/banners/68de3f6c12e31.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446526/posters/6a8a91872f132.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446526/backgrounds/6a9a76c1352ec.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446526/clearlogo/68de3f7b7faac.png"
+            }
+          ],
+          "imdbId": "tt31449991",
+          "languageProfileId": 1,
+          "lastAired": "2026-09-03T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Hulu",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Eight years after an unforgivable mistake nukes his promising college football career, hotshot quarterback Russ Holliday tries to resurrect his dreams by disguising himself as Chad Powers - a talented oddball who walks on to the struggling South Georgia Catfish.",
+          "path": "/tv/Chad Powers (2025)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.6,
+            "votes": 19631
+          },
+          "runtime": 33,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "chad powers",
+          "status": "continuing",
+          "tags": [
+            1,
+            2
+          ],
+          "title": "Chad Powers",
+          "titleSlug": "chad-powers",
+          "tmdbId": 247168,
+          "tvMazeId": 74865,
+          "tvRageId": 0,
+          "tvdbId": 446526,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 45,
+        "sourceTitle": "/tv/Chad Powers (2025)/Season 02/Chad Powers (2025) - S02E05 - 11th Quarter [MULTi][WEBRip-1080p][AAC 5.1][x265]-V3SP4EV3R.mkv"
+      },
+      {
+        "customFormatScore": 2000,
+        "customFormats": [
+          {
+            "id": 35,
+            "name": "MULTi"
+          },
+          {
+            "id": 15,
+            "name": "x265 (HD)"
+          }
+        ],
+        "data": {
+          "indexerFlags": "0",
+          "reason": "Manual",
+          "releaseGroup": "V3SP4EV3R",
+          "releaseType": "SeasonPack",
+          "size": "346482854"
+        },
+        "date": "2026-10-31T16:51:08Z",
+        "episode": {
+          "airDate": "2026-09-03",
+          "airDateUtc": "2026-09-03T04:00:00Z",
+          "episodeFileId": 0,
+          "episodeNumber": 4,
+          "hasFile": false,
+          "id": 1554,
+          "lastSearchTime": "2026-09-13T21:23:55Z",
+          "monitored": false,
+          "overview": "To legitimize his backstory, Russ brings his real father to the Catfish homecoming banquet as Chad’s dad – Howard Powers.",
+          "runtime": 28,
+          "seasonNumber": 2,
+          "seriesId": 45,
+          "title": "10th Quarter",
+          "tvdbId": 11774119,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 1554,
+        "eventType": "episodeFileDeleted",
+        "id": 2293,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 15,
+            "name": "WEBRip-1080p",
+            "resolution": 1080,
+            "source": "webRip"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "series": {
+          "added": "2026-09-13T21:23:02Z",
+          "airTime": "00:00",
+          "certification": "TV-MA",
+          "cleanTitle": "chadpowers",
+          "ended": false,
+          "firstAired": "2025-09-30T00:00:00Z",
+          "genres": [
+            "Comedy",
+            "Sport"
+          ],
+          "id": 45,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446526/banners/68de3f6c12e31.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446526/posters/6a8a91872f132.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446526/backgrounds/6a9a76c1352ec.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446526/clearlogo/68de3f7b7faac.png"
+            }
+          ],
+          "imdbId": "tt31449991",
+          "languageProfileId": 1,
+          "lastAired": "2026-09-03T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Hulu",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Eight years after an unforgivable mistake nukes his promising college football career, hotshot quarterback Russ Holliday tries to resurrect his dreams by disguising himself as Chad Powers - a talented oddball who walks on to the struggling South Georgia Catfish.",
+          "path": "/tv/Chad Powers (2025)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.6,
+            "votes": 19631
+          },
+          "runtime": 33,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "chad powers",
+          "status": "continuing",
+          "tags": [
+            1,
+            2
+          ],
+          "title": "Chad Powers",
+          "titleSlug": "chad-powers",
+          "tmdbId": 247168,
+          "tvMazeId": 74865,
+          "tvRageId": 0,
+          "tvdbId": 446526,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 45,
+        "sourceTitle": "/tv/Chad Powers (2025)/Season 02/Chad Powers (2025) - S02E04 - 10th Quarter [MULTi][WEBRip-1080p][AAC 5.1][x265]-V3SP4EV3R.mkv"
+      },
+      {
+        "customFormatScore": 2000,
+        "customFormats": [
+          {
+            "id": 35,
+            "name": "MULTi"
+          },
+          {
+            "id": 15,
+            "name": "x265 (HD)"
+          }
+        ],
+        "data": {
+          "indexerFlags": "0",
+          "reason": "Manual",
+          "releaseGroup": "V3SP4EV3R",
+          "releaseType": "SeasonPack",
+          "size": "417088867"
+        },
+        "date": "2026-10-31T16:51:08Z",
+        "episode": {
+          "airDate": "2026-09-03",
+          "airDateUtc": "2026-09-03T04:00:00Z",
+          "episodeFileId": 0,
+          "episodeNumber": 3,
+          "hasFile": false,
+          "id": 1553,
+          "lastSearchTime": "2026-09-13T21:23:55Z",
+          "monitored": false,
+          "overview": "With the Catfish stranded in the airport after a tough away game, Tricia cozies up to Chad – and starts asking dangerous questions.",
+          "runtime": 28,
+          "seasonNumber": 2,
+          "seriesId": 45,
+          "title": "9th Quarter",
+          "tvdbId": 11774118,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 1553,
+        "eventType": "episodeFileDeleted",
+        "id": 2292,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 15,
+            "name": "WEBRip-1080p",
+            "resolution": 1080,
+            "source": "webRip"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "series": {
+          "added": "2026-09-13T21:23:02Z",
+          "airTime": "00:00",
+          "certification": "TV-MA",
+          "cleanTitle": "chadpowers",
+          "ended": false,
+          "firstAired": "2025-09-30T00:00:00Z",
+          "genres": [
+            "Comedy",
+            "Sport"
+          ],
+          "id": 45,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446526/banners/68de3f6c12e31.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446526/posters/6a8a91872f132.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446526/backgrounds/6a9a76c1352ec.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446526/clearlogo/68de3f7b7faac.png"
+            }
+          ],
+          "imdbId": "tt31449991",
+          "languageProfileId": 1,
+          "lastAired": "2026-09-03T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Hulu",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Eight years after an unforgivable mistake nukes his promising college football career, hotshot quarterback Russ Holliday tries to resurrect his dreams by disguising himself as Chad Powers - a talented oddball who walks on to the struggling South Georgia Catfish.",
+          "path": "/tv/Chad Powers (2025)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.6,
+            "votes": 19631
+          },
+          "runtime": 33,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "chad powers",
+          "status": "continuing",
+          "tags": [
+            1,
+            2
+          ],
+          "title": "Chad Powers",
+          "titleSlug": "chad-powers",
+          "tmdbId": 247168,
+          "tvMazeId": 74865,
+          "tvRageId": 0,
+          "tvdbId": 446526,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 45,
+        "sourceTitle": "/tv/Chad Powers (2025)/Season 02/Chad Powers (2025) - S02E03 - 9th Quarter [MULTi][WEBRip-1080p][AAC 5.1][x265]-V3SP4EV3R.mkv"
+      },
+      {
+        "customFormatScore": 2000,
+        "customFormats": [
+          {
+            "id": 35,
+            "name": "MULTi"
+          },
+          {
+            "id": 15,
+            "name": "x265 (HD)"
+          }
+        ],
+        "data": {
+          "indexerFlags": "0",
+          "reason": "Manual",
+          "releaseGroup": "V3SP4EV3R",
+          "releaseType": "SeasonPack",
+          "size": "474613198"
+        },
+        "date": "2026-10-31T16:51:08Z",
+        "episode": {
+          "airDate": "2026-09-03",
+          "airDateUtc": "2026-09-03T04:00:00Z",
+          "episodeFileId": 0,
+          "episodeNumber": 2,
+          "hasFile": false,
+          "id": 1552,
+          "lastSearchTime": "2026-09-13T21:23:55Z",
+          "monitored": false,
+          "overview": "Ahead of the team’s big bye week house party, Coach Hudson grows increasingly suspicious of Chad’s behavior.",
+          "runtime": 34,
+          "seasonNumber": 2,
+          "seriesId": 45,
+          "title": "8th Quarter",
+          "tvdbId": 11774117,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 1552,
+        "eventType": "episodeFileDeleted",
+        "id": 2291,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 15,
+            "name": "WEBRip-1080p",
+            "resolution": 1080,
+            "source": "webRip"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "series": {
+          "added": "2026-09-13T21:23:02Z",
+          "airTime": "00:00",
+          "certification": "TV-MA",
+          "cleanTitle": "chadpowers",
+          "ended": false,
+          "firstAired": "2025-09-30T00:00:00Z",
+          "genres": [
+            "Comedy",
+            "Sport"
+          ],
+          "id": 45,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446526/banners/68de3f6c12e31.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446526/posters/6a8a91872f132.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446526/backgrounds/6a9a76c1352ec.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446526/clearlogo/68de3f7b7faac.png"
+            }
+          ],
+          "imdbId": "tt31449991",
+          "languageProfileId": 1,
+          "lastAired": "2026-09-03T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Hulu",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Eight years after an unforgivable mistake nukes his promising college football career, hotshot quarterback Russ Holliday tries to resurrect his dreams by disguising himself as Chad Powers - a talented oddball who walks on to the struggling South Georgia Catfish.",
+          "path": "/tv/Chad Powers (2025)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.6,
+            "votes": 19631
+          },
+          "runtime": 33,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "chad powers",
+          "status": "continuing",
+          "tags": [
+            1,
+            2
+          ],
+          "title": "Chad Powers",
+          "titleSlug": "chad-powers",
+          "tmdbId": 247168,
+          "tvMazeId": 74865,
+          "tvRageId": 0,
+          "tvdbId": 446526,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 45,
+        "sourceTitle": "/tv/Chad Powers (2025)/Season 02/Chad Powers (2025) - S02E02 - 8th Quarter [MULTi][WEBRip-1080p][AAC 5.1][x265]-V3SP4EV3R.mkv"
+      },
+      {
+        "customFormatScore": 2000,
+        "customFormats": [
+          {
+            "id": 35,
+            "name": "MULTi"
+          },
+          {
+            "id": 15,
+            "name": "x265 (HD)"
+          }
+        ],
+        "data": {
+          "indexerFlags": "0",
+          "reason": "Manual",
+          "releaseGroup": "V3SP4EV3R",
+          "releaseType": "SeasonPack",
+          "size": "559974158"
+        },
+        "date": "2026-10-31T16:51:08Z",
+        "episode": {
+          "airDate": "2026-09-03",
+          "airDateUtc": "2026-09-03T04:00:00Z",
+          "episodeFileId": 0,
+          "episodeNumber": 1,
+          "hasFile": false,
+          "id": 1551,
+          "lastSearchTime": "2026-09-13T21:23:55Z",
+          "monitored": false,
+          "overview": "Russ and Danny's tenuous new alliance with Ricky is tested when Chad suffers a mid-game injury.",
+          "runtime": 35,
+          "seasonNumber": 2,
+          "seriesId": 45,
+          "title": "7th Quarter",
+          "tvdbId": 11774116,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 1551,
+        "eventType": "episodeFileDeleted",
+        "id": 2290,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 15,
+            "name": "WEBRip-1080p",
+            "resolution": 1080,
+            "source": "webRip"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "series": {
+          "added": "2026-09-13T21:23:02Z",
+          "airTime": "00:00",
+          "certification": "TV-MA",
+          "cleanTitle": "chadpowers",
+          "ended": false,
+          "firstAired": "2025-09-30T00:00:00Z",
+          "genres": [
+            "Comedy",
+            "Sport"
+          ],
+          "id": 45,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446526/banners/68de3f6c12e31.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446526/posters/6a8a91872f132.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446526/backgrounds/6a9a76c1352ec.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446526/clearlogo/68de3f7b7faac.png"
+            }
+          ],
+          "imdbId": "tt31449991",
+          "languageProfileId": 1,
+          "lastAired": "2026-09-03T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Hulu",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Eight years after an unforgivable mistake nukes his promising college football career, hotshot quarterback Russ Holliday tries to resurrect his dreams by disguising himself as Chad Powers - a talented oddball who walks on to the struggling South Georgia Catfish.",
+          "path": "/tv/Chad Powers (2025)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.6,
+            "votes": 19631
+          },
+          "runtime": 33,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "chad powers",
+          "status": "continuing",
+          "tags": [
+            1,
+            2
+          ],
+          "title": "Chad Powers",
+          "titleSlug": "chad-powers",
+          "tmdbId": 247168,
+          "tvMazeId": 74865,
+          "tvRageId": 0,
+          "tvdbId": 446526,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 45,
+        "sourceTitle": "/tv/Chad Powers (2025)/Season 02/Chad Powers (2025) - S02E01 - 7th Quarter [MULTi][WEBRip-1080p][AAC 5.1][x265]-V3SP4EV3R.mkv"
+      },
+      {
+        "customFormatScore": 2000,
+        "customFormats": [
+          {
+            "id": 17,
+            "name": "ATV"
+          },
+          {
+            "id": 35,
+            "name": "MULTi"
+          }
+        ],
+        "data": {
+          "indexerFlags": "0",
+          "reason": "Manual",
+          "releaseGroup": "FUZEER",
+          "releaseType": "SingleEpisode",
+          "size": "7786694290"
+        },
+        "date": "2026-10-31T16:50:41Z",
+        "episode": {
+          "airDate": "2026-07-03",
+          "airDateUtc": "2026-07-03T04:00:00Z",
+          "episodeFileId": 0,
+          "episodeNumber": 1,
+          "hasFile": false,
+          "id": 1342,
+          "lastSearchTime": "2026-07-24T14:42:38Z",
+          "monitored": false,
+          "overview": "New mayor Juliette can’t remember anything from her time outside—or her past.",
+          "runtime": 52,
+          "seasonNumber": 3,
+          "seriesId": 23,
+          "title": "Who Are You?",
+          "tvdbId": 11751879,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 1342,
+        "eventType": "episodeFileDeleted",
+        "id": 2289,
+        "languages": [
+          {
+            "id": 17,
+            "name": "Turkish"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 8,
+            "name": "Japanese"
+          },
+          {
+            "id": 3,
+            "name": "Spanish"
+          },
+          {
+            "id": 18,
+            "name": "Portuguese"
+          },
+          {
+            "id": 2,
+            "name": "French"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 4,
+            "name": "German"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "00:00",
+          "certification": "TV-MA",
+          "cleanTitle": "silo",
+          "ended": false,
+          "firstAired": "2023-05-05T00:00:00Z",
+          "genres": [
+            "Drama",
+            "Science Fiction"
+          ],
+          "id": 23,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/banners/6449d56a60674.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/posters/64432dea72673.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/backgrounds/640bc23f1fa80.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/clearlogo/6455710e48c96.png"
+            }
+          ],
+          "imdbId": "tt14688458",
+          "languageProfileId": 1,
+          "lastAired": "2027-07-09T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "In a ruined and toxic future, thousands live in a giant silo deep underground. After its sheriff breaks a cardinal rule and residents die mysteriously, engineer Juliette starts to uncover shocking secrets and the truth about the silo.",
+          "path": "/tv/Silo",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.1,
+            "votes": 252993
+          },
+          "runtime": 51,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 3
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 4
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "silo",
+          "status": "continuing",
+          "tags": [
+            2
+          ],
+          "title": "Silo",
+          "titleSlug": "silo",
+          "tmdbId": 125988,
+          "tvMazeId": 38052,
+          "tvRageId": 0,
+          "tvdbId": 403245,
+          "useSceneNumbering": false,
+          "year": 2023
+        },
+        "seriesId": 23,
+        "sourceTitle": "/tv/Silo/Season 03/Silo (2023) - S03E01 - Who Are You [ATV MULTi][WEBDL-1080p][EAC3 Atmos 5.1][h264]-FUZEER.mkv"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 18,
+            "name": "ATVP"
+          }
+        ],
+        "data": {
+          "indexerFlags": "Freeleech",
+          "reason": "Manual",
+          "releaseGroup": "MeM",
+          "releaseType": "SingleEpisode",
+          "size": "5130616070"
+        },
+        "date": "2026-10-31T16:49:36Z",
+        "episode": {
+          "airDate": "2026-10-21",
+          "airDateUtc": "2026-10-21T04:00:00Z",
+          "episodeFileId": 0,
+          "episodeNumber": 6,
+          "finaleType": "season",
+          "hasFile": false,
+          "id": 1468,
+          "monitored": false,
+          "overview": "The safe house becomes unsafe as Lamb and Taverner finally join forces.",
+          "runtime": 62,
+          "seasonNumber": 6,
+          "seriesId": 24,
+          "title": "Judgement Day",
+          "tvdbId": 11839917,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 1468,
+        "eventType": "episodeFileDeleted",
+        "id": 2288,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "00:00",
+          "certification": "TV-MA",
+          "cleanTitle": "slowhorses",
+          "ended": false,
+          "firstAired": "2022-04-01T00:00:00Z",
+          "genres": [
+            "Suspense",
+            "Thriller"
+          ],
+          "id": 24,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/banners/6572357383704.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/posters/637d209da8190.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/backgrounds/63896cb293707.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/clearlogo/656ea800b402e.png"
+            }
+          ],
+          "imdbId": "tt5875444",
+          "languageProfileId": 1,
+          "lastAired": "2026-10-21T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "This quick-witted spy drama follows a dysfunctional team of MI5 agents – and their obnoxious boss, the notorious Jackson Lamb – as they navigate the espionage world's smoke and mirrors to defend England from sinister forces.",
+          "path": "/tv/Slow Horses",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.4,
+            "votes": 168158
+          },
+          "runtime": 46,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 3
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 4
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 5
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 6
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "slow horses",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "Slow Horses",
+          "titleSlug": "slow-horses",
+          "tmdbId": 95480,
+          "tvMazeId": 45039,
+          "tvRageId": 0,
+          "tvdbId": 372264,
+          "useSceneNumbering": false,
+          "year": 2022
+        },
+        "seriesId": 24,
+        "sourceTitle": "/tv/Slow Horses/Season 06/Slow Horses (2022) - S06E06 - Judgement Day [ATVP][WEBDL-1080p][AC3 5.1][h264]-MeM.mkv"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 18,
+            "name": "ATVP"
+          },
+          {
+            "id": 15,
+            "name": "x265 (HD)"
+          }
+        ],
+        "data": {
+          "indexerFlags": "Freeleech",
+          "reason": "Manual",
+          "releaseGroup": "TBK",
+          "releaseType": "SingleEpisode",
+          "size": "2152807760"
+        },
+        "date": "2026-10-31T16:49:36Z",
+        "episode": {
+          "airDate": "2026-10-14",
+          "airDateUtc": "2026-10-14T04:00:00Z",
+          "episodeFileId": 0,
+          "episodeNumber": 5,
+          "hasFile": false,
+          "id": 1467,
+          "monitored": false,
+          "overview": "River goes after Sid. Lamb sets his sights on Cantor. Taverner carries on with a treacherous deal.",
+          "runtime": 47,
+          "seasonNumber": 6,
+          "seriesId": 24,
+          "title": "Sayonara",
+          "tvdbId": 11839916,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 1467,
+        "eventType": "episodeFileDeleted",
+        "id": 2287,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "00:00",
+          "certification": "TV-MA",
+          "cleanTitle": "slowhorses",
+          "ended": false,
+          "firstAired": "2022-04-01T00:00:00Z",
+          "genres": [
+            "Suspense",
+            "Thriller"
+          ],
+          "id": 24,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/banners/6572357383704.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/posters/637d209da8190.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/backgrounds/63896cb293707.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/clearlogo/656ea800b402e.png"
+            }
+          ],
+          "imdbId": "tt5875444",
+          "languageProfileId": 1,
+          "lastAired": "2026-10-21T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "This quick-witted spy drama follows a dysfunctional team of MI5 agents – and their obnoxious boss, the notorious Jackson Lamb – as they navigate the espionage world's smoke and mirrors to defend England from sinister forces.",
+          "path": "/tv/Slow Horses",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.4,
+            "votes": 168158
+          },
+          "runtime": 46,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 3
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 4
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 5
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 6
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "slow horses",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "Slow Horses",
+          "titleSlug": "slow-horses",
+          "tmdbId": 95480,
+          "tvMazeId": 45039,
+          "tvRageId": 0,
+          "tvdbId": 372264,
+          "useSceneNumbering": false,
+          "year": 2022
+        },
+        "seriesId": 24,
+        "sourceTitle": "/tv/Slow Horses/Season 06/Slow Horses (2022) - S06E05 - Sayonara [ATVP][WEBDL-1080p][AC3 5.1][h265]-TBK.mkv"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 18,
+            "name": "ATVP"
+          }
+        ],
+        "data": {
+          "indexerFlags": "Freeleech",
+          "reason": "Manual",
+          "releaseGroup": "MeM",
+          "releaseType": "SingleEpisode",
+          "size": "4184296526"
+        },
+        "date": "2026-10-31T16:49:35Z",
+        "episode": {
+          "airDate": "2026-10-07",
+          "airDateUtc": "2026-10-07T04:00:00Z",
+          "episodeFileId": 0,
+          "episodeNumber": 4,
+          "hasFile": false,
+          "id": 1466,
+          "monitored": false,
+          "overview": "Lamb tries figuring out who Frank is working for. Sid, River, and Coe do everything to evade the hit squad.",
+          "runtime": 50,
+          "seasonNumber": 6,
+          "seriesId": 24,
+          "title": "Lost & Found",
+          "tvdbId": 11839915,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 1466,
+        "eventType": "episodeFileDeleted",
+        "id": 2286,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "00:00",
+          "certification": "TV-MA",
+          "cleanTitle": "slowhorses",
+          "ended": false,
+          "firstAired": "2022-04-01T00:00:00Z",
+          "genres": [
+            "Suspense",
+            "Thriller"
+          ],
+          "id": 24,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/banners/6572357383704.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/posters/637d209da8190.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/backgrounds/63896cb293707.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/clearlogo/656ea800b402e.png"
+            }
+          ],
+          "imdbId": "tt5875444",
+          "languageProfileId": 1,
+          "lastAired": "2026-10-21T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "This quick-witted spy drama follows a dysfunctional team of MI5 agents – and their obnoxious boss, the notorious Jackson Lamb – as they navigate the espionage world's smoke and mirrors to defend England from sinister forces.",
+          "path": "/tv/Slow Horses",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.4,
+            "votes": 168158
+          },
+          "runtime": 46,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 3
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 4
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 5
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 6
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "slow horses",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "Slow Horses",
+          "titleSlug": "slow-horses",
+          "tmdbId": 95480,
+          "tvMazeId": 45039,
+          "tvRageId": 0,
+          "tvdbId": 372264,
+          "useSceneNumbering": false,
+          "year": 2022
+        },
+        "seriesId": 24,
+        "sourceTitle": "/tv/Slow Horses/Season 06/Slow Horses (2022) - S06E04 - Lost and Found [ATVP][WEBDL-1080p][AC3 5.1][h264]-MeM.mkv"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 18,
+            "name": "ATVP"
+          },
+          {
+            "id": 15,
+            "name": "x265 (HD)"
+          }
+        ],
+        "data": {
+          "indexerFlags": "Freeleech",
+          "reason": "Manual",
+          "releaseGroup": "TBK",
+          "releaseType": "SingleEpisode",
+          "size": "2226362834"
+        },
+        "date": "2026-10-31T16:49:35Z",
+        "episode": {
+          "airDate": "2026-09-30",
+          "airDateUtc": "2026-09-30T04:00:00Z",
+          "episodeFileId": 0,
+          "episodeNumber": 3,
+          "hasFile": false,
+          "id": 1465,
+          "monitored": false,
+          "overview": "Ex-Slow Horses return to the fold as assassins close in. Taverner faces the fallout of her TV interview.",
+          "runtime": 48,
+          "seasonNumber": 6,
+          "seriesId": 24,
+          "title": "Resurrection",
+          "tvdbId": 11839914,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 1465,
+        "eventType": "episodeFileDeleted",
+        "id": 2285,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "00:00",
+          "certification": "TV-MA",
+          "cleanTitle": "slowhorses",
+          "ended": false,
+          "firstAired": "2022-04-01T00:00:00Z",
+          "genres": [
+            "Suspense",
+            "Thriller"
+          ],
+          "id": 24,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/banners/6572357383704.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/posters/637d209da8190.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/backgrounds/63896cb293707.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/clearlogo/656ea800b402e.png"
+            }
+          ],
+          "imdbId": "tt5875444",
+          "languageProfileId": 1,
+          "lastAired": "2026-10-21T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "This quick-witted spy drama follows a dysfunctional team of MI5 agents – and their obnoxious boss, the notorious Jackson Lamb – as they navigate the espionage world's smoke and mirrors to defend England from sinister forces.",
+          "path": "/tv/Slow Horses",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.4,
+            "votes": 168158
+          },
+          "runtime": 46,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 3
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 4
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 5
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 6
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "slow horses",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "Slow Horses",
+          "titleSlug": "slow-horses",
+          "tmdbId": 95480,
+          "tvMazeId": 45039,
+          "tvRageId": 0,
+          "tvdbId": 372264,
+          "useSceneNumbering": false,
+          "year": 2022
+        },
+        "seriesId": 24,
+        "sourceTitle": "/tv/Slow Horses/Season 06/Slow Horses (2022) - S06E03 - Resurrection [ATVP][WEBDL-1080p][AC3 5.1][h265]-TBK.mkv"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 18,
+            "name": "ATVP"
+          }
+        ],
+        "data": {
+          "indexerFlags": "Freeleech",
+          "reason": "Manual",
+          "releaseGroup": "MeM",
+          "releaseType": "SingleEpisode",
+          "size": "3892175591"
+        },
+        "date": "2026-10-31T16:49:35Z",
+        "episode": {
+          "airDate": "2026-09-23",
+          "airDateUtc": "2026-09-23T04:00:00Z",
+          "episodeFileId": 0,
+          "episodeNumber": 2,
+          "hasFile": false,
+          "id": 1464,
+          "monitored": false,
+          "overview": "The reemergence of Frank Harkness and a suspicious string of murders put Lamb and team on high alert.",
+          "runtime": 47,
+          "seasonNumber": 6,
+          "seriesId": 24,
+          "title": "Daddy Issues",
+          "tvdbId": 11839913,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 1464,
+        "eventType": "episodeFileDeleted",
+        "id": 2284,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "00:00",
+          "certification": "TV-MA",
+          "cleanTitle": "slowhorses",
+          "ended": false,
+          "firstAired": "2022-04-01T00:00:00Z",
+          "genres": [
+            "Suspense",
+            "Thriller"
+          ],
+          "id": 24,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/banners/6572357383704.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/posters/637d209da8190.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/backgrounds/63896cb293707.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/clearlogo/656ea800b402e.png"
+            }
+          ],
+          "imdbId": "tt5875444",
+          "languageProfileId": 1,
+          "lastAired": "2026-10-21T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "This quick-witted spy drama follows a dysfunctional team of MI5 agents – and their obnoxious boss, the notorious Jackson Lamb – as they navigate the espionage world's smoke and mirrors to defend England from sinister forces.",
+          "path": "/tv/Slow Horses",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.4,
+            "votes": 168158
+          },
+          "runtime": 46,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 3
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 4
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 5
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 6
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "slow horses",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "Slow Horses",
+          "titleSlug": "slow-horses",
+          "tmdbId": 95480,
+          "tvMazeId": 45039,
+          "tvRageId": 0,
+          "tvdbId": 372264,
+          "useSceneNumbering": false,
+          "year": 2022
+        },
+        "seriesId": 24,
+        "sourceTitle": "/tv/Slow Horses/Season 06/Slow Horses (2022) - S06E02 - Daddy Issues [ATVP][WEBDL-1080p][AC3 5.1][h264]-MeM.mkv"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 18,
+            "name": "ATVP"
+          },
+          {
+            "id": 15,
+            "name": "x265 (HD)"
+          }
+        ],
+        "data": {
+          "indexerFlags": "Freeleech",
+          "reason": "Manual",
+          "releaseGroup": "TBK",
+          "releaseType": "SingleEpisode",
+          "size": "2197232422"
+        },
+        "date": "2026-10-31T16:49:35Z",
+        "episode": {
+          "airDate": "2026-09-16",
+          "airDateUtc": "2026-09-16T04:00:00Z",
+          "episodeFileId": 0,
+          "episodeNumber": 1,
+          "hasFile": false,
+          "id": 1463,
+          "monitored": false,
+          "overview": "River braces for his grandfather’s funeral. Lamb looks into the death of an ex-Slow Horse.",
+          "runtime": 48,
+          "seasonNumber": 6,
+          "seriesId": 24,
+          "title": "Circle of Life",
+          "tvdbId": 11839840,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 1463,
+        "eventType": "episodeFileDeleted",
+        "id": 2283,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "00:00",
+          "certification": "TV-MA",
+          "cleanTitle": "slowhorses",
+          "ended": false,
+          "firstAired": "2022-04-01T00:00:00Z",
+          "genres": [
+            "Suspense",
+            "Thriller"
+          ],
+          "id": 24,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/banners/6572357383704.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/posters/637d209da8190.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/backgrounds/63896cb293707.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/clearlogo/656ea800b402e.png"
+            }
+          ],
+          "imdbId": "tt5875444",
+          "languageProfileId": 1,
+          "lastAired": "2026-10-21T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "This quick-witted spy drama follows a dysfunctional team of MI5 agents – and their obnoxious boss, the notorious Jackson Lamb – as they navigate the espionage world's smoke and mirrors to defend England from sinister forces.",
+          "path": "/tv/Slow Horses",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.4,
+            "votes": 168158
+          },
+          "runtime": 46,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 3
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 4
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 5
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 6
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "slow horses",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "Slow Horses",
+          "titleSlug": "slow-horses",
+          "tmdbId": 95480,
+          "tvMazeId": 45039,
+          "tvRageId": 0,
+          "tvdbId": 372264,
+          "useSceneNumbering": false,
+          "year": 2022
+        },
+        "seriesId": 24,
+        "sourceTitle": "/tv/Slow Horses/Season 06/Slow Horses (2022) - S06E01 - Circle of Life [ATVP][WEBDL-1080p][AC3 5.1][h265]-TBK.mkv"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 29,
+            "name": "PMTP"
+          }
+        ],
+        "data": {
+          "customFormatScore": "0",
+          "downloadClient": "redacted",
+          "downloadClientName": "Download client",
+          "droppedPath": "/downloads/MobLand.S02E07.Ace.of.Spades.1080p.PMTP.WEB-DL.DDP5.1.ENG.Atmos.ITA.H264-TBK.mkv",
+          "fileId": "1072",
+          "importedPath": "/tv/MobLand/Season 02/MobLand (2025) - S02E07 - Ace of Spades [PMTP][WEBDL-1080p][EAC3 5.1][h264]-TBK.mkv",
+          "indexerFlags": "Freeleech",
+          "releaseGroup": "TBK",
+          "releaseType": "SingleEpisode",
+          "size": "1744183615"
+        },
+        "date": "2026-10-31T13:24:19Z",
+        "downloadId": "185764b847f67ca08657cd9b55679bfe1877a256",
+        "episode": {
+          "airDate": "2026-10-30",
+          "airDateUtc": "2026-10-30T07:00:00Z",
+          "episodeFileId": 1072,
+          "episodeNumber": 7,
+          "hasFile": true,
+          "id": 530,
+          "lastSearchTime": "2026-10-31T13:17:56Z",
+          "monitored": true,
+          "overview": "The Harrigans lock down the Cotswolds and roll back into London to shake the tree -- buying loyalty with cash, threats, and broken fingers. Maeve tightens the screws within the family, while Harry walks into a trap.",
+          "runtime": 55,
+          "seasonNumber": 2,
+          "seriesId": 18,
+          "title": "Ace of Spades",
+          "tvdbId": 11542644,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 530,
+        "eventType": "downloadFolderImported",
+        "id": 2282,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "03:00",
+          "certification": "TV-MA",
+          "cleanTitle": "mobland",
+          "ended": false,
+          "firstAired": "2025-03-30T00:00:00Z",
+          "genres": [
+            "Crime",
+            "Drama"
+          ],
+          "id": 18,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/banners/68175c94c4974.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/posters/6aa1c710a2a68.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/backgrounds/67e9845c46113.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/clearlogo/68fd77028683b.png"
+            }
+          ],
+          "imdbId": "tt31510819",
+          "languageProfileId": 1,
+          "lastAired": "2026-11-20T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Paramount+",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Two mob families clash in a war that threatens to topple empires and lives.",
+          "path": "/tv/MobLand",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.3,
+            "votes": 138308
+          },
+          "runtime": 47,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "mobland",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "MobLand",
+          "titleSlug": "mobland",
+          "tmdbId": 247718,
+          "tvMazeId": 75026,
+          "tvRageId": 0,
+          "tvdbId": 446831,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 18,
+        "sourceTitle": "MobLand S02E07 Ace of Spades 1080p PMTP WEB-DL DDP5 1 ENG Atmos ITA H264-TBK"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 29,
+            "name": "PMTP"
+          }
+        ],
+        "data": {
+          "age": "0",
+          "ageHours": "23.023479679444446",
+          "ageMinutes": "1381.4087809166667",
+          "customFormatScore": "0",
+          "downloadClient": "redacted",
+          "downloadClientName": "Download client",
+          "downloadUrl": "http://indexer.invalid/1ac0c7be6489",
+          "guid": "http://indexer.invalid/edd79ceeff68",
+          "imdbId": null,
+          "indexer": "Indexer",
+          "indexerFlags": "Freeleech",
+          "nzbInfoUrl": "http://indexer.invalid/edd79ceeff68",
+          "protocol": "2",
+          "publishedDate": "2026-10-30T14:16:54Z",
+          "releaseGroup": null,
+          "releaseSource": "UserInvokedSearch",
+          "releaseType": "SingleEpisode",
+          "seriesMatchType": "Title",
+          "size": "1739461754",
+          "torrentInfoHash": "185764b847f67ca08657cd9b55679bfe1877a256",
+          "tvRageId": "0",
+          "tvdbId": "0"
+        },
+        "date": "2026-10-31T13:18:18Z",
+        "downloadId": "185764b847f67ca08657cd9b55679bfe1877a256",
+        "episode": {
+          "airDate": "2026-10-30",
+          "airDateUtc": "2026-10-30T07:00:00Z",
+          "episodeFileId": 1072,
+          "episodeNumber": 7,
+          "hasFile": true,
+          "id": 530,
+          "lastSearchTime": "2026-10-31T13:17:56Z",
+          "monitored": true,
+          "overview": "The Harrigans lock down the Cotswolds and roll back into London to shake the tree -- buying loyalty with cash, threats, and broken fingers. Maeve tightens the screws within the family, while Harry walks into a trap.",
+          "runtime": 55,
+          "seasonNumber": 2,
+          "seriesId": 18,
+          "title": "Ace of Spades",
+          "tvdbId": 11542644,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 530,
+        "eventType": "grabbed",
+        "id": 2281,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "03:00",
+          "certification": "TV-MA",
+          "cleanTitle": "mobland",
+          "ended": false,
+          "firstAired": "2025-03-30T00:00:00Z",
+          "genres": [
+            "Crime",
+            "Drama"
+          ],
+          "id": 18,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/banners/68175c94c4974.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/posters/6aa1c710a2a68.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/backgrounds/67e9845c46113.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/clearlogo/68fd77028683b.png"
+            }
+          ],
+          "imdbId": "tt31510819",
+          "languageProfileId": 1,
+          "lastAired": "2026-11-20T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Paramount+",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Two mob families clash in a war that threatens to topple empires and lives.",
+          "path": "/tv/MobLand",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.3,
+            "votes": 138308
+          },
+          "runtime": 47,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "mobland",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "MobLand",
+          "titleSlug": "mobland",
+          "tmdbId": 247718,
+          "tvMazeId": 75026,
+          "tvRageId": 0,
+          "tvdbId": 446831,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 18,
+        "sourceTitle": "MobLand S02E07 Ace of Spades 1080p PMTP WEB DL DDP5 1 ENG Atmos ITA H264 TBK"
+      },
+      {
+        "customFormatScore": 2000,
+        "customFormats": [
+          {
+            "id": 35,
+            "name": "MULTi"
+          }
+        ],
+        "data": {
+          "indexerFlags": "0",
+          "reason": "Manual",
+          "releaseGroup": "COGLiONE",
+          "releaseType": "SingleEpisode",
+          "size": "4287879901"
+        },
+        "date": "2026-10-30T18:38:06Z",
+        "episode": {
+          "airDate": "2025-10-29",
+          "airDateUtc": "2025-10-29T04:00:00Z",
+          "episodeFileId": 0,
+          "episodeNumber": 6,
+          "finaleType": "season",
+          "hasFile": false,
+          "id": 752,
+          "monitored": false,
+          "overview": "It’s up to the Slow Horses to stop Farouk’s team from completing its mission in a final act of mass carnage.",
+          "runtime": 51,
+          "seasonNumber": 5,
+          "seriesId": 24,
+          "title": "Scars",
+          "tvdbId": 11175988,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 752,
+        "eventType": "episodeFileDeleted",
+        "id": 2280,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "00:00",
+          "certification": "TV-MA",
+          "cleanTitle": "slowhorses",
+          "ended": false,
+          "firstAired": "2022-04-01T00:00:00Z",
+          "genres": [
+            "Suspense",
+            "Thriller"
+          ],
+          "id": 24,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/banners/6572357383704.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/posters/637d209da8190.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/backgrounds/63896cb293707.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/clearlogo/656ea800b402e.png"
+            }
+          ],
+          "imdbId": "tt5875444",
+          "languageProfileId": 1,
+          "lastAired": "2026-10-21T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "This quick-witted spy drama follows a dysfunctional team of MI5 agents – and their obnoxious boss, the notorious Jackson Lamb – as they navigate the espionage world's smoke and mirrors to defend England from sinister forces.",
+          "path": "/tv/Slow Horses",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.4,
+            "votes": 168158
+          },
+          "runtime": 46,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 3
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 4
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 5
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 6
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "slow horses",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "Slow Horses",
+          "titleSlug": "slow-horses",
+          "tmdbId": 95480,
+          "tvMazeId": 45039,
+          "tvRageId": 0,
+          "tvdbId": 372264,
+          "useSceneNumbering": false,
+          "year": 2022
+        },
+        "seriesId": 24,
+        "sourceTitle": "/tv/Slow Horses/Season 05/Slow.Horses.S05E06.iTALiAN.MULTi.1080p.WEB.H264-COGLiONE.mkv"
+      },
+      {
+        "customFormatScore": 2000,
+        "customFormats": [
+          {
+            "id": 35,
+            "name": "MULTi"
+          }
+        ],
+        "data": {
+          "indexerFlags": "0",
+          "reason": "Manual",
+          "releaseGroup": "COGLiONE",
+          "releaseType": "SingleEpisode",
+          "size": "3741890465"
+        },
+        "date": "2026-10-30T18:38:05Z",
+        "episode": {
+          "airDate": "2025-10-22",
+          "airDateUtc": "2025-10-22T04:00:00Z",
+          "episodeFileId": 0,
+          "episodeNumber": 5,
+          "hasFile": false,
+          "id": 751,
+          "monitored": false,
+          "overview": "Lamb debriefs River and Coe. Roddy is pulled in to help decipher a piece of code as the destabilization strategy nears its final stage.",
+          "runtime": 44,
+          "seasonNumber": 5,
+          "seriesId": 24,
+          "title": "Circus",
+          "tvdbId": 11175987,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 751,
+        "eventType": "episodeFileDeleted",
+        "id": 2279,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "00:00",
+          "certification": "TV-MA",
+          "cleanTitle": "slowhorses",
+          "ended": false,
+          "firstAired": "2022-04-01T00:00:00Z",
+          "genres": [
+            "Suspense",
+            "Thriller"
+          ],
+          "id": 24,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/banners/6572357383704.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/posters/637d209da8190.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/backgrounds/63896cb293707.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/clearlogo/656ea800b402e.png"
+            }
+          ],
+          "imdbId": "tt5875444",
+          "languageProfileId": 1,
+          "lastAired": "2026-10-21T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "This quick-witted spy drama follows a dysfunctional team of MI5 agents – and their obnoxious boss, the notorious Jackson Lamb – as they navigate the espionage world's smoke and mirrors to defend England from sinister forces.",
+          "path": "/tv/Slow Horses",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.4,
+            "votes": 168158
+          },
+          "runtime": 46,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 3
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 4
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 5
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 6
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "slow horses",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "Slow Horses",
+          "titleSlug": "slow-horses",
+          "tmdbId": 95480,
+          "tvMazeId": 45039,
+          "tvRageId": 0,
+          "tvdbId": 372264,
+          "useSceneNumbering": false,
+          "year": 2022
+        },
+        "seriesId": 24,
+        "sourceTitle": "/tv/Slow Horses/Season 05/Slow.Horses.S05E05.iTALiAN.MULTi.1080p.WEB.H264-COGLiONE.mkv"
+      },
+      {
+        "customFormatScore": 2000,
+        "customFormats": [
+          {
+            "id": 35,
+            "name": "MULTi"
+          },
+          {
+            "id": 7,
+            "name": "Repack/Proper"
+          }
+        ],
+        "data": {
+          "indexerFlags": "0",
+          "reason": "Manual",
+          "releaseGroup": "COGLiONE",
+          "releaseType": "SingleEpisode",
+          "size": "3279236263"
+        },
+        "date": "2026-10-30T18:38:05Z",
+        "episode": {
+          "airDate": "2025-10-15",
+          "airDateUtc": "2025-10-15T04:00:00Z",
+          "episodeFileId": 0,
+          "episodeNumber": 4,
+          "hasFile": false,
+          "id": 750,
+          "monitored": false,
+          "overview": "Flyte sets out to find Roddy's girlfriend. The gang is dispatched to two different campaign events to prevent another attack.",
+          "runtime": 39,
+          "seasonNumber": 5,
+          "seriesId": 24,
+          "title": "Missiles",
+          "tvdbId": 11175985,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 750,
+        "eventType": "episodeFileDeleted",
+        "id": 2278,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 2
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "00:00",
+          "certification": "TV-MA",
+          "cleanTitle": "slowhorses",
+          "ended": false,
+          "firstAired": "2022-04-01T00:00:00Z",
+          "genres": [
+            "Suspense",
+            "Thriller"
+          ],
+          "id": 24,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/banners/6572357383704.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/posters/637d209da8190.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/backgrounds/63896cb293707.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/clearlogo/656ea800b402e.png"
+            }
+          ],
+          "imdbId": "tt5875444",
+          "languageProfileId": 1,
+          "lastAired": "2026-10-21T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "This quick-witted spy drama follows a dysfunctional team of MI5 agents – and their obnoxious boss, the notorious Jackson Lamb – as they navigate the espionage world's smoke and mirrors to defend England from sinister forces.",
+          "path": "/tv/Slow Horses",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.4,
+            "votes": 168158
+          },
+          "runtime": 46,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 3
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 4
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 5
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 6
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "slow horses",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "Slow Horses",
+          "titleSlug": "slow-horses",
+          "tmdbId": 95480,
+          "tvMazeId": 45039,
+          "tvRageId": 0,
+          "tvdbId": 372264,
+          "useSceneNumbering": false,
+          "year": 2022
+        },
+        "seriesId": 24,
+        "sourceTitle": "/tv/Slow Horses/Season 05/Slow.Horses.S05E04.PROPER.iTALiAN.MULTi.1080p.WEB.H264-COGLiONE.mkv"
+      },
+      {
+        "customFormatScore": 2000,
+        "customFormats": [
+          {
+            "id": 35,
+            "name": "MULTi"
+          },
+          {
+            "id": 7,
+            "name": "Repack/Proper"
+          }
+        ],
+        "data": {
+          "indexerFlags": "0",
+          "reason": "Manual",
+          "releaseGroup": "COGLiONE",
+          "releaseType": "SingleEpisode",
+          "size": "3320210637"
+        },
+        "date": "2026-10-30T18:38:05Z",
+        "episode": {
+          "airDate": "2025-10-08",
+          "airDateUtc": "2025-10-08T04:00:00Z",
+          "episodeFileId": 0,
+          "episodeNumber": 3,
+          "hasFile": false,
+          "id": 749,
+          "monitored": false,
+          "overview": "An act of sabotage grinds London to a halt. Taverner interrogates Roddy. Coe is convinced a destabilization strategy is at play.",
+          "runtime": 39,
+          "seasonNumber": 5,
+          "seriesId": 24,
+          "title": "Tall Tales",
+          "tvdbId": 11175984,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 749,
+        "eventType": "episodeFileDeleted",
+        "id": 2277,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 2
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "00:00",
+          "certification": "TV-MA",
+          "cleanTitle": "slowhorses",
+          "ended": false,
+          "firstAired": "2022-04-01T00:00:00Z",
+          "genres": [
+            "Suspense",
+            "Thriller"
+          ],
+          "id": 24,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/banners/6572357383704.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/posters/637d209da8190.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/backgrounds/63896cb293707.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/clearlogo/656ea800b402e.png"
+            }
+          ],
+          "imdbId": "tt5875444",
+          "languageProfileId": 1,
+          "lastAired": "2026-10-21T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "This quick-witted spy drama follows a dysfunctional team of MI5 agents – and their obnoxious boss, the notorious Jackson Lamb – as they navigate the espionage world's smoke and mirrors to defend England from sinister forces.",
+          "path": "/tv/Slow Horses",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.4,
+            "votes": 168158
+          },
+          "runtime": 46,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 3
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 4
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 5
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 6
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "slow horses",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "Slow Horses",
+          "titleSlug": "slow-horses",
+          "tmdbId": 95480,
+          "tvMazeId": 45039,
+          "tvRageId": 0,
+          "tvdbId": 372264,
+          "useSceneNumbering": false,
+          "year": 2022
+        },
+        "seriesId": 24,
+        "sourceTitle": "/tv/Slow Horses/Season 05/Slow.Horses.S05E03.PROPER.iTALiAN.MULTi.1080p.WEB.H264-COGLiONE.mkv"
+      },
+      {
+        "customFormatScore": 2000,
+        "customFormats": [
+          {
+            "id": 35,
+            "name": "MULTi"
+          },
+          {
+            "id": 7,
+            "name": "Repack/Proper"
+          }
+        ],
+        "data": {
+          "indexerFlags": "0",
+          "reason": "Manual",
+          "releaseGroup": "COGLiONE",
+          "releaseType": "SingleEpisode",
+          "size": "4008444613"
+        },
+        "date": "2026-10-30T18:38:05Z",
+        "episode": {
+          "airDate": "2025-10-01",
+          "airDateUtc": "2025-10-01T04:00:00Z",
+          "episodeFileId": 0,
+          "episodeNumber": 2,
+          "hasFile": false,
+          "id": 748,
+          "monitored": false,
+          "overview": "Lamb intercepts an assassin. Taverner receives a key piece of intel about the Abbotsfield shooting.",
+          "runtime": 48,
+          "seasonNumber": 5,
+          "seriesId": 24,
+          "title": "Incommunicado",
+          "tvdbId": 11175983,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 748,
+        "eventType": "episodeFileDeleted",
+        "id": 2276,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 2
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "00:00",
+          "certification": "TV-MA",
+          "cleanTitle": "slowhorses",
+          "ended": false,
+          "firstAired": "2022-04-01T00:00:00Z",
+          "genres": [
+            "Suspense",
+            "Thriller"
+          ],
+          "id": 24,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/banners/6572357383704.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/posters/637d209da8190.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/backgrounds/63896cb293707.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/372264/clearlogo/656ea800b402e.png"
+            }
+          ],
+          "imdbId": "tt5875444",
+          "languageProfileId": 1,
+          "lastAired": "2026-10-21T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "This quick-witted spy drama follows a dysfunctional team of MI5 agents – and their obnoxious boss, the notorious Jackson Lamb – as they navigate the espionage world's smoke and mirrors to defend England from sinister forces.",
+          "path": "/tv/Slow Horses",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.4,
+            "votes": 168158
+          },
+          "runtime": 46,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 3
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 4
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 5
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 6
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "slow horses",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "Slow Horses",
+          "titleSlug": "slow-horses",
+          "tmdbId": 95480,
+          "tvMazeId": 45039,
+          "tvRageId": 0,
+          "tvdbId": 372264,
+          "useSceneNumbering": false,
+          "year": 2022
+        },
+        "seriesId": 24,
+        "sourceTitle": "/tv/Slow Horses/Season 05/Slow.Horses.S05E02.PROPER.iTALiAN.MULTi.1080p.WEB.H264-COGLiONE.mkv"
+      }
+    ],
+    "sortDirection": "descending",
+    "sortKey": "date",
+    "totalRecords": 1998
+  },
+  "recordedAt": "2026-11-07T08:04:08Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/history?page=1&pageSize=20&sortKey=date&sortDirection=descending&includeSeries=true&includeEpisode=true"
+  },
+  "status": 200
+}

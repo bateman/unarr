@@ -1,0 +1,120 @@
+{
+  "body": {
+    "added": "2026-03-07T11:22:23Z",
+    "airTime": "22:00",
+    "alternateTitles": [
+      {
+        "seasonNumber": -1,
+        "title": "El caballero de los Siete Reinos"
+      }
+    ],
+    "certification": "TV-MA",
+    "cleanTitle": "aknightsevenkingdoms",
+    "ended": false,
+    "firstAired": "2026-01-18T00:00:00Z",
+    "genres": [
+      "Action",
+      "Adventure",
+      "Drama",
+      "Fantasy"
+    ],
+    "id": 5,
+    "images": [
+      {
+        "coverType": "banner",
+        "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433631/banners/696d01d889ebf.jpg",
+        "url": "/MediaCover/5/banner.jpg"
+      },
+      {
+        "coverType": "poster",
+        "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433631/posters/6934ab30720ee.jpg",
+        "url": "/MediaCover/5/poster.jpg"
+      },
+      {
+        "coverType": "fanart",
+        "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433631/backgrounds/6934a76d9bbba.jpg",
+        "url": "/MediaCover/5/fanart.jpg"
+      },
+      {
+        "coverType": "clearlogo",
+        "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433631/clearlogo/696cfcd38cd4e.png",
+        "url": "/MediaCover/5/clearlogo.png"
+      }
+    ],
+    "imdbId": "tt27497448",
+    "languageProfileId": 1,
+    "lastAired": "2026-02-22T00:00:00Z",
+    "monitorNewItems": "all",
+    "monitored": true,
+    "network": "HBO",
+    "originalLanguage": {
+      "id": 1,
+      "name": "English"
+    },
+    "overview": "A century before the events of Game of Thrones, two unlikely heroes wandered Westeros, a young knight, Ser Duncan the Tall, and his squire, Egg, set in an age when the Targaryen line still holds the Iron Throne.",
+    "path": "/tv/A Knight of the Seven Kingdoms",
+    "qualityProfileId": 10,
+    "ratings": {
+      "value": 8.6,
+      "votes": 292326
+    },
+    "rootFolderPath": "/tv",
+    "runtime": 33,
+    "seasonFolder": true,
+    "seasons": [
+      {
+        "monitored": false,
+        "seasonNumber": 0,
+        "statistics": {
+          "episodeCount": 0,
+          "episodeFileCount": 0,
+          "percentOfEpisodes": 0,
+          "releaseGroups": [],
+          "sizeOnDisk": 0,
+          "totalEpisodeCount": 9
+        }
+      },
+      {
+        "monitored": false,
+        "seasonNumber": 1,
+        "statistics": {
+          "episodeCount": 0,
+          "episodeFileCount": 0,
+          "percentOfEpisodes": 0,
+          "releaseGroups": [],
+          "sizeOnDisk": 0,
+          "totalEpisodeCount": 6
+        }
+      }
+    ],
+    "seriesType": "standard",
+    "sortTitle": "knight of the seven kingdoms",
+    "statistics": {
+      "episodeCount": 0,
+      "episodeFileCount": 0,
+      "percentOfEpisodes": 0,
+      "releaseGroups": [],
+      "seasonCount": 1,
+      "sizeOnDisk": 0,
+      "totalEpisodeCount": 15
+    },
+    "status": "continuing",
+    "tags": [
+      1
+    ],
+    "title": "A Knight of the Seven Kingdoms",
+    "titleSlug": "a-knight-of-the-seven-kingdoms",
+    "tmdbId": 224372,
+    "tvMazeId": 53063,
+    "tvRageId": 0,
+    "tvdbId": 433631,
+    "useSceneNumbering": false,
+    "year": 2026
+  },
+  "recordedAt": "2026-11-07T08:04:07Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/series/5"
+  },
+  "status": 200
+}

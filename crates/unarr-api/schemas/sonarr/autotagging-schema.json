@@ -1,0 +1,437 @@
+[
+ {
+  "fields": [
+   {
+    "advanced": false,
+    "isFloat": false,
+    "label": "Genre(s)",
+    "name": "value",
+    "order": 0,
+    "privacy": "normal",
+    "type": "tag"
+   }
+  ],
+  "implementation": "GenreSpecification",
+  "implementationName": "Genre",
+  "negate": false,
+  "required": false
+ },
+ {
+  "fields": [],
+  "implementation": "MonitoredSpecification",
+  "implementationName": "Monitored",
+  "negate": false,
+  "required": false
+ },
+ {
+  "fields": [
+   {
+    "advanced": false,
+    "isFloat": false,
+    "label": "Language",
+    "name": "value",
+    "order": 0,
+    "privacy": "normal",
+    "selectOptions": [
+     {
+      "name": "Unknown",
+      "order": 0,
+      "value": 0
+     },
+     {
+      "name": "Arabic",
+      "order": 0,
+      "value": 26
+     },
+     {
+      "name": "Bosnian",
+      "order": 0,
+      "value": 41
+     },
+     {
+      "name": "Bulgarian",
+      "order": 0,
+      "value": 28
+     },
+     {
+      "name": "Catalan",
+      "order": 0,
+      "value": 38
+     },
+     {
+      "name": "Chinese",
+      "order": 0,
+      "value": 10
+     },
+     {
+      "name": "Croatian",
+      "order": 0,
+      "value": 39
+     },
+     {
+      "name": "Czech",
+      "order": 0,
+      "value": 25
+     },
+     {
+      "name": "Danish",
+      "order": 0,
+      "value": 6
+     },
+     {
+      "name": "Dutch",
+      "order": 0,
+      "value": 7
+     },
+     {
+      "name": "English",
+      "order": 0,
+      "value": 1
+     },
+     {
+      "name": "Estonian",
+      "order": 0,
+      "value": 42
+     },
+     {
+      "name": "Finnish",
+      "order": 0,
+      "value": 16
+     },
+     {
+      "name": "Flemish",
+      "order": 0,
+      "value": 19
+     },
+     {
+      "name": "French",
+      "order": 0,
+      "value": 2
+     },
+     {
+      "name": "German",
+      "order": 0,
+      "value": 4
+     },
+     {
+      "name": "Greek",
+      "order": 0,
+      "value": 20
+     },
+     {
+      "name": "Hebrew",
+      "order": 0,
+      "value": 23
+     },
+     {
+      "name": "Hindi",
+      "order": 0,
+      "value": 27
+     },
+     {
+      "name": "Hungarian",
+      "order": 0,
+      "value": 22
+     },
+     {
+      "name": "Icelandic",
+      "order": 0,
+      "value": 9
+     },
+     {
+      "name": "Indonesian",
+      "order": 0,
+      "value": 44
+     },
+     {
+      "name": "Italian",
+      "order": 0,
+      "value": 5
+     },
+     {
+      "name": "Japanese",
+      "order": 0,
+      "value": 8
+     },
+     {
+      "name": "Korean",
+      "order": 0,
+      "value": 21
+     },
+     {
+      "name": "Latvian",
+      "order": 0,
+      "value": 36
+     },
+     {
+      "name": "Lithuanian",
+      "order": 0,
+      "value": 24
+     },
+     {
+      "name": "Macedonian",
+      "order": 0,
+      "value": 45
+     },
+     {
+      "name": "Malayalam",
+      "order": 0,
+      "value": 29
+     },
+     {
+      "name": "Norwegian",
+      "order": 0,
+      "value": 15
+     },
+     {
+      "name": "Persian",
+      "order": 0,
+      "value": 37
+     },
+     {
+      "name": "Polish",
+      "order": 0,
+      "value": 12
+     },
+     {
+      "name": "Portuguese",
+      "order": 0,
+      "value": 18
+     },
+     {
+      "name": "Portuguese (Brazil)",
+      "order": 0,
+      "value": 33
+     },
+     {
+      "name": "Romanian",
+      "order": 0,
+      "value": 35
+     },
+     {
+      "name": "Russian",
+      "order": 0,
+      "value": 11
+     },
+     {
+      "name": "Serbian",
+      "order": 0,
+      "value": 40
+     },
+     {
+      "name": "Slovak",
+      "order": 0,
+      "value": 31
+     },
+     {
+      "name": "Slovenian",
+      "order": 0,
+      "value": 46
+     },
+     {
+      "name": "Spanish",
+      "order": 0,
+      "value": 3
+     },
+     {
+      "name": "Spanish (Latino)",
+      "order": 0,
+      "value": 34
+     },
+     {
+      "name": "Swedish",
+      "order": 0,
+      "value": 14
+     },
+     {
+      "name": "Tamil",
+      "order": 0,
+      "value": 43
+     },
+     {
+      "name": "Thai",
+      "order": 0,
+      "value": 32
+     },
+     {
+      "name": "Turkish",
+      "order": 0,
+      "value": 17
+     },
+     {
+      "name": "Ukrainian",
+      "order": 0,
+      "value": 30
+     },
+     {
+      "name": "Vietnamese",
+      "order": 0,
+      "value": 13
+     }
+    ],
+    "type": "select",
+    "value": 0
+   }
+  ],
+  "implementation": "OriginalLanguageSpecification",
+  "implementationName": "Original Language",
+  "negate": false,
+  "required": false
+ },
+ {
+  "fields": [
+   {
+    "advanced": false,
+    "isFloat": false,
+    "label": "Quality Profile",
+    "name": "value",
+    "order": 0,
+    "privacy": "normal",
+    "type": "qualityProfile",
+    "value": 0
+   }
+  ],
+  "implementation": "QualityProfileSpecification",
+  "implementationName": "Quality Profile",
+  "negate": false,
+  "required": false
+ },
+ {
+  "fields": [
+   {
+    "advanced": false,
+    "isFloat": false,
+    "label": "Root Folder",
+    "name": "value",
+    "order": 0,
+    "privacy": "normal",
+    "type": "rootFolder"
+   }
+  ],
+  "implementation": "RootFolderSpecification",
+  "implementationName": "Root Folder",
+  "negate": false,
+  "required": false
+ },
+ {
+  "fields": [
+   {
+    "advanced": false,
+    "isFloat": false,
+    "label": "Status",
+    "name": "status",
+    "order": 0,
+    "privacy": "normal",
+    "selectOptions": [
+     {
+      "name": "Deleted",
+      "order": -1,
+      "value": -1
+     },
+     {
+      "name": "Continuing",
+      "order": 0,
+      "value": 0
+     },
+     {
+      "name": "Ended",
+      "order": 1,
+      "value": 1
+     },
+     {
+      "name": "Upcoming",
+      "order": 2,
+      "value": 2
+     }
+    ],
+    "type": "select",
+    "value": 0
+   }
+  ],
+  "implementation": "StatusSpecification",
+  "implementationName": "Status",
+  "negate": false,
+  "required": false
+ },
+ {
+  "fields": [
+   {
+    "advanced": false,
+    "isFloat": false,
+    "label": "Tag",
+    "name": "value",
+    "order": 0,
+    "privacy": "normal",
+    "type": "seriesTag",
+    "value": 0
+   }
+  ],
+  "implementation": "TagSpecification",
+  "implementationName": "Tag",
+  "negate": false,
+  "required": false
+ },
+ {
+  "fields": [
+   {
+    "advanced": false,
+    "isFloat": false,
+    "label": "Minimum Year",
+    "name": "min",
+    "order": 0,
+    "privacy": "normal",
+    "type": "number",
+    "value": 0
+   },
+   {
+    "advanced": false,
+    "isFloat": false,
+    "label": "Maximum Year",
+    "name": "max",
+    "order": 1,
+    "privacy": "normal",
+    "type": "number",
+    "value": 0
+   }
+  ],
+  "implementation": "YearSpecification",
+  "implementationName": "Year",
+  "negate": false,
+  "required": false
+ },
+ {
+  "fields": [
+   {
+    "advanced": false,
+    "isFloat": false,
+    "label": "Series Type",
+    "name": "value",
+    "order": 0,
+    "privacy": "normal",
+    "selectOptions": [
+     {
+      "name": "Standard",
+      "order": 0,
+      "value": 0
+     },
+     {
+      "name": "Daily",
+      "order": 1,
+      "value": 1
+     },
+     {
+      "name": "Anime",
+      "order": 2,
+      "value": 2
+     }
+    ],
+    "type": "select",
+    "value": 0
+   }
+  ],
+  "implementation": "SeriesTypeSpecification",
+  "implementationName": "Series Type",
+  "negate": false,
+  "required": false
+ }
+]

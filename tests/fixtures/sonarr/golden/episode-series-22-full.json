@@ -1,0 +1,4200 @@
+{
+  "body": [
+    {
+      "airDate": "2014-04-06",
+      "airDateUtc": "2014-04-07T02:00:00Z",
+      "episodeFileId": 0,
+      "episodeNumber": 1,
+      "hasFile": false,
+      "id": 638,
+      "monitored": false,
+      "overview": "An inside look at this new HBO comedy series from Mike Judge of “Office Space” fame.",
+      "runtime": 30,
+      "seasonNumber": 0,
+      "seriesId": 22,
+      "title": "Making of Silicon Valley",
+      "tvdbId": 4851215,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "episodeFileId": 0,
+      "episodeNumber": 2,
+      "hasFile": false,
+      "id": 639,
+      "monitored": false,
+      "runtime": 30,
+      "seasonNumber": 0,
+      "seriesId": 22,
+      "title": "Techcrunch: Disrupt!",
+      "tvdbId": 6039569,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "episodeFileId": 0,
+      "episodeNumber": 3,
+      "finaleType": "season",
+      "hasFile": false,
+      "id": 640,
+      "monitored": false,
+      "runtime": 30,
+      "seasonNumber": 0,
+      "seriesId": 22,
+      "title": "The Hacker Hostel",
+      "tvdbId": 6254377,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "airDate": "2019-12-15",
+      "airDateUtc": "2019-12-16T03:00:00Z",
+      "episodeFileId": 0,
+      "episodeNumber": 4,
+      "hasFile": false,
+      "id": 641,
+      "monitored": false,
+      "overview": "An extended version of the documentary from the series finale of Silicon Valley.",
+      "runtime": 30,
+      "seasonNumber": 0,
+      "seriesId": 22,
+      "title": "Ten Years Later: The Extended Pied Piper Documentary",
+      "tvdbId": 7496731,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "episodeFileId": 0,
+      "episodeNumber": 5,
+      "finaleType": "season",
+      "hasFile": false,
+      "id": 642,
+      "monitored": false,
+      "overview": "Join Mike Judge and the stars of 'Silicon Valley' for this look at the incredible detail that goes into the comical code gags and more.",
+      "runtime": 5,
+      "seasonNumber": 0,
+      "seriesId": 22,
+      "title": "Reality Bytes",
+      "tvdbId": 8143904,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 1,
+      "airDate": "2014-04-06",
+      "airDateUtc": "2014-04-07T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:47Z",
+        "id": 970,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 0,
+          "audioChannels": 5.1,
+          "audioCodec": "DTS-HD MA",
+          "audioLanguages": "eng/eng",
+          "audioStreamCount": 2,
+          "resolution": "1920x1080",
+          "runTime": "29:21",
+          "scanType": "Progressive",
+          "subtitles": "eng/eng/eng/dan/fin/fre/ger/nor/spa/swe",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 01/Silicon.Valley.S01E01.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "quality": {
+          "quality": {
+            "id": 20,
+            "name": "Bluray-1080p Remux",
+            "resolution": 1080,
+            "source": "blurayRaw"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Season 01/Silicon.Valley.S01E01.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "releaseGroup": "NOGRP",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 1,
+        "seriesId": 22,
+        "size": 8177501633
+      },
+      "episodeFileId": 970,
+      "episodeNumber": 1,
+      "hasFile": true,
+      "id": 643,
+      "monitored": true,
+      "overview": "Attending an elaborate launch party, Richard and his computer programmer friends - Big Head, Dinesh and Gilfoyle - dream of making it big. Instead, they're living in the communal Hacker Hostel owned by former programmer Erlich, who gets to claim ten percent of anything they invent there. When it becomes clear that Richard has developed a powerful compression algorithm for his website, Pied Piper, he finds himself courted by Gavin Belson, his egomaniacal corporate boss, who offers a $10 million buyout by his firm, Hooli. But Richard holds back when well-known investor Peter Gregory makes a counteroffer.",
+      "runtime": 29,
+      "seasonNumber": 1,
+      "seriesId": 22,
+      "title": "Minimum Viable Product",
+      "tvdbId": 4765079,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 2,
+      "airDate": "2014-04-13",
+      "airDateUtc": "2014-04-14T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:48Z",
+        "id": 975,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 0,
+          "audioChannels": 5.1,
+          "audioCodec": "DTS-HD MA",
+          "audioLanguages": "eng/eng",
+          "audioStreamCount": 2,
+          "resolution": "1920x1080",
+          "runTime": "28:05",
+          "scanType": "Progressive",
+          "subtitles": "eng/eng/eng/dan/fin/fre/ger/nor/spa/swe",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 01/Silicon.Valley.S01E02.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "quality": {
+          "quality": {
+            "id": 20,
+            "name": "Bluray-1080p Remux",
+            "resolution": 1080,
+            "source": "blurayRaw"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Season 01/Silicon.Valley.S01E02.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "releaseGroup": "NOGRP",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 1,
+        "seriesId": 22,
+        "size": 7854389782
+      },
+      "episodeFileId": 975,
+      "episodeNumber": 2,
+      "hasFile": true,
+      "id": 644,
+      "monitored": true,
+      "overview": "After a celebratory party at the Hacker Hostel, Richard and Erlich learn that Peter Gregory won't pay up until they deliver a viable business plan that includes a slimmed-down staff. A desperate Richard hires former Belson underling Jared, and they set about trying to trim the fat. While Gilfoyle and Dinesh prove essential, Big Head's place in the company is less certain.",
+      "runtime": 28,
+      "seasonNumber": 1,
+      "seriesId": 22,
+      "title": "The Cap Table",
+      "tvdbId": 4794504,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 3,
+      "airDate": "2014-04-20",
+      "airDateUtc": "2014-04-21T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:48Z",
+        "id": 980,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 0,
+          "audioChannels": 5.1,
+          "audioCodec": "DTS-HD MA",
+          "audioLanguages": "eng/eng",
+          "audioStreamCount": 2,
+          "resolution": "1920x1080",
+          "runTime": "28:39",
+          "scanType": "Progressive",
+          "subtitles": "eng/eng/eng/dan/fin/fre/ger/nor/spa/swe",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 01/Silicon.Valley.S01E03.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "quality": {
+          "quality": {
+            "id": 20,
+            "name": "Bluray-1080p Remux",
+            "resolution": 1080,
+            "source": "blurayRaw"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Season 01/Silicon.Valley.S01E03.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "releaseGroup": "NOGRP",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 1,
+        "seriesId": 22,
+        "size": 7964483681
+      },
+      "episodeFileId": 980,
+      "episodeNumber": 3,
+      "hasFile": true,
+      "id": 645,
+      "monitored": true,
+      "overview": "While Gavin Belson begins to hype Nucleus, a competing compression platform, Richard learns that the name Pied Piper is already registered to a sprinkler company, forcing him to negotiate. Meanwhile, Erlich goes on a vision quest for a new company name, and Peter Gregory proves elusive when one of his companies asks for money.",
+      "runtime": 29,
+      "seasonNumber": 1,
+      "seriesId": 22,
+      "title": "Articles of Incorporation",
+      "tvdbId": 4794505,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 4,
+      "airDate": "2014-04-27",
+      "airDateUtc": "2014-04-28T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:49Z",
+        "id": 985,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 0,
+          "audioChannels": 5.1,
+          "audioCodec": "DTS-HD MA",
+          "audioLanguages": "eng/eng",
+          "audioStreamCount": 2,
+          "resolution": "1920x1080",
+          "runTime": "28:30",
+          "scanType": "Progressive",
+          "subtitles": "eng/eng/eng/dan/fin/fre/ger/nor/spa/swe",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 01/Silicon.Valley.S01E04.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "quality": {
+          "quality": {
+            "id": 20,
+            "name": "Bluray-1080p Remux",
+            "resolution": 1080,
+            "source": "blurayRaw"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Season 01/Silicon.Valley.S01E04.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "releaseGroup": "NOGRP",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 1,
+        "seriesId": 22,
+        "size": 7952132983
+      },
+      "episodeFileId": 985,
+      "episodeNumber": 4,
+      "hasFile": true,
+      "id": 646,
+      "monitored": true,
+      "overview": "At Peter's toga party, Richard drunkenly promises to make Erlich a board member, which he regrets the next morning. After being unassigned at Hooli, Big Head finds others like him who have made careers out of doing nothing. Richard struggles to put Pied Piper's vision into words for a presentation without Erlich; later, he discovers an interesting connection between Peter and Gavin Belson.",
+      "runtime": 28,
+      "seasonNumber": 1,
+      "seriesId": 22,
+      "title": "Fiduciary Duties",
+      "tvdbId": 4794506,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 5,
+      "airDate": "2014-05-04",
+      "airDateUtc": "2014-05-05T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:50Z",
+        "id": 990,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 0,
+          "audioChannels": 5.1,
+          "audioCodec": "DTS-HD MA",
+          "audioLanguages": "eng/eng",
+          "audioStreamCount": 2,
+          "resolution": "1920x1080",
+          "runTime": "28:30",
+          "scanType": "Progressive",
+          "subtitles": "eng/eng/eng/dan/fin/fre/ger/nor/spa/swe",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 01/Silicon.Valley.S01E05.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "quality": {
+          "quality": {
+            "id": 20,
+            "name": "Bluray-1080p Remux",
+            "resolution": 1080,
+            "source": "blurayRaw"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Season 01/Silicon.Valley.S01E05.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "releaseGroup": "NOGRP",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 1,
+        "seriesId": 22,
+        "size": 7935307841
+      },
+      "episodeFileId": 990,
+      "episodeNumber": 5,
+      "hasFile": true,
+      "id": 647,
+      "monitored": true,
+      "overview": "Erlich taps a graffiti artist to design Pied Piper's logo, with predictably controversial results. Meanwhile, Richard learns he doesn't have much time to prepare for a live demonstration at TechCrunch Disrupt; Gavin Belson and Peter Gregory have an unexpected encounter; and Jared works on the company's efficiency.",
+      "runtime": 28,
+      "seasonNumber": 1,
+      "seriesId": 22,
+      "title": "Signaling Risk",
+      "tvdbId": 4794507,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 6,
+      "airDate": "2014-05-11",
+      "airDateUtc": "2014-05-12T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:51Z",
+        "id": 997,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 0,
+          "audioChannels": 5.1,
+          "audioCodec": "DTS-HD MA",
+          "audioLanguages": "eng/eng",
+          "audioStreamCount": 2,
+          "resolution": "1920x1080",
+          "runTime": "28:31",
+          "scanType": "Progressive",
+          "subtitles": "eng/eng/eng/dan/fin/fre/ger/nor/spa/swe",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 01/Silicon.Valley.S01E06.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "quality": {
+          "quality": {
+            "id": 20,
+            "name": "Bluray-1080p Remux",
+            "resolution": 1080,
+            "source": "blurayRaw"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Season 01/Silicon.Valley.S01E06.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "releaseGroup": "NOGRP",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 1,
+        "seriesId": 22,
+        "size": 5361852306
+      },
+      "episodeFileId": 997,
+      "episodeNumber": 6,
+      "hasFile": true,
+      "id": 648,
+      "monitored": true,
+      "overview": "Richard feels threatened when the team hires The Carver a hacker with a notorious reputation, to help with Pied Piper’s cloud. Jared finds himself taken for a ride when he seeks out Peter Gregory’s signature. Erlich and Dinesh compete for the attention of Tara, Gilfoyles visiting girlfriend. Later, Dinesh faces a sexual dilemma.",
+      "runtime": 28,
+      "seasonNumber": 1,
+      "seriesId": 22,
+      "title": "Third Party Insourcing",
+      "tvdbId": 4794508,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 7,
+      "airDate": "2014-05-18",
+      "airDateUtc": "2014-05-19T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:52Z",
+        "id": 1002,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 0,
+          "audioChannels": 5.1,
+          "audioCodec": "DTS-HD MA",
+          "audioLanguages": "eng/eng",
+          "audioStreamCount": 2,
+          "resolution": "1920x1080",
+          "runTime": "28:09",
+          "scanType": "Progressive",
+          "subtitles": "eng/eng/eng/dan/fin/fre/ger/nor/spa/swe",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 01/Silicon.Valley.S01E07.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "quality": {
+          "quality": {
+            "id": 20,
+            "name": "Bluray-1080p Remux",
+            "resolution": 1080,
+            "source": "blurayRaw"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Season 01/Silicon.Valley.S01E07.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "releaseGroup": "NOGRP",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 1,
+        "seriesId": 22,
+        "size": 5352272311
+      },
+      "episodeFileId": 1002,
+      "episodeNumber": 7,
+      "hasFile": true,
+      "id": 649,
+      "monitored": true,
+      "overview": "At TechCrunch Disrupt, Richard feels the pressure to finish his demo, but finds himself distracted by a girl he dated briefly, who’s now spreading rumors about him. Jared worries that Monica is taking his place in the company. Dinesh develops a crush on a girl at a neighboring booth. Erlich’s scandalous past connection to one of the judges threatens Pied Piper’s chances.",
+      "runtime": 28,
+      "seasonNumber": 1,
+      "seriesId": 22,
+      "title": "Proof of Concept",
+      "tvdbId": 4794509,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 8,
+      "airDate": "2014-06-01",
+      "airDateUtc": "2014-06-02T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:53Z",
+        "id": 1007,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 0,
+          "audioChannels": 5.1,
+          "audioCodec": "DTS-HD MA",
+          "audioLanguages": "eng/eng",
+          "audioStreamCount": 2,
+          "resolution": "1920x1080",
+          "runTime": "28:31",
+          "scanType": "Progressive",
+          "subtitles": "eng/eng/eng/dan/fin/fre/ger/nor/spa/swe",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 01/Silicon.Valley.S01E08.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "quality": {
+          "quality": {
+            "id": 20,
+            "name": "Bluray-1080p Remux",
+            "resolution": 1080,
+            "source": "blurayRaw"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Season 01/Silicon.Valley.S01E08.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "releaseGroup": "NOGRP",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 1,
+        "seriesId": 22,
+        "size": 5423713673
+      },
+      "episodeFileId": 1007,
+      "episodeNumber": 8,
+      "finaleType": "season",
+      "hasFile": true,
+      "id": 650,
+      "monitored": true,
+      "overview": "Poised to compete at TechCrunch Disrupt, the guys of Pied Piper become worried after an impressive presentation by Gavin Belson. As Jared tries to pivot the company, Richard is inspired to make big changes at the last minute.",
+      "runtime": 28,
+      "seasonNumber": 1,
+      "seriesId": 22,
+      "title": "Optimal Tip-to-Tip Efficiency",
+      "tvdbId": 4822932,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 9,
+      "airDate": "2015-04-12",
+      "airDateUtc": "2015-04-13T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:47Z",
+        "id": 971,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 0,
+          "audioChannels": 5.1,
+          "audioCodec": "DTS-HD MA",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "29:32",
+          "scanType": "Progressive",
+          "subtitles": "eng/eng/eng/fre/spa/dan/fin/nor/swe",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 02/Silicon.Valley.S02E01.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "quality": {
+          "quality": {
+            "id": 20,
+            "name": "Bluray-1080p Remux",
+            "resolution": 1080,
+            "source": "blurayRaw"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Season 02/Silicon.Valley.S02E01.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "releaseGroup": "NOGRP",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 2,
+        "seriesId": 22,
+        "size": 6344807318
+      },
+      "episodeFileId": 971,
+      "episodeNumber": 1,
+      "hasFile": true,
+      "id": 651,
+      "monitored": true,
+      "overview": "Following their success at TechCrunch Disrupt, the guys of Pied Piper find themselves aggressively courted by every VC in Silicon Valley. With Peter Gregory’s company facing major changes, Monica tries to do what’s best while dealing with new managing partner Laurie, a competitive bigwig who will do anything to hold onto Pied Piper. Later, Richard makes a decision about the company’s future and faces big news from Hooli.",
+      "runtime": 30,
+      "seasonNumber": 2,
+      "seriesId": 22,
+      "title": "Sand Hill Shuffle",
+      "tvdbId": 5091616,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 10,
+      "airDate": "2015-04-19",
+      "airDateUtc": "2015-04-20T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:48Z",
+        "id": 977,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 0,
+          "audioChannels": 5.1,
+          "audioCodec": "DTS-HD MA",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "26:46",
+          "scanType": "Progressive",
+          "subtitles": "eng/eng/eng/fre/spa/dan/fin/nor/swe",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 02/Silicon.Valley.S02E02.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "quality": {
+          "quality": {
+            "id": 20,
+            "name": "Bluray-1080p Remux",
+            "resolution": 1080,
+            "source": "blurayRaw"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Season 02/Silicon.Valley.S02E02.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "releaseGroup": "NOGRP",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 2,
+        "seriesId": 22,
+        "size": 5606350389
+      },
+      "episodeFileId": 977,
+      "episodeNumber": 2,
+      "hasFile": true,
+      "id": 652,
+      "monitored": true,
+      "overview": "In the wake of Hooli’s bombshell, Richard and the guys struggle to find a backer as they face legal and financial woes. Monica attempts to balance her interest in Pied Piper with her job. A cash-strapped Dinesh tries to put an end to the Kickstarter campaign for his cousin’s new app, Bro. Richard gets a surprising offer.",
+      "runtime": 27,
+      "seasonNumber": 2,
+      "seriesId": 22,
+      "title": "Runaway Devaluation",
+      "tvdbId": 5148405,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 11,
+      "airDate": "2015-04-26",
+      "airDateUtc": "2015-04-27T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:49Z",
+        "id": 982,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 0,
+          "audioChannels": 5.1,
+          "audioCodec": "DTS-HD MA",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "27:56",
+          "scanType": "Progressive",
+          "subtitles": "eng/eng/eng/fre/spa/dan/fin/nor/swe",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 02/Silicon.Valley.S02E03.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "quality": {
+          "quality": {
+            "id": 20,
+            "name": "Bluray-1080p Remux",
+            "resolution": 1080,
+            "source": "blurayRaw"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Season 02/Silicon.Valley.S02E03.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "releaseGroup": "NOGRP",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 2,
+        "seriesId": 22,
+        "size": 5983946757
+      },
+      "episodeFileId": 982,
+      "episodeNumber": 3,
+      "hasFile": true,
+      "id": 653,
+      "monitored": true,
+      "overview": "While considering Gavin’s proposal, Richard is approached by Russ Hanneman, an image-conscious billionaire who wants to back Pied Piper, but may not be as “hands-off” as he claims. Gilfoyle and Dinesh play hardball to get what they want; Gavin finds a new strategy in dealing with the enemy.",
+      "runtime": 28,
+      "seasonNumber": 2,
+      "seriesId": 22,
+      "title": "Bad Money",
+      "tvdbId": 5148406,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 12,
+      "airDate": "2015-05-03",
+      "airDateUtc": "2015-05-04T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:49Z",
+        "id": 987,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 0,
+          "audioChannels": 5.1,
+          "audioCodec": "DTS-HD MA",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "28:31",
+          "scanType": "Progressive",
+          "subtitles": "eng/eng/eng/fre/spa/dan/fin/nor/swe",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 02/Silicon.Valley.S02E04.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "quality": {
+          "quality": {
+            "id": 20,
+            "name": "Bluray-1080p Remux",
+            "resolution": 1080,
+            "source": "blurayRaw"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Season 02/Silicon.Valley.S02E04.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "releaseGroup": "NOGRP",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 2,
+        "seriesId": 22,
+        "size": 6091576259
+      },
+      "episodeFileId": 987,
+      "episodeNumber": 4,
+      "hasFile": true,
+      "id": 654,
+      "monitored": true,
+      "overview": "Richard butts heads with Erlich over a prospective hire, while Dinesh and Gilfoyle become suspicious that a new employee they recommended is commanding a higher salary. Big Head gets a surprising promotion at Hooli. At a board meeting, Monica and Richard find themselves outvoted; Jared institutes a workplace harassment policy.",
+      "runtime": 28,
+      "seasonNumber": 2,
+      "seriesId": 22,
+      "title": "The Lady",
+      "tvdbId": 5148407,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 13,
+      "airDate": "2015-05-10",
+      "airDateUtc": "2015-05-11T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:50Z",
+        "id": 992,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 0,
+          "audioChannels": 5.1,
+          "audioCodec": "DTS-HD MA",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "28:30",
+          "scanType": "Progressive",
+          "subtitles": "eng/eng/eng/fre/spa/dan/fin/nor/swe",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 02/Silicon.Valley.S02E05.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "quality": {
+          "quality": {
+            "id": 20,
+            "name": "Bluray-1080p Remux",
+            "resolution": 1080,
+            "source": "blurayRaw"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Season 02/Silicon.Valley.S02E05.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "releaseGroup": "NOGRP",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 2,
+        "seriesId": 22,
+        "size": 6132520955
+      },
+      "episodeFileId": 992,
+      "episodeNumber": 5,
+      "hasFile": true,
+      "id": 655,
+      "monitored": true,
+      "overview": "Gavin’s interference causes Pied Piper to struggle with securing their expansion, while a nosy neighbor puts the guys at risk. Gilfoyle takes on the task of building servers, and an overstressed Richard reluctantly takes in Jared as a roommate. Big Head’s management skills are questioned, and Nucleus’ debut zeroes in on a big event.",
+      "runtime": 28,
+      "seasonNumber": 2,
+      "seriesId": 22,
+      "title": "Server Space",
+      "tvdbId": 5195798,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 14,
+      "airDate": "2015-05-17",
+      "airDateUtc": "2015-05-18T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:51Z",
+        "id": 996,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 0,
+          "audioChannels": 5.1,
+          "audioCodec": "DTS-HD MA",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "28:31",
+          "scanType": "Progressive",
+          "subtitles": "eng/eng/eng/fre/spa/dan/fin/nor/swe",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 02/Silicon.Valley.S02E06.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "quality": {
+          "quality": {
+            "id": 20,
+            "name": "Bluray-1080p Remux",
+            "resolution": 1080,
+            "source": "blurayRaw"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Season 02/Silicon.Valley.S02E06.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "releaseGroup": "NOGRP",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 2,
+        "seriesId": 22,
+        "size": 6132695279
+      },
+      "episodeFileId": 996,
+      "episodeNumber": 6,
+      "hasFile": true,
+      "id": 656,
+      "monitored": true,
+      "overview": "When Monica encourages the guys to pounce on a livestream opportunity, Erlich reconnects with his old mentee, Double-A, an energy drink billionaire, but Richard finds out their friendship isn’t quite what Erlich thinks. After learning that the livestream might hit a snag, Gilfoyle and Dinesh brainstorm their options. Jared encourages a friendship between Carla and Monica.",
+      "runtime": 28,
+      "seasonNumber": 2,
+      "seriesId": 22,
+      "title": "Homicide",
+      "tvdbId": 5195799,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 15,
+      "airDate": "2015-05-24",
+      "airDateUtc": "2015-05-25T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:51Z",
+        "id": 1000,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 0,
+          "audioChannels": 5.1,
+          "audioCodec": "DTS-HD MA",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "28:29",
+          "scanType": "Progressive",
+          "subtitles": "eng/eng/eng/fre/spa/dan/fin/nor/swe",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 02/Silicon.Valley.S02E07.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "quality": {
+          "quality": {
+            "id": 20,
+            "name": "Bluray-1080p Remux",
+            "resolution": 1080,
+            "source": "blurayRaw"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Season 02/Silicon.Valley.S02E07.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "releaseGroup": "NOGRP",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 2,
+        "seriesId": 22,
+        "size": 6129692106
+      },
+      "episodeFileId": 1000,
+      "episodeNumber": 7,
+      "hasFile": true,
+      "id": 657,
+      "monitored": true,
+      "overview": "With the Pied Piper team fielding job offers and Russ distracted by financial news, Richard faces the prospect of either merging with a nemesis or folding. Gavin attempts to turn Nucleus’ failure into a success. Dinesh tries his hand at wooing a woman online. After Gilfoyle suggests a risky move, Richard reaches out to an unconventional client.",
+      "runtime": 28,
+      "seasonNumber": 2,
+      "seriesId": 22,
+      "title": "Adult Content",
+      "tvdbId": 5195800,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 16,
+      "airDate": "2015-05-31",
+      "airDateUtc": "2015-06-01T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:52Z",
+        "id": 1006,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 0,
+          "audioChannels": 5.1,
+          "audioCodec": "DTS-HD MA",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "28:14",
+          "scanType": "Progressive",
+          "subtitles": "eng/eng/eng/fre/spa/dan/fin/nor/swe",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 02/Silicon.Valley.S02E08.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "quality": {
+          "quality": {
+            "id": 20,
+            "name": "Bluray-1080p Remux",
+            "resolution": 1080,
+            "source": "blurayRaw"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Season 02/Silicon.Valley.S02E08.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "releaseGroup": "NOGRP",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 2,
+        "seriesId": 22,
+        "size": 6069992492
+      },
+      "episodeFileId": 1006,
+      "episodeNumber": 8,
+      "hasFile": true,
+      "id": 658,
+      "monitored": true,
+      "overview": "When Richard takes pity on a competitor, he accidentally sparks a feud that finds him paranoid about security. Jared exaggerates Pied Piper’s size to get results. Facing pressure from board members, Gavin looks to place responsibility elsewhere.",
+      "runtime": 28,
+      "seasonNumber": 2,
+      "seriesId": 22,
+      "title": "White Hat/Black Hat",
+      "tvdbId": 5195801,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 17,
+      "airDate": "2015-06-07",
+      "airDateUtc": "2015-06-08T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:53Z",
+        "id": 1010,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 0,
+          "audioChannels": 5.1,
+          "audioCodec": "DTS-HD MA",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "29:49",
+          "scanType": "Progressive",
+          "subtitles": "eng/eng/eng/fre/spa/dan/fin/nor/swe",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 02/Silicon.Valley.S02E09.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "quality": {
+          "quality": {
+            "id": 20,
+            "name": "Bluray-1080p Remux",
+            "resolution": 1080,
+            "source": "blurayRaw"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Season 02/Silicon.Valley.S02E09.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "releaseGroup": "NOGRP",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 2,
+        "seriesId": 22,
+        "size": 6389840295
+      },
+      "episodeFileId": 1010,
+      "episodeNumber": 9,
+      "hasFile": true,
+      "id": 659,
+      "monitored": true,
+      "overview": "When Pied Piper and Hooli enter binding arbitration, Erlich demands to be put on the stand. Big Head finds himself propped up. Richard worries Hooli’s claim could have legs.",
+      "runtime": 30,
+      "seasonNumber": 2,
+      "seriesId": 22,
+      "title": "Binding Arbitration",
+      "tvdbId": 5196851,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 18,
+      "airDate": "2015-06-14",
+      "airDateUtc": "2015-06-15T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:54Z",
+        "id": 1014,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 0,
+          "audioChannels": 5.1,
+          "audioCodec": "DTS-HD MA",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "28:22",
+          "scanType": "Progressive",
+          "subtitles": "eng/eng/eng/fre/spa/dan/fin/nor/swe",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 02/Silicon.Valley.S02E10.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "quality": {
+          "quality": {
+            "id": 20,
+            "name": "Bluray-1080p Remux",
+            "resolution": 1080,
+            "source": "blurayRaw"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Season 02/Silicon.Valley.S02E10.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "releaseGroup": "NOGRP",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 2,
+        "seriesId": 22,
+        "size": 6112376853
+      },
+      "episodeFileId": 1014,
+      "episodeNumber": 10,
+      "finaleType": "season",
+      "hasFile": true,
+      "id": 660,
+      "monitored": true,
+      "overview": "As the guys await the verdict on Pied Piper’s fate, an unexpected real-life drama draws a spike in traffic to their livestream and leaves them fighting to hold things together – literally. While Erlich considers his future, Richard scrambles to save Pied Piper’s.",
+      "runtime": 28,
+      "seasonNumber": 2,
+      "seriesId": 22,
+      "title": "Two Days of the Condor",
+      "tvdbId": 5196852,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 19,
+      "airDate": "2016-04-24",
+      "airDateUtc": "2016-04-25T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:47Z",
+        "id": 972,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 0,
+          "audioChannels": 5.1,
+          "audioCodec": "DTS-HD MA",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "28:54",
+          "scanType": "Progressive",
+          "subtitles": "eng/eng/eng/fre/spa/dan/fin/nor/swe",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 03/Silicon.Valley.S03E01.Founder.Friendly.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "quality": {
+          "quality": {
+            "id": 20,
+            "name": "Bluray-1080p Remux",
+            "resolution": 1080,
+            "source": "blurayRaw"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Season 03/Silicon.Valley.S03E01.Founder.Friendly.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "releaseGroup": "NOGRP",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 3,
+        "seriesId": 22,
+        "size": 6221714062
+      },
+      "episodeFileId": 972,
+      "episodeNumber": 1,
+      "hasFile": true,
+      "id": 661,
+      "monitored": true,
+      "overview": "After being unceremoniously fired, an angry Richard faces a tough decision: accept the diminished role of CTO, or leave Pied Piper for good. Erlich takes a shine to Jack Barker, Laurie’s new choice of CEO, while Dinesh and Gilfoyle weigh their options in Richard’s absence. At Hooli, Gavin tries to improve his image by admitting failure, and Big Head gets wind of major changes.",
+      "runtime": 29,
+      "seasonNumber": 3,
+      "seriesId": 22,
+      "title": "Founder Friendly",
+      "tvdbId": 5444157,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 20,
+      "airDate": "2016-05-01",
+      "airDateUtc": "2016-05-02T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:48Z",
+        "id": 976,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 0,
+          "audioChannels": 5.1,
+          "audioCodec": "DTS-HD MA",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "28:28",
+          "scanType": "Progressive",
+          "subtitles": "eng/eng/eng/fre/spa/dan/fin/nor/swe",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 03/Silicon.Valley.S03E02.Two.in.the.Box.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "quality": {
+          "quality": {
+            "id": 20,
+            "name": "Bluray-1080p Remux",
+            "resolution": 1080,
+            "source": "blurayRaw"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Season 03/Silicon.Valley.S03E02.Two.in.the.Box.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "releaseGroup": "NOGRP",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 3,
+        "seriesId": 22,
+        "size": 6126479004
+      },
+      "episodeFileId": 976,
+      "episodeNumber": 2,
+      "hasFile": true,
+      "id": 662,
+      "monitored": true,
+      "overview": "The new and improved Pied Piper impresses Dinesh and Gilfoyle, but worries Richard; Jared and Erlich both face housing issues; Gavin suggests a controversial move.",
+      "runtime": 28,
+      "seasonNumber": 3,
+      "seriesId": 22,
+      "title": "Two in the Box",
+      "tvdbId": 5493954,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 21,
+      "airDate": "2016-05-08",
+      "airDateUtc": "2016-05-09T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:48Z",
+        "id": 981,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 0,
+          "audioChannels": 5.1,
+          "audioCodec": "DTS-HD MA",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "28:16",
+          "scanType": "Progressive",
+          "subtitles": "eng/eng/eng/fre/spa/dan/fin/nor/swe",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 03/Silicon.Valley.S03E03.Meinertzhagens.Haversack.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "quality": {
+          "quality": {
+            "id": 20,
+            "name": "Bluray-1080p Remux",
+            "resolution": 1080,
+            "source": "blurayRaw"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Season 03/Silicon.Valley.S03E03.Meinertzhagens.Haversack.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "releaseGroup": "NOGRP",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 3,
+        "seriesId": 22,
+        "size": 6086852129
+      },
+      "episodeFileId": 981,
+      "episodeNumber": 3,
+      "hasFile": true,
+      "id": 663,
+      "monitored": true,
+      "overview": "Richard searches for a way around Jack. Gilfoyle opens himself up to recruiters. Dinesh draws unwanted attention from a recent purchase.",
+      "runtime": 28,
+      "seasonNumber": 3,
+      "seriesId": 22,
+      "title": "Meinertzhagen's Haversack",
+      "tvdbId": 5493955,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 22,
+      "airDate": "2016-05-15",
+      "airDateUtc": "2016-05-16T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:49Z",
+        "id": 986,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 0,
+          "audioChannels": 5.1,
+          "audioCodec": "DTS-HD MA",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "29:00",
+          "scanType": "Progressive",
+          "subtitles": "eng/eng/eng/fre/spa/dan/fin/nor/swe",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 03/Silicon.Valley.S03E04.Maleant.Data.Systems.Solutions.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "quality": {
+          "quality": {
+            "id": 20,
+            "name": "Bluray-1080p Remux",
+            "resolution": 1080,
+            "source": "blurayRaw"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Season 03/Silicon.Valley.S03E04.Maleant.Data.Systems.Solutions.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "releaseGroup": "NOGRP",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 3,
+        "seriesId": 22,
+        "size": 6252023723
+      },
+      "episodeFileId": 986,
+      "episodeNumber": 4,
+      "hasFile": true,
+      "id": 664,
+      "monitored": true,
+      "overview": "The Pied Piper guys struggle to phone it in. Erlich faces competition. Monica takes a stand. Gavin makes a decision about Nucleus.",
+      "runtime": 29,
+      "seasonNumber": 3,
+      "seriesId": 22,
+      "title": "Maleant Data Systems Solutions",
+      "tvdbId": 5493956,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 23,
+      "airDate": "2016-05-22",
+      "airDateUtc": "2016-05-23T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:50Z",
+        "id": 991,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 0,
+          "audioChannels": 5.1,
+          "audioCodec": "DTS-HD MA",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "28:27",
+          "scanType": "Progressive",
+          "subtitles": "eng/eng/eng/fre/spa/dan/fin/nor/swe",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 03/Silicon.Valley.S03E05.The.Empty.Chair.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "quality": {
+          "quality": {
+            "id": 20,
+            "name": "Bluray-1080p Remux",
+            "resolution": 1080,
+            "source": "blurayRaw"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Season 03/Silicon.Valley.S03E05.The.Empty.Chair.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "releaseGroup": "NOGRP",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 3,
+        "seriesId": 22,
+        "size": 6141408695
+      },
+      "episodeFileId": 991,
+      "episodeNumber": 5,
+      "hasFile": true,
+      "id": 665,
+      "monitored": true,
+      "overview": "Richard lets his ego get in the way at an interview. Dinesh, Gilfoyle and Jared misplace hardware. Erlich pitches his plans to Big Head.",
+      "runtime": 28,
+      "seasonNumber": 3,
+      "seriesId": 22,
+      "title": "The Empty Chair",
+      "tvdbId": 5493957,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 24,
+      "airDate": "2016-05-29",
+      "airDateUtc": "2016-05-30T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:51Z",
+        "id": 995,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 0,
+          "audioChannels": 5.1,
+          "audioCodec": "DTS-HD MA",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "28:31",
+          "scanType": "Progressive",
+          "subtitles": "eng/eng/eng/fre/spa/dan/fin/nor/swe",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 03/Silicon.Valley.S03E06.Bachmanity.Insanity.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "quality": {
+          "quality": {
+            "id": 20,
+            "name": "Bluray-1080p Remux",
+            "resolution": 1080,
+            "source": "blurayRaw"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Season 03/Silicon.Valley.S03E06.Bachmanity.Insanity.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "releaseGroup": "NOGRP",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 3,
+        "seriesId": 22,
+        "size": 6143370139
+      },
+      "episodeFileId": 995,
+      "episodeNumber": 6,
+      "hasFile": true,
+      "id": 666,
+      "monitored": true,
+      "overview": "Richard’s new relationship is threatened by neuroses. Big Head and Erlich’s launch party has snags. Dinesh falls for a foreign coworker.",
+      "runtime": 28,
+      "seasonNumber": 3,
+      "seriesId": 22,
+      "title": "Bachmanity Insanity",
+      "tvdbId": 5493958,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 25,
+      "airDate": "2016-06-05",
+      "airDateUtc": "2016-06-06T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:52Z",
+        "id": 1001,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 0,
+          "audioChannels": 5.1,
+          "audioCodec": "DTS-HD MA",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "28:26",
+          "scanType": "Progressive",
+          "subtitles": "eng/eng/eng/fre/spa/dan/fin/nor/swe",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 03/Silicon.Valley.S03E07.To.Build.a.Better.Beta.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "quality": {
+          "quality": {
+            "id": 20,
+            "name": "Bluray-1080p Remux",
+            "resolution": 1080,
+            "source": "blurayRaw"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Season 03/Silicon.Valley.S03E07.To.Build.a.Better.Beta.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "releaseGroup": "NOGRP",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 3,
+        "seriesId": 22,
+        "size": 6107924716
+      },
+      "episodeFileId": 1001,
+      "episodeNumber": 7,
+      "hasFile": true,
+      "id": 667,
+      "monitored": true,
+      "overview": "A beta version of Pied Piper gets an unexpected reception as Dinesh's lack of friends worries him, but Gilfoyle thinks he's stretching the truth. Amanda isn't sure she can dole out criticism. A strapped Erlich mulls a big decision. The Nucleus team tackles a difficult challenge from Gavin.",
+      "runtime": 28,
+      "seasonNumber": 3,
+      "seriesId": 22,
+      "title": "To Build a Better Beta",
+      "tvdbId": 5598486,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 26,
+      "airDate": "2016-06-12",
+      "airDateUtc": "2016-06-13T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:52Z",
+        "id": 1005,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 0,
+          "audioChannels": 5.1,
+          "audioCodec": "DTS-HD MA",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "28:27",
+          "scanType": "Progressive",
+          "subtitles": "eng/eng/eng/fre/spa/dan/fin/nor/swe",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 03/Silicon.Valley.S03E08.Bachmans.Earnings.Over-Ride.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "quality": {
+          "quality": {
+            "id": 20,
+            "name": "Bluray-1080p Remux",
+            "resolution": 1080,
+            "source": "blurayRaw"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Season 03/Silicon.Valley.S03E08.Bachmans.Earnings.Over-Ride.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "releaseGroup": "NOGRP",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 3,
+        "seriesId": 22,
+        "size": 6140935409
+      },
+      "episodeFileId": 1005,
+      "episodeNumber": 8,
+      "hasFile": true,
+      "id": 668,
+      "monitored": true,
+      "overview": "Erlich tries to be honest with Richard, who has mixed emotions about their friendship and the future of Pied Piper. Jared's new company apparel turns heads but fuels yet another clash between Dinesh and Gilfoyle.",
+      "runtime": 28,
+      "seasonNumber": 3,
+      "seriesId": 22,
+      "title": "Bachman's Earnings Over-Ride",
+      "tvdbId": 5598487,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 27,
+      "airDate": "2016-06-19",
+      "airDateUtc": "2016-06-20T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:53Z",
+        "id": 1011,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 0,
+          "audioChannels": 5.1,
+          "audioCodec": "DTS-HD MA",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "29:01",
+          "scanType": "Progressive",
+          "subtitles": "eng/eng/eng/fre/spa/dan/fin/nor/swe",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 03/Silicon.Valley.S03E09.Daily.Active.Users.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "quality": {
+          "quality": {
+            "id": 20,
+            "name": "Bluray-1080p Remux",
+            "resolution": 1080,
+            "source": "blurayRaw"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Season 03/Silicon.Valley.S03E09.Daily.Active.Users.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "releaseGroup": "NOGRP",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 3,
+        "seriesId": 22,
+        "size": 6273374510
+      },
+      "episodeFileId": 1011,
+      "episodeNumber": 9,
+      "hasFile": true,
+      "id": 669,
+      "monitored": true,
+      "overview": "Shocking stats are revealed and prompt Richard to bridge the gap between Pied Piper and its users, but Jared must go to extremes to keep everything intact. Gavin tries to recapture his former glory by bringing in new talent after discovering secrets about the competition.",
+      "runtime": 29,
+      "seasonNumber": 3,
+      "seriesId": 22,
+      "title": "Daily Active Users",
+      "tvdbId": 5598488,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 28,
+      "airDate": "2016-06-26",
+      "airDateUtc": "2016-06-27T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:54Z",
+        "id": 1013,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 0,
+          "audioChannels": 5.1,
+          "audioCodec": "DTS-HD MA",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "29:37",
+          "scanType": "Progressive",
+          "subtitles": "eng/eng/eng/fre/spa/dan/fin/nor/swe",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 03/Silicon.Valley.S03E10.The.Uptick.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "quality": {
+          "quality": {
+            "id": 20,
+            "name": "Bluray-1080p Remux",
+            "resolution": 1080,
+            "source": "blurayRaw"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Season 03/Silicon.Valley.S03E10.The.Uptick.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+        "releaseGroup": "NOGRP",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 3,
+        "seriesId": 22,
+        "size": 6374897351
+      },
+      "episodeFileId": 1013,
+      "episodeNumber": 10,
+      "finaleType": "season",
+      "hasFile": true,
+      "id": 670,
+      "monitored": true,
+      "overview": "Pied Piper’s future is hazy, but Erlich’s industry profile begins to rise, creating a moral dilemma for Richard as Dinesh’s new app starts to catch on. Meanwhile, Laurie makes plans for her exit; and Gavin’s pompous personality haunts his comeback at Hooli.",
+      "runtime": 30,
+      "seasonNumber": 3,
+      "seriesId": 22,
+      "title": "The Uptick",
+      "tvdbId": 5598489,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 29,
+      "airDate": "2017-04-23",
+      "airDateUtc": "2017-04-24T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 1775,
+        "customFormats": [
+          {
+            "id": 16,
+            "name": "AMZN"
+          },
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 11,
+            "name": "WEB Tier 01"
+          }
+        ],
+        "dateAdded": "2026-03-07T15:34:54Z",
+        "id": 362,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 640000,
+          "audioChannels": 5.1,
+          "audioCodec": "EAC3",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "31:24",
+          "scanType": "Progressive",
+          "subtitles": "eng",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "x264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 04/Silicon Valley (2014) - S04E01 - Success Failure [AMZN][WEBRip-1080p][EAC3 5.1][x264]-NTb.mkv",
+        "quality": {
+          "quality": {
+            "id": 15,
+            "name": "WEBRip-1080p",
+            "resolution": 1080,
+            "source": "webRip"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "relativePath": "Season 04/Silicon Valley (2014) - S04E01 - Success Failure [AMZN][WEBRip-1080p][EAC3 5.1][x264]-NTb.mkv",
+        "releaseGroup": "NTb",
+        "releaseType": "singleEpisode",
+        "sceneName": "Silicon.Valley.S04E01.Success.Failure.1080p.AMZN.WEBRip.DD5.1.x264-NTb-Scrambled",
+        "seasonNumber": 4,
+        "seriesId": 22,
+        "size": 1912962015
+      },
+      "episodeFileId": 362,
+      "episodeNumber": 1,
+      "hasFile": true,
+      "id": 671,
+      "lastSearchTime": "2026-03-07T15:30:16Z",
+      "monitored": true,
+      "overview": "The guys struggle to find funding for Pied Piper's video chat app to keep up with their rapidly growing user base. Erlich faces resistance from Big Head's father. Jack steps on Gavin's toes at Hooli. Richard gets sage advice.",
+      "runtime": 29,
+      "seasonNumber": 4,
+      "seriesId": 22,
+      "title": "Success Failure",
+      "tvdbId": 5964673,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 30,
+      "airDate": "2017-04-30",
+      "airDateUtc": "2017-05-01T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 1780,
+        "customFormats": [
+          {
+            "id": 22,
+            "name": "HBO"
+          },
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 7,
+            "name": "Repack/Proper"
+          },
+          {
+            "id": 11,
+            "name": "WEB Tier 01"
+          }
+        ],
+        "dateAdded": "2026-03-07T15:32:45Z",
+        "id": 361,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 384000,
+          "audioChannels": 5.1,
+          "audioCodec": "AC3",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "29:03",
+          "scanType": "Progressive",
+          "subtitles": "eng",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 04/Silicon Valley (2014) - S04E02 - Terms of Service [HBO][WEBDL-1080p Proper][AC3 5.1][h264]-monkee.mkv",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": true,
+            "real": 0,
+            "version": 2
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "relativePath": "Season 04/Silicon Valley (2014) - S04E02 - Terms of Service [HBO][WEBDL-1080p Proper][AC3 5.1][h264]-monkee.mkv",
+        "releaseGroup": "monkee",
+        "releaseType": "singleEpisode",
+        "sceneName": "Silicon.Valley.S04E02.Terms.of.Service.REPACK.1080p.HBO.WEB-DL.DD5.1.H.264-monkee-Scrambled",
+        "seasonNumber": 4,
+        "seriesId": 22,
+        "size": 865765285
+      },
+      "episodeFileId": 361,
+      "episodeNumber": 2,
+      "hasFile": true,
+      "id": 672,
+      "lastSearchTime": "2026-03-07T15:30:16Z",
+      "monitored": true,
+      "overview": "Richard butts heads with Dinesh, whose new position goes to his head. Richard discovers interesting data about PiperChat's users. Erlich makes a play to be involved in Jian-Yang's new app. Jared sets ground rules in his friendship with Richard. Gavin's paranoia over Jack's enthusiasm causes him to make a rash decision.",
+      "runtime": 29,
+      "seasonNumber": 4,
+      "seriesId": 22,
+      "title": "Terms of Service",
+      "tvdbId": 5999993,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 31,
+      "airDate": "2017-05-07",
+      "airDateUtc": "2017-05-08T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 1775,
+        "customFormats": [
+          {
+            "id": 16,
+            "name": "AMZN"
+          },
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 11,
+            "name": "WEB Tier 01"
+          }
+        ],
+        "dateAdded": "2026-03-07T16:08:54Z",
+        "id": 372,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 640000,
+          "audioChannels": 5.1,
+          "audioCodec": "EAC3",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "30:30",
+          "scanType": "Progressive",
+          "subtitles": "eng",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "x264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 04/Silicon Valley (2014) - S04E03 - Intellectual Property [AMZN][WEBRip-1080p][EAC3 5.1][x264]-NTb.mkv",
+        "quality": {
+          "quality": {
+            "id": 15,
+            "name": "WEBRip-1080p",
+            "resolution": 1080,
+            "source": "webRip"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "relativePath": "Season 04/Silicon Valley (2014) - S04E03 - Intellectual Property [AMZN][WEBRip-1080p][EAC3 5.1][x264]-NTb.mkv",
+        "releaseGroup": "NTb",
+        "releaseType": "singleEpisode",
+        "sceneName": "Silicon.Valley.S04E03.Intellectual.Property.1080p.AMZN.WEBRip.DD5.1.x264-NTb-AsRequested-Obfuscated",
+        "seasonNumber": 4,
+        "seriesId": 22,
+        "size": 1814721857
+      },
+      "episodeFileId": 372,
+      "episodeNumber": 3,
+      "hasFile": true,
+      "id": 673,
+      "lastSearchTime": "2026-03-07T15:34:57Z",
+      "monitored": true,
+      "overview": "Richard continues to explore his new project. Gavin tries to come out of the new problem he has gotten himself into. The chemistry between Richard and Monica takes a new turn.",
+      "runtime": 29,
+      "seasonNumber": 4,
+      "seriesId": 22,
+      "title": "Intellectual Property",
+      "tvdbId": 6027683,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 32,
+      "airDate": "2017-05-14",
+      "airDateUtc": "2017-05-15T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 1775,
+        "customFormats": [
+          {
+            "id": 16,
+            "name": "AMZN"
+          },
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 11,
+            "name": "WEB Tier 01"
+          }
+        ],
+        "dateAdded": "2026-03-07T15:37:39Z",
+        "id": 363,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 640000,
+          "audioChannels": 5.1,
+          "audioCodec": "EAC3",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "30:30",
+          "scanType": "Progressive",
+          "subtitles": "eng",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 04/Silicon Valley (2014) - S04E04 - Teambuilding Exercise [AMZN][WEBDL-1080p][EAC3 5.1][h264]-NTb.mkv",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "relativePath": "Season 04/Silicon Valley (2014) - S04E04 - Teambuilding Exercise [AMZN][WEBDL-1080p][EAC3 5.1][h264]-NTb.mkv",
+        "releaseGroup": "NTb",
+        "releaseType": "singleEpisode",
+        "sceneName": "Silicon.Valley.S04E04.Teambuilding.Exercise.1080p.AMZN.WEB-DL.DDP5.1.H.264-NTb",
+        "seasonNumber": 4,
+        "seriesId": 22,
+        "size": 1848367524
+      },
+      "episodeFileId": 363,
+      "episodeNumber": 4,
+      "hasFile": true,
+      "id": 674,
+      "lastSearchTime": "2026-03-07T15:30:16Z",
+      "monitored": true,
+      "overview": "Seafood demo is being prepared. Big head professorship is proving beneficial to his students. We get a glimpse of the insides of Gavin Belson mansion.",
+      "runtime": 29,
+      "seasonNumber": 4,
+      "seriesId": 22,
+      "title": "Teambuilding Exercise",
+      "tvdbId": 6027684,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 33,
+      "airDate": "2017-05-21",
+      "airDateUtc": "2017-05-22T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 1775,
+        "customFormats": [
+          {
+            "id": 16,
+            "name": "AMZN"
+          },
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 11,
+            "name": "WEB Tier 01"
+          }
+        ],
+        "dateAdded": "2026-03-07T16:51:58Z",
+        "id": 383,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 640000,
+          "audioChannels": 5.1,
+          "audioCodec": "EAC3",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "30:18",
+          "scanType": "Progressive",
+          "subtitles": "eng",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "x264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 04/Silicon Valley (2014) - S04E05 - The Blood Boy [AMZN][WEBRip-1080p][EAC3 5.1][x264]-NTb.mkv",
+        "quality": {
+          "quality": {
+            "id": 15,
+            "name": "WEBRip-1080p",
+            "resolution": 1080,
+            "source": "webRip"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "relativePath": "Season 04/Silicon Valley (2014) - S04E05 - The Blood Boy [AMZN][WEBRip-1080p][EAC3 5.1][x264]-NTb.mkv",
+        "releaseGroup": "NTb",
+        "releaseType": "singleEpisode",
+        "sceneName": "Silicon.Valley.S04E05.The.Blood.Boy.1080p.AMZN.WEBRip.DD5.1.x264-NTb-AsRequested-Obfuscated",
+        "seasonNumber": 4,
+        "seriesId": 22,
+        "size": 2023524787
+      },
+      "episodeFileId": 383,
+      "episodeNumber": 5,
+      "hasFile": true,
+      "id": 675,
+      "lastSearchTime": "2026-03-07T15:37:41Z",
+      "monitored": true,
+      "overview": "Richard tries to convince Gavin of his strategy for the new internet, but finds himself blocked by meddling from an annoying associate of Gavin's. Erlich connives his way into Laurie's baby shower and tips her off to a hidden agenda. Dinesh struggles to free himself of Mia.",
+      "runtime": 29,
+      "seasonNumber": 4,
+      "seriesId": 22,
+      "title": "The Blood Boy",
+      "tvdbId": 6056602,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 34,
+      "airDate": "2017-05-28",
+      "airDateUtc": "2017-05-29T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 1775,
+        "customFormats": [
+          {
+            "id": 16,
+            "name": "AMZN"
+          },
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 11,
+            "name": "WEB Tier 01"
+          }
+        ],
+        "dateAdded": "2026-03-07T15:41:46Z",
+        "id": 364,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 640000,
+          "audioChannels": 5.1,
+          "audioCodec": "EAC3",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "30:43",
+          "scanType": "Progressive",
+          "subtitles": "eng",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "x264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 04/Silicon Valley (2014) - S04E06 - Customer Service [AMZN][WEBRip-1080p][EAC3 5.1][x264]-NTb.mkv",
+        "quality": {
+          "quality": {
+            "id": 15,
+            "name": "WEBRip-1080p",
+            "resolution": 1080,
+            "source": "webRip"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "relativePath": "Season 04/Silicon Valley (2014) - S04E06 - Customer Service [AMZN][WEBRip-1080p][EAC3 5.1][x264]-NTb.mkv",
+        "releaseGroup": "NTb",
+        "releaseType": "singleEpisode",
+        "sceneName": "Silicon.Valley.S04E06.Customer.Service.1080p.AMZN.WEBRip.DD5.1.x264-NTb-Scrambled",
+        "seasonNumber": 4,
+        "seriesId": 22,
+        "size": 1913435038
+      },
+      "episodeFileId": 364,
+      "episodeNumber": 6,
+      "hasFile": true,
+      "id": 676,
+      "lastSearchTime": "2026-03-07T15:30:16Z",
+      "monitored": true,
+      "overview": "The guys struggle for funding to launch the latest iteration of Pied Piper. Erlich seeks to join the new VC firm formed by Laurie and Monica. Dinesh and Gilfoyle clash over the alpha build.",
+      "runtime": 29,
+      "seasonNumber": 4,
+      "seriesId": 22,
+      "title": "Customer Service",
+      "tvdbId": 6056603,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 35,
+      "airDate": "2017-06-04",
+      "airDateUtc": "2017-06-05T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 1775,
+        "customFormats": [
+          {
+            "id": 16,
+            "name": "AMZN"
+          },
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 11,
+            "name": "WEB Tier 01"
+          }
+        ],
+        "dateAdded": "2026-03-07T17:57:36Z",
+        "id": 393,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 640000,
+          "audioChannels": 5.1,
+          "audioCodec": "EAC3",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "30:13",
+          "scanType": "Progressive",
+          "subtitles": "eng",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "x264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 04/Silicon Valley (2014) - S04E07 - The Patent Troll [AMZN][WEBRip-1080p][EAC3 5.1][x264]-NTb.mkv",
+        "quality": {
+          "quality": {
+            "id": 15,
+            "name": "WEBRip-1080p",
+            "resolution": 1080,
+            "source": "webRip"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "relativePath": "Season 04/Silicon Valley (2014) - S04E07 - The Patent Troll [AMZN][WEBRip-1080p][EAC3 5.1][x264]-NTb.mkv",
+        "releaseGroup": "NTb",
+        "releaseType": "singleEpisode",
+        "sceneName": "Silicon.Valley.S04E07.The.Patent.Troll.1080p.AMZN.WEBRip.DD5.1.x264-NTb-AsRequested",
+        "seasonNumber": 4,
+        "seriesId": 22,
+        "size": 2019979927
+      },
+      "episodeFileId": 393,
+      "episodeNumber": 7,
+      "hasFile": true,
+      "id": 677,
+      "lastSearchTime": "2026-03-07T16:55:00Z",
+      "monitored": true,
+      "overview": "When Richard decides to stand up to a patent troll, his defiance ends up coming back to haunt him. Gilfoyle goes to desperate measures to battle Jian-Yang's new smart refrigerator. Jared embraces multiple identities in in his quest to reduce costs. Erlich tries to hang with the alpha males.",
+      "runtime": 29,
+      "seasonNumber": 4,
+      "seriesId": 22,
+      "title": "The Patent Troll",
+      "tvdbId": 6056604,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 36,
+      "airDate": "2017-06-11",
+      "airDateUtc": "2017-06-12T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 1775,
+        "customFormats": [
+          {
+            "id": 16,
+            "name": "AMZN"
+          },
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 11,
+            "name": "WEB Tier 01"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:53Z",
+        "id": 1008,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 640000,
+          "audioChannels": 5.1,
+          "audioCodec": "EAC3",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "30:11",
+          "scanType": "Progressive",
+          "subtitles": "eng",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "x264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 04/Silicon.Valley.S04E08.The.Keenan.Vortex.1080p.AMZN.WEBRip.DD5.1.x264-NTb[rarbg].mkv",
+        "quality": {
+          "quality": {
+            "id": 15,
+            "name": "WEBRip-1080p",
+            "resolution": 1080,
+            "source": "webRip"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "relativePath": "Season 04/Silicon.Valley.S04E08.The.Keenan.Vortex.1080p.AMZN.WEBRip.DD5.1.x264-NTb[rarbg].mkv",
+        "releaseGroup": "NTb",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 4,
+        "seriesId": 22,
+        "size": 2084060412
+      },
+      "episodeFileId": 1008,
+      "episodeNumber": 8,
+      "hasFile": true,
+      "id": 678,
+      "lastSearchTime": "2026-03-07T15:30:16Z",
+      "monitored": true,
+      "overview": "An unexpected increase in data traffic leads Richard to turn the Ehrlich for help in garnering a deal with Keenan Feldspar, Silicon Valley's latest 'it' boy, but when he makes a too-good-to-resist offer, Richard must weigh Pied Piper's future against a potential mutiny. Jack faces setbacks while preparing for Hooli-Con.",
+      "runtime": 29,
+      "seasonNumber": 4,
+      "seriesId": 22,
+      "title": "The Keenan Vortex",
+      "tvdbId": 6056605,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 37,
+      "airDate": "2017-06-18",
+      "airDateUtc": "2017-06-19T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 1780,
+        "customFormats": [
+          {
+            "id": 16,
+            "name": "AMZN"
+          },
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 7,
+            "name": "Repack/Proper"
+          },
+          {
+            "id": 11,
+            "name": "WEB Tier 01"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:53Z",
+        "id": 1012,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 640000,
+          "audioChannels": 5.1,
+          "audioCodec": "EAC3",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "30:53",
+          "scanType": "Progressive",
+          "subtitles": "",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 04/Silicon.Valley.S04E09.Hooli-Con.1080p.REPACK.AMZN.WEBRip.DD5.1.x264-NTb[rarbg].mkv",
+        "quality": {
+          "quality": {
+            "id": 15,
+            "name": "WEBRip-1080p",
+            "resolution": 1080,
+            "source": "webRip"
+          },
+          "revision": {
+            "isRepack": true,
+            "real": 0,
+            "version": 2
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "relativePath": "Season 04/Silicon.Valley.S04E09.Hooli-Con.1080p.REPACK.AMZN.WEBRip.DD5.1.x264-NTb[rarbg].mkv",
+        "releaseGroup": "NTb",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 4,
+        "seriesId": 22,
+        "size": 2100932508
+      },
+      "episodeFileId": 1012,
+      "episodeNumber": 9,
+      "hasFile": true,
+      "id": 679,
+      "lastSearchTime": "2026-03-07T15:30:16Z",
+      "monitored": true,
+      "overview": "Erlich goes on a trip to get his mojo back while the guys head to Hooli-Con, where Jared faces a moral dilemma. Gilfoyle and Dinesh are distracted by Keenan. and Richard becomes obsessed with an ex's new beau.",
+      "runtime": 29,
+      "seasonNumber": 4,
+      "seriesId": 22,
+      "title": "Hooli-con",
+      "tvdbId": 6066834,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 38,
+      "airDate": "2017-06-25",
+      "airDateUtc": "2017-06-26T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 1775,
+        "customFormats": [
+          {
+            "id": 16,
+            "name": "AMZN"
+          },
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 11,
+            "name": "WEB Tier 01"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:54Z",
+        "id": 1015,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 640000,
+          "audioChannels": 5.1,
+          "audioCodec": "EAC3",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "30:11",
+          "scanType": "Progressive",
+          "subtitles": "eng",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 04/Silicon.Valley.S04E10.Server.Error.1080p.AMZN.WEBRip.DD5.1.x264-NTb[rartv].mkv",
+        "quality": {
+          "quality": {
+            "id": 15,
+            "name": "WEBRip-1080p",
+            "resolution": 1080,
+            "source": "webRip"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "relativePath": "Season 04/Silicon.Valley.S04E10.Server.Error.1080p.AMZN.WEBRip.DD5.1.x264-NTb[rartv].mkv",
+        "releaseGroup": "NTb",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 4,
+        "seriesId": 22,
+        "size": 1969798954
+      },
+      "episodeFileId": 1015,
+      "episodeNumber": 10,
+      "finaleType": "season",
+      "hasFile": true,
+      "id": 680,
+      "lastSearchTime": "2026-03-07T15:30:16Z",
+      "monitored": true,
+      "overview": "Richard finds himself in a web of lie. Jared plans his exit. Jack bets big. Gavin plots a comeback.",
+      "runtime": 29,
+      "seasonNumber": 4,
+      "seriesId": 22,
+      "title": "Server Error",
+      "tvdbId": 6081570,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 39,
+      "airDate": "2018-03-25",
+      "airDateUtc": "2018-03-26T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": -8275,
+        "customFormats": [
+          {
+            "id": 16,
+            "name": "AMZN"
+          },
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 12,
+            "name": "WEB Tier 02"
+          },
+          {
+            "id": 15,
+            "name": "x265 (HD)"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:48Z",
+        "id": 974,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 640000,
+          "audioChannels": 5.1,
+          "audioCodec": "EAC3",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "31:58",
+          "scanType": "Progressive",
+          "subtitles": "eng",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h265",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 05/Silicon.Valley.S05E01.Grow.Fast.or.Die.Slow.1080p.AMZN.WEB-DL.DD.5.1.H.265-SiGMA.mkv",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "relativePath": "Season 05/Silicon.Valley.S05E01.Grow.Fast.or.Die.Slow.1080p.AMZN.WEB-DL.DD.5.1.H.265-SiGMA.mkv",
+        "releaseGroup": "SiGMA",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 5,
+        "seriesId": 22,
+        "size": 1176153557
+      },
+      "episodeFileId": 974,
+      "episodeNumber": 1,
+      "hasFile": true,
+      "id": 681,
+      "monitored": true,
+      "overview": "Now that Pied Piper has ample funding and new offices, the pressure to get things right stymies Richard and forces him to grow the company in a way he hadn't planned. A picky Dinesh and Gilfoyle question their ability to make good decisions. After returning to Hooli, Gavin worries about becoming antiquated.",
+      "runtime": 30,
+      "seasonNumber": 5,
+      "seriesId": 22,
+      "title": "Grow Fast or Die Slow",
+      "tvdbId": 6476842,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 40,
+      "airDate": "2018-04-01",
+      "airDateUtc": "2018-04-02T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": -8275,
+        "customFormats": [
+          {
+            "id": 16,
+            "name": "AMZN"
+          },
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 12,
+            "name": "WEB Tier 02"
+          },
+          {
+            "id": 15,
+            "name": "x265 (HD)"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:48Z",
+        "id": 979,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 640000,
+          "audioChannels": 5.1,
+          "audioCodec": "EAC3",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "30:20",
+          "scanType": "Progressive",
+          "subtitles": "eng",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h265",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 05/Silicon.Valley.S05E02.Reorientation.1080p.AMZN.WEB-DL.DD.5.1.H.265-SiGMA.mkv",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "relativePath": "Season 05/Silicon.Valley.S05E02.Reorientation.1080p.AMZN.WEB-DL.DD.5.1.H.265-SiGMA.mkv",
+        "releaseGroup": "SiGMA",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 5,
+        "seriesId": 22,
+        "size": 1013065188
+      },
+      "episodeFileId": 979,
+      "episodeNumber": 2,
+      "hasFile": true,
+      "id": 682,
+      "monitored": true,
+      "overview": "Panicked by suddenly leading a much larger team, Richard finds himself managing a number of small conflicts in his efforts to unite his new employees. Dinesh celebrates a new purchase that Gilfoyle looks to spoil. Jian-Yang goes to court. Gavin meets pushback over his signature and what it says about him.",
+      "runtime": 29,
+      "seasonNumber": 5,
+      "seriesId": 22,
+      "title": "Reorientation",
+      "tvdbId": 6579623,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 41,
+      "airDate": "2018-04-08",
+      "airDateUtc": "2018-04-09T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": -8275,
+        "customFormats": [
+          {
+            "id": 16,
+            "name": "AMZN"
+          },
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 12,
+            "name": "WEB Tier 02"
+          },
+          {
+            "id": 15,
+            "name": "x265 (HD)"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:49Z",
+        "id": 984,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 640000,
+          "audioChannels": 5.1,
+          "audioCodec": "EAC3",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "30:20",
+          "scanType": "Progressive",
+          "subtitles": "eng",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h265",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 05/Silicon.Valley.S05E03.Chief.Operating.Officer.1080p.AMZN.WEB-DL.DD.5.1.H.265-SiGMA.mkv",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "relativePath": "Season 05/Silicon.Valley.S05E03.Chief.Operating.Officer.1080p.AMZN.WEB-DL.DD.5.1.H.265-SiGMA.mkv",
+        "releaseGroup": "SiGMA",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 5,
+        "seriesId": 22,
+        "size": 1013700409
+      },
+      "episodeFileId": 984,
+      "episodeNumber": 3,
+      "hasFile": true,
+      "id": 683,
+      "monitored": true,
+      "overview": "Encouraged by Jared to strike up a friendship with Dana, a like-minded CEO, Richard instead finds himself charmed by Dana's COO, who challenges his loyalty to Gilfoyle. Facing limited housing options thanks to his impulse purchase, Dinesh searches for a new roommate.",
+      "runtime": 29,
+      "seasonNumber": 5,
+      "seriesId": 22,
+      "title": "Chief Operating Officer",
+      "tvdbId": 6579624,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 42,
+      "airDate": "2018-04-15",
+      "airDateUtc": "2018-04-16T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": -8275,
+        "customFormats": [
+          {
+            "id": 16,
+            "name": "AMZN"
+          },
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 12,
+            "name": "WEB Tier 02"
+          },
+          {
+            "id": 15,
+            "name": "x265 (HD)"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:50Z",
+        "id": 989,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 640000,
+          "audioChannels": 5.1,
+          "audioCodec": "EAC3",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "29:14",
+          "scanType": "Progressive",
+          "subtitles": "eng",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h265",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 05/Silicon.Valley.S05E04.Tech.Evangelist.1080p.AMZN.WEB-DL.DD.5.1.H.265-SiGMA.mkv",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "relativePath": "Season 05/Silicon.Valley.S05E04.Tech.Evangelist.1080p.AMZN.WEB-DL.DD.5.1.H.265-SiGMA.mkv",
+        "releaseGroup": "SiGMA",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 5,
+        "seriesId": 22,
+        "size": 1010030634
+      },
+      "episodeFileId": 989,
+      "episodeNumber": 4,
+      "hasFile": true,
+      "id": 684,
+      "monitored": true,
+      "overview": "Attempting to woo a gaming company to PiperNet, Richard inadvertently angers a prized ally. Dinesh deals with a betrayal. In preparation for a big launch, Gavin leaves his underlings with a cryptic message. Jared gets inside information from Big Head.",
+      "runtime": 28,
+      "seasonNumber": 5,
+      "seriesId": 22,
+      "title": "Tech Evangelist",
+      "tvdbId": 6587066,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 43,
+      "airDate": "2018-04-22",
+      "airDateUtc": "2018-04-23T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": -8275,
+        "customFormats": [
+          {
+            "id": 16,
+            "name": "AMZN"
+          },
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 12,
+            "name": "WEB Tier 02"
+          },
+          {
+            "id": 15,
+            "name": "x265 (HD)"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:50Z",
+        "id": 994,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 640000,
+          "audioChannels": 5.1,
+          "audioCodec": "EAC3",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "31:14",
+          "scanType": "Progressive",
+          "subtitles": "eng",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h265",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 05/Silicon.Valley.S05E05.Facial.Recognition.1080p.AMZN.WEB-DL.DD.5.1.H.265-SiGMA.mkv",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "relativePath": "Season 05/Silicon.Valley.S05E05.Facial.Recognition.1080p.AMZN.WEB-DL.DD.5.1.H.265-SiGMA.mkv",
+        "releaseGroup": "SiGMA",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 5,
+        "seriesId": 22,
+        "size": 1075037073
+      },
+      "episodeFileId": 994,
+      "episodeNumber": 5,
+      "hasFile": true,
+      "id": 685,
+      "monitored": true,
+      "overview": "Overshadowed by Jared in an on-camera interview, Richard’s confidence wavers further when Laurie and Monica force him to work with a new artificial-intelligence company. Gilfoyle worries about the prospect of introducing AI into Pied Piper. Dinesh makes Jared self-conscious ahead of a second interview. Gavin questions his future beyond Hooli.",
+      "runtime": 30,
+      "seasonNumber": 5,
+      "seriesId": 22,
+      "title": "Facial Recognition",
+      "tvdbId": 6611266,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 44,
+      "airDate": "2018-04-29",
+      "airDateUtc": "2018-04-30T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": -8275,
+        "customFormats": [
+          {
+            "id": 16,
+            "name": "AMZN"
+          },
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 12,
+            "name": "WEB Tier 02"
+          },
+          {
+            "id": 15,
+            "name": "x265 (HD)"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:51Z",
+        "id": 999,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 640000,
+          "audioChannels": 5.1,
+          "audioCodec": "EAC3",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "31:08",
+          "scanType": "Progressive",
+          "subtitles": "eng",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h265",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 05/Silicon.Valley.S05E06.Artificial.Emotional.Intelligence.1080p.AMZN.WEB-DL.DD.5.1.H.265-SiGMA.mkv",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "relativePath": "Season 05/Silicon.Valley.S05E06.Artificial.Emotional.Intelligence.1080p.AMZN.WEB-DL.DD.5.1.H.265-SiGMA.mkv",
+        "releaseGroup": "SiGMA",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 5,
+        "seriesId": 22,
+        "size": 1209785592
+      },
+      "episodeFileId": 999,
+      "episodeNumber": 6,
+      "hasFile": true,
+      "id": 686,
+      "monitored": true,
+      "overview": "Richard decides to help when Laurie gets in a jam, but his lack of emotional discipline threatens to backfire on Pied Piper. Gavin tries to make a deal with a stubborn partner while abroad. Dinesh relishes a rare win. Jared bonds with a surprising figure.",
+      "runtime": 30,
+      "seasonNumber": 5,
+      "seriesId": 22,
+      "title": "Artificial Emotional Intelligence",
+      "tvdbId": 6611267,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 45,
+      "airDate": "2018-05-06",
+      "airDateUtc": "2018-05-07T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": -8275,
+        "customFormats": [
+          {
+            "id": 16,
+            "name": "AMZN"
+          },
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 12,
+            "name": "WEB Tier 02"
+          },
+          {
+            "id": 15,
+            "name": "x265 (HD)"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:52Z",
+        "id": 1004,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 640000,
+          "audioChannels": 5.1,
+          "audioCodec": "EAC3",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "31:30",
+          "scanType": "Progressive",
+          "subtitles": "eng",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h265",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 05/Silicon.Valley.S05E07.Initial.Coin.Offering.1080p.AMZN.WEB-DL.DD.5.1.H.265-SiGMA.mkv",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "relativePath": "Season 05/Silicon.Valley.S05E07.Initial.Coin.Offering.1080p.AMZN.WEB-DL.DD.5.1.H.265-SiGMA.mkv",
+        "releaseGroup": "SiGMA",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 5,
+        "seriesId": 22,
+        "size": 1084050597
+      },
+      "episodeFileId": 1004,
+      "episodeNumber": 7,
+      "hasFile": true,
+      "id": 687,
+      "monitored": true,
+      "overview": "Richard gets unsettling news as the Pied Piper guys prepare to close their Series B funding. Meanwhile, Gilfoyle suggests a risky proposition; Dinesh goes to great lengths to compete with a coworker; Jared keeps an eye on Richard's new assistant; and Gavin tries to charm small-town America.",
+      "runtime": 30,
+      "seasonNumber": 5,
+      "seriesId": 22,
+      "title": "Initial Coin Offering",
+      "tvdbId": 6642301,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 46,
+      "airDate": "2018-05-13",
+      "airDateUtc": "2018-05-14T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": -8275,
+        "customFormats": [
+          {
+            "id": 16,
+            "name": "AMZN"
+          },
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 12,
+            "name": "WEB Tier 02"
+          },
+          {
+            "id": 15,
+            "name": "x265 (HD)"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:53Z",
+        "id": 1009,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 640000,
+          "audioChannels": 5.1,
+          "audioCodec": "EAC3",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "30:26",
+          "scanType": "Progressive",
+          "subtitles": "eng",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h265",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 05/Silicon.Valley.S05E08.Fifty-One.Percent.1080p.AMZN.WEB-DL.DD.5.1.H.265-SiGMA.mkv",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "relativePath": "Season 05/Silicon.Valley.S05E08.Fifty-One.Percent.1080p.AMZN.WEB-DL.DD.5.1.H.265-SiGMA.mkv",
+        "releaseGroup": "SiGMA",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 5,
+        "seriesId": 22,
+        "size": 1125110910
+      },
+      "episodeFileId": 1009,
+      "episodeNumber": 8,
+      "finaleType": "season",
+      "hasFile": true,
+      "id": 688,
+      "monitored": true,
+      "overview": "PiperNet launches, but an early success makes Monica suspicious. Richard makes a surprising move; the team races against the clock as its future is threatened.",
+      "runtime": 30,
+      "seasonNumber": 5,
+      "seriesId": 22,
+      "title": "Fifty-One Percent",
+      "tvdbId": 6642302,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 47,
+      "airDate": "2019-10-27",
+      "airDateUtc": "2019-10-28T02:00:00Z",
+      "episodeFile": {
+        "customFormatScore": -9995,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 3,
+            "name": "LQ"
+          },
+          {
+            "id": 7,
+            "name": "Repack/Proper"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:47Z",
+        "id": 973,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 256000,
+          "audioChannels": 5.1,
+          "audioCodec": "EAC3",
+          "audioLanguages": "",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "32:51",
+          "scanType": "Progressive",
+          "subtitles": "eng",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 06/Silicon.Valley.S06E01.PROPER.1080p.WEB.h264-TBS[TGx].mkv",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 2
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "relativePath": "Season 06/Silicon.Valley.S06E01.PROPER.1080p.WEB.h264-TBS[TGx].mkv",
+        "releaseGroup": "TBS",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 6,
+        "seriesId": 22,
+        "size": 1249890709
+      },
+      "episodeFileId": 973,
+      "episodeNumber": 1,
+      "hasFile": true,
+      "id": 689,
+      "monitored": true,
+      "overview": "Richard discovers his promise that Pied Piper won't collect user data is under threat; Jared longs for the past; Gilfoyle gets creative in dealing with Dinesh.",
+      "runtime": 30,
+      "seasonNumber": 6,
+      "seriesId": 22,
+      "title": "Artificial Lack of Intelligence",
+      "tvdbId": 7325062,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 48,
+      "airDate": "2019-11-03",
+      "airDateUtc": "2019-11-04T03:00:00Z",
+      "episodeFile": {
+        "customFormatScore": -10000,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 3,
+            "name": "LQ"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:48Z",
+        "id": 978,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 256000,
+          "audioChannels": 5.1,
+          "audioCodec": "EAC3",
+          "audioLanguages": "",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "30:13",
+          "scanType": "Progressive",
+          "subtitles": "eng",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 06/Silicon.Valley.S06E02.1080p.WEB.h264-TBS[TGx].mkv",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "relativePath": "Season 06/Silicon.Valley.S06E02.1080p.WEB.h264-TBS[TGx].mkv",
+        "releaseGroup": "TBS",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 6,
+        "seriesId": 22,
+        "size": 1038141384
+      },
+      "episodeFileId": 978,
+      "episodeNumber": 2,
+      "hasFile": true,
+      "id": 690,
+      "monitored": true,
+      "overview": "Richard meets a potential investor; Gilfoyle butts heads with HR; Gavin explores a leaner Hooli's future.",
+      "runtime": 29,
+      "seasonNumber": 6,
+      "seriesId": 22,
+      "title": "Blood Money",
+      "tvdbId": 7422121,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 49,
+      "airDate": "2019-11-10",
+      "airDateUtc": "2019-11-11T03:00:00Z",
+      "episodeFile": {
+        "customFormatScore": -10000,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 3,
+            "name": "LQ"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:49Z",
+        "id": 983,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 256000,
+          "audioChannels": 5.1,
+          "audioCodec": "EAC3",
+          "audioLanguages": "",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "31:12",
+          "scanType": "Progressive",
+          "subtitles": "eng",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 06/Silicon.Valley.S06E03.1080p.WEB.h264-TBS[TGx].mkv",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "relativePath": "Season 06/Silicon.Valley.S06E03.1080p.WEB.h264-TBS[TGx].mkv",
+        "releaseGroup": "TBS",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 6,
+        "seriesId": 22,
+        "size": 1183582511
+      },
+      "episodeFileId": 983,
+      "episodeNumber": 3,
+      "hasFile": true,
+      "id": 691,
+      "monitored": true,
+      "overview": "The Pied Piper team races to close a major deal. Dinesh considers being a better person. An angry Jared reluctantly helps Richard.",
+      "runtime": 30,
+      "seasonNumber": 6,
+      "seriesId": 22,
+      "title": "Hooli Smokes!",
+      "tvdbId": 7422123,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 50,
+      "airDate": "2019-11-17",
+      "airDateUtc": "2019-11-18T03:00:00Z",
+      "episodeFile": {
+        "customFormatScore": -10000,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 3,
+            "name": "LQ"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:50Z",
+        "id": 988,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 256000,
+          "audioChannels": 5.1,
+          "audioCodec": "EAC3",
+          "audioLanguages": "",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "31:28",
+          "scanType": "Progressive",
+          "subtitles": "eng",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 06/Silicon.Valley.S06E04.1080p.WEB.h264-TBS[TGx].mkv",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "relativePath": "Season 06/Silicon.Valley.S06E04.1080p.WEB.h264-TBS[TGx].mkv",
+        "releaseGroup": "TBS",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 6,
+        "seriesId": 22,
+        "size": 1171992506
+      },
+      "episodeFileId": 988,
+      "episodeNumber": 4,
+      "hasFile": true,
+      "id": 692,
+      "monitored": true,
+      "overview": "Richard's authority is threatened by his former Hooli manager. Monica tries to prove her support of other women. Gavin sets his sights on the literary world.",
+      "runtime": 30,
+      "seasonNumber": 6,
+      "seriesId": 22,
+      "title": "Maximizing Alphaness",
+      "tvdbId": 7444628,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 51,
+      "airDate": "2019-11-24",
+      "airDateUtc": "2019-11-25T03:00:00Z",
+      "episodeFile": {
+        "customFormatScore": 1775,
+        "customFormats": [
+          {
+            "id": 16,
+            "name": "AMZN"
+          },
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 11,
+            "name": "WEB Tier 01"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:50Z",
+        "id": 993,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 640000,
+          "audioChannels": 5.1,
+          "audioCodec": "EAC3",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "32:13",
+          "scanType": "Progressive",
+          "subtitles": "eng",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 06/Silicon.Valley.S06E05.Tethics.1080p.AMZN.WEB-DL.DDP5.1.H.264-NTb[TGx].mkv",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "relativePath": "Season 06/Silicon.Valley.S06E05.Tethics.1080p.AMZN.WEB-DL.DDP5.1.H.264-NTb[TGx].mkv",
+        "releaseGroup": "NTb",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 6,
+        "seriesId": 22,
+        "size": 2373400740
+      },
+      "episodeFileId": 993,
+      "episodeNumber": 5,
+      "hasFile": true,
+      "id": 693,
+      "monitored": true,
+      "overview": "Richard fumes at Gavin's new ethical stance. Dinesh's trip turns into a nightmare. Gilfoyle and Monica work on their peer review scores.",
+      "runtime": 30,
+      "seasonNumber": 6,
+      "seriesId": 22,
+      "title": "Tethics",
+      "tvdbId": 7444630,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 52,
+      "airDate": "2019-12-01",
+      "airDateUtc": "2019-12-02T03:00:00Z",
+      "episodeFile": {
+        "customFormatScore": -9995,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 3,
+            "name": "LQ"
+          },
+          {
+            "id": 7,
+            "name": "Repack/Proper"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:51Z",
+        "id": 998,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 256000,
+          "audioChannels": 5.1,
+          "audioCodec": "EAC3",
+          "audioLanguages": "",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "33:50",
+          "scanType": "Progressive",
+          "subtitles": "eng",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 06/Silicon.Valley.S06E06.REPACK.1080p.WEB.h264-TBS[TGx].mkv",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": true,
+            "real": 0,
+            "version": 2
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "relativePath": "Season 06/Silicon.Valley.S06E06.REPACK.1080p.WEB.h264-TBS[TGx].mkv",
+        "releaseGroup": "TBS",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 6,
+        "seriesId": 22,
+        "size": 1374552726
+      },
+      "episodeFileId": 998,
+      "episodeNumber": 6,
+      "hasFile": true,
+      "id": 694,
+      "monitored": true,
+      "overview": "A major event puts PiperNet's capabilities to the test. Monica confronts Jian-Yang over his use of Pied Piper's name.",
+      "runtime": 32,
+      "seasonNumber": 6,
+      "seriesId": 22,
+      "title": "RussFest",
+      "tvdbId": 7444632,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 53,
+      "airDate": "2019-12-08",
+      "airDateUtc": "2019-12-09T03:00:00Z",
+      "episodeFile": {
+        "customFormatScore": -10000,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 3,
+            "name": "LQ"
+          }
+        ],
+        "dateAdded": "2026-09-30T15:54:52Z",
+        "id": 1003,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 256000,
+          "audioChannels": 5.1,
+          "audioCodec": "EAC3",
+          "audioLanguages": "",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "48:33",
+          "scanType": "Progressive",
+          "subtitles": "eng",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "path": "/tv/Silicon Valley/Season 06/Silicon.Valley.S06E07.1080p.WEB.h264-TBS[TGx].mkv",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "relativePath": "Season 06/Silicon.Valley.S06E07.1080p.WEB.h264-TBS[TGx].mkv",
+        "releaseGroup": "TBS",
+        "releaseType": "singleEpisode",
+        "seasonNumber": 6,
+        "seriesId": 22,
+        "size": 2053033187
+      },
+      "episodeFileId": 1003,
+      "episodeNumber": 7,
+      "finaleType": "series",
+      "hasFile": true,
+      "id": 695,
+      "monitored": true,
+      "overview": "Ahead of a career-defining moment, Richard makes a startling discovery that sends the entire Pied Piper team racing to pull off the biggest bait-and-switch that Silicon Valley has ever seen.",
+      "runtime": 48,
+      "seasonNumber": 6,
+      "seriesId": 22,
+      "title": "Exit Event",
+      "tvdbId": 7444636,
+      "unverifiedSceneNumbering": false
+    }
+  ],
+  "recordedAt": "2026-11-07T08:04:07Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/episode?seriesId=22&includeEpisodeFile=true"
+  },
+  "status": 200
+}

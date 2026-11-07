@@ -1,0 +1,9 @@
+{
+  "body": [],
+  "recordedAt": "2026-11-07T08:04:07Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/releaseprofile"
+  },
+  "status": 200
+}

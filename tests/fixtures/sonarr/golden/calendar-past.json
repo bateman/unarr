@@ -1,0 +1,42 @@
+{
+  "body": [
+    {
+      "airDate": "2025-01-16",
+      "airDateUtc": "2025-01-17T02:00:00Z",
+      "episodeFileId": 0,
+      "episodeNumber": 1,
+      "hasFile": false,
+      "id": 594,
+      "monitored": true,
+      "overview": "Mark returns to work under different circumstances. Secrets from the Outie world come to light.",
+      "runtime": 49,
+      "seasonNumber": 2,
+      "seriesId": 20,
+      "title": "Hello, Ms. Cobel",
+      "tvdbId": 10586352,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "airDate": "2025-01-23",
+      "airDateUtc": "2025-01-24T02:00:00Z",
+      "episodeFileId": 0,
+      "episodeNumber": 2,
+      "hasFile": false,
+      "id": 595,
+      "monitored": true,
+      "overview": "Mark contemplates the meaning of a message.",
+      "runtime": 46,
+      "seasonNumber": 2,
+      "seriesId": 20,
+      "title": "Goodbye, Mrs. Selvig",
+      "tvdbId": 10592759,
+      "unverifiedSceneNumbering": false
+    }
+  ],
+  "recordedAt": "2026-11-07T08:04:13Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/calendar?start=2025-01-01T00:00:00Z&end=2025-01-31T00:00:00Z&includeEpisodeFile=true"
+  },
+  "status": 200
+}
