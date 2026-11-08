@@ -209,100 +209,14 @@ pub fn evaluate<'f>(formats: &'f [CustomFormat], input: &Input) -> Vec<&'f Custo
     out
 }
 
-/// Media extensions the originals strip before parsing a title.
-const MEDIA_EXTENSIONS: &[&str] = &[
-    "mkv", "mp4", "avi", "m4v", "mpg", "mpeg", "mov", "wmv", "ts", "m2ts", "webm", "flv", "ogm", "ogv",
-    "divx", "xvid", "iso", "img", "strm", "nzb", "par2", "rar", "zip", "srt",
-];
-
 /// A release title without its media extension, as the parser sees it.
-pub fn strip_media_extension(title: &str) -> &str {
-    match title.rsplit_once('.') {
-        Some((stem, ext)) if MEDIA_EXTENSIONS.contains(&ext.to_ascii_lowercase().as_str()) => stem,
-        _ => title,
-    }
+pub fn strip_media_extension(title: &str) -> String {
+    crate::parser::remove_file_extension(title)
 }
-
-/// Best-effort release group from a release title, for history rows that
-/// only keep the title: the token glued to the last dash, as scene names
-/// put it (`...x264-GROUP`). Titles with spaces around the dash are the
-/// originals' own naming, which carries no group.
-macro_rules! regex {
-    ($name:ident, $pattern:expr) => {
-        fn $name() -> &'static fancy_regex::Regex {
-            static RE: OnceLock<fancy_regex::Regex> = OnceLock::new();
-            RE.get_or_init(|| fancy_regex::Regex::new($pattern).expect(stringify!($name)))
-        }
-    };
-}
-
-// The originals' Parser regexes for the release group, verbatim but for the
-// duplicate group name, which Rust does not allow.
-regex!(
-    website_prefix_re,
-    r"(?i)^(?:(?:\[|\()\s*)?(?:www\.)?[-a-z0-9-]{1,256}\.(?<!Naruto-Kun\.)(?:[a-z]{2,6}\.[a-z]{2,6}|xn--[a-z0-9-]{4,}|[a-z]{2,})\b(?:\s*(?:\]|\))|[ -]{2,})[ -]*"
-);
-regex!(
-    clean_torrent_suffix_re,
-    r"(?i)\[(?:ettv|rartv|rarbg|cttv|publichd)\]$"
-);
-regex!(
-    anime_release_group_re,
-    r"(?i)^(?:\[(?<subgroup>(?!\s).+?(?<!\s))\](?:_|-|\s|\.)?)"
-);
-regex!(
-    clean_release_group_re,
-    r"(?i)^(.*?[-._ ](S\d+E\d+)[-._ ])|(-(RP|1|NZBGeek|Obfuscated|Scrambled|sample|Pre|postbot|xpost|Rakuv[a-z0-9]*|WhiteRev|BUYMORE|AsRequested|AlternativeToRequested|GEROV|Z0iDS3N|Chamele0n|4P|4Planet|AlteZachen|RePACKPOST))+$"
-);
-regex!(
-    exception_release_group_re,
-    r"(?i)(?<=[._ \[])(?<releasegroup>(Silence|afm72|Panda|Ghost|MONOLITH|Tigole|Joy|ImE|UTR|t3nzin|Anime Time|Project Angel|Hakata Ramen|HONE|Vyndros|SEV|Garshasp|Kappa|Natty|RCVR|SAMPA|YOGI|r00t|EDGE2020|RZeroX)(?=\]|\)))"
-);
-regex!(
-    exception_release_group_exact_re,
-    r"(?i)(?<releasegroup>(?:D\-Z0N3|Fight-BB|VARYG|E\.N\.D|KRaLiMaRKo|BluDragon|DarQ|KCRT|BEN[_. ]THE[_. ]MEN)\b)"
-);
-regex!(
-    release_group_re,
-    r"(?i)-(?<releasegroup>[a-z0-9]+(?<part2>-[a-z0-9]+)?(?!.+?(?:480p|576p|720p|1080p|2160p)))(?<!(?:WEB-DL|Blu-Ray|480p|576p|720p|1080p|2160p|DTS-HD|DTS-X|DTS-MA|DTS-ES|-ES|-EN|-CAT|[ ._]\d{4}-\d{2}|-\d{2})(?:\k<part2>)?)(?:\b|[-._ ]|$)|[-._ ]\[(?<bracketgroup>[a-z0-9]+)\]$"
-);
-regex!(invalid_release_group_re, r"(?i)^([se]\d+|[0-9a-f]{8})$");
 
 /// The release group of a release title, as the originals' parser finds it.
 pub fn parse_release_group(title: &str) -> Option<String> {
-    let title = strip_media_extension(title.trim());
-    let title = website_prefix_re().replace(title, "").into_owned();
-    let title = clean_torrent_suffix_re().replace(&title, "").into_owned();
-    if let Ok(Some(c)) = anime_release_group_re().captures(title.as_str()) {
-        return c.name("subgroup").map(|m| m.as_str().to_string());
-    }
-    let title = clean_release_group_re().replace_all(&title, "").into_owned();
-    if let Some(c) = exception_release_group_re()
-        .captures_iter(title.as_str())
-        .flatten()
-        .last()
-    {
-        return c.name("releasegroup").map(|m| m.as_str().to_string());
-    }
-    if let Some(c) = exception_release_group_exact_re()
-        .captures_iter(title.as_str())
-        .flatten()
-        .last()
-    {
-        return c.name("releasegroup").map(|m| m.as_str().to_string());
-    }
-    let last = release_group_re()
-        .captures_iter(title.as_str())
-        .flatten()
-        .last()?;
-    let group = last
-        .name("releasegroup")
-        .or_else(|| last.name("bracketgroup"))
-        .map(|m| m.as_str())?;
-    if group.parse::<i64>().is_ok() || invalid_release_group_re().is_match(group).unwrap_or(false) {
-        return None;
-    }
-    Some(group.to_string())
+    crate::parser::parse_release_group(title)
 }
 
 #[cfg(test)]

@@ -1,0 +1,68 @@
+{
+  "body": [
+    {
+      "id": 1,
+      "isValid": false,
+      "validationFailures": [
+        {
+          "errorMessage": "Unable to connect to qBittorrent",
+          "propertyName": "Host",
+          "severity": "error"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "isValid": false,
+      "validationFailures": [
+        {
+          "errorMessage": "Unable to connect to NZBGet",
+          "propertyName": "Host",
+          "severity": "error"
+        },
+        {
+          "errorMessage": "Test was aborted due to an error: Unable to connect to NzbGet. Name or service not known (nzbget.invalid:6789)",
+          "propertyName": "",
+          "severity": "error"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "isValid": false,
+      "validationFailures": [
+        {
+          "errorMessage": "Unable to connect to qBittorrent",
+          "propertyName": "Host",
+          "severity": "error"
+        }
+      ]
+    },
+    {
+      "id": 4,
+      "isValid": true,
+      "validationFailures": []
+    },
+    {
+      "id": 5,
+      "isValid": true,
+      "validationFailures": []
+    },
+    {
+      "id": 6,
+      "isValid": true,
+      "validationFailures": []
+    },
+    {
+      "id": 7,
+      "isValid": true,
+      "validationFailures": []
+    }
+  ],
+  "recordedAt": "2026-11-07T15:44:21Z",
+  "request": {
+    "method": "POST",
+    "path": "/api/v3/downloadclient/testall"
+  },
+  "status": 400
+}

@@ -57,3 +57,11 @@ pub fn by_tvdb_ids(conn: &Connection, tvdb_ids: &[i64]) -> anyhow::Result<HashMa
     }
     Ok(out)
 }
+
+/// `SceneMappingService.FindMappings` candidates: the mappings whose parse
+/// term (the cleaned title) is the given one.
+pub fn by_parse_term(conn: &Connection, parse_term: &str) -> anyhow::Result<Vec<SceneMapping>> {
+    let mut stmt = conn.prepare("SELECT * FROM scene_mappings WHERE parse_term = ?1 ORDER BY id")?;
+    let rows = stmt.query_map(params![parse_term], from_row)?;
+    Ok(rows.collect::<Result<_, _>>()?)
+}

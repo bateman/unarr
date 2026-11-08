@@ -1,0 +1,115 @@
+{
+  "body": [
+    {
+      "added": "2026-11-07T15:44:21Z",
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 11,
+          "name": "WEB Tier 01"
+        }
+      ],
+      "downloadClient": "Mock SABnzbd",
+      "downloadClientHasPostImportCategory": false,
+      "downloadId": "SABnzbd_nzo_mock1",
+      "episodeHasFile": false,
+      "episodeId": 1,
+      "estimatedCompletionTime": "2026-11-07T15:54:26Z",
+      "id": 489905582,
+      "indexer": "Mock Newznab (Prowlarr)",
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "protocol": "usenet",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "seasonNumber": 1,
+      "seriesId": 1,
+      "size": 765460,
+      "sizeleft": 765460,
+      "status": "downloading",
+      "statusMessages": [],
+      "timeleft": "00:10:00",
+      "title": "The.Pitt.S01E01.1080p.AMZN.WEB-DL.DDP5.1.H.264-FLUX",
+      "trackedDownloadState": "downloading",
+      "trackedDownloadStatus": "ok"
+    },
+    {
+      "added": "2026-11-07T15:44:25Z",
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        }
+      ],
+      "downloadClient": "Mock Transmission",
+      "downloadClientHasPostImportCategory": false,
+      "downloadId": "C7EB8F60E61BC10B2F8762DE09949BDD2AAFBE5A",
+      "episodeHasFile": false,
+      "episodeId": 1,
+      "estimatedCompletionTime": "2026-11-07T15:54:26Z",
+      "id": 1443899403,
+      "indexer": "Mock Torznab (Prowlarr)",
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "outputPath": "/downloads/tv/b2a4d3e5f6c7b8d9e0f1a2b3c4d5e6f7",
+      "protocol": "torrent",
+      "quality": {
+        "quality": {
+          "id": 5,
+          "name": "WEBDL-720p",
+          "resolution": 720,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "seasonNumber": 1,
+      "seriesId": 1,
+      "size": 768000,
+      "sizeleft": 768000,
+      "status": "downloading",
+      "statusMessages": [],
+      "timeleft": "00:10:00",
+      "title": "b2a4d3e5f6c7b8d9e0f1a2b3c4d5e6f7",
+      "trackedDownloadState": "downloading",
+      "trackedDownloadStatus": "ok"
+    }
+  ],
+  "recordedAt": "2026-11-07T15:44:37Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/queue/details?seriesId=1"
+  },
+  "status": 200
+}

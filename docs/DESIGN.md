@@ -151,13 +151,39 @@ proxies hosted by the Servarr team (Skyhook, radarr-api, api.lidarr.audio).
 Those are reachable, but intended for the official clients. Phase 1 did not
 need any of them: Unarr serves the metadata the importer found in `sonarr.db`,
 and the fixture's posters come from the `MediaCover` directory Sonarr left on
-disk. The decision moves to phase 2, which is the first to add series.
+disk. Phase 2 did not need them either: searching, deciding and downloading
+work on the series the import brought, and `RefreshSeries` completes without
+effect. The decision is deferred to phase 3, which adds series and refreshes
+them; what is known so far, so the choice can be made there:
 
-Two options:
+- **Servarr proxies (Skyhook for Sonarr).** For: the exact shapes the
+  originals consume, so `series/lookup`, `POST /series` and the refresh are
+  ports rather than designs, scene mappings and the TVDB-to-TVMaze/TMDB ids
+  come from the same place, no key for the user to obtain, one HTTP client
+  for all three personalities. Against: a service run for the official
+  clients, with no published terms for third parties; it may be closed to an
+  unknown user agent at any time, and using it under the original's user
+  agent would be deceptive. Unarr would carry its availability as a risk the
+  user cannot mitigate.
+- **TVDB v4, TMDB and MusicBrainz directly.** For: public APIs with terms
+  (TMDB free with attribution, TVDB v4 with a subscription or a project key
+  under its licence, MusicBrainz at one request per second with a named user
+  agent), no dependency on the Servarr team's goodwill. Against: the
+  responses do not match the originals' shapes, so every metadata field the
+  UI shows (images, ratings, alternate titles, scene numbering) has to be
+  mapped and some have no source (Skyhook adds the XEM scene mappings and
+  `sceneSeasonNumber`); TVDB needs a key the user provides or Unarr ships;
+  Lidarr's MusicBrainz model (release groups, releases, tracks, fingerprints)
+  is the largest port of the three.
+- **A hybrid.** Direct providers for identity and metadata, the Servarr
+  proxies only for what has no other source (scene mappings), with a
+  graceful fallback when the proxy is unavailable. The likely outcome: the
+  cost is bounded by phase 3's scope (Sonarr only) and it keeps the user's
+  installation working if either side disappears.
 
-- Use the Servarr proxies, accepting that they may be closed to third parties.
-- Talk to TMDB (free key), TVDB v4 (key, licence to check) and MusicBrainz
-  (1 request per second) directly. More honest, more work, hardest for Lidarr.
+Whatever is chosen, the key or user agent is the user's or Unarr's own; the
+originals' identity is emulated towards clients, never towards upstream
+services.
 
 ## 8. Phases
 
@@ -171,7 +197,14 @@ Two options:
    exit criterion.
 2. **Acquisition.** Release parser, quality and custom formats, Newznab/Torznab
    search, decision engine, SABnzbd, NZBGet, qBittorrent, Transmission, queue.
-   Exit criterion: Prowlarr-driven searches end in a download.
+   Exit criterion: Prowlarr-driven searches end in a download. *Done,
+   November 2026, against mocks*: the release parser and decision engine
+   carry the originals' own test vectors, the 219 goldens include every
+   write, search, grab, queue, command and health shape recorded from the
+   real Sonarr pointed at mock indexers and mock download clients, and
+   `scripts/prowlarr-replay.py` drives the indexer sync. The homelab run (a
+   real Prowlarr, indexer and client) is the one criterion the cloud session
+   could not meet. See `docs/phase-2-acquisition.md`.
 3. **Import and rename.** Folder scanning, media info (ffprobe or a native
    Matroska/MP4 reader), naming tokens, notifications.
 4. **Radarr** as a second personality on the existing core.
@@ -210,9 +243,41 @@ history rows, 40 custom formats):
 | `GET /api/v3/wanted/missing` page of 20, p50 / p99 | | 3.8 / 4.9 ms |
 | `GET /api/v3/calendar` one month, p50 / p99 | | 4.5 / 5.4 ms |
 
-The real fixture is still a small library next to the 1,000-series target, so
-the RSS figures remain a floor; they do say the per-series cost is a few
-hundred kilobytes. The first measurement on the real fixture found the
+End of phase 2 (release build, x86-64, in the cloud session, measured with
+`scripts/scale-fixture.py` and a client script over the loopback). Two
+fixtures again: the real one (38 series, 1,012 episodes, 1,998 history rows)
+and the same scaled 25 times (950 series, 25,300 episodes, 8,650 files,
+50,000 history rows), both with the mock indexers and the mock SABnzbd:
+
+| Metric | Real fixture | Scaled fixture |
+|--------|--------------|----------------|
+| Binary, stripped, with the embedded UI, `reqwest` and `rustls` | 17.7 MiB | 17.7 MiB |
+| Cold start to first response, import included | under 1 s | 2.7 s (the import) |
+| Idle RSS after import | 22.9 MB | 26.0 MB |
+| RSS after an RSS sync and three searches | 56.8 MB | 68.3 MB |
+| RSS after a full `history/since` with series and episodes | 73.9 MB | 88.7 MB |
+| `GET /api/v3/series`, p50 / p99 | 2.8 / 3.6 ms | 49.5 / 60.0 ms |
+| `GET /api/v3/queue` page of 20, p50 / p99 | 1.3 / 1.7 ms | 1.5 / 1.9 ms |
+| `GET /api/v3/health`, `system/task`, `command`, p99 | under 1 ms | under 1 ms |
+| `RssSync` command (18 reports from the mocks) | 0.17 s | 0.18 s |
+| `GET /api/v3/release?episodeId=` (one indexer round trip each), p50 | 76 ms | 74 ms |
+| `GET /api/v3/history/since` from the epoch, with series and episodes | 1,998 rows, 5.7 MB, 0.27 s | 50,000 rows, 144 MB, 6.8 s |
+
+The two targets the phase 1 review left: the full `history/since` is
+streamed a thousand rows at a time, so the 144 MB answer passes through
+without staying (the process is 20 MB heavier after it, not 150, and glibc
+gives the rest back on the next scheduler tick); `/series` on 950 series went
+from 86 ms to 50 ms by not decoding the cast (2.5 MB of JSON no resource
+shows) and loading only the queue's series for the queue, and the rest is the
+950 rows' remaining JSON columns (35 ms) and the season statistics over
+25,000 episodes (15 ms). The design target of 10 ms at that size is not met;
+section 13 says what the next step would be.
+
+The idle figures are what `malloc_trim` leaves after the import: without it
+the scaled fixture's import left the process at 232 MB, holding pages it no
+longer used. The real fixture is still a small library next to the
+1,000-series target, so the RSS figures remain a floor; they do say the
+per-series cost is a few hundred kilobytes. The first measurement on the real fixture found the
 episode-file endpoints at 2 s and the full history at 49 s: every file was
 matched against 249 custom-format specifications whose regexes were compiled
 on each call. A per-pattern cache brought them to the figures above; no other
@@ -311,9 +376,10 @@ cache exists yet, every answer is built from SQLite on request.
     empty values ignored). Dotted field names (`seedCriteria.seedRatio`) read
     nested settings.
   - The anonymiser regenerates every passphrase and salt in `Config`. The
-    first fixture commit on the branch still holds the installation's LAN
-    host names in `config.xml`; the branch history has to be rewritten before
-    the repository goes public.
+    first fixture commit on the phase 1 branch held the installation's LAN
+    host names in `config.xml`; the branch was squashed into the single
+    phase 1 commit on `main`, so no published history carries them. Each
+    phase lands the same way.
   - Dead code from earlier steps and the synthetic fixture generator were
     removed.
 - **From the second review.** A follow-up audit found eight more:
@@ -344,15 +410,196 @@ cache exists yet, every answer is built from SQLite on request.
   - The history event numbers live once, in `HistoryEvent::from_number`; the
     SignalR connection id is a counter, since nothing reads it back.
 
-## 12. Open questions
+## 12. Decisions taken in phase 2
 
-- Metadata provider strategy (section 7), needed when phase 2 adds series.
-- SignalR beyond keep-alive: phase 1 broadcasts nothing because nothing
-  changes. Phase 2 has to emit `version`, `series`, `episode`, `queue` and
-  `command` messages with the shapes the UI reduces.
+- **The originals' sources are the specification, their binary the oracle.**
+  Every shape was recorded from the real Sonarr before being implemented:
+  `make golden` points the pinned release at a mock Newznab/Torznab server
+  and mock SABnzbd, NZBGet, qBittorrent and Transmission
+  (`scripts/mock-servarr.py`, mirrored in Rust by `unarr-mock` for the
+  tests), and the request list carries bodies, `sleep` lines for the
+  originals' background work and `{id:name}` references for the ids they
+  number themselves. The replay moves its pinned clock across the sleeps and
+  waits for Unarr's own queue instead. Where the originals' answer is not a
+  function of the request (queue order on equal time left, the health
+  dictionary, the command list with the scheduler's own commands), the
+  comparison says so rather than pinning an accident.
+- **Ported test vectors, as data.** The parser and the decision engine run
+  the originals' own test cases (`tests/vectors/*`, extracted by
+  `scripts/port-vectors.py`); a divergence there is a bug in Unarr, not a
+  judgement call.
+- **Mocks, not credentials.** The fixture's providers stay anonymised; the
+  network tests run against the mocks on a free port, with the fixtures'
+  recorded addresses rewritten to it. No real indexer, tracker or client was
+  contacted from the cloud session, and none of the user's keys exist in
+  the tree.
+- **One HTTP client, no OpenSSL.** `reqwest` with `rustls`, shared, with the
+  originals' timeouts and a Unarr user agent towards indexers and clients.
+  The emulated Sonarr identity stops at the API surface.
+- **Commands as the unit of work.** A port of the originals' command queue,
+  executor and scheduler rather than a Rust-native task system: the UI and
+  the ecosystem drive `POST /command`, read the queue back, and expect the
+  scheduled tasks to move. Three workers, the same priority and exclusivity
+  rules, the same thirty-second tick, commands stored for a day.
+- **Pending releases follow the originals, quirks included.** A release held
+  back by a delay profile is re-decided on every RSS sync together with the
+  feed; the copy from the table turns the stored row into a fallback that
+  leaves the queue, as the originals' `AddMany` does. Documented in the tests
+  rather than fixed: a client that reads the queue sees what it would see.
+- **Provider back-off with the originals' grace periods.** The first failure
+  sets level one; download clients are not blocked within five minutes of it;
+  nothing escalates in the quarter hour after the start, and no block then
+  outlasts five minutes. Without the grace, a single unreachable client
+  disappeared from the rotation at once and the health page lit up where the
+  originals' stayed quiet.
+- **Health verdicts kept by source, run on events.** Startup after five
+  seconds, the `CheckHealth` command, a provider change, a provider status
+  change; the UI gets a `health` sync each time something changed. The
+  checks are the acquisition subset of the originals' with their messages
+  and wiki links verbatim.
+- **Streaming where a response may not fit.** `history/since` renders and
+  serialises a thousand rows at a time behind a cursor on `(date, id)`; the
+  full history of a 50,000-row library is 144 MB of JSON and the process no
+  longer keeps it. Everything else is small enough to build at once.
+- **Memory given back.** glibc keeps what an import or a large response
+  freed; `malloc_trim` after the import and on every scheduler tick returns
+  it. Idle RSS on the 950-series fixture went from 232 MB to 22 MB with
+  nothing else changed.
+- **Metadata deferred, with the trade-offs written down** (section 7).
+- **`RefreshSeries`, `RescanSeries` and the importer's completed downloads**
+  are accepted and complete without effect: the UI's buttons work and the
+  scheduler's rows move, the work itself is phase 3's.
+- **From the phase 2 review.** An independent audit of `main` at the end of
+  phase 2 found 23 issues (9 must fix, 10 should fix, 4 nice to have) and
+  some code to delete, treating indexer and client responses as untrusted.
+  A recheck of the fixes confirmed them, found one division left unguarded
+  and a 24th finding the first pass had missed. All are addressed; the
+  decisions:
+  - An original `config.xml` is never rewritten. One that lives in Unarr's
+    own folder (the installation mounted as Unarr's data, or copied there)
+    is read in place; one Unarr did not write is kept even when another
+    original is pointed at. A marker (`.config.xml.unarr`) names the files
+    Unarr itself wrote, which are the only ones a later import replaces. The
+    phase 1 fix had rewritten the user's file with the settings Unarr keeps.
+  - A scene mapping with a season but no scene season shifts nothing: the
+    originals compare a nullable, which is false on null. Over a hundred
+    fixture rows have that shape; `Dragons.Defenders.of.Berk.S02E05` mapped
+    to S04E05 before.
+  - NZBGet's own field names (`NZBID`, `NZBName`, `ID`) are read; serde is
+    case-sensitive where the originals' JSON reader is not, so every queue
+    item had id 0 and no title. Both mocks spelled them the wrong way, which
+    is why the tests passed; the real captures had empty queues.
+  - `POST /release/push` processes the decision it reports, under the
+    originals' push lock, honouring `downloadClientId`; it used to answer
+    "approved" and grab nothing.
+  - Deleting a download's files refuses a path with `..`, one with fewer than
+    two components, and one that is, holds or is inside a library root
+    folder, with a warning. The originals delete whatever path the client
+    reports; this is a deliberate deviation, since one click could remove a
+    library when a client sorts into it.
+  - Hostile input no longer ends the daemon: bencode nesting is capped at
+    128, `size_suffix` saturates on `i64::MIN`, an NZB with an `<!ENTITY`
+    declaration is invalid (a 130 KB one expanded to a gigabyte), every
+    response body is read through one helper with a 64 MiB ceiling, a
+    release profile term with an unfinished group fails to compile instead
+    of slicing past the end, a `PUT` whose body is not an object is a 400,
+    client time-left figures clamp at ten years and date additions are
+    checked, feed dates outside years 1 to 9999 are refused, and titles
+    over 512 bytes are not parsed (6,001 bytes of `-` took 26 seconds of the
+    database thread).
+  - Secrets stay out of logs and API errors: `http::redact` blanks the
+    secret query values (`apikey`, `passkey`, `token`, SABnzbd's login
+    fields...) in every HTTP error text and download log line, `reqwest`
+    errors are logged without their URL, and the shared client sends no
+    `Referer` on redirects, which carried the first URL's key to the next
+    host.
+  - An unknown HTML entity in a feed becomes text (`&amp;oacute;`) rather
+    than failing the page and backing the indexer off.
+  - `history.download_id` is indexed (migration 5): the per-item lookup on
+    every refresh was a table scan, 20 ms on 50,000 rows.
+  - One queue refresh at a time, with the dirty flag cleared before the
+    clients are asked and restored on failure, so two readers of a stale
+    queue poll once and a grab during a refresh is not lost.
+  - The rows a grab, a failure, an ignore or a pending release write land in
+    one transaction, and a download is marked `Failed` only once its rows
+    exist.
+  - Tracked downloads no client reports any more leave the cache; the
+    originals keep them as not trackable for the life of the process.
+  - On SIGTERM the workers take no further command and the daemon waits up
+    to eight seconds for the running ones, so a grab is not cut between the
+    client and its history row.
+  - A bulk grab skips ids a pack already took; a bulk removal stops tracking
+    what it removed before reporting a later failure.
+  - The blocklist matches titles as the originals' `LIKE '%title%'` does:
+    inside the text, ignoring ASCII case.
+  - Removed: `IndexerClient::download`, `store::pending::delete_by_series`
+    and `added_at`, `CommandQueue::set_result`, the weaker magnet parser in
+    `rss` and the second `remove_file_extension`. `scheduler::refresh_intervals`
+    had no caller because the hook was missing, not because it was dead: it
+    runs on every scheduler tick now, so a changed interval setting applies
+    within thirty seconds. `torrent::summary` and `magnet_display_name` stay
+    in `unarr-core` although only the mock uses them: they need the bencode
+    parser, and moving them means a second one.
+  - Importing after a blank first start works again (finding 24): the
+    start had seeded `scheduled_tasks` with the default tasks, and the
+    import inserted the original's rows with the same ids. The import now
+    replaces the seeded rows, last runs included, inside its transaction;
+    the scheduler reconciles the table with the defaults on the next start
+    as before. NZBGet's time-left division is checked too, since a client
+    reporting a negative rate could overflow it.
+  - Left as is: a blank start on a build before the marker file wrote no
+    marker, so a later import keeps that generated `config.xml`. The log
+    line says so and says to delete the file; only unreleased builds are
+    affected.
+- **From the review of the last phase 2 step.** A separate review of the
+  branch's final commit (the measurements step) found one bug and three
+  cleanups, all applied: `history/since` answered `[` without closing the
+  array when nothing was newer than the date asked, the normal case for a
+  client polling for news (the stream ended with the cursor, and an empty
+  first page has none); four doc comments had landed on the wrong items;
+  the old whole-list `since` query had no caller; the timers and the
+  hand-rolled serialisation that measured `/series` are gone, the numbers
+  being in section 9. Its two unverified notes are recorded above: the
+  memory figures are from a glibc build, not the musl image, and listing
+  series without the cast is safe only until something writes a series back
+  whole.
+
+## 13. Open questions
+
+- Metadata provider strategy (section 7), to decide in phase 3 with the
+  pros and cons recorded there.
+- SignalR: phase 2 emits `indexer`, `downloadclient`, `queue`,
+  `queue/details`, `queue/status`, `command` and `health` messages with the
+  shapes the UI reduces; `series` and `episode` messages wait for the
+  importer and the metadata refresh.
 - The collation approximates ICU for ASCII names. Titles with accented or
   non-Latin characters may sort differently from the originals; a full UCA
   implementation is not worth its size until a golden shows the difference.
 - `MediaCover` images: the fixture has none, so the UI shows placeholders.
-  Phase 2 will fetch covers when it adds series; for imports, Unarr reuses the
+  Phase 3 will fetch covers when it adds series; for imports, Unarr reuses the
   original `MediaCover` directory when it is next to the imported files.
+- The download clients were ported from the originals' proxies and verified
+  against mocks that answer as those proxies expect. Exchanges recorded from
+  the maintainer's Sonarr (its trace log read by
+  `scripts/downloadclient-capture.py from-log`, anonymised) with a real
+  NZBGet 24, a real qBittorrent 5 and a program speaking qBittorrent's API
+  under a URL base of its own are in `tests/fixtures/downloadclients/`; the
+  mock replays them under `/capture/<name>/` and
+  `crates/unarr-mock/tests/captures.rs` runs Unarr's clients against them.
+  The queues were empty when they were taken, so they verify versions,
+  settings, categories and the directories derived from them, not queue
+  items; a recording with downloads in flight, and any exchange with SABnzbd
+  or Transmission, would extend the replays.
+- The memory figures in section 9 come from a glibc build, where
+  `malloc_trim` returns freed pages. The published image is a static musl
+  build: musl's allocator has no `malloc_trim` (the call is compiled out)
+  and behaves differently, so the image's idle footprint after an import
+  is not measured yet.
+- Listing series skips the `actors` column, the largest JSON one. That is
+  safe only while nothing writes a series back whole from a list; the
+  series writes of phase 3 must load the cast first, or update columns.
+- `/series` on a 950-series library costs tens of milliseconds, most of it
+  reading and decoding 950 rows with their JSON columns and aggregating
+  25,000 episodes on every call. The design keeps every answer built from
+  SQLite on request; a per-series cache invalidated by the writes would be
+  the next step if the UI's refresh rate makes it matter.

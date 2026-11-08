@@ -2,10 +2,14 @@
 //! connection; callers obtain the connection through [`crate::db::Db`].
 
 pub mod catalog;
+pub mod commands;
 pub mod config;
+pub mod download_history;
 pub mod episodes;
 pub mod history;
 pub mod paging;
+pub mod pending;
+pub mod provider_status;
 pub mod providers;
 pub mod scene;
 pub mod series;

@@ -1,0 +1,10 @@
+{
+  "body": {},
+  "recordedAt": "2026-11-07T15:44:21Z",
+  "request": {
+    "body": "bodies/downloadclient-test-transmission-directory.json",
+    "method": "POST",
+    "path": "/api/v3/downloadclient/test"
+  },
+  "status": 200
+}

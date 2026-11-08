@@ -1,0 +1,108 @@
+{
+ "source": "NzbDrone.Core.Test/ParserTests/ParsingServiceTests/GetEpisodesFixture.cs",
+ "methods": {
+  "should_use_scene_numbering_when_scene_season_number_has_value": {
+   "params": [
+    "seasonNumber"
+   ],
+   "cases": [
+    [
+     0
+    ],
+    [
+     1
+    ],
+    [
+     2
+    ]
+   ]
+  },
+  "should_find_episode_by_season_and_scene_absolute_episode_number": {
+   "params": [
+    "seasonNumber"
+   ],
+   "cases": [
+    [
+     0
+    ],
+    [
+     1
+    ],
+    [
+     2
+    ]
+   ]
+  },
+  "should_find_episode_by_parsed_season_and_absolute_episode_number_when_season_number_is_2_or_higher": {
+   "params": [
+    "seasonNumber"
+   ],
+   "cases": [
+    [
+     2
+    ],
+    [
+     20
+    ]
+   ]
+  },
+  "should_find_episode_by_parsed_season_and_absolute_episode_number_when_season_number_is_2_or_higher_and_scene_season_number_lookup_failed": {
+   "params": [
+    "seasonNumber"
+   ],
+   "cases": [
+    [
+     2
+    ],
+    [
+     20
+    ]
+   ]
+  },
+  "should_not_find_episode_by_parsed_season_and_absolute_episode_number_when_season_number_is_2_or_higher_and_a_episode_number_was_parsed": {
+   "params": [
+    "seasonNumber"
+   ],
+   "cases": [
+    [
+     2
+    ],
+    [
+     20
+    ]
+   ]
+  },
+  "should_return_episodes_when_scene_absolute_episode_number_returns_multiple_results": {
+   "params": [
+    "seasonNumber"
+   ],
+   "cases": [
+    [
+     0
+    ],
+    [
+     1
+    ],
+    [
+     2
+    ]
+   ]
+  },
+  "should_find_episode_by_season_and_absolute_episode_number_when_scene_absolute_episode_number_returns_no_results": {
+   "params": [
+    "seasonNumber"
+   ],
+   "cases": [
+    [
+     0
+    ],
+    [
+     1
+    ],
+    [
+     2
+    ]
+   ]
+  }
+ }
+}

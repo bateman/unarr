@@ -1,0 +1,81 @@
+{
+  "body": {
+    "options": [
+      {
+        "hint": "(5000)",
+        "name": "TV",
+        "order": 0,
+        "value": 5000
+      },
+      {
+        "hint": "(5020)",
+        "name": "Foreign",
+        "order": 0,
+        "parentValue": 5000,
+        "value": 5020
+      },
+      {
+        "hint": "(5030)",
+        "name": "SD",
+        "order": 0,
+        "parentValue": 5000,
+        "value": 5030
+      },
+      {
+        "hint": "(5040)",
+        "name": "HD",
+        "order": 0,
+        "parentValue": 5000,
+        "value": 5040
+      },
+      {
+        "hint": "(5045)",
+        "name": "UHD",
+        "order": 0,
+        "parentValue": 5000,
+        "value": 5045
+      },
+      {
+        "hint": "(5050)",
+        "name": "Other",
+        "order": 0,
+        "parentValue": 5000,
+        "value": 5050
+      },
+      {
+        "hint": "(5070)",
+        "name": "Anime",
+        "order": 0,
+        "parentValue": 5000,
+        "value": 5070
+      },
+      {
+        "hint": "(5080)",
+        "name": "Documentary",
+        "order": 0,
+        "parentValue": 5000,
+        "value": 5080
+      },
+      {
+        "hint": "(2000)",
+        "name": "Movies",
+        "order": 0,
+        "value": 2000
+      },
+      {
+        "hint": "(2040)",
+        "name": "HD",
+        "order": 0,
+        "parentValue": 2000,
+        "value": 2040
+      }
+    ]
+  },
+  "recordedAt": "2026-11-07T15:44:12Z",
+  "request": {
+    "body": "bodies/indexer-create.json",
+    "method": "POST",
+    "path": "/api/v3/indexer/action/newznabCategories"
+  },
+  "status": 200
+}

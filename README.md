@@ -5,11 +5,16 @@ Sonarr, Radarr and Lidarr that keeps their APIs, so Prowlarr, Bazarr, Overseerr,
 Recyclarr and your dashboards keep working unchanged. Drop it in, import your
 existing databases and config, free a few hundred megabytes of RAM.
 
-Status: phase 1 done, Sonarr read-only. Unarr imports `sonarr.db` and
-`config.xml`, serves the `/api/v3` read endpoints with the original JSON, and
-runs the official Sonarr v4 web UI from the binary. Nothing is searched,
-downloaded or renamed yet. Radarr and Lidarr answer `system/status` only. See
-[docs/DESIGN.md](docs/DESIGN.md) and [docs/phase-1-sonarr.md](docs/phase-1-sonarr.md).
+Status: phase 2 done, Sonarr acquires. Unarr imports `sonarr.db` and
+`config.xml`, serves `/api/v3` with the original JSON, runs the official
+Sonarr v4 web UI from the binary, and now searches Newznab and Torznab
+indexers (Prowlarr can manage them), decides with the originals' rules,
+hands releases to SABnzbd, NZBGet, qBittorrent or Transmission, tracks the
+queue, runs the commands and scheduled tasks, and reports health. Completed
+downloads wait for phase 3, which imports and renames them and adds series.
+Radarr and Lidarr answer `system/status` only. See
+[docs/DESIGN.md](docs/DESIGN.md), [docs/phase-1-sonarr.md](docs/phase-1-sonarr.md)
+and [docs/phase-2-acquisition.md](docs/phase-2-acquisition.md).
 
 ## Goals
 

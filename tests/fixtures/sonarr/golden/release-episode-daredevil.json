@@ -1,0 +1,204 @@
+{
+  "body": [
+    {
+      "absoluteEpisodeNumbers": [],
+      "age": 612,
+      "ageHours": 14701.57131360764,
+      "ageMinutes": 882094.278816465,
+      "approved": false,
+      "commentUrl": "http://127.0.0.1:18989/newznab/details/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2#comments",
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 21,
+          "name": "DSNP"
+        },
+        {
+          "id": 10,
+          "name": "HD Streaming Boost"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 11,
+          "name": "WEB Tier 01"
+        }
+      ],
+      "downloadAllowed": true,
+      "downloadUrl": "http://127.0.0.1:18989/newznab/download/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2.nzb",
+      "episodeNumbers": [
+        1
+      ],
+      "episodeRequested": true,
+      "fullSeason": false,
+      "guid": "http://127.0.0.1:18989/newznab/details/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2",
+      "indexer": "Mock Newznab (Prowlarr)",
+      "indexerFlags": 0,
+      "indexerId": 20,
+      "infoUrl": "http://127.0.0.1:18989/newznab/details/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2",
+      "isAbsoluteNumbering": false,
+      "isDaily": false,
+      "isPossibleSpecialEpisode": false,
+      "languageWeight": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mappedAbsoluteEpisodeNumbers": [],
+      "mappedEpisodeInfo": [
+        {
+          "episodeNumber": 1,
+          "id": 46,
+          "seasonNumber": 1,
+          "title": "Heaven's Half Hour"
+        }
+      ],
+      "mappedEpisodeNumbers": [
+        1
+      ],
+      "mappedSeasonNumber": 1,
+      "mappedSeriesId": 2,
+      "protocol": "usenet",
+      "publishDate": "2025-03-05T02:10:00Z",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityWeight": 1101,
+      "rejected": true,
+      "rejections": [
+        "Custom Formats DSNP, HD Streaming Boost, Language not Italian, WEB Tier 01 have score -10000 below Series profile minimum 0"
+      ],
+      "releaseGroup": "FLUX",
+      "releaseHash": "",
+      "releaseWeight": 0,
+      "sceneSource": false,
+      "seasonNumber": 1,
+      "seriesTitle": "Daredevil Born Again",
+      "size": 3113851289,
+      "special": false,
+      "temporarilyRejected": false,
+      "title": "Daredevil.Born.Again.S01E01.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-FLUX",
+      "tvRageId": 0,
+      "tvdbId": 422712
+    },
+    {
+      "absoluteEpisodeNumbers": [],
+      "age": 612,
+      "ageHours": 14701.571313620778,
+      "ageMinutes": 882094.2788172467,
+      "approved": false,
+      "commentUrl": "http://127.0.0.1:18989/torznab/details/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2#comments",
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 21,
+          "name": "DSNP"
+        },
+        {
+          "id": 10,
+          "name": "HD Streaming Boost"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 11,
+          "name": "WEB Tier 01"
+        }
+      ],
+      "downloadAllowed": true,
+      "downloadUrl": "http://127.0.0.1:18989/torznab/download/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2.torrent",
+      "episodeNumbers": [
+        1
+      ],
+      "episodeRequested": true,
+      "fullSeason": false,
+      "guid": "http://127.0.0.1:18989/torznab/details/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2",
+      "indexer": "Mock Torznab (Prowlarr)",
+      "indexerFlags": 0,
+      "indexerId": 21,
+      "infoHash": "07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e207f9c8d0",
+      "infoUrl": "http://127.0.0.1:18989/torznab/details/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2",
+      "isAbsoluteNumbering": false,
+      "isDaily": false,
+      "isPossibleSpecialEpisode": false,
+      "languageWeight": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "leechers": 4,
+      "magnetUrl": "",
+      "mappedAbsoluteEpisodeNumbers": [],
+      "mappedEpisodeInfo": [
+        {
+          "episodeNumber": 1,
+          "id": 46,
+          "seasonNumber": 1,
+          "title": "Heaven's Half Hour"
+        }
+      ],
+      "mappedEpisodeNumbers": [
+        1
+      ],
+      "mappedSeasonNumber": 1,
+      "mappedSeriesId": 2,
+      "protocol": "torrent",
+      "publishDate": "2025-03-05T02:10:00Z",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityWeight": 1101,
+      "rejected": true,
+      "rejections": [
+        "Custom Formats DSNP, HD Streaming Boost, Language not Italian, WEB Tier 01 have score -10000 below Series profile minimum 0"
+      ],
+      "releaseGroup": "FLUX",
+      "releaseHash": "",
+      "releaseWeight": 1,
+      "sceneSource": false,
+      "seasonNumber": 1,
+      "seeders": 64,
+      "seriesTitle": "Daredevil Born Again",
+      "size": 3113851289,
+      "special": false,
+      "temporarilyRejected": false,
+      "title": "Daredevil.Born.Again.S01E01.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-FLUX",
+      "tvRageId": 0,
+      "tvdbId": 422712
+    }
+  ],
+  "recordedAt": "2026-11-07T15:44:16Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/release?episodeId=46"
+  },
+  "status": 200
+}

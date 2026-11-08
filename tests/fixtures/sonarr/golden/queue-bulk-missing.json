@@ -1,0 +1,12 @@
+{
+  "body": {
+    "message": "NotFound"
+  },
+  "recordedAt": "2026-11-07T15:44:37Z",
+  "request": {
+    "body": "bodies/queue-bulk-missing.json",
+    "method": "DELETE",
+    "path": "/api/v3/queue/bulk?removeFromClient=true"
+  },
+  "status": 404
+}

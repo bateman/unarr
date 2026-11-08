@@ -1,0 +1,37 @@
+{
+  "body": {
+    "body": {
+      "isExclusive": false,
+      "isLongRunning": false,
+      "name": "SeasonSearch",
+      "requiresDiskAccess": false,
+      "seasonNumber": 1,
+      "sendUpdatesToClient": true,
+      "seriesId": 1,
+      "suppressMessages": false,
+      "trigger": "manual",
+      "updateScheduledTask": true
+    },
+    "commandName": "Season Search",
+    "duration": "00:00:00.0859046",
+    "ended": "2026-11-07T15:44:53Z",
+    "id": 461666,
+    "message": "Season search completed. 0 reports downloaded.",
+    "name": "SeasonSearch",
+    "priority": "normal",
+    "queued": "2026-11-07T15:44:53Z",
+    "result": "successful",
+    "sendUpdatesToClient": true,
+    "started": "2026-11-07T15:44:53Z",
+    "stateChangeTime": "2026-11-07T15:44:53Z",
+    "status": "completed",
+    "trigger": "manual",
+    "updateScheduledTask": true
+  },
+  "recordedAt": "2026-11-07T15:45:08Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/command/461666"
+  },
+  "status": 200
+}

@@ -6,3 +6,4 @@
 /crates/unarr-api/ui/sonarr/*
 !/crates/unarr-api/ui/sonarr/.gitkeep
 __pycache__/
+/scratchpad

@@ -105,10 +105,21 @@ pub async fn status(State(state): State<AppState>) -> ApiResult<Json<SystemResou
     }))
 }
 
-/// Health checks. Unarr runs none yet, so the list is empty, which the
-/// originals also return when everything is fine.
-pub async fn health() -> Json<Vec<serde_json::Value>> {
-    Json(Vec::new())
+/// `HealthResource`: the verdicts that stand, as the runtime keeps them;
+/// none before it runs, which is also what the originals answer when
+/// everything is fine.
+pub async fn health(State(state): State<AppState>) -> Json<Vec<Value>> {
+    let checks = state.commands().map(|r| r.health()).unwrap_or_default();
+    Json(checks.iter().map(health_resource).collect())
+}
+
+pub fn health_resource(h: &unarr_core::health::HealthCheck) -> Value {
+    json!({
+        "source": h.source,
+        "type": h.kind.as_str(),
+        "message": h.message,
+        "wikiUrl": h.wiki_url,
+    })
 }
 
 /// The bootstrap document the web UI fetches before anything else.
@@ -210,11 +221,6 @@ pub async fn task(State(state): State<AppState>, Path(id): Path<i64>) -> ApiResu
         .call(|c| store::providers::list_scheduled_tasks(c))
         .await?;
     Ok(Json(found(all.iter().find(|t| t.id == id).map(task_resource))?))
-}
-
-/// Queued and running commands. Unarr runs none yet.
-pub async fn commands() -> Json<Vec<Value>> {
-    Json(Vec::new())
 }
 
 // --- logs

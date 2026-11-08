@@ -1,0 +1,10 @@
+{
+  "body": {},
+  "recordedAt": "2026-11-07T15:44:12Z",
+  "request": {
+    "body": "bodies/indexer-test.json",
+    "method": "POST",
+    "path": "/api/v3/indexer/test"
+  },
+  "status": 200
+}

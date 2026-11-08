@@ -1,0 +1,104 @@
+{
+  "body": [
+    {
+      "absoluteEpisodeNumbers": [],
+      "age": 659,
+      "ageHours": 15828.739132835806,
+      "ageMinutes": 949724.34797016,
+      "approved": false,
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 11,
+          "name": "WEB Tier 01"
+        }
+      ],
+      "downloadAllowed": true,
+      "downloadUrl": "http://127.0.0.1:18989/newznab/download/push-the-pitt-s01e03.nzb",
+      "episodeNumbers": [
+        3
+      ],
+      "episodeRequested": false,
+      "fullSeason": false,
+      "guid": "PUSH-http://127.0.0.1:18989/newznab/download/push-the-pitt-s01e03.nzb",
+      "indexer": "Mock Newznab (Prowlarr)",
+      "indexerFlags": 0,
+      "indexerId": 20,
+      "isAbsoluteNumbering": false,
+      "isDaily": false,
+      "isPossibleSpecialEpisode": false,
+      "languageWeight": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mappedAbsoluteEpisodeNumbers": [
+        3
+      ],
+      "mappedEpisodeInfo": [
+        {
+          "absoluteEpisodeNumber": 3,
+          "episodeNumber": 3,
+          "id": 3,
+          "seasonNumber": 1,
+          "title": "9:00 A.M."
+        }
+      ],
+      "mappedEpisodeNumbers": [
+        3
+      ],
+      "mappedSeasonNumber": 1,
+      "mappedSeriesId": 1,
+      "protocol": "usenet",
+      "publishDate": "2025-01-17T03:00:00Z",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityWeight": 1101,
+      "rejected": true,
+      "rejections": [
+        "Custom Formats AMZN, Language not Italian, WEB Tier 01 have score -10000 below Series profile minimum 0",
+        "Episode is not monitored"
+      ],
+      "releaseGroup": "FLUX",
+      "releaseHash": "",
+      "releaseWeight": 0,
+      "sceneSource": false,
+      "seasonNumber": 1,
+      "seriesTitle": "The Pitt",
+      "size": 2684354560,
+      "special": false,
+      "temporarilyRejected": false,
+      "title": "The.Pitt.S01E03.1080p.AMZN.WEB-DL.DDP5.1.H.264-FLUX",
+      "tvRageId": 0,
+      "tvdbId": 0
+    }
+  ],
+  "recordedAt": "2026-11-07T15:44:20Z",
+  "request": {
+    "body": "bodies/release-push.json",
+    "method": "POST",
+    "path": "/api/v3/release/push"
+  },
+  "status": 200
+}

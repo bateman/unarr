@@ -1,0 +1,23 @@
+{
+  "body": [
+    {
+      "attemptedValue": "Mock Newznab (Prowlarr)",
+      "errorCode": "PredicateValidator",
+      "errorMessage": "Should be unique",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Name",
+        "propertyValue": "Mock Newznab (Prowlarr)"
+      },
+      "propertyName": "Name",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-07T15:44:12Z",
+  "request": {
+    "body": "bodies/indexer-create.json",
+    "method": "POST",
+    "path": "/api/v3/indexer/test"
+  },
+  "status": 400
+}

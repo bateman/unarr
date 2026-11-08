@@ -10,7 +10,9 @@ use std::collections::HashMap;
 
 use axum::extract::State;
 use axum::http::Uri;
+use axum::response::{IntoResponse, Response};
 use axum::Json;
+use chrono::{DateTime, Utc};
 use serde_json::{json, Value};
 use unarr_core::customformat::{self, Input};
 use unarr_core::model::{BlocklistEntry, Episode, HistoryEntry, HistoryEvent, ReleaseType};
@@ -48,8 +50,9 @@ fn release_formats(
     input: Input<'_>,
 ) -> (Vec<CustomFormatRef>, i64) {
     let group = customformat::parse_release_group(title);
+    let release_title = customformat::strip_media_extension(title);
     let input = Input {
-        release_title: customformat::strip_media_extension(title),
+        release_title: &release_title,
         release_group: group.as_deref(),
         ..input
     };
@@ -225,7 +228,14 @@ pub async fn history(
     Ok(Json(out))
 }
 
-pub async fn history_since(State(state): State<AppState>, uri: Uri) -> ApiResult<Json<Vec<HistoryResource>>> {
+/// Rows of `history/since` rendered and serialised per page, so the
+/// response does not have to fit in memory at once.
+const SINCE_PAGE: i64 = 1000;
+
+/// `GET /history/since?date=`: every row since the date, oldest first,
+/// streamed as one JSON array. The originals build the whole list; on a
+/// large library that is tens of megabytes held until the client is done.
+pub async fn history_since(State(state): State<AppState>, uri: Uri) -> ApiResult<Response> {
     let p = Params::from_uri(&uri);
     let Some(date) = p.time("date") else {
         return Err(ApiError::BadRequest("date is required".into()));
@@ -233,16 +243,70 @@ pub async fn history_since(State(state): State<AppState>, uri: Uri) -> ApiResult
     let event = p.get("eventType").and_then(event_param);
     let include_series = p.bool("includeSeries", false);
     let include_episode = p.bool("includeEpisode", false);
-    let load = state
-        .db()
-        .call(move |conn| {
-            let entries = store::history::since(conn, date, event)?;
-            let total = entries.len() as i64;
-            HistoryLoad::read(conn, entries, total, include_episode)
-        })
-        .await?;
-    let out = crate::blocking::run(move || load.render(include_series, include_episode)).await?;
-    Ok(Json(out))
+    let db = state.db().clone();
+    // One page rendered to JSON text, with the cursor of its last row.
+    let page = move |after: Option<(DateTime<Utc>, i64)>, first: bool| {
+        let db = db.clone();
+        async move {
+            db.call(move |conn| {
+                let entries = store::history::since_page(conn, date, event, after, SINCE_PAGE)?;
+                let last = entries.last().map(|h| (h.date, h.id));
+                let total = entries.len() as i64;
+                let load = HistoryLoad::read(conn, entries, total, include_episode)?;
+                let mut text = String::new();
+                for (i, r) in load.render(include_series, include_episode).iter().enumerate() {
+                    if !(first && i == 0) {
+                        text.push(',');
+                    }
+                    text.push_str(&serde_json::to_string(r)?);
+                }
+                Ok((text, last))
+            })
+            .await
+        }
+    };
+    // The first page before answering, so an error is still a status code.
+    let (text, mut cursor) = page(None, true).await?;
+    // No cursor means no rows at all: the array closes at once, since the
+    // stream below ends where the cursor ends.
+    let head = if cursor.is_some() {
+        format!("[{text}")
+    } else {
+        format!("[{text}]")
+    };
+    let stream = futures_util::stream::unfold(
+        (Some(head), cursor.take(), page),
+        |(pending, cursor, page)| async move {
+            if let Some(text) = pending {
+                return Some((
+                    Ok::<_, std::io::Error>(axum::body::Bytes::from(text)),
+                    (None, cursor, page),
+                ));
+            }
+            let after = cursor?;
+            match page(Some(after), false).await {
+                Ok((text, next)) if next.is_some() => {
+                    Some((Ok(axum::body::Bytes::from(text)), (None, next, page)))
+                }
+                Ok((text, _)) => Some((
+                    Ok(axum::body::Bytes::from(format!("{text}]"))),
+                    (None, None, page),
+                )),
+                Err(e) => {
+                    tracing::error!(error = %e, "history/since stopped part way");
+                    Some((Err(std::io::Error::other(e.to_string())), (None, None, page)))
+                }
+            }
+        },
+    );
+    Ok((
+        [(
+            axum::http::header::CONTENT_TYPE,
+            "application/json; charset=utf-8",
+        )],
+        axum::body::Body::from_stream(stream),
+    )
+        .into_response())
 }
 
 pub async fn history_series(
@@ -276,57 +340,6 @@ pub async fn history_series(
 }
 
 // --- queue (nothing downloads yet)
-
-const QUEUE_SORT_KEYS: &[&str] = &[
-    "added",
-    "downloadClient",
-    "episode",
-    "episode.airDateUtc",
-    "episode.title",
-    "episodes.airDateUtc",
-    "episodes.title",
-    "estimatedCompletionTime",
-    "indexer",
-    "language",
-    "languages",
-    "progress",
-    "protocol",
-    "quality",
-    "series.sortTitle",
-    "size",
-    "status",
-    "timeleft",
-    "title",
-];
-
-pub async fn queue(uri: Uri) -> Json<PagingResource<Value>> {
-    let p = Params::from_uri(&uri);
-    let paging = Paging::resolve(
-        p.i64("page"),
-        p.i64("pageSize"),
-        p.get("sortKey"),
-        p.descending(),
-        QUEUE_SORT_KEYS,
-        "timeleft",
-    );
-    Json(PagingResource::new(&paging, 0, Vec::new()))
-}
-
-pub async fn queue_status() -> Json<Value> {
-    Json(json!({
-        "totalCount": 0,
-        "count": 0,
-        "unknownCount": 0,
-        "errors": false,
-        "warnings": false,
-        "unknownErrors": false,
-        "unknownWarnings": false,
-    }))
-}
-
-pub async fn queue_details() -> Json<Vec<Value>> {
-    Json(Vec::new())
-}
 
 // --- blocklist
 

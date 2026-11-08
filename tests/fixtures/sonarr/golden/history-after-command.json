@@ -1,0 +1,216 @@
+{
+  "body": {
+    "page": 1,
+    "pageSize": 3,
+    "records": [
+      {
+        "customFormatScore": -10000,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          }
+        ],
+        "data": {
+          "age": "666",
+          "ageHours": "15996.073786163139",
+          "ageMinutes": "959764.4271698467",
+          "customFormatScore": "-10000",
+          "downloadClient": "Transmission",
+          "downloadClientName": "Mock Transmission",
+          "downloadUrl": "http://127.0.0.1:18989/torznab/download/b2a4d3e5f6c7b8d9e0f1a2b3c4d5e6f7.torrent",
+          "guid": "http://127.0.0.1:18989/torznab/details/b2a4d3e5f6c7b8d9e0f1a2b3c4d5e6f7",
+          "imdbId": null,
+          "indexer": "Mock Torznab (Prowlarr)",
+          "indexerFlags": "0",
+          "nzbInfoUrl": "http://127.0.0.1:18989/torznab/details/b2a4d3e5f6c7b8d9e0f1a2b3c4d5e6f7",
+          "protocol": "2",
+          "publishedDate": "2025-01-10T03:40:00Z",
+          "releaseGroup": "ETHEL",
+          "releaseSource": "Rss",
+          "releaseType": "SingleEpisode",
+          "seriesMatchType": "Title",
+          "size": "1395864371",
+          "torrentInfoHash": "b2a4d3e5f6c7b8d9e0f1a2b3c4d5e6f7b2a4d3e5",
+          "tvRageId": "0",
+          "tvdbId": "448176"
+        },
+        "date": "2026-11-07T15:44:25Z",
+        "downloadId": "C7EB8F60E61BC10B2F8762DE09949BDD2AAFBE5A",
+        "episodeId": 1,
+        "eventType": "grabbed",
+        "id": 2298,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 5,
+            "name": "WEBDL-720p",
+            "resolution": 720,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "seriesId": 1,
+        "sourceTitle": "The.Pitt.S01E01.720p.WEB.h264-ETHEL"
+      },
+      {
+        "customFormatScore": -10000,
+        "customFormats": [
+          {
+            "id": 21,
+            "name": "DSNP"
+          },
+          {
+            "id": 10,
+            "name": "HD Streaming Boost"
+          },
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 11,
+            "name": "WEB Tier 01"
+          }
+        ],
+        "data": {
+          "age": "612",
+          "ageHours": "14701.573239738362",
+          "ageMinutes": "882094.3943843567",
+          "customFormatScore": "-10000",
+          "downloadClient": "qBittorrent",
+          "downloadClientName": "Mock qBittorrent",
+          "downloadUrl": "http://127.0.0.1:18989/torznab/download/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2.torrent",
+          "guid": "http://127.0.0.1:18989/torznab/details/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2",
+          "imdbId": null,
+          "indexer": "Mock Torznab (Prowlarr)",
+          "indexerFlags": "0",
+          "nzbInfoUrl": "http://127.0.0.1:18989/torznab/details/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2",
+          "protocol": "2",
+          "publishedDate": "2025-03-05T02:10:00Z",
+          "releaseGroup": "FLUX",
+          "releaseSource": "Rss",
+          "releaseType": "SingleEpisode",
+          "seriesMatchType": "Title",
+          "size": "3113851289",
+          "torrentInfoHash": "07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e207f9c8d0",
+          "tvRageId": "0",
+          "tvdbId": "422712"
+        },
+        "date": "2026-11-07T15:44:23Z",
+        "downloadId": "0FB2EF04FB342178115BA635EC7B5EC0067058BA",
+        "episodeId": 46,
+        "eventType": "grabbed",
+        "id": 2297,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "seriesId": 2,
+        "sourceTitle": "Daredevil.Born.Again.S01E01.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-FLUX"
+      },
+      {
+        "customFormatScore": -10000,
+        "customFormats": [
+          {
+            "id": 16,
+            "name": "AMZN"
+          },
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 11,
+            "name": "WEB Tier 01"
+          }
+        ],
+        "data": {
+          "age": "666",
+          "ageHours": "15996.539364495722",
+          "ageMinutes": "959792.36186983",
+          "customFormatScore": "-10000",
+          "downloadClient": "SABnzbd",
+          "downloadClientName": "Mock SABnzbd",
+          "downloadUrl": "http://127.0.0.1:18989/newznab/download/a1f3c2d4e5b6a7c8d9e0f1a2b3c4d5e6.nzb",
+          "guid": "http://127.0.0.1:18989/newznab/details/a1f3c2d4e5b6a7c8d9e0f1a2b3c4d5e6",
+          "imdbId": null,
+          "indexer": "Mock Newznab (Prowlarr)",
+          "indexerFlags": "0",
+          "nzbInfoUrl": "http://127.0.0.1:18989/newznab/details/a1f3c2d4e5b6a7c8d9e0f1a2b3c4d5e6",
+          "protocol": "1",
+          "publishedDate": "2025-01-10T03:12:00Z",
+          "releaseGroup": "FLUX",
+          "releaseSource": "Rss",
+          "releaseType": "SingleEpisode",
+          "seriesMatchType": "Title",
+          "size": "2684354560",
+          "tvRageId": "0",
+          "tvdbId": "448176"
+        },
+        "date": "2026-11-07T15:44:21Z",
+        "downloadId": "SABnzbd_nzo_mock1",
+        "episodeId": 1,
+        "eventType": "grabbed",
+        "id": 2296,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "seriesId": 1,
+        "sourceTitle": "The.Pitt.S01E01.1080p.AMZN.WEB-DL.DDP5.1.H.264-FLUX"
+      }
+    ],
+    "sortDirection": "descending",
+    "sortKey": "date",
+    "totalRecords": 749
+  },
+  "recordedAt": "2026-11-07T15:45:08Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/history?page=1&pageSize=3&sortKey=date&sortDirection=descending&eventType=1"
+  },
+  "status": 200
+}

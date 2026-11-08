@@ -1,0 +1,34 @@
+{
+  "body": {
+    "body": {
+      "isExclusive": false,
+      "isLongRunning": false,
+      "name": "ClearBlocklist",
+      "requiresDiskAccess": false,
+      "sendUpdatesToClient": true,
+      "suppressMessages": false,
+      "trigger": "manual",
+      "updateScheduledTask": true
+    },
+    "commandName": "Clear Blocklist",
+    "duration": "00:00:00.0052670",
+    "ended": "2026-11-07T15:45:08Z",
+    "id": 461667,
+    "name": "ClearBlocklist",
+    "priority": "normal",
+    "queued": "2026-11-07T15:45:08Z",
+    "result": "successful",
+    "sendUpdatesToClient": true,
+    "started": "2026-11-07T15:45:08Z",
+    "stateChangeTime": "2026-11-07T15:45:08Z",
+    "status": "completed",
+    "trigger": "manual",
+    "updateScheduledTask": true
+  },
+  "recordedAt": "2026-11-07T15:45:13Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/command/461667"
+  },
+  "status": 200
+}

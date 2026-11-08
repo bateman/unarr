@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:newznab="http://www.newznab.com/DTD/2010/feeds/attributes/">
+  <channel>
+    <atom:link href="http://127.0.0.1:18989/newznab/api" rel="self" type="application/rss+xml"/>
+    <title>Fixture Newznab</title>
+    <description>Unarr test indexer</description>
+    <link>http://127.0.0.1:18989/newznab/</link>
+    <language>en-gb</language>
+    <newznab:response offset="0" total="1"/>
+    <item>
+      <title>Daredevil.Born.Again.S01E01.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-FLUX</title>
+      <guid isPermaLink="true">http://127.0.0.1:18989/newznab/details/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2</guid>
+      <link>http://127.0.0.1:18989/newznab/download/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2.nzb</link>
+      <comments>http://127.0.0.1:18989/newznab/details/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2#comments</comments>
+      <pubDate>Wed, 05 Mar 2025 02:10:00 +0000</pubDate>
+      <category>TV &gt; HD</category>
+      <description>Daredevil.Born.Again.S01E01.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-FLUX</description>
+      <enclosure url="http://127.0.0.1:18989/newznab/download/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2.nzb" length="3113851289" type="application/x-nzb"/>
+      <newznab:attr name="category" value="5000"/>
+      <newznab:attr name="category" value="5040"/>
+      <newznab:attr name="size" value="3113851289"/>
+      <newznab:attr name="guid" value="07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2"/>
+      <newznab:attr name="tvdbid" value="422712"/>
+      <newznab:attr name="season" value="1"/>
+      <newznab:attr name="episode" value="1"/>
+      <newznab:attr name="usenetdate" value="Wed, 05 Mar 2025 02:10:00 +0000"/>
+      <newznab:attr name="grabs" value="12"/>
+    </item>
+  </channel>
+</rss>

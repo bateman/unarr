@@ -1,0 +1,53 @@
+{
+  "enable": true,
+  "protocol": "usenet",
+  "priority": 1,
+  "removeCompletedDownloads": true,
+  "removeFailedDownloads": true,
+  "name": "Bad settings",
+  "implementation": "Sabnzbd",
+  "configContract": "SabnzbdSettings",
+  "tags": [],
+  "fields": [
+    {
+      "name": "host",
+      "value": "http://x"
+    },
+    {
+      "name": "port",
+      "value": 0
+    },
+    {
+      "name": "useSsl",
+      "value": false
+    },
+    {
+      "name": "urlBase",
+      "value": "http://evil.invalid/x"
+    },
+    {
+      "name": "apiKey",
+      "value": ""
+    },
+    {
+      "name": "username",
+      "value": ""
+    },
+    {
+      "name": "password",
+      "value": ""
+    },
+    {
+      "name": "tvCategory",
+      "value": "tv"
+    },
+    {
+      "name": "recentTvPriority",
+      "value": -100
+    },
+    {
+      "name": "olderTvPriority",
+      "value": -100
+    }
+  ]
+}

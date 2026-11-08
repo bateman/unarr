@@ -1,0 +1,1762 @@
+[
+ {
+  "request": {
+   "body": "config()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"62eeb4ad\", \"result\": [{\"Name\": \"ConfigFile\", \"Value\": \"/downloads/config/nzbget.conf\"}, {\"Name\": \"AppBin\", \"Value\": \"/downloads/nzbget\"}, {\"Name\": \"AppDir\", \"Value\": \"/downloads/nzbget\"}, {\"Name\": \"Version\", \"Value\": \"26.3\"}, {\"Name\": \"MainDir\", \"Value\": \"/downloads/usenet\"}, {\"Name\": \"WebDir\", \"Value\": \"/downloads/webui\"}, {\"Name\": \"ConfigTemplate\", \"Value\": \"/downloads/webui/nzbget.conf.template\"}, {\"Name\": \"TempDir\", \"Value\": \"/downloads/tmp\"}, {\"Name\": \"DestDir\", \"Value\": \"/downloads/complete\"}, {\"Name\": \"InterDir\", \"Value\": \"/downloads/incomplete\"}, {\"Name\": \"QueueDir\", \"Value\": \"/downloads/queue\"}, {\"Name\": \"NzbDir\", \"Value\": \"/downloads/nzb\"}, {\"Name\": \"LockFile\", \"Value\": \"/downloads/usenet/nzbget.lock\"}, {\"Name\": \"LogFile\", \"Value\": \"/downloads/usenet/nzbget.log\"}, {\"Name\": \"ScriptDir\", \"Value\": \"/downloads/scripts\"}, {\"Name\": \"RequiredDir\", \"Value\": \"\"}, {\"Name\": \"WriteLog\", \"Value\": \"rotate\"}, {\"Name\": \"RotateLog\", \"Value\": \"3\"}, {\"Name\": \"AppendCategoryDir\", \"Value\": \"yes\"}, {\"Name\": \"OutputMode\", \"Value\": \"loggable\"}, {\"Name\": \"DupeCheck\", \"Value\": \"yes\"}, {\"Name\": \"DownloadRate\", \"Value\": \"0\"}, {\"Name\": \"ControlIP\", \"Value\": \"0.0.0.0\"}, {\"Name\": \"ControlUsername\", \"Value\": \"unarr\"}, {\"Name\": \"ControlPassword\", \"Value\": \"fixture\"}, {\"Name\": \"RestrictedUsername\", \"Value\": \"\"}, {\"Name\": \"RestrictedPassword\", \"Value\": \"\"}, {\"Name\": \"AddUsername\", \"Value\": \"\"}, {\"Name\": \"AddPassword\", \"Value\": \"\"}, {\"Name\": \"ControlPort\", \"Value\": \"6789\"}, {\"Name\": \"FormAuth\", \"Value\": \"yes\"}, {\"Name\": \"SecureControl\", \"Value\": \"no\"}, {\"Name\": \"SecurePort\", \"Value\": \"6791\"}, {\"Name\": \"SecureCert\", \"Value\": \"\"}, {\"Name\": \"SecureKey\", \"Value\": \"\"}, {\"Name\": \"CertStore\", \"Value\": \"/downloads/nzbget/cacert.pem\"}, {\"Name\": \"CertCheck\", \"Value\": \"yes\"}, {\"Name\": \"AuthorizedIP\", \"Value\": \"127.0.0.1\"}, {\"Name\": \"ArticleTimeout\", \"Value\": \"60\"}, {\"Name\": \"ArticleReadChunkSize\", \"Value\": \"4\"}, {\"Name\": \"UrlTimeout\", \"Value\": \"60\"}, {\"Name\": \"RemoteTimeout\", \"Value\": \"90\"}, {\"Name\": \"FlushQueue\", \"Value\": \"yes\"}, {\"Name\": \"SystemHealthCheck\", \"Value\": \"yes\"}, {\"Name\": \"NzbLog\", \"Value\": \"yes\"}, {\"Name\": \"RawArticle\", \"Value\": \"no\"}, {\"Name\": \"SkipWrite\", \"Value\": \"no\"}, {\"Name\": \"ArticleRetries\", \"Value\": \"3\"}, {\"Name\": \"ArticleInterval\", \"Value\": \"10\"}, {\"Name\": \"UrlRetries\", \"Value\": \"3\"}, {\"Name\": \"UrlInterval\", \"Value\": \"10\"}, {\"Name\": \"ContinuePartial\", \"Value\": \"yes\"}, {\"Name\": \"UrlConnections\", \"Value\": \"4\"}, {\"Name\": \"LogBuffer\", \"Value\": \"1000\"}, {\"Name\": \"InfoTarget\", \"Value\": \"both\"}, {\"Name\": \"WarningTarget\", \"Value\": \"both\"}, {\"Name\": \"ErrorTarget\", \"Value\": \"both\"}, {\"Name\": \"DebugTarget\", \"Value\": \"log\"}, {\"Name\": \"DetailTarget\", \"Value\": \"log\"}, {\"Name\": \"ParCheck\", \"Value\": \"auto\"}, {\"Name\": \"ParRepair\", \"Value\": \"yes\"}, {\"Name\": \"ParScan\", \"Value\": \"extended\"}, {\"Name\": \"ParQuick\", \"Value\": \"yes\"}, {\"Name\": \"PostStrategy\", \"Value\": \"balanced\"}, {\"Name\": \"FileNaming\", \"Value\": \"auto\"}, {\"Name\": \"RenameAfterUnpack\", \"Value\": \"yes\"}, {\"Name\": \"RenameIgnoreExt\", \"Value\": \".zip, .7z, .rar, .par2\"}, {\"Name\": \"ParRename\", \"Value\": \"yes\"}, {\"Name\": \"ParBuffer\", \"Value\": \"512\"}, {\"Name\": \"ParThreads\", \"Value\": \"0\"}, {\"Name\": \"RarRename\", \"Value\": \"yes\"}, {\"Name\": \"HealthCheck\", \"Value\": \"park\"}, {\"Name\": \"DirectRename\", \"Value\": \"no\"}, {\"Name\": \"HardLinking\", \"Value\": \"no\"}, {\"Name\": \"HardLinkingIgnoreExt\", \"Value\": \".zip, .7z, .rar, *.7z.###, *.r##\"}, {\"Name\": \"ScriptOrder\", \"Value\": \"\"}, {\"Name\": \"Extensions\", \"Value\": \"\"}, {\"Name\": \"DaemonUsername\", \"Value\": \"unarr\"}, {\"Name\": \"UMask\", \"Value\": \"1000\"}, {\"Name\": \"UpdateInterval\", \"Value\": \"200\"}, {\"Name\": \"CursesNzbName\", \"Value\": \"yes\"}, {\"Name\": \"CursesTime\", \"Value\": \"no\"}, {\"Name\": \"CursesGroup\", \"Value\": \"no\"}, {\"Name\": \"CrcCheck\", \"Value\": \"yes\"}, {\"Name\": \"DirectWrite\", \"Value\": \"yes\"}, {\"Name\": \"WriteBuffer\", \"Value\": \"1024\"}, {\"Name\": \"NzbDirInterval\", \"Value\": \"5\"}, {\"Name\": \"NzbDirFileAge\", \"Value\": \"60\"}, {\"Name\": \"NzbDirArchiveScan\", \"Value\": \"yes\"}, {\"Name\": \"NzbDirArchiveAction\", \"Value\": \"delete\"}, {\"Name\": \"DiskSpace\", \"Value\": \"250\"}, {\"Name\": \"CrashTrace\", \"Value\": \"yes\"}, {\"Name\": \"CrashDump\", \"Value\": \"no\"}, {\"Name\": \"ParPauseQueue\", \"Value\": \"yes\"}, {\"Name\": \"ScriptPauseQueue\", \"Value\": \"no\"}, {\"Name\": \"NzbCleanupDisk\", \"Value\": \"yes\"}, {\"Name\": \"ParTimeLimit\", \"Value\": \"0\"}, {\"Name\": \"KeepHistory\", \"Value\": \"30\"}, {\"Name\": \"Unpack\", \"Value\": \"yes\"}, {\"Name\": \"DirectUnpack\", \"Value\": \"no\"}, {\"Name\": \"UseTempUnpackDir\", \"Value\": \"yes\"}, {\"Name\": \"UnpackCleanupDisk\", \"Value\": \"yes\"}, {\"Name\": \"UnrarCmd\", \"Value\": \"unrar\"}, {\"Name\": \"SevenZipCmd\", \"Value\": \"7z\"}, {\"Name\": \"UnpackPassFile\", \"Value\": \"\"}, {\"Name\": \"UnpackPauseQueue\", \"Value\": \"no\"}, {\"Name\": \"ExtCleanupDisk\", \"Value\": \".par2, .sfv\"}, {\"Name\": \"ParIgnoreExt\", \"Value\": \".sfv, .nzb, .nfo\"}, {\"Name\": \"UnpackIgnoreExt\", \"Value\": \".cbr\"}, {\"Name\": \"FeedHistory\", \"Value\": \"7\"}, {\"Name\": \"UrlForce\", \"Value\": \"yes\"}, {\"Name\": \"TimeCorrection\", \"Value\": \"0\"}, {\"Name\": \"PropagationDelay\", \"Value\": \"0\"}, {\"Name\": \"ArticleCache\", \"Value\": \"500\"}, {\"Name\": \"EventInterval\", \"Value\": \"0\"}, {\"Name\": \"ShellOverride\", \"Value\": \"\"}, {\"Name\": \"MonthlyQuota\", \"Value\": \"0\"}, {\"Name\": \"QuotaStartDay\", \"Value\": \"1\"}, {\"Name\": \"DailyQuota\", \"Value\": \"0\"}, {\"Name\": \"ReorderFiles\", \"Value\": \"yes\"}, {\"Name\": \"UpdateCheck\", \"Value\": \"stable\"}, {\"Name\": \"Server1.Active\", \"Value\": \"yes\"}, {\"Name\": \"Server1.Name\", \"Value\": \"downloadclient.invalid\"}, {\"Name\": \"Server1.Level\", \"Value\": \"0\"}, {\"Name\": \"Server1.Optional\", \"Value\": \"no\"}, {\"Name\": \"Server1.Group\", \"Value\": \"0\"}, {\"Name\": \"Server1.Host\", \"Value\": \"downloadclient.invalid\"}, {\"Name\": \"Server1.Encryption\", \"Value\": \"yes\"}, {\"Name\": \"Server1.Port\", \"Value\": \"563\"}, {\"Name\": \"Server1.Username\", \"Value\": \"unarr\"}, {\"Name\": \"Server1.Password\", \"Value\": \"fixture\"}, {\"Name\": \"Server1.JoinGroup\", \"Value\": \"no\"}, {\"Name\": \"Server1.Cipher\", \"Value\": \"\"}, {\"Name\": \"Server1.Connections\", \"Value\": \"40\"}, {\"Name\": \"Server1.Retention\", \"Value\": \"6649\"}, {\"Name\": \"Server1.CertVerification\", \"Value\": \"strict\"}, {\"Name\": \"Server1.IpVersion\", \"Value\": \"auto\"}, {\"Name\": \"Server1.Notes\", \"Value\": \"\"}, {\"Name\": \"Category1.Name\", \"Value\": \"movies\"}, {\"Name\": \"Category1.DestDir\", \"Value\": \"/downloads/movies\"}, {\"Name\": \"Category1.Unpack\", \"Value\": \"yes\"}, {\"Name\": \"Category1.Extensions\", \"Value\": \"\"}, {\"Name\": \"Category1.Aliases\", \"Value\": \"\"}, {\"Name\": \"Category2.Name\", \"Value\": \"tv\"}, {\"Name\": \"Category3.Name\", \"Value\": \"music\"}, {\"Name\": \"Category2.DestDir\", \"Value\": \"/downloads/tv\"}, {\"Name\": \"Category2.Unpack\", \"Value\": \"yes\"}, {\"Name\": \"Category2.Extensions\", \"Value\": \"\"}, {\"Name\": \"Category2.Aliases\", \"Value\": \"\"}, {\"Name\": \"Category3.DestDir\", \"Value\": \"/downloads/music\"}, {\"Name\": \"Category3.Unpack\", \"Value\": \"yes\"}, {\"Name\": \"Category3.Extensions\", \"Value\": \"\"}, {\"Name\": \"Category3.Aliases\", \"Value\": \"\"}, {\"Name\": \"Server2.Active\", \"Value\": \"yes\"}, {\"Name\": \"Server2.Name\", \"Value\": \"downloadclient.invalid\"}, {\"Name\": \"Server2.Level\", \"Value\": \"1\"}, {\"Name\": \"Server2.Optional\", \"Value\": \"yes\"}, {\"Name\": \"Server2.Group\", \"Value\": \"0\"}, {\"Name\": \"Server2.Host\", \"Value\": \"downloadclient.invalid\"}, {\"Name\": \"Server2.Encryption\", \"Value\": \"yes\"}, {\"Name\": \"Server2.Port\", \"Value\": \"563\"}, {\"Name\": \"Server2.Username\", \"Value\": \"unarr\"}, {\"Name\": \"Server2.Password\", \"Value\": \"fixture\"}, {\"Name\": \"Server2.JoinGroup\", \"Value\": \"no\"}, {\"Name\": \"Server2.Cipher\", \"Value\": \"\"}, {\"Name\": \"Server2.Connections\", \"Value\": \"15\"}, {\"Name\": \"Server2.Retention\", \"Value\": \"6000\"}, {\"Name\": \"Server2.CertVerification\", \"Value\": \"strict\"}, {\"Name\": \"Server2.IpVersion\", \"Value\": \"auto\"}, {\"Name\": \"Server2.Notes\", \"Value\": \"\"}, {\"Name\": \"Server3.Active\", \"Value\": \"yes\"}, {\"Name\": \"Server3.Name\", \"Value\": \"downloadclient.invalid\"}, {\"Name\": \"Server3.Level\", \"Value\": \"2\"}, {\"Name\": \"Server3.Optional\", \"Value\": \"yes\"}, {\"Name\": \"Server3.Group\", \"Value\": \"0\"}, {\"Name\": \"Server3.Host\", \"Value\": \"downloadclient.invalid\"}, {\"Name\": \"Server3.Encryption\", \"Value\": \"yes\"}, {\"Name\": \"Server3.Port\", \"Value\": \"563\"}, {\"Name\": \"Server3.Username\", \"Value\": \"unarr\"}, {\"Name\": \"Server3.Password\", \"Value\": \"fixture\"}, {\"Name\": \"Server3.JoinGroup\", \"Value\": \"no\"}, {\"Name\": \"Server3.Cipher\", \"Value\": \"\"}, {\"Name\": \"Server3.Connections\", \"Value\": \"15\"}, {\"Name\": \"Server3.Retention\", \"Value\": \"6647\"}, {\"Name\": \"Server3.CertVerification\", \"Value\": \"strict\"}, {\"Name\": \"Server3.IpVersion\", \"Value\": \"auto\"}, {\"Name\": \"Server3.Notes\", \"Value\": \"\"}]}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 1,
+  "time": "2026-11-07T20:34:27Z"
+ },
+ {
+  "request": {
+   "body": "status()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"3cb80c65\", \"result\": {\"RemainingSizeLo\": 0, \"RemainingSizeHi\": 0, \"RemainingSizeMB\": 0, \"ForcedSizeLo\": 0, \"ForcedSizeHi\": 0, \"ForcedSizeMB\": 0, \"DownloadedSizeLo\": 1828751072, \"DownloadedSizeHi\": 2, \"DownloadedSizeMB\": 9936, \"MonthSizeLo\": 1475713580, \"MonthSizeHi\": 10, \"MonthSizeMB\": 42367, \"DaySizeLo\": 1829531082, \"DaySizeHi\": 2, \"DaySizeMB\": 9936, \"ArticleCacheLo\": 0, \"ArticleCacheHi\": 0, \"ArticleCacheMB\": 0, \"DownloadRate\": 0, \"DownloadRateLo\": 0, \"DownloadRateHi\": 0, \"AverageDownloadRate\": 10875454, \"AverageDownloadRateLo\": 10875454, \"AverageDownloadRateHi\": 0, \"DownloadLimit\": 0, \"ThreadCount\": 9, \"ParJobCount\": 0, \"PostJobCount\": 0, \"UrlCount\": 0, \"UpTimeSec\": 42567, \"DownloadTimeSec\": 958, \"ServerPaused\": false, \"DownloadPaused\": false, \"Download2Paused\": false, \"ServerStandBy\": true, \"PostPaused\": false, \"ScanPaused\": false, \"QuotaReached\": false, \"FreeDiskSpaceLo\": 3727413248, \"FreeDiskSpaceHi\": 1228, \"FreeDiskSpaceMB\": 5033442, \"TotalDiskSpaceLo\": 712802304, \"TotalDiskSpaceHi\": 1794, \"TotalDiskSpaceMB\": 7348903, \"FreeInterDiskSpaceLo\": 3727413248, \"FreeInterDiskSpaceHi\": 1228, \"FreeInterDiskSpaceMB\": 5033442, \"TotalInterDiskSpaceLo\": 712802304, \"TotalInterDiskSpaceHi\": 1794, \"TotalInterDiskSpaceMB\": 7348903, \"ServerTime\": 1794080103, \"ResumeTime\": 0, \"FeedActive\": false, \"QueueScriptCount\": 0, \"NewsServers\": [{\"ID\": 1, \"Active\": true}, {\"ID\": 2, \"Active\": true}, {\"ID\": 3, \"Active\": true}]}}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 2,
+  "time": "2026-11-07T20:35:03Z"
+ },
+ {
+  "request": {
+   "body": "listgroups()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"f98b4c57\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 3,
+  "time": "2026-11-07T20:35:03Z"
+ },
+ {
+  "request": {
+   "body": "history()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"a57bd74a\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 4,
+  "time": "2026-11-07T20:35:03Z"
+ },
+ {
+  "request": {
+   "body": "status()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"a3de3b2c\", \"result\": {\"RemainingSizeLo\": 0, \"RemainingSizeHi\": 0, \"RemainingSizeMB\": 0, \"ForcedSizeLo\": 0, \"ForcedSizeHi\": 0, \"ForcedSizeMB\": 0, \"DownloadedSizeLo\": 1828751072, \"DownloadedSizeHi\": 2, \"DownloadedSizeMB\": 9936, \"MonthSizeLo\": 1475713580, \"MonthSizeHi\": 10, \"MonthSizeMB\": 42367, \"DaySizeLo\": 1829531082, \"DaySizeHi\": 2, \"DaySizeMB\": 9936, \"ArticleCacheLo\": 0, \"ArticleCacheHi\": 0, \"ArticleCacheMB\": 0, \"DownloadRate\": 0, \"DownloadRateLo\": 0, \"DownloadRateHi\": 0, \"AverageDownloadRate\": 10875454, \"AverageDownloadRateLo\": 10875454, \"AverageDownloadRateHi\": 0, \"DownloadLimit\": 0, \"ThreadCount\": 9, \"ParJobCount\": 0, \"PostJobCount\": 0, \"UrlCount\": 0, \"UpTimeSec\": 42657, \"DownloadTimeSec\": 958, \"ServerPaused\": false, \"DownloadPaused\": false, \"Download2Paused\": false, \"ServerStandBy\": true, \"PostPaused\": false, \"ScanPaused\": false, \"QuotaReached\": false, \"FreeDiskSpaceLo\": 3726647296, \"FreeDiskSpaceHi\": 1228, \"FreeDiskSpaceMB\": 5033442, \"TotalDiskSpaceLo\": 712802304, \"TotalDiskSpaceHi\": 1794, \"TotalDiskSpaceMB\": 7348903, \"FreeInterDiskSpaceLo\": 3726647296, \"FreeInterDiskSpaceHi\": 1228, \"FreeInterDiskSpaceMB\": 5033442, \"TotalInterDiskSpaceLo\": 712802304, \"TotalInterDiskSpaceHi\": 1794, \"TotalInterDiskSpaceMB\": 7348903, \"ServerTime\": 1794080193, \"ResumeTime\": 0, \"FeedActive\": false, \"QueueScriptCount\": 0, \"NewsServers\": [{\"ID\": 1, \"Active\": true}, {\"ID\": 2, \"Active\": true}, {\"ID\": 3, \"Active\": true}]}}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 5,
+  "time": "2026-11-07T20:36:33Z"
+ },
+ {
+  "request": {
+   "body": "listgroups()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"d73f7d24\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 6,
+  "time": "2026-11-07T20:36:33Z"
+ },
+ {
+  "request": {
+   "body": "history()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"afd25940\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 7,
+  "time": "2026-11-07T20:36:33Z"
+ },
+ {
+  "request": {
+   "body": "status()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"443a14e6\", \"result\": {\"RemainingSizeLo\": 0, \"RemainingSizeHi\": 0, \"RemainingSizeMB\": 0, \"ForcedSizeLo\": 0, \"ForcedSizeHi\": 0, \"ForcedSizeMB\": 0, \"DownloadedSizeLo\": 1828751072, \"DownloadedSizeHi\": 2, \"DownloadedSizeMB\": 9936, \"MonthSizeLo\": 1475713580, \"MonthSizeHi\": 10, \"MonthSizeMB\": 42367, \"DaySizeLo\": 1829531082, \"DaySizeHi\": 2, \"DaySizeMB\": 9936, \"ArticleCacheLo\": 0, \"ArticleCacheHi\": 0, \"ArticleCacheMB\": 0, \"DownloadRate\": 0, \"DownloadRateLo\": 0, \"DownloadRateHi\": 0, \"AverageDownloadRate\": 10875454, \"AverageDownloadRateLo\": 10875454, \"AverageDownloadRateHi\": 0, \"DownloadLimit\": 0, \"ThreadCount\": 9, \"ParJobCount\": 0, \"PostJobCount\": 0, \"UrlCount\": 0, \"UpTimeSec\": 42747, \"DownloadTimeSec\": 958, \"ServerPaused\": false, \"DownloadPaused\": false, \"Download2Paused\": false, \"ServerStandBy\": true, \"PostPaused\": false, \"ScanPaused\": false, \"QuotaReached\": false, \"FreeDiskSpaceLo\": 3772276736, \"FreeDiskSpaceHi\": 1228, \"FreeDiskSpaceMB\": 5033485, \"TotalDiskSpaceLo\": 712802304, \"TotalDiskSpaceHi\": 1794, \"TotalDiskSpaceMB\": 7348903, \"FreeInterDiskSpaceLo\": 3772276736, \"FreeInterDiskSpaceHi\": 1228, \"FreeInterDiskSpaceMB\": 5033485, \"TotalInterDiskSpaceLo\": 712802304, \"TotalInterDiskSpaceHi\": 1794, \"TotalInterDiskSpaceMB\": 7348903, \"ServerTime\": 1794080283, \"ResumeTime\": 0, \"FeedActive\": false, \"QueueScriptCount\": 0, \"NewsServers\": [{\"ID\": 1, \"Active\": true}, {\"ID\": 2, \"Active\": true}, {\"ID\": 3, \"Active\": true}]}}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 8,
+  "time": "2026-11-07T20:38:03Z"
+ },
+ {
+  "request": {
+   "body": "listgroups()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"f9995ef3\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 9,
+  "time": "2026-11-07T20:38:03Z"
+ },
+ {
+  "request": {
+   "body": "history()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"34e94fcb\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 10,
+  "time": "2026-11-07T20:38:03Z"
+ },
+ {
+  "request": {
+   "body": "status()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"a952dcd9\", \"result\": {\"RemainingSizeLo\": 0, \"RemainingSizeHi\": 0, \"RemainingSizeMB\": 0, \"ForcedSizeLo\": 0, \"ForcedSizeHi\": 0, \"ForcedSizeMB\": 0, \"DownloadedSizeLo\": 1828751072, \"DownloadedSizeHi\": 2, \"DownloadedSizeMB\": 9936, \"MonthSizeLo\": 1475713580, \"MonthSizeHi\": 10, \"MonthSizeMB\": 42367, \"DaySizeLo\": 1829531082, \"DaySizeHi\": 2, \"DaySizeMB\": 9936, \"ArticleCacheLo\": 0, \"ArticleCacheHi\": 0, \"ArticleCacheMB\": 0, \"DownloadRate\": 0, \"DownloadRateLo\": 0, \"DownloadRateHi\": 0, \"AverageDownloadRate\": 10875454, \"AverageDownloadRateLo\": 10875454, \"AverageDownloadRateHi\": 0, \"DownloadLimit\": 0, \"ThreadCount\": 9, \"ParJobCount\": 0, \"PostJobCount\": 0, \"UrlCount\": 0, \"UpTimeSec\": 42837, \"DownloadTimeSec\": 958, \"ServerPaused\": false, \"DownloadPaused\": false, \"Download2Paused\": false, \"ServerStandBy\": true, \"PostPaused\": false, \"ScanPaused\": false, \"QuotaReached\": false, \"FreeDiskSpaceLo\": 3769946112, \"FreeDiskSpaceHi\": 1228, \"FreeDiskSpaceMB\": 5033483, \"TotalDiskSpaceLo\": 712802304, \"TotalDiskSpaceHi\": 1794, \"TotalDiskSpaceMB\": 7348903, \"FreeInterDiskSpaceLo\": 3769946112, \"FreeInterDiskSpaceHi\": 1228, \"FreeInterDiskSpaceMB\": 5033483, \"TotalInterDiskSpaceLo\": 712802304, \"TotalInterDiskSpaceHi\": 1794, \"TotalInterDiskSpaceMB\": 7348903, \"ServerTime\": 1794080373, \"ResumeTime\": 0, \"FeedActive\": false, \"QueueScriptCount\": 0, \"NewsServers\": [{\"ID\": 1, \"Active\": true}, {\"ID\": 2, \"Active\": true}, {\"ID\": 3, \"Active\": true}]}}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 11,
+  "time": "2026-11-07T20:39:33Z"
+ },
+ {
+  "request": {
+   "body": "listgroups()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"2ce8eb08\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 12,
+  "time": "2026-11-07T20:39:33Z"
+ },
+ {
+  "request": {
+   "body": "history()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"4837e4b6\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 13,
+  "time": "2026-11-07T20:39:33Z"
+ },
+ {
+  "request": {
+   "body": "status()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"0be1ada0\", \"result\": {\"RemainingSizeLo\": 0, \"RemainingSizeHi\": 0, \"RemainingSizeMB\": 0, \"ForcedSizeLo\": 0, \"ForcedSizeHi\": 0, \"ForcedSizeMB\": 0, \"DownloadedSizeLo\": 1828751072, \"DownloadedSizeHi\": 2, \"DownloadedSizeMB\": 9936, \"MonthSizeLo\": 1475713580, \"MonthSizeHi\": 10, \"MonthSizeMB\": 42367, \"DaySizeLo\": 1829531082, \"DaySizeHi\": 2, \"DaySizeMB\": 9936, \"ArticleCacheLo\": 0, \"ArticleCacheHi\": 0, \"ArticleCacheMB\": 0, \"DownloadRate\": 0, \"DownloadRateLo\": 0, \"DownloadRateHi\": 0, \"AverageDownloadRate\": 10875454, \"AverageDownloadRateLo\": 10875454, \"AverageDownloadRateHi\": 0, \"DownloadLimit\": 0, \"ThreadCount\": 9, \"ParJobCount\": 0, \"PostJobCount\": 0, \"UrlCount\": 0, \"UpTimeSec\": 42927, \"DownloadTimeSec\": 958, \"ServerPaused\": false, \"DownloadPaused\": false, \"Download2Paused\": false, \"ServerStandBy\": true, \"PostPaused\": false, \"ScanPaused\": false, \"QuotaReached\": false, \"FreeDiskSpaceLo\": 3682451456, \"FreeDiskSpaceHi\": 1228, \"FreeDiskSpaceMB\": 5033399, \"TotalDiskSpaceLo\": 712802304, \"TotalDiskSpaceHi\": 1794, \"TotalDiskSpaceMB\": 7348903, \"FreeInterDiskSpaceLo\": 3682451456, \"FreeInterDiskSpaceHi\": 1228, \"FreeInterDiskSpaceMB\": 5033399, \"TotalInterDiskSpaceLo\": 712802304, \"TotalInterDiskSpaceHi\": 1794, \"TotalInterDiskSpaceMB\": 7348903, \"ServerTime\": 1794080463, \"ResumeTime\": 0, \"FeedActive\": false, \"QueueScriptCount\": 0, \"NewsServers\": [{\"ID\": 1, \"Active\": true}, {\"ID\": 2, \"Active\": true}, {\"ID\": 3, \"Active\": true}]}}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 14,
+  "time": "2026-11-07T20:41:03Z"
+ },
+ {
+  "request": {
+   "body": "listgroups()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"67e23d0c\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 15,
+  "time": "2026-11-07T20:41:03Z"
+ },
+ {
+  "request": {
+   "body": "history()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"677e1476\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 16,
+  "time": "2026-11-07T20:41:03Z"
+ },
+ {
+  "request": {
+   "body": "status()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"cdc1175d\", \"result\": {\"RemainingSizeLo\": 0, \"RemainingSizeHi\": 0, \"RemainingSizeMB\": 0, \"ForcedSizeLo\": 0, \"ForcedSizeHi\": 0, \"ForcedSizeMB\": 0, \"DownloadedSizeLo\": 1828751072, \"DownloadedSizeHi\": 2, \"DownloadedSizeMB\": 9936, \"MonthSizeLo\": 1475713580, \"MonthSizeHi\": 10, \"MonthSizeMB\": 42367, \"DaySizeLo\": 1829531082, \"DaySizeHi\": 2, \"DaySizeMB\": 9936, \"ArticleCacheLo\": 0, \"ArticleCacheHi\": 0, \"ArticleCacheMB\": 0, \"DownloadRate\": 0, \"DownloadRateLo\": 0, \"DownloadRateHi\": 0, \"AverageDownloadRate\": 10875454, \"AverageDownloadRateLo\": 10875454, \"AverageDownloadRateHi\": 0, \"DownloadLimit\": 0, \"ThreadCount\": 9, \"ParJobCount\": 0, \"PostJobCount\": 0, \"UrlCount\": 0, \"UpTimeSec\": 43017, \"DownloadTimeSec\": 958, \"ServerPaused\": false, \"DownloadPaused\": false, \"Download2Paused\": false, \"ServerStandBy\": true, \"PostPaused\": false, \"ScanPaused\": false, \"QuotaReached\": false, \"FreeDiskSpaceLo\": 3610681344, \"FreeDiskSpaceHi\": 1228, \"FreeDiskSpaceMB\": 5033331, \"TotalDiskSpaceLo\": 712802304, \"TotalDiskSpaceHi\": 1794, \"TotalDiskSpaceMB\": 7348903, \"FreeInterDiskSpaceLo\": 3610681344, \"FreeInterDiskSpaceHi\": 1228, \"FreeInterDiskSpaceMB\": 5033331, \"TotalInterDiskSpaceLo\": 712802304, \"TotalInterDiskSpaceHi\": 1794, \"TotalInterDiskSpaceMB\": 7348903, \"ServerTime\": 1794080553, \"ResumeTime\": 0, \"FeedActive\": false, \"QueueScriptCount\": 0, \"NewsServers\": [{\"ID\": 1, \"Active\": true}, {\"ID\": 2, \"Active\": true}, {\"ID\": 3, \"Active\": true}]}}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 17,
+  "time": "2026-11-07T20:42:33Z"
+ },
+ {
+  "request": {
+   "body": "listgroups()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"ba054183\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 18,
+  "time": "2026-11-07T20:42:33Z"
+ },
+ {
+  "request": {
+   "body": "history()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"e7a71f49\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 19,
+  "time": "2026-11-07T20:42:33Z"
+ },
+ {
+  "request": {
+   "body": "status()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"a84e0636\", \"result\": {\"RemainingSizeLo\": 0, \"RemainingSizeHi\": 0, \"RemainingSizeMB\": 0, \"ForcedSizeLo\": 0, \"ForcedSizeHi\": 0, \"ForcedSizeMB\": 0, \"DownloadedSizeLo\": 1828751072, \"DownloadedSizeHi\": 2, \"DownloadedSizeMB\": 9936, \"MonthSizeLo\": 1475713580, \"MonthSizeHi\": 10, \"MonthSizeMB\": 42367, \"DaySizeLo\": 1829531082, \"DaySizeHi\": 2, \"DaySizeMB\": 9936, \"ArticleCacheLo\": 0, \"ArticleCacheHi\": 0, \"ArticleCacheMB\": 0, \"DownloadRate\": 0, \"DownloadRateLo\": 0, \"DownloadRateHi\": 0, \"AverageDownloadRate\": 10875454, \"AverageDownloadRateLo\": 10875454, \"AverageDownloadRateHi\": 0, \"DownloadLimit\": 0, \"ThreadCount\": 9, \"ParJobCount\": 0, \"PostJobCount\": 0, \"UrlCount\": 0, \"UpTimeSec\": 43108, \"DownloadTimeSec\": 958, \"ServerPaused\": false, \"DownloadPaused\": false, \"Download2Paused\": false, \"ServerStandBy\": true, \"PostPaused\": false, \"ScanPaused\": false, \"QuotaReached\": false, \"FreeDiskSpaceLo\": 3541889024, \"FreeDiskSpaceHi\": 1228, \"FreeDiskSpaceMB\": 5033265, \"TotalDiskSpaceLo\": 712802304, \"TotalDiskSpaceHi\": 1794, \"TotalDiskSpaceMB\": 7348903, \"FreeInterDiskSpaceLo\": 3541889024, \"FreeInterDiskSpaceHi\": 1228, \"FreeInterDiskSpaceMB\": 5033265, \"TotalInterDiskSpaceLo\": 712802304, \"TotalInterDiskSpaceHi\": 1794, \"TotalInterDiskSpaceMB\": 7348903, \"ServerTime\": 1794080644, \"ResumeTime\": 0, \"FeedActive\": false, \"QueueScriptCount\": 0, \"NewsServers\": [{\"ID\": 1, \"Active\": true}, {\"ID\": 2, \"Active\": true}, {\"ID\": 3, \"Active\": true}]}}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 20,
+  "time": "2026-11-07T20:44:04Z"
+ },
+ {
+  "request": {
+   "body": "listgroups()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"5a8713b1\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 21,
+  "time": "2026-11-07T20:44:04Z"
+ },
+ {
+  "request": {
+   "body": "history()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"8f76dd15\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 22,
+  "time": "2026-11-07T20:44:04Z"
+ },
+ {
+  "request": {
+   "body": "status()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"b6501f65\", \"result\": {\"RemainingSizeLo\": 0, \"RemainingSizeHi\": 0, \"RemainingSizeMB\": 0, \"ForcedSizeLo\": 0, \"ForcedSizeHi\": 0, \"ForcedSizeMB\": 0, \"DownloadedSizeLo\": 1828751072, \"DownloadedSizeHi\": 2, \"DownloadedSizeMB\": 9936, \"MonthSizeLo\": 1475713580, \"MonthSizeHi\": 10, \"MonthSizeMB\": 42367, \"DaySizeLo\": 1829531082, \"DaySizeHi\": 2, \"DaySizeMB\": 9936, \"ArticleCacheLo\": 0, \"ArticleCacheHi\": 0, \"ArticleCacheMB\": 0, \"DownloadRate\": 0, \"DownloadRateLo\": 0, \"DownloadRateHi\": 0, \"AverageDownloadRate\": 10875454, \"AverageDownloadRateLo\": 10875454, \"AverageDownloadRateHi\": 0, \"DownloadLimit\": 0, \"ThreadCount\": 9, \"ParJobCount\": 0, \"PostJobCount\": 0, \"UrlCount\": 0, \"UpTimeSec\": 43198, \"DownloadTimeSec\": 958, \"ServerPaused\": false, \"DownloadPaused\": false, \"Download2Paused\": false, \"ServerStandBy\": true, \"PostPaused\": false, \"ScanPaused\": false, \"QuotaReached\": false, \"FreeDiskSpaceLo\": 3474903040, \"FreeDiskSpaceHi\": 1228, \"FreeDiskSpaceMB\": 5033201, \"TotalDiskSpaceLo\": 712802304, \"TotalDiskSpaceHi\": 1794, \"TotalDiskSpaceMB\": 7348903, \"FreeInterDiskSpaceLo\": 3474903040, \"FreeInterDiskSpaceHi\": 1228, \"FreeInterDiskSpaceMB\": 5033201, \"TotalInterDiskSpaceLo\": 712802304, \"TotalInterDiskSpaceHi\": 1794, \"TotalInterDiskSpaceMB\": 7348903, \"ServerTime\": 1794080734, \"ResumeTime\": 0, \"FeedActive\": false, \"QueueScriptCount\": 0, \"NewsServers\": [{\"ID\": 1, \"Active\": true}, {\"ID\": 2, \"Active\": true}, {\"ID\": 3, \"Active\": true}]}}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 23,
+  "time": "2026-11-07T20:45:34Z"
+ },
+ {
+  "request": {
+   "body": "listgroups()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"694aec09\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 24,
+  "time": "2026-11-07T20:45:34Z"
+ },
+ {
+  "request": {
+   "body": "history()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"25327b45\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 25,
+  "time": "2026-11-07T20:45:34Z"
+ },
+ {
+  "request": {
+   "body": "status()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"7e9c2340\", \"result\": {\"RemainingSizeLo\": 0, \"RemainingSizeHi\": 0, \"RemainingSizeMB\": 0, \"ForcedSizeLo\": 0, \"ForcedSizeHi\": 0, \"ForcedSizeMB\": 0, \"DownloadedSizeLo\": 1828751072, \"DownloadedSizeHi\": 2, \"DownloadedSizeMB\": 9936, \"MonthSizeLo\": 1475713580, \"MonthSizeHi\": 10, \"MonthSizeMB\": 42367, \"DaySizeLo\": 1829531082, \"DaySizeHi\": 2, \"DaySizeMB\": 9936, \"ArticleCacheLo\": 0, \"ArticleCacheHi\": 0, \"ArticleCacheMB\": 0, \"DownloadRate\": 0, \"DownloadRateLo\": 0, \"DownloadRateHi\": 0, \"AverageDownloadRate\": 10875454, \"AverageDownloadRateLo\": 10875454, \"AverageDownloadRateHi\": 0, \"DownloadLimit\": 0, \"ThreadCount\": 9, \"ParJobCount\": 0, \"PostJobCount\": 0, \"UrlCount\": 0, \"UpTimeSec\": 43288, \"DownloadTimeSec\": 958, \"ServerPaused\": false, \"DownloadPaused\": false, \"Download2Paused\": false, \"ServerStandBy\": true, \"PostPaused\": false, \"ScanPaused\": false, \"QuotaReached\": false, \"FreeDiskSpaceLo\": 3409817600, \"FreeDiskSpaceHi\": 1228, \"FreeDiskSpaceMB\": 5033139, \"TotalDiskSpaceLo\": 712802304, \"TotalDiskSpaceHi\": 1794, \"TotalDiskSpaceMB\": 7348903, \"FreeInterDiskSpaceLo\": 3409817600, \"FreeInterDiskSpaceHi\": 1228, \"FreeInterDiskSpaceMB\": 5033139, \"TotalInterDiskSpaceLo\": 712802304, \"TotalInterDiskSpaceHi\": 1794, \"TotalInterDiskSpaceMB\": 7348903, \"ServerTime\": 1794080824, \"ResumeTime\": 0, \"FeedActive\": false, \"QueueScriptCount\": 0, \"NewsServers\": [{\"ID\": 1, \"Active\": true}, {\"ID\": 2, \"Active\": true}, {\"ID\": 3, \"Active\": true}]}}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 26,
+  "time": "2026-11-07T20:47:04Z"
+ },
+ {
+  "request": {
+   "body": "listgroups()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"3dc8d10f\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 27,
+  "time": "2026-11-07T20:47:04Z"
+ },
+ {
+  "request": {
+   "body": "history()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"3c49a181\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 28,
+  "time": "2026-11-07T20:47:04Z"
+ },
+ {
+  "request": {
+   "body": "status()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"aefe693a\", \"result\": {\"RemainingSizeLo\": 0, \"RemainingSizeHi\": 0, \"RemainingSizeMB\": 0, \"ForcedSizeLo\": 0, \"ForcedSizeHi\": 0, \"ForcedSizeMB\": 0, \"DownloadedSizeLo\": 1828751072, \"DownloadedSizeHi\": 2, \"DownloadedSizeMB\": 9936, \"MonthSizeLo\": 1475713580, \"MonthSizeHi\": 10, \"MonthSizeMB\": 42367, \"DaySizeLo\": 1829531082, \"DaySizeHi\": 2, \"DaySizeMB\": 9936, \"ArticleCacheLo\": 0, \"ArticleCacheHi\": 0, \"ArticleCacheMB\": 0, \"DownloadRate\": 0, \"DownloadRateLo\": 0, \"DownloadRateHi\": 0, \"AverageDownloadRate\": 10875454, \"AverageDownloadRateLo\": 10875454, \"AverageDownloadRateHi\": 0, \"DownloadLimit\": 0, \"ThreadCount\": 9, \"ParJobCount\": 0, \"PostJobCount\": 0, \"UrlCount\": 0, \"UpTimeSec\": 43378, \"DownloadTimeSec\": 958, \"ServerPaused\": false, \"DownloadPaused\": false, \"Download2Paused\": false, \"ServerStandBy\": true, \"PostPaused\": false, \"ScanPaused\": false, \"QuotaReached\": false, \"FreeDiskSpaceLo\": 3351941120, \"FreeDiskSpaceHi\": 1228, \"FreeDiskSpaceMB\": 5033084, \"TotalDiskSpaceLo\": 712802304, \"TotalDiskSpaceHi\": 1794, \"TotalDiskSpaceMB\": 7348903, \"FreeInterDiskSpaceLo\": 3351941120, \"FreeInterDiskSpaceHi\": 1228, \"FreeInterDiskSpaceMB\": 5033084, \"TotalInterDiskSpaceLo\": 712802304, \"TotalInterDiskSpaceHi\": 1794, \"TotalInterDiskSpaceMB\": 7348903, \"ServerTime\": 1794080914, \"ResumeTime\": 0, \"FeedActive\": false, \"QueueScriptCount\": 0, \"NewsServers\": [{\"ID\": 1, \"Active\": true}, {\"ID\": 2, \"Active\": true}, {\"ID\": 3, \"Active\": true}]}}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 29,
+  "time": "2026-11-07T20:48:34Z"
+ },
+ {
+  "request": {
+   "body": "listgroups()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"f826a8c7\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 30,
+  "time": "2026-11-07T20:48:34Z"
+ },
+ {
+  "request": {
+   "body": "history()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"8a49e8a0\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 31,
+  "time": "2026-11-07T20:48:34Z"
+ },
+ {
+  "request": {
+   "body": "status()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"63f3a2e6\", \"result\": {\"RemainingSizeLo\": 0, \"RemainingSizeHi\": 0, \"RemainingSizeMB\": 0, \"ForcedSizeLo\": 0, \"ForcedSizeHi\": 0, \"ForcedSizeMB\": 0, \"DownloadedSizeLo\": 1828751072, \"DownloadedSizeHi\": 2, \"DownloadedSizeMB\": 9936, \"MonthSizeLo\": 1475713580, \"MonthSizeHi\": 10, \"MonthSizeMB\": 42367, \"DaySizeLo\": 1829531082, \"DaySizeHi\": 2, \"DaySizeMB\": 9936, \"ArticleCacheLo\": 0, \"ArticleCacheHi\": 0, \"ArticleCacheMB\": 0, \"DownloadRate\": 0, \"DownloadRateLo\": 0, \"DownloadRateHi\": 0, \"AverageDownloadRate\": 10875454, \"AverageDownloadRateLo\": 10875454, \"AverageDownloadRateHi\": 0, \"DownloadLimit\": 0, \"ThreadCount\": 9, \"ParJobCount\": 0, \"PostJobCount\": 0, \"UrlCount\": 0, \"UpTimeSec\": 43468, \"DownloadTimeSec\": 958, \"ServerPaused\": false, \"DownloadPaused\": false, \"Download2Paused\": false, \"ServerStandBy\": true, \"PostPaused\": false, \"ScanPaused\": false, \"QuotaReached\": false, \"FreeDiskSpaceLo\": 3301703680, \"FreeDiskSpaceHi\": 1228, \"FreeDiskSpaceMB\": 5033036, \"TotalDiskSpaceLo\": 712802304, \"TotalDiskSpaceHi\": 1794, \"TotalDiskSpaceMB\": 7348903, \"FreeInterDiskSpaceLo\": 3301703680, \"FreeInterDiskSpaceHi\": 1228, \"FreeInterDiskSpaceMB\": 5033036, \"TotalInterDiskSpaceLo\": 712802304, \"TotalInterDiskSpaceHi\": 1794, \"TotalInterDiskSpaceMB\": 7348903, \"ServerTime\": 1794081004, \"ResumeTime\": 0, \"FeedActive\": false, \"QueueScriptCount\": 0, \"NewsServers\": [{\"ID\": 1, \"Active\": true}, {\"ID\": 2, \"Active\": true}, {\"ID\": 3, \"Active\": true}]}}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 32,
+  "time": "2026-11-07T20:50:04Z"
+ },
+ {
+  "request": {
+   "body": "listgroups()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"82861606\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 33,
+  "time": "2026-11-07T20:50:04Z"
+ },
+ {
+  "request": {
+   "body": "history()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"dce655a9\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 34,
+  "time": "2026-11-07T20:50:04Z"
+ },
+ {
+  "request": {
+   "body": "status()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"d19603a7\", \"result\": {\"RemainingSizeLo\": 0, \"RemainingSizeHi\": 0, \"RemainingSizeMB\": 0, \"ForcedSizeLo\": 0, \"ForcedSizeHi\": 0, \"ForcedSizeMB\": 0, \"DownloadedSizeLo\": 1828751072, \"DownloadedSizeHi\": 2, \"DownloadedSizeMB\": 9936, \"MonthSizeLo\": 1475713580, \"MonthSizeHi\": 10, \"MonthSizeMB\": 42367, \"DaySizeLo\": 1829531082, \"DaySizeHi\": 2, \"DaySizeMB\": 9936, \"ArticleCacheLo\": 0, \"ArticleCacheHi\": 0, \"ArticleCacheMB\": 0, \"DownloadRate\": 0, \"DownloadRateLo\": 0, \"DownloadRateHi\": 0, \"AverageDownloadRate\": 10875454, \"AverageDownloadRateLo\": 10875454, \"AverageDownloadRateHi\": 0, \"DownloadLimit\": 0, \"ThreadCount\": 9, \"ParJobCount\": 0, \"PostJobCount\": 0, \"UrlCount\": 0, \"UpTimeSec\": 43558, \"DownloadTimeSec\": 958, \"ServerPaused\": false, \"DownloadPaused\": false, \"Download2Paused\": false, \"ServerStandBy\": true, \"PostPaused\": false, \"ScanPaused\": false, \"QuotaReached\": false, \"FreeDiskSpaceLo\": 3249528832, \"FreeDiskSpaceHi\": 1228, \"FreeDiskSpaceMB\": 5032986, \"TotalDiskSpaceLo\": 712802304, \"TotalDiskSpaceHi\": 1794, \"TotalDiskSpaceMB\": 7348903, \"FreeInterDiskSpaceLo\": 3249528832, \"FreeInterDiskSpaceHi\": 1228, \"FreeInterDiskSpaceMB\": 5032986, \"TotalInterDiskSpaceLo\": 712802304, \"TotalInterDiskSpaceHi\": 1794, \"TotalInterDiskSpaceMB\": 7348903, \"ServerTime\": 1794081094, \"ResumeTime\": 0, \"FeedActive\": false, \"QueueScriptCount\": 0, \"NewsServers\": [{\"ID\": 1, \"Active\": true}, {\"ID\": 2, \"Active\": true}, {\"ID\": 3, \"Active\": true}]}}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 35,
+  "time": "2026-11-07T20:51:34Z"
+ },
+ {
+  "request": {
+   "body": "listgroups()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"1a68adc4\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 36,
+  "time": "2026-11-07T20:51:34Z"
+ },
+ {
+  "request": {
+   "body": "history()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"331a0dc3\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 37,
+  "time": "2026-11-07T20:51:34Z"
+ },
+ {
+  "request": {
+   "body": "status()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"cd7afab5\", \"result\": {\"RemainingSizeLo\": 0, \"RemainingSizeHi\": 0, \"RemainingSizeMB\": 0, \"ForcedSizeLo\": 0, \"ForcedSizeHi\": 0, \"ForcedSizeMB\": 0, \"DownloadedSizeLo\": 1828751072, \"DownloadedSizeHi\": 2, \"DownloadedSizeMB\": 9936, \"MonthSizeLo\": 1475713580, \"MonthSizeHi\": 10, \"MonthSizeMB\": 42367, \"DaySizeLo\": 1829531082, \"DaySizeHi\": 2, \"DaySizeMB\": 9936, \"ArticleCacheLo\": 0, \"ArticleCacheHi\": 0, \"ArticleCacheMB\": 0, \"DownloadRate\": 0, \"DownloadRateLo\": 0, \"DownloadRateHi\": 0, \"AverageDownloadRate\": 10875454, \"AverageDownloadRateLo\": 10875454, \"AverageDownloadRateHi\": 0, \"DownloadLimit\": 0, \"ThreadCount\": 9, \"ParJobCount\": 0, \"PostJobCount\": 0, \"UrlCount\": 0, \"UpTimeSec\": 43648, \"DownloadTimeSec\": 958, \"ServerPaused\": false, \"DownloadPaused\": false, \"Download2Paused\": false, \"ServerStandBy\": true, \"PostPaused\": false, \"ScanPaused\": false, \"QuotaReached\": false, \"FreeDiskSpaceLo\": 3201388544, \"FreeDiskSpaceHi\": 1228, \"FreeDiskSpaceMB\": 5032941, \"TotalDiskSpaceLo\": 712802304, \"TotalDiskSpaceHi\": 1794, \"TotalDiskSpaceMB\": 7348903, \"FreeInterDiskSpaceLo\": 3201388544, \"FreeInterDiskSpaceHi\": 1228, \"FreeInterDiskSpaceMB\": 5032941, \"TotalInterDiskSpaceLo\": 712802304, \"TotalInterDiskSpaceHi\": 1794, \"TotalInterDiskSpaceMB\": 7348903, \"ServerTime\": 1794081184, \"ResumeTime\": 0, \"FeedActive\": false, \"QueueScriptCount\": 0, \"NewsServers\": [{\"ID\": 1, \"Active\": true}, {\"ID\": 2, \"Active\": true}, {\"ID\": 3, \"Active\": true}]}}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 38,
+  "time": "2026-11-07T20:53:04Z"
+ },
+ {
+  "request": {
+   "body": "listgroups()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"a82803fc\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 39,
+  "time": "2026-11-07T20:53:04Z"
+ },
+ {
+  "request": {
+   "body": "history()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"ab07a83b\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 40,
+  "time": "2026-11-07T20:53:04Z"
+ },
+ {
+  "request": {
+   "body": "status()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"71a22236\", \"result\": {\"RemainingSizeLo\": 0, \"RemainingSizeHi\": 0, \"RemainingSizeMB\": 0, \"ForcedSizeLo\": 0, \"ForcedSizeHi\": 0, \"ForcedSizeMB\": 0, \"DownloadedSizeLo\": 1828751072, \"DownloadedSizeHi\": 2, \"DownloadedSizeMB\": 9936, \"MonthSizeLo\": 1475713580, \"MonthSizeHi\": 10, \"MonthSizeMB\": 42367, \"DaySizeLo\": 1829531082, \"DaySizeHi\": 2, \"DaySizeMB\": 9936, \"ArticleCacheLo\": 0, \"ArticleCacheHi\": 0, \"ArticleCacheMB\": 0, \"DownloadRate\": 0, \"DownloadRateLo\": 0, \"DownloadRateHi\": 0, \"AverageDownloadRate\": 10875454, \"AverageDownloadRateLo\": 10875454, \"AverageDownloadRateHi\": 0, \"DownloadLimit\": 0, \"ThreadCount\": 9, \"ParJobCount\": 0, \"PostJobCount\": 0, \"UrlCount\": 0, \"UpTimeSec\": 43738, \"DownloadTimeSec\": 958, \"ServerPaused\": false, \"DownloadPaused\": false, \"Download2Paused\": false, \"ServerStandBy\": true, \"PostPaused\": false, \"ScanPaused\": false, \"QuotaReached\": false, \"FreeDiskSpaceLo\": 3149656064, \"FreeDiskSpaceHi\": 1228, \"FreeDiskSpaceMB\": 5032891, \"TotalDiskSpaceLo\": 712802304, \"TotalDiskSpaceHi\": 1794, \"TotalDiskSpaceMB\": 7348903, \"FreeInterDiskSpaceLo\": 3149656064, \"FreeInterDiskSpaceHi\": 1228, \"FreeInterDiskSpaceMB\": 5032891, \"TotalInterDiskSpaceLo\": 712802304, \"TotalInterDiskSpaceHi\": 1794, \"TotalInterDiskSpaceMB\": 7348903, \"ServerTime\": 1794081274, \"ResumeTime\": 0, \"FeedActive\": false, \"QueueScriptCount\": 0, \"NewsServers\": [{\"ID\": 1, \"Active\": true}, {\"ID\": 2, \"Active\": true}, {\"ID\": 3, \"Active\": true}]}}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 41,
+  "time": "2026-11-07T20:54:34Z"
+ },
+ {
+  "request": {
+   "body": "listgroups()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"cb94fc14\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 42,
+  "time": "2026-11-07T20:54:34Z"
+ },
+ {
+  "request": {
+   "body": "history()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"70f5dde4\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 43,
+  "time": "2026-11-07T20:54:34Z"
+ },
+ {
+  "request": {
+   "body": "status()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"ae549661\", \"result\": {\"RemainingSizeLo\": 0, \"RemainingSizeHi\": 0, \"RemainingSizeMB\": 0, \"ForcedSizeLo\": 0, \"ForcedSizeHi\": 0, \"ForcedSizeMB\": 0, \"DownloadedSizeLo\": 1828751072, \"DownloadedSizeHi\": 2, \"DownloadedSizeMB\": 9936, \"MonthSizeLo\": 1475713580, \"MonthSizeHi\": 10, \"MonthSizeMB\": 42367, \"DaySizeLo\": 1829531082, \"DaySizeHi\": 2, \"DaySizeMB\": 9936, \"ArticleCacheLo\": 0, \"ArticleCacheHi\": 0, \"ArticleCacheMB\": 0, \"DownloadRate\": 0, \"DownloadRateLo\": 0, \"DownloadRateHi\": 0, \"AverageDownloadRate\": 10875454, \"AverageDownloadRateLo\": 10875454, \"AverageDownloadRateHi\": 0, \"DownloadLimit\": 0, \"ThreadCount\": 9, \"ParJobCount\": 0, \"PostJobCount\": 0, \"UrlCount\": 0, \"UpTimeSec\": 43828, \"DownloadTimeSec\": 958, \"ServerPaused\": false, \"DownloadPaused\": false, \"Download2Paused\": false, \"ServerStandBy\": true, \"PostPaused\": false, \"ScanPaused\": false, \"QuotaReached\": false, \"FreeDiskSpaceLo\": 3097944064, \"FreeDiskSpaceHi\": 1228, \"FreeDiskSpaceMB\": 5032842, \"TotalDiskSpaceLo\": 712802304, \"TotalDiskSpaceHi\": 1794, \"TotalDiskSpaceMB\": 7348903, \"FreeInterDiskSpaceLo\": 3097944064, \"FreeInterDiskSpaceHi\": 1228, \"FreeInterDiskSpaceMB\": 5032842, \"TotalInterDiskSpaceLo\": 712802304, \"TotalInterDiskSpaceHi\": 1794, \"TotalInterDiskSpaceMB\": 7348903, \"ServerTime\": 1794081364, \"ResumeTime\": 0, \"FeedActive\": false, \"QueueScriptCount\": 0, \"NewsServers\": [{\"ID\": 1, \"Active\": true}, {\"ID\": 2, \"Active\": true}, {\"ID\": 3, \"Active\": true}]}}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 44,
+  "time": "2026-11-07T20:56:04Z"
+ },
+ {
+  "request": {
+   "body": "listgroups()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"ad943d42\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 45,
+  "time": "2026-11-07T20:56:04Z"
+ },
+ {
+  "request": {
+   "body": "history()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"029b2861\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 46,
+  "time": "2026-11-07T20:56:04Z"
+ },
+ {
+  "request": {
+   "body": "status()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"417efd44\", \"result\": {\"RemainingSizeLo\": 0, \"RemainingSizeHi\": 0, \"RemainingSizeMB\": 0, \"ForcedSizeLo\": 0, \"ForcedSizeHi\": 0, \"ForcedSizeMB\": 0, \"DownloadedSizeLo\": 1828751072, \"DownloadedSizeHi\": 2, \"DownloadedSizeMB\": 9936, \"MonthSizeLo\": 1475713580, \"MonthSizeHi\": 10, \"MonthSizeMB\": 42367, \"DaySizeLo\": 1829531082, \"DaySizeHi\": 2, \"DaySizeMB\": 9936, \"ArticleCacheLo\": 0, \"ArticleCacheHi\": 0, \"ArticleCacheMB\": 0, \"DownloadRate\": 0, \"DownloadRateLo\": 0, \"DownloadRateHi\": 0, \"AverageDownloadRate\": 10875454, \"AverageDownloadRateLo\": 10875454, \"AverageDownloadRateHi\": 0, \"DownloadLimit\": 0, \"ThreadCount\": 9, \"ParJobCount\": 0, \"PostJobCount\": 0, \"UrlCount\": 0, \"UpTimeSec\": 43919, \"DownloadTimeSec\": 958, \"ServerPaused\": false, \"DownloadPaused\": false, \"Download2Paused\": false, \"ServerStandBy\": true, \"PostPaused\": false, \"ScanPaused\": false, \"QuotaReached\": false, \"FreeDiskSpaceLo\": 3043917824, \"FreeDiskSpaceHi\": 1228, \"FreeDiskSpaceMB\": 5032790, \"TotalDiskSpaceLo\": 712802304, \"TotalDiskSpaceHi\": 1794, \"TotalDiskSpaceMB\": 7348903, \"FreeInterDiskSpaceLo\": 3043917824, \"FreeInterDiskSpaceHi\": 1228, \"FreeInterDiskSpaceMB\": 5032790, \"TotalInterDiskSpaceLo\": 712802304, \"TotalInterDiskSpaceHi\": 1794, \"TotalInterDiskSpaceMB\": 7348903, \"ServerTime\": 1794081455, \"ResumeTime\": 0, \"FeedActive\": false, \"QueueScriptCount\": 0, \"NewsServers\": [{\"ID\": 1, \"Active\": true}, {\"ID\": 2, \"Active\": true}, {\"ID\": 3, \"Active\": true}]}}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 47,
+  "time": "2026-11-07T20:57:35Z"
+ },
+ {
+  "request": {
+   "body": "listgroups()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"e056c652\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 48,
+  "time": "2026-11-07T20:57:35Z"
+ },
+ {
+  "request": {
+   "body": "history()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"f4ba47ab\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 49,
+  "time": "2026-11-07T20:57:35Z"
+ },
+ {
+  "request": {
+   "body": "status()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"18a60cf5\", \"result\": {\"RemainingSizeLo\": 0, \"RemainingSizeHi\": 0, \"RemainingSizeMB\": 0, \"ForcedSizeLo\": 0, \"ForcedSizeHi\": 0, \"ForcedSizeMB\": 0, \"DownloadedSizeLo\": 1828751072, \"DownloadedSizeHi\": 2, \"DownloadedSizeMB\": 9936, \"MonthSizeLo\": 1475713580, \"MonthSizeHi\": 10, \"MonthSizeMB\": 42367, \"DaySizeLo\": 1829531082, \"DaySizeHi\": 2, \"DaySizeMB\": 9936, \"ArticleCacheLo\": 0, \"ArticleCacheHi\": 0, \"ArticleCacheMB\": 0, \"DownloadRate\": 0, \"DownloadRateLo\": 0, \"DownloadRateHi\": 0, \"AverageDownloadRate\": 10875454, \"AverageDownloadRateLo\": 10875454, \"AverageDownloadRateHi\": 0, \"DownloadLimit\": 0, \"ThreadCount\": 9, \"ParJobCount\": 0, \"PostJobCount\": 0, \"UrlCount\": 0, \"UpTimeSec\": 44009, \"DownloadTimeSec\": 958, \"ServerPaused\": false, \"DownloadPaused\": false, \"Download2Paused\": false, \"ServerStandBy\": true, \"PostPaused\": false, \"ScanPaused\": false, \"QuotaReached\": false, \"FreeDiskSpaceLo\": 2964942848, \"FreeDiskSpaceHi\": 1228, \"FreeDiskSpaceMB\": 5032715, \"TotalDiskSpaceLo\": 712802304, \"TotalDiskSpaceHi\": 1794, \"TotalDiskSpaceMB\": 7348903, \"FreeInterDiskSpaceLo\": 2964942848, \"FreeInterDiskSpaceHi\": 1228, \"FreeInterDiskSpaceMB\": 5032715, \"TotalInterDiskSpaceLo\": 712802304, \"TotalInterDiskSpaceHi\": 1794, \"TotalInterDiskSpaceMB\": 7348903, \"ServerTime\": 1794081545, \"ResumeTime\": 0, \"FeedActive\": false, \"QueueScriptCount\": 0, \"NewsServers\": [{\"ID\": 1, \"Active\": true}, {\"ID\": 2, \"Active\": true}, {\"ID\": 3, \"Active\": true}]}}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 50,
+  "time": "2026-11-07T20:59:05Z"
+ },
+ {
+  "request": {
+   "body": "listgroups()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"35017dfa\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 51,
+  "time": "2026-11-07T20:59:05Z"
+ },
+ {
+  "request": {
+   "body": "history()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"422f9200\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 52,
+  "time": "2026-11-07T20:59:05Z"
+ },
+ {
+  "request": {
+   "body": "status()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"ea7aebc5\", \"result\": {\"RemainingSizeLo\": 0, \"RemainingSizeHi\": 0, \"RemainingSizeMB\": 0, \"ForcedSizeLo\": 0, \"ForcedSizeHi\": 0, \"ForcedSizeMB\": 0, \"DownloadedSizeLo\": 1828751072, \"DownloadedSizeHi\": 2, \"DownloadedSizeMB\": 9936, \"MonthSizeLo\": 1475713580, \"MonthSizeHi\": 10, \"MonthSizeMB\": 42367, \"DaySizeLo\": 1829531082, \"DaySizeHi\": 2, \"DaySizeMB\": 9936, \"ArticleCacheLo\": 0, \"ArticleCacheHi\": 0, \"ArticleCacheMB\": 0, \"DownloadRate\": 0, \"DownloadRateLo\": 0, \"DownloadRateHi\": 0, \"AverageDownloadRate\": 10875454, \"AverageDownloadRateLo\": 10875454, \"AverageDownloadRateHi\": 0, \"DownloadLimit\": 0, \"ThreadCount\": 9, \"ParJobCount\": 0, \"PostJobCount\": 0, \"UrlCount\": 0, \"UpTimeSec\": 44099, \"DownloadTimeSec\": 958, \"ServerPaused\": false, \"DownloadPaused\": false, \"Download2Paused\": false, \"ServerStandBy\": true, \"PostPaused\": false, \"ScanPaused\": false, \"QuotaReached\": false, \"FreeDiskSpaceLo\": 2765017088, \"FreeDiskSpaceHi\": 1228, \"FreeDiskSpaceMB\": 5032524, \"TotalDiskSpaceLo\": 712802304, \"TotalDiskSpaceHi\": 1794, \"TotalDiskSpaceMB\": 7348903, \"FreeInterDiskSpaceLo\": 2765017088, \"FreeInterDiskSpaceHi\": 1228, \"FreeInterDiskSpaceMB\": 5032524, \"TotalInterDiskSpaceLo\": 712802304, \"TotalInterDiskSpaceHi\": 1794, \"TotalInterDiskSpaceMB\": 7348903, \"ServerTime\": 1794081635, \"ResumeTime\": 0, \"FeedActive\": false, \"QueueScriptCount\": 0, \"NewsServers\": [{\"ID\": 1, \"Active\": true}, {\"ID\": 2, \"Active\": true}, {\"ID\": 3, \"Active\": true}]}}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 53,
+  "time": "2026-11-07T21:00:35Z"
+ },
+ {
+  "request": {
+   "body": "listgroups()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"8ffab6f7\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 54,
+  "time": "2026-11-07T21:00:35Z"
+ },
+ {
+  "request": {
+   "body": "history()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"04758423\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 55,
+  "time": "2026-11-07T21:00:35Z"
+ },
+ {
+  "request": {
+   "body": "status()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"1ecb9322\", \"result\": {\"RemainingSizeLo\": 0, \"RemainingSizeHi\": 0, \"RemainingSizeMB\": 0, \"ForcedSizeLo\": 0, \"ForcedSizeHi\": 0, \"ForcedSizeMB\": 0, \"DownloadedSizeLo\": 1828751072, \"DownloadedSizeHi\": 2, \"DownloadedSizeMB\": 9936, \"MonthSizeLo\": 1475713580, \"MonthSizeHi\": 10, \"MonthSizeMB\": 42367, \"DaySizeLo\": 1829531082, \"DaySizeHi\": 2, \"DaySizeMB\": 9936, \"ArticleCacheLo\": 0, \"ArticleCacheHi\": 0, \"ArticleCacheMB\": 0, \"DownloadRate\": 0, \"DownloadRateLo\": 0, \"DownloadRateHi\": 0, \"AverageDownloadRate\": 10875454, \"AverageDownloadRateLo\": 10875454, \"AverageDownloadRateHi\": 0, \"DownloadLimit\": 0, \"ThreadCount\": 9, \"ParJobCount\": 0, \"PostJobCount\": 0, \"UrlCount\": 0, \"UpTimeSec\": 44189, \"DownloadTimeSec\": 958, \"ServerPaused\": false, \"DownloadPaused\": false, \"Download2Paused\": false, \"ServerStandBy\": true, \"PostPaused\": false, \"ScanPaused\": false, \"QuotaReached\": false, \"FreeDiskSpaceLo\": 2471829504, \"FreeDiskSpaceHi\": 1228, \"FreeDiskSpaceMB\": 5032245, \"TotalDiskSpaceLo\": 712802304, \"TotalDiskSpaceHi\": 1794, \"TotalDiskSpaceMB\": 7348903, \"FreeInterDiskSpaceLo\": 2471829504, \"FreeInterDiskSpaceHi\": 1228, \"FreeInterDiskSpaceMB\": 5032245, \"TotalInterDiskSpaceLo\": 712802304, \"TotalInterDiskSpaceHi\": 1794, \"TotalInterDiskSpaceMB\": 7348903, \"ServerTime\": 1794081725, \"ResumeTime\": 0, \"FeedActive\": false, \"QueueScriptCount\": 0, \"NewsServers\": [{\"ID\": 1, \"Active\": true}, {\"ID\": 2, \"Active\": true}, {\"ID\": 3, \"Active\": true}]}}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 56,
+  "time": "2026-11-07T21:02:05Z"
+ },
+ {
+  "request": {
+   "body": "listgroups()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"5cfd0f12\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 57,
+  "time": "2026-11-07T21:02:05Z"
+ },
+ {
+  "request": {
+   "body": "history()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"4d3fcfdd\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 58,
+  "time": "2026-11-07T21:02:05Z"
+ },
+ {
+  "request": {
+   "body": "status()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"44eec1a1\", \"result\": {\"RemainingSizeLo\": 0, \"RemainingSizeHi\": 0, \"RemainingSizeMB\": 0, \"ForcedSizeLo\": 0, \"ForcedSizeHi\": 0, \"ForcedSizeMB\": 0, \"DownloadedSizeLo\": 1828751072, \"DownloadedSizeHi\": 2, \"DownloadedSizeMB\": 9936, \"MonthSizeLo\": 1475713580, \"MonthSizeHi\": 10, \"MonthSizeMB\": 42367, \"DaySizeLo\": 1829531082, \"DaySizeHi\": 2, \"DaySizeMB\": 9936, \"ArticleCacheLo\": 0, \"ArticleCacheHi\": 0, \"ArticleCacheMB\": 0, \"DownloadRate\": 0, \"DownloadRateLo\": 0, \"DownloadRateHi\": 0, \"AverageDownloadRate\": 10875454, \"AverageDownloadRateLo\": 10875454, \"AverageDownloadRateHi\": 0, \"DownloadLimit\": 0, \"ThreadCount\": 9, \"ParJobCount\": 0, \"PostJobCount\": 0, \"UrlCount\": 0, \"UpTimeSec\": 44279, \"DownloadTimeSec\": 958, \"ServerPaused\": false, \"DownloadPaused\": false, \"Download2Paused\": false, \"ServerStandBy\": true, \"PostPaused\": false, \"ScanPaused\": false, \"QuotaReached\": false, \"FreeDiskSpaceLo\": 2288635904, \"FreeDiskSpaceHi\": 1228, \"FreeDiskSpaceMB\": 5032070, \"TotalDiskSpaceLo\": 712802304, \"TotalDiskSpaceHi\": 1794, \"TotalDiskSpaceMB\": 7348903, \"FreeInterDiskSpaceLo\": 2288635904, \"FreeInterDiskSpaceHi\": 1228, \"FreeInterDiskSpaceMB\": 5032070, \"TotalInterDiskSpaceLo\": 712802304, \"TotalInterDiskSpaceHi\": 1794, \"TotalInterDiskSpaceMB\": 7348903, \"ServerTime\": 1794081815, \"ResumeTime\": 0, \"FeedActive\": false, \"QueueScriptCount\": 0, \"NewsServers\": [{\"ID\": 1, \"Active\": true}, {\"ID\": 2, \"Active\": true}, {\"ID\": 3, \"Active\": true}]}}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 59,
+  "time": "2026-11-07T21:03:35Z"
+ },
+ {
+  "request": {
+   "body": "listgroups()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"7d730783\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 60,
+  "time": "2026-11-07T21:03:35Z"
+ },
+ {
+  "request": {
+   "body": "history()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"e23276c9\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 61,
+  "time": "2026-11-07T21:03:35Z"
+ },
+ {
+  "request": {
+   "body": "status()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"5d776789\", \"result\": {\"RemainingSizeLo\": 0, \"RemainingSizeHi\": 0, \"RemainingSizeMB\": 0, \"ForcedSizeLo\": 0, \"ForcedSizeHi\": 0, \"ForcedSizeMB\": 0, \"DownloadedSizeLo\": 1828751072, \"DownloadedSizeHi\": 2, \"DownloadedSizeMB\": 9936, \"MonthSizeLo\": 1475713580, \"MonthSizeHi\": 10, \"MonthSizeMB\": 42367, \"DaySizeLo\": 1829531082, \"DaySizeHi\": 2, \"DaySizeMB\": 9936, \"ArticleCacheLo\": 0, \"ArticleCacheHi\": 0, \"ArticleCacheMB\": 0, \"DownloadRate\": 0, \"DownloadRateLo\": 0, \"DownloadRateHi\": 0, \"AverageDownloadRate\": 10875454, \"AverageDownloadRateLo\": 10875454, \"AverageDownloadRateHi\": 0, \"DownloadLimit\": 0, \"ThreadCount\": 9, \"ParJobCount\": 0, \"PostJobCount\": 0, \"UrlCount\": 0, \"UpTimeSec\": 44369, \"DownloadTimeSec\": 958, \"ServerPaused\": false, \"DownloadPaused\": false, \"Download2Paused\": false, \"ServerStandBy\": true, \"PostPaused\": false, \"ScanPaused\": false, \"QuotaReached\": false, \"FreeDiskSpaceLo\": 2184183808, \"FreeDiskSpaceHi\": 1228, \"FreeDiskSpaceMB\": 5031971, \"TotalDiskSpaceLo\": 712802304, \"TotalDiskSpaceHi\": 1794, \"TotalDiskSpaceMB\": 7348903, \"FreeInterDiskSpaceLo\": 2184183808, \"FreeInterDiskSpaceHi\": 1228, \"FreeInterDiskSpaceMB\": 5031971, \"TotalInterDiskSpaceLo\": 712802304, \"TotalInterDiskSpaceHi\": 1794, \"TotalInterDiskSpaceMB\": 7348903, \"ServerTime\": 1794081905, \"ResumeTime\": 0, \"FeedActive\": false, \"QueueScriptCount\": 0, \"NewsServers\": [{\"ID\": 1, \"Active\": true}, {\"ID\": 2, \"Active\": true}, {\"ID\": 3, \"Active\": true}]}}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 62,
+  "time": "2026-11-07T21:05:05Z"
+ },
+ {
+  "request": {
+   "body": "listgroups()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"fc402418\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 63,
+  "time": "2026-11-07T21:05:05Z"
+ },
+ {
+  "request": {
+   "body": "history()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"353aa4a5\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 64,
+  "time": "2026-11-07T21:05:05Z"
+ },
+ {
+  "request": {
+   "body": "status()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"c1c7f07d\", \"result\": {\"RemainingSizeLo\": 0, \"RemainingSizeHi\": 0, \"RemainingSizeMB\": 0, \"ForcedSizeLo\": 0, \"ForcedSizeHi\": 0, \"ForcedSizeMB\": 0, \"DownloadedSizeLo\": 1828751072, \"DownloadedSizeHi\": 2, \"DownloadedSizeMB\": 9936, \"MonthSizeLo\": 1475713580, \"MonthSizeHi\": 10, \"MonthSizeMB\": 42367, \"DaySizeLo\": 1829531082, \"DaySizeHi\": 2, \"DaySizeMB\": 9936, \"ArticleCacheLo\": 0, \"ArticleCacheHi\": 0, \"ArticleCacheMB\": 0, \"DownloadRate\": 0, \"DownloadRateLo\": 0, \"DownloadRateHi\": 0, \"AverageDownloadRate\": 10875454, \"AverageDownloadRateLo\": 10875454, \"AverageDownloadRateHi\": 0, \"DownloadLimit\": 0, \"ThreadCount\": 9, \"ParJobCount\": 0, \"PostJobCount\": 0, \"UrlCount\": 0, \"UpTimeSec\": 44459, \"DownloadTimeSec\": 958, \"ServerPaused\": false, \"DownloadPaused\": false, \"Download2Paused\": false, \"ServerStandBy\": true, \"PostPaused\": false, \"ScanPaused\": false, \"QuotaReached\": false, \"FreeDiskSpaceLo\": 2072776704, \"FreeDiskSpaceHi\": 1228, \"FreeDiskSpaceMB\": 5031864, \"TotalDiskSpaceLo\": 712802304, \"TotalDiskSpaceHi\": 1794, \"TotalDiskSpaceMB\": 7348903, \"FreeInterDiskSpaceLo\": 2072776704, \"FreeInterDiskSpaceHi\": 1228, \"FreeInterDiskSpaceMB\": 5031864, \"TotalInterDiskSpaceLo\": 712802304, \"TotalInterDiskSpaceHi\": 1794, \"TotalInterDiskSpaceMB\": 7348903, \"ServerTime\": 1794081995, \"ResumeTime\": 0, \"FeedActive\": false, \"QueueScriptCount\": 0, \"NewsServers\": [{\"ID\": 1, \"Active\": true}, {\"ID\": 2, \"Active\": true}, {\"ID\": 3, \"Active\": true}]}}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 65,
+  "time": "2026-11-07T21:06:35Z"
+ },
+ {
+  "request": {
+   "body": "listgroups()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"3cab972c\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 66,
+  "time": "2026-11-07T21:06:35Z"
+ },
+ {
+  "request": {
+   "body": "history()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"2d9d6630\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 67,
+  "time": "2026-11-07T21:06:35Z"
+ },
+ {
+  "request": {
+   "body": "status()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"c5915bb9\", \"result\": {\"RemainingSizeLo\": 0, \"RemainingSizeHi\": 0, \"RemainingSizeMB\": 0, \"ForcedSizeLo\": 0, \"ForcedSizeHi\": 0, \"ForcedSizeMB\": 0, \"DownloadedSizeLo\": 1828751072, \"DownloadedSizeHi\": 2, \"DownloadedSizeMB\": 9936, \"MonthSizeLo\": 1475713580, \"MonthSizeHi\": 10, \"MonthSizeMB\": 42367, \"DaySizeLo\": 1829531082, \"DaySizeHi\": 2, \"DaySizeMB\": 9936, \"ArticleCacheLo\": 0, \"ArticleCacheHi\": 0, \"ArticleCacheMB\": 0, \"DownloadRate\": 0, \"DownloadRateLo\": 0, \"DownloadRateHi\": 0, \"AverageDownloadRate\": 10875454, \"AverageDownloadRateLo\": 10875454, \"AverageDownloadRateHi\": 0, \"DownloadLimit\": 0, \"ThreadCount\": 9, \"ParJobCount\": 0, \"PostJobCount\": 0, \"UrlCount\": 0, \"UpTimeSec\": 44549, \"DownloadTimeSec\": 958, \"ServerPaused\": false, \"DownloadPaused\": false, \"Download2Paused\": false, \"ServerStandBy\": true, \"PostPaused\": false, \"ScanPaused\": false, \"QuotaReached\": false, \"FreeDiskSpaceLo\": 1975001088, \"FreeDiskSpaceHi\": 1228, \"FreeDiskSpaceMB\": 5031771, \"TotalDiskSpaceLo\": 712802304, \"TotalDiskSpaceHi\": 1794, \"TotalDiskSpaceMB\": 7348903, \"FreeInterDiskSpaceLo\": 1975001088, \"FreeInterDiskSpaceHi\": 1228, \"FreeInterDiskSpaceMB\": 5031771, \"TotalInterDiskSpaceLo\": 712802304, \"TotalInterDiskSpaceHi\": 1794, \"TotalInterDiskSpaceMB\": 7348903, \"ServerTime\": 1794082085, \"ResumeTime\": 0, \"FeedActive\": false, \"QueueScriptCount\": 0, \"NewsServers\": [{\"ID\": 1, \"Active\": true}, {\"ID\": 2, \"Active\": true}, {\"ID\": 3, \"Active\": true}]}}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 68,
+  "time": "2026-11-07T21:08:05Z"
+ },
+ {
+  "request": {
+   "body": "listgroups()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"7169fa55\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 69,
+  "time": "2026-11-07T21:08:05Z"
+ },
+ {
+  "request": {
+   "body": "history()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"dd34a90e\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 70,
+  "time": "2026-11-07T21:08:05Z"
+ },
+ {
+  "request": {
+   "body": "status()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"3b317587\", \"result\": {\"RemainingSizeLo\": 0, \"RemainingSizeHi\": 0, \"RemainingSizeMB\": 0, \"ForcedSizeLo\": 0, \"ForcedSizeHi\": 0, \"ForcedSizeMB\": 0, \"DownloadedSizeLo\": 1828751072, \"DownloadedSizeHi\": 2, \"DownloadedSizeMB\": 9936, \"MonthSizeLo\": 1475713580, \"MonthSizeHi\": 10, \"MonthSizeMB\": 42367, \"DaySizeLo\": 1829531082, \"DaySizeHi\": 2, \"DaySizeMB\": 9936, \"ArticleCacheLo\": 0, \"ArticleCacheHi\": 0, \"ArticleCacheMB\": 0, \"DownloadRate\": 0, \"DownloadRateLo\": 0, \"DownloadRateHi\": 0, \"AverageDownloadRate\": 10875454, \"AverageDownloadRateLo\": 10875454, \"AverageDownloadRateHi\": 0, \"DownloadLimit\": 0, \"ThreadCount\": 9, \"ParJobCount\": 0, \"PostJobCount\": 0, \"UrlCount\": 0, \"UpTimeSec\": 44639, \"DownloadTimeSec\": 958, \"ServerPaused\": false, \"DownloadPaused\": false, \"Download2Paused\": false, \"ServerStandBy\": true, \"PostPaused\": false, \"ScanPaused\": false, \"QuotaReached\": false, \"FreeDiskSpaceLo\": 1873780736, \"FreeDiskSpaceHi\": 1228, \"FreeDiskSpaceMB\": 5031674, \"TotalDiskSpaceLo\": 712802304, \"TotalDiskSpaceHi\": 1794, \"TotalDiskSpaceMB\": 7348903, \"FreeInterDiskSpaceLo\": 1873780736, \"FreeInterDiskSpaceHi\": 1228, \"FreeInterDiskSpaceMB\": 5031674, \"TotalInterDiskSpaceLo\": 712802304, \"TotalInterDiskSpaceHi\": 1794, \"TotalInterDiskSpaceMB\": 7348903, \"ServerTime\": 1794082175, \"ResumeTime\": 0, \"FeedActive\": false, \"QueueScriptCount\": 0, \"NewsServers\": [{\"ID\": 1, \"Active\": true}, {\"ID\": 2, \"Active\": true}, {\"ID\": 3, \"Active\": true}]}}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 71,
+  "time": "2026-11-07T21:09:35Z"
+ },
+ {
+  "request": {
+   "body": "listgroups()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"5ffc8b07\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 72,
+  "time": "2026-11-07T21:09:35Z"
+ },
+ {
+  "request": {
+   "body": "history()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"614fca90\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 73,
+  "time": "2026-11-07T21:09:35Z"
+ },
+ {
+  "request": {
+   "body": "status()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"97490a73\", \"result\": {\"RemainingSizeLo\": 0, \"RemainingSizeHi\": 0, \"RemainingSizeMB\": 0, \"ForcedSizeLo\": 0, \"ForcedSizeHi\": 0, \"ForcedSizeMB\": 0, \"DownloadedSizeLo\": 1828751072, \"DownloadedSizeHi\": 2, \"DownloadedSizeMB\": 9936, \"MonthSizeLo\": 1475713580, \"MonthSizeHi\": 10, \"MonthSizeMB\": 42367, \"DaySizeLo\": 1829531082, \"DaySizeHi\": 2, \"DaySizeMB\": 9936, \"ArticleCacheLo\": 0, \"ArticleCacheHi\": 0, \"ArticleCacheMB\": 0, \"DownloadRate\": 0, \"DownloadRateLo\": 0, \"DownloadRateHi\": 0, \"AverageDownloadRate\": 10875454, \"AverageDownloadRateLo\": 10875454, \"AverageDownloadRateHi\": 0, \"DownloadLimit\": 0, \"ThreadCount\": 9, \"ParJobCount\": 0, \"PostJobCount\": 0, \"UrlCount\": 0, \"UpTimeSec\": 44729, \"DownloadTimeSec\": 958, \"ServerPaused\": false, \"DownloadPaused\": false, \"Download2Paused\": false, \"ServerStandBy\": true, \"PostPaused\": false, \"ScanPaused\": false, \"QuotaReached\": false, \"FreeDiskSpaceLo\": 1677557760, \"FreeDiskSpaceHi\": 1228, \"FreeDiskSpaceMB\": 5031487, \"TotalDiskSpaceLo\": 712802304, \"TotalDiskSpaceHi\": 1794, \"TotalDiskSpaceMB\": 7348903, \"FreeInterDiskSpaceLo\": 1677557760, \"FreeInterDiskSpaceHi\": 1228, \"FreeInterDiskSpaceMB\": 5031487, \"TotalInterDiskSpaceLo\": 712802304, \"TotalInterDiskSpaceHi\": 1794, \"TotalInterDiskSpaceMB\": 7348903, \"ServerTime\": 1794082265, \"ResumeTime\": 0, \"FeedActive\": false, \"QueueScriptCount\": 0, \"NewsServers\": [{\"ID\": 1, \"Active\": true}, {\"ID\": 2, \"Active\": true}, {\"ID\": 3, \"Active\": true}]}}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 74,
+  "time": "2026-11-07T21:11:05Z"
+ },
+ {
+  "request": {
+   "body": "listgroups()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"12b9127e\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 75,
+  "time": "2026-11-07T21:11:05Z"
+ },
+ {
+  "request": {
+   "body": "history()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"8d7e22da\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 76,
+  "time": "2026-11-07T21:11:05Z"
+ },
+ {
+  "request": {
+   "body": "status()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"28f9e65c\", \"result\": {\"RemainingSizeLo\": 0, \"RemainingSizeHi\": 0, \"RemainingSizeMB\": 0, \"ForcedSizeLo\": 0, \"ForcedSizeHi\": 0, \"ForcedSizeMB\": 0, \"DownloadedSizeLo\": 1828751072, \"DownloadedSizeHi\": 2, \"DownloadedSizeMB\": 9936, \"MonthSizeLo\": 1475713580, \"MonthSizeHi\": 10, \"MonthSizeMB\": 42367, \"DaySizeLo\": 1829531082, \"DaySizeHi\": 2, \"DaySizeMB\": 9936, \"ArticleCacheLo\": 0, \"ArticleCacheHi\": 0, \"ArticleCacheMB\": 0, \"DownloadRate\": 0, \"DownloadRateLo\": 0, \"DownloadRateHi\": 0, \"AverageDownloadRate\": 10875454, \"AverageDownloadRateLo\": 10875454, \"AverageDownloadRateHi\": 0, \"DownloadLimit\": 0, \"ThreadCount\": 9, \"ParJobCount\": 0, \"PostJobCount\": 0, \"UrlCount\": 0, \"UpTimeSec\": 44819, \"DownloadTimeSec\": 958, \"ServerPaused\": false, \"DownloadPaused\": false, \"Download2Paused\": false, \"ServerStandBy\": true, \"PostPaused\": false, \"ScanPaused\": false, \"QuotaReached\": false, \"FreeDiskSpaceLo\": 1369296896, \"FreeDiskSpaceHi\": 1228, \"FreeDiskSpaceMB\": 5031193, \"TotalDiskSpaceLo\": 712802304, \"TotalDiskSpaceHi\": 1794, \"TotalDiskSpaceMB\": 7348903, \"FreeInterDiskSpaceLo\": 1369296896, \"FreeInterDiskSpaceHi\": 1228, \"FreeInterDiskSpaceMB\": 5031193, \"TotalInterDiskSpaceLo\": 712802304, \"TotalInterDiskSpaceHi\": 1794, \"TotalInterDiskSpaceMB\": 7348903, \"ServerTime\": 1794082355, \"ResumeTime\": 0, \"FeedActive\": false, \"QueueScriptCount\": 0, \"NewsServers\": [{\"ID\": 1, \"Active\": true}, {\"ID\": 2, \"Active\": true}, {\"ID\": 3, \"Active\": true}]}}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 77,
+  "time": "2026-11-07T21:12:35Z"
+ },
+ {
+  "request": {
+   "body": "listgroups()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"12b8e2eb\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 78,
+  "time": "2026-11-07T21:12:35Z"
+ },
+ {
+  "request": {
+   "body": "history()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"612a6f75\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 79,
+  "time": "2026-11-07T21:12:35Z"
+ },
+ {
+  "request": {
+   "body": "status()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"3fcb1523\", \"result\": {\"RemainingSizeLo\": 0, \"RemainingSizeHi\": 0, \"RemainingSizeMB\": 0, \"ForcedSizeLo\": 0, \"ForcedSizeHi\": 0, \"ForcedSizeMB\": 0, \"DownloadedSizeLo\": 1828751072, \"DownloadedSizeHi\": 2, \"DownloadedSizeMB\": 9936, \"MonthSizeLo\": 1475713580, \"MonthSizeHi\": 10, \"MonthSizeMB\": 42367, \"DaySizeLo\": 1829531082, \"DaySizeHi\": 2, \"DaySizeMB\": 9936, \"ArticleCacheLo\": 0, \"ArticleCacheHi\": 0, \"ArticleCacheMB\": 0, \"DownloadRate\": 0, \"DownloadRateLo\": 0, \"DownloadRateHi\": 0, \"AverageDownloadRate\": 10875454, \"AverageDownloadRateLo\": 10875454, \"AverageDownloadRateHi\": 0, \"DownloadLimit\": 0, \"ThreadCount\": 9, \"ParJobCount\": 0, \"PostJobCount\": 0, \"UrlCount\": 0, \"UpTimeSec\": 44909, \"DownloadTimeSec\": 958, \"ServerPaused\": false, \"DownloadPaused\": false, \"Download2Paused\": false, \"ServerStandBy\": true, \"PostPaused\": false, \"ScanPaused\": false, \"QuotaReached\": false, \"FreeDiskSpaceLo\": 1079140352, \"FreeDiskSpaceHi\": 1228, \"FreeDiskSpaceMB\": 5030917, \"TotalDiskSpaceLo\": 712802304, \"TotalDiskSpaceHi\": 1794, \"TotalDiskSpaceMB\": 7348903, \"FreeInterDiskSpaceLo\": 1079140352, \"FreeInterDiskSpaceHi\": 1228, \"FreeInterDiskSpaceMB\": 5030917, \"TotalInterDiskSpaceLo\": 712802304, \"TotalInterDiskSpaceHi\": 1794, \"TotalInterDiskSpaceMB\": 7348903, \"ServerTime\": 1794082445, \"ResumeTime\": 0, \"FeedActive\": false, \"QueueScriptCount\": 0, \"NewsServers\": [{\"ID\": 1, \"Active\": true}, {\"ID\": 2, \"Active\": true}, {\"ID\": 3, \"Active\": true}]}}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 80,
+  "time": "2026-11-07T21:14:05Z"
+ },
+ {
+  "request": {
+   "body": "listgroups()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"83fb9fc6\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 81,
+  "time": "2026-11-07T21:14:05Z"
+ },
+ {
+  "request": {
+   "body": "history()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"54f1d556\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 82,
+  "time": "2026-11-07T21:14:05Z"
+ },
+ {
+  "request": {
+   "body": "status()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"18a14e12\", \"result\": {\"RemainingSizeLo\": 0, \"RemainingSizeHi\": 0, \"RemainingSizeMB\": 0, \"ForcedSizeLo\": 0, \"ForcedSizeHi\": 0, \"ForcedSizeMB\": 0, \"DownloadedSizeLo\": 1828751072, \"DownloadedSizeHi\": 2, \"DownloadedSizeMB\": 9936, \"MonthSizeLo\": 1475713580, \"MonthSizeHi\": 10, \"MonthSizeMB\": 42367, \"DaySizeLo\": 1829531082, \"DaySizeHi\": 2, \"DaySizeMB\": 9936, \"ArticleCacheLo\": 0, \"ArticleCacheHi\": 0, \"ArticleCacheMB\": 0, \"DownloadRate\": 0, \"DownloadRateLo\": 0, \"DownloadRateHi\": 0, \"AverageDownloadRate\": 10875454, \"AverageDownloadRateLo\": 10875454, \"AverageDownloadRateHi\": 0, \"DownloadLimit\": 0, \"ThreadCount\": 9, \"ParJobCount\": 0, \"PostJobCount\": 0, \"UrlCount\": 0, \"UpTimeSec\": 44999, \"DownloadTimeSec\": 958, \"ServerPaused\": false, \"DownloadPaused\": false, \"Download2Paused\": false, \"ServerStandBy\": true, \"PostPaused\": false, \"ScanPaused\": false, \"QuotaReached\": false, \"FreeDiskSpaceLo\": 774565888, \"FreeDiskSpaceHi\": 1228, \"FreeDiskSpaceMB\": 5030626, \"TotalDiskSpaceLo\": 712802304, \"TotalDiskSpaceHi\": 1794, \"TotalDiskSpaceMB\": 7348903, \"FreeInterDiskSpaceLo\": 774565888, \"FreeInterDiskSpaceHi\": 1228, \"FreeInterDiskSpaceMB\": 5030626, \"TotalInterDiskSpaceLo\": 712802304, \"TotalInterDiskSpaceHi\": 1794, \"TotalInterDiskSpaceMB\": 7348903, \"ServerTime\": 1794082535, \"ResumeTime\": 0, \"FeedActive\": false, \"QueueScriptCount\": 0, \"NewsServers\": [{\"ID\": 1, \"Active\": true}, {\"ID\": 2, \"Active\": true}, {\"ID\": 3, \"Active\": true}]}}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 83,
+  "time": "2026-11-07T21:15:35Z"
+ },
+ {
+  "request": {
+   "body": "listgroups()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"78163790\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 84,
+  "time": "2026-11-07T21:15:35Z"
+ },
+ {
+  "request": {
+   "body": "history()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"d44e460e\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 85,
+  "time": "2026-11-07T21:15:35Z"
+ },
+ {
+  "request": {
+   "body": "status()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"92dbf6e8\", \"result\": {\"RemainingSizeLo\": 0, \"RemainingSizeHi\": 0, \"RemainingSizeMB\": 0, \"ForcedSizeLo\": 0, \"ForcedSizeHi\": 0, \"ForcedSizeMB\": 0, \"DownloadedSizeLo\": 1828751072, \"DownloadedSizeHi\": 2, \"DownloadedSizeMB\": 9936, \"MonthSizeLo\": 1475713580, \"MonthSizeHi\": 10, \"MonthSizeMB\": 42367, \"DaySizeLo\": 1829531082, \"DaySizeHi\": 2, \"DaySizeMB\": 9936, \"ArticleCacheLo\": 0, \"ArticleCacheHi\": 0, \"ArticleCacheMB\": 0, \"DownloadRate\": 0, \"DownloadRateLo\": 0, \"DownloadRateHi\": 0, \"AverageDownloadRate\": 10875454, \"AverageDownloadRateLo\": 10875454, \"AverageDownloadRateHi\": 0, \"DownloadLimit\": 0, \"ThreadCount\": 9, \"ParJobCount\": 0, \"PostJobCount\": 0, \"UrlCount\": 0, \"UpTimeSec\": 45090, \"DownloadTimeSec\": 958, \"ServerPaused\": false, \"DownloadPaused\": false, \"Download2Paused\": false, \"ServerStandBy\": true, \"PostPaused\": false, \"ScanPaused\": false, \"QuotaReached\": false, \"FreeDiskSpaceLo\": 439853056, \"FreeDiskSpaceHi\": 1228, \"FreeDiskSpaceMB\": 5030307, \"TotalDiskSpaceLo\": 712802304, \"TotalDiskSpaceHi\": 1794, \"TotalDiskSpaceMB\": 7348903, \"FreeInterDiskSpaceLo\": 439853056, \"FreeInterDiskSpaceHi\": 1228, \"FreeInterDiskSpaceMB\": 5030307, \"TotalInterDiskSpaceLo\": 712802304, \"TotalInterDiskSpaceHi\": 1794, \"TotalInterDiskSpaceMB\": 7348903, \"ServerTime\": 1794082626, \"ResumeTime\": 0, \"FeedActive\": false, \"QueueScriptCount\": 0, \"NewsServers\": [{\"ID\": 1, \"Active\": true}, {\"ID\": 2, \"Active\": true}, {\"ID\": 3, \"Active\": true}]}}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 86,
+  "time": "2026-11-07T21:17:06Z"
+ },
+ {
+  "request": {
+   "body": "listgroups()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"cb4a3933\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 87,
+  "time": "2026-11-07T21:17:06Z"
+ },
+ {
+  "request": {
+   "body": "history()",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/jsonrpc"
+  },
+  "response": {
+   "body": "{\"version\": \"1.1\", \"id\": \"1fd312a2\", \"result\": []}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 88,
+  "time": "2026-11-07T21:17:06Z"
+ }
+]

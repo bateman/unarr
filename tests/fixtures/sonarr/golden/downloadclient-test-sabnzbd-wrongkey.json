@@ -1,0 +1,30 @@
+{
+  "body": [
+    {
+      "detailedDescription": "Error response received from SABnzbd: API Key Incorrect",
+      "errorMessage": "Unable to connect to SABnzbd",
+      "isWarning": false,
+      "propertyName": "Host",
+      "severity": "error"
+    },
+    {
+      "errorMessage": "API Key Incorrect",
+      "isWarning": false,
+      "propertyName": "APIKey",
+      "severity": "error"
+    },
+    {
+      "errorMessage": "Test was aborted due to an error: Error response received from SABnzbd: API Key Incorrect",
+      "isWarning": false,
+      "propertyName": "",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-07T15:44:21Z",
+  "request": {
+    "body": "bodies/downloadclient-test-sabnzbd-wrongkey.json",
+    "method": "POST",
+    "path": "/api/v3/downloadclient/test"
+  },
+  "status": 400
+}

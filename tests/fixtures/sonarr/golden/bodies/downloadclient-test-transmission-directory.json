@@ -1,0 +1,61 @@
+{
+  "enable": true,
+  "protocol": "torrent",
+  "priority": 1,
+  "removeCompletedDownloads": true,
+  "removeFailedDownloads": true,
+  "name": "Directory",
+  "implementation": "Transmission",
+  "configContract": "TransmissionSettings",
+  "tags": [],
+  "fields": [
+    {
+      "name": "host",
+      "value": "127.0.0.1"
+    },
+    {
+      "name": "port",
+      "value": 18989
+    },
+    {
+      "name": "useSsl",
+      "value": false
+    },
+    {
+      "name": "urlBase",
+      "value": "/transmission/"
+    },
+    {
+      "name": "username",
+      "value": "mock"
+    },
+    {
+      "name": "password",
+      "value": "mock"
+    },
+    {
+      "name": "tvCategory",
+      "value": ""
+    },
+    {
+      "name": "tvImportedCategory",
+      "value": ""
+    },
+    {
+      "name": "tvDirectory",
+      "value": "/downloads/tv"
+    },
+    {
+      "name": "recentTvPriority",
+      "value": 0
+    },
+    {
+      "name": "olderTvPriority",
+      "value": 0
+    },
+    {
+      "name": "addPaused",
+      "value": false
+    }
+  ]
+}

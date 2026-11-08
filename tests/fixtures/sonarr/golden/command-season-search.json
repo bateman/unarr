@@ -1,0 +1,33 @@
+{
+  "body": {
+    "body": {
+      "isExclusive": false,
+      "isLongRunning": false,
+      "name": "SeasonSearch",
+      "requiresDiskAccess": false,
+      "seasonNumber": 1,
+      "sendUpdatesToClient": true,
+      "seriesId": 1,
+      "suppressMessages": false,
+      "trigger": "manual",
+      "updateScheduledTask": true
+    },
+    "commandName": "Season Search",
+    "id": 461666,
+    "name": "SeasonSearch",
+    "priority": "normal",
+    "queued": "2026-11-07T15:44:53Z",
+    "result": "unknown",
+    "sendUpdatesToClient": true,
+    "status": "queued",
+    "trigger": "manual",
+    "updateScheduledTask": true
+  },
+  "recordedAt": "2026-11-07T15:44:53Z",
+  "request": {
+    "body": "bodies/command-season-search.json",
+    "method": "POST",
+    "path": "/api/v3/command"
+  },
+  "status": 201
+}

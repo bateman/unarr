@@ -1,9 +1,15 @@
 //! Shared state handed to every handler.
 
+use std::collections::HashMap;
 use std::path::PathBuf;
-use std::sync::{Arc, Mutex};
+use std::sync::{Arc, Mutex, OnceLock};
+use unarr_core::commands::{Event, Runtime};
+use unarr_core::decision::RemoteEpisode;
+use unarr_core::downloadclients::DownloadClientService;
+use unarr_core::downloads::Downloads;
 
 use chrono::{DateTime, Utc};
+use serde_json::json;
 use unarr_core::config::HostConfig;
 use unarr_core::{Db, Personality};
 
@@ -102,9 +108,23 @@ struct Inner {
     logs: LogBuffer,
     hub: Hub,
     /// When set, the moment every time-dependent answer is computed for.
-    /// Contract tests pin it to the instant each golden was recorded.
-    fixed_now: Mutex<Option<DateTime<Utc>>>,
+    /// Contract tests pin it to the instant each golden was recorded. Shared
+    /// with the command runtime, whose clock reads it.
+    fixed_now: Arc<Mutex<Option<DateTime<Utc>>>>,
+    /// `ReleaseController`'s cache: the releases a search listed, by
+    /// `{indexerId}_{guid}`, for half an hour, so a grab can find them.
+    releases: Mutex<HashMap<String, (RemoteEpisode, DateTime<Utc>)>>,
+    /// Grabs, tracked downloads and the queue.
+    downloads: Arc<Downloads>,
+    /// The command queue, its workers and the scheduler, once started.
+    commands: OnceLock<Arc<Runtime>>,
+    /// `ReleasePushController.PushLock`: one push decided and processed
+    /// at a time, so two pushes of one episode do not both grab.
+    push_lock: tokio::sync::Mutex<()>,
 }
+
+/// `TimeSpan.FromMinutes(30)`.
+const RELEASE_CACHE_TTL: chrono::Duration = chrono::Duration::minutes(30);
 
 /// Cheaply cloneable handle to everything a handler needs.
 #[derive(Clone)]
@@ -118,15 +138,94 @@ impl AppState {
         runtime: RuntimeInfo,
         logs: LogBuffer,
     ) -> AppState {
+        let downloads = Arc::new(Downloads::new(db.clone(), DownloadClientService::new(db.clone())));
         AppState(Arc::new(Inner {
             personality,
+            downloads,
             db,
             settings,
             runtime,
             logs,
             hub: Hub::new(),
-            fixed_now: Mutex::new(None),
+            fixed_now: Arc::new(Mutex::new(None)),
+            releases: Mutex::new(HashMap::new()),
+            commands: OnceLock::new(),
+            push_lock: tokio::sync::Mutex::new(()),
         }))
+    }
+
+    /// Start the command runtime: the queue, its workers, the scheduler,
+    /// and the relay of its events to SignalR. Needs a Tokio runtime; call
+    /// once.
+    pub async fn start_runtime(&self) -> anyhow::Result<()> {
+        if self.0.commands.get().is_some() {
+            return Ok(());
+        }
+        let fixed = self.0.fixed_now.clone();
+        let clock: unarr_core::commands::executor::Clock =
+            Arc::new(move || fixed.lock().unwrap().unwrap_or_else(Utc::now));
+        let runtime = Runtime::new(self.db().clone(), self.downloads().clone(), clock).await?;
+        runtime.start();
+        let mut events = runtime.subscribe();
+        let state = self.clone();
+        tokio::spawn(async move {
+            loop {
+                match events.recv().await {
+                    Ok(Event::CommandUpdated(c)) => state.hub().broadcast(
+                        "command",
+                        json!({"action": "updated", "resource": crate::routes::command::command_resource(&c)}),
+                    ),
+                    Ok(Event::QueueUpdated) => crate::routes::queue::broadcast_queue(&state),
+                    Ok(Event::HealthChanged) => state.hub().broadcast("health", json!({"action": "sync"})),
+                    Err(tokio::sync::broadcast::error::RecvError::Lagged(_)) => continue,
+                    Err(tokio::sync::broadcast::error::RecvError::Closed) => break,
+                }
+            }
+        });
+        let _ = self.0.commands.set(runtime);
+        Ok(())
+    }
+
+    /// A provider changed: the health checks that follow one, in the
+    /// background, when the runtime is up.
+    pub fn providers_changed(&self) {
+        if let Ok(runtime) = self.commands() {
+            runtime.check_health_later(unarr_core::health::CheckSet::Providers);
+        }
+    }
+
+    /// The command runtime; an error before `start_runtime`.
+    pub fn commands(&self) -> anyhow::Result<&Arc<Runtime>> {
+        self.0
+            .commands
+            .get()
+            .ok_or_else(|| anyhow::anyhow!("the command runtime is not running"))
+    }
+
+    /// Remember a release a search listed.
+    pub fn cache_release(&self, key: String, remote: RemoteEpisode) {
+        let now = self.now();
+        let mut cache = self.0.releases.lock().unwrap();
+        cache.retain(|_, (_, at)| now - *at < RELEASE_CACHE_TTL);
+        cache.insert(key, (remote, now));
+    }
+
+    /// A release a recent search listed.
+    pub fn cached_release(&self, key: &str) -> Option<RemoteEpisode> {
+        let now = self.now();
+        let cache = self.0.releases.lock().unwrap();
+        cache
+            .get(key)
+            .filter(|(_, at)| now - *at < RELEASE_CACHE_TTL)
+            .map(|(r, _)| r.clone())
+    }
+
+    pub fn push_lock(&self) -> &tokio::sync::Mutex<()> {
+        &self.0.push_lock
+    }
+
+    pub fn downloads(&self) -> &Arc<Downloads> {
+        &self.0.downloads
     }
 
     /// The current time, or the pinned one.

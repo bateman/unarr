@@ -3078,7 +3078,7 @@
     "sortKey": "date",
     "totalRecords": 1998
   },
-  "recordedAt": "2026-11-07T08:04:08Z",
+  "recordedAt": "2026-11-07T15:44:03Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/history?page=1&pageSize=20&sortKey=date&sortDirection=descending&includeSeries=true&includeEpisode=true"

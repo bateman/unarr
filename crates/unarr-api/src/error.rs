@@ -10,7 +10,19 @@ use serde_json::json;
 #[derive(Debug)]
 pub enum ApiError {
     NotFound,
+    /// `NzbDroneClientException(NotFound, message)`: a 404 with the message
+    /// and the exception's description.
+    NotFoundMessage(String),
+    /// `NzbDroneClientException(InternalServerError, message)`.
+    ServerMessage(String),
+    /// `NzbDroneClientException(Conflict, message)`.
+    ConflictMessage(String),
+    /// `NotFoundException` thrown by a controller: `{"message": "NotFound"}`.
+    NotFoundException,
+    /// `BadRequestException`: `{"message": "BadRequest: ...", "content": "..."}`.
     BadRequest(String),
+    /// `ValidationException`: a 400 listing the failures.
+    Validation(Vec<unarr_core::validation::ValidationFailure>),
     Internal(anyhow::Error),
 }
 
@@ -35,9 +47,27 @@ impl IntoResponse for ApiError {
                 .into_response(),
             ApiError::BadRequest(message) => (
                 StatusCode::BAD_REQUEST,
-                Json(json!({ "message": message, "description": message })),
+                Json(json!({ "message": format!("BadRequest: {message}"), "content": message })),
             )
                 .into_response(),
+            ApiError::NotFoundMessage(message) => {
+                (StatusCode::NOT_FOUND, Json(client_exception(&message))).into_response()
+            }
+            ApiError::ServerMessage(message) => (
+                StatusCode::INTERNAL_SERVER_ERROR,
+                Json(client_exception(&message)),
+            )
+                .into_response(),
+            ApiError::ConflictMessage(message) => {
+                (StatusCode::CONFLICT, Json(client_exception(&message))).into_response()
+            }
+            ApiError::NotFoundException => {
+                (StatusCode::NOT_FOUND, Json(json!({"message": "NotFound"}))).into_response()
+            }
+            ApiError::Validation(failures) => {
+                let body: Vec<serde_json::Value> = failures.iter().map(|f| f.to_json()).collect();
+                (StatusCode::BAD_REQUEST, Json(body)).into_response()
+            }
             ApiError::Internal(e) => {
                 tracing::error!(error = ?e, "request failed");
                 (
@@ -51,6 +81,15 @@ impl IntoResponse for ApiError {
             }
         }
     }
+}
+
+/// The body of an `NzbDroneClientException`: the message, and a description
+/// that the originals fill with the exception and its stack.
+fn client_exception(message: &str) -> serde_json::Value {
+    json!({
+        "message": message,
+        "description": format!("NzbDrone.Core.Exceptions.NzbDroneClientException: {message}"),
+    })
 }
 
 /// A W3C trace-context style id, as ASP.NET emits in problem details.

@@ -4,15 +4,27 @@
 //! applications; that lives in `unarr-api` and `unarr-import` respectively.
 
 pub mod collation;
+pub mod commands;
 pub mod config;
 pub mod customformat;
 pub mod db;
+pub mod decision;
+pub mod downloadclients;
+pub mod downloads;
+pub mod fs;
+pub mod health;
+pub mod http;
+pub mod indexers;
 pub mod model;
 pub mod naming;
+pub mod parser;
 pub mod profile;
 pub mod quality;
+pub mod search;
 pub mod store;
 pub mod time;
+pub mod torrent;
+pub mod validation;
 
 pub use db::Db;
 

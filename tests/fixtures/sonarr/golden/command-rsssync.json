@@ -1,0 +1,33 @@
+{
+  "body": {
+    "body": {
+      "isExclusive": false,
+      "isLongRunning": true,
+      "name": "RssSync",
+      "requiresDiskAccess": false,
+      "sendUpdatesToClient": true,
+      "suppressMessages": false,
+      "trigger": "manual",
+      "updateScheduledTask": true
+    },
+    "commandName": "Rss Sync",
+    "id": 461661,
+    "name": "RssSync",
+    "priority": "normal",
+    "queued": "2026-11-07T15:44:37Z",
+    "result": "unknown",
+    "sendUpdatesToClient": true,
+    "started": "2026-11-07T15:44:37Z",
+    "stateChangeTime": "2026-11-07T15:44:37Z",
+    "status": "started",
+    "trigger": "manual",
+    "updateScheduledTask": true
+  },
+  "recordedAt": "2026-11-07T15:44:37Z",
+  "request": {
+    "body": "bodies/command-rsssync.json",
+    "method": "POST",
+    "path": "/api/v3/command"
+  },
+  "status": 201
+}

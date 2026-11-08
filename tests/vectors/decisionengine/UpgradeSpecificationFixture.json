@@ -1,0 +1,157 @@
+{
+ "source": "sonarr/src/NzbDrone.Core.Test/DecisionEngineTests/UpgradeSpecificationFixture.cs",
+ "methods": {
+  "IsUpgradeTest": {
+   "params": [
+    "current",
+    "currentVersion",
+    "newQuality",
+    "newVersion",
+    "cutoff",
+    "expected"
+   ],
+   "cases": [
+    [
+     {
+      "enum": "Quality",
+      "member": "SDTV"
+     },
+     1,
+     {
+      "enum": "Quality",
+      "member": "SDTV"
+     },
+     2,
+     {
+      "enum": "Quality",
+      "member": "SDTV"
+     },
+     {
+      "enum": "UpgradeableRejectReason",
+      "member": "None"
+     }
+    ],
+    [
+     {
+      "enum": "Quality",
+      "member": "WEBDL720p"
+     },
+     1,
+     {
+      "enum": "Quality",
+      "member": "WEBDL720p"
+     },
+     2,
+     {
+      "enum": "Quality",
+      "member": "WEBDL720p"
+     },
+     {
+      "enum": "UpgradeableRejectReason",
+      "member": "None"
+     }
+    ],
+    [
+     {
+      "enum": "Quality",
+      "member": "SDTV"
+     },
+     1,
+     {
+      "enum": "Quality",
+      "member": "SDTV"
+     },
+     1,
+     {
+      "enum": "Quality",
+      "member": "SDTV"
+     },
+     {
+      "enum": "UpgradeableRejectReason",
+      "member": "CustomFormatScore"
+     }
+    ],
+    [
+     {
+      "enum": "Quality",
+      "member": "WEBDL720p"
+     },
+     1,
+     {
+      "enum": "Quality",
+      "member": "HDTV720p"
+     },
+     2,
+     {
+      "enum": "Quality",
+      "member": "Bluray720p"
+     },
+     {
+      "enum": "UpgradeableRejectReason",
+      "member": "BetterQuality"
+     }
+    ],
+    [
+     {
+      "enum": "Quality",
+      "member": "WEBDL720p"
+     },
+     1,
+     {
+      "enum": "Quality",
+      "member": "HDTV720p"
+     },
+     2,
+     {
+      "enum": "Quality",
+      "member": "WEBDL720p"
+     },
+     {
+      "enum": "UpgradeableRejectReason",
+      "member": "BetterQuality"
+     }
+    ],
+    [
+     {
+      "enum": "Quality",
+      "member": "WEBDL720p"
+     },
+     1,
+     {
+      "enum": "Quality",
+      "member": "WEBDL720p"
+     },
+     1,
+     {
+      "enum": "Quality",
+      "member": "WEBDL720p"
+     },
+     {
+      "enum": "UpgradeableRejectReason",
+      "member": "CustomFormatScore"
+     }
+    ],
+    [
+     {
+      "enum": "Quality",
+      "member": "WEBDL1080p"
+     },
+     1,
+     {
+      "enum": "Quality",
+      "member": "WEBDL1080p"
+     },
+     1,
+     {
+      "enum": "Quality",
+      "member": "WEBDL1080p"
+     },
+     {
+      "enum": "UpgradeableRejectReason",
+      "member": "CustomFormatScore"
+     }
+    ]
+   ]
+  }
+ }
+}

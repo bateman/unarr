@@ -16,7 +16,15 @@ rusqlite.workspace = true
 tracing.workspace = true
 chrono.workspace = true
 fancy-regex.workspace = true
-tokio = { workspace = true, features = ["sync"] }
+roxmltree.workspace = true
+tokio = { workspace = true, features = ["sync", "rt", "time"] }
+reqwest = { version = "0.13", default-features = false, features = ["rustls-no-provider", "json", "gzip", "multipart", "form", "query", "charset"] }
+rustls = { version = "0.23", default-features = false, features = ["ring", "std", "tls12", "logging"] }
+unicode-normalization = "0.1"
+libc = "0.2"
+ring = "0.17"
+base64 = "0.22"
 
 [dev-dependencies]
-tokio = { workspace = true, features = ["rt", "macros"] }
+tokio = { workspace = true, features = ["rt", "rt-multi-thread", "macros"] }
+axum = { workspace = true, features = ["query", "tokio", "http1"] }

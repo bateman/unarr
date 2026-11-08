@@ -50,6 +50,27 @@ fn query(conn: &Connection, sql: &str, params: &[&dyn rusqlite::ToSql]) -> anyho
     Ok(out)
 }
 
+/// The next free history id.
+pub fn next_id(conn: &Connection) -> anyhow::Result<i64> {
+    let max: Option<i64> = conn.query_row("SELECT max(id) FROM history", [], |r| r.get(0))?;
+    Ok(max.unwrap_or(0) + 1)
+}
+
+/// `FindByDownloadId`: every row of one download, newest first.
+pub fn find_by_download_id(conn: &Connection, download_id: &str) -> anyhow::Result<Vec<HistoryEntry>> {
+    query(
+        conn,
+        "SELECT h.* FROM history h WHERE h.download_id = ?1 ORDER BY h.date DESC, h.id DESC",
+        &[&download_id],
+    )
+}
+
+/// The next free blocklist id.
+pub fn next_blocklist_id(conn: &Connection) -> anyhow::Result<i64> {
+    let max: Option<i64> = conn.query_row("SELECT max(id) FROM blocklist", [], |r| r.get(0))?;
+    Ok(max.unwrap_or(0) + 1)
+}
+
 /// Filters of the paged `history` endpoint.
 #[derive(Debug, Default, Clone)]
 pub struct HistoryFilter {
@@ -121,19 +142,30 @@ pub fn paged(
     Ok((records, total))
 }
 
-/// Entries since `date`, oldest first, optionally of one event type.
-pub fn since(
+/// One page of the entries since `date`, oldest first, optionally of one
+/// event type, in `(date, id)` order after the cursor: a full
+/// `history/since` on a large library streams page by page instead of
+/// building one response in memory.
+pub fn since_page(
     conn: &Connection,
     date: DateTime<Utc>,
     event_type: Option<HistoryEvent>,
+    after: Option<(DateTime<Utc>, i64)>,
+    limit: i64,
 ) -> anyhow::Result<Vec<HistoryEntry>> {
     let date = time::format_utc(date);
     let event = event_type.map(|e| e.as_str().to_string());
+    let (after_date, after_id) = match after {
+        Some((d, id)) => (Some(time::format_utc(d)), id),
+        None => (None, 0),
+    };
     query(
         conn,
         "SELECT h.* FROM history h JOIN series s ON s.id = h.series_id JOIN episodes e ON e.id = h.episode_id
-         WHERE h.date >= ?1 AND (?2 IS NULL OR h.event_type = ?2) ORDER BY h.date, h.id",
-        &[&date, &event],
+         WHERE h.date >= ?1 AND (?2 IS NULL OR h.event_type = ?2)
+           AND (?3 IS NULL OR h.date > ?3 OR (h.date = ?3 AND h.id > ?4))
+         ORDER BY h.date, h.id LIMIT ?5",
+        &[&date, &event, &after_date, &after_id, &limit],
     )
 }
 
@@ -229,6 +261,32 @@ pub fn blocklist_paged(
         out.push(blocklist_from_row(row)?);
     }
     Ok((out, total))
+}
+
+/// `HistoryService.FindByEpisodeId`: every entry of an episode, newest first.
+pub fn for_episode(conn: &Connection, episode_id: i64) -> anyhow::Result<Vec<HistoryEntry>> {
+    query(
+        conn,
+        "SELECT h.* FROM history h WHERE h.episode_id = ?1 ORDER BY h.date DESC, h.id DESC",
+        &[&episode_id],
+    )
+}
+
+/// The blocklist entries of a series, oldest first.
+/// `ClearBlocklist`: every row.
+pub fn clear_blocklist(conn: &Connection) -> anyhow::Result<()> {
+    conn.execute("DELETE FROM blocklist", [])?;
+    Ok(())
+}
+
+pub fn blocklist_for_series(conn: &Connection, series_id: i64) -> anyhow::Result<Vec<BlocklistEntry>> {
+    let mut stmt = conn.prepare("SELECT * FROM blocklist WHERE series_id = ?1 ORDER BY id")?;
+    let mut rows = stmt.query(params![series_id])?;
+    let mut out = Vec::new();
+    while let Some(row) = rows.next()? {
+        out.push(blocklist_from_row(row)?);
+    }
+    Ok(out)
 }
 
 #[cfg(test)]

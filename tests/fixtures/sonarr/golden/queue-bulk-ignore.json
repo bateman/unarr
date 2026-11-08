@@ -1,0 +1,10 @@
+{
+  "body": {},
+  "recordedAt": "2026-11-07T15:44:37Z",
+  "request": {
+    "body": "bodies/queue-bulk-ignore.json",
+    "method": "DELETE",
+    "path": "/api/v3/queue/bulk?removeFromClient=false&blocklist=false"
+  },
+  "status": 200
+}

@@ -7,7 +7,7 @@
 use std::collections::HashMap;
 use std::sync::OnceLock;
 
-use serde_json::{Map, Value};
+use serde_json::{json, Map, Value};
 
 use unarr_core::model::ProviderKind;
 
@@ -105,6 +105,96 @@ pub fn render_fields(schema: &Value, settings: &Value) -> Vec<Value> {
         .unwrap_or_default()
 }
 
+/// `SchemaBuilder.ReadFromSchema`: settings from a `fields` list. Every
+/// schema field starts at its default (the value the schema endpoint shows),
+/// each field sent overrides it, converted to the default's JSON type as the
+/// originals convert by property type; a masked secret (`********`) keeps
+/// the existing value. Fields the schema does not know are ignored.
+pub fn read_fields(schema: &Value, fields: &Value, existing: Option<&Value>) -> Value {
+    let mut settings = Map::new();
+    let schema_fields = schema["fields"].as_array().cloned().unwrap_or_default();
+    for f in &schema_fields {
+        if let Some(name) = f["name"].as_str() {
+            set_path(
+                &mut settings,
+                name,
+                f.get("value").cloned().unwrap_or(Value::Null),
+            );
+        }
+    }
+    let empty = Map::new();
+    let existing = existing.and_then(Value::as_object).unwrap_or(&empty);
+    for sent in fields.as_array().map(Vec::as_slice).unwrap_or(&[]) {
+        let Some(name) = sent["name"].as_str() else {
+            continue;
+        };
+        let Some(schema_field) = schema_fields.iter().find(|f| f["name"].as_str() == Some(name)) else {
+            continue;
+        };
+        let privacy = schema_field["privacy"].as_str().unwrap_or("normal");
+        let value = sent.get("value").cloned().unwrap_or(Value::Null);
+        let value = if matches!(privacy, "apiKey" | "password") && value.as_str() == Some("********") {
+            lookup_path(existing, name).cloned().unwrap_or(Value::Null)
+        } else {
+            convert_like(schema_field, value)
+        };
+        set_path(&mut settings, name, value);
+    }
+    Value::Object(settings)
+}
+
+/// Convert `value` to the type the schema field declares (`type`, `isFloat`
+/// and the default's JSON type), as the schema reader converts a field to
+/// its property type.
+fn convert_like(field: &Value, value: Value) -> Value {
+    let default = field.get("value").filter(|v| !v.is_null());
+    let kind = field["type"].as_str().unwrap_or("textbox");
+    let is_float = field["isFloat"].as_bool().unwrap_or(false)
+        || matches!(default, Some(Value::Number(n)) if n.is_f64());
+    let numeric = kind == "number" || matches!(default, Some(Value::Number(_)));
+    let boolean = kind == "checkbox" || matches!(default, Some(Value::Bool(_)));
+    let list = matches!(default, Some(Value::Array(_)));
+    match value {
+        Value::String(s) if numeric => {
+            let s = s.trim();
+            if s.is_empty() {
+                Value::Null
+            } else if is_float || s.contains('.') {
+                s.parse::<f64>().map(|f| json!(f)).unwrap_or(Value::Null)
+            } else {
+                s.parse::<i64>().map(|i| json!(i)).unwrap_or(Value::Null)
+            }
+        }
+        Value::Null if numeric && default.is_some() => json!(0),
+        Value::String(s) if boolean => json!(s.trim().eq_ignore_ascii_case("true")),
+        Value::Null if boolean => json!(false),
+        Value::String(s) if list => Value::Array(
+            s.split(',')
+                .filter_map(|p| p.trim().parse::<i64>().ok().map(|i| json!(i)))
+                .collect(),
+        ),
+        Value::Null if list => json!([]),
+        v => v,
+    }
+}
+
+/// `seedCriteria.seedRatio` writes `settings.seedCriteria.seedRatio`.
+fn set_path(settings: &mut Map<String, Value>, name: &str, value: Value) {
+    let mut parts: Vec<&str> = name.split('.').collect();
+    let last = parts.pop().unwrap_or(name);
+    let mut current = settings;
+    for key in parts {
+        let entry = current
+            .entry(key.to_string())
+            .or_insert_with(|| Value::Object(Map::new()));
+        if !entry.is_object() {
+            *entry = Value::Object(Map::new());
+        }
+        current = entry.as_object_mut().unwrap();
+    }
+    current.insert(last.to_string(), value);
+}
+
 /// A field named `seedCriteria.seedRatio` reads `settings.seedCriteria.seedRatio`.
 fn lookup_path<'a>(settings: &'a Map<String, Value>, name: &str) -> Option<&'a Value> {
     let mut parts = name.split('.');
@@ -131,6 +221,34 @@ mod tests {
         assert_eq!(by_name("seedCriteria.seedTime")["value"], 60);
         assert!(by_name("seedCriteria.seasonPackSeedTime").get("value").is_none());
         assert_eq!(by_name("minimumSeeders")["value"], 1);
+    }
+
+    #[test]
+    fn fields_are_read_back_into_settings() {
+        let torznab = lookup(SchemaKind::Provider(ProviderKind::Indexer), "Torznab").unwrap();
+        let settings = read_fields(
+            torznab,
+            &json!([
+                {"name": "baseUrl", "value": "http://127.0.0.1:18989/torznab"},
+                {"name": "apiKey", "value": "********"},
+                {"name": "minimumSeeders", "value": "3"},
+                {"name": "categories", "value": [5030, 5040]},
+                {"name": "seedCriteria.seedRatio", "value": "1.5"},
+                {"name": "unknownField", "value": 1},
+            ]),
+            Some(&json!({"apiKey": "kept"})),
+        );
+        assert_eq!(settings["baseUrl"], "http://127.0.0.1:18989/torznab");
+        assert_eq!(settings["apiKey"], "kept");
+        assert_eq!(settings["apiPath"], "/api");
+        assert_eq!(settings["minimumSeeders"], 3);
+        assert_eq!(settings["seedCriteria"]["seedRatio"], 1.5);
+        assert_eq!(settings["seedCriteria"]["seedTime"], Value::Null);
+        assert_eq!(settings["animeStandardFormatSearch"], false);
+        assert!(settings.get("unknownField").is_none());
+        let newznab = lookup(SchemaKind::Provider(ProviderKind::Indexer), "Newznab").unwrap();
+        let fresh = read_fields(newznab, &json!([{"name": "apiKey", "value": "********"}]), None);
+        assert_eq!(fresh["apiKey"], Value::Null);
     }
 
     #[test]

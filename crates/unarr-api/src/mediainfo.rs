@@ -81,7 +81,7 @@ pub fn audio_codec(format: Option<&str>, codec_id: &str, profile: &str) -> Optio
 fn scene_name_match(scene_name: Option<&str>, tokens: &[&str]) -> String {
     let name = scene_name
         .map(unarr_core::customformat::strip_media_extension)
-        .unwrap_or("")
+        .unwrap_or_default()
         .to_ascii_lowercase();
     tokens
         .iter()

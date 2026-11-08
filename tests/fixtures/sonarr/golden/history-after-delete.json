@@ -1,0 +1,347 @@
+{
+  "body": {
+    "page": 1,
+    "pageSize": 5,
+    "records": [
+      {
+        "customFormatScore": -10000,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          }
+        ],
+        "data": {
+          "downloadClient": "Transmission",
+          "downloadClientName": "Mock Transmission",
+          "message": "Manually ignored",
+          "releaseGroup": "ETHEL",
+          "releaseType": "SingleEpisode",
+          "size": "768000"
+        },
+        "date": "2026-11-07T15:44:37Z",
+        "downloadId": "C7EB8F60E61BC10B2F8762DE09949BDD2AAFBE5A",
+        "episode": {
+          "absoluteEpisodeNumber": 1,
+          "airDate": "2025-01-09",
+          "airDateUtc": "2025-01-10T02:00:00Z",
+          "episodeFileId": 0,
+          "episodeNumber": 1,
+          "hasFile": false,
+          "id": 1,
+          "lastSearchTime": "2026-11-07T15:44:18Z",
+          "monitored": false,
+          "overview": "While attempting to distract himself from the anniversary of his mentor’s death, Dr. Robby introduces a fresh batch of interns to life in the ER.",
+          "runtime": 53,
+          "seasonNumber": 1,
+          "seriesId": 1,
+          "title": "7:00 A.M.",
+          "tvdbId": 10407559,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 1,
+        "eventType": "downloadIgnored",
+        "id": 2300,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 5,
+            "name": "WEBDL-720p",
+            "resolution": 720,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "seriesId": 1,
+        "sourceTitle": "b2a4d3e5f6c7b8d9e0f1a2b3c4d5e6f7"
+      },
+      {
+        "customFormatScore": -10000,
+        "customFormats": [
+          {
+            "id": 21,
+            "name": "DSNP"
+          },
+          {
+            "id": 10,
+            "name": "HD Streaming Boost"
+          },
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 11,
+            "name": "WEB Tier 01"
+          }
+        ],
+        "data": {
+          "downloadClient": "qBittorrent",
+          "downloadClientName": "Mock qBittorrent",
+          "message": "Manually marked as failed",
+          "releaseGroup": "FLUX",
+          "size": "768000"
+        },
+        "date": "2026-11-07T15:44:37Z",
+        "downloadId": "0FB2EF04FB342178115BA635EC7B5EC0067058BA",
+        "episode": {
+          "airDate": "2025-03-04",
+          "airDateUtc": "2025-03-05T02:00:00Z",
+          "episodeFileId": 0,
+          "episodeNumber": 1,
+          "hasFile": false,
+          "id": 46,
+          "lastSearchTime": "2026-11-07T15:44:16Z",
+          "monitored": false,
+          "overview": "Longtime rivals Matt Murdock and Wilson Fisk attempt to move past their darker personas to serve New York, but their pasts resurface, reintroducing the world of Daredevil.",
+          "runtime": 59,
+          "seasonNumber": 1,
+          "seriesId": 2,
+          "title": "Heaven's Half Hour",
+          "tvdbId": 9275652,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 46,
+        "eventType": "downloadFailed",
+        "id": 2299,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "seriesId": 2,
+        "sourceTitle": "Daredevil.Born.Again.S01E01.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-FLUX"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 29,
+            "name": "PMTP"
+          }
+        ],
+        "data": {
+          "downloadClient": "redacted",
+          "downloadClientName": "Download client",
+          "message": "redacted",
+          "releaseGroup": "TBK",
+          "size": "0"
+        },
+        "date": "2026-10-30T15:45:00Z",
+        "downloadId": "185764b847f67ca08657cd9b55679bfe1877a256",
+        "episode": {
+          "airDate": "2026-10-30",
+          "airDateUtc": "2026-10-30T07:00:00Z",
+          "episodeFileId": 1072,
+          "episodeNumber": 7,
+          "hasFile": true,
+          "id": 530,
+          "lastSearchTime": "2026-10-31T13:17:56Z",
+          "monitored": true,
+          "overview": "The Harrigans lock down the Cotswolds and roll back into London to shake the tree -- buying loyalty with cash, threats, and broken fingers. Maeve tightens the screws within the family, while Harry walks into a trap.",
+          "runtime": 55,
+          "seasonNumber": 2,
+          "seriesId": 18,
+          "title": "Ace of Spades",
+          "tvdbId": 11542644,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 530,
+        "eventType": "downloadFailed",
+        "id": 2273,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "seriesId": 18,
+        "sourceTitle": "MobLand.S02E07.Ace.of.Spades.1080p.PMTP.WEB-DL.DDP5.1.ENG.Atmos.ITA.H264-TBK"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 18,
+            "name": "ATVP"
+          }
+        ],
+        "data": {
+          "downloadClient": "redacted",
+          "downloadClientName": "Download client",
+          "message": "redacted",
+          "releaseGroup": "MeM",
+          "size": "0"
+        },
+        "date": "2026-09-26T15:24:28Z",
+        "downloadId": "eb046e0a3675a9d6d367fb23918f939647cf7d8b",
+        "episode": {
+          "absoluteEpisodeNumber": 8,
+          "airDate": "2024-05-17",
+          "airDateUtc": "2024-05-17T04:00:00Z",
+          "episodeFileId": 828,
+          "episodeNumber": 8,
+          "finaleType": "season",
+          "hasFile": true,
+          "id": 1325,
+          "lastSearchTime": "2026-09-26T15:31:15Z",
+          "monitored": true,
+          "overview": "A shocking realization points Sugar toward a discovery that changes everything.",
+          "runtime": 36,
+          "seasonNumber": 1,
+          "seriesId": 35,
+          "title": "Farewell",
+          "tvdbId": 10408508,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 1325,
+        "eventType": "downloadFailed",
+        "id": 1868,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "seriesId": 35,
+        "sourceTitle": "Sugar.2024.S01E08.Addii.ITA.ENG.1080p.ATVP.WEB-DL.DDP5.1.H.264-MeM.GP.mkv"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 18,
+            "name": "ATVP"
+          }
+        ],
+        "data": {
+          "downloadClient": "NZBGet",
+          "downloadClientName": "Download client",
+          "message": "redacted",
+          "releaseGroup": "MeM",
+          "size": "3272017109"
+        },
+        "date": "2026-09-26T14:49:48Z",
+        "downloadId": "720fbb7e6e104f176acb61e16f89b9a6",
+        "episode": {
+          "absoluteEpisodeNumber": 8,
+          "airDate": "2024-05-17",
+          "airDateUtc": "2024-05-17T04:00:00Z",
+          "episodeFileId": 828,
+          "episodeNumber": 8,
+          "finaleType": "season",
+          "hasFile": true,
+          "id": 1325,
+          "lastSearchTime": "2026-09-26T15:31:15Z",
+          "monitored": true,
+          "overview": "A shocking realization points Sugar toward a discovery that changes everything.",
+          "runtime": 36,
+          "seasonNumber": 1,
+          "seriesId": 35,
+          "title": "Farewell",
+          "tvdbId": 10408508,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 1325,
+        "eventType": "downloadFailed",
+        "id": 1864,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "seriesId": 35,
+        "sourceTitle": "Sugar.2024.S01E08.Addii.ITA.ENG.1080p.ATVP.WEB-DL.DDP5.1.H.264-MeM.GP"
+      }
+    ],
+    "sortDirection": "descending",
+    "sortKey": "date",
+    "totalRecords": 229
+  },
+  "recordedAt": "2026-11-07T15:44:37Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/history?page=1&pageSize=5&sortKey=date&sortDirection=descending&eventType=4&eventType=7&includeEpisode=true"
+  },
+  "status": 200
+}

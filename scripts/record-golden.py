@@ -3,7 +3,13 @@
 
 Request list format, one per line (blank lines and ``#`` comments ignored)::
 
-    <name> <METHOD> <path-with-query>
+    <name> <METHOD> <path-with-query> [body-file]
+
+The optional fourth column names a JSON file, relative to the request list,
+sent as the request body with ``Content-Type: application/json``. A path may
+carry ``{id:name}``: the ``id`` the response recorded as ``name`` returned,
+for resources the application numbers itself (commands). ``sleep N`` lines
+pause the recording for the application's background work.
 
 Each golden file is ``<name>.json`` holding ``{"request": {...}, "status": N,
 "body": <json or null>}``. Pretty-printed with sorted keys so diffs stay readable.
@@ -26,10 +32,23 @@ import datetime
 import http.cookiejar
 import json
 import sys
+import time
 import urllib.error
 import urllib.parse
 import urllib.request
 from pathlib import Path
+
+
+def substitute_ids(path: str, ids: dict[str, str]) -> str:
+    """Replace each ``{id:name}`` with the id the response named ``name`` carried."""
+    while "{id:" in path:
+        start = path.index("{id:")
+        end = path.index("}", start)
+        name = path[start + 4:end]
+        if name not in ids:
+            sys.exit(f"[golden] {path}: no id recorded for {name!r}")
+        path = path[:start] + ids[name] + path[end + 1:]
+    return path
 
 
 def main():
@@ -54,12 +73,26 @@ def main():
         with session.open(urllib.request.Request(base + "/login", data=form, method="POST"), timeout=60) as resp:
             print(f"[golden] login as {user!r}: {resp.status} {resp.geturl()}", file=sys.stderr)
     count = 0
+    # Ids the responses carried, for `{id:name}` in later paths.
+    ids: dict[str, str] = {}
     for line in args.requests.read_text().splitlines():
         line = line.strip()
         if not line or line.startswith("#"):
             continue
-        name, method, path = line.split(maxsplit=2)
-        req = urllib.request.Request(base + path, method=method)
+        name, method, path, *rest = line.split(maxsplit=3) if not line.startswith("sleep ") else (line.split()[0], line.split()[1], "", [])
+        if name == "sleep":
+            # `sleep N`: let the originals' background work (debounced
+            # refreshes, command queue) catch up before the next request.
+            print(f"[golden] sleeping {method}s", file=sys.stderr)
+            time.sleep(float(method))
+            continue
+        data = None
+        if rest:
+            data = (args.requests.parent / rest[0]).read_bytes()
+        path = substitute_ids(path, ids)
+        req = urllib.request.Request(base + path, data=data, method=method)
+        if data is not None:
+            req.add_header("Content-Type", "application/json")
         client = bare
         if name.startswith("session"):
             client = session
@@ -74,8 +107,10 @@ def main():
             body = json.loads(raw) if raw else None
         except json.JSONDecodeError:
             body = raw.decode(errors="replace")
+        if isinstance(body, dict) and isinstance(body.get("id"), int):
+            ids[name] = str(body["id"])
         golden = {
-            "request": {"method": method, "path": path},
+            "request": {"method": method, "path": path, **({"body": rest[0]} if rest else {})},
             # The instant the answer was computed for: the contract tests pin
             # Unarr's clock to it, so fields such as nextAiring or the wanted
             # list do not drift as the calendar moves on.

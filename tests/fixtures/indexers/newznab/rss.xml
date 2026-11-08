@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:newznab="http://www.newznab.com/DTD/2010/feeds/attributes/">
+  <channel>
+    <atom:link href="http://127.0.0.1:18989/newznab/api" rel="self" type="application/rss+xml"/>
+    <title>Fixture Newznab</title>
+    <description>Unarr test indexer</description>
+    <link>http://127.0.0.1:18989/newznab/</link>
+    <language>en-gb</language>
+    <newznab:response offset="0" total="9"/>
+    <item>
+      <title>The.Pitt.S01E01.1080p.AMZN.WEB-DL.DDP5.1.H.264-FLUX</title>
+      <guid isPermaLink="true">http://127.0.0.1:18989/newznab/details/a1f3c2d4e5b6a7c8d9e0f1a2b3c4d5e6</guid>
+      <link>http://127.0.0.1:18989/newznab/download/a1f3c2d4e5b6a7c8d9e0f1a2b3c4d5e6.nzb</link>
+      <comments>http://127.0.0.1:18989/newznab/details/a1f3c2d4e5b6a7c8d9e0f1a2b3c4d5e6#comments</comments>
+      <pubDate>Fri, 10 Jan 2025 03:12:00 +0000</pubDate>
+      <category>TV &gt; HD</category>
+      <description>The.Pitt.S01E01.1080p.AMZN.WEB-DL.DDP5.1.H.264-FLUX</description>
+      <enclosure url="http://127.0.0.1:18989/newznab/download/a1f3c2d4e5b6a7c8d9e0f1a2b3c4d5e6.nzb" length="2684354560" type="application/x-nzb"/>
+      <newznab:attr name="category" value="5000"/>
+      <newznab:attr name="category" value="5040"/>
+      <newznab:attr name="size" value="2684354560"/>
+      <newznab:attr name="guid" value="a1f3c2d4e5b6a7c8d9e0f1a2b3c4d5e6"/>
+      <newznab:attr name="tvdbid" value="448176"/>
+      <newznab:attr name="season" value="1"/>
+      <newznab:attr name="episode" value="1"/>
+      <newznab:attr name="usenetdate" value="Fri, 10 Jan 2025 03:12:00 +0000"/>
+      <newznab:attr name="grabs" value="12"/>
+    </item>
+    <item>
+      <title>The.Pitt.S01E01.720p.WEB.h264-ETHEL</title>
+      <guid isPermaLink="true">http://127.0.0.1:18989/newznab/details/b2a4d3e5f6c7b8d9e0f1a2b3c4d5e6f7</guid>
+      <link>http://127.0.0.1:18989/newznab/download/b2a4d3e5f6c7b8d9e0f1a2b3c4d5e6f7.nzb</link>
+      <comments>http://127.0.0.1:18989/newznab/details/b2a4d3e5f6c7b8d9e0f1a2b3c4d5e6f7#comments</comments>
+      <pubDate>Fri, 10 Jan 2025 03:40:00 +0000</pubDate>
+      <category>TV &gt; HD</category>
+      <description>The.Pitt.S01E01.720p.WEB.h264-ETHEL</description>
+      <enclosure url="http://127.0.0.1:18989/newznab/download/b2a4d3e5f6c7b8d9e0f1a2b3c4d5e6f7.nzb" length="1395864371" type="application/x-nzb"/>
+      <newznab:attr name="category" value="5000"/>
+      <newznab:attr name="category" value="5040"/>
+      <newznab:attr name="size" value="1395864371"/>
+      <newznab:attr name="guid" value="b2a4d3e5f6c7b8d9e0f1a2b3c4d5e6f7"/>
+      <newznab:attr name="tvdbid" value="448176"/>
+      <newznab:attr name="season" value="1"/>
+      <newznab:attr name="episode" value="1"/>
+      <newznab:attr name="usenetdate" value="Fri, 10 Jan 2025 03:40:00 +0000"/>
+      <newznab:attr name="grabs" value="12"/>
+    </item>
+    <item>
+      <title>The.Pitt.S01E01.iTALiAN.1080p.WEB.H264-MeM.GP</title>
+      <guid isPermaLink="true">http://127.0.0.1:18989/newznab/details/c3b5e4f6a7d8c9e0f1a2b3c4d5e6f7a8</guid>
+      <link>http://127.0.0.1:18989/newznab/download/c3b5e4f6a7d8c9e0f1a2b3c4d5e6f7a8.nzb</link>
+      <comments>http://127.0.0.1:18989/newznab/details/c3b5e4f6a7d8c9e0f1a2b3c4d5e6f7a8#comments</comments>
+      <pubDate>Sat, 11 Jan 2025 09:05:00 +0000</pubDate>
+      <category>TV &gt; HD</category>
+      <description>The.Pitt.S01E01.iTALiAN.1080p.WEB.H264-MeM.GP</description>
+      <enclosure url="http://127.0.0.1:18989/newznab/download/c3b5e4f6a7d8c9e0f1a2b3c4d5e6f7a8.nzb" length="2254857830" type="application/x-nzb"/>
+      <newznab:attr name="category" value="5000"/>
+      <newznab:attr name="category" value="5040"/>
+      <newznab:attr name="size" value="2254857830"/>
+      <newznab:attr name="guid" value="c3b5e4f6a7d8c9e0f1a2b3c4d5e6f7a8"/>
+      <newznab:attr name="tvdbid" value="448176"/>
+      <newznab:attr name="season" value="1"/>
+      <newznab:attr name="episode" value="1"/>
+      <newznab:attr name="usenetdate" value="Sat, 11 Jan 2025 09:05:00 +0000"/>
+      <newznab:attr name="grabs" value="12"/>
+    </item>
+    <item>
+      <title>The.Pitt.S01E01.480p.x264-mSD</title>
+      <guid isPermaLink="true">http://127.0.0.1:18989/newznab/details/d4c6f5a7b8e9d0f1a2b3c4d5e6f7a8b9</guid>
+      <link>http://127.0.0.1:18989/newznab/download/d4c6f5a7b8e9d0f1a2b3c4d5e6f7a8b9.nzb</link>
+      <comments>http://127.0.0.1:18989/newznab/details/d4c6f5a7b8e9d0f1a2b3c4d5e6f7a8b9#comments</comments>
+      <pubDate>Fri, 10 Jan 2025 05:00:00 +0000</pubDate>
+      <category>TV &gt; HD</category>
+      <description>The.Pitt.S01E01.480p.x264-mSD</description>
+      <enclosure url="http://127.0.0.1:18989/newznab/download/d4c6f5a7b8e9d0f1a2b3c4d5e6f7a8b9.nzb" length="367001600" type="application/x-nzb"/>
+      <newznab:attr name="category" value="5000"/>
+      <newznab:attr name="category" value="5030"/>
+      <newznab:attr name="size" value="367001600"/>
+      <newznab:attr name="guid" value="d4c6f5a7b8e9d0f1a2b3c4d5e6f7a8b9"/>
+      <newznab:attr name="tvdbid" value="448176"/>
+      <newznab:attr name="season" value="1"/>
+      <newznab:attr name="episode" value="1"/>
+      <newznab:attr name="usenetdate" value="Fri, 10 Jan 2025 05:00:00 +0000"/>
+      <newznab:attr name="grabs" value="12"/>
+    </item>
+    <item>
+      <title>The.Pitt.S01E02.1080p.WEB.H264-SuccessfulCrab</title>
+      <guid isPermaLink="true">http://127.0.0.1:18989/newznab/details/e5d7a6b8c9f0e1a2b3c4d5e6f7a8b9c0</guid>
+      <link>http://127.0.0.1:18989/newznab/download/e5d7a6b8c9f0e1a2b3c4d5e6f7a8b9c0.nzb</link>
+      <comments>http://127.0.0.1:18989/newznab/details/e5d7a6b8c9f0e1a2b3c4d5e6f7a8b9c0#comments</comments>
+      <pubDate>Fri, 10 Jan 2025 03:58:00 +0000</pubDate>
+      <category>TV &gt; HD</category>
+      <description>The.Pitt.S01E02.1080p.WEB.H264-SuccessfulCrab</description>
+      <enclosure url="http://127.0.0.1:18989/newznab/download/e5d7a6b8c9f0e1a2b3c4d5e6f7a8b9c0.nzb" length="2469606195" type="application/x-nzb"/>
+      <newznab:attr name="category" value="5000"/>
+      <newznab:attr name="category" value="5040"/>
+      <newznab:attr name="size" value="2469606195"/>
+      <newznab:attr name="guid" value="e5d7a6b8c9f0e1a2b3c4d5e6f7a8b9c0"/>
+      <newznab:attr name="tvdbid" value="448176"/>
+      <newznab:attr name="season" value="1"/>
+      <newznab:attr name="episode" value="2"/>
+      <newznab:attr name="usenetdate" value="Fri, 10 Jan 2025 03:58:00 +0000"/>
+      <newznab:attr name="grabs" value="12"/>
+    </item>
+    <item>
+      <title>The.Pitt.S01.1080p.AMZN.WEB-DL.DDP5.1.H.264-FLUX</title>
+      <guid isPermaLink="true">http://127.0.0.1:18989/newznab/details/f6e8b7c9d0a1f2b3c4d5e6f7a8b9c0d1</guid>
+      <link>http://127.0.0.1:18989/newznab/download/f6e8b7c9d0a1f2b3c4d5e6f7a8b9c0d1.nzb</link>
+      <comments>http://127.0.0.1:18989/newznab/details/f6e8b7c9d0a1f2b3c4d5e6f7a8b9c0d1#comments</comments>
+      <pubDate>Sat, 12 Apr 2025 02:00:00 +0000</pubDate>
+      <category>TV &gt; HD</category>
+      <description>The.Pitt.S01.1080p.AMZN.WEB-DL.DDP5.1.H.264-FLUX</description>
+      <enclosure url="http://127.0.0.1:18989/newznab/download/f6e8b7c9d0a1f2b3c4d5e6f7a8b9c0d1.nzb" length="40265318400" type="application/x-nzb"/>
+      <newznab:attr name="category" value="5000"/>
+      <newznab:attr name="category" value="5040"/>
+      <newznab:attr name="size" value="40265318400"/>
+      <newznab:attr name="guid" value="f6e8b7c9d0a1f2b3c4d5e6f7a8b9c0d1"/>
+      <newznab:attr name="tvdbid" value="448176"/>
+      <newznab:attr name="season" value="1"/>
+      <newznab:attr name="usenetdate" value="Sat, 12 Apr 2025 02:00:00 +0000"/>
+      <newznab:attr name="grabs" value="12"/>
+    </item>
+    <item>
+      <title>Daredevil.Born.Again.S01E01.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-FLUX</title>
+      <guid isPermaLink="true">http://127.0.0.1:18989/newznab/details/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2</guid>
+      <link>http://127.0.0.1:18989/newznab/download/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2.nzb</link>
+      <comments>http://127.0.0.1:18989/newznab/details/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2#comments</comments>
+      <pubDate>Wed, 05 Mar 2025 02:10:00 +0000</pubDate>
+      <category>TV &gt; HD</category>
+      <description>Daredevil.Born.Again.S01E01.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-FLUX</description>
+      <enclosure url="http://127.0.0.1:18989/newznab/download/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2.nzb" length="3113851289" type="application/x-nzb"/>
+      <newznab:attr name="category" value="5000"/>
+      <newznab:attr name="category" value="5040"/>
+      <newznab:attr name="size" value="3113851289"/>
+      <newznab:attr name="guid" value="07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2"/>
+      <newznab:attr name="tvdbid" value="422712"/>
+      <newznab:attr name="season" value="1"/>
+      <newznab:attr name="episode" value="1"/>
+      <newznab:attr name="usenetdate" value="Wed, 05 Mar 2025 02:10:00 +0000"/>
+      <newznab:attr name="grabs" value="12"/>
+    </item>
+    <item>
+      <title>Some.Other.Show.S03E04.720p.HDTV.x264-GRP</title>
+      <guid isPermaLink="true">http://127.0.0.1:18989/newznab/details/18a0d9e1f2c3b4d5e6f7a8b9c0d1e2f3</guid>
+      <link>http://127.0.0.1:18989/newznab/download/18a0d9e1f2c3b4d5e6f7a8b9c0d1e2f3.nzb</link>
+      <comments>http://127.0.0.1:18989/newznab/details/18a0d9e1f2c3b4d5e6f7a8b9c0d1e2f3#comments</comments>
+      <pubDate>Thu, 06 Mar 2025 22:00:00 +0000</pubDate>
+      <category>TV &gt; HD</category>
+      <description>Some.Other.Show.S03E04.720p.HDTV.x264-GRP</description>
+      <enclosure url="http://127.0.0.1:18989/newznab/download/18a0d9e1f2c3b4d5e6f7a8b9c0d1e2f3.nzb" length="1073741824" type="application/x-nzb"/>
+      <newznab:attr name="category" value="5000"/>
+      <newznab:attr name="category" value="5040"/>
+      <newznab:attr name="size" value="1073741824"/>
+      <newznab:attr name="guid" value="18a0d9e1f2c3b4d5e6f7a8b9c0d1e2f3"/>
+      <newznab:attr name="tvdbid" value="999999"/>
+      <newznab:attr name="season" value="3"/>
+      <newznab:attr name="episode" value="4"/>
+      <newznab:attr name="usenetdate" value="Thu, 06 Mar 2025 22:00:00 +0000"/>
+      <newznab:attr name="grabs" value="12"/>
+    </item>
+    <item>
+      <title>The.Pitt.S01E01.2160p.AMZN.WEB-DL.DDP5.1.HDR.H.265-FLUX</title>
+      <guid isPermaLink="true">http://127.0.0.1:18989/newznab/details/29b1e0f2a3d4c5e6f7a8b9c0d1e2f3a4</guid>
+      <link>http://127.0.0.1:18989/newznab/download/29b1e0f2a3d4c5e6f7a8b9c0d1e2f3a4.nzb</link>
+      <comments>http://127.0.0.1:18989/newznab/details/29b1e0f2a3d4c5e6f7a8b9c0d1e2f3a4#comments</comments>
+      <pubDate>Fri, 10 Jan 2025 06:30:00 +0000</pubDate>
+      <category>TV &gt; HD</category>
+      <description>The.Pitt.S01E01.2160p.AMZN.WEB-DL.DDP5.1.HDR.H.265-FLUX</description>
+      <enclosure url="http://127.0.0.1:18989/newznab/download/29b1e0f2a3d4c5e6f7a8b9c0d1e2f3a4.nzb" length="7516192768" type="application/x-nzb"/>
+      <newznab:attr name="category" value="5000"/>
+      <newznab:attr name="category" value="5045"/>
+      <newznab:attr name="size" value="7516192768"/>
+      <newznab:attr name="guid" value="29b1e0f2a3d4c5e6f7a8b9c0d1e2f3a4"/>
+      <newznab:attr name="tvdbid" value="448176"/>
+      <newznab:attr name="season" value="1"/>
+      <newznab:attr name="episode" value="1"/>
+      <newznab:attr name="usenetdate" value="Fri, 10 Jan 2025 06:30:00 +0000"/>
+      <newznab:attr name="grabs" value="12"/>
+    </item>
+  </channel>
+</rss>

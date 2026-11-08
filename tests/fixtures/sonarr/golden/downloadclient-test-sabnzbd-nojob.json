@@ -1,0 +1,19 @@
+{
+  "body": [
+    {
+      "detailedDescription": "Sonarr prefers each download to have a separate folder. With * appended to the Folder/Path Sabnzbd will not create these job folders. Go to Sabnzbd to fix it.",
+      "errorMessage": "Enable Job folders",
+      "infoLink": "http://127.0.0.1:18989/sabnzbd/config/categories/",
+      "isWarning": false,
+      "propertyName": "TvCategory",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-07T15:44:21Z",
+  "request": {
+    "body": "bodies/downloadclient-test-sabnzbd-nojob.json",
+    "method": "POST",
+    "path": "/api/v3/downloadclient/test"
+  },
+  "status": 400
+}

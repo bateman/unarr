@@ -76,6 +76,46 @@ pub fn all_config(conn: &Connection) -> anyhow::Result<Vec<(String, String)>> {
     Ok(rows.collect::<Result<_, _>>()?)
 }
 
+/// The settings `config/indexer` serves, with the originals' defaults
+/// (`IndexerConfigResource`, `ConfigService`).
+#[derive(Debug, Clone, PartialEq)]
+pub struct IndexerConfig {
+    /// Minutes a usenet release must be old before it is grabbed.
+    pub minimum_age: i64,
+    /// Days a usenet release may be old before it is skipped; 0 is unlimited.
+    pub retention: i64,
+    /// Megabytes a release may weigh; 0 is unlimited.
+    pub maximum_size: i64,
+    /// Minutes between RSS syncs; 0 disables the sync.
+    pub rss_sync_interval: i64,
+}
+
+impl Default for IndexerConfig {
+    fn default() -> Self {
+        IndexerConfig {
+            minimum_age: 0,
+            retention: 0,
+            maximum_size: 0,
+            rss_sync_interval: 15,
+        }
+    }
+}
+
+pub fn indexer_config(conn: &Connection) -> anyhow::Result<IndexerConfig> {
+    let int = |key: &str, default: i64| -> anyhow::Result<i64> {
+        Ok(config(conn, key)?
+            .and_then(|v| v.trim().parse().ok())
+            .unwrap_or(default))
+    };
+    let defaults = IndexerConfig::default();
+    Ok(IndexerConfig {
+        minimum_age: int("MinimumAge", defaults.minimum_age)?,
+        retention: int("Retention", defaults.retention)?,
+        maximum_size: int("MaximumSize", defaults.maximum_size)?,
+        rss_sync_interval: int("RssSyncInterval", defaults.rss_sync_interval)?,
+    })
+}
+
 pub fn set_meta(conn: &Connection, key: &str, value: &str) -> anyhow::Result<()> {
     conn.execute(
         "INSERT OR REPLACE INTO meta (key, value) VALUES (?1, ?2)",

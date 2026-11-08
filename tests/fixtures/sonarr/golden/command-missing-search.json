@@ -1,0 +1,33 @@
+{
+  "body": {
+    "body": {
+      "isExclusive": false,
+      "isLongRunning": false,
+      "monitored": true,
+      "name": "MissingEpisodeSearch",
+      "requiresDiskAccess": false,
+      "sendUpdatesToClient": true,
+      "seriesId": 2,
+      "suppressMessages": false,
+      "trigger": "manual",
+      "updateScheduledTask": true
+    },
+    "commandName": "Missing Episode Search",
+    "id": 461664,
+    "name": "MissingEpisodeSearch",
+    "priority": "normal",
+    "queued": "2026-11-07T15:44:37Z",
+    "result": "unknown",
+    "sendUpdatesToClient": true,
+    "status": "queued",
+    "trigger": "manual",
+    "updateScheduledTask": true
+  },
+  "recordedAt": "2026-11-07T15:44:37Z",
+  "request": {
+    "body": "bodies/command-missing-search.json",
+    "method": "POST",
+    "path": "/api/v3/command"
+  },
+  "status": 201
+}

@@ -476,6 +476,26 @@ impl Language {
     }
 }
 
+/// `QualityProfileService.GetDefaultProfile`: the position of a quality in
+/// the default profile, whose items are the qualities grouped by weight in
+/// definition order. The release resource's `qualityWeight` counts from it.
+pub fn default_profile_index(quality_id: i64) -> i64 {
+    let mut weights: Vec<i64> = Vec::new();
+    let mut found: Option<i64> = None;
+    for d in SONARR_QUALITIES {
+        if !weights.contains(&d.weight) {
+            weights.push(d.weight);
+        }
+        if d.quality.id == quality_id {
+            found = Some(d.weight);
+        }
+    }
+    match found {
+        Some(w) => weights.iter().position(|x| *x == w).unwrap_or(0) as i64,
+        None => 0,
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -500,5 +520,18 @@ mod tests {
         );
         assert_eq!(Language::by_id(8).name, "Japanese");
         assert_eq!(Language::by_id(999).id, 0);
+    }
+
+    #[test]
+    fn default_profile_positions_match_the_release_weights() {
+        // qualityWeight = index * 100 + real * 10 + version, from the goldens.
+        assert_eq!(default_profile_index(3), 11, "WEBDL-1080p");
+        assert_eq!(default_profile_index(15), 11, "WEBRip-1080p shares the group");
+        assert_eq!(default_profile_index(18), 15, "WEBDL-2160p");
+        assert_eq!(default_profile_index(5), 9, "WEBDL-720p");
+        assert_eq!(default_profile_index(4), 6, "HDTV-720p");
+        assert_eq!(default_profile_index(1), 1, "SDTV");
+        assert_eq!(default_profile_index(0), 0);
+        assert_eq!(default_profile_index(999), 0);
     }
 }

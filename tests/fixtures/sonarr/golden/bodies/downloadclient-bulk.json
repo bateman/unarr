@@ -1,0 +1,12 @@
+{
+  "ids": [
+    5,
+    6
+  ],
+  "tags": [],
+  "applyTags": "add",
+  "enable": false,
+  "priority": 3,
+  "removeCompletedDownloads": false,
+  "removeFailedDownloads": null
+}

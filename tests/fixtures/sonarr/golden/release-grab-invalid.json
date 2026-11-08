@@ -1,0 +1,37 @@
+{
+  "body": [
+    {
+      "attemptedValue": 0,
+      "errorCode": "GreaterThanValidator",
+      "errorMessage": "'Indexer Id' must be greater than '0'.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "comparisonProperty": "",
+        "comparisonValue": 0,
+        "propertyName": "Indexer Id",
+        "propertyValue": 0
+      },
+      "propertyName": "IndexerId",
+      "severity": "error"
+    },
+    {
+      "attemptedValue": "",
+      "errorCode": "NotEmptyValidator",
+      "errorMessage": "'Guid' must not be empty.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Guid",
+        "propertyValue": ""
+      },
+      "propertyName": "Guid",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-07T15:44:20Z",
+  "request": {
+    "body": "bodies/release-grab-invalid.json",
+    "method": "POST",
+    "path": "/api/v3/release"
+  },
+  "status": 400
+}

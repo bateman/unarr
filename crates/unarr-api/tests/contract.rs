@@ -29,6 +29,13 @@ const PENDING: &[&str] = &[];
 enum Mode {
     /// Full comparison, ignoring the named keys wherever they appear.
     Exact(&'static [&'static str]),
+    /// `Exact`, with every list of identified objects compared in id order:
+    /// the originals list the queue from a concurrent dictionary, so ties
+    /// on the sort key come out in any order.
+    Unordered(&'static [&'static str]),
+    /// `Exact` over the commands a client started: the originals' own
+    /// refreshes and the scheduler's commands come and go with the clock.
+    ManualCommands(&'static [&'static str]),
     /// Key structure only.
     Shape,
     /// An HTML page: status and the page title.
@@ -65,8 +72,66 @@ fn mode(name: &str) -> Mode {
         n if n.starts_with("rootfolder") => {
             Mode::Exact(&["freeSpace", "totalSpace", "accessible", "unmappedFolders"])
         }
-        n if n.ends_with("-404") => Mode::Exact(&["traceId"]),
-        "diskspace" | "system-task" | "log" | "update" | "command" | "signalr-negotiate" => Mode::Shape,
+        n if n.ends_with("-404") || n == "downloadclient-update-missing" || n == "command-get-missing" => {
+            Mode::Exact(&["traceId"])
+        }
+        // Commands carry the originals' ids and clocks; a freshly posted
+        // one may already have started, or finished, when it is read back.
+        n if n.starts_with("command-") && n.ends_with("-get") => Mode::Exact(&[
+            "id",
+            "queued",
+            "started",
+            "ended",
+            "duration",
+            "stateChangeTime",
+            "lastExecutionTime",
+        ]),
+        "command-list" => Mode::ManualCommands(&[
+            "id",
+            "queued",
+            "started",
+            "ended",
+            "duration",
+            "stateChangeTime",
+            "lastExecutionTime",
+        ]),
+        "command-unknown" => Mode::Shape,
+        "command-cancel-completed" => Mode::Exact(&["description"]),
+        n if n.starts_with("command-") => Mode::Exact(&[
+            "id",
+            "queued",
+            "started",
+            "ended",
+            "duration",
+            "stateChangeTime",
+            "lastExecutionTime",
+            "status",
+            "result",
+            "message",
+        ]),
+        // The originals' exceptions carry their stack in the description.
+        "release-episode-missing" | "release-grab-uncached" | "release-grab-unknown-client" => Mode::Shape,
+        // The queue's times follow the clock the client was read at; the
+        // history and blocklist rows a grab leaves carry the grab's.
+        n if n.starts_with("queue") => Mode::Unordered(&["estimatedCompletionTime", "added"]),
+        // The originals keep verdicts in a dictionary.
+        "health-after" => Mode::Unordered(&[]),
+        "history-after-grab"
+        | "history-download-id"
+        | "history-episode-1-grabbed"
+        | "history-after-delete"
+        | "history-after-command" => Mode::Exact(&["date", "age", "ageHours", "ageMinutes"]),
+        "blocklist-after-delete" => Mode::Exact(&["date"]),
+        // Ages in hours and minutes carry the fraction of a second the
+        // recording happened at.
+        n if n.starts_with("release") => Mode::Exact(&["ageHours", "ageMinutes"]),
+        // The socket error text in the detail is the runtime's (.NET's
+        // "Connection refused (127.0.0.1:1)" against Rust's).
+        n if n.starts_with("downloadclient-unreachable") || n == "downloadclient-testall" => {
+            Mode::Exact(&["detailedDescription"])
+        }
+        "diskspace" | "system-task" | "system-task-after" | "log" | "update" | "command"
+        | "signalr-negotiate" => Mode::Shape,
         _ => Mode::Exact(&[]),
     }
 }
@@ -95,14 +160,33 @@ fn build_state_with(adjust: impl FnOnce(&mut HostConfig)) -> AppState {
 
 /// Drop ignored keys and normalise numbers so `100` equals `100.0`.
 fn normalize(v: &Value, ignore: &[&str]) -> Value {
+    normalize_with(v, ignore, false)
+}
+
+fn normalize_with(v: &Value, ignore: &[&str], sort_by_id: bool) -> Value {
     match v {
         Value::Object(map) => Value::Object(
             map.iter()
                 .filter(|(k, _)| !ignore.contains(&k.as_str()))
-                .map(|(k, v)| (k.clone(), normalize(v, ignore)))
+                .map(|(k, v)| (k.clone(), normalize_with(v, ignore, sort_by_id)))
                 .collect(),
         ),
-        Value::Array(items) => Value::Array(items.iter().map(|v| normalize(v, ignore)).collect()),
+        Value::Array(items) => {
+            let mut out: Vec<Value> = items
+                .iter()
+                .map(|v| normalize_with(v, ignore, sort_by_id))
+                .collect();
+            if sort_by_id && out.iter().all(|v| v.get("id").and_then(Value::as_i64).is_some()) {
+                out.sort_by_key(|v| v["id"].as_i64());
+            } else if sort_by_id
+                && out
+                    .iter()
+                    .all(|v| v.get("source").and_then(Value::as_str).is_some())
+            {
+                out.sort_by_key(|v| v["source"].as_str().map(String::from));
+            }
+            Value::Array(out)
+        }
         Value::Number(n) => match n.as_f64() {
             Some(f) if f.fract() == 0.0 && f.abs() < 1e15 => Value::from(f as i64),
             _ => v.clone(),
@@ -177,8 +261,12 @@ fn short(v: &Value) -> String {
 
 struct Golden {
     name: String,
+    /// `sleep` for a pause in the recording: the replay waits for the
+    /// command queue instead.
     method: String,
     path: String,
+    /// JSON request body, from the file the fourth column names.
+    request_body: Option<String>,
     status: u16,
     body: Value,
     /// When the real application answered; Unarr's clock is pinned to it.
@@ -194,10 +282,28 @@ fn load_goldens() -> Vec<Golden> {
         if line.is_empty() || line.starts_with('#') {
             continue;
         }
-        let mut parts = line.splitn(3, ' ');
+        // `sleep N` lines pace the recording while the originals' commands
+        // ran; the replay waits for Unarr's instead.
+        if let Some(seconds) = line.strip_prefix("sleep ") {
+            out.push(Golden {
+                name: String::new(),
+                method: "sleep".into(),
+                path: seconds.trim().to_string(),
+                request_body: None,
+                status: 0,
+                body: Value::Null,
+                recorded_at: None,
+            });
+            continue;
+        }
+        let mut parts = line.splitn(4, ' ');
         let name = parts.next().unwrap().to_string();
         let method = parts.next().unwrap().to_string();
         let path = parts.next().unwrap().to_string();
+        let body = parts.next().map(|body_file| {
+            std::fs::read_to_string(golden_dir.join(body_file.trim()))
+                .unwrap_or_else(|e| panic!("body file {body_file} for {name}: {e}"))
+        });
         let file = golden_dir.join(format!("{name}.json"));
         let Ok(text) = std::fs::read_to_string(&file) else {
             panic!("no golden recorded for {name}: run `make golden`");
@@ -207,6 +313,7 @@ fn load_goldens() -> Vec<Golden> {
             name,
             method,
             path,
+            request_body: body,
             status: recorded["status"].as_u64().unwrap() as u16,
             body: recorded["body"].clone(),
             recorded_at: recorded["recordedAt"]
@@ -243,18 +350,38 @@ async fn login_cookie(app: &axum::Router) -> String {
     cookie.split(';').next().unwrap().to_string()
 }
 
-async fn send(app: &axum::Router, g: &Golden, session: &str) -> (StatusCode, Value) {
-    let mut req = Request::builder().method(g.method.as_str()).uri(&g.path);
+/// `{id:name}` in a path: the id the named response carried.
+fn substitute_ids(path: &str, ids: &std::collections::HashMap<String, i64>) -> String {
+    let mut path = path.to_string();
+    while let Some(start) = path.find("{id:") {
+        let end = path[start..]
+            .find('}')
+            .map(|e| start + e)
+            .expect("a closing brace");
+        let name = &path[start + 4..end];
+        let id = ids
+            .get(name)
+            .unwrap_or_else(|| panic!("no id recorded for {name} before {path}"));
+        path = format!("{}{}{}", &path[..start], id, &path[end + 1..]);
+    }
+    path
+}
+
+async fn send(app: &axum::Router, g: &Golden, session: &str, path: &str) -> (StatusCode, Value) {
+    let mut req = Request::builder().method(g.method.as_str()).uri(path);
     if g.name.starts_with("session") {
         req = req.header("cookie", session);
     } else if !g.name.starts_with("noauth") && !g.path.contains("apikey=") {
         req = req.header("X-Api-Key", API_KEY);
     }
-    let mut response = app
-        .clone()
-        .oneshot(req.body(Body::empty()).unwrap())
-        .await
-        .unwrap();
+    let body = match &g.request_body {
+        Some(json) => {
+            req = req.header("content-type", "application/json");
+            Body::from(json.clone())
+        }
+        None => Body::empty(),
+    };
+    let mut response = app.clone().oneshot(req.body(body).unwrap()).await.unwrap();
     // The recorder (urllib) follows redirects; do the same, once.
     if response.status().is_redirection() {
         if let Some(location) = response
@@ -281,16 +408,41 @@ async fn send(app: &axum::Router, g: &Golden, session: &str) -> (StatusCode, Val
     (status, body)
 }
 
+/// The mock indexers the write goldens were recorded against, on the port
+/// the recorded provider settings carry.
+async fn start_mock() -> unarr_mock::Mock {
+    unarr_mock::Mock::start(unarr_mock::fixtures_dir(), 18989)
+        .await
+        .expect("port 18989 free for the mock indexers (stop a stale scripts/mock-servarr.py)")
+}
+
 #[tokio::test]
 async fn golden_responses_match() {
+    let _mock = start_mock().await;
     let state = build_state();
+    state.start_runtime().await.expect("the command runtime");
     let app = unarr_api::router(state.clone());
     let goldens = load_goldens();
     let session = login_cookie(&app).await;
     let mut failures = Vec::new();
     let mut checked = 0;
+    let mut ids: std::collections::HashMap<String, i64> = std::collections::HashMap::new();
 
     for g in &goldens {
+        if g.method == "sleep" {
+            // The recording's clock moved on while the originals' background
+            // work ran; the checks Unarr runs meanwhile see the same clock.
+            let seconds: i64 = g.path.parse().expect("sleep seconds");
+            let now = state.now() + chrono::Duration::seconds(seconds);
+            state.set_now(Some(now));
+            tokio::time::timeout(
+                std::time::Duration::from_secs(60),
+                state.commands().unwrap().wait_idle(),
+            )
+            .await
+            .expect("commands finish within a minute");
+            continue;
+        }
         if PENDING.contains(&g.name.as_str()) {
             continue;
         }
@@ -301,7 +453,11 @@ async fn golden_responses_match() {
         }
         checked += 1;
         state.set_now(g.recorded_at);
-        let (status, body) = send(&app, g, &session).await;
+        let path = substitute_ids(&g.path, &ids);
+        let (status, body) = send(&app, g, &session, &path).await;
+        if let Some(id) = body.get("id").and_then(Value::as_i64) {
+            ids.insert(g.name.clone(), id);
+        }
         if status.as_u16() != g.status {
             failures.push(format!(
                 "{}: status {} expected, {} got",
@@ -314,6 +470,23 @@ async fn golden_responses_match() {
             Mode::Exact(ignore) => {
                 let want = normalize(&g.body, ignore);
                 let got = normalize(&body, ignore);
+                diff("", &want, &got, &mut problems);
+            }
+            Mode::Unordered(ignore) => {
+                let want = normalize_with(&g.body, ignore, true);
+                let got = normalize_with(&body, ignore, true);
+                diff("", &want, &got, &mut problems);
+            }
+            Mode::ManualCommands(ignore) => {
+                let manual = |v: &Value| -> Value {
+                    Value::Array(
+                        v.as_array()
+                            .map(|a| a.iter().filter(|c| c["trigger"] == "manual").cloned().collect())
+                            .unwrap_or_default(),
+                    )
+                };
+                let want = normalize(&manual(&g.body), ignore);
+                let got = normalize(&manual(&body), ignore);
                 diff("", &want, &got, &mut problems);
             }
             Mode::Html => {
@@ -366,7 +539,11 @@ async fn golden_responses_match() {
 
 #[tokio::test]
 async fn pending_list_only_names_recorded_goldens() {
-    let names: BTreeSet<String> = load_goldens().into_iter().map(|g| g.name).collect();
+    let names: BTreeSet<String> = load_goldens()
+        .into_iter()
+        .filter(|g| g.method != "sleep")
+        .map(|g| g.name)
+        .collect();
     for p in PENDING {
         assert!(names.contains(*p), "PENDING names unknown golden {p}");
     }

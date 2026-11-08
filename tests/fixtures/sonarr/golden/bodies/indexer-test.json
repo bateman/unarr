@@ -1,0 +1,58 @@
+{
+  "enableRss": true,
+  "enableAutomaticSearch": true,
+  "enableInteractiveSearch": true,
+  "priority": 25,
+  "name": "Mock Newznab (test)",
+  "implementationName": "Newznab",
+  "implementation": "Newznab",
+  "configContract": "NewznabSettings",
+  "infoLink": "https://wiki.servarr.com/sonarr/supported#newznab",
+  "downloadClientId": 0,
+  "seasonSearchMaximumSingleEpisodeAge": 0,
+  "tags": [],
+  "fields": [
+    {
+      "name": "baseUrl",
+      "value": "http://127.0.0.1:18989/newznab"
+    },
+    {
+      "name": "apiPath",
+      "value": "/api"
+    },
+    {
+      "name": "apiKey",
+      "value": "0123456789abcdef0123456789abcdef"
+    },
+    {
+      "name": "categories",
+      "value": [
+        5030,
+        5040,
+        5045
+      ]
+    },
+    {
+      "name": "animeCategories",
+      "value": [
+        5070
+      ]
+    },
+    {
+      "name": "animeStandardFormatSearch",
+      "value": false
+    },
+    {
+      "name": "additionalParameters",
+      "value": ""
+    },
+    {
+      "name": "multiLanguages",
+      "value": []
+    },
+    {
+      "name": "failDownloads",
+      "value": []
+    }
+  ]
+}

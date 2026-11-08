@@ -1,0 +1,19 @@
+{
+  "body": [
+    {
+      "detailedDescription": "You must disable TV sorting for the category Sonarr uses to prevent import issues. Go to Sabnzbd to fix it.",
+      "errorMessage": "Disable TV Sorting",
+      "infoLink": "http://127.0.0.1:18989/sabnzbd/config/sorting/",
+      "isWarning": false,
+      "propertyName": "TvCategory",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-07T15:44:21Z",
+  "request": {
+    "body": "bodies/downloadclient-test-sabnzbd-sorted.json",
+    "method": "POST",
+    "path": "/api/v3/downloadclient/test"
+  },
+  "status": 400
+}

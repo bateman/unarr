@@ -1,0 +1,17 @@
+{
+  "body": {
+    "count": 3,
+    "errors": false,
+    "totalCount": 3,
+    "unknownCount": 0,
+    "unknownErrors": false,
+    "unknownWarnings": false,
+    "warnings": false
+  },
+  "recordedAt": "2026-11-07T15:44:37Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/queue/status"
+  },
+  "status": 200
+}

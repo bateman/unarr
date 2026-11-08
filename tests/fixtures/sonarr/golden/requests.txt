@@ -1,6 +1,10 @@
 # Requests replayed against the real Sonarr to record golden responses, and
-# against Unarr by the contract tests. Format: <name> <METHOD> <path>.
+# against Unarr by the contract tests. Format: <name> <METHOD> <path> [body],
+# where body names a JSON file under bodies/ sent as application/json.
 # Names starting with "noauth" are sent without the X-Api-Key header.
+# Requests run in this order on both sides, so a write is visible to the
+# reads that follow it: writes belong at the end, after every read-only
+# golden.
 
 # system
 system-status GET /api/v3/system/status
@@ -106,3 +110,161 @@ config-indexer GET /api/v3/config/indexer
 config-naming-examples GET /api/v3/config/naming/examples
 languageprofile GET /api/v3/languageprofile
 languageprofile-1 GET /api/v3/languageprofile/1
+
+# provider writes: these change the fixture copy, so they come after every
+# read-only golden. The mock indexers of scripts/mock-servarr.py answer on
+# 127.0.0.1:18989; 18999 has nothing listening. The fixture's Indexers
+# sequence stands at 19, so the two created indexers get ids 20 and 21.
+indexer-create POST /api/v3/indexer bodies/indexer-create.json
+indexer-create-torznab POST /api/v3/indexer bodies/indexer-create-torznab.json
+indexer-create-duplicate POST /api/v3/indexer bodies/indexer-create.json
+indexer-create-invalid POST /api/v3/indexer bodies/indexer-invalid.json
+indexer-create-unreachable POST /api/v3/indexer bodies/indexer-unreachable.json
+indexer-create-unreachable-forced POST /api/v3/indexer?forceSave=true bodies/indexer-unreachable.json
+indexer-test POST /api/v3/indexer/test bodies/indexer-test.json
+indexer-test-existing POST /api/v3/indexer/test bodies/indexer-test-existing.json
+indexer-test-duplicate POST /api/v3/indexer/test bodies/indexer-create.json
+indexer-test-wrong-key POST /api/v3/indexer/test bodies/indexer-wrong-key.json
+indexer-test-invalid POST /api/v3/indexer/test bodies/indexer-invalid.json
+indexer-action-categories POST /api/v3/indexer/action/newznabCategories bodies/indexer-create.json
+indexer-action-categories-unreachable POST /api/v3/indexer/action/newznabCategories bodies/indexer-unreachable.json
+indexer-20 GET /api/v3/indexer/20
+indexer-after-create GET /api/v3/indexer
+# Interactive search, RSS and pushes against the mock indexers (ids 20 and
+# 21); the fixture's own indexers point at *.invalid hosts and fail at once.
+# The Pitt (series 1, tvdbid 448176) and Daredevil: Born Again (series 2,
+# tvdbid 422712) have result fixtures; their episodes are unmonitored, so a
+# push is decided but never grabbed.
+release-episode GET /api/v3/release?episodeId=1
+release-episode-daredevil GET /api/v3/release?episodeId=46
+release-season GET /api/v3/release?seriesId=1&seasonNumber=1
+release-episode-missing GET /api/v3/release?episodeId=999999
+release-rss GET /api/v3/release
+release-grab-uncached POST /api/v3/release bodies/release-grab-uncached.json
+release-grab-invalid POST /api/v3/release bodies/release-grab-invalid.json
+release-push POST /api/v3/release/push bodies/release-push.json
+release-push-unknown-series POST /api/v3/release/push bodies/release-push-unknown.json
+release-push-invalid POST /api/v3/release/push bodies/release-push-invalid.json
+# Download clients and the grabs through them, while indexers 20 and 21 still exist.
+downloadclient-create-sabnzbd POST /api/v3/downloadclient bodies/downloadclient-create-sabnzbd.json
+downloadclient-create-nzbget POST /api/v3/downloadclient bodies/downloadclient-create-nzbget.json
+downloadclient-create-qbittorrent POST /api/v3/downloadclient bodies/downloadclient-create-qbittorrent.json
+downloadclient-create-transmission POST /api/v3/downloadclient bodies/downloadclient-create-transmission.json
+downloadclient-create-duplicate POST /api/v3/downloadclient bodies/downloadclient-create-duplicate.json
+downloadclient-after-create GET /api/v3/downloadclient
+downloadclient-4 GET /api/v3/downloadclient/4
+downloadclient-test-sabnzbd POST /api/v3/downloadclient/test bodies/downloadclient-create-sabnzbd.json
+downloadclient-test-sabnzbd-wrongkey POST /api/v3/downloadclient/test bodies/downloadclient-test-sabnzbd-wrongkey.json
+downloadclient-test-sabnzbd-nojob POST /api/v3/downloadclient/test bodies/downloadclient-test-sabnzbd-nojob.json
+downloadclient-test-sabnzbd-sorted POST /api/v3/downloadclient/test bodies/downloadclient-test-sabnzbd-sorted.json
+downloadclient-test-sabnzbd-missing-category POST /api/v3/downloadclient/test bodies/downloadclient-test-sabnzbd-missing-category.json
+downloadclient-test-sabnzbd-nocategory POST /api/v3/downloadclient/test bodies/downloadclient-test-sabnzbd-nocategory.json
+downloadclient-test-sabnzbd-nocategory-forced POST /api/v3/downloadclient/test?forceTest=true bodies/downloadclient-test-sabnzbd-nocategory.json
+downloadclient-test-nzbget POST /api/v3/downloadclient/test bodies/downloadclient-create-nzbget.json
+downloadclient-test-nzbget-wrongpassword POST /api/v3/downloadclient/test bodies/downloadclient-test-nzbget-wrongpassword.json
+downloadclient-test-nzbget-missing-category POST /api/v3/downloadclient/test bodies/downloadclient-test-nzbget-missing-category.json
+downloadclient-test-qbittorrent POST /api/v3/downloadclient/test bodies/downloadclient-create-qbittorrent.json
+downloadclient-test-qbittorrent-apikey POST /api/v3/downloadclient/test bodies/downloadclient-test-qbittorrent-apikey.json
+downloadclient-test-qbittorrent-wrongpassword POST /api/v3/downloadclient/test bodies/downloadclient-test-qbittorrent-wrongpassword.json
+downloadclient-test-qbittorrent-nocategory POST /api/v3/downloadclient/test bodies/downloadclient-test-qbittorrent-nocategory.json
+downloadclient-test-qbittorrent-newcategory POST /api/v3/downloadclient/test bodies/downloadclient-test-qbittorrent-newcategory.json
+downloadclient-test-transmission POST /api/v3/downloadclient/test bodies/downloadclient-create-transmission.json
+downloadclient-test-transmission-wrongpassword POST /api/v3/downloadclient/test bodies/downloadclient-test-transmission-wrongpassword.json
+downloadclient-test-transmission-directory POST /api/v3/downloadclient/test bodies/downloadclient-test-transmission-directory.json
+downloadclient-invalid POST /api/v3/downloadclient bodies/downloadclient-invalid.json
+downloadclient-invalid-settings POST /api/v3/downloadclient bodies/downloadclient-invalid-settings.json
+downloadclient-invalid-torrent-settings POST /api/v3/downloadclient bodies/downloadclient-invalid-torrent-settings.json
+downloadclient-invalid-transmission-settings POST /api/v3/downloadclient bodies/downloadclient-invalid-transmission-settings.json
+downloadclient-unreachable POST /api/v3/downloadclient bodies/downloadclient-unreachable.json
+downloadclient-unreachable-forced POST /api/v3/downloadclient?forceSave=true bodies/downloadclient-unreachable.json
+downloadclient-unreachable-nzbget POST /api/v3/downloadclient/test bodies/downloadclient-unreachable-nzbget.json
+downloadclient-unreachable-qbittorrent POST /api/v3/downloadclient/test bodies/downloadclient-unreachable-qbittorrent.json
+downloadclient-unreachable-transmission POST /api/v3/downloadclient/test bodies/downloadclient-unreachable-transmission.json
+downloadclient-testall POST /api/v3/downloadclient/testall
+downloadclient-update PUT /api/v3/downloadclient/4 bodies/downloadclient-update.json
+downloadclient-update-missing PUT /api/v3/downloadclient/999 bodies/downloadclient-update-999.json
+downloadclient-4-after-update GET /api/v3/downloadclient/4
+# Grabs from the cache the searches above filled, each to a named mock
+# client, then the queue they make and the history they leave; the delay
+# lets the originals' debounced refresh see the clients.
+release-grab-usenet POST /api/v3/release bodies/release-grab-usenet.json
+release-grab-torrent POST /api/v3/release bodies/release-grab-torrent.json
+release-grab-transmission POST /api/v3/release bodies/release-grab-transmission.json
+release-grab-unknown-client POST /api/v3/release bodies/release-grab-unknown-client.json
+sleep 12
+queue-after-grab GET /api/v3/queue?page=1&pageSize=20&sortKey=timeleft&sortDirection=ascending&includeUnknownSeriesItems=false&includeSeries=true&includeEpisode=true
+queue-after-grab-plain GET /api/v3/queue?page=1&pageSize=20&sortKey=timeleft&sortDirection=ascending
+queue-page-2 GET /api/v3/queue?page=2&pageSize=2&sortKey=title&sortDirection=descending
+queue-page-overflow GET /api/v3/queue?page=5&pageSize=2&sortKey=title&sortDirection=descending
+queue-torrent-only GET /api/v3/queue?page=1&pageSize=20&sortKey=timeleft&sortDirection=ascending&protocol=torrent
+queue-series-2 GET /api/v3/queue?page=1&pageSize=20&sortKey=series.sortTitle&sortDirection=ascending&seriesIds=2
+queue-quality-filter GET /api/v3/queue?page=1&pageSize=20&sortKey=quality&sortDirection=descending&quality=3
+queue-status-after-grab GET /api/v3/queue/status
+queue-details-after-grab GET /api/v3/queue/details?includeSeries=true&includeEpisode=true
+queue-details-series-1 GET /api/v3/queue/details?seriesId=1
+queue-details-episode-46 GET /api/v3/queue/details?episodeIds=46&includeEpisode=true
+history-after-grab GET /api/v3/history?page=1&pageSize=5&sortKey=date&sortDirection=descending&includeSeries=true&includeEpisode=true
+history-download-id GET /api/v3/history?page=1&pageSize=5&sortKey=date&sortDirection=descending&downloadId=SABnzbd_nzo_mock1
+history-episode-1-grabbed GET /api/v3/history?page=1&pageSize=5&sortKey=date&sortDirection=descending&episodeId=1&eventType=1
+queue-delete-usenet DELETE /api/v3/queue/489905582?removeFromClient=true&blocklist=false
+queue-delete-blocklist DELETE /api/v3/queue/1652059285?removeFromClient=true&blocklist=true&skipRedownload=true
+queue-bulk-ignore DELETE /api/v3/queue/bulk?removeFromClient=false&blocklist=false bodies/queue-bulk-ignore.json
+queue-delete-missing DELETE /api/v3/queue/123456?removeFromClient=true
+queue-bulk-missing DELETE /api/v3/queue/bulk?removeFromClient=true bodies/queue-bulk-missing.json
+queue-grab-missing POST /api/v3/queue/grab/123456
+queue-after-delete GET /api/v3/queue?page=1&pageSize=20&sortKey=timeleft&sortDirection=ascending
+queue-status-after-delete GET /api/v3/queue/status
+history-after-delete GET /api/v3/history?page=1&pageSize=5&sortKey=date&sortDirection=descending&eventType=4&eventType=7&includeEpisode=true
+blocklist-after-delete GET /api/v3/blocklist?page=1&pageSize=5&sortKey=date&sortDirection=descending
+downloadclient-action POST /api/v3/downloadclient/action/getCategories bodies/downloadclient-action.json
+downloadclient-bulk PUT /api/v3/downloadclient/bulk bodies/downloadclient-bulk.json
+downloadclient-bulk-empty PUT /api/v3/downloadclient/bulk bodies/downloadclient-bulk-empty.json
+# Commands: the queue the UI and the scheduler drive. Each command runs in
+# the background, so the sleeps let it finish before it is read back;
+# `{id:name}` is the id the named response carried. NZBGet 2 is disabled
+# first so the season search grabs to the mock SABnzbd, the only usenet
+# client left enabled.
+downloadclient-disable-nzbget2 PUT /api/v3/downloadclient/2 bodies/downloadclient-disable-nzbget2.json
+command-rsssync POST /api/v3/command bodies/command-rsssync.json
+command-refresh-downloads POST /api/v3/command bodies/command-refresh-downloads.json
+command-episode-search POST /api/v3/command bodies/command-episode-search.json
+command-missing-search POST /api/v3/command bodies/command-missing-search.json
+command-missing-name POST /api/v3/command bodies/command-missing-name.json
+command-unknown POST /api/v3/command bodies/command-unknown.json
+command-get-missing GET /api/v3/command/999999
+sleep 15
+command-rsssync-get GET /api/v3/command/{id:command-rsssync}
+command-refresh-downloads-get GET /api/v3/command/{id:command-refresh-downloads}
+command-episode-search-get GET /api/v3/command/{id:command-episode-search}
+command-missing-search-get GET /api/v3/command/{id:command-missing-search}
+command-cancel-completed DELETE /api/v3/command/{id:command-rsssync}
+command-list GET /api/v3/command
+command-season-search POST /api/v3/command bodies/command-season-search.json
+sleep 15
+command-season-search-get GET /api/v3/command/{id:command-season-search}
+queue-after-command GET /api/v3/queue?page=1&pageSize=20&sortKey=timeleft&sortDirection=ascending&includeSeries=true&includeEpisode=true
+history-after-command GET /api/v3/history?page=1&pageSize=3&sortKey=date&sortDirection=descending&eventType=1
+command-clear-blocklist POST /api/v3/command bodies/command-clear-blocklist.json
+sleep 5
+command-clear-blocklist-get GET /api/v3/command/{id:command-clear-blocklist}
+blocklist-after-clear GET /api/v3/blocklist?page=1&pageSize=5&sortKey=date&sortDirection=descending
+system-task-after GET /api/v3/system/task
+downloadclient-delete DELETE /api/v3/downloadclient/7
+downloadclient-delete-missing DELETE /api/v3/downloadclient/7
+downloadclient-bulk-delete DELETE /api/v3/downloadclient/bulk bodies/downloadclient-bulk-delete.json
+downloadclient-after-delete GET /api/v3/downloadclient
+
+indexer-update PUT /api/v3/indexer/20 bodies/indexer-update.json
+indexer-update-missing PUT /api/v3/indexer/999 bodies/indexer-update-999.json
+indexer-20-after-update GET /api/v3/indexer/20
+indexer-bulk PUT /api/v3/indexer/bulk bodies/indexer-bulk.json
+indexer-bulk-empty PUT /api/v3/indexer/bulk bodies/indexer-bulk-empty.json
+indexer-delete DELETE /api/v3/indexer/20
+indexer-delete-missing DELETE /api/v3/indexer/20
+indexer-bulk-delete DELETE /api/v3/indexer/bulk bodies/indexer-bulk-delete.json
+indexer-after-delete GET /api/v3/indexer
+
+# Health as the run leaves it: the fixture clients and indexers that cannot
+# be reached, after the checks the writes above triggered have settled.
+sleep 10
+health-after GET /api/v3/health

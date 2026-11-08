@@ -1,0 +1,68 @@
+{
+ "source": "sonarr/src/NzbDrone.Core.Test/DecisionEngineTests/SingleEpisodeAgeDownloadDecisionFixture.cs",
+ "methods": {
+  "single_episode_release": {
+   "params": [
+    "episode",
+    "seasonSearchMaximumSingleEpisodeAge",
+    "expectedResult"
+   ],
+   "cases": [
+    [
+     1,
+     200,
+     false
+    ],
+    [
+     4,
+     200,
+     false
+    ],
+    [
+     1,
+     600,
+     true
+    ],
+    [
+     1,
+     365,
+     true
+    ],
+    [
+     4,
+     365,
+     true
+    ],
+    [
+     1,
+     0,
+     true
+    ]
+   ]
+  },
+  "multi_episode_release": {
+   "params": [
+    "seasonSearchMaximumSingleEpisodeAge",
+    "expectedResult"
+   ],
+   "cases": [
+    [
+     200,
+     true
+    ],
+    [
+     600,
+     true
+    ],
+    [
+     365,
+     true
+    ],
+    [
+     0,
+     true
+    ]
+   ]
+  }
+ }
+}

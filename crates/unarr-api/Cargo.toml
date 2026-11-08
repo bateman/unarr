@@ -25,10 +25,11 @@ sha2 = "0.11"
 hmac = "0.13"
 pbkdf2 = { version = "0.13", features = ["hmac"] }
 base64 = "0.22"
+futures-util = "0.3"
 
 [dev-dependencies]
 unarr-import.workspace = true
+unarr-mock.workspace = true
 tower = { version = "0.5", features = ["util"] }
 http-body-util = "0.1"
 tokio-tungstenite = "0.30"
-futures-util = "0.3"

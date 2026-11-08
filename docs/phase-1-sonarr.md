@@ -101,6 +101,13 @@ now, anonymised by `scripts/sonarr-anonymize.py` (see
 had served its purpose: left in the tree it could overwrite the real fixture.
 The official release runs without Docker, so the goldens are recorded from it.
 
+*Closing check, from `main` after the merge:* one squashed commit, `make ui
+&& make check` green (67 tests), CI green including the multi-arch image,
+12.4 MiB release binary, 25.4 MB RSS after importing the fixture and 32.9 MB
+after 300 requests to `/series`; every write endpoint answers 405 and
+`release` 404, as expected before phase 2. The next phase is
+`docs/phase-2-acquisition.md`.
+
 ## Conventions
 
 - Rust 2021, `make check` before every push (fmt, clippy `-D warnings`, tests).

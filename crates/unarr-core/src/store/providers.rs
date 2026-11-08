@@ -1,6 +1,7 @@
 //! Providers (indexers, download clients, notifications, import lists,
 //! metadata) and the smaller settings tables.
 
+use chrono::{DateTime, Utc};
 use rusqlite::{named_params, params, Connection, Row};
 
 use super::{from_json, parse_enum, parse_ts, to_json, ts};
@@ -19,7 +20,65 @@ pub fn insert_provider(conn: &Connection, p: &Provider) -> anyhow::Result<()> {
             ":tags": to_json(&p.tags)?, ":attributes": to_json(&p.attributes)?,
         },
     )?;
+    // Move the kind's sequence forward, as AUTOINCREMENT would.
+    let sequence: i64 = super::config::meta(conn, &sequence_key(p.kind))?
+        .and_then(|v| v.parse().ok())
+        .unwrap_or(0);
+    if p.id > sequence {
+        set_provider_sequence(conn, p.kind, p.id)?;
+    }
     Ok(())
+}
+
+/// The `meta` key holding the last id handed out for a provider kind.
+fn sequence_key(kind: ProviderKind) -> String {
+    format!("sequence.{}", kind.as_str())
+}
+
+/// The id the next provider of this kind gets. The originals' tables are
+/// `AUTOINCREMENT`, so a deleted id is never reused: the importer records
+/// each table's `sqlite_sequence` and inserts move it forward.
+pub fn next_provider_id(conn: &Connection, kind: ProviderKind) -> anyhow::Result<i64> {
+    let max: Option<i64> = conn.query_row(
+        "SELECT max(id) FROM providers WHERE kind = ?1",
+        params![kind.as_str()],
+        |r| r.get(0),
+    )?;
+    let sequence: i64 = super::config::meta(conn, &sequence_key(kind))?
+        .and_then(|v| v.parse().ok())
+        .unwrap_or(0);
+    Ok(max.unwrap_or(0).max(sequence) + 1)
+}
+
+/// Record the last id used for a kind (the importer's `sqlite_sequence`).
+pub fn set_provider_sequence(conn: &Connection, kind: ProviderKind, last_id: i64) -> anyhow::Result<()> {
+    super::config::set_meta(conn, &sequence_key(kind), &last_id.to_string())
+}
+
+/// Replace every column of an existing provider; `false` when there is none.
+pub fn update_provider(conn: &Connection, p: &Provider) -> anyhow::Result<bool> {
+    let n = conn.execute(
+        "UPDATE providers SET name = :name, implementation = :implementation, config_contract = :config_contract,
+            settings = :settings, tags = :tags, attributes = :attributes
+         WHERE kind = :kind AND id = :id",
+        named_params! {
+            ":kind": p.kind.as_str(), ":id": p.id, ":name": p.name, ":implementation": p.implementation,
+            ":config_contract": p.config_contract, ":settings": to_json(&p.settings)?,
+            ":tags": to_json(&p.tags)?, ":attributes": to_json(&p.attributes)?,
+        },
+    )?;
+    Ok(n == 1)
+}
+
+/// Remove a provider; `false` when there was none.
+pub fn delete_provider(conn: &Connection, kind: ProviderKind, id: i64) -> anyhow::Result<bool> {
+    let n = conn.execute(
+        "DELETE FROM providers WHERE kind = ?1 AND id = ?2",
+        params![kind.as_str(), id],
+    )?;
+    // `ProviderDeletedEvent`: the status goes with the provider.
+    super::provider_status::delete_provider_status(conn, kind, id)?;
+    Ok(n == 1)
 }
 
 fn provider_from_row(row: &Row) -> anyhow::Result<Provider> {
@@ -256,17 +315,51 @@ pub fn list_users(conn: &Connection) -> anyhow::Result<Vec<User>> {
     Ok(rows.collect::<Result<_, _>>()?)
 }
 
+/// Insert a task; an id of zero takes the next free one.
 pub fn insert_scheduled_task(conn: &Connection, t: &ScheduledTask) -> anyhow::Result<()> {
+    let id = if t.id == 0 {
+        let max: Option<i64> = conn.query_row("SELECT max(id) FROM scheduled_tasks", [], |r| r.get(0))?;
+        max.unwrap_or(0) + 1
+    } else {
+        t.id
+    };
     conn.execute(
         "INSERT INTO scheduled_tasks (id, type_name, interval_minutes, last_execution, last_start_time)
          VALUES (?1, ?2, ?3, ?4, ?5)",
         params![
-            t.id,
+            id,
             t.type_name,
             t.interval_minutes,
             ts(t.last_execution),
             ts(t.last_start_time)
         ],
+    )?;
+    Ok(())
+}
+
+pub fn delete_scheduled_task(conn: &Connection, id: i64) -> anyhow::Result<()> {
+    conn.execute("DELETE FROM scheduled_tasks WHERE id = ?1", params![id])?;
+    Ok(())
+}
+
+pub fn set_scheduled_task_interval(conn: &Connection, id: i64, interval_minutes: i64) -> anyhow::Result<()> {
+    conn.execute(
+        "UPDATE scheduled_tasks SET interval_minutes = ?2 WHERE id = ?1",
+        params![id, interval_minutes],
+    )?;
+    Ok(())
+}
+
+/// `SetLastExecutionTime`.
+pub fn set_scheduled_task_execution(
+    conn: &Connection,
+    id: i64,
+    last_execution: DateTime<Utc>,
+    last_start_time: DateTime<Utc>,
+) -> anyhow::Result<()> {
+    conn.execute(
+        "UPDATE scheduled_tasks SET last_execution = ?2, last_start_time = ?3 WHERE id = ?1",
+        params![id, ts(Some(last_execution)), ts(Some(last_start_time))],
     )?;
     Ok(())
 }
@@ -318,8 +411,33 @@ mod tests {
                 },
             )?;
             assert_eq!(list_providers(conn, ProviderKind::Indexer)?, vec![idx.clone()]);
-            assert_eq!(get_provider(conn, ProviderKind::Indexer, 1)?, Some(idx));
+            assert_eq!(get_provider(conn, ProviderKind::Indexer, 1)?, Some(idx.clone()));
             assert_eq!(get_provider(conn, ProviderKind::Notification, 1)?, None);
+            assert_eq!(next_provider_id(conn, ProviderKind::Indexer)?, 2);
+            assert_eq!(next_provider_id(conn, ProviderKind::Notification)?, 1);
+            let renamed = Provider {
+                name: "Renamed".into(),
+                attributes: serde_json::json!({"enableRss": false, "priority": 1}),
+                ..idx.clone()
+            };
+            assert!(update_provider(conn, &renamed)?);
+            assert_eq!(get_provider(conn, ProviderKind::Indexer, 1)?, Some(renamed));
+            assert!(!update_provider(
+                conn,
+                &Provider {
+                    id: 99,
+                    ..idx.clone()
+                }
+            )?);
+            assert!(delete_provider(conn, ProviderKind::Indexer, 1)?);
+            assert!(!delete_provider(conn, ProviderKind::Indexer, 1)?);
+            assert!(list_providers(conn, ProviderKind::Indexer)?.is_empty());
+            // A deleted id is not reused, as AUTOINCREMENT would not.
+            assert_eq!(next_provider_id(conn, ProviderKind::Indexer)?, 2);
+            set_provider_sequence(conn, ProviderKind::Indexer, 19)?;
+            assert_eq!(next_provider_id(conn, ProviderKind::Indexer)?, 20);
+            // The other kind with the same id is untouched.
+            assert!(get_provider(conn, ProviderKind::DownloadClient, 1)?.is_some());
 
             let delay = DelayProfile {
                 id: 1,

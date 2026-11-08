@@ -1,0 +1,33 @@
+{
+  "body": [
+    {
+      "errorCode": "NotNullValidator",
+      "errorMessage": "'Name' must not be empty.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Name",
+        "propertyValue": null
+      },
+      "propertyName": "Name",
+      "severity": "error"
+    },
+    {
+      "errorCode": "NotEmptyValidator",
+      "errorMessage": "'Name' must not be empty.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Name",
+        "propertyValue": null
+      },
+      "propertyName": "Name",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-07T15:44:37Z",
+  "request": {
+    "body": "bodies/command-missing-name.json",
+    "method": "POST",
+    "path": "/api/v3/command"
+  },
+  "status": 400
+}

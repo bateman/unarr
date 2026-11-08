@@ -1,0 +1,16 @@
+{
+  "body": {
+    "page": 1,
+    "pageSize": 20,
+    "records": [],
+    "sortDirection": "ascending",
+    "sortKey": "timeleft",
+    "totalRecords": 0
+  },
+  "recordedAt": "2026-11-07T15:44:37Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/queue?page=1&pageSize=20&sortKey=timeleft&sortDirection=ascending"
+  },
+  "status": 200
+}

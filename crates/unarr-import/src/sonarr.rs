@@ -16,8 +16,13 @@ use rusqlite::types::{FromSql, Value as SqlValue};
 use rusqlite::{Connection, OpenFlags, Row, Statement};
 use serde::de::DeserializeOwned;
 use serde_json::{json, Value};
+use unarr_core::decision::{ReleaseSource, SeriesMatchType};
+use unarr_core::downloads::pending::{PendingRelease, PendingReleaseReason};
+use unarr_core::indexers::rss::ReleaseInfo;
 use unarr_core::model::*;
 use unarr_core::store;
+use unarr_core::store::download_history::{DownloadHistoryEntry, DownloadHistoryEvent};
+use unarr_core::store::provider_status::ProviderStatus;
 use unarr_core::{time, Db};
 
 /// Oldest migration level the mapping was written against (196 added
@@ -34,6 +39,132 @@ pub struct ImportReport {
     pub counts: BTreeMap<&'static str, usize>,
     /// Human-readable notes about anything skipped or defaulted.
     pub notes: Vec<String>,
+    /// Legacy tables with rows the importer does not carry over, with
+    /// their row counts.
+    pub skipped: BTreeMap<String, i64>,
+}
+
+/// Legacy tables the importer reads. Anything else with rows is logged.
+const HANDLED_TABLES: &[&str] = &[
+    "Tags",
+    "RootFolders",
+    "QualityDefinitions",
+    "CustomFormats",
+    "QualityProfiles",
+    "Series",
+    "Episodes",
+    "EpisodeFiles",
+    "History",
+    "Indexers",
+    "DownloadClients",
+    "Notifications",
+    "ImportLists",
+    "Metadata",
+    "DelayProfiles",
+    "ReleaseProfiles",
+    "RemotePathMappings",
+    "CustomFilters",
+    "ImportListExclusions",
+    "AutoTagging",
+    "Users",
+    "ScheduledTasks",
+    "Blocklist",
+    "SceneMappings",
+    "NamingConfig",
+    "Config",
+    "PendingReleases",
+    "DownloadHistory",
+    "IndexerStatus",
+    "DownloadClientStatus",
+    "VersionInfo",
+    "sqlite_sequence",
+];
+
+/// Tables with rows that nothing reads, by name.
+fn skipped_tables(legacy: &Connection) -> anyhow::Result<BTreeMap<String, i64>> {
+    let mut stmt = legacy.prepare("SELECT name FROM sqlite_master WHERE type = 'table' ORDER BY name")?;
+    let names: Vec<String> = stmt
+        .query_map([], |r| r.get::<_, String>(0))?
+        .collect::<Result<_, _>>()?;
+    let mut out = BTreeMap::new();
+    for name in names {
+        if HANDLED_TABLES.contains(&name.as_str()) {
+            continue;
+        }
+        let rows: i64 = legacy.query_row(&format!("SELECT count(*) FROM \"{name}\""), [], |r| r.get(0))?;
+        if rows > 0 {
+            out.insert(name, rows);
+        }
+    }
+    Ok(out)
+}
+
+/// A release as the originals store it (`ReleaseInfo` serialised by their
+/// JSON settings: `downloadProtocol`, languages as objects), mapped to
+/// Unarr's.
+fn legacy_release(v: &Value) -> ReleaseInfo {
+    let text = |k: &str| v[k].as_str().map(String::from);
+    let int = |k: &str| v[k].as_i64().unwrap_or(0);
+    ReleaseInfo {
+        guid: text("guid").unwrap_or_default(),
+        title: text("title").unwrap_or_default(),
+        size: int("size"),
+        download_url: text("downloadUrl"),
+        info_url: text("infoUrl"),
+        comment_url: text("commentUrl"),
+        indexer_id: int("indexerId"),
+        indexer: text("indexer").unwrap_or_default(),
+        indexer_priority: v["indexerPriority"].as_i64().unwrap_or(25),
+        season_search_maximum_single_episode_age: int("seasonSearchMaximumSingleEpisodeAge"),
+        protocol: match v["downloadProtocol"]
+            .as_str()
+            .map(str::to_ascii_lowercase)
+            .as_deref()
+        {
+            Some("usenet") => Protocol::Usenet,
+            Some("torrent") => Protocol::Torrent,
+            _ => protocol(int("downloadProtocol")),
+        },
+        tvdb_id: int("tvdbId"),
+        tv_rage_id: int("tvRageId"),
+        imdb_id: text("imdbId"),
+        publish_date: text("publishDate")
+            .and_then(|s| time::parse_utc(&s))
+            .unwrap_or(DateTime::<Utc>::UNIX_EPOCH),
+        languages: v["languages"]
+            .as_array()
+            .map(|a| {
+                a.iter()
+                    .filter_map(|l| l["id"].as_i64().or_else(|| l.as_i64()))
+                    .collect()
+            })
+            .unwrap_or_default(),
+        indexer_flags: int("indexerFlags"),
+        magnet_url: text("magnetUrl"),
+        info_hash: text("infoHash"),
+        seeders: v["seeders"].as_i64(),
+        peers: v["peers"].as_i64(),
+        container: text("container"),
+        pending_release_reason: None,
+    }
+}
+
+/// The status rows of a provider kind.
+fn read_statuses(legacy: &Connection, table: &'static str) -> anyhow::Result<Vec<(i64, ProviderStatus)>> {
+    read_table(legacy, table, |r| {
+        Ok((
+            r.req("ProviderId")?,
+            ProviderStatus {
+                initial_failure: r.timestamp("InitialFailure")?,
+                most_recent_failure: r.timestamp("MostRecentFailure")?,
+                escalation_level: r.or("EscalationLevel", 0)?,
+                disabled_till: r.timestamp("DisabledTill")?,
+                last_rss_sync_release_info: r
+                    .json_opt("LastRssSyncReleaseInfo")?
+                    .map(|v| serde_json::to_string(&legacy_release(&v)).unwrap_or_default()),
+            },
+        ))
+    })
 }
 
 /// Open the legacy database read-only, and only read-only: the original files
@@ -525,6 +656,26 @@ pub fn import(legacy_db: &Path, db: &Db) -> anyhow::Result<ImportReport> {
         provider(r, ProviderKind::Metadata, attributes)
     })?);
 
+    // AUTOINCREMENT sequences of the provider tables, so ids created later
+    // continue where the original left off rather than reusing deleted ones.
+    let sequences: Vec<(ProviderKind, i64)> = [
+        ("Indexers", ProviderKind::Indexer),
+        ("DownloadClients", ProviderKind::DownloadClient),
+        ("Notifications", ProviderKind::Notification),
+        ("ImportLists", ProviderKind::ImportList),
+        ("Metadata", ProviderKind::Metadata),
+    ]
+    .into_iter()
+    .filter_map(|(table, kind)| {
+        legacy
+            .query_row("SELECT seq FROM sqlite_sequence WHERE name = ?1", [table], |r| {
+                r.get::<_, i64>(0)
+            })
+            .ok()
+            .map(|seq| (kind, seq))
+    })
+    .collect();
+
     let delay_profiles = read_table(&legacy, "DelayProfiles", |r| {
         Ok(DelayProfile {
             id: r.req("Id")?,
@@ -716,6 +867,83 @@ pub fn import(legacy_db: &Path, db: &Db) -> anyhow::Result<ImportReport> {
         ));
     }
 
+    let pending_releases = read_table(&legacy, "PendingReleases", |r| {
+        let additional = r.json_opt("AdditionalInfo")?.unwrap_or(Value::Null);
+        let enum_text = |v: &Value| {
+            v.as_str()
+                .map(str::to_string)
+                .or_else(|| v.as_i64().map(|n| n.to_string()))
+        };
+        Ok(PendingRelease {
+            id: r.req("Id")?,
+            series_id: r.req("SeriesId")?,
+            title: r.req("Title")?,
+            added: r.timestamp_req("Added")?,
+            release: legacy_release(&r.json_opt("Release")?.unwrap_or(Value::Null)),
+            reason: PendingReleaseReason::from_i64(r.or("Reason", 0)?),
+            series_match_type: enum_text(&additional["seriesMatchType"])
+                .and_then(|s| match s.as_str() {
+                    "0" => Some(SeriesMatchType::Unknown),
+                    "1" => Some(SeriesMatchType::Title),
+                    "2" => Some(SeriesMatchType::Alias),
+                    "3" => Some(SeriesMatchType::Id),
+                    other => SeriesMatchType::parse(other),
+                })
+                .unwrap_or_default(),
+            release_source: enum_text(&additional["releaseSource"])
+                .and_then(|s| match s.as_str() {
+                    "0" => Some(ReleaseSource::Unknown),
+                    "1" => Some(ReleaseSource::Rss),
+                    "2" => Some(ReleaseSource::Search),
+                    "3" => Some(ReleaseSource::UserInvokedSearch),
+                    "4" => Some(ReleaseSource::InteractiveSearch),
+                    "5" => Some(ReleaseSource::ReleasePush),
+                    other => ReleaseSource::parse(other),
+                })
+                .unwrap_or_default(),
+        })
+    })?;
+    let download_history = read_table(&legacy, "DownloadHistory", |r| {
+        Ok(DownloadHistoryEntry {
+            id: r.req("Id")?,
+            event_type: match r.or("EventType", 0)? {
+                1 => DownloadHistoryEvent::DownloadGrabbed,
+                2 => DownloadHistoryEvent::DownloadImported,
+                3 => DownloadHistoryEvent::DownloadFailed,
+                4 => DownloadHistoryEvent::DownloadIgnored,
+                5 => DownloadHistoryEvent::FileImported,
+                other => anyhow::bail!("DownloadHistory.EventType: unknown value {other}"),
+            },
+            series_id: r.or("SeriesId", 0)?,
+            download_id: r.or("DownloadId", String::new())?,
+            source_title: r.or("SourceTitle", String::new())?,
+            date: r.timestamp_req("Date")?,
+            protocol: protocol(r.or("Protocol", 0)?),
+            indexer_id: r.or("IndexerId", 0)?,
+            download_client_id: r.or("DownloadClientId", 0)?,
+            release: r.json_opt("Release")?,
+            data: r.json_opt("Data")?.unwrap_or(json!({})),
+        })
+    })?;
+    let indexer_statuses = read_statuses(&legacy, "IndexerStatus")?;
+    let download_client_statuses = read_statuses(&legacy, "DownloadClientStatus")?;
+    // Rows of a provider that no longer exists would never be read.
+    let provider_exists =
+        |kind: ProviderKind, id: i64| providers.iter().any(|p| p.kind == kind && p.id == id);
+    let indexer_statuses: Vec<_> = indexer_statuses
+        .into_iter()
+        .filter(|(id, _)| provider_exists(ProviderKind::Indexer, *id))
+        .collect();
+    let download_client_statuses: Vec<_> = download_client_statuses
+        .into_iter()
+        .filter(|(id, _)| provider_exists(ProviderKind::DownloadClient, *id))
+        .collect();
+
+    report.skipped = skipped_tables(&legacy)?;
+    for (table, rows) in &report.skipped {
+        tracing::info!(table, rows, "legacy table not imported");
+    }
+
     // --- write in one transaction
     let counts = [
         ("Tags", tags.len()),
@@ -774,6 +1002,10 @@ pub fn import(legacy_db: &Path, db: &Db) -> anyhow::Result<ImportReport> {
         ("SceneMappings", scene_mappings.len()),
         ("NamingConfig", naming.len()),
         ("Config", config.len()),
+        ("PendingReleases", pending_releases.len()),
+        ("DownloadHistory", download_history.len()),
+        ("IndexerStatus", indexer_statuses.len()),
+        ("DownloadClientStatus", download_client_statuses.len()),
     ];
     report.counts.extend(counts);
     let migration_version = report.migration_version;
@@ -836,6 +1068,9 @@ pub fn import(legacy_db: &Path, db: &Db) -> anyhow::Result<ImportReport> {
         for u in &users {
             store::providers::insert_user(&tx, u)?;
         }
+        // A blank first start seeds the default tasks with ids of its own;
+        // the original's rows, last runs included, take their place.
+        tx.execute("DELETE FROM scheduled_tasks", [])?;
         for t in &scheduled_tasks {
             store::providers::insert_scheduled_task(&tx, t)?;
         }
@@ -845,11 +1080,26 @@ pub fn import(legacy_db: &Path, db: &Db) -> anyhow::Result<ImportReport> {
         for m in &scene_mappings {
             store::scene::insert(&tx, m)?;
         }
+        for p in &pending_releases {
+            store::pending::insert(&tx, p)?;
+        }
+        for h in &download_history {
+            store::download_history::insert(&tx, h)?;
+        }
+        for (id, status) in &indexer_statuses {
+            store::provider_status::upsert_provider_status(&tx, ProviderKind::Indexer, *id, status)?;
+        }
+        for (id, status) in &download_client_statuses {
+            store::provider_status::upsert_provider_status(&tx, ProviderKind::DownloadClient, *id, status)?;
+        }
         if let Some(n) = naming.first() {
             store::config::set_naming(&tx, n)?;
         }
         for (k, v) in &config {
             store::config::set_config(&tx, k, v)?;
+        }
+        for (kind, last_id) in &sequences {
+            store::providers::set_provider_sequence(&tx, *kind, *last_id)?;
         }
         store::config::set_meta(&tx, "source.app", "Sonarr")?;
         store::config::set_meta(&tx, "source.path", &source)?;
@@ -941,10 +1191,21 @@ mod tests {
             ("NamingConfig", 1),
             ("Users", 1),
             ("SceneMappings", 16064),
+            ("DownloadHistory", 1726),
+            ("PendingReleases", 0),
+            ("IndexerStatus", 0),
+            ("DownloadClientStatus", 0),
         ];
         for (table, n) in expect {
             assert_eq!(report.counts[table], n, "{table}");
         }
+        // Tables with rows nothing reads are reported, not silently dropped.
+        assert_eq!(
+            report.skipped.keys().map(String::as_str).collect::<Vec<_>>(),
+            ["ImportListItems", "MetadataFiles", "SubtitleFiles"],
+            "{:?}",
+            report.skipped
+        );
 
         db.call_blocking(|conn| {
             // The Pitt: continuing, tagged, two seasons (specials and 1).
@@ -979,6 +1240,103 @@ mod tests {
             Ok(())
         })
         .unwrap();
+    }
+
+    /// The acquisition tables: a pending release and the statuses of an
+    /// indexer and a client, as the originals store them.
+    #[test]
+    fn imports_pending_releases_and_provider_statuses() {
+        let dir = std::env::temp_dir().join(format!("unarr-acquisition-{}", std::process::id()));
+        std::fs::create_dir_all(&dir).unwrap();
+        let copy = dir.join("sonarr.db");
+        std::fs::copy(FIXTURE, &copy).unwrap();
+        {
+            let legacy = rusqlite::Connection::open(&copy).unwrap();
+            legacy
+                .execute_batch(
+                    r#"INSERT INTO PendingReleases (SeriesId, Title, Added, ParsedEpisodeInfo, Release, Reason, AdditionalInfo)
+                       VALUES (1, 'The.Pitt.S01E01.iTALiAN.1080p.WEB.H264-MeM.GP', '2026-03-06 07:48:20.6457169Z', '{}',
+                               '{"guid": "http://indexer.invalid/abc", "title": "The.Pitt.S01E01.iTALiAN.1080p.WEB.H264-MeM.GP", "size": 2254857830,
+                                 "downloadUrl": "http://indexer.invalid/abc.nzb", "indexerId": 1, "indexer": "Indexer", "indexerPriority": 25,
+                                 "downloadProtocol": "usenet", "tvdbId": 448176, "publishDate": "2025-01-11T09:05:00Z",
+                                 "languages": [{"id": 5, "name": "Italian"}], "age": 3, "ageHours": 72.5}',
+                               1, '{"seriesMatchType": "title", "releaseSource": "rss"}');
+                     INSERT INTO IndexerStatus (ProviderId, InitialFailure, MostRecentFailure, EscalationLevel, DisabledTill, LastRssSyncReleaseInfo)
+                       VALUES (1, '2026-03-06 07:00:00Z', '2026-03-06 07:48:20Z', 3, '2026-03-06 08:03:20Z',
+                               '{"guid": "http://indexer.invalid/last", "title": "Last.One.S01E01", "downloadUrl": "http://indexer.invalid/last.nzb", "publishDate": "2026-03-06T07:00:00Z", "downloadProtocol": "usenet"}');
+                     INSERT INTO IndexerStatus (ProviderId, EscalationLevel) VALUES (999, 1);
+                     INSERT INTO DownloadClientStatus (ProviderId, InitialFailure, MostRecentFailure, EscalationLevel, DisabledTill)
+                       VALUES (2, '2026-03-06 07:00:00Z', '2026-03-06 07:48:20Z', 2, NULL);"#,
+                )
+                .unwrap();
+        }
+        let db = Db::open_in_memory().unwrap();
+        let report = import(&copy, &db).unwrap();
+        assert_eq!(report.counts["PendingReleases"], 1);
+        assert_eq!(
+            report.counts["IndexerStatus"], 1,
+            "the status of a provider that is gone is dropped"
+        );
+        assert_eq!(report.counts["DownloadClientStatus"], 1);
+        db.call_blocking(|conn| {
+            let pending = store::pending::all(conn)?;
+            assert_eq!(pending.len(), 1);
+            let p = &pending[0];
+            assert!(p.id > 0, "the legacy id is kept");
+            assert_eq!(p.reason, PendingReleaseReason::DownloadClientUnavailable);
+            assert_eq!(p.series_match_type, SeriesMatchType::Title);
+            assert_eq!(p.release_source, ReleaseSource::Rss);
+            assert_eq!(p.release.protocol, Protocol::Usenet);
+            assert_eq!(p.release.languages, vec![5]);
+            assert_eq!(p.release.size, 2254857830);
+            assert_eq!(time::format_utc(p.release.publish_date), "2025-01-11T09:05:00Z");
+            let status = store::provider_status::provider_status(conn, ProviderKind::Indexer, 1)?;
+            assert_eq!(status.escalation_level, 3);
+            assert_eq!(
+                time::format_utc(status.disabled_till.unwrap()),
+                "2026-03-06T08:03:20Z"
+            );
+            let last: serde_json::Value =
+                serde_json::from_str(status.last_rss_sync_release_info.as_deref().unwrap())?;
+            assert_eq!(last["downloadUrl"], "http://indexer.invalid/last.nzb");
+            assert_eq!(last["publishDate"], "2026-03-06T07:00:00Z");
+            let client = store::provider_status::provider_status(conn, ProviderKind::DownloadClient, 2)?;
+            assert_eq!(client.escalation_level, 2);
+            assert_eq!(client.disabled_till, None);
+            let history =
+                store::download_history::latest_for_download_id(conn, "0d4b6b4be80f4c06a5218e0d4ca92856")?
+                    .unwrap();
+            assert_eq!(
+                history.event_type,
+                DownloadHistoryEvent::DownloadFailed,
+                "the latest row of that download"
+            );
+            assert_eq!(history.download_client_id, 2);
+            Ok(())
+        })
+        .unwrap();
+        let _ = std::fs::remove_dir_all(&dir);
+    }
+
+    /// A blank first start seeds the default scheduled tasks; the import
+    /// that follows must replace them, not collide with their ids.
+    #[test]
+    fn imports_after_a_blank_start_seeded_the_scheduled_tasks() {
+        let db = Db::open_in_memory().unwrap();
+        let now = chrono::Utc::now();
+        db.call_blocking(move |conn| unarr_core::commands::scheduler::ensure_defaults(conn, now))
+            .unwrap();
+        let seeded = db
+            .call_blocking(|conn| store::providers::list_scheduled_tasks(conn))
+            .unwrap();
+        assert!(!seeded.is_empty());
+        let report = import(Path::new(FIXTURE), &db).unwrap();
+        let after = db
+            .call_blocking(|conn| store::providers::list_scheduled_tasks(conn))
+            .unwrap();
+        assert_eq!(after.len(), report.counts["ScheduledTasks"]);
+        // The original's rows, not the seeded ones.
+        assert!(after.iter().all(|t| t.last_execution != Some(now)));
     }
 
     #[test]

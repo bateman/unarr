@@ -10,7 +10,8 @@
 # into .cache/sonarr/. The fixture itself is an anonymised real database, see
 # tests/fixtures/sonarr/README.md.
 #
-# Requirements: bash, curl, tar, python3; libicu for `golden`.
+# Requirements: bash, curl, tar, python3; libicu for `golden`. `golden` and
+# `shell` also start scripts/mock-servarr.py on port 18989 (MOCK_PORT).
 set -euo pipefail
 
 SONARR_VERSION="${SONARR_VERSION:-4.0.20.3014}"
@@ -49,6 +50,38 @@ download() {
     fi
 }
 
+MOCK_PORT="${MOCK_PORT:-18989}"
+MOCK_PID=""
+# The mock indexers and download clients the real Sonarr is pointed at while
+# recording; their requests are logged for the request builders to mirror.
+start_mock() {
+    local logfile="$CACHE/mock-requests.jsonl"
+    rm -f "$logfile"
+    # A stale mock from an earlier run would answer the health check below
+    # and swallow the request log.
+    if curl -fsS -o /dev/null "http://127.0.0.1:$MOCK_PORT/newznab/api?t=caps&apikey=$API_KEY" 2>/dev/null; then
+        die "something already listens on port $MOCK_PORT; stop it (pkill -f mock-servarr.py) and retry"
+    fi
+    python3 -I "$REPO/scripts/mock-servarr.py" --listen "127.0.0.1:$MOCK_PORT" --fixtures "$REPO/tests/fixtures" --log "$logfile" 2>"$CACHE/mock.stderr.log" &
+    MOCK_PID=$!
+    for _ in $(seq 1 20); do
+        if curl -fsS -o /dev/null "http://127.0.0.1:$MOCK_PORT/newznab/api?t=caps&apikey=$API_KEY" 2>/dev/null; then
+            log "mock services up on port $MOCK_PORT, requests logged to $logfile"
+            return
+        fi
+        sleep 0.5
+    done
+    die "the mock did not come up, see $CACHE/mock.stderr.log"
+}
+
+stop_mock() {
+    [ -n "$MOCK_PID" ] || return 0
+    # TERM, not INT: a background job of a non-interactive shell ignores INT.
+    kill -TERM "$MOCK_PID" 2>/dev/null || true
+    wait "$MOCK_PID" 2>/dev/null || true
+    MOCK_PID=""
+}
+
 SONARR_PID=""
 start_sonarr() {
     local data="$1"
@@ -78,7 +111,7 @@ stop_sonarr() {
     wait "$SONARR_PID" 2>/dev/null || true
     SONARR_PID=""
 }
-trap stop_sonarr EXIT
+trap 'stop_sonarr; stop_mock' EXIT
 
 # Start Sonarr on a throwaway copy of the fixture, so recording never mutates it.
 start_on_fixture_copy() {
@@ -97,6 +130,7 @@ start_on_fixture_copy() {
 }
 
 cmd_golden() {
+    start_mock
     start_on_fixture_copy
     mkdir -p "$GOLDEN_DIR"
     python3 -I "$REPO/scripts/record-golden.py" \
@@ -104,6 +138,7 @@ cmd_golden() {
         --requests "$GOLDEN_DIR/requests.txt" --out "$GOLDEN_DIR" --login unarr:fixture
     record_schemas
     stop_sonarr
+    stop_mock
     log "golden files written to $GOLDEN_DIR"
 }
 
@@ -138,6 +173,7 @@ cmd_ui() {
 }
 
 cmd_shell() {
+    start_mock
     start_on_fixture_copy
     log "Sonarr running at http://127.0.0.1:$SONARR_PORT with API key $API_KEY; Ctrl-C to stop"
     wait "$SONARR_PID"

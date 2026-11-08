@@ -1,0 +1,34 @@
+{
+  "body": {
+    "body": {
+      "episodeIds": [
+        46
+      ],
+      "isExclusive": false,
+      "isLongRunning": false,
+      "name": "EpisodeSearch",
+      "requiresDiskAccess": false,
+      "sendUpdatesToClient": true,
+      "suppressMessages": false,
+      "trigger": "manual",
+      "updateScheduledTask": true
+    },
+    "commandName": "Episode Search",
+    "id": 461663,
+    "name": "EpisodeSearch",
+    "priority": "normal",
+    "queued": "2026-11-07T15:44:37Z",
+    "result": "unknown",
+    "sendUpdatesToClient": true,
+    "status": "queued",
+    "trigger": "manual",
+    "updateScheduledTask": true
+  },
+  "recordedAt": "2026-11-07T15:44:37Z",
+  "request": {
+    "body": "bodies/command-episode-search.json",
+    "method": "POST",
+    "path": "/api/v3/command"
+  },
+  "status": 201
+}

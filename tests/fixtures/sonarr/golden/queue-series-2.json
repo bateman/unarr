@@ -1,0 +1,77 @@
+{
+  "body": {
+    "page": 1,
+    "pageSize": 20,
+    "records": [
+      {
+        "added": "2026-11-07T15:44:23Z",
+        "customFormatScore": -10000,
+        "customFormats": [
+          {
+            "id": 21,
+            "name": "DSNP"
+          },
+          {
+            "id": 10,
+            "name": "HD Streaming Boost"
+          },
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 11,
+            "name": "WEB Tier 01"
+          }
+        ],
+        "downloadClient": "Mock qBittorrent",
+        "downloadClientHasPostImportCategory": false,
+        "downloadId": "0FB2EF04FB342178115BA635EC7B5EC0067058BA",
+        "episodeHasFile": false,
+        "episodeId": 46,
+        "estimatedCompletionTime": "2026-11-07T15:54:26Z",
+        "id": 1652059285,
+        "indexer": "Mock Torznab (Prowlarr)",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "seasonNumber": 1,
+        "seriesId": 2,
+        "size": 768000,
+        "sizeleft": 768000,
+        "status": "downloading",
+        "statusMessages": [],
+        "timeleft": "00:10:00",
+        "title": "07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2",
+        "trackedDownloadState": "downloading",
+        "trackedDownloadStatus": "ok"
+      }
+    ],
+    "sortDirection": "ascending",
+    "sortKey": "series.sortTitle",
+    "totalRecords": 1
+  },
+  "recordedAt": "2026-11-07T15:44:37Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/queue?page=1&pageSize=20&sortKey=series.sortTitle&sortDirection=ascending&seriesIds=2"
+  },
+  "status": 200
+}

@@ -53,12 +53,34 @@ async fn lowercase_api_path(
     next.run(request).await
 }
 
+/// `X-Application-Version` on every API response: Prowlarr reads it from
+/// the indexer test to check the version it talks to.
+async fn version_header(
+    axum::extract::State(state): axum::extract::State<AppState>,
+    request: axum::extract::Request,
+    next: axum::middleware::Next,
+) -> axum::response::Response {
+    let mut response = next.run(request).await;
+    if let Ok(value) = axum::http::HeaderValue::from_str(compat::emulated_version(state.personality())) {
+        response
+            .headers_mut()
+            .entry("X-Application-Version")
+            .or_insert(value);
+    }
+    response
+}
+
 /// Build the router for one personality.
 pub fn router(state: AppState) -> Router {
-    let api = routes::api_router(&state).route_layer(axum::middleware::from_fn_with_state(
-        state.clone(),
-        auth::require_api_key,
-    ));
+    let api = routes::api_router(&state)
+        .route_layer(axum::middleware::from_fn_with_state(
+            state.clone(),
+            auth::require_api_key,
+        ))
+        .layer(axum::middleware::from_fn_with_state(
+            state.clone(),
+            version_header,
+        ));
 
     // Pages and bootstrap the browser loads: behind the UI policy.
     let pages = Router::new()

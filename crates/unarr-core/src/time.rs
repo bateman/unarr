@@ -4,6 +4,13 @@
 use chrono::{DateTime, NaiveDate, NaiveDateTime, Timelike, Utc};
 
 /// Format a timestamp as the API and the database spell it.
+/// When this process started, as far as the services know: the first call
+/// pins it. The daemon and the command runtime call it at start.
+pub fn process_start() -> DateTime<Utc> {
+    static START: std::sync::OnceLock<DateTime<Utc>> = std::sync::OnceLock::new();
+    *START.get_or_init(Utc::now)
+}
+
 pub fn format_utc(t: DateTime<Utc>) -> String {
     t.format("%Y-%m-%dT%H:%M:%SZ").to_string()
 }

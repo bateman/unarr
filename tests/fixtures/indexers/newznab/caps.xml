@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<caps>
+  <server version="1.0" title="Fixture Newznab" strapline="Unarr test indexer" email="fixture@fixture.invalid" url="http://127.0.0.1:18989/newznab/" image="http://127.0.0.1:18989/newznab/logo.png"/>
+  <limits max="100" default="100"/>
+  <retention days="4000"/>
+  <registration available="no" open="no"/>
+  <searching>
+    <search available="yes" supportedParams="q"/>
+    <tv-search available="yes" supportedParams="q,tvdbid,rid,tvmazeid,imdbid,season,ep"/>
+    <movie-search available="yes" supportedParams="q,imdbid,tmdbid"/>
+    <music-search available="no" supportedParams="q"/>
+    <audio-search available="no" supportedParams="q"/>
+    <book-search available="no" supportedParams="q"/>
+  </searching>
+  <categories>
+    <category id="2000" name="Movies">
+      <subcat id="2040" name="HD"/>
+    </category>
+    <category id="5000" name="TV">
+      <subcat id="5020" name="Foreign"/>
+      <subcat id="5030" name="SD"/>
+      <subcat id="5040" name="HD"/>
+      <subcat id="5045" name="UHD"/>
+      <subcat id="5050" name="Other"/>
+      <subcat id="5070" name="Anime"/>
+      <subcat id="5080" name="Documentary"/>
+    </category>
+  </categories>
+</caps>

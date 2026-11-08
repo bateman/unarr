@@ -3,15 +3,20 @@
 
 pub mod activity;
 pub mod catalog;
+pub mod command;
 pub mod config;
+pub mod downloadclient_writes;
 pub mod episodes;
+pub mod indexer_writes;
 pub mod providers;
+pub mod queue;
+pub mod release;
 pub mod series;
 pub mod settings;
 pub mod signalr;
 pub mod system;
 
-use axum::routing::{get, post};
+use axum::routing::{delete, get, post, put};
 use axum::Router;
 
 use crate::state::AppState;
@@ -54,9 +59,13 @@ pub fn api_router(_state: &AppState) -> Router<AppState> {
         .route("/history", get(activity::history))
         .route("/history/since", get(activity::history_since))
         .route("/history/series", get(activity::history_series))
-        .route("/queue", get(activity::queue))
-        .route("/queue/status", get(activity::queue_status))
-        .route("/queue/details", get(activity::queue_details))
+        .route("/queue", get(queue::list))
+        .route("/queue/status", get(queue::status))
+        .route("/queue/details", get(queue::details))
+        .route("/queue/bulk", delete(queue::remove_many))
+        .route("/queue/grab/bulk", post(queue::grab_many))
+        .route("/queue/grab/{id}", post(queue::grab))
+        .route("/queue/{id}", delete(queue::remove))
         .route("/blocklist", get(activity::blocklist))
         .route("/config/naming", get(settings::naming))
         .route("/config/mediamanagement", get(settings::media_management))
@@ -64,12 +73,42 @@ pub fn api_router(_state: &AppState) -> Router<AppState> {
         .route("/config/naming/examples", get(settings::naming_examples))
         .route("/languageprofile", get(settings::language_profiles))
         .route("/languageprofile/{id}", get(settings::language_profile))
-        .route("/indexer", get(providers::indexers))
+        .route("/indexer", get(providers::indexers).post(indexer_writes::create))
         .route("/indexer/schema", get(providers::indexer_schema))
-        .route("/indexer/{id}", get(providers::indexer))
-        .route("/downloadclient", get(providers::download_clients))
+        .route("/indexer/test", post(indexer_writes::test))
+        .route("/indexer/testall", post(indexer_writes::test_all))
+        .route("/indexer/action/{name}", post(indexer_writes::action))
+        .route(
+            "/indexer/bulk",
+            put(indexer_writes::bulk_update).delete(indexer_writes::bulk_delete),
+        )
+        .route(
+            "/indexer/{id}",
+            get(providers::indexer)
+                .put(indexer_writes::update)
+                .delete(indexer_writes::delete),
+        )
+        .route(
+            "/downloadclient",
+            get(providers::download_clients).post(downloadclient_writes::create),
+        )
         .route("/downloadclient/schema", get(providers::download_client_schema))
-        .route("/downloadclient/{id}", get(providers::download_client))
+        .route("/downloadclient/test", post(downloadclient_writes::test))
+        .route("/downloadclient/testall", post(downloadclient_writes::test_all))
+        .route(
+            "/downloadclient/action/{name}",
+            post(downloadclient_writes::action),
+        )
+        .route(
+            "/downloadclient/bulk",
+            put(downloadclient_writes::bulk_update).delete(downloadclient_writes::bulk_delete),
+        )
+        .route(
+            "/downloadclient/{id}",
+            get(providers::download_client)
+                .put(downloadclient_writes::update)
+                .delete(downloadclient_writes::delete),
+        )
         .route("/notification", get(providers::notifications))
         .route("/notification/schema", get(providers::notification_schema))
         .route("/notification/{id}", get(providers::notification))
@@ -85,6 +124,8 @@ pub fn api_router(_state: &AppState) -> Router<AppState> {
         .route("/customformat/schema", get(providers::custom_format_schema))
         .route("/delayprofile", get(providers::delay_profiles))
         .route("/delayprofile/{id}", get(providers::delay_profile))
+        .route("/release", get(release::list).post(release::grab))
+        .route("/release/push", post(release::push))
         .route("/releaseprofile", get(providers::release_profiles))
         .route("/releaseprofile/{id}", get(providers::release_profile))
         .route("/remotepathmapping", get(providers::remote_path_mappings))
@@ -93,7 +134,8 @@ pub fn api_router(_state: &AppState) -> Router<AppState> {
         .route("/customfilter/{id}", get(providers::custom_filter))
         .route("/system/task", get(system::tasks))
         .route("/system/task/{id}", get(system::task))
-        .route("/command", get(system::commands))
+        .route("/command", get(command::list).post(command::start))
+        .route("/command/{id}", get(command::get).delete(command::cancel))
         .route("/log", get(system::log))
         .route("/update", get(system::update))
         .route("/localization", get(system::localization))

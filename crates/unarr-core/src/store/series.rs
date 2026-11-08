@@ -60,7 +60,9 @@ pub fn insert(conn: &Connection, s: &Series) -> anyhow::Result<()> {
     Ok(())
 }
 
-fn from_row(row: &Row) -> anyhow::Result<Series> {
+/// A row decoded; the cast (`actors`, the largest JSON column and one no
+/// resource carries) is parsed only when asked for.
+fn from_row(row: &Row, with_actors: bool) -> anyhow::Result<Series> {
     Ok(Series {
         id: row.get("id")?,
         tvdb_id: row.get("tvdb_id")?,
@@ -79,7 +81,11 @@ fn from_row(row: &Row) -> anyhow::Result<Series> {
         certification: row.get("certification")?,
         images: from_json::<Vec<Image>>(row.get("images")?)?,
         genres: from_json::<Vec<String>>(row.get("genres")?)?,
-        actors: from_json(row.get("actors")?)?,
+        actors: if with_actors {
+            from_json(row.get("actors")?)?
+        } else {
+            serde_json::Value::Array(Vec::new())
+        },
         path: row.get("path")?,
         monitored: row.get("monitored")?,
         season_folder: row.get("season_folder")?,
@@ -165,13 +171,15 @@ fn attach_children(conn: &Connection, series: &mut [Series]) -> anyhow::Result<(
     Ok(())
 }
 
-/// Every series, by id.
+/// Every series, by id, without the cast: `actors` is the largest JSON
+/// column and nothing that lists series reads it. A series loaded here (or
+/// by [`get_many`]) must not be written back whole, or its cast is lost.
 pub fn list(conn: &Connection) -> anyhow::Result<Vec<Series>> {
     let mut stmt = conn.prepare("SELECT * FROM series ORDER BY id")?;
     let mut out = Vec::new();
     let mut rows = stmt.query([])?;
     while let Some(row) = rows.next()? {
-        out.push(from_row(row)?);
+        out.push(from_row(row, false)?);
     }
     attach_children(conn, &mut out)?;
     Ok(out)
@@ -183,7 +191,7 @@ pub fn get(conn: &Connection, id: i64) -> anyhow::Result<Option<Series>> {
     let Some(row) = rows.next()? else {
         return Ok(None);
     };
-    let mut out = vec![from_row(row)?];
+    let mut out = vec![from_row(row, true)?];
     drop(rows);
     attach_children(conn, &mut out)?;
     Ok(out.pop())
@@ -201,7 +209,7 @@ pub fn get_many(conn: &Connection, ids: &[i64]) -> anyhow::Result<Vec<Series>> {
     let mut out = Vec::new();
     let mut rows = stmt.query(params![json])?;
     while let Some(row) = rows.next()? {
-        out.push(from_row(row)?);
+        out.push(from_row(row, false)?);
     }
     drop(rows);
     attach_children(conn, &mut out)?;
@@ -210,6 +218,83 @@ pub fn get_many(conn: &Connection, ids: &[i64]) -> anyhow::Result<Vec<Series>> {
 
 pub fn count(conn: &Connection) -> anyhow::Result<i64> {
     Ok(conn.query_row("SELECT count(*) FROM series", [], |r| r.get(0))?)
+}
+
+fn query_series(
+    conn: &Connection,
+    sql: &str,
+    params: &[&dyn rusqlite::ToSql],
+) -> anyhow::Result<Vec<Series>> {
+    let mut stmt = conn.prepare(sql)?;
+    let mut rows = stmt.query(params)?;
+    let mut out = Vec::new();
+    while let Some(row) = rows.next()? {
+        out.push(from_row(row, false)?);
+    }
+    drop(rows);
+    attach_children(conn, &mut out)?;
+    Ok(out)
+}
+
+/// `SeriesRepository.FindByTitle`: every series with this clean title (the
+/// caller decides what more than one means).
+pub fn find_by_clean_title(conn: &Connection, clean_title: &str) -> anyhow::Result<Vec<Series>> {
+    query_series(
+        conn,
+        "SELECT * FROM series WHERE clean_title = ?1 ORDER BY id",
+        &[&clean_title.to_lowercase()],
+    )
+}
+
+pub fn find_by_clean_title_and_year(
+    conn: &Connection,
+    clean_title: &str,
+    year: i64,
+) -> anyhow::Result<Vec<Series>> {
+    query_series(
+        conn,
+        "SELECT * FROM series WHERE clean_title = ?1 AND year = ?2 ORDER BY id",
+        &[&clean_title.to_lowercase(), &year],
+    )
+}
+
+/// `FindByTitleInexact`: series whose clean title is contained in the given one.
+pub fn find_by_clean_title_inexact(conn: &Connection, clean_title: &str) -> anyhow::Result<Vec<Series>> {
+    query_series(
+        conn,
+        "SELECT * FROM series WHERE instr(?1, clean_title) > 0 ORDER BY id",
+        &[&clean_title],
+    )
+}
+
+pub fn find_by_tvdb_id(conn: &Connection, tvdb_id: i64) -> anyhow::Result<Option<Series>> {
+    Ok(query_series(
+        conn,
+        "SELECT * FROM series WHERE tvdb_id = ?1 ORDER BY id",
+        &[&tvdb_id],
+    )?
+    .into_iter()
+    .next())
+}
+
+pub fn find_by_tv_rage_id(conn: &Connection, tv_rage_id: i64) -> anyhow::Result<Option<Series>> {
+    Ok(query_series(
+        conn,
+        "SELECT * FROM series WHERE tv_rage_id = ?1 ORDER BY id",
+        &[&tv_rage_id],
+    )?
+    .into_iter()
+    .next())
+}
+
+pub fn find_by_imdb_id(conn: &Connection, imdb_id: &str) -> anyhow::Result<Option<Series>> {
+    Ok(query_series(
+        conn,
+        "SELECT * FROM series WHERE imdb_id = ?1 ORDER BY id",
+        &[&imdb_id],
+    )?
+    .into_iter()
+    .next())
 }
 
 #[cfg(test)]

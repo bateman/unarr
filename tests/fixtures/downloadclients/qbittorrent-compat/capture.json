@@ -1,0 +1,1864 @@
+[
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 1,
+  "time": "2026-11-07T20:34:27Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/preferences"
+  },
+  "response": {
+   "body": "{\"save_path\": \"/downloads/emule\", \"temp_path\": \"/downloads/emule/.incomplete\", \"dht\": true, \"max_ratio_enabled\": false, \"max_ratio\": -1, \"max_seeding_time_enabled\": false, \"max_seeding_time\": -1, \"max_inactive_seeding_time_enabled\": false, \"max_inactive_seeding_time\": -1}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 2,
+  "time": "2026-11-07T20:34:28Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/categories"
+  },
+  "response": {
+   "body": "{\"all\": {\"name\": \"all\", \"savePath\": \"/downloads/emule\"}, \"tv\": {\"name\": \"tv\", \"savePath\": \"/downloads/emule\"}, \"music\": {\"name\": \"music\", \"savePath\": \"/downloads/emule\"}, \"movies\": {\"name\": \"movies\", \"savePath\": \"/downloads/emule\"}}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 3,
+  "time": "2026-11-07T20:34:28Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 4,
+  "time": "2026-11-07T20:35:03Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/preferences"
+  },
+  "response": {
+   "body": "{\"save_path\": \"/downloads/emule\", \"temp_path\": \"/downloads/emule/.incomplete\", \"dht\": true, \"max_ratio_enabled\": false, \"max_ratio\": -1, \"max_seeding_time_enabled\": false, \"max_seeding_time\": -1, \"max_inactive_seeding_time_enabled\": false, \"max_inactive_seeding_time\": -1}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 5,
+  "time": "2026-11-07T20:35:03Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/info?category=tv"
+  },
+  "response": {
+   "body": "[]",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 6,
+  "time": "2026-11-07T20:35:03Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 7,
+  "time": "2026-11-07T20:36:33Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/preferences"
+  },
+  "response": {
+   "body": "{\"save_path\": \"/downloads/emule\", \"temp_path\": \"/downloads/emule/.incomplete\", \"dht\": true, \"max_ratio_enabled\": false, \"max_ratio\": -1, \"max_seeding_time_enabled\": false, \"max_seeding_time\": -1, \"max_inactive_seeding_time_enabled\": false, \"max_inactive_seeding_time\": -1}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 8,
+  "time": "2026-11-07T20:36:33Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/info?category=tv"
+  },
+  "response": {
+   "body": "[]",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 9,
+  "time": "2026-11-07T20:36:33Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 10,
+  "time": "2026-11-07T20:38:03Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/preferences"
+  },
+  "response": {
+   "body": "{\"save_path\": \"/downloads/emule\", \"temp_path\": \"/downloads/emule/.incomplete\", \"dht\": true, \"max_ratio_enabled\": false, \"max_ratio\": -1, \"max_seeding_time_enabled\": false, \"max_seeding_time\": -1, \"max_inactive_seeding_time_enabled\": false, \"max_inactive_seeding_time\": -1}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 11,
+  "time": "2026-11-07T20:38:03Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/info?category=tv"
+  },
+  "response": {
+   "body": "[]",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 12,
+  "time": "2026-11-07T20:38:03Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 13,
+  "time": "2026-11-07T20:39:33Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/preferences"
+  },
+  "response": {
+   "body": "{\"save_path\": \"/downloads/emule\", \"temp_path\": \"/downloads/emule/.incomplete\", \"dht\": true, \"max_ratio_enabled\": false, \"max_ratio\": -1, \"max_seeding_time_enabled\": false, \"max_seeding_time\": -1, \"max_inactive_seeding_time_enabled\": false, \"max_inactive_seeding_time\": -1}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 14,
+  "time": "2026-11-07T20:39:33Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/info?category=tv"
+  },
+  "response": {
+   "body": "[]",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 15,
+  "time": "2026-11-07T20:39:33Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 16,
+  "time": "2026-11-07T20:41:03Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 17,
+  "time": "2026-11-07T20:41:03Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 18,
+  "time": "2026-11-07T20:41:03Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/preferences"
+  },
+  "response": {
+   "body": "{\"save_path\": \"/downloads/emule\", \"temp_path\": \"/downloads/emule/.incomplete\", \"dht\": true, \"max_ratio_enabled\": false, \"max_ratio\": -1, \"max_seeding_time_enabled\": false, \"max_seeding_time\": -1, \"max_inactive_seeding_time_enabled\": false, \"max_inactive_seeding_time\": -1}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 19,
+  "time": "2026-11-07T20:41:03Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/info?category=tv"
+  },
+  "response": {
+   "body": "[]",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 20,
+  "time": "2026-11-07T20:41:03Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 21,
+  "time": "2026-11-07T20:42:33Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/preferences"
+  },
+  "response": {
+   "body": "{\"save_path\": \"/downloads/emule\", \"temp_path\": \"/downloads/emule/.incomplete\", \"dht\": true, \"max_ratio_enabled\": false, \"max_ratio\": -1, \"max_seeding_time_enabled\": false, \"max_seeding_time\": -1, \"max_inactive_seeding_time_enabled\": false, \"max_inactive_seeding_time\": -1}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 22,
+  "time": "2026-11-07T20:42:33Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/info?category=tv"
+  },
+  "response": {
+   "body": "[]",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 23,
+  "time": "2026-11-07T20:42:33Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 24,
+  "time": "2026-11-07T20:44:04Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/preferences"
+  },
+  "response": {
+   "body": "{\"save_path\": \"/downloads/emule\", \"temp_path\": \"/downloads/emule/.incomplete\", \"dht\": true, \"max_ratio_enabled\": false, \"max_ratio\": -1, \"max_seeding_time_enabled\": false, \"max_seeding_time\": -1, \"max_inactive_seeding_time_enabled\": false, \"max_inactive_seeding_time\": -1}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 25,
+  "time": "2026-11-07T20:44:04Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/info?category=tv"
+  },
+  "response": {
+   "body": "[]",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 26,
+  "time": "2026-11-07T20:44:04Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 27,
+  "time": "2026-11-07T20:45:34Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/preferences"
+  },
+  "response": {
+   "body": "{\"save_path\": \"/downloads/emule\", \"temp_path\": \"/downloads/emule/.incomplete\", \"dht\": true, \"max_ratio_enabled\": false, \"max_ratio\": -1, \"max_seeding_time_enabled\": false, \"max_seeding_time\": -1, \"max_inactive_seeding_time_enabled\": false, \"max_inactive_seeding_time\": -1}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 28,
+  "time": "2026-11-07T20:45:34Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/info?category=tv"
+  },
+  "response": {
+   "body": "[]",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 29,
+  "time": "2026-11-07T20:45:34Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 30,
+  "time": "2026-11-07T20:47:04Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/preferences"
+  },
+  "response": {
+   "body": "{\"save_path\": \"/downloads/emule\", \"temp_path\": \"/downloads/emule/.incomplete\", \"dht\": true, \"max_ratio_enabled\": false, \"max_ratio\": -1, \"max_seeding_time_enabled\": false, \"max_seeding_time\": -1, \"max_inactive_seeding_time_enabled\": false, \"max_inactive_seeding_time\": -1}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 31,
+  "time": "2026-11-07T20:47:04Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/info?category=tv"
+  },
+  "response": {
+   "body": "[]",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 32,
+  "time": "2026-11-07T20:47:04Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 33,
+  "time": "2026-11-07T20:48:34Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/preferences"
+  },
+  "response": {
+   "body": "{\"save_path\": \"/downloads/emule\", \"temp_path\": \"/downloads/emule/.incomplete\", \"dht\": true, \"max_ratio_enabled\": false, \"max_ratio\": -1, \"max_seeding_time_enabled\": false, \"max_seeding_time\": -1, \"max_inactive_seeding_time_enabled\": false, \"max_inactive_seeding_time\": -1}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 34,
+  "time": "2026-11-07T20:48:34Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/info?category=tv"
+  },
+  "response": {
+   "body": "[]",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 35,
+  "time": "2026-11-07T20:48:34Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 36,
+  "time": "2026-11-07T20:50:04Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/preferences"
+  },
+  "response": {
+   "body": "{\"save_path\": \"/downloads/emule\", \"temp_path\": \"/downloads/emule/.incomplete\", \"dht\": true, \"max_ratio_enabled\": false, \"max_ratio\": -1, \"max_seeding_time_enabled\": false, \"max_seeding_time\": -1, \"max_inactive_seeding_time_enabled\": false, \"max_inactive_seeding_time\": -1}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 37,
+  "time": "2026-11-07T20:50:04Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/info?category=tv"
+  },
+  "response": {
+   "body": "[]",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 38,
+  "time": "2026-11-07T20:50:04Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 39,
+  "time": "2026-11-07T20:51:34Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 40,
+  "time": "2026-11-07T20:51:34Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 41,
+  "time": "2026-11-07T20:51:34Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/preferences"
+  },
+  "response": {
+   "body": "{\"save_path\": \"/downloads/emule\", \"temp_path\": \"/downloads/emule/.incomplete\", \"dht\": true, \"max_ratio_enabled\": false, \"max_ratio\": -1, \"max_seeding_time_enabled\": false, \"max_seeding_time\": -1, \"max_inactive_seeding_time_enabled\": false, \"max_inactive_seeding_time\": -1}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 42,
+  "time": "2026-11-07T20:51:34Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/info?category=tv"
+  },
+  "response": {
+   "body": "[]",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 43,
+  "time": "2026-11-07T20:51:34Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 44,
+  "time": "2026-11-07T20:53:04Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/preferences"
+  },
+  "response": {
+   "body": "{\"save_path\": \"/downloads/emule\", \"temp_path\": \"/downloads/emule/.incomplete\", \"dht\": true, \"max_ratio_enabled\": false, \"max_ratio\": -1, \"max_seeding_time_enabled\": false, \"max_seeding_time\": -1, \"max_inactive_seeding_time_enabled\": false, \"max_inactive_seeding_time\": -1}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 45,
+  "time": "2026-11-07T20:53:04Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/info?category=tv"
+  },
+  "response": {
+   "body": "[]",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 46,
+  "time": "2026-11-07T20:53:04Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 47,
+  "time": "2026-11-07T20:54:34Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/preferences"
+  },
+  "response": {
+   "body": "{\"save_path\": \"/downloads/emule\", \"temp_path\": \"/downloads/emule/.incomplete\", \"dht\": true, \"max_ratio_enabled\": false, \"max_ratio\": -1, \"max_seeding_time_enabled\": false, \"max_seeding_time\": -1, \"max_inactive_seeding_time_enabled\": false, \"max_inactive_seeding_time\": -1}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 48,
+  "time": "2026-11-07T20:54:34Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/info?category=tv"
+  },
+  "response": {
+   "body": "[]",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 49,
+  "time": "2026-11-07T20:54:34Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 50,
+  "time": "2026-11-07T20:56:04Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/preferences"
+  },
+  "response": {
+   "body": "{\"save_path\": \"/downloads/emule\", \"temp_path\": \"/downloads/emule/.incomplete\", \"dht\": true, \"max_ratio_enabled\": false, \"max_ratio\": -1, \"max_seeding_time_enabled\": false, \"max_seeding_time\": -1, \"max_inactive_seeding_time_enabled\": false, \"max_inactive_seeding_time\": -1}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 51,
+  "time": "2026-11-07T20:56:04Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/info?category=tv"
+  },
+  "response": {
+   "body": "[]",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 52,
+  "time": "2026-11-07T20:56:04Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 53,
+  "time": "2026-11-07T20:57:35Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/preferences"
+  },
+  "response": {
+   "body": "{\"save_path\": \"/downloads/emule\", \"temp_path\": \"/downloads/emule/.incomplete\", \"dht\": true, \"max_ratio_enabled\": false, \"max_ratio\": -1, \"max_seeding_time_enabled\": false, \"max_seeding_time\": -1, \"max_inactive_seeding_time_enabled\": false, \"max_inactive_seeding_time\": -1}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 54,
+  "time": "2026-11-07T20:57:35Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/info?category=tv"
+  },
+  "response": {
+   "body": "[]",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 55,
+  "time": "2026-11-07T20:57:35Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 56,
+  "time": "2026-11-07T20:59:05Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/preferences"
+  },
+  "response": {
+   "body": "{\"save_path\": \"/downloads/emule\", \"temp_path\": \"/downloads/emule/.incomplete\", \"dht\": true, \"max_ratio_enabled\": false, \"max_ratio\": -1, \"max_seeding_time_enabled\": false, \"max_seeding_time\": -1, \"max_inactive_seeding_time_enabled\": false, \"max_inactive_seeding_time\": -1}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 57,
+  "time": "2026-11-07T20:59:05Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/info?category=tv"
+  },
+  "response": {
+   "body": "[]",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 58,
+  "time": "2026-11-07T20:59:05Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 59,
+  "time": "2026-11-07T21:00:35Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/preferences"
+  },
+  "response": {
+   "body": "{\"save_path\": \"/downloads/emule\", \"temp_path\": \"/downloads/emule/.incomplete\", \"dht\": true, \"max_ratio_enabled\": false, \"max_ratio\": -1, \"max_seeding_time_enabled\": false, \"max_seeding_time\": -1, \"max_inactive_seeding_time_enabled\": false, \"max_inactive_seeding_time\": -1}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 60,
+  "time": "2026-11-07T21:00:35Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/info?category=tv"
+  },
+  "response": {
+   "body": "[]",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 61,
+  "time": "2026-11-07T21:00:35Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 62,
+  "time": "2026-11-07T21:02:05Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 63,
+  "time": "2026-11-07T21:02:05Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 64,
+  "time": "2026-11-07T21:02:05Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/preferences"
+  },
+  "response": {
+   "body": "{\"save_path\": \"/downloads/emule\", \"temp_path\": \"/downloads/emule/.incomplete\", \"dht\": true, \"max_ratio_enabled\": false, \"max_ratio\": -1, \"max_seeding_time_enabled\": false, \"max_seeding_time\": -1, \"max_inactive_seeding_time_enabled\": false, \"max_inactive_seeding_time\": -1}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 65,
+  "time": "2026-11-07T21:02:05Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/info?category=tv"
+  },
+  "response": {
+   "body": "[]",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 66,
+  "time": "2026-11-07T21:02:05Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 67,
+  "time": "2026-11-07T21:03:35Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/preferences"
+  },
+  "response": {
+   "body": "{\"save_path\": \"/downloads/emule\", \"temp_path\": \"/downloads/emule/.incomplete\", \"dht\": true, \"max_ratio_enabled\": false, \"max_ratio\": -1, \"max_seeding_time_enabled\": false, \"max_seeding_time\": -1, \"max_inactive_seeding_time_enabled\": false, \"max_inactive_seeding_time\": -1}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 68,
+  "time": "2026-11-07T21:03:35Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/info?category=tv"
+  },
+  "response": {
+   "body": "[]",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 69,
+  "time": "2026-11-07T21:03:35Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 70,
+  "time": "2026-11-07T21:05:05Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/preferences"
+  },
+  "response": {
+   "body": "{\"save_path\": \"/downloads/emule\", \"temp_path\": \"/downloads/emule/.incomplete\", \"dht\": true, \"max_ratio_enabled\": false, \"max_ratio\": -1, \"max_seeding_time_enabled\": false, \"max_seeding_time\": -1, \"max_inactive_seeding_time_enabled\": false, \"max_inactive_seeding_time\": -1}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 71,
+  "time": "2026-11-07T21:05:05Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/info?category=tv"
+  },
+  "response": {
+   "body": "[]",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 72,
+  "time": "2026-11-07T21:05:05Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 73,
+  "time": "2026-11-07T21:06:35Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/preferences"
+  },
+  "response": {
+   "body": "{\"save_path\": \"/downloads/emule\", \"temp_path\": \"/downloads/emule/.incomplete\", \"dht\": true, \"max_ratio_enabled\": false, \"max_ratio\": -1, \"max_seeding_time_enabled\": false, \"max_seeding_time\": -1, \"max_inactive_seeding_time_enabled\": false, \"max_inactive_seeding_time\": -1}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 74,
+  "time": "2026-11-07T21:06:35Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/info?category=tv"
+  },
+  "response": {
+   "body": "[]",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 75,
+  "time": "2026-11-07T21:06:35Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 76,
+  "time": "2026-11-07T21:08:05Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/preferences"
+  },
+  "response": {
+   "body": "{\"save_path\": \"/downloads/emule\", \"temp_path\": \"/downloads/emule/.incomplete\", \"dht\": true, \"max_ratio_enabled\": false, \"max_ratio\": -1, \"max_seeding_time_enabled\": false, \"max_seeding_time\": -1, \"max_inactive_seeding_time_enabled\": false, \"max_inactive_seeding_time\": -1}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 77,
+  "time": "2026-11-07T21:08:05Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/info?category=tv"
+  },
+  "response": {
+   "body": "[]",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 78,
+  "time": "2026-11-07T21:08:05Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 79,
+  "time": "2026-11-07T21:09:35Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/preferences"
+  },
+  "response": {
+   "body": "{\"save_path\": \"/downloads/emule\", \"temp_path\": \"/downloads/emule/.incomplete\", \"dht\": true, \"max_ratio_enabled\": false, \"max_ratio\": -1, \"max_seeding_time_enabled\": false, \"max_seeding_time\": -1, \"max_inactive_seeding_time_enabled\": false, \"max_inactive_seeding_time\": -1}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 80,
+  "time": "2026-11-07T21:09:35Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/info?category=tv"
+  },
+  "response": {
+   "body": "[]",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 81,
+  "time": "2026-11-07T21:09:35Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 82,
+  "time": "2026-11-07T21:11:05Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/preferences"
+  },
+  "response": {
+   "body": "{\"save_path\": \"/downloads/emule\", \"temp_path\": \"/downloads/emule/.incomplete\", \"dht\": true, \"max_ratio_enabled\": false, \"max_ratio\": -1, \"max_seeding_time_enabled\": false, \"max_seeding_time\": -1, \"max_inactive_seeding_time_enabled\": false, \"max_inactive_seeding_time\": -1}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 83,
+  "time": "2026-11-07T21:11:05Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/info?category=tv"
+  },
+  "response": {
+   "body": "[]",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 84,
+  "time": "2026-11-07T21:11:05Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 85,
+  "time": "2026-11-07T21:12:35Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 86,
+  "time": "2026-11-07T21:12:35Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 87,
+  "time": "2026-11-07T21:12:35Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/preferences"
+  },
+  "response": {
+   "body": "{\"save_path\": \"/downloads/emule\", \"temp_path\": \"/downloads/emule/.incomplete\", \"dht\": true, \"max_ratio_enabled\": false, \"max_ratio\": -1, \"max_seeding_time_enabled\": false, \"max_seeding_time\": -1, \"max_inactive_seeding_time_enabled\": false, \"max_inactive_seeding_time\": -1}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 88,
+  "time": "2026-11-07T21:12:35Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/info?category=tv"
+  },
+  "response": {
+   "body": "[]",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 89,
+  "time": "2026-11-07T21:12:35Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 90,
+  "time": "2026-11-07T21:14:05Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/preferences"
+  },
+  "response": {
+   "body": "{\"save_path\": \"/downloads/emule\", \"temp_path\": \"/downloads/emule/.incomplete\", \"dht\": true, \"max_ratio_enabled\": false, \"max_ratio\": -1, \"max_seeding_time_enabled\": false, \"max_seeding_time\": -1, \"max_inactive_seeding_time_enabled\": false, \"max_inactive_seeding_time\": -1}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 91,
+  "time": "2026-11-07T21:14:05Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/info?category=tv"
+  },
+  "response": {
+   "body": "[]",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 92,
+  "time": "2026-11-07T21:14:05Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 93,
+  "time": "2026-11-07T21:15:35Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/preferences"
+  },
+  "response": {
+   "body": "{\"save_path\": \"/downloads/emule\", \"temp_path\": \"/downloads/emule/.incomplete\", \"dht\": true, \"max_ratio_enabled\": false, \"max_ratio\": -1, \"max_seeding_time_enabled\": false, \"max_seeding_time\": -1, \"max_inactive_seeding_time_enabled\": false, \"max_inactive_seeding_time\": -1}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 94,
+  "time": "2026-11-07T21:15:35Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/info?category=tv"
+  },
+  "response": {
+   "body": "[]",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 95,
+  "time": "2026-11-07T21:15:35Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 96,
+  "time": "2026-11-07T21:17:06Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/preferences"
+  },
+  "response": {
+   "body": "{\"save_path\": \"/downloads/emule\", \"temp_path\": \"/downloads/emule/.incomplete\", \"dht\": true, \"max_ratio_enabled\": false, \"max_ratio\": -1, \"max_seeding_time_enabled\": false, \"max_seeding_time\": -1, \"max_inactive_seeding_time_enabled\": false, \"max_inactive_seeding_time\": -1}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 97,
+  "time": "2026-11-07T21:17:06Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/info?category=tv"
+  },
+  "response": {
+   "body": "[]",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 98,
+  "time": "2026-11-07T21:17:06Z"
+ }
+]

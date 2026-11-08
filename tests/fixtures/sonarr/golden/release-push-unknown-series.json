@@ -1,0 +1,76 @@
+{
+  "body": [
+    {
+      "absoluteEpisodeNumbers": [],
+      "age": 610,
+      "ageHours": 14657.739134706528,
+      "ageMinutes": 879464.3480824,
+      "approved": false,
+      "customFormatScore": 0,
+      "customFormats": [],
+      "downloadAllowed": false,
+      "downloadUrl": "http://127.0.0.1:18989/newznab/download/push-some-other-show.nzb",
+      "episodeNumbers": [
+        4
+      ],
+      "episodeRequested": false,
+      "fullSeason": false,
+      "guid": "PUSH-http://127.0.0.1:18989/newznab/download/push-some-other-show.nzb",
+      "indexer": "Mock Newznab (Prowlarr)",
+      "indexerFlags": 0,
+      "indexerId": 20,
+      "isAbsoluteNumbering": false,
+      "isDaily": false,
+      "isPossibleSpecialEpisode": false,
+      "languageWeight": 0,
+      "languages": [
+        {
+          "id": 0,
+          "name": "Unknown"
+        }
+      ],
+      "mappedAbsoluteEpisodeNumbers": [],
+      "mappedEpisodeInfo": [],
+      "mappedEpisodeNumbers": [],
+      "protocol": "usenet",
+      "publishDate": "2025-03-06T22:00:00Z",
+      "quality": {
+        "quality": {
+          "id": 4,
+          "name": "HDTV-720p",
+          "resolution": 720,
+          "source": "television"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityWeight": 601,
+      "rejected": true,
+      "rejections": [
+        "Unknown Series"
+      ],
+      "releaseGroup": "GRP",
+      "releaseHash": "",
+      "releaseWeight": 0,
+      "sceneSource": false,
+      "seasonNumber": 3,
+      "seriesTitle": "Some Other Show",
+      "size": 734003200,
+      "special": false,
+      "temporarilyRejected": false,
+      "title": "Some.Other.Show.S03E04.720p.HDTV.x264-GRP",
+      "tvRageId": 0,
+      "tvdbId": 0
+    }
+  ],
+  "recordedAt": "2026-11-07T15:44:20Z",
+  "request": {
+    "body": "bodies/release-push-unknown.json",
+    "method": "POST",
+    "path": "/api/v3/release/push"
+  },
+  "status": 200
+}

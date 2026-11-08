@@ -1,0 +1,39 @@
+{
+  "body": [
+    {
+      "attemptedValue": "mock",
+      "errorMessage": "Username must be empty when using API Key.",
+      "isWarning": false,
+      "propertyName": "Username",
+      "severity": "error"
+    },
+    {
+      "attemptedValue": "mock",
+      "errorMessage": "Password must be empty when using API Key.",
+      "isWarning": false,
+      "propertyName": "Password",
+      "severity": "error"
+    },
+    {
+      "attemptedValue": "/tv/",
+      "errorMessage": "Can not contain '\\', '//', or start/end with '/'",
+      "isWarning": false,
+      "propertyName": "TvCategory",
+      "severity": "error"
+    },
+    {
+      "attemptedValue": "a//b",
+      "errorMessage": "Can not contain '\\', '//', or start/end with '/'",
+      "isWarning": false,
+      "propertyName": "TvImportedCategory",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-07T15:44:21Z",
+  "request": {
+    "body": "bodies/downloadclient-invalid-torrent-settings.json",
+    "method": "POST",
+    "path": "/api/v3/downloadclient"
+  },
+  "status": 400
+}

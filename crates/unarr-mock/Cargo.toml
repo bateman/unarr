@@ -1,0 +1,23 @@
+[package]
+name = "unarr-mock"
+description = "Test doubles for the indexers and download clients Unarr talks to, answering from tests/fixtures"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+publish = false
+
+[dependencies]
+anyhow.workspace = true
+unarr-core.workspace = true
+base64 = "0.22"
+axum = { workspace = true, features = ["query", "json", "tokio", "http1"] }
+serde_json.workspace = true
+tokio = { workspace = true, features = ["net"] }
+tracing.workspace = true
+
+[dev-dependencies]
+unarr-import.workspace = true
+chrono.workspace = true
+tokio = { workspace = true, features = ["rt-multi-thread", "macros"] }

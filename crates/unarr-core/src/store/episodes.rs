@@ -1,7 +1,7 @@
 //! Episodes and episode files.
 
 use chrono::{DateTime, Utc};
-use rusqlite::{named_params, Connection, Row};
+use rusqlite::{named_params, params, Connection, Row};
 
 use super::paging::Paging;
 use super::{from_json, parse_date, parse_enum, parse_ts, parse_ts_required, quality_from_row, to_json, ts};
@@ -304,6 +304,103 @@ pub fn list_files_by_ids(conn: &Connection, ids: &[i64]) -> anyhow::Result<Vec<E
 
 pub fn get_file(conn: &Connection, id: i64) -> anyhow::Result<Option<EpisodeFile>> {
     Ok(query_files(conn, "SELECT * FROM episode_files WHERE id = ?1", &[&id])?.pop())
+}
+
+/// `EpisodeRepository.Find(seriesId, season, episodeNumber)`.
+pub fn find_episode(
+    conn: &Connection,
+    series_id: i64,
+    season: i64,
+    number: i64,
+) -> anyhow::Result<Option<Episode>> {
+    Ok(query_episodes(
+        conn,
+        "SELECT * FROM episodes WHERE series_id = ?1 AND season_number = ?2 AND episode_number = ?3 ORDER BY id",
+        &[&series_id, &season, &number],
+    )?
+    .into_iter()
+    .next())
+}
+
+/// `Find(seriesId, absoluteEpisodeNumber)`.
+pub fn find_episode_by_absolute(
+    conn: &Connection,
+    series_id: i64,
+    absolute: i64,
+) -> anyhow::Result<Option<Episode>> {
+    Ok(query_episodes(
+        conn,
+        "SELECT * FROM episodes WHERE series_id = ?1 AND absolute_episode_number = ?2 ORDER BY id",
+        &[&series_id, &absolute],
+    )?
+    .into_iter()
+    .next())
+}
+
+/// `FindEpisodesBySceneNumbering(seriesId, seasonNumber, episodeNumber)`.
+pub fn find_episodes_by_scene_numbering(
+    conn: &Connection,
+    series_id: i64,
+    scene_season: i64,
+    scene_episode: i64,
+) -> anyhow::Result<Vec<Episode>> {
+    query_episodes(
+        conn,
+        "SELECT * FROM episodes WHERE series_id = ?1 AND scene_season_number = ?2 AND scene_episode_number = ?3 ORDER BY id",
+        &[&series_id, &scene_season, &scene_episode],
+    )
+}
+
+/// `FindEpisodesBySceneNumbering(seriesId, sceneAbsoluteEpisodeNumber)`.
+pub fn find_episodes_by_scene_absolute(
+    conn: &Connection,
+    series_id: i64,
+    scene_absolute: i64,
+) -> anyhow::Result<Vec<Episode>> {
+    query_episodes(
+        conn,
+        "SELECT * FROM episodes WHERE series_id = ?1 AND scene_absolute_episode_number = ?2 ORDER BY id",
+        &[&series_id, &scene_absolute],
+    )
+}
+
+/// `GetEpisodesBySceneSeason`.
+pub fn list_episodes_by_scene_season(
+    conn: &Connection,
+    series_id: i64,
+    scene_season: i64,
+) -> anyhow::Result<Vec<Episode>> {
+    query_episodes(
+        conn,
+        "SELECT * FROM episodes WHERE series_id = ?1 AND scene_season_number = ?2 ORDER BY id",
+        &[&series_id, &scene_season],
+    )
+}
+
+/// `Find(seriesId, date)`: the episodes airing on a `YYYY-MM-DD` date.
+pub fn list_episodes_by_air_date(
+    conn: &Connection,
+    series_id: i64,
+    air_date: &str,
+) -> anyhow::Result<Vec<Episode>> {
+    query_episodes(
+        conn,
+        "SELECT * FROM episodes WHERE series_id = ?1 AND air_date = ?2 ORDER BY id",
+        &[&series_id, &air_date],
+    )
+}
+
+/// `UpdateLastSearchTime`.
+pub fn set_last_search_time(conn: &Connection, ids: &[i64], at: DateTime<Utc>) -> anyhow::Result<()> {
+    if ids.is_empty() {
+        return Ok(());
+    }
+    let json = serde_json::to_string(ids)?;
+    conn.execute(
+        "UPDATE episodes SET last_search_time = ?1 WHERE id IN (SELECT value FROM json_each(?2))",
+        params![ts(Some(at)), json],
+    )?;
+    Ok(())
 }
 
 #[cfg(test)]

@@ -1,0 +1,61 @@
+{
+  "enable": true,
+  "protocol": "torrent",
+  "priority": 1,
+  "removeCompletedDownloads": true,
+  "removeFailedDownloads": true,
+  "name": "Unreachable Transmission",
+  "implementation": "Transmission",
+  "configContract": "TransmissionSettings",
+  "tags": [],
+  "fields": [
+    {
+      "name": "host",
+      "value": "127.0.0.1"
+    },
+    {
+      "name": "port",
+      "value": 1
+    },
+    {
+      "name": "useSsl",
+      "value": false
+    },
+    {
+      "name": "urlBase",
+      "value": "/transmission/"
+    },
+    {
+      "name": "username",
+      "value": "mock"
+    },
+    {
+      "name": "password",
+      "value": "mock"
+    },
+    {
+      "name": "tvCategory",
+      "value": "tv"
+    },
+    {
+      "name": "tvImportedCategory",
+      "value": ""
+    },
+    {
+      "name": "tvDirectory",
+      "value": ""
+    },
+    {
+      "name": "recentTvPriority",
+      "value": 0
+    },
+    {
+      "name": "olderTvPriority",
+      "value": 0
+    },
+    {
+      "name": "addPaused",
+      "value": false
+    }
+  ]
+}
