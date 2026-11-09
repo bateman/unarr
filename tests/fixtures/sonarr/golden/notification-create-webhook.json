@@ -1,0 +1,115 @@
+{
+  "body": {
+    "configContract": "WebhookSettings",
+    "fields": [
+      {
+        "advanced": false,
+        "isFloat": false,
+        "label": "Webhook URL",
+        "name": "url",
+        "order": 0,
+        "privacy": "normal",
+        "type": "url",
+        "value": "http://127.0.0.1:18989/webhook"
+      },
+      {
+        "advanced": false,
+        "helpText": "Which HTTP method to use submit to the Webservice",
+        "isFloat": false,
+        "label": "Method",
+        "name": "method",
+        "order": 1,
+        "privacy": "normal",
+        "selectOptions": [
+          {
+            "name": "POST",
+            "order": 1,
+            "value": 1
+          },
+          {
+            "name": "PUT",
+            "order": 2,
+            "value": 2
+          }
+        ],
+        "type": "select",
+        "value": 1
+      },
+      {
+        "advanced": false,
+        "isFloat": false,
+        "label": "Username",
+        "name": "username",
+        "order": 2,
+        "privacy": "userName",
+        "type": "textbox",
+        "value": "hook"
+      },
+      {
+        "advanced": false,
+        "isFloat": false,
+        "label": "Password",
+        "name": "password",
+        "order": 3,
+        "privacy": "password",
+        "type": "password",
+        "value": "********"
+      },
+      {
+        "advanced": true,
+        "isFloat": false,
+        "label": "Headers",
+        "name": "headers",
+        "order": 4,
+        "privacy": "normal",
+        "type": "keyValueList",
+        "value": [
+          {
+            "key": "X-Fixture",
+            "value": "yes"
+          }
+        ]
+      }
+    ],
+    "id": 5,
+    "implementation": "Webhook",
+    "implementationName": "Webhook",
+    "includeHealthWarnings": false,
+    "infoLink": "https://wiki.servarr.com/sonarr/supported#webhook",
+    "name": "Mock Webhook",
+    "onApplicationUpdate": true,
+    "onDownload": true,
+    "onEpisodeFileDelete": true,
+    "onEpisodeFileDeleteForUpgrade": true,
+    "onGrab": true,
+    "onHealthIssue": true,
+    "onHealthRestored": true,
+    "onImportComplete": true,
+    "onManualInteractionRequired": true,
+    "onRename": true,
+    "onSeriesAdd": true,
+    "onSeriesDelete": true,
+    "onUpgrade": true,
+    "supportsOnApplicationUpdate": true,
+    "supportsOnDownload": true,
+    "supportsOnEpisodeFileDelete": true,
+    "supportsOnEpisodeFileDeleteForUpgrade": true,
+    "supportsOnGrab": true,
+    "supportsOnHealthIssue": true,
+    "supportsOnHealthRestored": true,
+    "supportsOnImportComplete": true,
+    "supportsOnManualInteractionRequired": true,
+    "supportsOnRename": true,
+    "supportsOnSeriesAdd": true,
+    "supportsOnSeriesDelete": true,
+    "supportsOnUpgrade": true,
+    "tags": []
+  },
+  "recordedAt": "2026-11-08T20:57:01Z",
+  "request": {
+    "body": "bodies/notification-create-webhook.json",
+    "method": "POST",
+    "path": "/api/v3/notification"
+  },
+  "status": 201
+}

@@ -124,7 +124,9 @@ async fn runtime(db: &Db, clock: &Clock) -> Arc<Runtime> {
         db.clone(),
         DownloadClientService::with_client(db.clone(), http),
     ));
-    Runtime::new(db.clone(), downloads, clock.source()).await.unwrap()
+    Runtime::new(db.clone(), downloads, clock.source(), Default::default())
+        .await
+        .unwrap()
 }
 
 /// Push a command and run it on the spot, as a worker would.
@@ -139,9 +141,27 @@ async fn run(runtime: &Runtime, body: CommandBody) -> unarr_core::commands::Comm
         )
         .await
         .unwrap();
-    let started = runtime.queue().try_start(runtime.now()).unwrap();
-    assert_eq!(started.id, model.id);
-    runtime.execute(started).await;
+    // A refresh queues the processing of what completed, ahead of the
+    // next command; run whatever is queued until ours has run.
+    loop {
+        let started = runtime.queue().try_start(runtime.now()).unwrap();
+        let ours = started.id == model.id;
+        runtime.execute(started).await;
+        if ours {
+            break;
+        }
+    }
+    // ...and the processing a refresh of ours queued, so that the queue is
+    // left as the caller expects.
+    let processing = runtime
+        .queue()
+        .all()
+        .iter()
+        .any(|c| c.status == CommandStatus::Queued && c.body == CommandBody::ProcessMonitoredDownloads);
+    if processing {
+        let started = runtime.queue().try_start(runtime.now()).unwrap();
+        runtime.execute(started).await;
+    }
     runtime.queue().get(model.id).await.unwrap().unwrap()
 }
 
@@ -536,7 +556,21 @@ async fn the_scheduler_pushes_due_tasks_and_records_their_runs() {
 
 #[tokio::test]
 async fn health_checks_follow_the_providers_and_the_library() {
-    let mock = Mock::start(fixtures_dir(), 0).await.unwrap();
+    // The library and the client's folder are under a directory that does
+    // not exist, whatever this machine has at /tv and /downloads.
+    let missing = std::env::temp_dir().join(format!("unarr-missing-{}", std::process::id()));
+    let tv = missing.join("tv").to_string_lossy().into_owned();
+    let downloads = missing.join("downloads");
+    let mock = Mock::start_with(
+        fixtures_dir(),
+        0,
+        unarr_mock::MockDirs {
+            downloads: Some(downloads.clone()),
+            tv: None,
+        },
+    )
+    .await
+    .unwrap();
     let clock = Clock::new();
     // One client that cannot be reached and one mock.
     let db = fixture_db(
@@ -547,6 +581,21 @@ async fn health_checks_follow_the_providers_and_the_library() {
         ],
     )
     .await;
+    let tv_path = tv.clone();
+    db.call(move |conn| {
+        conn.execute("UPDATE root_folders SET path = ?1", [&tv_path])?;
+        conn.execute(
+            "UPDATE series SET path = ?1 || substr(path, 4) WHERE path LIKE '/tv/%'",
+            [&tv_path],
+        )?;
+        conn.execute(
+            "UPDATE providers SET settings = replace(settings, '\"/tv\"', '\"' || ?1 || '\"')",
+            [&tv_path],
+        )?;
+        Ok(())
+    })
+    .await
+    .unwrap();
     let runtime = runtime(&db, &clock).await;
     assert!(runtime.health().is_empty(), "nothing before the first run");
 
@@ -582,9 +631,12 @@ async fn health_checks_follow_the_providers_and_the_library() {
     );
     assert_eq!(
         health[2].message,
-        "Download client Mock SABnzbd places downloads in /downloads/complete/tv but Sonarr cannot see this directory. You may need to adjust the folder's permissions."
+        format!(
+            "Download client Mock SABnzbd places downloads in {}/complete/tv but Sonarr cannot see this directory. You may need to adjust the folder's permissions.",
+            downloads.display()
+        )
     );
-    assert_eq!(health[4].message, "Missing root folder: /tv");
+    assert_eq!(health[4].message, format!("Missing root folder: {tv}"));
 
     // Blocked clients and indexers show up, and clear again.
     clock.advance(Duration::minutes(10));

@@ -2,9 +2,18 @@
 //! state and answers (see `scripts/mock-servarr.py` for the contract):
 //! SABnzbd under `/sabnzbd`, NZBGet under `/nzbget`, qBittorrent under
 //! `/qbittorrent`, Transmission under `/transmission`, plus the `/mock/`
-//! control endpoints that complete or fail a download.
+//! control endpoints that complete or fail a download, and the three
+//! notification targets (a Plex Media Server at `/identity` and
+//! `/library/...`, a Discord webhook under `/discord/`, a generic webhook
+//! at `/webhook`) that keep what they receive for `GET /mock/notifications`.
+//!
+//! Completing an item puts real files where the client says they are: the
+//! clients report paths under [`ClientState::downloads`] and `complete`
+//! copies a clip from `tests/fixtures/media/` into the item's folder
+//! (`clip=`, `extras=` as the Python mock documents).
 
 use std::collections::BTreeMap;
+use std::path::PathBuf;
 use std::sync::Mutex;
 
 use axum::http::{HeaderMap, Method, StatusCode};
@@ -18,6 +27,8 @@ pub const MOCK_PASSWORD: &str = "mock";
 pub const QBIT_SESSION: &str = "mock-session-cookie";
 pub const TRANSMISSION_SESSION: &str = "mock-transmission-session-id";
 pub const ITEM_SIZE: i64 = 768_000;
+pub const PLEX_TOKEN: &str = "mock-plex-token";
+pub const PLEX_VERSION: &str = "1.41.0.8992-8e6b099a8";
 
 /// What a handler answers.
 pub struct Reply {
@@ -87,15 +98,42 @@ pub enum ItemState {
     Failed,
 }
 
-#[derive(Debug, Default)]
+#[derive(Debug)]
 pub struct ClientState {
     pub sabnzbd: Vec<Item>,
     pub nzbget: Vec<Item>,
     pub qbittorrent: Vec<Item>,
     pub qbittorrent_categories: BTreeMap<String, String>,
     pub transmission: Vec<Item>,
+    /// What the notification targets received, oldest first.
+    pub notifications: Vec<Value>,
+    /// The directory the clients report their files under, no trailing
+    /// slash; `/downloads` unless the mock was started on a real one.
+    pub downloads: String,
+    /// The TV library location Plex reports.
+    pub tv: String,
+    /// `tests/fixtures/media`, the clips `complete` copies.
+    pub media: PathBuf,
     seq: i64,
     initialised: bool,
+}
+
+impl Default for ClientState {
+    fn default() -> Self {
+        ClientState {
+            sabnzbd: Vec::new(),
+            nzbget: Vec::new(),
+            qbittorrent: Vec::new(),
+            qbittorrent_categories: BTreeMap::new(),
+            transmission: Vec::new(),
+            notifications: Vec::new(),
+            downloads: "/downloads".into(),
+            tv: "/tv".into(),
+            media: crate::fixtures_dir().join("media"),
+            seq: 0,
+            initialised: false,
+        }
+    }
 }
 
 impl ClientState {
@@ -105,12 +143,103 @@ impl ClientState {
         }
     }
 
+    /// Forget every item and notification; the directories stay.
     pub fn reset(&mut self) {
-        *self = ClientState::default();
+        let (downloads, tv, media) = (
+            std::mem::take(&mut self.downloads),
+            std::mem::take(&mut self.tv),
+            std::mem::take(&mut self.media),
+        );
+        *self = ClientState {
+            downloads,
+            tv,
+            media,
+            ..ClientState::default()
+        };
         self.qbittorrent_categories.insert("tv".into(), String::new());
         self.qbittorrent_categories
-            .insert("movies".into(), "/downloads/movies".into());
+            .insert("movies".into(), self.dl("/movies"));
         self.initialised = true;
+    }
+
+    /// A path under the downloads directory the clients report.
+    pub fn dl(&self, rest: &str) -> String {
+        format!("{}{rest}", self.downloads)
+    }
+
+    fn qbit_save_path(&self, t: &Item) -> String {
+        if t.category.is_empty() {
+            self.dl("/")
+        } else {
+            self.dl(&format!("/{}/", t.category))
+        }
+    }
+
+    /// The folder a client reports for a finished item, no trailing slash.
+    pub fn complete_dir(&self, client: &str, item: &Item) -> String {
+        match client {
+            "sabnzbd" => self.dl(&format!("/complete/{}/{}", item.category, item.title)),
+            "nzbget" => self.dl(&format!("/completed/{}/{}", item.category, item.title)),
+            "qbittorrent" => format!("{}{}", self.qbit_save_path(item), item.title),
+            _ => format!("{}/{}", item.dir.trim_end_matches('/'), item.title),
+        }
+    }
+
+    /// Only the mock's own directories are written to or deleted from.
+    pub fn inside_mock_dirs(&self, path: &str) -> bool {
+        if !path.starts_with('/') || format!("{path}/").contains("/../") {
+            return false;
+        }
+        [&self.downloads, &self.tv]
+            .iter()
+            .any(|d| path == d.as_str() || path.starts_with(&format!("{d}/")))
+    }
+
+    /// What a real client does when asked to delete an item's data.
+    fn delete_data(&self, client: &str, item: &Item) {
+        let folder = self.complete_dir(client, item);
+        if self.inside_mock_dirs(&folder) {
+            remove_path(&folder);
+        }
+    }
+
+    /// Copy the fixture clips into `folder` as the download's files:
+    /// `clip` names the main one (`<title>.mkv`), `extras` adds
+    /// `<clip>:<relative name>` pairs with `{title}` replaced.
+    fn materialise(&self, folder: &str, title: &str, query: &BTreeMap<String, String>) {
+        let target = PathBuf::from(folder);
+        let mut files = vec![(
+            query.get("clip").cloned().unwrap_or_else(|| "episode".into()),
+            format!("{title}.mkv"),
+        )];
+        for extra in query
+            .get("extras")
+            .map(String::as_str)
+            .unwrap_or("")
+            .split(',')
+            .filter(|e| !e.is_empty())
+        {
+            let (clip, name) = extra.split_once(':').unwrap_or((extra, ""));
+            let name = if name.is_empty() {
+                format!("{title}.{clip}.mkv")
+            } else {
+                name.replace("{title}", title)
+            };
+            files.push((clip.to_string(), name));
+        }
+        for (clip, name) in files {
+            let source = self.media.join(format!("{clip}.mkv"));
+            let dest = target.join(&name);
+            if let Some(parent) = dest.parent() {
+                let _ = std::fs::create_dir_all(parent);
+            }
+            match std::fs::copy(&source, &dest) {
+                Ok(n) => tracing::debug!(path = %dest.display(), bytes = n, "mock wrote a download file"),
+                Err(e) => {
+                    tracing::warn!(clip = %source.display(), error = %e, "no clip to copy; the folder stays empty")
+                }
+            }
+        }
     }
 
     fn next_seq(&mut self) -> i64 {
@@ -128,20 +257,64 @@ impl ClientState {
         }
     }
 
-    /// Move an item along, as the control endpoints do.
+    /// Move an item along, as the control endpoints do; a completed item
+    /// gets the default clip as its file.
     pub fn advance(&mut self, client: &str, id: &str, state: ItemState) -> bool {
+        self.advance_with(client, id, state, &BTreeMap::new())
+    }
+
+    /// Whether a control request's `id=` or `title=` names `item`.
+    fn selects(item: &Item, id: &str, query: &BTreeMap<String, String>) -> bool {
+        if !id.is_empty() && item.id.eq_ignore_ascii_case(id) {
+            return true;
+        }
+        query
+            .get("title")
+            .is_some_and(|t| !t.is_empty() && item.title.eq_ignore_ascii_case(t))
+    }
+
+    /// `advance` with the `clip` and `extras` of a `complete` request, which
+    /// may name the item by `title=` instead of its id.
+    pub fn advance_with(
+        &mut self,
+        client: &str,
+        id: &str,
+        state: ItemState,
+        query: &BTreeMap<String, String>,
+    ) -> bool {
         let Some(items) = self.items_mut(client) else {
             return false;
         };
+        let mut found = None;
         for item in items.iter_mut() {
-            if item.id.eq_ignore_ascii_case(id) {
+            if ClientState::selects(item, id, query) {
                 item.state = state;
                 if state == ItemState::Completed {
                     item.done = item.size;
                 }
-                return true;
+                found = Some(item.clone());
+                break;
             }
         }
+        let Some(item) = found else {
+            return false;
+        };
+        if state == ItemState::Completed {
+            let folder = self.complete_dir(client, &item);
+            self.materialise(&folder, &item.title, query);
+        }
+        true
+    }
+}
+
+/// Delete a file or a folder tree the mock put on disk.
+fn remove_path(path: &str) -> bool {
+    let target = std::path::Path::new(path);
+    if target.is_dir() {
+        std::fs::remove_dir_all(target).is_ok()
+    } else if target.is_file() {
+        std::fs::remove_file(target).is_ok()
+    } else {
         false
     }
 }
@@ -337,6 +510,15 @@ pub fn handle(
     if let Some(rest) = path.strip_prefix("/mock/") {
         return Some(control(&mut state, rest, query));
     }
+    if path == "/identity" || path.starts_with("/library/") {
+        return Some(plex(&mut state, method, path, query, headers, body));
+    }
+    if path.starts_with("/discord/") {
+        return Some(discord(&mut state, method, path, query, headers, body));
+    }
+    if path == "/webhook" || path.starts_with("/webhook/") {
+        return Some(webhook(&mut state, method, path, query, headers, body));
+    }
     None
 }
 
@@ -345,6 +527,52 @@ fn control(state: &mut ClientState, rest: &str, query: &BTreeMap<String, String>
         state.reset();
         return json_reply(StatusCode::OK, json!({"ok": true}), "mock/reset");
     }
+    if rest == "notifications" {
+        return json_reply(
+            StatusCode::OK,
+            Value::Array(state.notifications.clone()),
+            "mock/notifications",
+        );
+    }
+    if rest == "notifications/clear" {
+        state.notifications.clear();
+        return json_reply(StatusCode::OK, json!({"ok": true}), "mock/notifications/clear");
+    }
+    if rest == "fs/write" || rest == "fs/remove" {
+        let path = query.get("path").cloned().unwrap_or_default();
+        if !state.inside_mock_dirs(&path) {
+            return json_reply(
+                StatusCode::BAD_REQUEST,
+                json!({"ok": false, "error": format!("{path} is not under {} or {}", state.downloads, state.tv)}),
+                format!("mock/{rest}"),
+            );
+        }
+        if rest == "fs/write" {
+            let clip = query.get("clip").cloned().unwrap_or_else(|| "episode".into());
+            let source = state.media.join(format!("{clip}.mkv"));
+            if let Some(parent) = std::path::Path::new(&path).parent() {
+                let _ = std::fs::create_dir_all(parent);
+            }
+            return match std::fs::copy(&source, &path) {
+                Ok(size) => json_reply(StatusCode::OK, json!({"ok": true, "size": size}), "mock/fs/write"),
+                Err(e) => json_reply(
+                    StatusCode::NOT_FOUND,
+                    json!({"ok": false, "error": format!("no clip {}: {e}", source.display())}),
+                    "mock/fs/write",
+                ),
+            };
+        }
+        let removed = remove_path(&path);
+        return json_reply(
+            if removed {
+                StatusCode::OK
+            } else {
+                StatusCode::NOT_FOUND
+            },
+            json!({"ok": removed}),
+            "mock/fs/remove",
+        );
+    }
     let (client, action) = rest.split_once('/').unwrap_or((rest, ""));
     let target = match action {
         "complete" => ItemState::Completed,
@@ -352,7 +580,7 @@ fn control(state: &mut ClientState, rest: &str, query: &BTreeMap<String, String>
         _ => return text_reply(StatusCode::NOT_FOUND, "not found\n", "404"),
     };
     let id = query.get("id").cloned().unwrap_or_default();
-    let found = state.advance(client, &id, target);
+    let found = state.advance_with(client, &id, target, query);
     json_reply(
         if found {
             StatusCode::OK
@@ -362,6 +590,133 @@ fn control(state: &mut ClientState, rest: &str, query: &BTreeMap<String, String>
         json!({"ok": found}),
         format!("mock/{client}/{action}"),
     )
+}
+
+// --- Notification targets: Plex Media Server, Discord, a generic webhook
+
+/// Keep what a notification target received: method, path, query, the
+/// headers that matter (content type, authorization, `X-*`) and the body
+/// decoded as JSON when it is.
+fn notified(
+    state: &mut ClientState,
+    service: &str,
+    method: &Method,
+    path: &str,
+    query: &BTreeMap<String, String>,
+    headers: &HeaderMap,
+    body: &[u8],
+) {
+    let mut kept = serde_json::Map::new();
+    for (name, value) in headers {
+        let name = name.as_str().to_ascii_lowercase();
+        if name == "content-type" || name == "authorization" || name.starts_with("x-") {
+            kept.insert(name, Value::from(value.to_str().unwrap_or("")));
+        }
+    }
+    let decoded = if body.is_empty() {
+        Value::Null
+    } else {
+        serde_json::from_slice(body)
+            .unwrap_or_else(|_| Value::from(String::from_utf8_lossy(body).into_owned()))
+    };
+    state.notifications.push(json!({
+        "service": service,
+        "method": method.as_str(),
+        "path": path,
+        "query": query,
+        "headers": kept,
+        "body": decoded,
+    }));
+}
+
+fn plex(
+    state: &mut ClientState,
+    method: &Method,
+    path: &str,
+    query: &BTreeMap<String, String>,
+    headers: &HeaderMap,
+    body: &[u8],
+) -> Reply {
+    notified(state, "plex", method, path, query, headers, body);
+    if query.get("X-Plex-Token").map(String::as_str) != Some(PLEX_TOKEN) {
+        return json_reply(
+            StatusCode::UNAUTHORIZED,
+            json!({"errors": [{"code": 1001, "message": "Unauthorized", "status": 401}]}),
+            "plex/401",
+        );
+    }
+    if path == "/identity" {
+        return json_reply(
+            StatusCode::OK,
+            json!({"MediaContainer": {"size": 0, "claimed": true, "machineIdentifier": "6d0f2a9c1b3e4d5f8a7b6c5d4e3f2a1b0c9d8e7f", "version": PLEX_VERSION}}),
+            "plex/identity",
+        );
+    }
+    if path == "/library/sections" {
+        return json_reply(
+            StatusCode::OK,
+            json!({"MediaContainer": {"size": 2, "allowSync": false, "title1": "Plex Library", "Directory": [
+                {"allowSync": true, "art": "/:/resources/show-fanart.jpg", "composite": "/library/sections/2/composite/1736478720", "filters": true, "refreshing": false, "thumb": "/:/resources/show.png", "key": "2", "type": "show", "title": "TV Shows", "agent": "tv.plex.agents.series", "scanner": "Plex TV Series", "language": "en-US", "uuid": "0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0", "updatedAt": 1736478720, "createdAt": 1736478720, "scannedAt": 1736478720, "content": true, "directory": true, "contentChangedAt": 1, "hidden": 0, "Location": [{"id": 2, "path": state.tv}]},
+                {"allowSync": true, "art": "/:/resources/movie-fanart.jpg", "composite": "/library/sections/1/composite/1736478720", "filters": true, "refreshing": false, "thumb": "/:/resources/movie.png", "key": "1", "type": "movie", "title": "Movies", "agent": "tv.plex.agents.movie", "scanner": "Plex Movie", "language": "en-US", "uuid": "1a2b3c4d-5e6f-7081-92a3-b4c5d6e7f809", "updatedAt": 1736478720, "createdAt": 1736478720, "scannedAt": 1736478720, "content": true, "directory": true, "contentChangedAt": 1, "hidden": 0, "Location": [{"id": 1, "path": "/movies"}]},
+            ]}}),
+            "plex/sections",
+        );
+    }
+    if let Some(section) = path
+        .strip_prefix("/library/sections/")
+        .and_then(|rest| rest.strip_suffix("/refresh"))
+        .filter(|id| !id.is_empty() && id.chars().all(|c| c.is_ascii_digit()))
+    {
+        return Reply {
+            status: StatusCode::OK,
+            body: Vec::new(),
+            content_type: "text/html",
+            headers: Vec::new(),
+            served: format!("plex/refresh-{section}"),
+        };
+    }
+    json_reply(
+        StatusCode::NOT_FOUND,
+        json!({"errors": [{"code": 1002, "message": "Not Found", "status": 404}]}),
+        "plex/404",
+    )
+}
+
+fn discord(
+    state: &mut ClientState,
+    method: &Method,
+    path: &str,
+    query: &BTreeMap<String, String>,
+    headers: &HeaderMap,
+    body: &[u8],
+) -> Reply {
+    notified(state, "discord", method, path, query, headers, body);
+    if method != Method::POST {
+        return json_reply(
+            StatusCode::METHOD_NOT_ALLOWED,
+            json!({"message": "405: Method Not Allowed", "code": 0}),
+            "discord/405",
+        );
+    }
+    Reply {
+        status: StatusCode::NO_CONTENT,
+        body: Vec::new(),
+        content_type: "text/plain",
+        headers: Vec::new(),
+        served: "discord/webhook".into(),
+    }
+}
+
+fn webhook(
+    state: &mut ClientState,
+    method: &Method,
+    path: &str,
+    query: &BTreeMap<String, String>,
+    headers: &HeaderMap,
+    body: &[u8],
+) -> Reply {
+    notified(state, "webhook", method, path, query, headers, body);
+    json_reply(StatusCode::OK, json!({"ok": true}), "webhook")
 }
 
 // --- SABnzbd
@@ -388,7 +743,7 @@ fn sabnzbd(state: &mut ClientState, q: &BTreeMap<String, String>, headers: &Head
         "get_config" => ok(
             json!({"config": {
                 "misc": {
-                    "complete_dir": "/downloads/complete", "tv_categories": ["sorted"], "enable_tv_sorting": true,
+                    "complete_dir": state.dl("/complete"), "tv_categories": ["sorted"], "enable_tv_sorting": true,
                     "movie_categories": [], "enable_movie_sorting": false, "date_categories": [], "enable_date_sorting": false,
                     "pre_check": false, "history_retention": "", "history_retention_option": "all", "history_retention_number": 0,
                 },
@@ -404,7 +759,7 @@ fn sabnzbd(state: &mut ClientState, q: &BTreeMap<String, String>, headers: &Head
             "get_config",
         ),
         "fullstatus" => ok(
-            json!({"status": {"completedir": "/downloads/complete"}}),
+            json!({"status": {"completedir": state.dl("/complete")}}),
             "fullstatus",
         ),
         "addfile" => {
@@ -470,13 +825,22 @@ fn sabnzbd(state: &mut ClientState, q: &BTreeMap<String, String>, headers: &Head
                 })
                 .collect();
             ok(
-                json!({"queue": {"my_home": "/downloads", "paused": false, "slots": slots}}),
+                json!({"queue": {"my_home": state.dl(""), "paused": false, "slots": slots}}),
                 "queue",
             )
         }
         "history" => {
             if get("name") == "delete" {
                 let ids: Vec<&str> = get("value").split(',').collect();
+                if get("del_files") == "1" {
+                    for i in state
+                        .sabnzbd
+                        .iter()
+                        .filter(|i| ids.contains(&i.id.as_str()) && i.state != ItemState::Downloading)
+                    {
+                        state.delete_data("sabnzbd", i);
+                    }
+                }
                 state
                     .sabnzbd
                     .retain(|i| !(ids.contains(&i.id.as_str()) && i.state != ItemState::Downloading));
@@ -492,7 +856,7 @@ fn sabnzbd(state: &mut ClientState, q: &BTreeMap<String, String>, headers: &Head
                     json!({
                         "fail_message": if failed { "Unpacking failed, archive requires a password" } else { "" },
                         "bytes": i.size, "category": i.category, "nzb_name": format!("{}.nzb", i.title), "download_time": 60,
-                        "storage": if failed { String::new() } else { format!("/downloads/complete/{}/{}", i.category, i.title) },
+                        "storage": if failed { String::new() } else { state.complete_dir("sabnzbd", i) },
                         "status": if failed { "Failed" } else { "Completed" }, "nzo_id": i.id, "name": i.title,
                     })
                 })
@@ -531,8 +895,9 @@ fn nzbget(state: &mut ClientState, headers: &HeaderMap, body: &[u8]) -> Reply {
     match method.as_str() {
         "version" => ok(json!("24.3"), "version"),
         "config" => {
+            let (main_dir, movies_dir) = (state.dl(""), state.dl("/movies"));
             let cfg = [
-                ("MainDir", "/downloads"),
+                ("MainDir", main_dir.as_str()),
                 ("DestDir", "${MainDir}/completed"),
                 ("InterDir", "${MainDir}/intermediate"),
                 ("AppendCategoryDir", "yes"),
@@ -543,7 +908,7 @@ fn nzbget(state: &mut ClientState, headers: &HeaderMap, body: &[u8]) -> Reply {
                 ("Category1.DefScript", ""),
                 ("Category1.Aliases", ""),
                 ("Category2.Name", "movies"),
-                ("Category2.DestDir", "/downloads/movies"),
+                ("Category2.DestDir", movies_dir.as_str()),
                 ("Category2.Unpack", "yes"),
                 ("Category2.DefScript", ""),
                 ("Category2.Aliases", ""),
@@ -586,7 +951,7 @@ fn nzbget(state: &mut ClientState, headers: &HeaderMap, body: &[u8]) -> Reply {
                 .map(|i| {
                     let (size_lo, size_hi) = lohi(i.size);
                     let failed = i.state == ItemState::Failed;
-                    json!({"ID": i.number, "Name": i.title, "Category": i.category, "FileSizeLo": size_lo, "FileSizeHi": size_hi, "ParStatus": if failed { "FAILURE" } else { "SUCCESS" }, "UnpackStatus": if failed { "NONE" } else { "SUCCESS" }, "MoveStatus": if failed { "NONE" } else { "SUCCESS" }, "ScriptStatus": "NONE", "DeleteStatus": "NONE", "MarkStatus": "NONE", "DestDir": format!("/downloads/completed/{}/{}", i.category, i.title), "FinalDir": "", "Parameters": [{"Name": "drone", "Value": i.id}]})
+                    json!({"ID": i.number, "Name": i.title, "Category": i.category, "FileSizeLo": size_lo, "FileSizeHi": size_hi, "ParStatus": if failed { "FAILURE" } else { "SUCCESS" }, "UnpackStatus": if failed { "NONE" } else { "SUCCESS" }, "MoveStatus": if failed { "NONE" } else { "SUCCESS" }, "ScriptStatus": "NONE", "DeleteStatus": "NONE", "MarkStatus": "NONE", "DestDir": state.complete_dir("nzbget", i), "FinalDir": "", "Parameters": [{"Name": "drone", "Value": i.id}]})
                 })
                 .collect();
             ok(Value::Array(hist), "history")
@@ -635,9 +1000,20 @@ fn nzbget(state: &mut ClientState, headers: &HeaderMap, body: &[u8]) -> Reply {
                 "GroupFinalDelete" | "GroupDelete" => state
                     .nzbget
                     .retain(|i| !(ids.contains(&i.number) && i.state == ItemState::Downloading)),
-                "HistoryDelete" => state
-                    .nzbget
-                    .retain(|i| !(ids.contains(&i.number) && i.state != ItemState::Downloading)),
+                "HistoryDelete" | "HistoryFinalDelete" => {
+                    if command == "HistoryFinalDelete" {
+                        for i in state
+                            .nzbget
+                            .iter()
+                            .filter(|i| ids.contains(&i.number) && i.state != ItemState::Downloading)
+                        {
+                            state.delete_data("nzbget", i);
+                        }
+                    }
+                    state
+                        .nzbget
+                        .retain(|i| !(ids.contains(&i.number) && i.state != ItemState::Downloading))
+                }
                 "HistoryRedownload" => {
                     for i in state.nzbget.iter_mut().filter(|i| ids.contains(&i.number)) {
                         i.state = ItemState::Downloading;
@@ -691,18 +1067,19 @@ fn qbittorrent(
     }
     let text = |t: &str, served: &str| text_reply(StatusCode::OK, t, format!("qbittorrent/{served}"));
     let json_ok = |v: Value, served: &str| json_reply(StatusCode::OK, v, format!("qbittorrent/{served}"));
+    let downloads = state.downloads.clone();
     let save_path = |t: &Item| {
         if t.category.is_empty() {
-            "/downloads/".to_string()
+            format!("{downloads}/")
         } else {
-            format!("/downloads/{}/", t.category)
+            format!("{downloads}/{}/", t.category)
         }
     };
     match rest {
         "app/webapiVersion" => text("2.11.4", "webapiVersion"),
         "app/version" => text("v5.1.2", "version"),
         "app/preferences" => json_ok(
-            json!({"save_path": "/downloads/", "max_ratio_enabled": false, "max_ratio": -1, "max_seeding_time_enabled": false, "max_seeding_time": -1, "max_inactive_seeding_time_enabled": false, "max_inactive_seeding_time": -1, "max_ratio_act": 0, "queueing_enabled": true, "dht": true}),
+            json!({"save_path": format!("{downloads}/"), "max_ratio_enabled": false, "max_ratio": -1, "max_seeding_time_enabled": false, "max_seeding_time": -1, "max_inactive_seeding_time_enabled": false, "max_inactive_seeding_time": -1, "max_ratio_act": 0, "queueing_enabled": true, "dht": true}),
             "preferences",
         ),
         "torrents/categories" => {
@@ -801,6 +1178,15 @@ fn qbittorrent(
                 .split('|')
                 .map(|h| h.to_ascii_lowercase())
                 .collect();
+            if field("deleteFiles") == "true" {
+                for t in state
+                    .qbittorrent
+                    .iter()
+                    .filter(|t| hashes.contains(&t.id.to_ascii_lowercase()))
+                {
+                    state.delete_data("qbittorrent", t);
+                }
+            }
             state
                 .qbittorrent
                 .retain(|t| !hashes.contains(&t.id.to_ascii_lowercase()));
@@ -912,7 +1298,7 @@ fn transmission(state: &mut ClientState, _method: &Method, headers: &HeaderMap, 
     };
     match method.as_str() {
         "session-get" => ok(
-            json!({"rpc-version": 17, "version": "4.0.6 (38c164933e)", "download-dir": "/downloads", "seedRatioLimit": 2.0, "seedRatioLimited": false, "idle-seeding-limit": 30, "idle-seeding-limit-enabled": false}),
+            json!({"rpc-version": 17, "version": "4.0.6 (38c164933e)", "download-dir": state.dl(""), "seedRatioLimit": 2.0, "seedRatioLimited": false, "idle-seeding-limit": 30, "idle-seeding-limit-enabled": false}),
             "session-get",
         ),
         "torrent-get" => {
@@ -960,7 +1346,10 @@ fn transmission(state: &mut ClientState, _method: &Method, headers: &HeaderMap, 
             }
             let number = state.next_seq();
             let mut item = new_item(hash.clone(), number, name, String::new(), size);
-            item.dir = args["download-dir"].as_str().unwrap_or("/downloads").to_string();
+            item.dir = args["download-dir"]
+                .as_str()
+                .map(String::from)
+                .unwrap_or_else(|| state.dl(""));
             item.labels = args["labels"]
                 .as_array()
                 .map(|a| a.iter().filter_map(|l| l.as_str().map(String::from)).collect())
@@ -1001,6 +1390,11 @@ fn transmission(state: &mut ClientState, _method: &Method, headers: &HeaderMap, 
             ok(json!({}), "torrent-set")
         }
         "torrent-remove" => {
+            if args["delete-local-data"].as_bool() == Some(true) {
+                for t in selected(state) {
+                    state.delete_data("transmission", &t);
+                }
+            }
             let gone: Vec<String> = selected(state).iter().map(|t| t.id.clone()).collect();
             state.transmission.retain(|t| !gone.contains(&t.id));
             ok(json!({}), "torrent-remove")

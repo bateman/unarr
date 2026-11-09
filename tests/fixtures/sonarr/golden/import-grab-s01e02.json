@@ -1,0 +1,39 @@
+{
+  "body": {
+    "age": 0,
+    "ageHours": 0,
+    "ageMinutes": 0,
+    "approved": false,
+    "customFormatScore": 0,
+    "downloadAllowed": false,
+    "downloadClientId": 5,
+    "episodeRequested": false,
+    "fullSeason": false,
+    "guid": "http://127.0.0.1:18989/newznab/details/e5d7a6b8c9f0e1a2b3c4d5e6f7a8b9c0",
+    "indexerFlags": 0,
+    "indexerId": 20,
+    "isAbsoluteNumbering": false,
+    "isDaily": false,
+    "isPossibleSpecialEpisode": false,
+    "languageWeight": 0,
+    "protocol": "unknown",
+    "publishDate": "0001-01-01T00:00:00Z",
+    "qualityWeight": 0,
+    "rejected": false,
+    "releaseWeight": 0,
+    "sceneSource": false,
+    "seasonNumber": 0,
+    "size": 0,
+    "special": false,
+    "temporarilyRejected": false,
+    "tvRageId": 0,
+    "tvdbId": 0
+  },
+  "recordedAt": "2026-11-08T20:57:11Z",
+  "request": {
+    "body": "bodies/import-grab-s01e02.json",
+    "method": "POST",
+    "path": "/api/v3/release"
+  },
+  "status": 200
+}

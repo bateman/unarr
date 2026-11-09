@@ -80,6 +80,14 @@ pub fn path_extension(name: &str) -> &str {
     }
 }
 
+/// The originals' `DiskExtensions` and `StreamingExtensions`: disk images
+/// and stream files, which ffprobe is not asked about.
+pub fn is_disk_or_stream_extension(ext: &str) -> bool {
+    [".img", ".iso", ".vob", ".m3u", ".strm"]
+        .iter()
+        .any(|e| e.eq_ignore_ascii_case(ext))
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

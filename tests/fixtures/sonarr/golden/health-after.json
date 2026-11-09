@@ -1,31 +1,13 @@
 {
   "body": [
     {
-      "message": "Missing root folder for import list(s): /tv (SimklUserImport 1)",
-      "source": "ImportListRootFolderCheck",
-      "type": "error",
-      "wikiUrl": "https://wiki.servarr.com/sonarr/system#import-list-missing-root-folder"
-    },
-    {
-      "message": "Missing root folder: /tv",
-      "source": "RootFolderCheck",
-      "type": "error",
-      "wikiUrl": "https://wiki.servarr.com/sonarr/system#missing-root-folder"
-    },
-    {
-      "message": "Download client Mock SABnzbd places downloads in /downloads/complete/tv but Sonarr cannot see this directory. You may need to adjust the folder's permissions.",
-      "source": "RemotePathMappingCheck",
-      "type": "error",
-      "wikiUrl": "https://wiki.servarr.com/sonarr/system#permissions-error"
-    },
-    {
       "message": "Unable to communicate with QBittorrent 1. Name or service not known (qbittorrent.invalid:8080)",
       "source": "DownloadClientCheck",
       "type": "error",
       "wikiUrl": "https://wiki.servarr.com/sonarr/system#unable-to-communicate-with-download-client"
     }
   ],
-  "recordedAt": "2026-11-07T15:45:23Z",
+  "recordedAt": "2026-11-08T21:00:39Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/health"

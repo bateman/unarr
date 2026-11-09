@@ -92,6 +92,12 @@ pub async fn start(
         .ok_or_else(|| ApiError::Internal(anyhow::anyhow!("Sequence contains no matching element")))?;
     let runtime = state.commands()?;
     let sends = body["sendUpdatesToClient"].as_bool().unwrap_or(false) || command.sends_updates();
+    // The originals push manual imports ahead of the rest.
+    let priority = if matches!(command, CommandBody::ManualImport { .. }) {
+        CommandPriority::High
+    } else {
+        CommandPriority::Normal
+    };
     // The originals read `UserAgent`, a header no client sends.
     let agent = headers
         .get("UserAgent")
@@ -99,17 +105,11 @@ pub async fn start(
         .map(String::from);
     let model = runtime
         .queue()
-        .push_with(
-            command,
-            CommandPriority::Normal,
-            CommandTrigger::Manual,
-            state.now(),
-            |m| {
-                m.suppress_messages = !sends;
-                m.send_updates_to_client = true;
-                m.client_user_agent = agent;
-            },
-        )
+        .push_with(command, priority, CommandTrigger::Manual, state.now(), |m| {
+            m.suppress_messages = !sends;
+            m.send_updates_to_client = true;
+            m.client_user_agent = agent;
+        })
         .await?;
     let current = runtime.queue().get(model.id).await?.unwrap_or(model);
     Ok((StatusCode::CREATED, Json(command_resource(&current))).into_response())

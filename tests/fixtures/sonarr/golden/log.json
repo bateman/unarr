@@ -8,49 +8,49 @@
         "level": "info",
         "logger": "Microsoft.Hosting.Lifetime",
         "message": "Content root path: /home/(removed)/unarr",
-        "time": "2026-11-07T15:43:59Z"
+        "time": "2026-11-08T20:55:50Z"
       },
       {
         "id": 5,
         "level": "info",
         "logger": "Microsoft.Hosting.Lifetime",
         "message": "Hosting environment: Production",
-        "time": "2026-11-07T15:43:59Z"
+        "time": "2026-11-08T20:55:50Z"
       },
       {
         "id": 4,
         "level": "info",
         "logger": "Microsoft.Hosting.Lifetime",
         "message": "Application started. Press Ctrl+C to shut down.",
-        "time": "2026-11-07T15:43:59Z"
+        "time": "2026-11-08T20:55:50Z"
       },
       {
         "id": 3,
         "level": "info",
         "logger": "UpdaterConfigProvider",
         "message": "Update mechanism Docker not supported in the current configuration, changing to BuiltIn.",
-        "time": "2026-11-07T15:43:59Z"
+        "time": "2026-11-08T20:55:50Z"
       },
       {
         "id": 2,
         "level": "info",
         "logger": "Microsoft.Hosting.Lifetime",
         "message": "Now listening on: http://0.0.0.0:8989",
-        "time": "2026-11-07T15:43:59Z"
+        "time": "2026-11-08T20:55:50Z"
       },
       {
         "id": 1,
         "level": "info",
         "logger": "ConfigureHostFilteringOptions",
         "message": "Accepting requests for hosts: *, localhost, 127.0.0.1, [::1], vm",
-        "time": "2026-11-07T15:43:59Z"
+        "time": "2026-11-08T20:55:50Z"
       }
     ],
     "sortDirection": "descending",
     "sortKey": "time",
     "totalRecords": 6
   },
-  "recordedAt": "2026-11-07T15:44:00Z",
+  "recordedAt": "2026-11-08T20:55:51Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/log?page=1&pageSize=10&sortKey=time&sortDirection=descending"

@@ -1,0 +1,23 @@
+{
+  "body": [
+    {
+      "attemptedValue": "",
+      "errorCode": "NotEmptyValidator",
+      "errorMessage": "'Name' must not be empty.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Name",
+        "propertyValue": ""
+      },
+      "propertyName": "Name",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-08T20:57:01Z",
+  "request": {
+    "body": "bodies/notification-create-invalid.json",
+    "method": "POST",
+    "path": "/api/v3/notification"
+  },
+  "status": 400
+}

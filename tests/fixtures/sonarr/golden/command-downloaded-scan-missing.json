@@ -1,0 +1,33 @@
+{
+  "body": {
+    "body": {
+      "importMode": "move",
+      "isExclusive": false,
+      "isLongRunning": true,
+      "name": "DownloadedEpisodesScan",
+      "path": "/downloads/drop/nothing-here",
+      "requiresDiskAccess": true,
+      "sendUpdatesToClient": true,
+      "suppressMessages": true,
+      "trigger": "manual",
+      "updateScheduledTask": true
+    },
+    "commandName": "Downloaded Episodes Scan",
+    "id": 461700,
+    "name": "DownloadedEpisodesScan",
+    "priority": "normal",
+    "queued": "2026-11-08T20:59:56Z",
+    "result": "unknown",
+    "sendUpdatesToClient": true,
+    "status": "queued",
+    "trigger": "manual",
+    "updateScheduledTask": true
+  },
+  "recordedAt": "2026-11-08T20:59:56Z",
+  "request": {
+    "body": "bodies/command-downloaded-scan-missing.json",
+    "method": "POST",
+    "path": "/api/v3/command"
+  },
+  "status": 201
+}

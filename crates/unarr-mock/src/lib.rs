@@ -72,14 +72,38 @@ pub fn fixtures_dir() -> PathBuf {
     PathBuf::from(env!("CARGO_MANIFEST_DIR")).join("../../tests/fixtures")
 }
 
+/// Where the mock's download clients and Plex say their files are.
+#[derive(Debug, Clone, Default)]
+pub struct MockDirs {
+    /// The directory the download clients report and fill on `complete`;
+    /// `/downloads`, the recorder's real one, when `None`.
+    pub downloads: Option<PathBuf>,
+    /// The TV library location Plex reports; `/tv` when `None`.
+    pub tv: Option<PathBuf>,
+}
+
 impl Mock {
     /// Serve `fixtures` on `127.0.0.1:port`; port 0 picks a free one. The
     /// goldens name 18989, the port `make golden` runs the Python mock on.
     pub async fn start(fixtures: PathBuf, port: u16) -> anyhow::Result<Mock> {
+        Mock::start_with(fixtures, port, MockDirs::default()).await
+    }
+
+    /// `start`, with the clients' and Plex's directories pointed at real
+    /// ones, so a completed download can be imported from them.
+    pub async fn start_with(fixtures: PathBuf, port: u16, dirs: MockDirs) -> anyhow::Result<Mock> {
+        let mut state = clients::ClientState::default();
+        state.media = fixtures.join("media");
+        if let Some(d) = &dirs.downloads {
+            state.downloads = d.to_string_lossy().trim_end_matches('/').to_string();
+        }
+        if let Some(d) = &dirs.tv {
+            state.tv = d.to_string_lossy().trim_end_matches('/').to_string();
+        }
         let shared = Shared {
             fixtures,
             requests: Arc::new(Mutex::new(Vec::new())),
-            clients: Arc::new(Mutex::new(clients::ClientState::default())),
+            clients: Arc::new(Mutex::new(state)),
             base_url: Arc::new(Mutex::new(FIXTURE_URL.to_string())),
         };
         let app = Router::new().fallback(handle).with_state(shared.clone());
@@ -112,6 +136,34 @@ impl Mock {
     /// Look at (or change) what the mock download clients hold.
     pub fn clients(&self) -> std::sync::MutexGuard<'_, clients::ClientState> {
         self.shared.clients.lock().unwrap()
+    }
+
+    /// Send a request to the mock without the network, as a `mock` line of
+    /// the golden request list does during the replay: `path` carries the
+    /// query. Returns the status and body.
+    pub fn call(&self, method: &str, path_and_query: &str, body: &[u8]) -> (StatusCode, Vec<u8>) {
+        let method = Method::from_bytes(method.as_bytes()).unwrap_or(Method::GET);
+        let (path, query) = path_and_query.split_once('?').unwrap_or((path_and_query, ""));
+        let query: BTreeMap<String, String> = query
+            .split('&')
+            .filter(|p| !p.is_empty())
+            .map(|p| {
+                let (k, v) = p.split_once('=').unwrap_or((p, ""));
+                (clients::percent_decode(k), clients::percent_decode(v))
+            })
+            .collect();
+        let headers = HeaderMap::new();
+        let reply = clients::handle(&self.shared.clients, &method, path, &query, &headers, body)
+            .unwrap_or_else(|| {
+                (
+                    StatusCode::NOT_FOUND,
+                    b"not found\n".to_vec(),
+                    "text/plain",
+                    "404".into(),
+                )
+                    .into()
+            });
+        (reply.status, reply.body)
     }
 }
 

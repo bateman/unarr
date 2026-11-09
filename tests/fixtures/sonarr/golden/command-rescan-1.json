@@ -1,0 +1,32 @@
+{
+  "body": {
+    "body": {
+      "isExclusive": false,
+      "isLongRunning": false,
+      "name": "RescanSeries",
+      "requiresDiskAccess": false,
+      "sendUpdatesToClient": true,
+      "seriesId": 1,
+      "suppressMessages": false,
+      "trigger": "manual",
+      "updateScheduledTask": true
+    },
+    "commandName": "Rescan Series",
+    "id": 461695,
+    "name": "RescanSeries",
+    "priority": "normal",
+    "queued": "2026-11-08T20:59:32Z",
+    "result": "unknown",
+    "sendUpdatesToClient": true,
+    "status": "queued",
+    "trigger": "manual",
+    "updateScheduledTask": true
+  },
+  "recordedAt": "2026-11-08T20:59:32Z",
+  "request": {
+    "body": "bodies/command-rescan-1.json",
+    "method": "POST",
+    "path": "/api/v3/command"
+  },
+  "status": 201
+}

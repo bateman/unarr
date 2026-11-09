@@ -95,6 +95,12 @@ fn render(state: &AppState, loaded: &Loaded, include_season_images: bool) -> Vec
         .collect()
 }
 
+/// One series with its statistics, for the SignalR relays.
+pub async fn series_resource_by_id(state: &AppState, id: i64) -> anyhow::Result<Option<SeriesResource>> {
+    let loaded = load(state, Some(id), None).await?;
+    Ok(render(state, &loaded, false).into_iter().next())
+}
+
 pub async fn list(State(state): State<AppState>, uri: Uri) -> ApiResult<Json<Vec<SeriesResource>>> {
     let p = Params::from_uri(&uri);
     let loaded = load(&state, None, p.i64("tvdbId")).await?;

@@ -195,6 +195,7 @@ pub enum BackupType {
 pub enum CommandBody {
     RssSync,
     RefreshMonitoredDownloads,
+    ProcessMonitoredDownloads,
     EpisodeSearch {
         episode_ids: Vec<i64>,
     },
@@ -222,6 +223,26 @@ pub enum CommandBody {
     RescanSeries {
         series_id: Option<i64>,
     },
+    /// `ManualImportCommand`: the files the interactive import chose.
+    ManualImport {
+        files: Vec<crate::mediafiles::manual::ManualImportFile>,
+        import_mode: crate::mediafiles::ImportMode,
+    },
+    /// `RenameFilesCommand`.
+    RenameFiles {
+        series_id: i64,
+        files: Vec<i64>,
+    },
+    /// `RenameSeriesCommand`.
+    RenameSeries {
+        series_ids: Vec<i64>,
+    },
+    /// `DownloadedEpisodesScanCommand`: a path a third party asks to import.
+    DownloadedEpisodesScan {
+        path: Option<String>,
+        download_client_id: Option<String>,
+        import_mode: crate::mediafiles::ImportMode,
+    },
     CheckHealth,
     Housekeeping,
     ApplicationUpdateCheck {
@@ -244,6 +265,10 @@ const NAMES: &[(&str, &str)] = &[
     (
         "RefreshMonitoredDownloads",
         "NzbDrone.Core.Download.RefreshMonitoredDownloadsCommand",
+    ),
+    (
+        "ProcessMonitoredDownloads",
+        "NzbDrone.Core.Download.ProcessMonitoredDownloadsCommand",
     ),
     (
         "EpisodeSearch",
@@ -272,6 +297,22 @@ const NAMES: &[(&str, &str)] = &[
         "RescanSeries",
         "NzbDrone.Core.MediaFiles.Commands.RescanSeriesCommand",
     ),
+    (
+        "DownloadedEpisodesScan",
+        "NzbDrone.Core.MediaFiles.Commands.DownloadedEpisodesScanCommand",
+    ),
+    (
+        "ManualImport",
+        "NzbDrone.Core.MediaFiles.EpisodeImport.Manual.ManualImportCommand",
+    ),
+    (
+        "RenameFiles",
+        "NzbDrone.Core.MediaFiles.Commands.RenameFilesCommand",
+    ),
+    (
+        "RenameSeries",
+        "NzbDrone.Core.MediaFiles.Commands.RenameSeriesCommand",
+    ),
     ("CheckHealth", "NzbDrone.Core.HealthCheck.CheckHealthCommand"),
     ("Housekeeping", "NzbDrone.Core.Housekeeping.HousekeepingCommand"),
     (
@@ -292,6 +333,86 @@ const NAMES: &[(&str, &str)] = &[
     ),
     ("Backup", "NzbDrone.Core.Backup.BackupCommand"),
 ];
+
+/// `QualityModel` as the API carries it.
+pub fn quality_model_json(q: &crate::model::QualityModel) -> Value {
+    json!({
+        "quality": crate::quality::Quality::by_id(q.quality_id),
+        "revision": {"version": q.version, "real": q.real, "isRepack": q.is_repack},
+    })
+}
+
+/// The API's quality model, from a command body.
+pub fn quality_model_from_json(v: &Value) -> crate::model::QualityModel {
+    crate::model::QualityModel {
+        quality_id: v["quality"]["id"].as_i64().unwrap_or(0),
+        version: v["revision"]["version"].as_i64().unwrap_or(1),
+        real: v["revision"]["real"].as_i64().unwrap_or(0),
+        is_repack: v["revision"]["isRepack"].as_bool().unwrap_or(false),
+    }
+}
+
+/// Language ids from the API's `[{id, name}]`.
+pub fn language_ids_from_json(v: &Value) -> Vec<i64> {
+    v.as_array()
+        .map(|a| a.iter().filter_map(|l| l["id"].as_i64()).collect())
+        .unwrap_or_default()
+}
+
+pub fn languages_json(ids: &[i64]) -> Value {
+    Value::Array(
+        ids.iter()
+            .map(|id| {
+                let l = crate::quality::Language::by_id(*id);
+                json!({"id": l.id, "name": l.name})
+            })
+            .collect(),
+    )
+}
+
+fn manual_import_file(v: &Value) -> crate::mediafiles::manual::ManualImportFile {
+    let text = |key: &str| v[key].as_str().map(str::to_string).filter(|s| !s.is_empty());
+    crate::mediafiles::manual::ManualImportFile {
+        path: v["path"].as_str().unwrap_or("").to_string(),
+        folder_name: text("folderName"),
+        series_id: v["seriesId"].as_i64().unwrap_or(0),
+        episode_ids: ints(&v["episodeIds"]),
+        episode_file_id: v["episodeFileId"].as_i64(),
+        quality: quality_model_from_json(&v["quality"]),
+        languages: language_ids_from_json(&v["languages"]),
+        release_group: text("releaseGroup"),
+        indexer_flags: v["indexerFlags"].as_i64().unwrap_or(0),
+        release_type: v["releaseType"]
+            .as_str()
+            .and_then(crate::model::ReleaseType::parse)
+            .unwrap_or_default(),
+        download_id: text("downloadId"),
+    }
+}
+
+fn manual_import_file_json(f: &crate::mediafiles::manual::ManualImportFile) -> Value {
+    let mut m = Map::new();
+    m.insert("path".into(), json!(f.path));
+    if let Some(folder) = &f.folder_name {
+        m.insert("folderName".into(), json!(folder));
+    }
+    m.insert("seriesId".into(), json!(f.series_id));
+    m.insert("episodeIds".into(), json!(f.episode_ids));
+    if let Some(id) = f.episode_file_id {
+        m.insert("episodeFileId".into(), json!(id));
+    }
+    m.insert("quality".into(), quality_model_json(&f.quality));
+    m.insert("languages".into(), languages_json(&f.languages));
+    if let Some(group) = &f.release_group {
+        m.insert("releaseGroup".into(), json!(group));
+    }
+    m.insert("indexerFlags".into(), json!(f.indexer_flags));
+    m.insert("releaseType".into(), json!(f.release_type.as_str()));
+    if let Some(id) = &f.download_id {
+        m.insert("downloadId".into(), json!(id));
+    }
+    Value::Object(m)
+}
 
 fn ints(v: &Value) -> Vec<i64> {
     v.as_array()
@@ -326,6 +447,7 @@ impl CommandBody {
         match name {
             "RssSync" => CommandBody::RssSync,
             "RefreshMonitoredDownloads" => CommandBody::RefreshMonitoredDownloads,
+            "ProcessMonitoredDownloads" => CommandBody::ProcessMonitoredDownloads,
             "EpisodeSearch" => CommandBody::EpisodeSearch {
                 episode_ids: ints(&body["episodeIds"]),
             },
@@ -361,6 +483,37 @@ impl CommandBody {
             "RescanSeries" => CommandBody::RescanSeries {
                 series_id: body["seriesId"].as_i64(),
             },
+            "ManualImport" => CommandBody::ManualImport {
+                files: body["files"]
+                    .as_array()
+                    .map(|a| a.iter().map(manual_import_file).collect())
+                    .unwrap_or_default(),
+                import_mode: body["importMode"]
+                    .as_str()
+                    .map(crate::mediafiles::ImportMode::parse)
+                    .unwrap_or_default(),
+            },
+            "RenameFiles" => CommandBody::RenameFiles {
+                series_id: body["seriesId"].as_i64().unwrap_or(0),
+                files: ints(&body["files"]),
+            },
+            "RenameSeries" => CommandBody::RenameSeries {
+                series_ids: ints(&body["seriesIds"]),
+            },
+            "DownloadedEpisodesScan" => CommandBody::DownloadedEpisodesScan {
+                path: body["path"]
+                    .as_str()
+                    .map(str::to_string)
+                    .filter(|p| !p.trim().is_empty()),
+                download_client_id: body["downloadClientId"]
+                    .as_str()
+                    .map(str::to_string)
+                    .filter(|p| !p.trim().is_empty()),
+                import_mode: body["importMode"]
+                    .as_str()
+                    .map(crate::mediafiles::ImportMode::parse)
+                    .unwrap_or_default(),
+            },
             "CheckHealth" => CommandBody::CheckHealth,
             "Housekeeping" => CommandBody::Housekeeping,
             "ApplicationUpdateCheck" => CommandBody::ApplicationUpdateCheck {
@@ -387,6 +540,7 @@ impl CommandBody {
         match self {
             CommandBody::RssSync => "RssSync",
             CommandBody::RefreshMonitoredDownloads => "RefreshMonitoredDownloads",
+            CommandBody::ProcessMonitoredDownloads => "ProcessMonitoredDownloads",
             CommandBody::EpisodeSearch { .. } => "EpisodeSearch",
             CommandBody::SeasonSearch { .. } => "SeasonSearch",
             CommandBody::SeriesSearch { .. } => "SeriesSearch",
@@ -396,6 +550,10 @@ impl CommandBody {
             CommandBody::MessagingCleanup => "MessagingCleanup",
             CommandBody::RefreshSeries { .. } => "RefreshSeries",
             CommandBody::RescanSeries { .. } => "RescanSeries",
+            CommandBody::DownloadedEpisodesScan { .. } => "DownloadedEpisodesScan",
+            CommandBody::ManualImport { .. } => "ManualImport",
+            CommandBody::RenameFiles { .. } => "RenameFiles",
+            CommandBody::RenameSeries { .. } => "RenameSeries",
             CommandBody::CheckHealth => "CheckHealth",
             CommandBody::Housekeeping => "Housekeeping",
             CommandBody::ApplicationUpdateCheck { .. } => "ApplicationUpdateCheck",
@@ -422,6 +580,8 @@ impl CommandBody {
         !matches!(
             self,
             CommandBody::RefreshMonitoredDownloads
+                | CommandBody::ProcessMonitoredDownloads
+                | CommandBody::DownloadedEpisodesScan { .. }
                 | CommandBody::MessagingCleanup
                 | CommandBody::CheckHealth
                 | CommandBody::Housekeeping
@@ -431,7 +591,13 @@ impl CommandBody {
     }
 
     pub fn is_long_running(&self) -> bool {
-        matches!(self, CommandBody::RssSync | CommandBody::RefreshSeries { .. })
+        matches!(
+            self,
+            CommandBody::RssSync
+                | CommandBody::RefreshSeries { .. }
+                | CommandBody::ProcessMonitoredDownloads
+                | CommandBody::DownloadedEpisodesScan { .. }
+        )
     }
 
     pub fn is_exclusive(&self) -> bool {
@@ -439,7 +605,14 @@ impl CommandBody {
     }
 
     pub fn requires_disk_access(&self) -> bool {
-        false
+        matches!(
+            self,
+            CommandBody::ProcessMonitoredDownloads
+                | CommandBody::DownloadedEpisodesScan { .. }
+                | CommandBody::ManualImport { .. }
+                | CommandBody::RenameFiles { .. }
+                | CommandBody::RenameSeries { .. }
+        )
     }
 
     /// `UpdateScheduledTask`: whether running it counts as the scheduled
@@ -493,6 +666,33 @@ impl CommandBody {
             }
             CommandBody::RescanSeries { series_id: Some(id) } => {
                 m.insert("seriesId".into(), json!(id));
+            }
+            CommandBody::ManualImport { files, import_mode } => {
+                m.insert(
+                    "files".into(),
+                    Value::Array(files.iter().map(manual_import_file_json).collect()),
+                );
+                m.insert("importMode".into(), json!(import_mode.as_str()));
+            }
+            CommandBody::RenameFiles { series_id, files } => {
+                m.insert("seriesId".into(), json!(series_id));
+                m.insert("files".into(), json!(files));
+            }
+            CommandBody::RenameSeries { series_ids } => {
+                m.insert("seriesIds".into(), json!(series_ids));
+            }
+            CommandBody::DownloadedEpisodesScan {
+                path,
+                download_client_id,
+                import_mode,
+            } => {
+                if let Some(p) = path {
+                    m.insert("path".into(), json!(p));
+                }
+                if let Some(d) = download_client_id {
+                    m.insert("downloadClientId".into(), json!(d));
+                }
+                m.insert("importMode".into(), json!(import_mode.as_str()));
             }
             CommandBody::ApplicationUpdateCheck { install_major_update } => {
                 m.insert("installMajorUpdate".into(), json!(install_major_update));
@@ -826,6 +1026,12 @@ impl CommandQueue {
     /// `SetMessage`: a progress message (`ProgressInfo`).
     pub fn set_message(&self, id: i64, message: &str) -> Option<CommandModel> {
         self.update(id, |c| c.message = Some(message.to_string()))
+    }
+
+    /// `CommandResultReporter.Report`: a result the handler sets before the
+    /// command ends (an unsuccessful import scan completes all the same).
+    pub fn set_result(&self, id: i64, result: CommandResult) -> Option<CommandModel> {
+        self.update(id, |c| c.result = result)
     }
 
     /// `Start`: the started state written to the table.

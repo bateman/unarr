@@ -13,8 +13,10 @@ hands releases to SABnzbd, NZBGet, qBittorrent or Transmission, tracks the
 queue, runs the commands and scheduled tasks, and reports health. Completed
 downloads wait for phase 3, which imports and renames them and adds series.
 Radarr and Lidarr answer `system/status` only. See
-[docs/DESIGN.md](docs/DESIGN.md), [docs/phase-1-sonarr.md](docs/phase-1-sonarr.md)
-and [docs/phase-2-acquisition.md](docs/phase-2-acquisition.md).
+[docs/DESIGN.md](docs/DESIGN.md), [docs/phase-1-sonarr.md](docs/phase-1-sonarr.md),
+[docs/phase-2-acquisition.md](docs/phase-2-acquisition.md) and, for what comes
+next, [docs/phase-3a-import.md](docs/phase-3a-import.md) and
+[docs/phase-3b-library.md](docs/phase-3b-library.md).
 
 ## Goals
 

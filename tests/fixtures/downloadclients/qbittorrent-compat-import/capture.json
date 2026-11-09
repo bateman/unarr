@@ -1,0 +1,154 @@
+[
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 1,
+  "time": "2026-11-09T13:10:10Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/preferences"
+  },
+  "response": {
+   "body": "{\"save_path\": \"/downloads/emule\", \"temp_path\": \"/downloads/emule/.incomplete\", \"dht\": true, \"max_ratio_enabled\": false, \"max_ratio\": -1, \"max_seeding_time_enabled\": false, \"max_seeding_time\": -1, \"max_inactive_seeding_time_enabled\": false, \"max_inactive_seeding_time\": -1, \"web_ui_username\": \"admin\", \"bypass_auth_subnet_whitelist\": \"0.0.0.0/0\"}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 2,
+  "time": "2026-11-09T13:10:10Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/info?category=tv"
+  },
+  "response": {
+   "body": "[{\"hash\": \"27d0b8e1d820bbf0b78d2ebb5d1c9c5bcf437f5e\", \"name\": \"Below.S01E02.Crown.and.Anchor.1080p.NF.WEB-DL.ENG.Atmos.ITA.DDP5.1.H264-TBK.mkv\", \"size\": 1662080803, \"progress\": 0.8860017920560749, \"dlspeed\": 1717127, \"upspeed\": 0, \"priority\": 10, \"num_seeds\": 7, \"num_leechers\": 0, \"state\": \"downloading\", \"save_path\": \"/downloads/emule\", \"content_path\": \"/downloads/emule/Below.S01E02.Crown.and.Anchor.1080p.NF.WEB-DL.ENG.Atmos.ITA.DDP5.1.H264-TBK.mkv\", \"added_on\": 1794229810, \"eta\": 110.34375034578106, \"category\": \"tv\", \"uploaded\": 0, \"ratio\": 0, \"seeding_time\": 0, \"ratio_limit\": 0, \"seeding_time_limit\": -1, \"inactive_seeding_time_limit\": -1}, {\"hash\": \"11226bb412e2667eb65ad0635d6f6b7018ee1a5c\", \"name\": \"Below.S01E03.Sir.John.Franklin.1080p.NF.WEB-DL.ENG.Atmos.ITA.DDP5.1.H264-TBK.mkv\", \"size\": 1826615271, \"progress\": 0, \"dlspeed\": 0, \"upspeed\": 0, \"priority\": 10, \"num_seeds\": 2, \"num_leechers\": 0, \"state\": \"downloading\", \"save_path\": \"/downloads/emule\", \"content_path\": \"/downloads/emule/Below.S01E03.Sir.John.Franklin.1080p.NF.WEB-DL.ENG.Atmos.ITA.DDP5.1.H264-TBK.mkv\", \"added_on\": 1794229810, \"eta\": 1826615271, \"category\": \"tv\", \"uploaded\": 0, \"ratio\": 0, \"seeding_time\": 0, \"ratio_limit\": 0, \"seeding_time_limit\": -1, \"inactive_seeding_time_limit\": -1}, {\"hash\": \"6e0fe7079529e1a16bbc723abb9c7fca8c29aaf6\", \"name\": \"Below.S01E04.The.Ocean.Will.Have.Us.All.1080p.NF.WEB-DL.ENG.Atmos.ITA.DDP5.1.H264-TBK.mkv\", \"size\": 1801712382, \"progress\": 0, \"dlspeed\": 0, \"upspeed\": 0, \"priority\": 10, \"num_seeds\": 1, \"num_leechers\": 0, \"state\": \"downloading\", \"save_path\": \"/downloads/emule\", \"content_path\": \"/downloads/emule/Below.S01E04.The.Ocean.Will.Have.Us.All.1080p.NF.WEB-DL.ENG.Atmos.ITA.DDP5.1.H264-TBK.mkv\", \"added_on\": 1794229810, \"eta\": 1801712382, \"category\": \"tv\", \"uploaded\": 0, \"ratio\": 0, \"seeding_time\": 0, \"ratio_limit\": 0, \"seeding_time_limit\": -1, \"inactive_seeding_time_limit\": -1}, {\"hash\": \"1c07093c5b67ca08886275701a3a2613401b7209\", \"name\": \"Below.S01E05.Little.Pot.Rock.1080p.NF.WEB-DL.ENG.Atmos.ITA.DDP5.1.H264-TBK.mkv\", \"size\": 1887551893, \"progress\": 0, \"dlspeed\": 0, \"upspeed\": 0, \"priority\": 10, \"num_seeds\": 1, \"num_leechers\": 0, \"state\": \"downloading\", \"save_path\": \"/downloads/emule\", \"content_path\": \"/downloads/emule/Below.S01E05.Little.Pot.Rock.1080p.NF.WEB-DL.ENG.Atmos.ITA.DDP5.1.H264-TBK.mkv\", \"added_on\": 1794229810, \"eta\": 1887551893, \"category\": \"tv\", \"uploaded\": 0, \"ratio\": 0, \"seeding_time\": 0, \"ratio_limit\": 0, \"seeding_time_limit\": -1, \"inactive_seeding_time_limit\": -1}, {\"hash\": \"f6654e5c8e2e7951f31c5d2a907041aacd3ac14d\", \"name\": \"Below.S01E06.The.Unfathering.Deep.1080p.NF.WEB-DL.ENG.Atmos.ITA.DDP5.1.H264-TBK.mkv\", \"size\": 1705912169, \"progress\": 1, \"dlspeed\": 0, \"upspeed\": 0, \"priority\": 0, \"num_seeds\": 0, \"num_leechers\": 0, \"state\": \"pausedUP\", \"save_path\": \"/downloads/emule\", \"content_path\": \"/downloads/emule/Below.S01E06.The.Unfathering.Deep.1080p.NF.WEB-DL.ENG.Atmos.ITA.DDP5.1.H264-TBK.mkv\", \"added_on\": 1794229810, \"eta\": 0, \"category\": \"tv\", \"uploaded\": 0, \"ratio\": 0, \"seeding_time\": 67, \"ratio_limit\": 0, \"seeding_time_limit\": -1, \"inactive_seeding_time_limit\": -1}]",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 3,
+  "time": "2026-11-09T13:10:10Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/files?hash=f6654e5c8e2e7951f31c5d2a907041aacd3ac14d"
+  },
+  "response": {
+   "body": "[{\"index\": 0, \"is_seed\": true, \"name\": \"Below.S01E06.The.Unfathering.Deep.1080p.NF.WEB-DL.ENG.Atmos.ITA.DDP5.1.H264-TBK.mkv\", \"priority\": 1, \"progress\": 1, \"size\": 1705912169, \"availability\": 1}]",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 4,
+  "time": "2026-11-09T13:10:10Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/properties?hash=f6654e5c8e2e7951f31c5d2a907041aacd3ac14d"
+  },
+  "response": {
+   "body": "{\"addition_date\": 0, \"comment\": \"\", \"completion_date\": 1794229743, \"created_by\": \"\", \"dl_speed\": 0, \"eta\": 0, \"isPrivate\": false, \"peers\": 0, \"save_path\": \"/downloads/emule\", \"seeding_time\": 67, \"seeds\": 0, \"seeds_total\": 0, \"share_ratio\": 0, \"total_downloaded\": 1705912169, \"total_size\": 1705912169, \"total_uploaded\": 0, \"up_limit\": -1, \"up_speed\": 0, \"up_speed_avg\": 0}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 5,
+  "time": "2026-11-09T13:10:10Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/files?hash=f6654e5c8e2e7951f31c5d2a907041aacd3ac14d"
+  },
+  "response": {
+   "body": "[{\"index\": 0, \"is_seed\": true, \"name\": \"Below.S01E06.The.Unfathering.Deep.1080p.NF.WEB-DL.ENG.Atmos.ITA.DDP5.1.H264-TBK.mkv\", \"priority\": 1, \"progress\": 1, \"size\": 1705912169, \"availability\": 1}]",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 6,
+  "time": "2026-11-09T13:10:10Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/properties?hash=f6654e5c8e2e7951f31c5d2a907041aacd3ac14d"
+  },
+  "response": {
+   "body": "{\"addition_date\": 0, \"comment\": \"\", \"completion_date\": 1794229743, \"created_by\": \"\", \"dl_speed\": 0, \"eta\": 0, \"isPrivate\": false, \"peers\": 0, \"save_path\": \"/downloads/emule\", \"seeding_time\": 67, \"seeds\": 0, \"seeds_total\": 0, \"share_ratio\": 0, \"total_downloaded\": 1705912169, \"total_size\": 1705912169, \"total_uploaded\": 0, \"up_limit\": -1, \"up_speed\": 0, \"up_speed_avg\": 0}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 7,
+  "time": "2026-11-09T13:10:10Z"
+ },
+ {
+  "request": {
+   "body": "hashes=f6654e5c8e2e7951f31c5d2a907041aacd3ac14d&deleteFiles=true",
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/api/as-qbittorrent/api/v2/torrents/delete"
+  },
+  "response": {
+   "body": "Ok.",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 8,
+  "time": "2026-11-09T13:10:11Z"
+ }
+]

@@ -2,9 +2,9 @@
   "body": [
     {
       "absoluteEpisodeNumbers": [],
-      "age": 612,
-      "ageHours": 14701.57131360764,
-      "ageMinutes": 882094.278816465,
+      "age": 613,
+      "ageHours": 14730.768031520056,
+      "ageMinutes": 883846.0818912133,
       "approved": false,
       "commentUrl": "http://127.0.0.1:18989/newznab/details/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2#comments",
       "customFormatScore": -10000,
@@ -97,9 +97,9 @@
     },
     {
       "absoluteEpisodeNumbers": [],
-      "age": 612,
-      "ageHours": 14701.571313620778,
-      "ageMinutes": 882094.2788172467,
+      "age": 613,
+      "ageHours": 14730.768031531306,
+      "ageMinutes": 883846.08189188,
       "approved": false,
       "commentUrl": "http://127.0.0.1:18989/torznab/details/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2#comments",
       "customFormatScore": -10000,
@@ -195,7 +195,7 @@
       "tvdbId": 422712
     }
   ],
-  "recordedAt": "2026-11-07T15:44:16Z",
+  "recordedAt": "2026-11-08T20:56:04Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/release?episodeId=46"

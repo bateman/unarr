@@ -1,0 +1,36 @@
+{
+  "body": {
+    "body": {
+      "isExclusive": false,
+      "isLongRunning": false,
+      "name": "RescanSeries",
+      "requiresDiskAccess": false,
+      "sendUpdatesToClient": true,
+      "seriesId": 1,
+      "suppressMessages": false,
+      "trigger": "manual",
+      "updateScheduledTask": true
+    },
+    "commandName": "Rescan Series",
+    "duration": "00:00:00.0515652",
+    "ended": "2026-11-08T20:59:32Z",
+    "id": 461695,
+    "message": "Scanning The Pitt",
+    "name": "RescanSeries",
+    "priority": "normal",
+    "queued": "2026-11-08T20:59:32Z",
+    "result": "successful",
+    "sendUpdatesToClient": true,
+    "started": "2026-11-08T20:59:32Z",
+    "stateChangeTime": "2026-11-08T20:59:32Z",
+    "status": "completed",
+    "trigger": "manual",
+    "updateScheduledTask": true
+  },
+  "recordedAt": "2026-11-08T20:59:44Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/command/461695"
+  },
+  "status": 200
+}

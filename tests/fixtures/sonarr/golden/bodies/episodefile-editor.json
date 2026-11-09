@@ -1,0 +1,24 @@
+{
+  "episodeFileIds": [
+    1075
+  ],
+  "quality": {
+    "quality": {
+      "id": 5,
+      "name": "WEBDL-720p",
+      "source": "web",
+      "resolution": 720
+    },
+    "revision": {
+      "version": 1,
+      "real": 0,
+      "isRepack": false
+    }
+  },
+  "languages": [
+    {
+      "id": 1,
+      "name": "English"
+    }
+  ]
+}

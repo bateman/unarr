@@ -1,0 +1,78 @@
+[
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.16.2",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 1,
+  "time": "2026-11-09T11:50:35Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/v2/app/preferences"
+  },
+  "response": {
+   "body": "{\"add_stopped_enabled\": false, \"add_to_top_of_queue\": false, \"add_trackers\": \"\", \"add_trackers_enabled\": false, \"add_trackers_from_url_enabled\": false, \"add_trackers_url\": \"\", \"add_trackers_url_list\": \"\", \"alt_dl_limit\": 10240, \"alt_up_limit\": 10240, \"alternative_webui_enabled\": false, \"alternative_webui_path\": \"\", \"announce_ip\": \"\", \"announce_port\": 0, \"announce_to_all_tiers\": true, \"announce_to_all_trackers\": false, \"anonymous_mode\": false, \"app_instance_name\": \"\", \"async_io_threads\": 10, \"auto_delete_mode\": 0, \"auto_tmm_enabled\": true, \"autorun_enabled\": false, \"autorun_on_torrent_added_enabled\": false, \"autorun_on_torrent_added_program\": \"\", \"autorun_program\": \"\", \"banned_IPs\": \"\", \"bdecode_depth_limit\": 100, \"bdecode_token_limit\": 10000000, \"bittorrent_protocol\": 0, \"block_peers_on_privileged_ports\": false, \"bypass_auth_subnet_whitelist\": \"0.0.0.0/0\", \"bypass_auth_subnet_whitelist_enabled\": true, \"bypass_local_auth\": true, \"category_changed_tmm_enabled\": false, \"checking_memory_use\": 32, \"confirm_remove_all_tags\": true, \"confirm_remove_tracker_from_all_torrents\": true, \"confirm_torrent_deletion\": true, \"confirm_torrent_recheck\": true, \"connection_speed\": 30, \"current_interface_address\": \"\", \"current_interface_name\": \"\", \"current_network_interface\": \"\", \"delete_torrent_content_files\": false, \"dht\": true, \"dht_bootstrap_nodes\": \"dht.libtorrent.org:25401, dht.transmissionbt.com:6881, router.bt.ouinet.work:6881\", \"disk_cache\": -1, \"disk_cache_ttl\": 60, \"disk_io_read_mode\": 1, \"disk_io_type\": 0, \"disk_io_write_mode\": 1, \"disk_queue_size\": 104857600, \"dl_limit\": 0, \"dont_count_slow_torrents\": false, \"dyndns_domain\": \"\", \"dyndns_enabled\": false, \"dyndns_password\": \"\", \"dyndns_service\": 0, \"dyndns_username\": \"\", \"embedded_tracker_port\": 9000, \"embedded_tracker_port_forwarding\": false, \"enable_coalesce_read_write\": false, \"enable_embedded_tracker\": false, \"enable_multi_connections_from_same_ip\": false, \"enable_multi_connections_from_same_peer_id\": false, \"enable_piece_extent_affinity\": false, \"enable_upload_suggestions\": false, \"encryption\": 0, \"excluded_file_names\": \"\", \"excluded_file_names_enabled\": false, \"file_log_age\": 1, \"file_log_age_type\": 1, \"file_log_backup_enabled\": true, \"file_log_delete_old\": true, \"file_log_enabled\": true, \"file_log_max_size\": 65, \"file_log_path\": \"/config/qBittorrent/logs\", \"file_pool_size\": 100, \"hashing_threads\": 1, \"hostname_cache_ttl\": 1200, \"i2p_address\": \"127.0.0.1\", \"i2p_enabled\": false, \"i2p_inbound_length\": 3, \"i2p_inbound_length_variance\": 0, \"i2p_inbound_quantity\": 3, \"i2p_mixed_mode\": false, \"i2p_outbound_length\": 3, \"i2p_outbound_length_variance\": 0, \"i2p_outbound_quantity\": 3, \"i2p_pex_enabled\": true, \"i2p_port\": 7656, \"idn_support_enabled\": false, \"ignore_ssl_errors\": false, \"incomplete_files_ext\": false, \"ip_filter_enabled\": false, \"ip_filter_path\": \"\", \"ip_filter_trackers\": false, \"limit_lan_peers\": true, \"limit_tcp_overhead\": false, \"limit_utp_rate\": true, \"listen_port\": 6881, \"locale\": \"en\", \"lsd\": true, \"mail_notification_auth_enabled\": true, \"mail_notification_email\": \"\", \"mail_notification_enabled\": false, \"mail_notification_encryption_type\": \"\", \"mail_notification_password\": \"\", \"mail_notification_sender\": \"\", \"mail_notification_smtp\": \"\", \"mail_notification_username\": \"\", \"mark_of_the_web\": true, \"max_active_checking_torrents\": 1, \"max_active_downloads\": 3, \"max_active_torrents\": 5, \"max_active_uploads\": 3, \"max_concurrent_http_announces\": 50, \"max_connec\": 250, \"max_connec_per_torrent\": 100, \"max_inactive_seeding_time\": 1, \"max_inactive_seeding_time_enabled\": true, \"max_outstanding_block_requests\": 2000, \"max_ratio\": -1, \"max_ratio_act\": 0, \"max_ratio_enabled\": false, \"max_seeding_time\": 10, \"max_seeding_time_enabled\": true, \"max_uploads\": 40, \"max_uploads_per_torrent\": 8, \"memory_working_set_limit\": 512, \"merge_trackers\": false, \"outgoing_ports_max\": 0, \"outgoing_ports_min\": 0, \"peer_tos\": 1, \"peer_turnover\": 4, \"peer_turnover_cutoff\": 90, \"peer_turnover_interval\": 300, \"performance_warning\": false, \"pex\": true, \"preallocate_all\": false, \"proxy_auth_enabled\": false, \"proxy_bittorrent\": true, \"proxy_hostname_lookup\": false, \"proxy_ip\": \"\", \"proxy_misc\": true, \"proxy_password\": \"\", \"proxy_peer_connections\": false, \"proxy_port\": 8080, \"proxy_rss\": true, \"proxy_type\": \"\", \"proxy_username\": \"\", \"python_executable_path\": \"\", \"queueing_enabled\": true, \"random_port\": false, \"reannounce_when_address_changed\": false, \"recheck_completed_torrents\": false, \"refresh_interval\": 1500, \"remove_torrent_file_backup\": false, \"request_queue_size\": 500, \"resolve_peer_countries\": true, \"resolve_peer_host_names\": false, \"resume_data_storage_type\": \"Legacy\", \"rss_auto_downloading_enabled\": false, \"rss_download_repack_proper_episodes\": true, \"rss_fetch_delay\": 2, \"rss_max_articles_per_feed\": 50, \"rss_processing_enabled\": false, \"rss_refresh_interval\": 30, \"rss_smart_episode_filters\": \"s(\\\\d+)e(\\\\d+)\\n(\\\\d+)x(\\\\d+)\\n(\\\\d{4}[.\\\\-]\\\\d{1,2}[.\\\\-]\\\\d{1,2})\\n(\\\\d{1,2}[.\\\\-]\\\\d{1,2}[.\\\\-]\\\\d{4})\", \"save_path\": \"/downloads/torrents\", \"save_path_changed_tmm_enabled\": false, \"save_resume_data_interval\": 60, \"save_statistics_interval\": 15, \"scan_dirs\": {}, \"schedule_from_hour\": 8, \"schedule_from_min\": 0, \"schedule_to_hour\": 20, \"schedule_to_min\": 0, \"scheduler_days\": 0, \"scheduler_enabled\": false, \"seeding_outgoing_connections\": true, \"send_buffer_low_watermark\": 10, \"send_buffer_watermark\": 500, \"send_buffer_watermark_factor\": 50, \"share_limits_mode\": \"MatchAny\", \"shutdown_timeout\": -1, \"slow_torrent_dl_rate_threshold\": 2, \"slow_torrent_inactive_timer\": 60, \"slow_torrent_ul_rate_threshold\": 2, \"socket_backlog_size\": 30, \"socket_receive_buffer_size\": 0, \"socket_send_buffer_size\": 0, \"ssl_enabled\": false, \"ssl_listen_port\": 0, \"ssrf_mitigation\": true, \"start_paused\": false, \"status_bar_external_ip\": true, \"stop_tracker_timeout\": 2, \"store_search_job_results\": false, \"store_search_jobs\": false, \"temp_path\": \"/downloads/incomplete\", \"temp_path_enabled\": false, \"torrent_changed_tmm_enabled\": true, \"torrent_content_layout\": \"Original\", \"torrent_content_remove_option\": \"Delete\", \"torrent_file_size_limit\": 104857600, \"torrent_files_backup_dir\": \"backup\", \"torrent_files_backup_enabled\": false, \"torrent_files_finished_backup_dir\": \"backup\", \"torrent_files_finished_backup_dir_enabled\": false, \"torrent_stop_condition\": \"None\", \"up_limit\": 0, \"upload_choking_algorithm\": 1, \"upload_slots_behavior\": 0, \"upnp\": false, \"upnp_lease_duration\": 0, \"use_category_paths_in_manual_mode\": false, \"use_https\": false, \"use_unwanted_folder\": false, \"utp_tcp_mixed_mode\": 0, \"validate_https_tracker_certificate\": true, \"web_ui_address\": \"*\", \"web_ui_api_key\": \"\", \"web_ui_ban_duration\": 3600, \"web_ui_clickjacking_protection_enabled\": true, \"web_ui_csrf_protection_enabled\": false, \"web_ui_custom_http_headers\": \"\", \"web_ui_domain_list\": \"\", \"web_ui_host_header_validation_enabled\": false, \"web_ui_https_cert_path\": \"\", \"web_ui_https_key_path\": \"\", \"web_ui_max_auth_fail_count\": 5, \"web_ui_port\": 8080, \"web_ui_reverse_proxies_list\": \"\", \"web_ui_reverse_proxy_enabled\": false, \"web_ui_secure_cookie_enabled\": true, \"web_ui_session_timeout\": 3600, \"web_ui_sessions_count_limit\": 15, \"web_ui_upnp\": false, \"web_ui_use_custom_http_headers_enabled\": false, \"web_ui_username\": \"admin\", \"webtorrent_stun_server\": \"stun.l.google.com:19302\"}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 2,
+  "time": "2026-11-09T11:50:35Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/v2/torrents/info?category=tv"
+  },
+  "response": {
+   "body": "[{\"added_on\": 1794224240, \"amount_left\": 0, \"auto_tmm\": true, \"availability\": -1, \"category\": \"tv\", \"comment\": \"\", \"completed\": 1765003499, \"completion_on\": 1794224947, \"connections_count\": 0, \"connections_limit\": 100, \"content_path\": \"/downloads/torrents/tv/www.UIndex.org    -    Ted.S02E02.1080p.WEB.h264-ETHEL\", \"created_by\": \"\", \"creation_date\": -1, \"dl_limit\": 0, \"dlspeed\": 0, \"download_path\": \"\", \"downloaded\": 1767101040, \"downloaded_session\": 1767101040, \"eta\": 8640000, \"f_l_piece_prio\": false, \"force_start\": false, \"has_metadata\": true, \"hash\": \"e274ebcd3f2b606cda26d89ae084fb7e5fea776d\", \"inactive_seeding_time_limit\": -2, \"infohash_v1\": \"e274ebcd3f2b606cda26d89ae084fb7e5fea776d\", \"infohash_v2\": \"\", \"last_activity\": 1794224947, \"magnet_uri\": \"\", \"max_inactive_seeding_time\": 1, \"max_ratio\": -1, \"max_seeding_time\": 10, \"name\": \"www.UIndex.org    -    Ted.S02E02.1080p.WEB.h264-ETHEL\", \"num_complete\": 82, \"num_incomplete\": 18, \"num_leechs\": 0, \"num_seeds\": 0, \"piece_size\": 8388608, \"pieces_have\": 211, \"pieces_num\": 211, \"popularity\": 0, \"priority\": 0, \"private\": false, \"progress\": 1, \"ratio\": 0, \"ratio_limit\": -2, \"reannounce\": 0, \"root_path\": \"/downloads/torrents/tv/www.UIndex.org    -    Ted.S02E02.1080p.WEB.h264-ETHEL\", \"save_path\": \"/downloads/torrents/tv\", \"seeding_time\": 68, \"seeding_time_limit\": -2, \"seen_complete\": 1794224947, \"seq_dl\": false, \"share_limit_action\": \"Default\", \"share_limits_mode\": \"Default\", \"size\": 1765003499, \"state\": \"stoppedUP\", \"super_seeding\": false, \"tags\": \"\", \"time_active\": 775, \"total_size\": 1765003499, \"total_wasted\": 2097541, \"tracker\": \"\", \"trackers_count\": 20, \"up_limit\": 0, \"uploaded\": 0, \"uploaded_session\": 0, \"upspeed\": 0}, {\"added_on\": 1794223701, \"amount_left\": 3737354240, \"auto_tmm\": true, \"availability\": 3.194999933242798, \"category\": \"tv\", \"comment\": \"\", \"completed\": 909965479, \"completion_on\": -1, \"connections_count\": 3, \"connections_limit\": 100, \"content_path\": \"/downloads/torrents/tv/Below.S01E01-06.1080p.NF.WEB-DL.ITA.ENG.DDP5.1.AV1-G66\", \"created_by\": \"\", \"creation_date\": -1, \"dl_limit\": 0, \"dlspeed\": 821257, \"download_path\": \"\", \"downloaded\": 909772175, \"downloaded_session\": 910009566, \"eta\": 5744, \"f_l_piece_prio\": false, \"force_start\": false, \"has_metadata\": true, \"hash\": \"851ec3d03df1e3adfe1ed6efd6a13f1b9299e972\", \"inactive_seeding_time_limit\": -2, \"infohash_v1\": \"851ec3d03df1e3adfe1ed6efd6a13f1b9299e972\", \"infohash_v2\": \"\", \"last_activity\": 1794225034, \"magnet_uri\": \"\", \"max_inactive_seeding_time\": 1, \"max_ratio\": -1, \"max_seeding_time\": 10, \"name\": \"Below.S01E01-06.1080p.NF.WEB-DL.ITA.ENG.DDP5.1.AV1-G66\", \"num_complete\": 0, \"num_incomplete\": 12, \"num_leechs\": 0, \"num_seeds\": 3, \"piece_size\": 524288, \"pieces_have\": 1735, \"pieces_num\": 8865, \"popularity\": 0, \"priority\": 1, \"private\": false, \"progress\": 0.1958043633795448, \"ratio\": 0, \"ratio_limit\": -2, \"reannounce\": 16, \"root_path\": \"/downloads/torrents/tv/Below.S01E01-06.1080p.NF.WEB-DL.ITA.ENG.DDP5.1.AV1-G66\", \"save_path\": \"/downloads/torrents/tv\", \"seeding_time\": 0, \"seeding_time_limit\": -2, \"seen_complete\": 1794225034, \"seq_dl\": false, \"share_limit_action\": \"Default\", \"share_limits_mode\": \"Default\", \"size\": 4647319719, \"state\": \"downloading\", \"super_seeding\": false, \"tags\": \"\", \"time_active\": 1332, \"total_size\": 4647319719, \"total_wasted\": 20305, \"tracker\": \"\", \"trackers_count\": 20, \"up_limit\": 0, \"uploaded\": 0, \"uploaded_session\": 0, \"upspeed\": 0}]",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 3,
+  "time": "2026-11-09T11:50:35Z"
+ },
+ {
+  "request": {
+   "body": "hashes=e274ebcd3f2b606cda26d89ae084fb7e5fea776d&deleteFiles=true",
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/api/v2/torrents/delete"
+  },
+  "response": {
+   "body": "",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 4,
+  "time": "2026-11-09T11:50:36Z"
+ }
+]

@@ -1,0 +1,1485 @@
+{
+  "body": {
+    "page": 1,
+    "pageSize": 10,
+    "records": [
+      {
+        "customFormatScore": -10000,
+        "customFormats": [
+          {
+            "id": 21,
+            "name": "DSNP"
+          },
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 11,
+            "name": "WEB Tier 01"
+          }
+        ],
+        "data": {
+          "customFormatScore": "-10000",
+          "downloadClient": "Transmission",
+          "downloadClientName": "Mock Transmission",
+          "droppedPath": "/downloads/tv/Daredevil.Born.Again.S01E02.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-FLUX/Daredevil.Born.Again.S01E02.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-FLUX.mkv",
+          "fileId": "1075",
+          "importedPath": "/tv/Daredevil - Born Again/Season 01/Daredevil Born Again (2025) - S01E02 - Optics [DSNP][WEBDL-480p][AAC 1.0][x264]-FLUX.mkv",
+          "indexerFlags": "0",
+          "releaseGroup": "FLUX",
+          "releaseType": "SingleEpisode",
+          "size": "119980"
+        },
+        "date": "2026-11-08T20:58:07Z",
+        "downloadId": "4271B834AED1835F13BD078CB4A9A98F00AC777F",
+        "episode": {
+          "airDate": "2025-03-04",
+          "airDateUtc": "2025-03-05T02:48:00Z",
+          "episodeFileId": 1075,
+          "episodeNumber": 2,
+          "hasFile": true,
+          "id": 47,
+          "lastSearchTime": "2026-11-08T20:57:09Z",
+          "monitored": false,
+          "overview": "Matt Murdock takes on a new client, Hector Ayala. But this local hero from the Heights is more than he claims to be. Fisk learns the power of optics in his new and very public role.",
+          "runtime": 47,
+          "seasonNumber": 1,
+          "seriesId": 2,
+          "title": "Optics",
+          "tvdbId": 10751467,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 47,
+        "eventType": "downloadFolderImported",
+        "id": 2307,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 8,
+            "name": "WEBDL-480p",
+            "resolution": 480,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "TV-MA",
+          "cleanTitle": "daredevilbornagain",
+          "ended": false,
+          "firstAired": "2025-03-04T00:00:00Z",
+          "genres": [
+            "Action",
+            "Drama"
+          ],
+          "id": 2,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/422712/banners/6787d1d7187c6.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/422712/posters/6978fefe94ea5.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/422712/backgrounds/69bef1d230b9d.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/422712/clearlogo/67e60e559c1f8.png"
+            }
+          ],
+          "imdbId": "tt18923754",
+          "languageProfileId": 1,
+          "lastAired": "2026-05-05T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Disney+",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Matt Murdock finds himself on a collision course with Wilson Fisk when their past identities begin to emerge.",
+          "path": "/tv/Daredevil - Born Again",
+          "qualityProfileId": 8,
+          "ratings": {
+            "value": 8.1,
+            "votes": 118894
+          },
+          "runtime": 48,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "daredevil born again",
+          "status": "continuing",
+          "tags": [],
+          "title": "Daredevil: Born Again",
+          "titleSlug": "daredevil-born-again",
+          "tmdbId": 202555,
+          "tvMazeId": 63234,
+          "tvRageId": 0,
+          "tvdbId": 422712,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 2,
+        "sourceTitle": "Daredevil.Born.Again.S01E02.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-FLUX"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [],
+        "data": {
+          "customFormatScore": "0",
+          "downloadClient": "NZBGet",
+          "downloadClientName": "Mock NZBGet",
+          "droppedPath": "/downloads/completed/tv/The.Pitt.S01E02.1080p.WEB.H264-SuccessfulCrab/The.Pitt.S01E02.1080p.WEB.H264-SuccessfulCrab.mkv",
+          "fileId": "1074",
+          "importedPath": "/tv/The Pitt/Season 01/The Pitt (2025) - S01E02 - 8-00 A.M [WEBDL-480p][AAC 1.0][x264]-SuccessfulCrab.mkv",
+          "indexerFlags": "0",
+          "releaseGroup": "SuccessfulCrab",
+          "releaseType": "SingleEpisode",
+          "size": "177860"
+        },
+        "date": "2026-11-08T20:57:47Z",
+        "downloadId": "c4119cd06a044d60be1043396370761b",
+        "episode": {
+          "absoluteEpisodeNumber": 2,
+          "airDate": "2025-01-09",
+          "airDateUtc": "2025-01-10T02:48:00Z",
+          "episodeFileId": 1074,
+          "episodeNumber": 2,
+          "hasFile": true,
+          "id": 2,
+          "lastSearchTime": "2026-11-08T20:56:40Z",
+          "monitored": false,
+          "overview": "Robby helps siblings navigate their elderly father’s end-of-life care. Later, Samira fends off cops targeting a woman with a misunderstood condition.",
+          "runtime": 50,
+          "seasonNumber": 1,
+          "seriesId": 1,
+          "title": "8:00 A.M.",
+          "tvdbId": 10851517,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 2,
+        "eventType": "downloadFolderImported",
+        "id": 2306,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 8,
+            "name": "WEBDL-480p",
+            "resolution": 480,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "series": {
+          "added": "2026-03-06T07:44:38Z",
+          "airTime": "21:00",
+          "cleanTitle": "thepitt",
+          "ended": false,
+          "firstAired": "2025-01-09T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 1,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/banners/6972a4aba4c5d.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/backgrounds/675c4f787cfc4.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/clearlogo/675d049994d06.png"
+            }
+          ],
+          "imdbId": "tt31938062",
+          "languageProfileId": 1,
+          "lastAired": "2026-04-16T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "HBO Max",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "The staff of Pittsburgh's Trauma Medical Center work around the clock to save lives in an overcrowded and underfunded emergency department.",
+          "path": "/tv/The Pitt",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.9,
+            "votes": 178410
+          },
+          "runtime": 48,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "pitt",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "The Pitt",
+          "titleSlug": "the-pitt",
+          "tmdbId": 250307,
+          "tvMazeId": 75632,
+          "tvRageId": 0,
+          "tvdbId": 448176,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 1,
+        "sourceTitle": "The.Pitt.S01E02.1080p.WEB.H264-SuccessfulCrab"
+      },
+      {
+        "customFormatScore": -10000,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          }
+        ],
+        "data": {
+          "customFormatScore": "-10000",
+          "downloadClient": "SABnzbd",
+          "downloadClientName": "Mock SABnzbd",
+          "droppedPath": "/downloads/complete/tv/The.Pitt.S01E01.720p.WEB.h264-ETHEL/The.Pitt.S01E01.720p.WEB.h264-ETHEL.mkv",
+          "fileId": "1073",
+          "importedPath": "/tv/The Pitt/Season 01/The Pitt (2025) - S01E01 - 7-00 A.M [WEBDL-480p][AAC 1.0][x264]-ETHEL.mkv",
+          "indexerFlags": "0",
+          "releaseGroup": "ETHEL",
+          "releaseType": "SingleEpisode",
+          "size": "119980"
+        },
+        "date": "2026-11-08T20:57:28Z",
+        "downloadId": "SABnzbd_nzo_mock3",
+        "episode": {
+          "absoluteEpisodeNumber": 1,
+          "airDate": "2025-01-09",
+          "airDateUtc": "2025-01-10T02:00:00Z",
+          "episodeFileId": 1073,
+          "episodeNumber": 1,
+          "hasFile": true,
+          "id": 1,
+          "lastSearchTime": "2026-11-08T20:56:40Z",
+          "monitored": false,
+          "overview": "While attempting to distract himself from the anniversary of his mentor’s death, Dr. Robby introduces a fresh batch of interns to life in the ER.",
+          "runtime": 53,
+          "seasonNumber": 1,
+          "seriesId": 1,
+          "title": "7:00 A.M.",
+          "tvdbId": 10407559,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 1,
+        "eventType": "downloadFolderImported",
+        "id": 2305,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 8,
+            "name": "WEBDL-480p",
+            "resolution": 480,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "series": {
+          "added": "2026-03-06T07:44:38Z",
+          "airTime": "21:00",
+          "cleanTitle": "thepitt",
+          "ended": false,
+          "firstAired": "2025-01-09T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 1,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/banners/6972a4aba4c5d.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/backgrounds/675c4f787cfc4.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/clearlogo/675d049994d06.png"
+            }
+          ],
+          "imdbId": "tt31938062",
+          "languageProfileId": 1,
+          "lastAired": "2026-04-16T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "HBO Max",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "The staff of Pittsburgh's Trauma Medical Center work around the clock to save lives in an overcrowded and underfunded emergency department.",
+          "path": "/tv/The Pitt",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.9,
+            "votes": 178410
+          },
+          "runtime": 48,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "pitt",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "The Pitt",
+          "titleSlug": "the-pitt",
+          "tmdbId": 250307,
+          "tvMazeId": 75632,
+          "tvRageId": 0,
+          "tvdbId": 448176,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 1,
+        "sourceTitle": "The.Pitt.S01E01.720p.WEB.h264-ETHEL"
+      },
+      {
+        "customFormatScore": -10000,
+        "customFormats": [
+          {
+            "id": 21,
+            "name": "DSNP"
+          },
+          {
+            "id": 10,
+            "name": "HD Streaming Boost"
+          },
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 11,
+            "name": "WEB Tier 01"
+          }
+        ],
+        "data": {
+          "age": "613",
+          "ageHours": "14730.787728927111",
+          "ageMinutes": "883847.2637356684",
+          "customFormatScore": "-10000",
+          "downloadClient": "Transmission",
+          "downloadClientName": "Mock Transmission",
+          "downloadUrl": "http://127.0.0.1:18989/torznab/download/d2e4f6a8b0c2d4e6f8a0b2c4d6e8f0a2.torrent",
+          "guid": "http://127.0.0.1:18989/torznab/details/d2e4f6a8b0c2d4e6f8a0b2c4d6e8f0a2",
+          "imdbId": null,
+          "indexer": "Mock Torznab (Prowlarr)",
+          "indexerFlags": "0",
+          "nzbInfoUrl": "http://127.0.0.1:18989/torznab/details/d2e4f6a8b0c2d4e6f8a0b2c4d6e8f0a2",
+          "protocol": "2",
+          "publishedDate": "2025-03-05T02:10:00Z",
+          "releaseGroup": "FLUX",
+          "releaseSource": "InteractiveSearch",
+          "releaseType": "SingleEpisode",
+          "seriesMatchType": "Title",
+          "size": "3221225472",
+          "torrentInfoHash": "d2e4f6a8b0c2d4e6f8a0b2c4d6e8f0a2d2e4f6a8",
+          "tvRageId": "0",
+          "tvdbId": "422712"
+        },
+        "date": "2026-11-08T20:57:15Z",
+        "downloadId": "4271B834AED1835F13BD078CB4A9A98F00AC777F",
+        "episode": {
+          "airDate": "2025-03-04",
+          "airDateUtc": "2025-03-05T02:48:00Z",
+          "episodeFileId": 1075,
+          "episodeNumber": 2,
+          "hasFile": true,
+          "id": 47,
+          "lastSearchTime": "2026-11-08T20:57:09Z",
+          "monitored": false,
+          "overview": "Matt Murdock takes on a new client, Hector Ayala. But this local hero from the Heights is more than he claims to be. Fisk learns the power of optics in his new and very public role.",
+          "runtime": 47,
+          "seasonNumber": 1,
+          "seriesId": 2,
+          "title": "Optics",
+          "tvdbId": 10751467,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 47,
+        "eventType": "grabbed",
+        "id": 2304,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "TV-MA",
+          "cleanTitle": "daredevilbornagain",
+          "ended": false,
+          "firstAired": "2025-03-04T00:00:00Z",
+          "genres": [
+            "Action",
+            "Drama"
+          ],
+          "id": 2,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/422712/banners/6787d1d7187c6.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/422712/posters/6978fefe94ea5.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/422712/backgrounds/69bef1d230b9d.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/422712/clearlogo/67e60e559c1f8.png"
+            }
+          ],
+          "imdbId": "tt18923754",
+          "languageProfileId": 1,
+          "lastAired": "2026-05-05T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Disney+",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Matt Murdock finds himself on a collision course with Wilson Fisk when their past identities begin to emerge.",
+          "path": "/tv/Daredevil - Born Again",
+          "qualityProfileId": 8,
+          "ratings": {
+            "value": 8.1,
+            "votes": 118894
+          },
+          "runtime": 48,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "daredevil born again",
+          "status": "continuing",
+          "tags": [],
+          "title": "Daredevil: Born Again",
+          "titleSlug": "daredevil-born-again",
+          "tmdbId": 202555,
+          "tvMazeId": 63234,
+          "tvRageId": 0,
+          "tvdbId": 422712,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 2,
+        "sourceTitle": "Daredevil.Born.Again.S01E02.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-FLUX"
+      },
+      {
+        "customFormatScore": -10000,
+        "customFormats": [
+          {
+            "id": 21,
+            "name": "DSNP"
+          },
+          {
+            "id": 10,
+            "name": "HD Streaming Boost"
+          },
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 11,
+            "name": "WEB Tier 01"
+          }
+        ],
+        "data": {
+          "age": "613",
+          "ageHours": "14730.787171340167",
+          "ageMinutes": "883847.2302804617",
+          "customFormatScore": "-10000",
+          "downloadClient": "qBittorrent",
+          "downloadClientName": "Mock qBittorrent",
+          "downloadUrl": "http://127.0.0.1:18989/torznab/download/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2.torrent",
+          "guid": "http://127.0.0.1:18989/torznab/details/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2",
+          "imdbId": null,
+          "indexer": "Mock Torznab (Prowlarr)",
+          "indexerFlags": "0",
+          "nzbInfoUrl": "http://127.0.0.1:18989/torznab/details/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2",
+          "protocol": "2",
+          "publishedDate": "2025-03-05T02:10:00Z",
+          "releaseGroup": "FLUX",
+          "releaseSource": "Rss",
+          "releaseType": "SingleEpisode",
+          "seriesMatchType": "Title",
+          "size": "3113851289",
+          "torrentInfoHash": "07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e207f9c8d0",
+          "tvRageId": "0",
+          "tvdbId": "422712"
+        },
+        "date": "2026-11-08T20:57:13Z",
+        "downloadId": "0FB2EF04FB342178115BA635EC7B5EC0067058BA",
+        "episode": {
+          "airDate": "2025-03-04",
+          "airDateUtc": "2025-03-05T02:00:00Z",
+          "episodeFileId": 0,
+          "episodeNumber": 1,
+          "hasFile": false,
+          "id": 46,
+          "lastSearchTime": "2026-11-08T20:56:27Z",
+          "monitored": false,
+          "overview": "Longtime rivals Matt Murdock and Wilson Fisk attempt to move past their darker personas to serve New York, but their pasts resurface, reintroducing the world of Daredevil.",
+          "runtime": 59,
+          "seasonNumber": 1,
+          "seriesId": 2,
+          "title": "Heaven's Half Hour",
+          "tvdbId": 9275652,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 46,
+        "eventType": "grabbed",
+        "id": 2303,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "TV-MA",
+          "cleanTitle": "daredevilbornagain",
+          "ended": false,
+          "firstAired": "2025-03-04T00:00:00Z",
+          "genres": [
+            "Action",
+            "Drama"
+          ],
+          "id": 2,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/422712/banners/6787d1d7187c6.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/422712/posters/6978fefe94ea5.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/422712/backgrounds/69bef1d230b9d.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/422712/clearlogo/67e60e559c1f8.png"
+            }
+          ],
+          "imdbId": "tt18923754",
+          "languageProfileId": 1,
+          "lastAired": "2026-05-05T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Disney+",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Matt Murdock finds himself on a collision course with Wilson Fisk when their past identities begin to emerge.",
+          "path": "/tv/Daredevil - Born Again",
+          "qualityProfileId": 8,
+          "ratings": {
+            "value": 8.1,
+            "votes": 118894
+          },
+          "runtime": 48,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "daredevil born again",
+          "status": "continuing",
+          "tags": [],
+          "title": "Daredevil: Born Again",
+          "titleSlug": "daredevil-born-again",
+          "tmdbId": 202555,
+          "tvMazeId": 63234,
+          "tvRageId": 0,
+          "tvdbId": 422712,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 2,
+        "sourceTitle": "Daredevil.Born.Again.S01E01.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-FLUX"
+      },
+      {
+        "customFormatScore": -10000,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          }
+        ],
+        "data": {
+          "age": "667",
+          "ageHours": "16024.986617665472",
+          "ageMinutes": "961499.1970599816",
+          "customFormatScore": "-10000",
+          "downloadClient": "NZBGet",
+          "downloadClientName": "Mock NZBGet",
+          "downloadUrl": "http://127.0.0.1:18989/newznab/download/e5d7a6b8c9f0e1a2b3c4d5e6f7a8b9c0.nzb",
+          "guid": "http://127.0.0.1:18989/newznab/details/e5d7a6b8c9f0e1a2b3c4d5e6f7a8b9c0",
+          "imdbId": null,
+          "indexer": "Mock Newznab (Prowlarr)",
+          "indexerFlags": "0",
+          "nzbInfoUrl": "http://127.0.0.1:18989/newznab/details/e5d7a6b8c9f0e1a2b3c4d5e6f7a8b9c0",
+          "protocol": "1",
+          "publishedDate": "2025-01-10T03:58:00Z",
+          "releaseGroup": "SuccessfulCrab",
+          "releaseSource": "Rss",
+          "releaseType": "SingleEpisode",
+          "seriesMatchType": "Title",
+          "size": "2469606195",
+          "tvRageId": "0",
+          "tvdbId": "448176"
+        },
+        "date": "2026-11-08T20:57:11Z",
+        "downloadId": "c4119cd06a044d60be1043396370761b",
+        "episode": {
+          "absoluteEpisodeNumber": 2,
+          "airDate": "2025-01-09",
+          "airDateUtc": "2025-01-10T02:48:00Z",
+          "episodeFileId": 1074,
+          "episodeNumber": 2,
+          "hasFile": true,
+          "id": 2,
+          "lastSearchTime": "2026-11-08T20:56:40Z",
+          "monitored": false,
+          "overview": "Robby helps siblings navigate their elderly father’s end-of-life care. Later, Samira fends off cops targeting a woman with a misunderstood condition.",
+          "runtime": 50,
+          "seasonNumber": 1,
+          "seriesId": 1,
+          "title": "8:00 A.M.",
+          "tvdbId": 10851517,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 2,
+        "eventType": "grabbed",
+        "id": 2302,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "series": {
+          "added": "2026-03-06T07:44:38Z",
+          "airTime": "21:00",
+          "cleanTitle": "thepitt",
+          "ended": false,
+          "firstAired": "2025-01-09T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 1,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/banners/6972a4aba4c5d.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/backgrounds/675c4f787cfc4.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/clearlogo/675d049994d06.png"
+            }
+          ],
+          "imdbId": "tt31938062",
+          "languageProfileId": 1,
+          "lastAired": "2026-04-16T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "HBO Max",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "The staff of Pittsburgh's Trauma Medical Center work around the clock to save lives in an overcrowded and underfunded emergency department.",
+          "path": "/tv/The Pitt",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.9,
+            "votes": 178410
+          },
+          "runtime": 48,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "pitt",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "The Pitt",
+          "titleSlug": "the-pitt",
+          "tmdbId": 250307,
+          "tvMazeId": 75632,
+          "tvRageId": 0,
+          "tvdbId": 448176,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 1,
+        "sourceTitle": "The.Pitt.S01E02.1080p.WEB.H264-SuccessfulCrab"
+      },
+      {
+        "customFormatScore": -10000,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          }
+        ],
+        "data": {
+          "age": "667",
+          "ageHours": "16025.286072868666",
+          "ageMinutes": "961517.1643721666",
+          "customFormatScore": "-10000",
+          "downloadClient": "SABnzbd",
+          "downloadClientName": "Mock SABnzbd",
+          "downloadUrl": "http://127.0.0.1:18989/newznab/download/b2a4d3e5f6c7b8d9e0f1a2b3c4d5e6f7.nzb",
+          "guid": "http://127.0.0.1:18989/newznab/details/b2a4d3e5f6c7b8d9e0f1a2b3c4d5e6f7",
+          "imdbId": null,
+          "indexer": "Mock Newznab (Prowlarr)",
+          "indexerFlags": "0",
+          "nzbInfoUrl": "http://127.0.0.1:18989/newznab/details/b2a4d3e5f6c7b8d9e0f1a2b3c4d5e6f7",
+          "protocol": "1",
+          "publishedDate": "2025-01-10T03:40:00Z",
+          "releaseGroup": "ETHEL",
+          "releaseSource": "Rss",
+          "releaseType": "SingleEpisode",
+          "seriesMatchType": "Title",
+          "size": "1395864371",
+          "tvRageId": "0",
+          "tvdbId": "448176"
+        },
+        "date": "2026-11-08T20:57:09Z",
+        "downloadId": "SABnzbd_nzo_mock3",
+        "episode": {
+          "absoluteEpisodeNumber": 1,
+          "airDate": "2025-01-09",
+          "airDateUtc": "2025-01-10T02:00:00Z",
+          "episodeFileId": 1073,
+          "episodeNumber": 1,
+          "hasFile": true,
+          "id": 1,
+          "lastSearchTime": "2026-11-08T20:56:40Z",
+          "monitored": false,
+          "overview": "While attempting to distract himself from the anniversary of his mentor’s death, Dr. Robby introduces a fresh batch of interns to life in the ER.",
+          "runtime": 53,
+          "seasonNumber": 1,
+          "seriesId": 1,
+          "title": "7:00 A.M.",
+          "tvdbId": 10407559,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 1,
+        "eventType": "grabbed",
+        "id": 2301,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 5,
+            "name": "WEBDL-720p",
+            "resolution": 720,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "series": {
+          "added": "2026-03-06T07:44:38Z",
+          "airTime": "21:00",
+          "cleanTitle": "thepitt",
+          "ended": false,
+          "firstAired": "2025-01-09T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 1,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/banners/6972a4aba4c5d.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/backgrounds/675c4f787cfc4.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/clearlogo/675d049994d06.png"
+            }
+          ],
+          "imdbId": "tt31938062",
+          "languageProfileId": 1,
+          "lastAired": "2026-04-16T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "HBO Max",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "The staff of Pittsburgh's Trauma Medical Center work around the clock to save lives in an overcrowded and underfunded emergency department.",
+          "path": "/tv/The Pitt",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.9,
+            "votes": 178410
+          },
+          "runtime": 48,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "pitt",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "The Pitt",
+          "titleSlug": "the-pitt",
+          "tmdbId": 250307,
+          "tvMazeId": 75632,
+          "tvRageId": 0,
+          "tvdbId": 448176,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 1,
+        "sourceTitle": "The.Pitt.S01E01.720p.WEB.h264-ETHEL"
+      },
+      {
+        "customFormatScore": -10000,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          }
+        ],
+        "data": {
+          "downloadClient": "Transmission",
+          "downloadClientName": "Mock Transmission",
+          "message": "Manually ignored",
+          "releaseGroup": "ETHEL",
+          "releaseType": "SingleEpisode",
+          "size": "768000"
+        },
+        "date": "2026-11-08T20:56:25Z",
+        "downloadId": "C7EB8F60E61BC10B2F8762DE09949BDD2AAFBE5A",
+        "episode": {
+          "absoluteEpisodeNumber": 1,
+          "airDate": "2025-01-09",
+          "airDateUtc": "2025-01-10T02:00:00Z",
+          "episodeFileId": 1073,
+          "episodeNumber": 1,
+          "hasFile": true,
+          "id": 1,
+          "lastSearchTime": "2026-11-08T20:56:40Z",
+          "monitored": false,
+          "overview": "While attempting to distract himself from the anniversary of his mentor’s death, Dr. Robby introduces a fresh batch of interns to life in the ER.",
+          "runtime": 53,
+          "seasonNumber": 1,
+          "seriesId": 1,
+          "title": "7:00 A.M.",
+          "tvdbId": 10407559,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 1,
+        "eventType": "downloadIgnored",
+        "id": 2300,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 5,
+            "name": "WEBDL-720p",
+            "resolution": 720,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "series": {
+          "added": "2026-03-06T07:44:38Z",
+          "airTime": "21:00",
+          "cleanTitle": "thepitt",
+          "ended": false,
+          "firstAired": "2025-01-09T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 1,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/banners/6972a4aba4c5d.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/backgrounds/675c4f787cfc4.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/clearlogo/675d049994d06.png"
+            }
+          ],
+          "imdbId": "tt31938062",
+          "languageProfileId": 1,
+          "lastAired": "2026-04-16T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "HBO Max",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "The staff of Pittsburgh's Trauma Medical Center work around the clock to save lives in an overcrowded and underfunded emergency department.",
+          "path": "/tv/The Pitt",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.9,
+            "votes": 178410
+          },
+          "runtime": 48,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "pitt",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "The Pitt",
+          "titleSlug": "the-pitt",
+          "tmdbId": 250307,
+          "tvMazeId": 75632,
+          "tvRageId": 0,
+          "tvdbId": 448176,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 1,
+        "sourceTitle": "b2a4d3e5f6c7b8d9e0f1a2b3c4d5e6f7"
+      },
+      {
+        "customFormatScore": -10000,
+        "customFormats": [
+          {
+            "id": 21,
+            "name": "DSNP"
+          },
+          {
+            "id": 10,
+            "name": "HD Streaming Boost"
+          },
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 11,
+            "name": "WEB Tier 01"
+          }
+        ],
+        "data": {
+          "downloadClient": "qBittorrent",
+          "downloadClientName": "Mock qBittorrent",
+          "message": "Manually marked as failed",
+          "releaseGroup": "FLUX",
+          "size": "768000"
+        },
+        "date": "2026-11-08T20:56:25Z",
+        "downloadId": "0FB2EF04FB342178115BA635EC7B5EC0067058BA",
+        "episode": {
+          "airDate": "2025-03-04",
+          "airDateUtc": "2025-03-05T02:00:00Z",
+          "episodeFileId": 0,
+          "episodeNumber": 1,
+          "hasFile": false,
+          "id": 46,
+          "lastSearchTime": "2026-11-08T20:56:27Z",
+          "monitored": false,
+          "overview": "Longtime rivals Matt Murdock and Wilson Fisk attempt to move past their darker personas to serve New York, but their pasts resurface, reintroducing the world of Daredevil.",
+          "runtime": 59,
+          "seasonNumber": 1,
+          "seriesId": 2,
+          "title": "Heaven's Half Hour",
+          "tvdbId": 9275652,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 46,
+        "eventType": "downloadFailed",
+        "id": 2299,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "TV-MA",
+          "cleanTitle": "daredevilbornagain",
+          "ended": false,
+          "firstAired": "2025-03-04T00:00:00Z",
+          "genres": [
+            "Action",
+            "Drama"
+          ],
+          "id": 2,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/422712/banners/6787d1d7187c6.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/422712/posters/6978fefe94ea5.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/422712/backgrounds/69bef1d230b9d.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/422712/clearlogo/67e60e559c1f8.png"
+            }
+          ],
+          "imdbId": "tt18923754",
+          "languageProfileId": 1,
+          "lastAired": "2026-05-05T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Disney+",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Matt Murdock finds himself on a collision course with Wilson Fisk when their past identities begin to emerge.",
+          "path": "/tv/Daredevil - Born Again",
+          "qualityProfileId": 8,
+          "ratings": {
+            "value": 8.1,
+            "votes": 118894
+          },
+          "runtime": 48,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "daredevil born again",
+          "status": "continuing",
+          "tags": [],
+          "title": "Daredevil: Born Again",
+          "titleSlug": "daredevil-born-again",
+          "tmdbId": 202555,
+          "tvMazeId": 63234,
+          "tvRageId": 0,
+          "tvdbId": 422712,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 2,
+        "sourceTitle": "Daredevil.Born.Again.S01E01.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-FLUX"
+      },
+      {
+        "customFormatScore": -10000,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          }
+        ],
+        "data": {
+          "age": "667",
+          "ageHours": "16025.270426698473",
+          "ageMinutes": "961516.225601955",
+          "customFormatScore": "-10000",
+          "downloadClient": "Transmission",
+          "downloadClientName": "Mock Transmission",
+          "downloadUrl": "http://127.0.0.1:18989/torznab/download/b2a4d3e5f6c7b8d9e0f1a2b3c4d5e6f7.torrent",
+          "guid": "http://127.0.0.1:18989/torznab/details/b2a4d3e5f6c7b8d9e0f1a2b3c4d5e6f7",
+          "imdbId": null,
+          "indexer": "Mock Torznab (Prowlarr)",
+          "indexerFlags": "0",
+          "nzbInfoUrl": "http://127.0.0.1:18989/torznab/details/b2a4d3e5f6c7b8d9e0f1a2b3c4d5e6f7",
+          "protocol": "2",
+          "publishedDate": "2025-01-10T03:40:00Z",
+          "releaseGroup": "ETHEL",
+          "releaseSource": "Rss",
+          "releaseType": "SingleEpisode",
+          "seriesMatchType": "Title",
+          "size": "1395864371",
+          "torrentInfoHash": "b2a4d3e5f6c7b8d9e0f1a2b3c4d5e6f7b2a4d3e5",
+          "tvRageId": "0",
+          "tvdbId": "448176"
+        },
+        "date": "2026-11-08T20:56:13Z",
+        "downloadId": "C7EB8F60E61BC10B2F8762DE09949BDD2AAFBE5A",
+        "episode": {
+          "absoluteEpisodeNumber": 1,
+          "airDate": "2025-01-09",
+          "airDateUtc": "2025-01-10T02:00:00Z",
+          "episodeFileId": 1073,
+          "episodeNumber": 1,
+          "hasFile": true,
+          "id": 1,
+          "lastSearchTime": "2026-11-08T20:56:40Z",
+          "monitored": false,
+          "overview": "While attempting to distract himself from the anniversary of his mentor’s death, Dr. Robby introduces a fresh batch of interns to life in the ER.",
+          "runtime": 53,
+          "seasonNumber": 1,
+          "seriesId": 1,
+          "title": "7:00 A.M.",
+          "tvdbId": 10407559,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 1,
+        "eventType": "grabbed",
+        "id": 2298,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 5,
+            "name": "WEBDL-720p",
+            "resolution": 720,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "series": {
+          "added": "2026-03-06T07:44:38Z",
+          "airTime": "21:00",
+          "cleanTitle": "thepitt",
+          "ended": false,
+          "firstAired": "2025-01-09T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 1,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/banners/6972a4aba4c5d.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/backgrounds/675c4f787cfc4.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/clearlogo/675d049994d06.png"
+            }
+          ],
+          "imdbId": "tt31938062",
+          "languageProfileId": 1,
+          "lastAired": "2026-04-16T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "HBO Max",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "The staff of Pittsburgh's Trauma Medical Center work around the clock to save lives in an overcrowded and underfunded emergency department.",
+          "path": "/tv/The Pitt",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.9,
+            "votes": 178410
+          },
+          "runtime": 48,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "pitt",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "The Pitt",
+          "titleSlug": "the-pitt",
+          "tmdbId": 250307,
+          "tvMazeId": 75632,
+          "tvRageId": 0,
+          "tvdbId": 448176,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 1,
+        "sourceTitle": "The.Pitt.S01E01.720p.WEB.h264-ETHEL"
+      }
+    ],
+    "sortDirection": "descending",
+    "sortKey": "date",
+    "totalRecords": 2010
+  },
+  "recordedAt": "2026-11-08T20:58:47Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/history?page=1&pageSize=10&sortKey=date&sortDirection=descending&includeSeries=true&includeEpisode=true"
+  },
+  "status": 200
+}

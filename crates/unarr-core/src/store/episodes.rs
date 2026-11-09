@@ -403,6 +403,102 @@ pub fn set_last_search_time(conn: &Connection, ids: &[i64], at: DateTime<Utc>) -
     Ok(())
 }
 
+/// `MediaFileRepository.GetFilesBySeason`.
+pub fn list_files_by_season(
+    conn: &Connection,
+    series_id: i64,
+    season: i64,
+) -> anyhow::Result<Vec<EpisodeFile>> {
+    query_files(
+        conn,
+        "SELECT * FROM episode_files WHERE series_id = ?1 AND season_number = ?2 ORDER BY id",
+        &[&series_id, &season],
+    )
+}
+
+/// `GetFilesWithRelativePath`: the rows already at a path, case-insensitively
+/// as the originals compare paths.
+pub fn files_with_relative_path(
+    conn: &Connection,
+    series_id: i64,
+    relative_path: &str,
+) -> anyhow::Result<Vec<EpisodeFile>> {
+    query_files(
+        conn,
+        "SELECT * FROM episode_files WHERE series_id = ?1 AND lower(relative_path) = lower(?2) ORDER BY id",
+        &[&series_id, &relative_path],
+    )
+}
+
+/// `MediaFileRepository.Update`: every column but the id.
+pub fn update_file(conn: &Connection, f: &EpisodeFile) -> anyhow::Result<()> {
+    conn.execute(
+        "UPDATE episode_files SET series_id = :series_id, season_number = :season_number,
+            relative_path = :relative_path, original_file_path = :original_file_path, size = :size,
+            date_added = :date_added, scene_name = :scene_name, release_group = :release_group,
+            release_hash = :release_hash, quality_id = :quality_id, revision_version = :revision_version,
+            revision_real = :revision_real, revision_is_repack = :revision_is_repack, languages = :languages,
+            media_info = :media_info, indexer_flags = :indexer_flags, release_type = :release_type
+         WHERE id = :id",
+        named_params! {
+            ":id": f.id, ":series_id": f.series_id, ":season_number": f.season_number,
+            ":relative_path": f.relative_path, ":original_file_path": f.original_file_path, ":size": f.size,
+            ":date_added": ts(Some(f.date_added)), ":scene_name": f.scene_name,
+            ":release_group": f.release_group, ":release_hash": f.release_hash,
+            ":quality_id": f.quality.quality_id, ":revision_version": f.quality.version,
+            ":revision_real": f.quality.real, ":revision_is_repack": f.quality.is_repack,
+            ":languages": to_json(&f.languages)?,
+            ":media_info": f.media_info.as_ref().map(to_json).transpose()?,
+            ":indexer_flags": f.indexer_flags, ":release_type": f.release_type.as_str(),
+        },
+    )?;
+    Ok(())
+}
+
+/// `MediaFileRepository.Delete`: the row goes; the episodes that pointed at
+/// it are detached by the caller, as the originals' event handler does.
+pub fn delete_file(conn: &Connection, id: i64) -> anyhow::Result<()> {
+    conn.execute("DELETE FROM episode_files WHERE id = ?1", params![id])?;
+    Ok(())
+}
+
+/// `EpisodeRepository.SetFileId`.
+pub fn set_episode_file_id(conn: &Connection, episode_id: i64, file_id: i64) -> anyhow::Result<()> {
+    conn.execute(
+        "UPDATE episodes SET episode_file_id = ?1 WHERE id = ?2",
+        params![file_id, episode_id],
+    )?;
+    Ok(())
+}
+
+/// Detach every episode that points at `file_id`.
+pub fn clear_episode_file_id(conn: &Connection, file_id: i64) -> anyhow::Result<()> {
+    conn.execute(
+        "UPDATE episodes SET episode_file_id = 0 WHERE episode_file_id = ?1",
+        params![file_id],
+    )?;
+    Ok(())
+}
+
+/// `EpisodeRepository.SetMonitored`.
+pub fn set_monitored(conn: &Connection, ids: &[i64], monitored: bool) -> anyhow::Result<()> {
+    if ids.is_empty() {
+        return Ok(());
+    }
+    let json = serde_json::to_string(ids)?;
+    conn.execute(
+        "UPDATE episodes SET monitored = ?1 WHERE id IN (SELECT value FROM json_each(?2))",
+        params![monitored, json],
+    )?;
+    Ok(())
+}
+
+/// Every file of the library with its series' path, for the checks that
+/// look at the disk.
+pub fn list_all_files(conn: &Connection) -> anyhow::Result<Vec<EpisodeFile>> {
+    query_files(conn, "SELECT * FROM episode_files ORDER BY series_id, id", &[])
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

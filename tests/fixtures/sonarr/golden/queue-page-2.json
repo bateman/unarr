@@ -4,7 +4,7 @@
     "pageSize": 2,
     "records": [
       {
-        "added": "2026-11-07T15:44:23Z",
+        "added": "2026-11-08T20:56:11Z",
         "customFormatScore": -10000,
         "customFormats": [
           {
@@ -29,7 +29,7 @@
         "downloadId": "0FB2EF04FB342178115BA635EC7B5EC0067058BA",
         "episodeHasFile": false,
         "episodeId": 46,
-        "estimatedCompletionTime": "2026-11-07T15:54:26Z",
+        "estimatedCompletionTime": "2026-11-08T21:06:14Z",
         "id": 1652059285,
         "indexer": "Mock Torznab (Prowlarr)",
         "languages": [
@@ -68,7 +68,7 @@
     "sortKey": "title",
     "totalRecords": 3
   },
-  "recordedAt": "2026-11-07T15:44:37Z",
+  "recordedAt": "2026-11-08T20:56:25Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/queue?page=2&pageSize=2&sortKey=title&sortDirection=descending"

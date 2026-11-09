@@ -1,6 +1,6 @@
 {
   "body": {},
-  "recordedAt": "2026-11-07T15:44:12Z",
+  "recordedAt": "2026-11-08T20:56:00Z",
   "request": {
     "body": "bodies/indexer-test-existing.json",
     "method": "POST",

@@ -1,0 +1,85 @@
+{
+  "onGrab": true,
+  "onDownload": true,
+  "onUpgrade": true,
+  "onRename": true,
+  "onSeriesAdd": true,
+  "onSeriesDelete": true,
+  "onEpisodeFileDelete": true,
+  "onEpisodeFileDeleteForUpgrade": true,
+  "onHealthIssue": true,
+  "onHealthRestored": true,
+  "onApplicationUpdate": true,
+  "onManualInteractionRequired": true,
+  "onImportComplete": true,
+  "includeHealthWarnings": false,
+  "tags": [],
+  "name": "Mock Discord",
+  "implementation": "Discord",
+  "configContract": "DiscordSettings",
+  "fields": [
+    {
+      "name": "webHookUrl",
+      "value": "http://127.0.0.1:18989/discord/api/webhooks/100/fixturetoken"
+    },
+    {
+      "name": "username",
+      "value": "Unarr fixture"
+    },
+    {
+      "name": "avatar",
+      "value": ""
+    },
+    {
+      "name": "grabFields",
+      "value": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    {
+      "name": "importFields",
+      "value": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12
+      ]
+    },
+    {
+      "name": "manualInteractionFields",
+      "value": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9
+      ]
+    }
+  ]
+}

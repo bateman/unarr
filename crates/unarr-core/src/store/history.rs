@@ -50,10 +50,14 @@ fn query(conn: &Connection, sql: &str, params: &[&dyn rusqlite::ToSql]) -> anyho
     Ok(out)
 }
 
-/// The next free history id.
+/// The next history id; ids are never reused, as the originals' are not.
 pub fn next_id(conn: &Connection) -> anyhow::Result<i64> {
-    let max: Option<i64> = conn.query_row("SELECT max(id) FROM history", [], |r| r.get(0))?;
-    Ok(max.unwrap_or(0) + 1)
+    super::sequence::next_id(conn, "history")
+}
+
+/// The first of `count` consecutive history ids reserved at once.
+pub fn next_ids(conn: &Connection, count: usize) -> anyhow::Result<i64> {
+    super::sequence::next_ids(conn, "history", count)
 }
 
 /// `FindByDownloadId`: every row of one download, newest first.
@@ -269,6 +273,30 @@ pub fn for_episode(conn: &Connection, episode_id: i64) -> anyhow::Result<Vec<His
         conn,
         "SELECT h.* FROM history h WHERE h.episode_id = ?1 ORDER BY h.date DESC, h.id DESC",
         &[&episode_id],
+    )
+}
+
+/// `FindDownloadHistory(seriesId, quality)`: the grabs, failures and
+/// imports of a series at one quality, for finding the download a manual
+/// import belongs to.
+pub fn download_history_for(
+    conn: &Connection,
+    series_id: i64,
+    quality: &crate::model::QualityModel,
+) -> anyhow::Result<Vec<HistoryEntry>> {
+    query(
+        conn,
+        "SELECT h.* FROM history h WHERE h.series_id = ?1 AND h.quality_id = ?2 AND h.revision_version = ?3
+            AND h.revision_real = ?4 AND h.revision_is_repack = ?5
+            AND h.event_type IN ('grabbed', 'downloadFailed', 'downloadFolderImported')
+         ORDER BY h.date DESC, h.id DESC",
+        &[
+            &series_id,
+            &quality.quality_id,
+            &quality.version,
+            &quality.real,
+            &quality.is_repack,
+        ],
     )
 }
 

@@ -55,6 +55,8 @@ pub struct Downloads {
     /// The command queue, once the runtime is up, for the searches a
     /// failed download triggers.
     commands: OnceLock<Arc<CommandQueue>>,
+    /// The notifications, once the runtime is up, for the grabs.
+    notifier: OnceLock<Arc<crate::notifications::Notifier>>,
 }
 
 /// What `DELETE /queue/{id}` was asked to do.
@@ -93,12 +95,22 @@ impl Downloads {
             last_refresh: Mutex::new(None),
             refresh_lock: tokio::sync::Mutex::new(()),
             commands: OnceLock::new(),
+            notifier: OnceLock::new(),
         }
     }
 
     /// Hand over the command queue; the first call wins.
     pub fn set_commands(&self, queue: Arc<CommandQueue>) {
         let _ = self.commands.set(queue);
+    }
+
+    /// Hand over the notifications; the first call wins.
+    pub fn set_notifier(&self, notifier: Arc<crate::notifications::Notifier>) {
+        let _ = self.notifier.set(notifier);
+    }
+
+    pub fn notifier(&self) -> Option<&Arc<crate::notifications::Notifier>> {
+        self.notifier.get()
     }
 
     pub fn commands(&self) -> Option<&Arc<CommandQueue>> {
@@ -194,6 +206,29 @@ impl Downloads {
                 tracked.remove(id);
             }
         }
+        self.rebuild_queue(now);
+    }
+
+    /// A tracked download changed by the importer: the cache takes it,
+    /// when the download is still tracked.
+    pub fn update_tracked(&self, mut t: TrackedDownload) {
+        // `DownloadIsTrackable`: a download past importing leaves the queue
+        // (`DownloadsProcessedEvent` -> `TrackedDownloadRefreshedEvent`).
+        if matches!(
+            t.state,
+            TrackedDownloadState::Imported | TrackedDownloadState::Failed | TrackedDownloadState::Ignored
+        ) {
+            t.is_trackable = false;
+        }
+        let mut tracked = self.tracked.lock().unwrap();
+        if tracked.contains_key(&t.item.download_id) {
+            tracked.insert(t.item.download_id.clone(), t);
+        }
+    }
+
+    /// `QueueService.Handle(TrackedDownloadRefreshedEvent)`, for the
+    /// importer once it processed the tracked downloads.
+    pub fn rebuild_queue_now(&self, now: DateTime<Utc>) {
         self.rebuild_queue(now);
     }
 

@@ -1,0 +1,187 @@
+{
+  "body": [
+    {
+      "customFormatScore": 0,
+      "customFormats": [],
+      "dateAdded": "2026-11-08T20:57:47Z",
+      "id": 1074,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        },
+        {
+          "id": 5,
+          "name": "Italian"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 0,
+        "audioChannels": 1,
+        "audioCodec": "AAC",
+        "audioLanguages": "eng/ita",
+        "audioStreamCount": 2,
+        "resolution": "64x64",
+        "runTime": "10:10",
+        "scanType": "Progressive",
+        "subtitles": "eng/ita",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "x264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 2
+      },
+      "path": "/tv/The Pitt/Season 01/The Pitt (2025) - S01E02 - 8-00 A.M [WEBDL-480p][AAC 1.0][x264]-SuccessfulCrab.mkv",
+      "quality": {
+        "quality": {
+          "id": 8,
+          "name": "WEBDL-480p",
+          "resolution": 480,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "relativePath": "Season 01/The Pitt (2025) - S01E02 - 8-00 A.M [WEBDL-480p][AAC 1.0][x264]-SuccessfulCrab.mkv",
+      "releaseGroup": "SuccessfulCrab",
+      "releaseType": "singleEpisode",
+      "sceneName": "The.Pitt.S01E02.1080p.WEB.H264-SuccessfulCrab",
+      "seasonNumber": 1,
+      "seriesId": 1,
+      "size": 177860
+    },
+    {
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 16,
+          "name": "AMZN"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 11,
+          "name": "WEB Tier 01"
+        }
+      ],
+      "dateAdded": "2026-11-08T20:59:12Z",
+      "id": 1077,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 0,
+        "audioChannels": 1,
+        "audioCodec": "AAC",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "10:10",
+        "scanType": "Progressive",
+        "subtitles": "eng",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 1000
+      },
+      "path": "/tv/The Pitt/Season 01/The Pitt (2025) - S01E01 - 7-00 A.M [AMZN][WEBDL-1080p][AAC 1.0][h264]-FLUX.mkv",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "relativePath": "Season 01/The Pitt (2025) - S01E01 - 7-00 A.M [AMZN][WEBDL-1080p][AAC 1.0][h264]-FLUX.mkv",
+      "releaseGroup": "FLUX",
+      "releaseType": "singleEpisode",
+      "sceneName": "The.Pitt.S01E01.1080p.AMZN.WEB-DL.DDP5.1.H.264-FLUX",
+      "seasonNumber": 1,
+      "seriesId": 1,
+      "size": 1106640
+    },
+    {
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        }
+      ],
+      "dateAdded": "2026-11-08T20:59:32Z",
+      "id": 1078,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 0,
+        "audioChannels": 1,
+        "audioCodec": "AAC",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "64x64",
+        "runTime": "10:10",
+        "scanType": "Progressive",
+        "subtitles": "eng",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "x264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 2
+      },
+      "path": "/tv/The Pitt/Season 01/The.Pitt.S01E03.1080p.WEB.H264-Fixture.mkv",
+      "quality": {
+        "quality": {
+          "id": 8,
+          "name": "WEBDL-480p",
+          "resolution": 480,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "relativePath": "Season 01/The.Pitt.S01E03.1080p.WEB.H264-Fixture.mkv",
+      "releaseGroup": "Fixture",
+      "releaseType": "singleEpisode",
+      "seasonNumber": 1,
+      "seriesId": 1,
+      "size": 119980
+    }
+  ],
+  "recordedAt": "2026-11-08T20:59:44Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/episodefile?seriesId=1"
+  },
+  "status": 200
+}

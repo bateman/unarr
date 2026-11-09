@@ -16,6 +16,7 @@ pub mod json;
 pub mod logbuf;
 pub mod mediainfo;
 pub mod query;
+pub mod relay;
 pub mod resources;
 pub mod routes;
 pub mod schemas;

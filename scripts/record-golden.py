@@ -11,6 +11,12 @@ carry ``{id:name}``: the ``id`` the response recorded as ``name`` returned,
 for resources the application numbers itself (commands). ``sleep N`` lines
 pause the recording for the application's background work.
 
+``mock <name> <METHOD> <path> [body-file]`` sends the request to the mock
+services (``--mock-url``, the ``scripts/mock-servarr.py`` the application is
+pointed at) instead of the application: to complete a download, or to read
+back what the mock's notification targets received. The response is recorded
+as ``<name>.json`` like any other, unless ``<name>`` is ``-``.
+
 Each golden file is ``<name>.json`` holding ``{"request": {...}, "status": N,
 "body": <json or null>}``. Pretty-printed with sorted keys so diffs stay readable.
 
@@ -58,6 +64,7 @@ def main():
     ap.add_argument("--requests", required=True, type=Path)
     ap.add_argument("--out", required=True, type=Path)
     ap.add_argument("--login", help="user:password for the forms login used by session-* requests")
+    ap.add_argument("--mock-url", default="http://127.0.0.1:18989", help="where `mock` lines are sent")
     args = ap.parse_args()
 
     args.out.mkdir(parents=True, exist_ok=True)
@@ -86,15 +93,22 @@ def main():
             print(f"[golden] sleeping {method}s", file=sys.stderr)
             time.sleep(float(method))
             continue
+        # `mock <name> METHOD path [body]`: aimed at the mock services.
+        to_mock = name == "mock"
+        if to_mock:
+            name, method, path, *rest = line.split(maxsplit=4)[1:]
         data = None
         if rest:
             data = (args.requests.parent / rest[0]).read_bytes()
         path = substitute_ids(path, ids)
-        req = urllib.request.Request(base + path, data=data, method=method)
+        target = args.mock_url.rstrip("/") if to_mock else base
+        req = urllib.request.Request(target + urllib.parse.quote(path, safe="/?&=:%+,-._~"), data=data, method=method)
         if data is not None:
             req.add_header("Content-Type", "application/json")
         client = bare
-        if name.startswith("session"):
+        if to_mock:
+            pass
+        elif name.startswith("session"):
             client = session
         elif "apikey=" not in path and not name.startswith("noauth"):
             req.add_header("X-Api-Key", args.api_key)
@@ -109,6 +123,9 @@ def main():
             body = raw.decode(errors="replace")
         if isinstance(body, dict) and isinstance(body.get("id"), int):
             ids[name] = str(body["id"])
+        if to_mock and name == "-":
+            print(f"[golden] mock {status} {method} {path} (not recorded)", file=sys.stderr)
+            continue
         golden = {
             "request": {"method": method, "path": path, **({"body": rest[0]} if rest else {})},
             # The instant the answer was computed for: the contract tests pin
@@ -118,6 +135,8 @@ def main():
             "status": status,
             "body": body,
         }
+        if to_mock:
+            golden["request"]["target"] = "mock"
         (args.out / f"{name}.json").write_text(json.dumps(golden, indent=2, sort_keys=True, ensure_ascii=False) + "\n")
         print(f"[golden] {status} {method} {path} -> {name}.json", file=sys.stderr)
         count += 1

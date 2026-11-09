@@ -192,6 +192,8 @@ pub struct DownloadClientItem {
     pub is_encrypted: bool,
     pub can_move_files: bool,
     pub can_be_removed: bool,
+    /// `Removed`: Unarr already asked the client to drop the item.
+    pub removed: bool,
 }
 
 impl DownloadClientItem {
@@ -215,6 +217,7 @@ impl DownloadClientItem {
             is_encrypted: false,
             can_move_files: false,
             can_be_removed: false,
+            removed: false,
         }
     }
 }

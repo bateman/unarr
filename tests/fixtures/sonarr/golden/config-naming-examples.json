@@ -9,7 +9,7 @@
     "singleEpisodeExample": "The Series Title's! (2010) - S01E01 - Episode Title 1 [Surround Sound x264][WEBDL-1080p Proper][DTS 5.1][AVC]-RlsGrp",
     "specialsFolderExample": "Specials"
   },
-  "recordedAt": "2026-11-07T15:44:08Z",
+  "recordedAt": "2026-11-08T20:55:56Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/config/naming/examples"

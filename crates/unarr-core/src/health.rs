@@ -9,7 +9,7 @@ use chrono::{DateTime, Duration, Utc};
 
 use crate::downloadclients::remote_path;
 use crate::downloadclients::{
-    Client, ClientError, DownloadClientDefinition, DownloadClientService, APP_NAME,
+    Client, ClientError, ClientKind, DownloadClientDefinition, DownloadClientService, APP_NAME,
 };
 use crate::indexers::{IndexerDefinition, IndexerService};
 use crate::model::ProviderKind;
@@ -71,13 +71,40 @@ impl HealthCheck {
 }
 
 /// Which checks to run: all of them (startup, schedule, a manual
-/// `CheckHealth`), those that follow a provider change, or those that
-/// follow a provider's status change (cheap, plus the clients' reach).
+/// `CheckHealth`), those that follow a provider change, those that
+/// follow a provider's status change (cheap, plus the clients' reach), or
+/// those the originals' `CheckOn` attributes tie to an import that failed
+/// or succeeded.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum CheckSet {
     All,
     Providers,
     Statuses,
+    /// `EpisodeImportFailedEvent`: the checks that look for the cause.
+    ImportFailed,
+    /// `EpisodeImportedEvent`: the checks whose failure an import clears.
+    ImportSucceeded,
+}
+
+/// `CheckOnCondition`: whether a check tied to an event runs only while
+/// it is passing (to catch a new failure) or only while failing (to see
+/// it clear).
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Condition {
+    Always,
+    SuccessfulOnly,
+    FailedOnly,
+}
+
+/// What `EpisodeImportFailedEvent` carries for `RemotePathMappingCheck`.
+#[derive(Debug, Clone, Default)]
+pub struct ImportFailure {
+    /// The file the import worked on, when it got that far.
+    pub path: Option<String>,
+    pub download_client: Option<String>,
+    pub download_id: Option<String>,
+    /// Where the client says the download is, as this process sees it.
+    pub output_path: Option<String>,
 }
 
 /// What the checks read and ask.
@@ -87,6 +114,7 @@ pub struct Context<'a> {
     pub clients: &'a DownloadClientService,
     pub now: DateTime<Utc>,
     pub is_docker: bool,
+    pub import_failure: Option<&'a ImportFailure>,
 }
 
 type Check = for<'a> fn(
@@ -101,38 +129,118 @@ macro_rules! check {
     };
 }
 
-/// The checks of a set, in the originals' registration order.
-fn checks(set: CheckSet) -> Vec<Check> {
-    let mut out: Vec<Check> = vec![
-        check!(indexer_rss),
-        check!(indexer_search),
-        check!(indexer_status),
-        check!(indexer_long_term_status),
-        check!(download_client_reach),
-        check!(download_client_status),
-    ];
-    if set != CheckSet::Statuses {
-        out.extend([
-            check!(indexer_download_client),
-            check!(download_client_sorting),
-            check!(remote_path_mapping),
-            check!(download_client_root_folder),
-            check!(import_list_root_folder),
-        ]);
+/// The checks of a set with their source names and conditions, in the
+/// originals' registration order.
+fn checks(set: CheckSet) -> Vec<(&'static str, Condition, Check)> {
+    use Condition::*;
+    match set {
+        CheckSet::All | CheckSet::Providers | CheckSet::Statuses => {
+            let mut out = vec![
+                ("IndexerRssCheck", Always, check!(indexer_rss)),
+                ("IndexerSearchCheck", Always, check!(indexer_search)),
+                ("IndexerStatusCheck", Always, check!(indexer_status)),
+                (
+                    "IndexerLongTermStatusCheck",
+                    Always,
+                    check!(indexer_long_term_status),
+                ),
+                ("DownloadClientCheck", Always, check!(download_client_reach)),
+                (
+                    "DownloadClientStatusCheck",
+                    Always,
+                    check!(download_client_status),
+                ),
+            ];
+            if set != CheckSet::Statuses {
+                out.extend([
+                    (
+                        "IndexerDownloadClientCheck",
+                        Always,
+                        check!(indexer_download_client),
+                    ),
+                    (
+                        "DownloadClientSortingCheck",
+                        Always,
+                        check!(download_client_sorting),
+                    ),
+                    ("RemotePathMappingCheck", Always, check!(remote_path_mapping)),
+                    (
+                        "DownloadClientRootFolderCheck",
+                        Always,
+                        check!(download_client_root_folder),
+                    ),
+                    (
+                        "ImportListRootFolderCheck",
+                        Always,
+                        check!(import_list_root_folder),
+                    ),
+                    ("ImportMechanismCheck", Always, check!(import_mechanism)),
+                    (
+                        "DownloadClientRemovesCompletedDownloadsCheck",
+                        Always,
+                        check!(download_client_removes_completed_downloads),
+                    ),
+                ]);
+            }
+            if set == CheckSet::All {
+                out.extend([
+                    ("RootFolderCheck", Always, check!(root_folder)),
+                    ("RecyclingBinCheck", Always, check!(recycling_bin)),
+                    ("MountCheck", Always, check!(mount)),
+                ]);
+            }
+            out
+        }
+        CheckSet::ImportFailed => vec![
+            ("RootFolderCheck", SuccessfulOnly, check!(root_folder)),
+            (
+                "ImportListRootFolderCheck",
+                SuccessfulOnly,
+                check!(import_list_root_folder),
+            ),
+            ("RecyclingBinCheck", SuccessfulOnly, check!(recycling_bin)),
+            (
+                "RemotePathMappingCheck",
+                SuccessfulOnly,
+                check!(remote_path_mapping_after_failure),
+            ),
+        ],
+        CheckSet::ImportSucceeded => vec![
+            ("RootFolderCheck", FailedOnly, check!(root_folder)),
+            (
+                "ImportListRootFolderCheck",
+                FailedOnly,
+                check!(import_list_root_folder),
+            ),
+            ("RecyclingBinCheck", FailedOnly, check!(recycling_bin)),
+        ],
     }
-    if set == CheckSet::All {
-        out.push(check!(root_folder));
-    }
-    out
 }
 
-/// Run a set of checks; every verdict, ok or not, in order.
-pub async fn run(ctx: &Context<'_>, set: CheckSet) -> Vec<HealthCheck> {
+/// Run the checks of some sets, each once, those with a condition only
+/// when the standing verdicts allow; every verdict, ok or not, in order.
+pub async fn run(ctx: &Context<'_>, sets: &[CheckSet], standing: &[HealthCheck]) -> Vec<HealthCheck> {
+    let mut seen: Vec<&'static str> = Vec::new();
     let mut out = Vec::new();
-    for check in checks(set) {
-        match check(ctx).await {
-            Ok(result) => out.push(result),
-            Err(e) => tracing::error!(error = %e, "health check failed to run"),
+    for set in sets {
+        for (source, condition, check) in checks(*set) {
+            if seen.contains(&source) {
+                continue;
+            }
+            let failing = standing.iter().any(|s| s.source == source);
+            let runs = match condition {
+                Condition::Always => true,
+                Condition::SuccessfulOnly => !failing,
+                Condition::FailedOnly => failing,
+            };
+            if !runs {
+                continue;
+            }
+            seen.push(source);
+            match check(ctx).await {
+                Ok(result) => out.push(result),
+                Err(e) => tracing::error!(source, error = %e, "health check failed to run"),
+            }
         }
     }
     out
@@ -630,9 +738,296 @@ async fn import_list_root_folder(ctx: &Context<'_>) -> anyhow::Result<HealthChec
     }
 }
 
+/// `ImportMechanismCheck`: completed download handling must be on; a
+/// client that cannot be asked leaves the verdict for later.
+async fn import_mechanism(ctx: &Context<'_>) -> anyhow::Result<HealthCheck> {
+    const SOURCE: &str = "ImportMechanismCheck";
+    let clients = ctx.clients.enabled().await?;
+    let context = ctx.clients.context(ctx.now).await?;
+    let mut statuses = Vec::new();
+    for definition in &clients {
+        match Client::new(definition, &context).status().await {
+            Ok(status) => statuses.push((definition, status)),
+            // One or more download clients failed: assume the health is
+            // okay and verify later.
+            Err(_) => return Ok(HealthCheck::ok(SOURCE)),
+        }
+    }
+    let defined = ctx
+        .db
+        .call(|conn| store::config::config(conn, "EnableCompletedDownloadHandling"))
+        .await?;
+    let Some(value) = defined else {
+        // Migration helper logic.
+        let all_local = statuses.iter().all(|(_, s)| s.is_localhost);
+        let message = if !all_local {
+            "Enable Completed Download Handling if possible (Multi-Computer unsupported)".to_string()
+        } else if !clients.is_empty() && clients.iter().all(|d| d.kind == ClientKind::Sabnzbd) {
+            "Enable Completed Download Handling if possible (Sabnzbd)".to_string()
+        } else if !clients.is_empty() && clients.iter().all(|d| d.kind == ClientKind::Nzbget) {
+            "Enable Completed Download Handling if possible (Nzbget)".to_string()
+        } else {
+            "Enable Completed Download Handling if possible".to_string()
+        };
+        return Ok(HealthCheck::new(
+            SOURCE,
+            HealthType::Warning,
+            message,
+            "#completedfailed-download-handling",
+        ));
+    };
+    if !value.trim().eq_ignore_ascii_case("true") {
+        return Ok(HealthCheck::new(
+            SOURCE,
+            HealthType::Warning,
+            "Enable Completed Download Handling".into(),
+            "#completed-download-handling-is-disabled",
+        ));
+    }
+    Ok(HealthCheck::ok(SOURCE))
+}
+
+/// `DownloadClientRemovesCompletedDownloadsCheck`.
+async fn download_client_removes_completed_downloads(ctx: &Context<'_>) -> anyhow::Result<HealthCheck> {
+    const SOURCE: &str = "DownloadClientRemovesCompletedDownloadsCheck";
+    for (definition, status) in client_statuses(ctx).await? {
+        if status.removes_completed_downloads {
+            return Ok(HealthCheck::new(
+                SOURCE,
+                HealthType::Warning,
+                format!(
+                    "Download client {} is set to remove completed downloads. This can result in downloads being removed from your client before {APP_NAME} can import them.",
+                    definition.name
+                ),
+                "#download-client-removes-completed-downloads",
+            ));
+        }
+    }
+    Ok(HealthCheck::ok(SOURCE))
+}
+
+/// `DiskProvider.FolderWritable`: a file written and removed.
+fn folder_writable(path: &str) -> bool {
+    let test = std::path::Path::new(path).join("unarr_write_test.txt");
+    match std::fs::write(&test, "") {
+        Ok(()) => {
+            let _ = std::fs::remove_file(&test);
+            true
+        }
+        Err(_) => false,
+    }
+}
+
+/// `RecyclingBinCheck`: a configured recycle bin must be writable.
+async fn recycling_bin(ctx: &Context<'_>) -> anyhow::Result<HealthCheck> {
+    const SOURCE: &str = "RecyclingBinCheck";
+    let recycle_bin = ctx
+        .db
+        .call(|conn| store::config::config(conn, "RecycleBin"))
+        .await?
+        .unwrap_or_default();
+    if recycle_bin.trim().is_empty() {
+        return Ok(HealthCheck::ok(SOURCE));
+    }
+    if !folder_writable(&recycle_bin) {
+        return Ok(HealthCheck::new(
+            SOURCE,
+            HealthType::Error,
+            format!("Unable to write to configured recycling bin folder: {recycle_bin}. Ensure this path exists and is writable by the user running {APP_NAME}"),
+            "#cannot-write-recycle-bin",
+        ));
+    }
+    Ok(HealthCheck::ok(SOURCE))
+}
+
+/// A mounted file system as `/proc/mounts` lists it.
+struct Mount {
+    device: String,
+    root: String,
+    read_only: bool,
+}
+
+/// `ProcMountProvider.GetMounts`, from the given table text.
+fn parse_mounts(text: &str) -> Vec<Mount> {
+    text.lines()
+        .filter_map(|line| {
+            let mut parts = line.split_whitespace();
+            let device = parts.next()?.to_string();
+            let root = parts.next()?.replace("\\040", " ");
+            let _fs_type = parts.next()?;
+            let options = parts.next().unwrap_or("");
+            let read_only = options.split(',').any(|o| o == "ro");
+            Some(Mount {
+                device,
+                root,
+                read_only,
+            })
+        })
+        .collect()
+}
+
+/// `DiskProvider.GetMount`: the mount with the longest root above the path.
+fn mount_of<'m>(mounts: &'m [Mount], path: &str) -> Option<&'m Mount> {
+    mounts
+        .iter()
+        .filter(|m| m.root == "/" || path == m.root || path.starts_with(&format!("{}/", m.root)))
+        .max_by_key(|m| m.root.len())
+}
+
+/// `MountCheck`: a series on a read-only mount.
+async fn mount(ctx: &Context<'_>) -> anyhow::Result<HealthCheck> {
+    const SOURCE: &str = "MountCheck";
+    let Ok(table) = std::fs::read_to_string("/proc/mounts") else {
+        return Ok(HealthCheck::ok(SOURCE));
+    };
+    let mounts = parse_mounts(&table);
+    let paths: Vec<String> = ctx
+        .db
+        .call(|conn| Ok(store::series::list(conn)?.into_iter().map(|s| s.path).collect()))
+        .await?;
+    let mut seen_roots: Vec<&str> = Vec::new();
+    let mut found: Vec<String> = Vec::new();
+    for path in &paths {
+        let Some(m) = mount_of(&mounts, path).filter(|m| m.read_only) else {
+            continue;
+        };
+        if seen_roots.contains(&m.root.as_str()) {
+            continue;
+        }
+        seen_roots.push(&m.root);
+        found.push(format!("{} ({path})", m.device));
+    }
+    if found.is_empty() {
+        return Ok(HealthCheck::ok(SOURCE));
+    }
+    Ok(HealthCheck::new(
+        SOURCE,
+        HealthType::Error,
+        format!(
+            "Mount containing a series path is mounted read-only: {}",
+            found.join(", ")
+        ),
+        "#series-mount-ro",
+    ))
+}
+
+/// `RemotePathMappingCheck.Check(EpisodeImportFailedEvent)`: what a failed
+/// import says about the paths.
+async fn remote_path_mapping_after_failure(ctx: &Context<'_>) -> anyhow::Result<HealthCheck> {
+    const SOURCE: &str = "RemotePathMappingCheck";
+    let handling = ctx
+        .db
+        .call(|conn| store::config::config(conn, "EnableCompletedDownloadHandling"))
+        .await?
+        .map(|v| v.trim().eq_ignore_ascii_case("true"))
+        .unwrap_or(true);
+    let Some(failure) = ctx.import_failure.filter(|_| handling) else {
+        return Ok(HealthCheck::ok(SOURCE));
+    };
+    if let Some(path) = failure.path.as_deref().filter(|p| !p.is_empty()) {
+        // The file is there but the import failed: likely permissions;
+        // gone: removed part way through processing.
+        if std::path::Path::new(path).is_file() {
+            return Ok(HealthCheck::new(
+                SOURCE,
+                HealthType::Error,
+                format!(
+                    "{APP_NAME} can see but not access downloaded episode {path}. Likely permissions error."
+                ),
+                "#permissions-error",
+            ));
+        }
+        return Ok(HealthCheck::new(
+            SOURCE,
+            HealthType::Error,
+            format!("File {path} was removed part way through processing."),
+            "#remote-path-file-removed",
+        ));
+    }
+    // The failure came before any file was found: ask the client where
+    // the download is.
+    let Some(name) = failure.download_client.as_deref() else {
+        return Ok(HealthCheck::ok(SOURCE));
+    };
+    let Some((definition, status)) = client_statuses(ctx)
+        .await?
+        .into_iter()
+        .find(|(d, _)| d.name == name)
+    else {
+        return Ok(HealthCheck::ok(SOURCE));
+    };
+    let os_name = std::env::consts::OS;
+    let Some(dlpath) = failure.output_path.as_deref().filter(|p| !p.trim().is_empty()) else {
+        return Ok(HealthCheck::new(
+            SOURCE,
+            HealthType::Error,
+            format!("{APP_NAME} failed to import (an) episode(s). Check your logs for details."),
+            "#remote-path-import-failed",
+        ));
+    };
+    let name = &definition.name;
+    if !remote_path::is_rooted(dlpath) {
+        let (message, fragment) = if !status.is_localhost {
+            (format!("Remote download client {name} reported files in {dlpath} but this is not a valid {os_name} path. Review your remote path mappings and download client settings."), "#bad-remote-path-mapping")
+        } else if ctx.is_docker {
+            (format!("You are using docker; download client {name} reported files in {dlpath} but this is not a valid {os_name} path. Review your remote path mappings and download client settings."), "#docker-bad-remote-path-mapping")
+        } else {
+            (format!("Local download client {name} reported files in {dlpath} but this is not a valid {os_name} path. Review your download client settings."), "#bad-download-client-settings")
+        };
+        return Ok(HealthCheck::new(SOURCE, HealthType::Error, message, fragment));
+    }
+    if std::path::Path::new(dlpath).is_dir() {
+        return Ok(HealthCheck::new(
+            SOURCE,
+            HealthType::Error,
+            format!(
+                "{APP_NAME} can see but not access download directory {dlpath}. Likely permissions error."
+            ),
+            "#permissions-error",
+        ));
+    }
+    let (message, fragment) = if ctx.is_docker {
+        (
+            format!(
+                "{APP_NAME} can see but not access download directory {dlpath}. Likely permissions error."
+            ),
+            "#docker-bad-remote-path-mapping",
+        )
+    } else if !status.is_localhost {
+        (format!("Remote download client {name} reported files in {dlpath} but this directory does not appear to exist. Likely missing remote path mapping."), "#bad-remote-path-mapping")
+    } else {
+        (format!("Download client {name} reported files in {dlpath} but {APP_NAME} cannot see this directory. You may need to adjust the folder's permissions."), "#permissions-error")
+    };
+    Ok(HealthCheck::new(SOURCE, HealthType::Error, message, fragment))
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn mounts_are_read_and_matched() {
+        let table = "/dev/sda1 / ext4 rw,relatime 0 0\n/dev/sdb1 /mnt/media ext4 ro,relatime 0 0\ntmpfs /mnt/media\\040two tmpfs rw 0 0\n";
+        let mounts = parse_mounts(table);
+        assert_eq!(mounts.len(), 3);
+        assert_eq!(mounts[2].root, "/mnt/media two");
+        let m = mount_of(&mounts, "/mnt/media/tv/Show").unwrap();
+        assert_eq!(m.device, "/dev/sdb1");
+        assert!(m.read_only);
+        let root = mount_of(&mounts, "/home/user/tv").unwrap();
+        assert_eq!(root.root, "/");
+        assert!(!root.read_only);
+        assert_eq!(mount_of(&mounts, "/mnt/mediax").unwrap().root, "/");
+    }
+
+    #[test]
+    fn a_missing_recycle_bin_is_not_writable() {
+        assert!(!folder_writable("/nonexistent/unarr/recycle"));
+        let dir = std::env::temp_dir().join(format!("unarr_health_{}", std::process::id()));
+        std::fs::create_dir_all(&dir).unwrap();
+        assert!(folder_writable(dir.to_str().unwrap()));
+        let _ = std::fs::remove_dir_all(&dir);
+    }
 
     #[test]
     fn merges_verdicts_by_source() {

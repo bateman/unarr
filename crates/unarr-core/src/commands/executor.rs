@@ -15,9 +15,13 @@ use crate::decision::{self, Decision, DecisionInput};
 use crate::downloads::pending;
 use crate::downloads::process::{self, Processed};
 use crate::downloads::Downloads;
-use crate::health::{self, CheckSet, HealthCheck};
+use crate::health::{self, CheckSet, HealthCheck, ImportFailure};
 use crate::indexers::IndexerService;
+use crate::mediafiles::decide::Environment;
+use crate::mediafiles::manual::{self, ManualImportFile};
+use crate::mediafiles::{completed, downloaded, rename, scan, ImportEvent, ImportMode};
 use crate::model::Episode;
+use crate::notifications::{Identity, Notifier};
 use crate::profile;
 use crate::search::{SearchService, Trigger};
 use crate::store;
@@ -38,6 +42,9 @@ pub enum Event {
     QueueUpdated,
     /// `HealthCheckCompleteEvent`, when a verdict changed.
     HealthChanged,
+    /// What the importer raised: `EpisodeImportedEvent`,
+    /// `EpisodeFileDeletedEvent`, `DownloadCompletedEvent` and the rest.
+    Import(Box<ImportEvent>),
 }
 
 /// Health runs the originals' debouncer holds for five seconds after a
@@ -56,26 +63,46 @@ pub struct Runtime {
     health: Mutex<Vec<HealthCheck>>,
     /// Health runs in flight, so a test can wait for them.
     health_runs: Mutex<Vec<tokio::task::JoinHandle<()>>>,
+    /// `_pendingHealthChecks`: the sets a debounced run will cover.
+    health_pending: Mutex<Vec<(CheckSet, Option<ImportFailure>)>>,
+    /// A handle on this runtime, for the background runs it spawns.
+    me: Mutex<std::sync::Weak<Runtime>>,
     /// The provider statuses the last status-driven run saw, so a refresh
     /// that changed nothing does not ask the clients again.
     health_statuses: Mutex<Option<String>>,
     is_docker: bool,
     /// Set at shutdown: the workers take no further command.
     stopping: std::sync::atomic::AtomicBool,
+    notifier: Arc<Notifier>,
+    /// When the runtime came up, for the health checks' startup grace.
+    started_at: DateTime<Utc>,
+    /// `_hasRunHealthChecksAfterGracePeriod`: health verdicts reach the
+    /// notifications only once the checks ran after the grace period.
+    health_armed: std::sync::atomic::AtomicBool,
 }
+
+/// `HealthCheckService`'s startup grace: fifteen minutes.
+const HEALTH_GRACE: chrono::Duration = chrono::Duration::minutes(15);
 
 impl Runtime {
     /// Open the queue over `db`, bring the scheduled tasks in line with
     /// the defaults, and hand the queue to the downloads for the searches
     /// a failed download triggers.
-    pub async fn new(db: Db, downloads: Arc<Downloads>, clock: Clock) -> anyhow::Result<Arc<Runtime>> {
+    pub async fn new(
+        db: Db,
+        downloads: Arc<Downloads>,
+        clock: Clock,
+        identity: Identity,
+    ) -> anyhow::Result<Arc<Runtime>> {
         crate::time::process_start();
         let queue = Arc::new(CommandQueue::open(db.clone()).await?);
         let now = clock();
         db.call(move |conn| scheduler::ensure_defaults(conn, now)).await?;
         downloads.set_commands(queue.clone());
+        let notifier = Arc::new(Notifier::new(db.clone(), identity, now));
+        downloads.set_notifier(notifier.clone());
         let (events, _) = broadcast::channel(256);
-        Ok(Arc::new(Runtime {
+        let runtime = Arc::new(Runtime {
             search: SearchService::new(db.clone()).with_queue(downloads.queue_source()),
             indexers: IndexerService::new(db.clone()),
             db,
@@ -85,10 +112,21 @@ impl Runtime {
             events,
             health: Mutex::new(Vec::new()),
             health_runs: Mutex::new(Vec::new()),
+            health_pending: Mutex::new(Vec::new()),
+            me: Mutex::new(std::sync::Weak::new()),
             health_statuses: Mutex::new(None),
             is_docker: std::path::Path::new("/.dockerenv").exists(),
             stopping: std::sync::atomic::AtomicBool::new(false),
-        }))
+            notifier,
+            started_at: now,
+            health_armed: std::sync::atomic::AtomicBool::new(false),
+        });
+        *runtime.me.lock().unwrap() = Arc::downgrade(&runtime);
+        Ok(runtime)
+    }
+
+    pub fn notifier(&self) -> &Arc<Notifier> {
+        &self.notifier
     }
 
     /// The health verdicts that stand.
@@ -99,33 +137,138 @@ impl Runtime {
     /// Run a set of health checks now and keep what they found; `true`
     /// when a verdict changed.
     pub async fn check_health(&self, set: CheckSet) -> bool {
+        self.check_health_sets(&[(set, None)]).await
+    }
+
+    /// `ProcessHealthChecks`: the pending sets in one run, then
+    /// `HealthCheckCompleteEvent`.
+    async fn check_health_sets(&self, sets: &[(CheckSet, Option<ImportFailure>)]) -> bool {
+        let now = self.now();
         let clients = self.downloads.clients();
+        let failure = sets.iter().find_map(|(_, f)| f.clone());
         let ctx = health::Context {
             db: &self.db,
             indexers: &self.indexers,
             clients,
-            now: self.now(),
+            now,
             is_docker: self.is_docker,
+            import_failure: failure.as_ref(),
         };
-        let run = health::run(&ctx, set).await;
-        let changed = health::merge(&mut self.health.lock().unwrap(), run);
+        let standing = self.health();
+        let names: Vec<CheckSet> = sets.iter().map(|(s, _)| *s).collect();
+        let run = health::run(&ctx, &names, &standing).await;
+        let (changed, failed, restored) = {
+            let mut results = self.health.lock().unwrap();
+            let before = results.clone();
+            let changed = health::merge(&mut results, run.clone());
+            // `HealthCheckFailedEvent` for a source that had no verdict,
+            // `HealthCheckRestoredEvent` for one whose verdict cleared.
+            let failed: Vec<HealthCheck> = run
+                .iter()
+                .filter(|r| !r.is_ok() && !before.iter().any(|b| b.source == r.source))
+                .cloned()
+                .collect();
+            let restored: Vec<HealthCheck> = run
+                .iter()
+                .filter(|r| r.is_ok())
+                .filter_map(|r| before.iter().find(|b| b.source == r.source).cloned())
+                .collect();
+            (changed, failed, restored)
+        };
         if changed {
             self.emit(Event::HealthChanged);
         }
+        if self.health_armed.load(std::sync::atomic::Ordering::SeqCst) {
+            for check in &failed {
+                self.notifier.on_health_issue(check, now).await;
+            }
+            for check in &restored {
+                self.notifier.on_health_restored(check, now).await;
+            }
+        }
+        // `HealthCheckCompleteEvent`.
+        self.notifier.process_queue(now).await;
         changed
+    }
+
+    /// `HealthCheckService.HandleAsync(IEvent)`: once the startup grace
+    /// period is over, the checks run again and every failure that stands
+    /// reaches the notifications; from then on new verdicts do too.
+    async fn arm_health_notifications(&self) {
+        use std::sync::atomic::Ordering;
+        if self.health_armed.load(Ordering::SeqCst) || self.now() < self.started_at + HEALTH_GRACE {
+            return;
+        }
+        self.check_health(CheckSet::All).await;
+        self.health_armed.store(true, Ordering::SeqCst);
+        let now = self.now();
+        for check in self.health() {
+            self.notifier.on_health_issue(&check, now).await;
+        }
     }
 
     /// Run a set of health checks in the background after the originals'
     /// debounce, as a provider change or the start asks for.
     pub fn check_health_later(self: &Arc<Self>, set: CheckSet) {
-        let runtime = self.clone();
+        self.check_health_later_with(set, None);
+    }
+
+    /// `HealthCheckService.HandleAsync(IEvent)` through the debouncer: the
+    /// set joins what is pending; one run, five seconds after the first
+    /// request, covers them all.
+    fn check_health_later_with(&self, set: CheckSet, failure: Option<ImportFailure>) {
+        let first = {
+            let mut pending = self.health_pending.lock().unwrap();
+            pending.push((set, failure));
+            pending.len() == 1
+        };
+        if !first {
+            return;
+        }
+        let Some(runtime) = self.me.lock().unwrap().upgrade() else {
+            return;
+        };
         let handle = tokio::spawn(async move {
             tokio::time::sleep(HEALTH_DELAY).await;
-            runtime.check_health(set).await;
+            let sets: Vec<(CheckSet, Option<ImportFailure>)> =
+                std::mem::take(&mut *runtime.health_pending.lock().unwrap());
+            runtime.check_health_sets(&sets).await;
         });
         let mut runs = self.health_runs.lock().unwrap();
         runs.retain(|h| !h.is_finished());
         runs.push(handle);
+    }
+
+    /// The event-driven checks an import's outcome asks for (`CheckOn` on
+    /// `EpisodeImportedEvent` and `EpisodeImportFailedEvent`).
+    fn check_health_after_import(&self, events: &[ImportEvent]) {
+        let failure = events.iter().find_map(|e| match e {
+            ImportEvent::EpisodeImportFailed(f) => Some(ImportFailure {
+                path: Some(f.local.path.clone()).filter(|p| !p.is_empty()),
+                download_client: f.client.as_ref().map(|c| c.name.clone()),
+                download_id: f.download_id.clone(),
+                output_path: f
+                    .download_id
+                    .as_deref()
+                    .and_then(|id| self.downloads.tracked(id))
+                    .and_then(|t| {
+                        t.import_item
+                            .as_ref()
+                            .or(Some(&t.item))
+                            .and_then(|i| i.output_path.clone())
+                    }),
+            }),
+            _ => None,
+        });
+        if let Some(f) = failure {
+            self.check_health_later_with(CheckSet::ImportFailed, Some(f));
+        }
+        if events
+            .iter()
+            .any(|e| matches!(e, ImportEvent::EpisodeImported(_)))
+        {
+            self.check_health_later_with(CheckSet::ImportSucceeded, None);
+        }
     }
 
     /// The status-driven checks, when a provider's status changed since the
@@ -301,6 +444,7 @@ impl Runtime {
         let id = model.id;
         let name = model.name();
         tracing::trace!(name, id, "command started");
+        self.arm_health_notifications().await;
         if let Err(e) = self.queue.record_started(&model).await {
             tracing::warn!(error = %e, "failed to record the command's start");
         }
@@ -387,6 +531,26 @@ impl Runtime {
         match &model.body {
             CommandBody::RssSync => self.rss_sync(id).await,
             CommandBody::RefreshMonitoredDownloads => self.refresh_monitored_downloads().await,
+            CommandBody::ProcessMonitoredDownloads => self.process_monitored_downloads().await,
+            CommandBody::RescanSeries { series_id } => self.rescan_series(id, *series_id).await,
+            CommandBody::ManualImport { files, import_mode } => {
+                self.manual_import(id, files, *import_mode).await
+            }
+            CommandBody::RenameFiles { series_id, files } => self.rename_files(id, *series_id, files).await,
+            CommandBody::RenameSeries { series_ids } => self.rename_series(id, series_ids).await,
+            CommandBody::DownloadedEpisodesScan {
+                path,
+                download_client_id,
+                import_mode,
+            } => {
+                self.downloaded_episodes_scan(
+                    id,
+                    path.as_deref(),
+                    download_client_id.as_deref(),
+                    *import_mode,
+                )
+                .await
+            }
             CommandBody::EpisodeSearch { episode_ids } => {
                 for episode_id in episode_ids {
                     let decisions = self
@@ -437,8 +601,11 @@ impl Runtime {
                 Ok(())
             }
             CommandBody::MessagingCleanup => self.queue.clean(self.now()).await,
-            CommandBody::RefreshSeries { .. } | CommandBody::RescanSeries { .. } => {
-                tracing::warn!(name = model.name(), "metadata refreshes and disk scans arrive with the importer; the command completes without effect");
+            CommandBody::RefreshSeries { .. } => {
+                tracing::warn!(
+                    name = model.name(),
+                    "metadata refreshes arrive with the library phase; the command completes without effect"
+                );
                 Ok(())
             }
             CommandBody::CheckHealth => {
@@ -522,9 +689,272 @@ impl Runtime {
         Ok(())
     }
 
+    /// `DownloadMonitoringService.Refresh`: the clients asked, then the
+    /// processing of what completed or failed queued as its own command.
     async fn refresh_monitored_downloads(&self) -> anyhow::Result<()> {
         if self.downloads.refresh(self.now()).await? {
             self.emit(Event::QueueUpdated);
+        }
+        self.queue
+            .push(
+                CommandBody::ProcessMonitoredDownloads,
+                CommandPriority::High,
+                CommandTrigger::Unspecified,
+                self.now(),
+            )
+            .await?;
+        Ok(())
+    }
+
+    /// `DownloadProcessingService.Execute(ProcessMonitoredDownloadsCommand)`.
+    async fn process_monitored_downloads(&self) -> anyhow::Result<()> {
+        let events = completed::process_monitored_downloads(&self.downloads, self.now()).await?;
+        self.emit_import_events(events).await;
+        // `DownloadsProcessedEvent` -> `TrackedDownloadRefreshedEvent` -> the
+        // queue, and the notifications flush what they queued.
+        self.emit(Event::QueueUpdated);
+        self.notifier.process_queue(self.now()).await;
+        Ok(())
+    }
+
+    /// Events the API raised outside a command (a file deleted through it):
+    /// relayed like the commands' own.
+    pub async fn publish_import_events(&self, events: Vec<ImportEvent>) {
+        self.emit_import_events(events).await;
+    }
+
+    /// `Execute(ManualImportCommand)`.
+    async fn manual_import(
+        &self,
+        id: i64,
+        files: &[ManualImportFile],
+        mode: ImportMode,
+    ) -> anyhow::Result<()> {
+        let now = self.now();
+        let env = self.db.call(move |conn| Environment::load(conn, now)).await?;
+        let (db, downloads, files) = (self.db.clone(), self.downloads.clone(), files.to_vec());
+        let (messages, outcome) = tokio::task::spawn_blocking(move || {
+            let mut messages = Vec::new();
+            let outcome = manual::execute(&db, &env, &downloads, &files, mode, now, &mut |m| {
+                messages.push(m)
+            });
+            (messages, outcome)
+        })
+        .await?;
+        for m in messages {
+            self.progress(id, m);
+        }
+        let outcome = outcome.map_err(|e| anyhow::anyhow!("{e}"))?;
+        for mut t in outcome.completed {
+            completed::download_completed(&self.downloads, &mut t, now).await;
+            self.downloads.update_tracked(t);
+        }
+        self.downloads.rebuild_queue_now(now);
+        self.emit_import_events(outcome.events.into_vec()).await;
+        self.emit(Event::QueueUpdated);
+        Ok(())
+    }
+
+    /// `Execute(RenameFilesCommand)`.
+    async fn rename_files(&self, id: i64, series_id: i64, files: &[i64]) -> anyhow::Result<()> {
+        let now = self.now();
+        let ids = files.to_vec();
+        let (env, series, files) = self
+            .db
+            .call(move |conn| {
+                let series = store::series::get(conn, series_id)?
+                    .ok_or_else(|| anyhow::anyhow!("Series with ID {series_id} does not exist"))?;
+                Ok((
+                    Environment::load(conn, now)?,
+                    series,
+                    store::episodes::list_files_by_ids(conn, &ids)?,
+                ))
+            })
+            .await?;
+        self.progress(id, format!("Renaming {} files for {}", files.len(), series.title));
+        let db = self.db.clone();
+        let title = series.title.clone();
+        let (renamed, events) =
+            tokio::task::spawn_blocking(move || rename::rename_files(&db, &env, &series, files, now))
+                .await??;
+        self.progress(
+            id,
+            format!("{} selected episode files renamed for {}", renamed.len(), title),
+        );
+        self.emit_import_events(events.into_vec()).await;
+        // `RenameCompletedEvent`.
+        self.notifier.process_queue(self.now()).await;
+        Ok(())
+    }
+
+    /// `Execute(RenameSeriesCommand)`.
+    async fn rename_series(&self, id: i64, series_ids: &[i64]) -> anyhow::Result<()> {
+        tracing::debug!("Renaming all files for selected series");
+        let now = self.now();
+        let ids = series_ids.to_vec();
+        let (env, series) = self
+            .db
+            .call(move |conn| {
+                Ok((
+                    Environment::load(conn, now)?,
+                    store::series::get_many(conn, &ids)?,
+                ))
+            })
+            .await?;
+        for s in series {
+            let sid = s.id;
+            let files = self
+                .db
+                .call(move |conn| store::episodes::list_files(conn, sid))
+                .await?;
+            self.progress(id, format!("Renaming all files in series: {}", s.title));
+            let (db, env2, title) = (self.db.clone(), env.clone(), s.title.clone());
+            let (renamed, events) =
+                tokio::task::spawn_blocking(move || rename::rename_files(&db, &env2, &s, files, now))
+                    .await??;
+            self.progress(
+                id,
+                format!("{} episode files renamed for {}", renamed.len(), title),
+            );
+            self.emit_import_events(events.into_vec()).await;
+        }
+        // `RenameCompletedEvent`.
+        self.notifier.process_queue(self.now()).await;
+        Ok(())
+    }
+
+    /// The importer's events relayed, with the rescans a destination clash
+    /// asks for queued.
+    async fn emit_import_events(&self, events: Vec<ImportEvent>) {
+        // `NotificationService`'s synchronous handlers, in event order.
+        self.notifier.on_import_events(&events, self.now()).await;
+        // The health checks an import's outcome triggers, debounced; their
+        // completion is what flushes the media servers' update queues.
+        self.check_health_after_import(&events);
+        for e in events {
+            if let ImportEvent::RescanRequested { series_id } = &e {
+                if let Err(err) = self
+                    .queue
+                    .push(
+                        CommandBody::RescanSeries {
+                            series_id: Some(*series_id),
+                        },
+                        CommandPriority::Normal,
+                        CommandTrigger::Unspecified,
+                        self.now(),
+                    )
+                    .await
+                {
+                    tracing::warn!(error = %err, "failed to queue the rescan");
+                }
+                continue;
+            }
+            self.emit(Event::Import(Box::new(e)));
+        }
+    }
+
+    /// `DiskScanService.Execute(RescanSeriesCommand)`.
+    async fn rescan_series(&self, id: i64, series_id: Option<i64>) -> anyhow::Result<()> {
+        let now = self.now();
+        let (env, series) = self
+            .db
+            .call(move |conn| {
+                let series = match series_id {
+                    Some(sid) => store::series::get(conn, sid)?
+                        .map(|s| vec![s])
+                        .ok_or_else(|| anyhow::anyhow!("Series with ID {sid} does not exist"))?,
+                    None => store::series::list(conn)?,
+                };
+                Ok((Environment::load(conn, now)?, series))
+            })
+            .await?;
+        for s in series {
+            let (db, env2) = (self.db.clone(), env.clone());
+            let (messages, events) = tokio::task::spawn_blocking(move || {
+                let mut messages = Vec::new();
+                let events = scan::scan(&db, &env2, &s, now, &mut |m| messages.push(m));
+                (messages, events)
+            })
+            .await?;
+            for m in messages {
+                self.progress(id, m);
+            }
+            self.emit_import_events(events?.into_vec()).await;
+        }
+        Ok(())
+    }
+
+    /// `DownloadedEpisodesCommandService.Execute(DownloadedEpisodesScanCommand)`.
+    async fn downloaded_episodes_scan(
+        &self,
+        id: i64,
+        path: Option<&str>,
+        download_client_id: Option<&str>,
+        import_mode: ImportMode,
+    ) -> anyhow::Result<()> {
+        let Some(path) = path.map(str::to_string) else {
+            anyhow::bail!("A path must be provided (Parameter 'path')");
+        };
+        let now = self.now();
+        let env = self.db.call(move |conn| Environment::load(conn, now)).await?;
+        let mut results = Vec::new();
+        if !std::path::Path::new(&path).exists() {
+            tracing::warn!("Folder/File specified for import scan [{path}] doesn't exist.");
+        } else {
+            let mut tracked = download_client_id.and_then(|d| self.downloads.tracked(d));
+            if download_client_id.is_some() && tracked.is_none() {
+                tracing::warn!(
+                    "External directory scan request for unknown download {}, attempting normal import. [{path}]",
+                    download_client_id.unwrap_or("")
+                );
+            }
+            if let Some(t) = tracked.as_ref() {
+                tracing::debug!(
+                    "External directory scan request for known download {}. [{path}]",
+                    t.download_id()
+                );
+            }
+            let db = self.db.clone();
+            let (imported, updated, verify_events) = tokio::task::spawn_blocking(move || {
+                let (series, item) = match tracked.as_ref() {
+                    Some(t) => (
+                        t.remote.as_ref().and_then(|r| r.series.clone()),
+                        Some(t.item.clone()),
+                    ),
+                    None => (None, None),
+                };
+                let imported = downloaded::process_path(
+                    &db,
+                    &env,
+                    &path,
+                    import_mode,
+                    series.as_ref(),
+                    item.as_ref(),
+                    now,
+                );
+                let mut events = crate::mediafiles::Events::default();
+                if let Some(t) = tracked.as_mut() {
+                    completed::verify_import(&db, t, &imported.results, now, &mut events);
+                }
+                (imported, tracked, events)
+            })
+            .await?;
+            if let Some(t) = updated {
+                self.downloads.update_tracked(t);
+                self.downloads.rebuild_queue_now(now);
+            }
+            results = imported.results;
+            let mut events = imported.events;
+            events.extend(verify_events);
+            for series_id in imported.rescan_series {
+                events.push(ImportEvent::RescanRequested { series_id });
+            }
+            self.emit_import_events(events.into_vec()).await;
+        }
+        if results.iter().all(|r| r.episode_file.is_none()) {
+            // The command completes, but reports as unsuccessful.
+            self.progress(id, "Failed to import".into());
+            self.queue.set_result(id, super::CommandResult::Unsuccessful);
         }
         Ok(())
     }

@@ -1,0 +1,35 @@
+{
+  "body": {
+    "body": {
+      "files": [
+        1075
+      ],
+      "isExclusive": false,
+      "isLongRunning": false,
+      "name": "RenameFiles",
+      "requiresDiskAccess": true,
+      "sendUpdatesToClient": true,
+      "seriesId": 2,
+      "suppressMessages": false,
+      "trigger": "manual",
+      "updateScheduledTask": true
+    },
+    "commandName": "Rename Files",
+    "id": 461703,
+    "name": "RenameFiles",
+    "priority": "normal",
+    "queued": "2026-11-08T21:00:08Z",
+    "result": "unknown",
+    "sendUpdatesToClient": true,
+    "status": "queued",
+    "trigger": "manual",
+    "updateScheduledTask": true
+  },
+  "recordedAt": "2026-11-08T21:00:08Z",
+  "request": {
+    "body": "bodies/command-rename-files.json",
+    "method": "POST",
+    "path": "/api/v3/command"
+  },
+  "status": 201
+}

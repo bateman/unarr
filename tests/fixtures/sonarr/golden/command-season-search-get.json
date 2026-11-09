@@ -13,22 +13,22 @@
       "updateScheduledTask": true
     },
     "commandName": "Season Search",
-    "duration": "00:00:00.0859046",
-    "ended": "2026-11-07T15:44:53Z",
+    "duration": "00:00:00.1399343",
+    "ended": "2026-11-08T20:56:41Z",
     "id": 461666,
     "message": "Season search completed. 0 reports downloaded.",
     "name": "SeasonSearch",
     "priority": "normal",
-    "queued": "2026-11-07T15:44:53Z",
+    "queued": "2026-11-08T20:56:40Z",
     "result": "successful",
     "sendUpdatesToClient": true,
-    "started": "2026-11-07T15:44:53Z",
-    "stateChangeTime": "2026-11-07T15:44:53Z",
+    "started": "2026-11-08T20:56:40Z",
+    "stateChangeTime": "2026-11-08T20:56:40Z",
     "status": "completed",
     "trigger": "manual",
     "updateScheduledTask": true
   },
-  "recordedAt": "2026-11-07T15:45:08Z",
+  "recordedAt": "2026-11-08T20:56:55Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/command/461666"

@@ -7,7 +7,7 @@
     "sortKey": "timeleft",
     "totalRecords": 0
   },
-  "recordedAt": "2026-11-07T15:45:08Z",
+  "recordedAt": "2026-11-08T20:56:55Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/queue?page=1&pageSize=20&sortKey=timeleft&sortDirection=ascending&includeSeries=true&includeEpisode=true"

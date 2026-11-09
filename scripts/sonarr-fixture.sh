@@ -11,7 +11,12 @@
 # tests/fixtures/sonarr/README.md.
 #
 # Requirements: bash, curl, tar, python3; libicu for `golden`. `golden` and
-# `shell` also start scripts/mock-servarr.py on port 18989 (MOCK_PORT).
+# `shell` also start scripts/mock-servarr.py on port 18989 (MOCK_PORT), and
+# need /tv and /downloads (TV_DIR, DOWNLOADS_DIR): the fixture's root folder
+# and the directory the mock download clients report, so that the real
+# Sonarr can import what the mock completes. They are created if missing
+# (root, or a writable /) and emptied before each recording; the script
+# refuses to empty a directory it did not mark as its own.
 set -euo pipefail
 
 SONARR_VERSION="${SONARR_VERSION:-4.0.20.3014}"
@@ -52,6 +57,27 @@ download() {
 
 MOCK_PORT="${MOCK_PORT:-18989}"
 MOCK_PID=""
+TV_DIR="${TV_DIR:-/tv}"
+DOWNLOADS_DIR="${DOWNLOADS_DIR:-/downloads}"
+MARKER=".unarr-fixture"
+
+# The library and download directories the recording imports through. The
+# fixture database says /tv, the mock says /downloads, so both must exist for
+# real; each gets a marker so that a later run empties only what this
+# script owns.
+prepare_dirs() {
+    local d
+    for d in "$TV_DIR" "$DOWNLOADS_DIR"; do
+        if [ -d "$d" ]; then
+            [ -f "$d/$MARKER" ] || die "$d exists but was not created by this script (no $d/$MARKER); point TV_DIR/DOWNLOADS_DIR elsewhere or create the marker yourself"
+            find "$d" -mindepth 1 -delete
+        else
+            mkdir -p "$d" 2>/dev/null || die "cannot create $d; run as root or set TV_DIR and DOWNLOADS_DIR to writable paths"
+        fi
+        touch "$d/$MARKER"
+        log "using $d (emptied)"
+    done
+}
 # The mock indexers and download clients the real Sonarr is pointed at while
 # recording; their requests are logged for the request builders to mirror.
 start_mock() {
@@ -62,7 +88,7 @@ start_mock() {
     if curl -fsS -o /dev/null "http://127.0.0.1:$MOCK_PORT/newznab/api?t=caps&apikey=$API_KEY" 2>/dev/null; then
         die "something already listens on port $MOCK_PORT; stop it (pkill -f mock-servarr.py) and retry"
     fi
-    python3 -I "$REPO/scripts/mock-servarr.py" --listen "127.0.0.1:$MOCK_PORT" --fixtures "$REPO/tests/fixtures" --log "$logfile" 2>"$CACHE/mock.stderr.log" &
+    python3 -I "$REPO/scripts/mock-servarr.py" --listen "127.0.0.1:$MOCK_PORT" --fixtures "$REPO/tests/fixtures" --log "$logfile" --downloads "$DOWNLOADS_DIR" --tv "$TV_DIR" 2>"$CACHE/mock.stderr.log" &
     MOCK_PID=$!
     for _ in $(seq 1 20); do
         if curl -fsS -o /dev/null "http://127.0.0.1:$MOCK_PORT/newznab/api?t=caps&apikey=$API_KEY" 2>/dev/null; then
@@ -130,11 +156,12 @@ start_on_fixture_copy() {
 }
 
 cmd_golden() {
+    prepare_dirs
     start_mock
     start_on_fixture_copy
     mkdir -p "$GOLDEN_DIR"
     python3 -I "$REPO/scripts/record-golden.py" \
-        --base-url "http://127.0.0.1:$SONARR_PORT" --api-key "$API_KEY" \
+        --base-url "http://127.0.0.1:$SONARR_PORT" --api-key "$API_KEY" --mock-url "http://127.0.0.1:$MOCK_PORT" \
         --requests "$GOLDEN_DIR/requests.txt" --out "$GOLDEN_DIR" --login unarr:fixture
     record_schemas
     stop_sonarr
@@ -173,6 +200,7 @@ cmd_ui() {
 }
 
 cmd_shell() {
+    prepare_dirs
     start_mock
     start_on_fixture_copy
     log "Sonarr running at http://127.0.0.1:$SONARR_PORT with API key $API_KEY; Ctrl-C to stop"

@@ -151,6 +151,12 @@ pub async fn download_report(
     tracing::info!(client = %definition.name, indexer = %release.indexer, title = %release.title, "report sent to the download client");
     let download_id = Some(download_id).filter(|id| !id.trim().is_empty());
     record_grab(downloads, remote, &definition, download_id.as_deref(), now).await?;
+    // `NotificationService.Handle(EpisodeGrabbedEvent)`.
+    if let Some(notifier) = downloads.notifier() {
+        notifier
+            .on_grab(remote, &definition, download_id.as_deref(), now)
+            .await;
+    }
     // `PendingReleaseService.Handle(EpisodeGrabbedEvent)`.
     let grabbed_remote = remote.clone();
     downloads
@@ -185,7 +191,7 @@ async fn record_grab(
             let conn: &rusqlite::Connection = &tx;
             let parsed = remote.parsed.clone().unwrap_or_default();
             let series = remote.series.as_ref().expect("checked by the caller");
-            let first_id = store::history::next_id(conn)?;
+            let first_id = store::history::next_ids(conn, remote.episodes.len())?;
             for (id, episode) in (first_id..).zip(remote.episodes.iter()) {
                 store::history::insert(
                     conn,
@@ -282,10 +288,10 @@ pub fn grab_history_data(
     data
 }
 
-/// `IndexerFlags.ToString()`: the flag names, or `0`.
-pub fn flag_names(flags: i64) -> String {
+/// `IndexerFlags` members, bit and name.
+fn flag_table() -> [(i64, &'static str); 8] {
     use crate::indexers::rss::flags::*;
-    let names: Vec<&str> = [
+    [
         (FREELEECH, "G_Freeleech"),
         (HALFLEECH, "G_Halfleech"),
         (DOUBLE_UPLOAD, "G_DoubleUpload"),
@@ -295,15 +301,42 @@ pub fn flag_names(flags: i64) -> String {
         (FREELEECH25, "G_Freeleech25"),
         (NUKED, "Nuked"),
     ]
-    .iter()
-    .filter(|(bit, _)| flags & bit != 0)
-    .map(|(_, name)| *name)
-    .collect();
+}
+
+/// `IndexerFlags.ToString()`: the flag names, or `0`.
+pub fn flag_names(flags: i64) -> String {
+    let names: Vec<&str> = flag_table()
+        .iter()
+        .filter(|(bit, _)| flags & bit != 0)
+        .map(|(_, name)| *name)
+        .collect();
     if names.is_empty() {
         flags.to_string()
     } else {
         names.join(", ")
     }
+}
+
+/// `Enum.TryParse<IndexerFlags>(text, ignoreCase)`: the names (or the
+/// number) the history stored, back to bits; `None` for text that is not
+/// a flag list.
+pub fn parse_flag_names(text: &str) -> Option<i64> {
+    let text = text.trim();
+    if text.is_empty() {
+        return None;
+    }
+    if let Ok(n) = text.parse::<i64>() {
+        return Some(n);
+    }
+    let table = flag_table();
+    let mut flags = 0;
+    for part in text.split(',') {
+        let (bit, _) = table
+            .iter()
+            .find(|(_, name)| name.eq_ignore_ascii_case(part.trim()))?;
+        flags |= bit;
+    }
+    Some(flags)
 }
 
 /// `double.ToString()`: the shortest text that reads back as the number.

@@ -1,0 +1,459 @@
+{
+  "body": [
+    {
+      "body": {
+        "embeds": [
+          {
+            "author": {
+              "icon_url": "https://raw.githubusercontent.com/Sonarr/Sonarr/develop/Logo/256.png",
+              "name": "vm"
+            },
+            "color": 2605644,
+            "description": "Episode Imported",
+            "fields": [
+              {
+                "inline": false,
+                "name": "Overview",
+                "value": "Longtime rivals Matt Murdock and Wilson Fisk attempt to move past their darker personas to serve New York, but their pasts resurface, reintroducing the world of Daredevil."
+              },
+              {
+                "inline": false,
+                "name": "Rating",
+                "value": "8.1"
+              },
+              {
+                "inline": false,
+                "name": "Genres",
+                "value": "Action, Drama"
+              },
+              {
+                "inline": true,
+                "name": "Quality",
+                "value": "WEBDL-1080p"
+              },
+              {
+                "inline": true,
+                "name": "Codecs",
+                "value": "x264 / AAC 1"
+              },
+              {
+                "inline": false,
+                "name": "Group",
+                "value": "FLUX"
+              },
+              {
+                "inline": true,
+                "name": "Size",
+                "value": "117.2 KB"
+              },
+              {
+                "inline": false,
+                "name": "Languages",
+                "value": "eng"
+              },
+              {
+                "inline": false,
+                "name": "Subtitles",
+                "value": "eng"
+              },
+              {
+                "inline": false,
+                "name": "Links",
+                "value": "[The TVDB](https://thetvdb.com/?tab=series&id=422712) / [Trakt](https://trakt.tv/search/tvdb/422712?id_type=show) / [IMDB](https://imdb.com/title/tt18923754/)"
+              },
+              {
+                "inline": false,
+                "name": "Release",
+                "value": "```Daredevil.Born.Again.S01E01.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-FLUX```"
+              }
+            ],
+            "image": {
+              "url": "https://artworks.thetvdb.com/banners/v4/series/422712/backgrounds/69bef1d230b9d.jpg"
+            },
+            "thumbnail": {
+              "url": "https://artworks.thetvdb.com/banners/v4/series/422712/posters/6978fefe94ea5.jpg"
+            },
+            "timestamp": "2026-11-08T20:58:48.6005257Z",
+            "title": "Daredevil: Born Again - 1x01 - Heaven's Half Hour",
+            "url": "http://thetvdb.com/?tab=series&id=422712"
+          }
+        ],
+        "username": "Unarr fixture"
+      },
+      "headers": {
+        "content-type": "application/json"
+      },
+      "method": "POST",
+      "path": "/discord/api/webhooks/100/fixturetoken",
+      "query": {},
+      "service": "discord"
+    },
+    {
+      "body": {
+        "applicationUrl": "",
+        "customFormatInfo": {
+          "customFormatScore": -10000,
+          "customFormats": [
+            {
+              "id": 21,
+              "name": "DSNP"
+            },
+            {
+              "id": 10,
+              "name": "HD Streaming Boost"
+            },
+            {
+              "id": 36,
+              "name": "Language not Italian"
+            },
+            {
+              "id": 11,
+              "name": "WEB Tier 01"
+            }
+          ]
+        },
+        "downloadClient": "Mock qBittorrent",
+        "downloadClientType": "qBittorrent",
+        "downloadId": "0FB2EF04FB342178115BA635EC7B5EC0067058BA",
+        "episodeFile": {
+          "dateAdded": "2026-11-08T20:58:48.5893616Z",
+          "id": 1076,
+          "languages": [
+            {
+              "id": 1,
+              "name": "English"
+            }
+          ],
+          "mediaInfo": {
+            "audioChannels": 1.0,
+            "audioCodec": "AAC",
+            "audioLanguages": [
+              "eng"
+            ],
+            "height": 64,
+            "subtitles": [
+              "eng"
+            ],
+            "videoCodec": "x264",
+            "videoDynamicRange": "",
+            "videoDynamicRangeType": "",
+            "width": 64
+          },
+          "path": "/tv/Daredevil - Born Again/Season 01/Daredevil Born Again (2025) - S01E01 - Heavens Half Hour [DSNP][WEBDL-1080p][AAC 1.0][x264]-FLUX.mkv",
+          "quality": "WEBDL-1080p",
+          "qualityVersion": 1,
+          "relativePath": "Season 01/Daredevil Born Again (2025) - S01E01 - Heavens Half Hour [DSNP][WEBDL-1080p][AAC 1.0][x264]-FLUX.mkv",
+          "releaseGroup": "FLUX",
+          "sceneName": "Daredevil.Born.Again.S01E01.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-FLUX",
+          "size": 119980,
+          "sourcePath": "/downloads/tv/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2.mkv"
+        },
+        "episodes": [
+          {
+            "airDate": "2025-03-04",
+            "airDateUtc": "2025-03-05T02:00:00Z",
+            "episodeNumber": 1,
+            "id": 46,
+            "overview": "Longtime rivals Matt Murdock and Wilson Fisk attempt to move past their darker personas to serve New York, but their pasts resurface, reintroducing the world of Daredevil.",
+            "seasonNumber": 1,
+            "seriesId": 2,
+            "title": "Heaven's Half Hour",
+            "tvdbId": 9275652
+          }
+        ],
+        "eventType": "Download",
+        "instanceName": "Sonarr",
+        "isUpgrade": false,
+        "release": {
+          "indexer": "Mock Torznab (Prowlarr)",
+          "releaseTitle": "Daredevil.Born.Again.S01E01.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-FLUX",
+          "releaseType": "singleEpisode",
+          "size": 3113851289
+        },
+        "series": {
+          "genres": [
+            "Action",
+            "Drama"
+          ],
+          "id": 2,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/422712/banners/6787d1d7187c6.jpg",
+              "url": "/MediaCover/2/banner.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/422712/posters/6978fefe94ea5.jpg",
+              "url": "/MediaCover/2/poster.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/422712/backgrounds/69bef1d230b9d.jpg",
+              "url": "/MediaCover/2/fanart.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/422712/clearlogo/67e60e559c1f8.png",
+              "url": "/MediaCover/2/clearlogo.png"
+            }
+          ],
+          "imdbId": "tt18923754",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "path": "/tv/Daredevil - Born Again",
+          "tags": [],
+          "title": "Daredevil: Born Again",
+          "titleSlug": "daredevil-born-again",
+          "tmdbId": 202555,
+          "tvMazeId": 63234,
+          "tvdbId": 422712,
+          "type": "standard",
+          "year": 2025
+        }
+      },
+      "headers": {
+        "authorization": "Basic aG9vazpzZWNyZXQ=",
+        "content-type": "application/json",
+        "x-fixture": "yes"
+      },
+      "method": "PUT",
+      "path": "/webhook/updated",
+      "query": {},
+      "service": "webhook"
+    },
+    {
+      "body": {
+        "embeds": [
+          {
+            "author": {
+              "icon_url": "https://raw.githubusercontent.com/Sonarr/Sonarr/develop/Logo/256.png",
+              "name": "vm"
+            },
+            "color": 2605644,
+            "description": "Import Complete",
+            "fields": [
+              {
+                "inline": false,
+                "name": "Overview",
+                "value": "Longtime rivals Matt Murdock and Wilson Fisk attempt to move past their darker personas to serve New York, but their pasts resurface, reintroducing the world of Daredevil."
+              },
+              {
+                "inline": false,
+                "name": "Rating",
+                "value": "8.1"
+              },
+              {
+                "inline": false,
+                "name": "Genres",
+                "value": "Action, Drama"
+              },
+              {
+                "inline": true,
+                "name": "Quality",
+                "value": "WEBDL-1080p"
+              },
+              {
+                "inline": false,
+                "name": "Group",
+                "value": "FLUX"
+              },
+              {
+                "inline": true,
+                "name": "Size",
+                "value": "2.9 GB"
+              },
+              {
+                "inline": false,
+                "name": "Links",
+                "value": "[The TVDB](https://thetvdb.com/?tab=series&id=422712) / [Trakt](https://trakt.tv/search/tvdb/422712?id_type=show) / [IMDB](https://imdb.com/title/tt18923754/)"
+              },
+              {
+                "inline": false,
+                "name": "Release",
+                "value": "```Daredevil.Born.Again.S01E01.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-FLUX```"
+              }
+            ],
+            "image": {
+              "url": "https://artworks.thetvdb.com/banners/v4/series/422712/backgrounds/69bef1d230b9d.jpg"
+            },
+            "thumbnail": {
+              "url": "https://artworks.thetvdb.com/banners/v4/series/422712/posters/6978fefe94ea5.jpg"
+            },
+            "timestamp": "2026-11-08T20:58:48.6281367Z",
+            "title": "Daredevil: Born Again - 1x01 - Heaven's Half Hour",
+            "url": "http://thetvdb.com/?tab=series&id=422712"
+          }
+        ],
+        "username": "Unarr fixture"
+      },
+      "headers": {
+        "content-type": "application/json"
+      },
+      "method": "POST",
+      "path": "/discord/api/webhooks/100/fixturetoken",
+      "query": {},
+      "service": "discord"
+    },
+    {
+      "body": {
+        "applicationUrl": "",
+        "destinationPath": "/tv/Daredevil - Born Again/Season 01",
+        "downloadClient": "Mock qBittorrent",
+        "downloadClientType": "qBittorrent",
+        "downloadId": "0FB2EF04FB342178115BA635EC7B5EC0067058BA",
+        "episodeFiles": [
+          {
+            "dateAdded": "2026-11-08T20:58:48.5893616Z",
+            "id": 1076,
+            "languages": [
+              {
+                "id": 1,
+                "name": "English"
+              }
+            ],
+            "mediaInfo": {
+              "audioChannels": 1.0,
+              "audioCodec": "AAC",
+              "audioLanguages": [
+                "eng"
+              ],
+              "height": 64,
+              "subtitles": [
+                "eng"
+              ],
+              "videoCodec": "x264",
+              "videoDynamicRange": "",
+              "videoDynamicRangeType": "",
+              "width": 64
+            },
+            "path": "/tv/Daredevil - Born Again/Season 01/Daredevil Born Again (2025) - S01E01 - Heavens Half Hour [DSNP][WEBDL-1080p][AAC 1.0][x264]-FLUX.mkv",
+            "quality": "WEBDL-1080p",
+            "qualityVersion": 1,
+            "relativePath": "Season 01/Daredevil Born Again (2025) - S01E01 - Heavens Half Hour [DSNP][WEBDL-1080p][AAC 1.0][x264]-FLUX.mkv",
+            "releaseGroup": "FLUX",
+            "sceneName": "Daredevil.Born.Again.S01E01.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-FLUX",
+            "size": 119980
+          }
+        ],
+        "episodes": [
+          {
+            "airDate": "2025-03-04",
+            "airDateUtc": "2025-03-05T02:00:00Z",
+            "episodeNumber": 1,
+            "id": 46,
+            "overview": "Longtime rivals Matt Murdock and Wilson Fisk attempt to move past their darker personas to serve New York, but their pasts resurface, reintroducing the world of Daredevil.",
+            "seasonNumber": 1,
+            "seriesId": 2,
+            "title": "Heaven's Half Hour",
+            "tvdbId": 9275652
+          }
+        ],
+        "eventType": "Download",
+        "fileCount": 1,
+        "instanceName": "Sonarr",
+        "release": {
+          "indexer": "Mock Torznab (Prowlarr)",
+          "releaseTitle": "Daredevil.Born.Again.S01E01.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-FLUX",
+          "releaseType": "singleEpisode",
+          "size": 3113851289
+        },
+        "series": {
+          "genres": [
+            "Action",
+            "Drama"
+          ],
+          "id": 2,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/422712/banners/6787d1d7187c6.jpg",
+              "url": "/MediaCover/2/banner.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/422712/posters/6978fefe94ea5.jpg",
+              "url": "/MediaCover/2/poster.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/422712/backgrounds/69bef1d230b9d.jpg",
+              "url": "/MediaCover/2/fanart.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/422712/clearlogo/67e60e559c1f8.png",
+              "url": "/MediaCover/2/clearlogo.png"
+            }
+          ],
+          "imdbId": "tt18923754",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "path": "/tv/Daredevil - Born Again",
+          "tags": [],
+          "title": "Daredevil: Born Again",
+          "titleSlug": "daredevil-born-again",
+          "tmdbId": 202555,
+          "tvMazeId": 63234,
+          "tvdbId": 422712,
+          "type": "standard",
+          "year": 2025
+        },
+        "sourcePath": "/downloads/tv/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2"
+      },
+      "headers": {
+        "authorization": "Basic aG9vazpzZWNyZXQ=",
+        "content-type": "application/json",
+        "x-fixture": "yes"
+      },
+      "method": "PUT",
+      "path": "/webhook/updated",
+      "query": {},
+      "service": "webhook"
+    },
+    {
+      "body": null,
+      "headers": {},
+      "method": "GET",
+      "path": "/library/sections",
+      "query": {
+        "X-Plex-Client-Identifier": "06379e6c-b6a8-4dab-9ca2-d3c11680a12b",
+        "X-Plex-Device-Name": "Sonarr",
+        "X-Plex-Platform": "Windows",
+        "X-Plex-Platform-Version": "7",
+        "X-Plex-Product": "Sonarr",
+        "X-Plex-Token": "mock-plex-token",
+        "X-Plex-Version": "4.0.20.3014"
+      },
+      "service": "plex"
+    },
+    {
+      "body": null,
+      "headers": {},
+      "method": "GET",
+      "path": "/library/sections/2/refresh",
+      "query": {
+        "X-Plex-Client-Identifier": "06379e6c-b6a8-4dab-9ca2-d3c11680a12b",
+        "X-Plex-Device-Name": "Sonarr",
+        "X-Plex-Platform": "Windows",
+        "X-Plex-Platform-Version": "7",
+        "X-Plex-Product": "Sonarr",
+        "X-Plex-Token": "mock-plex-token",
+        "X-Plex-Version": "4.0.20.3014",
+        "path": "/tv/Daredevil - Born Again"
+      },
+      "service": "plex"
+    }
+  ],
+  "recordedAt": "2026-11-08T20:59:00Z",
+  "request": {
+    "method": "GET",
+    "path": "/mock/notifications",
+    "target": "mock"
+  },
+  "status": 200
+}

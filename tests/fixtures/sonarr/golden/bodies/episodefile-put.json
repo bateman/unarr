@@ -1,0 +1,18 @@
+{
+  "id": 1076,
+  "quality": {
+    "quality": {
+      "id": 3,
+      "name": "WEBDL-1080p",
+      "source": "web",
+      "resolution": 1080
+    },
+    "revision": {
+      "version": 1,
+      "real": 0,
+      "isRepack": false
+    }
+  },
+  "releaseGroup": "FLUX2",
+  "sceneName": "Daredevil.Born.Again.S01E01.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-FLUX"
+}

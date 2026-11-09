@@ -1,0 +1,109 @@
+{
+  "body": [
+    {
+      "absoluteEpisodeNumbers": [],
+      "age": 613,
+      "ageHours": 14730.786054728083,
+      "ageMinutes": 883847.163283685,
+      "approved": false,
+      "commentUrl": "http://127.0.0.1:18989/torznab/details/d2e4f6a8b0c2d4e6f8a0b2c4d6e8f0a2#comments",
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 21,
+          "name": "DSNP"
+        },
+        {
+          "id": 10,
+          "name": "HD Streaming Boost"
+        },
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 11,
+          "name": "WEB Tier 01"
+        }
+      ],
+      "downloadAllowed": true,
+      "downloadUrl": "http://127.0.0.1:18989/torznab/download/d2e4f6a8b0c2d4e6f8a0b2c4d6e8f0a2.torrent",
+      "episodeNumbers": [
+        2
+      ],
+      "episodeRequested": true,
+      "fullSeason": false,
+      "guid": "http://127.0.0.1:18989/torznab/details/d2e4f6a8b0c2d4e6f8a0b2c4d6e8f0a2",
+      "indexer": "Mock Torznab (Prowlarr)",
+      "indexerFlags": 0,
+      "indexerId": 21,
+      "infoHash": "d2e4f6a8b0c2d4e6f8a0b2c4d6e8f0a2d2e4f6a8",
+      "infoUrl": "http://127.0.0.1:18989/torznab/details/d2e4f6a8b0c2d4e6f8a0b2c4d6e8f0a2",
+      "isAbsoluteNumbering": false,
+      "isDaily": false,
+      "isPossibleSpecialEpisode": false,
+      "languageWeight": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "leechers": 4,
+      "magnetUrl": "",
+      "mappedAbsoluteEpisodeNumbers": [],
+      "mappedEpisodeInfo": [
+        {
+          "episodeNumber": 2,
+          "id": 47,
+          "seasonNumber": 1,
+          "title": "Optics"
+        }
+      ],
+      "mappedEpisodeNumbers": [
+        2
+      ],
+      "mappedSeasonNumber": 1,
+      "mappedSeriesId": 2,
+      "protocol": "torrent",
+      "publishDate": "2025-03-05T02:10:00Z",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "web"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityWeight": 1101,
+      "rejected": true,
+      "rejections": [
+        "Custom Formats DSNP, HD Streaming Boost, Language not Italian, WEB Tier 01 have score -10000 below Series profile minimum 0"
+      ],
+      "releaseGroup": "FLUX",
+      "releaseHash": "",
+      "releaseWeight": 0,
+      "sceneSource": false,
+      "seasonNumber": 1,
+      "seeders": 64,
+      "seriesTitle": "Daredevil Born Again",
+      "size": 3221225472,
+      "special": false,
+      "temporarilyRejected": false,
+      "title": "Daredevil.Born.Again.S01E02.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-FLUX",
+      "tvRageId": 0,
+      "tvdbId": 422712
+    }
+  ],
+  "recordedAt": "2026-11-08T20:57:09Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/release?episodeId=47"
+  },
+  "status": 200
+}

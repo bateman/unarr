@@ -19,7 +19,7 @@
           "releaseType": "SingleEpisode",
           "size": "768000"
         },
-        "date": "2026-11-07T15:44:37Z",
+        "date": "2026-11-08T20:56:25Z",
         "downloadId": "C7EB8F60E61BC10B2F8762DE09949BDD2AAFBE5A",
         "episode": {
           "absoluteEpisodeNumber": 1,
@@ -29,7 +29,7 @@
           "episodeNumber": 1,
           "hasFile": false,
           "id": 1,
-          "lastSearchTime": "2026-11-07T15:44:18Z",
+          "lastSearchTime": "2026-11-08T20:56:06Z",
           "monitored": false,
           "overview": "While attempting to distract himself from the anniversary of his mentor’s death, Dr. Robby introduces a fresh batch of interns to life in the ER.",
           "runtime": 53,
@@ -92,7 +92,7 @@
           "releaseGroup": "FLUX",
           "size": "768000"
         },
-        "date": "2026-11-07T15:44:37Z",
+        "date": "2026-11-08T20:56:25Z",
         "downloadId": "0FB2EF04FB342178115BA635EC7B5EC0067058BA",
         "episode": {
           "airDate": "2025-03-04",
@@ -101,7 +101,7 @@
           "episodeNumber": 1,
           "hasFile": false,
           "id": 46,
-          "lastSearchTime": "2026-11-07T15:44:16Z",
+          "lastSearchTime": "2026-11-08T20:56:04Z",
           "monitored": false,
           "overview": "Longtime rivals Matt Murdock and Wilson Fisk attempt to move past their darker personas to serve New York, but their pasts resurface, reintroducing the world of Daredevil.",
           "runtime": 59,
@@ -338,7 +338,7 @@
     "sortKey": "date",
     "totalRecords": 229
   },
-  "recordedAt": "2026-11-07T15:44:37Z",
+  "recordedAt": "2026-11-08T20:56:25Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/history?page=1&pageSize=5&sortKey=date&sortDirection=descending&eventType=4&eventType=7&includeEpisode=true"

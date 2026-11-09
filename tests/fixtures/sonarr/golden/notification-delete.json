@@ -1,0 +1,9 @@
+{
+  "body": {},
+  "recordedAt": "2026-11-08T21:00:29Z",
+  "request": {
+    "method": "DELETE",
+    "path": "/api/v3/notification/6"
+  },
+  "status": 200
+}

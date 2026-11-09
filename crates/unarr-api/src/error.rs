@@ -17,6 +17,8 @@ pub enum ApiError {
     ServerMessage(String),
     /// `NzbDroneClientException(Conflict, message)`.
     ConflictMessage(String),
+    /// `ModelNotFoundException`: a 404 with the message and a description.
+    ModelNotFound(String),
     /// `NotFoundException` thrown by a controller: `{"message": "NotFound"}`.
     NotFoundException,
     /// `BadRequestException`: `{"message": "BadRequest: ...", "content": "..."}`.
@@ -61,6 +63,14 @@ impl IntoResponse for ApiError {
             ApiError::ConflictMessage(message) => {
                 (StatusCode::CONFLICT, Json(client_exception(&message))).into_response()
             }
+            ApiError::ModelNotFound(message) => (
+                StatusCode::NOT_FOUND,
+                Json(json!({
+                    "message": message,
+                    "description": format!("NzbDrone.Core.Datastore.ModelNotFoundException: {message}"),
+                })),
+            )
+                .into_response(),
             ApiError::NotFoundException => {
                 (StatusCode::NOT_FOUND, Json(json!({"message": "NotFound"}))).into_response()
             }

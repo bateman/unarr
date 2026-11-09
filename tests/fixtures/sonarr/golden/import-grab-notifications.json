@@ -1,0 +1,363 @@
+{
+  "body": [
+    {
+      "body": {
+        "embeds": [
+          {
+            "author": {
+              "icon_url": "https://raw.githubusercontent.com/Sonarr/Sonarr/develop/Logo/256.png",
+              "name": "vm"
+            },
+            "color": 16761392,
+            "description": "Episode Grabbed",
+            "fields": [
+              {
+                "inline": false,
+                "name": "Overview",
+                "value": "While attempting to distract himself from the anniversary of his mentor’s death, Dr. Robby introduces a fresh batch of interns to life in the ER."
+              },
+              {
+                "inline": false,
+                "name": "Rating",
+                "value": "8.9"
+              },
+              {
+                "inline": false,
+                "name": "Genres",
+                "value": "Drama"
+              },
+              {
+                "inline": true,
+                "name": "Quality",
+                "value": "WEBDL-720p"
+              },
+              {
+                "inline": false,
+                "name": "Group",
+                "value": "ETHEL"
+              },
+              {
+                "inline": true,
+                "name": "Size",
+                "value": "1.3 GB"
+              },
+              {
+                "inline": false,
+                "name": "Links",
+                "value": "[The TVDB](https://thetvdb.com/?tab=series&id=448176) / [Trakt](https://trakt.tv/search/tvdb/448176?id_type=show) / [IMDB](https://imdb.com/title/tt31938062/)"
+              },
+              {
+                "inline": false,
+                "name": "Release",
+                "value": "```The.Pitt.S01E01.720p.WEB.h264-ETHEL```"
+              },
+              {
+                "inline": false,
+                "name": "Indexer",
+                "value": "Mock Newznab (Prowlarr)"
+              },
+              {
+                "inline": false,
+                "name": "Custom Formats",
+                "value": "Language not Italian"
+              },
+              {
+                "inline": false,
+                "name": "Custom Format Score",
+                "value": "-10000"
+              }
+            ],
+            "image": {
+              "url": "https://artworks.thetvdb.com/banners/v4/series/448176/backgrounds/675c4f787cfc4.jpg"
+            },
+            "thumbnail": {
+              "url": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg"
+            },
+            "timestamp": "2026-11-08T20:57:09.8607198Z",
+            "title": "The Pitt - 1x01 - 7:00 A.M.",
+            "url": "http://thetvdb.com/?tab=series&id=448176"
+          }
+        ],
+        "username": "Unarr fixture"
+      },
+      "headers": {
+        "content-type": "application/json"
+      },
+      "method": "POST",
+      "path": "/discord/api/webhooks/100/fixturetoken",
+      "query": {},
+      "service": "discord"
+    },
+    {
+      "body": {
+        "embeds": [
+          {
+            "author": {
+              "icon_url": "https://raw.githubusercontent.com/Sonarr/Sonarr/develop/Logo/256.png",
+              "name": "vm"
+            },
+            "color": 16761392,
+            "description": "Episode Grabbed",
+            "fields": [
+              {
+                "inline": false,
+                "name": "Overview",
+                "value": "Robby helps siblings navigate their elderly father’s end-of-life care. Later, Samira fends off cops targeting a woman with a misunderstood condition."
+              },
+              {
+                "inline": false,
+                "name": "Rating",
+                "value": "8.9"
+              },
+              {
+                "inline": false,
+                "name": "Genres",
+                "value": "Drama"
+              },
+              {
+                "inline": true,
+                "name": "Quality",
+                "value": "WEBDL-1080p"
+              },
+              {
+                "inline": false,
+                "name": "Group",
+                "value": "SuccessfulCrab"
+              },
+              {
+                "inline": true,
+                "name": "Size",
+                "value": "2.3 GB"
+              },
+              {
+                "inline": false,
+                "name": "Links",
+                "value": "[The TVDB](https://thetvdb.com/?tab=series&id=448176) / [Trakt](https://trakt.tv/search/tvdb/448176?id_type=show) / [IMDB](https://imdb.com/title/tt31938062/)"
+              },
+              {
+                "inline": false,
+                "name": "Release",
+                "value": "```The.Pitt.S01E02.1080p.WEB.H264-SuccessfulCrab```"
+              },
+              {
+                "inline": false,
+                "name": "Indexer",
+                "value": "Mock Newznab (Prowlarr)"
+              },
+              {
+                "inline": false,
+                "name": "Custom Formats",
+                "value": "Language not Italian"
+              },
+              {
+                "inline": false,
+                "name": "Custom Format Score",
+                "value": "-10000"
+              }
+            ],
+            "image": {
+              "url": "https://artworks.thetvdb.com/banners/v4/series/448176/backgrounds/675c4f787cfc4.jpg"
+            },
+            "thumbnail": {
+              "url": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg"
+            },
+            "timestamp": "2026-11-08T20:57:11.8221931Z",
+            "title": "The Pitt - 1x02 - 8:00 A.M.",
+            "url": "http://thetvdb.com/?tab=series&id=448176"
+          }
+        ],
+        "username": "Unarr fixture"
+      },
+      "headers": {
+        "content-type": "application/json"
+      },
+      "method": "POST",
+      "path": "/discord/api/webhooks/100/fixturetoken",
+      "query": {},
+      "service": "discord"
+    },
+    {
+      "body": {
+        "embeds": [
+          {
+            "author": {
+              "icon_url": "https://raw.githubusercontent.com/Sonarr/Sonarr/develop/Logo/256.png",
+              "name": "vm"
+            },
+            "color": 16761392,
+            "description": "Episode Grabbed",
+            "fields": [
+              {
+                "inline": false,
+                "name": "Overview",
+                "value": "Longtime rivals Matt Murdock and Wilson Fisk attempt to move past their darker personas to serve New York, but their pasts resurface, reintroducing the world of Daredevil."
+              },
+              {
+                "inline": false,
+                "name": "Rating",
+                "value": "8.1"
+              },
+              {
+                "inline": false,
+                "name": "Genres",
+                "value": "Action, Drama"
+              },
+              {
+                "inline": true,
+                "name": "Quality",
+                "value": "WEBDL-1080p"
+              },
+              {
+                "inline": false,
+                "name": "Group",
+                "value": "FLUX"
+              },
+              {
+                "inline": true,
+                "name": "Size",
+                "value": "2.9 GB"
+              },
+              {
+                "inline": false,
+                "name": "Links",
+                "value": "[The TVDB](https://thetvdb.com/?tab=series&id=422712) / [Trakt](https://trakt.tv/search/tvdb/422712?id_type=show) / [IMDB](https://imdb.com/title/tt18923754/)"
+              },
+              {
+                "inline": false,
+                "name": "Release",
+                "value": "```Daredevil.Born.Again.S01E01.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-FLUX```"
+              },
+              {
+                "inline": false,
+                "name": "Indexer",
+                "value": "Mock Torznab (Prowlarr)"
+              },
+              {
+                "inline": false,
+                "name": "Custom Formats",
+                "value": "DSNP|HD Streaming Boost|Language not Italian|WEB Tier 01"
+              },
+              {
+                "inline": false,
+                "name": "Custom Format Score",
+                "value": "-10000"
+              }
+            ],
+            "image": {
+              "url": "https://artworks.thetvdb.com/banners/v4/series/422712/backgrounds/69bef1d230b9d.jpg"
+            },
+            "thumbnail": {
+              "url": "https://artworks.thetvdb.com/banners/v4/series/422712/posters/6978fefe94ea5.jpg"
+            },
+            "timestamp": "2026-11-08T20:57:13.8150663Z",
+            "title": "Daredevil: Born Again - 1x01 - Heaven's Half Hour",
+            "url": "http://thetvdb.com/?tab=series&id=422712"
+          }
+        ],
+        "username": "Unarr fixture"
+      },
+      "headers": {
+        "content-type": "application/json"
+      },
+      "method": "POST",
+      "path": "/discord/api/webhooks/100/fixturetoken",
+      "query": {},
+      "service": "discord"
+    },
+    {
+      "body": {
+        "embeds": [
+          {
+            "author": {
+              "icon_url": "https://raw.githubusercontent.com/Sonarr/Sonarr/develop/Logo/256.png",
+              "name": "vm"
+            },
+            "color": 16761392,
+            "description": "Episode Grabbed",
+            "fields": [
+              {
+                "inline": false,
+                "name": "Overview",
+                "value": "Matt Murdock takes on a new client, Hector Ayala. But this local hero from the Heights is more than he claims to be. Fisk learns the power of optics in his new and very public role."
+              },
+              {
+                "inline": false,
+                "name": "Rating",
+                "value": "8.1"
+              },
+              {
+                "inline": false,
+                "name": "Genres",
+                "value": "Action, Drama"
+              },
+              {
+                "inline": true,
+                "name": "Quality",
+                "value": "WEBDL-1080p"
+              },
+              {
+                "inline": false,
+                "name": "Group",
+                "value": "FLUX"
+              },
+              {
+                "inline": true,
+                "name": "Size",
+                "value": "3 GB"
+              },
+              {
+                "inline": false,
+                "name": "Links",
+                "value": "[The TVDB](https://thetvdb.com/?tab=series&id=422712) / [Trakt](https://trakt.tv/search/tvdb/422712?id_type=show) / [IMDB](https://imdb.com/title/tt18923754/)"
+              },
+              {
+                "inline": false,
+                "name": "Release",
+                "value": "```Daredevil.Born.Again.S01E02.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-FLUX```"
+              },
+              {
+                "inline": false,
+                "name": "Indexer",
+                "value": "Mock Torznab (Prowlarr)"
+              },
+              {
+                "inline": false,
+                "name": "Custom Formats",
+                "value": "DSNP|HD Streaming Boost|Language not Italian|WEB Tier 01"
+              },
+              {
+                "inline": false,
+                "name": "Custom Format Score",
+                "value": "-10000"
+              }
+            ],
+            "image": {
+              "url": "https://artworks.thetvdb.com/banners/v4/series/422712/backgrounds/69bef1d230b9d.jpg"
+            },
+            "thumbnail": {
+              "url": "https://artworks.thetvdb.com/banners/v4/series/422712/posters/6978fefe94ea5.jpg"
+            },
+            "timestamp": "2026-11-08T20:57:15.8224503Z",
+            "title": "Daredevil: Born Again - 1x02 - Optics",
+            "url": "http://thetvdb.com/?tab=series&id=422712"
+          }
+        ],
+        "username": "Unarr fixture"
+      },
+      "headers": {
+        "content-type": "application/json"
+      },
+      "method": "POST",
+      "path": "/discord/api/webhooks/100/fixturetoken",
+      "query": {},
+      "service": "discord"
+    }
+  ],
+  "recordedAt": "2026-11-08T20:57:27Z",
+  "request": {
+    "method": "GET",
+    "path": "/mock/notifications",
+    "target": "mock"
+  },
+  "status": 200
+}

@@ -216,6 +216,17 @@ pub fn get_many(conn: &Connection, ids: &[i64]) -> anyhow::Result<Vec<Series>> {
     Ok(out)
 }
 
+/// `SeriesRepository.SeriesPathExists`: whether a series sits at `path`,
+/// compared as the originals compare paths.
+pub fn path_exists(conn: &Connection, path: &str) -> anyhow::Result<bool> {
+    let n: i64 = conn.query_row(
+        "SELECT count(*) FROM series WHERE lower(rtrim(path, '/')) = lower(rtrim(?1, '/'))",
+        [path],
+        |r| r.get(0),
+    )?;
+    Ok(n > 0)
+}
+
 pub fn count(conn: &Connection) -> anyhow::Result<i64> {
     Ok(conn.query_row("SELECT count(*) FROM series", [], |r| r.get(0))?)
 }

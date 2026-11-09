@@ -1,0 +1,116 @@
+{
+  "body": {
+    "added": "2026-03-06T07:44:38Z",
+    "airTime": "21:00",
+    "alternateTitles": [
+      {
+        "seasonNumber": -1,
+        "title": "The Pitt 2024"
+      }
+    ],
+    "cleanTitle": "thepitt",
+    "ended": false,
+    "firstAired": "2025-01-09T00:00:00Z",
+    "genres": [
+      "Drama"
+    ],
+    "id": 1,
+    "images": [
+      {
+        "coverType": "banner",
+        "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/banners/6972a4aba4c5d.jpg",
+        "url": "/MediaCover/1/banner.jpg"
+      },
+      {
+        "coverType": "poster",
+        "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg",
+        "url": "/MediaCover/1/poster.jpg"
+      },
+      {
+        "coverType": "fanart",
+        "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/backgrounds/675c4f787cfc4.jpg",
+        "url": "/MediaCover/1/fanart.jpg"
+      },
+      {
+        "coverType": "clearlogo",
+        "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/clearlogo/675d049994d06.png",
+        "url": "/MediaCover/1/clearlogo.png"
+      }
+    ],
+    "imdbId": "tt31938062",
+    "languageProfileId": 1,
+    "lastAired": "2026-04-16T00:00:00Z",
+    "monitorNewItems": "all",
+    "monitored": true,
+    "network": "HBO Max",
+    "originalLanguage": {
+      "id": 1,
+      "name": "English"
+    },
+    "overview": "The staff of Pittsburgh's Trauma Medical Center work around the clock to save lives in an overcrowded and underfunded emergency department.",
+    "path": "/tv/The Pitt",
+    "qualityProfileId": 10,
+    "ratings": {
+      "value": 8.9,
+      "votes": 178410
+    },
+    "rootFolderPath": "/tv",
+    "runtime": 48,
+    "seasonFolder": true,
+    "seasons": [
+      {
+        "monitored": false,
+        "seasonNumber": 1,
+        "statistics": {
+          "episodeCount": 0,
+          "episodeFileCount": 0,
+          "percentOfEpisodes": 0,
+          "releaseGroups": [],
+          "sizeOnDisk": 0,
+          "totalEpisodeCount": 15
+        }
+      },
+      {
+        "monitored": false,
+        "seasonNumber": 2,
+        "statistics": {
+          "episodeCount": 0,
+          "episodeFileCount": 0,
+          "percentOfEpisodes": 0,
+          "releaseGroups": [],
+          "sizeOnDisk": 0,
+          "totalEpisodeCount": 15
+        }
+      }
+    ],
+    "seriesType": "standard",
+    "sortTitle": "pitt",
+    "statistics": {
+      "episodeCount": 0,
+      "episodeFileCount": 0,
+      "percentOfEpisodes": 0,
+      "releaseGroups": [],
+      "seasonCount": 2,
+      "sizeOnDisk": 0,
+      "totalEpisodeCount": 30
+    },
+    "status": "continuing",
+    "tags": [
+      1
+    ],
+    "title": "The Pitt",
+    "titleSlug": "the-pitt",
+    "tmdbId": 250307,
+    "tvMazeId": 75632,
+    "tvRageId": 0,
+    "tvdbId": 448176,
+    "useSceneNumbering": false,
+    "year": 2025
+  },
+  "recordedAt": "2026-11-08T20:59:56Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/series/1"
+  },
+  "status": 200
+}

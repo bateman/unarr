@@ -1,0 +1,23 @@
+{
+  "body": [
+    {
+      "attemptedValue": "Mock Discord",
+      "errorCode": "PredicateValidator",
+      "errorMessage": "Should be unique",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Name",
+        "propertyValue": "Mock Discord"
+      },
+      "propertyName": "Name",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-08T20:57:01Z",
+  "request": {
+    "body": "bodies/notification-create-discord.json",
+    "method": "POST",
+    "path": "/api/v3/notification/test"
+  },
+  "status": 400
+}

@@ -1,0 +1,42 @@
+{
+  "onGrab": true,
+  "onDownload": true,
+  "onUpgrade": true,
+  "onRename": true,
+  "onSeriesAdd": true,
+  "onSeriesDelete": true,
+  "onEpisodeFileDelete": true,
+  "onEpisodeFileDeleteForUpgrade": true,
+  "onHealthIssue": true,
+  "onHealthRestored": true,
+  "onApplicationUpdate": true,
+  "onManualInteractionRequired": true,
+  "onImportComplete": true,
+  "includeHealthWarnings": false,
+  "tags": [],
+  "name": "Mock Webhook (unreachable)",
+  "implementation": "Webhook",
+  "configContract": "WebhookSettings",
+  "fields": [
+    {
+      "name": "url",
+      "value": "http://127.0.0.1:1/webhook"
+    },
+    {
+      "name": "method",
+      "value": 1
+    },
+    {
+      "name": "username",
+      "value": ""
+    },
+    {
+      "name": "password",
+      "value": ""
+    },
+    {
+      "name": "headers",
+      "value": []
+    }
+  ]
+}

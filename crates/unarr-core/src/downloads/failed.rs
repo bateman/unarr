@@ -145,7 +145,7 @@ pub async fn ignore_download(
                 "size": item.total_size.to_string(),
                 "releaseType": pascal(parsed.release_type().as_str()),
             });
-            let first_id = store::history::next_id(conn)?;
+            let first_id = store::history::next_ids(conn, remote.episodes.len())?;
             for (id, episode) in (first_id..).zip(remote.episodes.iter()) {
                 store::history::insert(
                     conn,
@@ -258,7 +258,7 @@ async fn publish_failed(
                 "releaseGroup": release_group,
                 "size": tracked.as_ref().map(|t| t.item.total_size.to_string()),
             });
-            let first_id = store::history::next_id(conn)?;
+            let first_id = store::history::next_ids(conn, e.episode_ids.len())?;
             for (id, episode_id) in (first_id..).zip(e.episode_ids.iter()) {
                 store::history::insert(
                     conn,

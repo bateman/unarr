@@ -163,3 +163,160 @@ mod tests {
         .unwrap();
     }
 }
+
+/// `EpisodeTitleRequiredType`.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
+pub enum EpisodeTitleRequired {
+    #[default]
+    Always,
+    BulkSeasonReleases,
+    Never,
+}
+
+/// `FileDateType`.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
+pub enum FileDateType {
+    #[default]
+    None,
+    LocalAirDate,
+    UtcAirDate,
+}
+
+/// `RescanAfterRefreshType`.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
+pub enum RescanAfterRefresh {
+    #[default]
+    Always,
+    AfterManual,
+    Never,
+}
+
+/// The media management settings the import reads (`ConfigService`), with
+/// the originals' defaults.
+#[derive(Debug, Clone, PartialEq)]
+pub struct MediaManagementConfig {
+    pub recycle_bin: String,
+    pub recycle_bin_cleanup_days: i64,
+    pub create_empty_series_folders: bool,
+    pub delete_empty_folders: bool,
+    pub file_date: FileDateType,
+    pub rescan_after_refresh: RescanAfterRefresh,
+    pub set_permissions_linux: bool,
+    pub chmod_folder: String,
+    pub chown_group: String,
+    pub episode_title_required: EpisodeTitleRequired,
+    pub skip_free_space_check_when_importing: bool,
+    pub minimum_free_space_when_importing_mb: i64,
+    pub copy_using_hardlinks: bool,
+    pub import_extra_files: bool,
+    pub extra_file_extensions: String,
+    pub enable_media_info: bool,
+    pub auto_unmonitor_previously_downloaded_episodes: bool,
+    pub enable_completed_download_handling: bool,
+    /// `DownloadClientWorkingFolders`, `|`-separated prefixes.
+    pub download_client_working_folders: String,
+}
+
+impl Default for MediaManagementConfig {
+    fn default() -> Self {
+        MediaManagementConfig {
+            recycle_bin: String::new(),
+            recycle_bin_cleanup_days: 7,
+            create_empty_series_folders: false,
+            delete_empty_folders: false,
+            file_date: FileDateType::None,
+            rescan_after_refresh: RescanAfterRefresh::Always,
+            set_permissions_linux: false,
+            chmod_folder: "755".into(),
+            chown_group: String::new(),
+            episode_title_required: EpisodeTitleRequired::Always,
+            skip_free_space_check_when_importing: false,
+            minimum_free_space_when_importing_mb: 100,
+            copy_using_hardlinks: true,
+            import_extra_files: false,
+            extra_file_extensions: "srt".into(),
+            enable_media_info: true,
+            auto_unmonitor_previously_downloaded_episodes: false,
+            enable_completed_download_handling: true,
+            download_client_working_folders: "_UNPACK_|_FAILED_".into(),
+        }
+    }
+}
+
+impl MediaManagementConfig {
+    pub fn load(conn: &Connection) -> anyhow::Result<MediaManagementConfig> {
+        let d = MediaManagementConfig::default();
+        let text = |key: &str| config(conn, key);
+        let flag = |key: &str, default: bool| -> anyhow::Result<bool> {
+            Ok(text(key)?
+                .map(|v| v.eq_ignore_ascii_case("true"))
+                .unwrap_or(default))
+        };
+        let string = |key: &str, default: &str| -> anyhow::Result<String> {
+            Ok(text(key)?.unwrap_or_else(|| default.to_string()))
+        };
+        let int = |key: &str, default: i64| -> anyhow::Result<i64> {
+            Ok(text(key)?.and_then(|v| v.trim().parse().ok()).unwrap_or(default))
+        };
+        Ok(MediaManagementConfig {
+            recycle_bin: string("RecycleBin", &d.recycle_bin)?,
+            recycle_bin_cleanup_days: int("RecycleBinCleanupDays", d.recycle_bin_cleanup_days)?,
+            create_empty_series_folders: flag("CreateEmptySeriesFolders", d.create_empty_series_folders)?,
+            delete_empty_folders: flag("DeleteEmptyFolders", d.delete_empty_folders)?,
+            file_date: match text("FileDate")?
+                .as_deref()
+                .map(str::to_ascii_lowercase)
+                .as_deref()
+            {
+                Some("localairdate") => FileDateType::LocalAirDate,
+                Some("utcairdate") => FileDateType::UtcAirDate,
+                _ => FileDateType::None,
+            },
+            rescan_after_refresh: match text("RescanAfterRefresh")?
+                .as_deref()
+                .map(str::to_ascii_lowercase)
+                .as_deref()
+            {
+                Some("aftermanual") => RescanAfterRefresh::AfterManual,
+                Some("never") => RescanAfterRefresh::Never,
+                _ => RescanAfterRefresh::Always,
+            },
+            set_permissions_linux: flag("SetPermissionsLinux", d.set_permissions_linux)?,
+            chmod_folder: string("ChmodFolder", &d.chmod_folder)?,
+            chown_group: string("ChownGroup", &d.chown_group)?,
+            episode_title_required: match text("EpisodeTitleRequired")?
+                .as_deref()
+                .map(str::to_ascii_lowercase)
+                .as_deref()
+            {
+                Some("bulkseasonreleases") => EpisodeTitleRequired::BulkSeasonReleases,
+                Some("never") => EpisodeTitleRequired::Never,
+                _ => EpisodeTitleRequired::Always,
+            },
+            skip_free_space_check_when_importing: flag(
+                "SkipFreeSpaceCheckWhenImporting",
+                d.skip_free_space_check_when_importing,
+            )?,
+            minimum_free_space_when_importing_mb: int(
+                "MinimumFreeSpaceWhenImporting",
+                d.minimum_free_space_when_importing_mb,
+            )?,
+            copy_using_hardlinks: flag("CopyUsingHardlinks", d.copy_using_hardlinks)?,
+            import_extra_files: flag("ImportExtraFiles", d.import_extra_files)?,
+            extra_file_extensions: string("ExtraFileExtensions", &d.extra_file_extensions)?,
+            enable_media_info: flag("EnableMediaInfo", d.enable_media_info)?,
+            auto_unmonitor_previously_downloaded_episodes: flag(
+                "AutoUnmonitorPreviouslyDownloadedEpisodes",
+                d.auto_unmonitor_previously_downloaded_episodes,
+            )?,
+            enable_completed_download_handling: flag(
+                "EnableCompletedDownloadHandling",
+                d.enable_completed_download_handling,
+            )?,
+            download_client_working_folders: string(
+                "DownloadClientWorkingFolders",
+                &d.download_client_working_folders,
+            )?,
+        })
+    }
+}

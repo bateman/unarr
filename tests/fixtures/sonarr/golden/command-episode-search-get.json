@@ -14,22 +14,22 @@
       "updateScheduledTask": true
     },
     "commandName": "Episode Search",
-    "duration": "00:00:02.0573535",
-    "ended": "2026-11-07T15:44:39Z",
+    "duration": "00:00:02.0643459",
+    "ended": "2026-11-08T20:56:27Z",
     "id": 461663,
     "message": "Episode search completed. 0 reports downloaded.",
     "name": "EpisodeSearch",
     "priority": "normal",
-    "queued": "2026-11-07T15:44:37Z",
+    "queued": "2026-11-08T20:56:25Z",
     "result": "successful",
     "sendUpdatesToClient": true,
-    "started": "2026-11-07T15:44:37Z",
-    "stateChangeTime": "2026-11-07T15:44:37Z",
+    "started": "2026-11-08T20:56:25Z",
+    "stateChangeTime": "2026-11-08T20:56:25Z",
     "status": "completed",
     "trigger": "manual",
     "updateScheduledTask": true
   },
-  "recordedAt": "2026-11-07T15:44:52Z",
+  "recordedAt": "2026-11-08T20:56:40Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/command/461663"

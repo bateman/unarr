@@ -1,0 +1,9 @@
+{
+  "body": [],
+  "recordedAt": "2026-11-08T21:00:28Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/rename?seriesId=2"
+  },
+  "status": 200
+}

@@ -1081,6 +1081,51 @@ fn requires_absolute_episode_number(anime_format: &str) -> bool {
     absolute_re().is_match(anime_format).unwrap_or(false)
 }
 
+/// `RequiresAbsoluteEpisodeNumber`: whether the anime format names the
+/// absolute number, so an anime episode without one cannot be imported.
+pub fn config_requires_absolute_episode_number(config: &NamingConfig) -> bool {
+    requires_absolute_episode_number(&config.anime_episode_format)
+}
+
+/// `FileNameBuilderTokenEqualityComparer`: tokens compare without
+/// separators, braces or case.
+fn simplify_token(token: &str) -> String {
+    token
+        .chars()
+        .filter(|c| c.is_ascii_alphanumeric())
+        .map(|c| c.to_ascii_lowercase())
+        .collect()
+}
+
+/// `RequiresEpisodeTitle`: whether the format the series uses names the
+/// episode title, so an episode without a title (TBA) waits for one.
+/// `all_have_absolute` says whether every episode has an absolute number,
+/// which is when an anime series takes the anime format.
+pub fn requires_episode_title(
+    series_type: SeriesType,
+    all_have_absolute: bool,
+    config: &NamingConfig,
+) -> bool {
+    if !config.rename_episodes {
+        return false;
+    }
+    let mut pattern = config.standard_episode_format.as_str();
+    if series_type == SeriesType::Daily {
+        pattern = &config.daily_episode_format;
+    }
+    if series_type == SeriesType::Anime && all_have_absolute {
+        pattern = &config.anime_episode_format;
+    }
+    title_re()
+        .captures_iter(pattern)
+        .filter_map(Result::ok)
+        .filter_map(|c| c.name("token").map(|m| m.as_str().to_string()))
+        .any(|token| {
+            let t = simplify_token(&token);
+            t == simplify_token("{Episode Title}") || t == simplify_token("{Episode CleanTitle}")
+        })
+}
+
 fn replace_token(
     c: &fancy_regex::Captures<str>,
     h: &Handlers<'_>,

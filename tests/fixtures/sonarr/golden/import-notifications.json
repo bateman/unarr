@@ -1,0 +1,1354 @@
+{
+  "body": [
+    {
+      "body": {
+        "embeds": [
+          {
+            "author": {
+              "icon_url": "https://raw.githubusercontent.com/Sonarr/Sonarr/develop/Logo/256.png",
+              "name": "vm"
+            },
+            "color": 2605644,
+            "description": "Episode Imported",
+            "fields": [
+              {
+                "inline": false,
+                "name": "Overview",
+                "value": "While attempting to distract himself from the anniversary of his mentor’s death, Dr. Robby introduces a fresh batch of interns to life in the ER."
+              },
+              {
+                "inline": false,
+                "name": "Rating",
+                "value": "8.9"
+              },
+              {
+                "inline": false,
+                "name": "Genres",
+                "value": "Drama"
+              },
+              {
+                "inline": true,
+                "name": "Quality",
+                "value": "WEBDL-480p"
+              },
+              {
+                "inline": true,
+                "name": "Codecs",
+                "value": "x264 / AAC 1"
+              },
+              {
+                "inline": false,
+                "name": "Group",
+                "value": "ETHEL"
+              },
+              {
+                "inline": true,
+                "name": "Size",
+                "value": "117.2 KB"
+              },
+              {
+                "inline": false,
+                "name": "Languages",
+                "value": "eng"
+              },
+              {
+                "inline": false,
+                "name": "Subtitles",
+                "value": "eng"
+              },
+              {
+                "inline": false,
+                "name": "Links",
+                "value": "[The TVDB](https://thetvdb.com/?tab=series&id=448176) / [Trakt](https://trakt.tv/search/tvdb/448176?id_type=show) / [IMDB](https://imdb.com/title/tt31938062/)"
+              },
+              {
+                "inline": false,
+                "name": "Release",
+                "value": "```The.Pitt.S01E01.720p.WEB.h264-ETHEL```"
+              }
+            ],
+            "image": {
+              "url": "https://artworks.thetvdb.com/banners/v4/series/448176/backgrounds/675c4f787cfc4.jpg"
+            },
+            "thumbnail": {
+              "url": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg"
+            },
+            "timestamp": "2026-11-08T20:57:28.5390561Z",
+            "title": "The Pitt - 1x01 - 7:00 A.M.",
+            "url": "http://thetvdb.com/?tab=series&id=448176"
+          }
+        ],
+        "username": "Unarr fixture"
+      },
+      "headers": {
+        "content-type": "application/json"
+      },
+      "method": "POST",
+      "path": "/discord/api/webhooks/100/fixturetoken",
+      "query": {},
+      "service": "discord"
+    },
+    {
+      "body": {
+        "applicationUrl": "",
+        "customFormatInfo": {
+          "customFormatScore": -10000,
+          "customFormats": [
+            {
+              "id": 36,
+              "name": "Language not Italian"
+            }
+          ]
+        },
+        "downloadClient": "Mock SABnzbd",
+        "downloadClientType": "SABnzbd",
+        "downloadId": "SABnzbd_nzo_mock3",
+        "episodeFile": {
+          "dateAdded": "2026-11-08T20:57:28.0506875Z",
+          "id": 1073,
+          "languages": [
+            {
+              "id": 1,
+              "name": "English"
+            }
+          ],
+          "mediaInfo": {
+            "audioChannels": 1.0,
+            "audioCodec": "AAC",
+            "audioLanguages": [
+              "eng"
+            ],
+            "height": 64,
+            "subtitles": [
+              "eng"
+            ],
+            "videoCodec": "x264",
+            "videoDynamicRange": "",
+            "videoDynamicRangeType": "",
+            "width": 64
+          },
+          "path": "/tv/The Pitt/Season 01/The Pitt (2025) - S01E01 - 7-00 A.M [WEBDL-480p][AAC 1.0][x264]-ETHEL.mkv",
+          "quality": "WEBDL-480p",
+          "qualityVersion": 1,
+          "relativePath": "Season 01/The Pitt (2025) - S01E01 - 7-00 A.M [WEBDL-480p][AAC 1.0][x264]-ETHEL.mkv",
+          "releaseGroup": "ETHEL",
+          "sceneName": "The.Pitt.S01E01.720p.WEB.h264-ETHEL",
+          "size": 119980,
+          "sourcePath": "/downloads/complete/tv/The.Pitt.S01E01.720p.WEB.h264-ETHEL/The.Pitt.S01E01.720p.WEB.h264-ETHEL.mkv"
+        },
+        "episodes": [
+          {
+            "airDate": "2025-01-09",
+            "airDateUtc": "2025-01-10T02:00:00Z",
+            "episodeNumber": 1,
+            "id": 1,
+            "overview": "While attempting to distract himself from the anniversary of his mentor’s death, Dr. Robby introduces a fresh batch of interns to life in the ER.",
+            "seasonNumber": 1,
+            "seriesId": 1,
+            "title": "7:00 A.M.",
+            "tvdbId": 10407559
+          }
+        ],
+        "eventType": "Download",
+        "instanceName": "Sonarr",
+        "isUpgrade": false,
+        "release": {
+          "indexer": "Mock Newznab (Prowlarr)",
+          "releaseTitle": "The.Pitt.S01E01.720p.WEB.h264-ETHEL",
+          "releaseType": "singleEpisode",
+          "size": 1395864371
+        },
+        "series": {
+          "genres": [
+            "Drama"
+          ],
+          "id": 1,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/banners/6972a4aba4c5d.jpg",
+              "url": "/MediaCover/1/banner.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg",
+              "url": "/MediaCover/1/poster.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/backgrounds/675c4f787cfc4.jpg",
+              "url": "/MediaCover/1/fanart.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/clearlogo/675d049994d06.png",
+              "url": "/MediaCover/1/clearlogo.png"
+            }
+          ],
+          "imdbId": "tt31938062",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "path": "/tv/The Pitt",
+          "tags": [
+            "ita"
+          ],
+          "title": "The Pitt",
+          "titleSlug": "the-pitt",
+          "tmdbId": 250307,
+          "tvMazeId": 75632,
+          "tvdbId": 448176,
+          "type": "standard",
+          "year": 2025
+        }
+      },
+      "headers": {
+        "authorization": "Basic aG9vazpzZWNyZXQ=",
+        "content-type": "application/json",
+        "x-fixture": "yes"
+      },
+      "method": "PUT",
+      "path": "/webhook/updated",
+      "query": {},
+      "service": "webhook"
+    },
+    {
+      "body": {
+        "embeds": [
+          {
+            "author": {
+              "icon_url": "https://raw.githubusercontent.com/Sonarr/Sonarr/develop/Logo/256.png",
+              "name": "vm"
+            },
+            "color": 2605644,
+            "description": "Import Complete",
+            "fields": [
+              {
+                "inline": false,
+                "name": "Overview",
+                "value": "While attempting to distract himself from the anniversary of his mentor’s death, Dr. Robby introduces a fresh batch of interns to life in the ER."
+              },
+              {
+                "inline": false,
+                "name": "Rating",
+                "value": "8.9"
+              },
+              {
+                "inline": false,
+                "name": "Genres",
+                "value": "Drama"
+              },
+              {
+                "inline": true,
+                "name": "Quality",
+                "value": "WEBDL-720p"
+              },
+              {
+                "inline": false,
+                "name": "Group",
+                "value": "ETHEL"
+              },
+              {
+                "inline": true,
+                "name": "Size",
+                "value": "1.3 GB"
+              },
+              {
+                "inline": false,
+                "name": "Links",
+                "value": "[The TVDB](https://thetvdb.com/?tab=series&id=448176) / [Trakt](https://trakt.tv/search/tvdb/448176?id_type=show) / [IMDB](https://imdb.com/title/tt31938062/)"
+              },
+              {
+                "inline": false,
+                "name": "Release",
+                "value": "```The.Pitt.S01E01.720p.WEB.h264-ETHEL```"
+              }
+            ],
+            "image": {
+              "url": "https://artworks.thetvdb.com/banners/v4/series/448176/backgrounds/675c4f787cfc4.jpg"
+            },
+            "thumbnail": {
+              "url": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg"
+            },
+            "timestamp": "2026-11-08T20:57:28.6083568Z",
+            "title": "The Pitt - 1x01 - 7:00 A.M.",
+            "url": "http://thetvdb.com/?tab=series&id=448176"
+          }
+        ],
+        "username": "Unarr fixture"
+      },
+      "headers": {
+        "content-type": "application/json"
+      },
+      "method": "POST",
+      "path": "/discord/api/webhooks/100/fixturetoken",
+      "query": {},
+      "service": "discord"
+    },
+    {
+      "body": {
+        "applicationUrl": "",
+        "destinationPath": "/tv/The Pitt/Season 01",
+        "downloadClient": "Mock SABnzbd",
+        "downloadClientType": "SABnzbd",
+        "downloadId": "SABnzbd_nzo_mock3",
+        "episodeFiles": [
+          {
+            "dateAdded": "2026-11-08T20:57:28.0506875Z",
+            "id": 1073,
+            "languages": [
+              {
+                "id": 1,
+                "name": "English"
+              }
+            ],
+            "mediaInfo": {
+              "audioChannels": 1.0,
+              "audioCodec": "AAC",
+              "audioLanguages": [
+                "eng"
+              ],
+              "height": 64,
+              "subtitles": [
+                "eng"
+              ],
+              "videoCodec": "x264",
+              "videoDynamicRange": "",
+              "videoDynamicRangeType": "",
+              "width": 64
+            },
+            "path": "/tv/The Pitt/Season 01/The Pitt (2025) - S01E01 - 7-00 A.M [WEBDL-480p][AAC 1.0][x264]-ETHEL.mkv",
+            "quality": "WEBDL-480p",
+            "qualityVersion": 1,
+            "relativePath": "Season 01/The Pitt (2025) - S01E01 - 7-00 A.M [WEBDL-480p][AAC 1.0][x264]-ETHEL.mkv",
+            "releaseGroup": "ETHEL",
+            "sceneName": "The.Pitt.S01E01.720p.WEB.h264-ETHEL",
+            "size": 119980
+          }
+        ],
+        "episodes": [
+          {
+            "airDate": "2025-01-09",
+            "airDateUtc": "2025-01-10T02:00:00Z",
+            "episodeNumber": 1,
+            "id": 1,
+            "overview": "While attempting to distract himself from the anniversary of his mentor’s death, Dr. Robby introduces a fresh batch of interns to life in the ER.",
+            "seasonNumber": 1,
+            "seriesId": 1,
+            "title": "7:00 A.M.",
+            "tvdbId": 10407559
+          }
+        ],
+        "eventType": "Download",
+        "fileCount": 1,
+        "instanceName": "Sonarr",
+        "release": {
+          "indexer": "Mock Newznab (Prowlarr)",
+          "releaseTitle": "The.Pitt.S01E01.720p.WEB.h264-ETHEL",
+          "releaseType": "singleEpisode",
+          "size": 1395864371
+        },
+        "series": {
+          "genres": [
+            "Drama"
+          ],
+          "id": 1,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/banners/6972a4aba4c5d.jpg",
+              "url": "/MediaCover/1/banner.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg",
+              "url": "/MediaCover/1/poster.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/backgrounds/675c4f787cfc4.jpg",
+              "url": "/MediaCover/1/fanart.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/clearlogo/675d049994d06.png",
+              "url": "/MediaCover/1/clearlogo.png"
+            }
+          ],
+          "imdbId": "tt31938062",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "path": "/tv/The Pitt",
+          "tags": [
+            "ita"
+          ],
+          "title": "The Pitt",
+          "titleSlug": "the-pitt",
+          "tmdbId": 250307,
+          "tvMazeId": 75632,
+          "tvdbId": 448176,
+          "type": "standard",
+          "year": 2025
+        },
+        "sourcePath": "/downloads/complete/tv/The.Pitt.S01E01.720p.WEB.h264-ETHEL"
+      },
+      "headers": {
+        "authorization": "Basic aG9vazpzZWNyZXQ=",
+        "content-type": "application/json",
+        "x-fixture": "yes"
+      },
+      "method": "PUT",
+      "path": "/webhook/updated",
+      "query": {},
+      "service": "webhook"
+    },
+    {
+      "body": null,
+      "headers": {},
+      "method": "GET",
+      "path": "/identity",
+      "query": {
+        "X-Plex-Client-Identifier": "06379e6c-b6a8-4dab-9ca2-d3c11680a12b",
+        "X-Plex-Device-Name": "Sonarr",
+        "X-Plex-Platform": "Windows",
+        "X-Plex-Platform-Version": "7",
+        "X-Plex-Product": "Sonarr",
+        "X-Plex-Token": "mock-plex-token",
+        "X-Plex-Version": "4.0.20.3014"
+      },
+      "service": "plex"
+    },
+    {
+      "body": null,
+      "headers": {},
+      "method": "GET",
+      "path": "/library/sections",
+      "query": {
+        "X-Plex-Client-Identifier": "06379e6c-b6a8-4dab-9ca2-d3c11680a12b",
+        "X-Plex-Device-Name": "Sonarr",
+        "X-Plex-Platform": "Windows",
+        "X-Plex-Platform-Version": "7",
+        "X-Plex-Product": "Sonarr",
+        "X-Plex-Token": "mock-plex-token",
+        "X-Plex-Version": "4.0.20.3014"
+      },
+      "service": "plex"
+    },
+    {
+      "body": null,
+      "headers": {},
+      "method": "GET",
+      "path": "/library/sections/2/refresh",
+      "query": {
+        "X-Plex-Client-Identifier": "06379e6c-b6a8-4dab-9ca2-d3c11680a12b",
+        "X-Plex-Device-Name": "Sonarr",
+        "X-Plex-Platform": "Windows",
+        "X-Plex-Platform-Version": "7",
+        "X-Plex-Product": "Sonarr",
+        "X-Plex-Token": "mock-plex-token",
+        "X-Plex-Version": "4.0.20.3014",
+        "path": "/tv/The Pitt"
+      },
+      "service": "plex"
+    },
+    {
+      "body": {
+        "embeds": [
+          {
+            "author": {
+              "icon_url": "https://raw.githubusercontent.com/Sonarr/Sonarr/develop/Logo/256.png",
+              "name": "vm"
+            },
+            "color": 2605644,
+            "description": "Episode Imported",
+            "fields": [
+              {
+                "inline": false,
+                "name": "Overview",
+                "value": "Robby helps siblings navigate their elderly father’s end-of-life care. Later, Samira fends off cops targeting a woman with a misunderstood condition."
+              },
+              {
+                "inline": false,
+                "name": "Rating",
+                "value": "8.9"
+              },
+              {
+                "inline": false,
+                "name": "Genres",
+                "value": "Drama"
+              },
+              {
+                "inline": true,
+                "name": "Quality",
+                "value": "WEBDL-480p"
+              },
+              {
+                "inline": true,
+                "name": "Codecs",
+                "value": "x264 / AAC 1"
+              },
+              {
+                "inline": false,
+                "name": "Group",
+                "value": "SuccessfulCrab"
+              },
+              {
+                "inline": true,
+                "name": "Size",
+                "value": "173.7 KB"
+              },
+              {
+                "inline": false,
+                "name": "Languages",
+                "value": "eng/ita"
+              },
+              {
+                "inline": false,
+                "name": "Subtitles",
+                "value": "eng/ita"
+              },
+              {
+                "inline": false,
+                "name": "Links",
+                "value": "[The TVDB](https://thetvdb.com/?tab=series&id=448176) / [Trakt](https://trakt.tv/search/tvdb/448176?id_type=show) / [IMDB](https://imdb.com/title/tt31938062/)"
+              },
+              {
+                "inline": false,
+                "name": "Release",
+                "value": "```The.Pitt.S01E02.1080p.WEB.H264-SuccessfulCrab```"
+              }
+            ],
+            "image": {
+              "url": "https://artworks.thetvdb.com/banners/v4/series/448176/backgrounds/675c4f787cfc4.jpg"
+            },
+            "thumbnail": {
+              "url": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg"
+            },
+            "timestamp": "2026-11-08T20:57:47.9885509Z",
+            "title": "The Pitt - 1x02 - 8:00 A.M.",
+            "url": "http://thetvdb.com/?tab=series&id=448176"
+          }
+        ],
+        "username": "Unarr fixture"
+      },
+      "headers": {
+        "content-type": "application/json"
+      },
+      "method": "POST",
+      "path": "/discord/api/webhooks/100/fixturetoken",
+      "query": {},
+      "service": "discord"
+    },
+    {
+      "body": {
+        "applicationUrl": "",
+        "customFormatInfo": {
+          "customFormatScore": 0,
+          "customFormats": []
+        },
+        "downloadClient": "Mock NZBGet",
+        "downloadClientType": "NZBGet",
+        "downloadId": "c4119cd06a044d60be1043396370761b",
+        "episodeFile": {
+          "dateAdded": "2026-11-08T20:57:47.9750994Z",
+          "id": 1074,
+          "languages": [
+            {
+              "id": 1,
+              "name": "English"
+            },
+            {
+              "id": 5,
+              "name": "Italian"
+            }
+          ],
+          "mediaInfo": {
+            "audioChannels": 1.0,
+            "audioCodec": "AAC",
+            "audioLanguages": [
+              "eng",
+              "ita"
+            ],
+            "height": 64,
+            "subtitles": [
+              "eng",
+              "ita"
+            ],
+            "videoCodec": "x264",
+            "videoDynamicRange": "",
+            "videoDynamicRangeType": "",
+            "width": 64
+          },
+          "path": "/tv/The Pitt/Season 01/The Pitt (2025) - S01E02 - 8-00 A.M [WEBDL-480p][AAC 1.0][x264]-SuccessfulCrab.mkv",
+          "quality": "WEBDL-480p",
+          "qualityVersion": 1,
+          "relativePath": "Season 01/The Pitt (2025) - S01E02 - 8-00 A.M [WEBDL-480p][AAC 1.0][x264]-SuccessfulCrab.mkv",
+          "releaseGroup": "SuccessfulCrab",
+          "sceneName": "The.Pitt.S01E02.1080p.WEB.H264-SuccessfulCrab",
+          "size": 177860,
+          "sourcePath": "/downloads/completed/tv/The.Pitt.S01E02.1080p.WEB.H264-SuccessfulCrab/The.Pitt.S01E02.1080p.WEB.H264-SuccessfulCrab.mkv"
+        },
+        "episodes": [
+          {
+            "airDate": "2025-01-09",
+            "airDateUtc": "2025-01-10T02:48:00Z",
+            "episodeNumber": 2,
+            "id": 2,
+            "overview": "Robby helps siblings navigate their elderly father’s end-of-life care. Later, Samira fends off cops targeting a woman with a misunderstood condition.",
+            "seasonNumber": 1,
+            "seriesId": 1,
+            "title": "8:00 A.M.",
+            "tvdbId": 10851517
+          }
+        ],
+        "eventType": "Download",
+        "instanceName": "Sonarr",
+        "isUpgrade": false,
+        "release": {
+          "indexer": "Mock Newznab (Prowlarr)",
+          "releaseTitle": "The.Pitt.S01E02.1080p.WEB.H264-SuccessfulCrab",
+          "releaseType": "singleEpisode",
+          "size": 2469606195
+        },
+        "series": {
+          "genres": [
+            "Drama"
+          ],
+          "id": 1,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/banners/6972a4aba4c5d.jpg",
+              "url": "/MediaCover/1/banner.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg",
+              "url": "/MediaCover/1/poster.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/backgrounds/675c4f787cfc4.jpg",
+              "url": "/MediaCover/1/fanart.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/clearlogo/675d049994d06.png",
+              "url": "/MediaCover/1/clearlogo.png"
+            }
+          ],
+          "imdbId": "tt31938062",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "path": "/tv/The Pitt",
+          "tags": [
+            "ita"
+          ],
+          "title": "The Pitt",
+          "titleSlug": "the-pitt",
+          "tmdbId": 250307,
+          "tvMazeId": 75632,
+          "tvdbId": 448176,
+          "type": "standard",
+          "year": 2025
+        }
+      },
+      "headers": {
+        "authorization": "Basic aG9vazpzZWNyZXQ=",
+        "content-type": "application/json",
+        "x-fixture": "yes"
+      },
+      "method": "PUT",
+      "path": "/webhook/updated",
+      "query": {},
+      "service": "webhook"
+    },
+    {
+      "body": {
+        "embeds": [
+          {
+            "author": {
+              "icon_url": "https://raw.githubusercontent.com/Sonarr/Sonarr/develop/Logo/256.png",
+              "name": "vm"
+            },
+            "color": 2605644,
+            "description": "Import Complete",
+            "fields": [
+              {
+                "inline": false,
+                "name": "Overview",
+                "value": "Robby helps siblings navigate their elderly father’s end-of-life care. Later, Samira fends off cops targeting a woman with a misunderstood condition."
+              },
+              {
+                "inline": false,
+                "name": "Rating",
+                "value": "8.9"
+              },
+              {
+                "inline": false,
+                "name": "Genres",
+                "value": "Drama"
+              },
+              {
+                "inline": true,
+                "name": "Quality",
+                "value": "WEBDL-1080p"
+              },
+              {
+                "inline": false,
+                "name": "Group",
+                "value": "SuccessfulCrab"
+              },
+              {
+                "inline": true,
+                "name": "Size",
+                "value": "2.3 GB"
+              },
+              {
+                "inline": false,
+                "name": "Links",
+                "value": "[The TVDB](https://thetvdb.com/?tab=series&id=448176) / [Trakt](https://trakt.tv/search/tvdb/448176?id_type=show) / [IMDB](https://imdb.com/title/tt31938062/)"
+              },
+              {
+                "inline": false,
+                "name": "Release",
+                "value": "```The.Pitt.S01E02.1080p.WEB.H264-SuccessfulCrab```"
+              }
+            ],
+            "image": {
+              "url": "https://artworks.thetvdb.com/banners/v4/series/448176/backgrounds/675c4f787cfc4.jpg"
+            },
+            "thumbnail": {
+              "url": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg"
+            },
+            "timestamp": "2026-11-08T20:57:48.0087719Z",
+            "title": "The Pitt - 1x02 - 8:00 A.M.",
+            "url": "http://thetvdb.com/?tab=series&id=448176"
+          }
+        ],
+        "username": "Unarr fixture"
+      },
+      "headers": {
+        "content-type": "application/json"
+      },
+      "method": "POST",
+      "path": "/discord/api/webhooks/100/fixturetoken",
+      "query": {},
+      "service": "discord"
+    },
+    {
+      "body": {
+        "applicationUrl": "",
+        "destinationPath": "/tv/The Pitt/Season 01",
+        "downloadClient": "Mock NZBGet",
+        "downloadClientType": "NZBGet",
+        "downloadId": "c4119cd06a044d60be1043396370761b",
+        "episodeFiles": [
+          {
+            "dateAdded": "2026-11-08T20:57:47.9750994Z",
+            "id": 1074,
+            "languages": [
+              {
+                "id": 1,
+                "name": "English"
+              },
+              {
+                "id": 5,
+                "name": "Italian"
+              }
+            ],
+            "mediaInfo": {
+              "audioChannels": 1.0,
+              "audioCodec": "AAC",
+              "audioLanguages": [
+                "eng",
+                "ita"
+              ],
+              "height": 64,
+              "subtitles": [
+                "eng",
+                "ita"
+              ],
+              "videoCodec": "x264",
+              "videoDynamicRange": "",
+              "videoDynamicRangeType": "",
+              "width": 64
+            },
+            "path": "/tv/The Pitt/Season 01/The Pitt (2025) - S01E02 - 8-00 A.M [WEBDL-480p][AAC 1.0][x264]-SuccessfulCrab.mkv",
+            "quality": "WEBDL-480p",
+            "qualityVersion": 1,
+            "relativePath": "Season 01/The Pitt (2025) - S01E02 - 8-00 A.M [WEBDL-480p][AAC 1.0][x264]-SuccessfulCrab.mkv",
+            "releaseGroup": "SuccessfulCrab",
+            "sceneName": "The.Pitt.S01E02.1080p.WEB.H264-SuccessfulCrab",
+            "size": 177860
+          }
+        ],
+        "episodes": [
+          {
+            "airDate": "2025-01-09",
+            "airDateUtc": "2025-01-10T02:48:00Z",
+            "episodeNumber": 2,
+            "id": 2,
+            "overview": "Robby helps siblings navigate their elderly father’s end-of-life care. Later, Samira fends off cops targeting a woman with a misunderstood condition.",
+            "seasonNumber": 1,
+            "seriesId": 1,
+            "title": "8:00 A.M.",
+            "tvdbId": 10851517
+          }
+        ],
+        "eventType": "Download",
+        "fileCount": 1,
+        "instanceName": "Sonarr",
+        "release": {
+          "indexer": "Mock Newznab (Prowlarr)",
+          "releaseTitle": "The.Pitt.S01E02.1080p.WEB.H264-SuccessfulCrab",
+          "releaseType": "singleEpisode",
+          "size": 2469606195
+        },
+        "series": {
+          "genres": [
+            "Drama"
+          ],
+          "id": 1,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/banners/6972a4aba4c5d.jpg",
+              "url": "/MediaCover/1/banner.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg",
+              "url": "/MediaCover/1/poster.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/backgrounds/675c4f787cfc4.jpg",
+              "url": "/MediaCover/1/fanart.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/clearlogo/675d049994d06.png",
+              "url": "/MediaCover/1/clearlogo.png"
+            }
+          ],
+          "imdbId": "tt31938062",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "path": "/tv/The Pitt",
+          "tags": [
+            "ita"
+          ],
+          "title": "The Pitt",
+          "titleSlug": "the-pitt",
+          "tmdbId": 250307,
+          "tvMazeId": 75632,
+          "tvdbId": 448176,
+          "type": "standard",
+          "year": 2025
+        },
+        "sourcePath": "/downloads/completed/tv/The.Pitt.S01E02.1080p.WEB.H264-SuccessfulCrab"
+      },
+      "headers": {
+        "authorization": "Basic aG9vazpzZWNyZXQ=",
+        "content-type": "application/json",
+        "x-fixture": "yes"
+      },
+      "method": "PUT",
+      "path": "/webhook/updated",
+      "query": {},
+      "service": "webhook"
+    },
+    {
+      "body": null,
+      "headers": {},
+      "method": "GET",
+      "path": "/library/sections",
+      "query": {
+        "X-Plex-Client-Identifier": "06379e6c-b6a8-4dab-9ca2-d3c11680a12b",
+        "X-Plex-Device-Name": "Sonarr",
+        "X-Plex-Platform": "Windows",
+        "X-Plex-Platform-Version": "7",
+        "X-Plex-Product": "Sonarr",
+        "X-Plex-Token": "mock-plex-token",
+        "X-Plex-Version": "4.0.20.3014"
+      },
+      "service": "plex"
+    },
+    {
+      "body": null,
+      "headers": {},
+      "method": "GET",
+      "path": "/library/sections/2/refresh",
+      "query": {
+        "X-Plex-Client-Identifier": "06379e6c-b6a8-4dab-9ca2-d3c11680a12b",
+        "X-Plex-Device-Name": "Sonarr",
+        "X-Plex-Platform": "Windows",
+        "X-Plex-Platform-Version": "7",
+        "X-Plex-Product": "Sonarr",
+        "X-Plex-Token": "mock-plex-token",
+        "X-Plex-Version": "4.0.20.3014",
+        "path": "/tv/The Pitt"
+      },
+      "service": "plex"
+    },
+    {
+      "body": {
+        "embeds": [
+          {
+            "author": {
+              "icon_url": "https://raw.githubusercontent.com/Sonarr/Sonarr/develop/Logo/256.png",
+              "name": "vm"
+            },
+            "color": 2605644,
+            "description": "Episode Imported",
+            "fields": [
+              {
+                "inline": false,
+                "name": "Overview",
+                "value": "Matt Murdock takes on a new client, Hector Ayala. But this local hero from the Heights is more than he claims to be. Fisk learns the power of optics in his new and very public role."
+              },
+              {
+                "inline": false,
+                "name": "Rating",
+                "value": "8.1"
+              },
+              {
+                "inline": false,
+                "name": "Genres",
+                "value": "Action, Drama"
+              },
+              {
+                "inline": true,
+                "name": "Quality",
+                "value": "WEBDL-480p"
+              },
+              {
+                "inline": true,
+                "name": "Codecs",
+                "value": "x264 / AAC 1"
+              },
+              {
+                "inline": false,
+                "name": "Group",
+                "value": "FLUX"
+              },
+              {
+                "inline": true,
+                "name": "Size",
+                "value": "117.2 KB"
+              },
+              {
+                "inline": false,
+                "name": "Languages",
+                "value": "eng"
+              },
+              {
+                "inline": false,
+                "name": "Subtitles",
+                "value": "eng"
+              },
+              {
+                "inline": false,
+                "name": "Links",
+                "value": "[The TVDB](https://thetvdb.com/?tab=series&id=422712) / [Trakt](https://trakt.tv/search/tvdb/422712?id_type=show) / [IMDB](https://imdb.com/title/tt18923754/)"
+              },
+              {
+                "inline": false,
+                "name": "Release",
+                "value": "```Daredevil.Born.Again.S01E02.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-FLUX```"
+              }
+            ],
+            "image": {
+              "url": "https://artworks.thetvdb.com/banners/v4/series/422712/backgrounds/69bef1d230b9d.jpg"
+            },
+            "thumbnail": {
+              "url": "https://artworks.thetvdb.com/banners/v4/series/422712/posters/6978fefe94ea5.jpg"
+            },
+            "timestamp": "2026-11-08T20:58:07.9656964Z",
+            "title": "Daredevil: Born Again - 1x02 - Optics",
+            "url": "http://thetvdb.com/?tab=series&id=422712"
+          }
+        ],
+        "username": "Unarr fixture"
+      },
+      "headers": {
+        "content-type": "application/json"
+      },
+      "method": "POST",
+      "path": "/discord/api/webhooks/100/fixturetoken",
+      "query": {},
+      "service": "discord"
+    },
+    {
+      "body": {
+        "applicationUrl": "",
+        "customFormatInfo": {
+          "customFormatScore": -10000,
+          "customFormats": [
+            {
+              "id": 21,
+              "name": "DSNP"
+            },
+            {
+              "id": 36,
+              "name": "Language not Italian"
+            },
+            {
+              "id": 11,
+              "name": "WEB Tier 01"
+            }
+          ]
+        },
+        "downloadClient": "Mock Transmission",
+        "downloadClientType": "Transmission",
+        "downloadId": "4271B834AED1835F13BD078CB4A9A98F00AC777F",
+        "episodeFile": {
+          "dateAdded": "2026-11-08T20:58:07.956174Z",
+          "id": 1075,
+          "languages": [
+            {
+              "id": 1,
+              "name": "English"
+            }
+          ],
+          "mediaInfo": {
+            "audioChannels": 1.0,
+            "audioCodec": "AAC",
+            "audioLanguages": [
+              "eng"
+            ],
+            "height": 64,
+            "subtitles": [
+              "eng"
+            ],
+            "videoCodec": "x264",
+            "videoDynamicRange": "",
+            "videoDynamicRangeType": "",
+            "width": 64
+          },
+          "path": "/tv/Daredevil - Born Again/Season 01/Daredevil Born Again (2025) - S01E02 - Optics [DSNP][WEBDL-480p][AAC 1.0][x264]-FLUX.mkv",
+          "quality": "WEBDL-480p",
+          "qualityVersion": 1,
+          "relativePath": "Season 01/Daredevil Born Again (2025) - S01E02 - Optics [DSNP][WEBDL-480p][AAC 1.0][x264]-FLUX.mkv",
+          "releaseGroup": "FLUX",
+          "sceneName": "Daredevil.Born.Again.S01E02.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-FLUX",
+          "size": 119980,
+          "sourcePath": "/downloads/tv/Daredevil.Born.Again.S01E02.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-FLUX/Daredevil.Born.Again.S01E02.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-FLUX.mkv"
+        },
+        "episodes": [
+          {
+            "airDate": "2025-03-04",
+            "airDateUtc": "2025-03-05T02:48:00Z",
+            "episodeNumber": 2,
+            "id": 47,
+            "overview": "Matt Murdock takes on a new client, Hector Ayala. But this local hero from the Heights is more than he claims to be. Fisk learns the power of optics in his new and very public role.",
+            "seasonNumber": 1,
+            "seriesId": 2,
+            "title": "Optics",
+            "tvdbId": 10751467
+          }
+        ],
+        "eventType": "Download",
+        "instanceName": "Sonarr",
+        "isUpgrade": false,
+        "release": {
+          "indexer": "Mock Torznab (Prowlarr)",
+          "releaseTitle": "Daredevil.Born.Again.S01E02.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-FLUX",
+          "releaseType": "singleEpisode",
+          "size": 3221225472
+        },
+        "series": {
+          "genres": [
+            "Action",
+            "Drama"
+          ],
+          "id": 2,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/422712/banners/6787d1d7187c6.jpg",
+              "url": "/MediaCover/2/banner.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/422712/posters/6978fefe94ea5.jpg",
+              "url": "/MediaCover/2/poster.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/422712/backgrounds/69bef1d230b9d.jpg",
+              "url": "/MediaCover/2/fanart.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/422712/clearlogo/67e60e559c1f8.png",
+              "url": "/MediaCover/2/clearlogo.png"
+            }
+          ],
+          "imdbId": "tt18923754",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "path": "/tv/Daredevil - Born Again",
+          "tags": [],
+          "title": "Daredevil: Born Again",
+          "titleSlug": "daredevil-born-again",
+          "tmdbId": 202555,
+          "tvMazeId": 63234,
+          "tvdbId": 422712,
+          "type": "standard",
+          "year": 2025
+        }
+      },
+      "headers": {
+        "authorization": "Basic aG9vazpzZWNyZXQ=",
+        "content-type": "application/json",
+        "x-fixture": "yes"
+      },
+      "method": "PUT",
+      "path": "/webhook/updated",
+      "query": {},
+      "service": "webhook"
+    },
+    {
+      "body": {
+        "embeds": [
+          {
+            "author": {
+              "icon_url": "https://raw.githubusercontent.com/Sonarr/Sonarr/develop/Logo/256.png",
+              "name": "vm"
+            },
+            "color": 2605644,
+            "description": "Import Complete",
+            "fields": [
+              {
+                "inline": false,
+                "name": "Overview",
+                "value": "Matt Murdock takes on a new client, Hector Ayala. But this local hero from the Heights is more than he claims to be. Fisk learns the power of optics in his new and very public role."
+              },
+              {
+                "inline": false,
+                "name": "Rating",
+                "value": "8.1"
+              },
+              {
+                "inline": false,
+                "name": "Genres",
+                "value": "Action, Drama"
+              },
+              {
+                "inline": true,
+                "name": "Quality",
+                "value": "WEBDL-1080p"
+              },
+              {
+                "inline": false,
+                "name": "Group",
+                "value": "FLUX"
+              },
+              {
+                "inline": true,
+                "name": "Size",
+                "value": "3 GB"
+              },
+              {
+                "inline": false,
+                "name": "Links",
+                "value": "[The TVDB](https://thetvdb.com/?tab=series&id=422712) / [Trakt](https://trakt.tv/search/tvdb/422712?id_type=show) / [IMDB](https://imdb.com/title/tt18923754/)"
+              },
+              {
+                "inline": false,
+                "name": "Release",
+                "value": "```Daredevil.Born.Again.S01E02.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-FLUX```"
+              }
+            ],
+            "image": {
+              "url": "https://artworks.thetvdb.com/banners/v4/series/422712/backgrounds/69bef1d230b9d.jpg"
+            },
+            "thumbnail": {
+              "url": "https://artworks.thetvdb.com/banners/v4/series/422712/posters/6978fefe94ea5.jpg"
+            },
+            "timestamp": "2026-11-08T20:58:07.9819824Z",
+            "title": "Daredevil: Born Again - 1x02 - Optics",
+            "url": "http://thetvdb.com/?tab=series&id=422712"
+          }
+        ],
+        "username": "Unarr fixture"
+      },
+      "headers": {
+        "content-type": "application/json"
+      },
+      "method": "POST",
+      "path": "/discord/api/webhooks/100/fixturetoken",
+      "query": {},
+      "service": "discord"
+    },
+    {
+      "body": {
+        "applicationUrl": "",
+        "destinationPath": "/tv/Daredevil - Born Again/Season 01",
+        "downloadClient": "Mock Transmission",
+        "downloadClientType": "Transmission",
+        "downloadId": "4271B834AED1835F13BD078CB4A9A98F00AC777F",
+        "episodeFiles": [
+          {
+            "dateAdded": "2026-11-08T20:58:07.956174Z",
+            "id": 1075,
+            "languages": [
+              {
+                "id": 1,
+                "name": "English"
+              }
+            ],
+            "mediaInfo": {
+              "audioChannels": 1.0,
+              "audioCodec": "AAC",
+              "audioLanguages": [
+                "eng"
+              ],
+              "height": 64,
+              "subtitles": [
+                "eng"
+              ],
+              "videoCodec": "x264",
+              "videoDynamicRange": "",
+              "videoDynamicRangeType": "",
+              "width": 64
+            },
+            "path": "/tv/Daredevil - Born Again/Season 01/Daredevil Born Again (2025) - S01E02 - Optics [DSNP][WEBDL-480p][AAC 1.0][x264]-FLUX.mkv",
+            "quality": "WEBDL-480p",
+            "qualityVersion": 1,
+            "relativePath": "Season 01/Daredevil Born Again (2025) - S01E02 - Optics [DSNP][WEBDL-480p][AAC 1.0][x264]-FLUX.mkv",
+            "releaseGroup": "FLUX",
+            "sceneName": "Daredevil.Born.Again.S01E02.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-FLUX",
+            "size": 119980
+          }
+        ],
+        "episodes": [
+          {
+            "airDate": "2025-03-04",
+            "airDateUtc": "2025-03-05T02:48:00Z",
+            "episodeNumber": 2,
+            "id": 47,
+            "overview": "Matt Murdock takes on a new client, Hector Ayala. But this local hero from the Heights is more than he claims to be. Fisk learns the power of optics in his new and very public role.",
+            "seasonNumber": 1,
+            "seriesId": 2,
+            "title": "Optics",
+            "tvdbId": 10751467
+          }
+        ],
+        "eventType": "Download",
+        "fileCount": 1,
+        "instanceName": "Sonarr",
+        "release": {
+          "indexer": "Mock Torznab (Prowlarr)",
+          "releaseTitle": "Daredevil.Born.Again.S01E02.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-FLUX",
+          "releaseType": "singleEpisode",
+          "size": 3221225472
+        },
+        "series": {
+          "genres": [
+            "Action",
+            "Drama"
+          ],
+          "id": 2,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/422712/banners/6787d1d7187c6.jpg",
+              "url": "/MediaCover/2/banner.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/422712/posters/6978fefe94ea5.jpg",
+              "url": "/MediaCover/2/poster.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/422712/backgrounds/69bef1d230b9d.jpg",
+              "url": "/MediaCover/2/fanart.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/422712/clearlogo/67e60e559c1f8.png",
+              "url": "/MediaCover/2/clearlogo.png"
+            }
+          ],
+          "imdbId": "tt18923754",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "path": "/tv/Daredevil - Born Again",
+          "tags": [],
+          "title": "Daredevil: Born Again",
+          "titleSlug": "daredevil-born-again",
+          "tmdbId": 202555,
+          "tvMazeId": 63234,
+          "tvdbId": 422712,
+          "type": "standard",
+          "year": 2025
+        },
+        "sourcePath": "/downloads/tv/Daredevil.Born.Again.S01E02.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-FLUX"
+      },
+      "headers": {
+        "authorization": "Basic aG9vazpzZWNyZXQ=",
+        "content-type": "application/json",
+        "x-fixture": "yes"
+      },
+      "method": "PUT",
+      "path": "/webhook/updated",
+      "query": {},
+      "service": "webhook"
+    },
+    {
+      "body": null,
+      "headers": {},
+      "method": "GET",
+      "path": "/library/sections",
+      "query": {
+        "X-Plex-Client-Identifier": "06379e6c-b6a8-4dab-9ca2-d3c11680a12b",
+        "X-Plex-Device-Name": "Sonarr",
+        "X-Plex-Platform": "Windows",
+        "X-Plex-Platform-Version": "7",
+        "X-Plex-Product": "Sonarr",
+        "X-Plex-Token": "mock-plex-token",
+        "X-Plex-Version": "4.0.20.3014"
+      },
+      "service": "plex"
+    },
+    {
+      "body": null,
+      "headers": {},
+      "method": "GET",
+      "path": "/library/sections/2/refresh",
+      "query": {
+        "X-Plex-Client-Identifier": "06379e6c-b6a8-4dab-9ca2-d3c11680a12b",
+        "X-Plex-Device-Name": "Sonarr",
+        "X-Plex-Platform": "Windows",
+        "X-Plex-Platform-Version": "7",
+        "X-Plex-Product": "Sonarr",
+        "X-Plex-Token": "mock-plex-token",
+        "X-Plex-Version": "4.0.20.3014",
+        "path": "/tv/Daredevil - Born Again"
+      },
+      "service": "plex"
+    }
+  ],
+  "recordedAt": "2026-11-08T20:58:48Z",
+  "request": {
+    "method": "GET",
+    "path": "/mock/notifications",
+    "target": "mock"
+  },
+  "status": 200
+}

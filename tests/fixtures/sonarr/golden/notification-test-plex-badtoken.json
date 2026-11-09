@@ -1,0 +1,17 @@
+{
+  "body": [
+    {
+      "errorMessage": "Authentication Token is invalid",
+      "isWarning": false,
+      "propertyName": "AuthToken",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-08T20:57:01Z",
+  "request": {
+    "body": "bodies/notification-test-plex-badtoken.json",
+    "method": "POST",
+    "path": "/api/v3/notification/test"
+  },
+  "status": 400
+}

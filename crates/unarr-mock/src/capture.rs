@@ -107,9 +107,13 @@ pub fn handle(
             .unwrap_or_default(),
         _ => Vec::new(),
     };
+    // The note names the JSON-RPC method when the recorded body is Sonarr's
+    // `method(params)` summary, else the path (a form body is not a name).
     let what = exchange["request"]["body"]
         .as_str()
-        .map(|s| s.split('(').next().unwrap_or(s).to_string())
+        .and_then(|s| s.split_once('('))
+        .map(|(method, _)| method.to_string())
+        .filter(|m| !m.is_empty() && m.chars().all(|c| c.is_ascii_alphanumeric() || c == '_'))
         .unwrap_or_else(|| wanted.trim_start_matches('/').to_string());
     Some(Reply {
         status,

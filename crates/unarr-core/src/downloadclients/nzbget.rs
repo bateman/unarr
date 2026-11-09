@@ -548,12 +548,27 @@ impl<'a> Nzbget<'a> {
     }
 }
 
-/// `Guid.NewGuid().ToString().Replace("-", "")`: 32 hex characters.
+/// `Guid.NewGuid().ToString().Replace("-", "")`: 32 hex characters, or
+/// the next pinned id when a replay set some.
 fn random_hex() -> String {
+    if let Some(pinned) = PINNED_IDS.lock().unwrap().pop_front() {
+        return pinned;
+    }
     use ring::rand::SecureRandom;
     let mut bytes = [0u8; 16];
     let _ = ring::rand::SystemRandom::new().fill(&mut bytes);
     bytes.iter().map(|b| format!("{b:02x}")).collect()
+}
+
+static PINNED_IDS: std::sync::Mutex<std::collections::VecDeque<String>> =
+    std::sync::Mutex::new(std::collections::VecDeque::new());
+
+/// Pin the drone ids the next grabs get, in order, so that a replay of a
+/// recording sees the ids the recording did (like its pinned clock).
+pub fn pin_drone_ids(ids: &[&str]) {
+    let mut pinned = PINNED_IDS.lock().unwrap();
+    pinned.clear();
+    pinned.extend(ids.iter().map(|s| s.to_string()));
 }
 
 #[cfg(test)]

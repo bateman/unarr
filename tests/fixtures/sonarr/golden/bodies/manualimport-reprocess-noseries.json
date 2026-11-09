@@ -1,0 +1,26 @@
+[
+  {
+    "path": "/downloads/tv/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2.mkv",
+    "downloadId": "0FB2EF04FB342178115BA635EC7B5EC0067058BA",
+    "seriesId": 0,
+    "episodeIds": [],
+    "quality": {
+      "quality": {
+        "id": 0
+      },
+      "revision": {
+        "version": 1,
+        "real": 0,
+        "isRepack": false
+      }
+    },
+    "languages": [
+      {
+        "id": 0,
+        "name": "Unknown"
+      }
+    ],
+    "indexerFlags": 0,
+    "releaseType": "unknown"
+  }
+]

@@ -12,6 +12,7 @@ pub mod pending;
 pub mod provider_status;
 pub mod providers;
 pub mod scene;
+pub mod sequence;
 pub mod series;
 pub mod stats;
 

@@ -33,6 +33,10 @@ struct Args {
     /// then to --data itself (a Sonarr /config mounted as is).
     #[arg(long, env = "UNARR_IMPORT_FROM")]
     import_from: Option<PathBuf>,
+
+    /// The ffprobe binary for media info; `ffprobe` on the PATH when unset.
+    #[arg(long, env = "UNARR_FFPROBE")]
+    ffprobe: Option<PathBuf>,
 }
 
 fn parse_personality(s: &str) -> anyhow::Result<Personality> {
@@ -294,6 +298,14 @@ async fn main() -> anyhow::Result<()> {
         .iter()
         .map(|name| parse_personality(name))
         .collect::<anyhow::Result<_>>()?;
+    unarr_core::mediafiles::mediainfo::set_ffprobe_path(args.ffprobe.clone());
+    match unarr_core::mediafiles::mediainfo::ffprobe_version() {
+        Some(v) => tracing::info!(ffprobe = %v, "media info enabled"),
+        None => tracing::warn!(
+            path = %unarr_core::mediafiles::mediainfo::ffprobe_path().display(),
+            "ffprobe not found; media info and sample detection are off"
+        ),
+    }
     if let Some(import_from) = &args.import_from {
         check_import_source(import_from, &personalities, &args.data)?;
     }

@@ -1,0 +1,9 @@
+{
+  "body": [],
+  "recordedAt": "2026-11-08T20:58:48Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/manualimport?downloadId=NOTTRACKED&filterExistingFiles=true"
+  },
+  "status": 200
+}

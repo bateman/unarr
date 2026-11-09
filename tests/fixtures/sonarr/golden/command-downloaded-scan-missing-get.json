@@ -1,0 +1,37 @@
+{
+  "body": {
+    "body": {
+      "importMode": "move",
+      "isExclusive": false,
+      "isLongRunning": true,
+      "name": "DownloadedEpisodesScan",
+      "path": "/downloads/drop/nothing-here",
+      "requiresDiskAccess": true,
+      "sendUpdatesToClient": true,
+      "suppressMessages": true,
+      "trigger": "manual",
+      "updateScheduledTask": true
+    },
+    "commandName": "Downloaded Episodes Scan",
+    "duration": "00:00:00.0013838",
+    "ended": "2026-11-08T20:59:56Z",
+    "id": 461700,
+    "message": "Failed to import",
+    "name": "DownloadedEpisodesScan",
+    "priority": "normal",
+    "queued": "2026-11-08T20:59:56Z",
+    "result": "unsuccessful",
+    "sendUpdatesToClient": true,
+    "started": "2026-11-08T20:59:56Z",
+    "stateChangeTime": "2026-11-08T20:59:56Z",
+    "status": "completed",
+    "trigger": "manual",
+    "updateScheduledTask": true
+  },
+  "recordedAt": "2026-11-08T21:00:08Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/command/461700"
+  },
+  "status": 200
+}

@@ -181,9 +181,36 @@ them; what is known so far, so the choice can be made there:
   cost is bounded by phase 3's scope (Sonarr only) and it keeps the user's
   installation working if either side disappears.
 
-Whatever is chosen, the key or user agent is the user's or Unarr's own; the
-originals' identity is emulated towards clients, never towards upstream
-services.
+The alternatives are laid out with sizes, the TVDB licensing friction, TVMaze
+and the public XEM API in `docs/phase-3b-library.md`.
+
+**Decision, November 2026: option A, the Servarr proxies**, behind one
+`MetadataProvider` trait in `unarr-core` whose output is the originals'
+resource shapes, so that a direct-provider implementation stays additive.
+Skyhook for Sonarr now; `api.radarr.video` and `api.lidarr.audio` when those
+personalities come.
+
+**User agent: the original's, for now.** During development and testing Unarr
+identifies itself to the Servarr proxies exactly as the application it
+emulates (Sonarr's user agent and version for the Sonarr personality, later
+Radarr's and Lidarr's), so that the responses, rate limits and any
+user-agent-dependent behaviour are the ones the goldens were recorded with,
+and so that the project does not show up as an unknown client while its
+correctness is still being established. This is a deliberate, temporary
+exception to the rule that the emulated identity stops at the API surface
+(section 12). Its exit condition is written down so it is not forgotten:
+once phase 3b's exit criteria are met and the metadata path is known to be
+correct and complete, the user agent becomes Unarr's own, honest one
+(`Unarr/<version> (+https://github.com/bateman/unarr)`), the Servarr team is
+told, and the fallback path (B, TVMaze plus XEM) is what Unarr implements if
+they refuse. The user agent is one constant in the HTTP client, read from a
+single place, so the switch is a one-line change plus a golden re-record;
+nothing else in the code may depend on which one is in use. Towards every
+other upstream (indexers, download clients, notification targets) Unarr
+already uses its own user agent and keeps doing so.
+
+Keys, where a provider needs one, are the user's or Unarr's own in every
+case.
 
 ## 8. Phases
 
@@ -205,10 +232,37 @@ services.
    `scripts/prowlarr-replay.py` drives the indexer sync. The homelab run (a
    real Prowlarr, indexer and client) is the one criterion the cloud session
    could not meet. See `docs/phase-2-acquisition.md`.
-3. **Import and rename.** Folder scanning, media info (ffprobe or a native
-   Matroska/MP4 reader), naming tokens, notifications.
-4. **Radarr** as a second personality on the existing core.
+3. **Library**, split in two after phase 2 landed, each on its own branch and
+   squashed on its own:
+   - **3a, import, rename, notify.** Completed download handling with the
+     originals' import specifications, disk scan, media info through
+     ffprobe, rename on the `FileNameBuilder` port, manual import, and
+     notifications limited to Plex, Discord and the generic Webhook (the
+     maintainer uses the first two; the other implementations keep their
+     imported settings untouched). Exit criterion: a mock client's completed
+     download ends as a named episode file with history, SignalR and
+     notifications matching the oracle. *Done, November 2026, against
+     mocks*: 342 goldens recorded from the real Sonarr pointed at the mocks
+     (the mock clients completing real clips, a mock Plex, Discord and
+     webhook keeping what they receive) replay identically, none pending;
+     the import specifications carry the originals' fixtures as unit tests;
+     the homelab run (a real NZBGet download found, grabbed and imported on
+     the maintainer's NAS in place of Sonarr, Discord notified, the real
+     Plex refreshed) passed on 9 November 2026. See
+     `docs/phase-3a-import.md`.
+   - **3b, metadata, series management, settings writes.** The metadata
+     provider decision (section 7), lookup, add, refresh and delete of
+     series, MediaCover, the remaining write endpoints (settings pages,
+     profiles, custom formats, tags, root folders, import lists), backups.
+     Exit criterion: Overseerr adds a series and Recyclarr syncs profiles
+     through Unarr. See `docs/phase-3b-library.md`.
+   Sizing from phase 2's 32k lines: 3a about two thirds of it, 3b about half,
+   together about equal to phase 2.
+4. **Radarr** as a second personality on the existing core. Expected at half
+   of phase 2: the core is shared, the importer, movie model, Radarr UI and
+   goldens from the Radarr release are new.
 5. **Lidarr** last: MusicBrainz, per-track matching, Chromaprint fingerprints.
+   Expected at phase 2's size or above; the most divergent personality.
 
 ## 9. Non-functional targets
 
@@ -271,7 +325,7 @@ from 86 ms to 50 ms by not decoding the cast (2.5 MB of JSON no resource
 shows) and loading only the queue's series for the queue, and the rest is the
 950 rows' remaining JSON columns (35 ms) and the season statistics over
 25,000 episodes (15 ms). The design target of 10 ms at that size is not met;
-section 13 says what the next step would be.
+section 14 says what the next step would be.
 
 The idle figures are what `malloc_trim` leaves after the import: without it
 the scaled fixture's import left the process at 232 MB, holding pages it no
@@ -282,6 +336,35 @@ episode-file endpoints at 2 s and the full history at 49 s: every file was
 matched against 249 custom-format specifications whose regexes were compiled
 on each call. A per-pattern cache brought them to the figures above; no other
 cache exists yet, every answer is built from SQLite on request.
+
+End of phase 3a (release build, x86-64, in the cloud session, the Python
+mock on the loopback, the originals' bundled ffprobe). The same two
+fixtures; the clip the mock completes is a 120 KB Matroska file, so moving
+it costs nothing and the figures are the pipeline's own:
+
+| Metric | Real fixture | Scaled fixture |
+|--------|--------------|----------------|
+| Binary, stripped, with the embedded UI, notifications included | 19.3 MiB | 19.3 MiB |
+| Cold start to first response, import included | 0.21 s | 1.9 s (the import) |
+| Idle RSS after import | 18.7 MB | 21.6 MB |
+| 200 downloads the mock SABnzbd completed, one `ProcessMonitoredDownloads` | 21 s, 9.5 files/s | |
+| 152 more with Discord, webhook and Plex notifications on | 16 s, 9.5 files/s | |
+| RSS after those imports, and eight seconds later | 81 MB, 69 MB | |
+| `RescanSeries` over every series | 1 s (38 series; the fixture's 346 files are not on disk, so their rows went, as the originals' would) | 38 s (950 series, 8,650 files linked on disk with another size, so each is probed again) |
+| `RescanSeries` again, nothing changed | | 1 s |
+| RSS after the rescans | 71 MB | 38 MB |
+
+An import costs about 105 ms per file: 45 of them wait on the mock client
+(the removal call, which the Python mock serves while deleting the item's
+folder), 5 are ffprobe, the rest is Unarr's parsing, decision, move, rows
+and SignalR relay; the three notifications add nothing measurable (three
+posts to the loopback per import). The RSS the imports leave is the
+tracked downloads the client still lists, each with its series and
+episodes, until the next refresh drops them, plus what glibc keeps for the
+blocking threads; the scheduler tick's `malloc_trim` returned twelve of
+the forty megabytes within eight seconds. The scaled rescan's 38 s are the
+8,650 ffprobe runs a changed size asks for, in one thread per series; the
+walk itself, the second pass, takes a second.
 
 ## 10. Naming and distribution
 
@@ -468,7 +551,8 @@ cache exists yet, every answer is built from SQLite on request.
 - **Metadata deferred, with the trade-offs written down** (section 7).
 - **`RefreshSeries`, `RescanSeries` and the importer's completed downloads**
   are accepted and complete without effect: the UI's buttons work and the
-  scheduler's rows move, the work itself is phase 3's.
+  scheduler's rows move, the work itself is phase 3's. (Phase 3a did the
+  rescan and the completed downloads; `RefreshSeries` waits for 3b.)
 - **From the phase 2 review.** An independent audit of `main` at the end of
   phase 2 found 23 issues (9 must fix, 10 should fix, 4 nice to have) and
   some code to delete, treating indexer and client responses as untrusted.
@@ -564,14 +648,106 @@ cache exists yet, every answer is built from SQLite on request.
   series without the cast is safe only until something writes a series back
   whole.
 
-## 13. Open questions
+## 13. Decisions taken in phase 3a
 
-- Metadata provider strategy (section 7), to decide in phase 3 with the
-  pros and cons recorded there.
-- SignalR: phase 2 emits `indexer`, `downloadclient`, `queue`,
-  `queue/details`, `queue/status`, `command` and `health` messages with the
-  shapes the UI reduces; `series` and `episode` messages wait for the
-  importer and the metadata refresh.
+- **The oracle again, with files this time.** `make golden` points the
+  pinned Sonarr at the mocks as before, and the mocks now complete items
+  with real clips (`tests/fixtures/media/`, four Matroska files of a few
+  hundred kilobytes, one with two audio tracks, one a sample), put files
+  on disk for the drop-folder and rescan flows, and stand in for a Plex
+  Media Server, a Discord webhook and a generic webhook that keep every
+  request they receive. 342 goldens replay, the notification targets'
+  recordings included. The replay runs in a temporary directory: the
+  library and the clients' downloads are rewritten to it before the import
+  and mapped back before comparing, so a golden naming `/tv/The Pitt/...`
+  matches what Unarr wrote there. The directory's name carries no dash:
+  the release-group parser read `unarr-contract-123` off a file path.
+- **ffprobe, not a native reader.** Media info comes from `ffprobe`,
+  parsed into the originals' `MediaInfoModel` (schema revision 11). The
+  binary is `--ffprobe`/`UNARR_FFPROBE`, else the one on the `PATH`; the
+  replay uses the ffprobe the pinned Sonarr ships with when `make golden`
+  left it under `.cache`, so codec names and channel counts are the
+  oracle's own. The image does not bundle it; the user installs it next to
+  Unarr or mounts it in.
+- **The import pipeline is a port, step for step.** `mediafiles::{decide,
+  specs, aggregate, approve, downloaded, completed, scan, deletion, rename,
+  manual}` follow `MediaFiles/EpisodeImport` and its neighbours: the
+  fourteen specifications in the originals' order with their messages, the
+  quality, language, release-group and scene-name aggregators, the
+  upgrade's file deletion into the recycling bin, the folder cleanup, the
+  rename on the `FileNameBuilder` port. The specification fixtures of the
+  originals assert on mocks, so they are ported as unit tests rather than
+  as data; the sample detection and scene-name rules likewise.
+- **Imports run on blocking threads; the database is asked, not held.**
+  Each import or scan runs under `spawn_blocking`; every database touch is
+  one `call_blocking` on the single writer, and ffprobe runs on every file
+  before the database phase starts, so the writer never waits on a
+  process. A command's result reports the originals' messages (`Failed to
+  import`, `Manually imported N files`).
+- **Events are returned, not published.** The pipeline hands the runtime a
+  list of `ImportEvent`s (`EpisodeImported`, `EpisodeFileDeleted`,
+  `DownloadCompleted`, `SeriesRenamed`, `ManualInteractionRequired`...)
+  and writes the history rows itself; the runtime relays them to SignalR
+  (`episodefile`, `episode`, `series` with its statistics), to the
+  notifications and to the event-driven health checks. There is no event
+  bus to subscribe to; the order is the call order.
+- **Three notification implementations, the others round-trip.** Discord,
+  the generic webhook and the Plex Media Server send with the originals'
+  payloads (embed fields, colours and titles; the webhook's event types,
+  `PUT` or `POST`, basic credentials and headers; Plex's identifying query
+  parameters, the section whose location holds the series' root folder,
+  the two-hour version cache). The remaining implementations keep their
+  settings and flags and answer a test with a validation error saying
+  Unarr does not drive them. The plex.tv side (sign-in, server list, the
+  ping on every update) is not called: it needs the user's account, and
+  the `action` endpoint answers the originals' empty object. A notification
+  that keeps failing backs off with the originals' periods (five levels,
+  no block within five minutes of the first failure) in the shared
+  `provider_status` table; a test whose target never answers escapes as a
+  500, as the originals' does.
+- **Plex updates are queued and flushed where the originals flush them.**
+  The series to refresh queue per server and go out on
+  `DownloadsProcessedEvent` (after the monitored downloads are processed),
+  `RenameCompletedEvent`, `DeleteCompletedEvent` and
+  `HealthCheckCompleteEvent`. The last one is what flushes after a library
+  scan or a manual import: an import, successful or not, runs the
+  event-driven health checks through the originals' five-second debouncer,
+  and the run's completion flushes the queue. The replay compares a
+  delete's notifications as a multiset (the originals' flush runs on a
+  background handler) and leaves the Plex refreshes around the library
+  scans out, since they rode on the originals' minute refresh during the
+  recording.
+- **Health checks for the import, with the originals' conditions.** The
+  recycling bin's writability, read-only mounts under series (from
+  `/proc/mounts`), completed download handling off, clients that remove
+  completed downloads, and what a failed import says about remote paths
+  join the checks; the event-driven ones run only while passing
+  (`SuccessfulOnly`) or only while failing (`FailedOnly`) as their
+  `CheckOn` attributes say. Health verdicts reach the notifications only
+  after the fifteen-minute startup grace, when the checks run once more
+  and every standing failure is sent, as `HealthCheckService` does.
+- **Quirks kept.** Reprocessing a manual-import item whose name does not
+  parse answers 500 (`AugmentingFailedException`); a missing episode file
+  answers the `ModelNotFoundException` body; a manual-import item of the
+  library has no `name`; the naming's codec tokens read the scene name
+  first and the file name second (`GetSceneOrFileName`); the Discord embed
+  author is the machine name unless set; the Discord test message carries
+  the local time in the invariant culture's shape.
+- **Ids the originals make up are pinned or ignored.** NZBGet's drone id
+  is a random GUID at grab time; the replay pins it to the recorded one.
+  Manual-import item ids are a hash of the path (the originals' too, with
+  another function), so the goldens ignore them.
+
+## 14. Open questions
+
+- Metadata provider: decided (section 7, option A). Open is the switch to
+  Unarr's own user agent towards the Servarr proxies, due when phase 3b's
+  exit criteria are met, and the conversation with the Servarr team that
+  goes with it.
+- SignalR: phases 2 and 3a emit `indexer`, `downloadclient`,
+  `notification`, `queue`, `queue/details`, `queue/status`, `command`,
+  `health`, `episodefile`, `episode` and `series` messages with the shapes
+  the UI reduces; the metadata refresh's messages wait for 3b.
 - The collation approximates ICU for ASCII names. Titles with accented or
   non-Latin characters may sort differently from the originals; a full UCA
   implementation is not worth its size until a golden shows the difference.
@@ -586,10 +762,16 @@ cache exists yet, every answer is built from SQLite on request.
   under a URL base of its own are in `tests/fixtures/downloadclients/`; the
   mock replays them under `/capture/<name>/` and
   `crates/unarr-mock/tests/captures.rs` runs Unarr's clients against them.
-  The queues were empty when they were taken, so they verify versions,
-  settings, categories and the directories derived from them, not queue
-  items; a recording with downloads in flight, and any exchange with SABnzbd
-  or Transmission, would extend the replays.
+  Those queues were empty when they were taken, so they verify versions,
+  settings, categories and the directories derived from them; the
+  `nzbget-import` capture from phase 3a adds a queue of five groups, a
+  finished one in the history and its deletion; `qbittorrent-import` a
+  finished torrent stopped at qBittorrent's inactive-seeding limit next to
+  a season pack still downloading, and its removal with data after the
+  import; `qbittorrent-compat-import` the same for the program speaking
+  API 2.0, where the output path comes from `files` and `properties`
+  rather than from the listing. Any exchange with SABnzbd or Transmission
+  would extend the replays.
 - The memory figures in section 9 come from a glibc build, where
   `malloc_trim` returns freed pages. The published image is a static musl
   build: musl's allocator has no `malloc_trim` (the call is compiled out)
@@ -598,6 +780,53 @@ cache exists yet, every answer is built from SQLite on request.
 - Listing series skips the `actors` column, the largest JSON one. That is
   safe only while nothing writes a series back whole from a list; the
   series writes of phase 3 must load the cast first, or update columns.
+- The import was verified against the mocks and the recorded oracle. The
+  maintainer's trace logs of an evening of real use (a real NZBGet
+  downloading a season, Sonarr importing each episode as it finished, two
+  qBittorrent instances idle, Discord posted, the Plex update failing
+  because the server was unreachable from Sonarr at the time) confirm the
+  sequence Unarr reproduces: the sample arrives first and is rejected, the
+  download stays pending and is imported on a later refresh once the main
+  file is unpacked, the RAR files leave a warning, the history entry is
+  deleted after the import. One refresh cycle of the NZBGet exchanges is
+  the `nzbget-import` capture (`tests/fixtures/downloadclients/`), the
+  first recording with downloads in flight; the Discord bodies are not in
+  the trace log, so the payloads stay verified by the mock goldens only.
+  A second day of logs (fifteen imports: seven NZBGet episodes, a torrent
+  season pack, a torrent episode, five single-file items from the
+  qBittorrent-compatible program) added the two torrent captures above
+  and confirmed, against the behaviour Unarr already has: a season pack
+  grabbed for one episode imports that episode only, the other files are
+  rejected by `MatchesGrabSpecification` ("Episode 1x06 was not found in
+  the grabbed release") and the download waits with
+  `ManualInteractionRequired` until it is removed and blocklisted (here by
+  a queue-cleaning tool through `DELETE /queue/{id}`), which fails the
+  download and removes the torrent from the client a second time; a
+  torrent is removed right after its import when qBittorrent has stopped
+  it (`stoppedUP`) at a global inactive-seeding limit; and Sonarr's
+  `PlexServer` pings plex.tv (`/api/v2/ping`) with the token on every
+  import before scheduling the library update, which Unarr does not do
+  (see the next point). The real Plex server was off during those logs
+  (it follows the television), so Sonarr's refreshes failed. On 9 November
+  2026 Unarr itself replaced Sonarr on the maintainer's NAS for one
+  episode, from search to the real Plex, which is the homelab run of
+  `docs/phase-3a-import.md`.
+- The Disk Space page lists every mount on a fixed or network file system
+  outside `/etc`, `/boot` and the container runtimes' storage, as Sonarr
+  does on Linux, so a single file bind-mounted into the container (an
+  ffprobe mounted under `/usr/local/bin`) shows as a disk in both.
+  Filtering mounts that are files would be a departure from the original;
+  it is left as is.
+- Notifications beyond Discord, the webhook and Plex keep their settings
+  and send nothing; Plex's sign-in through plex.tv is not offered, the
+  token is entered by hand. Health notifications arm fifteen minutes after
+  the runtime's own clock started, so a long replay with a pinned clock
+  never sends them.
+- An import costs about 100 ms per file against the Python mock, most of
+  it the client's removal call; against a real client the share is the
+  client's. The tracked downloads an import leaves behind stay in memory
+  until the next refresh drops them, which is the originals' behaviour
+  too, and glibc keeps part of what the blocking threads freed.
 - `/series` on a 950-series library costs tens of milliseconds, most of it
   reading and decoding 950 rows with their JSON columns and aggregating
   25,000 episodes on every call. The design keeps every answer built from

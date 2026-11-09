@@ -249,6 +249,184 @@ sleep 5
 command-clear-blocklist-get GET /api/v3/command/{id:command-clear-blocklist}
 blocklist-after-clear GET /api/v3/blocklist?page=1&pageSize=5&sortKey=date&sortDirection=descending
 system-task-after GET /api/v3/system/task
+
+# Import: downloads the mock clients complete end up in the library. The
+# two clients the bulk edit above disabled are enabled again, and the
+# notification targets go first (tested before they exist, then created),
+# so the grabs and imports below reach the mock's Plex, Discord and webhook;
+# `mock` lines complete items, put files on disk and read back what the
+# targets received. One completion per refresh, so the originals number the
+# new files in a known order.
+downloadclient-bulk-enable PUT /api/v3/downloadclient/bulk bodies/downloadclient-bulk-enable.json
+notification-test-discord POST /api/v3/notification/test bodies/notification-create-discord.json
+notification-test-webhook POST /api/v3/notification/test bodies/notification-create-webhook.json
+notification-test-plex POST /api/v3/notification/test bodies/notification-create-plex.json
+notification-test-plex-badtoken POST /api/v3/notification/test bodies/notification-test-plex-badtoken.json
+notification-test-webhook-unreachable POST /api/v3/notification/test bodies/notification-test-webhook-unreachable.json
+mock notifications-after-test GET /mock/notifications
+mock - POST /mock/notifications/clear
+notification-create-discord POST /api/v3/notification bodies/notification-create-discord.json
+notification-create-webhook POST /api/v3/notification bodies/notification-create-webhook.json
+notification-create-plex POST /api/v3/notification bodies/notification-create-plex.json
+notification-create-invalid POST /api/v3/notification bodies/notification-create-invalid.json
+notification-after-create GET /api/v3/notification
+notification-4 GET /api/v3/notification/4
+notification-test-existing POST /api/v3/notification/test bodies/notification-create-discord.json
+notification-testall POST /api/v3/notification/testall
+notification-update PUT /api/v3/notification/5 bodies/notification-update-webhook.json
+notification-update-missing PUT /api/v3/notification/999 bodies/notification-update-missing.json
+notification-5-after-update GET /api/v3/notification/5
+mock notifications-after-testall GET /mock/notifications
+mock - POST /mock/notifications/clear
+# Four grabs, one per mock client: a 720p for The Pitt S01E01 (upgraded
+# later), S01E02 with two audio languages, Daredevil S01E01 as a torrent
+# whose name is a hash (manual import required), Daredevil S01E02 with a
+# sample next to the episode.
+release-episode-47 GET /api/v3/release?episodeId=47
+import-grab-720 POST /api/v3/release bodies/import-grab-720.json
+import-grab-s01e02 POST /api/v3/release bodies/import-grab-s01e02.json
+import-grab-daredevil POST /api/v3/release bodies/import-grab-daredevil.json
+import-grab-daredevil-s01e02 POST /api/v3/release bodies/import-grab-daredevil-s01e02.json
+sleep 12
+import-queue-grabbed GET /api/v3/queue?page=1&pageSize=20&sortKey=timeleft&sortDirection=ascending&includeUnknownSeriesItems=true&includeSeries=true&includeEpisode=true
+mock import-grab-notifications GET /mock/notifications
+mock - POST /mock/notifications/clear
+mock - POST /mock/sabnzbd/complete?title=The.Pitt.S01E01.720p.WEB.h264-ETHEL&clip=episode
+import-refresh-1 POST /api/v3/command bodies/command-refresh-downloads.json
+sleep 20
+import-refresh-1-get GET /api/v3/command/{id:import-refresh-1}
+import-queue-1 GET /api/v3/queue?page=1&pageSize=20&sortKey=timeleft&sortDirection=ascending&includeUnknownSeriesItems=true&includeSeries=true&includeEpisode=true
+import-episodefiles-1 GET /api/v3/episodefile?seriesId=1
+import-episode-1 GET /api/v3/episode/1
+mock - POST /mock/nzbget/complete?title=The.Pitt.S01E02.1080p.WEB.H264-SuccessfulCrab&clip=episode-dual
+import-refresh-2 POST /api/v3/command bodies/command-refresh-downloads.json
+sleep 20
+import-queue-2 GET /api/v3/queue?page=1&pageSize=20&sortKey=timeleft&sortDirection=ascending&includeUnknownSeriesItems=true&includeSeries=true&includeEpisode=true
+mock - POST /mock/transmission/complete?title=Daredevil.Born.Again.S01E02.1080p.DSNP.WEB-DL.DDP5.1.Atmos.H.264-FLUX&clip=episode&extras=sample:Sample/{title}.sample.mkv
+import-refresh-3 POST /api/v3/command bodies/command-refresh-downloads.json
+sleep 20
+import-queue-3 GET /api/v3/queue?page=1&pageSize=20&sortKey=timeleft&sortDirection=ascending&includeUnknownSeriesItems=true&includeSeries=true&includeEpisode=true
+mock - POST /mock/qbittorrent/complete?title=07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2&clip=episode
+import-refresh-4 POST /api/v3/command bodies/command-refresh-downloads.json
+sleep 20
+import-queue-after GET /api/v3/queue?page=1&pageSize=20&sortKey=timeleft&sortDirection=ascending&includeUnknownSeriesItems=true&includeSeries=true&includeEpisode=true
+import-queue-status GET /api/v3/queue/status
+import-queue-details GET /api/v3/queue/details?includeSeries=true&includeEpisode=true
+import-history GET /api/v3/history?page=1&pageSize=10&sortKey=date&sortDirection=descending&includeSeries=true&includeEpisode=true
+import-history-imported GET /api/v3/history?page=1&pageSize=10&sortKey=date&sortDirection=descending&eventType=3&includeEpisode=true
+import-history-series-1 GET /api/v3/history/series?seriesId=1&includeEpisode=true
+import-episodefiles-1-after GET /api/v3/episodefile?seriesId=1
+import-episodefiles-2 GET /api/v3/episodefile?seriesId=2
+import-episodefile-1073 GET /api/v3/episodefile/1073
+import-episodefile-missing GET /api/v3/episodefile/999999
+import-episodes-1 GET /api/v3/episode?seriesId=1&seasonNumber=1&includeEpisodeFile=true
+import-episode-2 GET /api/v3/episode/2
+import-series-1 GET /api/v3/series/1
+import-series-2 GET /api/v3/series/2
+import-series-list GET /api/v3/series
+mock import-notifications GET /mock/notifications
+mock - POST /mock/notifications/clear
+# Manual import of the hash-named torrent: what the UI shows for the
+# download, for its folder and for a series folder, then the reprocess and
+# the command that imports it.
+manualimport-download GET /api/v3/manualimport?downloadId=0FB2EF04FB342178115BA635EC7B5EC0067058BA&filterExistingFiles=true
+manualimport-folder GET /api/v3/manualimport?folder=/downloads/tv/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2&filterExistingFiles=true
+manualimport-folder-unfiltered GET /api/v3/manualimport?folder=/downloads/tv/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2&filterExistingFiles=false
+manualimport-series-1 GET /api/v3/manualimport?seriesId=1
+manualimport-series-1-season GET /api/v3/manualimport?seriesId=1&seasonNumber=1
+manualimport-missing-folder GET /api/v3/manualimport?folder=/downloads/nothing-here&filterExistingFiles=true
+manualimport-missing-download GET /api/v3/manualimport?downloadId=NOTTRACKED&filterExistingFiles=true
+manualimport-reprocess-noseries POST /api/v3/manualimport bodies/manualimport-reprocess-noseries.json
+manualimport-reprocess POST /api/v3/manualimport bodies/manualimport-reprocess.json
+command-manual-import POST /api/v3/command bodies/command-manual-import.json
+sleep 12
+command-manual-import-get GET /api/v3/command/{id:command-manual-import}
+manualimport-queue-after GET /api/v3/queue?page=1&pageSize=20&sortKey=timeleft&sortDirection=ascending&includeUnknownSeriesItems=true&includeSeries=true&includeEpisode=true
+manualimport-episodefiles-2 GET /api/v3/episodefile?seriesId=2
+manualimport-history GET /api/v3/history?page=1&pageSize=5&sortKey=date&sortDirection=descending&includeEpisode=true
+mock manualimport-notifications GET /mock/notifications
+mock - POST /mock/notifications/clear
+# Upgrade: the 1080p of The Pitt S01E01 replaces the 720p imported above.
+import-grab-1080 POST /api/v3/release bodies/import-grab-1080.json
+sleep 12
+mock - POST /mock/sabnzbd/complete?title=The.Pitt.S01E01.1080p.AMZN.WEB-DL.DDP5.1.H.264-FLUX&clip=episode-1080
+upgrade-refresh POST /api/v3/command bodies/command-refresh-downloads.json
+sleep 20
+upgrade-queue GET /api/v3/queue?page=1&pageSize=20&sortKey=timeleft&sortDirection=ascending&includeUnknownSeriesItems=true&includeSeries=true&includeEpisode=true
+upgrade-history GET /api/v3/history?page=1&pageSize=5&sortKey=date&sortDirection=descending&includeEpisode=true
+upgrade-episodefiles-1 GET /api/v3/episodefile?seriesId=1
+upgrade-episode-1 GET /api/v3/episode/1
+mock upgrade-notifications GET /mock/notifications
+mock - POST /mock/notifications/clear
+# Disk scan: a file dropped into the series folder is picked up, one in an
+# extras folder is not, and files gone from disk lose their rows.
+mock - POST /mock/fs/write?path=/tv/The%20Pitt/Season%2001/The.Pitt.S01E03.1080p.WEB.H264-Fixture.mkv&clip=episode
+mock - POST /mock/fs/write?path=/tv/The%20Pitt/Season%2001/Extras/The.Pitt.S01E04.Behind.The.Scenes.mkv&clip=sample
+command-rescan-1 POST /api/v3/command bodies/command-rescan-1.json
+sleep 12
+command-rescan-1-get GET /api/v3/command/{id:command-rescan-1}
+rescan-episodefiles-1 GET /api/v3/episodefile?seriesId=1
+rescan-episode-3 GET /api/v3/episode/3
+rescan-history GET /api/v3/history?page=1&pageSize=5&sortKey=date&sortDirection=descending&includeEpisode=true
+mock - POST /mock/fs/remove?path=/tv/The%20Pitt/Season%2001
+command-rescan-1-again POST /api/v3/command bodies/command-rescan-1.json
+sleep 12
+rescan-episodefiles-1-after GET /api/v3/episodefile?seriesId=1
+rescan-episodes-1-after GET /api/v3/episode?seriesId=1&seasonNumber=1
+rescan-history-after GET /api/v3/history?page=1&pageSize=5&sortKey=date&sortDirection=descending&eventType=5&includeEpisode=true
+rescan-series-1 GET /api/v3/series/1
+mock rescan-notifications GET /mock/notifications
+mock - POST /mock/notifications/clear
+# Drop folder scan, as Unpackerr or a script would ask for it.
+mock - POST /mock/fs/write?path=/downloads/drop/The.Pitt.S01E04.1080p.WEB.H264-Fixture/The.Pitt.S01E04.1080p.WEB.H264-Fixture.mkv&clip=episode
+command-downloaded-scan POST /api/v3/command bodies/command-downloaded-scan.json
+command-downloaded-scan-missing POST /api/v3/command bodies/command-downloaded-scan-missing.json
+sleep 12
+command-downloaded-scan-get GET /api/v3/command/{id:command-downloaded-scan}
+command-downloaded-scan-missing-get GET /api/v3/command/{id:command-downloaded-scan-missing}
+scan-episodefiles-1 GET /api/v3/episodefile?seriesId=1
+scan-history GET /api/v3/history?page=1&pageSize=3&sortKey=date&sortDirection=descending&eventType=3&includeEpisode=true
+mock scan-notifications GET /mock/notifications
+mock - POST /mock/notifications/clear
+# Rename: the editor changes a file's quality, so its name no longer
+# matches the naming settings; the preview shows it and the commands fix it.
+episodefile-editor PUT /api/v3/episodefile/editor bodies/episodefile-editor.json
+rename-preview-2 GET /api/v3/rename?seriesId=2
+rename-preview-2-season GET /api/v3/rename?seriesId=2&seasonNumber=1
+rename-preview-2-season-2 GET /api/v3/rename?seriesId=2&seasonNumber=2
+rename-preview-22 GET /api/v3/rename?seriesId=22
+rename-preview-missing GET /api/v3/rename?seriesId=999999
+command-rename-files POST /api/v3/command bodies/command-rename-files.json
+sleep 10
+command-rename-files-get GET /api/v3/command/{id:command-rename-files}
+rename-episodefiles-2 GET /api/v3/episodefile?seriesId=2
+rename-history GET /api/v3/history?page=1&pageSize=5&sortKey=date&sortDirection=descending&eventType=6&includeEpisode=true
+mock rename-notifications GET /mock/notifications
+mock - POST /mock/notifications/clear
+episodefile-editor-back PUT /api/v3/episodefile/editor bodies/episodefile-editor-back.json
+episodefile-put PUT /api/v3/episodefile/1076 bodies/episodefile-put.json
+episodefile-bulk-put PUT /api/v3/episodefile/bulk bodies/episodefile-bulk-put.json
+rename-preview-2-again GET /api/v3/rename?seriesId=2
+command-rename-series POST /api/v3/command bodies/command-rename-series.json
+sleep 10
+command-rename-series-get GET /api/v3/command/{id:command-rename-series}
+rename-series-episodefiles-2 GET /api/v3/episodefile?seriesId=2
+rename-series-preview-2 GET /api/v3/rename?seriesId=2
+# Deleting files: one by id, one in bulk, with the history and the
+# notifications each leaves.
+episodefile-1076 GET /api/v3/episodefile/1076
+episodefile-delete DELETE /api/v3/episodefile/1076
+episodefile-delete-missing DELETE /api/v3/episodefile/1076
+episodefile-bulk-delete DELETE /api/v3/episodefile/bulk bodies/episodefile-bulk-delete.json
+delete-episodefiles-2 GET /api/v3/episodefile?seriesId=2
+delete-episodes-2 GET /api/v3/episode?seriesId=2&seasonNumber=1
+delete-history GET /api/v3/history?page=1&pageSize=5&sortKey=date&sortDirection=descending&eventType=5&includeEpisode=true
+delete-series-2 GET /api/v3/series/2
+mock delete-notifications GET /mock/notifications
+mock - POST /mock/notifications/clear
+notification-delete DELETE /api/v3/notification/6
+notification-delete-missing DELETE /api/v3/notification/6
+notification-after-delete GET /api/v3/notification
 downloadclient-delete DELETE /api/v3/downloadclient/7
 downloadclient-delete-missing DELETE /api/v3/downloadclient/7
 downloadclient-bulk-delete DELETE /api/v3/downloadclient/bulk bodies/downloadclient-bulk-delete.json

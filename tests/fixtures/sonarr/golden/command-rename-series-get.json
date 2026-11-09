@@ -1,0 +1,38 @@
+{
+  "body": {
+    "body": {
+      "isExclusive": false,
+      "isLongRunning": false,
+      "name": "RenameSeries",
+      "requiresDiskAccess": true,
+      "sendUpdatesToClient": true,
+      "seriesIds": [
+        2
+      ],
+      "suppressMessages": false,
+      "trigger": "manual",
+      "updateScheduledTask": true
+    },
+    "commandName": "Rename Series",
+    "duration": "00:00:00.0242253",
+    "ended": "2026-11-08T21:00:18Z",
+    "id": 461704,
+    "message": "1 episode files renamed for Daredevil: Born Again",
+    "name": "RenameSeries",
+    "priority": "normal",
+    "queued": "2026-11-08T21:00:18Z",
+    "result": "successful",
+    "sendUpdatesToClient": true,
+    "started": "2026-11-08T21:00:18Z",
+    "stateChangeTime": "2026-11-08T21:00:18Z",
+    "status": "completed",
+    "trigger": "manual",
+    "updateScheduledTask": true
+  },
+  "recordedAt": "2026-11-08T21:00:28Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/command/461704"
+  },
+  "status": 200
+}

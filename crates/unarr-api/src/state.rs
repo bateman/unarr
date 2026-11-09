@@ -164,7 +164,14 @@ impl AppState {
         let fixed = self.0.fixed_now.clone();
         let clock: unarr_core::commands::executor::Clock =
             Arc::new(move || fixed.lock().unwrap().unwrap_or_else(Utc::now));
-        let runtime = Runtime::new(self.db().clone(), self.downloads().clone(), clock).await?;
+        let identity = unarr_core::notifications::Identity {
+            instance_name: self.settings().instance_name.clone(),
+            url_base: self.settings().url_base.clone(),
+            app_name: self.personality().app_name().to_string(),
+            app_version: crate::compat::emulated_version(self.personality()).to_string(),
+            ..unarr_core::notifications::Identity::default()
+        };
+        let runtime = Runtime::new(self.db().clone(), self.downloads().clone(), clock, identity).await?;
         runtime.start();
         let mut events = runtime.subscribe();
         let state = self.clone();
@@ -177,6 +184,7 @@ impl AppState {
                     ),
                     Ok(Event::QueueUpdated) => crate::routes::queue::broadcast_queue(&state),
                     Ok(Event::HealthChanged) => state.hub().broadcast("health", json!({"action": "sync"})),
+                    Ok(Event::Import(e)) => crate::relay::relay_import(&state, &e).await,
                     Err(tokio::sync::broadcast::error::RecvError::Lagged(_)) => continue,
                     Err(tokio::sync::broadcast::error::RecvError::Closed) => break,
                 }

@@ -63,6 +63,15 @@ string_enum! {
     }
 }
 
+// The macro derives the enum's traits; `Unknown` is the default the
+// originals' `ReleaseType` field takes.
+#[allow(clippy::derivable_impls)]
+impl Default for ReleaseType {
+    fn default() -> Self {
+        ReleaseType::Unknown
+    }
+}
+
 string_enum! {
     /// Download protocol.
     Protocol { Unknown = "unknown", Usenet = "usenet", Torrent = "torrent" }

@@ -11,21 +11,21 @@
       "updateScheduledTask": true
     },
     "commandName": "Refresh Monitored Downloads",
-    "duration": "00:00:00.0463162",
-    "ended": "2026-11-07T15:44:37Z",
+    "duration": "00:00:00.0469467",
+    "ended": "2026-11-08T20:56:25Z",
     "id": 461662,
     "name": "RefreshMonitoredDownloads",
     "priority": "normal",
-    "queued": "2026-11-07T15:44:37Z",
+    "queued": "2026-11-08T20:56:25Z",
     "result": "successful",
     "sendUpdatesToClient": true,
-    "started": "2026-11-07T15:44:37Z",
-    "stateChangeTime": "2026-11-07T15:44:37Z",
+    "started": "2026-11-08T20:56:25Z",
+    "stateChangeTime": "2026-11-08T20:56:25Z",
     "status": "completed",
     "trigger": "manual",
     "updateScheduledTask": true
   },
-  "recordedAt": "2026-11-07T15:44:52Z",
+  "recordedAt": "2026-11-08T20:56:40Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/command/461662"

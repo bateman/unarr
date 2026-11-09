@@ -8,6 +8,8 @@ pub mod config;
 pub mod downloadclient_writes;
 pub mod episodes;
 pub mod indexer_writes;
+pub mod mediafiles;
+pub mod notification_writes;
 pub mod providers;
 pub mod queue;
 pub mod release;
@@ -52,7 +54,22 @@ pub fn api_router(_state: &AppState) -> Router<AppState> {
         .route("/episode", get(episodes::episodes))
         .route("/episode/{id}", get(episodes::episode))
         .route("/episodefile", get(episodes::episode_files))
-        .route("/episodefile/{id}", get(episodes::episode_file))
+        .route("/episodefile/editor", put(mediafiles::editor))
+        .route(
+            "/episodefile/bulk",
+            put(mediafiles::bulk_update).delete(mediafiles::bulk_delete),
+        )
+        .route(
+            "/episodefile/{id}",
+            get(episodes::episode_file)
+                .put(mediafiles::update)
+                .delete(mediafiles::delete),
+        )
+        .route(
+            "/manualimport",
+            get(mediafiles::manual_import).post(mediafiles::reprocess),
+        )
+        .route("/rename", get(mediafiles::rename_preview))
         .route("/calendar", get(episodes::calendar))
         .route("/wanted/missing", get(episodes::missing))
         .route("/wanted/cutoff", get(episodes::cutoff))
@@ -109,9 +126,24 @@ pub fn api_router(_state: &AppState) -> Router<AppState> {
                 .put(downloadclient_writes::update)
                 .delete(downloadclient_writes::delete),
         )
-        .route("/notification", get(providers::notifications))
+        .route(
+            "/notification",
+            get(providers::notifications).post(notification_writes::create),
+        )
         .route("/notification/schema", get(providers::notification_schema))
-        .route("/notification/{id}", get(providers::notification))
+        .route("/notification/test", post(notification_writes::test))
+        .route("/notification/testall", post(notification_writes::test_all))
+        .route("/notification/action/{name}", post(notification_writes::action))
+        .route(
+            "/notification/bulk",
+            put(notification_writes::bulk_update).delete(notification_writes::bulk_delete),
+        )
+        .route(
+            "/notification/{id}",
+            get(providers::notification)
+                .put(notification_writes::update)
+                .delete(notification_writes::delete),
+        )
         .route("/importlist", get(providers::import_lists))
         .route("/importlist/schema", get(providers::import_list_schema))
         .route("/importlist/{id}", get(providers::import_list))

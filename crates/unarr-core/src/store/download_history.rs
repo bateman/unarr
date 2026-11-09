@@ -109,6 +109,19 @@ pub fn latest_for_download_id(
     }
 }
 
+/// `GetLatestGrab`: the newest grab row of a download.
+pub fn latest_grab(conn: &Connection, download_id: &str) -> anyhow::Result<Option<DownloadHistoryEntry>> {
+    let mut stmt = conn.prepare(
+        "SELECT * FROM download_history WHERE download_id = ?1 AND event_type = 'downloadGrabbed'
+         ORDER BY date DESC, id DESC LIMIT 1",
+    )?;
+    let mut rows = stmt.query([download_id])?;
+    match rows.next()? {
+        Some(row) => Ok(Some(from_row(row)?)),
+        None => Ok(None),
+    }
+}
+
 /// Every row, oldest first.
 pub fn list(conn: &Connection) -> anyhow::Result<Vec<DownloadHistoryEntry>> {
     let mut stmt = conn.prepare("SELECT * FROM download_history ORDER BY id")?;

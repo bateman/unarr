@@ -10,6 +10,9 @@ One process, one port, several services told apart by path prefix:
     /nzbget/jsonrpc       NZBGet 24         (basic auth mock:mock)
     /qbittorrent/api/v2/  qBittorrent 5.1   (Bearer api key, or the login form mock/mock)
     /transmission/rpc     Transmission 4.0  (basic auth mock:mock, X-Transmission-Session-Id)
+    /identity, /library/sections[/<id>/refresh]   a Plex Media Server (X-Plex-Token below)
+    /discord/api/webhooks/<id>/<token>            a Discord webhook (any POST is accepted)
+    /webhook              a generic webhook target (any method, any body)
 
 `make golden` starts it and registers these services in the real Sonarr
 running on the fixture copy, so the goldens for searches, grabs and the
@@ -44,7 +47,36 @@ endpoints the real clients do not have:
 
 `<client>` is sabnzbd, nzbget, qbittorrent or transmission. The ids are the
 ones the client reported when adding (SABnzbd nzo id, NZBGet drone id,
-torrent info hash).
+torrent info hash); `title=<release title>` selects by title instead, for
+the ids the application makes up (NZBGet's drone id).
+
+Completing an item also puts real files where the client says they are, so
+the application that polls the mock can import them: `--downloads DIR` is
+the directory the clients report (`/downloads` by default, which the golden
+recorder creates for real), and `complete` copies a clip from
+`tests/fixtures/media/` into `<reported folder>/<title>.mkv`. `clip=<name>`
+picks the clip (`episode` by default; `episode-dual`, `sample`), and
+`extras=<clip>:<relative name>,...` adds more files under the folder, with
+`{title}` replaced by the item's title (`extras=sample:Sample/{title}.sample.mkv`).
+
+The Plex, Discord and webhook stand-ins keep every request they receive,
+with method, path, query, the headers that matter and the parsed body:
+
+    GET  /mock/notifications                           what the notification targets received
+    POST /mock/notifications/clear                     forget them
+
+Plex answers one TV section whose location is `--tv DIR` (`/tv` by default,
+the fixture's root folder), accepts the token `mock-plex-token` and rejects
+any other with 401, as a real server does.
+
+A removal that asks for the data to go (SABnzbd `del_files=1`, NZBGet
+`GroupFinalDelete`, qBittorrent `deleteFiles=true`, Transmission
+`delete-local-data`) deletes the item's folder, as the real clients do. Two
+more control endpoints put files on disk for the disk-scan and drop-folder
+flows, under the downloads or TV directory only:
+
+    POST /mock/fs/write?path=<absolute>&clip=<name>   copy a clip there (parents created)
+    POST /mock/fs/remove?path=<absolute>              delete that file or folder
 
     scripts/mock-servarr.py --listen 127.0.0.1:18989 --fixtures tests/fixtures --log .cache/mock-requests.jsonl
 """
@@ -53,6 +85,7 @@ from __future__ import annotations
 
 import argparse
 import base64
+import shutil
 import threading
 import uuid
 import datetime
@@ -66,6 +99,20 @@ import urllib.parse
 from pathlib import Path
 
 API_KEY = "0123456789abcdef0123456789abcdef"
+PLEX_TOKEN = "mock-plex-token"
+PLEX_VERSION = "1.41.0.8992-8e6b099a8"
+
+# Where the download clients say their files are, and where Plex says the TV
+# library is; both are real directories when the goldens are recorded.
+DOWNLOADS = "/downloads"
+TV = "/tv"
+# The clips `complete` copies into the download folders.
+MEDIA = Path("tests/fixtures/media")
+
+
+def dl(rest: str = "") -> str:
+    """A path under the downloads directory the clients report."""
+    return DOWNLOADS + rest
 
 ERROR_100 = '<?xml version="1.0" encoding="UTF-8"?>\n<error code="100" description="Incorrect user credentials"/>\n'
 EMPTY_RSS = (
@@ -238,7 +285,8 @@ class ClientState:
         self.sab: list[dict] = []
         self.nzbget: list[dict] = []
         self.qbit: list[dict] = []
-        self.qbit_categories: dict[str, str] = {"tv": "", "movies": "/downloads/movies"}
+        self.qbit_categories: dict[str, str] = {"tv": "", "movies": dl("/movies")}
+        self.notifications: list[dict] = []
         self.transmission: list[dict] = []
         self.seq = 0
 
@@ -252,16 +300,91 @@ class ClientState:
     def items(self, client: str) -> list[dict]:
         return {"sabnzbd": self.sab, "nzbget": self.nzbget, "qbittorrent": self.qbit, "transmission": self.transmission}[client]
 
-    def advance(self, client: str, id_: str, state: str) -> bool:
+    def find(self, client: str, q: dict[str, str]) -> dict | None:
+        """The item `id=` or `title=` of a control request names."""
         for item in self.items(client):
-            if item["id"].lower() == id_.lower():
+            if q.get("id") and item["id"].lower() == q["id"].lower():
+                return item
+            if q.get("title") and item["title"].lower() == q["title"].lower():
+                return item
+        return None
+
+    def advance(self, client: str, id_: str, state: str, q: dict[str, str] | None = None) -> bool:
+        q = dict(q or {})
+        q.setdefault("id", id_)
+        for item in self.items(client):
+            if item is self.find(client, q):
                 item["state"] = state
                 item["done"] = item["size"] if state == "completed" else item["done"]
+                if state == "completed":
+                    materialise(complete_dir(client, item), item["title"], q or {})
                 return True
         return False
 
 
 STATE = ClientState()
+
+
+def complete_dir(client: str, item: dict) -> str:
+    """The folder a client reports for a finished item (no trailing slash)."""
+    if client == "sabnzbd":
+        return dl(f"/complete/{item['category']}/{item['title']}")
+    if client == "nzbget":
+        return dl(f"/completed/{item['category']}/{item['title']}")
+    if client == "qbittorrent":
+        return qbit_save_path(item) + item["title"]
+    return f"{item['dir'].rstrip('/')}/{item['title']}"
+
+
+def inside_mock_dirs(path: str) -> bool:
+    """Only the mock's own directories are written to or deleted from."""
+    if not path.startswith("/") or "/../" in path + "/":
+        return False
+    return any(path == d or path.startswith(d + "/") for d in (DOWNLOADS, TV))
+
+
+def remove_path(path: str) -> bool:
+    """Delete a file or a folder tree the mock put on disk."""
+    target = Path(path)
+    if target.is_dir():
+        shutil.rmtree(target)
+        log(f"removed folder {path}")
+        return True
+    if target.is_file():
+        target.unlink()
+        log(f"removed {path}")
+        return True
+    return False
+
+
+def delete_data(client: str, item: dict) -> None:
+    """What a real client does when asked to delete an item's data."""
+    folder = complete_dir(client, item)
+    if inside_mock_dirs(folder):
+        remove_path(folder)
+
+
+def qbit_save_path(t: dict) -> str:
+    return dl(f"/{t['category']}/") if t["category"] else dl("/")
+
+
+def materialise(folder: str, title: str, q: dict[str, str]) -> None:
+    """Copy the fixture clips into `folder` as the download's files."""
+    target = Path(folder)
+    target.mkdir(parents=True, exist_ok=True)
+    files = [(q.get("clip") or "episode", f"{title}.mkv")]
+    for extra in filter(None, (q.get("extras") or "").split(",")):
+        clip, _, name = extra.partition(":")
+        files.append((clip, (name or f"{title}.{clip}.mkv").replace("{title}", title)))
+    for clip, name in files:
+        source = MEDIA / f"{clip}.mkv"
+        if not source.is_file():
+            log(f"no clip {source}; the folder {folder} stays empty")
+            continue
+        dest = target / name
+        dest.parent.mkdir(parents=True, exist_ok=True)
+        dest.write_bytes(source.read_bytes())
+        log(f"wrote {dest} ({dest.stat().st_size} bytes)")
 
 
 def basic_auth_ok(headers) -> bool:
@@ -321,6 +444,8 @@ class Handler(http.server.BaseHTTPRequestHandler):
         length = int(self.headers.get("Content-Length") or 0)
         self.dispatch(self.rfile.read(length))
 
+    do_PUT = do_POST
+
     def dispatch(self, body: bytes) -> None:
         parsed = urllib.parse.urlparse(self.path)
         q = dict(urllib.parse.parse_qsl(parsed.query, keep_blank_values=True))
@@ -342,6 +467,12 @@ class Handler(http.server.BaseHTTPRequestHandler):
                 return self.transmission(body)
             if path.startswith("/mock/"):
                 return self.control(path[len("/mock/"):], q)
+            if path == "/identity" or path.startswith("/library/"):
+                return self.plex(path, q, body)
+            if path.startswith("/discord/"):
+                return self.discord(q, body)
+            if path == "/webhook" or path.startswith("/webhook/"):
+                return self.webhook(q, body)
         self.reply(404, b"not found\n", "text/plain", "404")
 
     def json(self, obj, served: str, status: int = 200, headers: dict | None = None) -> None:
@@ -381,11 +512,71 @@ class Handler(http.server.BaseHTTPRequestHandler):
         if rest == "reset":
             STATE.reset()
             return self.json({"ok": True}, "mock/reset")
+        if rest == "notifications":
+            return self.json(list(STATE.notifications), "mock/notifications")
+        if rest == "notifications/clear":
+            STATE.notifications.clear()
+            return self.json({"ok": True}, "mock/notifications/clear")
         client, _, action = rest.partition("/")
         if client in ("sabnzbd", "nzbget", "qbittorrent", "transmission") and action in ("complete", "fail"):
-            found = STATE.advance(client, q.get("id", ""), "completed" if action == "complete" else "failed")
+            found = STATE.advance(client, q.get("id", ""), "completed" if action == "complete" else "failed", q)
             return self.json({"ok": found}, f"mock/{client}/{action}", 200 if found else 404)
+        if rest in ("fs/write", "fs/remove"):
+            path = q.get("path", "")
+            if not inside_mock_dirs(path):
+                return self.json({"ok": False, "error": f"{path} is not under {DOWNLOADS} or {TV}"}, f"mock/{rest}", 400)
+            if rest == "fs/write":
+                source = MEDIA / f"{q.get('clip') or 'episode'}.mkv"
+                if not source.is_file():
+                    return self.json({"ok": False, "error": f"no clip {source}"}, "mock/fs/write", 404)
+                Path(path).parent.mkdir(parents=True, exist_ok=True)
+                Path(path).write_bytes(source.read_bytes())
+                log(f"wrote {path}")
+                return self.json({"ok": True, "size": Path(path).stat().st_size}, "mock/fs/write")
+            removed = remove_path(path)
+            return self.json({"ok": removed}, "mock/fs/remove", 200 if removed else 404)
         self.reply(404, b"not found\n", "text/plain", "404")
+
+    # --- Notification targets: Plex Media Server, Discord, a generic webhook
+
+    def notified(self, service: str, q: dict[str, str], body: bytes) -> dict:
+        """Keep what a notification target received, for the goldens."""
+        parsed = urllib.parse.urlparse(self.path)
+        keep = ("content-type", "authorization")
+        headers = {k.lower(): v for k, v in self.headers.items() if k.lower() in keep or k.lower().startswith("x-")}
+        try:
+            decoded = json.loads(body) if body else None
+        except ValueError:
+            decoded = body.decode(errors="replace")
+        entry = {"service": service, "method": self.command, "path": parsed.path, "query": q, "headers": headers, "body": decoded}
+        STATE.notifications.append(entry)
+        return entry
+
+    def plex(self, path: str, q: dict[str, str], body: bytes) -> None:
+        self.notified("plex", q, body)
+        if q.get("X-Plex-Token") != PLEX_TOKEN:
+            return self.json({"errors": [{"code": 1001, "message": "Unauthorized", "status": 401}]}, "plex/401", 401)
+        if path == "/identity":
+            return self.json({"MediaContainer": {"size": 0, "claimed": True, "machineIdentifier": "6d0f2a9c1b3e4d5f8a7b6c5d4e3f2a1b0c9d8e7f", "version": PLEX_VERSION}}, "plex/identity")
+        if path == "/library/sections":
+            return self.json({"MediaContainer": {"size": 2, "allowSync": False, "title1": "Plex Library", "Directory": [
+                {"allowSync": True, "art": "/:/resources/show-fanart.jpg", "composite": "/library/sections/2/composite/1736478720", "filters": True, "refreshing": False, "thumb": "/:/resources/show.png", "key": "2", "type": "show", "title": "TV Shows", "agent": "tv.plex.agents.series", "scanner": "Plex TV Series", "language": "en-US", "uuid": "0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0", "updatedAt": 1736478720, "createdAt": 1736478720, "scannedAt": 1736478720, "content": True, "directory": True, "contentChangedAt": 1, "hidden": 0, "Location": [{"id": 2, "path": TV}]},
+                {"allowSync": True, "art": "/:/resources/movie-fanart.jpg", "composite": "/library/sections/1/composite/1736478720", "filters": True, "refreshing": False, "thumb": "/:/resources/movie.png", "key": "1", "type": "movie", "title": "Movies", "agent": "tv.plex.agents.movie", "scanner": "Plex Movie", "language": "en-US", "uuid": "1a2b3c4d-5e6f-7081-92a3-b4c5d6e7f809", "updatedAt": 1736478720, "createdAt": 1736478720, "scannedAt": 1736478720, "content": True, "directory": True, "contentChangedAt": 1, "hidden": 0, "Location": [{"id": 1, "path": "/movies"}]},
+            ]}}, "plex/sections")
+        m = re.fullmatch(r"/library/sections/(\d+)/refresh", path)
+        if m:
+            return self.reply(200, b"", "text/html", f"plex/refresh-{m.group(1)}")
+        self.json({"errors": [{"code": 1002, "message": "Not Found", "status": 404}]}, "plex/404", 404)
+
+    def discord(self, q: dict[str, str], body: bytes) -> None:
+        self.notified("discord", q, body)
+        if self.command != "POST":
+            return self.json({"message": "405: Method Not Allowed", "code": 0}, "discord/405", 405)
+        self.reply(204, b"", "text/plain", "discord/webhook")
+
+    def webhook(self, q: dict[str, str], body: bytes) -> None:
+        self.notified("webhook", q, body)
+        self.json({"ok": True}, "webhook")
 
     # --- SABnzbd
 
@@ -403,7 +594,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
                 {
                     "config": {
                         "misc": {
-                            "complete_dir": "/downloads/complete",
+                            "complete_dir": dl("/complete"),
                             "tv_categories": ["sorted"],
                             "enable_tv_sorting": True,
                             "movie_categories": [],
@@ -428,7 +619,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
                 "sabnzbd/get_config",
             )
         if mode == "fullstatus":
-            return self.json({"status": {"completedir": "/downloads/complete"}}, "sabnzbd/fullstatus")
+            return self.json({"status": {"completedir": dl("/complete")}}, "sabnzbd/fullstatus")
         if mode == "addfile":
             parts = parse_multipart(body, self.headers.get("Content-Type", ""))
             filename, data = parts.get("name", (None, b""))
@@ -468,10 +659,14 @@ class Handler(http.server.BaseHTTPRequestHandler):
                         "nzo_id": i["id"],
                     }
                 )
-            return self.json({"queue": {"my_home": "/downloads", "paused": False, "slots": slots}}, "sabnzbd/queue")
+            return self.json({"queue": {"my_home": dl(), "paused": False, "slots": slots}}, "sabnzbd/queue")
         if mode == "history":
             if q.get("name") == "delete":
                 ids = q.get("value", "").split(",")
+                if q.get("del_files") == "1":
+                    for i in STATE.sab:
+                        if i["id"] in ids and i["state"] != "downloading":
+                            delete_data("sabnzbd", i)
                 STATE.sab = [i for i in STATE.sab if not (i["id"] in ids and i["state"] != "downloading")]
                 return self.json({"status": True, "nzo_ids": ids}, "sabnzbd/history-delete")
             slots = []
@@ -486,7 +681,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
                         "category": i["category"],
                         "nzb_name": i["title"] + ".nzb",
                         "download_time": 60,
-                        "storage": "" if failed else f"/downloads/complete/{i['category']}/{i['title']}",
+                        "storage": "" if failed else complete_dir("sabnzbd", i),
                         "status": "Failed" if failed else "Completed",
                         "nzo_id": i["id"],
                         "name": i["title"],
@@ -518,10 +713,10 @@ class Handler(http.server.BaseHTTPRequestHandler):
             return ok("24.3", "version")
         if method == "config":
             cfg = [
-                ("MainDir", "/downloads"), ("DestDir", "${MainDir}/completed"), ("InterDir", "${MainDir}/intermediate"),
+                ("MainDir", dl()), ("DestDir", "${MainDir}/completed"), ("InterDir", "${MainDir}/intermediate"),
                 ("AppendCategoryDir", "yes"), ("KeepHistory", "7"),
                 ("Category1.Name", "tv"), ("Category1.DestDir", ""), ("Category1.Unpack", "yes"), ("Category1.DefScript", ""), ("Category1.Aliases", ""),
-                ("Category2.Name", "movies"), ("Category2.DestDir", "/downloads/movies"), ("Category2.Unpack", "yes"), ("Category2.DefScript", ""), ("Category2.Aliases", ""),
+                ("Category2.Name", "movies"), ("Category2.DestDir", dl("/movies")), ("Category2.Unpack", "yes"), ("Category2.DefScript", ""), ("Category2.Aliases", ""),
             ]
             return ok([{"Name": k, "Value": v} for k, v in cfg], "config")
         if method == "status":
@@ -544,7 +739,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
                     continue
                 size_lo, size_hi = lohi(i["size"])
                 failed = i["state"] == "failed"
-                hist.append({"ID": i["nzb_id"], "Name": i["title"], "Category": i["category"], "FileSizeLo": size_lo, "FileSizeHi": size_hi, "ParStatus": "FAILURE" if failed else "SUCCESS", "UnpackStatus": "NONE" if failed else "SUCCESS", "MoveStatus": "NONE" if failed else "SUCCESS", "ScriptStatus": "NONE", "DeleteStatus": "NONE", "MarkStatus": "NONE", "DestDir": f"/downloads/completed/{i['category']}/{i['title']}", "FinalDir": "", "Parameters": [{"Name": "drone", "Value": i["id"]}]})
+                hist.append({"ID": i["nzb_id"], "Name": i["title"], "Category": i["category"], "FileSizeLo": size_lo, "FileSizeHi": size_hi, "ParStatus": "FAILURE" if failed else "SUCCESS", "UnpackStatus": "NONE" if failed else "SUCCESS", "MoveStatus": "NONE" if failed else "SUCCESS", "ScriptStatus": "NONE", "DeleteStatus": "NONE", "MarkStatus": "NONE", "DestDir": complete_dir("nzbget", i), "FinalDir": "", "Parameters": [{"Name": "drone", "Value": i["id"]}]})
             return ok(hist, "history")
         if method == "append":
             # append(NZBFilename, Content, Category, Priority, AddToTop, AddPaused, DupeKey, DupeScore, DupeMode, PPParameters)
@@ -565,7 +760,11 @@ class Handler(http.server.BaseHTTPRequestHandler):
             ids = ids if isinstance(ids, list) else [ids]
             if command in ("GroupFinalDelete", "GroupDelete"):
                 STATE.nzbget = [i for i in STATE.nzbget if not (i["nzb_id"] in ids and i["state"] == "downloading")]
-            elif command == "HistoryDelete":
+            elif command in ("HistoryDelete", "HistoryFinalDelete"):
+                if command == "HistoryFinalDelete":
+                    for i in STATE.nzbget:
+                        if i["nzb_id"] in ids and i["state"] != "downloading":
+                            delete_data("nzbget", i)
                 STATE.nzbget = [i for i in STATE.nzbget if not (i["nzb_id"] in ids and i["state"] != "downloading")]
             elif command == "HistoryRedownload":
                 for i in STATE.nzbget:
@@ -592,7 +791,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
         if rest == "app/version":
             return self.text(200, "v5.1.2", "qbittorrent/version")
         if rest == "app/preferences":
-            return self.json({"save_path": "/downloads/", "max_ratio_enabled": False, "max_ratio": -1, "max_seeding_time_enabled": False, "max_seeding_time": -1, "max_inactive_seeding_time_enabled": False, "max_inactive_seeding_time": -1, "max_ratio_act": 0, "queueing_enabled": True, "dht": True}, "qbittorrent/preferences")
+            return self.json({"save_path": dl("/"), "max_ratio_enabled": False, "max_ratio": -1, "max_seeding_time_enabled": False, "max_seeding_time": -1, "max_inactive_seeding_time_enabled": False, "max_inactive_seeding_time": -1, "max_ratio_act": 0, "queueing_enabled": True, "dht": True}, "qbittorrent/preferences")
         if rest == "torrents/categories":
             return self.json({name: {"name": name, "savePath": path} for name, path in STATE.qbit_categories.items()}, "qbittorrent/categories")
         if rest == "torrents/createCategory":
@@ -603,7 +802,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
             for t in STATE.qbit:
                 if q.get("category") and t["category"] != q["category"]:
                     continue
-                save_path = f"/downloads/{t['category']}/" if t["category"] else "/downloads/"
+                save_path = qbit_save_path(t)
                 state = {"downloading": "downloading", "completed": "stoppedUP", "failed": "error"}[t["state"]]
                 progress = t["done"] / t["size"]
                 out.append({"hash": t["id"].lower(), "name": t["title"], "size": t["size"], "progress": progress, "eta": 8640000 if progress >= 1 else 600, "state": state, "category": t["category"], "save_path": save_path, "content_path": save_path + t["title"], "ratio": 0.0 if progress < 1 else 1.0, "ratio_limit": -2, "seeding_time_limit": -2, "inactive_seeding_time_limit": -2, "last_activity": 1736478720, "added_on": 1736478720})
@@ -611,7 +810,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
         if rest == "torrents/properties":
             for t in STATE.qbit:
                 if t["id"].lower() == q.get("hash", "").lower():
-                    return self.json({"hash": t["id"].lower(), "save_path": f"/downloads/{t['category']}/" if t["category"] else "/downloads/", "seeding_time": 0}, "qbittorrent/properties")
+                    return self.json({"hash": t["id"].lower(), "save_path": qbit_save_path(t), "seeding_time": 0}, "qbittorrent/properties")
             return self.text(404, "Not Found", "qbittorrent/properties-404")
         if rest == "torrents/files":
             for t in STATE.qbit:
@@ -634,6 +833,10 @@ class Handler(http.server.BaseHTTPRequestHandler):
             return self.text(200, "Ok.", "qbittorrent/add")
         if rest == "torrents/delete":
             hashes = f.get("hashes", "").lower().split("|")
+            if f.get("deleteFiles") == "true":
+                for t in STATE.qbit:
+                    if t["id"].lower() in hashes:
+                        delete_data("qbittorrent", t)
             STATE.qbit = [t for t in STATE.qbit if t["id"].lower() not in hashes]
             return self.text(200, "", "qbittorrent/delete")
         if rest == "torrents/setCategory":
@@ -673,7 +876,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
             return [t for t in STATE.transmission if t["id"].lower() in ids or str(t["tid"]) in ids]
 
         if method == "session-get":
-            return ok({"rpc-version": 17, "version": "4.0.6 (38c164933e)", "download-dir": "/downloads", "seedRatioLimit": 2.0, "seedRatioLimited": False, "idle-seeding-limit": 30, "idle-seeding-limit-enabled": False}, "session-get")
+            return ok({"rpc-version": 17, "version": "4.0.6 (38c164933e)", "download-dir": dl(), "seedRatioLimit": 2.0, "seedRatioLimited": False, "idle-seeding-limit": 30, "idle-seeding-limit-enabled": False}, "session-get")
         if method == "torrent-get":
             return ok({"torrents": [torrent_json(t) for t in selected()]}, "torrent-get")
         if method == "torrent-add":
@@ -690,7 +893,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
                 if t["id"] == hash_:
                     return ok({"torrent-duplicate": {"id": t["tid"], "hashString": hash_.lower(), "name": t["title"]}}, "torrent-add-duplicate")
             tid = STATE.next_seq()
-            t = {"id": hash_, "tid": tid, "title": name[:-4] if name.endswith(".mkv") else name, "category": "", "dir": args.get("download-dir") or "/downloads", "labels": args.get("labels") or [], "size": size or ITEM_SIZE, "done": 0, "state": "downloading", "paused": bool(args.get("paused"))}
+            t = {"id": hash_, "tid": tid, "title": name[:-4] if name.endswith(".mkv") else name, "category": "", "dir": args.get("download-dir") or dl(), "labels": args.get("labels") or [], "size": size or ITEM_SIZE, "done": 0, "state": "downloading", "paused": bool(args.get("paused"))}
             STATE.transmission.append(t)
             return ok({"torrent-added": {"id": tid, "hashString": hash_.lower(), "name": t["title"]}}, "torrent-add")
         if method == "torrent-set":
@@ -702,6 +905,9 @@ class Handler(http.server.BaseHTTPRequestHandler):
                         t[k] = args[k]
             return ok({}, "torrent-set")
         if method == "torrent-remove":
+            if args.get("delete-local-data"):
+                for t in selected():
+                    delete_data("transmission", t)
             gone = {t["id"] for t in selected()}
             STATE.transmission = [t for t in STATE.transmission if t["id"] not in gone]
             return ok({}, "torrent-remove")
@@ -746,11 +952,18 @@ class Server(socketserver.ThreadingMixIn, http.server.HTTPServer):
 
 
 def main() -> None:
+    global DOWNLOADS, TV, MEDIA
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("--listen", default="127.0.0.1:18989")
     ap.add_argument("--fixtures", default="tests/fixtures", type=Path)
     ap.add_argument("--log", type=Path, help="append one JSON line per request here")
+    ap.add_argument("--downloads", default=DOWNLOADS, help="the directory the download clients report and fill (default /downloads)")
+    ap.add_argument("--tv", default=TV, help="the TV library location Plex reports (default /tv)")
     args = ap.parse_args()
+    DOWNLOADS = args.downloads.rstrip("/") or "/"
+    TV = args.tv.rstrip("/") or "/"
+    MEDIA = args.fixtures / "media"
+    STATE.reset()
     host, _, port = args.listen.rpartition(":")
     Handler.fixtures = args.fixtures
     Handler.logfile = args.log

@@ -1,0 +1,87 @@
+{
+  "body": {
+    "page": 1,
+    "pageSize": 5,
+    "records": [
+      {
+        "customFormatScore": -10000,
+        "customFormats": [
+          {
+            "id": 21,
+            "name": "DSNP"
+          },
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 11,
+            "name": "WEB Tier 01"
+          }
+        ],
+        "data": {
+          "indexerFlags": "0",
+          "path": "/tv/Daredevil - Born Again/Season 01/Daredevil Born Again (2025) - S01E02 - Optics [DSNP][WEBDL-720p][AAC 1.0][x264]-FLUX.mkv",
+          "relativePath": "Season 01/Daredevil Born Again (2025) - S01E02 - Optics [DSNP][WEBDL-720p][AAC 1.0][x264]-FLUX.mkv",
+          "releaseGroup": "FLUX",
+          "releaseType": "SingleEpisode",
+          "size": "119980",
+          "sourcePath": "/tv/Daredevil - Born Again/Season 01/Daredevil Born Again (2025) - S01E02 - Optics [DSNP][WEBDL-480p][AAC 1.0][x264]-FLUX.mkv",
+          "sourceRelativePath": "Season 01/Daredevil Born Again (2025) - S01E02 - Optics [DSNP][WEBDL-480p][AAC 1.0][x264]-FLUX.mkv"
+        },
+        "date": "2026-11-08T21:00:08Z",
+        "episode": {
+          "airDate": "2025-03-04",
+          "airDateUtc": "2025-03-05T02:48:00Z",
+          "episodeFileId": 1075,
+          "episodeNumber": 2,
+          "hasFile": true,
+          "id": 47,
+          "lastSearchTime": "2026-11-08T20:57:09Z",
+          "monitored": false,
+          "overview": "Matt Murdock takes on a new client, Hector Ayala. But this local hero from the Heights is more than he claims to be. Fisk learns the power of optics in his new and very public role.",
+          "runtime": 47,
+          "seasonNumber": 1,
+          "seriesId": 2,
+          "title": "Optics",
+          "tvdbId": 10751467,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 47,
+        "eventType": "episodeFileRenamed",
+        "id": 2316,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 5,
+            "name": "WEBDL-720p",
+            "resolution": 720,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "seriesId": 2,
+        "sourceTitle": "/tv/Daredevil - Born Again/Season 01/Daredevil Born Again (2025) - S01E02 - Optics [DSNP][WEBDL-480p][AAC 1.0][x264]-FLUX.mkv"
+      }
+    ],
+    "sortDirection": "descending",
+    "sortKey": "date",
+    "totalRecords": 1
+  },
+  "recordedAt": "2026-11-08T21:00:18Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/history?page=1&pageSize=5&sortKey=date&sortDirection=descending&eventType=6&includeEpisode=true"
+  },
+  "status": 200
+}

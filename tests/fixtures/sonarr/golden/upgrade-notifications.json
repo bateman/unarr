@@ -1,0 +1,722 @@
+{
+  "body": [
+    {
+      "body": {
+        "embeds": [
+          {
+            "author": {
+              "icon_url": "https://raw.githubusercontent.com/Sonarr/Sonarr/develop/Logo/256.png",
+              "name": "vm"
+            },
+            "color": 16761392,
+            "description": "Episode Grabbed",
+            "fields": [
+              {
+                "inline": false,
+                "name": "Overview",
+                "value": "While attempting to distract himself from the anniversary of his mentor’s death, Dr. Robby introduces a fresh batch of interns to life in the ER."
+              },
+              {
+                "inline": false,
+                "name": "Rating",
+                "value": "8.9"
+              },
+              {
+                "inline": false,
+                "name": "Genres",
+                "value": "Drama"
+              },
+              {
+                "inline": true,
+                "name": "Quality",
+                "value": "WEBDL-1080p"
+              },
+              {
+                "inline": false,
+                "name": "Group",
+                "value": "FLUX"
+              },
+              {
+                "inline": true,
+                "name": "Size",
+                "value": "2.5 GB"
+              },
+              {
+                "inline": false,
+                "name": "Links",
+                "value": "[The TVDB](https://thetvdb.com/?tab=series&id=448176) / [Trakt](https://trakt.tv/search/tvdb/448176?id_type=show) / [IMDB](https://imdb.com/title/tt31938062/)"
+              },
+              {
+                "inline": false,
+                "name": "Release",
+                "value": "```The.Pitt.S01E01.1080p.AMZN.WEB-DL.DDP5.1.H.264-FLUX```"
+              },
+              {
+                "inline": false,
+                "name": "Indexer",
+                "value": "Mock Newznab (Prowlarr)"
+              },
+              {
+                "inline": false,
+                "name": "Custom Formats",
+                "value": "AMZN|Language not Italian|WEB Tier 01"
+              },
+              {
+                "inline": false,
+                "name": "Custom Format Score",
+                "value": "-10000"
+              }
+            ],
+            "image": {
+              "url": "https://artworks.thetvdb.com/banners/v4/series/448176/backgrounds/675c4f787cfc4.jpg"
+            },
+            "thumbnail": {
+              "url": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg"
+            },
+            "timestamp": "2026-11-08T20:59:00.6294578Z",
+            "title": "The Pitt - 1x01 - 7:00 A.M.",
+            "url": "http://thetvdb.com/?tab=series&id=448176"
+          }
+        ],
+        "username": "Unarr fixture"
+      },
+      "headers": {
+        "content-type": "application/json"
+      },
+      "method": "POST",
+      "path": "/discord/api/webhooks/100/fixturetoken",
+      "query": {},
+      "service": "discord"
+    },
+    {
+      "body": {
+        "embeds": [
+          {
+            "author": {
+              "icon_url": "https://raw.githubusercontent.com/Sonarr/Sonarr/develop/Logo/256.png",
+              "name": "vm"
+            },
+            "color": 15749200,
+            "description": "Episode Deleted",
+            "fields": [
+              {
+                "inline": false,
+                "name": "Reason",
+                "value": "Upgrade"
+              },
+              {
+                "inline": false,
+                "name": "File name",
+                "value": "```/tv/The Pitt/Season 01/The Pitt (2025) - S01E01 - 7-00 A.M [WEBDL-480p][AAC 1.0][x264]-ETHEL.mkv```"
+              }
+            ],
+            "timestamp": "2026-11-08T20:59:12.7247092Z",
+            "title": "The Pitt - 1x01 - 7:00 A.M.",
+            "url": "http://thetvdb.com/?tab=series&id=448176"
+          }
+        ],
+        "username": "Unarr fixture"
+      },
+      "headers": {
+        "content-type": "application/json"
+      },
+      "method": "POST",
+      "path": "/discord/api/webhooks/100/fixturetoken",
+      "query": {},
+      "service": "discord"
+    },
+    {
+      "body": {
+        "applicationUrl": "",
+        "deleteReason": "upgrade",
+        "episodeFile": {
+          "dateAdded": "2026-11-08T20:57:28.0506875Z",
+          "id": 1073,
+          "languages": [
+            {
+              "id": 1,
+              "name": "English"
+            }
+          ],
+          "mediaInfo": {
+            "audioChannels": 1.0,
+            "audioCodec": "AAC",
+            "audioLanguages": [
+              "eng"
+            ],
+            "height": 64,
+            "subtitles": [
+              "eng"
+            ],
+            "videoCodec": "x264",
+            "videoDynamicRange": "",
+            "videoDynamicRangeType": "",
+            "width": 64
+          },
+          "path": "/tv/The Pitt/Season 01/The Pitt (2025) - S01E01 - 7-00 A.M [WEBDL-480p][AAC 1.0][x264]-ETHEL.mkv",
+          "quality": "WEBDL-480p",
+          "qualityVersion": 1,
+          "relativePath": "Season 01/The Pitt (2025) - S01E01 - 7-00 A.M [WEBDL-480p][AAC 1.0][x264]-ETHEL.mkv",
+          "releaseGroup": "ETHEL",
+          "sceneName": "The.Pitt.S01E01.720p.WEB.h264-ETHEL",
+          "size": 119980
+        },
+        "episodes": [
+          {
+            "airDate": "2025-01-09",
+            "airDateUtc": "2025-01-10T02:00:00Z",
+            "episodeNumber": 1,
+            "id": 1,
+            "overview": "While attempting to distract himself from the anniversary of his mentor’s death, Dr. Robby introduces a fresh batch of interns to life in the ER.",
+            "seasonNumber": 1,
+            "seriesId": 1,
+            "title": "7:00 A.M.",
+            "tvdbId": 10407559
+          }
+        ],
+        "eventType": "EpisodeFileDelete",
+        "instanceName": "Sonarr",
+        "series": {
+          "genres": [
+            "Drama"
+          ],
+          "id": 1,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/banners/6972a4aba4c5d.jpg",
+              "url": "/MediaCover/1/banner.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg",
+              "url": "/MediaCover/1/poster.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/backgrounds/675c4f787cfc4.jpg",
+              "url": "/MediaCover/1/fanart.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/clearlogo/675d049994d06.png",
+              "url": "/MediaCover/1/clearlogo.png"
+            }
+          ],
+          "imdbId": "tt31938062",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "path": "/tv/The Pitt",
+          "tags": [
+            "ita"
+          ],
+          "title": "The Pitt",
+          "titleSlug": "the-pitt",
+          "tmdbId": 250307,
+          "tvMazeId": 75632,
+          "tvdbId": 448176,
+          "type": "standard",
+          "year": 2025
+        }
+      },
+      "headers": {
+        "authorization": "Basic aG9vazpzZWNyZXQ=",
+        "content-type": "application/json",
+        "x-fixture": "yes"
+      },
+      "method": "PUT",
+      "path": "/webhook/updated",
+      "query": {},
+      "service": "webhook"
+    },
+    {
+      "body": {
+        "embeds": [
+          {
+            "author": {
+              "icon_url": "https://raw.githubusercontent.com/Sonarr/Sonarr/develop/Logo/256.png",
+              "name": "vm"
+            },
+            "color": 4089856,
+            "description": "Episode Upgraded",
+            "fields": [
+              {
+                "inline": false,
+                "name": "Overview",
+                "value": "While attempting to distract himself from the anniversary of his mentor’s death, Dr. Robby introduces a fresh batch of interns to life in the ER."
+              },
+              {
+                "inline": false,
+                "name": "Rating",
+                "value": "8.9"
+              },
+              {
+                "inline": false,
+                "name": "Genres",
+                "value": "Drama"
+              },
+              {
+                "inline": true,
+                "name": "Quality",
+                "value": "WEBDL-1080p"
+              },
+              {
+                "inline": true,
+                "name": "Codecs",
+                "value": "h264 / AAC 1"
+              },
+              {
+                "inline": false,
+                "name": "Group",
+                "value": "FLUX"
+              },
+              {
+                "inline": true,
+                "name": "Size",
+                "value": "1.1 MB"
+              },
+              {
+                "inline": false,
+                "name": "Languages",
+                "value": "eng"
+              },
+              {
+                "inline": false,
+                "name": "Subtitles",
+                "value": "eng"
+              },
+              {
+                "inline": false,
+                "name": "Links",
+                "value": "[The TVDB](https://thetvdb.com/?tab=series&id=448176) / [Trakt](https://trakt.tv/search/tvdb/448176?id_type=show) / [IMDB](https://imdb.com/title/tt31938062/)"
+              },
+              {
+                "inline": false,
+                "name": "Release",
+                "value": "```The.Pitt.S01E01.1080p.AMZN.WEB-DL.DDP5.1.H.264-FLUX```"
+              }
+            ],
+            "image": {
+              "url": "https://artworks.thetvdb.com/banners/v4/series/448176/backgrounds/675c4f787cfc4.jpg"
+            },
+            "thumbnail": {
+              "url": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg"
+            },
+            "timestamp": "2026-11-08T20:59:12.7516616Z",
+            "title": "The Pitt - 1x01 - 7:00 A.M.",
+            "url": "http://thetvdb.com/?tab=series&id=448176"
+          }
+        ],
+        "username": "Unarr fixture"
+      },
+      "headers": {
+        "content-type": "application/json"
+      },
+      "method": "POST",
+      "path": "/discord/api/webhooks/100/fixturetoken",
+      "query": {},
+      "service": "discord"
+    },
+    {
+      "body": {
+        "applicationUrl": "",
+        "customFormatInfo": {
+          "customFormatScore": -10000,
+          "customFormats": [
+            {
+              "id": 16,
+              "name": "AMZN"
+            },
+            {
+              "id": 36,
+              "name": "Language not Italian"
+            },
+            {
+              "id": 11,
+              "name": "WEB Tier 01"
+            }
+          ]
+        },
+        "deletedFiles": [
+          {
+            "dateAdded": "2026-11-08T20:57:28.0506875Z",
+            "id": 1073,
+            "languages": [
+              {
+                "id": 1,
+                "name": "English"
+              }
+            ],
+            "mediaInfo": {
+              "audioChannels": 1.0,
+              "audioCodec": "AAC",
+              "audioLanguages": [
+                "eng"
+              ],
+              "height": 64,
+              "subtitles": [
+                "eng"
+              ],
+              "videoCodec": "x264",
+              "videoDynamicRange": "",
+              "videoDynamicRangeType": "",
+              "width": 64
+            },
+            "path": "/tv/The Pitt/Season 01/The Pitt (2025) - S01E01 - 7-00 A.M [WEBDL-480p][AAC 1.0][x264]-ETHEL.mkv",
+            "quality": "WEBDL-480p",
+            "qualityVersion": 1,
+            "relativePath": "Season 01/The Pitt (2025) - S01E01 - 7-00 A.M [WEBDL-480p][AAC 1.0][x264]-ETHEL.mkv",
+            "releaseGroup": "ETHEL",
+            "sceneName": "The.Pitt.S01E01.720p.WEB.h264-ETHEL",
+            "size": 119980
+          }
+        ],
+        "downloadClient": "Mock SABnzbd",
+        "downloadClientType": "SABnzbd",
+        "downloadId": "SABnzbd_nzo_mock6",
+        "episodeFile": {
+          "dateAdded": "2026-11-08T20:59:12.7097754Z",
+          "id": 1077,
+          "languages": [
+            {
+              "id": 1,
+              "name": "English"
+            }
+          ],
+          "mediaInfo": {
+            "audioChannels": 1.0,
+            "audioCodec": "AAC",
+            "audioLanguages": [
+              "eng"
+            ],
+            "height": 1080,
+            "subtitles": [
+              "eng"
+            ],
+            "videoCodec": "h264",
+            "videoDynamicRange": "",
+            "videoDynamicRangeType": "",
+            "width": 1920
+          },
+          "path": "/tv/The Pitt/Season 01/The Pitt (2025) - S01E01 - 7-00 A.M [AMZN][WEBDL-1080p][AAC 1.0][h264]-FLUX.mkv",
+          "quality": "WEBDL-1080p",
+          "qualityVersion": 1,
+          "relativePath": "Season 01/The Pitt (2025) - S01E01 - 7-00 A.M [AMZN][WEBDL-1080p][AAC 1.0][h264]-FLUX.mkv",
+          "releaseGroup": "FLUX",
+          "sceneName": "The.Pitt.S01E01.1080p.AMZN.WEB-DL.DDP5.1.H.264-FLUX",
+          "size": 1106640,
+          "sourcePath": "/downloads/complete/tv/The.Pitt.S01E01.1080p.AMZN.WEB-DL.DDP5.1.H.264-FLUX/The.Pitt.S01E01.1080p.AMZN.WEB-DL.DDP5.1.H.264-FLUX.mkv"
+        },
+        "episodes": [
+          {
+            "airDate": "2025-01-09",
+            "airDateUtc": "2025-01-10T02:00:00Z",
+            "episodeNumber": 1,
+            "id": 1,
+            "overview": "While attempting to distract himself from the anniversary of his mentor’s death, Dr. Robby introduces a fresh batch of interns to life in the ER.",
+            "seasonNumber": 1,
+            "seriesId": 1,
+            "title": "7:00 A.M.",
+            "tvdbId": 10407559
+          }
+        ],
+        "eventType": "Download",
+        "instanceName": "Sonarr",
+        "isUpgrade": true,
+        "release": {
+          "indexer": "Mock Newznab (Prowlarr)",
+          "releaseTitle": "The.Pitt.S01E01.1080p.AMZN.WEB-DL.DDP5.1.H.264-FLUX",
+          "releaseType": "singleEpisode",
+          "size": 2684354560
+        },
+        "series": {
+          "genres": [
+            "Drama"
+          ],
+          "id": 1,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/banners/6972a4aba4c5d.jpg",
+              "url": "/MediaCover/1/banner.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg",
+              "url": "/MediaCover/1/poster.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/backgrounds/675c4f787cfc4.jpg",
+              "url": "/MediaCover/1/fanart.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/clearlogo/675d049994d06.png",
+              "url": "/MediaCover/1/clearlogo.png"
+            }
+          ],
+          "imdbId": "tt31938062",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "path": "/tv/The Pitt",
+          "tags": [
+            "ita"
+          ],
+          "title": "The Pitt",
+          "titleSlug": "the-pitt",
+          "tmdbId": 250307,
+          "tvMazeId": 75632,
+          "tvdbId": 448176,
+          "type": "standard",
+          "year": 2025
+        }
+      },
+      "headers": {
+        "authorization": "Basic aG9vazpzZWNyZXQ=",
+        "content-type": "application/json",
+        "x-fixture": "yes"
+      },
+      "method": "PUT",
+      "path": "/webhook/updated",
+      "query": {},
+      "service": "webhook"
+    },
+    {
+      "body": {
+        "embeds": [
+          {
+            "author": {
+              "icon_url": "https://raw.githubusercontent.com/Sonarr/Sonarr/develop/Logo/256.png",
+              "name": "vm"
+            },
+            "color": 2605644,
+            "description": "Import Complete",
+            "fields": [
+              {
+                "inline": false,
+                "name": "Overview",
+                "value": "While attempting to distract himself from the anniversary of his mentor’s death, Dr. Robby introduces a fresh batch of interns to life in the ER."
+              },
+              {
+                "inline": false,
+                "name": "Rating",
+                "value": "8.9"
+              },
+              {
+                "inline": false,
+                "name": "Genres",
+                "value": "Drama"
+              },
+              {
+                "inline": true,
+                "name": "Quality",
+                "value": "WEBDL-1080p"
+              },
+              {
+                "inline": false,
+                "name": "Group",
+                "value": "FLUX"
+              },
+              {
+                "inline": true,
+                "name": "Size",
+                "value": "2.5 GB"
+              },
+              {
+                "inline": false,
+                "name": "Links",
+                "value": "[The TVDB](https://thetvdb.com/?tab=series&id=448176) / [Trakt](https://trakt.tv/search/tvdb/448176?id_type=show) / [IMDB](https://imdb.com/title/tt31938062/)"
+              },
+              {
+                "inline": false,
+                "name": "Release",
+                "value": "```The.Pitt.S01E01.1080p.AMZN.WEB-DL.DDP5.1.H.264-FLUX```"
+              }
+            ],
+            "image": {
+              "url": "https://artworks.thetvdb.com/banners/v4/series/448176/backgrounds/675c4f787cfc4.jpg"
+            },
+            "thumbnail": {
+              "url": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg"
+            },
+            "timestamp": "2026-11-08T20:59:12.7684825Z",
+            "title": "The Pitt - 1x01 - 7:00 A.M.",
+            "url": "http://thetvdb.com/?tab=series&id=448176"
+          }
+        ],
+        "username": "Unarr fixture"
+      },
+      "headers": {
+        "content-type": "application/json"
+      },
+      "method": "POST",
+      "path": "/discord/api/webhooks/100/fixturetoken",
+      "query": {},
+      "service": "discord"
+    },
+    {
+      "body": {
+        "applicationUrl": "",
+        "destinationPath": "/tv/The Pitt/Season 01",
+        "downloadClient": "Mock SABnzbd",
+        "downloadClientType": "SABnzbd",
+        "downloadId": "SABnzbd_nzo_mock6",
+        "episodeFiles": [
+          {
+            "dateAdded": "2026-11-08T20:59:12.7097754Z",
+            "id": 1077,
+            "languages": [
+              {
+                "id": 1,
+                "name": "English"
+              }
+            ],
+            "mediaInfo": {
+              "audioChannels": 1.0,
+              "audioCodec": "AAC",
+              "audioLanguages": [
+                "eng"
+              ],
+              "height": 1080,
+              "subtitles": [
+                "eng"
+              ],
+              "videoCodec": "h264",
+              "videoDynamicRange": "",
+              "videoDynamicRangeType": "",
+              "width": 1920
+            },
+            "path": "/tv/The Pitt/Season 01/The Pitt (2025) - S01E01 - 7-00 A.M [AMZN][WEBDL-1080p][AAC 1.0][h264]-FLUX.mkv",
+            "quality": "WEBDL-1080p",
+            "qualityVersion": 1,
+            "relativePath": "Season 01/The Pitt (2025) - S01E01 - 7-00 A.M [AMZN][WEBDL-1080p][AAC 1.0][h264]-FLUX.mkv",
+            "releaseGroup": "FLUX",
+            "sceneName": "The.Pitt.S01E01.1080p.AMZN.WEB-DL.DDP5.1.H.264-FLUX",
+            "size": 1106640
+          }
+        ],
+        "episodes": [
+          {
+            "airDate": "2025-01-09",
+            "airDateUtc": "2025-01-10T02:00:00Z",
+            "episodeNumber": 1,
+            "id": 1,
+            "overview": "While attempting to distract himself from the anniversary of his mentor’s death, Dr. Robby introduces a fresh batch of interns to life in the ER.",
+            "seasonNumber": 1,
+            "seriesId": 1,
+            "title": "7:00 A.M.",
+            "tvdbId": 10407559
+          }
+        ],
+        "eventType": "Download",
+        "fileCount": 1,
+        "instanceName": "Sonarr",
+        "release": {
+          "indexer": "Mock Newznab (Prowlarr)",
+          "releaseTitle": "The.Pitt.S01E01.1080p.AMZN.WEB-DL.DDP5.1.H.264-FLUX",
+          "releaseType": "singleEpisode",
+          "size": 2684354560
+        },
+        "series": {
+          "genres": [
+            "Drama"
+          ],
+          "id": 1,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/banners/6972a4aba4c5d.jpg",
+              "url": "/MediaCover/1/banner.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg",
+              "url": "/MediaCover/1/poster.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/backgrounds/675c4f787cfc4.jpg",
+              "url": "/MediaCover/1/fanart.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/clearlogo/675d049994d06.png",
+              "url": "/MediaCover/1/clearlogo.png"
+            }
+          ],
+          "imdbId": "tt31938062",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "path": "/tv/The Pitt",
+          "tags": [
+            "ita"
+          ],
+          "title": "The Pitt",
+          "titleSlug": "the-pitt",
+          "tmdbId": 250307,
+          "tvMazeId": 75632,
+          "tvdbId": 448176,
+          "type": "standard",
+          "year": 2025
+        },
+        "sourcePath": "/downloads/complete/tv/The.Pitt.S01E01.1080p.AMZN.WEB-DL.DDP5.1.H.264-FLUX"
+      },
+      "headers": {
+        "authorization": "Basic aG9vazpzZWNyZXQ=",
+        "content-type": "application/json",
+        "x-fixture": "yes"
+      },
+      "method": "PUT",
+      "path": "/webhook/updated",
+      "query": {},
+      "service": "webhook"
+    },
+    {
+      "body": null,
+      "headers": {},
+      "method": "GET",
+      "path": "/library/sections",
+      "query": {
+        "X-Plex-Client-Identifier": "06379e6c-b6a8-4dab-9ca2-d3c11680a12b",
+        "X-Plex-Device-Name": "Sonarr",
+        "X-Plex-Platform": "Windows",
+        "X-Plex-Platform-Version": "7",
+        "X-Plex-Product": "Sonarr",
+        "X-Plex-Token": "mock-plex-token",
+        "X-Plex-Version": "4.0.20.3014"
+      },
+      "service": "plex"
+    },
+    {
+      "body": null,
+      "headers": {},
+      "method": "GET",
+      "path": "/library/sections/2/refresh",
+      "query": {
+        "X-Plex-Client-Identifier": "06379e6c-b6a8-4dab-9ca2-d3c11680a12b",
+        "X-Plex-Device-Name": "Sonarr",
+        "X-Plex-Platform": "Windows",
+        "X-Plex-Platform-Version": "7",
+        "X-Plex-Product": "Sonarr",
+        "X-Plex-Token": "mock-plex-token",
+        "X-Plex-Version": "4.0.20.3014",
+        "path": "/tv/The Pitt"
+      },
+      "service": "plex"
+    }
+  ],
+  "recordedAt": "2026-11-08T20:59:32Z",
+  "request": {
+    "method": "GET",
+    "path": "/mock/notifications",
+    "target": "mock"
+  },
+  "status": 200
+}

@@ -1,0 +1,47 @@
+{
+  "body": [
+    {
+      "customFormatScore": 0,
+      "customFormats": [],
+      "id": 203145371,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 0,
+          "name": "Unknown"
+        }
+      ],
+      "name": "07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2",
+      "path": "/downloads/tv/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2.mkv",
+      "quality": {
+        "quality": {
+          "id": 4,
+          "name": "HDTV-720p",
+          "resolution": 720,
+          "source": "television"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityWeight": 8,
+      "rejections": [
+        {
+          "reason": "Unknown Series",
+          "type": "permanent"
+        }
+      ],
+      "relativePath": "07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2.mkv",
+      "releaseType": "unknown",
+      "size": 119980
+    }
+  ],
+  "recordedAt": "2026-11-08T20:58:48Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/manualimport?folder=/downloads/tv/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2&filterExistingFiles=false"
+  },
+  "status": 200
+}

@@ -12,9 +12,9 @@
           }
         ],
         "data": {
-          "age": "666",
-          "ageHours": "15996.073786163139",
-          "ageMinutes": "959764.4271698467",
+          "age": "667",
+          "ageHours": "16025.270426698473",
+          "ageMinutes": "961516.225601955",
           "customFormatScore": "-10000",
           "downloadClient": "Transmission",
           "downloadClientName": "Mock Transmission",
@@ -35,7 +35,7 @@
           "tvRageId": "0",
           "tvdbId": "448176"
         },
-        "date": "2026-11-07T15:44:25Z",
+        "date": "2026-11-08T20:56:13Z",
         "downloadId": "C7EB8F60E61BC10B2F8762DE09949BDD2AAFBE5A",
         "episodeId": 1,
         "eventType": "grabbed",
@@ -84,9 +84,9 @@
           }
         ],
         "data": {
-          "age": "612",
-          "ageHours": "14701.573239738362",
-          "ageMinutes": "882094.3943843567",
+          "age": "613",
+          "ageHours": "14730.7698755665",
+          "ageMinutes": "883846.192534045",
           "customFormatScore": "-10000",
           "downloadClient": "qBittorrent",
           "downloadClientName": "Mock qBittorrent",
@@ -107,7 +107,7 @@
           "tvRageId": "0",
           "tvdbId": "422712"
         },
-        "date": "2026-11-07T15:44:23Z",
+        "date": "2026-11-08T20:56:11Z",
         "downloadId": "0FB2EF04FB342178115BA635EC7B5EC0067058BA",
         "episodeId": 46,
         "eventType": "grabbed",
@@ -152,9 +152,9 @@
           }
         ],
         "data": {
-          "age": "666",
-          "ageHours": "15996.539364495722",
-          "ageMinutes": "959792.36186983",
+          "age": "667",
+          "ageHours": "16025.735992586806",
+          "ageMinutes": "961544.15955529",
           "customFormatScore": "-10000",
           "downloadClient": "SABnzbd",
           "downloadClientName": "Mock SABnzbd",
@@ -174,7 +174,7 @@
           "tvRageId": "0",
           "tvdbId": "448176"
         },
-        "date": "2026-11-07T15:44:21Z",
+        "date": "2026-11-08T20:56:09Z",
         "downloadId": "SABnzbd_nzo_mock1",
         "episodeId": 1,
         "eventType": "grabbed",
@@ -207,7 +207,7 @@
     "sortKey": "date",
     "totalRecords": 749
   },
-  "recordedAt": "2026-11-07T15:45:08Z",
+  "recordedAt": "2026-11-08T20:56:55Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/history?page=1&pageSize=3&sortKey=date&sortDirection=descending&eventType=1"

@@ -1,7 +1,7 @@
 {
   "body": [
     {
-      "freeSpace": 6605082624,
+      "freeSpace": 24742694912,
       "label": "",
       "path": "/",
       "totalSpace": 270553174016
@@ -37,7 +37,7 @@
       "totalSpace": 6160384
     }
   ],
-  "recordedAt": "2026-11-07T15:44:00Z",
+  "recordedAt": "2026-11-08T20:55:51Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/diskspace"

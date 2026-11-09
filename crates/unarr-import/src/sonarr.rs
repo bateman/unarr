@@ -1044,6 +1044,21 @@ pub fn import(legacy_db: &Path, db: &Db) -> anyhow::Result<ImportReport> {
         for h in &history {
             store::history::insert(&tx, h).with_context(|| format!("history {}", h.id))?;
         }
+        // The originals never reuse an id once its row is deleted; the
+        // counters continue where theirs stopped.
+        for (table, ours) in [
+            ("EpisodeFiles", "episode_files"),
+            ("History", "history"),
+            ("Episodes", "episodes"),
+        ] {
+            if let Ok(seq) =
+                legacy.query_row("SELECT seq FROM sqlite_sequence WHERE name = ?1", [table], |r| {
+                    r.get::<_, i64>(0)
+                })
+            {
+                store::sequence::seed(&tx, ours, seq)?;
+            }
+        }
         for p in &providers {
             store::providers::insert_provider(&tx, p)?;
         }
