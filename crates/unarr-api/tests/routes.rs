@@ -354,3 +354,73 @@ async fn a_trusted_proxy_lets_local_clients_skip_the_login() {
     assert_eq!(page("", "192.168.4.128:41000", None).await.0, StatusCode::OK);
     assert_eq!(page("", "203.0.113.9:41000", None).await, login);
 }
+
+/// The series page on a high-density screen asks for `poster-1000.jpg`,
+/// which nothing makes: it gets the full poster, as from the originals.
+#[tokio::test]
+async fn a_cover_size_that_was_not_made_is_served_from_the_full_cover() {
+    let mock = Mock::start(fixtures_dir(), 0).await.unwrap();
+    let app_data = std::env::temp_dir().join(format!("unarr_routes_covers_{}", std::process::id()));
+    let _ = std::fs::remove_dir_all(&app_data);
+    let covers = app_data.join("MediaCover").join("5");
+    std::fs::create_dir_all(&covers).unwrap();
+    std::fs::write(covers.join("poster.jpg"), b"full poster").unwrap();
+    std::fs::write(covers.join("poster-500.jpg"), b"poster at 500").unwrap();
+    let app = unarr_api::router(state_in(&mock, app_data.clone()).await);
+    let login = app
+        .clone()
+        .oneshot(
+            Request::builder()
+                .method("POST")
+                .uri("/login")
+                .header("content-type", "application/x-www-form-urlencoded")
+                .body(Body::from("username=unarr&password=fixture&rememberMe=on"))
+                .unwrap(),
+        )
+        .await
+        .unwrap();
+    let session = login.headers()["set-cookie"]
+        .to_str()
+        .unwrap()
+        .split(';')
+        .next()
+        .unwrap()
+        .to_string();
+    let get = |path: &'static str| {
+        let app = app.clone();
+        let session = session.clone();
+        async move {
+            let response = app
+                .oneshot(
+                    Request::builder()
+                        .uri(path)
+                        .header("cookie", session)
+                        .body(Body::empty())
+                        .unwrap(),
+                )
+                .await
+                .unwrap();
+            let status = response.status();
+            let bytes = response.into_body().collect().await.unwrap().to_bytes();
+            (status, String::from_utf8_lossy(&bytes).into_owned())
+        }
+    };
+    assert_eq!(
+        get("/MediaCover/5/poster-500.jpg?lastWrite=1").await,
+        (StatusCode::OK, "poster at 500".to_string())
+    );
+    assert_eq!(
+        get("/MediaCover/5/poster-1000.jpg?lastWrite=1").await,
+        (StatusCode::OK, "full poster".to_string())
+    );
+    assert_eq!(
+        get("/MediaCover/5/poster.jpg").await,
+        (StatusCode::OK, "full poster".to_string())
+    );
+    assert_eq!(get("/MediaCover/5/banner-70.jpg").await.0, StatusCode::NOT_FOUND);
+    assert_eq!(
+        get("/MediaCover/6/poster-1000.jpg").await.0,
+        StatusCode::NOT_FOUND
+    );
+    std::fs::remove_dir_all(&app_data).unwrap();
+}

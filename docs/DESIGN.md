@@ -924,6 +924,12 @@ a query; section 15 asks which library size the target is for.
   through the originals' `CleanseLogMessage`: Unarr keeps secrets out of
   what it logs in the first place (section 12). `system/routes` is not
   implemented, the UI does not ask for it.
+- **A resized cover that was not made is the full cover**
+  (`MediaCoverMapper.MapPath`): `/MediaCover/<id>/poster-1000.jpg`, which
+  the series page asks for on a screen with a pixel ratio of two, is
+  answered with `poster.jpg` when the file is missing or empty. Unarr
+  served the folder as it is and answered 404; the browser checks ran at
+  a ratio of one and never asked. Found on the first day on the NAS.
 - **`TrustedNetworks` is applied** (`unarr_api::forwarded`), as the
   originals do through ASP.NET's forwarded-headers middleware: a proxy on
   one of the listed networks, or on the loopback, is believed, the address

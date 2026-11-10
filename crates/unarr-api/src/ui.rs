@@ -448,6 +448,52 @@ pub async fn require_ui_auth(State(state): State<AppState>, request: Request, ne
     }
 }
 
+/// `-<digits>.jpg` at the end of a path, taken off: the cover a resized
+/// one was made from.
+fn unresized(path: &str) -> Option<String> {
+    let stem = path
+        .len()
+        .checked_sub(4)
+        .filter(|&at| path.is_char_boundary(at) && path[at..].eq_ignore_ascii_case(".jpg"))
+        .map(|at| &path[..at])?;
+    let (before, size) = stem.rsplit_once('-')?;
+    (!size.is_empty() && size.bytes().all(|b| b.is_ascii_digit())).then(|| format!("{before}.jpg"))
+}
+
+/// `MediaCoverMapper.MapPath`: a resized cover that is not on disk, or is
+/// empty, is answered with the cover it would have been made from. The UI
+/// asks for `poster-<size times the screen's pixel ratio>.jpg`, and only
+/// some sizes are made: on a high-density screen the series page asks for
+/// `poster-1000.jpg`. `request` is the one the cover folder is about to
+/// serve, its path relative to `covers`.
+pub fn full_cover_when_resized_is_missing<B>(
+    covers: &std::path::Path,
+    mut request: Request<B>,
+) -> Request<B> {
+    let path = request.uri().path();
+    let Some(full) = unresized(path) else {
+        return request;
+    };
+    let relative = path.trim_start_matches('/');
+    if relative.split('/').any(|part| part == "..") {
+        return request;
+    }
+    let on_disk = std::fs::metadata(covers.join(relative))
+        .map(|m| m.is_file() && m.len() > 0)
+        .unwrap_or(false);
+    if on_disk {
+        return request;
+    }
+    let uri = match request.uri().query() {
+        Some(query) => format!("{full}?{query}"),
+        None => full,
+    };
+    if let Ok(uri) = uri.parse() {
+        *request.uri_mut() = uri;
+    }
+    request
+}
+
 /// A 302 to `location`, as ASP.NET's cookie authentication answers.
 fn found(location: &str) -> Response {
     (
@@ -520,5 +566,36 @@ mod tests {
         assert!(is_local_address("::ffff:10.0.0.5".parse().unwrap()));
         assert!(is_local_address("fe80::1".parse().unwrap()));
         assert!(!is_local_address("8.8.8.8".parse().unwrap()));
+    }
+
+    #[test]
+    fn a_missing_resized_cover_falls_back_to_the_full_one() {
+        let covers = std::env::temp_dir().join(format!("unarr_cover_fallback_{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&covers);
+        std::fs::create_dir_all(covers.join("5")).unwrap();
+        std::fs::write(covers.join("5/poster.jpg"), b"full").unwrap();
+        std::fs::write(covers.join("5/poster-500.jpg"), b"resized").unwrap();
+        std::fs::write(covers.join("5/poster-250.jpg"), b"").unwrap();
+        let served = |uri: &str| {
+            let request = axum::http::Request::builder().uri(uri).body(()).unwrap();
+            full_cover_when_resized_is_missing(&covers, request)
+                .uri()
+                .to_string()
+        };
+        // On disk: served as asked.
+        assert_eq!(served("/5/poster-500.jpg"), "/5/poster-500.jpg");
+        assert_eq!(served("/5/poster.jpg?lastWrite=1"), "/5/poster.jpg?lastWrite=1");
+        // Not made, or empty: the full cover, the query kept.
+        assert_eq!(
+            served("/5/poster-1000.jpg?lastWrite=1"),
+            "/5/poster.jpg?lastWrite=1"
+        );
+        assert_eq!(served("/5/poster-250.jpg"), "/5/poster.jpg");
+        assert_eq!(served("/5/fanart-720.JPG"), "/5/fanart.jpg");
+        // Not a resized name, or not a jpg: left alone.
+        assert_eq!(served("/5/clearlogo-70.png"), "/5/clearlogo-70.png");
+        assert_eq!(served("/5/poster-big.jpg"), "/5/poster-big.jpg");
+        assert_eq!(served("/5/../../etc/x-1.jpg"), "/5/../../etc/x-1.jpg");
+        std::fs::remove_dir_all(&covers).unwrap();
     }
 }

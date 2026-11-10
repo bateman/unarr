@@ -227,10 +227,17 @@ pub fn router(state: AppState) -> Router {
             "/updatelogfile/{filename}",
             axum::routing::get(routes::backup::update_log_file_download),
         )
-        .nest_service(
-            "/MediaCover",
-            tower_http::services::ServeDir::new(state.runtime().media_cover_dir.clone()),
-        )
+        .nest("/MediaCover", {
+            let covers = state.runtime().media_cover_dir.clone();
+            Router::new()
+                .fallback_service(tower_http::services::ServeDir::new(covers.clone()))
+                .layer(axum::middleware::map_request(
+                    move |request: axum::extract::Request| {
+                        let covers = covers.clone();
+                        async move { ui::full_cover_when_resized_is_missing(&covers, request) }
+                    },
+                ))
+        })
         .fallback(axum::routing::get(ui::spa))
         // `layer`, not `route_layer`: the guard must cover the fallback too,
         // or deep links such as /settings would skip the login.
