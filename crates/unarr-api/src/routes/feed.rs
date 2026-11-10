@@ -146,8 +146,16 @@ pub async fn calendar(State(state): State<AppState>, uri: Uri) -> ApiResult<Resp
     let p = Params::from_uri(&uri);
     let now = state.now();
     let today = local_midnight(now);
-    let start = today - Duration::days(p.i64("pastDays").unwrap_or(7));
-    let end = today + Duration::days(p.i64("futureDays").unwrap_or(28));
+    // Numbers no calendar reaches are refused, not computed with.
+    let days = |name: &str, default: i64| Duration::try_days(p.i64(name).unwrap_or(default));
+    let range = days("pastDays", 7)
+        .and_then(|past| today.checked_sub_signed(past))
+        .zip(days("futureDays", 28).and_then(|future| today.checked_add_signed(future)));
+    let Some((start, end)) = range else {
+        return Err(crate::error::ApiError::BadRequest(
+            "pastDays and futureDays are out of range".into(),
+        ));
+    };
     let unmonitored = p.bool("unmonitored", false);
     let premieres_only = p.bool("premieresOnly", false);
     let all_day = p.bool("asAllDay", false);

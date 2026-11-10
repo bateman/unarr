@@ -183,9 +183,13 @@ pub fn insert_default_delay_profile(conn: &Connection) -> anyhow::Result<bool> {
 /// Everything above, at start.
 pub fn ensure(conn: &Connection) -> anyhow::Result<()> {
     tracing::debug!("Setting up default quality config");
-    insert_missing_definitions(conn)?;
-    insert_default_profiles(conn)?;
-    insert_default_delay_profile(conn)?;
+    // All of it or none: a start cut short must not leave three profiles
+    // of six, which the next start would take for somebody's choice.
+    let tx = conn.unchecked_transaction()?;
+    insert_missing_definitions(&tx)?;
+    insert_default_profiles(&tx)?;
+    insert_default_delay_profile(&tx)?;
+    tx.commit()?;
     Ok(())
 }
 

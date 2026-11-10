@@ -3,10 +3,11 @@
 //!
 //! Ported from `NzbDrone.Core/Housekeeping/Housekeepers`, those that have a
 //! table here: the orphaned blocklist, episode files, episodes, history and
-//! pending releases, the provider statuses of providers that went, the
-//! pending releases a client or a fallback left for two weeks, status
-//! times in the future, and the tags nothing uses. Not ported: the
-//! metadata and extra file cleaners (no such files), the update's
+//! pending releases, the subtitles and other extras, the provider
+//! statuses of providers that went, the pending releases a client or a
+//! fallback left for two weeks, status times in the future, and the tags
+//! nothing uses. Not ported: the metadata file cleaners (no such files),
+//! the update's
 //! temporary files, the log database (the log is in memory), the repair of
 //! profiles' format items and of clean titles (both are written whole by
 //! the code that owns them), and the removal of bad covers.

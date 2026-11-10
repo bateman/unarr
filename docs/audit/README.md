@@ -121,6 +121,16 @@ opened), and the recording corrected two of the findings.
 | 23. Session length and `Secure` | Fixed: seven days from the last use, renewed past half its life; `Secure` when a trusted proxy says the request came over HTTPS. Sessions open at the upgrade end once: the signing key is now a random one kept in the database, not derived from the API key. |
 | 24. `/initialize.json` without `no-store` | Fixed. |
 
+A review of these fixes found more, fixed in turn: the recycling bin's
+folder was not validated (a root folder set as the bin would have been
+emptied by the clean-up), a blank API key from the environment opened
+the API, an absurd range stopped the calendar feed's process, series
+were added outside a transaction, a login could be switched on without
+a user, and the scan remembered extras only when the series folder was
+missing. Two of its findings describe what the original does and were
+left: an imported extra replaces the file already at its name, and
+"Mark as failed" on a row that is not a grab blocklists from that row.
+
 Not recorded against the original, and so not changed: `PUT
 config/naming` does not yet refuse a format whose sample name fails the
 same parse-back check.

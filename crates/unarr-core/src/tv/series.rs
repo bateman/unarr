@@ -277,7 +277,11 @@ pub async fn add(
         if !failures.is_empty() {
             return Ok(Err(failures));
         }
-        Ok(Ok(insert_new(conn, series)?))
+        // The series, its seasons and its tags, or none of them.
+        let tx = conn.unchecked_transaction()?;
+        let series = insert_new(&tx, series)?;
+        tx.commit()?;
+        Ok(Ok(series))
     })
     .await?
     .map_err(WriteError::Invalid)
@@ -328,10 +332,14 @@ pub async fn add_many(
             }
             to_add.push(series);
         }
+        // All of them, or none: a series that cannot be written (a tag
+        // that does not exist) leaves nothing half added behind.
+        let tx = conn.unchecked_transaction()?;
         let mut added = Vec::new();
         for series in to_add {
-            added.push(insert_new(conn, series)?);
+            added.push(insert_new(&tx, series)?);
         }
+        tx.commit()?;
         Ok(Ok(added))
     })
     .await?
@@ -724,5 +732,129 @@ pub fn delete_series_folder(
         if let Err(e) = crate::mediafiles::transfer::recycle_folder(config, path) {
             tracing::error!(error = %e, "Unable to delete the folder of {}", series.title);
         }
+    }
+}
+
+#[cfg(test)]
+mod add_many_tests {
+    use super::*;
+    use crate::metadata::BoxFuture;
+    use crate::metadata::SeriesInfo;
+
+    /// A provider that knows two series, by the ids the store's sample
+    /// series carry.
+    struct Known;
+
+    impl MetadataProvider for Known {
+        fn series_info(&self, tvdb_id: i64) -> BoxFuture<'_, Result<SeriesInfo, MetadataError>> {
+            Box::pin(async move {
+                let id = tvdb_id - 1000;
+                if !(1..=2).contains(&id) {
+                    return Err(MetadataError::SeriesNotFound(tvdb_id));
+                }
+                let mut series = crate::store::series::tests::sample(id);
+                series.id = 0;
+                series.title = format!("Show {id}");
+                series.title_slug = format!("show-{id}");
+                series.tags = Vec::new();
+                Ok(SeriesInfo {
+                    series,
+                    episodes: Vec::new(),
+                })
+            })
+        }
+
+        fn search(&self, _: &str) -> BoxFuture<'_, Result<Vec<Series>, MetadataError>> {
+            Box::pin(async { Ok(Vec::new()) })
+        }
+    }
+
+    fn new(tvdb_id: i64, path: &str, tags: Vec<i64>) -> NewSeries {
+        NewSeries {
+            tvdb_id,
+            title: None,
+            path: Some(path.to_string()),
+            root_folder_path: None,
+            quality_profile_id: 1,
+            season_folder: true,
+            monitored: true,
+            monitor_new_items: NewItemMonitor::All,
+            series_type: SeriesType::Standard,
+            tags,
+            seasons: Vec::new(),
+            add_options: None,
+        }
+    }
+
+    async fn library() -> Db {
+        let db = Db::open_in_memory().unwrap();
+        db.call(|conn| {
+            conn.execute_batch(
+                "INSERT INTO quality_profiles (id, name, cutoff, items) VALUES (1, 'Any', 1, '[]');
+                 INSERT INTO tags (id, label) VALUES (1, 'drama');",
+            )?;
+            Ok(())
+        })
+        .await
+        .unwrap();
+        db
+    }
+
+    async fn titles(db: &Db) -> Vec<String> {
+        db.call(|conn| Ok(store::series::list(conn)?.into_iter().map(|s| s.title).collect()))
+            .await
+            .unwrap()
+    }
+
+    /// A series that cannot be written takes the others of the request
+    /// with it: nothing is left half added, and the same request, put
+    /// right, goes through.
+    #[tokio::test]
+    async fn a_series_that_cannot_be_written_leaves_nothing_behind() {
+        let db = library().await;
+        let now = Utc::now();
+        // The second names a tag that does not exist.
+        let request = |tags: Vec<i64>| vec![new(1001, "/tv/Show 1", vec![1]), new(1002, "/tv/Show 2", tags)];
+        let refused = add_many(&db, &Known, request(vec![999]), now).await;
+        assert!(matches!(refused, Err(WriteError::Other(_))), "{refused:?}");
+        assert!(titles(&db).await.is_empty());
+        let added = add_many(&db, &Known, request(vec![1]), now).await.unwrap();
+        assert_eq!(added.len(), 2);
+        assert_eq!(titles(&db).await.len(), 2);
+    }
+
+    /// One nobody knows refuses the request, and so does one already
+    /// there; one named twice is added once.
+    #[tokio::test]
+    async fn unknown_series_refuse_and_known_ones_are_left_out() {
+        let db = library().await;
+        let now = Utc::now();
+        let refused = add_many(
+            &db,
+            &Known,
+            vec![new(1001, "/tv/Show 1", vec![]), new(5, "/tv/Nobody", vec![])],
+            now,
+        )
+        .await;
+        assert!(matches!(refused, Err(WriteError::InvalidPlain(_))), "{refused:?}");
+        assert!(titles(&db).await.is_empty());
+        let twice = vec![
+            new(1001, "/tv/Show 1", vec![]),
+            new(1001, "/tv/Show 1 again", vec![]),
+        ];
+        assert_eq!(add_many(&db, &Known, twice, now).await.unwrap().len(), 1);
+        // Already in the library: its title slug is taken, which refuses
+        // the request before the library is looked at for its id (as
+        // recorded: `series-import-again`), and the other with it.
+        let again = vec![
+            new(1001, "/tv/Show 1 once more", vec![]),
+            new(1002, "/tv/Show 2", vec![]),
+        ];
+        let refused = add_many(&db, &Known, again, now).await;
+        assert!(matches!(refused, Err(WriteError::Invalid(_))), "{refused:?}");
+        assert_eq!(titles(&db).await, ["Show 1"]);
+        // The same single add, on the same rules.
+        let single = add(&db, &Known, new(1001, "/tv/Show 1 elsewhere", vec![]), now).await;
+        assert!(matches!(single, Err(WriteError::Invalid(_))), "{single:?}");
     }
 }

@@ -1,0 +1,35 @@
+{
+  "body": [
+    {
+      "attemptedValue": "",
+      "errorCode": "NotEmptyValidator",
+      "errorMessage": "'Username' must not be empty.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Username",
+        "propertyValue": ""
+      },
+      "propertyName": "Username",
+      "severity": "error"
+    },
+    {
+      "attemptedValue": "",
+      "errorCode": "NotEmptyValidator",
+      "errorMessage": "'Password' must not be empty.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Password",
+        "propertyValue": ""
+      },
+      "propertyName": "Password",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-10T23:00:07Z",
+  "request": {
+    "body": "bodies/config-host-put-no-user.json",
+    "method": "PUT",
+    "path": "/api/v3/config/host"
+  },
+  "status": 400
+}

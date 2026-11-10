@@ -1,0 +1,6 @@
+{
+ "$from": "config-mediamanagement",
+ "$set": {
+  "recycleBin": "/tv"
+ }
+}

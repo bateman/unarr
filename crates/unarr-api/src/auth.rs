@@ -64,7 +64,8 @@ pub fn percent_decode(s: &str) -> String {
 pub fn key_matches(expected: &str, presented: &str) -> bool {
     let a = expected.as_bytes();
     let b = presented.as_bytes();
-    if a.len() != b.len() {
+    // No key is no key: a blank one configured by mistake opens nothing.
+    if a.is_empty() || a.len() != b.len() {
         return false;
     }
     a.iter().zip(b).fold(0u8, |acc, (x, y)| acc | (x ^ y)) == 0
@@ -98,5 +99,6 @@ mod tests {
         assert!(key_matches("abc", "abc"));
         assert!(!key_matches("abc", "abd"));
         assert!(!key_matches("abc", "ab"));
+        assert!(!key_matches("", ""));
     }
 }

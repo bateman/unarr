@@ -59,10 +59,7 @@ fn personality_dir(personality: Personality) -> &'static str {
 /// A 32-character hex API key, as the originals generate. Without a source
 /// of randomness there is no safe key, so starting up fails.
 fn generate_api_key() -> anyhow::Result<String> {
-    let mut bytes = [0u8; 16];
-    let mut urandom = std::fs::File::open("/dev/urandom").context("opening /dev/urandom for the API key")?;
-    std::io::Read::read_exact(&mut urandom, &mut bytes).context("reading /dev/urandom for the API key")?;
-    Ok(bytes.iter().map(|b| format!("{b:02x}")).collect())
+    unarr_core::random::hex::<16>().context("making the API key")
 }
 
 /// Where the original application's files are, if anywhere.
@@ -378,6 +375,9 @@ fn open_personality(personality: Personality, args: &Args, logs: &LogBuffer) -> 
         unarr_core::store::config::meta(conn, unarr_api::routes::settings_writes::HOST_OVERRIDES)
     })?;
     unarr_api::routes::settings_writes::apply_saved_host_overrides(&mut host, saved.as_deref());
+    // The environment wins over both, and the listener must hear of it:
+    // the port and the address are read here.
+    host.apply_environment(personality.app_name(), std::env::vars());
     let port = host.port;
     if host.enable_ssl {
         tracing::warn!(

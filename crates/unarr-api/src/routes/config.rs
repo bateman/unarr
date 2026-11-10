@@ -114,7 +114,7 @@ pub async fn host(State(state): State<AppState>) -> ApiResult<Json<serde_json::V
         "backupFolder": v.str("BackupFolder", "Backups"),
         "backupInterval": v.int("BackupInterval", 7),
         "backupRetention": v.int("BackupRetention", 28),
-        "trustCgnatIpAddresses": h.trust_cgnat_ip_addresses || v.bool("TrustCgnatIpAddresses", false),
+        "trustCgnatIpAddresses": h.trust_cgnat_ip_addresses,
         "id": 1,
     })))
 }

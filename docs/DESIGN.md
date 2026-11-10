@@ -895,9 +895,17 @@ a query; section 15 asks which library size the target is for.
   or off, a scan remembers the extras next to episode files, a rename
   takes them along and deleting the episode file sends them to the
   recycling bin, as in the originals. Unarr drives no metadata consumer
-  (section 15): an nfo or image whose name parses to an episode is
-  remembered as an other extra, and the `MetadataFiles` rows are not
-  imported.
+  (section 15), and the `MetadataFiles` rows are not imported. Of the
+  files that are not subtitles, a scan remembers only those named exactly
+  as their episode file (an nfo): a rename gives an other extra the
+  episode file's name and nothing else, which would turn a media
+  centre's `-thumb.jpg` into a second `.jpg`. The originals hand those
+  to their metadata consumers; here they stay where they are.
+- **The recycling bin must be a folder of its own.** The daily clean-up
+  deletes what is in it, so a save refuses, with the originals' rules and
+  messages, a folder that is a root folder or above one, a series'
+  folder, the program's or a system folder, and one that is not there or
+  cannot be written.
 - **Media info is read off the database's thread when it is missing.**
   After a scan the files without media info, or with one older than the
   least schema still read, are probed again, as the originals do; a
@@ -918,7 +926,9 @@ a query; section 15 asks which library size the target is for.
   (`Sonarr__Server__Port`, `Sonarr__Auth__ApiKey`, `Sonarr__Log__Level`
   and the others of the Server, Auth, App, Log and Update sections that
   Unarr has a setting for) are laid over `config.xml` and over what was
-  saved, at start and after every save.
+  saved, at start and after every save. A blank API key there is ignored:
+  an unset variable of a compose file would otherwise make `apikey=`,
+  with nothing after it, the key.
 - **Log level.** The Log Level of Settings > General applies at once:
   Unarr's own code logs at it and the libraries stay at info; the debug
   and trace files are written only at their levels. `RUST_LOG`, when

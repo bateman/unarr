@@ -130,7 +130,14 @@ impl HostConfig {
                     Some(on) => self.enable_ssl = on,
                     None => unusable = true,
                 },
-                "auth__apikey" => self.api_key = value.clone(),
+                // A blank key would open the API to a blank `apikey=`.
+                "auth__apikey" => {
+                    if value.trim().is_empty() {
+                        unusable = true;
+                    } else {
+                        self.api_key = value.clone();
+                    }
+                }
                 "auth__method" => match AuthenticationMethod::parse(&value) {
                     Some(method) => self.authentication_method = method,
                     None => unusable = true,
@@ -265,6 +272,9 @@ mod environment_tests {
                 ("Sonarr__Server__Port", "eighty"),
                 ("Sonarr__Auth__Method", "Kerberos"),
                 ("Sonarr__Server__EnableSsl", "yes"),
+                // An unset variable of a compose file: no key at all.
+                ("Sonarr__Auth__ApiKey", ""),
+                ("SONARR__AUTH__APIKEY", "  "),
             ]),
         );
         assert_eq!(h, host());

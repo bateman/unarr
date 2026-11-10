@@ -159,6 +159,130 @@ async fn save_config(state: &AppState, body: &Value, fields: &[(&str, Kind)]) ->
 
 // --- config pages
 
+/// The name the process runs under (`Environment.UserName`).
+fn current_user() -> String {
+    std::env::var("USER")
+        .ok()
+        .filter(|u| !u.is_empty())
+        .or_else(|| {
+            // The passwd entry of the user the process runs as.
+            let passwd = std::fs::read_to_string("/etc/passwd").ok()?;
+            #[cfg(unix)]
+            let uid = {
+                use std::os::unix::fs::MetadataExt;
+                std::fs::metadata("/proc/self").ok()?.uid().to_string()
+            };
+            #[cfg(not(unix))]
+            let uid = String::new();
+            passwd.lines().find_map(|line| {
+                let mut fields = line.split(':');
+                let name = fields.next()?;
+                (fields.nth(1)? == uid).then(|| name.to_string())
+            })
+        })
+        .unwrap_or_default()
+}
+
+/// The rules of the recycling bin's folder (`MediaManagementConfigController`):
+/// what the daily clean-up empties must be a folder of its own. It exists
+/// and can be written to; it is not a root folder nor a folder above one,
+/// not the program's folder nor one inside it, not a system folder, and
+/// not the folder of a series. Every rule that fails is reported.
+fn recycle_bin_failures(
+    bin: &str,
+    root_folders: &[String],
+    series: &[(i64, String)],
+    own_id: i64,
+    startup_folder: &str,
+) -> Vec<ValidationFailure> {
+    use unarr_core::mediafiles::{is_parent_path, path_equals};
+    let failure = |code: &str, message: String, extra: Vec<(&str, Value)>| {
+        let mut f = rule("RecycleBin", code, &message, json!(bin));
+        f.placeholders = vec![("path".to_string(), json!(bin))];
+        f.placeholders
+            .extend(extra.into_iter().map(|(k, v)| (k.to_string(), v)));
+        f
+    };
+    let mut failures = Vec::new();
+    let folder = std::path::Path::new(bin);
+    let writable = folder.is_dir() && {
+        let probe = folder.join("sonarr_write_test.txt");
+        let written = std::fs::write(&probe, "").is_ok();
+        let _ = std::fs::remove_file(&probe);
+        written
+    };
+    if !writable {
+        let user = current_user();
+        failures.push(failure(
+            "FolderWritableValidator",
+            format!("Folder '{bin}' is not writable by user '{user}'"),
+            vec![("user", json!(user))],
+        ));
+    }
+    if root_folders.iter().any(|r| path_equals(r, bin)) {
+        failures.push(failure(
+            "RootFolderValidator",
+            format!("Path '{bin}' is already configured as a root folder"),
+            vec![],
+        ));
+    }
+    if !folder.is_dir() {
+        failures.push(failure(
+            "PathExistsValidator",
+            format!("Path '{bin}' does not exist"),
+            vec![],
+        ));
+    }
+    if root_folders.iter().any(|r| is_parent_path(bin, r)) {
+        failures.push(failure(
+            "RootFolderAncestorValidator",
+            format!("Path '{bin}' is an ancestor of an existing root folder"),
+            vec![],
+        ));
+    }
+    let relationship = |other: &str| {
+        if path_equals(other, bin) {
+            Some("set to")
+        } else if is_parent_path(other, bin) {
+            Some("child of")
+        } else {
+            None
+        }
+    };
+    if let Some(relationship) = relationship(startup_folder) {
+        failures.push(failure(
+            "StartupFolderValidator",
+            format!("Path '{bin}' cannot be {relationship} the start up folder"),
+            vec![("relationship", json!(relationship))],
+        ));
+    }
+    for system in ["/bin", "/boot", "/lib", "/sbin", "/proc", "/usr/bin"] {
+        if let Some(relationship) = relationship(system) {
+            failures.push(failure(
+                "SystemFolderValidator",
+                format!("Path '{bin}' is {relationship} system folder {system}"),
+                vec![
+                    ("relationship", json!(relationship)),
+                    ("systemFolder", json!(system)),
+                ],
+            ));
+            break;
+        }
+    }
+    // The originals leave out the series whose id is the resource's own.
+    if series
+        .iter()
+        .any(|(id, path)| *id != own_id && path.starts_with('/') && path_equals(path, bin))
+    {
+        failures.push(failure(
+            "SeriesPathValidator",
+            format!("Path '{bin}' is already configured for another series"),
+            vec![],
+        ));
+    }
+    failures
+}
+
 /// `PUT /config/mediamanagement/{id}`.
 pub async fn media_management(State(state): State<AppState>, Json(body): Json<Value>) -> ApiResult<Response> {
     object(&body)?;
@@ -168,12 +292,6 @@ pub async fn media_management(State(state): State<AppState>, Json(body): Json<Va
         int(&body, "recycleBinCleanupDays"),
         0,
     ));
-    failures.extend(at_least(
-        "MinimumFreeSpaceWhenImporting",
-        int(&body, "minimumFreeSpaceWhenImporting"),
-        100,
-    ));
-    check(failures)?;
     // The originals' path validator throws on a relative recycling bin
     // before it can report it.
     let bin = text(&body, "recycleBin");
@@ -185,6 +303,29 @@ pub async fn media_management(State(state): State<AppState>, Json(body): Json<Va
             exception: "System.ArgumentException".into(),
         });
     }
+    if !bin.trim().is_empty() {
+        let own_id = body.get("id").and_then(Value::as_i64).unwrap_or(0);
+        let path = bin.clone();
+        let (roots, series) = state
+            .db()
+            .call(move |conn| {
+                Ok((
+                    store::catalog::list_root_folders(conn)?,
+                    store::series::list(conn)?,
+                ))
+            })
+            .await?;
+        let roots: Vec<String> = roots.into_iter().map(|r| r.path).collect();
+        let series: Vec<(i64, String)> = series.into_iter().map(|s| (s.id, s.path)).collect();
+        let startup = state.runtime().startup_path.to_string_lossy().into_owned();
+        failures.extend(recycle_bin_failures(&path, &roots, &series, own_id, &startup));
+    }
+    failures.extend(at_least(
+        "MinimumFreeSpaceWhenImporting",
+        int(&body, "minimumFreeSpaceWhenImporting"),
+        100,
+    ));
+    check(failures)?;
     use Kind::*;
     save_config(
         &state,
@@ -607,8 +748,7 @@ async fn upsert_user(state: &AppState, username: String, password: String) -> Ap
         .call(move |conn| {
             use unarr_core::model::User;
             let existing = store::providers::list_users(conn)?.into_iter().next();
-            let mut random = [0u8; 32];
-            std::io::Read::read_exact(&mut std::fs::File::open("/dev/urandom")?, &mut random)?;
+            let random = unarr_core::random::bytes::<32>()?;
             let hash = |user: &mut User| {
                 let salt = &random[..16];
                 user.salt = Some(base64::Engine::encode(
@@ -760,6 +900,17 @@ pub async fn host(State(state): State<AppState>, Json(body): Json<Value>) -> Api
         f.error_message = "Branch name is required, 'main' is the default".into();
         failures.push(f);
     }
+    // Forms and Basic log somebody in: without a name and a password
+    // nobody could pass the login the save would switch on.
+    let method = text(&body, "authenticationMethod");
+    if method.eq_ignore_ascii_case("forms") || method.eq_ignore_ascii_case("basic") {
+        for (property, key) in [("Username", "username"), ("Password", "password")] {
+            let value = text(&body, key);
+            if value.is_empty() {
+                failures.push(ValidationFailure::not_empty(property, json!(value)));
+            }
+        }
+    }
     // `IsMatchingPassword`: the stored hash sent back as it was shown, or
     // a new password typed twice.
     let (password, confirmation) = (text(&body, "password"), text(&body, "passwordConfirmation"));
@@ -810,7 +961,6 @@ pub async fn host(State(state): State<AppState>, Json(body): Json<Value>) -> Api
             ("backupFolder", Str),
             ("backupInterval", Int),
             ("backupRetention", Int),
-            ("trustCgnatIpAddresses", Bool),
         ],
     )
     .await?;
@@ -2306,5 +2456,68 @@ mod tests {
         let f = naming_failures(&body);
         assert_eq!(f.len(), 1);
         assert_eq!(f[0].property_name, "StandardEpisodeFormat");
+    }
+
+    /// What the daily clean-up empties must be a folder of its own: the
+    /// messages are the ones recorded from the original.
+    #[test]
+    fn the_recycling_bin_may_not_be_where_the_library_is() {
+        let base = std::env::temp_dir().join(format!("unarr_bin_rules_{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&base);
+        std::fs::create_dir_all(base.join("tv/Show")).unwrap();
+        std::fs::create_dir_all(base.join("bin")).unwrap();
+        let at = |rest: &str| base.join(rest).to_string_lossy().into_owned();
+        let roots = vec![at("tv")];
+        let series = vec![(1, at("tv/First")), (2, at("tv/Show"))];
+        let codes = |bin: &str| -> Vec<String> {
+            recycle_bin_failures(bin, &roots, &series, 1, "/opt/unarr")
+                .into_iter()
+                .map(|f| f.error_code.unwrap_or_default())
+                .collect()
+        };
+        // A folder of its own, there and writable.
+        assert!(codes(&at("bin")).is_empty());
+        // The root folder itself, and what holds it.
+        assert_eq!(codes(&at("tv")), ["RootFolderValidator"]);
+        let above = recycle_bin_failures(&base.to_string_lossy(), &roots, &series, 1, "/opt/unarr");
+        assert_eq!(above.len(), 1);
+        assert_eq!(
+            above[0].error_message,
+            format!(
+                "Path '{}' is an ancestor of an existing root folder",
+                base.display()
+            )
+        );
+        assert!(codes("/").contains(&"RootFolderAncestorValidator".to_string()));
+        // Not there.
+        let missing = recycle_bin_failures(&at("nowhere"), &roots, &series, 1, "/opt/unarr");
+        assert_eq!(
+            missing
+                .iter()
+                .map(|f| f.error_code.clone().unwrap())
+                .collect::<Vec<_>>(),
+            ["FolderWritableValidator", "PathExistsValidator"]
+        );
+        assert_eq!(
+            missing[1].error_message,
+            format!("Path '{}' does not exist", at("nowhere"))
+        );
+        assert!(missing[0]
+            .error_message
+            .starts_with(&format!("Folder '{}' is not writable by user '", at("nowhere"))));
+        // A series' folder; the series whose id is the resource's own is
+        // left out, as the originals leave it out.
+        assert_eq!(codes(&at("tv/Show")), ["SeriesPathValidator"]);
+        assert!(!codes(&at("tv/First")).contains(&"SeriesPathValidator".to_string()));
+        // The program's folder and the system's.
+        let own = recycle_bin_failures("/opt/unarr/bin", &roots, &series, 1, "/opt/unarr");
+        assert!(own
+            .iter()
+            .any(|f| f.error_message == "Path '/opt/unarr/bin' cannot be child of the start up folder"));
+        let system = recycle_bin_failures("/usr/bin", &roots, &series, 1, "/opt/unarr");
+        assert!(system
+            .iter()
+            .any(|f| f.error_message == "Path '/usr/bin' is set to system folder /usr/bin"));
+        let _ = std::fs::remove_dir_all(&base);
     }
 }

@@ -1,0 +1,8 @@
+{
+ "$from": "config-host",
+ "$set": {
+  "username": "",
+  "password": "",
+  "allowedHosts": ""
+ }
+}

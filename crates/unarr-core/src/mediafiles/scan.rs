@@ -171,6 +171,10 @@ pub fn backfill_media_info(
             revision.is_none_or(|r| r < mediainfo::MINIMUM_MEDIA_INFO_SCHEMA_REVISION)
         })
         .collect();
+    // Without ffprobe every probe would fail, and say so, at every scan.
+    if stale.is_empty() || !mediainfo::ffprobe_available() {
+        return Ok(0);
+    }
     let mut updated = 0;
     for mut file in stale {
         let path = super::join(&series.path, &file.relative_path);
@@ -259,17 +263,9 @@ pub fn scan(
         events
             .0
             .extend(db.call_blocking(move |conn| clean_media_files(conn, &config, &series2, &[], now))?);
-        // `ExistingExtraFileService`: the subtitles and other extras in the
-        // folder are remembered with the episode files they belong to.
-        if Path::new(&series.path).is_dir() {
-            let extras: Vec<String> = files_in(&series.path, true)
-                .into_iter()
-                .filter(|f| !crate::parser::media_extensions::is_media_extension(super::extension(f)))
-                .collect();
-            let possible = filter_paths(&series.path, &extras, true);
-            let series2 = series.clone();
-            db.call_blocking(move |conn| super::extras::import_existing(conn, &series2, &possible, now))?;
-        }
+        // No folder, no extras: the ones remembered are forgotten.
+        let series2 = series.clone();
+        db.call_blocking(move |conn| super::extras::import_existing(conn, &series2, &[], now))?;
         tracing::info!("Completed scanning disk for {}", series.title);
         unmonitor_missing(db, &env.config, &events)?;
         events.push(ImportEvent::SeriesScanned { series_id: series.id });
@@ -352,6 +348,19 @@ pub fn scan(
             let _ = std::fs::remove_dir_all(&series.path);
         }
     }
+    // `ExistingExtraFileService`: the subtitles and other extras in the
+    // folder are remembered with the episode files they belong to.
+    let possible: Vec<String> = if Path::new(&series.path).is_dir() {
+        let extras: Vec<String> = files_in(&series.path, true)
+            .into_iter()
+            .filter(|f| !crate::parser::media_extensions::is_media_extension(super::extension(f)))
+            .collect();
+        filter_paths(&series.path, &extras, true)
+    } else {
+        Vec::new()
+    };
+    let series2 = series.clone();
+    db.call_blocking(move |conn| super::extras::import_existing(conn, &series2, &possible, now))?;
     tracing::info!("Completed scanning disk for {}", series.title);
     unmonitor_missing(db, &env.config, &events)?;
     events.push(ImportEvent::SeriesScanned { series_id: series.id });

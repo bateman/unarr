@@ -330,18 +330,19 @@ impl AppState {
                 if let Some(secret) = unarr_core::store::config::meta(conn, KEY)? {
                     return Ok(secret);
                 }
-                let mut bytes = [0u8; 32];
-                std::io::Read::read_exact(&mut std::fs::File::open("/dev/urandom")?, &mut bytes)?;
-                let secret: String = bytes.iter().map(|b| format!("{b:02x}")).collect();
+                let secret = unarr_core::random::hex::<32>()?;
                 unarr_core::store::config::set_meta(conn, KEY, &secret)?;
                 Ok(secret)
             });
             match stored {
                 Ok(secret) => secret.into_bytes(),
                 Err(e) => {
-                    // Sessions then end with the process.
+                    // Sessions then end with the process. Still a key nobody
+                    // can guess, or no key at all.
                     tracing::warn!(error = %e, "could not keep the session key; using one for this run");
-                    format!("{:?}{}", std::time::SystemTime::now(), std::process::id()).into_bytes()
+                    unarr_core::random::hex::<32>()
+                        .expect("random bytes for the session key")
+                        .into_bytes()
                 }
             }
         })
@@ -412,9 +413,7 @@ impl AppState {
             }),
             // `ConfigFileProvider.Execute(ResetApiKeyCommand)`.
             reset_api_key: Arc::new(move || {
-                let mut bytes = [0u8; 16];
-                std::io::Read::read_exact(&mut std::fs::File::open("/dev/urandom")?, &mut bytes)?;
-                let key: String = bytes.iter().map(|b| format!("{b:02x}")).collect();
+                let key = unarr_core::random::hex::<16>()?;
                 crate::routes::settings_writes::set_host_override_blocking(&state, "apiKey", json!(key))
             }),
         }

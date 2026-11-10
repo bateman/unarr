@@ -1,0 +1,24 @@
+{
+  "body": [
+    {
+      "attemptedValue": "/tv",
+      "errorCode": "RootFolderValidator",
+      "errorMessage": "Path '/tv' is already configured as a root folder",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "path": "/tv",
+        "propertyName": "Recycle Bin",
+        "propertyValue": "/tv"
+      },
+      "propertyName": "RecycleBin",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-10T23:00:07Z",
+  "request": {
+    "body": "bodies/config-mediamanagement-put-bin-root.json",
+    "method": "PUT",
+    "path": "/api/v3/config/mediamanagement/1"
+  },
+  "status": 400
+}

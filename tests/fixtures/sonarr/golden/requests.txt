@@ -821,3 +821,7 @@ sleep 20
 series-type-after GET /api/v3/series/1
 series-type-restore PUT /api/v3/series/1 bodies/series-type-restore.json
 sleep 20
+# What a review of the audit's fixes found: the recycling bin may not be a
+# root folder (the daily clean-up empties it), and a login needs a user.
+config-mediamanagement-put-bin-root PUT /api/v3/config/mediamanagement/1 bodies/config-mediamanagement-put-bin-root.json
+config-host-put-no-user PUT /api/v3/config/host bodies/config-host-put-no-user.json

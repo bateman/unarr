@@ -308,10 +308,12 @@ pub fn clear_blocklist(conn: &Connection) -> anyhow::Result<()> {
 
 /// `BlocklistService.Delete`: the rows with these ids; how many went.
 pub fn delete_blocklist(conn: &Connection, ids: &[i64]) -> anyhow::Result<usize> {
+    let tx = conn.unchecked_transaction()?;
     let mut removed = 0;
     for id in ids {
-        removed += conn.execute("DELETE FROM blocklist WHERE id = ?1", params![id])?;
+        removed += tx.execute("DELETE FROM blocklist WHERE id = ?1", params![id])?;
     }
+    tx.commit()?;
     Ok(removed)
 }
 

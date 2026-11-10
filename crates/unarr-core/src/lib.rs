@@ -28,6 +28,7 @@ pub mod outbound;
 pub mod parser;
 pub mod profile;
 pub mod quality;
+pub mod random;
 pub mod search;
 pub mod store;
 pub mod time;

@@ -370,7 +370,9 @@ fn chown_group(path: &Path, group: &str) -> io::Result<()> {
 
 /// `FileSetLastWriteTime`, errors swallowed as the originals swallow them.
 pub fn set_last_write_time(path: &Path, at: DateTime<Utc>) {
-    if let Ok(f) = fs::File::options().write(true).open(path) {
+    // Opened for reading: the time is the owner's to set, and a file that
+    // cannot be written must still say when it reached the recycling bin.
+    if let Ok(f) = fs::File::open(path) {
         let _ = f.set_modified(std::time::SystemTime::from(at));
     }
 }

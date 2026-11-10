@@ -296,7 +296,13 @@ fn fixture_dir() -> PathBuf {
 /// build when it is there, else with `UNARR_FFPROBE` or the `PATH`'s.
 fn use_bundled_ffprobe() {
     let bundled = Path::new(env!("CARGO_MANIFEST_DIR")).join("../../.cache/sonarr/Sonarr/ffprobe");
-    if bundled.is_file() && std::env::var_os("UNARR_FFPROBE").is_none() {
+    // The bundled build is the original's Linux one: elsewhere it does not
+    // run, and the system's is better than none.
+    let runs = std::process::Command::new(&bundled)
+        .arg("-version")
+        .output()
+        .is_ok_and(|o| o.status.success());
+    if runs && std::env::var_os("UNARR_FFPROBE").is_none() {
         unarr_core::mediafiles::mediainfo::set_ffprobe_path(Some(bundled));
     }
 }
@@ -980,7 +986,7 @@ async fn golden_responses_match() {
             (Some(hash), Some(text)) if g.method == "PUT" && g.path.ends_with("/config/host") => {
                 let mut sent: Value = serde_json::from_str(text).unwrap();
                 if sent["passwordConfirmation"].as_str().unwrap_or("").is_empty()
-                    && sent["password"].is_string()
+                    && sent["password"].as_str().is_some_and(|p| !p.is_empty())
                 {
                     sent["password"] = Value::String(hash.clone());
                 }
@@ -1810,4 +1816,47 @@ async fn changing_the_series_type_queues_a_refresh() {
         .unwrap();
     assert_eq!(status_of(&app, save).await, StatusCode::ACCEPTED);
     assert_eq!(refreshes(&state).await, before + 1);
+}
+
+/// The calendar feed refuses a range no calendar reaches instead of
+/// computing with it, and a key that is blank opens nothing.
+#[tokio::test]
+async fn the_feed_refuses_absurd_ranges_and_blank_keys() {
+    let app = unarr_api::router(build_state());
+    for query in [
+        "pastDays=1000000000",
+        "futureDays=9223372036854775807",
+        "pastDays=-9223372036854775808",
+    ] {
+        let request = get(&format!("/feed/v3/calendar/Sonarr.ics?{query}"))
+            .header("X-Api-Key", API_KEY)
+            .body(Body::empty())
+            .unwrap();
+        assert_eq!(status_of(&app, request).await, StatusCode::BAD_REQUEST, "{query}");
+    }
+    let wide = get("/feed/v3/calendar/Sonarr.ics?pastDays=36500&futureDays=36500")
+        .header("X-Api-Key", API_KEY)
+        .body(Body::empty())
+        .unwrap();
+    assert_eq!(status_of(&app, wide).await, StatusCode::OK);
+
+    // An installation whose key came out blank: `apikey=` is not a key.
+    let blank = unarr_api::router(build_state_with(|h| h.api_key = String::new()));
+    for uri in [
+        "/api/v3/system/status?apikey=",
+        "/api/v3/system/status",
+        "/feed/v3/calendar/Sonarr.ics?apikey=",
+    ] {
+        let request = get(uri).body(Body::empty()).unwrap();
+        assert_eq!(
+            status_of(&blank, request).await,
+            StatusCode::UNAUTHORIZED,
+            "{uri}"
+        );
+    }
+    let header = get("/api/v3/system/status")
+        .header("X-Api-Key", "")
+        .body(Body::empty())
+        .unwrap();
+    assert_eq!(status_of(&blank, header).await, StatusCode::UNAUTHORIZED);
 }

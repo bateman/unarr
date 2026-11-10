@@ -148,7 +148,8 @@ pub fn list_by_episode_file(conn: &Connection, episode_file_id: i64) -> anyhow::
 pub fn upsert(conn: &Connection, file: &mut ExtraFile, now: DateTime<Utc>) -> anyhow::Result<()> {
     if file.id == 0 {
         file.id = store::sequence::next_id(conn, "extra_files")?;
-        file.added = Some(now);
+        // A row brought over from the original keeps its own date.
+        file.added.get_or_insert(now);
     }
     conn.execute(
         "INSERT OR REPLACE INTO extra_files (id, kind, series_id, season_number, episode_file_id,
@@ -598,20 +599,21 @@ pub fn import_existing(
 ) -> anyhow::Result<usize> {
     tracing::debug!("Looking for existing extra files in {}", series.path);
     let known = list_by_series(conn, series.id)?;
-    let gone: Vec<i64> = known
-        .iter()
-        .filter(|e| !files_on_disk.contains(&super::join(&series.path, &e.relative_path)))
-        .map(|e| e.id)
-        .collect();
+    let on_disk: std::collections::HashSet<&str> = files_on_disk.iter().map(String::as_str).collect();
+    let mut known_paths = std::collections::HashSet::new();
+    let mut gone = Vec::new();
+    for extra in &known {
+        let path = super::join(&series.path, &extra.relative_path);
+        if on_disk.contains(path.as_str()) {
+            known_paths.insert(path);
+        } else {
+            gone.push(extra.id);
+        }
+    }
     delete_rows(conn, &gone)?;
-    let known_paths: Vec<String> = known
-        .iter()
-        .filter(|e| !gone.contains(&e.id))
-        .map(|e| super::join(&series.path, &e.relative_path))
-        .collect();
     let lookup = StoreLookup::new(conn);
     let mut added = 0;
-    for path in files_on_disk.iter().filter(|p| !known_paths.contains(p)) {
+    for path in files_on_disk.iter().filter(|p| !known_paths.contains(p.as_str())) {
         let extension = super::extension(path).to_string();
         if extension.trim().is_empty() {
             tracing::debug!("No extension for file: {path}");
@@ -646,6 +648,15 @@ pub fn import_existing(
             extra.copy = info.copy;
             extra
         } else {
+            // A rename gives an other extra the episode file's name and its
+            // own extension, nothing between. One that is named otherwise
+            // (`-thumb.jpg`, written by a media centre) is left alone:
+            // the originals hand those to their metadata consumers, which
+            // Unarr does not drive.
+            if !super::file_stem(path).eq_ignore_ascii_case(super::file_stem(&episode_file.relative_path)) {
+                tracing::debug!("Extra file: {path} is not named after its episode file.");
+                continue;
+            }
             ExtraFile::new(Kind::Other, series, &episode_file, relative, &extension)
         };
         extra.season_number = Some(first.season_number);
@@ -971,6 +982,33 @@ mod tests {
             folder.join("Show - S01E02 - Second.en.srt").exists(),
             "not an extra of that file"
         );
+        let _ = fs::remove_dir_all(&lib.root);
+    }
+
+    /// The scan itself does the remembering: a subtitle next to an episode
+    /// file is in the table once the series has been scanned, on the
+    /// ordinary path of a scan and not only when the folder is missing.
+    #[test]
+    fn a_scan_remembers_the_extras_it_finds() {
+        let lib = library("scan");
+        let folder = Path::new(&lib.series.path).join("Season 01");
+        fs::write(folder.join("Show - S01E01 - Pilot.it.srt"), b"x").unwrap();
+        let now = Utc::now();
+        let env = lib
+            .db
+            .call_blocking(move |conn| super::super::decide::Environment::load(conn, now))
+            .unwrap();
+        super::super::scan::scan(&lib.db, &env, &lib.series, now, &mut |_| {}).unwrap();
+        assert_eq!(lib.paths(), ["Season 01/Show - S01E01 - Pilot.it.srt"]);
+        // The folder gone: nothing is remembered any more.
+        fs::remove_dir_all(&lib.series.path).unwrap();
+        fs::write(
+            lib.root.join("tv/other.txt"),
+            b"so that the root folder is not empty",
+        )
+        .unwrap();
+        super::super::scan::scan(&lib.db, &env, &lib.series, now, &mut |_| {}).unwrap();
+        assert!(lib.rows().is_empty());
         let _ = fs::remove_dir_all(&lib.root);
     }
 }

@@ -1,0 +1,5 @@
+# The goldens were recorded with the clock in UTC, and some answers carry
+# local time (a notification's text, the all-day dates of the calendar
+# feed): the tests run there too, wherever the machine is.
+[env]
+TZ = "UTC"
