@@ -26,6 +26,9 @@ pub struct Settings {
     pub url_base: String,
     /// The hosts requests may name, from `AllowedHosts`.
     pub allowed_hosts: crate::hosts::AllowedHosts,
+    /// The proxies whose `X-Forwarded-For` is believed, from
+    /// `TrustedNetworks`.
+    pub trusted_networks: crate::forwarded::TrustedNetworks,
 }
 
 impl Settings {
@@ -40,6 +43,7 @@ impl Settings {
             instance_name: host.effective_instance_name(personality.app_name()),
             url_base: host.normalized_url_base(),
             allowed_hosts,
+            trusted_networks: crate::forwarded::TrustedNetworks::parse(&host.trusted_networks),
             host,
         }
     }

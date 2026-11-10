@@ -10,6 +10,7 @@ pub mod auth;
 mod blocking;
 pub mod compat;
 pub mod error;
+pub mod forwarded;
 pub mod fs;
 pub mod hosts;
 pub mod json;

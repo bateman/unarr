@@ -394,18 +394,25 @@ pub async fn require_ui_auth(State(state): State<AppState>, request: Request, ne
         return next.run(request).await;
     }
     let headers = request.headers();
-    let forwarded = headers.contains_key("x-forwarded-for");
-    let remote = request
-        .extensions()
-        .get::<ConnectInfo<std::net::SocketAddr>>()
-        .map(|c| c.0.ip());
+    // The client behind the proxies `TrustedNetworks` lets speak for it; a
+    // forwarded address nobody trusted vouched for leaves it unknown
+    // (`IsClientAddressKnown`), and an unknown client is never exempt.
+    let client = crate::forwarded::client(
+        request
+            .extensions()
+            .get::<ConnectInfo<std::net::SocketAddr>>()
+            .map(|c| c.0.ip()),
+        headers,
+        &settings.trusted_networks,
+    );
+    let known = !client.forwarded_left;
     let exempt = match host.authentication_required {
         AuthenticationRequired::Enabled => false,
         AuthenticationRequired::DisabledForLocalAddresses => {
-            !forwarded && remote.is_some_and(is_local_address)
+            known && client.address.is_some_and(is_local_address)
         }
         AuthenticationRequired::DisabledForLocalhost => {
-            !forwarded && remote.is_some_and(|ip| ip.is_loopback())
+            known && client.address.is_some_and(|ip| ip.is_loopback())
         }
     };
     // Exempt clients skip the credential check, which is slow for Basic.

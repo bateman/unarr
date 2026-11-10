@@ -282,3 +282,75 @@ async fn log_files_are_listed_newest_first_and_downloaded() {
     }
     std::fs::remove_dir_all(&app_data).unwrap();
 }
+
+/// Behind a reverse proxy: with "Disabled for Local Addresses" the login is
+/// skipped only for a LAN client that a proxy on a trusted network vouches
+/// for, as the originals do with `TrustedNetworks`.
+#[tokio::test]
+async fn a_trusted_proxy_lets_local_clients_skip_the_login() {
+    use axum::extract::ConnectInfo;
+    use std::net::SocketAddr;
+    use unarr_core::config::AuthenticationRequired;
+
+    let dir = fixtures_dir().join("sonarr");
+    let page = |trusted_networks: &'static str, peer: &'static str, forwarded: Option<&'static str>| {
+        let dir = dir.clone();
+        async move {
+            let db = Db::open_in_memory().unwrap();
+            unarr_import::sonarr::import(&dir.join("sonarr.db"), &db).expect("import fixture");
+            let mut host = unarr_import::config_xml::read(&dir.join("config.xml"), 8989).expect("config.xml");
+            host.authentication_required = AuthenticationRequired::DisabledForLocalAddresses;
+            host.trusted_networks = trusted_networks.to_string();
+            let state = AppState::new(
+                Personality::Sonarr,
+                db,
+                Settings::from_host_config(host, Personality::Sonarr),
+                RuntimeInfo::detect(dir),
+                LogBuffer::new(),
+            );
+            let mut request = Request::builder().uri("/system/status");
+            if let Some(forwarded) = forwarded {
+                request = request.header("X-Forwarded-For", forwarded);
+            }
+            let mut request = request.body(Body::empty()).unwrap();
+            request
+                .extensions_mut()
+                .insert(ConnectInfo(peer.parse::<SocketAddr>().unwrap()));
+            let response = unarr_api::router(state).oneshot(request).await.unwrap();
+            (
+                response.status(),
+                response
+                    .headers()
+                    .get("location")
+                    .map(|l| l.to_str().unwrap().to_string()),
+            )
+        }
+    };
+    let login = (
+        StatusCode::FOUND,
+        Some("/login?returnUrl=/system/status".to_string()),
+    );
+    const PROXY: &str = "172.29.4.2:41000";
+
+    // The proxy's network is trusted and the client is on the LAN.
+    assert_eq!(
+        page("172.29.4.0/22", PROXY, Some("192.168.4.128")).await.0,
+        StatusCode::OK
+    );
+    // The setting empty: the header is not believed, the client is unknown.
+    assert_eq!(page("", PROXY, Some("192.168.4.128")).await, login);
+    // Trusted proxy, client from the internet.
+    assert_eq!(page("172.29.4.0/22", PROXY, Some("203.0.113.9")).await, login);
+    // A local-looking address claimed by a sender nobody trusts.
+    assert_eq!(
+        page("172.29.4.0/22", "203.0.113.9:41000", Some("192.168.4.128")).await,
+        login
+    );
+    assert_eq!(
+        page("172.29.4.0/22", "192.168.4.50:41000", Some("192.168.4.128")).await,
+        login
+    );
+    // No proxy at all: a LAN client is exempt, as before.
+    assert_eq!(page("", "192.168.4.128:41000", None).await.0, StatusCode::OK);
+    assert_eq!(page("", "203.0.113.9:41000", None).await, login);
+}

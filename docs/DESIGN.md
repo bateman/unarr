@@ -924,6 +924,19 @@ a query; section 15 asks which library size the target is for.
   through the originals' `CleanseLogMessage`: Unarr keeps secrets out of
   what it logs in the first place (section 12). `system/routes` is not
   implemented, the UI does not ask for it.
+- **`TrustedNetworks` is applied** (`unarr_api::forwarded`), as the
+  originals do through ASP.NET's forwarded-headers middleware: a proxy on
+  one of the listed networks, or on the loopback, is believed, the address
+  it names in `X-Forwarded-For` becomes the client's and its entry is
+  consumed, from the last entry back until an address nobody trusted
+  vouches for. "Disabled for Local Addresses" exempts a client only when
+  no entry is left and its address is local. Until the first days of
+  running in place of Sonarr on the maintainer's NAS the setting was
+  stored and shown but not read, so every request through Traefik was
+  asked to log in. A saved setting applies at once, where the originals
+  ask for a restart. `X-Forwarded-Proto` and `X-Forwarded-Host` are not
+  read: Unarr's redirects are relative. The setting is not validated on
+  save yet (the originals refuse a list that does not parse).
 - **Each personality logs on its own.** One process serves several
   personalities and a log line does not say whose it is. Rather than mark
   every task (a span on each spawn, and a line lost to the wrong file
