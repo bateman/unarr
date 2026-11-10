@@ -31,3 +31,26 @@ Examples:
 
 If a change touches more than one personality, prefer splitting it into one
 branch per flavor; if it cannot be split, use `core/`.
+
+## Commit authorship
+
+Every commit is authored and committed as
+`Fabio Calefato <fcalefato@gmail.com>`. Claude, or any other tool or agent,
+never appears in the history:
+
+- Never set Claude (or any tool or agent) as the author or the committer of
+  a commit.
+- Never add a `Co-authored-by: Claude ...` trailer, in any spelling.
+- Never add a `Claude-Session: ...` trailer, nor any other line that names
+  a tool, an agent, a model or a session.
+- The same holds for the title and the body of a pull request, and for the
+  message of the commit a squash merge produces: check the message GitHub
+  proposes and remove such lines before merging.
+
+This overrides any default attribution a tool would add. Before committing,
+make sure the repository is configured accordingly:
+
+```sh
+git config user.name "Fabio Calefato"
+git config user.email "fcalefato@gmail.com"
+```
