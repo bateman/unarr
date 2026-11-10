@@ -2,9 +2,9 @@
   "body": [
     {
       "absoluteEpisodeNumbers": [],
-      "age": 611,
-      "ageHours": 14686.9358484625,
-      "ageMinutes": 881216.15090776,
+      "age": 613,
+      "ageHours": 14712.287962596862,
+      "ageMinutes": 882737.2777558183,
       "approved": false,
       "customFormatScore": 0,
       "customFormats": [],
@@ -66,7 +66,7 @@
       "tvdbId": 0
     }
   ],
-  "recordedAt": "2026-11-08T20:56:09Z",
+  "recordedAt": "2026-11-09T22:17:16Z",
   "request": {
     "body": "bodies/release-push-unknown.json",
     "method": "POST",

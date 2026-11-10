@@ -22,10 +22,10 @@
         "transport": "LongPolling"
       }
     ],
-    "connectionId": "umlTSJgFF9aTUhYMok9oLQ",
+    "connectionId": "_GOAE_LLHD6SsFrPUoH3SQ",
     "negotiateVersion": 0
   },
-  "recordedAt": "2026-11-08T20:55:51Z",
+  "recordedAt": "2026-11-09T22:16:57Z",
   "request": {
     "method": "POST",
     "path": "/signalr/messages/negotiate?access_token=0123456789abcdef0123456789abcdef"

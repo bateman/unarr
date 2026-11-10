@@ -1,0 +1,11 @@
+{
+ "tvdbId": 81189,
+ "title": "Breaking Bad",
+ "qualityProfileId": 999,
+ "rootFolderPath": "/tv",
+ "seasonFolder": true,
+ "monitored": true,
+ "addOptions": {
+  "monitor": "all"
+ }
+}

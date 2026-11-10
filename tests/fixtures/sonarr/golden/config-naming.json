@@ -13,7 +13,7 @@
     "specialsFolderFormat": "Specials",
     "standardEpisodeFormat": "{Series CleanTitleWithoutYear} {(Series Year)} - S{season:00}E{episode:00} - {Episode CleanTitle:90} {[Custom Formats]}{[Quality Full]}{[Mediainfo AudioCodec}{ Mediainfo AudioChannels]}{[MediaInfo VideoDynamicRangeType]}{[Mediainfo VideoCodec]}{-Release Group}"
   },
-  "recordedAt": "2026-11-08T20:55:52Z",
+  "recordedAt": "2026-11-09T22:16:58Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/config/naming"

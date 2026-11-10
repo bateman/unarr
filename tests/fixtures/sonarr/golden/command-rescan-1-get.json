@@ -12,22 +12,22 @@
       "updateScheduledTask": true
     },
     "commandName": "Rescan Series",
-    "duration": "00:00:00.0515652",
-    "ended": "2026-11-08T20:59:32Z",
+    "duration": "00:00:00.0668379",
+    "ended": "2026-11-09T22:20:40Z",
     "id": 461695,
     "message": "Scanning The Pitt",
     "name": "RescanSeries",
     "priority": "normal",
-    "queued": "2026-11-08T20:59:32Z",
+    "queued": "2026-11-09T22:20:40Z",
     "result": "successful",
     "sendUpdatesToClient": true,
-    "started": "2026-11-08T20:59:32Z",
-    "stateChangeTime": "2026-11-08T20:59:32Z",
+    "started": "2026-11-09T22:20:40Z",
+    "stateChangeTime": "2026-11-09T22:20:40Z",
     "status": "completed",
     "trigger": "manual",
     "updateScheduledTask": true
   },
-  "recordedAt": "2026-11-08T20:59:44Z",
+  "recordedAt": "2026-11-09T22:20:52Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/command/461695"

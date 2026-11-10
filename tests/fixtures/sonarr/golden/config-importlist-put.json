@@ -1,0 +1,14 @@
+{
+  "body": {
+    "id": 1,
+    "listSyncLevel": "logOnly",
+    "listSyncTag": 0
+  },
+  "recordedAt": "2026-11-09T22:24:42Z",
+  "request": {
+    "body": "bodies/config-importlist-put.json",
+    "method": "PUT",
+    "path": "/api/v3/config/importlist/1"
+  },
+  "status": 202
+}

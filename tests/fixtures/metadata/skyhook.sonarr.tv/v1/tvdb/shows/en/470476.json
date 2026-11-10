@@ -1,0 +1,152 @@
+{
+ "tvdbId": 470476,
+ "title": "Avvocato Ligas",
+ "overview": "Lawyer Lorenzo Ligas, played by Luca Argentero, is the man everyone would like to be. He is fired from his prestigious law firm because he is unable to distinguish between duty and pleasure, and to get back to the top he will face a challenge that he cannot tackle alone.",
+ "slug": "avvocato-ligas",
+ "originalCountry": "ita",
+ "originalLanguage": "ita",
+ "language": "eng",
+ "firstAired": "2026-03-06",
+ "lastAired": "2026-04-03",
+ "tvMazeId": 90698,
+ "tmdbId": 314658,
+ "imdbId": "tt35677644",
+ "malIds": [],
+ "anidbIds": [],
+ "aniListIds": [],
+ "lastUpdated": "2026-09-14T05:14:46Z",
+ "status": "Continuing",
+ "runtime": 58,
+ "timeOfDay": {
+  "hours": 6,
+  "minutes": 0
+ },
+ "originalNetwork": "Sky Atlantic (IT)",
+ "network": "Sky Atlantic (IT)",
+ "genres": [
+  "Drama"
+ ],
+ "rating": {
+  "count": 289,
+  "value": "7.2"
+ },
+ "actors": [
+  {
+   "name": "Luca Argentero",
+   "character": "Lorenzo Ligas",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/304297/photo/6a04dc0e30257.jpg"
+  },
+  {
+   "name": "Marina Occhionero ",
+   "character": "Marta Carati"
+  },
+  {
+   "name": "Barbara Chichiarelli",
+   "character": "Anna Maria Pastori",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/7897358/photo/60c3557ba7cb5.jpg"
+  },
+  {
+   "name": "Gaia Messerklinger",
+   "character": "Patrizia Roncella",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/543918/photo/697fead3c35d2.jpg"
+  },
+  {
+   "name": "Flavio Furno",
+   "character": "Paolo Scarpelli"
+  }
+ ],
+ "images": [
+  {
+   "coverType": "Banner",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/470476/banners/69ef77b01ddff.jpg"
+  },
+  {
+   "coverType": "Poster",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/470476/posters/698618d1abd3f.jpg"
+  },
+  {
+   "coverType": "Fanart",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/470476/backgrounds/69adea15f2144.jpg"
+  }
+ ],
+ "seasons": [
+  {
+   "seasonNumber": 1
+  }
+ ],
+ "episodes": [
+  {
+   "tvdbShowId": 470476,
+   "tvdbId": 11457552,
+   "seasonNumber": 1,
+   "episodeNumber": 1,
+   "title": "Episode 1",
+   "airDate": "2026-03-06",
+   "airDateUtc": "2026-03-06T05:00:00Z",
+   "runtime": 53,
+   "overview": "Lawyer Ligas enters the courtroom to defend pop star Jack Zero, but the chaos of his life threatens to overwhelm him completely.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11457552/screencap/69aa988839b55.jpg"
+  },
+  {
+   "tvdbShowId": 470476,
+   "tvdbId": 11626848,
+   "seasonNumber": 1,
+   "episodeNumber": 2,
+   "title": "Episode 2",
+   "airDate": "2026-03-06",
+   "airDateUtc": "2026-03-06T05:00:00Z",
+   "runtime": 59,
+   "overview": "Without education or reputation, Ligas fights to return to prominence with cunning and cynicism. But his private life has surprises in store for him...",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11626848/screencap/69aa98d475982.jpg"
+  },
+  {
+   "tvdbShowId": 470476,
+   "tvdbId": 11626849,
+   "seasonNumber": 1,
+   "episodeNumber": 3,
+   "title": "Episode 3",
+   "airDate": "2026-03-13",
+   "airDateUtc": "2026-03-13T05:00:00Z",
+   "runtime": 61,
+   "overview": "New case, old troubles: Ligas and Marta find themselves torn between personal dramas and a client who is impossible to defend.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11626849/screencap/69b3bf79179fd.jpg"
+  },
+  {
+   "tvdbShowId": 470476,
+   "tvdbId": 11626850,
+   "seasonNumber": 1,
+   "episodeNumber": 4,
+   "title": "Episode 4",
+   "airDate": "2026-03-20",
+   "airDateUtc": "2026-03-20T05:00:00Z",
+   "runtime": 58,
+   "overview": "An eccentric new client, romantic drama, and a birthday to remember: Ligas has everything under control...\r\nor almost.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11626850/screencap/69bd0caac1058.jpg"
+  },
+  {
+   "tvdbShowId": 470476,
+   "tvdbId": 11626851,
+   "seasonNumber": 1,
+   "episodeNumber": 5,
+   "title": "Episode 5",
+   "airDate": "2026-03-27",
+   "airDateUtc": "2026-03-27T05:00:00Z",
+   "runtime": 59,
+   "overview": "Ligas seeks personal and professional redemption, but a new case and old enemies put his balance to the test.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11626851/screencap/69c65589060ad.jpg"
+  },
+  {
+   "tvdbShowId": 470476,
+   "tvdbId": 11626852,
+   "seasonNumber": 1,
+   "episodeNumber": 6,
+   "title": "Episode 6",
+   "airDate": "2026-04-03",
+   "airDateUtc": "2026-04-03T04:00:00Z",
+   "runtime": 57,
+   "finaleType": "season",
+   "overview": "Unexpected departures and old wounds are pushing Ligas to the limit, but a return from the past could call everything into question.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11626852/screencap/69cf81dc65883.jpg"
+  }
+ ]
+}

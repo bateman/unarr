@@ -43,3 +43,23 @@ lto = "fat"
 codegen-units = 1
 panic = "abort"
 strip = true
+
+# Cover thumbnails are pixel loops: unoptimised, a refresh of the fixture
+# spends minutes resizing in the tests. The image stack is built optimised
+# in every profile.
+[profile.dev.package.image]
+opt-level = 3
+[profile.dev.package.zune-jpeg]
+opt-level = 3
+[profile.dev.package.zune-core]
+opt-level = 3
+[profile.dev.package.png]
+opt-level = 3
+[profile.dev.package.fdeflate]
+opt-level = 3
+[profile.dev.package.miniz_oxide]
+opt-level = 3
+[profile.dev.package.simd-adler32]
+opt-level = 3
+[profile.dev.package.crc32fast]
+opt-level = 3

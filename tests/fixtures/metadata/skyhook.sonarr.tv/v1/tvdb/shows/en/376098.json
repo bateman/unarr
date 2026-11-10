@@ -1,0 +1,432 @@
+{
+ "tvdbId": 376098,
+ "title": "Lanterns",
+ "overview": "Follows intergalactic cops John Stewart and Hal Jordan as they uncover a dark mystery.",
+ "slug": "lanterns",
+ "originalCountry": "usa",
+ "originalLanguage": "eng",
+ "language": "eng",
+ "firstAired": "2026-08-16",
+ "lastAired": "2026-10-04",
+ "tvMazeId": 44776,
+ "tmdbId": 95350,
+ "imdbId": "tt26545992",
+ "malIds": [],
+ "anidbIds": [],
+ "aniListIds": [],
+ "lastUpdated": "2026-11-05T18:25:06Z",
+ "status": "Continuing",
+ "runtime": 53,
+ "timeOfDay": {
+  "hours": 21,
+  "minutes": 0
+ },
+ "originalNetwork": "HBO",
+ "network": "HBO",
+ "genres": [
+  "Mystery",
+  "Science Fiction"
+ ],
+ "contentRating": "TV-MA",
+ "rating": {
+  "count": 90244,
+  "value": "7.7"
+ },
+ "actors": [
+  {
+   "name": "Aaron Pierre",
+   "character": "John Stewart",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/7970391/photo/60fd4b2b5f22e.jpg"
+  },
+  {
+   "name": "Kyle Chandler",
+   "character": "Hal Jordan",
+   "image": "https://artworks.thetvdb.com/banners/person/300292/6a6292c6c3bd5.jpg"
+  },
+  {
+   "name": "Kelly Macdonald",
+   "character": "Sheriff Kerry",
+   "image": "https://artworks.thetvdb.com/banners/person/7876528/5ebb938519a98.jpg"
+  },
+  {
+   "name": "Poorna Jagannathan",
+   "character": "Zoe",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/317075/photo/62fd4217dacae.jpg"
+  },
+  {
+   "name": "Laura Linney",
+   "character": "Lianna",
+   "image": "https://artworks.thetvdb.com/banners/person/310770/primary.jpg"
+  },
+  {
+   "name": "J. Alphonse Nicholson",
+   "character": "Johnny Stewart Sr. (young)",
+   "image": "https://artworks.thetvdb.com/banners/person/7992871/5efa0141c9edc.jpg"
+  },
+  {
+   "name": "Jason Ritter",
+   "character": "Billy Macon",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/269510/photo/64f8def213064.jpg"
+  },
+  {
+   "name": "Jasmine Cephas Jones",
+   "character": "Bernadette Stewart",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/479667/photo/676da066a0fb9.jpg"
+  },
+  {
+   "name": "Garret Dillahunt",
+   "character": "William Macon",
+   "image": "https://artworks.thetvdb.com/banners/person/275807/609f9892e4ebd.jpg"
+  },
+  {
+   "name": "Paul Ben-Victor",
+   "character": "Antaan",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/305594/photo/65be08a982ca2.jpg"
+  }
+ ],
+ "images": [
+  {
+   "coverType": "Banner",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/376098/banners/6a837b9445cbd.jpg"
+  },
+  {
+   "coverType": "Poster",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/376098/posters/6a260a39d7133.jpg"
+  },
+  {
+   "coverType": "Fanart",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/376098/backgrounds/6a2609cc83b3f.jpg"
+  },
+  {
+   "coverType": "Clearlogo",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/376098/clearlogo/6a8306eb38dd4.png"
+  }
+ ],
+ "seasons": [
+  {
+   "seasonNumber": 0,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2174172/posters/6a8307ca899b2.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 1,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2005527/posters/6a83086fe032d.jpg"
+    }
+   ]
+  }
+ ],
+ "episodes": [
+  {
+   "tvdbShowId": 376098,
+   "tvdbId": 12023888,
+   "seasonNumber": 0,
+   "episodeNumber": 1,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 2,
+   "title": "Inside the Episode: S1 E1",
+   "airDate": "2026-08-16",
+   "airDateUtc": "2026-08-17T01:00:00Z",
+   "runtime": 4,
+   "overview": "Kyle Chandler, Aaron Pierre, and the cast of Lanterns unpack episode 1."
+  },
+  {
+   "tvdbShowId": 376098,
+   "tvdbId": 12023889,
+   "seasonNumber": 0,
+   "episodeNumber": 2,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 2,
+   "title": "Lanterns: The Official Podcast | Episode 1, \"Pilot\"",
+   "airDate": "2026-08-16",
+   "airDateUtc": "2026-08-17T01:00:00Z",
+   "runtime": 50,
+   "overview": "Welcome to Lanterns: The Official Podcast. Host Juju Green kicks off the series with an inside look at Lanterns Episode 1, \"Pilot,\" alongside the creative team behind the DC Studios series: Chris Mundy (Showrunner, Executive Producer, Co-Creator, Writer), Damon Lindelof (Executive Producer, Co-Creator, Writer), and Tom King (Executive Producer, Co-Creator, Writer). \r\n\r\nThe conversation covers how Lanterns found its identity as a character-driven mystery, why Nebraska became the perfect setting, the creative influences that shaped the series, and how the team approached adapting decades of Green Lantern mythology while making the story welcoming for new viewers. Juju also asks about the casting of Kyle Chandler as Hal Jordan and Aaron Pierre as John Stewart, the show's approach to legacy, and the balance between grounded storytelling and cosmic spectacle. \r\n\r\nWhether you've followed Green Lantern comics for years or this is your first trip into the DC Universe, this episode offers an inside"
+  },
+  {
+   "tvdbShowId": 376098,
+   "tvdbId": 12023890,
+   "seasonNumber": 0,
+   "episodeNumber": 3,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 3,
+   "title": "Inside the Episode: S1 E2",
+   "airDate": "2026-08-23",
+   "airDateUtc": "2026-08-24T01:00:00Z",
+   "runtime": 4,
+   "overview": "Kyle Chandler, Aaron Pierre, and the cast of Lanterns discuss the significance of Hal Jordan's suit and possessions in episode 2."
+  },
+  {
+   "tvdbShowId": 376098,
+   "tvdbId": 12023891,
+   "seasonNumber": 0,
+   "episodeNumber": 4,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 3,
+   "title": "Lanterns: The Official Podcast | Episode 2, \"Trust Fall\"",
+   "airDate": "2026-08-23",
+   "airDateUtc": "2026-08-24T01:00:00Z",
+   "runtime": 35,
+   "overview": "What does it take to bring the Green Lantern mythos down to Earth? In Lanterns: The Official Podcast, Juju Green sits down with showrunner, executive producer, co-creator and writer Chris Mundy, writer and co-executive producer Vanessa Baden Kelly, and director and executive producer James Hawes to break down Episode 2, “Trust Fall.” \r\n\r\nThe creators discuss building the grounded world of Lanterns, separating John Stewart and Hal Jordan, designing their approach to flight, and crafting the episode’s massive car chase. They also reveal how Earl, Hal Jordan’s bizarre alien pet, went from a writers’ room idea to one of the episode’s most memorable characters. \r\n\r\nPlus, the team discusses the 48-hour clock, John and Hal’s evolving trust, bringing the iconic villain Sinestro into the story, finding the right balance between comic book mythology and grounded drama, and the process of bringing Sinestro and the Green Lantern elements to life. \r\n\r\nThis is a spoiler discussion for Episode 2, “Trust Fa"
+  },
+  {
+   "tvdbShowId": 376098,
+   "tvdbId": 12023892,
+   "seasonNumber": 0,
+   "episodeNumber": 5,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 4,
+   "title": "Inside the Episode: S1 E3",
+   "airDate": "2026-08-30",
+   "airDateUtc": "2026-08-31T01:00:00Z",
+   "runtime": 5,
+   "overview": "Aaron Pierre, Jasmine Cephas Jones, and Laura Linney discuss the layers of John Stewart's origin story in episode 3."
+  },
+  {
+   "tvdbShowId": 376098,
+   "tvdbId": 12023893,
+   "seasonNumber": 0,
+   "episodeNumber": 6,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 4,
+   "title": "Lanterns: The Official Podcast | Episode 3, \"OutKast\"",
+   "airDate": "2026-08-30",
+   "airDateUtc": "2026-08-31T01:00:00Z",
+   "runtime": 59,
+   "overview": "In Lanterns: The Official Podcast, Juju Green breaks down Episode 3, “OutKast,” with writer and co-executive producer Vanessa Baden Kelly, director Stephen Williams, and Aaron Pierre, who plays John Stewart. \r\n\r\nVanessa and Stephen reveal how they built John Stewart's origin story, why the episode is structured across multiple timelines, and how the Guardian interview became a powerful lens for John's identity and experience. They also discuss the Stewart family's approach to raising John, the challenges of making him a formidable Green Lantern, and the performances that brought his family to life. \r\n\r\nThen Aaron Pierre joins Juju to talk about the responsibility of becoming the first live-action John Stewart, his approach to John's physicality and stillness, the character's military background, and the emotional psychology beneath his calm exterior."
+  },
+  {
+   "tvdbShowId": 376098,
+   "tvdbId": 12023894,
+   "seasonNumber": 0,
+   "episodeNumber": 7,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 5,
+   "title": "Inside the Episode: S1 E4",
+   "airDate": "2026-09-06",
+   "airDateUtc": "2026-09-07T01:00:00Z",
+   "runtime": 5,
+   "overview": "Kyle Chandler, Aaron Pierre, Poorna Jagannathan, and the creators of Lanterns discuss the tense and polarizing moments in episode 4."
+  },
+  {
+   "tvdbShowId": 376098,
+   "tvdbId": 12023895,
+   "seasonNumber": 0,
+   "episodeNumber": 8,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 5,
+   "title": "Lanterns: The Official Podcast | Episode 4, \"The Weenie\"",
+   "airDate": "2026-09-06",
+   "airDateUtc": "2026-09-07T01:00:00Z",
+   "runtime": 59,
+   "overview": "In Lanterns: The Official Podcast, Juju Green breaks down Episode 4, “The Weenie,” with writer and producer Breannah Gibson, actor Garret Dillahunt, and Poorna Jagannathan. \r\n\r\nBreannah Gibson reveals how Sinestro, the Guardians, and the episode's “weenie” theme shape Hal Jordan and John Stewart's increasingly complicated partnership. Garret Dillahunt talks about playing William Macon, his Green Lantern comic book roots, and preparing for one of the episode's most unexpected scenes. Poorna Jagannathan goes inside Zoe's journey, her connection with John, and the emotional impact of the episode's major reveal."
+  },
+  {
+   "tvdbShowId": 376098,
+   "tvdbId": 12023896,
+   "seasonNumber": 0,
+   "episodeNumber": 9,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 6,
+   "title": "Inside the Episode: S1 E5",
+   "airDate": "2026-09-13",
+   "airDateUtc": "2026-09-14T01:00:00Z",
+   "runtime": 5,
+   "overview": "Aaron Pierre, Kyle Chandler, and the creators of Lanterns talk about the power and pitfalls of the Green Lantern ring."
+  },
+  {
+   "tvdbShowId": 376098,
+   "tvdbId": 12023897,
+   "seasonNumber": 0,
+   "episodeNumber": 10,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 6,
+   "title": "Lanterns: The Official Podcast | Episode 5, \"Lights Out\"",
+   "airDate": "2026-09-13",
+   "airDateUtc": "2026-09-14T01:00:00Z",
+   "runtime": 51,
+   "overview": "Juju Green breaks down Lanterns Episode 5, “Lights Out,” with writer Justin Britt-Gibson and Kelly Macdonald, who plays Sheriff Kerry Kane. From the fall of Rushville to John Stewart and Hal Jordan's brutal fight, the episode takes Lanterns into some of its biggest emotional territory yet."
+  },
+  {
+   "tvdbShowId": 376098,
+   "tvdbId": 12023898,
+   "seasonNumber": 0,
+   "episodeNumber": 11,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 7,
+   "title": "Inside the Episode: S1 E6",
+   "airDate": "2026-09-20",
+   "airDateUtc": "2026-09-21T01:00:00Z",
+   "runtime": 4,
+   "overview": "Damon Lindeloff, Chris Mundy, and the production team explore the emotional stakes and character development behind a pivotal sequence in Lanterns.  The creators discuss the narrative choices involved in crafting a complex, high-pressured scenes that challenged the protagonists and define their motivation throughout the series."
+  },
+  {
+   "tvdbShowId": 376098,
+   "tvdbId": 12023899,
+   "seasonNumber": 0,
+   "episodeNumber": 12,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 7,
+   "title": "Lanterns: The Official Podcast | Episode 6, \"Bad Optics\"",
+   "airDate": "2026-09-20",
+   "airDateUtc": "2026-09-21T01:00:00Z",
+   "runtime": 51,
+   "overview": "In Episode 6 of Lanterns: The Official Podcast, host Juju Green breaks down “Bad Optics” with co-executive producer and writer Justin Britt-Gibson and director Stephen Williams, before sitting down with Grammy Award-winning composer Stephanie Economou to talk about the music behind the series. \r\n\r\nJuju, Justin, and Stephen get into John Stewart's return to Rushville, the show's 10-year time jump, the evolution of Super Heroes in the DC Universe, Hal Jordan's self-written eulogy, and Nathan Fillion's scene-stealing take on Guy Gardner. \r\n\r\nThen, Stephanie Economou goes inside the creation of the Lanterns score, from John Stewart and Hal Jordan's distinct musical identities to the '90s rock influences, experimental sounds, silence in Hal's funeral, and the score's relationship to the episode's final needle drop."
+  },
+  {
+   "tvdbShowId": 376098,
+   "tvdbId": 12023900,
+   "seasonNumber": 0,
+   "episodeNumber": 13,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 8,
+   "title": "Inside the Episode: S1 E7",
+   "airDate": "2026-09-27",
+   "airDateUtc": "2026-09-28T01:00:00Z",
+   "runtime": 6,
+   "overview": "Get the inside scoop on the alien planet from Aaron Pierre and Kyle Chandler."
+  },
+  {
+   "tvdbShowId": 376098,
+   "tvdbId": 12023901,
+   "seasonNumber": 0,
+   "episodeNumber": 14,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 8,
+   "title": "Lanterns: The Official Podcast | Episode 7, \"The Jordan Boys’ Legacy\"",
+   "airDate": "2026-09-27",
+   "airDateUtc": "2026-09-28T01:00:00Z",
+   "runtime": 32,
+   "overview": "In Episode 7 of Lanterns: The Official Podcast, Juju Green sits down with Lanterns showrunner, co-creator, executive producer and writer Chris Mundy and co-creator, executive producer and writer Tom King to break down “The Jordan Boys' Legacy.” Together, they discuss the evolving relationship between John Stewart and Hal Jordan, the meaning of legacy, and the fear that connects both characters. \r\n\r\nJuju, Chris, and Tom also get into Hal Jordan’s complicated relationship with his father, the role of fear and recklessness in Hal’s story, John’s confrontation with his own past, and how the series brings Green Lantern comic lore into a grounded television world. Plus, Tom and Chris reveal how they built the alien planet practically in the California desert, discuss Sinestro’s place in the Green Lantern legacy, and explain how changes from the comics shaped the show. \r\n\r\n⚠️ SPOILER WARNING: This episode contains spoilers for Lanterns Episode 7, “The Jordan Boys’ Legacy.” Watch the episode befor"
+  },
+  {
+   "tvdbShowId": 376098,
+   "tvdbId": 12023902,
+   "seasonNumber": 0,
+   "episodeNumber": 15,
+   "airedBeforeSeasonNumber": 2,
+   "airedBeforeEpisodeNumber": 1,
+   "title": "Inside the Episode: S1 E8",
+   "airDate": "2026-10-04",
+   "airDateUtc": "2026-10-05T01:00:00Z",
+   "runtime": 5,
+   "overview": "Aaron Pierre, Kyle Chandler, Kelly Macdonald, and the creators of Lanterns discuss the shocking details around Hal's death and John Stewart officially stepping into his destiny."
+  },
+  {
+   "tvdbShowId": 376098,
+   "tvdbId": 12023903,
+   "seasonNumber": 0,
+   "episodeNumber": 16,
+   "airedBeforeSeasonNumber": 2,
+   "airedBeforeEpisodeNumber": 1,
+   "title": "Lanterns: The Official Podcast | Episode 8, \"Dirt and Stars\"",
+   "airDate": "2026-10-04",
+   "airDateUtc": "2026-10-05T01:00:00Z",
+   "runtime": 54,
+   "overview": "It’s the season finale of Lanterns: The Official Podcast. Juju Green sits down with showrunner, writer, co-creator and executive producer Chris Mundy, co-creator, writer and executive producer Damon Lindelof, and co-creator, writer and executive producer Tom King to break down Episode 8, “Dirt and Stars.” \r\n\r\nThe conversation goes deep on John Stewart accepting the Green Lantern mantle, Hal Jordan’s legacy, the emotional choices behind the finale, the new Green Lantern oath, Sinestro’s influence, the John Stewart and Noah Macon relationship, and the creative decisions that brought the season to a close.  \r\n\r\nThen, Juju talks with Shea Pritchard, who plays Noah Macon, about stepping into the role, working with Aaron Pierre and Kyle Chandler, Noah’s biggest choices in the finale, and the nature-versus-nurture themes at the heart of his character. Plus, Ulrich Thomsen delivers one final message as Sinestro."
+  },
+  {
+   "tvdbShowId": 376098,
+   "tvdbId": 9216985,
+   "seasonNumber": 1,
+   "episodeNumber": 1,
+   "title": "Pilot",
+   "airDate": "2026-08-16",
+   "airDateUtc": "2026-08-17T01:00:00Z",
+   "runtime": 56,
+   "overview": "After a fatal shooting, Green Lantern Hal Jordan and new recruit John Stewart set out to prove it was an extraterrestrial event.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9216985/screencap/6a8057a7c481d.jpg"
+  },
+  {
+   "tvdbShowId": 376098,
+   "tvdbId": 11908188,
+   "seasonNumber": 1,
+   "episodeNumber": 2,
+   "title": "Trust Fall",
+   "airDate": "2026-08-23",
+   "airDateUtc": "2026-08-24T01:00:00Z",
+   "runtime": 52,
+   "overview": "While John's middling errand ultimately proves eventful, Hal makes waves in Rushville - which only inspires him to dig deeper.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11908188/screencap/6a8982620b556.jpg"
+  },
+  {
+   "tvdbShowId": 376098,
+   "tvdbId": 11908189,
+   "seasonNumber": 1,
+   "episodeNumber": 3,
+   "title": "OutKast",
+   "airDate": "2026-08-30",
+   "airDateUtc": "2026-08-31T01:00:00Z",
+   "runtime": 54,
+   "overview": "After a lifetime of preparation, John finally gets his chance to interview for the Guardians.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11908189/screencap/6a9071454afaf.jpg"
+  },
+  {
+   "tvdbShowId": 376098,
+   "tvdbId": 11908190,
+   "seasonNumber": 1,
+   "episodeNumber": 4,
+   "title": "The Weenie",
+   "airDate": "2026-09-06",
+   "airDateUtc": "2026-09-07T01:00:00Z",
+   "runtime": 52,
+   "overview": "John and Hal run their new plan to uncover the Manhunter past Sheriff Kane, as Hal's visit to Sinestro begins to have consequences.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11908190/screencap/6a9bee3d68513.jpg"
+  },
+  {
+   "tvdbShowId": 376098,
+   "tvdbId": 11908191,
+   "seasonNumber": 1,
+   "episodeNumber": 5,
+   "title": "Lights Out",
+   "airDate": "2026-09-13",
+   "airDateUtc": "2026-09-14T01:00:00Z",
+   "runtime": 53,
+   "overview": "As Rushville braces for catastrophe, John is forced into an impossible position, while Hal risks everything to take down the Manhunter.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11908191/screencap/6aa524851a7c1.jpg"
+  },
+  {
+   "tvdbShowId": 376098,
+   "tvdbId": 11908192,
+   "seasonNumber": 1,
+   "episodeNumber": 6,
+   "title": "Bad Optics",
+   "airDate": "2026-09-20",
+   "airDateUtc": "2026-09-21T01:00:00Z",
+   "runtime": 53,
+   "overview": "As John tries to move forward, the mysteries of Rushville refuse to let him go.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11908192/screencap/6aae5e493e311.jpg"
+  },
+  {
+   "tvdbShowId": 376098,
+   "tvdbId": 11908193,
+   "seasonNumber": 1,
+   "episodeNumber": 7,
+   "title": "The Jordan Boys' Legacy",
+   "airDate": "2026-09-27",
+   "airDateUtc": "2026-09-28T01:00:00Z",
+   "runtime": 47,
+   "overview": "John and Hal reluctantly team up to solve a pressing murder – and find themselves on another planet.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11908193/screencap/6ab7988b9b0cf.jpg"
+  },
+  {
+   "tvdbShowId": 376098,
+   "tvdbId": 11908194,
+   "seasonNumber": 1,
+   "episodeNumber": 8,
+   "title": "Dirt and Stars",
+   "airDate": "2026-10-04",
+   "airDateUtc": "2026-10-05T01:00:00Z",
+   "runtime": 57,
+   "finaleType": "season",
+   "overview": "As John and Hal draw closer to the truth, John comes to an unexpected understanding with Sheriff Kane... just as a chilling new discovery emerges.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11908194/screencap/6ae7a27a72e7b.jpg"
+  }
+ ]
+}

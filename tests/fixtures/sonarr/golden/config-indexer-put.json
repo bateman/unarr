@@ -1,0 +1,16 @@
+{
+  "body": {
+    "id": 1,
+    "maximumSize": 0,
+    "minimumAge": 5,
+    "retention": 1500,
+    "rssSyncInterval": 30
+  },
+  "recordedAt": "2026-11-09T22:24:42Z",
+  "request": {
+    "body": "bodies/config-indexer-put.json",
+    "method": "PUT",
+    "path": "/api/v3/config/indexer/1"
+  },
+  "status": 202
+}

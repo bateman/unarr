@@ -1,0 +1,448 @@
+{
+ "tvdbId": 366532,
+ "title": "Twisted Metal",
+ "overview": "A motor-mouthed outsider must deliver a mysterious package across a post-apocalyptic wasteland, battling marauders, road hazards, and a deranged clown in an ice cream truck—with help from a trigger-happy car thief.",
+ "slug": "twisted-metal",
+ "originalCountry": "usa",
+ "originalLanguage": "eng",
+ "language": "eng",
+ "firstAired": "2023-07-27",
+ "lastAired": "2025-08-28",
+ "tvMazeId": 60743,
+ "tmdbId": 133748,
+ "imdbId": "tt14261112",
+ "malIds": [],
+ "anidbIds": [],
+ "aniListIds": [],
+ "lastUpdated": "2026-10-31T17:33:47Z",
+ "status": "Continuing",
+ "runtime": 30,
+ "timeOfDay": {
+  "hours": 3,
+  "minutes": 0
+ },
+ "originalNetwork": "Peacock",
+ "network": "Peacock",
+ "genres": [
+  "Action",
+  "Comedy",
+  "Science Fiction",
+  "Thriller"
+ ],
+ "contentRating": "TV-MA",
+ "rating": {
+  "count": 41273,
+  "value": "7.3"
+ },
+ "actors": [
+  {
+   "name": "Anthony Mackie",
+   "character": "John Doe",
+   "image": "https://artworks.thetvdb.com/banners/person/311164/5efefa4ac4e24.jpg"
+  },
+  {
+   "name": "Stephanie Beatriz",
+   "character": "Quiet",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/450438/photo/61a2c8b746928.jpg"
+  },
+  {
+   "name": "Nuufolau Seanoa",
+   "character": "sweet tooth",
+   "image": "https://artworks.thetvdb.com/banners/person/536769/62078904.jpg"
+  },
+  {
+   "name": "Will Arnett",
+   "character": "Sweet Tooth (voice)",
+   "image": "https://artworks.thetvdb.com/banners/person/255118/primary.jpg"
+  },
+  {
+   "name": "Anthony Carrigan",
+   "character": "Calypso",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/317619/photo/654c94130be30.jpg"
+  },
+  {
+   "name": "Mike Mitchell",
+   "character": "Stu",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/311597/photo/6a1c92e0079f6.jpg"
+  },
+  {
+   "name": "Thomas Haden Church",
+   "character": "Agent Stone",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/280105/photo/651abe320544f.jpg"
+  },
+  {
+   "name": "Neve Campbell",
+   "character": "Raven",
+   "image": "https://artworks.thetvdb.com/banners/person/296367/605db0d38c147.jpg"
+  },
+  {
+   "name": "Richard Cabral",
+   "character": "Loud",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/450416/photo/66feb44e02942.jpg"
+  },
+  {
+   "name": "Tahj Vaughans",
+   "character": "Mike"
+  },
+  {
+   "name": "Tiana Okoye",
+   "character": "Krista / Dollface",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9089692/photo/621eb65ad92f1.jpg"
+  },
+  {
+   "name": "Patty Guggenheim",
+   "character": "Raven",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/576930/photo/67dc2e52832cc.jpg"
+  },
+  {
+   "name": "Saylor Bell Curda",
+   "character": "Mayhem",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8010737/photo/688bf29506c70.jpg"
+  },
+  {
+   "name": "Richard de Klerk",
+   "character": "Mr. Grimm"
+  },
+  {
+   "name": "Michael James Shaw",
+   "character": "Axel",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/516072/photo/64d6a879d3af9.jpg"
+  },
+  {
+   "name": "Lisa Gilroy",
+   "character": "Vermin",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9107032/photo/63c5bcfa67c39.jpg"
+  },
+  {
+   "name": "Jamie Neumann",
+   "character": "Miranda Watts",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/579977/photo/65ff0a045040c.jpg"
+  },
+  {
+   "name": "Diany Rodriguez",
+   "character": "Amber Rose",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/7880851/photo/611fa4762ed00.jpg"
+  },
+  {
+   "name": "Chelle Ramos",
+   "character": "Jamie Roberts",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/501252/photo/6274343fca01d.jpg"
+  },
+  {
+   "name": "Chloe Fineman",
+   "character": "Bloody Mary",
+   "image": "https://artworks.thetvdb.com/banners/person/8116813/5ef870cc5542c.jpg"
+  },
+  {
+   "name": "Jason Mantzoukas",
+   "character": "Preacher",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/327308/photo/69ca4d43dbab5.jpg"
+  }
+ ],
+ "images": [
+  {
+   "coverType": "Banner",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/366532/banners/64ac0975be0c9.jpg"
+  },
+  {
+   "coverType": "Poster",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/366532/posters/64bd2141b277f.jpg"
+  },
+  {
+   "coverType": "Fanart",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/366532/backgrounds/64bd21245ee92.jpg"
+  },
+  {
+   "coverType": "Clearlogo",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/366532/clearlogo/650fa49d2f57d.png"
+  }
+ ],
+ "seasons": [
+  {
+   "seasonNumber": 1,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/1989425/posters/64c26eb43ea88.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 2,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2172082/posters/6868621d72df7.jpg"
+    }
+   ]
+  }
+ ],
+ "episodes": [
+  {
+   "tvdbShowId": 366532,
+   "tvdbId": 9047886,
+   "seasonNumber": 1,
+   "episodeNumber": 1,
+   "title": "WLUDRV",
+   "airDate": "2023-07-27",
+   "airDateUtc": "2023-07-27T07:00:00Z",
+   "runtime": 29,
+   "overview": "John Doe, a motormouthed outsider, is offered a chance at a better life, but only if he can successfully deliver a mysterious package across a twisted, postapocalyptic wasteland.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9047886/screencap/64c1a6bfa2b19.jpg"
+  },
+  {
+   "tvdbShowId": 366532,
+   "tvdbId": 9843515,
+   "seasonNumber": 1,
+   "episodeNumber": 2,
+   "title": "3RNCRCS",
+   "airDate": "2023-07-27",
+   "airDateUtc": "2023-07-27T07:00:00Z",
+   "runtime": 28,
+   "overview": "John finds his mission thwarted by two unpredictable adversaries in Lost Vegas. Agent Stone recruits new members for his cause.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9843515/screencap/64c1a6a676b08.jpg"
+  },
+  {
+   "tvdbShowId": 366532,
+   "tvdbId": 9843516,
+   "seasonNumber": 1,
+   "episodeNumber": 3,
+   "title": "NTHLAW1",
+   "airDate": "2023-07-27",
+   "airDateUtc": "2023-07-27T07:00:00Z",
+   "runtime": 30,
+   "overview": "John and Quiet find themselves caught in an unexpected trap. Agent Stone tests the loyalty of his new recruits.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9843516/screencap/64c1a68b64eeb.jpg"
+  },
+  {
+   "tvdbShowId": 366532,
+   "tvdbId": 9843517,
+   "seasonNumber": 1,
+   "episodeNumber": 4,
+   "title": "WHZDARE",
+   "airDate": "2023-07-27",
+   "airDateUtc": "2023-07-27T07:00:00Z",
+   "runtime": 31,
+   "overview": "John strikes a dangerous deal in order to get desperately needed supplies. Quiet questions her future.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9843517/screencap/64c1a67dbcd65.jpg"
+  },
+  {
+   "tvdbShowId": 366532,
+   "tvdbId": 9843518,
+   "seasonNumber": 1,
+   "episodeNumber": 5,
+   "title": "CRZSRDS",
+   "airDate": "2023-07-27",
+   "airDateUtc": "2023-07-27T07:00:00Z",
+   "runtime": 29,
+   "overview": "Quiet closes in on her search for revenge. John finds himself incapacitated. Sweet Tooth wreaks havoc during his road tour.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9843518/screencap/64c1a66d1aed7.jpg"
+  },
+  {
+   "tvdbShowId": 366532,
+   "tvdbId": 9843519,
+   "seasonNumber": 1,
+   "episodeNumber": 6,
+   "title": "DRVTHRU",
+   "airDate": "2023-07-27",
+   "airDateUtc": "2023-07-27T07:00:00Z",
+   "runtime": 28,
+   "overview": "John and Quiet seek shelter from a dangerous storm in a familiar place. Quiet reflects upon her past.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9843519/screencap/64c1a65b159b2.jpg"
+  },
+  {
+   "tvdbShowId": 366532,
+   "tvdbId": 9843520,
+   "seasonNumber": 1,
+   "episodeNumber": 7,
+   "title": "NUTH0UZ",
+   "airDate": "2023-07-27",
+   "airDateUtc": "2023-07-27T07:00:00Z",
+   "runtime": 31,
+   "overview": "John and Quiet make a pit stop, where John reunites with a former contact. Sweet Tooth bonds with a new follower.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9843520/screencap/64c1a6483197e.jpg"
+  },
+  {
+   "tvdbShowId": 366532,
+   "tvdbId": 9843521,
+   "seasonNumber": 1,
+   "episodeNumber": 8,
+   "title": "EV3L1N",
+   "airDate": "2023-07-27",
+   "airDateUtc": "2023-07-27T07:00:00Z",
+   "runtime": 28,
+   "overview": "John and Quiet go undercover on a dangerous rescue mission. John goes up against an out-of-control opponent.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9843521/screencap/64c1a63945fa7.jpg"
+  },
+  {
+   "tvdbShowId": 366532,
+   "tvdbId": 9843522,
+   "seasonNumber": 1,
+   "episodeNumber": 9,
+   "title": "R04DK11",
+   "airDate": "2023-07-27",
+   "airDateUtc": "2023-07-27T07:00:00Z",
+   "runtime": 23,
+   "overview": "Unexpected allegiances begin to form. Quiet gets to work. John makes amends. Sweet Tooth is ready for revenge.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9843522/screencap/64c1a62a273e2.jpg"
+  },
+  {
+   "tvdbShowId": 366532,
+   "tvdbId": 9843523,
+   "seasonNumber": 1,
+   "episodeNumber": 10,
+   "title": "SHNGRLA",
+   "airDate": "2023-07-27",
+   "airDateUtc": "2023-07-27T07:00:00Z",
+   "runtime": 32,
+   "finaleType": "season",
+   "overview": "With everything coming to a head, John and Quiet face a difficult choice. New players enter the fray.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9843523/screencap/64c1a61ba467e.jpg"
+  },
+  {
+   "tvdbShowId": 366532,
+   "tvdbId": 10963120,
+   "seasonNumber": 2,
+   "episodeNumber": 1,
+   "title": "PRSRPNT",
+   "airDate": "2025-07-31",
+   "airDateUtc": "2025-07-31T07:00:00Z",
+   "runtime": 37,
+   "overview": "John sets out to reunite with Quiet, while Quiet and Dollface devise a plan of their own; Sweet Tooth and Stu face a new threat.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10963120/screencap/688b0b7492f96.jpg"
+  },
+  {
+   "tvdbShowId": 366532,
+   "tvdbId": 10963121,
+   "seasonNumber": 2,
+   "episodeNumber": 2,
+   "title": "DOLF4C3",
+   "airDate": "2025-07-31",
+   "airDateUtc": "2025-07-31T07:00:00Z",
+   "runtime": 31,
+   "overview": "John uncovers shocking details about his past, forcing him to confront buried truths; Quiet forms an unexpected friendship that challenges her and opens her up to new possibilities.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10963121/screencap/688b0b84a48c1.jpg"
+  },
+  {
+   "tvdbShowId": 366532,
+   "tvdbId": 10963122,
+   "seasonNumber": 2,
+   "episodeNumber": 3,
+   "title": "T3STDRV",
+   "airDate": "2025-07-31",
+   "airDateUtc": "2025-07-31T07:00:00Z",
+   "runtime": 32,
+   "overview": "John makes a heartfelt attempt to rekindle an old friendship, hoping to bridge the gap that time and conflict have created; as he faces the challenges of reconnecting, Quiet extends a helping hand to someone new.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10963122/screencap/688b0b9441918.jpg"
+  },
+  {
+   "tvdbShowId": 366532,
+   "tvdbId": 10963123,
+   "seasonNumber": 2,
+   "episodeNumber": 4,
+   "title": "LZGTBZY",
+   "airDate": "2025-08-07",
+   "airDateUtc": "2025-08-07T07:00:00Z",
+   "runtime": 32,
+   "overview": "John and Quiet plot a daring heist to secure vital weaponry; Sweet Tooth and Stu are unwittingly pulled into the high-stakes operation.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10963123/screencap/68955cbf00fec.jpg"
+  },
+  {
+   "tvdbShowId": 366532,
+   "tvdbId": 10963124,
+   "seasonNumber": 2,
+   "episodeNumber": 5,
+   "title": "ONURMRK",
+   "airDate": "2025-08-07",
+   "airDateUtc": "2025-08-07T07:00:00Z",
+   "runtime": 26,
+   "overview": "As the tournament kicks off, John and Quiet battle through a grueling qualifying round.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10963124/screencap/68955d01ecec0.jpg"
+  },
+  {
+   "tvdbShowId": 366532,
+   "tvdbId": 10963125,
+   "seasonNumber": 2,
+   "episodeNumber": 6,
+   "title": "MKAW1SH",
+   "airDate": "2025-08-14",
+   "airDateUtc": "2025-08-14T07:00:00Z",
+   "runtime": 29,
+   "overview": "John and Quiet forge new alliances and rivalries; Sweet Tooth crosses paths with a familiar foe.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10963125/screencap/689e6bf99a222.jpg"
+  },
+  {
+   "tvdbShowId": 366532,
+   "tvdbId": 10963126,
+   "seasonNumber": 2,
+   "episodeNumber": 7,
+   "title": "H1TNRVN",
+   "airDate": "2025-08-14",
+   "airDateUtc": "2025-08-14T07:00:00Z",
+   "runtime": 28,
+   "overview": "After their worst day of facing a series of setbacks, another obstacle tests John and Quiet.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10963126/screencap/689e6c16dc060.jpg"
+  },
+  {
+   "tvdbShowId": 366532,
+   "tvdbId": 10963127,
+   "seasonNumber": 2,
+   "episodeNumber": 8,
+   "title": "SDDNDTH",
+   "airDate": "2025-08-21",
+   "airDateUtc": "2025-08-21T07:00:00Z",
+   "runtime": 33,
+   "overview": "John and Quiet join forces with fellow contestants to overcome a deadly new challenge.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10963127/screencap/68a7b04e4e918.jpg"
+  },
+  {
+   "tvdbShowId": 366532,
+   "tvdbId": 10963128,
+   "seasonNumber": 2,
+   "episodeNumber": 9,
+   "title": "VAVAVUM",
+   "airDate": "2025-08-21",
+   "airDateUtc": "2025-08-21T07:00:00Z",
+   "runtime": 32,
+   "overview": "Calypso stuns the contestants with a game-changing twist.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10963128/screencap/68a7b07917cbe.jpg"
+  },
+  {
+   "tvdbShowId": 366532,
+   "tvdbId": 10963129,
+   "seasonNumber": 2,
+   "episodeNumber": 10,
+   "title": "M4YH3M",
+   "airDate": "2025-08-28",
+   "airDateUtc": "2025-08-28T07:00:00Z",
+   "runtime": 27,
+   "overview": "John and Quiet face an unexpected challenge; Calypso holds an investigation that uncovers secrets.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10963129/screencap/68b06fb2cf279.jpg"
+  },
+  {
+   "tvdbShowId": 366532,
+   "tvdbId": 10963135,
+   "seasonNumber": 2,
+   "episodeNumber": 11,
+   "title": "OHLYNTE",
+   "airDate": "2025-08-28",
+   "airDateUtc": "2025-08-28T07:00:00Z",
+   "runtime": 35,
+   "overview": "John and Quiet prepare for the high-stakes final round of Calypso's tournament.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10963135/screencap/68b0face97847.jpg"
+  },
+  {
+   "tvdbShowId": 366532,
+   "tvdbId": 10963136,
+   "seasonNumber": 2,
+   "episodeNumber": 12,
+   "title": "NUY3ARZ",
+   "airDate": "2025-08-28",
+   "airDateUtc": "2025-08-28T07:00:00Z",
+   "runtime": 30,
+   "finaleType": "season",
+   "overview": "Amid unexpected twists and turns, life-and-death choices are made as only one can emerge victorious.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10963136/screencap/68b0fae1cd193.jpg"
+  }
+ ]
+}

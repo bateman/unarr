@@ -1,0 +1,6 @@
+{
+ "$from": "customfilter-create",
+ "$set": {
+  "label": "Ended series"
+ }
+}

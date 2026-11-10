@@ -1,0 +1,24 @@
+{
+  "body": [
+    {
+      "attemptedValue": "/tv",
+      "errorCode": "RootFolderValidator",
+      "errorMessage": "Path '/tv' is already configured as a root folder",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "path": "/tv",
+        "propertyName": "Path",
+        "propertyValue": "/tv"
+      },
+      "propertyName": "Path",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-09T22:24:42Z",
+  "request": {
+    "body": "bodies/rootfolder-create-existing.json",
+    "method": "POST",
+    "path": "/api/v3/rootfolder"
+  },
+  "status": 400
+}

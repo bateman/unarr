@@ -68,6 +68,25 @@ pub fn is_parent_path(parent: &str, child: &str) -> bool {
     child[..parent.len()].eq_ignore_ascii_case(parent) && child[parent.len()..].starts_with('/')
 }
 
+/// The root folder a series path belongs to: the longest root folder that is
+/// a parent of the path, else the path's own parent directory.
+pub fn best_root_folder_path(series_path: &str, root_folders: &[String]) -> String {
+    let normalized = series_path.trim_end_matches('/');
+    root_folders
+        .iter()
+        .filter(|r| {
+            let r = r.trim_end_matches('/');
+            normalized.starts_with(r) && normalized[r.len()..].starts_with('/')
+        })
+        .max_by_key(|r| r.len())
+        .map(|r| r.trim_end_matches('/').to_string())
+        .unwrap_or_else(|| match normalized.rfind('/') {
+            Some(0) => "/".to_string(),
+            Some(i) => normalized[..i].to_string(),
+            None => String::new(),
+        })
+}
+
 /// `PathEquals`.
 pub fn path_equals(a: &str, b: &str) -> bool {
     a.trim_end_matches('/')
@@ -129,7 +148,47 @@ pub fn longest_common_path(paths: &[String]) -> String {
 /// audio tracks media info names.
 pub fn language_from_iso(code: &str) -> Option<i64> {
     use crate::parser::language::lang;
-    let code = code.trim().to_ascii_lowercase();
+    let whole = code.trim().to_ascii_lowercase();
+    // `Find` looks at the part before a dash (`pt-br`); the country part
+    // only narrows a two-letter match, which this table has no row for.
+    let code = whole.split('-').next().unwrap_or("").to_string();
+    // `AlternateIsoCodeMappings`, checked on the whole code.
+    let alternate = match whole.as_str() {
+        "cze" => Some(25),
+        "dut" => Some(lang::DUTCH),
+        "mac" => Some(45),
+        "rum" => Some(35),
+        "yue" | "zhtw" => Some(lang::CHINESE),
+        _ => None,
+    };
+    if code.len() != 2 && alternate.is_some() {
+        return alternate;
+    }
+    // `FileNameBuilder.Iso639BTMap`: bibliographic codes to terminologic.
+    let code = match code.as_str() {
+        "alb" => "sqi",
+        "arm" => "hye",
+        "baq" => "eus",
+        "bur" => "mya",
+        "chi" => "zho",
+        "cze" => "ces",
+        "dut" => "nld",
+        "fre" => "fra",
+        "geo" => "kat",
+        "ger" => "deu",
+        "gre" => "ell",
+        "ice" => "isl",
+        "mac" => "mkd",
+        "mao" => "mri",
+        "may" => "msa",
+        "per" => "fas",
+        "rum" => "ron",
+        "slo" => "slk",
+        "tib" => "bod",
+        "wel" => "cym",
+        other => other,
+    }
+    .to_string();
     let table: &[(&str, &str, i64)] = &[
         ("en", "eng", lang::ENGLISH),
         ("fr", "fra", lang::FRENCH),
@@ -179,11 +238,33 @@ pub fn language_from_iso(code: &str) -> Option<i64> {
     // The originals look the two-letter code up first, then the three-letter
     // one, taking the first row that matches (`fr`/`fra` are French, not
     // the later `pt-br` style rows).
-    table
-        .iter()
-        .find(|(two, _, _)| *two == code)
-        .or_else(|| table.iter().find(|(_, three, _)| *three == code))
-        .map(|(_, _, id)| *id)
+    // The rows of `IsoLanguages.All` with a country code; a two-letter code
+    // with a country picks among them, falling back to the rows without.
+    let countries: &[(&str, &str, i64)] = &[
+        ("fr", "fr", lang::FRENCH),
+        ("de", "de", lang::GERMAN),
+        ("zh", "cn", lang::CHINESE),
+        ("pt", "pt", lang::PORTUGUESE),
+        ("th", "th", 32),
+        ("pt", "br", lang::PORTUGUESE_BRAZIL),
+        ("es", "mx", 34),
+    ];
+    if let (2, Some(country)) = (code.len(), whole.split('-').nth(1)) {
+        if let Some((_, _, id)) = countries.iter().find(|(two, c, _)| *two == code && *c == country) {
+            return Some(*id);
+        }
+        let has_country = |id: i64| countries.iter().any(|(two, _, i)| *two == code && *i == id);
+        return table
+            .iter()
+            .find(|(two, _, id)| *two == code && !has_country(*id))
+            .map(|(_, _, id)| *id);
+    }
+    match code.len() {
+        2 => table.iter().find(|(two, _, _)| *two == code),
+        3 => table.iter().find(|(_, three, _)| *three == code),
+        _ => None,
+    }
+    .map(|(_, _, id)| *id)
 }
 
 #[cfg(test)]
@@ -214,11 +295,21 @@ mod tests {
         assert_eq!(longest_common_path(&["/d/a/1.mkv".into()]), "/d/a");
     }
 
+    fn lang_portuguese() -> i64 {
+        crate::parser::language::lang::PORTUGUESE
+    }
+
     #[test]
     fn iso_codes_map_to_language_ids() {
         assert_eq!(language_from_iso("eng"), Some(1));
         assert_eq!(language_from_iso("ita"), Some(5));
         assert_eq!(language_from_iso("fr"), Some(2));
         assert_eq!(language_from_iso("und"), None);
+        assert_eq!(language_from_iso("ger"), Some(4));
+        assert_eq!(language_from_iso("cze"), Some(25));
+        assert_eq!(language_from_iso("pt-br"), Some(33));
+        assert_eq!(language_from_iso("pt-xx"), None);
+        assert_eq!(language_from_iso("es-ar"), Some(3));
+        assert_eq!(language_from_iso("pt"), Some(lang_portuguese()));
     }
 }

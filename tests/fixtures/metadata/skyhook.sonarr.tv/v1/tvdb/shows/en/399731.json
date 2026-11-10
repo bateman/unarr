@@ -1,0 +1,731 @@
+{
+ "tvdbId": 399731,
+ "title": "Yellowjackets",
+ "overview": "A wildly talented high school girl soccer team becomes the (un)lucky survivors of a plane crash deep in the Canadian wilderness.",
+ "slug": "yellowjackets",
+ "originalCountry": "usa",
+ "originalLanguage": "eng",
+ "language": "eng",
+ "firstAired": "2021-11-14",
+ "lastAired": "2027-01-22",
+ "tvMazeId": 36672,
+ "tmdbId": 117488,
+ "imdbId": "tt11041332",
+ "malIds": [],
+ "anidbIds": [],
+ "aniListIds": [],
+ "lastUpdated": "2026-11-01T00:00:49Z",
+ "status": "Continuing",
+ "runtime": 57,
+ "timeOfDay": {
+  "hours": 20,
+  "minutes": 0
+ },
+ "originalNetwork": "Paramount+ with Showtime",
+ "network": "Paramount+ with Showtime",
+ "genres": [
+  "Drama",
+  "Horror",
+  "Mystery",
+  "Thriller"
+ ],
+ "contentRating": "TV-MA",
+ "rating": {
+  "count": 118667,
+  "value": "7.7"
+ },
+ "alternativeTitles": [
+  {
+   "title": "Yellowjackets (2021)"
+  }
+ ],
+ "actors": [
+  {
+   "name": "Melanie Lynskey",
+   "character": "Shauna Sheridan",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/336104/photo/66b788daa3686.jpg"
+  },
+  {
+   "name": "Sophie Nélisse",
+   "character": "Young Shauna",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/494754/photo/608e3116c6982.jpg"
+  },
+  {
+   "name": "Juliette Lewis",
+   "character": "Natalie",
+   "image": "https://artworks.thetvdb.com/banners/person/295850/6369cc697fea8.jpg"
+  },
+  {
+   "name": "Sophie Thatcher",
+   "character": "Young Natalie",
+   "image": "https://artworks.thetvdb.com/banners/person/480314/5f44cdba212c0.jpg"
+  },
+  {
+   "name": "Christina Ricci",
+   "character": "Misty",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/294327/photo/650dc1e2adeea.jpg"
+  },
+  {
+   "name": "Samantha Hanratty",
+   "character": "Young Misty",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9027265/photo/61a157b9052a3.jpg"
+  },
+  {
+   "name": "Tawny Cypress",
+   "character": "Taissa",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/269559/photo/6244843dddf9b.jpg"
+  },
+  {
+   "name": "Jasmin Savoy Brown",
+   "character": "Young Taissa",
+   "image": "https://artworks.thetvdb.com/banners/person/368433/640e66fc293cd.jpg"
+  },
+  {
+   "name": "Warren Kole",
+   "character": "Jeff Sadecki",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/359085/photo/62dc29a44b4ab.jpg"
+  },
+  {
+   "name": "Elijah Wood",
+   "character": "Walter",
+   "image": "https://artworks.thetvdb.com/banners/person/273363/primary.jpg"
+  },
+  {
+   "name": "Lauren Ambrose",
+   "character": "Vanessa Palmer",
+   "image": "https://artworks.thetvdb.com/banners/person/307185/primary.jpg"
+  },
+  {
+   "name": "Liv Hewson",
+   "character": "Young Van",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/549125/photo/65f78ba5335e6.jpg"
+  },
+  {
+   "name": "Simone Kessell",
+   "character": "Lottie",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/262246/photo/6291f9c36c0b2.jpg"
+  },
+  {
+   "name": "Courtney Eaton",
+   "character": "Lottie",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8171547/photo/66c426866aba1.jpg"
+  },
+  {
+   "name": "Steven Krueger",
+   "character": "Ben Scott"
+  },
+  {
+   "name": "Ella Purnell",
+   "character": "Jackie",
+   "image": "https://artworks.thetvdb.com/banners/person/599610/6032c4e1a91d1.jpg"
+  },
+  {
+   "name": "Jane Widdop",
+   "character": "Young Laura Lee",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/644579/photo/6530484f1e84b.jpg"
+  },
+  {
+   "name": "Alexa Barajas",
+   "character": "Young Mari",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/522759/photo/63e10241bf9d9.jpg"
+  },
+  {
+   "name": "Rekha Sharma",
+   "character": "Jessica Roberts"
+  },
+  {
+   "name": "Keeya King",
+   "character": "Akilah ",
+   "image": "https://artworks.thetvdb.com/banners/person/8158722/primary.jpg"
+  },
+  {
+   "name": "Peter Gadiot",
+   "character": "Adam",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/484655/photo/6093a297446b5.jpg"
+  },
+  {
+   "name": "Sarah Desjardins",
+   "character": "Callie Sadecki",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/546022/photo/63ee4a5517df0.jpg"
+  },
+  {
+   "name": "Alex Wyndham",
+   "character": "Kevyn",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/362371/photo/6422c83718c82.jpg"
+  },
+  {
+   "name": "Rukiya Bernard",
+   "character": "Simone",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/296193/photo/6352cda4186d3.jpg"
+  },
+  {
+   "name": "Nicole Maines",
+   "character": "Lisa",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/502731/photo/6755f8dc7444c.jpg"
+  },
+  {
+   "name": "Nia Sondaya",
+   "character": "Akilah",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9094545/photo/6421e44444961.jpg"
+  },
+  {
+   "name": "Nuha Jes Izman",
+   "character": "Teen Crystal",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9103072/photo/6345f60479319.jpg"
+  },
+  {
+   "name": "Kevin Alves",
+   "character": "Teen Travis",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9111764/photo/645021b68392b.jpg"
+  },
+  {
+   "name": "Jenna Burgess",
+   "character": "Teen Melissa",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8231821/photo/642a285814961.jpg"
+  },
+  {
+   "name": "Mya Lowe",
+   "character": "Teen Gen",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9094728/photo/6428e014b6375.jpg"
+  },
+  {
+   "name": "Silvana Estifanos",
+   "character": "Teen Britney"
+  },
+  {
+   "name": "Vanessa Prasad",
+   "character": "Teen Gen",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8041948/photo/64da3b28ace13.jpg"
+  },
+  {
+   "name": "Anisa Harris",
+   "character": "Teen Robin",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9103551/photo/6358529f9c8a6.jpg"
+  },
+  {
+   "name": "Ashley Sutton",
+   "character": "Hannah Sophia Finch",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9139449/photo/67dd9b320018f.jpg"
+  },
+  {
+   "name": "Joel McHale",
+   "character": "Kodiak",
+   "image": "https://artworks.thetvdb.com/banners/person/294831/605a64a89286a.jpg"
+  },
+  {
+   "name": "Nelson Franklin",
+   "character": "Edwin",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/308040/photo/61eb9469141f3.jpg"
+  },
+  {
+   "name": "Hilary Swank",
+   "character": "Melissa",
+   "image": "https://artworks.thetvdb.com/banners/person/282267/62e4479cc0d4e.jpg"
+  }
+ ],
+ "images": [
+  {
+   "coverType": "Banner",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/399731/banners/67fdaca73b8c3.jpg"
+  },
+  {
+   "coverType": "Poster",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/399731/posters/61a14a3784935.jpg"
+  },
+  {
+   "coverType": "Fanart",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/399731/backgrounds/61a1584479b19.jpg"
+  },
+  {
+   "coverType": "Clearlogo",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/399731/clearlogo/61d58b65ee945.png"
+  }
+ ],
+ "seasons": [
+  {
+   "seasonNumber": 1,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/1951842/posters/67af629cd3719.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 2,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2033654/posters/641dd8d2da51d.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 3,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2156505/posters/67aede396ca73.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 4,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2212942/posters/6ae681317d6b8.jpg"
+    }
+   ]
+  }
+ ],
+ "episodes": [
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 8630955,
+   "seasonNumber": 1,
+   "episodeNumber": 1,
+   "title": "Pilot",
+   "airDate": "2021-11-14",
+   "airDateUtc": "2021-11-15T01:00:00Z",
+   "runtime": 57,
+   "overview": "On the eve of a fateful flight, a championship high school girls soccer squad celebrates being a team by betraying one another. 25 years later, the survivors do their best imitations of well-adjusted people. Season premiere.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8630955/screencap/619955a6a9384.jpg"
+  },
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 8630956,
+   "seasonNumber": 1,
+   "episodeNumber": 2,
+   "title": "F Sharp",
+   "airDate": "2021-11-21",
+   "airDateUtc": "2021-11-22T01:00:00Z",
+   "runtime": 57,
+   "overview": "As the teens get their bearings among the wreckage, Misty finds hell on earth quite becoming. In the present: revenge, sex homework and the policeman formerly known as Goth.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8630956/screencap/61a0ecc8be295.jpg"
+  },
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 8630957,
+   "seasonNumber": 1,
+   "episodeNumber": 3,
+   "title": "The Dollhouse",
+   "airDate": "2021-11-28",
+   "airDateUtc": "2021-11-29T01:00:00Z",
+   "runtime": 57,
+   "overview": "The Yellowjackets debate the merits of probably dying while staying put or probably dying while looking for shelter. Taissa navigates a dirty attack ad and the other C-word. Shauna sees about a boy.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8630957/screencap/61a338295e309.jpg"
+  },
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 8630958,
+   "seasonNumber": 1,
+   "episodeNumber": 4,
+   "title": "Bear Down",
+   "airDate": "2021-12-05",
+   "airDateUtc": "2021-12-06T01:00:00Z",
+   "runtime": 58,
+   "overview": "The girls play with guns to determine who is the most responsible. Natalie untangles a lifetime of piecing together broken men. Taissa greets the rich.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8630958/screencap/61ac570406cae.jpg"
+  },
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 8630959,
+   "seasonNumber": 1,
+   "episodeNumber": 5,
+   "title": "Blood Hive",
+   "airDate": "2021-12-12",
+   "airDateUtc": "2021-12-13T01:00:00Z",
+   "runtime": 58,
+   "overview": "Out in the wilderness, the girls ride the crimson wave and plan a dark arts slumber party. Natalie and Misty tame a stallion. On Halloween night, Shauna parties like it’s 1996.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8630959/screencap/61b590567d8e8.jpg"
+  },
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 8630960,
+   "seasonNumber": 1,
+   "episodeNumber": 6,
+   "title": "Saints",
+   "airDate": "2021-12-19",
+   "airDateUtc": "2021-12-20T01:00:00Z",
+   "runtime": 58,
+   "overview": "The Yellowjackets tangle with the birds & the bees, navigating love, lust and DIY surgery. In the present : blackmail, bunnies and an icy reunion. Misty prepares for a surprise(d) houseguest.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8630960/screencap/61bf2955932da.jpg"
+  },
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 8630961,
+   "seasonNumber": 1,
+   "episodeNumber": 7,
+   "title": "No Compass",
+   "airDate": "2021-12-26",
+   "airDateUtc": "2021-12-27T01:00:00Z",
+   "runtime": 58,
+   "overview": "In the wilderness, Taissa leads a last desperate attempt to keep the team from starving to death, but the effort could get them killed regardless; the Yellowjackets are faced with the terrifying possibility of small talk during stressful times.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8630961/screencap/61c9060f6eebe.jpg"
+  },
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 8630962,
+   "seasonNumber": 1,
+   "episodeNumber": 8,
+   "title": "Flight of the Bumblebee",
+   "airDate": "2022-01-02",
+   "airDateUtc": "2022-01-03T01:00:00Z",
+   "runtime": 57,
+   "overview": "While in triage after a vicious attack, the Yellowjackets are left to suss out the best of their worst ideas. Shauna dabbles in some light cyberstalking.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8630962/screencap/61d1ba29a0ff3.jpg"
+  },
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 8630963,
+   "seasonNumber": 1,
+   "episodeNumber": 9,
+   "title": "Doomcoming",
+   "airDate": "2022-01-09",
+   "airDateUtc": "2022-01-10T01:00:00Z",
+   "runtime": 58,
+   "overview": "On the brink of death, the Yellowjackets opt to throw one last rager before careening into oblivion. An increasingly paranoid Shauna struggles between keeping her cool and being Shauna.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8630963/screencap/61daeb89ce895.jpg"
+  },
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 8630964,
+   "seasonNumber": 1,
+   "episodeNumber": 10,
+   "title": "Sic Transit Gloria Mundi",
+   "airDate": "2022-01-16",
+   "airDateUtc": "2022-01-17T01:00:00Z",
+   "runtime": 59,
+   "finaleType": "season",
+   "overview": "On the night of their 25-year class reunion, the Yellowjackets navigate damning evidence, false alibis and a dubious attempt to “heal.” In the wilderness, the Doomcoming fallout finds everything firmly off the rails as simmering resentments come to a head.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8630964/screencap/61e413ca77b6f.jpg"
+  },
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 9493850,
+   "seasonNumber": 2,
+   "episodeNumber": 1,
+   "title": "Friends, Romans, Countrymen",
+   "airDate": "2023-03-26",
+   "airDateUtc": "2023-03-27T00:00:00Z",
+   "overview": "Two months into winter the survivors cope with falling rations, low morale and their latest disastrous attempt to freeze a teammate out of the game. Shauna explores the secondary market for Yellowjackets memorabilia, while Taissa, Misty and Natalie all seek out best friends, both old and new. For those of you keeping the stat book: Lottie Matthews comes in off the bench.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9493850/screencap/6421c71daf30f.jpg"
+  },
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 9611602,
+   "seasonNumber": 2,
+   "episodeNumber": 2,
+   "title": "Edible Complex",
+   "airDate": "2023-04-02",
+   "airDateUtc": "2023-04-03T00:00:00Z",
+   "runtime": 60,
+   "overview": "The Yellowjackets barely made it through summer in the woods, but now as winter begins to bite, we’ll see if hunger and desperation turn into full-on psychosis. While there may or may not be a dark and powerful force inhabiting the wilderness, their survival could depend upon what they choose to believe. Meanwhile, twenty-five years later, each survivor must ask themselves – Is the darkness coming for them, or is it coming from them?",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9611602/screencap/640e3d8250869.jpg"
+  },
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 9646699,
+   "seasonNumber": 2,
+   "episodeNumber": 3,
+   "title": "Digestif",
+   "airDate": "2023-04-09",
+   "airDateUtc": "2023-04-10T00:00:00Z",
+   "runtime": 57,
+   "overview": "The girls experience an unusual hangover. Shauna learns the thrill of peer-to-peer car rentals. Natalie audits Lottie’s class in emotional apiology. Tai reflects, Misty hits the high seas, and you’ve never attended a baby shower like the one the Yellowjackets throw here.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9646699/screencap/64233e858d623.jpg"
+  },
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 9646701,
+   "seasonNumber": 2,
+   "episodeNumber": 4,
+   "title": "Old Wounds",
+   "airDate": "2023-04-16",
+   "airDateUtc": "2023-04-17T00:00:00Z",
+   "runtime": 60,
+   "overview": "Relive your youth by hitting the road! Take a roadtrip with your child! Go on vacation with a new friend! Hitchhike, if you must! Just make sure you pack a good playlist for the ride. Some recommendations from us: “Anything You Can Do,” “You Get What You Give,” “Instinct,” a famous composition by Frank Comstock, but absolutely not anything from “Starlight Express”.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9646701/screencap/642d6dd5631e4.jpg"
+  },
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 9646702,
+   "seasonNumber": 2,
+   "episodeNumber": 5,
+   "title": "Two Truths and a Lie",
+   "airDate": "2023-04-23",
+   "airDateUtc": "2023-04-24T00:00:00Z",
+   "runtime": 59,
+   "overview": "Okay, Fellowjackets, rise and shine and don't forget your booties because it's coooold out there. Misty makes a leap of faith for her bestie, Natalie and Lottie play a game of surrender, Shauna finds herself unexpectedly randy, and Tai seeks out a movie recommendation.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9646702/screencap/64349524122ad.jpg"
+  },
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 9681914,
+   "seasonNumber": 2,
+   "episodeNumber": 6,
+   "title": "Qui",
+   "airDate": "2023-05-07",
+   "airDateUtc": "2023-05-08T00:00:00Z",
+   "runtime": 55,
+   "overview": "Trapped inside on a snow day, the Yellowjackets revisit the highlights, humiliations and traumas of “Health Class.” Tai and Van help each other kindly rewind, Misty explores joining a classic Cosmic American tribute band, Lisa helps Natalie carp the day, and Shauna gets a pop-quiz on her cookie-reading assignment.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9681914/screencap/643935641eb64.jpg"
+  },
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 9681915,
+   "seasonNumber": 2,
+   "episodeNumber": 7,
+   "title": "Burial",
+   "airDate": "2023-05-14",
+   "airDateUtc": "2023-05-15T00:00:00Z",
+   "runtime": 59,
+   "overview": "Sometimes the best therapy is cranking the hits to eleven, so today we’re exploring the hardcore kid-care revival movement, 11 o’clock theatrical birdcore numbers, some late hits of the renovationwave era (call us about a spinoff!), flower duets, and a classic live record. Out in the wilderness, Coach Scott does a great Karl Havoc impression for an unimpressed Misty.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9681915/screencap/6455a7db2ff8b.jpg"
+  },
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 9681916,
+   "seasonNumber": 2,
+   "episodeNumber": 8,
+   "title": "It Chooses",
+   "airDate": "2023-05-21",
+   "airDateUtc": "2023-05-22T00:00:00Z",
+   "runtime": 51,
+   "overview": "Shhh, it’s only going to get worse from here. Despite the whole “winter never’s gonna end” thing, the 1996 New Jersey state girls soccer champions decide to start their spring training early with an impromptu cardio session. Callie encounters an old flame, Van proves goalies never say die, most of the adults intentionally commune in the sharing shack, and, Lottie, baby, I hear the blues are calling for tossed salad and scrambled eggs. Mercy!",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9681916/screencap/6466f74e90484.jpg"
+  },
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 9681917,
+   "seasonNumber": 2,
+   "episodeNumber": 9,
+   "title": "Storytelling",
+   "airDate": "2023-05-28",
+   "airDateUtc": "2023-05-29T00:00:00Z",
+   "runtime": 61,
+   "finaleType": "season",
+   "overview": "Heavy is the head that wears the antler crown is a lesson you don’t learn until much later in life… if you ever even learn it at all. Everything’s about to get really wild(erness), and we’re so excited (so excited!) and so, so scared to find out who paid attention to what lessons and when. So, on the count of three, you may pick up your pencil, open your testing booklet, and start this finale exam. One… Two…",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9681917/screencap/647026b8f23c6.jpg"
+  },
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 10814635,
+   "seasonNumber": 3,
+   "episodeNumber": 1,
+   "title": "It Girl",
+   "airDate": "2025-02-14",
+   "airDateUtc": "2025-02-15T01:00:00Z",
+   "runtime": 59,
+   "overview": "Summer inspires the Yellowjackets to ditch soccer for a more contact-intensive sport and revive an old pagan tradition. In the present, a cringe-worthy funeral flows organically into a bar therapy session.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10814635/screencap/67aa8445a36c9.jpg"
+  },
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 10814636,
+   "seasonNumber": 3,
+   "episodeNumber": 2,
+   "title": "Dislocation",
+   "airDate": "2025-02-14",
+   "airDateUtc": "2025-02-15T01:00:00Z",
+   "runtime": 58,
+   "overview": "The Yellowjackets are stuck deciding whether to track down a missing teammate or just trip out on mushrooms. Shauna secures a spot on the world’s most unsupportive partner list. Misty finds herself tangled in the intimate chaos of sleepover parties.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10814636/screencap/67aa830ecbb64.jpg"
+  },
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 10814637,
+   "seasonNumber": 3,
+   "episodeNumber": 3,
+   "title": "Them's the Brakes",
+   "airDate": "2025-02-23",
+   "airDateUtc": "2025-02-24T01:00:00Z",
+   "runtime": 54,
+   "overview": "The return of a Yellowjacket sparks a vengeful frenzy in the team. Lottie’s rendition of Cool Aunt Without Kids leaves Callie with an open door to answers about her mother’s twisted past. Tai and Van receive a karmic payout for their dine and dash.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10814637/screencap/67b51bdde007a.jpg"
+  },
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 10814638,
+   "seasonNumber": 3,
+   "episodeNumber": 4,
+   "title": "12 Angry Girls and 1 Drunk Travis",
+   "airDate": "2025-03-02",
+   "airDateUtc": "2025-03-03T01:00:00Z",
+   "runtime": 59,
+   "overview": "The Yellowjackets attempt to spin a hundred suspicions into proof. Coach Scott has an existential meltdown. Meanwhile, Jeff embarks on a crusade to make things right as Shauna is forcibly committed to some \"me time.\" Spoiler: it's not a spa day.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10814638/screencap/67bdeef75d6c1.jpg"
+  },
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 10814639,
+   "seasonNumber": 3,
+   "episodeNumber": 5,
+   "title": "Did Tai Do That?",
+   "airDate": "2025-03-09",
+   "airDateUtc": "2025-03-10T00:00:00Z",
+   "runtime": 55,
+   "overview": "The Yellowjackets confront the reality of having to pull an Old Yeller. Lottie mentors an up-and-coming prophet. In the present, Misty investigates a suspicious death. Shauna, desperate, turns to the last person she would trust – because, why not?",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10814639/screencap/67c7725e60fa2.jpg"
+  },
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 10814640,
+   "seasonNumber": 3,
+   "episodeNumber": 6,
+   "title": "Thanksgiving (Canada)",
+   "airDate": "2025-03-16",
+   "airDateUtc": "2025-03-17T00:00:00Z",
+   "runtime": 54,
+   "overview": "The Yellowjackets start turning on each other faster than a reality TV reunion special. Meanwhile, the Sadecki family \"vacation\" features a vending machine and a deep dive into questionable parenting choices. Misty uncovers an incriminating clue.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10814640/screencap/67cf1daab1c3b.jpg"
+  },
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 10814641,
+   "seasonNumber": 3,
+   "episodeNumber": 7,
+   "title": "Croak",
+   "airDate": "2025-03-23",
+   "airDateUtc": "2025-03-24T00:00:00Z",
+   "runtime": 55,
+   "overview": "The Yellowjackets realize their choices have snowballed into a catastrophe. Misty sets her sights on a fresh suspect, and even she’s surprised by the plot twist. Meanwhile, Taissa’s desperation is peeling back layers she didn’t even know she had.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10814641/screencap/67d8603de94cb.jpg"
+  },
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 10814642,
+   "seasonNumber": 3,
+   "episodeNumber": 8,
+   "title": "A Normal, Boring Life",
+   "airDate": "2025-03-30",
+   "airDateUtc": "2025-03-31T00:00:00Z",
+   "runtime": 56,
+   "overview": "With a possible escape from their nightmare, the Yellowjackets learn not everyone may be in a rush to leave. In the present, the unexpected return of an old teammate sends Shauna spiraling in ways that should probably concern everyone.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10814642/screencap/67e460d53ccbf.jpg"
+  },
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 10814643,
+   "seasonNumber": 3,
+   "episodeNumber": 9,
+   "title": "How the Story Ends",
+   "airDate": "2025-04-06",
+   "airDateUtc": "2025-04-07T00:00:00Z",
+   "runtime": 55,
+   "overview": "Taking cues from Stravinsky (or Picciotto, if that’s your vibe), the Yellowjackets’ rites of spring finally come to an end. Misty gets a pick-me up. Shauna worries about a sticky Melissa problem. The power of The New Flesh is strong with this one.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10814643/screencap/67ec37f8295ed.jpg"
+  },
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 10814644,
+   "seasonNumber": 3,
+   "episodeNumber": 10,
+   "title": "Full Circle",
+   "airDate": "2025-04-13",
+   "airDateUtc": "2025-04-14T00:00:00Z",
+   "runtime": 59,
+   "finaleType": "season",
+   "overview": "Things turn frigid as bloody new alliances get built and spilled. It’s our time, right now, down here in the new Queen’s court. Eat up, drink deep, and descend.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10814644/screencap/67f572575c29d.jpg"
+  },
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 11785093,
+   "seasonNumber": 4,
+   "episodeNumber": 1,
+   "title": "Hivemind",
+   "airDate": "2026-11-20",
+   "airDateUtc": "2026-11-21T01:00:00Z",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11785093/screencap/6ab5c80a97d04.jpg"
+  },
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 11785094,
+   "seasonNumber": 4,
+   "episodeNumber": 2,
+   "title": "Human Interest",
+   "airDate": "2026-11-27",
+   "airDateUtc": "2026-11-28T01:00:00Z",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11785094/screencap/6ab5c82abe23d.jpg"
+  },
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 11785095,
+   "seasonNumber": 4,
+   "episodeNumber": 3,
+   "title": "She's Made of Iron, Sir",
+   "airDate": "2026-12-04",
+   "airDateUtc": "2026-12-05T01:00:00Z",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11785095/screencap/6ab5c848b6131.jpg"
+  },
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 12000957,
+   "seasonNumber": 4,
+   "episodeNumber": 4,
+   "title": "TBA",
+   "airDate": "2026-12-11",
+   "airDateUtc": "2026-12-12T01:00:00Z",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/12000957/screencap/6ab5c872d796b.jpg"
+  },
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 12000958,
+   "seasonNumber": 4,
+   "episodeNumber": 5,
+   "title": "TBA",
+   "airDate": "2026-12-18",
+   "airDateUtc": "2026-12-19T01:00:00Z",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/12000958/screencap/6ab5c87e667d6.jpg"
+  },
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 12000959,
+   "seasonNumber": 4,
+   "episodeNumber": 6,
+   "title": "TBA",
+   "airDate": "2026-12-25",
+   "airDateUtc": "2026-12-26T01:00:00Z"
+  },
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 12000960,
+   "seasonNumber": 4,
+   "episodeNumber": 7,
+   "title": "TBA",
+   "airDate": "2027-01-01",
+   "airDateUtc": "2027-01-02T01:00:00Z"
+  },
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 12000961,
+   "seasonNumber": 4,
+   "episodeNumber": 8,
+   "title": "TBA",
+   "airDate": "2027-01-08",
+   "airDateUtc": "2027-01-09T01:00:00Z",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/12000961/screencap/6ab5c893b846e.jpg"
+  },
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 12035506,
+   "seasonNumber": 4,
+   "episodeNumber": 9,
+   "title": "TBA",
+   "airDate": "2027-01-15",
+   "airDateUtc": "2027-01-16T01:00:00Z"
+  },
+  {
+   "tvdbShowId": 399731,
+   "tvdbId": 12035507,
+   "seasonNumber": 4,
+   "episodeNumber": 10,
+   "title": "TBA",
+   "airDate": "2027-01-22",
+   "airDateUtc": "2027-01-23T01:00:00Z",
+   "finaleType": "series"
+  }
+ ]
+}

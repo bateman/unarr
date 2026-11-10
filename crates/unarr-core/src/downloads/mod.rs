@@ -209,6 +209,96 @@ impl Downloads {
         self.rebuild_queue(now);
     }
 
+    /// `TrackedDownloadService.Handle` of `EpisodeInfoRefreshedEvent`,
+    /// `SeriesAddedEvent` and `SeriesDeletedEvent`: the tracked downloads
+    /// `affected` picks are matched again against the library and the
+    /// queue is rebuilt. `Ok(true)` when there was one.
+    pub async fn remap_tracked<F>(&self, affected: F, now: DateTime<Utc>) -> anyhow::Result<bool>
+    where
+        F: Fn(&TrackedDownload) -> bool,
+    {
+        let stale: Vec<TrackedDownload> = self
+            .tracked
+            .lock()
+            .unwrap()
+            .values()
+            .filter(|t| affected(t))
+            .cloned()
+            .collect();
+        if stale.is_empty() {
+            return Ok(false);
+        }
+        let remapped = self
+            .db()
+            .call(move |conn| {
+                let catalog = crate::decision::lookup::Catalog::load(conn, now)?;
+                let lookup = crate::decision::lookup::StoreLookup::new(conn);
+                Ok(stale
+                    .iter()
+                    .map(|t| {
+                        (
+                            t.item.download_id.clone(),
+                            tracked::remap(&catalog, &lookup, t, now),
+                        )
+                    })
+                    .collect::<Vec<_>>())
+            })
+            .await?;
+        {
+            let mut tracked = self.tracked.lock().unwrap();
+            for (download_id, remote) in remapped {
+                if let Some(t) = tracked.get_mut(&download_id) {
+                    t.remote = remote;
+                }
+            }
+        }
+        self.rebuild_queue(now);
+        Ok(true)
+    }
+
+    /// The episodes a refresh removed: the downloads that were for them.
+    pub async fn episodes_removed(&self, episode_ids: &[i64], now: DateTime<Utc>) -> anyhow::Result<bool> {
+        if episode_ids.is_empty() {
+            return Ok(false);
+        }
+        self.remap_tracked(
+            |t| {
+                t.remote
+                    .as_ref()
+                    .is_some_and(|r| r.episodes.iter().any(|e| episode_ids.contains(&e.id)))
+            },
+            now,
+        )
+        .await
+    }
+
+    /// A series was added: the downloads no series was found for, and
+    /// those of a series with its TVDB id.
+    pub async fn series_added(&self, tvdb_id: i64, now: DateTime<Utc>) -> anyhow::Result<bool> {
+        self.remap_tracked(
+            |t| match t.remote.as_ref().and_then(|r| r.series.as_ref()) {
+                None => true,
+                Some(s) => s.tvdb_id == tvdb_id,
+            },
+            now,
+        )
+        .await
+    }
+
+    /// Series were deleted: the downloads that were for them.
+    pub async fn series_deleted(&self, series: &[(i64, i64)], now: DateTime<Utc>) -> anyhow::Result<bool> {
+        self.remap_tracked(
+            |t| {
+                t.remote
+                    .as_ref()
+                    .and_then(|r| r.series.as_ref())
+                    .is_some_and(|s| series.iter().any(|(id, tvdb)| *id == s.id || *tvdb == s.tvdb_id))
+            },
+            now,
+        )
+        .await
+    }
+
     /// A tracked download changed by the importer: the cache takes it,
     /// when the download is still tracked.
     pub fn update_tracked(&self, mut t: TrackedDownload) {

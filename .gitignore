@@ -1,5 +1,7 @@
 /target
 *.png
+# The artwork the metadata mock serves and the cover tests resize.
+!tests/fixtures/metadata/artwork/*.png
 /.cache
 *.db-wal
 *.db-shm

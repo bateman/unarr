@@ -1,0 +1,212 @@
+{
+ "tvdbId": 464461,
+ "title": "Heated Rivalry",
+ "overview": "Shane Hollander and Ilya Rozanov are two of the biggest stars in Major League Hockey, bound by ambition, rivalry, and a magnetic pull neither of them fully understands. What begins as a secret fling between two fresh faced rookies evolves into a years-long journey of love, denial, and self-discovery. Over the next eight years, as they chase glory on the ice, they struggle to navigate their feelings for each other. Torn between the sport they live for and the love they can’t ignore, Shane and Ilya must decide if there’s room in their fiercely competitive world for something as fragile – and powerful – as real love.",
+ "slug": "heated-rivalry",
+ "originalCountry": "can",
+ "originalLanguage": "eng",
+ "language": "eng",
+ "firstAired": "2025-11-28",
+ "lastAired": "2025-12-26",
+ "tvMazeId": 85269,
+ "tmdbId": 301507,
+ "imdbId": "tt35495073",
+ "malIds": [],
+ "anidbIds": [],
+ "aniListIds": [],
+ "lastUpdated": "2026-10-31T00:05:35Z",
+ "status": "Continuing",
+ "runtime": 47,
+ "timeOfDay": {
+  "hours": 0,
+  "minutes": 0
+ },
+ "originalNetwork": "Crave",
+ "network": "Crave",
+ "genres": [
+  "Drama",
+  "Romance",
+  "Sport"
+ ],
+ "contentRating": "18",
+ "rating": {
+  "count": 116565,
+  "value": "8.7"
+ },
+ "actors": [
+  {
+   "name": "Hudson Williams ",
+   "character": "Shane Hollander",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9145473/photo/68a48dba755c9.jpg"
+  },
+  {
+   "name": "Connor Storrie ",
+   "character": "Ilya Rozanov",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9145472/photo/68a48a568d44d.jpg"
+  },
+  {
+   "name": "François Arnaud",
+   "character": "Scott Hunter",
+   "image": "https://artworks.thetvdb.com/banners/person/479592/5f0c627819f24.jpg"
+  },
+  {
+   "name": "Robbie G.K.",
+   "character": "Kip Grady",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8090533/photo/692899bb10a32.jpg"
+  },
+  {
+   "name": "Christina Chang",
+   "character": "Yuna Hollander",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/269790/photo/62232280af2c1.jpg"
+  },
+  {
+   "name": "Dylan Walsh",
+   "character": "David Hollander",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/335054/photo/611e19fb3aab3.jpg"
+  },
+  {
+   "name": "Ksenia Daniela Kharlamova",
+   "character": "Svetlana",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9145754/photo/69289e79e8ad4.jpg"
+  },
+  {
+   "name": "Sophie Nélisse",
+   "character": "Rose Landry",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/494754/photo/608e3116c6982.jpg"
+  },
+  {
+   "name": "Kolton Stewart",
+   "character": "Carter Vaughn",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/639423/photo/6388cefb4b5f3.jpg"
+  },
+  {
+   "name": "Nadine Bhabha",
+   "character": "Elena Rygg",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8189886/photo/6a9aa3094af41.jpg"
+  },
+  {
+   "name": "Callan Potter",
+   "character": "Hayden Pike"
+  },
+  {
+   "name": "Justice Smith",
+   "character": "Harris Drover",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/329334/photo/694f1463ec8d2.jpg"
+  },
+  {
+   "name": "Charlie Gillespie",
+   "character": "Troy Barrett",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/466201/photo/61292b504a52f.jpg"
+  }
+ ],
+ "images": [
+  {
+   "coverType": "Banner",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/464461/banners/6929c6d66921f.jpg"
+  },
+  {
+   "coverType": "Poster",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/464461/posters/69278147ece9a.jpg"
+  },
+  {
+   "coverType": "Fanart",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/464461/backgrounds/68d49f4ebc33a.jpg"
+  },
+  {
+   "coverType": "Clearlogo",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/464461/clearlogo/6953c2122a7c5.png"
+  }
+ ],
+ "seasons": [
+  {
+   "seasonNumber": 1,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2190307/posters/694ea908ea9a8.jpg"
+    }
+   ]
+  }
+ ],
+ "episodes": [
+  {
+   "tvdbShowId": 464461,
+   "tvdbId": 11178949,
+   "seasonNumber": 1,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 1,
+   "title": "Rookies",
+   "airDate": "2025-11-28",
+   "airDateUtc": "2025-11-28T05:00:00Z",
+   "runtime": 47,
+   "overview": "Hockey superstars Shane Hollander and Ilya Rozanov toe the thin ice between rivalry and something far more personal.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11178949/screencap/6920bc6c2a323.jpg"
+  },
+  {
+   "tvdbShowId": 464461,
+   "tvdbId": 11280676,
+   "seasonNumber": 1,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 2,
+   "title": "Olympians",
+   "airDate": "2025-11-28",
+   "airDateUtc": "2025-11-28T05:00:00Z",
+   "runtime": 42,
+   "overview": "Shane and Ilya keep their secret fling alive while their growing connection is tested by personal and professional pressures.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11280676/screencap/6920bc858120d.jpg"
+  },
+  {
+   "tvdbShowId": 464461,
+   "tvdbId": 11280677,
+   "seasonNumber": 1,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 3,
+   "title": "Hunter",
+   "airDate": "2025-12-05",
+   "airDateUtc": "2025-12-05T05:00:00Z",
+   "runtime": 46,
+   "overview": "A hockey player’s high-stakes career collides with love when a chance meeting ignites a spark.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11280677/screencap/693285f877865.jpg"
+  },
+  {
+   "tvdbShowId": 464461,
+   "tvdbId": 11280679,
+   "seasonNumber": 1,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 4,
+   "title": "Rose",
+   "airDate": "2025-12-12",
+   "airDateUtc": "2025-12-12T05:00:00Z",
+   "runtime": 42,
+   "overview": "A moment of unexpected vulnerability and a high-profile romance unleash a storm of turmoil for Shane and Ilya.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11280679/screencap/692b5dcd9eff9.jpg"
+  },
+  {
+   "tvdbShowId": 464461,
+   "tvdbId": 11280681,
+   "seasonNumber": 1,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 5,
+   "title": "I'll Believe in Anything",
+   "airDate": "2025-12-19",
+   "airDateUtc": "2025-12-19T05:00:00Z",
+   "runtime": 53,
+   "overview": "Shane, Ilya and Scott each face pivotal personal decisions.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11280681/screencap/6943319243499.jpg"
+  },
+  {
+   "tvdbShowId": 464461,
+   "tvdbId": 11280683,
+   "seasonNumber": 1,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 6,
+   "title": "The Cottage",
+   "airDate": "2025-12-26",
+   "airDateUtc": "2025-12-26T05:00:00Z",
+   "runtime": 49,
+   "finaleType": "season",
+   "overview": "Shane and Ilya escape the spotlight for a rare moment of freedom.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11280683/screencap/694894a27f9db.jpg"
+  }
+ ]
+}

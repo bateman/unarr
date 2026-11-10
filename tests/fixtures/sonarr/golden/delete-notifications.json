@@ -26,7 +26,7 @@
         "instanceName": "Sonarr",
         "renamedEpisodeFiles": [
           {
-            "dateAdded": "2026-11-08T20:58:07.956174Z",
+            "dateAdded": "2026-11-09T22:19:15.7142408Z",
             "id": 1075,
             "languages": [
               {
@@ -169,7 +169,7 @@
                 "value": "```/tv/Daredevil - Born Again/Season 01/Daredevil Born Again (2025) - S01E01 - Heavens Half Hour [DSNP][WEBDL-1080p][AAC 1.0][x264]-FLUX.mkv```"
               }
             ],
-            "timestamp": "2026-11-08T21:00:29.0003826Z",
+            "timestamp": "2026-11-09T22:21:36.7155289Z",
             "title": "Daredevil: Born Again - 1x01 - Heaven's Half Hour",
             "url": "http://thetvdb.com/?tab=series&id=422712"
           }
@@ -189,7 +189,7 @@
         "applicationUrl": "",
         "deleteReason": "manual",
         "episodeFile": {
-          "dateAdded": "2026-11-08T20:58:48.5893616Z",
+          "dateAdded": "2026-11-09T22:19:56.267577Z",
           "id": 1076,
           "languages": [
             {
@@ -294,6 +294,39 @@
       "service": "webhook"
     },
     {
+      "body": null,
+      "headers": {},
+      "method": "GET",
+      "path": "/library/sections",
+      "query": {
+        "X-Plex-Client-Identifier": "06379e6c-b6a8-4dab-9ca2-d3c11680a12b",
+        "X-Plex-Device-Name": "Sonarr",
+        "X-Plex-Platform": "Windows",
+        "X-Plex-Platform-Version": "7",
+        "X-Plex-Product": "Sonarr",
+        "X-Plex-Token": "mock-plex-token",
+        "X-Plex-Version": "4.0.20.3014"
+      },
+      "service": "plex"
+    },
+    {
+      "body": null,
+      "headers": {},
+      "method": "GET",
+      "path": "/library/sections/2/refresh",
+      "query": {
+        "X-Plex-Client-Identifier": "06379e6c-b6a8-4dab-9ca2-d3c11680a12b",
+        "X-Plex-Device-Name": "Sonarr",
+        "X-Plex-Platform": "Windows",
+        "X-Plex-Platform-Version": "7",
+        "X-Plex-Product": "Sonarr",
+        "X-Plex-Token": "mock-plex-token",
+        "X-Plex-Version": "4.0.20.3014",
+        "path": "/tv/Daredevil - Born Again"
+      },
+      "service": "plex"
+    },
+    {
       "body": {
         "embeds": [
           {
@@ -315,7 +348,7 @@
                 "value": "```/tv/Daredevil - Born Again/Season 01/Daredevil Born Again (2025) - S01E02 - Optics [DSNP][WEBDL-1080p][AAC 1.0][x264]-FLUX.mkv```"
               }
             ],
-            "timestamp": "2026-11-08T21:00:29.0301541Z",
+            "timestamp": "2026-11-09T22:21:36.7589343Z",
             "title": "Daredevil: Born Again - 1x02 - Optics",
             "url": "http://thetvdb.com/?tab=series&id=422712"
           }
@@ -335,7 +368,7 @@
         "applicationUrl": "",
         "deleteReason": "manual",
         "episodeFile": {
-          "dateAdded": "2026-11-08T20:58:07.956174Z",
+          "dateAdded": "2026-11-09T22:19:15.7142408Z",
           "id": 1075,
           "languages": [
             {
@@ -467,42 +500,9 @@
         "path": "/tv/Daredevil - Born Again"
       },
       "service": "plex"
-    },
-    {
-      "body": null,
-      "headers": {},
-      "method": "GET",
-      "path": "/library/sections",
-      "query": {
-        "X-Plex-Client-Identifier": "06379e6c-b6a8-4dab-9ca2-d3c11680a12b",
-        "X-Plex-Device-Name": "Sonarr",
-        "X-Plex-Platform": "Windows",
-        "X-Plex-Platform-Version": "7",
-        "X-Plex-Product": "Sonarr",
-        "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "4.0.20.3014"
-      },
-      "service": "plex"
-    },
-    {
-      "body": null,
-      "headers": {},
-      "method": "GET",
-      "path": "/library/sections/2/refresh",
-      "query": {
-        "X-Plex-Client-Identifier": "06379e6c-b6a8-4dab-9ca2-d3c11680a12b",
-        "X-Plex-Device-Name": "Sonarr",
-        "X-Plex-Platform": "Windows",
-        "X-Plex-Platform-Version": "7",
-        "X-Plex-Product": "Sonarr",
-        "X-Plex-Token": "mock-plex-token",
-        "X-Plex-Version": "4.0.20.3014",
-        "path": "/tv/Daredevil - Born Again"
-      },
-      "service": "plex"
     }
   ],
-  "recordedAt": "2026-11-08T21:00:29Z",
+  "recordedAt": "2026-11-09T22:21:36Z",
   "request": {
     "method": "GET",
     "path": "/mock/notifications",

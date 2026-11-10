@@ -1,12 +1,12 @@
 {
   "body": {
     "accessible": true,
-    "freeSpace": 24742699008,
+    "freeSpace": 14373728256,
     "id": 1,
     "path": "/tv",
     "unmappedFolders": []
   },
-  "recordedAt": "2026-11-08T20:55:52Z",
+  "recordedAt": "2026-11-09T22:16:58Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/rootfolder/1"

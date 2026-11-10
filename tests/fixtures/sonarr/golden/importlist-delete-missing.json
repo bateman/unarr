@@ -1,0 +1,9 @@
+{
+  "body": {},
+  "recordedAt": "2026-11-09T22:24:55Z",
+  "request": {
+    "method": "DELETE",
+    "path": "/api/v3/importlist/2"
+  },
+  "status": 200
+}

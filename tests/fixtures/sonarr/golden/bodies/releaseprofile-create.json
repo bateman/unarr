@@ -1,0 +1,11 @@
+{
+ "name": "No CAM",
+ "enabled": true,
+ "required": [],
+ "ignored": [
+  "CAM",
+  "TS"
+ ],
+ "indexerId": 0,
+ "tags": []
+}

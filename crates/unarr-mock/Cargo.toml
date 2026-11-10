@@ -10,6 +10,7 @@ publish = false
 
 [dependencies]
 anyhow.workspace = true
+chrono.workspace = true
 unarr-core.workspace = true
 base64 = "0.22"
 axum = { workspace = true, features = ["query", "json", "tokio", "http1"] }

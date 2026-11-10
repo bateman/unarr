@@ -14,6 +14,7 @@ pub mod fs;
 pub mod hosts;
 pub mod json;
 pub mod logbuf;
+pub mod logfile;
 pub mod mediainfo;
 pub mod query;
 pub mod relay;
@@ -23,10 +24,12 @@ pub mod schemas;
 pub mod state;
 pub mod ui;
 
+use axum::response::IntoResponse;
 use axum::Router;
 use tower_http::trace::TraceLayer;
 
 pub use logbuf::LogBuffer;
+pub use logfile::{LogFiles, ProcessLog};
 pub use state::{AppState, RuntimeInfo, Settings};
 
 /// The originals route API paths case-insensitively (Bazarr asks for
@@ -54,6 +57,122 @@ async fn lowercase_api_path(
     next.run(request).await
 }
 
+/// Resources whose `PUT` takes an id: `[RestPutById]` in the originals,
+/// which is `HttpPut("{id:int?}")`.
+const PUT_BY_ID: &[&str] = &[
+    "autotagging",
+    "config/downloadclient",
+    "config/host",
+    "config/importlist",
+    "config/indexer",
+    "config/mediamanagement",
+    "config/naming",
+    "config/ui",
+    "customfilter",
+    "customformat",
+    "delayprofile",
+    "downloadclient",
+    "episode",
+    "episodefile",
+    "importlist",
+    "importlistexclusion",
+    "indexer",
+    "notification",
+    "qualitydefinition",
+    "qualityprofile",
+    "releaseprofile",
+    "remotepathmapping",
+    "series",
+    "tag",
+];
+
+/// Split an API path into what precedes the resource, the resource and the
+/// id in the route, when the resource is one of [`PUT_BY_ID`].
+fn put_by_id_target(path: &str) -> Option<(&str, Option<&str>)> {
+    let api = path.find("/api/v")?;
+    let resource_start = api + 1 + path[api + 1..].find('/')? + 1;
+    let resource_start = resource_start + path[resource_start..].find('/')? + 1;
+    let rest = path[resource_start..].trim_end_matches('/');
+    let (resource, id) = match rest.rsplit_once('/') {
+        Some((head, tail)) if !tail.is_empty() && tail.bytes().all(|b| b.is_ascii_digit()) => {
+            (head, Some(tail))
+        }
+        _ => (rest, None),
+    };
+    PUT_BY_ID
+        .contains(&resource)
+        .then(|| (&path[..resource_start + resource.len()], id))
+}
+
+/// The id of a `PUT` is the one in the body; the one in the route only
+/// fills in for a body without one (the UI saves the settings pages with no
+/// id in the route at all). The routes take the id from the path, so put the
+/// one that counts there; `0` stands for "none", which the API router
+/// rejects as the originals' validation does.
+async fn put_resource_id(
+    request: axum::extract::Request,
+    next: axum::middleware::Next,
+) -> axum::response::Response {
+    if request.method() != axum::http::Method::PUT {
+        return next.run(request).await;
+    }
+    let uri = request.uri().clone();
+    let Some((base, route_id)) = put_by_id_target(uri.path()) else {
+        return next.run(request).await;
+    };
+    let (mut parts, body) = request.into_parts();
+    let bytes = match axum::body::to_bytes(body, PUT_BODY_LIMIT).await {
+        Ok(bytes) => bytes,
+        Err(_) => return axum::http::StatusCode::PAYLOAD_TOO_LARGE.into_response(),
+    };
+    let body_id = serde_json::from_slice::<serde_json::Value>(&bytes)
+        .ok()
+        .and_then(|v| v.get("id").and_then(serde_json::Value::as_i64))
+        .filter(|id| *id > 0);
+    let id = match (body_id, route_id) {
+        (Some(id), _) => id.to_string(),
+        (None, Some(id)) => id.to_owned(),
+        (None, None) => "0".to_owned(),
+    };
+    let rewritten = match uri.query() {
+        Some(q) => format!("{base}/{id}?{q}"),
+        None => format!("{base}/{id}"),
+    };
+    if let Ok(new_uri) = rewritten.parse() {
+        parts.uri = new_uri;
+    }
+    next.run(axum::extract::Request::from_parts(
+        parts,
+        axum::body::Body::from(bytes),
+    ))
+    .await
+}
+
+/// What a `PUT` body may weigh: the default limit of the JSON extractor.
+const PUT_BODY_LIMIT: usize = 2 * 1024 * 1024;
+
+/// A `PUT` with no id in the body nor in the route: the originals'
+/// `Id > 0` rule answers.
+async fn reject_put_without_id(
+    request: axum::extract::Request,
+    next: axum::middleware::Next,
+) -> axum::response::Response {
+    if request.method() == axum::http::Method::PUT && request.uri().path().ends_with("/0") {
+        let mut failure = unarr_core::validation::ValidationFailure::rule(
+            "Id",
+            "GreaterThanValidator",
+            "'Id' must be greater than '0'.",
+            serde_json::json!(0),
+        );
+        failure.placeholders = vec![
+            ("comparisonProperty".into(), serde_json::json!("")),
+            ("comparisonValue".into(), serde_json::json!(0)),
+        ];
+        return error::ApiError::Validation(vec![failure]).into_response();
+    }
+    next.run(request).await
+}
+
 /// `X-Application-Version` on every API response: Prowlarr reads it from
 /// the indexer test to check the version it talks to.
 async fn version_header(
@@ -74,6 +193,7 @@ async fn version_header(
 /// Build the router for one personality.
 pub fn router(state: AppState) -> Router {
     let api = routes::api_router(&state)
+        .route_layer(axum::middleware::from_fn(reject_put_without_id))
         .route_layer(axum::middleware::from_fn_with_state(
             state.clone(),
             auth::require_api_key,
@@ -89,6 +209,22 @@ pub fn router(state: AppState) -> Router {
         .route(
             "/initialize.json",
             axum::routing::get(routes::system::initialize_json),
+        )
+        .route(
+            "/MediaCoverProxy/{hash}/{file}",
+            axum::routing::get(routes::series_writes::media_cover_proxy),
+        )
+        .route(
+            "/backup/{kind}/{name}",
+            axum::routing::get(routes::backup::download),
+        )
+        .route(
+            "/logfile/{filename}",
+            axum::routing::get(routes::backup::log_file_download),
+        )
+        .route(
+            "/updatelogfile/{filename}",
+            axum::routing::get(routes::backup::update_log_file_download),
         )
         .nest_service(
             "/MediaCover",
@@ -139,6 +275,7 @@ pub fn router(state: AppState) -> Router {
     // host check sit on an outer router whose only route is the real one.
     Router::new()
         .fallback_service(app)
+        .layer(axum::middleware::from_fn(put_resource_id))
         .layer(axum::middleware::from_fn(lowercase_api_path))
         .layer(axum::middleware::from_fn_with_state(
             state.clone(),

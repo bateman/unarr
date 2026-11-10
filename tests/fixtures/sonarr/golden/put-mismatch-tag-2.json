@@ -1,0 +1,12 @@
+{
+  "body": {
+    "id": 2,
+    "label": "usenet-only"
+  },
+  "recordedAt": "2026-11-09T23:25:56Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/tag/2"
+  },
+  "status": 200
+}

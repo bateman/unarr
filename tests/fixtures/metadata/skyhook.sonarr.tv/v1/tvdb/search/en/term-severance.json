@@ -1,0 +1,913 @@
+[
+ {
+  "tvdbId": 371980,
+  "title": "Severance",
+  "overview": "Mark leads a team of office workers whose memories have been surgically divided between their work and personal lives. When a mysterious colleague appears outside of work, it begins a journey to discover the truth about their jobs.",
+  "slug": "severance",
+  "originalCountry": "usa",
+  "originalLanguage": "eng",
+  "language": "eng",
+  "firstAired": "2022-02-18",
+  "lastAired": "2025-03-20",
+  "tvMazeId": 44933,
+  "tmdbId": 95396,
+  "imdbId": "tt11280740",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2026-11-06T08:45:54Z",
+  "status": "Continuing",
+  "runtime": 49,
+  "timeOfDay": {
+   "hours": 21,
+   "minutes": 0
+  },
+  "originalNetwork": "Apple TV",
+  "network": "Apple TV",
+  "genres": [
+   "Drama",
+   "Mystery",
+   "Science Fiction",
+   "Thriller"
+  ],
+  "contentRating": "TV-MA",
+  "rating": {
+   "count": 415088,
+   "value": "8.6"
+  },
+  "actors": [
+   {
+    "name": "Adam Scott",
+    "character": "Mark Scout",
+    "image": "https://artworks.thetvdb.com/banners/person/274370/primary.jpg"
+   },
+   {
+    "name": "Britt Lower",
+    "character": "Helly",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/296815/photo/67ba01b5cc513.jpg"
+   },
+   {
+    "name": "Patricia Arquette",
+    "character": "Harmony Cobel / Mrs. Selvig",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/311092/photo/61be0c22624ae.jpg"
+   },
+   {
+    "name": "Zach Cherry",
+    "character": "Dylan",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/296928/photo/62656c277637b.jpg"
+   },
+   {
+    "name": "Tramell Tillman",
+    "character": "Milchick",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/8024114/photo/68af216aa72be.jpg"
+   },
+   {
+    "name": "Jen Tullock",
+    "character": "Devon"
+   },
+   {
+    "name": "John Turturro",
+    "character": "Irving",
+    "image": "https://artworks.thetvdb.com/banners/person/441767/primary.jpg"
+   },
+   {
+    "name": "Christopher Walken",
+    "character": "Burt",
+    "image": "https://artworks.thetvdb.com/banners/person/288073/primary.jpg"
+   },
+   {
+    "name": "Dichen Lachman",
+    "character": "Ms. Casey",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/303654/photo/65ef3040e5033.jpg"
+   }
+  ],
+  "images": [
+   {
+    "coverType": "Banner",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/371980/banners/67d3854a3f3f2.jpg"
+   },
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/371980/posters/621096b26f0e2.jpg"
+   },
+   {
+    "coverType": "Fanart",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/371980/backgrounds/61bdee7c62d99.jpg"
+   },
+   {
+    "coverType": "Clearlogo",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/371980/clearlogo/67deb201804b5.png"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1,
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/v4/season/1971742/posters/62113d7daa972.jpg"
+     },
+     {
+      "coverType": "Banner",
+      "url": "https://artworks.thetvdb.com/banners/v4/season/1971742/banners/64019535f16a9.jpg"
+     }
+    ]
+   },
+   {
+    "seasonNumber": 2,
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/v4/season/2136511/posters/67d38676755a5.jpg"
+     },
+     {
+      "coverType": "Banner",
+      "url": "https://artworks.thetvdb.com/banners/v4/season/2136511/banners/682db80f0d3b5.jpg"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "tvdbId": 395962,
+  "title": "Severnoe siyanie",
+  "overview": "The popular author of detective stories Agata Sever, who is experiencing a creative crisis, goes with her assistant agent Marusya to one of the islands in Lake Ladoga. The trip turns into a real nightmare: unfriendly residents, a series of strange incidents, the disappearance of an assistant. Murder and old secrets, friends and enemies, mysticism and reality - everything is woven into a tight knot.",
+  "slug": "severnoe-siyanie",
+  "originalCountry": "rus",
+  "originalLanguage": "rus",
+  "language": "eng",
+  "firstAired": "2018-06-01",
+  "lastAired": "2020-05-22",
+  "imdbId": "tt7336468",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2022-05-24T13:29:54Z",
+  "status": "Ended",
+  "timeOfDay": {
+   "hours": 0,
+   "minutes": 0
+  },
+  "genres": [
+   "Mystery"
+  ],
+  "rating": {
+   "count": 25,
+   "value": "5.8"
+  },
+  "images": [
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/series/395962/posters/6012b8a6578f9.jpg"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1
+   },
+   {
+    "seasonNumber": 2
+   },
+   {
+    "seasonNumber": 3
+   },
+   {
+    "seasonNumber": 4
+   },
+   {
+    "seasonNumber": 5
+   },
+   {
+    "seasonNumber": 6
+   },
+   {
+    "seasonNumber": 7
+   },
+   {
+    "seasonNumber": 8
+   },
+   {
+    "seasonNumber": 9
+   }
+  ]
+ },
+ {
+  "tvdbId": 81645,
+  "title": "North and South",
+  "overview": "This saga chronicles a nation divided and two families,the Hazards of Pennsylvania and the Mains of South Carolina,caught on opposite sides when the Civil War erupts in May 1861. As war is raged on one battlefield after another, lives on the home front drastically change. The hatred, prejudice and greed that tear the fabric of a nation, also threatens the very foundation of love and friendship between these two families.",
+  "slug": "north-and-south-1985",
+  "originalCountry": "usa",
+  "originalLanguage": "eng",
+  "language": "eng",
+  "firstAired": "1985-11-03",
+  "lastAired": "1994-03-02",
+  "tvRageId": 8911,
+  "tvMazeId": 1157,
+  "tmdbId": 3266,
+  "imdbId": "tt0088583",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2026-08-30T14:43:30Z",
+  "status": "Ended",
+  "runtime": 88,
+  "originalNetwork": "ABC (US)",
+  "network": "ABC (US)",
+  "genres": [
+   "Drama",
+   "History",
+   "Mini-Series",
+   "Romance",
+   "War"
+  ],
+  "rating": {
+   "count": 13360,
+   "value": "8.1"
+  },
+  "alternativeTitles": [
+   {
+    "title": "North and South (1985)"
+   }
+  ],
+  "actors": [
+   {
+    "name": "Patrick Swayze",
+    "character": "Orry Main",
+    "image": "https://artworks.thetvdb.com/banners/person/253463/primary.jpg"
+   },
+   {
+    "name": "James Read",
+    "character": "George Hazard",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/256998/photo/62cf210e4d5f9.jpg"
+   },
+   {
+    "name": "Lesley-Ann Down",
+    "character": "Madeline Fabray"
+   },
+   {
+    "name": "Wendy Kilbourne",
+    "character": "Constance Flynn"
+   },
+   {
+    "name": "Kirstie Alley",
+    "character": "Virgilia Hazard",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/253846/photo/65538f8606803.jpg"
+   },
+   {
+    "name": "David Carradine",
+    "character": "Justin LaMotte",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/257544/photo/65d625658702d.jpg"
+   },
+   {
+    "name": "Genie Francis",
+    "character": "Brett Main"
+   },
+   {
+    "name": "John Stockwell",
+    "character": "Billy Hazard"
+   },
+   {
+    "name": "Terri Garber",
+    "character": "Ashton Main"
+   },
+   {
+    "name": "Philip Casnoff",
+    "character": "Elkanah Bent"
+   },
+   {
+    "name": "Lewis Smith",
+    "character": "Charles Main"
+   },
+   {
+    "name": "Jonathan Frakes",
+    "character": "Stanley Hazard",
+    "image": "https://artworks.thetvdb.com/banners/person/255688/634487c64ee02.jpg"
+   },
+   {
+    "name": "Jean Simmons",
+    "character": "Clarissa Main",
+    "image": "https://artworks.thetvdb.com/banners/person/265403/primary.jpg"
+   },
+   {
+    "name": "Rya Kihlstedt",
+    "character": "Willa",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/329972/photo/6281319718ac5.jpg"
+   },
+   {
+    "name": "Parker Stevenson",
+    "character": "Billy Hazard",
+    "image": "https://artworks.thetvdb.com/banners/person/253834/5f83562052255.jpg"
+   },
+   {
+    "name": "Lee Horsley",
+    "character": "Rafe Beaudeen"
+   },
+   {
+    "name": "Jim Metzler",
+    "character": "James Huntoon",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/291577/photo/6497b4ef4ba72.jpg"
+   },
+   {
+    "name": "Inga Swenson",
+    "character": "Maude Hazard"
+   },
+   {
+    "name": "Erica Gimpel",
+    "character": "Semiramis"
+   },
+   {
+    "name": "Kyle Chandler",
+    "character": "Charles Main (Season 3)",
+    "image": "https://artworks.thetvdb.com/banners/person/300292/6a6292c6c3bd5.jpg"
+   },
+   {
+    "name": "John Anderson",
+    "character": "William Hazard",
+    "image": "https://artworks.thetvdb.com/banners/person/257860/6006325b368dc.jpg"
+   },
+   {
+    "name": "Lee Bergere",
+    "character": "Nicholas Fabray",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/265064/photo/64545db479485.jpg"
+   },
+   {
+    "name": "David Ogden Stiers",
+    "character": "Sam Greene"
+   },
+   {
+    "name": "Elizabeth Taylor",
+    "character": "Madam Conti",
+    "image": "https://artworks.thetvdb.com/banners/person/254408/62fbbe38eedf0.jpg"
+   },
+   {
+    "name": "Olivia Cole",
+    "character": "Maum Sally"
+   },
+   {
+    "name": "Robert Guillaume",
+    "character": "Frederick Douglass",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/254314/photo/627a14f41fdd2.jpg"
+   },
+   {
+    "name": "Forest Whitaker",
+    "character": "Cuffey",
+    "image": "https://artworks.thetvdb.com/banners/person/276091/63236cb204e1d.jpg"
+   },
+   {
+    "name": "Gene Kelly",
+    "character": "Charles Edwards",
+    "image": "https://artworks.thetvdb.com/banners/person/253602/primary.jpg"
+   },
+   {
+    "name": "David Harris",
+    "character": "Priam"
+   },
+   {
+    "name": "Tony Frank",
+    "character": "Salem Jones"
+   },
+   {
+    "name": "Georg Stanford Brown",
+    "character": "Garrison Grady"
+   }
+  ],
+  "images": [
+   {
+    "coverType": "Banner",
+    "url": "https://artworks.thetvdb.com/banners/text/81645.jpg"
+   },
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/81645/posters/653fb617bcaaf.jpg"
+   },
+   {
+    "coverType": "Fanart",
+    "url": "https://artworks.thetvdb.com/banners/fanart/original/81645-1.jpg"
+   },
+   {
+    "coverType": "Clearlogo",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/81645/clearlogo/653fb5f172cce.png"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1,
+    "name": "North and South",
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/v4/season/31461/posters/653fb8e4eb733.jpg"
+     },
+     {
+      "coverType": "Banner",
+      "url": "https://artworks.thetvdb.com/banners/seasonswide/81645-1.jpg"
+     }
+    ]
+   },
+   {
+    "seasonNumber": 2,
+    "name": "Love and War",
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/v4/season/34717/posters/653fb9070dbf9.jpg"
+     },
+     {
+      "coverType": "Banner",
+      "url": "https://artworks.thetvdb.com/banners/seasonswide/81645-2.jpg"
+     }
+    ]
+   },
+   {
+    "seasonNumber": 3,
+    "name": "Heaven and Hell",
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/v4/season/34718/posters/653fb925edf41.jpg"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "tvdbId": 369399,
+  "title": "Internal Affairs",
+  "overview": "Petr is a promising criminal investigator who believes in justice and honor. When he discovers his superiors' darkest secrets, he becomes the victim of a lethal punishment that might not only end his career but also his life.",
+  "slug": "internal-affairs",
+  "originalCountry": "cze",
+  "originalLanguage": "ces",
+  "language": "eng",
+  "firstAired": "2019-09-02",
+  "lastAired": "2019-10-07",
+  "tvMazeId": 50591,
+  "tmdbId": 93186,
+  "imdbId": "tt10733720",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2024-05-23T18:20:25Z",
+  "status": "Ended",
+  "runtime": 60,
+  "originalNetwork": "Česká televize",
+  "network": "Česká televize",
+  "genres": [
+   "Crime",
+   "Drama",
+   "Thriller"
+  ],
+  "rating": {
+   "count": 113,
+   "value": "6.7"
+  },
+  "actors": [
+   {
+    "name": "Jiří Mádl"
+   },
+   {
+    "name": "Eliška Křenková",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/630168/photo/6599df06b735d.jpg"
+   },
+   {
+    "name": "Robert Řasa"
+   }
+  ],
+  "images": [
+   {
+    "coverType": "Banner",
+    "url": "https://artworks.thetvdb.com/banners/graphical/5d7679c54b69c.jpg"
+   },
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/posters/5d7679b6bf42c.jpg"
+   },
+   {
+    "coverType": "Fanart",
+    "url": "https://artworks.thetvdb.com/banners/fanart/original/5d7679d92bb8d.jpg"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1
+   }
+  ]
+ },
+ {
+  "tvdbId": 467232,
+  "title": "Aligned Reverence",
+  "overview": "After a tragic mistake leads to the downfall of her benefactors, orphaned Su Jinyuan returns seeking redemption. Her fate becomes entwined with Xie Yunyuan, the adopted son of the fallen family. Together, they defy betrayal, fight to survive, and ignite a passionate, fate-defying love as they seek justice and reclaim their destiny.",
+  "slug": "aligned-reverence",
+  "originalCountry": "chn",
+  "originalLanguage": "zho",
+  "language": "eng",
+  "firstAired": "2025-12-05",
+  "lastAired": "2025-12-12",
+  "tvMazeId": 85532,
+  "tmdbId": 294576,
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2026-05-21T17:45:26Z",
+  "status": "Ended",
+  "runtime": 15,
+  "timeOfDay": {
+   "hours": 12,
+   "minutes": 0
+  },
+  "genres": [
+   "Drama",
+   "Romance"
+  ],
+  "actors": [
+   {
+    "name": "Deng Xiaoci",
+    "character": "Xie Yunyuan",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/9123797/photo/65e879d0e80cd.jpg"
+   },
+   {
+    "name": "Sun Yi Ran",
+    "character": "Su Jinyuan",
+    "image": "https://artworks.thetvdb.com/banners/person/8169550/5ec8118d594d6.jpg"
+   }
+  ],
+  "images": [
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/467232/posters/68a9e4e22d53d.jpg"
+   },
+   {
+    "coverType": "Fanart",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/467232/backgrounds/69621bbea7bcb.jpg"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1
+   }
+  ]
+ },
+ {
+  "tvdbId": 424828,
+  "title": "The Trauma Code: Heroes on Call",
+  "overview": "To create a top-tier trauma center, a war-seasoned doctor arrives — bringing his blunt but skilled ways to transform his team into life-saving mavericks.",
+  "slug": "the-trauma-code-heroes-on-call",
+  "originalCountry": "kor",
+  "originalLanguage": "kor",
+  "language": "eng",
+  "firstAired": "2025-01-24",
+  "lastAired": "2025-01-24",
+  "tvMazeId": 73789,
+  "tmdbId": 217553,
+  "imdbId": "tt28106730",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2026-10-28T12:01:10Z",
+  "status": "Continuing",
+  "runtime": 51,
+  "timeOfDay": {
+   "hours": 17,
+   "minutes": 0
+  },
+  "originalNetwork": "Netflix",
+  "network": "Netflix",
+  "genres": [
+   "Action",
+   "Drama"
+  ],
+  "contentRating": "16",
+  "rating": {
+   "count": 12172,
+   "value": "8.4"
+  },
+  "alternativeTitles": [
+   {
+    "title": "Severe Trauma Center"
+   },
+   {
+    "title": "Golden Hour"
+   },
+   {
+    "title": "Severe Trauma Center: Golden Hour"
+   },
+   {
+    "title": "Goldeun Aweo"
+   }
+  ],
+  "actors": [
+   {
+    "name": "Ju Ji-hoon",
+    "character": "Baek Kang-hyuk",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/455571/photo/685488d3cb583.jpg"
+   },
+   {
+    "name": "Choo Young-woo",
+    "character": "Yang Jae-won ",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/8194967/photo/6adba8e2180a7.jpg"
+   },
+   {
+    "name": "Yoon Kyung-ho",
+    "character": "Han Yu-rim",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/584198/photo/6adba9031431d.jpg"
+   },
+   {
+    "name": "Jung Jae-gwang",
+    "character": "Park Kyung-won ",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/7940402/photo/693c363c5f2d6.jpg"
+   },
+   {
+    "name": "Jeong Ye-in",
+    "character": "Cheon Jang-mi"
+   },
+   {
+    "name": "Ahn Ha-young",
+    "character": "Cheon Jang-mi ",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/8175470/photo/6a50d5cc31cea.jpg"
+   },
+   {
+    "name": "Kim Sun-young",
+    "character": "Kang Myeong-hui",
+    "image": "https://artworks.thetvdb.com/banners/person/499343/5ed042fd32261.jpg"
+   },
+   {
+    "name": "Kim Eui-sung",
+    "character": "Choi Jo-Eun",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/481086/photo/655a137a8ad48.jpg"
+   },
+   {
+    "name": "Kim Won-hae",
+    "character": "Hong Jae-Hun",
+    "image": "https://artworks.thetvdb.com/banners/person/455745/69a35f564a38f.jpg"
+   }
+  ],
+  "images": [
+   {
+    "coverType": "Banner",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/424828/banners/679399bd2a180.jpg"
+   },
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/424828/posters/6792bdc64c162.jpg"
+   },
+   {
+    "coverType": "Fanart",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/424828/backgrounds/6789069288480.jpg"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1,
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/v4/season/2019958/posters/679ae0ae25d03.jpg"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "tvdbId": 267649,
+  "title": "The Severing Crime Edge",
+  "overview": "Killing Goods are murder weapons handed down from generation to generation within the families of their owners. They are cursed to compel their current owners to repeat the original murders. The curse also makes them indestructible. Kiri Haimura is the current owner of a pair of shears that can cut seemingly anything, although the only thing he wants to cut is hair. One day he meets Iwai Mushanokoji, a girl of whom he has only heard rumors that her hair cannot be cut, a girl who can grant one wish, any wish, but only to the person who murders her. Every morning he cuts her hair, which grows back every night; and every day he helps protect her from people who know about her curse and who want a wish granted.",
+  "slug": "the-severing-crime-edge",
+  "originalCountry": "jpn",
+  "originalLanguage": "jpn",
+  "language": "eng",
+  "firstAired": "2013-04-04",
+  "lastAired": "2013-06-27",
+  "tvRageId": 35144,
+  "tvMazeId": 17639,
+  "tmdbId": 52850,
+  "imdbId": "tt2623000",
+  "malIds": [
+   16355
+  ],
+  "anidbIds": [
+   9510
+  ],
+  "aniListIds": [
+   16355
+  ],
+  "lastUpdated": "2025-09-06T12:13:56Z",
+  "status": "Ended",
+  "runtime": 25,
+  "timeOfDay": {
+   "hours": 1,
+   "minutes": 30
+  },
+  "originalNetwork": "Tokyo MX",
+  "network": "Tokyo MX",
+  "genres": [
+   "Action",
+   "Animation",
+   "Fantasy",
+   "Romance"
+  ],
+  "contentRating": "MA15+",
+  "rating": {
+   "count": 118,
+   "value": "5.6"
+  },
+  "alternativeTitles": [
+   {
+    "title": "Dansai Bunri no Crime Edge"
+   }
+  ],
+  "actors": [
+   {
+    "name": "Kotori Koiwai",
+    "character": "Iwai Mushanokoji",
+    "image": "https://artworks.thetvdb.com/banners/person/460013/primary.jpg"
+   },
+   {
+    "name": "Natsuki Hanae",
+    "character": "Kiri Haimura",
+    "image": "https://artworks.thetvdb.com/banners/person/271014/61a0c1042916a.jpg"
+   },
+   {
+    "name": "Arisa Noto",
+    "character": "Nigi Ubusato",
+    "image": "https://artworks.thetvdb.com/banners/person/7924613/primary.jpg"
+   },
+   {
+    "name": "Kaori Fukuhara",
+    "character": "Yamane Byoinzaka",
+    "image": "https://artworks.thetvdb.com/banners/person/450859/61a21a1058722.jpg"
+   },
+   {
+    "name": "Kiyono Yasuno",
+    "character": "Kashiko Misumi",
+    "image": "https://artworks.thetvdb.com/banners/person/307471/61a21aff608be.jpg"
+   },
+   {
+    "name": "Kouji Yusa",
+    "character": "Kanae Sumeragi / Professor",
+    "image": "https://artworks.thetvdb.com/banners/person/7864374/5f3a11f799593.jpg"
+   },
+   {
+    "name": "Nobunaga Shimazaki",
+    "character": "Kotaro Naruto",
+    "image": "https://artworks.thetvdb.com/banners/person/292646/61e1ac7b7cefd.jpg"
+   },
+   {
+    "name": "Yumi Uchiyama",
+    "character": "Houko Byoinzaka",
+    "image": "https://artworks.thetvdb.com/banners/person/292642/6140df9aa4521.jpg"
+   }
+  ],
+  "images": [
+   {
+    "coverType": "Banner",
+    "url": "https://artworks.thetvdb.com/banners/graphical/267649-g.jpg"
+   },
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/posters/267649-1.jpg"
+   },
+   {
+    "coverType": "Fanart",
+    "url": "https://artworks.thetvdb.com/banners/fanart/original/267649-2.jpg"
+   },
+   {
+    "coverType": "Clearlogo",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/267649/clearlogo/611d3a0ea4396.png"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1,
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/seasons/267649-1.jpg"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "tvdbId": 342533,
+  "title": "Wild North",
+  "overview": "Take a look at Norway's coastlines, forests and mountains and the animals who live there, including bears, elk, birds of prey, foxes and lemmings.",
+  "slug": "wild-north",
+  "originalCountry": "usa",
+  "originalLanguage": "eng",
+  "language": "eng",
+  "firstAired": "2015-10-06",
+  "lastAired": "2015-10-20",
+  "tmdbId": 75445,
+  "imdbId": "tt6241856",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2024-01-22T01:29:21Z",
+  "status": "Ended",
+  "runtime": 52,
+  "originalNetwork": "NRK1",
+  "network": "NRK1",
+  "genres": [
+   "Documentary"
+  ],
+  "rating": {
+   "count": 148,
+   "value": "7.3"
+  },
+  "images": [
+   {
+    "coverType": "Banner",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/342533/banners/65adc4cd2d4f4.jpg"
+   },
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/posters/342533-1.jpg"
+   },
+   {
+    "coverType": "Fanart",
+    "url": "https://artworks.thetvdb.com/banners/fanart/original/342533-1.jpg"
+   },
+   {
+    "coverType": "Clearlogo",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/342533/clearlogo/65adc4dc5410c.png"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1
+   }
+  ]
+ },
+ {
+  "tvdbId": 460877,
+  "title": "The Severance Podcast with Ben Stiller and Adam Scott",
+  "overview": "This is the Severance Podcast with Ben Stiller and Adam Scott, an episode-by-episode, behind-the-scenes breakdown with the creators, cast, crew, and fans of the Emmy- and Peabody Award-winning TV show.",
+  "slug": "the-severance-podcast-with-ben-stiller-and-adam-scott",
+  "originalCountry": "usa",
+  "originalLanguage": "eng",
+  "language": "eng",
+  "firstAired": "2025-01-07",
+  "lastAired": "2025-09-18",
+  "imdbId": "tt34791039",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2026-09-04T20:51:10Z",
+  "status": "Continuing",
+  "runtime": 67,
+  "timeOfDay": {
+   "hours": 8,
+   "minutes": 0
+  },
+  "genres": [
+   "Podcast"
+  ],
+  "images": [
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/460877/posters/687b9792c0585.jpg"
+   },
+   {
+    "coverType": "Fanart",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/460877/backgrounds/6a920092a56d3.jpg"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1
+   },
+   {
+    "seasonNumber": 2
+   },
+   {
+    "seasonNumber": 3
+   }
+  ]
+ }
+]

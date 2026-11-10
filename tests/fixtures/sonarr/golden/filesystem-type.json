@@ -1,0 +1,11 @@
+{
+  "body": {
+    "type": "folder"
+  },
+  "recordedAt": "2026-11-09T22:24:32Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/filesystem/type?path=/tv"
+  },
+  "status": 200
+}

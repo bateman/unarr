@@ -3,7 +3,7 @@
     {
       "customFormatScore": 0,
       "customFormats": [],
-      "dateAdded": "2026-11-08T20:57:47Z",
+      "dateAdded": "2026-11-09T22:18:55Z",
       "id": 1074,
       "indexerFlags": 0,
       "languages": [
@@ -72,7 +72,7 @@
           "name": "WEB Tier 01"
         }
       ],
-      "dateAdded": "2026-11-08T20:59:12Z",
+      "dateAdded": "2026-11-09T22:20:20Z",
       "id": 1077,
       "indexerFlags": 0,
       "languages": [
@@ -129,7 +129,7 @@
           "name": "Language not Italian"
         }
       ],
-      "dateAdded": "2026-11-08T20:59:32Z",
+      "dateAdded": "2026-11-09T22:20:40Z",
       "id": 1078,
       "indexerFlags": 0,
       "languages": [
@@ -178,7 +178,7 @@
       "size": 119980
     }
   ],
-  "recordedAt": "2026-11-08T20:59:44Z",
+  "recordedAt": "2026-11-09T22:20:52Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/episodefile?seriesId=1"

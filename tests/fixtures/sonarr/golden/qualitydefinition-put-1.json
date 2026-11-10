@@ -1,0 +1,23 @@
+{
+  "body": {
+    "id": 1,
+    "maxSize": 100,
+    "minSize": 2,
+    "preferredSize": 50,
+    "quality": {
+      "id": 0,
+      "name": "Unknown",
+      "resolution": 0,
+      "source": "unknown"
+    },
+    "title": "Unknown",
+    "weight": 1
+  },
+  "recordedAt": "2026-11-09T22:24:43Z",
+  "request": {
+    "body": "bodies/qualitydefinition-put-1.json",
+    "method": "PUT",
+    "path": "/api/v3/qualitydefinition/1"
+  },
+  "status": 202
+}

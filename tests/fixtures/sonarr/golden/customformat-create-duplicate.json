@@ -1,0 +1,23 @@
+{
+  "body": [
+    {
+      "attemptedValue": "x265 (Unarr)",
+      "errorCode": "PredicateValidator",
+      "errorMessage": "Must be unique.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Name",
+        "propertyValue": "x265 (Unarr)"
+      },
+      "propertyName": "Name",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-09T22:24:43Z",
+  "request": {
+    "body": "bodies/customformat-create.json",
+    "method": "POST",
+    "path": "/api/v3/customformat"
+  },
+  "status": 400
+}

@@ -446,3 +446,297 @@ indexer-after-delete GET /api/v3/indexer
 # be reached, after the checks the writes above triggered have settled.
 sleep 10
 health-after GET /api/v3/health
+
+# Phase 3b, metadata. The original reaches Skyhook, the Servarr services,
+# XEM and TheTVDB's artwork through scripts/mock-servarr.py, which becomes
+# its HTTP proxy here: certificate validation off for the mock's
+# self-signed tunnels, the fixture's dead *.invalid providers bypassed so
+# they fail as before. The fixture's own AllowedHosts '*' is refused by the
+# original's validation of the same PUT first.
+config-host-put-allowedhosts-star PUT /api/v3/config/host/1 bodies/config-host-proxy-star.json
+config-host-put-proxy PUT /api/v3/config/host/1 bodies/config-host-proxy.json
+# A manual refresh of one series: scene mappings (a manual refresh updates
+# them), XEM, the show from Skyhook, its covers, a rescan. Silo (23) has
+# nine episodes the fixture does not, Stick (25) nine changed titles.
+refresh-series-silo POST /api/v3/command bodies/command-refresh-series-23.json
+sleep 20
+refresh-series-silo-get GET /api/v3/command/{id:refresh-series-silo}
+refresh-series-silo-series GET /api/v3/series/23
+refresh-series-silo-episodes GET /api/v3/episode?seriesId=23
+refresh-series-stick POST /api/v3/command bodies/command-refresh-series-25.json
+sleep 15
+refresh-series-stick-get GET /api/v3/command/{id:refresh-series-stick}
+refresh-series-stick-episodes GET /api/v3/episode?seriesId=25
+# Every series: the scheduled task's command, triggered by hand.
+refresh-series-all POST /api/v3/command bodies/command-refresh-series-all.json
+sleep 60
+refresh-series-all-get GET /api/v3/command/{id:refresh-series-all}
+refresh-series-all-series GET /api/v3/series
+refresh-series-all-series-1 GET /api/v3/series/1
+refresh-series-all-episodes-1 GET /api/v3/episode?seriesId=1
+refresh-series-all-wanted GET /api/v3/wanted/missing?page=1&pageSize=50&sortKey=episodes.airDateUtc&sortDirection=descending&includeSeries=true&monitored=true
+
+# Phase 3b, series management. Lookups by term and by the id prefixes
+# (a tvdb id already in the library is answered from it), then the UI's
+# Add Series with addOptions and the original's validation failures, the
+# edits (PUT with season monitoring and a move, the editor, the season
+# pass, episode monitoring), parse, the folder browser and the deletes.
+# The series added get ids 50, 51 and 52 (the fixture's sequence stands
+# at 49); the derived bodies take a recorded response and change it, as
+# the UI sends a series back whole.
+series-lookup-term GET /api/v3/series/lookup?term=breaking%20bad
+series-lookup-tvdb-new GET /api/v3/series/lookup?term=tvdb:81189
+series-lookup-tvdb-existing GET /api/v3/series/lookup?term=tvdb:448176
+series-lookup-tvdb-missing GET /api/v3/series/lookup?term=tvdb:999999999
+series-lookup-imdb GET /api/v3/series/lookup?term=imdb:tt11280740
+series-lookup-tmdb GET /api/v3/series/lookup?term=tmdb:95396
+series-lookup-tvmaze GET /api/v3/series/lookup?term=tvmaze:44933
+series-lookup-none GET /api/v3/series/lookup?term=xyzzynothing
+series-lookup-frieren GET /api/v3/series/lookup?term=frieren
+series-lookup-pete GET /api/v3/series/lookup?term=pete%20holmes
+series-add-noroot POST /api/v3/series bodies/series-add-noroot.json
+series-add-existing POST /api/v3/series bodies/series-add-existing.json
+series-add-unknown POST /api/v3/series bodies/series-add-unknown.json
+series-add-bad-profile POST /api/v3/series bodies/series-add-bad-profile.json
+series-add-missing-root POST /api/v3/series bodies/series-add-missing-root.json
+mock - POST /mock/notifications/clear
+series-add-breaking-bad POST /api/v3/series bodies/series-add-breaking-bad.json
+sleep 15
+series-add-frieren POST /api/v3/series bodies/series-add-frieren.json
+sleep 15
+series-add-pete POST /api/v3/series bodies/series-add-pete.json
+sleep 25
+series-after-add-breaking-bad GET /api/v3/series/50
+episodes-after-add-breaking-bad GET /api/v3/episode?seriesId=50
+series-after-add-frieren GET /api/v3/series/51
+episodes-after-add-frieren GET /api/v3/episode?seriesId=51
+series-after-add-pete GET /api/v3/series/52
+episodes-after-add-pete GET /api/v3/episode?seriesId=52
+series-add-history GET /api/v3/history?page=1&pageSize=10&sortKey=date&sortDirection=descending
+mock series-add-notifications GET /mock/notifications
+mock - POST /mock/notifications/clear
+series-folder GET /api/v3/series/50/folder
+series-put-breaking-bad PUT /api/v3/series/50 bodies/series-put-breaking-bad.json
+series-after-put-breaking-bad GET /api/v3/series/50
+episodes-after-put-breaking-bad GET /api/v3/episode?seriesId=50
+series-put-breaking-bad-nopath PUT /api/v3/series/50 bodies/series-put-breaking-bad-nopath.json
+series-put-breaking-bad-move PUT /api/v3/series/50?moveFiles=true bodies/series-put-breaking-bad-move.json
+sleep 10
+series-after-move-breaking-bad GET /api/v3/series/50
+series-put-404 PUT /api/v3/series/999 bodies/series-put-breaking-bad-move.json
+series-editor PUT /api/v3/series/editor bodies/series-editor.json
+series-editor-root PUT /api/v3/series/editor bodies/series-editor-root.json
+series-after-editor-frieren GET /api/v3/series/51
+series-after-editor-pete GET /api/v3/series/52
+seasonpass POST /api/v3/seasonpass bodies/seasonpass.json
+sleep 5
+series-after-seasonpass GET /api/v3/series/50
+episodes-after-seasonpass GET /api/v3/episode?seriesId=50
+episode-monitor PUT /api/v3/episode/monitor bodies/episode-monitor.json
+episode-2-before-put GET /api/v3/episode/2
+episode-put-2 PUT /api/v3/episode/2 bodies/episode-put-2.json
+episodes-after-monitor GET /api/v3/episode?seriesId=1
+parse-release GET /api/v3/parse?title=The.Pitt.S01E01.1080p.WEB.H264-SuccessfulCrab
+parse-unknown GET /api/v3/parse?title=Some.Other.Show.S03E04.720p.HDTV.x264-GRP
+parse-daily GET /api/v3/parse?title=The.Pete.Holmes.Show.2014.01.02.720p.HDTV.x264-GRP
+parse-path GET /api/v3/parse?path=/tv/The%20Pitt/Season%2001/The.Pitt.S01E03.1080p.WEB.H264-SuccessfulCrab.mkv
+parse-empty GET /api/v3/parse
+filesystem-tv GET /api/v3/filesystem?path=/tv/&includeFiles=false&allowFoldersWithoutTrailingSlashes=false
+filesystem-series-files GET /api/v3/filesystem?path=/tv/The%20Pitt/&includeFiles=true&allowFoldersWithoutTrailingSlashes=false
+filesystem-type GET /api/v3/filesystem/type?path=/tv
+filesystem-mediafiles GET /api/v3/filesystem/mediafiles?path=/tv/The%20Pitt/
+filesystem-missing GET /api/v3/filesystem?path=/nowhere/&includeFiles=false
+series-delete-pete DELETE /api/v3/series/52?deleteFiles=true&addImportListExclusion=true
+sleep 5
+series-after-delete-pete GET /api/v3/series/52
+series-delete-404 DELETE /api/v3/series/999
+series-editor-delete DELETE /api/v3/series/editor bodies/series-editor-delete.json
+sleep 5
+importlistexclusion-after-delete GET /api/v3/importlistexclusion
+series-list-after-delete GET /api/v3/series
+mock series-delete-notifications GET /mock/notifications
+mock - POST /mock/notifications/clear
+
+# Phase 3b, settings writes: every settings page's PUT, the validation the
+# originals answer with, and the CRUD of the catalogues Recyclarr and the
+# UI write. Ids the originals number go by the fixture's sequences (tags
+# at 2, delay profiles at 2, custom formats at 41...), the derived bodies
+# take what was recorded.
+config-host-after-proxy GET /api/v3/config/host
+config-naming-put PUT /api/v3/config/naming/1 bodies/config-naming-put.json
+config-naming-after GET /api/v3/config/naming
+config-naming-put-invalid PUT /api/v3/config/naming/1 bodies/config-naming-put-invalid.json
+config-mediamanagement-put PUT /api/v3/config/mediamanagement/1 bodies/config-mediamanagement-put.json
+config-mediamanagement-after GET /api/v3/config/mediamanagement
+config-mediamanagement-put-invalid PUT /api/v3/config/mediamanagement/1 bodies/config-mediamanagement-put-invalid.json
+config-ui-put PUT /api/v3/config/ui/1 bodies/config-ui-put.json
+config-ui-after GET /api/v3/config/ui
+config-indexer-put PUT /api/v3/config/indexer/1 bodies/config-indexer-put.json
+config-indexer-after GET /api/v3/config/indexer
+config-indexer-put-invalid PUT /api/v3/config/indexer/1 bodies/config-indexer-put-invalid.json
+config-downloadclient-put PUT /api/v3/config/downloadclient/1 bodies/config-downloadclient-put.json
+config-downloadclient-after GET /api/v3/config/downloadclient
+config-importlist-put PUT /api/v3/config/importlist/1 bodies/config-importlist-put.json
+config-importlist-after GET /api/v3/config/importlist
+tag-create POST /api/v3/tag bodies/tag-create.json
+tag-create-invalid POST /api/v3/tag bodies/tag-create-invalid.json
+tag-update PUT /api/v3/tag/3 bodies/tag-update.json
+tag-after-update GET /api/v3/tag
+tag-detail-after GET /api/v3/tag/detail
+tag-delete DELETE /api/v3/tag/3
+tag-after-delete GET /api/v3/tag
+rootfolder-create POST /api/v3/rootfolder bodies/rootfolder-create.json
+rootfolder-create-missing POST /api/v3/rootfolder bodies/rootfolder-create-missing.json
+rootfolder-create-existing POST /api/v3/rootfolder bodies/rootfolder-create-existing.json
+rootfolder-after-create GET /api/v3/rootfolder
+rootfolder-delete DELETE /api/v3/rootfolder/2
+rootfolder-after-delete GET /api/v3/rootfolder
+remotepathmapping-create POST /api/v3/remotepathmapping bodies/remotepathmapping-create.json
+remotepathmapping-create-invalid POST /api/v3/remotepathmapping bodies/remotepathmapping-create-invalid.json
+remotepathmapping-update PUT /api/v3/remotepathmapping/1 bodies/remotepathmapping-update.json
+remotepathmapping-after-update GET /api/v3/remotepathmapping
+remotepathmapping-delete DELETE /api/v3/remotepathmapping/1
+remotepathmapping-after-delete GET /api/v3/remotepathmapping
+delayprofile-create-tag-in-use POST /api/v3/delayprofile bodies/delayprofile-create-tag-in-use.json
+delayprofile-create POST /api/v3/delayprofile bodies/delayprofile-create.json
+delayprofile-create-invalid POST /api/v3/delayprofile bodies/delayprofile-create-invalid.json
+delayprofile-update PUT /api/v3/delayprofile/{id:delayprofile-create} bodies/delayprofile-update.json
+delayprofile-reorder PUT /api/v3/delayprofile/reorder/{id:delayprofile-create}?after=1
+delayprofile-after-reorder GET /api/v3/delayprofile
+delayprofile-delete DELETE /api/v3/delayprofile/{id:delayprofile-create}
+delayprofile-delete-default DELETE /api/v3/delayprofile/1
+delayprofile-after-delete GET /api/v3/delayprofile
+releaseprofile-create POST /api/v3/releaseprofile bodies/releaseprofile-create.json
+releaseprofile-create-invalid POST /api/v3/releaseprofile bodies/releaseprofile-create-invalid.json
+releaseprofile-update PUT /api/v3/releaseprofile/{id:releaseprofile-create} bodies/releaseprofile-update.json
+releaseprofile-after-update GET /api/v3/releaseprofile
+releaseprofile-delete DELETE /api/v3/releaseprofile/{id:releaseprofile-create}
+customfilter-create POST /api/v3/customfilter bodies/customfilter-create.json
+customfilter-update PUT /api/v3/customfilter/{id:customfilter-create} bodies/customfilter-update.json
+customfilter-after-update GET /api/v3/customfilter
+customfilter-delete DELETE /api/v3/customfilter/{id:customfilter-create}
+autotagging-create POST /api/v3/autotagging bodies/autotagging-create.json
+autotagging-create-invalid POST /api/v3/autotagging bodies/autotagging-create-invalid.json
+autotagging-update PUT /api/v3/autotagging/{id:autotagging-create} bodies/autotagging-update.json
+autotagging-after-update GET /api/v3/autotagging
+autotagging-delete DELETE /api/v3/autotagging/{id:autotagging-create}
+importlistexclusion-create POST /api/v3/importlistexclusion bodies/importlistexclusion-create.json
+importlistexclusion-create-invalid POST /api/v3/importlistexclusion bodies/importlistexclusion-create-invalid.json
+importlistexclusion-create-duplicate POST /api/v3/importlistexclusion bodies/importlistexclusion-create.json
+importlistexclusion-update PUT /api/v3/importlistexclusion/{id:importlistexclusion-create} bodies/importlistexclusion-update.json
+importlistexclusion-after-update GET /api/v3/importlistexclusion
+importlistexclusion-delete DELETE /api/v3/importlistexclusion/{id:importlistexclusion-create}
+qualitydefinition-update PUT /api/v3/qualitydefinition/update bodies/qualitydefinition-update.json
+qualitydefinition-after-update GET /api/v3/qualitydefinition
+qualitydefinition-1-before GET /api/v3/qualitydefinition/1
+qualitydefinition-put-1 PUT /api/v3/qualitydefinition/1 bodies/qualitydefinition-put-1.json
+qualityprofile-schema GET /api/v3/qualityprofile/schema
+qualityprofile-create POST /api/v3/qualityprofile bodies/qualityprofile-create.json
+qualityprofile-create-invalid POST /api/v3/qualityprofile bodies/qualityprofile-create-invalid.json
+qualityprofile-update PUT /api/v3/qualityprofile/{id:qualityprofile-create} bodies/qualityprofile-update.json
+qualityprofile-after-update GET /api/v3/qualityprofile/{id:qualityprofile-create}
+qualityprofile-delete-in-use DELETE /api/v3/qualityprofile/7
+qualityprofile-delete DELETE /api/v3/qualityprofile/{id:qualityprofile-create}
+qualityprofile-after-delete GET /api/v3/qualityprofile
+customformat-create POST /api/v3/customformat bodies/customformat-create.json
+customformat-create-invalid POST /api/v3/customformat bodies/customformat-create-invalid.json
+customformat-create-badregex POST /api/v3/customformat bodies/customformat-create-badregex.json
+customformat-create-duplicate POST /api/v3/customformat bodies/customformat-create.json
+customformat-update PUT /api/v3/customformat/{id:customformat-create} bodies/customformat-update.json
+customformat-after-update GET /api/v3/customformat/{id:customformat-create}
+customformat-bulk-put PUT /api/v3/customformat/bulk bodies/customformat-bulk-put.json
+customformat-after-bulk GET /api/v3/customformat/1
+qualityprofile-after-customformat GET /api/v3/qualityprofile/1
+customformat-bulk-delete DELETE /api/v3/customformat/bulk bodies/customformat-bulk-delete.json
+customformat-delete DELETE /api/v3/customformat/{id:customformat-create}
+customformat-after-delete GET /api/v3/customformat
+
+# Phase 3b, import lists: provider CRUD and test for the fixture's Simkl
+# list, then ImportListSync against the mock Simkl (hand-made answers under
+# tests/fixtures/metadata/api.simkl.com). The list holds a series already in
+# the library, an excluded one, one with a tvdb id, one with only an imdb id
+# and one nothing can identify. Clean Library is set to tag only after the
+# sync a saved list queues has run, so no series is tagged here; the Rust
+# tests under crates/unarr-mock/tests/import_lists.rs cover the clean.
+importlist-schema GET /api/v3/importlist/schema
+importlist-1 GET /api/v3/importlist/1
+importlist-get-missing GET /api/v3/importlist/999
+importlist-test POST /api/v3/importlist/test bodies/importlist-test.json
+importlist-test-empty POST /api/v3/importlist/test bodies/importlist-test-empty.json
+importlist-test-failing POST /api/v3/importlist/test bodies/importlist-test-failing.json
+importlist-test-unauthenticated POST /api/v3/importlist/test bodies/importlist-test-unauthenticated.json
+# The anonymised fixture stores the list with a placeholder base URL, which
+# is not a field: saving the list from its resource puts the default back.
+importlist-update-fixture PUT /api/v3/importlist/1?forceSave=true bodies/importlist-update-fixture.json
+importlist-testall POST /api/v3/importlist/testall
+importlist-action-startoauth POST /api/v3/importlist/action/startOAuth?callbackUrl=http%3A%2F%2Flocalhost%3A8989%2Foauth.html bodies/importlist-test.json
+importlist-action-unknown POST /api/v3/importlist/action/nothing bodies/importlist-test.json
+importlist-create POST /api/v3/importlist bodies/importlist-create.json
+importlist-create-invalid POST /api/v3/importlist bodies/importlist-create-invalid.json
+importlist-create-duplicate POST /api/v3/importlist bodies/importlist-create-duplicate.json
+importlist-create-unauthenticated POST /api/v3/importlist bodies/importlist-test-unauthenticated.json
+importlist-create-empty-enabled POST /api/v3/importlist bodies/importlist-create-empty-enabled.json
+importlist-create-empty-forced POST /api/v3/importlist?forceSave=true bodies/importlist-create-empty-enabled.json
+importlist-update PUT /api/v3/importlist/2 bodies/importlist-update.json
+importlist-update-missing PUT /api/v3/importlist/999 bodies/importlist-update-missing.json
+importlist-after-update GET /api/v3/importlist
+importlist-bulk-put PUT /api/v3/importlist/bulk bodies/importlist-bulk-put.json
+importlist-bulk-put-noids PUT /api/v3/importlist/bulk bodies/importlist-bulk-put-noids.json
+importlist-bulk-delete DELETE /api/v3/importlist/bulk bodies/importlist-bulk-delete.json
+importlist-delete DELETE /api/v3/importlist/2
+importlist-delete-missing DELETE /api/v3/importlist/2
+importlist-after-delete GET /api/v3/importlist
+config-importlist-put-tag PUT /api/v3/config/importlist/1 bodies/config-importlist-put-tag.json
+mock - POST /mock/notifications/clear
+command-importlist-sync POST /api/v3/command bodies/command-importlist-sync.json
+sleep 40
+command-importlist-sync-get GET /api/v3/command/{id:command-importlist-sync}
+series-list-after-importlist-sync GET /api/v3/series
+series-after-importlist-sync-53 GET /api/v3/series/53
+episodes-after-importlist-sync-53 GET /api/v3/episode?seriesId=53
+series-after-importlist-sync-54 GET /api/v3/series/54
+importlistexclusion-after-importlist-sync GET /api/v3/importlistexclusion
+mock importlist-sync-notifications GET /mock/notifications
+mock - POST /mock/notifications/clear
+# Within the list's refresh interval nothing is fetched; a sync of the one
+# list skips the interval, and Simkl's activity stamp then says nothing
+# changed since the last fetch.
+command-importlist-sync-again POST /api/v3/command bodies/command-importlist-sync.json
+command-importlist-sync-single POST /api/v3/command bodies/command-importlist-sync-single.json
+sleep 10
+command-importlist-sync-again-get GET /api/v3/command/{id:command-importlist-sync-again}
+command-importlist-sync-single-get GET /api/v3/command/{id:command-importlist-sync-single}
+series-list-after-importlist-resync GET /api/v3/series
+health-after-importlist-sync GET /api/v3/health
+system-backup-empty GET /api/v3/system/backup
+command-backup POST /api/v3/command bodies/command-backup.json
+sleep 5
+command-backup-get GET /api/v3/command/{id:command-backup}
+system-backup GET /api/v3/system/backup
+system-backup-restore-missing POST /api/v3/system/backup/restore/12345
+system-backup-delete-missing DELETE /api/v3/system/backup/12345
+system-backup-restore POST /api/v3/system/backup/restore/{id:system-backup}
+system-backup-delete DELETE /api/v3/system/backup/{id:system-backup}
+system-backup-after-delete GET /api/v3/system/backup
+log-file GET /api/v3/log/file
+log-file-update GET /api/v3/log/file/update
+
+# PUT takes its id from the body; the route id only fills in for a body without one.
+put-noid-config-ui PUT /api/v3/config/ui bodies/put-noid-config-ui.json
+put-noid-config-ui-no-body-id PUT /api/v3/config/ui bodies/put-noid-config-ui-no-body-id.json
+put-noid-tag PUT /api/v3/tag bodies/put-noid-tag.json
+put-mismatch-tag PUT /api/v3/tag/1 bodies/put-mismatch-tag.json
+put-mismatch-tag-1 GET /api/v3/tag/1
+put-mismatch-tag-2 GET /api/v3/tag/2
+put-noid-tag-no-body-id PUT /api/v3/tag bodies/put-noid-tag-no-body-id.json
+put-routeid-tag-no-body-id PUT /api/v3/tag/2 bodies/put-routeid-tag-no-body-id.json
+
+# The page the import list settings load.
+importlistexclusion-paged GET /api/v3/importlistexclusion/paged?page=1&pageSize=20
+importlistexclusion-paged-default GET /api/v3/importlistexclusion/paged
+importlistexclusion-paged-page-2 GET /api/v3/importlistexclusion/paged?page=2&pageSize=1&sortKey=title&sortDirection=descending
+importlistexclusion-paged-sort-title GET /api/v3/importlistexclusion/paged?sortKey=title
+importlistexclusion-paged-sort-title-asc GET /api/v3/importlistexclusion/paged?sortKey=title&sortDirection=ascending
+importlistexclusion-paged-sort-tvdbid GET /api/v3/importlistexclusion/paged?sortKey=tvdbId&sortDirection=ascending
+importlistexclusion-paged-sort-unknown GET /api/v3/importlistexclusion/paged?sortKey=nope&pageSize=0
+importlistexclusion-paged-beyond GET /api/v3/importlistexclusion/paged?page=9&pageSize=2

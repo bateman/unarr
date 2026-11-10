@@ -1,0 +1,1878 @@
+[
+ {
+  "tvdbId": 73082,
+  "title": "Sherlock Hound",
+  "overview": "Loosely based on the \"Sherlock Holmes\" series by Sir Arthur Conan Doyle, Sherlock Hound turns all the classic characters into dogs. The canine Sherlock Holmes, his assistant Watson, and housemaid Mrs. Hudson work together to solve mysteries. The culprit is usually Professor Moriarty and his gang, who use all kinds of wacky contraptions to steal what they want.",
+  "slug": "sherlock-hound",
+  "originalCountry": "jpn",
+  "originalLanguage": "jpn",
+  "language": "eng",
+  "firstAired": "1984-11-06",
+  "lastAired": "1985-05-21",
+  "tvRageId": 12318,
+  "tvMazeId": 22613,
+  "tmdbId": 21296,
+  "imdbId": "tt0088109",
+  "malIds": [
+   1972
+  ],
+  "anidbIds": [
+   617
+  ],
+  "aniListIds": [
+   1972
+  ],
+  "lastUpdated": "2026-09-08T12:14:26Z",
+  "status": "Ended",
+  "runtime": 25,
+  "originalNetwork": "TV Asahi",
+  "network": "TV Asahi",
+  "genres": [
+   "Action",
+   "Anime",
+   "Comedy",
+   "Crime",
+   "Mystery"
+  ],
+  "contentRating": "TV-G",
+  "rating": {
+   "count": 1871,
+   "value": "7.5"
+  },
+  "alternativeTitles": [
+   {
+    "title": "Meitantei Holmes"
+   }
+  ],
+  "actors": [
+   {
+    "name": "Taichirô Hirokawa",
+    "character": "Sherlock Hound"
+   },
+   {
+    "name": "Kousei Tomita",
+    "character": "Doctor Watson",
+    "image": "https://artworks.thetvdb.com/banners/person/386117/primary.jpg"
+   },
+   {
+    "name": "Chikao Ohtsuka",
+    "character": "Professor Moriarty",
+    "image": "https://artworks.thetvdb.com/banners/person/277072/primary.jpg"
+   },
+   {
+    "name": "Shôzô Îzuka",
+    "character": "Inspector Lestrade"
+   },
+   {
+    "name": "Youko Asagami",
+    "character": "Mrs. Hudson",
+    "image": "https://artworks.thetvdb.com/banners/person/351359/primary.jpg"
+   },
+   {
+    "name": "Mitsuo Senda",
+    "character": "Smiley"
+   },
+   {
+    "name": "Hiroshi Masuoka",
+    "character": "George/Todd",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/354825/photo/666ab07dce77c.jpg"
+   },
+   {
+    "name": "Mika Doi",
+    "character": "Barbara",
+    "image": "https://artworks.thetvdb.com/banners/person/279185/primary.jpg"
+   }
+  ],
+  "images": [
+   {
+    "coverType": "Banner",
+    "url": "https://artworks.thetvdb.com/banners/graphical/73082-g3.jpg"
+   },
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/posters/73082-10.jpg"
+   },
+   {
+    "coverType": "Fanart",
+    "url": "https://artworks.thetvdb.com/banners/fanart/original/73082-2.jpg"
+   },
+   {
+    "coverType": "Clearlogo",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/73082/clearlogo/611d0032bcd6a.png"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0,
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/v4/season/20547/posters/60dbe7c46bcce.jpg"
+     }
+    ]
+   },
+   {
+    "seasonNumber": 1,
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/seasons/73082-1.jpg"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "tvdbId": 271728,
+  "title": "The Pete Holmes Show",
+  "overview": "Comedian Pete Holmes hosts the late night talk show \"The Pete Holmes Show\" (formerly known as \"The Midnight Show with Pete Holmes\") which is produced by Conan O'Brien and airs right after CONAN on TBS.",
+  "slug": "the-pete-holmes-show",
+  "originalCountry": "usa",
+  "originalLanguage": "eng",
+  "language": "eng",
+  "firstAired": "2013-10-28",
+  "lastAired": "2014-06-18",
+  "tvRageId": 36809,
+  "tvMazeId": 6229,
+  "tmdbId": 57506,
+  "imdbId": "tt3278316",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2024-04-24T20:29:27Z",
+  "status": "Ended",
+  "runtime": 25,
+  "timeOfDay": {
+   "hours": 12,
+   "minutes": 0
+  },
+  "genres": [
+   "Comedy",
+   "Talk Show"
+  ],
+  "rating": {
+   "count": 654,
+   "value": "7.2"
+  },
+  "actors": [
+   {
+    "name": "Pete Holmes",
+    "character": "Host",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/296667/photo/60a017c6881b7.jpg"
+   }
+  ],
+  "images": [
+   {
+    "coverType": "Banner",
+    "url": "https://artworks.thetvdb.com/banners/graphical/271728-g.jpg"
+   },
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/posters/271728-1.jpg"
+   },
+   {
+    "coverType": "Fanart",
+    "url": "https://artworks.thetvdb.com/banners/fanart/original/271728-1.jpg"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1
+   },
+   {
+    "seasonNumber": 2
+   }
+  ]
+ },
+ {
+  "tvdbId": 73529,
+  "title": "Sherlock Holmes (1954)",
+  "overview": "Based on the characters created by Arthur Conan Doyle: Dr. John Watson returns from Afghanistan, and decides to share lodgings in Baker Street with Sherlock Holmes, an acquaintance of one of Watson's own friends. Not long afterward, Holmes brings Watson with him when he solves a murder case that has confused Inspector Lestrade. Watson soon becomes Holmes's friend, assistant, and chronicler, as the private detective takes on one baffling case after another.",
+  "slug": "sherlock-holmes-1954",
+  "originalCountry": "usa",
+  "originalLanguage": "eng",
+  "language": "eng",
+  "firstAired": "1954-10-18",
+  "lastAired": "1955-10-17",
+  "tvRageId": 12318,
+  "tvMazeId": 22618,
+  "tmdbId": 6560,
+  "imdbId": "tt0046642",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2024-12-29T11:27:53Z",
+  "status": "Ended",
+  "runtime": 30,
+  "genres": [
+   "Crime",
+   "Drama",
+   "Mystery",
+   "Suspense"
+  ],
+  "rating": {
+   "count": 1307,
+   "value": "7.5"
+  },
+  "actors": [
+   {
+    "name": "Howard Marion-Crawford",
+    "character": "Dr. John H. Watson"
+   },
+   {
+    "name": "Archie Duncan",
+    "character": "Inspector Lestrade"
+   },
+   {
+    "name": "Ronald Howard",
+    "character": "Sherlock Holmes",
+    "image": "https://artworks.thetvdb.com/banners/person/313913/5f7f3aff19427.jpg"
+   }
+  ],
+  "images": [
+   {
+    "coverType": "Banner",
+    "url": "https://artworks.thetvdb.com/banners/graphical/73529-g2.jpg"
+   },
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/posters/73529-2.jpg"
+   },
+   {
+    "coverType": "Fanart",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/73529/backgrounds/6771179a77ac5.jpg"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1,
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/seasons/73529-1.jpg"
+     },
+     {
+      "coverType": "Banner",
+      "url": "https://artworks.thetvdb.com/banners/seasonswide/73529-1.jpg"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "tvdbId": 266482,
+  "title": "Sir Arthur Conan Doyle",
+  "overview": "Die Hauptrollen in dieser klassischen Krimiserie spielten Erich Schellow als Sherlock Holmes und Paul Edwin Roth als Dr. Watson. Regie bei allen sechs Episoden führte Paul May. Die Drehbücher stammen alle von englischen Autoren, die diese ursprünglich für eine gleichnamige britische BBC-Serie geschrieben hatten und die nach ihrer Verfilmung in Großbritannien auf Deutsch übersetzt wurden. Eine Synchronisation der BBC-Serie war rechtlich nicht möglich, weshalb es in der BRD, ähnlich wie bei den Mehrteilern von Francis Durbridge, zu einer selbständigen Verfilmung kommen musste. Alle sechs Episoden wurden ausschließlich im Studio gedreht, auch die im Freien spielenden Szenen. Ausgestrahlt wurden die Filme immer sonntags. Die einzelnen Folgen zeigen im Vorspann keinen Serienübertitel, sondern beginnen mit der Einblendung Sir Arthur Conan Doyle. Anschließend erscheint der Titel des Films.",
+  "slug": "sir-arthur-conan-doyle",
+  "originalCountry": "deu",
+  "originalLanguage": "deu",
+  "language": "eng",
+  "firstAired": "1967-10-01",
+  "lastAired": "1968-03-18",
+  "tmdbId": 63139,
+  "imdbId": "tt0271927",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2023-04-18T09:28:45Z",
+  "status": "Ended",
+  "runtime": 60,
+  "originalNetwork": "Westdeutscher Rundfunk (WDR)",
+  "network": "Westdeutscher Rundfunk (WDR)",
+  "genres": [
+   "Crime"
+  ],
+  "rating": {
+   "count": 68,
+   "value": "7.9"
+  },
+  "actors": [
+   {
+    "name": "Erich Schellow",
+    "character": "Sherlock Holmes",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/8045483/photo/6135926b8c8b0.jpg"
+   },
+   {
+    "name": "Paul Edwin Roth",
+    "character": "Dr. Watson"
+   },
+   {
+    "name": "Manja Kafka",
+    "character": "Mrs. Hudson"
+   },
+   {
+    "name": "Hans Schellbach",
+    "character": "Inspector Lestrade"
+   }
+  ],
+  "images": [
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/266482/posters/61358c78486cc.jpg"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1
+   }
+  ]
+ },
+ {
+  "tvdbId": 71976,
+  "title": "Sir Arthur Conan Doyle's Sherlock Holmes",
+  "overview": "Sherlock Holmes (alternately Sir Arthur Conan Doyle's Sherlock Holmes) was a series of Sherlock Holmes adaptations produced by British television company BBC between 1965 and 1968. In 1964, an adaptation of \"The Adventure of the Speckled Band\" was commissioned as a pilot for a twelve part series of Sherlock Holmes stories. Douglas Wilmer was cast as Holmes and Nigel Stock as Watson. Peter Cushing was approached to take over the role of Sherlock Holmes for the 1968 series. Only 6 Episodes survived.",
+  "slug": "sir-arthur-conan-doyles-sherlock-holmes",
+  "originalCountry": "gbr",
+  "originalLanguage": "eng",
+  "language": "eng",
+  "firstAired": "1965-02-20",
+  "lastAired": "1968-12-23",
+  "tvRageId": 13197,
+  "tvMazeId": 15057,
+  "tmdbId": 23027,
+  "imdbId": "tt0163492",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2026-04-04T19:06:38Z",
+  "status": "Ended",
+  "runtime": 50,
+  "originalNetwork": "BBC One",
+  "network": "BBC One",
+  "genres": [
+   "Crime",
+   "Drama",
+   "Horror",
+   "Mystery",
+   "Suspense"
+  ],
+  "rating": {
+   "count": 715,
+   "value": "7.5"
+  },
+  "alternativeTitles": [
+   {
+    "title": "Sherlock Holmes (1965)"
+   }
+  ],
+  "actors": [
+   {
+    "name": "Douglas Wilmer",
+    "character": "Sherlock Holmes (S01)",
+    "image": "https://artworks.thetvdb.com/banners/person/263790/5f9a2b153077b.jpg"
+   },
+   {
+    "name": "Nigel Stock",
+    "character": "Dr. Watson"
+   },
+   {
+    "name": "Peter Cushing",
+    "character": "Sherlock Holmes (S02)",
+    "image": "https://artworks.thetvdb.com/banners/person/326881/5f9a27dd73574.jpg"
+   }
+  ],
+  "images": [
+   {
+    "coverType": "Banner",
+    "url": "https://artworks.thetvdb.com/banners/graphical/71976-g2.jpg"
+   },
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/posters/71976-1.jpg"
+   },
+   {
+    "coverType": "Fanart",
+    "url": "https://artworks.thetvdb.com/banners/fanart/original/71976-3.jpg"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1,
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/seasons/71976-1.jpg"
+     }
+    ]
+   },
+   {
+    "seasonNumber": 2,
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/seasons/71976-2.jpg"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "tvdbId": 77728,
+  "title": "Sherlock Holmes (1984)",
+  "overview": "Sherlock Holmes is one of the world’s most popular fictional detectives, famed for his legendary powers of observation and deduction. Adapted from Sir Arthur Conan Doyle’s original novels, this classic series by Granada Television starred Jeremy Brett as the definitive Holmes, with David Burke and later Edward Hardwicke as his able assistant Dr. Watson.",
+  "slug": "sherlock-holmes-1984",
+  "originalCountry": "gbr",
+  "originalLanguage": "eng",
+  "language": "eng",
+  "firstAired": "1984-04-24",
+  "lastAired": "1994-04-11",
+  "tvRageId": 5175,
+  "tvMazeId": 3255,
+  "tmdbId": 799,
+  "imdbId": "tt0086661",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2026-11-09T01:14:22Z",
+  "status": "Ended",
+  "runtime": 64,
+  "timeOfDay": {
+   "hours": 20,
+   "minutes": 0
+  },
+  "originalNetwork": "ITV1",
+  "network": "ITV1",
+  "genres": [
+   "Crime",
+   "Drama",
+   "Mystery",
+   "Suspense"
+  ],
+  "contentRating": "TV-G",
+  "rating": {
+   "count": 27895,
+   "value": "8.7"
+  },
+  "alternativeTitles": [
+   {
+    "title": "The Adventures of Sherlock Holmes"
+   },
+   {
+    "title": "The Case-Book of Sherlock Holmes"
+   },
+   {
+    "title": "The Casebook of Sherlock Holmes"
+   },
+   {
+    "title": "The Hound of the Baskervilles"
+   },
+   {
+    "title": "The Memoirs of Sherlock Holmes"
+   },
+   {
+    "title": "The Return of Sherlock Holmes"
+   },
+   {
+    "title": "The Sign of Four"
+   }
+  ],
+  "actors": [
+   {
+    "name": "Jeremy Brett",
+    "character": "Sherlock Holmes"
+   },
+   {
+    "name": "David Burke",
+    "character": "Dr. Watson (1984-1985)"
+   },
+   {
+    "name": "Rosalie Williams",
+    "character": "Mrs. Hudson",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/348683/photo/63c04d626d6c7.jpg"
+   },
+   {
+    "name": "Edward Hardwicke",
+    "character": "Dr. Watson (1986-1994)",
+    "image": "https://artworks.thetvdb.com/banners/person/299220/5f13c9a12d4a8.jpg"
+   },
+   {
+    "name": "Colin Jeavons",
+    "character": "Inspector Lestrade"
+   },
+   {
+    "name": "Eric Porter",
+    "character": "Professor Moriarty"
+   },
+   {
+    "name": "Charles Gray",
+    "character": "Mycroft Holmes"
+   }
+  ],
+  "images": [
+   {
+    "coverType": "Banner",
+    "url": "https://artworks.thetvdb.com/banners/graphical/6802-g.jpg"
+   },
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/posters/77728-3.jpg"
+   },
+   {
+    "coverType": "Fanart",
+    "url": "https://artworks.thetvdb.com/banners/fanart/original/77728-3.jpg"
+   },
+   {
+    "coverType": "Clearlogo",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/77728/clearlogo/611bc14955b15.png"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0,
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/v4/season/25185/posters/69e493559e23a.jpg"
+     }
+    ]
+   },
+   {
+    "seasonNumber": 1,
+    "name": "The Adventures of Sherlock Holmes (1)",
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/v4/season/13452/posters/69e4938146dbc.jpg"
+     }
+    ]
+   },
+   {
+    "seasonNumber": 2,
+    "name": "The Adventures of Sherlock Holmes (2)",
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/series/77728/seasons/13453/posters/5f2ef66d8c801.jpg"
+     }
+    ]
+   },
+   {
+    "seasonNumber": 3,
+    "name": "The Return of Sherlock Holmes (1)",
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/v4/season/13454/posters/69e493a554ddd.jpg"
+     }
+    ]
+   },
+   {
+    "seasonNumber": 4,
+    "name": "The Return of Sherlock Holmes (2)",
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/v4/season/13455/posters/69e493b76f67c.jpg"
+     }
+    ]
+   },
+   {
+    "seasonNumber": 5,
+    "name": "The Case-Book of Sherlock Holmes (1)",
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/v4/season/13456/posters/69e493ca406ca.jpg"
+     }
+    ]
+   },
+   {
+    "seasonNumber": 6,
+    "name": "The Case-Book of Sherlock Holmes (2)",
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/v4/season/13457/posters/69e493dc7dc01.jpg"
+     }
+    ]
+   },
+   {
+    "seasonNumber": 7,
+    "name": "The Memoirs of Sherlock Holmes",
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/v4/season/13458/posters/69e493ef7d36b.jpg"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "tvdbId": 319596,
+  "title": "Holmes and Holmes",
+  "overview": "Holmes & Holmes is a brand new series that follows Mike Holmes and his son Mike Jr. (MJ) as they transform MJ’s modest bachelor bungalow into the perfect, two-storey home for MJ and his girlfriend Lisa. While Mike and MJ share a last name, a strong work ethic, and a desire to help others, they don’t always see eye to eye. Their different approaches provide the foundation for unexpected moments of humour and drama- though they always vow to build it right. In addition to seeing the newest materials and build techniques, viewers will get a glimpse into the personal lives of the Holmes men. Holmes + Holmes is a memorable Father/Son journey with a hammer…and a dream!",
+  "slug": "holmes-and-holmes",
+  "originalCountry": "can",
+  "originalLanguage": "eng",
+  "language": "eng",
+  "firstAired": "2016-11-10",
+  "lastAired": "2020-02-26",
+  "tvMazeId": 22777,
+  "tmdbId": 80977,
+  "imdbId": "tt8001366",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2023-07-11T23:52:06Z",
+  "status": "Ended",
+  "runtime": 57,
+  "timeOfDay": {
+   "hours": 21,
+   "minutes": 0
+  },
+  "originalNetwork": "Home Network",
+  "network": "DIY Network",
+  "genres": [
+   "Documentary",
+   "Home and Garden",
+   "Reality"
+  ],
+  "rating": {
+   "count": 113,
+   "value": "7.8"
+  },
+  "alternativeTitles": [
+   {
+    "title": "Holmes + Holmes"
+   },
+   {
+    "title": "Holmes & Holmes"
+   }
+  ],
+  "actors": [
+   {
+    "name": "Mike Holmes",
+    "character": "Himself"
+   },
+   {
+    "name": "Mike Holmes Jr.",
+    "character": "Himself"
+   }
+  ],
+  "images": [
+   {
+    "coverType": "Banner",
+    "url": "https://artworks.thetvdb.com/banners/graphical/319596-g.jpg"
+   },
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/posters/319596-1.jpg"
+   },
+   {
+    "coverType": "Fanart",
+    "url": "https://artworks.thetvdb.com/banners/fanart/original/319596-1.jpg"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1
+   },
+   {
+    "seasonNumber": 2
+   },
+   {
+    "seasonNumber": 3,
+    "name": "Holmes 911"
+   },
+   {
+    "seasonNumber": 4
+   }
+  ]
+ },
+ {
+  "tvdbId": 433264,
+  "title": "Mademoiselle Holmes",
+  "overview": "Shy French cop Charlie Holmes is the great-granddaughter of the great English detective Sherlock Holmes. She uses her hereditary deductive brilliance to solve crimes with the aid of Samy Vatel, her Dr. Watson substitute.",
+  "slug": "mademoiselle-holmes",
+  "originalCountry": "fra",
+  "originalLanguage": "fra",
+  "language": "eng",
+  "firstAired": "2024-04-11",
+  "lastAired": "2025-02-27",
+  "tvMazeId": 72994,
+  "tmdbId": 222076,
+  "imdbId": "tt26813534",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2026-10-25T13:59:35Z",
+  "status": "Continuing",
+  "runtime": 50,
+  "timeOfDay": {
+   "hours": 21,
+   "minutes": 0
+  },
+  "originalNetwork": "TF1",
+  "network": "TF1",
+  "genres": [
+   "Comedy",
+   "Crime",
+   "Drama"
+  ],
+  "contentRating": "TP",
+  "rating": {
+   "count": 601,
+   "value": "6.5"
+  },
+  "actors": [
+   {
+    "name": "Lola Dewaere",
+    "character": "Charlie Holmes",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/295084/photo/626fba0057f97.jpg"
+   },
+   {
+    "name": "Tom Villa",
+    "character": "Samy Vatel",
+    "image": "https://artworks.thetvdb.com/banners/person/484639/6018a6a8bfade.jpg"
+   },
+   {
+    "name": "Daniel Prévost",
+    "character": "George Holmes",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/8060187/photo/6603ed72cd2bb.jpg"
+   },
+   {
+    "name": "Thomas Jouannet",
+    "character": "Chris Hervieu",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/470583/photo/6603e6eb51c59.jpg"
+   },
+   {
+    "name": "Alika Del Sol",
+    "character": "Florence Billon",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/8032944/photo/63ac40c96c8bb.jpg"
+   },
+   {
+    "name": "Armelle Abibou",
+    "character": "Jess",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/8167736/photo/6087d09d7d725.jpg"
+   },
+   {
+    "name": "Oscar Berthe",
+    "character": "Loïc"
+   },
+   {
+    "name": "Éric Naggar",
+    "character": "Alfred Camus, légiste",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/7980160/photo/65e5f40e953d9.jpg"
+   },
+   {
+    "name": "Philippe Rolland",
+    "character": "Procureur"
+   }
+  ],
+  "images": [
+   {
+    "coverType": "Banner",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/433264/banners/661462545353e.jpg"
+   },
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/433264/posters/661469836dad4.jpg"
+   },
+   {
+    "coverType": "Fanart",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/433264/backgrounds/679dd21660aed.jpg"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1
+   },
+   {
+    "seasonNumber": 2
+   },
+   {
+    "seasonNumber": 3
+   }
+  ]
+ },
+ {
+  "tvdbId": 180871,
+  "title": "Pete Versus Life",
+  "overview": "Pete Griffith is basically an average guy. Apart from the lying, selfishness and being a bit of an arse. He's slightly more than average in these departments... But what sets Pete apart is that every move he makes is subject to constant observation, analysis and comment by two TV sport pundits. And they aren't slow to point out the errors of his ways...",
+  "slug": "pete-versus-life",
+  "originalCountry": "gbr",
+  "originalLanguage": "eng",
+  "language": "eng",
+  "firstAired": "2010-08-06",
+  "lastAired": "2011-12-09",
+  "tvRageId": 26234,
+  "tvMazeId": 4539,
+  "tmdbId": 33405,
+  "imdbId": "tt1690364",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2022-04-21T08:58:52Z",
+  "status": "Ended",
+  "runtime": 30,
+  "timeOfDay": {
+   "hours": 22,
+   "minutes": 0
+  },
+  "originalNetwork": "Channel 4",
+  "network": "Channel 4",
+  "genres": [
+   "Comedy",
+   "Drama"
+  ],
+  "rating": {
+   "count": 980,
+   "value": "7.7"
+  },
+  "alternativeTitles": [
+   {
+    "title": "Pete vs Life"
+   }
+  ],
+  "actors": [
+   {
+    "name": "Rafe Spall",
+    "character": "Pete Griffith",
+    "image": "https://artworks.thetvdb.com/banners/person/465847/primary.jpg"
+   },
+   {
+    "name": "Joseph Kloska",
+    "character": "Rob"
+   },
+   {
+    "name": "Pippa Duffy",
+    "character": "Anna"
+   },
+   {
+    "name": "Reece Ritchie",
+    "character": "Ollie",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/480701/photo/64d7a78908d05.jpg"
+   },
+   {
+    "name": "Chris Geere",
+    "character": "Kurt",
+    "image": "https://artworks.thetvdb.com/banners/person/380289/5f1f43fd88ef1.jpg"
+   },
+   {
+    "name": "Simon Greenall",
+    "character": "Colin King",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/271434/photo/63e6984de97f5.jpg"
+   },
+   {
+    "name": "Ian Kirkby",
+    "character": "Terry McIroy"
+   },
+   {
+    "name": "Philip Jackson",
+    "character": "Frank",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/258050/photo/68768c24dd8a0.jpg"
+   },
+   {
+    "name": "Sorcha Cusack",
+    "character": "Noreen",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/323226/photo/65fafe8597c7d.jpg"
+   }
+  ],
+  "images": [
+   {
+    "coverType": "Banner",
+    "url": "https://artworks.thetvdb.com/banners/graphical/180871-g.jpg"
+   },
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/posters/180871-2.jpg"
+   },
+   {
+    "coverType": "Fanart",
+    "url": "https://artworks.thetvdb.com/banners/fanart/original/180871-1.jpg"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1,
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/seasons/180871-1.jpg"
+     }
+    ]
+   },
+   {
+    "seasonNumber": 2,
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/seasons/180871-2.jpg"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "tvdbId": 74670,
+  "title": "The Adventures of Pete & Pete",
+  "overview": "The Adventures of Pete and Pete was a surreal comedy in which a peaceful suburban neighborhood was a strange and skewed world as seen through the eyes of pre-teens.  Wellsville, USA contained many different unique characters, such as: two brothers that were both named Pete, the metal plate in their mom's head, Artie the spandex-wearing super-hero, and Petunia, little Pete's tatoo. The Adventures of Pete and Pete originated as a series of one-minute vignettes in 1990, then was expanded into a series of five specials, and then became a regular series in late 1993. The show was filmed in Leonia, New Jersey.  Episodes (or portions of episodes) were also filmed in the New Jersey towns of South Orange and Cranford.",
+  "slug": "the-adventures-of-pete-and-pete",
+  "originalCountry": "usa",
+  "originalLanguage": "eng",
+  "language": "eng",
+  "firstAired": "1993-11-28",
+  "lastAired": "1996-12-28",
+  "tvRageId": 5537,
+  "tvMazeId": 5940,
+  "tmdbId": 2824,
+  "imdbId": "tt0105933",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2026-07-11T12:57:20Z",
+  "status": "Ended",
+  "runtime": 25,
+  "originalNetwork": "Nickelodeon",
+  "network": "Nickelodeon",
+  "genres": [
+   "Children",
+   "Comedy",
+   "Drama",
+   "Family"
+  ],
+  "contentRating": "TV-Y7",
+  "rating": {
+   "count": 10684,
+   "value": "8.4"
+  },
+  "alternativeTitles": [
+   {
+    "title": "The Adventures of Pete and Pete"
+   }
+  ],
+  "actors": [
+   {
+    "name": "Danny Tamberelli",
+    "character": "'Little' Pete Wrigley",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/314513/photo/649a20e9be7c9.jpg"
+   },
+   {
+    "name": "Michael C. Maronna",
+    "character": "'Big' Pete Wrigley"
+   },
+   {
+    "name": "Allison Fanelli",
+    "character": "Ellen Josephine Hickle"
+   },
+   {
+    "name": "Michelle Trachtenberg",
+    "character": "Nona Mecklenberg",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/252094/photo/613925b1c1cd7.jpg"
+   },
+   {
+    "name": "Toby Huss",
+    "character": "Artie",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/260677/photo/639b1a6b36494.jpg"
+   },
+   {
+    "name": "Judy Grafe",
+    "character": "Joyce Wrigley "
+   },
+   {
+    "name": "Hardy Rawls",
+    "character": "Don Wrigley"
+   },
+   {
+    "name": "Eric Kushnick",
+    "character": "Fran 'Pit Stain' Jones"
+   }
+  ],
+  "images": [
+   {
+    "coverType": "Banner",
+    "url": "https://artworks.thetvdb.com/banners/graphical/74670-g2.jpg"
+   },
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/posters/74670-2.jpg"
+   },
+   {
+    "coverType": "Fanart",
+    "url": "https://artworks.thetvdb.com/banners/fanart/original/74670-2.jpg"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0,
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/v4/season/22132/posters/61d4c3b8d36bc.jpg"
+     }
+    ]
+   },
+   {
+    "seasonNumber": 1,
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/v4/season/7819/posters/61d4c3e07a492.jpg"
+     }
+    ]
+   },
+   {
+    "seasonNumber": 2,
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/v4/season/7820/posters/61d4c3fcc292d.jpg"
+     }
+    ]
+   },
+   {
+    "seasonNumber": 3,
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/v4/season/7821/posters/61d4c4130dbab.jpg"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "tvdbId": 77567,
+  "title": "Pete and Gladys",
+  "slug": "pete-and-gladys",
+  "originalCountry": "usa",
+  "originalLanguage": "eng",
+  "language": "eng",
+  "firstAired": "1960-09-19",
+  "lastAired": "1962-09-10",
+  "tvRageId": 44,
+  "tvMazeId": 42874,
+  "tmdbId": 10594,
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2025-06-09T19:19:59Z",
+  "status": "Ended",
+  "runtime": 25,
+  "originalNetwork": "CBS",
+  "network": "CBS",
+  "genres": [],
+  "actors": [
+   {
+    "name": "Cara Williams",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/395983/photo/6377dbc47ffc3.jpg"
+   },
+   {
+    "name": "Gale Gordon"
+   },
+   {
+    "name": "Verna Felton",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/264393/photo/64932b49d8c53.jpg"
+   },
+   {
+    "name": "Peter Leeds"
+   },
+   {
+    "name": "Shirley Mitchell"
+   },
+   {
+    "name": "Harry Morgan",
+    "image": "https://artworks.thetvdb.com/banners/person/257685/5f848ffacefbc.jpg"
+   },
+   {
+    "name": "Barbara Stuart",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/258093/photo/64a5e459a8869.jpg"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1
+   },
+   {
+    "seasonNumber": 2
+   }
+  ]
+ },
+ {
+  "tvdbId": 340595,
+  "title": "Pete the Cat",
+  "overview": "Based on the New York Times #1 best-selling children's books by author James Dean, \"Pete the Cat\" is a fun, musically driven series about exploring your world and trying new things; pushing the boundaries while being smart, accepting, and optimistic. Pete is a very cool and loveable cat who, along with his friends, experiences the day-to-day challenges and changes that children can relate to on a personal level. Whether you're making new friends, or facing all of life's ups and downs, Pete highlights the lessons life can teach you.",
+  "slug": "pete-the-cat",
+  "originalCountry": "usa",
+  "originalLanguage": "eng",
+  "language": "eng",
+  "firstAired": "2018-09-21",
+  "lastAired": "2022-03-10",
+  "tvMazeId": 25289,
+  "tmdbId": 82235,
+  "imdbId": "tt6148744",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2024-09-02T20:16:18Z",
+  "status": "Ended",
+  "runtime": 22,
+  "timeOfDay": {
+   "hours": 12,
+   "minutes": 0
+  },
+  "originalNetwork": "Prime Video",
+  "network": "Prime Video",
+  "genres": [
+   "Animation",
+   "Children",
+   "Comedy",
+   "Family"
+  ],
+  "contentRating": "TV-Y",
+  "rating": {
+   "count": 561,
+   "value": "7.8"
+  },
+  "actors": [
+   {
+    "name": "Jacob Tremblay",
+    "character": "Pete",
+    "image": "https://artworks.thetvdb.com/banners/person/334904/6432e6fa705b9.jpg"
+   },
+   {
+    "name": "Elvis Costello",
+    "character": "Pete’s Dad",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/310376/photo/610ff40ce49b1.jpg"
+   },
+   {
+    "name": "Diana Krall",
+    "character": "Pete’s Mom"
+   }
+  ],
+  "images": [
+   {
+    "coverType": "Banner",
+    "url": "https://artworks.thetvdb.com/banners/graphical/5bac545b442fa.jpg"
+   },
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/posters/5ba9f164854ff.jpg"
+   },
+   {
+    "coverType": "Fanart",
+    "url": "https://artworks.thetvdb.com/banners/fanart/original/5b77464bd4b45.jpg"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1
+   },
+   {
+    "seasonNumber": 2
+   }
+  ]
+ },
+ {
+  "tvdbId": 300166,
+  "title": "Sneaky Pete",
+  "overview": "After leaving prison, Marius takes cover from his past by assuming the identity of his cellmate Pete. He moves in with Pete's long-estranged unsuspecting family and is roped into the family's bail bond business. He's a criminal taking down other criminals and, in the process, discovers the family life he never had.",
+  "slug": "sneaky-pete",
+  "originalCountry": "usa",
+  "originalLanguage": "eng",
+  "language": "eng",
+  "firstAired": "2015-08-07",
+  "lastAired": "2019-05-10",
+  "tvRageId": 47587,
+  "tvMazeId": 2686,
+  "tmdbId": 64199,
+  "imdbId": "tt5011816",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2026-11-05T18:47:43Z",
+  "status": "Ended",
+  "runtime": 49,
+  "timeOfDay": {
+   "hours": 0,
+   "minutes": 0
+  },
+  "originalNetwork": "Prime Video",
+  "network": "Prime Video",
+  "genres": [
+   "Crime",
+   "Drama"
+  ],
+  "contentRating": "TV-MA",
+  "rating": {
+   "count": 49809,
+   "value": "8.0"
+  },
+  "actors": [
+   {
+    "name": "Giovanni Ribisi",
+    "character": "Pete / Marius",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/325080/photo/65a36b1f0cf15.jpg"
+   },
+   {
+    "name": "Marin Ireland",
+    "character": "Julia",
+    "image": "https://artworks.thetvdb.com/banners/person/316328/5eb2ba3273182.jpg"
+   },
+   {
+    "name": "Margo Martindale",
+    "character": "Audrey",
+    "image": "https://artworks.thetvdb.com/banners/person/273681/5fa16e4f5aebd.jpg"
+   },
+   {
+    "name": "Shane McRae",
+    "character": "Taylor"
+   },
+   {
+    "name": "Peter Gerety",
+    "character": "Otto Bernhardt",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/272973/photo/655ba7962182a.jpg"
+   },
+   {
+    "name": "Libe Barer",
+    "character": "Carly",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/538172/photo/67ad7f508af63.jpg"
+   },
+   {
+    "name": "Michael Drayer",
+    "character": "Eddie"
+   },
+   {
+    "name": "Bryan Cranston",
+    "character": "Vince",
+    "image": "https://artworks.thetvdb.com/banners/person/255211/68e688c12965e.jpg"
+   },
+   {
+    "name": "Virginia Kull",
+    "character": "Katie",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/577733/photo/660c01f8923d7.jpg"
+   },
+   {
+    "name": "Alison Wright",
+    "character": "Marjorie",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/487190/photo/65ef5352f05e9.jpg"
+   },
+   {
+    "name": "Efrat Dor",
+    "character": "Lizzie",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/470037/photo/62495738b1830.jpg"
+   },
+   {
+    "name": "Karolina Wydra",
+    "character": "Karolina",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/317608/photo/6239d5b9e97f0.jpg"
+   },
+   {
+    "name": "Jane Adams",
+    "character": "Maggie Murphy",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/279114/photo/6553a154d957c.jpg"
+   },
+   {
+    "name": "Ethan Embry",
+    "character": "Pete Murphy",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/270454/photo/6067b3729b158.jpg"
+   }
+  ],
+  "images": [
+   {
+    "coverType": "Banner",
+    "url": "https://artworks.thetvdb.com/banners/graphical/300166-g2.jpg"
+   },
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/posters/300166-2.jpg"
+   },
+   {
+    "coverType": "Fanart",
+    "url": "https://artworks.thetvdb.com/banners/fanart/original/300166-3.jpg"
+   },
+   {
+    "coverType": "Clearlogo",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/300166/clearlogo/611bf1970d5c0.png"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0,
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/seasons/5cd759d2ed342.jpg"
+     },
+     {
+      "coverType": "Banner",
+      "url": "https://artworks.thetvdb.com/banners/seasonswide/5cd7547682be0.jpg"
+     }
+    ]
+   },
+   {
+    "seasonNumber": 1,
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/seasons/300166-1.jpg"
+     }
+    ]
+   },
+   {
+    "seasonNumber": 2,
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/seasons/300166-2.jpg"
+     }
+    ]
+   },
+   {
+    "seasonNumber": 3,
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/seasons/5dc79c5705de2.jpg"
+     },
+     {
+      "coverType": "Banner",
+      "url": "https://artworks.thetvdb.com/banners/seasonswide/5cd968ff599fe.jpg"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "tvdbId": 80258,
+  "title": "Holmes on Homes",
+  "overview": "Construction and renovation expert Mike Holmes visits unlucky families who have been swindled or abandoned during their home improvement projects. Mike uncovers shoddy construction methods, improper techniques and down right rip-offs. You'll see Mike correct the problems, as well as explain how the homeowners could have safeguarded themselves from unscrupulous builders and dishonest contractors.",
+  "slug": "holmes-on-homes",
+  "originalCountry": "can",
+  "originalLanguage": "eng",
+  "language": "eng",
+  "firstAired": "2003-03-24",
+  "lastAired": "2008-07-24",
+  "tvRageId": 14611,
+  "tvMazeId": 23615,
+  "tmdbId": 12261,
+  "imdbId": "tt0765621",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2025-04-24T22:01:59Z",
+  "status": "Ended",
+  "runtime": 54,
+  "timeOfDay": {
+   "hours": 18,
+   "minutes": 0
+  },
+  "originalNetwork": "Home Network",
+  "network": "Home Network",
+  "genres": [
+   "Home and Garden",
+   "News",
+   "Reality"
+  ],
+  "rating": {
+   "count": 731,
+   "value": "8.6"
+  },
+  "actors": [
+   {
+    "name": "Mike Holmes",
+    "character": "Himself"
+   },
+   {
+    "name": "Shawn Morren",
+    "character": "Himself"
+   },
+   {
+    "name": "Damon Bennett",
+    "character": "Himself"
+   }
+  ],
+  "images": [
+   {
+    "coverType": "Banner",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/80258/banners/664538c2e4c14.jpg"
+   },
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/posters/80258-2.jpg"
+   },
+   {
+    "coverType": "Fanart",
+    "url": "https://artworks.thetvdb.com/banners/fanart/original/80258-2.jpg"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0,
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/seasons/80258-0.jpg"
+     }
+    ]
+   },
+   {
+    "seasonNumber": 1,
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/seasons/80258-1.jpg"
+     }
+    ]
+   },
+   {
+    "seasonNumber": 2,
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/seasons/80258-2.jpg"
+     }
+    ]
+   },
+   {
+    "seasonNumber": 3,
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/seasons/80258-3.jpg"
+     }
+    ]
+   },
+   {
+    "seasonNumber": 4,
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/seasons/80258-4.jpg"
+     }
+    ]
+   },
+   {
+    "seasonNumber": 5,
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/seasons/80258-5.jpg"
+     }
+    ]
+   },
+   {
+    "seasonNumber": 6,
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/seasons/80258-6.jpg"
+     }
+    ]
+   },
+   {
+    "seasonNumber": 7,
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/seasons/80258-7.jpg"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "tvdbId": 267225,
+  "title": "Best of Holmes on Homes",
+  "overview": "After seven seasons and more than 100 episodes of Holmes On Homes, Mike Holmes has seen - and fixed - almost everything a house can throw at a family. In this 13 part collection, Best of Holmes On Homes highlights some of the most challenging, head-scratching, heart-wrenching jobs Mike and his crew took on. Whether it's a collection of the scariest basement stories or horror stories from the kitchen, Best of Holmes On Homes offers the best of the worst in home renovations and what Mike had to do to fix them.",
+  "slug": "best-of-holmes-on-homes",
+  "originalCountry": "usa",
+  "originalLanguage": "eng",
+  "language": "eng",
+  "firstAired": "2012-04-22",
+  "lastAired": "2012-08-21",
+  "tvRageId": 25765,
+  "tmdbId": 55760,
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2023-03-29T18:59:25Z",
+  "status": "Ended",
+  "runtime": 45,
+  "originalNetwork": "HGTV",
+  "network": "HGTV",
+  "genres": [
+   "Documentary",
+   "Home and Garden"
+  ],
+  "images": [
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/posters/267225-1.jpg"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1
+   }
+  ]
+ },
+ {
+  "tvdbId": 283251,
+  "title": "Holms",
+  "overview": "About the everyday life of doctor Jørgen Holm, his artist/painter-wife Eva, and their teenage daughter Victoria.",
+  "slug": "holms",
+  "originalCountry": "nor",
+  "originalLanguage": "nor",
+  "language": "eng",
+  "firstAired": "2002-02-25",
+  "lastAired": "2003-11-25",
+  "tmdbId": 98719,
+  "imdbId": "tt0310466",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2025-05-28T23:04:59Z",
+  "status": "Ended",
+  "runtime": 25,
+  "timeOfDay": {
+   "hours": 19,
+   "minutes": 0
+  },
+  "originalNetwork": "TV 2 (NO)",
+  "network": "TV 2 (NO)",
+  "genres": [
+   "Comedy",
+   "Family"
+  ],
+  "rating": {
+   "count": 221,
+   "value": "2.5"
+  },
+  "actors": [
+   {
+    "name": "Lasse Lindtner",
+    "character": "Dr. Jørgen Holm"
+   },
+   {
+    "name": "Eva Holm",
+    "character": "Anne Marie Ottersen"
+   },
+   {
+    "name": "Victoria Holm",
+    "character": "Karen Louise Grindvold"
+   },
+   {
+    "name": "Dr. Sebastian Bøver",
+    "character": "Trond Teigen"
+   },
+   {
+    "name": "Sarah",
+    "character": "Wenche Kvamme"
+   },
+   {
+    "name": "Grandpa Philip",
+    "character": "Tor Stokke"
+   },
+   {
+    "name": "Dr. Frode Holm",
+    "character": "Tore Ryen"
+   }
+  ],
+  "images": [
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/283251/posters/6837969a45bd5.jpg"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1
+   },
+   {
+    "seasonNumber": 2
+   },
+   {
+    "seasonNumber": 3
+   }
+  ]
+ },
+ {
+  "tvdbId": 473811,
+  "title": "Holmes 911",
+  "overview": "Mike Holmes is going back to his roots rescuing homeowners from unscrupulous contractors, unhealthy homes and D.I.Y. projects gone wrong. It’s a family affair as his daughter Sherry and son Michael, who share his passion for making it right for deserving families, are right by his side. Over 12 episodes, the Holmes’ will take on five houses, and turn them into homes again.",
+  "slug": "holmes-911",
+  "originalCountry": "can",
+  "originalLanguage": "eng",
+  "language": "eng",
+  "firstAired": "2019-09-17",
+  "lastAired": "2019-12-19",
+  "tvMazeId": 43938,
+  "tmdbId": 101904,
+  "imdbId": "tt37897214",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2026-02-09T20:56:44Z",
+  "status": "Ended",
+  "timeOfDay": {
+   "hours": 0,
+   "minutes": 0
+  },
+  "originalNetwork": "CTV",
+  "network": "CTV",
+  "genres": [
+   "Home and Garden",
+   "Reality"
+  ],
+  "actors": [
+   {
+    "name": "Mike Holmes",
+    "character": "Self"
+   },
+   {
+    "name": "Mike Holmes Jr.",
+    "character": "Self"
+   },
+   {
+    "name": "Sherry Holmes",
+    "character": "Self"
+   }
+  ],
+  "images": [
+   {
+    "coverType": "Banner",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/473811/banners/698a49297b903.jpg"
+   },
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/473811/posters/698a4940ec1e4.jpg"
+   },
+   {
+    "coverType": "Fanart",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/473811/backgrounds/698a491b6a47c.jpg"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1
+   }
+  ]
+ },
+ {
+  "tvdbId": 334271,
+  "title": "Petes PA",
+  "overview": "Pete Burns is on the hunt for a Celebrity PA to help organize his life and his wedding to long-term partner Michael Simpson. 100's of people applied but will anyone have what it takes to tackle Pete's diva demands and caustic put-downs? Over ten weeks the wannabe PAs are put through their paces by a series of challenges that pit each against the other, all scrambling to survive the weekly elimination. Expect, bitching, backstabbing, blood, sweat and tears.",
+  "slug": "petes-pa",
+  "originalCountry": "gbr",
+  "originalLanguage": "eng",
+  "language": "eng",
+  "firstAired": "2007-10-08",
+  "lastAired": "2007-12-10",
+  "imdbId": "tt1202120",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2025-05-28T18:08:04Z",
+  "status": "Ended",
+  "runtime": 45,
+  "originalNetwork": "Living",
+  "network": "Living",
+  "genres": [
+   "Game Show",
+   "Reality"
+  ],
+  "rating": {
+   "count": 10,
+   "value": "7.2"
+  },
+  "images": [
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/334271/posters/68371fc4acd36.jpg"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1
+   }
+  ]
+ },
+ {
+  "tvdbId": 395065,
+  "title": "Holmes Family Effect",
+  "overview": "Inspired by people who are making a difference in their communities, each episode follows the Holmes family as they surprise these deserving people by transforming their spaces.",
+  "slug": "holmes-family-effect",
+  "originalCountry": "can",
+  "originalLanguage": "eng",
+  "language": "eng",
+  "firstAired": "2021-02-07",
+  "lastAired": "2021-03-07",
+  "tvMazeId": 54159,
+  "tmdbId": 118394,
+  "imdbId": "tt13836352",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2024-07-18T22:20:33Z",
+  "status": "Ended",
+  "runtime": 44,
+  "timeOfDay": {
+   "hours": 20,
+   "minutes": 0
+  },
+  "originalNetwork": "CTV",
+  "network": "CTV",
+  "genres": [
+   "Family",
+   "Home and Garden",
+   "Reality"
+  ],
+  "rating": {
+   "count": 73,
+   "value": "7.6"
+  },
+  "actors": [
+   {
+    "name": "Mike Holmes",
+    "character": "Himself"
+   },
+   {
+    "name": "Sherry Holmes",
+    "character": "Herself"
+   },
+   {
+    "name": "Mike Holmes Jr.",
+    "character": "Himself"
+   }
+  ],
+  "images": [
+   {
+    "coverType": "Banner",
+    "url": "https://artworks.thetvdb.com/banners/series/395065/banners/602257c495ef7.jpg"
+   },
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/series/395065/posters/600b3d82a1240.jpg"
+   },
+   {
+    "coverType": "Fanart",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/395065/backgrounds/6066b5d063b41.jpg"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1
+   }
+  ]
+ },
+ {
+  "tvdbId": 320734,
+  "title": "Sherlock Holmes (1939)",
+  "overview": "A series of fourteen films based on Sir Arthur Conan Doyle's Sherlock Holmes stories were released between 1939 and 1946; the British actors Basil Rathbone and Nigel Bruce played Holmes and Dr. John Watson, respectively.",
+  "slug": "sherlock-holmes-1939",
+  "originalCountry": "gbr",
+  "originalLanguage": "eng",
+  "language": "eng",
+  "firstAired": "1939-03-31",
+  "lastAired": "1946-06-07",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2025-05-04T20:50:33Z",
+  "status": "Ended",
+  "runtime": 70,
+  "genres": [
+   "Adventure",
+   "Crime",
+   "Drama",
+   "Family",
+   "Mini-Series",
+   "Thriller"
+  ],
+  "actors": [
+   {
+    "name": "Basil Rathbone",
+    "character": "Sherlock Holmes",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/297076/photo/6121b9193038d.jpg"
+   },
+   {
+    "name": "Nigel Bruce",
+    "character": "Dr. Watson"
+   },
+   {
+    "name": "George Zucco",
+    "character": "Moriarty"
+   },
+   {
+    "name": "Dennis Hoey",
+    "character": "Inspector Lestrade"
+   },
+   {
+    "name": "Mary Gordon",
+    "character": "Mrs. Hudson"
+   }
+  ],
+  "images": [
+   {
+    "coverType": "Banner",
+    "url": "https://artworks.thetvdb.com/banners/graphical/320734-g.jpg"
+   },
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/posters/5d1b92157b37c.jpg"
+   },
+   {
+    "coverType": "Fanart",
+    "url": "https://artworks.thetvdb.com/banners/fanart/original/320734-1.jpg"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1,
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/seasons/320734-1.jpg"
+     }
+    ]
+   }
+  ]
+ }
+]

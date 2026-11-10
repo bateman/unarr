@@ -1,0 +1,36 @@
+{
+  "body": {
+    "body": {
+      "definitionId": 1,
+      "isExclusive": false,
+      "isLongRunning": false,
+      "name": "ImportListSync",
+      "requiresDiskAccess": false,
+      "sendUpdatesToClient": true,
+      "suppressMessages": false,
+      "trigger": "manual",
+      "updateScheduledTask": false
+    },
+    "commandName": "Import List Sync",
+    "duration": "00:00:00.0060059",
+    "ended": "2026-11-09T22:25:35Z",
+    "id": 461728,
+    "message": "No list items to process",
+    "name": "ImportListSync",
+    "priority": "normal",
+    "queued": "2026-11-09T22:25:35Z",
+    "result": "successful",
+    "sendUpdatesToClient": true,
+    "started": "2026-11-09T22:25:35Z",
+    "stateChangeTime": "2026-11-09T22:25:35Z",
+    "status": "completed",
+    "trigger": "manual",
+    "updateScheduledTask": false
+  },
+  "recordedAt": "2026-11-09T22:25:45Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/command/461728"
+  },
+  "status": 200
+}

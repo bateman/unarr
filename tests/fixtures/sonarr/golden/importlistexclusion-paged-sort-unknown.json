@@ -1,0 +1,16 @@
+{
+  "body": {
+    "page": 1,
+    "pageSize": 0,
+    "records": [],
+    "sortDirection": "descending",
+    "sortKey": "id",
+    "totalRecords": 2
+  },
+  "recordedAt": "2026-11-09T23:47:55Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/importlistexclusion/paged?sortKey=nope&pageSize=0"
+  },
+  "status": 200
+}

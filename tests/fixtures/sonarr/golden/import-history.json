@@ -31,7 +31,7 @@
           "releaseType": "SingleEpisode",
           "size": "119980"
         },
-        "date": "2026-11-08T20:58:07Z",
+        "date": "2026-11-09T22:19:15Z",
         "downloadId": "4271B834AED1835F13BD078CB4A9A98F00AC777F",
         "episode": {
           "airDate": "2025-03-04",
@@ -40,7 +40,7 @@
           "episodeNumber": 2,
           "hasFile": true,
           "id": 47,
-          "lastSearchTime": "2026-11-08T20:57:09Z",
+          "lastSearchTime": "2026-11-09T22:18:17Z",
           "monitored": false,
           "overview": "Matt Murdock takes on a new client, Hector Ayala. But this local hero from the Heights is more than he claims to be. Fisk learns the power of optics in his new and very public role.",
           "runtime": 47,
@@ -163,8 +163,8 @@
           "releaseType": "SingleEpisode",
           "size": "177860"
         },
-        "date": "2026-11-08T20:57:47Z",
-        "downloadId": "c4119cd06a044d60be1043396370761b",
+        "date": "2026-11-09T22:18:55Z",
+        "downloadId": "c860499553f64d7b8170eae60cd1a5b3",
         "episode": {
           "absoluteEpisodeNumber": 2,
           "airDate": "2025-01-09",
@@ -173,7 +173,7 @@
           "episodeNumber": 2,
           "hasFile": true,
           "id": 2,
-          "lastSearchTime": "2026-11-08T20:56:40Z",
+          "lastSearchTime": "2026-11-09T22:17:48Z",
           "monitored": false,
           "overview": "Robby helps siblings navigate their elderly father’s end-of-life care. Later, Samira fends off cops targeting a woman with a misunderstood condition.",
           "runtime": 50,
@@ -305,7 +305,7 @@
           "releaseType": "SingleEpisode",
           "size": "119980"
         },
-        "date": "2026-11-08T20:57:28Z",
+        "date": "2026-11-09T22:18:35Z",
         "downloadId": "SABnzbd_nzo_mock3",
         "episode": {
           "absoluteEpisodeNumber": 1,
@@ -315,7 +315,7 @@
           "episodeNumber": 1,
           "hasFile": true,
           "id": 1,
-          "lastSearchTime": "2026-11-08T20:56:40Z",
+          "lastSearchTime": "2026-11-09T22:17:48Z",
           "monitored": false,
           "overview": "While attempting to distract himself from the anniversary of his mentor’s death, Dr. Robby introduces a fresh batch of interns to life in the ER.",
           "runtime": 53,
@@ -444,9 +444,9 @@
           }
         ],
         "data": {
-          "age": "613",
-          "ageHours": "14730.787728927111",
-          "ageMinutes": "883847.2637356684",
+          "age": "614",
+          "ageHours": "14756.139873305583",
+          "ageMinutes": "885368.3923983916",
           "customFormatScore": "-10000",
           "downloadClient": "Transmission",
           "downloadClientName": "Mock Transmission",
@@ -467,7 +467,7 @@
           "tvRageId": "0",
           "tvdbId": "422712"
         },
-        "date": "2026-11-08T20:57:15Z",
+        "date": "2026-11-09T22:18:23Z",
         "downloadId": "4271B834AED1835F13BD078CB4A9A98F00AC777F",
         "episode": {
           "airDate": "2025-03-04",
@@ -476,7 +476,7 @@
           "episodeNumber": 2,
           "hasFile": true,
           "id": 47,
-          "lastSearchTime": "2026-11-08T20:57:09Z",
+          "lastSearchTime": "2026-11-09T22:18:17Z",
           "monitored": false,
           "overview": "Matt Murdock takes on a new client, Hector Ayala. But this local hero from the Heights is more than he claims to be. Fisk learns the power of optics in his new and very public role.",
           "runtime": 47,
@@ -605,9 +605,9 @@
           }
         ],
         "data": {
-          "age": "613",
-          "ageHours": "14730.787171340167",
-          "ageMinutes": "883847.2302804617",
+          "age": "614",
+          "ageHours": "14756.139314879083",
+          "ageMinutes": "885368.3588928",
           "customFormatScore": "-10000",
           "downloadClient": "qBittorrent",
           "downloadClientName": "Mock qBittorrent",
@@ -628,7 +628,7 @@
           "tvRageId": "0",
           "tvdbId": "422712"
         },
-        "date": "2026-11-08T20:57:13Z",
+        "date": "2026-11-09T22:18:21Z",
         "downloadId": "0FB2EF04FB342178115BA635EC7B5EC0067058BA",
         "episode": {
           "airDate": "2025-03-04",
@@ -637,7 +637,7 @@
           "episodeNumber": 1,
           "hasFile": false,
           "id": 46,
-          "lastSearchTime": "2026-11-08T20:56:27Z",
+          "lastSearchTime": "2026-11-09T22:17:35Z",
           "monitored": false,
           "overview": "Longtime rivals Matt Murdock and Wilson Fisk attempt to move past their darker personas to serve New York, but their pasts resurface, reintroducing the world of Daredevil.",
           "runtime": 59,
@@ -754,9 +754,9 @@
           }
         ],
         "data": {
-          "age": "667",
-          "ageHours": "16024.986617665472",
-          "ageMinutes": "961499.1970599816",
+          "age": "668",
+          "ageHours": "16050.338762107916",
+          "ageMinutes": "963020.3257265483",
           "customFormatScore": "-10000",
           "downloadClient": "NZBGet",
           "downloadClientName": "Mock NZBGet",
@@ -776,8 +776,8 @@
           "tvRageId": "0",
           "tvdbId": "448176"
         },
-        "date": "2026-11-08T20:57:11Z",
-        "downloadId": "c4119cd06a044d60be1043396370761b",
+        "date": "2026-11-09T22:18:19Z",
+        "downloadId": "c860499553f64d7b8170eae60cd1a5b3",
         "episode": {
           "absoluteEpisodeNumber": 2,
           "airDate": "2025-01-09",
@@ -786,7 +786,7 @@
           "episodeNumber": 2,
           "hasFile": true,
           "id": 2,
-          "lastSearchTime": "2026-11-08T20:56:40Z",
+          "lastSearchTime": "2026-11-09T22:17:48Z",
           "monitored": false,
           "overview": "Robby helps siblings navigate their elderly father’s end-of-life care. Later, Samira fends off cops targeting a woman with a misunderstood condition.",
           "runtime": 50,
@@ -903,9 +903,9 @@
           }
         ],
         "data": {
-          "age": "667",
-          "ageHours": "16025.286072868666",
-          "ageMinutes": "961517.1643721666",
+          "age": "668",
+          "ageHours": "16050.63821524486",
+          "ageMinutes": "963038.292914765",
           "customFormatScore": "-10000",
           "downloadClient": "SABnzbd",
           "downloadClientName": "Mock SABnzbd",
@@ -925,7 +925,7 @@
           "tvRageId": "0",
           "tvdbId": "448176"
         },
-        "date": "2026-11-08T20:57:09Z",
+        "date": "2026-11-09T22:18:17Z",
         "downloadId": "SABnzbd_nzo_mock3",
         "episode": {
           "absoluteEpisodeNumber": 1,
@@ -935,7 +935,7 @@
           "episodeNumber": 1,
           "hasFile": true,
           "id": 1,
-          "lastSearchTime": "2026-11-08T20:56:40Z",
+          "lastSearchTime": "2026-11-09T22:17:48Z",
           "monitored": false,
           "overview": "While attempting to distract himself from the anniversary of his mentor’s death, Dr. Robby introduces a fresh batch of interns to life in the ER.",
           "runtime": 53,
@@ -1059,7 +1059,7 @@
           "releaseType": "SingleEpisode",
           "size": "768000"
         },
-        "date": "2026-11-08T20:56:25Z",
+        "date": "2026-11-09T22:17:33Z",
         "downloadId": "C7EB8F60E61BC10B2F8762DE09949BDD2AAFBE5A",
         "episode": {
           "absoluteEpisodeNumber": 1,
@@ -1069,7 +1069,7 @@
           "episodeNumber": 1,
           "hasFile": true,
           "id": 1,
-          "lastSearchTime": "2026-11-08T20:56:40Z",
+          "lastSearchTime": "2026-11-09T22:17:48Z",
           "monitored": false,
           "overview": "While attempting to distract himself from the anniversary of his mentor’s death, Dr. Robby introduces a fresh batch of interns to life in the ER.",
           "runtime": 53,
@@ -1204,7 +1204,7 @@
           "releaseGroup": "FLUX",
           "size": "768000"
         },
-        "date": "2026-11-08T20:56:25Z",
+        "date": "2026-11-09T22:17:33Z",
         "downloadId": "0FB2EF04FB342178115BA635EC7B5EC0067058BA",
         "episode": {
           "airDate": "2025-03-04",
@@ -1213,7 +1213,7 @@
           "episodeNumber": 1,
           "hasFile": false,
           "id": 46,
-          "lastSearchTime": "2026-11-08T20:56:27Z",
+          "lastSearchTime": "2026-11-09T22:17:35Z",
           "monitored": false,
           "overview": "Longtime rivals Matt Murdock and Wilson Fisk attempt to move past their darker personas to serve New York, but their pasts resurface, reintroducing the world of Daredevil.",
           "runtime": 59,
@@ -1330,9 +1330,9 @@
           }
         ],
         "data": {
-          "age": "667",
-          "ageHours": "16025.270426698473",
-          "ageMinutes": "961516.225601955",
+          "age": "668",
+          "ageHours": "16050.622587719805",
+          "ageMinutes": "963037.3552632533",
           "customFormatScore": "-10000",
           "downloadClient": "Transmission",
           "downloadClientName": "Mock Transmission",
@@ -1353,7 +1353,7 @@
           "tvRageId": "0",
           "tvdbId": "448176"
         },
-        "date": "2026-11-08T20:56:13Z",
+        "date": "2026-11-09T22:17:21Z",
         "downloadId": "C7EB8F60E61BC10B2F8762DE09949BDD2AAFBE5A",
         "episode": {
           "absoluteEpisodeNumber": 1,
@@ -1363,7 +1363,7 @@
           "episodeNumber": 1,
           "hasFile": true,
           "id": 1,
-          "lastSearchTime": "2026-11-08T20:56:40Z",
+          "lastSearchTime": "2026-11-09T22:17:48Z",
           "monitored": false,
           "overview": "While attempting to distract himself from the anniversary of his mentor’s death, Dr. Robby introduces a fresh batch of interns to life in the ER.",
           "runtime": 53,
@@ -1476,7 +1476,7 @@
     "sortKey": "date",
     "totalRecords": 2010
   },
-  "recordedAt": "2026-11-08T20:58:47Z",
+  "recordedAt": "2026-11-09T22:19:55Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/history?page=1&pageSize=10&sortKey=date&sortDirection=descending&includeSeries=true&includeEpisode=true"

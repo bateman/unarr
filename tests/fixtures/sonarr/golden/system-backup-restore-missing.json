@@ -1,0 +1,11 @@
+{
+  "body": {
+    "message": "NotFound"
+  },
+  "recordedAt": "2026-11-09T23:01:03Z",
+  "request": {
+    "method": "POST",
+    "path": "/api/v3/system/backup/restore/12345"
+  },
+  "status": 404
+}

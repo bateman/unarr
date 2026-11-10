@@ -8,10 +8,12 @@
 //! Every request is kept, so a test can assert what Unarr sent.
 //!
 //! Exchanges recorded with real download clients replay under `/capture/`
-//! (see [`capture`]).
+//! (see [`capture`]); the metadata hosts answer under `/<host>/` (see
+//! [`metadata`]).
 
 pub mod capture;
 pub mod clients;
+pub mod metadata;
 
 use std::collections::BTreeMap;
 use std::net::SocketAddr;
@@ -167,7 +169,7 @@ impl Mock {
     }
 }
 
-fn slug(text: &str) -> String {
+pub(crate) fn slug(text: &str) -> String {
     let mut out = String::new();
     let mut dash = false;
     for c in text.to_lowercase().chars() {
@@ -330,6 +332,9 @@ async fn handle(
             if let Some(file) = path.strip_prefix(&format!("/{kind}/download/")) {
                 break 'route download(&shared, kind, file).into();
             }
+        }
+        if let Some(reply) = metadata::handle(&shared.fixtures, &path, uri.query().unwrap_or("")) {
+            break 'route reply;
         }
         if let Some(reply) = capture::handle(&shared.fixtures, &method, &path, &query, &body) {
             break 'route reply;

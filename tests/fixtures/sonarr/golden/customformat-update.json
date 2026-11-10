@@ -1,0 +1,37 @@
+{
+  "body": {
+    "id": 42,
+    "includeCustomFormatWhenRenaming": true,
+    "name": "x265 (Unarr, edited)",
+    "specifications": [
+      {
+        "fields": [
+          {
+            "advanced": false,
+            "helpText": "Custom Format RegEx is Case Insensitive",
+            "isFloat": false,
+            "label": "Regular Expression",
+            "name": "value",
+            "order": 0,
+            "privacy": "normal",
+            "type": "textbox",
+            "value": "[xh][ ._-]?265|\\bHEVC(\\b|\\d)"
+          }
+        ],
+        "implementation": "ReleaseTitleSpecification",
+        "implementationName": "Release Title",
+        "infoLink": "https://wiki.servarr.com/sonarr/settings#custom-formats-2",
+        "name": "x265",
+        "negate": false,
+        "required": true
+      }
+    ]
+  },
+  "recordedAt": "2026-11-09T22:24:43Z",
+  "request": {
+    "body": "bodies/customformat-update.json",
+    "method": "PUT",
+    "path": "/api/v3/customformat/42"
+  },
+  "status": 202
+}

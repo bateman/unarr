@@ -17,14 +17,14 @@
     "id": 461704,
     "name": "RenameSeries",
     "priority": "normal",
-    "queued": "2026-11-08T21:00:18Z",
+    "queued": "2026-11-09T22:21:26Z",
     "result": "unknown",
     "sendUpdatesToClient": true,
     "status": "queued",
     "trigger": "manual",
     "updateScheduledTask": true
   },
-  "recordedAt": "2026-11-08T21:00:18Z",
+  "recordedAt": "2026-11-09T22:21:26Z",
   "request": {
     "body": "bodies/command-rename-series.json",
     "method": "POST",

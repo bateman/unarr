@@ -1,0 +1,40 @@
+{
+  "body": [
+    {
+      "message": "All search-capable indexers are temporarily unavailable due to recent indexer errors",
+      "source": "IndexerSearchCheck",
+      "type": "warning",
+      "wikiUrl": "https://wiki.servarr.com/sonarr/system#indexers-are-unavailable-due-to-failures"
+    },
+    {
+      "message": "Download clients unavailable due to failures: QBittorrent 1, QBittorrent 3",
+      "source": "DownloadClientStatusCheck",
+      "type": "warning",
+      "wikiUrl": "https://wiki.servarr.com/sonarr/system#download-clients-are-unavailable-due-to-failures"
+    },
+    {
+      "message": "All rss-capable indexers are temporarily unavailable due to recent indexer errors",
+      "source": "IndexerRssCheck",
+      "type": "warning",
+      "wikiUrl": "https://wiki.servarr.com/sonarr/system#indexers-are-unavailable-due-to-failures"
+    },
+    {
+      "message": "Unable to communicate with QBittorrent 1. Name or service not known (qbittorrent.invalid:8080)",
+      "source": "DownloadClientCheck",
+      "type": "error",
+      "wikiUrl": "https://wiki.servarr.com/sonarr/system#unable-to-communicate-with-download-client"
+    },
+    {
+      "message": "All indexers are unavailable due to failures",
+      "source": "IndexerStatusCheck",
+      "type": "error",
+      "wikiUrl": "https://wiki.servarr.com/sonarr/system#indexers-are-unavailable-due-to-failures"
+    }
+  ],
+  "recordedAt": "2026-11-09T22:25:45Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/health"
+  },
+  "status": 200
+}

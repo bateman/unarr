@@ -1,0 +1,8 @@
+{
+ "$from": "config-indexer",
+ "$set": {
+  "minimumAge": 5,
+  "retention": 1500,
+  "rssSyncInterval": 30
+ }
+}

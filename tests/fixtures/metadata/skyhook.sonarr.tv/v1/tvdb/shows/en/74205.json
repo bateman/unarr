@@ -1,0 +1,388 @@
+{
+ "tvdbId": 74205,
+ "title": "Band of Brothers",
+ "overview": "The story of Easy Company, 506th Regiment of the 101st Airborne Division, U.S. Army. Based on interviews with survivors of Easy Company, as well as soldiers' journals and letters, the series chronicles the experiences of these young men who knew extraordinary bravery and extraordinary fear.",
+ "slug": "band-of-brothers",
+ "originalCountry": "usa",
+ "originalLanguage": "eng",
+ "language": "eng",
+ "firstAired": "2001-09-09",
+ "lastAired": "2001-11-04",
+ "tvRageId": 2708,
+ "tvMazeId": 465,
+ "tmdbId": 4613,
+ "imdbId": "tt0185906",
+ "malIds": [],
+ "anidbIds": [],
+ "aniListIds": [],
+ "lastUpdated": "2026-11-03T16:59:10Z",
+ "status": "Ended",
+ "runtime": 63,
+ "originalNetwork": "HBO",
+ "network": "HBO",
+ "genres": [
+  "Action",
+  "Adventure",
+  "Drama",
+  "History",
+  "Mini-Series",
+  "War"
+ ],
+ "contentRating": "TV-MA",
+ "rating": {
+  "count": 612334,
+  "value": "9.4"
+ },
+ "actors": [
+  {
+   "name": "Damian Lewis",
+   "character": "Richard \"Dick\" Winters",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/327374/photo/679f81538cfc4.jpg"
+  },
+  {
+   "name": "Ron Livingston",
+   "character": "Lewis Nixon",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/310440/photo/606d75eec9a1e.jpg"
+  },
+  {
+   "name": "Donnie Wahlberg",
+   "character": "Carwood Lipton",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/255051/photo/606410d5051fd.jpg"
+  },
+  {
+   "name": "Michael Cudlitz",
+   "character": "Denver \"Bull\" Randleman",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/252396/photo/65918bf3216a8.jpg"
+  },
+  {
+   "name": "Matthew Settle",
+   "character": "Ronald Speirs",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/303916/photo/6521df101171f.jpg"
+  },
+  {
+   "name": "Shane Taylor",
+   "character": "Eugene Roe"
+  },
+  {
+   "name": "Eion Bailey",
+   "character": "David Kenyon Webster",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/252163/photo/609c65a976690.jpg"
+  },
+  {
+   "name": "Marc Warren",
+   "character": "Albert Blithe",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/261633/photo/6512da9ce5c2f.jpg"
+  },
+  {
+   "name": "Neal McDonough",
+   "character": "Lynn Compton",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/300351/photo/64c9068365215.jpg"
+  },
+  {
+   "name": "Scott Grimes",
+   "character": "Donald Malarkey",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/274189/photo/66292a555211f.jpg"
+  },
+  {
+   "name": "Frank John Hughes",
+   "character": "William Guarnere",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/273190/photo/65ab58f1bbd94.jpg"
+  },
+  {
+   "name": "Kirk Acevedo",
+   "character": "Joe Toye",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/271463/photo/6840786683090.jpg"
+  },
+  {
+   "name": "James Madio",
+   "character": "Frank Perconte",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/257305/photo/66ecbc5c57803.jpg"
+  },
+  {
+   "name": "Dale Dye",
+   "character": "Robert Sink",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/336423/photo/6551191648d6b.jpg"
+  },
+  {
+   "name": "Rick Gomez",
+   "character": "George Luz",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/271114/photo/6876e5a13442f.jpg"
+  },
+  {
+   "name": "David Schwimmer",
+   "character": "Herbert Sobel",
+   "image": "https://artworks.thetvdb.com/banners/person/274631/60f709fa64299.jpg"
+  },
+  {
+   "name": "Richard Speight Jr.",
+   "character": "Warren Muck",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/300506/photo/6071ff9930a6e.jpg"
+  },
+  {
+   "name": "Douglas Spain",
+   "character": "Antonio C. García"
+  },
+  {
+   "name": "Rick Warden",
+   "character": "Harry Welsh"
+  },
+  {
+   "name": "Dexter Fletcher",
+   "character": "Johnny Martin",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/315351/photo/622722964e645.jpg"
+  },
+  {
+   "name": "Colin Hanks",
+   "character": "Henry S. Jones",
+   "image": "https://artworks.thetvdb.com/banners/person/310360/5ea73e6fdfce6.jpg"
+  },
+  {
+   "name": "Ross McCall",
+   "character": "Joseph Liebgott",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/297319/photo/652721e4e8529.jpg"
+  },
+  {
+   "name": "Rene L. Moreno",
+   "character": "Joseph Ramirez",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/270358/photo/67f2874ed6b92.jpg"
+  }
+ ],
+ "images": [
+  {
+   "coverType": "Banner",
+   "url": "https://artworks.thetvdb.com/banners/graphical/74205-g3.jpg"
+  },
+  {
+   "coverType": "Poster",
+   "url": "https://artworks.thetvdb.com/banners/posters/74205-12.jpg"
+  },
+  {
+   "coverType": "Fanart",
+   "url": "https://artworks.thetvdb.com/banners/fanart/original/74205-38.jpg"
+  },
+  {
+   "coverType": "Clearlogo",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/74205/clearlogo/611b6d5b9ae72.png"
+  }
+ ],
+ "seasons": [
+  {
+   "seasonNumber": 0,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/21667/posters/6aa19ad5165be.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 1,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/7109/posters/6272ba2fdfd41.jpg"
+    }
+   ]
+  }
+ ],
+ "episodes": [
+  {
+   "tvdbShowId": 74205,
+   "tvdbId": 3705121,
+   "seasonNumber": 0,
+   "episodeNumber": 1,
+   "airedAfterSeasonNumber": 1,
+   "title": "Premiere in Normandy",
+   "airDate": "2001-06-06",
+   "airDateUtc": "2001-06-06T04:00:00Z",
+   "runtime": 3,
+   "overview": "An HBO Entertainment News piece about the premiere of the mini-series in Normandy for Easy Company vets, their families, friends and stars of the series.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/3705121/screencap/69cd3eb338242.jpg"
+  },
+  {
+   "tvdbShowId": 74205,
+   "tvdbId": 312666,
+   "seasonNumber": 0,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 11,
+   "title": "Behind the Scenes - The Making of Band of Brothers",
+   "airDate": "2001-09-09",
+   "airDateUtc": "2001-09-09T04:00:00Z",
+   "runtime": 30,
+   "overview": "Interviews made of the various actors and cast members that provide the knowledge and production skills and sets required to make the film a success.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/74205/312666.jpg"
+  },
+  {
+   "tvdbShowId": 74205,
+   "tvdbId": 333159,
+   "seasonNumber": 0,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 12,
+   "airedAfterSeasonNumber": 1,
+   "title": "We Stand Alone Together: The Men of Easy Company",
+   "airDate": "2001-11-10",
+   "airDateUtc": "2001-11-10T05:00:00Z",
+   "runtime": 78,
+   "overview": "We Stand Alone Together tells the remarkable story of the men of Easy Company in their own words. Featuring recent interviews with the real-life company members whose deeds are dramatized in the miniseries, combined with rare and archival photographs and film footage.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/74205/333159.jpg"
+  },
+  {
+   "tvdbShowId": 74205,
+   "tvdbId": 3705061,
+   "seasonNumber": 0,
+   "episodeNumber": 4,
+   "airedAfterSeasonNumber": 1,
+   "title": "Ron Livingston's Video Diaries",
+   "airDate": "2006-06-06",
+   "airDateUtc": "2006-06-06T04:00:00Z",
+   "runtime": 56,
+   "finaleType": "season",
+   "overview": "12 video diaries by actor Ron Livingston (who portrays Lewis Nixon) detailing the tough \"actors' boot camp.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/74205/3705061.jpg"
+  },
+  {
+   "tvdbShowId": 74205,
+   "tvdbId": 11961050,
+   "seasonNumber": 0,
+   "episodeNumber": 5,
+   "airedAfterSeasonNumber": 1,
+   "title": "Band of Brothers: Legacy",
+   "airDate": "2026-09-09",
+   "airDateUtc": "2026-09-09T04:00:00Z",
+   "runtime": 0,
+   "overview": "BAND OF BROTHERS: LEGACY serves as a tribute to the groundbreaking series that helped preserve the story of Easy Company and deepened public appreciation for the sacrifices of the Greatest Generation. The documentary features new interviews with BAND OF BROTHERS cast members including Damian Lewis, Ron Livingston, Michael Cudlitz, Capt. Dale Dye, USMC (Ret.), David Schwimmer, and more. Through personal reflections and behind-the-scenes stories, participants revisit the experience of making the series and explore its lasting cultural resonance. BAND OF BROTHERS: LEGACY also includes never-before-seen archival footage and photographs of Easy Company and World War II.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11961050/screencap/6aa19b9459592.jpg"
+  },
+  {
+   "tvdbShowId": 74205,
+   "tvdbId": 141245,
+   "seasonNumber": 1,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 1,
+   "title": "Currahee",
+   "airDate": "2001-09-09",
+   "airDateUtc": "2001-09-09T04:00:00Z",
+   "runtime": 73,
+   "overview": "Easy Company is introduced to Captain Sobel, who has the group undergo hard and unfair training. As a result, Sobel comes into conflict with his men, including Richard Winters, his executive officer. The company is shipped to England to prepare for D-Day.",
+   "image": "https://artworks.thetvdb.com/banners/series/74205/episodes/65ea4810752db.jpg"
+  },
+  {
+   "tvdbShowId": 74205,
+   "tvdbId": 141246,
+   "seasonNumber": 1,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 2,
+   "title": "Day of Days",
+   "airDate": "2001-09-09",
+   "airDateUtc": "2001-09-09T04:00:00Z",
+   "runtime": 52,
+   "overview": "Easy Company lands in Normandy, scattered all across and away from their drop zone. 1st Lt. Meehan, commander of Easy, is killed when his plane suffers a direct hit and 1st Lt. Winters must take command and 1st Lt. Speirs is introduced.",
+   "image": "https://artworks.thetvdb.com/banners/series/74205/episodes/65ea485293efa.jpg"
+  },
+  {
+   "tvdbShowId": 74205,
+   "tvdbId": 141247,
+   "seasonNumber": 1,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 3,
+   "title": "Carentan",
+   "airDate": "2001-09-16",
+   "airDateUtc": "2001-09-16T04:00:00Z",
+   "runtime": 65,
+   "overview": "Easy Company are sent to liberate the French village of Carentan, where they lose several men in heavy fighting. The episode focuses on Private Albert Blithe, who struggles with crippling anxiety following the battle.",
+   "image": "https://artworks.thetvdb.com/banners/series/74205/episodes/65ea486d71172.jpg"
+  },
+  {
+   "tvdbShowId": 74205,
+   "tvdbId": 141248,
+   "seasonNumber": 1,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 4,
+   "title": "Replacements",
+   "airDate": "2001-09-23",
+   "airDateUtc": "2001-09-23T04:00:00Z",
+   "runtime": 60,
+   "overview": "Due to heavy casualties, a group of fresh paratrooper replacements joins Easy Co. in time for a massive drop into German-occupied Holland for Operation Market-Garden. While met with no resistance in Eindhoven, Easy and a cluster of British tanks are repelled from a nearby town by a superior German force, sustaining many casualties as they retreat. The Allied plan to enter Germany through Holland and end the war before Christmas fails.",
+   "image": "https://artworks.thetvdb.com/banners/series/74205/episodes/65ea488a58ecd.jpg"
+  },
+  {
+   "tvdbShowId": 74205,
+   "tvdbId": 141249,
+   "seasonNumber": 1,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 5,
+   "title": "Crossroads",
+   "airDate": "2001-09-30",
+   "airDateUtc": "2001-09-30T04:00:00Z",
+   "runtime": 56,
+   "overview": "Winters writes a report on the challenge of an unexpected resistance to a German attack, and is haunted by his conscience after shooting a teenage German soldier. Operation Pegasus is depicted. Easy Company is called to Bastogne to repel the sudden German counterattack.",
+   "image": "https://artworks.thetvdb.com/banners/series/74205/episodes/65ea48d401876.jpg"
+  },
+  {
+   "tvdbShowId": 74205,
+   "tvdbId": 141250,
+   "seasonNumber": 1,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 6,
+   "title": "Bastogne",
+   "airDate": "2001-10-07",
+   "airDateUtc": "2001-10-07T04:00:00Z",
+   "runtime": 67,
+   "overview": "Easy Company experiences the Battle of the Bulge and have to hold ground near Bastogne while running low on ammunition and other supplies. The episode focuses on medic Eugene \"Doc\" Roe as he helps out his fellow soldiers where he can, while also scrounging for medical supplies, of which the Company is dangerously low.",
+   "image": "https://artworks.thetvdb.com/banners/series/74205/episodes/65ea490b19882.jpg"
+  },
+  {
+   "tvdbShowId": 74205,
+   "tvdbId": 141251,
+   "seasonNumber": 1,
+   "episodeNumber": 7,
+   "absoluteEpisodeNumber": 7,
+   "title": "The Breaking Point",
+   "airDate": "2001-10-14",
+   "airDateUtc": "2001-10-14T04:00:00Z",
+   "runtime": 73,
+   "overview": "Easy Company battles near Foy, Belgium, losing numerous men. In the episode, the actions of 1st Lt. Norman Dike, the Company's commander, are examined and questioned. Serving as narrator is 1st Sgt. Carwood Lipton, who attempts to keep the morale of the men up as they endure their trials in the forest near Foy.",
+   "image": "https://artworks.thetvdb.com/banners/series/74205/episodes/64e67bc35c3fc.jpg"
+  },
+  {
+   "tvdbShowId": 74205,
+   "tvdbId": 141252,
+   "seasonNumber": 1,
+   "episodeNumber": 8,
+   "absoluteEpisodeNumber": 8,
+   "title": "The Last Patrol",
+   "airDate": "2001-10-21",
+   "airDateUtc": "2001-10-21T04:00:00Z",
+   "runtime": 59,
+   "overview": "Easy Company carries out a dangerous mission in Haguenau as David Webster  returns from a hospital. Together with new replacement 2nd Lt. Jones, he eventually (re)integrates with the other soldiers, whose experiences at Bastogne have made them weary and closed off from Webster due to the fact he didn't try and leave hospital early unlike other soldiers in the company.",
+   "image": "https://artworks.thetvdb.com/banners/series/74205/episodes/65ea4985c032c.jpg"
+  },
+  {
+   "tvdbShowId": 74205,
+   "tvdbId": 141253,
+   "seasonNumber": 1,
+   "episodeNumber": 9,
+   "absoluteEpisodeNumber": 9,
+   "title": "Why We Fight",
+   "airDate": "2001-10-28",
+   "airDateUtc": "2001-10-28T04:00:00Z",
+   "runtime": 58,
+   "overview": "As Nixon battles alcoholism, Easy Company enters Germany. A concentration camp near Landsberg is discovered by a patrol. This site leaves many soldiers both shocked and disgusted at what they're witnessing at the hands of the Nazi Germans. The episode was based on the liberation of Kaufering IV in the area of Hurlach.",
+   "image": "https://artworks.thetvdb.com/banners/series/74205/episodes/65ea49b2c2eb4.jpg"
+  },
+  {
+   "tvdbShowId": 74205,
+   "tvdbId": 141254,
+   "seasonNumber": 1,
+   "episodeNumber": 10,
+   "absoluteEpisodeNumber": 10,
+   "title": "Points",
+   "airDate": "2001-11-04",
+   "airDateUtc": "2001-11-04T05:00:00Z",
+   "runtime": 62,
+   "finaleType": "series",
+   "overview": "Easy Company enters the Bavarian town of Berchtesgaden, once home to Hitler's top officers. They find the town deserted and rush on to capture Hitler's famed \"Eagle's Nest\" before the French can get there. Here they learn of the German army's surrender.",
+   "image": "https://artworks.thetvdb.com/banners/series/74205/episodes/65ea49eb4172a.jpg"
+  }
+ ]
+}

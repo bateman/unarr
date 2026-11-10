@@ -86,7 +86,7 @@ async fn broadcast_episodes(state: &AppState, ids: &[i64]) {
     }
 }
 
-async fn broadcast_series(state: &AppState, series_id: i64) {
+pub(crate) async fn broadcast_series(state: &AppState, series_id: i64) {
     if let Ok(Some(r)) = series_resource_by_id(state, series_id).await {
         state
             .hub()

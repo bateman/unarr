@@ -1,0 +1,1263 @@
+{
+ "tvdbId": 356202,
+ "title": "For All Mankind",
+ "overview": "The depiction of an 'alternate history' of the global space race after the USSR succeeds in achieving the first manned Moon landing.",
+ "slug": "for-all-mankind",
+ "originalCountry": "usa",
+ "originalLanguage": "eng",
+ "language": "eng",
+ "firstAired": "2019-11-01",
+ "lastAired": "2026-05-29",
+ "tvMazeId": 41414,
+ "tmdbId": 87917,
+ "imdbId": "tt7772588",
+ "malIds": [],
+ "anidbIds": [],
+ "aniListIds": [],
+ "lastUpdated": "2026-10-18T00:28:38Z",
+ "status": "Continuing",
+ "runtime": 59,
+ "timeOfDay": {
+  "hours": 0,
+  "minutes": 0
+ },
+ "originalNetwork": "Apple TV",
+ "network": "Apple TV",
+ "genres": [
+  "Drama",
+  "Science Fiction"
+ ],
+ "contentRating": "TV-MA",
+ "rating": {
+  "count": 94763,
+  "value": "8.1"
+ },
+ "actors": [
+  {
+   "name": "Joel Kinnaman",
+   "character": "Ed Baldwin",
+   "image": "https://artworks.thetvdb.com/banners/person/303650/62ddb059d799d.jpg"
+  },
+  {
+   "name": "Shantel VanSanten",
+   "character": "Karen Baldwin",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/331733/photo/68075c4073f8b.jpg"
+  },
+  {
+   "name": "Wrenn Schmidt",
+   "character": "Margo Madison",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/341968/photo/622480fada5b5.jpg"
+  },
+  {
+   "name": "Jodi Balfour",
+   "character": "Ellen Waverly",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/481744/photo/680bf30e28bfe.jpg"
+  },
+  {
+   "name": "Michael Dorman",
+   "character": "Gordon “Gordo” Stevens",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/474016/photo/6522da7c3009d.jpg"
+  },
+  {
+   "name": "Sarah Jones",
+   "character": "Tracy Stevens"
+  },
+  {
+   "name": "Krys Marshall",
+   "character": "Danielle Poole",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8039368/photo/68e553967f61a.jpg"
+  },
+  {
+   "name": "Sonya Walger",
+   "character": "Molly Cobb",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/280798/photo/621ff98b0897d.jpg"
+  },
+  {
+   "name": "Casey W. Johnson",
+   "character": "Danny Stevens"
+  },
+  {
+   "name": "Coral Peña",
+   "character": "Aleida Rosales",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/476957/photo/65f55c2910be4.jpg"
+  },
+  {
+   "name": "Cynthy Wu",
+   "character": "Kelly Baldwin"
+  },
+  {
+   "name": "Edi Gathegi",
+   "character": "Dev Ayesa",
+   "image": "https://artworks.thetvdb.com/banners/person/346715/25868480.jpg"
+  },
+  {
+   "name": "Toby Kebbell",
+   "character": "Miles Dale",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/634137/photo/64d7a71c6504d.jpg"
+  },
+  {
+   "name": "Tyner Rushing",
+   "character": "Samantha Massey",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/472084/photo/6274220f83b2a.jpg"
+  },
+  {
+   "name": "Daniel Stern",
+   "character": "Eli Hobson",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/254255/photo/612aab95a5fca.jpg"
+  },
+  {
+   "name": "Svetlana Efremova",
+   "character": "Irina Morozova"
+  },
+  {
+   "name": "Piotr Adamczyk",
+   "character": "Sergei Nikulov",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/471391/photo/619ea4b175097.jpg"
+  },
+  {
+   "name": "Ruby Cruz",
+   "character": "Lily Dale",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8162515/photo/60ae8a6ade474.jpg"
+  },
+  {
+   "name": "Sean Kaufman",
+   "character": "Alex Baldwin",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/7981078/photo/64cabeb0d7ae4.jpg"
+  },
+  {
+   "name": "Mireille Enos",
+   "character": "Celia Boyd",
+   "image": "https://artworks.thetvdb.com/banners/person/352716/primary.jpg"
+  },
+  {
+   "name": "Ines Høysæter Asserson",
+   "character": "A.J. Jarrett"
+  },
+  {
+   "name": "Costa Ronin",
+   "character": "Leonid Polivanov",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/496411/photo/676d9b0b3db7a.jpg"
+  }
+ ],
+ "images": [
+  {
+   "coverType": "Banner",
+   "url": "https://artworks.thetvdb.com/banners/graphical/5d850474ed246.jpg"
+  },
+  {
+   "coverType": "Poster",
+   "url": "https://artworks.thetvdb.com/banners/series/356202/posters/600304db98362.jpg"
+  },
+  {
+   "coverType": "Fanart",
+   "url": "https://artworks.thetvdb.com/banners/series/356202/backgrounds/6035368ae4176.jpg"
+  },
+  {
+   "coverType": "Clearlogo",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/356202/clearlogo/611bf94f751b5.png"
+  }
+ ],
+ "seasons": [
+  {
+   "seasonNumber": 0,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/788101/posters/6543503d9fd63.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 1,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/seasons/5dc2de6bac894.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 2,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/series/356202/seasons/1882023/posters/6032b48c8d3d0.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 3,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/1994691/posters/62a09f657be0f.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 4,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2083198/posters/65457be76ed02.jpg"
+    },
+    {
+     "coverType": "Banner",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2083198/banners/6599bc85019e7.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 5,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2125379/posters/69c2fa1baec6c.jpg"
+    }
+   ]
+  }
+ ],
+ "episodes": [
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 9883320,
+   "seasonNumber": 0,
+   "episodeNumber": 1,
+   "title": "Season 1 First Look",
+   "airDate": "2019-12-17",
+   "airDateUtc": "2019-12-17T05:00:00Z",
+   "runtime": 2
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 9883328,
+   "seasonNumber": 0,
+   "episodeNumber": 2,
+   "title": "Season 1 Cast Recap",
+   "airDate": "2022-05-24",
+   "airDateUtc": "2022-05-24T04:00:00Z",
+   "runtime": 6
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 10133103,
+   "seasonNumber": 0,
+   "episodeNumber": 3,
+   "title": "Wilson Wins Re-election (1996)",
+   "airDate": "2023-11-10",
+   "airDateUtc": "2023-11-10T05:00:00Z",
+   "runtime": 2,
+   "overview": "Explore the alternative-history news events that transpired between Season 3 and 4"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 10133105,
+   "seasonNumber": 0,
+   "episodeNumber": 4,
+   "title": "The Mars-7 Alliance (1997)",
+   "airDate": "2023-11-10",
+   "airDateUtc": "2023-11-10T05:00:00Z",
+   "runtime": 2,
+   "overview": "Explore the alternative-history news events that transpired between Season 3 and 4"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 10133106,
+   "seasonNumber": 0,
+   "episodeNumber": 5,
+   "title": "JSC Bombing Trial (1998)",
+   "airDate": "2023-11-10",
+   "airDateUtc": "2023-11-10T05:00:00Z",
+   "runtime": 2,
+   "overview": "Explore the alternative-history news events that transpired between Season 3 and 4"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 10133107,
+   "seasonNumber": 0,
+   "episodeNumber": 6,
+   "title": "A Game-Changing Engine (1999)",
+   "airDate": "2023-11-10",
+   "airDateUtc": "2023-11-10T05:00:00Z",
+   "runtime": 2,
+   "overview": "Explore the alternative-history news events that transpired between Season 3 and 4"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 10133108,
+   "seasonNumber": 0,
+   "episodeNumber": 7,
+   "title": "Election Night (2000)",
+   "airDate": "2023-11-10",
+   "airDateUtc": "2023-11-10T05:00:00Z",
+   "runtime": 3,
+   "overview": "Explore the alternative-history news events that transpired between Season 3 and 4"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 10133109,
+   "seasonNumber": 0,
+   "episodeNumber": 8,
+   "title": "Soviet Economic Boom (2001)",
+   "airDate": "2023-11-10",
+   "airDateUtc": "2023-11-10T05:00:00Z",
+   "runtime": 3,
+   "overview": "Explore the alternative-history news events that transpired between Season 3 and 4"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 10172270,
+   "seasonNumber": 0,
+   "episodeNumber": 9,
+   "title": "Mars Landing (1975)",
+   "airDate": "2021-02-19",
+   "airDateUtc": "2021-02-19T05:00:00Z",
+   "runtime": 2,
+   "overview": "Explore the alternative-history events that transpired between Seasons 1 & 2"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 10172271,
+   "seasonNumber": 0,
+   "episodeNumber": 10,
+   "title": "Reagan Defeats Kennedy (1976)",
+   "airDate": "2021-02-19",
+   "airDateUtc": "2021-02-19T05:00:00Z",
+   "runtime": 2,
+   "overview": "Explore the alternative-history events that transpired between Seasons 1 & 2"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 10172272,
+   "seasonNumber": 0,
+   "episodeNumber": 11,
+   "title": "Sea Dragon Launch (1977)",
+   "airDate": "2021-02-19",
+   "airDateUtc": "2021-02-19T05:00:00Z",
+   "runtime": 2,
+   "overview": "Explore the alternative-history events that transpired between Seasons 1 & 2"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 10172273,
+   "seasonNumber": 0,
+   "episodeNumber": 12,
+   "title": "Space Sweeps Hollywood (1978)",
+   "airDate": "2021-02-19",
+   "airDateUtc": "2021-02-19T05:00:00Z",
+   "runtime": 1,
+   "overview": "Explore the alternative-history events that transpired between Seasons 1 & 2"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 10172274,
+   "seasonNumber": 0,
+   "episodeNumber": 13,
+   "title": "Panama Canal Control (1979)",
+   "airDate": "2021-02-19",
+   "airDateUtc": "2021-02-19T05:00:00Z",
+   "runtime": 3,
+   "overview": "Explore the alternative-history events that transpired between Seasons 1 & 2"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 10172275,
+   "seasonNumber": 0,
+   "episodeNumber": 14,
+   "title": "Lennon Survives (1980)",
+   "airDate": "2021-02-19",
+   "airDateUtc": "2021-02-19T05:00:00Z",
+   "runtime": 2,
+   "overview": "Explore the alternative-history events that transpired between Seasons 1 & 2"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 10172276,
+   "seasonNumber": 0,
+   "episodeNumber": 15,
+   "title": "Military Shuttle Launch (1981)",
+   "airDate": "2021-02-19",
+   "airDateUtc": "2021-02-19T05:00:00Z",
+   "runtime": 1,
+   "overview": "Explore the alternative-history events that transpired between Seasons 1 & 2"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 10172278,
+   "seasonNumber": 0,
+   "episodeNumber": 16,
+   "title": "Berlin Crisis (1982)",
+   "airDate": "2021-02-19",
+   "airDateUtc": "2021-02-19T05:00:00Z",
+   "runtime": 3,
+   "overview": "Explore the alternative-history events that transpired between Seasons 1 & 2"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 10173865,
+   "seasonNumber": 0,
+   "episodeNumber": 17,
+   "title": "The Rogers Report (1984)",
+   "airDate": "2022-06-10",
+   "airDateUtc": "2022-06-10T04:00:00Z",
+   "runtime": 2,
+   "overview": "Explore the alternative-history news events that transpired between Seasons 2 & 3"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 10173866,
+   "seasonNumber": 0,
+   "episodeNumber": 18,
+   "title": "Internet Accessibility (1985)",
+   "airDate": "2022-06-10",
+   "airDateUtc": "2022-06-10T04:00:00Z",
+   "runtime": 1,
+   "overview": "Explore the alternative-history news events that transpired between Seasons 2 & 3"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 10173867,
+   "seasonNumber": 0,
+   "episodeNumber": 19,
+   "title": "Global Space Boom (1986)",
+   "airDate": "2022-06-10",
+   "airDateUtc": "2022-06-10T04:00:00Z",
+   "runtime": 1,
+   "overview": "Explore the alternative-history news events that transpired between Seasons 2 & 3"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 10173868,
+   "seasonNumber": 0,
+   "episodeNumber": 20,
+   "title": "Clean Nuclear Energy (1987)",
+   "airDate": "2022-06-10",
+   "airDateUtc": "2022-06-10T04:00:00Z",
+   "runtime": 2,
+   "overview": "Explore the alternative-history news events that transpired between Seasons 2 & 3"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 10173869,
+   "seasonNumber": 0,
+   "episodeNumber": 21,
+   "title": "Mexico's New President (1988)",
+   "airDate": "2022-06-10",
+   "airDateUtc": "2022-06-10T04:00:00Z",
+   "runtime": 2,
+   "overview": "Explore the alternative-history news events that transpired between Seasons 2 & 3"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 10173870,
+   "seasonNumber": 0,
+   "episodeNumber": 22,
+   "title": "Pathfinder Tragedy (1989)",
+   "airDate": "2022-06-10",
+   "airDateUtc": "2022-06-10T04:00:00Z",
+   "runtime": 1,
+   "overview": "Explore the alternative-history news events that transpired between Seasons 2 & 3"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 10173871,
+   "seasonNumber": 0,
+   "episodeNumber": 23,
+   "title": "North Korean Launch (1990)",
+   "airDate": "2022-06-10",
+   "airDateUtc": "2022-06-10T04:00:00Z",
+   "runtime": 1,
+   "overview": "Explore the alternative-history news events that transpired between Seasons 2 & 3"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 10173872,
+   "seasonNumber": 0,
+   "episodeNumber": 24,
+   "title": "Kuwait Invasion (1991)",
+   "airDate": "2022-06-10",
+   "airDateUtc": "2022-06-10T04:00:00Z",
+   "runtime": 1,
+   "overview": "Explore the alternative-history news events that transpired between Seasons 2 & 3"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 10173873,
+   "seasonNumber": 0,
+   "episodeNumber": 25,
+   "title": "Presidential Primaries (1992)",
+   "airDate": "2022-06-10",
+   "airDateUtc": "2022-06-10T04:00:00Z",
+   "runtime": 2,
+   "finaleType": "season",
+   "overview": "Explore the alternative-history news events that transpired between Seasons 2 & 3"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 11648906,
+   "seasonNumber": 0,
+   "episodeNumber": 26,
+   "airedAfterSeasonNumber": 4,
+   "title": "The Next Giant Leap: 2004-2012  - Bragg Wins (2004)",
+   "airDate": "2026-02-27",
+   "airDateUtc": "2026-02-27T05:00:00Z",
+   "runtime": 2
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 11648907,
+   "seasonNumber": 0,
+   "episodeNumber": 27,
+   "airedAfterSeasonNumber": 4,
+   "title": "The Next Giant Leap: 2004-2012 - North Korean Base (2005)",
+   "airDate": "2026-02-27",
+   "airDateUtc": "2026-02-27T05:00:00Z",
+   "runtime": 2
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 11648908,
+   "seasonNumber": 0,
+   "episodeNumber": 28,
+   "airedAfterSeasonNumber": 4,
+   "title": "The Next Giant Leap: 2004-2012 - Peacekeepers (2006)",
+   "airDate": "2026-02-27",
+   "airDateUtc": "2026-02-27T05:00:00Z",
+   "runtime": 2
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 11648909,
+   "seasonNumber": 0,
+   "episodeNumber": 29,
+   "airedAfterSeasonNumber": 4,
+   "title": "The Next Giant Leap: 2004-2012 - A New Alliance (2007)",
+   "airDate": "2026-02-27",
+   "airDateUtc": "2026-02-27T05:00:00Z",
+   "runtime": 2
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 11648910,
+   "seasonNumber": 0,
+   "episodeNumber": 30,
+   "airedAfterSeasonNumber": 4,
+   "title": "The Next Giant Leap: 2004-2012 - Space Elevator (2008)",
+   "airDate": "2026-02-27",
+   "airDateUtc": "2026-02-27T05:00:00Z",
+   "runtime": 2
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 11648911,
+   "seasonNumber": 0,
+   "episodeNumber": 31,
+   "airedAfterSeasonNumber": 4,
+   "title": "The Next Giant Leap: 2004-2012 - Radiation Shield (2009)",
+   "airDate": "2026-02-27",
+   "airDateUtc": "2026-02-27T05:00:00Z",
+   "runtime": 2
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 11648912,
+   "seasonNumber": 0,
+   "episodeNumber": 32,
+   "airedAfterSeasonNumber": 4,
+   "title": "The Next Giant Leap: 2004-2012 - A Final Journey (2010)",
+   "airDate": "2026-02-27",
+   "airDateUtc": "2026-02-27T05:00:00Z",
+   "runtime": 2
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 11648913,
+   "seasonNumber": 0,
+   "episodeNumber": 33,
+   "airedAfterSeasonNumber": 4,
+   "title": "The Next Giant Leap: 2004-2012 - Refugees on Mars (2011)",
+   "airDate": "2026-02-27",
+   "airDateUtc": "2026-02-27T05:00:00Z",
+   "runtime": 2
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 11648914,
+   "seasonNumber": 0,
+   "episodeNumber": 34,
+   "airedAfterSeasonNumber": 4,
+   "title": "The Next Giant Leap: 2004-2012 - M-6 Protests (2012)",
+   "airDate": "2026-02-27",
+   "airDateUtc": "2026-02-27T05:00:00Z",
+   "runtime": 2
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 11832765,
+   "seasonNumber": 0,
+   "episodeNumber": 35,
+   "airedAfterSeasonNumber": 3,
+   "airedBeforeSeasonNumber": 4,
+   "title": "Helios Recruitment",
+   "airDate": "2023-10-10",
+   "airDateUtc": "2023-10-10T04:00:00Z",
+   "runtime": 2,
+   "overview": "Helios Recruitment for Mars"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 6923960,
+   "seasonNumber": 1,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 1,
+   "title": "Red Moon",
+   "airDate": "2019-11-01",
+   "airDateUtc": "2019-11-01T04:00:00Z",
+   "runtime": 65,
+   "overview": "NASA is in crisis as the Soviets land the first man on the moon in 1969, the beginning of an alternate history.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/356202/6923960.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 7359066,
+   "seasonNumber": 1,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 2,
+   "title": "He Built the Saturn V",
+   "airDate": "2019-11-01",
+   "airDateUtc": "2019-11-01T04:00:00Z",
+   "runtime": 62,
+   "overview": "Director von Braun opposes President Nixon’s directive, with dire consequences.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/356202/7359066.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 7410976,
+   "seasonNumber": 1,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 3,
+   "title": "Nixon's Women",
+   "airDate": "2019-11-01",
+   "airDateUtc": "2019-11-01T04:00:00Z",
+   "runtime": 62,
+   "overview": "Deke must recruit female astronauts after Russia lands a woman on the moon.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/356202/7410976.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 7430851,
+   "seasonNumber": 1,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 4,
+   "title": "Prime Crew",
+   "airDate": "2019-11-08",
+   "airDateUtc": "2019-11-08T05:00:00Z",
+   "runtime": 61,
+   "overview": "A training accident spurs a national debate about women astronauts.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/356202/7430851.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 7439964,
+   "seasonNumber": 1,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 5,
+   "title": "Into the Abyss",
+   "airDate": "2019-11-15",
+   "airDateUtc": "2019-11-15T05:00:00Z",
+   "runtime": 59,
+   "overview": "Ed and the crew change Apollo 15’s landing site after lunar ice is detected.",
+   "image": "https://artworks.thetvdb.com/banners/series/356202/episodes/7439964.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 7466053,
+   "seasonNumber": 1,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 6,
+   "title": "Home Again",
+   "airDate": "2019-11-22",
+   "airDateUtc": "2019-11-22T05:00:00Z",
+   "runtime": 60,
+   "overview": "A launchpad accident leads to delayed missions and FBI background checks.",
+   "image": "https://artworks.thetvdb.com/banners/series/356202/episodes/7450447.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 7466054,
+   "seasonNumber": 1,
+   "episodeNumber": 7,
+   "absoluteEpisodeNumber": 7,
+   "title": "Hi Bob",
+   "airDate": "2019-11-29",
+   "airDateUtc": "2019-11-29T05:00:00Z",
+   "runtime": 59,
+   "overview": "Ed, Gordo, and Danielle struggle with an extended Jamestown mission.",
+   "image": "https://artworks.thetvdb.com/banners/series/356202/episodes/7466054.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 7466055,
+   "seasonNumber": 1,
+   "episodeNumber": 8,
+   "absoluteEpisodeNumber": 8,
+   "title": "Rupture",
+   "airDate": "2019-12-06",
+   "airDateUtc": "2019-12-06T05:00:00Z",
+   "runtime": 57,
+   "overview": "NASA preps a Jamestown relief mission, while Karen waits for news at the hospital.",
+   "image": "https://artworks.thetvdb.com/banners/series/356202/episodes/7466055.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 7466056,
+   "seasonNumber": 1,
+   "episodeNumber": 9,
+   "absoluteEpisodeNumber": 9,
+   "title": "Bent Bird",
+   "airDate": "2019-12-13",
+   "airDateUtc": "2019-12-13T05:00:00Z",
+   "runtime": 48,
+   "overview": "A crisis in space puts the Apollo 24 and 25 crews in peril.",
+   "image": "https://artworks.thetvdb.com/banners/series/356202/episodes/7466056.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 7466057,
+   "seasonNumber": 1,
+   "episodeNumber": 10,
+   "absoluteEpisodeNumber": 10,
+   "title": "A City Upon a Hill",
+   "airDate": "2019-12-20",
+   "airDateUtc": "2019-12-20T05:00:00Z",
+   "runtime": 76,
+   "finaleType": "season",
+   "overview": "Ed handles a trespasser. Ellen and Deke chart a new course without Mission Control.",
+   "image": "https://artworks.thetvdb.com/banners/series/356202/episodes/7466057.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 8053683,
+   "seasonNumber": 2,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 11,
+   "title": "Every Little Thing",
+   "airDate": "2021-02-19",
+   "airDateUtc": "2021-02-19T05:00:00Z",
+   "runtime": 56,
+   "overview": "Nearly a decade later, technology and lunar exploration have taken huge strides—but a solar storm threatens the astronauts on Jamestown.",
+   "image": "https://artworks.thetvdb.com/banners/series/356202/episodes/603017f40411c.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 8056246,
+   "seasonNumber": 2,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 12,
+   "title": "The Bleeding Edge",
+   "airDate": "2021-02-26",
+   "airDateUtc": "2021-02-26T05:00:00Z",
+   "runtime": 56,
+   "overview": "Margo must lead a seemingly impossible mission. Danielle wants to return to the moon. Gordo grapples with life on Earth.",
+   "image": "https://artworks.thetvdb.com/banners/series/356202/episodes/60357e9302e6b.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 8056247,
+   "seasonNumber": 2,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 13,
+   "title": "Rules of Engagement",
+   "airDate": "2021-03-05",
+   "airDateUtc": "2021-03-05T05:00:00Z",
+   "runtime": 60,
+   "overview": "A dispute on the moon prompts NASA officials to consider arming astronauts. Ed’s past comes back to haunt him.",
+   "image": "https://artworks.thetvdb.com/banners/series/356202/episodes/6042213a877fe.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 8056248,
+   "seasonNumber": 2,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 14,
+   "title": "Pathfinder",
+   "airDate": "2021-03-12",
+   "airDateUtc": "2021-03-12T05:00:00Z",
+   "runtime": 60,
+   "overview": "With a little help from Molly, Ed plans a career change—as his old Jamestown crewmates Gordo and Danielle struggle.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8056248/screencap/604ba5fa3792e.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 8056249,
+   "seasonNumber": 2,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 15,
+   "title": "The Weight",
+   "airDate": "2021-03-19",
+   "airDateUtc": "2021-03-19T04:00:00Z",
+   "runtime": 58,
+   "overview": "Ed’s reckless behavior at NASA shakes the foundation of the Baldwin family. Tracy attempts to readapt to life in space.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8056249/screencap/60551a8b0a14b.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 8056250,
+   "seasonNumber": 2,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 16,
+   "title": "Best-Laid Plans",
+   "airDate": "2021-03-26",
+   "airDateUtc": "2021-03-26T04:00:00Z",
+   "runtime": 59,
+   "overview": "American astronauts and NASA leadership prepare for a new mission with unlikely partners. Ellen gets in touch with an old friend.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8056250/screencap/605e5f61c4699.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 8056251,
+   "seasonNumber": 2,
+   "episodeNumber": 7,
+   "absoluteEpisodeNumber": 17,
+   "title": "Don't Be Cruel",
+   "airDate": "2021-04-02",
+   "airDateUtc": "2021-04-02T04:00:00Z",
+   "runtime": 62,
+   "overview": "Ellen is challenged by her new role. Margo’s allegiances are put to the test. Karen explores new opportunities—personally and professionally.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8056251/screencap/606b3c8786c4e.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 8056252,
+   "seasonNumber": 2,
+   "episodeNumber": 8,
+   "absoluteEpisodeNumber": 18,
+   "title": "And Here's to You",
+   "airDate": "2021-04-09",
+   "airDateUtc": "2021-04-09T04:00:00Z",
+   "runtime": 69,
+   "overview": "Gordo returns to space. Molly faces an upsetting new reality. Aleida confronts her first major hurdle at work.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8056252/screencap/6074a4bf67fcb.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 8056253,
+   "seasonNumber": 2,
+   "episodeNumber": 9,
+   "absoluteEpisodeNumber": 19,
+   "title": "Triage",
+   "airDate": "2021-04-16",
+   "airDateUtc": "2021-04-16T04:00:00Z",
+   "runtime": 56,
+   "overview": "The rivalry between American astronauts and Soviet cosmonauts intensifies as last-minute changes impact the Pathfinder mission plan.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8056253/screencap/607ddd2fa0bbb.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 8056254,
+   "seasonNumber": 2,
+   "episodeNumber": 10,
+   "absoluteEpisodeNumber": 20,
+   "title": "The Grey",
+   "airDate": "2021-04-23",
+   "airDateUtc": "2021-04-23T04:00:00Z",
+   "runtime": 76,
+   "finaleType": "season",
+   "overview": "Season finale. Tensions between the U.S. and the Soviet Union reach an all-time high on the moon, throwing multiple missions into jeopardy.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8056254/screencap/6089b28e74837.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 9105060,
+   "seasonNumber": 3,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 21,
+   "title": "Polaris",
+   "airDate": "2022-06-10",
+   "airDateUtc": "2022-06-10T04:00:00Z",
+   "runtime": 57,
+   "overview": "Nearly 10 years have passed. Danielle and Ed attend a celebration, where things take a terrifying turn.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9105060/screencap/62a2e2f7c7294.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 9105062,
+   "seasonNumber": 3,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 22,
+   "title": "Game Changer",
+   "airDate": "2022-06-17",
+   "airDateUtc": "2022-06-17T04:00:00Z",
+   "runtime": 62,
+   "overview": "A commercial spaceflight company makes an announcement. The choice over who’ll command the Mars mission leads to a shift in personnel.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9105062/screencap/62a2e37f36768.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 9105065,
+   "seasonNumber": 3,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 23,
+   "title": "All In",
+   "airDate": "2022-06-24",
+   "airDateUtc": "2022-06-24T04:00:00Z",
+   "runtime": 61,
+   "overview": "As NASA scrambles to prepare for the launch to Mars, Margo is confronted with a harsh personal reality.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9105065/screencap/62abe87eb551e.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 9105068,
+   "seasonNumber": 3,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 24,
+   "title": "Happy Valley",
+   "airDate": "2022-07-01",
+   "airDateUtc": "2022-07-01T04:00:00Z",
+   "runtime": 52,
+   "overview": "A surprise maneuver during the journey to Mars provokes desperate measures.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9105068/screencap/62b52fb975fbe.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 9105070,
+   "seasonNumber": 3,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 25,
+   "title": "Seven Minutes of Terror",
+   "airDate": "2022-07-08",
+   "airDateUtc": "2022-07-08T04:00:00Z",
+   "runtime": 63,
+   "overview": "The race to land first on Mars brings together unexpected allies.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9105070/screencap/62be4a9c8ef4a.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 9105073,
+   "seasonNumber": 3,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 26,
+   "title": "New Eden",
+   "airDate": "2022-07-15",
+   "airDateUtc": "2022-07-15T04:00:00Z",
+   "runtime": 60,
+   "overview": "The astronauts move quickly to build Martian bases.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9105073/screencap/62c7ad559bb38.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 9105076,
+   "seasonNumber": 3,
+   "episodeNumber": 7,
+   "absoluteEpisodeNumber": 27,
+   "title": "Bring It Down",
+   "airDate": "2022-07-22",
+   "airDateUtc": "2022-07-22T04:00:00Z",
+   "runtime": 57,
+   "overview": "A joint mission brings about conflict between crew members.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9105076/screencap/62d0e9a82d9cb.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 9105079,
+   "seasonNumber": 3,
+   "episodeNumber": 8,
+   "absoluteEpisodeNumber": 28,
+   "title": "The Sands of Ares",
+   "airDate": "2022-07-29",
+   "airDateUtc": "2022-07-29T04:00:00Z",
+   "runtime": 64,
+   "overview": "After a sudden crisis, the Martian crews pull together.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9105079/screencap/62da0315b146f.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 9105080,
+   "seasonNumber": 3,
+   "episodeNumber": 9,
+   "absoluteEpisodeNumber": 29,
+   "title": "Coming Home",
+   "airDate": "2022-08-05",
+   "airDateUtc": "2022-08-05T04:00:00Z",
+   "runtime": 46,
+   "overview": "Plans to leave Mars are complicated by an unforeseen issue.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9105080/screencap/62e36487e65cf.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 9105083,
+   "seasonNumber": 3,
+   "episodeNumber": 10,
+   "absoluteEpisodeNumber": 30,
+   "title": "Stranger In A Strange Land",
+   "airDate": "2022-08-12",
+   "airDateUtc": "2022-08-12T04:00:00Z",
+   "runtime": 82,
+   "finaleType": "season",
+   "overview": "The Martian crew debates how to save the life of one of their own.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9105083/screencap/62ecb4cd068a5.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 10020188,
+   "seasonNumber": 4,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 31,
+   "title": "Glasnost",
+   "airDate": "2023-11-10",
+   "airDateUtc": "2023-11-10T05:00:00Z",
+   "runtime": 65,
+   "overview": "Eight years later, a new mission begins: Capture an asteroid. Aleida and Danielle are still haunted by events from the past.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10020188/screencap/654ddae4e9911.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 10087058,
+   "seasonNumber": 4,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 32,
+   "title": "Have a Nice Sol",
+   "airDate": "2023-11-17",
+   "airDateUtc": "2023-11-17T05:00:00Z",
+   "runtime": 52,
+   "overview": "New Helios employees arrive on Mars as NASA undergoes major changes.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10087058/screencap/654ddaeaced43.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 10087059,
+   "seasonNumber": 4,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 33,
+   "title": "The Bear Hug",
+   "airDate": "2023-11-22",
+   "airDateUtc": "2023-11-22T05:00:00Z",
+   "runtime": 70,
+   "overview": "Miles tries to make ends meet. Margo finds herself pulled into a dangerous situation.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10087059/screencap/6556db1cb346d.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 10087060,
+   "seasonNumber": 4,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 34,
+   "title": "House Divided",
+   "airDate": "2023-12-01",
+   "airDateUtc": "2023-12-01T05:00:00Z",
+   "runtime": 58,
+   "overview": "An accident on Mars strains relationships, while Miles embarks on a risky venture.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10087060/screencap/655d63ccf3d6f.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 10087061,
+   "seasonNumber": 4,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 35,
+   "title": "Goldilocks",
+   "airDate": "2023-12-08",
+   "airDateUtc": "2023-12-08T05:00:00Z",
+   "runtime": 55,
+   "overview": "A discovery sends teams across Earth and Mars scrambling for answers.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10087061/screencap/6529c148418a1.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 10087062,
+   "seasonNumber": 4,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 36,
+   "title": "Leningrad",
+   "airDate": "2023-12-15",
+   "airDateUtc": "2023-12-15T05:00:00Z",
+   "runtime": 55,
+   "overview": "Unlikely partnerships are formed at a high-stakes international conference.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10087062/screencap/657282f867ead.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 10087063,
+   "seasonNumber": 4,
+   "episodeNumber": 7,
+   "absoluteEpisodeNumber": 37,
+   "title": "Crossing the Line",
+   "airDate": "2023-12-22",
+   "airDateUtc": "2023-12-22T05:00:00Z",
+   "runtime": 42,
+   "overview": "A group on Mars takes drastic measures. Margo grapples with a new assignment.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10087063/screencap/657bb8f2aa9b3.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 10087064,
+   "seasonNumber": 4,
+   "episodeNumber": 8,
+   "absoluteEpisodeNumber": 38,
+   "title": "Legacy",
+   "airDate": "2023-12-29",
+   "airDateUtc": "2023-12-29T05:00:00Z",
+   "runtime": 51,
+   "overview": "Plans are made with interplanetary ramifications. Ed begins working with an unexpected partner.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10087064/screencap/658e1c1567135.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 10087065,
+   "seasonNumber": 4,
+   "episodeNumber": 9,
+   "absoluteEpisodeNumber": 39,
+   "title": "Brazil",
+   "airDate": "2024-01-05",
+   "airDateUtc": "2024-01-05T05:00:00Z",
+   "runtime": 46,
+   "overview": "Things start to go awry just as an important mission approaches a critical juncture.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10087065/screencap/658e2902e3c9f.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 10087066,
+   "seasonNumber": 4,
+   "episodeNumber": 10,
+   "absoluteEpisodeNumber": 40,
+   "title": "Perestroika",
+   "airDate": "2024-01-12",
+   "airDateUtc": "2024-01-12T05:00:00Z",
+   "runtime": 76,
+   "finaleType": "season",
+   "overview": "Tensions on Earth and Mars come to a head.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10087066/screencap/659763942dae9.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 11570678,
+   "seasonNumber": 5,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 41,
+   "title": "First Light",
+   "airDate": "2026-03-27",
+   "airDateUtc": "2026-03-27T04:00:00Z",
+   "runtime": 59,
+   "overview": "Nine years after the Goldilocks asteroid heist, Happy Valley has grown into a thriving colony. But an unsettling discovery threatens their peace.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11570678/screencap/69c5dab347444.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 11571454,
+   "seasonNumber": 5,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 42,
+   "title": "The Hard Six",
+   "airDate": "2026-04-03",
+   "airDateUtc": "2026-04-03T04:00:00Z",
+   "runtime": 46,
+   "overview": "Ed rallies Happy Valley's residents in support of one of their own. Kelly refuses to back down from an opportunity.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11571454/screencap/69c5dac32dc06.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 11571455,
+   "seasonNumber": 5,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 43,
+   "title": "Home",
+   "airDate": "2026-04-10",
+   "airDateUtc": "2026-04-10T04:00:00Z",
+   "runtime": 59,
+   "overview": "The consequences of Ed’s actions begin to play out. Aleida finds an unexpected solution to her problem.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11571455/screencap/69cf11f7e611c.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 11571456,
+   "seasonNumber": 5,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 44,
+   "title": "Open Source",
+   "airDate": "2026-04-17",
+   "airDateUtc": "2026-04-17T04:00:00Z",
+   "runtime": 56,
+   "overview": "Alex takes Ed’s advice and finds a new project to focus on: a job at Helios.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11571456/screencap/69d84c75b772f.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 11571457,
+   "seasonNumber": 5,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 45,
+   "title": "Svoboda",
+   "airDate": "2026-04-24",
+   "airDateUtc": "2026-04-24T04:00:00Z",
+   "runtime": 52,
+   "overview": "Chaos erupts on Mars following a shocking revelation.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11571457/screencap/69e186cb390ef.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 11571458,
+   "seasonNumber": 5,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 46,
+   "title": "No Sudden Moves",
+   "airDate": "2026-05-01",
+   "airDateUtc": "2026-05-01T04:00:00Z",
+   "runtime": 49,
+   "overview": "A desperate group of Marsies tries to rectify a dangerous situation.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11571458/screencap/69eac152cd86e.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 11571459,
+   "seasonNumber": 5,
+   "episodeNumber": 7,
+   "absoluteEpisodeNumber": 47,
+   "title": "The Sirens of Titan",
+   "airDate": "2026-05-08",
+   "airDateUtc": "2026-05-08T04:00:00Z",
+   "runtime": 51,
+   "overview": "A fatal miscalculation puts the Titan mission in jeopardy. Dev makes a drastic decision.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11571459/screencap/69f3fba9e852e.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 11571460,
+   "seasonNumber": 5,
+   "episodeNumber": 8,
+   "absoluteEpisodeNumber": 48,
+   "title": "Brave New World",
+   "airDate": "2026-05-15",
+   "airDateUtc": "2026-05-15T04:00:00Z",
+   "runtime": 52,
+   "overview": "The Titan crew weighs a risky move, while Mars struggles to keep up morale.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11571460/screencap/69fd3687cfa7a.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 11571461,
+   "seasonNumber": 5,
+   "episodeNumber": 9,
+   "absoluteEpisodeNumber": 49,
+   "title": "Sons and Daughters",
+   "airDate": "2026-05-22",
+   "airDateUtc": "2026-05-22T04:00:00Z",
+   "runtime": 44,
+   "overview": "The Marsies formulate a plan. Kelly faces a major setback.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11571461/screencap/6a0670a746fd8.jpg"
+  },
+  {
+   "tvdbShowId": 356202,
+   "tvdbId": 11571462,
+   "seasonNumber": 5,
+   "episodeNumber": 10,
+   "absoluteEpisodeNumber": 50,
+   "title": "This Land Is Our Land",
+   "airDate": "2026-05-29",
+   "airDateUtc": "2026-05-29T04:00:00Z",
+   "runtime": 70,
+   "finaleType": "season",
+   "overview": "The resilience of Mars is put to the test.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11571462/screencap/6a0fab01d5c75.jpg"
+  }
+ ]
+}

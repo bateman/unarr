@@ -1,0 +1,22 @@
+{
+  "body": {
+    "page": 2,
+    "pageSize": 1,
+    "records": [
+      {
+        "id": 2,
+        "title": "Frieren: Beyond Journey's End",
+        "tvdbId": 424536
+      }
+    ],
+    "sortDirection": "descending",
+    "sortKey": "title",
+    "totalRecords": 2
+  },
+  "recordedAt": "2026-11-09T23:47:55Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/importlistexclusion/paged?page=2&pageSize=1&sortKey=title&sortDirection=descending"
+  },
+  "status": 200
+}

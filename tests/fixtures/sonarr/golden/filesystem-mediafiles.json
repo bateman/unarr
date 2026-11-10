@@ -1,0 +1,15 @@
+{
+  "body": [
+    {
+      "name": "The Pitt (2025) - S01E04 - 10-00 A.M [WEBDL-480p][AAC 1.0][x264]-Fixture.mkv",
+      "path": "/tv/The Pitt/Season 01/The Pitt (2025) - S01E04 - 10-00 A.M [WEBDL-480p][AAC 1.0][x264]-Fixture.mkv",
+      "relativePath": "Season 01/The Pitt (2025) - S01E04 - 10-00 A.M [WEBDL-480p][AAC 1.0][x264]-Fixture.mkv"
+    }
+  ],
+  "recordedAt": "2026-11-09T22:24:32Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/filesystem/mediafiles?path=/tv/The%20Pitt/"
+  },
+  "status": 200
+}

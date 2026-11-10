@@ -103,7 +103,8 @@ fn os_release() -> (String, String) {
 struct Inner {
     personality: Personality,
     db: Db,
-    settings: Settings,
+    /// Replaced whole when the host settings are saved.
+    settings: std::sync::RwLock<Arc<Settings>>,
     runtime: RuntimeInfo,
     logs: LogBuffer,
     hub: Hub,
@@ -121,6 +122,11 @@ struct Inner {
     /// `ReleasePushController.PushLock`: one push decided and processed
     /// at a time, so two pushes of one episode do not both grab.
     push_lock: tokio::sync::Mutex<()>,
+    /// The session cookie's name, fixed the first time it is needed.
+    auth_cookie: std::sync::OnceLock<String>,
+    /// Where the metadata hosts are asked, when not the real ones (a mock,
+    /// in the tests and the replay); applied when the runtime starts.
+    metadata: Mutex<Option<unarr_core::metadata::Upstreams>>,
 }
 
 /// `TimeSpan.FromMinutes(30)`.
@@ -143,7 +149,7 @@ impl AppState {
             personality,
             downloads,
             db,
-            settings,
+            settings: std::sync::RwLock::new(Arc::new(settings)),
             runtime,
             logs,
             hub: Hub::new(),
@@ -151,6 +157,8 @@ impl AppState {
             releases: Mutex::new(HashMap::new()),
             commands: OnceLock::new(),
             push_lock: tokio::sync::Mutex::new(()),
+            auth_cookie: std::sync::OnceLock::new(),
+            metadata: Mutex::new(None),
         }))
     }
 
@@ -169,9 +177,15 @@ impl AppState {
             url_base: self.settings().url_base.clone(),
             app_name: self.personality().app_name().to_string(),
             app_version: crate::compat::emulated_version(self.personality()).to_string(),
+            media_cover_dir: Some(self.runtime().media_cover_dir.clone()),
             ..unarr_core::notifications::Identity::default()
         };
         let runtime = Runtime::new(self.db().clone(), self.downloads().clone(), clock, identity).await?;
+        if let Some(upstreams) = self.0.metadata.lock().unwrap().clone() {
+            runtime.set_upstreams(upstreams);
+        }
+        runtime.set_media_cover_dir(self.runtime().media_cover_dir.clone());
+        runtime.set_backup(self.backup_context());
         runtime.start();
         let mut events = runtime.subscribe();
         let state = self.clone();
@@ -185,6 +199,7 @@ impl AppState {
                     Ok(Event::QueueUpdated) => crate::routes::queue::broadcast_queue(&state),
                     Ok(Event::HealthChanged) => state.hub().broadcast("health", json!({"action": "sync"})),
                     Ok(Event::Import(e)) => crate::relay::relay_import(&state, &e).await,
+                    Ok(Event::SeriesUpdated { series_id }) => crate::relay::broadcast_series(&state, series_id).await,
                     Err(tokio::sync::broadcast::error::RecvError::Lagged(_)) => continue,
                     Err(tokio::sync::broadcast::error::RecvError::Closed) => break,
                 }
@@ -192,6 +207,15 @@ impl AppState {
         });
         let _ = self.0.commands.set(runtime);
         Ok(())
+    }
+
+    /// Ask the metadata hosts through `upstreams` instead of directly.
+    /// Takes effect at once when the runtime is up, else when it starts.
+    pub fn set_metadata_upstreams(&self, upstreams: unarr_core::metadata::Upstreams) {
+        if let Some(runtime) = self.0.commands.get() {
+            runtime.set_upstreams(upstreams.clone());
+        }
+        *self.0.metadata.lock().unwrap() = Some(upstreams);
     }
 
     /// A provider changed: the health checks that follow one, in the
@@ -228,6 +252,21 @@ impl AppState {
             .map(|(r, _)| r.clone())
     }
 
+    /// The name of the session cookie: `<InstanceName>Auth`, letters and
+    /// digits only. The originals build it once, so a renamed instance keeps
+    /// its sessions until the next start.
+    pub fn auth_cookie(&self) -> &str {
+        self.0.auth_cookie.get_or_init(|| {
+            let name: String = self
+                .settings()
+                .instance_name
+                .chars()
+                .filter(|c| c.is_ascii_alphanumeric())
+                .collect();
+            format!("{name}Auth")
+        })
+    }
+
     pub fn push_lock(&self) -> &tokio::sync::Mutex<()> {
         &self.0.push_lock
     }
@@ -251,6 +290,15 @@ impl AppState {
         &self.0.hub
     }
 
+    /// What backups need to know about this installation.
+    pub fn backup_context(&self) -> unarr_core::backup::BackupContext {
+        unarr_core::backup::BackupContext {
+            personality: self.personality(),
+            app_data: self.runtime().app_data.clone(),
+            version: env!("CARGO_PKG_VERSION").to_string(),
+        }
+    }
+
     pub fn logs(&self) -> &LogBuffer {
         &self.0.logs
     }
@@ -263,8 +311,13 @@ impl AppState {
         &self.0.db
     }
 
-    pub fn settings(&self) -> &Settings {
-        &self.0.settings
+    pub fn settings(&self) -> Arc<Settings> {
+        self.0.settings.read().unwrap().clone()
+    }
+
+    /// Install new host settings (a saved `config/host`).
+    pub fn set_settings(&self, settings: Settings) {
+        *self.0.settings.write().unwrap() = Arc::new(settings);
     }
 
     pub fn runtime(&self) -> &RuntimeInfo {

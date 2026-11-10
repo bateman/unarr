@@ -1,0 +1,12 @@
+{
+  "body": {
+    "oauthUrl": "https://simkl.com/oauth/authorize?client_id=3281c139f576b2f59c1389b22337140b6b087ee17e000e89dbafdcf20af6dac7&response_type=code&redirect_uri=https%3A%2F%2Fauth.servarr.com%2Fv1%2Fsimkl_sonarr%2Fauth&state=http%3A%2F%2Flocalhost%3A8989%2Foauth.html"
+  },
+  "recordedAt": "2026-11-09T22:24:49Z",
+  "request": {
+    "body": "bodies/importlist-test.json",
+    "method": "POST",
+    "path": "/api/v3/importlist/action/startOAuth?callbackUrl=http%3A%2F%2Flocalhost%3A8989%2Foauth.html"
+  },
+  "status": 200
+}

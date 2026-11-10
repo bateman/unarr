@@ -1,0 +1,22 @@
+{
+ "all": "2026-11-01T10:00:00Z",
+ "settings": {
+  "all": "2026-10-01T08:00:00Z"
+ },
+ "tv_shows": {
+  "all": "2026-11-01T10:00:00Z",
+  "rated_at": null,
+  "plantowatch": "2026-11-01T10:00:00Z",
+  "watching": null,
+  "completed": null,
+  "hold": null,
+  "dropped": null,
+  "removed_from_list": "2026-10-20T09:30:00Z"
+ },
+ "anime": {
+  "all": null
+ },
+ "movies": {
+  "all": null
+ }
+}

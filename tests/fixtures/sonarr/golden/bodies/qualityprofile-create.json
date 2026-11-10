@@ -1,0 +1,9 @@
+{
+ "$from": "qualityprofile-1",
+ "$set": {
+  "id": 0,
+  "name": "Unarr Test",
+  "minFormatScore": 0,
+  "cutoffFormatScore": 0
+ }
+}

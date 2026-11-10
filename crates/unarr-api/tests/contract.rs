@@ -74,6 +74,53 @@ fn import_phase(name: &str) -> bool {
 
 fn mode(name: &str) -> Mode {
     match name {
+        // Phase 3b, series management. The originals download an added
+        // series' covers while the notification goes out, so which URLs
+        // carry a `lastWrite` there is a race.
+        "series-add-notifications" => Mode::Exact(&["timestamp", "dateAdded", "url"]),
+        "series-add-history" => Mode::Exact(&["date", "age", "ageHours", "ageMinutes", "lastSearchTime"]),
+        // The folder the replay's library is in has another parent.
+        "filesystem-tv" => Mode::Exact(&["lastModified", "parent"]),
+        n if n.starts_with("filesystem-") => Mode::Exact(&["lastModified"]),
+        "series-after-delete-pete"
+        | "series-after-importlist-sync-54"
+        | "importlist-get-missing"
+        | "importlist-update-missing" => Mode::Exact(&["traceId"]),
+        // `System.ApplicationException` with the originals' stack.
+        "series-delete-404" => Mode::Exact(&["description"]),
+        n if !n.ends_with("-404") && n.starts_with("episode-")
+            || n.starts_with("episodes-after-")
+            || n.starts_with("parse-")
+            || (n.starts_with("series-") && !n.ends_with("-404")) =>
+        {
+            Mode::Exact(&["lastSearchTime", "added", "dateAdded"])
+        }
+        // Phase 3b's refresh commands: the originals' ids and clocks, and a
+        // posted one may have started by the time it is answered.
+        "refresh-series-silo" | "refresh-series-stick" | "refresh-series-all" => Mode::Exact(&[
+            "id",
+            "queued",
+            "started",
+            "ended",
+            "duration",
+            "stateChangeTime",
+            "lastExecutionTime",
+            "status",
+            "result",
+            "message",
+        ]),
+        n if n.starts_with("refresh-series-") && n.ends_with("-get") => Mode::Exact(&[
+            "id",
+            "queued",
+            "started",
+            "ended",
+            "duration",
+            "stateChangeTime",
+            "lastExecutionTime",
+        ]),
+        // What the refreshes left: episodes searched and files imported
+        // earlier in the recording carry its clock.
+        n if n.starts_with("refresh-series-") => Mode::Exact(&["lastSearchTime", "dateAdded"]),
         // What the notification targets received: Discord embeds carry
         // the moment they were built, webhook payloads the files' clock.
         "delete-notifications" => Mode::Multiset(&["timestamp", "dateAdded"]),
@@ -186,12 +233,22 @@ fn mode(name: &str) -> Mode {
             "message",
         ]),
         // The originals' exceptions carry their stack in the description.
+        "config-mediamanagement-put-invalid"
+        | "qualityprofile-delete-in-use"
+        | "customformat-create-badregex"
+        | "customformat-delete" => Mode::Exact(&["description"]),
+        // The originals answer the quality definitions from a five-second
+        // cache, so right after a bulk update they show what was there
+        // before; Unarr shows what it wrote.
+        "qualitydefinition-update" | "qualitydefinition-after-update" | "qualitydefinition-1-before" => {
+            Mode::Shape
+        }
         "release-episode-missing" | "release-grab-uncached" | "release-grab-unknown-client" => Mode::Shape,
         // The queue's times follow the clock the client was read at; the
         // history and blocklist rows a grab leaves carry the grab's.
         n if n.starts_with("queue") => Mode::Unordered(&["estimatedCompletionTime", "added"]),
         // The originals keep verdicts in a dictionary.
-        "health-after" => Mode::Unordered(&[]),
+        "health-after" | "health-after-importlist-sync" => Mode::Unordered(&[]),
         "history-after-grab"
         | "history-download-id"
         | "history-episode-1-grabbed"
@@ -208,6 +265,11 @@ fn mode(name: &str) -> Mode {
         }
         "diskspace" | "system-task" | "system-task-after" | "log" | "update" | "command"
         | "signalr-negotiate" => Mode::Shape,
+        // The zip carries each application's name, version and clock.
+        "system-backup" => Mode::Exact(&["id", "name", "path", "size", "time"]),
+        // Sonarr builds `contentsUrl` from a route that no longer exists
+        // (`/api/v1//sonarr.txt`); Unarr's names the route that answers.
+        "log-file" => Mode::Exact(&["lastWriteTime", "contentsUrl"]),
         _ => Mode::Exact(&[]),
     }
 }
@@ -245,7 +307,12 @@ struct ReplayDirs {
 
 impl ReplayDirs {
     fn create() -> ReplayDirs {
-        let root = std::env::temp_dir().join(format!("unarr_contract_{}", std::process::id()));
+        ReplayDirs::create_named("replay")
+    }
+
+    /// Tests run side by side in one process: each takes its own name.
+    fn create_named(name: &str) -> ReplayDirs {
+        let root = std::env::temp_dir().join(format!("unarr_contract_{}_{name}", std::process::id()));
         let _ = std::fs::remove_dir_all(&root);
         let tv = root.join("tv");
         let downloads = root.join("downloads");
@@ -319,7 +386,37 @@ fn build_state_in(dirs: Option<&ReplayDirs>, adjust: impl FnOnce(&mut HostConfig
     let mut host = unarr_import::config_xml::read(&dir.join("config.xml"), 8989).expect("config.xml");
     adjust(&mut host);
     let settings = Settings::from_host_config(host, Personality::Sonarr);
-    let runtime = RuntimeInfo::detect(dir);
+    // The replay writes into its app data (backups, a staged restore):
+    // a copy under the replay's directory, never the fixture.
+    let app_data = match dirs {
+        Some(dirs) => {
+            let app_data = dirs.root.join("appdata");
+            let logs = app_data.join("logs");
+            std::fs::create_dir_all(&logs).expect("replay app data");
+            std::fs::copy(dir.join("config.xml"), app_data.join("config.xml")).expect("config.xml copy");
+            // The log files the original had written by `log-file`.
+            // Written at one instant, so the list (last written first)
+            // keeps the order of their names, as recorded.
+            let written = std::time::SystemTime::now();
+            for name in ["sonarr.debug.txt", "sonarr.txt"] {
+                std::fs::write(logs.join(name), "").expect("log file");
+                std::fs::File::options()
+                    .write(true)
+                    .open(logs.join(name))
+                    .and_then(|f| f.set_modified(written))
+                    .expect("log file time");
+            }
+            app_data
+        }
+        None => dir.clone(),
+    };
+    let mut runtime = RuntimeInfo::detect(app_data);
+    // Covers the refreshes download go to the replay's directory, never
+    // into the fixture.
+    runtime.media_cover_dir = match dirs {
+        Some(dirs) => dirs.root.join("MediaCover"),
+        None => std::env::temp_dir().join(format!("unarr_contract_covers_{}", std::process::id())),
+    };
     let logs = LogBuffer::new();
     logs.push("info", "unarr", "contract test".into(), None);
     AppState::new(Personality::Sonarr, db, settings, runtime, logs)
@@ -381,6 +478,11 @@ fn normalize_with(v: &Value, ignore: &[&str], sort_by_id: bool) -> Value {
         Value::Number(n) => match n.as_f64() {
             Some(f) if f.fract() == 0.0 && f.abs() < 1e15 => Value::from(f as i64),
             _ => v.clone(),
+        },
+        // A cover's `lastWrite` is the moment its file was written.
+        Value::String(text) => match text.find("?lastWrite=") {
+            Some(at) => Value::String(format!("{}?lastWrite=…", &text[..at])),
+            None => v.clone(),
         },
         _ => v.clone(),
     }
@@ -472,6 +574,32 @@ struct Golden {
     recorded_at: Option<chrono::DateTime<chrono::Utc>>,
 }
 
+/// A `{"$from": name, "$set": {...}}` body: the body the golden `name`
+/// recorded, its top-level keys replaced (`scripts/record-golden.py`).
+fn derive_body(text: &str, golden_dir: &std::path::Path) -> String {
+    let Ok(Value::Object(spec)) = serde_json::from_str::<Value>(text) else {
+        return text.to_string();
+    };
+    let Some(from) = spec.get("$from").and_then(Value::as_str) else {
+        return text.to_string();
+    };
+    let recorded: Value = serde_json::from_str(
+        &std::fs::read_to_string(golden_dir.join(format!("{from}.json")))
+            .unwrap_or_else(|e| panic!("body derived from {from}: {e}")),
+    )
+    .unwrap();
+    let mut body = match &recorded["body"] {
+        Value::Array(items) => items.first().cloned().unwrap_or(Value::Null),
+        other => other.clone(),
+    };
+    if let (Value::Object(target), Some(Value::Object(set))) = (&mut body, spec.get("$set")) {
+        for (k, v) in set {
+            target.insert(k.clone(), v.clone());
+        }
+    }
+    body.to_string()
+}
+
 fn load_goldens() -> Vec<Golden> {
     let golden_dir = fixture_dir().join("golden");
     let list = std::fs::read_to_string(golden_dir.join("requests.txt")).expect("requests.txt");
@@ -507,8 +635,9 @@ fn load_goldens() -> Vec<Golden> {
         let method = parts.next().unwrap().to_string();
         let path = parts.next().unwrap().to_string();
         let body = parts.next().map(|body_file| {
-            std::fs::read_to_string(golden_dir.join(body_file.trim()))
-                .unwrap_or_else(|e| panic!("body file {body_file} for {name}: {e}"))
+            let text = std::fs::read_to_string(golden_dir.join(body_file.trim()))
+                .unwrap_or_else(|e| panic!("body file {body_file} for {name}: {e}"));
+            derive_body(&text, &golden_dir)
         });
         if to_mock && name == "-" {
             out.push(Golden {
@@ -687,12 +816,33 @@ async fn golden_responses_match() {
     // pinned before the runtime builds its identity from the hostname.
     unarr_core::notifications::pin_machine_name("vm");
     let state = build_state_in(Some(&dirs), |_| {});
+    // The metadata hosts the recording reached through the mock's tunnels.
+    state.set_metadata_upstreams(unarr_core::metadata::Upstreams::mock(&mock.url()));
+    let goldens = load_goldens();
+    // The recorder marks every scheduled task as just run before it starts
+    // (scripts/sonarr-fixture.sh), so that no refresh, RSS sync or
+    // housekeeping runs while it records; the replay starts the same way.
+    if let Some(start) = goldens.iter().filter_map(|g| g.recorded_at).min() {
+        state
+            .db()
+            .call(move |conn| {
+                let ids: Vec<i64> = conn
+                    .prepare("SELECT id FROM scheduled_tasks")?
+                    .query_map([], |r| r.get(0))?
+                    .collect::<Result<_, _>>()?;
+                for id in ids {
+                    unarr_core::store::providers::set_scheduled_task_execution(conn, id, start, start)?;
+                }
+                Ok(())
+            })
+            .await
+            .expect("freeze the scheduled tasks");
+    }
     state.start_runtime().await.expect("the command runtime");
     // The recording's one NZBGet grab got this drone id from the originals'
     // random GUID; the queue and history goldens name it.
-    unarr_core::downloadclients::nzbget::pin_drone_ids(&["c4119cd06a044d60be1043396370761b"]);
+    unarr_core::downloadclients::nzbget::pin_drone_ids(&["c860499553f64d7b8170eae60cd1a5b3"]);
     let app = unarr_api::router(state.clone());
-    let goldens = load_goldens();
     let session = login_cookie(&app).await;
     let mut failures = Vec::new();
     let mut checked = 0;
@@ -787,7 +937,47 @@ async fn golden_responses_match() {
         }
         checked += 1;
         state.set_now(g.recorded_at);
+        if g.name == "health-after-importlist-sync" {
+            // The originals' scheduler refreshed the queue every minute of
+            // the recording, the replay runs no schedule: the refresh that
+            // found the unreachable clients after the startup grace period
+            // is run here.
+            let runtime = state.commands().unwrap();
+            runtime
+                .queue()
+                .push(
+                    unarr_core::commands::CommandBody::RefreshMonitoredDownloads,
+                    unarr_core::commands::CommandPriority::Normal,
+                    unarr_core::commands::CommandTrigger::Scheduled,
+                    state.now(),
+                )
+                .await
+                .expect("a queued refresh");
+            tokio::time::timeout(std::time::Duration::from_secs(60), runtime.wait_idle())
+                .await
+                .expect("the refresh finishes within a minute");
+        }
         let (status, body) = send(&app, g, &session, &path, &mappings).await;
+        if g.name == "command-backup" {
+            // The recording read the backup back five seconds later.
+            tokio::time::timeout(
+                std::time::Duration::from_secs(60),
+                state.commands().unwrap().wait_idle(),
+            )
+            .await
+            .expect("the backup finishes within a minute");
+        }
+        if g.method == "PUT" && g.path.starts_with("/api/v3/importlist") {
+            // Saving a list queues its sync, which the originals had run by
+            // the next request of the recording (the series it adds, the
+            // notifications it sends).
+            tokio::time::timeout(
+                std::time::Duration::from_secs(60),
+                state.commands().unwrap().wait_idle(),
+            )
+            .await
+            .expect("the list's sync finishes within a minute");
+        }
         let body = unmap_paths(&body, &mappings);
         // `UNARR_CONTRACT_DUMP=name,name` prints what Unarr answered.
         if std::env::var("UNARR_CONTRACT_DUMP")
@@ -800,7 +990,11 @@ async fn golden_responses_match() {
                 serde_json::to_string_pretty(&body).unwrap_or_default()
             );
         }
-        if let Some(id) = body.get("id").and_then(Value::as_i64) {
+        // As the recorder: the answer's id, or its first item's.
+        let answered = body
+            .get("id")
+            .or_else(|| body.get(0).and_then(|first| first.get("id")));
+        if let Some(id) = answered.and_then(Value::as_i64) {
             ids.insert(g.name.clone(), id);
         }
         if status.as_u16() != g.status {
@@ -1143,4 +1337,106 @@ async fn allowed_hosts_are_enforced() {
         .body(Body::empty())
         .unwrap();
     assert_eq!(status_of(&open, req).await, StatusCode::OK);
+}
+
+/// A backup is listed, downloads as the list's `path` says (a page, behind
+/// the login), and restores from an upload of the same zip.
+#[tokio::test]
+async fn backup_downloads_and_restores_from_an_upload() {
+    let dirs = ReplayDirs::create_named("backup");
+    let state = build_state_in(Some(&dirs), |_| {});
+    state.start_runtime().await.expect("the command runtime");
+    let app = unarr_api::router(state.clone());
+    let app_data = state.runtime().app_data.clone();
+    let api = |method: &str, uri: &str| {
+        Request::builder()
+            .method(method)
+            .uri(uri)
+            .header("X-Api-Key", API_KEY)
+    };
+    let bytes_of = |response: axum::response::Response| async {
+        axum::body::to_bytes(response.into_body(), usize::MAX)
+            .await
+            .unwrap()
+    };
+
+    let post = api("POST", "/api/v3/command")
+        .header("Content-Type", "application/json")
+        .body(Body::from(r#"{"name":"Backup","type":"manual"}"#))
+        .unwrap();
+    assert_eq!(status_of(&app, post).await, StatusCode::CREATED);
+    tokio::time::timeout(
+        std::time::Duration::from_secs(60),
+        state.commands().unwrap().wait_idle(),
+    )
+    .await
+    .expect("the backup finishes within a minute");
+
+    let listed = app
+        .clone()
+        .oneshot(api("GET", "/api/v3/system/backup").body(Body::empty()).unwrap())
+        .await
+        .unwrap();
+    let listed: Value = serde_json::from_slice(&bytes_of(listed).await).unwrap();
+    assert_eq!(listed.as_array().map(Vec::len), Some(1), "{listed}");
+    let path = listed[0]["path"].as_str().unwrap().to_string();
+    assert!(path.starts_with("/backup/manual/unarr_sonarr_backup_v"), "{path}");
+
+    // The download is a page: the API key does not open it, a session does.
+    assert_eq!(
+        status_of(&app, api("GET", &path).body(Body::empty()).unwrap()).await,
+        StatusCode::FOUND
+    );
+    let cookie = login_cookie(&app).await;
+    let page = |uri: &str| {
+        get(uri)
+            .header("Cookie", cookie.clone())
+            .body(Body::empty())
+            .unwrap()
+    };
+    let download = app.clone().oneshot(page(&path)).await.unwrap();
+    assert_eq!(download.status(), StatusCode::OK);
+    let zip = bytes_of(download).await;
+    assert!(zip.starts_with(b"PK"), "a zip archive");
+    // Only what the list names is served.
+    for uri in [
+        "/backup/manual/config.xml",
+        "/backup/manual/..%2F..%2Fconfig.xml",
+        "/backup/scheduled/missing.zip",
+    ] {
+        assert_eq!(status_of(&app, page(uri)).await, StatusCode::NOT_FOUND, "{uri}");
+    }
+
+    let upload = |filename: &str, content: &[u8]| {
+        let mut body = format!(
+            "--XBOUNDARY\r\nContent-Disposition: form-data; name=\"restore\"; filename=\"{filename}\"\r\nContent-Type: application/zip\r\n\r\n"
+        )
+        .into_bytes();
+        body.extend_from_slice(content);
+        body.extend_from_slice(b"\r\n--XBOUNDARY--\r\n");
+        api("POST", "/api/v3/system/backup/restore/upload")
+            .header("Content-Type", "multipart/form-data; boundary=XBOUNDARY")
+            .body(Body::from(body))
+            .unwrap()
+    };
+    assert_eq!(
+        status_of(&app, upload("backup.txt", &zip)).await,
+        StatusCode::UNSUPPORTED_MEDIA_TYPE
+    );
+    // Not an archive: refused, nothing staged.
+    assert_eq!(
+        status_of(&app, upload("backup.zip", b"not a zip")).await,
+        StatusCode::INTERNAL_SERVER_ERROR
+    );
+    assert!(!app_data.join("restore").exists());
+
+    let restored = app.clone().oneshot(upload("backup.zip", &zip)).await.unwrap();
+    assert_eq!(restored.status(), StatusCode::OK);
+    let restored: Value = serde_json::from_slice(&bytes_of(restored).await).unwrap();
+    assert_eq!(restored, serde_json::json!({ "restartRequired": true }));
+    assert!(app_data.join("restore").join("unarr-sonarr.db").is_file());
+    assert!(app_data.join("restore").join("config.xml").is_file());
+    assert!(!app_data.join(".restore-upload.zip").exists());
+
+    let _ = std::fs::remove_dir_all(&dirs.root);
 }

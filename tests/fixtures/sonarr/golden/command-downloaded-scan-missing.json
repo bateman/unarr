@@ -16,14 +16,14 @@
     "id": 461700,
     "name": "DownloadedEpisodesScan",
     "priority": "normal",
-    "queued": "2026-11-08T20:59:56Z",
+    "queued": "2026-11-09T22:21:04Z",
     "result": "unknown",
     "sendUpdatesToClient": true,
     "status": "queued",
     "trigger": "manual",
     "updateScheduledTask": true
   },
-  "recordedAt": "2026-11-08T20:59:56Z",
+  "recordedAt": "2026-11-09T22:21:04Z",
   "request": {
     "body": "bodies/command-downloaded-scan-missing.json",
     "method": "POST",

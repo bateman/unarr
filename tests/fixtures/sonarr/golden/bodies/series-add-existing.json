@@ -1,0 +1,11 @@
+{
+ "tvdbId": 448176,
+ "title": "The Pitt",
+ "qualityProfileId": 7,
+ "rootFolderPath": "/tv",
+ "seasonFolder": true,
+ "monitored": true,
+ "addOptions": {
+  "monitor": "all"
+ }
+}

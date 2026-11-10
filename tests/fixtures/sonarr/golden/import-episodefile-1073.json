@@ -7,7 +7,7 @@
         "name": "Language not Italian"
       }
     ],
-    "dateAdded": "2026-11-08T20:57:28Z",
+    "dateAdded": "2026-11-09T22:18:35Z",
     "id": 1073,
     "indexerFlags": 0,
     "languages": [
@@ -56,7 +56,7 @@
     "seriesId": 1,
     "size": 119980
   },
-  "recordedAt": "2026-11-08T20:58:48Z",
+  "recordedAt": "2026-11-09T22:19:55Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/episodefile/1073"

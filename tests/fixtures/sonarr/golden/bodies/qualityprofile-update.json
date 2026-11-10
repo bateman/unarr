@@ -1,0 +1,7 @@
+{
+ "$from": "qualityprofile-create",
+ "$set": {
+  "upgradeAllowed": false,
+  "name": "Unarr Test Edited"
+ }
+}

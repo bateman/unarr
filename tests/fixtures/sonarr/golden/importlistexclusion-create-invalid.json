@@ -1,0 +1,35 @@
+{
+  "body": [
+    {
+      "attemptedValue": 0,
+      "errorCode": "NotEmptyValidator",
+      "errorMessage": "'Tvdb Id' must not be empty.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Tvdb Id",
+        "propertyValue": 0
+      },
+      "propertyName": "TvdbId",
+      "severity": "error"
+    },
+    {
+      "attemptedValue": "",
+      "errorCode": "NotEmptyValidator",
+      "errorMessage": "'Title' must not be empty.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Title",
+        "propertyValue": ""
+      },
+      "propertyName": "Title",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-09T22:24:43Z",
+  "request": {
+    "body": "bodies/importlistexclusion-create-invalid.json",
+    "method": "POST",
+    "path": "/api/v3/importlistexclusion"
+  },
+  "status": 400
+}

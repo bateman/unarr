@@ -1,0 +1,8 @@
+{
+ "$from": "qualityprofile-1",
+ "$set": {
+  "id": 0,
+  "name": "",
+  "cutoff": 9999
+ }
+}

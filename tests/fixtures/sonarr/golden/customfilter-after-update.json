@@ -1,0 +1,38 @@
+{
+  "body": [
+    {
+      "filters": [
+        {
+          "key": "protocol",
+          "type": "equal",
+          "value": [
+            "usenet"
+          ]
+        }
+      ],
+      "id": 1,
+      "label": "Usenet",
+      "type": "releases"
+    },
+    {
+      "filters": [
+        {
+          "key": "status",
+          "type": "equal",
+          "value": [
+            "ended"
+          ]
+        }
+      ],
+      "id": 2,
+      "label": "Ended series",
+      "type": "series"
+    }
+  ],
+  "recordedAt": "2026-11-09T22:24:43Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/customfilter"
+  },
+  "status": 200
+}

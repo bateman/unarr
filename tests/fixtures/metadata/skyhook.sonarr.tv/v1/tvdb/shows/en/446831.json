@@ -1,0 +1,374 @@
+{
+ "tvdbId": 446831,
+ "title": "MobLand",
+ "overview": "Two mob families clash in a war that threatens to topple empires and lives.",
+ "slug": "mobland",
+ "originalCountry": "usa",
+ "originalLanguage": "eng",
+ "language": "eng",
+ "firstAired": "2025-03-30",
+ "lastAired": "2026-11-20",
+ "tvMazeId": 75026,
+ "tmdbId": 247718,
+ "imdbId": "tt31510819",
+ "malIds": [],
+ "anidbIds": [],
+ "aniListIds": [],
+ "lastUpdated": "2026-11-09T18:12:15Z",
+ "status": "Continuing",
+ "runtime": 47,
+ "timeOfDay": {
+  "hours": 3,
+  "minutes": 0
+ },
+ "originalNetwork": "Paramount+",
+ "network": "Paramount+",
+ "genres": [
+  "Crime",
+  "Drama"
+ ],
+ "contentRating": "TV-MA",
+ "rating": {
+  "count": 140934,
+  "value": "8.3"
+ },
+ "actors": [
+  {
+   "name": "Tom Hardy",
+   "character": "Harry Da Souza",
+   "image": "https://artworks.thetvdb.com/banners/person/373728/65f8b845ef6f6.jpg"
+  },
+  {
+   "name": "Helen Mirren",
+   "character": "Maeve Harrigan",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/296967/photo/6528646921624.jpg"
+  },
+  {
+   "name": "Pierce Brosnan",
+   "character": "Conrad Harrigan",
+   "image": "https://artworks.thetvdb.com/banners/person/254202/primary.jpg"
+  },
+  {
+   "name": "Paddy Considine",
+   "character": "Kevin Harrigan",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/304311/photo/624871aab5899.jpg"
+  },
+  {
+   "name": "Lara Pulver",
+   "character": "Bella Harrigan",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/486458/photo/6592919d4d2ce.jpg"
+  },
+  {
+   "name": "Anson Boon",
+   "character": "Eddie Harrigan",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8179495/photo/65c06a5b344df.jpg"
+  },
+  {
+   "name": "Mandeep Dhillon",
+   "character": "Seraphina Harrigan",
+   "image": "https://artworks.thetvdb.com/banners/person/292633/5eb6fbb3b4e3f.jpg"
+  },
+  {
+   "name": "Geoff Bell",
+   "character": "Richie Stevenson",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/378153/photo/640892a6b9e37.jpg"
+  },
+  {
+   "name": "Joanne Froggatt",
+   "character": "Jan Da Souza",
+   "image": "https://artworks.thetvdb.com/banners/person/284225/617335a0a6716.jpg"
+  },
+  {
+   "name": "Daniel Betts",
+   "character": "Brendan Harrigan"
+  }
+ ],
+ "images": [
+  {
+   "coverType": "Banner",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/446831/banners/68175c94c4974.jpg"
+  },
+  {
+   "coverType": "Poster",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/446831/posters/6aa1c710a2a68.jpg"
+  },
+  {
+   "coverType": "Fanart",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/446831/backgrounds/67e9845c46113.jpg"
+  },
+  {
+   "coverType": "Clearlogo",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/446831/clearlogo/68fd77028683b.png"
+  }
+ ],
+ "seasons": [
+  {
+   "seasonNumber": 1,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2114356/posters/680509bbcc43d.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 2,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2225152/posters/6aacda94c2316.jpg"
+    }
+   ]
+  }
+ ],
+ "episodes": [
+  {
+   "tvdbShowId": 446831,
+   "tvdbId": 10345021,
+   "seasonNumber": 1,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 1,
+   "title": "Stick or Twist",
+   "airDate": "2025-03-30",
+   "airDateUtc": "2025-03-30T07:00:00Z",
+   "runtime": 59,
+   "overview": "Harry Da Souza is called upon to make a problem disappear after a night out goes awry for the sons of two warring crime families. As boss Richie Stevenson looks to pin blame, patriarch Conrad Harrigan gathers his clan with a plan.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10345021/screencap/67e9752f2937d.jpg"
+  },
+  {
+   "tvdbShowId": 446831,
+   "tvdbId": 10987394,
+   "seasonNumber": 1,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 2,
+   "title": "Jigsaw Puzzle",
+   "airDate": "2025-04-06",
+   "airDateUtc": "2025-04-06T07:00:00Z",
+   "runtime": 52,
+   "overview": "Harry deals with the aftermath of the Harrigan family meeting as Jan wonders what's the final straw. Kevin scurries Eddie out of London after a threat from Richie. Maeve shows her hand to Conrad. Chasing a lead, Harry makes a startling discovery.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10987394/screencap/67ec3bde5eae5.jpg"
+  },
+  {
+   "tvdbShowId": 446831,
+   "tvdbId": 10987395,
+   "seasonNumber": 1,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 3,
+   "title": "Plan B",
+   "airDate": "2025-04-13",
+   "airDateUtc": "2025-04-13T07:00:00Z",
+   "runtime": 47,
+   "overview": "Richie makes his move, putting the Harrigans on high alert. Conrad and Maeve lock horns over Eddie but agree on a plan B. As Kevin prepares for all-out war, Harry kills two birds with one stone, and an anonymous tip leads Fisk to the cemetery.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10987395/screencap/67f41571601f2.jpg"
+  },
+  {
+   "tvdbShowId": 446831,
+   "tvdbId": 10987396,
+   "seasonNumber": 1,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 4,
+   "title": "Rat Trap",
+   "airDate": "2025-04-20",
+   "airDateUtc": "2025-04-20T07:00:00Z",
+   "runtime": 42,
+   "overview": "Harry pays a visit to Antoine at the urging of Bella. Fisk and Mukasa trade theories. Suspecting a rat, Conrad comes to Jan for a favor. Kevin makes a startling confession. Richie calls a midnight meeting at the Sinful Monkey with shocking results.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10987396/screencap/67f415d67ff09.jpg"
+  },
+  {
+   "tvdbShowId": 446831,
+   "tvdbId": 10987397,
+   "seasonNumber": 1,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 5,
+   "title": "Funeral for a Friend",
+   "airDate": "2025-04-27",
+   "airDateUtc": "2025-04-27T07:00:00Z",
+   "runtime": 41,
+   "overview": "Kevin and Harry assess scenarios in a search for insurance and an exit strategy. Looking for a way back in, Brendan approaches Seraphina. Left to their own devices, Bella and Jan commiserate. Richie makes a proposal. Maeve, in her element, strikes.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10987397/screencap/67f41603abdcd.jpg"
+  },
+  {
+   "tvdbShowId": 446831,
+   "tvdbId": 10987398,
+   "seasonNumber": 1,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 6,
+   "title": "Antwerp Blues",
+   "airDate": "2025-05-04",
+   "airDateUtc": "2025-05-04T07:00:00Z",
+   "runtime": 43,
+   "overview": "In the aftermath of Plan B, Conrad twists the knife and Fisk has a realization: this is war. Maeve gives Eddie a lesson in the art of chess. Richie takes the bait. Harry goes searching for Seraphina and Brendan, who've gone rogue.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10987398/screencap/67f4164a30758.jpg"
+  },
+  {
+   "tvdbShowId": 446831,
+   "tvdbId": 10987399,
+   "seasonNumber": 1,
+   "episodeNumber": 7,
+   "absoluteEpisodeNumber": 7,
+   "title": "The Crossroads",
+   "airDate": "2025-05-11",
+   "airDateUtc": "2025-05-11T07:00:00Z",
+   "runtime": 41,
+   "overview": "O'Hara points out the elephant in the room. Harry takes extreme measures.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10987399/screencap/682045b521f84.jpg"
+  },
+  {
+   "tvdbShowId": 446831,
+   "tvdbId": 10987400,
+   "seasonNumber": 1,
+   "episodeNumber": 8,
+   "absoluteEpisodeNumber": 8,
+   "title": "Helter Skelter",
+   "airDate": "2025-05-18",
+   "airDateUtc": "2025-05-18T07:00:00Z",
+   "runtime": 45,
+   "overview": "Maeve extends an olive branch. Kevin questions the wisdom of a sit down with Jaime. Tattersall offers Fisk and Mukasa a new point of entry. Harry comes to Kat for a favor as Richie, at the Sinful Monkey, contemplates a new affiliation.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10987400/screencap/682a8eafc9897.jpg"
+  },
+  {
+   "tvdbShowId": 446831,
+   "tvdbId": 10987401,
+   "seasonNumber": 1,
+   "episodeNumber": 9,
+   "absoluteEpisodeNumber": 9,
+   "title": "Beggars Banquet",
+   "airDate": "2025-05-25",
+   "airDateUtc": "2025-05-25T07:00:00Z",
+   "runtime": 48,
+   "overview": "Bella, trying to salvage her plan with Antoine, does a runner down to London. Tattersall gets Alice's tootsies tapping. Conrad clears the air at The Falkland Arms. Kevin confronts his past. The Harrigans sit down for a normal family dinner.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10987401/screencap/68329d13f3cce.jpg"
+  },
+  {
+   "tvdbShowId": 446831,
+   "tvdbId": 10987402,
+   "seasonNumber": 1,
+   "episodeNumber": 10,
+   "absoluteEpisodeNumber": 10,
+   "title": "The Beast in Me",
+   "airDate": "2025-06-01",
+   "airDateUtc": "2025-06-01T07:00:00Z",
+   "runtime": 55,
+   "finaleType": "season",
+   "overview": "Power is up for grabs as two warring crime families clash in a battle that threatens to topple empires and ruin lives. In the crossfire stands Harry Da Souza, a street-smart 'fixer' who knows too well where loyalties lie when opposing forces collide.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10987402/screencap/683bd0ec230ac.jpg"
+  },
+  {
+   "tvdbShowId": 446831,
+   "tvdbId": 11542638,
+   "seasonNumber": 2,
+   "episodeNumber": 1,
+   "title": "I Wanna Be Your Dog",
+   "airDate": "2026-09-18",
+   "airDateUtc": "2026-09-18T07:00:00Z",
+   "runtime": 48,
+   "overview": "Maeve and Conrad go to the dogs, leaving Harry to deal with the messy fallout. Jan makes a startling confession. Kevin and Seraphina both look to the future. Tattersall puts his cards on the table.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11542638/screencap/6aac18f0b1d98.jpg"
+  },
+  {
+   "tvdbShowId": 446831,
+   "tvdbId": 11542639,
+   "seasonNumber": 2,
+   "episodeNumber": 2,
+   "title": "Song 2",
+   "airDate": "2026-09-25",
+   "airDateUtc": "2026-09-25T07:00:00Z",
+   "runtime": 46,
+   "overview": "With Conrad's self-control slipping, Maeve make plans of her own while Jan hits Harry with a hard truth. Smelling blood, Frankie and Tattersall circle like sharks.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11542639/screencap/6ab36532c5344.jpg"
+  },
+  {
+   "tvdbShowId": 446831,
+   "tvdbId": 11542640,
+   "seasonNumber": 2,
+   "episodeNumber": 3,
+   "title": "Bonzo Goes to Bitburg",
+   "airDate": "2026-10-02",
+   "airDateUtc": "2026-10-02T07:00:00Z",
+   "runtime": 45,
+   "overview": "Maeve probes Conrad for secrets, positioning herself against threats old and new. As Frankie forces a high-stakes sit-down, Kevin and Harry game out their strategy.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11542640/screencap/6abc95287f318.jpg"
+  },
+  {
+   "tvdbShowId": 446831,
+   "tvdbId": 11542641,
+   "seasonNumber": 2,
+   "episodeNumber": 4,
+   "title": "Blank Curtain",
+   "airDate": "2026-10-09",
+   "airDateUtc": "2026-10-09T07:00:00Z",
+   "runtime": 44,
+   "overview": "The Harrigans reel from an unexpected turn of events, triggering Harry to do damage control before police scrutiny closes in. Maeve's unseen hand moves Eddie out of London as Seraphina makes a new alliance and Conrad re-asserts his dominance.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11542641/screencap/6ac4ff7a3caae.jpg"
+  },
+  {
+   "tvdbShowId": 446831,
+   "tvdbId": 11542642,
+   "seasonNumber": 2,
+   "episodeNumber": 5,
+   "title": "Birdland",
+   "airDate": "2026-10-16",
+   "airDateUtc": "2026-10-16T07:00:00Z",
+   "runtime": 45,
+   "overview": "Conrad declares war, stacking bodies and turning the Cotswolds into a fortress. Maeve plays puppet-master, sending Eddie on a mission before secrets start to spill and a hit hurtles the Harrigans into all‑out chaos.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11542642/screencap/6acdaa3e231e9.jpg"
+  },
+  {
+   "tvdbShowId": 446831,
+   "tvdbId": 11542643,
+   "seasonNumber": 2,
+   "episodeNumber": 6,
+   "title": "A Different Corner",
+   "airDate": "2026-10-23",
+   "airDateUtc": "2026-10-23T07:00:00Z",
+   "runtime": 42,
+   "overview": "Licking wounds and turning on each other after fleeing Frankie's assault, Seraphina goes all in, pitching the Harrigans on a global power play, while Maeve and Harry square off over crossed lines.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11542643/screencap/6ad6cfb8db418.jpg"
+  },
+  {
+   "tvdbShowId": 446831,
+   "tvdbId": 11542644,
+   "seasonNumber": 2,
+   "episodeNumber": 7,
+   "title": "Ace of Spades",
+   "airDate": "2026-10-30",
+   "airDateUtc": "2026-10-30T07:00:00Z",
+   "runtime": 55,
+   "overview": "The Harrigans lock down the Cotswolds and roll back into London to shake the tree -- buying loyalty with cash, threats, and broken fingers. Maeve tightens the screws within the family, while Harry walks into a trap.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11542644/screencap/6ae44581e1717.jpg"
+  },
+  {
+   "tvdbShowId": 446831,
+   "tvdbId": 11542645,
+   "seasonNumber": 2,
+   "episodeNumber": 8,
+   "title": "We Don't Talk Anymore",
+   "airDate": "2026-11-06",
+   "airDateUtc": "2026-11-06T08:00:00Z",
+   "runtime": 43,
+   "overview": "Harry's covert strike pours petrol on the escalating war. Eddie slides further off the rails under Maeve's manipulations. Bella and Seraphina plot a long game as Conrad starts to crack, and a new adversary enters the frame.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11542645/screencap/6aeaac133f1bb.jpg"
+  },
+  {
+   "tvdbShowId": 446831,
+   "tvdbId": 11542646,
+   "seasonNumber": 2,
+   "episodeNumber": 9,
+   "title": "Nervous Breakdown",
+   "airDate": "2026-11-13",
+   "airDateUtc": "2026-11-13T08:00:00Z",
+   "overview": "Frankie goes full nuclear, kicking a plan into gear. Eddie is tasked with a final chance to prove his worth as Maeve and Conrad chase one last mad score. Harry stares down a standoff.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11542646/screencap/6af20cfee342a.jpg"
+  },
+  {
+   "tvdbShowId": 446831,
+   "tvdbId": 11542647,
+   "seasonNumber": 2,
+   "episodeNumber": 10,
+   "title": "TBA",
+   "airDate": "2026-11-20",
+   "airDateUtc": "2026-11-20T08:00:00Z",
+   "finaleType": "season"
+  }
+ ]
+}

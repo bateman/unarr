@@ -1,0 +1,5 @@
+{
+ "host": "",
+ "remotePath": "relative",
+ "localPath": "/nowhere/at/all/"
+}

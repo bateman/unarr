@@ -1,0 +1,13 @@
+{
+  "body": {
+    "id": 1,
+    "listSyncLevel": "logOnly",
+    "listSyncTag": 0
+  },
+  "recordedAt": "2026-11-09T22:24:42Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/config/importlist"
+  },
+  "status": 200
+}

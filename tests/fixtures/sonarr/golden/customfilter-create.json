@@ -1,0 +1,23 @@
+{
+  "body": {
+    "filters": [
+      {
+        "key": "status",
+        "type": "equal",
+        "value": [
+          "ended"
+        ]
+      }
+    ],
+    "id": 2,
+    "label": "Ended",
+    "type": "series"
+  },
+  "recordedAt": "2026-11-09T22:24:43Z",
+  "request": {
+    "body": "bodies/customfilter-create.json",
+    "method": "POST",
+    "path": "/api/v3/customfilter"
+  },
+  "status": 201
+}

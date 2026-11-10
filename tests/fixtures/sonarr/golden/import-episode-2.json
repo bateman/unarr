@@ -6,7 +6,7 @@
     "episodeFile": {
       "customFormatScore": 0,
       "customFormats": [],
-      "dateAdded": "2026-11-08T20:57:47Z",
+      "dateAdded": "2026-11-09T22:18:55Z",
       "id": 1074,
       "indexerFlags": 0,
       "languages": [
@@ -69,7 +69,7 @@
         "remoteUrl": "https://artworks.thetvdb.com/banners/v4/episode/10851517/screencap/696818b1903e3.jpg"
       }
     ],
-    "lastSearchTime": "2026-11-08T20:56:40Z",
+    "lastSearchTime": "2026-11-09T22:17:48Z",
     "monitored": false,
     "overview": "Robby helps siblings navigate their elderly father’s end-of-life care. Later, Samira fends off cops targeting a woman with a misunderstood condition.",
     "runtime": 50,
@@ -151,7 +151,7 @@
     "tvdbId": 10851517,
     "unverifiedSceneNumbering": false
   },
-  "recordedAt": "2026-11-08T20:58:48Z",
+  "recordedAt": "2026-11-09T22:19:55Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/episode/2"

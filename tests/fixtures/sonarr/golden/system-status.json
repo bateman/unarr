@@ -24,12 +24,12 @@
     "packageUpdateMechanism": "builtIn",
     "runtimeName": ".NET",
     "runtimeVersion": "6.0.13",
-    "startTime": "2026-11-08T20:55:49Z",
+    "startTime": "2026-11-09T22:16:55Z",
     "startupPath": "/home/user/unarr/.cache/sonarr/Sonarr",
     "urlBase": "",
     "version": "4.0.20.3014"
   },
-  "recordedAt": "2026-11-08T20:55:51Z",
+  "recordedAt": "2026-11-09T22:16:57Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/system/status"

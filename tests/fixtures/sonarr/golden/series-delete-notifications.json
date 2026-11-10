@@ -1,0 +1,208 @@
+{
+  "body": [
+    {
+      "body": {
+        "embeds": [
+          {
+            "author": {
+              "icon_url": "https://raw.githubusercontent.com/Sonarr/Sonarr/develop/Logo/256.png",
+              "name": "vm"
+            },
+            "color": 15749200,
+            "description": "Series removed and all files were deleted",
+            "fields": [
+              {
+                "inline": false,
+                "name": "Links",
+                "value": "[The TVDB](https://thetvdb.com/?tab=series&id=271728) / [Trakt](https://trakt.tv/search/tvdb/271728?id_type=show) / [IMDB](https://imdb.com/title/tt3278316/)"
+              }
+            ],
+            "image": {
+              "url": "https://artworks.thetvdb.com/banners/fanart/original/271728-1.jpg"
+            },
+            "thumbnail": {
+              "url": "https://artworks.thetvdb.com/banners/posters/271728-1.jpg"
+            },
+            "title": "The Pete Holmes Show",
+            "url": "http://thetvdb.com/?tab=series&id=271728"
+          }
+        ],
+        "username": "Unarr fixture"
+      },
+      "headers": {
+        "content-type": "application/json"
+      },
+      "method": "POST",
+      "path": "/discord/api/webhooks/100/fixturetoken",
+      "query": {},
+      "service": "discord"
+    },
+    {
+      "body": {
+        "applicationUrl": "",
+        "deletedFiles": true,
+        "eventType": "SeriesDelete",
+        "instanceName": "Sonarr",
+        "series": {
+          "genres": [
+            "Comedy",
+            "Talk Show"
+          ],
+          "id": 52,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/graphical/271728-g.jpg",
+              "url": "/MediaCover/52/banner.jpg?lastWrite=639298598323831326"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/posters/271728-1.jpg",
+              "url": "/MediaCover/52/poster.jpg?lastWrite=639298598324237087"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/fanart/original/271728-1.jpg",
+              "url": "/MediaCover/52/fanart.jpg?lastWrite=639298598324677087"
+            }
+          ],
+          "imdbId": "tt3278316",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "path": "/tv/Pete Holmes Show",
+          "tags": [
+            "usenet-only"
+          ],
+          "title": "The Pete Holmes Show",
+          "titleSlug": "the-pete-holmes-show",
+          "tmdbId": 57506,
+          "tvMazeId": 6229,
+          "tvdbId": 271728,
+          "type": "standard",
+          "year": 2013
+        }
+      },
+      "headers": {
+        "authorization": "Basic aG9vazpzZWNyZXQ=",
+        "content-type": "application/json",
+        "x-fixture": "yes"
+      },
+      "method": "PUT",
+      "path": "/webhook/updated",
+      "query": {},
+      "service": "webhook"
+    },
+    {
+      "body": {
+        "embeds": [
+          {
+            "author": {
+              "icon_url": "https://raw.githubusercontent.com/Sonarr/Sonarr/develop/Logo/256.png",
+              "name": "vm"
+            },
+            "color": 15749200,
+            "description": "Series removed, files were not deleted",
+            "fields": [
+              {
+                "inline": false,
+                "name": "Links",
+                "value": "[The TVDB](https://thetvdb.com/?tab=series&id=424536) / [Trakt](https://trakt.tv/search/tvdb/424536?id_type=show) / [IMDB](https://imdb.com/title/tt22248376/)"
+              }
+            ],
+            "image": {
+              "url": "https://artworks.thetvdb.com/banners/v4/series/424536/backgrounds/64e6cbe29d9c0.jpg"
+            },
+            "thumbnail": {
+              "url": "https://artworks.thetvdb.com/banners/v4/series/424536/posters/6516fe48e7a06.jpg"
+            },
+            "title": "Frieren: Beyond Journey's End",
+            "url": "http://thetvdb.com/?tab=series&id=424536"
+          }
+        ],
+        "username": "Unarr fixture"
+      },
+      "headers": {
+        "content-type": "application/json"
+      },
+      "method": "POST",
+      "path": "/discord/api/webhooks/100/fixturetoken",
+      "query": {},
+      "service": "discord"
+    },
+    {
+      "body": {
+        "applicationUrl": "",
+        "deletedFiles": false,
+        "eventType": "SeriesDelete",
+        "instanceName": "Sonarr",
+        "series": {
+          "genres": [
+            "Adventure",
+            "Animation",
+            "Anime",
+            "Drama",
+            "Fantasy"
+          ],
+          "id": 51,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/424536/banners/651dd688bd4d5.jpg",
+              "url": "/MediaCover/51/banner.jpg?lastWrite=639298598174430745"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/424536/posters/6516fe48e7a06.jpg",
+              "url": "/MediaCover/51/poster.jpg?lastWrite=639298598174859960"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/424536/backgrounds/64e6cbe29d9c0.jpg",
+              "url": "/MediaCover/51/fanart.jpg?lastWrite=639298598175277078"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/424536/clearlogo/65d798fbd2f61.png",
+              "url": "/MediaCover/51/clearlogo.png?lastWrite=639298598175717078"
+            }
+          ],
+          "imdbId": "tt22248376",
+          "originalLanguage": {
+            "id": 8,
+            "name": "Japanese"
+          },
+          "path": "/tv/Frieren Beyond Journeys End (2023)",
+          "tags": [
+            "ita",
+            "usenet-only"
+          ],
+          "title": "Frieren: Beyond Journey's End",
+          "titleSlug": "frieren-beyond-journeys-end",
+          "tmdbId": 209867,
+          "tvMazeId": 69956,
+          "tvdbId": 424536,
+          "type": "standard",
+          "year": 2023
+        }
+      },
+      "headers": {
+        "authorization": "Basic aG9vazpzZWNyZXQ=",
+        "content-type": "application/json",
+        "x-fixture": "yes"
+      },
+      "method": "PUT",
+      "path": "/webhook/updated",
+      "query": {},
+      "service": "webhook"
+    }
+  ],
+  "recordedAt": "2026-11-09T22:24:42Z",
+  "request": {
+    "method": "GET",
+    "path": "/mock/notifications",
+    "target": "mock"
+  },
+  "status": 200
+}

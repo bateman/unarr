@@ -1,0 +1,28 @@
+{
+  "body": {
+    "directories": [
+      {
+        "lastModified": "2026-11-09T22:19:15Z",
+        "name": "Daredevil - Born Again",
+        "path": "/tv/Daredevil - Born Again/",
+        "size": 0,
+        "type": "folder"
+      },
+      {
+        "lastModified": "2026-11-09T22:21:04Z",
+        "name": "The Pitt",
+        "path": "/tv/The Pitt/",
+        "size": 0,
+        "type": "folder"
+      }
+    ],
+    "files": [],
+    "parent": "/"
+  },
+  "recordedAt": "2026-11-09T22:24:32Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/filesystem?path=/tv/&includeFiles=false&allowFoldersWithoutTrailingSlashes=false"
+  },
+  "status": 200
+}

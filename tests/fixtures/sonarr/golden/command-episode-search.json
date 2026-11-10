@@ -17,14 +17,14 @@
     "id": 461663,
     "name": "EpisodeSearch",
     "priority": "normal",
-    "queued": "2026-11-08T20:56:25Z",
+    "queued": "2026-11-09T22:17:33Z",
     "result": "unknown",
     "sendUpdatesToClient": true,
     "status": "queued",
     "trigger": "manual",
     "updateScheduledTask": true
   },
-  "recordedAt": "2026-11-08T20:56:25Z",
+  "recordedAt": "2026-11-09T22:17:33Z",
   "request": {
     "body": "bodies/command-episode-search.json",
     "method": "POST",

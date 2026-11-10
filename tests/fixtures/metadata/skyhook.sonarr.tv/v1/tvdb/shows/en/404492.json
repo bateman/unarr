@@ -1,0 +1,660 @@
+{
+ "tvdbId": 404492,
+ "title": "Invasion (2021)",
+ "overview": "Earth is visited by an alien species that threatens humanity's existence. Events unfold in real time through the eyes of five ordinary people across the globe as they struggle to make sense of the chaos unraveling around them.",
+ "slug": "invasion-2021",
+ "originalCountry": "usa",
+ "originalLanguage": "eng",
+ "language": "eng",
+ "firstAired": "2021-10-21",
+ "lastAired": "2025-10-24",
+ "tvMazeId": 49964,
+ "tmdbId": 127235,
+ "imdbId": "tt9737326",
+ "malIds": [],
+ "anidbIds": [],
+ "aniListIds": [],
+ "lastUpdated": "2026-10-14T04:14:34Z",
+ "status": "Continuing",
+ "runtime": 49,
+ "timeOfDay": {
+  "hours": 0,
+  "minutes": 0
+ },
+ "originalNetwork": "Apple TV",
+ "network": "Apple TV",
+ "genres": [
+  "Drama",
+  "Fantasy",
+  "Science Fiction"
+ ],
+ "contentRating": "TV-MA",
+ "rating": {
+  "count": 59079,
+  "value": "6.2"
+ },
+ "actors": [
+  {
+   "name": "Golshifteh Farahani",
+   "character": "Aneesha Malik",
+   "image": "https://artworks.thetvdb.com/banners/person/530800/5eafe79aa624d.jpg"
+  },
+  {
+   "name": "Shioli Kutsuna",
+   "character": "Mitsuki Yamato",
+   "image": "https://artworks.thetvdb.com/banners/person/653334/5f8548f322f54.jpg"
+  },
+  {
+   "name": "Shamier Anderson",
+   "character": "Trevante Cole",
+   "image": "https://artworks.thetvdb.com/banners/person/299834/6001ff21b4e7b.jpg"
+  },
+  {
+   "name": "Billy Barratt",
+   "character": "Caspar Morrow",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/7885810/photo/60c492bd0b10d.jpg"
+  },
+  {
+   "name": "India Brown",
+   "character": "Jamila Huston"
+  },
+  {
+   "name": "Azhy Robertson",
+   "character": "Luke Malik"
+  },
+  {
+   "name": "Tara Moayedi",
+   "character": "Sarah Malik"
+  },
+  {
+   "name": "Firas Nassar",
+   "character": "Ahmed Malik"
+  },
+  {
+   "name": "Sam Neill",
+   "character": "Jim Bell Tyson",
+   "image": "https://artworks.thetvdb.com/banners/person/292016/primary.jpg"
+  },
+  {
+   "name": "Enver Gjokaj",
+   "character": "Clark Evans",
+   "image": "https://artworks.thetvdb.com/banners/person/317607/5f1b35de169b6.jpg"
+  },
+  {
+   "name": "Olivia Mai-Barrett",
+   "character": "Ryder Evans",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8092364/photo/6253f9a833afc.jpg"
+  },
+  {
+   "name": "Daisuke Tsuji",
+   "character": "Kaito Kawaguchi",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8049218/photo/64e727648c4d4.jpg"
+  },
+  {
+   "name": "Paddy Holland",
+   "character": "Monty Cuttermill"
+  },
+  {
+   "name": "Naian González Norvind",
+   "character": "Maya Castillo",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8080624/photo/66f59e5445b92.jpg"
+  },
+  {
+   "name": "Nidra Sous la Terre",
+   "character": "Rose Callaway"
+  },
+  {
+   "name": "Shane Zaza",
+   "character": "Nikhil Kapur"
+  },
+  {
+   "name": "Natasha Loring",
+   "character": "Mira"
+  },
+  {
+   "name": "India Jane Francis",
+   "character": "Poppy Rees"
+  },
+  {
+   "name": "Aliyah O'Brien",
+   "character": "Chopper Two Pilot Hering /Captain Hering",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/461584/photo/62737c8899096.jpg"
+  },
+  {
+   "name": "Ingrid Keighley",
+   "character": "Eva"
+  },
+  {
+   "name": "Camille Rowe",
+   "character": "Amanda Hornsby",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8432122/photo/6328853dba17b.jpg"
+  },
+  {
+   "name": "Milana Kerr",
+   "character": "Isabelle"
+  },
+  {
+   "name": "Kiarra Hamagami Goldberg",
+   "character": "Analyst",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9148055/photo/698299b782a21.jpg"
+  },
+  {
+   "name": "Anjali Jay",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/436394/photo/66b70c5a27535.jpg"
+  },
+  {
+   "name": "Charlotte Ray",
+   "character": "Allie"
+  },
+  {
+   "name": "Reedan Elizabeth",
+   "character": "Cindy"
+  },
+  {
+   "name": "Emily Althaus",
+   "character": "Lindie"
+  },
+  {
+   "name": "Alejandro Chavarria",
+   "character": "Government Official #1"
+  },
+  {
+   "name": " Sharinna Goyco",
+   "character": "Woman in Cafeteria (as Sharinna Allan)"
+  },
+  {
+   "name": " Cheryse Dyllan",
+   "character": "National Guard"
+  },
+  {
+   "name": " Vanessa Hodges",
+   "character": "Acrobat Performer #3"
+  },
+  {
+   "name": "Hazel Bartlett-Sias",
+   "character": "Monica"
+  },
+  {
+   "name": "Aubin Bradley",
+   "character": "Traumatized Child"
+  },
+  {
+   "name": "Sonia Okacha",
+   "character": "Doctor in Cellar"
+  },
+  {
+   "name": "Kathryn Alexandre",
+   "character": "Receptionist"
+  },
+  {
+   "name": "Amreen Gill",
+   "character": "Nikhil's Mother"
+  },
+  {
+   "name": "Sarah Rich",
+   "character": "Motel Girlfriend"
+  },
+  {
+   "name": "Britt Faulkner",
+   "character": "Truck Stop Woman"
+  },
+  {
+   "name": "Talia Cuomo",
+   "character": "Bloody Nose Child"
+  },
+  {
+   "name": "Alice Lazarus",
+   "character": "Lab Assistant"
+  },
+  {
+   "name": "Madeline Hoarle",
+   "character": "Bloody Nose Child"
+  },
+  {
+   "name": "Raina Pellinger",
+   "character": "School Kid"
+  }
+ ],
+ "images": [
+  {
+   "coverType": "Banner",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/404492/banners/617244eb9f108.jpg"
+  },
+  {
+   "coverType": "Poster",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/404492/posters/614cba2817b5e.jpg"
+  },
+  {
+   "coverType": "Fanart",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/404492/backgrounds/69013f445ae68.jpg"
+  },
+  {
+   "coverType": "Clearlogo",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/404492/clearlogo/617245b2412bc.png"
+  }
+ ],
+ "seasons": [
+  {
+   "seasonNumber": 1,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/1933168/posters/64e8592993db7.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 2,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2004803/posters/64f0589416d67.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 3,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2194579/posters/68a7bf0dbf067.jpg"
+    }
+   ]
+  }
+ ],
+ "episodes": [
+  {
+   "tvdbShowId": 404492,
+   "tvdbId": 8481419,
+   "seasonNumber": 1,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 1,
+   "title": "Last Day",
+   "airDate": "2021-10-21",
+   "airDateUtc": "2021-10-21T04:00:00Z",
+   "runtime": 55,
+   "overview": "Across the globe, strange and unexplainable events begin to unfold. A small-town sheriff senses something bigger is at play.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8481419/screencap/64e7024ee9aff.jpg"
+  },
+  {
+   "tvdbShowId": 404492,
+   "tvdbId": 8481519,
+   "seasonNumber": 1,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 2,
+   "title": "Crash",
+   "airDate": "2021-10-21",
+   "airDateUtc": "2021-10-21T04:00:00Z",
+   "runtime": 57,
+   "overview": "Amid chaos, Aneesha makes a difficult decision for the sake of her family. Trevante—a Navy SEAL—investigates a distress call with his team.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8481519/screencap/64e7027ff1611.jpg"
+  },
+  {
+   "tvdbShowId": 404492,
+   "tvdbId": 8481520,
+   "seasonNumber": 1,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 3,
+   "title": "Orion",
+   "airDate": "2021-10-21",
+   "airDateUtc": "2021-10-21T04:00:00Z",
+   "runtime": 52,
+   "overview": "Mitsuki takes desperate measures, determined to uncover the truth. Caspar and Jamila discover just how dire their situation is.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8481520/screencap/64e702a6f1327.jpg"
+  },
+  {
+   "tvdbShowId": 404492,
+   "tvdbId": 8481521,
+   "seasonNumber": 1,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 4,
+   "title": "The King Is Dead",
+   "airDate": "2021-10-29",
+   "airDateUtc": "2021-10-29T04:00:00Z",
+   "runtime": 56,
+   "overview": "Trevante fears the worst until a locator beacon gives him hope. Mitsuki finds an ally in the most unexpected place.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8481521/screencap/617242aaa17dc.jpg"
+  },
+  {
+   "tvdbShowId": 404492,
+   "tvdbId": 8481522,
+   "seasonNumber": 1,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 5,
+   "title": "Going Home",
+   "airDate": "2021-11-04",
+   "airDateUtc": "2021-11-04T04:00:00Z",
+   "runtime": 41,
+   "overview": "The President of the United States gives an urgent global address in an attempt to prepare the world for what lies ahead.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8481522/screencap/64e702db458a3.jpg"
+  },
+  {
+   "tvdbShowId": 404492,
+   "tvdbId": 8481523,
+   "seasonNumber": 1,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 6,
+   "title": "Home Invasion",
+   "airDate": "2021-11-11",
+   "airDateUtc": "2021-11-11T05:00:00Z",
+   "runtime": 33,
+   "overview": "In shock from the President’s speech, Aneesha rushes back to her family only to find their safe haven—and their lives—threatened.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8481523/screencap/64e702fe6fd4b.jpg"
+  },
+  {
+   "tvdbShowId": 404492,
+   "tvdbId": 8481524,
+   "seasonNumber": 1,
+   "episodeNumber": 7,
+   "absoluteEpisodeNumber": 7,
+   "title": "Hope",
+   "airDate": "2021-11-19",
+   "airDateUtc": "2021-11-19T05:00:00Z",
+   "runtime": 48,
+   "overview": "Mitsuki commandeers a satellite station, hoping to make contact with outer space. Caspar reveals a strange secret he thinks is related to the invasion.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8481524/screencap/618df53a08301.jpg"
+  },
+  {
+   "tvdbShowId": 404492,
+   "tvdbId": 8481525,
+   "seasonNumber": 1,
+   "episodeNumber": 8,
+   "absoluteEpisodeNumber": 8,
+   "title": "Contact",
+   "airDate": "2021-11-25",
+   "airDateUtc": "2021-11-25T05:00:00Z",
+   "runtime": 48,
+   "overview": "Trevante’s plane lands, but his journey home is just beginning. Caspar and Jamila brave London’s streets, trying to make sense of his secret.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8481525/screencap/619710791aeb8.jpg"
+  },
+  {
+   "tvdbShowId": 404492,
+   "tvdbId": 8481526,
+   "seasonNumber": 1,
+   "episodeNumber": 9,
+   "absoluteEpisodeNumber": 9,
+   "title": "Full of Stars",
+   "airDate": "2021-12-03",
+   "airDateUtc": "2021-12-03T05:00:00Z",
+   "runtime": 58,
+   "overview": "Mitsuki is determined to contact the Hoshi 12 before it’s too late, as the military detains the Maliks and Caspar takes a risk that may kill him.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8481526/screencap/61a02bad46625.jpg"
+  },
+  {
+   "tvdbShowId": 404492,
+   "tvdbId": 8481527,
+   "seasonNumber": 1,
+   "episodeNumber": 10,
+   "absoluteEpisodeNumber": 10,
+   "title": "First Day",
+   "airDate": "2021-12-10",
+   "airDateUtc": "2021-12-10T05:00:00Z",
+   "runtime": 57,
+   "finaleType": "season",
+   "overview": "The world, still reeling from global destruction, faces a new and unforeseen dawn.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8481527/screencap/61aabcc7e052c.jpg"
+  },
+  {
+   "tvdbShowId": 404492,
+   "tvdbId": 9208207,
+   "seasonNumber": 2,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 11,
+   "title": "Something’s Changed",
+   "airDate": "2023-08-23",
+   "airDateUtc": "2023-08-23T04:00:00Z",
+   "runtime": 58,
+   "overview": "Mitsuki is taken to an alien ship in the Amazon jungle. Aneesha and her children take refuge with a group called the Movement.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9208207/screencap/64afc1da1c03b.jpg"
+  },
+  {
+   "tvdbShowId": 404492,
+   "tvdbId": 9872885,
+   "seasonNumber": 2,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 12,
+   "title": "Chasing Ghosts",
+   "airDate": "2023-08-30",
+   "airDateUtc": "2023-08-30T04:00:00Z",
+   "runtime": 52,
+   "overview": "At home in Miami, Trevante struggles with returning to day-to-day life. Similarly, Jamila feels an unceasing pull to search for Caspar.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9872885/screencap/64e7037414372.jpg"
+  },
+  {
+   "tvdbShowId": 404492,
+   "tvdbId": 9872886,
+   "seasonNumber": 2,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 13,
+   "title": "Fireworks",
+   "airDate": "2023-09-06",
+   "airDateUtc": "2023-09-06T04:00:00Z",
+   "runtime": 48,
+   "overview": "A game-changing discovery could finally give Earth an advantage. Aneesha finds it difficult to trust the Movement, despite needing their help.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9872886/screencap/64f0693d62c9b.jpg"
+  },
+  {
+   "tvdbShowId": 404492,
+   "tvdbId": 9872887,
+   "seasonNumber": 2,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 14,
+   "title": "The Tunnel",
+   "airDate": "2023-09-13",
+   "airDateUtc": "2023-09-13T04:00:00Z",
+   "runtime": 50,
+   "overview": "Jamila's decision to trek the Channel Tunnel puts the group face-to-face with an even deadlier enemy.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9872887/screencap/64fc30e5e2e24.jpg"
+  },
+  {
+   "tvdbShowId": 404492,
+   "tvdbId": 9872888,
+   "seasonNumber": 2,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 15,
+   "title": "A Voice From the Other Side",
+   "airDate": "2023-09-20",
+   "airDateUtc": "2023-09-20T04:00:00Z",
+   "runtime": 51,
+   "overview": "Aneesha, Luke, and the Movement make a plan to locate Sarah. Mitsuki has a devastating encounter with the alien entity.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9872888/screencap/650149b128619.jpg"
+  },
+  {
+   "tvdbShowId": 404492,
+   "tvdbId": 9872889,
+   "seasonNumber": 2,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 16,
+   "title": "Pressure Points",
+   "airDate": "2023-09-27",
+   "airDateUtc": "2023-09-27T04:00:00Z",
+   "runtime": 51,
+   "overview": "Jamila and the gang reach the hospital and find a surprise. En route to Camp Pierce, the Movement get caught in a savage attack.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9872889/screencap/650a4b00c7a9e.jpg"
+  },
+  {
+   "tvdbShowId": 404492,
+   "tvdbId": 9872890,
+   "seasonNumber": 2,
+   "episodeNumber": 7,
+   "absoluteEpisodeNumber": 17,
+   "title": "Down the Rabbit Hole",
+   "airDate": "2023-10-04",
+   "airDateUtc": "2023-10-04T04:00:00Z",
+   "runtime": 48,
+   "overview": "Trevante and Rose investigate a clue that leads them to Ben Shelton’s farm. Monty has suspicions about the mission and confides in Jamila.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9872890/screencap/651414a343e25.jpg"
+  },
+  {
+   "tvdbShowId": 404492,
+   "tvdbId": 9872891,
+   "seasonNumber": 2,
+   "episodeNumber": 8,
+   "absoluteEpisodeNumber": 18,
+   "title": "Cosmic Ocean",
+   "airDate": "2023-10-11",
+   "airDateUtc": "2023-10-11T04:00:00Z",
+   "runtime": 51,
+   "overview": "Mitsuki begins experiencing symptoms from her time with the alien entity. Nikhil breaks into the enclosure, setting off global seismic events.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9872891/screencap/651cf70d0d8b4.jpg"
+  },
+  {
+   "tvdbShowId": 404492,
+   "tvdbId": 9872892,
+   "seasonNumber": 2,
+   "episodeNumber": 9,
+   "absoluteEpisodeNumber": 19,
+   "title": "Breakthrough",
+   "airDate": "2023-10-18",
+   "airDateUtc": "2023-10-18T04:00:00Z",
+   "runtime": 39,
+   "overview": "A dangerous trip to the alien mothership results in a connection across dimensions.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9872892/screencap/65264e380c27e.jpg"
+  },
+  {
+   "tvdbShowId": 404492,
+   "tvdbId": 9872893,
+   "seasonNumber": 2,
+   "episodeNumber": 10,
+   "absoluteEpisodeNumber": 20,
+   "title": "Old Friends, New Frontiers",
+   "airDate": "2023-10-25",
+   "airDateUtc": "2023-10-25T04:00:00Z",
+   "runtime": 50,
+   "finaleType": "season",
+   "overview": "A risky operation is humanity’s best and last hope.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9872893/screencap/652f6b99d0069.jpg"
+  },
+  {
+   "tvdbShowId": 404492,
+   "tvdbId": 11225537,
+   "seasonNumber": 3,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 21,
+   "title": "The Ones We Leave Behind",
+   "airDate": "2025-08-22",
+   "airDateUtc": "2025-08-22T04:00:00Z",
+   "runtime": 45,
+   "overview": "Trevante returns to an Earth that’s different than the one he left two years ago. Jamila struggles to adapt to this new world.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11225537/screencap/68a7c1ab849c0.jpg"
+  },
+  {
+   "tvdbShowId": 404492,
+   "tvdbId": 11229303,
+   "seasonNumber": 3,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 22,
+   "title": "The Message",
+   "airDate": "2025-08-29",
+   "airDateUtc": "2025-08-29T04:00:00Z",
+   "runtime": 51,
+   "overview": "Mysterious alien signals force Mitsuki out of hiding. Nikhil is charged with a task that tests his loyalty.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11229303/screencap/68a7c1cac1e38.jpg"
+  },
+  {
+   "tvdbShowId": 404492,
+   "tvdbId": 11229304,
+   "seasonNumber": 3,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 23,
+   "title": "Infinitas",
+   "airDate": "2025-09-05",
+   "airDateUtc": "2025-09-05T04:00:00Z",
+   "runtime": 52,
+   "overview": "Aneesha and Clark’s peaceful life is upended by a visit from Trevante and Jamila. Mitsuki and Nikhil search for answers at a portal base.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11229304/screencap/68b0ffd54066a.jpg"
+  },
+  {
+   "tvdbShowId": 404492,
+   "tvdbId": 11229305,
+   "seasonNumber": 3,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 24,
+   "title": "The Mission",
+   "airDate": "2025-09-12",
+   "airDateUtc": "2025-09-12T04:00:00Z",
+   "runtime": 44,
+   "overview": "Jamila and Clark try to find Aneesha, who’s begun digging into Infinitas. Trevante, Mitsuki, and Nikhil are hurled into a top-secret WDC mission.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11229305/screencap/68ba3713542b5.jpg"
+  },
+  {
+   "tvdbShowId": 404492,
+   "tvdbId": 11229306,
+   "seasonNumber": 3,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 25,
+   "title": "Point of No Return",
+   "airDate": "2025-09-19",
+   "airDateUtc": "2025-09-19T04:00:00Z",
+   "runtime": 41,
+   "overview": "Trevante, Mitsuki, and Nikhil must fight their way out of dangerous territory. Aneesha, Clark, and Jamila go on the run with Infinitas.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11229306/screencap/68a5180d4121a.jpg"
+  },
+  {
+   "tvdbShowId": 404492,
+   "tvdbId": 11229307,
+   "seasonNumber": 3,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 26,
+   "title": "Marilyn",
+   "airDate": "2025-09-26",
+   "airDateUtc": "2025-09-26T04:00:00Z",
+   "runtime": 46,
+   "overview": "Two years ago, when the alien invasion began, Verna and Joel sparked the rise of Infinitas.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11229307/screencap/68ccacd8a26d6.jpg"
+  },
+  {
+   "tvdbShowId": 404492,
+   "tvdbId": 11229308,
+   "seasonNumber": 3,
+   "episodeNumber": 7,
+   "absoluteEpisodeNumber": 27,
+   "title": "Outpost 17",
+   "airDate": "2025-10-03",
+   "airDateUtc": "2025-10-03T04:00:00Z",
+   "runtime": 48,
+   "overview": "The team make it to the Dead Zone, only to find a new threat waiting for them.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11229308/screencap/68e04573c5e85.jpg"
+  },
+  {
+   "tvdbShowId": 404492,
+   "tvdbId": 11229309,
+   "seasonNumber": 3,
+   "episodeNumber": 8,
+   "absoluteEpisodeNumber": 28,
+   "title": "Life in the Dead Zone",
+   "airDate": "2025-10-10",
+   "airDateUtc": "2025-10-10T04:00:00Z",
+   "runtime": 41,
+   "overview": "An extraordinary encounter leads Mitsuki on a harrowing journey—and a crisis of faith.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11229309/screencap/68e8401a81a3e.jpg"
+  },
+  {
+   "tvdbShowId": 404492,
+   "tvdbId": 11229311,
+   "seasonNumber": 3,
+   "episodeNumber": 9,
+   "absoluteEpisodeNumber": 29,
+   "title": "Homecoming",
+   "airDate": "2025-10-17",
+   "airDateUtc": "2025-10-17T04:00:00Z",
+   "runtime": 42,
+   "overview": "Trevante’s memories return and reveal a shocking truth. Mitsuki wrestles with doubts about the aliens. The WDC and Infinitas go to war.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11229311/screencap/68e85c85aa449.jpg"
+  },
+  {
+   "tvdbShowId": 404492,
+   "tvdbId": 11229313,
+   "seasonNumber": 3,
+   "episodeNumber": 10,
+   "absoluteEpisodeNumber": 30,
+   "title": "The End of the Line",
+   "airDate": "2025-10-24",
+   "airDateUtc": "2025-10-24T04:00:00Z",
+   "runtime": 51,
+   "finaleType": "season",
+   "overview": "Trevante, Jamila, and Nikhil face the deepest level of alien horror. Aneesha takes on Infinitas. Mitsuki makes a world-altering decision.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11229313/screencap/68f196450d170.jpg"
+  }
+ ]
+}

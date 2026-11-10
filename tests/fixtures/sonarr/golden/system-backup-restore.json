@@ -1,0 +1,11 @@
+{
+  "body": {
+    "restartRequired": true
+  },
+  "recordedAt": "2026-11-09T23:01:03Z",
+  "request": {
+    "method": "POST",
+    "path": "/api/v3/system/backup/restore/478899172"
+  },
+  "status": 200
+}

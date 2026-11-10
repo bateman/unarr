@@ -78,6 +78,26 @@ flows, under the downloads or TV directory only:
     POST /mock/fs/write?path=<absolute>&clip=<name>   copy a clip there (parents created)
     POST /mock/fs/remove?path=<absolute>              delete that file or folder
 
+Metadata upstreams. The originals call Skyhook, the Servarr services, XEM
+and TheTVDB's artwork host over HTTPS at fixed addresses, so the mock is
+also an HTTP proxy for them: the recording Sonarr is told to use it (its
+proxy settings, with certificate validation off), every `CONNECT` to one
+of METADATA_HOSTS is answered with TLS on `--tls-cert`/`--tls-key`, and
+the requests inside the tunnel are served as if they had come for
+`/<host><path>`. Unarr's tests ask for `/<host><path>` directly. A
+`CONNECT` to any other host is refused, so nothing leaves the machine
+while goldens are recorded.
+
+    /<host>/<path>?<query>   tests/fixtures/metadata/<host>/<path>[/<slug(query)>].json
+                             (a `.status` file next to it holds a status other than 200)
+    /artworks.thetvdb.com/…  an image from tests/fixtures/metadata/artwork/, by cover type
+    /services.sonarr.tv/v1/time  the current time, not a recording
+
+A missing file answers 404, unless `--record-metadata` is given: then the
+request is sent to the real host with the client's own user agent and
+the answer is stored under that name before it is served. Images are
+never fetched: the stand-ins are small images of the originals' sizes.
+
     scripts/mock-servarr.py --listen 127.0.0.1:18989 --fixtures tests/fixtures --log .cache/mock-requests.jsonl
 """
 
@@ -94,8 +114,11 @@ import http.server
 import json
 import re
 import socketserver
+import ssl
 import sys
+import urllib.error
 import urllib.parse
+import urllib.request
 from pathlib import Path
 
 API_KEY = "0123456789abcdef0123456789abcdef"
@@ -129,6 +152,46 @@ def log(msg: str) -> None:
 
 def slug(text: str) -> str:
     return re.sub(r"[^a-z0-9]+", "-", text.lower()).strip("-")
+
+
+# The HTTPS hosts the originals fetch metadata and artwork from.
+METADATA_HOSTS = ("skyhook.sonarr.tv", "services.sonarr.tv", "thexem.info", "artworks.thetvdb.com", "api.simkl.com")
+# Hosts whose fixtures are hand-made: a request for a missing one is never
+# passed on, since it would carry an account's token.
+NEVER_RECORDED = ("api.simkl.com",)
+
+
+def metadata_name(path: str, query: str) -> str:
+    """The fixture name, relative to `metadata/<host>/`, for a path and query."""
+    name = path.strip("/") or "index"
+    if query:
+        name += "/" + (slug(urllib.parse.unquote_plus(query)) or "query")
+    return name
+
+
+# Which stand-in image a TheTVDB artwork path gets, by the folder its
+# kind names; the first match wins.
+ARTWORK_KINDS = (
+    ("clearlogo", "clearlogo.png"),
+    ("clearart", "clearlogo.png"),
+    ("poster", "poster.jpg"),
+    ("background", "fanart.jpg"),
+    ("fanart", "fanart.jpg"),
+    ("banner", "banner.jpg"),
+    ("graphical", "banner.jpg"),
+    ("screencap", "screenshot.jpg"),
+    ("episode", "screenshot.jpg"),
+    ("photo", "headshot.jpg"),
+    ("actor", "headshot.jpg"),
+)
+
+
+def artwork_file(path: str) -> str:
+    lowered = path.lower()
+    for marker, name in ARTWORK_KINDS:
+        if marker in lowered:
+            return name
+    return "poster.jpg"
 
 
 def result_file(q: dict[str, str]) -> str:
@@ -404,8 +467,34 @@ def hms(seconds: int) -> str:
 
 class Handler(http.server.BaseHTTPRequestHandler):
     protocol_version = "HTTP/1.1"
+    # The headers and the body are two writes: without this, each answer on
+    # a kept-alive connection waits 40 ms for the client's delayed ACK.
+    disable_nagle_algorithm = True
     fixtures: Path
     logfile: Path | None
+    tls: ssl.SSLContext | None = None
+    record_metadata = False
+    # The host a CONNECT tunnel was opened to; its requests carry only a path.
+    tunnel: str | None = None
+
+    def do_CONNECT(self):
+        host, _, _port = self.path.rpartition(":")
+        if host not in METADATA_HOSTS or Handler.tls is None:
+            self.close_connection = True
+            return self.reply(403, b"", "text/plain", f"connect {host} refused")
+        self.send_response(200, "Connection established")
+        self.end_headers()
+        self.record(200, f"connect {host}")
+        try:
+            conn = Handler.tls.wrap_socket(self.connection, server_side=True)
+        except (ssl.SSLError, OSError) as e:
+            log(f"TLS with the client failed for {host}: {e}")
+            self.close_connection = True
+            return
+        self.connection = conn
+        self.rfile = conn.makefile("rb", self.rbufsize)
+        self.wfile = socketserver._SocketWriter(conn)
+        self.tunnel = host
 
     def log_message(self, fmt, *args):
         pass
@@ -447,9 +536,19 @@ class Handler(http.server.BaseHTTPRequestHandler):
     do_PUT = do_POST
 
     def dispatch(self, body: bytes) -> None:
+        # Inside a tunnel, or a plain proxy request with an absolute URI: the
+        # host becomes the first path segment, as Unarr's tests ask for it.
+        if self.tunnel:
+            self.path = f"/{self.tunnel}{self.path}"
+        elif self.path.startswith("http://"):
+            absolute = urllib.parse.urlsplit(self.path)
+            self.path = f"/{absolute.hostname}{absolute.path or '/'}" + (f"?{absolute.query}" if absolute.query else "")
         parsed = urllib.parse.urlparse(self.path)
         q = dict(urllib.parse.parse_qsl(parsed.query, keep_blank_values=True))
         path = parsed.path
+        host, _, rest = path[1:].partition("/")
+        if host in METADATA_HOSTS:
+            return self.metadata(host, "/" + rest, parsed.query)
         for kind in ("newznab", "torznab"):
             prefix = f"/{kind}"
             if path == f"{prefix}/api":
@@ -915,6 +1014,52 @@ class Handler(http.server.BaseHTTPRequestHandler):
             return ok({}, method)
         return self.json({"result": f"method name not recognized: {method}", "arguments": {}}, f"transmission/{method}")
 
+    # --- Metadata upstreams
+
+    def metadata(self, host: str, path: str, query: str) -> None:
+        if host == "artworks.thetvdb.com":
+            name = artwork_file(path)
+            image = self.fixtures / "metadata" / "artwork" / name
+            content_type = "image/png" if name.endswith(".png") else "image/jpeg"
+            return self.reply(200, image.read_bytes(), content_type, f"artwork/{name}")
+        if host == "services.sonarr.tv" and path == "/v1/time":
+            # The originals' system time check compares this with their own
+            # clock; a recorded answer would be days off on the next run.
+            now = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.%f0Z")
+            return self.json({"dateTimeUtc": now}, "services.sonarr.tv/v1/time (now)")
+        name = metadata_name(path, query)
+        stored = self.fixtures / "metadata" / host / f"{name}.json"
+        status_file = stored.with_suffix(".status")
+        if not stored.is_file() and Handler.record_metadata and host not in NEVER_RECORDED:
+            self.fetch_upstream(host, path, query, stored)
+        if not stored.is_file():
+            return self.json({"message": "NotFound", "description": f"no fixture {host}/{name}.json"}, f"{host}/{name} (missing)", 404)
+        status = int(status_file.read_text()) if status_file.is_file() else 200
+        self.reply(status, stored.read_bytes(), "application/json; charset=utf-8", f"{host}/{name}")
+
+    def fetch_upstream(self, host: str, path: str, query: str, stored: Path) -> None:
+        """Ask the real host once and keep the answer as the fixture."""
+        url = f"https://{host}{path}" + (f"?{query}" if query else "")
+        request = urllib.request.Request(url, headers={"User-Agent": self.headers.get("User-Agent", ""), "Accept": "application/json"})
+        try:
+            with urllib.request.urlopen(request, timeout=60) as response:
+                status, body = response.status, response.read()
+        except urllib.error.HTTPError as e:
+            status, body = e.code, e.read()
+        except (urllib.error.URLError, OSError) as e:
+            log(f"upstream {url} failed: {e}")
+            return
+        stored.parent.mkdir(parents=True, exist_ok=True)
+        try:
+            # Pretty-printed so the fixtures diff; the originals parse either.
+            body = (json.dumps(json.loads(body), indent=1, ensure_ascii=False) + "\n").encode()
+        except ValueError:
+            pass
+        stored.write_bytes(body)
+        if status != 200:
+            stored.with_suffix(".status").write_text(f"{status}\n")
+        log(f"recorded {url} -> {status}, {len(body)} bytes")
+
     def indexer(self, kind: str, q: dict[str, str]) -> None:
         if q.get("apikey") != API_KEY:
             return self.reply(200, ERROR_100.encode(), "application/xml", "error-100")
@@ -959,7 +1104,15 @@ def main() -> None:
     ap.add_argument("--log", type=Path, help="append one JSON line per request here")
     ap.add_argument("--downloads", default=DOWNLOADS, help="the directory the download clients report and fill (default /downloads)")
     ap.add_argument("--tv", default=TV, help="the TV library location Plex reports (default /tv)")
+    ap.add_argument("--tls-cert", type=Path, help="certificate for the metadata hosts' CONNECT tunnels")
+    ap.add_argument("--tls-key", type=Path, help="its private key")
+    ap.add_argument("--record-metadata", action="store_true", help="fetch a missing metadata fixture from the real host and keep it")
     args = ap.parse_args()
+    if args.tls_cert:
+        context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
+        context.load_cert_chain(args.tls_cert, args.tls_key)
+        Handler.tls = context
+    Handler.record_metadata = args.record_metadata
     DOWNLOADS = args.downloads.rstrip("/") or "/"
     TV = args.tv.rstrip("/") or "/"
     MEDIA = args.fixtures / "media"

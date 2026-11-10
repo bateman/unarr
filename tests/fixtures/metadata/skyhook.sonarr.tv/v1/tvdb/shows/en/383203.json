@@ -1,0 +1,849 @@
+{
+ "tvdbId": 383203,
+ "title": "Ted Lasso",
+ "overview": "Ted Lasso, an American football coach, moves to England when he’s hired to manage a soccer team—despite having no experience. With cynical players and a doubtful town, will he get them to see the Ted Lasso Way?",
+ "slug": "ted-lasso",
+ "originalCountry": "usa",
+ "originalLanguage": "eng",
+ "language": "eng",
+ "firstAired": "2020-08-14",
+ "lastAired": "2026-10-07",
+ "tvMazeId": 44458,
+ "tmdbId": 97546,
+ "imdbId": "tt10986410",
+ "malIds": [],
+ "anidbIds": [],
+ "aniListIds": [],
+ "lastUpdated": "2026-11-06T08:54:36Z",
+ "status": "Continuing",
+ "runtime": 43,
+ "timeOfDay": {
+  "hours": 0,
+  "minutes": 0
+ },
+ "originalNetwork": "Apple TV",
+ "network": "Apple TV",
+ "genres": [
+  "Comedy",
+  "Drama",
+  "Sport"
+ ],
+ "contentRating": "TV-MA",
+ "rating": {
+  "count": 479111,
+  "value": "8.7"
+ },
+ "actors": [
+  {
+   "name": "Jason Sudeikis",
+   "character": "Ted Lasso",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/292098/photo/60642ea3355e7.jpg"
+  },
+  {
+   "name": "Hannah Waddingham",
+   "character": "Rebecca Welton",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/283520/photo/645fa1ab65fd3.jpg"
+  },
+  {
+   "name": "Brendan Hunt",
+   "character": "Coach Beard"
+  },
+  {
+   "name": "Juno Temple",
+   "character": "Keeley Jones",
+   "image": "https://artworks.thetvdb.com/banners/person/445161/primary.jpg"
+  },
+  {
+   "name": "Phil Dunster",
+   "character": "Jamie Tartt",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/471076/photo/67c7d91169396.jpg"
+  },
+  {
+   "name": "Brett Goldstein",
+   "character": "Roy Kent",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/460656/photo/62c958f174f41.jpg"
+  },
+  {
+   "name": "Jeremy Swift",
+   "character": "Leslie Higgins",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/308484/photo/647b76dfa1809.jpg"
+  },
+  {
+   "name": "Nick Mohammed",
+   "character": "Nathan Shelley",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/453477/photo/66ceade1d2c9c.jpg"
+  },
+  {
+   "name": "Sarah Niles",
+   "character": "Dr. Sharon Fieldstone",
+   "image": "https://artworks.thetvdb.com/banners/person/529446/6023cd1904047.jpg"
+  },
+  {
+   "name": "Toheeb Jimoh",
+   "character": "Sam Obisanya",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8175855/photo/6ab5d103e7658.jpg"
+  },
+  {
+   "name": "Billy Harris",
+   "character": "Colin Hughes",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/7900001/photo/610da2a16fd96.jpg"
+  },
+  {
+   "name": "Kola Bokinni",
+   "character": "Isaac McAdoo"
+  },
+  {
+   "name": "Cristo Fernández",
+   "character": "Dani Rojas",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8178286/photo/610da2a051adf.jpg"
+  },
+  {
+   "name": "Stephen Manas",
+   "character": "Richard Montlaur",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8175853/photo/610da29f1b31e.jpg"
+  },
+  {
+   "name": "David Elsendoorn",
+   "character": "Jan Maas",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/461142/photo/610da29e4b099.jpg"
+  },
+  {
+   "name": "Moe Hashim",
+   "character": "Moe Bumbercatch",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8687670/photo/669d178d8f151.jpg"
+  }
+ ],
+ "images": [
+  {
+   "coverType": "Banner",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/383203/banners/60dfad53daf18.jpg"
+  },
+  {
+   "coverType": "Poster",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/383203/posters/61010b6167190.jpg"
+  },
+  {
+   "coverType": "Fanart",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/383203/backgrounds/60d5931c1f29c.jpg"
+  },
+  {
+   "coverType": "Clearlogo",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/383203/clearlogo/611c3acf767fe.png"
+  }
+ ],
+ "seasons": [
+  {
+   "seasonNumber": 0,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/1846160/posters/652c99b2161ff.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 1,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/1846161/posters/640d8d5356055.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 2,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/1921068/posters/640d8c7a4aeba.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 3,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2047526/posters/640d8a77ef0e8.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 4,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2247557/posters/6a72a5a4e248b.jpg"
+    }
+   ]
+  }
+ ],
+ "episodes": [
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 7949030,
+   "seasonNumber": 0,
+   "episodeNumber": 1,
+   "title": "An American Coach in London",
+   "airDate": "2013-08-03",
+   "airDateUtc": "2013-08-03T04:00:00Z",
+   "runtime": 5,
+   "overview": "This is first time we are introduced to the Ted Lasso character, created for a series of promotions of NBC landing the Premier League broadcasting rights for the US.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/7949030/screencap/60f81f3aca719.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 7952460,
+   "seasonNumber": 0,
+   "episodeNumber": 2,
+   "title": "Behind-the-Scenes with Coach Ted Lasso",
+   "airDate": "2013-08-05",
+   "airDateUtc": "2013-08-05T04:00:00Z",
+   "runtime": 4,
+   "overview": "You've seen the NBC Sports advert with Coach Lasso as a manager in the making. Spurs TV spoke to Hollywood star Jason Sudeikis when he was shooting the advert at the Tottenham Hotspur Training Centre.",
+   "image": "https://artworks.thetvdb.com/banners/series/383203/episodes/5f6a5be94e3e1.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 7949031,
+   "seasonNumber": 0,
+   "episodeNumber": 3,
+   "title": "The Return of Coach Lasso",
+   "airDate": "2014-08-08",
+   "airDateUtc": "2014-08-08T04:00:00Z",
+   "runtime": 5,
+   "overview": "After being fired by Tottenham, Ted helps in the broadcast booth.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/7949031/screencap/60f81f4dc3291.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 7952892,
+   "seasonNumber": 0,
+   "episodeNumber": 4,
+   "title": "A Conversation with José Mourinho",
+   "airDate": "2020-08-23",
+   "airDateUtc": "2020-08-23T04:00:00Z",
+   "runtime": 2,
+   "overview": "Ted Lasso might not know much about British football, but he does know José Mourinho’s phone number somehow.",
+   "image": "https://artworks.thetvdb.com/banners/series/383203/episodes/5f6abe3f03497.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 8441131,
+   "seasonNumber": 0,
+   "episodeNumber": 5,
+   "title": "SAG Awards: Ted Lasso Team on the Greatest Ensembles of All Time",
+   "airDate": "2021-04-04",
+   "airDateUtc": "2021-04-04T04:00:00Z",
+   "runtime": 3,
+   "overview": "Tonight at the 27th Annual SAG Awards, some solid thoughts from the Ted Lasso team on the greatest ensembles of all time.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8441131/screencap/60a72ac6acd5a.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 8569651,
+   "seasonNumber": 0,
+   "episodeNumber": 6,
+   "title": "The Lasso Way",
+   "airDate": "2021-07-07",
+   "airDateUtc": "2021-07-07T04:00:00Z",
+   "runtime": 3,
+   "overview": "The cast talks about what made the first season great, just ahead of the season 2 premiere.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8569651/screencap/60f81b90d786d.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 8890158,
+   "seasonNumber": 0,
+   "episodeNumber": 7,
+   "airedBeforeSeasonNumber": 2,
+   "airedBeforeEpisodeNumber": 5,
+   "title": "The Missing Christmas Mustache",
+   "airDate": "2021-12-15",
+   "airDateUtc": "2021-12-15T05:00:00Z",
+   "runtime": 4,
+   "overview": "Ted and the crew search for a lost item that ultimately leads him to realize the meaning of the holiday season.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8890158/screencap/61ba6be20ecf3.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 9824597,
+   "seasonNumber": 0,
+   "episodeNumber": 9,
+   "airedAfterSeasonNumber": 3,
+   "title": "Richmond Till We Die",
+   "airDate": "2023-05-31",
+   "airDateUtc": "2023-05-31T04:00:00Z",
+   "runtime": 6,
+   "overview": "A six-minute and 38-second video featuring a look back at the series with Jason Sudeikis, Brendan Hunt, Hannah Waddingham, Brett Goldstein, Juno Temple, and all your favorite Richmond stars.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9824597/screencap/649645827a7da.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 9824599,
+   "seasonNumber": 0,
+   "episodeNumber": 10,
+   "title": "An Inside Look: Season 3 - Rebuilding Richmond",
+   "airDate": "2023-03-23",
+   "airDateUtc": "2023-03-23T04:00:00Z",
+   "runtime": 4,
+   "finaleType": "season",
+   "overview": "The stakes are higher than ever as Ted and AFC Richmond look to build more than a winning team this season.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9824599/screencap/663bc88985d07.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 7768683,
+   "seasonNumber": 1,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 1,
+   "title": "Pilot",
+   "airDate": "2020-08-14",
+   "airDateUtc": "2020-08-14T04:00:00Z",
+   "runtime": 30,
+   "overview": "American football coach Ted Lasso is hired by a wealthy divorcée to coach the English soccer team AFC Richmond.",
+   "image": "https://artworks.thetvdb.com/banners/series/383203/episodes/5f26846b7b141.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 7839607,
+   "seasonNumber": 1,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 2,
+   "title": "Biscuits",
+   "airDate": "2020-08-14",
+   "airDateUtc": "2020-08-14T04:00:00Z",
+   "runtime": 29,
+   "overview": "It’s Ted’s first day of coaching, and fans aren’t happy. He makes little headway but remains undeterred as the team plays its first match.",
+   "image": "https://artworks.thetvdb.com/banners/series/383203/episodes/68bc9dcd40aeb.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 7839610,
+   "seasonNumber": 1,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 3,
+   "title": "Trent Crimm: The Independent",
+   "airDate": "2020-08-14",
+   "airDateUtc": "2020-08-14T04:00:00Z",
+   "runtime": 30,
+   "overview": "To arrange an in-depth exposé, Rebecca pairs cynical journalist Trent Crimm with Ted for a day. Ted and Roy venture into the community.",
+   "image": "https://artworks.thetvdb.com/banners/series/383203/episodes/68bc9df908514.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 7839611,
+   "seasonNumber": 1,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 4,
+   "title": "For the Children",
+   "airDate": "2020-08-21",
+   "airDateUtc": "2020-08-21T04:00:00Z",
+   "runtime": 33,
+   "overview": "Rebecca hosts the team’s annual charity benefit, where Ted stages a reconciliation between Roy and Jamie.",
+   "image": "https://artworks.thetvdb.com/banners/series/383203/episodes/5f3619d98dd67.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 7839613,
+   "seasonNumber": 1,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 5,
+   "title": "Tan Lines",
+   "airDate": "2020-08-28",
+   "airDateUtc": "2020-08-28T04:00:00Z",
+   "runtime": 31,
+   "overview": "With his wife and son visiting from America, Ted makes drastic changes to the lineup during a critical match.",
+   "image": "https://artworks.thetvdb.com/banners/series/383203/episodes/5f3f8a5178a46.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 7839614,
+   "seasonNumber": 1,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 6,
+   "title": "Two Aces",
+   "airDate": "2020-09-04",
+   "airDateUtc": "2020-09-04T04:00:00Z",
+   "runtime": 31,
+   "overview": "When Jamie refuses to train, Ted turns to talented new signing Dani Rojas—and the team is struck by an age-old curse.",
+   "image": "https://artworks.thetvdb.com/banners/series/383203/episodes/5f48ad1abd8f9.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 7839615,
+   "seasonNumber": 1,
+   "episodeNumber": 7,
+   "absoluteEpisodeNumber": 7,
+   "title": "Make Rebecca Great Again",
+   "airDate": "2020-09-11",
+   "airDateUtc": "2020-09-11T04:00:00Z",
+   "runtime": 32,
+   "overview": "Rebecca celebrates her first anniversary as a divorcée as the team plays a match in Liverpool.",
+   "image": "https://artworks.thetvdb.com/banners/series/383203/episodes/5f520b13dd697.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 7839616,
+   "seasonNumber": 1,
+   "episodeNumber": 8,
+   "absoluteEpisodeNumber": 8,
+   "title": "The Diamond Dogs",
+   "airDate": "2020-09-18",
+   "airDateUtc": "2020-09-18T04:00:00Z",
+   "runtime": 29,
+   "overview": "Ted and Roy are both having relationship problems. Ted consults the Diamond Dogs. Roy lays it on the line with Keeley.",
+   "image": "https://artworks.thetvdb.com/banners/series/383203/episodes/5f5b78c089fce.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 7839617,
+   "seasonNumber": 1,
+   "episodeNumber": 9,
+   "absoluteEpisodeNumber": 9,
+   "title": "All Apologies",
+   "airDate": "2020-09-25",
+   "airDateUtc": "2020-09-25T04:00:00Z",
+   "runtime": 31,
+   "overview": "After a series of mistakes on the pitch, pressure mounts to bench Roy. Rebecca finally reveals the truth to Ted.",
+   "image": "https://artworks.thetvdb.com/banners/series/383203/episodes/5f6432329295f.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 7839618,
+   "seasonNumber": 1,
+   "episodeNumber": 10,
+   "absoluteEpisodeNumber": 10,
+   "title": "The Hope That Kills You",
+   "airDate": "2020-10-02",
+   "airDateUtc": "2020-10-02T04:00:00Z",
+   "runtime": 33,
+   "finaleType": "season",
+   "overview": "Richmond plays a climactic match that will determine the fates of Ted and his club.",
+   "image": "https://artworks.thetvdb.com/banners/series/383203/episodes/5f6da73de3e25.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 8378606,
+   "seasonNumber": 2,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 11,
+   "title": "Goodbye Earl",
+   "airDate": "2021-07-23",
+   "airDateUtc": "2021-07-23T04:00:00Z",
+   "runtime": 34,
+   "overview": "AFC Richmond brings in a sports psychologist to help the team overcome their unprecedented seven game tie-streak.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8378606/screencap/68bc9e43e96b0.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 8378607,
+   "seasonNumber": 2,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 12,
+   "title": "Lavender",
+   "airDate": "2021-07-30",
+   "airDateUtc": "2021-07-30T04:00:00Z",
+   "runtime": 33,
+   "overview": "Ted is surprised by the reappearance of a familiar face. Roy tries out a new gig.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8378607/screencap/68bc9e5cdeac0.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 8378608,
+   "seasonNumber": 2,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 13,
+   "title": "Do the Right-est Thing",
+   "airDate": "2021-08-06",
+   "airDateUtc": "2021-08-06T04:00:00Z",
+   "runtime": 36,
+   "overview": "Rebecca has a special visitor shadow her at work. A player’s return is not welcomed by the team.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8378608/screencap/6103a9fc37515.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 8554003,
+   "seasonNumber": 2,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 14,
+   "title": "Carol of the Bells",
+   "airDate": "2021-08-13",
+   "airDateUtc": "2021-08-13T04:00:00Z",
+   "runtime": 30,
+   "overview": "It’s Christmas in Richmond. Rebecca enlists Ted for a secret mission, Roy and Keeley search for a miracle, and the Higginses open up their home.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8554003/screencap/610cdf86b9f8c.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 8571978,
+   "seasonNumber": 2,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 15,
+   "title": "Rainbow",
+   "airDate": "2021-08-20",
+   "airDateUtc": "2021-08-20T04:00:00Z",
+   "runtime": 38,
+   "overview": "Nate learns how to be assertive from Keeley and Rebecca. Ted asks Roy for a favor.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8571978/screencap/61161b3c9ca10.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 8571979,
+   "seasonNumber": 2,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 16,
+   "title": "The Signal",
+   "airDate": "2021-08-27",
+   "airDateUtc": "2021-08-27T04:00:00Z",
+   "runtime": 35,
+   "overview": "Ted is fired up that the new team dynamic seems to be working. But will they have a chance in the semifinal?",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8571979/screencap/611f5c8cad91e.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 8571980,
+   "seasonNumber": 2,
+   "episodeNumber": 7,
+   "absoluteEpisodeNumber": 17,
+   "title": "Headspace",
+   "airDate": "2021-09-03",
+   "airDateUtc": "2021-09-03T04:00:00Z",
+   "runtime": 35,
+   "overview": "With things turning around for Richmond, it’s time for everyone to work on their issues—like Ted’s discomfort, Nate’s confidence, and Roy’s attention.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8571980/screencap/612899cedb62d.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 8571981,
+   "seasonNumber": 2,
+   "episodeNumber": 8,
+   "absoluteEpisodeNumber": 18,
+   "title": "Man City",
+   "airDate": "2021-09-10",
+   "airDateUtc": "2021-09-10T04:00:00Z",
+   "runtime": 45,
+   "overview": "Ted and Dr. Sharon realize they might have to meet each other halfway. Tensions are high as the team prepares for the semifinal.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8571981/screencap/6131befaa5eaf.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 8571982,
+   "seasonNumber": 2,
+   "episodeNumber": 9,
+   "absoluteEpisodeNumber": 19,
+   "title": "Beard After Hours",
+   "airDate": "2021-09-17",
+   "airDateUtc": "2021-09-17T04:00:00Z",
+   "runtime": 43,
+   "overview": "After the semifinal, Beard sets out on an all-night odyssey through London in an effort to collect his thoughts.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8571982/screencap/68bc9e8fd12a3.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 8571983,
+   "seasonNumber": 2,
+   "episodeNumber": 10,
+   "absoluteEpisodeNumber": 20,
+   "title": "No Weddings and a Funeral",
+   "airDate": "2021-09-24",
+   "airDateUtc": "2021-09-24T04:00:00Z",
+   "runtime": 46,
+   "overview": "Rebecca is stunned by a sudden loss. The team rallies to show their support, but Ted finds himself grappling with a piece of his past.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8571983/screencap/61442b11d8a27.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 8571984,
+   "seasonNumber": 2,
+   "episodeNumber": 11,
+   "absoluteEpisodeNumber": 21,
+   "title": "Midnight Train to Royston",
+   "airDate": "2021-10-01",
+   "airDateUtc": "2021-10-01T04:00:00Z",
+   "runtime": 42,
+   "overview": "A billionaire football enthusiast from Ghana makes Sam an unbelievable offer. Ted plans something special for Dr. Sharon’s last day with the team.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8571984/screencap/614d3fec4b156.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 8573811,
+   "seasonNumber": 2,
+   "episodeNumber": 12,
+   "absoluteEpisodeNumber": 22,
+   "title": "Inverting the Pyramid of Success",
+   "airDate": "2021-10-08",
+   "airDateUtc": "2021-10-08T04:00:00Z",
+   "runtime": 49,
+   "finaleType": "season",
+   "overview": "Richmond gets their final chance to win promotion as Ted deals with the fallout of Trent Crimm’s painfully honest exposé.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8573811/screencap/615ffbda84c3d.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 9617982,
+   "seasonNumber": 3,
+   "episodeNumber": 1,
+   "title": "Smells Like Mean Spirit",
+   "airDate": "2023-03-15",
+   "airDateUtc": "2023-03-15T04:00:00Z",
+   "runtime": 43,
+   "overview": "The newly promoted AFC Richmond face mockery as pundits predict they’ll finish dead last this season.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9617982/screencap/6411381d06982.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 9618352,
+   "seasonNumber": 3,
+   "episodeNumber": 2,
+   "title": "(I Don’t Want to Go to) Chelsea",
+   "airDate": "2023-03-22",
+   "airDateUtc": "2023-03-22T04:00:00Z",
+   "runtime": 47,
+   "overview": "News of a top player looking to move to London sends the English clubs into a frenzy. Richmond play their first game back in the Premier League.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9618352/screencap/64112ee087350.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 9618353,
+   "seasonNumber": 3,
+   "episodeNumber": 3,
+   "title": "4-5-1",
+   "airDate": "2023-03-29",
+   "airDateUtc": "2023-03-29T04:00:00Z",
+   "runtime": 47,
+   "overview": "Richmond adjust to an exciting change, but Jamie has reservations. Ted learns there's something new going on back in Kansas as well.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9618353/screencap/641a546b055c4.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 9618354,
+   "seasonNumber": 3,
+   "episodeNumber": 4,
+   "title": "Big Week",
+   "airDate": "2023-04-05",
+   "airDateUtc": "2023-04-05T04:00:00Z",
+   "runtime": 49,
+   "overview": "Everyone's feeling the pressure as Richmond gear up to play West Ham. Ted is reunited with an old friend.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9618354/screencap/6409a6e6112d4.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 9618355,
+   "seasonNumber": 3,
+   "episodeNumber": 5,
+   "title": "Signs",
+   "airDate": "2023-04-12",
+   "airDateUtc": "2023-04-12T04:00:00Z",
+   "runtime": 49,
+   "overview": "With their season in a tailspin, Richmond try to right the ship against mighty Manchester City. Off the pitch, everyone faces their own setbacks.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9618355/screencap/642cdd25d0215.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 9618356,
+   "seasonNumber": 3,
+   "episodeNumber": 6,
+   "title": "Sunflowers",
+   "airDate": "2023-04-19",
+   "airDateUtc": "2023-04-19T04:00:00Z",
+   "runtime": 63,
+   "overview": "A friendly match takes the team to Amsterdam, where one night out unlocks truths for many.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9618356/screencap/68bc9eefc1aaf.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 9618357,
+   "seasonNumber": 3,
+   "episodeNumber": 7,
+   "title": "The Strings That Bind Us",
+   "airDate": "2023-04-26",
+   "airDateUtc": "2023-04-26T04:00:00Z",
+   "runtime": 57,
+   "overview": "The Greyhounds try a new strategy that has everyone thinking outside the box. Sam prepares to host a VIP guest at Ola's.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9618357/screencap/643f43327513d.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 9618358,
+   "seasonNumber": 3,
+   "episodeNumber": 8,
+   "title": "We’ll Never Have Paris",
+   "airDate": "2023-05-03",
+   "airDateUtc": "2023-05-03T04:00:00Z",
+   "runtime": 54,
+   "overview": "While watching Henry, Ted fights the urge to spiral when Michelle and Dr. Jacob go on a romantic trip. An online leak has massive implications for Keeley.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9618358/screencap/64487a368dda8.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 9618359,
+   "seasonNumber": 3,
+   "episodeNumber": 9,
+   "title": "La Locker Room Aux Folles",
+   "airDate": "2023-05-10",
+   "airDateUtc": "2023-05-10T04:00:00Z",
+   "runtime": 44,
+   "overview": "Colin and Isaac's friendship is tested. Roy is asked to do a press conference.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9618359/screencap/6451ba1195b20.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 9618360,
+   "seasonNumber": 3,
+   "episodeNumber": 10,
+   "title": "International Break",
+   "airDate": "2023-05-17",
+   "airDateUtc": "2023-05-17T04:00:00Z",
+   "runtime": 63,
+   "overview": "While some of the Greyhounds head home to play for their countries in international matches, Edwin Akufo brings a business proposal to Rebecca.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9618360/screencap/645aee15ccaf2.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 9618361,
+   "seasonNumber": 3,
+   "episodeNumber": 11,
+   "title": "Mom City",
+   "airDate": "2023-05-24",
+   "airDateUtc": "2023-05-24T04:00:00Z",
+   "runtime": 69,
+   "overview": "An unexpected guest has Ted on edge. When Richmond travel to Manchester for a big match, Roy and Keeley become concerned about Jamie.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9618361/screencap/6464504874747.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 9618362,
+   "seasonNumber": 3,
+   "episodeNumber": 12,
+   "title": "So Long, Farewell",
+   "airDate": "2023-05-31",
+   "airDateUtc": "2023-05-31T04:00:00Z",
+   "runtime": 75,
+   "finaleType": "season",
+   "overview": "AFC Richmond play their final match of the season.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9618362/screencap/646d7feb246f5.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 11766070,
+   "seasonNumber": 4,
+   "episodeNumber": 1,
+   "title": "Home",
+   "airDate": "2026-08-05",
+   "airDateUtc": "2026-08-05T04:00:00Z",
+   "runtime": 42,
+   "overview": "A few years after Ted has left Richmond, some familiar faces visit him in Kansas… or is it Missouri?",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11766070/screencap/6a727ff8ec52e.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 11767182,
+   "seasonNumber": 4,
+   "episodeNumber": 2,
+   "title": "Curiouser and Curiouser!",
+   "airDate": "2026-08-12",
+   "airDateUtc": "2026-08-12T04:00:00Z",
+   "runtime": 47,
+   "overview": "Ted returns to Richmond to meet the Lady Greyhounds, but not everyone is glad to see him.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11767182/screencap/6a728b6bae22c.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 11767183,
+   "seasonNumber": 4,
+   "episodeNumber": 3,
+   "title": "Richmond’s Got Talent",
+   "airDate": "2026-08-19",
+   "airDateUtc": "2026-08-19T04:00:00Z",
+   "runtime": 46,
+   "overview": "Richmond’s shareholders are unsure about a women's team. The coaches hold tryouts to fill out their roster.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11767183/screencap/6a739be37aa10.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 11767184,
+   "seasonNumber": 4,
+   "episodeNumber": 4,
+   "title": "Greyhounds’ Day Off",
+   "airDate": "2026-08-26",
+   "airDateUtc": "2026-08-26T04:00:00Z",
+   "runtime": 44,
+   "overview": "The coaches must figure out how to break up team cliques. Ted adjusts to life outside the locker room.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11767184/screencap/6a739bf80ecf0.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 11767185,
+   "seasonNumber": 4,
+   "episodeNumber": 5,
+   "title": "Riches of Embarrassment",
+   "airDate": "2026-09-02",
+   "airDateUtc": "2026-09-02T04:00:00Z",
+   "runtime": 48,
+   "overview": "The ladies face off against Chelsea. Alice feels the pressure. Rebecca navigates a complicated dynamic.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11767185/screencap/6a8e3ae8971af.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 11767186,
+   "seasonNumber": 4,
+   "episodeNumber": 6,
+   "title": "Don’t Jump Around Much Anymore",
+   "airDate": "2026-09-09",
+   "airDateUtc": "2026-09-09T04:00:00Z",
+   "runtime": 46,
+   "overview": "It’s New Year’s Eve! The team celebrates big. Rebecca, Roy, and Keeley ring it in with an old friend.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11767186/screencap/6a977717d5af5.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 11767187,
+   "seasonNumber": 4,
+   "episodeNumber": 7,
+   "title": "Yes & Baby",
+   "airDate": "2026-09-16",
+   "airDateUtc": "2026-09-16T04:00:00Z",
+   "runtime": 41,
+   "overview": "Alice and Ted try stepping outside their comfort zones. Zelda helps with a new problem at Richmond.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11767187/screencap/6aa0b0797b218.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 11767188,
+   "seasonNumber": 4,
+   "episodeNumber": 8,
+   "title": "Follow the Anger",
+   "airDate": "2026-09-23",
+   "airDateUtc": "2026-09-23T04:00:00Z",
+   "runtime": 51,
+   "overview": "The Lady Greyhounds navigate a difficult setback. Roy and Keeley prepare for the Wall of Legends.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11767188/screencap/6aa9ead635b92.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 11767189,
+   "seasonNumber": 4,
+   "episodeNumber": 9,
+   "title": "Mae Rides the Bus",
+   "airDate": "2026-09-30",
+   "airDateUtc": "2026-09-30T04:00:00Z",
+   "runtime": 43,
+   "overview": "Morale is low, but the stakes have never been higher. Mae joins the team on the road. Keeley has news.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11767189/screencap/6ab326a08f984.jpg"
+  },
+  {
+   "tvdbShowId": 383203,
+   "tvdbId": 11767190,
+   "seasonNumber": 4,
+   "episodeNumber": 10,
+   "title": "Being Alive",
+   "airDate": "2026-10-07",
+   "airDateUtc": "2026-10-07T04:00:00Z",
+   "runtime": 55,
+   "finaleType": "season",
+   "overview": "Big changes in bunches.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11767190/screencap/6abc5fdbb0131.jpg"
+  }
+ ]
+}

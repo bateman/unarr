@@ -1,0 +1,18 @@
+{
+ "tvdbId": 424536,
+ "title": "Frieren: Beyond Journey's End",
+ "qualityProfileId": 4,
+ "rootFolderPath": "/tv",
+ "seasonFolder": true,
+ "monitored": true,
+ "seriesType": "anime",
+ "tags": [
+  1
+ ],
+ "seasons": [],
+ "addOptions": {
+  "monitor": "firstSeason",
+  "searchForMissingEpisodes": false,
+  "searchForCutoffUnmetEpisodes": false
+ }
+}

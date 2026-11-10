@@ -70,7 +70,8 @@ async fn load(state: &AppState, id: Option<i64>, tvdb_id: Option<i64>) -> anyhow
 }
 
 fn render(state: &AppState, loaded: &Loaded, include_season_images: bool) -> Vec<SeriesResource> {
-    let url_base = &state.settings().url_base;
+    let settings = state.settings();
+    let url_base = &settings.url_base;
     loaded
         .series
         .iter()
@@ -79,6 +80,7 @@ fn render(state: &AppState, loaded: &Loaded, include_season_images: bool) -> Vec
                 s,
                 SeriesContext {
                     url_base,
+                    media_cover_dir: Some(&state.runtime().media_cover_dir),
                     root_folder_path: best_root_folder_path(&s.path, &loaded.root_folders),
                     alternate_titles: loaded
                         .mappings
@@ -103,12 +105,17 @@ pub async fn series_resource_by_id(state: &AppState, id: i64) -> anyhow::Result<
 
 pub async fn list(State(state): State<AppState>, uri: Uri) -> ApiResult<Json<Vec<SeriesResource>>> {
     let p = Params::from_uri(&uri);
+    let started = std::time::Instant::now();
     let loaded = load(&state, None, p.i64("tvdbId")).await?;
-    Ok(Json(render(
-        &state,
-        &loaded,
-        p.bool("includeSeasonImages", false),
-    )))
+    let read = started.elapsed();
+    let resources = render(&state, &loaded, p.bool("includeSeasonImages", false));
+    tracing::debug!(
+        series = resources.len(),
+        "series list: {:.1} ms in the database, {:.1} ms building the resources",
+        read.as_secs_f64() * 1000.0,
+        (started.elapsed() - read).as_secs_f64() * 1000.0
+    );
+    Ok(Json(resources))
 }
 
 pub async fn get(

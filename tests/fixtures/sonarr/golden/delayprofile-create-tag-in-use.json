@@ -1,0 +1,27 @@
+{
+  "body": [
+    {
+      "attemptedValue": [
+        2
+      ],
+      "errorCode": "DelayProfileTagInUseValidator",
+      "errorMessage": "One or more tags is used in another profile",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Tags",
+        "propertyValue": [
+          2
+        ]
+      },
+      "propertyName": "Tags",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-09T22:24:43Z",
+  "request": {
+    "body": "bodies/delayprofile-create-tag-in-use.json",
+    "method": "POST",
+    "path": "/api/v3/delayprofile"
+  },
+  "status": 400
+}

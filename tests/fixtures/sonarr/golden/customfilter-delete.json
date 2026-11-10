@@ -1,0 +1,9 @@
+{
+  "body": null,
+  "recordedAt": "2026-11-09T22:24:43Z",
+  "request": {
+    "method": "DELETE",
+    "path": "/api/v3/customfilter/2"
+  },
+  "status": 200
+}

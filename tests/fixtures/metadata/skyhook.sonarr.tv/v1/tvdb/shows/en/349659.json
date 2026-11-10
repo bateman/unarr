@@ -1,0 +1,823 @@
+{
+ "tvdbId": 349659,
+ "title": "Mayans M.C.",
+ "overview": "EZ is the gifted son of a proud Latino family, whose American dream was stifled by cartel violence. Now his need for revenge drives him into a life he never intended and he can never escape.",
+ "slug": "mayans-m-c",
+ "originalCountry": "usa",
+ "originalLanguage": "eng",
+ "language": "eng",
+ "firstAired": "2018-09-04",
+ "lastAired": "2023-07-19",
+ "tvMazeId": 17118,
+ "tmdbId": 76231,
+ "imdbId": "tt5715524",
+ "malIds": [],
+ "anidbIds": [],
+ "aniListIds": [],
+ "lastUpdated": "2026-11-03T09:27:42Z",
+ "status": "Ended",
+ "runtime": 53,
+ "timeOfDay": {
+  "hours": 22,
+  "minutes": 0
+ },
+ "originalNetwork": "FX",
+ "network": "FX",
+ "genres": [
+  "Crime",
+  "Drama"
+ ],
+ "contentRating": "TV-MA",
+ "rating": {
+  "count": 28190,
+  "value": "7.5"
+ },
+ "actors": [
+  {
+   "name": "J. D. Pardo",
+   "character": "Ezekiel ‘EZ’ Reyes",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/7866774/photo/65cd0ceedd851.jpg"
+  },
+  {
+   "name": "Clayton Cardenas",
+   "character": "Angel Reyes",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/7866782/photo/66fec1342b77e.jpg"
+  },
+  {
+   "name": "Sarah Bolger",
+   "character": "Emily Thomas",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/416061/photo/65fafef852288.jpg"
+  },
+  {
+   "name": "Michael Irby",
+   "character": "Obispo 'Bishop' Losa",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/314565/photo/6390f2785c820.jpg"
+  },
+  {
+   "name": "Carla Baratta",
+   "character": "Luisa 'Adelita' Espina"
+  },
+  {
+   "name": "Richard Cabral",
+   "character": "Johnny 'Coco' Cruz",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/450416/photo/66feb44e02942.jpg"
+  },
+  {
+   "name": "Raoul Trujillo",
+   "character": "Che 'Taza' Romero"
+  },
+  {
+   "name": "Antonio Jaramillo",
+   "character": "Michael 'Riz' Ariza"
+  },
+  {
+   "name": "Danny Pino",
+   "character": "Miguel Galindo",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/332332/photo/67daf594cfafb.jpg"
+  },
+  {
+   "name": "Edward James Olmos",
+   "character": "Felipe Reyes",
+   "image": "https://artworks.thetvdb.com/banners/person/345955/primary.jpg"
+  },
+  {
+   "name": "Emilio Rivera",
+   "character": "Marcus Alvarez",
+   "image": "https://artworks.thetvdb.com/banners/person/270341/primary.jpg"
+  },
+  {
+   "name": "Sulem Calderon",
+   "character": "Gaby Castillo"
+  },
+  {
+   "name": "Frankie Loyal",
+   "character": "Hank 'El Tranq' Loza"
+  },
+  {
+   "name": "Joseph Raymond Lucero",
+   "character": "Neron 'Creeper' Vargas"
+  },
+  {
+   "name": "Vincent Vargas",
+   "character": "Gilberto 'Gilly' Lopez",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8330908/photo/68febc2679680.jpg"
+  },
+  {
+   "name": "JR Bourne",
+   "character": "Isaac Packer",
+   "image": "https://artworks.thetvdb.com/banners/person/281354/5eee6196a3b10.jpg"
+  }
+ ],
+ "images": [
+  {
+   "coverType": "Banner",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/349659/banners/6455a608009d8.jpg"
+  },
+  {
+   "coverType": "Poster",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/349659/posters/624af976906b8.jpg"
+  },
+  {
+   "coverType": "Fanart",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/349659/backgrounds/624afa16220b5.jpg"
+  },
+  {
+   "coverType": "Clearlogo",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/349659/clearlogo/611c10300af30.png"
+  }
+ ],
+ "seasons": [
+  {
+   "seasonNumber": 1,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/seasons/5b9140106a5bd.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 2,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/seasons/5d7035976fee8.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 3,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/1899595/posters/62602a38ac85e.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 4,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/1927948/posters/62602a566f498.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 5,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2055915/posters/646fbba40b66d.jpg"
+    }
+   ]
+  }
+ ],
+ "episodes": [
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 6742844,
+   "seasonNumber": 1,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 1,
+   "title": "Perro/Oc",
+   "airDate": "2018-09-04",
+   "airDateUtc": "2018-09-05T02:00:00Z",
+   "runtime": 65,
+   "overview": "EZ’s fate is in flux as the M.C. and the cartel find a common adversary.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/349659/6742844.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 6793844,
+   "seasonNumber": 1,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 2,
+   "title": "Escorpión/Dzec",
+   "airDate": "2018-09-11",
+   "airDateUtc": "2018-09-12T02:00:00Z",
+   "runtime": 52,
+   "overview": "The Mayans seek answers from a local crew as the Galindo worlds north and south of the border collide.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/349659/6793844.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 6793848,
+   "seasonNumber": 1,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 3,
+   "title": "Búho/Muwan",
+   "airDate": "2018-09-18",
+   "airDateUtc": "2018-09-19T02:00:00Z",
+   "runtime": 50,
+   "overview": "The M.C. alliances are tested and the Galindo family adopts unconventional methods.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/349659/6793848.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 6793851,
+   "seasonNumber": 1,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 4,
+   "title": "Murciélago/Zotz",
+   "airDate": "2018-09-25",
+   "airDateUtc": "2018-09-26T02:00:00Z",
+   "runtime": 57,
+   "overview": "A new threat in Santo Padre presents the Mayans new obstacles and opportunities.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/349659/6793851.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 6806613,
+   "seasonNumber": 1,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 5,
+   "title": "Uch/Opossum",
+   "airDate": "2018-10-02",
+   "airDateUtc": "2018-10-03T02:00:00Z",
+   "runtime": 61,
+   "overview": "A new deal requires a dangerous favor in Santa Madre.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/349659/6806613.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 6806614,
+   "seasonNumber": 1,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 6,
+   "title": "Gato/Mis",
+   "airDate": "2018-10-09",
+   "airDateUtc": "2018-10-10T02:00:00Z",
+   "runtime": 49,
+   "overview": "EZ continues to prove his worth as a prospect, as both sides of the border must grapple with harsh realities.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/349659/6806614.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 6806616,
+   "seasonNumber": 1,
+   "episodeNumber": 7,
+   "absoluteEpisodeNumber": 7,
+   "title": "Cucaracha/K'uruch",
+   "airDate": "2018-10-16",
+   "airDateUtc": "2018-10-17T02:00:00Z",
+   "runtime": 60,
+   "overview": "New secrets are brought to light, putting the M.C. at odds.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/349659/6806616.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 6840282,
+   "seasonNumber": 1,
+   "episodeNumber": 8,
+   "absoluteEpisodeNumber": 8,
+   "title": "Rata/Ch’o",
+   "airDate": "2018-10-23",
+   "airDateUtc": "2018-10-24T02:00:00Z",
+   "runtime": 60,
+   "overview": "EZ’s past continues to haunt him, but present horrors give him a new perspective.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/349659/6840282.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 6849901,
+   "seasonNumber": 1,
+   "episodeNumber": 9,
+   "absoluteEpisodeNumber": 9,
+   "title": "Serpiente/Chikchan",
+   "airDate": "2018-10-30",
+   "airDateUtc": "2018-10-31T02:00:00Z",
+   "runtime": 67,
+   "overview": "The bond of the Reyes blood is fractured, and the Galindo family decides to cut their losses.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/349659/6849901.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 6857889,
+   "seasonNumber": 1,
+   "episodeNumber": 10,
+   "absoluteEpisodeNumber": 10,
+   "title": "Cuervo/Tz'ikb'uul",
+   "airDate": "2018-11-06",
+   "airDateUtc": "2018-11-07T03:00:00Z",
+   "runtime": 55,
+   "finaleType": "season",
+   "overview": "The club has reason to celebrate, but big changes leave the future uncertain.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/349659/6857889.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 7250050,
+   "seasonNumber": 2,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 11,
+   "title": "Xbalanque",
+   "airDate": "2019-09-03",
+   "airDateUtc": "2019-09-04T02:00:00Z",
+   "runtime": 51,
+   "overview": "The Reyes family is divided and the M.C. uncovers an internal leak.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/349659/7250050.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 7320936,
+   "seasonNumber": 2,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 12,
+   "title": "Xaman-Ek",
+   "airDate": "2019-09-10",
+   "airDateUtc": "2019-09-11T02:00:00Z",
+   "runtime": 44,
+   "overview": "As EZ and Angel reconnect, complications arise for the M.C. and Galindo.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/349659/7320936.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 7328958,
+   "seasonNumber": 2,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 13,
+   "title": "Camazotz",
+   "airDate": "2019-09-17",
+   "airDateUtc": "2019-09-18T02:00:00Z",
+   "runtime": 53,
+   "overview": "Mayans seek justice while Galindo’s deal takes an unexpected turn south of the border.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/349659/7328958.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 7342572,
+   "seasonNumber": 2,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 14,
+   "title": "Lahun Chan",
+   "airDate": "2019-09-24",
+   "airDateUtc": "2019-09-25T02:00:00Z",
+   "runtime": 49,
+   "overview": "The secrets behind the death of EZ and Angel’s mother unfold.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/349659/7342572.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 7349204,
+   "seasonNumber": 2,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 15,
+   "title": "Xquic",
+   "airDate": "2019-10-01",
+   "airDateUtc": "2019-10-02T02:00:00Z",
+   "runtime": 56,
+   "overview": "An unexpected storm kicks up dust south of the border, as old family secrets bleed into familial affairs",
+   "image": "https://artworks.thetvdb.com/banners/episodes/349659/7349204.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 7363389,
+   "seasonNumber": 2,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 16,
+   "title": "Muluc",
+   "airDate": "2019-10-08",
+   "airDateUtc": "2019-10-09T02:00:00Z",
+   "runtime": 45,
+   "overview": "Violent actions yield violent ramifications for both the MC and Galindo cartel.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/349659/7363389.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 7363391,
+   "seasonNumber": 2,
+   "episodeNumber": 7,
+   "absoluteEpisodeNumber": 17,
+   "title": "Tohil",
+   "airDate": "2019-10-15",
+   "airDateUtc": "2019-10-16T02:00:00Z",
+   "runtime": 42,
+   "overview": "EZ and the MC fight fire with fire, careful to not be burned in the process.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/349659/7363391.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 7397726,
+   "seasonNumber": 2,
+   "episodeNumber": 8,
+   "absoluteEpisodeNumber": 18,
+   "title": "Kukulkan",
+   "airDate": "2019-10-22",
+   "airDateUtc": "2019-10-23T02:00:00Z",
+   "runtime": 51,
+   "overview": "A deal is on the table for the MC but the price is paid in blood",
+   "image": "https://artworks.thetvdb.com/banners/episodes/349659/7397726.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 7397731,
+   "seasonNumber": 2,
+   "episodeNumber": 9,
+   "absoluteEpisodeNumber": 19,
+   "title": "Itzam-Ye",
+   "airDate": "2019-10-29",
+   "airDateUtc": "2019-10-30T02:00:00Z",
+   "runtime": 50,
+   "overview": "Dramatic revelations carve out different paths to vengeance.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/349659/7397731.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 7397735,
+   "seasonNumber": 2,
+   "episodeNumber": 10,
+   "absoluteEpisodeNumber": 20,
+   "title": "Hunahpu",
+   "airDate": "2019-11-05",
+   "airDateUtc": "2019-11-06T03:00:00Z",
+   "runtime": 65,
+   "finaleType": "season",
+   "overview": "The need for justice ignites tough decisions for the Reyes brothers and the MC.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/349659/7397735.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 8182731,
+   "seasonNumber": 3,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 21,
+   "title": "Pap Struggles with the Death Angel",
+   "airDate": "2021-03-16",
+   "airDateUtc": "2021-03-17T02:00:00Z",
+   "runtime": 52,
+   "overview": "A border shutdown squeezes the Mayan’s heroin trade setting off an internal clash over the future of the club. EZ and Angel grapple with the fallout of family secrets recently come to light. The Galindos grow apart as Miguel loses himself in his grief and search for answers.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8182731/screencap/6051ea7991649.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 8285657,
+   "seasonNumber": 3,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 22,
+   "title": "The Orneriness of Kings",
+   "airDate": "2021-03-16",
+   "airDateUtc": "2021-03-17T02:00:00Z",
+   "runtime": 47,
+   "overview": "Now a full patch member, an emboldened EZ proposes a plan that could change the course of the club. Adelita is freed from the grip of the U.S. government only to discover all is not as she left it with the L.O. Coco's demons lead him to a new low in his search to relieve the pain of his past.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8285657/screencap/6052460c9a00d.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 8285658,
+   "seasonNumber": 3,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 23,
+   "title": "Overreaching Don't Pay",
+   "airDate": "2021-03-23",
+   "airDateUtc": "2021-03-24T02:00:00Z",
+   "runtime": 51,
+   "overview": "Seeing an opportunity, Bishop sets EZ's plan into motion.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8285658/screencap/60959ad74af72.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 8285659,
+   "seasonNumber": 3,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 24,
+   "title": "Our Gang's Dark Oath",
+   "airDate": "2021-03-30",
+   "airDateUtc": "2021-03-31T02:00:00Z",
+   "runtime": 48,
+   "overview": "The M.C. scrambles to find a solution to their heroin problem, while EZ digs to discover who betrayed the club.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8285659/screencap/60674c9506c23.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 8285660,
+   "seasonNumber": 3,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 25,
+   "title": "Dark, Deep-Laid Plans",
+   "airDate": "2021-04-06",
+   "airDateUtc": "2021-04-07T02:00:00Z",
+   "runtime": 51,
+   "overview": "Bishop employs a risky tactic in an attempt to solve the club’s supply problems.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8285660/screencap/606e8e4665d49.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 8335862,
+   "seasonNumber": 3,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 26,
+   "title": "You Can't Pray a Lie",
+   "airDate": "2021-04-13",
+   "airDateUtc": "2021-04-14T02:00:00Z",
+   "runtime": 53,
+   "overview": "The club seeks retribution for a recent affront.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8335862/screencap/607d99ccf32c7.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 8335863,
+   "seasonNumber": 3,
+   "episodeNumber": 7,
+   "absoluteEpisodeNumber": 27,
+   "title": "What Comes of Handlin' Snakeskin",
+   "airDate": "2021-04-20",
+   "airDateUtc": "2021-04-21T02:00:00Z",
+   "runtime": 46,
+   "overview": "Bishop enlists the help of another chapter in his move against Ramos.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8335863/screencap/60834971e7847.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 8335864,
+   "seasonNumber": 3,
+   "episodeNumber": 8,
+   "absoluteEpisodeNumber": 28,
+   "title": "A Mixed-up and Splendid Rescue",
+   "airDate": "2021-04-27",
+   "airDateUtc": "2021-04-28T02:00:00Z",
+   "runtime": 54,
+   "overview": "Miguel discovers disturbing new information related to his mother's death.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8335864/screencap/608c5f3881c16.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 8335865,
+   "seasonNumber": 3,
+   "episodeNumber": 9,
+   "absoluteEpisodeNumber": 29,
+   "title": "The House of Death Floats By",
+   "airDate": "2021-05-04",
+   "airDateUtc": "2021-05-05T02:00:00Z",
+   "runtime": 62,
+   "overview": "The club welcomes a new member. Miguel seeks retribution on his mother's behalf.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8335865/screencap/609333f4d4204.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 8406754,
+   "seasonNumber": 3,
+   "episodeNumber": 10,
+   "absoluteEpisodeNumber": 30,
+   "title": "Chapter the Last, Nothing More to Write",
+   "airDate": "2021-05-11",
+   "airDateUtc": "2021-05-12T02:00:00Z",
+   "runtime": 74,
+   "finaleType": "season",
+   "overview": "Bishop pulls the trigger on his plan to become the sole king.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8406754/screencap/609d8054ab9a0.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 8437295,
+   "seasonNumber": 4,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 31,
+   "title": "Cleansing of the Temple",
+   "airDate": "2022-04-19",
+   "airDateUtc": "2022-04-20T02:00:00Z",
+   "runtime": 50,
+   "overview": "War descends on Santo Padre.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8437295/screencap/626a5c364eafe.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 8994420,
+   "seasonNumber": 4,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 32,
+   "title": "Hymn Among the Ruins",
+   "airDate": "2022-04-19",
+   "airDateUtc": "2022-04-20T02:00:00Z",
+   "runtime": 50,
+   "overview": "The club navigates a tenuous new world order.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8994420/screencap/6262a34fd5bd9.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 8994421,
+   "seasonNumber": 4,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 33,
+   "title": "Self Portrait in Blue Bathroom",
+   "airDate": "2022-04-26",
+   "airDateUtc": "2022-04-27T02:00:00Z",
+   "runtime": 50,
+   "overview": "In order for Santo Padre to get back in the drug trade, EZ must carry out a favor.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8994421/screencap/6269c8ec049a8.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 8994422,
+   "seasonNumber": 4,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 34,
+   "title": "A Crow Flew By",
+   "airDate": "2022-05-03",
+   "airDateUtc": "2022-05-04T02:00:00Z",
+   "runtime": 50,
+   "overview": "Internal strife bleeds into club business. An old enemy has found sanctuary south of the border.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8994422/screencap/6272f1fe74089.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 8994423,
+   "seasonNumber": 4,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 35,
+   "title": "Death of the Virgin",
+   "airDate": "2022-05-10",
+   "airDateUtc": "2022-05-11T02:00:00Z",
+   "runtime": 50,
+   "overview": "The divided M.C. comes together in honor of their fallen brothers.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8994423/screencap/6282a58ec7ddd.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 8994424,
+   "seasonNumber": 4,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 36,
+   "title": "When I Die, I Want Your Hands on My Eyes",
+   "airDate": "2022-05-17",
+   "airDateUtc": "2022-05-18T02:00:00Z",
+   "runtime": 50,
+   "overview": "In the wake of tragedy, the club demands answers.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8994424/screencap/6284ea36c2f22.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 8994425,
+   "seasonNumber": 4,
+   "episodeNumber": 7,
+   "absoluteEpisodeNumber": 37,
+   "title": "Dialogue with the Mirror",
+   "airDate": "2022-05-24",
+   "airDateUtc": "2022-05-25T02:00:00Z",
+   "runtime": 50,
+   "overview": "As the M.C. strikes against the Sons, EZ finds himself at an unexpected crossroads.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8994425/screencap/628dde73f3988.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 8994426,
+   "seasonNumber": 4,
+   "episodeNumber": 8,
+   "absoluteEpisodeNumber": 38,
+   "title": "The Righteous Wrath of an Honorable Man",
+   "airDate": "2022-05-31",
+   "airDateUtc": "2022-06-01T02:00:00Z",
+   "runtime": 50,
+   "overview": "The Mayans bring death to SOA's door step. Written by Debra Moore Muñoz; directed by Danny Pino.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8994426/screencap/6297825123811.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 8994427,
+   "seasonNumber": 4,
+   "episodeNumber": 9,
+   "absoluteEpisodeNumber": 39,
+   "title": "The Calling of Saint Matthew",
+   "airDate": "2022-06-07",
+   "airDateUtc": "2022-06-08T02:00:00Z",
+   "runtime": 50,
+   "overview": "A proposed alliance promises to return the M.C. to its former glory.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8994427/screencap/62a025bd40aec.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 8994428,
+   "seasonNumber": 4,
+   "episodeNumber": 10,
+   "absoluteEpisodeNumber": 40,
+   "title": "When the Breakdown Hit at Midnight",
+   "airDate": "2022-06-14",
+   "airDateUtc": "2022-06-15T02:00:00Z",
+   "runtime": 50,
+   "finaleType": "season",
+   "overview": "EZ ties up loose ends as the future of the club hangs in the balance. Alvarez seeks peace with a Redwood Original.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8994428/screencap/62a99a8eb493d.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 9701768,
+   "seasonNumber": 5,
+   "episodeNumber": 1,
+   "title": "I Hear the Train A-Comin",
+   "airDate": "2023-05-24",
+   "airDateUtc": "2023-05-25T02:00:00Z",
+   "runtime": 59,
+   "overview": "SONS escalate the war as EZ attempts to reclaim the pipeline.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9701768/screencap/647859a80531c.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 9703830,
+   "seasonNumber": 5,
+   "episodeNumber": 2,
+   "title": "Lord Help My Poor Soul",
+   "airDate": "2023-05-24",
+   "airDateUtc": "2023-05-25T02:00:00Z",
+   "runtime": 53,
+   "overview": "EZ's attempt to reclaim the pipeline brings danger to the club's doorstep.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9703830/screencap/647859c0165e8.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 9703831,
+   "seasonNumber": 5,
+   "episodeNumber": 3,
+   "title": "Do You Hear the Rain",
+   "airDate": "2023-05-31",
+   "airDateUtc": "2023-06-01T02:00:00Z",
+   "runtime": 56,
+   "overview": "Determined to reclaim the pipeline, the M.C. begins a new trade.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9703831/screencap/647859d3c950d.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 9703832,
+   "seasonNumber": 5,
+   "episodeNumber": 4,
+   "title": "I See the Black Light",
+   "airDate": "2023-06-07",
+   "airDateUtc": "2023-06-08T02:00:00Z",
+   "runtime": 52,
+   "overview": "After a fatal error, the Mayans navigate the dangers of their new trade, forcing an unlikely alliance.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9703832/screencap/647ff614b573f.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 9703833,
+   "seasonNumber": 5,
+   "episodeNumber": 5,
+   "title": "I Want Nothing but Death",
+   "airDate": "2023-06-14",
+   "airDateUtc": "2023-06-15T02:00:00Z",
+   "runtime": 52,
+   "overview": "As the war with the Sons escalates, the two clubs square off in a fight to the death.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9703833/screencap/64893371a5519.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 9703834,
+   "seasonNumber": 5,
+   "episodeNumber": 6,
+   "title": "My Eyes Filled and Then Closed on the Last of Childhood Tears",
+   "airDate": "2023-06-21",
+   "airDateUtc": "2023-06-22T02:00:00Z",
+   "runtime": 47,
+   "overview": "On the anniversary of their mother's death, EZ takes Angel on a fatal journey.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9703834/screencap/64927245bc85c.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 9703835,
+   "seasonNumber": 5,
+   "episodeNumber": 7,
+   "title": "To Fear of Death, I Eat the Stars",
+   "airDate": "2023-06-28",
+   "airDateUtc": "2023-06-29T02:00:00Z",
+   "runtime": 47,
+   "overview": "The M.C.'s fight to gain control of California takes a deadly twist; the Broken Saints welcome a desperate newcomer.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9703835/screencap/649bbd0023271.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 9703836,
+   "seasonNumber": 5,
+   "episodeNumber": 8,
+   "title": "Her Blacks Crackle and Drag",
+   "airDate": "2023-07-05",
+   "airDateUtc": "2023-07-06T02:00:00Z",
+   "runtime": 53,
+   "overview": "The MC unite for a final goodbye.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9703836/screencap/64a65cb03b376.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 9703837,
+   "seasonNumber": 5,
+   "episodeNumber": 9,
+   "title": "I Must Go in Now For the Fog is Rising",
+   "airDate": "2023-07-12",
+   "airDateUtc": "2023-07-13T02:00:00Z",
+   "runtime": 45,
+   "overview": "As the Sons close in on the Mayans, EZ crosses paths with a familiar stranger.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9703837/screencap/64ae2bd5e81cb.jpg"
+  },
+  {
+   "tvdbShowId": 349659,
+   "tvdbId": 9703838,
+   "seasonNumber": 5,
+   "episodeNumber": 10,
+   "title": "Slow to Bleed Fair Son",
+   "airDate": "2023-07-19",
+   "airDateUtc": "2023-07-20T02:00:00Z",
+   "runtime": 81,
+   "finaleType": "series",
+   "overview": "The End.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9703838/screencap/64b7dc61e7599.jpg"
+  }
+ ]
+}

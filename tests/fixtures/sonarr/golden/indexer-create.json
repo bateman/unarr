@@ -375,7 +375,7 @@
     "supportsSearch": true,
     "tags": []
   },
-  "recordedAt": "2026-11-08T20:55:56Z",
+  "recordedAt": "2026-11-09T22:17:04Z",
   "request": {
     "body": "bodies/indexer-create.json",
     "method": "POST",

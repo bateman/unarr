@@ -1,0 +1,17 @@
+{
+  "body": [
+    {
+      "errorMessage": "No results were returned from your import list, please check your settings and the log for details.",
+      "isWarning": true,
+      "propertyName": "",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-09T22:24:53Z",
+  "request": {
+    "body": "bodies/importlist-create-empty-enabled.json",
+    "method": "POST",
+    "path": "/api/v3/importlist"
+  },
+  "status": 400
+}

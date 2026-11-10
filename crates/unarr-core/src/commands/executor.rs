@@ -45,6 +45,9 @@ pub enum Event {
     /// What the importer raised: `EpisodeImportedEvent`,
     /// `EpisodeFileDeletedEvent`, `DownloadCompletedEvent` and the rest.
     Import(Box<ImportEvent>),
+    /// `SeriesUpdatedEvent` and `MediaCoversUpdatedEvent` with a change:
+    /// the series resource the UI holds is stale.
+    SeriesUpdated { series_id: i64 },
 }
 
 /// Health runs the originals' debouncer holds for five seconds after a
@@ -79,6 +82,20 @@ pub struct Runtime {
     /// `_hasRunHealthChecksAfterGracePeriod`: health verdicts reach the
     /// notifications only once the checks ran after the grace period.
     health_armed: std::sync::atomic::AtomicBool,
+    /// Where series metadata come from: Skyhook unless replaced.
+    metadata: std::sync::RwLock<crate::metadata::SharedProvider>,
+    /// Scene mappings, XEM and the cover downloads, through the same
+    /// upstreams as the provider.
+    augment: std::sync::RwLock<crate::metadata::augment::Augment>,
+    scene: crate::tv::scene::SceneState,
+    /// `MediaCover/` under the application folder, once the host says
+    /// where that is; no covers are fetched before.
+    media_cover_dir: std::sync::RwLock<Option<std::path::PathBuf>>,
+    /// What the Backup command needs; without it the command does nothing.
+    backup: std::sync::RwLock<Option<crate::backup::BackupContext>>,
+    /// `EpisodeRefreshedService._searchCache`: recently aired episodes a
+    /// refresh added, searched for once the series is scanned.
+    refreshed_search: Mutex<std::collections::HashMap<i64, Vec<i64>>>,
 }
 
 /// `HealthCheckService`'s startup grace: fifteen minutes.
@@ -120,9 +137,81 @@ impl Runtime {
             notifier,
             started_at: now,
             health_armed: std::sync::atomic::AtomicBool::new(false),
+            metadata: std::sync::RwLock::new(Arc::new(crate::metadata::Skyhook::new(
+                crate::metadata::Upstreams::real(),
+            ))),
+            augment: std::sync::RwLock::new(crate::metadata::augment::Augment::new(
+                crate::http::shared().clone(),
+                crate::metadata::Upstreams::real(),
+            )),
+            scene: crate::tv::scene::SceneState::default(),
+            media_cover_dir: std::sync::RwLock::new(None),
+            backup: std::sync::RwLock::new(None),
+            refreshed_search: Mutex::new(std::collections::HashMap::new()),
         });
         *runtime.me.lock().unwrap() = Arc::downgrade(&runtime);
         Ok(runtime)
+    }
+
+    /// The metadata provider series are looked up, added and refreshed
+    /// from.
+    pub fn metadata(&self) -> crate::metadata::SharedProvider {
+        self.metadata.read().unwrap().clone()
+    }
+
+    /// Replace the metadata provider.
+    pub fn set_metadata(&self, provider: crate::metadata::SharedProvider) {
+        *self.metadata.write().unwrap() = provider;
+    }
+
+    /// Ask every metadata host through `upstreams`: Skyhook as the
+    /// provider, the services, XEM and the artwork. Tests and the replay
+    /// point them at a mock.
+    pub fn set_upstreams(&self, upstreams: crate::metadata::Upstreams) {
+        self.set_metadata(Arc::new(crate::metadata::Skyhook::new(upstreams.clone())));
+        *self.augment.write().unwrap() =
+            crate::metadata::augment::Augment::new(crate::http::shared().clone(), upstreams);
+    }
+
+    /// Where the series covers live (`<app data>/MediaCover`).
+    pub fn set_media_cover_dir(&self, dir: std::path::PathBuf) {
+        *self.media_cover_dir.write().unwrap() = Some(dir);
+    }
+
+    /// Where the Backup command finds the app data, and Unarr's version.
+    pub fn set_backup(&self, context: crate::backup::BackupContext) {
+        *self.backup.write().unwrap() = Some(context);
+    }
+
+    /// The client the covers and the cover proxy fetch through.
+    pub fn augment_client(&self) -> crate::metadata::augment::Augment {
+        self.augment()
+    }
+
+    /// The import lists, asked through the same upstreams as the metadata.
+    pub fn import_lists(&self) -> crate::importlists::ImportLists {
+        crate::importlists::ImportLists::new(
+            self.db.clone(),
+            crate::http::shared().clone(),
+            self.augment().upstreams().clone(),
+        )
+    }
+
+    /// `ProviderDeletedEvent<IImportList>`: the library is checked against
+    /// the lists that remain.
+    pub async fn import_list_deleted(&self) {
+        match self.import_lists().try_clean_library().await {
+            Ok(updated) => {
+                for series_id in updated {
+                    self.emit(Event::SeriesUpdated { series_id });
+                }
+            }
+            Err(e) => tracing::warn!("Cleaning the library after a deleted import list failed: {e:#}"),
+        }
+    }
+
+    fn augment(&self) -> crate::metadata::augment::Augment {
+        self.augment.read().unwrap().clone()
     }
 
     pub fn notifier(&self) -> &Arc<Notifier> {
@@ -450,6 +539,20 @@ impl Runtime {
         }
         self.broadcast(&model);
         let outcome = self.run(&model).await;
+        // `ProviderStatusChangedEvent` is published while the command runs:
+        // the checks it asks for are done by the time the command ends.
+        if matches!(
+            model.body,
+            CommandBody::RssSync
+                | CommandBody::RefreshMonitoredDownloads
+                | CommandBody::EpisodeSearch { .. }
+                | CommandBody::SeasonSearch { .. }
+                | CommandBody::SeriesSearch { .. }
+                | CommandBody::MissingEpisodeSearch { .. }
+                | CommandBody::CutoffUnmetEpisodeSearch { .. }
+        ) {
+            self.check_health_on_status_change().await;
+        }
         let now = self.now();
         let ended = match outcome {
             Ok(()) => {
@@ -495,18 +598,6 @@ impl Runtime {
             tracing::warn!(error = %e, "failed to record the scheduled task's run");
         }
         tracing::trace!(name, id, duration = ?ended.duration, "command ended");
-        if matches!(
-            ended.body,
-            CommandBody::RssSync
-                | CommandBody::RefreshMonitoredDownloads
-                | CommandBody::EpisodeSearch { .. }
-                | CommandBody::SeasonSearch { .. }
-                | CommandBody::SeriesSearch { .. }
-                | CommandBody::MissingEpisodeSearch { .. }
-                | CommandBody::CutoffUnmetEpisodeSearch { .. }
-        ) {
-            self.check_health_on_status_change().await;
-        }
     }
 
     fn broadcast(&self, model: &CommandModel) {
@@ -601,23 +692,62 @@ impl Runtime {
                 Ok(())
             }
             CommandBody::MessagingCleanup => self.queue.clean(self.now()).await,
-            CommandBody::RefreshSeries { .. } => {
-                tracing::warn!(
-                    name = model.name(),
-                    "metadata refreshes arrive with the library phase; the command completes without effect"
-                );
+            CommandBody::RefreshSeries {
+                series_ids,
+                is_new_series,
+            } => {
+                self.refresh_series(id, series_ids, *is_new_series, model.trigger)
+                    .await
+            }
+            CommandBody::MoveSeries {
+                series_id,
+                source_path,
+                destination_path,
+            } => {
+                self.move_series(id, *series_id, source_path, destination_path, None)
+                    .await
+            }
+            CommandBody::BulkMoveSeries {
+                destination_root_folder,
+                series,
+            } => self.bulk_move_series(id, destination_root_folder, series).await,
+            CommandBody::UpdateSceneMapping => {
+                crate::tv::scene::update_mappings(&self.db, &self.augment(), &self.scene).await;
                 Ok(())
             }
             CommandBody::CheckHealth => {
                 self.check_health(CheckSet::All).await;
                 Ok(())
             }
+            CommandBody::ImportListSync { definition_id } => {
+                let progress = |message: String| self.progress(id, message);
+                let outcome = self
+                    .import_lists()
+                    .sync(self.metadata().as_ref(), *definition_id, self.now(), &progress)
+                    .await?;
+                for series_id in outcome.added {
+                    self.series_added(series_id).await?;
+                }
+                for series_id in outcome.updated {
+                    self.emit(Event::SeriesUpdated { series_id });
+                }
+                Ok(())
+            }
+            CommandBody::Backup { kind } => {
+                let context = self.backup.read().unwrap().clone();
+                let Some(context) = context else {
+                    tracing::debug!("no app data directory set, nothing to back up");
+                    return Ok(());
+                };
+                self.progress(id, "Starting Backup".into());
+                let path = crate::backup::create(&self.db, &context, *kind, self.now()).await?;
+                tracing::debug!(path = %path.display(), "backup written");
+                self.progress(id, "Backup zip created".into());
+                Ok(())
+            }
             CommandBody::Housekeeping
             | CommandBody::ApplicationUpdateCheck { .. }
-            | CommandBody::UpdateSceneMapping
-            | CommandBody::CleanUpRecycleBin
-            | CommandBody::ImportListSync { .. }
-            | CommandBody::Backup { .. } => {
+            | CommandBody::CleanUpRecycleBin => {
                 tracing::debug!(name = model.name(), "nothing to do for this command yet");
                 Ok(())
             }
@@ -832,6 +962,9 @@ impl Runtime {
         // completion is what flushes the media servers' update queues.
         self.check_health_after_import(&events);
         for e in events {
+            if let ImportEvent::SeriesScanned { series_id } = &e {
+                self.after_scan(*series_id).await;
+            }
             if let ImportEvent::RescanRequested { series_id } = &e {
                 if let Err(err) = self
                     .queue
@@ -851,6 +984,524 @@ impl Runtime {
             }
             self.emit(Event::Import(Box::new(e)));
         }
+    }
+
+    /// `RefreshSeriesService.Execute`: the series asked for, or every one
+    /// (by sort title) that is due unless the refresh is manual; each
+    /// followed by its tag update and rescan.
+    async fn refresh_series(
+        &self,
+        id: i64,
+        series_ids: &[i64],
+        is_new: bool,
+        trigger: CommandTrigger,
+    ) -> anyhow::Result<()> {
+        let manual = trigger == CommandTrigger::Manual;
+        // `SeriesRefreshStartingEvent`.
+        let augment = self.augment();
+        if manual && self.scene.mappings_due() {
+            crate::tv::scene::update_mappings(&self.db, &augment, &self.scene).await;
+        }
+        crate::tv::scene::refresh_starting(&augment, &self.scene, manual).await;
+
+        if !series_ids.is_empty() {
+            for &series_id in series_ids {
+                match self.refresh_one(id, series_id).await {
+                    Ok(_) => {
+                        self.update_tags(series_id).await;
+                        self.rescan_after_refresh(id, series_id, is_new, trigger).await
+                    }
+                    Err(crate::tv::refresh::RefreshError::NotFound { series, .. }) => {
+                        tracing::error!(
+                            "Series '{}' (tvdbid {}) was not found, it may have been removed from TheTVDB.",
+                            series.title,
+                            series.tvdb_id
+                        );
+                    }
+                    Err(crate::tv::refresh::RefreshError::Other(e)) => {
+                        tracing::error!(error = %e, "Couldn't refresh info for series {series_id}");
+                        self.update_tags(series_id).await;
+                        self.rescan_after_refresh(id, series_id, is_new, trigger).await;
+                        return Err(e);
+                    }
+                }
+            }
+            return Ok(());
+        }
+
+        let now = self.now();
+        let mut all = self
+            .db
+            .call(move |conn| {
+                let series = store::series::list(conn)?;
+                let mut out = Vec::new();
+                for s in series {
+                    let episodes = if manual {
+                        Vec::new()
+                    } else {
+                        store::episodes::list_episodes(conn, s.id, None)?
+                    };
+                    let due = manual || crate::tv::refresh::should_refresh(&s, &episodes, now);
+                    out.push((
+                        s.sort_title.clone().unwrap_or_default(),
+                        s.id,
+                        s.title.clone(),
+                        due,
+                    ));
+                }
+                Ok(out)
+            })
+            .await?;
+        // `OrderBy(SortTitle)`: ordinal, stable.
+        all.sort_by(|a, b| a.0.cmp(&b.0));
+        for (_, series_id, title, due) in all {
+            if due {
+                match self.refresh_one(id, series_id).await {
+                    Ok(_) => {}
+                    Err(crate::tv::refresh::RefreshError::NotFound { series, .. }) => {
+                        tracing::error!(
+                            "Series '{}' (tvdbid {}) was not found, it may have been removed from TheTVDB.",
+                            series.title,
+                            series.tvdb_id
+                        );
+                        continue;
+                    }
+                    Err(crate::tv::refresh::RefreshError::Other(e)) => {
+                        tracing::error!(error = %e, "Couldn't refresh info for {title}");
+                    }
+                }
+            } else {
+                tracing::info!("Skipping refresh of series: {title}");
+            }
+            self.update_tags(series_id).await;
+            self.rescan_after_refresh(id, series_id, false, trigger).await;
+        }
+        Ok(())
+    }
+
+    /// `RefreshSeriesService.UpdateTags`: the auto tagging rules applied
+    /// to the series as stored, written and announced when its tags
+    /// changed. The originals pass the series as it was before the refresh
+    /// when every series is refreshed, and write it back whole; here the
+    /// rules see what the refresh just stored and only the tags are written.
+    async fn update_tags(&self, series_id: i64) {
+        let updated = self
+            .db
+            .call(move |conn| crate::tv::autotag::update_stored(conn, series_id))
+            .await;
+        match updated {
+            Ok(Some(_)) => self.emit(Event::SeriesUpdated { series_id }),
+            Ok(None) => {}
+            Err(e) => tracing::error!(error = %e, "Couldn't update the tags of series {series_id}"),
+        }
+    }
+
+    /// `RefreshSeriesInfo` and the handlers of what it publishes.
+    async fn refresh_one(
+        &self,
+        id: i64,
+        series_id: i64,
+    ) -> Result<crate::tv::refresh::Refreshed, crate::tv::refresh::RefreshError> {
+        let title = self
+            .db
+            .call(move |conn| {
+                Ok(store::series::get_many(conn, &[series_id])?
+                    .pop()
+                    .map(|s| s.title))
+            })
+            .await?;
+        if let Some(title) = title {
+            self.progress(id, format!("Updating {title}"));
+        }
+        let provider = self.metadata();
+        match crate::tv::refresh::refresh_series_info(&self.db, provider.as_ref(), series_id, self.now())
+            .await
+        {
+            Ok(refreshed) => {
+                self.episodes_refreshed(&refreshed);
+                let removed: Vec<i64> = refreshed.removed.iter().map(|e| e.id).collect();
+                self.queue_changed(self.downloads.episodes_removed(&removed, self.now()).await);
+                self.series_updated(&refreshed.series).await;
+                Ok(refreshed)
+            }
+            Err(crate::tv::refresh::RefreshError::NotFound {
+                series,
+                marked_deleted,
+            }) => {
+                if marked_deleted {
+                    self.series_updated(&series).await;
+                }
+                Err(crate::tv::refresh::RefreshError::NotFound {
+                    series,
+                    marked_deleted,
+                })
+            }
+            Err(e) => Err(e),
+        }
+    }
+
+    /// `EpisodeRefreshedService.Handle(EpisodeInfoRefreshedEvent)`: the
+    /// monitored episodes added (or given an absolute number) that aired in
+    /// the last two weeks, kept for the search after the scan.
+    fn episodes_refreshed(&self, refreshed: &crate::tv::refresh::Refreshed) {
+        let series = &refreshed.series;
+        if series.add_options.is_some() {
+            return;
+        }
+        if !series.monitored {
+            tracing::debug!("Series is not monitored");
+            return;
+        }
+        let now = self.now();
+        let recent = |e: &crate::model::Episode| {
+            e.monitored
+                && e.air_date_utc.is_some_and(|d| {
+                    d >= now - chrono::Duration::days(14) && d <= now + chrono::Duration::days(1)
+                })
+        };
+        let mut ids: Vec<i64> = refreshed
+            .added
+            .iter()
+            .filter(|e| recent(e))
+            .map(|e| e.id)
+            .collect();
+        ids.extend(
+            refreshed
+                .updated
+                .iter()
+                .filter(|e| refreshed.absolute_added.contains(&e.id) && recent(e))
+                .map(|e| e.id),
+        );
+        let mut seen = std::collections::HashSet::new();
+        ids.retain(|i| seen.insert(*i));
+        if !ids.is_empty() {
+            self.refreshed_search.lock().unwrap().insert(series.id, ids);
+        }
+    }
+
+    /// `EpisodeRefreshedService.Search`, after the series was scanned: the
+    /// kept episodes still without a file are searched for.
+    async fn search_refreshed(&self, series_id: i64) {
+        let Some(ids) = self.refreshed_search.lock().unwrap().remove(&series_id) else {
+            return;
+        };
+        let missing = self
+            .db
+            .call(move |conn| {
+                Ok(store::episodes::list_episodes_by_ids(conn, &ids)?
+                    .into_iter()
+                    .filter(|e| e.episode_file_id == 0)
+                    .map(|e| e.id)
+                    .collect::<Vec<_>>())
+            })
+            .await;
+        if let Some(missing) = missing.ok().filter(|m| !m.is_empty()) {
+            if let Err(e) = self
+                .queue
+                .push(
+                    CommandBody::EpisodeSearch { episode_ids: missing },
+                    CommandPriority::Normal,
+                    CommandTrigger::Unspecified,
+                    self.now(),
+                )
+                .await
+            {
+                tracing::warn!(error = %e, "failed to queue the search of refreshed episodes");
+            }
+        }
+    }
+
+    /// The handlers of `SeriesUpdatedEvent`: the series resource, XEM's
+    /// scene numbering, the covers (and the resource again when they
+    /// changed).
+    async fn series_updated(&self, series: &crate::model::Series) {
+        self.emit(Event::SeriesUpdated { series_id: series.id });
+        let augment = self.augment();
+        crate::tv::scene::series_updated(&self.db, &augment, &self.scene, series).await;
+        let root = self.media_cover_dir.read().unwrap().clone();
+        if let Some(root) = root {
+            if crate::tv::covers::ensure_covers(&root, &augment, series).await {
+                self.emit(Event::SeriesUpdated { series_id: series.id });
+            }
+        }
+    }
+
+    /// `RescanSeries` after a refresh, as `RescanAfterRefresh` says.
+    async fn rescan_after_refresh(&self, id: i64, series_id: i64, is_new: bool, trigger: CommandTrigger) {
+        use crate::store::config::RescanAfterRefresh;
+        let setting = self
+            .db
+            .call(|conn| Ok(crate::store::config::MediaManagementConfig::load(conn)?.rescan_after_refresh))
+            .await
+            .unwrap_or_default();
+        if !is_new {
+            let skip = match setting {
+                RescanAfterRefresh::Never => true,
+                RescanAfterRefresh::AfterManual => trigger != CommandTrigger::Manual,
+                RescanAfterRefresh::Always => false,
+            };
+            if skip {
+                // `SeriesScanSkippedEvent`, handled as a scan.
+                self.after_scan(series_id).await;
+                return;
+            }
+        }
+        if let Err(e) = self.rescan_series(id, Some(series_id)).await {
+            tracing::error!(error = %e, "Couldn't rescan series {series_id}");
+        }
+    }
+
+    /// `SeriesScannedHandler`: what follows the scan of a series; for a
+    /// series being added, the post-add actions (the monitoring preset, the
+    /// notification, the searches asked for), once.
+    async fn after_scan(&self, series_id: i64) {
+        let now = self.now();
+        let added = self
+            .db
+            .call(move |conn| {
+                let Some(mut series) = store::series::get(conn, series_id)? else {
+                    return Ok(None);
+                };
+                let Some(options) = series.add_options.clone() else {
+                    return Ok(None);
+                };
+                tracing::info!(
+                    "[{}] was recently added, performing post-add actions",
+                    series.title
+                );
+                let monitoring = crate::tv::monitoring::MonitoringOptions::from_json(&options);
+                crate::tv::series::set_episode_monitored_status(conn, &mut series, &monitoring, now)?;
+                store::series::clear_add_options(conn, series_id)?;
+                Ok(Some((series, options)))
+            })
+            .await;
+        let (series, options) = match added {
+            Ok(Some(x)) => x,
+            Ok(None) => {
+                self.search_refreshed(series_id).await;
+                return;
+            }
+            Err(e) => {
+                tracing::warn!(error = %e, "post-add actions failed for series {series_id}");
+                return;
+            }
+        };
+        // `SeriesAddCompletedEvent`.
+        self.notifier.on_series_add(&series, now).await;
+        self.emit(Event::SeriesUpdated { series_id });
+        let flag = |k: &str| {
+            options
+                .get(k)
+                .and_then(serde_json::Value::as_bool)
+                .unwrap_or(false)
+        };
+        let (missing, cutoff) = (
+            flag("searchForMissingEpisodes"),
+            flag("searchForCutoffUnmetEpisodes"),
+        );
+        let mut searches = Vec::new();
+        if missing && cutoff {
+            searches.push(CommandBody::SeriesSearch { series_id });
+        } else {
+            if missing {
+                searches.push(CommandBody::MissingEpisodeSearch {
+                    series_id: Some(series_id),
+                    monitored: true,
+                });
+            }
+            if cutoff {
+                searches.push(CommandBody::CutoffUnmetEpisodeSearch {
+                    series_id: Some(series_id),
+                    monitored: true,
+                });
+            }
+        }
+        for body in searches {
+            if let Err(e) = self
+                .queue
+                .push(body, CommandPriority::Normal, CommandTrigger::Unspecified, now)
+                .await
+            {
+                tracing::warn!(error = %e, "failed to queue the search of an added series");
+            }
+        }
+    }
+
+    /// `SeriesAddedHandler` and `SceneMappingService.Handle(SeriesAddedEvent)`:
+    /// a new series is refreshed (and scanned) as new; the scene mappings
+    /// are updated if they never were since the start.
+    pub async fn series_added(&self, series_id: i64) -> anyhow::Result<()> {
+        let tvdb_id = self
+            .db
+            .call(move |conn| {
+                Ok(store::series::get_many(conn, &[series_id])?
+                    .pop()
+                    .map(|s| s.tvdb_id))
+            })
+            .await?;
+        if let Some(tvdb_id) = tvdb_id {
+            self.queue_changed(self.downloads.series_added(tvdb_id, self.now()).await);
+        }
+        if self.scene.mappings_never_updated() {
+            crate::tv::scene::update_mappings(&self.db, &self.augment(), &self.scene).await;
+        }
+        self.queue
+            .push(
+                CommandBody::RefreshSeries {
+                    series_ids: vec![series_id],
+                    is_new_series: true,
+                },
+                CommandPriority::Normal,
+                CommandTrigger::Unspecified,
+                self.now(),
+            )
+            .await?;
+        Ok(())
+    }
+
+    /// `TrackedDownloadRefreshedEvent` after the tracked downloads were
+    /// matched again: the queue goes out when one was.
+    fn queue_changed(&self, remapped: anyhow::Result<bool>) {
+        match remapped {
+            Ok(true) => self.emit(Event::QueueUpdated),
+            Ok(false) => {}
+            Err(e) => tracing::error!(error = %e, "Couldn't update the tracked downloads"),
+        }
+    }
+
+    /// The handlers of `SeriesDeletedEvent` outside the database: the
+    /// folders when asked, the covers, the notifications, the media
+    /// servers' queue.
+    pub async fn series_deleted(&self, series: Vec<crate::model::Series>, delete_files: bool) {
+        let now = self.now();
+        let gone: Vec<(i64, i64)> = series.iter().map(|s| (s.id, s.tvdb_id)).collect();
+        self.queue_changed(self.downloads.series_deleted(&gone, now).await);
+        if delete_files {
+            let (db, list) = (self.db.clone(), series.clone());
+            let _ = tokio::task::spawn_blocking(move || {
+                let config =
+                    db.call_blocking(|conn| crate::store::config::MediaManagementConfig::load(conn))?;
+                let remaining = db.call_blocking(|conn| store::series::all_paths(conn))?;
+                for s in &list {
+                    crate::tv::series::delete_series_folder(&config, s, &remaining);
+                }
+                anyhow::Ok(())
+            })
+            .await;
+        }
+        // The originals delete the covers in a background handler, after
+        // the notifications have read their URLs.
+        self.notifier.on_series_delete(&series, delete_files, now).await;
+        let root = self.media_cover_dir.read().unwrap().clone();
+        if let Some(root) = root {
+            for s in &series {
+                crate::tv::covers::delete_covers(&root, s.id).await;
+            }
+        }
+        if delete_files {
+            // `DeleteCompletedEvent`, once per series.
+            for _ in &series {
+                self.notifier
+                    .on_import_events(&[ImportEvent::DeleteCompleted], now)
+                    .await;
+            }
+        }
+    }
+
+    /// `MoveSeriesService.MoveSingleSeries`.
+    async fn move_series(
+        &self,
+        id: i64,
+        series_id: i64,
+        source: &str,
+        destination: &str,
+        position: Option<(usize, usize)>,
+    ) -> anyhow::Result<()> {
+        let title = self
+            .db
+            .call(move |conn| {
+                Ok(store::series::get_many(conn, &[series_id])?
+                    .pop()
+                    .map(|s| s.title))
+            })
+            .await?
+            .unwrap_or_default();
+        if !source.starts_with('/') {
+            tracing::warn!(
+                "Folder '{source}' for '{title}' is invalid, unable to move series. Try moving files manually"
+            );
+            return Ok(());
+        }
+        if !std::path::Path::new(source).is_dir() {
+            tracing::debug!("Folder '{source}' for '{title}' does not exist, not moving.");
+            return Ok(());
+        }
+        match position {
+            Some((i, n)) => self.progress(
+                id,
+                format!(
+                    "Moving {title} from '{source}' to '{destination}' ({}/{n})",
+                    i + 1
+                ),
+            ),
+            None => self.progress(id, format!("Moving {title} from '{source}' to '{destination}'")),
+        }
+        if crate::mediafiles::path_equals(source, destination) {
+            self.progress(
+                id,
+                format!("{title} is already in the specified location '{destination}'."),
+            );
+            return Ok(());
+        }
+        let (src, dst) = (
+            std::path::PathBuf::from(source),
+            std::path::PathBuf::from(destination),
+        );
+        let moved =
+            tokio::task::spawn_blocking(move || crate::mediafiles::transfer::move_folder(&src, &dst)).await?;
+        match moved {
+            Ok(()) => {
+                self.progress(id, format!("{title} moved successfully to {destination}"));
+                self.emit(Event::SeriesUpdated { series_id });
+            }
+            Err(e) => {
+                tracing::error!(error = %e, "Unable to move series from '{source}' to '{destination}'. Try moving files manually");
+                let source = source.to_string();
+                self.db
+                    .call(move |conn| {
+                        conn.execute(
+                            "UPDATE series SET path = ?2 WHERE id = ?1",
+                            rusqlite::params![series_id, source],
+                        )?;
+                        Ok(())
+                    })
+                    .await?;
+            }
+        }
+        Ok(())
+    }
+
+    /// `MoveSeriesService.Execute(BulkMoveSeriesCommand)`.
+    async fn bulk_move_series(&self, id: i64, root: &str, series: &[(i64, String)]) -> anyhow::Result<()> {
+        self.progress(id, format!("Moving {} series to '{root}'", series.len()));
+        for (i, (series_id, source)) in series.iter().enumerate() {
+            let sid = *series_id;
+            let folder = self
+                .db
+                .call(move |conn| {
+                    let naming = store::config::naming(conn)?;
+                    Ok(store::series::get(conn, sid)?.map(|s| {
+                        crate::naming::series_folder(&crate::mediafiles::approve::naming_series(&s), &naming)
+                    }))
+                })
+                .await?;
+            let Some(folder) = folder else { continue };
+            let destination = crate::mediafiles::join(root, &folder);
+            self.move_series(id, sid, source, &destination, Some((i, series.len())))
+                .await?;
+        }
+        self.progress(id, format!("Finished moving {} series to '{root}'", series.len()));
+        Ok(())
     }
 
     /// `DiskScanService.Execute(RescanSeriesCommand)`.

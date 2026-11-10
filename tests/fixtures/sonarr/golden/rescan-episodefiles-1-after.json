@@ -1,6 +1,6 @@
 {
   "body": [],
-  "recordedAt": "2026-11-08T20:59:56Z",
+  "recordedAt": "2026-11-09T22:21:04Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/episodefile?seriesId=1"

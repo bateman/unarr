@@ -4,7 +4,7 @@
     "pageSize": 2,
     "records": [
       {
-        "added": "2026-11-08T20:56:09Z",
+        "added": "2026-11-09T22:17:17Z",
         "customFormatScore": -10000,
         "customFormats": [
           {
@@ -25,7 +25,7 @@
         "downloadId": "SABnzbd_nzo_mock1",
         "episodeHasFile": false,
         "episodeId": 1,
-        "estimatedCompletionTime": "2026-11-08T21:06:14Z",
+        "estimatedCompletionTime": "2026-11-09T22:27:22Z",
         "id": 489905582,
         "indexer": "Mock Newznab (Prowlarr)",
         "languages": [
@@ -60,7 +60,7 @@
         "trackedDownloadStatus": "ok"
       },
       {
-        "added": "2026-11-08T20:56:13Z",
+        "added": "2026-11-09T22:17:21Z",
         "customFormatScore": -10000,
         "customFormats": [
           {
@@ -73,7 +73,7 @@
         "downloadId": "C7EB8F60E61BC10B2F8762DE09949BDD2AAFBE5A",
         "episodeHasFile": false,
         "episodeId": 1,
-        "estimatedCompletionTime": "2026-11-08T21:06:14Z",
+        "estimatedCompletionTime": "2026-11-09T22:27:22Z",
         "id": 1443899403,
         "indexer": "Mock Torznab (Prowlarr)",
         "languages": [
@@ -113,7 +113,7 @@
     "sortKey": "title",
     "totalRecords": 3
   },
-  "recordedAt": "2026-11-08T20:56:25Z",
+  "recordedAt": "2026-11-09T22:17:33Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/queue?page=5&pageSize=2&sortKey=title&sortDirection=descending"

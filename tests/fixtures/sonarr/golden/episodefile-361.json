@@ -68,7 +68,7 @@
     "seriesId": 22,
     "size": 865765285
   },
-  "recordedAt": "2026-11-08T20:55:52Z",
+  "recordedAt": "2026-11-09T22:16:58Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/episodefile/361"

@@ -15,7 +15,7 @@
         "name": "Language not Italian"
       }
     ],
-    "dateAdded": "2026-11-08T20:58:48Z",
+    "dateAdded": "2026-11-09T22:19:56Z",
     "id": 1076,
     "indexerFlags": 0,
     "languages": [
@@ -64,7 +64,7 @@
     "seriesId": 2,
     "size": 119980
   },
-  "recordedAt": "2026-11-08T21:00:18Z",
+  "recordedAt": "2026-11-09T22:21:26Z",
   "request": {
     "body": "bodies/episodefile-put.json",
     "method": "PUT",

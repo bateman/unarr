@@ -1,0 +1,7 @@
+{
+ "$from": "config-importlist",
+ "$set": {
+  "listSyncLevel": "keepAndTag",
+  "listSyncTag": 1
+ }
+}

@@ -1,0 +1,6 @@
+{
+ "$from": "remotepathmapping-create",
+ "$set": {
+  "remotePath": "/remote/done/"
+ }
+}

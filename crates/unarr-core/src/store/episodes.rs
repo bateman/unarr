@@ -39,6 +39,54 @@ pub fn insert_episode(conn: &Connection, e: &Episode) -> anyhow::Result<()> {
     Ok(())
 }
 
+/// Every column of an existing episode but its file, which only imports
+/// and deletions set.
+pub fn update_episode(conn: &Connection, e: &Episode) -> anyhow::Result<()> {
+    conn.execute(
+        "UPDATE episodes SET series_id = :series_id, tvdb_id = :tvdb_id, season_number = :season_number,
+            episode_number = :episode_number, title = :title, overview = :overview,
+            absolute_episode_number = :absolute_episode_number,
+            scene_absolute_episode_number = :scene_absolute_episode_number,
+            scene_season_number = :scene_season_number, scene_episode_number = :scene_episode_number,
+            unverified_scene_numbering = :unverified_scene_numbering, monitored = :monitored,
+            air_date = :air_date, air_date_utc = :air_date_utc, runtime = :runtime,
+            finale_type = :finale_type, images = :images, ratings_votes = :ratings_votes,
+            ratings_value = :ratings_value, last_search_time = :last_search_time,
+            aired_after_season_number = :aired_after_season_number,
+            aired_before_season_number = :aired_before_season_number,
+            aired_before_episode_number = :aired_before_episode_number
+         WHERE id = :id",
+        named_params! {
+            ":id": e.id, ":series_id": e.series_id, ":tvdb_id": e.tvdb_id, ":season_number": e.season_number,
+            ":episode_number": e.episode_number, ":title": e.title, ":overview": e.overview,
+            ":absolute_episode_number": e.absolute_episode_number,
+            ":scene_absolute_episode_number": e.scene_absolute_episode_number,
+            ":scene_season_number": e.scene_season_number, ":scene_episode_number": e.scene_episode_number,
+            ":unverified_scene_numbering": e.unverified_scene_numbering, ":monitored": e.monitored,
+            ":air_date": e.air_date.map(|d| d.to_string()), ":air_date_utc": ts(e.air_date_utc),
+            ":runtime": e.runtime, ":finale_type": e.finale_type, ":images": to_json(&e.images)?,
+            ":ratings_votes": e.ratings.votes, ":ratings_value": e.ratings.value,
+            ":last_search_time": ts(e.last_search_time),
+            ":aired_after_season_number": e.aired_after_season_number,
+            ":aired_before_season_number": e.aired_before_season_number,
+            ":aired_before_episode_number": e.aired_before_episode_number,
+        },
+    )?;
+    Ok(())
+}
+
+/// Episodes by id, gone.
+pub fn delete_episodes(conn: &Connection, ids: &[i64]) -> anyhow::Result<()> {
+    if ids.is_empty() {
+        return Ok(());
+    }
+    conn.execute(
+        "DELETE FROM episodes WHERE id IN (SELECT value FROM json_each(?1))",
+        params![serde_json::to_string(ids)?],
+    )?;
+    Ok(())
+}
+
 fn episode_from_row(row: &Row) -> anyhow::Result<Episode> {
     Ok(Episode {
         id: row.get("id")?,
@@ -481,6 +529,20 @@ pub fn clear_episode_file_id(conn: &Connection, file_id: i64) -> anyhow::Result<
 }
 
 /// `EpisodeRepository.SetMonitored`.
+/// `SetEpisodeMonitoredBySeason`.
+pub fn set_monitored_by_season(
+    conn: &Connection,
+    series_id: i64,
+    season: i64,
+    monitored: bool,
+) -> anyhow::Result<()> {
+    conn.execute(
+        "UPDATE episodes SET monitored = ?3 WHERE series_id = ?1 AND season_number = ?2",
+        params![series_id, season, monitored],
+    )?;
+    Ok(())
+}
+
 pub fn set_monitored(conn: &Connection, ids: &[i64], monitored: bool) -> anyhow::Result<()> {
     if ids.is_empty() {
         return Ok(());

@@ -1,0 +1,6 @@
+{
+ "$from": "delayprofile-create",
+ "$set": {
+  "usenetDelay": 30
+ }
+}

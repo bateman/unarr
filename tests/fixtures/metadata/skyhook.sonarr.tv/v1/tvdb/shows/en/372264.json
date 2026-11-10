@@ -1,0 +1,729 @@
+{
+ "tvdbId": 372264,
+ "title": "Slow Horses",
+ "overview": "This quick-witted spy drama follows a dysfunctional team of MI5 agents – and their obnoxious boss, the notorious Jackson Lamb – as they navigate the espionage world's smoke and mirrors to defend England from sinister forces.",
+ "slug": "slow-horses",
+ "originalCountry": "gbr",
+ "originalLanguage": "eng",
+ "language": "eng",
+ "firstAired": "2022-04-01",
+ "lastAired": "2026-10-21",
+ "tvMazeId": 45039,
+ "tmdbId": 95480,
+ "imdbId": "tt5875444",
+ "malIds": [],
+ "anidbIds": [],
+ "aniListIds": [],
+ "lastUpdated": "2026-10-28T13:32:47Z",
+ "status": "Continuing",
+ "runtime": 46,
+ "timeOfDay": {
+  "hours": 0,
+  "minutes": 0
+ },
+ "originalNetwork": "Apple TV",
+ "network": "Apple TV",
+ "genres": [
+  "Suspense",
+  "Thriller"
+ ],
+ "contentRating": "TV-MA",
+ "rating": {
+  "count": 169715,
+  "value": "8.4"
+ },
+ "actors": [
+  {
+   "name": "Gary Oldman",
+   "character": "Jackson Lamb",
+   "image": "https://artworks.thetvdb.com/banners/person/327268/primary.jpg"
+  },
+  {
+   "name": "Jack Lowden",
+   "character": "River Cartwright",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/290936/photo/67f85a9def567.jpg"
+  },
+  {
+   "name": "Kristin Scott Thomas",
+   "character": "Diana Taverner",
+   "image": "https://artworks.thetvdb.com/banners/person/261537/primary.jpg"
+  },
+  {
+   "name": "Aimee-Ffion Edwards",
+   "character": "Shirley Dander",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/303288/photo/65fd8cb4e9fe0.jpg"
+  },
+  {
+   "name": "Saskia Reeves",
+   "character": "Catherine Standish",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/380189/photo/62615033b5845.jpg"
+  },
+  {
+   "name": "Christopher Chung",
+   "character": "Roddy Ho",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8132391/photo/66f318e4bedb6.jpg"
+  },
+  {
+   "name": "Rosalind Eleazar",
+   "character": "Louisa Guy",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/308480/photo/66f31a578a833.jpg"
+  },
+  {
+   "name": "Kadiff Kirwan",
+   "character": "Marcus Longridge",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/496045/photo/671d0cfadef7c.jpg"
+  },
+  {
+   "name": "Dustin Demri-Burns",
+   "character": "Min Harper",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/534610/photo/67075b73a012e.jpg"
+  },
+  {
+   "name": "Jonathan Pryce",
+   "character": "David Cartwright",
+   "image": "https://artworks.thetvdb.com/banners/person/247886/primary.jpg"
+  },
+  {
+   "name": "Chris Reilly",
+   "character": "Nick Duffy",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/526997/photo/63b6eea92be5f.jpg"
+  },
+  {
+   "name": "Freddie Fox",
+   "character": "James 'Spider' Webb",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/490081/photo/6699c708ba964.jpg"
+  },
+  {
+   "name": "Sope Dirisu",
+   "character": "Sean Donovan",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/484962/photo/65641698b812c.jpg"
+  },
+  {
+   "name": "Sophie Okonedo",
+   "character": "Ingrid Tearney",
+   "image": "https://artworks.thetvdb.com/banners/person/449518/primary.jpg"
+  },
+  {
+   "name": "James Callis",
+   "character": "Claude Whelan",
+   "image": "https://artworks.thetvdb.com/banners/person/346892/5ec1531b82bfe.jpg"
+  },
+  {
+   "name": "Hugo Weaving",
+   "character": "Frank Harkness",
+   "image": "https://artworks.thetvdb.com/banners/person/298680/primary.jpg"
+  },
+  {
+   "name": "Ruth Bradley",
+   "character": "Emma Flyte",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/484965/photo/63f5345e9e761.jpg"
+  },
+  {
+   "name": "Joanna Scanlan",
+   "character": "Moira Tregorian",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/298764/photo/66bbd02b2f7f8.jpg"
+  },
+  {
+   "name": "Tom Brooke",
+   "character": "J.K. Coe",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/247998/photo/64e8ef9919c12.jpg"
+  },
+  {
+   "name": "Nick Mohammed",
+   "character": "Zafar Jaffrey",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/453477/photo/66ceade1d2c9c.jpg"
+  },
+  {
+   "name": "Hiba Bennani",
+   "character": "Tara",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9110677/photo/642dadc87e85e.jpg"
+  },
+  {
+   "name": "Rebecca Dyson-Smith",
+   "character": "Agent Smith",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8573842/photo/60fe1fa23edd7.jpg"
+  },
+  {
+   "name": "Tamsin Topolski",
+   "character": "Kelly Tropper",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/601138/photo/63aa6f9c5f841.jpg"
+  },
+  {
+   "name": "Kiran Sonia Sawar",
+   "character": "Agent Giti Rahman",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/513455/photo/64dd5db12bf46.jpg"
+  },
+  {
+   "name": "Samuel West",
+   "character": "Peter Judd"
+  },
+  {
+   "name": "Olivia Cooke",
+   "character": "Sidonie \"Sid\" Baker",
+   "image": "https://artworks.thetvdb.com/banners/person/467256/63f268ffda9e8.jpg"
+  }
+ ],
+ "images": [
+  {
+   "coverType": "Banner",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/372264/banners/6572357383704.jpg"
+  },
+  {
+   "coverType": "Poster",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/372264/posters/637d209da8190.jpg"
+  },
+  {
+   "coverType": "Fanart",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/372264/backgrounds/63896cb293707.jpg"
+  },
+  {
+   "coverType": "Clearlogo",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/372264/clearlogo/656ea800b402e.png"
+  }
+ ],
+ "seasons": [
+  {
+   "seasonNumber": 0,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/1982341/posters/69ec52974b732.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 1,
+   "name": "Slow Horses",
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/1982238/posters/66a6047fbf78c.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 2,
+   "name": "Dead Lions",
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2022006/posters/66a6042562b35.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 3,
+   "name": "Real Tigers",
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2033571/posters/66a603d02b646.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 4,
+   "name": "Spook Street",
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2033572/posters/670a7e1cd0952.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 5,
+   "name": "London Rules",
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2143435/posters/69ec5346b8d85.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 6,
+   "name": "Joe Country and Slough House",
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2213966/posters/6a961a7ec3c30.jpg"
+    }
+   ]
+  }
+ ],
+ "episodes": [
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 9822460,
+   "seasonNumber": 0,
+   "episodeNumber": 1,
+   "title": "Legendary Forces",
+   "airDate": "2022-03-24",
+   "airDateUtc": "2022-03-24T04:00:00Z",
+   "runtime": 3,
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9822460/screencap/6478d914e4faf.jpg"
+  },
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 9822461,
+   "seasonNumber": 0,
+   "episodeNumber": 2,
+   "title": "An Inside Look",
+   "airDate": "2022-03-25",
+   "airDateUtc": "2022-03-25T04:00:00Z",
+   "runtime": 3,
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9822461/screencap/6478d94ef07c6.jpg"
+  },
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 9822462,
+   "seasonNumber": 0,
+   "episodeNumber": 3,
+   "title": "What Is a Slow Horse?",
+   "airDate": "2022-03-26",
+   "airDateUtc": "2022-03-26T04:00:00Z",
+   "runtime": 3,
+   "finaleType": "season",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9822462/screencap/6478d96a55037.jpg"
+  },
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 8984450,
+   "seasonNumber": 1,
+   "episodeNumber": 1,
+   "title": "Failure's Contagious",
+   "airDate": "2022-04-01",
+   "airDateUtc": "2022-04-01T04:00:00Z",
+   "runtime": 53,
+   "overview": "River Cartwright is ousted from MI5 and finds himself in a place worse than purgatory: Slough House, dumping ground for failed spies.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8984450/screencap/624668706c090.jpg"
+  },
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 8984461,
+   "seasonNumber": 1,
+   "episodeNumber": 2,
+   "title": "Work Drinks",
+   "airDate": "2022-04-01",
+   "airDateUtc": "2022-04-01T04:00:00Z",
+   "runtime": 48,
+   "overview": "River and Sid join forces. A misfired gun has dire consequences.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8984461/screencap/62466916da227.jpg"
+  },
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 8984462,
+   "seasonNumber": 1,
+   "episodeNumber": 3,
+   "title": "Bad Tradecraft",
+   "airDate": "2022-04-08",
+   "airDateUtc": "2022-04-08T04:00:00Z",
+   "runtime": 41,
+   "overview": "Slough House is the unlikely venue for a secret romance, but events take a dark turn when a dangerous encounter becomes deadly.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8984462/screencap/62468e900b45c.jpg"
+  },
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 8984463,
+   "seasonNumber": 1,
+   "episodeNumber": 4,
+   "title": "Visiting Hours",
+   "airDate": "2022-04-15",
+   "airDateUtc": "2022-04-15T04:00:00Z",
+   "runtime": 43,
+   "overview": "Taverner sends the Dogs to hunt down Lamb and the Slow Horses. River holds the secret to saving the gang.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8984463/screencap/6251a08777285.jpg"
+  },
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 8984464,
+   "seasonNumber": 1,
+   "episodeNumber": 5,
+   "title": "Fiasco",
+   "airDate": "2022-04-22",
+   "airDateUtc": "2022-04-22T04:00:00Z",
+   "runtime": 42,
+   "overview": "The Slow Horses must disappear to avoid capture by MI5. Lamb and River head to The Park to outwit Taverner.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8984464/screencap/6258cc378d197.jpg"
+  },
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 8984465,
+   "seasonNumber": 1,
+   "episodeNumber": 6,
+   "title": "Follies",
+   "airDate": "2022-04-29",
+   "airDateUtc": "2022-04-29T04:00:00Z",
+   "runtime": 53,
+   "finaleType": "season",
+   "overview": "Taverner and the Slow Horses attempt different approaches to locate the kidnappers and Hassan. Ho makes a shocking discovery about Sid.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8984465/screencap/6262767e45877.jpg"
+  },
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 9367340,
+   "seasonNumber": 2,
+   "episodeNumber": 1,
+   "title": "Last Stop",
+   "airDate": "2022-12-02",
+   "airDateUtc": "2022-12-02T05:00:00Z",
+   "runtime": 43,
+   "overview": "Jackson Lamb is on high alert after a former spy is found dead. Min and Louisa are tempted by an offer from outside Slough House.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9367340/screencap/63895ca5cd0a2.jpg"
+  },
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 9446159,
+   "seasonNumber": 2,
+   "episodeNumber": 2,
+   "title": "From Upshott with Love",
+   "airDate": "2022-12-02",
+   "airDateUtc": "2022-12-02T05:00:00Z",
+   "runtime": 49,
+   "overview": "Lamb liaises with a Russian defector who may hold a clue to sleeper agents. River is on the trail of a ruthless assassin.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9446159/screencap/63895cddb2f8a.jpg"
+  },
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 9446160,
+   "seasonNumber": 2,
+   "episodeNumber": 3,
+   "title": "Drinking Games",
+   "airDate": "2022-12-09",
+   "airDateUtc": "2022-12-09T05:00:00Z",
+   "runtime": 53,
+   "overview": "River gets cozy in the Cotswolds while searching for a sleeper agent. Min discovers Russian drinking games are the most brutal of all.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9446160/screencap/63895d2f2acb6.jpg"
+  },
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 9446161,
+   "seasonNumber": 2,
+   "episodeNumber": 4,
+   "title": "Cicada",
+   "airDate": "2022-12-16",
+   "airDateUtc": "2022-12-16T05:00:00Z",
+   "runtime": 45,
+   "overview": "Louisa makes her move on Pashkin. Catherine makes moves of a different kind when she plays high-stakes chess with a sinister stranger.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9446161/screencap/6392a9812c766.jpg"
+  },
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 9446162,
+   "seasonNumber": 2,
+   "episodeNumber": 5,
+   "title": "Boardroom Politics",
+   "airDate": "2022-12-23",
+   "airDateUtc": "2022-12-23T05:00:00Z",
+   "runtime": 41,
+   "overview": "Lamb orders his Slow Horses to walk into traps. River believes something alarming is heading toward London.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9446162/screencap/639bd3a2cf3e8.jpg"
+  },
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 9446163,
+   "seasonNumber": 2,
+   "episodeNumber": 6,
+   "title": "Old Scores",
+   "airDate": "2022-12-30",
+   "airDateUtc": "2022-12-30T05:00:00Z",
+   "runtime": 45,
+   "finaleType": "season",
+   "overview": "Lamb and Katinsky go head-to-head. Ho finds himself trapped on a train with a Russian assassin.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9446163/screencap/63a5178192a78.jpg"
+  },
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 10038530,
+   "seasonNumber": 3,
+   "episodeNumber": 1,
+   "title": "Strange Games",
+   "airDate": "2023-11-29",
+   "airDateUtc": "2023-11-29T05:00:00Z",
+   "runtime": 44,
+   "overview": "A romantic relationship in Istanbul ends badly. Lamb hits the panic button when one of his Slow Horses fails to show up for work.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10038530/screencap/6519f6fb0d693.jpg"
+  },
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 10038531,
+   "seasonNumber": 3,
+   "episodeNumber": 2,
+   "title": "Hard Lessons",
+   "airDate": "2023-11-29",
+   "airDateUtc": "2023-11-29T05:00:00Z",
+   "runtime": 40,
+   "overview": "River has to steal something out of the Park to save a life. Lamb realizes a stranger game is afoot.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10038531/screencap/6519f70ecd43c.jpg"
+  },
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 10038532,
+   "seasonNumber": 3,
+   "episodeNumber": 3,
+   "title": "Negotiating with Tigers",
+   "airDate": "2023-12-06",
+   "airDateUtc": "2023-12-06T05:00:00Z",
+   "runtime": 44,
+   "overview": "Marcus and Shirley face Lamb's wrath. River discovers revenge is a dish best served cold.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10038532/screencap/6519f723e43b1.jpg"
+  },
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 10038533,
+   "seasonNumber": 3,
+   "episodeNumber": 4,
+   "title": "Uninvited Guests",
+   "airDate": "2023-12-13",
+   "airDateUtc": "2023-12-13T05:00:00Z",
+   "runtime": 45,
+   "overview": "Tearney makes a bold move. The Slow Horses assist the Tiger Team, unaware of their hidden agenda. Lamb and Ho take a road trip.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10038533/screencap/6519f7359b172.jpg"
+  },
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 10038534,
+   "seasonNumber": 3,
+   "episodeNumber": 5,
+   "title": "Cleaning Up",
+   "airDate": "2023-12-20",
+   "airDateUtc": "2023-12-20T05:00:00Z",
+   "runtime": 41,
+   "overview": "Taverner and Tearney face off for control of MI5. River and Louisa find themselves caught in the crossfire.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10038534/screencap/657911d70aa07.jpg"
+  },
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 10038535,
+   "seasonNumber": 3,
+   "episodeNumber": 6,
+   "title": "Footprints",
+   "airDate": "2023-12-27",
+   "airDateUtc": "2023-12-27T05:00:00Z",
+   "runtime": 44,
+   "finaleType": "season",
+   "overview": "The Slow Horses fight for their lives. Lamb shares some devastating truths with Catherine.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10038535/screencap/6519f74f92b56.jpg"
+  },
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 10226547,
+   "seasonNumber": 4,
+   "episodeNumber": 1,
+   "title": "Identity Theft",
+   "airDate": "2024-09-04",
+   "airDateUtc": "2024-09-04T04:00:00Z",
+   "runtime": 43,
+   "overview": "A London bombing puts Taverner under pressure. When River grows concerned for his grandfather, Louisa encourages him to go for a visit.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10226547/screencap/66b32f4465dfb.jpg"
+  },
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 10565102,
+   "seasonNumber": 4,
+   "episodeNumber": 2,
+   "title": "A Stranger Comes to Town",
+   "airDate": "2024-09-11",
+   "airDateUtc": "2024-09-11T04:00:00Z",
+   "runtime": 46,
+   "overview": "A naïve agent makes a discovery about the Westacres bomber. Lamb suspects that David knows more than he’s letting on.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10565102/screencap/66b32f48d07ab.jpg"
+  },
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 10585999,
+   "seasonNumber": 4,
+   "episodeNumber": 3,
+   "title": "Penny for Your Thoughts",
+   "airDate": "2024-09-18",
+   "airDateUtc": "2024-09-18T04:00:00Z",
+   "runtime": 46,
+   "overview": "River is trapped in France. Back at Slough House, the Dogs have come for Lamb.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10585999/screencap/66b32f48c8a10.jpg"
+  },
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 10586000,
+   "seasonNumber": 4,
+   "episodeNumber": 4,
+   "title": "Returns",
+   "airDate": "2024-09-25",
+   "airDateUtc": "2024-09-25T04:00:00Z",
+   "runtime": 42,
+   "overview": "Taverner is desperate to hide dangerous secrets. River seeks answers at his grandfather’s house.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10586000/screencap/66b32f4ab6e8a.jpg"
+  },
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 10586001,
+   "seasonNumber": 4,
+   "episodeNumber": 5,
+   "title": "Grave Danger",
+   "airDate": "2024-10-02",
+   "airDateUtc": "2024-10-02T04:00:00Z",
+   "runtime": 40,
+   "overview": "Lamb questions David about France as River comes face to face with the enemy.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10586001/screencap/66b32f527b30b.jpg"
+  },
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 10586002,
+   "seasonNumber": 4,
+   "episodeNumber": 6,
+   "title": "Hello Goodbye",
+   "airDate": "2024-10-09",
+   "airDateUtc": "2024-10-09T04:00:00Z",
+   "runtime": 52,
+   "finaleType": "season",
+   "overview": "Impossible decisions are faced and sacrifices are made.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10586002/screencap/66fc9bc198bb3.jpg"
+  },
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 11175982,
+   "seasonNumber": 5,
+   "episodeNumber": 1,
+   "title": "Bad Dates",
+   "airDate": "2025-09-24",
+   "airDateUtc": "2025-09-24T04:00:00Z",
+   "runtime": 46,
+   "overview": "A mass shooting rocks London, intensifying a testy mayoral race. Shirley believes one of the Slow Horses was the target of an attempted hit.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11175982/screencap/68a516fb187c5.jpg"
+  },
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 11175983,
+   "seasonNumber": 5,
+   "episodeNumber": 2,
+   "title": "Incommunicado",
+   "airDate": "2025-10-01",
+   "airDateUtc": "2025-10-01T04:00:00Z",
+   "runtime": 48,
+   "overview": "Lamb intercepts an assassin. Taverner receives a key piece of intel about the Abbotsfield shooting.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11175983/screencap/68a5173296c42.jpg"
+  },
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 11175984,
+   "seasonNumber": 5,
+   "episodeNumber": 3,
+   "title": "Tall Tales",
+   "airDate": "2025-10-08",
+   "airDateUtc": "2025-10-08T04:00:00Z",
+   "runtime": 39,
+   "overview": "An act of sabotage grinds London to a halt. Taverner interrogates Roddy. Coe is convinced a destabilization strategy is at play.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11175984/screencap/68e5a8c031247.jpg"
+  },
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 11175985,
+   "seasonNumber": 5,
+   "episodeNumber": 4,
+   "title": "Missiles",
+   "airDate": "2025-10-15",
+   "airDateUtc": "2025-10-15T04:00:00Z",
+   "runtime": 39,
+   "overview": "Flyte sets out to find Roddy's girlfriend. The gang is dispatched to two different campaign events to prevent another attack.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11175985/screencap/68a5175338adf.jpg"
+  },
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 11175987,
+   "seasonNumber": 5,
+   "episodeNumber": 5,
+   "title": "Circus",
+   "airDate": "2025-10-22",
+   "airDateUtc": "2025-10-22T04:00:00Z",
+   "runtime": 44,
+   "overview": "Lamb debriefs River and Coe. Roddy is pulled in to help decipher a piece of code as the destabilization strategy nears its final stage.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11175987/screencap/68a5178d2dfc0.jpg"
+  },
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 11175988,
+   "seasonNumber": 5,
+   "episodeNumber": 6,
+   "title": "Scars",
+   "airDate": "2025-10-29",
+   "airDateUtc": "2025-10-29T04:00:00Z",
+   "runtime": 51,
+   "finaleType": "season",
+   "overview": "It’s up to the Slow Horses to stop Farouk’s team from completing its mission in a final act of mass carnage.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11175988/screencap/68f82d353c539.jpg"
+  },
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 11839840,
+   "seasonNumber": 6,
+   "episodeNumber": 1,
+   "title": "Circle of Life",
+   "airDate": "2026-09-16",
+   "airDateUtc": "2026-09-16T04:00:00Z",
+   "runtime": 48,
+   "overview": "River braces for his grandfather’s funeral. Lamb looks into the death of an ex-Slow Horse.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11839840/screencap/6aa9ea5166d70.jpg"
+  },
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 11839913,
+   "seasonNumber": 6,
+   "episodeNumber": 2,
+   "title": "Daddy Issues",
+   "airDate": "2026-09-23",
+   "airDateUtc": "2026-09-23T04:00:00Z",
+   "runtime": 47,
+   "overview": "The reemergence of Frank Harkness and a suspicious string of murders put Lamb and team on high alert.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11839913/screencap/6aa9ea6a38775.jpg"
+  },
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 11839914,
+   "seasonNumber": 6,
+   "episodeNumber": 3,
+   "title": "Resurrection",
+   "airDate": "2026-09-30",
+   "airDateUtc": "2026-09-30T04:00:00Z",
+   "runtime": 48,
+   "overview": "Ex-Slow Horses return to the fold as assassins close in. Taverner faces the fallout of her TV interview.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11839914/screencap/6ab326455ef00.jpg"
+  },
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 11839915,
+   "seasonNumber": 6,
+   "episodeNumber": 4,
+   "title": "Lost & Found",
+   "airDate": "2026-10-07",
+   "airDateUtc": "2026-10-07T04:00:00Z",
+   "runtime": 50,
+   "overview": "Lamb tries figuring out who Frank is working for. Sid, River, and Coe do everything to evade the hit squad.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11839915/screencap/6abc5f5704cc4.jpg"
+  },
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 11839916,
+   "seasonNumber": 6,
+   "episodeNumber": 5,
+   "title": "Sayonara",
+   "airDate": "2026-10-14",
+   "airDateUtc": "2026-10-14T04:00:00Z",
+   "runtime": 47,
+   "overview": "River goes after Sid. Lamb sets his sights on Cantor. Taverner carries on with a treacherous deal.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11839916/screencap/6ac599e41bd97.jpg"
+  },
+  {
+   "tvdbShowId": 372264,
+   "tvdbId": 11839917,
+   "seasonNumber": 6,
+   "episodeNumber": 6,
+   "title": "Judgement Day",
+   "airDate": "2026-10-21",
+   "airDateUtc": "2026-10-21T04:00:00Z",
+   "runtime": 62,
+   "finaleType": "season",
+   "overview": "The safe house becomes unsafe as Lamb and Taverner finally join forces.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11839917/screencap/6aced44fa7f9d.jpg"
+  }
+ ]
+}

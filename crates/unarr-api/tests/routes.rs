@@ -17,6 +17,11 @@ use unarr_mock::{fixtures_dir, Mock, API_KEY};
 /// The fixture imported, with a SABnzbd pointing at the mock as the only
 /// enabled client and episode 1 of The Pitt monitored.
 async fn state_with_mock(mock: &Mock) -> AppState {
+    state_in(mock, fixtures_dir().join("sonarr")).await
+}
+
+/// The same, with the application data in `app_data`.
+async fn state_in(mock: &Mock, app_data: std::path::PathBuf) -> AppState {
     let dir = fixtures_dir().join("sonarr");
     let db = Db::open_in_memory().unwrap();
     unarr_import::sonarr::import(&dir.join("sonarr.db"), &db).expect("import fixture");
@@ -51,7 +56,7 @@ async fn state_with_mock(mock: &Mock) -> AppState {
         Personality::Sonarr,
         db,
         settings,
-        RuntimeInfo::detect(dir),
+        RuntimeInfo::detect(app_data),
         LogBuffer::new(),
     )
 }
@@ -170,4 +175,110 @@ async fn a_body_that_is_not_an_object_is_a_bad_request() {
             );
         }
     }
+}
+
+/// The log files the daemon writes: listed with the last written first,
+/// read through the API and downloaded where the list says.
+#[tokio::test]
+async fn log_files_are_listed_newest_first_and_downloaded() {
+    let mock = Mock::start(fixtures_dir(), 0).await.unwrap();
+    let app_data = std::env::temp_dir().join(format!("unarr_routes_logs_{}", std::process::id()));
+    let logs = app_data.join("logs");
+    let _ = std::fs::remove_dir_all(&app_data);
+    std::fs::create_dir_all(&logs).unwrap();
+    let base = std::time::SystemTime::now() - std::time::Duration::from_secs(600);
+    for (name, age, text) in [
+        ("sonarr.0.txt", 0, "older lines\n"),
+        ("sonarr.txt", 300, "2026-11-10 09:05:07.3|Info|unarrd|listening\n"),
+        ("notes.md", 400, "not a log\n"),
+    ] {
+        std::fs::write(logs.join(name), text).unwrap();
+        std::fs::File::options()
+            .write(true)
+            .open(logs.join(name))
+            .and_then(|f| f.set_modified(base + std::time::Duration::from_secs(age)))
+            .unwrap();
+    }
+    let app = unarr_api::router(state_in(&mock, app_data.clone()).await);
+
+    let (status, list) = send(&app, "GET", "/api/v3/log/file", Value::Null).await;
+    assert_eq!(status, StatusCode::OK);
+    let rows: Vec<(i64, &str, &str)> = list
+        .as_array()
+        .unwrap()
+        .iter()
+        .map(|f| {
+            (
+                f["id"].as_i64().unwrap(),
+                f["filename"].as_str().unwrap(),
+                f["downloadUrl"].as_str().unwrap(),
+            )
+        })
+        .collect();
+    // Numbered by name, shown by time.
+    assert_eq!(
+        rows,
+        [
+            (2, "sonarr.txt", "/logfile/sonarr.txt"),
+            (1, "sonarr.0.txt", "/logfile/sonarr.0.txt")
+        ]
+    );
+    assert_eq!(list[0]["contentsUrl"], "/api/v3/log/file/sonarr.txt");
+
+    // The download link is a page of the UI: it takes the browser's
+    // session, as the backups' links do.
+    let login = app
+        .clone()
+        .oneshot(
+            Request::builder()
+                .method("POST")
+                .uri("/login")
+                .header("content-type", "application/x-www-form-urlencoded")
+                .body(Body::from("username=unarr&password=fixture&rememberMe=on"))
+                .unwrap(),
+        )
+        .await
+        .unwrap();
+    let session = login.headers()["set-cookie"]
+        .to_str()
+        .unwrap()
+        .split(';')
+        .next()
+        .unwrap()
+        .to_string();
+    let text = |path: &'static str| {
+        let app = app.clone();
+        let session = session.clone();
+        async move {
+            let response = app
+                .oneshot(
+                    Request::builder()
+                        .uri(path)
+                        .header("X-Api-Key", API_KEY)
+                        .header("cookie", session)
+                        .body(Body::empty())
+                        .unwrap(),
+                )
+                .await
+                .unwrap();
+            let status = response.status();
+            let bytes = response.into_body().collect().await.unwrap().to_bytes();
+            (status, String::from_utf8_lossy(&bytes).into_owned())
+        }
+    };
+    for path in ["/logfile/sonarr.txt", "/api/v3/log/file/sonarr.txt"] {
+        let (status, body) = text(path).await;
+        assert_eq!(status, StatusCode::OK, "{path}");
+        assert!(body.ends_with("|Info|unarrd|listening\n"), "{path}: {body}");
+    }
+    // Only a listed file is served.
+    for path in [
+        "/logfile/notes.md",
+        "/logfile/missing.txt",
+        "/logfile/..%2Fconfig.xml",
+        "/updatelogfile/sonarr.txt",
+    ] {
+        assert_eq!(text(path).await.0, StatusCode::NOT_FOUND, "{path}");
+    }
+    std::fs::remove_dir_all(&app_data).unwrap();
 }

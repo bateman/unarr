@@ -191,6 +191,8 @@ pub struct Identity {
     /// `BuildInfo.AppName` and `BuildInfo.Version`, which Plex is told.
     pub app_name: String,
     pub app_version: String,
+    /// Where the series covers are, for the `lastWrite` of their URLs.
+    pub media_cover_dir: Option<std::path::PathBuf>,
 }
 
 impl Default for Identity {
@@ -201,6 +203,7 @@ impl Default for Identity {
             machine_name: machine_name(),
             app_name: "Sonarr".into(),
             app_version: "4.0.20.3014".into(),
+            media_cover_dir: None,
         }
     }
 }
@@ -626,6 +629,64 @@ impl Notifier {
                 | ImportEvent::EpisodeFileRenamed(_)
                 | ImportEvent::SeriesScanned { .. }
                 | ImportEvent::RescanRequested { .. } => {}
+            }
+        }
+    }
+
+    /// `Handle(SeriesAddCompletedEvent)`: the series once it was added,
+    /// refreshed and scanned.
+    pub async fn on_series_add(&self, series: &Series, now: DateTime<Utc>) {
+        let (application_url, tags) = self.context_parts().await;
+        let ctx = Context {
+            identity: &self.identity,
+            application_url: &application_url,
+            tags: &tags,
+            now,
+        };
+        for def in self.available(now, true).await {
+            if !def.on_series_add || !def.handles(series) {
+                continue;
+            }
+            let result = match def.kind() {
+                Some(Kind::Discord) => discord::on_series_add(&self.http, &def, series, &ctx).await,
+                Some(Kind::Webhook) => webhook::on_series_add(&self.http, &def, series, &ctx).await,
+                _ => Ok(()),
+            };
+            self.deliver(&def, "OnSeriesAdd", now, result).await;
+        }
+    }
+
+    /// `Handle(SeriesDeletedEvent)`: one message per series; Plex updates
+    /// its library when the files went.
+    pub async fn on_series_delete(&self, series: &[Series], deleted_files: bool, now: DateTime<Utc>) {
+        let (application_url, tags) = self.context_parts().await;
+        let ctx = Context {
+            identity: &self.identity,
+            application_url: &application_url,
+            tags: &tags,
+            now,
+        };
+        for one in series {
+            for def in self.available(now, true).await {
+                if !def.on_series_delete || !def.handles(one) {
+                    continue;
+                }
+                let result = match def.kind() {
+                    Some(Kind::Discord) => {
+                        discord::on_series_delete(&self.http, &def, one, deleted_files, &ctx).await
+                    }
+                    Some(Kind::Webhook) => {
+                        webhook::on_series_delete(&self.http, &def, one, deleted_files, &ctx).await
+                    }
+                    Some(Kind::PlexServer) => {
+                        if deleted_files {
+                            self.plex_update_if_enabled(&def, one);
+                        }
+                        Ok(())
+                    }
+                    None => Ok(()),
+                };
+                self.deliver(&def, "OnSeriesDelete", now, result).await;
             }
         }
     }

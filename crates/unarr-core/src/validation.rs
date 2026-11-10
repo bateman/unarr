@@ -22,6 +22,9 @@ pub struct ValidationFailure {
     /// Extra `formattedMessagePlaceholderValues` some validators add
     /// (`comparisonValue` for `GreaterThanValidator`).
     pub placeholders: Vec<(String, Value)>,
+    /// `context.AddFailure(message)` in a custom rule: serialised bare,
+    /// with no `isWarning`.
+    pub bare: bool,
 }
 
 impl ValidationFailure {
@@ -38,6 +41,7 @@ impl ValidationFailure {
             detailed_description: None,
             info_link: None,
             placeholders: Vec::new(),
+            bare: false,
         }
     }
 
@@ -54,6 +58,7 @@ impl ValidationFailure {
             detailed_description: None,
             info_link: None,
             placeholders: Vec::new(),
+            bare: false,
         }
     }
 
@@ -116,6 +121,15 @@ impl ValidationFailure {
             detailed_description: None,
             info_link: None,
             placeholders: Vec::new(),
+            bare: false,
+        }
+    }
+
+    /// A failure a custom rule adds by message only.
+    pub fn bare(property: &str, message: &str) -> ValidationFailure {
+        ValidationFailure {
+            bare: true,
+            ..Self::error(property, message)
         }
     }
 
@@ -133,6 +147,9 @@ impl ValidationFailure {
 
     /// The JSON object the API body lists.
     pub fn to_json(&self) -> Value {
+        if self.bare {
+            return self.to_plain_json();
+        }
         let mut m = Map::new();
         if let Some(code) = &self.error_code {
             // FluentValidation shape; a null attempted value is left out of

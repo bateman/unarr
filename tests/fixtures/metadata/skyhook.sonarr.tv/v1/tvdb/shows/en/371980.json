@@ -1,0 +1,600 @@
+{
+ "tvdbId": 371980,
+ "title": "Severance",
+ "overview": "Mark leads a team of office workers whose memories have been surgically divided between their work and personal lives. When a mysterious colleague appears outside of work, it begins a journey to discover the truth about their jobs.",
+ "slug": "severance",
+ "originalCountry": "usa",
+ "originalLanguage": "eng",
+ "language": "eng",
+ "firstAired": "2022-02-18",
+ "lastAired": "2025-03-20",
+ "tvMazeId": 44933,
+ "tmdbId": 95396,
+ "imdbId": "tt11280740",
+ "malIds": [],
+ "anidbIds": [],
+ "aniListIds": [],
+ "lastUpdated": "2026-11-06T08:45:54Z",
+ "status": "Continuing",
+ "runtime": 49,
+ "timeOfDay": {
+  "hours": 21,
+  "minutes": 0
+ },
+ "originalNetwork": "Apple TV",
+ "network": "Apple TV",
+ "genres": [
+  "Drama",
+  "Mystery",
+  "Science Fiction",
+  "Thriller"
+ ],
+ "contentRating": "TV-MA",
+ "rating": {
+  "count": 415088,
+  "value": "8.6"
+ },
+ "actors": [
+  {
+   "name": "Adam Scott",
+   "character": "Mark Scout",
+   "image": "https://artworks.thetvdb.com/banners/person/274370/primary.jpg"
+  },
+  {
+   "name": "Britt Lower",
+   "character": "Helly",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/296815/photo/67ba01b5cc513.jpg"
+  },
+  {
+   "name": "Patricia Arquette",
+   "character": "Harmony Cobel / Mrs. Selvig",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/311092/photo/61be0c22624ae.jpg"
+  },
+  {
+   "name": "Zach Cherry",
+   "character": "Dylan",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/296928/photo/62656c277637b.jpg"
+  },
+  {
+   "name": "Tramell Tillman",
+   "character": "Milchick",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8024114/photo/68af216aa72be.jpg"
+  },
+  {
+   "name": "Jen Tullock",
+   "character": "Devon"
+  },
+  {
+   "name": "John Turturro",
+   "character": "Irving",
+   "image": "https://artworks.thetvdb.com/banners/person/441767/primary.jpg"
+  },
+  {
+   "name": "Christopher Walken",
+   "character": "Burt",
+   "image": "https://artworks.thetvdb.com/banners/person/288073/primary.jpg"
+  },
+  {
+   "name": "Dichen Lachman",
+   "character": "Ms. Casey",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/303654/photo/65ef3040e5033.jpg"
+  }
+ ],
+ "images": [
+  {
+   "coverType": "Banner",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/371980/banners/67d3854a3f3f2.jpg"
+  },
+  {
+   "coverType": "Poster",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/371980/posters/621096b26f0e2.jpg"
+  },
+  {
+   "coverType": "Fanart",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/371980/backgrounds/61bdee7c62d99.jpg"
+  },
+  {
+   "coverType": "Clearlogo",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/371980/clearlogo/67deb201804b5.png"
+  }
+ ],
+ "seasons": [
+  {
+   "seasonNumber": 0
+  },
+  {
+   "seasonNumber": 1,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/1971742/posters/62113d7daa972.jpg"
+    },
+    {
+     "coverType": "Banner",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/1971742/banners/64019535f16a9.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 2,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2136511/posters/67d38676755a5.jpg"
+    },
+    {
+     "coverType": "Banner",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2136511/banners/682db80f0d3b5.jpg"
+    }
+   ]
+  }
+ ],
+ "episodes": [
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 10872740,
+   "seasonNumber": 0,
+   "episodeNumber": 11,
+   "title": "Season 2 Sneak Peek",
+   "airDate": "2024-07-10",
+   "airDateUtc": "2024-07-11T01:00:00Z",
+   "runtime": 10,
+   "overview": "First 10 minutes of the first episode of season 2, sneak peek.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10872740/screencap/679ab1666655f.jpg"
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 10911960,
+   "seasonNumber": 0,
+   "episodeNumber": 12,
+   "title": "Season 1 Recap",
+   "airDate": "2024-11-18",
+   "airDateUtc": "2024-11-19T02:00:00Z",
+   "runtime": 2,
+   "overview": "Per our last season.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10911960/screencap/679ab18977212.jpg"
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 10930486,
+   "seasonNumber": 0,
+   "episodeNumber": 13,
+   "title": "Inside the Episode: \"Goodbye, Mrs. Selvig\"",
+   "airDate": "2025-01-24",
+   "airDateUtc": "2025-01-25T02:00:00Z",
+   "runtime": 4,
+   "overview": "Severance writer Dan Erickson, Ben Stiller, Adam Scott, Patricia Arquette, Tramell Tillman, Britt Lower, and director Sam Donovan sit down to unpack key elements in Severance episode 202. In this edition, they take us through the each manager's response to the events of the Season 1 finale."
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 10939893,
+   "seasonNumber": 0,
+   "episodeNumber": 14,
+   "title": "Inside the Episode: \"Who Is Alive?\"",
+   "airDate": "2025-01-31",
+   "airDateUtc": "2025-02-01T02:00:00Z",
+   "runtime": 4,
+   "overview": "Severance writer Dan Erickson, Ben Stiller, Adam Scott, Tramell Tillman, and Zach Cherry sit down to unpack key elements in Severance episode 203. In this edition, they talk reintegration, goats, and the ultimate perk.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10939893/screencap/67a07f33a6f54.jpg"
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 10948444,
+   "seasonNumber": 0,
+   "episodeNumber": 15,
+   "title": "Lumon Management Program: Integrating New Team Members",
+   "airDate": "2025-01-22",
+   "airDateUtc": "2025-01-23T02:00:00Z",
+   "runtime": 1,
+   "overview": "Mr. Milchick freatures in a training video explaining how to integrate new employees into the Lumon Severance Progam."
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 10948445,
+   "seasonNumber": 0,
+   "episodeNumber": 16,
+   "title": "Lumon is Listening",
+   "airDate": "2025-01-13",
+   "airDateUtc": "2025-01-14T02:00:00Z",
+   "runtime": 1,
+   "overview": "A public relations video released by Lumon after the Macrodat Uprising, featuring Natalie.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10948445/screencap/67a40dd063465.jpg"
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 10948447,
+   "seasonNumber": 0,
+   "episodeNumber": 18,
+   "title": "Excerpt from The You You Are",
+   "airDate": "2025-02-01",
+   "airDateUtc": "2025-02-02T02:00:00Z",
+   "runtime": 1,
+   "overview": "An excerpt from \"The You You Are\" as read by the author himself, Dr. Ricken Lazlo Hale."
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 10948626,
+   "seasonNumber": 0,
+   "episodeNumber": 19,
+   "title": "Welcome to Lumon",
+   "airDate": "2021-12-15",
+   "airDateUtc": "2021-12-16T02:00:00Z",
+   "runtime": 7,
+   "overview": "A first person trek through the corridors of the Severance floor, featuring some of the cast. Released by Ben Stiller on X before the series began."
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 10950661,
+   "seasonNumber": 0,
+   "episodeNumber": 20,
+   "title": "Inside the Episode: \"Hello, Ms. Cobel\"",
+   "airDate": "2025-02-02",
+   "airDateUtc": "2025-02-03T02:00:00Z",
+   "runtime": 2,
+   "overview": "Severance writer Dan Erickson, Ben Stiller, Adam Scott, Britt Lower, Tramell Tillman, Zach Cherry and Patricia Arquette sit down to unpack key elements in Severance episode 201. In this edition, they discuss perplexing new questions, exploring their outies, and how worlds are expanding this season."
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 10950662,
+   "seasonNumber": 0,
+   "episodeNumber": 21,
+   "title": "Inside the Episode: \"Woe's Hollow\"",
+   "airDate": "2025-02-07",
+   "airDateUtc": "2025-02-08T02:00:00Z",
+   "runtime": 5,
+   "overview": "The cast and creatives behind Severance sit down to unpack the fourth episode of Season 2 \"Woe's Hollow\" for Inside the Episode. In this edition, they detail the intricacies of filming outside of the Lumon headquarters and MDR's character development."
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 10958826,
+   "seasonNumber": 0,
+   "episodeNumber": 22,
+   "title": "Lumon Management Program: Boosting Team Morale",
+   "airDate": "2025-02-12",
+   "airDateUtc": "2025-02-13T02:00:00Z",
+   "runtime": 1,
+   "overview": "Lumon Industries is jubilant to expose the public to yet another installment of the Lumon Management Program—otherwise known by its breviloquent moniker of LUMP. Today, Mr. Milchick and Ms. Huang dig deep into: \"Boosting Team Morale.\""
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 10961483,
+   "seasonNumber": 0,
+   "episodeNumber": 23,
+   "title": "Inside the Episode: \"Trojan's Horse\"",
+   "airDate": "2025-02-13",
+   "airDateUtc": "2025-02-14T02:00:00Z",
+   "runtime": 5,
+   "overview": "The cast and creatives behind Severance sit down to unpack the fifth episode of Season 2 \"Trojan's Horse\" for Inside the Episode. In this edition, they outline the complicated relationship dynamics on the severed floor."
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 10975089,
+   "seasonNumber": 0,
+   "episodeNumber": 24,
+   "title": "Inside the Episode: \"Attila\"",
+   "airDate": "2025-02-20",
+   "airDateUtc": "2025-02-21T02:00:00Z",
+   "runtime": 4,
+   "overview": "The cast and creatives behind Severance sit down to unpack the sixth episode of Season 2 \"Attila\" for Inside the Episode. In this edition, they discuss the implications of disrupting the Severance barrier."
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 10990340,
+   "seasonNumber": 0,
+   "episodeNumber": 25,
+   "title": "Inside the Episode: \"Chikhai Bardo\"",
+   "airDate": "2025-02-27",
+   "airDateUtc": "2025-02-28T02:00:00Z",
+   "runtime": 4,
+   "overview": "The cast and creatives behind Severance sit down to unpack the seventh episode of Season 2 \"Chikhai Bardo\" for Inside the Episode. In this edition, they work backwards to develop the character of Gemma."
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 10998154,
+   "seasonNumber": 0,
+   "episodeNumber": 26,
+   "title": "Tim C, The Core of the Apple",
+   "airDate": "2025-01-24",
+   "airDateUtc": "2025-01-25T02:00:00Z",
+   "runtime": 1,
+   "overview": "Mr. Milchick welcomes Lumon's newest employee, Tim C."
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 11008078,
+   "seasonNumber": 0,
+   "episodeNumber": 27,
+   "title": "Lumon Management Program: Enforcing Workplace Wellness",
+   "airDate": "2025-03-05",
+   "airDateUtc": "2025-03-06T02:00:00Z",
+   "runtime": 1,
+   "overview": "Lumon Industries proudly presents the culminating installment of the Lumon Management Program—affectionately known by its breviloquent moniker, LUMP. In this final course, our severed management team delves into the essential proficiency of: \"Enforcing Workplace Wellness.\""
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 11008085,
+   "seasonNumber": 0,
+   "episodeNumber": 28,
+   "title": "Inside the Episode: \"Sweet Vitriol\"",
+   "airDate": "2025-03-06",
+   "airDateUtc": "2025-03-07T02:00:00Z",
+   "runtime": 4,
+   "overview": "The cast and creatives behind Severance sit down to unpack the eighth episode of Season 2 \"Sweet Vitriol\" for Inside the Episode. In this edition, they begin to uncover the inner workings of Ms. Cobel through Lumon's influence on her hometown."
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 11023795,
+   "seasonNumber": 0,
+   "episodeNumber": 29,
+   "title": "Inside the Episode: \"The After Hours\"",
+   "airDate": "2025-03-13",
+   "airDateUtc": "2025-03-14T01:00:00Z",
+   "runtime": 5,
+   "overview": "The cast and creatives behind Severance sit down to unpack the ninth episode of Season 2 \"The After Hours\" for Inside the Episode. In this edition, they explore how the consciousness of each MDR member influences the others."
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 11039985,
+   "seasonNumber": 0,
+   "episodeNumber": 30,
+   "title": "Inside the Episode: \"Cold Harbor\"",
+   "airDate": "2025-03-20",
+   "airDateUtc": "2025-03-21T01:00:00Z",
+   "runtime": 5,
+   "overview": "The cast and creatives behind Severance sit down to unpack the Season 2 finale \"Cold Harbor\" for Inside the Episode. In this edition, they weave together every element that leads to the explosive final moments of this season."
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 11041804,
+   "seasonNumber": 0,
+   "episodeNumber": 31,
+   "title": "Season 1 Recap, Courtesy of Lumon",
+   "airDate": "2025-01-19",
+   "airDateUtc": "2025-01-20T02:00:00Z",
+   "runtime": 3,
+   "overview": "In Severance, Mark Scout (Adam Scott) leads a team at Lumon Industries, whose employees have undergone a severance procedure, which surgically divides their memories between their work and personal lives. This daring experiment in “work-life balance” is called into question as Mark finds himself at the center of an unraveling mystery that will force him to confront the true nature of his work… and of himself."
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 11046980,
+   "seasonNumber": 0,
+   "episodeNumber": 32,
+   "title": "Season 3 Renewal",
+   "airDate": "2025-03-21",
+   "airDateUtc": "2025-03-22T01:00:00Z",
+   "runtime": 1,
+   "finaleType": "season",
+   "overview": "Cue the choreography and merriment. Severance has been renewed for Season 3."
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 8891221,
+   "seasonNumber": 1,
+   "episodeNumber": 1,
+   "title": "Good News About Hell",
+   "airDate": "2022-02-18",
+   "airDateUtc": "2022-02-19T02:00:00Z",
+   "runtime": 57,
+   "overview": "Mark is promoted to lead a team who've had their memories surgically divided between their work and personal lives.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8891221/screencap/620eff3575758.jpg"
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 8891222,
+   "seasonNumber": 1,
+   "episodeNumber": 2,
+   "title": "Half Loop",
+   "airDate": "2022-02-18",
+   "airDateUtc": "2022-02-19T02:00:00Z",
+   "runtime": 53,
+   "overview": "The team train new hire Helly on macrodata refinement. Mark takes a day off to meet with a mysterious former colleague.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8891222/screencap/68bc9beb95956.jpg"
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 8891223,
+   "seasonNumber": 1,
+   "episodeNumber": 3,
+   "title": "In Perpetuity",
+   "airDate": "2022-02-25",
+   "airDateUtc": "2022-02-26T02:00:00Z",
+   "runtime": 57,
+   "overview": "Mark takes the team on a field trip, but Helly continues to rebel.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8891223/screencap/620eff1613fbc.jpg"
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 8891224,
+   "seasonNumber": 1,
+   "episodeNumber": 4,
+   "title": "The You You Are",
+   "airDate": "2022-03-04",
+   "airDateUtc": "2022-03-05T02:00:00Z",
+   "runtime": 47,
+   "overview": "Irving makes an intriguing discovery at work. Helly aggressively pursues a meeting with her Outie. Mark grapples with the loss of his wife.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8891224/screencap/621883c7cf054.jpg"
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 8891225,
+   "seasonNumber": 1,
+   "episodeNumber": 5,
+   "title": "The Grim Barbarity of Optics and Design",
+   "airDate": "2022-03-11",
+   "airDateUtc": "2022-03-12T02:00:00Z",
+   "runtime": 44,
+   "overview": "Irving and Dylan confront Burt. The team ventures out into the hallways.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8891225/screencap/622224dd9adc0.jpg"
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 8891226,
+   "seasonNumber": 1,
+   "episodeNumber": 6,
+   "title": "Hide and Seek",
+   "airDate": "2022-03-18",
+   "airDateUtc": "2022-03-19T01:00:00Z",
+   "runtime": 40,
+   "overview": "The team angers Cobel by forming an alliance.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8891226/screencap/62347d49c8730.jpg"
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 8891227,
+   "seasonNumber": 1,
+   "episodeNumber": 7,
+   "title": "Defiant Jazz",
+   "airDate": "2022-03-25",
+   "airDateUtc": "2022-03-26T01:00:00Z",
+   "runtime": 50,
+   "overview": "Mark and the team encounter new security measures from Cobel.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8891227/screencap/623807a96f389.jpg"
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 8891228,
+   "seasonNumber": 1,
+   "episodeNumber": 8,
+   "title": "What’s for Dinner?",
+   "airDate": "2022-04-01",
+   "airDateUtc": "2022-04-02T01:00:00Z",
+   "runtime": 47,
+   "overview": "The team prepares a plan. Mark attends Devon and Ricken’s party.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8891228/screencap/623e7fbc37af0.jpg"
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 8891229,
+   "seasonNumber": 1,
+   "episodeNumber": 9,
+   "title": "The We We Are",
+   "airDate": "2022-04-08",
+   "airDateUtc": "2022-04-09T01:00:00Z",
+   "runtime": 40,
+   "finaleType": "season",
+   "overview": "The team discovers troubling revelations.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8891229/screencap/62468f5215567.jpg"
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 10586352,
+   "seasonNumber": 2,
+   "episodeNumber": 1,
+   "title": "Hello, Ms. Cobel",
+   "airDate": "2025-01-16",
+   "airDateUtc": "2025-01-17T02:00:00Z",
+   "runtime": 49,
+   "overview": "Mark returns to work under different circumstances. Secrets from the Outie world come to light.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10586352/screencap/68bc9c255c61b.jpg"
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 10592759,
+   "seasonNumber": 2,
+   "episodeNumber": 2,
+   "title": "Goodbye, Mrs. Selvig",
+   "airDate": "2025-01-23",
+   "airDateUtc": "2025-01-24T02:00:00Z",
+   "runtime": 46,
+   "overview": "Mark contemplates the meaning of a message.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10592759/screencap/68bc9c3c7e14a.jpg"
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 10592760,
+   "seasonNumber": 2,
+   "episodeNumber": 3,
+   "title": "Who Is Alive?",
+   "airDate": "2025-01-30",
+   "airDateUtc": "2025-01-31T02:00:00Z",
+   "runtime": 54,
+   "overview": "Mark, Helly, Irving, and Dylan search for answers.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10592760/screencap/68bc9c51e9d83.jpg"
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 10592761,
+   "seasonNumber": 2,
+   "episodeNumber": 4,
+   "title": "Woe’s Hollow",
+   "airDate": "2025-02-06",
+   "airDateUtc": "2025-02-07T02:00:00Z",
+   "runtime": 51,
+   "overview": "The team participates in a group activity.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10592761/screencap/68bc9c689152c.jpg"
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 10592762,
+   "seasonNumber": 2,
+   "episodeNumber": 5,
+   "title": "Trojan’s Horse",
+   "airDate": "2025-02-13",
+   "airDateUtc": "2025-02-14T02:00:00Z",
+   "runtime": 47,
+   "overview": "Tensions emerge after the team suffers a loss.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10592762/screencap/679bd8c477542.jpg"
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 10592763,
+   "seasonNumber": 2,
+   "episodeNumber": 6,
+   "title": "Attila",
+   "airDate": "2025-02-20",
+   "airDateUtc": "2025-02-21T02:00:00Z",
+   "runtime": 48,
+   "overview": "Bonds are tested. Mark continues on his path of discovery.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10592763/screencap/679bd88078f6a.jpg"
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 10592764,
+   "seasonNumber": 2,
+   "episodeNumber": 7,
+   "title": "Chikhai Bardo",
+   "airDate": "2025-02-27",
+   "airDateUtc": "2025-02-28T02:00:00Z",
+   "runtime": 50,
+   "overview": "An old romance intersects with a deadly present threat.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10592764/screencap/679bd9095f748.jpg"
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 10592765,
+   "seasonNumber": 2,
+   "episodeNumber": 8,
+   "title": "Sweet Vitriol",
+   "airDate": "2025-03-06",
+   "airDateUtc": "2025-03-07T02:00:00Z",
+   "runtime": 37,
+   "overview": "Discoveries are made.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10592765/screencap/679bd942d8edd.jpg"
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 10592766,
+   "seasonNumber": 2,
+   "episodeNumber": 9,
+   "title": "The After Hours",
+   "airDate": "2025-03-13",
+   "airDateUtc": "2025-03-14T01:00:00Z",
+   "runtime": 45,
+   "overview": "Mark and Devon team with an ally. Helly investigates further.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10592766/screencap/67ca53e0b965f.jpg"
+  },
+  {
+   "tvdbShowId": 371980,
+   "tvdbId": 10592768,
+   "seasonNumber": 2,
+   "episodeNumber": 10,
+   "title": "Cold Harbor",
+   "airDate": "2025-03-20",
+   "airDateUtc": "2025-03-21T01:00:00Z",
+   "runtime": 76,
+   "finaleType": "season",
+   "overview": "Mark forms a shaky alliance in an all-or-nothing play, while the team makes a dangerous last stand.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10592768/screencap/679bd9790a8cf.jpg"
+  }
+ ]
+}

@@ -73,7 +73,7 @@
             "thumbnail": {
               "url": "https://artworks.thetvdb.com/banners/v4/series/422712/posters/6978fefe94ea5.jpg"
             },
-            "timestamp": "2026-11-08T20:58:48.6005257Z",
+            "timestamp": "2026-11-09T22:19:56.2793470Z",
             "title": "Daredevil: Born Again - 1x01 - Heaven's Half Hour",
             "url": "http://thetvdb.com/?tab=series&id=422712"
           }
@@ -116,7 +116,7 @@
         "downloadClientType": "qBittorrent",
         "downloadId": "0FB2EF04FB342178115BA635EC7B5EC0067058BA",
         "episodeFile": {
-          "dateAdded": "2026-11-08T20:58:48.5893616Z",
+          "dateAdded": "2026-11-09T22:19:56.267577Z",
           "id": 1076,
           "languages": [
             {
@@ -282,7 +282,7 @@
             "thumbnail": {
               "url": "https://artworks.thetvdb.com/banners/v4/series/422712/posters/6978fefe94ea5.jpg"
             },
-            "timestamp": "2026-11-08T20:58:48.6281367Z",
+            "timestamp": "2026-11-09T22:19:56.3031718Z",
             "title": "Daredevil: Born Again - 1x01 - Heaven's Half Hour",
             "url": "http://thetvdb.com/?tab=series&id=422712"
           }
@@ -306,7 +306,7 @@
         "downloadId": "0FB2EF04FB342178115BA635EC7B5EC0067058BA",
         "episodeFiles": [
           {
-            "dateAdded": "2026-11-08T20:58:48.5893616Z",
+            "dateAdded": "2026-11-09T22:19:56.267577Z",
             "id": 1076,
             "languages": [
               {
@@ -449,7 +449,7 @@
       "service": "plex"
     }
   ],
-  "recordedAt": "2026-11-08T20:59:00Z",
+  "recordedAt": "2026-11-09T22:20:08Z",
   "request": {
     "method": "GET",
     "path": "/mock/notifications",

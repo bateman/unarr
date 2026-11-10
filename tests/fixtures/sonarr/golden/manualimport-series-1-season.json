@@ -18,7 +18,7 @@
           "episodeNumber": 1,
           "hasFile": true,
           "id": 1,
-          "lastSearchTime": "2026-11-08T20:56:40Z",
+          "lastSearchTime": "2026-11-09T22:17:48Z",
           "monitored": false,
           "overview": "While attempting to distract himself from the anniversary of his mentor’s death, Dr. Robby introduces a fresh batch of interns to life in the ER.",
           "runtime": 53,
@@ -145,7 +145,7 @@
           "episodeNumber": 2,
           "hasFile": true,
           "id": 2,
-          "lastSearchTime": "2026-11-08T20:56:40Z",
+          "lastSearchTime": "2026-11-09T22:17:48Z",
           "monitored": false,
           "overview": "Robby helps siblings navigate their elderly father’s end-of-life care. Later, Samira fends off cops targeting a woman with a misunderstood condition.",
           "runtime": 50,
@@ -264,7 +264,7 @@
       "size": 177860
     }
   ],
-  "recordedAt": "2026-11-08T20:58:48Z",
+  "recordedAt": "2026-11-09T22:19:56Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/manualimport?seriesId=1&seasonNumber=1"

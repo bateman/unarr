@@ -1,0 +1,23 @@
+{
+  "body": [
+    {
+      "attemptedValue": "",
+      "errorCode": "NotEmptyValidator",
+      "errorMessage": "'Path' must not be empty.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Path",
+        "propertyValue": ""
+      },
+      "propertyName": "Path",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-09T22:24:17Z",
+  "request": {
+    "body": "bodies/series-put-breaking-bad-nopath.json",
+    "method": "PUT",
+    "path": "/api/v3/series/50"
+  },
+  "status": 400
+}

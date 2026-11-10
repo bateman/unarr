@@ -1,0 +1,1648 @@
+{
+  "body": [
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "certification": "TV-G",
+      "cleanTitle": "sherlockhound",
+      "ended": true,
+      "firstAired": "1984-11-06T00:00:00Z",
+      "folder": "Sherlock Hound (1984)",
+      "genres": [
+        "Action",
+        "Anime",
+        "Comedy",
+        "Crime",
+        "Mystery"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/graphical/73082-g3.jpg",
+          "url": "/MediaCoverProxy/36870d8d224fac4564798b3767ea20bc44864f70dc153cb3eae501eb4bc19066/73082-g3.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/posters/73082-10.jpg",
+          "url": "/MediaCoverProxy/f5cbc92ed25e0b425bf52e579973cb67285f95bb61fe2ef79ba4f1c2b5577cfc/73082-10.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/fanart/original/73082-2.jpg",
+          "url": "/MediaCoverProxy/3f2693db5483acfdb61f4f8ed2e1505989eddd65cc75ff565ee07a3bd040543c/73082-2.jpg"
+        },
+        {
+          "coverType": "clearlogo",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/73082/clearlogo/611d0032bcd6a.png",
+          "url": "/MediaCoverProxy/cb14eac00e0a526d93f85a432fe7f90f97bc24d1f49dcda971adf54bd6447c42/611d0032bcd6a.png"
+        }
+      ],
+      "imdbId": "tt0088109",
+      "languageProfileId": 1,
+      "lastAired": "1985-05-21T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "TV Asahi",
+      "originalLanguage": {
+        "id": 8,
+        "name": "Japanese"
+      },
+      "overview": "Loosely based on the \"Sherlock Holmes\" series by Sir Arthur Conan Doyle, Sherlock Hound turns all the classic characters into dogs. The canine Sherlock Holmes, his assistant Watson, and housemaid Mrs. Hudson work together to solve mysteries. The culprit is usually Professor Moriarty and his gang, who use all kinds of wacky contraptions to steal what they want.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 7.5,
+        "votes": 1871
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/posters/73082-10.jpg",
+      "runtime": 25,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "sherlock hound",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 1,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Sherlock Hound",
+      "titleSlug": "sherlock-hound",
+      "tmdbId": 21296,
+      "tvMazeId": 22613,
+      "tvRageId": 12318,
+      "tvdbId": 73082,
+      "useSceneNumbering": false,
+      "year": 1984
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "12:00",
+      "cleanTitle": "thepeteholmesshow",
+      "ended": true,
+      "firstAired": "2013-10-28T00:00:00Z",
+      "folder": "The Pete Holmes Show (2013)",
+      "genres": [
+        "Comedy",
+        "Talk Show"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/graphical/271728-g.jpg",
+          "url": "/MediaCoverProxy/cd584b0c4fc8219de3de28aeee12c9f0d43da070e935f628389985da4ff49d7a/271728-g.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/posters/271728-1.jpg",
+          "url": "/MediaCoverProxy/4026f9aa7f8f008425c4f59a1bdf3bb2f9cfc42bbb66270bc3752d76c37c086d/271728-1.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/fanart/original/271728-1.jpg",
+          "url": "/MediaCoverProxy/7a7e24b67c6b4b93abfc9dbc814b5c0dfd45d4056071216ffbcb8f3c258f0594/271728-1.jpg"
+        }
+      ],
+      "imdbId": "tt3278316",
+      "languageProfileId": 1,
+      "lastAired": "2014-06-18T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "overview": "Comedian Pete Holmes hosts the late night talk show \"The Pete Holmes Show\" (formerly known as \"The Midnight Show with Pete Holmes\") which is produced by Conan O'Brien and airs right after CONAN on TBS.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 7.2,
+        "votes": 654
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/posters/271728-1.jpg",
+      "runtime": 25,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 2
+        }
+      ],
+      "seriesType": "daily",
+      "sortTitle": "pete holmes show",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 2,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "The Pete Holmes Show",
+      "titleSlug": "the-pete-holmes-show",
+      "tmdbId": 57506,
+      "tvMazeId": 6229,
+      "tvRageId": 36809,
+      "tvdbId": 271728,
+      "useSceneNumbering": false,
+      "year": 2013
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "cleanTitle": "sherlockholmes1954",
+      "ended": true,
+      "firstAired": "1954-10-18T00:00:00Z",
+      "folder": "Sherlock Holmes (1954)",
+      "genres": [
+        "Crime",
+        "Drama",
+        "Mystery",
+        "Suspense"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/graphical/73529-g2.jpg",
+          "url": "/MediaCoverProxy/9c6bb854e4a38b6fd140eaed24afb4a31d18aec5d5977c0bb972294523de8406/73529-g2.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/posters/73529-2.jpg",
+          "url": "/MediaCoverProxy/08f3dc0728c7a8c91f15122b5ed8f552da298363ea49e155229ec257b406ee51/73529-2.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/73529/backgrounds/6771179a77ac5.jpg",
+          "url": "/MediaCoverProxy/bec399ba0198c075781a25e1672e1e3bc1a60d9da36c347e49ddd97d54d50403/6771179a77ac5.jpg"
+        }
+      ],
+      "imdbId": "tt0046642",
+      "languageProfileId": 1,
+      "lastAired": "1955-10-17T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "overview": "Based on the characters created by Arthur Conan Doyle: Dr. John Watson returns from Afghanistan, and decides to share lodgings in Baker Street with Sherlock Holmes, an acquaintance of one of Watson's own friends. Not long afterward, Holmes brings Watson with him when he solves a murder case that has confused Inspector Lestrade. Watson soon becomes Holmes's friend, assistant, and chronicler, as the private detective takes on one baffling case after another.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 7.5,
+        "votes": 1307
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/posters/73529-2.jpg",
+      "runtime": 30,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "sherlock holmes 1954",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 1,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Sherlock Holmes (1954)",
+      "titleSlug": "sherlock-holmes-1954",
+      "tmdbId": 6560,
+      "tvMazeId": 22618,
+      "tvRageId": 12318,
+      "tvdbId": 73529,
+      "useSceneNumbering": false,
+      "year": 1954
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "cleanTitle": "sirarthurconandoyle",
+      "ended": true,
+      "firstAired": "1967-10-01T00:00:00Z",
+      "folder": "Sir Arthur Conan Doyle (1967)",
+      "genres": [
+        "Crime"
+      ],
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/266482/posters/61358c78486cc.jpg",
+          "url": "/MediaCoverProxy/2d276eb822ad811dddf05d72885b774c49386aae76127239a470ff20a2994a32/61358c78486cc.jpg"
+        }
+      ],
+      "imdbId": "tt0271927",
+      "languageProfileId": 1,
+      "lastAired": "1968-03-18T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "Westdeutscher Rundfunk (WDR)",
+      "originalLanguage": {
+        "id": 4,
+        "name": "German"
+      },
+      "overview": "Die Hauptrollen in dieser klassischen Krimiserie spielten Erich Schellow als Sherlock Holmes und Paul Edwin Roth als Dr. Watson. Regie bei allen sechs Episoden führte Paul May. Die Drehbücher stammen alle von englischen Autoren, die diese ursprünglich für eine gleichnamige britische BBC-Serie geschrieben hatten und die nach ihrer Verfilmung in Großbritannien auf Deutsch übersetzt wurden. Eine Synchronisation der BBC-Serie war rechtlich nicht möglich, weshalb es in der BRD, ähnlich wie bei den Mehrteilern von Francis Durbridge, zu einer selbständigen Verfilmung kommen musste. Alle sechs Episoden wurden ausschließlich im Studio gedreht, auch die im Freien spielenden Szenen. Ausgestrahlt wurden die Filme immer sonntags. Die einzelnen Folgen zeigen im Vorspann keinen Serienübertitel, sondern beginnen mit der Einblendung Sir Arthur Conan Doyle. Anschließend erscheint der Titel des Films.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 7.9,
+        "votes": 68
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/v4/series/266482/posters/61358c78486cc.jpg",
+      "runtime": 60,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "sir arthur conan doyle",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 1,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Sir Arthur Conan Doyle",
+      "titleSlug": "sir-arthur-conan-doyle",
+      "tmdbId": 63139,
+      "tvMazeId": 0,
+      "tvRageId": 0,
+      "tvdbId": 266482,
+      "useSceneNumbering": false,
+      "year": 1967
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "cleanTitle": "sirarthurconandoylessherlockholmes",
+      "ended": true,
+      "firstAired": "1965-02-20T00:00:00Z",
+      "folder": "Sir Arthur Conan Doyles Sherlock Holmes (1965)",
+      "genres": [
+        "Crime",
+        "Drama",
+        "Horror",
+        "Mystery",
+        "Suspense"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/graphical/71976-g2.jpg",
+          "url": "/MediaCoverProxy/a9e397aff8471f1bdfd487818360523ebc00172221d935b75838fcb7db1cd7c7/71976-g2.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/posters/71976-1.jpg",
+          "url": "/MediaCoverProxy/ef08f8176b4452e5c5340b8017e879933031ae2844d3023883a11695b28479e7/71976-1.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/fanart/original/71976-3.jpg",
+          "url": "/MediaCoverProxy/85d753b4c8ccfc0a913e2911b2ffcd8cffd58c1b77670ded560e1e1ef68fa2d1/71976-3.jpg"
+        }
+      ],
+      "imdbId": "tt0163492",
+      "languageProfileId": 1,
+      "lastAired": "1968-12-23T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "BBC One",
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "overview": "Sherlock Holmes (alternately Sir Arthur Conan Doyle's Sherlock Holmes) was a series of Sherlock Holmes adaptations produced by British television company BBC between 1965 and 1968. In 1964, an adaptation of \"The Adventure of the Speckled Band\" was commissioned as a pilot for a twelve part series of Sherlock Holmes stories. Douglas Wilmer was cast as Holmes and Nigel Stock as Watson. Peter Cushing was approached to take over the role of Sherlock Holmes for the 1968 series. Only 6 Episodes survived.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 7.5,
+        "votes": 715
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/posters/71976-1.jpg",
+      "runtime": 50,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 2
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "sir arthur conan doyles sherlock holmes",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 2,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Sir Arthur Conan Doyle's Sherlock Holmes",
+      "titleSlug": "sir-arthur-conan-doyles-sherlock-holmes",
+      "tmdbId": 23027,
+      "tvMazeId": 15057,
+      "tvRageId": 13197,
+      "tvdbId": 71976,
+      "useSceneNumbering": false,
+      "year": 1965
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "20:00",
+      "certification": "TV-G",
+      "cleanTitle": "sherlockholmes1984",
+      "ended": true,
+      "firstAired": "1984-04-24T00:00:00Z",
+      "folder": "Sherlock Holmes (1984)",
+      "genres": [
+        "Crime",
+        "Drama",
+        "Mystery",
+        "Suspense"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/graphical/6802-g.jpg",
+          "url": "/MediaCoverProxy/5f5cb7630775631d36fd23a89fdda8bbfe45dc142f0c9d0ef18505e5444b43f5/6802-g.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/posters/77728-3.jpg",
+          "url": "/MediaCoverProxy/e1707f6d9283fd0f905b298111516ae1bac4201b7e8cdf04c999f9c21625317c/77728-3.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/fanart/original/77728-3.jpg",
+          "url": "/MediaCoverProxy/00442b1f9c5d3140c9400c943ad382483d8de4e8cab05f4ecf4c8493af9e74f2/77728-3.jpg"
+        },
+        {
+          "coverType": "clearlogo",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/77728/clearlogo/611bc14955b15.png",
+          "url": "/MediaCoverProxy/9abf1028ddfd5229c1d2cd38eb401cd2f18dd99979a8f7e93bed1ccae27c22b1/611bc14955b15.png"
+        }
+      ],
+      "imdbId": "tt0086661",
+      "languageProfileId": 1,
+      "lastAired": "1994-04-11T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "ITV1",
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "overview": "Sherlock Holmes is one of the world’s most popular fictional detectives, famed for his legendary powers of observation and deduction. Adapted from Sir Arthur Conan Doyle’s original novels, this classic series by Granada Television starred Jeremy Brett as the definitive Holmes, with David Burke and later Edward Hardwicke as his able assistant Dr. Watson.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 8.7,
+        "votes": 27895
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/posters/77728-3.jpg",
+      "runtime": 64,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 2
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 3
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 4
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 5
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 6
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 7
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "sherlock holmes 1984",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 7,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Sherlock Holmes (1984)",
+      "titleSlug": "sherlock-holmes-1984",
+      "tmdbId": 799,
+      "tvMazeId": 3255,
+      "tvRageId": 5175,
+      "tvdbId": 77728,
+      "useSceneNumbering": false,
+      "year": 1984
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "21:00",
+      "cleanTitle": "holmesholmes",
+      "ended": true,
+      "firstAired": "2016-11-10T00:00:00Z",
+      "folder": "Holmes and Holmes (2016)",
+      "genres": [
+        "Documentary",
+        "Home and Garden",
+        "Reality"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/graphical/319596-g.jpg",
+          "url": "/MediaCoverProxy/cf3bb017775848c40f6751b07c6c5865a26b998faf14f469a39574914c3e5b59/319596-g.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/posters/319596-1.jpg",
+          "url": "/MediaCoverProxy/b2c60473aa5139f148acc1f6d0abe06724ef7b00f4437d959287b8ed9d9a9b75/319596-1.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/fanart/original/319596-1.jpg",
+          "url": "/MediaCoverProxy/39b1fa24d541c7ca1147d01beccd1827472eb302e8c1db95b4bdc953b39490ed/319596-1.jpg"
+        }
+      ],
+      "imdbId": "tt8001366",
+      "languageProfileId": 1,
+      "lastAired": "2020-02-26T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "DIY Network",
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "overview": "Holmes & Holmes is a brand new series that follows Mike Holmes and his son Mike Jr. (MJ) as they transform MJ’s modest bachelor bungalow into the perfect, two-storey home for MJ and his girlfriend Lisa. While Mike and MJ share a last name, a strong work ethic, and a desire to help others, they don’t always see eye to eye. Their different approaches provide the foundation for unexpected moments of humour and drama- though they always vow to build it right. In addition to seeing the newest materials and build techniques, viewers will get a glimpse into the personal lives of the Holmes men. Holmes + Holmes is a memorable Father/Son journey with a hammer…and a dream!",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 7.8,
+        "votes": 113
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/posters/319596-1.jpg",
+      "runtime": 57,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 2
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 3
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 4
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "holmes and holmes",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 4,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Holmes and Holmes",
+      "titleSlug": "holmes-and-holmes",
+      "tmdbId": 80977,
+      "tvMazeId": 22777,
+      "tvRageId": 0,
+      "tvdbId": 319596,
+      "useSceneNumbering": false,
+      "year": 2016
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "21:00",
+      "certification": "TP",
+      "cleanTitle": "mademoiselleholmes",
+      "ended": false,
+      "firstAired": "2024-04-11T00:00:00Z",
+      "folder": "Mademoiselle Holmes (2024)",
+      "genres": [
+        "Comedy",
+        "Crime",
+        "Drama"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433264/banners/661462545353e.jpg",
+          "url": "/MediaCoverProxy/27a14b89f26f53cf60c972581187868b25194214bc54fbd3a4afe9977f2e7c82/661462545353e.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433264/posters/661469836dad4.jpg",
+          "url": "/MediaCoverProxy/d59d91f7c054461ce2fc331db11d710172816f91d42376d956ced556740c00c2/661469836dad4.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433264/backgrounds/679dd21660aed.jpg",
+          "url": "/MediaCoverProxy/fdabb0c81873d82825b9ddd93a6d187cbc85e2b0d5f38e4c25f32547d899ffbf/679dd21660aed.jpg"
+        }
+      ],
+      "imdbId": "tt26813534",
+      "languageProfileId": 1,
+      "lastAired": "2025-02-27T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "TF1",
+      "originalLanguage": {
+        "id": 2,
+        "name": "French"
+      },
+      "overview": "Shy French cop Charlie Holmes is the great-granddaughter of the great English detective Sherlock Holmes. She uses her hereditary deductive brilliance to solve crimes with the aid of Samy Vatel, her Dr. Watson substitute.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 6.5,
+        "votes": 601
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/v4/series/433264/posters/661469836dad4.jpg",
+      "runtime": 50,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 2
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 3
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "mademoiselle holmes",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 3,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "continuing",
+      "tags": [],
+      "title": "Mademoiselle Holmes",
+      "titleSlug": "mademoiselle-holmes",
+      "tmdbId": 222076,
+      "tvMazeId": 72994,
+      "tvRageId": 0,
+      "tvdbId": 433264,
+      "useSceneNumbering": false,
+      "year": 2024
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "22:00",
+      "cleanTitle": "peteversuslife",
+      "ended": true,
+      "firstAired": "2010-08-06T00:00:00Z",
+      "folder": "Pete Versus Life (2010)",
+      "genres": [
+        "Comedy",
+        "Drama"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/graphical/180871-g.jpg",
+          "url": "/MediaCoverProxy/90543f431faa828167a0af63d43a862d8e0730c446f4328282405c6507ba252c/180871-g.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/posters/180871-2.jpg",
+          "url": "/MediaCoverProxy/76e63518452bf1839b9194eecfdd4350553eb0f782df1bd7e3fe4001cd4dcfad/180871-2.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/fanart/original/180871-1.jpg",
+          "url": "/MediaCoverProxy/6187f3c99636cebef470b72a8b86889e94c0128ae03f5776a23af24c56b5ddda/180871-1.jpg"
+        }
+      ],
+      "imdbId": "tt1690364",
+      "languageProfileId": 1,
+      "lastAired": "2011-12-09T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "Channel 4",
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "overview": "Pete Griffith is basically an average guy. Apart from the lying, selfishness and being a bit of an arse. He's slightly more than average in these departments... But what sets Pete apart is that every move he makes is subject to constant observation, analysis and comment by two TV sport pundits. And they aren't slow to point out the errors of his ways...",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 7.7,
+        "votes": 980
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/posters/180871-2.jpg",
+      "runtime": 30,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 2
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "pete versus life",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 2,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Pete Versus Life",
+      "titleSlug": "pete-versus-life",
+      "tmdbId": 33405,
+      "tvMazeId": 4539,
+      "tvRageId": 26234,
+      "tvdbId": 180871,
+      "useSceneNumbering": false,
+      "year": 2010
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "certification": "TV-Y7",
+      "cleanTitle": "theadventurespetepete",
+      "ended": true,
+      "firstAired": "1993-11-28T00:00:00Z",
+      "folder": "The Adventures of Pete and Pete (1993)",
+      "genres": [
+        "Children",
+        "Comedy",
+        "Drama",
+        "Family"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/graphical/74670-g2.jpg",
+          "url": "/MediaCoverProxy/9f27182a08a96e5d8a64b258e7fd0fafd8532f79fb6e6b5aee35786ed95f2326/74670-g2.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/posters/74670-2.jpg",
+          "url": "/MediaCoverProxy/e1cf9afbc2ed1e8a1457bd447f0ede1711526f35d6e99237dfb4c225f473c0b9/74670-2.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/fanart/original/74670-2.jpg",
+          "url": "/MediaCoverProxy/6b7998ca87ae9d4fc6ccce34eb2e363d70669f1bcccc2ddc48da331b1f34b27e/74670-2.jpg"
+        }
+      ],
+      "imdbId": "tt0105933",
+      "languageProfileId": 1,
+      "lastAired": "1996-12-28T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "Nickelodeon",
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "overview": "The Adventures of Pete and Pete was a surreal comedy in which a peaceful suburban neighborhood was a strange and skewed world as seen through the eyes of pre-teens.  Wellsville, USA contained many different unique characters, such as: two brothers that were both named Pete, the metal plate in their mom's head, Artie the spandex-wearing super-hero, and Petunia, little Pete's tatoo. The Adventures of Pete and Pete originated as a series of one-minute vignettes in 1990, then was expanded into a series of five specials, and then became a regular series in late 1993. The show was filmed in Leonia, New Jersey.  Episodes (or portions of episodes) were also filmed in the New Jersey towns of South Orange and Cranford.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 8.4,
+        "votes": 10684
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/posters/74670-2.jpg",
+      "runtime": 25,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 2
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 3
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "adventures of pete pete",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 3,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "The Adventures of Pete & Pete",
+      "titleSlug": "the-adventures-of-pete-and-pete",
+      "tmdbId": 2824,
+      "tvMazeId": 5940,
+      "tvRageId": 5537,
+      "tvdbId": 74670,
+      "useSceneNumbering": false,
+      "year": 1993
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "cleanTitle": "petegladys",
+      "ended": true,
+      "firstAired": "1960-09-19T00:00:00Z",
+      "folder": "Pete and Gladys (1960)",
+      "genres": [],
+      "images": [],
+      "languageProfileId": 1,
+      "lastAired": "1962-09-10T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "CBS",
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 0,
+        "votes": 0
+      },
+      "runtime": 25,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 2
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "pete and gladys",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 2,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Pete and Gladys",
+      "titleSlug": "pete-and-gladys",
+      "tmdbId": 10594,
+      "tvMazeId": 42874,
+      "tvRageId": 44,
+      "tvdbId": 77567,
+      "useSceneNumbering": false,
+      "year": 1960
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "12:00",
+      "certification": "TV-Y",
+      "cleanTitle": "petecat",
+      "ended": true,
+      "firstAired": "2018-09-21T00:00:00Z",
+      "folder": "Pete the Cat (2018)",
+      "genres": [
+        "Animation",
+        "Children",
+        "Comedy",
+        "Family"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/graphical/5bac545b442fa.jpg",
+          "url": "/MediaCoverProxy/e8528b3c049530204043ed61212a2bdf53bd25adae3009aeaccf071c991313fa/5bac545b442fa.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/posters/5ba9f164854ff.jpg",
+          "url": "/MediaCoverProxy/6587292d9c53e452d14a069943fd744f41728f47ba440afd8c83efe20a3306b8/5ba9f164854ff.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/fanart/original/5b77464bd4b45.jpg",
+          "url": "/MediaCoverProxy/9280bd0dec5cf188ab2144070c04f5b2612543ef6641696299aa3687ae85b4bf/5b77464bd4b45.jpg"
+        }
+      ],
+      "imdbId": "tt6148744",
+      "languageProfileId": 1,
+      "lastAired": "2022-03-10T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "Prime Video",
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "overview": "Based on the New York Times #1 best-selling children's books by author James Dean, \"Pete the Cat\" is a fun, musically driven series about exploring your world and trying new things; pushing the boundaries while being smart, accepting, and optimistic. Pete is a very cool and loveable cat who, along with his friends, experiences the day-to-day challenges and changes that children can relate to on a personal level. Whether you're making new friends, or facing all of life's ups and downs, Pete highlights the lessons life can teach you.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 7.8,
+        "votes": 561
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/posters/5ba9f164854ff.jpg",
+      "runtime": 22,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 2
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "pete the cat",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 2,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Pete the Cat",
+      "titleSlug": "pete-the-cat",
+      "tmdbId": 82235,
+      "tvMazeId": 25289,
+      "tvRageId": 0,
+      "tvdbId": 340595,
+      "useSceneNumbering": false,
+      "year": 2018
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "00:00",
+      "certification": "TV-MA",
+      "cleanTitle": "sneakypete",
+      "ended": true,
+      "firstAired": "2015-08-07T00:00:00Z",
+      "folder": "Sneaky Pete (2015)",
+      "genres": [
+        "Crime",
+        "Drama"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/graphical/300166-g2.jpg",
+          "url": "/MediaCoverProxy/0f22e2da2df69a812818a6b037c503624f603400d846f2d7c5b4da1a58ef4c1e/300166-g2.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/posters/300166-2.jpg",
+          "url": "/MediaCoverProxy/f6a24c201f82cb581d6040053e8019ccce5307e0beb056a0fc79f87a49dcec3e/300166-2.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/fanart/original/300166-3.jpg",
+          "url": "/MediaCoverProxy/6585a0ac1dbfc9d1118ab5a85b7685dd00beee2f555a03f77adb5585a8f9496c/300166-3.jpg"
+        },
+        {
+          "coverType": "clearlogo",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/300166/clearlogo/611bf1970d5c0.png",
+          "url": "/MediaCoverProxy/8ea5e0b1516cd78bfaa281d5e724bd7d5019b974593ed09ffb71bb55a06a7c56/611bf1970d5c0.png"
+        }
+      ],
+      "imdbId": "tt5011816",
+      "languageProfileId": 1,
+      "lastAired": "2019-05-10T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "Prime Video",
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "overview": "After leaving prison, Marius takes cover from his past by assuming the identity of his cellmate Pete. He moves in with Pete's long-estranged unsuspecting family and is roped into the family's bail bond business. He's a criminal taking down other criminals and, in the process, discovers the family life he never had.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 8.0,
+        "votes": 49809
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/posters/300166-2.jpg",
+      "runtime": 49,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 2
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 3
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "sneaky pete",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 3,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Sneaky Pete",
+      "titleSlug": "sneaky-pete",
+      "tmdbId": 64199,
+      "tvMazeId": 2686,
+      "tvRageId": 47587,
+      "tvdbId": 300166,
+      "useSceneNumbering": false,
+      "year": 2015
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "18:00",
+      "cleanTitle": "holmesonhomes",
+      "ended": true,
+      "firstAired": "2003-03-24T00:00:00Z",
+      "folder": "Holmes on Homes (2003)",
+      "genres": [
+        "Home and Garden",
+        "News",
+        "Reality"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/80258/banners/664538c2e4c14.jpg",
+          "url": "/MediaCoverProxy/877d55f1ec221dcd4ce1d4ca5b48083eab53d4c2b65bbd082931bf18a55161a8/664538c2e4c14.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/posters/80258-2.jpg",
+          "url": "/MediaCoverProxy/9dd672bf0fbd647100d1838a257291827418a2dc45e774fc6393dd58b9646709/80258-2.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/fanart/original/80258-2.jpg",
+          "url": "/MediaCoverProxy/7c88d2c6a5afd1f2591ea93bce86543f59c4cbcff0b83e67f2e9128ebd1602ec/80258-2.jpg"
+        }
+      ],
+      "imdbId": "tt0765621",
+      "languageProfileId": 1,
+      "lastAired": "2008-07-24T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "Home Network",
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "overview": "Construction and renovation expert Mike Holmes visits unlucky families who have been swindled or abandoned during their home improvement projects. Mike uncovers shoddy construction methods, improper techniques and down right rip-offs. You'll see Mike correct the problems, as well as explain how the homeowners could have safeguarded themselves from unscrupulous builders and dishonest contractors.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 8.6,
+        "votes": 731
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/posters/80258-2.jpg",
+      "runtime": 54,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 2
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 3
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 4
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 5
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 6
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 7
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "holmes on homes",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 7,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Holmes on Homes",
+      "titleSlug": "holmes-on-homes",
+      "tmdbId": 12261,
+      "tvMazeId": 23615,
+      "tvRageId": 14611,
+      "tvdbId": 80258,
+      "useSceneNumbering": false,
+      "year": 2003
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "cleanTitle": "bestholmesonhomes",
+      "ended": true,
+      "firstAired": "2012-04-22T00:00:00Z",
+      "folder": "Best of Holmes on Homes (2012)",
+      "genres": [
+        "Documentary",
+        "Home and Garden"
+      ],
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/posters/267225-1.jpg",
+          "url": "/MediaCoverProxy/c4130936e904eaa9dce492c9985163b28beebaf10a6c823eabcfc5820d29fc99/267225-1.jpg"
+        }
+      ],
+      "languageProfileId": 1,
+      "lastAired": "2012-08-21T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "HGTV",
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "overview": "After seven seasons and more than 100 episodes of Holmes On Homes, Mike Holmes has seen - and fixed - almost everything a house can throw at a family. In this 13 part collection, Best of Holmes On Homes highlights some of the most challenging, head-scratching, heart-wrenching jobs Mike and his crew took on. Whether it's a collection of the scariest basement stories or horror stories from the kitchen, Best of Holmes On Homes offers the best of the worst in home renovations and what Mike had to do to fix them.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 0,
+        "votes": 0
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/posters/267225-1.jpg",
+      "runtime": 45,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "best of holmes on homes",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 1,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Best of Holmes on Homes",
+      "titleSlug": "best-of-holmes-on-homes",
+      "tmdbId": 55760,
+      "tvMazeId": 0,
+      "tvRageId": 25765,
+      "tvdbId": 267225,
+      "useSceneNumbering": false,
+      "year": 2012
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "19:00",
+      "cleanTitle": "holms",
+      "ended": true,
+      "firstAired": "2002-02-25T00:00:00Z",
+      "folder": "Holms (2002)",
+      "genres": [
+        "Comedy",
+        "Family"
+      ],
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/283251/posters/6837969a45bd5.jpg",
+          "url": "/MediaCoverProxy/10265bddd8953467375a12f2bbd23347c312e2f05dafc7a081728869a083253d/6837969a45bd5.jpg"
+        }
+      ],
+      "imdbId": "tt0310466",
+      "languageProfileId": 1,
+      "lastAired": "2003-11-25T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "TV 2 (NO)",
+      "originalLanguage": {
+        "id": 15,
+        "name": "Norwegian"
+      },
+      "overview": "About the everyday life of doctor Jørgen Holm, his artist/painter-wife Eva, and their teenage daughter Victoria.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 2.5,
+        "votes": 221
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/v4/series/283251/posters/6837969a45bd5.jpg",
+      "runtime": 25,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 2
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 3
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "holms",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 3,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Holms",
+      "titleSlug": "holms",
+      "tmdbId": 98719,
+      "tvMazeId": 0,
+      "tvRageId": 0,
+      "tvdbId": 283251,
+      "useSceneNumbering": false,
+      "year": 2002
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "00:00",
+      "cleanTitle": "holmes911",
+      "ended": true,
+      "firstAired": "2019-09-17T00:00:00Z",
+      "folder": "Holmes 911 (2019)",
+      "genres": [
+        "Home and Garden",
+        "Reality"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/473811/banners/698a49297b903.jpg",
+          "url": "/MediaCoverProxy/9fa53e1d9e491fa4b46a74c9cff67a21b53052dfc074116da011700bae721df6/698a49297b903.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/473811/posters/698a4940ec1e4.jpg",
+          "url": "/MediaCoverProxy/a51d0cdf30dbd78ec28339766b36af7a311cadd2a279b6b23d11e8f920a1efb3/698a4940ec1e4.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/473811/backgrounds/698a491b6a47c.jpg",
+          "url": "/MediaCoverProxy/27368f54ab47a0fb79b859fa2a3e4e072476364c0b90db4a7f5d54e0e8bcbd06/698a491b6a47c.jpg"
+        }
+      ],
+      "imdbId": "tt37897214",
+      "languageProfileId": 1,
+      "lastAired": "2019-12-19T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "CTV",
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "overview": "Mike Holmes is going back to his roots rescuing homeowners from unscrupulous contractors, unhealthy homes and D.I.Y. projects gone wrong. It’s a family affair as his daughter Sherry and son Michael, who share his passion for making it right for deserving families, are right by his side. Over 12 episodes, the Holmes’ will take on five houses, and turn them into homes again.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 0,
+        "votes": 0
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/v4/series/473811/posters/698a4940ec1e4.jpg",
+      "runtime": 0,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "holmes 911",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 1,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Holmes 911",
+      "titleSlug": "holmes-911",
+      "tmdbId": 101904,
+      "tvMazeId": 43938,
+      "tvRageId": 0,
+      "tvdbId": 473811,
+      "useSceneNumbering": false,
+      "year": 2019
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "cleanTitle": "petespa",
+      "ended": true,
+      "firstAired": "2007-10-08T00:00:00Z",
+      "folder": "Petes PA (2007)",
+      "genres": [
+        "Game Show",
+        "Reality"
+      ],
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/334271/posters/68371fc4acd36.jpg",
+          "url": "/MediaCoverProxy/0b42f8db0ac61b92c9703083f65dc45e70faf6bcb5b9f0630ae60bef5f7d7f02/68371fc4acd36.jpg"
+        }
+      ],
+      "imdbId": "tt1202120",
+      "languageProfileId": 1,
+      "lastAired": "2007-12-10T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "Living",
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "overview": "Pete Burns is on the hunt for a Celebrity PA to help organize his life and his wedding to long-term partner Michael Simpson. 100's of people applied but will anyone have what it takes to tackle Pete's diva demands and caustic put-downs? Over ten weeks the wannabe PAs are put through their paces by a series of challenges that pit each against the other, all scrambling to survive the weekly elimination. Expect, bitching, backstabbing, blood, sweat and tears.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 7.2,
+        "votes": 10
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/v4/series/334271/posters/68371fc4acd36.jpg",
+      "runtime": 45,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "petes pa",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 1,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Petes PA",
+      "titleSlug": "petes-pa",
+      "tmdbId": 0,
+      "tvMazeId": 0,
+      "tvRageId": 0,
+      "tvdbId": 334271,
+      "useSceneNumbering": false,
+      "year": 2007
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "20:00",
+      "cleanTitle": "holmesfamilyeffect",
+      "ended": true,
+      "firstAired": "2021-02-07T00:00:00Z",
+      "folder": "Holmes Family Effect (2021)",
+      "genres": [
+        "Family",
+        "Home and Garden",
+        "Reality"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/series/395065/banners/602257c495ef7.jpg",
+          "url": "/MediaCoverProxy/617ec8839ffd7d936e6952fe181aa563694b6c289123782ae2018093bdafe5ef/602257c495ef7.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/series/395065/posters/600b3d82a1240.jpg",
+          "url": "/MediaCoverProxy/3b2ccb03cd2d61c0a5b593dc6fee2d188ea8a5bd01bf5d04a500fd336b8d2e60/600b3d82a1240.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/395065/backgrounds/6066b5d063b41.jpg",
+          "url": "/MediaCoverProxy/c0b399725700910dbaa9a9b0fc5aac717576869e14d896fba2d819c08f535895/6066b5d063b41.jpg"
+        }
+      ],
+      "imdbId": "tt13836352",
+      "languageProfileId": 1,
+      "lastAired": "2021-03-07T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "CTV",
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "overview": "Inspired by people who are making a difference in their communities, each episode follows the Holmes family as they surprise these deserving people by transforming their spaces.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 7.6,
+        "votes": 73
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/series/395065/posters/600b3d82a1240.jpg",
+      "runtime": 44,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "holmes family effect",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 1,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Holmes Family Effect",
+      "titleSlug": "holmes-family-effect",
+      "tmdbId": 118394,
+      "tvMazeId": 54159,
+      "tvRageId": 0,
+      "tvdbId": 395065,
+      "useSceneNumbering": false,
+      "year": 2021
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "cleanTitle": "sherlockholmes1939",
+      "ended": true,
+      "firstAired": "1939-03-31T00:00:00Z",
+      "folder": "Sherlock Holmes (1939)",
+      "genres": [
+        "Adventure",
+        "Crime",
+        "Drama",
+        "Family",
+        "Mini-Series",
+        "Thriller"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/graphical/320734-g.jpg",
+          "url": "/MediaCoverProxy/abcbb98cc14e0b5cfb756ec3177452bb71e88a8280ea4bb8d56ddbca88355643/320734-g.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/posters/5d1b92157b37c.jpg",
+          "url": "/MediaCoverProxy/ea67f251e3c9c8ddecf051ea907aff6967ef02c9aac37a4de368ae4e40ef4b5a/5d1b92157b37c.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/fanart/original/320734-1.jpg",
+          "url": "/MediaCoverProxy/5cd4631a3067c1c089337437974fae63886908c21903d731e279f6ffb0a594a1/320734-1.jpg"
+        }
+      ],
+      "languageProfileId": 1,
+      "lastAired": "1946-06-07T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "overview": "A series of fourteen films based on Sir Arthur Conan Doyle's Sherlock Holmes stories were released between 1939 and 1946; the British actors Basil Rathbone and Nigel Bruce played Holmes and Dr. John Watson, respectively.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 0,
+        "votes": 0
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/posters/5d1b92157b37c.jpg",
+      "runtime": 70,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "sherlock holmes 1939",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 1,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Sherlock Holmes (1939)",
+      "titleSlug": "sherlock-holmes-1939",
+      "tmdbId": 0,
+      "tvMazeId": 0,
+      "tvRageId": 0,
+      "tvdbId": 320734,
+      "useSceneNumbering": false,
+      "year": 1939
+    }
+  ],
+  "recordedAt": "2026-11-09T22:23:22Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/series/lookup?term=pete%20holmes"
+  },
+  "status": 200
+}

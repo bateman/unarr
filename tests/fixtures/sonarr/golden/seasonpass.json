@@ -1,0 +1,10 @@
+{
+  "body": {},
+  "recordedAt": "2026-11-09T22:24:27Z",
+  "request": {
+    "body": "bodies/seasonpass.json",
+    "method": "POST",
+    "path": "/api/v3/seasonpass"
+  },
+  "status": 202
+}

@@ -1,0 +1,23 @@
+{
+  "body": [
+    {
+      "attemptedValue": "{Series Title}",
+      "errorCode": "ValidStandardEpisodeFormatValidator",
+      "errorMessage": "Must contain season and episode numbers OR Original Title",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Standard Episode Format",
+        "propertyValue": "{Series Title}"
+      },
+      "propertyName": "StandardEpisodeFormat",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-09T22:24:42Z",
+  "request": {
+    "body": "bodies/config-naming-put-invalid.json",
+    "method": "PUT",
+    "path": "/api/v3/config/naming/1"
+  },
+  "status": 400
+}

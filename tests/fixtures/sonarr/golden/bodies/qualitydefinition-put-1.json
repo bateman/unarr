@@ -1,0 +1,8 @@
+{
+ "$from": "qualitydefinition-1-before",
+ "$set": {
+  "minSize": 2,
+  "preferredSize": 50,
+  "maxSize": 100
+ }
+}

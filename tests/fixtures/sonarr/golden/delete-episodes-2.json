@@ -7,7 +7,7 @@
       "episodeNumber": 1,
       "hasFile": false,
       "id": 46,
-      "lastSearchTime": "2026-11-08T20:56:27Z",
+      "lastSearchTime": "2026-11-09T22:17:35Z",
       "monitored": false,
       "overview": "Longtime rivals Matt Murdock and Wilson Fisk attempt to move past their darker personas to serve New York, but their pasts resurface, reintroducing the world of Daredevil.",
       "runtime": 59,
@@ -24,7 +24,7 @@
       "episodeNumber": 2,
       "hasFile": false,
       "id": 47,
-      "lastSearchTime": "2026-11-08T20:57:09Z",
+      "lastSearchTime": "2026-11-09T22:18:17Z",
       "monitored": false,
       "overview": "Matt Murdock takes on a new client, Hector Ayala. But this local hero from the Heights is more than he claims to be. Fisk learns the power of optics in his new and very public role.",
       "runtime": 47,
@@ -148,7 +148,7 @@
       "unverifiedSceneNumbering": false
     }
   ],
-  "recordedAt": "2026-11-08T21:00:29Z",
+  "recordedAt": "2026-11-09T22:21:36Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/episode?seriesId=2&seasonNumber=1"

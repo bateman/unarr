@@ -1,0 +1,100 @@
+{
+ "title": "Breaking Bad",
+ "sortTitle": "breaking bad",
+ "status": "ended",
+ "ended": true,
+ "overview": "When Walter White, a chemistry teacher, is diagnosed with Stage III cancer and given a prognosis of two years left to live, he chooses to enter a dangerous world of drugs and crime with the intent to secure his family's financial security.",
+ "network": "AMC",
+ "airTime": "21:00",
+ "images": [
+  {
+   "coverType": "banner",
+   "url": "/MediaCoverProxy/11d8491574928723a7cb4ad413a946048a3b5fa113294a9ad48bb9888919ad4d/81189-g21.jpg",
+   "remoteUrl": "https://artworks.thetvdb.com/banners/graphical/81189-g21.jpg"
+  },
+  {
+   "coverType": "poster",
+   "url": "/MediaCoverProxy/654177c109680f7222c3b91329075525bd3d06ea3aef40b45116019d8d7c1b72/81189-10.jpg",
+   "remoteUrl": "https://artworks.thetvdb.com/banners/posters/81189-10.jpg"
+  },
+  {
+   "coverType": "fanart",
+   "url": "/MediaCoverProxy/fedaca230f901f9e74724eba0d61d9e33703c1bfd3ef8f5685412cd2e699909e/81189-21.jpg",
+   "remoteUrl": "https://artworks.thetvdb.com/banners/fanart/original/81189-21.jpg"
+  },
+  {
+   "coverType": "clearlogo",
+   "url": "/MediaCoverProxy/3887baaeb0c812aec8abd1d0a92fd2225df24bde484b341750b4ebfd8e59b348/611b4df33bac5.png",
+   "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/81189/clearlogo/611b4df33bac5.png"
+  }
+ ],
+ "originalLanguage": {
+  "id": 1,
+  "name": "English"
+ },
+ "remotePoster": "https://artworks.thetvdb.com/banners/posters/81189-10.jpg",
+ "seasons": [
+  {
+   "seasonNumber": 0,
+   "monitored": false
+  },
+  {
+   "seasonNumber": 1,
+   "monitored": true
+  },
+  {
+   "seasonNumber": 2,
+   "monitored": true
+  },
+  {
+   "seasonNumber": 3,
+   "monitored": true
+  },
+  {
+   "seasonNumber": 4,
+   "monitored": true
+  },
+  {
+   "seasonNumber": 5,
+   "monitored": true
+  }
+ ],
+ "year": 2008,
+ "qualityProfileId": 7,
+ "seasonFolder": true,
+ "monitored": true,
+ "monitorNewItems": "all",
+ "useSceneNumbering": false,
+ "runtime": 48,
+ "tvdbId": 81189,
+ "tvRageId": 18164,
+ "tvMazeId": 169,
+ "tmdbId": 1396,
+ "firstAired": "2008-01-20T00:00:00Z",
+ "lastAired": "2013-09-29T00:00:00Z",
+ "seriesType": "standard",
+ "cleanTitle": "breakingbad",
+ "imdbId": "tt0903747",
+ "titleSlug": "breaking-bad",
+ "folder": "Breaking Bad (2008)",
+ "certification": "TV-MA",
+ "genres": [
+  "Crime",
+  "Drama",
+  "Thriller",
+  "Western"
+ ],
+ "tags": [],
+ "added": "0001-01-01T00:00:00Z",
+ "ratings": {
+  "votes": 2703038,
+  "value": 9.5
+ },
+ "languageProfileId": 1,
+ "rootFolderPath": "/tv",
+ "addOptions": {
+  "monitor": "all",
+  "searchForMissingEpisodes": false,
+  "searchForCutoffUnmetEpisodes": false
+ }
+}

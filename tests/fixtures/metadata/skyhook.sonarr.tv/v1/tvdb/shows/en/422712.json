@@ -1,0 +1,380 @@
+{
+ "tvdbId": 422712,
+ "title": "Daredevil: Born Again",
+ "overview": "Matt Murdock finds himself on a collision course with Wilson Fisk when their past identities begin to emerge.",
+ "slug": "daredevil-born-again",
+ "originalCountry": "usa",
+ "originalLanguage": "eng",
+ "language": "eng",
+ "firstAired": "2025-03-04",
+ "lastAired": "2026-05-05",
+ "tvMazeId": 63234,
+ "tmdbId": 202555,
+ "imdbId": "tt18923754",
+ "malIds": [],
+ "anidbIds": [],
+ "aniListIds": [],
+ "lastUpdated": "2026-11-02T04:13:02Z",
+ "status": "Continuing",
+ "runtime": 48,
+ "timeOfDay": {
+  "hours": 21,
+  "minutes": 0
+ },
+ "originalNetwork": "Disney+",
+ "network": "Disney+",
+ "genres": [
+  "Action",
+  "Drama"
+ ],
+ "contentRating": "TV-MA",
+ "rating": {
+  "count": 119270,
+  "value": "8.1"
+ },
+ "alternativeTitles": [
+  {
+   "title": "Marvel Studios' Daredevil: Born Again"
+  },
+  {
+   "title": "Marvel Television's Daredevil: Born Again"
+  },
+  {
+   "title": "Marvel's Daredevil: Born Again"
+  }
+ ],
+ "actors": [
+  {
+   "name": "Charlie Cox",
+   "character": "Matt Murdock",
+   "image": "https://artworks.thetvdb.com/banners/person/475230/69c438ed90924.jpg"
+  },
+  {
+   "name": "Vincent D'Onofrio",
+   "character": "Wilson Fisk",
+   "image": "https://artworks.thetvdb.com/banners/person/273492/69c438c2ae12f.jpg"
+  },
+  {
+   "name": "Margarita Levieva",
+   "character": "Heather Glenn",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/373606/photo/6589397bea56e.jpg"
+  },
+  {
+   "name": "Deborah Ann Woll",
+   "character": "Karen Page",
+   "image": "https://artworks.thetvdb.com/banners/person/346701/69c438384a1dd.jpg"
+  },
+  {
+   "name": "Wilson Bethel",
+   "character": "Benjamin Poindexter",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/329634/photo/6067ae79a6f0e.jpg"
+  },
+  {
+   "name": "Zabryna Guevara",
+   "character": "Sheila Rivera",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/341550/photo/68198f94ace05.jpg"
+  },
+  {
+   "name": "Nikki M. James",
+   "character": "Kirsten McDuffie"
+  },
+  {
+   "name": "Genneya Walton",
+   "character": "BB Urich",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/486185/photo/676f57b3f07f9.jpg"
+  },
+  {
+   "name": "Arty Froushan",
+   "character": "Buck Cashman",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/7864558/photo/640c7b84275ec.jpg"
+  },
+  {
+   "name": "Clark Johnson",
+   "character": "Cherry"
+  },
+  {
+   "name": "Michael Gandolfini",
+   "character": "Daniel Blake",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/388134/photo/65720b65e8b50.jpg"
+  },
+  {
+   "name": "Ayelet Zurer",
+   "character": "Vanessa Fisk",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/617920/photo/62002af11e5d8.jpg"
+  },
+  {
+   "name": "Ruibo Qian",
+   "character": "Angie Kim",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/299436/photo/6531f49eaf4b2.jpg"
+  },
+  {
+   "name": "Hamish Allan-Headley",
+   "character": "Powell",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8669868/photo/61db7993f1d91.jpg"
+  },
+  {
+   "name": "Ashley Marie Ortiz",
+   "character": "Soledad Ayala"
+  },
+  {
+   "name": "Camila Rodriguez",
+   "character": "Angela Del Toro",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9139447/photo/67dd8e10ae476.jpg"
+  },
+  {
+   "name": "Jeremy Isaiah Earl",
+   "character": "Cole North",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9102318/photo/63361034e1d02.jpg"
+  }
+ ],
+ "images": [
+  {
+   "coverType": "Banner",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/422712/banners/6787d1d7187c6.jpg"
+  },
+  {
+   "coverType": "Poster",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/422712/posters/6978fefe94ea5.jpg"
+  },
+  {
+   "coverType": "Fanart",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/422712/backgrounds/69bef1d230b9d.jpg"
+  },
+  {
+   "coverType": "Clearlogo",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/422712/clearlogo/67e60e559c1f8.png"
+  }
+ ],
+ "seasons": [
+  {
+   "seasonNumber": 1,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2011291/posters/67c7c57a91f29.jpg"
+    },
+    {
+     "coverType": "Banner",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2011291/banners/682ac972a1c3f.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 2,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2211562/posters/69b2e41f6d02c.jpg"
+    }
+   ]
+  }
+ ],
+ "episodes": [
+  {
+   "tvdbShowId": 422712,
+   "tvdbId": 9275652,
+   "seasonNumber": 1,
+   "episodeNumber": 1,
+   "title": "Heaven's Half Hour",
+   "airDate": "2025-03-04",
+   "airDateUtc": "2025-03-05T02:00:00Z",
+   "runtime": 59,
+   "overview": "Longtime rivals Matt Murdock and Wilson Fisk attempt to move past their darker personas to serve New York, but their pasts resurface, reintroducing the world of Daredevil.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9275652/screencap/67c7e780c0c98.jpg"
+  },
+  {
+   "tvdbShowId": 422712,
+   "tvdbId": 10751467,
+   "seasonNumber": 1,
+   "episodeNumber": 2,
+   "title": "Optics",
+   "airDate": "2025-03-04",
+   "airDateUtc": "2025-03-05T02:00:00Z",
+   "runtime": 47,
+   "overview": "Matt Murdock takes on a new client, Hector Ayala. But this local hero from the Heights is more than he claims to be. Fisk learns the power of optics in his new and very public role.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10751467/screencap/67c7e79bf2aed.jpg"
+  },
+  {
+   "tvdbShowId": 422712,
+   "tvdbId": 10751469,
+   "seasonNumber": 1,
+   "episodeNumber": 3,
+   "title": "The Hollow of His Hand",
+   "airDate": "2025-03-11",
+   "airDateUtc": "2025-03-12T01:00:00Z",
+   "runtime": 44,
+   "overview": "The trial of Hector Ayala begins. Matt Murdock takes on the system to defend an innocent man. Wilson Fisk's old business associates grow restless in their desire to claim his vacant mantle as Kingpin of Crime.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10751469/screencap/67d1265d47546.jpg"
+  },
+  {
+   "tvdbShowId": 422712,
+   "tvdbId": 10751471,
+   "seasonNumber": 1,
+   "episodeNumber": 4,
+   "title": "Sic Semper Systema",
+   "airDate": "2025-03-18",
+   "airDateUtc": "2025-03-19T01:00:00Z",
+   "runtime": 52,
+   "overview": "Fisk's former associates start a gang war for his territories. Cherry manages to get Torres to appear at Hector's trial. Intimidated by the police, he commits perjury by declaring that he had never been assaulted.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10751471/screencap/67da18725f220.jpg"
+  },
+  {
+   "tvdbShowId": 422712,
+   "tvdbId": 10751473,
+   "seasonNumber": 1,
+   "episodeNumber": 5,
+   "title": "With Interest",
+   "airDate": "2025-03-25",
+   "airDateUtc": "2025-03-26T01:00:00Z",
+   "runtime": 40,
+   "overview": "A day in the life of Matt Murdock gets unexpectedly intense, forcing him to team up with a familiar face.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10751473/screencap/67e3797e02436.jpg"
+  },
+  {
+   "tvdbShowId": 422712,
+   "tvdbId": 10751475,
+   "seasonNumber": 1,
+   "episodeNumber": 6,
+   "title": "Excessive Force",
+   "airDate": "2025-03-25",
+   "airDateUtc": "2025-03-26T01:00:00Z",
+   "runtime": 42,
+   "overview": "A masked serial killer by the name Muse terrorizes the streets of New York, turning victims into grotesque works of street art. Matt Murdock and Mayor Fisk both know: the city needs a savior.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10751475/screencap/67e379dc9985d.jpg"
+  },
+  {
+   "tvdbShowId": 422712,
+   "tvdbId": 10751476,
+   "seasonNumber": 1,
+   "episodeNumber": 7,
+   "title": "Art for Art's Sake",
+   "airDate": "2025-04-01",
+   "airDateUtc": "2025-04-02T01:00:00Z",
+   "runtime": 40,
+   "overview": "Daredevil is back; it's a race to stop Muse before he can kill again; Fisk's rivals in the criminal underworld take advantage of the chaos.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10751476/screencap/67ec9fb5143ce.jpg"
+  },
+  {
+   "tvdbShowId": 422712,
+   "tvdbId": 10751477,
+   "seasonNumber": 1,
+   "episodeNumber": 8,
+   "title": "Isle of Joy",
+   "airDate": "2025-04-08",
+   "airDateUtc": "2025-04-09T01:00:00Z",
+   "runtime": 49,
+   "overview": "At his inaugural Black and White Ball, Mayor Fisk tightens his grip on New York City. Matt Murdock learns shocking information when an old enemy reaches out.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10751477/screencap/67fcf19f25160.jpg"
+  },
+  {
+   "tvdbShowId": 422712,
+   "tvdbId": 10751478,
+   "seasonNumber": 1,
+   "episodeNumber": 9,
+   "title": "Straight to Hell",
+   "airDate": "2025-04-15",
+   "airDateUtc": "2025-04-16T01:00:00Z",
+   "runtime": 57,
+   "finaleType": "season",
+   "overview": "Mayor Fisk becomes Mayor Kingpin; Daredevil is unleashed as chaos takes over the city.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10751478/screencap/67ff1f52b3e67.jpg"
+  },
+  {
+   "tvdbShowId": 422712,
+   "tvdbId": 11397847,
+   "seasonNumber": 2,
+   "episodeNumber": 1,
+   "title": "The Northern Star",
+   "airDate": "2026-03-24",
+   "airDateUtc": "2026-03-25T01:00:00Z",
+   "runtime": 51,
+   "overview": "Daredevil is in hiding, but he isn't laying low; a shadowy player from Washington, D.C. emerges.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11397847/screencap/69c95adbe2752.jpg"
+  },
+  {
+   "tvdbShowId": 422712,
+   "tvdbId": 11580807,
+   "seasonNumber": 2,
+   "episodeNumber": 2,
+   "title": "Shoot the Moon",
+   "airDate": "2026-03-31",
+   "airDateUtc": "2026-04-01T01:00:00Z",
+   "runtime": 46,
+   "overview": "Fisk tries a new tactic to lure Daredevil out of hiding.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11580807/screencap/69ccd9aaca3aa.jpg"
+  },
+  {
+   "tvdbShowId": 422712,
+   "tvdbId": 11580808,
+   "seasonNumber": 2,
+   "episodeNumber": 3,
+   "title": "The Scales & The Sword",
+   "airDate": "2026-03-31",
+   "airDateUtc": "2026-04-01T01:00:00Z",
+   "runtime": 47,
+   "overview": "Matt Murdock and Karen Page find new allies.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11580808/screencap/69cc8c4973510.jpg"
+  },
+  {
+   "tvdbShowId": 422712,
+   "tvdbId": 11580809,
+   "seasonNumber": 2,
+   "episodeNumber": 4,
+   "title": "Gloves Off",
+   "airDate": "2026-04-07",
+   "airDateUtc": "2026-04-08T01:00:00Z",
+   "runtime": 51,
+   "overview": "Bullseye adopts a new morning routine. Fisk takes the ring.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11580809/screencap/69d5b0d793155.jpg"
+  },
+  {
+   "tvdbShowId": 422712,
+   "tvdbId": 11580810,
+   "seasonNumber": 2,
+   "episodeNumber": 5,
+   "title": "The Grand Design",
+   "airDate": "2026-04-14",
+   "airDateUtc": "2026-04-15T01:00:00Z",
+   "runtime": 50,
+   "overview": "The Anti-Vigilante Task Force intensifies its search for Daredevil and Bullseye.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11580810/screencap/69e8bfafb4658.jpg"
+  },
+  {
+   "tvdbShowId": 422712,
+   "tvdbId": 11580811,
+   "seasonNumber": 2,
+   "episodeNumber": 6,
+   "title": "Requiem",
+   "airDate": "2026-04-21",
+   "airDateUtc": "2026-04-22T01:00:00Z",
+   "runtime": 49,
+   "overview": "Fisk's operation is dealt an irrevocable blow. The resistance spills over into the streets.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11580811/screencap/69e8bfc454f78.jpg"
+  },
+  {
+   "tvdbShowId": 422712,
+   "tvdbId": 11580813,
+   "seasonNumber": 2,
+   "episodeNumber": 7,
+   "title": "The Hateful Darkness",
+   "airDate": "2026-04-28",
+   "airDateUtc": "2026-04-29T01:00:00Z",
+   "runtime": 44,
+   "overview": "A trial close to Matt Murdock's heart grabs the city's attention.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11580813/screencap/69f7989fc89a1.jpg"
+  },
+  {
+   "tvdbShowId": 422712,
+   "tvdbId": 11580814,
+   "seasonNumber": 2,
+   "episodeNumber": 8,
+   "title": "The Southern Cross",
+   "airDate": "2026-05-05",
+   "airDateUtc": "2026-05-06T01:00:00Z",
+   "runtime": 51,
+   "finaleType": "season",
+   "overview": "The city and its heroes enter an unprecedented era.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11580814/screencap/69fa9982002ee.jpg"
+  }
+ ]
+}

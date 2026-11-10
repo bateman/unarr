@@ -1,0 +1,93 @@
+{
+  "body": [
+    {
+      "added": "2026-11-09T22:23:37Z",
+      "airTime": "23:00",
+      "certification": "TV-14",
+      "cleanTitle": "frierenbeyondjourneysend",
+      "ended": false,
+      "firstAired": "2023-09-29T00:00:00Z",
+      "genres": [
+        "Adventure",
+        "Animation",
+        "Anime",
+        "Drama",
+        "Fantasy"
+      ],
+      "id": 51,
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/424536/banners/651dd688bd4d5.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/424536/posters/6516fe48e7a06.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/424536/backgrounds/64e6cbe29d9c0.jpg"
+        },
+        {
+          "coverType": "clearlogo",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/424536/clearlogo/65d798fbd2f61.png"
+        }
+      ],
+      "imdbId": "tt22248376",
+      "languageProfileId": 1,
+      "lastAired": "2026-03-27T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": false,
+      "network": "Nippon TV",
+      "originalLanguage": {
+        "id": 8,
+        "name": "Japanese"
+      },
+      "overview": "Decades after her party defeated the Demon King, an old friend's funeral launches the elf wizard Frieren on a journey of self-discovery.",
+      "path": "/tv/Frieren Beyond Journeys End (2023)",
+      "qualityProfileId": 6,
+      "ratings": {
+        "value": 8.9,
+        "votes": 87128
+      },
+      "runtime": 25,
+      "seasonFolder": true,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        },
+        {
+          "monitored": false,
+          "seasonNumber": 2
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "frieren beyond journeys end",
+      "status": "continuing",
+      "tags": [
+        1,
+        2
+      ],
+      "title": "Frieren: Beyond Journey's End",
+      "titleSlug": "frieren-beyond-journeys-end",
+      "tmdbId": 209867,
+      "tvMazeId": 69956,
+      "tvRageId": 0,
+      "tvdbId": 424536,
+      "useSceneNumbering": true,
+      "year": 2023
+    }
+  ],
+  "recordedAt": "2026-11-09T22:24:27Z",
+  "request": {
+    "body": "bodies/series-editor-root.json",
+    "method": "PUT",
+    "path": "/api/v3/series/editor"
+  },
+  "status": 202
+}

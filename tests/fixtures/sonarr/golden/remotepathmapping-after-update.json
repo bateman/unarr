@@ -1,0 +1,16 @@
+{
+  "body": [
+    {
+      "host": "nzbget.invalid",
+      "id": 1,
+      "localPath": "/downloads/complete/",
+      "remotePath": "/remote/done/"
+    }
+  ],
+  "recordedAt": "2026-11-09T22:24:43Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/remotepathmapping"
+  },
+  "status": 200
+}

@@ -510,6 +510,67 @@ pub async fn on_import_complete(
     send(http, &settings, &payload).await.map_err(send_error_message)
 }
 
+/// `OnSeriesAdd` and `OnSeriesDelete`: an embed with no timestamp, the
+/// links, and the poster and fanart when the import fields ask for them.
+fn series_embed(
+    settings: &Settings,
+    identity: &Identity,
+    series: &Series,
+    description: &str,
+    color: i64,
+) -> Value {
+    let author = if settings.author.trim().is_empty() {
+        identity.machine_name.clone()
+    } else {
+        settings.author.clone()
+    };
+    let mut embed = json!({
+        "author": {"name": author, "icon_url": ICON_URL},
+        "url": format!("http://thetvdb.com/?tab=series&id={}", series.tvdb_id),
+        "title": series.title,
+        "description": description,
+        "color": color,
+        "fields": [{"name": "Links", "value": links(series), "inline": false}],
+    });
+    if settings.import_fields.contains(&import_field::POSTER) {
+        embed["thumbnail"] = image(Some(series), "poster");
+    }
+    if settings.import_fields.contains(&import_field::FANART) {
+        embed["image"] = image(Some(series), "fanart");
+    }
+    embed
+}
+
+pub async fn on_series_add(
+    http: &reqwest::Client,
+    def: &NotificationDefinition,
+    series: &Series,
+    ctx: &Context<'_>,
+) -> Result<(), String> {
+    let settings = Settings::from_value(&def.settings);
+    let embed = series_embed(&settings, ctx.identity, series, "Series Added", COLOR_SUCCESS);
+    let payload = payload(&settings, None, Some(vec![embed]));
+    send(http, &settings, &payload).await.map_err(send_error_message)
+}
+
+pub async fn on_series_delete(
+    http: &reqwest::Client,
+    def: &NotificationDefinition,
+    series: &Series,
+    deleted_files: bool,
+    ctx: &Context<'_>,
+) -> Result<(), String> {
+    let settings = Settings::from_value(&def.settings);
+    let description = if deleted_files {
+        "Series removed and all files were deleted"
+    } else {
+        "Series removed, files were not deleted"
+    };
+    let embed = series_embed(&settings, ctx.identity, series, description, COLOR_DANGER);
+    let payload = payload(&settings, None, Some(vec![embed]));
+    send(http, &settings, &payload).await.map_err(send_error_message)
+}
+
 pub async fn on_rename(
     http: &reqwest::Client,
     def: &NotificationDefinition,

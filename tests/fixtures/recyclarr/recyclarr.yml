@@ -1,0 +1,246 @@
+# The maintainer's Recyclarr configuration, the `sonarr:` section of
+# bateman/homelab docker/recyclarr.yml at f8d17e4, without base_url and
+# api_key. scripts/recyclarr-replay.py runs Recyclarr with it; the recording
+# in sonarr-exchange.json was made with it (see README.md).
+sonarr:
+  series:
+
+    # Remove custom formats from Sonarr that are no longer in this config
+    delete_old_custom_formats: true
+
+    # ---------------------------------------------------------------------------
+    # Quality Definition
+    # Controls min/max/preferred file sizes per quality level
+    # Docs: https://recyclarr.dev/wiki/yaml/config-reference/quality-definition/
+    # ---------------------------------------------------------------------------
+    quality_definition:
+      type: series
+      # preferred_ratio: 1.0  # 0.0=min, 0.5=mid, 1.0=max (default: guide value)
+
+    # ---------------------------------------------------------------------------
+    # Quality Profiles
+    # Uses trash_id to pull full profile from Trash Guides automatically
+    # Docs: https://recyclarr.dev/wiki/yaml/config-reference/quality-profiles/
+    # ---------------------------------------------------------------------------
+    quality_profiles:
+      # WEB-1080p - Recommended for most users
+      - trash_id: 72dae194fc92bf828f32cde7744e51a1
+        reset_unmatched_scores:
+          enabled: true
+
+      # Any - Custom profile limited to 720p-2160p (no SD/480p/BR-DISK)
+      # NOTE: Sonarr does not have Remux qualities (Radarr only)
+      - name: Any
+        upgrade:
+          allowed: true
+          until_quality: WEB 1080p
+        qualities:
+          - name: WEB 2160p
+            qualities:
+              - WEBDL-2160p
+              - WEBRip-2160p
+          - name: Bluray-2160p
+          - name: HDTV-2160p
+          - name: WEB 1080p
+            qualities:
+              - WEBDL-1080p
+              - WEBRip-1080p
+          - name: Bluray-1080p
+          - name: HDTV-1080p
+          - name: WEB 720p
+            qualities:
+              - WEBDL-720p
+              - WEBRip-720p
+          - name: Bluray-720p
+          - name: HDTV-720p
+
+      # HD - 720p/1080p - Accepts all HD qualities, cutoff at HDTV-1080p
+      - name: HD - 720p/1080p
+        min_format_score: 0
+        upgrade:
+          allowed: true
+          until_quality: HDTV-1080p
+          until_score: 10000
+        qualities:
+          - name: WEB 1080p
+            qualities:
+              - WEBDL-1080p
+              - WEBRip-1080p
+          - name: Bluray-1080p
+          - name: HDTV-1080p
+          - name: WEB 720p
+            qualities:
+              - WEBDL-720p
+              - WEBRip-720p
+          - name: Bluray-720p
+          - name: HDTV-720p
+
+      # HD-1080p - Only 1080p qualities, upgrades until Bluray-1080p
+      - name: HD-1080p
+        min_format_score: 0
+        upgrade:
+          allowed: true
+          until_quality: Bluray-1080p
+          until_score: 10000
+        qualities:
+          - name: Bluray-1080p
+          - name: WEB 1080p
+            qualities:
+              - WEBDL-1080p
+              - WEBRip-1080p
+          - name: HDTV-1080p
+
+      # -----------------------------------------------------------------------
+      # Italian Audio Profiles (ITA)
+      # Identical quality settings as their base profiles, but require Italian
+      # audio. After syncing, manually set "Language: Not Italian" CF score to
+      # -10000 on each ITA profile in the Sonarr UI.
+      #
+      # NOTE: a "WEB-1080p - ITA" variant would have to be cloned manually in
+      # the Sonarr UI from the Trash Guides "WEB-1080p" profile (trash_id
+      # profiles include CF scores that can't be duplicated here). It is not
+      # used in this setup, so it is not listed under custom_formats below.
+      # If you clone it, add it there too, or it gets no MULTi score.
+      # Listing a profile that does not exist only makes sync warn.
+      # -----------------------------------------------------------------------
+
+      # Any - ITA (no Remux qualities — Sonarr only)
+      - name: Any - ITA
+        upgrade:
+          allowed: true
+          until_quality: WEB 1080p
+        qualities:
+          - name: WEB 2160p
+            qualities:
+              - WEBDL-2160p
+              - WEBRip-2160p
+          - name: Bluray-2160p
+          - name: HDTV-2160p
+          - name: WEB 1080p
+            qualities:
+              - WEBDL-1080p
+              - WEBRip-1080p
+          - name: Bluray-1080p
+          - name: HDTV-1080p
+          - name: WEB 720p
+            qualities:
+              - WEBDL-720p
+              - WEBRip-720p
+          - name: Bluray-720p
+          - name: HDTV-720p
+
+      # HD - 720p/1080p - ITA
+      - name: HD - 720p/1080p - ITA
+        min_format_score: 0
+        upgrade:
+          allowed: true
+          until_quality: HDTV-1080p
+          until_score: 10000
+        qualities:
+          - name: WEB 1080p
+            qualities:
+              - WEBDL-1080p
+              - WEBRip-1080p
+          - name: Bluray-1080p
+          - name: HDTV-1080p
+          - name: WEB 720p
+            qualities:
+              - WEBDL-720p
+              - WEBRip-720p
+          - name: Bluray-720p
+          - name: HDTV-720p
+
+      # HD-1080p - ITA
+      - name: HD-1080p - ITA
+        min_format_score: 0
+        upgrade:
+          allowed: true
+          until_quality: Bluray-1080p
+          until_score: 10000
+        qualities:
+          - name: Bluray-1080p
+          - name: WEB 1080p
+            qualities:
+              - WEBDL-1080p
+              - WEBRip-1080p
+          - name: HDTV-1080p
+
+      # Uncomment for additional profiles (find trash_ids via Trash Guides):
+      # - trash_id: <WEB-2160p trash_id>
+      #   reset_unmatched_scores:
+      #     enabled: true
+
+    # ---------------------------------------------------------------------------
+    # Custom Formats (Optional Overrides)
+    # The quality profile above already includes Trash Guides custom formats.
+    # Only add entries here to override scores or add formats not in the profile.
+    # Docs: https://recyclarr.dev/wiki/yaml/config-reference/custom-formats/
+    # ---------------------------------------------------------------------------
+    custom_formats:
+      # -----------------------------------------------------------------------
+      # Italian Audio — prefer MULTi releases (original + Italian audio)
+      # For full Italian-only enforcement, also create "Language: Not Italian"
+      # CF manually in the Sonarr UI. See docs/setup/arr-tuning-guide.md
+      # -----------------------------------------------------------------------
+      - trash_ids:
+          - 7ba05c6e0e14e793538174c679126996  # MULTi
+        assign_scores_to:
+          # Standard profiles (soft preference)
+          - name: WEB-1080p
+            score: 2000
+          - name: Any
+            score: 2000
+          - name: HD - 720p/1080p
+            score: 2000
+          - name: HD-1080p
+            score: 2000
+          # ITA profiles (MULTi bonus + Language: Not Italian = -10000 in UI)
+          - name: Any - ITA
+            score: 2000
+          - name: HD - 720p/1080p - ITA
+            score: 2000
+          - name: HD-1080p - ITA
+            score: 2000
+
+    #   # Example: Penalize unwanted formats
+    #   - trash_ids:
+    #       - 85c61753df5da1fb2aab6f2a47426b09  # BR-DISK
+    #       - 9c11cd3f07101cdba90a2d81cf0e56b4  # LQ
+    #       - e2315f990da2e2cbfc9fa5b7a6c62170  # LQ (Release Title)
+    #       - 47435ece6b99a0b477caf360e79ba0bb  # x265 (HD)
+    #     assign_scores_to:
+    #       - name: WEB-1080p
+    #         score: -10000
+    #
+    #   # Example: Bonus score for streaming services
+    #   - trash_ids:
+    #       - d660701077794679fd59e8bdf4ce3a29  # AMZN
+    #       - f67c9ca88f463a48346062e8ad07713f  # ATVP
+    #       - 89358767a60cc28783cdc3d0be9388a4  # DSNP
+    #       - 81d1fbf600e2540cee87f3a23f9d3c1c  # MAX
+    #       - d34870697c9db575f17700212167be23  # NF
+    #     assign_scores_to:
+    #       - name: WEB-1080p
+    #         score: 100
+
+    # ---------------------------------------------------------------------------
+    # Media Naming - Trash Guides recommended (Plex-optimized)
+    # Keys listed via: recyclarr list naming sonarr
+    # Docs: https://recyclarr.dev/wiki/yaml/config-reference/media-naming/
+    # ---------------------------------------------------------------------------
+    media_naming:
+      series: default
+      season: default
+      episodes:
+        rename: true
+        standard: default
+        daily: default
+        anime: default
+
+    # ---------------------------------------------------------------------------
+    # Media Management
+    # Docs: https://recyclarr.dev/wiki/yaml/config-reference/media-management/
+    # ---------------------------------------------------------------------------
+    media_management:
+      # Let custom format scores handle propers/repacks (Trash Guides recommendation)
+      propers_and_repacks: do_not_prefer

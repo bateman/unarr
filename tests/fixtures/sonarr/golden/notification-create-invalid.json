@@ -13,7 +13,7 @@
       "severity": "error"
     }
   ],
-  "recordedAt": "2026-11-08T20:57:01Z",
+  "recordedAt": "2026-11-09T22:18:09Z",
   "request": {
     "body": "bodies/notification-create-invalid.json",
     "method": "POST",

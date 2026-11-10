@@ -1,0 +1,859 @@
+{
+ "tvdbId": 403245,
+ "title": "Silo",
+ "overview": "In a ruined and toxic future, thousands live in a giant silo deep underground. After its sheriff breaks a cardinal rule and residents die mysteriously, engineer Juliette starts to uncover shocking secrets and the truth about the silo.",
+ "slug": "silo",
+ "originalCountry": "usa",
+ "originalLanguage": "eng",
+ "language": "eng",
+ "firstAired": "2023-05-05",
+ "lastAired": "2027-09-10",
+ "tvMazeId": 38052,
+ "tmdbId": 125988,
+ "imdbId": "tt14688458",
+ "malIds": [],
+ "anidbIds": [],
+ "aniListIds": [],
+ "lastUpdated": "2026-11-08T23:31:00Z",
+ "status": "Continuing",
+ "runtime": 51,
+ "timeOfDay": {
+  "hours": 0,
+  "minutes": 0
+ },
+ "originalNetwork": "Apple TV",
+ "network": "Apple TV",
+ "genres": [
+  "Drama",
+  "Science Fiction"
+ ],
+ "contentRating": "TV-MA",
+ "rating": {
+  "count": 254219,
+  "value": "8.1"
+ },
+ "actors": [
+  {
+   "name": "Rebecca Ferguson",
+   "character": "Juliette",
+   "image": "https://artworks.thetvdb.com/banners/person/295149/5f09f7efaccfe.jpg"
+  },
+  {
+   "name": "Chinaza Uche",
+   "character": "Billings",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/535952/photo/63c5cfe64e896.jpg"
+  },
+  {
+   "name": "Harriet Walter",
+   "character": "Martha Walker",
+   "image": "https://artworks.thetvdb.com/banners/person/403783/5eea933b741b6.jpg"
+  },
+  {
+   "name": "Avi Nash",
+   "character": "Lukas"
+  },
+  {
+   "name": "Shane McRae",
+   "character": "Knox"
+  },
+  {
+   "name": "Remmie Milner",
+   "character": "Shirley",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8047871/photo/6784d6f12bbdb.jpg"
+  },
+  {
+   "name": "Common",
+   "character": "Robert Sims",
+   "image": "https://artworks.thetvdb.com/banners/person/310836/primary.jpg"
+  },
+  {
+   "name": "Alexandria Riley",
+   "character": "Camille Sims",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8112392/photo/676d6e6366b74.jpg"
+  },
+  {
+   "name": "Rick Gomez",
+   "character": "Patrick Kennedy",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/271114/photo/6876e5a13442f.jpg"
+  },
+  {
+   "name": "Will Merrick",
+   "character": "Danny Bly",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/303280/photo/60f6b7c3dd9df.jpg"
+  },
+  {
+   "name": "Caitlin Zoz",
+   "character": "Kathleen Billings",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9111923/photo/6455163a7a4b3.jpg"
+  },
+  {
+   "name": "Billy Postlethwaite",
+   "character": "Hank",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/248027/photo/61577b29c2ae9.jpg"
+  },
+  {
+   "name": "Clare Perkins",
+   "character": "Carla McLain",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/444232/photo/646bbee84789a.jpg"
+  },
+  {
+   "name": "Steve Zahn",
+   "character": "Solo",
+   "image": "https://artworks.thetvdb.com/banners/person/450538/primary.jpg"
+  },
+  {
+   "name": "Ashley Zukerman",
+   "character": "Daniel Keene",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/492783/photo/60ed93f571dad.jpg"
+  },
+  {
+   "name": "Jessica Henwick",
+   "character": "Helen Drew",
+   "image": "https://artworks.thetvdb.com/banners/person/248011/5f4bf605c5bb0.jpg"
+  },
+  {
+   "name": "Jessica Brown Findlay",
+   "character": "Charlotte Keene",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/453678/photo/6615cd9c9ed46.jpg"
+  },
+  {
+   "name": "Morven Christie",
+   "character": "Anna Thurman",
+   "image": "https://artworks.thetvdb.com/banners/person/403800/5eca3ef68e4d4.jpg"
+  },
+  {
+   "name": "Laura Innes",
+   "character": "Senator Rosalind Thurman",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/274187/photo/65fd9867d0254.jpg"
+  },
+  {
+   "name": "Reed Birney",
+   "character": "Henry",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/315911/photo/62d83af8595a4.jpg"
+  },
+  {
+   "name": "Colin Hanks",
+   "character": "Per Stenson",
+   "image": "https://artworks.thetvdb.com/banners/person/310360/5ea73e6fdfce6.jpg"
+  },
+  {
+   "name": "Oscar Coleman",
+   "character": "Anthony Sims",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9136002/photo/678374b5bca69.jpg"
+  },
+  {
+   "name": "Sophie Thompson",
+   "character": "Gloria Hildebrandt",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/358652/photo/623b9f12b0b00.jpg"
+  },
+  {
+   "name": "Sonita Henry",
+   "character": "Regina Jackson",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/329822/photo/62f6a5b73f2e8.jpg"
+  },
+  {
+   "name": "Chipo Chung",
+   "character": "Sandy"
+  },
+  {
+   "name": "Jacqueline Berces",
+   "character": "Amy Hansen"
+  },
+  {
+   "name": "Sara Hazemi",
+   "character": "Hope / Eater",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9158307/photo/6ace871391c03.jpg"
+  },
+  {
+   "name": "Orlando Norman",
+   "character": "Rick",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9125355/photo/669ba2a151551.jpg"
+  },
+  {
+   "name": "Georgina Sadler",
+   "character": "Audrey"
+  },
+  {
+   "name": "Olatunji Ayofe",
+   "character": "Teddy"
+  },
+  {
+   "name": "George Robinson",
+   "character": "Mark Chambers",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8797147/photo/6309fc5a54b90.jpg"
+  },
+  {
+   "name": "Ned Dennehy",
+   "character": "Ed Harwood",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/458538/photo/6508bf4a06c1e.jpg"
+  },
+  {
+   "name": "William Hope",
+   "character": "Gus",
+   "image": "https://artworks.thetvdb.com/banners/person/418785/5eb58fc7f2f0c.jpg"
+  },
+  {
+   "name": "Liam Akpan",
+   "character": "Jerry",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9158333/photo/6acff91293aaf.jpg"
+  },
+  {
+   "name": "Angela Yeoh",
+   "character": "Molly Karins"
+  },
+  {
+   "name": "Florian Clare",
+   "character": "Chris Emerson",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9158539/photo/6adb8991c4251.jpg"
+  },
+  {
+   "name": "Christian Ochoa",
+   "character": "Amundsen",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/7918140/photo/6158d8d4bfc76.jpg"
+  },
+  {
+   "name": "Matt Craven",
+   "character": "Dr. Victor Crnkovich",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/275452/photo/64f2588ee5844.jpg"
+  },
+  {
+   "name": "Tim Robbins",
+   "character": "Bernard",
+   "image": "https://artworks.thetvdb.com/banners/person/293587/primary.jpg"
+  },
+  {
+   "name": "Tanya Moodie",
+   "character": "Mary Meadows",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/261499/photo/64958c38edc19.jpg"
+  },
+  {
+   "name": "Iain Glen",
+   "character": "Dr. Pete Nichols",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/247872/photo/6053afa5ab7d4.jpg"
+  },
+  {
+   "name": "Sienna Guillory",
+   "character": "Hanna Nichols",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/346777/photo/60bff6f7c10bc.jpg"
+  },
+  {
+   "name": "Rashida Jones",
+   "character": "Allison",
+   "image": "https://artworks.thetvdb.com/banners/person/310905/primary.jpg"
+  },
+  {
+   "name": "David Oyelowo",
+   "character": "Holston",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/396447/photo/64fa202d2eebd.jpg"
+  },
+  {
+   "name": "Ferdinand Kingsley",
+   "character": "George Wilkins",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/403808/photo/67475831e9efd.jpg"
+  },
+  {
+   "name": "Matt Gomez Hidaka",
+   "character": "Terry Cooper",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9158259/photo/6acac2731b8eb.jpg"
+  },
+  {
+   "name": "Will Patton",
+   "character": "Deputy Marnes",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/333716/photo/610291939dc1a.jpg"
+  },
+  {
+   "name": "Geraldine James",
+   "character": "Mayor Ruth Jahns",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/304664/photo/65a37b09acfd6.jpg"
+  }
+ ],
+ "images": [
+  {
+   "coverType": "Banner",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/403245/banners/6449d56a60674.jpg"
+  },
+  {
+   "coverType": "Poster",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/403245/posters/64432dea72673.jpg"
+  },
+  {
+   "coverType": "Fanart",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/403245/backgrounds/640bc23f1fa80.jpg"
+  },
+  {
+   "coverType": "Clearlogo",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/403245/clearlogo/6455710e48c96.png"
+  }
+ ],
+ "seasons": [
+  {
+   "seasonNumber": 0,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/1928275/posters/645570f845507.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 1,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/1928276/posters/644c44635ae95.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 2,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2087050/posters/670d7ae095b8a.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 3,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2246297/posters/6a4522d73aa0c.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 4,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2266909/posters/6aece3063fbda.jpg"
+    }
+   ]
+  }
+ ],
+ "episodes": [
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 9873798,
+   "seasonNumber": 0,
+   "episodeNumber": 1,
+   "title": "Building a World",
+   "airDate": "2023-06-30",
+   "airDateUtc": "2023-06-30T04:00:00Z",
+   "runtime": 2,
+   "overview": "A brief, behind the scenes look into the making of Silo.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9873798/screencap/663bc943e9119.jpg"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 9873799,
+   "seasonNumber": 0,
+   "episodeNumber": 2,
+   "title": "Questions of the Silo",
+   "airDate": "2023-05-05",
+   "airDateUtc": "2023-05-05T04:00:00Z",
+   "runtime": 2,
+   "overview": "A brief, behind the scenes look back at Silo Season 1.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9873799/screencap/663bc98be2e63.jpg"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 10798335,
+   "seasonNumber": 0,
+   "episodeNumber": 3,
+   "title": "Season 1 Recap",
+   "airDate": "2024-11-11",
+   "airDateUtc": "2024-11-11T05:00:00Z",
+   "runtime": 5,
+   "overview": "Silo is the story of the last ten thousand people on earth, their mile-deep home protecting them from the toxic and deadly world outside. However, no one knows when or why the silo was built and those who try to find out face fatal consequences. Ferguson stars as Juliette, an engineer who seeks answers about a loved one’s murder and tumbles onto a mystery that goes far deeper than she could have ever imagined, leading her to discover that if the lies don’t kill you, the truth will."
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 10806950,
+   "seasonNumber": 0,
+   "episodeNumber": 4,
+   "title": "The Rebellion in Season 2",
+   "airDate": "2024-11-15",
+   "airDateUtc": "2024-11-15T05:00:00Z",
+   "runtime": 2,
+   "finaleType": "season",
+   "overview": "Order into chaos. Control into madness. How far would you go to discover the truth?"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 8440385,
+   "seasonNumber": 1,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 1,
+   "title": "Freedom Day",
+   "airDate": "2023-05-05",
+   "airDateUtc": "2023-05-05T04:00:00Z",
+   "runtime": 59,
+   "overview": "Sheriff Becker’s plans for the future are thrown off course after his wife meets a hacker with information about the silo.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8440385/screencap/6438f1201575f.jpg"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 9655334,
+   "seasonNumber": 1,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 2,
+   "title": "Holston’s Pick",
+   "airDate": "2023-05-05",
+   "airDateUtc": "2023-05-05T04:00:00Z",
+   "runtime": 47,
+   "overview": "Juliette, an engineer, pieces together what might have led to a co-worker’s mysterious death.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9655334/screencap/6438f126b2473.jpg"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 9655335,
+   "seasonNumber": 1,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 3,
+   "title": "Machines",
+   "airDate": "2023-05-12",
+   "airDateUtc": "2023-05-12T04:00:00Z",
+   "runtime": 62,
+   "overview": "In her hunt for a new sheriff, Mayor Jahns clashes with Bernard. Juliette strikes a deal to keep the generator running.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9655335/screencap/6438f151740b5.jpg"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 9655336,
+   "seasonNumber": 1,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 4,
+   "title": "Truth",
+   "airDate": "2023-05-19",
+   "airDateUtc": "2023-05-19T04:00:00Z",
+   "runtime": 45,
+   "overview": "Juliette tries gaining the trust of Deputy Marnes as they work to uncover the truth about recent tragedies.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9655336/screencap/6438f15b643f6.jpg"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 9655337,
+   "seasonNumber": 1,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 5,
+   "title": "The Janitor’s Boy",
+   "airDate": "2023-05-26",
+   "airDateUtc": "2023-05-26T04:00:00Z",
+   "runtime": 50,
+   "overview": "Sims appoints Billings as chief deputy to keep tabs on Juliette, whose efforts to solve two murders lead to a showdown.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9655337/screencap/6438f1675af9f.jpg"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 9655338,
+   "seasonNumber": 1,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 6,
+   "title": "The Relic",
+   "airDate": "2023-06-02",
+   "airDateUtc": "2023-06-02T04:00:00Z",
+   "runtime": 50,
+   "overview": "During her investigation, Juliette uncovers disturbing secrets about someone she thought she knew.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9655338/screencap/64702e3aba8be.jpg"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 9655339,
+   "seasonNumber": 1,
+   "episodeNumber": 7,
+   "absoluteEpisodeNumber": 7,
+   "title": "The Flamekeepers",
+   "airDate": "2023-06-09",
+   "airDateUtc": "2023-06-09T04:00:00Z",
+   "runtime": 47,
+   "overview": "Bernard seeks Juliette’s cooperation as he grows increasingly concerned about the silo’s security. Juliette asks her father for a favor.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9655339/screencap/64797cd804291.jpg"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 9655340,
+   "seasonNumber": 1,
+   "episodeNumber": 8,
+   "absoluteEpisodeNumber": 8,
+   "title": "Hanna",
+   "airDate": "2023-06-16",
+   "airDateUtc": "2023-06-16T04:00:00Z",
+   "runtime": 43,
+   "overview": "New information causes Juliette to see her family’s past differently—and she finally gains access to the silo’s biggest secrets.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9655340/screencap/6482d59174189.jpg"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 9655341,
+   "seasonNumber": 1,
+   "episodeNumber": 9,
+   "absoluteEpisodeNumber": 9,
+   "title": "The Getaway",
+   "airDate": "2023-06-23",
+   "airDateUtc": "2023-06-23T04:00:00Z",
+   "runtime": 43,
+   "overview": "Racked with guilt, Billings sets off on a personal mission, only to discover a mind-blowing clue from Juliette.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9655341/screencap/648c03127b16e.jpg"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 9655342,
+   "seasonNumber": 1,
+   "episodeNumber": 10,
+   "absoluteEpisodeNumber": 10,
+   "title": "Outside",
+   "airDate": "2023-06-30",
+   "airDateUtc": "2023-06-30T04:00:00Z",
+   "runtime": 44,
+   "finaleType": "season",
+   "overview": "Juliette’s fate seems sealed when certain truths finally come to light.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9655342/screencap/64952fff7a913.jpg"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 10232256,
+   "seasonNumber": 2,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 11,
+   "title": "The Engineer",
+   "airDate": "2024-11-15",
+   "airDateUtc": "2024-11-15T05:00:00Z",
+   "runtime": 45,
+   "overview": "Juliette finds sanctuary in a silo long ago destroyed by war, thinking she’s alone.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10232256/screencap/66b32d2d9aec4.jpg"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 10608307,
+   "seasonNumber": 2,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 12,
+   "title": "Order",
+   "airDate": "2024-11-22",
+   "airDateUtc": "2024-11-22T05:00:00Z",
+   "runtime": 41,
+   "overview": "In Silo 18, shock and unrest take hold in the wake of Juliette doing what no one’s done before.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10608307/screencap/67312b469d490.jpg"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 10608310,
+   "seasonNumber": 2,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 13,
+   "title": "Solo",
+   "airDate": "2024-11-27",
+   "airDateUtc": "2024-11-27T05:00:00Z",
+   "runtime": 54,
+   "overview": "Bernard turns to Judge Meadows for help. Billings begins to wonder if he’s being lied to. Juliette finally meets the man in the vault.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10608310/screencap/66b32d33cf4e9.jpg"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 10608312,
+   "seasonNumber": 2,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 14,
+   "title": "The Harmonium",
+   "airDate": "2024-12-06",
+   "airDateUtc": "2024-12-06T05:00:00Z",
+   "runtime": 55,
+   "overview": "Juliette sets out on a dangerous quest to retrieve a suit so she can return home and save her silo. Mechanical plans a meeting with Judge Meadows.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10608312/screencap/67467e4975178.jpg"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 10608314,
+   "seasonNumber": 2,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 15,
+   "title": "Descent",
+   "airDate": "2024-12-13",
+   "airDateUtc": "2024-12-13T05:00:00Z",
+   "runtime": 49,
+   "overview": "Sims finds himself with a new position. Juliette learns Solo isn’t being honest. Bernard and Lukas make an important discovery.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10608314/screencap/67525b01b0952.jpg"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 10608315,
+   "seasonNumber": 2,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 16,
+   "title": "Barricades",
+   "airDate": "2024-12-20",
+   "airDateUtc": "2024-12-20T05:00:00Z",
+   "runtime": 43,
+   "overview": "Bernard enacts a plan to root out Knox, Shirley, and Walker. Billings takes a stand. Solo saves Juliette’s life and wants something in return.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10608315/screencap/675b956c9b6c2.jpg"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 10608318,
+   "seasonNumber": 2,
+   "episodeNumber": 7,
+   "absoluteEpisodeNumber": 17,
+   "title": "The Dive",
+   "airDate": "2024-12-27",
+   "airDateUtc": "2024-12-27T05:00:00Z",
+   "runtime": 51,
+   "overview": "Lukas is assigned a mission. Mechanical sends a powerful message. Juliette embarks on a perilous descent—and confronts a new danger.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10608318/screencap/66b32d37e41f5.jpg"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 10608320,
+   "seasonNumber": 2,
+   "episodeNumber": 8,
+   "absoluteEpisodeNumber": 18,
+   "title": "The Book of Quinn",
+   "airDate": "2025-01-03",
+   "airDateUtc": "2025-01-03T05:00:00Z",
+   "runtime": 48,
+   "overview": "Juliette discovers something’s happened to Solo. Bernard makes an offer to Walker. Lukas meets with Salvador Quinn’s descendants.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10608320/screencap/676e0a79267c1.jpg"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 10608322,
+   "seasonNumber": 2,
+   "episodeNumber": 9,
+   "absoluteEpisodeNumber": 19,
+   "title": "The Safeguard",
+   "airDate": "2025-01-10",
+   "airDateUtc": "2025-01-10T05:00:00Z",
+   "runtime": 60,
+   "overview": "Billings’ faith is shaken. Lukas heads to the down deep. Knox identifies the traitor. Juliette uncovers the truth about Solo’s past.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10608322/screencap/677744e63a72d.jpg"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 10608324,
+   "seasonNumber": 2,
+   "episodeNumber": 10,
+   "absoluteEpisodeNumber": 20,
+   "title": "Into the Fire",
+   "airDate": "2025-01-17",
+   "airDateUtc": "2025-01-17T05:00:00Z",
+   "runtime": 59,
+   "finaleType": "season",
+   "overview": "The rebels make their move—and so does Juliette.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10608324/screencap/673bd1e83476c.jpg"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 11751879,
+   "seasonNumber": 3,
+   "episodeNumber": 1,
+   "title": "Who Are You?",
+   "airDate": "2026-07-03",
+   "airDateUtc": "2026-07-03T04:00:00Z",
+   "runtime": 52,
+   "overview": "New mayor Juliette can’t remember anything from her time outside—or her past.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11751879/screencap/6a446a8e707aa.jpg"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 11751880,
+   "seasonNumber": 3,
+   "episodeNumber": 2,
+   "title": "It's All Good",
+   "airDate": "2026-07-10",
+   "airDateUtc": "2026-07-10T04:00:00Z",
+   "runtime": 52,
+   "overview": "Billings investigates a disappearance. Daniel Keene has a run-in with a reporter.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11751880/screencap/6a446aab4dade.jpg"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 11751881,
+   "seasonNumber": 3,
+   "episodeNumber": 3,
+   "title": "A Dark Web",
+   "airDate": "2026-07-17",
+   "airDateUtc": "2026-07-17T04:00:00Z",
+   "runtime": 49,
+   "overview": "Juliette takes control of her recovery process. Helen suffers consequences of her investigation.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11751881/screencap/6a50446395b2c.jpg"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 11751882,
+   "seasonNumber": 3,
+   "episodeNumber": 4,
+   "title": "Whatever You Do, Don't Go Home",
+   "airDate": "2026-07-24",
+   "airDateUtc": "2026-07-24T04:00:00Z",
+   "runtime": 48,
+   "overview": "The race to evade Camille leads Juliette to a shocking discovery. Daniel seeks help from a friend.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11751882/screencap/6a597eeeb36ff.jpg"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 11751883,
+   "seasonNumber": 3,
+   "episodeNumber": 5,
+   "title": "Memory",
+   "airDate": "2026-07-31",
+   "airDateUtc": "2026-07-31T04:00:00Z",
+   "runtime": 53,
+   "overview": "The events following Juliette’s return come to light—and unexpected allies are made.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11751883/screencap/6a62ba23597b6.jpg"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 11751884,
+   "seasonNumber": 3,
+   "episodeNumber": 6,
+   "title": "The Drive",
+   "airDate": "2026-08-07",
+   "airDateUtc": "2026-08-07T04:00:00Z",
+   "runtime": 54,
+   "overview": "Billings and Hank stumble on a new mystery. Daniel and Helen receive a surprising proposition.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11751884/screencap/6a6bf3e2aee74.jpg"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 11751885,
+   "seasonNumber": 3,
+   "episodeNumber": 7,
+   "title": "Radio",
+   "airDate": "2026-08-14",
+   "airDateUtc": "2026-08-14T04:00:00Z",
+   "runtime": 55,
+   "overview": "Juliette sends Lukas and Kennedy on a mission, as a desperate Camille threatens Robert to tell the truth.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11751885/screencap/6a75313152da9.jpg"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 11751886,
+   "seasonNumber": 3,
+   "episodeNumber": 8,
+   "title": "Gray Goo",
+   "airDate": "2026-08-21",
+   "airDateUtc": "2026-08-21T04:00:00Z",
+   "runtime": 56,
+   "overview": "Knox’s father Gus comes clean about a secret. Charlotte makes a life-changing decision.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11751886/screencap/6a7e68de4d4a9.jpg"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 11751887,
+   "seasonNumber": 3,
+   "episodeNumber": 9,
+   "title": "Farewell",
+   "airDate": "2026-08-28",
+   "airDateUtc": "2026-08-28T04:00:00Z",
+   "runtime": 62,
+   "overview": "The entire silo is stunned by an announcement from Camille. Daniel and Helen attend a special event.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11751887/screencap/6a87bdf257865.jpg"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 11751888,
+   "seasonNumber": 3,
+   "episodeNumber": 10,
+   "title": "Troy",
+   "airDate": "2026-09-04",
+   "airDateUtc": "2026-09-04T04:00:00Z",
+   "runtime": 60,
+   "finaleType": "season",
+   "overview": "A leader wakes to a new world.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11751888/screencap/6a90ddf1ed2e6.jpg"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 11962822,
+   "seasonNumber": 4,
+   "episodeNumber": 1,
+   "title": "TBA",
+   "airDate": "2027-07-09",
+   "airDateUtc": "2027-07-09T04:00:00Z",
+   "overview": "Juliette prepares Silo 18 for war against Silo 1.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11962822/screencap/6aece024359c9.jpg"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 12074963,
+   "seasonNumber": 4,
+   "episodeNumber": 2,
+   "title": "TBA",
+   "airDate": "2027-07-16",
+   "airDateUtc": "2027-07-16T04:00:00Z"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 12074964,
+   "seasonNumber": 4,
+   "episodeNumber": 3,
+   "title": "TBA",
+   "airDate": "2027-07-23",
+   "airDateUtc": "2027-07-23T04:00:00Z"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 12074965,
+   "seasonNumber": 4,
+   "episodeNumber": 4,
+   "title": "TBA",
+   "airDate": "2027-07-30",
+   "airDateUtc": "2027-07-30T04:00:00Z"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 12074966,
+   "seasonNumber": 4,
+   "episodeNumber": 5,
+   "title": "TBA",
+   "airDate": "2027-08-06",
+   "airDateUtc": "2027-08-06T04:00:00Z"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 12074967,
+   "seasonNumber": 4,
+   "episodeNumber": 6,
+   "title": "TBA",
+   "airDate": "2027-08-13",
+   "airDateUtc": "2027-08-13T04:00:00Z"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 12074968,
+   "seasonNumber": 4,
+   "episodeNumber": 7,
+   "title": "TBA",
+   "airDate": "2027-08-20",
+   "airDateUtc": "2027-08-20T04:00:00Z"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 12074969,
+   "seasonNumber": 4,
+   "episodeNumber": 8,
+   "title": "TBA",
+   "airDate": "2027-08-27",
+   "airDateUtc": "2027-08-27T04:00:00Z"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 12074970,
+   "seasonNumber": 4,
+   "episodeNumber": 9,
+   "title": "TBA",
+   "airDate": "2027-09-03",
+   "airDateUtc": "2027-09-03T04:00:00Z"
+  },
+  {
+   "tvdbShowId": 403245,
+   "tvdbId": 12074971,
+   "seasonNumber": 4,
+   "episodeNumber": 10,
+   "title": "TBA",
+   "airDate": "2027-09-10",
+   "airDateUtc": "2027-09-10T04:00:00Z"
+  }
+ ]
+}

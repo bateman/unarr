@@ -73,7 +73,7 @@
             "thumbnail": {
               "url": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg"
             },
-            "timestamp": "2026-11-08T20:57:09.8607198Z",
+            "timestamp": "2026-11-09T22:18:17.5725574Z",
             "title": "The Pitt - 1x01 - 7:00 A.M.",
             "url": "http://thetvdb.com/?tab=series&id=448176"
           }
@@ -161,7 +161,7 @@
             "thumbnail": {
               "url": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg"
             },
-            "timestamp": "2026-11-08T20:57:11.8221931Z",
+            "timestamp": "2026-11-09T22:18:19.5412800Z",
             "title": "The Pitt - 1x02 - 8:00 A.M.",
             "url": "http://thetvdb.com/?tab=series&id=448176"
           }
@@ -249,7 +249,7 @@
             "thumbnail": {
               "url": "https://artworks.thetvdb.com/banners/v4/series/422712/posters/6978fefe94ea5.jpg"
             },
-            "timestamp": "2026-11-08T20:57:13.8150663Z",
+            "timestamp": "2026-11-09T22:18:21.5317291Z",
             "title": "Daredevil: Born Again - 1x01 - Heaven's Half Hour",
             "url": "http://thetvdb.com/?tab=series&id=422712"
           }
@@ -337,7 +337,7 @@
             "thumbnail": {
               "url": "https://artworks.thetvdb.com/banners/v4/series/422712/posters/6978fefe94ea5.jpg"
             },
-            "timestamp": "2026-11-08T20:57:15.8224503Z",
+            "timestamp": "2026-11-09T22:18:23.5417059Z",
             "title": "Daredevil: Born Again - 1x02 - Optics",
             "url": "http://thetvdb.com/?tab=series&id=422712"
           }
@@ -353,7 +353,7 @@
       "service": "discord"
     }
   ],
-  "recordedAt": "2026-11-08T20:57:27Z",
+  "recordedAt": "2026-11-09T22:18:35Z",
   "request": {
     "method": "GET",
     "path": "/mock/notifications",

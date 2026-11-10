@@ -22,7 +22,7 @@
                 "value": "```/tv/The Pitt/Season 01/The Pitt (2025) - S01E02 - 8-00 A.M [WEBDL-480p][AAC 1.0][x264]-SuccessfulCrab.mkv```"
               }
             ],
-            "timestamp": "2026-11-08T20:59:44.7172948Z",
+            "timestamp": "2026-11-09T22:20:52.4215006Z",
             "title": "The Pitt - 1x02 - 8:00 A.M.",
             "url": "http://thetvdb.com/?tab=series&id=448176"
           }
@@ -42,7 +42,7 @@
         "applicationUrl": "",
         "deleteReason": "missingFromDisk",
         "episodeFile": {
-          "dateAdded": "2026-11-08T20:57:47.9750994Z",
+          "dateAdded": "2026-11-09T22:18:55.6872611Z",
           "id": 1074,
           "languages": [
             {
@@ -171,7 +171,7 @@
                 "value": "```/tv/The Pitt/Season 01/The Pitt (2025) - S01E01 - 7-00 A.M [AMZN][WEBDL-1080p][AAC 1.0][h264]-FLUX.mkv```"
               }
             ],
-            "timestamp": "2026-11-08T20:59:44.7364120Z",
+            "timestamp": "2026-11-09T22:20:52.4385194Z",
             "title": "The Pitt - 1x01 - 7:00 A.M.",
             "url": "http://thetvdb.com/?tab=series&id=448176"
           }
@@ -191,7 +191,7 @@
         "applicationUrl": "",
         "deleteReason": "missingFromDisk",
         "episodeFile": {
-          "dateAdded": "2026-11-08T20:59:12.7097754Z",
+          "dateAdded": "2026-11-09T22:20:20.4052336Z",
           "id": 1077,
           "languages": [
             {
@@ -314,7 +314,7 @@
                 "value": "```/tv/The Pitt/Season 01/The.Pitt.S01E03.1080p.WEB.H264-Fixture.mkv```"
               }
             ],
-            "timestamp": "2026-11-08T20:59:44.7534643Z",
+            "timestamp": "2026-11-09T22:20:52.4550593Z",
             "title": "The Pitt - 1x03 - 9:00 A.M.",
             "url": "http://thetvdb.com/?tab=series&id=448176"
           }
@@ -334,7 +334,7 @@
         "applicationUrl": "",
         "deleteReason": "missingFromDisk",
         "episodeFile": {
-          "dateAdded": "2026-11-08T20:59:32.6982935Z",
+          "dateAdded": "2026-11-09T22:20:40.3863851Z",
           "id": 1078,
           "languages": [
             {
@@ -435,7 +435,7 @@
       "service": "webhook"
     }
   ],
-  "recordedAt": "2026-11-08T20:59:56Z",
+  "recordedAt": "2026-11-09T22:21:04Z",
   "request": {
     "method": "GET",
     "path": "/mock/notifications",

@@ -1,0 +1,18 @@
+{
+  "body": [
+    {
+      "id": 478899172,
+      "name": "sonarr_backup_v4.0.20.3014_2026.11.09_23.00.58.zip",
+      "path": "/backup/manual/sonarr_backup_v4.0.20.3014_2026.11.09_23.00.58.zip",
+      "size": 1358860,
+      "time": "2026-11-09T23:00:58Z",
+      "type": "manual"
+    }
+  ],
+  "recordedAt": "2026-11-09T23:01:03Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/system/backup"
+  },
+  "status": 200
+}

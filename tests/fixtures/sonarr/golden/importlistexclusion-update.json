@@ -1,0 +1,14 @@
+{
+  "body": {
+    "id": 3,
+    "title": "Breaking Bad (excluded)",
+    "tvdbId": 81189
+  },
+  "recordedAt": "2026-11-09T22:24:43Z",
+  "request": {
+    "body": "bodies/importlistexclusion-update.json",
+    "method": "PUT",
+    "path": "/api/v3/importlistexclusion/3"
+  },
+  "status": 202
+}

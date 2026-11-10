@@ -1,0 +1,14 @@
+{
+ "seriesIds": [
+  51,
+  52
+ ],
+ "monitored": false,
+ "qualityProfileId": 6,
+ "seriesType": "standard",
+ "tags": [
+  2
+ ],
+ "applyTags": "add",
+ "moveFiles": false
+}

@@ -1,0 +1,492 @@
+{
+ "tvdbId": 391153,
+ "title": "Peacemaker",
+ "overview": "A man fights for peace at any cost, no matter how many people he has to kill to get it.",
+ "slug": "peacemaker",
+ "originalCountry": "usa",
+ "originalLanguage": "eng",
+ "language": "eng",
+ "firstAired": "2022-01-13",
+ "lastAired": "2025-10-09",
+ "tvMazeId": 50603,
+ "tmdbId": 110492,
+ "imdbId": "tt13146488",
+ "malIds": [],
+ "anidbIds": [],
+ "aniListIds": [],
+ "lastUpdated": "2026-11-06T08:54:49Z",
+ "status": "Ended",
+ "runtime": 42,
+ "timeOfDay": {
+  "hours": 21,
+  "minutes": 0
+ },
+ "originalNetwork": "HBO Max",
+ "network": "HBO Max",
+ "genres": [
+  "Action",
+  "Comedy",
+  "Science Fiction"
+ ],
+ "contentRating": "TV-MA",
+ "rating": {
+  "count": 202303,
+  "value": "8.2"
+ },
+ "alternativeTitles": [
+  {
+   "title": "DC’s Peacemaker"
+  }
+ ],
+ "actors": [
+  {
+   "name": "John Cena",
+   "character": "Christopher Smith",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/281914/photo/68eae9ddb5a58.jpg"
+  },
+  {
+   "name": "Danielle Brooks",
+   "character": "Leota Adebayo",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/296809/photo/6570700e2245e.jpg"
+  },
+  {
+   "name": "Freddie Stroma",
+   "character": "Adrian Chase",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/554349/photo/64738ff2b5c7b.jpg"
+  },
+  {
+   "name": "Chukwudi Iwuji",
+   "character": "Clemson Murn",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/590331/photo/64fb54e3d724c.jpg"
+  },
+  {
+   "name": "Jennifer Holland",
+   "character": "Emilia Harcourt",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/393463/photo/68eae4dbb5837.jpg"
+  },
+  {
+   "name": "Steve Agee",
+   "character": "John Economos",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/308124/photo/620f5b384a531.jpg"
+  },
+  {
+   "name": "Robert Patrick",
+   "character": "August Smith",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/278773/photo/67b8e0e3ad7e8.jpg"
+  },
+  {
+   "name": "Sol Rodriguez",
+   "character": "Sasha Bordeaux",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/7993383/photo/65f44d468db15.jpg"
+  },
+  {
+   "name": "Frank Grillo",
+   "character": "Rick Flagg Sr.",
+   "image": "https://artworks.thetvdb.com/banners/person/346594/primary.jpg"
+  },
+  {
+   "name": "Nhut Le",
+   "character": "Judomaster",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8233370/photo/68eae1b606e6c.jpg"
+  }
+ ],
+ "images": [
+  {
+   "coverType": "Banner",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/391153/banners/6161284158e54.jpg"
+  },
+  {
+   "coverType": "Poster",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/391153/posters/6883da0cd5deb.jpg"
+  },
+  {
+   "coverType": "Fanart",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/391153/backgrounds/61d60cbb8b7a0.jpg"
+  },
+  {
+   "coverType": "Clearlogo",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/391153/clearlogo/61bfa9d36a9ef.png"
+  }
+ ],
+ "seasons": [
+  {
+   "seasonNumber": 0
+  },
+  {
+   "seasonNumber": 1,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/1877874/posters/67fae6ca0d3b5.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 2,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2180964/posters/681e2c2a44ba5.jpg"
+    }
+   ]
+  }
+ ],
+ "episodes": [
+  {
+   "tvdbShowId": 391153,
+   "tvdbId": 8968770,
+   "seasonNumber": 0,
+   "episodeNumber": 1,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 5,
+   "title": "Opening Credits Behind The Scenes",
+   "airDate": "2022-01-21",
+   "airDateUtc": "2022-01-22T02:00:00Z",
+   "runtime": 2,
+   "finaleType": "season",
+   "overview": "Check out this behind-the-scenes of the iconic Peacemaker opening credits sequence! Watch as John Cena and the rest of the cast learn the dance moves."
+  },
+  {
+   "tvdbShowId": 391153,
+   "tvdbId": 8969506,
+   "seasonNumber": 0,
+   "episodeNumber": 2,
+   "title": "BFFs Featurette",
+   "airDate": "2021-12-07",
+   "airDateUtc": "2021-12-08T02:00:00Z",
+   "runtime": 2,
+   "overview": "Maybe the real peace is the friends we made along the way. Director James Gunn, John Cena and Freddie Stroma talk about their experience together on set, and the relationship between Peacemaker and Vigilante, which is… complicated."
+  },
+  {
+   "tvdbShowId": 391153,
+   "tvdbId": 8969540,
+   "seasonNumber": 0,
+   "episodeNumber": 3,
+   "title": "\"The Story So Far\" Featurette",
+   "airDate": "2022-01-07",
+   "airDateUtc": "2022-01-08T02:00:00Z",
+   "runtime": 4,
+   "overview": "In this behind-the-scenes clip, Peacemaker and Agent Emilia Harcourt piece together a \"factual\" account of Christopher Smith's history with the NSA, his experiences leading The Suicide Squad and the impending mission, Project Butterfly."
+  },
+  {
+   "tvdbShowId": 391153,
+   "tvdbId": 8977707,
+   "seasonNumber": 0,
+   "episodeNumber": 4,
+   "title": "Team Member: Peacemaker",
+   "airDate": "2022-01-05",
+   "airDateUtc": "2022-01-06T02:00:00Z",
+   "runtime": 2,
+   "overview": "John Cena gives the inside scoop on Peacemaker"
+  },
+  {
+   "tvdbShowId": 391153,
+   "tvdbId": 8969508,
+   "seasonNumber": 0,
+   "episodeNumber": 5,
+   "title": "Team Member: Murn",
+   "airDate": "2022-01-06",
+   "airDateUtc": "2022-01-07T02:00:00Z",
+   "runtime": 1,
+   "overview": "Chukwudi Iwuji gives the inside scoop on \"Murn\" his character from season 1 of Peacemaker"
+  },
+  {
+   "tvdbShowId": 391153,
+   "tvdbId": 8969509,
+   "seasonNumber": 0,
+   "episodeNumber": 6,
+   "title": "Team Member: Harcourt",
+   "airDate": "2022-01-07",
+   "airDateUtc": "2022-01-08T02:00:00Z",
+   "runtime": 1,
+   "overview": "Jennifer Holland gives the inside scoop on \"Harcourt\" her character from season 1 of Peacemaker"
+  },
+  {
+   "tvdbShowId": 391153,
+   "tvdbId": 8969510,
+   "seasonNumber": 0,
+   "episodeNumber": 7,
+   "title": "Team Member: Adebayo",
+   "airDate": "2022-01-08",
+   "airDateUtc": "2022-01-09T02:00:00Z",
+   "runtime": 1,
+   "overview": "Danielle Brooks gives the inside scoop on \"Adebayo\" her character from season 1 of Peacemaker"
+  },
+  {
+   "tvdbShowId": 391153,
+   "tvdbId": 8969511,
+   "seasonNumber": 0,
+   "episodeNumber": 8,
+   "title": "Team Member: Vigilante",
+   "airDate": "2022-01-09",
+   "airDateUtc": "2022-01-10T02:00:00Z",
+   "runtime": 1,
+   "overview": "Freddie Stroma gives the inside scoop on \"Vigilante\" his character from season 1 of Peacemaker"
+  },
+  {
+   "tvdbShowId": 391153,
+   "tvdbId": 8969512,
+   "seasonNumber": 0,
+   "episodeNumber": 9,
+   "title": "Team Member: Economos",
+   "airDate": "2022-01-09",
+   "airDateUtc": "2022-01-10T02:00:00Z",
+   "runtime": 1,
+   "overview": "Steve Agee gives the inside scoop on \"Economos\" his character from season 1 of Peacemaker"
+  },
+  {
+   "tvdbShowId": 391153,
+   "tvdbId": 8969516,
+   "seasonNumber": 0,
+   "episodeNumber": 10,
+   "title": "Cast Interview",
+   "airDate": "2022-01-14",
+   "airDateUtc": "2022-01-15T02:00:00Z",
+   "runtime": 6
+  },
+  {
+   "tvdbShowId": 391153,
+   "tvdbId": 8969519,
+   "seasonNumber": 0,
+   "episodeNumber": 11,
+   "title": "\"Danielle Brooks Explains DC Comics\" Featurette",
+   "airDate": "2022-01-16",
+   "airDateUtc": "2022-01-17T02:00:00Z",
+   "runtime": 2
+  },
+  {
+   "tvdbShowId": 391153,
+   "tvdbId": 8969520,
+   "seasonNumber": 0,
+   "episodeNumber": 12,
+   "title": "James Gunn Interview",
+   "airDate": "2022-01-17",
+   "airDateUtc": "2022-01-18T02:00:00Z",
+   "runtime": 4
+  },
+  {
+   "tvdbShowId": 391153,
+   "tvdbId": 8969521,
+   "seasonNumber": 0,
+   "episodeNumber": 13,
+   "title": "\"Dramatic Comic Book Reading with Chuk\" Featurette",
+   "airDate": "2022-01-18",
+   "airDateUtc": "2022-01-19T02:00:00Z",
+   "runtime": 2
+  },
+  {
+   "tvdbShowId": 391153,
+   "tvdbId": 8969523,
+   "seasonNumber": 0,
+   "episodeNumber": 14,
+   "title": "Episode 5 Outtakes",
+   "airDate": "2022-01-27",
+   "airDateUtc": "2022-01-28T02:00:00Z",
+   "runtime": 2,
+   "finaleType": "season",
+   "overview": "How many celebrities can you name in two minutes? Watch Episode 5, Monkey Dory outtakes with John Cena and Steve Agee improvising the scene."
+  },
+  {
+   "tvdbShowId": 391153,
+   "tvdbId": 8020977,
+   "seasonNumber": 1,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 1,
+   "title": "A Whole New Whirled",
+   "airDate": "2022-01-13",
+   "airDateUtc": "2022-01-14T02:00:00Z",
+   "runtime": 46,
+   "overview": "A miraculously recovered Peacemaker returns home only to discover that he’s been assigned to a new task force. Later, Peacemaker pays a visit to his steely father Auggie to retrieve his trusted sidekick Eagly.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8020977/screencap/68a874f258b0d.jpg"
+  },
+  {
+   "tvdbShowId": 391153,
+   "tvdbId": 8507901,
+   "seasonNumber": 1,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 2,
+   "title": "Best Friends for Never",
+   "airDate": "2022-01-13",
+   "airDateUtc": "2022-01-14T02:00:00Z",
+   "runtime": 40,
+   "overview": "After Peacemaker’s hazardous escape, tension and mistrust build within the team. Later, as Peacemaker grapples with his new assignment, he receives a surprise visitor.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8507901/screencap/68a87509c207e.jpg"
+  },
+  {
+   "tvdbShowId": 391153,
+   "tvdbId": 8507902,
+   "seasonNumber": 1,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 3,
+   "title": "Better Goff Dead",
+   "airDate": "2022-01-13",
+   "airDateUtc": "2022-01-14T02:00:00Z",
+   "runtime": 39,
+   "overview": "On their first official mission to assassinate suspected \"butterflies,\" Economos and Murn bond, and Peacemaker and Harcourt reach an understanding. But the whole job goes sideways with the arrival of Judomaster.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8507902/screencap/68a87521027a3.jpg"
+  },
+  {
+   "tvdbShowId": 391153,
+   "tvdbId": 8507903,
+   "seasonNumber": 1,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 4,
+   "title": "The Choad Less Traveled",
+   "airDate": "2022-01-20",
+   "airDateUtc": "2022-01-21T02:00:00Z",
+   "runtime": 47,
+   "overview": "Following a somewhat successful mission, Murn recruits Vigilante. Meanwhile, after learning that the team helped land his father in prison, Peacemaker confronts his complicated past.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8507903/screencap/68a87533e0605.jpg"
+  },
+  {
+   "tvdbShowId": 391153,
+   "tvdbId": 8869903,
+   "seasonNumber": 1,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 5,
+   "title": "Monkey Dory",
+   "airDate": "2022-01-27",
+   "airDateUtc": "2022-01-28T02:00:00Z",
+   "runtime": 42,
+   "overview": "The team scouts the apparent hub for the aliens' food supply, only to come face-to-face with a full-fledged invasion. Meanwhile, Auggie’s attempt to sell out his son to the police is complicated by Murn’s mysterious contact.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8869903/screencap/61f253b7543ef.jpg"
+  },
+  {
+   "tvdbShowId": 391153,
+   "tvdbId": 8869905,
+   "seasonNumber": 1,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 6,
+   "title": "Murn After Reading",
+   "airDate": "2022-02-03",
+   "airDateUtc": "2022-02-04T02:00:00Z",
+   "runtime": 46,
+   "overview": "Murn reveals his deepest secret. Auggie is set free. And the botched arrest of Peacemaker sends alien Goff into an unexpected new host.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8869905/screencap/68a87577bea16.jpg"
+  },
+  {
+   "tvdbShowId": 391153,
+   "tvdbId": 8869908,
+   "seasonNumber": 1,
+   "episodeNumber": 7,
+   "absoluteEpisodeNumber": 7,
+   "title": "Stop Dragon My Heart Around",
+   "airDate": "2022-02-10",
+   "airDateUtc": "2022-02-11T02:00:00Z",
+   "runtime": 39,
+   "overview": "Harcourt, Murn and Adebayo find themselves surrounded by an alien force, while Peacemaker squares off against his father with help from Vigilante and Economos.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8869908/screencap/6204c83c76d0e.jpg"
+  },
+  {
+   "tvdbShowId": 391153,
+   "tvdbId": 8869910,
+   "seasonNumber": 1,
+   "episodeNumber": 8,
+   "absoluteEpisodeNumber": 8,
+   "title": "It's Cow or Never",
+   "airDate": "2022-02-17",
+   "airDateUtc": "2022-02-18T02:00:00Z",
+   "runtime": 44,
+   "finaleType": "season",
+   "overview": "With Peacemaker and Adebayo at odds, can the team kill the cow once and for all -- or will their fracture give the aliens the opening they need to complete its teleportation?",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8869910/screencap/68a875af80273.jpg"
+  },
+  {
+   "tvdbShowId": 391153,
+   "tvdbId": 11071140,
+   "seasonNumber": 2,
+   "episodeNumber": 1,
+   "title": "The Ties That Grind",
+   "airDate": "2025-08-21",
+   "airDateUtc": "2025-08-22T01:00:00Z",
+   "runtime": 45,
+   "overview": "Hoping to find a place among them, Peacemaker interviews for a spot in the Justice Gang, while Harcourt struggles to find work on the heels of Adebayo's bombshell press conference. Economos is forced to surveil Peacemaker.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11071140/screencap/68a8771377028.jpg"
+  },
+  {
+   "tvdbShowId": 391153,
+   "tvdbId": 11130236,
+   "seasonNumber": 2,
+   "episodeNumber": 2,
+   "title": "A Man is Only as Good as His Bird",
+   "airDate": "2025-08-28",
+   "airDateUtc": "2025-08-29T01:00:00Z",
+   "runtime": 48,
+   "overview": "As Economos clashes with his new handler, Peacemaker must deal with the consequences of his actions in the alternate dimension.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11130236/screencap/68b15cfd15c9f.jpg"
+  },
+  {
+   "tvdbShowId": 391153,
+   "tvdbId": 11130237,
+   "seasonNumber": 2,
+   "episodeNumber": 3,
+   "title": "Another Rick Up My Sleeve",
+   "airDate": "2025-09-04",
+   "airDateUtc": "2025-09-05T01:00:00Z",
+   "runtime": 38,
+   "overview": "While Peacemaker is lauded as a hero, the alternate dimension also enables him to explore the depth of his connection with Harcourt. Later, Economos catches heat for the team's bungled mission.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11130237/screencap/68cd289e5a578.jpg"
+  },
+  {
+   "tvdbShowId": 391153,
+   "tvdbId": 11130238,
+   "seasonNumber": 2,
+   "episodeNumber": 4,
+   "title": "Need I Say Door",
+   "airDate": "2025-09-11",
+   "airDateUtc": "2025-09-12T01:00:00Z",
+   "runtime": 38,
+   "overview": "With the help of new recruits Red St. Wild and Judomaster, A.R.G.U.S. lays siege to Peacemaker's home in search of the QUC. Meanwhile, Harcourt receives a tempting offer from Flag – which comes at a steep cost to Peacemaker.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11130238/screencap/68c3f2f909331.jpg"
+  },
+  {
+   "tvdbShowId": 391153,
+   "tvdbId": 11130239,
+   "seasonNumber": 2,
+   "episodeNumber": 5,
+   "title": "Back to the Suture",
+   "airDate": "2025-09-18",
+   "airDateUtc": "2025-09-19T01:00:00Z",
+   "runtime": 37,
+   "overview": "Red’s ritual reveal’s Eagly’s location while Flag confronts Peacemaker; as Peacemaker makes a life-changing choice, Adebayo and Vigilante try to unite the 11th Street Kids.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11130239/screencap/68cd28bd41665.jpg"
+  },
+  {
+   "tvdbShowId": 391153,
+   "tvdbId": 11130240,
+   "seasonNumber": 2,
+   "episodeNumber": 6,
+   "title": "Ignorance Is Chris",
+   "airDate": "2025-09-25",
+   "airDateUtc": "2025-09-26T01:00:00Z",
+   "runtime": 34,
+   "overview": "As Peacemaker settles into his new life, the 11th Street Kids decide they will risk it all to bring their friend back home. Meanwhile, Flag doubles down on his efforts to hold Peacemaker accountable by seeking help from an unlikely source.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11130240/screencap/68d5e605441a5.jpg"
+  },
+  {
+   "tvdbShowId": 391153,
+   "tvdbId": 11130241,
+   "seasonNumber": 2,
+   "episodeNumber": 7,
+   "title": "Like a Keith in the Night",
+   "airDate": "2025-10-02",
+   "airDateUtc": "2025-10-03T01:00:00Z",
+   "runtime": 33,
+   "overview": "As Flag and A.R.G.U.S. close in, the 11th Street Kids attempt to keep the ever-increasing dangers of the alternate world around them at bay.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11130241/screencap/68e92ed69bd26.jpg"
+  },
+  {
+   "tvdbShowId": 391153,
+   "tvdbId": 11130242,
+   "seasonNumber": 2,
+   "episodeNumber": 8,
+   "title": "Full Nelson",
+   "airDate": "2025-10-09",
+   "airDateUtc": "2025-10-10T01:00:00Z",
+   "runtime": 57,
+   "finaleType": "series",
+   "overview": "Peacemaker gets a wake-up call from the ever-loyal 11th Street Kids. Later, Peacemaker and Harcourt must rectify their past, while Flag's mission poses an ever-increasing threat to everyone's future.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11130242/screencap/68e92ef9f1413.jpg"
+  }
+ ]
+}

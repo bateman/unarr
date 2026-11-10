@@ -460,7 +460,7 @@
     "name": "HD-1080p - ITA",
     "upgradeAllowed": true
   },
-  "recordedAt": "2026-11-08T20:55:52Z",
+  "recordedAt": "2026-11-09T22:16:58Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/qualityprofile/10"

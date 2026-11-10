@@ -1,0 +1,15 @@
+{
+  "body": {
+    "host": "nzbget.invalid",
+    "id": 1,
+    "localPath": "/downloads/complete/",
+    "remotePath": "/remote/done/"
+  },
+  "recordedAt": "2026-11-09T22:24:42Z",
+  "request": {
+    "body": "bodies/remotepathmapping-update.json",
+    "method": "PUT",
+    "path": "/api/v3/remotepathmapping/1"
+  },
+  "status": 202
+}

@@ -25,6 +25,23 @@ pub enum ApiError {
     BadRequest(String),
     /// `ValidationException`: a 400 listing the failures.
     Validation(Vec<unarr_core::validation::ValidationFailure>),
+    /// A `ValidationException` a service raised with bare
+    /// `ValidationFailure`s: only what is set shows.
+    ValidationPlain(Vec<unarr_core::validation::ValidationFailure>),
+    /// An exception the originals let escape: a 500 with its message and
+    /// a description that names it.
+    ServerException {
+        message: String,
+        exception: String,
+    },
+    /// An `NzbDroneClientException` subclass with `BadRequest`: a 400 with
+    /// its message and a description that names it.
+    ClientException {
+        message: String,
+        exception: String,
+    },
+    /// `MethodNotAllowedException`: a 405 with message and content.
+    MethodNotAllowed(String),
     Internal(anyhow::Error),
 }
 
@@ -78,6 +95,31 @@ impl IntoResponse for ApiError {
                 let body: Vec<serde_json::Value> = failures.iter().map(|f| f.to_json()).collect();
                 (StatusCode::BAD_REQUEST, Json(body)).into_response()
             }
+            ApiError::ValidationPlain(failures) => {
+                let body: Vec<serde_json::Value> = failures.iter().map(|f| f.to_plain_json()).collect();
+                (StatusCode::BAD_REQUEST, Json(body)).into_response()
+            }
+            ApiError::ServerException { message, exception } => (
+                StatusCode::INTERNAL_SERVER_ERROR,
+                Json(json!({
+                    "message": message,
+                    "description": format!("{exception}: {message}"),
+                })),
+            )
+                .into_response(),
+            ApiError::ClientException { message, exception } => (
+                StatusCode::BAD_REQUEST,
+                Json(json!({
+                    "message": message,
+                    "description": format!("{exception}: {message}"),
+                })),
+            )
+                .into_response(),
+            ApiError::MethodNotAllowed(message) => (
+                StatusCode::METHOD_NOT_ALLOWED,
+                Json(json!({ "message": format!("MethodNotAllowed: {message}"), "content": message })),
+            )
+                .into_response(),
             ApiError::Internal(e) => {
                 tracing::error!(error = ?e, "request failed");
                 (

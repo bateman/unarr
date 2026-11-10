@@ -1,0 +1,8 @@
+{
+ "enableUsenet": false,
+ "enableTorrent": false,
+ "preferredProtocol": "usenet",
+ "usenetDelay": 0,
+ "torrentDelay": 0,
+ "tags": []
+}

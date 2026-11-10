@@ -1,0 +1,24 @@
+{
+  "body": {
+    "bypassIfAboveCustomFormatScore": true,
+    "bypassIfHighestQuality": false,
+    "enableTorrent": true,
+    "enableUsenet": true,
+    "id": 3,
+    "minimumCustomFormatScore": 100,
+    "order": 2,
+    "preferredProtocol": "torrent",
+    "tags": [
+      1
+    ],
+    "torrentDelay": 120,
+    "usenetDelay": 30
+  },
+  "recordedAt": "2026-11-09T22:24:43Z",
+  "request": {
+    "body": "bodies/delayprofile-update.json",
+    "method": "PUT",
+    "path": "/api/v3/delayprofile/3"
+  },
+  "status": 202
+}

@@ -19,7 +19,7 @@
           "name": "WEB Tier 01"
         }
       ],
-      "dateAdded": "2026-11-08T20:59:12Z",
+      "dateAdded": "2026-11-09T22:20:20Z",
       "id": 1077,
       "indexerFlags": 0,
       "languages": [
@@ -78,7 +78,7 @@
         "remoteUrl": "https://artworks.thetvdb.com/banners/v4/episode/10407559/screencap/69681884ba5cd.jpg"
       }
     ],
-    "lastSearchTime": "2026-11-08T20:56:40Z",
+    "lastSearchTime": "2026-11-09T22:17:48Z",
     "monitored": false,
     "overview": "While attempting to distract himself from the anniversary of his mentor’s death, Dr. Robby introduces a fresh batch of interns to life in the ER.",
     "runtime": 53,
@@ -160,7 +160,7 @@
     "tvdbId": 10407559,
     "unverifiedSceneNumbering": false
   },
-  "recordedAt": "2026-11-08T20:59:32Z",
+  "recordedAt": "2026-11-09T22:20:40Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/episode/1"

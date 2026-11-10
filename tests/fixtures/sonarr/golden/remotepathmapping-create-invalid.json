@@ -1,0 +1,36 @@
+{
+  "body": [
+    {
+      "attemptedValue": "",
+      "errorCode": "NotEmptyValidator",
+      "errorMessage": "'Host' must not be empty.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Host",
+        "propertyValue": ""
+      },
+      "propertyName": "Host",
+      "severity": "error"
+    },
+    {
+      "attemptedValue": "/nowhere/at/all/",
+      "errorCode": "PathExistsValidator",
+      "errorMessage": "Path '/nowhere/at/all/' does not exist",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "path": "/nowhere/at/all/",
+        "propertyName": "Local Path",
+        "propertyValue": "/nowhere/at/all/"
+      },
+      "propertyName": "LocalPath",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-09T22:24:42Z",
+  "request": {
+    "body": "bodies/remotepathmapping-create-invalid.json",
+    "method": "POST",
+    "path": "/api/v3/remotepathmapping"
+  },
+  "status": 400
+}

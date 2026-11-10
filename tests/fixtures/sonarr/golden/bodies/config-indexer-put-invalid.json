@@ -1,0 +1,6 @@
+{
+ "$from": "config-indexer",
+ "$set": {
+  "rssSyncInterval": 5
+ }
+}

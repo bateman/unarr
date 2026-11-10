@@ -1,0 +1,445 @@
+{
+ "tvdbId": 416744,
+ "title": "Fallout",
+ "overview": "The story of haves and have-nots in a world in which there’s almost nothing left to have. 200 years after the apocalypse, the gentle denizens of luxury fallout shelters are forced to return to the incredibly complex, gleefully weird and highly violent universe waiting for them above.",
+ "slug": "fallout",
+ "originalCountry": "usa",
+ "originalLanguage": "eng",
+ "language": "eng",
+ "firstAired": "2024-04-11",
+ "lastAired": "2026-02-03",
+ "tvMazeId": 49041,
+ "tmdbId": 106379,
+ "imdbId": "tt12637874",
+ "malIds": [],
+ "anidbIds": [],
+ "aniListIds": [],
+ "lastUpdated": "2026-11-05T18:46:55Z",
+ "status": "Continuing",
+ "runtime": 56,
+ "timeOfDay": {
+  "hours": 2,
+  "minutes": 0
+ },
+ "originalNetwork": "Prime Video",
+ "network": "Prime Video",
+ "genres": [
+  "Action",
+  "Drama",
+  "Science Fiction",
+  "War"
+ ],
+ "contentRating": "TV-MA",
+ "rating": {
+  "count": 407514,
+  "value": "8.3"
+ },
+ "actors": [
+  {
+   "name": "Ella Purnell",
+   "character": "Lucy MacLean",
+   "image": "https://artworks.thetvdb.com/banners/person/599610/6032c4e1a91d1.jpg"
+  },
+  {
+   "name": "Aaron Moten",
+   "character": "Maximus",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8429774/photo/656de413b9ddb.jpg"
+  },
+  {
+   "name": "Kyle MacLachlan",
+   "character": "Hank MacLean",
+   "image": "https://artworks.thetvdb.com/banners/person/308801/6015ec36c7c3a.jpg"
+  },
+  {
+   "name": "Moises Arias",
+   "character": "Norm MacLean",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/7938181/photo/65f2e2e001f39.jpg"
+  },
+  {
+   "name": "Walton Goggins",
+   "character": "The Ghoul / Cooper Howard",
+   "image": "https://artworks.thetvdb.com/banners/person/248314/22198561.jpg"
+  },
+  {
+   "name": "Frances Turner",
+   "character": "Barb Howard"
+  },
+  {
+   "name": "Sarita Choudhury",
+   "character": "Lee Moldaver",
+   "image": "https://artworks.thetvdb.com/banners/person/312590/64f257c281fed.jpg"
+  },
+  {
+   "name": "Leslie Uggams",
+   "character": "Betty Pearson",
+   "image": "https://artworks.thetvdb.com/banners/person/287253/5f9b159977b5c.jpg"
+  },
+  {
+   "name": "Johnny Pemberton",
+   "character": "Thaddeus",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/484302/photo/6a0aa63b36df6.jpg"
+  },
+  {
+   "name": "Zach Cherry",
+   "character": "Woody Thomas",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/296928/photo/62656c277637b.jpg"
+  },
+  {
+   "name": "Annabel O'Hagan",
+   "character": "Stephanie Harper"
+  },
+  {
+   "name": "Dave Register",
+   "character": "Chet"
+  },
+  {
+   "name": "Rodrigo Luzzi",
+   "character": "Reg McPhee"
+  },
+  {
+   "name": "Leer Leary",
+   "character": "Davey"
+  },
+  {
+   "name": "Michael Cristofer",
+   "character": "Elder Cleric Quintus"
+  },
+  {
+   "name": "Justin Theroux",
+   "character": "Robert House",
+   "image": "https://artworks.thetvdb.com/banners/person/327279/60720267bfa26.jpg"
+  },
+  {
+   "name": "Rachel Marsh",
+   "character": "Claudia",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8159616/photo/62abb2786253e.jpg"
+  },
+  {
+   "name": "Adam Faison",
+   "character": "Ronnie McCurtry",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/476261/photo/6343b12055ca8.jpg"
+  },
+  {
+   "name": "Rajat Suresh",
+   "character": "Clark"
+  },
+  {
+   "name": "Jeremy Levick",
+   "character": "Pete"
+  },
+  {
+   "name": "Martha Kelly",
+   "character": "Representative Welch",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/348807/photo/69ed7a46ebb25.jpg"
+  },
+  {
+   "name": "Jon Gries",
+   "character": "Biff",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/275561/photo/6592c5045a4af.jpg"
+  }
+ ],
+ "images": [
+  {
+   "coverType": "Banner",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/416744/banners/66188de1e3130.jpg"
+  },
+  {
+   "coverType": "Poster",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/416744/posters/656c96bea0c11.jpg"
+  },
+  {
+   "coverType": "Fanart",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/416744/backgrounds/694060bceeb9e.jpg"
+  },
+  {
+   "coverType": "Clearlogo",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/416744/clearlogo/656dc5796cdad.png"
+  }
+ ],
+ "seasons": [
+  {
+   "seasonNumber": 0,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/1985739/posters/6954df7de6bb3.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 1,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/1985740/posters/660f30b524d51.jpg"
+    },
+    {
+     "coverType": "Banner",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/1985740/banners/662dd9e954cf7.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 2,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2201569/posters/6907fb1824ef0.jpg"
+    }
+   ]
+  }
+ ],
+ "episodes": [
+  {
+   "tvdbShowId": 416744,
+   "tvdbId": 10172936,
+   "seasonNumber": 0,
+   "episodeNumber": 1,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 1,
+   "title": "A Special LIVE Report from Galaxy News",
+   "airDate": "2023-12-02",
+   "airDateUtc": "2023-12-02T07:00:00Z",
+   "runtime": 60,
+   "finaleType": "season",
+   "overview": "Galaxy News is here live with an exclusive look at the next generation of apocalypse-proof, purpose-built luxury housing, sponsored by our friends at Vault-Tec.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10172936/screencap/656b882d06616.jpg"
+  },
+  {
+   "tvdbShowId": 416744,
+   "tvdbId": 11248994,
+   "seasonNumber": 0,
+   "episodeNumber": 2,
+   "airedAfterSeasonNumber": 1,
+   "title": "Inside Season One",
+   "airDate": "2024-08-19",
+   "airDateUtc": "2024-08-19T06:00:00Z",
+   "runtime": 18,
+   "overview": "Go inside the epic production of Season One, from Vault to Wasteland, with the cast and crew of the Emmy-nominated series.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11248994/screencap/6879ff92c2e19.jpg"
+  },
+  {
+   "tvdbShowId": 416744,
+   "tvdbId": 11248995,
+   "seasonNumber": 0,
+   "episodeNumber": 3,
+   "airedAfterSeasonNumber": 1,
+   "title": "The Making of Season One",
+   "airDate": "2025-07-09",
+   "airDateUtc": "2025-07-09T06:00:00Z",
+   "runtime": 27,
+   "finaleType": "season",
+   "overview": "Fallout Season One behind the scenes shows how the hit video game was adapted into a drama series from LED stages, jet packs, production design, costumes, and more to create the Wasteland. Hear from stars Walton Goggins, Ell Purnell, Aaron Moten, as well as the director and crew what it was like on the expansive locations used as sets."
+  },
+  {
+   "tvdbShowId": 416744,
+   "tvdbId": 9027007,
+   "seasonNumber": 1,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 1,
+   "title": "The End",
+   "airDate": "2024-04-11",
+   "airDateUtc": "2024-04-11T06:00:00Z",
+   "runtime": 75,
+   "overview": "Okey dokey...",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9027007/screencap/6617378751868.jpg"
+  },
+  {
+   "tvdbShowId": 416744,
+   "tvdbId": 10361187,
+   "seasonNumber": 1,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 2,
+   "title": "The Target",
+   "airDate": "2024-04-11",
+   "airDateUtc": "2024-04-11T06:00:00Z",
+   "runtime": 66,
+   "overview": "I know life can't have been easy up here...",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10361187/screencap/661737b9756db.jpg"
+  },
+  {
+   "tvdbShowId": 416744,
+   "tvdbId": 10361188,
+   "seasonNumber": 1,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 3,
+   "title": "The Head",
+   "airDate": "2024-04-11",
+   "airDateUtc": "2024-04-11T06:00:00Z",
+   "runtime": 57,
+   "overview": "The Wasteland's got its own Golden Rule...",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10361188/screencap/661737d20d80f.jpg"
+  },
+  {
+   "tvdbShowId": 416744,
+   "tvdbId": 10361189,
+   "seasonNumber": 1,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 4,
+   "title": "The Ghouls",
+   "airDate": "2024-04-11",
+   "airDateUtc": "2024-04-11T06:00:00Z",
+   "runtime": 49,
+   "overview": "Death to Management",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10361189/screencap/6617380237f9e.jpg"
+  },
+  {
+   "tvdbShowId": 416744,
+   "tvdbId": 10361190,
+   "seasonNumber": 1,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 5,
+   "title": "The Past",
+   "airDate": "2024-04-11",
+   "airDateUtc": "2024-04-11T06:00:00Z",
+   "runtime": 45,
+   "overview": "Everyone wants to save the world...",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10361190/screencap/6617381af1ecc.jpg"
+  },
+  {
+   "tvdbShowId": 416744,
+   "tvdbId": 10361191,
+   "seasonNumber": 1,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 6,
+   "title": "The Trap",
+   "airDate": "2024-04-11",
+   "airDateUtc": "2024-04-11T06:00:00Z",
+   "runtime": 61,
+   "overview": "What happens when the ranchers have more power than the Sheriff?",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10361191/screencap/66173836703b2.jpg"
+  },
+  {
+   "tvdbShowId": 416744,
+   "tvdbId": 10361192,
+   "seasonNumber": 1,
+   "episodeNumber": 7,
+   "absoluteEpisodeNumber": 7,
+   "title": "The Radio",
+   "airDate": "2024-04-11",
+   "airDateUtc": "2024-04-11T06:00:00Z",
+   "runtime": 61,
+   "overview": "Every generation has their own dumbass ideas...",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10361192/screencap/6617384bca398.jpg"
+  },
+  {
+   "tvdbShowId": 416744,
+   "tvdbId": 10361193,
+   "seasonNumber": 1,
+   "episodeNumber": 8,
+   "absoluteEpisodeNumber": 8,
+   "title": "The Beginning",
+   "airDate": "2024-04-11",
+   "airDateUtc": "2024-04-11T06:00:00Z",
+   "runtime": 62,
+   "finaleType": "season",
+   "overview": "War...",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10361193/screencap/6617387033739.jpg"
+  },
+  {
+   "tvdbShowId": 416744,
+   "tvdbId": 11296159,
+   "seasonNumber": 2,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 9,
+   "title": "The Innovator",
+   "airDate": "2025-12-17",
+   "airDateUtc": "2025-12-17T07:00:00Z",
+   "runtime": 60,
+   "overview": "Every dollar spent is a vote cast.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11296159/screencap/69421637799cf.jpg"
+  },
+  {
+   "tvdbShowId": 416744,
+   "tvdbId": 11296171,
+   "seasonNumber": 2,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 10,
+   "title": "The Golden Rule",
+   "airDate": "2025-12-24",
+   "airDateUtc": "2025-12-24T07:00:00Z",
+   "runtime": 56,
+   "overview": "You can't put a price on family…",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11296171/screencap/694b9ea2a6d56.jpg"
+  },
+  {
+   "tvdbShowId": 416744,
+   "tvdbId": 11296172,
+   "seasonNumber": 2,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 11,
+   "title": "The Profligate",
+   "airDate": "2025-12-31",
+   "airDateUtc": "2025-12-31T07:00:00Z",
+   "runtime": 53,
+   "overview": "Most kids are dead by this age.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11296172/screencap/6954da0456876.jpg"
+  },
+  {
+   "tvdbShowId": 416744,
+   "tvdbId": 11296173,
+   "seasonNumber": 2,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 12,
+   "title": "The Demon in the Snow",
+   "airDate": "2026-01-07",
+   "airDateUtc": "2026-01-07T07:00:00Z",
+   "runtime": 47,
+   "overview": "Rock to spear and so on...",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11296173/screencap/695e160a52e1f.jpg"
+  },
+  {
+   "tvdbShowId": 416744,
+   "tvdbId": 11296174,
+   "seasonNumber": 2,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 13,
+   "title": "The Wrangler",
+   "airDate": "2026-01-14",
+   "airDateUtc": "2026-01-14T07:00:00Z",
+   "runtime": 54,
+   "overview": "Big Whoop.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11296174/screencap/69675c05084ae.jpg"
+  },
+  {
+   "tvdbShowId": 416744,
+   "tvdbId": 11296175,
+   "seasonNumber": 2,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 14,
+   "title": "The Other Player",
+   "airDate": "2026-01-21",
+   "airDateUtc": "2026-01-21T07:00:00Z",
+   "runtime": 49,
+   "overview": "I remember good people.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11296175/screencap/697088a99f2d2.jpg"
+  },
+  {
+   "tvdbShowId": 416744,
+   "tvdbId": 11296176,
+   "seasonNumber": 2,
+   "episodeNumber": 7,
+   "absoluteEpisodeNumber": 15,
+   "title": "The Handoff",
+   "airDate": "2026-01-27",
+   "airDateUtc": "2026-01-27T07:00:00Z",
+   "runtime": 49,
+   "overview": "You always end up back where you started.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11296176/screencap/69796fb234955.jpg"
+  },
+  {
+   "tvdbShowId": 416744,
+   "tvdbId": 11296177,
+   "seasonNumber": 2,
+   "episodeNumber": 8,
+   "absoluteEpisodeNumber": 16,
+   "title": "The Strip",
+   "airDate": "2026-02-03",
+   "airDateUtc": "2026-02-03T07:00:00Z",
+   "runtime": 54,
+   "finaleType": "season",
+   "overview": "Winning might be overrated…",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11296177/screencap/6982a9b8ae7c7.jpg"
+  }
+ ]
+}

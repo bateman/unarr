@@ -1,0 +1,17 @@
+{
+  "body": [
+    {
+      "errorMessage": "Unable to connect to import list: HTTP request failed: [500:InternalServerError] [GET] at [https://api.simkl.com/sync/all-items/shows/completed]. Check the log surrounding this error for details.",
+      "isWarning": false,
+      "propertyName": "",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-09T22:24:47Z",
+  "request": {
+    "body": "bodies/importlist-test-failing.json",
+    "method": "POST",
+    "path": "/api/v3/importlist/test"
+  },
+  "status": 400
+}

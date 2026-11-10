@@ -1,0 +1,23 @@
+{
+  "body": [
+    {
+      "attemptedValue": 5,
+      "errorCode": "RssSyncIntervalValidator",
+      "errorMessage": "Must be between 10 and 120 or 0 to disable",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Rss Sync Interval",
+        "propertyValue": 5
+      },
+      "propertyName": "RssSyncInterval",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-09T22:24:42Z",
+  "request": {
+    "body": "bodies/config-indexer-put-invalid.json",
+    "method": "PUT",
+    "path": "/api/v3/config/indexer/1"
+  },
+  "status": 400
+}

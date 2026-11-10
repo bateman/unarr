@@ -1,0 +1,9 @@
+{
+  "body": [],
+  "recordedAt": "2026-11-09T22:23:22Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/series/lookup?term=tvmaze:44933"
+  },
+  "status": 200
+}

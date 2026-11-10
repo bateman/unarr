@@ -254,8 +254,16 @@ case.
      provider decision (section 7), lookup, add, refresh and delete of
      series, MediaCover, the remaining write endpoints (settings pages,
      profiles, custom formats, tags, root folders, import lists), backups.
-     Exit criterion: Overseerr adds a series and Recyclarr syncs profiles
-     through Unarr. See `docs/phase-3b-library.md`.
+     Exit criterion: the UI and the Simkl import list add series, and
+     Recyclarr syncs profiles through Unarr (Overseerr, in the original
+     plan, is not used by the maintainer and left the scope). *Done,
+     November 2026, against mocks*: 630 goldens recorded from the real
+     Sonarr replay identically, the metadata hosts and Simkl answered by
+     recorded and hand-made fixtures; the Sonarr UI adds a series and saves
+     every settings page in a browser; the exchange between the real
+     Recyclarr 8.8.1 and the real Sonarr replays against Unarr. The homelab
+     run is optional for this phase and was not done. See
+     `docs/phase-3b-library.md`.
    Sizing from phase 2's 32k lines: 3a about two thirds of it, 3b about half,
    together about equal to phase 2.
 4. **Radarr** as a second personality on the existing core. Expected at half
@@ -325,7 +333,7 @@ from 86 ms to 50 ms by not decoding the cast (2.5 MB of JSON no resource
 shows) and loading only the queue's series for the queue, and the rest is the
 950 rows' remaining JSON columns (35 ms) and the season statistics over
 25,000 episodes (15 ms). The design target of 10 ms at that size is not met;
-section 14 says what the next step would be.
+section 15 says what the next step would be.
 
 The idle figures are what `malloc_trim` leaves after the import: without it
 the scaled fixture's import left the process at 232 MB, holding pages it no
@@ -365,6 +373,73 @@ blocking threads; the scheduler tick's `malloc_trim` returned twelve of
 the forty megabytes within eight seconds. The scaled rescan's 38 s are the
 8,650 ffprobe runs a changed size asks for, in one thread per series; the
 walk itself, the second pass, takes a second.
+
+End of phase 3b (release build, x86-64, in the cloud session, the Python
+mock on the loopback answering for Skyhook, the image hosts and Simkl with
+the recorded fixtures). The scaled fixture's 950 series ask the mock for
+tvdb ids shifted by multiples of ten million, each answered with a copy of
+one of the 40 recorded shows, posters and fanart included:
+
+| Metric | Real fixture | Scaled fixture |
+|--------|--------------|----------------|
+| Binary, stripped, with the embedded UI | 21.6 MiB | 21.6 MiB |
+| Cold start to first response, import included | 0.42 s | 2.2 s (the import) |
+| Idle RSS after import | 19.5 MB | 26.3 MB |
+| `GET /api/v3/series/lookup?term=`, p50 / p99 | 2.7 / 3.7 ms | 2.9 / 6.9 ms |
+| `GET /api/v3/series/lookup?term=tvdb:`, p50 / p99 | 1.7 / 2.5 ms | 1.9 / 3.5 ms |
+| RSS after 400 lookups | 22.4 MB | 28.9 MB |
+| `POST /api/v3/series` (Frieren, 65 episodes) | 22 ms, episodes there after 0.19 s | 22 ms, 0.24 s |
+| `POST /api/v3/series` (The Pete Holmes Show, 81 episodes) | 5 ms, 0.17 s | 11 ms, 0.17 s |
+| `RefreshSeries`, every series, covers fetched and resized | 5.0 s (40 series) | 129 s (952 series, 7.4 a second) |
+| RSS right after it | 29.5 MB | 39.9 MB |
+| `RefreshSeries` again, nothing changed | 0.4 s | 8.6 s |
+| `GET /api/v3/series` after the refresh, p50 / p99 | 4.1 / 5.8 ms | 81.5 / 105.6 ms |
+| RSS at rest | 28.2 MB | 38.9 MB |
+| `MediaCover` on disk | 4.7 MB | 112 MB |
+
+A lookup is one round trip to the provider and no database write, so the
+figures are the mock's answer plus the mapping; the real Skyhook adds its
+own hundred milliseconds or more. The add answers once the row is written
+and refreshes in the background, as the originals do: the episodes are
+there two tenths of a second later. The first refresh is the covers: three
+images per series downloaded, decoded and resized to the originals' three
+widths, four series at a time; the second pass finds every `Last-Modified`
+unchanged and costs 9 ms a series.
+
+Two things these measurements found. The first refresh left the process at
+123 to 133 MB and never gave it back: decoding a 1920x1080 fanart and its
+resize intermediates are 20 MB allocations, glibc raises its mmap threshold
+to the size of each mapping it frees (up to 32 MiB), and from then on such
+buffers come from the per-thread arenas, where `malloc_trim` cannot return
+what sits below a live allocation. `unarrd` now pins the threshold at 1 MiB
+at start (`fs::tune_allocator`), so large buffers are mapped and unmapped
+one by one: 29.5 MB after the same refresh, and the refresh itself went
+from 10.9 s to 5.0 s. The other is the mock, not Unarr: Python's HTTP
+server writes headers and body separately, and on a kept-alive connection
+Nagle's algorithm held the second write for the client's delayed ACK,
+40 ms on every answer after the first. The lookups measured 44 ms before
+`TCP_NODELAY` was set on the mock; the 45 ms an import "waits on the mock
+client" in the phase 3a figures above and the 76 ms release search of
+phase 2 include the same delay, and were not measured again.
+
+`GET /series` on 950 series is slower than phase 2 left it: 59 ms before
+any refresh on this machine and build, 82 ms right after one, 63 ms on the
+same data after a restart. Looked at afterwards, call by call: 35 ms are
+the database (the season statistics, an aggregate over 25,000 episodes
+that fetched each row from the table, 4,700 page reads a request; then
+the 950 series rows and their JSON columns), 7 ms build the resources
+(four `stat` calls per series for the covers' `lastWrite`, new in this
+phase), the rest serialises and sends 2.3 MB. An index holding the
+columns the statistics read (migration 8) and remembering the covers'
+times between the writes that change them bring it to 59 ms; neither
+changes the order of magnitude. Keeping the answer between requests while
+no row of the database had changed was built and measured (2.8 ms when
+kept, 53 ms when rebuilt after a write) and then removed: the UI asks for
+the list once per page load and follows the changes over SignalR, so it
+bought fifty milliseconds nobody waits for at the cost of a second code
+path and a validity rule tied to the clock. Ten milliseconds at this size
+is, for 2.3 MB of JSON built on request, not within reach of an index or
+a query; section 15 asks which library size the target is for.
 
 ## 10. Naming and distribution
 
@@ -738,22 +813,169 @@ walk itself, the second pass, takes a second.
   Manual-import item ids are a hash of the path (the originals' too, with
   another function), so the goldens ignore them.
 
-## 14. Open questions
+## 14. Decisions taken in phase 3b
 
-- Metadata provider: decided (section 7, option A). Open is the switch to
-  Unarr's own user agent towards the Servarr proxies, due when phase 3b's
-  exit criteria are met, and the conversation with the Servarr team that
-  goes with it.
-- SignalR: phases 2 and 3a emit `indexer`, `downloadclient`,
-  `notification`, `queue`, `queue/details`, `queue/status`, `command`,
-  `health`, `episodefile`, `episode` and `series` messages with the shapes
-  the UI reduces; the metadata refresh's messages wait for 3b.
+- **The provider behind a trait, its output the originals' model.**
+  `unarr_core::metadata::MetadataProvider` returns series and episodes as
+  `SkyHookProxy` maps them, so the refresh, the lookup and the add are ports
+  and another provider has one place to plug in. The user agent towards the
+  Servarr proxies is one constant (`unarr_core::http::SERVARR_PROXY_USER_AGENT`),
+  still the original's. `UNARR_METADATA_UPSTREAM` points every metadata
+  host (Skyhook, the Servarr services, XEM, the artwork hosts, Simkl) at
+  one base URL, `/<host><path>`; the tests and the measurements use it, and
+  the daemon warns when it is set.
+- **No test contacts a metadata host.** `tests/fixtures/metadata/` holds
+  the answers by host: Skyhook's for the fixture's series and the ones the
+  goldens add, recorded once with the original's user agent; the scene
+  mappings cut to those series; XEM's and Simkl's hand-made (XEM refuses
+  data-centre networks, Simkl needs an account). The recording Sonarr
+  reaches the same files through `scripts/mock-servarr.py` acting as its
+  HTTP proxy.
+- **Series are written by columns.** The refresh writes the provider's
+  fields and the cast, never the user's settings; `PUT /series`, the
+  editor, the season pass, the import lists' Clean Library and the move
+  update the columns they own. A series read from a list (without its
+  cast) is never written back whole; a test checks the cast survives each
+  of those writes.
+- **Ids continue the original's sequences.** The importer seeds the id
+  sequence of every table 3b writes to, so a series added after an import
+  gets the id Sonarr would have given. Ids are never handed out again, as
+  the originals' `AUTOINCREMENT` tables do: asked on the fixture, the real
+  Sonarr gives id 2 to an exclusion created after the only one was deleted.
+- **Covers.** Each refreshed series has its poster, fanart and banner
+  downloaded when `Last-Modified` changed and resized to the originals'
+  widths under `<data>/MediaCover/<id>/`; image URLs carry `?lastWrite=`.
+  The daemon copies the original's `MediaCover` folder into its own once
+  instead of serving, and now writing into, the original's. Lookups of
+  series not in the library show covers through `/MediaCoverProxy`.
+- **Auto tagging** (`unarr_core::tv::autotag`) is `AutoTaggingService`
+  with its nine specifications, applied where `SeriesService.UpdateTags`
+  is: after each series of a refresh, refreshed or skipped, on a
+  `PUT /series` and in the editor. One deliberate difference: when every
+  series is refreshed the originals pass the rules the series as it was
+  before the refresh and, if its tags change, write that stale copy back
+  whole; Unarr gives the rules what the refresh just stored and writes the
+  tags alone. No golden covers the rules (the fixture has none); they are
+  unit tests against the originals' code.
+- **Tracked downloads follow the library**, as
+  `TrackedDownloadService`'s three handlers do: when a refresh removes
+  episodes, when a series is added and when one is deleted, the downloads
+  concerned are matched again from their title at once and the queue goes
+  out, instead of waiting for the next poll of the clients.
+- **A series added** is refreshed and scanned as new, then the post-add
+  actions run once: the monitoring preset, the `SeriesAdd` notification,
+  the searches asked for. Its folder is created only when Create Empty
+  Series Folders is set, as the originals do. The series an
+  import list brings are added one after the other, each in its own
+  transaction, where the originals insert the batch at once.
+- **Host settings never rewrite the original's `config.xml`.** A saved
+  `config/host` is kept as overrides in the database, applied at start and
+  in memory. The session cookie keeps the name it had at start, as the
+  originals', so renaming the instance does not log the browser out.
+- **PUT without a route id.** The UI saves settings pages with `PUT` on
+  the collection path and the id in the body. As recorded: the body id
+  wins over the route id, the route id fills in when the body has none,
+  and neither answers 400 with the `'Id'` validation failure.
+- **Quality definitions after a bulk update** are compared by shape in the
+  replay: the original answers `GET /qualitydefinition` from a five-second
+  cache, Unarr from the database. Recyclarr reads them back at once, so
+  its recorded exchange differs there and nowhere else
+  (`scripts/recyclarr-replay.py`, `--settle` when run against the
+  original).
+- **Recyclarr is verified against the real client's recording.**
+  `tests/fixtures/recyclarr/sonarr-exchange.json` is what Recyclarr 8.8.1
+  and the original Sonarr said to each other through a proxy, on the
+  maintainer's configuration, over a drifted instance and two syncs.
+  `make recyclarr` sends the recorded requests to a running `unarrd` and
+  compares the answers. A first stand-in written from Recyclarr's source
+  assumed a deletion the real client does not make, and was removed.
+- **Import lists: Simkl only.** Provider CRUD, `test`, `testall` and
+  `action` work for every implementation's settings; `ImportListSync`
+  fetches Simkl lists and nothing else, the others keep round-tripping
+  untested. Clean Library runs once every list has synced and one lost an
+  item, matching ids as the originals do. The health checks tied to
+  provider statuses run before the command that changed them is recorded
+  as ended; the replay still runs one `RefreshMonitoredDownloads` by hand
+  before `health-after-importlist-sync`, where the recorder's scheduler
+  had run it.
+- **Backups.** The `Backup` command writes a zip of Unarr's own database
+  and `config.xml`, in the originals' layout; a restore, from a listed
+  backup or an uploaded zip, is staged under `<data>/restore` and applied
+  at the next start: an Unarr database is moved into place, an original
+  Sonarr backup goes through the importer, and the previous files are set
+  aside as `*.before-restore` and put back if the import fails. The
+  originals restore in place and ask for a restart.
+- **Logs.** Besides the standard output and the recent lines kept for
+  `GET /log`, the daemon writes log files where the originals keep theirs
+  and under their names: `<data>/sonarr/logs/sonarr.txt` in the originals'
+  layout (`date|Level|logger|message`), info and above, rolled into
+  `sonarr.0.txt`, `sonarr.1.txt`... above one megabyte, fifty archives
+  kept (`LogSizeLimit` and `LogRotate`'s defaults; neither is a setting
+  yet); `sonarr.debug.txt` and `sonarr.trace.txt` exist when the process
+  logs at those levels (`RUST_LOG`). The names follow the personality, so
+  what reads `sonarr.txt` today finds it, and Radarr's and Lidarr's will
+  be `radarr.txt` and `lidarr.txt` in their own folders. A data folder
+  that already holds the original's `sonarr.txt` has it continued, and
+  rolled with its archives. `log/file` lists the files, the last written
+  first,
+  `log/file/{name}` and `/logfile/{name}` serve them; the download takes
+  the browser's session, as the backups do. `contentsUrl` is a working
+  path where the original's is `/api/v1//<name>`. Lines are not passed
+  through the originals' `CleanseLogMessage`: Unarr keeps secrets out of
+  what it logs in the first place (section 12). `system/routes` is not
+  implemented, the UI does not ask for it.
+- **Each personality logs on its own.** One process serves several
+  personalities and a log line does not say whose it is. Rather than mark
+  every task (a span on each spawn, and a line lost to the wrong file
+  wherever one is forgotten), the daemon gives each personality a Tokio
+  runtime of its own, whose threads, workers and blocking ones alike, are
+  started with a `tracing` dispatcher writing to that personality's
+  console lines, recent lines (`GET /log`, which is per personality too
+  now) and files. A thread started outside the runtime takes the
+  dispatcher of the thread that starts it; there is one, the database
+  thread, and a new one must do the same or its lines go to the process.
+  One case is not covered: the personalities share one HTTP client
+  (`http::shared()`), which reuses connections, and a connection's
+  background task runs on the runtime of the personality that opened it.
+  With two personalities talking to the same host at `RUST_LOG=debug`,
+  the HTTP library's own debug and trace lines for one's request can land
+  in the other's debug file; Unarr's lines are not affected. A client per
+  personality would close it and is not worth it for debug lines.
+  What the process logs outside any personality (the start before the
+  first is opened, the shutdown) reaches all of them through `ProcessLog`.
+  The price is a set of worker threads per personality instead of one for
+  all. Considered and not taken: one shared `unarr.txt` listed by every
+  UI (no attribution, and not the names the originals' tooling reads),
+  spans on every task, and one process per personality (it gives up the
+  shared process this project is for).
+- **Paging of the exclusions.** `importlistexclusion/paged` answers no
+  record for `pageSize=0`, as recorded; the other paged resources clamp
+  the size to one, as their goldens say.
+- **The allocator's mmap threshold is pinned** (`fs::tune_allocator`, glibc
+  only); section 9 says why.
+- **Found by driving the UI in a browser** (Playwright against the release
+  binary): the three gaps above (PUT without an id, the session cookie,
+  the paged exclusions), each recorded from Sonarr before the fix. The
+  fixture's `AllowedHosts` of `*` makes the General page refuse to save in
+  Sonarr as well; the page was checked after correcting the field.
+
+## 15. Open questions
+
+- Metadata provider: decided (section 7, option A) and implemented behind
+  a trait. Open is the switch to Unarr's own user agent towards the Servarr
+  proxies, due now that phase 3b's exit criteria are met, and the
+  conversation with the Servarr team that goes with it.
+- SignalR: `series` and `episode` messages follow the refresh, the adds and
+  the edits since 3b. The UI's pages were driven in a browser; no client
+  other than the UI listens.
 - The collation approximates ICU for ASCII names. Titles with accented or
   non-Latin characters may sort differently from the originals; a full UCA
   implementation is not worth its size until a golden shows the difference.
-- `MediaCover` images: the fixture has none, so the UI shows placeholders.
-  Phase 3 will fetch covers when it adds series; for imports, Unarr reuses the
-  original `MediaCover` directory when it is next to the imported files.
+- `MediaCover` images are fetched by the refresh since 3b (112 MB for 950
+  series). Nothing removes the covers of a folder whose series row went
+  away outside the API.
+- Import lists other than Simkl, and the Kodi and Plex metadata file
+  writers, keep their imported settings and are not driven.
 - The download clients were ported from the originals' proxies and verified
   against mocks that answer as those proxies expect. Exchanges recorded from
   the maintainer's Sonarr (its trace log read by
@@ -777,9 +999,19 @@ walk itself, the second pass, takes a second.
   build: musl's allocator has no `malloc_trim` (the call is compiled out)
   and behaves differently, so the image's idle footprint after an import
   is not measured yet.
-- Listing series skips the `actors` column, the largest JSON one. That is
-  safe only while nothing writes a series back whole from a list; the
-  series writes of phase 3 must load the cast first, or update columns.
+- Listing series skips the `actors` column, the largest JSON one. Every
+  series write of 3b updates columns, so nothing writes back a series read
+  from a list; a new write must keep to that.
+- The `GET /series` target. Section 9's table says under 10 ms at p99 "on
+  the fixture": the real fixture's 38 series meet it (5.8 ms). Since the
+  phase 1 review it has also been read against the 950-series fixture,
+  where it stands at 53 to 59 ms and is out of reach without keeping the
+  answer. Which library size the target is for, and at what figure, is
+  the maintainer's call; the original's time on the same library has not
+  been measured.
+- Phase 3b has not run on the homelab: a series added from the UI or by
+  the Simkl list, searched, grabbed and imported end to end, against the
+  real Skyhook and the real Simkl.
 - The import was verified against the mocks and the recorded oracle. The
   maintainer's trace logs of an evening of real use (a real NZBGet
   downloading a season, Sonarr importing each episode as it finished, two

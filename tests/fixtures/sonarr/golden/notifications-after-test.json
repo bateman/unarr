@@ -2,7 +2,7 @@
   "body": [
     {
       "body": {
-        "content": "Test message from Sonarr posted at 11/08/2026 20:57:00",
+        "content": "Test message from Sonarr posted at 11/09/2026 22:18:08",
         "username": "Unarr fixture"
       },
       "headers": {
@@ -85,7 +85,7 @@
       "service": "plex"
     }
   ],
-  "recordedAt": "2026-11-08T20:57:01Z",
+  "recordedAt": "2026-11-09T22:18:09Z",
   "request": {
     "method": "GET",
     "path": "/mock/notifications",

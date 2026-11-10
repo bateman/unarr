@@ -1,0 +1,571 @@
+{
+ "tvdbId": 448176,
+ "title": "The Pitt",
+ "overview": "The staff of Pittsburgh's Trauma Medical Center work around the clock to save lives in an overcrowded and underfunded emergency department.",
+ "slug": "the-pitt",
+ "originalCountry": "usa",
+ "originalLanguage": "eng",
+ "language": "eng",
+ "firstAired": "2025-01-09",
+ "lastAired": "2026-04-16",
+ "tvMazeId": 75632,
+ "tmdbId": 250307,
+ "imdbId": "tt31938062",
+ "malIds": [],
+ "anidbIds": [],
+ "aniListIds": [],
+ "lastUpdated": "2026-11-03T16:47:58Z",
+ "status": "Continuing",
+ "runtime": 48,
+ "timeOfDay": {
+  "hours": 21,
+  "minutes": 0
+ },
+ "originalNetwork": "HBO Max",
+ "network": "HBO Max",
+ "genres": [
+  "Drama"
+ ],
+ "rating": {
+  "count": 179144,
+  "value": "8.9"
+ },
+ "actors": [
+  {
+   "name": "Noah Wyle",
+   "character": "Michael 'Robby' Robinavitch",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/274185/photo/6a2e0a9b4bd56.jpg"
+  },
+  {
+   "name": "Patrick Ball",
+   "character": "Frank Langdon",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/356782/photo/69937d1406fe1.jpg"
+  },
+  {
+   "name": "Katherine LaNasa",
+   "character": "Dana Evans",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/334975/photo/6078ab0089c77.jpg"
+  },
+  {
+   "name": "Supriya Ganesh",
+   "character": "Samira Mohan",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8015708/photo/69937d399ec8b.jpg"
+  },
+  {
+   "name": "Taylor Dearden",
+   "character": "Melissa King",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/596090/photo/69937f34e5633.jpg"
+  },
+  {
+   "name": "Fiona Dourif",
+   "character": "Cassie McKay",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/375383/photo/6a2e0b317ea1e.jpg"
+  },
+  {
+   "name": "Isa Briones",
+   "character": "Trinity Santos",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8160522/photo/65063b1b78352.jpg"
+  },
+  {
+   "name": "Gerran Howell",
+   "character": "Dennis Whitaker",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/7922843/photo/6a2e0bd29e120.jpg"
+  },
+  {
+   "name": "Shabana Azeez",
+   "character": "Victoria Javadi",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8199298/photo/69937db568b2d.jpg"
+  },
+  {
+   "name": "Sepideh Moafi",
+   "character": "Baran Al-Hashimi",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/7866423/photo/66e8776116dd1.jpg"
+  },
+  {
+   "name": "Shawn Hatosy",
+   "character": "Jack Abbot",
+   "image": "https://artworks.thetvdb.com/banners/person/273168/primary.jpg"
+  },
+  {
+   "name": "Amielynn Abellera",
+   "character": "Perlah Alawi",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8038934/photo/69937f7532909.jpg"
+  },
+  {
+   "name": "Kristin Villanueva",
+   "character": "Princess Dela Cruz",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/524360/photo/69937fe411e71.jpg"
+  },
+  {
+   "name": "Tracy Ifeachor",
+   "character": "Heather Collins",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/300405/photo/6229d6b4c8c9c.jpg"
+  },
+  {
+   "name": "Brandon Mendez Homer",
+   "character": "Donnie Donahue",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8104135/photo/69937e45a4669.jpg"
+  },
+  {
+   "name": "Jalen Thomas Brooks",
+   "character": "Mateo Díaz",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9098175/photo/681a97623fa1c.jpg"
+  },
+  {
+   "name": "Alexandra Metz",
+   "character": "Yolanda Garcia",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/393562/photo/69938047986e6.jpg"
+  },
+  {
+   "name": "Krystel McNeil",
+   "character": "Kiara Alfaro",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8090956/photo/699380b96edff.jpg"
+  },
+  {
+   "name": "Laëtitia Hollard",
+   "character": "Emma Nolan",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9152086/photo/6999bd11ed4b7.jpg"
+  },
+  {
+   "name": "Irene Choi",
+   "character": "Joy Kwon",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/368412/photo/6084a0cb9a13e.jpg"
+  },
+  {
+   "name": "Lucas Iverson",
+   "character": "James Ogilvie"
+  }
+ ],
+ "images": [
+  {
+   "coverType": "Banner",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/448176/banners/6972a4aba4c5d.jpg"
+  },
+  {
+   "coverType": "Poster",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg"
+  },
+  {
+   "coverType": "Fanart",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/448176/backgrounds/675c4f787cfc4.jpg"
+  },
+  {
+   "coverType": "Clearlogo",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/448176/clearlogo/675d049994d06.png"
+  }
+ ],
+ "seasons": [
+  {
+   "seasonNumber": 1,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2119950/posters/67ddc46d44805.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 2,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2199878/posters/694b10d733447.jpg"
+    }
+   ]
+  }
+ ],
+ "episodes": [
+  {
+   "tvdbShowId": 448176,
+   "tvdbId": 10407559,
+   "seasonNumber": 1,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 1,
+   "title": "7:00 A.M.",
+   "airDate": "2025-01-09",
+   "airDateUtc": "2025-01-10T02:00:00Z",
+   "runtime": 53,
+   "overview": "While attempting to distract himself from the anniversary of his mentor’s death, Dr. Robby introduces a fresh batch of interns to life in the ER.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10407559/screencap/69681884ba5cd.jpg"
+  },
+  {
+   "tvdbShowId": 448176,
+   "tvdbId": 10851517,
+   "seasonNumber": 1,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 2,
+   "title": "8:00 A.M.",
+   "airDate": "2025-01-09",
+   "airDateUtc": "2025-01-10T02:00:00Z",
+   "runtime": 50,
+   "overview": "Robby helps siblings navigate their elderly father’s end-of-life care. Later, Samira fends off cops targeting a woman with a misunderstood condition.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10851517/screencap/696818b1903e3.jpg"
+  },
+  {
+   "tvdbShowId": 448176,
+   "tvdbId": 10851518,
+   "seasonNumber": 1,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 3,
+   "title": "9:00 A.M.",
+   "airDate": "2025-01-16",
+   "airDateUtc": "2025-01-17T02:00:00Z",
+   "runtime": 50,
+   "overview": "Samira does her best to keep Whitaker on the right track. A teen overdose sparks conflict in the ER.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10851518/screencap/696818c79850f.jpg"
+  },
+  {
+   "tvdbShowId": 448176,
+   "tvdbId": 10851519,
+   "seasonNumber": 1,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 4,
+   "title": "10:00 A.M.",
+   "airDate": "2025-01-23",
+   "airDateUtc": "2025-01-24T02:00:00Z",
+   "runtime": 50,
+   "overview": "Bets are taken on the whereabouts of a stolen ambulance, while Santos learns a hard lesson, and Whitaker helps to tame “The Kraken.”",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10851519/screencap/696818e2383c2.jpg"
+  },
+  {
+   "tvdbShowId": 448176,
+   "tvdbId": 10851520,
+   "seasonNumber": 1,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 5,
+   "title": "11:00 A.M.",
+   "airDate": "2025-01-30",
+   "airDateUtc": "2025-01-31T02:00:00Z",
+   "runtime": 47,
+   "overview": "Santos and Collins each deal with moral quandaries. Samira’s careful approach earns praise from patients – and reproach from Robby.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10851520/screencap/696818f5c3949.jpg"
+  },
+  {
+   "tvdbShowId": 448176,
+   "tvdbId": 10851521,
+   "seasonNumber": 1,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 6,
+   "title": "12:00 P.M.",
+   "airDate": "2025-02-06",
+   "airDateUtc": "2025-02-07T02:00:00Z",
+   "runtime": 46,
+   "overview": "While Robby handles an ultimatum from the hospital, Mel, Javadi, and Collins each handle unique mother-daughter dynamics.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10851521/screencap/6968190b5fa65.jpg"
+  },
+  {
+   "tvdbShowId": 448176,
+   "tvdbId": 10851522,
+   "seasonNumber": 1,
+   "episodeNumber": 7,
+   "absoluteEpisodeNumber": 7,
+   "title": "1:00 P.M.",
+   "airDate": "2025-02-13",
+   "airDateUtc": "2025-02-14T02:00:00Z",
+   "runtime": 45,
+   "overview": "After examining an influencer with strange symptoms, Samira pushes back against Robby. Santos contends with a patient accused of assault.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10851522/screencap/6968191cc5671.jpg"
+  },
+  {
+   "tvdbShowId": 448176,
+   "tvdbId": 10851523,
+   "seasonNumber": 1,
+   "episodeNumber": 8,
+   "absoluteEpisodeNumber": 8,
+   "title": "2:00 P.M.",
+   "airDate": "2025-02-20",
+   "airDateUtc": "2025-02-21T02:00:00Z",
+   "runtime": 47,
+   "overview": "While Robby attends to an elderly patient with ties to Pittsburgh's history, other members of the team attempt to resuscitate a young drowning victim.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10851523/screencap/69681932d3ce1.jpg"
+  },
+  {
+   "tvdbShowId": 448176,
+   "tvdbId": 10851524,
+   "seasonNumber": 1,
+   "episodeNumber": 9,
+   "absoluteEpisodeNumber": 9,
+   "title": "3:00 P.M.",
+   "airDate": "2025-02-27",
+   "airDateUtc": "2025-02-28T02:00:00Z",
+   "runtime": 44,
+   "overview": "After a staff debrief from Robby, Dana defuses a waiting room brawl, Whitaker finds common ground with \"The Kraken,\" and McKay faces a crucial error.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10851524/screencap/69681948d8d4a.jpg"
+  },
+  {
+   "tvdbShowId": 448176,
+   "tvdbId": 10851525,
+   "seasonNumber": 1,
+   "episodeNumber": 10,
+   "absoluteEpisodeNumber": 10,
+   "title": "4:00 P.M.",
+   "airDate": "2025-03-06",
+   "airDateUtc": "2025-03-07T02:00:00Z",
+   "runtime": 47,
+   "overview": "With the Pitt down a staff member, Robby relies on his team to pick up the slack. Later, Santos finally voices her suspicions.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10851525/screencap/6968195b9c27f.jpg"
+  },
+  {
+   "tvdbShowId": 448176,
+   "tvdbId": 10851526,
+   "seasonNumber": 1,
+   "episodeNumber": 11,
+   "absoluteEpisodeNumber": 11,
+   "title": "5:00 P.M.",
+   "airDate": "2025-03-13",
+   "airDateUtc": "2025-03-14T01:00:00Z",
+   "runtime": 48,
+   "overview": "While Robby tries to keep a developing staffing situation under wraps, Collins guides a surrogate through a difficult delivery.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10851526/screencap/6968196de9345.jpg"
+  },
+  {
+   "tvdbShowId": 448176,
+   "tvdbId": 10851527,
+   "seasonNumber": 1,
+   "episodeNumber": 12,
+   "absoluteEpisodeNumber": 12,
+   "title": "6:00 P.M.",
+   "airDate": "2025-03-20",
+   "airDateUtc": "2025-03-21T01:00:00Z",
+   "runtime": 40,
+   "overview": "When dozens of critical patients flood the ER, Robby and his team struggle to keep up amid quickly diminished supplies.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10851527/screencap/6968197f4c8db.jpg"
+  },
+  {
+   "tvdbShowId": 448176,
+   "tvdbId": 10851528,
+   "seasonNumber": 1,
+   "episodeNumber": 13,
+   "absoluteEpisodeNumber": 13,
+   "title": "7:00 P.M.",
+   "airDate": "2025-03-27",
+   "airDateUtc": "2025-03-28T01:00:00Z",
+   "runtime": 43,
+   "overview": "As the night shift begins and the death toll rises, Robby refuses to give up on a mass casualty victim – even after Abbott intervenes. Unable to find an attending, Santos and Samira each attempt risky moves to save their patients’ lives.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10851528/screencap/696819942a71c.jpg"
+  },
+  {
+   "tvdbShowId": 448176,
+   "tvdbId": 10851529,
+   "seasonNumber": 1,
+   "episodeNumber": 14,
+   "absoluteEpisodeNumber": 14,
+   "title": "8:00 P.M.",
+   "airDate": "2025-04-03",
+   "airDateUtc": "2025-04-04T01:00:00Z",
+   "runtime": 44,
+   "overview": "As the ER begins to quiet down, Robby struggles to cope with a loss, while Abbott and Samira are challenged by a patient’s rapidly deteriorating condition.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10851529/screencap/696819a49a977.jpg"
+  },
+  {
+   "tvdbShowId": 448176,
+   "tvdbId": 10851530,
+   "seasonNumber": 1,
+   "episodeNumber": 15,
+   "absoluteEpisodeNumber": 15,
+   "title": "9:00 P.M.",
+   "airDate": "2025-04-10",
+   "airDateUtc": "2025-04-11T01:00:00Z",
+   "runtime": 59,
+   "finaleType": "season",
+   "overview": "As the day shift prepares to finally head home, Robby resorts to unorthodox methods to convince the father of a critically ill teen to allow treatment.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10851530/screencap/696819b7992e6.jpg"
+  },
+  {
+   "tvdbShowId": 448176,
+   "tvdbId": 11278446,
+   "seasonNumber": 2,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 16,
+   "title": "7:00 A.M.",
+   "airDate": "2026-01-08",
+   "airDateUtc": "2026-01-09T02:00:00Z",
+   "runtime": 53,
+   "overview": "On July 4th, Robby meets his replacement for his upcoming sabbatical, and a familiar face returns to the Pitt.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11278446/screencap/696819d99c804.jpg"
+  },
+  {
+   "tvdbShowId": 448176,
+   "tvdbId": 11518791,
+   "seasonNumber": 2,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 17,
+   "title": "8:00 A.M.",
+   "airDate": "2026-01-15",
+   "airDateUtc": "2026-01-16T02:00:00Z",
+   "runtime": 45,
+   "overview": "Distracted by her impending deposition, King suffers a fall. Then, while Al-Hashimi attempts to revolutionize the department’s technology, Javadi sizes up the competition.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11518791/screencap/696c540be0424.jpg"
+  },
+  {
+   "tvdbShowId": 448176,
+   "tvdbId": 11518792,
+   "seasonNumber": 2,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 18,
+   "title": "9:00 A.M.",
+   "airDate": "2026-01-22",
+   "airDateUtc": "2026-01-23T02:00:00Z",
+   "runtime": 44,
+   "overview": "After a fatal motorcycle collision, a husband and wife are rushed to the ER. As King and Javadi deal with a bickering family, Santos is forced to check her assumptions about a possible case of child abuse and Robby bonds with a Tree of Life survivor.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11518792/screencap/69737283da86b.jpg"
+  },
+  {
+   "tvdbShowId": 448176,
+   "tvdbId": 11518793,
+   "seasonNumber": 2,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 19,
+   "title": "10:00 A.M.",
+   "airDate": "2026-01-29",
+   "airDateUtc": "2026-01-30T02:00:00Z",
+   "runtime": 49,
+   "overview": "With a nearby hospital shuttered on the busiest day of the year, Robby and team must field extra patients, including the victim of a parkour mishap.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11518793/screencap/697c17e421393.jpg"
+  },
+  {
+   "tvdbShowId": 448176,
+   "tvdbId": 11518794,
+   "seasonNumber": 2,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 20,
+   "title": "11:00 A.M.",
+   "airDate": "2026-02-05",
+   "airDateUtc": "2026-02-06T02:00:00Z",
+   "runtime": 44,
+   "overview": "As patients continue to pour in, including a local prison inmate, Robby and Langdon must work together to save a beloved patient.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11518794/screencap/69855119ab9e2.jpg"
+  },
+  {
+   "tvdbShowId": 448176,
+   "tvdbId": 11518795,
+   "seasonNumber": 2,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 21,
+   "title": "12:00 P.M.",
+   "airDate": "2026-02-12",
+   "airDateUtc": "2026-02-13T02:00:00Z",
+   "runtime": 50,
+   "overview": "As the team deals with a loss, Al-Hashimi and Robby continue to clash over the best course of treatment for a patient showing signs of malnutrition.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11518795/screencap/698f743d5d6f2.jpg"
+  },
+  {
+   "tvdbShowId": 448176,
+   "tvdbId": 11518796,
+   "seasonNumber": 2,
+   "episodeNumber": 7,
+   "absoluteEpisodeNumber": 22,
+   "title": "1:00 P.M.",
+   "airDate": "2026-02-19",
+   "airDateUtc": "2026-02-20T02:00:00Z",
+   "runtime": 53,
+   "overview": "While Dana tends to a sexual assault victim, Abbot helps an officer injured in the field, and Mohan attempts to keep her uninsured patient in the ER.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11518796/screencap/6997c080732c8.jpg"
+  },
+  {
+   "tvdbShowId": 448176,
+   "tvdbId": 11518797,
+   "seasonNumber": 2,
+   "episodeNumber": 8,
+   "absoluteEpisodeNumber": 23,
+   "title": "2:00 P.M.",
+   "airDate": "2026-02-26",
+   "airDateUtc": "2026-02-27T02:00:00Z",
+   "runtime": 45,
+   "overview": "In the wake of an IT shutdown, Princess must manage a completely analog ER. Al-Hashimi, Mohan, and King assess a woman with sudden blindness.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11518797/screencap/69a1555d6a914.jpg"
+  },
+  {
+   "tvdbShowId": 448176,
+   "tvdbId": 11518798,
+   "seasonNumber": 2,
+   "episodeNumber": 9,
+   "absoluteEpisodeNumber": 24,
+   "title": "3:00 P.M.",
+   "airDate": "2026-03-05",
+   "airDateUtc": "2026-03-06T02:00:00Z",
+   "runtime": 49,
+   "overview": "After one of Javadi's patients slips through the cracks, Dana calls in an old friend with experience running a low-tech ER.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11518798/screencap/69aa39fec4a9b.jpg"
+  },
+  {
+   "tvdbShowId": 448176,
+   "tvdbId": 11518799,
+   "seasonNumber": 2,
+   "episodeNumber": 10,
+   "absoluteEpisodeNumber": 25,
+   "title": "4:00 P.M.",
+   "airDate": "2026-03-12",
+   "airDateUtc": "2026-03-13T01:00:00Z",
+   "runtime": 43,
+   "overview": "After an incident at a nearby water park, several critical patients are rushed to the Pitt. Later, Al-Hashimi confronts Robby.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11518799/screencap/69b361f54ee60.jpg"
+  },
+  {
+   "tvdbShowId": 448176,
+   "tvdbId": 11518800,
+   "seasonNumber": 2,
+   "episodeNumber": 11,
+   "absoluteEpisodeNumber": 26,
+   "title": "5:00 P.M.",
+   "airDate": "2026-03-19",
+   "airDateUtc": "2026-03-20T01:00:00Z",
+   "runtime": 49,
+   "overview": "While King struggles to cope with her sister's newfound independence, patients and staff are put on edge by an unexpected presence in the ER.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11518800/screencap/69bc9c3dbef4f.jpg"
+  },
+  {
+   "tvdbShowId": 448176,
+   "tvdbId": 11518801,
+   "seasonNumber": 2,
+   "episodeNumber": 12,
+   "absoluteEpisodeNumber": 27,
+   "title": "6:00 P.M.",
+   "airDate": "2026-03-26",
+   "airDateUtc": "2026-03-27T01:00:00Z",
+   "runtime": 52,
+   "overview": "After she steps up to defend her trainee, Dana clashes with Robby about her methods – and his upcoming sabbatical.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11518801/screencap/69c5d6f819cc6.jpg"
+  },
+  {
+   "tvdbShowId": 448176,
+   "tvdbId": 11532947,
+   "seasonNumber": 2,
+   "episodeNumber": 13,
+   "absoluteEpisodeNumber": 28,
+   "title": "7:00 P.M.",
+   "airDate": "2026-04-02",
+   "airDateUtc": "2026-04-03T01:00:00Z",
+   "runtime": 49,
+   "overview": "As the night shift begins, Mohan's AMA patient is brought back to the ER, Langdon doubts his place in the Pitt, and Robby gets Duke's results.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11532947/screencap/69cf115762491.jpg"
+  },
+  {
+   "tvdbShowId": 448176,
+   "tvdbId": 11532948,
+   "seasonNumber": 2,
+   "episodeNumber": 14,
+   "absoluteEpisodeNumber": 29,
+   "title": "8:00 P.M.",
+   "airDate": "2026-04-09",
+   "airDateUtc": "2026-04-10T01:00:00Z",
+   "runtime": 42,
+   "overview": "After his bike takes a hit in the ambulance bay, Robby levels with Duke. A spinal cord injury forces Langdon to attempt a risky procedure.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11532948/screencap/69d97b405f7c1.jpg"
+  },
+  {
+   "tvdbShowId": 448176,
+   "tvdbId": 11532949,
+   "seasonNumber": 2,
+   "episodeNumber": 15,
+   "absoluteEpisodeNumber": 30,
+   "title": "9:00 P.M.",
+   "airDate": "2026-04-16",
+   "airDateUtc": "2026-04-17T01:00:00Z",
+   "runtime": 50,
+   "finaleType": "season",
+   "overview": "Al-Hashimi reveals details from her medical history, forcing Robby to face an ethical dilemma as he prepares to leave for his sabbatical. Note: Credit scene",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11532949/screencap/69e18651637ca.jpg"
+  }
+ ]
+}

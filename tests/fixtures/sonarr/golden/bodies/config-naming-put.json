@@ -1,0 +1,7 @@
+{
+ "$from": "config-naming",
+ "$set": {
+  "seasonFolderFormat": "Season {season:00} [Unarr]",
+  "multiEpisodeStyle": 5
+ }
+}

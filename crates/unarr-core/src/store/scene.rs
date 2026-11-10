@@ -23,6 +23,36 @@ pub fn insert(conn: &Connection, m: &SceneMapping) -> anyhow::Result<()> {
     Ok(())
 }
 
+/// `Clear(type)` and `InsertMany`: one provider's mappings replaced, ids
+/// counting on from the table's sequence as the originals' do.
+pub fn replace_type(conn: &Connection, mapping_type: &str, mappings: &[SceneMapping]) -> anyhow::Result<()> {
+    conn.execute(
+        "DELETE FROM scene_mappings WHERE type = ?1",
+        params![mapping_type],
+    )?;
+    if mappings.is_empty() {
+        return Ok(());
+    }
+    let first = super::sequence::next_ids(conn, "scene_mappings", mappings.len())?;
+    for (i, m) in mappings.iter().enumerate() {
+        insert(
+            conn,
+            &SceneMapping {
+                id: first + i as i64,
+                ..m.clone()
+            },
+        )?;
+    }
+    Ok(())
+}
+
+/// Every mapping, by id.
+pub fn all(conn: &Connection) -> anyhow::Result<Vec<SceneMapping>> {
+    let mut stmt = conn.prepare("SELECT * FROM scene_mappings ORDER BY id")?;
+    let rows = stmt.query_map([], from_row)?;
+    Ok(rows.collect::<Result<_, _>>()?)
+}
+
 fn from_row(row: &Row) -> rusqlite::Result<SceneMapping> {
     Ok(SceneMapping {
         id: row.get("id")?,

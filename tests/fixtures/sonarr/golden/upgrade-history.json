@@ -31,7 +31,7 @@
           "releaseType": "SingleEpisode",
           "size": "1106640"
         },
-        "date": "2026-11-08T20:59:12Z",
+        "date": "2026-11-09T22:20:20Z",
         "downloadId": "SABnzbd_nzo_mock6",
         "episode": {
           "absoluteEpisodeNumber": 1,
@@ -41,7 +41,7 @@
           "episodeNumber": 1,
           "hasFile": true,
           "id": 1,
-          "lastSearchTime": "2026-11-08T20:56:40Z",
+          "lastSearchTime": "2026-11-09T22:17:48Z",
           "monitored": false,
           "overview": "While attempting to distract himself from the anniversary of his mentor’s death, Dr. Robby introduces a fresh batch of interns to life in the ER.",
           "runtime": 53,
@@ -92,7 +92,7 @@
           "releaseType": "SingleEpisode",
           "size": "119980"
         },
-        "date": "2026-11-08T20:59:12Z",
+        "date": "2026-11-09T22:20:20Z",
         "episode": {
           "absoluteEpisodeNumber": 1,
           "airDate": "2025-01-09",
@@ -101,7 +101,7 @@
           "episodeNumber": 1,
           "hasFile": true,
           "id": 1,
-          "lastSearchTime": "2026-11-08T20:56:40Z",
+          "lastSearchTime": "2026-11-09T22:17:48Z",
           "monitored": false,
           "overview": "While attempting to distract himself from the anniversary of his mentor’s death, Dr. Robby introduces a fresh batch of interns to life in the ER.",
           "runtime": 53,
@@ -154,9 +154,9 @@
           }
         ],
         "data": {
-          "age": "667",
-          "ageHours": "16025.78350876011",
-          "ageMinutes": "961547.0105256516",
+          "age": "668",
+          "ageHours": "16051.135640808277",
+          "ageMinutes": "963068.138448535",
           "customFormatScore": "-10000",
           "downloadClient": "SABnzbd",
           "downloadClientName": "Mock SABnzbd",
@@ -176,7 +176,7 @@
           "tvRageId": "0",
           "tvdbId": "448176"
         },
-        "date": "2026-11-08T20:59:00Z",
+        "date": "2026-11-09T22:20:08Z",
         "downloadId": "SABnzbd_nzo_mock6",
         "episode": {
           "absoluteEpisodeNumber": 1,
@@ -186,7 +186,7 @@
           "episodeNumber": 1,
           "hasFile": true,
           "id": 1,
-          "lastSearchTime": "2026-11-08T20:56:40Z",
+          "lastSearchTime": "2026-11-09T22:17:48Z",
           "monitored": false,
           "overview": "While attempting to distract himself from the anniversary of his mentor’s death, Dr. Robby introduces a fresh batch of interns to life in the ER.",
           "runtime": 53,
@@ -254,7 +254,7 @@
           "releaseType": "SingleEpisode",
           "size": "119980"
         },
-        "date": "2026-11-08T20:58:48Z",
+        "date": "2026-11-09T22:19:56Z",
         "downloadId": "0FB2EF04FB342178115BA635EC7B5EC0067058BA",
         "episode": {
           "airDate": "2025-03-04",
@@ -263,7 +263,7 @@
           "episodeNumber": 1,
           "hasFile": true,
           "id": 46,
-          "lastSearchTime": "2026-11-08T20:56:27Z",
+          "lastSearchTime": "2026-11-09T22:17:35Z",
           "monitored": false,
           "overview": "Longtime rivals Matt Murdock and Wilson Fisk attempt to move past their darker personas to serve New York, but their pasts resurface, reintroducing the world of Daredevil.",
           "runtime": 59,
@@ -327,7 +327,7 @@
           "releaseType": "SingleEpisode",
           "size": "119980"
         },
-        "date": "2026-11-08T20:58:07Z",
+        "date": "2026-11-09T22:19:15Z",
         "downloadId": "4271B834AED1835F13BD078CB4A9A98F00AC777F",
         "episode": {
           "airDate": "2025-03-04",
@@ -336,7 +336,7 @@
           "episodeNumber": 2,
           "hasFile": true,
           "id": 47,
-          "lastSearchTime": "2026-11-08T20:57:09Z",
+          "lastSearchTime": "2026-11-09T22:18:17Z",
           "monitored": false,
           "overview": "Matt Murdock takes on a new client, Hector Ayala. But this local hero from the Heights is more than he claims to be. Fisk learns the power of optics in his new and very public role.",
           "runtime": 47,
@@ -377,7 +377,7 @@
     "sortKey": "date",
     "totalRecords": 2014
   },
-  "recordedAt": "2026-11-08T20:59:32Z",
+  "recordedAt": "2026-11-09T22:20:40Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/history?page=1&pageSize=5&sortKey=date&sortDirection=descending&includeEpisode=true"

@@ -1,0 +1,1687 @@
+{
+  "body": [
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "21:00",
+      "certification": "TV-MA",
+      "cleanTitle": "breakingbad",
+      "ended": true,
+      "firstAired": "2008-01-20T00:00:00Z",
+      "folder": "Breaking Bad (2008)",
+      "genres": [
+        "Crime",
+        "Drama",
+        "Thriller",
+        "Western"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/graphical/81189-g21.jpg",
+          "url": "/MediaCoverProxy/11d8491574928723a7cb4ad413a946048a3b5fa113294a9ad48bb9888919ad4d/81189-g21.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/posters/81189-10.jpg",
+          "url": "/MediaCoverProxy/654177c109680f7222c3b91329075525bd3d06ea3aef40b45116019d8d7c1b72/81189-10.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/fanart/original/81189-21.jpg",
+          "url": "/MediaCoverProxy/fedaca230f901f9e74724eba0d61d9e33703c1bfd3ef8f5685412cd2e699909e/81189-21.jpg"
+        },
+        {
+          "coverType": "clearlogo",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/81189/clearlogo/611b4df33bac5.png",
+          "url": "/MediaCoverProxy/3887baaeb0c812aec8abd1d0a92fd2225df24bde484b341750b4ebfd8e59b348/611b4df33bac5.png"
+        }
+      ],
+      "imdbId": "tt0903747",
+      "languageProfileId": 1,
+      "lastAired": "2013-09-29T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "AMC",
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "overview": "When Walter White, a chemistry teacher, is diagnosed with Stage III cancer and given a prognosis of two years left to live, he chooses to enter a dangerous world of drugs and crime with the intent to secure his family's financial security.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 9.5,
+        "votes": 2703038
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/posters/81189-10.jpg",
+      "runtime": 48,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 2
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 3
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 4
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 5
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "breaking bad",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 5,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Breaking Bad",
+      "titleSlug": "breaking-bad",
+      "tmdbId": 1396,
+      "tvMazeId": 169,
+      "tvRageId": 18164,
+      "tvdbId": 81189,
+      "useSceneNumbering": false,
+      "year": 2008
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "21:30",
+      "cleanTitle": "breakingband",
+      "ended": true,
+      "firstAired": "2016-01-24T00:00:00Z",
+      "folder": "Breaking Band (2016)",
+      "genres": [
+        "Musical",
+        "Reality"
+      ],
+      "images": [],
+      "imdbId": "tt4854852",
+      "languageProfileId": 1,
+      "lastAired": "2016-02-28T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "AXS TV",
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "overview": "Six emerging musicians are each paired with one rock legend, who provides guidance to help the up and comers work to achieve their dreams of stardom. Mentors Dave Navarro, Moby, Sebastian Bach, Robin Zander, Belinda Carlisle, and Mark McGrath share invaluable advice and collaborate with their proteges before deciding whether to join them on stage for a live performance at YouTube Space LA.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 6.4,
+        "votes": 11
+      },
+      "runtime": 30,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "breaking band",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 1,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Breaking Band",
+      "titleSlug": "breaking-band",
+      "tmdbId": 0,
+      "tvMazeId": 6101,
+      "tvRageId": 0,
+      "tvdbId": 306432,
+      "useSceneNumbering": false,
+      "year": 2016
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "20:00",
+      "cleanTitle": "bradleybarneywalshbreakingdad",
+      "ended": false,
+      "firstAired": "2019-01-02T00:00:00Z",
+      "folder": "Bradley and Barney Walsh Breaking Dad (2019)",
+      "genres": [
+        "Comedy",
+        "Documentary",
+        "Reality"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/357539/banners/67ec2f1a2b3d8.jpg",
+          "url": "/MediaCoverProxy/a3b4581d8f3c2b2fe679f6d28504382726d0d38554f799745bedde11adc8ee26/67ec2f1a2b3d8.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/357539/posters/60ef7c4f4f42d.jpg",
+          "url": "/MediaCoverProxy/d372590ded1af8a22308ee044888a54f3817f82e831b88d4f07e56b79bef45c2/60ef7c4f4f42d.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/357539/backgrounds/67ece38e63eeb.jpg",
+          "url": "/MediaCoverProxy/202f2f0c6bcc4294a92e0eae43c7337c21c0b03a543d1cd82ad7fd97547d5b0d/67ece38e63eeb.jpg"
+        }
+      ],
+      "imdbId": "tt9516768",
+      "languageProfileId": 1,
+      "lastAired": "2026-06-12T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "ITV1",
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "overview": "Actor Bradley Walsh and his 20-year-old son Barney are hitting the road together for a brand-new four-part series, travelling over 2000 miles from Los Angeles to New Orleans.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 7.4,
+        "votes": 217
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/v4/series/357539/posters/60ef7c4f4f42d.jpg",
+      "runtime": 28,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 2
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 3
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 4
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 5
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 6
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 7
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "bradley barney walsh breaking dad",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 7,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "continuing",
+      "tags": [],
+      "title": "Bradley & Barney Walsh: Breaking Dad",
+      "titleSlug": "bradley-and-barney-walsh-breaking-dad",
+      "tmdbId": 85466,
+      "tvMazeId": 39967,
+      "tvRageId": 0,
+      "tvdbId": 357539,
+      "useSceneNumbering": false,
+      "year": 2019
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "certification": "TV-PG",
+      "cleanTitle": "breakingband",
+      "ended": true,
+      "firstAired": "2018-06-10T00:00:00Z",
+      "folder": "Breaking The Band (2018)",
+      "genres": [
+        "Documentary"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/348998/banners/660afb96c91f7.jpg",
+          "url": "/MediaCoverProxy/4de2a6e8b5bfa24f25e573de4e0307ce189d0c3e3b984a80aa8252e1af8e4b71/660afb96c91f7.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/posters/5b22b772b154b.jpg",
+          "url": "/MediaCoverProxy/fa16a4562288719dd39b3c9bcfa95d6d1e1fd2c9820cc1dd0bd4fde2c061a584/5b22b772b154b.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/fanart/original/5b379ec3483d2.jpg",
+          "url": "/MediaCoverProxy/1bc62b08640557c7df385d99262510e9ddc73b372509e1ce2f084ca9c9bcf608/5b379ec3483d2.jpg"
+        }
+      ],
+      "imdbId": "tt8068670",
+      "languageProfileId": 1,
+      "lastAired": "2022-06-26T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "ReelzChannel",
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "overview": "Sold out tours, chart-topping hits, and runaway world domination can all mean nothing when you’re in a band on the brink of collapse. Tempers flare, arguments erupt and the sweet sound of musical success comes to an abrupt end. Breaking the Band shows the battling egos, power struggles and inter-band rivalries that split up The Beatles, The Supremes, Fleetwood Mac, The Eagles, The Beach Boys, N.W.A, Van Halen and Sonny and Cher. From crippling drug addictions to scandalous affairs Breaking the Band uncovers the incredible true stories by recreating the key moments the cameras missed in addition to using rare band interviews and off-stage footage to piece together each dramatic tale.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 6.9,
+        "votes": 100
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/posters/5b22b772b154b.jpg",
+      "runtime": 47,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 2
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 3
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 4
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "breaking the band",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 4,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Breaking The Band",
+      "titleSlug": "breaking-the-band",
+      "tmdbId": 80106,
+      "tvMazeId": 37136,
+      "tvRageId": 0,
+      "tvdbId": 348998,
+      "useSceneNumbering": false,
+      "year": 2018
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "22:00",
+      "certification": "TV-14",
+      "cleanTitle": "metastasis",
+      "ended": true,
+      "firstAired": "2014-06-08T00:00:00Z",
+      "folder": "Metástasis (2014)",
+      "genres": [
+        "Crime",
+        "Drama",
+        "Thriller"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/273859/banners/6632efedb1a6e.jpg",
+          "url": "/MediaCoverProxy/413cfdc2d243a20fce16f1d0dbc43f01cc9974dbf21b0befb03c104044a9480f/6632efedb1a6e.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/posters/273859-1.jpg",
+          "url": "/MediaCoverProxy/b98be65901b95b7389834ef35ac5c26cb29d3de99d0c112622f4848c61f24dd2/273859-1.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/fanart/original/273859-1.jpg",
+          "url": "/MediaCoverProxy/d31b93ac8c2919692e2bdab934c46ba0686dd5ad12a70e2eff398c9abff09ce2/273859-1.jpg"
+        }
+      ],
+      "imdbId": "tt3190448",
+      "languageProfileId": 1,
+      "lastAired": "2014-09-18T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "Univision",
+      "originalLanguage": {
+        "id": 3,
+        "name": "Spanish"
+      },
+      "overview": "“Metástasis” is the story of a struggling high school chemistry teacher who is diagnosed with inoperable lung cancer. He turns to a life of crime, producing and selling meth with a former student in order to secure his family’s financial future before he passes away.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 2.5,
+        "votes": 5457
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/posters/273859-1.jpg",
+      "runtime": 60,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "metástasis",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 1,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Metástasis",
+      "titleSlug": "metastasis",
+      "tmdbId": 72812,
+      "tvMazeId": 0,
+      "tvRageId": 42983,
+      "tvdbId": 273859,
+      "useSceneNumbering": false,
+      "year": 2014
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "cleanTitle": "bakingbad",
+      "ended": true,
+      "folder": "Baking Bad (0)",
+      "genres": [
+        "Food"
+      ],
+      "images": [],
+      "imdbId": "tt3808074",
+      "languageProfileId": 1,
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "Twitch",
+      "originalLanguage": {
+        "id": 4,
+        "name": "German"
+      },
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 5.2,
+        "votes": 27
+      },
+      "runtime": 0,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "baking bad",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 1,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Baking Bad",
+      "titleSlug": "baking-bad",
+      "tmdbId": 0,
+      "tvMazeId": 0,
+      "tvRageId": 0,
+      "tvdbId": 357407,
+      "useSceneNumbering": false,
+      "year": 0
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "21:30",
+      "certification": "TV-14",
+      "cleanTitle": "breakingin",
+      "ended": true,
+      "firstAired": "2011-04-06T00:00:00Z",
+      "folder": "Breaking In (2011)",
+      "genres": [
+        "Action",
+        "Comedy",
+        "Crime"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/graphical/206751-g.jpg",
+          "url": "/MediaCoverProxy/c89796ce37dcd65c442560879ba2d76a59bc12f571581dd58adf20362f0c998b/206751-g.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/posters/206751-1.jpg",
+          "url": "/MediaCoverProxy/a42a71bc808eef530ddd17329610736073e05875cd8c259d357b87cd7be5253e/206751-1.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/fanart/original/206751-5.jpg",
+          "url": "/MediaCoverProxy/20472af5db7c4a616d98d7220a17445be0477af48ceb7390929a3a445e2fc1b1/206751-5.jpg"
+        },
+        {
+          "coverType": "clearlogo",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/206751/clearlogo/611b8ff2df330.png",
+          "url": "/MediaCoverProxy/1806b494c1c9912c1d3cde5bb7928a41689106f435be79a43839597f398058fb/611b8ff2df330.png"
+        }
+      ],
+      "imdbId": "tt1630574",
+      "languageProfileId": 1,
+      "lastAired": "2012-08-22T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "FOX",
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "overview": "Contra Security, corporate America's answer to \"The A-Team\", gives clients a sense of security by first ripping it away. The firm is led by OZ, a larger-than-life head honcho who is a man of mystery and master of manipulation. The members of the odd squad include alluring bad girl Melanie, who is in charge of lock-picking, safe-cracking and heart-breaking; and Cash, a fanboy who specializes in strategy, logistics and office pranks only a mad genius could think up.\r\n\r\nOz's newest recruit, plucked right out of college, is lovable and charming computer hacker Cameron Price. Unfortunately for Cameron, cracking into state-of-the-art security systems is a lot easier than dealing with his co-workers. Between Melanie's sex appeal and Cash's hazing, Cameron has more than a few obstacles to overcome if he wants to cement his status as part of the team and become Oz's go-to guy.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 7.1,
+        "votes": 7748
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/posters/206751-1.jpg",
+      "runtime": 25,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 2
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "breaking in",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 2,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Breaking In",
+      "titleSlug": "breaking-in",
+      "tmdbId": 34541,
+      "tvMazeId": 510,
+      "tvRageId": 26082,
+      "tvdbId": 206751,
+      "useSceneNumbering": false,
+      "year": 2011
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "22:00",
+      "certification": "14",
+      "cleanTitle": "nowwearebreakingup",
+      "ended": true,
+      "firstAired": "2021-11-12T00:00:00Z",
+      "folder": "Now We Are Breaking Up (2021)",
+      "genres": [
+        "Drama",
+        "Romance"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/398219/banners/627e8f50e58c4.jpg",
+          "url": "/MediaCoverProxy/ff783aebb9b38ace18d446252fa9be39006bac77e1ab08186df3c3033fb4b0c8/627e8f50e58c4.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/398219/posters/6182cedd04097.jpg",
+          "url": "/MediaCoverProxy/b3b42b8354db30e4485de5ed7418e4c05c413a93133bf73e0747086ff562f3f4/6182cedd04097.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/398219/backgrounds/6453bf4ac3186.jpg",
+          "url": "/MediaCoverProxy/fd17f13adac930a0da746681a43a78b48d8e366809a359ec282cb67b9ee2d828/6453bf4ac3186.jpg"
+        }
+      ],
+      "imdbId": "tt14408016",
+      "languageProfileId": 1,
+      "lastAired": "2022-01-08T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "SBS",
+      "originalLanguage": {
+        "id": 21,
+        "name": "Korean"
+      },
+      "overview": "Successful but pragmatic to a fault, a fashion designer becomes entangled with a charming photographer — forcing her to challenge her entire worldview.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 6.4,
+        "votes": 1955
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/v4/series/398219/posters/6182cedd04097.jpg",
+      "runtime": 64,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "now we are breaking up",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 1,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Now, We Are Breaking Up",
+      "titleSlug": "now-we-are-breaking-up",
+      "tmdbId": 129887,
+      "tvMazeId": 54178,
+      "tvRageId": 0,
+      "tvdbId": 398219,
+      "useSceneNumbering": false,
+      "year": 2021
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "19:00",
+      "cleanTitle": "breakingnews",
+      "ended": false,
+      "firstAired": "2018-07-07T00:00:00Z",
+      "folder": "Breaking News (2018)",
+      "genres": [
+        "Comedy"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/404643/banners/6135592c7fa4a.jpg",
+          "url": "/MediaCoverProxy/795d181e9cf1497f08087193fd0af0bbd3e8b445df5ef1bd4ac3ae07e9fff250/6135592c7fa4a.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/404643/posters/6487b4b463534.jpg",
+          "url": "/MediaCoverProxy/2f7ba553d329f8870be67cc9b0d78c5dc1e5bd0ea07dc4576379d179ffab3886/6487b4b463534.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/404643/backgrounds/6138014dea37a.jpg",
+          "url": "/MediaCoverProxy/f49532249d0b75f4f23779d6adfc3835dbb4d968282f35359c0170061c025d56/6138014dea37a.jpg"
+        }
+      ],
+      "imdbId": "tt10887470",
+      "languageProfileId": 1,
+      "lastAired": "2024-10-15T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "Dropout",
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "overview": "In this newsroom, breaking means losing. Our reporters don't know what's about to be on the teleprompter, and every laugh is a point against them.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 7.4,
+        "votes": 271
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/v4/series/404643/posters/6487b4b463534.jpg",
+      "runtime": 7,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 2
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 3
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 4
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 5
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 6
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 7
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "breaking news",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 7,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "continuing",
+      "tags": [],
+      "title": "Breaking News",
+      "titleSlug": "breaking-news",
+      "tmdbId": 203942,
+      "tvMazeId": 63012,
+      "tvRageId": 0,
+      "tvdbId": 404643,
+      "useSceneNumbering": false,
+      "year": 2018
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "certification": "TV-MA",
+      "cleanTitle": "brokenblade",
+      "ended": true,
+      "firstAired": "2014-04-06T00:00:00Z",
+      "folder": "Broken Blade (2014)",
+      "genres": [
+        "Action",
+        "Animation",
+        "Anime",
+        "Drama",
+        "Science Fiction"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/graphical/179791-g.jpg",
+          "url": "/MediaCoverProxy/17a5663e1ee162b2541cc8bd63819c81a6889503c2e4ba7c60d68b684f5f186e/179791-g.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/posters/179791-5.jpg",
+          "url": "/MediaCoverProxy/a4595d1977ee9f81f12125a096912f801cd68ea3454b9e89973279f1b8fa4d48/179791-5.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/fanart/original/179791-1.jpg",
+          "url": "/MediaCoverProxy/5555566e0c5b11b002c7c2a2a11063cdf0f7690ef08da7e441a1e0be27d63ed9/179791-1.jpg"
+        },
+        {
+          "coverType": "clearlogo",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/179791/clearlogo/611c859edc954.png",
+          "url": "/MediaCoverProxy/a5aee461f7b146026c0b946b50c2696a0c82ea1a31df4dc74f7bbbe1050ceb8e/611c859edc954.png"
+        }
+      ],
+      "imdbId": "tt3509378",
+      "languageProfileId": 1,
+      "lastAired": "2014-06-22T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "Tokyo MX",
+      "originalLanguage": {
+        "id": 8,
+        "name": "Japanese"
+      },
+      "overview": "In the continent of Cruzon, an impending war between the Kingdom of Krishna and the nation of Athens is brimming. The people of this land are able to wield the crystals from the ground for whatever purpose they desire. Yet one person, Rygart Arrow, is not. He is an \"un-sorcerer\", a person unable to wield the crystals. But this characteristic will enable him to pilot an ancient mecha, one strong enough to put up a fight against the invading army of Athens.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 6.8,
+        "votes": 330
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/posters/179791-5.jpg",
+      "runtime": 25,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "broken blade",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 1,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Broken Blade",
+      "titleSlug": "broken-blade",
+      "tmdbId": 44163,
+      "tvMazeId": 16259,
+      "tvRageId": 41844,
+      "tvdbId": 179791,
+      "useSceneNumbering": false,
+      "year": 2014
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "15:00",
+      "cleanTitle": "breakingitalypodcast",
+      "ended": true,
+      "firstAired": "2019-05-18T00:00:00Z",
+      "folder": "Breaking Italy Podcast (2019)",
+      "genres": [
+        "Podcast",
+        "Talk Show"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/graphical/5ce2a13d1eb1c.jpg",
+          "url": "/MediaCoverProxy/ab66d8135c89eb1b5b61edae13c0cf17470556f0f1537eba961faa118f02cca0/5ce2a13d1eb1c.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/series/364224/posters/62092654.jpg",
+          "url": "/MediaCoverProxy/bde3b4db0a1c048b387ff2b6fd726d193cada2808bed6611e92e0c177acaa1ef/62092654.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/fanart/original/5ce2a1b50f5d3.jpg",
+          "url": "/MediaCoverProxy/8259d22d87897dd0a49eb7b458a3de74bfb573d02fddb611d91aaef5db122679/5ce2a1b50f5d3.jpg"
+        }
+      ],
+      "languageProfileId": 1,
+      "lastAired": "2024-06-01T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "YouTube",
+      "originalLanguage": {
+        "id": 5,
+        "name": "Italian"
+      },
+      "overview": "Breaking Italy, Alessandro Masala's show, debuts even in a podcast version, where our Shy will discuss various topics with his guests.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 0,
+        "votes": 0
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/series/364224/posters/62092654.jpg",
+      "runtime": 134,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 2
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 3
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 4
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "breaking italy podcast",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 4,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Breaking Italy Podcast",
+      "titleSlug": "breaking-italy-podcast",
+      "tmdbId": 0,
+      "tvMazeId": 0,
+      "tvRageId": 0,
+      "tvdbId": 364224,
+      "useSceneNumbering": false,
+      "year": 2019
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "23:30",
+      "certification": "TV-14",
+      "cleanTitle": "breakingnews2018",
+      "ended": false,
+      "firstAired": "2019-03-01T00:00:00Z",
+      "folder": "Breaking the News (2019)",
+      "genres": [
+        "Comedy",
+        "Game Show"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/359219/banners/664e737c21dab.jpg",
+          "url": "/MediaCoverProxy/fe2fe353f67fd8dcbe745adac64f48725cd3c0993a34283c76054e8ea6638fd6/664e737c21dab.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/posters/5c59ecf079827.jpg",
+          "url": "/MediaCoverProxy/7913f571b7374e9bf978761d9196b89035912267504c35eba0c108ef36b9814d/5c59ecf079827.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/359219/backgrounds/618d9c6f3ba1f.jpg",
+          "url": "/MediaCoverProxy/22debc04126d8055654864940f39c147217df609eead232348cc0f3b25c16332/618d9c6f3ba1f.jpg"
+        }
+      ],
+      "imdbId": "tt10102954",
+      "languageProfileId": 1,
+      "lastAired": "2026-11-13T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "BBC Scotland",
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "overview": "TV version of Radio Scotland's topical panel show, hosted by Des Clarke.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 8.2,
+        "votes": 9
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/posters/5c59ecf079827.jpg",
+      "runtime": 29,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 2
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 3
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 4
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 5
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "breaking the news 2018",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 5,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "continuing",
+      "tags": [],
+      "title": "Breaking the News (2018)",
+      "titleSlug": "breaking-the-news-2018",
+      "tmdbId": 0,
+      "tvMazeId": 45575,
+      "tvRageId": 0,
+      "tvdbId": 359219,
+      "useSceneNumbering": false,
+      "year": 2019
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "00:00",
+      "cleanTitle": "breakingbadfortuneteller",
+      "ended": true,
+      "firstAired": "2016-04-11T00:00:00Z",
+      "folder": "Breaking Bad Fortune Teller (2016)",
+      "genres": [
+        "Fantasy",
+        "History",
+        "Mystery"
+      ],
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/415491/posters/61f834ad1d22d.jpg",
+          "url": "/MediaCoverProxy/ac63a8f9c142a5dd242a56cd258947aca22f2d4e4a67f8ee33f03395aa978727/61f834ad1d22d.jpg"
+        }
+      ],
+      "languageProfileId": 1,
+      "lastAired": "2016-04-11T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "originalLanguage": {
+        "id": 10,
+        "name": "Chinese"
+      },
+      "overview": "During the Ming Dynasty, the emperor sets out for Xinjiang to advocate peace. Shortly after his absence, mysterious occurrences plague the palace and Daoist Tian Mu Tong (Zhang Xiao Chen) is called to cast out demons. Together with eunuch Xiao Mo Gu (Zhang Hao Ran) and Jin Yi Wei leader Yun Xiang Rong (Lu Qing), Mu Tong uncovers deep dark secrets and conspiracies hidden within conspiracies.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 0,
+        "votes": 0
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/v4/series/415491/posters/61f834ad1d22d.jpg",
+      "runtime": 25,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "breaking bad fortune teller",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 1,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Breaking Bad Fortune Teller",
+      "titleSlug": "breaking-bad-fortune-teller",
+      "tmdbId": 232533,
+      "tvMazeId": 0,
+      "tvRageId": 0,
+      "tvdbId": 415491,
+      "useSceneNumbering": false,
+      "year": 2016
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "00:00",
+      "cleanTitle": "breakitdown",
+      "ended": true,
+      "firstAired": "2013-01-01T00:00:00Z",
+      "folder": "Break It Down (2013)",
+      "genres": [
+        "Family"
+      ],
+      "images": [],
+      "imdbId": "tt3150080",
+      "languageProfileId": 1,
+      "lastAired": "2013-01-01T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "Disney XD",
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "overview": "Featuring legendary skater Danny Way and the youngest X Games gold medalist Tom Schaar, the special shows a behind-the-scenes look at the X Games.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 0,
+        "votes": 0
+      },
+      "runtime": 0,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "break it down",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 1,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Break It Down",
+      "titleSlug": "break-it-down",
+      "tmdbId": 0,
+      "tvMazeId": 0,
+      "tvRageId": 0,
+      "tvdbId": 404253,
+      "useSceneNumbering": false,
+      "year": 2013
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "03:00",
+      "certification": "6+",
+      "cleanTitle": "breakpoint2023",
+      "ended": true,
+      "firstAired": "2023-01-13T00:00:00Z",
+      "folder": "Break Point (2023)",
+      "genres": [
+        "Documentary",
+        "Reality",
+        "Sport"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/428389/banners/63b0897c432ce.jpg",
+          "url": "/MediaCoverProxy/91281498adba1c1ab4ed5c733aa3a0e5e465a91f21b547f8ffab0b4ae4cae6a7/63b0897c432ce.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/428389/posters/63f50e70aa9b6.jpg",
+          "url": "/MediaCoverProxy/2b3a44991579c8e284b7ad3859d447d22dc2915ae03983148a8e9dcdd5a98851/63f50e70aa9b6.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/428389/backgrounds/639bdbcc84bef.jpg",
+          "url": "/MediaCoverProxy/880b72a6b820bb13886765985441c729ed397376b66bb327df82385a8774ceb0/639bdbcc84bef.jpg"
+        },
+        {
+          "coverType": "clearlogo",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/428389/clearlogo/6449f652a5e0b.png",
+          "url": "/MediaCoverProxy/94f1fa8220c754e2e28271bbeac757712cc8b4292ef295c3b45da9de352f969c/6449f652a5e0b.png"
+        }
+      ],
+      "imdbId": "tt17048442",
+      "languageProfileId": 1,
+      "lastAired": "2024-01-10T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "Netflix",
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "overview": "Travel alongside some of the world's most talented tennis players as they swing for greatness and Grand Slams through an action-packed season.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 7.3,
+        "votes": 5049
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/v4/series/428389/posters/63f50e70aa9b6.jpg",
+      "runtime": 48,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 2
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "break point 2023",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 2,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Break Point (2023)",
+      "titleSlug": "break-point-2023",
+      "tmdbId": 216386,
+      "tvMazeId": 65904,
+      "tvRageId": 0,
+      "tvdbId": 428389,
+      "useSceneNumbering": false,
+      "year": 2023
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "cleanTitle": "breakup",
+      "ended": true,
+      "firstAired": "2019-05-17T00:00:00Z",
+      "folder": "Break Up (2019)",
+      "genres": [
+        "Comedy",
+        "Romance"
+      ],
+      "images": [
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/fanart/original/5cfc29e25e67f.jpg",
+          "url": "/MediaCoverProxy/c8093ec9b6ba0079a61d74501206e21e0caa2e6e5b74bf44e0671eae35c5d348/5cfc29e25e67f.jpg"
+        }
+      ],
+      "languageProfileId": 1,
+      "lastAired": "2019-05-17T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "originalLanguage": {
+        "id": 2,
+        "name": "French"
+      },
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 0,
+        "votes": 0
+      },
+      "runtime": 10,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "break up",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 1,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Break Up",
+      "titleSlug": "break-up",
+      "tmdbId": 0,
+      "tvMazeId": 0,
+      "tvRageId": 0,
+      "tvdbId": 362308,
+      "useSceneNumbering": false,
+      "year": 2019
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "20:00",
+      "certification": "U",
+      "cleanTitle": "dogsbehavingverybadly",
+      "ended": false,
+      "firstAired": "2019-01-15T00:00:00Z",
+      "folder": "Dogs Behaving Very Badly (2019)",
+      "genres": [
+        "Reality"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/358646/banners/65fc3b582f1f8.jpg",
+          "url": "/MediaCoverProxy/80223948d8511b11986b1bbcfd95c52649d4d8ce718e7a413e548331f7971b5a/65fc3b582f1f8.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/358646/posters/6692c48d8ceb4.jpg",
+          "url": "/MediaCoverProxy/26b80fb684cef7a13eb287daba4f8ba961c355e2956229fdabcbae06bec79c97/6692c48d8ceb4.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/fanart/original/5ce4607cc72d9.jpg",
+          "url": "/MediaCoverProxy/609c9b09682df959c980b2ca713e0e4bb4168d047249d1e5b1f633af5fb26542/5ce4607cc72d9.jpg"
+        }
+      ],
+      "imdbId": "tt9606804",
+      "languageProfileId": 1,
+      "lastAired": "2026-06-07T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "5",
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "overview": "Graeme seeks to save bewildered owners from their four-legged friends' terrible behaviour.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 7.5,
+        "votes": 168
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/v4/series/358646/posters/6692c48d8ceb4.jpg",
+      "runtime": 52,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 2
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 3
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 4
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 5
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 6
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 7
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 8
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "dogs behaving very badly",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 8,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "continuing",
+      "tags": [],
+      "title": "Dogs Behaving Very Badly",
+      "titleSlug": "dogs-behaving-very-badly",
+      "tmdbId": 97530,
+      "tvMazeId": 40497,
+      "tvRageId": 0,
+      "tvdbId": 358646,
+      "useSceneNumbering": false,
+      "year": 2019
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "14:00",
+      "certification": "TV-MA",
+      "cleanTitle": "bangkokbreaking",
+      "ended": true,
+      "firstAired": "2021-09-23T00:00:00Z",
+      "folder": "Bangkok Breaking (2021)",
+      "genres": [
+        "Action",
+        "Adventure",
+        "Crime",
+        "Drama",
+        "Thriller"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/404462/banners/614da1d272d7c.jpg",
+          "url": "/MediaCoverProxy/6070ea1b7d4bcbb5098a8250617c78b4e5f36f76721fda0227cfbfefc61759d5/614da1d272d7c.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/404462/posters/61423ac3ac6a0.jpg",
+          "url": "/MediaCoverProxy/75ff558bbd51f1ef4a0e2b585523b762a9328ef0b21b4b292f538411da14fe1f/61423ac3ac6a0.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/404462/backgrounds/61423aedaa330.jpg",
+          "url": "/MediaCoverProxy/ef1ff7b844e777421fd8a49fe769bdb059ecffb7e3911626c65dedef36871bfa/61423aedaa330.jpg"
+        }
+      ],
+      "imdbId": "tt14202282",
+      "languageProfileId": 1,
+      "lastAired": "2021-09-23T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "Netflix",
+      "originalLanguage": {
+        "id": 32,
+        "name": "Thai"
+      },
+      "overview": "Newly arrived in Bangkok, Wanchai joins the road rescue service and unravels a city-wide conspiracy with the help of a journalist.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 5.9,
+        "votes": 477
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/v4/series/404462/posters/61423ac3ac6a0.jpg",
+      "runtime": 60,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "bangkok breaking",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 1,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Bangkok Breaking",
+      "titleSlug": "bangkok-breaking",
+      "tmdbId": 132158,
+      "tvMazeId": 57880,
+      "tvRageId": 0,
+      "tvdbId": 404462,
+      "useSceneNumbering": false,
+      "year": 2021
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "21:00",
+      "certification": "TV-14",
+      "cleanTitle": "prisonbreak",
+      "ended": true,
+      "firstAired": "2005-08-29T00:00:00Z",
+      "folder": "Prison Break (2005)",
+      "genres": [
+        "Action",
+        "Crime",
+        "Drama",
+        "Mystery",
+        "Suspense",
+        "Thriller"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/graphical/5c9dff708b17f.jpg",
+          "url": "/MediaCoverProxy/c728a5269fc26bc94fd8382d3cf32bc18c373615955cd3ebbfdc4f1906d4498d/5c9dff708b17f.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/posters/5c9e0957ce5be.jpg",
+          "url": "/MediaCoverProxy/092628d23e8cfc809512077a43eae441dad219ce56e428763ac1ba003f93ce90/5c9e0957ce5be.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/fanart/original/5c9e06b046ab6.jpg",
+          "url": "/MediaCoverProxy/0bc78abf8f21eb59671add519c4a6b32784b6fade64002db86370fdad3f6685c/5c9e06b046ab6.jpg"
+        },
+        {
+          "coverType": "clearlogo",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/360115/clearlogo/611c4d12f1c8e.png",
+          "url": "/MediaCoverProxy/3724ddeceb47055831183e2a558a7d9f584b9a88fbcd109c5ab02a6c434cb673/611c4d12f1c8e.png"
+        }
+      ],
+      "imdbId": "tt0455275",
+      "languageProfileId": 1,
+      "lastAired": "2017-05-30T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "FOX",
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "overview": "Due to a political conspiracy, an innocent man is sent to death row and his only hope is his brother, who makes it his mission to deliberately get himself sent to the same prison to break them both out from the inside.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 8.3,
+        "votes": 684374
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/posters/5c9e0957ce5be.jpg",
+      "runtime": 45,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 2
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 3
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 4
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 5
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "prison break",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 5,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Prison Break",
+      "titleSlug": "prison-break",
+      "tmdbId": 2288,
+      "tvMazeId": 541,
+      "tvRageId": 0,
+      "tvdbId": 360115,
+      "useSceneNumbering": false,
+      "year": 2005
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "00:00",
+      "cleanTitle": "downbad",
+      "ended": true,
+      "firstAired": "2021-10-01T00:00:00Z",
+      "folder": "Down Bad (2021)",
+      "genres": [
+        "Drama"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/415437/banners/66174f4fdca27.jpg",
+          "url": "/MediaCoverProxy/8ee9ac8d20883176665ea0c61735172be7d5a21c367b0df383c9f0bf8e5238e9/66174f4fdca27.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/415437/posters/61f6f7bdeed3f.jpg",
+          "url": "/MediaCoverProxy/a9d63dbb7e7c4fd46275d182ed2cb029f0bdbd6121f11fa520bc250d38e3728d/61f6f7bdeed3f.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/415437/backgrounds/620600feaa265.jpg",
+          "url": "/MediaCoverProxy/6042b71bd3cc2fce22809c0b45729964a7f0a40c93a5aa036d2e96e190fd7251/620600feaa265.jpg"
+        }
+      ],
+      "imdbId": "tt13814546",
+      "languageProfileId": 1,
+      "lastAired": "2021-10-28T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "overview": "Follows three childhood friends with their own trials and tribulations as they navigate life in small town America.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 7.0,
+        "votes": 46
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/v4/series/415437/posters/61f6f7bdeed3f.jpg",
+      "runtime": 29,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "down bad",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 1,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Down Bad",
+      "titleSlug": "down-bad",
+      "tmdbId": 156773,
+      "tvMazeId": 0,
+      "tvRageId": 0,
+      "tvdbId": 415437,
+      "useSceneNumbering": false,
+      "year": 2021
+    }
+  ],
+  "recordedAt": "2026-11-09T22:23:22Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/series/lookup?term=breaking%20bad"
+  },
+  "status": 200
+}

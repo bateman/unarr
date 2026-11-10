@@ -235,6 +235,20 @@ pub fn track(
     Ok(tracked)
 }
 
+/// `TrackedDownloadService.UpdateCachedItem`: what the download is, read
+/// again from its title against the library as it is now.
+pub fn remap(
+    catalog: &Catalog,
+    lookup: &dyn Lookup,
+    tracked: &TrackedDownload,
+    now: DateTime<Utc>,
+) -> Option<RemoteEpisode> {
+    let parsed = parser::parse_title(&tracked.item.title)?;
+    let mut remote = mapping::map(lookup, release_for(&tracked.item.title), parsed, None).ok()?;
+    engine::augment_tracked(catalog, lookup, now, &mut remote, tracked.item.total_size);
+    Some(remote)
+}
+
 fn release_for(title: &str) -> ReleaseInfo {
     ReleaseInfo {
         title: title.to_string(),

@@ -78,6 +78,9 @@ pub fn delete_provider(conn: &Connection, kind: ProviderKind, id: i64) -> anyhow
     )?;
     // `ProviderDeletedEvent`: the status goes with the provider.
     super::provider_status::delete_provider_status(conn, kind, id)?;
+    if kind == ProviderKind::ImportList {
+        super::import_lists::delete_list(conn, id)?;
+    }
     Ok(n == 1)
 }
 

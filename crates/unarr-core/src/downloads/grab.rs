@@ -303,6 +303,12 @@ fn flag_table() -> [(i64, &'static str); 8] {
     ]
 }
 
+/// `EpisodeFile.IndexerFlags.ToString()`: the file's flags are the
+/// parser's `IndexerFlags`, whose names have no `G_` prefix.
+pub fn file_flag_names(flags: i64) -> String {
+    flag_names(flags).replace("G_", "")
+}
+
 /// `IndexerFlags.ToString()`: the flag names, or `0`.
 pub fn flag_names(flags: i64) -> String {
     let names: Vec<&str> = flag_table()

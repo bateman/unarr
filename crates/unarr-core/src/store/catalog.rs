@@ -145,6 +145,26 @@ pub fn list_quality_profiles(conn: &Connection) -> anyhow::Result<Vec<QualityPro
     Ok(out)
 }
 
+/// A row of one of the catalogue tables, gone; whether there was one.
+/// Updates delete and insert again under the same id, in a transaction.
+pub fn delete_row(conn: &Connection, table: &str, id: i64) -> anyhow::Result<bool> {
+    const TABLES: &[&str] = &[
+        "tags",
+        "root_folders",
+        "quality_definitions",
+        "custom_formats",
+        "quality_profiles",
+        "delay_profiles",
+        "release_profiles",
+        "remote_path_mappings",
+        "custom_filters",
+        "import_list_exclusions",
+        "auto_tagging",
+    ];
+    anyhow::ensure!(TABLES.contains(&table), "not a catalogue table: {table}");
+    Ok(conn.execute(&format!("DELETE FROM {table} WHERE id = ?1"), params![id])? > 0)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

@@ -1,0 +1,11 @@
+{
+  "body": {
+    "folder": "Breaking Bad (2008)"
+  },
+  "recordedAt": "2026-11-09T22:24:17Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/series/50/folder"
+  },
+  "status": 200
+}

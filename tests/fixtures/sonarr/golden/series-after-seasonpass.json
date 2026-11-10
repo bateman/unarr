@@ -1,0 +1,163 @@
+{
+  "body": {
+    "added": "2026-11-09T22:23:22Z",
+    "airTime": "21:00",
+    "alternateTitles": [],
+    "certification": "TV-MA",
+    "cleanTitle": "breakingbad",
+    "ended": true,
+    "firstAired": "2008-01-20T00:00:00Z",
+    "genres": [
+      "Crime",
+      "Drama",
+      "Thriller",
+      "Western"
+    ],
+    "id": 50,
+    "images": [
+      {
+        "coverType": "banner",
+        "remoteUrl": "https://artworks.thetvdb.com/banners/graphical/81189-g21.jpg",
+        "url": "/MediaCover/50/banner.jpg?lastWrite=639298598023286551"
+      },
+      {
+        "coverType": "poster",
+        "remoteUrl": "https://artworks.thetvdb.com/banners/posters/81189-10.jpg",
+        "url": "/MediaCover/50/poster.jpg?lastWrite=639298598023748334"
+      },
+      {
+        "coverType": "fanart",
+        "remoteUrl": "https://artworks.thetvdb.com/banners/fanart/original/81189-21.jpg",
+        "url": "/MediaCover/50/fanart.jpg?lastWrite=639298598024157069"
+      },
+      {
+        "coverType": "clearlogo",
+        "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/81189/clearlogo/611b4df33bac5.png",
+        "url": "/MediaCover/50/clearlogo.png?lastWrite=639298598024597069"
+      }
+    ],
+    "imdbId": "tt0903747",
+    "languageProfileId": 1,
+    "lastAired": "2013-09-29T00:00:00Z",
+    "monitorNewItems": "none",
+    "monitored": true,
+    "network": "AMC",
+    "originalLanguage": {
+      "id": 1,
+      "name": "English"
+    },
+    "overview": "When Walter White, a chemistry teacher, is diagnosed with Stage III cancer and given a prognosis of two years left to live, he chooses to enter a dangerous world of drugs and crime with the intent to secure his family's financial security.",
+    "path": "/tv/Breaking Bad Moved",
+    "qualityProfileId": 4,
+    "ratings": {
+      "value": 9.5,
+      "votes": 2703038
+    },
+    "rootFolderPath": "/tv",
+    "runtime": 48,
+    "seasonFolder": true,
+    "seasons": [
+      {
+        "monitored": false,
+        "seasonNumber": 0,
+        "statistics": {
+          "episodeCount": 0,
+          "episodeFileCount": 0,
+          "percentOfEpisodes": 0,
+          "releaseGroups": [],
+          "sizeOnDisk": 0,
+          "totalEpisodeCount": 18
+        }
+      },
+      {
+        "monitored": false,
+        "seasonNumber": 1,
+        "statistics": {
+          "episodeCount": 0,
+          "episodeFileCount": 0,
+          "percentOfEpisodes": 0,
+          "releaseGroups": [],
+          "sizeOnDisk": 0,
+          "totalEpisodeCount": 7
+        }
+      },
+      {
+        "monitored": false,
+        "seasonNumber": 2,
+        "statistics": {
+          "episodeCount": 0,
+          "episodeFileCount": 0,
+          "percentOfEpisodes": 0,
+          "releaseGroups": [],
+          "sizeOnDisk": 0,
+          "totalEpisodeCount": 13
+        }
+      },
+      {
+        "monitored": false,
+        "seasonNumber": 3,
+        "statistics": {
+          "episodeCount": 0,
+          "episodeFileCount": 0,
+          "percentOfEpisodes": 0,
+          "releaseGroups": [],
+          "sizeOnDisk": 0,
+          "totalEpisodeCount": 13
+        }
+      },
+      {
+        "monitored": false,
+        "seasonNumber": 4,
+        "statistics": {
+          "episodeCount": 0,
+          "episodeFileCount": 0,
+          "percentOfEpisodes": 0,
+          "releaseGroups": [],
+          "sizeOnDisk": 0,
+          "totalEpisodeCount": 13
+        }
+      },
+      {
+        "monitored": false,
+        "seasonNumber": 5,
+        "statistics": {
+          "episodeCount": 0,
+          "episodeFileCount": 0,
+          "percentOfEpisodes": 0,
+          "releaseGroups": [],
+          "sizeOnDisk": 0,
+          "totalEpisodeCount": 16
+        }
+      }
+    ],
+    "seriesType": "standard",
+    "sortTitle": "breaking bad",
+    "statistics": {
+      "episodeCount": 0,
+      "episodeFileCount": 0,
+      "percentOfEpisodes": 0,
+      "releaseGroups": [],
+      "seasonCount": 5,
+      "sizeOnDisk": 0,
+      "totalEpisodeCount": 80
+    },
+    "status": "ended",
+    "tags": [
+      1
+    ],
+    "title": "Breaking Bad",
+    "titleSlug": "breaking-bad",
+    "tmdbId": 1396,
+    "tvMazeId": 169,
+    "tvRageId": 18164,
+    "tvdbId": 81189,
+    "useSceneNumbering": false,
+    "year": 2008
+  },
+  "recordedAt": "2026-11-09T22:24:32Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/series/50"
+  },
+  "status": 200
+}

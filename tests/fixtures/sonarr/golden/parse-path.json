@@ -1,0 +1,9 @@
+{
+  "body": null,
+  "recordedAt": "2026-11-09T22:24:32Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/parse?path=/tv/The%20Pitt/Season%2001/The.Pitt.S01E03.1080p.WEB.H264-SuccessfulCrab.mkv"
+  },
+  "status": 204
+}

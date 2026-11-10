@@ -60,6 +60,154 @@ pub fn insert(conn: &Connection, s: &Series) -> anyhow::Result<()> {
     Ok(())
 }
 
+/// `UpdateSeries` after a metadata refresh: the columns the provider owns,
+/// the cast included, and the seasons; never the user's own settings, so a
+/// change made while the refresh ran (monitoring, profile, tags) stays.
+pub fn update_info(conn: &Connection, s: &Series) -> anyhow::Result<()> {
+    let changed = conn.execute(
+        "UPDATE series SET tvdb_id = :tvdb_id, tv_rage_id = :tv_rage_id, tv_maze_id = :tv_maze_id,
+            tmdb_id = :tmdb_id, imdb_id = :imdb_id, title = :title, title_slug = :title_slug,
+            clean_title = :clean_title, sort_title = :sort_title, status = :status, overview = :overview,
+            air_time = :air_time, network = :network, certification = :certification, images = :images,
+            genres = :genres, actors = :actors, path = :path, runtime = :runtime, year = :year,
+            first_aired = :first_aired, last_aired = :last_aired, original_language_id = :original_language_id,
+            ratings_votes = :ratings_votes, ratings_value = :ratings_value, last_info_sync = :last_info_sync,
+            mal_ids = :mal_ids, anilist_ids = :anilist_ids
+         WHERE id = :id",
+        named_params! {
+            ":id": s.id, ":tvdb_id": s.tvdb_id, ":tv_rage_id": s.tv_rage_id, ":tv_maze_id": s.tv_maze_id,
+            ":tmdb_id": s.tmdb_id, ":imdb_id": s.imdb_id, ":title": s.title, ":title_slug": s.title_slug,
+            ":clean_title": s.clean_title, ":sort_title": s.sort_title, ":status": s.status.as_str(),
+            ":overview": s.overview, ":air_time": s.air_time, ":network": s.network,
+            ":certification": s.certification, ":images": to_json(&s.images)?, ":genres": to_json(&s.genres)?,
+            ":actors": to_json(&s.actors)?, ":path": s.path, ":runtime": s.runtime, ":year": s.year,
+            ":first_aired": ts(s.first_aired), ":last_aired": ts(s.last_aired),
+            ":original_language_id": s.original_language_id, ":ratings_votes": s.ratings.votes,
+            ":ratings_value": s.ratings.value, ":last_info_sync": ts(s.last_info_sync),
+            ":mal_ids": s.mal_ids.as_ref().map(to_json).transpose()?,
+            ":anilist_ids": s.anilist_ids.as_ref().map(to_json).transpose()?,
+        },
+    )?;
+    anyhow::ensure!(changed == 1, "Series with ID {} does not exist", s.id);
+    replace_seasons(conn, s.id, &s.seasons)
+}
+
+/// The seasons of a series, replaced in the given order.
+pub fn replace_seasons(conn: &Connection, series_id: i64, seasons: &[Season]) -> anyhow::Result<()> {
+    conn.execute("DELETE FROM seasons WHERE series_id = ?1", params![series_id])?;
+    for season in seasons {
+        conn.execute(
+            "INSERT INTO seasons (series_id, season_number, monitored, images) VALUES (?1, ?2, ?3, ?4)",
+            params![
+                series_id,
+                season.season_number,
+                season.monitored,
+                to_json(&season.images)?
+            ],
+        )?;
+    }
+    Ok(())
+}
+
+/// One series' status, alone (a series the provider no longer knows).
+pub fn set_status(conn: &Connection, series_id: i64, status: SeriesStatus) -> anyhow::Result<()> {
+    conn.execute(
+        "UPDATE series SET status = ?2 WHERE id = ?1",
+        params![series_id, status.as_str()],
+    )?;
+    Ok(())
+}
+
+/// `UseSceneNumbering`, as XEM decides it.
+pub fn set_use_scene_numbering(conn: &Connection, series_id: i64, value: bool) -> anyhow::Result<()> {
+    conn.execute(
+        "UPDATE series SET use_scene_numbering = ?2 WHERE id = ?1",
+        params![series_id, value],
+    )?;
+    Ok(())
+}
+
+/// `UpdateSeries` from the API: the settings a user edits, the seasons'
+/// monitoring and the tags; the provider's columns, the cast first among
+/// them, are left alone.
+pub fn update_settings(conn: &Connection, s: &Series) -> anyhow::Result<()> {
+    conn.execute(
+        "UPDATE series SET tvdb_id = :tvdb_id, path = :path, quality_profile_id = :quality_profile_id,
+            season_folder = :season_folder, monitored = :monitored, monitor_new_items = :monitor_new_items,
+            series_type = :series_type, add_options = :add_options
+         WHERE id = :id",
+        named_params! {
+            ":id": s.id, ":tvdb_id": s.tvdb_id, ":path": s.path, ":quality_profile_id": s.quality_profile_id,
+            ":season_folder": s.season_folder, ":monitored": s.monitored,
+            ":monitor_new_items": s.monitor_new_items.as_str(), ":series_type": s.series_type.as_str(),
+            ":add_options": s.add_options.as_ref().map(to_json).transpose()?,
+        },
+    )?;
+    replace_seasons(conn, s.id, &s.seasons)?;
+    set_tags(conn, s.id, &s.tags)
+}
+
+/// The tags of a series, replaced.
+pub fn set_tags(conn: &Connection, series_id: i64, tags: &[i64]) -> anyhow::Result<()> {
+    conn.execute("DELETE FROM series_tags WHERE series_id = ?1", params![series_id])?;
+    for tag in tags {
+        conn.execute(
+            "INSERT OR IGNORE INTO series_tags (series_id, tag_id) VALUES (?1, ?2)",
+            params![series_id, tag],
+        )?;
+    }
+    Ok(())
+}
+
+/// `RemoveAddOptions`: the add options gone once the post-add actions ran.
+pub fn clear_add_options(conn: &Connection, series_id: i64) -> anyhow::Result<()> {
+    conn.execute(
+        "UPDATE series SET add_options = NULL WHERE id = ?1",
+        params![series_id],
+    )?;
+    Ok(())
+}
+
+/// `GetAllSeriesPaths`: every series' id and path.
+pub fn all_paths(conn: &Connection) -> anyhow::Result<Vec<(i64, String)>> {
+    let mut stmt = conn.prepare("SELECT id, path FROM series ORDER BY id")?;
+    let rows = stmt.query_map([], |r| Ok((r.get(0)?, r.get(1)?)))?;
+    Ok(rows.collect::<Result<_, _>>()?)
+}
+
+/// Every series' title slug.
+pub fn all_slugs(conn: &Connection) -> anyhow::Result<Vec<String>> {
+    let mut stmt = conn.prepare("SELECT title_slug FROM series")?;
+    let rows = stmt.query_map([], |r| r.get(0))?;
+    Ok(rows.collect::<Result<_, _>>()?)
+}
+
+/// The series and everything that hangs off them: seasons, tags,
+/// episodes, files, history, download history, blocklist, pending releases.
+pub fn delete_cascade(conn: &Connection, ids: &[i64]) -> anyhow::Result<()> {
+    let json = serde_json::to_string(ids)?;
+    for table in [
+        "seasons",
+        "series_tags",
+        "episodes",
+        "episode_files",
+        "history",
+        "download_history",
+        "blocklist",
+        "pending_releases",
+    ] {
+        conn.execute(
+            &format!("DELETE FROM {table} WHERE series_id IN (SELECT value FROM json_each(?1))"),
+            params![json],
+        )?;
+    }
+    conn.execute(
+        "DELETE FROM series WHERE id IN (SELECT value FROM json_each(?1))",
+        params![json],
+    )?;
+    Ok(())
+}
+
 /// A row decoded; the cast (`actors`, the largest JSON column and one no
 /// resource carries) is parsed only when asked for.
 fn from_row(row: &Row, with_actors: bool) -> anyhow::Result<Series> {

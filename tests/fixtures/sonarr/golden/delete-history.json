@@ -30,7 +30,7 @@
           "releaseType": "SingleEpisode",
           "size": "119980"
         },
-        "date": "2026-11-08T21:00:29Z",
+        "date": "2026-11-09T22:21:36Z",
         "episode": {
           "airDate": "2025-03-04",
           "airDateUtc": "2025-03-05T02:48:00Z",
@@ -38,7 +38,7 @@
           "episodeNumber": 2,
           "hasFile": false,
           "id": 47,
-          "lastSearchTime": "2026-11-08T20:57:09Z",
+          "lastSearchTime": "2026-11-09T22:18:17Z",
           "monitored": false,
           "overview": "Matt Murdock takes on a new client, Hector Ayala. But this local hero from the Heights is more than he claims to be. Fisk learns the power of optics in his new and very public role.",
           "runtime": 47,
@@ -97,7 +97,7 @@
           "releaseType": "SingleEpisode",
           "size": "119980"
         },
-        "date": "2026-11-08T21:00:29Z",
+        "date": "2026-11-09T22:21:36Z",
         "episode": {
           "airDate": "2025-03-04",
           "airDateUtc": "2025-03-05T02:00:00Z",
@@ -105,7 +105,7 @@
           "episodeNumber": 1,
           "hasFile": false,
           "id": 46,
-          "lastSearchTime": "2026-11-08T20:56:27Z",
+          "lastSearchTime": "2026-11-09T22:17:35Z",
           "monitored": false,
           "overview": "Longtime rivals Matt Murdock and Wilson Fisk attempt to move past their darker personas to serve New York, but their pasts resurface, reintroducing the world of Daredevil.",
           "runtime": 59,
@@ -160,7 +160,7 @@
           "releaseType": "SingleEpisode",
           "size": "119980"
         },
-        "date": "2026-11-08T20:59:44Z",
+        "date": "2026-11-09T22:20:52Z",
         "episode": {
           "absoluteEpisodeNumber": 3,
           "airDate": "2025-01-16",
@@ -169,7 +169,7 @@
           "episodeNumber": 3,
           "hasFile": false,
           "id": 3,
-          "lastSearchTime": "2026-11-08T20:56:40Z",
+          "lastSearchTime": "2026-11-09T22:17:48Z",
           "monitored": false,
           "overview": "Samira does her best to keep Whitaker on the right track. A teen overdose sparks conflict in the ER.",
           "runtime": 50,
@@ -228,7 +228,7 @@
           "releaseType": "SingleEpisode",
           "size": "1106640"
         },
-        "date": "2026-11-08T20:59:44Z",
+        "date": "2026-11-09T22:20:52Z",
         "episode": {
           "absoluteEpisodeNumber": 1,
           "airDate": "2025-01-09",
@@ -237,7 +237,7 @@
           "episodeNumber": 1,
           "hasFile": false,
           "id": 1,
-          "lastSearchTime": "2026-11-08T20:56:40Z",
+          "lastSearchTime": "2026-11-09T22:17:48Z",
           "monitored": false,
           "overview": "While attempting to distract himself from the anniversary of his mentor’s death, Dr. Robby introduces a fresh batch of interns to life in the ER.",
           "runtime": 53,
@@ -283,7 +283,7 @@
           "releaseType": "SingleEpisode",
           "size": "177860"
         },
-        "date": "2026-11-08T20:59:44Z",
+        "date": "2026-11-09T22:20:52Z",
         "episode": {
           "absoluteEpisodeNumber": 2,
           "airDate": "2025-01-09",
@@ -292,7 +292,7 @@
           "episodeNumber": 2,
           "hasFile": false,
           "id": 2,
-          "lastSearchTime": "2026-11-08T20:56:40Z",
+          "lastSearchTime": "2026-11-09T22:17:48Z",
           "monitored": false,
           "overview": "Robby helps siblings navigate their elderly father’s end-of-life care. Later, Samira fends off cops targeting a woman with a misunderstood condition.",
           "runtime": 50,
@@ -337,7 +337,7 @@
     "sortKey": "date",
     "totalRecords": 588
   },
-  "recordedAt": "2026-11-08T21:00:29Z",
+  "recordedAt": "2026-11-09T22:21:36Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/history?page=1&pageSize=5&sortKey=date&sortDirection=descending&eventType=5&includeEpisode=true"

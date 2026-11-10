@@ -266,15 +266,9 @@ fn hex(bytes: &[u8]) -> String {
 
 // --- the session cookie
 
-/// `<InstanceName>Auth`, letters and digits only, as the originals name it.
+/// `<InstanceName>Auth`, as it was when the first session needed it.
 fn cookie_name(state: &AppState) -> String {
-    let name: String = state
-        .settings()
-        .instance_name
-        .chars()
-        .filter(|c| c.is_ascii_alphanumeric())
-        .collect();
-    format!("{name}Auth")
+    state.auth_cookie().to_owned()
 }
 
 /// HMAC key derived from the API key: rotating the key logs everyone out.
@@ -390,7 +384,8 @@ fn is_local_address(ip: std::net::IpAddr) -> bool {
 /// pages, as in the originals) unless the client is a local address the
 /// configuration exempts.
 pub async fn require_ui_auth(State(state): State<AppState>, request: Request, next: Next) -> Response {
-    let host = &state.settings().host;
+    let settings = state.settings();
+    let host = &settings.host;
     let needs_auth = matches!(
         host.authentication_method,
         AuthenticationMethod::Forms | AuthenticationMethod::Basic

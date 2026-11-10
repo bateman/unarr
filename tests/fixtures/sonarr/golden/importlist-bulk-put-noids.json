@@ -1,0 +1,13 @@
+{
+  "body": {
+    "content": "ids must be provided",
+    "message": "BadRequest: ids must be provided"
+  },
+  "recordedAt": "2026-11-09T22:24:55Z",
+  "request": {
+    "body": "bodies/importlist-bulk-put-noids.json",
+    "method": "PUT",
+    "path": "/api/v3/importlist/bulk"
+  },
+  "status": 400
+}

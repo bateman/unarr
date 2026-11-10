@@ -1,0 +1,38 @@
+{
+  "body": {
+    "body": {
+      "completionMessage": "Completed",
+      "isExclusive": false,
+      "isLongRunning": true,
+      "isNewSeries": false,
+      "name": "RefreshSeries",
+      "requiresDiskAccess": false,
+      "sendUpdatesToClient": true,
+      "seriesIds": [],
+      "suppressMessages": false,
+      "trigger": "manual",
+      "updateScheduledTask": true
+    },
+    "commandName": "Refresh Series",
+    "duration": "00:00:06.6387561",
+    "ended": "2026-11-09T22:22:28Z",
+    "id": 461709,
+    "message": "Completed",
+    "name": "RefreshSeries",
+    "priority": "normal",
+    "queued": "2026-11-09T22:22:22Z",
+    "result": "successful",
+    "sendUpdatesToClient": true,
+    "started": "2026-11-09T22:22:22Z",
+    "stateChangeTime": "2026-11-09T22:22:22Z",
+    "status": "completed",
+    "trigger": "manual",
+    "updateScheduledTask": true
+  },
+  "recordedAt": "2026-11-09T22:23:22Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/command/461709"
+  },
+  "status": 200
+}

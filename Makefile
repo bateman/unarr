@@ -4,7 +4,7 @@ NAME  ?= unarr
 IMAGE ?= ghcr.io/bateman/unarr
 TAG   ?= dev
 
-.PHONY: help build run test fmt lint check clean docker check-name golden sonarr ui ui-present bazarr prowlarr anonymize scale-fixture
+.PHONY: help build run test fmt lint check clean docker check-name golden sonarr ui ui-present bazarr prowlarr recyclarr anonymize scale-fixture
 UNARR_URL ?= http://127.0.0.1:8989
 UNARR_API_KEY ?= 0123456789abcdef0123456789abcdef
 OUT ?= .cache/anonymized
@@ -58,6 +58,9 @@ bazarr: ## Replay Bazarr's requests against a running unarrd (UNARR_URL, UNARR_A
 
 prowlarr: ## Replay Prowlarr's indexer sync against a running unarrd, with the mock indexer (UNARR_URL, UNARR_API_KEY)
 	@python3 -I scripts/prowlarr-replay.py --base-url $(UNARR_URL) --api-key $(UNARR_API_KEY) --mock
+
+recyclarr: ## Replay the recorded Recyclarr sync (tests/fixtures/recyclarr) against a running unarrd on a fresh fixture (UNARR_URL, UNARR_API_KEY)
+	@python3 -I scripts/recyclarr-replay.py --base-url $(UNARR_URL) --api-key $(UNARR_API_KEY)
 
 anonymize: ## Anonymised copy of a Sonarr backup zip or config dir (FROM=..., OUT=.cache/anonymized)
 	@test -n "$(FROM)" || { echo "usage: make anonymize FROM=sonarr_backup.zip [OUT=dir]"; exit 2; }

@@ -4,7 +4,7 @@
     "pageSize": 20,
     "records": [
       {
-        "added": "2026-11-08T20:57:11Z",
+        "added": "2026-11-09T22:18:19Z",
         "customFormatScore": -10000,
         "customFormats": [
           {
@@ -14,7 +14,7 @@
         ],
         "downloadClient": "Mock NZBGet",
         "downloadClientHasPostImportCategory": false,
-        "downloadId": "c4119cd06a044d60be1043396370761b",
+        "downloadId": "c860499553f64d7b8170eae60cd1a5b3",
         "episode": {
           "absoluteEpisodeNumber": 2,
           "airDate": "2025-01-09",
@@ -23,7 +23,7 @@
           "episodeNumber": 2,
           "hasFile": false,
           "id": 2,
-          "lastSearchTime": "2026-11-08T20:56:40Z",
+          "lastSearchTime": "2026-11-09T22:17:48Z",
           "monitored": false,
           "overview": "Robby helps siblings navigate their elderly father’s end-of-life care. Later, Samira fends off cops targeting a woman with a misunderstood condition.",
           "runtime": 50,
@@ -35,8 +35,8 @@
         },
         "episodeHasFile": false,
         "episodeId": 2,
-        "estimatedCompletionTime": "2026-11-08T20:57:20Z",
-        "id": 1645317694,
+        "estimatedCompletionTime": "2026-11-09T22:18:28Z",
+        "id": 1434614421,
         "indexer": "Mock Newznab (Prowlarr)",
         "languages": [
           {
@@ -142,7 +142,145 @@
         "trackedDownloadStatus": "ok"
       },
       {
-        "added": "2026-11-08T20:57:15Z",
+        "added": "2026-11-09T22:18:17Z",
+        "customFormatScore": -10000,
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          }
+        ],
+        "downloadClient": "Mock SABnzbd",
+        "downloadClientHasPostImportCategory": false,
+        "downloadId": "SABnzbd_nzo_mock3",
+        "episode": {
+          "absoluteEpisodeNumber": 1,
+          "airDate": "2025-01-09",
+          "airDateUtc": "2025-01-10T02:00:00Z",
+          "episodeFileId": 0,
+          "episodeNumber": 1,
+          "hasFile": false,
+          "id": 1,
+          "lastSearchTime": "2026-11-09T22:17:48Z",
+          "monitored": false,
+          "overview": "While attempting to distract himself from the anniversary of his mentor’s death, Dr. Robby introduces a fresh batch of interns to life in the ER.",
+          "runtime": 53,
+          "seasonNumber": 1,
+          "seriesId": 1,
+          "title": "7:00 A.M.",
+          "tvdbId": 10407559,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeHasFile": false,
+        "episodeId": 1,
+        "estimatedCompletionTime": "2026-11-09T22:28:28Z",
+        "id": 2137872197,
+        "indexer": "Mock Newznab (Prowlarr)",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 5,
+            "name": "WEBDL-720p",
+            "resolution": 720,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "seasonNumber": 1,
+        "series": {
+          "added": "2026-03-06T07:44:38Z",
+          "airTime": "21:00",
+          "cleanTitle": "thepitt",
+          "ended": false,
+          "firstAired": "2025-01-09T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 1,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/banners/6972a4aba4c5d.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/backgrounds/675c4f787cfc4.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/clearlogo/675d049994d06.png"
+            }
+          ],
+          "imdbId": "tt31938062",
+          "languageProfileId": 1,
+          "lastAired": "2026-04-16T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "HBO Max",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "The staff of Pittsburgh's Trauma Medical Center work around the clock to save lives in an overcrowded and underfunded emergency department.",
+          "path": "/tv/The Pitt",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.9,
+            "votes": 178410
+          },
+          "runtime": 48,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "pitt",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "The Pitt",
+          "titleSlug": "the-pitt",
+          "tmdbId": 250307,
+          "tvMazeId": 75632,
+          "tvRageId": 0,
+          "tvdbId": 448176,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 1,
+        "size": 765460,
+        "sizeleft": 765460,
+        "status": "downloading",
+        "statusMessages": [],
+        "timeleft": "00:10:00",
+        "title": "The.Pitt.S01E01.720p.WEB.h264-ETHEL",
+        "trackedDownloadState": "downloading",
+        "trackedDownloadStatus": "ok"
+      },
+      {
+        "added": "2026-11-09T22:18:23Z",
         "customFormatScore": -10000,
         "customFormats": [
           {
@@ -172,7 +310,7 @@
           "episodeNumber": 2,
           "hasFile": false,
           "id": 47,
-          "lastSearchTime": "2026-11-08T20:57:09Z",
+          "lastSearchTime": "2026-11-09T22:18:17Z",
           "monitored": false,
           "overview": "Matt Murdock takes on a new client, Hector Ayala. But this local hero from the Heights is more than he claims to be. Fisk learns the power of optics in his new and very public role.",
           "runtime": 47,
@@ -184,7 +322,7 @@
         },
         "episodeHasFile": false,
         "episodeId": 47,
-        "estimatedCompletionTime": "2026-11-08T21:07:20Z",
+        "estimatedCompletionTime": "2026-11-09T22:28:28Z",
         "id": 2106446295,
         "indexer": "Mock Torznab (Prowlarr)",
         "languages": [
@@ -292,145 +430,7 @@
         "trackedDownloadStatus": "ok"
       },
       {
-        "added": "2026-11-08T20:57:09Z",
-        "customFormatScore": -10000,
-        "customFormats": [
-          {
-            "id": 36,
-            "name": "Language not Italian"
-          }
-        ],
-        "downloadClient": "Mock SABnzbd",
-        "downloadClientHasPostImportCategory": false,
-        "downloadId": "SABnzbd_nzo_mock3",
-        "episode": {
-          "absoluteEpisodeNumber": 1,
-          "airDate": "2025-01-09",
-          "airDateUtc": "2025-01-10T02:00:00Z",
-          "episodeFileId": 0,
-          "episodeNumber": 1,
-          "hasFile": false,
-          "id": 1,
-          "lastSearchTime": "2026-11-08T20:56:40Z",
-          "monitored": false,
-          "overview": "While attempting to distract himself from the anniversary of his mentor’s death, Dr. Robby introduces a fresh batch of interns to life in the ER.",
-          "runtime": 53,
-          "seasonNumber": 1,
-          "seriesId": 1,
-          "title": "7:00 A.M.",
-          "tvdbId": 10407559,
-          "unverifiedSceneNumbering": false
-        },
-        "episodeHasFile": false,
-        "episodeId": 1,
-        "estimatedCompletionTime": "2026-11-08T21:07:20Z",
-        "id": 2137872197,
-        "indexer": "Mock Newznab (Prowlarr)",
-        "languages": [
-          {
-            "id": 1,
-            "name": "English"
-          }
-        ],
-        "protocol": "usenet",
-        "quality": {
-          "quality": {
-            "id": 5,
-            "name": "WEBDL-720p",
-            "resolution": 720,
-            "source": "web"
-          },
-          "revision": {
-            "isRepack": false,
-            "real": 0,
-            "version": 1
-          }
-        },
-        "seasonNumber": 1,
-        "series": {
-          "added": "2026-03-06T07:44:38Z",
-          "airTime": "21:00",
-          "cleanTitle": "thepitt",
-          "ended": false,
-          "firstAired": "2025-01-09T00:00:00Z",
-          "genres": [
-            "Drama"
-          ],
-          "id": 1,
-          "images": [
-            {
-              "coverType": "banner",
-              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/banners/6972a4aba4c5d.jpg"
-            },
-            {
-              "coverType": "poster",
-              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg"
-            },
-            {
-              "coverType": "fanart",
-              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/backgrounds/675c4f787cfc4.jpg"
-            },
-            {
-              "coverType": "clearlogo",
-              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/clearlogo/675d049994d06.png"
-            }
-          ],
-          "imdbId": "tt31938062",
-          "languageProfileId": 1,
-          "lastAired": "2026-04-16T00:00:00Z",
-          "monitorNewItems": "all",
-          "monitored": true,
-          "network": "HBO Max",
-          "originalLanguage": {
-            "id": 1,
-            "name": "English"
-          },
-          "overview": "The staff of Pittsburgh's Trauma Medical Center work around the clock to save lives in an overcrowded and underfunded emergency department.",
-          "path": "/tv/The Pitt",
-          "qualityProfileId": 10,
-          "ratings": {
-            "value": 8.9,
-            "votes": 178410
-          },
-          "runtime": 48,
-          "seasonFolder": true,
-          "seasons": [
-            {
-              "monitored": false,
-              "seasonNumber": 1
-            },
-            {
-              "monitored": false,
-              "seasonNumber": 2
-            }
-          ],
-          "seriesType": "standard",
-          "sortTitle": "pitt",
-          "status": "continuing",
-          "tags": [
-            1
-          ],
-          "title": "The Pitt",
-          "titleSlug": "the-pitt",
-          "tmdbId": 250307,
-          "tvMazeId": 75632,
-          "tvRageId": 0,
-          "tvdbId": 448176,
-          "useSceneNumbering": false,
-          "year": 2025
-        },
-        "seriesId": 1,
-        "size": 765460,
-        "sizeleft": 765460,
-        "status": "downloading",
-        "statusMessages": [],
-        "timeleft": "00:10:00",
-        "title": "The.Pitt.S01E01.720p.WEB.h264-ETHEL",
-        "trackedDownloadState": "downloading",
-        "trackedDownloadStatus": "ok"
-      },
-      {
-        "added": "2026-11-08T20:57:13Z",
+        "added": "2026-11-09T22:18:21Z",
         "customFormatScore": -10000,
         "customFormats": [
           {
@@ -460,7 +460,7 @@
           "episodeNumber": 1,
           "hasFile": false,
           "id": 46,
-          "lastSearchTime": "2026-11-08T20:56:27Z",
+          "lastSearchTime": "2026-11-09T22:17:35Z",
           "monitored": false,
           "overview": "Longtime rivals Matt Murdock and Wilson Fisk attempt to move past their darker personas to serve New York, but their pasts resurface, reintroducing the world of Daredevil.",
           "runtime": 59,
@@ -472,7 +472,7 @@
         },
         "episodeHasFile": false,
         "episodeId": 46,
-        "estimatedCompletionTime": "2026-11-08T21:07:20Z",
+        "estimatedCompletionTime": "2026-11-09T22:28:28Z",
         "id": 1652059285,
         "indexer": "Mock Torznab (Prowlarr)",
         "languages": [
@@ -583,7 +583,7 @@
     "sortKey": "timeleft",
     "totalRecords": 4
   },
-  "recordedAt": "2026-11-08T20:57:27Z",
+  "recordedAt": "2026-11-09T22:18:35Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/queue?page=1&pageSize=20&sortKey=timeleft&sortDirection=ascending&includeUnknownSeriesItems=true&includeSeries=true&includeEpisode=true"

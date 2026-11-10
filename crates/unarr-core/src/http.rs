@@ -22,6 +22,22 @@ pub fn user_agent() -> String {
     )
 }
 
+/// `User-Agent` towards the Servarr metadata proxies (Skyhook and the
+/// Servarr services), and only towards them: the original's, exactly as
+/// the pinned Sonarr sends it. A deliberate, temporary exception to Unarr
+/// naming itself (`docs/DESIGN.md` section 7): the responses, rate limits
+/// and any user-agent-dependent behaviour are then the ones the goldens
+/// were recorded with. Once phase 3b's exit criteria are met this becomes
+/// [`user_agent`], the Servarr team is told, and the goldens are recorded
+/// again. Read by [`servarr_proxy_user_agent`] alone; nothing else may
+/// depend on which one is in use.
+const SERVARR_PROXY_USER_AGENT: &str = "Sonarr/4.0.20.3014 (ubuntu 24.04)";
+
+/// The `User-Agent` for requests to the Servarr metadata proxies.
+pub fn servarr_proxy_user_agent() -> &'static str {
+    SERVARR_PROXY_USER_AGENT
+}
+
 /// Build a client with Unarr's defaults. Tests build their own to point at
 /// mocks; production code takes [`shared`].
 pub fn build(timeout: Duration) -> reqwest::Client {

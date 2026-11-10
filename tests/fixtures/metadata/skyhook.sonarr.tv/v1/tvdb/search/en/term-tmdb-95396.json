@@ -1,0 +1,134 @@
+[
+ {
+  "tvdbId": 371980,
+  "title": "Severance",
+  "overview": "Mark leads a team of office workers whose memories have been surgically divided between their work and personal lives. When a mysterious colleague appears outside of work, it begins a journey to discover the truth about their jobs.",
+  "slug": "severance",
+  "originalCountry": "usa",
+  "originalLanguage": "eng",
+  "language": "eng",
+  "firstAired": "2022-02-18",
+  "lastAired": "2025-03-20",
+  "tvMazeId": 44933,
+  "tmdbId": 95396,
+  "imdbId": "tt11280740",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2026-11-06T08:45:54Z",
+  "status": "Continuing",
+  "runtime": 49,
+  "timeOfDay": {
+   "hours": 21,
+   "minutes": 0
+  },
+  "originalNetwork": "Apple TV",
+  "network": "Apple TV",
+  "genres": [
+   "Drama",
+   "Mystery",
+   "Science Fiction",
+   "Thriller"
+  ],
+  "contentRating": "TV-MA",
+  "rating": {
+   "count": 415088,
+   "value": "8.6"
+  },
+  "actors": [
+   {
+    "name": "Adam Scott",
+    "character": "Mark Scout",
+    "image": "https://artworks.thetvdb.com/banners/person/274370/primary.jpg"
+   },
+   {
+    "name": "Britt Lower",
+    "character": "Helly",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/296815/photo/67ba01b5cc513.jpg"
+   },
+   {
+    "name": "Patricia Arquette",
+    "character": "Harmony Cobel / Mrs. Selvig",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/311092/photo/61be0c22624ae.jpg"
+   },
+   {
+    "name": "Zach Cherry",
+    "character": "Dylan",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/296928/photo/62656c277637b.jpg"
+   },
+   {
+    "name": "Tramell Tillman",
+    "character": "Milchick",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/8024114/photo/68af216aa72be.jpg"
+   },
+   {
+    "name": "Jen Tullock",
+    "character": "Devon"
+   },
+   {
+    "name": "John Turturro",
+    "character": "Irving",
+    "image": "https://artworks.thetvdb.com/banners/person/441767/primary.jpg"
+   },
+   {
+    "name": "Christopher Walken",
+    "character": "Burt",
+    "image": "https://artworks.thetvdb.com/banners/person/288073/primary.jpg"
+   },
+   {
+    "name": "Dichen Lachman",
+    "character": "Ms. Casey",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/303654/photo/65ef3040e5033.jpg"
+   }
+  ],
+  "images": [
+   {
+    "coverType": "Banner",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/371980/banners/67d3854a3f3f2.jpg"
+   },
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/371980/posters/621096b26f0e2.jpg"
+   },
+   {
+    "coverType": "Fanart",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/371980/backgrounds/61bdee7c62d99.jpg"
+   },
+   {
+    "coverType": "Clearlogo",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/371980/clearlogo/67deb201804b5.png"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1,
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/v4/season/1971742/posters/62113d7daa972.jpg"
+     },
+     {
+      "coverType": "Banner",
+      "url": "https://artworks.thetvdb.com/banners/v4/season/1971742/banners/64019535f16a9.jpg"
+     }
+    ]
+   },
+   {
+    "seasonNumber": 2,
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/v4/season/2136511/posters/67d38676755a5.jpg"
+     },
+     {
+      "coverType": "Banner",
+      "url": "https://artworks.thetvdb.com/banners/v4/season/2136511/banners/682db80f0d3b5.jpg"
+     }
+    ]
+   }
+  ]
+ }
+]

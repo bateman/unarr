@@ -1,0 +1,65 @@
+{
+  "body": [
+    {
+      "absoluteEpisodeNumber": 1,
+      "airDate": "2025-01-09",
+      "airDateUtc": "2025-01-10T02:00:00Z",
+      "episodeFileId": 0,
+      "episodeNumber": 1,
+      "hasFile": false,
+      "id": 1,
+      "lastSearchTime": "2026-11-09T22:17:48Z",
+      "monitored": true,
+      "overview": "While attempting to distract himself from the anniversary of his mentor’s death, Dr. Robby introduces a fresh batch of interns to life in the ER.",
+      "runtime": 53,
+      "seasonNumber": 1,
+      "seriesId": 1,
+      "title": "7:00 A.M.",
+      "tvdbId": 10407559,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 2,
+      "airDate": "2025-01-09",
+      "airDateUtc": "2025-01-10T02:48:00Z",
+      "episodeFileId": 0,
+      "episodeNumber": 2,
+      "hasFile": false,
+      "id": 2,
+      "lastSearchTime": "2026-11-09T22:17:48Z",
+      "monitored": true,
+      "overview": "Robby helps siblings navigate their elderly father’s end-of-life care. Later, Samira fends off cops targeting a woman with a misunderstood condition.",
+      "runtime": 50,
+      "seasonNumber": 1,
+      "seriesId": 1,
+      "title": "8:00 A.M.",
+      "tvdbId": 10851517,
+      "unverifiedSceneNumbering": false
+    },
+    {
+      "absoluteEpisodeNumber": 3,
+      "airDate": "2025-01-16",
+      "airDateUtc": "2025-01-17T02:00:00Z",
+      "episodeFileId": 0,
+      "episodeNumber": 3,
+      "hasFile": false,
+      "id": 3,
+      "lastSearchTime": "2026-11-09T22:17:48Z",
+      "monitored": true,
+      "overview": "Samira does her best to keep Whitaker on the right track. A teen overdose sparks conflict in the ER.",
+      "runtime": 50,
+      "seasonNumber": 1,
+      "seriesId": 1,
+      "title": "9:00 A.M.",
+      "tvdbId": 10851518,
+      "unverifiedSceneNumbering": false
+    }
+  ],
+  "recordedAt": "2026-11-09T22:24:32Z",
+  "request": {
+    "body": "bodies/episode-monitor.json",
+    "method": "PUT",
+    "path": "/api/v3/episode/monitor"
+  },
+  "status": 202
+}

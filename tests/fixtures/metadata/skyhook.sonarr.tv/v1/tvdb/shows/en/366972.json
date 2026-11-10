@@ -1,0 +1,552 @@
+{
+ "tvdbId": 366972,
+ "title": "Foundation (2021)",
+ "overview": "Based on the award-winning novels by Isaac Asimov, “Foundation” chronicles a band of exiles on their monumental journey to save humanity and rebuild civilization amid the fall of the Galactic Empire.",
+ "slug": "foundation-2021",
+ "originalCountry": "usa",
+ "originalLanguage": "eng",
+ "language": "eng",
+ "firstAired": "2021-09-24",
+ "lastAired": "2025-09-12",
+ "tvMazeId": 35951,
+ "tmdbId": 93740,
+ "imdbId": "tt0804484",
+ "malIds": [],
+ "anidbIds": [],
+ "aniListIds": [],
+ "lastUpdated": "2026-10-31T11:23:32Z",
+ "status": "Continuing",
+ "runtime": 53,
+ "timeOfDay": {
+  "hours": 0,
+  "minutes": 0
+ },
+ "originalNetwork": "Apple TV",
+ "network": "Apple TV",
+ "genres": [
+  "Drama",
+  "Science Fiction"
+ ],
+ "contentRating": "TV-MA",
+ "rating": {
+  "count": 130338,
+  "value": "7.6"
+ },
+ "actors": [
+  {
+   "name": "Jared Harris",
+   "character": "Hari Seldon",
+   "image": "https://artworks.thetvdb.com/banners/person/360332/614ce218cf5c2.jpg"
+  },
+  {
+   "name": "Lee Pace",
+   "character": "Brother Day",
+   "image": "https://artworks.thetvdb.com/banners/person/394118/6438997bc93aa.jpg"
+  },
+  {
+   "name": "Lou Llobell",
+   "character": "Gaal",
+   "image": "https://artworks.thetvdb.com/banners/person/8158080/primary.jpg"
+  },
+  {
+   "name": "Leah Harvey",
+   "character": "Salvor Hardin",
+   "image": "https://artworks.thetvdb.com/banners/person/8158081/primary.jpg"
+  },
+  {
+   "name": "Laura Birn",
+   "character": "Demerzel",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/521205/photo/6468dcd5ce17c.jpg"
+  },
+  {
+   "name": "Terrence Mann",
+   "character": "Brother Dusk",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/333890/photo/614ce30bb9148.jpg"
+  },
+  {
+   "name": "Cassian Bilton",
+   "character": "Brother Dawn",
+   "image": "https://artworks.thetvdb.com/banners/person/8158082/primary.jpg"
+  },
+  {
+   "name": "Sasha Behar",
+   "character": "Mari",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/433966/photo/6220cc47d13df.jpg"
+  },
+  {
+   "name": "Kubbra Sait",
+   "character": "Phara Keaen"
+  },
+  {
+   "name": "Kulvinder Ghir",
+   "character": "Poly Verisof ",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/369872/photo/64cd7bcba7859.jpg"
+  },
+  {
+   "name": "Ella-Rae Smith",
+   "character": "Queen Sareth",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/622471/photo/640c785faa169.jpg"
+  },
+  {
+   "name": "Sandra Yi Sencindiver",
+   "character": "Enjoiner Rue ",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9053804/photo/64cd7b6540341.jpg"
+  },
+  {
+   "name": "Ben Daniels",
+   "character": "Bel Riose",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/317986/photo/6071f26a645c3.jpg"
+  },
+  {
+   "name": "Dino Fetscher",
+   "character": "Glawen Curr",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/484970/photo/63f537be67f38.jpg"
+  },
+  {
+   "name": "Dimitri Leonidas",
+   "character": "Hober Mallow ",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/353732/photo/63e6a429e44b9.jpg"
+  },
+  {
+   "name": "Isabella Laughland",
+   "character": "Brother Constant "
+  },
+  {
+   "name": "Jesper Christensen",
+   "character": "Ducem Barr",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/525247/photo/63aa15a44a596.jpg"
+  },
+  {
+   "name": "Pilou Asbæk",
+   "character": "The Mule",
+   "image": "https://artworks.thetvdb.com/banners/person/247897/5ef6221688207.jpg"
+  },
+  {
+   "name": "Ahd Tamimi",
+   "character": "Magnus",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9145920/photo/68c7c7ad6e6c1.jpg"
+  }
+ ],
+ "images": [
+  {
+   "coverType": "Banner",
+   "url": "https://artworks.thetvdb.com/banners/series/366972/banners/5ef8b618b2d5e.jpg"
+  },
+  {
+   "coverType": "Poster",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/366972/posters/61940c9510021.jpg"
+  },
+  {
+   "coverType": "Fanart",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/366972/backgrounds/61940d32da801.jpg"
+  },
+  {
+   "coverType": "Clearlogo",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/366972/clearlogo/611ca795c69e3.png"
+  }
+ ],
+ "seasons": [
+  {
+   "seasonNumber": 1,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/818841/posters/64623454ece2d.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 2,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/1982299/posters/646234924ad6c.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 3,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2125380/posters/6870807a80e22.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 4
+  }
+ ],
+ "episodes": [
+  {
+   "tvdbShowId": 366972,
+   "tvdbId": 8287162,
+   "seasonNumber": 1,
+   "episodeNumber": 1,
+   "title": "The Emperor's Peace",
+   "airDate": "2021-09-24",
+   "airDateUtc": "2021-09-24T04:00:00Z",
+   "runtime": 69,
+   "overview": "Gaal Dornick leaves her life in Synnax behind when the galaxy's greatest mathematician, Hari Seldon, invites her to Trantor.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8287162/screencap/614d28f33abef.jpg"
+  },
+  {
+   "tvdbShowId": 366972,
+   "tvdbId": 8682932,
+   "seasonNumber": 1,
+   "episodeNumber": 2,
+   "title": "Preparing to Live",
+   "airDate": "2021-09-24",
+   "airDateUtc": "2021-09-24T04:00:00Z",
+   "runtime": 61,
+   "overview": "The Foundation makes the long journey to Terminus as Gaal and Raych grow closer. The Empire faces a difficult decision.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8682932/screencap/614d29538e1a9.jpg"
+  },
+  {
+   "tvdbShowId": 366972,
+   "tvdbId": 8682933,
+   "seasonNumber": 1,
+   "episodeNumber": 3,
+   "title": "The Mathematician's Ghost",
+   "airDate": "2021-10-01",
+   "airDateUtc": "2021-10-01T04:00:00Z",
+   "runtime": 49,
+   "overview": "Brother Dusk reflects on his legacy as he prepares for ascension. The Foundation arrives on Terminus and finds a mysterious object.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8682933/screencap/614d2981a8f62.jpg"
+  },
+  {
+   "tvdbShowId": 366972,
+   "tvdbId": 8682934,
+   "seasonNumber": 1,
+   "episodeNumber": 4,
+   "title": "Barbarians at the Gate",
+   "airDate": "2021-10-08",
+   "airDateUtc": "2021-10-08T04:00:00Z",
+   "runtime": 45,
+   "overview": "Salvor faces off with an enemy of the Empire. Brothers Day and Dusk are at odds, while Brother Dawn wrestles with his truth.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8682934/screencap/61568e821407a.jpg"
+  },
+  {
+   "tvdbShowId": 366972,
+   "tvdbId": 8682935,
+   "seasonNumber": 1,
+   "episodeNumber": 5,
+   "title": "Upon Awakening",
+   "airDate": "2021-10-15",
+   "airDateUtc": "2021-10-15T04:00:00Z",
+   "runtime": 53,
+   "overview": "A flashback reveals the origin of Gaal's conflict between faith and science. The standoff on Terminus takes an unfortunate turn.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8682935/screencap/615fc97795b1c.jpg"
+  },
+  {
+   "tvdbShowId": 366972,
+   "tvdbId": 8682936,
+   "seasonNumber": 1,
+   "episodeNumber": 6,
+   "title": "Death and the Maiden",
+   "airDate": "2021-10-22",
+   "airDateUtc": "2021-10-22T04:00:00Z",
+   "runtime": 55,
+   "overview": "Brother Day meets Zephyr Halima—a would-be leader who opposes the Empire. Brother Dusk grows suspicious of Brother Dawn.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8682936/screencap/6168dfc3e0fef.jpg"
+  },
+  {
+   "tvdbShowId": 366972,
+   "tvdbId": 8682937,
+   "seasonNumber": 1,
+   "episodeNumber": 7,
+   "title": "Mysteries and Martyrs",
+   "airDate": "2021-10-29",
+   "airDateUtc": "2021-10-29T04:00:00Z",
+   "runtime": 48,
+   "overview": "The Anacreons and their hostages board the fabled Invictus warship. The bond between Brother Dawn and Azura intensifies.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8682937/screencap/61722da3e5362.jpg"
+  },
+  {
+   "tvdbShowId": 366972,
+   "tvdbId": 8682938,
+   "seasonNumber": 1,
+   "episodeNumber": 8,
+   "title": "The Missing Piece",
+   "airDate": "2021-11-05",
+   "airDateUtc": "2021-11-05T04:00:00Z",
+   "runtime": 56,
+   "overview": "Brother Day embarks on a journey that no other Cleon has ever attempted. Salvor prepares to make the ultimate sacrifice to return home.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8682938/screencap/617b7284d967b.jpg"
+  },
+  {
+   "tvdbShowId": 366972,
+   "tvdbId": 8682939,
+   "seasonNumber": 1,
+   "episodeNumber": 9,
+   "title": "The First Crisis",
+   "airDate": "2021-11-12",
+   "airDateUtc": "2021-11-12T05:00:00Z",
+   "runtime": 57,
+   "overview": "On Terminus, Salvor witnesses how powerful the null field has become. Brother Dawn makes a daring choice.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8682939/screencap/618495e086512.jpg"
+  },
+  {
+   "tvdbShowId": 366972,
+   "tvdbId": 8682940,
+   "seasonNumber": 1,
+   "episodeNumber": 10,
+   "title": "The Leap",
+   "airDate": "2021-11-19",
+   "airDateUtc": "2021-11-19T05:00:00Z",
+   "runtime": 59,
+   "finaleType": "season",
+   "overview": "An unexpected ally helps Salvor broker an alliance. A confrontation between the Brothers leads to unthinkable consequences.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8682940/screencap/618df708c78f4.jpg"
+  },
+  {
+   "tvdbShowId": 366972,
+   "tvdbId": 9208201,
+   "seasonNumber": 2,
+   "episodeNumber": 1,
+   "title": "In Seldon's Shadow",
+   "airDate": "2023-07-14",
+   "airDateUtc": "2023-07-14T04:00:00Z",
+   "runtime": 49,
+   "overview": "Hari finds himself trapped in a mysterious prison. An assassination attempt leaves Day shaken. Gaal and Salvor devise an escape plan.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9208201/screencap/64e9be7506c1c.jpg"
+  },
+  {
+   "tvdbShowId": 366972,
+   "tvdbId": 9785488,
+   "seasonNumber": 2,
+   "episodeNumber": 2,
+   "title": "A Glimpse of Darkness",
+   "airDate": "2023-07-21",
+   "airDateUtc": "2023-07-21T04:00:00Z",
+   "runtime": 53,
+   "overview": "Gaal has a disturbing vision. Day's bond with Queen Sareth grows stronger. The Vault opens and reveals a cryptic message.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9785488/screencap/64e9be9d7466e.jpg"
+  },
+  {
+   "tvdbShowId": 366972,
+   "tvdbId": 9785494,
+   "seasonNumber": 2,
+   "episodeNumber": 3,
+   "title": "King and Commoner",
+   "airDate": "2023-07-28",
+   "airDateUtc": "2023-07-28T04:00:00Z",
+   "runtime": 54,
+   "overview": "The Empire recruits Bel Riose to investigate the resurgent Foundation. Hari leads Gaal and Salvor to a desert planet.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9785494/screencap/64e9bebc96199.jpg"
+  },
+  {
+   "tvdbShowId": 366972,
+   "tvdbId": 9785495,
+   "seasonNumber": 2,
+   "episodeNumber": 4,
+   "title": "Where the Stars Are Scattered Thinly",
+   "airDate": "2023-08-04",
+   "airDateUtc": "2023-08-04T04:00:00Z",
+   "runtime": 52,
+   "overview": "Queen Sareth and Dawn share a moment as she tries to learn more about Day. Brothers Constant and Poly bring Hober Mallow to Terminus.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9785495/screencap/64c3141080a1f.jpg"
+  },
+  {
+   "tvdbShowId": 366972,
+   "tvdbId": 9785496,
+   "seasonNumber": 2,
+   "episodeNumber": 5,
+   "title": "The Sighted and the Seen",
+   "airDate": "2023-08-11",
+   "airDateUtc": "2023-08-11T04:00:00Z",
+   "runtime": 47,
+   "overview": "Gaal, Salvor, and Hari arrive on Ignis and meet the source of the strange signal they've been tracking. Dawn and Dusk are suspicious of Day.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9785496/screencap/64cc4e6516b80.jpg"
+  },
+  {
+   "tvdbShowId": 366972,
+   "tvdbId": 9785497,
+   "seasonNumber": 2,
+   "episodeNumber": 6,
+   "title": "Why the Gods Made Wine",
+   "airDate": "2023-08-18",
+   "airDateUtc": "2023-08-18T04:00:00Z",
+   "runtime": 58,
+   "overview": "Day and Queen Sareth make an announcement. Tellem sows seeds of distrust between Gaal and Hari. Hober Mallow reaches his destination.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9785497/screencap/64d58881cd135.jpg"
+  },
+  {
+   "tvdbShowId": 366972,
+   "tvdbId": 9785498,
+   "seasonNumber": 2,
+   "episodeNumber": 7,
+   "title": "A Necessary Death",
+   "airDate": "2023-08-25",
+   "airDateUtc": "2023-08-25T04:00:00Z",
+   "runtime": 53,
+   "overview": "Salvor begins to question the Mentalics' motives. Hober Mallow's proposal to the Spacers meets resistance. Brothers Constant and Poly stand trial.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9785498/screencap/64dec2f15c81f.jpg"
+  },
+  {
+   "tvdbShowId": 366972,
+   "tvdbId": 9785499,
+   "seasonNumber": 2,
+   "episodeNumber": 8,
+   "title": "The Last Empress",
+   "airDate": "2023-09-01",
+   "airDateUtc": "2023-09-01T04:00:00Z",
+   "runtime": 60,
+   "overview": "Enjoiner Rue confides in Dusk about her distrust of Demerzel. Hober Mallow pulls a daring move. Day sets course for Terminus and the Foundation.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9785499/screencap/64e806f7c429e.jpg"
+  },
+  {
+   "tvdbShowId": 366972,
+   "tvdbId": 9785500,
+   "seasonNumber": 2,
+   "episodeNumber": 9,
+   "title": "Long Ago, Not Far Away",
+   "airDate": "2023-09-08",
+   "airDateUtc": "2023-09-08T04:00:00Z",
+   "runtime": 61,
+   "overview": "Dusk and Enjoiner Rue learn Demerzel's origin and true purpose. Tellem's plans for Gaal take a dark turn. On Terminus, Day confronts Dr. Seldon.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9785500/screencap/64f13808b54b9.jpg"
+  },
+  {
+   "tvdbShowId": 366972,
+   "tvdbId": 9785501,
+   "seasonNumber": 2,
+   "episodeNumber": 10,
+   "title": "Creation Myths",
+   "airDate": "2023-09-15",
+   "airDateUtc": "2023-09-15T04:00:00Z",
+   "runtime": 53,
+   "finaleType": "season",
+   "overview": "Gaal, Salvor, and Hari chart a new path forward on Ignis. Demerzel heads to Trantor, taking actions that will change Empire forever.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9785501/screencap/64fa7a04ef017.jpg"
+  },
+  {
+   "tvdbShowId": 366972,
+   "tvdbId": 11127692,
+   "seasonNumber": 3,
+   "episodeNumber": 1,
+   "title": "A Song for the End of Everything",
+   "airDate": "2025-07-11",
+   "airDateUtc": "2025-07-11T04:00:00Z",
+   "runtime": 51,
+   "overview": "A mysterious new pirate with terrifying abilities—known as the Mule—catches the attention of the Foundation and Empire.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11127692/screencap/6870630f4e50c.jpg"
+  },
+  {
+   "tvdbShowId": 366972,
+   "tvdbId": 11133968,
+   "seasonNumber": 3,
+   "episodeNumber": 2,
+   "title": "Shadows in the Math",
+   "airDate": "2025-07-18",
+   "airDateUtc": "2025-07-18T04:00:00Z",
+   "runtime": 48,
+   "overview": "Gaal and Hari advance their plans on Ignis. Empire grapples with an unforeseen prediction. Pritcher enlists help to investigate the Mule.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11133968/screencap/6870638c43101.jpg"
+  },
+  {
+   "tvdbShowId": 366972,
+   "tvdbId": 11133969,
+   "seasonNumber": 3,
+   "episodeNumber": 3,
+   "title": "When a Book Finds You",
+   "airDate": "2025-07-25",
+   "airDateUtc": "2025-07-25T04:00:00Z",
+   "runtime": 50,
+   "overview": "An unexpected alliance is formed. Pritcher, Bayta, and Toran come face-to-face with the Mule. Demerzel seeks spiritual guidance.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11133969/screencap/68799ceb006f6.jpg"
+  },
+  {
+   "tvdbShowId": 366972,
+   "tvdbId": 11133970,
+   "seasonNumber": 3,
+   "episodeNumber": 4,
+   "title": "The Stress of Her Regard",
+   "airDate": "2025-08-01",
+   "airDateUtc": "2025-08-01T04:00:00Z",
+   "runtime": 48,
+   "overview": "Demerzel struggles with the paradox of her programming. Pritcher's true loyalties are revealed. Day sets off on a quest for answers.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11133970/screencap/6882d781867ab.jpg"
+  },
+  {
+   "tvdbShowId": 366972,
+   "tvdbId": 11133971,
+   "seasonNumber": 3,
+   "episodeNumber": 5,
+   "title": "Where Tyrants Spend Eternity",
+   "airDate": "2025-08-08",
+   "airDateUtc": "2025-08-08T04:00:00Z",
+   "runtime": 46,
+   "overview": "Day enters uncharted territory. Dawn and Gaal put their plan in motion. Magnifico’s worth becomes clear. Demerzel attempts to restore power.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11133971/screencap/688c130648ef8.jpg"
+  },
+  {
+   "tvdbShowId": 366972,
+   "tvdbId": 11133972,
+   "seasonNumber": 3,
+   "episodeNumber": 6,
+   "title": "The Shape of Time",
+   "airDate": "2025-08-15",
+   "airDateUtc": "2025-08-15T04:00:00Z",
+   "runtime": 44,
+   "overview": "A long-awaited reunion turns violent. Day looks for Song. On New Terminus, the Vault opens—and the Mule takes aim.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11133972/screencap/68954d475da70.jpg"
+  },
+  {
+   "tvdbShowId": 366972,
+   "tvdbId": 11133973,
+   "seasonNumber": 3,
+   "episodeNumber": 7,
+   "title": "Foundation's End",
+   "airDate": "2025-08-22",
+   "airDateUtc": "2025-08-22T04:00:00Z",
+   "runtime": 59,
+   "overview": "Chaos and destruction rain down on New Terminus. Back on Trantor, Dusk and Quent unite to assess the state of the galaxy.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11133973/screencap/689eb5cc40b6a.jpg"
+  },
+  {
+   "tvdbShowId": 366972,
+   "tvdbId": 11133974,
+   "seasonNumber": 3,
+   "episodeNumber": 8,
+   "title": "Skin in the Game",
+   "airDate": "2025-08-29",
+   "airDateUtc": "2025-08-29T04:00:00Z",
+   "runtime": 46,
+   "overview": "Gaal and the Second Foundation reckon with the fall of New Terminus. Day faces judgment on Mycogen. Dusk's ascension looms.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11133974/screencap/68a7c28dde705.jpg"
+  },
+  {
+   "tvdbShowId": 366972,
+   "tvdbId": 11133975,
+   "seasonNumber": 3,
+   "episodeNumber": 9,
+   "title": "The Paths That Choose Us",
+   "airDate": "2025-09-05",
+   "airDateUtc": "2025-09-05T04:00:00Z",
+   "runtime": 46,
+   "overview": "Gaal confronts the power of the Mule's conversions. Dusk resorts to drastic measures. Demerzel searches for clarity about the future.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11133975/screencap/68b0ff0ba7c91.jpg"
+  },
+  {
+   "tvdbShowId": 366972,
+   "tvdbId": 11133976,
+   "seasonNumber": 3,
+   "episodeNumber": 10,
+   "title": "The Darkness",
+   "airDate": "2025-09-12",
+   "airDateUtc": "2025-09-12T04:00:00Z",
+   "runtime": 51,
+   "finaleType": "season",
+   "overview": "Gaal and the Second Foundation take the fight to the Mule as Empire's legacy suffers a catastrophic blow.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11133976/screencap/68ba36b62ca0b.jpg"
+  },
+  {
+   "tvdbShowId": 366972,
+   "tvdbId": 11833139,
+   "seasonNumber": 4,
+   "episodeNumber": 1,
+   "title": "The Line of Consequence"
+  }
+ ]
+}

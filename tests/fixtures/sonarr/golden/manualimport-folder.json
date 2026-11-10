@@ -38,7 +38,7 @@
       "size": 119980
     }
   ],
-  "recordedAt": "2026-11-08T20:58:48Z",
+  "recordedAt": "2026-11-09T22:19:56Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/manualimport?folder=/downloads/tv/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2&filterExistingFiles=true"

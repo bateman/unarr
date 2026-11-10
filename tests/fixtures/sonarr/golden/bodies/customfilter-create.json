@@ -1,0 +1,13 @@
+{
+ "type": "series",
+ "label": "Ended",
+ "filters": [
+  {
+   "key": "status",
+   "value": [
+    "ended"
+   ],
+   "type": "equal"
+  }
+ ]
+}

@@ -356,3 +356,54 @@ async fn grabs_are_tracked_through_the_queue_and_the_history() {
         Err(RemoveError::NotFound)
     ));
 }
+
+/// `TrackedDownloadService`'s handlers of a refresh that removed episodes,
+/// of a deleted series and of an added one: the download is matched again
+/// at once, not at the next poll of the clients.
+#[tokio::test]
+async fn tracked_downloads_follow_the_library() {
+    let mock = Mock::start(fixtures_dir(), 0).await.unwrap();
+    let db = fixture_db(mock.port()).await;
+    let http = unarr_core::http::build(std::time::Duration::from_secs(10));
+    let downloads = Downloads::new(db.clone(), DownloadClientService::with_client(db.clone(), http));
+    let pitt = decided(&db, IndexerKind::Newznab, &mock, "The.Pitt.S01E01.1080p.AMZN").await;
+    downloads.download_report(&pitt, Some(4), now()).await.unwrap();
+    downloads.refresh(now()).await.unwrap();
+    let item = &downloads.queue()[0];
+    assert_eq!(item.series.as_ref().map(|s| s.id), Some(1));
+    assert_eq!(item.episode.as_ref().map(|e| e.id), Some(1));
+    let tvdb_id = item.series.as_ref().unwrap().tvdb_id;
+
+    // Episodes no download is for: nothing to do.
+    assert!(!downloads.episodes_removed(&[2, 3], now()).await.unwrap());
+    assert!(!downloads.episodes_removed(&[], now()).await.unwrap());
+
+    // The refresh removed the episode: the series is still known, the
+    // episode is not.
+    db.call(|conn| store::episodes::delete_episodes(conn, &[1]))
+        .await
+        .unwrap();
+    assert!(downloads.episodes_removed(&[1], now()).await.unwrap());
+    let queue = downloads.queue();
+    assert_eq!(queue.len(), 1, "{queue:?}");
+    assert_eq!(queue[0].series.as_ref().map(|s| s.id), Some(1));
+    assert_eq!(queue[0].episode, None);
+    assert!(downloads
+        .queued_releases()
+        .iter()
+        .all(|q| q.episode_ids.is_empty()));
+
+    // The series is deleted: the download stays in the queue, unmatched.
+    db.call(|conn| store::series::delete_cascade(conn, &[1]))
+        .await
+        .unwrap();
+    assert!(!downloads.series_deleted(&[(99, 99)], now()).await.unwrap());
+    assert!(downloads.series_deleted(&[(1, tvdb_id)], now()).await.unwrap());
+    let queue = downloads.queue();
+    assert_eq!(queue.len(), 1, "{queue:?}");
+    assert_eq!(queue[0].series, None);
+
+    // Any series added has the unmatched downloads looked at again.
+    assert!(downloads.series_added(tvdb_id, now()).await.unwrap());
+    assert_eq!(downloads.queue()[0].series, None);
+}

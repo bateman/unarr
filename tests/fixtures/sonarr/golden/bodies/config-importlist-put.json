@@ -1,0 +1,6 @@
+{
+ "$from": "config-importlist",
+ "$set": {
+  "listSyncLevel": "logOnly"
+ }
+}

@@ -1,0 +1,6 @@
+{
+ "$from": "episode-2-before-put",
+ "$set": {
+  "monitored": false
+ }
+}

@@ -11,7 +11,7 @@
       "seriesId": 2
     }
   ],
-  "recordedAt": "2026-11-08T21:00:08Z",
+  "recordedAt": "2026-11-09T22:21:16Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/rename?seriesId=2&seasonNumber=1"

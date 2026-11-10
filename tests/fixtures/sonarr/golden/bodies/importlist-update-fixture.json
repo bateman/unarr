@@ -1,0 +1,6 @@
+{
+ "$from": "importlist-1",
+ "$set": {
+  "name": "Simkl Plan to Watch"
+ }
+}

@@ -22,6 +22,11 @@ impl Params {
         Params(out)
     }
 
+    /// Every pair, in the order sent.
+    pub fn pairs(&self) -> &[(String, String)] {
+        &self.0
+    }
+
     pub fn get(&self, name: &str) -> Option<&str> {
         self.0
             .iter()

@@ -1,0 +1,23 @@
+{
+  "body": [
+    {
+      "attemptedValue": 448176,
+      "errorCode": "SeriesExistsValidator",
+      "errorMessage": "This series has already been added",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Tvdb Id",
+        "propertyValue": 448176
+      },
+      "propertyName": "TvdbId",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-09T22:23:22Z",
+  "request": {
+    "body": "bodies/series-add-existing.json",
+    "method": "POST",
+    "path": "/api/v3/series"
+  },
+  "status": 400
+}

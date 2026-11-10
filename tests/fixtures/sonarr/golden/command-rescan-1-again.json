@@ -15,14 +15,14 @@
     "id": 461698,
     "name": "RescanSeries",
     "priority": "normal",
-    "queued": "2026-11-08T20:59:44Z",
+    "queued": "2026-11-09T22:20:52Z",
     "result": "unknown",
     "sendUpdatesToClient": true,
     "status": "queued",
     "trigger": "manual",
     "updateScheduledTask": true
   },
-  "recordedAt": "2026-11-08T20:59:44Z",
+  "recordedAt": "2026-11-09T22:20:52Z",
   "request": {
     "body": "bodies/command-rescan-1.json",
     "method": "POST",

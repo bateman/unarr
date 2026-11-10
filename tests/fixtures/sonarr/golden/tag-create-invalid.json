@@ -1,0 +1,13 @@
+{
+  "body": {
+    "id": 4,
+    "label": "not valid!"
+  },
+  "recordedAt": "2026-11-09T22:24:42Z",
+  "request": {
+    "body": "bodies/tag-create-invalid.json",
+    "method": "POST",
+    "path": "/api/v3/tag"
+  },
+  "status": 201
+}

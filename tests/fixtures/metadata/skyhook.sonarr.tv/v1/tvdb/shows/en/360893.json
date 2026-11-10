@@ -1,0 +1,353 @@
+{
+ "tvdbId": 360893,
+ "title": "Chernobyl",
+ "overview": "Chernobyl dramatizes the story of the 1986 nuclear accident — one of the worst man-made catastrophes in history — and the sacrifices made to save Europe from unimaginable disaster.",
+ "slug": "chernobyl",
+ "originalCountry": "usa",
+ "originalLanguage": "eng",
+ "language": "eng",
+ "firstAired": "2019-05-06",
+ "lastAired": "2019-06-03",
+ "tvMazeId": 30770,
+ "tmdbId": 87108,
+ "imdbId": "tt7366338",
+ "malIds": [],
+ "anidbIds": [],
+ "aniListIds": [],
+ "lastUpdated": "2026-10-28T21:56:52Z",
+ "status": "Ended",
+ "runtime": 65,
+ "timeOfDay": {
+  "hours": 21,
+  "minutes": 0
+ },
+ "originalNetwork": "HBO",
+ "network": "HBO",
+ "genres": [
+  "Drama",
+  "History",
+  "Mini-Series",
+  "Thriller"
+ ],
+ "contentRating": "TV-MA",
+ "rating": {
+  "count": 1075848,
+  "value": "9.3"
+ },
+ "alternativeTitles": [
+  {
+   "title": "Chornobyl"
+  }
+ ],
+ "actors": [
+  {
+   "name": "Jared Harris",
+   "character": "Valery Legasov",
+   "image": "https://artworks.thetvdb.com/banners/person/360332/614ce218cf5c2.jpg"
+  },
+  {
+   "name": "Stellan Skarsgård",
+   "character": "Boris Shcherbina",
+   "image": "https://artworks.thetvdb.com/banners/person/378106/5f09f8ba3ec90.jpg"
+  },
+  {
+   "name": "Emily Watson",
+   "character": "Ulana Khomyuk",
+   "image": "https://artworks.thetvdb.com/banners/person/300426/5f5bea1590aad.jpg"
+  },
+  {
+   "name": "Jessie Buckley",
+   "character": "Lyudmila Ignatenko",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/477089/photo/654b6a64c3d1d.jpg"
+  },
+  {
+   "name": "Adrian Rawlins",
+   "character": "Nikolai Fomin",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/322198/photo/6513541dcd70a.jpg"
+  },
+  {
+   "name": "Con O'Neill",
+   "character": "Viktor Bryukhanov",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/449517/photo/686c00db4a650.jpg"
+  },
+  {
+   "name": "Paul Ritter",
+   "character": "Anatoly Dyatlov",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/503454/photo/606c9d38aa1c1.jpg"
+  },
+  {
+   "name": "David Dencik",
+   "character": "Mikhail Gorbachev",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/463556/photo/677c95dc5d976.jpg"
+  },
+  {
+   "name": "Robert Emms",
+   "character": "Leonid Toptunov"
+  },
+  {
+   "name": "Sam Troughton",
+   "character": "Aleksandr Akimov",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/385238/photo/685b57c8d8645.jpg"
+  },
+  {
+   "name": "Alex Ferns",
+   "character": "Glukhov",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/351456/photo/60b688bceda8a.jpg"
+  }
+ ],
+ "images": [
+  {
+   "coverType": "Banner",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/360893/banners/6751caac5a993.jpg"
+  },
+  {
+   "coverType": "Poster",
+   "url": "https://artworks.thetvdb.com/banners/posters/5cc12861c93e4.jpg"
+  },
+  {
+   "coverType": "Fanart",
+   "url": "https://artworks.thetvdb.com/banners/series/360893/backgrounds/62017319.jpg"
+  },
+  {
+   "coverType": "Clearlogo",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/360893/clearlogo/611be4d52d6a8.png"
+  }
+ ],
+ "seasons": [
+  {
+   "seasonNumber": 0,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/801959/posters/61abded7829fe.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 1,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/801960/posters/694d0f265d874.jpg"
+    }
+   ]
+  }
+ ],
+ "episodes": [
+  {
+   "tvdbShowId": 360893,
+   "tvdbId": 11521949,
+   "seasonNumber": 0,
+   "episodeNumber": 23,
+   "airedAfterSeasonNumber": 1,
+   "airedBeforeSeasonNumber": 2,
+   "airedBeforeEpisodeNumber": 1,
+   "title": "Inside the Episode - 1:23:45",
+   "airDate": "2019-07-15",
+   "airDateUtc": "2019-07-16T01:00:00Z",
+   "runtime": 3,
+   "overview": "Inside the Episode of 1:23:45"
+  },
+  {
+   "tvdbShowId": 360893,
+   "tvdbId": 11521950,
+   "seasonNumber": 0,
+   "episodeNumber": 24,
+   "airedAfterSeasonNumber": 1,
+   "title": "Inside the Episode - Please Remain Calm",
+   "airDate": "2019-07-15",
+   "airDateUtc": "2019-07-16T01:00:00Z",
+   "runtime": 3,
+   "overview": "Inside the Episode of Please Remain Calm"
+  },
+  {
+   "tvdbShowId": 360893,
+   "tvdbId": 11521951,
+   "seasonNumber": 0,
+   "episodeNumber": 25,
+   "airedAfterSeasonNumber": 1,
+   "title": "Inside the Episode - Open Wide, O Earth",
+   "airDate": "2019-07-15",
+   "airDateUtc": "2019-07-16T01:00:00Z",
+   "runtime": 2,
+   "overview": "Inside the Episode of Open Wide, O Earth"
+  },
+  {
+   "tvdbShowId": 360893,
+   "tvdbId": 11521952,
+   "seasonNumber": 0,
+   "episodeNumber": 26,
+   "airedAfterSeasonNumber": 1,
+   "airedBeforeSeasonNumber": 2,
+   "airedBeforeEpisodeNumber": 1,
+   "title": "Inside the Episode - The Happiness of All Mankind",
+   "airDate": "2019-07-15",
+   "airDateUtc": "2019-07-16T01:00:00Z",
+   "runtime": 4,
+   "overview": "Inside the Episode of The Happiness of All Mankind"
+  },
+  {
+   "tvdbShowId": 360893,
+   "tvdbId": 11521953,
+   "seasonNumber": 0,
+   "episodeNumber": 27,
+   "airedAfterSeasonNumber": 1,
+   "title": "Inside the Episode - Vichnaya Pamyat",
+   "airDate": "2019-07-15",
+   "airDateUtc": "2019-07-16T01:00:00Z",
+   "runtime": 4,
+   "overview": "Inside the Episode of Vichnaya Pamyat"
+  },
+  {
+   "tvdbShowId": 360893,
+   "tvdbId": 11889277,
+   "seasonNumber": 0,
+   "episodeNumber": 28,
+   "airedAfterSeasonNumber": 1,
+   "title": "What is Chernobyl",
+   "airDate": "2019-04-26",
+   "airDateUtc": "2019-04-27T01:00:00Z",
+   "runtime": 1,
+   "overview": "What is Chernobyl?"
+  },
+  {
+   "tvdbShowId": 360893,
+   "tvdbId": 11889280,
+   "seasonNumber": 0,
+   "episodeNumber": 29,
+   "airedAfterSeasonNumber": 1,
+   "title": "Meet the key players JeredHarris as Valery Legasov The professor",
+   "airDate": "2019-10-01",
+   "airDateUtc": "2019-10-02T01:00:00Z",
+   "runtime": 1,
+   "overview": "Meet the key players JeredHarris as Valery Legasov The professor."
+  },
+  {
+   "tvdbShowId": 360893,
+   "tvdbId": 11889281,
+   "seasonNumber": 0,
+   "episodeNumber": 30,
+   "airedAfterSeasonNumber": 1,
+   "title": "Meet the Players Stallan Skarsgard as Boris Shcherbina The Apparatchik",
+   "airDate": "2019-10-01",
+   "airDateUtc": "2019-10-02T01:00:00Z",
+   "runtime": 1,
+   "overview": "Meet the Players Stallan Skarsgard as Boris Shcherbina The Apparatchik"
+  },
+  {
+   "tvdbShowId": 360893,
+   "tvdbId": 11889283,
+   "seasonNumber": 0,
+   "episodeNumber": 31,
+   "airedAfterSeasonNumber": 1,
+   "title": "Meet the key players Emily Watson as Ulana Khomyuk The Scientist",
+   "airDate": "2019-10-01",
+   "airDateUtc": "2019-10-02T01:00:00Z",
+   "runtime": 1,
+   "overview": "Meet the key players Emily Watson as Ulana Khomyuk The Scientist"
+  },
+  {
+   "tvdbShowId": 360893,
+   "tvdbId": 11889284,
+   "seasonNumber": 0,
+   "episodeNumber": 32,
+   "airedAfterSeasonNumber": 1,
+   "title": "Behind the Curtain Director Johan Renck",
+   "airDate": "2019-10-01",
+   "airDateUtc": "2019-10-02T01:00:00Z",
+   "runtime": 1,
+   "overview": "Behind the Curtain Director Johan Renck"
+  },
+  {
+   "tvdbShowId": 360893,
+   "tvdbId": 11889285,
+   "seasonNumber": 0,
+   "episodeNumber": 33,
+   "airedAfterSeasonNumber": 1,
+   "title": "Script to Screen The Divers",
+   "airDate": "2019-10-01",
+   "airDateUtc": "2019-10-02T01:00:00Z",
+   "runtime": 1,
+   "overview": "Script to Screen The Divers"
+  },
+  {
+   "tvdbShowId": 360893,
+   "tvdbId": 11889287,
+   "seasonNumber": 0,
+   "episodeNumber": 34,
+   "airedAfterSeasonNumber": 1,
+   "title": "Pivotal Moment The Trial",
+   "airDate": "2019-10-01",
+   "airDateUtc": "2019-10-02T01:00:00Z",
+   "runtime": 2,
+   "finaleType": "season",
+   "overview": "Pivotal Moment The Trial"
+  },
+  {
+   "tvdbShowId": 360893,
+   "tvdbId": 7082952,
+   "seasonNumber": 1,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 1,
+   "title": "1:23:45",
+   "airDate": "2019-05-06",
+   "airDateUtc": "2019-05-07T01:00:00Z",
+   "runtime": 59,
+   "overview": "Plant workers and firefighters put their lives on the line to control a catastrophic 1986 explosion at a Soviet nuclear power plant.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/360893/65ef1dc1e30e1.jpg"
+  },
+  {
+   "tvdbShowId": 360893,
+   "tvdbId": 7109113,
+   "seasonNumber": 1,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 2,
+   "title": "Please Remain Calm",
+   "airDate": "2019-05-13",
+   "airDateUtc": "2019-05-14T01:00:00Z",
+   "runtime": 65,
+   "overview": "With untold millions at risk after the Chernobyl explosion, nuclear physicist Ulana Khomyuk makes a desperate attempt to reach Valery Legasov, a leading Soviet nuclear physicist, and warn him about the threat of second explosion that could devastate the continent.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/360893/65ef1df635ac0.jpg"
+  },
+  {
+   "tvdbShowId": 360893,
+   "tvdbId": 7223774,
+   "seasonNumber": 1,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 3,
+   "title": "Open Wide, O Earth",
+   "airDate": "2019-05-20",
+   "airDateUtc": "2019-05-21T01:00:00Z",
+   "runtime": 62,
+   "overview": "Lyudmilla Ignatenko, a Pripyat resident, ignores warning about her firefighter husband's contamination; Valery Legasov lays out a decontamination plan, complete with human risks.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/360893/65ef1e1e11567.jpg"
+  },
+  {
+   "tvdbShowId": 360893,
+   "tvdbId": 7116984,
+   "seasonNumber": 1,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 4,
+   "title": "The Happiness of All Mankind",
+   "airDate": "2019-05-27",
+   "airDateUtc": "2019-05-28T01:00:00Z",
+   "runtime": 65,
+   "overview": "Valery Legasov and Soviet Deputy Prime Minister Boris Shcherbina consider using lunar rovers to remove radioactive debris. Ulana Khomyuk faces government hurdles in determining the truth about the cause of the explosion.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/360893/66af49cc234bb.jpg"
+  },
+  {
+   "tvdbShowId": 360893,
+   "tvdbId": 7116987,
+   "seasonNumber": 1,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 5,
+   "title": "Vichnaya Pamyat",
+   "airDate": "2019-06-03",
+   "airDateUtc": "2019-06-04T01:00:00Z",
+   "runtime": 72,
+   "finaleType": "series",
+   "overview": "Valery Legasov, Boris Shcherbina and Ulana Khomyuk risk their lives and reputations to expose the truth about Chernobyl.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/360893/65ef1eb59666b.jpg"
+  }
+ ]
+}

@@ -73,7 +73,7 @@
             "thumbnail": {
               "url": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg"
             },
-            "timestamp": "2026-11-08T20:59:00.6294578Z",
+            "timestamp": "2026-11-09T22:20:08.3051777Z",
             "title": "The Pitt - 1x01 - 7:00 A.M.",
             "url": "http://thetvdb.com/?tab=series&id=448176"
           }
@@ -110,7 +110,7 @@
                 "value": "```/tv/The Pitt/Season 01/The Pitt (2025) - S01E01 - 7-00 A.M [WEBDL-480p][AAC 1.0][x264]-ETHEL.mkv```"
               }
             ],
-            "timestamp": "2026-11-08T20:59:12.7247092Z",
+            "timestamp": "2026-11-09T22:20:20.4249739Z",
             "title": "The Pitt - 1x01 - 7:00 A.M.",
             "url": "http://thetvdb.com/?tab=series&id=448176"
           }
@@ -130,7 +130,7 @@
         "applicationUrl": "",
         "deleteReason": "upgrade",
         "episodeFile": {
-          "dateAdded": "2026-11-08T20:57:28.0506875Z",
+          "dateAdded": "2026-11-09T22:18:35.761909Z",
           "id": 1073,
           "languages": [
             {
@@ -304,7 +304,7 @@
             "thumbnail": {
               "url": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg"
             },
-            "timestamp": "2026-11-08T20:59:12.7516616Z",
+            "timestamp": "2026-11-09T22:20:20.4551630Z",
             "title": "The Pitt - 1x01 - 7:00 A.M.",
             "url": "http://thetvdb.com/?tab=series&id=448176"
           }
@@ -341,7 +341,7 @@
         },
         "deletedFiles": [
           {
-            "dateAdded": "2026-11-08T20:57:28.0506875Z",
+            "dateAdded": "2026-11-09T22:18:35.761909Z",
             "id": 1073,
             "languages": [
               {
@@ -377,7 +377,7 @@
         "downloadClientType": "SABnzbd",
         "downloadId": "SABnzbd_nzo_mock6",
         "episodeFile": {
-          "dateAdded": "2026-11-08T20:59:12.7097754Z",
+          "dateAdded": "2026-11-09T22:20:20.4052336Z",
           "id": 1077,
           "languages": [
             {
@@ -544,7 +544,7 @@
             "thumbnail": {
               "url": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg"
             },
-            "timestamp": "2026-11-08T20:59:12.7684825Z",
+            "timestamp": "2026-11-09T22:20:20.4765668Z",
             "title": "The Pitt - 1x01 - 7:00 A.M.",
             "url": "http://thetvdb.com/?tab=series&id=448176"
           }
@@ -568,7 +568,7 @@
         "downloadId": "SABnzbd_nzo_mock6",
         "episodeFiles": [
           {
-            "dateAdded": "2026-11-08T20:59:12.7097754Z",
+            "dateAdded": "2026-11-09T22:20:20.4052336Z",
             "id": 1077,
             "languages": [
               {
@@ -712,7 +712,7 @@
       "service": "plex"
     }
   ],
-  "recordedAt": "2026-11-08T20:59:32Z",
+  "recordedAt": "2026-11-09T22:20:40Z",
   "request": {
     "method": "GET",
     "path": "/mock/notifications",

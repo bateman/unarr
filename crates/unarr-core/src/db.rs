@@ -19,6 +19,8 @@ const MIGRATIONS: &[&str] = &[
     include_str!("../migrations/0004_commands.sql"),
     include_str!("../migrations/0005_history_download_id.sql"),
     include_str!("../migrations/0006_import.sql"),
+    include_str!("../migrations/0007_import_lists.sql"),
+    include_str!("../migrations/0008_episode_statistics.sql"),
 ];
 
 type Job = Box<dyn FnOnce(&mut Connection) + Send + 'static>;
@@ -57,7 +59,11 @@ impl Db {
         conn.pragma_update(None, "foreign_keys", "ON")?;
         migrate(&mut conn)?;
         let (tx, rx) = mpsc::channel::<Job>();
+        // The thread logs where its opener does: one process serves several
+        // personalities, each with a `tracing` dispatcher of its own.
+        let log = tracing::dispatcher::get_default(|d| d.clone());
         thread::Builder::new().name("unarr-db".into()).spawn(move || {
+            let _log = tracing::dispatcher::set_default(&log);
             for job in rx {
                 job(&mut conn);
             }

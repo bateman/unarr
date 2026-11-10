@@ -184,7 +184,7 @@
     "removeFailedDownloads": true,
     "tags": []
   },
-  "recordedAt": "2026-11-08T20:56:09Z",
+  "recordedAt": "2026-11-09T22:17:17Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/downloadclient/4"

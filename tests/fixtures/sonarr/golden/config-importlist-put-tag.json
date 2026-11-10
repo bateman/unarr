@@ -1,0 +1,14 @@
+{
+  "body": {
+    "id": 1,
+    "listSyncLevel": "keepAndTag",
+    "listSyncTag": 1
+  },
+  "recordedAt": "2026-11-09T22:24:55Z",
+  "request": {
+    "body": "bodies/config-importlist-put-tag.json",
+    "method": "PUT",
+    "path": "/api/v3/config/importlist/1"
+  },
+  "status": 202
+}

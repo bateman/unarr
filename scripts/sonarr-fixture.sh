@@ -10,7 +10,7 @@
 # into .cache/sonarr/. The fixture itself is an anonymised real database, see
 # tests/fixtures/sonarr/README.md.
 #
-# Requirements: bash, curl, tar, python3; libicu for `golden`. `golden` and
+# Requirements: bash, curl, tar, python3, openssl; libicu for `golden`. `golden` and
 # `shell` also start scripts/mock-servarr.py on port 18989 (MOCK_PORT), and
 # need /tv and /downloads (TV_DIR, DOWNLOADS_DIR): the fixture's root folder
 # and the directory the mock download clients report, so that the real
@@ -88,7 +88,15 @@ start_mock() {
     if curl -fsS -o /dev/null "http://127.0.0.1:$MOCK_PORT/newznab/api?t=caps&apikey=$API_KEY" 2>/dev/null; then
         die "something already listens on port $MOCK_PORT; stop it (pkill -f mock-servarr.py) and retry"
     fi
-    python3 -I "$REPO/scripts/mock-servarr.py" --listen "127.0.0.1:$MOCK_PORT" --fixtures "$REPO/tests/fixtures" --log "$logfile" --downloads "$DOWNLOADS_DIR" --tv "$TV_DIR" 2>"$CACHE/mock.stderr.log" &
+    local cert="$CACHE/mock-tls.crt" key="$CACHE/mock-tls.key" record=()
+    if [ ! -f "$cert" ]; then
+        openssl req -x509 -newkey rsa:2048 -nodes -days 3650 -subj "/CN=unarr-mock" \
+            -addext "subjectAltName=DNS:skyhook.sonarr.tv,DNS:services.sonarr.tv,DNS:thexem.info,DNS:artworks.thetvdb.com" \
+            -keyout "$key" -out "$cert" 2>/dev/null || die "openssl could not make the mock's certificate"
+    fi
+    [ "${RECORD_METADATA:-0}" = 1 ] && record=(--record-metadata) && log "metadata fixtures missing from tests/fixtures/metadata are fetched from the real hosts"
+    python3 -I "$REPO/scripts/mock-servarr.py" --listen "127.0.0.1:$MOCK_PORT" --fixtures "$REPO/tests/fixtures" --log "$logfile" --downloads "$DOWNLOADS_DIR" --tv "$TV_DIR" \
+        --tls-cert "$cert" --tls-key "$key" "${record[@]}" 2>"$CACHE/mock.stderr.log" &
     MOCK_PID=$!
     for _ in $(seq 1 20); do
         if curl -fsS -o /dev/null "http://127.0.0.1:$MOCK_PORT/newznab/api?t=caps&apikey=$API_KEY" 2>/dev/null; then
@@ -112,7 +120,10 @@ SONARR_PID=""
 start_sonarr() {
     local data="$1"
     log "starting Sonarr on port $SONARR_PORT, data dir $data"
-    "$CACHE/Sonarr/Sonarr" -nobrowser -data="$data" >"$data/sonarr.stdout.log" 2>&1 &
+    # Without the environment's proxy variables: .NET honours them, and the
+    # recording must reach the outside world only through the mock.
+    env -u HTTPS_PROXY -u https_proxy -u HTTP_PROXY -u http_proxy -u ALL_PROXY -u all_proxy \
+        "$CACHE/Sonarr/Sonarr" -nobrowser -data="$data" >"$data/sonarr.stdout.log" 2>&1 &
     SONARR_PID=$!
     for _ in $(seq 1 120); do
         if curl -fsS -o /dev/null -H "X-Api-Key: $API_KEY" "http://127.0.0.1:$SONARR_PORT/api/v3/system/status" 2>/dev/null; then
@@ -159,14 +170,18 @@ cmd_golden() {
     prepare_dirs
     start_mock
     start_on_fixture_copy
-    mkdir -p "$GOLDEN_DIR"
+    # GOLDEN_REQUESTS and GOLDEN_OUT record another request list somewhere
+    # else: a probe of the original, or new requests tried on their own
+    # before they join the list (bodies are read next to the list).
+    local requests="${GOLDEN_REQUESTS:-$GOLDEN_DIR/requests.txt}" out="${GOLDEN_OUT:-$GOLDEN_DIR}"
+    mkdir -p "$out"
     python3 -I "$REPO/scripts/record-golden.py" \
         --base-url "http://127.0.0.1:$SONARR_PORT" --api-key "$API_KEY" --mock-url "http://127.0.0.1:$MOCK_PORT" \
-        --requests "$GOLDEN_DIR/requests.txt" --out "$GOLDEN_DIR" --login unarr:fixture
-    record_schemas
+        --requests "$requests" --out "$out" --login unarr:fixture
+    [ "$out" = "$GOLDEN_DIR" ] && record_schemas
     stop_sonarr
     stop_mock
-    log "golden files written to $GOLDEN_DIR"
+    log "golden files written to $out"
 }
 
 # Provider and specification schemas: the field metadata (labels, help text,

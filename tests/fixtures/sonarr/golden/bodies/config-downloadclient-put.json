@@ -1,0 +1,7 @@
+{
+ "$from": "config-downloadclient",
+ "$set": {
+  "autoRedownloadFailed": false,
+  "checkForFinishedDownloadInterval": 2
+ }
+}

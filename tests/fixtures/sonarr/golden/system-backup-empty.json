@@ -1,0 +1,9 @@
+{
+  "body": [],
+  "recordedAt": "2026-11-09T23:00:58Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/system/backup"
+  },
+  "status": 200
+}

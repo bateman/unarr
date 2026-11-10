@@ -4,7 +4,7 @@
     "pageSize": 20,
     "records": [
       {
-        "added": "2026-11-08T20:57:11Z",
+        "added": "2026-11-09T22:18:19Z",
         "customFormatScore": -10000,
         "customFormats": [
           {
@@ -14,7 +14,7 @@
         ],
         "downloadClient": "Mock NZBGet",
         "downloadClientHasPostImportCategory": false,
-        "downloadId": "c4119cd06a044d60be1043396370761b",
+        "downloadId": "c860499553f64d7b8170eae60cd1a5b3",
         "episode": {
           "absoluteEpisodeNumber": 2,
           "airDate": "2025-01-09",
@@ -23,7 +23,7 @@
           "episodeNumber": 2,
           "hasFile": false,
           "id": 2,
-          "lastSearchTime": "2026-11-08T20:56:40Z",
+          "lastSearchTime": "2026-11-09T22:17:48Z",
           "monitored": false,
           "overview": "Robby helps siblings navigate their elderly father’s end-of-life care. Later, Samira fends off cops targeting a woman with a misunderstood condition.",
           "runtime": 50,
@@ -35,8 +35,8 @@
         },
         "episodeHasFile": false,
         "episodeId": 2,
-        "estimatedCompletionTime": "2026-11-08T20:57:33Z",
-        "id": 1645317694,
+        "estimatedCompletionTime": "2026-11-09T22:18:41Z",
+        "id": 1434614421,
         "indexer": "Mock Newznab (Prowlarr)",
         "languages": [
           {
@@ -142,7 +142,7 @@
         "trackedDownloadStatus": "ok"
       },
       {
-        "added": "2026-11-08T20:57:15Z",
+        "added": "2026-11-09T22:18:23Z",
         "customFormatScore": -10000,
         "customFormats": [
           {
@@ -172,7 +172,7 @@
           "episodeNumber": 2,
           "hasFile": false,
           "id": 47,
-          "lastSearchTime": "2026-11-08T20:57:09Z",
+          "lastSearchTime": "2026-11-09T22:18:17Z",
           "monitored": false,
           "overview": "Matt Murdock takes on a new client, Hector Ayala. But this local hero from the Heights is more than he claims to be. Fisk learns the power of optics in his new and very public role.",
           "runtime": 47,
@@ -184,7 +184,7 @@
         },
         "episodeHasFile": false,
         "episodeId": 47,
-        "estimatedCompletionTime": "2026-11-08T21:07:33Z",
+        "estimatedCompletionTime": "2026-11-09T22:28:41Z",
         "id": 2106446295,
         "indexer": "Mock Torznab (Prowlarr)",
         "languages": [
@@ -292,7 +292,7 @@
         "trackedDownloadStatus": "ok"
       },
       {
-        "added": "2026-11-08T20:57:13Z",
+        "added": "2026-11-09T22:18:21Z",
         "customFormatScore": -10000,
         "customFormats": [
           {
@@ -322,7 +322,7 @@
           "episodeNumber": 1,
           "hasFile": false,
           "id": 46,
-          "lastSearchTime": "2026-11-08T20:56:27Z",
+          "lastSearchTime": "2026-11-09T22:17:35Z",
           "monitored": false,
           "overview": "Longtime rivals Matt Murdock and Wilson Fisk attempt to move past their darker personas to serve New York, but their pasts resurface, reintroducing the world of Daredevil.",
           "runtime": 59,
@@ -334,7 +334,7 @@
         },
         "episodeHasFile": false,
         "episodeId": 46,
-        "estimatedCompletionTime": "2026-11-08T21:07:33Z",
+        "estimatedCompletionTime": "2026-11-09T22:28:41Z",
         "id": 1652059285,
         "indexer": "Mock Torznab (Prowlarr)",
         "languages": [
@@ -445,7 +445,7 @@
     "sortKey": "timeleft",
     "totalRecords": 3
   },
-  "recordedAt": "2026-11-08T20:57:47Z",
+  "recordedAt": "2026-11-09T22:18:55Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/queue?page=1&pageSize=20&sortKey=timeleft&sortDirection=ascending&includeUnknownSeriesItems=true&includeSeries=true&includeEpisode=true"

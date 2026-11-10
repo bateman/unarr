@@ -13,21 +13,21 @@
       "updateScheduledTask": true
     },
     "commandName": "Downloaded Episodes Scan",
-    "duration": "00:00:00.0424422",
-    "ended": "2026-11-08T20:59:56Z",
+    "duration": "00:00:00.0575517",
+    "ended": "2026-11-09T22:21:04Z",
     "id": 461699,
     "name": "DownloadedEpisodesScan",
     "priority": "normal",
-    "queued": "2026-11-08T20:59:56Z",
+    "queued": "2026-11-09T22:21:04Z",
     "result": "successful",
     "sendUpdatesToClient": true,
-    "started": "2026-11-08T20:59:56Z",
-    "stateChangeTime": "2026-11-08T20:59:56Z",
+    "started": "2026-11-09T22:21:04Z",
+    "stateChangeTime": "2026-11-09T22:21:04Z",
     "status": "completed",
     "trigger": "manual",
     "updateScheduledTask": true
   },
-  "recordedAt": "2026-11-08T21:00:08Z",
+  "recordedAt": "2026-11-09T22:21:16Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/command/461699"

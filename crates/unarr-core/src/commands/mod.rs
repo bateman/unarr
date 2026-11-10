@@ -237,6 +237,18 @@ pub enum CommandBody {
     RenameSeries {
         series_ids: Vec<i64>,
     },
+    /// `MoveSeriesCommand`: a series folder moved after a path edit.
+    MoveSeries {
+        series_id: i64,
+        source_path: String,
+        destination_path: String,
+    },
+    /// `BulkMoveSeriesCommand`: the editor's move to another root folder,
+    /// `(series id, source path)` each.
+    BulkMoveSeries {
+        destination_root_folder: String,
+        series: Vec<(i64, String)>,
+    },
     /// `DownloadedEpisodesScanCommand`: a path a third party asks to import.
     DownloadedEpisodesScan {
         path: Option<String>,
@@ -312,6 +324,11 @@ const NAMES: &[(&str, &str)] = &[
     (
         "RenameSeries",
         "NzbDrone.Core.MediaFiles.Commands.RenameSeriesCommand",
+    ),
+    ("MoveSeries", "NzbDrone.Core.Tv.Commands.MoveSeriesCommand"),
+    (
+        "BulkMoveSeries",
+        "NzbDrone.Core.Tv.Commands.BulkMoveSeriesCommand",
     ),
     ("CheckHealth", "NzbDrone.Core.HealthCheck.CheckHealthCommand"),
     ("Housekeeping", "NzbDrone.Core.Housekeeping.HousekeepingCommand"),
@@ -500,6 +517,25 @@ impl CommandBody {
             "RenameSeries" => CommandBody::RenameSeries {
                 series_ids: ints(&body["seriesIds"]),
             },
+            "MoveSeries" => CommandBody::MoveSeries {
+                series_id: body["seriesId"].as_i64().unwrap_or(0),
+                source_path: body["sourcePath"].as_str().unwrap_or("").to_string(),
+                destination_path: body["destinationPath"].as_str().unwrap_or("").to_string(),
+            },
+            "BulkMoveSeries" => CommandBody::BulkMoveSeries {
+                destination_root_folder: body["destinationRootFolder"].as_str().unwrap_or("").to_string(),
+                series: body["series"]
+                    .as_array()
+                    .into_iter()
+                    .flatten()
+                    .map(|s| {
+                        (
+                            s["seriesId"].as_i64().unwrap_or(0),
+                            s["sourcePath"].as_str().unwrap_or("").to_string(),
+                        )
+                    })
+                    .collect(),
+            },
             "DownloadedEpisodesScan" => CommandBody::DownloadedEpisodesScan {
                 path: body["path"]
                     .as_str()
@@ -554,6 +590,8 @@ impl CommandBody {
             CommandBody::ManualImport { .. } => "ManualImport",
             CommandBody::RenameFiles { .. } => "RenameFiles",
             CommandBody::RenameSeries { .. } => "RenameSeries",
+            CommandBody::MoveSeries { .. } => "MoveSeries",
+            CommandBody::BulkMoveSeries { .. } => "BulkMoveSeries",
             CommandBody::CheckHealth => "CheckHealth",
             CommandBody::Housekeeping => "Housekeeping",
             CommandBody::ApplicationUpdateCheck { .. } => "ApplicationUpdateCheck",
@@ -612,6 +650,8 @@ impl CommandBody {
                 | CommandBody::ManualImport { .. }
                 | CommandBody::RenameFiles { .. }
                 | CommandBody::RenameSeries { .. }
+                | CommandBody::MoveSeries { .. }
+                | CommandBody::BulkMoveSeries { .. }
         )
     }
 
@@ -680,6 +720,28 @@ impl CommandBody {
             }
             CommandBody::RenameSeries { series_ids } => {
                 m.insert("seriesIds".into(), json!(series_ids));
+            }
+            CommandBody::MoveSeries {
+                series_id,
+                source_path,
+                destination_path,
+            } => {
+                m.insert("seriesId".into(), json!(series_id));
+                m.insert("sourcePath".into(), json!(source_path));
+                m.insert("destinationPath".into(), json!(destination_path));
+            }
+            CommandBody::BulkMoveSeries {
+                destination_root_folder,
+                series,
+            } => {
+                m.insert("destinationRootFolder".into(), json!(destination_root_folder));
+                m.insert(
+                    "series".into(),
+                    json!(series
+                        .iter()
+                        .map(|(id, path)| json!({"seriesId": id, "sourcePath": path}))
+                        .collect::<Vec<_>>()),
+                );
             }
             CommandBody::DownloadedEpisodesScan {
                 path,

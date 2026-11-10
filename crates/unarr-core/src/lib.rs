@@ -3,6 +3,7 @@
 //! Nothing here knows about HTTP or about the on-disk layout of the original
 //! applications; that lives in `unarr-api` and `unarr-import` respectively.
 
+pub mod backup;
 pub mod collation;
 pub mod commands;
 pub mod config;
@@ -14,8 +15,10 @@ pub mod downloads;
 pub mod fs;
 pub mod health;
 pub mod http;
+pub mod importlists;
 pub mod indexers;
 pub mod mediafiles;
+pub mod metadata;
 pub mod model;
 pub mod naming;
 pub mod notifications;
@@ -26,6 +29,7 @@ pub mod search;
 pub mod store;
 pub mod time;
 pub mod torrent;
+pub mod tv;
 pub mod validation;
 
 pub use db::Db;

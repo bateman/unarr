@@ -1,0 +1,20 @@
+{
+  "body": [
+    {
+      "id": 1,
+      "title": "The Pete Holmes Show",
+      "tvdbId": 271728
+    },
+    {
+      "id": 2,
+      "title": "Frieren: Beyond Journey's End",
+      "tvdbId": 424536
+    }
+  ],
+  "recordedAt": "2026-11-09T22:25:35Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/importlistexclusion"
+  },
+  "status": 200
+}

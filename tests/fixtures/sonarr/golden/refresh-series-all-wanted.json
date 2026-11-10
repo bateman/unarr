@@ -1,0 +1,4594 @@
+{
+  "body": {
+    "page": 1,
+    "pageSize": 50,
+    "records": [
+      {
+        "airDate": "2026-11-06",
+        "airDateUtc": "2026-11-06T08:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 8,
+        "hasFile": false,
+        "id": 531,
+        "lastSearchTime": "2026-10-31T13:17:56Z",
+        "monitored": true,
+        "overview": "Harry's covert strike pours petrol on the escalating war. Eddie slides further off the rails under Maeve's manipulations. Bella and Seraphina plot a long game as Conrad starts to crack, and a new adversary enters the frame.",
+        "runtime": 43,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "03:00",
+          "certification": "TV-MA",
+          "cleanTitle": "mobland",
+          "ended": false,
+          "firstAired": "2025-03-30T00:00:00Z",
+          "genres": [
+            "Crime",
+            "Drama"
+          ],
+          "id": 18,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/banners/68175c94c4974.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/posters/6aa1c710a2a68.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/backgrounds/67e9845c46113.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/446831/clearlogo/68fd77028683b.png"
+            }
+          ],
+          "imdbId": "tt31510819",
+          "languageProfileId": 1,
+          "lastAired": "2026-11-20T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Paramount+",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Two mob families clash in a war that threatens to topple empires and lives.",
+          "path": "/tv/MobLand",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.3,
+            "votes": 140934
+          },
+          "runtime": 47,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "mobland",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "MobLand",
+          "titleSlug": "mobland",
+          "tmdbId": 247718,
+          "tvMazeId": 75026,
+          "tvRageId": 0,
+          "tvdbId": 446831,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 18,
+        "title": "We Don't Talk Anymore",
+        "tvdbId": 11542645,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-11-04",
+        "airDateUtc": "2026-11-04T05:33:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 2,
+        "hasFile": false,
+        "id": 1423,
+        "monitored": true,
+        "overview": "The gang heads to LA, where Santi hits the PGA spotlight. Clark presents Pryce with a wild idea.",
+        "runtime": 35,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "00:00",
+          "certification": "TV-MA",
+          "cleanTitle": "stick",
+          "ended": false,
+          "firstAired": "2025-06-04T00:00:00Z",
+          "genres": [
+            "Comedy",
+            "Sport"
+          ],
+          "id": 25,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/455562/banners/684027a2f2955.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/455562/posters/681cbaa9e6f40.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/455562/backgrounds/6921780c3b5fc.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/455562/clearlogo/684027b3cdf91.png"
+            }
+          ],
+          "imdbId": "tt31710249",
+          "languageProfileId": 1,
+          "lastAired": "2026-12-30T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Pryce Cahill was headed for golf greatness when an on-course meltdown derailed his career. Now struggling to stay afloat, he goes all in to mentor Santi—a teenage phenom with immense potential—and maybe save himself.",
+          "path": "/tv/Stick",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.2,
+            "votes": 21070
+          },
+          "runtime": 33,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "stick",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "Stick",
+          "titleSlug": "stick",
+          "tmdbId": 248830,
+          "tvMazeId": 82227,
+          "tvRageId": 0,
+          "tvdbId": 455562,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 25,
+        "title": "Don’t Be Summer Mayonnaise",
+        "tvdbId": 11785097,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-11-04",
+        "airDateUtc": "2026-11-04T05:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 1,
+        "hasFile": false,
+        "id": 1413,
+        "monitored": true,
+        "overview": "As the golf world waits on Santi to turn pro, Pryce gets a taste of his glory days.",
+        "runtime": 29,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "00:00",
+          "certification": "TV-MA",
+          "cleanTitle": "stick",
+          "ended": false,
+          "firstAired": "2025-06-04T00:00:00Z",
+          "genres": [
+            "Comedy",
+            "Sport"
+          ],
+          "id": 25,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/455562/banners/684027a2f2955.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/455562/posters/681cbaa9e6f40.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/455562/backgrounds/6921780c3b5fc.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/455562/clearlogo/684027b3cdf91.png"
+            }
+          ],
+          "imdbId": "tt31710249",
+          "languageProfileId": 1,
+          "lastAired": "2026-12-30T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Pryce Cahill was headed for golf greatness when an on-course meltdown derailed his career. Now struggling to stay afloat, he goes all in to mentor Santi—a teenage phenom with immense potential—and maybe save himself.",
+          "path": "/tv/Stick",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.2,
+            "votes": 21070
+          },
+          "runtime": 33,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "stick",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "Stick",
+          "titleSlug": "stick",
+          "tmdbId": 248830,
+          "tvMazeId": 82227,
+          "tvRageId": 0,
+          "tvdbId": 455562,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 25,
+        "title": "Sirens in Soft Spikes",
+        "tvdbId": 11774149,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-11-03",
+        "airDateUtc": "2026-11-04T02:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 6,
+        "hasFile": false,
+        "id": 1620,
+        "monitored": true,
+        "overview": "Amy and Jake work together to treat a patient whose secret past puts her life in danger. Meanwhile, after a key donor withdraws funding, Ben must scramble to save his artificial heart trial. Sonya and TJ's relationship is tested when Sonya's father visits Westside.",
+        "runtime": 43,
+        "seasonNumber": 3,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "12+",
+          "cleanTitle": "docus",
+          "ended": false,
+          "firstAired": "2025-01-07T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 9,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/banners/675ec1dc40af9.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/posters/68aa16885d5ee.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/backgrounds/696789f761136.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/clearlogo/6aa994a538807.png"
+            }
+          ],
+          "imdbId": "tt26748321",
+          "languageProfileId": 1,
+          "lastAired": "2026-11-17T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "FOX",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "After a brain injury erases the last eight years of Dr. Amy Larsen's life, she must navigate an unfamiliar world where she has no recollection of patients she's treated or the tragedy that caused her to push everyone away.",
+          "path": "/tv/Doc (US)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.3,
+            "votes": 8020
+          },
+          "runtime": 43,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 3
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "doc us",
+          "status": "continuing",
+          "tags": [],
+          "title": "Doc (US)",
+          "titleSlug": "doc-us",
+          "tmdbId": 255055,
+          "tvMazeId": 67884,
+          "tvRageId": 0,
+          "tvdbId": 433263,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 9,
+        "title": "Facade",
+        "tvdbId": 12038282,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-10-20",
+        "airDateUtc": "2026-10-21T01:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 5,
+        "hasFile": false,
+        "id": 1544,
+        "monitored": true,
+        "overview": "Amy must help a family process the news that their daughter's sudden illness could be fatal, while enduring a barrage of intrusive memory seizures. Despite unease in their relationship, TJ and Sonya are forced to work together to treat a man whose injuries appear to be self-inflicted.",
+        "runtime": 43,
+        "seasonNumber": 3,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "12+",
+          "cleanTitle": "docus",
+          "ended": false,
+          "firstAired": "2025-01-07T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 9,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/banners/675ec1dc40af9.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/posters/68aa16885d5ee.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/backgrounds/696789f761136.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/clearlogo/6aa994a538807.png"
+            }
+          ],
+          "imdbId": "tt26748321",
+          "languageProfileId": 1,
+          "lastAired": "2026-11-17T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "FOX",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "After a brain injury erases the last eight years of Dr. Amy Larsen's life, she must navigate an unfamiliar world where she has no recollection of patients she's treated or the tragedy that caused her to push everyone away.",
+          "path": "/tv/Doc (US)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.3,
+            "votes": 8020
+          },
+          "runtime": 43,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 3
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "doc us",
+          "status": "continuing",
+          "tags": [],
+          "title": "Doc (US)",
+          "titleSlug": "doc-us",
+          "tmdbId": 255055,
+          "tvMazeId": 67884,
+          "tvRageId": 0,
+          "tvdbId": 433263,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 9,
+        "title": "S.O.S.",
+        "tvdbId": 11966083,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-10-15",
+        "airDateUtc": "2026-10-15T07:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 1,
+        "hasFile": false,
+        "id": 1621,
+        "lastSearchTime": "2026-10-24T18:53:24Z",
+        "monitored": true,
+        "overview": "Camp Crystal Lake's idyllic summer is cut short by Jason's death; as the town moves on, Pam continues looking for him; Levon invites her to Founder's Day, but it only triggers Pam's pain; as she runs from her present, Pam is soon met with her past.",
+        "runtime": 56,
+        "seasonNumber": 1,
+        "series": {
+          "added": "2026-10-24T18:52:53Z",
+          "airTime": "03:00",
+          "certification": "16",
+          "cleanTitle": "crystallake",
+          "ended": false,
+          "firstAired": "2026-10-15T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 49,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/banners/6a97089173849.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/posters/6a56eb4470204.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/backgrounds/6ad1e68f82f63.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/clearlogo/6aaaeb6967ab7.png"
+            }
+          ],
+          "imdbId": "tt23148340",
+          "languageProfileId": 1,
+          "lastAired": "2026-10-15T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Peacock",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Single mother Pam Voorhees has been unable to shake her grief after her young, sickly son Jason tragically drowned in the town lake almost a year before. When two strangers arrive at Pam's door digging into her past, a disturbing chain of events is set into motion, leaving the townspeople of Crystal Lake wondering: just who is Pam Voorhees?",
+          "path": "/tv/Crystal Lake (2026)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.6,
+            "votes": 26096
+          },
+          "runtime": 50,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "crystal lake",
+          "status": "continuing",
+          "tags": [
+            2
+          ],
+          "title": "Crystal Lake",
+          "titleSlug": "crystal-lake",
+          "tmdbId": 213562,
+          "tvMazeId": 64960,
+          "tvRageId": 0,
+          "tvdbId": 426669,
+          "useSceneNumbering": false,
+          "year": 2026
+        },
+        "seriesId": 49,
+        "title": "Camp Crystal",
+        "tvdbId": 9431113,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-10-15",
+        "airDateUtc": "2026-10-15T07:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 2,
+        "hasFile": false,
+        "id": 1622,
+        "lastSearchTime": "2026-10-24T18:53:24Z",
+        "monitored": true,
+        "overview": "While on a date with Levon, Pam bumps into Rita and is invited to a weekend seminar with a self-help guru; Grace goes to a high school party only to be sent away by Claudette; something sinister takes revenge for Grace.",
+        "runtime": 53,
+        "seasonNumber": 1,
+        "series": {
+          "added": "2026-10-24T18:52:53Z",
+          "airTime": "03:00",
+          "certification": "16",
+          "cleanTitle": "crystallake",
+          "ended": false,
+          "firstAired": "2026-10-15T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 49,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/banners/6a97089173849.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/posters/6a56eb4470204.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/backgrounds/6ad1e68f82f63.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/clearlogo/6aaaeb6967ab7.png"
+            }
+          ],
+          "imdbId": "tt23148340",
+          "languageProfileId": 1,
+          "lastAired": "2026-10-15T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Peacock",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Single mother Pam Voorhees has been unable to shake her grief after her young, sickly son Jason tragically drowned in the town lake almost a year before. When two strangers arrive at Pam's door digging into her past, a disturbing chain of events is set into motion, leaving the townspeople of Crystal Lake wondering: just who is Pam Voorhees?",
+          "path": "/tv/Crystal Lake (2026)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.6,
+            "votes": 26096
+          },
+          "runtime": 50,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "crystal lake",
+          "status": "continuing",
+          "tags": [
+            2
+          ],
+          "title": "Crystal Lake",
+          "titleSlug": "crystal-lake",
+          "tmdbId": 213562,
+          "tvMazeId": 64960,
+          "tvRageId": 0,
+          "tvdbId": 426669,
+          "useSceneNumbering": false,
+          "year": 2026
+        },
+        "seriesId": 49,
+        "title": "Part 2",
+        "tvdbId": 11252252,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-10-15",
+        "airDateUtc": "2026-10-15T07:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 3,
+        "hasFile": false,
+        "id": 1623,
+        "lastSearchTime": "2026-10-24T18:53:24Z",
+        "monitored": true,
+        "overview": "The townspeople go bear hunting against Levon's orders; Pam and Levon bond over the loss of their loved ones; Pam visits Grace at her apartment and suspects she is being abused, leading to a confrontation with her mother, Valerie.",
+        "runtime": 48,
+        "seasonNumber": 1,
+        "series": {
+          "added": "2026-10-24T18:52:53Z",
+          "airTime": "03:00",
+          "certification": "16",
+          "cleanTitle": "crystallake",
+          "ended": false,
+          "firstAired": "2026-10-15T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 49,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/banners/6a97089173849.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/posters/6a56eb4470204.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/backgrounds/6ad1e68f82f63.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/clearlogo/6aaaeb6967ab7.png"
+            }
+          ],
+          "imdbId": "tt23148340",
+          "languageProfileId": 1,
+          "lastAired": "2026-10-15T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Peacock",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Single mother Pam Voorhees has been unable to shake her grief after her young, sickly son Jason tragically drowned in the town lake almost a year before. When two strangers arrive at Pam's door digging into her past, a disturbing chain of events is set into motion, leaving the townspeople of Crystal Lake wondering: just who is Pam Voorhees?",
+          "path": "/tv/Crystal Lake (2026)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.6,
+            "votes": 26096
+          },
+          "runtime": 50,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "crystal lake",
+          "status": "continuing",
+          "tags": [
+            2
+          ],
+          "title": "Crystal Lake",
+          "titleSlug": "crystal-lake",
+          "tmdbId": 213562,
+          "tvMazeId": 64960,
+          "tvRageId": 0,
+          "tvdbId": 426669,
+          "useSceneNumbering": false,
+          "year": 2026
+        },
+        "seriesId": 49,
+        "title": "Part III",
+        "tvdbId": 11252253,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-10-15",
+        "airDateUtc": "2026-10-15T07:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 4,
+        "hasFile": false,
+        "id": 1624,
+        "lastSearchTime": "2026-10-24T18:53:24Z",
+        "monitored": true,
+        "overview": "Willow looks for her friends; Pam returns to work at the camp alongside a group of new counselors.",
+        "runtime": 53,
+        "seasonNumber": 1,
+        "series": {
+          "added": "2026-10-24T18:52:53Z",
+          "airTime": "03:00",
+          "certification": "16",
+          "cleanTitle": "crystallake",
+          "ended": false,
+          "firstAired": "2026-10-15T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 49,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/banners/6a97089173849.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/posters/6a56eb4470204.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/backgrounds/6ad1e68f82f63.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/clearlogo/6aaaeb6967ab7.png"
+            }
+          ],
+          "imdbId": "tt23148340",
+          "languageProfileId": 1,
+          "lastAired": "2026-10-15T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Peacock",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Single mother Pam Voorhees has been unable to shake her grief after her young, sickly son Jason tragically drowned in the town lake almost a year before. When two strangers arrive at Pam's door digging into her past, a disturbing chain of events is set into motion, leaving the townspeople of Crystal Lake wondering: just who is Pam Voorhees?",
+          "path": "/tv/Crystal Lake (2026)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.6,
+            "votes": 26096
+          },
+          "runtime": 50,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "crystal lake",
+          "status": "continuing",
+          "tags": [
+            2
+          ],
+          "title": "Crystal Lake",
+          "titleSlug": "crystal-lake",
+          "tmdbId": 213562,
+          "tvMazeId": 64960,
+          "tvRageId": 0,
+          "tvdbId": 426669,
+          "useSceneNumbering": false,
+          "year": 2026
+        },
+        "seriesId": 49,
+        "title": "A New Beginning",
+        "tvdbId": 11252254,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-10-15",
+        "airDateUtc": "2026-10-15T07:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 5,
+        "hasFile": false,
+        "id": 1625,
+        "lastSearchTime": "2026-10-24T18:53:24Z",
+        "monitored": true,
+        "overview": "Camp Crystal Lake reopens despite the mounting death toll; Pam discovers life-changing news.",
+        "runtime": 49,
+        "seasonNumber": 1,
+        "series": {
+          "added": "2026-10-24T18:52:53Z",
+          "airTime": "03:00",
+          "certification": "16",
+          "cleanTitle": "crystallake",
+          "ended": false,
+          "firstAired": "2026-10-15T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 49,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/banners/6a97089173849.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/posters/6a56eb4470204.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/backgrounds/6ad1e68f82f63.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/clearlogo/6aaaeb6967ab7.png"
+            }
+          ],
+          "imdbId": "tt23148340",
+          "languageProfileId": 1,
+          "lastAired": "2026-10-15T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Peacock",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Single mother Pam Voorhees has been unable to shake her grief after her young, sickly son Jason tragically drowned in the town lake almost a year before. When two strangers arrive at Pam's door digging into her past, a disturbing chain of events is set into motion, leaving the townspeople of Crystal Lake wondering: just who is Pam Voorhees?",
+          "path": "/tv/Crystal Lake (2026)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.6,
+            "votes": 26096
+          },
+          "runtime": 50,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "crystal lake",
+          "status": "continuing",
+          "tags": [
+            2
+          ],
+          "title": "Crystal Lake",
+          "titleSlug": "crystal-lake",
+          "tmdbId": 213562,
+          "tvMazeId": 64960,
+          "tvRageId": 0,
+          "tvdbId": 426669,
+          "useSceneNumbering": false,
+          "year": 2026
+        },
+        "seriesId": 49,
+        "title": "The New Blood",
+        "tvdbId": 11252255,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-10-15",
+        "airDateUtc": "2026-10-15T07:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 6,
+        "hasFile": false,
+        "id": 1626,
+        "lastSearchTime": "2026-10-24T18:53:24Z",
+        "monitored": true,
+        "overview": "The counselors' drug trip takes a chilling turn; Briana receives a mysterious envelope.",
+        "runtime": 44,
+        "seasonNumber": 1,
+        "series": {
+          "added": "2026-10-24T18:52:53Z",
+          "airTime": "03:00",
+          "certification": "16",
+          "cleanTitle": "crystallake",
+          "ended": false,
+          "firstAired": "2026-10-15T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 49,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/banners/6a97089173849.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/posters/6a56eb4470204.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/backgrounds/6ad1e68f82f63.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/clearlogo/6aaaeb6967ab7.png"
+            }
+          ],
+          "imdbId": "tt23148340",
+          "languageProfileId": 1,
+          "lastAired": "2026-10-15T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Peacock",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Single mother Pam Voorhees has been unable to shake her grief after her young, sickly son Jason tragically drowned in the town lake almost a year before. When two strangers arrive at Pam's door digging into her past, a disturbing chain of events is set into motion, leaving the townspeople of Crystal Lake wondering: just who is Pam Voorhees?",
+          "path": "/tv/Crystal Lake (2026)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.6,
+            "votes": 26096
+          },
+          "runtime": 50,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "crystal lake",
+          "status": "continuing",
+          "tags": [
+            2
+          ],
+          "title": "Crystal Lake",
+          "titleSlug": "crystal-lake",
+          "tmdbId": 213562,
+          "tvMazeId": 64960,
+          "tvRageId": 0,
+          "tvdbId": 426669,
+          "useSceneNumbering": false,
+          "year": 2026
+        },
+        "seriesId": 49,
+        "title": "Kill Them, Mommy",
+        "tvdbId": 11252256,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-10-15",
+        "airDateUtc": "2026-10-15T07:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 7,
+        "hasFile": false,
+        "id": 1627,
+        "lastSearchTime": "2026-10-24T18:53:24Z",
+        "monitored": true,
+        "overview": "In the past, a young Jason shows alarming symptoms that lead Pam to question life as she knows it.",
+        "runtime": 51,
+        "seasonNumber": 1,
+        "series": {
+          "added": "2026-10-24T18:52:53Z",
+          "airTime": "03:00",
+          "certification": "16",
+          "cleanTitle": "crystallake",
+          "ended": false,
+          "firstAired": "2026-10-15T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 49,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/banners/6a97089173849.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/posters/6a56eb4470204.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/backgrounds/6ad1e68f82f63.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/clearlogo/6aaaeb6967ab7.png"
+            }
+          ],
+          "imdbId": "tt23148340",
+          "languageProfileId": 1,
+          "lastAired": "2026-10-15T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Peacock",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Single mother Pam Voorhees has been unable to shake her grief after her young, sickly son Jason tragically drowned in the town lake almost a year before. When two strangers arrive at Pam's door digging into her past, a disturbing chain of events is set into motion, leaving the townspeople of Crystal Lake wondering: just who is Pam Voorhees?",
+          "path": "/tv/Crystal Lake (2026)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.6,
+            "votes": 26096
+          },
+          "runtime": 50,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "crystal lake",
+          "status": "continuing",
+          "tags": [
+            2
+          ],
+          "title": "Crystal Lake",
+          "titleSlug": "crystal-lake",
+          "tmdbId": 213562,
+          "tvMazeId": 64960,
+          "tvRageId": 0,
+          "tvdbId": 426669,
+          "useSceneNumbering": false,
+          "year": 2026
+        },
+        "seriesId": 49,
+        "title": "Friday...",
+        "tvdbId": 11252257,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-10-15",
+        "airDateUtc": "2026-10-15T07:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 8,
+        "finaleType": "season",
+        "hasFile": false,
+        "id": 1628,
+        "lastSearchTime": "2026-10-24T18:53:24Z",
+        "monitored": true,
+        "overview": "Elias arrives in Crystal Lake determined to find his family; Levon and Elias have a heated clash.",
+        "runtime": 43,
+        "seasonNumber": 1,
+        "series": {
+          "added": "2026-10-24T18:52:53Z",
+          "airTime": "03:00",
+          "certification": "16",
+          "cleanTitle": "crystallake",
+          "ended": false,
+          "firstAired": "2026-10-15T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 49,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/banners/6a97089173849.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/posters/6a56eb4470204.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/backgrounds/6ad1e68f82f63.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/426669/clearlogo/6aaaeb6967ab7.png"
+            }
+          ],
+          "imdbId": "tt23148340",
+          "languageProfileId": 1,
+          "lastAired": "2026-10-15T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Peacock",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Single mother Pam Voorhees has been unable to shake her grief after her young, sickly son Jason tragically drowned in the town lake almost a year before. When two strangers arrive at Pam's door digging into her past, a disturbing chain of events is set into motion, leaving the townspeople of Crystal Lake wondering: just who is Pam Voorhees?",
+          "path": "/tv/Crystal Lake (2026)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.6,
+            "votes": 26096
+          },
+          "runtime": 50,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "crystal lake",
+          "status": "continuing",
+          "tags": [
+            2
+          ],
+          "title": "Crystal Lake",
+          "titleSlug": "crystal-lake",
+          "tmdbId": 213562,
+          "tvMazeId": 64960,
+          "tvRageId": 0,
+          "tvdbId": 426669,
+          "useSceneNumbering": false,
+          "year": 2026
+        },
+        "seriesId": 49,
+        "title": "The Final Chapter",
+        "tvdbId": 11252258,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-10-13",
+        "airDateUtc": "2026-10-14T01:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 4,
+        "hasFile": false,
+        "id": 1543,
+        "monitored": true,
+        "overview": "Amy and Ben go toe to toe when their cancer patient demands the impossible. Jake discovers a senior Westside surgeon has botched an operation and he must decide whether to speak out and risk his tenuous new position in cardiology. Sonya grapples with the weight of life-changing news.",
+        "runtime": 44,
+        "seasonNumber": 3,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "12+",
+          "cleanTitle": "docus",
+          "ended": false,
+          "firstAired": "2025-01-07T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 9,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/banners/675ec1dc40af9.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/posters/68aa16885d5ee.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/backgrounds/696789f761136.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/clearlogo/6aa994a538807.png"
+            }
+          ],
+          "imdbId": "tt26748321",
+          "languageProfileId": 1,
+          "lastAired": "2026-11-17T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "FOX",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "After a brain injury erases the last eight years of Dr. Amy Larsen's life, she must navigate an unfamiliar world where she has no recollection of patients she's treated or the tragedy that caused her to push everyone away.",
+          "path": "/tv/Doc (US)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.3,
+            "votes": 8020
+          },
+          "runtime": 43,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 3
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "doc us",
+          "status": "continuing",
+          "tags": [],
+          "title": "Doc (US)",
+          "titleSlug": "doc-us",
+          "tmdbId": 255055,
+          "tvMazeId": 67884,
+          "tvRageId": 0,
+          "tvdbId": 433263,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 9,
+        "title": "Great Expectations",
+        "tvdbId": 11966082,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-10-06",
+        "airDateUtc": "2026-10-07T01:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 3,
+        "hasFile": false,
+        "id": 1540,
+        "monitored": true,
+        "overview": "Amy and Jake are paired together on a bizarre case that lays bare the still-raw feelings surrounding their fractured relationship. Old wounds also reopen for Michael when he and Sonya are thrust into a family crisis while trying to save a young addict. Meanwhile, Gina grapples with her life choices when Walter returns to Westside.",
+        "runtime": 44,
+        "seasonNumber": 3,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "12+",
+          "cleanTitle": "docus",
+          "ended": false,
+          "firstAired": "2025-01-07T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 9,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/banners/675ec1dc40af9.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/posters/68aa16885d5ee.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/backgrounds/696789f761136.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/clearlogo/6aa994a538807.png"
+            }
+          ],
+          "imdbId": "tt26748321",
+          "languageProfileId": 1,
+          "lastAired": "2026-11-17T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "FOX",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "After a brain injury erases the last eight years of Dr. Amy Larsen's life, she must navigate an unfamiliar world where she has no recollection of patients she's treated or the tragedy that caused her to push everyone away.",
+          "path": "/tv/Doc (US)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.3,
+            "votes": 8020
+          },
+          "runtime": 43,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 3
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "doc us",
+          "status": "continuing",
+          "tags": [],
+          "title": "Doc (US)",
+          "titleSlug": "doc-us",
+          "tmdbId": 255055,
+          "tvMazeId": 67884,
+          "tvRageId": 0,
+          "tvdbId": 433263,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 9,
+        "title": "I Know What I Want",
+        "tvdbId": 11936711,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-09-29",
+        "airDateUtc": "2026-09-30T01:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 2,
+        "hasFile": false,
+        "id": 1539,
+        "monitored": true,
+        "overview": "When a horrific accident sends three members of the same family to Westside in critical condition, the entire staff must band together to save them and avert tragedy. Amidst the chaos, Amy must contend with a flood of emotional memories as she goes head to head with mysterious newcomer Dr. Ben Grant.",
+        "runtime": 43,
+        "seasonNumber": 3,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "12+",
+          "cleanTitle": "docus",
+          "ended": false,
+          "firstAired": "2025-01-07T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 9,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/banners/675ec1dc40af9.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/posters/68aa16885d5ee.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/backgrounds/696789f761136.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/clearlogo/6aa994a538807.png"
+            }
+          ],
+          "imdbId": "tt26748321",
+          "languageProfileId": 1,
+          "lastAired": "2026-11-17T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "FOX",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "After a brain injury erases the last eight years of Dr. Amy Larsen's life, she must navigate an unfamiliar world where she has no recollection of patients she's treated or the tragedy that caused her to push everyone away.",
+          "path": "/tv/Doc (US)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.3,
+            "votes": 8020
+          },
+          "runtime": 43,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 3
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "doc us",
+          "status": "continuing",
+          "tags": [],
+          "title": "Doc (US)",
+          "titleSlug": "doc-us",
+          "tmdbId": 255055,
+          "tvMazeId": 67884,
+          "tvRageId": 0,
+          "tvdbId": 433263,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 9,
+        "title": "Ready or Not",
+        "tvdbId": 11936710,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-09-22",
+        "airDateUtc": "2026-09-23T01:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 1,
+        "hasFile": false,
+        "id": 1490,
+        "monitored": true,
+        "overview": "On Amy and Sonya's first day as Co-Chief Resident, they must coach a fresh crop of interns through a mysterious case that seems to defy medical logic. Jake and TJ adjust to new roles within the hospital. Meanwhile, Dr. Ben Grant returns to Westside with a secret plan to reshape the Surgical Department.",
+        "runtime": 43,
+        "seasonNumber": 3,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "12+",
+          "cleanTitle": "docus",
+          "ended": false,
+          "firstAired": "2025-01-07T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 9,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/banners/675ec1dc40af9.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/posters/68aa16885d5ee.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/backgrounds/696789f761136.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/clearlogo/6aa994a538807.png"
+            }
+          ],
+          "imdbId": "tt26748321",
+          "languageProfileId": 1,
+          "lastAired": "2026-11-17T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "FOX",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "After a brain injury erases the last eight years of Dr. Amy Larsen's life, she must navigate an unfamiliar world where she has no recollection of patients she's treated or the tragedy that caused her to push everyone away.",
+          "path": "/tv/Doc (US)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.3,
+            "votes": 8020
+          },
+          "runtime": 43,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 3
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "doc us",
+          "status": "continuing",
+          "tags": [],
+          "title": "Doc (US)",
+          "titleSlug": "doc-us",
+          "tmdbId": 255055,
+          "tvMazeId": 67884,
+          "tvRageId": 0,
+          "tvdbId": 433263,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 9,
+        "title": "Wherefore Art Thou",
+        "tvdbId": 11870167,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-04-14",
+        "airDateUtc": "2026-04-15T01:43:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 22,
+        "finaleType": "season",
+        "hasFile": false,
+        "id": 210,
+        "lastSearchTime": "2026-09-28T16:55:06Z",
+        "monitored": true,
+        "overview": "In an effort to save a crashing Richard from a deadly virus, Amy gets infected with it. Michael and the team work tirelessly to help her and the other patients but their experimental treatments fail and Amy becomes critically ill. When a promising cure finally emerges, there isn’t enough to save everyone—forcing the team to decide who will live and who will die, as Amy’s life hangs in the balance.",
+        "runtime": 43,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "12+",
+          "cleanTitle": "docus",
+          "ended": false,
+          "firstAired": "2025-01-07T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 9,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/banners/675ec1dc40af9.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/posters/68aa16885d5ee.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/backgrounds/696789f761136.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/clearlogo/6aa994a538807.png"
+            }
+          ],
+          "imdbId": "tt26748321",
+          "languageProfileId": 1,
+          "lastAired": "2026-11-17T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "FOX",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "After a brain injury erases the last eight years of Dr. Amy Larsen's life, she must navigate an unfamiliar world where she has no recollection of patients she's treated or the tragedy that caused her to push everyone away.",
+          "path": "/tv/Doc (US)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.3,
+            "votes": 8020
+          },
+          "runtime": 43,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 3
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "doc us",
+          "status": "continuing",
+          "tags": [],
+          "title": "Doc (US)",
+          "titleSlug": "doc-us",
+          "tmdbId": 255055,
+          "tvMazeId": 67884,
+          "tvRageId": 0,
+          "tvdbId": 433263,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 9,
+        "title": "Happy Birthday",
+        "tvdbId": 11606742,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-04-14",
+        "airDateUtc": "2026-04-15T01:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 21,
+        "hasFile": false,
+        "id": 209,
+        "lastSearchTime": "2026-09-28T16:55:06Z",
+        "monitored": true,
+        "overview": "A mysterious, fast-acting and extremely deadly virus triggers an emergency lockdown on the 6th floor of Westside Hospital. In the face of seemingly insurmountable odds, everyone must work together to contact trace, triage and attempt to contain this terrifying killer. As fear grips the staff and patients alike, Amy pushes through debilitating memory seizures and races to find a cure before it’s too late.",
+        "runtime": 43,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "12+",
+          "cleanTitle": "docus",
+          "ended": false,
+          "firstAired": "2025-01-07T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 9,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/banners/675ec1dc40af9.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/posters/68aa16885d5ee.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/backgrounds/696789f761136.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/clearlogo/6aa994a538807.png"
+            }
+          ],
+          "imdbId": "tt26748321",
+          "languageProfileId": 1,
+          "lastAired": "2026-11-17T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "FOX",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "After a brain injury erases the last eight years of Dr. Amy Larsen's life, she must navigate an unfamiliar world where she has no recollection of patients she's treated or the tragedy that caused her to push everyone away.",
+          "path": "/tv/Doc (US)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.3,
+            "votes": 8020
+          },
+          "runtime": 43,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 3
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "doc us",
+          "status": "continuing",
+          "tags": [],
+          "title": "Doc (US)",
+          "titleSlug": "doc-us",
+          "tmdbId": 255055,
+          "tvMazeId": 67884,
+          "tvRageId": 0,
+          "tvdbId": 433263,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 9,
+        "title": "Stuck",
+        "tvdbId": 11606741,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-04-07",
+        "airDateUtc": "2026-04-08T01:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 20,
+        "hasFile": false,
+        "id": 208,
+        "lastSearchTime": "2026-09-28T16:55:06Z",
+        "monitored": true,
+        "overview": "On Michael's first day as Chief of Internal Medicine, Joan arrives at the hospital as a patient in dire straits. Amy, determined to save her, clashes repeatedly with Richard over Joan's treatment plan. Meanwhile, Gina makes a nearly impossible medical decision for a young patient and Liz fights for her allegations against Richard to be taken seriously.",
+        "runtime": 43,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "12+",
+          "cleanTitle": "docus",
+          "ended": false,
+          "firstAired": "2025-01-07T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 9,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/banners/675ec1dc40af9.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/posters/68aa16885d5ee.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/backgrounds/696789f761136.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/clearlogo/6aa994a538807.png"
+            }
+          ],
+          "imdbId": "tt26748321",
+          "languageProfileId": 1,
+          "lastAired": "2026-11-17T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "FOX",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "After a brain injury erases the last eight years of Dr. Amy Larsen's life, she must navigate an unfamiliar world where she has no recollection of patients she's treated or the tragedy that caused her to push everyone away.",
+          "path": "/tv/Doc (US)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.3,
+            "votes": 8020
+          },
+          "runtime": 43,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 3
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "doc us",
+          "status": "continuing",
+          "tags": [],
+          "title": "Doc (US)",
+          "titleSlug": "doc-us",
+          "tmdbId": 255055,
+          "tvMazeId": 67884,
+          "tvRageId": 0,
+          "tvdbId": 433263,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 9,
+        "title": "The Big Chair",
+        "tvdbId": 11606740,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-03-31",
+        "airDateUtc": "2026-04-01T01:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 19,
+        "hasFile": false,
+        "id": 207,
+        "lastSearchTime": "2026-09-28T16:55:06Z",
+        "monitored": true,
+        "overview": "On her last day at Westside, Joan chooses an unlikely successor, crowns a Chief Resident and imparts some final wisdom to the next generation. Gina steps in to help TJ's patient, a foster child suffering from rheumatoid arthritis. Amy and Jake's tension intensifies while treating a pregnant teen caught between her divorced parents.",
+        "runtime": 43,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "12+",
+          "cleanTitle": "docus",
+          "ended": false,
+          "firstAired": "2025-01-07T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 9,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/banners/675ec1dc40af9.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/posters/68aa16885d5ee.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/backgrounds/696789f761136.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/clearlogo/6aa994a538807.png"
+            }
+          ],
+          "imdbId": "tt26748321",
+          "languageProfileId": 1,
+          "lastAired": "2026-11-17T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "FOX",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "After a brain injury erases the last eight years of Dr. Amy Larsen's life, she must navigate an unfamiliar world where she has no recollection of patients she's treated or the tragedy that caused her to push everyone away.",
+          "path": "/tv/Doc (US)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.3,
+            "votes": 8020
+          },
+          "runtime": 43,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 3
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "doc us",
+          "status": "continuing",
+          "tags": [],
+          "title": "Doc (US)",
+          "titleSlug": "doc-us",
+          "tmdbId": 255055,
+          "tvMazeId": 67884,
+          "tvRageId": 0,
+          "tvdbId": 433263,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 9,
+        "title": "Next",
+        "tvdbId": 11606739,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-03-24",
+        "airDateUtc": "2026-03-25T01:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 18,
+        "hasFile": false,
+        "id": 206,
+        "lastSearchTime": "2026-09-28T16:55:06Z",
+        "monitored": true,
+        "overview": "When Amy and Michael take Katie on a road trip to her college orientation, they pass a familiar campsite and decide to stop and hike the trail. The journey quickly becomes harrowing when they discover an injured man whose life hangs in the balance. Stranded in the middle of nowhere, with no cell service, it's up to the three of them to somehow save him.",
+        "runtime": 44,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "12+",
+          "cleanTitle": "docus",
+          "ended": false,
+          "firstAired": "2025-01-07T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 9,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/banners/675ec1dc40af9.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/posters/68aa16885d5ee.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/backgrounds/696789f761136.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/clearlogo/6aa994a538807.png"
+            }
+          ],
+          "imdbId": "tt26748321",
+          "languageProfileId": 1,
+          "lastAired": "2026-11-17T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "FOX",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "After a brain injury erases the last eight years of Dr. Amy Larsen's life, she must navigate an unfamiliar world where she has no recollection of patients she's treated or the tragedy that caused her to push everyone away.",
+          "path": "/tv/Doc (US)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.3,
+            "votes": 8020
+          },
+          "runtime": 43,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 3
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "doc us",
+          "status": "continuing",
+          "tags": [],
+          "title": "Doc (US)",
+          "titleSlug": "doc-us",
+          "tmdbId": 255055,
+          "tvMazeId": 67884,
+          "tvRageId": 0,
+          "tvdbId": 433263,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 9,
+        "title": "Orientation",
+        "tvdbId": 11606738,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "absoluteEpisodeNumber": 6,
+        "airDate": "2026-03-16",
+        "airDateUtc": "2026-03-16T22:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 6,
+        "finaleType": "season",
+        "hasFile": false,
+        "id": 1601,
+        "lastSearchTime": "2026-10-07T18:48:36Z",
+        "monitored": true,
+        "overview": "The prophets are looking sick, Michael hasn’t asked his questions and all hell has broken out in Marvin Gardens. It seems like the end of the line, or the start of a new adventure.",
+        "runtime": 29,
+        "seasonNumber": 1,
+        "series": {
+          "added": "2026-10-07T18:43:08Z",
+          "airTime": "22:00",
+          "cleanTitle": "smallprophets",
+          "ended": false,
+          "firstAired": "2026-02-09T00:00:00Z",
+          "genres": [
+            "Comedy",
+            "Drama",
+            "Fantasy",
+            "Mystery"
+          ],
+          "id": 48,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/464815/banners/698539cb45e2a.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/464815/posters/6ac616cc034bd.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/464815/backgrounds/698539b640aa0.jpg"
+            }
+          ],
+          "imdbId": "tt38504111",
+          "languageProfileId": 1,
+          "lastAired": "2026-03-16T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "BBC Two",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Since his girlfriend went missing seven years go Michael Sleep's life has been on hold. But a mystical recipe in an old journal promises to give the answers he's been longing for.",
+          "path": "/tv/Small Prophets (2026)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.1,
+            "votes": 10195
+          },
+          "runtime": 29,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "small prophets",
+          "status": "continuing",
+          "tags": [],
+          "title": "Small Prophets",
+          "titleSlug": "small-prophets",
+          "tmdbId": 312693,
+          "tvMazeId": 87306,
+          "tvRageId": 0,
+          "tvdbId": 464815,
+          "useSceneNumbering": false,
+          "year": 2026
+        },
+        "seriesId": 48,
+        "title": "Episode 6",
+        "tvdbId": 11195995,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-03-10",
+        "airDateUtc": "2026-03-11T01:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 17,
+        "hasFile": false,
+        "id": 205,
+        "lastSearchTime": "2026-09-28T16:55:06Z",
+        "monitored": true,
+        "overview": "After a tragic accident, one of Joan’s oldest friends is rushed to Minneapolis for treatment, forcing Amy to confront her about her illness. Meanwhile, Richard and TJ find themselves at odds when they treat a tech bro who thrives on pushing boundaries and Michael tries to pick up the pieces in the wake of his fractured marriage.",
+        "runtime": 43,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "12+",
+          "cleanTitle": "docus",
+          "ended": false,
+          "firstAired": "2025-01-07T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 9,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/banners/675ec1dc40af9.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/posters/68aa16885d5ee.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/backgrounds/696789f761136.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/clearlogo/6aa994a538807.png"
+            }
+          ],
+          "imdbId": "tt26748321",
+          "languageProfileId": 1,
+          "lastAired": "2026-11-17T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "FOX",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "After a brain injury erases the last eight years of Dr. Amy Larsen's life, she must navigate an unfamiliar world where she has no recollection of patients she's treated or the tragedy that caused her to push everyone away.",
+          "path": "/tv/Doc (US)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.3,
+            "votes": 8020
+          },
+          "runtime": 43,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 3
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "doc us",
+          "status": "continuing",
+          "tags": [],
+          "title": "Doc (US)",
+          "titleSlug": "doc-us",
+          "tmdbId": 255055,
+          "tvMazeId": 67884,
+          "tvRageId": 0,
+          "tvdbId": 433263,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 9,
+        "title": "Good Hands",
+        "tvdbId": 11600250,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-03-03",
+        "airDateUtc": "2026-03-04T02:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 16,
+        "hasFile": false,
+        "id": 204,
+        "lastSearchTime": "2026-09-28T16:55:06Z",
+        "monitored": true,
+        "overview": "Met with hostility upon his return, Richard looks to redeem himself while treating an overworked food delivery worker. Sonya and TJ enlist Jake's help with the delicate Joan situation. Amy and TJ take on the case of a well-known medical malpractice lawyer.",
+        "runtime": 43,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "12+",
+          "cleanTitle": "docus",
+          "ended": false,
+          "firstAired": "2025-01-07T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 9,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/banners/675ec1dc40af9.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/posters/68aa16885d5ee.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/backgrounds/696789f761136.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/clearlogo/6aa994a538807.png"
+            }
+          ],
+          "imdbId": "tt26748321",
+          "languageProfileId": 1,
+          "lastAired": "2026-11-17T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "FOX",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "After a brain injury erases the last eight years of Dr. Amy Larsen's life, she must navigate an unfamiliar world where she has no recollection of patients she's treated or the tragedy that caused her to push everyone away.",
+          "path": "/tv/Doc (US)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.3,
+            "votes": 8020
+          },
+          "runtime": 43,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 3
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "doc us",
+          "status": "continuing",
+          "tags": [],
+          "title": "Doc (US)",
+          "titleSlug": "doc-us",
+          "tmdbId": 255055,
+          "tvMazeId": 67884,
+          "tvRageId": 0,
+          "tvdbId": 433263,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 9,
+        "title": "The Best We Can Do",
+        "tvdbId": 11600249,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-02-10",
+        "airDateUtc": "2026-02-11T02:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 15,
+        "hasFile": false,
+        "id": 203,
+        "lastSearchTime": "2026-09-28T16:55:06Z",
+        "monitored": true,
+        "overview": "While navigating the fallout from Katie's secret, Amy treats a critically ill patient with a dark one of her own. Gina and Jake evaluate a world-class poker player. Sonya and TJ investigate their theory behind Joan's frequent absences and Richard returns with a trick up his sleeve.",
+        "runtime": 43,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "12+",
+          "cleanTitle": "docus",
+          "ended": false,
+          "firstAired": "2025-01-07T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 9,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/banners/675ec1dc40af9.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/posters/68aa16885d5ee.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/backgrounds/696789f761136.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/clearlogo/6aa994a538807.png"
+            }
+          ],
+          "imdbId": "tt26748321",
+          "languageProfileId": 1,
+          "lastAired": "2026-11-17T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "FOX",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "After a brain injury erases the last eight years of Dr. Amy Larsen's life, she must navigate an unfamiliar world where she has no recollection of patients she's treated or the tragedy that caused her to push everyone away.",
+          "path": "/tv/Doc (US)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.3,
+            "votes": 8020
+          },
+          "runtime": 43,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 3
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "doc us",
+          "status": "continuing",
+          "tags": [],
+          "title": "Doc (US)",
+          "titleSlug": "doc-us",
+          "tmdbId": 255055,
+          "tvMazeId": 67884,
+          "tvRageId": 0,
+          "tvdbId": 433263,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 9,
+        "title": "Trust",
+        "tvdbId": 11563016,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-02-03",
+        "airDateUtc": "2026-02-04T02:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 14,
+        "hasFile": false,
+        "id": 202,
+        "lastSearchTime": "2026-09-28T16:55:06Z",
+        "monitored": true,
+        "overview": "Amy and Jake treat an expectant mother injured during a robbery. Michael is challenged to open up when Katie's therapist invites him and Amy to a session. TJ and Sonya help Julie navigate a mysterious illness and an unexpected romance.",
+        "runtime": 43,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "12+",
+          "cleanTitle": "docus",
+          "ended": false,
+          "firstAired": "2025-01-07T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 9,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/banners/675ec1dc40af9.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/posters/68aa16885d5ee.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/backgrounds/696789f761136.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/clearlogo/6aa994a538807.png"
+            }
+          ],
+          "imdbId": "tt26748321",
+          "languageProfileId": 1,
+          "lastAired": "2026-11-17T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "FOX",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "After a brain injury erases the last eight years of Dr. Amy Larsen's life, she must navigate an unfamiliar world where she has no recollection of patients she's treated or the tragedy that caused her to push everyone away.",
+          "path": "/tv/Doc (US)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.3,
+            "votes": 8020
+          },
+          "runtime": 43,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 3
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "doc us",
+          "status": "continuing",
+          "tags": [],
+          "title": "Doc (US)",
+          "titleSlug": "doc-us",
+          "tmdbId": 255055,
+          "tvMazeId": 67884,
+          "tvRageId": 0,
+          "tvdbId": 433263,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 9,
+        "title": "When You Know, You Know",
+        "tvdbId": 11537549,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-01-27",
+        "airDateUtc": "2026-01-28T02:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 13,
+        "hasFile": false,
+        "id": 201,
+        "lastSearchTime": "2026-09-28T16:55:06Z",
+        "monitored": true,
+        "overview": "The race for Chief resident intensifies as Joan tasks Amy and Sonya with evaluating each other's case work. Amy tends to a politician with a disability. Sonya struggles to find a solution to her combative patient's abdominal pain. Michael's parents come to town.",
+        "runtime": 43,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "12+",
+          "cleanTitle": "docus",
+          "ended": false,
+          "firstAired": "2025-01-07T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 9,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/banners/675ec1dc40af9.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/posters/68aa16885d5ee.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/backgrounds/696789f761136.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/clearlogo/6aa994a538807.png"
+            }
+          ],
+          "imdbId": "tt26748321",
+          "languageProfileId": 1,
+          "lastAired": "2026-11-17T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "FOX",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "After a brain injury erases the last eight years of Dr. Amy Larsen's life, she must navigate an unfamiliar world where she has no recollection of patients she's treated or the tragedy that caused her to push everyone away.",
+          "path": "/tv/Doc (US)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.3,
+            "votes": 8020
+          },
+          "runtime": 43,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 3
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "doc us",
+          "status": "continuing",
+          "tags": [],
+          "title": "Doc (US)",
+          "titleSlug": "doc-us",
+          "tmdbId": 255055,
+          "tvMazeId": 67884,
+          "tvRageId": 0,
+          "tvdbId": 433263,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 9,
+        "title": "Fare Well",
+        "tvdbId": 11537548,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-01-20",
+        "airDateUtc": "2026-01-21T02:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 12,
+        "hasFile": false,
+        "id": 200,
+        "lastSearchTime": "2026-09-28T16:55:06Z",
+        "monitored": true,
+        "overview": "Charlie fights for his life at Westside with Hannah by his side. The Board launches an internal investigation into Brian Clark's resignation, putting everyone in the hot seat. A familiar face returns to Westside.",
+        "runtime": 43,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "12+",
+          "cleanTitle": "docus",
+          "ended": false,
+          "firstAired": "2025-01-07T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 9,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/banners/675ec1dc40af9.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/posters/68aa16885d5ee.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/backgrounds/696789f761136.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/clearlogo/6aa994a538807.png"
+            }
+          ],
+          "imdbId": "tt26748321",
+          "languageProfileId": 1,
+          "lastAired": "2026-11-17T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "FOX",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "After a brain injury erases the last eight years of Dr. Amy Larsen's life, she must navigate an unfamiliar world where she has no recollection of patients she's treated or the tragedy that caused her to push everyone away.",
+          "path": "/tv/Doc (US)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.3,
+            "votes": 8020
+          },
+          "runtime": 43,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 3
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "doc us",
+          "status": "continuing",
+          "tags": [],
+          "title": "Doc (US)",
+          "titleSlug": "doc-us",
+          "tmdbId": 255055,
+          "tvMazeId": 67884,
+          "tvRageId": 0,
+          "tvdbId": 433263,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 9,
+        "title": "Inquisition",
+        "tvdbId": 11496474,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-01-13",
+        "airDateUtc": "2026-01-14T02:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 11,
+        "hasFile": false,
+        "id": 199,
+        "lastSearchTime": "2026-09-28T16:55:06Z",
+        "monitored": true,
+        "overview": "The search for Amy's hacker intensifies. Hannah, devastated by the death of her patient, works with Amy to treat a sick man whose daughter believes has been poisoned. Meanwhile, Sonya and TJ examine middle school kids for scoliosis.",
+        "runtime": 43,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "12+",
+          "cleanTitle": "docus",
+          "ended": false,
+          "firstAired": "2025-01-07T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 9,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/banners/675ec1dc40af9.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/posters/68aa16885d5ee.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/backgrounds/696789f761136.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/clearlogo/6aa994a538807.png"
+            }
+          ],
+          "imdbId": "tt26748321",
+          "languageProfileId": 1,
+          "lastAired": "2026-11-17T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "FOX",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "After a brain injury erases the last eight years of Dr. Amy Larsen's life, she must navigate an unfamiliar world where she has no recollection of patients she's treated or the tragedy that caused her to push everyone away.",
+          "path": "/tv/Doc (US)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.3,
+            "votes": 8020
+          },
+          "runtime": 43,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 3
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "doc us",
+          "status": "continuing",
+          "tags": [],
+          "title": "Doc (US)",
+          "titleSlug": "doc-us",
+          "tmdbId": 255055,
+          "tvMazeId": 67884,
+          "tvRageId": 0,
+          "tvdbId": 433263,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 9,
+        "title": "Family Matters",
+        "tvdbId": 11496473,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2026-01-06",
+        "airDateUtc": "2026-01-07T02:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 10,
+        "hasFile": false,
+        "id": 198,
+        "lastSearchTime": "2026-09-28T16:55:06Z",
+        "monitored": true,
+        "overview": "With the search underway to find out the truth about Amy's hacked accounts, she and Sonya butt heads while treating a homeless patient. Jake and TJ help a distraught mother figure out why her daughter is in a coma. Hannah cares for a charming high school athlete.",
+        "runtime": 43,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "12+",
+          "cleanTitle": "docus",
+          "ended": false,
+          "firstAired": "2025-01-07T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 9,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/banners/675ec1dc40af9.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/posters/68aa16885d5ee.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/backgrounds/696789f761136.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/clearlogo/6aa994a538807.png"
+            }
+          ],
+          "imdbId": "tt26748321",
+          "languageProfileId": 1,
+          "lastAired": "2026-11-17T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "FOX",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "After a brain injury erases the last eight years of Dr. Amy Larsen's life, she must navigate an unfamiliar world where she has no recollection of patients she's treated or the tragedy that caused her to push everyone away.",
+          "path": "/tv/Doc (US)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.3,
+            "votes": 8020
+          },
+          "runtime": 43,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 3
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "doc us",
+          "status": "continuing",
+          "tags": [],
+          "title": "Doc (US)",
+          "titleSlug": "doc-us",
+          "tmdbId": 255055,
+          "tvMazeId": 67884,
+          "tvRageId": 0,
+          "tvdbId": 433263,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 9,
+        "title": "Chief",
+        "tvdbId": 11450088,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2025-11-25",
+        "airDateUtc": "2025-11-26T02:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 9,
+        "finaleType": "midseason",
+        "hasFile": false,
+        "id": 197,
+        "lastSearchTime": "2026-09-28T16:55:06Z",
+        "monitored": true,
+        "overview": "Grief helps clarify Jake's feelings for Amy, and a flashback to the pandemic reveals the truth about why he stayed at Westside. To Hannah's surprise and dismay, Charlie goes too far with their plan to destroy Amy, causing explosive repercussions.",
+        "runtime": 43,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "12+",
+          "cleanTitle": "docus",
+          "ended": false,
+          "firstAired": "2025-01-07T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 9,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/banners/675ec1dc40af9.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/posters/68aa16885d5ee.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/backgrounds/696789f761136.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/clearlogo/6aa994a538807.png"
+            }
+          ],
+          "imdbId": "tt26748321",
+          "languageProfileId": 1,
+          "lastAired": "2026-11-17T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "FOX",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "After a brain injury erases the last eight years of Dr. Amy Larsen's life, she must navigate an unfamiliar world where she has no recollection of patients she's treated or the tragedy that caused her to push everyone away.",
+          "path": "/tv/Doc (US)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.3,
+            "votes": 8020
+          },
+          "runtime": 43,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 3
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "doc us",
+          "status": "continuing",
+          "tags": [],
+          "title": "Doc (US)",
+          "titleSlug": "doc-us",
+          "tmdbId": 255055,
+          "tvMazeId": 67884,
+          "tvRageId": 0,
+          "tvdbId": 433263,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 9,
+        "title": "Kaddish",
+        "tvdbId": 11429403,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2025-11-18",
+        "airDateUtc": "2025-11-19T02:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 8,
+        "hasFile": false,
+        "id": 196,
+        "lastSearchTime": "2026-09-28T16:55:06Z",
+        "monitored": true,
+        "overview": "Jake refuses to give up on a beloved patient, landing himself in conflict with several Westside surgeons and when Amy's neuro tests elicit memories of Danny, she pushes herself too far.",
+        "runtime": 43,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "12+",
+          "cleanTitle": "docus",
+          "ended": false,
+          "firstAired": "2025-01-07T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 9,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/banners/675ec1dc40af9.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/posters/68aa16885d5ee.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/backgrounds/696789f761136.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/clearlogo/6aa994a538807.png"
+            }
+          ],
+          "imdbId": "tt26748321",
+          "languageProfileId": 1,
+          "lastAired": "2026-11-17T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "FOX",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "After a brain injury erases the last eight years of Dr. Amy Larsen's life, she must navigate an unfamiliar world where she has no recollection of patients she's treated or the tragedy that caused her to push everyone away.",
+          "path": "/tv/Doc (US)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.3,
+            "votes": 8020
+          },
+          "runtime": 43,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 3
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "doc us",
+          "status": "continuing",
+          "tags": [],
+          "title": "Doc (US)",
+          "titleSlug": "doc-us",
+          "tmdbId": 255055,
+          "tvMazeId": 67884,
+          "tvRageId": 0,
+          "tvdbId": 433263,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 9,
+        "title": "He Loved You",
+        "tvdbId": 11349401,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2025-11-11",
+        "airDateUtc": "2025-11-12T02:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 7,
+        "hasFile": false,
+        "id": 195,
+        "lastSearchTime": "2026-09-28T16:55:06Z",
+        "monitored": true,
+        "overview": "Amy and Gina, with an assist from Jake, team up to help a victim of domestic abuse, while TJ finds himself in the spotlight when he, Sonya and Liz treat a social media influencer.",
+        "runtime": 44,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "12+",
+          "cleanTitle": "docus",
+          "ended": false,
+          "firstAired": "2025-01-07T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 9,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/banners/675ec1dc40af9.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/posters/68aa16885d5ee.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/backgrounds/696789f761136.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/clearlogo/6aa994a538807.png"
+            }
+          ],
+          "imdbId": "tt26748321",
+          "languageProfileId": 1,
+          "lastAired": "2026-11-17T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "FOX",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "After a brain injury erases the last eight years of Dr. Amy Larsen's life, she must navigate an unfamiliar world where she has no recollection of patients she's treated or the tragedy that caused her to push everyone away.",
+          "path": "/tv/Doc (US)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.3,
+            "votes": 8020
+          },
+          "runtime": 43,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 3
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "doc us",
+          "status": "continuing",
+          "tags": [],
+          "title": "Doc (US)",
+          "titleSlug": "doc-us",
+          "tmdbId": 255055,
+          "tvMazeId": 67884,
+          "tvRageId": 0,
+          "tvdbId": 433263,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 9,
+        "title": "What I Did for Love",
+        "tvdbId": 11335293,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2025-11-04",
+        "airDateUtc": "2025-11-05T02:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 6,
+        "hasFile": false,
+        "id": 194,
+        "lastSearchTime": "2026-09-28T16:55:06Z",
+        "monitored": true,
+        "overview": "Amy treats a Chaplain who helps her reconcile with the past, while Michael is under investigation for his actions during the hostage crisis.",
+        "runtime": 43,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "12+",
+          "cleanTitle": "docus",
+          "ended": false,
+          "firstAired": "2025-01-07T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 9,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/banners/675ec1dc40af9.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/posters/68aa16885d5ee.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/backgrounds/696789f761136.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/clearlogo/6aa994a538807.png"
+            }
+          ],
+          "imdbId": "tt26748321",
+          "languageProfileId": 1,
+          "lastAired": "2026-11-17T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "FOX",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "After a brain injury erases the last eight years of Dr. Amy Larsen's life, she must navigate an unfamiliar world where she has no recollection of patients she's treated or the tragedy that caused her to push everyone away.",
+          "path": "/tv/Doc (US)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.3,
+            "votes": 8020
+          },
+          "runtime": 43,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 3
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "doc us",
+          "status": "continuing",
+          "tags": [],
+          "title": "Doc (US)",
+          "titleSlug": "doc-us",
+          "tmdbId": 255055,
+          "tvMazeId": 67884,
+          "tvRageId": 0,
+          "tvdbId": 433263,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 9,
+        "title": "Saints and Sinners",
+        "tvdbId": 11335292,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2025-10-21",
+        "airDateUtc": "2025-10-22T01:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 5,
+        "hasFile": false,
+        "id": 193,
+        "lastSearchTime": "2026-09-28T16:55:06Z",
+        "monitored": true,
+        "overview": "A popular weight loss medication reveals the cracks in a couple's relationship and two sisters face an unexpected diagnosis.",
+        "runtime": 43,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "12+",
+          "cleanTitle": "docus",
+          "ended": false,
+          "firstAired": "2025-01-07T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 9,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/banners/675ec1dc40af9.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/posters/68aa16885d5ee.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/backgrounds/696789f761136.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/clearlogo/6aa994a538807.png"
+            }
+          ],
+          "imdbId": "tt26748321",
+          "languageProfileId": 1,
+          "lastAired": "2026-11-17T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "FOX",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "After a brain injury erases the last eight years of Dr. Amy Larsen's life, she must navigate an unfamiliar world where she has no recollection of patients she's treated or the tragedy that caused her to push everyone away.",
+          "path": "/tv/Doc (US)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.3,
+            "votes": 8020
+          },
+          "runtime": 43,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 3
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "doc us",
+          "status": "continuing",
+          "tags": [],
+          "title": "Doc (US)",
+          "titleSlug": "doc-us",
+          "tmdbId": 255055,
+          "tvMazeId": 67884,
+          "tvRageId": 0,
+          "tvdbId": 433263,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 9,
+        "title": "Tightrope",
+        "tvdbId": 11301014,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2025-10-14",
+        "airDateUtc": "2025-10-15T01:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 4,
+        "hasFile": false,
+        "id": 192,
+        "lastSearchTime": "2026-09-28T16:55:06Z",
+        "monitored": true,
+        "overview": "An outdated medical proxy form creates tension between a patient's ex-husband and current partner. Amy, Jake, and new intern Hannah investigate a college student's sudden blindness.",
+        "runtime": 43,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "12+",
+          "cleanTitle": "docus",
+          "ended": false,
+          "firstAired": "2025-01-07T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 9,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/banners/675ec1dc40af9.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/posters/68aa16885d5ee.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/backgrounds/696789f761136.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/clearlogo/6aa994a538807.png"
+            }
+          ],
+          "imdbId": "tt26748321",
+          "languageProfileId": 1,
+          "lastAired": "2026-11-17T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "FOX",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "After a brain injury erases the last eight years of Dr. Amy Larsen's life, she must navigate an unfamiliar world where she has no recollection of patients she's treated or the tragedy that caused her to push everyone away.",
+          "path": "/tv/Doc (US)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.3,
+            "votes": 8020
+          },
+          "runtime": 43,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 3
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "doc us",
+          "status": "continuing",
+          "tags": [],
+          "title": "Doc (US)",
+          "titleSlug": "doc-us",
+          "tmdbId": 255055,
+          "tvMazeId": 67884,
+          "tvRageId": 0,
+          "tvdbId": 433263,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 9,
+        "title": "Something to Prove",
+        "tvdbId": 11290700,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2025-10-07",
+        "airDateUtc": "2025-10-08T01:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 3,
+        "hasFile": false,
+        "id": 191,
+        "lastSearchTime": "2026-09-28T16:55:06Z",
+        "monitored": true,
+        "overview": "A patient forces Amy to confront the realities of medical tourism, TJ helps a veteran with his prosthetic and Joan drops a bombshell.",
+        "runtime": 43,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "12+",
+          "cleanTitle": "docus",
+          "ended": false,
+          "firstAired": "2025-01-07T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 9,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/banners/675ec1dc40af9.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/posters/68aa16885d5ee.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/backgrounds/696789f761136.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/clearlogo/6aa994a538807.png"
+            }
+          ],
+          "imdbId": "tt26748321",
+          "languageProfileId": 1,
+          "lastAired": "2026-11-17T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "FOX",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "After a brain injury erases the last eight years of Dr. Amy Larsen's life, she must navigate an unfamiliar world where she has no recollection of patients she's treated or the tragedy that caused her to push everyone away.",
+          "path": "/tv/Doc (US)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.3,
+            "votes": 8020
+          },
+          "runtime": 43,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 3
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "doc us",
+          "status": "continuing",
+          "tags": [],
+          "title": "Doc (US)",
+          "titleSlug": "doc-us",
+          "tmdbId": 255055,
+          "tvMazeId": 67884,
+          "tvRageId": 0,
+          "tvdbId": 433263,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 9,
+        "title": "New Blood",
+        "tvdbId": 11269781,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2025-09-30",
+        "airDateUtc": "2025-10-01T01:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 2,
+        "hasFile": false,
+        "id": 190,
+        "lastSearchTime": "2026-09-28T16:55:06Z",
+        "monitored": true,
+        "overview": "Amy grapples with having memories while treating a mother-to-be with a mysterious condition. Also, Dr. Joan Ridley, Amy's mentor, visits Westside.",
+        "runtime": 43,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "12+",
+          "cleanTitle": "docus",
+          "ended": false,
+          "firstAired": "2025-01-07T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 9,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/banners/675ec1dc40af9.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/posters/68aa16885d5ee.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/backgrounds/696789f761136.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/clearlogo/6aa994a538807.png"
+            }
+          ],
+          "imdbId": "tt26748321",
+          "languageProfileId": 1,
+          "lastAired": "2026-11-17T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "FOX",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "After a brain injury erases the last eight years of Dr. Amy Larsen's life, she must navigate an unfamiliar world where she has no recollection of patients she's treated or the tragedy that caused her to push everyone away.",
+          "path": "/tv/Doc (US)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.3,
+            "votes": 8020
+          },
+          "runtime": 43,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 3
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "doc us",
+          "status": "continuing",
+          "tags": [],
+          "title": "Doc (US)",
+          "titleSlug": "doc-us",
+          "tmdbId": 255055,
+          "tvMazeId": 67884,
+          "tvRageId": 0,
+          "tvdbId": 433263,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 9,
+        "title": "Delusions of Grandeur",
+        "tvdbId": 11269780,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2025-09-14",
+        "airDateUtc": "2025-09-15T01:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 1,
+        "hasFile": false,
+        "id": 189,
+        "lastSearchTime": "2026-09-28T16:55:06Z",
+        "monitored": true,
+        "overview": "Amy's past comes back to haunt her when a desperate father sacrifices everything to secure his daughter's heart transplant.",
+        "runtime": 43,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "12+",
+          "cleanTitle": "docus",
+          "ended": false,
+          "firstAired": "2025-01-07T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 9,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/banners/675ec1dc40af9.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/posters/68aa16885d5ee.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/backgrounds/696789f761136.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433263/clearlogo/6aa994a538807.png"
+            }
+          ],
+          "imdbId": "tt26748321",
+          "languageProfileId": 1,
+          "lastAired": "2026-11-17T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "FOX",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "After a brain injury erases the last eight years of Dr. Amy Larsen's life, she must navigate an unfamiliar world where she has no recollection of patients she's treated or the tragedy that caused her to push everyone away.",
+          "path": "/tv/Doc (US)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.3,
+            "votes": 8020
+          },
+          "runtime": 43,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 3
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "doc us",
+          "status": "continuing",
+          "tags": [],
+          "title": "Doc (US)",
+          "titleSlug": "doc-us",
+          "tmdbId": 255055,
+          "tvMazeId": 67884,
+          "tvRageId": 0,
+          "tvdbId": 433263,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 9,
+        "title": "Her Heart",
+        "tvdbId": 11230696,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2025-03-20",
+        "airDateUtc": "2025-03-21T01:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 10,
+        "finaleType": "season",
+        "hasFile": false,
+        "id": 603,
+        "monitored": true,
+        "overview": "Mark forms a shaky alliance in an all-or-nothing play, while the team makes a dangerous last stand.",
+        "runtime": 76,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "TV-MA",
+          "cleanTitle": "severance",
+          "ended": false,
+          "firstAired": "2022-02-18T00:00:00Z",
+          "genres": [
+            "Drama",
+            "Mystery",
+            "Science Fiction",
+            "Thriller"
+          ],
+          "id": 20,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/banners/67d3854a3f3f2.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/posters/621096b26f0e2.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/backgrounds/61bdee7c62d99.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/clearlogo/67deb201804b5.png"
+            }
+          ],
+          "imdbId": "tt11280740",
+          "languageProfileId": 1,
+          "lastAired": "2025-03-20T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Mark leads a team of office workers whose memories have been surgically divided between their work and personal lives. When a mysterious colleague appears outside of work, it begins a journey to discover the truth about their jobs.",
+          "path": "/tv/Severance",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.6,
+            "votes": 415088
+          },
+          "runtime": 49,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "severance",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "Severance",
+          "titleSlug": "severance",
+          "tmdbId": 95396,
+          "tvMazeId": 44933,
+          "tvRageId": 0,
+          "tvdbId": 371980,
+          "useSceneNumbering": false,
+          "year": 2022
+        },
+        "seriesId": 20,
+        "title": "Cold Harbor",
+        "tvdbId": 10592768,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2025-03-13",
+        "airDateUtc": "2025-03-14T01:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 9,
+        "hasFile": false,
+        "id": 602,
+        "monitored": true,
+        "overview": "Mark and Devon team with an ally. Helly investigates further.",
+        "runtime": 45,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "TV-MA",
+          "cleanTitle": "severance",
+          "ended": false,
+          "firstAired": "2022-02-18T00:00:00Z",
+          "genres": [
+            "Drama",
+            "Mystery",
+            "Science Fiction",
+            "Thriller"
+          ],
+          "id": 20,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/banners/67d3854a3f3f2.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/posters/621096b26f0e2.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/backgrounds/61bdee7c62d99.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/clearlogo/67deb201804b5.png"
+            }
+          ],
+          "imdbId": "tt11280740",
+          "languageProfileId": 1,
+          "lastAired": "2025-03-20T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Mark leads a team of office workers whose memories have been surgically divided between their work and personal lives. When a mysterious colleague appears outside of work, it begins a journey to discover the truth about their jobs.",
+          "path": "/tv/Severance",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.6,
+            "votes": 415088
+          },
+          "runtime": 49,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "severance",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "Severance",
+          "titleSlug": "severance",
+          "tmdbId": 95396,
+          "tvMazeId": 44933,
+          "tvRageId": 0,
+          "tvdbId": 371980,
+          "useSceneNumbering": false,
+          "year": 2022
+        },
+        "seriesId": 20,
+        "title": "The After Hours",
+        "tvdbId": 10592766,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2025-03-06",
+        "airDateUtc": "2025-03-07T02:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 8,
+        "hasFile": false,
+        "id": 601,
+        "monitored": true,
+        "overview": "Discoveries are made.",
+        "runtime": 37,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "TV-MA",
+          "cleanTitle": "severance",
+          "ended": false,
+          "firstAired": "2022-02-18T00:00:00Z",
+          "genres": [
+            "Drama",
+            "Mystery",
+            "Science Fiction",
+            "Thriller"
+          ],
+          "id": 20,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/banners/67d3854a3f3f2.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/posters/621096b26f0e2.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/backgrounds/61bdee7c62d99.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/clearlogo/67deb201804b5.png"
+            }
+          ],
+          "imdbId": "tt11280740",
+          "languageProfileId": 1,
+          "lastAired": "2025-03-20T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Mark leads a team of office workers whose memories have been surgically divided between their work and personal lives. When a mysterious colleague appears outside of work, it begins a journey to discover the truth about their jobs.",
+          "path": "/tv/Severance",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.6,
+            "votes": 415088
+          },
+          "runtime": 49,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "severance",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "Severance",
+          "titleSlug": "severance",
+          "tmdbId": 95396,
+          "tvMazeId": 44933,
+          "tvRageId": 0,
+          "tvdbId": 371980,
+          "useSceneNumbering": false,
+          "year": 2022
+        },
+        "seriesId": 20,
+        "title": "Sweet Vitriol",
+        "tvdbId": 10592765,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2025-02-27",
+        "airDateUtc": "2025-02-28T02:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 7,
+        "hasFile": false,
+        "id": 600,
+        "monitored": true,
+        "overview": "An old romance intersects with a deadly present threat.",
+        "runtime": 50,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "TV-MA",
+          "cleanTitle": "severance",
+          "ended": false,
+          "firstAired": "2022-02-18T00:00:00Z",
+          "genres": [
+            "Drama",
+            "Mystery",
+            "Science Fiction",
+            "Thriller"
+          ],
+          "id": 20,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/banners/67d3854a3f3f2.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/posters/621096b26f0e2.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/backgrounds/61bdee7c62d99.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/clearlogo/67deb201804b5.png"
+            }
+          ],
+          "imdbId": "tt11280740",
+          "languageProfileId": 1,
+          "lastAired": "2025-03-20T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Mark leads a team of office workers whose memories have been surgically divided between their work and personal lives. When a mysterious colleague appears outside of work, it begins a journey to discover the truth about their jobs.",
+          "path": "/tv/Severance",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.6,
+            "votes": 415088
+          },
+          "runtime": 49,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "severance",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "Severance",
+          "titleSlug": "severance",
+          "tmdbId": 95396,
+          "tvMazeId": 44933,
+          "tvRageId": 0,
+          "tvdbId": 371980,
+          "useSceneNumbering": false,
+          "year": 2022
+        },
+        "seriesId": 20,
+        "title": "Chikhai Bardo",
+        "tvdbId": 10592764,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2025-02-20",
+        "airDateUtc": "2025-02-21T02:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 6,
+        "hasFile": false,
+        "id": 599,
+        "monitored": true,
+        "overview": "Bonds are tested. Mark continues on his path of discovery.",
+        "runtime": 48,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "TV-MA",
+          "cleanTitle": "severance",
+          "ended": false,
+          "firstAired": "2022-02-18T00:00:00Z",
+          "genres": [
+            "Drama",
+            "Mystery",
+            "Science Fiction",
+            "Thriller"
+          ],
+          "id": 20,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/banners/67d3854a3f3f2.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/posters/621096b26f0e2.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/backgrounds/61bdee7c62d99.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/clearlogo/67deb201804b5.png"
+            }
+          ],
+          "imdbId": "tt11280740",
+          "languageProfileId": 1,
+          "lastAired": "2025-03-20T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Mark leads a team of office workers whose memories have been surgically divided between their work and personal lives. When a mysterious colleague appears outside of work, it begins a journey to discover the truth about their jobs.",
+          "path": "/tv/Severance",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.6,
+            "votes": 415088
+          },
+          "runtime": 49,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "severance",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "Severance",
+          "titleSlug": "severance",
+          "tmdbId": 95396,
+          "tvMazeId": 44933,
+          "tvRageId": 0,
+          "tvdbId": 371980,
+          "useSceneNumbering": false,
+          "year": 2022
+        },
+        "seriesId": 20,
+        "title": "Attila",
+        "tvdbId": 10592763,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2025-02-13",
+        "airDateUtc": "2025-02-14T02:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 5,
+        "hasFile": false,
+        "id": 598,
+        "monitored": true,
+        "overview": "Tensions emerge after the team suffers a loss.",
+        "runtime": 47,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "TV-MA",
+          "cleanTitle": "severance",
+          "ended": false,
+          "firstAired": "2022-02-18T00:00:00Z",
+          "genres": [
+            "Drama",
+            "Mystery",
+            "Science Fiction",
+            "Thriller"
+          ],
+          "id": 20,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/banners/67d3854a3f3f2.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/posters/621096b26f0e2.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/backgrounds/61bdee7c62d99.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/clearlogo/67deb201804b5.png"
+            }
+          ],
+          "imdbId": "tt11280740",
+          "languageProfileId": 1,
+          "lastAired": "2025-03-20T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Mark leads a team of office workers whose memories have been surgically divided between their work and personal lives. When a mysterious colleague appears outside of work, it begins a journey to discover the truth about their jobs.",
+          "path": "/tv/Severance",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.6,
+            "votes": 415088
+          },
+          "runtime": 49,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "severance",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "Severance",
+          "titleSlug": "severance",
+          "tmdbId": 95396,
+          "tvMazeId": 44933,
+          "tvRageId": 0,
+          "tvdbId": 371980,
+          "useSceneNumbering": false,
+          "year": 2022
+        },
+        "seriesId": 20,
+        "title": "Trojan’s Horse",
+        "tvdbId": 10592762,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2025-02-06",
+        "airDateUtc": "2025-02-07T02:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 4,
+        "hasFile": false,
+        "id": 597,
+        "monitored": true,
+        "overview": "The team participates in a group activity.",
+        "runtime": 51,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "TV-MA",
+          "cleanTitle": "severance",
+          "ended": false,
+          "firstAired": "2022-02-18T00:00:00Z",
+          "genres": [
+            "Drama",
+            "Mystery",
+            "Science Fiction",
+            "Thriller"
+          ],
+          "id": 20,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/banners/67d3854a3f3f2.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/posters/621096b26f0e2.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/backgrounds/61bdee7c62d99.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/clearlogo/67deb201804b5.png"
+            }
+          ],
+          "imdbId": "tt11280740",
+          "languageProfileId": 1,
+          "lastAired": "2025-03-20T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Mark leads a team of office workers whose memories have been surgically divided between their work and personal lives. When a mysterious colleague appears outside of work, it begins a journey to discover the truth about their jobs.",
+          "path": "/tv/Severance",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.6,
+            "votes": 415088
+          },
+          "runtime": 49,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "severance",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "Severance",
+          "titleSlug": "severance",
+          "tmdbId": 95396,
+          "tvMazeId": 44933,
+          "tvRageId": 0,
+          "tvdbId": 371980,
+          "useSceneNumbering": false,
+          "year": 2022
+        },
+        "seriesId": 20,
+        "title": "Woe’s Hollow",
+        "tvdbId": 10592761,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2025-01-30",
+        "airDateUtc": "2025-01-31T02:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 3,
+        "hasFile": false,
+        "id": 596,
+        "monitored": true,
+        "overview": "Mark, Helly, Irving, and Dylan search for answers.",
+        "runtime": 54,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "TV-MA",
+          "cleanTitle": "severance",
+          "ended": false,
+          "firstAired": "2022-02-18T00:00:00Z",
+          "genres": [
+            "Drama",
+            "Mystery",
+            "Science Fiction",
+            "Thriller"
+          ],
+          "id": 20,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/banners/67d3854a3f3f2.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/posters/621096b26f0e2.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/backgrounds/61bdee7c62d99.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/clearlogo/67deb201804b5.png"
+            }
+          ],
+          "imdbId": "tt11280740",
+          "languageProfileId": 1,
+          "lastAired": "2025-03-20T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Mark leads a team of office workers whose memories have been surgically divided between their work and personal lives. When a mysterious colleague appears outside of work, it begins a journey to discover the truth about their jobs.",
+          "path": "/tv/Severance",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.6,
+            "votes": 415088
+          },
+          "runtime": 49,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "severance",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "Severance",
+          "titleSlug": "severance",
+          "tmdbId": 95396,
+          "tvMazeId": 44933,
+          "tvRageId": 0,
+          "tvdbId": 371980,
+          "useSceneNumbering": false,
+          "year": 2022
+        },
+        "seriesId": 20,
+        "title": "Who Is Alive?",
+        "tvdbId": 10592760,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2025-01-23",
+        "airDateUtc": "2025-01-24T02:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 2,
+        "hasFile": false,
+        "id": 595,
+        "monitored": true,
+        "overview": "Mark contemplates the meaning of a message.",
+        "runtime": 46,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "TV-MA",
+          "cleanTitle": "severance",
+          "ended": false,
+          "firstAired": "2022-02-18T00:00:00Z",
+          "genres": [
+            "Drama",
+            "Mystery",
+            "Science Fiction",
+            "Thriller"
+          ],
+          "id": 20,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/banners/67d3854a3f3f2.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/posters/621096b26f0e2.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/backgrounds/61bdee7c62d99.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/clearlogo/67deb201804b5.png"
+            }
+          ],
+          "imdbId": "tt11280740",
+          "languageProfileId": 1,
+          "lastAired": "2025-03-20T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Mark leads a team of office workers whose memories have been surgically divided between their work and personal lives. When a mysterious colleague appears outside of work, it begins a journey to discover the truth about their jobs.",
+          "path": "/tv/Severance",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.6,
+            "votes": 415088
+          },
+          "runtime": 49,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "severance",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "Severance",
+          "titleSlug": "severance",
+          "tmdbId": 95396,
+          "tvMazeId": 44933,
+          "tvRageId": 0,
+          "tvdbId": 371980,
+          "useSceneNumbering": false,
+          "year": 2022
+        },
+        "seriesId": 20,
+        "title": "Goodbye, Mrs. Selvig",
+        "tvdbId": 10592759,
+        "unverifiedSceneNumbering": false
+      },
+      {
+        "airDate": "2025-01-16",
+        "airDateUtc": "2025-01-17T02:00:00Z",
+        "episodeFileId": 0,
+        "episodeNumber": 1,
+        "hasFile": false,
+        "id": 594,
+        "monitored": true,
+        "overview": "Mark returns to work under different circumstances. Secrets from the Outie world come to light.",
+        "runtime": 49,
+        "seasonNumber": 2,
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "21:00",
+          "certification": "TV-MA",
+          "cleanTitle": "severance",
+          "ended": false,
+          "firstAired": "2022-02-18T00:00:00Z",
+          "genres": [
+            "Drama",
+            "Mystery",
+            "Science Fiction",
+            "Thriller"
+          ],
+          "id": 20,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/banners/67d3854a3f3f2.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/posters/621096b26f0e2.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/backgrounds/61bdee7c62d99.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/371980/clearlogo/67deb201804b5.png"
+            }
+          ],
+          "imdbId": "tt11280740",
+          "languageProfileId": 1,
+          "lastAired": "2025-03-20T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Mark leads a team of office workers whose memories have been surgically divided between their work and personal lives. When a mysterious colleague appears outside of work, it begins a journey to discover the truth about their jobs.",
+          "path": "/tv/Severance",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.6,
+            "votes": 415088
+          },
+          "runtime": 49,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "severance",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "Severance",
+          "titleSlug": "severance",
+          "tmdbId": 95396,
+          "tvMazeId": 44933,
+          "tvRageId": 0,
+          "tvdbId": 371980,
+          "useSceneNumbering": false,
+          "year": 2022
+        },
+        "seriesId": 20,
+        "title": "Hello, Ms. Cobel",
+        "tvdbId": 10586352,
+        "unverifiedSceneNumbering": false
+      }
+    ],
+    "sortDirection": "descending",
+    "sortKey": "episodes.airDateUtc",
+    "totalRecords": 59
+  },
+  "recordedAt": "2026-11-09T22:23:22Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/wanted/missing?page=1&pageSize=50&sortKey=episodes.airDateUtc&sortDirection=descending&includeSeries=true&monitored=true"
+  },
+  "status": 200
+}

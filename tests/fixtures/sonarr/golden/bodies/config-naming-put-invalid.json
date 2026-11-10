@@ -1,0 +1,7 @@
+{
+ "$from": "config-naming",
+ "$set": {
+  "renameEpisodes": true,
+  "standardEpisodeFormat": "{Series Title}"
+ }
+}

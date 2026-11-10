@@ -1,0 +1,669 @@
+{
+ "tvdbId": 392573,
+ "title": "Shōgun",
+ "overview": "Set in Japan in the year 1600, at the dawn of a century-defining civil war. Lord Yoshii Toranaga is fighting for his life as his enemies on the Council of Regents unite against him, when a mysterious European ship is found marooned in a nearby fishing village.",
+ "slug": "shogun-2024",
+ "originalCountry": "usa",
+ "originalLanguage": "jpn",
+ "language": "eng",
+ "firstAired": "2024-02-27",
+ "lastAired": "2024-04-23",
+ "tvMazeId": 37336,
+ "tmdbId": 126308,
+ "imdbId": "tt2788316",
+ "malIds": [],
+ "anidbIds": [],
+ "aniListIds": [],
+ "lastUpdated": "2026-11-06T08:56:17Z",
+ "status": "Continuing",
+ "runtime": 59,
+ "timeOfDay": {
+  "hours": 22,
+  "minutes": 0
+ },
+ "originalNetwork": "FX",
+ "network": "FX",
+ "genres": [
+  "Action",
+  "Adventure",
+  "Drama",
+  "History",
+  "War"
+ ],
+ "contentRating": "TV-MA",
+ "rating": {
+  "count": 255323,
+  "value": "8.6"
+ },
+ "alternativeTitles": [
+  {
+   "title": "Shōgun 将軍"
+  },
+  {
+   "title": "Shōgun (2024)"
+  },
+  {
+   "title": "Shogun (2024)"
+  }
+ ],
+ "actors": [
+  {
+   "name": "Hiroyuki Sanada",
+   "character": "Yoshii Toranaga",
+   "image": "https://artworks.thetvdb.com/banners/person/367569/6032c5c04dcbb.jpg"
+  },
+  {
+   "name": "Cosmo Jarvis",
+   "character": "John Blackthorne",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8174503/photo/660c4e105b19a.jpg"
+  },
+  {
+   "name": "Anna Sawai",
+   "character": "Toda Mariko",
+   "image": "https://artworks.thetvdb.com/banners/person/8165041/6027526e9cfd7.jpg"
+  },
+  {
+   "name": "Tadanobu Asano",
+   "character": "Kashigi Yabushige",
+   "image": "https://artworks.thetvdb.com/banners/person/613711/primary.jpg"
+  },
+  {
+   "name": "Takehiro Hira",
+   "character": "Ishido Kazunari",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8058715/photo/656f84c4094e5.jpg"
+  },
+  {
+   "name": "Fumi Nikaido",
+   "character": "Ochiba-no-kata",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/592772/photo/649ea14204778.jpg"
+  },
+  {
+   "name": "Shinnosuke Abe",
+   "character": "Buntaro",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8039656/photo/653e1b7a11901.jpg"
+  },
+  {
+   "name": "Yûko Miyamoto",
+   "character": "Gin",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8312587/photo/660c4ed1d7bec.jpg"
+  },
+  {
+   "name": "Hiroto Kanai",
+   "character": "Kashigi Omi",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9021324/photo/6636717a0b74c.jpg"
+  },
+  {
+   "name": "Yuka Kouri",
+   "character": "Kiku",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8105375/photo/63c51491b56c4.jpg"
+  },
+  {
+   "name": "Tommy Bastow",
+   "character": "Father Martin Alvito",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/472603/photo/66368eed6bba3.jpg"
+  },
+  {
+   "name": "Yoriko Dôguchi",
+   "character": "Kiri-no-kata",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8212575/photo/6519d489534bf.jpg"
+  },
+  {
+   "name": "Takaaki Enoki",
+   "character": "Lord Ito",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/542733/photo/633c9c7f66c8b.jpg"
+  },
+  {
+   "name": "Jun Kunimura",
+   "character": "Gōda",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/503864/photo/64da6f3bb58e0.jpg"
+  },
+  {
+   "name": "Sho Kaneta",
+   "character": "Hidenobu",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9127963/photo/6663f8f246984.jpg"
+  },
+  {
+   "name": "Masataka Kubota",
+   "character": "Hyūga",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/292109/photo/634627f8b995e.jpg"
+  },
+  {
+   "name": "Asami Mizukawa",
+   "character": "Aya",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/7872628/photo/621ec71a59f8d.jpg"
+  },
+  {
+   "name": "Risei Kukihara",
+   "character": "Gabriel"
+  },
+  {
+   "name": "Ryo Sato",
+   "character": "Rin",
+   "image": "https://artworks.thetvdb.com/banners/person/8182927/5fa461eec12d4.jpg"
+  },
+  {
+   "name": "Seishiro Nishida",
+   "character": "Jōshin"
+  },
+  {
+   "name": "Mantaro Koichi",
+   "character": "Saitō",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8068078/photo/6351af5aef213.jpg"
+  },
+  {
+   "name": "Takashi Yamaguchi",
+   "character": "Kanō",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8600754/photo/66866d6e4d6a5.jpg"
+  },
+  {
+   "name": "Moeka Hoshi",
+   "character": "Usami Fuji",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9106066/photo/63a99a4c5841e.jpg"
+  },
+  {
+   "name": "Tokuma Nishioka",
+   "character": "Toda Hiromatsu",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/501402/photo/63998c365948b.jpg"
+  },
+  {
+   "name": "Yuki Kura",
+   "character": "Yoshii Nagakado",
+   "image": "https://artworks.thetvdb.com/banners/person/8162808/62098829.jpg"
+  },
+  {
+   "name": "Yasunari Takeshima",
+   "character": "Muraji",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/7907750/photo/6636862169b7f.jpg"
+  },
+  {
+   "name": "Takeshi Kurokawa",
+   "character": "Ohno"
+  },
+  {
+   "name": "Hiromoto Ida",
+   "character": "Kiyama"
+  },
+  {
+   "name": "Ako",
+   "character": "Daiyoin / Lady Iyo",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/652377/photo/6636910feb7bc.jpg"
+  }
+ ],
+ "images": [
+  {
+   "coverType": "Banner",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/392573/banners/64bdaf5238aad.jpg"
+  },
+  {
+   "coverType": "Poster",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/392573/posters/65cf707706d1a.jpg"
+  },
+  {
+   "coverType": "Fanart",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/392573/backgrounds/65de5a4927427.jpg"
+  },
+  {
+   "coverType": "Clearlogo",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/392573/clearlogo/662dde0fbfa92.png"
+  }
+ ],
+ "seasons": [
+  {
+   "seasonNumber": 0
+  },
+  {
+   "seasonNumber": 1,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/1915787/posters/662ddff4f21ed.jpg"
+    },
+    {
+     "coverType": "Banner",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/1915787/banners/662de2f078af7.jpg"
+    }
+   ]
+  }
+ ],
+ "episodes": [
+  {
+   "tvdbShowId": 392573,
+   "tvdbId": 10303452,
+   "seasonNumber": 0,
+   "episodeNumber": 1,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 1,
+   "title": "The Making of Shōgun: First Look",
+   "airDate": "2024-02-06",
+   "airDateUtc": "2024-02-07T03:00:00Z",
+   "runtime": 6,
+   "overview": "The dawn of a new era. Watch for a First Look at FX’s epic saga of war, passion, and power.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10303452/screencap/65f8c3eaa62b5.jpg"
+  },
+  {
+   "tvdbShowId": 392573,
+   "tvdbId": 10303453,
+   "seasonNumber": 0,
+   "episodeNumber": 2,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 1,
+   "title": "The Making of Shōgun: Action Authenticity",
+   "airDate": "2024-02-07",
+   "airDateUtc": "2024-02-08T03:00:00Z",
+   "runtime": 1,
+   "overview": "Hiroyuki Sanada (Producer / Lord Toranaga), Anna Sawai (Lady Mariko), and Eriko Miyagawa (producer) give fans a look at the action coming FX’s Shōgun.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10303453/screencap/65f8c510ae774.jpg"
+  },
+  {
+   "tvdbShowId": 392573,
+   "tvdbId": 10303454,
+   "seasonNumber": 0,
+   "episodeNumber": 3,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 1,
+   "title": "The World of Shōgun: History & Backstory",
+   "airDate": "2024-02-09",
+   "airDateUtc": "2024-02-10T03:00:00Z",
+   "runtime": 6,
+   "overview": "See how it all began in “The World of Shōgun”. Experience the history behind the rise of Warlords, Samurai, and a powerful new empire in Feudal Japan.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10303454/screencap/65f8c5d2c83d8.jpg"
+  },
+  {
+   "tvdbShowId": 392573,
+   "tvdbId": 10346502,
+   "seasonNumber": 0,
+   "episodeNumber": 4,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 1,
+   "title": "The Making of Shōgun – Chapter One: Honoring Authenticity",
+   "airDate": "2024-02-14",
+   "airDateUtc": "2024-02-15T03:00:00Z",
+   "runtime": 6,
+   "overview": "“You see it in each frame.” Find out how the Shōgun team brought unprecedented accuracy to the screen through collaboration with Japan’s most dedicated actors, artists, crew members, and cultural specialists."
+  },
+  {
+   "tvdbShowId": 392573,
+   "tvdbId": 10361780,
+   "seasonNumber": 0,
+   "episodeNumber": 5,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 2,
+   "title": "FX's Shōgun: The Official Podcast - Episode 1 - Anjin",
+   "airDate": "2024-02-27",
+   "airDateUtc": "2024-02-28T03:00:00Z",
+   "runtime": 28,
+   "overview": "Host Emily Yoshida and guests break down episode 1 of FX’s Shōgun. Featuring showrunner Justin Marks, actor Hiroyuki Sanada \"Toranaga,\" historian Frederik Cryns, and costume designer Carlos Rosario. From cultural bonding and falcon training to dressing samurai and Dutch sailors, join them as they discuss the first chapter of the epic tale."
+  },
+  {
+   "tvdbShowId": 392573,
+   "tvdbId": 10364466,
+   "seasonNumber": 0,
+   "episodeNumber": 6,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 3,
+   "title": "The Making of Shōgun – Chapter Two: A Day with Hiroyuki Sanada",
+   "airDate": "2024-02-27",
+   "airDateUtc": "2024-02-28T03:00:00Z",
+   "runtime": 7,
+   "overview": "For the first time ever, audiences of FX’s Shōgun will see legendary actor Hiroyuki Sanada rise to a role he’s never played: producer. Join Sanada for a hectic day on set as he finds a balance between acting and advising, on a mission to showcase authenticity every step of the way. FX’s Shōgun premieres 2.27 on Hulu. Based on James Clavell’s novel, FX’s Shōgun is set in Japan in the year 1600 at the dawn of a century-defining civil war. Lord Yoshii Toranaga is fighting for his life as his enemies on the Council of Regents unite against him, when a mysterious European ship is found marooned in a nearby fishing village.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10364466/screencap/65f8c6c82bfac.jpg"
+  },
+  {
+   "tvdbShowId": 392573,
+   "tvdbId": 10364467,
+   "seasonNumber": 0,
+   "episodeNumber": 7,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 3,
+   "title": "FX's Shōgun: The Official Podcast - Episode 2 - Servants of Two Masters",
+   "airDate": "2024-02-27",
+   "airDateUtc": "2024-02-28T03:00:00Z",
+   "runtime": 31,
+   "overview": "A Taikō leaves his legacy. Host Emily Yoshida and guests break down episode 2 of FX’s Shōgun. Featuring executive producer and co-creator Rachel Kondo, actor Cosmo Jarvis \"Blackthorne,\" producer Eriko Miyagawa, and director Johnathan Van Tulleken. Creators and cast discuss why some characters' names in the original book had to be changed for the show, why Ishido might be a sympathetic villain, and what Blackthorne sees in Yabushige."
+  },
+  {
+   "tvdbShowId": 392573,
+   "tvdbId": 10389905,
+   "seasonNumber": 0,
+   "episodeNumber": 8,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 4,
+   "title": "FX's Shōgun: The Official Podcast - Episode 3 - Tomorrow is Tomorrow",
+   "airDate": "2024-03-05",
+   "airDateUtc": "2024-03-06T03:00:00Z",
+   "runtime": 27,
+   "overview": "A great escape. Host Emily Yoshida and guests break down episode 3 of FX’s Shōgun. Featuring showrunner Justin Marks, actor Nestor Carbonell \"Rodrigues\", stunt coordinator Lauro David Chartrand-Del Valle, and production designer Helen Jarvis. Listen in as Yoshida and guests explore the skills required to be a great samurai, how to drown on camera, and what it takes to build 16th century ships.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10389905/screencap/65f8c7918a98b.jpg"
+  },
+  {
+   "tvdbShowId": 392573,
+   "tvdbId": 10389907,
+   "seasonNumber": 0,
+   "episodeNumber": 10,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 4,
+   "title": "The Making of Shōgun – Chapter Three: Creating the Costumes",
+   "airDate": "2024-03-08",
+   "airDateUtc": "2024-03-09T03:00:00Z",
+   "runtime": 6,
+   "overview": "“The costumes tell a story of their own.” Costume Designer Carlos Rosario brings us into the process of constructing an ornate and authentic Japanese wardrobe for Shōgun, down to every stitch, brushstroke, and hand-dyed feather.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10389907/screencap/65f8c88c7f318.jpg"
+  },
+  {
+   "tvdbShowId": 392573,
+   "tvdbId": 10389908,
+   "seasonNumber": 0,
+   "episodeNumber": 11,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 5,
+   "title": "FX's Shōgun: The Official Podcast - Episode 4 - The Eightfold Fence",
+   "airDate": "2024-03-12",
+   "airDateUtc": "2024-03-13T02:00:00Z",
+   "runtime": 30,
+   "overview": "A wall too high to scale. Host Emily Yoshida and guests break down episode 4 of FX’s Shōgun. Featuring executive producer and co-creator Rachel Kondo, actor Anna Sawai \"Mariko,\" historian Frederik Cryns, and director Fred Toye. Join them as they discuss what Fuji's role as consort means, what's going on between Mariko and Blackthorne, and how to bring a small fishing village like Ajiro to the screen.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10389908/screencap/65f8c8f68bd8b.jpg"
+  },
+  {
+   "tvdbShowId": 392573,
+   "tvdbId": 10389922,
+   "seasonNumber": 0,
+   "episodeNumber": 12,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 5,
+   "title": "Crafting Shōgun | Behind the Epic Saga: Hiroyuki Sanada, Anna Sawai, Rachel Kondo, and More",
+   "airDate": "2024-03-13",
+   "airDateUtc": "2024-03-14T02:00:00Z",
+   "runtime": 18,
+   "overview": "Every legend begins with a story. Join our creators and cast as they discuss the vision and artistry behind FX's Shōgun's groundbreaking series. Based on James Clavell's international bestseller, Shōgun brings Sengoku Period Japan to life, filled with war, passion, and power. We’ll discuss the traditions and authenticity applied to every scene, the complexity of evoking a time period in dialogue, the experts on set, and so much more."
+  },
+  {
+   "tvdbShowId": 392573,
+   "tvdbId": 10398576,
+   "seasonNumber": 0,
+   "episodeNumber": 13,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 6,
+   "title": "FX's Shōgun: The Official Podcast - Episode 5 - Broken to the Fist",
+   "airDate": "2024-03-19",
+   "airDateUtc": "2024-03-20T02:00:00Z",
+   "runtime": 28,
+   "overview": "A ground that does not waver to man. Host Emily Yoshida and guests break down episode 5 of FX’s Shōgun. Featuring showrunner Justin Marks, actors Cosmo Jarvis \"Blackthorne” and Moeka Hoshi \"Fuji,\" and consulting producer Mako Kamitsuna. Creators and cast members discuss that \"groundbreaking\" earthquake, explore the dark corners of Buntaro's mind, and break down the fate of a gardener.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10398576/screencap/65fef58f85f02.jpg"
+  },
+  {
+   "tvdbShowId": 392573,
+   "tvdbId": 10400367,
+   "seasonNumber": 0,
+   "episodeNumber": 14,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 6,
+   "title": "The Making of Shōgun – Chapter Four꞉ Creating the Look",
+   "airDate": "2024-03-22",
+   "airDateUtc": "2024-03-23T02:00:00Z",
+   "runtime": 7,
+   "overview": "See how the hair and makeup specialists of Shōgun tackled the herculean challenge to prepare hundreds of actors and extras to meld seamlessly into the world of feudal Japan."
+  },
+  {
+   "tvdbShowId": 392573,
+   "tvdbId": 10400368,
+   "seasonNumber": 0,
+   "episodeNumber": 15,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 7,
+   "title": "FX's Shōgun: The Official Podcast - Episode 6 - Ladies of the Willow World",
+   "airDate": "2024-03-26",
+   "airDateUtc": "2024-03-27T02:00:00Z",
+   "runtime": 28,
+   "overview": "A secret place of pleasures. Host Emily Yoshida and guests break down episode 6 of FX’s Shōgun. Featuring actor Anna Sawai \"Mariko,\" associate producer & writer Caillin Puente, historian Frederik Cryns, and director Hiromi Kamata. Discover what it takes to film the series' most intimate scene, the meaning of honors and titles, and the on-screen moment so haunting that it entered Anna Sawai's dreams."
+  },
+  {
+   "tvdbShowId": 392573,
+   "tvdbId": 10421172,
+   "seasonNumber": 0,
+   "episodeNumber": 16,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 7,
+   "title": "The Making of Shōgun – Chapter Five: Expanding the Vision with VFX",
+   "airDate": "2024-03-29",
+   "airDateUtc": "2024-03-30T02:00:00Z",
+   "runtime": 5,
+   "overview": "Storytelling on a scale that's never been seen. VFX Supervisor Michael Cliett breaks down the process of resurrecting feudal Japan in over 5,000 intense and strategic visual effects shots."
+  },
+  {
+   "tvdbShowId": 392573,
+   "tvdbId": 10421174,
+   "seasonNumber": 0,
+   "episodeNumber": 17,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 8,
+   "title": "FX's Shōgun: The Official Podcast - Episode 7 - A Stick of Time",
+   "airDate": "2024-04-02",
+   "airDateUtc": "2024-04-03T02:00:00Z",
+   "runtime": 27,
+   "overview": "A fate for every soul. Host Emily Yoshida and guests break down episode 7 of FX’s Shōgun. Featuring executive producer and co-creator Rachel Kondo, actor Hiroyuki Sanada \"Toranaga,\" producer Eriko Miyagawa, and composer Leopold Ross. From Toranaga's complicated relationship with his son, Nagakado, to a music score so compelling it tells a story, episode 7 breakdown will delve into the heart of Shōgun."
+  },
+  {
+   "tvdbShowId": 392573,
+   "tvdbId": 10437885,
+   "seasonNumber": 0,
+   "episodeNumber": 18,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 9,
+   "title": "FX's Shōgun: The Official Podcast - Episode 8 - The Abyss of Life",
+   "airDate": "2024-04-09",
+   "airDateUtc": "2024-04-10T02:00:00Z",
+   "runtime": 28,
+   "overview": "A question of loyalty. Host Emily Yoshida and guests break down episode 8 of FX’s Shōgun. Featuring showrunner Justin Marks, production designer Helen Jarvis, historian Frederick Cryns, and director Emmanuel Osei-Kuffour. Creators and experts deep-dive into the intricacies of the tea ceremony, the fates of the real-life shipwrecked sailors, and the evolution of a region that would become Tokyo."
+  },
+  {
+   "tvdbShowId": 392573,
+   "tvdbId": 10446208,
+   "seasonNumber": 0,
+   "episodeNumber": 19,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 7,
+   "title": "The Making of Shōgun – Chapter Six: A Show Within A Show",
+   "airDate": "2024-04-12",
+   "airDateUtc": "2024-04-13T02:00:00Z",
+   "runtime": 5,
+   "overview": "Weeks of preparation distilled into five minutes on the stage, where every word wields a double edge. Sit down with the actors, performers, and masters of Noh theater flown in from Japan to perform in Episode Six."
+  },
+  {
+   "tvdbShowId": 392573,
+   "tvdbId": 10460921,
+   "seasonNumber": 0,
+   "episodeNumber": 20,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 10,
+   "title": "FX's Shōgun: The Official Podcast - Episode 9 - Crimson Sky",
+   "airDate": "2024-04-16",
+   "airDateUtc": "2024-04-17T02:00:00Z",
+   "runtime": 35,
+   "overview": "A torn heart in a torn land. Host Emily Yoshida and guests break down episode 9 of FX’s Shōgun. Featuring executive producer and co-creator Rachel Kondo, actor Anna Sawai \"Mariko,\" associate producer & writer Caillin Puente, and director Fred Toye. Join them as they examine Mariko's relationship with the church, the Shinobi assassins, and Anna Sawai's feelings about that passionate scene at the gate."
+  },
+  {
+   "tvdbShowId": 392573,
+   "tvdbId": 10460922,
+   "seasonNumber": 0,
+   "episodeNumber": 21,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 11,
+   "title": "FX's Shōgun: The Official Podcast - Episode 10 - A Dream of a Dream",
+   "airDate": "2024-04-23",
+   "airDateUtc": "2024-04-24T02:00:00Z",
+   "runtime": 35,
+   "overview": "A choice that will make history. Host Emily Yoshida and guests break down episode 10 of FX's Shōgun. Featuring showrunner Justin Marks, actor Cosmo Jarvis \"Blackthorne,\" historian Frederik Cryns, executive producer Michaela Clavell, and actor and producer Hiroyuki Sanada \"Toranaga.\" In this last installment of the companion podcast, creators, cast and crew will round out the entire series while discussing the fates of all its characters."
+  },
+  {
+   "tvdbShowId": 392573,
+   "tvdbId": 10470479,
+   "seasonNumber": 0,
+   "episodeNumber": 22,
+   "airedAfterSeasonNumber": 1,
+   "title": "The Making of Shōgun – Chapter Seven: Battle Cry",
+   "airDate": "2024-04-26",
+   "airDateUtc": "2024-04-27T02:00:00Z",
+   "runtime": 5,
+   "overview": "The stunt team behind Shogun’s fights, falls, and monumental battle sequences breaks down the preparation needed to achieve a precise blend of violence and artistry"
+  },
+  {
+   "tvdbShowId": 392573,
+   "tvdbId": 10477406,
+   "seasonNumber": 0,
+   "episodeNumber": 23,
+   "airedAfterSeasonNumber": 1,
+   "title": "The Making of Shōgun – Chapter Eight: Building the World",
+   "airDate": "2024-05-01",
+   "airDateUtc": "2024-05-02T02:00:00Z",
+   "runtime": 5,
+   "overview": "Sit down with Production Designer Helen Jarvis and the team that painstakingly reconstructed 1600s Japan in modern Vancouver, from palaces to villages, with an eye for detail that carried all the way down to the smallest prop"
+  },
+  {
+   "tvdbShowId": 392573,
+   "tvdbId": 10630124,
+   "seasonNumber": 0,
+   "episodeNumber": 24,
+   "airedAfterSeasonNumber": 1,
+   "title": "The Making of Shōgun – Chapter Nine: From Script to Screen",
+   "airDate": "2024-08-07",
+   "airDateUtc": "2024-08-08T02:00:00Z",
+   "runtime": 6,
+   "finaleType": "season",
+   "overview": "Sit down with the creatives behind FX’s Shōgun as they unpack the process of researching, writing, translating, and shooting the epic saga."
+  },
+  {
+   "tvdbShowId": 392573,
+   "tvdbId": 11609295,
+   "seasonNumber": 0,
+   "episodeNumber": 25,
+   "airedAfterSeasonNumber": 1,
+   "title": "For Your Consideration: The Making of Shōgun with Hiroyuki Sanada and Anna Sawai",
+   "airDate": "2024-08-12",
+   "airDateUtc": "2024-08-13T02:00:00Z",
+   "runtime": 6,
+   "finaleType": "season",
+   "overview": "Stars Hiroyuki Sanada and Anna Sawai reflect on the triumph and responsibility of their leading roles in FX’s Shōgun."
+  },
+  {
+   "tvdbShowId": 392573,
+   "tvdbId": 9240063,
+   "seasonNumber": 1,
+   "episodeNumber": 1,
+   "title": "Anjin",
+   "airDate": "2024-02-27",
+   "airDateUtc": "2024-02-28T03:00:00Z",
+   "runtime": 70,
+   "overview": "Destinies converge in Japan after a barbarian ship washes ashore in a poor fishing village. Meanwhile, in Osaka, Lord Toranaga finds himself outplayed by his enemies.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9240063/screencap/65de3f752ed1f.jpg"
+  },
+  {
+   "tvdbShowId": 392573,
+   "tvdbId": 10141079,
+   "seasonNumber": 1,
+   "episodeNumber": 2,
+   "title": "Servants of Two Masters",
+   "airDate": "2024-02-27",
+   "airDateUtc": "2024-02-28T03:00:00Z",
+   "runtime": 58,
+   "overview": "Blackthorne’s arrival in Osaka stirs up a hornet’s nest of rivalries. Mariko is trapped between her cause and her faith when she must translate for the barbarian in Lord Toranaga’s custody.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10141079/screencap/65de3f798fd83.jpg"
+  },
+  {
+   "tvdbShowId": 392573,
+   "tvdbId": 10141080,
+   "seasonNumber": 1,
+   "episodeNumber": 3,
+   "title": "Tomorrow is Tomorrow",
+   "airDate": "2024-03-05",
+   "airDateUtc": "2024-03-06T03:00:00Z",
+   "runtime": 53,
+   "overview": "After Blackthorne survives a brazen assassination attempt, Toranaga realizes he must ferry his allies out of Osaka or risk certain defeat.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10141080/screencap/65e34fff89086.jpg"
+  },
+  {
+   "tvdbShowId": 392573,
+   "tvdbId": 10141081,
+   "seasonNumber": 1,
+   "episodeNumber": 4,
+   "title": "The Eightfold Fence",
+   "airDate": "2024-03-12",
+   "airDateUtc": "2024-03-13T02:00:00Z",
+   "runtime": 57,
+   "overview": "Blackthorne and Mariko test their new alliance as they train Toranaga's gun regiment for war. Yabushige must navigate his past promises to Ishido when an old friend comes to the village.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10141081/screencap/65eca40eba25a.jpg"
+  },
+  {
+   "tvdbShowId": 392573,
+   "tvdbId": 10141082,
+   "seasonNumber": 1,
+   "episodeNumber": 5,
+   "title": "Broken to the Fist",
+   "airDate": "2024-03-19",
+   "airDateUtc": "2024-03-20T02:00:00Z",
+   "runtime": 56,
+   "overview": "Blackthorne and Mariko struggle to contain the secret that could get them both killed. Yabushige searches for the spy who has betrayed his intentions to Lord Toranaga.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10141082/screencap/65fba5e7bc0ec.jpg"
+  },
+  {
+   "tvdbShowId": 392573,
+   "tvdbId": 10141083,
+   "seasonNumber": 1,
+   "episodeNumber": 6,
+   "title": "Ladies of the Willow World",
+   "airDate": "2024-03-26",
+   "airDateUtc": "2024-03-27T02:00:00Z",
+   "runtime": 56,
+   "overview": "Lady Ochiba returns to Osaka in order to accelerate the Regents' campaign against Toranaga. In Ajiro, Toranaga tests Mariko's loyalty to his cause.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10141083/screencap/65fde357ea4b3.jpg"
+  },
+  {
+   "tvdbShowId": 392573,
+   "tvdbId": 10141084,
+   "seasonNumber": 1,
+   "episodeNumber": 7,
+   "title": "A Stick of Time",
+   "airDate": "2024-04-02",
+   "airDateUtc": "2024-04-03T02:00:00Z",
+   "runtime": 55,
+   "overview": "Outplayed by new alliances in Osaka, Toranaga is forced to carve out a new deal with a long lost family member.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10141084/screencap/660b8c56c9daf.jpg"
+  },
+  {
+   "tvdbShowId": 392573,
+   "tvdbId": 10141085,
+   "seasonNumber": 1,
+   "episodeNumber": 8,
+   "title": "The Abyss of Life",
+   "airDate": "2024-04-09",
+   "airDateUtc": "2024-04-10T02:00:00Z",
+   "runtime": 59,
+   "overview": "Toranaga's defeated clan moves to Edo and awaits their fate. Blackthorne must decide who he fights for – the lord who has turned his back on him, or the ambition that brought him to Japan in the first place.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10141085/screencap/6614d6eb1a0a0.jpg"
+  },
+  {
+   "tvdbShowId": 392573,
+   "tvdbId": 10141086,
+   "seasonNumber": 1,
+   "episodeNumber": 9,
+   "title": "Crimson Sky",
+   "airDate": "2024-04-16",
+   "airDateUtc": "2024-04-17T02:00:00Z",
+   "runtime": 60,
+   "overview": "Mariko arrives in Osaka for the fight of her life. Blackthorne and Yabushige scramble to save their own heads as their options dwindle.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10141086/screencap/661be894766e3.jpg"
+  },
+  {
+   "tvdbShowId": 392573,
+   "tvdbId": 10141087,
+   "seasonNumber": 1,
+   "episodeNumber": 10,
+   "title": "A Dream of a Dream",
+   "airDate": "2024-04-23",
+   "airDateUtc": "2024-04-24T02:00:00Z",
+   "runtime": 62,
+   "finaleType": "series",
+   "overview": "In the wake of a tragic death, Blackthorne finally considers the true nature of Toranaga's plan.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10141087/screencap/662723739910d.jpg"
+  }
+ ]
+}

@@ -213,6 +213,7 @@ pub fn scan(
             .0
             .extend(db.call_blocking(move |conn| clean_media_files(conn, &config, &series2, &[], now))?);
         tracing::info!("Completed scanning disk for {}", series.title);
+        unmonitor_missing(db, &env.config, &events)?;
         events.push(ImportEvent::SeriesScanned { series_id: series.id });
         return Ok(events);
     }
@@ -293,8 +294,39 @@ pub fn scan(
         }
     }
     tracing::info!("Completed scanning disk for {}", series.title);
+    unmonitor_missing(db, &env.config, &events)?;
     events.push(ImportEvent::SeriesScanned { series_id: series.id });
     Ok(events)
+}
+
+/// `EpisodeService.HandleAsync(SeriesScannedEvent)`: with "unmonitor
+/// deleted episodes" on, the episodes whose file went missing from disk
+/// during the scan, and that the scan did not link to another file, are
+/// unmonitored.
+fn unmonitor_missing(db: &Db, config: &MediaManagementConfig, events: &Events) -> anyhow::Result<()> {
+    if !config.auto_unmonitor_previously_downloaded_episodes {
+        return Ok(());
+    }
+    let ids: Vec<i64> = events
+        .0
+        .iter()
+        .filter_map(|e| match e {
+            ImportEvent::EpisodeFileDeleted(d) if d.reason == DeleteReason::MissingFromDisk => Some(d),
+            _ => None,
+        })
+        .flat_map(|d| d.episodes.iter().map(|e| e.id))
+        .collect();
+    if ids.is_empty() {
+        return Ok(());
+    }
+    db.call_blocking(move |conn| {
+        let still_missing: Vec<i64> = store::episodes::list_episodes_by_ids(conn, &ids)?
+            .into_iter()
+            .filter(|e| e.episode_file_id == 0)
+            .map(|e| e.id)
+            .collect();
+        store::episodes::set_monitored(conn, &still_missing, false)
+    })
 }
 
 #[cfg(test)]

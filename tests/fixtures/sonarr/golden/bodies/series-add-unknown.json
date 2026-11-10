@@ -1,0 +1,11 @@
+{
+ "tvdbId": 999999999,
+ "title": "Nothing",
+ "qualityProfileId": 7,
+ "rootFolderPath": "/tv",
+ "seasonFolder": true,
+ "monitored": true,
+ "addOptions": {
+  "monitor": "all"
+ }
+}

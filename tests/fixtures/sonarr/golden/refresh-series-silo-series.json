@@ -1,0 +1,156 @@
+{
+  "body": {
+    "added": "2026-03-07T11:22:23Z",
+    "airTime": "00:00",
+    "alternateTitles": [
+      {
+        "seasonNumber": -1,
+        "title": "Silos / Silo"
+      }
+    ],
+    "certification": "TV-MA",
+    "cleanTitle": "silo",
+    "ended": false,
+    "firstAired": "2023-05-05T00:00:00Z",
+    "genres": [
+      "Drama",
+      "Science Fiction"
+    ],
+    "id": 23,
+    "images": [
+      {
+        "coverType": "banner",
+        "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/banners/6449d56a60674.jpg",
+        "url": "/MediaCover/23/banner.jpg?lastWrite=639298597073282095"
+      },
+      {
+        "coverType": "poster",
+        "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/posters/64432dea72673.jpg",
+        "url": "/MediaCover/23/poster.jpg?lastWrite=639298597073757012"
+      },
+      {
+        "coverType": "fanart",
+        "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/backgrounds/640bc23f1fa80.jpg",
+        "url": "/MediaCover/23/fanart.jpg?lastWrite=639298597074197012"
+      },
+      {
+        "coverType": "clearlogo",
+        "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/403245/clearlogo/6455710e48c96.png",
+        "url": "/MediaCover/23/clearlogo.png?lastWrite=639298597074637013"
+      }
+    ],
+    "imdbId": "tt14688458",
+    "languageProfileId": 1,
+    "lastAired": "2027-09-10T00:00:00Z",
+    "monitorNewItems": "all",
+    "monitored": true,
+    "network": "Apple TV",
+    "nextAiring": "2027-07-09T04:00:00Z",
+    "originalLanguage": {
+      "id": 1,
+      "name": "English"
+    },
+    "overview": "In a ruined and toxic future, thousands live in a giant silo deep underground. After its sheriff breaks a cardinal rule and residents die mysteriously, engineer Juliette starts to uncover shocking secrets and the truth about the silo.",
+    "path": "/tv/Silo",
+    "qualityProfileId": 10,
+    "ratings": {
+      "value": 8.1,
+      "votes": 254219
+    },
+    "rootFolderPath": "/tv",
+    "runtime": 51,
+    "seasonFolder": true,
+    "seasons": [
+      {
+        "monitored": false,
+        "seasonNumber": 0,
+        "statistics": {
+          "episodeCount": 0,
+          "episodeFileCount": 0,
+          "percentOfEpisodes": 0,
+          "releaseGroups": [],
+          "sizeOnDisk": 0,
+          "totalEpisodeCount": 4
+        }
+      },
+      {
+        "monitored": false,
+        "seasonNumber": 1,
+        "statistics": {
+          "episodeCount": 0,
+          "episodeFileCount": 0,
+          "percentOfEpisodes": 0,
+          "releaseGroups": [],
+          "sizeOnDisk": 0,
+          "totalEpisodeCount": 10
+        }
+      },
+      {
+        "monitored": false,
+        "seasonNumber": 2,
+        "statistics": {
+          "episodeCount": 0,
+          "episodeFileCount": 0,
+          "percentOfEpisodes": 0,
+          "releaseGroups": [],
+          "sizeOnDisk": 0,
+          "totalEpisodeCount": 10
+        }
+      },
+      {
+        "monitored": true,
+        "seasonNumber": 3,
+        "statistics": {
+          "episodeCount": 0,
+          "episodeFileCount": 0,
+          "percentOfEpisodes": 0,
+          "releaseGroups": [],
+          "sizeOnDisk": 0,
+          "totalEpisodeCount": 10
+        }
+      },
+      {
+        "monitored": true,
+        "seasonNumber": 4,
+        "statistics": {
+          "episodeCount": 0,
+          "episodeFileCount": 0,
+          "nextAiring": "2027-07-09T04:00:00Z",
+          "percentOfEpisodes": 0,
+          "releaseGroups": [],
+          "sizeOnDisk": 0,
+          "totalEpisodeCount": 10
+        }
+      }
+    ],
+    "seriesType": "standard",
+    "sortTitle": "silo",
+    "statistics": {
+      "episodeCount": 0,
+      "episodeFileCount": 0,
+      "percentOfEpisodes": 0,
+      "releaseGroups": [],
+      "seasonCount": 4,
+      "sizeOnDisk": 0,
+      "totalEpisodeCount": 44
+    },
+    "status": "continuing",
+    "tags": [
+      2
+    ],
+    "title": "Silo",
+    "titleSlug": "silo",
+    "tmdbId": 125988,
+    "tvMazeId": 38052,
+    "tvRageId": 0,
+    "tvdbId": 403245,
+    "useSceneNumbering": false,
+    "year": 2023
+  },
+  "recordedAt": "2026-11-09T22:22:07Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/series/23"
+  },
+  "status": 200
+}

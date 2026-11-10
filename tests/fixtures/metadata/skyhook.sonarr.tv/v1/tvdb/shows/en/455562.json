@@ -1,0 +1,343 @@
+{
+ "tvdbId": 455562,
+ "title": "Stick",
+ "overview": "Pryce Cahill was headed for golf greatness when an on-course meltdown derailed his career. Now struggling to stay afloat, he goes all in to mentor Santi—a teenage phenom with immense potential—and maybe save himself.",
+ "slug": "stick",
+ "originalCountry": "usa",
+ "originalLanguage": "eng",
+ "language": "eng",
+ "firstAired": "2025-06-04",
+ "lastAired": "2026-12-30",
+ "tvMazeId": 82227,
+ "tmdbId": 248830,
+ "imdbId": "tt31710249",
+ "malIds": [],
+ "anidbIds": [],
+ "aniListIds": [],
+ "lastUpdated": "2026-11-09T18:00:54Z",
+ "status": "Continuing",
+ "runtime": 33,
+ "timeOfDay": {
+  "hours": 0,
+  "minutes": 0
+ },
+ "originalNetwork": "Apple TV",
+ "network": "Apple TV",
+ "genres": [
+  "Comedy",
+  "Sport"
+ ],
+ "contentRating": "TV-MA",
+ "rating": {
+  "count": 21070,
+  "value": "7.2"
+ },
+ "alternativeTitles": [
+  {
+   "title": "Rambler"
+  }
+ ],
+ "actors": [
+  {
+   "name": "Owen Wilson",
+   "character": "Pryce Cahill",
+   "image": "https://artworks.thetvdb.com/banners/person/310578/6078a717739a4.jpg"
+  },
+  {
+   "name": "Peter Dager",
+   "character": "Santi Wheeler",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9138693/photo/686428b118072.jpg"
+  },
+  {
+   "name": "Marc Maron",
+   "character": "Mitts",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/309919/photo/686428e320770.jpg"
+  },
+  {
+   "name": "Mariana Treviño",
+   "character": "Elena",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/486548/photo/63e48b326c44a.jpg"
+  },
+  {
+   "name": "Lilli Kay",
+   "character": "Zero",
+   "image": "https://artworks.thetvdb.com/banners/person/8148329/602fcaed65457.jpg"
+  },
+  {
+   "name": "Judy Greer",
+   "character": "Amber-Linn",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/248132/photo/64fb8dfb59453.jpg"
+  },
+  {
+   "name": "Timothy Olyphant",
+   "character": "Clark Ross",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/327861/photo/6892903331835.jpg"
+  },
+  {
+   "name": "Rhea Seehorn",
+   "character": "Amanda",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/273507/photo/651bd33664e2f.jpg"
+  }
+ ],
+ "images": [
+  {
+   "coverType": "Banner",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/455562/banners/684027a2f2955.jpg"
+  },
+  {
+   "coverType": "Poster",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/455562/posters/681cbaa9e6f40.jpg"
+  },
+  {
+   "coverType": "Fanart",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/455562/backgrounds/6921780c3b5fc.jpg"
+  },
+  {
+   "coverType": "Clearlogo",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/455562/clearlogo/684027b3cdf91.png"
+  }
+ ],
+ "seasons": [
+  {
+   "seasonNumber": 1,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2151211/posters/6accff0e0f016.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 2,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2248159/posters/6ae7d4305089f.jpg"
+    }
+   ]
+  }
+ ],
+ "episodes": [
+  {
+   "tvdbShowId": 455562,
+   "tvdbId": 10746848,
+   "seasonNumber": 1,
+   "episodeNumber": 1,
+   "title": "Pilot",
+   "airDate": "2025-06-04",
+   "airDateUtc": "2025-06-04T04:00:00Z",
+   "runtime": 46,
+   "overview": "Pryce is down on his luck when a chance encounter at the driving range sends him on a mission to secure the opportunity of a lifetime.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10746848/screencap/67c9ff8fe6b76.jpg"
+  },
+  {
+   "tvdbShowId": 455562,
+   "tvdbId": 10746849,
+   "seasonNumber": 1,
+   "episodeNumber": 2,
+   "title": "Grossweiner's Law",
+   "airDate": "2025-06-04",
+   "airDateUtc": "2025-06-04T04:00:00Z",
+   "runtime": 30,
+   "overview": "Mitts and Pryce evaluate Santi’s game over 18 holes. While testing out new clubs, Pryce tries to impart some wisdom about staying in the moment.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10746849/screencap/67c9ff942866b.jpg"
+  },
+  {
+   "tvdbShowId": 455562,
+   "tvdbId": 10746850,
+   "seasonNumber": 1,
+   "episodeNumber": 3,
+   "title": "Daddy Issues",
+   "airDate": "2025-06-04",
+   "airDateUtc": "2025-06-04T04:00:00Z",
+   "runtime": 33,
+   "overview": "The gang hits the road in Mitts’ RV. Pryce’s coaching methods get tested in their first tourney. Santi makes a friend who unlocks his game.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10746850/screencap/67c9ff98a0c01.jpg"
+  },
+  {
+   "tvdbShowId": 455562,
+   "tvdbId": 10746851,
+   "seasonNumber": 1,
+   "episodeNumber": 4,
+   "title": "Zero Sum Game",
+   "airDate": "2025-06-11",
+   "airDateUtc": "2025-06-11T04:00:00Z",
+   "runtime": 32,
+   "overview": "Pryce does everything he can to break through to Santi and get back to training. Zero is presented with an unexpected offer.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10746851/screencap/67c9ff9e233b5.jpg"
+  },
+  {
+   "tvdbShowId": 455562,
+   "tvdbId": 10746852,
+   "seasonNumber": 1,
+   "episodeNumber": 5,
+   "title": "The Birdie Machine",
+   "airDate": "2025-06-18",
+   "airDateUtc": "2025-06-18T04:00:00Z",
+   "runtime": 31,
+   "overview": "Santi tees off at the qualifier with a new caddy as Pryce deploys covert coaching tactics. Mitts delivers harsh truths—and gets some right back.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10746852/screencap/67c9ffa28d224.jpg"
+  },
+  {
+   "tvdbShowId": 455562,
+   "tvdbId": 10746853,
+   "seasonNumber": 1,
+   "episodeNumber": 6,
+   "title": "RV Shangri-La",
+   "airDate": "2025-06-25",
+   "airDateUtc": "2025-06-25T04:00:00Z",
+   "runtime": 34,
+   "overview": "Ahead of the U.S. Amateur Championship, Pryce gives everyone a rest day on the campgrounds. Mitts takes a risk. Santi makes a painful discovery.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10746853/screencap/67c9ffa74cadb.jpg"
+  },
+  {
+   "tvdbShowId": 455562,
+   "tvdbId": 10973472,
+   "seasonNumber": 1,
+   "episodeNumber": 7,
+   "title": "Dreams Never Remembered",
+   "airDate": "2025-07-02",
+   "airDateUtc": "2025-07-02T04:00:00Z",
+   "runtime": 29,
+   "overview": "After a blowup with Santi, Pryce is lost in thought about his past and what could’ve been. The gang prepare to go their separate ways.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10973472/screencap/67c9ffabc5db6.jpg"
+  },
+  {
+   "tvdbShowId": 455562,
+   "tvdbId": 10973473,
+   "seasonNumber": 1,
+   "episodeNumber": 8,
+   "title": "Clark the Mark",
+   "airDate": "2025-07-09",
+   "airDateUtc": "2025-07-09T04:00:00Z",
+   "runtime": 29,
+   "overview": "A brazen plan is hatched to hustle Clark Ross. Pryce gets a chance to prove he was always the better golfer.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10973473/screencap/67c9ffb06e6e3.jpg"
+  },
+  {
+   "tvdbShowId": 455562,
+   "tvdbId": 10973474,
+   "seasonNumber": 1,
+   "episodeNumber": 9,
+   "title": "Showtime",
+   "airDate": "2025-07-16",
+   "airDateUtc": "2025-07-16T04:00:00Z",
+   "runtime": 28,
+   "overview": "Pryce tries to help Santi deal with the pressure of his first PGA tournament. Romantic sparks fly as Santi starts climbing the leaderboard.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10973474/screencap/67c9ffb85e6b3.jpg"
+  },
+  {
+   "tvdbShowId": 455562,
+   "tvdbId": 10973475,
+   "seasonNumber": 1,
+   "episodeNumber": 10,
+   "title": "Déjà Vu All Over Again",
+   "airDate": "2025-07-23",
+   "airDateUtc": "2025-07-23T04:00:00Z",
+   "runtime": 34,
+   "finaleType": "season",
+   "overview": "On the last day of the tournament, an unexpected visitor shakes things up while Santi’s golf dreams hang in the balance.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10973475/screencap/67c9ffbeb8e26.jpg"
+  },
+  {
+   "tvdbShowId": 455562,
+   "tvdbId": 11774149,
+   "seasonNumber": 2,
+   "episodeNumber": 1,
+   "title": "Sirens in Soft Spikes",
+   "airDate": "2026-11-04",
+   "airDateUtc": "2026-11-04T05:00:00Z",
+   "runtime": 29,
+   "overview": "As the golf world waits on Santi to turn pro, Pryce gets a taste of his glory days.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11774149/screencap/6aea9288917d3.jpg"
+  },
+  {
+   "tvdbShowId": 455562,
+   "tvdbId": 11785097,
+   "seasonNumber": 2,
+   "episodeNumber": 2,
+   "title": "Don’t Be Summer Mayonnaise",
+   "airDate": "2026-11-04",
+   "airDateUtc": "2026-11-04T05:00:00Z",
+   "runtime": 35,
+   "overview": "The gang heads to LA, where Santi hits the PGA spotlight. Clark presents Pryce with a wild idea.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11785097/screencap/6aea9322c6c5c.jpg"
+  },
+  {
+   "tvdbShowId": 455562,
+   "tvdbId": 11785098,
+   "seasonNumber": 2,
+   "episodeNumber": 3,
+   "title": "Chip Off the Old Butch",
+   "airDate": "2026-11-11",
+   "airDateUtc": "2026-11-11T05:00:00Z",
+   "runtime": 37,
+   "overview": "Santi makes his long-awaited pro debut while Pryce takes a road trip to visit his former mentor.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11785098/screencap/6aea94ff159af.jpg"
+  },
+  {
+   "tvdbShowId": 455562,
+   "tvdbId": 11785099,
+   "seasonNumber": 2,
+   "episodeNumber": 4,
+   "title": "The Boog",
+   "airDate": "2026-11-18",
+   "airDateUtc": "2026-11-18T05:00:00Z"
+  },
+  {
+   "tvdbShowId": 455562,
+   "tvdbId": 11785100,
+   "seasonNumber": 2,
+   "episodeNumber": 5,
+   "title": "Go Time!",
+   "airDate": "2026-11-25",
+   "airDateUtc": "2026-11-25T05:00:00Z"
+  },
+  {
+   "tvdbShowId": 455562,
+   "tvdbId": 11785101,
+   "seasonNumber": 2,
+   "episodeNumber": 6,
+   "title": "Jung and the Restless",
+   "airDate": "2026-12-02",
+   "airDateUtc": "2026-12-02T05:00:00Z"
+  },
+  {
+   "tvdbShowId": 455562,
+   "tvdbId": 11785102,
+   "seasonNumber": 2,
+   "episodeNumber": 7,
+   "title": "Bogey Nights",
+   "airDate": "2026-12-09",
+   "airDateUtc": "2026-12-09T05:00:00Z"
+  },
+  {
+   "tvdbShowId": 455562,
+   "tvdbId": 11785103,
+   "seasonNumber": 2,
+   "episodeNumber": 8,
+   "title": "Fast Greens Do Not Hold",
+   "airDate": "2026-12-16",
+   "airDateUtc": "2026-12-16T05:00:00Z"
+  },
+  {
+   "tvdbShowId": 455562,
+   "tvdbId": 11796661,
+   "seasonNumber": 2,
+   "episodeNumber": 9,
+   "title": "Let'er Rip",
+   "airDate": "2026-12-23",
+   "airDateUtc": "2026-12-23T05:00:00Z"
+  },
+  {
+   "tvdbShowId": 455562,
+   "tvdbId": 11932440,
+   "seasonNumber": 2,
+   "episodeNumber": 10,
+   "title": "Like Nobody's Watching",
+   "airDate": "2026-12-30",
+   "airDateUtc": "2026-12-30T05:00:00Z",
+   "finaleType": "season"
+  }
+ ]
+}

@@ -45,22 +45,22 @@
       "updateScheduledTask": true
     },
     "commandName": "Manual Import",
-    "duration": "00:00:00.0738658",
-    "ended": "2026-11-08T20:58:48Z",
+    "duration": "00:00:00.0639402",
+    "ended": "2026-11-09T22:19:56Z",
     "id": 461686,
     "message": "Manually imported 1 files",
     "name": "ManualImport",
     "priority": "high",
-    "queued": "2026-11-08T20:58:48Z",
+    "queued": "2026-11-09T22:19:56Z",
     "result": "successful",
     "sendUpdatesToClient": true,
-    "started": "2026-11-08T20:58:48Z",
-    "stateChangeTime": "2026-11-08T20:58:48Z",
+    "started": "2026-11-09T22:19:56Z",
+    "stateChangeTime": "2026-11-09T22:19:56Z",
     "status": "completed",
     "trigger": "manual",
     "updateScheduledTask": true
   },
-  "recordedAt": "2026-11-08T20:59:00Z",
+  "recordedAt": "2026-11-09T22:20:08Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/command/461686"

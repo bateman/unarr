@@ -16,7 +16,7 @@
           "name": "WEB Tier 01"
         }
       ],
-      "dateAdded": "2026-11-08T20:58:48Z",
+      "dateAdded": "2026-11-09T22:19:56Z",
       "id": 1076,
       "indexerFlags": 0,
       "languages": [
@@ -70,7 +70,7 @@
       "size": 119980
     }
   ],
-  "recordedAt": "2026-11-08T21:00:18Z",
+  "recordedAt": "2026-11-09T22:21:26Z",
   "request": {
     "body": "bodies/episodefile-bulk-put.json",
     "method": "PUT",

@@ -1,0 +1,303 @@
+{
+  "body": [
+    {
+      "body": {
+        "embeds": [
+          {
+            "author": {
+              "icon_url": "https://raw.githubusercontent.com/Sonarr/Sonarr/develop/Logo/256.png",
+              "name": "vm"
+            },
+            "color": 2605644,
+            "description": "Series Added",
+            "fields": [
+              {
+                "inline": false,
+                "name": "Links",
+                "value": "[The TVDB](https://thetvdb.com/?tab=series&id=81189) / [Trakt](https://trakt.tv/search/tvdb/81189?id_type=show) / [IMDB](https://imdb.com/title/tt0903747/)"
+              }
+            ],
+            "image": {
+              "url": "https://artworks.thetvdb.com/banners/fanart/original/81189-21.jpg"
+            },
+            "thumbnail": {
+              "url": "https://artworks.thetvdb.com/banners/posters/81189-10.jpg"
+            },
+            "title": "Breaking Bad",
+            "url": "http://thetvdb.com/?tab=series&id=81189"
+          }
+        ],
+        "username": "Unarr fixture"
+      },
+      "headers": {
+        "content-type": "application/json"
+      },
+      "method": "POST",
+      "path": "/discord/api/webhooks/100/fixturetoken",
+      "query": {},
+      "service": "discord"
+    },
+    {
+      "body": {
+        "applicationUrl": "",
+        "eventType": "SeriesAdd",
+        "instanceName": "Sonarr",
+        "series": {
+          "genres": [
+            "Crime",
+            "Drama",
+            "Thriller",
+            "Western"
+          ],
+          "id": 50,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/graphical/81189-g21.jpg",
+              "url": "/MediaCover/50/banner.jpg?lastWrite=639298598023286551"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/posters/81189-10.jpg",
+              "url": "/MediaCover/50/poster.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/fanart/original/81189-21.jpg",
+              "url": "/MediaCover/50/fanart.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/81189/clearlogo/611b4df33bac5.png",
+              "url": "/MediaCover/50/clearlogo.png"
+            }
+          ],
+          "imdbId": "tt0903747",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "path": "/tv/Breaking Bad (2008)",
+          "tags": [],
+          "title": "Breaking Bad",
+          "titleSlug": "breaking-bad",
+          "tmdbId": 1396,
+          "tvMazeId": 169,
+          "tvdbId": 81189,
+          "type": "standard",
+          "year": 2008
+        }
+      },
+      "headers": {
+        "authorization": "Basic aG9vazpzZWNyZXQ=",
+        "content-type": "application/json",
+        "x-fixture": "yes"
+      },
+      "method": "PUT",
+      "path": "/webhook/updated",
+      "query": {},
+      "service": "webhook"
+    },
+    {
+      "body": {
+        "embeds": [
+          {
+            "author": {
+              "icon_url": "https://raw.githubusercontent.com/Sonarr/Sonarr/develop/Logo/256.png",
+              "name": "vm"
+            },
+            "color": 2605644,
+            "description": "Series Added",
+            "fields": [
+              {
+                "inline": false,
+                "name": "Links",
+                "value": "[The TVDB](https://thetvdb.com/?tab=series&id=424536) / [Trakt](https://trakt.tv/search/tvdb/424536?id_type=show) / [IMDB](https://imdb.com/title/tt22248376/)"
+              }
+            ],
+            "image": {
+              "url": "https://artworks.thetvdb.com/banners/v4/series/424536/backgrounds/64e6cbe29d9c0.jpg"
+            },
+            "thumbnail": {
+              "url": "https://artworks.thetvdb.com/banners/v4/series/424536/posters/6516fe48e7a06.jpg"
+            },
+            "title": "Frieren: Beyond Journey's End",
+            "url": "http://thetvdb.com/?tab=series&id=424536"
+          }
+        ],
+        "username": "Unarr fixture"
+      },
+      "headers": {
+        "content-type": "application/json"
+      },
+      "method": "POST",
+      "path": "/discord/api/webhooks/100/fixturetoken",
+      "query": {},
+      "service": "discord"
+    },
+    {
+      "body": {
+        "applicationUrl": "",
+        "eventType": "SeriesAdd",
+        "instanceName": "Sonarr",
+        "series": {
+          "genres": [
+            "Adventure",
+            "Animation",
+            "Anime",
+            "Drama",
+            "Fantasy"
+          ],
+          "id": 51,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/424536/banners/651dd688bd4d5.jpg",
+              "url": "/MediaCover/51/banner.jpg?lastWrite=639298598174430745"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/424536/posters/6516fe48e7a06.jpg",
+              "url": "/MediaCover/51/poster.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/424536/backgrounds/64e6cbe29d9c0.jpg",
+              "url": "/MediaCover/51/fanart.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/424536/clearlogo/65d798fbd2f61.png",
+              "url": "/MediaCover/51/clearlogo.png"
+            }
+          ],
+          "imdbId": "tt22248376",
+          "originalLanguage": {
+            "id": 8,
+            "name": "Japanese"
+          },
+          "path": "/tv/Frieren Beyond Journeys End (2023)",
+          "tags": [
+            "ita"
+          ],
+          "title": "Frieren: Beyond Journey's End",
+          "titleSlug": "frieren-beyond-journeys-end",
+          "tmdbId": 209867,
+          "tvMazeId": 69956,
+          "tvdbId": 424536,
+          "type": "anime",
+          "year": 2023
+        }
+      },
+      "headers": {
+        "authorization": "Basic aG9vazpzZWNyZXQ=",
+        "content-type": "application/json",
+        "x-fixture": "yes"
+      },
+      "method": "PUT",
+      "path": "/webhook/updated",
+      "query": {},
+      "service": "webhook"
+    },
+    {
+      "body": {
+        "embeds": [
+          {
+            "author": {
+              "icon_url": "https://raw.githubusercontent.com/Sonarr/Sonarr/develop/Logo/256.png",
+              "name": "vm"
+            },
+            "color": 2605644,
+            "description": "Series Added",
+            "fields": [
+              {
+                "inline": false,
+                "name": "Links",
+                "value": "[The TVDB](https://thetvdb.com/?tab=series&id=271728) / [Trakt](https://trakt.tv/search/tvdb/271728?id_type=show) / [IMDB](https://imdb.com/title/tt3278316/)"
+              }
+            ],
+            "image": {
+              "url": "https://artworks.thetvdb.com/banners/fanart/original/271728-1.jpg"
+            },
+            "thumbnail": {
+              "url": "https://artworks.thetvdb.com/banners/posters/271728-1.jpg"
+            },
+            "title": "The Pete Holmes Show",
+            "url": "http://thetvdb.com/?tab=series&id=271728"
+          }
+        ],
+        "username": "Unarr fixture"
+      },
+      "headers": {
+        "content-type": "application/json"
+      },
+      "method": "POST",
+      "path": "/discord/api/webhooks/100/fixturetoken",
+      "query": {},
+      "service": "discord"
+    },
+    {
+      "body": {
+        "applicationUrl": "",
+        "eventType": "SeriesAdd",
+        "instanceName": "Sonarr",
+        "series": {
+          "genres": [
+            "Comedy",
+            "Talk Show"
+          ],
+          "id": 52,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/graphical/271728-g.jpg",
+              "url": "/MediaCover/52/banner.jpg?lastWrite=639298598323831326"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/posters/271728-1.jpg",
+              "url": "/MediaCover/52/poster.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/fanart/original/271728-1.jpg",
+              "url": "/MediaCover/52/fanart.jpg"
+            }
+          ],
+          "imdbId": "tt3278316",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "path": "/tv/Pete Holmes Show",
+          "tags": [
+            "usenet-only"
+          ],
+          "title": "The Pete Holmes Show",
+          "titleSlug": "the-pete-holmes-show",
+          "tmdbId": 57506,
+          "tvMazeId": 6229,
+          "tvdbId": 271728,
+          "type": "daily",
+          "year": 2013
+        }
+      },
+      "headers": {
+        "authorization": "Basic aG9vazpzZWNyZXQ=",
+        "content-type": "application/json",
+        "x-fixture": "yes"
+      },
+      "method": "PUT",
+      "path": "/webhook/updated",
+      "query": {},
+      "service": "webhook"
+    }
+  ],
+  "recordedAt": "2026-11-09T22:24:17Z",
+  "request": {
+    "method": "GET",
+    "path": "/mock/notifications",
+    "target": "mock"
+  },
+  "status": 200
+}

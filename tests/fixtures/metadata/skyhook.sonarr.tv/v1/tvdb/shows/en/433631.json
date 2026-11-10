@@ -1,0 +1,411 @@
+{
+ "tvdbId": 433631,
+ "title": "A Knight of the Seven Kingdoms",
+ "overview": "A century before the events of Game of Thrones, two unlikely heroes wandered Westeros, a young knight, Ser Duncan the Tall, and his squire, Egg, set in an age when the Targaryen line still holds the Iron Throne.",
+ "slug": "a-knight-of-the-seven-kingdoms",
+ "originalCountry": "usa",
+ "originalLanguage": "eng",
+ "language": "eng",
+ "firstAired": "2026-01-18",
+ "lastAired": "2026-02-22",
+ "tvMazeId": 53063,
+ "tmdbId": 224372,
+ "imdbId": "tt27497448",
+ "malIds": [],
+ "anidbIds": [],
+ "aniListIds": [],
+ "lastUpdated": "2026-11-05T18:23:10Z",
+ "status": "Continuing",
+ "runtime": 33,
+ "timeOfDay": {
+  "hours": 22,
+  "minutes": 0
+ },
+ "originalNetwork": "HBO",
+ "network": "HBO",
+ "genres": [
+  "Action",
+  "Adventure",
+  "Drama",
+  "Fantasy"
+ ],
+ "contentRating": "TV-MA",
+ "rating": {
+  "count": 293650,
+  "value": "8.6"
+ },
+ "alternativeTitles": [
+  {
+   "title": "Game of Thrones: A Knight of the Seven Kingdoms: The Hedge Knight"
+  },
+  {
+   "title": "A Knight of the Nine Kingdoms"
+  }
+ ],
+ "actors": [
+  {
+   "name": "Peter Claffey",
+   "character": "Duncan 'Dunk' the Tall",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9102911/photo/69357ff59e5bf.jpg"
+  },
+  {
+   "name": "Dexter Sol Ansell",
+   "character": "Egg",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9107524/photo/69358066af493.jpg"
+  },
+  {
+   "name": "Daniel Ings",
+   "character": "Lyonel 'The Laughing Storm' Baratheon",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/524294/photo/64edfde066823.jpg"
+  },
+  {
+   "name": "Shaun Thomas",
+   "character": "Raymun 'The Reluctant' Fossoway",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/303759/photo/6935822061ffa.jpg"
+  },
+  {
+   "name": "Tanzyn Crawford",
+   "character": "Tanselle",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9100292/photo/69358130b1429.jpg"
+  },
+  {
+   "name": "Danny Webb",
+   "character": "Arlan of Pennytree",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/322670/photo/627500ec31948.jpg"
+  },
+  {
+   "name": "Henry Ashton",
+   "character": "Daeron 'the Drunken' Targaryen",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9127715/photo/6a2c8c8314a74.jpg"
+  },
+  {
+   "name": "Daniel Monks",
+   "character": "Manfred Dondarrion"
+  },
+  {
+   "name": "Tom Vaughan-Lawlor",
+   "character": "Plummer",
+   "image": "https://artworks.thetvdb.com/banners/person/485281/5eeb07cb85896.jpg"
+  },
+  {
+   "name": "Edward Ashley",
+   "character": "Steffon Fossoway"
+  },
+  {
+   "name": "Bertie Carvel",
+   "character": "Baelor 'Breakspear' Targaryen",
+   "image": "https://artworks.thetvdb.com/banners/person/380292/5f92d76d8e045.jpg"
+  },
+  {
+   "name": "Sam Spruell",
+   "character": "Maekar Targaryen",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/455103/photo/693580f9a8d07.jpg"
+  },
+  {
+   "name": "Finn Bennett",
+   "character": "Aerion 'Brightflame' Targaryen",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/667679/photo/65c6f87ce85c1.jpg"
+  },
+  {
+   "name": "Youssef Kerkour",
+   "character": "Steely Pate",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/526903/photo/6362e002819aa.jpg"
+  },
+  {
+   "name": "Rowan Robinson",
+   "character": "Red",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9140831/photo/680f51bce51a2.jpg"
+  },
+  {
+   "name": "Danny Collins",
+   "character": "Humfrey Beesbury"
+  },
+  {
+   "name": "Ross Anderson",
+   "character": "Humfrey Hardyng",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/547454/photo/620a79cf306f2.jpg"
+  },
+  {
+   "name": "Steve Wall",
+   "character": "Leo 'Longthorn' Tyrell",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/544685/photo/6905b29ec547d.jpg"
+  },
+  {
+   "name": "Paul Hunter",
+   "character": "Lord Ashford"
+  },
+  {
+   "name": "Cara Harris",
+   "character": "Lady Gwin"
+  },
+  {
+   "name": "Oscar Morgan",
+   "character": "Valarr Targaryen"
+  },
+  {
+   "name": "Wade Briggs",
+   "character": "Roland Crakehall",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/551378/photo/6172aa819b5a6.jpg"
+  },
+  {
+   "name": "Bill Ward",
+   "character": "Donnel of Duskendale"
+  },
+  {
+   "name": "Russell Simpson",
+   "character": "Medgar Tully",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9152332/photo/69a0ac809fa3f.jpg"
+  },
+  {
+   "name": "William Houston",
+   "character": "Robyn Rhysling"
+  }
+ ],
+ "images": [
+  {
+   "coverType": "Banner",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/433631/banners/696d01d889ebf.jpg"
+  },
+  {
+   "coverType": "Poster",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/433631/posters/6934ab30720ee.jpg"
+  },
+  {
+   "coverType": "Fanart",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/433631/backgrounds/6934a76d9bbba.jpg"
+  },
+  {
+   "coverType": "Clearlogo",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/433631/clearlogo/696cfcd38cd4e.png"
+  }
+ ],
+ "seasons": [
+  {
+   "seasonNumber": 0,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2058239/posters/696e27d01a063.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 1,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2058240/posters/69b68cf7d8147.jpg"
+    },
+    {
+     "coverType": "Banner",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2058240/banners/69b68cd0a52c2.jpg"
+    }
+   ]
+  }
+ ],
+ "episodes": [
+  {
+   "tvdbShowId": 433631,
+   "tvdbId": 11570670,
+   "seasonNumber": 0,
+   "episodeNumber": 1,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 2,
+   "title": "A Knight In The Making - Episode 1",
+   "airDate": "2026-01-18",
+   "airDateUtc": "2026-01-19T03:00:00Z",
+   "runtime": 17,
+   "overview": "Follow A Knight of the Seven Kingdoms from the page to the screen in this fascinating and comprehensive look at how HBO's newest series in the Game of Thrones universe was brought to life.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11570670/screencap/6970e542bd387.jpg"
+  },
+  {
+   "tvdbShowId": 433631,
+   "tvdbId": 11591023,
+   "seasonNumber": 0,
+   "episodeNumber": 2,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 4,
+   "title": "A Knight In The Making - Episodes 2 & 3",
+   "airDate": "2026-02-01",
+   "airDateUtc": "2026-02-02T03:00:00Z",
+   "runtime": 21,
+   "overview": "Get the full scoop on Episodes 2 and 3 of A Knight of the Seven Kingdoms in this behind-the-scenes special that explores character arcs, the eye-popping jousting sequences, and the stunning Ep. 3 climax.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11591023/screencap/698076f6059ad.jpg"
+  },
+  {
+   "tvdbShowId": 433631,
+   "tvdbId": 11619836,
+   "seasonNumber": 0,
+   "episodeNumber": 3,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 2,
+   "title": "Inside the Episode - Episode 1",
+   "airDate": "2026-01-19",
+   "airDateUtc": "2026-01-20T03:00:00Z",
+   "runtime": 5,
+   "overview": "Peter Claffey (Dunk), Dexter Sol Ansell (Egg), and Daniel Ings (Lyonel Baratheon) go inside the premiere episode of A Knight of the Seven Kingdoms and discuss Dunk's motivation for being a knight, why Egg wants to squire, and what Lyonel sees in Dunk.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11619836/screencap/699ca721f29a5.jpg"
+  },
+  {
+   "tvdbShowId": 433631,
+   "tvdbId": 11619837,
+   "seasonNumber": 0,
+   "episodeNumber": 4,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 3,
+   "title": "Inside the Episode - Episode 2",
+   "airDate": "2026-01-26",
+   "airDateUtc": "2026-01-27T03:00:00Z",
+   "runtime": 5,
+   "overview": "A Knight of the Seven Kingdoms' showrunner Ira Parker, Peter Claffey (Dunk), Dexter Sol Ansell (Egg), and Bertie Carvel (Baelor Targaryen) take a deeper look inside the second episode. They discuss Ser Arlan's legacy, the Targaryens' arrival in Ashford, and Dunk meeting Tanselle Too-Tall.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11619837/screencap/699ca836025ab.jpg"
+  },
+  {
+   "tvdbShowId": 433631,
+   "tvdbId": 11619838,
+   "seasonNumber": 0,
+   "episodeNumber": 5,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 4,
+   "title": "Inside the Episode - Episode 3",
+   "airDate": "2026-02-02",
+   "airDateUtc": "2026-02-03T03:00:00Z",
+   "runtime": 5,
+   "overview": "A Knight of the Seven Kingdoms' showrunner Ira Parker, Peter Claffey (Dunk), Dexter Sol Ansell (Egg), and Finn Bennett (Aerion Targaryen) dive deeper into episode 3 of #AKOTSK. They discuss Dunk and Egg's relationship, Aerion Targaryen's shocking joust, and the unexpected revelation after Dunk defends Tanselle against Aerion.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11619838/screencap/699ca8bbe2493.jpg"
+  },
+  {
+   "tvdbShowId": 433631,
+   "tvdbId": 11619839,
+   "seasonNumber": 0,
+   "episodeNumber": 6,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 5,
+   "title": "Inside the Episode - Episode 4",
+   "airDate": "2026-02-09",
+   "airDateUtc": "2026-02-10T03:00:00Z",
+   "runtime": 6,
+   "overview": "A Knight of the Seven Kingdoms' showrunner Ira Parker, Peter Claffey (Dunk), Dexter Sol Ansell (Egg),  Finn Bennett (Aerion Targaryen),  Edward Ashley (Steffon Fossoway), and Bertie Carvel (Baelor Targaryen) dive deeper into episode 4 of #AKOTSK. They discuss where Dunk and Egg stand after the big reveal, the Trial of Seven, and Ser Steffon Fossoway's shocking betrayal.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11619839/screencap/699cb7b43f015.jpg"
+  },
+  {
+   "tvdbShowId": 433631,
+   "tvdbId": 11619840,
+   "seasonNumber": 0,
+   "episodeNumber": 7,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 6,
+   "title": "Inside the Episode - Episode 5",
+   "airDate": "2026-02-16",
+   "airDateUtc": "2026-02-17T03:00:00Z",
+   "runtime": 6,
+   "overview": "A Knight of the Seven Kingdoms' showrunner Ira Parker, Peter Claffey (Dunk), Dexter Sol Ansell (Egg), and Bertie Carvel (Baelor Targaryen) break down Episode 5 of #AKOTSK. They discuss Dunk's past, the Trial of Seven, and Baelor Targaryen's ultimate sacrifice.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11619840/screencap/699cb822d88b6.jpg"
+  },
+  {
+   "tvdbShowId": 433631,
+   "tvdbId": 11619841,
+   "seasonNumber": 0,
+   "episodeNumber": 8,
+   "airedAfterSeasonNumber": 1,
+   "title": "Inside the Episode - Episode 6",
+   "airDate": "2026-02-23",
+   "airDateUtc": "2026-02-24T03:00:00Z",
+   "runtime": 6,
+   "overview": "A Knight of the Seven Kingdoms' showrunner Ira Parker, Peter Claffey (Dunk), Dexter Sol Ansell (Egg), Daniel Ings (Lyonel Baratheon), Shaun Thomas (Raymun Fossoway), and Sam Spruell (Maekar Targaryen) explore the events and themes of the #AKOTSK season finale. They discuss the aftermath of the Trial of Seven and what's next for Dunk and Egg as the unlikely duo ventures off through Westeros.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11619841/screencap/699cb8a597353.jpg"
+  },
+  {
+   "tvdbShowId": 433631,
+   "tvdbId": 11637298,
+   "seasonNumber": 0,
+   "episodeNumber": 9,
+   "airedAfterSeasonNumber": 1,
+   "title": "A Knight In The Making - Episodes 4, 5 & 6",
+   "airDate": "2026-02-23",
+   "airDateUtc": "2026-02-24T03:00:00Z",
+   "runtime": 27,
+   "overview": "Watch an exclusive behind-the-scenes look at the making of A Knight of the Seven Kingdoms Episodes 4-6 from showrunner Ira Parker, Peter Claffey (Dunk), Dexter Sol Ansell (Egg) as well as the crew. Learn about the details that went into capturing the pinnacle Trial of Seven scenes and the logistics of how everything came together to bring the tale of Dunk and Egg from page to screen.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11637298/screencap/699ca6a3c8972.jpg"
+  },
+  {
+   "tvdbShowId": 433631,
+   "tvdbId": 9725383,
+   "seasonNumber": 1,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 1,
+   "title": "The Hedge Knight",
+   "airDate": "2026-01-18",
+   "airDateUtc": "2026-01-19T03:00:00Z",
+   "runtime": 40,
+   "overview": "On his journey to the forthcoming tournament in Ashford, Dunk meets a clever young boy named Egg, who offers to be his squire.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9725383/screencap/696f64930ae98.jpg"
+  },
+  {
+   "tvdbShowId": 433631,
+   "tvdbId": 11390658,
+   "seasonNumber": 1,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 2,
+   "title": "Hard Salt Beef",
+   "airDate": "2026-01-25",
+   "airDateUtc": "2026-01-26T03:00:00Z",
+   "runtime": 32,
+   "overview": "Dunk appeals to various lords in order to gain entrance into the tournament, but Egg advises him to hold onto his pride. When the Targaryens arrive at Ashford, Dunk seizes his moment with Prince Baelor.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11390658/screencap/69724b7d011f5.jpg"
+  },
+  {
+   "tvdbShowId": 433631,
+   "tvdbId": 11390659,
+   "seasonNumber": 1,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 3,
+   "title": "The Squire",
+   "airDate": "2026-02-01",
+   "airDateUtc": "2026-02-02T03:00:00Z",
+   "runtime": 30,
+   "overview": "The truth about Egg's identity is revealed as Dunk invites danger by doing the right thing and preparing for the tournament.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11390659/screencap/697ae531df9e3.jpg"
+  },
+  {
+   "tvdbShowId": 433631,
+   "tvdbId": 11390660,
+   "seasonNumber": 1,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 4,
+   "title": "Seven",
+   "airDate": "2026-02-08",
+   "airDateUtc": "2026-02-09T03:00:00Z",
+   "runtime": 33,
+   "overview": "Dunk angers the Targaryens and demands trial by combat. When Aerion calls for a trial of seven, Dunk must find six knights to join him in battle.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11390660/screencap/698529b12d14b.jpg"
+  },
+  {
+   "tvdbShowId": 433631,
+   "tvdbId": 11390661,
+   "seasonNumber": 1,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 5,
+   "title": "In the Name of the Mother",
+   "airDate": "2026-02-15",
+   "airDateUtc": "2026-02-16T03:00:00Z",
+   "runtime": 35,
+   "overview": "Dunk's mettle is put to the test in the brutal trial of seven. Years earlier, Dunk finds himself drawn to the promise of a new future.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11390661/screencap/6982e744f1be1.jpg"
+  },
+  {
+   "tvdbShowId": 433631,
+   "tvdbId": 11390662,
+   "seasonNumber": 1,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 6,
+   "title": "The Morrow",
+   "airDate": "2026-02-22",
+   "airDateUtc": "2026-02-23T03:00:00Z",
+   "runtime": 29,
+   "finaleType": "season",
+   "overview": "The people of Ashford mourn a significant loss following the tournament; Dunk reflects on his future and evaluates his responsibilities toward Egg; he decides whether to keep the boy as his squire.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11390662/screencap/6994db1241ee3.jpg"
+  }
+ ]
+}

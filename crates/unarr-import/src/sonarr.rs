@@ -22,6 +22,7 @@ use unarr_core::indexers::rss::ReleaseInfo;
 use unarr_core::model::*;
 use unarr_core::store;
 use unarr_core::store::download_history::{DownloadHistoryEntry, DownloadHistoryEvent};
+use unarr_core::store::import_lists::{ListItem, SyncStatus};
 use unarr_core::store::provider_status::ProviderStatus;
 use unarr_core::{time, Db};
 
@@ -76,6 +77,8 @@ const HANDLED_TABLES: &[&str] = &[
     "DownloadHistory",
     "IndexerStatus",
     "DownloadClientStatus",
+    "ImportListStatus",
+    "ImportListItems",
     "VersionInfo",
     "sqlite_sequence",
 ];
@@ -927,6 +930,35 @@ pub fn import(legacy_db: &Path, db: &Db) -> anyhow::Result<ImportReport> {
     })?;
     let indexer_statuses = read_statuses(&legacy, "IndexerStatus")?;
     let download_client_statuses = read_statuses(&legacy, "DownloadClientStatus")?;
+    let import_list_statuses = read_table(&legacy, "ImportListStatus", |r| {
+        Ok((
+            r.req::<i64>("ProviderId")?,
+            ProviderStatus {
+                initial_failure: r.timestamp("InitialFailure")?,
+                most_recent_failure: r.timestamp("MostRecentFailure")?,
+                escalation_level: r.or("EscalationLevel", 0)?,
+                disabled_till: r.timestamp("DisabledTill")?,
+                last_rss_sync_release_info: None,
+            },
+            SyncStatus {
+                last_info_sync: r.timestamp("LastInfoSync")?,
+                has_removed_item_since_last_clean: r.flag("HasRemovedItemSinceLastClean", false)?,
+            },
+        ))
+    })?;
+    let import_list_items = read_table(&legacy, "ImportListItems", |r| {
+        Ok(ListItem {
+            id: 0,
+            import_list_id: r.req("ImportListId")?,
+            title: r.or("Title", String::new())?,
+            tvdb_id: r.or("TvdbId", 0)?,
+            year: r.or("Year", 0)?,
+            tmdb_id: r.or("TmdbId", 0)?,
+            imdb_id: r.text("ImdbId")?,
+            mal_id: r.or("MalId", 0)?,
+            ani_list_id: r.or("AniListId", 0)?,
+        })
+    })?;
     // Rows of a provider that no longer exists would never be read.
     let provider_exists =
         |kind: ProviderKind, id: i64| providers.iter().any(|p| p.kind == kind && p.id == id);
@@ -937,6 +969,14 @@ pub fn import(legacy_db: &Path, db: &Db) -> anyhow::Result<ImportReport> {
     let download_client_statuses: Vec<_> = download_client_statuses
         .into_iter()
         .filter(|(id, _)| provider_exists(ProviderKind::DownloadClient, *id))
+        .collect();
+    let import_list_statuses: Vec<_> = import_list_statuses
+        .into_iter()
+        .filter(|(id, _, _)| provider_exists(ProviderKind::ImportList, *id))
+        .collect();
+    let import_list_items: Vec<_> = import_list_items
+        .into_iter()
+        .filter(|i| provider_exists(ProviderKind::ImportList, i.import_list_id))
         .collect();
 
     report.skipped = skipped_tables(&legacy)?;
@@ -1006,6 +1046,8 @@ pub fn import(legacy_db: &Path, db: &Db) -> anyhow::Result<ImportReport> {
         ("DownloadHistory", download_history.len()),
         ("IndexerStatus", indexer_statuses.len()),
         ("DownloadClientStatus", download_client_statuses.len()),
+        ("ImportListStatus", import_list_statuses.len()),
+        ("ImportListItems", import_list_items.len()),
     ];
     report.counts.extend(counts);
     let migration_version = report.migration_version;
@@ -1050,6 +1092,18 @@ pub fn import(legacy_db: &Path, db: &Db) -> anyhow::Result<ImportReport> {
             ("EpisodeFiles", "episode_files"),
             ("History", "history"),
             ("Episodes", "episodes"),
+            ("Series", "series"),
+            ("SceneMappings", "scene_mappings"),
+            ("Tags", "tags"),
+            ("RootFolders", "root_folders"),
+            ("QualityProfiles", "quality_profiles"),
+            ("CustomFormats", "custom_formats"),
+            ("DelayProfiles", "delay_profiles"),
+            ("ReleaseProfiles", "release_profiles"),
+            ("RemotePathMappings", "remote_path_mappings"),
+            ("ImportListExclusions", "import_list_exclusions"),
+            ("CustomFilters", "custom_filters"),
+            ("AutoTagging", "auto_tagging"),
         ] {
             if let Ok(seq) =
                 legacy.query_row("SELECT seq FROM sqlite_sequence WHERE name = ?1", [table], |r| {
@@ -1106,6 +1160,13 @@ pub fn import(legacy_db: &Path, db: &Db) -> anyhow::Result<ImportReport> {
         }
         for (id, status) in &download_client_statuses {
             store::provider_status::upsert_provider_status(&tx, ProviderKind::DownloadClient, *id, status)?;
+        }
+        for (id, status, sync) in &import_list_statuses {
+            store::provider_status::upsert_provider_status(&tx, ProviderKind::ImportList, *id, status)?;
+            store::import_lists::set_sync_status(&tx, *id, sync)?;
+        }
+        for item in &import_list_items {
+            store::import_lists::insert_item(&tx, item)?;
         }
         if let Some(n) = naming.first() {
             store::config::set_naming(&tx, n)?;
@@ -1210,6 +1271,8 @@ mod tests {
             ("PendingReleases", 0),
             ("IndexerStatus", 0),
             ("DownloadClientStatus", 0),
+            ("ImportListStatus", 0),
+            ("ImportListItems", 1),
         ];
         for (table, n) in expect {
             assert_eq!(report.counts[table], n, "{table}");
@@ -1217,7 +1280,7 @@ mod tests {
         // Tables with rows nothing reads are reported, not silently dropped.
         assert_eq!(
             report.skipped.keys().map(String::as_str).collect::<Vec<_>>(),
-            ["ImportListItems", "MetadataFiles", "SubtitleFiles"],
+            ["MetadataFiles", "SubtitleFiles"],
             "{:?}",
             report.skipped
         );

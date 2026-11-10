@@ -254,6 +254,49 @@ pub async fn import_list_exclusions(State(state): State<AppState>) -> ApiResult<
     ))
 }
 
+/// `GET /importlistexclusion/paged`: what the settings page lists.
+pub async fn import_list_exclusions_paged(
+    State(state): State<AppState>,
+    uri: axum::http::Uri,
+) -> ApiResult<Json<crate::resources::PagingResource<Value>>> {
+    let p = crate::query::Params::from_uri(&uri);
+    let mut paging = unarr_core::store::paging::Paging::resolve(
+        p.i64("page"),
+        p.i64("pageSize"),
+        p.get("sortKey"),
+        p.descending(),
+        &["id", "title", "tvdbId"],
+        "id",
+    );
+    // A page size of zero is taken at its word: no records.
+    if p.i64("pageSize") == Some(0) {
+        paging.page_size = 0;
+    }
+    let mut all = state
+        .db()
+        .call(|c| store::providers::list_import_list_exclusions(c))
+        .await?;
+    match paging.sort_key.as_str() {
+        // The database's binary collation: capitals before lower case.
+        "title" => all.sort_by(|a, b| a.title.as_bytes().cmp(b.title.as_bytes())),
+        "tvdbId" => all.sort_by_key(|e| e.tvdb_id),
+        _ => all.sort_by_key(|e| e.id),
+    }
+    if paging.descending {
+        all.reverse();
+    }
+    let records = paging
+        .slice(&all)
+        .iter()
+        .map(|e| json!({"id": e.id, "tvdbId": e.tvdb_id, "title": e.title}))
+        .collect();
+    Ok(Json(crate::resources::PagingResource::new(
+        &paging,
+        all.len() as i64,
+        records,
+    )))
+}
+
 /// Auto-tagging rules; specifications are rendered like custom format ones.
 fn auto_tagging_resource(a: &unarr_core::model::AutoTagging) -> Value {
     let specs: Vec<Value> = a

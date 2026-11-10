@@ -1,0 +1,34 @@
+{
+  "body": {
+    "body": {
+      "isExclusive": false,
+      "isLongRunning": false,
+      "name": "Backup",
+      "requiresDiskAccess": false,
+      "sendUpdatesToClient": true,
+      "suppressMessages": false,
+      "trigger": "manual",
+      "type": "manual",
+      "updateScheduledTask": false
+    },
+    "commandName": "Backup",
+    "id": 461659,
+    "name": "Backup",
+    "priority": "normal",
+    "queued": "2026-11-09T23:00:58Z",
+    "result": "unknown",
+    "sendUpdatesToClient": true,
+    "started": "2026-11-09T23:00:58Z",
+    "stateChangeTime": "2026-11-09T23:00:58Z",
+    "status": "started",
+    "trigger": "manual",
+    "updateScheduledTask": false
+  },
+  "recordedAt": "2026-11-09T23:00:58Z",
+  "request": {
+    "body": "bodies/command-backup.json",
+    "method": "POST",
+    "path": "/api/v3/command"
+  },
+  "status": 201
+}

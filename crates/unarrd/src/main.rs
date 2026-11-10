@@ -6,7 +6,7 @@ use anyhow::Context;
 use clap::Parser;
 use tracing_subscriber::layer::SubscriberExt;
 use tracing_subscriber::util::SubscriberInitExt;
-use unarr_api::{AppState, LogBuffer, RuntimeInfo, Settings};
+use unarr_api::{AppState, LogBuffer, LogFiles, ProcessLog, RuntimeInfo, Settings};
 use unarr_core::config::{AuthenticationMethod, AuthenticationRequired, HostConfig};
 use unarr_core::{Db, Personality};
 
@@ -208,19 +208,117 @@ struct Opened {
     port: u16,
 }
 
-fn open_personality(personality: Personality, args: &Args, logs: &LogBuffer) -> anyhow::Result<Opened> {
-    let own_dir = args.data.join(personality_dir(personality));
-    std::fs::create_dir_all(&own_dir).with_context(|| format!("creating {}", own_dir.display()))?;
-    let legacy = legacy_source(personality, &own_dir, &args.data, args.import_from.as_deref());
+/// The database files, with SQLite's write-ahead log and its index.
+const DB_SUFFIXES: [&str; 3] = ["", "-wal", "-shm"];
 
+fn before_restore(path: &Path) -> PathBuf {
+    let mut name = path.file_name().unwrap_or_default().to_os_string();
+    name.push(".before-restore");
+    path.with_file_name(name)
+}
+
+fn with_suffix(path: &Path, suffix: &str) -> PathBuf {
+    let mut name = path.as_os_str().to_os_string();
+    name.push(suffix);
+    PathBuf::from(name)
+}
+
+/// Take up a restore the API staged in `<own dir>/restore` (see
+/// `unarr_core::backup`). The current database and `config.xml` are set
+/// aside as `*.before-restore` first. A backup of Unarr's own replaces the
+/// database right here; for a backup the original application wrote, the
+/// folder is returned: the importer reads it into a blank database, as on a
+/// first start.
+fn begin_restore(personality: Personality, own_dir: &Path) -> anyhow::Result<Option<PathBuf>> {
+    let dir = own_dir.join(unarr_core::backup::RESTORE_DIR);
+    if !dir.is_dir() {
+        return Ok(None);
+    }
+    let own_db = dir.join(personality.db_file());
+    let original_db = dir.join(personality.legacy_db_file());
+    if !own_db.is_file() && !original_db.is_file() {
+        tracing::warn!(path = %dir.display(), "the staged restore holds no database; ignoring it");
+        set_restore_aside(&dir);
+        return Ok(None);
+    }
+
+    let db = own_dir.join(personality.db_file());
+    let kept = before_restore(&db);
+    for suffix in DB_SUFFIXES {
+        let (from, to) = (with_suffix(&db, suffix), with_suffix(&kept, suffix));
+        let _ = std::fs::remove_file(&to);
+        if from.exists() {
+            std::fs::rename(&from, &to).with_context(|| format!("setting {} aside", from.display()))?;
+        }
+    }
+    let config = own_dir.join("config.xml");
+    let _ = std::fs::remove_file(before_restore(&config));
+    if config.is_file() {
+        std::fs::copy(&config, before_restore(&config))?;
+    }
+
+    if !own_db.is_file() {
+        tracing::info!(from = %original_db.display(), "restoring a backup of the original application through the importer");
+        return Ok(Some(dir));
+    }
+    std::fs::rename(&own_db, &db).with_context(|| format!("moving {} into place", own_db.display()))?;
+    // Unarr's own settings file comes back with its database; an original
+    // read in place is never rewritten.
+    let staged_config = dir.join("config.xml");
+    if staged_config.is_file() && (!config.is_file() || own_dir.join(WRITTEN_BY_UNARR).is_file()) {
+        std::fs::copy(&staged_config, &config)?;
+        std::fs::write(own_dir.join(WRITTEN_BY_UNARR), "")?;
+    }
+    let _ = std::fs::remove_dir_all(&dir);
+    tracing::info!(kept = %kept.display(), "restored the database from the staged backup");
+    Ok(None)
+}
+
+/// Move a restore that cannot be applied out of the way, so the next start
+/// does not try it again.
+fn set_restore_aside(dir: &Path) {
+    let failed = dir.with_file_name(format!("{}.failed", unarr_core::backup::RESTORE_DIR));
+    let _ = std::fs::remove_dir_all(&failed);
+    if let Err(e) = std::fs::rename(dir, &failed) {
+        tracing::warn!(error = %e, path = %dir.display(), "could not set the staged restore aside");
+    }
+}
+
+/// Undo `begin_restore` after the importer failed: the previous database
+/// and `config.xml` come back.
+fn abandon_restore(personality: Personality, own_dir: &Path) -> anyhow::Result<()> {
+    let db = own_dir.join(personality.db_file());
+    let kept = before_restore(&db);
+    for suffix in DB_SUFFIXES {
+        let (to, from) = (with_suffix(&db, suffix), with_suffix(&kept, suffix));
+        let _ = std::fs::remove_file(&to);
+        if from.exists() {
+            std::fs::rename(&from, &to).with_context(|| format!("putting {} back", to.display()))?;
+        }
+    }
+    let config = own_dir.join("config.xml");
+    if before_restore(&config).is_file() {
+        std::fs::rename(before_restore(&config), &config)?;
+    }
+    set_restore_aside(&own_dir.join(unarr_core::backup::RESTORE_DIR));
+    Ok(())
+}
+
+/// Open the personality's database and settings, importing the original's
+/// from `legacy` when nothing was imported yet.
+fn open_database(
+    personality: Personality,
+    own_dir: &Path,
+    legacy: Option<&Path>,
+) -> anyhow::Result<(Db, HostConfig)> {
     let db = Db::open(&own_dir.join(personality.db_file()))?;
     let imported = db
         .call_blocking(|conn| unarr_core::store::config::meta(conn, "source.app"))?
         .is_some();
-    let host = load_or_create_config(personality, &own_dir, legacy.as_deref(), imported)?;
+    let host = load_or_create_config(personality, own_dir, legacy, imported)?;
 
     if !imported {
-        if let Some(src) = &legacy {
+        if let Some(src) = legacy {
             match personality {
                 Personality::Sonarr => {
                     let report = unarr_import::sonarr::import(&src.join(personality.legacy_db_file()), &db)?;
@@ -236,7 +334,45 @@ fn open_personality(personality: Personality, args: &Args, logs: &LogBuffer) -> 
             }
         }
     }
+    Ok((db, host))
+}
 
+/// `open_database`, after taking up a restore staged before this start. A
+/// restore that fails leaves the installation as it was.
+fn open_restoring(
+    personality: Personality,
+    own_dir: &Path,
+    legacy: Option<&Path>,
+) -> anyhow::Result<(Db, HostConfig)> {
+    let Some(staged) = begin_restore(personality, own_dir)? else {
+        return open_database(personality, own_dir, legacy);
+    };
+    match open_database(personality, own_dir, Some(&staged)) {
+        Ok(opened) => {
+            let _ = std::fs::remove_dir_all(&staged);
+            tracing::info!("restored the original application's backup");
+            Ok(opened)
+        }
+        Err(e) => {
+            tracing::error!(error = %format!("{e:#}"), "the staged restore failed; keeping the previous database");
+            abandon_restore(personality, own_dir)?;
+            open_database(personality, own_dir, legacy)
+        }
+    }
+}
+
+fn open_personality(personality: Personality, args: &Args, logs: &LogBuffer) -> anyhow::Result<Opened> {
+    let own_dir = args.data.join(personality_dir(personality));
+    std::fs::create_dir_all(&own_dir).with_context(|| format!("creating {}", own_dir.display()))?;
+    let legacy = legacy_source(personality, &own_dir, &args.data, args.import_from.as_deref());
+    let (db, mut host) = open_restoring(personality, &own_dir, legacy.as_deref())?;
+
+    // Host settings saved through the API since: the original's
+    // config.xml is never rewritten, they are laid over it.
+    let saved = db.call_blocking(|conn| {
+        unarr_core::store::config::meta(conn, unarr_api::routes::settings_writes::HOST_OVERRIDES)
+    })?;
+    unarr_api::routes::settings_writes::apply_saved_host_overrides(&mut host, saved.as_deref());
     let port = host.port;
     if host.enable_ssl {
         tracing::warn!(
@@ -250,12 +386,19 @@ fn open_personality(personality: Personality, args: &Args, logs: &LogBuffer) -> 
         other => other.to_string(),
     };
     let settings = Settings::from_host_config(host, personality);
-    let mut runtime = RuntimeInfo::detect(own_dir);
-    // Serve the posters the original already downloaded, until Unarr fetches
-    // its own.
+    let runtime = RuntimeInfo::detect(own_dir);
+    // The posters the original already downloaded, copied once into Unarr's
+    // own folder: refreshes write there, never into the original's.
     if let Some(covers) = legacy.map(|d| d.join("MediaCover")).filter(|d| d.is_dir()) {
-        if !runtime.media_cover_dir.is_dir() {
-            runtime.media_cover_dir = covers;
+        if !runtime.media_cover_dir.exists() {
+            match copy_dir(&covers, &runtime.media_cover_dir) {
+                Ok(n) => {
+                    tracing::info!(files = n, from = %covers.display(), "copied the original's media covers")
+                }
+                Err(e) => {
+                    tracing::warn!(error = %e, from = %covers.display(), "could not copy the original's media covers")
+                }
+            }
         }
     }
     Ok(Opened {
@@ -263,6 +406,25 @@ fn open_personality(personality: Personality, args: &Args, logs: &LogBuffer) -> 
         bind,
         port,
     })
+}
+
+/// Copy a directory tree, files only (no links followed); the number of
+/// files copied.
+fn copy_dir(from: &std::path::Path, to: &std::path::Path) -> std::io::Result<usize> {
+    std::fs::create_dir_all(to)?;
+    let mut copied = 0;
+    for entry in std::fs::read_dir(from)? {
+        let entry = entry?;
+        let kind = entry.file_type()?;
+        let target = to.join(entry.file_name());
+        if kind.is_dir() {
+            copied += copy_dir(&entry.path(), &target)?;
+        } else if kind.is_file() {
+            std::fs::copy(entry.path(), &target)?;
+            copied += 1;
+        }
+    }
+    Ok(copied)
 }
 
 /// Ctrl+C, or SIGTERM as `docker stop` sends it.
@@ -283,13 +445,84 @@ async fn shutdown_signal() {
     }
 }
 
-#[tokio::main]
-async fn main() -> anyhow::Result<()> {
-    let logs = LogBuffer::new();
+/// What the process logs at, from `RUST_LOG`; info without it.
+fn log_filter() -> tracing_subscriber::EnvFilter {
+    tracing_subscriber::EnvFilter::try_from_default_env().unwrap_or_else(|_| "info".into())
+}
+
+/// Where a personality logs: the console, its recent lines (`GET /log`)
+/// and its files.
+fn personality_dispatch(
+    logs: &LogBuffer,
+    files: &LogFiles,
+    filter: tracing_subscriber::EnvFilter,
+) -> tracing::Dispatch {
+    tracing::Dispatch::new(
+        tracing_subscriber::registry()
+            .with(filter)
+            .with(tracing_subscriber::fmt::layer())
+            .with(logs.clone())
+            .with(files.clone()),
+    )
+}
+
+/// The runtime a personality runs on. Every thread it starts, workers and
+/// blocking ones alike, logs to `dispatch` for as long as it lives: that
+/// is how a line lands in the files of the personality that logged it,
+/// whichever task or library wrote it.
+fn personality_runtime(name: &str, dispatch: &tracing::Dispatch) -> std::io::Result<tokio::runtime::Runtime> {
+    let dispatch = dispatch.clone();
+    tokio::runtime::Builder::new_multi_thread()
+        .enable_all()
+        .thread_name(format!("unarr-{name}"))
+        .on_thread_start(move || {
+            // Never dropped: the thread keeps the dispatcher until it ends.
+            std::mem::forget(tracing::dispatcher::set_default(&dispatch));
+        })
+        .build()
+}
+
+/// A personality being served.
+struct Running {
+    dispatch: tracing::Dispatch,
+    runtime: tokio::runtime::Runtime,
+    state: AppState,
+}
+
+/// Start what a personality runs: the command runtime and the HTTP server.
+async fn serve(personality: Personality, state: AppState, bind: String, port: u16) -> anyhow::Result<()> {
+    state
+        .start_runtime()
+        .await
+        .with_context(|| format!("starting the command runtime for {personality:?}"))?;
+    // The import read whole tables into memory; the allocator keeps the
+    // pages unless told otherwise.
+    unarr_core::fs::release_memory();
+    // A (host, port) pair resolves names and IPv6 literals such as `::`.
+    let listener = tokio::net::TcpListener::bind((bind.as_str(), port))
+        .await
+        .with_context(|| format!("binding {bind}:{port}"))?;
+    let addr = listener.local_addr()?;
+    tracing::info!(%addr, ?personality, "listening");
+    tokio::spawn(
+        axum::serve(
+            listener,
+            unarr_api::router(state).into_make_service_with_connect_info::<SocketAddr>(),
+        )
+        .into_future(),
+    );
+    Ok(())
+}
+
+fn main() -> anyhow::Result<()> {
+    unarr_core::fs::tune_allocator();
+    // What is logged outside any personality goes to the console and, through
+    // `process_log`, to every personality's recent lines and files.
+    let process_log = ProcessLog::new();
     tracing_subscriber::registry()
-        .with(tracing_subscriber::EnvFilter::try_from_default_env().unwrap_or_else(|_| "info".into()))
+        .with(log_filter())
         .with(tracing_subscriber::fmt::layer())
-        .with(logs.clone())
+        .with(process_log.clone())
         .init();
     let args = Args::parse();
 
@@ -310,42 +543,56 @@ async fn main() -> anyhow::Result<()> {
         check_import_source(import_from, &personalities, &args.data)?;
     }
 
-    let mut servers = Vec::new();
-    let mut states = Vec::new();
+    let mut running = Vec::new();
     for personality in personalities {
-        let opened = open_personality(personality, &args, &logs)?;
-        let (state, port) = (opened.state, opened.port);
-        states.push(state.clone());
-        state
-            .start_runtime()
-            .await
-            .with_context(|| format!("starting the command runtime for {personality:?}"))?;
-        // The import read whole tables into memory; the allocator keeps the
-        // pages unless told otherwise.
-        unarr_core::fs::release_memory();
-        // A (host, port) pair resolves names and IPv6 literals such as `::`.
-        let listener = tokio::net::TcpListener::bind((opened.bind.as_str(), port))
-            .await
-            .with_context(|| format!("binding {}:{port}", opened.bind))?;
-        let addr = listener.local_addr()?;
-        tracing::info!(%addr, ?personality, "listening");
-        servers.push(tokio::spawn(
-            axum::serve(
-                listener,
-                unarr_api::router(state).into_make_service_with_connect_info::<SocketAddr>(),
-            )
-            .into_future(),
-        ));
+        // The log files live with the personality's data, where the
+        // originals keep theirs and under their names (`sonarr.txt`).
+        let name = personality.app_name().to_lowercase();
+        let logs = LogBuffer::new();
+        let files = LogFiles::open(&args.data.join(personality_dir(personality)).join("logs"), &name);
+        process_log.add(logs.clone(), files.clone());
+        let dispatch = personality_dispatch(&logs, &files, log_filter());
+        let runtime = personality_runtime(&name, &dispatch)
+            .with_context(|| format!("starting the runtime for {personality:?}"))?;
+        // This thread opens the personality and logs as it while it does;
+        // the database thread started here does the same from then on.
+        let state = tracing::dispatcher::with_default(&dispatch, || -> anyhow::Result<AppState> {
+            let opened = open_personality(personality, &args, &logs)?;
+            let state = opened.state;
+            // A mock serving every metadata host under `<url>/<host>/`, for
+            // replays against `scripts/mock-servarr.py`; unset in real use.
+            if let Ok(url) = std::env::var("UNARR_METADATA_UPSTREAM") {
+                tracing::warn!(%url, "metadata hosts redirected (UNARR_METADATA_UPSTREAM)");
+                state.set_metadata_upstreams(unarr_core::metadata::Upstreams::mock(&url));
+            }
+            runtime.block_on(serve(personality, state.clone(), opened.bind, opened.port))?;
+            Ok(state)
+        })?;
+        running.push(Running {
+            dispatch,
+            runtime,
+            state,
+        });
     }
+    // Every personality has the lines of the start; no need to keep them.
+    process_log.seal();
 
-    shutdown_signal().await;
+    tokio::runtime::Builder::new_current_thread()
+        .enable_all()
+        .build()
+        .context("starting the signal handler")?
+        .block_on(shutdown_signal());
     tracing::info!("shutting down");
     // Running commands get a moment to finish: a grab cut between the
     // client and its history row would leave an untracked download.
-    for state in &states {
-        if let Ok(runtime) = state.commands() {
-            runtime.shutdown(std::time::Duration::from_secs(8)).await;
-        }
+    for personality in &running {
+        tracing::dispatcher::with_default(&personality.dispatch, || {
+            personality.runtime.block_on(async {
+                if let Ok(commands) = personality.state.commands() {
+                    commands.shutdown(std::time::Duration::from_secs(8)).await;
+                }
+            });
+        });
     }
     Ok(())
 }
@@ -455,5 +702,190 @@ mod tests {
         assert_eq!(std::fs::read(own_dir.join("config.xml")).unwrap(), original);
 
         let _ = std::fs::remove_dir_all(&dir);
+    }
+
+    fn meta(db: &Db, key: &'static str) -> Option<String> {
+        db.call_blocking(move |conn| unarr_core::store::config::meta(conn, key))
+            .unwrap()
+    }
+
+    /// A staged backup of Unarr's own replaces the database at the next
+    /// start; what was there is kept next to it.
+    #[test]
+    fn a_staged_unarr_backup_replaces_the_database() {
+        let dir = std::env::temp_dir().join(format!("unarr-restore-own-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&dir);
+        let own_dir = dir.join("sonarr");
+        let staged = own_dir.join(unarr_core::backup::RESTORE_DIR);
+        std::fs::create_dir_all(&staged).unwrap();
+        let p = Personality::Sonarr;
+
+        // The backup: a database that says so, and its settings file.
+        {
+            let db = Db::open(&staged.join(p.db_file())).unwrap();
+            db.call_blocking(|conn| unarr_core::store::config::set_meta(conn, "test.state", "backup"))
+                .unwrap();
+            db.call_blocking(|conn| {
+                conn.execute_batch("PRAGMA wal_checkpoint(TRUNCATE)")
+                    .map_err(Into::into)
+            })
+            .unwrap();
+        }
+        for suffix in ["-wal", "-shm"] {
+            let _ = std::fs::remove_file(with_suffix(&staged.join(p.db_file()), suffix));
+        }
+        // The installation: a newer database and a generated config.
+        let (db, before) = open_database(p, &own_dir, None).unwrap();
+        db.call_blocking(|conn| unarr_core::store::config::set_meta(conn, "test.state", "current"))
+            .unwrap();
+        drop(db);
+        std::fs::copy(own_dir.join("config.xml"), staged.join("config.xml")).unwrap();
+        // The settings changed since the backup was taken.
+        let _ = std::fs::remove_file(own_dir.join("config.xml"));
+        let changed = load_or_create_config(p, &own_dir, None, false).unwrap();
+        assert_ne!(changed.api_key, before.api_key);
+
+        let (db, host) = open_restoring(p, &own_dir, None).unwrap();
+        assert_eq!(meta(&db, "test.state").as_deref(), Some("backup"));
+        assert_eq!(host.api_key, before.api_key);
+        assert!(!staged.exists());
+        drop(db);
+        let kept = Db::open(&before_restore(&own_dir.join(p.db_file()))).unwrap();
+        assert_eq!(meta(&kept, "test.state").as_deref(), Some("current"));
+        drop(kept);
+
+        // Nothing staged any more: the next start changes nothing.
+        let (db, _) = open_restoring(p, &own_dir, None).unwrap();
+        assert_eq!(meta(&db, "test.state").as_deref(), Some("backup"));
+
+        let _ = std::fs::remove_dir_all(&dir);
+    }
+
+    /// A staged backup the original application wrote goes through the
+    /// importer; one that cannot be imported leaves everything as it was.
+    #[test]
+    fn a_staged_original_backup_is_imported_or_abandoned() {
+        let dir = std::env::temp_dir().join(format!("unarr-restore-orig-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&dir);
+        let own_dir = dir.join("sonarr");
+        let staged = own_dir.join(unarr_core::backup::RESTORE_DIR);
+        std::fs::create_dir_all(&staged).unwrap();
+        let p = Personality::Sonarr;
+        let fixture = Path::new(concat!(
+            env!("CARGO_MANIFEST_DIR"),
+            "/../../tests/fixtures/sonarr"
+        ));
+
+        // A blank installation with its generated key.
+        let (db, generated) = open_database(p, &own_dir, None).unwrap();
+        db.call_blocking(|conn| unarr_core::store::config::set_meta(conn, "test.state", "current"))
+            .unwrap();
+        drop(db);
+
+        // A broken backup first: not a database at all.
+        std::fs::write(staged.join(p.legacy_db_file()), b"not a database").unwrap();
+        std::fs::copy(fixture.join("config.xml"), staged.join("config.xml")).unwrap();
+        let (db, host) = open_restoring(p, &own_dir, None).unwrap();
+        assert_eq!(meta(&db, "test.state").as_deref(), Some("current"));
+        assert_eq!(meta(&db, "source.app"), None);
+        assert_eq!(host.api_key, generated.api_key);
+        assert!(!staged.exists());
+        assert!(own_dir.join("restore.failed").is_dir());
+        drop(db);
+
+        // Then Sonarr's own files, as its backup zip holds them.
+        std::fs::create_dir_all(&staged).unwrap();
+        std::fs::copy(fixture.join("sonarr.db"), staged.join(p.legacy_db_file())).unwrap();
+        std::fs::copy(fixture.join("config.xml"), staged.join("config.xml")).unwrap();
+        let (db, host) = open_restoring(p, &own_dir, None).unwrap();
+        assert!(meta(&db, "source.app").is_some());
+        assert_eq!(meta(&db, "test.state"), None);
+        assert_eq!(host.api_key, "0123456789abcdef0123456789abcdef");
+        let series: i64 = db
+            .call_blocking(|conn| Ok(conn.query_row("SELECT COUNT(*) FROM series", [], |r| r.get(0))?))
+            .unwrap();
+        assert!(series > 0);
+        assert!(!staged.exists());
+
+        let _ = std::fs::remove_dir_all(&dir);
+    }
+
+    /// One process, two personalities: whatever a personality's threads
+    /// log (its tasks, the tasks they spawn, blocking work, its database
+    /// thread) lands in its own files and recent lines, and nowhere else.
+    #[test]
+    fn each_personality_logs_to_its_own_files() {
+        let root = std::env::temp_dir().join(format!("unarr-personality-logs-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&root);
+        let start = |name: &'static str| {
+            let logs = LogBuffer::new();
+            let files = LogFiles::open(&root.join(name).join("logs"), name);
+            // Not the environment's level: the test asserts on info lines
+            // whatever `RUST_LOG` the shell exports.
+            let dispatch = personality_dispatch(&logs, &files, "info".into());
+            let runtime = personality_runtime(name, &dispatch).unwrap();
+            // As `main` does: opened, and its database started, as itself.
+            let db = tracing::dispatcher::with_default(&dispatch, || {
+                tracing::info!("{name} opening");
+                Db::open_in_memory().unwrap()
+            });
+            (logs, dispatch, runtime, db)
+        };
+        let sonarr = start("sonarr");
+        let radarr = start("radarr");
+        // Interleaved, so that neither merely happens to be the last set.
+        for (name, (_, dispatch, runtime, db)) in
+            [("sonarr", &sonarr), ("radarr", &radarr), ("sonarr", &sonarr)]
+        {
+            let db = db.clone();
+            tracing::dispatcher::with_default(dispatch, || {
+                runtime.block_on(async move {
+                    tokio::spawn(async move {
+                        tracing::info!("{name} from a task");
+                        tokio::spawn(async move { tracing::info!("{name} from a task of a task") })
+                            .await
+                            .unwrap();
+                        tokio::task::spawn_blocking(move || tracing::warn!("{name} from blocking work"))
+                            .await
+                            .unwrap();
+                        db.call(move |_| {
+                            tracing::info!("{name} from the database thread");
+                            Ok(())
+                        })
+                        .await
+                        .unwrap();
+                    })
+                    .await
+                    .unwrap();
+                });
+            });
+        }
+        // A thread of neither logs to neither.
+        tracing::info!("sonarr radarr from the process");
+
+        let wrote = [
+            "opening",
+            "from a task",
+            "from a task of a task",
+            "from blocking work",
+            "from the database thread",
+        ];
+        for (name, other, (logs, ..)) in [("sonarr", "radarr", &sonarr), ("radarr", "sonarr", &radarr)] {
+            let file =
+                std::fs::read_to_string(root.join(name).join("logs").join(format!("{name}.txt"))).unwrap();
+            let recent: Vec<String> = logs.entries().into_iter().map(|e| e.message).collect();
+            for what in wrote {
+                let line = format!("{name} {what}");
+                assert!(file.contains(&line), "{name}.txt lacks '{line}':\n{file}");
+                assert!(recent.contains(&line), "{name}'s recent lines lack '{line}'");
+            }
+            assert!(
+                !file.contains(other),
+                "{name}.txt holds a line of {other}:\n{file}"
+            );
+            assert!(recent.iter().all(|m| !m.contains(other)));
+        }
+        drop((sonarr, radarr));
+        let _ = std::fs::remove_dir_all(&root);
     }
 }

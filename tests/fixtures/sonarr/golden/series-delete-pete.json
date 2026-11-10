@@ -1,0 +1,9 @@
+{
+  "body": null,
+  "recordedAt": "2026-11-09T22:24:32Z",
+  "request": {
+    "method": "DELETE",
+    "path": "/api/v3/series/52?deleteFiles=true&addImportListExclusion=true"
+  },
+  "status": 200
+}

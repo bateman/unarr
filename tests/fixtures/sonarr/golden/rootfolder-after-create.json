@@ -1,0 +1,30 @@
+{
+  "body": [
+    {
+      "accessible": true,
+      "freeSpace": 14354038784,
+      "id": 1,
+      "path": "/tv",
+      "unmappedFolders": []
+    },
+    {
+      "accessible": true,
+      "freeSpace": 14354038784,
+      "id": 2,
+      "path": "/downloads/completed",
+      "unmappedFolders": [
+        {
+          "name": "tv",
+          "path": "/downloads/completed/tv",
+          "relativePath": "tv"
+        }
+      ]
+    }
+  ],
+  "recordedAt": "2026-11-09T22:24:42Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/rootfolder"
+  },
+  "status": 200
+}

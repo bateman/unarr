@@ -1,0 +1,333 @@
+{
+ "tvdbId": 404604,
+ "title": "ted",
+ "overview": "In this comedic prequel event series to the Ted films, it’s 1993, and Ted the bear’s moment of fame has passed. He’s now living back home in Framingham, Massachusetts with his best friend, 16-year-old John Bennett, along with John’s parents, Matty and Susan and cousin Blaire. Ted may be a lousy influence on John, but at the end of the day, he’s a loyal pal who’s always willing to go out on a limb for friendship.",
+ "slug": "ted",
+ "originalCountry": "usa",
+ "originalLanguage": "eng",
+ "language": "eng",
+ "firstAired": "2024-01-11",
+ "lastAired": "2026-03-05",
+ "tvMazeId": 55832,
+ "tmdbId": 201834,
+ "imdbId": "tt14824792",
+ "malIds": [],
+ "anidbIds": [],
+ "aniListIds": [],
+ "lastUpdated": "2026-10-24T19:52:11Z",
+ "status": "Ended",
+ "runtime": 36,
+ "timeOfDay": {
+  "hours": 6,
+  "minutes": 0
+ },
+ "originalNetwork": "Peacock",
+ "network": "Peacock",
+ "genres": [
+  "Comedy"
+ ],
+ "contentRating": "TV-MA",
+ "rating": {
+  "count": 51007,
+  "value": "7.9"
+ },
+ "alternativeTitles": [
+  {
+   "title": "ted (2024)"
+  }
+ ],
+ "actors": [
+  {
+   "name": "Seth MacFarlane",
+   "character": "Ted (Voice)",
+   "image": "https://artworks.thetvdb.com/banners/person/255117/primary.jpg"
+  },
+  {
+   "name": "Max Burkholder",
+   "character": "John Bennett",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/303952/photo/65485bf1aec5c.jpg"
+  },
+  {
+   "name": "Giorgia Whigham",
+   "character": "Blaire Bennett",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/514267/photo/65fe8649771af.jpg"
+  },
+  {
+   "name": "Alanna Ubach",
+   "character": "Susan Bennett",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/330132/photo/64f800daabf7c.jpg"
+  },
+  {
+   "name": "Scott Grimes",
+   "character": "Matty Bennett",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/274189/photo/66292a555211f.jpg"
+  }
+ ],
+ "images": [
+  {
+   "coverType": "Banner",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/404604/banners/656d8dc126294.jpg"
+  },
+  {
+   "coverType": "Poster",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/404604/posters/656d8d7db69b4.jpg"
+  },
+  {
+   "coverType": "Fanart",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/404604/backgrounds/656d8de5571ca.jpg"
+  },
+  {
+   "coverType": "Clearlogo",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/404604/clearlogo/656d8d4d86e87.png"
+  }
+ ],
+ "seasons": [
+  {
+   "seasonNumber": 0
+  },
+  {
+   "seasonNumber": 1,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/1933592/posters/65a03cb3809bf.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 2,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2220806/posters/69a99065d5c2b.jpg"
+    }
+   ]
+  }
+ ],
+ "episodes": [
+  {
+   "tvdbShowId": 404604,
+   "tvdbId": 10478539,
+   "seasonNumber": 0,
+   "episodeNumber": 1,
+   "airedAfterSeasonNumber": 2,
+   "title": "Ted",
+   "airDate": "2012-06-29",
+   "airDateUtc": "2012-06-29T10:00:00Z",
+   "runtime": 107,
+   "overview": "John Bennett, a man whose childhood wish of bringing his teddy bear to life came true, now must decide between keeping the relationship with the bear or his girlfriend, Lori.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10478539/screencap/66e826c8d4447.jpg"
+  },
+  {
+   "tvdbShowId": 404604,
+   "tvdbId": 10697657,
+   "seasonNumber": 0,
+   "episodeNumber": 2,
+   "airedAfterSeasonNumber": 2,
+   "title": "Ted 2",
+   "airDate": "2015-08-13",
+   "airDateUtc": "2015-08-13T10:00:00Z",
+   "runtime": 116,
+   "finaleType": "season",
+   "overview": "Newlywed couple Ted and Tami-Lynn want to have a baby, but in order to qualify to be a parent, Ted will have to prove he's a person in a court of law.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10697657/screencap/66e8267e3e5f3.jpg"
+  },
+  {
+   "tvdbShowId": 404604,
+   "tvdbId": 9226297,
+   "seasonNumber": 1,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 1,
+   "title": "Just Say Yes",
+   "airDate": "2024-01-11",
+   "airDateUtc": "2024-01-11T11:00:00Z",
+   "runtime": 51,
+   "overview": "When Matty makes Ted go to school with John, Ted immediately decides to get expelled.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9226297/screencap/65a08109a7821.jpg"
+  },
+  {
+   "tvdbShowId": 404604,
+   "tvdbId": 10148164,
+   "seasonNumber": 1,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 2,
+   "title": "My Two Dads",
+   "airDate": "2024-01-11",
+   "airDateUtc": "2024-01-11T11:00:00Z",
+   "runtime": 39,
+   "overview": "Ted and John’s plan to exact revenge on the school bully inadvertently puts them in a parental role.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10148164/screencap/65a0813f1743f.jpg"
+  },
+  {
+   "tvdbShowId": 404604,
+   "tvdbId": 10148165,
+   "seasonNumber": 1,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 3,
+   "title": "Ejectile Dysfunction",
+   "airDate": "2024-01-11",
+   "airDateUtc": "2024-01-11T11:00:00Z",
+   "runtime": 37,
+   "overview": "Ted and John go to extraordinary lengths so that John can watch his first adult film.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10148165/screencap/65a0817f298a2.jpg"
+  },
+  {
+   "tvdbShowId": 404604,
+   "tvdbId": 10148166,
+   "seasonNumber": 1,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 4,
+   "title": "Subways, Bicycles and Automobiles",
+   "airDate": "2024-01-11",
+   "airDateUtc": "2024-01-11T11:00:00Z",
+   "runtime": 37,
+   "overview": "Ted’s Halloween plans with John are thwarted when Blaire forces him to be her designated driver.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10148166/screencap/65a081c36c3a1.jpg"
+  },
+  {
+   "tvdbShowId": 404604,
+   "tvdbId": 10148167,
+   "seasonNumber": 1,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 5,
+   "title": "Desperately Seeking Susan",
+   "airDate": "2024-01-11",
+   "airDateUtc": "2024-01-11T11:00:00Z",
+   "runtime": 34,
+   "overview": "Blaire asks Matty and Susan to let Ted be their marriage therapist; Susan pursues a past career.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10148167/screencap/65a0820963b09.jpg"
+  },
+  {
+   "tvdbShowId": 404604,
+   "tvdbId": 10148168,
+   "seasonNumber": 1,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 6,
+   "title": "Loud Night",
+   "airDate": "2024-01-11",
+   "airDateUtc": "2024-01-11T11:00:00Z",
+   "runtime": 44,
+   "overview": "Matty’s unorthodox Christmas wish is granted, completely upending the Bennett family dynamic.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10148168/screencap/65a0827d5e538.jpg"
+  },
+  {
+   "tvdbShowId": 404604,
+   "tvdbId": 10148169,
+   "seasonNumber": 1,
+   "episodeNumber": 7,
+   "absoluteEpisodeNumber": 7,
+   "title": "He's Gotta Have It",
+   "airDate": "2024-01-11",
+   "airDateUtc": "2024-01-11T11:00:00Z",
+   "runtime": 43,
+   "finaleType": "season",
+   "overview": "As the end of the school year approaches, Ted plots to help John lose his virginity.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10148169/screencap/65a082b4a92fd.jpg"
+  },
+  {
+   "tvdbShowId": 404604,
+   "tvdbId": 11504118,
+   "seasonNumber": 2,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 8,
+   "title": "Talk Dirty to Me",
+   "airDate": "2026-03-05",
+   "airDateUtc": "2026-03-05T11:00:00Z",
+   "runtime": 33,
+   "overview": "John and Ted use a phone in the school basement to call a phone-sex hotline; when the charges end up costing the school thousands of dollars, a hard-nosed special investigator from the school district is brought in to find the culprits.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11504118/screencap/69a96c9631db0.jpg"
+  },
+  {
+   "tvdbShowId": 404604,
+   "tvdbId": 11504119,
+   "seasonNumber": 2,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 9,
+   "title": "Mrs. Robicheck",
+   "airDate": "2026-03-05",
+   "airDateUtc": "2026-03-05T11:00:00Z",
+   "runtime": 33,
+   "overview": "Ted starts a risky affair with a married woman and becomes emotionally invested; Matty and Susan try to figure out the cause of Matty's erectile dysfunction.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11504119/screencap/69a96cb2052b0.jpg"
+  },
+  {
+   "tvdbShowId": 404604,
+   "tvdbId": 11504120,
+   "seasonNumber": 2,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 10,
+   "title": "Dungeons & Dealers",
+   "airDate": "2026-03-05",
+   "airDateUtc": "2026-03-05T11:00:00Z",
+   "runtime": 31,
+   "overview": "A weed shortage forces John, Ted and Blaire to complete a drug dealer's Dungeons & Dragons campaign; unaware that the reward is a bag of pot, Matty and Susan join the quest.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11504120/screencap/69a96cc56f82f.jpg"
+  },
+  {
+   "tvdbShowId": 404604,
+   "tvdbId": 11504121,
+   "seasonNumber": 2,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 11,
+   "title": "The Mom's Bombed Rom-Com",
+   "airDate": "2026-03-05",
+   "airDateUtc": "2026-03-05T11:00:00Z",
+   "runtime": 36,
+   "overview": "When Blaire and her girlfriend break up, all she wants to do is sit on the couch and watch rom-coms, to Matty's frustration; Ted's lie to John about hooking up with their elderly neighbor leads the boys to an unusual double date.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11504121/screencap/69a96cdbb3465.jpg"
+  },
+  {
+   "tvdbShowId": 404604,
+   "tvdbId": 11504122,
+   "seasonNumber": 2,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 12,
+   "title": "The Sword in the Stoned",
+   "airDate": "2026-03-05",
+   "airDateUtc": "2026-03-05T11:00:00Z",
+   "runtime": 33,
+   "overview": "Realizing John is light on extracurricular activities for college applications, John and Ted audition for the school play; Matty and Susan get part-time jobs at Dunkin' Donuts.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11504122/screencap/69a96cee0a07a.jpg"
+  },
+  {
+   "tvdbShowId": 404604,
+   "tvdbId": 11504123,
+   "seasonNumber": 2,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 13,
+   "title": "Roe v. Weed",
+   "airDate": "2026-03-05",
+   "airDateUtc": "2026-03-05T11:00:00Z",
+   "runtime": 31,
+   "overview": "After a meaningless hookup, Blaire finds herself navigating an unexpected pregnancy, causing a clash of opinions among the family.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11504123/screencap/69a96d009de9f.jpg"
+  },
+  {
+   "tvdbShowId": 404604,
+   "tvdbId": 11504124,
+   "seasonNumber": 2,
+   "episodeNumber": 7,
+   "absoluteEpisodeNumber": 14,
+   "title": "Susan Is the New Black",
+   "airDate": "2026-03-05",
+   "airDateUtc": "2026-03-05T11:00:00Z",
+   "runtime": 32,
+   "overview": "When a police officer finds John and Ted's weed during a traffic stop, Susan takes the fall for them and gets a 10-day jail sentence; she navigates life on the inside, while the family discovers what life on the outside is like without her.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11504124/screencap/69a96d11452e3.jpg"
+  },
+  {
+   "tvdbShowId": 404604,
+   "tvdbId": 11504125,
+   "seasonNumber": 2,
+   "episodeNumber": 8,
+   "absoluteEpisodeNumber": 15,
+   "title": "Fraudcast News",
+   "airDate": "2026-03-05",
+   "airDateUtc": "2026-03-05T11:00:00Z",
+   "runtime": 32,
+   "finaleType": "series",
+   "overview": "After a health scare, Matty is under doctor's orders to keep calm; this becomes especially challenging when the O.J. Simpson verdict is announced, leading the family to go to extreme lengths to keep him from learning the truth.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11504125/screencap/69a96d23d9857.jpg"
+  }
+ ]
+}

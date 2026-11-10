@@ -1,0 +1,208 @@
+{
+ "tvdbId": 464815,
+ "title": "Small Prophets",
+ "overview": "Since his girlfriend went missing seven years go Michael Sleep's life has been on hold. But a mystical recipe in an old journal promises to give the answers he's been longing for.",
+ "slug": "small-prophets",
+ "originalCountry": "gbr",
+ "originalLanguage": "eng",
+ "language": "eng",
+ "firstAired": "2026-02-09",
+ "lastAired": "2026-03-16",
+ "tvMazeId": 87306,
+ "tmdbId": 312693,
+ "imdbId": "tt38504111",
+ "malIds": [],
+ "anidbIds": [],
+ "aniListIds": [],
+ "lastUpdated": "2026-11-04T20:32:15Z",
+ "status": "Continuing",
+ "runtime": 29,
+ "timeOfDay": {
+  "hours": 22,
+  "minutes": 0
+ },
+ "originalNetwork": "BBC Two",
+ "network": "BBC Two",
+ "genres": [
+  "Comedy",
+  "Drama",
+  "Fantasy",
+  "Mystery"
+ ],
+ "rating": {
+  "count": 10195,
+  "value": "8.1"
+ },
+ "actors": [
+  {
+   "name": "Pearce Quigley",
+   "character": "Michael Sleep",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/322664/photo/686824488c40c.jpg"
+  },
+  {
+   "name": "Lauren Patel",
+   "character": "Kacey",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9101263/photo/631754efa67f7.jpg"
+  },
+  {
+   "name": "Michael Palin",
+   "character": "Brian",
+   "image": "https://artworks.thetvdb.com/banners/person/253896/5fe024347cf3c.jpg"
+  },
+  {
+   "name": "Mackenzie Crook",
+   "character": "Gordon",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/247992/photo/6577642668e3f.jpg"
+  },
+  {
+   "name": "Paul Kaye",
+   "character": "Roy",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/247863/photo/620767a9b9db3.jpg"
+  },
+  {
+   "name": "Sophie Willan",
+   "character": "Bev",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/493526/photo/60e2a44665f8a.jpg"
+  },
+  {
+   "name": "Jon Pointing",
+   "character": "Clive",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8110224/photo/65d8e5eb7eabd.jpg"
+  },
+  {
+   "name": "Shola Adewusi",
+   "character": "Olive",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/645702/photo/697c2200024ec.jpg"
+  },
+  {
+   "name": "Ed Kear",
+   "character": "Brigham",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/466559/photo/6166fe419f5f6.jpg"
+  },
+  {
+   "name": "Adam Wright",
+   "character": "Elliot",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9155734/photo/6a318babc5c3d.jpg"
+  },
+  {
+   "name": "Charlotte Mills",
+   "character": "Hilary",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9151321/photo/697c20ec964b7.jpg"
+  },
+  {
+   "name": "Howard Gossington",
+   "character": "Bob"
+  },
+  {
+   "name": "Kathryn Drysdale",
+   "character": "Bea",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/433137/photo/627ac28a74287.jpg"
+  }
+ ],
+ "images": [
+  {
+   "coverType": "Banner",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/464815/banners/698539cb45e2a.jpg"
+  },
+  {
+   "coverType": "Poster",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/464815/posters/6ac616cc034bd.jpg"
+  },
+  {
+   "coverType": "Fanart",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/464815/backgrounds/698539b640aa0.jpg"
+  }
+ ],
+ "seasons": [
+  {
+   "seasonNumber": 1,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2191785/posters/69853b056c453.jpg"
+    }
+   ]
+  }
+ ],
+ "episodes": [
+  {
+   "tvdbShowId": 464815,
+   "tvdbId": 11195990,
+   "seasonNumber": 1,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 1,
+   "title": "Episode 1",
+   "airDate": "2026-02-09",
+   "airDateUtc": "2026-02-09T22:00:00Z",
+   "runtime": 29,
+   "overview": "Since his girlfriend went missing seven years ago Michael Sleep’s life has been on hold. But a mystical recipe in an old journal promises to give the answers he’s been longing for.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11195990/screencap/6985372beef3b.jpg"
+  },
+  {
+   "tvdbShowId": 464815,
+   "tvdbId": 11195991,
+   "seasonNumber": 1,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 2,
+   "title": "Episode 2",
+   "airDate": "2026-02-16",
+   "airDateUtc": "2026-02-16T22:00:00Z",
+   "runtime": 29,
+   "overview": "Michael converts his shed into an alchemist’s laboratory but Clive is getting suspicious. Kacey invites Michael to the pub where he says too much about his mysterious experiment.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11195991/screencap/69853740bed79.jpg"
+  },
+  {
+   "tvdbShowId": 464815,
+   "tvdbId": 11195992,
+   "seasonNumber": 1,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 3,
+   "title": "Episode 3",
+   "airDate": "2026-02-23",
+   "airDateUtc": "2026-02-23T22:00:00Z",
+   "runtime": 29,
+   "overview": "Michael witnesses a crime and is questioned by the police. Meanwhile Clive is obsessing about a black rabbit and Kacey visits Marvin Gardens to meet the prophets and is shocked by what she sees.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11195992/screencap/6985374f84bfd.jpg"
+  },
+  {
+   "tvdbShowId": 464815,
+   "tvdbId": 11195993,
+   "seasonNumber": 1,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 4,
+   "title": "Episode 4",
+   "airDate": "2026-03-02",
+   "airDateUtc": "2026-03-02T22:00:00Z",
+   "runtime": 29,
+   "overview": "Clive is seething when a truckload of steaming horse manure is dumped in front of Michael’s house. Kacey comes round to help bury the jars and asks Michael about the hoarded boxes.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11195993/screencap/6985375db4984.jpg"
+  },
+  {
+   "tvdbShowId": 464815,
+   "tvdbId": 11195994,
+   "seasonNumber": 1,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 5,
+   "title": "Episode 5",
+   "airDate": "2026-03-09",
+   "airDateUtc": "2026-03-09T22:00:00Z",
+   "runtime": 29,
+   "overview": "Strange things are happening in Marvin Gardens and they’re starting to attract unwanted attention. It’s time for Kacey and Michael to exhume the prophets from their pile of manure.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11195994/screencap/6985376a9b775.jpg"
+  },
+  {
+   "tvdbShowId": 464815,
+   "tvdbId": 11195995,
+   "seasonNumber": 1,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 6,
+   "title": "Episode 6",
+   "airDate": "2026-03-16",
+   "airDateUtc": "2026-03-16T22:00:00Z",
+   "runtime": 29,
+   "finaleType": "season",
+   "overview": "The prophets are looking sick, Michael hasn’t asked his questions and all hell has broken out in Marvin Gardens. It seems like the end of the line, or the start of a new adventure.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11195995/screencap/69853777c0727.jpg"
+  }
+ ]
+}

@@ -31,7 +31,7 @@
           "releaseType": "SingleEpisode",
           "size": "119980"
         },
-        "date": "2026-11-08T20:58:07Z",
+        "date": "2026-11-09T22:19:15Z",
         "downloadId": "4271B834AED1835F13BD078CB4A9A98F00AC777F",
         "episode": {
           "airDate": "2025-03-04",
@@ -40,7 +40,7 @@
           "episodeNumber": 2,
           "hasFile": true,
           "id": 47,
-          "lastSearchTime": "2026-11-08T20:57:09Z",
+          "lastSearchTime": "2026-11-09T22:18:17Z",
           "monitored": false,
           "overview": "Matt Murdock takes on a new client, Hector Ayala. But this local hero from the Heights is more than he claims to be. Fisk learns the power of optics in his new and very public role.",
           "runtime": 47,
@@ -91,8 +91,8 @@
           "releaseType": "SingleEpisode",
           "size": "177860"
         },
-        "date": "2026-11-08T20:57:47Z",
-        "downloadId": "c4119cd06a044d60be1043396370761b",
+        "date": "2026-11-09T22:18:55Z",
+        "downloadId": "c860499553f64d7b8170eae60cd1a5b3",
         "episode": {
           "absoluteEpisodeNumber": 2,
           "airDate": "2025-01-09",
@@ -101,7 +101,7 @@
           "episodeNumber": 2,
           "hasFile": true,
           "id": 2,
-          "lastSearchTime": "2026-11-08T20:56:40Z",
+          "lastSearchTime": "2026-11-09T22:17:48Z",
           "monitored": false,
           "overview": "Robby helps siblings navigate their elderly father’s end-of-life care. Later, Samira fends off cops targeting a woman with a misunderstood condition.",
           "runtime": 50,
@@ -161,7 +161,7 @@
           "releaseType": "SingleEpisode",
           "size": "119980"
         },
-        "date": "2026-11-08T20:57:28Z",
+        "date": "2026-11-09T22:18:35Z",
         "downloadId": "SABnzbd_nzo_mock3",
         "episode": {
           "absoluteEpisodeNumber": 1,
@@ -171,7 +171,7 @@
           "episodeNumber": 1,
           "hasFile": true,
           "id": 1,
-          "lastSearchTime": "2026-11-08T20:56:40Z",
+          "lastSearchTime": "2026-11-09T22:17:48Z",
           "monitored": false,
           "overview": "While attempting to distract himself from the anniversary of his mentor’s death, Dr. Robby introduces a fresh batch of interns to life in the ER.",
           "runtime": 53,
@@ -700,7 +700,7 @@
     "sortKey": "date",
     "totalRecords": 446
   },
-  "recordedAt": "2026-11-08T20:58:47Z",
+  "recordedAt": "2026-11-09T22:19:55Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/history?page=1&pageSize=10&sortKey=date&sortDirection=descending&eventType=3&includeEpisode=true"

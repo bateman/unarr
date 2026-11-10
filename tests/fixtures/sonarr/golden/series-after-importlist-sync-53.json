@@ -1,0 +1,117 @@
+{
+  "body": {
+    "added": "2026-11-09T22:24:51Z",
+    "airTime": "21:00",
+    "alternateTitles": [],
+    "certification": "TV-MA",
+    "cleanTitle": "chernobyl",
+    "ended": true,
+    "firstAired": "2019-05-06T00:00:00Z",
+    "genres": [
+      "Drama",
+      "History",
+      "Mini-Series",
+      "Thriller"
+    ],
+    "id": 53,
+    "images": [
+      {
+        "coverType": "banner",
+        "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/360893/banners/6751caac5a993.jpg",
+        "url": "/MediaCover/53/banner.jpg?lastWrite=639298598921691280"
+      },
+      {
+        "coverType": "poster",
+        "remoteUrl": "https://artworks.thetvdb.com/banners/posters/5cc12861c93e4.jpg",
+        "url": "/MediaCover/53/poster.jpg?lastWrite=639298598922117122"
+      },
+      {
+        "coverType": "fanart",
+        "remoteUrl": "https://artworks.thetvdb.com/banners/series/360893/backgrounds/62017319.jpg",
+        "url": "/MediaCover/53/fanart.jpg?lastWrite=639298598922557122"
+      },
+      {
+        "coverType": "clearlogo",
+        "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/360893/clearlogo/611be4d52d6a8.png",
+        "url": "/MediaCover/53/clearlogo.png?lastWrite=639298598923037122"
+      }
+    ],
+    "imdbId": "tt7366338",
+    "languageProfileId": 1,
+    "lastAired": "2019-06-03T00:00:00Z",
+    "monitorNewItems": "all",
+    "monitored": true,
+    "network": "HBO",
+    "originalLanguage": {
+      "id": 1,
+      "name": "English"
+    },
+    "overview": "Chernobyl dramatizes the story of the 1986 nuclear accident — one of the worst man-made catastrophes in history — and the sacrifices made to save Europe from unimaginable disaster.",
+    "path": "/tv/Chernobyl (2019)",
+    "previousAiring": "2019-06-04T01:00:00Z",
+    "qualityProfileId": 10,
+    "ratings": {
+      "value": 9.3,
+      "votes": 1075848
+    },
+    "rootFolderPath": "/tv",
+    "runtime": 65,
+    "seasonFolder": true,
+    "seasons": [
+      {
+        "monitored": false,
+        "seasonNumber": 0,
+        "statistics": {
+          "episodeCount": 0,
+          "episodeFileCount": 0,
+          "percentOfEpisodes": 0,
+          "releaseGroups": [],
+          "sizeOnDisk": 0,
+          "totalEpisodeCount": 12
+        }
+      },
+      {
+        "monitored": true,
+        "seasonNumber": 1,
+        "statistics": {
+          "episodeCount": 5,
+          "episodeFileCount": 0,
+          "percentOfEpisodes": 0,
+          "previousAiring": "2019-06-04T01:00:00Z",
+          "releaseGroups": [],
+          "sizeOnDisk": 0,
+          "totalEpisodeCount": 5
+        }
+      }
+    ],
+    "seriesType": "standard",
+    "sortTitle": "chernobyl",
+    "statistics": {
+      "episodeCount": 5,
+      "episodeFileCount": 0,
+      "percentOfEpisodes": 0,
+      "releaseGroups": [],
+      "seasonCount": 1,
+      "sizeOnDisk": 0,
+      "totalEpisodeCount": 17
+    },
+    "status": "ended",
+    "tags": [
+      2
+    ],
+    "title": "Chernobyl",
+    "titleSlug": "chernobyl",
+    "tmdbId": 87108,
+    "tvMazeId": 30770,
+    "tvRageId": 0,
+    "tvdbId": 360893,
+    "useSceneNumbering": false,
+    "year": 2019
+  },
+  "recordedAt": "2026-11-09T22:25:35Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/series/53"
+  },
+  "status": 200
+}

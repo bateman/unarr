@@ -1,0 +1,9 @@
+{
+ "$from": "releaseprofile-create",
+ "$set": {
+  "required": [
+   "x265"
+  ],
+  "enabled": false
+ }
+}

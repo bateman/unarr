@@ -6,7 +6,11 @@ Request list format, one per line (blank lines and ``#`` comments ignored)::
     <name> <METHOD> <path-with-query> [body-file]
 
 The optional fourth column names a JSON file, relative to the request list,
-sent as the request body with ``Content-Type: application/json``. A path may
+sent as the request body with ``Content-Type: application/json``. A body
+file holding ``{"$from": "<name>", "$set": {...}}`` is derived instead: the
+body the response recorded as ``<name>`` carried, its top-level keys
+replaced by those of ``$set`` (what a client does that reads a resource,
+changes it and sends it back whole, the UI's series editor for one). A path may
 carry ``{id:name}``: the ``id`` the response recorded as ``name`` returned,
 for resources the application numbers itself (commands). ``sleep N`` lines
 pause the recording for the application's background work.
@@ -57,6 +61,21 @@ def substitute_ids(path: str, ids: dict[str, str]) -> str:
     return path
 
 
+def derive_body(raw: bytes, out: Path) -> bytes:
+    """A ``$from``/``$set`` body file resolved against the goldens recorded so far."""
+    try:
+        spec = json.loads(raw)
+    except json.JSONDecodeError:
+        return raw
+    if not isinstance(spec, dict) or "$from" not in spec:
+        return raw
+    source = json.loads((out / f"{spec['$from']}.json").read_text())["body"]
+    if isinstance(source, list):
+        source = source[0]
+    source.update(spec.get("$set", {}))
+    return json.dumps(source).encode()
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--base-url", required=True)
@@ -99,7 +118,7 @@ def main():
             name, method, path, *rest = line.split(maxsplit=4)[1:]
         data = None
         if rest:
-            data = (args.requests.parent / rest[0]).read_bytes()
+            data = derive_body((args.requests.parent / rest[0]).read_bytes(), args.out)
         path = substitute_ids(path, ids)
         target = args.mock_url.rstrip("/") if to_mock else base
         req = urllib.request.Request(target + urllib.parse.quote(path, safe="/?&=:%+,-._~"), data=data, method=method)
@@ -123,6 +142,9 @@ def main():
             body = raw.decode(errors="replace")
         if isinstance(body, dict) and isinstance(body.get("id"), int):
             ids[name] = str(body["id"])
+        elif isinstance(body, list) and body and isinstance(body[0], dict) and isinstance(body[0].get("id"), int):
+            # A list names its first item: the backup a listing just showed.
+            ids[name] = str(body[0]["id"])
         if to_mock and name == "-":
             print(f"[golden] mock {status} {method} {path} (not recorded)", file=sys.stderr)
             continue

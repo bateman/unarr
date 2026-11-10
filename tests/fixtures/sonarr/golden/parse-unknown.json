@@ -1,0 +1,79 @@
+{
+  "body": {
+    "customFormatScore": 0,
+    "customFormats": [
+      {
+        "id": 36,
+        "name": "Language not Italian"
+      },
+      {
+        "id": 41,
+        "name": "Language: Not Original"
+      }
+    ],
+    "episodes": [],
+    "languages": [
+      {
+        "id": 0,
+        "name": "Unknown"
+      }
+    ],
+    "parsedEpisodeInfo": {
+      "absoluteEpisodeNumbers": [],
+      "episodeNumbers": [
+        4
+      ],
+      "fullSeason": false,
+      "isAbsoluteNumbering": false,
+      "isDaily": false,
+      "isMiniSeries": false,
+      "isMultiSeason": false,
+      "isPartialSeason": false,
+      "isPossibleSceneSeasonSpecial": false,
+      "isPossibleSpecialEpisode": false,
+      "isSeasonExtra": false,
+      "isSplitEpisode": false,
+      "languages": [
+        {
+          "id": 0,
+          "name": "Unknown"
+        }
+      ],
+      "quality": {
+        "quality": {
+          "id": 4,
+          "name": "HDTV-720p",
+          "resolution": 720,
+          "source": "television"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "releaseGroup": "GRP",
+      "releaseHash": "",
+      "releaseTitle": "Some.Other.Show.S03E04.720p.HDTV.x264-GRP",
+      "releaseTokens": ".720p.HDTV.x264-GRP",
+      "releaseType": "singleEpisode",
+      "seasonNumber": 3,
+      "seasonPart": 0,
+      "seriesTitle": "Some Other Show",
+      "seriesTitleInfo": {
+        "title": "Some Other Show",
+        "titleWithoutYear": "Some Other Show",
+        "year": 0
+      },
+      "special": false,
+      "specialAbsoluteEpisodeNumbers": []
+    },
+    "title": "Some.Other.Show.S03E04.720p.HDTV.x264-GRP"
+  },
+  "recordedAt": "2026-11-09T22:24:32Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/parse?title=Some.Other.Show.S03E04.720p.HDTV.x264-GRP"
+  },
+  "status": 200
+}

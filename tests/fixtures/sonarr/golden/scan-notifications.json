@@ -73,7 +73,7 @@
             "thumbnail": {
               "url": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg"
             },
-            "timestamp": "2026-11-08T20:59:56.7778065Z",
+            "timestamp": "2026-11-09T22:21:04.4969189Z",
             "title": "The Pitt - 1x04 - 10:00 A.M.",
             "url": "http://thetvdb.com/?tab=series&id=448176"
           }
@@ -101,7 +101,7 @@
           ]
         },
         "episodeFile": {
-          "dateAdded": "2026-11-08T20:59:56.7676527Z",
+          "dateAdded": "2026-11-09T22:21:04.4773625Z",
           "id": 1079,
           "languages": [
             {
@@ -241,7 +241,7 @@
       "service": "plex"
     }
   ],
-  "recordedAt": "2026-11-08T21:00:08Z",
+  "recordedAt": "2026-11-09T22:21:16Z",
   "request": {
     "method": "GET",
     "path": "/mock/notifications",

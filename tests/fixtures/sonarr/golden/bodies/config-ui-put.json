@@ -1,0 +1,8 @@
+{
+ "$from": "config-ui",
+ "$set": {
+  "firstDayOfWeek": 0,
+  "timeFormat": "h(:mm)a",
+  "theme": "dark"
+ }
+}

@@ -32,6 +32,22 @@ pub fn free_space(path: &Path) -> Option<i64> {
     disk_space(path).map(|(free, _)| free)
 }
 
+/// Keep large buffers out of the allocator's arenas. glibc serves a request
+/// above its mmap threshold with a mapping of its own, returned on free,
+/// but raises that threshold (up to 32 MiB) each time such a mapping is
+/// freed; from then on a decoded cover or a large response comes from the
+/// arena of whichever thread asked, and stays there. Setting the threshold
+/// fixes it. Call once at start; a no-op on other allocators.
+pub fn tune_allocator() {
+    #[cfg(all(target_os = "linux", target_env = "gnu"))]
+    {
+        // SAFETY: mallopt only sets a tunable of the allocator.
+        unsafe {
+            libc::mallopt(libc::M_MMAP_THRESHOLD, 1024 * 1024);
+        }
+    }
+}
+
 /// Hand the pages the allocator no longer uses back to the system. glibc
 /// keeps freed memory for reuse, so a process that read a whole database
 /// for an import, or built a large response once, looks that big for good;

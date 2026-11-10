@@ -13,22 +13,22 @@
       "updateScheduledTask": true
     },
     "commandName": "Missing Episode Search",
-    "duration": "00:00:00.0081931",
-    "ended": "2026-11-08T20:56:25Z",
+    "duration": "00:00:00.0083486",
+    "ended": "2026-11-09T22:17:33Z",
     "id": 461664,
     "message": "Completed search for 0 episodes. 0 reports downloaded.",
     "name": "MissingEpisodeSearch",
     "priority": "normal",
-    "queued": "2026-11-08T20:56:25Z",
+    "queued": "2026-11-09T22:17:33Z",
     "result": "successful",
     "sendUpdatesToClient": true,
-    "started": "2026-11-08T20:56:25Z",
-    "stateChangeTime": "2026-11-08T20:56:25Z",
+    "started": "2026-11-09T22:17:33Z",
+    "stateChangeTime": "2026-11-09T22:17:33Z",
     "status": "completed",
     "trigger": "manual",
     "updateScheduledTask": true
   },
-  "recordedAt": "2026-11-08T20:56:40Z",
+  "recordedAt": "2026-11-09T22:17:48Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/command/461664"

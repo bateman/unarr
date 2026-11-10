@@ -155,4 +155,4 @@ folders, `@eaDir`, `Plex Versions`, the extras folders from `Extras` to
 `.DS_Store`, samples, the clients' working folders). A health run after an import is debounced
 five seconds, as the originals', so the replay takes a minute instead of
 half of one. `docs/DESIGN.md` section 13 records the decisions and section
-14 what stays open.
+15 what stays open.

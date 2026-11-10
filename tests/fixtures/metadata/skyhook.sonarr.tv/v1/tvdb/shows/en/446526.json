@@ -1,0 +1,266 @@
+{
+ "tvdbId": 446526,
+ "title": "Chad Powers",
+ "overview": "Eight years after an unforgivable mistake nukes his promising college football career, hotshot quarterback Russ Holliday tries to resurrect his dreams by disguising himself as Chad Powers - a talented oddball who walks on to the struggling South Georgia Catfish.",
+ "slug": "chad-powers",
+ "originalCountry": "usa",
+ "originalLanguage": "eng",
+ "language": "eng",
+ "firstAired": "2025-09-30",
+ "lastAired": "2026-09-03",
+ "tvMazeId": 74865,
+ "tmdbId": 247168,
+ "imdbId": "tt31449991",
+ "malIds": [],
+ "anidbIds": [],
+ "aniListIds": [],
+ "lastUpdated": "2026-11-03T16:48:31Z",
+ "status": "Continuing",
+ "runtime": 33,
+ "timeOfDay": {
+  "hours": 0,
+  "minutes": 0
+ },
+ "originalNetwork": "Hulu",
+ "network": "Hulu",
+ "genres": [
+  "Comedy",
+  "Sport"
+ ],
+ "contentRating": "TV-MA",
+ "rating": {
+  "count": 19794,
+  "value": "7.6"
+ },
+ "actors": [
+  {
+   "name": "Glen Powell",
+   "character": "Russ \"Chad Powers\" Holliday",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/330022/photo/64dc36ef637ea.jpg"
+  },
+  {
+   "name": "Steve Zahn",
+   "character": "Jake Hudson",
+   "image": "https://artworks.thetvdb.com/banners/person/450538/primary.jpg"
+  },
+  {
+   "name": "Perry Mattfeld",
+   "character": "Ricky"
+  },
+  {
+   "name": "Frankie A Rodriguez",
+   "character": "Danny Cruz"
+  },
+  {
+   "name": "Wynn Everett",
+   "character": "Tricia",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/317045/photo/67daf55e5bd3e.jpg"
+  },
+  {
+   "name": "Quentin Plair",
+   "character": "Coach Byrd",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8812917/photo/61e3afa388578.jpg"
+  },
+  {
+   "name": "Clayne Crawford",
+   "character": "Coach Dobbs",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/252229/photo/64fc624ca332b.jpg"
+  },
+  {
+   "name": "Colton Ryan",
+   "character": "Gerry",
+   "image": "https://artworks.thetvdb.com/banners/person/8172032/5ef7397750ada.jpg"
+  },
+  {
+   "name": "Toby Huss",
+   "character": "Mike Holliday",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/260677/photo/639b1a6b36494.jpg"
+  }
+ ],
+ "images": [
+  {
+   "coverType": "Banner",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/446526/banners/68de3f6c12e31.jpg"
+  },
+  {
+   "coverType": "Poster",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/446526/posters/6a8a91872f132.jpg"
+  },
+  {
+   "coverType": "Fanart",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/446526/backgrounds/6a9a76c1352ec.jpg"
+  },
+  {
+   "coverType": "Clearlogo",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/446526/clearlogo/68de3f7b7faac.png"
+  }
+ ],
+ "seasons": [
+  {
+   "seasonNumber": 1,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2113073/posters/6a9a9b5e52c28.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 2,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2220063/posters/6a9a9b4316796.jpg"
+    }
+   ]
+  }
+ ],
+ "episodes": [
+  {
+   "tvdbShowId": 446526,
+   "tvdbId": 10327419,
+   "seasonNumber": 1,
+   "episodeNumber": 1,
+   "title": "1st Quarter",
+   "airDate": "2025-09-30",
+   "airDateUtc": "2025-09-30T04:00:00Z",
+   "runtime": 40,
+   "overview": "Years after bad boy QB Russ Holliday nuked his college football career, he attempts to walk on to the struggling South Georgia Catfish program disguised as a young man named Chad Powers.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10327419/screencap/68e05a27a0c39.jpg"
+  },
+  {
+   "tvdbShowId": 446526,
+   "tvdbId": 11142053,
+   "seasonNumber": 1,
+   "episodeNumber": 2,
+   "title": "2nd Quarter",
+   "airDate": "2025-09-30",
+   "airDateUtc": "2025-09-30T04:00:00Z",
+   "runtime": 33,
+   "overview": "Chad struggles to compete for the starting QB job, then struggles even more maintaining his new identity at Coach Hudson’s lake house barbecue.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11142053/screencap/68e05a21d07d3.jpg"
+  },
+  {
+   "tvdbShowId": 446526,
+   "tvdbId": 11142054,
+   "seasonNumber": 1,
+   "episodeNumber": 3,
+   "title": "3rd Quarter",
+   "airDate": "2025-10-07",
+   "airDateUtc": "2025-10-07T04:00:00Z",
+   "runtime": 27,
+   "overview": "It’s the second half of the season opener against Ole Miss and the Catfish are losing. Stuck on the sidelines together, Chad and Ricky team up and try to save the day.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11142054/screencap/68e059f2627da.jpg"
+  },
+  {
+   "tvdbShowId": 446526,
+   "tvdbId": 11142055,
+   "seasonNumber": 1,
+   "episodeNumber": 4,
+   "title": "4th Quarter",
+   "airDate": "2025-10-14",
+   "airDateUtc": "2025-10-14T04:00:00Z",
+   "runtime": 28,
+   "overview": "The night before an away game in Knoxville, Russ and Danny must sneak out of the team hotel and go on a dangerous mission behind enemy lines.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11142055/screencap/68e059f0c8e83.jpg"
+  },
+  {
+   "tvdbShowId": 446526,
+   "tvdbId": 11142056,
+   "seasonNumber": 1,
+   "episodeNumber": 5,
+   "title": "5th Quarter",
+   "airDate": "2025-10-21",
+   "airDateUtc": "2025-10-21T04:00:00Z",
+   "runtime": 36,
+   "overview": "The Catfish are 5-0, Chad Powers is a superstar, and ESPN wants to feature him on College Gameday. What could go wrong?",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11142056/screencap/68edce3f4f54a.jpg"
+  },
+  {
+   "tvdbShowId": 446526,
+   "tvdbId": 11142057,
+   "seasonNumber": 1,
+   "episodeNumber": 6,
+   "title": "6th Quarter",
+   "airDate": "2025-10-28",
+   "airDateUtc": "2025-10-28T04:00:00Z",
+   "runtime": 37,
+   "finaleType": "season",
+   "overview": "On the eve of the biggest game of the season, the truth about Chad Powers threatens to emerge.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11142057/screencap/68edce905e70d.jpg"
+  },
+  {
+   "tvdbShowId": 446526,
+   "tvdbId": 11774116,
+   "seasonNumber": 2,
+   "episodeNumber": 1,
+   "title": "7th Quarter",
+   "airDate": "2026-09-03",
+   "airDateUtc": "2026-09-03T04:00:00Z",
+   "runtime": 35,
+   "overview": "Russ and Danny's tenuous new alliance with Ricky is tested when Chad suffers a mid-game injury.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11774116/screencap/6a95c62a2bf3e.jpg"
+  },
+  {
+   "tvdbShowId": 446526,
+   "tvdbId": 11774117,
+   "seasonNumber": 2,
+   "episodeNumber": 2,
+   "title": "8th Quarter",
+   "airDate": "2026-09-03",
+   "airDateUtc": "2026-09-03T04:00:00Z",
+   "runtime": 34,
+   "overview": "Ahead of the team’s big bye week house party, Coach Hudson grows increasingly suspicious of Chad’s behavior.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11774117/screencap/6a95c641e3a94.jpg"
+  },
+  {
+   "tvdbShowId": 446526,
+   "tvdbId": 11774118,
+   "seasonNumber": 2,
+   "episodeNumber": 3,
+   "title": "9th Quarter",
+   "airDate": "2026-09-03",
+   "airDateUtc": "2026-09-03T04:00:00Z",
+   "runtime": 28,
+   "overview": "With the Catfish stranded in the airport after a tough away game, Tricia cozies up to Chad – and starts asking dangerous questions.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11774118/screencap/6a95c658d1129.jpg"
+  },
+  {
+   "tvdbShowId": 446526,
+   "tvdbId": 11774119,
+   "seasonNumber": 2,
+   "episodeNumber": 4,
+   "title": "10th Quarter",
+   "airDate": "2026-09-03",
+   "airDateUtc": "2026-09-03T04:00:00Z",
+   "runtime": 28,
+   "overview": "To legitimize his backstory, Russ brings his real father to the Catfish homecoming banquet as Chad’s dad – Howard Powers.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11774119/screencap/6a95c6632f95b.jpg"
+  },
+  {
+   "tvdbShowId": 446526,
+   "tvdbId": 11774120,
+   "seasonNumber": 2,
+   "episodeNumber": 5,
+   "title": "11th Quarter",
+   "airDate": "2026-09-03",
+   "airDateUtc": "2026-09-03T04:00:00Z",
+   "runtime": 31,
+   "overview": "Gerry pursues the truth about Chad Powers, while Russ, Ricky, and Danny do everything they can to stop him.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11774120/screencap/6a95c66db956b.jpg"
+  },
+  {
+   "tvdbShowId": 446526,
+   "tvdbId": 11774121,
+   "seasonNumber": 2,
+   "episodeNumber": 6,
+   "title": "12th Quarter",
+   "airDate": "2026-09-03",
+   "airDateUtc": "2026-09-03T04:00:00Z",
+   "runtime": 37,
+   "finaleType": "season",
+   "overview": "Chad and the Catfish must beat Texas to make the Playoff, but Gerry has other plans.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11774121/screencap/6a95c67d7268d.jpg"
+  }
+ ]
+}

@@ -1,0 +1,17 @@
+{
+ "series": [
+  {
+   "id": 50,
+   "monitored": true,
+   "seasons": [
+    {
+     "seasonNumber": 2,
+     "monitored": false
+    }
+   ]
+  }
+ ],
+ "monitoringOptions": {
+  "monitor": "future"
+ }
+}

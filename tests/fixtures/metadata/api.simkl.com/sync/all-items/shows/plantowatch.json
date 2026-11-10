@@ -1,0 +1,118 @@
+{
+ "shows": [
+  {
+   "added_to_watchlist_at": "2026-11-01T10:00:00Z",
+   "last_watched_at": null,
+   "user_rated_at": null,
+   "user_rating": null,
+   "status": "plantowatch",
+   "last_watched": null,
+   "next_to_watch": "S01E01",
+   "watched_episodes_count": 0,
+   "total_episodes_count": 0,
+   "not_aired_episodes_count": 0,
+   "show": {
+    "title": "The Pitt",
+    "poster": "",
+    "year": 2025,
+    "ids": {
+     "simkl": 9000001,
+     "slug": "the-pitt",
+     "imdb": "tt31938062",
+     "tmdb": "250307",
+     "tvdb": "448176"
+    }
+   }
+  },
+  {
+   "added_to_watchlist_at": "2026-11-01T10:00:00Z",
+   "last_watched_at": null,
+   "user_rated_at": null,
+   "user_rating": null,
+   "status": "plantowatch",
+   "last_watched": null,
+   "next_to_watch": "S01E01",
+   "watched_episodes_count": 0,
+   "total_episodes_count": 0,
+   "not_aired_episodes_count": 0,
+   "show": {
+    "title": "The Pete Holmes Show",
+    "poster": "",
+    "year": 2013,
+    "ids": {
+     "simkl": 9000002,
+     "slug": "the-pete-holmes-show",
+     "imdb": "tt3120408",
+     "tvdb": "271728"
+    }
+   }
+  },
+  {
+   "added_to_watchlist_at": "2026-11-01T10:00:00Z",
+   "last_watched_at": null,
+   "user_rated_at": null,
+   "user_rating": null,
+   "status": "plantowatch",
+   "last_watched": null,
+   "next_to_watch": "S01E01",
+   "watched_episodes_count": 0,
+   "total_episodes_count": 0,
+   "not_aired_episodes_count": 0,
+   "show": {
+    "title": "Chernobyl",
+    "poster": "",
+    "year": 2019,
+    "ids": {
+     "simkl": 9000003,
+     "slug": "chernobyl",
+     "imdb": "tt7366338",
+     "tmdb": "87108",
+     "tvdb": "360893"
+    }
+   }
+  },
+  {
+   "added_to_watchlist_at": "2026-11-01T10:00:00Z",
+   "last_watched_at": null,
+   "user_rated_at": null,
+   "user_rating": null,
+   "status": "plantowatch",
+   "last_watched": null,
+   "next_to_watch": "S01E01",
+   "watched_episodes_count": 0,
+   "total_episodes_count": 0,
+   "not_aired_episodes_count": 0,
+   "show": {
+    "title": "Band of Brothers",
+    "poster": "",
+    "year": 2001,
+    "ids": {
+     "simkl": 9000004,
+     "slug": "band-of-brothers",
+     "imdb": "tt0185906"
+    }
+   }
+  },
+  {
+   "added_to_watchlist_at": "2026-11-01T10:00:00Z",
+   "last_watched_at": null,
+   "user_rated_at": null,
+   "user_rating": null,
+   "status": "plantowatch",
+   "last_watched": null,
+   "next_to_watch": "S01E01",
+   "watched_episodes_count": 0,
+   "total_episodes_count": 0,
+   "not_aired_episodes_count": 0,
+   "show": {
+    "title": "A Show Nobody Has Indexed",
+    "poster": "",
+    "year": 2026,
+    "ids": {
+     "simkl": 9000005,
+     "slug": "a-show-nobody-has-indexed"
+    }
+   }
+  }
+ ]
+}

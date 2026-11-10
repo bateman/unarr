@@ -8,7 +8,7 @@
           "name": "Language not Italian"
         }
       ],
-      "dateAdded": "2026-11-08T20:57:28Z",
+      "dateAdded": "2026-11-09T22:18:35Z",
       "id": 1073,
       "indexerFlags": 0,
       "languages": [
@@ -60,7 +60,7 @@
     {
       "customFormatScore": 0,
       "customFormats": [],
-      "dateAdded": "2026-11-08T20:57:47Z",
+      "dateAdded": "2026-11-09T22:18:55Z",
       "id": 1074,
       "indexerFlags": 0,
       "languages": [
@@ -114,7 +114,7 @@
       "size": 177860
     }
   ],
-  "recordedAt": "2026-11-08T20:58:48Z",
+  "recordedAt": "2026-11-09T22:19:55Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/episodefile?seriesId=1"

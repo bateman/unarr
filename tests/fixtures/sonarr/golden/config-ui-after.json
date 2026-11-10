@@ -1,0 +1,20 @@
+{
+  "body": {
+    "calendarWeekColumnHeader": "ddd DD/MM",
+    "enableColorImpairedMode": false,
+    "firstDayOfWeek": 0,
+    "id": 1,
+    "longDateFormat": "dddd, D MMMM YYYY",
+    "shortDateFormat": "DD MMM YYYY",
+    "showRelativeDates": true,
+    "theme": "dark",
+    "timeFormat": "h(:mm)a",
+    "uiLanguage": 1
+  },
+  "recordedAt": "2026-11-09T22:24:42Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/config/ui"
+  },
+  "status": 200
+}

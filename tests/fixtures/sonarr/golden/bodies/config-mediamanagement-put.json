@@ -1,0 +1,8 @@
+{
+ "$from": "config-mediamanagement",
+ "$set": {
+  "recycleBinCleanupDays": 14,
+  "deleteEmptyFolders": true,
+  "downloadPropersAndRepacks": "doNotUpgrade"
+ }
+}

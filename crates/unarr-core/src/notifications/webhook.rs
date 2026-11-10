@@ -104,13 +104,19 @@ fn series_json(series: &Series, ctx: &Context<'_>) -> Value {
             let ext = if i.cover_type == "clearlogo" { "png" } else { "jpg" };
             let mut o = Object::new();
             o.set("coverType", json!(i.cover_type));
-            o.set(
-                "url",
-                json!(format!(
+            let url = match &ctx.identity.media_cover_dir {
+                Some(dir) => {
+                    crate::tv::covers::local_url(dir, &ctx.identity.url_base, series.id, &i.cover_type)
+                }
+                None => None,
+            }
+            .unwrap_or_else(|| {
+                format!(
                     "{}/MediaCover/{}/{}.{ext}",
                     ctx.identity.url_base, series.id, i.cover_type
-                )),
-            );
+                )
+            });
+            o.set("url", json!(url));
             o.opt("remoteUrl", i.remote_url.as_ref());
             o.done()
         })
@@ -419,6 +425,32 @@ pub async fn on_episode_file_delete(
     o.set("episodes", episodes_json(m.episodes));
     o.set("episodeFile", file_json(m.series, m.file));
     o.set("deleteReason", json!(delete_reason(m.reason)));
+    send(http, &settings, &o.done()).await.map_err(send_error_message)
+}
+
+pub async fn on_series_add(
+    http: &reqwest::Client,
+    def: &NotificationDefinition,
+    series: &Series,
+    ctx: &Context<'_>,
+) -> Result<(), String> {
+    let settings = Settings::from_value(&def.settings);
+    let mut o = base("SeriesAdd", ctx);
+    o.set("series", series_json(series, ctx));
+    send(http, &settings, &o.done()).await.map_err(send_error_message)
+}
+
+pub async fn on_series_delete(
+    http: &reqwest::Client,
+    def: &NotificationDefinition,
+    series: &Series,
+    deleted_files: bool,
+    ctx: &Context<'_>,
+) -> Result<(), String> {
+    let settings = Settings::from_value(&def.settings);
+    let mut o = base("SeriesDelete", ctx);
+    o.set("series", series_json(series, ctx));
+    o.set("deletedFiles", json!(deleted_files));
     send(http, &settings, &o.done()).await.map_err(send_error_message)
 }
 

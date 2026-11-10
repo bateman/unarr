@@ -1,0 +1,211 @@
+{
+ "tvdbId": 426669,
+ "title": "Crystal Lake",
+ "overview": "Single mother Pam Voorhees has been unable to shake her grief after her young, sickly son Jason tragically drowned in the town lake almost a year before. When two strangers arrive at Pam's door digging into her past, a disturbing chain of events is set into motion, leaving the townspeople of Crystal Lake wondering: just who is Pam Voorhees?",
+ "slug": "crystal-lake",
+ "originalCountry": "usa",
+ "originalLanguage": "eng",
+ "language": "eng",
+ "firstAired": "2026-10-15",
+ "lastAired": "2026-10-15",
+ "tvMazeId": 64960,
+ "tmdbId": 213562,
+ "imdbId": "tt23148340",
+ "malIds": [],
+ "anidbIds": [],
+ "aniListIds": [],
+ "lastUpdated": "2026-11-09T03:44:37Z",
+ "status": "Continuing",
+ "runtime": 50,
+ "timeOfDay": {
+  "hours": 3,
+  "minutes": 0
+ },
+ "originalNetwork": "Peacock",
+ "network": "Peacock",
+ "genres": [
+  "Drama"
+ ],
+ "contentRating": "16",
+ "rating": {
+  "count": 26096,
+  "value": "7.6"
+ },
+ "actors": [
+  {
+   "name": "Linda Cardellini",
+   "character": "Pamela Voorhees",
+   "image": "https://artworks.thetvdb.com/banners/person/266557/5eb9876cca32a.jpg"
+  },
+  {
+   "name": "William Catlett",
+   "character": "Levon Brooks",
+   "image": "https://artworks.thetvdb.com/banners/person/8089059/62068249.jpg"
+  },
+  {
+   "name": "Callum Vinson",
+   "character": "Jason Voorhees",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9139090/photo/67d23d3a567ad.jpg"
+  },
+  {
+   "name": "Gwendolyn Sundstrom",
+   "character": "Grace Snell",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9158369/photo/6ad3f2a4ba343.jpg"
+  },
+  {
+   "name": "Danielle Kotch",
+   "character": "Claudette"
+  },
+  {
+   "name": "Cameron Scoggins",
+   "character": "Dorf"
+  },
+  {
+   "name": "Joy Suprano",
+   "character": "Rita"
+  },
+  {
+   "name": "Nick Cordileone",
+   "character": "Ralph",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9158472/photo/6ada73b7c69c7.jpg"
+  },
+  {
+   "name": "Devin Kessler",
+   "character": "Brianna Brooks",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9158471/photo/6ada7347d3136.jpg"
+  },
+  {
+   "name": "Manon Gage",
+   "character": "Harmony",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9158473/photo/6ada745737fec.jpg"
+  }
+ ],
+ "images": [
+  {
+   "coverType": "Banner",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/426669/banners/6a97089173849.jpg"
+  },
+  {
+   "coverType": "Poster",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/426669/posters/6a56eb4470204.jpg"
+  },
+  {
+   "coverType": "Fanart",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/426669/backgrounds/6ad1e68f82f63.jpg"
+  },
+  {
+   "coverType": "Clearlogo",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/426669/clearlogo/6aaaeb6967ab7.png"
+  }
+ ],
+ "seasons": [
+  {
+   "seasonNumber": 1,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2027867/posters/6acc4787129ea.jpg"
+    }
+   ]
+  }
+ ],
+ "episodes": [
+  {
+   "tvdbShowId": 426669,
+   "tvdbId": 9431113,
+   "seasonNumber": 1,
+   "episodeNumber": 1,
+   "title": "Camp Crystal",
+   "airDate": "2026-10-15",
+   "airDateUtc": "2026-10-15T07:00:00Z",
+   "runtime": 56,
+   "overview": "Camp Crystal Lake's idyllic summer is cut short by Jason's death; as the town moves on, Pam continues looking for him; Levon invites her to Founder's Day, but it only triggers Pam's pain; as she runs from her present, Pam is soon met with her past.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9431113/screencap/6acb1abcc060d.jpg"
+  },
+  {
+   "tvdbShowId": 426669,
+   "tvdbId": 11252252,
+   "seasonNumber": 1,
+   "episodeNumber": 2,
+   "title": "Part 2",
+   "airDate": "2026-10-15",
+   "airDateUtc": "2026-10-15T07:00:00Z",
+   "runtime": 53,
+   "overview": "While on a date with Levon, Pam bumps into Rita and is invited to a weekend seminar with a self-help guru; Grace goes to a high school party only to be sent away by Claudette; something sinister takes revenge for Grace.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11252252/screencap/6acb180197be9.jpg"
+  },
+  {
+   "tvdbShowId": 426669,
+   "tvdbId": 11252253,
+   "seasonNumber": 1,
+   "episodeNumber": 3,
+   "title": "Part III",
+   "airDate": "2026-10-15",
+   "airDateUtc": "2026-10-15T07:00:00Z",
+   "runtime": 48,
+   "overview": "The townspeople go bear hunting against Levon's orders; Pam and Levon bond over the loss of their loved ones; Pam visits Grace at her apartment and suspects she is being abused, leading to a confrontation with her mother, Valerie.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11252253/screencap/6acb17cf1f28f.jpg"
+  },
+  {
+   "tvdbShowId": 426669,
+   "tvdbId": 11252254,
+   "seasonNumber": 1,
+   "episodeNumber": 4,
+   "title": "A New Beginning",
+   "airDate": "2026-10-15",
+   "airDateUtc": "2026-10-15T07:00:00Z",
+   "runtime": 53,
+   "overview": "Willow looks for her friends; Pam returns to work at the camp alongside a group of new counselors.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11252254/screencap/6acb17a97847e.jpg"
+  },
+  {
+   "tvdbShowId": 426669,
+   "tvdbId": 11252255,
+   "seasonNumber": 1,
+   "episodeNumber": 5,
+   "title": "The New Blood",
+   "airDate": "2026-10-15",
+   "airDateUtc": "2026-10-15T07:00:00Z",
+   "runtime": 49,
+   "overview": "Camp Crystal Lake reopens despite the mounting death toll; Pam discovers life-changing news.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11252255/screencap/6acb17750325f.jpg"
+  },
+  {
+   "tvdbShowId": 426669,
+   "tvdbId": 11252256,
+   "seasonNumber": 1,
+   "episodeNumber": 6,
+   "title": "Kill Them, Mommy",
+   "airDate": "2026-10-15",
+   "airDateUtc": "2026-10-15T07:00:00Z",
+   "runtime": 44,
+   "overview": "The counselors' drug trip takes a chilling turn; Briana receives a mysterious envelope.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11252256/screencap/6acb175adef02.jpg"
+  },
+  {
+   "tvdbShowId": 426669,
+   "tvdbId": 11252257,
+   "seasonNumber": 1,
+   "episodeNumber": 7,
+   "title": "Friday...",
+   "airDate": "2026-10-15",
+   "airDateUtc": "2026-10-15T07:00:00Z",
+   "runtime": 51,
+   "overview": "In the past, a young Jason shows alarming symptoms that lead Pam to question life as she knows it.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11252257/screencap/6acb1711dbb7c.jpg"
+  },
+  {
+   "tvdbShowId": 426669,
+   "tvdbId": 11252258,
+   "seasonNumber": 1,
+   "episodeNumber": 8,
+   "title": "The Final Chapter",
+   "airDate": "2026-10-15",
+   "airDateUtc": "2026-10-15T07:00:00Z",
+   "runtime": 43,
+   "finaleType": "season",
+   "overview": "Elias arrives in Crystal Lake determined to find his family; Levon and Elias have a heated clash.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11252258/screencap/6acb15eca6302.jpg"
+  }
+ ]
+}

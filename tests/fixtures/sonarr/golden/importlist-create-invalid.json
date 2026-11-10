@@ -1,0 +1,48 @@
+{
+  "body": [
+    {
+      "attemptedValue": "",
+      "errorCode": "NotEmptyValidator",
+      "errorMessage": "'Name' must not be empty.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Name",
+        "propertyValue": ""
+      },
+      "propertyName": "Name",
+      "severity": "error"
+    },
+    {
+      "attemptedValue": "/nowhere",
+      "errorCode": "RootFolderExistsValidator",
+      "errorMessage": "Root folder '/nowhere' does not exist",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "path": "/nowhere",
+        "propertyName": "Root Folder Path",
+        "propertyValue": "/nowhere"
+      },
+      "propertyName": "RootFolderPath",
+      "severity": "error"
+    },
+    {
+      "attemptedValue": 999,
+      "errorCode": "QualityProfileExistsValidator",
+      "errorMessage": "Quality Profile does not exist",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Quality Profile Id",
+        "propertyValue": 999
+      },
+      "propertyName": "QualityProfileId",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-09T22:24:49Z",
+  "request": {
+    "body": "bodies/importlist-create-invalid.json",
+    "method": "POST",
+    "path": "/api/v3/importlist"
+  },
+  "status": 400
+}

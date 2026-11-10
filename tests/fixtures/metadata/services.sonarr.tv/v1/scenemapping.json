@@ -1,0 +1,350 @@
+[
+ {
+  "mappingId": "s-5b914aa3e9a6ad7314bcf1a9",
+  "tvdbId": 349659,
+  "title": "Mayans MC",
+  "searchTitle": "Mayans MC",
+  "season": -1
+ },
+ {
+  "mappingId": "s-5b9a8b49e9a6ad14b4d40e25",
+  "tvdbId": 349659,
+  "title": "Mayans M C",
+  "searchTitle": "Mayans M C",
+  "season": -1
+ },
+ {
+  "mappingId": "s-5df3e7aa7399618d44fb7d8c",
+  "tvdbId": 356202,
+  "title": "Para toda la humanidad",
+  "searchTitle": "Para toda la humanidad",
+  "season": -1
+ },
+ {
+  "mappingId": "s-6151f045739961e8f4f97aa1",
+  "tvdbId": 366972,
+  "title": "Foundation",
+  "searchTitle": "Foundation",
+  "season": -1
+ },
+ {
+  "mappingId": "s-6155dd82739961e8f4f97aae",
+  "tvdbId": 366972,
+  "title": "Fundación",
+  "searchTitle": "Fundación",
+  "season": -1
+ },
+ {
+  "mappingId": "s-6155dd83739961e8f4f97ab9",
+  "tvdbId": 366972,
+  "title": "Alapítvány",
+  "searchTitle": "Alapítvány",
+  "season": -1
+ },
+ {
+  "mappingId": "s-617307567399612a14c02ffc",
+  "tvdbId": 366972,
+  "title": "Fondazione Foundation",
+  "searchTitle": "Fondazione Foundation",
+  "season": -1
+ },
+ {
+  "mappingId": "s-6173075d7399612a14c0302d",
+  "tvdbId": 366972,
+  "title": "Fondazione (2021)",
+  "searchTitle": "Fondazione (2021)",
+  "season": -1
+ },
+ {
+  "mappingId": "s-617309197399612a14c03092",
+  "tvdbId": 404492,
+  "title": "Invasion",
+  "searchTitle": "Invasion",
+  "season": -1,
+  "filterRegex": "\\srus\\s+\\(|-\\srus$"
+ },
+ {
+  "mappingId": "s-617b38ba739961f8e4a58e2c",
+  "tvdbId": 404492,
+  "title": "Infiltration",
+  "searchTitle": "Infiltration",
+  "season": -1
+ },
+ {
+  "mappingId": "s-619fe1d873996187583733d7",
+  "tvdbId": 404492,
+  "title": "Invasion -",
+  "searchTitle": "Invasion -",
+  "season": -1
+ },
+ {
+  "mappingId": "s-61bfbdfd739961a100291401",
+  "tvdbId": 366529,
+  "title": "Estación once",
+  "searchTitle": "Estación once",
+  "season": -1
+ },
+ {
+  "mappingId": "s-620af069739961a148bfc705",
+  "tvdbId": 391153,
+  "title": "El Pacificador",
+  "searchTitle": "El Pacificador",
+  "season": -1
+ },
+ {
+  "mappingId": "s-62180683739961a148bfc81c",
+  "tvdbId": 371980,
+  "title": "Separación",
+  "searchTitle": "Separación",
+  "season": -1
+ },
+ {
+  "mappingId": "s-62341fb8739961111c456743",
+  "tvdbId": 371980,
+  "title": "Scissione",
+  "searchTitle": "Scissione",
+  "season": -1
+ },
+ {
+  "mappingId": "s-623e0abe739961c92c8f1780",
+  "tvdbId": 366972,
+  "title": "Fondazione",
+  "searchTitle": "Fondazione",
+  "season": -1
+ },
+ {
+  "mappingId": "s-624da640739961c92c8f17aa",
+  "tvdbId": 372264,
+  "title": "Slow Horses Ein Fall fuer Jackson Lamb",
+  "searchTitle": "Slow Horses Ein Fall fuer Jackson Lamb",
+  "season": -1
+ },
+ {
+  "mappingId": "s-624da640739961c92c8f17ab",
+  "tvdbId": 372264,
+  "title": "Slow Horses - Ein Fall für Jackson Lamb",
+  "searchTitle": "Slow Horses - Ein Fall für Jackson Lamb",
+  "season": -1
+ },
+ {
+  "mappingId": "s-64beb414e844ebfe32afcc06",
+  "tvdbId": 349659,
+  "title": "Mayans",
+  "searchTitle": "Mayans",
+  "season": -1
+ },
+ {
+  "mappingId": "s-65da24b4730eac2289249c2e",
+  "tvdbId": 418727,
+  "title": "Constelacion",
+  "searchTitle": "Constelacion",
+  "season": -1
+ },
+ {
+  "mappingId": "s-65dd72f0730eac2289249c39",
+  "tvdbId": 392573,
+  "title": "Shogun 2024",
+  "searchTitle": "Shogun 2024",
+  "season": -1
+ },
+ {
+  "mappingId": "s-6611c288e470e8cbeb12cab5",
+  "tvdbId": 421070,
+  "title": "John Sugar",
+  "searchTitle": "John Sugar",
+  "season": -1
+ },
+ {
+  "mappingId": "s-663824080f22bb7104217d2c",
+  "tvdbId": 421070,
+  "title": "Sugar",
+  "searchTitle": "Sugar",
+  "season": -1
+ },
+ {
+  "mappingId": "s-663826e10f22bb7104217d32",
+  "tvdbId": 392573,
+  "title": "Shogun",
+  "searchTitle": "Shogun",
+  "season": -1,
+  "comment": "wolfmax4k",
+  "filterRegex": "(?i)\\(wolfmax4k.com\\)"
+ },
+ {
+  "mappingId": "s-66e7308c006310096b98ff6b",
+  "tvdbId": 372264,
+  "title": "Kulawe konie / Slow Horses (2024)",
+  "searchTitle": "Kulawe konie / Slow Horses (2024)",
+  "season": -1
+ },
+ {
+  "mappingId": "s-66e7308c006310096b98ff6c",
+  "tvdbId": 372264,
+  "title": "Kulawe konie / Slow Horses",
+  "searchTitle": "Kulawe konie / Slow Horses",
+  "season": -1
+ },
+ {
+  "mappingId": "s-66e7308d006310096b98ff6f",
+  "tvdbId": 403245,
+  "title": "Silos / Silo",
+  "searchTitle": "Silos / Silo",
+  "season": -1
+ },
+ {
+  "mappingId": "s-6701e38acf70f9aba2aea71a",
+  "tvdbId": 417648,
+  "title": "El Pingüino",
+  "searchTitle": "El Pingüino",
+  "season": -1
+ },
+ {
+  "mappingId": "s-67183189f55884f3e8022b44",
+  "tvdbId": 417648,
+  "title": "Pingwin / The Penguin",
+  "searchTitle": "Pingwin / The Penguin",
+  "season": -1
+ },
+ {
+  "mappingId": "s-6785b0ae877d7e8e0267f311",
+  "tvdbId": 433263,
+  "title": "Doc 2025",
+  "searchTitle": "Doc 2025",
+  "season": -1
+ },
+ {
+  "mappingId": "s-678afd52617cc2f663088702",
+  "tvdbId": 421636,
+  "title": "School Spirits",
+  "searchTitle": "School Spirits",
+  "season": -1,
+  "comment": "Cakes",
+  "filterRegex": "(?i)-(?:CAKES)$"
+ },
+ {
+  "mappingId": "s-67c1c94f00648721db1f56e1",
+  "tvdbId": 421636,
+  "title": "School Spirits",
+  "searchTitle": "School Spirits",
+  "season": -1
+ },
+ {
+  "mappingId": "s-67c1c95100648721db1f56ed",
+  "tvdbId": 371980,
+  "title": "Severence Scissione",
+  "searchTitle": "Severence Scissione",
+  "season": -1
+ },
+ {
+  "mappingId": "s-67cc9e534820fc421b65e62c",
+  "tvdbId": 422712,
+  "title": "Daredevil: Rinascita",
+  "searchTitle": "Daredevil: Rinascita",
+  "season": -1
+ },
+ {
+  "mappingId": "s-67dc87334820fc421b65e658",
+  "tvdbId": 422712,
+  "title": "Daredevil: Odrodzenie / Daredevil: Born Again",
+  "searchTitle": "Daredevil: Odrodzenie / Daredevil: Born Again",
+  "season": -1
+ },
+ {
+  "mappingId": "s-67e6ca3d7152151bf0ca8148",
+  "tvdbId": 371980,
+  "title": "Separacion",
+  "searchTitle": "Separacion",
+  "season": -1
+ },
+ {
+  "mappingId": "s-67f168847152151bf0ca817c",
+  "tvdbId": 422712,
+  "title": "Daredevil: Odrodzenie / Daredevil: Born Again (2025)",
+  "searchTitle": "Daredevil: Odrodzenie / Daredevil: Born Again (2025)",
+  "season": -1
+ },
+ {
+  "mappingId": "s-685457830c734f0055c47d32",
+  "tvdbId": 446831,
+  "title": "Tierra de Mafiosos",
+  "searchTitle": "Tierra de Mafiosos",
+  "season": -1
+ },
+ {
+  "mappingId": "s-68bf577f76112862a32f0da7",
+  "tvdbId": 404492,
+  "title": "Infiltration 2021",
+  "searchTitle": "Infiltration 2021",
+  "season": -1
+ },
+ {
+  "mappingId": "s-68f69eaf095e762ac6293a4b",
+  "tvdbId": 372264,
+  "title": "Slow Horses - Ein Fall fuer Jackson Lamb 2022",
+  "searchTitle": "Slow Horses - Ein Fall fuer Jackson Lamb 2022",
+  "season": -1
+ },
+ {
+  "mappingId": "s-68f69eb4095e762ac6293a66",
+  "tvdbId": 433631,
+  "title": "El caballero de los Siete Reinos",
+  "searchTitle": "El caballero de los Siete Reinos",
+  "season": -1
+ },
+ {
+  "mappingId": "s-693c5f1066797ec077674335",
+  "tvdbId": 448176,
+  "title": "The Pitt 2024",
+  "searchTitle": "The Pitt 2024",
+  "season": -1
+ },
+ {
+  "mappingId": "s-693c5f1266797ec077674343",
+  "tvdbId": 464461,
+  "title": "Rivalité Passionnée",
+  "searchTitle": "Rivalité Passionnée",
+  "season": -1
+ },
+ {
+  "mappingId": "s-695bde3c187049e8c9b811c2",
+  "tvdbId": 366972,
+  "title": "Foundation 2021",
+  "searchTitle": "Foundation 2021",
+  "season": -1
+ },
+ {
+  "mappingId": "s-69f23653fd43d8286fe4a82c",
+  "tvdbId": 449146,
+  "title": "Ciudad de las Estrellas",
+  "searchTitle": "Ciudad de las Estrellas",
+  "season": -1
+ },
+ {
+  "mappingId": "s-6a160aac897487ca509bc93a",
+  "tvdbId": 454109,
+  "title": "La maldición de Widow's Bay",
+  "searchTitle": "La maldición de Widow's Bay",
+  "season": -1
+ },
+ {
+  "mappingId": "s-6a160aad897487ca509bc93d",
+  "tvdbId": 454109,
+  "title": "La maldición de window's bay",
+  "searchTitle": "La maldición de window's bay",
+  "season": -1
+ },
+ {
+  "mappingId": "s-6a442f84516f2b05f026054b",
+  "tvdbId": 421636,
+  "title": "Espíritus en la escuela",
+  "searchTitle": "Espíritus en la escuela",
+  "season": -1
+ },
+ {
+  "mappingId": "s-6a9104ab713428ec4907ce4f",
+  "tvdbId": 376098,
+  "title": "Linternas",
+  "searchTitle": "Linternas",
+  "season": -1
+ }
+]

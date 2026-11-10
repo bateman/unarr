@@ -1,0 +1,503 @@
+{
+ "tvdbId": 421636,
+ "title": "School Spirits (2023)",
+ "overview": "A teen stuck in the afterlife decides to investigate her mysterious disappearance alongside a group of other students who are also stuck in limbo at their high school.",
+ "slug": "school-spirits-2023",
+ "originalCountry": "usa",
+ "originalLanguage": "eng",
+ "language": "eng",
+ "firstAired": "2023-03-09",
+ "lastAired": "2026-03-04",
+ "tvMazeId": 62556,
+ "tmdbId": 208397,
+ "imdbId": "tt21057450",
+ "malIds": [],
+ "anidbIds": [],
+ "aniListIds": [],
+ "lastUpdated": "2026-11-02T03:35:53Z",
+ "status": "Continuing",
+ "runtime": 51,
+ "timeOfDay": {
+  "hours": 3,
+  "minutes": 0
+ },
+ "originalNetwork": "Paramount+",
+ "network": "Paramount+",
+ "genres": [
+  "Drama",
+  "Mystery"
+ ],
+ "contentRating": "TV-MA",
+ "rating": {
+  "count": 19347,
+  "value": "7.6"
+ },
+ "alternativeTitles": [
+  {
+   "title": "School Spirits"
+  }
+ ],
+ "actors": [
+  {
+   "name": "Peyton List",
+   "character": "Maddie Nears",
+   "image": "https://artworks.thetvdb.com/banners/person/7948413/5ea0767009483.jpg"
+  },
+  {
+   "name": "Kristian Flores",
+   "character": "Simon Elroy"
+  },
+  {
+   "name": "Milo Manheim",
+   "character": "Wally Clark",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/511543/photo/62924f16b665e.jpg"
+  },
+  {
+   "name": "Spencer MacPherson",
+   "character": "Xavier Baxter",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/440062/photo/631bd7ffd1673.jpg"
+  },
+  {
+   "name": "Kiara Pichardo",
+   "character": "Nicole Herrera",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8578322/photo/640b745c27abd.jpg"
+  },
+  {
+   "name": "Sarah Yarkin",
+   "character": "Rhonda",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8578410/photo/60eef771e2a4f.jpg"
+  },
+  {
+   "name": "Nick Pugliese",
+   "character": "Charley",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8518549/photo/640b74bb039f0.jpg"
+  },
+  {
+   "name": "Rainbow Wedell",
+   "character": "Claire Zolinski",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8021292/photo/640b74fb38757.jpg"
+  },
+  {
+   "name": "Josh Zuckerman",
+   "character": "Mr. Martin",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/248281/photo/60711d60b2de8.jpg"
+  },
+  {
+   "name": "Jess Gabor",
+   "character": "Janet Hamilton",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8160391/photo/666062281504a.jpg"
+  },
+  {
+   "name": "Miles Elliot",
+   "character": "Yuri"
+  },
+  {
+   "name": "Ci Hang Ma",
+   "character": "Quinn"
+  },
+  {
+   "name": "Maria Dizzia",
+   "character": "Sandra Nears",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/317188/photo/64da406d1af46.jpg"
+  },
+  {
+   "name": "Ian Tracey",
+   "character": "Sheriff Baxter",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/285059/photo/6450f74d0bb0b.jpg"
+  },
+  {
+   "name": "Alex Zahara",
+   "character": "Principal Hartman",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/281787/photo/627beb6a09fc9.jpg"
+  },
+  {
+   "name": "RaeAnne Boon",
+   "character": "Dawn",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9115605/photo/64da3ad1373ca.jpg"
+  },
+  {
+   "name": "Katarina Mueller",
+   "character": "Tira",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9115606/photo/64da3b1328bc6.jpg"
+  },
+  {
+   "name": "Vanessa Prasad",
+   "character": "Kirsten",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8041948/photo/64da3b28ace13.jpg"
+  },
+  {
+   "name": "Patrick Gilmore",
+   "character": "Mr. Anderson",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/279003/photo/64da42701ee3e.jpg"
+  },
+  {
+   "name": "Alison Thornton",
+   "character": "Chloé",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/529537/photo/64da41fe73aef.jpg"
+  }
+ ],
+ "images": [
+  {
+   "coverType": "Banner",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/421636/banners/64058da3906e6.jpg"
+  },
+  {
+   "coverType": "Poster",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/421636/posters/67ad3bbd99fea.jpg"
+  },
+  {
+   "coverType": "Fanart",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/421636/backgrounds/64058e63ee12d.jpg"
+  },
+  {
+   "coverType": "Clearlogo",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/421636/clearlogo/640592564a3e8.png"
+  }
+ ],
+ "seasons": [
+  {
+   "seasonNumber": 1,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2006905/posters/6573c1715d9c9.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 2,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2103391/posters/679b8fe3ab7c0.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 3,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2220012/posters/6961dc9b7aace.jpg"
+    }
+   ]
+  }
+ ],
+ "episodes": [
+  {
+   "tvdbShowId": 421636,
+   "tvdbId": 9229976,
+   "seasonNumber": 1,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 1,
+   "title": "My So-Called Death",
+   "airDate": "2023-03-09",
+   "airDateUtc": "2023-03-09T08:00:00Z",
+   "runtime": 44,
+   "overview": "While acclimating to purgatory at Split River High, Maddie becomes determined to solve the mystery of her disappearance. While observing those she left behind, Maddie begins to realize everyone is not as honest and loyal as she once thought.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9229976/screencap/640a73ee395ce.jpg"
+  },
+  {
+   "tvdbShowId": 421636,
+   "tvdbId": 9652793,
+   "seasonNumber": 1,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 2,
+   "title": "The Fault In Our Scars",
+   "airDate": "2023-03-09",
+   "airDateUtc": "2023-03-09T08:00:00Z",
+   "runtime": 49,
+   "overview": "As she grows close to the spirits in the ghost world, a driven Maddie begins to unravel the events surrounding her death, only to discover someone other than Xavier may have been involved.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9652793/screencap/640a74158e2d4.jpg"
+  },
+  {
+   "tvdbShowId": 421636,
+   "tvdbId": 9652794,
+   "seasonNumber": 1,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 3,
+   "title": "Dead and Confused",
+   "airDate": "2023-03-09",
+   "airDateUtc": "2023-03-09T08:00:00Z",
+   "runtime": 45,
+   "overview": "With an unexpected suspect possibly involved in her death, Maddie's forced to reveal more about the depth of that relationship - leading to unexpected consequences.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9652794/screencap/640a743dd9dfb.jpg"
+  },
+  {
+   "tvdbShowId": 421636,
+   "tvdbId": 9652795,
+   "seasonNumber": 1,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 4,
+   "title": "Ghoul Intentions",
+   "airDate": "2023-03-16",
+   "airDateUtc": "2023-03-16T07:00:00Z",
+   "runtime": 46,
+   "overview": "When the search for Maddie's killer puts Simon in real jeopardy and exposes Maddie's connection to the living world, Maddie must navigate Split River High's spooky spectral underbelly - first alone, and then with the help of her fellow ghosts.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9652795/screencap/64112ddc44043.jpg"
+  },
+  {
+   "tvdbShowId": 421636,
+   "tvdbId": 9652796,
+   "seasonNumber": 1,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 5,
+   "title": "The Twilight End Zone",
+   "airDate": "2023-03-23",
+   "airDateUtc": "2023-03-23T07:00:00Z",
+   "runtime": 44,
+   "overview": "As Homecoming unfolds at Split River, Maddie finds herself divided between accepting her fate in purgatory and a newly hatched plan to crack a new suspect.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9652796/screencap/6476b5a4c6d50.jpg"
+  },
+  {
+   "tvdbShowId": 421636,
+   "tvdbId": 9652797,
+   "seasonNumber": 1,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 6,
+   "title": "Grave The Last Dance",
+   "airDate": "2023-03-30",
+   "airDateUtc": "2023-03-30T07:00:00Z",
+   "runtime": 45,
+   "overview": "Amongst the sparkly lights of Split River's Homecoming Dance, Operation Find Maddie's Killer goes into overdrive leading to surprising revelations.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9652797/screencap/6423978782fc8.jpg"
+  },
+  {
+   "tvdbShowId": 421636,
+   "tvdbId": 9652798,
+   "seasonNumber": 1,
+   "episodeNumber": 7,
+   "absoluteEpisodeNumber": 7,
+   "title": "Séance Anything",
+   "airDate": "2023-04-06",
+   "airDateUtc": "2023-04-06T07:00:00Z",
+   "runtime": 48,
+   "overview": "The spirits enlist Dawn to help Maddie recall her last living moments which takes a heartbreaking turn. Nicole desperately tries to keep a secret from being revealed. As the spirits begin to ask more questions, an unexpected turn of events takes place within their own.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9652798/screencap/642c662dd4fc3.jpg"
+  },
+  {
+   "tvdbShowId": 421636,
+   "tvdbId": 9652799,
+   "seasonNumber": 1,
+   "episodeNumber": 8,
+   "absoluteEpisodeNumber": 8,
+   "title": "Madison's Body",
+   "airDate": "2023-04-13",
+   "airDateUtc": "2023-04-13T07:00:00Z",
+   "runtime": 52,
+   "finaleType": "season",
+   "overview": "Questioning their existence, the spirits seek Mr. Martin for answers. Maddie must confront the latest suspect which challenges everything she thought she knew before. Xavier, Claire and Nicole look for answers at an abandoned house. When the truth is finally revealed, Maddie must face unexpected and devastating consequences.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9652799/screencap/643576cb0cbd5.jpg"
+  },
+  {
+   "tvdbShowId": 421636,
+   "tvdbId": 10232153,
+   "seasonNumber": 2,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 9,
+   "title": "Whatever Happened To Maddie Nears?",
+   "airDate": "2025-01-30",
+   "airDateUtc": "2025-01-30T08:00:00Z",
+   "runtime": 51,
+   "overview": "Maddie confronts Mr. Martin, who flees. Janet, in Maddie's body, returns to her family's now dilapidated farmhouse, triggering memories. A conflicted Simon struggles with his desire to help Maddie and protect his own grasp on reality.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10232153/screencap/679c3bc17fe56.jpg"
+  },
+  {
+   "tvdbShowId": 421636,
+   "tvdbId": 10911589,
+   "seasonNumber": 2,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 10,
+   "title": "Field Of Screams",
+   "airDate": "2025-01-30",
+   "airDateUtc": "2025-01-30T08:00:00Z",
+   "runtime": 54,
+   "overview": "Fugitive Janet is haunted by her past as the ghost group continues searching for Mr. Martin inside Split River High. Simon tells the living kids about Janet's body-snatching. A fire at a dilapidated farmhouse leaves Maddie's fate unclear.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10911589/screencap/679c3bca681ab.jpg"
+  },
+  {
+   "tvdbShowId": 421636,
+   "tvdbId": 10911590,
+   "seasonNumber": 2,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 11,
+   "title": "Can't Hauntly Wait",
+   "airDate": "2025-01-30",
+   "airDateUtc": "2025-01-30T08:00:00Z",
+   "runtime": 47,
+   "overview": "A relentless Sandra is desperate to know her daughters fate, as Janet in Maddie's body wreaks havoc in the living world. Simon and friends search for Janet/Maddie in an unlikely place, as the ghosts decode Janet's past.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10911590/screencap/679c3bd48b831.jpg"
+  },
+  {
+   "tvdbShowId": 421636,
+   "tvdbId": 10911591,
+   "seasonNumber": 2,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 12,
+   "title": "A Walk-In To Remember",
+   "airDate": "2025-02-06",
+   "airDateUtc": "2025-02-06T08:00:00Z",
+   "runtime": 50,
+   "overview": "Janet/Maddie returns home to a shocked and relieved Sandra. The ghosts discover the objects from their deaths unlock hidden spaces. A mandatory school event uncovers tension between the living kids who are more concerned about Janet's return.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10911591/screencap/67a2b158cf26f.jpg"
+  },
+  {
+   "tvdbShowId": 421636,
+   "tvdbId": 10911592,
+   "seasonNumber": 2,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 13,
+   "title": "Ghost Who's Coming To Dinner",
+   "airDate": "2025-02-13",
+   "airDateUtc": "2025-02-13T08:00:00Z",
+   "runtime": 52,
+   "overview": "Janet/Maddie agrees to have Maddie's  friends over for dinner and the tense meal ends with Janet realizing her cover is blown. Meanwhile, Maddie explores the school's \"scars\" and uncovers intel about Janet that shakes her resolve.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10911592/screencap/67aac11fb115f.jpg"
+  },
+  {
+   "tvdbShowId": 421636,
+   "tvdbId": 10911593,
+   "seasonNumber": 2,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 14,
+   "title": "Ghost Pointe Blank",
+   "airDate": "2025-02-20",
+   "airDateUtc": "2025-02-20T08:00:00Z",
+   "runtime": 53,
+   "overview": "Maddie and the ghosts find a link between their scars while Simon and team go on a mission where tensions rise with the arrival of an unexpected visitor.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10911593/screencap/67b7c5687bed5.jpg"
+  },
+  {
+   "tvdbShowId": 421636,
+   "tvdbId": 10931639,
+   "seasonNumber": 2,
+   "episodeNumber": 7,
+   "absoluteEpisodeNumber": 15,
+   "title": "Anatomy Of A Fallout Shelter",
+   "airDate": "2025-02-27",
+   "airDateUtc": "2025-02-27T08:00:00Z",
+   "runtime": 51,
+   "overview": "Janet is finally ready to give answers. Mr. Martin hatches a plan, Maddie reevaluates her relationships with Wally and Simon, and Quinn makes a discovery.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10931639/screencap/67c01f5e35f79.jpg"
+  },
+  {
+   "tvdbShowId": 421636,
+   "tvdbId": 10931640,
+   "seasonNumber": 2,
+   "episodeNumber": 8,
+   "absoluteEpisodeNumber": 16,
+   "title": "Fire, Talk To Me",
+   "airDate": "2025-03-06",
+   "airDateUtc": "2025-03-06T08:00:00Z",
+   "runtime": 50,
+   "finaleType": "season",
+   "overview": "Maddie and the ghosts confront Mr. Martin, ultimately trapping him in the afterlife. New information leads to a chase through the school's scars, delaying Maddie's return to the living world and putting her body in jeopardy.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10931640/screencap/67c957cc00b9c.jpg"
+  },
+  {
+   "tvdbShowId": 421636,
+   "tvdbId": 11496864,
+   "seasonNumber": 3,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 17,
+   "title": "It's A Wonderful Afterlife",
+   "airDate": "2026-01-28",
+   "airDateUtc": "2026-01-28T08:00:00Z",
+   "runtime": 56,
+   "overview": "Maddie's return upends Split River High; as she adjusts, not everyone welcomes her back; Simon is trapped on the other side while the ghosts search for answers and dark new secrets about the school emerge.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11496864/screencap/6979c47999332.jpg"
+  },
+  {
+   "tvdbShowId": 421636,
+   "tvdbId": 11498362,
+   "seasonNumber": 3,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 18,
+   "title": "Mean Ghouls",
+   "airDate": "2026-01-28",
+   "airDateUtc": "2026-01-28T08:00:00Z",
+   "runtime": 52,
+   "overview": "Split River High grows volatile as Maddie faces mounting pressure; buried truths and new dangers are revealed that could change everything for the living and the dead, forcing some to question who they can trust.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11498362/screencap/6979c48d95ae9.jpg"
+  },
+  {
+   "tvdbShowId": 421636,
+   "tvdbId": 11498363,
+   "seasonNumber": 3,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 19,
+   "title": "The Halls Have Eyes",
+   "airDate": "2026-01-28",
+   "airDateUtc": "2026-01-28T08:00:00Z",
+   "runtime": 56,
+   "overview": "New mysteries at Split River High force Maddie, Simon and the ghosts to choose between leaving the past alone or exploring it and triggering unseen dangers; as Nicole joins a new circle, Simon and Wally take a risky leap for answers.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11498363/screencap/6979c4a3bb446.jpg"
+  },
+  {
+   "tvdbShowId": 421636,
+   "tvdbId": 11514620,
+   "seasonNumber": 3,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 20,
+   "title": "The Bereftest Club",
+   "airDate": "2026-02-04",
+   "airDateUtc": "2026-02-04T08:00:00Z",
+   "runtime": 56,
+   "overview": "A day of detention sparks a journey into the school's secret past. Hidden truths resurface, dark forces stir, and Quinn undergoes a powerful transformation. Maddie and her friends uncover clues connecting the living and the dead.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11514620/screencap/69830300886e4.jpg"
+  },
+  {
+   "tvdbShowId": 421636,
+   "tvdbId": 11514621,
+   "seasonNumber": 3,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 21,
+   "title": "Raiders of the Lost Scar",
+   "airDate": "2026-02-11",
+   "airDateUtc": "2026-02-11T08:00:00Z",
+   "runtime": 53,
+   "overview": "Darkness spreads through Split River High as Maddie's visions intensify and new truths emerge. Each discovery deepens the danger, leaving Simon's fate hanging in the balance.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11514621/screencap/698c39bc81893.jpg"
+  },
+  {
+   "tvdbShowId": 421636,
+   "tvdbId": 11514622,
+   "seasonNumber": 3,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 22,
+   "title": "Children of the Scorned",
+   "airDate": "2026-02-18",
+   "airDateUtc": "2026-02-18T08:00:00Z",
+   "runtime": 55,
+   "overview": "As darkness spreads through Split River High, Simon's fate grows more perilous. Maddie confronts a powerful adversary whose dangerous secrets might be the only key to saving him.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11514622/screencap/699572448f88c.jpg"
+  },
+  {
+   "tvdbShowId": 421636,
+   "tvdbId": 11514623,
+   "seasonNumber": 3,
+   "episodeNumber": 7,
+   "absoluteEpisodeNumber": 23,
+   "title": "Midsomester",
+   "airDate": "2026-02-25",
+   "airDateUtc": "2026-02-25T08:00:00Z",
+   "runtime": 51,
+   "overview": "After a shocking event, Maddie and Xavier come under suspicion. As the living investigate a corrupt scheme, the ghosts search their scars for clues, Maddie opens up, and someone takes a big leap that could change everything.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11514623/screencap/699eae308a1f9.jpg"
+  },
+  {
+   "tvdbShowId": 421636,
+   "tvdbId": 11514624,
+   "seasonNumber": 3,
+   "episodeNumber": 8,
+   "absoluteEpisodeNumber": 24,
+   "title": "Dawn of the Deb",
+   "airDate": "2026-03-04",
+   "airDateUtc": "2026-03-04T08:00:00Z",
+   "runtime": 56,
+   "finaleType": "season",
+   "overview": "The team confronts a dangerous force in a desperate bid to save their friends.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11514624/screencap/69a7e9a0df809.jpg"
+  }
+ ]
+}

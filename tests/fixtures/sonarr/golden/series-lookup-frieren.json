@@ -1,0 +1,1445 @@
+{
+  "body": [
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "23:00",
+      "certification": "TV-14",
+      "cleanTitle": "frierenbeyondjourneysend",
+      "ended": false,
+      "firstAired": "2023-09-29T00:00:00Z",
+      "folder": "Frieren Beyond Journeys End (2023)",
+      "genres": [
+        "Adventure",
+        "Animation",
+        "Anime",
+        "Drama",
+        "Fantasy"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/424536/banners/651dd688bd4d5.jpg",
+          "url": "/MediaCoverProxy/c397ef33ad6308518662dbbbab897f6afff3221f4d37b36aa6af02c7895f9654/651dd688bd4d5.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/424536/posters/6516fe48e7a06.jpg",
+          "url": "/MediaCoverProxy/3e29d57efaa24399ed0292ae0cd55ee58956a7ff9bec39ce701cfb26d3f73fe2/6516fe48e7a06.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/424536/backgrounds/64e6cbe29d9c0.jpg",
+          "url": "/MediaCoverProxy/dab4d8b605c47fd9072e20bcf8c35f16594a317840ce5eaf70619f45c0889d2a/64e6cbe29d9c0.jpg"
+        },
+        {
+          "coverType": "clearlogo",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/424536/clearlogo/65d798fbd2f61.png",
+          "url": "/MediaCoverProxy/87a16a3d9e61198389cd2164706c9ac7cf5a24a5b62b7982e840697bf79a7109/65d798fbd2f61.png"
+        }
+      ],
+      "imdbId": "tt22248376",
+      "languageProfileId": 1,
+      "lastAired": "2026-03-27T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "Nippon TV",
+      "originalLanguage": {
+        "id": 8,
+        "name": "Japanese"
+      },
+      "overview": "Decades after her party defeated the Demon King, an old friend's funeral launches the elf wizard Frieren on a journey of self-discovery.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 8.9,
+        "votes": 87128
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/v4/series/424536/posters/6516fe48e7a06.jpg",
+      "runtime": 25,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 2
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 3
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "frieren beyond journeys end",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 3,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "continuing",
+      "tags": [],
+      "title": "Frieren: Beyond Journey's End",
+      "titleSlug": "frieren-beyond-journeys-end",
+      "tmdbId": 209867,
+      "tvMazeId": 69956,
+      "tvRageId": 0,
+      "tvdbId": 424536,
+      "useSceneNumbering": false,
+      "year": 2023
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "20:00",
+      "cleanTitle": "labyrinthpeace",
+      "ended": true,
+      "firstAired": "2020-11-08T00:00:00Z",
+      "folder": "Labyrinth of Peace (2020)",
+      "genres": [
+        "Drama",
+        "History",
+        "Mini-Series"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/391612/banners/630cd6b56cd39.jpg",
+          "url": "/MediaCoverProxy/5216c31703e2cc9b1165d34d9cb1fc9347fe8d16eeb0a4c479a0a31b748affe1/630cd6b56cd39.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/391612/posters/619a408fb5e29.jpg",
+          "url": "/MediaCoverProxy/ca2d2fe94255dd7b74993e8abd4ca686196f59ea3dde7915b35cf8d1628d4b66/619a408fb5e29.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/series/391612/backgrounds/5faae1d66af0f.jpg",
+          "url": "/MediaCoverProxy/404ee969d0f8020eb9e915f79db02802f47957a44d78d05a09bbb9807d8e511b/5faae1d66af0f.jpg"
+        }
+      ],
+      "imdbId": "tt10639680",
+      "languageProfileId": 1,
+      "lastAired": "2020-11-11T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "SRF Schweizer Radio und Fernsehen",
+      "originalLanguage": {
+        "id": 4,
+        "name": "German"
+      },
+      "overview": "Year 1945. The war is over and neutral Switzerland has been saved from the conflict. Klara's family looks forward to the future as she cares for young Holocaust survivors. Johann hopes to save and modernize his father-in-law's textile business. And Egon, fresh from military service, takes his first steps in the Attorney General's office chasing fugitive Nazis. The three soon realize that the facade of peace is bought with the blood of war victims. Johann's career ambitions bring him closer to those who committed heinous war crimes. Klara risks her marriage as she grows closer and closer to one of the survivors, whom the locals receive with distrust. And Egon finds himself trapped in a system that voluntarily turns a blind eye to Nazi criminals for financial reasons.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 7.3,
+        "votes": 461
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/v4/series/391612/posters/619a408fb5e29.jpg",
+      "runtime": 50,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "labyrinth of peace",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 1,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Labyrinth of Peace",
+      "titleSlug": "labyrinth-of-peace",
+      "tmdbId": 112370,
+      "tvMazeId": 52078,
+      "tvRageId": 0,
+      "tvdbId": 391612,
+      "useSceneNumbering": false,
+      "year": 2020
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "00:00",
+      "cleanTitle": "proscons",
+      "ended": true,
+      "firstAired": "2018-10-24T00:00:00Z",
+      "folder": "Pros and Cons (2018)",
+      "genres": [
+        "Comedy",
+        "Crime",
+        "Drama"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/graphical/5ca2e5e6eb307.jpg",
+          "url": "/MediaCoverProxy/004873bbc35e131d505b644ead887adcbb43d0c40b51e086f8871ed5395ea5c6/5ca2e5e6eb307.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/posters/5bd0d5652ebb5.jpg",
+          "url": "/MediaCoverProxy/1b62ef6280a64b9bf6949e6c7c95de5445b127376e5ac369a2c6a82b1ab949fe/5bd0d5652ebb5.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/fanart/original/5bd98ebe2e6e2.jpg",
+          "url": "/MediaCoverProxy/03fdbb78adbd6c9e4d75ec2c853334277c8f9b4f2b28a9b4d0710bf0ed32fc66/5bd98ebe2e6e2.jpg"
+        }
+      ],
+      "imdbId": "tt7694874",
+      "languageProfileId": 1,
+      "lastAired": "2021-01-03T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "Viaplay",
+      "originalLanguage": {
+        "id": 6,
+        "name": "Danish"
+      },
+      "overview": "Officially they are a regular family. Unofficially, they are Denmark's most notorious cheaters. The question is how to deal with parenting meetings, lunch boxes and payouts at the same time as their biggest coup.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 7.4,
+        "votes": 1014
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/posters/5bd0d5652ebb5.jpg",
+      "runtime": 43,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 2
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "pros and cons",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 2,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Pros and Cons",
+      "titleSlug": "pros-and-cons",
+      "tmdbId": 85344,
+      "tvMazeId": 39314,
+      "tvRageId": 0,
+      "tvdbId": 354458,
+      "useSceneNumbering": false,
+      "year": 2018
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "11:00",
+      "cleanTitle": "gooischefrieten",
+      "ended": true,
+      "firstAired": "2010-10-29T00:00:00Z",
+      "folder": "Gooische Frieten (2010)",
+      "genres": [
+        "Comedy",
+        "Mini-Series"
+      ],
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/posters/336832-1.jpg",
+          "url": "/MediaCoverProxy/d99c79ec8bb0262e21c9eff2fd4a25abb19de694e282b341968557143dfc4450/336832-1.jpg"
+        }
+      ],
+      "languageProfileId": 1,
+      "lastAired": "2010-12-24T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "RTL XL",
+      "originalLanguage": {
+        "id": 7,
+        "name": "Dutch"
+      },
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 0,
+        "votes": 0
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/posters/336832-1.jpg",
+      "runtime": 5,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "gooische frieten",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 1,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Gooische Frieten",
+      "titleSlug": "gooische-frieten",
+      "tmdbId": 38479,
+      "tvMazeId": 0,
+      "tvRageId": 0,
+      "tvdbId": 336832,
+      "useSceneNumbering": false,
+      "year": 2010
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "cleanTitle": "fruerneudenfilter",
+      "ended": true,
+      "firstAired": "2018-08-30T00:00:00Z",
+      "folder": "Fruerne uden Filter (2018)",
+      "genres": [
+        "Documentary",
+        "Family"
+      ],
+      "images": [],
+      "languageProfileId": 1,
+      "lastAired": "2019-05-23T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "Viafree",
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 0,
+        "votes": 0
+      },
+      "runtime": 20,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 2
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "fruerne uden filter",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 2,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Fruerne uden Filter",
+      "titleSlug": "fruerne-uden-filter",
+      "tmdbId": 0,
+      "tvMazeId": 0,
+      "tvRageId": 0,
+      "tvdbId": 364715,
+      "useSceneNumbering": false,
+      "year": 2018
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "21:15",
+      "cleanTitle": "brievenaansamson",
+      "ended": false,
+      "firstAired": "2026-04-22T00:00:00Z",
+      "folder": "Brieven aan Samson (2026)",
+      "genres": [
+        "Family"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/476873/banners/69e93716075af.jpg",
+          "url": "/MediaCoverProxy/b55246b1941bdbe6a2fd3fdd7a5e9df2ea5084c0485b95695d080b8d500be417/69e93716075af.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/476873/posters/69e13ed421cbf.jpg",
+          "url": "/MediaCoverProxy/1d166a425de8322ced7dd6c0691db4c14d19664987de55a8bfae4e16d1b2d756/69e13ed421cbf.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/476873/backgrounds/69e13d8e89fbe.jpg",
+          "url": "/MediaCoverProxy/e3894ed31a95a7298fdcafe5381db838add3a2eb3a1edeeb888c2e93e513c40e/69e13d8e89fbe.jpg"
+        }
+      ],
+      "languageProfileId": 1,
+      "lastAired": "2026-05-27T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "Play",
+      "originalLanguage": {
+        "id": 7,
+        "name": "Dutch"
+      },
+      "overview": "Human interest series in which Viktor Verhulst visits viewers of 'Samson & Gert' who wrote a letter to the iconic children's program thirty years ago.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 0,
+        "votes": 0
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/v4/series/476873/posters/69e13ed421cbf.jpg",
+      "runtime": 43,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "brieven aan samson",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 1,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "continuing",
+      "tags": [],
+      "title": "Brieven aan Samson",
+      "titleSlug": "brieven-aan-samson",
+      "tmdbId": 316327,
+      "tvMazeId": 91560,
+      "tvRageId": 0,
+      "tvdbId": 476873,
+      "useSceneNumbering": false,
+      "year": 2026
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "00:00",
+      "cleanTitle": "heinofikserfrøerne",
+      "ended": true,
+      "firstAired": "2021-03-26T00:00:00Z",
+      "folder": "Heino Fikser Frøerne (2021)",
+      "genres": [
+        "Children"
+      ],
+      "images": [],
+      "languageProfileId": 1,
+      "lastAired": "2021-03-26T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "originalLanguage": {
+        "id": 6,
+        "name": "Danish"
+      },
+      "overview": "Heino loves making seed traps. He's just not very good at it. And don't listen to what others tell you either.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 0,
+        "votes": 0
+      },
+      "runtime": 0,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "heino fikser frøerne",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 1,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Heino Fikser Frøerne",
+      "titleSlug": "heino-fikser-frøerne",
+      "tmdbId": 121955,
+      "tvMazeId": 0,
+      "tvRageId": 0,
+      "tvdbId": 440768,
+      "useSceneNumbering": false,
+      "year": 2021
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "certification": "A",
+      "cleanTitle": "theydontwanttoseeus",
+      "ended": true,
+      "firstAired": "2021-11-08T00:00:00Z",
+      "folder": "They Dont Want to See Us (2021)",
+      "genres": [
+        "Drama",
+        "Mini-Series",
+        "Thriller"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/412319/banners/6192fa95929aa.jpg",
+          "url": "/MediaCoverProxy/01cc4ab02b41544940df9ec464133677102c03a0ce9641bb9e883319799bebba/6192fa95929aa.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/412319/posters/6a1fc7892e382.jpg",
+          "url": "/MediaCoverProxy/aa00cf7f8168d27d4ffcfb51a2e24c570cfe07f117f477029fdc9601df301185/6a1fc7892e382.jpg"
+        }
+      ],
+      "imdbId": "tt15658048",
+      "languageProfileId": 1,
+      "lastAired": "2021-12-27T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "Mega",
+      "originalLanguage": {
+        "id": 3,
+        "name": "Spanish"
+      },
+      "overview": "Inspired by the cases that have been discovered within the National Service for Minors in Chile, the story of Catalina is told, a teenager at social risk found dead in a residence of the institution, along with that of her lawyer who seeks to know the truth of his alleged suicide. In this investigation, together with a judge and the director of the center, they discover the reality that exists in that place, something hidden, and that also affects other minors. The injustice, the violation of the rights of girls, boys and young people evidence a system in collapse are portrayed in this mini-series of eight chapters.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 8.2,
+        "votes": 95
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/v4/series/412319/posters/6a1fc7892e382.jpg",
+      "runtime": 51,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "they dont want to see us",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 1,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "They Don't Want to See Us",
+      "titleSlug": "they-dont-want-to-see-us",
+      "tmdbId": 137366,
+      "tvMazeId": 0,
+      "tvRageId": 0,
+      "tvdbId": 412319,
+      "useSceneNumbering": false,
+      "year": 2021
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "cleanTitle": "hauntedsoulswithoutpeace",
+      "ended": true,
+      "firstAired": "2016-05-20T00:00:00Z",
+      "folder": "Haunted Souls Without Peace (2016)",
+      "genres": [
+        "Mystery",
+        "Suspense"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/graphical/327997-g.jpg",
+          "url": "/MediaCoverProxy/4af4dcda6e45651aaa820384fce9a21ecc094734ccfdbf9d49d09831038cf3a6/327997-g.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/series/327997/posters/5f3624aba040c.jpg",
+          "url": "/MediaCoverProxy/3d81625f700981b2b225b7cce234a8f017ff531da106695a2efea435a3238e4f/5f3624aba040c.jpg"
+        }
+      ],
+      "imdbId": "tt9673410",
+      "languageProfileId": 1,
+      "lastAired": "2020-06-12T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "TLC",
+      "originalLanguage": {
+        "id": 4,
+        "name": "German"
+      },
+      "overview": "Sky du Mont allegedly presents true, supernatural, inexplicable and mysterious haunted cases reported by eyewitnesses to whom these stories supposedly happened.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 6.9,
+        "votes": 9
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/series/327997/posters/5f3624aba040c.jpg",
+      "runtime": 45,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 2
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 3
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 4
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 5
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "haunted souls without peace",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 5,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Haunted - Souls Without Peace",
+      "titleSlug": "haunted---souls-without-peace",
+      "tmdbId": 0,
+      "tvMazeId": 0,
+      "tvRageId": 0,
+      "tvdbId": 327997,
+      "useSceneNumbering": false,
+      "year": 2016
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "00:00",
+      "cleanTitle": "dervergiftetefrieden",
+      "ended": true,
+      "firstAired": "2021-07-14T00:00:00Z",
+      "folder": "Der vergiftete Frieden (2021)",
+      "genres": [
+        "Documentary"
+      ],
+      "images": [],
+      "languageProfileId": 1,
+      "lastAired": "2021-07-14T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "originalLanguage": {
+        "id": 4,
+        "name": "German"
+      },
+      "overview": "Der Erste Weltkrieg gilt als die \"Urkatastrophe\" des 20. Jahrhunderts. Die Ereignisse vor hundert Jahren beherrschen die politische Agenda bis zum heutigen Tag.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 0,
+        "votes": 0
+      },
+      "runtime": 43,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "der vergiftete frieden",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 1,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Der vergiftete Frieden",
+      "titleSlug": "der-vergiftete-frieden",
+      "tmdbId": 0,
+      "tvMazeId": 0,
+      "tvRageId": 0,
+      "tvdbId": 455195,
+      "useSceneNumbering": false,
+      "year": 2021
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "00:00",
+      "cleanTitle": "raceforsky",
+      "ended": true,
+      "firstAired": "2022-02-15T00:00:00Z",
+      "folder": "Race for the Sky (2022)",
+      "genres": [
+        "Documentary"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/434554/banners/6621633e668bf.jpg",
+          "url": "/MediaCoverProxy/58f45b193d2e81b7b01b5995c00d3987bed8f4a9be3dcb0e4c69c3858c73f4ec/6621633e668bf.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/434554/backgrounds/6a200911a1833.jpg",
+          "url": "/MediaCoverProxy/9f1bba14bbf6014d23034adf33ca952aa9ed8ce313d6befa38db2aebf6c2e7e0/6a200911a1833.jpg"
+        }
+      ],
+      "imdbId": "tt18253368",
+      "languageProfileId": 1,
+      "lastAired": "2022-02-15T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "Arte",
+      "originalLanguage": {
+        "id": 4,
+        "name": "German"
+      },
+      "overview": "From the start, inventors, tinkerers, pilots, designers, and other skyriders competed to make their dream of flying come true. It is a story about people who dared to cross borders, risk their lives, and make the adventure of flying accessible to everyone. The two-part documentary traces historical developments in the race for supremacy in the sky and shows the immense challenges facing modern aviation today.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 5.4,
+        "votes": 12
+      },
+      "runtime": 52,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "race for the sky",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 1,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Race for the Sky",
+      "titleSlug": "race-for-the-sky",
+      "tmdbId": 157690,
+      "tvMazeId": 0,
+      "tvRageId": 0,
+      "tvdbId": 434554,
+      "useSceneNumbering": false,
+      "year": 2022
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "21:15",
+      "certification": "TV-PG",
+      "cleanTitle": "nichttotzukriegen",
+      "ended": true,
+      "firstAired": "2017-03-09T00:00:00Z",
+      "folder": "Nicht tot zu kriegen (2017)",
+      "genres": [
+        "Comedy"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/graphical/323224-g.jpg",
+          "url": "/MediaCoverProxy/edfd4a607427e36af69ad84a4d5f057696cc6f19821a63112124e3496423eee0/323224-g.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/posters/323224-1.jpg",
+          "url": "/MediaCoverProxy/b48df83060a4929ab65f931a0cd9708dc328515a750cf926acd49f6320746441/323224-1.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/fanart/original/323224-1.jpg",
+          "url": "/MediaCoverProxy/7c132d3fe89d240a9ac5978285518eb8f44475d3d3c1dfd351a80be4f22b3fa7/323224-1.jpg"
+        }
+      ],
+      "imdbId": "tt6219106",
+      "languageProfileId": 1,
+      "lastAired": "2017-03-30T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "RTL Television",
+      "originalLanguage": {
+        "id": 4,
+        "name": "German"
+      },
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 6.8,
+        "votes": 24
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/posters/323224-1.jpg",
+      "runtime": 25,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "nicht tot zu kriegen",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 1,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Nicht tot zu kriegen",
+      "titleSlug": "nicht-tot-zu-kriegen",
+      "tmdbId": 69996,
+      "tvMazeId": 0,
+      "tvRageId": 0,
+      "tvdbId": 323224,
+      "useSceneNumbering": false,
+      "year": 2017
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "00:00",
+      "cleanTitle": "hetvuurvandefriezen",
+      "ended": true,
+      "firstAired": "2024-07-13T00:00:00Z",
+      "folder": "Het Vuur van de Friezen (2024)",
+      "genres": [
+        "History"
+      ],
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/457305/banners/67619aa3a9e16.jpg",
+          "url": "/MediaCoverProxy/cf8dc14ec4c1a9457dc1f4ae3c7dc90262dbcf35365d1ad281758e6dc55d3baa/67619aa3a9e16.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/457305/posters/674a1cae17c30.jpg",
+          "url": "/MediaCoverProxy/d7a4b0c9ec2a6022862db70a4155c3f6cfa27e159eb8d3b153e3492fa0aa611e/674a1cae17c30.jpg"
+        }
+      ],
+      "imdbId": "tt33265472",
+      "languageProfileId": 1,
+      "lastAired": "2024-08-10T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "originalLanguage": {
+        "id": 7,
+        "name": "Dutch"
+      },
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 8.1,
+        "votes": 9
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/v4/series/457305/posters/674a1cae17c30.jpg",
+      "runtime": 40,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "het vuur van de friezen",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 1,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Het Vuur van de Friezen",
+      "titleSlug": "het-vuur-van-de-friezen",
+      "tmdbId": 259163,
+      "tvMazeId": 0,
+      "tvRageId": 0,
+      "tvdbId": 457305,
+      "useSceneNumbering": false,
+      "year": 2024
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "22:45",
+      "cleanTitle": "thedreamflight",
+      "ended": true,
+      "firstAired": "2015-07-22T00:00:00Z",
+      "folder": "The dream of flight (2015)",
+      "genres": [
+        "Adventure",
+        "Documentary",
+        "Sport"
+      ],
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/299593/posters/620a0a910eb60.jpg",
+          "url": "/MediaCoverProxy/77e41d0a545828a3b75adbeae93ebe2e24afdaa27aff473d859ad767032451e8/620a0a910eb60.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/299593/backgrounds/620a0b49645c5.jpg",
+          "url": "/MediaCoverProxy/293773086a1ce3b78e43a239f32a21fcf7d3521422019117903ce574a4d490af/620a0b49645c5.jpg"
+        }
+      ],
+      "imdbId": "tt4887322",
+      "languageProfileId": 1,
+      "lastAired": "2015-08-19T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "SF 1",
+      "originalLanguage": {
+        "id": 4,
+        "name": "German"
+      },
+      "overview": "His passion for flying took hold of him at the age of nine - and never let go: Chrigel Maurer, the eagle of Adelboden. Today he is one of the world's best paraglider pilots. The 33-year-old travels the globe from competition to competition. He has won the X-Alps three times, taken the Swiss championship title three times, flown countless podium places at paragliding acro events and long-distance competitions - and yet he is still in search of the ultimate challenge. What drives him to push his physical and mental limits? Where does the ability to turn failures and disappointments into new goals come from, and where does the irrepressible will to keep developing come from?",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 0,
+        "votes": 0
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/v4/series/299593/posters/620a0a910eb60.jpg",
+      "runtime": 25,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "dream of flight",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 1,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "The dream of flight",
+      "titleSlug": "the-dream-of-flight",
+      "tmdbId": 0,
+      "tvMazeId": 0,
+      "tvRageId": 0,
+      "tvdbId": 299593,
+      "useSceneNumbering": false,
+      "year": 2015
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "20:15",
+      "cleanTitle": "brievenaanandalusie",
+      "ended": true,
+      "firstAired": "2019-09-08T00:00:00Z",
+      "folder": "Brieven aan Andalusië (2019)",
+      "genres": [
+        "Documentary"
+      ],
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/series/369952/posters/62030297.jpg",
+          "url": "/MediaCoverProxy/cbb072ee0f4ab042e35d9dafaa94feaae73d6326d3dc00aff7fdeeef4728ee83/62030297.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/fanart/original/5d9c9690d3034.jpg",
+          "url": "/MediaCoverProxy/4d3e80c065132414d082a09b361e39ca37d100d089d8943e33563ade8f2db17d/5d9c9690d3034.jpg"
+        }
+      ],
+      "languageProfileId": 1,
+      "lastAired": "2019-10-13T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "VPRO",
+      "originalLanguage": {
+        "id": 7,
+        "name": "Dutch"
+      },
+      "overview": "Brieven aan Andalusië is een zesdelige, persoonlijke serie van Stef Biemans die een jaar geleden met zijn familie naar Zuid-Spanje vluchtte vanwege de politieke onrust en protesten in Nicaragua. Het land waar hij al vijftien jaar woonde. Om contact te krijgen met de mensen uit zijn nieuwe omgeving, stuurt hij brieven met vragen over Andalusië.\r\n\r\nMeer dan een jaar geleden woonde Stef Biemans nog met zijn familie in Nicaragua. Toen het land in een diepe crisis belandde en president Daniel Ortega de protesten met harde hand de kop in drukte, veranderde de stad (en straat) waar hij woonde in een slagveld. Stef zocht naar een toevluchtsoord en belandde met zijn vrouw en kinderen in Andalusië, Zuid-Spanje. Om Andalusië beter te leren kennen schrijft hij brieven aan de streekbewoners. Hij correspondeert met hen over zaken als migratie, armoede, religie, oud dictator Franco en het belang van (schoon)familie. Aan de hand van deze briefwisselingen probeert Stef zijn voorlopige thuisbasis beter te leren kennen. Parallel aan de verhalen die voortvloeien uit Stefs correspondentie, is er aandacht voor zijn persoonlijke situatie en voor de crisis in Nicaragua.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 0,
+        "votes": 0
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/series/369952/posters/62030297.jpg",
+      "runtime": 45,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "brieven aan andalusië",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 1,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Brieven aan Andalusië",
+      "titleSlug": "brieven-aan-andalusie",
+      "tmdbId": 120245,
+      "tvMazeId": 0,
+      "tvRageId": 0,
+      "tvdbId": 369952,
+      "useSceneNumbering": false,
+      "year": 2019
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "00:00",
+      "certification": "0+",
+      "cleanTitle": "lenasfarm",
+      "ended": false,
+      "firstAired": "2025-02-04T00:00:00Z",
+      "folder": "Lenas Farm (2025)",
+      "genres": [
+        "Animation",
+        "Children",
+        "Family"
+      ],
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/480520/posters/6a5f759860b51.jpg",
+          "url": "/MediaCoverProxy/b31238c0381777d2c3c2dee1a0a3282a41d35cde29da1aa826d15dc44d77943f/6a5f759860b51.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/480520/backgrounds/6a5f76f693bc2.jpg",
+          "url": "/MediaCoverProxy/548e1d5e168af2ffa0d70394c1420fcc95b70f040f772d81e0255d5c31137db2/6a5f76f693bc2.jpg"
+        }
+      ],
+      "imdbId": "tt35661249",
+      "languageProfileId": 1,
+      "lastAired": "2025-03-11T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "KIKA",
+      "originalLanguage": {
+        "id": 4,
+        "name": "German"
+      },
+      "overview": "Living together is not easy - if you are an eccentric frog, a daydreaming piglet, a walking disaster of a dog or another one of the bunch of peculiar animals on this small farm. But no matter what, Lena loves them all the same.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 8.4,
+        "votes": 26
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/v4/series/480520/posters/6a5f759860b51.jpg",
+      "runtime": 6,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "lenas farm",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 1,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "continuing",
+      "tags": [],
+      "title": "Lena's Farm",
+      "titleSlug": "lenas-farm",
+      "tmdbId": 116552,
+      "tvMazeId": 0,
+      "tvRageId": 0,
+      "tvdbId": 480520,
+      "useSceneNumbering": false,
+      "year": 2025
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "00:00",
+      "cleanTitle": "ulflundellfrihetenochensamheten",
+      "ended": true,
+      "firstAired": "2020-12-30T00:00:00Z",
+      "folder": "Ulf Lundell friheten och ensamheten (2020)",
+      "genres": [
+        "Documentary",
+        "Musical"
+      ],
+      "images": [],
+      "languageProfileId": 1,
+      "lastAired": "2021-01-06T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "SVT",
+      "originalLanguage": {
+        "id": 14,
+        "name": "Swedish"
+      },
+      "overview": "No one can compare to Ulf Lundell when it comes to productivity and versatility. He's been active for almost halv a century as an artist, songwriter and as an author. In this  documentary by Marie Nyeröd we get to follow Ulf Lundell through his life - a life like a story tale.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 0,
+        "votes": 0
+      },
+      "runtime": 60,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "ulf lundell friheten och ensamheten",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 1,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Ulf Lundell - friheten och ensamheten",
+      "titleSlug": "ulf-lundell---friheten-och-ensamheten",
+      "tmdbId": 0,
+      "tvMazeId": 0,
+      "tvRageId": 0,
+      "tvdbId": 394529,
+      "useSceneNumbering": false,
+      "year": 2020
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "00:00",
+      "cleanTitle": "israelundpalastinafriedenunmoglich",
+      "ended": true,
+      "folder": "ISRAEL und PALÄSTINA Frieden unmöglich (0)",
+      "genres": [
+        "Documentary",
+        "History"
+      ],
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/478644/posters/6a1c9183700d3.jpg",
+          "url": "/MediaCoverProxy/ac396f2e935220ff60c975608e8357c57490e33556f0df6720a0e7d43e7b49b0/6a1c9183700d3.jpg"
+        }
+      ],
+      "languageProfileId": 1,
+      "monitorNewItems": "all",
+      "monitored": true,
+      "originalLanguage": {
+        "id": 4,
+        "name": "German"
+      },
+      "overview": "Seit 1948 prägt ein blutiger Konflikt den Nahen Osten: Kriege, Besatzung, Intifadas, Terror und gescheiterte Friedenspläne - bis hin zum Hamas-Angriff auf Israel im Jahr 2023. (Info ZDF)",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 0,
+        "votes": 0
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/v4/series/478644/posters/6a1c9183700d3.jpg",
+      "runtime": 50,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "israel und palästina frieden unmöglich",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 1,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "ISRAEL und PALÄSTINA - Frieden unmöglich?",
+      "titleSlug": "israel-und-palastina---frieden-unmoglich",
+      "tmdbId": 0,
+      "tvMazeId": 0,
+      "tvRageId": 0,
+      "tvdbId": 478644,
+      "useSceneNumbering": false,
+      "year": 0
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "20:15",
+      "cleanTitle": "rosinworldwideothercountriesotherfries",
+      "ended": true,
+      "firstAired": "2015-08-11T00:00:00Z",
+      "folder": "Rosin worldwide other countries other fries (2015)",
+      "genres": [
+        "Food",
+        "Reality"
+      ],
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/318034/posters/6821dfab330e1.jpg",
+          "url": "/MediaCoverProxy/a62d4e869df9146e8b0fb7b6e944c3b882725c7ff37b7f5cce329781e3c1d8da/6821dfab330e1.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/318034/backgrounds/6821dfbca0cda.jpg",
+          "url": "/MediaCoverProxy/48ebb8dd972aaff51662baba310b841cd085e101ece2aefd1885ae0d9348fb94/6821dfbca0cda.jpg"
+        }
+      ],
+      "imdbId": "tt9177884",
+      "languageProfileId": 1,
+      "lastAired": "2016-10-25T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "network": "Kabel eins",
+      "originalLanguage": {
+        "id": 4,
+        "name": "German"
+      },
+      "overview": "Now his expertise is being put to use abroad: in \"Rosin weltweit - Andere Länder, andere Fritten\", Rosin helps German expats whose dream of owning their own restaurant far from home is on the brink of failure.",
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 0,
+        "votes": 0
+      },
+      "remotePoster": "https://artworks.thetvdb.com/banners/v4/series/318034/posters/6821dfab330e1.jpg",
+      "runtime": 90,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 2
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "rosin worldwide other countries other fries",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 2,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "ended",
+      "tags": [],
+      "title": "Rosin worldwide - other countries, other fries",
+      "titleSlug": "rosin-worldwide---other-countries-other-fries",
+      "tmdbId": 68164,
+      "tvMazeId": 0,
+      "tvRageId": 0,
+      "tvdbId": 318034,
+      "useSceneNumbering": false,
+      "year": 2015
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "airTime": "00:00",
+      "cleanTitle": "fischbrotchenfrittenfalafelimbisseimnorden",
+      "ended": false,
+      "firstAired": "2024-09-09T00:00:00Z",
+      "folder": "Fischbrötchen Fritten and Falafel – Imbisse im Norden (2024)",
+      "genres": [
+        "Documentary"
+      ],
+      "images": [],
+      "languageProfileId": 1,
+      "lastAired": "2024-09-12T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": true,
+      "originalLanguage": {
+        "id": 4,
+        "name": "German"
+      },
+      "qualityProfileId": 0,
+      "ratings": {
+        "value": 0,
+        "votes": 0
+      },
+      "runtime": 29,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "fischbrötchen fritten falafel imbisse im norden",
+      "statistics": {
+        "episodeCount": 0,
+        "episodeFileCount": 0,
+        "percentOfEpisodes": 0,
+        "seasonCount": 1,
+        "sizeOnDisk": 0,
+        "totalEpisodeCount": 0
+      },
+      "status": "continuing",
+      "tags": [],
+      "title": "Fischbrötchen, Fritten & Falafel – Imbisse im Norden",
+      "titleSlug": "fischbrotchen-fritten-and-falafel--imbisse-im-norden",
+      "tmdbId": 0,
+      "tvMazeId": 0,
+      "tvRageId": 0,
+      "tvdbId": 454909,
+      "useSceneNumbering": false,
+      "year": 2024
+    }
+  ],
+  "recordedAt": "2026-11-09T22:23:22Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/series/lookup?term=frieren"
+  },
+  "status": 200
+}

@@ -1,0 +1,7 @@
+{
+ "$from": "customformat-create",
+ "$set": {
+  "name": "x265 (Unarr, edited)",
+  "includeCustomFormatWhenRenaming": true
+ }
+}

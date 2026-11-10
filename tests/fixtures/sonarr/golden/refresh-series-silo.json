@@ -1,0 +1,36 @@
+{
+  "body": {
+    "body": {
+      "completionMessage": "Completed",
+      "isExclusive": false,
+      "isLongRunning": true,
+      "isNewSeries": false,
+      "name": "RefreshSeries",
+      "requiresDiskAccess": false,
+      "sendUpdatesToClient": true,
+      "seriesIds": [
+        23
+      ],
+      "suppressMessages": false,
+      "trigger": "manual",
+      "updateScheduledTask": false
+    },
+    "commandName": "Refresh Series",
+    "id": 461705,
+    "name": "RefreshSeries",
+    "priority": "normal",
+    "queued": "2026-11-09T22:21:46Z",
+    "result": "unknown",
+    "sendUpdatesToClient": true,
+    "status": "queued",
+    "trigger": "manual",
+    "updateScheduledTask": false
+  },
+  "recordedAt": "2026-11-09T22:21:46Z",
+  "request": {
+    "body": "bodies/command-refresh-series-23.json",
+    "method": "POST",
+    "path": "/api/v3/command"
+  },
+  "status": 201
+}

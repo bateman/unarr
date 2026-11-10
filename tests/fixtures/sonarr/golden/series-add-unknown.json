@@ -1,0 +1,17 @@
+{
+  "body": [
+    {
+      "attemptedValue": 999999999,
+      "errorMessage": "A series with this ID was not found. Path: ",
+      "propertyName": "TvdbId",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-09T22:23:22Z",
+  "request": {
+    "body": "bodies/series-add-unknown.json",
+    "method": "POST",
+    "path": "/api/v3/series"
+  },
+  "status": 400
+}

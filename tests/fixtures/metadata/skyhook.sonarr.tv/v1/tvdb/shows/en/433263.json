@@ -1,0 +1,627 @@
+{
+ "tvdbId": 433263,
+ "title": "Doc (US)",
+ "overview": "After a brain injury erases the last eight years of Dr. Amy Larsen's life, she must navigate an unfamiliar world where she has no recollection of patients she's treated or the tragedy that caused her to push everyone away.",
+ "slug": "doc-us",
+ "originalCountry": "usa",
+ "originalLanguage": "eng",
+ "language": "eng",
+ "firstAired": "2025-01-07",
+ "lastAired": "2026-11-17",
+ "tvMazeId": 67884,
+ "tmdbId": 255055,
+ "imdbId": "tt26748321",
+ "malIds": [],
+ "anidbIds": [],
+ "aniListIds": [],
+ "lastUpdated": "2026-11-09T13:03:20Z",
+ "status": "Continuing",
+ "runtime": 43,
+ "timeOfDay": {
+  "hours": 21,
+  "minutes": 0
+ },
+ "originalNetwork": "FOX",
+ "network": "FOX",
+ "genres": [
+  "Drama"
+ ],
+ "contentRating": "12+",
+ "rating": {
+  "count": 8020,
+  "value": "7.3"
+ },
+ "alternativeTitles": [
+  {
+   "title": "Doc"
+  },
+  {
+   "title": "Doc (2025)"
+  },
+  {
+   "title": "Doc (US)"
+  }
+ ],
+ "actors": [
+  {
+   "name": "Molly Parker",
+   "character": "Amy Larsen",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/304583/photo/6605784c6c90f.jpg"
+  },
+  {
+   "name": "Omar Metwally",
+   "character": "Michael Hamda",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/368262/photo/63f158c410f98.jpg"
+  },
+  {
+   "name": "Amirah Vann",
+   "character": "Gina Walker",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/485840/photo/635e2af58ace0.jpg"
+  },
+  {
+   "name": "Jon-Michael Ecker",
+   "character": "Jake Heller",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8143768/photo/6093a353c4428.jpg"
+  },
+  {
+   "name": "Anya Banerjee",
+   "character": "Sonya Maitra",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9108015/photo/63dd7b1e6c68a.jpg"
+  },
+  {
+   "name": "Patrick Walker",
+   "character": "Theodore \"TJ\" Coleman",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/543307/photo/61e2caf345991.jpg"
+  },
+  {
+   "name": "Felicity Huffman",
+   "character": "Joan Riddley",
+   "image": "https://artworks.thetvdb.com/banners/person/285334/64e180aa36370.jpg"
+  },
+  {
+   "name": "Scott Wolf",
+   "character": "Richard Miller",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/294114/photo/60b964e1a4b9d.jpg"
+  },
+  {
+   "name": "Blair Underwood",
+   "character": "Ben Grant",
+   "image": "https://artworks.thetvdb.com/banners/person/258033/primary.jpg"
+  },
+  {
+   "name": "Charlotte Fountain-Jardim",
+   "character": "Katie Hamda ",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9146039/photo/68b78ed2192a1.jpg"
+  }
+ ],
+ "images": [
+  {
+   "coverType": "Banner",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/433263/banners/675ec1dc40af9.jpg"
+  },
+  {
+   "coverType": "Poster",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/433263/posters/68aa16885d5ee.jpg"
+  },
+  {
+   "coverType": "Fanart",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/433263/backgrounds/696789f761136.jpg"
+  },
+  {
+   "coverType": "Clearlogo",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/433263/clearlogo/6aa994a538807.png"
+  }
+ ],
+ "seasons": [
+  {
+   "seasonNumber": 1,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2056512/posters/68c8526353fdc.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 2,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2195016/posters/68c85243d9208.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 3,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2249563/posters/6ab129db0ba80.jpg"
+    }
+   ]
+  }
+ ],
+ "episodes": [
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 9709039,
+   "seasonNumber": 1,
+   "episodeNumber": 1,
+   "title": "If At First You Don’t Succeed…",
+   "airDate": "2025-01-07",
+   "airDateUtc": "2025-01-08T02:00:00Z",
+   "runtime": 44,
+   "overview": "When Chief of Internal Medicine Dr. Amy Larsen suffers a catastrophic brain injury, her life is turned upside down. Still, determined to once again practice medicine, she charts a new path forward, ready to face whatever obstacles stand in her way.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9709039/screencap/66465e7c140f6.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 10879045,
+   "seasonNumber": 1,
+   "episodeNumber": 2,
+   "title": "…Try, Try Again",
+   "airDate": "2025-01-14",
+   "airDateUtc": "2025-01-15T02:00:00Z",
+   "runtime": 44,
+   "overview": "While at the hospital recovering, Amy can’t help but insert herself into her roommate’s case. Meanwhile, all the other doctors and nurses have to adjust to the once formidable Chief now being a patient.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10879045/screencap/6773269226e53.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 10895855,
+   "seasonNumber": 1,
+   "episodeNumber": 3,
+   "title": "Day One",
+   "airDate": "2025-01-21",
+   "airDateUtc": "2025-01-22T02:00:00Z",
+   "runtime": 44,
+   "overview": "Amy is allowed to return to work under strict guidelines and teams up with TJ to treat a patient suffering from mysterious liver problems. Sonya and Jake help an elderly couple navigate the final chapter of their love story.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10895855/screencap/6787169dd49c6.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 10895856,
+   "seasonNumber": 1,
+   "episodeNumber": 4,
+   "title": "One Small Step",
+   "airDate": "2025-01-28",
+   "airDateUtc": "2025-01-29T02:00:00Z",
+   "runtime": 44,
+   "overview": "Amy must confront who she became after a tragedy struck her family 7 years ago. Sonya and TJ disagree on how to handle a sick Marine, and Amy and Jake make a life-changing discovery about an Alzheimer’s patient.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10895856/screencap/67898932591c9.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 10895857,
+   "seasonNumber": 1,
+   "episodeNumber": 5,
+   "title": "He Ain’t Heavy",
+   "airDate": "2025-02-04",
+   "airDateUtc": "2025-02-05T02:00:00Z",
+   "runtime": 44,
+   "overview": "Amy and Sonya endeavor to help a teen in need of a bone marrow transplant and his younger brother whose own health issues jeopardize his ability to donate. Jake deals with a fainting bride and her worried groom. Michael struggles with a secret he’s been keeping.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10895857/screencap/67be78ef2e475.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 10895858,
+   "seasonNumber": 1,
+   "episodeNumber": 6,
+   "title": "Once More, with Feeling",
+   "airDate": "2025-02-11",
+   "airDateUtc": "2025-02-12T02:00:00Z",
+   "runtime": 44,
+   "overview": "It’s a race against time as Amy and Jake try to uncover the cause of a unique patient’s worsening condition. Gina treats a quirky hypochondriac, and Amy makes a shocking discovery about her pre-accident love life.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10895858/screencap/6795249ddc3a1.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 10895859,
+   "seasonNumber": 1,
+   "episodeNumber": 7,
+   "title": "Secrets and Lies",
+   "airDate": "2025-02-18",
+   "airDateUtc": "2025-02-19T02:00:00Z",
+   "runtime": 44,
+   "overview": "Sonya wrestles with treating a guy from her past and must rely on Amy to help her. Richard deals with a family situation. Jake and TJ debate the moral implications of a diagnosis.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10895859/screencap/67be79233cb76.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 10895860,
+   "seasonNumber": 1,
+   "episodeNumber": 8,
+   "title": "Man Plans",
+   "airDate": "2025-02-25",
+   "airDateUtc": "2025-02-26T02:00:00Z",
+   "runtime": 44,
+   "overview": "Amy and Richard reconnect while treating a patient whose diagnosis is not at all what it seems. A real life romcom comes to Westside Hospital, bringing love to the forefront of everyone’s minds.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10895860/screencap/67be78aa53179.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 10895861,
+   "seasonNumber": 1,
+   "episodeNumber": 9,
+   "title": "What Goes Up…",
+   "airDate": "2025-03-11",
+   "airDateUtc": "2025-03-12T01:00:00Z",
+   "runtime": 44,
+   "overview": "Amy, finally allowed to practice medicine again without supervision, struggles to diagnose her most complicated patient yet: TJ’s dad. Sonya and Jake treat a single mom who’s reluctant to stay in the hospital. Richard tries to contain the truth about Dixon.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10895861/screencap/67be78ca81bf9.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 10895863,
+   "seasonNumber": 1,
+   "episodeNumber": 10,
+   "title": "…Must Come Down",
+   "airDate": "2025-03-18",
+   "airDateUtc": "2025-03-19T01:00:00Z",
+   "runtime": 44,
+   "finaleType": "season",
+   "overview": "A mass casualty event requires all hands on deck at Westside Hospital. Amidst the chaos, Gina deals with a devastating revelation and Amy is forced to confront her demons.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10895863/screencap/67c8760d466de.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 11230696,
+   "seasonNumber": 2,
+   "episodeNumber": 1,
+   "title": "Her Heart",
+   "airDate": "2025-09-14",
+   "airDateUtc": "2025-09-15T01:00:00Z",
+   "runtime": 43,
+   "overview": "Amy's past comes back to haunt her when a desperate father sacrifices everything to secure his daughter's heart transplant.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11230696/screencap/68b233e576146.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 11269780,
+   "seasonNumber": 2,
+   "episodeNumber": 2,
+   "title": "Delusions of Grandeur",
+   "airDate": "2025-09-30",
+   "airDateUtc": "2025-10-01T01:00:00Z",
+   "runtime": 43,
+   "overview": "Amy grapples with having memories while treating a mother-to-be with a mysterious condition. Also, Dr. Joan Ridley, Amy's mentor, visits Westside.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11269780/screencap/68c9ace5ed525.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 11269781,
+   "seasonNumber": 2,
+   "episodeNumber": 3,
+   "title": "New Blood",
+   "airDate": "2025-10-07",
+   "airDateUtc": "2025-10-08T01:00:00Z",
+   "runtime": 43,
+   "overview": "A patient forces Amy to confront the realities of medical tourism, TJ helps a veteran with his prosthetic and Joan drops a bombshell.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11269781/screencap/68dd2d3577469.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 11290700,
+   "seasonNumber": 2,
+   "episodeNumber": 4,
+   "title": "Something to Prove",
+   "airDate": "2025-10-14",
+   "airDateUtc": "2025-10-15T01:00:00Z",
+   "runtime": 43,
+   "overview": "An outdated medical proxy form creates tension between a patient's ex-husband and current partner. Amy, Jake, and new intern Hannah investigate a college student's sudden blindness.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11290700/screencap/68dd2d60648e3.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 11301014,
+   "seasonNumber": 2,
+   "episodeNumber": 5,
+   "title": "Tightrope",
+   "airDate": "2025-10-21",
+   "airDateUtc": "2025-10-22T01:00:00Z",
+   "runtime": 43,
+   "overview": "A popular weight loss medication reveals the cracks in a couple's relationship and two sisters face an unexpected diagnosis.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11301014/screencap/68e6992e27f5e.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 11335292,
+   "seasonNumber": 2,
+   "episodeNumber": 6,
+   "title": "Saints and Sinners",
+   "airDate": "2025-11-04",
+   "airDateUtc": "2025-11-05T02:00:00Z",
+   "runtime": 43,
+   "overview": "Amy treats a Chaplain who helps her reconcile with the past, while Michael is under investigation for his actions during the hostage crisis.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11335292/screencap/68f0284b8f6a5.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 11335293,
+   "seasonNumber": 2,
+   "episodeNumber": 7,
+   "title": "What I Did for Love",
+   "airDate": "2025-11-11",
+   "airDateUtc": "2025-11-12T02:00:00Z",
+   "runtime": 44,
+   "overview": "Amy and Gina, with an assist from Jake, team up to help a victim of domestic abuse, while TJ finds himself in the spotlight when he, Sonya and Liz treat a social media influencer.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11335293/screencap/690cd6184b501.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 11349401,
+   "seasonNumber": 2,
+   "episodeNumber": 8,
+   "title": "He Loved You",
+   "airDate": "2025-11-18",
+   "airDateUtc": "2025-11-19T02:00:00Z",
+   "runtime": 43,
+   "overview": "Jake refuses to give up on a beloved patient, landing himself in conflict with several Westside surgeons and when Amy's neuro tests elicit memories of Danny, she pushes herself too far.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11349401/screencap/690cd5a7ea8db.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 11429403,
+   "seasonNumber": 2,
+   "episodeNumber": 9,
+   "title": "Kaddish",
+   "airDate": "2025-11-25",
+   "airDateUtc": "2025-11-26T02:00:00Z",
+   "runtime": 43,
+   "finaleType": "midseason",
+   "overview": "Grief helps clarify Jake's feelings for Amy, and a flashback to the pandemic reveals the truth about why he stayed at Westside. To Hannah's surprise and dismay, Charlie goes too far with their plan to destroy Amy, causing explosive repercussions.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11429403/screencap/691360da30c43.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 11450088,
+   "seasonNumber": 2,
+   "episodeNumber": 10,
+   "title": "Chief",
+   "airDate": "2026-01-06",
+   "airDateUtc": "2026-01-07T02:00:00Z",
+   "runtime": 43,
+   "overview": "With the search underway to find out the truth about Amy's hacked accounts, she and Sonya butt heads while treating a homeless patient. Jake and TJ help a distraught mother figure out why her daughter is in a coma. Hannah cares for a charming high school athlete.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11450088/screencap/6979a67674e13.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 11496473,
+   "seasonNumber": 2,
+   "episodeNumber": 11,
+   "title": "Family Matters",
+   "airDate": "2026-01-13",
+   "airDateUtc": "2026-01-14T02:00:00Z",
+   "runtime": 43,
+   "overview": "The search for Amy's hacker intensifies. Hannah, devastated by the death of her patient, works with Amy to treat a sick man whose daughter believes has been poisoned. Meanwhile, Sonya and TJ examine middle school kids for scoliosis.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11496473/screencap/6979a6c10e962.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 11496474,
+   "seasonNumber": 2,
+   "episodeNumber": 12,
+   "title": "Inquisition",
+   "airDate": "2026-01-20",
+   "airDateUtc": "2026-01-21T02:00:00Z",
+   "runtime": 43,
+   "overview": "Charlie fights for his life at Westside with Hannah by his side. The Board launches an internal investigation into Brian Clark's resignation, putting everyone in the hot seat. A familiar face returns to Westside.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11496474/screencap/6979a5b9e8418.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 11537548,
+   "seasonNumber": 2,
+   "episodeNumber": 13,
+   "title": "Fare Well",
+   "airDate": "2026-01-27",
+   "airDateUtc": "2026-01-28T02:00:00Z",
+   "runtime": 43,
+   "overview": "The race for Chief resident intensifies as Joan tasks Amy and Sonya with evaluating each other's case work. Amy tends to a politician with a disability. Sonya struggles to find a solution to her combative patient's abdominal pain. Michael's parents come to town.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11537548/screencap/6979a6112eed2.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 11537549,
+   "seasonNumber": 2,
+   "episodeNumber": 14,
+   "title": "When You Know, You Know",
+   "airDate": "2026-02-03",
+   "airDateUtc": "2026-02-04T02:00:00Z",
+   "runtime": 43,
+   "overview": "Amy and Jake treat an expectant mother injured during a robbery. Michael is challenged to open up when Katie's therapist invites him and Amy to a session. TJ and Sonya help Julie navigate a mysterious illness and an unexpected romance.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11537549/screencap/6979a5609df95.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 11563016,
+   "seasonNumber": 2,
+   "episodeNumber": 15,
+   "title": "Trust",
+   "airDate": "2026-02-10",
+   "airDateUtc": "2026-02-11T02:00:00Z",
+   "runtime": 43,
+   "overview": "While navigating the fallout from Katie's secret, Amy treats a critically ill patient with a dark one of her own. Gina and Jake evaluate a world-class poker player. Sonya and TJ investigate their theory behind Joan's frequent absences and Richard returns with a trick up his sleeve.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11563016/screencap/6986b3837c000.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 11600249,
+   "seasonNumber": 2,
+   "episodeNumber": 16,
+   "title": "The Best We Can Do",
+   "airDate": "2026-03-03",
+   "airDateUtc": "2026-03-04T02:00:00Z",
+   "runtime": 43,
+   "overview": "Met with hostility upon his return, Richard looks to redeem himself while treating an overworked food delivery worker. Sonya and TJ enlist Jake's help with the delicate Joan situation. Amy and TJ take on the case of a well-known medical malpractice lawyer.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11600249/screencap/699773a7a2257.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 11600250,
+   "seasonNumber": 2,
+   "episodeNumber": 17,
+   "title": "Good Hands",
+   "airDate": "2026-03-10",
+   "airDateUtc": "2026-03-11T01:00:00Z",
+   "runtime": 43,
+   "overview": "After a tragic accident, one of Joan’s oldest friends is rushed to Minneapolis for treatment, forcing Amy to confront her about her illness. Meanwhile, Richard and TJ find themselves at odds when they treat a tech bro who thrives on pushing boundaries and Michael tries to pick up the pieces in the wake of his fractured marriage.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11600250/screencap/69a0772943f64.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 11606738,
+   "seasonNumber": 2,
+   "episodeNumber": 18,
+   "title": "Orientation",
+   "airDate": "2026-03-24",
+   "airDateUtc": "2026-03-25T01:00:00Z",
+   "runtime": 44,
+   "overview": "When Amy and Michael take Katie on a road trip to her college orientation, they pass a familiar campsite and decide to stop and hike the trail. The journey quickly becomes harrowing when they discover an injured man whose life hangs in the balance. Stranded in the middle of nowhere, with no cell service, it's up to the three of them to somehow save him.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11606738/screencap/69b341696c909.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 11606739,
+   "seasonNumber": 2,
+   "episodeNumber": 19,
+   "title": "Next",
+   "airDate": "2026-03-31",
+   "airDateUtc": "2026-04-01T01:00:00Z",
+   "runtime": 43,
+   "overview": "On her last day at Westside, Joan chooses an unlikely successor, crowns a Chief Resident and imparts some final wisdom to the next generation. Gina steps in to help TJ's patient, a foster child suffering from rheumatoid arthritis. Amy and Jake's tension intensifies while treating a pregnant teen caught between her divorced parents.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11606739/screencap/69c845509f7c7.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 11606740,
+   "seasonNumber": 2,
+   "episodeNumber": 20,
+   "title": "The Big Chair",
+   "airDate": "2026-04-07",
+   "airDateUtc": "2026-04-08T01:00:00Z",
+   "runtime": 43,
+   "overview": "On Michael's first day as Chief of Internal Medicine, Joan arrives at the hospital as a patient in dire straits. Amy, determined to save her, clashes repeatedly with Richard over Joan's treatment plan. Meanwhile, Gina makes a nearly impossible medical decision for a young patient and Liz fights for her allegations against Richard to be taken seriously.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11606740/screencap/69cd6f0b6aea0.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 11606741,
+   "seasonNumber": 2,
+   "episodeNumber": 21,
+   "title": "Stuck",
+   "airDate": "2026-04-14",
+   "airDateUtc": "2026-04-15T01:00:00Z",
+   "runtime": 43,
+   "overview": "A mysterious, fast-acting and extremely deadly virus triggers an emergency lockdown on the 6th floor of Westside Hospital. In the face of seemingly insurmountable odds, everyone must work together to contact trace, triage and attempt to contain this terrifying killer. As fear grips the staff and patients alike, Amy pushes through debilitating memory seizures and races to find a cure before it’s too late.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11606741/screencap/69d83962077a7.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 11606742,
+   "seasonNumber": 2,
+   "episodeNumber": 22,
+   "title": "Happy Birthday",
+   "airDate": "2026-04-14",
+   "airDateUtc": "2026-04-15T01:00:00Z",
+   "runtime": 43,
+   "finaleType": "season",
+   "overview": "In an effort to save a crashing Richard from a deadly virus, Amy gets infected with it. Michael and the team work tirelessly to help her and the other patients but their experimental treatments fail and Amy becomes critically ill. When a promising cure finally emerges, there isn’t enough to save everyone—forcing the team to decide who will live and who will die, as Amy’s life hangs in the balance.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11606742/screencap/69e05fb838d54.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 11870167,
+   "seasonNumber": 3,
+   "episodeNumber": 1,
+   "title": "Wherefore Art Thou",
+   "airDate": "2026-09-22",
+   "airDateUtc": "2026-09-23T01:00:00Z",
+   "runtime": 43,
+   "overview": "On Amy and Sonya's first day as Co-Chief Resident, they must coach a fresh crop of interns through a mysterious case that seems to defy medical logic. Jake and TJ adjust to new roles within the hospital. Meanwhile, Dr. Ben Grant returns to Westside with a secret plan to reshape the Surgical Department.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11870167/screencap/6aaad072b4518.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 11936710,
+   "seasonNumber": 3,
+   "episodeNumber": 2,
+   "title": "Ready or Not",
+   "airDate": "2026-09-29",
+   "airDateUtc": "2026-09-30T01:00:00Z",
+   "runtime": 43,
+   "overview": "When a horrific accident sends three members of the same family to Westside in critical condition, the entire staff must band together to save them and avert tragedy. Amidst the chaos, Amy must contend with a flood of emotional memories as she goes head to head with mysterious newcomer Dr. Ben Grant.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11936710/screencap/6aaad0ebc35cf.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 11936711,
+   "seasonNumber": 3,
+   "episodeNumber": 3,
+   "title": "I Know What I Want",
+   "airDate": "2026-10-06",
+   "airDateUtc": "2026-10-07T01:00:00Z",
+   "runtime": 44,
+   "overview": "Amy and Jake are paired together on a bizarre case that lays bare the still-raw feelings surrounding their fractured relationship. Old wounds also reopen for Michael when he and Sonya are thrust into a family crisis while trying to save a young addict. Meanwhile, Gina grapples with her life choices when Walter returns to Westside.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11936711/screencap/6abd68f9506c5.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 11966082,
+   "seasonNumber": 3,
+   "episodeNumber": 4,
+   "title": "Great Expectations",
+   "airDate": "2026-10-13",
+   "airDateUtc": "2026-10-14T01:00:00Z",
+   "runtime": 44,
+   "overview": "Amy and Ben go toe to toe when their cancer patient demands the impossible. Jake discovers a senior Westside surgeon has botched an operation and he must decide whether to speak out and risk his tenuous new position in cardiology. Sonya grapples with the weight of life-changing news.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11966082/screencap/6acd7f289f7c3.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 11966083,
+   "seasonNumber": 3,
+   "episodeNumber": 5,
+   "title": "S.O.S.",
+   "airDate": "2026-10-20",
+   "airDateUtc": "2026-10-21T01:00:00Z",
+   "runtime": 43,
+   "overview": "Amy must help a family process the news that their daughter's sudden illness could be fatal, while enduring a barrage of intrusive memory seizures. Despite unease in their relationship, TJ and Sonya are forced to work together to treat a man whose injuries appear to be self-inflicted.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11966083/screencap/6aca88cda8c15.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 12038282,
+   "seasonNumber": 3,
+   "episodeNumber": 6,
+   "title": "Facade",
+   "airDate": "2026-11-03",
+   "airDateUtc": "2026-11-04T02:00:00Z",
+   "runtime": 43,
+   "overview": "Amy and Jake work together to treat a patient whose secret past puts her life in danger. Meanwhile, after a key donor withdraws funding, Ben must scramble to save his artificial heart trial. Sonya and TJ's relationship is tested when Sonya's father visits Westside.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/12038282/screencap/6ae2995a33ccd.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 12052136,
+   "seasonNumber": 3,
+   "episodeNumber": 7,
+   "title": "Heroic Measures",
+   "airDate": "2026-11-10",
+   "airDateUtc": "2026-11-11T02:00:00Z",
+   "overview": "Revelations about Amy's brain health put her future at Westside in jeopardy. Gina pushes the limits of medicine to revive a patient who seems beyond saving. Meanwhile, Ben begins human trials on his artificial heart implant.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/12052136/screencap/6aeff6c9d0110.jpg"
+  },
+  {
+   "tvdbShowId": 433263,
+   "tvdbId": 12052137,
+   "seasonNumber": 3,
+   "episodeNumber": 8,
+   "title": "Operation",
+   "airDate": "2026-11-17",
+   "airDateUtc": "2026-11-18T02:00:00Z",
+   "overview": "Amy treats a rural patient whose condition has worsened significantly due to a lack of medical resources. As Ben prepares to launch the artificial heart surgery trial, Jake grapples with his role in deciding which patient gets to go first.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/12052137/screencap/6af1c497e0b91.jpg"
+  }
+ ]
+}

@@ -1,0 +1,208 @@
+{
+ "tvdbId": 418727,
+ "title": "Constellation",
+ "overview": "When a fatal accident occurs on board the International Space Station, a lone astronaut makes the heroic journey back to Earth, only to discover key pieces of her life—including her young daughter—have changed.",
+ "slug": "constellation",
+ "originalCountry": "usa",
+ "originalLanguage": "eng",
+ "language": "eng",
+ "firstAired": "2024-02-21",
+ "lastAired": "2024-03-27",
+ "tvMazeId": 61489,
+ "tmdbId": 197125,
+ "imdbId": "tt19395018",
+ "malIds": [],
+ "anidbIds": [],
+ "aniListIds": [],
+ "lastUpdated": "2026-10-15T00:55:27Z",
+ "status": "Ended",
+ "runtime": 53,
+ "timeOfDay": {
+  "hours": 0,
+  "minutes": 0
+ },
+ "originalNetwork": "Apple TV",
+ "network": "Apple TV",
+ "genres": [
+  "Drama",
+  "Science Fiction",
+  "Thriller"
+ ],
+ "contentRating": "TV-MA",
+ "rating": {
+  "count": 22632,
+  "value": "6.7"
+ },
+ "actors": [
+  {
+   "name": "Noomi Rapace",
+   "character": "Jo Ericsson",
+   "image": "https://artworks.thetvdb.com/banners/person/360661/primary.jpg"
+  },
+  {
+   "name": "Davina/Rosie Coleman",
+   "character": "Alice Ericsson-Taylor"
+  },
+  {
+   "name": "James D'Arcy",
+   "character": "Magnus Taylor",
+   "image": "https://artworks.thetvdb.com/banners/person/453267/5e81e9960fe49.jpg"
+  },
+  {
+   "name": "Jonathan Banks",
+   "character": "Henry Caldera",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/293588/photo/651bd47df1599.jpg"
+  },
+  {
+   "name": "Barbara Sukowa",
+   "character": "Irena Lysenko",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/531096/photo/63ee9fdc405ce.jpg"
+  },
+  {
+   "name": "William Catlett",
+   "character": "Paul Lancaster",
+   "image": "https://artworks.thetvdb.com/banners/person/8089059/62068249.jpg"
+  },
+  {
+   "name": "Julian Looman",
+   "character": "Frederic Duverger",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/579656/photo/651df0941a4cd.jpg"
+  }
+ ],
+ "images": [
+  {
+   "coverType": "Banner",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/418727/banners/65b3d430605bb.jpg"
+  },
+  {
+   "coverType": "Poster",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/418727/posters/66073ae40517e.jpg"
+  },
+  {
+   "coverType": "Fanart",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/418727/backgrounds/681873fcef7eb.jpg"
+  },
+  {
+   "coverType": "Clearlogo",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/418727/clearlogo/65dfcbd15574c.png"
+  }
+ ],
+ "seasons": [
+  {
+   "seasonNumber": 1,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/1993996/posters/65d606bbf11c7.jpg"
+    }
+   ]
+  }
+ ],
+ "episodes": [
+  {
+   "tvdbShowId": 418727,
+   "tvdbId": 9097959,
+   "seasonNumber": 1,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 1,
+   "title": "The Wounded Angel",
+   "airDate": "2024-02-21",
+   "airDateUtc": "2024-02-21T05:00:00Z",
+   "runtime": 58,
+   "overview": "A disaster on board the International Space Station becomes a fight for survival.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9097959/screencap/65d55a445b840.jpg"
+  },
+  {
+   "tvdbShowId": 418727,
+   "tvdbId": 10180900,
+   "seasonNumber": 1,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 2,
+   "title": "Live And Let Die",
+   "airDate": "2024-02-21",
+   "airDateUtc": "2024-02-21T05:00:00Z",
+   "runtime": 54,
+   "overview": "Jo races to find a way back to Earth before her life support runs out. Henry is concerned about his experiment.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10180900/screencap/65d55a2fc3bd3.jpg"
+  },
+  {
+   "tvdbShowId": 418727,
+   "tvdbId": 10180901,
+   "seasonNumber": 1,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 3,
+   "title": "Somewhere in Space Hangs My Heart",
+   "airDate": "2024-02-21",
+   "airDateUtc": "2024-02-21T05:00:00Z",
+   "runtime": 50,
+   "overview": "The space agencies begin their investigation into the ISS collision. Jo struggles to reconnect with Magnus and Alice.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10180901/screencap/65d55a1fa1c0b.jpg"
+  },
+  {
+   "tvdbShowId": 418727,
+   "tvdbId": 10180902,
+   "seasonNumber": 1,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 4,
+   "title": "The Left Hand of God",
+   "airDate": "2024-02-28",
+   "airDateUtc": "2024-02-28T05:00:00Z",
+   "runtime": 52,
+   "overview": "Jo’s life back home is not how she remembers it, and growing tension with Magnus adds to her feelings of alienation.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10180902/screencap/65d559fb823a3.jpg"
+  },
+  {
+   "tvdbShowId": 418727,
+   "tvdbId": 10180903,
+   "seasonNumber": 1,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 5,
+   "title": "Five Miles Out, the Sound Is Clearest",
+   "airDate": "2024-03-06",
+   "airDateUtc": "2024-03-06T05:00:00Z",
+   "runtime": 51,
+   "overview": "While on the run with Alice, Jo makes a chilling discovery. Bud threatens to exact his revenge on Henry.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10180903/screencap/65de95992821d.jpg"
+  },
+  {
+   "tvdbShowId": 418727,
+   "tvdbId": 10180904,
+   "seasonNumber": 1,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 6,
+   "title": "Paul Is Dead",
+   "airDate": "2024-03-13",
+   "airDateUtc": "2024-03-13T04:00:00Z",
+   "runtime": 57,
+   "overview": "Magnus worries that Alice is living in a fantasy world.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10180904/screencap/65e7cfe26e18f.jpg"
+  },
+  {
+   "tvdbShowId": 418727,
+   "tvdbId": 10180905,
+   "seasonNumber": 1,
+   "episodeNumber": 7,
+   "absoluteEpisodeNumber": 7,
+   "title": "Through The Looking Glass",
+   "airDate": "2024-03-20",
+   "airDateUtc": "2024-03-20T04:00:00Z",
+   "runtime": 53,
+   "overview": "Lost and alone in the woods, Jo desperately tries to reunite with her daughter.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10180905/screencap/65f0fc1260f61.jpg"
+  },
+  {
+   "tvdbShowId": 418727,
+   "tvdbId": 10180906,
+   "seasonNumber": 1,
+   "episodeNumber": 8,
+   "absoluteEpisodeNumber": 8,
+   "title": "These Fragments I Have Shored Against My Ruin",
+   "airDate": "2024-03-27",
+   "airDateUtc": "2024-03-27T04:00:00Z",
+   "runtime": 51,
+   "finaleType": "series",
+   "overview": "Jo is taken to an astronaut rehabilitation clinic, where the truth is revealed.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10180906/screencap/65fa362514fc0.jpg"
+  }
+ ]
+}

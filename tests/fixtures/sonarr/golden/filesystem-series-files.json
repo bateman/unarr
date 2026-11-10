@@ -1,0 +1,21 @@
+{
+  "body": {
+    "directories": [
+      {
+        "lastModified": "2026-11-09T22:21:04Z",
+        "name": "Season 01",
+        "path": "/tv/The Pitt/Season 01/",
+        "size": 0,
+        "type": "folder"
+      }
+    ],
+    "files": [],
+    "parent": "/tv/"
+  },
+  "recordedAt": "2026-11-09T22:24:32Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/filesystem?path=/tv/The%20Pitt/&includeFiles=true&allowFoldersWithoutTrailingSlashes=false"
+  },
+  "status": 200
+}

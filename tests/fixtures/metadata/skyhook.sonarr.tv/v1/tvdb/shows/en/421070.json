@@ -1,0 +1,388 @@
+{
+ "tvdbId": 421070,
+ "title": "Sugar (2024)",
+ "overview": "Sugar is a contemporary noir drama following an enigmatic Los Angeles private detective known for his sharp instincts and deep love of classic cinema. As he takes on complex cases across the city, his work is shaped by personal struggles with personal demons and a ongoing search for his missing sister.",
+ "slug": "sugar-2024",
+ "originalCountry": "usa",
+ "originalLanguage": "eng",
+ "language": "eng",
+ "firstAired": "2024-04-05",
+ "lastAired": "2026-08-07",
+ "tvMazeId": 62463,
+ "tmdbId": 203744,
+ "imdbId": "tt16418808",
+ "malIds": [],
+ "anidbIds": [],
+ "aniListIds": [],
+ "lastUpdated": "2026-11-02T05:40:50Z",
+ "status": "Continuing",
+ "runtime": 38,
+ "timeOfDay": {
+  "hours": 0,
+  "minutes": 0
+ },
+ "originalNetwork": "Apple TV",
+ "network": "Apple TV",
+ "genres": [
+  "Drama",
+  "Thriller"
+ ],
+ "contentRating": "TV-MA",
+ "rating": {
+  "count": 51825,
+  "value": "7.4"
+ },
+ "alternativeTitles": [
+  {
+   "title": "Sugar (2023)"
+  },
+  {
+   "title": "John Sugar"
+  }
+ ],
+ "actors": [
+  {
+   "name": "Colin Farrell",
+   "character": "John Sugar",
+   "image": "https://artworks.thetvdb.com/banners/person/310392/25868413.jpg"
+  },
+  {
+   "name": "Kirby Howell-Baptiste",
+   "character": "Ruby",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/501993/photo/6089daebcafed.jpg"
+  },
+  {
+   "name": "Amy Ryan",
+   "character": "Melanie Mackintosh",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/269720/photo/65720a1105455.jpg"
+  },
+  {
+   "name": "Dennis Boutsikaris",
+   "character": "Bernie Siegel",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/267437/photo/630e561ef147e.jpg"
+  },
+  {
+   "name": "Anna Gunn",
+   "character": "Margit Sorensen",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/269404/photo/61138b8f549b0.jpg"
+  },
+  {
+   "name": "James Cromwell",
+   "character": "Jonathan Siegel",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/275483/photo/66f1f01819225.jpg"
+  },
+  {
+   "name": "Nate Corddry",
+   "character": "David Siegel",
+   "image": "https://artworks.thetvdb.com/banners/person/310250/5ef133633f488.jpg"
+  },
+  {
+   "name": "Sydney Chandler",
+   "character": "Olivia Siegel",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8008194/photo/68928e3dc1b60.jpg"
+  },
+  {
+   "name": "Alex Hernandez",
+   "character": "Kenny",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/284655/photo/63c5623d0479c.jpg"
+  },
+  {
+   "name": "Laura Donnelly",
+   "character": "Charlotte Fischer",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/455250/photo/631dcd930ffbd.jpg"
+  },
+  {
+   "name": "Sasha Calle",
+   "character": "Val",
+   "image": "https://artworks.thetvdb.com/banners/person/8281414/60415d14a4d7d.jpg"
+  },
+  {
+   "name": "Raymond Lee",
+   "character": " Ji Moon",
+   "image": "https://artworks.thetvdb.com/banners/person/396944/602b6fff645b4.jpg"
+  },
+  {
+   "name": "Jin Ha",
+   "character": "Danny Moon",
+   "image": "https://artworks.thetvdb.com/banners/person/8162463/5ece8dbc957ed.jpg"
+  },
+  {
+   "name": "Tony Dalton",
+   "character": "Ray Vega",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/579075/photo/6a779ae655846.jpg"
+  },
+  {
+   "name": "Shea Whigham",
+   "character": "Tom Flyberg",
+   "image": "https://artworks.thetvdb.com/banners/person/275852/primary.jpg"
+  }
+ ],
+ "images": [
+  {
+   "coverType": "Banner",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/421070/banners/65dc08e382aeb.jpg"
+  },
+  {
+   "coverType": "Poster",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/421070/posters/6a18881d42952.jpg"
+  },
+  {
+   "coverType": "Fanart",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/421070/backgrounds/6622312cecc2d.jpg"
+  },
+  {
+   "coverType": "Clearlogo",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/421070/clearlogo/65e80a5bd6e2c.png"
+  }
+ ],
+ "seasons": [
+  {
+   "seasonNumber": 0
+  },
+  {
+   "seasonNumber": 1,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2004601/posters/6a18a166e8ada.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 2,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2230552/posters/6a18a28513f49.jpg"
+    }
+   ]
+  }
+ ],
+ "episodes": [
+  {
+   "tvdbShowId": 421070,
+   "tvdbId": 10469221,
+   "seasonNumber": 0,
+   "episodeNumber": 1,
+   "airedBeforeSeasonNumber": 1,
+   "airedBeforeEpisodeNumber": 1,
+   "title": "Sugar — Who is John Sugar?",
+   "airDate": "2024-03-31",
+   "airDateUtc": "2024-03-31T04:00:00Z",
+   "runtime": 2,
+   "finaleType": "season",
+   "overview": "Colin Farrell is John Sugar. Who John Sugar is, well—that’s for you to find out.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10469221/screencap/663bc4fc49a37.jpg"
+  },
+  {
+   "tvdbShowId": 421070,
+   "tvdbId": 9206658,
+   "seasonNumber": 1,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 1,
+   "title": "Olivia",
+   "airDate": "2024-04-05",
+   "airDateUtc": "2024-04-05T04:00:00Z",
+   "runtime": 49,
+   "overview": "After solving a case in Japan, private eye John Sugar returns to LA to help find a missing woman with ties to a Hollywood legend.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/9206658/screencap/660ff7e913f00.jpg"
+  },
+  {
+   "tvdbShowId": 421070,
+   "tvdbId": 10408502,
+   "seasonNumber": 1,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 2,
+   "title": "These People, These Places",
+   "airDate": "2024-04-05",
+   "airDateUtc": "2024-04-05T04:00:00Z",
+   "runtime": 36,
+   "overview": "Sugar suspects Melanie’s not telling the full story. Meanwhile, he and Ruby may not be the only ones looking into the mysterious body in Olivia’s trunk.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10408502/screencap/660ff578029d6.jpg"
+  },
+  {
+   "tvdbShowId": 421070,
+   "tvdbId": 10408503,
+   "seasonNumber": 1,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 3,
+   "title": "Shibuya Crossing",
+   "airDate": "2024-04-12",
+   "airDateUtc": "2024-04-12T04:00:00Z",
+   "runtime": 32,
+   "overview": "Melanie and Sugar get caught in a dicey situation — and make a new enemy. Sugar reunites with old friends, but he senses some are keeping secrets.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10408503/screencap/660ff58f56faa.jpg"
+  },
+  {
+   "tvdbShowId": 421070,
+   "tvdbId": 10408504,
+   "seasonNumber": 1,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 4,
+   "title": "Starry-Eyed",
+   "airDate": "2024-04-19",
+   "airDateUtc": "2024-04-19T04:00:00Z",
+   "runtime": 34,
+   "overview": "Sugar and Melanie track down Olivia’s friend, who shares disturbing information about Davy and his family. Davy and Kenny dig into Sugar’s past.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10408504/screencap/661889b46eb68.jpg"
+  },
+  {
+   "tvdbShowId": 421070,
+   "tvdbId": 10408505,
+   "seasonNumber": 1,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 5,
+   "title": "Boy in the Corner",
+   "airDate": "2024-04-26",
+   "airDateUtc": "2024-04-26T04:00:00Z",
+   "runtime": 33,
+   "overview": "Melanie gets a surprise visit that unleashes Sugar's dark side. Ruby receives chilling guidance from a colleague. Davy makes a tragic decision.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10408505/screencap/6623cf7c97048.jpg"
+  },
+  {
+   "tvdbShowId": 421070,
+   "tvdbId": 10408506,
+   "seasonNumber": 1,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 6,
+   "title": "Go Home",
+   "airDate": "2024-05-03",
+   "airDateUtc": "2024-05-03T04:00:00Z",
+   "runtime": 33,
+   "overview": "Sugar thinks he’s made a break in the case. When a double cross forces him to do the unthinkable, he turns to Melanie and Henry for help.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10408506/screencap/662b029b5d159.jpg"
+  },
+  {
+   "tvdbShowId": 421070,
+   "tvdbId": 10408507,
+   "seasonNumber": 1,
+   "episodeNumber": 7,
+   "absoluteEpisodeNumber": 7,
+   "title": "The Friends You Keep",
+   "airDate": "2024-05-10",
+   "airDateUtc": "2024-05-10T04:00:00Z",
+   "runtime": 36,
+   "overview": "Sugar’s fears for the safety of his friends lead him to a clandestine gathering where he learns a dangerous secret—and the truth about Olivia.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10408507/screencap/66343ce73f2a1.jpg"
+  },
+  {
+   "tvdbShowId": 421070,
+   "tvdbId": 10408508,
+   "seasonNumber": 1,
+   "episodeNumber": 8,
+   "absoluteEpisodeNumber": 8,
+   "title": "Farewell",
+   "airDate": "2024-05-17",
+   "airDateUtc": "2024-05-17T04:00:00Z",
+   "runtime": 36,
+   "finaleType": "season",
+   "overview": "A shocking realization points Sugar toward a discovery that changes everything.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10408508/screencap/6603b4ef639f9.jpg"
+  },
+  {
+   "tvdbShowId": 421070,
+   "tvdbId": 11585254,
+   "seasonNumber": 2,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 9,
+   "title": "Home Away from Home",
+   "airDate": "2026-06-19",
+   "airDateUtc": "2026-06-19T04:00:00Z",
+   "runtime": 37,
+   "overview": "Sugar takes on a new case: Tracking down the troubled brother of rising local boxer Danny Moon.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11585254/screencap/6a3494f1a0469.jpg"
+  },
+  {
+   "tvdbShowId": 421070,
+   "tvdbId": 11585255,
+   "seasonNumber": 2,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 10,
+   "title": "Downer Town",
+   "airDate": "2026-06-26",
+   "airDateUtc": "2026-06-26T04:00:00Z",
+   "runtime": 42,
+   "overview": "The search for Ji sends Sugar into dangerous territory; Danny resorts to desperate measures.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11585255/screencap/6a3495145471d.jpg"
+  },
+  {
+   "tvdbShowId": 421070,
+   "tvdbId": 11585256,
+   "seasonNumber": 2,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 11,
+   "title": "Watch Face",
+   "airDate": "2026-07-03",
+   "airDateUtc": "2026-07-03T04:00:00Z",
+   "runtime": 35,
+   "overview": "Danny gets a lead on Ji. Back at the Del, Sugar finds himself with a new admirer.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11585256/screencap/6a3dcf5365a7e.jpg"
+  },
+  {
+   "tvdbShowId": 421070,
+   "tvdbId": 11585257,
+   "seasonNumber": 2,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 12,
+   "title": "Off 15",
+   "airDate": "2026-07-10",
+   "airDateUtc": "2026-07-10T04:00:00Z",
+   "runtime": 33,
+   "overview": "Sugar makes a powerful enemy and has a falling out with Charlotte. The race to find Ji is on.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11585257/screencap/6a470af1d5533.jpg"
+  },
+  {
+   "tvdbShowId": 421070,
+   "tvdbId": 11585258,
+   "seasonNumber": 2,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 13,
+   "title": "Unknowns",
+   "airDate": "2026-07-17",
+   "airDateUtc": "2026-07-17T04:00:00Z",
+   "runtime": 40,
+   "overview": "Vega isn’t convinced his problem with Ji is solved. Sugar befriends someone in Pavich’s inner circle.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11585258/screencap/6a5044d577c57.jpg"
+  },
+  {
+   "tvdbShowId": 421070,
+   "tvdbId": 11585259,
+   "seasonNumber": 2,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 14,
+   "title": "Cautionary Tale",
+   "airDate": "2026-07-24",
+   "airDateUtc": "2026-07-24T04:00:00Z",
+   "runtime": 35,
+   "overview": "Sugar wrestles with his fear of contamination. Vega forces Sugar to make an impossible choice.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11585259/screencap/6a597f782f856.jpg"
+  },
+  {
+   "tvdbShowId": 421070,
+   "tvdbId": 11585260,
+   "seasonNumber": 2,
+   "episodeNumber": 7,
+   "absoluteEpisodeNumber": 15,
+   "title": "What Else Can You Do?",
+   "airDate": "2026-07-31",
+   "airDateUtc": "2026-07-31T04:00:00Z",
+   "runtime": 47,
+   "overview": "With every other option spent, Sugar plays one last card. Charlotte opens up to Sugar.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11585260/screencap/6a62ba1b69641.jpg"
+  },
+  {
+   "tvdbShowId": 421070,
+   "tvdbId": 11585261,
+   "seasonNumber": 2,
+   "episodeNumber": 8,
+   "absoluteEpisodeNumber": 16,
+   "title": "Like Sugar",
+   "airDate": "2026-08-07",
+   "airDateUtc": "2026-08-07T04:00:00Z",
+   "runtime": 44,
+   "finaleType": "season",
+   "overview": "Sugar attends an event that shakes him to his core.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11585261/screencap/6a6bf43668bf7.jpg"
+  }
+ ]
+}

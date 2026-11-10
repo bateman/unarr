@@ -1,0 +1,56 @@
+{
+  "body": [
+    {
+      "id": 2,
+      "name": "Anime",
+      "removeTagsAutomatically": true,
+      "specifications": [
+        {
+          "fields": [
+            {
+              "advanced": false,
+              "isFloat": false,
+              "label": "Series Type",
+              "name": "value",
+              "order": 0,
+              "privacy": "normal",
+              "selectOptions": [
+                {
+                  "name": "Standard",
+                  "order": 0,
+                  "value": 0
+                },
+                {
+                  "name": "Daily",
+                  "order": 1,
+                  "value": 1
+                },
+                {
+                  "name": "Anime",
+                  "order": 2,
+                  "value": 2
+                }
+              ],
+              "type": "select",
+              "value": 2
+            }
+          ],
+          "implementation": "SeriesTypeSpecification",
+          "implementationName": "Series Type",
+          "name": "Anime type",
+          "negate": false,
+          "required": true
+        }
+      ],
+      "tags": [
+        1
+      ]
+    }
+  ],
+  "recordedAt": "2026-11-09T22:24:43Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/autotagging"
+  },
+  "status": 200
+}

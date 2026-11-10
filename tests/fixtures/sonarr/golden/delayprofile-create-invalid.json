@@ -1,0 +1,28 @@
+{
+  "body": [
+    {
+      "attemptedValue": [],
+      "errorCode": "NotEmptyValidator",
+      "errorMessage": "'Tags' must not be empty.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Tags",
+        "propertyValue": []
+      },
+      "propertyName": "Tags",
+      "severity": "error"
+    },
+    {
+      "errorMessage": "Either Usenet or Torrent should be enabled",
+      "propertyName": "",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-09T22:24:43Z",
+  "request": {
+    "body": "bodies/delayprofile-create-invalid.json",
+    "method": "POST",
+    "path": "/api/v3/delayprofile"
+  },
+  "status": 400
+}

@@ -1,0 +1,21 @@
+{
+  "body": {
+    "enabled": true,
+    "id": 1,
+    "ignored": [
+      "CAM",
+      "TS"
+    ],
+    "indexerId": 0,
+    "name": "No CAM",
+    "required": [],
+    "tags": []
+  },
+  "recordedAt": "2026-11-09T22:24:43Z",
+  "request": {
+    "body": "bodies/releaseprofile-create.json",
+    "method": "POST",
+    "path": "/api/v3/releaseprofile"
+  },
+  "status": 201
+}

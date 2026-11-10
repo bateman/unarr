@@ -1,0 +1,13 @@
+{
+  "body": {
+    "id": 2,
+    "label": "usenet-only"
+  },
+  "recordedAt": "2026-11-09T23:25:56Z",
+  "request": {
+    "body": "bodies/put-noid-tag.json",
+    "method": "PUT",
+    "path": "/api/v3/tag"
+  },
+  "status": 202
+}

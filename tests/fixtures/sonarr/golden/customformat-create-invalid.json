@@ -1,0 +1,40 @@
+{
+  "body": [
+    {
+      "attemptedValue": "",
+      "errorCode": "NotEmptyValidator",
+      "errorMessage": "'Name' must not be empty.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Name",
+        "propertyValue": ""
+      },
+      "propertyName": "Name",
+      "severity": "error"
+    },
+    {
+      "attemptedValue": [],
+      "errorCode": "NotEmptyValidator",
+      "errorMessage": "'Specifications' must not be empty.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Specifications",
+        "propertyValue": []
+      },
+      "propertyName": "Specifications",
+      "severity": "error"
+    },
+    {
+      "errorMessage": "Must contain at least one Condition",
+      "propertyName": "",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-09T22:24:43Z",
+  "request": {
+    "body": "bodies/customformat-create-invalid.json",
+    "method": "POST",
+    "path": "/api/v3/customformat"
+  },
+  "status": 400
+}

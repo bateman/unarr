@@ -1,0 +1,9 @@
+{
+  "body": {},
+  "recordedAt": "2026-11-09T23:01:03Z",
+  "request": {
+    "method": "DELETE",
+    "path": "/api/v3/system/backup/478899172"
+  },
+  "status": 200
+}

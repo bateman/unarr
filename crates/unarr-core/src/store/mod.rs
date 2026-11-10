@@ -7,6 +7,7 @@ pub mod config;
 pub mod download_history;
 pub mod episodes;
 pub mod history;
+pub mod import_lists;
 pub mod paging;
 pub mod pending;
 pub mod provider_status;

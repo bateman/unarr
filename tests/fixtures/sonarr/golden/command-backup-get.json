@@ -1,0 +1,36 @@
+{
+  "body": {
+    "body": {
+      "isExclusive": false,
+      "isLongRunning": false,
+      "name": "Backup",
+      "requiresDiskAccess": false,
+      "sendUpdatesToClient": true,
+      "suppressMessages": false,
+      "trigger": "manual",
+      "type": "manual",
+      "updateScheduledTask": false
+    },
+    "commandName": "Backup",
+    "duration": "00:00:00.6628721",
+    "ended": "2026-11-09T23:00:58Z",
+    "id": 461659,
+    "message": "Backup zip created",
+    "name": "Backup",
+    "priority": "normal",
+    "queued": "2026-11-09T23:00:58Z",
+    "result": "successful",
+    "sendUpdatesToClient": true,
+    "started": "2026-11-09T23:00:58Z",
+    "stateChangeTime": "2026-11-09T23:00:58Z",
+    "status": "completed",
+    "trigger": "manual",
+    "updateScheduledTask": false
+  },
+  "recordedAt": "2026-11-09T23:01:03Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/command/461659"
+  },
+  "status": 200
+}

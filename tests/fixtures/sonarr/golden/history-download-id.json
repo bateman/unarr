@@ -20,9 +20,9 @@
           }
         ],
         "data": {
-          "age": "667",
-          "ageHours": "16025.735992586806",
-          "ageMinutes": "961544.15955529",
+          "age": "668",
+          "ageHours": "16051.088166138055",
+          "ageMinutes": "963065.2899683967",
           "customFormatScore": "-10000",
           "downloadClient": "SABnzbd",
           "downloadClientName": "Mock SABnzbd",
@@ -42,7 +42,7 @@
           "tvRageId": "0",
           "tvdbId": "448176"
         },
-        "date": "2026-11-08T20:56:09Z",
+        "date": "2026-11-09T22:17:17Z",
         "downloadId": "SABnzbd_nzo_mock1",
         "episodeId": 1,
         "eventType": "grabbed",
@@ -75,7 +75,7 @@
     "sortKey": "date",
     "totalRecords": 1
   },
-  "recordedAt": "2026-11-08T20:56:25Z",
+  "recordedAt": "2026-11-09T22:17:33Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/history?page=1&pageSize=5&sortKey=date&sortDirection=descending&downloadId=SABnzbd_nzo_mock1"

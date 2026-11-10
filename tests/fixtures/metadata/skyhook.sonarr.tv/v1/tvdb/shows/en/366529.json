@@ -1,0 +1,248 @@
+{
+ "tvdbId": 366529,
+ "title": "Station Eleven",
+ "overview": "The survivors of a devastating flu attempt to rebuild and reimagine the world anew – while holding on to the best of what’s been lost.",
+ "slug": "station-eleven",
+ "originalCountry": "usa",
+ "originalLanguage": "eng",
+ "language": "eng",
+ "firstAired": "2021-12-16",
+ "lastAired": "2022-01-13",
+ "tvMazeId": 42845,
+ "tmdbId": 90972,
+ "imdbId": "tt10574236",
+ "malIds": [],
+ "anidbIds": [],
+ "aniListIds": [],
+ "lastUpdated": "2026-10-09T22:07:30Z",
+ "status": "Ended",
+ "runtime": 51,
+ "timeOfDay": {
+  "hours": 3,
+  "minutes": 0
+ },
+ "originalNetwork": "HBO Max",
+ "network": "HBO Max",
+ "genres": [
+  "Adventure",
+  "Drama",
+  "Mini-Series",
+  "Mystery",
+  "Science Fiction",
+  "Thriller"
+ ],
+ "contentRating": "TV-MA",
+ "rating": {
+  "count": 45186,
+  "value": "7.5"
+ },
+ "alternativeTitles": [
+  {
+   "title": "Station Eleven (2021)"
+  }
+ ],
+ "actors": [
+  {
+   "name": "Mackenzie Davis",
+   "character": "Kirsten",
+   "image": "https://artworks.thetvdb.com/banners/person/473013/primary.jpg"
+  },
+  {
+   "name": "Himesh Patel",
+   "character": "Jeevan",
+   "image": "https://artworks.thetvdb.com/banners/person/473801/6ace5db279b17.jpg"
+  },
+  {
+   "name": "Daniel Zovatto",
+   "character": "The Prophet",
+   "image": "https://artworks.thetvdb.com/banners/person/476099/6028e7efbf68f.jpg"
+  },
+  {
+   "name": "David Wilmot",
+   "character": "Clark",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/320084/photo/696cbafc34251.jpg"
+  },
+  {
+   "name": "Matilda Lawler",
+   "character": "Young Kirsten",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8189684/photo/63d2b5ca0d1dc.jpg"
+  },
+  {
+   "name": "Philippine Velge",
+   "character": "Alexandra",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8170483/photo/686d95bdc9d86.jpg"
+  },
+  {
+   "name": "Danielle Deadwyler",
+   "character": "Miranda Carroll",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/506388/photo/6ace5ef08514c.jpg"
+  },
+  {
+   "name": "Nabhaan Rizwan",
+   "character": "Frank Chaudhary",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8045869/photo/62be44f016a73.jpg"
+  },
+  {
+   "name": "Lori Petty",
+   "character": "The Conductor",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/314065/photo/6670644168e1a.jpg"
+  },
+  {
+   "name": "Gael García Bernal",
+   "character": "Arthur Leander",
+   "image": "https://artworks.thetvdb.com/banners/person/311077/64166b9928b8c.jpg"
+  }
+ ],
+ "images": [
+  {
+   "coverType": "Banner",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/366529/banners/6182c2e3625b5.jpg"
+  },
+  {
+   "coverType": "Poster",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/366529/posters/61abc09f38307.jpg"
+  },
+  {
+   "coverType": "Fanart",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/366529/backgrounds/667051012e26d.jpg"
+  },
+  {
+   "coverType": "Clearlogo",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/366529/clearlogo/638eff42edcdc.png"
+  }
+ ],
+ "seasons": [
+  {
+   "seasonNumber": 1,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/1965478/posters/6324efb321bbc.jpg"
+    }
+   ]
+  }
+ ],
+ "episodes": [
+  {
+   "tvdbShowId": 366529,
+   "tvdbId": 8815687,
+   "seasonNumber": 1,
+   "episodeNumber": 1,
+   "title": "Wheel of Fire",
+   "airDate": "2021-12-16",
+   "airDateUtc": "2021-12-16T08:00:00Z",
+   "runtime": 46,
+   "overview": "After renowned actor Arthur Leander tragically collapses onstage, Jeevan Chaudhary and young Kirsten Raymonde have a chance meeting – and soon face an important decision that could save their lives.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8815687/screencap/61c03035acb81.jpg"
+  },
+  {
+   "tvdbShowId": 366529,
+   "tvdbId": 8884141,
+   "seasonNumber": 1,
+   "episodeNumber": 2,
+   "title": "A Hawk from a Handsaw",
+   "airDate": "2021-12-16",
+   "airDateUtc": "2021-12-16T08:00:00Z",
+   "runtime": 47,
+   "overview": "Twenty years later, Kirsten and her Shakespearean troupe, the Traveling Symphony, meet a mysterious man on their way to perform at St. Deborah-by-the-Water.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8884141/screencap/61c03061b7b13.jpg"
+  },
+  {
+   "tvdbShowId": 366529,
+   "tvdbId": 8884142,
+   "seasonNumber": 1,
+   "episodeNumber": 3,
+   "title": "Hurricane",
+   "airDate": "2021-12-16",
+   "airDateUtc": "2021-12-16T08:00:00Z",
+   "runtime": 49,
+   "overview": "While fighting for her only chance at survival, Miranda Carroll reflects on the cost of her relationships with Arthur and Dr. Eleven.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8884142/screencap/61c03084adf52.jpg"
+  },
+  {
+   "tvdbShowId": 366529,
+   "tvdbId": 8884143,
+   "seasonNumber": 1,
+   "episodeNumber": 4,
+   "title": "Rosencrantz and Guildenstern Aren't Dead",
+   "airDate": "2021-12-23",
+   "airDateUtc": "2021-12-23T08:00:00Z",
+   "runtime": 44,
+   "overview": "After Kirsten nudges the Traveling Symphony off-course to help unravel the mystery of the Prophet, a much grimmer truth is revealed.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8884143/screencap/61cdc0d18b7ab.jpg"
+  },
+  {
+   "tvdbShowId": 366529,
+   "tvdbId": 8884144,
+   "seasonNumber": 1,
+   "episodeNumber": 5,
+   "title": "The Severn City Airport",
+   "airDate": "2021-12-23",
+   "airDateUtc": "2021-12-23T08:00:00Z",
+   "runtime": 54,
+   "overview": "After an unexpected landing in Severn City, Arthur’s ex-wife Elizabeth, son Tyler, and friend Clark confront an even more uncertain future.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8884144/screencap/61cdc16191711.jpg"
+  },
+  {
+   "tvdbShowId": 366529,
+   "tvdbId": 8884152,
+   "seasonNumber": 1,
+   "episodeNumber": 6,
+   "title": "Survival is Insufficient",
+   "airDate": "2021-12-30",
+   "airDateUtc": "2021-12-30T08:00:00Z",
+   "runtime": 44,
+   "overview": "While Kirsten leaves the Traveling Symphony behind to track down the Prophet, the Conductor accepts an invitation for the rest of the grieving troupe that breaks her heart.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8884152/screencap/61cd77670e7d8.jpg"
+  },
+  {
+   "tvdbShowId": 366529,
+   "tvdbId": 8884153,
+   "seasonNumber": 1,
+   "episodeNumber": 7,
+   "title": "Goodbye My Damaged Home",
+   "airDate": "2021-12-30",
+   "airDateUtc": "2021-12-30T08:00:00Z",
+   "runtime": 52,
+   "overview": "On a journey to unravel her deepest trauma, Kirsten goes back to the apartment she once shared with Jeevan and Frank.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8884153/screencap/61cd775240160.jpg"
+  },
+  {
+   "tvdbShowId": 366529,
+   "tvdbId": 8884147,
+   "seasonNumber": 1,
+   "episodeNumber": 8,
+   "title": "Who’s There?",
+   "airDate": "2022-01-06",
+   "airDateUtc": "2022-01-06T08:00:00Z",
+   "runtime": 57,
+   "overview": "Kirsten arrives in Severn City to rescue the Traveling Symphony – only to find herself trapped in a family conflict that began twenty years ago.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8884147/screencap/61d26e7616cbd.jpg"
+  },
+  {
+   "tvdbShowId": 366529,
+   "tvdbId": 8885854,
+   "seasonNumber": 1,
+   "episodeNumber": 9,
+   "title": "Dr. Chaudhary",
+   "airDate": "2022-01-06",
+   "airDateUtc": "2022-01-06T08:00:00Z",
+   "runtime": 57,
+   "overview": "Jeevan and Kirsten survive their first winter alone, until an argument sends Jeevan on an unexpected path.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8885854/screencap/61d6a8efaf6a8.jpg"
+  },
+  {
+   "tvdbShowId": 366529,
+   "tvdbId": 8885855,
+   "seasonNumber": 1,
+   "episodeNumber": 10,
+   "title": "Unbroken Circle",
+   "airDate": "2022-01-13",
+   "airDateUtc": "2022-01-13T08:00:00Z",
+   "runtime": 59,
+   "finaleType": "series",
+   "overview": "Kirsten sets in motion her plan to free the Traveling Symphony, while Miranda tries to live the right life.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8885855/screencap/61dff3be16cd7.jpg"
+  }
+ ]
+}

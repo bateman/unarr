@@ -1,0 +1,15 @@
+{
+  "body": [
+    {
+      "id": 1,
+      "isValid": true,
+      "validationFailures": []
+    }
+  ],
+  "recordedAt": "2026-11-09T22:24:49Z",
+  "request": {
+    "method": "POST",
+    "path": "/api/v3/importlist/testall"
+  },
+  "status": 200
+}

@@ -1,0 +1,232 @@
+{
+ "tvdbId": 454109,
+ "title": "Widow's Bay",
+ "overview": "A New England mayor trying to boost tourism on his island must navigate strange events suggesting it might be cursed.",
+ "slug": "widows-bay",
+ "originalCountry": "usa",
+ "originalLanguage": "eng",
+ "language": "eng",
+ "firstAired": "2026-04-29",
+ "lastAired": "2026-06-17",
+ "tvMazeId": 79390,
+ "tmdbId": 270476,
+ "imdbId": "tt33332385",
+ "malIds": [],
+ "anidbIds": [],
+ "aniListIds": [],
+ "lastUpdated": "2026-11-02T05:06:56Z",
+ "status": "Continuing",
+ "runtime": 38,
+ "timeOfDay": {
+  "hours": 0,
+  "minutes": 0
+ },
+ "originalNetwork": "Apple TV",
+ "network": "Apple TV",
+ "genres": [
+  "Comedy",
+  "Horror"
+ ],
+ "rating": {
+  "count": 103751,
+  "value": "8.1"
+ },
+ "actors": [
+  {
+   "name": "Matthew Rhys",
+   "character": "Tom Loftis",
+   "image": "https://artworks.thetvdb.com/banners/person/257222/5e98a6e58edbd.jpg"
+  },
+  {
+   "name": "Stephen Root",
+   "character": "Wyck",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/248228/photo/660f7b5296633.jpg"
+  },
+  {
+   "name": "Kate O'Flynn",
+   "character": "Patricia",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/304315/photo/671d0c183d43c.jpg"
+  },
+  {
+   "name": "Kevin Carroll",
+   "character": "Bechir",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/274693/photo/65c2496a6aad3.jpg"
+  },
+  {
+   "name": "Dale Dickey",
+   "character": "Rosemary",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/270668/photo/65d05ced33424.jpg"
+  },
+  {
+   "name": "Kingston Rumi Southwick",
+   "character": "Evan"
+  },
+  {
+   "name": "Jeff Hiller",
+   "character": "Dale",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/488113/photo/6a1c6b365d30b.jpg"
+  }
+ ],
+ "images": [
+  {
+   "coverType": "Banner",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/454109/banners/69f60b9e6651a.jpg"
+  },
+  {
+   "coverType": "Poster",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/454109/posters/69ceb33ba3b1e.jpg"
+  },
+  {
+   "coverType": "Fanart",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/454109/backgrounds/69f1a685b66e0.jpg"
+  },
+  {
+   "coverType": "Clearlogo",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/454109/clearlogo/69f60bc7eaa54.png"
+  }
+ ],
+ "seasons": [
+  {
+   "seasonNumber": 1,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2144796/posters/6a0b3b3b6e6cc.jpg"
+    }
+   ]
+  }
+ ],
+ "episodes": [
+  {
+   "tvdbShowId": 454109,
+   "tvdbId": 10676840,
+   "seasonNumber": 1,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 1,
+   "title": "Welcome to Widow's Bay!",
+   "airDate": "2026-04-29",
+   "airDateUtc": "2026-04-29T04:00:00Z",
+   "runtime": 41,
+   "overview": "We hope you enjoyed the three-hour ferry to New England’s best-kept secret! Ignore the warnings about the fog. Everything’s fine.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10676840/screencap/69f15a631bbc4.jpg"
+  },
+  {
+   "tvdbShowId": 454109,
+   "tvdbId": 11512008,
+   "seasonNumber": 1,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 2,
+   "title": "Lodging",
+   "airDate": "2026-04-29",
+   "airDateUtc": "2026-04-29T04:00:00Z",
+   "runtime": 37,
+   "overview": "Cherish the historical charm of our local inn, which Mayor Loftis will prove is safe by spending a night there alone.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11512008/screencap/69f15a7cb39c4.jpg"
+  },
+  {
+   "tvdbShowId": 454109,
+   "tvdbId": 11512010,
+   "seasonNumber": 1,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 3,
+   "title": "The Inaugural Swim",
+   "airDate": "2026-05-06",
+   "airDateUtc": "2026-05-06T04:00:00Z",
+   "runtime": 38,
+   "overview": "It’s time for the annual beach opening. Lay out a towel as the mayor “tests the waters.” Unrelated: Do not pick up hitchhikers.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11512010/screencap/69f15aa8cdff7.jpg"
+  },
+  {
+   "tvdbShowId": 454109,
+   "tvdbId": 11512012,
+   "seasonNumber": 1,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 4,
+   "title": "Beach Reads",
+   "airDate": "2026-05-13",
+   "airDateUtc": "2026-05-13T04:00:00Z",
+   "runtime": 36,
+   "overview": "Make sure you pack a good read for the beach! (We do not recommend self-help books on the island.)",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11512012/screencap/69fa93314955f.jpg"
+  },
+  {
+   "tvdbShowId": 454109,
+   "tvdbId": 11512014,
+   "seasonNumber": 1,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 5,
+   "title": "What to Expect on Your Trip",
+   "airDate": "2026-05-20",
+   "airDateUtc": "2026-05-20T04:00:00Z",
+   "runtime": 37,
+   "overview": "We apologize for the curfew. Please remain calm as we determine what’s happening. On a separate note, keep your teenagers inside after dark.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11512014/screencap/6a03cdb1545c8.jpg"
+  },
+  {
+   "tvdbShowId": 454109,
+   "tvdbId": 11512016,
+   "seasonNumber": 1,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 6,
+   "title": "Our History",
+   "airDate": "2026-05-27",
+   "airDateUtc": "2026-05-27T04:00:00Z",
+   "runtime": 37,
+   "overview": "The history of Widow’s Bay is a beautiful tale of marriage, loyalty, and a love that endures beyond lifetimes. That’s all.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11512016/screencap/6a0d09109c234.jpg"
+  },
+  {
+   "tvdbShowId": 454109,
+   "tvdbId": 11512018,
+   "seasonNumber": 1,
+   "episodeNumber": 7,
+   "absoluteEpisodeNumber": 7,
+   "title": "Seasickness",
+   "airDate": "2026-05-27",
+   "airDateUtc": "2026-05-27T04:00:00Z",
+   "runtime": 42,
+   "overview": "Set out to sea with Mayor Loftis and cherished local figure, Wyck! They are attending to some business - best to simply enjoy the voyage.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11512018/screencap/6a0d08fd3156a.jpg"
+  },
+  {
+   "tvdbShowId": 454109,
+   "tvdbId": 11512020,
+   "seasonNumber": 1,
+   "episodeNumber": 8,
+   "absoluteEpisodeNumber": 8,
+   "title": "Your Baggage",
+   "airDate": "2026-06-03",
+   "airDateUtc": "2026-06-03T04:00:00Z",
+   "runtime": 34,
+   "overview": "Don’t worry about misplaced luggage. Old baggage always resurfaces in Widow’s Bay.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11512020/screencap/6a16427c6bd9f.jpg"
+  },
+  {
+   "tvdbShowId": 454109,
+   "tvdbId": 11512022,
+   "seasonNumber": 1,
+   "episodeNumber": 9,
+   "absoluteEpisodeNumber": 9,
+   "title": "Emergency Shelter",
+   "airDate": "2026-06-10",
+   "airDateUtc": "2026-06-10T04:00:00Z",
+   "runtime": 31,
+   "overview": "Please seek shelter should a centuries-old storm rage toward the island and plunge us into darkness. Enjoy a card game.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11512022/screencap/6a1f7d26eb933.jpg"
+  },
+  {
+   "tvdbShowId": 454109,
+   "tvdbId": 11512024,
+   "seasonNumber": 1,
+   "episodeNumber": 10,
+   "absoluteEpisodeNumber": 10,
+   "title": "We Hope You Enjoyed Your Time!",
+   "airDate": "2026-06-17",
+   "airDateUtc": "2026-06-17T04:00:00Z",
+   "runtime": 48,
+   "finaleType": "season",
+   "overview": "We understand that hard choices had to be made and we may never be the same, but we hope you’ll visit again!",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11512024/screencap/6a28b75022c9d.jpg"
+  }
+ ]
+}

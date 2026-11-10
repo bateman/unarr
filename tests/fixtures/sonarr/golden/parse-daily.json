@@ -1,0 +1,146 @@
+{
+  "body": {
+    "customFormatScore": 0,
+    "customFormats": [
+      {
+        "id": 36,
+        "name": "Language not Italian"
+      }
+    ],
+    "episodes": [],
+    "languages": [
+      {
+        "id": 1,
+        "name": "English"
+      }
+    ],
+    "parsedEpisodeInfo": {
+      "absoluteEpisodeNumbers": [],
+      "airDate": "2014-01-02",
+      "episodeNumbers": [],
+      "fullSeason": false,
+      "isAbsoluteNumbering": false,
+      "isDaily": true,
+      "isMiniSeries": false,
+      "isMultiSeason": false,
+      "isPartialSeason": false,
+      "isPossibleSceneSeasonSpecial": false,
+      "isPossibleSpecialEpisode": false,
+      "isSeasonExtra": false,
+      "isSplitEpisode": false,
+      "languages": [
+        {
+          "id": 0,
+          "name": "Unknown"
+        }
+      ],
+      "quality": {
+        "quality": {
+          "id": 4,
+          "name": "HDTV-720p",
+          "resolution": 720,
+          "source": "television"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "releaseGroup": "GRP",
+      "releaseHash": "",
+      "releaseTitle": "The.Pete.Holmes.Show.2014.01.02.720p.HDTV.x264-GRP",
+      "releaseTokens": ".720p.HDTV.x264-GRP",
+      "releaseType": "unknown",
+      "seasonNumber": 0,
+      "seasonPart": 0,
+      "seriesTitle": "The Pete Holmes Show",
+      "seriesTitleInfo": {
+        "title": "The Pete Holmes Show",
+        "titleWithoutYear": "The Pete Holmes Show",
+        "year": 0
+      },
+      "special": false,
+      "specialAbsoluteEpisodeNumbers": []
+    },
+    "series": {
+      "added": "2026-11-09T22:23:52Z",
+      "airTime": "12:00",
+      "cleanTitle": "thepeteholmesshow",
+      "ended": true,
+      "firstAired": "2013-10-28T00:00:00Z",
+      "genres": [
+        "Comedy",
+        "Talk Show"
+      ],
+      "id": 52,
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/graphical/271728-g.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/posters/271728-1.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/fanart/original/271728-1.jpg"
+        }
+      ],
+      "imdbId": "tt3278316",
+      "languageProfileId": 1,
+      "lastAired": "2014-06-18T00:00:00Z",
+      "monitorNewItems": "none",
+      "monitored": false,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "overview": "Comedian Pete Holmes hosts the late night talk show \"The Pete Holmes Show\" (formerly known as \"The Midnight Show with Pete Holmes\") which is produced by Conan O'Brien and airs right after CONAN on TBS.",
+      "path": "/tv/Pete Holmes Show",
+      "qualityProfileId": 6,
+      "ratings": {
+        "value": 7.2,
+        "votes": 654
+      },
+      "runtime": 25,
+      "seasonFolder": false,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": false,
+          "seasonNumber": 1
+        },
+        {
+          "monitored": false,
+          "seasonNumber": 2
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "pete holmes show",
+      "status": "ended",
+      "tags": [
+        2
+      ],
+      "title": "The Pete Holmes Show",
+      "titleSlug": "the-pete-holmes-show",
+      "tmdbId": 57506,
+      "tvMazeId": 6229,
+      "tvRageId": 36809,
+      "tvdbId": 271728,
+      "useSceneNumbering": false,
+      "year": 2013
+    },
+    "title": "The.Pete.Holmes.Show.2014.01.02.720p.HDTV.x264-GRP"
+  },
+  "recordedAt": "2026-11-09T22:24:32Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/parse?title=The.Pete.Holmes.Show.2014.01.02.720p.HDTV.x264-GRP"
+  },
+  "status": 200
+}

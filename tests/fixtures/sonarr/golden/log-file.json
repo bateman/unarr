@@ -1,0 +1,24 @@
+{
+  "body": [
+    {
+      "contentsUrl": "/api/v1//sonarr.debug.txt",
+      "downloadUrl": "/logfile/sonarr.debug.txt",
+      "filename": "sonarr.debug.txt",
+      "id": 1,
+      "lastWriteTime": "2026-11-09T23:01:03Z"
+    },
+    {
+      "contentsUrl": "/api/v1//sonarr.txt",
+      "downloadUrl": "/logfile/sonarr.txt",
+      "filename": "sonarr.txt",
+      "id": 2,
+      "lastWriteTime": "2026-11-09T23:01:03Z"
+    }
+  ],
+  "recordedAt": "2026-11-09T23:01:03Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/log/file"
+  },
+  "status": 200
+}

@@ -71,24 +71,27 @@ pub struct ImageResource {
 }
 
 /// Series images with the local `/MediaCover/{id}/{type}.{ext}` URL the UI
-/// loads; `clearlogo` is PNG, everything else JPEG.
-pub fn series_images(series_id: i64, url_base: &str, images: &[Image]) -> Vec<ImageResource> {
+/// loads (`ConvertToLocalUrls`), with `?lastWrite=` when the file is in
+/// `covers`; unknown kinds keep the URL they have.
+pub fn series_images(
+    series_id: i64,
+    url_base: &str,
+    covers: Option<&std::path::Path>,
+    images: &[Image],
+) -> Vec<ImageResource> {
+    let none = std::path::Path::new("/nonexistent-unarr-covers");
     images
         .iter()
-        .map(|i| {
-            let ext = if i.cover_type == "clearlogo" { "png" } else { "jpg" };
-            ImageResource {
-                cover_type: i.cover_type.clone(),
-                url: if i.cover_type == "unknown" {
-                    i.url.clone()
-                } else {
-                    Some(format!(
-                        "{url_base}/MediaCover/{series_id}/{}.{ext}",
-                        i.cover_type
-                    ))
-                },
-                remote_url: i.remote_url.clone(),
-            }
+        .map(|i| ImageResource {
+            cover_type: i.cover_type.clone(),
+            url: unarr_core::tv::covers::local_url(
+                covers.unwrap_or(none),
+                url_base,
+                series_id,
+                &i.cover_type,
+            )
+            .or_else(|| i.url.clone()),
+            remote_url: i.remote_url.clone(),
         })
         .collect()
 }
@@ -164,7 +167,10 @@ pub struct SeriesStatisticsResource {
     pub episode_count: i64,
     pub total_episode_count: i64,
     pub size_on_disk: i64,
-    pub release_groups: Vec<String>,
+    /// Left out when the statistics are the empty ones of a series not in
+    /// the library, or with no episode yet.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub release_groups: Option<Vec<String>>,
     pub percent_of_episodes: f64,
 }
 
@@ -183,6 +189,8 @@ pub struct SeasonResource {
 #[derive(Serialize, Clone)]
 #[serde(rename_all = "camelCase")]
 pub struct SeriesResource {
+    /// Left out for a series not in the library (a lookup result).
+    #[serde(skip_serializing_if = "is_zero")]
     pub id: i64,
     pub title: String,
     #[serde(skip_serializing_if = "Option::is_none")]
@@ -205,6 +213,7 @@ pub struct SeriesResource {
     pub original_language: LanguageResource,
     pub seasons: Vec<SeasonResource>,
     pub year: i64,
+    #[serde(skip_serializing_if = "String::is_empty")]
     pub path: String,
     pub quality_profile_id: i64,
     pub season_folder: bool,
@@ -238,11 +247,26 @@ pub struct SeriesResource {
     pub statistics: Option<SeriesStatisticsResource>,
     /// Legacy field kept by Sonarr v4 for v3 clients.
     pub language_profile_id: i64,
+    /// The lookup's folder name for the series.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub folder: Option<String>,
+    /// The lookup's poster, remote.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub remote_poster: Option<String>,
+    /// While the series is being added.
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub add_options: Option<serde_json::Value>,
+}
+
+fn is_zero(v: &i64) -> bool {
+    *v == 0
 }
 
 /// Inputs the series resource needs besides the series itself.
 pub struct SeriesContext<'a> {
     pub url_base: &'a str,
+    /// Where the covers are, for their `lastWrite`.
+    pub media_cover_dir: Option<&'a std::path::Path>,
     pub root_folder_path: String,
     pub alternate_titles: Vec<AlternateTitleResource>,
     pub season_stats: Option<&'a [SeasonStats]>,
@@ -280,7 +304,7 @@ pub fn series_resource(s: &Series, ctx: SeriesContext<'_>) -> SeriesResource {
             episode_count,
             total_episode_count: stats.iter().map(|x| x.total_episode_count).sum(),
             size_on_disk: stats.iter().map(|x| x.size_on_disk).sum(),
-            release_groups,
+            release_groups: Some(release_groups),
             percent_of_episodes: if episode_count == 0 {
                 0.0
             } else {
@@ -312,7 +336,7 @@ pub fn series_resource(s: &Series, ctx: SeriesContext<'_>) -> SeriesResource {
         previous_airing,
         network: s.network.clone(),
         air_time: s.air_time.clone(),
-        images: series_images(s.id, ctx.url_base, &s.images),
+        images: series_images(s.id, ctx.url_base, ctx.media_cover_dir, &s.images),
         original_language: language(s.original_language_id),
         seasons,
         year: s.year,
@@ -344,6 +368,9 @@ pub fn series_resource(s: &Series, ctx: SeriesContext<'_>) -> SeriesResource {
         },
         statistics,
         language_profile_id: 1,
+        folder: None,
+        remote_poster: None,
+        add_options: s.add_options.clone(),
     }
 }
 
@@ -355,6 +382,7 @@ pub fn series_resource_plain(s: &Series) -> SeriesResource {
         s,
         SeriesContext {
             url_base: "",
+            media_cover_dir: None,
             root_folder_path: String::new(),
             alternate_titles: Vec::new(),
             season_stats: None,
@@ -519,24 +547,7 @@ impl<T: Serialize> PagingResource<T> {
     }
 }
 
-/// The root folder a series path belongs to: the longest root folder that is
-/// a parent of the path, else the path's own parent directory.
-pub fn best_root_folder_path(series_path: &str, root_folders: &[String]) -> String {
-    let normalized = series_path.trim_end_matches('/');
-    root_folders
-        .iter()
-        .filter(|r| {
-            let r = r.trim_end_matches('/');
-            normalized.starts_with(r) && normalized[r.len()..].starts_with('/')
-        })
-        .max_by_key(|r| r.len())
-        .map(|r| r.trim_end_matches('/').to_string())
-        .unwrap_or_else(|| match normalized.rfind('/') {
-            Some(0) => "/".to_string(),
-            Some(i) => normalized[..i].to_string(),
-            None => String::new(),
-        })
-}
+pub use unarr_core::mediafiles::best_root_folder_path;
 
 #[cfg(test)]
 mod tests {
@@ -565,7 +576,7 @@ mod tests {
                 url: None,
             },
         ];
-        let out = series_images(7, "/sonarr", &imgs);
+        let out = series_images(7, "/sonarr", None, &imgs);
         assert_eq!(out[0].url.as_deref(), Some("/sonarr/MediaCover/7/poster.jpg"));
         assert_eq!(out[1].url.as_deref(), Some("/sonarr/MediaCover/7/clearlogo.png"));
     }

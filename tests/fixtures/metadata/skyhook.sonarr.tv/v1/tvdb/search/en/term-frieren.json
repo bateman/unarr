@@ -1,0 +1,1311 @@
+[
+ {
+  "tvdbId": 424536,
+  "title": "Frieren: Beyond Journey's End",
+  "overview": "Decades after her party defeated the Demon King, an old friend's funeral launches the elf wizard Frieren on a journey of self-discovery.",
+  "slug": "frieren-beyond-journeys-end",
+  "originalCountry": "jpn",
+  "originalLanguage": "jpn",
+  "language": "eng",
+  "firstAired": "2023-09-29",
+  "lastAired": "2026-03-27",
+  "tvMazeId": 69956,
+  "tmdbId": 209867,
+  "imdbId": "tt22248376",
+  "malIds": [
+   52991,
+   59978,
+   63816
+  ],
+  "anidbIds": [
+   17617,
+   18886,
+   19977
+  ],
+  "aniListIds": [
+   154587,
+   182255,
+   209939
+  ],
+  "lastUpdated": "2026-11-05T18:43:46Z",
+  "status": "Continuing",
+  "runtime": 25,
+  "timeOfDay": {
+   "hours": 23,
+   "minutes": 0
+  },
+  "originalNetwork": "Nippon TV",
+  "network": "Nippon TV",
+  "genres": [
+   "Adventure",
+   "Animation",
+   "Anime",
+   "Drama",
+   "Fantasy"
+  ],
+  "contentRating": "TV-14",
+  "rating": {
+   "count": 87128,
+   "value": "8.9"
+  },
+  "alternativeTitles": [
+   {
+    "title": "Frieren of the Funeral"
+   },
+   {
+    "title": "Frieren"
+   },
+   {
+    "title": "Frieren: An Ageless Elegy"
+   }
+  ],
+  "actors": [
+   {
+    "name": "Atsumi Tanezaki",
+    "character": "Frieren",
+    "image": "https://artworks.thetvdb.com/banners/person/7866747/61c865002721e.jpg"
+   },
+   {
+    "name": "Nobuhiko Okamoto",
+    "character": "Himmel",
+    "image": "https://artworks.thetvdb.com/banners/person/303207/5f6e1a73d949d.jpg"
+   },
+   {
+    "name": "Yoji Ueda",
+    "character": "Eisen",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/8085473/photo/62e235c6b46e3.jpg"
+   },
+   {
+    "name": "Hiroki Touchi",
+    "character": "Heiter",
+    "image": "https://artworks.thetvdb.com/banners/person/463716/61eb88fb49f52.jpg"
+   },
+   {
+    "name": "Chiaki Kobayashi",
+    "character": "Stark",
+    "image": "https://artworks.thetvdb.com/banners/person/7891643/primary.jpg"
+   },
+   {
+    "name": "Kana Ichinose",
+    "character": "Fern",
+    "image": "https://artworks.thetvdb.com/banners/person/7868437/primary.jpg"
+   },
+   {
+    "name": "Atsuko Tanaka",
+    "character": " Flamme",
+    "image": "https://artworks.thetvdb.com/banners/person/314895/primary.jpg"
+   },
+   {
+    "name": "Hiroki Yasumoto",
+    "character": "Qual",
+    "image": "https://artworks.thetvdb.com/banners/person/301118/primary.jpg"
+   },
+   {
+    "name": "Junichi Suwabe",
+    "character": "Lugner",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/309354/photo/62e22d918a92f.jpg"
+   },
+   {
+    "name": "Takehito Koyasu",
+    "character": "Kraft",
+    "image": "https://artworks.thetvdb.com/banners/person/277098/61a63f303ea4d.jpg"
+   },
+   {
+    "name": "Shunsuke Sakuya",
+    "character": "Granat",
+    "image": "https://artworks.thetvdb.com/banners/person/293448/primary.jpg"
+   },
+   {
+    "name": "Manaka Iwami",
+    "character": "Linie",
+    "image": "https://artworks.thetvdb.com/banners/person/465329/primary.jpg"
+   },
+   {
+    "name": "Ayana Taketatsu",
+    "character": "Aura",
+    "image": "https://artworks.thetvdb.com/banners/person/302377/61e1ac092d2ca.jpg"
+   },
+   {
+    "name": "Takuya Eguchi",
+    "character": "Stoltz",
+    "image": "https://artworks.thetvdb.com/banners/person/292647/primary.jpg"
+   },
+   {
+    "name": "Kouki Ohsuzu",
+    "character": "Draht",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/9088969/photo/674b4fb066fc2.jpg"
+   },
+   {
+    "name": "Konomi Kohara",
+    "character": "Chief of the Village of the Sword",
+    "image": "https://artworks.thetvdb.com/banners/person/7891685/6223200d3d1eb.jpg"
+   },
+   {
+    "name": "Daisuke Hirakawa",
+    "character": "Sein's Older Brother",
+    "image": "https://artworks.thetvdb.com/banners/person/301120/primary.jpg"
+   },
+   {
+    "name": "Yuichi Nakamura",
+    "character": "Sein",
+    "image": "https://artworks.thetvdb.com/banners/person/7864375/61a4e29c56d7d.jpg"
+   },
+   {
+    "name": "Hiromichi Tezuka",
+    "character": "Warrior Gorilla",
+    "image": "https://artworks.thetvdb.com/banners/person/7896334/61fd08a8c31ed.jpg"
+   },
+   {
+    "name": "Azumi Waki",
+    "character": "Kanne",
+    "image": "https://artworks.thetvdb.com/banners/person/7881478/641eaaf522c55.jpg"
+   },
+   {
+    "name": "Sayumi Suzushiro",
+    "character": "Lawine",
+    "image": "https://artworks.thetvdb.com/banners/person/7937849/primary.jpg"
+   },
+   {
+    "name": "Kisho Taniyama",
+    "character": "Wirbel",
+    "image": "https://artworks.thetvdb.com/banners/person/302328/61f9045b57401.jpg"
+   },
+   {
+    "name": "Ikumi Hasegawa",
+    "character": "Übel",
+    "image": "https://artworks.thetvdb.com/banners/person/485406/61fe2aa3d2a05.jpg"
+   },
+   {
+    "name": "Jirou Saitou",
+    "character": "Denken",
+    "image": "https://artworks.thetvdb.com/banners/person/7891597/5e9c7fd884c60.jpg"
+   },
+   {
+    "name": "Shohei Komatsu",
+    "character": "Land",
+    "image": "https://artworks.thetvdb.com/banners/person/7912268/642e74345f45d.jpg"
+   },
+   {
+    "name": "Eiji Hanawa",
+    "character": "Richter",
+    "image": "https://artworks.thetvdb.com/banners/person/491377/primary.jpg"
+   },
+   {
+    "name": "Shizuka Ishigami",
+    "character": "Laufen",
+    "image": "https://artworks.thetvdb.com/banners/person/292640/61e18e969c7ac.jpg"
+   },
+   {
+    "name": "Kanae Itou",
+    "character": "Ehre",
+    "image": "https://artworks.thetvdb.com/banners/person/464298/primary.jpg"
+   },
+   {
+    "name": "Haruka Terui",
+    "character": "Sense",
+    "image": "https://artworks.thetvdb.com/banners/person/7915489/61e42b3625916.jpg"
+   },
+   {
+    "name": "Tarusuke Shingaki",
+    "character": "Genau",
+    "image": "https://artworks.thetvdb.com/banners/person/460216/61a4e667d4193.jpg"
+   },
+   {
+    "name": "Yuji Murai",
+    "character": "Scharf ",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/9128619/photo/667d4b2810007.jpg"
+   },
+   {
+    "name": "Tomoyo Kurosawa",
+    "character": "Edel",
+    "image": "https://artworks.thetvdb.com/banners/person/469674/61c86de9b382d.jpg"
+   },
+   {
+    "name": "Mariya Ise",
+    "character": "Serie",
+    "image": "https://artworks.thetvdb.com/banners/person/447326/61a676ffcb24c.jpg"
+   },
+   {
+    "name": "Reina Ueda",
+    "character": "Methode",
+    "image": "https://artworks.thetvdb.com/banners/person/295192/primary.jpg"
+   },
+   {
+    "name": "Atsushi Miyauchi",
+    "character": "Lernen",
+    "image": "https://artworks.thetvdb.com/banners/person/450869/62011488c5fd0.jpg"
+   },
+   {
+    "name": "Yasuyuki Kase",
+    "character": "Stark's Father",
+    "image": "https://artworks.thetvdb.com/banners/person/447321/65086cab8d7f0.jpg"
+   },
+   {
+    "name": "Rie Kawamura",
+    "character": "Mazoku ",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/8172512/photo/674b55f198574.jpg"
+   }
+  ],
+  "images": [
+   {
+    "coverType": "Banner",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/424536/banners/651dd688bd4d5.jpg"
+   },
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/424536/posters/6516fe48e7a06.jpg"
+   },
+   {
+    "coverType": "Fanart",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/424536/backgrounds/64e6cbe29d9c0.jpg"
+   },
+   {
+    "coverType": "Clearlogo",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/424536/clearlogo/65d798fbd2f61.png"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1,
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/v4/season/2018812/posters/67fd81cd835b7.jpg"
+     }
+    ]
+   },
+   {
+    "seasonNumber": 2,
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/v4/season/2148708/posters/699dd12415f41.jpg"
+     }
+    ]
+   },
+   {
+    "seasonNumber": 3,
+    "name": "The Golden Land Arc",
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/v4/season/2241887/posters/69c6951801eec.jpg"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "tvdbId": 391612,
+  "title": "Labyrinth of Peace",
+  "overview": "Year 1945. The war is over and neutral Switzerland has been saved from the conflict. Klara's family looks forward to the future as she cares for young Holocaust survivors. Johann hopes to save and modernize his father-in-law's textile business. And Egon, fresh from military service, takes his first steps in the Attorney General's office chasing fugitive Nazis. The three soon realize that the facade of peace is bought with the blood of war victims. Johann's career ambitions bring him closer to those who committed heinous war crimes. Klara risks her marriage as she grows closer and closer to one of the survivors, whom the locals receive with distrust. And Egon finds himself trapped in a system that voluntarily turns a blind eye to Nazi criminals for financial reasons.",
+  "slug": "labyrinth-of-peace",
+  "originalCountry": "che",
+  "originalLanguage": "deu",
+  "language": "eng",
+  "firstAired": "2020-11-08",
+  "lastAired": "2020-11-11",
+  "tvMazeId": 52078,
+  "tmdbId": 112370,
+  "imdbId": "tt10639680",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2025-09-07T07:03:01Z",
+  "status": "Ended",
+  "runtime": 50,
+  "timeOfDay": {
+   "hours": 20,
+   "minutes": 0
+  },
+  "originalNetwork": "SRF Schweizer Radio und Fernsehen",
+  "network": "SRF Schweizer Radio und Fernsehen",
+  "genres": [
+   "Drama",
+   "History",
+   "Mini-Series"
+  ],
+  "rating": {
+   "count": 461,
+   "value": "7.3"
+  },
+  "actors": [
+   {
+    "name": "Annina Walt",
+    "character": "Klara",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/629484/photo/6778840a2d9d2.jpg"
+   },
+   {
+    "name": "Max Hubacher",
+    "character": "Johan"
+   },
+   {
+    "name": "Therese Affolter",
+    "character": "Elsie Leutenegger"
+   },
+   {
+    "name": "Dimitri Stapfer",
+    "character": "Egon",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/8185344/photo/640f57a07d2a2.jpg"
+   },
+   {
+    "name": "Sylvie Rohrer",
+    "character": "Lisbeth-Marie Tobler"
+   }
+  ],
+  "images": [
+   {
+    "coverType": "Banner",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/391612/banners/630cd6b56cd39.jpg"
+   },
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/391612/posters/619a408fb5e29.jpg"
+   },
+   {
+    "coverType": "Fanart",
+    "url": "https://artworks.thetvdb.com/banners/series/391612/backgrounds/5faae1d66af0f.jpg"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1
+   }
+  ]
+ },
+ {
+  "tvdbId": 354458,
+  "title": "Pros and Cons",
+  "overview": "Officially they are a regular family. Unofficially, they are Denmark's most notorious cheaters. The question is how to deal with parenting meetings, lunch boxes and payouts at the same time as their biggest coup.",
+  "slug": "pros-and-cons",
+  "originalCountry": "dnk",
+  "originalLanguage": "dan",
+  "language": "eng",
+  "firstAired": "2018-10-24",
+  "lastAired": "2021-01-03",
+  "tvMazeId": 39314,
+  "tmdbId": 85344,
+  "imdbId": "tt7694874",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2026-06-05T05:30:23Z",
+  "status": "Ended",
+  "runtime": 43,
+  "timeOfDay": {
+   "hours": 0,
+   "minutes": 0
+  },
+  "originalNetwork": "TV3 (DK)",
+  "network": "Viaplay",
+  "genres": [
+   "Comedy",
+   "Crime",
+   "Drama"
+  ],
+  "rating": {
+   "count": 1014,
+   "value": "7.4"
+  },
+  "actors": [
+   {
+    "name": "Lars Ranthe",
+    "character": "Erik",
+    "image": "https://artworks.thetvdb.com/banners/person/489026/60115be60d9eb.jpg"
+   },
+   {
+    "name": "Lene Maria Christensen",
+    "character": "Nina",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/482171/photo/6776f81a9695c.jpg"
+   },
+   {
+    "name": "Lotte Andersen",
+    "character": "Jacqueline",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/525176/photo/65f5bdd280e97.jpg"
+   }
+  ],
+  "images": [
+   {
+    "coverType": "Banner",
+    "url": "https://artworks.thetvdb.com/banners/graphical/5ca2e5e6eb307.jpg"
+   },
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/posters/5bd0d5652ebb5.jpg"
+   },
+   {
+    "coverType": "Fanart",
+    "url": "https://artworks.thetvdb.com/banners/fanart/original/5bd98ebe2e6e2.jpg"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1,
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/seasons/5d3c2680bf812.jpg"
+     }
+    ]
+   },
+   {
+    "seasonNumber": 2
+   }
+  ]
+ },
+ {
+  "tvdbId": 336832,
+  "title": "Gooische Frieten",
+  "slug": "gooische-frieten",
+  "originalCountry": "nld",
+  "originalLanguage": "nld",
+  "firstAired": "2010-10-29",
+  "lastAired": "2010-12-24",
+  "tmdbId": 38479,
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2019-11-13T09:45:53Z",
+  "status": "Ended",
+  "runtime": 5,
+  "timeOfDay": {
+   "hours": 11,
+   "minutes": 0
+  },
+  "originalNetwork": "RTL XL",
+  "network": "RTL XL",
+  "genres": [
+   "Comedy",
+   "Mini-Series"
+  ],
+  "actors": [
+   {
+    "name": "Cynthia Abma",
+    "character": "Presilla"
+   },
+   {
+    "name": "Annemieke Bakker",
+    "character": "Jooke"
+   }
+  ],
+  "images": [
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/posters/336832-1.jpg"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1
+   }
+  ]
+ },
+ {
+  "tvdbId": 364715,
+  "title": "Fruerne uden Filter",
+  "slug": "fruerne-uden-filter",
+  "originalCountry": "swe",
+  "originalLanguage": "eng",
+  "language": "eng",
+  "firstAired": "2018-08-30",
+  "lastAired": "2019-05-23",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2019-11-13T13:42:00Z",
+  "status": "Ended",
+  "runtime": 20,
+  "originalNetwork": "Viafree",
+  "network": "Viafree",
+  "genres": [
+   "Documentary",
+   "Family"
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1
+   },
+   {
+    "seasonNumber": 2
+   }
+  ]
+ },
+ {
+  "tvdbId": 476873,
+  "title": "Brieven aan Samson",
+  "overview": "Human interest series in which Viktor Verhulst visits viewers of 'Samson & Gert' who wrote a letter to the iconic children's program thirty years ago.",
+  "slug": "brieven-aan-samson",
+  "originalCountry": "bel",
+  "originalLanguage": "nld",
+  "language": "eng",
+  "firstAired": "2026-04-22",
+  "lastAired": "2026-05-27",
+  "tvMazeId": 91560,
+  "tmdbId": 316327,
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2026-08-15T07:48:25Z",
+  "status": "Continuing",
+  "runtime": 43,
+  "timeOfDay": {
+   "hours": 21,
+   "minutes": 15
+  },
+  "originalNetwork": "Play",
+  "network": "Play",
+  "genres": [
+   "Family"
+  ],
+  "actors": [
+   {
+    "name": "Viktor Verhulst",
+    "image": "https://artworks.thetvdb.com/banners/person/7958417/603af3cea65d6.jpg"
+   }
+  ],
+  "images": [
+   {
+    "coverType": "Banner",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/476873/banners/69e93716075af.jpg"
+   },
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/476873/posters/69e13ed421cbf.jpg"
+   },
+   {
+    "coverType": "Fanart",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/476873/backgrounds/69e13d8e89fbe.jpg"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1,
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/v4/season/2245581/posters/69ebce0dd7ca8.jpg"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "tvdbId": 440768,
+  "title": "Heino Fikser Frøerne",
+  "overview": "Heino loves making seed traps. He's just not very good at it. And don't listen to what others tell you either.",
+  "slug": "heino-fikser-frøerne",
+  "originalCountry": "dnk",
+  "originalLanguage": "dan",
+  "language": "eng",
+  "firstAired": "2021-03-26",
+  "lastAired": "2021-03-26",
+  "tmdbId": 121955,
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2023-10-16T15:52:47Z",
+  "status": "Ended",
+  "timeOfDay": {
+   "hours": 0,
+   "minutes": 0
+  },
+  "genres": [
+   "Children"
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1
+   }
+  ]
+ },
+ {
+  "tvdbId": 412319,
+  "title": "They Don't Want to See Us",
+  "overview": "Inspired by the cases that have been discovered within the National Service for Minors in Chile, the story of Catalina is told, a teenager at social risk found dead in a residence of the institution, along with that of her lawyer who seeks to know the truth of his alleged suicide. In this investigation, together with a judge and the director of the center, they discover the reality that exists in that place, something hidden, and that also affects other minors. The injustice, the violation of the rights of girls, boys and young people evidence a system in collapse are portrayed in this mini-series of eight chapters.",
+  "slug": "they-dont-want-to-see-us",
+  "originalCountry": "chl",
+  "originalLanguage": "spa",
+  "language": "eng",
+  "firstAired": "2021-11-08",
+  "lastAired": "2021-12-27",
+  "tmdbId": 137366,
+  "imdbId": "tt15658048",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2026-06-03T06:32:30Z",
+  "status": "Ended",
+  "runtime": 51,
+  "originalNetwork": "Mega",
+  "network": "Mega",
+  "genres": [
+   "Drama",
+   "Mini-Series",
+   "Thriller"
+  ],
+  "contentRating": "A",
+  "rating": {
+   "count": 95,
+   "value": "8.2"
+  },
+  "actors": [
+   {
+    "name": "Tamara Acosta",
+    "character": "Paola Gomez",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/450787/photo/6065301e1a25c.jpg"
+   },
+   {
+    "name": "Paulina Urrutia",
+    "character": "Fernanda Salazar"
+   },
+   {
+    "name": "Francisca Lewin",
+    "character": "Colomba Ulloa",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/580051/photo/636d869b589a8.jpg"
+   },
+   {
+    "name": "Sara Becker",
+    "character": "Catalina Pérez"
+   },
+   {
+    "name": "Joaquín Guzmán",
+    "character": "Carlos Alarcón"
+   },
+   {
+    "name": "Amparo Noguera",
+    "character": "Javiera Rojas",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/489505/photo/668b3c35205b7.jpg"
+   },
+   {
+    "name": "Paulina García",
+    "character": "Karen Sotomayor"
+   },
+   {
+    "name": "Rodrigo Soto",
+    "character": "Mario Sánchez"
+   },
+   {
+    "name": "Roberto Farías",
+    "character": "Juan Rebolledo",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/532933/photo/620ad9ca1c472.jpg"
+   }
+  ],
+  "images": [
+   {
+    "coverType": "Banner",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/412319/banners/6192fa95929aa.jpg"
+   },
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/412319/posters/6a1fc7892e382.jpg"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1
+   }
+  ]
+ },
+ {
+  "tvdbId": 327997,
+  "title": "Haunted - Souls Without Peace",
+  "overview": "Sky du Mont allegedly presents true, supernatural, inexplicable and mysterious haunted cases reported by eyewitnesses to whom these stories supposedly happened.",
+  "slug": "haunted---souls-without-peace",
+  "originalCountry": "usa",
+  "originalLanguage": "deu",
+  "language": "eng",
+  "firstAired": "2016-05-20",
+  "lastAired": "2020-06-12",
+  "imdbId": "tt9673410",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2025-09-16T07:52:13Z",
+  "status": "Ended",
+  "runtime": 45,
+  "originalNetwork": "TLC",
+  "network": "TLC",
+  "genres": [
+   "Mystery",
+   "Suspense"
+  ],
+  "rating": {
+   "count": 9,
+   "value": "6.9"
+  },
+  "images": [
+   {
+    "coverType": "Banner",
+    "url": "https://artworks.thetvdb.com/banners/graphical/327997-g.jpg"
+   },
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/series/327997/posters/5f3624aba040c.jpg"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1
+   },
+   {
+    "seasonNumber": 2
+   },
+   {
+    "seasonNumber": 3
+   },
+   {
+    "seasonNumber": 4
+   },
+   {
+    "seasonNumber": 5
+   }
+  ]
+ },
+ {
+  "tvdbId": 455195,
+  "title": "Der vergiftete Frieden",
+  "overview": "Der Erste Weltkrieg gilt als die \"Urkatastrophe\" des 20. Jahrhunderts. Die Ereignisse vor hundert Jahren beherrschen die politische Agenda bis zum heutigen Tag.",
+  "slug": "der-vergiftete-frieden",
+  "originalCountry": "deu",
+  "originalLanguage": "deu",
+  "firstAired": "2021-07-14",
+  "lastAired": "2021-07-14",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2024-10-05T05:56:48Z",
+  "status": "Ended",
+  "runtime": 43,
+  "timeOfDay": {
+   "hours": 0,
+   "minutes": 0
+  },
+  "genres": [
+   "Documentary"
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1
+   }
+  ]
+ },
+ {
+  "tvdbId": 434554,
+  "title": "Race for the Sky",
+  "overview": "From the start, inventors, tinkerers, pilots, designers, and other skyriders competed to make their dream of flying come true. It is a story about people who dared to cross borders, risk their lives, and make the adventure of flying accessible to everyone. The two-part documentary traces historical developments in the race for supremacy in the sky and shows the immense challenges facing modern aviation today.",
+  "slug": "race-for-the-sky",
+  "originalCountry": "deu",
+  "originalLanguage": "deu",
+  "language": "eng",
+  "firstAired": "2022-02-15",
+  "lastAired": "2022-02-15",
+  "tmdbId": 157690,
+  "imdbId": "tt18253368",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2026-06-03T19:19:49Z",
+  "status": "Ended",
+  "runtime": 52,
+  "timeOfDay": {
+   "hours": 0,
+   "minutes": 0
+  },
+  "originalNetwork": "Arte",
+  "network": "Arte",
+  "genres": [
+   "Documentary"
+  ],
+  "rating": {
+   "count": 12,
+   "value": "5.4"
+  },
+  "images": [
+   {
+    "coverType": "Banner",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/434554/banners/6621633e668bf.jpg"
+   },
+   {
+    "coverType": "Fanart",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/434554/backgrounds/6a200911a1833.jpg"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1
+   }
+  ]
+ },
+ {
+  "tvdbId": 323224,
+  "title": "Nicht tot zu kriegen",
+  "slug": "nicht-tot-zu-kriegen",
+  "originalCountry": "deu",
+  "originalLanguage": "deu",
+  "firstAired": "2017-03-09",
+  "lastAired": "2017-03-30",
+  "tmdbId": 69996,
+  "imdbId": "tt6219106",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2019-11-13T13:55:18Z",
+  "status": "Ended",
+  "runtime": 25,
+  "timeOfDay": {
+   "hours": 21,
+   "minutes": 15
+  },
+  "originalNetwork": "RTL Television",
+  "network": "RTL Television",
+  "genres": [
+   "Comedy"
+  ],
+  "contentRating": "TV-PG",
+  "rating": {
+   "count": 24,
+   "value": "6.8"
+  },
+  "actors": [
+   {
+    "name": "Jochen Busse",
+    "character": "Helmut Kraft",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/481698/photo/6abb885aa7f6c.jpg"
+   },
+   {
+    "name": "Caroline Maria Frier",
+    "character": "Dagmar Kramer"
+   },
+   {
+    "name": "Tristan Seith",
+    "character": "Oliver Kramer",
+    "image": "https://artworks.thetvdb.com/banners/v4/actor/521585/photo/6241e5675b8a3.jpg"
+   },
+   {
+    "name": "Amelie Plaas-Link",
+    "character": "Nina Holtmann"
+   },
+   {
+    "name": "Mathias Harrebye-Brandt",
+    "character": "Rasmus Paakkönen-Ylipulli"
+   },
+   {
+    "name": "Petra Nadolny",
+    "character": "Irina Popva"
+   }
+  ],
+  "images": [
+   {
+    "coverType": "Banner",
+    "url": "https://artworks.thetvdb.com/banners/graphical/323224-g.jpg"
+   },
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/posters/323224-1.jpg"
+   },
+   {
+    "coverType": "Fanart",
+    "url": "https://artworks.thetvdb.com/banners/fanart/original/323224-1.jpg"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1,
+    "images": [
+     {
+      "coverType": "Poster",
+      "url": "https://artworks.thetvdb.com/banners/seasons/323224-1.jpg"
+     }
+    ]
+   }
+  ]
+ },
+ {
+  "tvdbId": 457305,
+  "title": "Het Vuur van de Friezen",
+  "slug": "het-vuur-van-de-friezen",
+  "originalCountry": "nld",
+  "originalLanguage": "nld",
+  "firstAired": "2024-07-13",
+  "lastAired": "2024-08-10",
+  "tmdbId": 259163,
+  "imdbId": "tt33265472",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2024-12-17T15:37:08Z",
+  "status": "Ended",
+  "runtime": 40,
+  "timeOfDay": {
+   "hours": 0,
+   "minutes": 0
+  },
+  "genres": [
+   "History"
+  ],
+  "rating": {
+   "count": 9,
+   "value": "8.1"
+  },
+  "images": [
+   {
+    "coverType": "Banner",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/457305/banners/67619aa3a9e16.jpg"
+   },
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/457305/posters/674a1cae17c30.jpg"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1
+   }
+  ]
+ },
+ {
+  "tvdbId": 299593,
+  "title": "The dream of flight",
+  "overview": "His passion for flying took hold of him at the age of nine - and never let go: Chrigel Maurer, the eagle of Adelboden. Today he is one of the world's best paraglider pilots. The 33-year-old travels the globe from competition to competition. He has won the X-Alps three times, taken the Swiss championship title three times, flown countless podium places at paragliding acro events and long-distance competitions - and yet he is still in search of the ultimate challenge. What drives him to push his physical and mental limits? Where does the ability to turn failures and disappointments into new goals come from, and where does the irrepressible will to keep developing come from?",
+  "slug": "the-dream-of-flight",
+  "originalCountry": "che",
+  "originalLanguage": "deu",
+  "language": "eng",
+  "firstAired": "2015-07-22",
+  "lastAired": "2015-08-19",
+  "imdbId": "tt4887322",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2025-05-29T20:42:38Z",
+  "status": "Ended",
+  "runtime": 25,
+  "timeOfDay": {
+   "hours": 22,
+   "minutes": 45
+  },
+  "originalNetwork": "SF 1",
+  "network": "SF 1",
+  "genres": [
+   "Adventure",
+   "Documentary",
+   "Sport"
+  ],
+  "images": [
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/299593/posters/620a0a910eb60.jpg"
+   },
+   {
+    "coverType": "Fanart",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/299593/backgrounds/620a0b49645c5.jpg"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1
+   }
+  ]
+ },
+ {
+  "tvdbId": 369952,
+  "title": "Brieven aan Andalusië",
+  "overview": "Brieven aan Andalusië is een zesdelige, persoonlijke serie van Stef Biemans die een jaar geleden met zijn familie naar Zuid-Spanje vluchtte vanwege de politieke onrust en protesten in Nicaragua. Het land waar hij al vijftien jaar woonde. Om contact te krijgen met de mensen uit zijn nieuwe omgeving, stuurt hij brieven met vragen over Andalusië.\r\n\r\nMeer dan een jaar geleden woonde Stef Biemans nog met zijn familie in Nicaragua. Toen het land in een diepe crisis belandde en president Daniel Ortega de protesten met harde hand de kop in drukte, veranderde de stad (en straat) waar hij woonde in een slagveld. Stef zocht naar een toevluchtsoord en belandde met zijn vrouw en kinderen in Andalusië, Zuid-Spanje. Om Andalusië beter te leren kennen schrijft hij brieven aan de streekbewoners. Hij correspondeert met hen over zaken als migratie, armoede, religie, oud dictator Franco en het belang van (schoon)familie. Aan de hand van deze briefwisselingen probeert Stef zijn voorlopige thuisbasis beter te leren kennen. Parallel aan de verhalen die voortvloeien uit Stefs correspondentie, is er aandacht voor zijn persoonlijke situatie en voor de crisis in Nicaragua.",
+  "slug": "brieven-aan-andalusie",
+  "originalCountry": "nld",
+  "originalLanguage": "nld",
+  "firstAired": "2019-09-08",
+  "lastAired": "2019-10-13",
+  "tmdbId": 120245,
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2019-12-22T15:19:20Z",
+  "status": "Ended",
+  "runtime": 45,
+  "timeOfDay": {
+   "hours": 20,
+   "minutes": 15
+  },
+  "originalNetwork": "VPRO",
+  "network": "VPRO",
+  "genres": [
+   "Documentary"
+  ],
+  "actors": [
+   {
+    "name": "Stef Biemans",
+    "character": "Presentator"
+   }
+  ],
+  "images": [
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/series/369952/posters/62030297.jpg"
+   },
+   {
+    "coverType": "Fanart",
+    "url": "https://artworks.thetvdb.com/banners/fanart/original/5d9c9690d3034.jpg"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1
+   }
+  ]
+ },
+ {
+  "tvdbId": 480520,
+  "title": "Lena's Farm",
+  "overview": "Living together is not easy - if you are an eccentric frog, a daydreaming piglet, a walking disaster of a dog or another one of the bunch of peculiar animals on this small farm. But no matter what, Lena loves them all the same.",
+  "slug": "lenas-farm",
+  "originalCountry": "deu",
+  "originalLanguage": "deu",
+  "language": "eng",
+  "firstAired": "2025-02-04",
+  "lastAired": "2025-03-11",
+  "tmdbId": 116552,
+  "imdbId": "tt35661249",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2026-07-22T07:23:46Z",
+  "status": "Continuing",
+  "runtime": 6,
+  "timeOfDay": {
+   "hours": 0,
+   "minutes": 0
+  },
+  "originalNetwork": "KIKA",
+  "network": "KIKA",
+  "genres": [
+   "Animation",
+   "Children",
+   "Family"
+  ],
+  "contentRating": "0+",
+  "rating": {
+   "count": 26,
+   "value": "8.4"
+  },
+  "images": [
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/480520/posters/6a5f759860b51.jpg"
+   },
+   {
+    "coverType": "Fanart",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/480520/backgrounds/6a5f76f693bc2.jpg"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1
+   }
+  ]
+ },
+ {
+  "tvdbId": 394529,
+  "title": "Ulf Lundell - friheten och ensamheten",
+  "overview": "No one can compare to Ulf Lundell when it comes to productivity and versatility. He's been active for almost halv a century as an artist, songwriter and as an author. In this  documentary by Marie Nyeröd we get to follow Ulf Lundell through his life - a life like a story tale.",
+  "slug": "ulf-lundell---friheten-och-ensamheten",
+  "originalCountry": "swe",
+  "originalLanguage": "swe",
+  "language": "eng",
+  "firstAired": "2020-12-30",
+  "lastAired": "2021-01-06",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2021-02-12T20:05:38Z",
+  "status": "Ended",
+  "runtime": 60,
+  "timeOfDay": {
+   "hours": 0,
+   "minutes": 0
+  },
+  "originalNetwork": "SVT",
+  "network": "SVT",
+  "genres": [
+   "Documentary",
+   "Musical"
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1
+   }
+  ]
+ },
+ {
+  "tvdbId": 478644,
+  "title": "ISRAEL und PALÄSTINA - Frieden unmöglich?",
+  "overview": "Seit 1948 prägt ein blutiger Konflikt den Nahen Osten: Kriege, Besatzung, Intifadas, Terror und gescheiterte Friedenspläne - bis hin zum Hamas-Angriff auf Israel im Jahr 2023. (Info ZDF)",
+  "slug": "israel-und-palastina---frieden-unmoglich",
+  "originalCountry": "deu",
+  "originalLanguage": "deu",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2026-06-01T06:01:18Z",
+  "status": "Ended",
+  "runtime": 50,
+  "timeOfDay": {
+   "hours": 0,
+   "minutes": 0
+  },
+  "genres": [
+   "Documentary",
+   "History"
+  ],
+  "images": [
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/478644/posters/6a1c9183700d3.jpg"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1
+   }
+  ]
+ },
+ {
+  "tvdbId": 318034,
+  "title": "Rosin worldwide - other countries, other fries",
+  "overview": "Now his expertise is being put to use abroad: in \"Rosin weltweit - Andere Länder, andere Fritten\", Rosin helps German expats whose dream of owning their own restaurant far from home is on the brink of failure.",
+  "slug": "rosin-worldwide---other-countries-other-fries",
+  "originalCountry": "deu",
+  "originalLanguage": "deu",
+  "language": "eng",
+  "firstAired": "2015-08-11",
+  "lastAired": "2016-10-25",
+  "tmdbId": 68164,
+  "imdbId": "tt9177884",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2025-05-12T11:47:09Z",
+  "status": "Ended",
+  "runtime": 90,
+  "timeOfDay": {
+   "hours": 20,
+   "minutes": 15
+  },
+  "originalNetwork": "Kabel eins",
+  "network": "Kabel eins",
+  "genres": [
+   "Food",
+   "Reality"
+  ],
+  "actors": [
+   {
+    "name": "Frank Rosin"
+   }
+  ],
+  "images": [
+   {
+    "coverType": "Poster",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/318034/posters/6821dfab330e1.jpg"
+   },
+   {
+    "coverType": "Fanart",
+    "url": "https://artworks.thetvdb.com/banners/v4/series/318034/backgrounds/6821dfbca0cda.jpg"
+   }
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1
+   },
+   {
+    "seasonNumber": 2
+   }
+  ]
+ },
+ {
+  "tvdbId": 454909,
+  "title": "Fischbrötchen, Fritten & Falafel – Imbisse im Norden",
+  "slug": "fischbrotchen-fritten-and-falafel--imbisse-im-norden",
+  "originalCountry": "deu",
+  "originalLanguage": "deu",
+  "firstAired": "2024-09-09",
+  "lastAired": "2024-09-12",
+  "malIds": [],
+  "anidbIds": [],
+  "aniListIds": [],
+  "lastUpdated": "2024-09-27T00:18:08Z",
+  "status": "Continuing",
+  "runtime": 29,
+  "timeOfDay": {
+   "hours": 0,
+   "minutes": 0
+  },
+  "genres": [
+   "Documentary"
+  ],
+  "seasons": [
+   {
+    "seasonNumber": 0
+   },
+   {
+    "seasonNumber": 1
+   }
+  ]
+ }
+]

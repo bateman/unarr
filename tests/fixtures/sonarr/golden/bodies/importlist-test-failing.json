@@ -1,0 +1,144 @@
+{
+ "configContract": "SimklUserSettings",
+ "enableAutomaticAdd": true,
+ "fields": [
+  {
+   "advanced": false,
+   "hidden": "hidden",
+   "isFloat": false,
+   "label": "Access Token",
+   "name": "accessToken",
+   "order": 0,
+   "privacy": "normal",
+   "type": "textbox",
+   "value": "redacted"
+  },
+  {
+   "advanced": false,
+   "hidden": "hidden",
+   "isFloat": false,
+   "label": "Refresh Token",
+   "name": "refreshToken",
+   "order": 1,
+   "privacy": "normal",
+   "type": "textbox",
+   "value": ""
+  },
+  {
+   "advanced": false,
+   "hidden": "hidden",
+   "isFloat": false,
+   "label": "Expires",
+   "name": "expires",
+   "order": 2,
+   "privacy": "normal",
+   "type": "textbox",
+   "value": "2031-10-10T12:27:15Z"
+  },
+  {
+   "advanced": false,
+   "hidden": "hidden",
+   "isFloat": false,
+   "label": "Auth User",
+   "name": "authUser",
+   "order": 3,
+   "privacy": "normal",
+   "type": "textbox",
+   "value": "redacted"
+  },
+  {
+   "advanced": false,
+   "helpText": "Type of list you're seeking to import from",
+   "isFloat": false,
+   "label": "List Type",
+   "name": "listType",
+   "order": 4,
+   "privacy": "normal",
+   "selectOptions": [
+    {
+     "hint": "(0)",
+     "name": "Watching",
+     "order": 7,
+     "value": 0
+    },
+    {
+     "hint": "(1)",
+     "name": "Plan To Watch",
+     "order": 9,
+     "value": 1
+    },
+    {
+     "hint": "(2)",
+     "name": "Hold",
+     "order": 11,
+     "value": 2
+    },
+    {
+     "hint": "(3)",
+     "name": "Completed",
+     "order": 13,
+     "value": 3
+    },
+    {
+     "hint": "(4)",
+     "name": "Dropped",
+     "order": 15,
+     "value": 4
+    }
+   ],
+   "type": "select",
+   "value": 3
+  },
+  {
+   "advanced": false,
+   "helpText": "Type of show you're seeking to import from",
+   "isFloat": false,
+   "label": "Show Type",
+   "name": "showType",
+   "order": 5,
+   "privacy": "normal",
+   "selectOptions": [
+    {
+     "name": "Shows",
+     "order": 0,
+     "value": 0
+    },
+    {
+     "name": "Anime",
+     "order": 1,
+     "value": 1
+    }
+   ],
+   "type": "select",
+   "value": 0
+  },
+  {
+   "advanced": false,
+   "isFloat": false,
+   "label": "Authenticate with Simkl",
+   "name": "signIn",
+   "order": 6,
+   "privacy": "normal",
+   "type": "oAuth",
+   "value": "startOAuth"
+  }
+ ],
+ "id": 0,
+ "implementation": "SimklUserImport",
+ "implementationName": "Simkl User Watchlist",
+ "infoLink": "https://wiki.servarr.com/sonarr/supported#simkluserimport",
+ "listOrder": 3,
+ "listType": "simkl",
+ "minRefreshInterval": "06:00:00",
+ "monitorNewItems": "all",
+ "name": "Simkl Completed",
+ "qualityProfileId": 10,
+ "rootFolderPath": "/tv",
+ "searchForMissingEpisodes": true,
+ "seasonFolder": true,
+ "seriesType": "standard",
+ "shouldMonitor": "all",
+ "tags": [
+  2
+ ]
+}

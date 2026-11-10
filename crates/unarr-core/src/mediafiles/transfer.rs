@@ -368,6 +368,23 @@ pub fn create_folder(config: &MediaManagementConfig, path: &Path) -> io::Result<
     Ok(created)
 }
 
+/// `DiskTransferService.TransferFolder(source, destination, Move)`: a
+/// rename when both are on one file system, else a copy of every file
+/// then the source removed.
+pub fn move_folder(source: &Path, destination: &Path) -> io::Result<()> {
+    if let Some(parent) = destination.parent() {
+        std::fs::create_dir_all(parent)?;
+    }
+    match std::fs::rename(source, destination) {
+        Ok(()) => Ok(()),
+        Err(e) if e.raw_os_error() == Some(libc::EXDEV) => {
+            copy_tree(source, destination)?;
+            std::fs::remove_dir_all(source)
+        }
+        Err(e) => Err(e),
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

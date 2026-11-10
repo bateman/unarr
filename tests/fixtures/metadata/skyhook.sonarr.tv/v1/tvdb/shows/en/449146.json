@@ -1,0 +1,195 @@
+{
+ "tvdbId": 449146,
+ "title": "Star City",
+ "overview": "Step into a thrilling chapter inspired by For All Mankind. Same alt-history universe. Different perspective: the Soviet Union's. Go behind the Iron Curtain with the cosmonauts, engineers, and intelligence officers who risked it all in the race for the Moon.",
+ "slug": "star-city",
+ "originalCountry": "usa",
+ "originalLanguage": "eng",
+ "language": "eng",
+ "firstAired": "2026-05-29",
+ "lastAired": "2026-07-10",
+ "tvMazeId": 76191,
+ "tmdbId": 252107,
+ "imdbId": "tt32140872",
+ "malIds": [],
+ "anidbIds": [],
+ "aniListIds": [],
+ "lastUpdated": "2026-11-07T11:29:51Z",
+ "status": "Continuing",
+ "runtime": 60,
+ "timeOfDay": {
+  "hours": 0,
+  "minutes": 0
+ },
+ "originalNetwork": "Apple TV",
+ "network": "Apple TV",
+ "genres": [
+  "Drama",
+  "Science Fiction"
+ ],
+ "contentRating": "12",
+ "rating": {
+  "count": 8176,
+  "value": "7.6"
+ },
+ "actors": [
+  {
+   "name": "Rhys Ifans",
+   "character": "Chief Designer",
+   "image": "https://artworks.thetvdb.com/banners/person/462666/624872312e8cf.jpg"
+  },
+  {
+   "name": "Anna Maxwell Martin",
+   "character": "Lyudmilla Raskova",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/363048/photo/660917359083a.jpg"
+  },
+  {
+   "name": "Agnes O'Casey",
+   "character": "Irina Morozova",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9114419/photo/6739d4c06604f.jpg"
+  },
+  {
+   "name": "Alice Englert",
+   "character": "Anastasia Belikova",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/556295/photo/62f7cd817b748.jpg"
+  },
+  {
+   "name": "Solly McLeod",
+   "character": "Sasha Polivanov",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9101242/photo/6699134819568.jpg"
+  },
+  {
+   "name": "Josef Davies",
+   "character": "Sergei Nikilov",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/575054/photo/646816e87ff0d.jpg"
+  }
+ ],
+ "images": [
+  {
+   "coverType": "Banner",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/449146/banners/6a198ab98a14d.jpg"
+  },
+  {
+   "coverType": "Poster",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/449146/posters/6a0e1f176a889.jpg"
+  },
+  {
+   "coverType": "Fanart",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/449146/backgrounds/69ea32334f956.jpg"
+  },
+  {
+   "coverType": "Clearlogo",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/449146/clearlogo/6a18f30b0115f.png"
+  }
+ ],
+ "seasons": [
+  {
+   "seasonNumber": 1,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2123930/posters/69efcc207d5aa.jpg"
+    }
+   ]
+  }
+ ],
+ "episodes": [
+  {
+   "tvdbShowId": 449146,
+   "tvdbId": 10452050,
+   "seasonNumber": 1,
+   "episodeNumber": 1,
+   "title": "The Eyes",
+   "airDate": "2026-05-29",
+   "airDateUtc": "2026-05-29T04:00:00Z",
+   "runtime": 60,
+   "overview": "The Soviet Union reignites the race to the Moon—but this time, with a daring mission to send a woman.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10452050/screencap/6a18e5f2843ec.jpg"
+  },
+  {
+   "tvdbShowId": 449146,
+   "tvdbId": 11644006,
+   "seasonNumber": 1,
+   "episodeNumber": 2,
+   "title": "A Bear on a Chain",
+   "airDate": "2026-05-29",
+   "airDateUtc": "2026-05-29T04:00:00Z",
+   "runtime": 62,
+   "overview": "Anastasia is thrust onto the world stage. Lyudmilla tries a new tactic to get information.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11644006/screencap/6a18e60caeadc.jpg"
+  },
+  {
+   "tvdbShowId": 449146,
+   "tvdbId": 11644007,
+   "seasonNumber": 1,
+   "episodeNumber": 3,
+   "title": "Bad Dancer",
+   "airDate": "2026-06-05",
+   "airDateUtc": "2026-06-05T04:00:00Z",
+   "runtime": 60,
+   "overview": "Irina has an unexpected encounter. The Soviets scramble to maintain dominance on the Moon.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11644007/screencap/6a18e62d136b1.jpg"
+  },
+  {
+   "tvdbShowId": 449146,
+   "tvdbId": 11644008,
+   "seasonNumber": 1,
+   "episodeNumber": 4,
+   "title": "Dark Forest",
+   "airDate": "2026-06-12",
+   "airDateUtc": "2026-06-12T04:00:00Z",
+   "runtime": 62,
+   "overview": "Fame begins to take its toll on Anastasia. Irina tracks a crucial lead.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11644008/screencap/6a222419129bb.jpg"
+  },
+  {
+   "tvdbShowId": 449146,
+   "tvdbId": 11644009,
+   "seasonNumber": 1,
+   "episodeNumber": 5,
+   "title": "Bite Your Elbow",
+   "airDate": "2026-06-19",
+   "airDateUtc": "2026-06-19T04:00:00Z",
+   "runtime": 55,
+   "overview": "Pressure mounts on all fronts as fear sets in.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11644009/screencap/6a2b5c60791bb.jpg"
+  },
+  {
+   "tvdbShowId": 449146,
+   "tvdbId": 11644010,
+   "seasonNumber": 1,
+   "episodeNumber": 6,
+   "title": "Awl in a Sack",
+   "airDate": "2026-06-26",
+   "airDateUtc": "2026-06-26T04:00:00Z",
+   "runtime": 61,
+   "overview": "The fallout in Star City causes plans to unravel.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11644010/screencap/6a3495cd5ebdf.jpg"
+  },
+  {
+   "tvdbShowId": 449146,
+   "tvdbId": 11644011,
+   "seasonNumber": 1,
+   "episodeNumber": 7,
+   "title": "Plow Deep",
+   "airDate": "2026-07-03",
+   "airDateUtc": "2026-07-03T04:00:00Z",
+   "runtime": 57,
+   "overview": "Loyalties are tested by a new power structure.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11644011/screencap/6a3dcf8fdd84e.jpg"
+  },
+  {
+   "tvdbShowId": 449146,
+   "tvdbId": 11644012,
+   "seasonNumber": 1,
+   "episodeNumber": 8,
+   "title": "The Wolves",
+   "airDate": "2026-07-10",
+   "airDateUtc": "2026-07-10T04:00:00Z",
+   "runtime": 65,
+   "finaleType": "season",
+   "overview": "A revelation sparks a desperate race against time.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/11644012/screencap/6a470b29385e0.jpg"
+  }
+ ]
+}

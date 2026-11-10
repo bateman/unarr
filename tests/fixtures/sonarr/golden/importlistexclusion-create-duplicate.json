@@ -1,0 +1,23 @@
+{
+  "body": [
+    {
+      "attemptedValue": 81189,
+      "errorCode": "ImportListExclusionExistsValidator",
+      "errorMessage": "This exclusion has already been added.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Tvdb Id",
+        "propertyValue": 81189
+      },
+      "propertyName": "TvdbId",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-09T22:24:43Z",
+  "request": {
+    "body": "bodies/importlistexclusion-create.json",
+    "method": "POST",
+    "path": "/api/v3/importlistexclusion"
+  },
+  "status": 400
+}

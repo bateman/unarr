@@ -73,7 +73,7 @@
             "thumbnail": {
               "url": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg"
             },
-            "timestamp": "2026-11-08T20:57:28.5390561Z",
+            "timestamp": "2026-11-09T22:18:35.9635496Z",
             "title": "The Pitt - 1x01 - 7:00 A.M.",
             "url": "http://thetvdb.com/?tab=series&id=448176"
           }
@@ -104,7 +104,7 @@
         "downloadClientType": "SABnzbd",
         "downloadId": "SABnzbd_nzo_mock3",
         "episodeFile": {
-          "dateAdded": "2026-11-08T20:57:28.0506875Z",
+          "dateAdded": "2026-11-09T22:18:35.761909Z",
           "id": 1073,
           "languages": [
             {
@@ -271,7 +271,7 @@
             "thumbnail": {
               "url": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg"
             },
-            "timestamp": "2026-11-08T20:57:28.6083568Z",
+            "timestamp": "2026-11-09T22:18:36.0194013Z",
             "title": "The Pitt - 1x01 - 7:00 A.M.",
             "url": "http://thetvdb.com/?tab=series&id=448176"
           }
@@ -295,7 +295,7 @@
         "downloadId": "SABnzbd_nzo_mock3",
         "episodeFiles": [
           {
-            "dateAdded": "2026-11-08T20:57:28.0506875Z",
+            "dateAdded": "2026-11-09T22:18:35.761909Z",
             "id": 1073,
             "languages": [
               {
@@ -527,7 +527,7 @@
             "thumbnail": {
               "url": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg"
             },
-            "timestamp": "2026-11-08T20:57:47.9885509Z",
+            "timestamp": "2026-11-09T22:18:55.7004149Z",
             "title": "The Pitt - 1x02 - 8:00 A.M.",
             "url": "http://thetvdb.com/?tab=series&id=448176"
           }
@@ -551,9 +551,9 @@
         },
         "downloadClient": "Mock NZBGet",
         "downloadClientType": "NZBGet",
-        "downloadId": "c4119cd06a044d60be1043396370761b",
+        "downloadId": "c860499553f64d7b8170eae60cd1a5b3",
         "episodeFile": {
-          "dateAdded": "2026-11-08T20:57:47.9750994Z",
+          "dateAdded": "2026-11-09T22:18:55.6872611Z",
           "id": 1074,
           "languages": [
             {
@@ -726,7 +726,7 @@
             "thumbnail": {
               "url": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg"
             },
-            "timestamp": "2026-11-08T20:57:48.0087719Z",
+            "timestamp": "2026-11-09T22:18:55.7294423Z",
             "title": "The Pitt - 1x02 - 8:00 A.M.",
             "url": "http://thetvdb.com/?tab=series&id=448176"
           }
@@ -747,10 +747,10 @@
         "destinationPath": "/tv/The Pitt/Season 01",
         "downloadClient": "Mock NZBGet",
         "downloadClientType": "NZBGet",
-        "downloadId": "c4119cd06a044d60be1043396370761b",
+        "downloadId": "c860499553f64d7b8170eae60cd1a5b3",
         "episodeFiles": [
           {
-            "dateAdded": "2026-11-08T20:57:47.9750994Z",
+            "dateAdded": "2026-11-09T22:18:55.6872611Z",
             "id": 1074,
             "languages": [
               {
@@ -972,7 +972,7 @@
             "thumbnail": {
               "url": "https://artworks.thetvdb.com/banners/v4/series/422712/posters/6978fefe94ea5.jpg"
             },
-            "timestamp": "2026-11-08T20:58:07.9656964Z",
+            "timestamp": "2026-11-09T22:19:15.7288498Z",
             "title": "Daredevil: Born Again - 1x02 - Optics",
             "url": "http://thetvdb.com/?tab=series&id=422712"
           }
@@ -1011,7 +1011,7 @@
         "downloadClientType": "Transmission",
         "downloadId": "4271B834AED1835F13BD078CB4A9A98F00AC777F",
         "episodeFile": {
-          "dateAdded": "2026-11-08T20:58:07.956174Z",
+          "dateAdded": "2026-11-09T22:19:15.7142408Z",
           "id": 1075,
           "languages": [
             {
@@ -1177,7 +1177,7 @@
             "thumbnail": {
               "url": "https://artworks.thetvdb.com/banners/v4/series/422712/posters/6978fefe94ea5.jpg"
             },
-            "timestamp": "2026-11-08T20:58:07.9819824Z",
+            "timestamp": "2026-11-09T22:19:15.7540389Z",
             "title": "Daredevil: Born Again - 1x02 - Optics",
             "url": "http://thetvdb.com/?tab=series&id=422712"
           }
@@ -1201,7 +1201,7 @@
         "downloadId": "4271B834AED1835F13BD078CB4A9A98F00AC777F",
         "episodeFiles": [
           {
-            "dateAdded": "2026-11-08T20:58:07.956174Z",
+            "dateAdded": "2026-11-09T22:19:15.7142408Z",
             "id": 1075,
             "languages": [
               {
@@ -1344,7 +1344,7 @@
       "service": "plex"
     }
   ],
-  "recordedAt": "2026-11-08T20:58:48Z",
+  "recordedAt": "2026-11-09T22:19:55Z",
   "request": {
     "method": "GET",
     "path": "/mock/notifications",

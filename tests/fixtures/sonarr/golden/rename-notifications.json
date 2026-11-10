@@ -26,7 +26,7 @@
         "instanceName": "Sonarr",
         "renamedEpisodeFiles": [
           {
-            "dateAdded": "2026-11-08T20:58:07.956174Z",
+            "dateAdded": "2026-11-09T22:19:15.7142408Z",
             "id": 1075,
             "languages": [
               {
@@ -148,7 +148,7 @@
       "service": "plex"
     }
   ],
-  "recordedAt": "2026-11-08T21:00:18Z",
+  "recordedAt": "2026-11-09T22:21:26Z",
   "request": {
     "method": "GET",
     "path": "/mock/notifications",

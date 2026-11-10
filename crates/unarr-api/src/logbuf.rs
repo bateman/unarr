@@ -41,11 +41,22 @@ impl LogBuffer {
     }
 
     pub fn push(&self, level: &'static str, logger: &str, message: String, exception: Option<String>) {
+        self.push_at(Utc::now(), level, logger, message, exception);
+    }
+
+    fn push_at(
+        &self,
+        time: DateTime<Utc>,
+        level: &'static str,
+        logger: &str,
+        message: String,
+        exception: Option<String>,
+    ) {
         let mut inner = self.inner.lock().unwrap_or_else(|e| e.into_inner());
         inner.next_id += 1;
         let entry = LogEntry {
             id: inner.next_id,
-            time: Utc::now(),
+            time,
             level,
             logger: logger.to_string(),
             message,
@@ -64,9 +75,11 @@ impl LogBuffer {
     }
 }
 
-struct MessageVisitor {
-    message: String,
-    error: Option<String>,
+/// An event's message, with its other fields after it, and its `error`.
+#[derive(Default)]
+pub(crate) struct MessageVisitor {
+    pub(crate) message: String,
+    pub(crate) error: Option<String>,
 }
 
 impl Visit for MessageVisitor {
@@ -97,22 +110,54 @@ impl Visit for MessageVisitor {
     }
 }
 
-impl<S: Subscriber> Layer<S> for LogBuffer {
-    fn on_event(&self, event: &Event<'_>, _ctx: Context<'_, S>) {
+/// A log event taken out of `tracing`, to be kept or handed on.
+#[derive(Debug, Clone)]
+pub struct Record {
+    pub time: DateTime<Utc>,
+    pub level: tracing::Level,
+    pub logger: String,
+    pub message: String,
+    pub error: Option<String>,
+}
+
+impl Record {
+    pub fn from_event(event: &Event<'_>) -> Record {
         let meta = event.metadata();
-        let level = match *meta.level() {
+        let mut visitor = MessageVisitor::default();
+        event.record(&mut visitor);
+        Record {
+            time: Utc::now(),
+            level: *meta.level(),
+            logger: meta.target().to_string(),
+            message: visitor.message,
+            error: visitor.error,
+        }
+    }
+}
+
+impl LogBuffer {
+    /// Keep an event, at the time it was logged.
+    pub fn record(&self, record: &Record) {
+        let level = match record.level {
             tracing::Level::ERROR => "error",
             tracing::Level::WARN => "warn",
             tracing::Level::INFO => "info",
             tracing::Level::DEBUG => "debug",
             tracing::Level::TRACE => "trace",
         };
-        let mut visitor = MessageVisitor {
-            message: String::new(),
-            error: None,
-        };
-        event.record(&mut visitor);
-        self.push(level, meta.target(), visitor.message, visitor.error);
+        self.push_at(
+            record.time,
+            level,
+            &record.logger,
+            record.message.clone(),
+            record.error.clone(),
+        );
+    }
+}
+
+impl<S: Subscriber> Layer<S> for LogBuffer {
+    fn on_event(&self, event: &Event<'_>, _ctx: Context<'_, S>) {
+        self.record(&Record::from_event(event));
     }
 }
 

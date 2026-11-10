@@ -1,0 +1,36 @@
+{
+ "$from": "series-after-add-breaking-bad",
+ "$set": {
+  "qualityProfileId": 4,
+  "tags": [
+   1
+  ],
+  "monitorNewItems": "none",
+  "seasons": [
+   {
+    "seasonNumber": 0,
+    "monitored": false
+   },
+   {
+    "seasonNumber": 1,
+    "monitored": false
+   },
+   {
+    "seasonNumber": 2,
+    "monitored": true
+   },
+   {
+    "seasonNumber": 3,
+    "monitored": true
+   },
+   {
+    "seasonNumber": 4,
+    "monitored": true
+   },
+   {
+    "seasonNumber": 5,
+    "monitored": true
+   }
+  ]
+ }
+}

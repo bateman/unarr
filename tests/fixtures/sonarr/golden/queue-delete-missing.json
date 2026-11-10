@@ -2,7 +2,7 @@
   "body": {
     "message": "NotFound"
   },
-  "recordedAt": "2026-11-08T20:56:25Z",
+  "recordedAt": "2026-11-09T22:17:33Z",
   "request": {
     "method": "DELETE",
     "path": "/api/v3/queue/123456?removeFromClient=true"

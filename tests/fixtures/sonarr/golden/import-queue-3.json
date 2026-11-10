@@ -4,7 +4,7 @@
     "pageSize": 20,
     "records": [
       {
-        "added": "2026-11-08T20:57:13Z",
+        "added": "2026-11-09T22:18:21Z",
         "customFormatScore": -10000,
         "customFormats": [
           {
@@ -34,7 +34,7 @@
           "episodeNumber": 1,
           "hasFile": false,
           "id": 46,
-          "lastSearchTime": "2026-11-08T20:56:27Z",
+          "lastSearchTime": "2026-11-09T22:17:35Z",
           "monitored": false,
           "overview": "Longtime rivals Matt Murdock and Wilson Fisk attempt to move past their darker personas to serve New York, but their pasts resurface, reintroducing the world of Daredevil.",
           "runtime": 59,
@@ -46,7 +46,7 @@
         },
         "episodeHasFile": false,
         "episodeId": 46,
-        "estimatedCompletionTime": "2026-11-08T21:08:13Z",
+        "estimatedCompletionTime": "2026-11-09T22:29:20Z",
         "id": 1652059285,
         "indexer": "Mock Torznab (Prowlarr)",
         "languages": [
@@ -157,7 +157,7 @@
     "sortKey": "timeleft",
     "totalRecords": 1
   },
-  "recordedAt": "2026-11-08T20:58:27Z",
+  "recordedAt": "2026-11-09T22:19:35Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/queue?page=1&pageSize=20&sortKey=timeleft&sortDirection=ascending&includeUnknownSeriesItems=true&includeSeries=true&includeEpisode=true"

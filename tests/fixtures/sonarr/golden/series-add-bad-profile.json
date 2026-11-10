@@ -1,0 +1,23 @@
+{
+  "body": [
+    {
+      "attemptedValue": 999,
+      "errorCode": "QualityProfileExistsValidator",
+      "errorMessage": "Quality Profile does not exist",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Quality Profile Id",
+        "propertyValue": 999
+      },
+      "propertyName": "QualityProfileId",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-09T22:23:22Z",
+  "request": {
+    "body": "bodies/series-add-bad-profile.json",
+    "method": "POST",
+    "path": "/api/v3/series"
+  },
+  "status": 400
+}

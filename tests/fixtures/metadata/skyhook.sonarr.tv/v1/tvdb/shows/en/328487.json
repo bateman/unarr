@@ -1,0 +1,643 @@
+{
+ "tvdbId": 328487,
+ "title": "The Orville",
+ "overview": "Follows the crew of the not-so-functional exploratory ship in the Earth's interstellar fleet, 400 years in the future.",
+ "slug": "the-orville",
+ "originalCountry": "usa",
+ "originalLanguage": "eng",
+ "language": "eng",
+ "firstAired": "2017-09-10",
+ "lastAired": "2022-08-04",
+ "tvMazeId": 20263,
+ "tmdbId": 71738,
+ "imdbId": "tt5691552",
+ "malIds": [],
+ "anidbIds": [],
+ "aniListIds": [],
+ "lastUpdated": "2026-10-06T18:59:43Z",
+ "status": "Ended",
+ "runtime": 53,
+ "timeOfDay": {
+  "hours": 0,
+  "minutes": 0
+ },
+ "originalNetwork": "FOX",
+ "network": "Hulu",
+ "genres": [
+  "Adventure",
+  "Comedy",
+  "Drama",
+  "Science Fiction"
+ ],
+ "contentRating": "TV-14",
+ "rating": {
+  "count": 111336,
+  "value": "8.0"
+ },
+ "alternativeTitles": [
+  {
+   "title": "The Orville: New Horizons"
+  }
+ ],
+ "actors": [
+  {
+   "name": "Seth MacFarlane",
+   "character": "Ed Mercer",
+   "image": "https://artworks.thetvdb.com/banners/person/255117/primary.jpg"
+  },
+  {
+   "name": "Adrianne Palicki",
+   "character": "Kelly Grayson",
+   "image": "https://artworks.thetvdb.com/banners/person/302921/62db4836ddf79.jpg"
+  },
+  {
+   "name": "Scott Grimes",
+   "character": "Gordon Malloy",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/274189/photo/66292a555211f.jpg"
+  },
+  {
+   "name": "Halston Sage",
+   "character": "Alara Kitan",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/463310/photo/66b2df74194fc.jpg"
+  },
+  {
+   "name": "Mark Jackson",
+   "character": "Isaac",
+   "image": "https://artworks.thetvdb.com/banners/person/270212/5f84c64d4869c.jpg"
+  },
+  {
+   "name": "Peter Macon",
+   "character": "Bortus"
+  },
+  {
+   "name": "J. Lee",
+   "character": "John LaMarr"
+  },
+  {
+   "name": "Penny Johnson Jerald",
+   "character": "Claire Finn",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/329833/photo/6220b3fda02ea.jpg"
+  },
+  {
+   "name": "Jessica Szohr",
+   "character": "Talla Keyali",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/330752/photo/60642fbde06ff.jpg"
+  },
+  {
+   "name": "Anne Winters",
+   "character": "Charly Burke",
+   "image": "https://artworks.thetvdb.com/banners/person/299114/5eac67044e668.jpg"
+  },
+  {
+   "name": "Chad L. Coleman",
+   "character": "Klyden",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/269725/photo/6293d5479a37f.jpg"
+  }
+ ],
+ "images": [
+  {
+   "coverType": "Banner",
+   "url": "https://artworks.thetvdb.com/banners/graphical/328487-g.jpg"
+  },
+  {
+   "coverType": "Poster",
+   "url": "https://artworks.thetvdb.com/banners/posters/328487-2.jpg"
+  },
+  {
+   "coverType": "Fanart",
+   "url": "https://artworks.thetvdb.com/banners/fanart/original/328487-5.jpg"
+  },
+  {
+   "coverType": "Clearlogo",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/328487/clearlogo/611b861baa880.png"
+  }
+ ],
+ "seasons": [
+  {
+   "seasonNumber": 0,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/712014/posters/665d7fa84827a.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 1,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/seasons/5be88739c7427.jpg"
+    },
+    {
+     "coverType": "Banner",
+     "url": "https://artworks.thetvdb.com/banners/seasonswide/328487-1.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 2,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/seasons/5c0bf9c24f8a9.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 3,
+   "name": "New Horizons",
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/1958039/posters/62dd93a1c57e8.jpg"
+    }
+   ]
+  }
+ ],
+ "episodes": [
+  {
+   "tvdbShowId": 328487,
+   "tvdbId": 7852967,
+   "seasonNumber": 0,
+   "episodeNumber": 1,
+   "airedAfterSeasonNumber": 1,
+   "title": "The Orville Panel at PaleyFest 2018",
+   "airDate": "2018-03-17",
+   "airDateUtc": "2018-03-17T04:00:00Z",
+   "finaleType": "season",
+   "overview": "The cast and crew of \"The Orville\" host a panel at PaleyFest 2018 where they have a Q&A and discuss the show, its future, and more."
+  },
+  {
+   "tvdbShowId": 328487,
+   "tvdbId": 6089488,
+   "seasonNumber": 1,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 1,
+   "title": "Old Wounds",
+   "airDate": "2017-09-10",
+   "airDateUtc": "2017-09-10T04:00:00Z",
+   "runtime": 45,
+   "overview": "It's 2418 and the Planetary Union promotes Ed Mercer to Captain of the exploratory vessel The U.S.S. Orville. Ed's enthusiasm for his new position is dampened when his ex-wife, Kelly Grayson, is assigned to be his First Officer. While on their first routine mission, the Orville crew is ambushed by the Krill, a vicious alien race, who are bent on stealing a device that can cause time to accelerate.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/328487/6089488.jpg"
+  },
+  {
+   "tvdbShowId": 328487,
+   "tvdbId": 6123044,
+   "seasonNumber": 1,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 2,
+   "title": "Command Performance",
+   "airDate": "2017-09-17",
+   "airDateUtc": "2017-09-17T04:00:00Z",
+   "runtime": 43,
+   "overview": "When Ed and Kelly are tricked by a hologram of a ship in distress and find themselves prisoners in a replica of their former home, Alara must step up in her first command of the Orville and attempt a heroic rescue. Meanwhile, Bortus and Klyden receive some happy, yet unexpected news.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/328487/6123044.jpg"
+  },
+  {
+   "tvdbShowId": 328487,
+   "tvdbId": 6123046,
+   "seasonNumber": 1,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 3,
+   "title": "About a Girl",
+   "airDate": "2017-09-21",
+   "airDateUtc": "2017-09-21T04:00:00Z",
+   "runtime": 44,
+   "overview": "The Orville crew is divided between cultures when Bortus and Klyden debate if their newly born offspring should receive a controversial surgery.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/328487/6123046.jpg"
+  },
+  {
+   "tvdbShowId": 328487,
+   "tvdbId": 6123043,
+   "seasonNumber": 1,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 4,
+   "title": "If the Stars Should Appear",
+   "airDate": "2017-09-28",
+   "airDateUtc": "2017-09-28T04:00:00Z",
+   "runtime": 42,
+   "overview": "Ed and the Orville crew encounter a massive vessel adrift in space, which is in danger of colliding with a star. While some of the crew set out to help the ship's inhabitants, Bortus, Gordon, and John stay behind and fend off a Krill attack on another Union ship.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/328487/6123043.jpg"
+  },
+  {
+   "tvdbShowId": 328487,
+   "tvdbId": 6123048,
+   "seasonNumber": 1,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 5,
+   "title": "Pria",
+   "airDate": "2017-10-05",
+   "airDateUtc": "2017-10-05T04:00:00Z",
+   "runtime": 43,
+   "overview": "After the crew saves a stranded ship and its attractive captain, Ed becomes smitten with the Orville’s new guest, while Kelly suspects all is not what it seems. Meanwhile, Gordon attempts to teach Isaac the art of pulling off a practical joke.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/328487/6123048.jpg"
+  },
+  {
+   "tvdbShowId": 328487,
+   "tvdbId": 6123049,
+   "seasonNumber": 1,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 6,
+   "title": "Krill",
+   "airDate": "2017-10-12",
+   "airDateUtc": "2017-10-12T04:00:00Z",
+   "runtime": 43,
+   "overview": "After the Orville crew defeats a Krill attack on a brand-new colony, the Union sends Ed and Gordon on a dangerous undercover mission to infiltrate a Krill ship and obtain a copy of the Krill bible, the \"Anhkana,\" to better understand the enemy.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/328487/6123049.jpg"
+  },
+  {
+   "tvdbShowId": 328487,
+   "tvdbId": 6123054,
+   "seasonNumber": 1,
+   "episodeNumber": 7,
+   "absoluteEpisodeNumber": 7,
+   "title": "Majority Rule",
+   "airDate": "2017-10-26",
+   "airDateUtc": "2017-10-26T04:00:00Z",
+   "runtime": 43,
+   "overview": "When two Union anthropologists go missing on a planet similar to 21st century Earth, Ed sends a team led by Kelly to find them, but the mission quickly goes awry when they realize the society’s government is completely based on a public voting system to determine punishment.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/328487/6123054.jpg"
+  },
+  {
+   "tvdbShowId": 328487,
+   "tvdbId": 6123050,
+   "seasonNumber": 1,
+   "episodeNumber": 8,
+   "absoluteEpisodeNumber": 8,
+   "title": "Into the Fold",
+   "airDate": "2017-11-02",
+   "airDateUtc": "2017-11-02T04:00:00Z",
+   "runtime": 44,
+   "overview": "Ed and the crew set out to save Dr. Finn, her two sons and Isaac after their shuttle gets thrown into unchartered space and they crash-land on a moon that is light years from the Orville.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/328487/6123050.jpg"
+  },
+  {
+   "tvdbShowId": 328487,
+   "tvdbId": 6123056,
+   "seasonNumber": 1,
+   "episodeNumber": 9,
+   "absoluteEpisodeNumber": 9,
+   "title": "Cupid's Dagger",
+   "airDate": "2017-11-09",
+   "airDateUtc": "2017-11-09T05:00:00Z",
+   "runtime": 43,
+   "overview": "The Orville is called to mediate a peace treaty between two warring cultures, but tensions run even higher between Ed and Kelly when a familiar face boards the ship. Meanwhile Yaphit declares his love for Dr. Finn with surprising results.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/328487/6123056.jpg"
+  },
+  {
+   "tvdbShowId": 328487,
+   "tvdbId": 6123057,
+   "seasonNumber": 1,
+   "episodeNumber": 10,
+   "absoluteEpisodeNumber": 10,
+   "title": "Firestorm",
+   "airDate": "2017-11-16",
+   "airDateUtc": "2017-11-16T05:00:00Z",
+   "runtime": 42,
+   "overview": "When a fire breaks out on The Orville and a crew member dies, Alara begins to question if she is fit for her job, just as unusual and terrifying things start happening on the ship.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/328487/6123057.jpg"
+  },
+  {
+   "tvdbShowId": 328487,
+   "tvdbId": 6123061,
+   "seasonNumber": 1,
+   "episodeNumber": 11,
+   "absoluteEpisodeNumber": 11,
+   "title": "New Dimensions",
+   "airDate": "2017-11-30",
+   "airDateUtc": "2017-11-30T05:00:00Z",
+   "runtime": 43,
+   "overview": "Kelly discovers that Lt. John Lamarr is smarter than he lets on. So, she pushes Ed to consider him for a key leadership position on the ship after The Orville gets damaged by a mysterious spatial anomaly causing harrowing effects to all things living.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/328487/6123061.jpg"
+  },
+  {
+   "tvdbShowId": 328487,
+   "tvdbId": 6123059,
+   "seasonNumber": 1,
+   "episodeNumber": 12,
+   "absoluteEpisodeNumber": 12,
+   "title": "Mad Idolatry",
+   "airDate": "2017-12-07",
+   "airDateUtc": "2017-12-07T05:00:00Z",
+   "runtime": 43,
+   "finaleType": "season",
+   "overview": "Ed and Kelly seriously reconsider getting back together. However, while Kelly is on a mission with Isaac and Gordon to investigate the origins of an uncharted star, they suddenly crash-land on a planet from another universe. Kelly then makes a decision with unforeseen long-term consequences for the planet, putting Ed in a difficult position.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/328487/6123059.jpg"
+  },
+  {
+   "tvdbShowId": 328487,
+   "tvdbId": 6769844,
+   "seasonNumber": 2,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 13,
+   "title": "Ja'loja",
+   "airDate": "2018-12-30",
+   "airDateUtc": "2018-12-30T05:00:00Z",
+   "runtime": 48,
+   "overview": "The Orville heads towards Moclus for Bortus' special once-a-year ceremony, Ed discovers Kelly has moved on and has started dating. Gordon asks for John's help in getting game. Claire turns to Isaac for parenting advice.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/328487/6769844.jpg"
+  },
+  {
+   "tvdbShowId": 328487,
+   "tvdbId": 6690592,
+   "seasonNumber": 2,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 14,
+   "title": "Primal Urges",
+   "airDate": "2019-01-03",
+   "airDateUtc": "2019-01-03T05:00:00Z",
+   "runtime": 48,
+   "overview": "Ed and the crew race to save a small group of survivors on a planet about to be destroyed by its sun. Bortus and Klyden start marriage counseling when Bortus' obsession with the ship's simulation room gets out of hand.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/328487/6690592.jpg"
+  },
+  {
+   "tvdbShowId": 328487,
+   "tvdbId": 6938537,
+   "seasonNumber": 2,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 15,
+   "title": "Home",
+   "airDate": "2019-01-10",
+   "airDateUtc": "2019-01-10T05:00:00Z",
+   "runtime": 48,
+   "overview": "Ed, Gordon, and Alara visit Alara's home planet of Xelayah.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/328487/6938537.jpg"
+  },
+  {
+   "tvdbShowId": 328487,
+   "tvdbId": 6966010,
+   "seasonNumber": 2,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 16,
+   "title": "Nothing Left on Earth Excepting Fishes",
+   "airDate": "2019-01-17",
+   "airDateUtc": "2019-01-17T05:00:00Z",
+   "runtime": 48,
+   "overview": "Ed finds himself behind enemy lines when he crash-lands on a mysterious planet. Kelly questions why Gordon wants to take the Command Test.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/328487/6966010.jpg"
+  },
+  {
+   "tvdbShowId": 328487,
+   "tvdbId": 6968634,
+   "seasonNumber": 2,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 17,
+   "title": "All the World is Birthday Cake",
+   "airDate": "2019-01-24",
+   "airDateUtc": "2019-01-24T05:00:00Z",
+   "runtime": 48,
+   "overview": "The Orville makes First Contact and a new crew member joins the ship.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/328487/6968634.jpg"
+  },
+  {
+   "tvdbShowId": 328487,
+   "tvdbId": 6968635,
+   "seasonNumber": 2,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 18,
+   "title": "A Happy Refrain",
+   "airDate": "2019-01-31",
+   "airDateUtc": "2019-01-31T05:00:00Z",
+   "runtime": 48,
+   "overview": "The Orville crew is surprised when Claire's personal life takes an unexpected turn. Gordon makes an unusual grooming suggestion to Bortus.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/328487/6968635.jpg"
+  },
+  {
+   "tvdbShowId": 328487,
+   "tvdbId": 6972178,
+   "seasonNumber": 2,
+   "episodeNumber": 7,
+   "absoluteEpisodeNumber": 19,
+   "title": "Deflectors",
+   "airDate": "2019-02-14",
+   "airDateUtc": "2019-02-14T05:00:00Z",
+   "runtime": 48,
+   "overview": "Kelly breaks up with Cassius, while the Orville has its deflectors upgraded by a Moclan engineer who used to be Bortus' boyfriend.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/328487/6972178.jpg"
+  },
+  {
+   "tvdbShowId": 328487,
+   "tvdbId": 6972184,
+   "seasonNumber": 2,
+   "episodeNumber": 8,
+   "absoluteEpisodeNumber": 20,
+   "title": "Identity (1)",
+   "airDate": "2019-02-21",
+   "airDateUtc": "2019-02-21T05:00:00Z",
+   "runtime": 48,
+   "overview": "Ed and the crew travel to Isaac's home planet, Kaylon.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/328487/6972184.jpg"
+  },
+  {
+   "tvdbShowId": 328487,
+   "tvdbId": 6972192,
+   "seasonNumber": 2,
+   "episodeNumber": 9,
+   "absoluteEpisodeNumber": 21,
+   "title": "Identity (2)",
+   "airDate": "2019-02-28",
+   "airDateUtc": "2019-02-28T05:00:00Z",
+   "runtime": 48,
+   "overview": "The Kaylons take control of the Orville with the intention of destroying all biological lifeforms.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/328487/6972192.jpg"
+  },
+  {
+   "tvdbShowId": 328487,
+   "tvdbId": 7043517,
+   "seasonNumber": 2,
+   "episodeNumber": 10,
+   "absoluteEpisodeNumber": 22,
+   "title": "Blood of Patriots",
+   "airDate": "2019-03-07",
+   "airDateUtc": "2019-03-07T05:00:00Z",
+   "runtime": 48,
+   "overview": "Ed must initiate peace talks with the Krill.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/328487/7043517.jpg"
+  },
+  {
+   "tvdbShowId": 328487,
+   "tvdbId": 7063470,
+   "seasonNumber": 2,
+   "episodeNumber": 11,
+   "absoluteEpisodeNumber": 23,
+   "title": "Lasting Impressions",
+   "airDate": "2019-03-21",
+   "airDateUtc": "2019-03-21T04:00:00Z",
+   "runtime": 48,
+   "overview": "The Orville crew members open a time capsule from 2015.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/328487/7063470.jpg"
+  },
+  {
+   "tvdbShowId": 328487,
+   "tvdbId": 7063777,
+   "seasonNumber": 2,
+   "episodeNumber": 12,
+   "absoluteEpisodeNumber": 24,
+   "title": "Sanctuary",
+   "airDate": "2019-04-11",
+   "airDateUtc": "2019-04-11T04:00:00Z",
+   "runtime": 46,
+   "overview": "Ed discovers that Moclans aboard The Orville are harboring a secret.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/328487/7063777.jpg"
+  },
+  {
+   "tvdbShowId": 328487,
+   "tvdbId": 7063782,
+   "seasonNumber": 2,
+   "episodeNumber": 13,
+   "absoluteEpisodeNumber": 25,
+   "title": "Tomorrow, and Tomorrow, and Tomorrow",
+   "airDate": "2019-04-18",
+   "airDateUtc": "2019-04-18T04:00:00Z",
+   "runtime": 48,
+   "overview": "A time distortion affects Ed and Kelly’s relationship.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/328487/7063782.jpg"
+  },
+  {
+   "tvdbShowId": 328487,
+   "tvdbId": 7063788,
+   "seasonNumber": 2,
+   "episodeNumber": 14,
+   "absoluteEpisodeNumber": 26,
+   "title": "The Road Not Taken",
+   "airDate": "2019-04-25",
+   "airDateUtc": "2019-04-25T04:00:00Z",
+   "runtime": 48,
+   "finaleType": "season",
+   "overview": "The crew must contend with the disastrous fallout from Kelly’s decision.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/328487/7063788.jpg"
+  },
+  {
+   "tvdbShowId": 328487,
+   "tvdbId": 8710550,
+   "seasonNumber": 3,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 27,
+   "title": "Electric Sheep",
+   "airDate": "2022-06-02",
+   "airDateUtc": "2022-06-02T04:00:00Z",
+   "runtime": 69,
+   "overview": "The crew deals with the aftermath of the Kaylon battle.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8710550/screencap/62990ba141f25.jpg"
+  },
+  {
+   "tvdbShowId": 328487,
+   "tvdbId": 8710694,
+   "seasonNumber": 3,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 28,
+   "title": "Shadow Realms",
+   "airDate": "2022-06-09",
+   "airDateUtc": "2022-06-09T04:00:00Z",
+   "runtime": 65,
+   "overview": "The Orville explores a mysterious region of space.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8710694/screencap/62b0d0e9c6070.jpg"
+  },
+  {
+   "tvdbShowId": 328487,
+   "tvdbId": 8710743,
+   "seasonNumber": 3,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 29,
+   "title": "Mortality Paradox",
+   "airDate": "2022-06-16",
+   "airDateUtc": "2022-06-16T04:00:00Z",
+   "runtime": 61,
+   "overview": "The Orville crew makes a new discovery.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8710743/screencap/62a837582400e.jpg"
+  },
+  {
+   "tvdbShowId": 328487,
+   "tvdbId": 8710768,
+   "seasonNumber": 3,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 30,
+   "title": "Gently Falling Rain",
+   "airDate": "2022-06-23",
+   "airDateUtc": "2022-06-23T04:00:00Z",
+   "runtime": 65,
+   "overview": "The Orville crew leads a Union delegation to sign a peace treaty with the Krill.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8710768/screencap/62b30ab60619f.jpg"
+  },
+  {
+   "tvdbShowId": 328487,
+   "tvdbId": 8710800,
+   "seasonNumber": 3,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 31,
+   "title": "A Tale of Two Topas",
+   "airDate": "2022-06-30",
+   "airDateUtc": "2022-06-30T04:00:00Z",
+   "runtime": 75,
+   "overview": "Tensions between Kelly and the Moclans result when she helps Topa prepare for the Union Point entrance exam.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8710800/screencap/62bbe0079e89f.jpg"
+  },
+  {
+   "tvdbShowId": 328487,
+   "tvdbId": 8719889,
+   "seasonNumber": 3,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 32,
+   "title": "Twice in a Lifetime",
+   "airDate": "2022-07-07",
+   "airDateUtc": "2022-07-07T04:00:00Z",
+   "runtime": 70,
+   "overview": "The crew must rescue Gordon from a distant yet familiar world.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8719889/screencap/62c5334ad2b3b.jpg"
+  },
+  {
+   "tvdbShowId": 328487,
+   "tvdbId": 8719890,
+   "seasonNumber": 3,
+   "episodeNumber": 7,
+   "absoluteEpisodeNumber": 33,
+   "title": "From Unknown Graves",
+   "airDate": "2022-07-14",
+   "airDateUtc": "2022-07-14T04:00:00Z",
+   "runtime": 74,
+   "overview": "The Orville discovers a Kaylon with a very special ability.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8719890/screencap/62ce6d8163b9c.jpg"
+  },
+  {
+   "tvdbShowId": 328487,
+   "tvdbId": 8719895,
+   "seasonNumber": 3,
+   "episodeNumber": 8,
+   "absoluteEpisodeNumber": 34,
+   "title": "Midnight Blue",
+   "airDate": "2022-07-21",
+   "airDateUtc": "2022-07-21T04:00:00Z",
+   "runtime": 86,
+   "overview": "The Orville crew visits Heveena’s sanctuary world and embarks on a journey that may leave the entire Union more vulnerable.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8719895/screencap/62d7705970bf0.jpg"
+  },
+  {
+   "tvdbShowId": 328487,
+   "tvdbId": 8719896,
+   "seasonNumber": 3,
+   "episodeNumber": 9,
+   "absoluteEpisodeNumber": 35,
+   "title": "Domino",
+   "airDate": "2022-07-28",
+   "airDateUtc": "2022-07-28T04:00:00Z",
+   "runtime": 78,
+   "overview": "The creation of a powerful new weapon puts the Orville crew — and the entire Union — in a political and ethical quandary.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8719896/screencap/62e0bcc260a60.jpg"
+  },
+  {
+   "tvdbShowId": 328487,
+   "tvdbId": 8719898,
+   "seasonNumber": 3,
+   "episodeNumber": 10,
+   "absoluteEpisodeNumber": 36,
+   "title": "Future Unknown",
+   "airDate": "2022-08-04",
+   "airDateUtc": "2022-08-04T04:00:00Z",
+   "runtime": 81,
+   "finaleType": "series",
+   "overview": "A celebration is underway aboard the ship.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/8719898/screencap/62ea20a2a2c37.jpg"
+  }
+ ]
+}

@@ -1,0 +1,508 @@
+{
+  "body": {
+    "page": 1,
+    "pageSize": 10,
+    "records": [
+      {
+        "customFormatScore": 0,
+        "customFormats": [],
+        "data": {
+          "indexerFlags": "Freeleech",
+          "reason": "MissingFromDisk",
+          "releaseGroup": null,
+          "releaseType": "SingleEpisode",
+          "size": "2065326303"
+        },
+        "date": "2026-11-09T22:22:28Z",
+        "episodeId": 1270,
+        "eventType": "episodeFileDeleted",
+        "id": 2665,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 15,
+            "name": "WEBRip-1080p",
+            "resolution": 1080,
+            "source": "webRip"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "seriesId": 33,
+        "sourceTitle": "/tv/Yellowjackets/Season 02/Yellowjackets (2021) - S02E03 - Digestif [WEBRip-1080p][EAC3 2.0][x264].mkv"
+      },
+      {
+        "customFormatScore": 1775,
+        "customFormats": [
+          {
+            "id": 16,
+            "name": "AMZN"
+          },
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 11,
+            "name": "WEB Tier 01"
+          }
+        ],
+        "data": {
+          "indexerFlags": "0",
+          "reason": "MissingFromDisk",
+          "releaseGroup": "NTb",
+          "releaseType": "SingleEpisode",
+          "size": "2501363135"
+        },
+        "date": "2026-11-09T22:22:28Z",
+        "episodeId": 1271,
+        "eventType": "episodeFileDeleted",
+        "id": 2664,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "seriesId": 33,
+        "sourceTitle": "/tv/Yellowjackets/Season 02/Yellowjackets (2021) - S02E04 - Old Wounds [AMZN][WEBDL-1080p][EAC3 5.1][h264]-NTb.mkv"
+      },
+      {
+        "customFormatScore": 1775,
+        "customFormats": [
+          {
+            "id": 16,
+            "name": "AMZN"
+          },
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 11,
+            "name": "WEB Tier 01"
+          }
+        ],
+        "data": {
+          "indexerFlags": "0",
+          "reason": "MissingFromDisk",
+          "releaseGroup": "NTb",
+          "releaseType": "SingleEpisode",
+          "size": "2456594241"
+        },
+        "date": "2026-11-09T22:22:28Z",
+        "episodeId": 1274,
+        "eventType": "episodeFileDeleted",
+        "id": 2663,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "seriesId": 33,
+        "sourceTitle": "/tv/Yellowjackets/Season 02/Yellowjackets (2021) - S02E07 - Burial [AMZN][WEBDL-1080p][EAC3 5.1][h264]-NTb.mkv"
+      },
+      {
+        "customFormatScore": 1775,
+        "customFormats": [
+          {
+            "id": 16,
+            "name": "AMZN"
+          },
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 11,
+            "name": "WEB Tier 01"
+          }
+        ],
+        "data": {
+          "indexerFlags": "0",
+          "reason": "MissingFromDisk",
+          "releaseGroup": "NTb",
+          "releaseType": "SingleEpisode",
+          "size": "2417781614"
+        },
+        "date": "2026-11-09T22:22:28Z",
+        "episodeId": 1272,
+        "eventType": "episodeFileDeleted",
+        "id": 2662,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "seriesId": 33,
+        "sourceTitle": "/tv/Yellowjackets/Season 02/Yellowjackets (2021) - S02E05 - Two Truths and a Lie [AMZN][WEBDL-1080p][EAC3 5.1][h264]-NTb.mkv"
+      },
+      {
+        "customFormatScore": 1775,
+        "customFormats": [
+          {
+            "id": 16,
+            "name": "AMZN"
+          },
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 11,
+            "name": "WEB Tier 01"
+          }
+        ],
+        "data": {
+          "indexerFlags": "0",
+          "reason": "MissingFromDisk",
+          "releaseGroup": "NTb",
+          "releaseType": "SingleEpisode",
+          "size": "2394369819"
+        },
+        "date": "2026-11-09T22:22:28Z",
+        "episodeId": 1269,
+        "eventType": "episodeFileDeleted",
+        "id": 2661,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "seriesId": 33,
+        "sourceTitle": "/tv/Yellowjackets/Season 02/Yellowjackets (2021) - S02E02 - Edible Complex [AMZN][WEBDL-1080p][EAC3 5.1][h264]-NTb.mkv"
+      },
+      {
+        "customFormatScore": 1775,
+        "customFormats": [
+          {
+            "id": 16,
+            "name": "AMZN"
+          },
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 11,
+            "name": "WEB Tier 01"
+          }
+        ],
+        "data": {
+          "indexerFlags": "0",
+          "reason": "MissingFromDisk",
+          "releaseGroup": "NTb",
+          "releaseType": "SingleEpisode",
+          "size": "2182254077"
+        },
+        "date": "2026-11-09T22:22:28Z",
+        "episodeId": 1276,
+        "eventType": "episodeFileDeleted",
+        "id": 2660,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "seriesId": 33,
+        "sourceTitle": "/tv/Yellowjackets/Season 02/Yellowjackets (2021) - S02E09 - Storytelling [AMZN][WEBDL-1080p][EAC3 5.1][h264]-NTb.mkv"
+      },
+      {
+        "customFormatScore": 1775,
+        "customFormats": [
+          {
+            "id": 16,
+            "name": "AMZN"
+          },
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 11,
+            "name": "WEB Tier 01"
+          }
+        ],
+        "data": {
+          "indexerFlags": "0",
+          "reason": "MissingFromDisk",
+          "releaseGroup": "NTb",
+          "releaseType": "SingleEpisode",
+          "size": "2118690019"
+        },
+        "date": "2026-11-09T22:22:28Z",
+        "episodeId": 1273,
+        "eventType": "episodeFileDeleted",
+        "id": 2659,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "seriesId": 33,
+        "sourceTitle": "/tv/Yellowjackets/Season 02/Yellowjackets (2021) - S02E06 - Qui [AMZN][WEBDL-1080p][EAC3 5.1][h264]-NTb.mkv"
+      },
+      {
+        "customFormatScore": 1775,
+        "customFormats": [
+          {
+            "id": 16,
+            "name": "AMZN"
+          },
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 11,
+            "name": "WEB Tier 01"
+          }
+        ],
+        "data": {
+          "indexerFlags": "0",
+          "reason": "MissingFromDisk",
+          "releaseGroup": "Kitsune",
+          "releaseType": "SingleEpisode",
+          "size": "1852931142"
+        },
+        "date": "2026-11-09T22:22:28Z",
+        "episodeId": 1279,
+        "eventType": "episodeFileDeleted",
+        "id": 2658,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "seriesId": 33,
+        "sourceTitle": "/tv/Yellowjackets/Season 03/Yellowjackets (2021) - S03E03 - Thems the Brakes [AMZN][WEBDL-1080p][EAC3 5.1][h264]-Kitsune.mkv"
+      },
+      {
+        "customFormatScore": 1775,
+        "customFormats": [
+          {
+            "id": 16,
+            "name": "AMZN"
+          },
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 11,
+            "name": "WEB Tier 01"
+          }
+        ],
+        "data": {
+          "indexerFlags": "0",
+          "reason": "MissingFromDisk",
+          "releaseGroup": "NTb",
+          "releaseType": "SingleEpisode",
+          "size": "2282229823"
+        },
+        "date": "2026-11-09T22:22:28Z",
+        "episodeId": 1277,
+        "eventType": "episodeFileDeleted",
+        "id": 2657,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "seriesId": 33,
+        "sourceTitle": "/tv/Yellowjackets/Season 03/Yellowjackets (2021) - S03E01 - It Girl [AMZN][WEBDL-1080p][EAC3 5.1][h264]-NTb.mkv"
+      },
+      {
+        "customFormatScore": 1775,
+        "customFormats": [
+          {
+            "id": 16,
+            "name": "AMZN"
+          },
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 11,
+            "name": "WEB Tier 01"
+          }
+        ],
+        "data": {
+          "indexerFlags": "0",
+          "reason": "MissingFromDisk",
+          "releaseGroup": "NTb",
+          "releaseType": "SingleEpisode",
+          "size": "2603344166"
+        },
+        "date": "2026-11-09T22:22:28Z",
+        "episodeId": 1280,
+        "eventType": "episodeFileDeleted",
+        "id": 2656,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "seriesId": 33,
+        "sourceTitle": "/tv/Yellowjackets/Season 03/Yellowjackets (2021) - S03E04 - 12 Angry Girls and 1 Drunk Travis [AMZN][WEBDL-1080p][EAC3 5.1][h264]-NTb.mkv"
+      }
+    ],
+    "sortDirection": "descending",
+    "sortKey": "date",
+    "totalRecords": 2368
+  },
+  "recordedAt": "2026-11-09T22:24:17Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/history?page=1&pageSize=10&sortKey=date&sortDirection=descending"
+  },
+  "status": 200
+}

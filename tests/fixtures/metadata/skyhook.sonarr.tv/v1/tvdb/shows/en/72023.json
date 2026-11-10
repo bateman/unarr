@@ -1,0 +1,986 @@
+{
+ "tvdbId": 72023,
+ "title": "Deadwood",
+ "overview": "In the Black Hills Indian Cession, the town of Deadwood is a settlement violating treaty obligations; a violent and uncivilized outpost that attracts outlaws and entrepreneurs, ex-soldiers and racketeers, Chinese laborers, prostitutes, city slickers and gunfighters.",
+ "slug": "deadwood",
+ "originalCountry": "usa",
+ "originalLanguage": "eng",
+ "language": "eng",
+ "firstAired": "2004-03-21",
+ "lastAired": "2006-08-27",
+ "tvRageId": 3267,
+ "tvMazeId": 565,
+ "tmdbId": 1406,
+ "imdbId": "tt0348914",
+ "malIds": [],
+ "anidbIds": [],
+ "aniListIds": [],
+ "lastUpdated": "2026-05-17T13:24:22Z",
+ "status": "Ended",
+ "runtime": 53,
+ "timeOfDay": {
+  "hours": 21,
+  "minutes": 0
+ },
+ "originalNetwork": "HBO",
+ "network": "HBO",
+ "genres": [
+  "Crime",
+  "Drama",
+  "History",
+  "Western"
+ ],
+ "contentRating": "TV-MA",
+ "rating": {
+  "count": 130987,
+  "value": "8.6"
+ },
+ "alternativeTitles": [
+  {
+   "title": "Deadwood Cidade sem Lei"
+  }
+ ],
+ "actors": [
+  {
+   "name": "Timothy Olyphant",
+   "character": "Seth Bullock",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/327861/photo/6892903331835.jpg"
+  },
+  {
+   "name": "Ian McShane",
+   "character": "Al Swearengen",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/256988/photo/64f9b2bd54901.jpg"
+  },
+  {
+   "name": "Paula Malcomson",
+   "character": "Trixie",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/276081/photo/6783affd7959f.jpg"
+  },
+  {
+   "name": "Robin Weigert",
+   "character": "Calamity Jane",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/297653/photo/61ce38c917acb.jpg"
+  },
+  {
+   "name": "Powers Boothe",
+   "character": "Cy Tolliver"
+  },
+  {
+   "name": "Brad Dourif",
+   "character": "Doc Cochran",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/272799/photo/658af6ab99343.jpg"
+  },
+  {
+   "name": "Molly Parker",
+   "character": "Alma Garret",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/304583/photo/6605784c6c90f.jpg"
+  },
+  {
+   "name": "Sean Bridgers",
+   "character": "Johnny Burns"
+  },
+  {
+   "name": "John Hawkes",
+   "character": "Sol Star",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/252311/photo/6250009510b94.jpg"
+  },
+  {
+   "name": "Alice Krige",
+   "character": "Maddie",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/261789/photo/67588e46bf933.jpg"
+  },
+  {
+   "name": "William Sanderson",
+   "character": "E.B. Farnum",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/261923/photo/6393137fe162b.jpg"
+  },
+  {
+   "name": "Titus Welliver",
+   "character": "Silas Adams",
+   "image": "https://artworks.thetvdb.com/banners/person/269601/primary.jpg"
+  },
+  {
+   "name": "Bree Wall",
+   "character": "Sofia Metz"
+  },
+  {
+   "name": "W. Earl Brown",
+   "character": "Dan Dority",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/327933/photo/65a872cc019b8.jpg"
+  },
+  {
+   "name": "Ricky Jay",
+   "character": "Eddie Sawyer"
+  },
+  {
+   "name": "Garret Dillahunt",
+   "character": "Francis Wolcott",
+   "image": "https://artworks.thetvdb.com/banners/person/275807/609f9892e4ebd.jpg"
+  },
+  {
+   "name": "Dayton Callie",
+   "character": "Charlie Utter"
+  },
+  {
+   "name": "Jim Beaver",
+   "character": "Whitney Ellsworth",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/255941/photo/60682d1bbe672.jpg"
+  },
+  {
+   "name": "Kim Dickens",
+   "character": "Joanie Stubbs",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/317950/photo/654950c002e25.jpg"
+  },
+  {
+   "name": "Anna Gunn",
+   "character": "Martha Bullock",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/269404/photo/61138b8f549b0.jpg"
+  },
+  {
+   "name": "Keone Young",
+   "character": "Mr. Wu",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/280027/photo/649c0eabd0e07.jpg"
+  },
+  {
+   "name": "Leon Rippy",
+   "character": "Tom Nuttall",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/272412/photo/679629a4b92ed.jpg"
+  },
+  {
+   "name": "Jeffrey Jones",
+   "character": "A.W. Merrick",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/325557/photo/6314a36f42249.jpg"
+  },
+  {
+   "name": "Peter Jason",
+   "character": "Con Stapleton",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/263740/photo/68d4c9e85d923.jpg"
+  },
+  {
+   "name": "Geri Jewell",
+   "character": "Jewel"
+  },
+  {
+   "name": "Ralph Richeson",
+   "character": "Richardson "
+  },
+  {
+   "name": "Brent Sexton",
+   "character": "Harry Manning",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/283612/photo/62daa726c601d.jpg"
+  },
+  {
+   "name": "Pasha D. Lychnikoff",
+   "character": "Blazanov",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/248169/photo/615759a019958.jpg"
+  },
+  {
+   "name": "Gerald McRaney",
+   "character": "George Hearst",
+   "image": "https://artworks.thetvdb.com/banners/person/257736/5f2693272439b.jpg"
+  },
+  {
+   "name": "Michael Harney",
+   "character": "Steve",
+   "image": "https://artworks.thetvdb.com/banners/person/252553/primary.jpg"
+  },
+  {
+   "name": "Ray McKinnon",
+   "character": "Reverend H.W. Smith",
+   "image": "https://artworks.thetvdb.com/banners/person/292729/primary.jpg"
+  },
+  {
+   "name": "Josh Eriksson",
+   "character": "William Bullock"
+  },
+  {
+   "name": "Brian Cox",
+   "character": "Jack Langrishe",
+   "image": "https://artworks.thetvdb.com/banners/person/255293/primary.jpg"
+  },
+  {
+   "name": "Sarah Paulson",
+   "character": "Miss Isringhausen",
+   "image": "https://artworks.thetvdb.com/banners/person/277202/primary.jpg"
+  },
+  {
+   "name": "Cleo King",
+   "character": "Lucretia \"Aunt Lou\" Marchbanks"
+  },
+  {
+   "name": "Philip Moon",
+   "character": "Lee"
+  },
+  {
+   "name": "Meghan Glennon",
+   "character": "Lila"
+  },
+  {
+   "name": "Larry Cedar",
+   "character": "Leon",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/269240/photo/6081ced642f90.jpg"
+  },
+  {
+   "name": "Zach Grenier",
+   "character": "Andy Cramed",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/270258/photo/6228fef9357d3.jpg"
+  },
+  {
+   "name": "Stephen Tobolowsky",
+   "character": "Hugo Jarry",
+   "image": "https://artworks.thetvdb.com/banners/person/252910/primary.jpg"
+  },
+  {
+   "name": "Franklyn Ajaye",
+   "character": "Samuel \"Nigger General\" Fields",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/266690/photo/68e3cc59e5daf.jpg"
+  }
+ ],
+ "images": [
+  {
+   "coverType": "Banner",
+   "url": "https://artworks.thetvdb.com/banners/graphical/72023-g.jpg"
+  },
+  {
+   "coverType": "Poster",
+   "url": "https://artworks.thetvdb.com/banners/posters/72023-7.jpg"
+  },
+  {
+   "coverType": "Fanart",
+   "url": "https://artworks.thetvdb.com/banners/fanart/original/72023-1.jpg"
+  },
+  {
+   "coverType": "Clearlogo",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/72023/clearlogo/611b70226830e.png"
+  }
+ ],
+ "seasons": [
+  {
+   "seasonNumber": 0,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/531310/posters/694faf5b41137.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 1,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/3371/posters/694faf79dd82e.jpg"
+    },
+    {
+     "coverType": "Banner",
+     "url": "https://artworks.thetvdb.com/banners/seasonswide/72023-1.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 2,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/3372/posters/694fafc2ee8ba.jpg"
+    },
+    {
+     "coverType": "Banner",
+     "url": "https://artworks.thetvdb.com/banners/seasonswide/72023-2.jpg"
+    }
+   ]
+  },
+  {
+   "seasonNumber": 3,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/3373/posters/694fafde02316.jpg"
+    },
+    {
+     "coverType": "Banner",
+     "url": "https://artworks.thetvdb.com/banners/seasonswide/72023-3.jpg"
+    }
+   ]
+  }
+ ],
+ "episodes": [
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 7031763,
+   "seasonNumber": 0,
+   "episodeNumber": 1,
+   "airedAfterSeasonNumber": 3,
+   "title": "Deadwood: The Movie",
+   "airDate": "2019-05-31",
+   "airDateUtc": "2019-06-01T01:00:00Z",
+   "runtime": 105,
+   "overview": "Ten years later, as the residents of Deadwood gather to commemorate Dakota's statehood in 1889, saloon owner Al Swearengen and Marshal Seth Bullock clash with Senator George Hearst.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/72023/7031763.jpg"
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 7790465,
+   "seasonNumber": 0,
+   "episodeNumber": 2,
+   "airedAfterSeasonNumber": 1,
+   "title": "Making Deadwood: The Show Behind the Show",
+   "airDate": "2005-02-08",
+   "airDateUtc": "2005-02-09T02:00:00Z",
+   "runtime": 14,
+   "overview": "A behind the scenes featurette with cast and crew about the creation of Deadwood's first season, included in The Complete First Season DVD set."
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 7790466,
+   "seasonNumber": 0,
+   "episodeNumber": 3,
+   "airedAfterSeasonNumber": 1,
+   "title": "The Real Deadwood",
+   "airDate": "2005-02-08",
+   "airDateUtc": "2005-02-09T02:00:00Z",
+   "runtime": 26,
+   "overview": "A historical short about the real Deadwood, with appearances from experts and members of the Deadwood cast and crew, included in The Complete First Season DVD set."
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 7790467,
+   "seasonNumber": 0,
+   "episodeNumber": 4,
+   "airedAfterSeasonNumber": 1,
+   "title": "The New Language of the Old West: A Conversation with David Milch & Keith Carradine",
+   "airDate": "2005-02-08",
+   "airDateUtc": "2005-02-09T02:00:00Z",
+   "runtime": 30,
+   "overview": "A conversation with David Milch and Keith Carradine about the essence of language in Deadwood, included in The Complete First Season DVD set."
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 7790469,
+   "seasonNumber": 0,
+   "episodeNumber": 5,
+   "airedAfterSeasonNumber": 1,
+   "title": "An Imaginative Reality: A Discussion Between David Milch & Keith Carradine",
+   "airDate": "2005-02-08",
+   "airDateUtc": "2005-02-09T02:00:00Z",
+   "runtime": 28,
+   "overview": "A discussion with David Milch and Keith Carradine about the melding of historical and fictional characters in Deadwood, included in The Complete First Season DVD set."
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 7790470,
+   "seasonNumber": 0,
+   "episodeNumber": 6,
+   "airedAfterSeasonNumber": 2,
+   "title": "The Real Deadwood: 1877",
+   "airDate": "2006-05-23",
+   "airDateUtc": "2006-05-24T01:00:00Z",
+   "runtime": 22,
+   "overview": "Another historical short about the real Deadwood, with reappearances of experts from the The Real Deadwood special, as well as Deadwood cast and crew, included in The Complete Second Season DVD set."
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 7790472,
+   "seasonNumber": 0,
+   "episodeNumber": 7,
+   "airedAfterSeasonNumber": 2,
+   "title": "Making of the Season Two Finale, Part One: Trusting the Process with David Milch",
+   "airDate": "2006-05-23",
+   "airDateUtc": "2006-05-24T01:00:00Z",
+   "runtime": 28,
+   "overview": "Behind the scenes from the Season Two finale,  included in The Complete Second Season DVD set."
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 7790473,
+   "seasonNumber": 0,
+   "episodeNumber": 8,
+   "airedAfterSeasonNumber": 2,
+   "title": "Making of the Season Two Finale, Part Two: Mr. Wu Proves Out",
+   "airDate": "2006-05-23",
+   "airDateUtc": "2006-05-24T01:00:00Z",
+   "runtime": 22,
+   "overview": "Behind the scenes from the Season Two finale,  included in The Complete Second Season DVD set."
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 7790475,
+   "seasonNumber": 0,
+   "episodeNumber": 9,
+   "airedAfterSeasonNumber": 2,
+   "title": "Making of the Season Two Finale, Part Three: The Wedding Celebration",
+   "airDate": "2006-05-23",
+   "airDateUtc": "2006-05-24T01:00:00Z",
+   "runtime": 22,
+   "overview": "Behind the scenes from the Season Two finale,  included in The Complete Second Season DVD set."
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 7790476,
+   "seasonNumber": 0,
+   "episodeNumber": 10,
+   "airedAfterSeasonNumber": 3,
+   "title": "Deadwood Matures",
+   "airDate": "2007-06-12",
+   "airDateUtc": "2007-06-13T01:00:00Z",
+   "runtime": 20,
+   "overview": "Another historical short about the real Deadwood, as it matured from camp to township, with reappearances of experts from the The Real Deadwood and The Real Deadwood: 1877 specials, as well as Deadwood cast and crew, included in The Complete Third Season DVD set."
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 7790477,
+   "seasonNumber": 0,
+   "episodeNumber": 11,
+   "airedAfterSeasonNumber": 3,
+   "title": "The Education of Swearengen and Bullock",
+   "airDate": "2007-06-12",
+   "airDateUtc": "2007-06-13T01:00:00Z",
+   "runtime": 20,
+   "overview": "An interview short with cast and crew, discussing the relationship between the show's two most important characters, included in The Complete Third Season DVD set."
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 7790479,
+   "seasonNumber": 0,
+   "episodeNumber": 12,
+   "airedAfterSeasonNumber": 3,
+   "title": "The Meaning of Endings: David Milch on the Conclusion of Deadwood",
+   "airDate": "2013-10-29",
+   "airDateUtc": "2013-10-30T01:00:00Z",
+   "runtime": 23,
+   "overview": "David Milch, the creator of Deadwood, discusses the conclusion of Deadwood, the themes and ideas shared throughout the show, and the future storylines he had planned, included in The Complete Series DVD set."
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 7790482,
+   "seasonNumber": 0,
+   "episodeNumber": 13,
+   "airedAfterSeasonNumber": 3,
+   "title": "The Real Deadwood: Out of the Ashes",
+   "airDate": "2013-10-29",
+   "airDateUtc": "2013-10-30T01:00:00Z",
+   "runtime": 29,
+   "overview": "Another historical short about the real Deadwood, both past and present, with reappearances of experts from the The Real Deadwood, The Real Deadwood: 1877, and the Deadwood Matures specials, included in The Complete Series DVD set."
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 7790484,
+   "seasonNumber": 0,
+   "episodeNumber": 14,
+   "airedAfterSeasonNumber": 3,
+   "title": "Cast and Creative Team Q&A",
+   "airDate": "2013-10-29",
+   "airDateUtc": "2013-10-30T01:00:00Z",
+   "runtime": 64,
+   "overview": "A featurette of select members of cast and crew participating in a Q&A at William S. Paley Television Festival at the Paley Center for Media in March 16, 2005, included in The Complete Series DVD set."
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 7790486,
+   "seasonNumber": 0,
+   "episodeNumber": 15,
+   "airedAfterSeasonNumber": 3,
+   "title": "360° Set Tour",
+   "airDate": "2013-10-29",
+   "airDateUtc": "2013-10-30T01:00:00Z",
+   "runtime": 8,
+   "overview": "A behind the scenes short about the Deadwood set with cast and crew, included in The Complete Series DVD set."
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 7790488,
+   "seasonNumber": 0,
+   "episodeNumber": 16,
+   "airedAfterSeasonNumber": 3,
+   "title": "Al Swearengen Audition Reel",
+   "airDate": "2013-10-29",
+   "airDateUtc": "2013-10-30T01:00:00Z",
+   "runtime": 10,
+   "overview": "A short with Titus Welliver doing various impressions, including David Milch, Al Pacino, and more, included in The Complete Series DVD set."
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 7790490,
+   "seasonNumber": 0,
+   "episodeNumber": 17,
+   "airedAfterSeasonNumber": 3,
+   "title": "The Unspoken Subject: David Milch and Deadwood",
+   "airDate": "2019-05-31",
+   "airDateUtc": "2019-06-01T01:00:00Z",
+   "runtime": 14,
+   "finaleType": "season",
+   "overview": "A behind the scenes interview with Deadwood cast and crew, discussing Deadwood and David Milch's creative process, included in The Deadwood Movie DVD/Blu-Ray."
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 70900,
+   "seasonNumber": 1,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 1,
+   "title": "Deadwood",
+   "airDate": "2004-03-21",
+   "airDateUtc": "2004-03-22T02:00:00Z",
+   "runtime": 62,
+   "overview": "After executing a last act of justice as a Montana marshal, Seth Bullock relocates to a gold-mining camp known as Deadwood, where he and partner Sol Star look to start a hardware business. Bullock soon crosses paths with another new arrival - legendary gunfighter Wild Bill Hickok - and clashes with the formidable boss of the Gem Saloon, Al Swearengen. For his part, Swearengen must handle the deadly result of a run-in between one of his whores and a trick, while brokering the sale of a gold claim to wealthy New York socialite Brom Garret. When reports come of the massacre of a frontier family by Indians, a suspicious Bullock and Hickok ride out in search of survivors; for Swearengen, the results are bad for business.",
+   "image": "https://artworks.thetvdb.com/banners/series/72023/episodes/6022ae1c108a9.jpg"
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 70901,
+   "seasonNumber": 1,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 2,
+   "title": "Deep Water",
+   "airDate": "2004-03-28",
+   "airDateUtc": "2004-03-29T02:00:00Z",
+   "runtime": 56,
+   "overview": "As suspicions arise that \"road agents\" may have been the true perpetrators of the massacre, Swearengen takes a special interest in the health of its sole survivor, a young girl ministered to by the unlikely team of Doc Cochran and Calamity Jane. Meanwhile, Bullock and Star attempt to buy property from Swearengen, who suspects an alliance between Hickok and these hardware boys. At the Grand Central Hotel, Brom Garret rethinks his recent investment, while his wife Alma medicates her anxieties. And as a confrontation brews over the young survivor, Hickok asks Bullock to cover his back in a tension filled poker game.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/72023/70901.jpg"
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 70902,
+   "seasonNumber": 1,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 3,
+   "title": "Reconnoitering the Rim",
+   "airDate": "2004-04-04",
+   "airDateUtc": "2004-04-05T01:00:00Z",
+   "runtime": 52,
+   "overview": "Competition arrives for Swearengen in the form of the Bella Union, a new gambling outfit from Chicago operated by savvy Cy Tolliver, Madame Joanie Stubbs and gaming guru Eddie Sawyer. Hickok puts up precious collateral in a poker game with McCall; Bullock and Star strike a deal with Swearengen on a lot for their store and, with help from Hickok and Utter, set to building; Brom threatens Swearengen with The Pinkertons before he and Dan Dority are dispatched to reconnoiter his claim.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/72023/70902.jpg"
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 70903,
+   "seasonNumber": 1,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 4,
+   "title": "Here Was a Man",
+   "airDate": "2004-04-11",
+   "airDateUtc": "2004-04-12T01:00:00Z",
+   "runtime": 58,
+   "overview": "Swearengen directs Farnum to buy back the Garret claim; Alma prevails on Calamity Jane and Hickok for help; Hickok commissions Bullock in his stead; Charlie Utter leaves the camp; an ailing colleague, Andy Cramed, rejoins the Bella Union; and Hickok's run of luck at poker yields an unexpected return.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/72023/70903.jpg"
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 70904,
+   "seasonNumber": 1,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 5,
+   "title": "The Trial of Jack McCall",
+   "airDate": "2004-04-18",
+   "airDateUtc": "2004-04-19T01:00:00Z",
+   "runtime": 55,
+   "overview": "Swearengen transforms the Gem into a courtroom as Deadwood is forced to make its own laws to try a murderer; with Jane off on a bender, Swearengen employs Trixie to help Alma with the Metz Child; Doc Cochran fears Cramed's illness might threaten the camp; Tolliver sends Cramed to take air in the woods, where he meets Jane; and Bullock decides to take the law into his own hands.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/72023/70904.jpg"
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 70905,
+   "seasonNumber": 1,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 6,
+   "title": "Plague",
+   "airDate": "2004-04-25",
+   "airDateUtc": "2004-04-26T01:00:00Z",
+   "runtime": 52,
+   "overview": "Bullock encounters native resistance in his quest to bring a murderer to justice. Swearengen presses a resentful Farnum to keep tabs on Alma and Trixie; the camp fathers pool their resources to dispatch riders after precious vaccine and build a sick tent; Cochran enlists Jane as a nurse; and Swearengen collaborates on an article appearing in the Deadwood Pioneer.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/72023/70905.jpg"
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 70906,
+   "seasonNumber": 1,
+   "episodeNumber": 7,
+   "absoluteEpisodeNumber": 7,
+   "title": "Bullock Returns to the Camp",
+   "airDate": "2004-05-02",
+   "airDateUtc": "2004-05-03T01:00:00Z",
+   "runtime": 49,
+   "overview": "After tracking down a murderer, Bullock returns to Deadwood a changed man--and a marked one--while Utter must pay final respects to a fallen friend. Dority and Stubbs both take special interest when teenagers Miles and Flora Anderson arrive in camp in search of their father, each finding work at a rival saloon; Calamity Jane earns her moniker in the Pest Tent; Swearengen sees through Trixie's latest subterfuge; and Alma remains cold on Farnum's inappropriately advanced bid on her claim.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/72023/70906.jpg"
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 70907,
+   "seasonNumber": 1,
+   "episodeNumber": 8,
+   "absoluteEpisodeNumber": 8,
+   "title": "Suffer the Little Children",
+   "airDate": "2004-05-09",
+   "airDateUtc": "2004-05-10T01:00:00Z",
+   "runtime": 55,
+   "overview": "Deadwood breathes easier when riders arrive with precious vaccine--and word of a possible treaty with the Sioux. Awaiting Trixie's return, a pragmatic Swearengen resists counsel from a bloody-minded Farnum; results of Bullock's assay of her gold claim moves Alma to reassess her plans and sets up a confrontation between Bullock and Swearengen; and Tolliver teaches Stubbs a deadly lesson at the expense of a couple of con artists.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/72023/70907.jpg"
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 70908,
+   "seasonNumber": 1,
+   "episodeNumber": 9,
+   "absoluteEpisodeNumber": 9,
+   "title": "No Other Sons or Daughters",
+   "airDate": "2004-05-16",
+   "airDateUtc": "2004-05-17T01:00:00Z",
+   "runtime": 58,
+   "overview": "With annexation looming, Swearengen calls a meeting to set up an informal government. Bullock and Alma compare notes on Ellsworth, and each other; Farnum gets a special-delivery letter from Hickok; Utter offers Jane a job; and Stubbs prepares to make a go on her own, with Tolliver's avowed blessings.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/72023/70908.jpg"
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 70909,
+   "seasonNumber": 1,
+   "episodeNumber": 10,
+   "absoluteEpisodeNumber": 10,
+   "title": "Mister Wu",
+   "airDate": "2004-05-23",
+   "airDateUtc": "2004-05-24T01:00:00Z",
+   "runtime": 53,
+   "overview": "An opium theft leaves Swearengen trying to find common language with his supplier, as well as navigating tricky waters to deal with the mess. Meanwhile, Silas Adams, bagman for the magistrate from Yankton, arrives with bad news for Swearengen; Bullock regrets having raised his hand at the government meeting; Merrick proposes Deadwood's first \"club\"; and an unwelcome Rev. Smith gravitates to the Gem and its new piano.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/72023/70909.jpg"
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 70910,
+   "seasonNumber": 1,
+   "episodeNumber": 11,
+   "absoluteEpisodeNumber": 11,
+   "title": "Jewel's Boot Is Made for Walking",
+   "airDate": "2004-06-06",
+   "airDateUtc": "2004-06-07T01:00:00Z",
+   "runtime": 58,
+   "overview": "Alma's father, Otis Russell, arrives from New York to \"help\" with her claim; Swearengen strikes a bargain with Adams to rid him of some legal baggage; Jewel journeys to Cochran's cabin for help with her leg; Utter hazards an opinion on the safety of Nuttal's saloon; Leon and Sawyer resume work at the Bella Union; Bullock is angered by the choice of a new sheriff; and Star winds up paying for a free service.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/72023/70910.jpg"
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 70911,
+   "seasonNumber": 1,
+   "episodeNumber": 12,
+   "absoluteEpisodeNumber": 12,
+   "title": "Sold Under Sin",
+   "airDate": "2004-06-13",
+   "airDateUtc": "2004-06-14T01:00:00Z",
+   "runtime": 60,
+   "finaleType": "season",
+   "overview": "The U.S. Army--under General Crook a.k.a. \"Custer's Avengers\"--rolls into Deadwood, prompting a parade...and business solicitations from Farnum and Tolliver. Swearengen delivers a tortured soul from suffering; Bullock reacts decisively to Russell's intentions regarding Alma; Con Stapleton's new commission proves short-lived; Adams shows Clagett where his loyalties lie; and Bullock and Alma have a late-night meeting.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/72023/70911.jpg"
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 70912,
+   "seasonNumber": 2,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 13,
+   "title": "A Lie Agreed Upon (1)",
+   "airDate": "2005-03-06",
+   "airDateUtc": "2005-03-07T02:00:00Z",
+   "runtime": 49,
+   "overview": "Swearengen and Bullock have a violent confrontation; Bullock and Utter discover that mistaken identity led to a fatal shooting at Nuttall's.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/72023/70912.jpg"
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 70913,
+   "seasonNumber": 2,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 14,
+   "title": "A Lie Agreed Upon (2)",
+   "airDate": "2005-03-13",
+   "airDateUtc": "2005-03-14T02:00:00Z",
+   "runtime": 51,
+   "overview": "Alma and Bullock face an abrupt decision about their future; Swearengen prepares for another showdown with Bullock; Calamity Jane returns to camp.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/72023/70913.jpg"
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 70914,
+   "seasonNumber": 2,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 15,
+   "title": "New Money",
+   "airDate": "2005-03-20",
+   "airDateUtc": "2005-03-21T02:00:00Z",
+   "runtime": 58,
+   "overview": "A scout for a powerful mining operation arrives; an ailing Swearengen refuses visitors and medical attention; Farnum finds someone to buy the Hickok letter.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/72023/70914.jpg"
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 70915,
+   "seasonNumber": 2,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 16,
+   "title": "Requiem for a Gleet",
+   "airDate": "2005-03-27",
+   "airDateUtc": "2005-03-28T02:00:00Z",
+   "runtime": 53,
+   "overview": "Doc Cochran contemplates a procedure that could cure Swearengen; Bullock attempts to settle into domesticity; rumors about the camp's future begin to spread.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/72023/70915.jpg"
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 70916,
+   "seasonNumber": 2,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 17,
+   "title": "Complications",
+   "airDate": "2005-04-03",
+   "airDateUtc": "2005-04-04T01:00:00Z",
+   "runtime": 57,
+   "overview": "As a convalescing Swearengen bridles, Cochran schools Burns and Dority how best to assist his recovery. Alma is also feeling unwell, mornings. Unexpected profits at the Chez Ami lead Tolliver to an unexpected discovery about Wolcott. Merrick posts a provocative statement from Yankton on title to the claims; Bullock protects Commissioner Jarry from an angry mob, which redirects its ire. After returning a horse to Hostetler at the livery, professional go-between Samuel Fields finds a kindred spirit in Jane.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/72023/70916.jpg"
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 70917,
+   "seasonNumber": 2,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 18,
+   "title": "Something Very Expensive",
+   "airDate": "2005-04-10",
+   "airDateUtc": "2005-04-11T01:00:00Z",
+   "runtime": 51,
+   "overview": "Alma proposes forming a bank, and looks to familiar faces to run it. To test himself, Swearengen grants audience to a long line of supplicants; talks with Farnum and Miss Isringhausen prove most illuminating. The arrival of low-priced Chinese whores begins the next phase in Tolliver and Wolcott's arrangement. Humiliated by Bullock, an angry claim owner looks to \"square the scales.\" An enchanted Merrick tours a new schoolteacher about the camp. Wolcott's inner demons test his alliance with Tolliver, and prompt Stubbs and Utter to covert action.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/72023/70917.jpg"
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 70918,
+   "seasonNumber": 2,
+   "episodeNumber": 7,
+   "absoluteEpisodeNumber": 19,
+   "title": "E.B. Was Left Out",
+   "airDate": "2005-04-17",
+   "airDateUtc": "2005-04-18T01:00:00Z",
+   "runtime": 51,
+   "overview": "Tolliver wrecked Merrick's newspaper office in retribution for not publishing the county commissioner's notice. Con Stapleton and Leon are having difficulty generating business for Tolliver's new Chinese whores. Utter learns that Wolcott is in possession of Hickok's last letter. Joanie returns to Tolliver to \"turn tricks.\"",
+   "image": "https://artworks.thetvdb.com/banners/episodes/72023/70918.jpg"
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 70919,
+   "seasonNumber": 2,
+   "episodeNumber": 8,
+   "absoluteEpisodeNumber": 20,
+   "title": "Childish Things",
+   "airDate": "2005-04-24",
+   "airDateUtc": "2005-04-25T01:00:00Z",
+   "runtime": 50,
+   "overview": "Wolcott offers on a rich claim operated by two ornery brothers, and reports to Hearst on their progress overall. Nuttall proudly unveils his new \"Bone-Shaker\" bicycle--but some doubt he can ride it. Swearengen and Bullock discuss alternatives to annexing the Hills to Dakota. Miss Isringhausen strikes a deal with Swearengen; Alma receives proposals from both Martha and Ellsworth. Merrick's new office mate is a Russian telegraph operator, and Stubbs has two unexpected visitors at the Chez Ami.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/72023/70919.jpg"
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 70920,
+   "seasonNumber": 2,
+   "episodeNumber": 9,
+   "absoluteEpisodeNumber": 21,
+   "title": "Amalgamation and Capital",
+   "airDate": "2005-05-01",
+   "airDateUtc": "2005-05-02T01:00:00Z",
+   "runtime": 48,
+   "overview": "Eagar for the latest news from Yankton, Swearengen enlists Farnum to keep tabs on Blazanov and his telegrams, and admonishes Merrick for over-hyping the Montana rumors in his paper. Wolcott gets a new moniker; Jane and Joanie continue their unlikely alliance; Sweargengen strikes a departure deal with Miss Isringhausen; and Fields and Hostetler attempt to tame a wild horse for the cavalry with damaging results.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/72023/70920.jpg"
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 70921,
+   "seasonNumber": 2,
+   "episodeNumber": 10,
+   "absoluteEpisodeNumber": 22,
+   "title": "Advances, None Miraculous",
+   "airDate": "2005-05-08",
+   "airDateUtc": "2005-05-09T01:00:00Z",
+   "runtime": 49,
+   "overview": "The camp waits vigil for Doc Cochran's prognosis of William Bullock. Martha regrets her move to Deadwood after her son is severely injured. Commisioner Jarry returns to Deadwood to discuss possible annexation with Swearengen, who then asks Sol Star to school Silas Adams on Montana policy. Trixie forces Alma to make a decision on Ellsworth's proposal.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/72023/70921.jpg"
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 70922,
+   "seasonNumber": 2,
+   "episodeNumber": 11,
+   "absoluteEpisodeNumber": 23,
+   "title": "The Whores Can Come",
+   "airDate": "2005-05-15",
+   "airDateUtc": "2005-05-16T01:00:00Z",
+   "runtime": 47,
+   "overview": "Bullock's corroboration of the Montana offers complicates Commissioner Jarry's counter-efforts - and sends Blazanov's telegram lines to Yankton to overdrive. Swearengen uses a Deadwood tragedy to delay an altercation between Wu and Lee, while buying time to improve his own standing with the Hearst delegation.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/72023/70922.jpg"
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 70923,
+   "seasonNumber": 2,
+   "episodeNumber": 12,
+   "absoluteEpisodeNumber": 24,
+   "title": "Boy-the-Earth-Talks-To",
+   "airDate": "2005-05-22",
+   "airDateUtc": "2005-05-23T01:00:00Z",
+   "runtime": 55,
+   "finaleType": "season",
+   "overview": "Swearengen's shrewd manipulation of the rumor mill pays off in a Yankton counter-offer that requires only slight amending. Meanwhile, George Hearst's arrival in Deadwood has shaken up the camp's status quo from Wu to Farnum to Wolcott. Tolliver, for his part, seeks to avoid marginalization by offering the tycoon damning nuggets about his engineer's nasty habits.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/72023/70923.jpg"
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 307427,
+   "seasonNumber": 3,
+   "episodeNumber": 1,
+   "absoluteEpisodeNumber": 25,
+   "title": "Tell Your God to Ready for Blood",
+   "airDate": "2006-06-11",
+   "airDateUtc": "2006-06-12T01:00:00Z",
+   "runtime": 53,
+   "overview": "Deadwood's first true elections are nearly here, with the offices of sheriff and mayor to be decided. Tonight, the candidates will state their cases to the townspeople. One of Hearst's Cornish workers is killed at the Gem, leading Swearengen to suspect that the incident was a staged Hearst power play. Ellsworth and Doc Cochran are alarmed by complications involving Alma's pregnancy. Star gains a new home from Adams' orchestrated foreclosure. Jane prepares to tell the camp's children about her experiences scouting for General Custer. Shocked by her inability to make a clean break from the gut-stabbed Tolliver, Joanie considers taking the easy way out. Hearst will give Bullock his political backing if Bullock promises to exert influence over certain areas of the camp.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/72023/307427.jpg"
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 307428,
+   "seasonNumber": 3,
+   "episodeNumber": 2,
+   "absoluteEpisodeNumber": 26,
+   "title": "I Am Not the Man You Take Me For",
+   "airDate": "2006-06-18",
+   "airDateUtc": "2006-06-19T01:00:00Z",
+   "runtime": 52,
+   "overview": "Captain Turner tips off Swearengen with a cryptic note to another bloody incident at the Gem; later, Hearst makes his intentions known in a more straightforward way. While Jane finds a captive audience for her oratory skills, the candidates for mayor and sheriff aren't as fortunate. Alma's health raises the issue of Sofia's stewardship and newly reformed Andy Cramed pays a visit to Tolliver, with a different agenda and outcome.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/72023/307428.jpg"
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 307479,
+   "seasonNumber": 3,
+   "episodeNumber": 3,
+   "absoluteEpisodeNumber": 27,
+   "title": "True Colors",
+   "airDate": "2006-06-25",
+   "airDateUtc": "2006-06-26T01:00:00Z",
+   "runtime": 51,
+   "overview": "New arrivals on the stagecoach usher into Deadwood: Jack Langrishe, a stage promoter and friend of Al Swearengen, and Aunt Lou Marchbanks, Hearst's longtime cook. Also returning to town is a newly westernized Wu, with news for \"Swegin\" about a soon-to-arrive group of imported Hearst workers. Recovered from her ailments, Alma decides to approach Hearst with a claim deal, despite Ellsworth's adamant objections. Bullock uncovers the truth about the Gem killings, and vows to put Hearst on notice. Hearst calls Tolliver's bluff, then offers him a \"fresh start.\"",
+   "image": "https://artworks.thetvdb.com/banners/episodes/72023/307479.jpg"
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 307488,
+   "seasonNumber": 3,
+   "episodeNumber": 4,
+   "absoluteEpisodeNumber": 28,
+   "title": "Full Faith and Credit",
+   "airDate": "2006-07-02",
+   "airDateUtc": "2006-07-03T01:00:00Z",
+   "runtime": 51,
+   "overview": "While Alma officially opens the bank of Deadwood, Langrishe asks Joanie whether she is willing to sell the Chez Ami, so he could make it into a theatre. Stapleton sets his eye on one of the new actresses in town and Jane receives a telegram from Fields. Hostetler and the latter arrive in camp and engage Steve with regard to the ownership of the livery, forcing Bullock to intervene. Meanwhile, Al delegates Adams to represent him in his affairs with Hearst and Tolliver.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/72023/307488.jpg"
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 307489,
+   "seasonNumber": 3,
+   "episodeNumber": 5,
+   "absoluteEpisodeNumber": 29,
+   "title": "A Two-Headed Beast",
+   "airDate": "2006-07-09",
+   "airDateUtc": "2006-07-10T01:00:00Z",
+   "runtime": 53,
+   "overview": "As Tolliver tries to find a respectable employee suitable to be his liaison with Hearst, Swearengen tries to understand the reasoning behind Hearst's actions. The conflict becomes more tense as Dority and Captain Turner violently settle their differences. Bullock tries to finally settle the dispute between Steve and Hostetler and another murder brings Bullock once more face to face with Hearst, forcing him to take action. Trixie becomes suspicious of Alma's odd behaviour at the bank. Ellsworth and Alma have a close encounter that alters their relationship. Langrishe welcomes more arrivals from his theater troupe.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/72023/307489.jpg"
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 307490,
+   "seasonNumber": 3,
+   "episodeNumber": 6,
+   "absoluteEpisodeNumber": 30,
+   "title": "A Rich Find",
+   "airDate": "2006-07-16",
+   "airDateUtc": "2006-07-17T01:00:00Z",
+   "runtime": 52,
+   "overview": "While Hearst still lies in jail, Al pays the Sheriff a visit, asking about last night. Sofia is worried about Mr. Ellsworth's absence, which saddens Alma even more. Bullock releases Hearst from prison. Aunt Lou's son, Odell, arrives in camp and Cy Tolliver presents Hearst with a method of setting his hands on Alma's gold claim. Trixie confronts Mrs. Ellsworth in regard to her drug habit, while Odell and Hearst prepare for a meeting to discuss the issue of gold. Al and Seth, worried about Hearst's reply, try to find an answer to their problem.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/72023/307490.jpg"
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 307491,
+   "seasonNumber": 3,
+   "episodeNumber": 7,
+   "absoluteEpisodeNumber": 31,
+   "title": "Unauthorized Cinnamon",
+   "airDate": "2006-07-23",
+   "airDateUtc": "2006-07-24T01:00:00Z",
+   "runtime": 50,
+   "overview": "Bullock's proposal carries the day during a meeting held at the Gem to discuss the Hearst conundrum; Aunt Lou fears for Odell's well-being after his latest gambit; Fields is skeptical of Steve's offer to remain in camp; Cochran finds other uses for a tailor's swatches; Chesterton's illness postpones Langrishe's theater plans.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/72023/307491.jpg"
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 307492,
+   "seasonNumber": 3,
+   "episodeNumber": 8,
+   "absoluteEpisodeNumber": 32,
+   "title": "Leviathan Smiles",
+   "airDate": "2006-07-30",
+   "airDateUtc": "2006-07-31T01:00:00Z",
+   "runtime": 53,
+   "overview": "Merrick and Blazanov delivers the day's edition of The Pioneer around camp. A stagecoach arrives accompanied by the sound of gunfire as two strangers (Wyatt and Morgan Earp) come into town, unsettling the Sheriff and Al who wonder if they're Hearst's men. Swearengen talks to Wyatt Earp, evaluating his story, while Fields prepares for his departure. Jack tells his ailing friend, Chesterton, that he will move him to the theater that day. Lastly, Hearst finds an unexpected doctor for his back problems as he awaits an important \"package.\"",
+   "image": "https://artworks.thetvdb.com/banners/episodes/72023/307492.jpg"
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 307493,
+   "seasonNumber": 3,
+   "episodeNumber": 9,
+   "absoluteEpisodeNumber": 33,
+   "title": "Amateur Night",
+   "airDate": "2006-08-06",
+   "airDateUtc": "2006-08-07T01:00:00Z",
+   "runtime": 49,
+   "overview": "As Deadwood is overrun by Hearst's men, Bullock issues contingency plans to Martha. Wu is caught in a Pinkerton stampede and delivers a cryptic message to Swearengen that is solved by the unlikeliest person. Barrett makes Merrick pay for embarrassing Hearst in The Pioneer while Morgan Earp calls out one of the \"Pistoleros.\" As night falls, Langrishe mines Deadwood's talent pool with an amateur-night performance in front of his future theater, financed in part by a \"loan\" from Alma's bank.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/72023/307493.jpg"
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 307494,
+   "seasonNumber": 3,
+   "episodeNumber": 10,
+   "absoluteEpisodeNumber": 34,
+   "title": "A Constant Throb",
+   "airDate": "2006-08-13",
+   "airDateUtc": "2006-08-14T01:00:00Z",
+   "runtime": 48,
+   "overview": "With the Sheriff out of camp, Alma is assailed by Hearst's men and as she never would have expected, shelter comes form Swearengen. Barrett is sent to the Gem, but Al resorts to old fashion methods of enquiring to his employers plans. Meanwhile, Langrishe recruits a new actor.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/72023/307494.jpg"
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 307495,
+   "seasonNumber": 3,
+   "episodeNumber": 11,
+   "absoluteEpisodeNumber": 35,
+   "title": "The Catbird Seat",
+   "airDate": "2006-08-20",
+   "airDateUtc": "2006-08-21T01:00:00Z",
+   "runtime": 49,
+   "overview": "Bullock holds an impromptu morning meeting to determine which emergencies warrant wiring him in Sturgis, where he and Harry are delivering campaign pitches. The first summons doesn't take long, as Hearst follows up Alma's close call with one that's decidedly more on-target. In the aftermath, Alma takes refuge at the Gem, again, while Trixie decides to take matters into her own hands. Langrishe has a falling out with Hearst, giving him little time to huddle with his new lineup of actors. Dismissing the likelihood of ever seeing 23 mercenaries promised by Hawkeye, Swearengen turns to Wu to deliver more reliable, if not quite weapons-tested, reinforcements from Custer City.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/72023/307495.jpg"
+  },
+  {
+   "tvdbShowId": 72023,
+   "tvdbId": 307496,
+   "seasonNumber": 3,
+   "episodeNumber": 12,
+   "absoluteEpisodeNumber": 36,
+   "title": "Tell Him Something Pretty",
+   "airDate": "2006-08-27",
+   "airDateUtc": "2006-08-28T01:00:00Z",
+   "runtime": 50,
+   "finaleType": "series",
+   "overview": "In the third, and last, season finale, the camp turns out to vote--but as Bullock notes, the election may already have been decided. In light of the populace's mood, Langrishe delays the opening of his theater, and ponders his future in Deadwood. After detouring at Nuttall's Number ten, Hawkeye arrives at the Gem with \"almost 18\" men to complement Wu's contingent. Alma works out a deal for her claim; Utter recieves another body for Hearst; and Harry gets his fire engine. Stubbs reaches out to a frustrated Tolliver, who finds himself with a folded hand as the action heats up. Through Farnum, Hearst issues his conditions for departure, forcing Swearengen to finish what Burns can't.",
+   "image": "https://artworks.thetvdb.com/banners/episodes/72023/307496.jpg"
+  }
+ ]
+}

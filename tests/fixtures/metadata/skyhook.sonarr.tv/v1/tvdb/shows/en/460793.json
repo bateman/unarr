@@ -1,0 +1,234 @@
+{
+ "tvdbId": 460793,
+ "title": "Maximum Pleasure Guaranteed",
+ "overview": "A newly divorced mom falls down a dangerous rabbit hole of blackmail, murder and youth soccer.",
+ "slug": "maximum-pleasure-guaranteed",
+ "originalCountry": "usa",
+ "originalLanguage": "eng",
+ "language": "eng",
+ "firstAired": "2026-05-20",
+ "lastAired": "2026-07-15",
+ "tvMazeId": 82915,
+ "tmdbId": 285404,
+ "imdbId": "tt35946742",
+ "malIds": [],
+ "anidbIds": [],
+ "aniListIds": [],
+ "lastUpdated": "2026-10-28T02:57:07Z",
+ "status": "Continuing",
+ "runtime": 35,
+ "timeOfDay": {
+  "hours": 0,
+  "minutes": 0
+ },
+ "originalNetwork": "Apple TV",
+ "network": "Apple TV",
+ "genres": [
+  "Comedy",
+  "Thriller"
+ ],
+ "rating": {
+  "count": 11786,
+  "value": "7.4"
+ },
+ "actors": [
+  {
+   "name": "Tatiana Maslany",
+   "character": "Paula Sanders",
+   "image": "https://artworks.thetvdb.com/banners/person/457268/5f63c6d60d3e9.jpg"
+  },
+  {
+   "name": "Jake Johnson",
+   "character": "Karl",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/308035/photo/64dd70dd2bdf5.jpg"
+  },
+  {
+   "name": "Jessy Hodges",
+   "character": "Mallory",
+   "image": "https://artworks.thetvdb.com/banners/person/487126/5ebb3bd2eab76.jpg"
+  },
+  {
+   "name": "Dolly De Leon",
+   "character": "Sofia Gonzales",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8315880/photo/63d60ba557458.jpg"
+  },
+  {
+   "name": "Jon Michael Hill",
+   "character": "Detective Baxter",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/555941/photo/6982996ac109e.jpg"
+  },
+  {
+   "name": "Charlie Hall",
+   "character": "Rudy",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/8203548/photo/6982999598a19.jpg"
+  },
+  {
+   "name": "Kiarra Hamagami Goldberg",
+   "character": "Geri",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9148055/photo/698299b782a21.jpg"
+  },
+  {
+   "name": "Nola Wallace",
+   "character": "Hazel ",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/9151509/photo/698299135ce56.jpg"
+  },
+  {
+   "name": "Murray Bartlett",
+   "character": "Dennis",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/262126/photo/60720d6f460cd.jpg"
+  },
+  {
+   "name": "Brandon Flynn",
+   "character": "Trevor",
+   "image": "https://artworks.thetvdb.com/banners/v4/actor/549660/photo/67d4d6c3bff12.jpg"
+  }
+ ],
+ "images": [
+  {
+   "coverType": "Banner",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/460793/banners/69f22700c0bcb.jpg"
+  },
+  {
+   "coverType": "Poster",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/460793/posters/6a078bd29acd7.jpg"
+  },
+  {
+   "coverType": "Fanart",
+   "url": "https://artworks.thetvdb.com/banners/v4/series/460793/backgrounds/6a0d9f8851250.jpg"
+  }
+ ],
+ "seasons": [
+  {
+   "seasonNumber": 1,
+   "images": [
+    {
+     "coverType": "Poster",
+     "url": "https://artworks.thetvdb.com/banners/v4/season/2174301/posters/6a0dbb0974cec.jpg"
+    }
+   ]
+  }
+ ],
+ "episodes": [
+  {
+   "tvdbShowId": 460793,
+   "tvdbId": 10991540,
+   "seasonNumber": 1,
+   "episodeNumber": 1,
+   "title": "Magnets",
+   "airDate": "2026-05-20",
+   "airDateUtc": "2026-05-20T04:00:00Z",
+   "runtime": 40,
+   "overview": "Single mom Paula Sanders finds comfort and connection with a charming cam boy—until a shocking moment changes everything.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10991540/screencap/6a0d9c59240c2.jpg"
+  },
+  {
+   "tvdbShowId": 460793,
+   "tvdbId": 10991548,
+   "seasonNumber": 1,
+   "episodeNumber": 2,
+   "title": "YABA",
+   "airDate": "2026-05-20",
+   "airDateUtc": "2026-05-20T04:00:00Z",
+   "runtime": 36,
+   "overview": "Grave danger and police interrogations overlap with the first day of youth soccer coaching.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10991548/screencap/6a0e0a237e182.jpg"
+  },
+  {
+   "tvdbShowId": 460793,
+   "tvdbId": 10991549,
+   "seasonNumber": 1,
+   "episodeNumber": 3,
+   "title": "Chunnel",
+   "airDate": "2026-05-27",
+   "airDateUtc": "2026-05-27T04:00:00Z",
+   "runtime": 35,
+   "overview": "Paula is tracked by a deadly man. Karl and Mallory make Paula an offer she's advised not to refuse.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10991549/screencap/6a0d0d4292b95.jpg"
+  },
+  {
+   "tvdbShowId": 460793,
+   "tvdbId": 10991550,
+   "seasonNumber": 1,
+   "episodeNumber": 4,
+   "title": "Raisins",
+   "airDate": "2026-06-03",
+   "airDateUtc": "2026-06-03T04:00:00Z",
+   "runtime": 33,
+   "overview": "A secret is revealed in Portland. Danger—and the cops—close in on Paula in Queens.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10991550/screencap/6a1642bf9ba1e.jpg"
+  },
+  {
+   "tvdbShowId": 460793,
+   "tvdbId": 10991551,
+   "seasonNumber": 1,
+   "episodeNumber": 5,
+   "title": "Scamboy",
+   "airDate": "2026-06-10",
+   "airDateUtc": "2026-06-10T04:00:00Z",
+   "runtime": 37,
+   "overview": "Paula's investigation leads her, Rudy, and Geri into a terrifying standoff. Mallory crosses legal lines in the custody battle.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10991551/screencap/6a1f7d665bcd3.jpg"
+  },
+  {
+   "tvdbShowId": 460793,
+   "tvdbId": 10991552,
+   "seasonNumber": 1,
+   "episodeNumber": 6,
+   "title": "Rosebuds",
+   "airDate": "2026-06-17",
+   "airDateUtc": "2026-06-17T04:00:00Z",
+   "runtime": 29,
+   "overview": "Paula scrambles to host a children's pizza party as the case intensifies.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10991552/screencap/6a28b78f53faa.jpg"
+  },
+  {
+   "tvdbShowId": 460793,
+   "tvdbId": 10991553,
+   "seasonNumber": 1,
+   "episodeNumber": 7,
+   "title": "Flighting",
+   "airDate": "2026-06-24",
+   "airDateUtc": "2026-06-24T04:00:00Z",
+   "runtime": 35,
+   "overview": "Paranoia, packages, and a painful parting.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10991553/screencap/6a31f1e5f25ac.jpg"
+  },
+  {
+   "tvdbShowId": 460793,
+   "tvdbId": 10991555,
+   "seasonNumber": 1,
+   "episodeNumber": 8,
+   "title": "Hallidays",
+   "airDate": "2026-07-01",
+   "airDateUtc": "2026-07-01T04:00:00Z",
+   "runtime": 34,
+   "overview": "Paula hits rock bottom, but can't let the investigation go. Rudy suspects Geri is keeping secrets.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10991555/screencap/6a3b2c5bcf496.jpg"
+  },
+  {
+   "tvdbShowId": 460793,
+   "tvdbId": 10991557,
+   "seasonNumber": 1,
+   "episodeNumber": 9,
+   "title": "Erroneous",
+   "airDate": "2026-07-08",
+   "airDateUtc": "2026-07-08T04:00:00Z",
+   "runtime": 28,
+   "overview": "Custody hearings loom, conspiracy theories gel, and an attack brings back the fact checkers.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10991557/screencap/6a4466c730889.jpg"
+  },
+  {
+   "tvdbShowId": 460793,
+   "tvdbId": 10991558,
+   "seasonNumber": 1,
+   "episodeNumber": 10,
+   "title": "Queens",
+   "airDate": "2026-07-15",
+   "airDateUtc": "2026-07-15T04:00:00Z",
+   "runtime": 38,
+   "finaleType": "season",
+   "overview": "Everything everywhere all at once.",
+   "image": "https://artworks.thetvdb.com/banners/v4/episode/10991558/screencap/6a4da17b04731.jpg"
+  }
+ ]
+}

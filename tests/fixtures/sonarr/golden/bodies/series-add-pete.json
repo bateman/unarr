@@ -1,0 +1,18 @@
+{
+ "tvdbId": 271728,
+ "title": "The Pete Holmes Show",
+ "qualityProfileId": 1,
+ "path": "/tv/Pete Holmes Show",
+ "seasonFolder": false,
+ "monitored": true,
+ "seriesType": "daily",
+ "tags": [
+  2
+ ],
+ "monitorNewItems": "none",
+ "addOptions": {
+  "monitor": "recent",
+  "searchForMissingEpisodes": true,
+  "searchForCutoffUnmetEpisodes": false
+ }
+}

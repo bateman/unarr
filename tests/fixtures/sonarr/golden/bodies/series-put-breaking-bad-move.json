@@ -1,0 +1,6 @@
+{
+ "$from": "series-after-put-breaking-bad",
+ "$set": {
+  "path": "/tv/Breaking Bad Moved"
+ }
+}

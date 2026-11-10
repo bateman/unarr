@@ -57,7 +57,8 @@ impl Hub {
 
 /// `access_token` query parameter, or the usual header.
 fn authorized(state: &AppState, uri: &Uri, headers: &HeaderMap) -> bool {
-    let expected = &state.settings().host.api_key;
+    let settings = state.settings();
+    let expected = &settings.host.api_key;
     let params = Params::from_uri(uri);
     if let Some(token) = params.get("access_token") {
         return key_matches(expected, token);
