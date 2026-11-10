@@ -1,6 +1,7 @@
 //! `config/naming` and `config/mediamanagement`.
 
 use axum::extract::State;
+use axum::http::Uri;
 use axum::Json;
 use serde_json::{json, Value};
 use unarr_core::model::{QualityModel, SeriesType};
@@ -10,6 +11,7 @@ use unarr_core::naming::{
 use unarr_core::store;
 
 use crate::error::ApiResult;
+use crate::query::Params;
 use crate::routes::config::Values;
 use crate::state::AppState;
 
@@ -150,8 +152,39 @@ impl Sample {
     }
 }
 
-pub async fn naming_examples(State(state): State<AppState>) -> ApiResult<Json<Value>> {
-    let (n, definitions) = state
+pub async fn naming_examples(State(state): State<AppState>, uri: Uri) -> ApiResult<Json<Value>> {
+    // `GetExamples([FromQuery] NamingConfigResource)`: the form as it is
+    // being edited, when it comes with the configuration's id; else the
+    // stored configuration.
+    let p = Params::from_uri(&uri);
+    let form = (p.i64("id").unwrap_or(0) != 0).then(|| {
+        let mut form = serde_json::Map::new();
+        for key in ["renameEpisodes", "replaceIllegalCharacters"] {
+            if let Some(v) = p.get(key) {
+                form.insert(key.into(), json!(v.eq_ignore_ascii_case("true")));
+            }
+        }
+        for key in ["colonReplacementFormat", "multiEpisodeStyle"] {
+            if let Some(v) = p.i64(key) {
+                form.insert(key.into(), json!(v));
+            }
+        }
+        for key in [
+            "customColonReplacementFormat",
+            "standardEpisodeFormat",
+            "dailyEpisodeFormat",
+            "animeEpisodeFormat",
+            "seriesFolderFormat",
+            "seasonFolderFormat",
+            "specialsFolderFormat",
+        ] {
+            if let Some(v) = p.get(key) {
+                form.insert(key.into(), json!(v));
+            }
+        }
+        Value::Object(form)
+    });
+    let (mut n, definitions) = state
         .db()
         .call(|c| {
             Ok((
@@ -160,6 +193,9 @@ pub async fn naming_examples(State(state): State<AppState>) -> ApiResult<Json<Va
             ))
         })
         .await?;
+    if let Some(form) = &form {
+        crate::routes::settings_writes::apply_naming(&mut n, form);
+    }
     // The sample file is WEBDL-1080p; its title is whatever the user calls it.
     let quality_title = definitions
         .iter()
@@ -184,16 +220,102 @@ pub async fn naming_examples(State(state): State<AppState>) -> ApiResult<Json<Va
         // An empty format is an error for the originals too: the example is blank.
         naming::build_file_name(episodes, series, &file, "", &n, &formats).unwrap_or_default()
     };
-    Ok(Json(json!({
-        "singleEpisodeExample": build(single, &sample.standard, "The.Series.Title's!.S01E01.1080p.WEBDL.x264-EVOLVE", false),
-        "multiEpisodeExample": build(multi, &sample.standard, "The.Series.Title's!.S01E01-E03.1080p.WEBDL.x264-EVOLVE", false),
-        "dailyEpisodeExample": build(single, &sample.daily, "The.Series.Title's!.2013.10.30.1080p.WEBDL.x264-EVOLVE", false),
-        "animeEpisodeExample": build(single, &sample.anime, "[RlsGroup] The Series Title's! - 001 [1080P]", true),
-        "animeMultiEpisodeExample": build(multi, &sample.anime, "[RlsGroup] The Series Title's! - 001 - 103 [1080p]", true),
-        "seriesFolderExample": naming::series_folder(&sample.standard, &n),
-        "seasonFolderExample": naming::season_folder(&sample.standard, 1, &n),
-        "specialsFolderExample": naming::season_folder(&sample.standard, 0, &n),
-    })))
+    // `FileNameValidationService`: an example whose name does not parse
+    // back to the sample's episodes is left out, and the form shows the
+    // format as invalid.
+    let parsed = |name: &str| {
+        if name.contains('/') {
+            unarr_core::parser::parse_path(name)
+        } else {
+            unarr_core::parser::parse_title(name)
+        }
+    };
+    let numbers_match = |info: &unarr_core::parser::ParsedEpisodeInfo, episodes: &[NamingEpisode]| {
+        let mut got = info.episode_numbers.clone();
+        got.sort_unstable();
+        let mut want: Vec<i64> = episodes.iter().map(|e| e.episode_number).collect();
+        want.sort_unstable();
+        info.season_number == episodes[0].season_number && got == want
+    };
+    let standard_ok =
+        |name: &str, episodes: &[NamingEpisode]| parsed(name).is_some_and(|i| numbers_match(&i, episodes));
+    let daily_ok = |name: &str, episodes: &[NamingEpisode]| {
+        parsed(name).is_some_and(|i| match &i.air_date {
+            Some(date) => Some(date.as_str()) == episodes[0].air_date,
+            None => numbers_match(&i, episodes),
+        })
+    };
+    let anime_ok = |name: &str, episodes: &[NamingEpisode]| {
+        parsed(name).is_some_and(|i| match i.absolute_episode_numbers.first() {
+            Some(first) => Some(*first) == episodes[0].absolute_episode_number,
+            None => numbers_match(&i, episodes),
+        })
+    };
+    let mut out = serde_json::Map::new();
+    let mut example = |key: &str, name: String, ok: bool| {
+        if ok {
+            out.insert(key.into(), json!(name));
+        }
+    };
+    let name = build(
+        single,
+        &sample.standard,
+        "The.Series.Title's!.S01E01.1080p.WEBDL.x264-EVOLVE",
+        false,
+    );
+    let ok = standard_ok(&name, single);
+    example("singleEpisodeExample", name, ok);
+    let name = build(
+        multi,
+        &sample.standard,
+        "The.Series.Title's!.S01E01-E03.1080p.WEBDL.x264-EVOLVE",
+        false,
+    );
+    let ok = standard_ok(&name, multi);
+    example("multiEpisodeExample", name, ok);
+    let name = build(
+        single,
+        &sample.daily,
+        "The.Series.Title's!.2013.10.30.1080p.WEBDL.x264-EVOLVE",
+        false,
+    );
+    let ok = daily_ok(&name, single);
+    example("dailyEpisodeExample", name, ok);
+    let name = build(
+        single,
+        &sample.anime,
+        "[RlsGroup] The Series Title's! - 001 [1080P]",
+        true,
+    );
+    let ok = anime_ok(&name, single);
+    example("animeEpisodeExample", name, ok);
+    let name = build(
+        multi,
+        &sample.anime,
+        "[RlsGroup] The Series Title's! - 001 - 103 [1080p]",
+        true,
+    );
+    let ok = anime_ok(&name, multi);
+    example("animeMultiEpisodeExample", name, ok);
+    if !n.series_folder_format.trim().is_empty() {
+        out.insert(
+            "seriesFolderExample".into(),
+            json!(naming::series_folder(&sample.standard, &n)),
+        );
+    }
+    if !n.season_folder_format.trim().is_empty() {
+        out.insert(
+            "seasonFolderExample".into(),
+            json!(naming::season_folder(&sample.standard, 1, &n)),
+        );
+    }
+    if !n.specials_folder_format.trim().is_empty() {
+        out.insert(
+            "specialsFolderExample".into(),
+            json!(naming::season_folder(&sample.standard, 0, &n)),
+        );
+    }
+    Ok(Json(Value::Object(out)))
 }
 
 /// The language profile Sonarr v3 had; v4 keeps one fixed "Deprecated"

@@ -740,3 +740,50 @@ importlistexclusion-paged-sort-title-asc GET /api/v3/importlistexclusion/paged?s
 importlistexclusion-paged-sort-tvdbid GET /api/v3/importlistexclusion/paged?sortKey=tvdbId&sortDirection=ascending
 importlistexclusion-paged-sort-unknown GET /api/v3/importlistexclusion/paged?sortKey=nope&pageSize=0
 importlistexclusion-paged-beyond GET /api/v3/importlistexclusion/paged?page=9&pageSize=2
+
+# What the audit against the original's source found missing (docs/audit).
+# The uptime check, anonymous.
+noauth-ping GET /ping
+# The naming form's examples follow what is typed, when the form's id comes too.
+config-naming-examples-form GET /api/v3/config/naming/examples?animeEpisodeFormat=%7BSeries%20CleanTitleWithoutYear%7D%20%7B%28Series%20Year%29%7D%20-%20S%7Bseason%3A00%7DE%7Bepisode%3A00%7D%20-%20%7Babsolute%3A000%7D%20-%20%7BEpisode%20CleanTitle%3A90%7D%20%7B%5BCustom%20Formats%5D%7D%7B%5BQuality%20Full%5D%7D%7B%5BMediainfo%20AudioCodec%7D%7B%20Mediainfo%20AudioChannels%5D%7D%7BMediaInfo%20AudioLanguages%7D%7B%5BMediaInfo%20VideoDynamicRangeType%5D%7D%5B%7BMediainfo%20VideoCodec%20%7D%7BMediaInfo%20VideoBitDepth%7Dbit%5D%7B-Release%20Group%7D&colonReplacementFormat=4&customColonReplacementFormat=&dailyEpisodeFormat=%7BSeries%20CleanTitleWithoutYear%7D%20%7B%28Series%20Year%29%7D%20-%20%7BAir-Date%7D%20-%20%7BEpisode%20CleanTitle%3A90%7D%20%7B%5BCustom%20Formats%5D%7D%7B%5BQuality%20Full%5D%7D%7B%5BMediainfo%20AudioCodec%7D%7B%20Mediainfo%20AudioChannels%5D%7D%7B%5BMediaInfo%20VideoDynamicRangeType%5D%7D%7B%5BMediainfo%20VideoCodec%5D%7D%7B-Release%20Group%7D&id=1&multiEpisodeStyle=0&renameEpisodes=true&replaceIllegalCharacters=true&seasonFolderFormat=Season%20%7Bseason%3A00%7D&seriesFolderFormat=%7BSeries%20Title%7D&specialsFolderFormat=Specials&standardEpisodeFormat=%7BSeries%20Title%7D%20-%20S%7Bseason%3A00%7DE%7Bepisode%3A00%7D%20-%20%7BEpisode%20Title%7D%20%7BQuality%20Full%7D
+config-naming-examples-invalid GET /api/v3/config/naming/examples?animeEpisodeFormat=%7BSeries%20CleanTitleWithoutYear%7D%20%7B%28Series%20Year%29%7D%20-%20S%7Bseason%3A00%7DE%7Bepisode%3A00%7D%20-%20%7Babsolute%3A000%7D%20-%20%7BEpisode%20CleanTitle%3A90%7D%20%7B%5BCustom%20Formats%5D%7D%7B%5BQuality%20Full%5D%7D%7B%5BMediainfo%20AudioCodec%7D%7B%20Mediainfo%20AudioChannels%5D%7D%7BMediaInfo%20AudioLanguages%7D%7B%5BMediaInfo%20VideoDynamicRangeType%5D%7D%5B%7BMediainfo%20VideoCodec%20%7D%7BMediaInfo%20VideoBitDepth%7Dbit%5D%7B-Release%20Group%7D&colonReplacementFormat=4&customColonReplacementFormat=&dailyEpisodeFormat=%7BSeries%20CleanTitleWithoutYear%7D%20%7B%28Series%20Year%29%7D%20-%20%7BAir-Date%7D%20-%20%7BEpisode%20CleanTitle%3A90%7D%20%7B%5BCustom%20Formats%5D%7D%7B%5BQuality%20Full%5D%7D%7B%5BMediainfo%20AudioCodec%7D%7B%20Mediainfo%20AudioChannels%5D%7D%7B%5BMediaInfo%20VideoDynamicRangeType%5D%7D%7B%5BMediainfo%20VideoCodec%5D%7D%7B-Release%20Group%7D&id=1&multiEpisodeStyle=0&renameEpisodes=true&replaceIllegalCharacters=true&seasonFolderFormat=Season%20%7Bseason%3A00%7D&seriesFolderFormat=%7BSeries%20Title%7D&specialsFolderFormat=Specials&standardEpisodeFormat=%7BSeries%20Title%7D
+config-naming-examples-no-id GET /api/v3/config/naming/examples?animeEpisodeFormat=%7BSeries%20CleanTitleWithoutYear%7D%20%7B%28Series%20Year%29%7D%20-%20S%7Bseason%3A00%7DE%7Bepisode%3A00%7D%20-%20%7Babsolute%3A000%7D%20-%20%7BEpisode%20CleanTitle%3A90%7D%20%7B%5BCustom%20Formats%5D%7D%7B%5BQuality%20Full%5D%7D%7B%5BMediainfo%20AudioCodec%7D%7B%20Mediainfo%20AudioChannels%5D%7D%7BMediaInfo%20AudioLanguages%7D%7B%5BMediaInfo%20VideoDynamicRangeType%5D%7D%5B%7BMediainfo%20VideoCodec%20%7D%7BMediaInfo%20VideoBitDepth%7Dbit%5D%7B-Release%20Group%7D&colonReplacementFormat=4&customColonReplacementFormat=&dailyEpisodeFormat=%7BSeries%20CleanTitleWithoutYear%7D%20%7B%28Series%20Year%29%7D%20-%20%7BAir-Date%7D%20-%20%7BEpisode%20CleanTitle%3A90%7D%20%7B%5BCustom%20Formats%5D%7D%7B%5BQuality%20Full%5D%7D%7B%5BMediainfo%20AudioCodec%7D%7B%20Mediainfo%20AudioChannels%5D%7D%7B%5BMediaInfo%20VideoDynamicRangeType%5D%7D%7B%5BMediainfo%20VideoCodec%5D%7D%7B-Release%20Group%7D&multiEpisodeStyle=0&renameEpisodes=true&replaceIllegalCharacters=true&seasonFolderFormat=Season%20%7Bseason%3A00%7D&seriesFolderFormat=%7BSeries%20Title%7D&specialsFolderFormat=Specials&standardEpisodeFormat=%7BSeries%20Title%7D%20-%20S%7Bseason%3A00%7DE%7Bepisode%3A00%7D%20-%20%7BEpisode%20Title%7D%20%7BQuality%20Full%7D
+# Blocklist entries removed one by one and in bulk.
+blocklist-before-removal GET /api/v3/blocklist?page=1&pageSize=4&sortKey=date&sortDirection=ascending
+blocklist-delete DELETE /api/v3/blocklist/1
+blocklist-delete-missing DELETE /api/v3/blocklist/999999
+blocklist-bulk-delete DELETE /api/v3/blocklist/bulk bodies/blocklist-bulk-delete.json
+blocklist-after-removal GET /api/v3/blocklist?page=1&pageSize=4&sortKey=date&sortDirection=ascending
+# "Mark as failed" on a grabbed history row.
+history-mark-failed POST /api/v3/history/failed/2258
+history-mark-failed-missing POST /api/v3/history/failed/999999
+history-after-mark-failed GET /api/v3/history?page=1&pageSize=3&sortKey=date&sortDirection=descending&includeEpisode=true
+blocklist-after-mark-failed GET /api/v3/blocklist?page=1&pageSize=2&sortKey=date&sortDirection=descending
+# Settings > Metadata saves, though nothing writes metadata files.
+metadata-1 GET /api/v3/metadata/1
+metadata-update PUT /api/v3/metadata/1 bodies/metadata-update.json
+metadata-after-update GET /api/v3/metadata/1
+metadata-restore PUT /api/v3/metadata/1 bodies/metadata-restore.json
+# Commands of the log and quality pages.
+command-clear-log POST /api/v3/command bodies/command-clear-log.json
+command-delete-log-files POST /api/v3/command bodies/command-delete-log-files.json
+command-delete-update-log-files POST /api/v3/command bodies/command-delete-update-log-files.json
+command-reset-quality-definitions POST /api/v3/command bodies/command-reset-quality-definitions.json
+sleep 7
+command-clear-log-done GET /api/v3/command/{id:command-clear-log}
+command-reset-quality-definitions-done GET /api/v3/command/{id:command-reset-quality-definitions}
+qualitydefinition-after-reset GET /api/v3/qualitydefinition
+log-after-clear GET /api/v3/log?page=1&pageSize=10&sortKey=time&sortDirection=descending
+# The last custom format gone: what the profiles keep of their scores.
+qualityprofile-before-formats-gone GET /api/v3/qualityprofile/1
+customformat-delete-all DELETE /api/v3/customformat/bulk bodies/customformat-delete-all.json
+qualityprofile-after-formats-gone GET /api/v3/qualityprofile
+# Credentials and the API key saved from Settings > General; nothing can be
+# asked with the old key after the last one, so these stay last.
+config-host-before-credentials GET /api/v3/config/host
+config-host-put-credentials-mismatch PUT /api/v3/config/host bodies/config-host-put-credentials-mismatch.json
+config-host-put-credentials PUT /api/v3/config/host bodies/config-host-put-credentials.json
+config-host-after-credentials GET /api/v3/config/host
+config-host-put-apikey PUT /api/v3/config/host bodies/config-host-put-apikey.json
+noauth-newkey-system-status GET /api/v3/system/status?apikey=fedcba9876543210fedcba9876543210
+oldkey-system-status GET /api/v3/system/status

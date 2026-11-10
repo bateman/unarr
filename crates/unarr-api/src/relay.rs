@@ -38,6 +38,7 @@ pub async fn relay_import(state: &AppState, e: &ImportEvent) {
         | ImportEvent::ManualInteractionRequired(_)
         | ImportEvent::EpisodeImportFailed(_)
         | ImportEvent::SeriesScanned { .. }
+        | ImportEvent::SeriesScanSkipped { .. }
         | ImportEvent::DeleteCompleted
         | ImportEvent::RescanRequested { .. } => {}
     }

@@ -299,6 +299,15 @@ impl Downloads {
         .await
     }
 
+    /// "Mark as failed" on a history row: the failure recorded, the
+    /// release blocklisted, the episodes searched again when the settings
+    /// say so. `Ok(false)` when there is no such row.
+    pub async fn mark_history_as_failed(&self, history_id: i64, now: DateTime<Utc>) -> anyhow::Result<bool> {
+        Ok(failed::mark_history_as_failed(self, history_id, now)
+            .await?
+            .is_some())
+    }
+
     /// A tracked download changed by the importer: the cache takes it,
     /// when the download is still tracked.
     pub fn update_tracked(&self, mut t: TrackedDownload) {

@@ -1,0 +1,127 @@
+{
+  "body": {
+    "page": 1,
+    "pageSize": 2,
+    "records": [
+      {
+        "customFormats": [
+          {
+            "id": 18,
+            "name": "ATVP"
+          },
+          {
+            "id": 15,
+            "name": "x265 (HD)"
+          }
+        ],
+        "date": "2026-11-10T20:45:35Z",
+        "episodeIds": [
+          1600
+        ],
+        "id": 247,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "Manually marked as failed",
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "series": {
+          "added": "2026-10-07T18:43:08Z",
+          "airTime": "22:00",
+          "cleanTitle": "smallprophets",
+          "ended": false,
+          "firstAired": "2026-02-09T00:00:00Z",
+          "genres": [
+            "Comedy",
+            "Drama",
+            "Fantasy",
+            "Mystery"
+          ],
+          "id": 48,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/464815/banners/698539cb45e2a.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/464815/posters/6ac616cc034bd.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/464815/backgrounds/698539b640aa0.jpg"
+            }
+          ],
+          "imdbId": "tt38504111",
+          "languageProfileId": 1,
+          "lastAired": "2026-03-16T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "BBC Two",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Since his girlfriend went missing seven years go Michael Sleep's life has been on hold. But a mystical recipe in an old journal promises to give the answers he's been longing for.",
+          "path": "/tv/Small Prophets (2026)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.1,
+            "votes": 10195
+          },
+          "runtime": 29,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "small prophets",
+          "status": "continuing",
+          "tags": [],
+          "title": "Small Prophets",
+          "titleSlug": "small-prophets",
+          "tmdbId": 312693,
+          "tvMazeId": 87306,
+          "tvRageId": 0,
+          "tvdbId": 464815,
+          "useSceneNumbering": false,
+          "year": 2026
+        },
+        "seriesId": 48,
+        "sourceTitle": "Small.Prophets.S01E05.1080p.ATVP.WEB-DL.DDP5.1.ENG.Atmos.ITA.H265-TBK"
+      }
+    ],
+    "sortDirection": "descending",
+    "sortKey": "date",
+    "totalRecords": 1
+  },
+  "recordedAt": "2026-11-10T20:45:35Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/blocklist?page=1&pageSize=2&sortKey=date&sortDirection=descending"
+  },
+  "status": 200
+}

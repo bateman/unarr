@@ -17,7 +17,7 @@ use tokio::sync::Notify;
 use crate::db::Db;
 use crate::store;
 
-pub use executor::{Event, Runtime};
+pub use executor::{Event, HostHooks, Runtime};
 
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum CommandStatus {
@@ -215,6 +215,19 @@ pub enum CommandBody {
         monitored: bool,
     },
     ClearBlocklist,
+    /// The recent log lines, emptied.
+    ClearLog,
+    /// The log files on disk, deleted.
+    DeleteLogFiles,
+    /// The updater's log files; there are none.
+    DeleteUpdateLogFiles,
+    /// The quality definitions' sizes (and titles, when asked) back to the
+    /// defaults.
+    ResetQualityDefinitions {
+        reset_titles: bool,
+    },
+    /// A new API key.
+    ResetApiKey,
     MessagingCleanup,
     RefreshSeries {
         series_ids: Vec<i64>,
@@ -300,6 +313,23 @@ const NAMES: &[(&str, &str)] = &[
         "ClearBlocklist",
         "NzbDrone.Core.Blocklisting.ClearBlocklistCommand",
     ),
+    (
+        "ClearLog",
+        "NzbDrone.Core.Instrumentation.Commands.ClearLogCommand",
+    ),
+    (
+        "DeleteLogFiles",
+        "NzbDrone.Core.Instrumentation.Commands.DeleteLogFilesCommand",
+    ),
+    (
+        "DeleteUpdateLogFiles",
+        "NzbDrone.Core.Instrumentation.Commands.DeleteUpdateLogFilesCommand",
+    ),
+    (
+        "ResetQualityDefinitions",
+        "NzbDrone.Core.Qualities.Commands.ResetQualityDefinitionsCommand",
+    ),
+    ("ResetApiKey", "NzbDrone.Core.Configuration.ResetApiKeyCommand"),
     (
         "MessagingCleanup",
         "NzbDrone.Core.Messaging.Commands.MessagingCleanupCommand",
@@ -484,6 +514,13 @@ impl CommandBody {
                 monitored,
             },
             "ClearBlocklist" => CommandBody::ClearBlocklist,
+            "ClearLog" => CommandBody::ClearLog,
+            "DeleteLogFiles" => CommandBody::DeleteLogFiles,
+            "DeleteUpdateLogFiles" => CommandBody::DeleteUpdateLogFiles,
+            "ResetQualityDefinitions" => CommandBody::ResetQualityDefinitions {
+                reset_titles: body["resetTitles"].as_bool().unwrap_or(false),
+            },
+            "ResetApiKey" => CommandBody::ResetApiKey,
             "MessagingCleanup" => CommandBody::MessagingCleanup,
             "RefreshSeries" => CommandBody::RefreshSeries {
                 series_ids: {
@@ -583,6 +620,11 @@ impl CommandBody {
             CommandBody::MissingEpisodeSearch { .. } => "MissingEpisodeSearch",
             CommandBody::CutoffUnmetEpisodeSearch { .. } => "CutoffUnmetEpisodeSearch",
             CommandBody::ClearBlocklist => "ClearBlocklist",
+            CommandBody::ClearLog => "ClearLog",
+            CommandBody::DeleteLogFiles => "DeleteLogFiles",
+            CommandBody::DeleteUpdateLogFiles => "DeleteUpdateLogFiles",
+            CommandBody::ResetQualityDefinitions { .. } => "ResetQualityDefinitions",
+            CommandBody::ResetApiKey => "ResetApiKey",
             CommandBody::MessagingCleanup => "MessagingCleanup",
             CommandBody::RefreshSeries { .. } => "RefreshSeries",
             CommandBody::RescanSeries { .. } => "RescanSeries",
@@ -625,6 +667,7 @@ impl CommandBody {
                 | CommandBody::Housekeeping
                 | CommandBody::UpdateSceneMapping
                 | CommandBody::CleanUpRecycleBin
+                | CommandBody::ResetQualityDefinitions { .. }
         )
     }
 
@@ -679,6 +722,9 @@ impl CommandBody {
         match self {
             CommandBody::EpisodeSearch { episode_ids } => {
                 m.insert("episodeIds".into(), json!(episode_ids));
+            }
+            CommandBody::ResetQualityDefinitions { reset_titles } => {
+                m.insert("resetTitles".into(), json!(reset_titles));
             }
             CommandBody::SeasonSearch {
                 series_id,

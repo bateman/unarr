@@ -31,7 +31,7 @@ use tower_http::trace::TraceLayer;
 
 pub use logbuf::LogBuffer;
 pub use logfile::{LogFiles, ProcessLog};
-pub use state::{AppState, RuntimeInfo, Settings};
+pub use state::{AppState, Lifecycle, RuntimeInfo, Settings};
 
 /// The originals route API paths case-insensitively (Bazarr asks for
 /// `episodeFile`); lower-case the path before matching.
@@ -78,6 +78,7 @@ const PUT_BY_ID: &[&str] = &[
     "importlist",
     "importlistexclusion",
     "indexer",
+    "metadata",
     "notification",
     "qualitydefinition",
     "qualityprofile",
@@ -250,6 +251,7 @@ pub fn router(state: AppState) -> Router {
     // (which checks its own token).
     let open = Router::new()
         .route("/favicon.ico", axum::routing::get(ui::favicon))
+        .route("/ping", axum::routing::get(routes::system::ping))
         .route("/Content/{*path}", axum::routing::get(ui::content))
         .route("/content/{*path}", axum::routing::get(ui::content))
         .route("/login", axum::routing::get(ui::login_page).post(ui::login))

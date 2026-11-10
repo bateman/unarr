@@ -628,6 +628,7 @@ impl Notifier {
                 ImportEvent::EpisodeImportFailed(_)
                 | ImportEvent::EpisodeFileRenamed(_)
                 | ImportEvent::SeriesScanned { .. }
+                | ImportEvent::SeriesScanSkipped { .. }
                 | ImportEvent::RescanRequested { .. } => {}
             }
         }

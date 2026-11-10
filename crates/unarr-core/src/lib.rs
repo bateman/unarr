@@ -14,6 +14,7 @@ pub mod downloadclients;
 pub mod downloads;
 pub mod fs;
 pub mod health;
+pub mod housekeeping;
 pub mod http;
 pub mod importlists;
 pub mod indexers;

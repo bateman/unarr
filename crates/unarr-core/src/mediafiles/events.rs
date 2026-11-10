@@ -94,6 +94,12 @@ pub enum ImportEvent {
     SeriesScanned {
         series_id: i64,
     },
+    /// `SeriesScanSkippedEvent`: the series' root folder is missing or
+    /// empty, so nothing was scanned. What follows a scan of a series just
+    /// added still has to happen.
+    SeriesScanSkipped {
+        series_id: i64,
+    },
     EpisodeFileRenamed(Box<EpisodeFileRenamed>),
     /// `SeriesRenamedEvent`: the files of a series renamed by a command.
     SeriesRenamed {

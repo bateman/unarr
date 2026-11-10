@@ -113,6 +113,56 @@ pub async fn mark_as_failed(
     Ok(Some(event))
 }
 
+/// `MarkAsFailed(historyId)`: "Mark as failed" on a history row. With a
+/// download id, the failure covers every episode the download was grabbed
+/// for; without one, the row's own episode. `None` when there is no such
+/// row.
+pub async fn mark_history_as_failed(
+    downloads: &Downloads,
+    history_id: i64,
+    now: DateTime<Utc>,
+) -> anyhow::Result<Option<DownloadFailed>> {
+    let found = downloads
+        .db()
+        .call(move |conn| {
+            let Some(history) = store::history::get(conn, history_id)? else {
+                return Ok(None);
+            };
+            let Some(download_id) = history.download_id.clone().filter(|d| !d.trim().is_empty()) else {
+                let episode = history.episode_id;
+                return Ok(Some((history, vec![episode])));
+            };
+            // The row itself first when it is a grab, then the download's
+            // other grabs, each once.
+            let mut grabbed = Vec::new();
+            if history.event_type == HistoryEvent::Grabbed {
+                grabbed.push(history.clone());
+            }
+            for other in grabbed_history(conn, &download_id)? {
+                if !grabbed.iter().any(|g: &HistoryEntry| g.id == other.id) {
+                    grabbed.push(other);
+                }
+            }
+            let episodes = episode_ids(&grabbed);
+            Ok(Some((history, episodes)))
+        })
+        .await?;
+    let Some((history, episodes)) = found else {
+        return Ok(None);
+    };
+    let event = publish_failed(
+        downloads,
+        history,
+        episodes,
+        "Manually marked as failed",
+        None,
+        false,
+        now,
+    )
+    .await?;
+    Ok(Some(event))
+}
+
 /// `IgnoredDownloadService.IgnoreDownload`: `false` when the series is
 /// unknown, as the originals refuse then.
 pub async fn ignore_download(

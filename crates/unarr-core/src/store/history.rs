@@ -71,8 +71,7 @@ pub fn find_by_download_id(conn: &Connection, download_id: &str) -> anyhow::Resu
 
 /// The next free blocklist id.
 pub fn next_blocklist_id(conn: &Connection) -> anyhow::Result<i64> {
-    let max: Option<i64> = conn.query_row("SELECT max(id) FROM blocklist", [], |r| r.get(0))?;
-    Ok(max.unwrap_or(0) + 1)
+    super::sequence::next_id(conn, "blocklist")
 }
 
 /// Filters of the paged `history` endpoint.
@@ -305,6 +304,20 @@ pub fn download_history_for(
 pub fn clear_blocklist(conn: &Connection) -> anyhow::Result<()> {
     conn.execute("DELETE FROM blocklist", [])?;
     Ok(())
+}
+
+/// `BlocklistService.Delete`: the rows with these ids; how many went.
+pub fn delete_blocklist(conn: &Connection, ids: &[i64]) -> anyhow::Result<usize> {
+    let mut removed = 0;
+    for id in ids {
+        removed += conn.execute("DELETE FROM blocklist WHERE id = ?1", params![id])?;
+    }
+    Ok(removed)
+}
+
+/// One history row by id.
+pub fn get(conn: &Connection, id: i64) -> anyhow::Result<Option<HistoryEntry>> {
+    Ok(query(conn, "SELECT h.* FROM history h WHERE h.id = ?1", &[&id])?.pop())
 }
 
 pub fn blocklist_for_series(conn: &Connection, series_id: i64) -> anyhow::Result<Vec<BlocklistEntry>> {

@@ -85,5 +85,32 @@ the UI language, the blocklist's protocol filter.
 ## What the maintainer's installation uses
 
 No proxy, no recycling bin, no self-signed certificates, Import Extra
-Files off: findings 2, 4, 16 and 21 do not affect it and can wait. None
-of the findings is fixed in this commit.
+Files off: findings 2, 4, 16 and 21 do not affect it and can wait.
+
+## What has been fixed since
+
+Each fix was made against goldens recorded from the original first
+(`tests/fixtures/sonarr/golden/requests.txt`, the section the audit
+opened), and the recording corrected two of the findings.
+
+| Finding | State |
+|---------|-------|
+| 1. `PUT config/host` credentials | Fixed for the authentication method, the requirement, the user name and the password (same hash scheme as the original, so its users table stays readable by it). The API key part of the finding was wrong: the original does not change the key on a save either, it answers 202 and keeps the old one; only `ResetApiKey` changes it. Unarr now does the same. |
+| 3. `GET /ping` | Fixed: anonymous, `{"status":"OK"}`, 500 when the database does not answer. |
+| 6. Blocklist removal, one and bulk | Fixed. The original answers 200 for an id that is not there; the ids of new entries continue past the removed ones. |
+| 7. "Mark as failed" | Fixed. |
+| 9. Restart and shutdown | Fixed: the daemon stops as on a signal; a restart replaces the process with a fresh one. |
+| 10. `ClearLog`, `DeleteLogFiles`, `DeleteUpdateLogFiles`, `ResetQualityDefinitions`, `ResetApiKey` | Fixed. |
+| 11. Settings > Metadata save | Fixed. |
+| 12. Naming examples follow the form | Fixed, and an example whose name does not parse back to the sample's episodes is left out, as the original does to mark the format invalid. |
+| 14. Post-add actions under a missing or empty root folder | Fixed. |
+| 15. `Housekeeping` | Fixed for what Unarr stores: orphaned blocklist entries, episode files, episodes, history and pending releases, pending releases waiting for a download client for more than fourteen days, status rows of providers that are gone, status times in the future, unused tags, then `VACUUM`. |
+| 18. Scores after the last custom format | Fixed. |
+| 23. Session length and `Secure` | Fixed: seven days from the last use, renewed past half its life; `Secure` when a trusted proxy says the request came over HTTPS. Sessions open at the upgrade end once: the signing key is now a random one kept in the database, not derived from the API key. |
+| 24. `/initialize.json` without `no-store` | Fixed. |
+
+Not recorded against the original, and so not changed: `PUT
+config/naming` does not yet refuse a format whose sample name fails the
+same parse-back check.
+
+Still open: 2, 4, 5, 8, 13, 16, 17, 19, 20, 21, 22, 25 and the low ones.

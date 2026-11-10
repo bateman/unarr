@@ -1,0 +1,9 @@
+{
+  "body": {},
+  "recordedAt": "2026-11-10T20:45:35Z",
+  "request": {
+    "method": "POST",
+    "path": "/api/v3/history/failed/2258"
+  },
+  "status": 200
+}

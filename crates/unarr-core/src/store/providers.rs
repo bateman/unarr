@@ -302,6 +302,15 @@ pub fn insert_user(conn: &Connection, u: &User) -> anyhow::Result<()> {
     Ok(())
 }
 
+/// A user's name and password replaced (`UserService.Update`).
+pub fn update_user(conn: &Connection, u: &User) -> anyhow::Result<()> {
+    conn.execute(
+        "UPDATE users SET username = ?2, password = ?3, salt = ?4, iterations = ?5 WHERE id = ?1",
+        params![u.id, u.username, u.password, u.salt, u.iterations],
+    )?;
+    Ok(())
+}
+
 pub fn list_users(conn: &Connection) -> anyhow::Result<Vec<User>> {
     let mut stmt =
         conn.prepare("SELECT id, identifier, username, password, salt, iterations FROM users ORDER BY id")?;

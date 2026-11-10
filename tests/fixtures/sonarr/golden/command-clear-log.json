@@ -1,0 +1,31 @@
+{
+  "body": {
+    "body": {
+      "isExclusive": false,
+      "isLongRunning": false,
+      "name": "ClearLog",
+      "requiresDiskAccess": false,
+      "sendUpdatesToClient": true,
+      "suppressMessages": false,
+      "trigger": "manual",
+      "updateScheduledTask": true
+    },
+    "commandName": "Clear Log",
+    "id": 461730,
+    "name": "ClearLog",
+    "priority": "normal",
+    "queued": "2026-11-10T20:45:35Z",
+    "result": "unknown",
+    "sendUpdatesToClient": true,
+    "status": "queued",
+    "trigger": "manual",
+    "updateScheduledTask": true
+  },
+  "recordedAt": "2026-11-10T20:45:35Z",
+  "request": {
+    "body": "bodies/command-clear-log.json",
+    "method": "POST",
+    "path": "/api/v3/command"
+  },
+  "status": 201
+}

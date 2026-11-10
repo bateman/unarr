@@ -1,0 +1,11 @@
+{
+  "body": {
+    "status": "OK"
+  },
+  "recordedAt": "2026-11-10T20:45:35Z",
+  "request": {
+    "method": "GET",
+    "path": "/ping"
+  },
+  "status": 200
+}

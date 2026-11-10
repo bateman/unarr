@@ -436,6 +436,42 @@ fn naming_failures(body: &Value) -> Vec<ValidationFailure> {
 }
 
 /// `PUT /config/naming/{id}`.
+/// The naming form's fields laid over a configuration: what a save
+/// stores, and what the examples are built from while the form is edited.
+pub fn apply_naming(n: &mut unarr_core::model::NamingConfig, b: &Value) {
+    let flag = |k: &str, d: bool| b.get(k).and_then(Value::as_bool).unwrap_or(d);
+    n.rename_episodes = flag("renameEpisodes", n.rename_episodes);
+    n.replace_illegal_characters = flag("replaceIllegalCharacters", n.replace_illegal_characters);
+    if let Some(v) = b.get("colonReplacementFormat").and_then(Value::as_i64) {
+        n.colon_replacement_format = v;
+    }
+    if let Some(v) = b.get("customColonReplacementFormat").and_then(Value::as_str) {
+        n.custom_colon_replacement_format = v.to_string();
+    }
+    if let Some(v) = b.get("multiEpisodeStyle").and_then(Value::as_i64) {
+        n.multi_episode_style = v;
+    }
+    let s = |k: &str| b.get(k).and_then(Value::as_str).map(str::to_string);
+    if let Some(v) = s("standardEpisodeFormat") {
+        n.standard_episode_format = v;
+    }
+    if let Some(v) = s("dailyEpisodeFormat") {
+        n.daily_episode_format = v;
+    }
+    if let Some(v) = s("animeEpisodeFormat") {
+        n.anime_episode_format = v;
+    }
+    if let Some(v) = s("seriesFolderFormat") {
+        n.series_folder_format = v;
+    }
+    if let Some(v) = s("seasonFolderFormat") {
+        n.season_folder_format = v;
+    }
+    if let Some(v) = s("specialsFolderFormat") {
+        n.specials_folder_format = v;
+    }
+}
+
 pub async fn naming(State(state): State<AppState>, Json(body): Json<Value>) -> ApiResult<Response> {
     object(&body)?;
     check(naming_failures(&body))?;
@@ -444,37 +480,7 @@ pub async fn naming(State(state): State<AppState>, Json(body): Json<Value>) -> A
         .db()
         .call(move |conn| {
             let mut n = store::config::naming(conn)?;
-            let flag = |k: &str, d: bool| b.get(k).and_then(Value::as_bool).unwrap_or(d);
-            n.rename_episodes = flag("renameEpisodes", n.rename_episodes);
-            n.replace_illegal_characters = flag("replaceIllegalCharacters", n.replace_illegal_characters);
-            if let Some(v) = b.get("colonReplacementFormat").and_then(Value::as_i64) {
-                n.colon_replacement_format = v;
-            }
-            if let Some(v) = b.get("customColonReplacementFormat").and_then(Value::as_str) {
-                n.custom_colon_replacement_format = v.to_string();
-            }
-            if let Some(v) = b.get("multiEpisodeStyle").and_then(Value::as_i64) {
-                n.multi_episode_style = v;
-            }
-            let s = |k: &str| b.get(k).and_then(Value::as_str).map(str::to_string);
-            if let Some(v) = s("standardEpisodeFormat") {
-                n.standard_episode_format = v;
-            }
-            if let Some(v) = s("dailyEpisodeFormat") {
-                n.daily_episode_format = v;
-            }
-            if let Some(v) = s("animeEpisodeFormat") {
-                n.anime_episode_format = v;
-            }
-            if let Some(v) = s("seriesFolderFormat") {
-                n.series_folder_format = v;
-            }
-            if let Some(v) = s("seasonFolderFormat") {
-                n.season_folder_format = v;
-            }
-            if let Some(v) = s("specialsFolderFormat") {
-                n.specials_folder_format = v;
-            }
+            apply_naming(&mut n, &b);
             store::config::set_naming(conn, &n)
         })
         .await?;
@@ -574,6 +580,99 @@ pub fn apply_host_overrides(h: &mut unarr_core::config::HostConfig, o: &Map<Stri
     if let Some(v) = s("theme") {
         h.theme = v;
     }
+    if let Some(v) = s("apiKey").filter(|k| !k.trim().is_empty()) {
+        h.api_key = v;
+    }
+    if let Some(v) = s("authenticationMethod")
+        .and_then(|m| unarr_core::config::AuthenticationMethod::parse(&m.to_lowercase()))
+    {
+        h.authentication_method = v;
+    }
+    if let Some(v) = s("authenticationRequired")
+        .and_then(|r| unarr_core::config::AuthenticationRequired::parse(&r.to_lowercase()))
+    {
+        h.authentication_required = v;
+    }
+}
+
+/// `UserService.Upsert`: the one user created, or its name and password
+/// replaced. A password equal to the stored one is the hash the page was
+/// given and sent back: it is left alone.
+async fn upsert_user(state: &AppState, username: String, password: String) -> ApiResult<()> {
+    state
+        .db()
+        .call(move |conn| {
+            use unarr_core::model::User;
+            let existing = store::providers::list_users(conn)?.into_iter().next();
+            let mut random = [0u8; 32];
+            std::io::Read::read_exact(&mut std::fs::File::open("/dev/urandom")?, &mut random)?;
+            let hash = |user: &mut User| {
+                let salt = &random[..16];
+                user.salt = Some(base64::Engine::encode(
+                    &base64::engine::general_purpose::STANDARD,
+                    salt,
+                ));
+                user.iterations = Some(10_000);
+                let mut key = [0u8; 32];
+                pbkdf2::pbkdf2_hmac::<sha2::Sha512>(password.as_bytes(), salt, 10_000, &mut key);
+                user.password = base64::Engine::encode(&base64::engine::general_purpose::STANDARD, key);
+            };
+            match existing {
+                Some(mut user) => {
+                    if user.password != password {
+                        hash(&mut user);
+                    }
+                    user.username = username.to_lowercase();
+                    store::providers::update_user(conn, &user)
+                }
+                None => {
+                    let g = &random[16..];
+                    let mut user = User {
+                        id: 1,
+                        // A version 4 GUID, as `Guid.NewGuid` gives.
+                        identifier: format!(
+                            "{:02x}{:02x}{:02x}{:02x}-{:02x}{:02x}-4{:01x}{:02x}-{:02x}{:02x}-{:02x}{:02x}{:02x}{:02x}{:02x}{:02x}",
+                            g[0], g[1], g[2], g[3], g[4], g[5], g[6] & 0x0f, g[7],
+                            (g[8] & 0x3f) | 0x80, g[9], g[10], g[11], g[12], g[13], g[14], g[15]
+                        ),
+                        username: username.to_lowercase(),
+                        password: String::new(),
+                        salt: None,
+                        iterations: None,
+                    };
+                    hash(&mut user);
+                    store::providers::insert_user(conn, &user)
+                }
+            }
+        })
+        .await?;
+    Ok(())
+}
+
+/// A host setting changed outside a save of the page (`ResetApiKey`),
+/// from a thread that may block.
+pub fn set_host_override_blocking(state: &AppState, key: &str, value: Value) -> anyhow::Result<()> {
+    let key = key.to_string();
+    let overrides = state.db().call_blocking(move |conn| {
+        let mut overrides = store::config::meta(conn, HOST_OVERRIDES)?
+            .and_then(|r| serde_json::from_str::<Value>(&r).ok())
+            .and_then(|v| v.as_object().cloned())
+            .unwrap_or_default();
+        overrides.insert(key, value);
+        store::config::set_meta(
+            conn,
+            HOST_OVERRIDES,
+            &Value::Object(overrides.clone()).to_string(),
+        )?;
+        Ok(overrides)
+    })?;
+    let mut settings = (*state.settings()).clone();
+    apply_host_overrides(&mut settings.host, &overrides);
+    state.set_settings(crate::state::Settings::from_host_config(
+        settings.host,
+        state.personality(),
+    ));
+    Ok(())
 }
 
 /// `AllowedHostsParser.Parse`.
@@ -658,6 +757,31 @@ pub async fn host(State(state): State<AppState>, Json(body): Json<Value>) -> Api
         f.error_message = "Branch name is required, 'main' is the default".into();
         failures.push(f);
     }
+    // `IsMatchingPassword`: the stored hash sent back as it was shown, or
+    // a new password typed twice.
+    let (password, confirmation) = (text(&body, "password"), text(&body, "passwordConfirmation"));
+    let stored = state
+        .db()
+        .call(|conn| {
+            Ok(store::providers::list_users(conn)?
+                .into_iter()
+                .next()
+                .map(|u| u.password))
+        })
+        .await?;
+    if stored.as_deref() != Some(password.as_str()) && password != confirmation {
+        let mut f = rule(
+            "PasswordConfirmation",
+            "PredicateValidator",
+            "Must match Password",
+            json!(confirmation),
+        );
+        f.placeholders = vec![
+            ("propertyName".into(), json!("Password Confirmation")),
+            ("propertyValue".into(), json!(confirmation)),
+        ];
+        failures.push(f);
+    }
     if body.get("enableSsl").and_then(Value::as_bool).unwrap_or(false) {
         failures.extend(between("SslPort", int(&body, "sslPort"), 1, 65535));
     }
@@ -703,12 +827,25 @@ pub async fn host(State(state): State<AppState>, Json(body): Json<Value>) -> Api
         "urlBase",
         "instanceName",
         "analyticsEnabled",
+        // Not `apiKey`: the originals' `SaveConfigDictionary` skips it, and
+        // only `ResetApiKey` changes the key.
+        "authenticationMethod",
+        "authenticationRequired",
     ] {
         if let Some(v) = body.get(key) {
             overrides.insert(key.into(), v.clone());
         }
     }
     save_host_overrides(&state, overrides).await?;
+    let credential = |key: &str| {
+        body.get(key)
+            .and_then(Value::as_str)
+            .filter(|v| !v.trim().is_empty())
+            .map(str::to_string)
+    };
+    if let (Some(username), Some(password)) = (credential("username"), credential("password")) {
+        upsert_user(&state, username, password).await?;
+    }
     let Json(out) = crate::routes::config::host(State(state)).await?;
     Ok(accepted(out))
 }
@@ -1717,7 +1854,22 @@ fn delete_custom_formats(conn: &rusqlite::Connection, ids: &[i64]) -> anyhow::Re
     for mut p in store::catalog::list_quality_profiles(&tx)? {
         let before = p.format_items.len();
         p.format_items.retain(|f| !ids.contains(&f.format));
-        if p.format_items.len() != before {
+        let mut changed = p.format_items.len() != before;
+        // `Handle(CustomFormatDeletedEvent)`: a profile left without
+        // formats has no score to ask for.
+        if p.format_items.is_empty()
+            && (
+                p.min_format_score,
+                p.cutoff_format_score,
+                p.min_upgrade_format_score,
+            ) != (0, 0, 1)
+        {
+            p.min_format_score = 0;
+            p.cutoff_format_score = 0;
+            p.min_upgrade_format_score = 1;
+            changed = true;
+        }
+        if changed {
             store::catalog::delete_row(&tx, "quality_profiles", p.id)?;
             store::catalog::insert_quality_profile(&tx, &p)?;
         }

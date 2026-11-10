@@ -167,7 +167,7 @@ fn mode(name: &str) -> Mode {
             "dateAdded",
         ]),
         n if import_phase(n) => Mode::Exact(&["dateAdded", "lastSearchTime"]),
-        "system-status" | "apikey-query-system-status" => Mode::Exact(&[
+        "system-status" | "apikey-query-system-status" | "oldkey-system-status" => Mode::Exact(&[
             "isLinux",
             "isOsx",
             "isWindows",
@@ -253,7 +253,15 @@ fn mode(name: &str) -> Mode {
         | "history-download-id"
         | "history-episode-1-grabbed"
         | "history-after-delete"
+        | "history-after-mark-failed"
         | "history-after-command" => Mode::Exact(&["date", "age", "ageHours", "ageMinutes"]),
+        "history-mark-failed-missing" => Mode::Exact(&["description"]),
+        // The salt is drawn anew for every password.
+        "config-host-put-credentials" | "config-host-after-credentials" | "config-host-put-apikey" => {
+            Mode::Exact(&["password"])
+        }
+        // What the originals themselves logged after the clearing.
+        "log-after-clear" => Mode::Exact(&["records", "totalRecords"]),
         "blocklist-after-delete" => Mode::Exact(&["date"]),
         // Ages in hours and minutes carry the fraction of a second the
         // recording happened at.
@@ -558,6 +566,7 @@ fn short(v: &Value) -> String {
     }
 }
 
+#[derive(Clone)]
 struct Golden {
     name: String,
     /// `sleep` for a pause in the recording: the replay waits for the
@@ -844,6 +853,7 @@ async fn golden_responses_match() {
     unarr_core::downloadclients::nzbget::pin_drone_ids(&["c860499553f64d7b8170eae60cd1a5b3"]);
     let app = unarr_api::router(state.clone());
     let session = login_cookie(&app).await;
+    let mut host_password: Option<String> = None;
     let mut failures = Vec::new();
     let mut checked = 0;
     let mut ids: std::collections::HashMap<String, i64> = std::collections::HashMap::new();
@@ -957,7 +967,32 @@ async fn golden_responses_match() {
                 .await
                 .expect("the refresh finishes within a minute");
         }
+        // A client sends the stored password hash back as it read it; the
+        // recording's hash carries the recording's salt, so the replay
+        // sends the one Unarr answered with.
+        let own_hash;
+        let g = match (&host_password, &g.request_body) {
+            (Some(hash), Some(text)) if g.method == "PUT" && g.path.ends_with("/config/host") => {
+                let mut sent: Value = serde_json::from_str(text).unwrap();
+                if sent["passwordConfirmation"].as_str().unwrap_or("").is_empty()
+                    && sent["password"].is_string()
+                {
+                    sent["password"] = Value::String(hash.clone());
+                }
+                own_hash = Golden {
+                    request_body: Some(sent.to_string()),
+                    ..g.clone()
+                };
+                &own_hash
+            }
+            _ => g,
+        };
         let (status, body) = send(&app, g, &session, &path, &mappings).await;
+        if g.path.ends_with("/config/host") && status.is_success() {
+            if let Some(hash) = body["password"].as_str().filter(|h| !h.is_empty()) {
+                host_password = Some(hash.to_string());
+            }
+        }
         if g.name == "command-backup" {
             // The recording read the backup back five seconds later.
             tokio::time::timeout(
@@ -1439,4 +1474,137 @@ async fn backup_downloads_and_restores_from_an_upload() {
     assert!(!app_data.join(".restore-upload.zip").exists());
 
     let _ = std::fs::remove_dir_all(&dirs.root);
+}
+
+/// The session lasts seven days from its last use: past half its life a
+/// request renews the cookie, and one left unused for seven days is gone.
+#[tokio::test]
+async fn sessions_slide_and_say_how_they_may_travel() {
+    let state = build_state();
+    let app = unarr_api::router(state.clone());
+    let login = |form: &'static str, proto: Option<&'static str>| {
+        let mut req = Request::builder()
+            .method("POST")
+            .uri("/login")
+            .header("content-type", "application/x-www-form-urlencoded");
+        if let Some(proto) = proto {
+            req = req.header("x-forwarded-proto", proto);
+        }
+        req.body(Body::from(form)).unwrap()
+    };
+    let set_cookie = |response: &axum::response::Response| {
+        response
+            .headers()
+            .get("set-cookie")
+            .map(|v| v.to_str().unwrap().to_string())
+    };
+
+    // "Remember Me" keeps the cookie for seven days; without it the cookie
+    // ends with the browser.
+    let response = app
+        .clone()
+        .oneshot(login("username=unarr&password=fixture&rememberMe=on", None))
+        .await
+        .unwrap();
+    let remembered = set_cookie(&response).expect("a cookie");
+    assert!(remembered.contains("Max-Age=604800"), "{remembered}");
+    assert!(
+        remembered.contains("Path=/") && remembered.contains("HttpOnly"),
+        "{remembered}"
+    );
+    assert!(!remembered.contains("Secure"), "{remembered}");
+    let response = app
+        .clone()
+        .oneshot(login("username=unarr&password=fixture", None))
+        .await
+        .unwrap();
+    let passing = set_cookie(&response).expect("a cookie");
+    assert!(!passing.contains("Max-Age"), "{passing}");
+    // The header of a peer nobody trusts does not make the cookie Secure:
+    // the test's requests carry no peer address at all.
+    let response = app
+        .clone()
+        .oneshot(login("username=unarr&password=fixture", Some("https")))
+        .await
+        .unwrap();
+    assert!(!set_cookie(&response).expect("a cookie").contains("Secure"));
+
+    let cookie = remembered.split(';').next().unwrap().to_string();
+    let page = |cookie: &str| {
+        get("/initialize.json")
+            .header("cookie", cookie)
+            .body(Body::empty())
+            .unwrap()
+    };
+    // Fresh: nothing to renew.
+    let response = app.clone().oneshot(page(&cookie)).await.unwrap();
+    assert_eq!(response.status(), StatusCode::OK);
+    assert!(set_cookie(&response).is_none());
+    assert!(response
+        .headers()
+        .get("cache-control")
+        .is_some_and(|v| v.to_str().unwrap().contains("no-store")));
+
+    // Four days on, past half its life: renewed, and the new one lasts
+    // until day eleven while the old one stops at day seven.
+    let start = chrono::Utc::now();
+    state.set_now(Some(start + chrono::Duration::days(4)));
+    let response = app.clone().oneshot(page(&cookie)).await.unwrap();
+    assert_eq!(response.status(), StatusCode::OK);
+    let renewed = set_cookie(&response).expect("a renewed cookie");
+    assert!(renewed.contains("Max-Age=604800"), "{renewed}");
+    let renewed = renewed.split(';').next().unwrap().to_string();
+    state.set_now(Some(start + chrono::Duration::days(8)));
+    assert_eq!(status_of(&app, page(&cookie)).await, StatusCode::FOUND);
+    assert_eq!(status_of(&app, page(&renewed)).await, StatusCode::OK);
+    state.set_now(None);
+}
+
+/// The interface's Restart and Shutdown reach whoever runs the process.
+#[tokio::test]
+async fn restart_and_shutdown_are_handed_to_the_process() {
+    for (path, key, expected) in [
+        (
+            "/api/v3/system/shutdown",
+            "shuttingDown",
+            unarr_api::Lifecycle::Shutdown,
+        ),
+        (
+            "/api/v3/system/restart",
+            "restarting",
+            unarr_api::Lifecycle::Restart,
+        ),
+    ] {
+        let state = build_state();
+        let app = unarr_api::router(state.clone());
+        // Not without the key.
+        let anonymous = Request::builder()
+            .method("POST")
+            .uri(path)
+            .body(Body::empty())
+            .unwrap();
+        assert_eq!(status_of(&app, anonymous).await, StatusCode::UNAUTHORIZED);
+        let response = app
+            .clone()
+            .oneshot(
+                Request::builder()
+                    .method("POST")
+                    .uri(path)
+                    .header("X-Api-Key", API_KEY)
+                    .body(Body::empty())
+                    .unwrap(),
+            )
+            .await
+            .unwrap();
+        assert_eq!(response.status(), StatusCode::OK);
+        let bytes = axum::body::to_bytes(response.into_body(), usize::MAX)
+            .await
+            .unwrap();
+        let body: Value = serde_json::from_slice(&bytes).unwrap();
+        assert_eq!(body[key], Value::Bool(true));
+        let asked = tokio::time::timeout(std::time::Duration::from_secs(5), state.lifecycle_requested())
+            .await
+            .expect("the request is there to be read");
+        assert_eq!(asked, expected);
+    }
 }

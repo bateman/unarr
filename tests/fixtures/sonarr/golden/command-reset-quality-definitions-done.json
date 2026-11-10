@@ -1,0 +1,35 @@
+{
+  "body": {
+    "body": {
+      "isExclusive": false,
+      "isLongRunning": false,
+      "name": "ResetQualityDefinitions",
+      "requiresDiskAccess": false,
+      "resetTitles": true,
+      "sendUpdatesToClient": true,
+      "suppressMessages": true,
+      "trigger": "manual",
+      "updateScheduledTask": true
+    },
+    "commandName": "Reset Quality Definitions",
+    "duration": "00:00:00.0113016",
+    "ended": "2026-11-10T20:45:35Z",
+    "id": 461733,
+    "name": "ResetQualityDefinitions",
+    "priority": "normal",
+    "queued": "2026-11-10T20:45:35Z",
+    "result": "successful",
+    "sendUpdatesToClient": true,
+    "started": "2026-11-10T20:45:35Z",
+    "stateChangeTime": "2026-11-10T20:45:35Z",
+    "status": "completed",
+    "trigger": "manual",
+    "updateScheduledTask": true
+  },
+  "recordedAt": "2026-11-10T20:45:42Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/command/461733"
+  },
+  "status": 200
+}

@@ -8,8 +8,8 @@
 
 use std::collections::HashMap;
 
-use axum::extract::State;
-use axum::http::Uri;
+use axum::extract::{Path, State};
+use axum::http::{StatusCode, Uri};
 use axum::response::{IntoResponse, Response};
 use axum::Json;
 use chrono::{DateTime, Utc};
@@ -403,4 +403,43 @@ pub async fn blocklist(State(state): State<AppState>, uri: Uri) -> ApiResult<Jso
     })
     .await?;
     Ok(Json(out))
+}
+
+/// `DELETE /blocklist/{id}`: one entry removed.
+pub async fn blocklist_delete(State(state): State<AppState>, Path(id): Path<i64>) -> ApiResult<StatusCode> {
+    state
+        .db()
+        .call(move |conn| store::history::delete_blocklist(conn, &[id]))
+        .await?;
+    Ok(StatusCode::OK)
+}
+
+/// `DELETE /blocklist/bulk`: the entries of `ids` removed.
+pub async fn blocklist_bulk_delete(
+    State(state): State<AppState>,
+    Json(body): Json<Value>,
+) -> ApiResult<Json<Value>> {
+    let ids: Vec<i64> = body["ids"]
+        .as_array()
+        .map(|a| a.iter().filter_map(Value::as_i64).collect())
+        .unwrap_or_default();
+    state
+        .db()
+        .call(move |conn| store::history::delete_blocklist(conn, &ids))
+        .await?;
+    Ok(Json(json!({})))
+}
+
+/// `POST /history/failed/{id}`: "Mark as failed" on a history row.
+pub async fn history_mark_failed(
+    State(state): State<AppState>,
+    Path(id): Path<i64>,
+) -> ApiResult<Json<Value>> {
+    if !state.downloads().mark_history_as_failed(id, state.now()).await? {
+        return Err(ApiError::ModelNotFound(format!(
+            "EpisodeHistory with ID {id} does not exist"
+        )));
+    }
+    crate::routes::queue::broadcast_queue(&state);
+    Ok(Json(json!({})))
 }

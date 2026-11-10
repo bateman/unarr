@@ -1,7 +1,7 @@
 //! `system/status`, `health` and `/initialize.json`.
 
 use axum::extract::{Path, State};
-use axum::http::{header, Uri};
+use axum::http::{header, StatusCode, Uri};
 use axum::response::IntoResponse;
 use axum::Json;
 use chrono::{DateTime, Duration, Utc};
@@ -141,7 +141,47 @@ pub async fn initialize_json(State(state): State<AppState>) -> impl IntoResponse
         "urlBase": settings.url_base,
         "isProduction": true,
     });
-    ([(header::CONTENT_TYPE, "application/json")], body.to_string())
+    // `CacheableSpecification`: never cached; it carries the API key.
+    (
+        [
+            (header::CONTENT_TYPE, "application/json"),
+            (header::CACHE_CONTROL, "no-cache, no-store"),
+            (header::PRAGMA, "no-cache"),
+            (header::EXPIRES, "-1"),
+        ],
+        body.to_string(),
+    )
+}
+
+/// `GET /ping` (`PingController`): open to anyone, for uptime checks and
+/// container healthchecks; 500 when the database does not answer.
+pub async fn ping(State(state): State<AppState>) -> impl IntoResponse {
+    let answers = state
+        .db()
+        .call(|conn| unarr_core::store::config::meta(conn, "source.app"))
+        .await
+        .is_ok();
+    if answers {
+        (StatusCode::OK, Json(serde_json::json!({"status": "OK"})))
+    } else {
+        (
+            StatusCode::INTERNAL_SERVER_ERROR,
+            Json(serde_json::json!({"status": "Error"})),
+        )
+    }
+}
+
+/// `POST /system/shutdown`: the answer first, then the daemon stops.
+pub async fn shutdown(State(state): State<AppState>) -> Json<Value> {
+    state.request_lifecycle(crate::state::Lifecycle::Shutdown);
+    Json(serde_json::json!({"shuttingDown": true}))
+}
+
+/// `POST /system/restart`: the answer first, then the daemon stops and
+/// starts again.
+pub async fn restart(State(state): State<AppState>) -> Json<Value> {
+    state.request_lifecycle(crate::state::Lifecycle::Restart);
+    Json(serde_json::json!({"restarting": true}))
 }
 
 /// Eight hex characters derived from the installation, like the originals'

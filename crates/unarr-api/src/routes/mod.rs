@@ -161,6 +161,9 @@ pub fn api_router(_state: &AppState) -> Router<AppState> {
         .route("/queue/grab/{id}", post(queue::grab))
         .route("/queue/{id}", delete(queue::remove))
         .route("/blocklist", get(activity::blocklist))
+        .route("/blocklist/bulk", delete(activity::blocklist_bulk_delete))
+        .route("/blocklist/{id}", delete(activity::blocklist_delete))
+        .route("/history/failed/{id}", post(activity::history_mark_failed))
         .route("/config/naming", get(settings::naming))
         .route("/config/naming/{id}", put(settings_writes::naming))
         .route("/config/mediamanagement", get(settings::media_management))
@@ -247,7 +250,10 @@ pub fn api_router(_state: &AppState) -> Router<AppState> {
         )
         .route("/metadata", get(providers::metadata_list))
         .route("/metadata/schema", get(providers::metadata_schema))
-        .route("/metadata/{id}", get(providers::metadata))
+        .route(
+            "/metadata/{id}",
+            get(providers::metadata).put(providers::metadata_update),
+        )
         .route(
             "/importlistexclusion",
             get(providers::import_list_exclusions).post(settings_writes::exclusion_create),
@@ -318,6 +324,8 @@ pub fn api_router(_state: &AppState) -> Router<AppState> {
                 .put(settings_writes::custom_filter_update)
                 .delete(settings_writes::custom_filter_delete),
         )
+        .route("/system/shutdown", post(system::shutdown))
+        .route("/system/restart", post(system::restart))
         .route("/system/task", get(system::tasks))
         .route("/system/task/{id}", get(system::task))
         .route("/command", get(command::list).post(command::start))

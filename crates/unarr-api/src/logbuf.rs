@@ -68,6 +68,15 @@ impl LogBuffer {
         inner.entries.push_back(entry);
     }
 
+    /// `ClearLog`: the lines gone; ids keep counting.
+    pub fn clear(&self) {
+        self.inner
+            .lock()
+            .unwrap_or_else(|e| e.into_inner())
+            .entries
+            .clear();
+    }
+
     /// Newest first.
     pub fn entries(&self) -> Vec<LogEntry> {
         let inner = self.inner.lock().unwrap_or_else(|e| e.into_inner());

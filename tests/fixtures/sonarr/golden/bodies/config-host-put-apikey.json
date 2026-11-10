@@ -1,0 +1,6 @@
+{
+ "$from": "config-host-after-credentials",
+ "$set": {
+  "apiKey": "fedcba9876543210fedcba9876543210"
+ }
+}

@@ -351,6 +351,64 @@ pub async fn custom_format_schema() -> Json<Vec<Value>> {
     Json(schemas::all(SchemaKind::CustomFormatSpecification).to_vec())
 }
 
+/// `PUT /metadata/{id}`: Settings > Metadata saves a consumer's switch and
+/// options. They are kept, so the page works and a later export finds
+/// them; no metadata file is written (the consumers are not driven).
+pub async fn metadata_update(
+    State(state): State<AppState>,
+    Path(route_id): Path<i64>,
+    Json(mut body): Json<Value>,
+) -> ApiResult<axum::response::Response> {
+    use axum::response::IntoResponse;
+    if !body.is_object() {
+        return Err(crate::error::ApiError::BadRequest(
+            "The request body must be a JSON object".into(),
+        ));
+    }
+    if body["id"].as_i64().unwrap_or(0) == 0 {
+        body["id"] = json!(route_id);
+    }
+    let id = body["id"].as_i64().unwrap_or(0);
+    let existing = found(
+        state
+            .db()
+            .call(move |conn| store::providers::get_provider(conn, ProviderKind::Metadata, id))
+            .await?,
+    )?;
+    let mut updated = existing.clone();
+    if let Some(name) = body["name"].as_str() {
+        updated.name = name.to_string();
+    }
+    if let Some(schema) = schemas::lookup(
+        SchemaKind::Provider(ProviderKind::Metadata),
+        &existing.implementation,
+    ) {
+        updated.settings = schemas::read_fields(schema, &body["fields"], Some(&existing.settings));
+    }
+    if let Some(tags) = body["tags"].as_array() {
+        updated.tags = tags.iter().filter_map(Value::as_i64).collect();
+    }
+    if let (Some(enable), Some(attributes)) = (body["enable"].as_bool(), updated.attributes.as_object_mut()) {
+        attributes.insert("enable".into(), json!(enable));
+    }
+    if updated != existing {
+        let to_store = updated.clone();
+        state
+            .db()
+            .call(move |conn| store::providers::update_provider(conn, &to_store))
+            .await?;
+        state.hub().broadcast(
+            "metadata",
+            json!({"action": "updated", "resource": provider_resource(&updated)}),
+        );
+    }
+    Ok((
+        axum::http::StatusCode::ACCEPTED,
+        Json(provider_resource(&updated)),
+    )
+        .into_response())
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

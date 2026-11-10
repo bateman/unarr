@@ -131,6 +131,17 @@ struct Inner {
     /// Where the metadata hosts are asked, when not the real ones (a mock,
     /// in the tests and the replay); applied when the runtime starts.
     metadata: Mutex<Option<unarr_core::metadata::Upstreams>>,
+    /// The key session cookies are signed with, read once.
+    session_secret: OnceLock<Vec<u8>>,
+    /// A shutdown or restart asked through the API, for the daemon to act on.
+    lifecycle: tokio::sync::watch::Sender<Option<Lifecycle>>,
+}
+
+/// What `POST /system/shutdown` and `/system/restart` ask of the process.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum Lifecycle {
+    Shutdown,
+    Restart,
 }
 
 /// `TimeSpan.FromMinutes(30)`.
@@ -163,6 +174,8 @@ impl AppState {
             push_lock: tokio::sync::Mutex::new(()),
             auth_cookie: std::sync::OnceLock::new(),
             metadata: Mutex::new(None),
+            session_secret: OnceLock::new(),
+            lifecycle: tokio::sync::watch::channel(None).0,
         }))
     }
 
@@ -190,6 +203,7 @@ impl AppState {
         }
         runtime.set_media_cover_dir(self.runtime().media_cover_dir.clone());
         runtime.set_backup(self.backup_context());
+        runtime.set_host_hooks(self.host_hooks());
         runtime.start();
         let mut events = runtime.subscribe();
         let state = self.clone();
@@ -271,6 +285,53 @@ impl AppState {
         })
     }
 
+    /// The key session cookies are signed with: random, made on first use
+    /// and kept in the database, so sessions outlive a restart and a change
+    /// of the API key, as the originals' do.
+    pub fn session_secret(&self) -> &[u8] {
+        self.0.session_secret.get_or_init(|| {
+            const KEY: &str = "session.secret";
+            let stored = self.db().call_blocking(|conn| {
+                if let Some(secret) = unarr_core::store::config::meta(conn, KEY)? {
+                    return Ok(secret);
+                }
+                let mut bytes = [0u8; 32];
+                std::io::Read::read_exact(&mut std::fs::File::open("/dev/urandom")?, &mut bytes)?;
+                let secret: String = bytes.iter().map(|b| format!("{b:02x}")).collect();
+                unarr_core::store::config::set_meta(conn, KEY, &secret)?;
+                Ok(secret)
+            });
+            match stored {
+                Ok(secret) => secret.into_bytes(),
+                Err(e) => {
+                    // Sessions then end with the process.
+                    tracing::warn!(error = %e, "could not keep the session key; using one for this run");
+                    format!("{:?}{}", std::time::SystemTime::now(), std::process::id()).into_bytes()
+                }
+            }
+        })
+    }
+
+    /// Ask the daemon to stop, or to stop and start again
+    /// (`LifecycleService`). Nothing happens when no daemon listens, as in
+    /// the tests.
+    pub fn request_lifecycle(&self, what: Lifecycle) {
+        self.0.lifecycle.send_replace(Some(what));
+    }
+
+    /// Resolves with the first shutdown or restart asked through the API.
+    pub async fn lifecycle_requested(&self) -> Lifecycle {
+        let mut requests = self.0.lifecycle.subscribe();
+        loop {
+            if let Some(what) = *requests.borrow_and_update() {
+                return what;
+            }
+            if requests.changed().await.is_err() {
+                std::future::pending::<()>().await;
+            }
+        }
+    }
+
     pub fn push_lock(&self) -> &tokio::sync::Mutex<()> {
         &self.0.push_lock
     }
@@ -292,6 +353,36 @@ impl AppState {
     /// The SignalR fan-out to connected UIs.
     pub fn hub(&self) -> &Hub {
         &self.0.hub
+    }
+
+    /// The commands that act on the host itself.
+    fn host_hooks(&self) -> unarr_core::commands::HostHooks {
+        let logs = self.logs().clone();
+        let log_dir = self.runtime().app_data.join("logs");
+        let state = self.clone();
+        unarr_core::commands::HostHooks {
+            clear_log: Arc::new(move || logs.clear()),
+            // `DeleteLogFilesService`: every `.txt` of the log folder.
+            delete_log_files: Arc::new(move || {
+                let Ok(entries) = std::fs::read_dir(&log_dir) else {
+                    return Ok(());
+                };
+                for entry in entries.flatten() {
+                    let path = entry.path();
+                    if path.is_file() && path.extension().is_some_and(|e| e.eq_ignore_ascii_case("txt")) {
+                        std::fs::remove_file(&path)?;
+                    }
+                }
+                Ok(())
+            }),
+            // `ConfigFileProvider.Execute(ResetApiKeyCommand)`.
+            reset_api_key: Arc::new(move || {
+                let mut bytes = [0u8; 16];
+                std::io::Read::read_exact(&mut std::fs::File::open("/dev/urandom")?, &mut bytes)?;
+                let key: String = bytes.iter().map(|b| format!("{b:02x}")).collect();
+                crate::routes::settings_writes::set_host_override_blocking(&state, "apiKey", json!(key))
+            }),
+        }
     }
 
     /// What backups need to know about this installation.

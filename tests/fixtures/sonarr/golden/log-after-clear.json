@@ -1,0 +1,72 @@
+{
+  "body": {
+    "page": 1,
+    "pageSize": 10,
+    "records": [
+      {
+        "exception": "System.IO.DirectoryNotFoundException: Could not find a part of the path '/home/(removed)/unarr/.cache/sonarr/golden-data/UpdateLogs'.\n   at System.IO.Enumeration.FileSystemEnumerator`1.CreateDirectoryHandle(String path, Boolean ignoreNotFound)\n   at System.IO.Enumeration.FileSystemEnumerator`1.Init()\n   at System.IO.Enumeration.FileSystemEnumerableFactory.UserFiles(String directory, String expression, EnumerationOptions options)\n   at System.IO.Directory.InternalEnumeratePaths(String path, String searchPattern, SearchTarget searchTarget, EnumerationOptions options)\n   at NzbDrone.Common.Disk.DiskProviderBase.EmptyFolder(String path) in ./Sonarr.Common/Disk/DiskProviderBase.cs:line 420\n   at NzbDrone.Core.Instrumentation.DeleteLogFilesService.Execute(DeleteUpdateLogFilesCommand message) in ./Sonarr.Core/Instrumentation/DeleteLogFilesService.cs:line 36\n   at NzbDrone.Core.Messaging.Commands.CommandExecutor.ExecuteCommand[TCommand](TCommand command, CommandModel commandModel) in ./Sonarr.Core/Messaging/Commands/CommandExecutor.cs:line 116\n   at System.Dynamic.UpdateDelegates.UpdateAndExecuteVoid3[T0,T1,T2](CallSite site, T0 arg0, T1 arg1, T2 arg2)\n   at NzbDrone.Core.Messaging.Commands.CommandExecutor.ExecuteCommands() in ./Sonarr.Core/Messaging/Commands/CommandExecutor.cs:line 42",
+        "exceptionType": "System.IO.DirectoryNotFoundException",
+        "id": 1060,
+        "level": "error",
+        "logger": "CommandExecutor",
+        "message": "Error occurred while executing task DeleteUpdateLogFiles: Could not find a part of the path '/home/(removed)/unarr/.cache/sonarr/golden-data/UpdateLogs'.",
+        "time": "2026-11-10T20:45:35Z"
+      },
+      {
+        "id": 1059,
+        "level": "info",
+        "logger": "Database",
+        "message": "Log database compressed",
+        "time": "2026-11-10T20:45:35Z"
+      },
+      {
+        "id": 1058,
+        "level": "info",
+        "logger": "Database",
+        "message": "Vacuuming Log database",
+        "time": "2026-11-10T20:45:35Z"
+      },
+      {
+        "id": 1057,
+        "level": "warn",
+        "logger": "SonarrErrorPipeline",
+        "message": "Invalid request Validation failed: \n -- Id: 'Id' must be greater than '0'.",
+        "time": "2026-11-10T20:45:35Z"
+      },
+      {
+        "id": 1056,
+        "level": "warn",
+        "logger": "SonarrErrorPipeline",
+        "message": "Invalid request Validation failed: \n -- Id: 'Id' must be greater than '0'.",
+        "time": "2026-11-10T20:45:35Z"
+      },
+      {
+        "exception": "Sonarr.Http.REST.NotFoundException: NotFound\n   at Sonarr.Api.V3.System.Backup.BackupController.DeleteBackup(Int32 id) in ./Sonarr.Api.V3/System/Backup/BackupController.cs:line 59\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()\n--- End of stack trace from previous location ---\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()\n--- End of stack trace from previous location ---\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)\n   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)\n   at Sonarr.Http.Middleware.BufferingMiddleware.InvokeAsync(HttpContext context) in ./Sonarr.Http/Middleware/BufferingMiddleware.cs:line 28\n   at Sonarr.Http.Middleware.IfModifiedMiddleware.InvokeAsync(HttpContext context) in ./Sonarr.Http/Middleware/IfModifiedMiddleware.cs:line 41\n   at Sonarr.Http.Middleware.CacheHeaderMiddleware.InvokeAsync(HttpContext context) in ./Sonarr.Http/Middleware/CacheHeaderMiddleware.cs:line 33\n   at Sonarr.Http.Middleware.StartingUpMiddleware.InvokeAsync(HttpContext context) in ./Sonarr.Http/Middleware/StartingUpMiddleware.cs:line 38\n   at Sonarr.Http.Middleware.UrlBaseMiddleware.InvokeAsync(HttpContext context) in ./Sonarr.Http/Middleware/UrlBaseMiddleware.cs:line 29\n   at Sonarr.Http.Middleware.VersionMiddleware.InvokeAsync(HttpContext context) in ./Sonarr.Http/Middleware/VersionMiddleware.cs:line 29\n   at Microsoft.AspNetCore.ResponseCompression.ResponseCompressionMiddleware.InvokeCore(HttpContext context)\n   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)\n   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)\n   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)\n   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.<Invoke>g__Awaited|6_0(ExceptionHandlerMiddleware middleware, HttpContext context, Task task)",
+        "exceptionType": "Sonarr.Http.REST.NotFoundException",
+        "id": 1055,
+        "level": "warn",
+        "logger": "SonarrErrorPipeline",
+        "message": "API Error:\nNotFound: NotFound",
+        "time": "2026-11-10T20:45:35Z"
+      },
+      {
+        "exception": "Sonarr.Http.REST.NotFoundException: NotFound\n   at Sonarr.Api.V3.System.Backup.BackupController.Restore(Int32 id) in ./Sonarr.Api.V3/System/Backup/BackupController.cs:line 81\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.SyncObjectResultExecutor.Execute(IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeActionMethodAsync()\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeNextActionFilterAsync()\n--- End of stack trace from previous location ---\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()\n--- End of stack trace from previous location ---\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)\n   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Awaited|17_0(ResourceInvoker invoker, Task task, IDisposable scope)\n   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|6_0(Endpoint endpoint, Task requestTask, ILogger logger)\n   at Sonarr.Http.Middleware.BufferingMiddleware.InvokeAsync(HttpContext context) in ./Sonarr.Http/Middleware/BufferingMiddleware.cs:line 28\n   at Sonarr.Http.Middleware.IfModifiedMiddleware.InvokeAsync(HttpContext context) in ./Sonarr.Http/Middleware/IfModifiedMiddleware.cs:line 41\n   at Sonarr.Http.Middleware.CacheHeaderMiddleware.InvokeAsync(HttpContext context) in ./Sonarr.Http/Middleware/CacheHeaderMiddleware.cs:line 33\n   at Sonarr.Http.Middleware.StartingUpMiddleware.InvokeAsync(HttpContext context) in ./Sonarr.Http/Middleware/StartingUpMiddleware.cs:line 38\n   at Sonarr.Http.Middleware.UrlBaseMiddleware.InvokeAsync(HttpContext context) in ./Sonarr.Http/Middleware/UrlBaseMiddleware.cs:line 29\n   at Sonarr.Http.Middleware.VersionMiddleware.InvokeAsync(HttpContext context) in ./Sonarr.Http/Middleware/VersionMiddleware.cs:line 29\n   at Microsoft.AspNetCore.ResponseCompression.ResponseCompressionMiddleware.InvokeCore(HttpContext context)\n   at Microsoft.AspNetCore.Authorization.Policy.AuthorizationMiddlewareResultHandler.HandleAsync(RequestDelegate next, HttpContext context, AuthorizationPolicy policy, PolicyAuthorizationResult authorizeResult)\n   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)\n   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)\n   at Microsoft.AspNetCore.Diagnostics.ExceptionHandlerMiddleware.<Invoke>g__Awaited|6_0(ExceptionHandlerMiddleware middleware, HttpContext context, Task task)",
+        "exceptionType": "Sonarr.Http.REST.NotFoundException",
+        "id": 1054,
+        "level": "warn",
+        "logger": "SonarrErrorPipeline",
+        "message": "API Error:\nNotFound: NotFound",
+        "time": "2026-11-10T20:45:35Z"
+      }
+    ],
+    "sortDirection": "descending",
+    "sortKey": "time",
+    "totalRecords": 7
+  },
+  "recordedAt": "2026-11-10T20:45:42Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/log?page=1&pageSize=10&sortKey=time&sortDirection=descending"
+  },
+  "status": 200
+}

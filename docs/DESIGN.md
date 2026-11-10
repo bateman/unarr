@@ -872,6 +872,16 @@ a query; section 15 asks which library size the target is for.
   `config/host` is kept as overrides in the database, applied at start and
   in memory. The session cookie keeps the name it had at start, as the
   originals', so renaming the instance does not log the browser out.
+  A save changes the authentication method and requirement, the user name
+  and the password; the API key it carries is ignored, as the originals
+  ignore it (recorded), and changes only with `ResetApiKey`. Sessions
+  last seven days from their last use and are signed with a random key
+  kept in the database, not one derived from the API key.
+- **Restart from the UI replaces the process.** `POST /system/restart`
+  stops the daemon as a signal would and executes the same program again
+  with the same arguments; under Docker the container keeps running.
+  `POST /system/shutdown` ends the process, and the container's restart
+  policy decides what follows.
 - **PUT without a route id.** The UI saves settings pages with `PUT` on
   the collection path and the id in the body. As recorded: the body id
   wins over the route id, the route id fills in when the body has none,

@@ -184,10 +184,12 @@ pub fn scan(
     if !series_folder_exists {
         if !Path::new(&root_folder).is_dir() {
             tracing::warn!("Series' root folder ({root_folder}) doesn't exist.");
+            events.push(ImportEvent::SeriesScanSkipped { series_id: series.id });
             return Ok(events);
         }
         if transfer::folder_empty(Path::new(&root_folder)) {
             tracing::warn!("Series' root folder ({root_folder}) is empty.");
+            events.push(ImportEvent::SeriesScanSkipped { series_id: series.id });
             return Ok(events);
         }
     }
@@ -332,6 +334,37 @@ fn unmonitor_missing(db: &Db, config: &MediaManagementConfig, events: &Events) -
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// A series whose root folder is missing or empty is not scanned, and
+    /// says so: the series' post-add actions hang on that.
+    #[test]
+    fn a_scan_that_cannot_run_is_reported_as_skipped() {
+        let db = Db::open_in_memory().unwrap();
+        let now = Utc::now();
+        let root = std::env::temp_dir().join(format!("unarr_scan_skipped_{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&root);
+        let mut series = crate::store::series::tests::sample(1);
+        series.path = root.join("Series").to_string_lossy().into_owned();
+        let env = db
+            .call_blocking(move |conn| {
+                conn.execute_batch(
+                    "INSERT INTO quality_profiles (id, name, cutoff, items) VALUES (1, 'Any', 1, '[]');",
+                )?;
+                Environment::load(conn, now)
+            })
+            .unwrap();
+        let skipped = |events: Events| {
+            events
+                .0
+                .iter()
+                .any(|e| matches!(e, ImportEvent::SeriesScanSkipped { series_id: 1 }))
+        };
+        // No root folder at all, then one with nothing in it.
+        assert!(skipped(scan(&db, &env, &series, now, &mut |_| {}).unwrap()));
+        std::fs::create_dir_all(&root).unwrap();
+        assert!(skipped(scan(&db, &env, &series, now, &mut |_| {}).unwrap()));
+        let _ = std::fs::remove_dir_all(&root);
+    }
 
     #[test]
     fn filters_extras_and_hidden_folders_like_the_originals() {

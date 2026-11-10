@@ -1091,6 +1091,7 @@ pub fn import(legacy_db: &Path, db: &Db) -> anyhow::Result<ImportReport> {
         for (table, ours) in [
             ("EpisodeFiles", "episode_files"),
             ("History", "history"),
+            ("Blocklist", "blocklist"),
             ("Episodes", "episodes"),
             ("Series", "series"),
             ("SceneMappings", "scene_mappings"),

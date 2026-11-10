@@ -167,7 +167,13 @@ pub async fn login_page(State(state): State<AppState>) -> Response {
     }
 }
 
-pub async fn login(State(state): State<AppState>, uri: Uri, Form(form): Form<LoginForm>) -> Response {
+pub async fn login(
+    State(state): State<AppState>,
+    remote: Option<axum::Extension<ConnectInfo<std::net::SocketAddr>>>,
+    uri: Uri,
+    headers: HeaderMap,
+    Form(form): Form<LoginForm>,
+) -> Response {
     let url_base = state.settings().url_base.clone();
     let return_url = crate::query::Params::from_uri(&uri)
         .get("returnUrl")
@@ -200,7 +206,8 @@ pub async fn login(State(state): State<AppState>, uri: Uri, Form(form): Form<Log
         ));
     };
     let persistent = form.remember_me == "on";
-    let cookie = issue_cookie(&state, &user, persistent);
+    let secure = over_https(&state, remote.map(|c| c.0 .0.ip()), &headers);
+    let cookie = issue_cookie(&state, &user.identifier, persistent, secure);
     // Only a local path: not another host (`//host`), no backslash, which
     // browsers read as a slash (`/\host`), and no control character, which
     // browsers strip (`/<tab>/host` would become `//host`).
@@ -225,8 +232,8 @@ pub async fn login(State(state): State<AppState>, uri: Uri, Form(form): Form<Log
 pub async fn logout(State(state): State<AppState>) -> Response {
     let name = cookie_name(&state);
     let expired = format!(
-        "{name}=; Path={}/; Max-Age=0; HttpOnly; SameSite=Lax",
-        state.settings().url_base
+        "{name}=; Path={}; Max-Age=0; HttpOnly; SameSite=Lax",
+        cookie_path(&state)
     );
     let mut response = found(&format!("{}/", state.settings().url_base));
     response
@@ -271,9 +278,9 @@ fn cookie_name(state: &AppState) -> String {
     state.auth_cookie().to_owned()
 }
 
-/// HMAC key derived from the API key: rotating the key logs everyone out.
+/// The key the cookies are signed with.
 fn signing_key(state: &AppState) -> Vec<u8> {
-    Sha256::digest(format!("unarr-cookie:{}", state.settings().host.api_key).as_bytes()).to_vec()
+    Sha256::digest([b"unarr-cookie:".as_slice(), state.session_secret()].concat()).to_vec()
 }
 
 fn sign(key: &[u8], payload: &str) -> String {
@@ -283,47 +290,88 @@ fn sign(key: &[u8], payload: &str) -> String {
     base64::engine::general_purpose::URL_SAFE_NO_PAD.encode(mac.finalize().into_bytes())
 }
 
-fn issue_cookie(state: &AppState, user: &User, persistent: bool) -> String {
-    let ttl = if persistent { 7 * 86_400 } else { 86_400 };
-    let expires = state.now().timestamp() + ttl;
-    let payload = format!("{}|{}", user.identifier, expires);
+/// `ExpireTimeSpan`: seven days, counted again from each use
+/// (`SlidingExpiration`).
+const SESSION_SECONDS: i64 = 7 * 86_400;
+
+/// A valid session, as its cookie says.
+struct Session {
+    identifier: String,
+    /// "Remember Me": the cookie outlives the browser.
+    persistent: bool,
+    expires: i64,
+}
+
+/// The cookie's path: the URL base, or the root.
+fn cookie_path(state: &AppState) -> String {
+    let base = state.settings().url_base.clone();
+    if base.is_empty() {
+        "/".to_string()
+    } else {
+        base
+    }
+}
+
+/// The session cookie for `identifier`, good for seven days from now.
+/// Without "Remember Me" it carries no lifetime and goes with the browser,
+/// though the session inside still ends after seven idle days. `secure`
+/// when the request came over HTTPS (`CookieSecurePolicy.SameAsRequest`).
+fn issue_cookie(state: &AppState, identifier: &str, persistent: bool, secure: bool) -> String {
+    let expires = state.now().timestamp() + SESSION_SECONDS;
+    let payload = format!("{identifier}|{}|{expires}", u8::from(persistent));
     let token = format!("{payload}|{}", sign(&signing_key(state), &payload));
     let mut cookie = format!(
-        "{}={}; Path={}/; HttpOnly; SameSite=Lax",
+        "{}={}; Path={}; HttpOnly; SameSite=Lax",
         cookie_name(state),
         token,
-        state.settings().url_base
+        cookie_path(state)
     );
+    if secure {
+        cookie.push_str("; Secure");
+    }
     if persistent {
-        cookie.push_str(&format!("; Max-Age={ttl}"));
+        cookie.push_str(&format!("; Max-Age={SESSION_SECONDS}"));
     }
     cookie
 }
 
-fn cookie_valid(state: &AppState, headers: &HeaderMap) -> bool {
+/// The session the request's cookie holds, when it is signed by this
+/// installation and not expired.
+fn session(state: &AppState, headers: &HeaderMap) -> Option<Session> {
     let name = cookie_name(state);
-    let Some(cookies) = headers.get(header::COOKIE).and_then(|v| v.to_str().ok()) else {
-        return false;
-    };
-    let Some(token) = cookies
+    let cookies = headers.get(header::COOKIE).and_then(|v| v.to_str().ok())?;
+    let token = cookies
         .split(';')
         .map(str::trim)
-        .find_map(|c| c.strip_prefix(&format!("{name}=")))
-    else {
-        return false;
-    };
-    let mut parts = token.rsplitn(2, '|');
-    let (Some(signature), Some(payload)) = (parts.next(), parts.next()) else {
-        return false;
-    };
+        .find_map(|c| c.strip_prefix(&format!("{name}=")))?;
+    let (payload, signature) = token.rsplit_once('|')?;
     if !key_matches(&sign(&signing_key(state), payload), signature) {
-        return false;
+        return None;
     }
-    payload
-        .rsplit('|')
-        .next()
-        .and_then(|e| e.parse::<i64>().ok())
-        .is_some_and(|expires| expires > state.now().timestamp())
+    let (rest, expires) = payload.rsplit_once('|')?;
+    let expires: i64 = expires.parse().ok()?;
+    if expires <= state.now().timestamp() {
+        return None;
+    }
+    let (identifier, persistent) = rest.rsplit_once('|')?;
+    Some(Session {
+        identifier: identifier.to_string(),
+        persistent: persistent == "1",
+        expires,
+    })
+}
+
+/// Whether the request reached the proxy in front over HTTPS: the peer is
+/// one `TrustedNetworks` believes and it says so.
+fn over_https(state: &AppState, remote: Option<std::net::IpAddr>, headers: &HeaderMap) -> bool {
+    remote.is_some_and(|peer| state.settings().trusted_networks.contains(peer))
+        && headers
+            .get_all("x-forwarded-proto")
+            .iter()
+            .filter_map(|v| v.to_str().ok())
+            .flat_map(|v| v.split(','))
+            .next_back()
+            .is_some_and(|proto| proto.trim().eq_ignore_ascii_case("https"))
 }
 
 /// Basic authentication sends the password on every request, posters
@@ -397,14 +445,11 @@ pub async fn require_ui_auth(State(state): State<AppState>, request: Request, ne
     // The client behind the proxies `TrustedNetworks` lets speak for it; a
     // forwarded address nobody trusted vouched for leaves it unknown
     // (`IsClientAddressKnown`), and an unknown client is never exempt.
-    let client = crate::forwarded::client(
-        request
-            .extensions()
-            .get::<ConnectInfo<std::net::SocketAddr>>()
-            .map(|c| c.0.ip()),
-        headers,
-        &settings.trusted_networks,
-    );
+    let remote = request
+        .extensions()
+        .get::<ConnectInfo<std::net::SocketAddr>>()
+        .map(|c| c.0.ip());
+    let client = crate::forwarded::client(remote, headers, &settings.trusted_networks);
     let known = !client.forwarded_left;
     let exempt = match host.authentication_required {
         AuthenticationRequired::Enabled => false,
@@ -419,13 +464,34 @@ pub async fn require_ui_auth(State(state): State<AppState>, request: Request, ne
     if exempt {
         return next.run(request).await;
     }
+    let mut renewed = None;
     let session_ok = match host.authentication_method {
-        AuthenticationMethod::Forms => cookie_valid(&state, headers),
+        AuthenticationMethod::Forms => match session(&state, headers) {
+            Some(session) => {
+                // `SlidingExpiration`: past half its life, the session
+                // starts a new one.
+                if session.expires - state.now().timestamp() < SESSION_SECONDS / 2 {
+                    let secure = over_https(&state, remote, headers);
+                    renewed = Some(issue_cookie(
+                        &state,
+                        &session.identifier,
+                        session.persistent,
+                        secure,
+                    ));
+                }
+                true
+            }
+            None => false,
+        },
         AuthenticationMethod::Basic => basic_auth_valid(&state, headers).await,
         _ => true,
     };
     if session_ok {
-        return next.run(request).await;
+        let mut response = next.run(request).await;
+        if let Some(cookie) = renewed.and_then(|c| HeaderValue::from_str(&c).ok()) {
+            response.headers_mut().append(header::SET_COOKIE, cookie);
+        }
+        return response;
     }
     match host.authentication_method {
         AuthenticationMethod::Basic => (

@@ -1,0 +1,9 @@
+{
+  "body": null,
+  "recordedAt": "2026-11-10T20:48:17Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/system/status?apikey=fedcba9876543210fedcba9876543210"
+  },
+  "status": 401
+}

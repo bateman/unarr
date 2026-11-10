@@ -1,0 +1,211 @@
+{
+  "body": {
+    "page": 1,
+    "pageSize": 3,
+    "records": [
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 18,
+            "name": "ATVP"
+          },
+          {
+            "id": 15,
+            "name": "x265 (HD)"
+          }
+        ],
+        "data": {
+          "downloadClient": "redacted",
+          "downloadClientName": null,
+          "message": "Manually marked as failed",
+          "releaseGroup": null,
+          "size": null
+        },
+        "date": "2026-11-10T20:45:35Z",
+        "downloadId": "fc5bdc1bea6d11d0f8c911f4f68c15458ce4b34c",
+        "episode": {
+          "absoluteEpisodeNumber": 5,
+          "airDate": "2026-03-09",
+          "airDateUtc": "2026-03-09T22:00:00Z",
+          "episodeFileId": 0,
+          "episodeNumber": 5,
+          "hasFile": false,
+          "id": 1600,
+          "lastSearchTime": "2026-10-07T18:48:26Z",
+          "monitored": false,
+          "overview": "Strange things are happening in Marvin Gardens and they’re starting to attract unwanted attention. It’s time for Kacey and Michael to exhume the prophets from their pile of manure.",
+          "runtime": 29,
+          "seasonNumber": 1,
+          "seriesId": 48,
+          "title": "Episode 5",
+          "tvdbId": 11195994,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 1600,
+        "eventType": "downloadFailed",
+        "id": 2666,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "seriesId": 48,
+        "sourceTitle": "Small.Prophets.S01E05.1080p.ATVP.WEB-DL.DDP5.1.ENG.Atmos.ITA.H265-TBK"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [],
+        "data": {
+          "indexerFlags": "Freeleech",
+          "reason": "MissingFromDisk",
+          "releaseGroup": null,
+          "releaseType": "SingleEpisode",
+          "size": "2065326303"
+        },
+        "date": "2026-11-10T20:42:13Z",
+        "episode": {
+          "airDate": "2023-04-09",
+          "airDateUtc": "2023-04-10T00:00:00Z",
+          "episodeFileId": 0,
+          "episodeNumber": 3,
+          "hasFile": false,
+          "id": 1270,
+          "lastSearchTime": "2026-03-07T18:00:43Z",
+          "monitored": false,
+          "overview": "The girls experience an unusual hangover. Shauna learns the thrill of peer-to-peer car rentals. Natalie audits Lottie’s class in emotional apiology. Tai reflects, Misty hits the high seas, and you’ve never attended a baby shower like the one the Yellowjackets throw here.",
+          "runtime": 57,
+          "seasonNumber": 2,
+          "seriesId": 33,
+          "title": "Digestif",
+          "tvdbId": 9646699,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 1270,
+        "eventType": "episodeFileDeleted",
+        "id": 2665,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 15,
+            "name": "WEBRip-1080p",
+            "resolution": 1080,
+            "source": "webRip"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "seriesId": 33,
+        "sourceTitle": "/tv/Yellowjackets/Season 02/Yellowjackets (2021) - S02E03 - Digestif [WEBRip-1080p][EAC3 2.0][x264].mkv"
+      },
+      {
+        "customFormatScore": 1775,
+        "customFormats": [
+          {
+            "id": 16,
+            "name": "AMZN"
+          },
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 11,
+            "name": "WEB Tier 01"
+          }
+        ],
+        "data": {
+          "indexerFlags": "0",
+          "reason": "MissingFromDisk",
+          "releaseGroup": "NTb",
+          "releaseType": "SingleEpisode",
+          "size": "2501363135"
+        },
+        "date": "2026-11-10T20:42:13Z",
+        "episode": {
+          "airDate": "2023-04-16",
+          "airDateUtc": "2023-04-17T00:00:00Z",
+          "episodeFileId": 0,
+          "episodeNumber": 4,
+          "hasFile": false,
+          "id": 1271,
+          "lastSearchTime": "2026-03-07T18:01:11Z",
+          "monitored": false,
+          "overview": "Relive your youth by hitting the road! Take a roadtrip with your child! Go on vacation with a new friend! Hitchhike, if you must! Just make sure you pack a good playlist for the ride. Some recommendations from us: “Anything You Can Do,” “You Get What You Give,” “Instinct,” a famous composition by Frank Comstock, but absolutely not anything from “Starlight Express”.",
+          "runtime": 60,
+          "seasonNumber": 2,
+          "seriesId": 33,
+          "title": "Old Wounds",
+          "tvdbId": 9646701,
+          "unverifiedSceneNumbering": false
+        },
+        "episodeId": 1271,
+        "eventType": "episodeFileDeleted",
+        "id": 2664,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "seriesId": 33,
+        "sourceTitle": "/tv/Yellowjackets/Season 02/Yellowjackets (2021) - S02E04 - Old Wounds [AMZN][WEBDL-1080p][EAC3 5.1][h264]-NTb.mkv"
+      }
+    ],
+    "sortDirection": "descending",
+    "sortKey": "date",
+    "totalRecords": 2369
+  },
+  "recordedAt": "2026-11-10T20:45:35Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/history?page=1&pageSize=3&sortKey=date&sortDirection=descending&includeEpisode=true"
+  },
+  "status": 200
+}

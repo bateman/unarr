@@ -101,6 +101,11 @@ impl Rolling {
             return;
         }
         let result = (|| {
+            // `DeleteLogFiles` removes the file under the writer: a new one
+            // is started (the originals do not keep theirs open either).
+            if self.file.is_some() && !self.path().exists() {
+                self.file = None;
+            }
             if self.file.is_none() {
                 self.open()?;
             }

@@ -6,7 +6,7 @@ use anyhow::Context;
 use clap::Parser;
 use tracing_subscriber::layer::SubscriberExt;
 use tracing_subscriber::util::SubscriberInitExt;
-use unarr_api::{AppState, LogBuffer, LogFiles, ProcessLog, RuntimeInfo, Settings};
+use unarr_api::{AppState, Lifecycle, LogBuffer, LogFiles, ProcessLog, RuntimeInfo, Settings};
 use unarr_core::config::{AuthenticationMethod, AuthenticationRequired, HostConfig};
 use unarr_core::{Db, Personality};
 
@@ -577,12 +577,27 @@ fn main() -> anyhow::Result<()> {
     // Every personality has the lines of the start; no need to keep them.
     process_log.seal();
 
-    tokio::runtime::Builder::new_current_thread()
+    // Until a signal, or a shutdown or restart asked through the API.
+    let states: Vec<AppState> = running.iter().map(|p| p.state.clone()).collect();
+    let asked = tokio::runtime::Builder::new_current_thread()
         .enable_all()
         .build()
         .context("starting the signal handler")?
-        .block_on(shutdown_signal());
-    tracing::info!("shutting down");
+        .block_on(async {
+            let from_api = futures_first(states.iter().map(|s| s.lifecycle_requested()));
+            tokio::select! {
+                _ = shutdown_signal() => Lifecycle::Shutdown,
+                what = from_api => {
+                    // Let the answer to the request leave first.
+                    tokio::time::sleep(std::time::Duration::from_millis(500)).await;
+                    what
+                }
+            }
+        });
+    match asked {
+        Lifecycle::Shutdown => tracing::info!("shutting down"),
+        Lifecycle::Restart => tracing::info!("restarting"),
+    }
     // Running commands get a moment to finish: a grab cut between the
     // client and its history row would leave an untracked download.
     for personality in &running {
@@ -594,7 +609,46 @@ fn main() -> anyhow::Result<()> {
             });
         });
     }
+    if asked == Lifecycle::Restart {
+        // The listeners and the databases go with the runtimes; then the
+        // same program takes this process's place, with its arguments.
+        drop(running);
+        restart_in_place()?;
+    }
     Ok(())
+}
+
+/// The first of several futures to finish; never, when there are none.
+async fn futures_first<F: std::future::Future>(futures: impl Iterator<Item = F>) -> F::Output {
+    let mut all: Vec<std::pin::Pin<Box<F>>> = futures.map(Box::pin).collect();
+    std::future::poll_fn(move |cx| {
+        for f in all.iter_mut() {
+            if let std::task::Poll::Ready(out) = f.as_mut().poll(cx) {
+                return std::task::Poll::Ready(out);
+            }
+        }
+        std::task::Poll::Pending
+    })
+    .await
+}
+
+/// `LifecycleService.Restart`: start again as the same program. Where the
+/// process cannot be replaced, it exits and whatever supervises it (the
+/// container's restart policy) starts it again.
+fn restart_in_place() -> anyhow::Result<()> {
+    #[cfg(unix)]
+    {
+        use std::os::unix::process::CommandExt;
+        let program = std::env::current_exe().context("finding the running program")?;
+        let error = std::process::Command::new(program)
+            .args(std::env::args_os().skip(1))
+            .exec();
+        Err(error).context("starting again")
+    }
+    #[cfg(not(unix))]
+    {
+        Ok(())
+    }
 }
 
 #[cfg(test)]

@@ -45,6 +45,28 @@ pub fn list_root_folders(conn: &Connection) -> anyhow::Result<Vec<RootFolder>> {
     Ok(rows.collect::<Result<_, _>>()?)
 }
 
+/// `QualityDefinitionService.Execute(ResetQualityDefinitionsCommand)`:
+/// every definition's sizes back to the defaults, its title too when
+/// asked.
+pub fn reset_quality_definitions(conn: &Connection, reset_titles: bool) -> anyhow::Result<()> {
+    for default in crate::quality::SONARR_QUALITIES {
+        conn.execute(
+            "UPDATE quality_definitions SET min_size = ?2, max_size = ?3, preferred_size = ?4,
+                title = CASE WHEN ?5 THEN ?6 ELSE title END
+             WHERE quality_id = ?1",
+            params![
+                default.quality.id,
+                default.min_size,
+                default.max_size,
+                default.preferred_size,
+                reset_titles,
+                default.quality.name
+            ],
+        )?;
+    }
+    Ok(())
+}
+
 pub fn insert_quality_definition(conn: &Connection, d: &QualityDefinition) -> anyhow::Result<()> {
     conn.execute(
         "INSERT INTO quality_definitions (id, quality_id, title, min_size, max_size, preferred_size)

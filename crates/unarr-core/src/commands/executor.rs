@@ -54,6 +54,15 @@ pub enum Event {
 /// change (and after the start).
 const HEALTH_DELAY: std::time::Duration = std::time::Duration::from_secs(5);
 
+/// What only the program hosting the runtime can do: it holds the recent
+/// log lines, the log files and the host settings.
+#[derive(Clone)]
+pub struct HostHooks {
+    pub clear_log: Arc<dyn Fn() + Send + Sync>,
+    pub delete_log_files: Arc<dyn Fn() -> anyhow::Result<()> + Send + Sync>,
+    pub reset_api_key: Arc<dyn Fn() -> anyhow::Result<()> + Send + Sync>,
+}
+
 pub struct Runtime {
     db: Db,
     queue: Arc<CommandQueue>,
@@ -93,6 +102,8 @@ pub struct Runtime {
     media_cover_dir: std::sync::RwLock<Option<std::path::PathBuf>>,
     /// What the Backup command needs; without it the command does nothing.
     backup: std::sync::RwLock<Option<crate::backup::BackupContext>>,
+    /// What only the host of the runtime can do, when it said how.
+    host: std::sync::RwLock<Option<HostHooks>>,
     /// `EpisodeRefreshedService._searchCache`: recently aired episodes a
     /// refresh added, searched for once the series is scanned.
     refreshed_search: Mutex<std::collections::HashMap<i64, Vec<i64>>>,
@@ -147,6 +158,7 @@ impl Runtime {
             scene: crate::tv::scene::SceneState::default(),
             media_cover_dir: std::sync::RwLock::new(None),
             backup: std::sync::RwLock::new(None),
+            host: std::sync::RwLock::new(None),
             refreshed_search: Mutex::new(std::collections::HashMap::new()),
         });
         *runtime.me.lock().unwrap() = Arc::downgrade(&runtime);
@@ -176,6 +188,11 @@ impl Runtime {
     /// Where the series covers live (`<app data>/MediaCover`).
     pub fn set_media_cover_dir(&self, dir: std::path::PathBuf) {
         *self.media_cover_dir.write().unwrap() = Some(dir);
+    }
+
+    /// How the commands that act on the host (its log, its API key) do it.
+    pub fn set_host_hooks(&self, hooks: HostHooks) {
+        *self.host.write().unwrap() = Some(hooks);
     }
 
     /// Where the Backup command finds the app data, and Unarr's version.
@@ -745,9 +762,39 @@ impl Runtime {
                 self.progress(id, "Backup zip created".into());
                 Ok(())
             }
-            CommandBody::Housekeeping
-            | CommandBody::ApplicationUpdateCheck { .. }
-            | CommandBody::CleanUpRecycleBin => {
+            CommandBody::Housekeeping => {
+                let now = self.now();
+                self.db
+                    .call(move |conn| Ok(crate::housekeeping::run(conn, now)))
+                    .await?;
+                Ok(())
+            }
+            CommandBody::ClearLog | CommandBody::DeleteLogFiles | CommandBody::ResetApiKey => {
+                let hooks = self.host.read().unwrap().clone();
+                let Some(hooks) = hooks else {
+                    anyhow::bail!("{} needs a host, and none is attached", model.body.name());
+                };
+                let what = model.body.clone();
+                tokio::task::spawn_blocking(move || match what {
+                    CommandBody::ClearLog => {
+                        (hooks.clear_log)();
+                        Ok(())
+                    }
+                    CommandBody::DeleteLogFiles => (hooks.delete_log_files)(),
+                    _ => (hooks.reset_api_key)(),
+                })
+                .await?
+            }
+            // No updater, no update log.
+            CommandBody::DeleteUpdateLogFiles => Ok(()),
+            CommandBody::ResetQualityDefinitions { reset_titles } => {
+                let reset_titles = *reset_titles;
+                self.db
+                    .call(move |conn| store::catalog::reset_quality_definitions(conn, reset_titles))
+                    .await?;
+                Ok(())
+            }
+            CommandBody::ApplicationUpdateCheck { .. } | CommandBody::CleanUpRecycleBin => {
                 tracing::debug!(name = model.name(), "nothing to do for this command yet");
                 Ok(())
             }
@@ -962,7 +1009,10 @@ impl Runtime {
         // completion is what flushes the media servers' update queues.
         self.check_health_after_import(&events);
         for e in events {
-            if let ImportEvent::SeriesScanned { series_id } = &e {
+            // `SeriesScannedHandler` handles a skipped scan as a scan.
+            if let ImportEvent::SeriesScanned { series_id } | ImportEvent::SeriesScanSkipped { series_id } =
+                &e
+            {
                 self.after_scan(*series_id).await;
             }
             if let ImportEvent::RescanRequested { series_id } = &e {
