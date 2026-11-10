@@ -422,5 +422,17 @@ async fn a_cover_size_that_was_not_made_is_served_from_the_full_cover() {
         get("/MediaCover/6/poster-1000.jpg").await.0,
         StatusCode::NOT_FOUND
     );
+    // The folder stays behind the login.
+    let anonymous = app
+        .clone()
+        .oneshot(
+            Request::builder()
+                .uri("/MediaCover/5/poster-1000.jpg")
+                .body(Body::empty())
+                .unwrap(),
+        )
+        .await
+        .unwrap();
+    assert_eq!(anonymous.status(), StatusCode::FOUND);
     std::fs::remove_dir_all(&app_data).unwrap();
 }
