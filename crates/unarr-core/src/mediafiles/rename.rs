@@ -151,6 +151,13 @@ pub fn rename_files(
         }
     }
     if !renamed.is_empty() {
+        // `ExtraService.Handle(SeriesRenamedEvent)`: the subtitles and other
+        // extras of the series' files follow them to their names.
+        let series_id = series.id;
+        let all = db.call_blocking(move |conn| store::episodes::list_files(conn, series_id))?;
+        if let Err(e) = super::extras::move_after_rename(db, series, &all, now) {
+            tracing::warn!(error = %e, "Unable to move the extra files of {}", series.title);
+        }
         transfer::remove_empty_subfolders(std::path::Path::new(&series.path));
         events.push(ImportEvent::SeriesRenamed {
             series_id: series.id,

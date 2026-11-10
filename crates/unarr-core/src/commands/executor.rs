@@ -798,8 +798,21 @@ impl Runtime {
                     .await?;
                 Ok(())
             }
-            CommandBody::ApplicationUpdateCheck { .. } | CommandBody::CleanUpRecycleBin => {
-                tracing::debug!(name = model.name(), "nothing to do for this command yet");
+            CommandBody::CleanUpRecycleBin => {
+                let now = self.now();
+                let config = self
+                    .db
+                    .call(|conn| crate::store::config::MediaManagementConfig::load(conn))
+                    .await?;
+                tokio::task::spawn_blocking(move || {
+                    crate::mediafiles::transfer::clean_up_recycle_bin(&config, now)
+                })
+                .await?;
+                Ok(())
+            }
+            CommandBody::ApplicationUpdateCheck { .. } => {
+                // Unarr is updated by replacing its image.
+                tracing::debug!(name = model.name(), "nothing to do for this command");
                 Ok(())
             }
         }

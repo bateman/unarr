@@ -21,6 +21,7 @@ const MIGRATIONS: &[&str] = &[
     include_str!("../migrations/0006_import.sql"),
     include_str!("../migrations/0007_import_lists.sql"),
     include_str!("../migrations/0008_episode_statistics.sql"),
+    include_str!("../migrations/0009_extra_files.sql"),
 ];
 
 type Job = Box<dyn FnOnce(&mut Connection) + Send + 'static>;

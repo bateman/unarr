@@ -30,6 +30,8 @@ pub fn delete_file(
 ) -> anyhow::Result<EpisodeFileDeleted> {
     let episodes = store::episodes::list_episodes_by_file(conn, file.id)?;
     store::episodes::delete_file(conn, file.id)?;
+    // Its subtitles and other extras go with it.
+    super::extras::episode_file_deleted(conn, config, series, file.id, reason)?;
     // `EpisodeService.Handle(EpisodeFileDeletedEvent)`.
     let unmonitor_for_reason = !matches!(
         reason,

@@ -110,6 +110,9 @@ opened), and the recording corrected two of the findings.
 | 21. Certificate validation | Fixed: enabled, disabled for local addresses, disabled; this machine is always let through, as in the original. Tried against a local server with a self-signed certificate. |
 | 22. Log level and environment overrides | Fixed. `RUST_LOG`, when set, still decides the level. `ConsoleLogLevel` and the syslog settings are not read. |
 | 25. `TrustCgnatIpAddresses` | Fixed, read from `config.xml`, the saved settings and the environment. |
+| 4. `CleanUpRecycleBin` | Fixed: files in the bin for longer than the configured days go, with the folders that leaves empty. |
+| 16. Import Extra Files | Fixed: the listed extensions come in with a download (subtitles named by language and tags, anything else under the episode file's name). Beyond the finding: extras found by a scan are remembered, follow a rename and leave with the episode file, and the original's subtitle rows are imported. Metadata consumers stay undriven. |
+| 17. Files without media info | Fixed: probed again after every scan of their series. |
 | 23. Session length and `Secure` | Fixed: seven days from the last use, renewed past half its life; `Secure` when a trusted proxy says the request came over HTTPS. Sessions open at the upgrade end once: the signing key is now a random one kept in the database, not derived from the API key. |
 | 24. `/initialize.json` without `no-store` | Fixed. |
 
@@ -117,4 +120,4 @@ Not recorded against the original, and so not changed: `PUT
 config/naming` does not yet refuse a format whose sample name fails the
 same parse-back check.
 
-Still open: 4, 5, 8, 13, 16, 17, 19, 20 and the low ones.
+Still open: 5, 8, 13, 19, 20 and the low ones.

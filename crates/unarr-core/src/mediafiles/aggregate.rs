@@ -160,6 +160,24 @@ fn episodes_for(lookup: &dyn Lookup, local: &LocalEpisode) -> Vec<Episode> {
     episodes
 }
 
+/// The episodes a file already in the series' folder belongs to, by what
+/// its path parses to: how an extra found by a scan (a subtitle, an nfo)
+/// is matched to an episode file.
+pub fn episodes_of_existing_file(
+    lookup: &dyn Lookup,
+    series: &crate::model::Series,
+    path: &str,
+) -> Vec<Episode> {
+    let local = LocalEpisode {
+        file_episode_info: parser::parse_path(path),
+        series: Some(series.clone()),
+        path: path.to_string(),
+        existing_file: true,
+        ..Default::default()
+    };
+    episodes_for(lookup, &local)
+}
+
 /// `ValidateParsedEpisodeInfo.ValidateForSeriesType(info, series, isMediaFile)`:
 /// a daily-style name for a standard series is no good, unless it is not a
 /// media file at all.

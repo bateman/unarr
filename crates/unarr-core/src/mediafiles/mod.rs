@@ -21,6 +21,7 @@ pub mod decide;
 pub mod deletion;
 pub mod downloaded;
 pub mod events;
+pub mod extras;
 pub mod format;
 pub mod local;
 pub mod manual;

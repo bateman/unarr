@@ -144,6 +144,51 @@ pub fn clean_media_files(
     Ok(events)
 }
 
+/// `UpdateMediaInfoService.Handle(SeriesScannedEvent)`: the files of the
+/// series that have no media info, or one of a schema older than the
+/// least still read, are probed again. Returns how many got theirs. The
+/// probing runs here, not on the database's thread: a library imported
+/// without media info has thousands of such files.
+pub fn backfill_media_info(
+    db: &Db,
+    config: &MediaManagementConfig,
+    series: &Series,
+) -> anyhow::Result<usize> {
+    if !config.enable_media_info {
+        tracing::debug!("MediaInfo is disabled");
+        return Ok(0);
+    }
+    let series_id = series.id;
+    let stale: Vec<EpisodeFile> = db
+        .call_blocking(move |conn| store::episodes::list_files(conn, series_id))?
+        .into_iter()
+        .filter(|file| {
+            let revision = file
+                .media_info
+                .as_ref()
+                .filter(|info| !info.is_null())
+                .map(|info| info.get("schemaRevision").and_then(|r| r.as_i64()).unwrap_or(0));
+            revision.is_none_or(|r| r < mediainfo::MINIMUM_MEDIA_INFO_SCHEMA_REVISION)
+        })
+        .collect();
+    let mut updated = 0;
+    for mut file in stale {
+        let path = super::join(&series.path, &file.relative_path);
+        if !Path::new(&path).is_file() {
+            tracing::debug!("Can't update MediaInfo because '{path}' does not exist");
+            continue;
+        }
+        let Some(info) = mediainfo::probe(Path::new(&path)) else {
+            continue;
+        };
+        file.media_info = Some(info.model);
+        db.call_blocking(move |conn| store::episodes::update_file(conn, &file))?;
+        tracing::debug!("Updated MediaInfo for '{path}'");
+        updated += 1;
+    }
+    Ok(updated)
+}
+
 /// `UpdateMediaInfoService.Update(episodeFile, series)`: the media info
 /// read again; `true` when the row was written.
 pub fn update_media_info(
@@ -214,6 +259,17 @@ pub fn scan(
         events
             .0
             .extend(db.call_blocking(move |conn| clean_media_files(conn, &config, &series2, &[], now))?);
+        // `ExistingExtraFileService`: the subtitles and other extras in the
+        // folder are remembered with the episode files they belong to.
+        if Path::new(&series.path).is_dir() {
+            let extras: Vec<String> = files_in(&series.path, true)
+                .into_iter()
+                .filter(|f| !crate::parser::media_extensions::is_media_extension(super::extension(f)))
+                .collect();
+            let possible = filter_paths(&series.path, &extras, true);
+            let series2 = series.clone();
+            db.call_blocking(move |conn| super::extras::import_existing(conn, &series2, &possible, now))?;
+        }
         tracing::info!("Completed scanning disk for {}", series.title);
         unmonitor_missing(db, &env.config, &events)?;
         events.push(ImportEvent::SeriesScanned { series_id: series.id });
@@ -289,6 +345,7 @@ pub fn scan(
             Ok(())
         })?;
     }
+    backfill_media_info(db, &env.config, series)?;
     if env.config.delete_empty_folders {
         transfer::remove_empty_subfolders(Path::new(&series.path));
         if transfer::folder_empty(Path::new(&series.path)) {
@@ -334,6 +391,108 @@ fn unmonitor_missing(db: &Db, config: &MediaManagementConfig, events: &Events) -
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// Files that came without media info, or with one too old to read,
+    /// get it; those that have it are left alone.
+    #[test]
+    fn files_without_media_info_are_probed_again() {
+        if !mediainfo::ffprobe_available() {
+            eprintln!("ffprobe not available, skipping");
+            return;
+        }
+        use crate::model::{QualityModel, ReleaseType};
+        let folder = std::env::temp_dir().join(format!("unarr_backfill_{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&folder);
+        std::fs::create_dir_all(&folder).unwrap();
+        let clip = Path::new(env!("CARGO_MANIFEST_DIR")).join("../../tests/fixtures/media/episode.mkv");
+        for name in ["none.mkv", "old.mkv", "current.mkv"] {
+            std::fs::copy(&clip, folder.join(name)).unwrap();
+        }
+        let db = Db::open_in_memory().unwrap();
+        let mut series = crate::store::series::tests::sample(1);
+        series.path = folder.to_string_lossy().into_owned();
+        let stored = series.clone();
+        db.call_blocking(move |conn| {
+            // The sample series' profile and tag, for the foreign keys.
+            conn.execute_batch(
+                "INSERT INTO quality_profiles (id, name, cutoff, items) VALUES (1, 'Any', 1, '[]');
+                 INSERT INTO tags (id, label) VALUES (1, 'drama');",
+            )?;
+            crate::store::series::insert(conn, &stored)?;
+            let rows = [
+                (1, "none.mkv", None),
+                (
+                    2,
+                    "old.mkv",
+                    Some(serde_json::json!({"schemaRevision": 5, "videoFormat": "stale"})),
+                ),
+                (
+                    3,
+                    "current.mkv",
+                    Some(serde_json::json!({"schemaRevision": 11, "videoFormat": "kept"})),
+                ),
+                (4, "gone.mkv", None),
+            ];
+            for (id, name, media_info) in rows {
+                store::episodes::insert_file(
+                    conn,
+                    &EpisodeFile {
+                        id,
+                        series_id: 1,
+                        season_number: 1,
+                        relative_path: name.into(),
+                        original_file_path: None,
+                        size: 1,
+                        date_added: Utc::now(),
+                        scene_name: None,
+                        release_group: None,
+                        release_hash: None,
+                        quality: QualityModel {
+                            quality_id: 7,
+                            version: 1,
+                            real: 0,
+                            is_repack: false,
+                        },
+                        languages: vec![1],
+                        media_info,
+                        indexer_flags: 0,
+                        release_type: ReleaseType::SingleEpisode,
+                    },
+                )?;
+            }
+            Ok(())
+        })
+        .unwrap();
+
+        let mut config = MediaManagementConfig {
+            enable_media_info: false,
+            ..Default::default()
+        };
+        assert_eq!(
+            backfill_media_info(&db, &config, &series).unwrap(),
+            0,
+            "switched off"
+        );
+        config.enable_media_info = true;
+        assert_eq!(backfill_media_info(&db, &config, &series).unwrap(), 2);
+        let files = db
+            .call_blocking(|conn| store::episodes::list_files(conn, 1))
+            .unwrap();
+        let format = |id: i64| {
+            files
+                .iter()
+                .find(|f| f.id == id)
+                .and_then(|f| f.media_info.as_ref())
+                .map(|info| info["videoFormat"].as_str().unwrap_or_default().to_string())
+        };
+        assert_eq!(format(1).as_deref(), Some("h264"));
+        assert_eq!(format(2).as_deref(), Some("h264"));
+        assert_eq!(format(3).as_deref(), Some("kept"));
+        assert_eq!(format(4), None, "a file that is not there keeps none");
+        // Nothing left to do.
+        assert_eq!(backfill_media_info(&db, &config, &series).unwrap(), 0);
+        let _ = std::fs::remove_dir_all(&folder);
+    }
 
     /// A series whose root folder is missing or empty is not scanned, and
     /// says so: the series' post-add actions hang on that.

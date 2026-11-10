@@ -649,6 +649,12 @@ fn import_one(
     file = file2;
     episodes = episodes2;
     local.episodes = episodes;
+    if new_download {
+        // `ExtraService.ImportEpisode`: what came with the video.
+        if let Err(e) = super::extras::import_episode(db, &env.config, local, &file, copy_only, now) {
+            tracing::warn!(error = %e, "Failed to import the extra files of {}", local.path);
+        }
+    }
     Ok((file, old_files))
 }
 

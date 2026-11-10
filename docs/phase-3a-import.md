@@ -97,7 +97,9 @@ sees the new file; their Discord gets the message.
 
 Out of scope: adding, refreshing or deleting series, metadata providers,
 MediaCover, the remaining settings writes (all 3b); subtitle and extra files
-beyond keeping Bazarr's files where they are; Radarr and Lidarr.
+beyond keeping Bazarr's files where they are (done after the audit of
+November 2026: they now follow the episode file as in the originals, see
+`docs/DESIGN.md` section 14); Radarr and Lidarr.
 
 ## Exit criteria
 

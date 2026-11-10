@@ -192,6 +192,43 @@ pub fn recycle_folder(config: &MediaManagementConfig, path: &Path) -> Result<(),
     Ok(())
 }
 
+/// `RecycleBinProvider.Cleanup` (`CleanUpRecycleBin`, daily): the files
+/// that have been in the bin for more than the configured days are
+/// deleted, and the folders left empty with them. Returns how many files
+/// went; nothing happens without a bin, or with the days at zero.
+pub fn clean_up_recycle_bin(config: &MediaManagementConfig, now: DateTime<Utc>) -> usize {
+    let bin = config.recycle_bin.trim();
+    if bin.is_empty() {
+        tracing::info!("Recycle Bin has not been configured, cannot cleanup.");
+        return 0;
+    }
+    let days = config.recycle_bin_cleanup_days;
+    if days == 0 {
+        tracing::info!("Automatic cleanup of Recycle Bin is disabled");
+        return 0;
+    }
+    tracing::info!("Removing items older than {days} days from the recycling bin");
+    let mut removed = 0;
+    for file in files_under(Path::new(bin)) {
+        // The time it was put in the bin: `recycle_file` stamps it.
+        let written: Option<DateTime<Utc>> = fs::metadata(&file)
+            .and_then(|m| m.modified())
+            .ok()
+            .map(DateTime::<Utc>::from);
+        if written.is_none_or(|at| at + chrono::Duration::days(days) > now) {
+            tracing::debug!("File hasn't expired yet, skipping: {}", file.display());
+            continue;
+        }
+        match fs::remove_file(&file) {
+            Ok(()) => removed += 1,
+            Err(e) => tracing::warn!(error = %e, "Unable to delete {}", file.display()),
+        }
+    }
+    remove_empty_subfolders(Path::new(bin));
+    tracing::debug!("Recycling Bin has been cleaned up.");
+    removed
+}
+
 fn copy_tree(from: &Path, to: &Path) -> io::Result<()> {
     fs::create_dir_all(to)?;
     for entry in fs::read_dir(from)? {
@@ -457,6 +494,27 @@ mod tests {
         fs::write(&file, b"v").unwrap();
         let second = recycle_file(&config, &file, "Show/Season 01").unwrap().unwrap();
         assert_eq!(second, dir.join("bin/Show/Season 01/x_2.mkv"));
+
+        // The clean-up takes what has been in the bin for longer than the
+        // days set, and the folders that leaves empty.
+        let old = dir.join("bin/Gone/Season 02/old.mkv");
+        fs::create_dir_all(old.parent().unwrap()).unwrap();
+        fs::write(&old, b"v").unwrap();
+        let now = Utc::now();
+        set_last_write_time(&old, now - chrono::Duration::days(8));
+        config.recycle_bin_cleanup_days = 0;
+        assert_eq!(clean_up_recycle_bin(&config, now), 0, "disabled");
+        config.recycle_bin_cleanup_days = 7;
+        assert_eq!(clean_up_recycle_bin(&config, now), 1);
+        assert!(!dir.join("bin/Gone").exists(), "emptied folders go");
+        assert!(first.exists() && second.exists(), "recent files stay");
+        assert_eq!(clean_up_recycle_bin(&config, now + chrono::Duration::days(8)), 2);
+        assert!(dir.join("bin").exists() && !dir.join("bin/Show").exists());
+        assert_eq!(
+            clean_up_recycle_bin(&MediaManagementConfig::default(), now),
+            0,
+            "no bin"
+        );
 
         fs::create_dir_all(dir.join("show/Season 01/empty")).unwrap();
         fs::write(dir.join("show/Season 01/keep.mkv"), b"v").unwrap();

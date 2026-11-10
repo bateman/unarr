@@ -19,6 +19,7 @@ use serde_json::{json, Value};
 use unarr_core::decision::{ReleaseSource, SeriesMatchType};
 use unarr_core::downloads::pending::{PendingRelease, PendingReleaseReason};
 use unarr_core::indexers::rss::ReleaseInfo;
+use unarr_core::mediafiles::extras::{ExtraFile, Kind as ExtraKind};
 use unarr_core::model::*;
 use unarr_core::store;
 use unarr_core::store::download_history::{DownloadHistoryEntry, DownloadHistoryEvent};
@@ -70,6 +71,8 @@ const HANDLED_TABLES: &[&str] = &[
     "Users",
     "ScheduledTasks",
     "Blocklist",
+    "SubtitleFiles",
+    "ExtraFiles",
     "SceneMappings",
     "NamingConfig",
     "Config",
@@ -787,6 +790,43 @@ pub fn import(legacy_db: &Path, db: &Db) -> anyhow::Result<ImportReport> {
             release_type: release_type(r.or("ReleaseType", 0)?),
         })
     })?;
+    // Subtitles and other extras that go with episode files.
+    let extra = |kind: ExtraKind| {
+        move |r: &LegacyRow| -> anyhow::Result<ExtraFile> {
+            Ok(ExtraFile {
+                id: 0,
+                kind,
+                series_id: r.req("SeriesId")?,
+                season_number: r.opt("SeasonNumber")?,
+                episode_file_id: r.opt("EpisodeFileId")?,
+                relative_path: r.text("RelativePath")?.unwrap_or_default(),
+                extension: r.text("Extension")?.unwrap_or_default(),
+                added: r.timestamp("Added")?,
+                language: if kind == ExtraKind::Subtitle {
+                    r.or("Language", 0)?
+                } else {
+                    0
+                },
+                language_tags: if kind == ExtraKind::Subtitle {
+                    r.json("LanguageTags")?
+                } else {
+                    Vec::new()
+                },
+                title: if kind == ExtraKind::Subtitle {
+                    r.text("Title")?
+                } else {
+                    None
+                },
+                copy: if kind == ExtraKind::Subtitle {
+                    r.or("Copy", 0)?
+                } else {
+                    0
+                },
+            })
+        }
+    };
+    let subtitle_files = read_table(&legacy, "SubtitleFiles", extra(ExtraKind::Subtitle))?;
+    let other_extra_files = read_table(&legacy, "ExtraFiles", extra(ExtraKind::Other))?;
     let scene_mappings = read_table(&legacy, "SceneMappings", |r| {
         Ok(SceneMapping {
             id: r.req("Id")?,
@@ -1039,6 +1079,8 @@ pub fn import(legacy_db: &Path, db: &Db) -> anyhow::Result<ImportReport> {
         ("Users", users.len()),
         ("ScheduledTasks", scheduled_tasks.len()),
         ("Blocklist", blocklist.len()),
+        ("SubtitleFiles", subtitle_files.len()),
+        ("ExtraFiles", other_extra_files.len()),
         ("SceneMappings", scene_mappings.len()),
         ("NamingConfig", naming.len()),
         ("Config", config.len()),
@@ -1150,6 +1192,19 @@ pub fn import(legacy_db: &Path, db: &Db) -> anyhow::Result<ImportReport> {
         for m in &scene_mappings {
             store::scene::insert(&tx, m)?;
         }
+        // Those of a series that is still there; each gets a new id, the
+        // two tables of the original being one here.
+        let now = chrono::Utc::now();
+        for e in subtitle_files.iter().chain(&other_extra_files) {
+            let known: bool = tx.query_row(
+                "SELECT EXISTS(SELECT 1 FROM series WHERE id = ?1)",
+                [e.series_id],
+                |r| r.get(0),
+            )?;
+            if known {
+                unarr_core::mediafiles::extras::upsert(&tx, &mut e.clone(), now)?;
+            }
+        }
         for p in &pending_releases {
             store::pending::insert(&tx, p)?;
         }
@@ -1249,6 +1304,8 @@ mod tests {
             ("EpisodeFiles", 346),
             ("History", 1998),
             ("Blocklist", 220),
+            ("SubtitleFiles", 162),
+            ("ExtraFiles", 0),
             ("QualityProfiles", 10),
             ("QualityDefinitions", 22),
             ("CustomFormats", 40),
@@ -1281,7 +1338,7 @@ mod tests {
         // Tables with rows nothing reads are reported, not silently dropped.
         assert_eq!(
             report.skipped.keys().map(String::as_str).collect::<Vec<_>>(),
-            ["MetadataFiles", "SubtitleFiles"],
+            ["MetadataFiles"],
             "{:?}",
             report.skipped
         );

@@ -22,10 +22,11 @@ pub type Report = Vec<(&'static str, usize)>;
 
 type Housekeeper = fn(&Connection, DateTime<Utc>) -> anyhow::Result<usize>;
 
-const HOUSEKEEPERS: [(&str, Housekeeper); 9] = [
+const HOUSEKEEPERS: [(&str, Housekeeper); 10] = [
     ("CleanupOrphanedBlocklist", orphaned_blocklist),
     ("CleanupOrphanedEpisodeFiles", orphaned_episode_files),
     ("CleanupOrphanedEpisodes", orphaned_episodes),
+    ("CleanupOrphanedExtraFiles", orphaned_extra_files),
     ("CleanupOrphanedHistoryItems", orphaned_history),
     ("CleanupOrphanedPendingReleases", orphaned_pending_releases),
     (
@@ -92,6 +93,21 @@ fn orphaned_history(conn: &Connection, _: DateTime<Utc>) -> anyhow::Result<usize
         [],
     )?;
     Ok(by_series + by_episode)
+}
+
+/// Subtitles and other extras of a series, or of an episode file, that is
+/// gone (`CleanupOrphanedExtraFiles`, `CleanupOrphanedSubtitleFiles`).
+fn orphaned_extra_files(conn: &Connection, _: DateTime<Utc>) -> anyhow::Result<usize> {
+    let by_series = conn.execute(
+        "DELETE FROM extra_files WHERE series_id NOT IN (SELECT id FROM series)",
+        [],
+    )?;
+    let by_file = conn.execute(
+        "DELETE FROM extra_files WHERE episode_file_id > 0
+            AND episode_file_id NOT IN (SELECT id FROM episode_files)",
+        [],
+    )?;
+    Ok(by_series + by_file)
 }
 
 fn orphaned_pending_releases(conn: &Connection, _: DateTime<Utc>) -> anyhow::Result<usize> {

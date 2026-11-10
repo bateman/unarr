@@ -6,6 +6,7 @@ pub mod language;
 pub mod media_extensions;
 pub mod netregex;
 pub mod quality;
+pub mod subtitles;
 pub mod title;
 
 pub use quality::{Detection, ParsedQuality};

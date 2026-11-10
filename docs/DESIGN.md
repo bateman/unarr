@@ -877,6 +877,21 @@ a query; section 15 asks which library size the target is for.
   ignore it (recorded), and changes only with `ResetApiKey`. Sessions
   last seven days from their last use and are signed with a random key
   kept in the database, not one derived from the API key.
+- **Subtitles and other extras are one table.** The originals keep
+  `SubtitleFiles`, `ExtraFiles` and `MetadataFiles`; Unarr keeps the
+  first two in `extra_files` and imports their rows. With "Import Extra
+  Files" on, the listed extensions come in with a download. With it on
+  or off, a scan remembers the extras next to episode files, a rename
+  takes them along and deleting the episode file sends them to the
+  recycling bin, as in the originals. Unarr drives no metadata consumer
+  (section 15): an nfo or image whose name parses to an episode is
+  remembered as an other extra, and the `MetadataFiles` rows are not
+  imported.
+- **Media info is read off the database's thread when it is missing.**
+  After a scan the files without media info, or with one older than the
+  least schema still read, are probed again, as the originals do; a
+  library imported without it would otherwise hold the database for
+  minutes.
 - **Outgoing connections follow Settings > General while running.** The
   proxy (HTTP, SOCKS4, SOCKS5, with the bypass list as the originals'
   runtime reads it: regular expressions over `scheme://host[:port]`, plus
