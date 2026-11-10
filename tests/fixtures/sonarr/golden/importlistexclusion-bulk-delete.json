@@ -1,0 +1,10 @@
+{
+  "body": {},
+  "recordedAt": "2026-11-10T22:10:17Z",
+  "request": {
+    "body": "bodies/importlistexclusion-bulk-delete.json",
+    "method": "DELETE",
+    "path": "/api/v3/importlistexclusion/bulk"
+  },
+  "status": 200
+}

@@ -271,6 +271,79 @@ pub async fn add(
     new: NewSeries,
     now: DateTime<Utc>,
 ) -> Result<Series, WriteError> {
+    let (mut series, root) = with_provider_data(provider, new, now).await?;
+    db.call(move |conn| {
+        let failures = place_and_validate(conn, &mut series, root.as_deref())?;
+        if !failures.is_empty() {
+            return Ok(Err(failures));
+        }
+        Ok(Ok(insert_new(conn, series)?))
+    })
+    .await?
+    .map_err(WriteError::Invalid)
+}
+
+/// `AddSeriesService.AddSeries(List<Series>)`, as Library Import calls
+/// it: every series is looked up and validated against the library as it
+/// stands, and one that fails refuses the whole request. One already in
+/// the library, or named twice in the request, is left out without a
+/// word. The rest are added together.
+pub async fn add_many(
+    db: &Db,
+    provider: &dyn MetadataProvider,
+    list: Vec<NewSeries>,
+    now: DateTime<Utc>,
+) -> Result<Vec<Series>, WriteError> {
+    let mut prepared = Vec::new();
+    for new in list {
+        prepared.push(with_provider_data(provider, new, now).await?);
+    }
+    db.call(move |conn| {
+        let existing = store::series::tvdb_ids(conn)?;
+        let mut to_add: Vec<Series> = Vec::new();
+        for (mut series, root) in prepared {
+            let failures = place_and_validate(conn, &mut series, root.as_deref())?;
+            if !failures.is_empty() {
+                return Ok(Err(failures));
+            }
+            if existing.contains(&series.tvdb_id) {
+                tracing::debug!(
+                    "TVDB ID {} was not added due to validation failure: Series {} already exists in database",
+                    series.tvdb_id,
+                    series.title
+                );
+                continue;
+            }
+            if to_add.iter().any(|s| s.tvdb_id == series.tvdb_id) {
+                continue;
+            }
+            if let Some(other) = to_add.iter().find(|s| s.title_slug == series.title_slug) {
+                tracing::debug!(
+                    "TVDB ID {} was not added due to validation failure: Duplicate Slug {} used by series {}",
+                    series.tvdb_id,
+                    series.title_slug,
+                    other.tvdb_id
+                );
+                continue;
+            }
+            to_add.push(series);
+        }
+        let mut added = Vec::new();
+        for series in to_add {
+            added.push(insert_new(conn, series)?);
+        }
+        Ok(Ok(added))
+    })
+    .await?
+    .map_err(WriteError::Invalid)
+}
+
+/// `AddSkyhookData` and the request laid over it.
+async fn with_provider_data(
+    provider: &dyn MetadataProvider,
+    new: NewSeries,
+    now: DateTime<Utc>,
+) -> Result<(Series, Option<String>), WriteError> {
     let info = match provider.series_info(new.tvdb_id).await {
         Ok(info) => info,
         Err(MetadataError::SeriesNotFound(_)) => {
@@ -304,7 +377,6 @@ pub async fn add(
     series.series_type = new.series_type;
     series.tags = new.tags;
     series.add_options = new.add_options;
-    let root = new.root_folder_path.clone();
     series.path = new.path.clone().unwrap_or_default();
     series.added = now;
     if series
@@ -314,37 +386,48 @@ pub async fn add(
     {
         series.monitored = false;
     }
-    db.call(move |conn| {
-        if series.path.trim().is_empty() {
-            let naming = store::config::naming(conn)?;
-            let folder =
-                crate::naming::series_folder(&crate::mediafiles::approve::naming_series(&series), &naming);
-            series.path = crate::mediafiles::join(root.as_deref().unwrap_or(""), &folder);
-        }
-        // `AddSeriesValidator`.
-        if let Some(f) = path_rules(conn, 0, &series.path)? {
-            return Ok(Err(vec![f]));
-        }
-        if store::series::all_slugs(conn)?.contains(&series.title_slug) {
-            let mut f = ValidationFailure::rule(
-                "TitleSlug",
-                "SeriesTitleSlugValidator",
-                &format!(
-                    "Title slug '{}' is in use by series '{}'",
-                    series.title_slug, series.title
-                ),
-                json!(series.title_slug),
-            );
-            f.placeholders = vec![("slug".into(), json!(series.title_slug))];
-            return Ok(Err(vec![f]));
-        }
-        tracing::info!("Adding Series {} Path: [{}]", series.title, series.path);
-        series.id = store::sequence::next_id(conn, "series")?;
-        store::series::insert(conn, &series)?;
-        Ok(Ok(series))
-    })
-    .await?
-    .map_err(WriteError::Invalid)
+    Ok((series, new.root_folder_path))
+}
+
+/// `SetPropertiesAndValidate`: the folder named when the request gave
+/// none, then `AddSeriesValidator`, every rule of it.
+fn place_and_validate(
+    conn: &Connection,
+    series: &mut Series,
+    root: Option<&str>,
+) -> anyhow::Result<Vec<ValidationFailure>> {
+    if series.path.trim().is_empty() {
+        let naming = store::config::naming(conn)?;
+        let folder =
+            crate::naming::series_folder(&crate::mediafiles::approve::naming_series(series), &naming);
+        series.path = crate::mediafiles::join(root.unwrap_or(""), &folder);
+    }
+    let mut failures = Vec::new();
+    failures.extend(path_rules(conn, 0, &series.path)?);
+    if let Some(taken_by) = store::series::title_of_slug(conn, &series.title_slug)? {
+        let mut f = ValidationFailure::rule(
+            "TitleSlug",
+            "SeriesTitleSlugValidator",
+            &format!(
+                "Title slug '{}' is in use by series '{taken_by}'. Check the FAQ for more information",
+                series.title_slug
+            ),
+            json!(series.title_slug),
+        );
+        f.placeholders = vec![
+            ("seriesTitle".into(), json!(taken_by)),
+            ("slug".into(), json!(series.title_slug)),
+        ];
+        failures.push(f);
+    }
+    Ok(failures)
+}
+
+fn insert_new(conn: &Connection, mut series: Series) -> anyhow::Result<Series> {
+    tracing::info!("Adding Series {} Path: [{}]", series.title, series.path);
+    series.id = store::sequence::next_id(conn, "series")?;
+    store::series::insert(conn, &series)?;
+    Ok(series)
 }
 
 /// What a client sends back to edit a series (`SeriesResource.ToModel` and

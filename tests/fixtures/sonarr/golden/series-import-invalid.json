@@ -1,0 +1,17 @@
+{
+  "body": [
+    {
+      "attemptedValue": 999999999,
+      "errorMessage": "A series with this ID was not found. Path: /tv/Nobody Knows This One",
+      "propertyName": "TvdbId",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-10T22:10:17Z",
+  "request": {
+    "body": "bodies/series-import-invalid.json",
+    "method": "POST",
+    "path": "/api/v3/series/import"
+  },
+  "status": 400
+}

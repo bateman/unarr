@@ -787,3 +787,37 @@ config-host-after-credentials GET /api/v3/config/host
 config-host-put-apikey PUT /api/v3/config/host bodies/config-host-put-apikey.json
 noauth-newkey-system-status GET /api/v3/system/status?apikey=fedcba9876543210fedcba9876543210
 oldkey-system-status GET /api/v3/system/status
+
+# A series' cover through the API, for clients that hold the key and no
+# session. What is not there, and what is no image's name.
+mediacover-api-missing GET /api/v3/mediacover/1/nothere.jpg
+mediacover-api-missing-resized GET /api/v3/mediacover/1/nothere-500.jpg
+noauth-mediacover-api GET /api/v3/mediacover/1/nothere.jpg
+mediacover-api-bad-name GET /api/v3/mediacover/1/notes.txt
+mediacover-api-no-series GET /api/v3/mediacover/999999/poster.jpg
+# The calendar as iCalendar, for the applications that subscribe to it.
+feed-calendar GET /feed/v3/calendar/Sonarr.ics?pastDays=60&futureDays=60&unmonitored=true
+feed-calendar-default GET /feed/v3/calendar/Sonarr.ics
+feed-calendar-premieres GET /feed/v3/calendar/Sonarr.ics?pastDays=800&futureDays=60&unmonitored=true&premieresOnly=true&asAllDay=true
+feed-calendar-tags GET /feed/v3/calendar/Sonarr.ics?pastDays=60&futureDays=60&unmonitored=true&tags=1
+apikey-feed-calendar GET /feed/v3/calendar/Sonarr.ics?apikey=0123456789abcdef0123456789abcdef&pastDays=1&futureDays=1
+noauth-feed-calendar GET /feed/v3/calendar/Sonarr.ics
+# The selected import list exclusions removed.
+importlistexclusion-before-bulk GET /api/v3/importlistexclusion
+importlistexclusion-bulk-delete DELETE /api/v3/importlistexclusion/bulk bodies/importlistexclusion-bulk-delete.json
+importlistexclusion-after-bulk GET /api/v3/importlistexclusion
+# Library Import: several series at once. One nobody knows refuses them
+# all; one named twice is added once; one already there refuses again.
+series-import-invalid POST /api/v3/series/import bodies/series-import-invalid.json
+series-import POST /api/v3/series/import bodies/series-import.json
+sleep 25
+series-after-import GET /api/v3/series/{id:series-import}
+series-import-again POST /api/v3/series/import bodies/series-import.json
+mock - POST /mock/notifications/clear
+# Another series type: saved, and the series refreshed for it.
+series-type-before GET /api/v3/series/1
+series-type-change PUT /api/v3/series/1 bodies/series-type-change.json
+sleep 20
+series-type-after GET /api/v3/series/1
+series-type-restore PUT /api/v3/series/1 bodies/series-type-restore.json
+sleep 20

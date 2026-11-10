@@ -1,0 +1,14 @@
+{
+  "body": {
+    "status": 404,
+    "title": "Not Found",
+    "traceId": "00-1f00f0af159a243b4557cdc07e1ad1c8-00f0698022f6f56a-00",
+    "type": "https://tools.ietf.org/html/rfc7231#section-6.5.4"
+  },
+  "recordedAt": "2026-11-10T22:10:17Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/mediacover/999999/poster.jpg"
+  },
+  "status": 404
+}

@@ -1,0 +1,14 @@
+{
+  "body": {
+    "status": 404,
+    "title": "Not Found",
+    "traceId": "00-5847afbd675ae1ce518038210f704420-962b88351f0faba3-00",
+    "type": "https://tools.ietf.org/html/rfc7231#section-6.5.4"
+  },
+  "recordedAt": "2026-11-10T22:10:17Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/mediacover/1/nothere-500.jpg"
+  },
+  "status": 404
+}

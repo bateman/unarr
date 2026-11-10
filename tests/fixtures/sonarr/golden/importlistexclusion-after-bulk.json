@@ -1,0 +1,9 @@
+{
+  "body": [],
+  "recordedAt": "2026-11-10T22:10:17Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/importlistexclusion"
+  },
+  "status": 200
+}

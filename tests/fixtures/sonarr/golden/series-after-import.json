@@ -1,0 +1,119 @@
+{
+  "body": {
+    "added": "2026-11-10T22:10:17Z",
+    "airTime": "12:00",
+    "alternateTitles": [],
+    "cleanTitle": "thepeteholmesshow",
+    "ended": true,
+    "firstAired": "2013-10-28T00:00:00Z",
+    "genres": [
+      "Comedy",
+      "Talk Show"
+    ],
+    "id": 54,
+    "images": [
+      {
+        "coverType": "banner",
+        "remoteUrl": "https://artworks.thetvdb.com/banners/graphical/271728-g.jpg",
+        "url": "/MediaCover/54/banner.jpg?lastWrite=639299454176113244"
+      },
+      {
+        "coverType": "poster",
+        "remoteUrl": "https://artworks.thetvdb.com/banners/posters/271728-1.jpg",
+        "url": "/MediaCover/54/poster.jpg?lastWrite=639299454176135083"
+      },
+      {
+        "coverType": "fanart",
+        "remoteUrl": "https://artworks.thetvdb.com/banners/fanart/original/271728-1.jpg",
+        "url": "/MediaCover/54/fanart.jpg?lastWrite=639299454176149596"
+      }
+    ],
+    "imdbId": "tt3278316",
+    "languageProfileId": 1,
+    "lastAired": "2014-06-18T00:00:00Z",
+    "monitorNewItems": "all",
+    "monitored": true,
+    "originalLanguage": {
+      "id": 1,
+      "name": "English"
+    },
+    "overview": "Comedian Pete Holmes hosts the late night talk show \"The Pete Holmes Show\" (formerly known as \"The Midnight Show with Pete Holmes\") which is produced by Conan O'Brien and airs right after CONAN on TBS.",
+    "path": "/tv/Pete Holmes Show",
+    "previousAiring": "2014-06-18T16:00:00Z",
+    "qualityProfileId": 1,
+    "ratings": {
+      "value": 7.2,
+      "votes": 654
+    },
+    "rootFolderPath": "/tv",
+    "runtime": 25,
+    "seasonFolder": true,
+    "seasons": [
+      {
+        "monitored": false,
+        "seasonNumber": 0,
+        "statistics": {
+          "episodeCount": 0,
+          "episodeFileCount": 0,
+          "percentOfEpisodes": 0,
+          "releaseGroups": [],
+          "sizeOnDisk": 0,
+          "totalEpisodeCount": 1
+        }
+      },
+      {
+        "monitored": true,
+        "seasonNumber": 1,
+        "statistics": {
+          "episodeCount": 28,
+          "episodeFileCount": 0,
+          "percentOfEpisodes": 0,
+          "previousAiring": "2013-12-12T17:00:00Z",
+          "releaseGroups": [],
+          "sizeOnDisk": 0,
+          "totalEpisodeCount": 28
+        }
+      },
+      {
+        "monitored": true,
+        "seasonNumber": 2,
+        "statistics": {
+          "episodeCount": 52,
+          "episodeFileCount": 0,
+          "percentOfEpisodes": 0,
+          "previousAiring": "2014-06-18T16:00:00Z",
+          "releaseGroups": [],
+          "sizeOnDisk": 0,
+          "totalEpisodeCount": 52
+        }
+      }
+    ],
+    "seriesType": "standard",
+    "sortTitle": "pete holmes show",
+    "statistics": {
+      "episodeCount": 80,
+      "episodeFileCount": 0,
+      "percentOfEpisodes": 0,
+      "releaseGroups": [],
+      "seasonCount": 2,
+      "sizeOnDisk": 0,
+      "totalEpisodeCount": 81
+    },
+    "status": "ended",
+    "tags": [],
+    "title": "The Pete Holmes Show",
+    "titleSlug": "the-pete-holmes-show",
+    "tmdbId": 57506,
+    "tvMazeId": 6229,
+    "tvRageId": 36809,
+    "tvdbId": 271728,
+    "useSceneNumbering": false,
+    "year": 2013
+  },
+  "recordedAt": "2026-11-10T22:10:42Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/series/54"
+  },
+  "status": 200
+}

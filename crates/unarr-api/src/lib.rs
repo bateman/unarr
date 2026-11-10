@@ -258,8 +258,24 @@ pub fn router(state: AppState) -> Router {
         .route("/logout", axum::routing::get(ui::logout))
         .merge(routes::ui_router(&state));
 
+    // The calendar feed: opened with the API key, as the API is.
+    let feed = Router::new()
+        .route(
+            "/feed/v3/calendar/Sonarr.ics",
+            axum::routing::get(routes::feed::calendar),
+        )
+        .route(
+            "/feed/v3/calendar/sonarr.ics",
+            axum::routing::get(routes::feed::calendar),
+        )
+        .route_layer(axum::middleware::from_fn_with_state(
+            state.clone(),
+            auth::require_api_key,
+        ));
+
     let app = Router::new()
         .nest(state.personality().api_prefix(), api)
+        .merge(feed)
         .merge(open)
         .merge(pages)
         .with_state(state.clone())

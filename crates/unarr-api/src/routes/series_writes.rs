@@ -83,6 +83,53 @@ pub async fn media_cover_proxy(
     }
 }
 
+/// `GET /mediacover/{seriesId}/{filename}` (`MediaCoverController`): a
+/// series' cover for clients that hold the API key and no session. A
+/// resized cover that was not made answers with the full one.
+pub async fn media_cover_api(
+    State(state): State<AppState>,
+    Path((series_id, filename)): Path<(String, String)>,
+) -> Response {
+    // The originals' route takes a number and an image's name; anything
+    // else is no route at all.
+    let lower = filename.to_ascii_lowercase();
+    let is_image = [".jpg", ".png", ".gif"]
+        .iter()
+        .any(|ext| lower.ends_with(ext) && lower.len() > ext.len());
+    let Ok(series_id) = series_id.parse::<i64>() else {
+        return StatusCode::NOT_FOUND.into_response();
+    };
+    if !is_image || filename.contains(['/', '\\']) || filename.contains("..") {
+        return StatusCode::NOT_FOUND.into_response();
+    }
+    let folder = state.runtime().media_cover_dir.join(series_id.to_string());
+    let usable = |path: &std::path::Path| std::fs::metadata(path).is_ok_and(|m| m.is_file() && m.len() > 0);
+    let mut path = folder.join(&filename);
+    if !usable(&path) {
+        // `poster-500.jpg` for want of which `poster.jpg` will do.
+        let full = lower
+            .strip_suffix(".jpg")
+            .and_then(|stem| stem.rsplit_once('-'))
+            .filter(|(_, size)| !size.is_empty() && size.bytes().all(|b| b.is_ascii_digit()))
+            .map(|(name, _)| folder.join(format!("{}.jpg", &filename[..name.len()])));
+        match full {
+            Some(full) if full.is_file() => path = full,
+            _ => return ApiError::NotFound.into_response(),
+        }
+    }
+    let content_type = if lower.ends_with(".png") {
+        "image/png"
+    } else if lower.ends_with(".gif") {
+        "image/gif"
+    } else {
+        "image/jpeg"
+    };
+    match tokio::fs::read(&path).await {
+        Ok(bytes) => ([(header::CONTENT_TYPE, content_type)], bytes).into_response(),
+        Err(_) => ApiError::NotFound.into_response(),
+    }
+}
+
 /// `SeriesLookupController.MapToResource`: the bare resource, local cover
 /// URLs for a series in the library and proxied ones otherwise, the poster
 /// URL, the folder the naming would give, empty statistics.
@@ -234,26 +281,55 @@ async fn series_by_id(state: &AppState, id: i64) -> ApiResult<SeriesResource> {
 }
 
 /// `POST /series`.
+/// `SeriesResource.ToModel`, for a series to be added.
+fn new_series(body: &Value) -> NewSeries {
+    NewSeries {
+        tvdb_id: body.get("tvdbId").and_then(Value::as_i64).unwrap_or(0),
+        title: str_field(body, "title"),
+        path: str_field(body, "path").filter(|p| !p.trim().is_empty()),
+        root_folder_path: str_field(body, "rootFolderPath"),
+        quality_profile_id: body.get("qualityProfileId").and_then(Value::as_i64).unwrap_or(0),
+        season_folder: body.get("seasonFolder").and_then(Value::as_bool).unwrap_or(false),
+        monitored: body.get("monitored").and_then(Value::as_bool).unwrap_or(false),
+        monitor_new_items: monitor_new_items(body),
+        series_type: series_type(body.get("seriesType")).unwrap_or(SeriesType::Standard),
+        tags: ints(body.get("tags")),
+        seasons: seasons(body),
+        add_options: add_options(body.get("addOptions")),
+    }
+}
+
+/// `POST /series/import` (Library Import): the series of the folders the
+/// user picked, added together. One that does not validate refuses them
+/// all; one already in the library is left out. Each is then refreshed
+/// and scanned as a series just added.
+pub async fn import(State(state): State<AppState>, Json(body): Json<Value>) -> ApiResult<Response> {
+    let Some(list) = body.as_array() else {
+        return Err(ApiError::BadRequest(
+            "The request body must be a JSON array".into(),
+        ));
+    };
+    let list: Vec<NewSeries> = list.iter().map(new_series).collect();
+    let provider = state.commands()?.metadata();
+    let added = service::add_many(state.db(), provider.as_ref(), list, state.now())
+        .await
+        .map_err(write_error)?;
+    // The bare resources, as they were added: no statistics, no local
+    // cover URLs.
+    let resources: Vec<_> = added.iter().map(series_resource_plain).collect();
+    for series in &added {
+        state.commands()?.series_added(series.id).await?;
+    }
+    Ok(Json(resources).into_response())
+}
+
 pub async fn add(State(state): State<AppState>, Json(body): Json<Value>) -> ApiResult<Response> {
     if !body.is_object() {
         return Err(ApiError::BadRequest(
             "The request body must be a JSON object".into(),
         ));
     }
-    let new = NewSeries {
-        tvdb_id: body.get("tvdbId").and_then(Value::as_i64).unwrap_or(0),
-        title: str_field(&body, "title"),
-        path: str_field(&body, "path").filter(|p| !p.trim().is_empty()),
-        root_folder_path: str_field(&body, "rootFolderPath"),
-        quality_profile_id: body.get("qualityProfileId").and_then(Value::as_i64).unwrap_or(0),
-        season_folder: body.get("seasonFolder").and_then(Value::as_bool).unwrap_or(false),
-        monitored: body.get("monitored").and_then(Value::as_bool).unwrap_or(false),
-        monitor_new_items: monitor_new_items(&body),
-        series_type: series_type(body.get("seriesType")).unwrap_or(SeriesType::Standard),
-        tags: ints(body.get("tags")),
-        seasons: seasons(&body),
-        add_options: add_options(body.get("addOptions")),
-    };
+    let new = new_series(&body);
     let check = new.clone();
     let failures = state
         .db()
@@ -333,15 +409,32 @@ pub async fn update(
             )
             .await?;
     }
-    state
+    let changed = state
         .db()
         .call(move |conn| {
             let tx = conn.unchecked_transaction()?;
-            service::update(&tx, &edit)?;
+            let changed = service::update(&tx, &edit)?;
             tx.commit()?;
-            Ok(())
+            Ok(changed)
         })
         .await?;
+    // `SeriesEditedService`: another series type numbers the episodes
+    // another way, so the series is refreshed.
+    if changed.is_some_and(|(before, after)| before.series_type != after.series_type) {
+        state
+            .commands()?
+            .queue()
+            .push(
+                unarr_core::commands::CommandBody::RefreshSeries {
+                    series_ids: vec![id],
+                    is_new_series: false,
+                },
+                unarr_core::commands::CommandPriority::Normal,
+                unarr_core::commands::CommandTrigger::Unspecified,
+                state.now(),
+            )
+            .await?;
+    }
     let resource = series_by_id(&state, id).await?;
     state.hub().broadcast(
         "series",

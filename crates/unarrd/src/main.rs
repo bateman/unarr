@@ -335,6 +335,10 @@ fn open_database(
             }
         }
     }
+    // What the originals make sure is there at every start.
+    if personality == Personality::Sonarr {
+        db.call_blocking(|conn| unarr_core::defaults::ensure(conn))?;
+    }
     Ok((db, host))
 }
 

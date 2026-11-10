@@ -176,6 +176,24 @@ pub fn all_paths(conn: &Connection) -> anyhow::Result<Vec<(i64, String)>> {
 }
 
 /// Every series' title slug.
+/// The title of the series that has `slug`, if one has.
+pub fn title_of_slug(conn: &Connection, slug: &str) -> anyhow::Result<Option<String>> {
+    let found = conn.query_row(
+        "SELECT title FROM series WHERE title_slug = ?1 ORDER BY id LIMIT 1",
+        [slug],
+        |r| r.get(0),
+    );
+    use rusqlite::OptionalExtension;
+    Ok(found.optional()?)
+}
+
+/// `AllSeriesTvdbIds`.
+pub fn tvdb_ids(conn: &Connection) -> anyhow::Result<Vec<i64>> {
+    let mut stmt = conn.prepare("SELECT tvdb_id FROM series")?;
+    let rows = stmt.query_map([], |r| r.get(0))?;
+    Ok(rows.collect::<Result<_, _>>()?)
+}
+
 pub fn all_slugs(conn: &Connection) -> anyhow::Result<Vec<String>> {
     let mut stmt = conn.prepare("SELECT title_slug FROM series")?;
     let rows = stmt.query_map([], |r| r.get(0))?;

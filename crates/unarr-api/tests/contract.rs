@@ -52,6 +52,9 @@ enum Mode {
     Shape,
     /// An HTML page: status and the page title.
     Html,
+    /// An iCalendar feed: every line but `DTSTAMP`, which is the instant
+    /// the feed was written.
+    Calendar,
 }
 
 /// The goldens of the import phase: the files, history rows and queue
@@ -82,6 +85,8 @@ fn mode(name: &str) -> Mode {
         // The folder the replay's library is in has another parent.
         "filesystem-tv" => Mode::Exact(&["lastModified", "parent"]),
         n if n.starts_with("filesystem-") => Mode::Exact(&["lastModified"]),
+        n if n.contains("feed-calendar") && !n.starts_with("noauth") => Mode::Calendar,
+        n if n.starts_with("mediacover-api-") => Mode::Exact(&["traceId"]),
         "series-after-delete-pete"
         | "series-after-importlist-sync-54"
         | "importlist-get-missing"
@@ -1068,6 +1073,32 @@ async fn golden_responses_match() {
                 let got = normalize(&manual(&body), ignore);
                 diff("", &want, &got, &mut problems);
             }
+            Mode::Calendar => {
+                let lines = |v: &Value| -> Vec<String> {
+                    v.as_str()
+                        .unwrap_or("")
+                        .lines()
+                        .filter(|l| !l.starts_with("DTSTAMP:"))
+                        .map(str::to_string)
+                        .collect()
+                };
+                let (want, got) = (lines(&g.body), lines(&body));
+                if want != got {
+                    let at = want
+                        .iter()
+                        .zip(&got)
+                        .position(|(w, g)| w != g)
+                        .unwrap_or(want.len().min(got.len()));
+                    problems.push(format!(
+                        "calendar: {} lines expected, {} got; first difference at line {}: expected {:?}, got {:?}",
+                        want.len(),
+                        got.len(),
+                        at + 1,
+                        want.get(at),
+                        got.get(at)
+                    ));
+                }
+            }
             Mode::Html => {
                 let title = |v: &Value| {
                     v.as_str()
@@ -1664,4 +1695,119 @@ async fn carrier_grade_nat_addresses_are_local_when_trusted() {
     // Next to the range, and a public address: still asked to log in.
     assert_eq!(status_of(&app, from("100.128.0.1")).await, StatusCode::FOUND);
     assert_eq!(status_of(&app, from("8.8.8.8")).await, StatusCode::FOUND);
+}
+
+/// The cover route of the API: the file as it is, the full cover for a
+/// resized one that was not made, 404 for what is not there, and only
+/// with the key.
+#[tokio::test]
+async fn the_api_serves_covers_to_clients_with_the_key() {
+    let state = build_state();
+    let covers = state.runtime().media_cover_dir.join("777001");
+    std::fs::create_dir_all(&covers).unwrap();
+    std::fs::write(covers.join("poster.jpg"), b"full").unwrap();
+    std::fs::write(covers.join("poster-500.jpg"), b"resized").unwrap();
+    std::fs::write(covers.join("banner-70.jpg"), b"").unwrap();
+    std::fs::write(covers.join("clearlogo.png"), b"logo").unwrap();
+    let app = unarr_api::router(state);
+    let fetch = |file: &str, key: bool| {
+        let app = app.clone();
+        let mut request = get(&format!("/api/v3/mediacover/777001/{file}"));
+        if key {
+            request = request.header("X-Api-Key", API_KEY);
+        }
+        async move {
+            let response = app.oneshot(request.body(Body::empty()).unwrap()).await.unwrap();
+            let status = response.status();
+            let kind = response
+                .headers()
+                .get("content-type")
+                .map(|v| v.to_str().unwrap().to_string());
+            let bytes = response.into_body().collect().await.unwrap().to_bytes();
+            (status, kind, String::from_utf8_lossy(&bytes).into_owned())
+        }
+    };
+    let (status, kind, body) = fetch("poster-500.jpg", true).await;
+    assert_eq!(
+        (status, kind.as_deref(), body.as_str()),
+        (StatusCode::OK, Some("image/jpeg"), "resized")
+    );
+    let (status, kind, body) = fetch("clearlogo.png", true).await;
+    assert_eq!(
+        (status, kind.as_deref(), body.as_str()),
+        (StatusCode::OK, Some("image/png"), "logo")
+    );
+    // Not made: the full cover.
+    assert_eq!(fetch("poster-1000.jpg", true).await.2, "full");
+    // Empty, and no full one to give instead.
+    assert_eq!(fetch("banner-70.jpg", true).await.0, StatusCode::NOT_FOUND);
+    assert_eq!(fetch("fanart.jpg", true).await.0, StatusCode::NOT_FOUND);
+    // Not an image's name, and a way out of the folder.
+    assert_eq!(fetch("notes.txt", true).await.0, StatusCode::NOT_FOUND);
+    assert_eq!(
+        fetch("..%2F..%2Fsonarr.db.jpg", true).await.0,
+        StatusCode::NOT_FOUND
+    );
+    // Without the key.
+    assert_eq!(fetch("poster.jpg", false).await.0, StatusCode::UNAUTHORIZED);
+    let _ = std::fs::remove_dir_all(&covers);
+}
+
+/// `SeriesEditedService`: a series saved with another type is refreshed;
+/// saved with the same one, it is not.
+#[tokio::test]
+async fn changing_the_series_type_queues_a_refresh() {
+    let state = build_state();
+    // The refresh this queues must reach no metadata host: nothing listens
+    // where it is sent.
+    state.set_metadata_upstreams(unarr_core::metadata::Upstreams::mock("http://127.0.0.1:1"));
+    state.start_runtime().await.expect("the command runtime");
+    let app = unarr_api::router(state.clone());
+    let api = |method: &str, path: &str| {
+        Request::builder()
+            .method(method)
+            .uri(path)
+            .header("X-Api-Key", API_KEY)
+            .header("content-type", "application/json")
+    };
+    let response = app
+        .clone()
+        .oneshot(api("GET", "/api/v3/series/1").body(Body::empty()).unwrap())
+        .await
+        .unwrap();
+    let bytes = response.into_body().collect().await.unwrap().to_bytes();
+    let series: Value = serde_json::from_slice(&bytes).unwrap();
+    assert_eq!(series["seriesType"], "standard");
+    let refreshes = |state: &AppState| {
+        let state = state.clone();
+        async move {
+            state
+                .db()
+                .call(|conn| {
+                    Ok(conn.query_row(
+                        "SELECT count(*) FROM commands WHERE name = 'RefreshSeries'",
+                        [],
+                        |r| r.get::<_, i64>(0),
+                    )?)
+                })
+                .await
+                .unwrap()
+        }
+    };
+    let before = refreshes(&state).await;
+
+    // Saved as it is: nothing queued.
+    let save = api("PUT", "/api/v3/series/1")
+        .body(Body::from(series.to_string()))
+        .unwrap();
+    assert_eq!(status_of(&app, save).await, StatusCode::ACCEPTED);
+    assert_eq!(refreshes(&state).await, before);
+
+    let mut anime = series.clone();
+    anime["seriesType"] = Value::String("anime".into());
+    let save = api("PUT", "/api/v3/series/1")
+        .body(Body::from(anime.to_string()))
+        .unwrap();
+    assert_eq!(status_of(&app, save).await, StatusCode::ACCEPTED);
+    assert_eq!(refreshes(&state).await, before + 1);
 }

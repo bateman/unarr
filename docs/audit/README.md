@@ -113,6 +113,11 @@ opened), and the recording corrected two of the findings.
 | 4. `CleanUpRecycleBin` | Fixed: files in the bin for longer than the configured days go, with the folders that leaves empty. |
 | 16. Import Extra Files | Fixed: the listed extensions come in with a download (subtitles named by language and tags, anything else under the episode file's name). Beyond the finding: extras found by a scan are remembered, follow a rename and leave with the episode file, and the original's subtitle rows are imported. Metadata consumers stay undriven. |
 | 17. Files without media info | Fixed: probed again after every scan of their series. |
+| 5. `GET /api/v3/mediacover/…` and the calendar feed | Fixed. The feed is compared line by line with recordings of the original's. |
+| 8. Library Import | Fixed: `POST /series/import` adds the series together, refuses them all when one does not validate and leaves out those already there, as recorded. |
+| 13. Deleting the selected import list exclusions | Fixed. |
+| 19. Blank start | Fixed: quality definitions, the six default quality profiles and the delay profile are put in at start when missing. |
+| 20. Series type change | Fixed: the series is refreshed. |
 | 23. Session length and `Secure` | Fixed: seven days from the last use, renewed past half its life; `Secure` when a trusted proxy says the request came over HTTPS. Sessions open at the upgrade end once: the signing key is now a random one kept in the database, not derived from the API key. |
 | 24. `/initialize.json` without `no-store` | Fixed. |
 
@@ -120,4 +125,4 @@ Not recorded against the original, and so not changed: `PUT
 config/naming` does not yet refuse a format whose sample name fails the
 same parse-back check.
 
-Still open: 5, 8, 13, 19, 20 and the low ones.
+Still open: the low ones.

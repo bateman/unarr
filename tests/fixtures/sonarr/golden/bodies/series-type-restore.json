@@ -1,0 +1,1 @@
+{"$from": "series-type-before", "$set": {"seriesType": "standard"}}

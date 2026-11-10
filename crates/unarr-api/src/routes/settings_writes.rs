@@ -1601,6 +1601,28 @@ pub async fn exclusion_delete(State(state): State<AppState>, Path(id): Path<i64>
     Ok(ok_empty())
 }
 
+/// `DELETE /importlistexclusion/bulk`: the selected exclusions removed;
+/// an id that is not there is no error.
+pub async fn exclusion_bulk_delete(
+    State(state): State<AppState>,
+    Json(body): Json<Value>,
+) -> ApiResult<Json<Value>> {
+    let ids: Vec<i64> = body["ids"]
+        .as_array()
+        .map(|a| a.iter().filter_map(Value::as_i64).collect())
+        .unwrap_or_default();
+    state
+        .db()
+        .call(move |conn| {
+            for id in ids {
+                store::catalog::delete_row(conn, "import_list_exclusions", id)?;
+            }
+            Ok(())
+        })
+        .await?;
+    Ok(Json(json!({})))
+}
+
 // --- specifications (custom formats, auto tagging)
 
 /// API specifications to the stored `[{type, body}]`: the schema's fields

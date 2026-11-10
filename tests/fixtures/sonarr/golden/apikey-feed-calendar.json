@@ -1,0 +1,9 @@
+{
+  "body": "BEGIN:VCALENDAR\r\nNAME:Sonarr TV Schedule\r\nPRODID:-//github.com/ical-org/ical.net//NONSGML ical.net 4.0//EN\r\nVERSION:2.0\r\nX-WR-CALNAME:Sonarr TV Schedule\r\nEND:VCALENDAR\r\n",
+  "recordedAt": "2026-11-10T22:10:17Z",
+  "request": {
+    "method": "GET",
+    "path": "/feed/v3/calendar/Sonarr.ics?apikey=0123456789abcdef0123456789abcdef&pastDays=1&futureDays=1"
+  },
+  "status": 200
+}

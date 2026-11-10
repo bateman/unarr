@@ -10,6 +10,7 @@ pub mod config;
 pub mod customformat;
 pub mod db;
 pub mod decision;
+pub mod defaults;
 pub mod downloadclients;
 pub mod downloads;
 pub mod fs;

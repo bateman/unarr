@@ -1,0 +1,9 @@
+{
+  "body": null,
+  "recordedAt": "2026-11-10T22:10:17Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/mediacover/1/nothere.jpg"
+  },
+  "status": 401
+}

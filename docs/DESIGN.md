@@ -877,6 +877,17 @@ a query; section 15 asks which library size the target is for.
   ignore it (recorded), and changes only with `ResetApiKey`. Sessions
   last seven days from their last use and are signed with a random key
   kept in the database, not one derived from the API key.
+- **A database started from nothing gets the originals' defaults.** At
+  every start, as the originals do: a quality definition for every
+  quality, the six quality profiles of a new installation when there is
+  no profile, the delay profile when there is none. The default profile
+  is checked against one the original made (the fixture's "HD-720p").
+- **The calendar feed is written by hand.** `/feed/v3/calendar/Sonarr.ics`
+  writes what the originals' iCalendar library writes for the same
+  episodes (property order, folding at 74 characters, escaping), checked
+  line by line against recordings; `DTSTAMP` is the instant of the
+  request. The all-day dates are those of the server's time zone, as the
+  originals'.
 - **Subtitles and other extras are one table.** The originals keep
   `SubtitleFiles`, `ExtraFiles` and `MetadataFiles`; Unarr keeps the
   first two in `extra_files` and imports their rows. With "Import Extra

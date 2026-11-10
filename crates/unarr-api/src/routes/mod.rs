@@ -8,6 +8,7 @@ pub mod command;
 pub mod config;
 pub mod downloadclient_writes;
 pub mod episodes;
+pub mod feed;
 pub mod importlist_writes;
 pub mod indexer_writes;
 pub mod mediafiles;
@@ -47,6 +48,11 @@ pub fn api_router(_state: &AppState) -> Router<AppState> {
         .route("/config/importlist/{id}", put(settings_writes::import_list))
         .route("/series", get(series::list).post(series_writes::add))
         .route("/series/lookup", get(series_writes::lookup))
+        .route("/series/import", post(series_writes::import))
+        .route(
+            "/mediacover/{series_id}/{filename}",
+            get(series_writes::media_cover_api),
+        )
         .route(
             "/series/editor",
             put(series_writes::editor_update).delete(series_writes::editor_delete),
@@ -261,6 +267,10 @@ pub fn api_router(_state: &AppState) -> Router<AppState> {
         .route(
             "/importlistexclusion/paged",
             get(providers::import_list_exclusions_paged),
+        )
+        .route(
+            "/importlistexclusion/bulk",
+            delete(settings_writes::exclusion_bulk_delete),
         )
         .route(
             "/importlistexclusion/{id}",

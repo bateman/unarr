@@ -1,0 +1,26 @@
+[
+ {
+  "tvdbId": 271728,
+  "title": "The Pete Holmes Show",
+  "qualityProfileId": 1,
+  "path": "/tv/Pete Holmes Show",
+  "seasonFolder": true,
+  "monitored": true,
+  "seriesType": "standard",
+  "tags": [],
+  "monitorNewItems": "all",
+  "addOptions": {"monitor": "all", "searchForMissingEpisodes": false, "searchForCutoffUnmetEpisodes": false}
+ },
+ {
+  "tvdbId": 271728,
+  "title": "The Pete Holmes Show, again",
+  "qualityProfileId": 1,
+  "path": "/tv/Pete Holmes Show Again",
+  "seasonFolder": true,
+  "monitored": true,
+  "seriesType": "standard",
+  "tags": [],
+  "monitorNewItems": "all",
+  "addOptions": {"monitor": "all"}
+ }
+]

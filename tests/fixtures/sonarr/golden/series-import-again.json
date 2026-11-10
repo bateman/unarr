@@ -1,0 +1,38 @@
+{
+  "body": [
+    {
+      "attemptedValue": "/tv/Pete Holmes Show",
+      "errorCode": "SeriesPathValidator",
+      "errorMessage": "Path '/tv/Pete Holmes Show' is already configured for another series",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "path": "/tv/Pete Holmes Show",
+        "propertyName": "Path",
+        "propertyValue": "/tv/Pete Holmes Show"
+      },
+      "propertyName": "Path",
+      "severity": "error"
+    },
+    {
+      "attemptedValue": "the-pete-holmes-show",
+      "errorCode": "SeriesTitleSlugValidator",
+      "errorMessage": "Title slug 'the-pete-holmes-show' is in use by series 'The Pete Holmes Show'. Check the FAQ for more information",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Title Slug",
+        "propertyValue": "the-pete-holmes-show",
+        "seriesTitle": "The Pete Holmes Show",
+        "slug": "the-pete-holmes-show"
+      },
+      "propertyName": "TitleSlug",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-10T22:10:42Z",
+  "request": {
+    "body": "bodies/series-import.json",
+    "method": "POST",
+    "path": "/api/v3/series/import"
+  },
+  "status": 400
+}
