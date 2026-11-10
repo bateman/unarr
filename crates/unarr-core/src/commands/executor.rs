@@ -259,6 +259,10 @@ impl Runtime {
             now,
             is_docker: self.is_docker,
             import_failure: failure.as_ref(),
+            services_ping: self
+                .augment()
+                .upstreams()
+                .url("https://services.sonarr.tv/v1/ping"),
         };
         let standing = self.health();
         let names: Vec<CheckSet> = sets.iter().map(|(s, _)| *s).collect();

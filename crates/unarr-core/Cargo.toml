@@ -18,8 +18,9 @@ chrono.workspace = true
 fancy-regex.workspace = true
 roxmltree.workspace = true
 tokio = { workspace = true, features = ["sync", "rt", "time"] }
-reqwest = { version = "0.13", default-features = false, features = ["rustls-no-provider", "json", "gzip", "multipart", "form", "query", "charset"] }
+reqwest = { version = "0.13", default-features = false, features = ["rustls-no-provider", "socks", "json", "gzip", "multipart", "form", "query", "charset"] }
 rustls = { version = "0.23", default-features = false, features = ["ring", "std", "tls12", "logging"] }
+rustls-platform-verifier = "0.7"
 unicode-normalization = "0.1"
 libc = "0.2"
 ring = "0.17"

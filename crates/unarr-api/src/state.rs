@@ -32,7 +32,10 @@ pub struct Settings {
 }
 
 impl Settings {
-    pub fn from_host_config(host: HostConfig, personality: Personality) -> Settings {
+    pub fn from_host_config(mut host: HostConfig, personality: Personality) -> Settings {
+        // The environment wins over the file and over what was saved, at
+        // start and after every save.
+        host.apply_environment(personality.app_name(), std::env::vars());
         let allowed_hosts = crate::hosts::AllowedHosts::parse(&host.allowed_hosts);
         if allowed_hosts.allows_everything() {
             tracing::info!("AllowedHosts is not configured, accepting requests for any host");
@@ -135,7 +138,12 @@ struct Inner {
     session_secret: OnceLock<Vec<u8>>,
     /// A shutdown or restart asked through the API, for the daemon to act on.
     lifecycle: tokio::sync::watch::Sender<Option<Lifecycle>>,
+    /// How the program applies a log level, when it said how.
+    log_level: OnceLock<LogLevelHook>,
 }
+
+/// How the program applies a log level.
+type LogLevelHook = Box<dyn Fn(&str) + Send + Sync>;
 
 /// What `POST /system/shutdown` and `/system/restart` ask of the process.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -176,6 +184,7 @@ impl AppState {
             metadata: Mutex::new(None),
             session_secret: OnceLock::new(),
             lifecycle: tokio::sync::watch::channel(None).0,
+            log_level: OnceLock::new(),
         }))
     }
 
@@ -186,6 +195,7 @@ impl AppState {
         if self.0.commands.get().is_some() {
             return Ok(());
         }
+        self.apply_network_settings().await?;
         let fixed = self.0.fixed_now.clone();
         let clock: unarr_core::commands::executor::Clock =
             Arc::new(move || fixed.lock().unwrap().unwrap_or_else(Utc::now));
@@ -283,6 +293,31 @@ impl AppState {
                 .collect();
             format!("{name}Auth")
         })
+    }
+
+    /// `ReconfigureLogging`: how the program changes what it logs when the
+    /// level of Settings > General is saved. Set once, by the daemon.
+    pub fn set_log_level_hook(&self, apply: impl Fn(&str) + Send + Sync + 'static) {
+        let _ = self.0.log_level.set(Box::new(apply));
+    }
+
+    /// Log at the level the settings now say.
+    pub fn apply_log_level(&self) {
+        if let Some(apply) = self.0.log_level.get() {
+            apply(&self.settings().host.log_level);
+        }
+    }
+
+    /// Put the outgoing-connection settings of the configuration table to
+    /// work: the proxy and the certificate checks. At start, and after
+    /// every save of Settings > General.
+    pub async fn apply_network_settings(&self) -> anyhow::Result<()> {
+        let outbound = self
+            .db()
+            .call(|conn| unarr_core::outbound::Outbound::load(conn))
+            .await?;
+        unarr_core::outbound::process().set(outbound);
+        Ok(())
     }
 
     /// The key session cookies are signed with: random, made on first use

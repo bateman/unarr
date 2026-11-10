@@ -23,6 +23,7 @@ pub mod metadata;
 pub mod model;
 pub mod naming;
 pub mod notifications;
+pub mod outbound;
 pub mod parser;
 pub mod profile;
 pub mod quality;

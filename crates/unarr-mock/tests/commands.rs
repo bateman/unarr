@@ -687,4 +687,29 @@ async fn health_checks_follow_the_providers_and_the_library() {
     );
     let search = health.iter().find(|h| h.source == "IndexerSearchCheck").unwrap();
     assert_eq!(search.kind, HealthType::Warning);
+
+    // A proxy whose host does not resolve is reported; without a proxy
+    // there is nothing to say.
+    assert!(runtime.health().iter().all(|h| h.source != "ProxyCheck"));
+    db.call(|conn| {
+        unarr_core::store::config::set_config(conn, "proxyenabled", "True")?;
+        unarr_core::store::config::set_config(conn, "proxyhostname", "proxy.does.not.resolve.invalid")
+    })
+    .await
+    .unwrap();
+    assert!(runtime.check_health(CheckSet::All).await);
+    let health = runtime.health();
+    let proxy = health
+        .iter()
+        .find(|h| h.source == "ProxyCheck")
+        .expect("the proxy is checked");
+    assert_eq!(proxy.kind, HealthType::Error);
+    assert_eq!(
+        proxy.message,
+        "Failed to resolve the IP Address for the Configured Proxy Host proxy.does.not.resolve.invalid"
+    );
+    assert_eq!(
+        proxy.wiki_url,
+        "https://wiki.servarr.com/sonarr/system#proxy-failed-resolve-ip"
+    );
 }

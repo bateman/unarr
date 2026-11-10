@@ -38,21 +38,46 @@ pub fn servarr_proxy_user_agent() -> &'static str {
     SERVARR_PROXY_USER_AGENT
 }
 
-/// Build a client with Unarr's defaults. Tests build their own to point at
-/// mocks; production code takes [`shared`].
+/// Build a client with Unarr's defaults, following the process's proxy
+/// and certificate settings. Tests build their own to point at mocks;
+/// production code takes [`shared`].
 pub fn build(timeout: Duration) -> reqwest::Client {
-    install_crypto_provider();
-    reqwest::Client::builder()
-        .user_agent(user_agent())
+    build_with(timeout, crate::outbound::process())
+}
+
+/// [`build`], following the settings of `outbound`.
+pub fn build_with(timeout: Duration, outbound: &crate::outbound::Handle) -> reqwest::Client {
+    builder(outbound)
         .timeout(timeout)
-        .connect_timeout(Duration::from_secs(10))
         .pool_idle_timeout(Duration::from_secs(90))
         .redirect(reqwest::redirect::Policy::limited(5))
+        .build()
+        .expect("reqwest client with static configuration")
+}
+
+/// What every client has: the name it goes by, and the proxy and the
+/// certificate checks of Settings > General, read anew for each request.
+fn builder(outbound: &crate::outbound::Handle) -> reqwest::ClientBuilder {
+    install_crypto_provider();
+    let proxy = {
+        let outbound = outbound.clone();
+        reqwest::Proxy::custom(move |url| outbound.proxy_for(url))
+    };
+    let builder = reqwest::Client::builder()
+        .user_agent(user_agent())
+        .connect_timeout(Duration::from_secs(10))
         // A redirect would otherwise carry the first URL, API key included,
         // to the next host in `Referer`.
         .referer(false)
-        .build()
-        .expect("reqwest client with static configuration")
+        .proxy(proxy);
+    match outbound.tls_config() {
+        Ok(tls) => builder.tls_backend_preconfigured(tls),
+        Err(e) => {
+            // No certificate store to read: the client's own defaults.
+            tracing::warn!("Certificate validation settings cannot be applied: {e}");
+            builder
+        }
+    }
 }
 
 /// Most a response body may hold. Feeds and client answers are kilobytes;
@@ -156,13 +181,9 @@ pub fn shared() -> &'static reqwest::Client {
 pub fn no_redirect() -> &'static reqwest::Client {
     static CLIENT: OnceLock<reqwest::Client> = OnceLock::new();
     CLIENT.get_or_init(|| {
-        install_crypto_provider();
-        reqwest::Client::builder()
-            .user_agent(user_agent())
+        builder(crate::outbound::process())
             .timeout(Duration::from_secs(100))
-            .connect_timeout(Duration::from_secs(10))
             .redirect(reqwest::redirect::Policy::none())
-            .referer(false)
             .build()
             .expect("reqwest client with static configuration")
     })
@@ -199,5 +220,186 @@ mod tests {
         assert!(user_agent().starts_with("Unarr/"));
         let _ = build(Duration::from_secs(1));
         let _ = shared();
+    }
+
+    use crate::outbound::{CertificateValidation, Handle, Outbound, Proxy, ProxyType};
+    use std::io::{Read, Write};
+    use std::net::{SocketAddr, TcpListener};
+    use std::sync::{Arc, Mutex};
+
+    /// A proxy that answers every request itself and keeps its first line.
+    fn recording_proxy() -> (SocketAddr, Arc<Mutex<Vec<String>>>) {
+        let listener = TcpListener::bind("127.0.0.1:0").unwrap();
+        let address = listener.local_addr().unwrap();
+        let seen = Arc::new(Mutex::new(Vec::new()));
+        let log = seen.clone();
+        std::thread::spawn(move || {
+            for stream in listener.incoming() {
+                let Ok(mut stream) = stream else { break };
+                let mut buffer = [0u8; 4096];
+                let read = stream.read(&mut buffer).unwrap_or(0);
+                let request = String::from_utf8_lossy(&buffer[..read]).into_owned();
+                let mut lines: Vec<String> = request.lines().take(1).map(str::to_string).collect();
+                lines.extend(
+                    request
+                        .lines()
+                        .filter(|l| l.to_ascii_lowercase().starts_with("proxy-authorization:"))
+                        .map(str::to_string),
+                );
+                log.lock().unwrap().extend(lines);
+                let _ = stream
+                    .write_all(b"HTTP/1.1 200 OK\r\ncontent-length: 7\r\nconnection: close\r\n\r\nproxied");
+            }
+        });
+        (address, seen)
+    }
+
+    /// The proxy of the settings is used for the requests it is not
+    /// bypassed for, with its credentials, and a change of the settings
+    /// reaches the client already built.
+    #[tokio::test]
+    async fn requests_go_through_the_configured_proxy() {
+        let (proxy, seen) = recording_proxy();
+        let settings = Handle::default();
+        let client = build_with(Duration::from_secs(5), &settings);
+        let proxied = |host: &str| Outbound {
+            proxy: Some(Proxy::new(
+                ProxyType::Http,
+                &proxy.ip().to_string(),
+                proxy.port() as i64,
+                "me",
+                "secret",
+                host,
+                true,
+            )),
+            certificate_validation: CertificateValidation::Enabled,
+        };
+
+        settings.set(proxied(""));
+        let body = client
+            .get("http://indexer.invalid/api?t=caps")
+            .send()
+            .await
+            .expect("answered by the proxy")
+            .text()
+            .await
+            .unwrap();
+        assert_eq!(body, "proxied");
+        {
+            let seen = seen.lock().unwrap();
+            assert_eq!(seen[0], "GET http://indexer.invalid/api?t=caps HTTP/1.1");
+            // "me:secret".
+            assert!(seen[1].ends_with("Basic bWU6c2VjcmV0"), "{seen:?}");
+        }
+
+        // On the bypass list: not through the proxy, and the name resolves
+        // nowhere.
+        settings.set(proxied("indexer\\.invalid"));
+        assert!(client
+            .get("http://indexer.invalid/api?t=caps")
+            .send()
+            .await
+            .is_err());
+        // No proxy any more: the same.
+        settings.set(Outbound::default());
+        assert!(client
+            .get("http://indexer.invalid/api?t=caps")
+            .send()
+            .await
+            .is_err());
+        assert_eq!(seen.lock().unwrap().len(), 2);
+    }
+
+    /// An HTTPS server with the self-signed certificate of the fixtures.
+    fn self_signed_server() -> SocketAddr {
+        use rustls::pki_types::pem::PemObject;
+        use rustls::pki_types::{CertificateDer, PrivateKeyDer};
+        let fixtures = std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../tests/fixtures/tls");
+        let certificate = CertificateDer::from_pem_file(fixtures.join("selfsigned.cert.pem")).unwrap();
+        let key = PrivateKeyDer::from_pem_file(fixtures.join("selfsigned.key.pem")).unwrap();
+        let config =
+            rustls::ServerConfig::builder_with_provider(Arc::new(rustls::crypto::ring::default_provider()))
+                .with_safe_default_protocol_versions()
+                .unwrap()
+                .with_no_client_auth()
+                .with_single_cert(vec![certificate], key)
+                .unwrap();
+        let config = Arc::new(config);
+        let listener = TcpListener::bind("127.0.0.1:0").unwrap();
+        let address = listener.local_addr().unwrap();
+        std::thread::spawn(move || {
+            for stream in listener.incoming() {
+                let Ok(stream) = stream else { break };
+                let config = config.clone();
+                std::thread::spawn(move || {
+                    let Ok(connection) = rustls::ServerConnection::new(config) else {
+                        return;
+                    };
+                    let mut tls = rustls::StreamOwned::new(connection, stream);
+                    let mut buffer = [0u8; 4096];
+                    if tls.read(&mut buffer).is_ok() {
+                        let _ = tls.write_all(
+                            b"HTTP/1.1 200 OK\r\ncontent-length: 2\r\nconnection: close\r\n\r\nok",
+                        );
+                        tls.conn.send_close_notify();
+                        let _ = tls.flush();
+                    }
+                });
+            }
+        });
+        address
+    }
+
+    /// A certificate nobody vouches for is refused, unless the setting
+    /// says otherwise; a save changes what the client already built does.
+    #[tokio::test]
+    async fn certificate_validation_follows_the_setting() {
+        let server = self_signed_server();
+        let settings = Handle::default();
+        // The certificate's name, resolved to the test server.
+        let client = builder(&settings)
+            .timeout(Duration::from_secs(5))
+            .resolve("selfsigned.test", server)
+            .pool_max_idle_per_host(0)
+            .build()
+            .unwrap();
+        let url = format!("https://selfsigned.test:{}/", server.port());
+        let with = |validation| {
+            settings.set(Outbound {
+                proxy: None,
+                certificate_validation: validation,
+            })
+        };
+
+        with(CertificateValidation::Enabled);
+        assert!(
+            client.get(&url).send().await.is_err(),
+            "refused when validation is on"
+        );
+        with(CertificateValidation::Disabled);
+        let body = client
+            .get(&url)
+            .send()
+            .await
+            .expect("let through")
+            .text()
+            .await
+            .unwrap();
+        assert_eq!(body, "ok");
+        with(CertificateValidation::Enabled);
+        assert!(client.get(&url).send().await.is_err(), "refused again");
+        // This machine by name or address is always let through.
+        let local = format!("https://127.0.0.1:{}/", server.port());
+        assert_eq!(
+            client
+                .get(&local)
+                .send()
+                .await
+                .expect("local")
+                .text()
+                .await
+                .unwrap(),
+            "ok"
+        );
     }
 }

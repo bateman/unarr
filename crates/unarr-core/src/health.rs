@@ -115,6 +115,9 @@ pub struct Context<'a> {
     pub now: DateTime<Utc>,
     pub is_docker: bool,
     pub import_failure: Option<&'a ImportFailure>,
+    /// The Servarr services' ping, which the proxy check asks through the
+    /// proxy (a mock's, in the tests).
+    pub services_ping: String,
 }
 
 type Check = for<'a> fn(
@@ -187,6 +190,7 @@ fn checks(set: CheckSet) -> Vec<(&'static str, Condition, Check)> {
                     ("RootFolderCheck", Always, check!(root_folder)),
                     ("RecyclingBinCheck", Always, check!(recycling_bin)),
                     ("MountCheck", Always, check!(mount)),
+                    ("ProxyCheck", Always, check!(proxy)),
                 ]);
             }
             out
@@ -838,6 +842,66 @@ async fn recycling_bin(ctx: &Context<'_>) -> anyhow::Result<HealthCheck> {
         ));
     }
     Ok(HealthCheck::ok(SOURCE))
+}
+
+/// `ProxyCheck`: with a proxy configured, its host resolves and a
+/// request through it is answered. Only a 400 counts against it; any
+/// other answer came through.
+async fn proxy(ctx: &Context<'_>) -> anyhow::Result<HealthCheck> {
+    const SOURCE: &str = "ProxyCheck";
+    let (enabled, host) = ctx
+        .db
+        .call(|conn| {
+            Ok((
+                store::config::config(conn, "ProxyEnabled")?.is_some_and(|v| v.eq_ignore_ascii_case("true")),
+                store::config::config(conn, "ProxyHostname")?.unwrap_or_default(),
+            ))
+        })
+        .await?;
+    if !enabled {
+        return Ok(HealthCheck::ok(SOURCE));
+    }
+    let name = host.clone();
+    let resolves = tokio::task::spawn_blocking(move || {
+        use std::net::ToSocketAddrs;
+        name.parse::<std::net::IpAddr>().is_ok()
+            || (name.as_str(), 0)
+                .to_socket_addrs()
+                .is_ok_and(|mut a| a.next().is_some())
+    })
+    .await?;
+    if !resolves {
+        return Ok(HealthCheck::new(
+            SOURCE,
+            HealthType::Error,
+            format!("Failed to resolve the IP Address for the Configured Proxy Host {host}"),
+            "#proxy-failed-resolve-ip",
+        ));
+    }
+    match crate::http::shared().get(&ctx.services_ping).send().await {
+        Ok(response) if response.status() == reqwest::StatusCode::BAD_REQUEST => {
+            tracing::error!("Proxy Health Check failed: BadRequest");
+            Ok(HealthCheck::new(
+                SOURCE,
+                HealthType::Error,
+                "Failed to test proxy. Status Code: BadRequest".to_string(),
+                "#proxy-failed-test",
+            ))
+        }
+        Ok(_) => Ok(HealthCheck::ok(SOURCE)),
+        Err(e) => {
+            tracing::error!(
+                "Proxy Health Check failed: {}",
+                crate::http::BodyError::Transport(e)
+            );
+            Ok(HealthCheck::new(
+                SOURCE,
+                HealthType::Error,
+                format!("Failed to test proxy: {}", ctx.services_ping),
+                "#proxy-failed-test",
+            ))
+        }
+    }
 }
 
 /// A mounted file system as `/proc/mounts` lists it.

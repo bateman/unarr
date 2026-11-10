@@ -132,6 +132,9 @@ impl Rolling {
 pub struct LogFiles {
     /// The files, by the least severe level each takes.
     files: Arc<Mutex<Vec<(Level, Rolling)>>>,
+    /// The level being logged at: the debug and trace files are written
+    /// only at theirs.
+    enabled: Arc<std::sync::RwLock<tracing::level_filters::LevelFilter>>,
 }
 
 impl LogFiles {
@@ -157,7 +160,6 @@ impl LogFiles {
     ) -> LogFiles {
         let files = FILES
             .iter()
-            .filter(|(_, least)| *least == Level::INFO || enabled >= *least)
             .map(|(suffix, least)| {
                 (
                     *least,
@@ -167,7 +169,14 @@ impl LogFiles {
             .collect();
         LogFiles {
             files: Arc::new(Mutex::new(files)),
+            enabled: Arc::new(std::sync::RwLock::new(enabled)),
         }
+    }
+
+    /// `ReconfigureLogging`: from now on the debug and trace files take
+    /// lines only if `level` reaches them. Files already written stay.
+    pub fn set_level(&self, level: tracing::level_filters::LevelFilter) {
+        *self.enabled.write().unwrap_or_else(|e| e.into_inner()) = level;
     }
 
     /// Write an event to the files its level reaches.
@@ -183,10 +192,11 @@ impl LogFiles {
     }
 
     fn log(&self, level: Level, line: &str) {
+        let enabled = *self.enabled.read().unwrap_or_else(|e| e.into_inner());
         let mut files = self.files.lock().unwrap_or_else(|e| e.into_inner());
         for (least, file) in files.iter_mut() {
             // `Level` orders the more severe lower.
-            if level <= *least {
+            if level <= *least && (*least == Level::INFO || enabled >= *least) {
                 file.write(line);
             }
         }

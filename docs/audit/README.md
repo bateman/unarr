@@ -106,6 +106,10 @@ opened), and the recording corrected two of the findings.
 | 14. Post-add actions under a missing or empty root folder | Fixed. |
 | 15. `Housekeeping` | Fixed for what Unarr stores: orphaned blocklist entries, episode files, episodes, history and pending releases, pending releases waiting for a download client for more than fourteen days, status rows of providers that are gone, status times in the future, unused tags, then `VACUUM`. |
 | 18. Scores after the last custom format | Fixed. |
+| 2. Proxy | Fixed, HTTP and SOCKS, with the bypass list and the `ProxyCheck` health check. Tried against a local proxy; SOCKS only as far as the URL handed to the client. |
+| 21. Certificate validation | Fixed: enabled, disabled for local addresses, disabled; this machine is always let through, as in the original. Tried against a local server with a self-signed certificate. |
+| 22. Log level and environment overrides | Fixed. `RUST_LOG`, when set, still decides the level. `ConsoleLogLevel` and the syslog settings are not read. |
+| 25. `TrustCgnatIpAddresses` | Fixed, read from `config.xml`, the saved settings and the environment. |
 | 23. Session length and `Secure` | Fixed: seven days from the last use, renewed past half its life; `Secure` when a trusted proxy says the request came over HTTPS. Sessions open at the upgrade end once: the signing key is now a random one kept in the database, not derived from the API key. |
 | 24. `/initialize.json` without `no-store` | Fixed. |
 
@@ -113,4 +117,4 @@ Not recorded against the original, and so not changed: `PUT
 config/naming` does not yet refuse a format whose sample name fails the
 same parse-back check.
 
-Still open: 2, 4, 5, 8, 13, 16, 17, 19, 20, 21, 22, 25 and the low ones.
+Still open: 4, 5, 8, 13, 16, 17, 19, 20 and the low ones.

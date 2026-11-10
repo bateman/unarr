@@ -411,21 +411,7 @@ async fn basic_auth_valid(state: &AppState, headers: &HeaderMap) -> bool {
     }
 }
 
-fn is_local_address(ip: std::net::IpAddr) -> bool {
-    let ip = match ip {
-        std::net::IpAddr::V6(v6) => v6
-            .to_ipv4_mapped()
-            .map(std::net::IpAddr::V4)
-            .unwrap_or(std::net::IpAddr::V6(v6)),
-        v4 => v4,
-    };
-    match ip {
-        std::net::IpAddr::V4(v4) => v4.is_loopback() || v4.is_private() || v4.is_link_local(),
-        std::net::IpAddr::V6(v6) => {
-            v6.is_loopback() || (v6.segments()[0] & 0xffc0) == 0xfe80 || (v6.segments()[0] & 0xfe00) == 0xfc00
-        }
-    }
-}
+use unarr_core::outbound::{is_cgnat_address, is_local_address};
 
 /// Guard for the pages and bootstrap the browser loads: with forms or basic
 /// authentication a valid session is required (the API key does not open
@@ -454,7 +440,10 @@ pub async fn require_ui_auth(State(state): State<AppState>, request: Request, ne
     let exempt = match host.authentication_required {
         AuthenticationRequired::Enabled => false,
         AuthenticationRequired::DisabledForLocalAddresses => {
-            known && client.address.is_some_and(is_local_address)
+            known
+                && client.address.is_some_and(|ip| {
+                    is_local_address(ip) || (host.trust_cgnat_ip_addresses && is_cgnat_address(ip))
+                })
         }
         AuthenticationRequired::DisabledForLocalhost => {
             known && client.address.is_some_and(|ip| ip.is_loopback())
@@ -623,15 +612,6 @@ mod tests {
         };
         assert!(verify_password(&user, "secret"));
         assert!(!verify_password(&user, "Secret"));
-    }
-
-    #[test]
-    fn local_addresses() {
-        assert!(is_local_address("127.0.0.1".parse().unwrap()));
-        assert!(is_local_address("192.168.1.10".parse().unwrap()));
-        assert!(is_local_address("::ffff:10.0.0.5".parse().unwrap()));
-        assert!(is_local_address("fe80::1".parse().unwrap()));
-        assert!(!is_local_address("8.8.8.8".parse().unwrap()));
     }
 
     #[test]

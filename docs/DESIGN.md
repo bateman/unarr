@@ -877,6 +877,26 @@ a query; section 15 asks which library size the target is for.
   ignore it (recorded), and changes only with `ResetApiKey`. Sessions
   last seven days from their last use and are signed with a random key
   kept in the database, not one derived from the API key.
+- **Outgoing connections follow Settings > General while running.** The
+  proxy (HTTP, SOCKS4, SOCKS5, with the bypass list as the originals'
+  runtime reads it: regular expressions over `scheme://host[:port]`, plus
+  addresses, networks and ranges) and the certificate validation level
+  are asked for every request, so a save needs no restart. "Bypass Proxy
+  for Local Addresses" means what it means in the originals: this
+  machine and names without a dot, not the private networks. A save also
+  forgets the TLS sessions kept for resuming, or a host accepted while
+  validation was off would keep being accepted. One process has one
+  HTTP client, so with several personalities in one process the settings
+  of the last one saved apply to all (section 15).
+- **The environment wins over the settings.** The originals' variables
+  (`Sonarr__Server__Port`, `Sonarr__Auth__ApiKey`, `Sonarr__Log__Level`
+  and the others of the Server, Auth, App, Log and Update sections that
+  Unarr has a setting for) are laid over `config.xml` and over what was
+  saved, at start and after every save.
+- **Log level.** The Log Level of Settings > General applies at once:
+  Unarr's own code logs at it and the libraries stay at info; the debug
+  and trace files are written only at their levels. `RUST_LOG`, when
+  set, is the operator's word: it decides, and the setting is ignored.
 - **Restart from the UI replaces the process.** `POST /system/restart`
   stops the daemon as a signal would and executes the same program again
   with the same arguments; under Docker the container keeps running.
@@ -994,6 +1014,10 @@ a query; section 15 asks which library size the target is for.
   a trait. Open is the switch to Unarr's own user agent towards the Servarr
   proxies, due now that phase 3b's exit criteria are met, and the
   conversation with the Servarr team that goes with it.
+- One HTTP client serves the process, and with it one proxy and one
+  certificate validation level. Phase 4 puts a second personality in the
+  process: each then needs its own client, or the settings of one apply
+  to the other's requests.
 - SignalR: `series` and `episode` messages follow the refresh, the adds and
   the edits since 3b. The UI's pages were driven in a browser; no client
   other than the UI listens.

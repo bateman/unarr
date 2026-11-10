@@ -80,6 +80,7 @@ pub fn parse(xml: &str, default_port: u16) -> anyhow::Result<HostConfig> {
         instance_name: text("InstanceName").filter(|s| !s.is_empty()),
         analytics_enabled: boolean("AnalyticsEnabled", true)?,
         theme: string("Theme", "auto"),
+        trust_cgnat_ip_addresses: boolean("TrustCgnatIpAddresses", false)?,
     })
 }
 

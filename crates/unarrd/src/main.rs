@@ -186,6 +186,7 @@ fn load_or_create_config(
         instance_name: None,
         analytics_enabled: false,
         theme: "auto".into(),
+        trust_cgnat_ip_addresses: false,
     };
     tracing::info!(path = %own.display(), "no config.xml found, writing a new one");
     std::fs::write(&own, unarr_import::config_xml::render(&cfg))?;
@@ -450,20 +451,45 @@ fn log_filter() -> tracing_subscriber::EnvFilter {
     tracing_subscriber::EnvFilter::try_from_default_env().unwrap_or_else(|_| "info".into())
 }
 
+/// What a level of Settings > General (`info`, `debug`, `trace`) has
+/// logged: Unarr's own code at that level, the libraries under it at info.
+fn settings_filter(level: &str) -> tracing_subscriber::EnvFilter {
+    match level.trim().to_ascii_lowercase().as_str() {
+        "trace" => "info,unarr=trace".into(),
+        "debug" => "info,unarr=debug".into(),
+        _ => "info".into(),
+    }
+}
+
+/// The level of Settings > General as the log files know it.
+fn settings_level(level: &str) -> tracing::level_filters::LevelFilter {
+    match level.trim().to_ascii_lowercase().as_str() {
+        "trace" => tracing::level_filters::LevelFilter::TRACE,
+        "debug" => tracing::level_filters::LevelFilter::DEBUG,
+        _ => tracing::level_filters::LevelFilter::INFO,
+    }
+}
+
+/// Changes what a personality's dispatcher lets through.
+type FilterHandle =
+    tracing_subscriber::reload::Handle<tracing_subscriber::EnvFilter, tracing_subscriber::Registry>;
+
 /// Where a personality logs: the console, its recent lines (`GET /log`)
-/// and its files.
+/// and its files; and the handle that changes the level it logs at.
 fn personality_dispatch(
     logs: &LogBuffer,
     files: &LogFiles,
     filter: tracing_subscriber::EnvFilter,
-) -> tracing::Dispatch {
-    tracing::Dispatch::new(
+) -> (tracing::Dispatch, FilterHandle) {
+    let (filter, handle) = tracing_subscriber::reload::Layer::new(filter);
+    let dispatch = tracing::Dispatch::new(
         tracing_subscriber::registry()
             .with(filter)
             .with(tracing_subscriber::fmt::layer())
             .with(logs.clone())
             .with(files.clone()),
-    )
+    );
+    (dispatch, handle)
 }
 
 /// The runtime a personality runs on. Every thread it starts, workers and
@@ -551,7 +577,7 @@ fn main() -> anyhow::Result<()> {
         let logs = LogBuffer::new();
         let files = LogFiles::open(&args.data.join(personality_dir(personality)).join("logs"), &name);
         process_log.add(logs.clone(), files.clone());
-        let dispatch = personality_dispatch(&logs, &files, log_filter());
+        let (dispatch, filter) = personality_dispatch(&logs, &files, log_filter());
         let runtime = personality_runtime(&name, &dispatch)
             .with_context(|| format!("starting the runtime for {personality:?}"))?;
         // This thread opens the personality and logs as it while it does;
@@ -559,6 +585,23 @@ fn main() -> anyhow::Result<()> {
         let state = tracing::dispatcher::with_default(&dispatch, || -> anyhow::Result<AppState> {
             let opened = open_personality(personality, &args, &logs)?;
             let state = opened.state;
+            // `ReconfigureLogging`: the level of Settings > General, now and
+            // whenever it is saved. `RUST_LOG`, when set, is the operator's
+            // word and stays in force.
+            if std::env::var_os("RUST_LOG").is_some() {
+                tracing::info!(
+                    "RUST_LOG is set: it decides what is logged, not the Log Level of the settings"
+                );
+            } else {
+                let files = files.clone();
+                state.set_log_level_hook(move |level| {
+                    files.set_level(settings_level(level));
+                    if let Err(e) = filter.reload(settings_filter(level)) {
+                        tracing::warn!("The log level could not be changed: {e}");
+                    }
+                });
+                state.apply_log_level();
+            }
             // A mock serving every metadata host under `<url>/<host>/`, for
             // replays against `scripts/mock-servarr.py`; unset in real use.
             if let Ok(url) = std::env::var("UNARR_METADATA_UPSTREAM") {
@@ -864,6 +907,69 @@ mod tests {
         let _ = std::fs::remove_dir_all(&dir);
     }
 
+    /// The level of Settings > General changes what a personality logs
+    /// while it runs: debug lines of Unarr's own code start to be written,
+    /// to the debug file too, and stop again.
+    #[test]
+    fn the_saved_log_level_takes_effect_at_once() {
+        let dir = std::env::temp_dir().join(format!("unarr-log-level-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&dir);
+        let logs = LogBuffer::new();
+        let files = LogFiles::open(&dir, "sonarr");
+        let (dispatch, filter) = personality_dispatch(&logs, &files, "info".into());
+        let apply = |level: &str| {
+            files.set_level(settings_level(level));
+            filter.reload(settings_filter(level)).unwrap();
+        };
+        let read = |name: &str| std::fs::read_to_string(dir.join(name)).unwrap_or_default();
+        tracing::dispatcher::with_default(&dispatch, || {
+            apply("info");
+            tracing::debug!("quiet at info");
+            apply("debug");
+            tracing::debug!("heard at debug");
+            tracing::trace!("quiet at debug");
+            // A library's debug lines stay out at any level.
+            tracing::debug!(target: "hyper::client", "a library at debug");
+            apply("trace");
+            tracing::trace!("heard at trace");
+            apply("info");
+            tracing::debug!("quiet again");
+            tracing::info!("always there");
+        });
+        let (info, debug, trace) = (
+            read("sonarr.txt"),
+            read("sonarr.debug.txt"),
+            read("sonarr.trace.txt"),
+        );
+        assert!(
+            info.contains("always there") && !info.contains("heard at debug"),
+            "{info}"
+        );
+        // The debug file takes debug and worse; the trace file, written
+        // from the moment the level was trace, everything.
+        assert!(
+            debug.contains("heard at debug") && !debug.contains("heard at trace"),
+            "{debug}"
+        );
+        assert!(
+            trace.contains("heard at trace") && !trace.contains("heard at debug"),
+            "{trace}"
+        );
+        for file in [&info, &debug, &trace] {
+            for never in [
+                "quiet at info",
+                "quiet at debug",
+                "a library at debug",
+                "quiet again",
+            ] {
+                assert!(!file.contains(never), "'{never}' in:\n{file}");
+            }
+        }
+        // Back at info the debug file takes nothing more.
+        assert!(!debug.contains("always there"), "{debug}");
+        let _ = std::fs::remove_dir_all(&dir);
+    }
+
     /// One process, two personalities: whatever a personality's threads
     /// log (its tasks, the tasks they spawn, blocking work, its database
     /// thread) lands in its own files and recent lines, and nowhere else.
@@ -876,7 +982,7 @@ mod tests {
             let files = LogFiles::open(&root.join(name).join("logs"), name);
             // Not the environment's level: the test asserts on info lines
             // whatever `RUST_LOG` the shell exports.
-            let dispatch = personality_dispatch(&logs, &files, "info".into());
+            let (dispatch, _) = personality_dispatch(&logs, &files, "info".into());
             let runtime = personality_runtime(name, &dispatch).unwrap();
             // As `main` does: opened, and its database started, as itself.
             let db = tracing::dispatcher::with_default(&dispatch, || {

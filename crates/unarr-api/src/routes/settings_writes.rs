@@ -580,6 +580,9 @@ pub fn apply_host_overrides(h: &mut unarr_core::config::HostConfig, o: &Map<Stri
     if let Some(v) = s("theme") {
         h.theme = v;
     }
+    if let Some(v) = b("trustCgnatIpAddresses") {
+        h.trust_cgnat_ip_addresses = v;
+    }
     if let Some(v) = s("apiKey").filter(|k| !k.trim().is_empty()) {
         h.api_key = v;
     }
@@ -831,6 +834,7 @@ pub async fn host(State(state): State<AppState>, Json(body): Json<Value>) -> Api
         // only `ResetApiKey` changes the key.
         "authenticationMethod",
         "authenticationRequired",
+        "trustCgnatIpAddresses",
     ] {
         if let Some(v) = body.get(key) {
             overrides.insert(key.into(), v.clone());
@@ -846,6 +850,8 @@ pub async fn host(State(state): State<AppState>, Json(body): Json<Value>) -> Api
     if let (Some(username), Some(password)) = (credential("username"), credential("password")) {
         upsert_user(&state, username, password).await?;
     }
+    state.apply_network_settings().await?;
+    state.apply_log_level();
     let Json(out) = crate::routes::config::host(State(state)).await?;
     Ok(accepted(out))
 }

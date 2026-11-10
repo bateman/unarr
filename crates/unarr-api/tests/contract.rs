@@ -1608,3 +1608,60 @@ async fn restart_and_shutdown_are_handed_to_the_process() {
         assert_eq!(asked, expected);
     }
 }
+
+/// `TrustCgnatIpAddresses`: an address of `100.64.0.0/10` counts as local
+/// for "Disabled for Local Addresses" once the setting is saved.
+#[tokio::test]
+async fn carrier_grade_nat_addresses_are_local_when_trusted() {
+    let state =
+        build_state_with(|h| h.authentication_required = AuthenticationRequired::DisabledForLocalAddresses);
+    let app = unarr_api::router(state.clone());
+    let from = |ip: &str| {
+        get("/initialize.json")
+            .extension(ConnectInfo(
+                format!("{ip}:40000").parse::<std::net::SocketAddr>().unwrap(),
+            ))
+            .body(Body::empty())
+            .unwrap()
+    };
+    assert_eq!(status_of(&app, from("100.100.1.1")).await, StatusCode::FOUND);
+
+    let api = |method: &str, path: &str| {
+        Request::builder()
+            .method(method)
+            .uri(path)
+            .header("X-Api-Key", API_KEY)
+    };
+    let response = app
+        .clone()
+        .oneshot(api("GET", "/api/v3/config/host").body(Body::empty()).unwrap())
+        .await
+        .unwrap();
+    let bytes = axum::body::to_bytes(response.into_body(), usize::MAX)
+        .await
+        .unwrap();
+    let mut host: Value = serde_json::from_slice(&bytes).unwrap();
+    host["trustCgnatIpAddresses"] = Value::Bool(true);
+    // The form asks for the hosts once authentication is not for everyone.
+    host["allowedHosts"] = Value::String("sonarr.test".into());
+    let save = api("PUT", "/api/v3/config/host")
+        .header("content-type", "application/json")
+        .body(Body::from(host.to_string()))
+        .unwrap();
+    let response = app.clone().oneshot(save).await.unwrap();
+    let status = response.status();
+    let bytes = axum::body::to_bytes(response.into_body(), usize::MAX)
+        .await
+        .unwrap();
+    assert_eq!(
+        status,
+        StatusCode::ACCEPTED,
+        "{}",
+        String::from_utf8_lossy(&bytes)
+    );
+
+    assert_eq!(status_of(&app, from("100.100.1.1")).await, StatusCode::OK);
+    // Next to the range, and a public address: still asked to log in.
+    assert_eq!(status_of(&app, from("100.128.0.1")).await, StatusCode::FOUND);
+    assert_eq!(status_of(&app, from("8.8.8.8")).await, StatusCode::FOUND);
+}

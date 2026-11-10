@@ -2296,6 +2296,7 @@ dependencies = [
  "roxmltree",
  "rusqlite",
  "rustls",
+ "rustls-platform-verifier",
  "serde",
  "serde_json",
  "thiserror",
