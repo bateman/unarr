@@ -57,15 +57,33 @@ async fn fresh_queue(state: &AppState) -> ApiResult<Vec<QueueItem>> {
     Ok(queue)
 }
 
-/// `QueueUpdatedEvent` as the three controllers relay it.
+/// `QueueUpdatedEvent` as the three controllers relay it. The status is
+/// what `GET /queue/status` would answer: `QueueStatusController` counts
+/// the queue after its refresh, with the pending releases, so it follows
+/// in a task of its own once the queue is fresh.
 pub fn broadcast_queue(state: &AppState) {
     let hub = state.hub();
     hub.broadcast("queue", json!({"action": "sync"}));
     hub.broadcast("queue/details", json!({"action": "sync"}));
-    hub.broadcast(
-        "queue/status",
-        json!({"action": "updated", "resource": status_resource(&state.downloads().queue())}),
-    );
+    let state = state.clone();
+    tokio::spawn(async move {
+        let downloads = state.downloads();
+        let now = state.now();
+        // A grab or a removal only marked the queue dirty. A refresh that
+        // fails leaves it so; the status then says what is known.
+        if let Err(e) = downloads.refresh_if_dirty(now).await {
+            tracing::warn!(error = %e, "queue refresh before the status broadcast failed");
+        }
+        let mut queue = downloads.queue();
+        match downloads.pending_queue(now).await {
+            Ok(pending) => queue.extend(pending),
+            Err(e) => tracing::warn!(error = %e, "pending releases left out of the queue status"),
+        }
+        state.hub().broadcast(
+            "queue/status",
+            json!({"action": "updated", "resource": status_resource(&queue)}),
+        );
+    });
 }
 
 /// `TimeSpan.ToString()`: `[d.]hh:mm:ss[.fffffff]`.

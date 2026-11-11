@@ -1477,3 +1477,99 @@ async fn the_feed_refuses_absurd_ranges_and_blank_keys() {
         .unwrap();
     assert_eq!(status_of(&blank, header).await, StatusCode::UNAUTHORIZED);
 }
+
+/// The `queue/status` messages on the hub from now on, in order.
+async fn queue_statuses(hub: &mut tokio::sync::broadcast::Receiver<Value>) -> Vec<Value> {
+    let mut out = Vec::new();
+    // The status follows the refresh, in a task of its own.
+    while let Ok(Ok(message)) = tokio::time::timeout(std::time::Duration::from_secs(2), hub.recv()).await {
+        if message["name"] == "queue/status" {
+            out.push(message["body"].clone());
+        }
+    }
+    out
+}
+
+/// `QueueStatusController` counts the pending releases with the queue, on
+/// SignalR as in `GET /queue/status`.
+#[tokio::test]
+async fn the_queue_status_on_the_hub_counts_pending_releases() {
+    use unarr_core::downloads::pending::{PendingRelease, PendingReleaseReason};
+    use unarr_core::indexers::rss::ReleaseInfo;
+    use unarr_core::store;
+
+    let state = build_state();
+    // Two releases held back by a delay profile, one episode each; no
+    // download client to ask, so the queue itself is empty.
+    state
+        .db()
+        .call(|conn| {
+            conn.execute("DELETE FROM providers WHERE kind = 'downloadclient'", [])?;
+            for (n, title) in [
+                "The.Pitt.S01E01.1080p.WEB.h264-GRP",
+                "The.Pitt.S01E02.1080p.WEB.h264-GRP",
+            ]
+            .into_iter()
+            .enumerate()
+            {
+                store::pending::insert(
+                    conn,
+                    &PendingRelease {
+                        id: 0,
+                        series_id: 1,
+                        title: title.into(),
+                        added: chrono::Utc::now(),
+                        release: ReleaseInfo {
+                            guid: format!("pending-{n}"),
+                            title: title.into(),
+                            ..Default::default()
+                        },
+                        reason: PendingReleaseReason::Delay,
+                        series_match_type: Default::default(),
+                        release_source: Default::default(),
+                    },
+                )?;
+            }
+            Ok(())
+        })
+        .await
+        .expect("pending releases");
+    let mut hub = state.hub().subscribe();
+    let app = unarr_api::router(state.clone());
+    let call = |method: &str, uri: &str| {
+        Request::builder()
+            .method(method)
+            .uri(uri)
+            .header("X-Api-Key", API_KEY)
+            .body(Body::empty())
+            .unwrap()
+    };
+
+    // The endpoint counts them.
+    let response = app
+        .clone()
+        .oneshot(call("GET", "/api/v3/queue/status"))
+        .await
+        .unwrap();
+    assert_eq!(response.status(), StatusCode::OK);
+    let answered: Value =
+        serde_json::from_slice(&response.into_body().collect().await.unwrap().to_bytes()).unwrap();
+    assert_eq!(answered["totalCount"], 2, "{answered}");
+
+    // One of the two removed: the hub says what the endpoint says.
+    let response = app.clone().oneshot(call("GET", "/api/v3/queue")).await.unwrap();
+    let page: Value =
+        serde_json::from_slice(&response.into_body().collect().await.unwrap().to_bytes()).unwrap();
+    let id = page["records"][0]["id"].as_i64().expect("a pending queue item");
+    let response = app
+        .clone()
+        .oneshot(call("DELETE", &format!("/api/v3/queue/{id}")))
+        .await
+        .unwrap();
+    assert_eq!(response.status(), StatusCode::OK);
+    let announced = queue_statuses(&mut hub).await;
+    let last = announced.last().expect("a queue status on the hub");
+    assert_eq!(last["action"], "updated");
+    assert_eq!(last["resource"]["totalCount"], 1, "{announced:?}");
+    assert_eq!(last["resource"]["count"], 1, "{announced:?}");
+}
