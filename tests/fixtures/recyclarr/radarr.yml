@@ -1,0 +1,251 @@
+# The maintainer's Recyclarr configuration, the `radarr:` section of
+# bateman/homelab docker/recyclarr.yml as the maintainer gave it on 11
+# November 2026, without base_url and api_key. Nothing runs with it yet:
+# milestone 4c records the exchange between the real Recyclarr and the real
+# Radarr with it, as sonarr-exchange.json was recorded with recyclarr.yml.
+radarr:
+  movies:
+    # Remove custom formats from Radarr that are no longer in this config
+    delete_old_custom_formats: true
+
+    # ---------------------------------------------------------------------------
+    # Quality Definition
+    # Controls min/max/preferred file sizes per quality level
+    # Docs: https://recyclarr.dev/wiki/yaml/config-reference/quality-definition/
+    # ---------------------------------------------------------------------------
+    quality_definition:
+      type: movie
+      # preferred_ratio: 1.0  # 0.0=min, 0.5=mid, 1.0=max (default: guide value)
+
+    # ---------------------------------------------------------------------------
+    # Quality Profiles
+    # Uses trash_id to pull full profile from Trash Guides automatically
+    # Docs: https://recyclarr.dev/wiki/yaml/config-reference/quality-profiles/
+    # ---------------------------------------------------------------------------
+    quality_profiles:
+      # HD Bluray + WEB (1080p) - Recommended for most users
+      - trash_id: d1d67249d3890e49bc12e275d989a7e9
+        reset_unmatched_scores:
+          enabled: true
+
+      # UHD Bluray + WEB (4K) - 4K with 1080p fallback
+      - trash_id: 64fb5f9858489bdac2af690e27c8f42f
+        reset_unmatched_scores:
+          enabled: true
+
+      # Any - Custom profile limited to 720p-2160p (no SD/480p/BR-DISK)
+      - name: Any
+        upgrade:
+          allowed: true
+          until_quality: WEB 1080p
+        qualities:
+          - name: WEB 2160p
+            qualities:
+              - WEBDL-2160p
+              - WEBRip-2160p
+          - name: Remux-2160p
+          - name: Bluray-2160p
+          - name: HDTV-2160p
+          - name: WEB 1080p
+            qualities:
+              - WEBDL-1080p
+              - WEBRip-1080p
+          - name: Remux-1080p
+          - name: Bluray-1080p
+          - name: HDTV-1080p
+          - name: WEB 720p
+            qualities:
+              - WEBDL-720p
+              - WEBRip-720p
+          - name: Bluray-720p
+          - name: HDTV-720p
+
+      # HD - 720p/1080p - Accepts all HD qualities, cutoff at HDTV-1080p
+      - name: HD - 720p/1080p
+        min_format_score: 0
+        upgrade:
+          allowed: true
+          until_quality: HDTV-1080p
+          until_score: 10000
+        qualities:
+          - name: WEB 1080p
+            qualities:
+              - WEBDL-1080p
+              - WEBRip-1080p
+          - name: Remux-1080p
+          - name: Bluray-1080p
+          - name: HDTV-1080p
+          - name: WEB 720p
+            qualities:
+              - WEBDL-720p
+              - WEBRip-720p
+          - name: Bluray-720p
+          - name: HDTV-720p
+
+      # HD-1080p - Only 1080p qualities, upgrades until Bluray-1080p
+      - name: HD-1080p
+        min_format_score: 0
+        upgrade:
+          allowed: true
+          until_quality: Bluray-1080p
+          until_score: 10000
+        qualities:
+          - name: Remux-1080p
+          - name: Bluray-1080p
+          - name: WEB 1080p
+            qualities:
+              - WEBDL-1080p
+              - WEBRip-1080p
+          - name: HDTV-1080p
+
+      # -----------------------------------------------------------------------
+      # Italian Audio Profiles (ITA)
+      # Same quality settings as their base profiles minus the Remux
+      # qualities, but require Italian audio. After syncing, manually set
+      # "Language: Not Italian" CF score to -10000 on each ITA profile in the
+      # Radarr UI. Also set the Language dropdown to "Any" on each ITA
+      # profile (required for language CFs).
+      #
+      # NOTE: "UHD Bluray + WEB - ITA" must be cloned manually in the Radarr
+      # UI from its Trash Guides original (trash_id profiles include CF scores
+      # that can't be duplicated here). Recyclarr will still assign the MULTi
+      # score to it via the custom_formats section below. An "HD Bluray + WEB
+      # - ITA" clone is not used in this setup, so it is not listed there. If
+      # you clone it, add it there too, or it gets no MULTi score. Listing a
+      # profile that does not exist only makes sync warn.
+      #
+      # No Remux on ITA profiles: an Italian track in a Remux is often grafted
+      # from a WEB-DL onto the Blu-ray video and drifts out of lip sync over
+      # the film (typically an iTA DDP/EAC3 track next to lossless English).
+      # A WEB-DL takes video and Italian audio from the same stream. Omitted
+      # qualities are added to the profile disabled on sync. Manual clones
+      # inherit no Remux: their Trash Guides originals have none.
+      # -----------------------------------------------------------------------
+
+      # Any - ITA
+      - name: Any - ITA
+        upgrade:
+          allowed: true
+          until_quality: WEB 1080p
+        qualities:
+          - name: WEB 2160p
+            qualities:
+              - WEBDL-2160p
+              - WEBRip-2160p
+          - name: Bluray-2160p
+          - name: HDTV-2160p
+          - name: WEB 1080p
+            qualities:
+              - WEBDL-1080p
+              - WEBRip-1080p
+          - name: Bluray-1080p
+          - name: HDTV-1080p
+          - name: WEB 720p
+            qualities:
+              - WEBDL-720p
+              - WEBRip-720p
+          - name: Bluray-720p
+          - name: HDTV-720p
+
+      # HD - 720p/1080p - ITA
+      - name: HD - 720p/1080p - ITA
+        min_format_score: 0
+        upgrade:
+          allowed: true
+          until_quality: HDTV-1080p
+          until_score: 10000
+        qualities:
+          - name: WEB 1080p
+            qualities:
+              - WEBDL-1080p
+              - WEBRip-1080p
+          - name: Bluray-1080p
+          - name: HDTV-1080p
+          - name: WEB 720p
+            qualities:
+              - WEBDL-720p
+              - WEBRip-720p
+          - name: Bluray-720p
+          - name: HDTV-720p
+
+      # HD-1080p - ITA
+      - name: HD-1080p - ITA
+        min_format_score: 0
+        upgrade:
+          allowed: true
+          until_quality: Bluray-1080p
+          until_score: 10000
+        qualities:
+          - name: Bluray-1080p
+          - name: WEB 1080p
+            qualities:
+              - WEBDL-1080p
+              - WEBRip-1080p
+          - name: HDTV-1080p
+
+      # Remux + WEB 1080p
+      # - trash_id: 9ca12ea80aa55ef916e3751f4b874151
+      #   reset_unmatched_scores:
+      #     enabled: true
+      #
+      # Remux + WEB 2160p
+      # - trash_id: fd161a61e3ab826d3a22d53f935696dd
+      #   reset_unmatched_scores:
+      #     enabled: true
+
+    # ---------------------------------------------------------------------------
+    # Custom Formats (Optional Overrides)
+    # The quality profile above already includes Trash Guides custom formats.
+    # Only add entries here to override scores or add formats not in the profile.
+    # Docs: https://recyclarr.dev/wiki/yaml/config-reference/custom-formats/
+    # ---------------------------------------------------------------------------
+    custom_formats:
+      # -----------------------------------------------------------------------
+      # Italian Audio — prefer MULTi releases (original + Italian audio)
+      # For full Italian-only enforcement, also create "Language: Not Italian"
+      # CF manually in the Radarr UI. See docs/setup/arr-tuning-guide.md
+      # IMPORTANT: When using language CFs in Radarr, set the quality profile
+      # language to "Any" (not a specific language) to avoid conflicts.
+      # -----------------------------------------------------------------------
+      - trash_ids:
+          - 4b900e171accbfb172729b63323ea8ca  # MULTi
+        assign_scores_to:
+          # Standard profiles (soft preference)
+          - name: HD Bluray + WEB
+            score: 2000
+          - name: UHD Bluray + WEB
+            score: 2000
+          - name: Any
+            score: 2000
+          - name: HD - 720p/1080p
+            score: 2000
+          - name: HD-1080p
+            score: 2000
+          # ITA profiles (MULTi bonus + Language: Not Italian = -10000 in UI)
+          - name: UHD Bluray + WEB - ITA
+            score: 2000
+          - name: Any - ITA
+            score: 2000
+          - name: HD - 720p/1080p - ITA
+            score: 2000
+          - name: HD-1080p - ITA
+            score: 2000
+
+    # ---------------------------------------------------------------------------
+    # Media Naming - Trash Guides recommended (Plex-optimized)
+    # Keys listed via: recyclarr list naming radarr
+    # Docs: https://recyclarr.dev/wiki/yaml/config-reference/media-naming/
+    # ---------------------------------------------------------------------------
+    media_naming:
+      folder: plex-tmdb
+      movie:
+        rename: true
+        standard: plex-tmdb
+
+    # ---------------------------------------------------------------------------
+    # Media Management
+    # Docs: https://recyclarr.dev/wiki/yaml/config-reference/media-management/
+    # ---------------------------------------------------------------------------
+    media_management:
+      # Let custom format scores handle propers/repacks (Trash Guides recommendation)
+      propers_and_repacks: do_not_prefer

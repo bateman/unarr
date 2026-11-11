@@ -2,6 +2,10 @@
 
 - `recyclarr.yml`: the maintainer's Recyclarr configuration (the `sonarr:`
   section, without `base_url` and `api_key`).
+- `radarr.yml`: the `radarr:` section of the same configuration, as given
+  on 11 November 2026, without `base_url` and `api_key`. No exchange is
+  recorded with it yet: that is part of milestone 4c
+  (`docs/phase-4-radarr.md`), which writes the settings Recyclarr syncs.
 - `sonarr-exchange.json`: what Recyclarr 8.8.1 and the original Sonarr
   4.0.20.3014 said to each other on the phase 1 fixture, in the four phases
   `scripts/recyclarr-replay.py` describes (an older configuration, a drift,

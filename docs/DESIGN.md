@@ -1239,11 +1239,17 @@ the same order as `/series` at 950 series, and the same question
   the 60 MB target of section 9 is so far met only on two small
   libraries. Radarr's `health` is empty until it has checks to run: a
   root folder that is missing shows in `rootfolder`, not as a warning.
-- The maintainer's Recyclarr configuration for Radarr is in their homelab
-  repository (`docker/recyclarr.yml`); it was not read in 4a, which writes
-  nothing. 4c records the exchange with the real Recyclarr and the real
-  Radarr from it, as phase 3b did for Sonarr. The import list in use is
-  the IMDb watchlist (`IMDbListImport`), the one 4c drives.
+- The maintainer's Recyclarr configuration for Radarr is in the tree
+  (`tests/fixtures/recyclarr/radarr.yml`) and nothing runs with it yet:
+  4c records the exchange between the real Recyclarr and the real Radarr
+  from it, as phase 3b did for Sonarr. It syncs two guide profiles, six
+  named ones, the MULTi format, the `plex-tmdb` naming and the propers
+  setting, all of which the fixture already shows as synced; the
+  "UHD Bluray + WEB - ITA" profile and the "Language not Italian" format
+  are the maintainer's own, made in the UI, so `delete_old_custom_formats`
+  must leave the latter alone, as the real Recyclarr does for formats it
+  did not create. The import list in use is the IMDb watchlist
+  (`IMDbListImport`), the one 4c drives.
 - SignalR: `series` and `episode` messages follow the refresh, the adds and
   the edits since 3b. The UI's pages were driven in a browser; no client
   other than the UI listens.
