@@ -64,6 +64,7 @@ pub fn api_router() -> Router<AppState> {
         .route("/config/downloadclient", get(config::download_client))
         .route("/config/importlist", get(config::import_list))
         .route("/config/naming", get(config::naming))
+        .route("/config/naming/examples", get(config::naming_examples))
         .route("/config/mediamanagement", get(config::media_management))
         .route("/config/indexer", get(config::indexer))
         .route("/config/metadata", get(config::metadata))

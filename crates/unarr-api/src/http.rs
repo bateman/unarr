@@ -155,37 +155,21 @@ async fn framework_answer(response: Response, personality: Personality, command:
     let empty = detail.starts_with("EOF while parsing a value at line 1 column 0");
     let (document, errors) = match personality {
         Personality::Radarr if empty => (
-            "https://tools.ietf.org/html/rfc9110#section-15.5.1",
+            crate::error::BAD_REQUEST_TYPE_RFC9110,
             json!({"": ["A non-empty request body is required."]}),
         ),
-        Personality::Radarr => (
-            "https://tools.ietf.org/html/rfc9110#section-15.5.1",
-            json!({"$": [detail]}),
-        ),
-        Personality::Sonarr | Personality::Lidarr => (
-            "https://tools.ietf.org/html/rfc7231#section-6.5.1",
-            json!({"$": [detail]}),
-        ),
+        Personality::Radarr => (crate::error::BAD_REQUEST_TYPE_RFC9110, json!({"$": [detail]})),
+        Personality::Sonarr | Personality::Lidarr => {
+            (crate::error::BAD_REQUEST_TYPE_RFC7231, json!({"$": [detail]}))
+        }
     };
-    let body = json!({
-        "type": document,
-        "title": "One or more validation errors occurred.",
-        "status": 400,
-        "errors": errors,
-        "traceId": crate::error::trace_id(),
-    });
     // `POST /command` reads its body itself and says plain JSON.
     let content_type = if command {
         "application/json; charset=utf-8"
     } else {
         "application/problem+json; charset=utf-8"
     };
-    (
-        StatusCode::BAD_REQUEST,
-        [(header::CONTENT_TYPE, content_type)],
-        body.to_string(),
-    )
-        .into_response()
+    crate::error::validation_problem(document, content_type, errors)
 }
 
 /// What the originals' pipeline does around an action once the request is

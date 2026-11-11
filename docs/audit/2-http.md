@@ -183,11 +183,14 @@ now in `api/http.rs` unless said otherwise; `api/tests/http.rs` holds them.
 Also measured and aligned: a path under `/api/v3` that no action takes
 asks for the key before saying 404.
 
-What the script still reports after this, none of it the shared layer's:
-`GET /api/v3/config/naming/examples` is missing on Radarr (404);
-`GET /api/v3/manualimport?seriesId=1` and `GET /api/v3/series/50/folder`
-on Sonarr answer for a state the golden list builds with the writes the
-script does not replay.
+What the script reported after this, none of it the shared layer's, and
+what became of it: `GET /api/v3/config/naming/examples` was missing on
+Radarr (404) for want of the movie file name builder, since written;
+`GET /api/v3/series/50/folder` on Sonarr said a series that is not there
+with the framework's 404 where the original throws its own ("Series with
+ID 50 does not exist"), since corrected; `GET
+/api/v3/manualimport?seriesId=1` on Sonarr is a 500 on the original when
+the series' folder is not on disk and an empty list here, left so.
 
 Seen with the probes and left as it is: static files (`/Content/…`) are
 `max-age=31536000, public` on the originals and `no-cache` here (row 4.9):

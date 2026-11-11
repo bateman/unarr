@@ -25,9 +25,8 @@ use common::*;
 const API_KEY: &str = "0123456789abcdef0123456789abcdef";
 
 /// Goldens recorded and not implemented yet, taken out of this list as the
-/// work lands. The naming examples need the movie file name builder, which
-/// comes with the milestone that renames (4c).
-const PENDING: &[&str] = &["config-naming-examples"];
+/// work lands.
+const PENDING: &[&str] = &[];
 const PENDING_PREFIXES: &[&str] = &[];
 
 fn pending(name: &str) -> bool {

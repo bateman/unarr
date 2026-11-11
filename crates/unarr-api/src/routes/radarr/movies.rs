@@ -231,7 +231,7 @@ struct Collections {
     members: Vec<unarr_core::movies::model::MovieMetadata>,
     in_library: HashSet<i64>,
     excluded: HashSet<i64>,
-    folder_format: String,
+    naming: unarr_core::movies::model::MovieNamingConfig,
 }
 
 async fn load_collections(state: &AppState) -> anyhow::Result<Collections> {
@@ -249,7 +249,7 @@ async fn load_collections(state: &AppState) -> anyhow::Result<Collections> {
                     .into_iter()
                     .map(|e| e.tmdb_id)
                     .collect(),
-                folder_format: movies::naming(conn)?.movie_folder_format,
+                naming: movies::naming(conn)?,
             })
         })
         .await
@@ -277,7 +277,13 @@ fn collection_resource(all: &Collections, c: &Collection) -> Value {
                 "year": m.year,
                 "ratings": m.ratings,
                 "genres": m.genres,
-                "folder": movie_naming::movie_folder(&all.folder_format, m),
+                "folder": movie_naming::movie_folder(
+                    &movie_naming::NamingMovie {
+                        metadata: m,
+                        translations: &[],
+                    },
+                    &all.naming,
+                ),
                 "isExisting": all.in_library.contains(&m.tmdb_id),
                 "isExcluded": all.excluded.contains(&m.tmdb_id),
             });

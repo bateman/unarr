@@ -1252,7 +1252,8 @@ a parser.
   two pairs in the goldens; 4b probed it and found otherwise
   (section 16).
 - **Left for their milestone, on purpose.** `config/naming/examples`
-  (recorded, pending: it needs the movie file name builder, 4c);
+  (recorded, pending then: the movie file name builder it needs was
+  written after 4b, in `movies::naming`, and the golden replays);
   `movie/lookup`, `importlist/movie`, `release`, `rename`, `manualimport`,
   `parse`, `filesystem` (the UI asks for them on pages 4b and 4c make
   work); Radarr's defaults on a blank start (an imported installation has

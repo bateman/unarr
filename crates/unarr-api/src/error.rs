@@ -178,6 +178,29 @@ pub fn not_found_problem(document: &str, content_type: &'static str) -> Response
         .into_response()
 }
 
+/// ASP.NET's validation problem details: what model binding answers when
+/// it cannot read a body or a query, `errors` naming each field. `document`
+/// is the RFC section the personality's runtime points at.
+pub fn validation_problem(document: &str, content_type: &'static str, errors: serde_json::Value) -> Response {
+    (
+        StatusCode::BAD_REQUEST,
+        [(axum::http::header::CONTENT_TYPE, content_type)],
+        json!({
+            "type": document,
+            "title": "One or more validation errors occurred.",
+            "status": 400,
+            "errors": errors,
+            "traceId": trace_id(),
+        })
+        .to_string(),
+    )
+        .into_response()
+}
+
+/// The section a 400 of Radarr's runtime names; Sonarr's names RFC 7231.
+pub const BAD_REQUEST_TYPE_RFC9110: &str = "https://tools.ietf.org/html/rfc9110#section-15.5.1";
+pub const BAD_REQUEST_TYPE_RFC7231: &str = "https://tools.ietf.org/html/rfc7231#section-6.5.1";
+
 /// The body of an `NzbDroneClientException`: the message, and a description
 /// that the originals fill with the exception and its stack.
 fn client_exception(message: &str) -> serde_json::Value {

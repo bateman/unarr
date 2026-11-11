@@ -410,8 +410,10 @@ What does not hold, or was not verified:
 
 What 4c starts from: `movies::downloads` leaves a completed download
 `importPending` with its import item resolved; the movie file name
-builder is not written (`config-naming-examples` is the one pending
-golden); the command runtime runs Radarr's commands through
+builder is written (`movies::naming`, a port of Radarr's
+`FileNameBuilder`, landed after 4b for `config/naming/examples`, the
+last pending golden; compared with the original on 444 formats of the
+settings form) and nothing renames with it yet; the command runtime runs Radarr's commands through
 `movies::commands`, where the library's commands go; the scheduled tasks
 of the library are listed and skipped by `CommandBody::runs_in`.
 `docs/DESIGN.md` section 16 has the decisions, section 17 what is open.

@@ -137,7 +137,7 @@ impl TokenMatch {
     /// The originals' fallback for a missing value: only when the token has
     /// no decoration, so `{-Release Group}` disappears rather than reading
     /// `-Sonarr`.
-    fn default_value(&self, default: &str) -> String {
+    pub(crate) fn default_value(&self, default: &str) -> String {
         if self.prefix.is_empty() && self.suffix.is_empty() {
             default.to_string()
         } else {
@@ -146,28 +146,28 @@ impl TokenMatch {
     }
 }
 
-type Handler<'a> = Box<dyn Fn(&TokenMatch) -> Option<String> + 'a>;
+pub(crate) type Handler<'a> = Box<dyn Fn(&TokenMatch) -> Option<String> + 'a>;
 
 /// Token handlers keyed by the simplified token name.
-struct Handlers<'a>(HashMap<String, Handler<'a>>);
+pub(crate) struct Handlers<'a>(HashMap<String, Handler<'a>>);
 
 impl<'a> Handlers<'a> {
-    fn new() -> Self {
+    pub(crate) fn new() -> Self {
         Handlers(HashMap::new())
     }
 
-    fn set<F>(&mut self, token: &str, f: F)
+    pub(crate) fn set<F>(&mut self, token: &str, f: F)
     where
         F: Fn(&TokenMatch) -> Option<String> + 'a,
     {
         self.0.insert(simplify(token), Box::new(f));
     }
 
-    fn value(&mut self, token: &str, value: String) {
+    pub(crate) fn value(&mut self, token: &str, value: String) {
         self.set(token, move |_| Some(value.clone()));
     }
 
-    fn get(&self, token: &str) -> Option<&Handler<'a>> {
+    pub(crate) fn get(&self, token: &str) -> Option<&Handler<'a>> {
         self.0.get(&simplify(token))
     }
 }
@@ -182,7 +182,7 @@ fn simplify(token: &str) -> String {
         .collect()
 }
 
-fn is_blank(s: &str) -> bool {
+pub(crate) fn is_blank(s: &str) -> bool {
     s.trim().is_empty()
 }
 
@@ -284,9 +284,27 @@ fn strip_diacritic(c: char) -> char {
 
 /// Illegal characters and colons, per the naming settings.
 pub fn clean_file_name(name: &str, config: &NamingConfig) -> String {
+    clean_file_name_as(
+        name,
+        config.replace_illegal_characters,
+        config.colon_replacement_format,
+        &config.custom_colon_replacement_format,
+    )
+}
+
+/// [`clean_file_name`] for the settings of either application: whether
+/// illegal characters are replaced, and the colon's replacement (`0`
+/// delete, `1` dash, `2` space dash, `3` space dash space, `4` smart, `5`
+/// Sonarr's custom one).
+pub(crate) fn clean_file_name_as(
+    name: &str,
+    replace_illegal_characters: bool,
+    colon_replacement_format: i64,
+    custom_colon_replacement: &str,
+) -> String {
     let mut result = name.to_string();
-    if config.replace_illegal_characters {
-        match config.colon_replacement_format {
+    if replace_illegal_characters {
+        match colon_replacement_format {
             // Smart: a colon followed by a space reads better as " - ".
             4 => {
                 result = result.replace(": ", " - ");
@@ -297,7 +315,7 @@ pub fn clean_file_name(name: &str, config: &NamingConfig) -> String {
                     1 => "-",
                     2 => " -",
                     3 => " - ",
-                    5 => config.custom_colon_replacement_format.as_str(),
+                    5 => custom_colon_replacement,
                     _ => "",
                 };
                 result = result.replace(':', replacement);
@@ -307,14 +325,7 @@ pub fn clean_file_name(name: &str, config: &NamingConfig) -> String {
         result = result.replace(':', "");
     }
     for (bad, good) in BAD_CHARACTERS.iter().zip(GOOD_CHARACTERS) {
-        result = result.replace(
-            bad,
-            if config.replace_illegal_characters {
-                good
-            } else {
-                ""
-            },
-        );
+        result = result.replace(bad, if replace_illegal_characters { good } else { "" });
     }
     result
         .trim_start_matches([' ', '.'])
@@ -327,7 +338,7 @@ pub fn clean_folder_name(name: &str) -> String {
     name.trim_matches([' ', '.']).to_string()
 }
 
-fn replace_reserved_device_names(input: &str) -> String {
+pub(crate) fn replace_reserved_device_names(input: &str) -> String {
     reserved_device_re()
         .replace_all(input, |c: &fancy_regex::Captures<str>| c[0].replace('.', "_"))
         .into_owned()
@@ -342,7 +353,7 @@ fn take_chars(s: &str, n: usize) -> String {
 }
 
 /// `{Token:90}` keeps 90 characters and an ellipsis; `{Token:-90}` keeps the end.
-fn truncate(input: &str, formatter: Option<&str>) -> String {
+pub(crate) fn truncate(input: &str, formatter: Option<&str>) -> String {
     if is_blank(input) {
         return String::new();
     }
@@ -426,6 +437,8 @@ fn two_letter_language(code: &str) -> Option<&'static str> {
         "bos" => "BS",
         "afr" => "AF",
         "swa" => "SW",
+        "gsw" => "DE",
+        "khk" | "mvf" | "mon" => "MN",
         _ => return None,
     })
 }
@@ -678,7 +691,7 @@ fn add_episode_title_tokens<'a>(h: &mut Handlers<'a>, episodes: &'a [NamingEpiso
     });
 }
 
-fn file_stem(path: &str) -> &str {
+pub(crate) fn file_stem(path: &str) -> &str {
     let name = path.rsplit(['/', '\\']).next().unwrap_or(path);
     match name.rsplit_once('.') {
         Some((stem, _)) if !stem.is_empty() => stem,
@@ -731,7 +744,7 @@ fn quality_proper(series: &NamingSeries<'_>, quality: QualityModel) -> String {
     String::new()
 }
 
-fn quality_real(quality: QualityModel) -> &'static str {
+pub(crate) fn quality_real(quality: QualityModel) -> &'static str {
     if quality.real > 0 {
         "REAL"
     } else {
@@ -751,8 +764,8 @@ fn add_quality_tokens<'a>(h: &mut Handlers<'a>, series: &'a NamingSeries<'a>, fi
     h.value("{Quality Real}", real.to_string());
 }
 
-fn add_media_info_tokens<'a>(h: &mut Handlers<'a>, file: &'a NamingFile<'a>) {
-    let Some(mi) = file.media_info else {
+pub(crate) fn add_media_info_tokens<'a>(h: &mut Handlers<'a>, media_info: Option<&'a NamingMediaInfo>) {
+    let Some(mi) = media_info else {
         return;
     };
     let video_bit_depth = if mi.video_bit_depth > 0 {
@@ -824,7 +837,7 @@ fn add_media_info_tokens<'a>(h: &mut Handlers<'a>, file: &'a NamingFile<'a>) {
     );
 }
 
-fn add_custom_format_tokens<'a>(h: &mut Handlers<'a>, formats: &'a [NamingCustomFormat<'a>]) {
+pub(crate) fn add_custom_format_tokens<'a>(h: &mut Handlers<'a>, formats: &'a [NamingCustomFormat<'a>]) {
     h.set("{Custom Formats}", move |m| {
         Some(custom_formats_token(formats, m.custom_format.as_deref()))
     });
@@ -1277,7 +1290,7 @@ fn build(
         add_episode_title_placeholder_tokens(&mut h);
         add_episode_file_tokens(&mut h, file, !has_identifier || file.is_new);
         add_quality_tokens(&mut h, series, file);
-        add_media_info_tokens(&mut h, file);
+        add_media_info_tokens(&mut h, file.media_info);
         add_custom_format_tokens(&mut h, custom_formats);
 
         let component = replace_tokens(&p, &h, config, true).trim().to_string();
