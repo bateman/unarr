@@ -623,8 +623,18 @@ static CLEAN_RELEASE_GROUP_RE: Lazy = net_regex!(
 );
 static CLEAN_TORRENT_SUFFIX_RE: Lazy = net_regex!(r"\[(?:ettv|rartv|rarbg|cttv|publichd)\]$");
 static CLEAN_QUALITY_BRACKETS_RE: Lazy = net_regex!(r"\[[a-z0-9 ._-]+\]$");
+// Not the original verbatim. Sonarr ends its look-behind with an optional
+// back-reference, `(?<!(?:WEB-DL|...|-\d{2})(?:\k<part2>)?)`. .NET matches a
+// look-behind right to left, so that reads: refuse the group when one of
+// the words ends where the group ends, or where its second part begins.
+// `fancy-regex` matches look-behinds left to right and gets the
+// back-reference wrong once `part2` was tried and given up, so the
+// look-behind is written twice without it: before `part2` and at the end.
+// Before `part2` it also runs when there is no second part, where it stands
+// at the end of the group and repeats the final one. Checked against
+// Sonarr 4.0.20.3014, see `release_group_look_behind_covers_both_parts`.
 static RELEASE_GROUP_RE: Lazy = net_regex!(
-    r"-(?<releasegroup>[a-z0-9]+(?<part2>-[a-z0-9]+)?(?!.+?(?:480p|576p|720p|1080p|2160p)))(?<!(?:WEB-DL|Blu-Ray|480p|576p|720p|1080p|2160p|DTS-HD|DTS-X|DTS-MA|DTS-ES|-ES|-EN|-CAT|[ ._]\d{4}-\d{2}|-\d{2})(?:\k<part2>)?)(?:\b|[-._ ]|$)|[-._ ]\[(?<releasegroup>[a-z0-9]+)\]$"
+    r"-(?<releasegroup>[a-z0-9]+(?<!WEB-DL|Blu-Ray|480p|576p|720p|1080p|2160p|DTS-HD|DTS-X|DTS-MA|DTS-ES|-ES|-EN|-CAT|[ ._]\d{4}-\d{2}|-\d{2})(?<part2>-[a-z0-9]+)?(?!.+?(?:480p|576p|720p|1080p|2160p)))(?<!WEB-DL|Blu-Ray|480p|576p|720p|1080p|2160p|DTS-HD|DTS-X|DTS-MA|DTS-ES|-ES|-EN|-CAT|[ ._]\d{4}-\d{2}|-\d{2})(?:\b|[-._ ]|$)|[-._ ]\[(?<releasegroup>[a-z0-9]+)\]$"
 );
 static INVALID_RELEASE_GROUP_RE: Lazy = net_regex!(r"^([se]\d+|[0-9a-f]{8})$");
 static ANIME_RELEASE_GROUP_RE: Lazy = net_regex!(r"^(?:\[(?<subgroup>(?!\s).+?(?<!\s))\](?:_|-|\s|\.)?)");
@@ -1307,5 +1317,51 @@ mod tests {
         assert_eq!(parse_number("１５８"), Some(158));
         assert_eq!(utf16_from("aé", 2), Some(""));
         assert_eq!(utf16_from("aéb", 2), Some("b"));
+    }
+
+    /// The look-behind of the release group pattern refuses a group that
+    /// ends in a quality or language word as a whole, or whose first part
+    /// does. Every expectation but the first, a ported vector, is what
+    /// Sonarr 4.0.20.3014 itself answers on `/api/v3/parse`.
+    #[test]
+    fn release_group_look_behind_covers_both_parts() {
+        #[rustfmt::skip]
+        let cases: &[(&str, Option<&str>)] = &[
+            ("SomeShow S01E168 1080p WEB-DL AAC 2.0 x264-Erai-raws",         Some("Erai-raws")),
+            ("Show.S01E01.1080p.AVC.ES-CAT-EN.DTS-HD.MA.5.1",                None),
+            ("Show S01E01 [BDRemux 1080p AVC ES-CAT-EN DTS-HD MA 5.1 Subs]", None),
+            ("Show.S01E01.1080p.AVC.ES-CAT-EN",                              None),
+            ("Show.S01E01.1080p.AVC.ES-CAT",                                 None),
+            ("Show.S01E01.1080p.AVC.ES-EN",                                  None),
+            ("Show.S01E01.1080p.AVC-CAT-EN",                                 None),
+            ("Show.S01E01.1080p.AVC-Foo-EN",                                 Some("Foo")),
+            ("Show.S01E01.1080p.AVC-EN-Foo",                                 Some("Foo")),
+            ("Show.S01E01.1080p.AVC-ES-Foo",                                 Some("Foo")),
+            ("Show.S01E01.1080p.AVC-Foo-Bar",                                Some("Foo-Bar")),
+            ("Show.S01E01.1080p.AVC-Foo-Bar-Baz",                            Some("Baz")),
+            ("Show.S01E01.1080p.WEB-DL.AVC-Foo",                             Some("Foo")),
+            ("Show.S01E01.1080p.WEB-DL-Foo",                                 Some("Foo")),
+            ("Show.S01E01.1080p.AVC.WEB-DL",                                 None),
+            ("Show.S01E01.1080p.AVC.WEB-DL-DL",                              Some("DL")),
+            ("Show.S01E01.1080p.AVC-WEB-DL",                                 Some("WEB")),
+            ("Show.S01E01.1080p.AVC.DTS-HD-Foo",                             Some("Foo")),
+            ("Show.S01E01.1080p.AVC.DTS-HD.MA-Foo-Bar",                      Some("Foo-Bar")),
+            ("Show.S01E01.1080p.AVC-Foo-12",                                 Some("Foo")),
+            ("Show.S01E01.1080p.AVC-12-Foo",                                 Some("Foo")),
+            ("Show.S01E01.1080p.AVC.2020-12-Foo",                            Some("Foo")),
+            ("Show.S01E01.1080p.AVC-ES",                                     None),
+            ("Show.S01E01.1080p.AVC-ES-ES",                                  None),
+            ("Show.S01E01.1080p.AVC-Foo-ES-EN",                              Some("Foo")),
+            ("Show.S01E01.1080p.AVC.DTS-ES-EN",                              None),
+            ("Show.S01E01.1080p.AVC-EN-CAT-ES-Foo",                          Some("Foo")),
+            ("Show.S01E01.1080p.AVC-Foo.EN-CAT",                             Some("Foo")),
+            ("Show.S01E01.1080p.AVC-Blu-Ray",                                Some("Blu")),
+            ("Show.S01E01.AVC-Foo-720p",                                     None),
+            ("Show.S01E01.1080p.AVC-xES-Foo",                                Some("xES-Foo")),
+            ("Show.S01E01.1080p.AVC-xES-xEN",                                Some("xES-xEN")),
+        ];
+        for (title, expected) in cases {
+            assert_eq!(parse_release_group(title).as_deref(), *expected, "{title}");
+        }
     }
 }
