@@ -8,6 +8,7 @@
 
 pub mod auth;
 mod blocking;
+pub mod cleanse;
 pub mod compat;
 pub mod error;
 pub mod forwarded;

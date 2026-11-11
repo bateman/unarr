@@ -401,6 +401,36 @@ mod tests {
         }
     }
 
+    /// A secret in a message, a field or the error under the line never
+    /// reaches a file.
+    #[test]
+    fn secrets_do_not_reach_the_files() {
+        let dir = temp("cleansed");
+        let files = LogFiles::open_with(&dir, "sonarr", SIZE_LIMIT, MAX_ARCHIVES, LevelFilter::INFO);
+        let subscriber = tracing_subscriber::registry().with(files.clone());
+        tracing::subscriber::with_default(subscriber, || {
+            tracing::warn!(
+                error =
+                    "error sending request for url (http://plex.test:32400/identity?X-Plex-Token=mySecret)",
+                host = "plex.test",
+                "failed to update Plex host"
+            );
+            tracing::info!(
+                url = "http://indexer.test/api?apikey=mySecret&t=caps",
+                "asking /home/mySecret/x"
+            );
+        });
+        let text = std::fs::read_to_string(dir.join("sonarr.txt")).unwrap();
+        assert!(!text.contains("mySecret"), "{text}");
+        assert!(text.contains("X-Plex-Token=(removed)"), "{text}");
+        assert!(text.contains("apikey=(removed)&t=caps"), "{text}");
+        assert!(
+            text.contains("failed to update Plex host host=plex.test"),
+            "{text}"
+        );
+        std::fs::remove_dir_all(dir).unwrap();
+    }
+
     /// The process's own lines reach every personality, those of the start
     /// included; a personality's lines stay in its files.
     #[test]

@@ -941,6 +941,15 @@ a query; section 15 asks which library size the target is for.
   Unarr's own code logs at it and the libraries stay at info; the debug
   and trace files are written only at their levels. `RUST_LOG`, when
   set, is the operator's word: it decides, and the setting is ignored.
+- **Secrets are taken out of every log line.** `CleanseLogMessage`'s
+  rules, one for one (API keys, passkeys and tokens in URLs, Plex's
+  token, user names in paths, download clients' and webhooks' secrets,
+  the middle of a remote address), apply to the files, the recent lines
+  of `GET /log` and the console alike. An error of an HTTP request
+  carries its URL: without this a failed request to Plex wrote its token
+  to the log. Each rule is tried only on a line that holds a word it
+  needs, which brings the cost from 70 to 1 microsecond a line. The
+  console is coloured only on a terminal.
 - **Restart from the UI replaces the process.** `POST /system/restart`
   stops the daemon as a signal would and executes the same program again
   with the same arguments; under Docker the container keeps running.

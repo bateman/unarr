@@ -593,6 +593,19 @@ fn settings_level(level: &str) -> tracing::level_filters::LevelFilter {
 type FilterHandle =
     tracing_subscriber::reload::Handle<tracing_subscriber::EnvFilter, tracing_subscriber::Registry>;
 
+/// The console: `tracing`'s own lines, cleansed of secrets like every
+/// other place a line goes to, and coloured only on a terminal (`docker
+/// logs` and a redirected output get plain text).
+fn console_layer<S>() -> impl tracing_subscriber::Layer<S>
+where
+    S: tracing::Subscriber + for<'a> tracing_subscriber::registry::LookupSpan<'a>,
+{
+    use std::io::IsTerminal;
+    tracing_subscriber::fmt::layer()
+        .with_ansi(std::io::stdout().is_terminal())
+        .with_writer(|| unarr_api::cleanse::Cleansing(std::io::stdout()))
+}
+
 /// Where a personality logs: the console, its recent lines (`GET /log`)
 /// and its files; and the handle that changes the level it logs at.
 fn personality_dispatch(
@@ -604,7 +617,7 @@ fn personality_dispatch(
     let dispatch = tracing::Dispatch::new(
         tracing_subscriber::registry()
             .with(filter)
-            .with(tracing_subscriber::fmt::layer())
+            .with(console_layer())
             .with(logs.clone())
             .with(files.clone()),
     );
@@ -675,7 +688,7 @@ fn main() -> anyhow::Result<()> {
     let process_log = ProcessLog::new();
     tracing_subscriber::registry()
         .with(log_filter())
-        .with(tracing_subscriber::fmt::layer())
+        .with(console_layer())
         .with(process_log.clone())
         .init();
 

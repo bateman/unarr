@@ -138,8 +138,10 @@ impl Record {
             time: Utc::now(),
             level: *meta.level(),
             logger: meta.target().to_string(),
-            message: visitor.message,
-            error: visitor.error,
+            // `CleanseLogMessage`: here, so that neither the recent lines nor
+            // the files ever hold what it removes.
+            message: crate::cleanse::cleanse(&visitor.message).into_owned(),
+            error: visitor.error.map(|e| crate::cleanse::cleanse(&e).into_owned()),
         }
     }
 }
