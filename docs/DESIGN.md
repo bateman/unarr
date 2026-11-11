@@ -920,8 +920,9 @@ a query; section 15 asks which library size the target is for.
   machine and names without a dot, not the private networks. A save also
   forgets the TLS sessions kept for resuming, or a host accepted while
   validation was off would keep being accepted. One process has one
-  HTTP client, so with several personalities in one process the settings
-  of the last one saved apply to all (section 15).
+  HTTP client, so with several personalities in one process
+  (`--personalities sonarr,radarr`) the settings of the last one started
+  or saved apply to all (section 15).
 - **The environment wins over the settings.** The originals' variables
   (`Sonarr__Server__Port`, `Sonarr__Auth__ApiKey`, `Sonarr__Log__Level`
   and the others of the Server, Auth, App, Log and Update sections that
@@ -1051,9 +1052,12 @@ a query; section 15 asks which library size the target is for.
   proxies, due now that phase 3b's exit criteria are met, and the
   conversation with the Servarr team that goes with it.
 - One HTTP client serves the process, and with it one proxy and one
-  certificate validation level. Phase 4 puts a second personality in the
-  process: each then needs its own client, or the settings of one apply
-  to the other's requests.
+  certificate validation level: each personality installs its own at
+  start and at every save, so the last one started or saved decides for
+  all. The default runs Sonarr alone; `--personalities sonarr,radarr`
+  already runs two, and phase 4 makes the second one real. Each then
+  needs its own client, or a proxy set for one is bypassed by a save of
+  the other.
 - SignalR: `series` and `episode` messages follow the refresh, the adds and
   the edits since 3b. The UI's pages were driven in a browser; no client
   other than the UI listens.
