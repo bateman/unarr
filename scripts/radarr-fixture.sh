@@ -5,12 +5,14 @@
 #   scripts/radarr-fixture.sh shell     # start Radarr on a copy of the fixture, keep it up
 #   scripts/radarr-fixture.sh ui        # copy the official web UI into crates/unarr-api/ui/radarr
 #
-# The twin of scripts/sonarr-fixture.sh, kept apart from it on purpose: that
-# script records the Sonarr goldens and is not to change while Radarr is
-# being added. The official linux-core-x64 release is self-contained (.NET
-# runtime included), so no Docker daemon is needed. The tarball is downloaded
-# once, pinned by SHA-256, into .cache/radarr/. The fixture itself is an
-# anonymised real database, see tests/fixtures/radarr/README.md.
+# The twin of scripts/sonarr-fixture.sh, kept apart from it on purpose: each
+# script records the goldens of one application, and a change to one cannot
+# disturb the recordings of the other. What both need, such as the ICU check
+# below, is changed in both. The official linux-core-x64 release is
+# self-contained (.NET runtime included), so no Docker daemon is needed. The
+# tarball is downloaded once, pinned by SHA-256, into .cache/radarr/. The
+# fixture itself is an anonymised real database, see
+# tests/fixtures/radarr/README.md.
 #
 # Requirements: bash, curl, tar, python3; libicu for `golden`. `golden` and
 # `shell` need /movies (MOVIES_DIR), the fixture's root folder, and
