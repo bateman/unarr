@@ -10,7 +10,10 @@ RADARR_URL ?= http://127.0.0.1:7878
 UNARR_API_KEY ?= 0123456789abcdef0123456789abcdef
 OUT ?= .cache/anonymized
 APP ?= sonarr
-REQUESTS ?= tests/fixtures/radarr/golden/requests.txt
+# http-audit: Radarr unless AUDIT_APP=sonarr, which asks UNARR_URL and replays Sonarr's list.
+AUDIT_APP ?= radarr
+AUDIT_URL = $(if $(filter sonarr,$(AUDIT_APP)),$(UNARR_URL),$(RADARR_URL))
+AUDIT_REQUESTS = $(or $(REQUESTS),tests/fixtures/$(AUDIT_APP)/golden/requests.txt)
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | awk 'BEGIN{FS=":.*?## "}{printf "  %-14s %s\n", $$1, $$2}'
@@ -87,9 +90,9 @@ prowlarr-radarr: ## Replay Prowlarr's indexer sync into Radarr against a running
 recyclarr: ## Replay the recorded Recyclarr sync (tests/fixtures/recyclarr) against a running unarrd on a fresh fixture (UNARR_URL, UNARR_API_KEY)
 	@python3 -I scripts/recyclarr-replay.py --base-url $(UNARR_URL) --api-key $(UNARR_API_KEY)
 
-http-audit: ## Compare status and headers of the original and of unarrd, both running on one fixture (ORIGINAL_URL, RADARR_URL, REQUESTS)
-	@test -n "$(ORIGINAL_URL)" || { echo "usage: make http-audit ORIGINAL_URL=http://127.0.0.1:7880 [RADARR_URL=...] [REQUESTS=...]"; exit 2; }
-	@python3 -I scripts/http-audit.py --original $(ORIGINAL_URL) --unarr $(RADARR_URL) --requests $(REQUESTS)
+http-audit: ## Compare status and headers of the original and of unarrd, both running on one fixture (ORIGINAL_URL, AUDIT_APP=radarr|sonarr, RADARR_URL or UNARR_URL, REQUESTS)
+	@test -n "$(ORIGINAL_URL)" || { echo "usage: make http-audit ORIGINAL_URL=http://127.0.0.1:7880 [AUDIT_APP=sonarr] [RADARR_URL=...|UNARR_URL=...] [REQUESTS=...]"; exit 2; }
+	@python3 -I scripts/http-audit.py --app $(AUDIT_APP) --original $(ORIGINAL_URL) --unarr $(AUDIT_URL) --requests $(AUDIT_REQUESTS)
 
 anonymize: ## Anonymised copy of a Sonarr or Radarr backup zip or config dir (FROM=..., APP=sonarr, OUT=.cache/anonymized)
 	@test -n "$(FROM)" || { echo "usage: make anonymize FROM=backup.zip [APP=radarr] [OUT=dir]"; exit 2; }

@@ -6,7 +6,9 @@ original (``--original``) and to Unarr (``--unarr``), both running on the
 same fixture, and reports where the status line or the headers a client can
 depend on differ. It only reads: the GET lines of a golden request list,
 plus probes of the edges (no key, a wrong key, an unknown route, a method
-the route does not take, a body that is not JSON, a preflight).
+the route does not take, a body that is not JSON, a preflight). ``--app``
+says whose routes the probes ask for (``radarr``, the default, or
+``sonarr``).
 
     scripts/radarr-fixture.sh shell &                 # the original on 7878
     unarrd --personalities radarr ...                  # Unarr on another port
@@ -14,7 +16,8 @@ the route does not take, a body that is not JSON, a preflight).
         --unarr http://127.0.0.1:7879 \
         --requests tests/fixtures/radarr/golden/requests.txt
 
-Exit status 1 when something differs, so it can gate a release.
+Exit status 1 when something differs, so it can gate a release; what
+``DELIBERATE`` lists is reported and does not count.
 """
 
 import argparse
@@ -47,23 +50,31 @@ COMPARED = [
 # Present or absent, whatever the value.
 PRESENCE = ["set-cookie", "etag", "last-modified"]
 
+# Differences Unarr keeps on purpose, `(path, header)`: reported, not counted.
+# The originals let `/ping` be cached for a year, as they do any path that
+# is neither the API nor a page; a proxy that did would answer the health
+# check itself.
+DELIBERATE = {("/ping", "cache-control"), ("/ping", "last-modified")}
 
-def probes(api: str) -> list[tuple[str, str, str, dict[str, str], bytes | None]]:
+
+def probes(api: str, app: str) -> list[tuple[str, str, str, dict[str, str], bytes | None]]:
     """The edges: `(name, method, path, headers, body)`."""
     key = {"X-Api-Key": API_KEY}
     json = {"X-Api-Key": API_KEY, "Content-Type": "application/json"}
+    # The resource a library is made of, and the name of the calendar feed.
+    item, feed = {"sonarr": ("series", "Sonarr"), "radarr": ("movie", "Radarr")}[app]
     return [
         ("no-key", "GET", f"{api}/system/status", {}, None),
         ("wrong-key", "GET", f"{api}/system/status", {"X-Api-Key": "nope"}, None),
         ("key-in-query", "GET", f"{api}/system/status?apikey={API_KEY}", {}, None),
         ("bearer-key", "GET", f"{api}/system/status", {"Authorization": f"Bearer {API_KEY}"}, None),
         ("unknown-route", "GET", f"{api}/nosuchthing", key, None),
-        ("unknown-id", "GET", f"{api}/movie/999999", key, None),
-        ("id-not-a-number", "GET", f"{api}/movie/abc", key, None),
+        ("unknown-id", "GET", f"{api}/{item}/999999", key, None),
+        ("id-not-a-number", "GET", f"{api}/{item}/abc", key, None),
         ("method-not-taken", "DELETE", f"{api}/system/status", key, None),
         ("head", "HEAD", f"{api}/system/status", key, None),
-        ("preflight", "OPTIONS", f"{api}/movie", {"Origin": "http://example.invalid", "Access-Control-Request-Method": "GET"}, None),
-        ("gzip", "GET", f"{api}/movie", {**key, "Accept-Encoding": "gzip"}, None),
+        ("preflight", "OPTIONS", f"{api}/{item}", {"Origin": "http://example.invalid", "Access-Control-Request-Method": "GET"}, None),
+        ("gzip", "GET", f"{api}/{item}", {**key, "Accept-Encoding": "gzip"}, None),
         ("trailing-slash", "GET", f"{api}/tag/", key, None),
         ("upper-case-path", "GET", f"{api.upper()}/TAG", key, None),
         ("not-json", "POST", f"{api}/command", json, b"{not json"),
@@ -82,7 +93,7 @@ def probes(api: str) -> list[tuple[str, str, str, dict[str, str], bytes | None]]
         ("root", "GET", "/", {}, None),
         ("login-page", "GET", "/login", {}, None),
         ("initialize", "GET", "/initialize.json", {}, None),
-        ("feed-no-key", "GET", "/feed/v3/calendar/Radarr.ics", {}, None),
+        ("feed-no-key", "GET", f"/feed/v3/calendar/{feed}.ics", {}, None),
     ]
 
 
@@ -105,7 +116,14 @@ def ask(base: str, method: str, path: str, headers: dict[str, str], body: bytes 
         conn.request(method, path, body=body, headers=headers)
         response = conn.getresponse()
         response.read()
-        return response.status, {k.lower(): v for k, v in response.getheaders()}
+        headers = {k.lower(): v for k, v in response.getheaders()}
+        # A redirect names the server it came from: each its own.
+        if "location" in headers:
+            headers["location"] = headers["location"].replace(base.rstrip("/"), "<base>")
+        # A list of header names, which have no case.
+        if "vary" in headers:
+            headers["vary"] = headers["vary"].lower()
+        return response.status, headers
     finally:
         conn.close()
 
@@ -116,12 +134,13 @@ def main() -> int:
     parser.add_argument("--unarr", required=True, help="base URL of Unarr")
     parser.add_argument("--requests", type=Path, help="a golden request list; its GET lines are replayed")
     parser.add_argument("--api", default="/api/v3")
+    parser.add_argument("--app", choices=["sonarr", "radarr"], default="radarr", help="whose routes the probes ask for")
     args = parser.parse_args()
 
-    cases = probes(args.api)
+    cases = probes(args.api, args.app)
     if args.requests:
         cases += golden_gets(args.requests)
-    different = 0
+    different = deliberate = 0
     for name, method, path, headers, body in cases:
         try:
             want_status, want = ask(args.original, method, path, headers, body)
@@ -132,19 +151,21 @@ def main() -> int:
             continue
         problems = []
         if want_status != got_status:
-            problems.append(f"status {want_status} -> {got_status}")
+            problems.append(("status", f"status {want_status} -> {got_status}"))
         for header in COMPARED:
             if want.get(header) != got.get(header):
-                problems.append(f"{header}: {want.get(header)!r} -> {got.get(header)!r}")
+                problems.append((header, f"{header}: {want.get(header)!r} -> {got.get(header)!r}"))
         for header in PRESENCE:
             if (header in want) != (header in got):
-                problems.append(f"{header}: {'present' if header in want else 'absent'} -> {'present' if header in got else 'absent'}")
+                problems.append((header, f"{header}: {'present' if header in want else 'absent'} -> {'present' if header in got else 'absent'}"))
         if problems:
-            different += 1
-            print(f"{name}: {method} {path}")
-            for problem in problems:
+            kept = all((path.split("?")[0], header) in DELIBERATE for header, _ in problems)
+            deliberate += kept
+            different += not kept
+            print(f"{name}: {method} {path}{' (deliberate)' if kept else ''}")
+            for _, problem in problems:
                 print(f"    {problem}")
-    print(f"{len(cases)} requests, {different} with a difference (original -> Unarr)")
+    print(f"{len(cases)} requests, {different} with a difference (original -> Unarr), {deliberate} more with a deliberate one")
     return 1 if different else 0
 
 

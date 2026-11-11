@@ -132,6 +132,9 @@ SONARR_PID=""
 start_sonarr() {
     local data="$1"
     log "starting Sonarr on port $SONARR_PORT, data dir $data"
+    # The fixture's config names the default port; SONARR_PORT moves the
+    # copy, for a run beside an Unarr that serves the same fixture.
+    sed -i "s|<Port>[0-9]*</Port>|<Port>$SONARR_PORT</Port>|" "$data/config.xml"
     # Without the environment's proxy variables: .NET honours them, and the
     # recording must reach the outside world only through the mock.
     env -u HTTPS_PROXY -u https_proxy -u HTTP_PROXY -u http_proxy -u ALL_PROXY -u all_proxy \
