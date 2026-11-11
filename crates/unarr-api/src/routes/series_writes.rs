@@ -614,7 +614,7 @@ pub async fn folder(State(state): State<AppState>, Path(id): Path<i64>) -> ApiRe
             }))
         })
         .await?
-        .ok_or(ApiError::NotFound)?;
+        .ok_or_else(|| ApiError::ModelNotFound(format!("Series with ID {id} does not exist")))?;
     Ok(Json(json!({ "folder": folder })))
 }
 
