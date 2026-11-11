@@ -391,7 +391,8 @@ fn two_letter_language(code: &str) -> Option<&'static str> {
         "chi" | "zho" => "ZH",
         "kor" => "KO",
         "swe" => "SV",
-        "nor" | "nob" => "NB",
+        "nor" => "NO",
+        "nob" => "NB",
         "dan" => "DA",
         "fin" => "FI",
         "pol" => "PL",
@@ -437,8 +438,7 @@ fn two_letter_language(code: &str) -> Option<&'static str> {
         "bos" => "BS",
         "afr" => "AF",
         "swa" => "SW",
-        "gsw" => "DE",
-        "khk" | "mvf" | "mon" => "MN",
+        "mon" => "MN",
         _ => return None,
     })
 }
@@ -1487,6 +1487,32 @@ mod tests {
         };
         let name = build_file_name(&eps, &series(), &file(), "", &config, &[]).unwrap();
         assert_eq!(name, "The.Series.Title's!.S01E01.S01E02.S01E03.Episode.Title");
+    }
+
+    /// `should_format_languagecodes_properly`, Sonarr's cases: Norwegian
+    /// is not Bokmal.
+    #[test]
+    fn language_codes_read_as_the_original_reads_them() {
+        for (code, expected) in [
+            ("nob", "[NB]"),
+            ("nor", "[NO]"),
+            ("swe", "[SV]"),
+            ("zho", "[ZH]"),
+            ("chi", "[ZH]"),
+            ("fre", "[FR]"),
+            ("rum", "[RO]"),
+            ("per", "[FA]"),
+            ("ger", "[DE]"),
+            ("cze", "[CS]"),
+            ("ice", "[IS]"),
+            ("dut", "[NL]"),
+        ] {
+            assert_eq!(
+                languages_token(&[code.to_string()], None, false, true),
+                expected,
+                "{code}"
+            );
+        }
     }
 
     #[test]

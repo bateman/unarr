@@ -384,7 +384,37 @@ fn original_title(file: &NamingMovieFile<'_>, multiple_tokens: bool) -> String {
     }
 }
 
-fn add_file_tokens<'a>(h: &mut Handlers<'a>, file: &'a NamingMovieFile<'a>, multiple_tokens: bool) {
+/// The codes Radarr's `Iso639BTMap` has and Sonarr's has not, as the
+/// language they stand for: Swiss German, and two Mongolian ones.
+const RADARR_LANGUAGE_CODES: &[(&str, &str)] = &[("gsw", "deu"), ("khk", "mon"), ("mvf", "mon")];
+
+/// The media info with its language codes as Radarr reads them.
+fn radarr_media_info(media_info: &NamingMediaInfo) -> NamingMediaInfo {
+    let read = |codes: &[String]| -> Vec<String> {
+        codes
+            .iter()
+            .map(|code| {
+                let lower = code.trim().to_lowercase();
+                RADARR_LANGUAGE_CODES
+                    .iter()
+                    .find(|(from, _)| *from == lower)
+                    .map_or_else(|| code.clone(), |(_, to)| to.to_string())
+            })
+            .collect()
+    };
+    NamingMediaInfo {
+        audio_languages: read(&media_info.audio_languages),
+        subtitles: read(&media_info.subtitles),
+        ..media_info.clone()
+    }
+}
+
+fn add_file_tokens<'a>(
+    h: &mut Handlers<'a>,
+    file: &'a NamingMovieFile<'a>,
+    media_info: Option<&'a NamingMediaInfo>,
+    multiple_tokens: bool,
+) {
     h.value("{Original Title}", original_title(file, multiple_tokens));
     h.value("{Original Filename}", original_file_name(file, multiple_tokens));
     h.set("{Release Group}", move |m| {
@@ -407,8 +437,8 @@ fn add_file_tokens<'a>(h: &mut Handlers<'a>, file: &'a NamingMovieFile<'a>, mult
     h.value("{Quality Title}", file.quality_title.to_string());
     h.value("{Quality Proper}", proper.to_string());
     h.value("{Quality Real}", real.to_string());
-    add_media_info_tokens(h, file.media_info);
-    if file.media_info.is_some() {
+    add_media_info_tokens(h, media_info);
+    if media_info.is_some() {
         h.value(
             "{MediaInfo 3D}",
             if file.three_d {
@@ -491,9 +521,10 @@ pub fn build_file_name(
         return Err(MovieNamingError::EmptyFormat);
     }
     let multiple_tokens = title_re().find_iter(pattern).filter(|m| m.is_ok()).count() > 1;
+    let media_info = file.media_info.map(radarr_media_info);
     let mut h = Handlers::new();
     add_movie_tokens(&mut h, movie);
-    add_file_tokens(&mut h, file, multiple_tokens);
+    add_file_tokens(&mut h, file, media_info.as_ref(), multiple_tokens);
     add_custom_format_tokens(&mut h, formats);
     Ok(components(pattern, |part| {
         let name = replace_tokens(part, &h, config);
@@ -755,6 +786,42 @@ mod tests {
             build_file_name(&movie, &file(), &config(" ", ""), &[]),
             Err(MovieNamingError::EmptyFormat)
         );
+    }
+
+    /// `should_format_languagecodes_properly`, Radarr's cases.
+    #[test]
+    fn language_codes_read_as_the_original_reads_them() {
+        let md = metadata("South Park", 2020, 1);
+        for (code, expected) in [
+            ("nob", "NB"),
+            ("nor", "NO"),
+            ("swe", "SV"),
+            ("chi", "ZH"),
+            ("fre", "FR"),
+            ("ger", "DE"),
+            ("gsw", "DE"),
+            ("dut", "NL"),
+            ("khk", "MN"),
+            ("mvf", "MN"),
+            ("kat", "KA"),
+        ] {
+            let media_info = NamingMediaInfo {
+                video_codec: "H264".into(),
+                audio_codec: "DTS".into(),
+                audio_languages: vec!["eng".into()],
+                subtitles: vec![code.into()],
+                ..NamingMediaInfo::default()
+            };
+            let file = NamingMovieFile {
+                media_info: Some(&media_info),
+                ..file()
+            };
+            assert_eq!(
+                name_of(&md, &file, "{Movie.Title}.{MEDIAINFO.FULL}"),
+                format!("South.Park.H264.DTS.[{expected}]"),
+                "{code}"
+            );
+        }
     }
 
     /// From `EditionTagsFixture`.
