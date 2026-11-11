@@ -43,19 +43,18 @@ its owner, or the daemon cannot create its files there.
 ### Health check
 
 The image has no shell and no `curl`, so the daemon checks itself:
-`unarrd healthcheck` asks `GET /ping` of every personality, at the address
-and under the URL base the running daemon recorded when it started
-listening (`<data>/<personality>/listening`), and exits with 0 when all
-answer. The image declares it as its `HEALTHCHECK`; in a compose file that
-sets its own:
+`unarrd healthcheck` asks `GET /ping` of every personality the running
+daemon serves, at the address and under the URL base it recorded when it
+started listening (`<data>/listening`), and exits with 0 when all answer.
+The image declares it as its `HEALTHCHECK`; in a compose file that sets its
+own:
 
     healthcheck:
       test: ["CMD", "/usr/local/bin/unarrd", "healthcheck"]
 
-The check is a second process: it sees the environment of the container but
-not the arguments of the daemon. A data directory or a list of
-personalities given as arguments must be given to it too; set through
-`UNARR_CONFIG` and `UNARR_PERSONALITIES`, both see them.
+The check is a second process: of the daemon's arguments it needs only the
+data directory, which the image sets through `UNARR_CONFIG`. A data
+directory given to the daemon as `--data` must be given to the check too.
 
 `GET /ping` itself needs no key and answers `{"status":"OK"}`, for monitors
 such as Uptime Kuma.

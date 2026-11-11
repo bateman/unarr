@@ -16,11 +16,11 @@ use unarr_core::{Db, Personality};
 struct Args {
     /// Address to bind each personality to. Defaults to the BindAddress of
     /// its config.xml (`*` meaning every address); the port comes from there too.
-    #[arg(long, env = "UNARR_BIND", global = true)]
+    #[arg(long, env = "UNARR_BIND")]
     bind: Option<String>,
 
     /// Personalities to run.
-    #[arg(long, env = "UNARR_PERSONALITIES", value_delimiter = ',', default_values = ["sonarr"], global = true)]
+    #[arg(long, env = "UNARR_PERSONALITIES", value_delimiter = ',', default_values = ["sonarr"])]
     personalities: Vec<String>,
 
     /// Directory holding Unarr's databases and configuration, one
@@ -50,38 +50,51 @@ enum Command {
     Healthcheck,
 }
 
-/// The file in a personality's data directory where the daemon says, once
-/// it listens, on which address and under which URL base: what the health
-/// check asks. Written at every start, so that settings saved and not yet
-/// in force (a new port, a new URL base, both applied at the next start)
-/// do not send the check elsewhere than where the daemon is.
+/// The file in the data directory where the daemon says, once every
+/// personality listens, which ones it runs and where: a line each, its
+/// name, the address, the URL base. What the health check asks, and all
+/// it knows: it is another process, which sees neither the arguments the
+/// daemon was started with nor the settings in force (a port or a URL
+/// base saved in the interface applies at the next start).
 const LISTENING_FILE: &str = "listening";
 
-fn write_listening(own_dir: &Path, addr: SocketAddr, url_base: &str) -> std::io::Result<()> {
-    std::fs::write(own_dir.join(LISTENING_FILE), format!("{addr}\n{url_base}\n"))
+/// A personality as the daemon serves it.
+type Listening = (String, SocketAddr, String);
+
+fn write_listening(data: &Path, personalities: &[Listening]) -> std::io::Result<()> {
+    let text: String = personalities
+        .iter()
+        .map(|(name, addr, url_base)| format!("{name} {addr} {url_base}\n"))
+        .collect();
+    std::fs::write(data.join(LISTENING_FILE), text)
 }
 
-/// Where a personality said it listens: the address to reach it at from
-/// this machine, and its URL base.
-fn listening(personality: Personality, args: &Args) -> anyhow::Result<(SocketAddr, String)> {
-    let file = args.data.join(personality_dir(personality)).join(LISTENING_FILE);
+/// The personalities the daemon said it serves, each with the address to
+/// reach it at from this machine and its URL base.
+fn listening(data: &Path) -> anyhow::Result<Vec<Listening>> {
+    let file = data.join(LISTENING_FILE);
     let text = std::fs::read_to_string(&file)
         .with_context(|| format!("the daemon has not started listening yet ({})", file.display()))?;
-    let mut lines = text.lines();
-    let mut addr: SocketAddr = lines
-        .next()
-        .unwrap_or("")
-        .trim()
-        .parse()
-        .with_context(|| format!("{} does not hold an address", file.display()))?;
-    // Listening on every address is, from here, listening on the loopback.
-    if addr.ip().is_unspecified() {
-        addr.set_ip(match addr.ip() {
-            std::net::IpAddr::V4(_) => std::net::Ipv4Addr::LOCALHOST.into(),
-            std::net::IpAddr::V6(_) => std::net::Ipv6Addr::LOCALHOST.into(),
-        });
+    let mut out = Vec::new();
+    for line in text.lines().filter(|l| !l.trim().is_empty()) {
+        let mut fields = line.split_whitespace();
+        let name = fields.next().unwrap_or("").to_string();
+        let mut addr: SocketAddr = fields
+            .next()
+            .unwrap_or("")
+            .parse()
+            .with_context(|| format!("{} holds a line without an address: {line:?}", file.display()))?;
+        // Listening on every address is, from here, listening on the loopback.
+        if addr.ip().is_unspecified() {
+            addr.set_ip(match addr.ip() {
+                std::net::IpAddr::V4(_) => std::net::Ipv4Addr::LOCALHOST.into(),
+                std::net::IpAddr::V6(_) => std::net::Ipv6Addr::LOCALHOST.into(),
+            });
+        }
+        out.push((name, addr, fields.next().unwrap_or("").to_string()));
     }
-    Ok((addr, lines.next().unwrap_or("").trim().to_string()))
+    anyhow::ensure!(!out.is_empty(), "{} names no personality", file.display());
+    Ok(out)
 }
 
 /// `GET <base>/ping` over a plain connection: whether the daemon answers
@@ -116,20 +129,24 @@ fn ping(addr: SocketAddr, url_base: &str, timeout: std::time::Duration) -> anyho
     Ok(())
 }
 
-/// The `healthcheck` command: one line per personality, and whether all
-/// of them answered.
-fn healthcheck(args: &Args, personalities: &[Personality]) -> bool {
+/// The `healthcheck` command: one line per personality the daemon runs,
+/// and whether all of them answered.
+fn healthcheck(data: &Path) -> bool {
+    let personalities = match listening(data) {
+        Ok(personalities) => personalities,
+        Err(e) => {
+            eprintln!("{e:#}");
+            return false;
+        }
+    };
     let mut healthy = true;
-    for personality in personalities {
-        let name = personality.app_name();
-        let outcome = listening(*personality, args).and_then(|(addr, url_base)| {
-            ping(addr, &url_base, std::time::Duration::from_secs(5))
-                .with_context(|| format!("http://{addr}{url_base}/ping"))
-        });
-        match outcome {
+    for (name, addr, url_base) in personalities {
+        // Short enough for several personalities to be asked within the
+        // time a container's health check is given.
+        match ping(addr, &url_base, std::time::Duration::from_secs(3)) {
             Ok(()) => println!("{name}: ok"),
             Err(e) => {
-                eprintln!("{name}: {e:#}");
+                eprintln!("{name}: http://{addr}{url_base}/ping: {e:#}");
                 healthy = false;
             }
         }
@@ -618,7 +635,12 @@ struct Running {
 }
 
 /// Start what a personality runs: the command runtime and the HTTP server.
-async fn serve(personality: Personality, state: AppState, bind: String, port: u16) -> anyhow::Result<()> {
+async fn serve(
+    personality: Personality,
+    state: AppState,
+    bind: String,
+    port: u16,
+) -> anyhow::Result<SocketAddr> {
     state
         .start_runtime()
         .await
@@ -632,12 +654,6 @@ async fn serve(personality: Personality, state: AppState, bind: String, port: u1
         .with_context(|| format!("binding {bind}:{port}"))?;
     let addr = listener.local_addr()?;
     tracing::info!(%addr, ?personality, "listening");
-    // For `unarrd healthcheck`. Not being able to say it stops nothing but
-    // the health check, which then reports it.
-    let own_dir = state.runtime().app_data.clone();
-    if let Err(e) = write_listening(&own_dir, addr, &state.settings().url_base) {
-        tracing::warn!(error = %e, "could not record the listening address in {}", own_dir.display());
-    }
     tokio::spawn(
         axum::serve(
             listener,
@@ -645,18 +661,13 @@ async fn serve(personality: Personality, state: AppState, bind: String, port: u1
         )
         .into_future(),
     );
-    Ok(())
+    Ok(addr)
 }
 
 fn main() -> anyhow::Result<()> {
     let args = Args::parse();
     if let Some(Command::Healthcheck) = args.command {
-        let personalities: Vec<Personality> = args
-            .personalities
-            .iter()
-            .map(|name| parse_personality(name))
-            .collect::<anyhow::Result<_>>()?;
-        std::process::exit(if healthcheck(&args, &personalities) { 0 } else { 1 });
+        std::process::exit(if healthcheck(&args.data) { 0 } else { 1 });
     }
     unarr_core::fs::tune_allocator();
     // What is logged outside any personality goes to the console and, through
@@ -685,6 +696,9 @@ fn main() -> anyhow::Result<()> {
         check_import_source(import_from, &personalities, &args.data)?;
     }
 
+    // Whatever an earlier run said: nothing listens yet.
+    let _ = std::fs::remove_file(args.data.join(LISTENING_FILE));
+    let mut listening: Vec<Listening> = Vec::new();
     let mut running = Vec::new();
     for personality in personalities {
         // The log files live with the personality's data, where the
@@ -724,7 +738,8 @@ fn main() -> anyhow::Result<()> {
                 tracing::warn!(%url, "metadata hosts redirected (UNARR_METADATA_UPSTREAM)");
                 state.set_metadata_upstreams(unarr_core::metadata::Upstreams::mock(&url));
             }
-            runtime.block_on(serve(personality, state.clone(), opened.bind, opened.port))?;
+            let addr = runtime.block_on(serve(personality, state.clone(), opened.bind, opened.port))?;
+            listening.push((name.clone(), addr, state.settings().url_base.clone()));
             Ok(state)
         })?;
         running.push(Running {
@@ -732,6 +747,11 @@ fn main() -> anyhow::Result<()> {
             runtime,
             state,
         });
+    }
+    // For `unarrd healthcheck`: every personality listens. Not being able
+    // to say so stops nothing but the health check, which then reports it.
+    if let Err(e) = write_listening(&args.data, &listening) {
+        tracing::warn!(error = %e, "could not record the listening addresses in {}", args.data.display());
     }
     // Every personality has the lines of the start; no need to keep them.
     process_log.seal();
@@ -1081,33 +1101,73 @@ mod tests {
         assert!(ping(free, "/tv", wait).is_err());
     }
 
-    /// The health check asks where the daemon said it listens: nothing
-    /// before it does, the loopback when it listens on every address, the
-    /// URL base it serves under.
+    /// The health check asks the personalities the daemon said it runs,
+    /// where it said it listens: nothing before it does, the loopback when
+    /// it listens on every address, the URL base it serves under. Its own
+    /// arguments name no personality.
     #[test]
-    fn the_health_check_asks_where_the_daemon_listens() {
+    fn the_health_check_asks_what_the_daemon_said() {
         let data = std::env::temp_dir().join(format!("unarr-healthcheck-{}", std::process::id()));
         let _ = std::fs::remove_dir_all(&data);
-        let own = data.join("sonarr");
-        std::fs::create_dir_all(&own).unwrap();
-        let args = Args::parse_from(["unarrd", "healthcheck", "--data", data.to_str().unwrap()]);
-        assert!(listening(Personality::Sonarr, &args).is_err(), "not started yet");
-        let said = |addr: &str, url_base: &str| {
-            write_listening(&own, addr.parse().unwrap(), url_base).unwrap();
-            let (addr, url_base) = listening(Personality::Sonarr, &args).unwrap();
-            (addr.to_string(), url_base)
+        std::fs::create_dir_all(&data).unwrap();
+        assert!(listening(&data).is_err(), "not started yet");
+        assert!(!healthcheck(&data));
+        let said = |lines: &[(&str, &str, &str)]| {
+            let lines: Vec<Listening> = lines
+                .iter()
+                .map(|(name, addr, base)| (name.to_string(), addr.parse().unwrap(), base.to_string()))
+                .collect();
+            write_listening(&data, &lines).unwrap();
+            listening(&data)
+                .unwrap()
+                .into_iter()
+                .map(|(name, addr, base)| format!("{name} {addr} {base}"))
+                .collect::<Vec<_>>()
         };
         assert_eq!(
-            said("0.0.0.0:8990", "/tv"),
-            ("127.0.0.1:8990".to_string(), "/tv".to_string())
+            said(&[("radarr", "0.0.0.0:7878", "/movies"), ("lidarr", "[::]:8686", "")]),
+            ["radarr 127.0.0.1:7878 /movies", "lidarr [::1]:8686 "]
         );
-        assert_eq!(said("[::]:8990", ""), ("[::1]:8990".to_string(), String::new()));
         assert_eq!(
-            said("192.168.250.251:8989", ""),
-            ("192.168.250.251:8989".to_string(), String::new())
+            said(&[("sonarr", "192.168.250.251:8989", "")]),
+            ["sonarr 192.168.250.251:8989 "]
         );
-        std::fs::write(own.join(LISTENING_FILE), "not an address").unwrap();
-        assert!(listening(Personality::Sonarr, &args).is_err());
+        for bad in ["", "sonarr\n", "sonarr not-an-address /tv\n"] {
+            std::fs::write(data.join(LISTENING_FILE), bad).unwrap();
+            assert!(listening(&data).is_err(), "{bad:?}");
+        }
+
+        // Two personalities, one of them not answering: unhealthy, and
+        // healthy once both do.
+        let up = answering("200 OK", r#"{"status":"OK"}"#);
+        let free = std::net::TcpListener::bind("127.0.0.1:0")
+            .unwrap()
+            .local_addr()
+            .unwrap();
+        write_listening(
+            &data,
+            &[
+                ("sonarr".into(), up, "/tv".into()),
+                ("radarr".into(), free, String::new()),
+            ],
+        )
+        .unwrap();
+        assert!(!healthcheck(&data));
+        write_listening(
+            &data,
+            &[
+                ("sonarr".into(), up, "/tv".into()),
+                ("radarr".into(), up, "/tv".into()),
+            ],
+        )
+        .unwrap();
+        assert!(healthcheck(&data));
+
+        // The check takes the data directory and nothing else.
+        let args = Args::parse_from(["unarrd", "healthcheck", "--data", data.to_str().unwrap()]);
+        assert_eq!(args.data, data);
+        assert!(Args::try_parse_from(["unarrd", "healthcheck", "--bind", "10.0.0.5"]).is_err());
+        assert!(Args::try_parse_from(["unarrd", "healthcheck", "--personalities", "radarr"]).is_err());
         let _ = std::fs::remove_dir_all(&data);
     }
 
