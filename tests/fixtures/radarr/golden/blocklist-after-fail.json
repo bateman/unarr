@@ -1,0 +1,150 @@
+{
+  "body": [
+    {
+      "customFormats": [],
+      "date": "2026-11-11T19:39:45Z",
+      "id": 117,
+      "indexer": "Mock Newznab (Prowlarr)",
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        },
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "message": "Unpacking failed, archive requires a password",
+      "movie": {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "theholdovers",
+        "digitalRelease": "2023-11-28T00:00:00Z",
+        "folderName": "/movies/The Holdovers (2023)",
+        "genres": [
+          "Drama",
+          "Comedy"
+        ],
+        "id": 116,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/VHSzNBTwxV8vh7wylo7O9CLdac.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/57fhbxl9is7W7ur5v6UuvlNsoSg.jpg"
+          }
+        ],
+        "imdbId": "tt14849194",
+        "inCinemas": "2023-10-27T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "1970s",
+          "adoring",
+          "alcoholism",
+          "boarding school",
+          "boston, massachusetts",
+          "boys' boarding school",
+          "christmas",
+          "christmastime",
+          "cook",
+          "grief",
+          "holiday",
+          "loss of son",
+          "melancholy",
+          "mental illness",
+          "misfit",
+          "new england",
+          "peaceful",
+          "teacher student relationship",
+          "troubled youth",
+          "vietnam war",
+          "winter",
+          "winter break"
+        ],
+        "lastSearchTime": "2026-11-11T19:39:45Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Holdovers",
+        "overview": "A curmudgeonly instructor at a New England prep school is forced to remain on campus during Christmas break to babysit the handful of students with nowhere to go. Eventually, he forms an unlikely bond with one of them — a damaged, brainy troublemaker — and with the school’s head cook, who has just lost a son in Vietnam.",
+        "path": "/movies/The Holdovers (2023)",
+        "physicalRelease": "2024-01-02T00:00:00Z",
+        "popularity": 7.2706,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 7.9,
+            "votes": 276206
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 82,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 97,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 7.65,
+            "votes": 2774
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.95453,
+            "votes": 12734
+          }
+        },
+        "releaseDate": "2023-11-28T00:00:00Z",
+        "runtime": 133,
+        "secondaryYearSourceId": 0,
+        "sortTitle": "holdovers",
+        "status": "released",
+        "studio": "Miramax",
+        "tags": [
+          1
+        ],
+        "title": "The Holdovers",
+        "titleSlug": "840430",
+        "tmdbId": 840430,
+        "website": "http://focusfeatures.com/the-holdovers",
+        "year": 2023,
+        "youTubeTrailerId": "AhKLpJmHhIg"
+      },
+      "movieId": 116,
+      "protocol": "usenet",
+      "quality": {
+        "quality": {
+          "id": 7,
+          "modifier": "none",
+          "name": "Bluray-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "sourceTitle": "The.Holdovers.2023.iTA.ENG.1080p.BluRay.x264-MIRCrew"
+    }
+  ],
+  "recordedAt": "2026-11-11T19:39:57Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/blocklist/movie?movieId=116"
+  },
+  "status": 200
+}

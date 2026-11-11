@@ -1,0 +1,22 @@
+{
+  "body": {
+    "bypassIfAboveCustomFormatScore": false,
+    "bypassIfHighestQuality": true,
+    "enableTorrent": true,
+    "enableUsenet": true,
+    "id": 1,
+    "minimumCustomFormatScore": 0,
+    "order": 2147483647,
+    "preferredProtocol": "usenet",
+    "tags": [],
+    "torrentDelay": 0,
+    "usenetDelay": 0
+  },
+  "recordedAt": "2026-11-11T19:40:16Z",
+  "request": {
+    "body": "bodies/delayprofile-restore.json",
+    "method": "PUT",
+    "path": "/api/v3/delayprofile/1"
+  },
+  "status": 202
+}

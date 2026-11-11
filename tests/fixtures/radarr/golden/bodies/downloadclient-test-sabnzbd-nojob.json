@@ -1,0 +1,53 @@
+{
+  "enable": true,
+  "protocol": "usenet",
+  "priority": 1,
+  "removeCompletedDownloads": true,
+  "removeFailedDownloads": true,
+  "name": "No job folders",
+  "implementation": "Sabnzbd",
+  "configContract": "SabnzbdSettings",
+  "tags": [],
+  "fields": [
+    {
+      "name": "host",
+      "value": "127.0.0.1"
+    },
+    {
+      "name": "port",
+      "value": 18989
+    },
+    {
+      "name": "useSsl",
+      "value": false
+    },
+    {
+      "name": "urlBase",
+      "value": "/sabnzbd"
+    },
+    {
+      "name": "apiKey",
+      "value": "0123456789abcdef0123456789abcdef"
+    },
+    {
+      "name": "username",
+      "value": ""
+    },
+    {
+      "name": "password",
+      "value": ""
+    },
+    {
+      "name": "movieCategory",
+      "value": "nojob"
+    },
+    {
+      "name": "recentMoviePriority",
+      "value": -100
+    },
+    {
+      "name": "olderMoviePriority",
+      "value": -100
+    }
+  ]
+}

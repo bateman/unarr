@@ -55,7 +55,7 @@ impl std::fmt::Display for GrabError {
 }
 
 /// `DownloadProtocol.ToString()`.
-fn protocol_name(p: Protocol) -> &'static str {
+pub(crate) fn protocol_name(p: Protocol) -> &'static str {
     match p {
         Protocol::Usenet => "Usenet",
         Protocol::Torrent => "Torrent",
@@ -346,7 +346,7 @@ pub fn parse_flag_names(text: &str) -> Option<i64> {
 }
 
 /// `double.ToString()`: the shortest text that reads back as the number.
-fn format_double(v: f64) -> String {
+pub(crate) fn format_double(v: f64) -> String {
     if v.fract() == 0.0 && v.abs() < 1e15 {
         format!("{}", v as i64)
     } else {
@@ -355,7 +355,7 @@ fn format_double(v: f64) -> String {
 }
 
 /// `ReleaseInfo` as the download history keeps it.
-fn release_json(r: &crate::indexers::rss::ReleaseInfo) -> Value {
+pub(crate) fn release_json(r: &crate::indexers::rss::ReleaseInfo) -> Value {
     json!({
         "guid": r.guid,
         "title": r.title,

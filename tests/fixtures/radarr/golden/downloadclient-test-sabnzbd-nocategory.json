@@ -1,0 +1,21 @@
+{
+  "body": [
+    {
+      "attemptedValue": "",
+      "customState": {
+        "isWarning": true
+      },
+      "errorMessage": "A category is recommended",
+      "isWarning": true,
+      "propertyName": "MovieCategory",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-11T19:38:41Z",
+  "request": {
+    "body": "bodies/downloadclient-test-sabnzbd-nocategory.json",
+    "method": "POST",
+    "path": "/api/v3/downloadclient/test"
+  },
+  "status": 400
+}

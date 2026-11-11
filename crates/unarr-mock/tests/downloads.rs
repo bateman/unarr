@@ -102,7 +102,10 @@ async fn concurrent_refreshes_poll_the_clients_once() {
     let mock = Mock::start(fixtures_dir(), 0).await.unwrap();
     let db = fixture_db(mock.port()).await;
     let http = unarr_core::http::build(std::time::Duration::from_secs(10));
-    let downloads = Downloads::new(db.clone(), DownloadClientService::with_client(db.clone(), http));
+    let downloads = Downloads::new(
+        db.clone(),
+        DownloadClientService::with_client(db.clone(), http, unarr_core::downloadclients::SONARR),
+    );
     assert!(downloads.is_dirty());
     mock.clear();
     let (a, b) = tokio::join!(
@@ -137,7 +140,10 @@ async fn grabs_are_tracked_through_the_queue_and_the_history() {
     let mock = Mock::start(fixtures_dir(), 0).await.unwrap();
     let db = fixture_db(mock.port()).await;
     let http = unarr_core::http::build(std::time::Duration::from_secs(10));
-    let downloads = Downloads::new(db.clone(), DownloadClientService::with_client(db.clone(), http));
+    let downloads = Downloads::new(
+        db.clone(),
+        DownloadClientService::with_client(db.clone(), http, unarr_core::downloadclients::SONARR),
+    );
 
     // A usenet release handed to SABnzbd.
     let pitt = decided(&db, IndexerKind::Newznab, &mock, "The.Pitt.S01E01.1080p.AMZN").await;
@@ -365,7 +371,10 @@ async fn tracked_downloads_follow_the_library() {
     let mock = Mock::start(fixtures_dir(), 0).await.unwrap();
     let db = fixture_db(mock.port()).await;
     let http = unarr_core::http::build(std::time::Duration::from_secs(10));
-    let downloads = Downloads::new(db.clone(), DownloadClientService::with_client(db.clone(), http));
+    let downloads = Downloads::new(
+        db.clone(),
+        DownloadClientService::with_client(db.clone(), http, unarr_core::downloadclients::SONARR),
+    );
     let pitt = decided(&db, IndexerKind::Newznab, &mock, "The.Pitt.S01E01.1080p.AMZN").await;
     downloads.download_report(&pitt, Some(4), now()).await.unwrap();
     downloads.refresh(now()).await.unwrap();

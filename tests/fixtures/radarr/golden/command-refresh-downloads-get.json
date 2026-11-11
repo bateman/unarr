@@ -1,0 +1,35 @@
+{
+  "body": {
+    "body": {
+      "isExclusive": false,
+      "isLongRunning": false,
+      "isTypeExclusive": false,
+      "name": "RefreshMonitoredDownloads",
+      "requiresDiskAccess": false,
+      "sendUpdatesToClient": true,
+      "suppressMessages": true,
+      "trigger": "manual",
+      "updateScheduledTask": true
+    },
+    "commandName": "Refresh Monitored Downloads",
+    "duration": "00:00:00.0250295",
+    "ended": "2026-11-11T19:39:41Z",
+    "id": 472964,
+    "name": "RefreshMonitoredDownloads",
+    "priority": "normal",
+    "queued": "2026-11-11T19:39:41Z",
+    "result": "successful",
+    "sendUpdatesToClient": true,
+    "started": "2026-11-11T19:39:41Z",
+    "stateChangeTime": "2026-11-11T19:39:41Z",
+    "status": "completed",
+    "trigger": "manual",
+    "updateScheduledTask": true
+  },
+  "recordedAt": "2026-11-11T19:39:45Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/command/472964"
+  },
+  "status": 200
+}

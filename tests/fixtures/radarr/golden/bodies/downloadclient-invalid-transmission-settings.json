@@ -1,0 +1,61 @@
+{
+  "enable": true,
+  "protocol": "torrent",
+  "priority": 1,
+  "removeCompletedDownloads": true,
+  "removeFailedDownloads": true,
+  "name": "Bad transmission settings",
+  "implementation": "Transmission",
+  "configContract": "TransmissionSettings",
+  "tags": [],
+  "fields": [
+    {
+      "name": "host",
+      "value": "127.0.0.1"
+    },
+    {
+      "name": "port",
+      "value": 18989
+    },
+    {
+      "name": "useSsl",
+      "value": false
+    },
+    {
+      "name": "urlBase",
+      "value": "/transmission/"
+    },
+    {
+      "name": "username",
+      "value": "mock"
+    },
+    {
+      "name": "password",
+      "value": "mock"
+    },
+    {
+      "name": "movieCategory",
+      "value": "tv_1"
+    },
+    {
+      "name": "movieImportedCategory",
+      "value": ""
+    },
+    {
+      "name": "movieDirectory",
+      "value": "/x"
+    },
+    {
+      "name": "recentMoviePriority",
+      "value": 0
+    },
+    {
+      "name": "olderMoviePriority",
+      "value": 0
+    },
+    {
+      "name": "addPaused",
+      "value": false
+    }
+  ]
+}

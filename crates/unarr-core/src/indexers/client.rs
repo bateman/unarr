@@ -14,6 +14,7 @@ use crate::indexers::rss::{parse_feed, ReleaseInfo};
 use crate::indexers::settings::NewznabSettings;
 use crate::indexers::{IndexerDefinition, IndexerError, IndexerKind};
 use crate::validation::ValidationFailure;
+use crate::Personality;
 
 /// Capabilities are kept for a week, keyed by the settings, as the originals do.
 const CAPS_TTL: Duration = Duration::from_secs(7 * 24 * 3600);
@@ -23,6 +24,9 @@ const MAX_RESULTS_PER_QUERY: usize = 1000;
 pub struct IndexerClient {
     http: reqwest::Client,
     caps: Mutex<HashMap<String, (Capabilities, Instant)>>,
+    /// Whose indexers these are: Radarr asks for movies and words its
+    /// test failures its own way.
+    personality: Personality,
 }
 
 /// The process-wide client, on the shared HTTP client.
@@ -47,10 +51,34 @@ pub struct RecentFetch {
 }
 
 impl IndexerClient {
+    /// Sonarr's client.
     pub fn new(http: reqwest::Client) -> IndexerClient {
+        IndexerClient::for_personality(http, Personality::Sonarr)
+    }
+
+    /// A personality's client, on that personality's HTTP client.
+    pub fn for_personality(http: reqwest::Client, personality: Personality) -> IndexerClient {
         IndexerClient {
             http,
             caps: Mutex::new(HashMap::new()),
+            personality,
+        }
+    }
+
+    pub fn personality(&self) -> Personality {
+        self.personality
+    }
+
+    fn movies(&self) -> bool {
+        self.personality == Personality::Radarr
+    }
+
+    /// `GetRecentRequests`, the personality's.
+    fn recent_requests(&self, generator: &RequestGenerator<'_>) -> RequestChain {
+        if self.movies() {
+            crate::movies::request::recent_requests(generator)
+        } else {
+            generator.recent_requests()
         }
     }
 
@@ -184,14 +212,18 @@ impl IndexerClient {
     ) -> Option<ValidationFailure> {
         let caps = match self.capabilities(settings).await {
             Ok(caps) => caps,
-            Err(e) => return Some(e.into_test_failure()),
+            Err(e) => return Some(e.into_test_failure(self.personality)),
         };
         let generator = self.generator(settings, &caps);
-        let chain = generator.recent_requests();
+        let chain = self.recent_requests(&generator);
         let Some(first) = chain.iter().flatten().next().and_then(|pages| pages.first()) else {
             return Some(ValidationFailure::error(
                 "",
-                "No RSS feed query available. This may be an issue with the indexer or your indexer category settings.",
+                if self.movies() {
+                    "No rss feed query available. This may be an issue with the indexer or your indexer category settings."
+                } else {
+                    "No RSS feed query available. This may be an issue with the indexer or your indexer category settings."
+                },
             ));
         };
         match self.fetch_page(first, kind).await {
@@ -200,12 +232,39 @@ impl IndexerClient {
                 "Query successful, but no results in the configured categories were returned from your indexer. This may be an issue with the indexer or your indexer category settings.",
             )),
             Ok(_) => None,
-            Err(e) => Some(e.into_test_failure()),
+            Err(e) => Some(e.into_test_failure(self.personality)),
         }
     }
 
     async fn test_capabilities(&self, settings: &NewznabSettings) -> Option<ValidationFailure> {
         match self.capabilities(settings).await {
+            Ok(caps) if self.movies() => {
+                // Radarr's `Newznab.TestCapabilities`.
+                let supported: Vec<i64> = caps
+                    .categories
+                    .iter()
+                    .flat_map(|c| std::iter::once(c.id).chain(c.subcategories.iter().map(|s| s.id)))
+                    .collect();
+                if !settings.categories.is_empty()
+                    && settings.categories.iter().all(|c| !supported.contains(c))
+                {
+                    return Some(ValidationFailure::error(
+                        "",
+                        "This indexer does not support any of the selected categories! (You may need to turn on advanced settings to see them)",
+                    ));
+                }
+                if caps.supports_search_param("q")
+                    || ["q", "tmdbid", "imdbid"]
+                        .iter()
+                        .any(|p| caps.supports_movie_param(p))
+                {
+                    return None;
+                }
+                Some(ValidationFailure::error(
+                    "",
+                    "This indexer does not support searching for movies :(. Tell your indexer staff to enable this or force add the indexer by disabling search, adding the indexer and then enabling it again.",
+                ))
+            }
             Ok(caps) => {
                 if caps.supports_search_param("q") {
                     return None;
@@ -307,9 +366,24 @@ impl IndexerClient {
     ) -> Result<RecentFetch, IndexerError> {
         let caps = self.capabilities(&definition.settings).await?;
         let generator = self.generator(&definition.settings, &caps);
-        let chain = generator.recent_requests();
+        let chain = self.recent_requests(&generator);
         self.fetch_chain(definition, &chain, caps.page_size(), last_rss, true)
             .await
+    }
+
+    /// `Fetch(MovieSearchCriteria)`: Radarr's search.
+    pub async fn search_movie(
+        &self,
+        definition: &IndexerDefinition,
+        criteria: &crate::movies::request::MovieSearchCriteria,
+    ) -> Result<Vec<ReleaseInfo>, IndexerError> {
+        let caps = self.capabilities(&definition.settings).await?;
+        let generator = self.generator(&definition.settings, &caps);
+        let chain = crate::movies::request::search_requests(&generator, criteria);
+        Ok(self
+            .fetch_chain(definition, &chain, caps.page_size(), None, false)
+            .await?
+            .releases)
     }
 
     /// `Fetch(criteria)`: a search.

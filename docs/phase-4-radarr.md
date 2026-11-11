@@ -2,7 +2,7 @@
 
 Work order for the second personality. Read `docs/DESIGN.md` first (sections
 4 to 9 for the architecture and targets, 11 to 14 for the decisions each
-Sonarr phase took, 15 for those of milestone 4a, 16 for what is open), then `docs/audit/README.md` (what
+Sonarr phase took, 15 and 16 for those of milestones 4a and 4b, 17 for what is open), then `docs/audit/README.md` (what
 goldens cannot see, and how it was found), then this document. The four
 Sonarr work orders (`docs/phase-1-sonarr.md` to `docs/phase-3b-library.md`)
 are the template: Radarr goes through the same ground in the same order,
@@ -111,7 +111,7 @@ Decided here so the phase does not start with a rewrite:
   `ui_router` finally read their state: a Radarr route list, a
   `schemas/radarr/` catalogue recorded from the original, `ui/radarr/`
   embedded next to `ui/sonarr/`, `/feed/v3/calendar/Radarr.ics`.
-- **One HTTP client per personality** (`docs/DESIGN.md` section 16): each
+- **One HTTP client per personality** (`docs/DESIGN.md` section 17): each
   personality's proxy and certificate settings apply to its own requests.
   This is a precondition for running two, not a nicety.
 - **Metadata: `api.radarr.video`** behind a movie-shaped trait next to the
@@ -228,7 +228,7 @@ the oracle; the parser and decision vectors pass; Prowlarr's sync replays.
    findings before closing.
 7. **Measurements**: both personalities running, idle and after an RSS sync,
    an import and a full refresh, on glibc and on the published musl image
-   (still unmeasured, `docs/DESIGN.md` section 16); the figures against
+   (still unmeasured, `docs/DESIGN.md` section 17); the figures against
    section 9's target for three personalities.
 
 Exit: a mock client's completed movie download ends as a named movie file
@@ -244,7 +244,7 @@ levels beyond what the chosen import lists need; the Kodi, Plex and
 Emby metadata file writers; notification implementations beyond Discord,
 webhook and Plex; download clients beyond the four; HTTPS serving; the
 switch of the Servarr-proxy user agents to Unarr's own, which is its own
-decision (`docs/DESIGN.md` section 16) and not part of this phase.
+decision (`docs/DESIGN.md` section 17) and not part of this phase.
 
 ## Sizing
 
@@ -328,4 +328,90 @@ read through the schema catalogue and not yet through typed settings
 (`movieCategory` is in the schemas, not in `downloadclients::settings`);
 the personality's HTTP clients are in `AppState::http()` for the indexer
 and download client services to be built on. `docs/DESIGN.md` section 15
-has the decisions, section 16 what is open.
+has the decisions, section 17 what is open.
+
+## Status of 4b, November 2026
+
+Recorded and replayed on the same fixture, with the mock indexers and
+download clients of `scripts/mock-servarr.py` (the recording) and of
+`unarr-mock` (the replay). No Docker, no credential: the original ran
+without the environment's proxy and its own providers point at hosts that
+do not resolve.
+
+| Exit criterion | Status |
+|----------------|--------|
+| `make ui && make check` green | Yes: fmt, clippy `-D warnings`, 408 tests in 30 test binaries. Sonarr's replay is unchanged: the same 634 goldens, none re-recorded. |
+| An `RssSync` ends in a grab with queue, history, commands equal to the oracle | Yes. The original and Unarr both find 14 reports and grab one (Last Night in Soho, to the mock qBittorrent); `command-rsssync-get`, `queue-after-command` and `history-after-command` replay. |
+| A `MoviesSearch` ends in a grab, likewise | Yes: The Holdovers, to the mock SABnzbd, with `releaseSource` `UserInvokedSearch`; a second search, for a movie already in the queue, grabs nothing, as in the original. |
+| SignalR equal to the oracle | Not recorded from the original, as for Sonarr. The replay asserts what the hub sends: each command's start and end with its last message, the queue's sync, a queue status that counts the downloads and the pending releases, the health sync, and nothing under a series name. That assertion found the status being sent before the refresh and without the pending releases, since fixed. |
+| Parser vectors pass | 1,076 of Radarr's parser cases, ported as data by `scripts/port-vectors.py --source`. |
+| Decision vectors pass | 39 cases over the 30 specifications; their order is settled by a golden (`release-rss-pending`), not by the vectors. |
+| Prowlarr's sync replays | `scripts/prowlarr-replay.py --app radarr` (`make prowlarr-radarr`): 45 checks, passed against the real Radarr and against Unarr. The requests are Prowlarr 2.7's as read from its source and from the maintainer's logs; Prowlarr itself was not run. |
+| The goldens replay | 307 of 308 requests, recorded from the real Radarr before each shape was written. Pending: `config-naming-examples` (4c). |
+
+What 4b delivered against its six points:
+
+1. **Title parser.** `movies::parser` (title and year, edition, ids in
+   names, hardcoded subs, release group, quality, languages), with the
+   original's quirks kept.
+2. **Provider writes and Prowlarr.** Create, update, delete, test, test
+   all, actions and bulk for indexers and download clients, on the Sonarr
+   handlers with the application's schema, category and priority keys;
+   `movieCategory` through typed settings.
+3. **Indexer requests.** `t=movie` with `imdbid` and `tmdbid` as each
+   indexer's capabilities allow, the text search as second tier, the
+   movie categories; both mocks serve them, and the replay compares the
+   set of requests Unarr made with the set the original made.
+4. **Mapping and decisions.** Release to movie by ids, title, year,
+   alternative titles and translations; the 30 specifications with the
+   original's messages.
+5. **Search, grab, queue, history.** `GET release`, `POST release`,
+   `release/push`; grabs to SABnzbd, qBittorrent and Transmission (NZBGet
+   is tested, not grabbed to); tracked downloads by movie; `queue`,
+   `queue/status`, `queue/details` with the filters, sort keys and paging,
+   the two queries Unpackerr and Cleanuparr make; removal with and
+   without blocklist; `Grabbed` and `DownloadFailed` history with
+   Radarr's `data`.
+6. **Commands, scheduler, pending releases, health.** `RssSync`,
+   `MoviesSearch`, `MissingMoviesSearch`, `CutoffUnmetMoviesSearch`,
+   `RefreshMonitoredDownloads`, `ProcessMonitoredDownloads`,
+   `MessagingCleanup`, `CheckHealth`; Radarr's eleven tasks; pending
+   releases in the queue, grabbed or removed from there; the health
+   checks of the acquisition with Radarr's wiki links.
+
+Also done, from what 4a left: the calendar's order among movies of one
+date was probed on the original and corrected (three dates, not the TMDB
+id); status and headers were compared on the running original
+(`make http-audit`, 225 requests).
+
+What does not hold, or was not verified:
+
+- **The memory target.** 74 MB at rest with both personalities once
+  Radarr has searched, 63 MB with Radarr alone, against 60 MB; the movie
+  parser's patterns are 21 MB of it (`docs/DESIGN.md` section 9).
+- **Not replayed against the original**: the two bulk searches (tried on
+  the mock) and a release pending for want of a client. A failed
+  download, the queue's bulk removal and bulk grab and a grab with
+  `shouldOverride` were recorded after the review of the branch and
+  replay.
+- **Deliberately absent until their milestones**: importing a completed
+  download (it waits as `importPending`), the commands of the library
+  (`RefreshMovie`, `RescanMovie`, which Bazarr posts, `Housekeeping`,
+  `Backup`...: listed as tasks, not run, 500 when posted), Radarr's
+  notifications, its own health checks, `DELETE blocklist`, the writes of
+  settings other than the providers and `PUT delayprofile/{id}`.
+- **The server both personalities share** still differs from the
+  originals outside the bodies (cache headers, charset, compression,
+  CORS, `HEAD`, bearer key, trailing slash): measured, not changed.
+- The UI was not driven in a browser in this milestone: the pages of 4a
+  were, and the queue, the interactive search and the command messages
+  they now show come from goldens and from the hub's assertions, not
+  from a look at the screen.
+
+What 4c starts from: `movies::downloads` leaves a completed download
+`importPending` with its import item resolved; the movie file name
+builder is not written (`config-naming-examples` is the one pending
+golden); the command runtime runs Radarr's commands through
+`movies::commands`, where the library's commands go; the scheduled tasks
+of the library are listed and skipped by `CommandBody::runs_in`.
+`docs/DESIGN.md` section 16 has the decisions, section 17 what is open.

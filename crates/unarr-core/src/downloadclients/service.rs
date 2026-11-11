@@ -9,7 +9,7 @@ use std::sync::Mutex;
 
 use chrono::{DateTime, Duration, Utc};
 
-use super::{Client, ClientContext, DownloadClientDefinition};
+use super::{App, Client, ClientContext, DownloadClientDefinition, SONARR};
 use crate::db::Db;
 use crate::indexers::{status, IndexerDefinition};
 use crate::model::{Protocol, ProviderKind};
@@ -39,21 +39,41 @@ impl std::error::Error for DownloadClientUnavailable {}
 pub struct DownloadClientService {
     db: Db,
     http: reqwest::Client,
+    /// The twin of `http` that follows no redirect.
+    no_redirect: reqwest::Client,
+    /// The application the clients work for.
+    app: App,
     /// `_lastUsedDownloadClient`: round-robin position per protocol.
     last_used: Mutex<HashMap<Protocol, i64>>,
 }
 
 impl DownloadClientService {
+    /// Sonarr's service, on the process-wide HTTP client.
     pub fn new(db: Db) -> DownloadClientService {
-        Self::with_client(db, crate::http::shared().clone())
+        Self::with_client(db, crate::http::shared().clone(), SONARR)
     }
 
-    pub fn with_client(db: Db, http: reqwest::Client) -> DownloadClientService {
+    /// A service for an application, on that personality's HTTP client.
+    pub fn with_client(db: Db, http: reqwest::Client, app: App) -> DownloadClientService {
         DownloadClientService {
             db,
             http,
+            no_redirect: crate::http::no_redirect().clone(),
+            app,
             last_used: Mutex::new(HashMap::new()),
         }
+    }
+
+    /// Fetch torrent files through this client instead of the process-wide
+    /// one: a personality's own, so that its proxy is the one they go
+    /// through.
+    pub fn with_no_redirect(mut self, client: reqwest::Client) -> DownloadClientService {
+        self.no_redirect = client;
+        self
+    }
+
+    pub fn app(&self) -> App {
+        self.app
     }
 
     pub fn db(&self) -> &Db {
@@ -67,7 +87,7 @@ impl DownloadClientService {
             .call(|conn| store::providers::list_providers(conn, KIND))
             .await?
             .iter()
-            .filter_map(DownloadClientDefinition::from_provider)
+            .filter_map(|p| DownloadClientDefinition::from_provider(self.app, p))
             .collect())
     }
 
@@ -87,7 +107,7 @@ impl DownloadClientService {
             .call(move |conn| store::providers::get_provider(conn, KIND, id))
             .await?
             .as_ref()
-            .and_then(DownloadClientDefinition::from_provider))
+            .and_then(|p| DownloadClientDefinition::from_provider(self.app, p)))
     }
 
     /// The context clients run with: the HTTP client, the remote path
@@ -109,6 +129,7 @@ impl DownloadClientService {
             .await?;
         Ok(ClientContext {
             http: self.http.clone(),
+            no_redirect: self.no_redirect.clone(),
             mappings,
             history_limit: limit,
             root_folders,
@@ -180,9 +201,14 @@ impl DownloadClientService {
             matching
         };
         if available.is_empty() {
-            return Ok(Err(DownloadClientUnavailable(
-                "No download client was found without tags or a matching series tag. Please check your settings.".into(),
-            )));
+            let tagged = if self.app().name == "Radarr" {
+                "movie"
+            } else {
+                "series"
+            };
+            return Ok(Err(DownloadClientUnavailable(format!(
+                "No download client was found without tags or a matching {tagged} tag. Please check your settings."
+            ))));
         }
         if indexer_id > 0 {
             let indexer = self

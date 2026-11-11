@@ -11,7 +11,7 @@ use crate::model::{NamingConfig, Protocol};
 use crate::naming::clean_file_name;
 use crate::torrent;
 
-use super::{Client, ClientError, DownloadClientItem};
+use super::{Client, ClientError, DownloadClientItem, GrabRequest};
 
 /// The originals' `ReleaseDownloadException` family plus the client's own.
 #[derive(Debug, Clone, PartialEq, Eq)]
@@ -63,9 +63,20 @@ pub async fn download(
     indexer: Option<&IndexerDefinition>,
     blocklisted: &[String],
 ) -> Result<String, DownloadError> {
+    let request = GrabRequest::for_episode(remote, client.context.now);
+    download_release(client, &request, indexer, blocklisted).await
+}
+
+/// `Download` for whatever the release is of: the download id.
+pub async fn download_release(
+    client: &Client<'_>,
+    request: &GrabRequest<'_>,
+    indexer: Option<&IndexerDefinition>,
+    blocklisted: &[String],
+) -> Result<String, DownloadError> {
     match client.protocol() {
-        Protocol::Usenet => download_nzb(client, remote).await,
-        Protocol::Torrent => download_torrent(client, remote, indexer, blocklisted).await,
+        Protocol::Usenet => download_nzb(client, request).await,
+        Protocol::Torrent => download_torrent(client, request, indexer, blocklisted).await,
         Protocol::Unknown => Err(DownloadError::Client(ClientError::NotSupported(
             "Unknown download protocol".into(),
         ))),
@@ -73,8 +84,8 @@ pub async fn download(
 }
 
 /// `FileNameBuilder.CleanFileName(title)` with the default naming settings.
-fn clean_title(remote: &RemoteEpisode) -> String {
-    clean_file_name(&remote.release.title, &NamingConfig::default())
+fn clean_title(request: &GrabRequest<'_>) -> String {
+    clean_file_name(&request.release.title, &NamingConfig::default())
 }
 
 async fn fetch(
@@ -131,15 +142,15 @@ async fn fetch(
     }
 }
 
-async fn download_nzb(client: &Client<'_>, remote: &RemoteEpisode) -> Result<String, DownloadError> {
-    let url = remote.release.download_url.clone().unwrap_or_default();
-    let filename = format!("{}.nzb", clean_title(remote));
-    let response = fetch(&client.context.http, &url, None, "nzb", &remote.release.title).await?;
+async fn download_nzb(client: &Client<'_>, request: &GrabRequest<'_>) -> Result<String, DownloadError> {
+    let url = request.release.download_url.clone().unwrap_or_default();
+    let filename = format!("{}.nzb", clean_title(request));
+    let response = fetch(&client.context.http, &url, None, "nzb", &request.release.title).await?;
     let data = crate::http::read_body(response, crate::http::MAX_RESPONSE_BYTES)
         .await
         .map_err(|_| DownloadError::ReleaseDownload("Downloading nzb failed".into()))?;
     validate_nzb(&filename, &data)?;
-    Ok(client.add_nzb(remote, &filename, data).await?)
+    Ok(client.add_nzb(request, &filename, data).await?)
 }
 
 /// `NzbValidationService.Validate`.
@@ -188,11 +199,11 @@ pub fn validate_nzb(filename: &str, data: &[u8]) -> Result<(), DownloadError> {
 
 async fn download_torrent(
     client: &Client<'_>,
-    remote: &RemoteEpisode,
+    request: &GrabRequest<'_>,
     indexer: Option<&IndexerDefinition>,
     blocklisted: &[String],
 ) -> Result<String, DownloadError> {
-    let release = &remote.release;
+    let release = &request.release;
     let download_url = release.download_url.clone().unwrap_or_default();
     let mut magnet_url: Option<String> = None;
     let mut torrent_url: Option<String> = None;
@@ -208,7 +219,7 @@ async fn download_torrent(
     }
     // None of the clients driven here prefers the torrent file.
     if let Some(magnet) = &magnet_url {
-        match download_from_magnet(client, remote, indexer, blocklisted, magnet).await {
+        match download_from_magnet(client, request, indexer, blocklisted, magnet).await {
             Ok(hash) => return Ok(hash),
             Err(DownloadError::Client(ClientError::NotSupported(message))) => {
                 if torrent_url.is_none() {
@@ -221,7 +232,7 @@ async fn download_torrent(
         }
     }
     if let Some(url) = &torrent_url {
-        return download_from_web_url(client, remote, indexer, blocklisted, url, 0).await;
+        return download_from_web_url(client, request, indexer, blocklisted, url, 0).await;
     }
     Err(DownloadError::ReleaseDownload(
         "Release has no download URL".into(),
@@ -230,26 +241,26 @@ async fn download_torrent(
 
 async fn download_from_magnet(
     client: &Client<'_>,
-    remote: &RemoteEpisode,
+    request: &GrabRequest<'_>,
     indexer: Option<&IndexerDefinition>,
     blocklisted: &[String],
     magnet: &str,
 ) -> Result<String, DownloadError> {
     let hash = torrent::magnet_info_hash(magnet).ok_or_else(|| {
         DownloadError::ReleaseDownload(format!(
-            "Failed to parse magnetlink for episode '{}': '{}'",
-            remote.release.title, magnet
+            "Failed to parse magnetlink for {} '{}': '{}'",
+            request.noun, request.release.title, magnet
         ))
     })?;
-    ensure_not_blocklisted(remote, indexer, blocklisted, &hash)?;
-    let actual = client.add_magnet(remote, &hash, magnet).await?;
-    warn_on_hash_mismatch(client, remote, &hash, &actual);
+    ensure_not_blocklisted(request, indexer, blocklisted, &hash)?;
+    let actual = client.add_magnet(request, &hash, magnet).await?;
+    warn_on_hash_mismatch(client, request, &hash, &actual);
     Ok(actual)
 }
 
 fn download_from_web_url<'a>(
     client: &'a Client<'a>,
-    remote: &'a RemoteEpisode,
+    request: &'a GrabRequest<'a>,
     indexer: Option<&'a IndexerDefinition>,
     blocklisted: &'a [String],
     url: &'a str,
@@ -258,11 +269,11 @@ fn download_from_web_url<'a>(
     Box::pin(async move {
         // Redirects are followed by hand: a tracker may answer with a magnet.
         let response = fetch(
-            crate::http::no_redirect(),
+            &client.context.no_redirect,
             url,
             Some("application/x-bittorrent"),
             "torrent",
-            &remote.release.title,
+            &request.release.title,
         )
         .await?;
         let status = response.status();
@@ -281,7 +292,7 @@ fn download_from_web_url<'a>(
                 ));
             };
             if location.starts_with("magnet:") {
-                return download_from_magnet(client, remote, indexer, blocklisted, &location).await;
+                return download_from_magnet(client, request, indexer, blocklisted, &location).await;
             }
             if depth >= 5 {
                 return Err(DownloadError::ReleaseDownload(
@@ -292,7 +303,7 @@ fn download_from_web_url<'a>(
                 .and_then(|base| base.join(&location))
                 .map(|u| u.to_string())
                 .unwrap_or(location);
-            return download_from_web_url(client, remote, indexer, blocklisted, &next, depth + 1).await;
+            return download_from_web_url(client, request, indexer, blocklisted, &next, depth + 1).await;
         }
         if status.is_redirection() {
             return Err(DownloadError::ReleaseDownload(
@@ -302,14 +313,14 @@ fn download_from_web_url<'a>(
         let data = crate::http::read_body(response, crate::http::MAX_RESPONSE_BYTES)
             .await
             .map_err(|_| DownloadError::ReleaseDownload("Downloading torrent failed".into()))?;
-        let filename = format!("{}.torrent", clean_title(remote));
+        let filename = format!("{}.torrent", clean_title(request));
         let hash = torrent::info_hash(&data).ok_or_else(|| {
             tracing::trace!(content = %String::from_utf8_lossy(&data), "invalid torrent file contents");
             DownloadError::ReleaseDownload("Downloading torrent failed: the file is not a torrent".into())
         })?;
-        ensure_not_blocklisted(remote, indexer, blocklisted, &hash)?;
-        let actual = client.add_torrent(remote, &hash, &filename, data).await?;
-        warn_on_hash_mismatch(client, remote, &hash, &actual);
+        ensure_not_blocklisted(request, indexer, blocklisted, &hash)?;
+        let actual = client.add_torrent(request, &hash, &filename, data).await?;
+        warn_on_hash_mismatch(client, request, &hash, &actual);
         Ok(actual)
     })
 }
@@ -318,21 +329,21 @@ fn download_from_web_url<'a>(
 /// first learned at grab time be checked against the blocklist, unless the
 /// user picked the release by hand.
 fn ensure_not_blocklisted(
-    remote: &RemoteEpisode,
+    request: &GrabRequest<'_>,
     indexer: Option<&IndexerDefinition>,
     blocklisted: &[String],
     hash: &str,
 ) -> Result<(), DownloadError> {
-    let known = remote
+    let known = request
         .release
         .info_hash
         .as_deref()
         .is_some_and(|h| !h.trim().is_empty());
-    if remote.release.protocol != Protocol::Torrent || known {
+    if request.release.protocol != Protocol::Torrent || known {
         return Ok(());
     }
     let reject = indexer.is_some_and(|i| i.settings.reject_blocklisted_torrent_hashes_while_grabbing);
-    if remote.release_source != ReleaseSource::InteractiveSearch
+    if request.source != ReleaseSource::InteractiveSearch
         && reject
         && blocklisted.iter().any(|b| b.eq_ignore_ascii_case(hash))
     {
@@ -343,11 +354,11 @@ fn ensure_not_blocklisted(
     Ok(())
 }
 
-fn warn_on_hash_mismatch(client: &Client<'_>, remote: &RemoteEpisode, expected: &str, actual: &str) {
+fn warn_on_hash_mismatch(client: &Client<'_>, request: &GrabRequest<'_>, expected: &str, actual: &str) {
     if !actual.trim().is_empty() && !expected.eq_ignore_ascii_case(actual) {
         tracing::warn!(
             client = client.kind().implementation(),
-            url = remote.release.download_url.as_deref().unwrap_or(""),
+            url = request.release.download_url.as_deref().unwrap_or(""),
             "the client did not return the expected InfoHash; the download in progress may be lost track of"
         );
     }

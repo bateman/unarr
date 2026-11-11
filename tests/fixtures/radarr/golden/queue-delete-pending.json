@@ -1,0 +1,9 @@
+{
+  "body": null,
+  "recordedAt": "2026-11-11T19:40:02Z",
+  "request": {
+    "method": "DELETE",
+    "path": "/api/v3/queue/771989330?removeFromClient=true&blocklist=true"
+  },
+  "status": 200
+}

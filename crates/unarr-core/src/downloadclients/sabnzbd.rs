@@ -7,12 +7,12 @@ use serde_json::Value;
 
 use super::settings::SabnzbdSettings;
 use super::version::Version;
+use super::GrabRequest;
 use super::{
     build_base_url, combine_path, download, flag, http_error_message, int, is_localhost, remote_path, text,
     transport_message, Client, ClientError, ClientResult, DownloadClientInfo, DownloadClientItem,
-    DownloadItemStatus, APP_NAME,
+    DownloadItemStatus,
 };
-use crate::decision::RemoteEpisode;
 use crate::validation::ValidationFailure;
 
 const NAME: &str = "SABnzbd";
@@ -311,8 +311,8 @@ impl<'a> Sabnzbd<'a> {
 
     pub async fn queue(&self, start: i64, limit: i64) -> ClientResult<SabQueue> {
         let mut params = vec![("start", start.to_string()), ("limit", limit.to_string())];
-        if !self.settings.tv_category.trim().is_empty() {
-            params.push(("category", self.settings.tv_category.clone()));
+        if !self.settings.category.trim().is_empty() {
+            params.push(("category", self.settings.category.clone()));
         }
         let content = self.request("queue", &params, None).await?;
         let v: Value = serde_json::from_str(&content)
@@ -344,8 +344,8 @@ impl<'a> Sabnzbd<'a> {
 
     pub async fn history(&self, start: i64, limit: i64) -> ClientResult<SabHistory> {
         let mut params = vec![("start", start.to_string()), ("limit", limit.to_string())];
-        if !self.settings.tv_category.trim().is_empty() {
-            params.push(("category", self.settings.tv_category.clone()));
+        if !self.settings.category.trim().is_empty() {
+            params.push(("category", self.settings.category.clone()));
         }
         let content = self.request("history", &params, None).await?;
         let v: Value = serde_json::from_str(&content)
@@ -416,15 +416,13 @@ impl<'a> Sabnzbd<'a> {
 
     pub async fn add_nzb(
         &self,
-        remote: &RemoteEpisode,
+        request: &GrabRequest<'_>,
         filename: &str,
         nzb: Vec<u8>,
     ) -> ClientResult<String> {
-        let priority = self
-            .settings
-            .priority(remote.is_recent_episode(self.client.context.now));
+        let priority = self.settings.priority(request.recent);
         let ids = self
-            .add_nzb_file(nzb, filename, &self.settings.tv_category, priority)
+            .add_nzb_file(nzb, filename, &self.settings.category, priority)
             .await?;
         ids.into_iter()
             .next()
@@ -520,7 +518,7 @@ impl<'a> Sabnzbd<'a> {
     pub async fn items(&self) -> ClientResult<Vec<DownloadClientItem>> {
         let mut items = self.queue_items().await?;
         items.extend(self.history_items().await?);
-        let category = self.settings.tv_category.trim();
+        let category = self.settings.category.trim();
         Ok(items
             .into_iter()
             .filter(|i| {
@@ -582,14 +580,14 @@ impl<'a> Sabnzbd<'a> {
         let categories = self.categories(&config).await?;
         let category = categories
             .iter()
-            .find(|c| c.name == self.settings.tv_category)
+            .find(|c| c.name == self.settings.category)
             .or_else(|| categories.iter().find(|c| c.name == "*"));
         let mut status = DownloadClientInfo {
             is_localhost: is_localhost(&self.settings.host),
             ..Default::default()
         };
         if let Some(category) = category {
-            let tv = &self.settings.tv_category;
+            let tv = &self.settings.category;
             if config.enable_tv_sorting && contains_category(&config.tv_categories, tv) {
                 status.sorting_mode = Some("TV".into());
             } else if config.enable_movie_sorting && contains_category(&config.movie_categories, tv) {
@@ -615,6 +613,7 @@ impl<'a> Sabnzbd<'a> {
     }
 
     async fn test_connection_and_version(&self) -> Option<ValidationFailure> {
+        let app = self.settings.app.name;
         let raw = match self.version().await {
             Ok(raw) => raw,
             Err(e) => {
@@ -634,7 +633,7 @@ impl<'a> Sabnzbd<'a> {
             return Some(
                 ValidationFailure::warning("Version", "Sabnzbd develop version, assuming version 3.0.0 or higher.")
                     .with_detail(&format!(
-                        "{APP_NAME} may not be able to support new features added to SABnzbd when running develop versions."
+                        "{app} may not be able to support new features added to SABnzbd when running develop versions."
                     )),
             );
         }
@@ -664,10 +663,11 @@ impl<'a> Sabnzbd<'a> {
     }
 
     async fn test_global_config(&self) -> ClientResult<Option<ValidationFailure>> {
+        let app = self.settings.app.name;
         let config = self.config().await?;
         if config.pre_check && !self.has_version(1, 1).await? {
             let mut f = ValidationFailure::error("", "Disable 'Check before download' option in Sabnbzd").with_detail(
-                &format!("Using 'Check before download' affects {APP_NAME} ability to track new downloads. Also Sabnzbd recommends 'Abort jobs that cannot be completed' instead since it's more effective."),
+                &format!("Using 'Check before download' affects {app} ability to track new downloads. Also Sabnzbd recommends 'Abort jobs that cannot be completed' instead since it's more effective."),
             );
             f.info_link = Some(self.base_url("config/switches/"));
             return Ok(Some(f));
@@ -676,19 +676,21 @@ impl<'a> Sabnzbd<'a> {
     }
 
     async fn test_category(&self) -> ClientResult<Option<ValidationFailure>> {
+        let app = self.settings.app.name;
         let config = self.config().await?;
-        let tv = self.settings.tv_category.clone();
+        let tv = self.settings.category.clone();
         let categories = self.categories(&config).await?;
         let sorting = |message: &str, detail: &str| {
-            let mut f = ValidationFailure::error("TvCategory", message).with_detail(detail);
+            let mut f =
+                ValidationFailure::error(self.settings.app.category_property, message).with_detail(detail);
             f.info_link = Some(self.base_url("config/sorting/"));
             Some(f)
         };
         match categories.iter().find(|c| c.name == tv) {
             Some(category) => {
                 if category.dir.ends_with('*') {
-                    let mut f = ValidationFailure::error("TvCategory", "Enable Job folders").with_detail(&format!(
-                        "{APP_NAME} prefers each download to have a separate folder. With * appended to the Folder/Path Sabnzbd will not create these job folders. Go to Sabnzbd to fix it."
+                    let mut f = ValidationFailure::error(self.settings.app.category_property, "Enable Job folders").with_detail(&format!(
+                        "{app} prefers each download to have a separate folder. With * appended to the Folder/Path Sabnzbd will not create these job folders. Go to Sabnzbd to fix it."
                     ));
                     f.info_link = Some(self.base_url("config/categories/"));
                     return Ok(Some(f));
@@ -696,10 +698,13 @@ impl<'a> Sabnzbd<'a> {
             }
             None => {
                 if !tv.trim().is_empty() {
-                    let mut f = ValidationFailure::error("TvCategory", "Category does not exist")
-                        .with_detail(&format!(
-                            "The category you entered doesn't exist in {NAME}. Create it in {NAME} first."
-                        ));
+                    let mut f = ValidationFailure::error(
+                        self.settings.app.category_property,
+                        "Category does not exist",
+                    )
+                    .with_detail(&format!(
+                        "The category you entered doesn't exist in {NAME}. Create it in {NAME} first."
+                    ));
                     f.info_link = Some(self.base_url("config/categories/"));
                     return Ok(Some(f));
                 }
@@ -712,25 +717,25 @@ impl<'a> Sabnzbd<'a> {
         {
             return Ok(sorting(
                 "Disable TV Sorting",
-                &format!("You must disable TV sorting for the category {APP_NAME} uses to prevent import issues. Go to Sabnzbd to fix it."),
+                &format!("You must disable TV sorting for the category {app} uses to prevent import issues. Go to Sabnzbd to fix it."),
             ));
         }
         if config.enable_tv_sorting && contains_category(&config.tv_categories, &tv) {
             return Ok(sorting(
                 "Disable TV Sorting",
-                &format!("You must disable TV sorting for the category {APP_NAME} uses to prevent import issues. Go to Sabnzbd to fix it."),
+                &format!("You must disable TV sorting for the category {app} uses to prevent import issues. Go to Sabnzbd to fix it."),
             ));
         }
         if config.enable_movie_sorting && contains_category(&config.movie_categories, &tv) {
             return Ok(sorting(
                 "Disable Movie Sorting",
-                &format!("You must disable Movie sorting for the category {APP_NAME} uses to prevent import issues. Go to Sabnzbd to fix it."),
+                &format!("You must disable Movie sorting for the category {app} uses to prevent import issues. Go to Sabnzbd to fix it."),
             ));
         }
         if config.enable_date_sorting && contains_category(&config.date_categories, &tv) {
             return Ok(sorting(
                 "Disable Date Sorting",
-                &format!("You must disable Date sorting for the category {APP_NAME} uses to prevent import issues. Go to Sabnzbd to fix it."),
+                &format!("You must disable Date sorting for the category {app} uses to prevent import issues. Go to Sabnzbd to fix it."),
             ));
         }
         Ok(None)

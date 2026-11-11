@@ -672,6 +672,7 @@ pub fn import(legacy_db: &std::path::Path, db: &Db) -> anyhow::Result<ImportRepo
             ("Blocklist", "blocklist"),
             ("DownloadHistory", "download_history"),
             ("PendingReleases", "pending_releases"),
+            ("Commands", "commands"),
             ("Tags", "tags"),
             ("RootFolders", "root_folders"),
             ("QualityProfiles", "quality_profiles"),

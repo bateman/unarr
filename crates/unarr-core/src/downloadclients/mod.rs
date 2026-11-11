@@ -23,11 +23,12 @@ use std::fmt;
 use chrono::{DateTime, Duration, Utc};
 use serde_json::Value;
 
-use crate::decision::{RemoteEpisode, SeedConfiguration};
+use crate::decision::{ReleaseSource, RemoteEpisode, SeedConfiguration};
+use crate::indexers::ReleaseInfo;
 use crate::model::{Protocol, Provider, RemotePathMapping};
 use crate::validation::ValidationFailure;
 
-pub use download::{download, DownloadError};
+pub use download::{download, download_release, DownloadError};
 pub use service::{DownloadClientService, DownloadClientUnavailable};
 pub use settings::{
     ClientSettings, NzbgetSettings, QBittorrentSettings, SabnzbdSettings, TransmissionSettings,
@@ -35,7 +36,65 @@ pub use settings::{
 
 /// The name the clients' messages call the application. The texts are the
 /// originals' (the Sonarr UI shows them verbatim), so the name is theirs.
-pub const APP_NAME: &str = "Sonarr";
+/// What differs between the applications in how they use a download
+/// client: the name they call themselves in messages, the names of the
+/// settings that carry a media kind (`tvCategory` and `movieCategory`),
+/// and the defaults of their schemas.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub struct App {
+    pub name: &'static str,
+    pub category_key: &'static str,
+    pub imported_category_key: &'static str,
+    pub directory_key: &'static str,
+    pub recent_priority_key: &'static str,
+    pub older_priority_key: &'static str,
+    /// The property names validation failures carry.
+    pub category_property: &'static str,
+    pub imported_category_property: &'static str,
+    pub sabnzbd_category: &'static str,
+    pub nzbget_category: &'static str,
+    /// qBittorrent's and Transmission's.
+    pub torrent_category: &'static str,
+}
+
+impl App {
+    /// The application a personality emulates. Lidarr's download client
+    /// settings are not ported; nothing asks for them yet.
+    pub fn of(personality: crate::Personality) -> App {
+        match personality {
+            crate::Personality::Sonarr | crate::Personality::Lidarr => SONARR,
+            crate::Personality::Radarr => RADARR,
+        }
+    }
+}
+
+pub const SONARR: App = App {
+    name: "Sonarr",
+    category_key: "tvCategory",
+    imported_category_key: "tvImportedCategory",
+    directory_key: "tvDirectory",
+    recent_priority_key: "recentTvPriority",
+    older_priority_key: "olderTvPriority",
+    category_property: "TvCategory",
+    imported_category_property: "TvImportedCategory",
+    sabnzbd_category: "tv",
+    nzbget_category: "tv",
+    torrent_category: "tv-sonarr",
+};
+
+pub const RADARR: App = App {
+    name: "Radarr",
+    category_key: "movieCategory",
+    imported_category_key: "movieImportedCategory",
+    directory_key: "movieDirectory",
+    recent_priority_key: "recentMoviePriority",
+    older_priority_key: "olderMoviePriority",
+    category_property: "MovieCategory",
+    imported_category_property: "MovieImportedCategory",
+    sabnzbd_category: "movies",
+    nzbget_category: "Movies",
+    torrent_category: "radarr",
+};
 
 /// The implementations this phase drives.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
@@ -103,7 +162,7 @@ pub struct DownloadClientDefinition {
 impl DownloadClientDefinition {
     /// From a stored provider; `None` for implementations this phase does
     /// not drive.
-    pub fn from_provider(p: &Provider) -> Option<DownloadClientDefinition> {
+    pub fn from_provider(app: App, p: &Provider) -> Option<DownloadClientDefinition> {
         let kind = ClientKind::from_implementation(&p.implementation)?;
         let a = &p.attributes;
         Some(DownloadClientDefinition {
@@ -115,7 +174,7 @@ impl DownloadClientDefinition {
             remove_completed_downloads: a["removeCompletedDownloads"].as_bool().unwrap_or(true),
             remove_failed_downloads: a["removeFailedDownloads"].as_bool().unwrap_or(true),
             tags: p.tags.clone(),
-            settings: ClientSettings::from_value(kind, &p.settings),
+            settings: ClientSettings::from_value(app, kind, &p.settings),
         })
     }
 
@@ -273,6 +332,10 @@ pub type ClientResult<T> = Result<T, ClientError>;
 #[derive(Clone)]
 pub struct ClientContext {
     pub http: reqwest::Client,
+    /// The same client's twin that follows no redirect, for torrent files
+    /// (a tracker may answer with a magnet). Each personality has its own,
+    /// over its own proxy and certificate settings.
+    pub no_redirect: reqwest::Client,
     pub mappings: Vec<RemotePathMapping>,
     /// `DownloadClientHistoryLimit`: how many history items to read.
     pub history_limit: usize,
@@ -285,6 +348,7 @@ impl ClientContext {
     pub fn new(http: reqwest::Client, now: DateTime<Utc>) -> ClientContext {
         ClientContext {
             http,
+            no_redirect: crate::http::no_redirect().clone(),
             mappings: Vec::new(),
             history_limit: 60,
             root_folders: Vec::new(),
@@ -321,17 +385,17 @@ impl<'a> Client<'a> {
     /// `AddFromNzbFile`: the download id the client reports.
     pub async fn add_nzb(
         &self,
-        remote: &RemoteEpisode,
+        request: &GrabRequest<'_>,
         filename: &str,
         nzb: Vec<u8>,
     ) -> ClientResult<String> {
         match &self.definition.settings {
             ClientSettings::Sabnzbd(s) => {
                 sabnzbd::Sabnzbd::new(self, s)
-                    .add_nzb(remote, filename, nzb)
+                    .add_nzb(request, filename, nzb)
                     .await
             }
-            ClientSettings::Nzbget(s) => nzbget::Nzbget::new(self, s).add_nzb(remote, filename, nzb).await,
+            ClientSettings::Nzbget(s) => nzbget::Nzbget::new(self, s).add_nzb(request, filename, nzb).await,
             _ => Err(ClientError::NotSupported(format!(
                 "{} does not take NZBs",
                 self.kind().display_name()
@@ -340,16 +404,21 @@ impl<'a> Client<'a> {
     }
 
     /// `AddFromMagnetLink`: the info hash the client reports.
-    pub async fn add_magnet(&self, remote: &RemoteEpisode, hash: &str, magnet: &str) -> ClientResult<String> {
+    pub async fn add_magnet(
+        &self,
+        request: &GrabRequest<'_>,
+        hash: &str,
+        magnet: &str,
+    ) -> ClientResult<String> {
         match &self.definition.settings {
             ClientSettings::QBittorrent(s) => {
                 qbittorrent::QBittorrent::new(self, s)
-                    .add_magnet(remote, hash, magnet)
+                    .add_magnet(request, hash, magnet)
                     .await
             }
             ClientSettings::Transmission(s) => {
                 transmission::Transmission::new(self, s)
-                    .add_magnet(remote, hash, magnet)
+                    .add_magnet(request, hash, magnet)
                     .await
             }
             _ => Err(ClientError::NotSupported(format!(
@@ -362,7 +431,7 @@ impl<'a> Client<'a> {
     /// `AddFromTorrentFile`: the info hash the client reports.
     pub async fn add_torrent(
         &self,
-        remote: &RemoteEpisode,
+        request: &GrabRequest<'_>,
         hash: &str,
         filename: &str,
         torrent: Vec<u8>,
@@ -370,12 +439,12 @@ impl<'a> Client<'a> {
         match &self.definition.settings {
             ClientSettings::QBittorrent(s) => {
                 qbittorrent::QBittorrent::new(self, s)
-                    .add_torrent(remote, hash, filename, torrent)
+                    .add_torrent(request, hash, filename, torrent)
                     .await
             }
             ClientSettings::Transmission(s) => {
                 transmission::Transmission::new(self, s)
-                    .add_torrent(remote, hash, filename, torrent)
+                    .add_torrent(request, hash, filename, torrent)
                     .await
             }
             _ => Err(ClientError::NotSupported(format!(
@@ -571,12 +640,35 @@ pub fn http_error_message(status: reqwest::StatusCode, method: &str, url: &str) 
     )
 }
 
-/// The seed limits a torrent client is asked to apply, when the indexer set any.
-pub fn seed_limits(remote: &RemoteEpisode) -> Option<&SeedConfiguration> {
-    remote
-        .seed_configuration
-        .as_ref()
-        .filter(|s| s.ratio.is_some() || s.seed_time_minutes.is_some())
+/// What a client is told of the release it is handed: the release, whether
+/// what it is of is recent (the clients' recent and older priorities), the
+/// seed limits its indexer set and where the release came from.
+#[derive(Debug, Clone, Copy)]
+pub struct GrabRequest<'a> {
+    pub release: &'a ReleaseInfo,
+    pub recent: bool,
+    pub seed: Option<&'a SeedConfiguration>,
+    pub source: ReleaseSource,
+    /// What the release is of, in the originals' messages: `episode`, `movie`.
+    pub noun: &'static str,
+}
+
+impl<'a> GrabRequest<'a> {
+    pub fn for_episode(remote: &'a RemoteEpisode, now: DateTime<Utc>) -> Self {
+        GrabRequest {
+            release: &remote.release,
+            recent: remote.is_recent_episode(now),
+            seed: remote.seed_configuration.as_ref(),
+            source: remote.release_source,
+            noun: "episode",
+        }
+    }
+
+    /// The seed limits a torrent client is asked to apply, when the indexer set any.
+    pub fn seed_limits(&self) -> Option<&'a SeedConfiguration> {
+        self.seed
+            .filter(|s| s.ratio.is_some() || s.seed_time_minutes.is_some())
+    }
 }
 
 /// Read a settings value as text, `""` when missing or null.

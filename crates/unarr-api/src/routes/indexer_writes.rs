@@ -141,6 +141,10 @@ fn to_model(
     let settings = schemas::read_fields(schema, &body["fields"], existing.map(|e| &e.settings));
     let mut attributes = Map::new();
     for (name, default) in ATTRIBUTES {
+        // Sonarr's alone: Radarr's indexers have no such attribute.
+        if *name == "seasonSearchMaximumSingleEpisodeAge" && personality != unarr_core::Personality::Sonarr {
+            continue;
+        }
         let value = body.get(*name).cloned().unwrap_or(Value::Null);
         let value = match (value, default) {
             (Value::Null, Value::Null) => json!(0),
@@ -185,11 +189,11 @@ fn validate_settings(p: &Provider) -> Vec<ValidationFailure> {
 }
 
 /// `_providerFactory.Test(definition)`: the connection test.
-async fn test_provider(p: &Provider) -> Vec<ValidationFailure> {
+async fn test_provider(state: &AppState, p: &Provider) -> Vec<ValidationFailure> {
     match kind_of(p) {
         Some(kind) => {
             let settings = NewznabSettings::from_value(&p.settings);
-            indexers::shared().test(kind, &settings).await
+            state.indexers().test(kind, &settings).await
         }
         None => vec![ValidationFailure::error(
             "",
@@ -228,7 +232,7 @@ pub async fn create(State(state): State<AppState>, uri: Uri, Json(body): Json<Va
     let mut provider = to_model(state.personality(), &body, 0, None)?;
     if enabled(&provider) {
         verify(validate_settings(&provider), !force_save)?;
-        verify(test_provider(&provider).await, !force_save)?;
+        verify(test_provider(&state, &provider).await, !force_save)?;
     }
     let stored = state
         .db()
@@ -278,7 +282,7 @@ pub async fn update(
     if enabled(&provider) {
         verify(validate_settings(&provider), !force_save)?;
         if !force_save && changed {
-            verify(test_provider(&provider).await, true)?;
+            verify(test_provider(&state, &provider).await, true)?;
         }
     }
     if changed {
@@ -320,7 +324,7 @@ pub async fn test(
     let existing = if id > 0 { find(&state, id).await? } else { None };
     let provider = to_model(state.personality(), &body, id, existing.as_ref())?;
     verify(validate_settings(&provider), !force_test)?;
-    verify(test_provider(&provider).await, true)?;
+    verify(test_provider(&state, &provider).await, true)?;
     Ok(Json(json!({})))
 }
 
@@ -336,7 +340,12 @@ pub async fn test_all(State(state): State<AppState>) -> ApiResult<Response> {
         }
         let mut failures: Vec<ValidationFailure> =
             settings_failures.into_iter().filter(|f| !f.is_warning).collect();
-        failures.extend(test_provider(&p).await.into_iter().filter(|f| !f.is_warning));
+        failures.extend(
+            test_provider(&state, &p)
+                .await
+                .into_iter()
+                .filter(|f| !f.is_warning),
+        );
         any_invalid |= !failures.is_empty();
         results.push(json!({
             "id": p.id,
@@ -371,14 +380,15 @@ pub async fn action(
     let categories = if settings.base_url.trim().is_empty() || settings.api_path.trim().is_empty() {
         None
     } else {
-        indexers::shared()
+        state
+            .indexers()
             .capabilities(&settings)
             .await
             .ok()
             .map(|caps| caps.categories)
     };
     Ok(Json(json!({
-        "options": indexers::caps::category_options(categories.as_deref())
+        "options": indexers::caps::category_options_for(state.personality(), categories.as_deref())
     })))
 }
 

@@ -1,0 +1,239 @@
+{
+  "body": [
+    {
+      "added": "2026-11-11T19:38:51Z",
+      "customFormatScore": 0,
+      "customFormats": [],
+      "downloadClient": "Mock qBittorrent",
+      "downloadClientHasPostImportCategory": false,
+      "downloadId": "13706ED57ADBE030F510BEDCD37595376901117C",
+      "estimatedCompletionTime": "2026-11-11T19:48:54Z",
+      "id": 1132538262,
+      "indexer": "Mock Torznab (Prowlarr)",
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        },
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movie": {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [
+          {
+            "id": 507,
+            "movieMetadataId": 62,
+            "sourceType": "tmdb",
+            "title": "Ultima Notte A Soho"
+          },
+          {
+            "id": 508,
+            "movieMetadataId": 62,
+            "sourceType": "tmdb",
+            "title": "Une dernière nuit à Soho"
+          },
+          {
+            "id": 509,
+            "movieMetadataId": 62,
+            "sourceType": "tmdb",
+            "title": "蘇豪的最後一夜"
+          },
+          {
+            "id": 510,
+            "movieMetadataId": 62,
+            "sourceType": "tmdb",
+            "title": "Última noche en el Soho"
+          },
+          {
+            "id": 511,
+            "movieMetadataId": 62,
+            "sourceType": "tmdb",
+            "title": "Последна нощ в Сохо"
+          },
+          {
+            "id": 512,
+            "movieMetadataId": 62,
+            "sourceType": "tmdb",
+            "title": "ฝัน-หลอน-ที่โซโห"
+          },
+          {
+            "id": 513,
+            "movieMetadataId": 62,
+            "sourceType": "tmdb",
+            "title": "Dün Gece Soho'da"
+          },
+          {
+            "id": 514,
+            "movieMetadataId": 62,
+            "sourceType": "tmdb",
+            "title": "Ostatniej nocy w Soho"
+          },
+          {
+            "id": 515,
+            "movieMetadataId": 62,
+            "sourceType": "tmdb",
+            "title": "El misterio de Soho"
+          },
+          {
+            "id": 516,
+            "movieMetadataId": 62,
+            "sourceType": "tmdb",
+            "title": "Noite Passada em Soho"
+          },
+          {
+            "id": 517,
+            "movieMetadataId": 62,
+            "sourceType": "tmdb",
+            "title": "ラストナイト・イン・ソーホー：2021"
+          },
+          {
+            "id": 518,
+            "movieMetadataId": 62,
+            "sourceType": "tmdb",
+            "title": "Última nit al Soho"
+          },
+          {
+            "id": 519,
+            "movieMetadataId": 62,
+            "sourceType": "tmdb",
+            "title": "Վերջին գիշերը Սոհոյում"
+          }
+        ],
+        "certification": "R",
+        "cleanTitle": "lastnightinsoho",
+        "digitalRelease": "2021-11-19T00:00:00Z",
+        "folderName": "/movies/Last Night in Soho (2021)",
+        "genres": [
+          "Horror",
+          "Mystery",
+          "Thriller"
+        ],
+        "id": 62,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/n1ZRmjlk1BJTY7aASqACfPAaLn2.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/nPWy5KISy7BbUOQcg588dflKzTL.jpg"
+          }
+        ],
+        "imdbId": "tt9639470",
+        "inCinemas": "2021-10-09T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "1960s",
+          "amused",
+          "audacious",
+          "burlesque",
+          "clairvoyant",
+          "fashion design",
+          "fashion designer",
+          "go-go dancer",
+          "london, england",
+          "mirror",
+          "murder",
+          "mysterious",
+          "nightmare",
+          "nostalgia",
+          "psychological horror",
+          "pub",
+          "soho london",
+          "somber",
+          "suspenseful",
+          "time travel"
+        ],
+        "lastSearchTime": "2026-03-12T19:45:03Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "Last Night in Soho",
+        "overview": "A young girl, passionate about fashion design, is mysteriously able to enter the 1960s where she encounters her idol, a dazzling wannabe singer. But 1960s London is not what it seems, and time seems to be falling apart with shady consequences.",
+        "path": "/movies/Last Night in Soho (2021)",
+        "physicalRelease": "2022-01-18T00:00:00Z",
+        "popularity": 5.6875,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 7,
+            "votes": 203777
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 65,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 75,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 7.253,
+            "votes": 4115
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.08181,
+            "votes": 8728
+          }
+        },
+        "releaseDate": "2021-11-19T00:00:00Z",
+        "runtime": 116,
+        "secondaryYearSourceId": 0,
+        "sortTitle": "last night in soho",
+        "status": "released",
+        "studio": "Focus Features",
+        "tags": [
+          1
+        ],
+        "title": "Last Night in Soho",
+        "titleSlug": "576845",
+        "tmdbId": 576845,
+        "website": "https://www.focusfeatures.com/last-night-in-soho",
+        "year": 2021,
+        "youTubeTrailerId": "XgNrL4Kf7yU"
+      },
+      "movieId": 62,
+      "protocol": "torrent",
+      "quality": {
+        "quality": {
+          "id": 7,
+          "modifier": "none",
+          "name": "Bluray-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "size": 768000,
+      "sizeleft": 768000,
+      "status": "downloading",
+      "statusMessages": [],
+      "timeleft": "00:10:00",
+      "title": "c8949b89db6f20a1e049aa8170a7a05c",
+      "trackedDownloadState": "downloading",
+      "trackedDownloadStatus": "ok"
+    }
+  ],
+  "recordedAt": "2026-11-11T19:39:05Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/queue/details?movieId=62&includeMovie=true"
+  },
+  "status": 200
+}

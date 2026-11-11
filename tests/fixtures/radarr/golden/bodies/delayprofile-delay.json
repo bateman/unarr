@@ -1,0 +1,7 @@
+{
+  "$from": "delayprofile",
+  "$set": {
+    "usenetDelay": 525600,
+    "torrentDelay": 525600
+  }
+}

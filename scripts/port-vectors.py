@@ -1,12 +1,13 @@
 #!/usr/bin/env python3
-"""Extract NUnit `[TestCase(...)]` data from the Sonarr test sources as JSON.
+"""Extract NUnit `[TestCase(...)]` data from the originals' test sources as JSON.
 
-The Sonarr repository's parser and decision-engine tests are the
+The Sonarr and Radarr repositories' parser and decision-engine tests are the
 specification Unarr's ports are checked against. This script reads the C#
 fixture files and writes, for every test method, the list of its test cases
 with the arguments decoded, so the Rust tests can replay them as data::
 
     scripts/port-vectors.py --sonarr /path/to/Sonarr --out tests/vectors
+    scripts/port-vectors.py --source /path/to/Radarr --out tests/vectors/radarr
 
 Output: `<out>/<area>/<Fixture>.json` holding
 ``{"source": "...cs", "methods": {"should_x": {"params": [...], "cases": [[...], ...]}}}``.
@@ -16,7 +17,7 @@ arrays, and `Enum.Member` references, kept as `{"enum": "Enum", "member": "Membe
 Methods whose cases come from a static `object[]` field (`TestCaseSource`) are
 read too when the field is in the same file.
 
-Sonarr is GPL-3.0, as Unarr is; the vectors keep their origin in `source`.
+Sonarr and Radarr are GPL-3.0, as Unarr is; the vectors keep their origin in `source`.
 """
 
 from __future__ import annotations
@@ -258,14 +259,21 @@ def extract(path: Path) -> dict:
 
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
-    ap.add_argument("--sonarr", required=True, type=Path, help="checkout of github.com/Sonarr/Sonarr")
+    ap.add_argument(
+        "--source",
+        "--sonarr",
+        dest="source",
+        required=True,
+        type=Path,
+        help="checkout of github.com/Sonarr/Sonarr or github.com/Radarr/Radarr",
+    )
     ap.add_argument("--out", default="tests/vectors", type=Path)
     ap.add_argument("--area", action="append", default=None, help="test directory under src/NzbDrone.Core.Test (default: ParserTests, DecisionEngineTests)")
     args = ap.parse_args()
     areas = args.area or ["ParserTests", "DecisionEngineTests"]
     total = 0
     for area in areas:
-        src = args.sonarr / "src" / "NzbDrone.Core.Test" / area
+        src = args.source / "src" / "NzbDrone.Core.Test" / area
         out_dir = args.out / area.removesuffix("Tests").lower()
         out_dir.mkdir(parents=True, exist_ok=True)
         for path in sorted(src.rglob("*Fixture.cs")) + sorted(src.rglob("*Regex.cs")):

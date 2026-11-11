@@ -59,7 +59,11 @@ fn provider(id: i64, kind: ClientKind, port: u16, fields: serde_json::Value) -> 
 }
 
 fn definition(id: i64, kind: ClientKind, port: u16, fields: serde_json::Value) -> DownloadClientDefinition {
-    DownloadClientDefinition::from_provider(&provider(id, kind, port, fields)).unwrap()
+    DownloadClientDefinition::from_provider(
+        unarr_core::downloadclients::SONARR,
+        &provider(id, kind, port, fields),
+    )
+    .unwrap()
 }
 
 fn remote(mock: &Mock, title: &str, protocol: Protocol, download_url: &str) -> RemoteEpisode {
@@ -412,7 +416,7 @@ async fn the_service_picks_clients_by_protocol_priority_tags_and_health() {
         unreachable,
     ])
     .await;
-    let service = DownloadClientService::with_client(db, http());
+    let service = DownloadClientService::with_client(db, http(), unarr_core::downloadclients::SONARR);
     assert_eq!(service.definitions().await.unwrap().len(), 5);
     // Usenet: round robin between the two healthy ones, the unreachable
     // one (not yet failed) included in the rotation.

@@ -1,0 +1,950 @@
+{
+  "body": [
+    {
+      "age": 1,
+      "ageHours": 46.43279911702778,
+      "ageMinutes": 2785.9679470433334,
+      "approved": false,
+      "commentUrl": "http://127.0.0.1:18989/movies/newznab/details/fd04f3b8c14e7d33d5e992475f5fef5b#comments",
+      "customFormatScore": 0,
+      "customFormats": [],
+      "downloadAllowed": true,
+      "downloadUrl": "http://127.0.0.1:18989/movies/newznab/download/fd04f3b8c14e7d33d5e992475f5fef5b.nzb",
+      "edition": "",
+      "guid": "http://127.0.0.1:18989/movies/newznab/details/fd04f3b8c14e7d33d5e992475f5fef5b",
+      "imdbId": 14849194,
+      "indexer": "Mock Newznab (Prowlarr)",
+      "indexerFlags": [],
+      "indexerId": 20,
+      "infoUrl": "http://127.0.0.1:18989/movies/newznab/details/fd04f3b8c14e7d33d5e992475f5fef5b",
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        },
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mappedMovieId": 116,
+      "movieRequested": false,
+      "movieTitles": [
+        "The Holdovers"
+      ],
+      "protocol": "usenet",
+      "publishDate": "2026-11-09T21:14:00Z",
+      "quality": {
+        "quality": {
+          "id": 7,
+          "modifier": "none",
+          "name": "Bluray-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityWeight": 1801,
+      "rejected": true,
+      "rejections": [
+        "Release is blocklisted",
+        "Release in queue has an equal or higher Custom Format score: 0",
+        "Recent grab event in history has an equal or higher Custom Format score: 0"
+      ],
+      "releaseGroup": "MIRCrew",
+      "releaseHash": "",
+      "releaseWeight": 0,
+      "sceneSource": false,
+      "size": 7945689497,
+      "temporarilyRejected": false,
+      "title": "The.Holdovers.2023.iTA.ENG.1080p.BluRay.x264-MIRCrew",
+      "tmdbId": 840430
+    },
+    {
+      "age": 1,
+      "ageHours": 46.16613245636111,
+      "ageMinutes": 2769.967947381667,
+      "approved": false,
+      "commentUrl": "http://127.0.0.1:18989/movies/torznab/details/d94f74e9588477404bd8d34ffc605870#comments",
+      "customFormatScore": 0,
+      "customFormats": [],
+      "downloadAllowed": true,
+      "downloadUrl": "http://127.0.0.1:18989/movies/torznab/download/d94f74e9588477404bd8d34ffc605870.torrent",
+      "edition": "",
+      "guid": "http://127.0.0.1:18989/movies/torznab/details/d94f74e9588477404bd8d34ffc605870",
+      "imdbId": 14849194,
+      "indexer": "Mock Torznab (Prowlarr)",
+      "indexerFlags": [],
+      "indexerId": 21,
+      "infoHash": "7e59b884110362736e39ead456edcbdac5ef0fe6",
+      "infoUrl": "http://127.0.0.1:18989/movies/torznab/details/d94f74e9588477404bd8d34ffc605870",
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        },
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "leechers": 9,
+      "magnetUrl": "",
+      "mappedMovieId": 116,
+      "movieRequested": false,
+      "movieTitles": [
+        "The Holdovers"
+      ],
+      "protocol": "torrent",
+      "publishDate": "2026-11-09T21:30:00Z",
+      "quality": {
+        "quality": {
+          "id": 7,
+          "modifier": "none",
+          "name": "Bluray-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityWeight": 1801,
+      "rejected": true,
+      "rejections": [
+        "Release in queue has an equal or higher Custom Format score: 0",
+        "Waiting for better quality release",
+        "Recent grab event in history has an equal or higher Custom Format score: 0"
+      ],
+      "releaseGroup": "MIRCrew",
+      "releaseHash": "",
+      "releaseWeight": 1,
+      "sceneSource": false,
+      "seeders": 88,
+      "size": 7945689497,
+      "temporarilyRejected": false,
+      "title": "The.Holdovers.2023.iTA.ENG.1080p.BluRay.x264-MIRCrew",
+      "tmdbId": 0
+    },
+    {
+      "age": 1,
+      "ageHours": 47.63279912466667,
+      "ageMinutes": 2857.9679474816667,
+      "approved": false,
+      "commentUrl": "http://127.0.0.1:18989/movies/newznab/details/2579a03771a684b4e0186c4874aa07a5#comments",
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 19,
+          "name": "AMZN"
+        },
+        {
+          "id": 50,
+          "name": "DD+"
+        },
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 4,
+          "name": "WEB Tier 01"
+        }
+      ],
+      "downloadAllowed": true,
+      "downloadUrl": "http://127.0.0.1:18989/movies/newznab/download/2579a03771a684b4e0186c4874aa07a5.nzb",
+      "edition": "",
+      "guid": "http://127.0.0.1:18989/movies/newznab/details/2579a03771a684b4e0186c4874aa07a5",
+      "imdbId": 14849194,
+      "indexer": "Mock Newznab (Prowlarr)",
+      "indexerFlags": [],
+      "indexerId": 20,
+      "infoUrl": "http://127.0.0.1:18989/movies/newznab/details/2579a03771a684b4e0186c4874aa07a5",
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mappedMovieId": 116,
+      "movieRequested": false,
+      "movieTitles": [
+        "The Holdovers"
+      ],
+      "protocol": "usenet",
+      "publishDate": "2026-11-09T20:02:00Z",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "modifier": "none",
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "webdl"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityWeight": 1701,
+      "rejected": true,
+      "rejections": [
+        "Custom Formats AMZN, DD+, Language not Italian, WEB Tier 01 have score -10000 below Movie's profile minimum 0",
+        "Release in queue is of equal or higher preference: Bluray-1080p v1",
+        "Waiting for better quality release",
+        "Recent grab event in history is of equal or higher preference: Bluray-1080p v1"
+      ],
+      "releaseGroup": "FLUX",
+      "releaseHash": "",
+      "releaseWeight": 2,
+      "sceneSource": false,
+      "size": 6657199308,
+      "temporarilyRejected": false,
+      "title": "The.Holdovers.2023.1080p.AMZN.WEB-DL.DDP5.1.H.264-FLUX",
+      "tmdbId": 840430
+    },
+    {
+      "age": 2,
+      "ageHours": 48.58279912655556,
+      "ageMinutes": 2914.9679475933335,
+      "approved": false,
+      "commentUrl": "http://127.0.0.1:18989/movies/torznab/details/c8949b89db6f20a1e049aa8170a7a05c#comments",
+      "customFormatScore": 0,
+      "customFormats": [],
+      "downloadAllowed": true,
+      "downloadUrl": "http://127.0.0.1:18989/movies/torznab/download/c8949b89db6f20a1e049aa8170a7a05c.torrent",
+      "edition": "",
+      "guid": "http://127.0.0.1:18989/movies/torznab/details/c8949b89db6f20a1e049aa8170a7a05c",
+      "imdbId": 9639470,
+      "indexer": "Mock Torznab (Prowlarr)",
+      "indexerFlags": [
+        "G_Freeleech"
+      ],
+      "indexerId": 21,
+      "infoHash": "d0c1309e36cdb92c5d7b4abfd794f9bdff969920",
+      "infoUrl": "http://127.0.0.1:18989/movies/torznab/details/c8949b89db6f20a1e049aa8170a7a05c",
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        },
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "leechers": 1,
+      "magnetUrl": "",
+      "mappedMovieId": 62,
+      "movieRequested": false,
+      "movieTitles": [
+        "Last Night in Soho"
+      ],
+      "protocol": "torrent",
+      "publishDate": "2026-11-09T19:05:00Z",
+      "quality": {
+        "quality": {
+          "id": 7,
+          "modifier": "none",
+          "name": "Bluray-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityWeight": 1801,
+      "rejected": true,
+      "rejections": [
+        "Release in queue has an equal or higher Custom Format score: 0",
+        "Waiting for better quality release",
+        "Recent grab event in history has an equal or higher Custom Format score: 0"
+      ],
+      "releaseGroup": "MIRCrew",
+      "releaseHash": "",
+      "releaseWeight": 3,
+      "sceneSource": false,
+      "seeders": 35,
+      "size": 6979321856,
+      "temporarilyRejected": false,
+      "title": "Last.Night.in.Soho.2021.iTA.ENG.1080p.BluRay.x264-MIRCrew",
+      "tmdbId": 0
+    },
+    {
+      "age": 2,
+      "ageHours": 48.882799127666665,
+      "ageMinutes": 2932.96794766,
+      "approved": false,
+      "commentUrl": "http://127.0.0.1:18989/movies/newznab/details/8b519b988db3b735f5a5493125198c99#comments",
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 54,
+          "name": "DD"
+        }
+      ],
+      "downloadAllowed": true,
+      "downloadUrl": "http://127.0.0.1:18989/movies/newznab/download/8b519b988db3b735f5a5493125198c99.nzb",
+      "edition": "",
+      "guid": "http://127.0.0.1:18989/movies/newznab/details/8b519b988db3b735f5a5493125198c99",
+      "imdbId": 9639470,
+      "indexer": "Mock Newznab (Prowlarr)",
+      "indexerFlags": [],
+      "indexerId": 20,
+      "infoUrl": "http://127.0.0.1:18989/movies/newznab/details/8b519b988db3b735f5a5493125198c99",
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        },
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mappedMovieId": 62,
+      "movieRequested": false,
+      "movieTitles": [
+        "Last Night in Soho"
+      ],
+      "protocol": "usenet",
+      "publishDate": "2026-11-09T18:47:00Z",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "modifier": "none",
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "webdl"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityWeight": 1701,
+      "rejected": true,
+      "rejections": [
+        "Release in queue is of equal or higher preference: Bluray-1080p v1",
+        "Waiting for better quality release",
+        "Recent grab event in history is of equal or higher preference: Bluray-1080p v1"
+      ],
+      "releaseGroup": "iDN",
+      "releaseHash": "",
+      "releaseWeight": 4,
+      "sceneSource": false,
+      "size": 5476083302,
+      "temporarilyRejected": false,
+      "title": "Last.Night.in.Soho.2021.iTA.ENG.1080p.WEB-DL.DD5.1.H264-iDN_CreW",
+      "tmdbId": 576845
+    },
+    {
+      "age": 3,
+      "ageHours": 79.09946579516667,
+      "ageMinutes": 4745.967947711667,
+      "approved": false,
+      "commentUrl": "http://127.0.0.1:18989/movies/torznab/details/bc295ecb0fb56b9e5df74be19469cef4#comments",
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 50,
+          "name": "DD+"
+        }
+      ],
+      "downloadAllowed": true,
+      "downloadUrl": "http://127.0.0.1:18989/movies/torznab/download/bc295ecb0fb56b9e5df74be19469cef4.torrent",
+      "edition": "",
+      "guid": "http://127.0.0.1:18989/movies/torznab/details/bc295ecb0fb56b9e5df74be19469cef4",
+      "imdbId": 7740496,
+      "indexer": "Mock Torznab (Prowlarr)",
+      "indexerFlags": [],
+      "indexerId": 21,
+      "infoHash": "2076338e94f6fc307b43e478146e941fbd6ef7ba",
+      "infoUrl": "http://127.0.0.1:18989/movies/torznab/details/bc295ecb0fb56b9e5df74be19469cef4",
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        },
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "leechers": 6,
+      "magnetUrl": "",
+      "mappedMovieId": 70,
+      "movieRequested": false,
+      "movieTitles": [
+        "Nightmare Alley"
+      ],
+      "protocol": "torrent",
+      "publishDate": "2026-11-08T12:34:00Z",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "modifier": "none",
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "webdl"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityWeight": 1701,
+      "rejected": true,
+      "rejections": [
+        "Release in queue has an equal or higher Custom Format score: 0",
+        "Waiting for better quality release",
+        "Recent grab event in history has an equal or higher Custom Format score: 0"
+      ],
+      "releaseGroup": "MeM",
+      "releaseHash": "",
+      "releaseWeight": 5,
+      "sceneSource": false,
+      "seeders": 54,
+      "size": 4509715660,
+      "temporarilyRejected": false,
+      "title": "Nightmare.Alley.2021.iTA.ENG.1080p.WEB-DL.DDP5.1.H.264-MeM",
+      "tmdbId": 0
+    },
+    {
+      "age": 2,
+      "ageHours": 50.16613246280556,
+      "ageMinutes": 3009.96794777,
+      "approved": false,
+      "commentUrl": "http://127.0.0.1:18989/movies/newznab/details/1e31c567dbdcd043801cfdc268b38ae3#comments",
+      "customFormatScore": 2000,
+      "customFormats": [
+        {
+          "id": 46,
+          "name": "DTS-HD MA"
+        },
+        {
+          "id": 55,
+          "name": "HDR"
+        },
+        {
+          "id": 57,
+          "name": "MULTi"
+        }
+      ],
+      "downloadAllowed": true,
+      "downloadUrl": "http://127.0.0.1:18989/movies/newznab/download/1e31c567dbdcd043801cfdc268b38ae3.nzb",
+      "edition": "",
+      "guid": "http://127.0.0.1:18989/movies/newznab/details/1e31c567dbdcd043801cfdc268b38ae3",
+      "imdbId": 7740496,
+      "indexer": "Mock Newznab (Prowlarr)",
+      "indexerFlags": [],
+      "indexerId": 20,
+      "infoUrl": "http://127.0.0.1:18989/movies/newznab/details/1e31c567dbdcd043801cfdc268b38ae3",
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        },
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mappedMovieId": 70,
+      "movieRequested": false,
+      "movieTitles": [
+        "Nightmare Alley"
+      ],
+      "protocol": "usenet",
+      "publishDate": "2026-11-09T17:30:00Z",
+      "quality": {
+        "quality": {
+          "id": 31,
+          "modifier": "remux",
+          "name": "Remux-2160p",
+          "resolution": 2160,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityWeight": 2301,
+      "rejected": true,
+      "rejections": [
+        "Remux-2160p is not wanted in profile",
+        "Release in queue is of equal or higher preference: WEBDL-1080p v1",
+        "Waiting for better quality release",
+        "Recent grab event in history is of equal or higher preference: WEBDL-1080p v1"
+      ],
+      "releaseGroup": "FraMeSToR",
+      "releaseHash": "",
+      "releaseWeight": 6,
+      "sceneSource": false,
+      "size": 66357244723,
+      "temporarilyRejected": false,
+      "title": "Nightmare.Alley.2021.MULTi.iTA.ENG.2160p.UHD.BluRay.REMUX.HDR.HEVC.DTS-HD.MA.5.1-FraMeSToR",
+      "tmdbId": 597208
+    },
+    {
+      "age": 2,
+      "ageHours": 51.582799132611115,
+      "ageMinutes": 3094.967947968333,
+      "approved": false,
+      "commentUrl": "http://127.0.0.1:18989/movies/newznab/details/8c317d9d0d7ce2640d7244956502be76#comments",
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "LQ"
+        }
+      ],
+      "downloadAllowed": true,
+      "downloadUrl": "http://127.0.0.1:18989/movies/newznab/download/8c317d9d0d7ce2640d7244956502be76.nzb",
+      "edition": "",
+      "guid": "http://127.0.0.1:18989/movies/newznab/details/8c317d9d0d7ce2640d7244956502be76",
+      "imdbId": 0,
+      "indexer": "Mock Newznab (Prowlarr)",
+      "indexerFlags": [],
+      "indexerId": 20,
+      "infoUrl": "http://127.0.0.1:18989/movies/newznab/details/8c317d9d0d7ce2640d7244956502be76",
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mappedMovieId": 185,
+      "movieRequested": false,
+      "movieTitles": [
+        "Dune Part Three"
+      ],
+      "protocol": "usenet",
+      "publishDate": "2026-11-09T16:05:00Z",
+      "quality": {
+        "quality": {
+          "id": 25,
+          "modifier": "none",
+          "name": "CAM",
+          "resolution": 0,
+          "source": "cam"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityWeight": 201,
+      "rejected": true,
+      "rejections": [
+        "Custom Formats Language not Italian, LQ have score -10000 below Movie's profile minimum 0",
+        "CAM is not wanted in profile",
+        "Movie [Dune: Part Three (2026)][tt31378509, 1170608] will only be considered available 0 days after Released",
+        "Waiting for better quality release"
+      ],
+      "releaseGroup": "NoGRP",
+      "releaseHash": "",
+      "releaseWeight": 7,
+      "sceneSource": false,
+      "size": 2576980377,
+      "temporarilyRejected": false,
+      "title": "Dune.Part.Three.2026.1080p.HDCAM.x264-NoGRP",
+      "tmdbId": 1170608
+    },
+    {
+      "age": 2,
+      "ageHours": 68.49946580430556,
+      "ageMinutes": 4109.96794826,
+      "approved": false,
+      "commentUrl": "http://127.0.0.1:18989/movies/newznab/details/a9aeb356f82c4a5371c7e815e0e46e10#comments",
+      "customFormatScore": 0,
+      "customFormats": [],
+      "downloadAllowed": true,
+      "downloadUrl": "http://127.0.0.1:18989/movies/newznab/download/a9aeb356f82c4a5371c7e815e0e46e10.nzb",
+      "edition": "",
+      "guid": "http://127.0.0.1:18989/movies/newznab/details/a9aeb356f82c4a5371c7e815e0e46e10",
+      "imdbId": 372784,
+      "indexer": "Mock Newznab (Prowlarr)",
+      "indexerFlags": [],
+      "indexerId": 20,
+      "infoUrl": "http://127.0.0.1:18989/movies/newznab/details/a9aeb356f82c4a5371c7e815e0e46e10",
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        },
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mappedMovieId": 11,
+      "movieRequested": false,
+      "movieTitles": [
+        "Batman Begins"
+      ],
+      "protocol": "usenet",
+      "publishDate": "2026-11-08T23:10:00Z",
+      "quality": {
+        "quality": {
+          "id": 7,
+          "modifier": "none",
+          "name": "Bluray-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityWeight": 1801,
+      "rejected": true,
+      "rejections": [
+        "Existing file on disk is of equal or higher preference: WEBDL-1080p v1",
+        "Waiting for better quality release"
+      ],
+      "releaseGroup": "MIRCrew",
+      "releaseHash": "",
+      "releaseWeight": 8,
+      "sceneSource": false,
+      "size": 12025908428,
+      "temporarilyRejected": false,
+      "title": "Batman.Begins.2005.iTA.ENG.1080p.BluRay.x264-MIRCrew",
+      "tmdbId": 272
+    },
+    {
+      "age": 3,
+      "ageHours": 72.33279913930555,
+      "ageMinutes": 4339.96794836,
+      "approved": false,
+      "commentUrl": "http://127.0.0.1:18989/movies/newznab/details/6b608267b9e7d8c60dd555d16d9ad769#comments",
+      "customFormatScore": 0,
+      "customFormats": [],
+      "downloadAllowed": true,
+      "downloadUrl": "http://127.0.0.1:18989/movies/newznab/download/6b608267b9e7d8c60dd555d16d9ad769.nzb",
+      "edition": "",
+      "guid": "http://127.0.0.1:18989/movies/newznab/details/6b608267b9e7d8c60dd555d16d9ad769",
+      "imdbId": 9812474,
+      "indexer": "Mock Newznab (Prowlarr)",
+      "indexerFlags": [],
+      "indexerId": 20,
+      "infoUrl": "http://127.0.0.1:18989/movies/newznab/details/6b608267b9e7d8c60dd555d16d9ad769",
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        }
+      ],
+      "mappedMovieId": 61,
+      "movieRequested": false,
+      "movieTitles": [
+        "Lamb"
+      ],
+      "protocol": "usenet",
+      "publishDate": "2026-11-08T19:20:00Z",
+      "quality": {
+        "quality": {
+          "id": 7,
+          "modifier": "none",
+          "name": "Bluray-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityWeight": 1801,
+      "rejected": true,
+      "rejections": [
+        "40.0 MB is smaller than minimum allowed 5.3 GB (for Lamb)",
+        "Original Language (Icelandic) is wanted, but found Italian",
+        "Sample"
+      ],
+      "releaseGroup": "MIRCrew",
+      "releaseHash": "",
+      "releaseWeight": 9,
+      "sceneSource": false,
+      "size": 41943040,
+      "temporarilyRejected": false,
+      "title": "Lamb.2021.iTA.ISL.1080p.BluRay.x264-MIRCrew.sample",
+      "tmdbId": 788929
+    },
+    {
+      "age": 2,
+      "ageHours": 52.41613247341667,
+      "ageMinutes": 3144.967948406667,
+      "approved": false,
+      "commentUrl": "http://127.0.0.1:18989/movies/torznab/details/529fd365c22707b562df3f8ad9a04a58#comments",
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 54,
+          "name": "DD"
+        }
+      ],
+      "downloadAllowed": true,
+      "downloadUrl": "http://127.0.0.1:18989/movies/torznab/download/529fd365c22707b562df3f8ad9a04a58.torrent",
+      "edition": "",
+      "guid": "http://127.0.0.1:18989/movies/torznab/details/529fd365c22707b562df3f8ad9a04a58",
+      "imdbId": 0,
+      "indexer": "Mock Torznab (Prowlarr)",
+      "indexerFlags": [],
+      "indexerId": 21,
+      "infoHash": "7d29822e2668186ba54d7f3d7073d09493addfe1",
+      "infoUrl": "http://127.0.0.1:18989/movies/torznab/details/529fd365c22707b562df3f8ad9a04a58",
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        }
+      ],
+      "leechers": 2,
+      "magnetUrl": "",
+      "mappedMovieId": 61,
+      "movieRequested": false,
+      "movieTitles": [
+        "Lamb"
+      ],
+      "protocol": "torrent",
+      "publishDate": "2026-11-09T15:15:00Z",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "modifier": "none",
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "webdl"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityWeight": 1701,
+      "rejected": true,
+      "rejections": [
+        "Original Language (Icelandic) is wanted, but found Italian",
+        "Not enough seeders: 0. Minimum seeders: 1",
+        "Waiting for better quality release"
+      ],
+      "releaseGroup": "MeM",
+      "releaseHash": "",
+      "releaseWeight": 10,
+      "sceneSource": false,
+      "seeders": 0,
+      "size": 4939212390,
+      "temporarilyRejected": false,
+      "title": "Lamb.2021.iTA.ISL.1080p.WEB-DL.DD5.1.H264-MeM",
+      "tmdbId": 0
+    },
+    {
+      "age": 3,
+      "ageHours": 72.23279914072222,
+      "ageMinutes": 4333.967948445,
+      "approved": false,
+      "commentUrl": "http://127.0.0.1:18989/movies/newznab/details/a30d607c095f132509372ab72a6e6738#comments",
+      "customFormatScore": 0,
+      "customFormats": [],
+      "downloadAllowed": true,
+      "downloadUrl": "http://127.0.0.1:18989/movies/newznab/download/a30d607c095f132509372ab72a6e6738.nzb",
+      "edition": "",
+      "guid": "http://127.0.0.1:18989/movies/newznab/details/a30d607c095f132509372ab72a6e6738",
+      "imdbId": 9812474,
+      "indexer": "Mock Newznab (Prowlarr)",
+      "indexerFlags": [],
+      "indexerId": 20,
+      "infoUrl": "http://127.0.0.1:18989/movies/newznab/details/a30d607c095f132509372ab72a6e6738",
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        }
+      ],
+      "mappedMovieId": 61,
+      "movieRequested": false,
+      "movieTitles": [
+        "Lamb"
+      ],
+      "protocol": "usenet",
+      "publishDate": "2026-11-08T19:26:00Z",
+      "quality": {
+        "quality": {
+          "id": 6,
+          "modifier": "none",
+          "name": "Bluray-720p",
+          "resolution": 720,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityWeight": 1501,
+      "rejected": true,
+      "rejections": [
+        "Original Language (Icelandic) is wanted, but found Italian",
+        "Bluray-720p is not wanted in profile",
+        "Waiting for better quality release"
+      ],
+      "releaseGroup": "MIRCrew",
+      "releaseHash": "",
+      "releaseWeight": 11,
+      "sceneSource": false,
+      "size": 4402341478,
+      "temporarilyRejected": false,
+      "title": "Lamb.2021.iTA.ISL.720p.BluRay.x264-MIRCrew",
+      "tmdbId": 788929
+    },
+    {
+      "age": 2,
+      "ageHours": 68.98279914188889,
+      "ageMinutes": 4138.967948515,
+      "approved": false,
+      "commentUrl": "http://127.0.0.1:18989/movies/newznab/details/a21dcc90a30f28c9f1321274f0a62f4c#comments",
+      "customFormatScore": 0,
+      "customFormats": [],
+      "downloadAllowed": false,
+      "downloadUrl": "http://127.0.0.1:18989/movies/newznab/download/a21dcc90a30f28c9f1321274f0a62f4c.nzb",
+      "edition": "",
+      "guid": "http://127.0.0.1:18989/movies/newznab/details/a21dcc90a30f28c9f1321274f0a62f4c",
+      "imdbId": 0,
+      "indexer": "Mock Newznab (Prowlarr)",
+      "indexerFlags": [],
+      "indexerId": 20,
+      "infoUrl": "http://127.0.0.1:18989/movies/newznab/details/a21dcc90a30f28c9f1321274f0a62f4c",
+      "languages": [
+        {
+          "id": 0,
+          "name": "Unknown"
+        }
+      ],
+      "movieRequested": false,
+      "movieTitles": [
+        "An Unknown Movie"
+      ],
+      "protocol": "usenet",
+      "publishDate": "2026-11-08T22:41:00Z",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "modifier": "none",
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "webdl"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityWeight": 1701,
+      "rejected": true,
+      "rejections": [
+        "Unknown Movie. Unable to match to correct movie using release title."
+      ],
+      "releaseGroup": "NTb",
+      "releaseHash": "",
+      "releaseWeight": 12,
+      "sceneSource": false,
+      "size": 5153960755,
+      "temporarilyRejected": false,
+      "title": "An.Unknown.Movie.2024.1080p.WEB-DL.DDP5.1.H.264-NTb",
+      "tmdbId": 0
+    },
+    {
+      "age": 2,
+      "ageHours": 71.66613247588889,
+      "ageMinutes": 4299.967948553333,
+      "approved": false,
+      "commentUrl": "http://127.0.0.1:18989/movies/torznab/details/cb8be0ee70dc347e643fcbc2153b0cf7#comments",
+      "customFormatScore": 0,
+      "customFormats": [],
+      "downloadAllowed": false,
+      "downloadUrl": "http://127.0.0.1:18989/movies/torznab/download/cb8be0ee70dc347e643fcbc2153b0cf7.torrent",
+      "edition": "",
+      "guid": "http://127.0.0.1:18989/movies/torznab/details/cb8be0ee70dc347e643fcbc2153b0cf7",
+      "imdbId": 0,
+      "indexer": "Mock Torznab (Prowlarr)",
+      "indexerFlags": [],
+      "indexerId": 21,
+      "infoHash": "a91465ae7fa3d62fee6503f23ad74cf48d6819c7",
+      "infoUrl": "http://127.0.0.1:18989/movies/torznab/details/cb8be0ee70dc347e643fcbc2153b0cf7",
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        }
+      ],
+      "leechers": 2,
+      "magnetUrl": "",
+      "movieRequested": false,
+      "movieTitles": [
+        "Another Unknown Movie"
+      ],
+      "protocol": "torrent",
+      "publishDate": "2026-11-08T20:00:00Z",
+      "quality": {
+        "quality": {
+          "id": 15,
+          "modifier": "none",
+          "name": "WEBRip-1080p",
+          "resolution": 1080,
+          "source": "webrip"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityWeight": 1701,
+      "rejected": true,
+      "rejections": [
+        "Unknown Movie. Unable to match to correct movie using release title."
+      ],
+      "releaseGroup": "NoGRP",
+      "releaseHash": "",
+      "releaseWeight": 13,
+      "sceneSource": false,
+      "seeders": 12,
+      "size": 2362232012,
+      "temporarilyRejected": false,
+      "title": "Another.Unknown.Movie.2025.iTA.1080p.WEBRip.x264-NoGRP",
+      "tmdbId": 0
+    }
+  ],
+  "recordedAt": "2026-11-11T19:39:58Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/release"
+  },
+  "status": 200
+}

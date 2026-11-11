@@ -63,6 +63,59 @@ fn default_tasks(conn: &Connection) -> anyhow::Result<Vec<(CommandBody, i64, Com
     ])
 }
 
+/// Radarr's default tasks, `(type name, interval in minutes)`: its own
+/// `TaskManager` list. The ones whose commands a later milestone brings
+/// are listed and not run yet.
+fn radarr_tasks(conn: &Connection) -> anyhow::Result<Vec<(String, i64)>> {
+    let sonarr = default_tasks(conn)?;
+    let interval_of = |body: CommandBody| {
+        sonarr
+            .iter()
+            .find(|(b, _, _)| b.type_name() == body.type_name())
+            .map(|(_, interval, _)| *interval)
+            .unwrap_or(0)
+    };
+    let backup = interval_of(CommandBody::Backup {
+        kind: super::BackupType::Scheduled,
+    });
+    Ok([
+        ("NzbDrone.Core.Messaging.Commands.MessagingCleanupCommand", 5),
+        (
+            "NzbDrone.Core.Update.Commands.ApplicationCheckUpdateCommand",
+            6 * 60,
+        ),
+        ("NzbDrone.Core.HealthCheck.CheckHealthCommand", 6 * 60),
+        ("NzbDrone.Core.Movies.Commands.RefreshMovieCommand", 24 * 60),
+        ("NzbDrone.Core.Housekeeping.HousekeepingCommand", 24 * 60),
+        (
+            "NzbDrone.Core.MediaFiles.Commands.CleanUpRecycleBinCommand",
+            24 * 60,
+        ),
+        ("NzbDrone.Core.Movies.Commands.RefreshCollectionsCommand", 24 * 60),
+        ("NzbDrone.Core.Backup.BackupCommand", backup),
+        (
+            "NzbDrone.Core.Indexers.RssSyncCommand",
+            interval_of(CommandBody::RssSync),
+        ),
+        ("NzbDrone.Core.ImportLists.ImportListSyncCommand", 5),
+        ("NzbDrone.Core.Download.RefreshMonitoredDownloadsCommand", 1),
+    ]
+    .into_iter()
+    .map(|(name, interval)| (name.to_string(), interval))
+    .collect())
+}
+
+/// The default tasks of an application, `(type name, interval)`.
+fn tasks_for(conn: &Connection, personality: crate::Personality) -> anyhow::Result<Vec<(String, i64)>> {
+    match personality {
+        crate::Personality::Radarr => radarr_tasks(conn),
+        _ => Ok(default_tasks(conn)?
+            .into_iter()
+            .map(|(body, interval, _)| (body.type_name().to_string(), interval))
+            .collect()),
+    }
+}
+
 /// `ScheduledTask.Priority` for a stored task.
 pub fn priority_of(type_name: &str) -> CommandPriority {
     if type_name == CommandBody::RefreshMonitoredDownloads.type_name() {
@@ -77,16 +130,25 @@ pub fn priority_of(type_name: &str) -> CommandPriority {
 /// whole interval; a stored task keeps its last run and takes the
 /// current interval.
 pub fn ensure_defaults(conn: &Connection, now: DateTime<Utc>) -> anyhow::Result<()> {
-    let defaults = default_tasks(conn)?;
+    ensure_defaults_for(conn, crate::Personality::Sonarr, now)
+}
+
+/// [`ensure_defaults`] with the default tasks of one application.
+pub fn ensure_defaults_for(
+    conn: &Connection,
+    personality: crate::Personality,
+    now: DateTime<Utc>,
+) -> anyhow::Result<()> {
+    let defaults = tasks_for(conn, personality)?;
     let current = store::providers::list_scheduled_tasks(conn)?;
     for job in &current {
-        if !defaults.iter().any(|(b, _, _)| b.type_name() == job.type_name) {
+        if !defaults.iter().any(|(name, _)| *name == job.type_name) {
             tracing::trace!(task = job.type_name, "removing job from database");
             store::providers::delete_scheduled_task(conn, job.id)?;
         }
     }
-    for (body, interval, _) in defaults {
-        let type_name = body.type_name();
+    for (type_name, interval) in defaults {
+        let type_name = type_name.as_str();
         match current.iter().find(|t| t.type_name == type_name) {
             Some(existing) => store::providers::set_scheduled_task_interval(conn, existing.id, interval)?,
             None => store::providers::insert_scheduled_task(
@@ -106,9 +168,14 @@ pub fn ensure_defaults(conn: &Connection, now: DateTime<Utc>) -> anyhow::Result<
 
 /// `HandleAsync(ConfigSavedEvent)`: the intervals that follow the settings.
 pub fn refresh_intervals(conn: &Connection) -> anyhow::Result<()> {
-    let defaults = default_tasks(conn)?;
+    refresh_intervals_for(conn, crate::Personality::Sonarr)
+}
+
+/// [`refresh_intervals`] with the default tasks of one application.
+pub fn refresh_intervals_for(conn: &Connection, personality: crate::Personality) -> anyhow::Result<()> {
+    let defaults = tasks_for(conn, personality)?;
     for task in store::providers::list_scheduled_tasks(conn)? {
-        if let Some((_, interval, _)) = defaults.iter().find(|(b, _, _)| b.type_name() == task.type_name) {
+        if let Some((_, interval)) = defaults.iter().find(|(name, _)| *name == task.type_name) {
             if *interval != task.interval_minutes {
                 store::providers::set_scheduled_task_interval(conn, task.id, *interval)?;
             }
@@ -258,5 +325,49 @@ mod tests {
             Ok(())
         })
         .unwrap();
+    }
+
+    #[test]
+    fn radarr_keeps_its_own_tasks_and_commands() {
+        use crate::Personality;
+        let db = Db::open_in_memory_for(Personality::Radarr).unwrap();
+        let now = Utc.with_ymd_and_hms(2026, 11, 11, 12, 0, 0).unwrap();
+        db.call_blocking(move |conn| {
+            ensure_defaults_for(conn, Personality::Radarr, now)?;
+            let tasks = store::providers::list_scheduled_tasks(conn)?;
+            assert_eq!(tasks.len(), 11);
+            for name in [
+                "NzbDrone.Core.Movies.Commands.RefreshMovieCommand",
+                "NzbDrone.Core.Movies.Commands.RefreshCollectionsCommand",
+                "NzbDrone.Core.Update.Commands.ApplicationCheckUpdateCommand",
+            ] {
+                assert!(tasks.iter().any(|t| t.type_name == name), "{name}");
+            }
+            assert!(tasks.iter().all(|t| !t.type_name.contains("Series")));
+            // Running it again changes nothing.
+            ensure_defaults_for(conn, Personality::Radarr, now)?;
+            assert_eq!(store::providers::list_scheduled_tasks(conn)?.len(), 11);
+            Ok(())
+        })
+        .unwrap();
+        // Each application answers to its own names only.
+        let body = serde_json::json!({"movieIds": [116], "seriesId": 1});
+        assert_eq!(
+            CommandBody::parse_for(Personality::Radarr, "moviessearch", &body),
+            Some(CommandBody::MoviesSearch { movie_ids: vec![116] })
+        );
+        assert_eq!(
+            CommandBody::parse_for(Personality::Sonarr, "MoviesSearch", &body),
+            None
+        );
+        assert_eq!(
+            CommandBody::parse_for(Personality::Radarr, "SeriesSearch", &body),
+            None
+        );
+        assert!(CommandBody::parse_for(Personality::Sonarr, "SeriesSearch", &body).is_some());
+        assert!(CommandBody::parse_for(Personality::Radarr, "RssSync", &body).is_some());
+        // A task Radarr lists and does not run yet.
+        assert!(!CommandBody::Housekeeping.runs_in(Personality::Radarr));
+        assert!(CommandBody::Housekeeping.runs_in(Personality::Sonarr));
     }
 }

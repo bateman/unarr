@@ -1,0 +1,19 @@
+{
+  "body": [
+    {
+      "detailedDescription": "The category you entered doesn't exist in SABnzbd. Create it in SABnzbd first.",
+      "errorMessage": "Category does not exist",
+      "infoLink": "http://127.0.0.1:18989/sabnzbd/config/categories/",
+      "isWarning": false,
+      "propertyName": "MovieCategory",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-11T19:38:41Z",
+  "request": {
+    "body": "bodies/downloadclient-test-sabnzbd-missing-category.json",
+    "method": "POST",
+    "path": "/api/v3/downloadclient/test"
+  },
+  "status": 400
+}

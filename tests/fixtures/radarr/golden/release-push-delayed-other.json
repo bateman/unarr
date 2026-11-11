@@ -1,0 +1,76 @@
+{
+  "body": [
+    {
+      "age": 1,
+      "ageHours": 34.666097735166666,
+      "ageMinutes": 2079.965864125,
+      "approved": false,
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 54,
+          "name": "DD"
+        }
+      ],
+      "downloadAllowed": true,
+      "downloadUrl": "http://127.0.0.1:18989/movies/newznab/download/push-blindspotting-2018.nzb",
+      "edition": "",
+      "guid": "PUSH-http://127.0.0.1:18989/movies/newznab/download/push-blindspotting-2018.nzb",
+      "imdbId": 0,
+      "indexer": "Mock Newznab (Prowlarr)",
+      "indexerFlags": [],
+      "indexerId": 20,
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        },
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mappedMovieId": 14,
+      "movieRequested": false,
+      "movieTitles": [
+        "Blindspotting"
+      ],
+      "protocol": "usenet",
+      "publishDate": "2026-11-10T09:00:00Z",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "modifier": "none",
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "webdl"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityWeight": 1701,
+      "rejected": false,
+      "rejections": [
+        "Waiting for better quality release"
+      ],
+      "releaseGroup": "MeM",
+      "releaseHash": "",
+      "releaseWeight": 0,
+      "sceneSource": false,
+      "size": 6442450944,
+      "temporarilyRejected": true,
+      "title": "Blindspotting.2018.iTA.ENG.1080p.WEB-DL.DD5.1.H264-MeM",
+      "tmdbId": 0
+    }
+  ],
+  "recordedAt": "2026-11-11T19:39:57Z",
+  "request": {
+    "body": "bodies/release-push-delayed-other.json",
+    "method": "POST",
+    "path": "/api/v3/release/push"
+  },
+  "status": 200
+}

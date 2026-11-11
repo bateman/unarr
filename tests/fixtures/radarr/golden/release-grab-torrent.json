@@ -1,0 +1,31 @@
+{
+  "body": {
+    "age": 0,
+    "ageHours": 0,
+    "ageMinutes": 0,
+    "approved": false,
+    "customFormatScore": 0,
+    "downloadAllowed": false,
+    "downloadClientId": 6,
+    "guid": "http://127.0.0.1:18989/movies/torznab/details/c8949b89db6f20a1e049aa8170a7a05c",
+    "imdbId": 0,
+    "indexerId": 21,
+    "movieRequested": false,
+    "protocol": "unknown",
+    "publishDate": "0001-01-01T00:00:00Z",
+    "qualityWeight": 0,
+    "rejected": false,
+    "releaseWeight": 0,
+    "sceneSource": false,
+    "size": 0,
+    "temporarilyRejected": false,
+    "tmdbId": 0
+  },
+  "recordedAt": "2026-11-11T19:38:51Z",
+  "request": {
+    "body": "bodies/release-grab-torrent.json",
+    "method": "POST",
+    "path": "/api/v3/release"
+  },
+  "status": 200
+}

@@ -46,7 +46,7 @@ fn definition(kind: ClientKind, port: u16, name: &str, base: &str) -> DownloadCl
         tags: vec![],
         attributes: json!({"enable": true, "priority": 1, "removeCompletedDownloads": true, "removeFailedDownloads": true}),
     };
-    DownloadClientDefinition::from_provider(&provider).unwrap()
+    DownloadClientDefinition::from_provider(unarr_core::downloadclients::SONARR, &provider).unwrap()
 }
 
 /// What the mock served, by note, in order.

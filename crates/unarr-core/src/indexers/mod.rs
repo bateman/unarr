@@ -18,6 +18,7 @@ pub use settings::NewznabSettings;
 
 use crate::model::{Protocol, Provider};
 use crate::validation::ValidationFailure;
+use crate::Personality;
 
 /// The indexer implementations this phase talks to.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -179,9 +180,46 @@ impl IndexerError {
         IndexerError::Connect(format!("{} ({host_port})", root_cause(e)))
     }
 
-    /// The `ValidationFailure` `HttpIndexerBase.TestConnection` turns an
-    /// exception into.
-    pub fn into_test_failure(self) -> ValidationFailure {
+    /// What `HttpIndexerBase.TestConnection` turns an exception into, in
+    /// the personality's wording.
+    pub fn into_test_failure(self, personality: Personality) -> ValidationFailure {
+        if personality == Personality::Radarr {
+            self.into_radarr_test_failure()
+        } else {
+            self.into_sonarr_test_failure()
+        }
+    }
+
+    /// Radarr's `HttpIndexerBase.TestConnection`: the same cases, the
+    /// exception's message appended as it is.
+    fn into_radarr_test_failure(self) -> ValidationFailure {
+        let m = self.exception_message();
+        let message = match self {
+            IndexerError::ApiKey(_) => return ValidationFailure::error("ApiKey", "Invalid API Key"),
+            IndexerError::RequestLimit(_) => format!("Request limit reached: {m}"),
+            IndexerError::UnsupportedFeed(_) => format!("Indexer feed is not supported: {m}"),
+            IndexerError::Feed(_) | IndexerError::Xml(_) => format!("Unable to connect to indexer. {m}"),
+            IndexerError::Http { status, .. } if status >= 500 => {
+                format!("Unable to connect to indexer, indexer's server is unavailable. Try again later. {m}")
+            }
+            IndexerError::Http { status, .. } if status == 401 || status == 403 => {
+                format!("Unable to connect to indexer, invalid credentials. {m}")
+            }
+            IndexerError::Http { .. } => format!(
+                "Unable to connect to indexer, check the log above the ValidationFailure for more details. {m}"
+            ),
+            IndexerError::Connect(_) => format!(
+                "Unable to connect to indexer, please check your DNS settings and ensure IPv6 is working or disabled. {m}"
+            ),
+            IndexerError::Timeout(_) => format!(
+                "Unable to connect to indexer, possibly due to a timeout. Try again or check your network settings. {m}"
+            ),
+        };
+        ValidationFailure::error("", &message)
+    }
+
+    /// Sonarr's.
+    fn into_sonarr_test_failure(self) -> ValidationFailure {
         let m = self.exception_message();
         match self {
             IndexerError::ApiKey(_) => ValidationFailure::error("ApiKey", "Invalid API Key"),
@@ -273,10 +311,17 @@ mod tests {
             ..p
         })
         .is_none());
-        let f = IndexerError::Connect("Connection refused (127.0.0.1:18999)".into()).into_test_failure();
+        let f = IndexerError::Connect("Connection refused (127.0.0.1:18999)".into())
+            .into_test_failure(Personality::Sonarr);
         assert_eq!(
             f.error_message,
             "Unable to connect to indexer, please check your DNS settings and ensure that IPv6 is working or disabled. Connection refused (127.0.0.1:18999)."
+        );
+        let f = IndexerError::Connect("Connection refused (127.0.0.1:18999)".into())
+            .into_test_failure(Personality::Radarr);
+        assert_eq!(
+            f.error_message,
+            "Unable to connect to indexer, please check your DNS settings and ensure IPv6 is working or disabled. Connection refused (127.0.0.1:18999)"
         );
     }
 

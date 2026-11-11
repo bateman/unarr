@@ -1,0 +1,66 @@
+{
+  "body": [
+    {
+      "age": 4,
+      "ageHours": 117.64703884144444,
+      "ageMinutes": 7058.822330515,
+      "approved": false,
+      "customFormatScore": 0,
+      "customFormats": [],
+      "downloadAllowed": false,
+      "downloadUrl": "http://127.0.0.1:18989/movies/newznab/download/push-some-other-movie.nzb",
+      "edition": "",
+      "guid": "PUSH-http://127.0.0.1:18989/movies/newznab/download/push-some-other-movie.nzb",
+      "imdbId": 0,
+      "indexer": "Mock Newznab (Prowlarr)",
+      "indexerFlags": [],
+      "indexerId": 20,
+      "languages": [
+        {
+          "id": 0,
+          "name": "Unknown"
+        }
+      ],
+      "movieRequested": false,
+      "movieTitles": [
+        "Some Other Movie"
+      ],
+      "protocol": "usenet",
+      "publishDate": "2026-11-06T22:00:00Z",
+      "quality": {
+        "quality": {
+          "id": 4,
+          "modifier": "none",
+          "name": "HDTV-720p",
+          "resolution": 720,
+          "source": "tv"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityWeight": 1301,
+      "rejected": true,
+      "rejections": [
+        "Unknown Movie. Unable to match to existing movie in Library using release title."
+      ],
+      "releaseGroup": "GRP",
+      "releaseHash": "",
+      "releaseWeight": 0,
+      "sceneSource": false,
+      "size": 734003200,
+      "temporarilyRejected": false,
+      "title": "Some.Other.Movie.2019.720p.HDTV.x264-GRP",
+      "tmdbId": 0
+    }
+  ],
+  "recordedAt": "2026-11-11T19:38:49Z",
+  "request": {
+    "body": "bodies/release-push-unknown.json",
+    "method": "POST",
+    "path": "/api/v3/release/push"
+  },
+  "status": 200
+}

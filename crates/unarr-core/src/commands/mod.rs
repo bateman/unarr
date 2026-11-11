@@ -281,6 +281,21 @@ pub enum CommandBody {
     Backup {
         kind: BackupType,
     },
+    /// Radarr's `MoviesSearchCommand`.
+    MoviesSearch {
+        movie_ids: Vec<i64>,
+    },
+    /// Radarr's `MissingMoviesSearchCommand`; the filter is the UI's, which
+    /// the original keeps and does not read.
+    MissingMoviesSearch {
+        filter_key: Option<String>,
+        filter_value: Option<String>,
+    },
+    /// Radarr's `CutoffUnmetMoviesSearchCommand`.
+    CutoffUnmetMoviesSearch {
+        filter_key: Option<String>,
+        filter_value: Option<String>,
+    },
 }
 
 /// `(name, .NET type name)` of every command, for `POST /command` (the
@@ -379,6 +394,15 @@ const NAMES: &[(&str, &str)] = &[
         "NzbDrone.Core.ImportLists.ImportListSyncCommand",
     ),
     ("Backup", "NzbDrone.Core.Backup.BackupCommand"),
+    ("MoviesSearch", "NzbDrone.Core.IndexerSearch.MoviesSearchCommand"),
+    (
+        "MissingMoviesSearch",
+        "NzbDrone.Core.IndexerSearch.MissingMoviesSearchCommand",
+    ),
+    (
+        "CutoffUnmetMoviesSearch",
+        "NzbDrone.Core.IndexerSearch.CutoffUnmetMoviesSearchCommand",
+    ),
 ];
 
 /// `QualityModel` as the API carries it.
@@ -476,6 +500,38 @@ impl CommandBody {
             .map(|(n, _)| *n)
             .find(|n| n.eq_ignore_ascii_case(name.trim()))?;
         Some(Self::from_name(canonical, body))
+    }
+
+    /// [`CommandBody::parse`] for one application: a name only the other
+    /// knows is no command here, as it is none in the original.
+    pub fn parse_for(personality: crate::Personality, name: &str, body: &Value) -> Option<CommandBody> {
+        Self::parse(name, body).filter(|command| command.runs_in(personality))
+    }
+
+    /// Whether the application has this command. Radarr has what its
+    /// milestones brought so far: the acquisition commands and the two
+    /// that keep the queue and the health checks going.
+    pub fn runs_in(&self, personality: crate::Personality) -> bool {
+        let movies = matches!(
+            self,
+            CommandBody::MoviesSearch { .. }
+                | CommandBody::MissingMoviesSearch { .. }
+                | CommandBody::CutoffUnmetMoviesSearch { .. }
+        );
+        match personality {
+            crate::Personality::Radarr => {
+                movies
+                    || matches!(
+                        self,
+                        CommandBody::RssSync
+                            | CommandBody::RefreshMonitoredDownloads
+                            | CommandBody::ProcessMonitoredDownloads
+                            | CommandBody::MessagingCleanup
+                            | CommandBody::CheckHealth
+                    )
+            }
+            _ => !movies,
+        }
     }
 
     /// The command a .NET type name (a scheduled task) names.
@@ -604,6 +660,17 @@ impl CommandBody {
                     _ => BackupType::Scheduled,
                 },
             },
+            "MoviesSearch" => CommandBody::MoviesSearch {
+                movie_ids: ints(&body["movieIds"]),
+            },
+            "MissingMoviesSearch" => CommandBody::MissingMoviesSearch {
+                filter_key: body["filterKey"].as_str().map(String::from),
+                filter_value: body["filterValue"].as_str().map(String::from),
+            },
+            "CutoffUnmetMoviesSearch" => CommandBody::CutoffUnmetMoviesSearch {
+                filter_key: body["filterKey"].as_str().map(String::from),
+                filter_value: body["filterValue"].as_str().map(String::from),
+            },
             _ => unreachable!("every name in NAMES is handled"),
         }
     }
@@ -641,6 +708,9 @@ impl CommandBody {
             CommandBody::CleanUpRecycleBin => "CleanUpRecycleBin",
             CommandBody::ImportListSync { .. } => "ImportListSync",
             CommandBody::Backup { .. } => "Backup",
+            CommandBody::MoviesSearch { .. } => "MoviesSearch",
+            CommandBody::MissingMoviesSearch { .. } => "MissingMoviesSearch",
+            CommandBody::CutoffUnmetMoviesSearch { .. } => "CutoffUnmetMoviesSearch",
         }
     }
 
@@ -810,6 +880,24 @@ impl CommandBody {
             } => {
                 m.insert("definitionId".into(), json!(id));
             }
+            CommandBody::MoviesSearch { movie_ids } => {
+                m.insert("movieIds".into(), json!(movie_ids));
+            }
+            CommandBody::MissingMoviesSearch {
+                filter_key,
+                filter_value,
+            }
+            | CommandBody::CutoffUnmetMoviesSearch {
+                filter_key,
+                filter_value,
+            } => {
+                if let Some(key) = filter_key {
+                    m.insert("filterKey".into(), json!(key));
+                }
+                if let Some(value) = filter_value {
+                    m.insert("filterValue".into(), json!(value));
+                }
+            }
             CommandBody::Backup { kind } => {
                 m.insert(
                     "type".into(),
@@ -849,6 +937,9 @@ pub struct CommandModel {
     /// The scheduled task's last run, for commands the scheduler pushes.
     pub last_execution_time: Option<DateTime<Utc>>,
     pub last_start_time: Option<DateTime<Utc>>,
+    /// `Command.IsTypeExclusive`, a property Radarr's commands have and
+    /// Sonarr's do not: `None` where the application has none to show.
+    pub type_exclusive: Option<bool>,
 }
 
 impl CommandModel {
@@ -882,6 +973,9 @@ impl CommandModel {
             json!(self.body.requires_disk_access()),
         );
         m.insert("isExclusive".into(), json!(self.body.is_exclusive()));
+        if let Some(exclusive) = self.type_exclusive {
+            m.insert("isTypeExclusive".into(), json!(exclusive));
+        }
         m.insert("isLongRunning".into(), json!(self.body.is_long_running()));
         m.insert("name".into(), json!(self.body.name()));
         if let Some(t) = self.last_execution_time {
@@ -908,6 +1002,8 @@ pub struct CommandQueue {
     /// Pulsed whenever the queue changes, for the workers and for
     /// `wait_idle`.
     changed: Notify,
+    /// The application the commands are of.
+    personality: crate::Personality,
 }
 
 impl CommandQueue {
@@ -915,6 +1011,11 @@ impl CommandQueue {
     /// commands left started by an earlier run are orphaned, queued ones
     /// run again.
     pub async fn open(db: Db) -> anyhow::Result<CommandQueue> {
+        Self::open_for(db, crate::Personality::Sonarr).await
+    }
+
+    /// A queue of one application's commands.
+    pub async fn open_for(db: Db, personality: crate::Personality) -> anyhow::Result<CommandQueue> {
         let now = Utc::now();
         let (next_id, queued) = db
             .call(move |conn| {
@@ -927,6 +1028,7 @@ impl CommandQueue {
             items: Mutex::new(queued),
             next_id: AtomicI64::new(next_id),
             changed: Notify::new(),
+            personality,
         })
     }
 
@@ -981,6 +1083,7 @@ impl CommandQueue {
                 client_user_agent: None,
                 last_execution_time: None,
                 last_start_time: None,
+                type_exclusive: (self.personality == crate::Personality::Radarr).then_some(false),
             };
             adjust(&mut model);
             items.push(model.clone());

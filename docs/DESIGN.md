@@ -347,7 +347,7 @@ from 86 ms to 50 ms by not decoding the cast (2.5 MB of JSON no resource
 shows) and loading only the queue's series for the queue, and the rest is the
 950 rows' remaining JSON columns (35 ms) and the season statistics over
 25,000 episodes (15 ms). The design target of 10 ms at that size is not met;
-section 16 says what the next step would be.
+section 17 says what the next step would be.
 
 The idle figures are what `malloc_trim` leaves after the import: without it
 the scaled fixture's import left the process at 232 MB, holding pages it no
@@ -453,7 +453,7 @@ the list once per page load and follows the changes over SignalR, so it
 bought fifty milliseconds nobody waits for at the cost of a second code
 path and a validity rule tied to the clock. Ten milliseconds at this size
 is, for 2.3 MB of JSON built on request, not within reach of an index or
-a query; section 16 asks which library size the target is for.
+a query; section 17 asks which library size the target is for.
 
 End of phase 4a (release build, x86-64, in the cloud session, a client
 script over the loopback). The two real fixtures: Sonarr's (38 series,
@@ -493,7 +493,48 @@ thirty-second timer for a personality without a scheduler (36 MB).
 `GET /movie` builds 0.7 MB of JSON in 15 ms for 193 movies, the files'
 media info and the alternative titles included; at 2,000 movies that is
 the same order as `/series` at 950 series, and the same question
-(section 16).
+(section 17).
+
+End of phase 4b (release build, x86-64, in the cloud session, a client
+script over the loopback). The Radarr fixture with the mock indexers and
+download clients of `scripts/mock-servarr.py`; the fixture's own twelve
+indexers and three clients point at hosts that do not resolve, and are
+asked all the same. The idle figure is read 35 seconds after the start; "at
+rest" 35 seconds after the last request:
+
+| Metric | Radarr alone | Both in one process |
+|--------|--------------|---------------------|
+| Binary, with both embedded UIs | 28.2 MiB | |
+| Cold start to first response, import included | 0.24 s | |
+| Idle RSS, before any search | 27 MB | 44 MB |
+| RSS after the first interactive search | 51 MB | |
+| RSS after the requests | 68 MB | 84 MB |
+| RSS at rest | 63 MB | 74 MB |
+| `GET /release?movieId=` first, then p50 / p99 (9 releases, two indexers answering) | 0.14 s, then 15 / 20 ms | |
+| `GET /release` (the RSS list, 14 releases) | 29 to 40 ms | |
+| `RssSync` command (14 reports, 3 grabs on the first run) | 0.05 to 0.07 s | |
+| `MoviesSearch` command, one movie | 0.02 s | |
+| `GET /queue` page of 20 with the movie (3 items), p50 / p99 | 3.3 / 5.6 ms | |
+| `GET /queue` as Unpackerr asks (page of 500), p50 / p99 | 3.3 / 7.4 ms | |
+| `GET /queue/status`, p50 / p99 | 0.4 / 1.6 ms | |
+| `GET /history` page of 20 with the movie, p50 / p99 | 19.3 / 33.2 ms | |
+| `GET /command`, `GET /health`, p50 | 0.2, 0.1 ms | |
+
+The 60 MB target is not met with both personalities once Radarr has
+searched: 74 MB at rest, on two small libraries. Nothing leaks: one
+search costs what a hundred do. The first search compiles the movie title
+parser's patterns, some 21 MB that stay for the life of the process (30 MB
+with the providers created, 51 after one search, 52 after a hundred more),
+and the command runtime Radarr now runs adds some 9 MB to its idle figure
+(18 MB in 4a, 27 now). Sonarr's parser is a second set of patterns of the
+same kind; the two were ported apart, as the originals are, and share
+nothing. Whether to bring the patterns down (compile fewer of them, or
+build them so that the two parsers share the automata they have in
+common) or to state the target per personality is an open question
+(section 17). The history page takes twice what it did in 4a (10.6 ms):
+each row's custom formats are now computed from the release title as the
+movie parser reads it, edition and group included, where 4a went without
+a parser.
 
 ## 10. Naming and distribution
 
@@ -949,7 +990,7 @@ the same order as `/series` at 950 series, and the same question
   or off, a scan remembers the extras next to episode files, a rename
   takes them along and deleting the episode file sends them to the
   recycling bin, as in the originals. Unarr drives no metadata consumer
-  (section 16), and the `MetadataFiles` rows are not imported. Of the
+  (section 17), and the `MetadataFiles` rows are not imported. Of the
   files that are not subtitles, a scan remembers only those named exactly
   as their episode file (an nfo): a rename gives an other extra the
   episode file's name and nothing else, which would turn a media
@@ -976,7 +1017,7 @@ the same order as `/series` at 950 series, and the same question
   validation was off would keep being accepted. One process has one
   HTTP client, so with several personalities in one process
   (`--personalities sonarr,radarr`) the settings of the last one started
-  or saved apply to all (section 16).
+  or saved apply to all (section 17).
 - **The environment wins over the settings.** The originals' variables
   (`Sonarr__Server__Port`, `Sonarr__Auth__ApiKey`, `Sonarr__Log__Level`
   and the others of the Server, Auth, App, Log and Update sections that
@@ -1207,8 +1248,9 @@ the same order as `/series` at 950 series, and the same question
   zero or for having no release date, so the real Radarr was started on
   a copy with one movie's year zeroed and another's dates removed; it
   drops the first and lists the second. Movies sharing a cinema date
-  come out of `calendar` in TMDB id order, which is inferred from two
-  pairs in the goldens and from the original's index, not probed.
+  were taken to come out of `calendar` in TMDB id order, inferred from
+  two pairs in the goldens; 4b probed it and found otherwise
+  (section 16).
 - **Left for their milestone, on purpose.** `config/naming/examples`
   (recorded, pending: it needs the movie file name builder, 4c);
   `movie/lookup`, `importlist/movie`, `release`, `rename`, `manualimport`,
@@ -1217,7 +1259,163 @@ the same order as `/series` at 950 series, and the same question
   them; they come with the settings writes); the edition of a history
   row's release, which the title parser of 4b finds.
 
-## 16. Open questions
+## 16. Decisions taken in phase 4b
+
+- **Every shape was recorded before it was written, on mocks.** The
+  recording now starts `scripts/mock-servarr.py`: two indexers under
+  `/movies` that serve made-up movie feeds
+  (`tests/fixtures/indexers/movies`) and the four download clients. The
+  original runs without the environment's proxy and the fixture's own
+  providers point at `.invalid` hosts, so it reaches nothing else. The
+  maintainer's installation contributed facts, not data: that Prowlarr
+  manages the indexers (so its sync is what must work), that the delay
+  profiles are at zero, and the two queue queries Unpackerr and Cleanuparr
+  make, which are goldens.
+- **Movie modules next to the series ones; no abstraction over the two.**
+  `movies::{parser, request, decision, search, downloads, commands}` are
+  ports of Radarr's services, as `parser`, `decision`, `search`,
+  `downloads` are of Sonarr's. What they share was extracted when the
+  second use arrived, each time in a commit of its own with Sonarr's
+  goldens replaying before and after: the download clients take a
+  `GrabRequest` (the release, whether what it is of is recent, the seed
+  limits, where it came from) instead of a remote episode, and an `App`
+  (the application's name and the keys of its category and priority
+  settings); the indexer client and the HTTP clients are one per
+  personality; the queue's states, ids and removal options, the grab's
+  errors and the pending reasons are the series side's types, used as
+  they are.
+- **One command runtime, told which application it serves.** The plan
+  was a queue generic over the command. What the two applications
+  actually share is everything but the commands' work: the queue, its
+  persistence, the workers, the scheduler, the health service. So
+  `CommandBody` lists both applications' commands, `parse_for` and
+  `runs_in` say which an application has (a Sonarr name is unknown to
+  Radarr, as in the original, and the other way round), and the runtime
+  hands Radarr's commands to `movies::commands`. The series-side fields
+  of the runtime are built for Radarr and never asked. Radarr's commands
+  carry `isTypeExclusive`, which Sonarr's do not; an imported database
+  continues the original's command ids.
+- **Radarr schedules its own list and runs what the milestone brought.**
+  The eleven tasks are the original's. `RssSync`,
+  `RefreshMonitoredDownloads`, `MessagingCleanup` and `CheckHealth` run;
+  `RefreshMovie`, `RefreshCollections`, `Housekeeping`, `Backup`,
+  `CleanUpRecycleBin`, `ImportListSync` and the update check are listed
+  and skipped until their milestones, so they show as overdue rather
+  than as run. Posting one of them answers as for an unknown name.
+- **The title parser is Radarr's, quirks included**, with its 1,076
+  vectors ported as data: reversed names are not read; the title is cut
+  where the simplified title says, counted in UTF-16 units; the German
+  tracker pattern's unbounded look-behind is emulated with a group
+  checked afterwards. `NetRegex` turned out to mishandle a look-behind
+  that ends in an optional back-reference; the release group pattern is
+  written as two look-behinds instead. The history and the blocklist now
+  compute their custom formats from the title as this parser reads it.
+- **The specifications run in the order of the original's source files,
+  a folder's own before its subfolders'.** The first reading had them in
+  path order, which put the `RssSync` folder's (availability, delay,
+  history, tags, monitored, pending, proper) among the others. A release
+  rejected for several reasons while a delay holds it showed the real
+  order: the rejections come out as the files are compiled. The 39
+  decision vectors do not see the order; the golden does.
+- **A torrent whose feed names its hash is blocklisted by hash alone.**
+  The download a client made of it has the client's hash, so a removal
+  with blocklist does not stop the same release from being grabbed
+  again when the mock's hashes differ from the feed's, which is what the
+  original did in the recording. Kept as it is.
+- **Radarr's actions that return a string are negotiated as its
+  framework does.** `POST /indexer/test`, `POST /downloadclient/test`
+  and `GET /localization` return a string: the text as `text/plain` for
+  a client with no `Accept`, with `*/*` in it or asking for plain text;
+  the text as a JSON string for one asking for JSON alone (Prowlarr);
+  406 otherwise. Asked of the original with each.
+- **A queue item's movie shows how it was found.** A download matched
+  through the history of its grab carries the movie as read by id, with
+  its alternative titles; one matched by its title carries none. The
+  original's two code paths differ so, and the queue shows it.
+- **The queue and the health verdicts have no order to keep.** The
+  original holds its tracked downloads and its verdicts in hash tables;
+  the replay compares both as sets. The sort keys of `GET /queue` do
+  order it, and those are compared.
+- **The queue status sent over SignalR is read after the refresh and
+  counts the pending releases.** The first version sent what the cache
+  held when a grab ended, without the releases that wait; an assertion on
+  the hub's messages in the replay found it. SignalR itself was not
+  recorded from the original: the replay asserts that a command's start
+  and end, the queue's sync and status and the health sync are sent, and
+  that nothing goes out under a name only Sonarr's UI knows.
+- **Pending releases are the original's, by movie.** One release per
+  movie is listed, the best by quality and then by the preferred
+  protocol; a grab drops the pending releases of its quality or lower;
+  what an RSS sync rejects is dropped. The stored release is Unarr's
+  `ReleaseInfo` as JSON, whose `publishDate` the delay specification
+  reads; a row whose release cannot be read (a shape the original stored
+  and this port does not know) is skipped with a warning.
+- **The health checks are shared and told the application.** The checks
+  of the acquisition (indexers, download clients, remote paths, the
+  import mechanism, root folders, mounts) are the same code reading the
+  movies' folders, linking Radarr's wiki pages and, for the paths of a
+  download, keeping the two spaces Radarr's strings have between
+  sentences. Radarr's import mechanism check has no hints for a setting
+  never saved. Its own checks (collections, removed movies, metadata)
+  come with the library milestone; its notifications are not sent yet,
+  so a verdict stays in the list.
+- **Completed downloads wait.** The refresh marks a completed download
+  `importPending` or `importBlocked` with the original's messages and
+  deals with failed ones; importing is 4c, so
+  `ProcessMonitoredDownloads` only tells the UI the queue changed.
+- **The calendar sorts by three dates.** 4a inferred TMDB id order among
+  movies of one cinema date. Two pairs chosen so that TMDB ids, titles
+  and ids disagree were recorded: the original orders by cinema date,
+  then digital release, then physical release, as its controller says,
+  and the four pairs the fixture has all follow it.
+- **The free space check reads the real disk.** The mock's releases
+  meant to be approved are under 8 GB and one is 4 TB, so the check
+  rejects that one anywhere; the replay refuses to start with less than
+  9 GB free where `/movies` would be and says why, since with less the
+  approved releases are rejected and the goldens differ for a reason
+  that is not in the code.
+- **Status and headers were compared on the running original.**
+  `scripts/http-audit.py` (`make http-audit`) sends the GET requests of
+  the golden list and thirty probes of the edges to the original and to
+  Unarr on the same fixture: 225 requests. Of what differed, one thing
+  was Radarr's (the string answers above, fixed). The rest is the
+  server both personalities share, most of it listed by the November
+  audit as low: no cache headers on API answers, no charset on the JSON
+  content type, no compression, no CORS preflight, `HEAD` answered, the
+  key as a bearer token refused, a trailing slash not ignored, the
+  version header sent on errors too. Not changed in this milestone: it
+  is not Radarr's, and each needs the same comparison on Sonarr first.
+- **Implemented from the source, not replayed.** `MissingMoviesSearch`
+  and `CutoffUnmetMoviesSearch` (on the original they would search some
+  ninety movies at the indexers' pace) and a release kept pending for
+  want of a client. The first two are tried against the mock indexers
+  and clients (`crates/unarr-mock/tests/movie_commands.rs`); the pending
+  bookkeeping has a unit test.
+- **What a review of the branch found, and the recordings it led to.**
+  A failed download was recorded, blocklisted and removed, and never
+  searched for again: the movie side had no
+  `RedownloadFailedDownloadService`. The mock now fails a download in
+  the recording, and the original's answer (the failure, the blocklist
+  row, a new grab by a search nobody posted) is a golden. A pending
+  torrent blocklisted from the queue lost its hash, so the blocklist,
+  which knows a torrent by its hash, let it back in; the original's
+  `Block` keeps the hash and no flags. A queue removal naming an id
+  twice blocklisted twice; the original removes each item once, which a
+  golden now shows. A torrent file was fetched through the process-wide
+  client, that is through Sonarr's proxy settings: the download clients
+  now carry their personality's own. A movie file without a scene name
+  was scored by its whole original path, folders included; the original
+  reads the file's name. A release pushed for a client that does not
+  exist was kept as pending, and an error past the client ended the
+  whole batch: both are the original's "any other exception", which
+  skips that release, and both copies (series and movies) say so now.
+  These were drift between near-copies of the series code. The choice of
+  parallel modules stands, for the reasons above; what it costs is that
+  a fix to one side must be looked for on the other, and the rules with
+  no test of their own (queue, history, blocklist, free space, upgrade,
+  repack) now have one.
+
+## 17. Open questions
 
 - Metadata provider: decided (section 7, option A) and implemented behind
   a trait. Open is the switch to Unarr's own user agent towards the Servarr
@@ -1231,14 +1429,36 @@ the same order as `/series` at 950 series, and the same question
   series-side service that builds its client itself.
 - Radarr, from 4a. The Bazarr movie requests replayed are Bazarr's as
   remembered from its source, not recorded from a running Bazarr, and
-  Bazarr itself was not run. `calendar`'s order among movies of one cinema
-  date is inferred (section 15). The fixture has no `MediaCover` folder,
+  Bazarr itself was not run. The fixture has no `MediaCover` folder,
   so the cover addresses are compared and no cover was served. `GET
   /movie` costs 15 ms for 193 movies; nothing was scaled, so what a
   2,000-movie library costs, in time and in memory, is not known, and
   the 60 MB target of section 9 is so far met only on two small
-  libraries. Radarr's `health` is empty until it has checks to run: a
-  root folder that is missing shows in `rootfolder`, not as a warning.
+  libraries.
+- Radarr, from 4b. The review's suggestion to share the pieces of the
+  two pipelines that carry no media notion (the refresh loop over the
+  clients, what a grab's failure means, the release comparisons, the
+  push validation) was not taken up in this milestone and is open; so is
+  the series side the Radarr runtime builds and never asks, and the
+  parser's path, slug and scene-title functions, which only the vectors
+  call until 4c. The memory target is exceeded: 74 MB at rest with
+  both personalities after a search, 63 MB with Radarr alone, on small
+  libraries (section 9); the movie parser's compiled patterns are 21 MB
+  of it. Bazarr's `RescanMovie`, and any command of a later milestone,
+  answers 500 as an unknown name until 4c. Radarr sends no notification
+  yet, neither on a grab nor on a health verdict. The commands and paths
+  listed at the end of section 16 were written from the source and not
+  replayed against the original. The order of the queue among downloads
+  with the same time left, and of the calendar among movies equal on all
+  three dates, is not the original's to reproduce (a hash table) or was
+  not probed (the fixture has no such movies). The server-wide header
+  differences the live audit measured are open, for both personalities.
+  Three things found on the way concern Sonarr and were left to tasks of
+  their own: the same look-behind defect in its release group pattern
+  (fixed on `main` while this milestone was under way), the fixture
+  script's ICU check that can pass without ICU and its port variable
+  that does not move the copy, and its queue status over SignalR, which
+  leaves the pending releases out.
 - The maintainer's Recyclarr configuration for Radarr is in the tree
   (`tests/fixtures/recyclarr/radarr.yml`) and nothing runs with it yet:
   4c records the exchange between the real Recyclarr and the real Radarr

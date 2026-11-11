@@ -1,0 +1,39 @@
+{
+  "body": {
+    "body": {
+      "isExclusive": false,
+      "isLongRunning": false,
+      "isTypeExclusive": false,
+      "movieIds": [
+        116
+      ],
+      "name": "MoviesSearch",
+      "requiresDiskAccess": false,
+      "sendUpdatesToClient": true,
+      "suppressMessages": false,
+      "trigger": "manual",
+      "updateScheduledTask": true
+    },
+    "commandName": "Movies Search",
+    "duration": "00:00:02.0291871",
+    "ended": "2026-11-11T19:39:19Z",
+    "id": 472960,
+    "message": "Completed search for 1 movies. 1 reports downloaded.",
+    "name": "MoviesSearch",
+    "priority": "normal",
+    "queued": "2026-11-11T19:39:17Z",
+    "result": "successful",
+    "sendUpdatesToClient": true,
+    "started": "2026-11-11T19:39:17Z",
+    "stateChangeTime": "2026-11-11T19:39:17Z",
+    "status": "completed",
+    "trigger": "manual",
+    "updateScheduledTask": true
+  },
+  "recordedAt": "2026-11-11T19:39:29Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/command/472960"
+  },
+  "status": 200
+}

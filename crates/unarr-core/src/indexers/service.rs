@@ -25,6 +25,13 @@ pub enum Purpose {
     InteractiveSearch,
 }
 
+/// What one indexer is asked.
+enum Query<'a> {
+    Rss,
+    Series(&'a SearchCriteria),
+    Movie(&'a crate::movies::request::MovieSearchCriteria),
+}
+
 /// What a search dispatch found, and from how many indexers.
 #[derive(Debug, Clone, Default)]
 pub struct SearchResult {
@@ -127,9 +134,12 @@ impl IndexerService {
             let service = self.clone();
             tasks.spawn(async move { (position, service.fetch_one(&definition, None, now).await) });
         }
-        let releases = in_indexer_order(&mut tasks).await?;
-        let mut releases = releases;
-        releases.sort_by_key(|r| std::cmp::Reverse(r.publish_date));
+        let mut releases = in_indexer_order(&mut tasks).await?;
+        // Sonarr lists the newest first; Radarr keeps the feeds one after
+        // the other, in the indexers' order.
+        if self.client.personality() != crate::Personality::Radarr {
+            releases.sort_by_key(|r| std::cmp::Reverse(r.publish_date));
+        }
         tracing::debug!(count = releases.len(), "reports from the RSS sync");
         Ok(releases)
     }
@@ -175,6 +185,48 @@ impl IndexerService {
         })
     }
 
+    /// Radarr's `ReleaseSearchService.Dispatch`: a movie search sent to every
+    /// indexer enabled for it whose tags fit the movie, the answers merged.
+    pub async fn search_movie(
+        &self,
+        criteria: &crate::movies::request::MovieSearchCriteria,
+        interactive: bool,
+        movie_tags: &[i64],
+        now: DateTime<Utc>,
+    ) -> anyhow::Result<SearchResult> {
+        let purpose = if interactive {
+            Purpose::InteractiveSearch
+        } else {
+            Purpose::AutomaticSearch
+        };
+        let definitions: Vec<IndexerDefinition> = self
+            .enabled_for(purpose, now)
+            .await?
+            .into_iter()
+            .filter(|d| d.tags.is_empty() || d.tags.iter().any(|t| movie_tags.contains(t)))
+            .collect();
+        tracing::info!(count = definitions.len(), interactive, "searching indexers");
+        let indexers_searched = definitions.len();
+        let mut tasks = tokio::task::JoinSet::new();
+        for (position, definition) in definitions.into_iter().enumerate() {
+            let service = self.clone();
+            let criteria = criteria.clone();
+            tasks.spawn(async move {
+                (
+                    position,
+                    service
+                        .fetch_with(&definition, Query::Movie(&criteria), now)
+                        .await,
+                )
+            });
+        }
+        let releases = in_indexer_order(&mut tasks).await?;
+        Ok(SearchResult {
+            releases,
+            indexers_searched,
+        })
+    }
+
     /// One indexer's RSS feed (`criteria` `None`) or search, with the status
     /// bookkeeping of `HttpIndexerBase.FetchReleases`: success steps the
     /// back-off down, a failure steps it up (a request limit by an hour at
@@ -185,10 +237,28 @@ impl IndexerService {
         criteria: Option<&SearchCriteria>,
         now: DateTime<Utc>,
     ) -> Vec<ReleaseInfo> {
+        let query = match criteria {
+            Some(criteria) => Query::Series(criteria),
+            None => Query::Rss,
+        };
+        self.fetch_with(definition, query, now).await
+    }
+
+    async fn fetch_with(
+        &self,
+        definition: &IndexerDefinition,
+        query: Query<'_>,
+        now: DateTime<Utc>,
+    ) -> Vec<ReleaseInfo> {
         let id = definition.id;
-        let result = match criteria {
-            Some(criteria) => self.client.search(definition, criteria).await.map(|r| (r, None)),
-            None => {
+        let result = match query {
+            Query::Series(criteria) => self.client.search(definition, criteria).await.map(|r| (r, None)),
+            Query::Movie(criteria) => self
+                .client
+                .search_movie(definition, criteria)
+                .await
+                .map(|r| (r, None)),
+            Query::Rss => {
                 let last = self.last_rss_release(id).await;
                 self.client
                     .fetch_recent(definition, last.as_ref())

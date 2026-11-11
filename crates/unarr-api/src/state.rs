@@ -7,6 +7,7 @@ use unarr_core::commands::{Event, Runtime};
 use unarr_core::decision::RemoteEpisode;
 use unarr_core::downloadclients::DownloadClientService;
 use unarr_core::downloads::Downloads;
+use unarr_core::indexers::IndexerClient;
 
 use chrono::{DateTime, Utc};
 use serde_json::json;
@@ -109,6 +110,8 @@ fn os_release() -> (String, String) {
 
 struct Inner {
     personality: Personality,
+    /// The personality's indexer client.
+    indexers: &'static IndexerClient,
     db: Db,
     /// Replaced whole when the host settings are saved.
     settings: std::sync::RwLock<Arc<Settings>>,
@@ -122,8 +125,12 @@ struct Inner {
     /// `ReleaseController`'s cache: the releases a search listed, by
     /// `{indexerId}_{guid}`, for half an hour, so a grab can find them.
     releases: Mutex<HashMap<String, (RemoteEpisode, DateTime<Utc>)>>,
+    /// The same cache for Radarr, whose releases are mapped to movies.
+    movie_releases: Mutex<HashMap<String, (unarr_core::movies::decision::RemoteMovie, DateTime<Utc>)>>,
     /// Grabs, tracked downloads and the queue.
     downloads: Arc<Downloads>,
+    /// The same for Radarr, whose downloads are of movies.
+    movie_downloads: Arc<unarr_core::movies::downloads::MovieDownloads>,
     /// The command queue, its workers and the scheduler, once started.
     commands: OnceLock<Arc<Runtime>>,
     /// `ReleasePushController.PushLock`: one push decided and processed
@@ -170,10 +177,43 @@ impl AppState {
         runtime: RuntimeInfo,
         logs: LogBuffer,
     ) -> AppState {
-        let downloads = Arc::new(Downloads::new(db.clone(), DownloadClientService::new(db.clone())));
+        // The series side takes the process-wide clients; any other
+        // personality has its own, so that the proxy and certificate
+        // settings saved for one never reach another's requests.
+        let http = match personality {
+            Personality::Sonarr => unarr_core::http::Clients::process(),
+            Personality::Radarr | Personality::Lidarr => unarr_core::http::Clients::new(),
+        };
+        let clients = DownloadClientService::with_client(
+            db.clone(),
+            http.client.clone(),
+            unarr_core::downloadclients::App::of(personality),
+        )
+        .with_no_redirect(http.no_redirect.clone());
+        let movie_downloads = Arc::new(unarr_core::movies::downloads::MovieDownloads::new(
+            db.clone(),
+            DownloadClientService::with_client(
+                db.clone(),
+                http.client.clone(),
+                unarr_core::downloadclients::App::of(personality),
+            )
+            .with_no_redirect(http.no_redirect.clone()),
+        ));
+        let downloads = Arc::new(Downloads::new(db.clone(), clients));
+        // The indexer client keeps the capabilities it has read, so there
+        // is one per personality for the life of the process: Sonarr's is
+        // the process-wide one, any other is made here and never dropped.
+        let indexers: &'static IndexerClient = match personality {
+            Personality::Sonarr => unarr_core::indexers::shared(),
+            _ => Box::leak(Box::new(IndexerClient::for_personality(
+                http.client.clone(),
+                personality,
+            ))),
+        };
         AppState(Arc::new(Inner {
             personality,
             downloads,
+            movie_downloads,
             db,
             settings: std::sync::RwLock::new(Arc::new(settings)),
             runtime,
@@ -181,6 +221,7 @@ impl AppState {
             hub: Hub::new(),
             fixed_now: Arc::new(Mutex::new(None)),
             releases: Mutex::new(HashMap::new()),
+            movie_releases: Mutex::new(HashMap::new()),
             commands: OnceLock::new(),
             push_lock: tokio::sync::Mutex::new(()),
             auth_cookie: std::sync::OnceLock::new(),
@@ -188,13 +229,8 @@ impl AppState {
             session_secret: OnceLock::new(),
             lifecycle: tokio::sync::watch::channel(None).0,
             log_level: OnceLock::new(),
-            // The series side takes the process-wide clients; any other
-            // personality has its own, so that the proxy and certificate
-            // settings saved for one never reach another's requests.
-            http: match personality {
-                Personality::Sonarr => unarr_core::http::Clients::process(),
-                Personality::Radarr | Personality::Lidarr => unarr_core::http::Clients::new(),
-            },
+            http,
+            indexers,
         }))
     }
 
@@ -206,13 +242,6 @@ impl AppState {
             return Ok(());
         }
         self.apply_network_settings().await?;
-        // The command queue, the scheduler and what they run are bound to
-        // series and episodes; Radarr gets its own with the acquisition
-        // milestone. Until then it answers from what the import brought
-        // and runs nothing in the background.
-        if self.personality() == Personality::Radarr {
-            return Ok(());
-        }
         let fixed = self.0.fixed_now.clone();
         let clock: unarr_core::commands::executor::Clock =
             Arc::new(move || fixed.lock().unwrap().unwrap_or_else(Utc::now));
@@ -224,13 +253,27 @@ impl AppState {
             media_cover_dir: Some(self.runtime().media_cover_dir.clone()),
             ..unarr_core::notifications::Identity::default()
         };
-        let runtime = Runtime::new(self.db().clone(), self.downloads().clone(), clock, identity).await?;
+        let runtime = match self.personality() {
+            // Radarr: the same queue, workers and scheduler, the commands
+            // about movies done by its own downloads and searches.
+            Personality::Radarr => {
+                let side = unarr_core::movies::commands::MovieSide {
+                    downloads: self.movie_downloads().clone(),
+                    search: self.movie_search(),
+                    indexers: self.indexer_service(),
+                };
+                Runtime::new_radarr(self.db().clone(), side, clock, identity).await?
+            }
+            _ => Runtime::new(self.db().clone(), self.downloads().clone(), clock, identity).await?,
+        };
         if let Some(upstreams) = self.0.metadata.lock().unwrap().clone() {
             runtime.set_upstreams(upstreams);
         }
-        runtime.set_media_cover_dir(self.runtime().media_cover_dir.clone());
-        runtime.set_backup(self.backup_context());
-        runtime.set_host_hooks(self.host_hooks());
+        if self.personality() != Personality::Radarr {
+            runtime.set_media_cover_dir(self.runtime().media_cover_dir.clone());
+            runtime.set_backup(self.backup_context());
+            runtime.set_host_hooks(self.host_hooks());
+        }
         runtime.start();
         let mut events = runtime.subscribe();
         let state = self.clone();
@@ -241,7 +284,10 @@ impl AppState {
                         "command",
                         json!({"action": "updated", "resource": crate::routes::command::command_resource(&c)}),
                     ),
-                    Ok(Event::QueueUpdated) => crate::routes::queue::broadcast_queue(&state),
+                    Ok(Event::QueueUpdated) => match state.personality() {
+                        Personality::Radarr => crate::routes::radarr::queue::broadcast_queue(&state),
+                        _ => crate::routes::queue::broadcast_queue(&state),
+                    },
                     Ok(Event::HealthChanged) => state.hub().broadcast("health", json!({"action": "sync"})),
                     Ok(Event::Import(e)) => crate::relay::relay_import(&state, &e).await,
                     Ok(Event::SeriesUpdated { series_id }) => crate::relay::broadcast_series(&state, series_id).await,
@@ -403,6 +449,45 @@ impl AppState {
 
     pub fn push_lock(&self) -> &tokio::sync::Mutex<()> {
         &self.0.push_lock
+    }
+
+    /// `ReleaseController`'s cache for Radarr: a release a search listed,
+    /// kept half an hour for the grab that may follow.
+    pub fn cache_movie_release(&self, key: String, remote: unarr_core::movies::decision::RemoteMovie) {
+        let now = self.now();
+        let mut cache = self.0.movie_releases.lock().unwrap();
+        cache.retain(|_, (_, at)| now - *at < chrono::Duration::minutes(30));
+        cache.insert(key, (remote, now));
+    }
+
+    pub fn cached_movie_release(&self, key: &str) -> Option<unarr_core::movies::decision::RemoteMovie> {
+        let now = self.now();
+        let cache = self.0.movie_releases.lock().unwrap();
+        cache
+            .get(key)
+            .filter(|(_, at)| now - *at < chrono::Duration::minutes(30))
+            .map(|(remote, _)| remote.clone())
+    }
+
+    /// The indexers of this personality, asked through its own client.
+    pub fn indexer_service(&self) -> unarr_core::indexers::IndexerService {
+        unarr_core::indexers::IndexerService::with_client(self.db().clone(), self.0.indexers)
+    }
+
+    /// Radarr's searches, on this personality's indexers.
+    pub fn movie_search(&self) -> unarr_core::movies::search::MovieSearchService {
+        unarr_core::movies::search::MovieSearchService::new(self.db().clone(), self.indexer_service())
+            .with_queue(self.movie_downloads().queue_source())
+    }
+
+    /// Radarr's grabs, tracked downloads and queue.
+    pub fn movie_downloads(&self) -> &Arc<unarr_core::movies::downloads::MovieDownloads> {
+        &self.0.movie_downloads
+    }
+
+    /// The personality's indexer client, on its own HTTP client.
+    pub fn indexers(&self) -> &'static IndexerClient {
+        self.0.indexers
     }
 
     pub fn downloads(&self) -> &Arc<Downloads> {

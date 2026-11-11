@@ -1,0 +1,88 @@
+{
+  "body": {
+    "options": [
+      {
+        "hint": "(2000)",
+        "name": "Movies",
+        "order": 0,
+        "value": 2000
+      },
+      {
+        "hint": "(2010)",
+        "name": "Foreign",
+        "order": 0,
+        "parentValue": 2000,
+        "value": 2010
+      },
+      {
+        "hint": "(2020)",
+        "name": "Other",
+        "order": 0,
+        "parentValue": 2000,
+        "value": 2020
+      },
+      {
+        "hint": "(2030)",
+        "name": "SD",
+        "order": 0,
+        "parentValue": 2000,
+        "value": 2030
+      },
+      {
+        "hint": "(2040)",
+        "name": "HD",
+        "order": 0,
+        "parentValue": 2000,
+        "value": 2040
+      },
+      {
+        "hint": "(2045)",
+        "name": "UHD",
+        "order": 0,
+        "parentValue": 2000,
+        "value": 2045
+      },
+      {
+        "hint": "(2050)",
+        "name": "BluRay",
+        "order": 0,
+        "parentValue": 2000,
+        "value": 2050
+      },
+      {
+        "hint": "(2060)",
+        "name": "3D",
+        "order": 0,
+        "parentValue": 2000,
+        "value": 2060
+      },
+      {
+        "hint": "(5000)",
+        "name": "TV",
+        "order": 0,
+        "value": 5000
+      },
+      {
+        "hint": "(5030)",
+        "name": "SD",
+        "order": 0,
+        "parentValue": 5000,
+        "value": 5030
+      },
+      {
+        "hint": "(5040)",
+        "name": "HD",
+        "order": 0,
+        "parentValue": 5000,
+        "value": 5040
+      }
+    ]
+  },
+  "recordedAt": "2026-11-11T19:38:41Z",
+  "request": {
+    "body": "bodies/indexer-create.json",
+    "method": "POST",
+    "path": "/api/v3/indexer/action/newznabCategories"
+  },
+  "status": 200
+}

@@ -1,0 +1,11 @@
+{
+  "body": {
+    "message": "NotFound"
+  },
+  "recordedAt": "2026-11-11T19:39:05Z",
+  "request": {
+    "method": "POST",
+    "path": "/api/v3/queue/grab/123456"
+  },
+  "status": 404
+}

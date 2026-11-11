@@ -1,0 +1,56 @@
+{
+  "body": [
+    {
+      "added": "2026-11-11T19:39:47Z",
+      "customFormatScore": 0,
+      "customFormats": [],
+      "downloadClient": "Mock Transmission",
+      "downloadClientHasPostImportCategory": false,
+      "downloadId": "B133034E90669E52E3BA3460A651D3545769CB85",
+      "estimatedCompletionTime": "2026-11-11T19:49:52Z",
+      "id": 1613248858,
+      "indexer": "Mock Torznab (Prowlarr)",
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        },
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movieId": 116,
+      "outputPath": "/downloads/movies/d94f74e9588477404bd8d34ffc605870",
+      "protocol": "torrent",
+      "quality": {
+        "quality": {
+          "id": 7,
+          "modifier": "none",
+          "name": "Bluray-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "size": 768000,
+      "sizeleft": 768000,
+      "status": "downloading",
+      "statusMessages": [],
+      "timeleft": "00:10:00",
+      "title": "d94f74e9588477404bd8d34ffc605870",
+      "trackedDownloadState": "downloading",
+      "trackedDownloadStatus": "ok"
+    }
+  ],
+  "recordedAt": "2026-11-11T19:39:57Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/queue/details?movieId=116"
+  },
+  "status": 200
+}

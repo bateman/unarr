@@ -1,0 +1,180 @@
+{
+  "body": {
+    "configContract": "TransmissionSettings",
+    "enable": true,
+    "fields": [
+      {
+        "advanced": false,
+        "isFloat": false,
+        "label": "Host",
+        "name": "host",
+        "order": 0,
+        "privacy": "normal",
+        "type": "textbox",
+        "value": "127.0.0.1"
+      },
+      {
+        "advanced": false,
+        "isFloat": false,
+        "label": "Port",
+        "name": "port",
+        "order": 1,
+        "privacy": "normal",
+        "type": "textbox",
+        "value": 18989
+      },
+      {
+        "advanced": false,
+        "helpText": "Use secure connection when connection to Transmission",
+        "isFloat": false,
+        "label": "Use SSL",
+        "name": "useSsl",
+        "order": 2,
+        "privacy": "normal",
+        "type": "checkbox",
+        "value": false
+      },
+      {
+        "advanced": true,
+        "helpText": "Adds a prefix to the Transmission rpc url, eg http://[host]:[port]/[urlBase]/rpc, defaults to '/transmission/'",
+        "isFloat": false,
+        "label": "URL Base",
+        "name": "urlBase",
+        "order": 3,
+        "privacy": "normal",
+        "type": "textbox",
+        "value": "/transmission/"
+      },
+      {
+        "advanced": false,
+        "isFloat": false,
+        "label": "Username",
+        "name": "username",
+        "order": 4,
+        "privacy": "userName",
+        "type": "textbox",
+        "value": "mock"
+      },
+      {
+        "advanced": false,
+        "isFloat": false,
+        "label": "Password",
+        "name": "password",
+        "order": 5,
+        "privacy": "password",
+        "type": "password",
+        "value": "********"
+      },
+      {
+        "advanced": false,
+        "helpText": "Adding a category specific to Radarr avoids conflicts with unrelated non-Radarr downloads. Using a category is optional, but strongly recommended. Creates a [category] subdirectory in the output directory.",
+        "isFloat": false,
+        "label": "Category",
+        "name": "movieCategory",
+        "order": 6,
+        "privacy": "normal",
+        "type": "textbox",
+        "value": "movies"
+      },
+      {
+        "advanced": true,
+        "helpText": "Category for Radarr to set after it has imported the download. Radarr will not remove torrents in that category even if seeding finished. Leave blank to keep same category.",
+        "isFloat": false,
+        "label": "Post-Import Category",
+        "name": "movieImportedCategory",
+        "order": 7,
+        "privacy": "normal",
+        "type": "textbox",
+        "value": ""
+      },
+      {
+        "advanced": true,
+        "helpText": "Optional location to put downloads in, leave blank to use the default Transmission location",
+        "isFloat": false,
+        "label": "Directory",
+        "name": "movieDirectory",
+        "order": 8,
+        "privacy": "normal",
+        "type": "textbox",
+        "value": ""
+      },
+      {
+        "advanced": false,
+        "helpText": "Priority to use when grabbing movies that aired within the last 21 days",
+        "isFloat": false,
+        "label": "Recent Priority",
+        "name": "recentMoviePriority",
+        "order": 9,
+        "privacy": "normal",
+        "selectOptions": [
+          {
+            "dividerAfter": false,
+            "name": "Last",
+            "order": 0,
+            "value": 0
+          },
+          {
+            "dividerAfter": false,
+            "name": "First",
+            "order": 1,
+            "value": 1
+          }
+        ],
+        "type": "select",
+        "value": 0
+      },
+      {
+        "advanced": false,
+        "helpText": "Priority to use when grabbing movies that aired over 21 days ago",
+        "isFloat": false,
+        "label": "Older Priority",
+        "name": "olderMoviePriority",
+        "order": 10,
+        "privacy": "normal",
+        "selectOptions": [
+          {
+            "dividerAfter": false,
+            "name": "Last",
+            "order": 0,
+            "value": 0
+          },
+          {
+            "dividerAfter": false,
+            "name": "First",
+            "order": 1,
+            "value": 1
+          }
+        ],
+        "type": "select",
+        "value": 0
+      },
+      {
+        "advanced": false,
+        "isFloat": false,
+        "label": "Add Paused",
+        "name": "addPaused",
+        "order": 11,
+        "privacy": "normal",
+        "type": "checkbox",
+        "value": false
+      }
+    ],
+    "id": 7,
+    "implementation": "Transmission",
+    "implementationName": "Transmission",
+    "infoLink": "https://wiki.servarr.com/radarr/supported#transmission",
+    "name": "Mock Transmission",
+    "priority": 1,
+    "protocol": "torrent",
+    "removeCompletedDownloads": true,
+    "removeFailedDownloads": true,
+    "tags": []
+  },
+  "recordedAt": "2026-11-11T19:38:41Z",
+  "request": {
+    "body": "bodies/downloadclient-create-transmission.json",
+    "method": "POST",
+    "path": "/api/v3/downloadclient"
+  },
+  "status": 201
+}

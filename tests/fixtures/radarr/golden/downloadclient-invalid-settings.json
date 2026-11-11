@@ -1,0 +1,53 @@
+{
+  "body": [
+    {
+      "attemptedValue": "http://x",
+      "errorMessage": "must be valid Host without http://",
+      "isWarning": false,
+      "propertyName": "Host",
+      "severity": "error"
+    },
+    {
+      "attemptedValue": 0,
+      "errorMessage": "'Port' must be between 1 and 65535. You entered 0.",
+      "isWarning": false,
+      "propertyName": "Port",
+      "severity": "error"
+    },
+    {
+      "attemptedValue": "http://evil.invalid/x",
+      "errorMessage": "Must be a valid URL path (ie: '/radarr')",
+      "isWarning": false,
+      "propertyName": "UrlBase",
+      "severity": "error"
+    },
+    {
+      "attemptedValue": "",
+      "errorMessage": "API Key is required when username/password are not configured",
+      "isWarning": false,
+      "propertyName": "ApiKey",
+      "severity": "error"
+    },
+    {
+      "attemptedValue": "",
+      "errorMessage": "Username is required when API key is not configured",
+      "isWarning": false,
+      "propertyName": "Username",
+      "severity": "error"
+    },
+    {
+      "attemptedValue": "",
+      "errorMessage": "Password is required when API key is not configured",
+      "isWarning": false,
+      "propertyName": "Password",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-11T19:38:41Z",
+  "request": {
+    "body": "bodies/downloadclient-invalid-settings.json",
+    "method": "POST",
+    "path": "/api/v3/downloadclient"
+  },
+  "status": 400
+}

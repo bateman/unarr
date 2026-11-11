@@ -1,0 +1,612 @@
+{
+  "body": [
+    {
+      "age": 1,
+      "ageHours": 46.41201864088889,
+      "ageMinutes": 2784.721118746667,
+      "approved": true,
+      "commentUrl": "http://127.0.0.1:18989/movies/newznab/details/fd04f3b8c14e7d33d5e992475f5fef5b#comments",
+      "customFormatScore": 0,
+      "customFormats": [],
+      "downloadAllowed": true,
+      "downloadUrl": "http://127.0.0.1:18989/movies/newznab/download/fd04f3b8c14e7d33d5e992475f5fef5b.nzb",
+      "edition": "",
+      "guid": "http://127.0.0.1:18989/movies/newznab/details/fd04f3b8c14e7d33d5e992475f5fef5b",
+      "imdbId": 14849194,
+      "indexer": "Mock Newznab (Prowlarr)",
+      "indexerFlags": [],
+      "indexerId": 20,
+      "infoUrl": "http://127.0.0.1:18989/movies/newznab/details/fd04f3b8c14e7d33d5e992475f5fef5b",
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        },
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mappedMovieId": 116,
+      "movieRequested": true,
+      "movieTitles": [
+        "The Holdovers"
+      ],
+      "protocol": "usenet",
+      "publishDate": "2026-11-09T21:14:00Z",
+      "quality": {
+        "quality": {
+          "id": 7,
+          "modifier": "none",
+          "name": "Bluray-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityWeight": 1801,
+      "rejected": false,
+      "rejections": [],
+      "releaseGroup": "MIRCrew",
+      "releaseHash": "",
+      "releaseWeight": 0,
+      "sceneSource": false,
+      "size": 7945689497,
+      "temporarilyRejected": false,
+      "title": "The.Holdovers.2023.iTA.ENG.1080p.BluRay.x264-MIRCrew",
+      "tmdbId": 840430
+    },
+    {
+      "age": 1,
+      "ageHours": 46.14535244138889,
+      "ageMinutes": 2768.7211464933334,
+      "approved": true,
+      "commentUrl": "http://127.0.0.1:18989/movies/torznab/details/d94f74e9588477404bd8d34ffc605870#comments",
+      "customFormatScore": 0,
+      "customFormats": [],
+      "downloadAllowed": true,
+      "downloadUrl": "http://127.0.0.1:18989/movies/torznab/download/d94f74e9588477404bd8d34ffc605870.torrent",
+      "edition": "",
+      "guid": "http://127.0.0.1:18989/movies/torznab/details/d94f74e9588477404bd8d34ffc605870",
+      "imdbId": 0,
+      "indexer": "Mock Torznab (Prowlarr)",
+      "indexerFlags": [],
+      "indexerId": 21,
+      "infoHash": "7e59b884110362736e39ead456edcbdac5ef0fe6",
+      "infoUrl": "http://127.0.0.1:18989/movies/torznab/details/d94f74e9588477404bd8d34ffc605870",
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        },
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "leechers": 9,
+      "magnetUrl": "",
+      "mappedMovieId": 116,
+      "movieRequested": true,
+      "movieTitles": [
+        "The Holdovers"
+      ],
+      "protocol": "torrent",
+      "publishDate": "2026-11-09T21:30:00Z",
+      "quality": {
+        "quality": {
+          "id": 7,
+          "modifier": "none",
+          "name": "Bluray-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityWeight": 1801,
+      "rejected": false,
+      "rejections": [],
+      "releaseGroup": "MIRCrew",
+      "releaseHash": "",
+      "releaseWeight": 1,
+      "sceneSource": false,
+      "seeders": 88,
+      "size": 7945689497,
+      "temporarilyRejected": false,
+      "title": "The.Holdovers.2023.iTA.ENG.1080p.BluRay.x264-MIRCrew",
+      "tmdbId": 0
+    },
+    {
+      "age": 9,
+      "ageHours": 225.8953524905,
+      "ageMinutes": 13553.721149433333,
+      "approved": false,
+      "commentUrl": "http://127.0.0.1:18989/movies/newznab/details/9e6abd9b1744903249f92fc6cc130a1d#comments",
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        }
+      ],
+      "downloadAllowed": true,
+      "downloadUrl": "http://127.0.0.1:18989/movies/newznab/download/9e6abd9b1744903249f92fc6cc130a1d.nzb",
+      "edition": "",
+      "guid": "http://127.0.0.1:18989/movies/newznab/details/9e6abd9b1744903249f92fc6cc130a1d",
+      "imdbId": 14849194,
+      "indexer": "Mock Newznab (Prowlarr)",
+      "indexerFlags": [],
+      "indexerId": 20,
+      "infoUrl": "http://127.0.0.1:18989/movies/newznab/details/9e6abd9b1744903249f92fc6cc130a1d",
+      "languages": [
+        {
+          "id": 4,
+          "name": "German"
+        },
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mappedMovieId": 116,
+      "movieRequested": true,
+      "movieTitles": [
+        "The Holdovers"
+      ],
+      "protocol": "usenet",
+      "publishDate": "2026-11-02T09:45:00Z",
+      "quality": {
+        "quality": {
+          "id": 7,
+          "modifier": "none",
+          "name": "Bluray-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityWeight": 1801,
+      "rejected": true,
+      "rejections": [
+        "Custom Formats Language not Italian have score -10000 below Movie's profile minimum 0"
+      ],
+      "releaseGroup": "DETAiLS",
+      "releaseHash": "",
+      "releaseWeight": 2,
+      "sceneSource": false,
+      "size": 9341553868,
+      "temporarilyRejected": false,
+      "title": "The.Holdovers.2023.German.DL.1080p.BluRay.x264-DETAiLS",
+      "tmdbId": 840430
+    },
+    {
+      "age": 4,
+      "ageHours": 104.44535252888889,
+      "ageMinutes": 6266.721151735,
+      "approved": true,
+      "commentUrl": "http://127.0.0.1:18989/movies/newznab/details/ad3b4a26175e220331d8c1fc6e58cc54#comments",
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 54,
+          "name": "DD"
+        },
+        {
+          "id": 7,
+          "name": "Repack/Proper"
+        }
+      ],
+      "downloadAllowed": true,
+      "downloadUrl": "http://127.0.0.1:18989/movies/newznab/download/ad3b4a26175e220331d8c1fc6e58cc54.nzb",
+      "edition": "",
+      "guid": "http://127.0.0.1:18989/movies/newznab/details/ad3b4a26175e220331d8c1fc6e58cc54",
+      "imdbId": 14849194,
+      "indexer": "Mock Newznab (Prowlarr)",
+      "indexerFlags": [],
+      "indexerId": 20,
+      "infoUrl": "http://127.0.0.1:18989/movies/newznab/details/ad3b4a26175e220331d8c1fc6e58cc54",
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        },
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mappedMovieId": 116,
+      "movieRequested": true,
+      "movieTitles": [
+        "The Holdovers"
+      ],
+      "protocol": "usenet",
+      "publishDate": "2026-11-07T11:12:00Z",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "modifier": "none",
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "webdl"
+        },
+        "revision": {
+          "isRepack": true,
+          "real": 0,
+          "version": 2
+        }
+      },
+      "qualityWeight": 1702,
+      "rejected": false,
+      "rejections": [],
+      "releaseGroup": "iDN",
+      "releaseHash": "",
+      "releaseWeight": 3,
+      "sceneSource": false,
+      "size": 6012954214,
+      "temporarilyRejected": false,
+      "title": "The.Holdovers.2023.REPACK.iTA.ENG.1080p.WEB-DL.DD5.1.H264-iDN_CreW",
+      "tmdbId": 840430
+    },
+    {
+      "age": 3,
+      "ageHours": 84.31201919744444,
+      "ageMinutes": 5058.721151848334,
+      "approved": true,
+      "commentUrl": "http://127.0.0.1:18989/movies/torznab/details/fdc50ce8fed15b2c95e6b04256f5a5a6#comments",
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 50,
+          "name": "DD+"
+        }
+      ],
+      "downloadAllowed": true,
+      "downloadUrl": "http://127.0.0.1:18989/movies/torznab/download/fdc50ce8fed15b2c95e6b04256f5a5a6.torrent",
+      "edition": "",
+      "guid": "http://127.0.0.1:18989/movies/torznab/details/fdc50ce8fed15b2c95e6b04256f5a5a6",
+      "imdbId": 0,
+      "indexer": "Mock Torznab (Prowlarr)",
+      "indexerFlags": [
+        "G_Halfleech"
+      ],
+      "indexerId": 21,
+      "infoHash": "08f58b6730d1db196611d66ea9f80f335f251c3e",
+      "infoUrl": "http://127.0.0.1:18989/movies/torznab/details/fdc50ce8fed15b2c95e6b04256f5a5a6",
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        },
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "leechers": 11,
+      "magnetUrl": "",
+      "mappedMovieId": 116,
+      "movieRequested": true,
+      "movieTitles": [
+        "The Holdovers"
+      ],
+      "protocol": "torrent",
+      "publishDate": "2026-11-08T07:20:00Z",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "modifier": "none",
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "webdl"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityWeight": 1701,
+      "rejected": false,
+      "rejections": [],
+      "releaseGroup": "MeM",
+      "releaseHash": "",
+      "releaseWeight": 4,
+      "sceneSource": false,
+      "seeders": 140,
+      "size": 5261334937,
+      "temporarilyRejected": false,
+      "title": "The.Holdovers.2023.iTA.ENG.1080p.WEB-DL.DDP5.1.H.264-MeM",
+      "tmdbId": 0
+    },
+    {
+      "age": 1,
+      "ageHours": 47.612019199694444,
+      "ageMinutes": 2856.7211519816665,
+      "approved": false,
+      "commentUrl": "http://127.0.0.1:18989/movies/newznab/details/2579a03771a684b4e0186c4874aa07a5#comments",
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 19,
+          "name": "AMZN"
+        },
+        {
+          "id": 50,
+          "name": "DD+"
+        },
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 4,
+          "name": "WEB Tier 01"
+        }
+      ],
+      "downloadAllowed": true,
+      "downloadUrl": "http://127.0.0.1:18989/movies/newznab/download/2579a03771a684b4e0186c4874aa07a5.nzb",
+      "edition": "",
+      "guid": "http://127.0.0.1:18989/movies/newznab/details/2579a03771a684b4e0186c4874aa07a5",
+      "imdbId": 14849194,
+      "indexer": "Mock Newznab (Prowlarr)",
+      "indexerFlags": [],
+      "indexerId": 20,
+      "infoUrl": "http://127.0.0.1:18989/movies/newznab/details/2579a03771a684b4e0186c4874aa07a5",
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mappedMovieId": 116,
+      "movieRequested": true,
+      "movieTitles": [
+        "The Holdovers"
+      ],
+      "protocol": "usenet",
+      "publishDate": "2026-11-09T20:02:00Z",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "modifier": "none",
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "webdl"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityWeight": 1701,
+      "rejected": true,
+      "rejections": [
+        "Custom Formats AMZN, DD+, Language not Italian, WEB Tier 01 have score -10000 below Movie's profile minimum 0"
+      ],
+      "releaseGroup": "FLUX",
+      "releaseHash": "",
+      "releaseWeight": 5,
+      "sceneSource": false,
+      "size": 6657199308,
+      "temporarilyRejected": false,
+      "title": "The.Holdovers.2023.1080p.AMZN.WEB-DL.DDP5.1.H.264-FLUX",
+      "tmdbId": 840430
+    },
+    {
+      "age": 6,
+      "ageHours": 155.14535253458334,
+      "ageMinutes": 9308.721152076667,
+      "approved": false,
+      "commentUrl": "http://127.0.0.1:18989/movies/newznab/details/8c7ba67807e7b5c279dacc04365ddb8d#comments",
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 50,
+          "name": "DD+"
+        },
+        {
+          "id": 55,
+          "name": "HDR"
+        }
+      ],
+      "downloadAllowed": true,
+      "downloadUrl": "http://127.0.0.1:18989/movies/newznab/download/8c7ba67807e7b5c279dacc04365ddb8d.nzb",
+      "edition": "",
+      "guid": "http://127.0.0.1:18989/movies/newznab/details/8c7ba67807e7b5c279dacc04365ddb8d",
+      "imdbId": 14849194,
+      "indexer": "Mock Newznab (Prowlarr)",
+      "indexerFlags": [],
+      "indexerId": 20,
+      "infoUrl": "http://127.0.0.1:18989/movies/newznab/details/8c7ba67807e7b5c279dacc04365ddb8d",
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        },
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mappedMovieId": 116,
+      "movieRequested": true,
+      "movieTitles": [
+        "The Holdovers"
+      ],
+      "protocol": "usenet",
+      "publishDate": "2026-11-05T08:30:00Z",
+      "quality": {
+        "quality": {
+          "id": 18,
+          "modifier": "none",
+          "name": "WEBDL-2160p",
+          "resolution": 2160,
+          "source": "webdl"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityWeight": 2101,
+      "rejected": true,
+      "rejections": [
+        "WEBDL-2160p is not wanted in profile"
+      ],
+      "releaseGroup": "MeM",
+      "releaseHash": "",
+      "releaseWeight": 6,
+      "sceneSource": false,
+      "size": 18575733555,
+      "temporarilyRejected": false,
+      "title": "The.Holdovers.2023.iTA.ENG.2160p.WEB-DL.DDP5.1.HDR.H.265-MeM",
+      "tmdbId": 840430
+    },
+    {
+      "age": 8,
+      "ageHours": 197.64535253691668,
+      "ageMinutes": 11858.721152215,
+      "approved": false,
+      "commentUrl": "http://127.0.0.1:18989/movies/newznab/details/2e75d9d89af27d923de90c775b63cc9a#comments",
+      "customFormatScore": 0,
+      "customFormats": [],
+      "downloadAllowed": true,
+      "downloadUrl": "http://127.0.0.1:18989/movies/newznab/download/2e75d9d89af27d923de90c775b63cc9a.nzb",
+      "edition": "",
+      "guid": "http://127.0.0.1:18989/movies/newznab/details/2e75d9d89af27d923de90c775b63cc9a",
+      "imdbId": 14849194,
+      "indexer": "Mock Newznab (Prowlarr)",
+      "indexerFlags": [],
+      "indexerId": 20,
+      "infoUrl": "http://127.0.0.1:18989/movies/newznab/details/2e75d9d89af27d923de90c775b63cc9a",
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        }
+      ],
+      "mappedMovieId": 116,
+      "movieRequested": true,
+      "movieTitles": [
+        "The Holdovers"
+      ],
+      "protocol": "usenet",
+      "publishDate": "2026-11-03T14:00:00Z",
+      "quality": {
+        "quality": {
+          "id": 6,
+          "modifier": "none",
+          "name": "Bluray-720p",
+          "resolution": 720,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityWeight": 1501,
+      "rejected": true,
+      "rejections": [
+        "Original Language (English) is wanted, but found Italian",
+        "Bluray-720p is not wanted in profile"
+      ],
+      "releaseGroup": "MIRCrew",
+      "releaseHash": "",
+      "releaseWeight": 7,
+      "sceneSource": false,
+      "size": 4187593113,
+      "temporarilyRejected": false,
+      "title": "The.Holdovers.2023.iTA.720p.BluRay.x264-MIRCrew",
+      "tmdbId": 840430
+    },
+    {
+      "age": 12,
+      "ageHours": 289.64535253805553,
+      "ageMinutes": 17378.721152283335,
+      "approved": false,
+      "commentUrl": "http://127.0.0.1:18989/movies/torznab/details/6d4073a66aacfcd9c4a761ffda66fb12#comments",
+      "customFormatScore": 0,
+      "customFormats": [],
+      "downloadAllowed": true,
+      "downloadUrl": "http://127.0.0.1:18989/movies/torznab/download/6d4073a66aacfcd9c4a761ffda66fb12.torrent",
+      "edition": "",
+      "guid": "http://127.0.0.1:18989/movies/torznab/details/6d4073a66aacfcd9c4a761ffda66fb12",
+      "imdbId": 0,
+      "indexer": "Mock Torznab (Prowlarr)",
+      "indexerFlags": [],
+      "indexerId": 21,
+      "infoHash": "81b3d90d5021833e01f6c975f2121b5d1968ad5c",
+      "infoUrl": "http://127.0.0.1:18989/movies/torznab/details/6d4073a66aacfcd9c4a761ffda66fb12",
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        },
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "leechers": 0,
+      "magnetUrl": "",
+      "mappedMovieId": 116,
+      "movieRequested": true,
+      "movieTitles": [
+        "The Holdovers"
+      ],
+      "protocol": "torrent",
+      "publishDate": "2026-10-30T18:00:00Z",
+      "quality": {
+        "quality": {
+          "id": 2,
+          "modifier": "none",
+          "name": "DVD",
+          "resolution": 0,
+          "source": "dvd"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityWeight": 801,
+      "rejected": true,
+      "rejections": [
+        "DVD is not wanted in profile"
+      ],
+      "releaseGroup": "TrTd",
+      "releaseHash": "",
+      "releaseWeight": 8,
+      "sceneSource": false,
+      "seeders": 9,
+      "size": 1503238553,
+      "temporarilyRejected": false,
+      "title": "The.Holdovers.2023.iTA.ENG.DVDRip.x264-TrTd_TeaM",
+      "tmdbId": 0
+    }
+  ],
+  "recordedAt": "2026-11-11T19:38:43Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/release?movieId=116"
+  },
+  "status": 200
+}

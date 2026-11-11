@@ -78,6 +78,11 @@ pub const RADARR_QUALITIES: &[MovieQualityDefault] = &[
 impl MovieQuality {
     pub const UNKNOWN: MovieQuality = RADARR_QUALITIES[0].quality;
 
+    /// Every quality, in weight order.
+    pub fn all() -> impl Iterator<Item = MovieQuality> {
+        RADARR_QUALITIES.iter().map(|d| d.quality)
+    }
+
     /// The quality with this id; an id Radarr does not know is `Unknown`.
     pub fn by_id(id: i64) -> MovieQuality {
         RADARR_QUALITIES
@@ -94,6 +99,34 @@ impl MovieQuality {
             .find(|d| d.quality.id == id)
             .map(|d| d.weight)
             .unwrap_or(0)
+    }
+}
+
+/// `QualitySource`, as Radarr numbers it.
+pub fn source_number(source: &str) -> i64 {
+    match source {
+        "cam" => 1,
+        "telesync" => 2,
+        "telecine" => 3,
+        "workprint" => 4,
+        "dvd" => 5,
+        "tv" => 6,
+        "webdl" => 7,
+        "webrip" => 8,
+        "bluray" => 9,
+        _ => 0,
+    }
+}
+
+/// `Modifier`, as Radarr numbers it.
+pub fn modifier_number(modifier: &str) -> i64 {
+    match modifier {
+        "regional" => 1,
+        "screener" => 2,
+        "rawhd" => 3,
+        "brdisk" => 4,
+        "remux" => 5,
+        _ => 0,
     }
 }
 
@@ -372,6 +405,38 @@ pub fn indexer_flag_names(flags: i64) -> Vec<&'static str> {
         .filter(|(bit, _)| flags & bit != 0)
         .map(|(_, name)| *name)
         .collect()
+}
+
+/// `IndexerFlags.ToString()`: the flag names, or the number when no bit
+/// has one (`0`).
+pub fn indexer_flags_text(flags: i64) -> String {
+    let names = indexer_flag_names(flags);
+    if names.is_empty() {
+        flags.to_string()
+    } else {
+        names.join(", ")
+    }
+}
+
+/// `Enum.TryParse<IndexerFlags>(text, ignoreCase)`: the names (or the
+/// number) the history stored, back to bits; `None` for text that is not a
+/// flag list.
+pub fn parse_indexer_flags(text: &str) -> Option<i64> {
+    let text = text.trim();
+    if text.is_empty() {
+        return None;
+    }
+    if let Ok(n) = text.parse::<i64>() {
+        return Some(n);
+    }
+    let mut flags = 0;
+    for part in text.split(',') {
+        let (bit, _) = RADARR_INDEXER_FLAGS
+            .iter()
+            .find(|(_, name)| name.eq_ignore_ascii_case(part.trim()))?;
+        flags |= bit;
+    }
+    Some(flags)
 }
 
 #[cfg(test)]

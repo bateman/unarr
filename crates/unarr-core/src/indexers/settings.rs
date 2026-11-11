@@ -29,12 +29,16 @@ pub struct NewznabSettings {
     pub anime_categories: Vec<i64>,
     pub anime_standard_format_search: bool,
     pub additional_parameters: String,
+    /// Radarr only: leave the year out of a text search.
+    pub remove_year: bool,
     pub multi_languages: Vec<i64>,
     pub fail_downloads: Vec<i64>,
     // Torznab only
     pub minimum_seeders: i64,
     pub seed_criteria: SeedCriteria,
     pub reject_blocklisted_torrent_hashes_while_grabbing: bool,
+    /// Radarr only: indexer flags a torrent must carry.
+    pub required_flags: Vec<i64>,
 }
 
 impl Default for NewznabSettings {
@@ -47,11 +51,13 @@ impl Default for NewznabSettings {
             anime_categories: Vec::new(),
             anime_standard_format_search: false,
             additional_parameters: String::new(),
+            remove_year: false,
             multi_languages: Vec::new(),
             fail_downloads: Vec::new(),
             minimum_seeders: 1,
             seed_criteria: SeedCriteria::default(),
             reject_blocklisted_torrent_hashes_while_grabbing: false,
+            required_flags: Vec::new(),
         }
     }
 }
@@ -81,7 +87,13 @@ impl NewznabSettings {
                 let n = s.trim().parse::<i64>().unwrap_or(0);
                 obj.insert("minimumSeeders".into(), json!(n));
             }
-            for key in ["categories", "animeCategories", "multiLanguages", "failDownloads"] {
+            for key in [
+                "categories",
+                "animeCategories",
+                "multiLanguages",
+                "failDownloads",
+                "requiredFlags",
+            ] {
                 if let Some(Value::String(s)) = obj.get(key) {
                     let list: Vec<i64> = s.split(',').filter_map(|p| p.trim().parse().ok()).collect();
                     obj.insert(key.into(), json!(list));

@@ -291,10 +291,13 @@ pub async fn calendar(State(state): State<AppState>, uri: Uri) -> ApiResult<Json
         .filter(|m| unmonitored || m.monitored)
         .filter(|m| tags.is_empty() || m.tags.iter().any(|t| tags.contains(t)))
         .collect();
-    // By cinema date, a movie without one first. Movies of one date come
-    // in the order the originals' query finds them, which is that of
-    // their TMDB ids.
-    found.sort_by_key(|m| (m.metadata.in_cinemas, m.metadata.tmdb_id));
+    // `OrderBy(InCinemas).ThenBy(DigitalRelease).ThenBy(PhysicalRelease)`:
+    // a movie without a date before those with one. The sort is stable, so
+    // movies equal on all three stay as the library lists them.
+    found.sort_by_key(|m| {
+        let md = &m.metadata;
+        (md.in_cinemas, md.digital_release, md.physical_release)
+    });
     Ok(Json(
         found
             .iter()

@@ -11,11 +11,11 @@ use serde_json::{json, Value};
 
 use super::settings::NzbgetSettings;
 use super::version::Version;
+use super::GrabRequest;
 use super::{
     build_base_url, combine_path, download, http_error_message, is_localhost, remote_path, transport_message,
-    Client, ClientError, ClientResult, DownloadClientInfo, DownloadClientItem, DownloadItemStatus, APP_NAME,
+    Client, ClientError, ClientResult, DownloadClientInfo, DownloadClientItem, DownloadItemStatus,
 };
-use crate::decision::RemoteEpisode;
 use crate::validation::ValidationFailure;
 
 const NAME: &str = "NZBGet";
@@ -131,9 +131,16 @@ impl<'a> Nzbget<'a> {
         if !s.username.is_empty() || !s.password.is_empty() {
             request = request.basic_auth(&s.username, Some(&s.password));
         }
-        let response = request.send().await.map_err(|e| {
-            ClientError::Unavailable(format!("Unable to connect to NzbGet. {}", transport_message(&e)))
-        })?;
+        // Sonarr's proxy wraps a connection failure; Radarr's catches the
+        // older exception type only, so the runtime's own message gets out.
+        let unavailable = |e: &reqwest::Error| {
+            if s.app == super::RADARR {
+                ClientError::Unavailable(transport_message(e))
+            } else {
+                ClientError::Unavailable(format!("Unable to connect to NzbGet. {}", transport_message(e)))
+            }
+        };
+        let response = request.send().await.map_err(|e| unavailable(&e))?;
         let status = response.status();
         if status == reqwest::StatusCode::UNAUTHORIZED {
             return Err(ClientError::Authentication(
@@ -146,10 +153,7 @@ impl<'a> Nzbget<'a> {
                 http_error_message(status, "POST", &url)
             )));
         }
-        let content = super::read_text(response, NAME, |e| {
-            ClientError::Unavailable(format!("Unable to connect to NzbGet. {}", transport_message(e)))
-        })
-        .await?;
+        let content = super::read_text(response, NAME, unavailable).await?;
         let v: Value = serde_json::from_str(&content)
             .map_err(|e| ClientError::Other(format!("Unexpected response from nzbget: {e}")))?;
         if !v["error"].is_null() {
@@ -300,17 +304,15 @@ impl<'a> Nzbget<'a> {
 
     pub async fn add_nzb(
         &self,
-        remote: &RemoteEpisode,
+        request: &GrabRequest<'_>,
         filename: &str,
         nzb: Vec<u8>,
     ) -> ClientResult<String> {
-        let priority = self
-            .settings
-            .priority(remote.is_recent_episode(self.client.context.now));
+        let priority = self.settings.priority(request.recent);
         self.download_nzb(
             &nzb,
             filename,
-            &self.settings.tv_category,
+            &self.settings.category,
             priority,
             self.settings.add_paused,
         )
@@ -420,7 +422,7 @@ impl<'a> Nzbget<'a> {
         items.extend(self.history_items().await?);
         Ok(items
             .into_iter()
-            .filter(|i| i.category.as_deref() == Some(self.settings.tv_category.as_str()))
+            .filter(|i| i.category.as_deref() == Some(self.settings.category.as_str()))
             .collect())
     }
 
@@ -458,7 +460,7 @@ impl<'a> Nzbget<'a> {
         let config = self.config().await?;
         let category = Self::categories(&config)
             .into_iter()
-            .find(|c| c.name == self.settings.tv_category);
+            .find(|c| c.name == self.settings.category);
         Ok(DownloadClientInfo {
             is_localhost: is_localhost(&self.settings.host),
             output_root_folders: category
@@ -510,11 +512,13 @@ impl<'a> Nzbget<'a> {
 
     async fn test_category(&self) -> ClientResult<Option<ValidationFailure>> {
         let config = self.config().await?;
-        let tv = self.settings.tv_category.trim();
+        let tv = self.settings.category.trim();
         if !tv.is_empty() && !Self::categories(&config).iter().any(|c| c.name == tv) {
-            let mut f = ValidationFailure::error("TvCategory", "Category does not exist").with_detail(
-                &format!("The category you entered doesn't exist in {NAME}. Create it in {NAME} first."),
-            );
+            let mut f =
+                ValidationFailure::error(self.settings.app.category_property, "Category does not exist")
+                    .with_detail(&format!(
+                        "The category you entered doesn't exist in {NAME}. Create it in {NAME} first."
+                    ));
             f.info_link = Some(self.base_url(""));
             return Ok(Some(f));
         }
@@ -522,6 +526,7 @@ impl<'a> Nzbget<'a> {
     }
 
     async fn test_settings(&self) -> ClientResult<Option<ValidationFailure>> {
+        let app = self.settings.app.name;
         let config = self.config().await?;
         let keep = config.get("KeepHistory").cloned().unwrap_or_else(|| "7".into());
         let value: Option<i64> = keep
@@ -532,7 +537,7 @@ impl<'a> Nzbget<'a> {
         let failure = match value {
             None | Some(0) => Some(
                 ValidationFailure::error("", "NzbGet setting KeepHistory should be greater than 0").with_detail(
-                    &format!("NzbGet setting KeepHistory is set to 0. Which prevents {APP_NAME} from seeing completed downloads."),
+                    &format!("NzbGet setting KeepHistory is set to 0. Which prevents {app} from seeing completed downloads."),
                 ),
             ),
             Some(v) if v > 25000 => Some(

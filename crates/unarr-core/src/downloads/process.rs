@@ -198,6 +198,13 @@ async fn process_internal(
             );
             Ok(ProcessedResult::Rejected)
         }
+        // A client named and not there is the original's `Single()` that
+        // finds nothing: any other exception, so the release is skipped.
+        // Only the want of a client for the protocol keeps it for later.
+        Err(GrabError::NoClient(m)) if download_client_id.is_some() => {
+            tracing::warn!(title = remote.release.title, indexer = remote.release.indexer, error = %m, "couldn't add release to download queue");
+            Ok(ProcessedResult::Skipped)
+        }
         Err(GrabError::NoClient(m)) => {
             tracing::debug!(title = remote.release.title, indexer = remote.release.indexer, error = %m, "failed to send release to download client, storing until later");
             Ok(ProcessedResult::Failed)
@@ -206,7 +213,13 @@ async fn process_internal(
             tracing::debug!(title = remote.release.title, indexer = remote.release.indexer, error = %m, "failed to send release to download client, storing until later");
             Ok(ProcessedResult::Failed)
         }
-        Err(GrabError::Other(e)) => Err(e),
+        // The original catches whatever the grab throws and goes on to
+        // the next release: one that failed past the client (its history
+        // could not be written) must not take the rest of the batch along.
+        Err(GrabError::Other(e)) => {
+            tracing::error!(title = remote.release.title, indexer = remote.release.indexer, error = %format!("{e:#}"), "couldn't add release to download queue");
+            Ok(ProcessedResult::Skipped)
+        }
         Err(e) => {
             tracing::warn!(title = remote.release.title, indexer = remote.release.indexer, error = %e, "couldn't add release to download queue");
             Ok(ProcessedResult::Skipped)

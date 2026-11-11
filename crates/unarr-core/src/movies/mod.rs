@@ -6,8 +6,14 @@
 //! where the two differ.
 
 pub mod availability;
+pub mod commands;
+pub mod decision;
+pub mod downloads;
 pub mod formats;
 pub mod model;
 pub mod naming;
+pub mod parser;
 pub mod quality;
+pub mod request;
+pub mod search;
 pub mod store;

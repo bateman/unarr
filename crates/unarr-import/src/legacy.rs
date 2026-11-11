@@ -80,6 +80,7 @@ pub(crate) fn legacy_release(v: &Value) -> ReleaseInfo {
         tvdb_id: int("tvdbId"),
         tv_rage_id: int("tvRageId"),
         imdb_id: text("imdbId"),
+        tmdb_id: int("tmdbId"),
         publish_date: text("publishDate")
             .and_then(|s| time::parse_utc(&s))
             .unwrap_or(DateTime::<Utc>::UNIX_EPOCH),

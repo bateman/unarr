@@ -122,7 +122,7 @@ async fn runtime(db: &Db, clock: &Clock) -> Arc<Runtime> {
     let http = unarr_core::http::build(std::time::Duration::from_secs(10));
     let downloads = Arc::new(Downloads::new(
         db.clone(),
-        DownloadClientService::with_client(db.clone(), http),
+        DownloadClientService::with_client(db.clone(), http, unarr_core::downloadclients::SONARR),
     ));
     Runtime::new(db.clone(), downloads, clock.source(), Default::default())
         .await

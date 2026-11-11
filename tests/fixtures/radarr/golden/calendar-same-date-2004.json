@@ -1,0 +1,584 @@
+{
+  "body": [
+    {
+      "added": "2026-11-07T19:39:26Z",
+      "alternateTitles": [
+        {
+          "id": 2769,
+          "movieMetadataId": 515,
+          "sourceType": "tmdb",
+          "title": "怪物猎人"
+        },
+        {
+          "id": 2770,
+          "movieMetadataId": 515,
+          "sourceType": "tmdb",
+          "title": "Van Helsing: El cazador de monstruos"
+        },
+        {
+          "id": 2771,
+          "movieMetadataId": 515,
+          "sourceType": "tmdb",
+          "title": "Kallarai Manithan"
+        },
+        {
+          "id": 2772,
+          "movieMetadataId": 515,
+          "sourceType": "tmdb",
+          "title": "Ван Хелсінг"
+        },
+        {
+          "id": 2773,
+          "movieMetadataId": 515,
+          "sourceType": "tmdb",
+          "title": "반 헬싱"
+        },
+        {
+          "id": 2774,
+          "movieMetadataId": 515,
+          "sourceType": "tmdb",
+          "title": "Van Khelzing"
+        },
+        {
+          "id": 2775,
+          "movieMetadataId": 515,
+          "sourceType": "tmdb",
+          "title": "Van Chélsin'nk"
+        },
+        {
+          "id": 2776,
+          "movieMetadataId": 515,
+          "sourceType": "tmdb",
+          "title": "Ван Хельсинг"
+        },
+        {
+          "id": 2777,
+          "movieMetadataId": 515,
+          "sourceType": "tmdb",
+          "title": "Van Helsing, o Caçador de Monstros"
+        },
+        {
+          "id": 2778,
+          "movieMetadataId": 515,
+          "sourceType": "tmdb",
+          "title": "狙魔人"
+        },
+        {
+          "id": 2779,
+          "movieMetadataId": 515,
+          "sourceType": "tmdb",
+          "title": "范海辛"
+        }
+      ],
+      "certification": "PG-13",
+      "cleanTitle": "vanhelsing",
+      "digitalRelease": "2004-12-20T00:00:00Z",
+      "folderName": "/movies/Van Helsing (2004) {tmdb-7131}",
+      "genres": [
+        "Horror",
+        "Adventure",
+        "Action"
+      ],
+      "hasFile": true,
+      "id": 324,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/gsFun8nATm52aGHeT8ueAel98nE.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/d72ROyJqXQtw2OupW0l15eicRAF.jpg"
+        }
+      ],
+      "imdbId": "tt0338526",
+      "inCinemas": "2004-05-03T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "19th century",
+        "bite",
+        "castle",
+        "dracula",
+        "fantasy",
+        "frankenstein",
+        "gothic horror",
+        "mr. hyde",
+        "notre dame cathedral",
+        "steampunk",
+        "transylvania",
+        "vampire",
+        "van helsing",
+        "vatican (holy see)",
+        "werewolf"
+      ],
+      "lastSearchTime": "2026-11-07T19:39:57Z",
+      "minimumAvailability": "released",
+      "monitored": false,
+      "movieFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 52,
+            "name": "DTS"
+          }
+        ],
+        "dateAdded": "2026-11-07T22:15:36Z",
+        "edition": "",
+        "id": 399,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 2,
+            "name": "French"
+          },
+          {
+            "id": 3,
+            "name": "Spanish"
+          },
+          {
+            "id": 4,
+            "name": "German"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 768000,
+          "audioChannels": 5.1,
+          "audioCodec": "DTS",
+          "audioLanguages": "ita/ita/eng/eng/fre/fre/spa/spa/ger/ger",
+          "audioStreamCount": 10,
+          "resolution": "1920x1040",
+          "runTime": "2:11:30",
+          "scanType": "Progressive",
+          "subtitles": "ita/eng/fre/spa/ger",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "x264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "movieId": 324,
+        "originalFilePath": "Van.Helsing.2004.DTS.ITA.ENG.FRA.SPA.GER.1080p.BluRay.x264-BLUWORLD.mkv",
+        "path": "/movies/Van Helsing (2004) {tmdb-7131}/Van Helsing (2004) {tmdb-7131} - [Bluray-1080p][DTS 5.1][x264]-BLUWORLD.mkv",
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "relativePath": "Van Helsing (2004) {tmdb-7131} - [Bluray-1080p][DTS 5.1][x264]-BLUWORLD.mkv",
+        "releaseGroup": "BLUWORLD",
+        "sceneName": "Van.Helsing.2004.DTS.ITA.ENG.FRA.SPA.GER.1080p.BluRay.x264-BLUWORLD",
+        "size": 24278085946
+      },
+      "movieFileId": 399,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Van Helsing",
+      "overview": "Famed monster slayer Gabriel Van Helsing is dispatched to Transylvania to assist the last of the Valerious bloodline in defeating Count Dracula. Anna Valerious reveals that Dracula has formed an unholy alliance with Dr. Frankenstein's monster and is hell-bent on exacting a centuries-old curse on her family.",
+      "path": "/movies/Van Helsing (2004) {tmdb-7131}",
+      "physicalRelease": "2004-08-10T00:00:00Z",
+      "popularity": 15.671,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 6.1,
+          "votes": 311773
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 35,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 6.432,
+          "votes": 6941
+        },
+        "trakt": {
+          "type": "user",
+          "value": 6.54847,
+          "votes": 9964
+        }
+      },
+      "releaseDate": "2004-08-10T00:00:00Z",
+      "runtime": 132,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 24278085946,
+      "sortTitle": "van helsing",
+      "statistics": {
+        "movieFileCount": 1,
+        "movieFileQualities": [
+          {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          }
+        ],
+        "releaseGroups": [
+          "BLUWORLD"
+        ],
+        "sizeOnDisk": 24278085946
+      },
+      "status": "released",
+      "studio": "Universal Pictures",
+      "tags": [
+        1
+      ],
+      "title": "Van Helsing",
+      "titleSlug": "7131",
+      "tmdbId": 7131,
+      "website": "https://www.uphe.com/movies/van-helsing",
+      "year": 2004,
+      "youTubeTrailerId": "3fdRKme00uI"
+    },
+    {
+      "added": "2026-03-14T22:45:14Z",
+      "alternateTitles": [
+        {
+          "id": 1247,
+          "movieMetadataId": 217,
+          "sourceType": "tmdb",
+          "title": "L'Exorciste : Au commencement"
+        },
+        {
+          "id": 1248,
+          "movieMetadataId": 217,
+          "sourceType": "tmdb",
+          "title": "The Exorcist: The Beginning"
+        },
+        {
+          "id": 1249,
+          "movieMetadataId": 217,
+          "sourceType": "tmdb",
+          "title": "Egzorcysta: Początek"
+        },
+        {
+          "id": 1250,
+          "movieMetadataId": 217,
+          "sourceType": "tmdb",
+          "title": "Экзорцист: Начало"
+        },
+        {
+          "id": 1251,
+          "movieMetadataId": 217,
+          "sourceType": "tmdb",
+          "title": "L'Exorciste: Le commencement"
+        },
+        {
+          "id": 1252,
+          "movieMetadataId": 217,
+          "sourceType": "tmdb",
+          "title": "大法师: 吸魂首部曲"
+        },
+        {
+          "id": 1253,
+          "movieMetadataId": 217,
+          "sourceType": "tmdb",
+          "title": "El Exorcista 4 - El comienzo"
+        },
+        {
+          "id": 1254,
+          "movieMetadataId": 217,
+          "sourceType": "tmdb",
+          "title": "El Exorcista IV: El Comienzo"
+        },
+        {
+          "id": 1255,
+          "movieMetadataId": 217,
+          "sourceType": "tmdb",
+          "title": "Demion Exorzist - Der Anfang"
+        },
+        {
+          "id": 1256,
+          "movieMetadataId": 217,
+          "sourceType": "tmdb",
+          "title": "กำเนิดหมอผี เอ็กซอร์ซิสต์"
+        },
+        {
+          "id": 2765,
+          "movieMetadataId": 217,
+          "sourceType": "tmdb",
+          "title": "Истеривач ђавола: Почетак"
+        }
+      ],
+      "certification": "R",
+      "cleanTitle": "exorcistbeginning",
+      "collection": {
+        "title": "The Exorcist Collection",
+        "tmdbId": 12263
+      },
+      "digitalRelease": "2004-10-16T00:00:00Z",
+      "folderName": "/movies/Exorcist The Beginning (2004) {tmdb-11026}",
+      "genres": [
+        "Horror"
+      ],
+      "hasFile": false,
+      "id": 148,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/dwqVrJfAVHqhJSa1sKBsbttFUcU.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/A2kXYkGGdeLU20YHPM9qs6GX9nN.jpg"
+        }
+      ],
+      "imdbId": "tt0204313",
+      "inCinemas": "2004-08-20T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "1940s",
+        "abandoned church",
+        "africa",
+        "ancient evil",
+        "archaeological dig",
+        "archaeologist",
+        "based on novel or book",
+        "byzantine empire",
+        "catholic priest",
+        "crisis of faith",
+        "demon",
+        "demonic possession",
+        "devil",
+        "east africa",
+        "ex-priest",
+        "exorcism",
+        "kenya",
+        "massacre",
+        "nazi",
+        "paganism",
+        "possession",
+        "prequel",
+        "priest",
+        "relic",
+        "religion and supernatural",
+        "religious horror",
+        "remake",
+        "roman catholic church",
+        "supernatural horror",
+        "vatican (holy see)"
+      ],
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Exorcist: The Beginning",
+      "overview": "Years before Father Merrin helped save Regan MacNeil’s soul, he first encounters the demon Pazuzu in East Africa.",
+      "path": "/movies/Exorcist The Beginning (2004) {tmdb-11026}",
+      "physicalRelease": "2006-06-27T00:00:00Z",
+      "popularity": 2.3403,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 5.1,
+          "votes": 41968
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 30,
+          "votes": 0
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 10,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 5.4,
+          "votes": 943
+        },
+        "trakt": {
+          "type": "user",
+          "value": 5.44611,
+          "votes": 1336
+        }
+      },
+      "releaseDate": "2004-10-16T00:00:00Z",
+      "runtime": 114,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 0,
+      "sortTitle": "exorcist the beginning",
+      "statistics": {
+        "movieFileCount": 0,
+        "movieFileQualities": [],
+        "releaseGroups": [],
+        "sizeOnDisk": 0
+      },
+      "status": "released",
+      "studio": "Dominion Productions",
+      "tags": [
+        1
+      ],
+      "title": "Exorcist: The Beginning",
+      "titleSlug": "11026",
+      "tmdbId": 11026,
+      "website": "",
+      "year": 2004,
+      "youTubeTrailerId": "eHJEMIYNFFY"
+    },
+    {
+      "added": "2026-03-07T09:12:06Z",
+      "alternateTitles": [
+        {
+          "id": 335,
+          "movieMetadataId": 42,
+          "sourceType": "tmdb",
+          "title": "Tiempo de Volver"
+        },
+        {
+          "id": 336,
+          "movieMetadataId": 42,
+          "sourceType": "tmdb",
+          "title": "Algo en común"
+        },
+        {
+          "id": 2800,
+          "movieMetadataId": 42,
+          "sourceType": "tmdb",
+          "title": "Гардън Стейт"
+        }
+      ],
+      "certification": "R",
+      "cleanTitle": "gardenstate",
+      "digitalRelease": "2010-07-07T00:00:00Z",
+      "folderName": "/movies/Garden State (2004)",
+      "genres": [
+        "Comedy",
+        "Drama",
+        "Romance"
+      ],
+      "hasFile": false,
+      "id": 42,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/h3iqYiGS6F3y7GxaS4AT8nFxZ2i.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/2mu6XkJE0B6nK5jeOvXOyWPVmhw.jpg"
+        }
+      ],
+      "imdbId": "tt0333766",
+      "inCinemas": "2004-08-20T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "answering machine",
+        "depression",
+        "difficult childhood",
+        "ecstasy",
+        "epilepsy",
+        "expensive restaurant",
+        "grave digger",
+        "lethargy",
+        "los angeles, california",
+        "loss of loved one",
+        "marijuana",
+        "new jersey",
+        "paraplegic",
+        "pop culture",
+        "psychiatrist",
+        "single",
+        "strangeness",
+        "unsociability"
+      ],
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Garden State",
+      "overview": "Andrew returns to his hometown for his mother’s funeral, a journey that reconnects him with old friends. The trip coincides with his decision to stop taking his powerful antidepressants. A chance meeting with Sam—a girl also struggling with various maladies—opens up the possibility of rekindling emotional connections, confronting his psychologist father, and perhaps beginning a new life.",
+      "path": "/movies/Garden State (2004)",
+      "physicalRelease": "2005-10-20T00:00:00Z",
+      "popularity": 3.3216,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 7.4,
+          "votes": 228937
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 67,
+          "votes": 0
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 86,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 7.073,
+          "votes": 2151
+        },
+        "trakt": {
+          "type": "user",
+          "value": 7.35793,
+          "votes": 3523
+        }
+      },
+      "releaseDate": "2005-10-20T00:00:00Z",
+      "runtime": 102,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 0,
+      "sortTitle": "garden state",
+      "statistics": {
+        "movieFileCount": 0,
+        "movieFileQualities": [],
+        "releaseGroups": [],
+        "sizeOnDisk": 0
+      },
+      "status": "released",
+      "studio": "Camelot Pictures",
+      "tags": [
+        1
+      ],
+      "title": "Garden State",
+      "titleSlug": "401",
+      "tmdbId": 401,
+      "website": "https://www.searchlightpictures.com/gardenstate",
+      "year": 2004,
+      "youTubeTrailerId": "u82n0e1mgmQ"
+    }
+  ],
+  "recordedAt": "2026-11-11T19:38:32Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/calendar?start=2004-08-01T00:00:00Z&end=2004-08-31T00:00:00Z&unmonitored=true"
+  },
+  "status": 200
+}

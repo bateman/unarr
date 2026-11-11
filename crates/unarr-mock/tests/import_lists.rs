@@ -66,7 +66,7 @@ async fn setup(name: &str, level: &str) -> Setup {
     let http = unarr_core::http::build(Duration::from_secs(10));
     let downloads = Arc::new(Downloads::new(
         db.clone(),
-        DownloadClientService::with_client(db.clone(), http),
+        DownloadClientService::with_client(db.clone(), http, unarr_core::downloadclients::SONARR),
     ));
     let runtime = Runtime::new(db.clone(), downloads, Arc::new(now), Default::default())
         .await

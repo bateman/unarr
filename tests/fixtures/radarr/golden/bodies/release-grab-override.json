@@ -1,0 +1,27 @@
+{
+  "guid": "http://127.0.0.1:18989/movies/newznab/details/a21dcc90a30f28c9f1321274f0a62f4c",
+  "indexerId": 20,
+  "downloadClientId": 4,
+  "shouldOverride": true,
+  "movieId": 10,
+  "quality": {
+    "quality": {
+      "id": 3,
+      "name": "WEBDL-1080p",
+      "source": "webdl",
+      "resolution": 1080,
+      "modifier": "none"
+    },
+    "revision": {
+      "version": 1,
+      "real": 0,
+      "isRepack": false
+    }
+  },
+  "languages": [
+    {
+      "id": 1,
+      "name": "English"
+    }
+  ]
+}

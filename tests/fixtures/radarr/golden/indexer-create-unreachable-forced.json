@@ -1,0 +1,17 @@
+{
+  "body": [
+    {
+      "errorMessage": "Unable to connect to indexer, please check your DNS settings and ensure IPv6 is working or disabled. Connection refused (127.0.0.1:18999)",
+      "isWarning": false,
+      "propertyName": "",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-11T19:38:35Z",
+  "request": {
+    "body": "bodies/indexer-unreachable.json",
+    "method": "POST",
+    "path": "/api/v3/indexer?forceSave=true"
+  },
+  "status": 400
+}

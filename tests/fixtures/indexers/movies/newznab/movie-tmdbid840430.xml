@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:newznab="http://www.newznab.com/DTD/2010/feeds/attributes/">
+  <channel>
+    <atom:link href="http://127.0.0.1:18989/movies/newznab/api" rel="self" type="application/rss+xml"/>
+    <title>Fixture Newznab (movies)</title>
+    <description>Unarr test indexer</description>
+    <link>http://127.0.0.1:18989/movies/newznab/</link>
+    <language>en-gb</language>
+    <newznab:response offset="0" total="6"/>
+    <item>
+      <title>The.Holdovers.2023.iTA.ENG.1080p.BluRay.x264-MIRCrew</title>
+      <guid isPermaLink="true">http://127.0.0.1:18989/movies/newznab/details/fd04f3b8c14e7d33d5e992475f5fef5b</guid>
+      <link>http://127.0.0.1:18989/movies/newznab/download/fd04f3b8c14e7d33d5e992475f5fef5b.nzb</link>
+      <comments>http://127.0.0.1:18989/movies/newznab/details/fd04f3b8c14e7d33d5e992475f5fef5b#comments</comments>
+      <pubDate>Mon, 09 Nov 2026 21:14:00 +0000</pubDate>
+      <category>Movies &gt; HD</category>
+      <description>The.Holdovers.2023.iTA.ENG.1080p.BluRay.x264-MIRCrew</description>
+      <enclosure url="http://127.0.0.1:18989/movies/newznab/download/fd04f3b8c14e7d33d5e992475f5fef5b.nzb" length="7945689497" type="application/x-nzb"/>
+      <newznab:attr name="category" value="2000"/>
+      <newznab:attr name="category" value="2040"/>
+      <newznab:attr name="size" value="7945689497"/>
+      <newznab:attr name="guid" value="fd04f3b8c14e7d33d5e992475f5fef5b"/>
+      <newznab:attr name="tmdbid" value="840430"/>
+      <newznab:attr name="imdb" value="14849194"/>
+      <newznab:attr name="usenetdate" value="Mon, 09 Nov 2026 21:14:00 +0000"/>
+      <newznab:attr name="grabs" value="41"/>
+    </item>
+    <item>
+      <title>The.Holdovers.2023.REPACK.iTA.ENG.1080p.WEB-DL.DD5.1.H264-iDN_CreW</title>
+      <guid isPermaLink="true">http://127.0.0.1:18989/movies/newznab/details/ad3b4a26175e220331d8c1fc6e58cc54</guid>
+      <link>http://127.0.0.1:18989/movies/newznab/download/ad3b4a26175e220331d8c1fc6e58cc54.nzb</link>
+      <comments>http://127.0.0.1:18989/movies/newznab/details/ad3b4a26175e220331d8c1fc6e58cc54#comments</comments>
+      <pubDate>Sat, 07 Nov 2026 11:12:00 +0000</pubDate>
+      <category>Movies &gt; HD</category>
+      <description>The.Holdovers.2023.REPACK.iTA.ENG.1080p.WEB-DL.DD5.1.H264-iDN_CreW</description>
+      <enclosure url="http://127.0.0.1:18989/movies/newznab/download/ad3b4a26175e220331d8c1fc6e58cc54.nzb" length="6012954214" type="application/x-nzb"/>
+      <newznab:attr name="category" value="2000"/>
+      <newznab:attr name="category" value="2040"/>
+      <newznab:attr name="size" value="6012954214"/>
+      <newznab:attr name="guid" value="ad3b4a26175e220331d8c1fc6e58cc54"/>
+      <newznab:attr name="tmdbid" value="840430"/>
+      <newznab:attr name="imdb" value="14849194"/>
+      <newznab:attr name="usenetdate" value="Sat, 07 Nov 2026 11:12:00 +0000"/>
+      <newznab:attr name="grabs" value="33"/>
+    </item>
+    <item>
+      <title>The.Holdovers.2023.1080p.AMZN.WEB-DL.DDP5.1.H.264-FLUX</title>
+      <guid isPermaLink="true">http://127.0.0.1:18989/movies/newznab/details/2579a03771a684b4e0186c4874aa07a5</guid>
+      <link>http://127.0.0.1:18989/movies/newznab/download/2579a03771a684b4e0186c4874aa07a5.nzb</link>
+      <comments>http://127.0.0.1:18989/movies/newznab/details/2579a03771a684b4e0186c4874aa07a5#comments</comments>
+      <pubDate>Mon, 09 Nov 2026 20:02:00 +0000</pubDate>
+      <category>Movies &gt; HD</category>
+      <description>The.Holdovers.2023.1080p.AMZN.WEB-DL.DDP5.1.H.264-FLUX</description>
+      <enclosure url="http://127.0.0.1:18989/movies/newznab/download/2579a03771a684b4e0186c4874aa07a5.nzb" length="6657199308" type="application/x-nzb"/>
+      <newznab:attr name="category" value="2000"/>
+      <newznab:attr name="category" value="2040"/>
+      <newznab:attr name="size" value="6657199308"/>
+      <newznab:attr name="guid" value="2579a03771a684b4e0186c4874aa07a5"/>
+      <newznab:attr name="tmdbid" value="840430"/>
+      <newznab:attr name="imdb" value="14849194"/>
+      <newznab:attr name="usenetdate" value="Mon, 09 Nov 2026 20:02:00 +0000"/>
+      <newznab:attr name="grabs" value="120"/>
+    </item>
+    <item>
+      <title>The.Holdovers.2023.iTA.ENG.2160p.WEB-DL.DDP5.1.HDR.H.265-MeM</title>
+      <guid isPermaLink="true">http://127.0.0.1:18989/movies/newznab/details/8c7ba67807e7b5c279dacc04365ddb8d</guid>
+      <link>http://127.0.0.1:18989/movies/newznab/download/8c7ba67807e7b5c279dacc04365ddb8d.nzb</link>
+      <comments>http://127.0.0.1:18989/movies/newznab/details/8c7ba67807e7b5c279dacc04365ddb8d#comments</comments>
+      <pubDate>Thu, 05 Nov 2026 08:30:00 +0000</pubDate>
+      <category>Movies &gt; HD</category>
+      <description>The.Holdovers.2023.iTA.ENG.2160p.WEB-DL.DDP5.1.HDR.H.265-MeM</description>
+      <enclosure url="http://127.0.0.1:18989/movies/newznab/download/8c7ba67807e7b5c279dacc04365ddb8d.nzb" length="18575733555" type="application/x-nzb"/>
+      <newznab:attr name="category" value="2000"/>
+      <newznab:attr name="category" value="2045"/>
+      <newznab:attr name="size" value="18575733555"/>
+      <newznab:attr name="guid" value="8c7ba67807e7b5c279dacc04365ddb8d"/>
+      <newznab:attr name="tmdbid" value="840430"/>
+      <newznab:attr name="imdb" value="14849194"/>
+      <newznab:attr name="usenetdate" value="Thu, 05 Nov 2026 08:30:00 +0000"/>
+      <newznab:attr name="grabs" value="58"/>
+    </item>
+    <item>
+      <title>The.Holdovers.2023.iTA.720p.BluRay.x264-MIRCrew</title>
+      <guid isPermaLink="true">http://127.0.0.1:18989/movies/newznab/details/2e75d9d89af27d923de90c775b63cc9a</guid>
+      <link>http://127.0.0.1:18989/movies/newznab/download/2e75d9d89af27d923de90c775b63cc9a.nzb</link>
+      <comments>http://127.0.0.1:18989/movies/newznab/details/2e75d9d89af27d923de90c775b63cc9a#comments</comments>
+      <pubDate>Tue, 03 Nov 2026 14:00:00 +0000</pubDate>
+      <category>Movies &gt; HD</category>
+      <description>The.Holdovers.2023.iTA.720p.BluRay.x264-MIRCrew</description>
+      <enclosure url="http://127.0.0.1:18989/movies/newznab/download/2e75d9d89af27d923de90c775b63cc9a.nzb" length="4187593113" type="application/x-nzb"/>
+      <newznab:attr name="category" value="2000"/>
+      <newznab:attr name="category" value="2040"/>
+      <newznab:attr name="size" value="4187593113"/>
+      <newznab:attr name="guid" value="2e75d9d89af27d923de90c775b63cc9a"/>
+      <newznab:attr name="tmdbid" value="840430"/>
+      <newznab:attr name="imdb" value="14849194"/>
+      <newznab:attr name="usenetdate" value="Tue, 03 Nov 2026 14:00:00 +0000"/>
+      <newznab:attr name="grabs" value="20"/>
+    </item>
+    <item>
+      <title>The.Holdovers.2023.German.DL.1080p.BluRay.x264-DETAiLS</title>
+      <guid isPermaLink="true">http://127.0.0.1:18989/movies/newznab/details/9e6abd9b1744903249f92fc6cc130a1d</guid>
+      <link>http://127.0.0.1:18989/movies/newznab/download/9e6abd9b1744903249f92fc6cc130a1d.nzb</link>
+      <comments>http://127.0.0.1:18989/movies/newznab/details/9e6abd9b1744903249f92fc6cc130a1d#comments</comments>
+      <pubDate>Mon, 02 Nov 2026 09:45:00 +0000</pubDate>
+      <category>Movies &gt; HD</category>
+      <description>The.Holdovers.2023.German.DL.1080p.BluRay.x264-DETAiLS</description>
+      <enclosure url="http://127.0.0.1:18989/movies/newznab/download/9e6abd9b1744903249f92fc6cc130a1d.nzb" length="9341553868" type="application/x-nzb"/>
+      <newznab:attr name="category" value="2000"/>
+      <newznab:attr name="category" value="2040"/>
+      <newznab:attr name="size" value="9341553868"/>
+      <newznab:attr name="guid" value="9e6abd9b1744903249f92fc6cc130a1d"/>
+      <newznab:attr name="tmdbid" value="840430"/>
+      <newznab:attr name="imdb" value="14849194"/>
+      <newznab:attr name="usenetdate" value="Mon, 02 Nov 2026 09:45:00 +0000"/>
+      <newznab:attr name="grabs" value="14"/>
+    </item>
+  </channel>
+</rss>

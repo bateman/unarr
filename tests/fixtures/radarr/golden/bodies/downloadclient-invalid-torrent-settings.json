@@ -1,0 +1,73 @@
+{
+  "enable": true,
+  "protocol": "torrent",
+  "priority": 1,
+  "removeCompletedDownloads": true,
+  "removeFailedDownloads": true,
+  "name": "Bad torrent settings",
+  "implementation": "QBittorrent",
+  "configContract": "QBittorrentSettings",
+  "tags": [],
+  "fields": [
+    {
+      "name": "host",
+      "value": "127.0.0.1"
+    },
+    {
+      "name": "port",
+      "value": 18989
+    },
+    {
+      "name": "useSsl",
+      "value": false
+    },
+    {
+      "name": "urlBase",
+      "value": "/qbittorrent"
+    },
+    {
+      "name": "apiKey",
+      "value": "0123456789abcdef0123456789abcdef"
+    },
+    {
+      "name": "username",
+      "value": "mock"
+    },
+    {
+      "name": "password",
+      "value": "mock"
+    },
+    {
+      "name": "movieCategory",
+      "value": "/tv/"
+    },
+    {
+      "name": "movieImportedCategory",
+      "value": "a//b"
+    },
+    {
+      "name": "recentMoviePriority",
+      "value": 0
+    },
+    {
+      "name": "olderMoviePriority",
+      "value": 0
+    },
+    {
+      "name": "initialState",
+      "value": 0
+    },
+    {
+      "name": "sequentialOrder",
+      "value": false
+    },
+    {
+      "name": "firstAndLast",
+      "value": false
+    },
+    {
+      "name": "contentLayout",
+      "value": 0
+    }
+  ]
+}

@@ -25,6 +25,12 @@ pub struct Capabilities {
     pub supports_aggregate_id_search: bool,
     pub text_search_engine: String,
     pub tv_text_search_engine: String,
+    /// `None` when `movie-search` is unavailable. Radarr reads this side
+    /// of the document where Sonarr reads `tv-search`.
+    pub supported_movie_search_parameters: Option<Vec<String>>,
+    /// Radarr's `SupportsAggregateIdSearch`: set when `movie-search` lists
+    /// its parameters.
+    pub supports_aggregate_movie_id_search: bool,
     pub categories: Vec<Category>,
 }
 
@@ -44,6 +50,13 @@ impl Default for Capabilities {
             supports_aggregate_id_search: false,
             text_search_engine: "sphinx".into(),
             tv_text_search_engine: "sphinx".into(),
+            supported_movie_search_parameters: Some(vec![
+                "q".into(),
+                "imdbid".into(),
+                "imdbtitle".into(),
+                "imdbyear".into(),
+            ]),
+            supports_aggregate_movie_id_search: false,
             categories: Vec::new(),
         }
     }
@@ -58,6 +71,12 @@ impl Capabilities {
 
     pub fn supports_tv_param(&self, p: &str) -> bool {
         self.supported_tv_search_parameters
+            .as_ref()
+            .is_some_and(|v| v.iter().any(|x| x == p))
+    }
+
+    pub fn supports_movie_param(&self, p: &str) -> bool {
+        self.supported_movie_search_parameters
             .as_ref()
             .is_some_and(|v| v.iter().any(|x| x == p))
     }
@@ -111,6 +130,15 @@ pub fn parse_caps(xml: &str, request_url: &str) -> Result<Capabilities, IndexerE
                 }
             }
             _ => caps.supported_tv_search_parameters = None,
+        }
+        match searching.children().find(|n| n.has_tag_name("movie-search")) {
+            Some(s) if s.attribute("available") == Some("yes") => {
+                if let Some(p) = s.attribute("supportedParams") {
+                    caps.supported_movie_search_parameters = Some(split(p));
+                    caps.supports_aggregate_movie_id_search = true;
+                }
+            }
+            _ => caps.supported_movie_search_parameters = None,
         }
     }
     if let Some(categories) = root.children().find(|n| n.has_tag_name("categories")) {
@@ -166,13 +194,51 @@ pub fn default_categories() -> Vec<Category> {
     }]
 }
 
+/// The Newznab categories Radarr assumes when an indexer cannot be asked.
+fn default_movie_categories() -> Vec<Category> {
+    let sub = |id: i64, name: &str| Category {
+        id,
+        name: name.into(),
+        description: String::new(),
+        subcategories: Vec::new(),
+    };
+    vec![Category {
+        id: 2000,
+        name: "Movies".into(),
+        description: String::new(),
+        subcategories: vec![
+            sub(2010, "Foreign"),
+            sub(2020, "Other"),
+            sub(2030, "SD"),
+            sub(2040, "HD"),
+            sub(2045, "UHD"),
+            sub(2050, "BluRay"),
+            sub(2060, "3D"),
+        ],
+    }]
+}
+
 /// `NewznabCategoryFieldOptionsConverter.GetFieldSelectOptions`: the select
 /// options the `newznabCategories` action answers with.
 pub fn category_options(categories: Option<&[Category]>) -> Vec<serde_json::Value> {
+    category_options_for(crate::Personality::Sonarr, categories)
+}
+
+/// The options as a personality lists them: Sonarr puts the movie
+/// categories last and falls back on the TV ones, Radarr the reverse.
+pub fn category_options_for(
+    personality: crate::Personality,
+    categories: Option<&[Category]>,
+) -> Vec<serde_json::Value> {
     use serde_json::json;
+    let movies = personality == crate::Personality::Radarr;
     let ignore = [1000, 3000, 4000, 6000, 7000];
-    let unimportant = [0, 2000];
-    let fallback = default_categories();
+    let unimportant = if movies { [0, 5000] } else { [0, 2000] };
+    let fallback = if movies {
+        default_movie_categories()
+    } else {
+        default_categories()
+    };
     let mut cats: Vec<&Category> = categories
         .unwrap_or(&fallback)
         .iter()

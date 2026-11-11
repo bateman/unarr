@@ -15,9 +15,12 @@ adds and refreshes series, and saves every settings page (Recyclarr syncs
 through it). Radarr is under way ([docs/phase-4-radarr.md](docs/phase-4-radarr.md)):
 `--personalities sonarr,radarr` imports `radarr.db` and serves the official
 Radarr web UI, Bazarr and every read of the API next to Sonarr in one
-process, read-only for now; searching, importing and settings writes for
-movies are the next milestones. `--personalities lidarr` starts but is not
-usable. See
+process, and since milestone 4b searches for movies, decides with Radarr's
+rules, grabs, and keeps the queue, the history and the pending releases
+(Prowlarr can manage its indexers). It does not import what the clients
+finish yet, so it cannot replace Radarr: importing, the library's commands
+and the settings writes for movies are the next milestone.
+`--personalities lidarr` starts but is not usable. See
 [docs/DESIGN.md](docs/DESIGN.md), the work orders of each phase under `docs/`,
 [docs/audit/README.md](docs/audit/README.md) and, for running it in place of
 Sonarr, [docs/homelab-compose.md](docs/homelab-compose.md).

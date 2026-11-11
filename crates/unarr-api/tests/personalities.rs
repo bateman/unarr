@@ -203,7 +203,7 @@ async fn each_personality_serves_its_own_routes_and_strings() {
 }
 
 #[tokio::test]
-async fn radarr_is_read_only_in_this_milestone() {
+async fn radarr_writes_only_what_its_milestones_brought() {
     let radarr = unarr_api::router(build_state(Personality::Radarr));
     for (method, uri) in [
         ("POST", "/api/v3/movie"),
@@ -214,7 +214,7 @@ async fn radarr_is_read_only_in_this_milestone() {
         ("PUT", "/api/v3/qualityprofile/11"),
         ("PUT", "/api/v3/config/ui/1"),
         ("DELETE", "/api/v3/blocklist/1"),
-        ("POST", "/api/v3/indexer"),
+        ("POST", "/api/v3/notification"),
     ] {
         let status = send(&radarr, method, uri).await;
         assert!(
@@ -222,17 +222,17 @@ async fn radarr_is_read_only_in_this_milestone() {
             "{method} {uri} answered {status}"
         );
     }
+    // Milestone 4b brought the indexers and the download clients: a body
+    // that says nothing is refused as invalid, not as a method.
+    for uri in ["/api/v3/indexer", "/api/v3/downloadclient"] {
+        assert_eq!(send(&radarr, "POST", uri).await, StatusCode::BAD_REQUEST, "{uri}");
+    }
     // Nothing was written.
     let (status, body) = get(&radarr, "/api/v3/movie/6").await;
     assert_eq!(status, StatusCode::OK);
     assert!(body.contains("\"title\":\"Alien: Romulus\""));
-    // Commands, releases and the rest of the later milestones are not
-    // routes yet.
-    for uri in [
-        "/api/v3/release?movieId=6",
-        "/api/v3/movie/lookup?term=alien",
-        "/api/v3/rename?movieId=6",
-    ] {
+    // What milestone 4c brings is not a route yet.
+    for uri in ["/api/v3/movie/lookup?term=alien", "/api/v3/rename?movieId=6"] {
         assert_eq!(get(&radarr, uri).await.0, StatusCode::NOT_FOUND, "{uri}");
     }
 }

@@ -1,0 +1,52 @@
+{
+ "source": "radarr/src/NzbDrone.Core.Test/DecisionEngineTests/RawDiskSpecificationFixture.cs",
+ "methods": {
+  "should_return_false_if_matches_disc_format": {
+   "params": [
+    "title"
+   ],
+   "cases": [
+    [
+     "Series Title S02 Disc 1 1080i Blu-ray DTS-HD MA 2.0 AVC-TrollHD"
+    ],
+    [
+     "Series Title S03 Disc 1 1080p Blu-ray LPCM 2.0 AVC-TrollHD"
+    ],
+    [
+     "SERIES TITLE S02 1080P FULL BLURAY AVC DTS-HD MA 5 1"
+    ],
+    [
+     "Series.Title.S06.2016.DISC.3.BluRay.1080p.AVC.Atmos.TrueHD7.1-MTeam"
+    ],
+    [
+     "Series Title S05 Disc 1 BluRay 1080p AVC Atmos TrueHD 7 1-MTeam"
+    ],
+    [
+     "Series Title S05 Disc 1 BluRay 1080p AVC Atmos TrueHD 7 1-MTeam"
+    ],
+    [
+     "Someone.the.Entertainer.Presents.S01.NTSC.3xDVD9.MPEG-2.DD2.0"
+    ],
+    [
+     "Series.Title.S00.The.Christmas.Special.2011.PAL.DVD5.DD2.0"
+    ],
+    [
+     "Series.of.Desire.2000.S1_D01.NTSC.DVD5"
+    ]
+   ]
+  },
+  "should_return_true_if_dvdrip": {
+   "params": [
+    "title"
+   ],
+   "cases": [
+    [
+     "Series Title EP50 USLT NTSC DVDRemux DD2.0"
+    ],
+    [
+     "Series.Title.S01.NTSC.DVDRip.DD2.0.x264-PLAiD"
+    ]
+   ]
+  }
+ }
+}

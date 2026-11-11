@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:newznab="http://www.newznab.com/DTD/2010/feeds/attributes/">
+  <channel>
+    <atom:link href="http://127.0.0.1:18989/movies/newznab/api" rel="self" type="application/rss+xml"/>
+    <title>Fixture Newznab (movies)</title>
+    <description>Unarr test indexer</description>
+    <link>http://127.0.0.1:18989/movies/newznab/</link>
+    <language>en-gb</language>
+    <newznab:response offset="0" total="9"/>
+    <item>
+      <title>The.Holdovers.2023.iTA.ENG.1080p.BluRay.x264-MIRCrew</title>
+      <guid isPermaLink="true">http://127.0.0.1:18989/movies/newznab/details/fd04f3b8c14e7d33d5e992475f5fef5b</guid>
+      <link>http://127.0.0.1:18989/movies/newznab/download/fd04f3b8c14e7d33d5e992475f5fef5b.nzb</link>
+      <comments>http://127.0.0.1:18989/movies/newznab/details/fd04f3b8c14e7d33d5e992475f5fef5b#comments</comments>
+      <pubDate>Mon, 09 Nov 2026 21:14:00 +0000</pubDate>
+      <category>Movies &gt; HD</category>
+      <description>The.Holdovers.2023.iTA.ENG.1080p.BluRay.x264-MIRCrew</description>
+      <enclosure url="http://127.0.0.1:18989/movies/newznab/download/fd04f3b8c14e7d33d5e992475f5fef5b.nzb" length="7945689497" type="application/x-nzb"/>
+      <newznab:attr name="category" value="2000"/>
+      <newznab:attr name="category" value="2040"/>
+      <newznab:attr name="size" value="7945689497"/>
+      <newznab:attr name="guid" value="fd04f3b8c14e7d33d5e992475f5fef5b"/>
+      <newznab:attr name="tmdbid" value="840430"/>
+      <newznab:attr name="imdb" value="14849194"/>
+      <newznab:attr name="usenetdate" value="Mon, 09 Nov 2026 21:14:00 +0000"/>
+      <newznab:attr name="grabs" value="41"/>
+    </item>
+    <item>
+      <title>The.Holdovers.2023.1080p.AMZN.WEB-DL.DDP5.1.H.264-FLUX</title>
+      <guid isPermaLink="true">http://127.0.0.1:18989/movies/newznab/details/2579a03771a684b4e0186c4874aa07a5</guid>
+      <link>http://127.0.0.1:18989/movies/newznab/download/2579a03771a684b4e0186c4874aa07a5.nzb</link>
+      <comments>http://127.0.0.1:18989/movies/newznab/details/2579a03771a684b4e0186c4874aa07a5#comments</comments>
+      <pubDate>Mon, 09 Nov 2026 20:02:00 +0000</pubDate>
+      <category>Movies &gt; HD</category>
+      <description>The.Holdovers.2023.1080p.AMZN.WEB-DL.DDP5.1.H.264-FLUX</description>
+      <enclosure url="http://127.0.0.1:18989/movies/newznab/download/2579a03771a684b4e0186c4874aa07a5.nzb" length="6657199308" type="application/x-nzb"/>
+      <newznab:attr name="category" value="2000"/>
+      <newznab:attr name="category" value="2040"/>
+      <newznab:attr name="size" value="6657199308"/>
+      <newznab:attr name="guid" value="2579a03771a684b4e0186c4874aa07a5"/>
+      <newznab:attr name="tmdbid" value="840430"/>
+      <newznab:attr name="imdb" value="14849194"/>
+      <newznab:attr name="usenetdate" value="Mon, 09 Nov 2026 20:02:00 +0000"/>
+      <newznab:attr name="grabs" value="120"/>
+    </item>
+    <item>
+      <title>Last.Night.in.Soho.2021.iTA.ENG.1080p.WEB-DL.DD5.1.H264-iDN_CreW</title>
+      <guid isPermaLink="true">http://127.0.0.1:18989/movies/newznab/details/8b519b988db3b735f5a5493125198c99</guid>
+      <link>http://127.0.0.1:18989/movies/newznab/download/8b519b988db3b735f5a5493125198c99.nzb</link>
+      <comments>http://127.0.0.1:18989/movies/newznab/details/8b519b988db3b735f5a5493125198c99#comments</comments>
+      <pubDate>Mon, 09 Nov 2026 18:47:00 +0000</pubDate>
+      <category>Movies &gt; HD</category>
+      <description>Last.Night.in.Soho.2021.iTA.ENG.1080p.WEB-DL.DD5.1.H264-iDN_CreW</description>
+      <enclosure url="http://127.0.0.1:18989/movies/newznab/download/8b519b988db3b735f5a5493125198c99.nzb" length="5476083302" type="application/x-nzb"/>
+      <newznab:attr name="category" value="2000"/>
+      <newznab:attr name="category" value="2040"/>
+      <newznab:attr name="size" value="5476083302"/>
+      <newznab:attr name="guid" value="8b519b988db3b735f5a5493125198c99"/>
+      <newznab:attr name="tmdbid" value="576845"/>
+      <newznab:attr name="imdb" value="9639470"/>
+      <newznab:attr name="usenetdate" value="Mon, 09 Nov 2026 18:47:00 +0000"/>
+      <newznab:attr name="grabs" value="17"/>
+    </item>
+    <item>
+      <title>Nightmare.Alley.2021.MULTi.iTA.ENG.2160p.UHD.BluRay.REMUX.HDR.HEVC.DTS-HD.MA.5.1-FraMeSToR</title>
+      <guid isPermaLink="true">http://127.0.0.1:18989/movies/newznab/details/1e31c567dbdcd043801cfdc268b38ae3</guid>
+      <link>http://127.0.0.1:18989/movies/newznab/download/1e31c567dbdcd043801cfdc268b38ae3.nzb</link>
+      <comments>http://127.0.0.1:18989/movies/newznab/details/1e31c567dbdcd043801cfdc268b38ae3#comments</comments>
+      <pubDate>Mon, 09 Nov 2026 17:30:00 +0000</pubDate>
+      <category>Movies &gt; HD</category>
+      <description>Nightmare.Alley.2021.MULTi.iTA.ENG.2160p.UHD.BluRay.REMUX.HDR.HEVC.DTS-HD.MA.5.1-FraMeSToR</description>
+      <enclosure url="http://127.0.0.1:18989/movies/newznab/download/1e31c567dbdcd043801cfdc268b38ae3.nzb" length="66357244723" type="application/x-nzb"/>
+      <newznab:attr name="category" value="2000"/>
+      <newznab:attr name="category" value="2045"/>
+      <newznab:attr name="size" value="66357244723"/>
+      <newznab:attr name="guid" value="1e31c567dbdcd043801cfdc268b38ae3"/>
+      <newznab:attr name="tmdbid" value="597208"/>
+      <newznab:attr name="imdb" value="7740496"/>
+      <newznab:attr name="usenetdate" value="Mon, 09 Nov 2026 17:30:00 +0000"/>
+      <newznab:attr name="grabs" value="9"/>
+    </item>
+    <item>
+      <title>Dune.Part.Three.2026.1080p.HDCAM.x264-NoGRP</title>
+      <guid isPermaLink="true">http://127.0.0.1:18989/movies/newznab/details/8c317d9d0d7ce2640d7244956502be76</guid>
+      <link>http://127.0.0.1:18989/movies/newznab/download/8c317d9d0d7ce2640d7244956502be76.nzb</link>
+      <comments>http://127.0.0.1:18989/movies/newznab/details/8c317d9d0d7ce2640d7244956502be76#comments</comments>
+      <pubDate>Mon, 09 Nov 2026 16:05:00 +0000</pubDate>
+      <category>Movies &gt; HD</category>
+      <description>Dune.Part.Three.2026.1080p.HDCAM.x264-NoGRP</description>
+      <enclosure url="http://127.0.0.1:18989/movies/newznab/download/8c317d9d0d7ce2640d7244956502be76.nzb" length="2576980377" type="application/x-nzb"/>
+      <newznab:attr name="category" value="2000"/>
+      <newznab:attr name="category" value="2040"/>
+      <newznab:attr name="size" value="2576980377"/>
+      <newznab:attr name="guid" value="8c317d9d0d7ce2640d7244956502be76"/>
+      <newznab:attr name="tmdbid" value="1170608"/>
+      <newznab:attr name="usenetdate" value="Mon, 09 Nov 2026 16:05:00 +0000"/>
+      <newznab:attr name="grabs" value="300"/>
+    </item>
+    <item>
+      <title>Batman.Begins.2005.iTA.ENG.1080p.BluRay.x264-MIRCrew</title>
+      <guid isPermaLink="true">http://127.0.0.1:18989/movies/newznab/details/a9aeb356f82c4a5371c7e815e0e46e10</guid>
+      <link>http://127.0.0.1:18989/movies/newznab/download/a9aeb356f82c4a5371c7e815e0e46e10.nzb</link>
+      <comments>http://127.0.0.1:18989/movies/newznab/details/a9aeb356f82c4a5371c7e815e0e46e10#comments</comments>
+      <pubDate>Sun, 08 Nov 2026 23:10:00 +0000</pubDate>
+      <category>Movies &gt; HD</category>
+      <description>Batman.Begins.2005.iTA.ENG.1080p.BluRay.x264-MIRCrew</description>
+      <enclosure url="http://127.0.0.1:18989/movies/newznab/download/a9aeb356f82c4a5371c7e815e0e46e10.nzb" length="12025908428" type="application/x-nzb"/>
+      <newznab:attr name="category" value="2000"/>
+      <newznab:attr name="category" value="2040"/>
+      <newznab:attr name="size" value="12025908428"/>
+      <newznab:attr name="guid" value="a9aeb356f82c4a5371c7e815e0e46e10"/>
+      <newznab:attr name="tmdbid" value="272"/>
+      <newznab:attr name="imdb" value="0372784"/>
+      <newznab:attr name="usenetdate" value="Sun, 08 Nov 2026 23:10:00 +0000"/>
+      <newznab:attr name="grabs" value="64"/>
+    </item>
+    <item>
+      <title>An.Unknown.Movie.2024.1080p.WEB-DL.DDP5.1.H.264-NTb</title>
+      <guid isPermaLink="true">http://127.0.0.1:18989/movies/newznab/details/a21dcc90a30f28c9f1321274f0a62f4c</guid>
+      <link>http://127.0.0.1:18989/movies/newznab/download/a21dcc90a30f28c9f1321274f0a62f4c.nzb</link>
+      <comments>http://127.0.0.1:18989/movies/newznab/details/a21dcc90a30f28c9f1321274f0a62f4c#comments</comments>
+      <pubDate>Sun, 08 Nov 2026 22:41:00 +0000</pubDate>
+      <category>Movies &gt; HD</category>
+      <description>An.Unknown.Movie.2024.1080p.WEB-DL.DDP5.1.H.264-NTb</description>
+      <enclosure url="http://127.0.0.1:18989/movies/newznab/download/a21dcc90a30f28c9f1321274f0a62f4c.nzb" length="5153960755" type="application/x-nzb"/>
+      <newznab:attr name="category" value="2000"/>
+      <newznab:attr name="category" value="2040"/>
+      <newznab:attr name="size" value="5153960755"/>
+      <newznab:attr name="guid" value="a21dcc90a30f28c9f1321274f0a62f4c"/>
+      <newznab:attr name="usenetdate" value="Sun, 08 Nov 2026 22:41:00 +0000"/>
+      <newznab:attr name="grabs" value="2"/>
+    </item>
+    <item>
+      <title>Lamb.2021.iTA.ISL.720p.BluRay.x264-MIRCrew</title>
+      <guid isPermaLink="true">http://127.0.0.1:18989/movies/newznab/details/a30d607c095f132509372ab72a6e6738</guid>
+      <link>http://127.0.0.1:18989/movies/newznab/download/a30d607c095f132509372ab72a6e6738.nzb</link>
+      <comments>http://127.0.0.1:18989/movies/newznab/details/a30d607c095f132509372ab72a6e6738#comments</comments>
+      <pubDate>Sun, 08 Nov 2026 19:26:00 +0000</pubDate>
+      <category>Movies &gt; HD</category>
+      <description>Lamb.2021.iTA.ISL.720p.BluRay.x264-MIRCrew</description>
+      <enclosure url="http://127.0.0.1:18989/movies/newznab/download/a30d607c095f132509372ab72a6e6738.nzb" length="4402341478" type="application/x-nzb"/>
+      <newznab:attr name="category" value="2000"/>
+      <newznab:attr name="category" value="2040"/>
+      <newznab:attr name="size" value="4402341478"/>
+      <newznab:attr name="guid" value="a30d607c095f132509372ab72a6e6738"/>
+      <newznab:attr name="tmdbid" value="788929"/>
+      <newznab:attr name="imdb" value="9812474"/>
+      <newznab:attr name="usenetdate" value="Sun, 08 Nov 2026 19:26:00 +0000"/>
+      <newznab:attr name="grabs" value="11"/>
+    </item>
+    <item>
+      <title>Lamb.2021.iTA.ISL.1080p.BluRay.x264-MIRCrew.sample</title>
+      <guid isPermaLink="true">http://127.0.0.1:18989/movies/newznab/details/6b608267b9e7d8c60dd555d16d9ad769</guid>
+      <link>http://127.0.0.1:18989/movies/newznab/download/6b608267b9e7d8c60dd555d16d9ad769.nzb</link>
+      <comments>http://127.0.0.1:18989/movies/newznab/details/6b608267b9e7d8c60dd555d16d9ad769#comments</comments>
+      <pubDate>Sun, 08 Nov 2026 19:20:00 +0000</pubDate>
+      <category>Movies &gt; HD</category>
+      <description>Lamb.2021.iTA.ISL.1080p.BluRay.x264-MIRCrew.sample</description>
+      <enclosure url="http://127.0.0.1:18989/movies/newznab/download/6b608267b9e7d8c60dd555d16d9ad769.nzb" length="41943040" type="application/x-nzb"/>
+      <newznab:attr name="category" value="2000"/>
+      <newznab:attr name="category" value="2040"/>
+      <newznab:attr name="size" value="41943040"/>
+      <newznab:attr name="guid" value="6b608267b9e7d8c60dd555d16d9ad769"/>
+      <newznab:attr name="tmdbid" value="788929"/>
+      <newznab:attr name="imdb" value="9812474"/>
+      <newznab:attr name="usenetdate" value="Sun, 08 Nov 2026 19:20:00 +0000"/>
+      <newznab:attr name="grabs" value="1"/>
+    </item>
+  </channel>
+</rss>

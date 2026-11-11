@@ -1,0 +1,10 @@
+{
+  "body": {},
+  "recordedAt": "2026-11-11T19:40:16Z",
+  "request": {
+    "body": "bodies/downloadclient-bulk-delete.json",
+    "method": "DELETE",
+    "path": "/api/v3/downloadclient/bulk"
+  },
+  "status": 200
+}

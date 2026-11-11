@@ -2,14 +2,14 @@
   "body": {
     "id": 1,
     "interval": 5,
-    "lastDuration": "00:06:05.9160749",
-    "lastExecution": "2026-11-11T12:12:49Z",
+    "lastDuration": "07:31:41.9160749",
+    "lastExecution": "2026-11-11T19:38:25Z",
     "lastStartTime": "2026-11-11T12:06:43Z",
     "name": "Messaging Cleanup",
-    "nextExecution": "2026-11-11T12:17:49Z",
+    "nextExecution": "2026-11-11T19:43:25Z",
     "taskName": "MessagingCleanup"
   },
-  "recordedAt": "2026-11-11T12:12:51Z",
+  "recordedAt": "2026-11-11T19:38:27Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/system/task/1"

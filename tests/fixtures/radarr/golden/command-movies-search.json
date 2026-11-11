@@ -1,0 +1,35 @@
+{
+  "body": {
+    "body": {
+      "isExclusive": false,
+      "isLongRunning": false,
+      "isTypeExclusive": false,
+      "movieIds": [
+        116
+      ],
+      "name": "MoviesSearch",
+      "requiresDiskAccess": false,
+      "sendUpdatesToClient": true,
+      "suppressMessages": false,
+      "trigger": "manual",
+      "updateScheduledTask": true
+    },
+    "commandName": "Movies Search",
+    "id": 472960,
+    "name": "MoviesSearch",
+    "priority": "normal",
+    "queued": "2026-11-11T19:39:17Z",
+    "result": "unknown",
+    "sendUpdatesToClient": true,
+    "status": "queued",
+    "trigger": "manual",
+    "updateScheduledTask": true
+  },
+  "recordedAt": "2026-11-11T19:39:17Z",
+  "request": {
+    "body": "bodies/command-movies-search.json",
+    "method": "POST",
+    "path": "/api/v3/command"
+  },
+  "status": 201
+}

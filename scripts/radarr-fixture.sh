@@ -13,11 +13,14 @@
 # anonymised real database, see tests/fixtures/radarr/README.md.
 #
 # Requirements: bash, curl, tar, python3; libicu for `golden`. `golden` and
-# `shell` need /movies (MOVIES_DIR), the fixture's root folder, to exist: it
-# is created if missing (root, or a writable /) and emptied before each
-# recording; the script refuses to empty a directory it did not mark as its
-# own. Milestone 4a only reads, so no mock indexer or download client is
-# started: Radarr runs without the environment's proxy and reaches nothing.
+# `shell` need /movies (MOVIES_DIR), the fixture's root folder, and
+# /downloads (DOWNLOADS_DIR), where the mock download clients say their
+# files are, to exist: they are created if missing (root, or a writable /)
+# and emptied before each recording; the script refuses to empty a directory
+# it did not mark as its own. Both commands start scripts/mock-servarr.py,
+# whose movie indexers and download clients the requests of milestone 4b
+# register; Radarr runs without the environment's proxy and reaches nothing
+# else.
 set -euo pipefail
 
 RADARR_VERSION="${RADARR_VERSION:-6.4.4.10685}"
@@ -32,9 +35,21 @@ GOLDEN_DIR="$FIXTURE_DIR/golden"
 API_KEY="0123456789abcdef0123456789abcdef"
 
 # .NET needs ICU for culture-aware comparisons and language names, which is
-# what the Docker images ship. Without it, fall back to invariant globalization
-# and warn: sort orders and language tokens in the goldens would differ.
-if [ "$(uname -s)" = Linux ] && ! ldconfig -p 2>/dev/null | grep -q libicuuc; then
+# what the Docker images ship. Without it, fall back to invariant
+# globalization and warn; `golden` refuses instead, since sort orders and
+# language tokens in the goldens would differ. The library list is read
+# whole before it is searched: `ldconfig -p | grep -q` under pipefail fails
+# now and then, when grep leaves before ldconfig has finished writing, and
+# a recording then ran without ICU although it was installed.
+HAVE_ICU=1
+if [ "$(uname -s)" = Linux ]; then
+    libraries="$(ldconfig -p 2>/dev/null || true)"
+    case "$libraries" in
+        *libicuuc*) ;;
+        *) HAVE_ICU=0 ;;
+    esac
+fi
+if [ "$HAVE_ICU" = 0 ]; then
     echo "[fixture] libicu not found: running Radarr with invariant globalization" >&2
     export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
 fi
@@ -56,30 +71,71 @@ download() {
     fi
 }
 
+MOCK_PORT="${MOCK_PORT:-18989}"
+MOCK_PID=""
 MOVIES_DIR="${MOVIES_DIR:-/movies}"
+DOWNLOADS_DIR="${DOWNLOADS_DIR:-/downloads}"
 MARKER=".unarr-fixture"
 
-# The fixture database says /movies, so it must exist for real or the root
-# folder is reported missing; it gets a marker so that a later run empties
-# only what this script owns.
+# The fixture database says /movies and the mock clients say /downloads, so
+# both must exist for real or the root folder is reported missing and the
+# clients' folders unreachable; each gets a marker so that a later run
+# empties only what this script owns.
 prepare_dirs() {
-    local d="$MOVIES_DIR"
-    if [ -d "$d" ]; then
-        [ -f "$d/$MARKER" ] || die "$d exists but was not created by this script (no $d/$MARKER); point MOVIES_DIR elsewhere or create the marker yourself"
-        find "$d" -mindepth 1 -delete
-    else
-        mkdir -p "$d" 2>/dev/null || die "cannot create $d; run as root or set MOVIES_DIR to a writable path"
+    local d
+    for d in "$MOVIES_DIR" "$DOWNLOADS_DIR"; do
+        if [ -d "$d" ]; then
+            [ -f "$d/$MARKER" ] || die "$d exists but was not created by this script (no $d/$MARKER); point MOVIES_DIR/DOWNLOADS_DIR elsewhere or create the marker yourself"
+            find "$d" -mindepth 1 -delete
+        else
+            mkdir -p "$d" 2>/dev/null || die "cannot create $d; run as root or set MOVIES_DIR and DOWNLOADS_DIR to writable paths"
+        fi
+        touch "$d/$MARKER"
+        log "using $d (emptied)"
+    done
+}
+
+# The mock indexers and download clients the real Radarr is pointed at while
+# recording (milestone 4b on); their requests are logged for the request
+# builders to mirror. The indexers are the ones under /movies.
+start_mock() {
+    local logfile="$CACHE/mock-requests.jsonl"
+    rm -f "$logfile"
+    # A stale mock from an earlier run would answer the health check below
+    # and swallow the request log.
+    if curl -fsS -o /dev/null "http://127.0.0.1:$MOCK_PORT/movies/newznab/api?t=caps&apikey=$API_KEY" 2>/dev/null; then
+        die "something already listens on port $MOCK_PORT; stop it (pkill -f mock-servarr.py) and retry"
     fi
-    touch "$d/$MARKER"
-    log "using $d (emptied)"
+    python3 -I "$REPO/scripts/mock-servarr.py" --listen "127.0.0.1:$MOCK_PORT" --fixtures "$REPO/tests/fixtures" --log "$logfile" --downloads "$DOWNLOADS_DIR" \
+        2>"$CACHE/mock.stderr.log" &
+    MOCK_PID=$!
+    for _ in $(seq 1 20); do
+        if curl -fsS -o /dev/null "http://127.0.0.1:$MOCK_PORT/movies/newznab/api?t=caps&apikey=$API_KEY" 2>/dev/null; then
+            log "mock services up on port $MOCK_PORT, requests logged to $logfile"
+            return
+        fi
+        sleep 0.5
+    done
+    die "the mock did not come up, see $CACHE/mock.stderr.log"
+}
+
+stop_mock() {
+    [ -n "$MOCK_PID" ] || return 0
+    # TERM, not INT: a background job of a non-interactive shell ignores INT.
+    kill -TERM "$MOCK_PID" 2>/dev/null || true
+    wait "$MOCK_PID" 2>/dev/null || true
+    MOCK_PID=""
 }
 
 RADARR_PID=""
 start_radarr() {
     local data="$1"
     log "starting Radarr on port $RADARR_PORT, data dir $data"
+    # The fixture's config names the default port; RADARR_PORT moves the
+    # copy, for a run beside an Unarr that serves the same fixture.
+    sed -i "s|<Port>[0-9]*</Port>|<Port>$RADARR_PORT</Port>|" "$data/config.xml"
     # Without the environment's proxy variables: .NET honours them, and the
-    # recording must not reach the outside world.
+    # recording must reach nothing but the mock.
     env -u HTTPS_PROXY -u https_proxy -u HTTP_PROXY -u http_proxy -u ALL_PROXY -u all_proxy \
         "$CACHE/Radarr/Radarr" -nobrowser -data="$data" >"$data/radarr.stdout.log" 2>&1 &
     RADARR_PID=$!
@@ -106,7 +162,7 @@ stop_radarr() {
     wait "$RADARR_PID" 2>/dev/null || true
     RADARR_PID=""
 }
-trap 'stop_radarr' EXIT
+trap 'stop_radarr; stop_mock' EXIT
 
 # Start Radarr on a throwaway copy of the fixture, so recording never mutates it.
 start_on_fixture_copy() {
@@ -126,7 +182,9 @@ start_on_fixture_copy() {
 }
 
 cmd_golden() {
+    [ "$HAVE_ICU" = 1 ] || die "libicu is needed to record: without it Radarr sorts and names things differently"
     prepare_dirs
+    start_mock
     start_on_fixture_copy
     # GOLDEN_REQUESTS and GOLDEN_OUT record another request list somewhere
     # else: a probe of the original, or new requests tried on their own
@@ -134,10 +192,11 @@ cmd_golden() {
     local requests="${GOLDEN_REQUESTS:-$GOLDEN_DIR/requests.txt}" out="${GOLDEN_OUT:-$GOLDEN_DIR}"
     mkdir -p "$out"
     python3 -I "$REPO/scripts/record-golden.py" \
-        --base-url "http://127.0.0.1:$RADARR_PORT" --api-key "$API_KEY" \
+        --base-url "http://127.0.0.1:$RADARR_PORT" --api-key "$API_KEY" --mock-url "http://127.0.0.1:$MOCK_PORT" \
         --requests "$requests" --out "$out" --login unarr:fixture
     [ "$out" = "$GOLDEN_DIR" ] && record_schemas
     stop_radarr
+    stop_mock
     log "golden files written to $out"
 }
 
@@ -173,6 +232,7 @@ cmd_ui() {
 
 cmd_shell() {
     prepare_dirs
+    start_mock
     start_on_fixture_copy
     log "Radarr running at http://127.0.0.1:$RADARR_PORT with API key $API_KEY; Ctrl-C to stop"
     wait "$RADARR_PID"

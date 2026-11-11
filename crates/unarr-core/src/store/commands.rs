@@ -1,7 +1,7 @@
 //! The `commands` table.
 
 use chrono::{DateTime, Duration, Utc};
-use rusqlite::{params, Connection, Row};
+use rusqlite::{params, Connection, OptionalExtension, Row};
 
 use super::{parse_ts, parse_ts_required, ts};
 use crate::commands::{
@@ -10,7 +10,14 @@ use crate::commands::{
 
 pub fn next_id(conn: &Connection) -> anyhow::Result<i64> {
     let max: Option<i64> = conn.query_row("SELECT max(id) FROM commands", [], |r| r.get(0))?;
-    Ok(max.unwrap_or(0) + 1)
+    // An imported database continues the original's numbering, which its
+    // emptied table no longer shows.
+    let seeded: Option<i64> = conn
+        .query_row("SELECT value FROM sequences WHERE name = 'commands'", [], |r| {
+            r.get(0)
+        })
+        .optional()?;
+    Ok(max.unwrap_or(0).max(seeded.unwrap_or(0)) + 1)
 }
 
 pub fn insert(conn: &Connection, c: &CommandModel) -> anyhow::Result<()> {
@@ -79,6 +86,7 @@ fn from_row(row: &Row) -> anyhow::Result<CommandModel> {
         last_start_time: body_json["lastStartTime"]
             .as_str()
             .and_then(crate::time::parse_utc),
+        type_exclusive: body_json["isTypeExclusive"].as_bool(),
         body,
         priority: CommandPriority::from_i64(row.get(3)?),
         status: CommandStatus::from_i64(row.get(4)?),

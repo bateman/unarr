@@ -1,0 +1,53 @@
+{
+  "body": {
+    "age": 0,
+    "ageHours": 0,
+    "ageMinutes": 0,
+    "approved": false,
+    "customFormatScore": 0,
+    "downloadAllowed": false,
+    "downloadClientId": 4,
+    "guid": "http://127.0.0.1:18989/movies/newznab/details/a21dcc90a30f28c9f1321274f0a62f4c",
+    "imdbId": 0,
+    "indexerId": 20,
+    "languages": [
+      {
+        "id": 1,
+        "name": "English"
+      }
+    ],
+    "movieId": 10,
+    "movieRequested": false,
+    "protocol": "unknown",
+    "publishDate": "0001-01-01T00:00:00Z",
+    "quality": {
+      "quality": {
+        "id": 3,
+        "modifier": "none",
+        "name": "WEBDL-1080p",
+        "resolution": 1080,
+        "source": "webdl"
+      },
+      "revision": {
+        "isRepack": false,
+        "real": 0,
+        "version": 1
+      }
+    },
+    "qualityWeight": 0,
+    "rejected": false,
+    "releaseWeight": 0,
+    "sceneSource": false,
+    "shouldOverride": true,
+    "size": 0,
+    "temporarilyRejected": false,
+    "tmdbId": 0
+  },
+  "recordedAt": "2026-11-11T19:40:00Z",
+  "request": {
+    "body": "bodies/release-grab-override.json",
+    "method": "POST",
+    "path": "/api/v3/release"
+  },
+  "status": 200
+}

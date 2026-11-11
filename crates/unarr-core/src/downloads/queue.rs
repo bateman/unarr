@@ -59,7 +59,7 @@ impl QueueStatus {
         .find(|q| q.as_str().eq_ignore_ascii_case(s))
     }
 
-    fn from_item(status: DownloadItemStatus) -> QueueStatus {
+    pub(crate) fn from_item(status: DownloadItemStatus) -> QueueStatus {
         match status {
             DownloadItemStatus::Queued => QueueStatus::Queued,
             DownloadItemStatus::Paused => QueueStatus::Paused,

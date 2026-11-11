@@ -1,0 +1,21 @@
+{
+  "body": {
+    "bypassIfAboveCustomFormatScore": false,
+    "bypassIfHighestQuality": true,
+    "enableTorrent": true,
+    "enableUsenet": true,
+    "id": 1,
+    "minimumCustomFormatScore": 0,
+    "order": 2147483647,
+    "preferredProtocol": "usenet",
+    "tags": [],
+    "torrentDelay": 525600,
+    "usenetDelay": 525600
+  },
+  "recordedAt": "2026-11-11T19:39:57Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/delayprofile/1"
+  },
+  "status": 200
+}

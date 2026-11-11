@@ -1,0 +1,44 @@
+{
+ "source": "radarr/src/NzbDrone.Core.Test/DecisionEngineTests/AcceptableSizeSpecificationFixture.cs",
+ "methods": {
+  "single_episode": {
+   "params": [
+    "runtime",
+    "sizeInMegaBytes",
+    "expectedResult"
+   ],
+   "cases": [
+    [
+     30,
+     50,
+     false
+    ],
+    [
+     30,
+     250,
+     true
+    ],
+    [
+     30,
+     500,
+     false
+    ],
+    [
+     60,
+     100,
+     false
+    ],
+    [
+     60,
+     500,
+     true
+    ],
+    [
+     60,
+     1000,
+     false
+    ]
+   ]
+  }
+ }
+}

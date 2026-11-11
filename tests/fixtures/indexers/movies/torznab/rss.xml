@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:torznab="http://torznab.com/schemas/2015/feed">
+  <channel>
+    <atom:link href="http://127.0.0.1:18989/movies/torznab/api" rel="self" type="application/rss+xml"/>
+    <title>Fixture Torznab (movies)</title>
+    <description>Unarr test indexer</description>
+    <link>http://127.0.0.1:18989/movies/torznab/</link>
+    <language>en-gb</language>
+    <item>
+      <title>The.Holdovers.2023.iTA.ENG.1080p.BluRay.x264-MIRCrew</title>
+      <guid>http://127.0.0.1:18989/movies/torznab/details/d94f74e9588477404bd8d34ffc605870</guid>
+      <link>http://127.0.0.1:18989/movies/torznab/download/d94f74e9588477404bd8d34ffc605870.torrent</link>
+      <comments>http://127.0.0.1:18989/movies/torznab/details/d94f74e9588477404bd8d34ffc605870#comments</comments>
+      <pubDate>Mon, 09 Nov 2026 21:30:00 +0000</pubDate>
+      <size>7945689497</size>
+      <description>The.Holdovers.2023.iTA.ENG.1080p.BluRay.x264-MIRCrew</description>
+      <category>2000</category>
+      <category>2040</category>
+      <enclosure url="http://127.0.0.1:18989/movies/torznab/download/d94f74e9588477404bd8d34ffc605870.torrent" length="7945689497" type="application/x-bittorrent"/>
+      <torznab:attr name="category" value="2000"/>
+      <torznab:attr name="category" value="2040"/>
+      <torznab:attr name="size" value="7945689497"/>
+      <torznab:attr name="seeders" value="88"/>
+      <torznab:attr name="peers" value="97"/>
+      <torznab:attr name="infohash" value="7e59b884110362736e39ead456edcbdac5ef0fe6"/>
+      <torznab:attr name="imdb" value="14849194"/>
+      <torznab:attr name="downloadvolumefactor" value="1"/>
+      <torznab:attr name="uploadvolumefactor" value="1"/>
+    </item>
+    <item>
+      <title>Last.Night.in.Soho.2021.iTA.ENG.1080p.BluRay.x264-MIRCrew</title>
+      <guid>http://127.0.0.1:18989/movies/torznab/details/c8949b89db6f20a1e049aa8170a7a05c</guid>
+      <link>http://127.0.0.1:18989/movies/torznab/download/c8949b89db6f20a1e049aa8170a7a05c.torrent</link>
+      <comments>http://127.0.0.1:18989/movies/torznab/details/c8949b89db6f20a1e049aa8170a7a05c#comments</comments>
+      <pubDate>Mon, 09 Nov 2026 19:05:00 +0000</pubDate>
+      <size>6979321856</size>
+      <description>Last.Night.in.Soho.2021.iTA.ENG.1080p.BluRay.x264-MIRCrew</description>
+      <category>2000</category>
+      <category>2040</category>
+      <enclosure url="http://127.0.0.1:18989/movies/torznab/download/c8949b89db6f20a1e049aa8170a7a05c.torrent" length="6979321856" type="application/x-bittorrent"/>
+      <torznab:attr name="category" value="2000"/>
+      <torznab:attr name="category" value="2040"/>
+      <torznab:attr name="size" value="6979321856"/>
+      <torznab:attr name="seeders" value="35"/>
+      <torznab:attr name="peers" value="36"/>
+      <torznab:attr name="infohash" value="d0c1309e36cdb92c5d7b4abfd794f9bdff969920"/>
+      <torznab:attr name="imdb" value="9639470"/>
+      <torznab:attr name="downloadvolumefactor" value="0"/>
+      <torznab:attr name="uploadvolumefactor" value="1"/>
+    </item>
+    <item>
+      <title>Lamb.2021.iTA.ISL.1080p.WEB-DL.DD5.1.H264-MeM</title>
+      <guid>http://127.0.0.1:18989/movies/torznab/details/529fd365c22707b562df3f8ad9a04a58</guid>
+      <link>http://127.0.0.1:18989/movies/torznab/download/529fd365c22707b562df3f8ad9a04a58.torrent</link>
+      <comments>http://127.0.0.1:18989/movies/torznab/details/529fd365c22707b562df3f8ad9a04a58#comments</comments>
+      <pubDate>Mon, 09 Nov 2026 15:15:00 +0000</pubDate>
+      <size>4939212390</size>
+      <description>Lamb.2021.iTA.ISL.1080p.WEB-DL.DD5.1.H264-MeM</description>
+      <category>2000</category>
+      <category>2040</category>
+      <enclosure url="http://127.0.0.1:18989/movies/torznab/download/529fd365c22707b562df3f8ad9a04a58.torrent" length="4939212390" type="application/x-bittorrent"/>
+      <torznab:attr name="category" value="2000"/>
+      <torznab:attr name="category" value="2040"/>
+      <torznab:attr name="size" value="4939212390"/>
+      <torznab:attr name="seeders" value="0"/>
+      <torznab:attr name="peers" value="2"/>
+      <torznab:attr name="infohash" value="7d29822e2668186ba54d7f3d7073d09493addfe1"/>
+      <torznab:attr name="imdbid" value="tt9812474"/>
+      <torznab:attr name="downloadvolumefactor" value="1"/>
+      <torznab:attr name="uploadvolumefactor" value="1"/>
+    </item>
+    <item>
+      <title>Another.Unknown.Movie.2025.iTA.1080p.WEBRip.x264-NoGRP</title>
+      <guid>http://127.0.0.1:18989/movies/torznab/details/cb8be0ee70dc347e643fcbc2153b0cf7</guid>
+      <link>http://127.0.0.1:18989/movies/torznab/download/cb8be0ee70dc347e643fcbc2153b0cf7.torrent</link>
+      <comments>http://127.0.0.1:18989/movies/torznab/details/cb8be0ee70dc347e643fcbc2153b0cf7#comments</comments>
+      <pubDate>Sun, 08 Nov 2026 20:00:00 +0000</pubDate>
+      <size>2362232012</size>
+      <description>Another.Unknown.Movie.2025.iTA.1080p.WEBRip.x264-NoGRP</description>
+      <category>2000</category>
+      <category>2040</category>
+      <enclosure url="http://127.0.0.1:18989/movies/torznab/download/cb8be0ee70dc347e643fcbc2153b0cf7.torrent" length="2362232012" type="application/x-bittorrent"/>
+      <torznab:attr name="category" value="2000"/>
+      <torznab:attr name="category" value="2040"/>
+      <torznab:attr name="size" value="2362232012"/>
+      <torznab:attr name="seeders" value="12"/>
+      <torznab:attr name="peers" value="14"/>
+      <torznab:attr name="infohash" value="a91465ae7fa3d62fee6503f23ad74cf48d6819c7"/>
+      <torznab:attr name="downloadvolumefactor" value="1"/>
+      <torznab:attr name="uploadvolumefactor" value="1"/>
+    </item>
+    <item>
+      <title>Nightmare.Alley.2021.iTA.ENG.1080p.WEB-DL.DDP5.1.H.264-MeM</title>
+      <guid>http://127.0.0.1:18989/movies/torznab/details/bc295ecb0fb56b9e5df74be19469cef4</guid>
+      <link>http://127.0.0.1:18989/movies/torznab/download/bc295ecb0fb56b9e5df74be19469cef4.torrent</link>
+      <comments>http://127.0.0.1:18989/movies/torznab/details/bc295ecb0fb56b9e5df74be19469cef4#comments</comments>
+      <pubDate>Sun, 08 Nov 2026 12:34:00 +0000</pubDate>
+      <size>4509715660</size>
+      <description>Nightmare.Alley.2021.iTA.ENG.1080p.WEB-DL.DDP5.1.H.264-MeM</description>
+      <category>2000</category>
+      <category>2040</category>
+      <enclosure url="http://127.0.0.1:18989/movies/torznab/download/bc295ecb0fb56b9e5df74be19469cef4.torrent" length="4509715660" type="application/x-bittorrent"/>
+      <torznab:attr name="category" value="2000"/>
+      <torznab:attr name="category" value="2040"/>
+      <torznab:attr name="size" value="4509715660"/>
+      <torznab:attr name="seeders" value="54"/>
+      <torznab:attr name="peers" value="60"/>
+      <torznab:attr name="infohash" value="2076338e94f6fc307b43e478146e941fbd6ef7ba"/>
+      <torznab:attr name="imdb" value="7740496"/>
+      <torznab:attr name="downloadvolumefactor" value="1"/>
+      <torznab:attr name="uploadvolumefactor" value="1"/>
+    </item>
+  </channel>
+</rss>

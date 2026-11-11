@@ -150,8 +150,8 @@ pub fn diff(path: &str, want: &Value, got: &Value, out: &mut Vec<String>) {
 
 pub fn short(v: &Value) -> String {
     let s = v.to_string();
-    if s.len() > 80 {
-        format!("{}...", &s[..80])
+    if s.chars().count() > 80 {
+        format!("{}...", s.chars().take(80).collect::<String>())
     } else {
         s
     }

@@ -13,11 +13,12 @@ use super::settings::{
     QBITTORRENT_STATE_FORCE_START, QBITTORRENT_STATE_START, QBITTORRENT_STATE_STOP,
 };
 use super::version::Version;
+use super::GrabRequest;
 use super::{
-    build_base_url, is_localhost, remote_path, seed_limits, transport_message, Client, ClientError,
-    ClientResult, DownloadClientInfo, DownloadClientItem, DownloadItemStatus, APP_NAME,
+    build_base_url, is_localhost, remote_path, transport_message, Client, ClientError, ClientResult,
+    DownloadClientInfo, DownloadClientItem, DownloadItemStatus,
 };
-use crate::decision::{RemoteEpisode, SeedConfiguration};
+use crate::decision::SeedConfiguration;
 use crate::validation::ValidationFailure;
 
 const NAME: &str = "qBittorrent";
@@ -372,8 +373,8 @@ impl<'a> QBittorrent<'a> {
 
     pub async fn torrents(&self) -> ClientResult<Vec<Torrent>> {
         let mut query = Vec::new();
-        if !self.settings.tv_category.trim().is_empty() {
-            query.push(("category", self.settings.tv_category.clone()));
+        if !self.settings.category.trim().is_empty() {
+            query.push(("category", self.settings.category.clone()));
         }
         Self::parse(&self.get("/api/v2/torrents/info", &query).await?, "torrents")
     }
@@ -411,8 +412,8 @@ impl<'a> QBittorrent<'a> {
     ) -> ClientResult<Vec<(String, String)>> {
         let s = self.settings;
         let mut fields = Vec::new();
-        if !s.tv_category.trim().is_empty() {
-            fields.push(("category".to_string(), s.tv_category.clone()));
+        if !s.category.trim().is_empty() {
+            fields.push(("category".to_string(), s.category.clone()));
         }
         if s.initial_state == QBITTORRENT_STATE_START || s.initial_state == QBITTORRENT_STATE_STOP {
             // 5.0 renamed `paused` to `stopped`; ForceStart is a separate call.
@@ -575,16 +576,14 @@ impl<'a> QBittorrent<'a> {
 
     async fn after_add(
         &self,
-        remote: &RemoteEpisode,
+        request: &GrabRequest<'_>,
         hash: &str,
         limits_set_on_add: bool,
     ) -> ClientResult<()> {
         let hash = hash.to_ascii_lowercase();
-        let seed = seed_limits(remote);
+        let seed = request.seed_limits();
         let set_share_limits = seed.is_some() && !limits_set_on_add;
-        let move_to_top = self
-            .settings
-            .move_to_top(remote.is_recent_episode(self.client.context.now));
+        let move_to_top = self.settings.move_to_top(request.recent);
         let force_start = self.settings.initial_state == QBITTORRENT_STATE_FORCE_START;
         if !(set_share_limits || move_to_top || force_start) {
             return Ok(());
@@ -610,32 +609,37 @@ impl<'a> QBittorrent<'a> {
         Ok(())
     }
 
-    pub async fn add_magnet(&self, remote: &RemoteEpisode, hash: &str, magnet: &str) -> ClientResult<String> {
+    pub async fn add_magnet(
+        &self,
+        request: &GrabRequest<'_>,
+        hash: &str,
+        magnet: &str,
+    ) -> ClientResult<String> {
         if !self.config().await?.dht_enabled && !magnet.contains("&tr=") {
             return Err(ClientError::NotSupported(
                 "Magnet Links without trackers not supported if DHT is disabled".into(),
             ));
         }
-        let seed = seed_limits(remote);
+        let seed = request.seed_limits();
         let on_add = seed.is_some() && self.api_version().await? >= Version::with_build(2, 8, 1);
         self.add_from_url(magnet, if on_add { seed } else { None })
             .await?;
-        self.after_add(remote, hash, on_add).await?;
+        self.after_add(request, hash, on_add).await?;
         Ok(hash.to_string())
     }
 
     pub async fn add_torrent(
         &self,
-        remote: &RemoteEpisode,
+        request: &GrabRequest<'_>,
         hash: &str,
         filename: &str,
         torrent: Vec<u8>,
     ) -> ClientResult<String> {
-        let seed = seed_limits(remote);
+        let seed = request.seed_limits();
         let on_add = seed.is_some() && self.api_version().await? >= Version::with_build(2, 8, 1);
         self.add_from_file(filename, torrent, if on_add { seed } else { None })
             .await?;
-        self.after_add(remote, hash, on_add).await?;
+        self.after_add(request, hash, on_add).await?;
         Ok(hash.to_string())
     }
 
@@ -643,7 +647,7 @@ impl<'a> QBittorrent<'a> {
         let version = self.api_version().await?;
         let config = self.config().await?;
         let torrents = self.torrents().await?;
-        let has_post_import = !self.settings.tv_imported_category.trim().is_empty();
+        let has_post_import = !self.settings.imported_category.trim().is_empty();
         let mut out = Vec::new();
         for t in torrents {
             let mut item = DownloadClientItem::new(
@@ -776,8 +780,8 @@ impl<'a> QBittorrent<'a> {
     }
 
     pub async fn mark_imported(&self, item: &DownloadClientItem) -> ClientResult<()> {
-        let imported = self.settings.tv_imported_category.trim();
-        if !imported.is_empty() && imported != self.settings.tv_category {
+        let imported = self.settings.imported_category.trim();
+        if !imported.is_empty() && imported != self.settings.category {
             if let Err(e) = self
                 .set_label(&item.download_id.to_ascii_lowercase(), imported)
                 .await
@@ -792,7 +796,7 @@ impl<'a> QBittorrent<'a> {
         let version = self.api_version().await?;
         let config = self.config().await?;
         let mut dest_dir = config.save_path.clone();
-        let tv = self.settings.tv_category.trim();
+        let tv = self.settings.category.trim();
         if !tv.is_empty() && version >= Version::new(2, 0) {
             if let Some(label) = self.labels().await?.get(tv) {
                 if !label.save_path.trim().is_empty() {
@@ -828,6 +832,7 @@ impl<'a> QBittorrent<'a> {
     }
 
     async fn test_connection(&self) -> Option<ValidationFailure> {
+        let app = self.settings.app.name;
         let outcome: ClientResult<Option<ValidationFailure>> = async {
             let version = self.api_version().await?;
             if version < Version::new(1, 5) {
@@ -838,17 +843,17 @@ impl<'a> QBittorrent<'a> {
                 )));
             } else if version < Version::new(1, 6) {
                 // API version 6 introduced labels.
-                if !self.settings.tv_category.trim().is_empty() {
+                if !self.settings.category.trim().is_empty() {
                     return Ok(Some(
                         ValidationFailure::error("Category", "Category is not supported").with_detail(
                             "Categories are not supported until qBittorrent version 3.3.0. Please upgrade or try again with an empty Category.",
                         ),
                     ));
                 }
-            } else if self.settings.tv_category.trim().is_empty() {
+            } else if self.settings.category.trim().is_empty() {
                 return Ok(Some(
-                    ValidationFailure::warning("TvCategory", "Category is recommended").with_detail(&format!(
-                        "{APP_NAME} will not attempt to import completed downloads without a category."
+                    ValidationFailure::warning(self.settings.app.category_property, "Category is recommended").with_detail(&format!(
+                        "{app} will not attempt to import completed downloads without a category."
                     )),
                 ));
             }
@@ -860,7 +865,7 @@ impl<'a> QBittorrent<'a> {
                         &format!("{NAME} is configured to remove torrents when they reach their Share Ratio Limit"),
                     )
                     .with_detail(&format!(
-                        "{APP_NAME} will be unable to perform Completed Download Handling as configured. You can fix this in {NAME} ('Tools -> Options...' in the menu) by changing 'Options -> BitTorrent -> Share Ratio Limiting' from 'Remove them' to 'Pause them'"
+                        "{app} will be unable to perform Completed Download Handling as configured. You can fix this in {NAME} ('Tools -> Options...' in the menu) by changing 'Options -> BitTorrent -> Share Ratio Limiting' from 'Remove them' to 'Pause them'"
                     )),
                 ));
             }
@@ -874,7 +879,7 @@ impl<'a> QBittorrent<'a> {
                 let property = if self.uses_api_key() { "ApiKey" } else { "Username" };
                 Some(
                     ValidationFailure::error(property, "Authentication Failure").with_detail(&format!(
-                        "Please verify your credentials. Also verify if the host running {APP_NAME} isn't blocked from accessing {NAME} by WhiteList limitations in the {NAME} configuration."
+                        "Please verify your credentials. Also verify if the host running {app} isn't blocked from accessing {NAME} by WhiteList limitations in the {NAME} configuration."
                     )),
                 )
             }
@@ -889,8 +894,9 @@ impl<'a> QBittorrent<'a> {
     }
 
     async fn test_category(&self) -> ClientResult<Option<ValidationFailure>> {
-        let tv = self.settings.tv_category.trim();
-        let imported = self.settings.tv_imported_category.trim();
+        let app = self.settings.app.name;
+        let tv = self.settings.category.trim();
+        let imported = self.settings.imported_category.trim();
         if tv.is_empty() && imported.is_empty() {
             return Ok(None);
         }
@@ -898,7 +904,10 @@ impl<'a> QBittorrent<'a> {
             return Ok(None);
         }
         let mut labels = self.labels().await?;
-        for (property, label) in [("TvCategory", tv), ("TvImportedCategory", imported)] {
+        for (property, label) in [
+            (self.settings.app.category_property, tv),
+            (self.settings.app.imported_category_property, imported),
+        ] {
             if label.is_empty() || labels.contains_key(label) {
                 continue;
             }
@@ -907,7 +916,7 @@ impl<'a> QBittorrent<'a> {
             if !labels.contains_key(label) {
                 return Ok(Some(
                     ValidationFailure::error(property, "Configuration of category failed")
-                        .with_detail(&format!("{APP_NAME} was unable to add the label to {NAME}.")),
+                        .with_detail(&format!("{app} was unable to add the label to {NAME}.")),
                 ));
             }
         }

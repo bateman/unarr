@@ -1,0 +1,25 @@
+{
+  "body": [
+    {
+      "attemptedValue": "tv_1",
+      "errorMessage": "Allowed characters a-z and -",
+      "isWarning": false,
+      "propertyName": "MovieCategory",
+      "severity": "error"
+    },
+    {
+      "attemptedValue": "tv_1",
+      "errorMessage": "Cannot use Category and Directory",
+      "isWarning": false,
+      "propertyName": "MovieCategory",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-11T19:38:41Z",
+  "request": {
+    "body": "bodies/downloadclient-invalid-transmission-settings.json",
+    "method": "POST",
+    "path": "/api/v3/downloadclient"
+  },
+  "status": 400
+}

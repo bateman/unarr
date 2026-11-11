@@ -1,0 +1,23 @@
+{
+  "body": [
+    {
+      "attemptedValue": "Mock Newznab (renamed)",
+      "errorCode": "PredicateValidator",
+      "errorMessage": "Should be unique",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Name",
+        "propertyValue": "Mock Newznab (renamed)"
+      },
+      "propertyName": "Name",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-11T19:40:16Z",
+  "request": {
+    "body": "bodies/indexer-update-999.json",
+    "method": "PUT",
+    "path": "/api/v3/indexer/999"
+  },
+  "status": 400
+}

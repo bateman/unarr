@@ -1,8 +1,9 @@
 #!/usr/bin/env python3
-"""Replay the requests Prowlarr makes to a Sonarr instance, against Unarr.
+"""Replay the requests Prowlarr makes to a Sonarr or Radarr instance, against Unarr.
 
-Prowlarr (github.com/Prowlarr/Prowlarr, src/NzbDrone.Core/Applications/Sonarr)
-syncs its indexers into Sonarr through `SonarrV3Proxy`: it reads
+Prowlarr (github.com/Prowlarr/Prowlarr, src/NzbDrone.Core/Applications/Sonarr
+and .../Radarr) syncs its indexers into the application through
+`SonarrV3Proxy` or `RadarrV3Proxy`, which make the same calls: it reads
 `system/status`, the indexer schema and the indexer list, tests each indexer
 it built from the Newznab or Torznab schema (`POST indexer/test`, reading the
 `X-Application-Version` header), adds it (`POST indexer`, retried with
@@ -17,6 +18,14 @@ The indexer it registers points at the mock indexer of `scripts/mock-servarr.py`
 the Unarr under test; `--mock` starts one here on 127.0.0.1:18989.
 
     scripts/prowlarr-replay.py --base-url http://127.0.0.1:8989 --api-key KEY --mock
+    scripts/prowlarr-replay.py --app radarr --base-url http://127.0.0.1:7878 --api-key KEY --mock
+
+With `--app radarr` the indexers are the mock's movie ones (under /movies,
+categories 2000 on), no anime categories are sent, and one more case is
+replayed: an indexer whose feed is empty, which Radarr refuses with and
+without `forceSave`. That is what the maintainer's Radarr answered to
+Prowlarr 2.7.0.5723 twelve times in its trace log (POST indexer, 400, then
+POST indexer?forceSave=true, 400), so Prowlarr keeps such an indexer out.
 """
 
 from __future__ import annotations
@@ -64,8 +73,29 @@ def decode(raw: bytes):
         return raw.decode(errors="replace")
 
 
+APPS = {
+    "sonarr": {
+        "name": "Sonarr",
+        "prefix": "",
+        "categories": [5030, 5040, 5045],
+        "extra": {"animeCategories": [5070]},
+        "empty": None,
+        "test_answer": {},
+    },
+    "radarr": {
+        "name": "Radarr",
+        "prefix": "/movies",
+        "categories": [2000, 2010, 2020, 2030, 2040, 2045, 2050, 2060],
+        "extra": {},
+        "empty": "/movies/empty",
+        "test_answer": "{}",
+    },
+}
+
+
 class Replay:
-    def __init__(self, api: Api, indexer_url: str, indexer_key: str, keep: bool):
+    def __init__(self, api: Api, indexer_url: str, indexer_key: str, keep: bool, app: str = "sonarr"):
+        self.app = APPS[app]
         self.api = api
         self.indexer_url = indexer_url.rstrip("/")
         self.indexer_key = indexer_key
@@ -88,7 +118,7 @@ class Replay:
             version >= MIN_VERSION,
             f"X-Application-Version {header(headers, 'X-Application-Version')!r} is at least 3.0.5",
         )
-        self.check(body.get("appName") == "Sonarr", "system/status appName is Sonarr")
+        self.check(body.get("appName") == self.app["name"], f"system/status appName is {self.app['name']}")
         code, _, body = self.api.call("GET", "system/status", key="wrong")
         self.check(code == 401, "a wrong X-Api-Key is refused with 401 (Prowlarr: 'API Key is invalid')")
 
@@ -101,19 +131,19 @@ class Replay:
             self.check(s is not None and s.get("configContract") == contract, f"schema has {impl} with {contract}")
             names = {f.get("name") for f in (s or {}).get("fields", [])}
             self.check(
-                {"baseUrl", "apiPath", "apiKey", "categories", "animeCategories"} <= names,
+                {"baseUrl", "apiPath", "apiKey", "categories", *self.app["extra"]} <= names,
                 f"{impl} schema lists the fields Prowlarr sets",
             )
         return by_impl
 
     def build(self, schema: dict, name: str, base_url: str, torznab: bool) -> dict:
-        """`Sonarr.BuildSonarrIndexer`: the schema's fields with Prowlarr's values."""
+        """`BuildSonarrIndexer` / `BuildRadarrIndexer`: the schema's fields with Prowlarr's values."""
         values = {
             "baseUrl": base_url,
             "apiPath": "/api",
             "apiKey": self.indexer_key,
-            "categories": [5030, 5040, 5045],
-            "animeCategories": [5070],
+            "categories": self.app["categories"],
+            **self.app["extra"],
         }
         if torznab:
             values.update({"minimumSeeders": 2, "seedCriteria.seedRatio": 1.5, "seedCriteria.seedTime": 120})
@@ -140,7 +170,15 @@ class Replay:
     def test(self, body: dict, expect_ok: bool, what: str):
         code, headers, answer = self.api.call("POST", "indexer/test", body)
         if expect_ok:
-            self.check(code == 200 and answer == {}, f"POST indexer/test {what} answers 200 {{}}")
+            # Radarr answers the string `{}`, which a client asking for JSON
+            # (as this replay and Prowlarr do) receives as `"{}"`; recorded
+            # from the real Radarr 6.4.4. Prowlarr reads the status only.
+            passed = self.app["test_answer"]
+            self.check(
+                code == 200 and answer == passed,
+                f"POST indexer/test {what} answers 200 {json.dumps(passed)}"
+                + ("" if code == 200 and answer == passed else f" (got {code} {short(answer)})"),
+            )
             self.check(header(headers, "X-Application-Version") is not None, "the test answer carries X-Application-Version")
         else:
             self.check(code == 400 and isinstance(answer, list) and answer, f"POST indexer/test {what} answers 400 with failures")
@@ -164,7 +202,7 @@ class Replay:
         return answer["id"]
 
     def add_unreachable(self, body: dict):
-        """Sonarr refuses an indexer it cannot reach even with `forceSave=true`:
+        """The originals refuse an indexer they cannot reach even with `forceSave=true`:
         the flag only drops warnings, and a connection failure is an error."""
         for path in ("indexer", "indexer?forceSave=true"):
             code, _, answer = self.api.call("POST", path, body)
@@ -173,6 +211,17 @@ class Replay:
                 and isinstance(answer, list)
                 and any("Unable to connect to indexer" in (f.get("errorMessage") or "") for f in answer),
                 f"POST {path} for an unreachable indexer answers 400 'Unable to connect to indexer'",
+            )
+
+    def add_empty(self, body: dict):
+        """Radarr refuses an indexer whose test feed has no release, forced or not."""
+        for path in ("indexer", "indexer?forceSave=true"):
+            code, _, answer = self.api.call("POST", path, body)
+            self.check(
+                code == 400
+                and isinstance(answer, list)
+                and any("no results in the configured categories" in (f.get("errorMessage") or "") for f in answer),
+                f"POST {path} for an indexer without releases answers 400 'no results in the configured categories'",
             )
 
     def get(self, id: int) -> dict | None:
@@ -202,8 +251,9 @@ class Replay:
         self.check(code == 200 and isinstance(before, list), "GET indexer answers a list")
         before_ids = {i.get("id") for i in before or []}
 
-        newznab = self.build(schemas["Newznab"], "Mock Newznab (Prowlarr replay)", f"{self.indexer_url}/newznab", False)
-        torznab = self.build(schemas["Torznab"], "Mock Torznab (Prowlarr replay)", f"{self.indexer_url}/torznab", True)
+        indexers = self.indexer_url + self.app["prefix"]
+        newznab = self.build(schemas["Newznab"], "Mock Newznab (Prowlarr replay)", f"{indexers}/newznab", False)
+        torznab = self.build(schemas["Torznab"], "Mock Torznab (Prowlarr replay)", f"{indexers}/torznab", True)
         self.test(newznab, True, "Newznab")
         self.test(torznab, True, "Torznab")
         wrong_key = dict(newznab, name="Mock Newznab (wrong key)")
@@ -214,6 +264,9 @@ class Replay:
         torznab_id = self.add(torznab, "Torznab")
         unreachable = self.build(schemas["Newznab"], "Mock Newznab (unreachable)", "http://127.0.0.1:18999/newznab", False)
         self.add_unreachable(unreachable)
+        if self.app["empty"]:
+            empty = self.build(schemas["Newznab"], "Mock Newznab (no releases)", self.indexer_url + self.app["empty"], False)
+            self.add_empty(empty)
         code, _, answer = self.api.call("POST", "indexer", newznab)
         self.check(
             code == 400 and isinstance(answer, list) and any("unique" in (f.get("errorMessage") or "").lower() for f in answer),
@@ -223,8 +276,8 @@ class Replay:
         if newznab_id is not None:
             got = self.get(newznab_id)
             fields = {f["name"]: f.get("value") for f in (got or {}).get("fields", [])}
-            self.check(fields.get("baseUrl") == f"{self.indexer_url}/newznab", "the stored baseUrl is what Prowlarr sent")
-            self.check(fields.get("categories") == [5030, 5040, 5045], "the stored categories are what Prowlarr sent")
+            self.check(fields.get("baseUrl") == f"{indexers}/newznab", "the stored baseUrl is what Prowlarr sent")
+            self.check(fields.get("categories") == self.app["categories"], "the stored categories are what Prowlarr sent")
             self.check(got is not None and got.get("priority") == 25, "the stored priority is what Prowlarr sent")
             if got is not None:
                 got["priority"] = 10
@@ -301,7 +354,8 @@ def start_mock(fixtures: Path, listen: str) -> subprocess.Popen:
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
-    ap.add_argument("--base-url", required=True, help="Unarr, e.g. http://127.0.0.1:8989")
+    ap.add_argument("--app", choices=sorted(APPS), default="sonarr", help="the application Prowlarr syncs into")
+    ap.add_argument("--base-url", required=True, help="Unarr, e.g. http://127.0.0.1:8989 (7878 for Radarr)")
     ap.add_argument("--api-key", required=True, help="Unarr's API key")
     ap.add_argument("--indexer-url", default="http://127.0.0.1:18989", help="the mock indexer as Unarr reaches it")
     ap.add_argument("--indexer-key", default=MOCK_API_KEY)
@@ -312,7 +366,7 @@ def main():
 
     mock = start_mock(Path(args.fixtures), "127.0.0.1:18989") if args.mock else None
     try:
-        replay = Replay(Api(args.base_url, args.api_key), args.indexer_url, args.indexer_key, args.keep)
+        replay = Replay(Api(args.base_url, args.api_key), args.indexer_url, args.indexer_key, args.keep, args.app)
         replay.run()
     finally:
         if mock is not None:
@@ -321,7 +375,7 @@ def main():
     if replay.problems:
         print(f"[prowlarr] {len(replay.problems)} problems")
         sys.exit(1)
-    print("[prowlarr] every request Prowlarr makes is answered as Sonarr answers it")
+    print(f"[prowlarr] every request Prowlarr makes is answered as {APPS[args.app]['name']} answers it")
 
 
 if __name__ == "__main__":

@@ -11,7 +11,8 @@ file holding ``{"$from": "<name>", "$set": {...}}`` is derived instead: the
 body the response recorded as ``<name>`` carried, its top-level keys
 replaced by those of ``$set`` (what a client does that reads a resource,
 changes it and sends it back whole, the UI's series editor for one). A path may
-carry ``{id:name}``: the ``id`` the response recorded as ``name`` returned,
+carry ``{id:name}`` (a body carries it quoted, ``"{id:name}"``, and gets the
+number): the ``id`` the response recorded as ``name`` returned,
 for resources the application numbers itself (commands). ``sleep N`` lines
 pause the recording for the application's background work.
 
@@ -41,6 +42,7 @@ import argparse
 import datetime
 import http.cookiejar
 import json
+import re
 import sys
 import time
 import urllib.error
@@ -119,6 +121,8 @@ def main():
         data = None
         if rest:
             data = derive_body((args.requests.parent / rest[0]).read_bytes(), args.out)
+            # `"{id:name}"` in a body is that id, as a number.
+            data = re.sub(rb'"\{id:([^}]+)\}"', lambda m: ids[m.group(1).decode()].encode(), data)
         path = substitute_ids(path, ids)
         target = args.mock_url.rstrip("/") if to_mock else base
         req = urllib.request.Request(target + urllib.parse.quote(path, safe="/?&=:%+,-._~"), data=data, method=method)

@@ -1,0 +1,367 @@
+{
+  "body": [
+    {
+      "added": "2026-03-07T09:12:06Z",
+      "alternateTitles": [
+        {
+          "id": 903,
+          "movieMetadataId": 115,
+          "sourceType": "tmdb",
+          "title": "Зелений лицар"
+        },
+        {
+          "id": 904,
+          "movieMetadataId": 115,
+          "sourceType": "tmdb",
+          "title": "Le Chevalier Vert"
+        },
+        {
+          "id": 905,
+          "movieMetadataId": 115,
+          "sourceType": "tmdb",
+          "title": "เดอะ กรีนไนท์ ศึกโค่นอัศวินอมตะ"
+        },
+        {
+          "id": 906,
+          "movieMetadataId": 115,
+          "sourceType": "tmdb",
+          "title": "อัศวินโต๊ะกลม"
+        },
+        {
+          "id": 907,
+          "movieMetadataId": 115,
+          "sourceType": "tmdb",
+          "title": "El caballero verde"
+        },
+        {
+          "id": 908,
+          "movieMetadataId": 115,
+          "sourceType": "tmdb",
+          "title": "A Lenda do Cavaleiro Verde"
+        },
+        {
+          "id": 909,
+          "movieMetadataId": 115,
+          "sourceType": "tmdb",
+          "title": "ザ・グリーン・ナイト"
+        },
+        {
+          "id": 1524,
+          "movieMetadataId": 115,
+          "sourceType": "tmdb",
+          "title": "La Leyenda del Caballero Verde"
+        }
+      ],
+      "certification": "R",
+      "cleanTitle": "thegreenknight",
+      "digitalRelease": "2021-07-29T00:00:00Z",
+      "folderName": "/movies/The Green Knight (2021)",
+      "genres": [
+        "Adventure",
+        "Drama",
+        "Fantasy"
+      ],
+      "hasFile": false,
+      "id": 115,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/if4hw3Ou5Sav9Em7WWHj66mnywp.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/kIQc0kkqIYTo65x5XjlKgqdDQ6a.jpg"
+        }
+      ],
+      "imdbId": "tt9243804",
+      "inCinemas": "2021-07-29T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "aftercreditsstinger",
+        "based on myths, legends or folklore",
+        "camelot",
+        "cautionary",
+        "decapitated head",
+        "earnest",
+        "excalibur",
+        "fox",
+        "gawain",
+        "intense",
+        "king arthur",
+        "knights of the round table",
+        "medieval knight",
+        "meditative",
+        "middle ages (476-1453)",
+        "myth",
+        "philosophical",
+        "quest",
+        "winter"
+      ],
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "The Green Knight",
+      "overview": "An epic fantasy adventure based on the timeless Arthurian legend, The Green Knight tells the story of Sir Gawain, King Arthur's reckless and headstrong nephew, who embarks on a daring quest to confront the eponymous Green Knight, a gigantic emerald-skinned stranger and tester of men.",
+      "path": "/movies/The Green Knight (2021)",
+      "physicalRelease": "2021-10-12T00:00:00Z",
+      "popularity": 5.0397,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 6.5,
+          "votes": 134996
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 85,
+          "votes": 0
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 88,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 6.575,
+          "votes": 2355
+        },
+        "trakt": {
+          "type": "user",
+          "value": 6.47402,
+          "votes": 6812
+        }
+      },
+      "releaseDate": "2021-07-29T00:00:00Z",
+      "runtime": 130,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 0,
+      "sortTitle": "green knight",
+      "statistics": {
+        "movieFileCount": 0,
+        "movieFileQualities": [],
+        "releaseGroups": [],
+        "sizeOnDisk": 0
+      },
+      "status": "released",
+      "studio": "A24",
+      "tags": [],
+      "title": "The Green Knight",
+      "titleSlug": "559907",
+      "tmdbId": 559907,
+      "website": "http://thegreenknight.movie",
+      "year": 2021,
+      "youTubeTrailerId": "sS6ksY8xWCY"
+    },
+    {
+      "added": "2026-03-07T09:12:06Z",
+      "alternateTitles": [
+        {
+          "id": 768,
+          "movieMetadataId": 99,
+          "sourceType": "tmdb",
+          "title": "סטילווטר"
+        },
+        {
+          "id": 769,
+          "movieMetadataId": 99,
+          "sourceType": "tmdb",
+          "title": "Cuestión de Sangre"
+        },
+        {
+          "id": 770,
+          "movieMetadataId": 99,
+          "sourceType": "tmdb",
+          "title": "スティルウォーター：2021"
+        },
+        {
+          "id": 771,
+          "movieMetadataId": 99,
+          "sourceType": "tmdb",
+          "title": "止水"
+        },
+        {
+          "id": 772,
+          "movieMetadataId": 99,
+          "sourceType": "tmdb",
+          "title": "靜水城"
+        }
+      ],
+      "certification": "R",
+      "cleanTitle": "stillwater",
+      "digitalRelease": "2021-08-19T00:00:00Z",
+      "folderName": "/movies/Stillwater (2021)",
+      "genres": [
+        "Drama",
+        "Crime",
+        "Thriller"
+      ],
+      "hasFile": true,
+      "id": 99,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/1lrPR7ah1KElPKnCsxmIRE1OlIh.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/6NqfrYDfOoWTxv9uLVPIsACHV3x.jpg"
+        }
+      ],
+      "imdbId": "tt10696896",
+      "inCinemas": "2021-07-29T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "father daughter relationship",
+        "fish out of water",
+        "marseille, france"
+      ],
+      "lastSearchTime": "2026-06-24T21:06:50Z",
+      "minimumAvailability": "released",
+      "monitored": false,
+      "movieFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 50,
+            "name": "DD+"
+          }
+        ],
+        "dateAdded": "2026-06-29T13:27:34Z",
+        "edition": "",
+        "id": 272,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 640000,
+          "audioChannels": 5.1,
+          "audioCodec": "EAC3",
+          "audioLanguages": "ita/ita/eng",
+          "audioStreamCount": 3,
+          "resolution": "1920x1040",
+          "runTime": "2:18:59",
+          "scanType": "Progressive",
+          "subtitles": "ita/ita/eng",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "x264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "movieId": 99,
+        "originalFilePath": "La.Ragazza.Di.Stillwater.2021.iTA-ENG.Bluray.1080p.x264-CYBER.mkv",
+        "path": "/movies/Stillwater (2021)/Stillwater (2021) {tmdb-616651} - [Bluray-1080p][EAC3 5.1][x264]-CYBER.mkv",
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "relativePath": "Stillwater (2021) {tmdb-616651} - [Bluray-1080p][EAC3 5.1][x264]-CYBER.mkv",
+        "releaseGroup": "CYBER",
+        "sceneName": "La.Ragazza.Di.Stillwater.2021.iTA-ENG.Bluray.1080p.x264-CYBER",
+        "size": 15920427416
+      },
+      "movieFileId": 272,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Stillwater",
+      "overview": "Bill Baker, an American oil-rig roughneck from Oklahoma, travels to Marseille to visit his estranged daughter, Allison, who is in prison for a murder she claims she did not commit. Confronted with language barriers, cultural differences, and a complicated legal system, Bill builds a new life for himself in France as he makes it his personal mission to exonerate his daughter.",
+      "path": "/movies/Stillwater (2021)",
+      "physicalRelease": "2021-12-02T00:00:00Z",
+      "popularity": 6.6778,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 6.6,
+          "votes": 65517
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 60,
+          "votes": 0
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 75,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 6.639,
+          "votes": 1507
+        },
+        "trakt": {
+          "type": "user",
+          "value": 6.70912,
+          "votes": 4122
+        }
+      },
+      "releaseDate": "2021-08-19T00:00:00Z",
+      "runtime": 139,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 15920427416,
+      "sortTitle": "stillwater",
+      "statistics": {
+        "movieFileCount": 1,
+        "movieFileQualities": [
+          {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          }
+        ],
+        "releaseGroups": [
+          "CYBER"
+        ],
+        "sizeOnDisk": 15920427416
+      },
+      "status": "released",
+      "studio": "Participant",
+      "tags": [
+        1
+      ],
+      "title": "Stillwater",
+      "titleSlug": "616651",
+      "tmdbId": 616651,
+      "website": "https://www.focusfeatures.com/stillwater",
+      "year": 2021,
+      "youTubeTrailerId": "9cq1lPPeMUY"
+    }
+  ],
+  "recordedAt": "2026-11-11T19:38:32Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/calendar?start=2021-07-01T00:00:00Z&end=2021-08-31T00:00:00Z&unmonitored=true"
+  },
+  "status": 200
+}

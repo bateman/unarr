@@ -1,0 +1,67 @@
+{
+  "body": [
+    {
+      "age": 3,
+      "ageHours": 72.64703748927778,
+      "ageMinutes": 4358.822249388333,
+      "approved": false,
+      "customFormatScore": 0,
+      "customFormats": [],
+      "downloadAllowed": true,
+      "downloadUrl": "http://127.0.0.1:18989/movies/newznab/download/push-lamb-2021.nzb",
+      "edition": "",
+      "guid": "PUSH-http://127.0.0.1:18989/movies/newznab/download/push-lamb-2021.nzb",
+      "imdbId": 0,
+      "indexer": "Mock Newznab (Prowlarr)",
+      "indexerFlags": [],
+      "indexerId": 20,
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        }
+      ],
+      "mappedMovieId": 61,
+      "movieRequested": false,
+      "movieTitles": [
+        "Lamb"
+      ],
+      "protocol": "usenet",
+      "publishDate": "2026-11-08T19:00:00Z",
+      "quality": {
+        "quality": {
+          "id": 7,
+          "modifier": "none",
+          "name": "Bluray-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityWeight": 1801,
+      "rejected": true,
+      "rejections": [
+        "Original Language (Icelandic) is wanted, but found Italian"
+      ],
+      "releaseGroup": "MIRCrew",
+      "releaseHash": "",
+      "releaseWeight": 0,
+      "sceneSource": false,
+      "size": 9126805504,
+      "temporarilyRejected": false,
+      "title": "Lamb.2021.iTA.ISL.1080p.BluRay.x264-MIRCrew",
+      "tmdbId": 0
+    }
+  ],
+  "recordedAt": "2026-11-11T19:38:49Z",
+  "request": {
+    "body": "bodies/release-push.json",
+    "method": "POST",
+    "path": "/api/v3/release/push"
+  },
+  "status": 200
+}

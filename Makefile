@@ -4,12 +4,13 @@ NAME  ?= unarr
 IMAGE ?= ghcr.io/bateman/unarr
 TAG   ?= dev
 
-.PHONY: help build run run-both test fmt lint check clean docker check-name golden golden-radarr sonarr radarr ui ui-sonarr ui-radarr ui-present bazarr bazarr-radarr prowlarr recyclarr anonymize scale-fixture
+.PHONY: help build run run-both test fmt lint check clean docker check-name golden golden-radarr sonarr radarr ui ui-sonarr ui-radarr ui-present bazarr bazarr-radarr prowlarr prowlarr-radarr recyclarr http-audit anonymize scale-fixture
 UNARR_URL ?= http://127.0.0.1:8989
 RADARR_URL ?= http://127.0.0.1:7878
 UNARR_API_KEY ?= 0123456789abcdef0123456789abcdef
 OUT ?= .cache/anonymized
 APP ?= sonarr
+REQUESTS ?= tests/fixtures/radarr/golden/requests.txt
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | awk 'BEGIN{FS=":.*?## "}{printf "  %-14s %s\n", $$1, $$2}'
@@ -80,8 +81,15 @@ bazarr-radarr: ## Replay Bazarr's movie requests against a running unarrd (RADAR
 prowlarr: ## Replay Prowlarr's indexer sync against a running unarrd, with the mock indexer (UNARR_URL, UNARR_API_KEY)
 	@python3 -I scripts/prowlarr-replay.py --base-url $(UNARR_URL) --api-key $(UNARR_API_KEY) --mock
 
+prowlarr-radarr: ## Replay Prowlarr's indexer sync into Radarr against a running unarrd, with the mock indexer (RADARR_URL, UNARR_API_KEY)
+	@python3 -I scripts/prowlarr-replay.py --app radarr --base-url $(RADARR_URL) --api-key $(UNARR_API_KEY) --mock
+
 recyclarr: ## Replay the recorded Recyclarr sync (tests/fixtures/recyclarr) against a running unarrd on a fresh fixture (UNARR_URL, UNARR_API_KEY)
 	@python3 -I scripts/recyclarr-replay.py --base-url $(UNARR_URL) --api-key $(UNARR_API_KEY)
+
+http-audit: ## Compare status and headers of the original and of unarrd, both running on one fixture (ORIGINAL_URL, RADARR_URL, REQUESTS)
+	@test -n "$(ORIGINAL_URL)" || { echo "usage: make http-audit ORIGINAL_URL=http://127.0.0.1:7880 [RADARR_URL=...] [REQUESTS=...]"; exit 2; }
+	@python3 -I scripts/http-audit.py --original $(ORIGINAL_URL) --unarr $(RADARR_URL) --requests $(REQUESTS)
 
 anonymize: ## Anonymised copy of a Sonarr or Radarr backup zip or config dir (FROM=..., APP=sonarr, OUT=.cache/anonymized)
 	@test -n "$(FROM)" || { echo "usage: make anonymize FROM=backup.zip [APP=radarr] [OUT=dir]"; exit 2; }

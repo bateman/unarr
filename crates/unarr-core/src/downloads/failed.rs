@@ -449,7 +449,7 @@ pub async fn block_release(
         .await
 }
 
-fn text_i64(v: &Value) -> i64 {
+pub(crate) fn text_i64(v: &Value) -> i64 {
     match v {
         Value::Number(n) => n.as_i64().unwrap_or(0),
         Value::String(s) => s.trim().parse().unwrap_or(0),
@@ -466,7 +466,7 @@ pub fn pascal(name: &str) -> String {
     }
 }
 
-fn parse_release_source(s: &str) -> Option<ReleaseSource> {
+pub(crate) fn parse_release_source(s: &str) -> Option<ReleaseSource> {
     [
         ReleaseSource::Unknown,
         ReleaseSource::Rss,

@@ -1,0 +1,198 @@
+{
+  "body": [
+    {
+      "age": 5,
+      "ageHours": 129.47977128769443,
+      "ageMinutes": 7768.786277283333,
+      "approved": false,
+      "commentUrl": "http://127.0.0.1:18989/movies/newznab/details/46af7f49cb3ba7273e76954adc888e61#comments",
+      "customFormatScore": 0,
+      "customFormats": [],
+      "downloadAllowed": true,
+      "downloadUrl": "http://127.0.0.1:18989/movies/newznab/download/46af7f49cb3ba7273e76954adc888e61.nzb",
+      "edition": "",
+      "guid": "http://127.0.0.1:18989/movies/newznab/details/46af7f49cb3ba7273e76954adc888e61",
+      "imdbId": 0,
+      "indexer": "Mock Newznab (Prowlarr)",
+      "indexerFlags": [],
+      "indexerId": 20,
+      "infoUrl": "http://127.0.0.1:18989/movies/newznab/details/46af7f49cb3ba7273e76954adc888e61",
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        },
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mappedMovieId": 70,
+      "movieRequested": true,
+      "movieTitles": [
+        "Nightmare Alley"
+      ],
+      "protocol": "usenet",
+      "publishDate": "2026-11-06T10:10:00Z",
+      "quality": {
+        "quality": {
+          "id": 7,
+          "modifier": "none",
+          "name": "Bluray-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityWeight": 1801,
+      "rejected": true,
+      "rejections": [
+        "Importing after download will exceed available disk space"
+      ],
+      "releaseGroup": "MIRCrew",
+      "releaseHash": "",
+      "releaseWeight": 0,
+      "sceneSource": false,
+      "size": 4398046511104,
+      "temporarilyRejected": false,
+      "title": "Nightmare.Alley.2021.iTA.ENG.1080p.BluRay.x264-MIRCrew",
+      "tmdbId": 0
+    },
+    {
+      "age": 3,
+      "ageHours": 79.07977129819444,
+      "ageMinutes": 4744.786277893333,
+      "approved": true,
+      "commentUrl": "http://127.0.0.1:18989/movies/torznab/details/bc295ecb0fb56b9e5df74be19469cef4#comments",
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 50,
+          "name": "DD+"
+        }
+      ],
+      "downloadAllowed": true,
+      "downloadUrl": "http://127.0.0.1:18989/movies/torznab/download/bc295ecb0fb56b9e5df74be19469cef4.torrent",
+      "edition": "",
+      "guid": "http://127.0.0.1:18989/movies/torznab/details/bc295ecb0fb56b9e5df74be19469cef4",
+      "imdbId": 0,
+      "indexer": "Mock Torznab (Prowlarr)",
+      "indexerFlags": [],
+      "indexerId": 21,
+      "infoHash": "2076338e94f6fc307b43e478146e941fbd6ef7ba",
+      "infoUrl": "http://127.0.0.1:18989/movies/torznab/details/bc295ecb0fb56b9e5df74be19469cef4",
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        },
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "leechers": 6,
+      "magnetUrl": "",
+      "mappedMovieId": 70,
+      "movieRequested": true,
+      "movieTitles": [
+        "Nightmare Alley"
+      ],
+      "protocol": "torrent",
+      "publishDate": "2026-11-08T12:34:00Z",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "modifier": "none",
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "webdl"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityWeight": 1701,
+      "rejected": false,
+      "rejections": [],
+      "releaseGroup": "MeM",
+      "releaseHash": "",
+      "releaseWeight": 1,
+      "sceneSource": false,
+      "seeders": 54,
+      "size": 4509715660,
+      "temporarilyRejected": false,
+      "title": "Nightmare.Alley.2021.iTA.ENG.1080p.WEB-DL.DDP5.1.H.264-MeM",
+      "tmdbId": 0
+    },
+    {
+      "age": 7,
+      "ageHours": 181.64643796694443,
+      "ageMinutes": 10898.786278016667,
+      "approved": false,
+      "commentUrl": "http://127.0.0.1:18989/movies/newznab/details/4373e37c46f4bf864473e0910a6677b9#comments",
+      "customFormatScore": 0,
+      "customFormats": [],
+      "downloadAllowed": false,
+      "downloadUrl": "http://127.0.0.1:18989/movies/newznab/download/4373e37c46f4bf864473e0910a6677b9.nzb",
+      "edition": "",
+      "guid": "http://127.0.0.1:18989/movies/newznab/details/4373e37c46f4bf864473e0910a6677b9",
+      "imdbId": 0,
+      "indexer": "Mock Newznab (Prowlarr)",
+      "indexerFlags": [],
+      "indexerId": 20,
+      "infoUrl": "http://127.0.0.1:18989/movies/newznab/details/4373e37c46f4bf864473e0910a6677b9",
+      "languages": [
+        {
+          "id": 0,
+          "name": "Unknown"
+        }
+      ],
+      "movieRequested": false,
+      "movieTitles": [
+        "Nightmare Alley"
+      ],
+      "protocol": "usenet",
+      "publishDate": "2026-11-04T06:00:00Z",
+      "quality": {
+        "quality": {
+          "id": 7,
+          "modifier": "none",
+          "name": "Bluray-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityWeight": 1801,
+      "rejected": true,
+      "rejections": [
+        "Unknown Movie. Unable to match to correct movie using release title."
+      ],
+      "releaseGroup": "USURY",
+      "releaseHash": "",
+      "releaseWeight": 2,
+      "sceneSource": false,
+      "size": 8697308774,
+      "temporarilyRejected": false,
+      "title": "Nightmare.Alley.1947.1080p.BluRay.x264-USURY",
+      "tmdbId": 0
+    }
+  ],
+  "recordedAt": "2026-11-11T19:38:47Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/release?movieId=70"
+  },
+  "status": 200
+}

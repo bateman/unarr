@@ -11,7 +11,6 @@ use unarr_core::model::ScheduledTask;
 use unarr_core::store;
 use unarr_core::store::paging::Paging;
 use unarr_core::time;
-use unarr_core::Personality;
 
 use crate::compat;
 use crate::error::{found, ApiResult};
@@ -362,14 +361,15 @@ const RADARR_LOCALIZATION_EN: &str = include_str!("../../schemas/radarr/localiza
 
 /// The UI strings of the mirrored release (English). Radarr spells the
 /// key with a capital, as recorded.
-pub async fn localization(State(state): State<AppState>) -> impl IntoResponse {
-    let body = match state.personality() {
-        Personality::Radarr => format!("{{\"Strings\":{}}}", RADARR_LOCALIZATION_EN.trim()),
-        Personality::Sonarr | Personality::Lidarr => {
-            format!("{{\"strings\":{}}}", SONARR_LOCALIZATION_EN.trim())
-        }
-    };
+pub async fn localization() -> impl IntoResponse {
+    // Radarr returns its strings as a string and has a route of its own.
+    let body = format!("{{\"strings\":{}}}", SONARR_LOCALIZATION_EN.trim());
     ([(header::CONTENT_TYPE, "application/json")], body)
+}
+
+/// Radarr's strings as its `LocalizationResource` serialises.
+pub fn radarr_localization() -> String {
+    format!("{{\"Strings\":{}}}", RADARR_LOCALIZATION_EN.trim())
 }
 
 pub async fn localization_language() -> Json<Value> {

@@ -139,6 +139,11 @@ calendar-past GET /api/v3/calendar?start=2025-01-01T00:00:00Z&end=2025-12-31T00:
 calendar-tags GET /api/v3/calendar?start=2026-06-01T00:00:00Z&end=2026-12-31T00:00:00Z&unmonitored=true&tags=1
 calendar-empty GET /api/v3/calendar?start=2030-01-01T00:00:00Z&end=2030-01-07T00:00:00Z
 calendar-no-range GET /api/v3/calendar
+# Two pairs of movies that share a cinema date, chosen so that their TMDB
+# ids, their titles and their ids put them in different orders (Stillwater
+# and The Green Knight; Garden State and Exorcist: The Beginning).
+calendar-same-date-2021 GET /api/v3/calendar?start=2021-07-01T00:00:00Z&end=2021-08-31T00:00:00Z&unmonitored=true
+calendar-same-date-2004 GET /api/v3/calendar?start=2004-08-01T00:00:00Z&end=2004-08-31T00:00:00Z&unmonitored=true
 wanted-missing GET /api/v3/wanted/missing?page=1&pageSize=20&sortKey=movieMetadata.sortTitle&sortDirection=ascending
 wanted-missing-by-date GET /api/v3/wanted/missing?page=1&pageSize=20&sortKey=movieMetadata.digitalRelease&sortDirection=descending
 wanted-missing-unmonitored GET /api/v3/wanted/missing?page=1&pageSize=5&sortKey=movieMetadata.sortTitle&sortDirection=ascending&monitored=false
@@ -170,3 +175,208 @@ feed-calendar-lowercase GET /feed/v3/calendar/radarr.ics?apikey=0123456789abcdef
 feed-calendar-unmonitored GET /feed/v3/calendar/Radarr.ics?apikey=0123456789abcdef0123456789abcdef&unmonitored=true&pastDays=60&futureDays=60
 feed-calendar-tags GET /feed/v3/calendar/Radarr.ics?apikey=0123456789abcdef0123456789abcdef&unmonitored=true&pastDays=200&futureDays=60&tags=1
 noauth-feed-calendar GET /feed/v3/calendar/Radarr.ics
+# Milestone 4b. Provider writes: these change the fixture copy, so they come
+# after every read-only golden. The mock indexers of scripts/mock-servarr.py
+# answer on 127.0.0.1:18989 under /movies (movie feeds, categories 2000);
+# /movies/empty has caps and no release, which is what a Prowlarr indexer
+# without movies looks like; 18999 has nothing listening. The fixture's
+# Indexers sequence stands at 19, so the two created indexers get ids 20 and
+# 21; the download clients get 4 to 7.
+indexer-create POST /api/v3/indexer bodies/indexer-create.json
+indexer-create-torznab POST /api/v3/indexer bodies/indexer-create-torznab.json
+indexer-create-duplicate POST /api/v3/indexer bodies/indexer-create.json
+indexer-create-invalid POST /api/v3/indexer bodies/indexer-invalid.json
+indexer-create-unreachable POST /api/v3/indexer bodies/indexer-unreachable.json
+indexer-create-unreachable-forced POST /api/v3/indexer?forceSave=true bodies/indexer-unreachable.json
+indexer-create-empty POST /api/v3/indexer bodies/indexer-create-empty.json
+indexer-create-empty-forced POST /api/v3/indexer?forceSave=true bodies/indexer-create-empty.json
+indexer-test POST /api/v3/indexer/test bodies/indexer-test.json
+indexer-test-existing POST /api/v3/indexer/test bodies/indexer-test-existing.json
+indexer-test-duplicate POST /api/v3/indexer/test bodies/indexer-create.json
+indexer-test-wrong-key POST /api/v3/indexer/test bodies/indexer-wrong-key.json
+indexer-test-invalid POST /api/v3/indexer/test bodies/indexer-invalid.json
+indexer-action-categories POST /api/v3/indexer/action/newznabCategories bodies/indexer-create.json
+indexer-action-categories-unreachable POST /api/v3/indexer/action/newznabCategories bodies/indexer-unreachable.json
+indexer-20 GET /api/v3/indexer/20
+indexer-after-create GET /api/v3/indexer
+downloadclient-create-sabnzbd POST /api/v3/downloadclient bodies/downloadclient-create-sabnzbd.json
+downloadclient-create-nzbget POST /api/v3/downloadclient bodies/downloadclient-create-nzbget.json
+downloadclient-create-qbittorrent POST /api/v3/downloadclient bodies/downloadclient-create-qbittorrent.json
+downloadclient-create-transmission POST /api/v3/downloadclient bodies/downloadclient-create-transmission.json
+downloadclient-create-duplicate POST /api/v3/downloadclient bodies/downloadclient-create-duplicate.json
+downloadclient-after-create GET /api/v3/downloadclient
+downloadclient-4 GET /api/v3/downloadclient/4
+downloadclient-test-sabnzbd POST /api/v3/downloadclient/test bodies/downloadclient-create-sabnzbd.json
+downloadclient-test-sabnzbd-wrongkey POST /api/v3/downloadclient/test bodies/downloadclient-test-sabnzbd-wrongkey.json
+downloadclient-test-sabnzbd-nojob POST /api/v3/downloadclient/test bodies/downloadclient-test-sabnzbd-nojob.json
+downloadclient-test-sabnzbd-sorted POST /api/v3/downloadclient/test bodies/downloadclient-test-sabnzbd-sorted.json
+downloadclient-test-sabnzbd-missing-category POST /api/v3/downloadclient/test bodies/downloadclient-test-sabnzbd-missing-category.json
+downloadclient-test-sabnzbd-nocategory POST /api/v3/downloadclient/test bodies/downloadclient-test-sabnzbd-nocategory.json
+downloadclient-test-sabnzbd-nocategory-forced POST /api/v3/downloadclient/test?forceTest=true bodies/downloadclient-test-sabnzbd-nocategory.json
+downloadclient-test-nzbget POST /api/v3/downloadclient/test bodies/downloadclient-create-nzbget.json
+downloadclient-test-nzbget-wrongpassword POST /api/v3/downloadclient/test bodies/downloadclient-test-nzbget-wrongpassword.json
+downloadclient-test-nzbget-missing-category POST /api/v3/downloadclient/test bodies/downloadclient-test-nzbget-missing-category.json
+downloadclient-test-qbittorrent POST /api/v3/downloadclient/test bodies/downloadclient-create-qbittorrent.json
+downloadclient-test-qbittorrent-apikey POST /api/v3/downloadclient/test bodies/downloadclient-test-qbittorrent-apikey.json
+downloadclient-test-qbittorrent-wrongpassword POST /api/v3/downloadclient/test bodies/downloadclient-test-qbittorrent-wrongpassword.json
+downloadclient-test-qbittorrent-nocategory POST /api/v3/downloadclient/test bodies/downloadclient-test-qbittorrent-nocategory.json
+downloadclient-test-qbittorrent-newcategory POST /api/v3/downloadclient/test bodies/downloadclient-test-qbittorrent-newcategory.json
+downloadclient-test-transmission POST /api/v3/downloadclient/test bodies/downloadclient-create-transmission.json
+downloadclient-test-transmission-wrongpassword POST /api/v3/downloadclient/test bodies/downloadclient-test-transmission-wrongpassword.json
+downloadclient-test-transmission-directory POST /api/v3/downloadclient/test bodies/downloadclient-test-transmission-directory.json
+downloadclient-invalid POST /api/v3/downloadclient bodies/downloadclient-invalid.json
+downloadclient-invalid-settings POST /api/v3/downloadclient bodies/downloadclient-invalid-settings.json
+downloadclient-invalid-torrent-settings POST /api/v3/downloadclient bodies/downloadclient-invalid-torrent-settings.json
+downloadclient-invalid-transmission-settings POST /api/v3/downloadclient bodies/downloadclient-invalid-transmission-settings.json
+downloadclient-unreachable POST /api/v3/downloadclient bodies/downloadclient-unreachable.json
+downloadclient-unreachable-forced POST /api/v3/downloadclient?forceSave=true bodies/downloadclient-unreachable.json
+downloadclient-unreachable-nzbget POST /api/v3/downloadclient/test bodies/downloadclient-unreachable-nzbget.json
+downloadclient-unreachable-qbittorrent POST /api/v3/downloadclient/test bodies/downloadclient-unreachable-qbittorrent.json
+downloadclient-unreachable-transmission POST /api/v3/downloadclient/test bodies/downloadclient-unreachable-transmission.json
+downloadclient-testall POST /api/v3/downloadclient/testall
+downloadclient-update PUT /api/v3/downloadclient/4 bodies/downloadclient-update.json
+downloadclient-update-missing PUT /api/v3/downloadclient/999 bodies/downloadclient-update-999.json
+downloadclient-4-after-update GET /api/v3/downloadclient/4
+# Interactive search, RSS and pushes against the mock indexers (ids 20 and
+# 21); the fixture's own indexers point at *.invalid hosts and fail at once.
+# The Holdovers (movie 116, tmdb 840430) has id search results on both mock
+# indexers; Nightmare Alley (movie 70) only answers the text search, the
+# second tier.
+release-movie GET /api/v3/release?movieId=116
+release-movie-text-fallback GET /api/v3/release?movieId=70
+release-movie-missing GET /api/v3/release?movieId=999999
+release-rss GET /api/v3/release
+release-grab-uncached POST /api/v3/release bodies/release-grab-uncached.json
+release-grab-invalid POST /api/v3/release bodies/release-grab-invalid.json
+release-push POST /api/v3/release/push bodies/release-push.json
+release-push-unknown-movie POST /api/v3/release/push bodies/release-push-unknown.json
+release-push-invalid POST /api/v3/release/push bodies/release-push-invalid.json
+# Grabs from the cache the searches above filled, each to a named mock
+# client, then the queue they make and the history they leave; the delay
+# lets the original's debounced refresh see the clients. The two queue
+# reads after the first are the ones Unpackerr and Cleanuparr make on the
+# maintainer's installation.
+release-grab-usenet POST /api/v3/release bodies/release-grab-usenet.json
+release-grab-torrent POST /api/v3/release bodies/release-grab-torrent.json
+release-grab-transmission POST /api/v3/release bodies/release-grab-transmission.json
+release-grab-unknown-client POST /api/v3/release bodies/release-grab-unknown-client.json
+sleep 12
+queue-after-grab GET /api/v3/queue?page=1&pageSize=20&sortKey=timeleft&sortDirection=ascending&includeUnknownMovieItems=false&includeMovie=true
+queue-after-grab-plain GET /api/v3/queue?page=1&pageSize=20&sortKey=timeleft&sortDirection=ascending
+queue-unpackerr GET /api/v3/queue?includeUnknownMovieItems=true&page=1&pageSize=500&sortDirection=ascending&sortKey=timeleft
+queue-cleanuparr GET /api/v3/queue?page=1&pageSize=200&includeUnknownMovieItems=true&includeMovie=true
+queue-page-2 GET /api/v3/queue?page=2&pageSize=2&sortKey=title&sortDirection=descending
+queue-page-overflow GET /api/v3/queue?page=5&pageSize=2&sortKey=title&sortDirection=descending
+queue-torrent-only GET /api/v3/queue?page=1&pageSize=20&sortKey=timeleft&sortDirection=ascending&protocol=torrent
+queue-movie-62 GET /api/v3/queue?page=1&pageSize=20&sortKey=movies.sortTitle&sortDirection=ascending&movieIds=62
+queue-quality-filter GET /api/v3/queue?page=1&pageSize=20&sortKey=quality&sortDirection=descending&quality=3
+queue-status-after-grab GET /api/v3/queue/status
+queue-details-after-grab GET /api/v3/queue/details?includeMovie=true
+queue-details-movie-116 GET /api/v3/queue/details?movieId=116
+queue-details-movie-62 GET /api/v3/queue/details?movieId=62&includeMovie=true
+history-after-grab GET /api/v3/history?page=1&pageSize=5&sortKey=date&sortDirection=descending&includeMovie=true
+history-download-id GET /api/v3/history?page=1&pageSize=5&sortKey=date&sortDirection=descending&downloadId=SABnzbd_nzo_mock1
+history-movie-116-grabbed GET /api/v3/history/movie?movieId=116&eventType=1
+queue-delete-usenet DELETE /api/v3/queue/{id:queue-details-movie-116}?removeFromClient=true&blocklist=false
+queue-delete-blocklist DELETE /api/v3/queue/{id:queue-details-movie-62}?removeFromClient=true&blocklist=true&skipRedownload=true
+queue-delete-missing DELETE /api/v3/queue/123456?removeFromClient=true
+queue-grab-missing POST /api/v3/queue/grab/123456
+queue-after-delete GET /api/v3/queue?page=1&pageSize=20&sortKey=timeleft&sortDirection=ascending
+queue-status-after-delete GET /api/v3/queue/status
+history-after-delete GET /api/v3/history?page=1&pageSize=5&sortKey=date&sortDirection=descending&eventType=4&eventType=9&includeMovie=true
+blocklist-after-delete GET /api/v3/blocklist?page=1&pageSize=5&sortKey=date&sortDirection=descending
+# Commands: the queue the UI and the scheduler drive. Each command runs in
+# the background, so the sleeps let it finish before it is read back;
+# `{id:name}` is the id the named response carried. The fixture's own
+# clients (unreachable hosts) and the mock NZBGet are disabled first, so a
+# usenet grab goes to the mock SABnzbd and a torrent to one of the two mock
+# torrent clients. At this point Nightmare Alley is in the queue, Last
+# Night in Soho's torrent is blocklisted and The Holdovers was grabbed and
+# removed: the RSS sync has one release left to grab (Soho from usenet),
+# the search for The Holdovers grabs it again (a search skips the history).
+downloadclient-disable-others PUT /api/v3/downloadclient/bulk bodies/downloadclient-disable-others.json
+command-rsssync POST /api/v3/command bodies/command-rsssync.json
+sleep 12
+command-rsssync-get GET /api/v3/command/{id:command-rsssync}
+command-movies-search POST /api/v3/command bodies/command-movies-search.json
+sleep 12
+command-movies-search-get GET /api/v3/command/{id:command-movies-search}
+command-movies-search-queued POST /api/v3/command bodies/command-movies-search-queued.json
+sleep 12
+command-movies-search-queued-get GET /api/v3/command/{id:command-movies-search-queued}
+command-refresh-downloads POST /api/v3/command bodies/command-refresh-downloads.json
+sleep 4
+command-refresh-downloads-get GET /api/v3/command/{id:command-refresh-downloads}
+command-missing-name POST /api/v3/command bodies/command-missing-name.json
+command-unknown POST /api/v3/command bodies/command-unknown.json
+command-series-search POST /api/v3/command bodies/command-series-search.json
+command-get-missing GET /api/v3/command/999999
+command-cancel-completed DELETE /api/v3/command/{id:command-rsssync}
+command-cancel-missing DELETE /api/v3/command/999999
+command-list GET /api/v3/command
+queue-after-command GET /api/v3/queue?page=1&pageSize=20&sortKey=timeleft&sortDirection=ascending
+queue-status-after-command GET /api/v3/queue/status
+history-after-command GET /api/v3/history?page=1&pageSize=3&sortKey=date&sortDirection=descending&eventType=1
+system-task-after GET /api/v3/system/task
+health-after GET /api/v3/health
+# A download the client reports as failed: the mock SABnzbd fails The
+# Holdovers, the refresh records the failure, blocklists the release,
+# removes the item and, "redownload failed" being on, searches the movie
+# again, which grabs the next release the profile wants.
+mock - POST /mock/sabnzbd/fail?id=SABnzbd_nzo_mock3
+command-refresh-after-fail POST /api/v3/command bodies/command-refresh-downloads.json
+sleep 12
+history-after-fail GET /api/v3/history/movie?movieId=116
+blocklist-after-fail GET /api/v3/blocklist/movie?movieId=116
+queue-after-fail GET /api/v3/queue/details?movieId=116
+# Pending releases: with a delay on the default profile, an approved
+# release waits in the queue instead of being grabbed. One is grabbed by
+# hand from there, the other removed and blocklisted.
+delayprofile-update PUT /api/v3/delayprofile/1 bodies/delayprofile-delay.json
+delayprofile-after-update GET /api/v3/delayprofile/1
+release-push-delayed POST /api/v3/release/push bodies/release-push-delayed.json
+release-push-delayed-again POST /api/v3/release/push bodies/release-push-delayed.json
+release-push-delayed-other POST /api/v3/release/push bodies/release-push-delayed-other.json
+queue-pending GET /api/v3/queue?page=1&pageSize=20&sortKey=timeleft&sortDirection=ascending&includeMovie=true
+queue-status-pending GET /api/v3/queue/status
+queue-details-pending-13 GET /api/v3/queue/details?movieId=13
+queue-details-pending-14 GET /api/v3/queue/details?movieId=14
+release-rss-pending GET /api/v3/release
+# A release of the list grabbed for a movie, a quality and languages the
+# user names (the UI's override), and one that names too little.
+release-grab-override POST /api/v3/release bodies/release-grab-override.json
+release-grab-override-incomplete POST /api/v3/release bodies/release-grab-override-incomplete.json
+queue-grab-pending POST /api/v3/queue/grab/{id:queue-details-pending-13}
+queue-delete-pending DELETE /api/v3/queue/{id:queue-details-pending-14}?removeFromClient=true&blocklist=true
+# The same in bulk: one pending release grabbed, another removed and
+# blocklisted by a request that names it twice, an id that names nothing.
+release-push-delayed-third POST /api/v3/release/push bodies/release-push-delayed-third.json
+release-push-delayed-fourth POST /api/v3/release/push bodies/release-push-delayed-fourth.json
+queue-details-pending-20 GET /api/v3/queue/details?movieId=20
+queue-details-pending-32 GET /api/v3/queue/details?movieId=32
+queue-grab-bulk POST /api/v3/queue/grab/bulk bodies/queue-grab-bulk.json
+queue-delete-bulk DELETE /api/v3/queue/bulk?removeFromClient=true&blocklist=true bodies/queue-delete-bulk.json
+queue-delete-bulk-missing DELETE /api/v3/queue/bulk?removeFromClient=true bodies/queue-delete-bulk-missing.json
+sleep 12
+queue-after-pending GET /api/v3/queue?page=1&pageSize=20&sortKey=timeleft&sortDirection=ascending
+history-after-pending GET /api/v3/history?page=1&pageSize=3&sortKey=date&sortDirection=descending&includeMovie=false
+blocklist-after-pending GET /api/v3/blocklist?page=1&pageSize=2&sortKey=date&sortDirection=descending
+history-after-bulk GET /api/v3/history?page=1&pageSize=4&sortKey=date&sortDirection=descending&eventType=1
+blocklist-after-bulk GET /api/v3/blocklist?page=1&pageSize=4&sortKey=date&sortDirection=descending
+delayprofile-restore PUT /api/v3/delayprofile/1 bodies/delayprofile-restore.json
+downloadclient-action POST /api/v3/downloadclient/action/getCategories bodies/downloadclient-action.json
+downloadclient-bulk PUT /api/v3/downloadclient/bulk bodies/downloadclient-bulk.json
+downloadclient-bulk-empty PUT /api/v3/downloadclient/bulk bodies/downloadclient-bulk-empty.json
+downloadclient-delete DELETE /api/v3/downloadclient/7
+downloadclient-delete-missing DELETE /api/v3/downloadclient/7
+downloadclient-bulk-delete DELETE /api/v3/downloadclient/bulk bodies/downloadclient-bulk-delete.json
+downloadclient-after-delete GET /api/v3/downloadclient
+indexer-update PUT /api/v3/indexer/20 bodies/indexer-update.json
+indexer-update-missing PUT /api/v3/indexer/999 bodies/indexer-update-999.json
+indexer-20-after-update GET /api/v3/indexer/20
+indexer-bulk PUT /api/v3/indexer/bulk bodies/indexer-bulk.json
+indexer-bulk-empty PUT /api/v3/indexer/bulk bodies/indexer-bulk-empty.json
+indexer-delete DELETE /api/v3/indexer/20
+indexer-delete-missing DELETE /api/v3/indexer/20
+indexer-bulk-delete DELETE /api/v3/indexer/bulk bodies/indexer-bulk-delete.json
+indexer-after-delete GET /api/v3/indexer

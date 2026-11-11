@@ -1,0 +1,18 @@
+{
+  "body": [
+    {
+      "detailedDescription": "Radarr will not attempt to import completed downloads without a category.",
+      "errorMessage": "Category is recommended",
+      "isWarning": true,
+      "propertyName": "MovieCategory",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-11T19:38:41Z",
+  "request": {
+    "body": "bodies/downloadclient-test-qbittorrent-nocategory.json",
+    "method": "POST",
+    "path": "/api/v3/downloadclient/test"
+  },
+  "status": 400
+}

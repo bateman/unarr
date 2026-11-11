@@ -9,7 +9,7 @@ use chrono::{DateTime, Duration, Utc};
 
 use crate::downloadclients::remote_path;
 use crate::downloadclients::{
-    Client, ClientError, ClientKind, DownloadClientDefinition, DownloadClientService, APP_NAME,
+    Client, ClientError, ClientKind, DownloadClientDefinition, DownloadClientService,
 };
 use crate::indexers::{IndexerDefinition, IndexerService};
 use crate::model::ProviderKind;
@@ -109,6 +109,9 @@ pub struct ImportFailure {
 
 /// What the checks read and ask.
 pub struct Context<'a> {
+    /// The application the verdicts are of: its name in the wiki links,
+    /// its library where a check reads one.
+    pub personality: crate::Personality,
     pub db: &'a crate::db::Db,
     pub indexers: &'a IndexerService,
     pub clients: &'a DownloadClientService,
@@ -240,9 +243,27 @@ pub async fn run(ctx: &Context<'_>, sets: &[CheckSet], standing: &[HealthCheck])
             if !runs {
                 continue;
             }
+            // Import lists are Radarr's with a later milestone.
+            if ctx.personality == crate::Personality::Radarr && source == "ImportListRootFolderCheck" {
+                continue;
+            }
             seen.push(source);
             match check(ctx).await {
-                Ok(result) => out.push(result),
+                Ok(mut result) => {
+                    if ctx.personality == crate::Personality::Radarr {
+                        // The same pages under the other application's name.
+                        result.wiki_url = result
+                            .wiki_url
+                            .replace("/sonarr/", "/radarr/")
+                            .replace("-sonarr-", "-radarr-");
+                        // Radarr's strings for the paths of a download
+                        // keep two spaces between their sentences.
+                        if source == "RemotePathMappingCheck" {
+                            result.message = result.message.replace(". ", ".  ");
+                        }
+                    }
+                    out.push(result)
+                }
                 Err(e) => tracing::error!(source, error = %e, "health check failed to run"),
             }
         }
@@ -277,6 +298,20 @@ pub fn merge(results: &mut Vec<HealthCheck>, run: Vec<HealthCheck>) -> bool {
     changed
 }
 
+/// The folders of the library: every series', or every movie's.
+fn library_paths(
+    conn: &rusqlite::Connection,
+    personality: crate::Personality,
+) -> anyhow::Result<Vec<String>> {
+    Ok(match personality {
+        crate::Personality::Radarr => crate::movies::store::list_movies(conn)?
+            .into_iter()
+            .map(|m| m.path)
+            .collect(),
+        _ => store::series::list(conn)?.into_iter().map(|s| s.path).collect(),
+    })
+}
+
 fn names<'a>(it: impl Iterator<Item = &'a str>) -> String {
     it.collect::<Vec<_>>().join(", ")
 }
@@ -297,6 +332,7 @@ fn enabled(d: &IndexerDefinition) -> bool {
 
 /// `IndexerRssCheck`.
 async fn indexer_rss(ctx: &Context<'_>) -> anyhow::Result<HealthCheck> {
+    let app = ctx.clients.app().name;
     const SOURCE: &str = "IndexerRssCheck";
     let all = indexer_definitions(ctx).await?;
     let rss: Vec<&IndexerDefinition> = all.iter().filter(|d| d.enable_rss).collect();
@@ -304,7 +340,9 @@ async fn indexer_rss(ctx: &Context<'_>) -> anyhow::Result<HealthCheck> {
         return Ok(HealthCheck::new(
             SOURCE,
             HealthType::Error,
-            format!("No indexers available with RSS sync enabled, {APP_NAME} will not grab new releases automatically"),
+            format!(
+                "No indexers available with RSS sync enabled, {app} will not grab new releases automatically"
+            ),
             "#no-indexers-available-with-rss-sync-enabled-sonarr-will-not-grab-new-releases-automatically",
         ));
     }
@@ -327,13 +365,14 @@ async fn indexer_rss(ctx: &Context<'_>) -> anyhow::Result<HealthCheck> {
 
 /// `IndexerSearchCheck`.
 async fn indexer_search(ctx: &Context<'_>) -> anyhow::Result<HealthCheck> {
+    let app = ctx.clients.app().name;
     const SOURCE: &str = "IndexerSearchCheck";
     let all = indexer_definitions(ctx).await?;
     if !all.iter().any(|d| d.enable_automatic_search) {
         return Ok(HealthCheck::new(
             SOURCE,
             HealthType::Warning,
-            format!("No indexers available with Automatic Search enabled, {APP_NAME} will not provide any automatic search results"),
+            format!("No indexers available with Automatic Search enabled, {app} will not provide any automatic search results"),
             "#no-indexers-available-with-automatic-search-enabled-sonarr-will-not-provide-any-automatic-search-results",
         ));
     }
@@ -341,7 +380,7 @@ async fn indexer_search(ctx: &Context<'_>) -> anyhow::Result<HealthCheck> {
         return Ok(HealthCheck::new(
             SOURCE,
             HealthType::Warning,
-            format!("No indexers available with Interactive Search enabled, {APP_NAME} will not provide any interactive search results"),
+            format!("No indexers available with Interactive Search enabled, {app} will not provide any interactive search results"),
             "#no-indexers-available-with-interactive-search-enabled",
         ));
     }
@@ -542,6 +581,7 @@ async fn client_statuses(
 
 /// `DownloadClientSortingCheck`.
 async fn download_client_sorting(ctx: &Context<'_>) -> anyhow::Result<HealthCheck> {
+    let app = ctx.clients.app().name;
     const SOURCE: &str = "DownloadClientSortingCheck";
     for (definition, status) in client_statuses(ctx).await? {
         if let Some(mode) = status.sorting_mode.filter(|m| !m.trim().is_empty()) {
@@ -549,7 +589,7 @@ async fn download_client_sorting(ctx: &Context<'_>) -> anyhow::Result<HealthChec
                 SOURCE,
                 HealthType::Warning,
                 format!(
-                    "Download client {} has {mode} sorting enabled for {APP_NAME}'s category. You should disable sorting in your download client to avoid import issues.",
+                    "Download client {} has {mode} sorting enabled for {app}'s category. You should disable sorting in your download client to avoid import issues.",
                     definition.name
                 ),
                 "#download-folder-and-library-folder-not-different-folders",
@@ -562,6 +602,7 @@ async fn download_client_sorting(ctx: &Context<'_>) -> anyhow::Result<HealthChec
 /// `RemotePathMappingCheck`: the folders the clients download to, as this
 /// process sees them.
 async fn remote_path_mapping(ctx: &Context<'_>) -> anyhow::Result<HealthCheck> {
+    let app = ctx.clients.app().name;
     const SOURCE: &str = "RemotePathMappingCheck";
     let handling = ctx
         .db
@@ -592,7 +633,7 @@ async fn remote_path_mapping(ctx: &Context<'_>) -> anyhow::Result<HealthCheck> {
                 } else if !status.is_localhost {
                     (format!("Remote download client {name} places downloads in {folder} but this directory does not appear to exist. Likely missing or incorrect remote path mapping."), "#bad-remote-path-mapping")
                 } else {
-                    (format!("Download client {name} places downloads in {folder} but {APP_NAME} cannot see this directory. You may need to adjust the folder's permissions."), "#permissions-error")
+                    (format!("Download client {name} places downloads in {folder} but {app} cannot see this directory. You may need to adjust the folder's permissions."), "#permissions-error")
                 };
                 return Ok(HealthCheck::new(SOURCE, HealthType::Error, message, fragment));
             }
@@ -647,10 +688,11 @@ fn best_root_folder(path: &str, root_folders: &[String]) -> String {
 /// `RootFolderCheck`: every series' root folder must exist.
 async fn root_folder(ctx: &Context<'_>) -> anyhow::Result<HealthCheck> {
     const SOURCE: &str = "RootFolderCheck";
+    let personality = ctx.personality;
     let (paths, root_folders) = ctx
         .db
-        .call(|conn| {
-            let paths: Vec<String> = store::series::list(conn)?.into_iter().map(|s| s.path).collect();
+        .call(move |conn| {
+            let paths = library_paths(conn, personality)?;
             let roots: Vec<String> = store::catalog::list_root_folders(conn)?
                 .into_iter()
                 .map(|r| r.path)
@@ -761,6 +803,10 @@ async fn import_mechanism(ctx: &Context<'_>) -> anyhow::Result<HealthCheck> {
         .db
         .call(|conn| store::config::config(conn, "EnableCompletedDownloadHandling"))
         .await?;
+    // Radarr dropped the hints for a setting never saved: there it is on.
+    if defined.is_none() && ctx.personality == crate::Personality::Radarr {
+        return Ok(HealthCheck::ok(SOURCE));
+    }
     let Some(value) = defined else {
         // Migration helper logic.
         let all_local = statuses.iter().all(|(_, s)| s.is_localhost);
@@ -793,6 +839,7 @@ async fn import_mechanism(ctx: &Context<'_>) -> anyhow::Result<HealthCheck> {
 
 /// `DownloadClientRemovesCompletedDownloadsCheck`.
 async fn download_client_removes_completed_downloads(ctx: &Context<'_>) -> anyhow::Result<HealthCheck> {
+    let app = ctx.clients.app().name;
     const SOURCE: &str = "DownloadClientRemovesCompletedDownloadsCheck";
     for (definition, status) in client_statuses(ctx).await? {
         if status.removes_completed_downloads {
@@ -800,7 +847,7 @@ async fn download_client_removes_completed_downloads(ctx: &Context<'_>) -> anyho
                 SOURCE,
                 HealthType::Warning,
                 format!(
-                    "Download client {} is set to remove completed downloads. This can result in downloads being removed from your client before {APP_NAME} can import them.",
+                    "Download client {} is set to remove completed downloads. This can result in downloads being removed from your client before {app} can import them.",
                     definition.name
                 ),
                 "#download-client-removes-completed-downloads",
@@ -824,6 +871,7 @@ fn folder_writable(path: &str) -> bool {
 
 /// `RecyclingBinCheck`: a configured recycle bin must be writable.
 async fn recycling_bin(ctx: &Context<'_>) -> anyhow::Result<HealthCheck> {
+    let app = ctx.clients.app().name;
     const SOURCE: &str = "RecyclingBinCheck";
     let recycle_bin = ctx
         .db
@@ -837,7 +885,7 @@ async fn recycling_bin(ctx: &Context<'_>) -> anyhow::Result<HealthCheck> {
         return Ok(HealthCheck::new(
             SOURCE,
             HealthType::Error,
-            format!("Unable to write to configured recycling bin folder: {recycle_bin}. Ensure this path exists and is writable by the user running {APP_NAME}"),
+            format!("Unable to write to configured recycling bin folder: {recycle_bin}. Ensure this path exists and is writable by the user running {app}"),
             "#cannot-write-recycle-bin",
         ));
     }
@@ -945,10 +993,8 @@ async fn mount(ctx: &Context<'_>) -> anyhow::Result<HealthCheck> {
         return Ok(HealthCheck::ok(SOURCE));
     };
     let mounts = parse_mounts(&table);
-    let paths: Vec<String> = ctx
-        .db
-        .call(|conn| Ok(store::series::list(conn)?.into_iter().map(|s| s.path).collect()))
-        .await?;
+    let personality = ctx.personality;
+    let paths: Vec<String> = ctx.db.call(move |conn| library_paths(conn, personality)).await?;
     let mut seen_roots: Vec<&str> = Vec::new();
     let mut found: Vec<String> = Vec::new();
     for path in &paths {
@@ -964,20 +1010,25 @@ async fn mount(ctx: &Context<'_>) -> anyhow::Result<HealthCheck> {
     if found.is_empty() {
         return Ok(HealthCheck::ok(SOURCE));
     }
+    let (what, fragment) = match ctx.personality {
+        crate::Personality::Radarr => ("movie", "#movies-mount-ro"),
+        _ => ("series", "#series-mount-ro"),
+    };
     Ok(HealthCheck::new(
         SOURCE,
         HealthType::Error,
         format!(
-            "Mount containing a series path is mounted read-only: {}",
+            "Mount containing a {what} path is mounted read-only: {}",
             found.join(", ")
         ),
-        "#series-mount-ro",
+        fragment,
     ))
 }
 
 /// `RemotePathMappingCheck.Check(EpisodeImportFailedEvent)`: what a failed
 /// import says about the paths.
 async fn remote_path_mapping_after_failure(ctx: &Context<'_>) -> anyhow::Result<HealthCheck> {
+    let app = ctx.clients.app().name;
     const SOURCE: &str = "RemotePathMappingCheck";
     let handling = ctx
         .db
@@ -995,9 +1046,7 @@ async fn remote_path_mapping_after_failure(ctx: &Context<'_>) -> anyhow::Result<
             return Ok(HealthCheck::new(
                 SOURCE,
                 HealthType::Error,
-                format!(
-                    "{APP_NAME} can see but not access downloaded episode {path}. Likely permissions error."
-                ),
+                format!("{app} can see but not access downloaded episode {path}. Likely permissions error."),
                 "#permissions-error",
             ));
         }
@@ -1025,7 +1074,7 @@ async fn remote_path_mapping_after_failure(ctx: &Context<'_>) -> anyhow::Result<
         return Ok(HealthCheck::new(
             SOURCE,
             HealthType::Error,
-            format!("{APP_NAME} failed to import (an) episode(s). Check your logs for details."),
+            format!("{app} failed to import (an) episode(s). Check your logs for details."),
             "#remote-path-import-failed",
         ));
     };
@@ -1044,23 +1093,19 @@ async fn remote_path_mapping_after_failure(ctx: &Context<'_>) -> anyhow::Result<
         return Ok(HealthCheck::new(
             SOURCE,
             HealthType::Error,
-            format!(
-                "{APP_NAME} can see but not access download directory {dlpath}. Likely permissions error."
-            ),
+            format!("{app} can see but not access download directory {dlpath}. Likely permissions error."),
             "#permissions-error",
         ));
     }
     let (message, fragment) = if ctx.is_docker {
         (
-            format!(
-                "{APP_NAME} can see but not access download directory {dlpath}. Likely permissions error."
-            ),
+            format!("{app} can see but not access download directory {dlpath}. Likely permissions error."),
             "#docker-bad-remote-path-mapping",
         )
     } else if !status.is_localhost {
         (format!("Remote download client {name} reported files in {dlpath} but this directory does not appear to exist. Likely missing remote path mapping."), "#bad-remote-path-mapping")
     } else {
-        (format!("Download client {name} reported files in {dlpath} but {APP_NAME} cannot see this directory. You may need to adjust the folder's permissions."), "#permissions-error")
+        (format!("Download client {name} reported files in {dlpath} but {app} cannot see this directory. You may need to adjust the folder's permissions."), "#permissions-error")
     };
     Ok(HealthCheck::new(SOURCE, HealthType::Error, message, fragment))
 }

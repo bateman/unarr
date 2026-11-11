@@ -12,11 +12,11 @@ use serde_json::{json, Value};
 
 use super::settings::TransmissionSettings;
 use super::version::Version;
+use super::GrabRequest;
 use super::{
-    build_base_url, combine_path, is_localhost, remote_path, seed_limits, transport_message, Client,
-    ClientError, ClientResult, DownloadClientInfo, DownloadClientItem, DownloadItemStatus, APP_NAME,
+    build_base_url, combine_path, is_localhost, remote_path, transport_message, Client, ClientError,
+    ClientResult, DownloadClientInfo, DownloadClientItem, DownloadItemStatus,
 };
-use crate::decision::RemoteEpisode;
 use crate::validation::ValidationFailure;
 
 const NAME: &str = "Transmission";
@@ -139,6 +139,7 @@ impl<'a> Transmission<'a> {
     /// `AuthenticateClient`: the session id, from the cache or from the
     /// 409 Transmission answers a request without one.
     async fn authenticate(&self, reauthenticate: bool) -> ClientResult<String> {
+        let app = self.settings.app.name;
         let key = format!("{}:{}", self.base_url(), self.settings.password);
         if !reauthenticate {
             if let Some(id) = session_cache().lock().unwrap().get(&key) {
@@ -162,7 +163,7 @@ impl<'a> Transmission<'a> {
             }
             reqwest::StatusCode::FORBIDDEN => {
                 return Err(ClientError::Other(format!(
-                    "Failed to authenticate with {NAME}. It may be necessary to add {APP_NAME}'s IP address to RPC whitelist."
+                    "Failed to authenticate with {NAME}. It may be necessary to add {app}'s IP address to RPC whitelist."
                 )))
             }
             reqwest::StatusCode::CONFLICT => response
@@ -264,8 +265,8 @@ impl<'a> Transmission<'a> {
         if let Some(dir) = download_dir.filter(|d| !d.trim().is_empty()) {
             args["download-dir"] = json!(dir);
         }
-        if !self.settings.tv_category.trim().is_empty() {
-            args["labels"] = json!([self.settings.tv_category]);
+        if !self.settings.category.trim().is_empty() {
+            args["labels"] = json!([self.settings.category]);
         }
         args
     }
@@ -282,8 +283,8 @@ impl<'a> Transmission<'a> {
         self.process("torrent-add", Some(args)).await.map(|_| ())
     }
 
-    pub async fn set_seeding(&self, hash: &str, remote: &RemoteEpisode) -> ClientResult<()> {
-        let Some(seed) = seed_limits(remote) else {
+    pub async fn set_seeding(&self, hash: &str, request: &GrabRequest<'_>) -> ClientResult<()> {
+        let Some(seed) = request.seed_limits() else {
             return Ok(());
         };
         let mut args = json!({"ids": [hash]});
@@ -328,48 +329,50 @@ impl<'a> Transmission<'a> {
     }
 
     async fn download_directory(&self) -> ClientResult<Option<String>> {
-        if !self.settings.tv_directory.trim().is_empty() {
-            return Ok(Some(self.settings.tv_directory.clone()));
+        if !self.settings.directory.trim().is_empty() {
+            return Ok(Some(self.settings.directory.clone()));
         }
-        if self.settings.tv_category.trim().is_empty() {
+        if self.settings.category.trim().is_empty() {
             return Ok(None);
         }
         let config = self.config().await?;
         Ok(Some(format!(
             "{}/{}",
             config.download_dir.trim_end_matches('/'),
-            self.settings.tv_category
+            self.settings.category
         )))
     }
 
-    async fn after_add(&self, remote: &RemoteEpisode, hash: &str) -> ClientResult<()> {
-        self.set_seeding(hash, remote).await?;
-        if self
-            .settings
-            .move_to_top(remote.is_recent_episode(self.client.context.now))
-        {
+    async fn after_add(&self, request: &GrabRequest<'_>, hash: &str) -> ClientResult<()> {
+        self.set_seeding(hash, request).await?;
+        if self.settings.move_to_top(request.recent) {
             self.move_to_top(hash).await?;
         }
         Ok(())
     }
 
-    pub async fn add_magnet(&self, remote: &RemoteEpisode, hash: &str, magnet: &str) -> ClientResult<String> {
+    pub async fn add_magnet(
+        &self,
+        request: &GrabRequest<'_>,
+        hash: &str,
+        magnet: &str,
+    ) -> ClientResult<String> {
         let dir = self.download_directory().await?;
         self.add_from_url(magnet, dir.as_deref()).await?;
-        self.after_add(remote, hash).await?;
+        self.after_add(request, hash).await?;
         Ok(hash.to_string())
     }
 
     pub async fn add_torrent(
         &self,
-        remote: &RemoteEpisode,
+        request: &GrabRequest<'_>,
         hash: &str,
         _filename: &str,
         torrent: Vec<u8>,
     ) -> ClientResult<String> {
         let dir = self.download_directory().await?;
         self.add_from_data(&torrent, dir.as_deref()).await?;
-        self.after_add(remote, hash).await?;
+        self.after_add(request, hash).await?;
         Ok(hash.to_string())
     }
 
@@ -378,20 +381,19 @@ impl<'a> Transmission<'a> {
         let torrents = self.torrents(None).await?;
         let mut config: Option<Config> = None;
         let s = self.settings;
-        let has_post_import = !s.tv_imported_category.trim().is_empty() && supports_labels;
+        let has_post_import = !s.imported_category.trim().is_empty() && supports_labels;
         let mut out = Vec::new();
         for t in torrents {
             let output_dir = t.download_dir.clone();
-            if !s.tv_category.trim().is_empty() && supports_labels && !t.labels.is_empty() {
-                if !t.labels.iter().any(|l| l.eq_ignore_ascii_case(&s.tv_category)) {
+            if !s.category.trim().is_empty() && supports_labels && !t.labels.is_empty() {
+                if !t.labels.iter().any(|l| l.eq_ignore_ascii_case(&s.category)) {
                     continue;
                 }
-            } else if !s.tv_directory.trim().is_empty() {
-                if !remote_path::contains(&s.tv_directory, &output_dir) {
+            } else if !s.directory.trim().is_empty() {
+                if !remote_path::contains(&s.directory, &output_dir) {
                     continue;
                 }
-            } else if !s.tv_category.trim().is_empty()
-                && !output_dir.split(['/', '\\']).any(|d| d == s.tv_category)
+            } else if !s.category.trim().is_empty() && !output_dir.split(['/', '\\']).any(|d| d == s.category)
             {
                 continue;
             }
@@ -401,7 +403,7 @@ impl<'a> Transmission<'a> {
                 t.hash_string.to_ascii_uppercase(),
                 t.name.clone(),
             );
-            item.category = Some(s.tv_category.clone());
+            item.category = Some(s.category.clone());
             item.output_path = Some(remote_path::join(&output_dir, &t.name.replace(':', "_")));
             item.total_size = t.total_size;
             item.remaining_size = t.left_until_done;
@@ -456,8 +458,8 @@ impl<'a> Transmission<'a> {
             )));
         }
         let s = self.settings;
-        let imported = s.tv_imported_category.trim();
-        if imported.is_empty() || imported == s.tv_category {
+        let imported = s.imported_category.trim();
+        if imported.is_empty() || imported == s.category {
             return Ok(());
         }
         let hash = item.download_id.to_ascii_lowercase();
@@ -473,7 +475,7 @@ impl<'a> Transmission<'a> {
         let mut labels: BTreeSet<String> = torrent
             .labels
             .iter()
-            .filter(|l| !l.eq_ignore_ascii_case(&s.tv_category))
+            .filter(|l| !l.eq_ignore_ascii_case(&s.category))
             .cloned()
             .collect();
         labels.insert(imported.to_string());
@@ -485,14 +487,14 @@ impl<'a> Transmission<'a> {
 
     pub async fn status(&self) -> ClientResult<DownloadClientInfo> {
         let s = self.settings;
-        let dest_dir = if !s.tv_directory.trim().is_empty() {
-            s.tv_directory.clone()
+        let dest_dir = if !s.directory.trim().is_empty() {
+            s.directory.clone()
         } else {
             let config = self.config().await?;
-            if s.tv_category.trim().is_empty() {
+            if s.category.trim().is_empty() {
                 config.download_dir
             } else {
-                format!("{}/{}", config.download_dir, s.tv_category)
+                format!("{}/{}", config.download_dir, s.category)
             }
         };
         Ok(DownloadClientInfo {
@@ -512,6 +514,7 @@ impl<'a> Transmission<'a> {
     }
 
     async fn test_connection(&self) -> Option<ValidationFailure> {
+        let app = self.settings.app.name;
         match self.client_version().await {
             Ok(raw) => {
                 tracing::debug!(version = %raw, "Transmission version information");
@@ -533,7 +536,7 @@ impl<'a> Transmission<'a> {
                 tracing::error!(error = %e, "Transmission authentication failed");
                 Some(
                     ValidationFailure::error("Username", "Authentication Failure").with_detail(&format!(
-                        "Please verify your credentials. Also verify if the host running {APP_NAME} isn't blocked from accessing {NAME} by WhiteList limitations in the {NAME} configuration."
+                        "Please verify your credentials. Also verify if the host running {app} isn't blocked from accessing {NAME} by WhiteList limitations in the {NAME} configuration."
                     )),
                 )
             }

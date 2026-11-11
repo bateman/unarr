@@ -1,0 +1,549 @@
+{
+  "body": {
+    "page": 1,
+    "pageSize": 4,
+    "records": [
+      {
+        "customFormats": [
+          {
+            "id": 54,
+            "name": "DD"
+          }
+        ],
+        "date": "2026-11-11T19:40:04Z",
+        "id": 119,
+        "indexer": "Mock Newznab (Prowlarr)",
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "message": "Pending release manually blocklisted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "extraordinary",
+          "digitalRelease": "2019-07-06T00:00:00Z",
+          "folderName": "/movies/Extra Ordinary (2019)",
+          "genres": [
+            "Fantasy",
+            "Comedy",
+            "Horror"
+          ],
+          "id": 32,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/z3IRiGKXx2eMhxtV8GktKwvWkhm.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/6Rie2qP3R7DCnexj87XGaeCFb70.jpg"
+            }
+          ],
+          "imdbId": "tt8233874",
+          "inCinemas": "2019-09-13T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "abduction",
+            "driving school",
+            "exorcism",
+            "floating",
+            "ghost",
+            "horror spoof",
+            "pact with the devil",
+            "paranormal phenomena",
+            "possession"
+          ],
+          "lastSearchTime": "2026-06-05T10:31:21Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Extra Ordinary",
+          "overview": "A driving instructor must use her other-worldly gifts to save a lonely man’s daughter from a rock star looking to use her for Satanic purposes.",
+          "path": "/movies/Extra Ordinary (2019)",
+          "popularity": 3.3877,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.4,
+              "votes": 13011
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 72,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 98,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.4,
+              "votes": 294
+            },
+            "trakt": {
+              "type": "user",
+              "value": 6.7426,
+              "votes": 1014
+            }
+          },
+          "releaseDate": "2019-07-06T00:00:00Z",
+          "runtime": 94,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "extra ordinary",
+          "status": "released",
+          "studio": "uMedia",
+          "tags": [],
+          "title": "Extra Ordinary",
+          "titleSlug": "538227",
+          "tmdbId": 538227,
+          "website": "",
+          "year": 2019,
+          "youTubeTrailerId": "x1TvL5ZL6Sc"
+        },
+        "movieId": 32,
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "modifier": "none",
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "webdl"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "Extra.Ordinary.2019.iTA.ENG.1080p.WEB-DL.DD5.1.H264-MeM"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 54,
+            "name": "DD"
+          }
+        ],
+        "date": "2026-11-11T19:40:02Z",
+        "id": 118,
+        "indexer": "Mock Newznab (Prowlarr)",
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "message": "Pending release manually blocklisted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "blindspotting",
+          "digitalRelease": "2019-08-30T00:00:00Z",
+          "folderName": "/movies/Blindspotting (2018)",
+          "genres": [
+            "Comedy",
+            "Crime",
+            "Drama"
+          ],
+          "id": 14,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/x4DRZfTqOlmzNWAvy4vcKWkgEGL.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/d3m59GlnJQdb4taaHYTGVT7c3RJ.jpg"
+            }
+          ],
+          "imdbId": "tt7242142",
+          "inCinemas": "2018-07-27T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "cheerful",
+            "sincere"
+          ],
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Blindspotting",
+          "overview": "Collin must make it through his final three days of probation for a chance at a new beginning. He and his troublemaking childhood best friend, Miles, work as movers, and when Collin witnesses a police shooting, the two men’s friendship is tested as they grapple with identity and their changed realities in the rapidly-gentrifying neighborhood they grew up in.",
+          "path": "/movies/Blindspotting (2018)",
+          "physicalRelease": "2019-02-04T00:00:00Z",
+          "popularity": 3.5323,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 7.4,
+              "votes": 34568
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 75,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 94,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7.3,
+              "votes": 757
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.51011,
+              "votes": 1880
+            }
+          },
+          "releaseDate": "2019-02-04T00:00:00Z",
+          "runtime": 95,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "blindspotting",
+          "status": "released",
+          "studio": "Summit Entertainment",
+          "tags": [],
+          "title": "Blindspotting",
+          "titleSlug": "489930",
+          "tmdbId": 489930,
+          "website": "https://www.lionsgate.com/movies/blindspotting",
+          "year": 2018,
+          "youTubeTrailerId": "-9-HBqVbtTo"
+        },
+        "movieId": 14,
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "modifier": "none",
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "webdl"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "Blindspotting.2018.iTA.ENG.1080p.WEB-DL.DD5.1.H264-MeM"
+      },
+      {
+        "customFormats": [],
+        "date": "2026-11-11T19:39:45Z",
+        "id": 117,
+        "indexer": "Mock Newznab (Prowlarr)",
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "message": "Unpacking failed, archive requires a password",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "theholdovers",
+          "digitalRelease": "2023-11-28T00:00:00Z",
+          "folderName": "/movies/The Holdovers (2023)",
+          "genres": [
+            "Drama",
+            "Comedy"
+          ],
+          "id": 116,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/VHSzNBTwxV8vh7wylo7O9CLdac.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/57fhbxl9is7W7ur5v6UuvlNsoSg.jpg"
+            }
+          ],
+          "imdbId": "tt14849194",
+          "inCinemas": "2023-10-27T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "1970s",
+            "adoring",
+            "alcoholism",
+            "boarding school",
+            "boston, massachusetts",
+            "boys' boarding school",
+            "christmas",
+            "christmastime",
+            "cook",
+            "grief",
+            "holiday",
+            "loss of son",
+            "melancholy",
+            "mental illness",
+            "misfit",
+            "new england",
+            "peaceful",
+            "teacher student relationship",
+            "troubled youth",
+            "vietnam war",
+            "winter",
+            "winter break"
+          ],
+          "lastSearchTime": "2026-11-11T19:39:45Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "The Holdovers",
+          "overview": "A curmudgeonly instructor at a New England prep school is forced to remain on campus during Christmas break to babysit the handful of students with nowhere to go. Eventually, he forms an unlikely bond with one of them — a damaged, brainy troublemaker — and with the school’s head cook, who has just lost a son in Vietnam.",
+          "path": "/movies/The Holdovers (2023)",
+          "physicalRelease": "2024-01-02T00:00:00Z",
+          "popularity": 7.2706,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 7.9,
+              "votes": 276206
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 82,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 97,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7.65,
+              "votes": 2774
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.95453,
+              "votes": 12734
+            }
+          },
+          "releaseDate": "2023-11-28T00:00:00Z",
+          "runtime": 133,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "holdovers",
+          "status": "released",
+          "studio": "Miramax",
+          "tags": [
+            1
+          ],
+          "title": "The Holdovers",
+          "titleSlug": "840430",
+          "tmdbId": 840430,
+          "website": "http://focusfeatures.com/the-holdovers",
+          "year": 2023,
+          "youTubeTrailerId": "AhKLpJmHhIg"
+        },
+        "movieId": 116,
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "The.Holdovers.2023.iTA.ENG.1080p.BluRay.x264-MIRCrew"
+      },
+      {
+        "customFormats": [],
+        "date": "2026-11-11T19:39:05Z",
+        "id": 116,
+        "indexer": "Mock Torznab (Prowlarr)",
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "message": "Manually marked as failed",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "lastnightinsoho",
+          "digitalRelease": "2021-11-19T00:00:00Z",
+          "folderName": "/movies/Last Night in Soho (2021)",
+          "genres": [
+            "Horror",
+            "Mystery",
+            "Thriller"
+          ],
+          "id": 62,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/n1ZRmjlk1BJTY7aASqACfPAaLn2.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/nPWy5KISy7BbUOQcg588dflKzTL.jpg"
+            }
+          ],
+          "imdbId": "tt9639470",
+          "inCinemas": "2021-10-09T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "1960s",
+            "amused",
+            "audacious",
+            "burlesque",
+            "clairvoyant",
+            "fashion design",
+            "fashion designer",
+            "go-go dancer",
+            "london, england",
+            "mirror",
+            "murder",
+            "mysterious",
+            "nightmare",
+            "nostalgia",
+            "psychological horror",
+            "pub",
+            "soho london",
+            "somber",
+            "suspenseful",
+            "time travel"
+          ],
+          "lastSearchTime": "2026-03-12T19:45:03Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Last Night in Soho",
+          "overview": "A young girl, passionate about fashion design, is mysteriously able to enter the 1960s where she encounters her idol, a dazzling wannabe singer. But 1960s London is not what it seems, and time seems to be falling apart with shady consequences.",
+          "path": "/movies/Last Night in Soho (2021)",
+          "physicalRelease": "2022-01-18T00:00:00Z",
+          "popularity": 5.6875,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 7,
+              "votes": 203777
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 65,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 75,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7.253,
+              "votes": 4115
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.08181,
+              "votes": 8728
+            }
+          },
+          "releaseDate": "2021-11-19T00:00:00Z",
+          "runtime": 116,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "last night in soho",
+          "status": "released",
+          "studio": "Focus Features",
+          "tags": [
+            1
+          ],
+          "title": "Last Night in Soho",
+          "titleSlug": "576845",
+          "tmdbId": 576845,
+          "website": "https://www.focusfeatures.com/last-night-in-soho",
+          "year": 2021,
+          "youTubeTrailerId": "XgNrL4Kf7yU"
+        },
+        "movieId": 62,
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "Last.Night.in.Soho.2021.iTA.ENG.1080p.BluRay.x264-MIRCrew"
+      }
+    ],
+    "sortDirection": "descending",
+    "sortKey": "date",
+    "totalRecords": 90
+  },
+  "recordedAt": "2026-11-11T19:40:16Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/blocklist?page=1&pageSize=4&sortKey=date&sortDirection=descending"
+  },
+  "status": 200
+}

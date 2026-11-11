@@ -1,0 +1,835 @@
+{
+  "body": {
+    "page": 1,
+    "pageSize": 5,
+    "records": [
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 50,
+            "name": "DD+"
+          }
+        ],
+        "data": {
+          "age": "3",
+          "ageHours": "79.08149193663888",
+          "ageMinutes": "4744.889516275",
+          "customFormatScore": "0",
+          "downloadClient": "Transmission",
+          "downloadClientName": "Mock Transmission",
+          "downloadUrl": "http://127.0.0.1:18989/movies/torznab/download/bc295ecb0fb56b9e5df74be19469cef4.torrent",
+          "guid": "http://127.0.0.1:18989/movies/torznab/details/bc295ecb0fb56b9e5df74be19469cef4",
+          "imdbId": "7740496",
+          "indexer": "Mock Torznab (Prowlarr)",
+          "indexerFlags": "0",
+          "indexerId": "21",
+          "movieMatchType": "Id",
+          "nzbInfoUrl": "http://127.0.0.1:18989/movies/torznab/details/bc295ecb0fb56b9e5df74be19469cef4",
+          "protocol": "2",
+          "publishedDate": "2026-11-08T12:34:00Z",
+          "releaseGroup": "MeM",
+          "releaseSource": "Rss",
+          "size": "4509715660",
+          "tmdbId": "0",
+          "torrentInfoHash": "2076338e94f6fc307b43e478146e941fbd6ef7ba"
+        },
+        "date": "2026-11-11T19:38:53Z",
+        "downloadId": "5AE419C220561D2F40DDBB4026B5D0121DCC040E",
+        "eventType": "grabbed",
+        "id": 1011,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "nightmarealley",
+          "digitalRelease": "2022-02-01T00:00:00Z",
+          "folderName": "/movies/Nightmare Alley (2021)",
+          "genres": [
+            "Crime",
+            "Drama",
+            "Thriller"
+          ],
+          "id": 70,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/vfn1feL0V9HNSXuLLpaxAW8O6LO.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/g0YNGpmlXsgHfhGnJz3c5uyzZ1B.jpg"
+            }
+          ],
+          "imdbId": "tt7740496",
+          "inCinemas": "2021-12-02T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "1940s",
+            "alcoholic",
+            "based on novel or book",
+            "carnival",
+            "carny",
+            "con artist",
+            "freak show",
+            "fugitive",
+            "grifter",
+            "hustler",
+            "infidelity",
+            "lie",
+            "love triangle",
+            "mentalist",
+            "mentor",
+            "murder",
+            "neo-noir",
+            "spiritism",
+            "supernatural",
+            "séance",
+            "tarot cards",
+            "violence"
+          ],
+          "lastSearchTime": "2026-11-11T19:38:47Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Nightmare Alley",
+          "overview": "An ambitious carnival man with a talent for manipulating people with a few well-chosen words hooks up with a female psychologist who is even more dangerous than he is.",
+          "path": "/movies/Nightmare Alley (2021)",
+          "physicalRelease": "2022-03-16T00:00:00Z",
+          "popularity": 6.2105,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 7,
+              "votes": 185744
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 70,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 80,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.9,
+              "votes": 3554
+            },
+            "trakt": {
+              "type": "user",
+              "value": 6.95479,
+              "votes": 8427
+            }
+          },
+          "releaseDate": "2022-02-01T00:00:00Z",
+          "runtime": 151,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "nightmare alley",
+          "status": "released",
+          "studio": "Searchlight Pictures",
+          "tags": [],
+          "title": "Nightmare Alley",
+          "titleSlug": "597208",
+          "tmdbId": 597208,
+          "website": "https://www.searchlightpictures.com/nightmarealley/",
+          "year": 2021,
+          "youTubeTrailerId": "Q81Yf46Oj3s"
+        },
+        "movieId": 70,
+        "quality": {
+          "quality": {
+            "id": 3,
+            "modifier": "none",
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "webdl"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "sourceTitle": "Nightmare.Alley.2021.iTA.ENG.1080p.WEB-DL.DDP5.1.H.264-MeM"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [],
+        "data": {
+          "age": "2",
+          "ageHours": "48.56427527202778",
+          "ageMinutes": "2913.8565164083334",
+          "customFormatScore": "0",
+          "downloadClient": "qBittorrent",
+          "downloadClientName": "Mock qBittorrent",
+          "downloadUrl": "http://127.0.0.1:18989/movies/torznab/download/c8949b89db6f20a1e049aa8170a7a05c.torrent",
+          "guid": "http://127.0.0.1:18989/movies/torznab/details/c8949b89db6f20a1e049aa8170a7a05c",
+          "imdbId": "9639470",
+          "indexer": "Mock Torznab (Prowlarr)",
+          "indexerFlags": "G_Freeleech",
+          "indexerId": "21",
+          "movieMatchType": "Id",
+          "nzbInfoUrl": "http://127.0.0.1:18989/movies/torznab/details/c8949b89db6f20a1e049aa8170a7a05c",
+          "protocol": "2",
+          "publishedDate": "2026-11-09T19:05:00Z",
+          "releaseGroup": "MIRCrew",
+          "releaseSource": "Rss",
+          "size": "6979321856",
+          "tmdbId": "0",
+          "torrentInfoHash": "d0c1309e36cdb92c5d7b4abfd794f9bdff969920"
+        },
+        "date": "2026-11-11T19:38:51Z",
+        "downloadId": "13706ED57ADBE030F510BEDCD37595376901117C",
+        "eventType": "grabbed",
+        "id": 1010,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "lastnightinsoho",
+          "digitalRelease": "2021-11-19T00:00:00Z",
+          "folderName": "/movies/Last Night in Soho (2021)",
+          "genres": [
+            "Horror",
+            "Mystery",
+            "Thriller"
+          ],
+          "id": 62,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/n1ZRmjlk1BJTY7aASqACfPAaLn2.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/nPWy5KISy7BbUOQcg588dflKzTL.jpg"
+            }
+          ],
+          "imdbId": "tt9639470",
+          "inCinemas": "2021-10-09T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "1960s",
+            "amused",
+            "audacious",
+            "burlesque",
+            "clairvoyant",
+            "fashion design",
+            "fashion designer",
+            "go-go dancer",
+            "london, england",
+            "mirror",
+            "murder",
+            "mysterious",
+            "nightmare",
+            "nostalgia",
+            "psychological horror",
+            "pub",
+            "soho london",
+            "somber",
+            "suspenseful",
+            "time travel"
+          ],
+          "lastSearchTime": "2026-03-12T19:45:03Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Last Night in Soho",
+          "overview": "A young girl, passionate about fashion design, is mysteriously able to enter the 1960s where she encounters her idol, a dazzling wannabe singer. But 1960s London is not what it seems, and time seems to be falling apart with shady consequences.",
+          "path": "/movies/Last Night in Soho (2021)",
+          "physicalRelease": "2022-01-18T00:00:00Z",
+          "popularity": 5.6875,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 7,
+              "votes": 203777
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 65,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 75,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7.253,
+              "votes": 4115
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.08181,
+              "votes": 8728
+            }
+          },
+          "releaseDate": "2021-11-19T00:00:00Z",
+          "runtime": 116,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "last night in soho",
+          "status": "released",
+          "studio": "Focus Features",
+          "tags": [
+            1
+          ],
+          "title": "Last Night in Soho",
+          "titleSlug": "576845",
+          "tmdbId": 576845,
+          "website": "https://www.focusfeatures.com/last-night-in-soho",
+          "year": 2021,
+          "youTubeTrailerId": "XgNrL4Kf7yU"
+        },
+        "movieId": 62,
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "Last.Night.in.Soho.2021.iTA.ENG.1080p.BluRay.x264-MIRCrew"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [],
+        "data": {
+          "age": "1",
+          "ageHours": "46.413721340361114",
+          "ageMinutes": "2784.8232805233333",
+          "customFormatScore": "0",
+          "downloadClient": "SABnzbd",
+          "downloadClientName": "Mock SABnzbd",
+          "downloadUrl": "http://127.0.0.1:18989/movies/newznab/download/fd04f3b8c14e7d33d5e992475f5fef5b.nzb",
+          "guid": "http://127.0.0.1:18989/movies/newznab/details/fd04f3b8c14e7d33d5e992475f5fef5b",
+          "imdbId": "14849194",
+          "indexer": "Mock Newznab (Prowlarr)",
+          "indexerFlags": "0",
+          "indexerId": "20",
+          "movieMatchType": "Id",
+          "nzbInfoUrl": "http://127.0.0.1:18989/movies/newznab/details/fd04f3b8c14e7d33d5e992475f5fef5b",
+          "protocol": "1",
+          "publishedDate": "2026-11-09T21:14:00Z",
+          "releaseGroup": "MIRCrew",
+          "releaseSource": "Rss",
+          "size": "7945689497",
+          "tmdbId": "840430"
+        },
+        "date": "2026-11-11T19:38:49Z",
+        "downloadId": "SABnzbd_nzo_mock1",
+        "eventType": "grabbed",
+        "id": 1009,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "theholdovers",
+          "digitalRelease": "2023-11-28T00:00:00Z",
+          "folderName": "/movies/The Holdovers (2023)",
+          "genres": [
+            "Drama",
+            "Comedy"
+          ],
+          "id": 116,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/VHSzNBTwxV8vh7wylo7O9CLdac.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/57fhbxl9is7W7ur5v6UuvlNsoSg.jpg"
+            }
+          ],
+          "imdbId": "tt14849194",
+          "inCinemas": "2023-10-27T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "1970s",
+            "adoring",
+            "alcoholism",
+            "boarding school",
+            "boston, massachusetts",
+            "boys' boarding school",
+            "christmas",
+            "christmastime",
+            "cook",
+            "grief",
+            "holiday",
+            "loss of son",
+            "melancholy",
+            "mental illness",
+            "misfit",
+            "new england",
+            "peaceful",
+            "teacher student relationship",
+            "troubled youth",
+            "vietnam war",
+            "winter",
+            "winter break"
+          ],
+          "lastSearchTime": "2026-11-11T19:38:43Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "The Holdovers",
+          "overview": "A curmudgeonly instructor at a New England prep school is forced to remain on campus during Christmas break to babysit the handful of students with nowhere to go. Eventually, he forms an unlikely bond with one of them — a damaged, brainy troublemaker — and with the school’s head cook, who has just lost a son in Vietnam.",
+          "path": "/movies/The Holdovers (2023)",
+          "physicalRelease": "2024-01-02T00:00:00Z",
+          "popularity": 7.2706,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 7.9,
+              "votes": 276206
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 82,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 97,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7.65,
+              "votes": 2774
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.95453,
+              "votes": 12734
+            }
+          },
+          "releaseDate": "2023-11-28T00:00:00Z",
+          "runtime": 133,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "holdovers",
+          "status": "released",
+          "studio": "Miramax",
+          "tags": [
+            1
+          ],
+          "title": "The Holdovers",
+          "titleSlug": "840430",
+          "tmdbId": 840430,
+          "website": "http://focusfeatures.com/the-holdovers",
+          "year": 2023,
+          "youTubeTrailerId": "AhKLpJmHhIg"
+        },
+        "movieId": 116,
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "The.Holdovers.2023.iTA.ENG.1080p.BluRay.x264-MIRCrew"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 52,
+            "name": "DTS"
+          }
+        ],
+        "data": {
+          "customFormatScore": "0",
+          "downloadClient": "redacted",
+          "downloadClientName": "Download client",
+          "droppedPath": "/downloads/Predestination.2014.DTS.ITA.ENG.1080p.BluRay.x264-BLUWORLD.mkv",
+          "fileId": "404",
+          "importedPath": "/movies/Predestination (2014) {tmdb-206487}/Predestination (2014) {tmdb-206487} - [Bluray-1080p][DTS 5.1][x264]-BLUWORLD.mkv",
+          "indexerFlags": "G_Halfleech",
+          "releaseGroup": "BLUWORLD",
+          "size": "8735974490"
+        },
+        "date": "2026-11-11T11:53:43Z",
+        "downloadId": "932161398c8420b934b0d047c43b66b8d1337383",
+        "eventType": "downloadFolderImported",
+        "id": 1008,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-11-11T07:53:41Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "predestination",
+          "digitalRelease": "2014-08-28T00:00:00Z",
+          "folderName": "/movies/Predestination (2014) {tmdb-206487}",
+          "genres": [
+            "Science Fiction",
+            "Thriller"
+          ],
+          "id": 327,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/38Xr1JnV1ZcLQ55zmdSp6n475cZ.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/cvq9cRMDJIGzNpHaPVGFftqPcLj.jpg"
+            }
+          ],
+          "imdbId": "tt2397535",
+          "inCinemas": "2014-08-28T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "baffled",
+            "bartender",
+            "based on short story",
+            "bomber",
+            "determinism",
+            "excited",
+            "fate",
+            "intersex",
+            "intersexuality",
+            "loner",
+            "mission",
+            "orphanage",
+            "philosophical",
+            "pregnancy",
+            "secret organization",
+            "shocking",
+            "temporal agent",
+            "terrorism",
+            "time machine",
+            "time paradox",
+            "time travel"
+          ],
+          "lastSearchTime": "2026-11-11T07:54:45Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 404,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Predestination",
+          "overview": "Predestination chronicles the life of a Temporal Agent sent on an intricate series of time-travel journeys designed to prevent future killers from committing their crimes. Now, on his final assignment, the Agent must stop the one criminal that has eluded him throughout time and prevent a devastating attack in which thousands of lives will be lost.",
+          "path": "/movies/Predestination (2014) {tmdb-206487}",
+          "physicalRelease": "2014-11-28T00:00:00Z",
+          "popularity": 7.7869,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 7.4,
+              "votes": 343095
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 69,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 84,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7.412,
+              "votes": 7468
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.54082,
+              "votes": 13193
+            }
+          },
+          "releaseDate": "2014-08-28T00:00:00Z",
+          "runtime": 98,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "predestination",
+          "status": "released",
+          "studio": "Screen Queensland",
+          "tags": [
+            1
+          ],
+          "title": "Predestination",
+          "titleSlug": "206487",
+          "tmdbId": 206487,
+          "website": "https://www.sonypictures.com/movies/predestination",
+          "year": 2014,
+          "youTubeTrailerId": "xxG-YfedrfU"
+        },
+        "movieId": 327,
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "Predestination.2014.DTS.ITA.ENG.1080p.BluRay.x264-BLUWORLD"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 52,
+            "name": "DTS"
+          }
+        ],
+        "data": {
+          "age": "2318",
+          "ageHours": "55641.91606649264",
+          "ageMinutes": "3338514.963989713",
+          "customFormatScore": "0",
+          "downloadClient": "redacted",
+          "downloadClientName": "Download client",
+          "downloadUrl": "http://indexer.invalid/d7d810b5969e",
+          "guid": "http://indexer.invalid/8568914edcb1",
+          "imdbId": "0",
+          "indexer": "Indexer",
+          "indexerFlags": "G_Halfleech",
+          "indexerId": "17",
+          "movieMatchType": "Title",
+          "nzbInfoUrl": "http://indexer.invalid/4d29e242a089",
+          "protocol": "2",
+          "publishedDate": "2020-07-06T22:00:00Z",
+          "releaseGroup": null,
+          "releaseSource": "Search",
+          "size": "8740258447",
+          "tmdbId": "0",
+          "torrentInfoHash": "03c05d18105e259cbc7fff4eef9033733e52e80b"
+        },
+        "date": "2026-11-11T07:54:57Z",
+        "downloadId": "932161398c8420b934b0d047c43b66b8d1337383",
+        "eventType": "grabbed",
+        "id": 1007,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-11-11T07:53:41Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "predestination",
+          "digitalRelease": "2014-08-28T00:00:00Z",
+          "folderName": "/movies/Predestination (2014) {tmdb-206487}",
+          "genres": [
+            "Science Fiction",
+            "Thriller"
+          ],
+          "id": 327,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/38Xr1JnV1ZcLQ55zmdSp6n475cZ.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/cvq9cRMDJIGzNpHaPVGFftqPcLj.jpg"
+            }
+          ],
+          "imdbId": "tt2397535",
+          "inCinemas": "2014-08-28T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "baffled",
+            "bartender",
+            "based on short story",
+            "bomber",
+            "determinism",
+            "excited",
+            "fate",
+            "intersex",
+            "intersexuality",
+            "loner",
+            "mission",
+            "orphanage",
+            "philosophical",
+            "pregnancy",
+            "secret organization",
+            "shocking",
+            "temporal agent",
+            "terrorism",
+            "time machine",
+            "time paradox",
+            "time travel"
+          ],
+          "lastSearchTime": "2026-11-11T07:54:45Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 404,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Predestination",
+          "overview": "Predestination chronicles the life of a Temporal Agent sent on an intricate series of time-travel journeys designed to prevent future killers from committing their crimes. Now, on his final assignment, the Agent must stop the one criminal that has eluded him throughout time and prevent a devastating attack in which thousands of lives will be lost.",
+          "path": "/movies/Predestination (2014) {tmdb-206487}",
+          "physicalRelease": "2014-11-28T00:00:00Z",
+          "popularity": 7.7869,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 7.4,
+              "votes": 343095
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 69,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 84,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7.412,
+              "votes": 7468
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.54082,
+              "votes": 13193
+            }
+          },
+          "releaseDate": "2014-08-28T00:00:00Z",
+          "runtime": 98,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "predestination",
+          "status": "released",
+          "studio": "Screen Queensland",
+          "tags": [
+            1
+          ],
+          "title": "Predestination",
+          "titleSlug": "206487",
+          "tmdbId": 206487,
+          "website": "https://www.sonypictures.com/movies/predestination",
+          "year": 2014,
+          "youTubeTrailerId": "xxG-YfedrfU"
+        },
+        "movieId": 327,
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "Predestination 2014 DTS ITA ENG 1080p BluRay x264 BLUWORLD mkv torrent"
+      }
+    ],
+    "sortDirection": "descending",
+    "sortKey": "date",
+    "totalRecords": 672
+  },
+  "recordedAt": "2026-11-11T19:39:05Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/history?page=1&pageSize=5&sortKey=date&sortDirection=descending&includeMovie=true"
+  },
+  "status": 200
+}

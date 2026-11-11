@@ -1,0 +1,373 @@
+{
+ "source": "radarr/src/NzbDrone.Core.Test/ParserTests/SlugParserFixture.cs",
+ "methods": {
+  "should_replace_accents": {
+   "params": [
+    "input",
+    "result"
+   ],
+   "cases": [
+    [
+     "tèst",
+     "test"
+    ],
+    [
+     "têst",
+     "test"
+    ],
+    [
+     "tëst",
+     "test"
+    ],
+    [
+     "tËst",
+     "test"
+    ],
+    [
+     "áccent",
+     "accent"
+    ],
+    [
+     "àccent",
+     "accent"
+    ],
+    [
+     "âccent",
+     "accent"
+    ],
+    [
+     "Äccent",
+     "accent"
+    ],
+    [
+     "åccent",
+     "accent"
+    ],
+    [
+     "acceñt",
+     "accent"
+    ],
+    [
+     "ßtest",
+     "test"
+    ],
+    [
+     "œtest",
+     "test"
+    ],
+    [
+     "Œtest",
+     "test"
+    ],
+    [
+     "Øtest",
+     "test"
+    ]
+   ]
+  },
+  "should_replace_special_characters": {
+   "params": [
+    "input"
+   ],
+   "cases": [
+    [
+     "Test'Result"
+    ],
+    [
+     "Test$Result"
+    ],
+    [
+     "Test(Result"
+    ],
+    [
+     "Test)Result"
+    ],
+    [
+     "Test*Result"
+    ],
+    [
+     "Test?Result"
+    ],
+    [
+     "Test/Result"
+    ],
+    [
+     "Test=Result"
+    ],
+    [
+     "Test\\Result"
+    ]
+   ]
+  },
+  "should_lowercase_capitals": {
+   "params": [
+    "input"
+   ],
+   "cases": [
+    [
+     "ThIS IS A MiXeD CaSe SensItIvE ValUe"
+    ]
+   ]
+  },
+  "should_trim_trailing_dashes_and_underscores": {
+   "params": [
+    "input"
+   ],
+   "cases": [
+    [
+     "test----"
+    ],
+    [
+     "test____"
+    ],
+    [
+     "test-_--_"
+    ]
+   ]
+  },
+  "should_replace_spaces_with_dash": {
+   "params": [
+    "input"
+   ],
+   "cases": [
+    [
+     "test result"
+    ],
+    [
+     "test     result"
+    ]
+   ]
+  },
+  "should_replace_double_occurence": {
+   "params": [
+    "input",
+    "result"
+   ],
+   "cases": [
+    [
+     "test     result",
+     "test-result"
+    ],
+    [
+     "test-----result",
+     "test-result"
+    ],
+    [
+     "test_____result",
+     "test_result"
+    ]
+   ]
+  },
+  "should_replace_special_characters_with_dash_when_enabled": {
+   "params": [
+    "input"
+   ],
+   "cases": [
+    [
+     "Test'Result"
+    ],
+    [
+     "Test$Result"
+    ],
+    [
+     "Test(Result"
+    ],
+    [
+     "Test)Result"
+    ],
+    [
+     "Test*Result"
+    ],
+    [
+     "Test?Result"
+    ],
+    [
+     "Test/Result"
+    ],
+    [
+     "Test=Result"
+    ],
+    [
+     "Test\\Result"
+    ]
+   ]
+  },
+  "should__not_replace_special_characters_with_dash_when_disabled": {
+   "params": [
+    "input"
+   ],
+   "cases": [
+    [
+     "Test'Result"
+    ],
+    [
+     "Test$Result"
+    ],
+    [
+     "Test(Result"
+    ],
+    [
+     "Test)Result"
+    ],
+    [
+     "Test*Result"
+    ],
+    [
+     "Test?Result"
+    ],
+    [
+     "Test/Result"
+    ],
+    [
+     "Test=Result"
+    ],
+    [
+     "Test\\Result"
+    ]
+   ]
+  },
+  "should_trim_trailing_dashes_and_underscores_based_on_list": {
+   "params": [
+    "input",
+    "trimList",
+    "result"
+   ],
+   "cases": [
+    [
+     "test----",
+     "-_",
+     "test"
+    ],
+    [
+     "test____",
+     "-_",
+     "test"
+    ],
+    [
+     "test-_-_",
+     "-_",
+     "test"
+    ],
+    [
+     "test----",
+     "-",
+     "test"
+    ],
+    [
+     "test____",
+     "-",
+     "test____"
+    ],
+    [
+     "test-_-_",
+     "-",
+     "test-_-_"
+    ],
+    [
+     "test----",
+     "_",
+     "test----"
+    ],
+    [
+     "test____",
+     "_",
+     "test"
+    ],
+    [
+     "test-_-_",
+     "_",
+     "test-_-"
+    ],
+    [
+     "test----",
+     "",
+     "test----"
+    ],
+    [
+     "test____",
+     "",
+     "test____"
+    ],
+    [
+     "test-_-_",
+     "",
+     "test-_-_"
+    ]
+   ]
+  },
+  "should_replace_duplicate_characters_based_on_list": {
+   "params": [
+    "input",
+    "deduplicateChars",
+    "result"
+   ],
+   "cases": [
+    [
+     "test----result",
+     "-_",
+     "test-result"
+    ],
+    [
+     "test____result",
+     "-_",
+     "test_result"
+    ],
+    [
+     "test_-_-result",
+     "-_",
+     "test-result"
+    ],
+    [
+     "test-_-_result",
+     "-_",
+     "test_result"
+    ],
+    [
+     "test----result",
+     "-",
+     "test-result"
+    ],
+    [
+     "test____result",
+     "-",
+     "test____result"
+    ],
+    [
+     "test-_-_result",
+     "-",
+     "test-_-_result"
+    ],
+    [
+     "test----result",
+     "_",
+     "test----result"
+    ],
+    [
+     "test____result",
+     "_",
+     "test_result"
+    ],
+    [
+     "test-_-_result",
+     "_",
+     "test-_-_result"
+    ],
+    [
+     "test----result",
+     "",
+     "test----result"
+    ],
+    [
+     "test____result",
+     "",
+     "test____result"
+    ],
+    [
+     "test-_-_result",
+     "",
+     "test-_-_result"
+    ]
+   ]
+  }
+ }
+}

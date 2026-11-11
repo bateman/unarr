@@ -1,0 +1,133 @@
+{
+  "body": [
+    {
+      "customFormatScore": 0,
+      "customFormats": [],
+      "data": {
+        "age": "1",
+        "ageHours": "46.413721340361114",
+        "ageMinutes": "2784.8232805233333",
+        "customFormatScore": "0",
+        "downloadClient": "SABnzbd",
+        "downloadClientName": "Mock SABnzbd",
+        "downloadUrl": "http://127.0.0.1:18989/movies/newznab/download/fd04f3b8c14e7d33d5e992475f5fef5b.nzb",
+        "guid": "http://127.0.0.1:18989/movies/newznab/details/fd04f3b8c14e7d33d5e992475f5fef5b",
+        "imdbId": "14849194",
+        "indexer": "Mock Newznab (Prowlarr)",
+        "indexerFlags": "0",
+        "indexerId": "20",
+        "movieMatchType": "Id",
+        "nzbInfoUrl": "http://127.0.0.1:18989/movies/newznab/details/fd04f3b8c14e7d33d5e992475f5fef5b",
+        "protocol": "1",
+        "publishedDate": "2026-11-09T21:14:00Z",
+        "releaseGroup": "MIRCrew",
+        "releaseSource": "Rss",
+        "size": "7945689497",
+        "tmdbId": "840430"
+      },
+      "date": "2026-11-11T19:38:49Z",
+      "downloadId": "SABnzbd_nzo_mock1",
+      "eventType": "grabbed",
+      "id": 1009,
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        },
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movieId": 116,
+      "quality": {
+        "quality": {
+          "id": 7,
+          "modifier": "none",
+          "name": "Bluray-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "sourceTitle": "The.Holdovers.2023.iTA.ENG.1080p.BluRay.x264-MIRCrew"
+    },
+    {
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 46,
+          "name": "DTS-HD MA"
+        },
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 7,
+          "name": "Repack/Proper"
+        }
+      ],
+      "data": {
+        "age": "0",
+        "ageHours": "0.8649991273055555",
+        "ageMinutes": "51.89994782",
+        "customFormatScore": "0",
+        "downloadClient": "NZBGet",
+        "downloadClientName": "Download client",
+        "downloadUrl": "http://indexer.invalid/94fea4dc1658",
+        "guid": "http://indexer.invalid/95468dab2808",
+        "imdbId": "14849194",
+        "indexer": "Indexer",
+        "indexerFlags": "0",
+        "indexerId": "3",
+        "movieMatchType": "Id",
+        "nzbInfoUrl": "http://indexer.invalid/95468dab2808",
+        "protocol": "1",
+        "publishedDate": "2026-04-03T21:05:31Z",
+        "releaseGroup": "FraMeSToR",
+        "releaseSource": "Rss",
+        "size": "40214130837",
+        "tmdbId": "0"
+      },
+      "date": "2026-04-03T21:57:24Z",
+      "downloadId": "e96eebd89f6ece5a6a42d9cb77497083",
+      "eventType": "grabbed",
+      "id": 283,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movieId": 116,
+      "quality": {
+        "quality": {
+          "id": 30,
+          "modifier": "remux",
+          "name": "Remux-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 2
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "The.Holdovers.2023.PROPER.BluRay.1080p.DTS-HD.MA.5.1.AVC.REMUX-FraMeSToR"
+    }
+  ],
+  "recordedAt": "2026-11-11T19:39:05Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/history/movie?movieId=116&eventType=1"
+  },
+  "status": 200
+}

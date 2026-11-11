@@ -1,0 +1,31 @@
+{
+  "body": {
+    "age": 0,
+    "ageHours": 0,
+    "ageMinutes": 0,
+    "approved": false,
+    "customFormatScore": 0,
+    "downloadAllowed": false,
+    "downloadClientId": 4,
+    "guid": "http://127.0.0.1:18989/movies/newznab/details/fd04f3b8c14e7d33d5e992475f5fef5b",
+    "imdbId": 0,
+    "indexerId": 20,
+    "movieRequested": false,
+    "protocol": "unknown",
+    "publishDate": "0001-01-01T00:00:00Z",
+    "qualityWeight": 0,
+    "rejected": false,
+    "releaseWeight": 0,
+    "sceneSource": false,
+    "size": 0,
+    "temporarilyRejected": false,
+    "tmdbId": 0
+  },
+  "recordedAt": "2026-11-11T19:38:49Z",
+  "request": {
+    "body": "bodies/release-grab-usenet.json",
+    "method": "POST",
+    "path": "/api/v3/release"
+  },
+  "status": 200
+}

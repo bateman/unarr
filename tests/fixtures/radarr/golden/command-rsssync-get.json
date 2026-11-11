@@ -1,0 +1,36 @@
+{
+  "body": {
+    "body": {
+      "isExclusive": false,
+      "isLongRunning": true,
+      "isTypeExclusive": false,
+      "name": "RssSync",
+      "requiresDiskAccess": false,
+      "sendUpdatesToClient": true,
+      "suppressMessages": false,
+      "trigger": "manual",
+      "updateScheduledTask": true
+    },
+    "commandName": "Rss Sync",
+    "duration": "00:00:02.0349459",
+    "ended": "2026-11-11T19:39:07Z",
+    "id": 472957,
+    "message": "RSS Sync Completed. Reports found: 14, Reports grabbed: 1",
+    "name": "RssSync",
+    "priority": "normal",
+    "queued": "2026-11-11T19:39:05Z",
+    "result": "successful",
+    "sendUpdatesToClient": true,
+    "started": "2026-11-11T19:39:05Z",
+    "stateChangeTime": "2026-11-11T19:39:05Z",
+    "status": "completed",
+    "trigger": "manual",
+    "updateScheduledTask": true
+  },
+  "recordedAt": "2026-11-11T19:39:17Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/command/472957"
+  },
+  "status": 200
+}

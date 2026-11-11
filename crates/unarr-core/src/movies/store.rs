@@ -192,6 +192,192 @@ pub fn movies_by_tmdb_id(conn: &Connection, tmdb_id: i64) -> anyhow::Result<Vec<
     query_movies(conn, "md.tmdb_id = ?1", &[&tmdb_id])
 }
 
+/// The movie with this IMDb id (`tt` and at least seven digits).
+pub fn movie_by_imdb_id(conn: &Connection, imdb_id: &str) -> anyhow::Result<Option<Movie>> {
+    Ok(query_movies(conn, "md.imdb_id = ?1", &[&imdb_id])?
+        .into_iter()
+        .next())
+}
+
+/// `MovieRepository.FindByTitles`: the movies whose clean title or clean
+/// original title is one of these, then those with such an alternative
+/// title, then those with such a translation, each once, with the clean
+/// alternative titles and translations they are known by.
+pub fn movies_by_clean_titles(
+    conn: &Connection,
+    titles: &[String],
+) -> anyhow::Result<Vec<crate::movies::decision::LibraryMovie>> {
+    let titles = serde_json::to_string(titles)?;
+    let wanted = "(SELECT value FROM json_each(?1))";
+    let mut movies = Vec::new();
+    for filter in [
+        format!("md.clean_title IN {wanted} OR md.clean_original_title IN {wanted}"),
+        format!("md.id IN (SELECT movie_metadata_id FROM alternative_titles WHERE clean_title IN {wanted})"),
+        format!("md.id IN (SELECT movie_metadata_id FROM movie_translations WHERE clean_title IN {wanted})"),
+    ] {
+        for movie in query_movies(conn, &filter, &[&titles])? {
+            if !movies.iter().any(|m: &Movie| m.id == movie.id) {
+                movies.push(movie);
+            }
+        }
+    }
+    movies
+        .into_iter()
+        .map(|movie| library_movie(conn, movie))
+        .collect()
+}
+
+/// A movie with the clean titles its metadata is also known by.
+pub fn library_movie(
+    conn: &Connection,
+    movie: Movie,
+) -> anyhow::Result<crate::movies::decision::LibraryMovie> {
+    let clean_titles = |table: &str| -> anyhow::Result<Vec<String>> {
+        let mut stmt = conn.prepare(&format!(
+            "SELECT clean_title FROM {table} WHERE movie_metadata_id = ?1 AND clean_title IS NOT NULL ORDER BY id"
+        ))?;
+        let rows = stmt.query_map([movie.metadata.id], |r| r.get::<_, String>(0))?;
+        Ok(rows.collect::<Result<_, _>>()?)
+    };
+    Ok(crate::movies::decision::LibraryMovie {
+        alternative_titles: clean_titles("alternative_titles")?,
+        translations: clean_titles("movie_translations")?,
+        movie,
+    })
+}
+
+/// `(language id, title)` of the translations of a movie's metadata.
+pub fn translation_titles(conn: &Connection, movie_metadata_id: i64) -> anyhow::Result<Vec<(i64, String)>> {
+    let mut stmt = conn.prepare(
+        "SELECT language_id, title FROM movie_translations
+         WHERE movie_metadata_id = ?1 AND title IS NOT NULL ORDER BY id",
+    )?;
+    let rows = stmt.query_map([movie_metadata_id], |r| Ok((r.get(0)?, r.get(1)?)))?;
+    Ok(rows.collect::<Result<_, _>>()?)
+}
+
+/// `UpdateLastSearchTime`.
+pub fn set_last_search_time(conn: &Connection, movie_id: i64, at: DateTime<Utc>) -> anyhow::Result<()> {
+    conn.execute(
+        "UPDATE movies SET last_search_time = ?2 WHERE id = ?1",
+        params![movie_id, ts(Some(at))],
+    )?;
+    Ok(())
+}
+
+/// When the oldest release waiting for a movie was published.
+pub fn oldest_pending_release(conn: &Connection, movie_id: i64) -> anyhow::Result<Option<DateTime<Utc>>> {
+    let mut stmt = conn.prepare("SELECT release FROM pending_releases WHERE movie_id = ?1")?;
+    let rows = stmt.query_map([movie_id], |r| r.get::<_, String>(0))?;
+    let mut oldest: Option<DateTime<Utc>> = None;
+    for release in rows {
+        let release: serde_json::Value = serde_json::from_str(&release?).unwrap_or_default();
+        let published = release["publishDate"]
+            .as_str()
+            .and_then(|d| DateTime::parse_from_rfc3339(d).ok())
+            .map(|d| d.with_timezone(&Utc));
+        if let Some(published) = published {
+            oldest = Some(oldest.map_or(published, |o| o.min(published)));
+        }
+    }
+    Ok(oldest)
+}
+
+/// The movies some release is waiting for.
+pub fn pending_movie_ids(conn: &Connection) -> anyhow::Result<Vec<i64>> {
+    let mut stmt = conn.prepare("SELECT DISTINCT movie_id FROM pending_releases ORDER BY movie_id")?;
+    let rows = stmt.query_map([], |r| r.get(0))?;
+    Ok(rows.collect::<Result<_, _>>()?)
+}
+
+/// A row of `pending_releases` as the pending releases service reads it;
+/// `additional_info` is the original's `{movieMatchType, releaseSource}`.
+#[derive(Debug, Clone, PartialEq)]
+pub struct PendingRow {
+    pub id: i64,
+    pub movie_id: i64,
+    pub title: String,
+    pub added: DateTime<Utc>,
+    pub release: String,
+    pub reason: i64,
+    pub additional_info: Option<String>,
+}
+
+fn pending_rows(
+    conn: &Connection,
+    filter: &str,
+    args: &[&dyn rusqlite::ToSql],
+) -> anyhow::Result<Vec<PendingRow>> {
+    let mut stmt = conn.prepare(&format!(
+        "SELECT p.id, p.movie_id, p.title, p.added, p.release, p.reason, p.additional_info
+         FROM pending_releases p {filter} ORDER BY p.id"
+    ))?;
+    let mut rows = stmt.query(args)?;
+    let mut out = Vec::new();
+    while let Some(row) = rows.next()? {
+        out.push(PendingRow {
+            id: row.get(0)?,
+            movie_id: row.get(1)?,
+            title: row.get(2)?,
+            added: parse_ts_required(row.get(3)?)?,
+            release: row.get(4)?,
+            reason: row.get(5)?,
+            additional_info: row.get(6)?,
+        });
+    }
+    Ok(out)
+}
+
+pub fn pending_all(conn: &Connection) -> anyhow::Result<Vec<PendingRow>> {
+    pending_rows(conn, "", &[])
+}
+
+pub fn pending_of_movie(conn: &Connection, movie_id: i64) -> anyhow::Result<Vec<PendingRow>> {
+    pending_rows(conn, "WHERE p.movie_id = ?1", &[&movie_id])
+}
+
+/// `WithoutFallback`: joined with the movies, so a deleted movie's rows
+/// stay out. `fallback` is the reason's number.
+pub fn pending_without_fallback(conn: &Connection, fallback: i64) -> anyhow::Result<Vec<PendingRow>> {
+    pending_rows(
+        conn,
+        "JOIN movies m ON m.id = p.movie_id WHERE p.reason != ?1",
+        &[&fallback],
+    )
+}
+
+/// Insert a row with the next free id, which is returned.
+pub fn pending_insert(conn: &Connection, row: &PendingRow) -> anyhow::Result<i64> {
+    let id = crate::store::sequence::next_id(conn, "pending_releases")?;
+    conn.execute(
+        "INSERT INTO pending_releases (id, movie_id, title, added, release, reason, additional_info)
+         VALUES (?1, ?2, ?3, ?4, ?5, ?6, ?7)",
+        params![
+            id,
+            row.movie_id,
+            row.title,
+            ts(Some(row.added)),
+            row.release,
+            row.reason,
+            row.additional_info,
+        ],
+    )?;
+    Ok(id)
+}
+
+pub fn pending_set_reason(conn: &Connection, id: i64, reason: i64) -> anyhow::Result<()> {
+    conn.execute(
+        "UPDATE pending_releases SET reason = ?2 WHERE id = ?1",
+        params![id, reason],
+    )?;
+    Ok(())
+}
+
+pub fn pending_delete(conn: &Connection, id: i64) -> anyhow::Result<()> {
+    conn.execute("DELETE FROM pending_releases WHERE id = ?1", params![id])?;
+    Ok(())
+}
+
 /// The movies with these ids, as a JSON array of ids travels to SQLite.
 pub fn movies_by_ids(conn: &Connection, ids: &[i64]) -> anyhow::Result<Vec<Movie>> {
     let ids = serde_json::to_string(ids)?;
@@ -858,6 +1044,67 @@ pub fn insert_download_history(conn: &Connection, h: &MovieDownloadHistoryEntry)
         ],
     )?;
     Ok(())
+}
+
+/// The next free history id.
+pub fn next_history_id(conn: &Connection) -> anyhow::Result<i64> {
+    crate::store::sequence::next_id(conn, "history")
+}
+
+/// The next free blocklist id.
+pub fn next_blocklist_id(conn: &Connection) -> anyhow::Result<i64> {
+    crate::store::sequence::next_id(conn, "blocklist")
+}
+
+/// `FindByDownloadId`: every row of one download, newest first.
+pub fn history_by_download_id(
+    conn: &Connection,
+    download_id: &str,
+) -> anyhow::Result<Vec<MovieHistoryEntry>> {
+    query_history(
+        conn,
+        "SELECT * FROM history WHERE download_id = ?1 ORDER BY date DESC, id DESC",
+        &[&download_id],
+    )
+}
+
+/// A download history row with the next free id.
+pub fn add_download_history(conn: &Connection, h: &MovieDownloadHistoryEntry) -> anyhow::Result<()> {
+    let id = crate::store::sequence::next_id(conn, "download_history")?;
+    insert_download_history(conn, &MovieDownloadHistoryEntry { id, ..h.clone() })
+}
+
+/// `GetLatestDownloadHistoryItem`: the newest row of a download.
+pub fn latest_download_history(
+    conn: &Connection,
+    download_id: &str,
+) -> anyhow::Result<Option<MovieDownloadHistoryEntry>> {
+    let mut stmt = conn.prepare(
+        "SELECT * FROM download_history WHERE download_id = ?1 ORDER BY date DESC, id DESC LIMIT 1",
+    )?;
+    let mut rows = stmt.query([download_id])?;
+    let Some(row) = rows.next()? else {
+        return Ok(None);
+    };
+    let event: String = row.get("event_type")?;
+    let protocol: String = row.get("protocol")?;
+    let release: Option<String> = row.get("release")?;
+    Ok(Some(MovieDownloadHistoryEntry {
+        id: row.get("id")?,
+        event_type: event.parse().unwrap_or(0),
+        movie_id: row.get("movie_id")?,
+        download_id: row.get("download_id")?,
+        source_title: row.get("source_title")?,
+        date: parse_ts_required(row.get("date")?)?,
+        protocol: Protocol::parse(&protocol).unwrap_or(Protocol::Unknown),
+        indexer_id: row.get("indexer_id")?,
+        download_client_id: row.get("download_client_id")?,
+        release: match release {
+            Some(s) if !s.trim().is_empty() => Some(serde_json::from_str(&s)?),
+            _ => None,
+        },
+        data: from_json(row.get("data")?)?,
+    }))
 }
 
 // --- extra files

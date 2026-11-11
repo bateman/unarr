@@ -750,6 +750,7 @@ fn sabnzbd(state: &mut ClientState, q: &BTreeMap<String, String>, headers: &Head
                 "categories": [
                     {"name": "*", "dir": "", "priority": 0, "pp": "3", "script": "None", "newzbin": ""},
                     {"name": "tv", "dir": "tv", "priority": -100, "pp": "", "script": "Default", "newzbin": ""},
+                    {"name": "movies", "dir": "movies", "priority": -100, "pp": "", "script": "Default", "newzbin": ""},
                     {"name": "nojob", "dir": "nojob*", "priority": -100, "pp": "", "script": "Default", "newzbin": ""},
                     {"name": "sorted", "dir": "sorted", "priority": -100, "pp": "", "script": "Default", "newzbin": ""},
                 ],

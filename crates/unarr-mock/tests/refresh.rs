@@ -34,7 +34,7 @@ async fn setup(name: &str) -> Setup {
     let http = unarr_core::http::build(Duration::from_secs(10));
     let downloads = Arc::new(Downloads::new(
         db.clone(),
-        DownloadClientService::with_client(db.clone(), http),
+        DownloadClientService::with_client(db.clone(), http, unarr_core::downloadclients::SONARR),
     ));
     let now = Utc.with_ymd_and_hms(2026, 11, 9, 19, 40, 0).unwrap();
     let runtime = Runtime::new(db.clone(), downloads, Arc::new(move || now), Default::default())

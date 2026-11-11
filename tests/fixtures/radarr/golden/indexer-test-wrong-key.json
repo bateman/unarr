@@ -1,0 +1,17 @@
+{
+  "body": [
+    {
+      "errorMessage": "Invalid API Key",
+      "isWarning": false,
+      "propertyName": "ApiKey",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-11T19:38:41Z",
+  "request": {
+    "body": "bodies/indexer-wrong-key.json",
+    "method": "POST",
+    "path": "/api/v3/indexer/test"
+  },
+  "status": 400
+}

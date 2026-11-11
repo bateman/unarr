@@ -1,0 +1,28 @@
+{
+  "body": [
+    {
+      "message": "Indexers unavailable due to failures: Newznab 1, Newznab 2, Newznab 3, Torznab 6, Torznab 7, Torznab 9, Torznab 12, Torznab 14, Torznab 15, Torznab 17, Torznab 18, Newznab 19",
+      "source": "IndexerStatusCheck",
+      "type": "warning",
+      "wikiUrl": "https://wiki.servarr.com/radarr/system#indexers-are-unavailable-due-to-failures"
+    },
+    {
+      "message": "Indexers with invalid download clients: Newznab 1, Newznab 2, Newznab 3, Torznab 6, Torznab 7, Torznab 9, Torznab 12, Torznab 14, Torznab 15, Torznab 17.",
+      "source": "IndexerDownloadClientCheck",
+      "type": "warning",
+      "wikiUrl": "https://wiki.servarr.com/radarr/system#invalid-indexer-download-client-setting"
+    },
+    {
+      "message": "Download client Mock SABnzbd places downloads in /downloads/complete/movies but Radarr cannot see this directory.  You may need to adjust the folder's permissions.",
+      "source": "RemotePathMappingCheck",
+      "type": "error",
+      "wikiUrl": "https://wiki.servarr.com/radarr/system#permissions-error"
+    }
+  ],
+  "recordedAt": "2026-11-11T19:39:45Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/health"
+  },
+  "status": 200
+}

@@ -1,0 +1,67 @@
+{
+ "source": "radarr/src/NzbDrone.Core.Test/DecisionEngineTests/ReleaseRestrictionsSpecificationFixture.cs",
+ "methods": {
+  "should_ignore_case_when_matching_required": {
+   "params": [
+    "required"
+   ],
+   "cases": [
+    [
+     "EdiTED"
+    ],
+    [
+     "webrip"
+    ],
+    [
+     "X264"
+    ],
+    [
+     "X264,NOTTHERE"
+    ]
+   ]
+  },
+  "should_ignore_case_when_matching_ignored": {
+   "params": [
+    "ignored"
+   ],
+   "cases": [
+    [
+     "EdiTED"
+    ],
+    [
+     "webrip"
+    ],
+    [
+     "X264"
+    ],
+    [
+     "X264,NOTTHERE"
+    ]
+   ]
+  },
+  "should_match_perl_regex": {
+   "params": [
+    "pattern",
+    "expected"
+   ],
+   "cases": [
+    [
+     "/WEB/",
+     true
+    ],
+    [
+     "/WEB\b/",
+     false
+    ],
+    [
+     "/WEb/",
+     false
+    ],
+    [
+     "/\\.WEB/",
+     true
+    ]
+   ]
+  }
+ }
+}

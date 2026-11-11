@@ -1,0 +1,32 @@
+{
+  "enableRss": true,
+  "enableAutomaticSearch": true,
+  "enableInteractiveSearch": true,
+  "priority": 25,
+  "name": "",
+  "implementationName": "Newznab",
+  "implementation": "Newznab",
+  "configContract": "NewznabSettings",
+  "infoLink": "https://wiki.servarr.com/radarr/supported#newznab",
+  "downloadClientId": 0,
+  "tags": [],
+  "fields": [
+    {
+      "name": "baseUrl",
+      "value": "ftp://not-a-url"
+    },
+    {
+      "name": "apiPath",
+      "value": "http://x"
+    },
+    {
+      "name": "apiKey",
+      "value": ""
+    },
+    {
+      "name": "categories",
+      "value": []
+    }
+  ],
+  "categories_unused": null
+}

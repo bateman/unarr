@@ -1,0 +1,9 @@
+{
+  "body": {},
+  "recordedAt": "2026-11-11T19:40:16Z",
+  "request": {
+    "method": "DELETE",
+    "path": "/api/v3/indexer/20"
+  },
+  "status": 200
+}

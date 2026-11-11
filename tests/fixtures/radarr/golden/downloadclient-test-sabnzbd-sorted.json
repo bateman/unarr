@@ -1,0 +1,19 @@
+{
+  "body": [
+    {
+      "detailedDescription": "You must disable TV sorting for the category Radarr uses to prevent import issues. Go to Sabnzbd to fix it.",
+      "errorMessage": "Disable TV Sorting",
+      "infoLink": "http://127.0.0.1:18989/sabnzbd/config/sorting/",
+      "isWarning": false,
+      "propertyName": "MovieCategory",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-11T19:38:41Z",
+  "request": {
+    "body": "bodies/downloadclient-test-sabnzbd-sorted.json",
+    "method": "POST",
+    "path": "/api/v3/downloadclient/test"
+  },
+  "status": 400
+}

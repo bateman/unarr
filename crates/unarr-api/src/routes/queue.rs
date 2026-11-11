@@ -373,12 +373,12 @@ fn sort(items: &mut [QueueItem], key: &str, descending: bool) {
 
 /// The default string comparer of the originals: letters in alphabetical
 /// order whatever their case, the case deciding only among equals.
-fn culture_cmp(a: &str, b: &str) -> Ordering {
+pub(crate) fn culture_cmp(a: &str, b: &str) -> Ordering {
     a.to_lowercase().cmp(&b.to_lowercase()).then_with(|| a.cmp(b))
 }
 
 /// `DownloadProtocol`'s declaration order.
-fn protocol_rank(p: Protocol) -> i64 {
+pub(crate) fn protocol_rank(p: Protocol) -> i64 {
     match p {
         Protocol::Unknown => 0,
         Protocol::Usenet => 1,
@@ -420,7 +420,7 @@ pub async fn details(State(state): State<AppState>, uri: Uri) -> ApiResult<Json<
     ))
 }
 
-fn options(p: &Params) -> RemoveOptions {
+pub(crate) fn options(p: &Params) -> RemoveOptions {
     RemoveOptions {
         remove_from_client: p.bool("removeFromClient", true),
         blocklist: p.bool("blocklist", false),
@@ -429,7 +429,7 @@ fn options(p: &Params) -> RemoveOptions {
     }
 }
 
-fn remove_error(e: RemoveError) -> ApiError {
+pub(crate) fn remove_error(e: RemoveError) -> ApiError {
     match e {
         RemoveError::NotFound => ApiError::NotFoundException,
         RemoveError::ClientGone => ApiError::BadRequest(String::new()),

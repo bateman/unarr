@@ -10,9 +10,7 @@ use axum::http::{header, StatusCode, Uri};
 use axum::response::{IntoResponse, Response};
 use axum::Json;
 use serde_json::{json, Map, Value};
-use unarr_core::downloadclients::{
-    ClientKind, ClientSettings, DownloadClientDefinition, DownloadClientService,
-};
+use unarr_core::downloadclients::{App, ClientKind, ClientSettings, DownloadClientDefinition};
 use unarr_core::model::{Provider, ProviderKind};
 use unarr_core::store;
 use unarr_core::validation::{self, ValidationFailure};
@@ -158,9 +156,9 @@ fn enabled(p: &Provider) -> bool {
 
 /// `definition.Settings.Validate()`, for the implementations this phase
 /// drives; the others' settings are stored as given.
-fn validate_settings(p: &Provider) -> Vec<ValidationFailure> {
+fn validate_settings(app: App, p: &Provider) -> Vec<ValidationFailure> {
     match kind_of(p) {
-        Some(kind) => ClientSettings::from_value(kind, &p.settings).validate(),
+        Some(kind) => ClientSettings::from_value(app, kind, &p.settings).validate(),
         None => Vec::new(),
     }
 }
@@ -168,12 +166,9 @@ fn validate_settings(p: &Provider) -> Vec<ValidationFailure> {
 /// `_downloadClientFactory.Test(definition)`: the connection test, with
 /// the client's status recorded when it is a stored one.
 async fn test_provider(state: &AppState, p: &Provider) -> anyhow::Result<Vec<ValidationFailure>> {
-    match DownloadClientDefinition::from_provider(p) {
-        Some(definition) => {
-            DownloadClientService::new(state.db().clone())
-                .test(&definition, state.now())
-                .await
-        }
+    let clients = state.downloads().clients();
+    match DownloadClientDefinition::from_provider(clients.app(), p) {
+        Some(definition) => clients.test(&definition, state.now()).await,
         None => Ok(vec![ValidationFailure::error(
             "",
             &format!(
@@ -210,7 +205,10 @@ pub async fn create(State(state): State<AppState>, uri: Uri, Json(body): Json<Va
     validate_resource(&state, &body, 0, "POST", false).await?;
     let mut provider = to_model(state.personality(), &body, 0, None)?;
     if enabled(&provider) {
-        verify(validate_settings(&provider), !force_save)?;
+        verify(
+            validate_settings(state.downloads().clients().app(), &provider),
+            !force_save,
+        )?;
         verify(test_provider(&state, &provider).await?, !force_save)?;
     }
     let stored = state
@@ -262,7 +260,10 @@ pub async fn update(
     let provider = to_model(state.personality(), &body, existing.id, Some(&existing))?;
     let changed = provider != existing;
     if enabled(&provider) {
-        verify(validate_settings(&provider), !force_save)?;
+        verify(
+            validate_settings(state.downloads().clients().app(), &provider),
+            !force_save,
+        )?;
         if !force_save && changed {
             verify(test_provider(&state, &provider).await?, true)?;
         }
@@ -305,7 +306,10 @@ pub async fn test(
     validate_resource(&state, &body, id, "POST", true).await?;
     let existing = if id > 0 { find(&state, id).await? } else { None };
     let provider = to_model(state.personality(), &body, id, existing.as_ref())?;
-    verify(validate_settings(&provider), !force_test)?;
+    verify(
+        validate_settings(state.downloads().clients().app(), &provider),
+        !force_test,
+    )?;
     verify(test_provider(&state, &provider).await?, true)?;
     Ok(Json(json!({})))
 }
@@ -316,7 +320,7 @@ pub async fn test_all(State(state): State<AppState>) -> ApiResult<Response> {
     let mut results = Vec::new();
     let mut any_invalid = false;
     for p in list(&state).await? {
-        let settings_failures = validate_settings(&p);
+        let settings_failures = validate_settings(state.downloads().clients().app(), &p);
         if validation::has_errors(&settings_failures) || !enabled(&p) {
             continue;
         }

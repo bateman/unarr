@@ -156,7 +156,7 @@ fn url_encode(s: &str) -> String {
     out
 }
 
-fn newznabify_title(title: &str) -> String {
+pub(crate) fn newznabify_title(title: &str) -> String {
     escape_data_string(&title.replace('+', " "))
 }
 
@@ -477,7 +477,14 @@ impl RequestGenerator<'_> {
 
     /// `GetPagedRequests`: the page URLs of one query, `None` without
     /// categories.
-    fn paged_requests(&self, categories: &[i64], search_type: &str, parameters: &str) -> Option<Vec<String>> {
+    /// `GetPagedRequests`: the page URLs of one request, or nothing
+    /// without categories.
+    pub(crate) fn paged_requests(
+        &self,
+        categories: &[i64],
+        search_type: &str,
+        parameters: &str,
+    ) -> Option<Vec<String>> {
         if categories.is_empty() {
             return None;
         }

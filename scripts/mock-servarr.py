@@ -6,6 +6,9 @@ One process, one port, several services told apart by path prefix:
     /newznab/api      a Newznab indexer   (tests/fixtures/indexers/newznab/)
     /torznab/api      a Torznab indexer   (tests/fixtures/indexers/torznab/)
     /newznab/download/<guid>.nzb, /torznab/download/<guid>.torrent
+    /movies/newznab/..., /movies/torznab/...   the same two with movie
+                      feeds (tests/fixtures/indexers/movies/), for Radarr
+    /movies/empty/api a Newznab indexer that has caps and no release at all
     /sabnzbd/api          SABnzbd 4.4       (api key below, or ma_username=mock&ma_password=mock)
     /nzbget/jsonrpc       NZBGet 24         (basic auth mock:mock)
     /qbittorrent/api/v2/  qBittorrent 5.1   (Bearer api key, or the login form mock/mock)
@@ -29,6 +32,9 @@ Routing, by the `t` query parameter (missing files answer `empty.xml`):
     (rid= and tvmazeid= likewise, with the `rid` and `tvmazeid` prefixes)
     t=tvsearch|search&q=TEXT[&season&ep]  search-{slug(TEXT)}[-S{S}[E{E}]].xml
     t=tvsearch with no q and no id        rss.xml
+    t=movie&tmdbid=N[&imdbid=M]           movie-tmdbid{N}.xml
+    t=movie&imdbid=M                      movie-imdbid{M}.xml
+    t=movie with no id                    rss.xml
     offset=N>0                            the same name with `-offset{N}`, else empty.xml
 
 `slug` lower-cases, replaces every run of non-alphanumerics with `-` and
@@ -206,14 +212,21 @@ def result_file(q: dict[str, str]) -> str:
         if ep:
             suffix += f"E{ep}"
     name = None
-    for key in ("tvdbid", "rid", "tvmazeid", "imdbid"):
-        if q.get(key):
-            name = f"tvsearch-{key}{q[key]}{suffix}"
-            break
+    if t == "movie":
+        # Radarr's searches: by TMDB id, else by IMDb id; its RSS has neither.
+        for key in ("tmdbid", "imdbid"):
+            if q.get(key):
+                name = f"movie-{key}{q[key]}"
+                break
+    else:
+        for key in ("tvdbid", "rid", "tvmazeid", "imdbid"):
+            if q.get(key):
+                name = f"tvsearch-{key}{q[key]}{suffix}"
+                break
     if name is None and q.get("q"):
         name = f"search-{slug(q['q'])}{suffix}"
     if name is None:
-        name = "rss" if t == "tvsearch" else "empty"
+        name = "rss" if t in ("tvsearch", "movie") else "empty"
     offset = q.get("offset", "0")
     if offset not in ("", "0"):
         name += f"-offset{offset}"
@@ -549,7 +562,9 @@ class Handler(http.server.BaseHTTPRequestHandler):
         host, _, rest = path[1:].partition("/")
         if host in METADATA_HOSTS:
             return self.metadata(host, "/" + rest, parsed.query)
-        for kind in ("newznab", "torznab"):
+        # The indexers Radarr is pointed at live under /movies, with their
+        # own caps and feeds, so Sonarr's answers never change with them.
+        for kind in ("newznab", "torznab", "movies/newznab", "movies/torznab", "movies/empty"):
             prefix = f"/{kind}"
             if path == f"{prefix}/api":
                 return self.indexer(kind, q)
@@ -708,6 +723,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
                         "categories": [
                             {"name": "*", "dir": "", "priority": 0, "pp": "3", "script": "None", "newzbin": ""},
                             {"name": "tv", "dir": "tv", "priority": -100, "pp": "", "script": "Default", "newzbin": ""},
+                            {"name": "movies", "dir": "movies", "priority": -100, "pp": "", "script": "Default", "newzbin": ""},
                             {"name": "nojob", "dir": "nojob*", "priority": -100, "pp": "", "script": "Default", "newzbin": ""},
                             {"name": "sorted", "dir": "sorted", "priority": -100, "pp": "", "script": "Default", "newzbin": ""},
                         ],

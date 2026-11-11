@@ -1,0 +1,37 @@
+{
+ "source": "radarr/src/NzbDrone.Core.Test/ParserTests/AnimeVersionFixture.cs",
+ "methods": {
+  "should_be_able_to_parse_repack": {
+   "params": [
+    "title",
+    "version"
+   ],
+   "cases": [
+    [
+     "Anime Title - 2018 - (BD 1080p HEVC FLAC) [Dual Audio] [Group]",
+     1
+    ],
+    [
+     "Anime Title - 2018v2 - (BD 1080p HEVC FLAC) [Dual Audio] [Group]",
+     2
+    ],
+    [
+     "Anime Title - 2018 v2 - (BD 1080p HEVC FLAC) [Dual Audio] [Group]",
+     2
+    ],
+    [
+     "[SubsPlease] Anime Title - 01 (1080p) [B1F227CF]",
+     1
+    ],
+    [
+     "[SubsPlease] Anime Title - 01v2 (1080p) [B1F227CF]",
+     2
+    ],
+    [
+     "[SubsPlease] Anime Title - 01 v2 (1080p) [B1F227CF]",
+     2
+    ]
+   ]
+  }
+ }
+}

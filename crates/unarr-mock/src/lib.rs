@@ -198,10 +198,20 @@ pub fn result_file(q: &BTreeMap<String, String>) -> String {
         }
     }
     let mut name = None;
-    for key in ["tvdbid", "rid", "tvmazeid", "imdbid"] {
-        if let Some(v) = get(key) {
-            name = Some(format!("tvsearch-{key}{v}{suffix}"));
-            break;
+    if get("t") == Some("movie") {
+        // Radarr's searches: by TMDB id, else by IMDb id; its RSS has neither.
+        for key in ["tmdbid", "imdbid"] {
+            if let Some(v) = get(key) {
+                name = Some(format!("movie-{key}{v}"));
+                break;
+            }
+        }
+    } else {
+        for key in ["tvdbid", "rid", "tvmazeid", "imdbid"] {
+            if let Some(v) = get(key) {
+                name = Some(format!("tvsearch-{key}{v}{suffix}"));
+                break;
+            }
         }
     }
     if name.is_none() {
@@ -210,7 +220,7 @@ pub fn result_file(q: &BTreeMap<String, String>) -> String {
         }
     }
     let mut name = name.unwrap_or_else(|| {
-        if get("t") == Some("tvsearch") {
+        if matches!(get("t"), Some("tvsearch" | "movie")) {
             "rss"
         } else {
             "empty"
@@ -325,7 +335,15 @@ async fn handle(
         .unwrap_or("")
         .to_string();
     let reply: clients::Reply = 'route: {
-        for kind in ["newznab", "torznab"] {
+        // The indexers Radarr is pointed at live under /movies, with their
+        // own caps and feeds, so Sonarr's answers never change with them.
+        for kind in [
+            "newznab",
+            "torznab",
+            "movies/newznab",
+            "movies/torznab",
+            "movies/empty",
+        ] {
             if path == format!("/{kind}/api") {
                 break 'route indexer(&shared, kind, &query).into();
             }
@@ -491,6 +509,23 @@ mod tests {
             "rss-offset100.xml"
         );
         assert_eq!(result_file(&q(&[("t", "search")])), "empty.xml");
+        assert_eq!(
+            result_file(&q(&[
+                ("t", "movie"),
+                ("tmdbid", "840430"),
+                ("imdbid", "14849194")
+            ])),
+            "movie-tmdbid840430.xml"
+        );
+        assert_eq!(
+            result_file(&q(&[("t", "movie"), ("imdbid", "14849194")])),
+            "movie-imdbid14849194.xml"
+        );
+        assert_eq!(result_file(&q(&[("t", "movie"), ("cat", "2000")])), "rss.xml");
+        assert_eq!(
+            result_file(&q(&[("t", "search"), ("q", "Nightmare Alley 2021")])),
+            "search-nightmare-alley-2021.xml"
+        );
     }
 
     #[test]

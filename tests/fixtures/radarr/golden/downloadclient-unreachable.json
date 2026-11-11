@@ -1,0 +1,24 @@
+{
+  "body": [
+    {
+      "detailedDescription": "Unable to connect to SABnzbd, Connection refused (127.0.0.1:1)",
+      "errorMessage": "Unable to connect to SABnzbd",
+      "isWarning": false,
+      "propertyName": "Host",
+      "severity": "error"
+    },
+    {
+      "errorMessage": "Test was aborted due to an error: Unable to connect to SABnzbd, Connection refused (127.0.0.1:1)",
+      "isWarning": false,
+      "propertyName": "",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-11T19:38:41Z",
+  "request": {
+    "body": "bodies/downloadclient-unreachable.json",
+    "method": "POST",
+    "path": "/api/v3/downloadclient"
+  },
+  "status": 400
+}

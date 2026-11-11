@@ -1,0 +1,76 @@
+{
+  "enableRss": true,
+  "enableAutomaticSearch": true,
+  "enableInteractiveSearch": true,
+  "priority": 25,
+  "name": "Mock Torznab (Prowlarr)",
+  "implementationName": "Torznab",
+  "implementation": "Torznab",
+  "configContract": "TorznabSettings",
+  "infoLink": "https://wiki.servarr.com/radarr/supported#torznab",
+  "downloadClientId": 0,
+  "tags": [],
+  "fields": [
+    {
+      "name": "baseUrl",
+      "value": "http://127.0.0.1:18989/movies/torznab"
+    },
+    {
+      "name": "apiPath",
+      "value": "/api"
+    },
+    {
+      "name": "apiKey",
+      "value": "0123456789abcdef0123456789abcdef"
+    },
+    {
+      "name": "categories",
+      "value": [
+        2000,
+        2010,
+        2020,
+        2030,
+        2040,
+        2045,
+        2050,
+        2060
+      ]
+    },
+    {
+      "name": "additionalParameters",
+      "value": ""
+    },
+    {
+      "name": "removeYear",
+      "value": false
+    },
+    {
+      "name": "multiLanguages",
+      "value": []
+    },
+    {
+      "name": "failDownloads",
+      "value": []
+    },
+    {
+      "name": "minimumSeeders",
+      "value": 1
+    },
+    {
+      "name": "requiredFlags",
+      "value": []
+    },
+    {
+      "name": "seedCriteria.seedRatio",
+      "value": null
+    },
+    {
+      "name": "seedCriteria.seedTime",
+      "value": null
+    },
+    {
+      "name": "rejectBlocklistedTorrentHashesWhileGrabbing",
+      "value": false
+    }
+  ]
+}

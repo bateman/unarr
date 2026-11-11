@@ -21,6 +21,7 @@ use crate::mediafiles::decide::Environment;
 use crate::mediafiles::manual::{self, ManualImportFile};
 use crate::mediafiles::{completed, downloaded, rename, scan, ImportEvent, ImportMode};
 use crate::model::Episode;
+use crate::movies::commands::MovieSide;
 use crate::notifications::{Identity, Notifier};
 use crate::profile;
 use crate::search::{SearchService, Trigger};
@@ -64,6 +65,11 @@ pub struct HostHooks {
 }
 
 pub struct Runtime {
+    /// The application whose commands and tasks these are.
+    personality: crate::Personality,
+    /// Radarr's downloads, searches and indexers, when the application is
+    /// Radarr; the series side below is then never asked.
+    movies: Option<MovieSide>,
     db: Db,
     queue: Arc<CommandQueue>,
     downloads: Arc<Downloads>,
@@ -122,17 +128,62 @@ impl Runtime {
         clock: Clock,
         identity: Identity,
     ) -> anyhow::Result<Arc<Runtime>> {
+        Self::new_for(crate::Personality::Sonarr, None, db, downloads, clock, identity).await
+    }
+
+    /// Radarr's runtime: the same queue, workers and scheduler, with the
+    /// commands about movies done by `side`.
+    pub async fn new_radarr(
+        db: Db,
+        side: MovieSide,
+        clock: Clock,
+        identity: Identity,
+    ) -> anyhow::Result<Arc<Runtime>> {
+        // The series side is built and left alone.
+        let downloads = Arc::new(Downloads::new(
+            db.clone(),
+            crate::downloadclients::DownloadClientService::new(db.clone()),
+        ));
+        Self::new_for(
+            crate::Personality::Radarr,
+            Some(side),
+            db,
+            downloads,
+            clock,
+            identity,
+        )
+        .await
+    }
+
+    /// The runtime of one application: its commands, its default tasks.
+    async fn new_for(
+        personality: crate::Personality,
+        movies: Option<MovieSide>,
+        db: Db,
+        downloads: Arc<Downloads>,
+        clock: Clock,
+        identity: Identity,
+    ) -> anyhow::Result<Arc<Runtime>> {
         crate::time::process_start();
-        let queue = Arc::new(CommandQueue::open(db.clone()).await?);
+        let queue = Arc::new(CommandQueue::open_for(db.clone(), personality).await?);
         let now = clock();
-        db.call(move |conn| scheduler::ensure_defaults(conn, now)).await?;
+        db.call(move |conn| scheduler::ensure_defaults_for(conn, personality, now))
+            .await?;
         downloads.set_commands(queue.clone());
+        if let Some(side) = &movies {
+            side.downloads.set_commands(queue.clone());
+        }
         let notifier = Arc::new(Notifier::new(db.clone(), identity, now));
         downloads.set_notifier(notifier.clone());
         let (events, _) = broadcast::channel(256);
         let runtime = Arc::new(Runtime {
+            personality,
             search: SearchService::new(db.clone()).with_queue(downloads.queue_source()),
-            indexers: IndexerService::new(db.clone()),
+            indexers: match &movies {
+                Some(side) => side.indexers.clone(),
+                None => IndexerService::new(db.clone()),
+            },
+            movies,
             db,
             queue,
             downloads,
@@ -250,19 +301,23 @@ impl Runtime {
     /// `HealthCheckCompleteEvent`.
     async fn check_health_sets(&self, sets: &[(CheckSet, Option<ImportFailure>)]) -> bool {
         let now = self.now();
-        let clients = self.downloads.clients();
+        let clients = match &self.movies {
+            Some(side) => side.downloads.clients(),
+            None => self.downloads.clients(),
+        };
         let failure = sets.iter().find_map(|(_, f)| f.clone());
         let ctx = health::Context {
+            personality: self.personality,
             db: &self.db,
             indexers: &self.indexers,
             clients,
             now,
             is_docker: self.is_docker,
             import_failure: failure.as_ref(),
-            services_ping: self
-                .augment()
-                .upstreams()
-                .url("https://services.sonarr.tv/v1/ping"),
+            services_ping: self.augment().upstreams().url(match self.personality {
+                crate::Personality::Radarr => "https://radarr.servarr.com/v1/ping",
+                _ => "https://services.sonarr.tv/v1/ping",
+            }),
         };
         let standing = self.health();
         let names: Vec<CheckSet> = sets.iter().map(|(s, _)| *s).collect();
@@ -306,6 +361,11 @@ impl Runtime {
     /// reaches the notifications; from then on new verdicts do too.
     async fn arm_health_notifications(&self) {
         use std::sync::atomic::Ordering;
+        // Radarr's notifications come with a later milestone: its verdicts
+        // stay in the health list.
+        if self.movies.is_some() {
+            return;
+        }
         if self.health_armed.load(Ordering::SeqCst) || self.now() < self.started_at + HEALTH_GRACE {
             return;
         }
@@ -520,12 +580,13 @@ impl Runtime {
     /// were pushed.
     pub async fn tick_scheduler(&self) -> anyhow::Result<usize> {
         let now = self.now();
+        let personality = self.personality;
         let due = self
             .db
             .call(move |conn| {
                 // `Handle(ConfigSavedEvent)`: a changed interval setting
                 // takes effect at the next tick.
-                scheduler::refresh_intervals(conn)?;
+                scheduler::refresh_intervals_for(conn, personality)?;
                 scheduler::pending_tasks(conn, now)
             })
             .await?;
@@ -533,9 +594,16 @@ impl Runtime {
         let mut pushed = 0;
         for task in due {
             let Some(body) = CommandBody::from_type_name(&task.type_name) else {
-                tracing::warn!(task = task.type_name, "no command for the scheduled task");
+                // Radarr lists tasks whose commands a later milestone brings.
+                if self.personality == crate::Personality::Sonarr {
+                    tracing::warn!(task = task.type_name, "no command for the scheduled task");
+                }
                 continue;
             };
+            if !body.runs_in(self.personality) {
+                tracing::trace!(task = task.type_name, "the task's command is not run yet");
+                continue;
+            }
             let priority = scheduler::priority_of(&task.type_name);
             self.queue
                 .push_with(body, priority, CommandTrigger::Scheduled, now, |m| {
@@ -571,6 +639,9 @@ impl Runtime {
                 | CommandBody::SeriesSearch { .. }
                 | CommandBody::MissingEpisodeSearch { .. }
                 | CommandBody::CutoffUnmetEpisodeSearch { .. }
+                | CommandBody::MoviesSearch { .. }
+                | CommandBody::MissingMoviesSearch { .. }
+                | CommandBody::CutoffUnmetMoviesSearch { .. }
         ) {
             self.check_health_on_status_change().await;
         }
@@ -640,6 +711,9 @@ impl Runtime {
             user_invoked: model.trigger == CommandTrigger::Manual,
             interactive: false,
         };
+        if let Some(side) = &self.movies {
+            return self.run_radarr(side, model, trigger).await;
+        }
         match &model.body {
             CommandBody::RssSync => self.rss_sync(id).await,
             CommandBody::RefreshMonitoredDownloads => self.refresh_monitored_downloads().await,
@@ -815,7 +889,85 @@ impl Runtime {
                 tracing::debug!(name = model.name(), "nothing to do for this command");
                 Ok(())
             }
+            CommandBody::MoviesSearch { .. }
+            | CommandBody::MissingMoviesSearch { .. }
+            | CommandBody::CutoffUnmetMoviesSearch { .. } => {
+                anyhow::bail!("{} is not a command of this application", model.name())
+            }
         }
+    }
+
+    /// Radarr's commands: the ones about movies done by its side, the
+    /// ones with no media in them as for Sonarr.
+    async fn run_radarr(
+        &self,
+        side: &MovieSide,
+        model: &CommandModel,
+        trigger: Trigger,
+    ) -> anyhow::Result<()> {
+        use crate::movies::commands;
+        let id = model.id;
+        let now = self.now();
+        let progress = |message: String| self.progress(id, message);
+        let outcome = match &model.body {
+            CommandBody::RssSync => commands::rss_sync(side, &self.db, now, &progress).await?,
+            CommandBody::MoviesSearch { movie_ids } => {
+                commands::movies_search(side, &self.db, movie_ids, trigger.user_invoked, now, &progress)
+                    .await?
+            }
+            CommandBody::MissingMoviesSearch { .. } => {
+                commands::missing_movies_search(side, &self.db, trigger.user_invoked, now, &progress).await?
+            }
+            CommandBody::CutoffUnmetMoviesSearch { .. } => {
+                commands::cutoff_unmet_movies_search(side, &self.db, trigger.user_invoked, now, &progress)
+                    .await?
+            }
+            CommandBody::RefreshMonitoredDownloads => {
+                // `DownloadMonitoringService.Refresh`: the clients asked,
+                // then the processing queued as its own command.
+                if side.downloads.refresh(now).await? {
+                    self.emit(Event::QueueUpdated);
+                }
+                self.queue
+                    .push(
+                        CommandBody::ProcessMonitoredDownloads,
+                        CommandPriority::High,
+                        CommandTrigger::Unspecified,
+                        now,
+                    )
+                    .await?;
+                return Ok(());
+            }
+            CommandBody::ProcessMonitoredDownloads => {
+                // Failed downloads are dealt with as the refresh finds
+                // them; importing the completed ones comes with the
+                // milestone that imports.
+                self.emit(Event::QueueUpdated);
+                return Ok(());
+            }
+            CommandBody::MessagingCleanup => return self.queue.clean(now).await,
+            CommandBody::CheckHealth => {
+                self.check_health(CheckSet::All).await;
+                return Ok(());
+            }
+            _ => anyhow::bail!("{} is not a command of this application", model.name()),
+        };
+        // The queue refreshed after a grab, as the original's debounced
+        // refresh does.
+        if outcome.grabbed > 0 {
+            self.queue
+                .push(
+                    CommandBody::RefreshMonitoredDownloads,
+                    CommandPriority::High,
+                    CommandTrigger::Unspecified,
+                    now,
+                )
+                .await?;
+        }
+        if outcome.pending_changed {
+            self.emit(Event::QueueUpdated);
+        }
+        Ok(())
     }
 
     /// `ProcessDecisions`, with the queue refreshed after a grab as the

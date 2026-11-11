@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom" xmlns:newznab="http://www.newznab.com/DTD/2010/feeds/attributes/">
+  <channel>
+    <atom:link href="http://127.0.0.1:18989/movies/newznab/api" rel="self" type="application/rss+xml"/>
+    <title>Fixture Newznab (movies)</title>
+    <description>Unarr test indexer</description>
+    <link>http://127.0.0.1:18989/movies/newznab/</link>
+    <language>en-gb</language>
+    <newznab:response offset="0" total="2"/>
+    <item>
+      <title>Nightmare.Alley.2021.iTA.ENG.1080p.BluRay.x264-MIRCrew</title>
+      <guid isPermaLink="true">http://127.0.0.1:18989/movies/newznab/details/46af7f49cb3ba7273e76954adc888e61</guid>
+      <link>http://127.0.0.1:18989/movies/newznab/download/46af7f49cb3ba7273e76954adc888e61.nzb</link>
+      <comments>http://127.0.0.1:18989/movies/newznab/details/46af7f49cb3ba7273e76954adc888e61#comments</comments>
+      <pubDate>Fri, 06 Nov 2026 10:10:00 +0000</pubDate>
+      <category>Movies &gt; HD</category>
+      <description>Nightmare.Alley.2021.iTA.ENG.1080p.BluRay.x264-MIRCrew</description>
+      <enclosure url="http://127.0.0.1:18989/movies/newznab/download/46af7f49cb3ba7273e76954adc888e61.nzb" length="4398046511104" type="application/x-nzb"/>
+      <newznab:attr name="category" value="2000"/>
+      <newznab:attr name="category" value="2040"/>
+      <newznab:attr name="size" value="4398046511104"/>
+      <newznab:attr name="guid" value="46af7f49cb3ba7273e76954adc888e61"/>
+      <newznab:attr name="usenetdate" value="Fri, 06 Nov 2026 10:10:00 +0000"/>
+      <newznab:attr name="grabs" value="27"/>
+    </item>
+    <item>
+      <title>Nightmare.Alley.1947.1080p.BluRay.x264-USURY</title>
+      <guid isPermaLink="true">http://127.0.0.1:18989/movies/newznab/details/4373e37c46f4bf864473e0910a6677b9</guid>
+      <link>http://127.0.0.1:18989/movies/newznab/download/4373e37c46f4bf864473e0910a6677b9.nzb</link>
+      <comments>http://127.0.0.1:18989/movies/newznab/details/4373e37c46f4bf864473e0910a6677b9#comments</comments>
+      <pubDate>Wed, 04 Nov 2026 06:00:00 +0000</pubDate>
+      <category>Movies &gt; HD</category>
+      <description>Nightmare.Alley.1947.1080p.BluRay.x264-USURY</description>
+      <enclosure url="http://127.0.0.1:18989/movies/newznab/download/4373e37c46f4bf864473e0910a6677b9.nzb" length="8697308774" type="application/x-nzb"/>
+      <newznab:attr name="category" value="2000"/>
+      <newznab:attr name="category" value="2040"/>
+      <newznab:attr name="size" value="8697308774"/>
+      <newznab:attr name="guid" value="4373e37c46f4bf864473e0910a6677b9"/>
+      <newznab:attr name="usenetdate" value="Wed, 04 Nov 2026 06:00:00 +0000"/>
+      <newznab:attr name="grabs" value="3"/>
+    </item>
+  </channel>
+</rss>
