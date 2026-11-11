@@ -5,18 +5,18 @@ Sonarr, Radarr and Lidarr that keeps their APIs, so Prowlarr, Bazarr, Overseerr,
 Recyclarr and your dashboards keep working unchanged. Drop it in, import your
 existing databases and config, free a few hundred megabytes of RAM.
 
-Status: phase 2 done, Sonarr acquires. Unarr imports `sonarr.db` and
-`config.xml`, serves `/api/v3` with the original JSON, runs the official
-Sonarr v4 web UI from the binary, and now searches Newznab and Torznab
-indexers (Prowlarr can manage them), decides with the originals' rules,
-hands releases to SABnzbd, NZBGet, qBittorrent or Transmission, tracks the
-queue, runs the commands and scheduled tasks, and reports health. Completed
-downloads wait for phase 3, which imports and renames them and adds series.
-Radarr and Lidarr answer `system/status` only. See
-[docs/DESIGN.md](docs/DESIGN.md), [docs/phase-1-sonarr.md](docs/phase-1-sonarr.md),
-[docs/phase-2-acquisition.md](docs/phase-2-acquisition.md) and, for what comes
-next, [docs/phase-3a-import.md](docs/phase-3a-import.md) and
-[docs/phase-3b-library.md](docs/phase-3b-library.md).
+Status: the Sonarr personality is complete (phases 1 to 3b) and audited.
+Unarr imports `sonarr.db` and `config.xml`, serves `/api/v3` with the original
+JSON, runs the official Sonarr v4 web UI from the binary, searches Newznab and
+Torznab indexers (Prowlarr can manage them), decides with the originals'
+rules, hands releases to SABnzbd, NZBGet, qBittorrent or Transmission, imports
+and renames what they finish, notifies Discord, webhooks and Plex, looks up,
+adds and refreshes series, and saves every settings page (Recyclarr syncs
+through it). Radarr is next ([docs/phase-4-radarr.md](docs/phase-4-radarr.md));
+until then `--personalities radarr` and `lidarr` start but are not usable. See
+[docs/DESIGN.md](docs/DESIGN.md), the work orders of each phase under `docs/`,
+[docs/audit/README.md](docs/audit/README.md) and, for running it in place of
+Sonarr, [docs/homelab-compose.md](docs/homelab-compose.md).
 
 ## Goals
 

@@ -266,9 +266,16 @@ case.
      `docs/phase-3b-library.md`.
    Sizing from phase 2's 32k lines: 3a about two thirds of it, 3b about half,
    together about equal to phase 2.
-4. **Radarr** as a second personality on the existing core. Expected at half
-   of phase 2: the core is shared, the importer, movie model, Radarr UI and
-   goldens from the Radarr release are new.
+4. **Radarr** as a second personality on the existing core, in three
+   milestones that retrace the Sonarr phases: 4a read-only (importer, read
+   endpoints, the Radarr UI, both personalities in one process), 4b
+   acquisition (movie parser, `t=movie` searches, decision engine, grab,
+   queue), 4c library (import, rename, notifications, `api.radarr.video`,
+   movie management, settings writes, an audit, the homelab run). First
+   expected at half of phase 2; the map taken after phase 3b shows that
+   everything carrying the originals' rules is bound to series and
+   episodes, so a movie twin of each has to be written beside the shared
+   pieces: about phase 2's size. See `docs/phase-4-radarr.md`.
 5. **Lidarr** last: MusicBrainz, per-track matching, Chromaprint fingerprints.
    Expected at phase 2's size or above; the most divergent personality.
 
