@@ -21,7 +21,9 @@ EXPOSE 8989 7878 8686
 VOLUME ["/config"]
 ENV UNARR_CONFIG=/config RUST_LOG=info
 # No shell and no curl in this image: the daemon asks itself. The first
-# start may be importing a database, hence the long start period.
-HEALTHCHECK --interval=1m --timeout=10s --start-period=2m --retries=3 \
+# start may be importing a database, hence the long start period. Every
+# probe starts a process in the container, which is not free on a small
+# NAS: two minutes between them.
+HEALTHCHECK --interval=2m --timeout=10s --start-period=2m --retries=3 \
     CMD ["/usr/local/bin/unarrd", "healthcheck"]
 ENTRYPOINT ["/usr/local/bin/unarrd"]
