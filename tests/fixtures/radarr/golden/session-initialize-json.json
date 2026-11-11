@@ -12,7 +12,7 @@
     "userHash": "53984e57",
     "version": "6.4.4.10685"
   },
-  "recordedAt": "2026-11-11T19:38:28Z",
+  "recordedAt": "2026-11-11T22:00:01Z",
   "request": {
     "method": "GET",
     "path": "/initialize.json"

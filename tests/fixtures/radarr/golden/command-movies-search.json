@@ -18,14 +18,14 @@
     "id": 472960,
     "name": "MoviesSearch",
     "priority": "normal",
-    "queued": "2026-11-11T19:39:17Z",
+    "queued": "2026-11-11T22:00:52Z",
     "result": "unknown",
     "sendUpdatesToClient": true,
     "status": "queued",
     "trigger": "manual",
     "updateScheduledTask": true
   },
-  "recordedAt": "2026-11-11T19:39:17Z",
+  "recordedAt": "2026-11-11T22:00:52Z",
   "request": {
     "body": "bodies/command-movies-search.json",
     "method": "POST",

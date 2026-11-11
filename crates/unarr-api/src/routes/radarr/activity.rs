@@ -412,6 +412,26 @@ pub async fn missing(State(state): State<AppState>, uri: Uri) -> ApiResult<Json<
     Ok(Json(wanted_page(&ctx, &shelf, wanted, &wanted_paging(&p))))
 }
 
+/// `POST /history/failed/{id}`: "Mark as failed" on a history row.
+pub async fn history_mark_failed(
+    State(state): State<AppState>,
+    axum::extract::Path(id): axum::extract::Path<i64>,
+) -> ApiResult<Json<Value>> {
+    let failed = unarr_core::movies::downloads::failed::mark_history_as_failed(
+        state.movie_downloads(),
+        id,
+        state.now(),
+    )
+    .await?;
+    if failed.is_none() {
+        return Err(crate::error::ApiError::ModelNotFound(format!(
+            "MovieHistory with ID {id} does not exist"
+        )));
+    }
+    super::queue::broadcast_queue(&state);
+    Ok(Json(serde_json::json!({})))
+}
+
 /// `GET /wanted/cutoff`: the movies whose file is below the cutoff of
 /// their quality profile.
 pub async fn cutoff(State(state): State<AppState>, uri: Uri) -> ApiResult<Json<PagingResource<Value>>> {

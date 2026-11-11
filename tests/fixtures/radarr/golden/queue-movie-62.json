@@ -4,13 +4,13 @@
     "pageSize": 20,
     "records": [
       {
-        "added": "2026-11-11T19:38:51Z",
+        "added": "2026-11-11T22:00:24Z",
         "customFormatScore": 0,
         "customFormats": [],
         "downloadClient": "Mock qBittorrent",
         "downloadClientHasPostImportCategory": false,
         "downloadId": "13706ED57ADBE030F510BEDCD37595376901117C",
-        "estimatedCompletionTime": "2026-11-11T19:48:54Z",
+        "estimatedCompletionTime": "2026-11-11T22:10:28Z",
         "id": 1132538262,
         "indexer": "Mock Torznab (Prowlarr)",
         "languages": [
@@ -53,7 +53,7 @@
     "sortKey": "movies.sortTitle",
     "totalRecords": 1
   },
-  "recordedAt": "2026-11-11T19:39:05Z",
+  "recordedAt": "2026-11-11T22:00:38Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/queue?page=1&pageSize=20&sortKey=movies.sortTitle&sortDirection=ascending&movieIds=62"

@@ -7,7 +7,7 @@
     "replaceIllegalCharacters": true,
     "standardMovieFormat": "{Movie CleanTitle} {(Release Year)} {tmdb-{TmdbId}} - {edition-{Edition Tags}} {[MediaInfo 3D]}{[Custom Formats]}{[Quality Full]}{[Mediainfo AudioCodec}{ Mediainfo AudioChannels]}{[MediaInfo VideoDynamicRangeType]}{[Mediainfo VideoCodec]}{-Release Group}"
   },
-  "recordedAt": "2026-11-11T19:38:29Z",
+  "recordedAt": "2026-11-11T22:00:03Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/config/naming"

@@ -2,10 +2,10 @@
   "body": {
     "status": 404,
     "title": "Not Found",
-    "traceId": "00-efebb478b561e70ba4a28c0e3f95dbcb-8f9b2c15eeb227e5-00",
+    "traceId": "00-19dc12bd087c39922de1dfcfdb245926-e9862d20c6cbd0ae-00",
     "type": "https://tools.ietf.org/html/rfc9110#section-15.5.5"
   },
-  "recordedAt": "2026-11-11T19:38:28Z",
+  "recordedAt": "2026-11-11T22:00:02Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/movie/999"

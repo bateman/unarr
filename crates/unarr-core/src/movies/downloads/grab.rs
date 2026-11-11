@@ -142,13 +142,22 @@ pub async fn download_report(
         "report sent to the download client"
     );
     let download_id = Some(download_id).filter(|id| !id.trim().is_empty());
-    record_grab(downloads, remote, &definition, download_id.as_deref(), now).await?;
+    // The client has the release from here on: the grab happened whatever
+    // becomes of its bookkeeping. The original publishes `MovieGrabbedEvent`
+    // and its handlers' failures are logged, not thrown; were one to count
+    // as a failed grab, the next release of the movie would be sent too.
+    if let Err(e) = record_grab(downloads, remote, &definition, download_id.as_deref(), now).await {
+        tracing::error!(title = %release.title, error = %format!("{e:#}"), "the grab was sent to the client but its history could not be written");
+    }
     // `PendingReleaseService.Handle(MovieGrabbedEvent)`.
     let grabbed = remote.clone();
-    downloads
+    if let Err(e) = downloads
         .db()
         .call(move |conn| super::pending::remove_grabbed(conn, &grabbed, now))
-        .await?;
+        .await
+    {
+        tracing::error!(title = %release.title, error = %format!("{e:#}"), "the pending releases of the grabbed movie could not be dropped");
+    }
     downloads.mark_dirty();
     Ok(Grabbed {
         download_id,

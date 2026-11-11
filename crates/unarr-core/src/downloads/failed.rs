@@ -387,10 +387,6 @@ async fn publish_failed(
             Ok(())
         })
         .await?;
-    // `RedownloadFailedDownloadService.Handle(DownloadFailedEvent)`.
-    if let Err(e) = super::redownload::redownload(downloads, &event, now).await {
-        tracing::warn!(error = %e, "unable to queue the search for the failed download");
-    }
     // `DownloadEventHub.Handle(DownloadFailedEvent)`.
     if let Some(t) = t {
         if t.item.can_be_removed {
@@ -404,6 +400,12 @@ async fn publish_failed(
                 }
             }
         }
+    }
+    // Last, as the original has it: the search starts once the failed item
+    // has left the client.
+    // `RedownloadFailedDownloadService.Handle(DownloadFailedEvent)`.
+    if let Err(e) = super::redownload::redownload(downloads, &event, now).await {
+        tracing::warn!(error = %e, "unable to queue the search for the failed download");
     }
     Ok(event)
 }

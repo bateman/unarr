@@ -411,3 +411,53 @@ async fn redownloading_follows_the_setting_and_the_request() {
         1
     );
 }
+
+/// A grab whose history cannot be written is still a grab: the client has
+/// the release, and the next release of the movie must not follow it.
+#[tokio::test]
+async fn a_grab_counts_even_when_its_history_cannot_be_written() {
+    let mock = Mock::start(fixtures_dir(), 0).await.unwrap();
+    let db = fixture_db(&mock).await;
+    let (runtime, _) = runtime(&db).await;
+    // The database refuses every history row from here on.
+    db.call(|conn| {
+        conn.execute_batch(
+            "CREATE TRIGGER no_history BEFORE INSERT ON history
+             BEGIN SELECT RAISE(ABORT, 'the disk is full'); END;",
+        )?;
+        Ok(())
+    })
+    .await
+    .unwrap();
+    mock.clear();
+    // The Holdovers has several releases the profile wants, on both
+    // indexers.
+    let search = run(
+        &runtime,
+        CommandBody::MoviesSearch { movie_ids: vec![116] },
+        CommandTrigger::Manual,
+    )
+    .await;
+    assert_eq!(search.status, CommandStatus::Completed, "{:?}", search.exception);
+    assert_eq!(
+        search.message.as_deref(),
+        Some("Completed search for 1 movies. 1 reports downloaded.")
+    );
+    let fetched: Vec<String> = mock
+        .requests()
+        .iter()
+        .filter(|r| r.path.contains("/download/"))
+        .map(|r| r.path.clone())
+        .collect();
+    assert_eq!(fetched.len(), 1, "one release went to a client: {fetched:?}");
+    assert_eq!(
+        count(
+            &db,
+            "SELECT count(*) FROM history WHERE movie_id = ?1 AND event_type = 'grabbed' AND id > 1008",
+            116
+        )
+        .await,
+        0,
+        "and its history is what was lost"
+    );
+}

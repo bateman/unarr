@@ -123,6 +123,26 @@ pub async fn mark_as_failed(
     Ok(Some(event))
 }
 
+/// `MarkAsFailed(historyId)`: "Mark as failed" on a history row. The
+/// failure is recorded and the release blocklisted from what the row
+/// says, with no tracked download behind it. `None` when there is no such
+/// row.
+pub async fn mark_history_as_failed(
+    downloads: &MovieDownloads,
+    history_id: i64,
+    now: DateTime<Utc>,
+) -> anyhow::Result<Option<MovieDownloadFailed>> {
+    let found = downloads
+        .db()
+        .call(move |conn| store::get_history(conn, history_id))
+        .await?;
+    let Some(history) = found else {
+        return Ok(None);
+    };
+    let event = publish_failed(downloads, history, "Manually marked as failed", None, false, now).await?;
+    Ok(Some(event))
+}
+
 /// `IgnoredDownloadService.IgnoreDownload`: `false` when the movie is
 /// unknown, as the original refuses then.
 pub async fn ignore_download(
@@ -323,10 +343,6 @@ async fn publish_failed(
             Ok(())
         })
         .await?;
-    // `RedownloadFailedDownloadService.Handle(DownloadFailedEvent)`.
-    if let Err(e) = super::redownload::redownload(downloads, &event, now).await {
-        tracing::warn!(error = %e, "unable to queue the search for the failed download");
-    }
     // `DownloadEventHub.Handle(DownloadFailedEvent)`.
     if let Some(t) = t {
         if t.item.can_be_removed {
@@ -340,6 +356,12 @@ async fn publish_failed(
                 }
             }
         }
+    }
+    // Last, as the original has it: the search starts once the failed item
+    // has left the client.
+    // `RedownloadFailedDownloadService.Handle(DownloadFailedEvent)`.
+    if let Err(e) = super::redownload::redownload(downloads, &event, now).await {
+        tracing::warn!(error = %e, "unable to queue the search for the failed download");
     }
     Ok(event)
 }

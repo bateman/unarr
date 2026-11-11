@@ -683,7 +683,7 @@
     "name": "",
     "upgradeAllowed": false
   },
-  "recordedAt": "2026-11-11T19:38:29Z",
+  "recordedAt": "2026-11-11T22:00:03Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/qualityprofile/schema"

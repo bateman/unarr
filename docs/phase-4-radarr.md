@@ -340,14 +340,14 @@ do not resolve.
 
 | Exit criterion | Status |
 |----------------|--------|
-| `make ui && make check` green | Yes: fmt, clippy `-D warnings`, 408 tests in 30 test binaries. Sonarr's replay is unchanged: the same 634 goldens, none re-recorded. |
+| `make ui && make check` green | Yes: fmt, clippy `-D warnings`, 438 tests in 31 test binaries. Sonarr's replay is unchanged: the same 634 goldens, none re-recorded. |
 | An `RssSync` ends in a grab with queue, history, commands equal to the oracle | Yes. The original and Unarr both find 14 reports and grab one (Last Night in Soho, to the mock qBittorrent); `command-rsssync-get`, `queue-after-command` and `history-after-command` replay. |
 | A `MoviesSearch` ends in a grab, likewise | Yes: The Holdovers, to the mock SABnzbd, with `releaseSource` `UserInvokedSearch`; a second search, for a movie already in the queue, grabs nothing, as in the original. |
 | SignalR equal to the oracle | Not recorded from the original, as for Sonarr. The replay asserts what the hub sends: each command's start and end with its last message, the queue's sync, a queue status that counts the downloads and the pending releases, the health sync, and nothing under a series name. That assertion found the status being sent before the refresh and without the pending releases, since fixed. |
 | Parser vectors pass | 1,076 of Radarr's parser cases, ported as data by `scripts/port-vectors.py --source`. |
 | Decision vectors pass | 39 cases over the 30 specifications; their order is settled by a golden (`release-rss-pending`), not by the vectors. |
 | Prowlarr's sync replays | `scripts/prowlarr-replay.py --app radarr` (`make prowlarr-radarr`): 45 checks, passed against the real Radarr and against Unarr. The requests are Prowlarr 2.7's as read from its source and from the maintainer's logs; Prowlarr itself was not run. |
-| The goldens replay | 307 of 308 requests, recorded from the real Radarr before each shape was written. Pending: `config-naming-examples` (4c). |
+| The goldens replay | All 312 requests, recorded from the real Radarr before each shape was written (`config-naming-examples` replays since the movie file name builder landed on `main`). |
 
 What 4b delivered against its six points:
 

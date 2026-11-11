@@ -1056,6 +1056,15 @@ pub fn next_blocklist_id(conn: &Connection) -> anyhow::Result<i64> {
     crate::store::sequence::next_id(conn, "blocklist")
 }
 
+/// One history row by its id.
+pub fn get_history(conn: &Connection, id: i64) -> anyhow::Result<Option<MovieHistoryEntry>> {
+    Ok(
+        query_history(conn, "SELECT * FROM history WHERE id = ?1", &[&id])?
+            .into_iter()
+            .next(),
+    )
+}
+
 /// `FindByDownloadId`: every row of one download, newest first.
 pub fn history_by_download_id(
     conn: &Connection,

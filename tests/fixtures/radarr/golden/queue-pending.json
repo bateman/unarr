@@ -4,13 +4,13 @@
     "pageSize": 20,
     "records": [
       {
-        "added": "2026-11-11T19:39:47Z",
+        "added": "2026-11-11T22:01:23Z",
         "customFormatScore": 0,
         "customFormats": [],
         "downloadClient": "Mock Transmission",
         "downloadClientHasPostImportCategory": false,
         "downloadId": "B133034E90669E52E3BA3460A651D3545769CB85",
-        "estimatedCompletionTime": "2026-11-11T19:49:52Z",
+        "estimatedCompletionTime": "2026-11-11T22:11:28Z",
         "id": 1613248858,
         "indexer": "Mock Torznab (Prowlarr)",
         "languages": [
@@ -139,7 +139,7 @@
             "winter",
             "winter break"
           ],
-          "lastSearchTime": "2026-11-11T19:39:45Z",
+          "lastSearchTime": "2026-11-11T22:01:21Z",
           "minimumAvailability": "released",
           "monitored": true,
           "movieFileId": 0,
@@ -223,7 +223,7 @@
         "trackedDownloadStatus": "ok"
       },
       {
-        "added": "2026-11-11T19:38:53Z",
+        "added": "2026-11-11T22:00:26Z",
         "customFormatScore": 0,
         "customFormats": [
           {
@@ -234,7 +234,7 @@
         "downloadClient": "Mock Transmission",
         "downloadClientHasPostImportCategory": false,
         "downloadId": "5AE419C220561D2F40DDBB4026B5D0121DCC040E",
-        "estimatedCompletionTime": "2026-11-11T19:49:52Z",
+        "estimatedCompletionTime": "2026-11-11T22:11:28Z",
         "id": 936833475,
         "indexer": "Mock Torznab (Prowlarr)",
         "languages": [
@@ -352,7 +352,7 @@
             "tarot cards",
             "violence"
           ],
-          "lastSearchTime": "2026-11-11T19:39:31Z",
+          "lastSearchTime": "2026-11-11T22:01:06Z",
           "minimumAvailability": "released",
           "monitored": true,
           "movieFileId": 0,
@@ -434,13 +434,13 @@
         "trackedDownloadStatus": "ok"
       },
       {
-        "added": "2026-11-11T19:39:07Z",
+        "added": "2026-11-11T22:00:42Z",
         "customFormatScore": 0,
         "customFormats": [],
         "downloadClient": "Mock qBittorrent",
         "downloadClientHasPostImportCategory": false,
         "downloadId": "13706ED57ADBE030F510BEDCD37595376901117C",
-        "estimatedCompletionTime": "2026-11-11T19:49:52Z",
+        "estimatedCompletionTime": "2026-11-11T22:11:28Z",
         "id": 1132538262,
         "indexer": "Mock Torznab (Prowlarr)",
         "languages": [
@@ -663,7 +663,7 @@
         "trackedDownloadStatus": "ok"
       },
       {
-        "added": "2026-11-11T19:39:57Z",
+        "added": "2026-11-11T22:01:41Z",
         "customFormatScore": 0,
         "customFormats": [
           {
@@ -867,11 +867,11 @@
         "size": 7516192768,
         "sizeleft": 7516192768,
         "status": "delay",
-        "timeleft": "363.14:00:02.0427712",
+        "timeleft": "363.11:38:18.8971763",
         "title": "BlacKkKlansman.2018.iTA.ENG.1080p.WEB-DL.DD5.1.H264-MeM"
       },
       {
-        "added": "2026-11-11T19:39:57Z",
+        "added": "2026-11-11T22:01:41Z",
         "customFormatScore": 0,
         "customFormats": [
           {
@@ -1003,7 +1003,7 @@
         "size": 6442450944,
         "sizeleft": 6442450944,
         "status": "delay",
-        "timeleft": "363.15:00:02.0420973",
+        "timeleft": "363.12:38:18.8961465",
         "title": "Blindspotting.2018.iTA.ENG.1080p.WEB-DL.DD5.1.H264-MeM"
       }
     ],
@@ -1011,7 +1011,7 @@
     "sortKey": "timeleft",
     "totalRecords": 5
   },
-  "recordedAt": "2026-11-11T19:39:57Z",
+  "recordedAt": "2026-11-11T22:01:41Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/queue?page=1&pageSize=20&sortKey=timeleft&sortDirection=ascending&includeMovie=true"

@@ -680,4 +680,121 @@ mod what_the_library_already_has {
             d.rejections
         );
     }
+
+    #[test]
+    fn a_proper_of_a_file_that_is_not_new() {
+        use crate::decision::lookup::ProperDownloadTypes;
+        let proper = || {
+            let mut r = wanted();
+            r.title = "The.Holdovers.2023.PROPER.1080p.BluRay.x264-GRP".into();
+            r.guid = "guid-proper".into();
+            r
+        };
+        let aged = |days: i64| {
+            let mut f = file(BLURAY1080P, "GRP");
+            f.date_added = now() - Duration::days(days);
+            with_file(f)
+        };
+        // A file imported a month ago is not replaced by its proper...
+        let d = decide_one(&catalog(), &aged(30), proper());
+        assert!(reasons(&d).contains(&R::ProperForOldFile), "{:?}", d.rejections);
+        assert!(d.rejections.iter().any(|r| r.message == "Proper for old file"));
+        // ...one imported this week is.
+        let d = decide_one(&catalog(), &aged(2), proper());
+        assert!(!reasons(&d).contains(&R::ProperForOldFile), "{:?}", d.rejections);
+        // With propers not to be upgraded to, none is, old file or new.
+        let mut c = catalog();
+        c.base.config.download_propers_and_repacks = ProperDownloadTypes::DoNotUpgrade;
+        let d = decide_one(&c, &aged(2), proper());
+        assert!(reasons(&d).contains(&R::PropersDisabled), "{:?}", d.rejections);
+        assert!(d
+            .rejections
+            .iter()
+            .any(|r| r.message == "Proper downloading is disabled"));
+        // A release that is no revision upgrade is not the rule's business,
+        // nor is any release in a search.
+        let d = decide_one(&c, &aged(30), wanted());
+        assert!(!reasons(&d).contains(&R::PropersDisabled) && !reasons(&d).contains(&R::ProperForOldFile));
+        let lookup = aged(30);
+        let criteria = MovieSearch {
+            movie: lookup.movies[0].clone(),
+            user_invoked: false,
+            interactive: false,
+        };
+        let searched = decide(&catalog(), &lookup, &[proper()], Some(&criteria), false).remove(0);
+        assert!(
+            !reasons(&searched).contains(&R::ProperForOldFile),
+            "{:?}",
+            searched.rejections
+        );
+    }
+
+    #[test]
+    fn a_release_already_grabbed_and_imported_as_something_else() {
+        const HASH: &str = "ABCDEF0123456789ABCDEF0123456789ABCDEF01";
+        let row = |id: i64, hours: i64, event: MovieHistoryEvent, quality_id: i64| MovieHistoryEntry {
+            id,
+            movie_id: 1,
+            source_title: Some(TITLE.into()),
+            date: now() - Duration::hours(hours),
+            event_type: event,
+            quality: quality(quality_id, 1),
+            languages: vec![lang::ENGLISH],
+            data: serde_json::json!({}),
+            download_id: Some(HASH.into()),
+        };
+        // Grabbed as a Bluray, imported as the WEB-DL it turned out to be.
+        let imported_as = |quality_id: i64| {
+            let mut lookup = with_file(file(WEBDL1080P, "GRP"));
+            lookup.history = vec![
+                row(2, 20, MovieHistoryEvent::DownloadFolderImported, quality_id),
+                row(1, 24, MovieHistoryEvent::Grabbed, BLURAY1080P),
+            ];
+            lookup
+        };
+        let mut c = catalog();
+        c.base.profiles = vec![profile(&[WEBDL1080P, BLURAY1080P], BLURAY1080P, true)];
+        let lookup = imported_as(WEBDL1080P);
+        let d = decide_one(&c, &lookup, wanted());
+        assert_eq!(reasons(&d), vec![R::AlreadyImportedSameName]);
+        assert_eq!(
+            d.rejections[0].message,
+            "Has same release name as a grabbed and imported release"
+        );
+        // A torrent is known by its hash before its name.
+        let mut torrent = wanted();
+        torrent.title = "The.Holdovers.2023.1080p.BluRay.x264-OTHER".into();
+        torrent.protocol = Protocol::Torrent;
+        torrent.info_hash = Some(HASH.to_lowercase());
+        torrent.seeders = Some(10);
+        let d = decide_one(&c, &lookup, torrent);
+        assert_eq!(reasons(&d), vec![R::AlreadyImportedSameHash]);
+        assert_eq!(
+            d.rejections[0].message,
+            "Has same torrent hash as a grabbed and imported release"
+        );
+        // Another release of the movie is an upgrade like any other.
+        let other = release(
+            "The.Holdovers.2023.1080p.BluRay.x264-OTHER",
+            now() - Duration::hours(3),
+        );
+        let d = decide_one(&c, &lookup, other);
+        assert!(d.approved(), "{:?}", d.rejections);
+        // Imported as what was grabbed, the rule has nothing to say (the
+        // file on disk does).
+        let d = decide_one(&c, &imported_as(BLURAY1080P), wanted());
+        assert!(
+            !reasons(&d).contains(&R::AlreadyImportedSameName),
+            "{:?}",
+            d.rejections
+        );
+        // Nor with completed download handling off.
+        c.base.config.enable_completed_download_handling = false;
+        let d = decide_one(&c, &lookup, wanted());
+        assert!(
+            !reasons(&d).contains(&R::AlreadyImportedSameName),
+            "{:?}",
+            d.rejections
+        );
+    }
 }

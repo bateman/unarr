@@ -19,7 +19,7 @@
       "wikiUrl": "https://wiki.servarr.com/radarr/system#permissions-error"
     }
   ],
-  "recordedAt": "2026-11-11T19:39:45Z",
+  "recordedAt": "2026-11-11T22:01:20Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/health"

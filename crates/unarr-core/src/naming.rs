@@ -252,34 +252,22 @@ pub fn title_first_character(title: &str) -> String {
     let mut chars = title.chars();
     for _ in 0..2 {
         match chars.next() {
+            // `ToUpper().RemoveDiacritics()[0]`: the letter without its
+            // marks, whatever the alphabet (`Š` is `S`, `Ż` is `Z`); a
+            // letter that has none to shed (`Ø`, `Ł`) stays as it is.
             Some(c) if c.is_alphanumeric() => {
-                return c
-                    .to_uppercase()
+                let upper: String = c.to_uppercase().collect();
+                return crate::parser::title::remove_accent(&upper)
+                    .chars()
                     .next()
-                    .map(strip_diacritic)
                     .unwrap_or('_')
-                    .to_string()
+                    .to_string();
             }
             Some(_) => continue,
             None => break,
         }
     }
     "_".to_string()
-}
-
-/// The common Latin accented capitals, enough for a folder initial.
-fn strip_diacritic(c: char) -> char {
-    match c {
-        'À'..='Å' => 'A',
-        'Ç' => 'C',
-        'È'..='Ë' => 'E',
-        'Ì'..='Ï' => 'I',
-        'Ñ' => 'N',
-        'Ò'..='Ö' | 'Ø' => 'O',
-        'Ù'..='Ü' => 'U',
-        'Ý' => 'Y',
-        other => other,
-    }
 }
 
 /// Illegal characters and colons, per the naming settings.
@@ -439,6 +427,9 @@ fn two_letter_language(code: &str) -> Option<&'static str> {
         "afr" => "AF",
         "swa" => "SW",
         "mon" => "MN",
+        "bur" | "mya" => "MY",
+        "mao" | "mri" => "MI",
+        "tib" | "bod" => "BO",
         _ => return None,
     })
 }
@@ -1701,6 +1692,25 @@ mod tests {
         assert_eq!(title_first_character("The Show"), "T");
         assert_eq!(title_first_character(&title_the("The Show")), "S");
         assert_eq!(title_first_character("¡Hola!"), "H");
+        // Marks go whatever the alphabet; a letter that is one stays.
+        assert_eq!(title_first_character("Šarlatán"), "S");
+        assert_eq!(title_first_character("Żywot Briana"), "Z");
+        assert_eq!(title_first_character("Élite"), "E");
+        assert_eq!(title_first_character("ñandú"), "N");
+        assert_eq!(title_first_character("Ødipus"), "Ø");
+        assert_eq!(title_first_character("Łódź"), "Ł");
+        assert_eq!(title_first_character("東京物語"), "東");
+        assert_eq!(title_first_character("--"), "_");
+        // The bibliographic codes the originals map, the rare ones too.
+        let codes = |c: &[&str]| c.iter().map(|s| s.to_string()).collect::<Vec<_>>();
+        assert_eq!(
+            languages_token(&codes(&["bur", "ger"]), None, false, true),
+            "[MY+DE]"
+        );
+        assert_eq!(
+            languages_token(&codes(&["mao", "tib", "mri", "bod", "mya"]), None, false, false),
+            "MI+BO+MY"
+        );
         assert_eq!(truncate("A long title here", Some("10")), "A long{ellipsis}");
     }
 }

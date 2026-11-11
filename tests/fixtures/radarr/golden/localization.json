@@ -2065,7 +2065,7 @@
       "YouCanAlsoSearch": "You can also search using TMDb ID or IMDb ID of a movie. e.g. `tmdb:71663`"
     }
   },
-  "recordedAt": "2026-11-11T19:38:27Z",
+  "recordedAt": "2026-11-11T22:00:01Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/localization"

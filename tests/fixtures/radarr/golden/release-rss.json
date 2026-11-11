@@ -1,9 +1,9 @@
 {
   "body": [
     {
-      "age": 1,
-      "ageHours": 46.41369443966666,
-      "ageMinutes": 2784.821666396667,
+      "age": 2,
+      "ageHours": 48.773014163527776,
+      "ageMinutes": 2926.38084983,
       "approved": true,
       "commentUrl": "http://127.0.0.1:18989/movies/newznab/details/fd04f3b8c14e7d33d5e992475f5fef5b#comments",
       "customFormatScore": 0,
@@ -61,9 +61,9 @@
       "tmdbId": 840430
     },
     {
-      "age": 1,
-      "ageHours": 46.14702778294444,
-      "ageMinutes": 2768.8216669783333,
+      "age": 2,
+      "ageHours": 48.50634750636111,
+      "ageMinutes": 2910.3808503833334,
       "approved": true,
       "commentUrl": "http://127.0.0.1:18989/movies/torznab/details/d94f74e9588477404bd8d34ffc605870#comments",
       "customFormatScore": 0,
@@ -125,9 +125,9 @@
       "tmdbId": 0
     },
     {
-      "age": 1,
-      "ageHours": 47.61369445122222,
-      "ageMinutes": 2856.821667073333,
+      "age": 2,
+      "ageHours": 49.97301417455556,
+      "ageMinutes": 2998.3808504733333,
       "approved": false,
       "commentUrl": "http://127.0.0.1:18989/movies/newznab/details/2579a03771a684b4e0186c4874aa07a5#comments",
       "customFormatScore": -10000,
@@ -201,8 +201,8 @@
     },
     {
       "age": 2,
-      "ageHours": 48.563694453,
-      "ageMinutes": 2913.8216671816667,
+      "ageHours": 50.923014176361114,
+      "ageMinutes": 3055.3808505833335,
       "approved": true,
       "commentUrl": "http://127.0.0.1:18989/movies/torznab/details/c8949b89db6f20a1e049aa8170a7a05c#comments",
       "customFormatScore": 0,
@@ -267,8 +267,8 @@
     },
     {
       "age": 2,
-      "ageHours": 48.86369445363889,
-      "ageMinutes": 2931.8216672183335,
+      "ageHours": 51.22301417697222,
+      "ageMinutes": 3073.380850618333,
       "approved": true,
       "commentUrl": "http://127.0.0.1:18989/movies/newznab/details/8b519b988db3b735f5a5493125198c99#comments",
       "customFormatScore": 0,
@@ -332,8 +332,8 @@
     },
     {
       "age": 3,
-      "ageHours": 79.08036112119444,
-      "ageMinutes": 4744.821667273333,
+      "ageHours": 81.43968084422222,
+      "ageMinutes": 4886.380850653333,
       "approved": true,
       "commentUrl": "http://127.0.0.1:18989/movies/torznab/details/bc295ecb0fb56b9e5df74be19469cef4#comments",
       "customFormatScore": 0,
@@ -401,8 +401,8 @@
     },
     {
       "age": 2,
-      "ageHours": 50.14702778847222,
-      "ageMinutes": 3008.8216673083334,
+      "ageHours": 52.50634751183333,
+      "ageMinutes": 3150.380850711667,
       "approved": false,
       "commentUrl": "http://127.0.0.1:18989/movies/newznab/details/1e31c567dbdcd043801cfdc268b38ae3#comments",
       "customFormatScore": 2000,
@@ -476,8 +476,8 @@
     },
     {
       "age": 2,
-      "ageHours": 51.56369445622222,
-      "ageMinutes": 3093.821667375,
+      "ageHours": 53.92301417988889,
+      "ageMinutes": 3235.380850793333,
       "approved": false,
       "commentUrl": "http://127.0.0.1:18989/movies/newznab/details/8c317d9d0d7ce2640d7244956502be76#comments",
       "customFormatScore": -10000,
@@ -545,8 +545,8 @@
     },
     {
       "age": 2,
-      "ageHours": 68.48036112347222,
-      "ageMinutes": 4108.82166741,
+      "ageHours": 70.83968084752777,
+      "ageMinutes": 4250.380850851667,
       "approved": false,
       "commentUrl": "http://127.0.0.1:18989/movies/newznab/details/a9aeb356f82c4a5371c7e815e0e46e10#comments",
       "customFormatScore": 0,
@@ -607,8 +607,8 @@
     },
     {
       "age": 3,
-      "ageHours": 72.31369445733333,
-      "ageMinutes": 4338.821667441666,
+      "ageHours": 74.67301418166667,
+      "ageMinutes": 4480.380850901666,
       "approved": false,
       "commentUrl": "http://127.0.0.1:18989/movies/newznab/details/6b608267b9e7d8c60dd555d16d9ad769#comments",
       "customFormatScore": 0,
@@ -667,8 +667,8 @@
     },
     {
       "age": 2,
-      "ageHours": 52.39702779238889,
-      "ageMinutes": 3143.821667545,
+      "ageHours": 54.75634751688889,
+      "ageMinutes": 3285.3808510133335,
       "approved": false,
       "commentUrl": "http://127.0.0.1:18989/movies/torznab/details/529fd365c22707b562df3f8ad9a04a58#comments",
       "customFormatScore": 0,
@@ -735,8 +735,8 @@
     },
     {
       "age": 3,
-      "ageHours": 72.21369445997222,
-      "ageMinutes": 4332.8216676,
+      "ageHours": 74.5730141845,
+      "ageMinutes": 4474.380851071666,
       "approved": false,
       "commentUrl": "http://127.0.0.1:18989/movies/newznab/details/a30d607c095f132509372ab72a6e6738#comments",
       "customFormatScore": 0,
@@ -794,8 +794,8 @@
     },
     {
       "age": 2,
-      "ageHours": 68.96369446094444,
-      "ageMinutes": 4137.821667658333,
+      "ageHours": 71.32301418558333,
+      "ageMinutes": 4279.380851135,
       "approved": false,
       "commentUrl": "http://127.0.0.1:18989/movies/newznab/details/a21dcc90a30f28c9f1321274f0a62f4c#comments",
       "customFormatScore": 0,
@@ -850,9 +850,9 @@
       "tmdbId": 0
     },
     {
-      "age": 2,
-      "ageHours": 71.64702779533333,
-      "ageMinutes": 4298.82166772,
+      "age": 3,
+      "ageHours": 74.00634752002777,
+      "ageMinutes": 4440.380851203333,
       "approved": false,
       "commentUrl": "http://127.0.0.1:18989/movies/torznab/details/cb8be0ee70dc347e643fcbc2153b0cf7#comments",
       "customFormatScore": 0,
@@ -911,7 +911,7 @@
       "tmdbId": 0
     }
   ],
-  "recordedAt": "2026-11-11T19:38:49Z",
+  "recordedAt": "2026-11-11T22:00:22Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/release"

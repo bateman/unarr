@@ -14,18 +14,45 @@ use unarr_mock::fixtures_dir;
 const KEY: &str = "0123456789abcdef0123456789abcdef";
 
 fn app() -> axum::Router {
-    let dir = fixtures_dir().join("sonarr");
-    let db = Db::open_in_memory().unwrap();
-    unarr_import::sonarr::import(&dir.join("sonarr.db"), &db).expect("import fixture");
-    let host = unarr_import::config_xml::read(&dir.join("config.xml"), 8989).expect("config.xml");
+    app_for(Personality::Sonarr, "")
+}
+
+/// One personality on its fixture, under a URL base when one is given.
+fn app_for(personality: Personality, url_base: &str) -> axum::Router {
+    let name = personality.app_name().to_lowercase();
+    let dir = fixtures_dir().join(&name);
+    let db = Db::open_in_memory_for(personality).unwrap();
+    let legacy = dir.join(personality.legacy_db_file());
+    match personality {
+        Personality::Radarr => unarr_import::radarr::import(&legacy, &db).map(|_| ()),
+        _ => unarr_import::sonarr::import(&legacy, &db).map(|_| ()),
+    }
+    .expect("import fixture");
+    let mut host = unarr_import::config_xml::read(&dir.join("config.xml"), personality.default_port())
+        .expect("config.xml");
+    host.url_base = url_base.to_string();
+    let mut runtime = RuntimeInfo::detect(dir);
+    runtime.media_cover_dir = covers_dir(personality);
     let state = AppState::new(
-        Personality::Sonarr,
+        personality,
         db,
-        Settings::from_host_config(host, Personality::Sonarr),
-        RuntimeInfo::detect(dir),
+        Settings::from_host_config(host, personality),
+        runtime,
         LogBuffer::new(),
     );
     unarr_api::router(state)
+}
+
+/// A cover folder of this test run's own, with one poster in it.
+fn covers_dir(personality: Personality) -> std::path::PathBuf {
+    let dir = std::env::temp_dir().join(format!(
+        "unarr_http_covers_{}_{}",
+        personality.app_name(),
+        std::process::id()
+    ));
+    std::fs::create_dir_all(dir.join("6")).expect("cover folder");
+    std::fs::write(dir.join("6/poster.jpg"), b"\xff\xd8\xff\xd9").expect("cover");
+    dir
 }
 
 async fn ask(
@@ -311,4 +338,172 @@ async fn the_login_redirect_names_the_whole_url_and_escapes_where_to_return() {
     assert_eq!(header(&headers, "cache-control"), Some("no-cache, no-store"));
     assert_eq!(header(&headers, "pragma"), Some("no-cache"));
     assert_eq!(header(&headers, "expires"), Some("-1"));
+}
+
+/// Under a URL base the root answers with or without its slash: the path
+/// a `location /sonarr/` proxy forwards, and where the login form returns.
+#[tokio::test]
+async fn the_root_under_a_url_base_takes_a_trailing_slash() {
+    let app = app_for(Personality::Sonarr, "/sonarr");
+    for path in ["/sonarr", "/sonarr/"] {
+        let (status, headers, _) = ask(&app, "GET", path, &[], "").await;
+        assert_eq!(status, StatusCode::FOUND, "{path}");
+        assert_eq!(
+            header(&headers, "location"),
+            Some("/sonarr/login?returnUrl=%2F"),
+            "{path}"
+        );
+    }
+    for path in ["/sonarr/login", "/sonarr/login/"] {
+        assert_eq!(ask(&app, "GET", path, &[], "").await.0, StatusCode::OK, "{path}");
+    }
+    // Outside the base there is nothing.
+    assert_eq!(ask(&app, "GET", "/", &[], "").await.0, StatusCode::NOT_FOUND);
+}
+
+/// A client that refuses the answer as it is still gets it, as from the
+/// originals: never a 406 after the handler has done its work.
+#[tokio::test]
+async fn a_refused_encoding_is_no_reason_to_refuse_the_answer() {
+    let app = app();
+    for encoding in ["identity;q=0", "*;q=0", "identity;q=0, br;q=0"] {
+        let (status, _, body) = ask(&app, "GET", "/ping", &[("Accept-Encoding", encoding)], "").await;
+        assert_eq!(status, StatusCode::OK, "{encoding}");
+        assert_eq!(body, b"{\"status\":\"OK\"}", "{encoding}");
+        let (status, _, _) = ask(
+            &app,
+            "GET",
+            "/api/v3/system/status",
+            &[("Accept-Encoding", encoding)],
+            "",
+        )
+        .await;
+        assert_eq!(status, StatusCode::UNAUTHORIZED, "{encoding}");
+    }
+    // What it does take is still used.
+    let (status, headers, _) = ask(
+        &app,
+        "GET",
+        "/api/v3/system/status",
+        &[("X-Api-Key", KEY), ("Accept-Encoding", "gzip, identity;q=0")],
+        "",
+    )
+    .await;
+    assert_eq!(status, StatusCode::OK);
+    assert_eq!(header(&headers, "content-encoding"), Some("gzip"));
+}
+
+/// A body that is not JSON is answered the same with a slash after the
+/// path as without.
+#[tokio::test]
+async fn a_slash_after_the_path_does_not_change_how_a_bad_body_is_answered() {
+    for personality in [Personality::Sonarr, Personality::Radarr] {
+        let app = app_for(personality, "");
+        let json = [("X-Api-Key", KEY), ("Content-Type", "application/json")];
+        let plain = ask(&app, "POST", "/api/v3/command", &json, "{not json").await;
+        let slashed = ask(&app, "POST", "/api/v3/command/", &json, "{not json").await;
+        assert_eq!(plain.0, StatusCode::BAD_REQUEST);
+        assert_eq!(slashed.0, plain.0, "{personality:?}");
+        assert_eq!(
+            header(&slashed.1, "content-type"),
+            header(&plain.1, "content-type"),
+            "{personality:?}"
+        );
+        assert_eq!(
+            header(&plain.1, "content-type"),
+            Some("application/json; charset=utf-8")
+        );
+    }
+}
+
+/// What the audit measured on Radarr 6.4.4 where it differs from Sonarr,
+/// and the rows both share that only this test holds in place.
+#[tokio::test]
+async fn radarr_answers_outside_the_body_as_measured() {
+    let app = app_for(Personality::Radarr, "");
+    let key = [("X-Api-Key", KEY)];
+
+    // An id that names nothing: the framework's problem details.
+    let (status, headers, body) = ask(&app, "GET", "/api/v3/movie/999999", &key, "").await;
+    assert_eq!(status, StatusCode::NOT_FOUND);
+    assert_eq!(
+        header(&headers, "content-type"),
+        Some("application/problem+json; charset=utf-8")
+    );
+    let problem: serde_json::Value = serde_json::from_slice(&body).unwrap();
+    assert_eq!(problem["status"], 404);
+    assert_eq!(problem["title"], "Not Found");
+    assert_eq!(header(&headers, "x-application-version"), Some("6.4.4.10685"));
+
+    // No body where one is needed: the error is under the empty key.
+    let json = [("X-Api-Key", KEY), ("Content-Type", "application/json")];
+    let (status, headers, body) = ask(&app, "POST", "/api/v3/command", &json, "").await;
+    assert_eq!(status, StatusCode::BAD_REQUEST);
+    assert_eq!(
+        header(&headers, "content-type"),
+        Some("application/json; charset=utf-8")
+    );
+    let errors: serde_json::Value = serde_json::from_slice(&body).unwrap();
+    assert_eq!(errors["errors"][""][0], "A non-empty request body is required.");
+
+    // A cover with the key: kept for a year, as the static files are.
+    let (status, headers, _) = ask(&app, "GET", "/api/v3/mediacover/6/poster.jpg", &key, "").await;
+    assert_eq!(status, StatusCode::OK);
+    assert_eq!(header(&headers, "content-type"), Some("image/jpeg"));
+    assert_eq!(
+        header(&headers, "cache-control"),
+        Some("max-age=31536000, public")
+    );
+    assert!(header(&headers, "last-modified").is_some());
+    assert_eq!(header(&headers, "pragma"), None);
+
+    // The feed takes GET alone.
+    let feed = format!("/feed/v3/calendar/Radarr.ics?apikey={KEY}");
+    let (status, headers, body) = ask(&app, "HEAD", &feed, &[], "").await;
+    assert_eq!(status, StatusCode::METHOD_NOT_ALLOWED);
+    assert_eq!(header(&headers, "allow"), Some("GET"));
+    assert!(body.is_empty());
+    let (status, headers, _) = ask(&app, "GET", &feed, &[], "").await;
+    assert_eq!(status, StatusCode::OK);
+    assert_eq!(header(&headers, "content-type"), Some("text/calendar"));
+    assert_eq!(header(&headers, "x-application-version"), None);
+
+    // The login redirect names the host asked; what a client that is no
+    // trusted proxy says it forwards is not believed.
+    let (status, headers, _) = ask(
+        &app,
+        "GET",
+        "/settings",
+        &[
+            ("Host", "radarr:7878"),
+            ("X-Forwarded-Proto", "https"),
+            ("X-Forwarded-Host", "movies.example.invalid"),
+        ],
+        "",
+    )
+    .await;
+    assert_eq!(status, StatusCode::FOUND);
+    assert_eq!(
+        header(&headers, "location"),
+        Some("http://radarr:7878/login?returnUrl=%2Fsettings")
+    );
+
+    // From a proxy that is trusted (the loopback is), it is.
+    let peer: std::net::SocketAddr = "127.0.0.1:40000".parse().unwrap();
+    let request = Request::builder()
+        .method("GET")
+        .uri("/settings")
+        .header("Host", "radarr:7878")
+        .header("X-Forwarded-For", "203.0.113.7")
+        .header("X-Forwarded-Proto", "https")
+        .header("X-Forwarded-Host", "movies.example.invalid")
+        .extension(axum::extract::ConnectInfo(peer))
+        .body(Body::empty())
+        .unwrap();
+    let response = app.clone().oneshot(request).await.unwrap();
+    assert_eq!(response.status(), StatusCode::FOUND);
+    assert_eq!(
+        header(response.headers(), "location"),
+        Some("https://movies.example.invalid/login?returnUrl=%2Fsettings")
+    );
 }

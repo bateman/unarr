@@ -185,6 +185,7 @@ pub fn api_router() -> Router<AppState> {
         .route("/history", get(activity::history))
         .route("/history/since", get(activity::history_since))
         .route("/history/movie", get(activity::history_movie))
+        .route("/history/failed/{id}", post(activity::history_mark_failed))
         .route("/blocklist", get(activity::blocklist))
         .route("/blocklist/movie", get(activity::blocklist_movie))
         .route("/calendar", get(activity::calendar))

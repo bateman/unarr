@@ -4,7 +4,7 @@
     "pageSize": 20,
     "records": [
       {
-        "added": "2026-11-11T19:38:53Z",
+        "added": "2026-11-11T22:00:26Z",
         "customFormatScore": 0,
         "customFormats": [
           {
@@ -15,7 +15,7 @@
         "downloadClient": "Mock Transmission",
         "downloadClientHasPostImportCategory": false,
         "downloadId": "5AE419C220561D2F40DDBB4026B5D0121DCC040E",
-        "estimatedCompletionTime": "2026-11-11T19:48:54Z",
+        "estimatedCompletionTime": "2026-11-11T22:10:28Z",
         "id": 936833475,
         "indexer": "Mock Torznab (Prowlarr)",
         "languages": [
@@ -59,7 +59,7 @@
     "sortKey": "quality",
     "totalRecords": 1
   },
-  "recordedAt": "2026-11-11T19:39:05Z",
+  "recordedAt": "2026-11-11T22:00:38Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/queue?page=1&pageSize=20&sortKey=quality&sortDirection=descending&quality=3"

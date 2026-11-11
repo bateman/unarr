@@ -2,7 +2,7 @@
   "body": [
     {
       "customFormats": [],
-      "date": "2026-11-11T19:39:45Z",
+      "date": "2026-11-11T22:01:20Z",
       "id": 117,
       "indexer": "Mock Newznab (Prowlarr)",
       "languages": [
@@ -65,7 +65,7 @@
           "winter",
           "winter break"
         ],
-        "lastSearchTime": "2026-11-11T19:39:45Z",
+        "lastSearchTime": "2026-11-11T22:01:21Z",
         "minimumAvailability": "released",
         "monitored": true,
         "movieFileId": 0,
@@ -141,7 +141,7 @@
       "sourceTitle": "The.Holdovers.2023.iTA.ENG.1080p.BluRay.x264-MIRCrew"
     }
   ],
-  "recordedAt": "2026-11-11T19:39:57Z",
+  "recordedAt": "2026-11-11T22:01:32Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/blocklist/movie?movieId=116"

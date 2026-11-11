@@ -126,10 +126,17 @@ fn mode(name: &str) -> Mode {
         // asked.
         // The failure a removal records is stamped a moment before the
         // answer the recorder timed, which can be the second before.
+        "history-mark-failed-missing" => Mode::Exact(&["description"]),
         "history-after-delete" => Mode::Exact(&["date", "lastSearchTime"]),
         // Stamped by a command that ran while the recording paused.
-        "blocklist-after-fail" | "blocklist-after-bulk" => Mode::Exact(&["date", "lastSearchTime"]),
-        "history-after-command" | "history-after-pending" | "history-after-fail" | "history-after-bulk" => {
+        "blocklist-after-fail" | "blocklist-after-bulk" | "blocklist-after-mark-failed" => {
+            Mode::Exact(&["date", "lastSearchTime"])
+        }
+        "history-after-command"
+        | "history-after-pending"
+        | "history-after-fail"
+        | "history-after-bulk"
+        | "history-after-mark-failed" => {
             Mode::Exact(&["date", "age", "ageHours", "ageMinutes", "lastSearchTime"])
         }
         // The original keeps its verdicts in a hash table.
@@ -144,7 +151,9 @@ fn mode(name: &str) -> Mode {
         // Radarr builds `contentsUrl` from a route that no longer exists
         // (`/api/v1//radarr.txt`); Unarr's names the route that answers.
         // Its ids follow the order the directory lists the files in.
-        "log-file" => Mode::Exact(&["lastWriteTime", "contentsUrl", "id"]),
+        // The original lists the file written last first, which of the two
+        // that is at the moment of the recording.
+        "log-file" => Mode::Multiset(&["lastWriteTime", "contentsUrl", "id"]),
         _ => Mode::Exact(&[]),
     }
 }
@@ -466,6 +475,11 @@ async fn radarr_golden_responses_match() {
             format!("/movies/torznab/api t=movie {page} imdbid=7740496"),
             format!("/movies/newznab/api t=search {page} q=Nightmare Alley 2021"),
             format!("/movies/torznab/api t=search {page} q=Nightmare Alley 2021"),
+            // The search a history row marked as failed is followed by.
+            format!("/movies/newznab/api t=movie {page} tmdbid=206487 imdbid=2397535"),
+            format!("/movies/torznab/api t=movie {page} imdbid=2397535"),
+            format!("/movies/newznab/api t=search {page} q=Predestination 2014"),
+            format!("/movies/torznab/api t=search {page} q=Predestination 2014"),
         ]);
         assert_eq!(asked, expected, "the requests to the mock indexers");
     }

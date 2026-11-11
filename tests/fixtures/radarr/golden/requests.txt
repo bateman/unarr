@@ -329,6 +329,14 @@ sleep 12
 history-after-fail GET /api/v3/history/movie?movieId=116
 blocklist-after-fail GET /api/v3/blocklist/movie?movieId=116
 queue-after-fail GET /api/v3/queue/details?movieId=116
+# "Mark as failed" on a history row (a grab of Predestination, imported
+# since): the failure and the blocklist row come from what the row says,
+# and the movie is searched again.
+history-mark-failed POST /api/v3/history/failed/1007
+history-mark-failed-missing POST /api/v3/history/failed/999999
+sleep 8
+history-after-mark-failed GET /api/v3/history/movie?movieId=327
+blocklist-after-mark-failed GET /api/v3/blocklist/movie?movieId=327
 # Pending releases: with a delay on the default profile, an approved
 # release waits in the queue instead of being grabbed. One is grabbed by
 # hand from there, the other removed and blocklisted.

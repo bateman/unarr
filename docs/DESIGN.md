@@ -1419,6 +1419,34 @@ a parser.
   no test of their own (queue, history, blocklist, free space, upgrade,
   repack) now have one.
 
+- **A second review, of `main` after the merge.** A grab whose history
+  could not be written was, since the fix above, a release skipped: the
+  next release of the same movie or episode went to a client as well.
+  The originals publish the grab as an event whose handlers' failures
+  are logged; so the grab now counts once the client has the release,
+  in both copies, and a test makes the database refuse the history to
+  show one release sent. Radarr's history had no "Mark as failed"
+  (`POST /history/failed/{id}`): it is there, recorded from the original
+  with the search it is followed by. Under a URL base the root with a
+  slash after it (`/sonarr/`) was a 404, which is where a reverse proxy
+  and the login form send a browser; the slash is now ignored there as
+  everywhere. `{Movie TitleFirstCharacter}` and its series twin shed
+  marks for the Latin-1 capitals only; they now use the parser's
+  `RemoveDiacritics`, so `Š` is `S`, while a letter with no mark to shed
+  (`Ø`, `Ł`) stays, as in the originals. A client that refuses the
+  answer unencoded (`identity;q=0`) got a 406 after the handler had run;
+  what it refuses is no longer shown to the compression layer. Three
+  language codes of the originals' map were missing (`bur`, `mao`,
+  `tib`). The proper and already-imported rules have their tests, and
+  the HTTP tests build either personality and hold the rows that only a
+  hand check held. Two of the review's findings rested on memory of the
+  original and its source says otherwise, so nothing changed: the movie
+  folder name is built from the movie, release date and id tokens alone
+  (`GetMovieFolder`), and `{Quality Proper}` is `Proper` for a revision
+  above one and never `Repack` (`GetQualityProper`). The naming code
+  that repeats Sonarr's is left as it is, with the rest of the
+  near-copies.
+
 ## 17. Open questions
 
 - Metadata provider: decided (section 7, option A) and implemented behind

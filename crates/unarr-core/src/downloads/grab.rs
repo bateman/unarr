@@ -150,7 +150,13 @@ pub async fn download_report(
     };
     tracing::info!(client = %definition.name, indexer = %release.indexer, title = %release.title, "report sent to the download client");
     let download_id = Some(download_id).filter(|id| !id.trim().is_empty());
-    record_grab(downloads, remote, &definition, download_id.as_deref(), now).await?;
+    // The client has the release from here on: the grab happened whatever
+    // becomes of its bookkeeping. The originals publish `EpisodeGrabbedEvent`
+    // and its handlers' failures are logged, not thrown; were one to count
+    // as a failed grab, the next release of the episode would be sent too.
+    if let Err(e) = record_grab(downloads, remote, &definition, download_id.as_deref(), now).await {
+        tracing::error!(title = %release.title, error = %format!("{e:#}"), "the grab was sent to the client but its history could not be written");
+    }
     // `NotificationService.Handle(EpisodeGrabbedEvent)`.
     if let Some(notifier) = downloads.notifier() {
         notifier
@@ -159,10 +165,13 @@ pub async fn download_report(
     }
     // `PendingReleaseService.Handle(EpisodeGrabbedEvent)`.
     let grabbed_remote = remote.clone();
-    downloads
+    if let Err(e) = downloads
         .db()
         .call(move |conn| super::pending::remove_grabbed(conn, &grabbed_remote, now))
-        .await?;
+        .await
+    {
+        tracing::error!(title = %release.title, error = %format!("{e:#}"), "the pending releases of the grabbed episodes could not be dropped");
+    }
     downloads.mark_dirty();
     Ok(Grabbed {
         download_id,

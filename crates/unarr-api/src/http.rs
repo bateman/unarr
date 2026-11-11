@@ -185,7 +185,9 @@ pub async fn finish(State(state): State<AppState>, request: Request, next: Next)
     let method = request.method().clone();
     let path = asked_path(&state, &request);
     let response = next.run(request).await;
-    let mut response = framework_answer(response, state.personality(), path.ends_with("/command")).await;
+    // The path as asked: a slash after it is the same action.
+    let to_command = without_trailing_slash(&path).ends_with("/command");
+    let mut response = framework_answer(response, state.personality(), to_command).await;
     let thrown = response.extensions().get::<Thrown>().is_some();
     let not_found = response
         .extensions()
@@ -321,11 +323,42 @@ pub fn compression() -> tower_http::compression::CompressionLayer<Compressible> 
 }
 
 /// One slash at the end of a path is no part of it for ASP.NET's routes:
-/// `/api/v3/tag/` is `/api/v3/tag`. Two are.
-pub fn without_trailing_slash<'a>(path: &'a str, url_base: &str) -> &'a str {
+/// `/api/v3/tag/` is `/api/v3/tag`. Two are. The same holds for the root
+/// of the application under a URL base: `/sonarr/` is `/sonarr`, which is
+/// where a `location /sonarr/` proxy and the login form's return send a
+/// browser.
+pub fn without_trailing_slash(path: &str) -> &str {
     match path.strip_suffix('/') {
-        Some(rest) if !rest.is_empty() && !rest.ends_with('/') && rest != url_base => rest,
+        Some(rest) if !rest.is_empty() && !rest.ends_with('/') => rest,
         _ => path,
+    }
+}
+
+/// `Accept-Encoding` without the codings it refuses. A client that sends
+/// `identity;q=0` (or `*;q=0`) and nothing the server compresses to would
+/// have the compression layer turn the answer into a 406 after the handler
+/// has run; the originals just send it as it is.
+pub fn acceptable_encodings(value: &str) -> Option<String> {
+    let kept: Vec<&str> = value
+        .split(',')
+        .map(str::trim)
+        .filter(|part| !part.is_empty())
+        .filter(|part| {
+            let mut pieces = part.split(';').map(str::trim);
+            let coding = pieces.next().unwrap_or("");
+            let refused = pieces.any(|p| {
+                p.strip_prefix("q=")
+                    .or_else(|| p.strip_prefix("Q="))
+                    .and_then(|q| q.trim().parse::<f32>().ok())
+                    .is_some_and(|q| q == 0.0)
+            });
+            !(refused && (coding.eq_ignore_ascii_case("identity") || coding == "*"))
+        })
+        .collect();
+    if kept.is_empty() {
+        None
+    } else {
+        Some(kept.join(", "))
     }
 }
 
@@ -335,15 +368,20 @@ mod tests {
 
     #[test]
     fn one_trailing_slash_is_dropped() {
-        assert_eq!(without_trailing_slash("/api/v3/tag/", ""), "/api/v3/tag");
-        assert_eq!(without_trailing_slash("/api/v3/tag", ""), "/api/v3/tag");
-        assert_eq!(without_trailing_slash("/api/v3/tag//", ""), "/api/v3/tag//");
-        assert_eq!(without_trailing_slash("/", ""), "/");
-        // The root of the application under a URL base keeps its slash.
-        assert_eq!(without_trailing_slash("/sonarr/", "/sonarr"), "/sonarr/");
+        assert_eq!(without_trailing_slash("/api/v3/tag/"), "/api/v3/tag");
+        assert_eq!(without_trailing_slash("/api/v3/tag"), "/api/v3/tag");
+        assert_eq!(without_trailing_slash("/api/v3/tag//"), "/api/v3/tag//");
+        assert_eq!(without_trailing_slash("/"), "/");
+        // The root of the application under a URL base too.
+        assert_eq!(without_trailing_slash("/sonarr/"), "/sonarr");
+        assert_eq!(without_trailing_slash("/sonarr/login/"), "/sonarr/login");
+        // What a client refuses is not offered to the compression layer.
+        assert_eq!(acceptable_encodings("identity;q=0"), None);
+        assert_eq!(acceptable_encodings("gzip, identity; q=0"), Some("gzip".into()));
+        assert_eq!(acceptable_encodings("*;q=0, br"), Some("br".into()));
         assert_eq!(
-            without_trailing_slash("/sonarr/login/", "/sonarr"),
-            "/sonarr/login"
+            acceptable_encodings("gzip;q=0, identity"),
+            Some("gzip;q=0, identity".into())
         );
     }
 

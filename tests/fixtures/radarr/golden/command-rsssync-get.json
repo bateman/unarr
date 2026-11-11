@@ -12,22 +12,22 @@
       "updateScheduledTask": true
     },
     "commandName": "Rss Sync",
-    "duration": "00:00:02.0349459",
-    "ended": "2026-11-11T19:39:07Z",
+    "duration": "00:00:02.0400271",
+    "ended": "2026-11-11T22:00:42Z",
     "id": 472957,
     "message": "RSS Sync Completed. Reports found: 14, Reports grabbed: 1",
     "name": "RssSync",
     "priority": "normal",
-    "queued": "2026-11-11T19:39:05Z",
+    "queued": "2026-11-11T22:00:40Z",
     "result": "successful",
     "sendUpdatesToClient": true,
-    "started": "2026-11-11T19:39:05Z",
-    "stateChangeTime": "2026-11-11T19:39:05Z",
+    "started": "2026-11-11T22:00:40Z",
+    "stateChangeTime": "2026-11-11T22:00:40Z",
     "status": "completed",
     "trigger": "manual",
     "updateScheduledTask": true
   },
-  "recordedAt": "2026-11-11T19:39:17Z",
+  "recordedAt": "2026-11-11T22:00:52Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/command/472957"

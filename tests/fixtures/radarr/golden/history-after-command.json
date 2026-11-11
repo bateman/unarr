@@ -7,9 +7,9 @@
         "customFormatScore": 0,
         "customFormats": [],
         "data": {
-          "age": "1",
-          "ageHours": "46.4221006635",
-          "ageMinutes": "2785.32603992",
+          "age": "2",
+          "ageHours": "48.78192319955556",
+          "ageMinutes": "2926.915392065",
           "customFormatScore": "0",
           "downloadClient": "SABnzbd",
           "downloadClientName": "Mock SABnzbd",
@@ -28,7 +28,7 @@
           "size": "7945689497",
           "tmdbId": "840430"
         },
-        "date": "2026-11-11T19:39:19Z",
+        "date": "2026-11-11T22:00:54Z",
         "downloadId": "SABnzbd_nzo_mock3",
         "eventType": "grabbed",
         "id": 1014,
@@ -65,8 +65,8 @@
         "customFormats": [],
         "data": {
           "age": "2",
-          "ageHours": "48.56876331136111",
-          "ageMinutes": "2914.1257987916665",
+          "ageHours": "50.92858312836111",
+          "ageMinutes": "3055.7149878116666",
           "customFormatScore": "0",
           "downloadClient": "qBittorrent",
           "downloadClientName": "Mock qBittorrent",
@@ -86,7 +86,7 @@
           "tmdbId": "0",
           "torrentInfoHash": "d0c1309e36cdb92c5d7b4abfd794f9bdff969920"
         },
-        "date": "2026-11-11T19:39:07Z",
+        "date": "2026-11-11T22:00:42Z",
         "downloadId": "13706ED57ADBE030F510BEDCD37595376901117C",
         "eventType": "grabbed",
         "id": 1013,
@@ -128,8 +128,8 @@
         ],
         "data": {
           "age": "3",
-          "ageHours": "79.08149193663888",
-          "ageMinutes": "4744.889516275",
+          "ageHours": "81.44081570669445",
+          "ageMinutes": "4886.448942488333",
           "customFormatScore": "0",
           "downloadClient": "Transmission",
           "downloadClientName": "Mock Transmission",
@@ -149,7 +149,7 @@
           "tmdbId": "0",
           "torrentInfoHash": "2076338e94f6fc307b43e478146e941fbd6ef7ba"
         },
-        "date": "2026-11-11T19:38:53Z",
+        "date": "2026-11-11T22:00:26Z",
         "downloadId": "5AE419C220561D2F40DDBB4026B5D0121DCC040E",
         "eventType": "grabbed",
         "id": 1011,
@@ -186,7 +186,7 @@
     "sortKey": "date",
     "totalRecords": 275
   },
-  "recordedAt": "2026-11-11T19:39:45Z",
+  "recordedAt": "2026-11-11T22:01:20Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/history?page=1&pageSize=3&sortKey=date&sortDirection=descending&eventType=1"

@@ -1,0 +1,154 @@
+{
+  "body": [
+    {
+      "customFormats": [
+        {
+          "id": 52,
+          "name": "DTS"
+        }
+      ],
+      "date": "2026-11-11T22:01:32Z",
+      "id": 118,
+      "indexer": "Indexer",
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        },
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "message": "Manually marked as failed",
+      "movie": {
+        "added": "2026-11-11T07:53:41Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "predestination",
+        "digitalRelease": "2014-08-28T00:00:00Z",
+        "folderName": "/movies/Predestination (2014) {tmdb-206487}",
+        "genres": [
+          "Science Fiction",
+          "Thriller"
+        ],
+        "id": 327,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/38Xr1JnV1ZcLQ55zmdSp6n475cZ.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/cvq9cRMDJIGzNpHaPVGFftqPcLj.jpg"
+          }
+        ],
+        "imdbId": "tt2397535",
+        "inCinemas": "2014-08-28T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "baffled",
+          "bartender",
+          "based on short story",
+          "bomber",
+          "determinism",
+          "excited",
+          "fate",
+          "intersex",
+          "intersexuality",
+          "loner",
+          "mission",
+          "orphanage",
+          "philosophical",
+          "pregnancy",
+          "secret organization",
+          "shocking",
+          "temporal agent",
+          "terrorism",
+          "time machine",
+          "time paradox",
+          "time travel"
+        ],
+        "lastSearchTime": "2026-11-11T22:01:35Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 404,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "Predestination",
+        "overview": "Predestination chronicles the life of a Temporal Agent sent on an intricate series of time-travel journeys designed to prevent future killers from committing their crimes. Now, on his final assignment, the Agent must stop the one criminal that has eluded him throughout time and prevent a devastating attack in which thousands of lives will be lost.",
+        "path": "/movies/Predestination (2014) {tmdb-206487}",
+        "physicalRelease": "2014-11-28T00:00:00Z",
+        "popularity": 7.7869,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 7.4,
+            "votes": 343095
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 69,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 84,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 7.412,
+            "votes": 7468
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.54082,
+            "votes": 13193
+          }
+        },
+        "releaseDate": "2014-08-28T00:00:00Z",
+        "runtime": 98,
+        "secondaryYearSourceId": 0,
+        "sortTitle": "predestination",
+        "status": "released",
+        "studio": "Screen Queensland",
+        "tags": [
+          1
+        ],
+        "title": "Predestination",
+        "titleSlug": "206487",
+        "tmdbId": 206487,
+        "website": "https://www.sonypictures.com/movies/predestination",
+        "year": 2014,
+        "youTubeTrailerId": "xxG-YfedrfU"
+      },
+      "movieId": 327,
+      "protocol": "torrent",
+      "quality": {
+        "quality": {
+          "id": 7,
+          "modifier": "none",
+          "name": "Bluray-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "sourceTitle": "Predestination 2014 DTS ITA ENG 1080p BluRay x264 BLUWORLD mkv torrent"
+    }
+  ],
+  "recordedAt": "2026-11-11T22:01:40Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/blocklist/movie?movieId=327"
+  },
+  "status": 200
+}

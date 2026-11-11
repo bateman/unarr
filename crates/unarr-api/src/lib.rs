@@ -39,18 +39,38 @@ pub use state::{AppState, Lifecycle, RuntimeInfo, Settings};
 /// `episodeFile`) and take a path with one slash after it for the same
 /// path: lower-case the API part and drop that slash before matching.
 async fn normalize_path(
-    axum::extract::State(state): axum::extract::State<AppState>,
     mut request: axum::extract::Request,
     next: axum::middleware::Next,
 ) -> axum::response::Response {
     let uri = request.uri().clone();
-    let path = http::without_trailing_slash(uri.path(), &state.settings().url_base);
+    let path = http::without_trailing_slash(uri.path());
     let lower = path.to_ascii_lowercase();
     // Only the API part: a URL base such as /Sonarr keeps its case.
     let new_path = match lower.find("/api/v") {
         Some(i) => format!("{}{}", &path[..i], &lower[i..]),
         None => path.to_owned(),
     };
+    // A coding the client refuses is not the compression layer's to act on.
+    let asked = request
+        .headers()
+        .get(axum::http::header::ACCEPT_ENCODING)
+        .and_then(|v| v.to_str().ok())
+        .map(str::to_owned);
+    if let Some(asked) = asked {
+        match http::acceptable_encodings(&asked) {
+            Some(kept) if kept == asked => {}
+            Some(kept) => {
+                if let Ok(value) = kept.parse() {
+                    request
+                        .headers_mut()
+                        .insert(axum::http::header::ACCEPT_ENCODING, value);
+                }
+            }
+            None => {
+                request.headers_mut().remove(axum::http::header::ACCEPT_ENCODING);
+            }
+        }
+    }
     if new_path != uri.path() {
         let rewritten = match uri.query() {
             Some(q) => format!("{new_path}?{q}"),
