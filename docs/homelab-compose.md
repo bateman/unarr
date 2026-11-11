@@ -52,7 +52,7 @@ Differences from the Sonarr service, and why:
 | `image` | `ghcr.io/bateman/unarr:<tag>` | |
 | `user` | added | distroless image, no s6 init to honour `PUID`/`PGID` |
 | `command` | added | data directory and one-time import source |
-| `environment` | `TZ` only, no `*common-env` | `PUID`, `PGID`, `UMASK` mean nothing to it. Add `RUST_LOG: info,unarr=debug` only while collecting logs |
+| `environment` | `TZ` only, no `*common-env` | `PUID`, `PGID`, `UMASK` mean nothing to it. Do not set `RUST_LOG`: it overrides the Log Level of Settings > General, which is where to ask for debug or trace |
 | `volumes` | `./config/unarr:/config`, Sonarr's config read-only | Unarr writes `<data>/sonarr/…`; the original files stay intact, so going back is restoring the old service |
 | `healthcheck.test` | `unarrd healthcheck` | `curl` does not exist in the image |
 

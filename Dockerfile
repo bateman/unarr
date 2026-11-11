@@ -19,7 +19,9 @@ COPY --from=build /out/unarrd /usr/local/bin/unarrd
 COPY --from=build --chown=65532:65532 /out/config /config
 EXPOSE 8989 7878 8686
 VOLUME ["/config"]
-ENV UNARR_CONFIG=/config RUST_LOG=info
+# RUST_LOG is not set here: a set RUST_LOG overrides the Log Level of
+# Settings > General, which would then never apply in a container.
+ENV UNARR_CONFIG=/config
 # No shell and no curl in this image: the daemon asks itself. The first
 # start may be importing a database, hence the long start period. Every
 # probe starts a process in the container, which is not free on a small

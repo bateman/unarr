@@ -40,6 +40,11 @@ of its `config.xml` unless `--bind` says otherwise. Select them with
 user 65532; when mounting a host directory on `/config`, pass `--user` with
 its owner, or the daemon cannot create its files there.
 
+The log level is the Log Level of Settings > General (info by default), and
+changes as soon as it is saved. Setting `RUST_LOG` on the container
+overrides it: leave it unset unless a level per crate is needed, such as
+`RUST_LOG=info,unarr=trace`.
+
 ### Health check
 
 The image has no shell and no `curl`, so the daemon checks itself:
