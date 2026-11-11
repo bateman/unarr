@@ -31,9 +31,21 @@ GOLDEN_DIR="$FIXTURE_DIR/golden"
 API_KEY="0123456789abcdef0123456789abcdef"
 
 # .NET needs ICU for culture-aware comparisons and language names, which is
-# what the Docker images ship. Without it, fall back to invariant globalization
-# and warn: sort orders and language tokens in the goldens would differ.
-if [ "$(uname -s)" = Linux ] && ! ldconfig -p 2>/dev/null | grep -q libicuuc; then
+# what the Docker images ship. Without it, fall back to invariant
+# globalization and warn; `golden` refuses instead, since sort orders and
+# language tokens in the goldens would differ. The library list is read
+# whole before it is searched: `ldconfig -p | grep -q` under pipefail fails
+# now and then, when grep leaves before ldconfig has finished writing, and
+# a recording then ran without ICU although it was installed.
+HAVE_ICU=1
+if [ "$(uname -s)" = Linux ]; then
+    libraries="$(ldconfig -p 2>/dev/null || true)"
+    case "$libraries" in
+        *libicuuc*) ;;
+        *) HAVE_ICU=0 ;;
+    esac
+fi
+if [ "$HAVE_ICU" = 0 ]; then
     echo "[fixture] libicu not found: running Sonarr with invariant globalization" >&2
     export DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=1
 fi
@@ -167,6 +179,7 @@ start_on_fixture_copy() {
 }
 
 cmd_golden() {
+    [ "$HAVE_ICU" = 1 ] || die "libicu is needed to record: without it Sonarr sorts and names things differently"
     prepare_dirs
     start_mock
     start_on_fixture_copy
