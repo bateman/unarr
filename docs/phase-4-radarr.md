@@ -2,7 +2,7 @@
 
 Work order for the second personality. Read `docs/DESIGN.md` first (sections
 4 to 9 for the architecture and targets, 11 to 14 for the decisions each
-Sonarr phase took, 15 for what is open), then `docs/audit/README.md` (what
+Sonarr phase took, 15 for those of milestone 4a, 16 for what is open), then `docs/audit/README.md` (what
 goldens cannot see, and how it was found), then this document. The four
 Sonarr work orders (`docs/phase-1-sonarr.md` to `docs/phase-3b-library.md`)
 are the template: Radarr goes through the same ground in the same order,
@@ -51,7 +51,7 @@ behaviour.
   (Radarr's is `movieCategory`, default `radarr`); health wiki anchors;
   `http.rs`: one process-wide client and one
   `SERVARR_PROXY_USER_AGENT` constant (Sonarr's).
-- Tooling: `scripts/sonarr-fixture.sh`, `scripts/sonarr-anonymize.py`,
+- Tooling: `scripts/sonarr-fixture.sh`, `scripts/arr-anonymize.py`,
   `scripts/mock-servarr.py` and `unarr-mock` (indexers answer `t=tvsearch`
   and `t=search` only), the Makefile targets, the CI cache and `make ui`.
 - Tests: every harness points at `tests/fixtures/sonarr` and builds
@@ -111,7 +111,7 @@ Decided here so the phase does not start with a rewrite:
   `ui_router` finally read their state: a Radarr route list, a
   `schemas/radarr/` catalogue recorded from the original, `ui/radarr/`
   embedded next to `ui/sonarr/`, `/feed/v3/calendar/Radarr.ics`.
-- **One HTTP client per personality** (`docs/DESIGN.md` section 15): each
+- **One HTTP client per personality** (`docs/DESIGN.md` section 16): each
   personality's proxy and certificate settings apply to its own requests.
   This is a precondition for running two, not a nicety.
 - **Metadata: `api.radarr.video`** behind a movie-shaped trait next to the
@@ -228,7 +228,7 @@ the oracle; the parser and decision vectors pass; Prowlarr's sync replays.
    findings before closing.
 7. **Measurements**: both personalities running, idle and after an RSS sync,
    an import and a full refresh, on glibc and on the published musl image
-   (still unmeasured, `docs/DESIGN.md` section 15); the figures against
+   (still unmeasured, `docs/DESIGN.md` section 16); the figures against
    section 9's target for three personalities.
 
 Exit: a mock client's completed movie download ends as a named movie file
@@ -244,7 +244,7 @@ levels beyond what the chosen import lists need; the Kodi, Plex and
 Emby metadata file writers; notification implementations beyond Discord,
 webhook and Plex; download clients beyond the four; HTTPS serving; the
 switch of the Servarr-proxy user agents to Unarr's own, which is its own
-decision (`docs/DESIGN.md` section 15) and not part of this phase.
+decision (`docs/DESIGN.md` section 16) and not part of this phase.
 
 ## Sizing
 
@@ -274,11 +274,58 @@ credentials; no Docker in the cloud session. Added by experience:
 
 ## Conventions
 
-`make ui && make check` green before every push (both UIs once 4a adds the
-second); `unarr` in identifiers and Unarr in prose; commits with an
-imperative subject and a body that says why, no model identifiers; one
-branch per milestone (`phase-4a-radarr-readonly`, `phase-4b-radarr-acquisition`,
-`phase-4c-radarr-library`), squashed into `main`; before integrating, check
+`make ui && make check` green before every push (both UIs since 4a);
+`unarr` in identifiers and Unarr in prose; commits with an imperative
+subject and a body that says why, no model identifiers; one branch per
+milestone, named as `CLAUDE.md` asks (`radarr/phase-4a-readonly`,
+`radarr/phase-4b-acquisition`, `radarr/phase-4c-library`), squashed into
+`main`; before integrating, check
 that the branch history holds no homelab data that is not anonymised;
 `docs/DESIGN.md` kept current (a decisions section per milestone, the open
 questions last), the status table appended here.
+
+## Status of 4a, November 2026
+
+Recorded and replayed on the maintainer's Radarr 6.4.4.10685 installation
+(migration 242), anonymised: 193 movies, 100 files, 32 collections, 669
+history rows. The fixture was real from the first commit; no synthetic one
+was built.
+
+| Exit criterion | Status |
+|----------------|--------|
+| `make ui && make check` green | Yes: fmt, clippy `-D warnings`, 370 tests, the Sonarr replay unchanged (634 goldens over the 659 requests of its list; the "827" above counts the list's lines). |
+| The Radarr UI browses movies, collections, calendar, activity, wanted, settings and system pages on 7878, Sonarr beside it on 8989 in one process | Yes, with Playwright against the release binary running `--personalities sonarr,radarr` on both fixtures: login, the movie index, movie pages, add and import pages, collections, calendar, queue, history, blocklist, wanted missing and cutoff, every settings page, system status, tasks, backup, updates, events and log files; 32 pages, no page error. The requests that failed: the covers (the fixture has no `MediaCover`), `importlist/movie` on Discover and `config/naming/examples` on Media Management, both of 4c. |
+| The read goldens replay | 145 of 146, recorded from the real Radarr before each shape was written. Pending: `config-naming-examples`, which needs the movie file name builder of 4c. |
+| Bazarr's movie requests are answered | Verified by `scripts/bazarr-replay.py --app radarr` (`make bazarr-radarr`) on 193 movies and 100 files, with the Sonarr side replayed against the same process. The requests are Bazarr's as remembered from its source; Bazarr itself was not run. |
+| Both personalities' idle memory is measured | Yes: 39 to 45 MB idle with both, 48 MB at rest after some 1,100 requests; `docs/DESIGN.md` section 9. Neither library was scaled. |
+
+What 4a delivered against its five points:
+
+1. **Oracle and fixture.** `scripts/radarr-fixture.sh` (release pinned by
+   version and SHA-256, no Docker, scheduled tasks frozen), `make
+   ui-radarr`, `make golden-radarr`, `make radarr`;
+   `scripts/arr-anonymize.py --app radarr`; `tests/fixtures/radarr/`.
+2. **Per-personality plumbing.** Migration sets, router and feed, schema
+   catalogue, strings, embedded UI, PUT resources, HTTP clients and
+   outgoing settings, importer selection, a Radarr replay
+   (`tests/contract_radarr.rs`) sharing its helpers with Sonarr's, CI
+   fetching and caching both UIs. The image embeds both because `make ui`
+   fills both folders before the build; no image was built in the session.
+3. **Importer.** `unarr_import::radarr`, migrations 208 to 242 accepted,
+   242 verified; every table of the list read, `ImportListMovies` and
+   `MetadataFiles` included; nothing skipped on the fixture.
+4. **Read endpoints.** All of the list. Deviations, all deliberate: the
+   queue endpoints, `command` and `health` answer empty and `system/task`
+   shows the imported rows, since Radarr runs no command runtime until
+   4b; `log`, `update`, `diskspace` match the shape, not the values;
+   every write answers 405.
+5. **Bazarr's movie side.** As above.
+
+What 4b starts from: Radarr has no command queue, scheduler or health
+checks; no title parser (the history's custom formats take the release
+group from the shared parser and no edition); provider resources are
+read through the schema catalogue and not yet through typed settings
+(`movieCategory` is in the schemas, not in `downloadclients::settings`);
+the personality's HTTP clients are in `AppState::http()` for the indexer
+and download client services to be built on. `docs/DESIGN.md` section 15
+has the decisions, section 16 what is open.

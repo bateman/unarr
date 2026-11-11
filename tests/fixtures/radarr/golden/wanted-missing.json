@@ -1,0 +1,2167 @@
+{
+  "body": {
+    "page": 1,
+    "pageSize": 20,
+    "records": [
+      {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "PG-13",
+        "cleanTitle": "accepted",
+        "digitalRelease": "2007-01-31T00:00:00Z",
+        "folderName": "/movies/Accepted (2006)",
+        "genres": [
+          "Comedy"
+        ],
+        "hasFile": false,
+        "id": 3,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/pMh1dCw5vhMATmJs0ve0OpoSVED.jpg",
+            "url": "/MediaCover/3/poster.jpg?h=c1abb18df3048b437540"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/bKdNEAJ4TEN7w9Y8MgUwiC7F8Xd.jpg",
+            "url": "/MediaCover/3/fanart.jpg?h=9427b126a124f293b5f0"
+          }
+        ],
+        "imdbId": "tt0384793",
+        "inCinemas": "2006-08-18T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "best friends",
+          "college",
+          "college admission",
+          "comedy",
+          "electro shock",
+          "frat party",
+          "fraud",
+          "girlfriend",
+          "straitjacket ",
+          "university"
+        ],
+        "lastSearchTime": "2026-06-14T07:13:43Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "Accepted",
+        "overview": "A high school slacker who's rejected by every school he applies to opts to create his own institution of higher learning, the South Harmon Institute of Technology, on a rundown piece of property near his hometown.",
+        "path": "/movies/Accepted (2006)",
+        "physicalRelease": "2006-11-14T00:00:00Z",
+        "popularity": 8.9708,
+        "qualityProfileId": 9,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.4,
+            "votes": 149699
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 47,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 38,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.5,
+            "votes": 1873
+          },
+          "trakt": {
+            "type": "user",
+            "value": 6.68673,
+            "votes": 3473
+          }
+        },
+        "releaseDate": "2006-11-14T00:00:00Z",
+        "runtime": 93,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "accepted",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "Universal Pictures",
+        "tags": [],
+        "title": "Accepted",
+        "titleSlug": "9788",
+        "tmdbId": 9788,
+        "website": "https://www.uphe.com/movies/accepted",
+        "year": 2006,
+        "youTubeTrailerId": "NRfS_Pvk0Kg"
+      },
+      {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "NR",
+        "cleanTitle": "anotherround",
+        "digitalRelease": "2020-09-24T00:00:00Z",
+        "folderName": "/movies/Another Round (2020)",
+        "genres": [
+          "Drama"
+        ],
+        "hasFile": false,
+        "id": 9,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/aDcIt4NHURLKnAEu7gow51Yd00Q.jpg",
+            "url": "/MediaCover/9/poster.jpg?h=18aa9e203e4c406812c2"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/a2pPepVPtKY7E4XEkT7W3ZxUOY5.jpg",
+            "url": "/MediaCover/9/fanart.jpg?h=d4fa02b8d9ec05b50e26"
+          }
+        ],
+        "imdbId": "tt10288566",
+        "inCinemas": "2020-09-24T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "alcohol",
+          "alcoholism",
+          "copenhagen, denmark",
+          "drunk",
+          "experiment",
+          "family relationships",
+          "friendship",
+          "hilarious",
+          "intoxication",
+          "melancholy",
+          "pressure to perform",
+          "social pressure",
+          "teacher",
+          "teacher student relationship",
+          "wistful"
+        ],
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 6,
+          "name": "Danish"
+        },
+        "originalTitle": "Druk",
+        "overview": "Four stagnant high school teachers decide to test out a theory that maintaining a constant level of intoxication will improve their overall lives.",
+        "path": "/movies/Another Round (2020)",
+        "physicalRelease": "2021-06-16T00:00:00Z",
+        "popularity": 4.8705,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 7.7,
+            "votes": 232507
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 79,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 93,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 7.624,
+            "votes": 4009
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.8095,
+            "votes": 8803
+          }
+        },
+        "releaseDate": "2020-09-24T00:00:00Z",
+        "runtime": 117,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "another round",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "Zentropa Entertainments",
+        "tags": [],
+        "title": "Another Round",
+        "titleSlug": "580175",
+        "tmdbId": 580175,
+        "website": "http://www.samuelgoldwynfilms.com/another-round/",
+        "year": 2020,
+        "youTubeTrailerId": "xlwAgvn1e5E"
+      },
+      {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "backcountry",
+        "digitalRelease": "2020-10-09T00:00:00Z",
+        "folderName": "/movies/Backcountry (2015)",
+        "genres": [
+          "Horror",
+          "Thriller",
+          "Drama"
+        ],
+        "hasFile": false,
+        "id": 10,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/AdIkDCWcBqv1B10ncm71sMiqEEF.jpg",
+            "url": "/MediaCover/10/poster.jpg?h=2f0d229f328b0179acc7"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/fX8OjnkkWnGJdQ7tkpf8z7la4Xu.jpg",
+            "url": "/MediaCover/10/fanart.jpg?h=34bc6fd77c4a7f46287d"
+          }
+        ],
+        "imdbId": "tt2944198",
+        "inCinemas": "2015-03-20T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "animal attack",
+          "based on true story",
+          "bear",
+          "bear attack",
+          "black bear",
+          "camping",
+          "canoe",
+          "frightened",
+          "gore",
+          "grave",
+          "lost in the woods",
+          "nature",
+          "ontario, canada",
+          "survival",
+          "tragic",
+          "woods"
+        ],
+        "lastSearchTime": "2026-06-24T19:43:56Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "Backcountry",
+        "overview": "A couple on a deep-wilderness hike become hopelessly lost within an aggressive black bear's territory.",
+        "path": "/movies/Backcountry (2015)",
+        "physicalRelease": "2015-05-28T00:00:00Z",
+        "popularity": 2.177,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6,
+            "votes": 27766
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 62,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 93,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 5.968,
+            "votes": 760
+          },
+          "trakt": {
+            "type": "user",
+            "value": 6.22392,
+            "votes": 1246
+          }
+        },
+        "releaseDate": "2015-05-28T00:00:00Z",
+        "runtime": 92,
+        "secondaryYear": 2014,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "backcountry",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "Fella Films",
+        "tags": [
+          1
+        ],
+        "title": "Backcountry",
+        "titleSlug": "228973",
+        "tmdbId": 228973,
+        "website": "http://backcountryfilm.com/",
+        "year": 2015,
+        "youTubeTrailerId": "46uwmzTf5nA"
+      },
+      {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "PG-13",
+        "cleanTitle": "theballadwallisisland",
+        "digitalRelease": "2025-05-06T00:00:00Z",
+        "folderName": "/movies/The Ballad of Wallis Island (2025)",
+        "genres": [
+          "Comedy",
+          "Drama",
+          "Music"
+        ],
+        "hasFile": false,
+        "id": 104,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/haS6bnqDqZoi5sYcCPJWaj2yMbB.jpg",
+            "url": "/MediaCover/104/poster.jpg?h=c18198a806ac14085722"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/1nn7nCFRTKeWOXbtjrFxfSvf1EI.jpg",
+            "url": "/MediaCover/104/fanart.jpg?h=abfe64e5c222d4dd92f1"
+          }
+        ],
+        "imdbId": "tt27674982",
+        "inCinemas": "2025-05-08T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "adoring",
+          "duet",
+          "eccentric millionaire",
+          "empathetic",
+          "folk music",
+          "former lovers",
+          "indie folk",
+          "inspirational",
+          "island",
+          "isolated island",
+          "lottery winner",
+          "lovers reunion",
+          "musician",
+          "reunion",
+          "thoughtful",
+          "wales"
+        ],
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Ballad of Wallis Island",
+        "overview": "An eccentric lottery winner who lives alone on a remote island tries to make his fantasies come true by getting his favourite musicians to perform at his home.",
+        "path": "/movies/The Ballad of Wallis Island (2025)",
+        "popularity": 2.7204,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 7.4,
+            "votes": 26480
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 78,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 97,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 7.268,
+            "votes": 233
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.49252,
+            "votes": 1137
+          }
+        },
+        "releaseDate": "2025-05-06T00:00:00Z",
+        "runtime": 100,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "ballad of wallis island",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "Baby Cow Productions",
+        "tags": [],
+        "title": "The Ballad of Wallis Island",
+        "titleSlug": "1122099",
+        "tmdbId": 1122099,
+        "website": "https://www.focusfeatures.com/the-ballad-of-wallis-island",
+        "year": 2025,
+        "youTubeTrailerId": "GjbVZWVWzPU"
+      },
+      {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "blackkklansman",
+        "digitalRelease": "2018-10-23T00:00:00Z",
+        "folderName": "/movies/BlacKkKlansman (2018)",
+        "genres": [
+          "Crime",
+          "Drama",
+          "History"
+        ],
+        "hasFile": false,
+        "id": 13,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/8jxqAvSDoneSKRczaK8v9X5gqBp.jpg",
+            "url": "/MediaCover/13/poster.jpg?h=5c08b6ad5cfb4d6bd012"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/ot3eZ9XfOF42a3zFWluMPWkfCHB.jpg",
+            "url": "/MediaCover/13/fanart.jpg?h=3491da30d2db857b5159"
+          }
+        ],
+        "imdbId": "tt7349662",
+        "inCinemas": "2018-08-09T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "1970s",
+          "based on memoir or autobiography",
+          "based on novel or book",
+          "based on true story",
+          "biography",
+          "black panther party",
+          "defiant",
+          "kkk rally",
+          "ku klux klan",
+          "racism",
+          "revisionist history",
+          "thoughtful",
+          "undercover cop",
+          "white supremacy"
+        ],
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "BlacKkKlansman",
+        "overview": "Colorado Springs, late 1970s. Ron Stallworth, an African American police officer, and Flip Zimmerman, his Jewish colleague, run an undercover operation to infiltrate the Ku Klux Klan.",
+        "path": "/movies/BlacKkKlansman (2018)",
+        "physicalRelease": "2018-11-06T00:00:00Z",
+        "popularity": 6.1066,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 7.5,
+            "votes": 318659
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 83,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 95,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 7.484,
+            "votes": 8366
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.64445,
+            "votes": 13385
+          }
+        },
+        "releaseDate": "2018-10-23T00:00:00Z",
+        "runtime": 136,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "blackkklansman",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "Legendary Pictures",
+        "tags": [],
+        "title": "BlacKkKlansman",
+        "titleSlug": "487558",
+        "tmdbId": 487558,
+        "website": "https://www.focusfeatures.com/blackkklansman",
+        "year": 2018,
+        "youTubeTrailerId": "7tgMuagdEhc"
+      },
+      {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "blindspotting",
+        "digitalRelease": "2019-08-30T00:00:00Z",
+        "folderName": "/movies/Blindspotting (2018)",
+        "genres": [
+          "Comedy",
+          "Crime",
+          "Drama"
+        ],
+        "hasFile": false,
+        "id": 14,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/x4DRZfTqOlmzNWAvy4vcKWkgEGL.jpg",
+            "url": "/MediaCover/14/poster.jpg?h=646861c1128065bb7bcf"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/d3m59GlnJQdb4taaHYTGVT7c3RJ.jpg",
+            "url": "/MediaCover/14/fanart.jpg?h=1fbc39ef6b987fa59e04"
+          }
+        ],
+        "imdbId": "tt7242142",
+        "inCinemas": "2018-07-27T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "cheerful",
+          "sincere"
+        ],
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "Blindspotting",
+        "overview": "Collin must make it through his final three days of probation for a chance at a new beginning. He and his troublemaking childhood best friend, Miles, work as movers, and when Collin witnesses a police shooting, the two men’s friendship is tested as they grapple with identity and their changed realities in the rapidly-gentrifying neighborhood they grew up in.",
+        "path": "/movies/Blindspotting (2018)",
+        "physicalRelease": "2019-02-04T00:00:00Z",
+        "popularity": 3.5323,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 7.4,
+            "votes": 34568
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 75,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 94,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 7.3,
+            "votes": 757
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.51011,
+            "votes": 1880
+          }
+        },
+        "releaseDate": "2019-02-04T00:00:00Z",
+        "runtime": 95,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "blindspotting",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "Summit Entertainment",
+        "tags": [],
+        "title": "Blindspotting",
+        "titleSlug": "489930",
+        "tmdbId": 489930,
+        "website": "https://www.lionsgate.com/movies/blindspotting",
+        "year": 2018,
+        "youTubeTrailerId": "-9-HBqVbtTo"
+      },
+      {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "thebookeli",
+        "digitalRelease": "2012-01-07T00:00:00Z",
+        "folderName": "/movies/The Book of Eli (2010)",
+        "genres": [
+          "Action",
+          "Thriller",
+          "Science Fiction"
+        ],
+        "hasFile": false,
+        "id": 105,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg",
+            "url": "/MediaCover/105/poster.jpg?h=ca3c2a03a26c1f7ec59f"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg",
+            "url": "/MediaCover/105/fanart.jpg?h=612fe69eafb77448d9f6"
+          }
+        ],
+        "imdbId": "tt1037705",
+        "inCinemas": "2010-01-14T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "2040s",
+          "bible",
+          "blind",
+          "brutality",
+          "cannibal",
+          "carnage",
+          "chaos",
+          "combat",
+          "dystopia",
+          "faith",
+          "grimdark",
+          "gunfight",
+          "post-apocalyptic future",
+          "survival"
+        ],
+        "lastSearchTime": "2026-09-13T07:05:09Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Book of Eli",
+        "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+        "path": "/movies/The Book of Eli (2010)",
+        "physicalRelease": "2010-06-15T00:00:00Z",
+        "popularity": 17.3108,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.8,
+            "votes": 365126
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 53,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 46,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.811,
+            "votes": 6958
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.1625,
+            "votes": 12203
+          }
+        },
+        "releaseDate": "2010-06-15T00:00:00Z",
+        "runtime": 118,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "book of eli",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "Alcon Entertainment",
+        "tags": [],
+        "title": "The Book of Eli",
+        "titleSlug": "20504",
+        "tmdbId": 20504,
+        "website": "",
+        "year": 2010,
+        "youTubeTrailerId": "yAQcwKY0Dik"
+      },
+      {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "NR",
+        "cleanTitle": "braindead",
+        "digitalRelease": "2002-11-01T00:00:00Z",
+        "folderName": "/movies/Braindead (1992)",
+        "genres": [
+          "Horror",
+          "Comedy"
+        ],
+        "hasFile": false,
+        "id": 17,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/pa39D8TQs6aNw3hiUs4jLjHVUB0.jpg",
+            "url": "/MediaCover/17/poster.jpg?h=7f406441c54144aebf71"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/z07GWpT24sV7PDaaRKm71W63yAC.jpg",
+            "url": "/MediaCover/17/fanart.jpg?h=b6519430eb50f6ce20a6"
+          }
+        ],
+        "imdbId": "tt0103873",
+        "inCinemas": "1992-08-13T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "affectation",
+          "attempted rape",
+          "back from the dead",
+          "campy",
+          "infidelity",
+          "monkey",
+          "new zealand",
+          "poison",
+          "reanimation",
+          "wellington new zealand",
+          "zombie",
+          "zombie baby"
+        ],
+        "lastSearchTime": "2026-03-29T10:34:22Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "Braindead",
+        "overview": "When a Sumatran rat-monkey bites Lionel Cosgrove's mother, she's transformed into a zombie and begins killing (and transforming) the entire town while Lionel races to keep things under control.",
+        "path": "/movies/Braindead (1992)",
+        "physicalRelease": "1993-10-13T00:00:00Z",
+        "popularity": 5.5055,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 7.4,
+            "votes": 111311
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 54,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 89,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 7.388,
+            "votes": 1958
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.4789,
+            "votes": 2512
+          }
+        },
+        "releaseDate": "1993-10-13T00:00:00Z",
+        "runtime": 103,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "braindead",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "WingNut Films",
+        "tags": [
+          1
+        ],
+        "title": "Braindead",
+        "titleSlug": "763",
+        "tmdbId": 763,
+        "website": "",
+        "year": 1992,
+        "youTubeTrailerId": "Ytg1JFrI2AA"
+      },
+      {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "cleanTitle": "candyland",
+        "digitalRelease": "2023-01-06T00:00:00Z",
+        "folderName": "/movies/Candy Land (2023)",
+        "genres": [
+          "Horror",
+          "Thriller"
+        ],
+        "hasFile": false,
+        "id": 19,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/3upBKM4ZFZ1fEEnWrnTZMuyPrzI.jpg",
+            "url": "/MediaCover/19/poster.jpg?h=882ea1d026d05a8fe210"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/obBe7n3FVvHfwK3wP182MrsBbCk.jpg",
+            "url": "/MediaCover/19/fanart.jpg?h=7f6762cf0b2a4b6c8b05"
+          }
+        ],
+        "imdbId": "tt13857556",
+        "inCinemas": "2023-01-06T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "murder",
+          "prostitution",
+          "religious cult",
+          "serial killer",
+          "sex work",
+          "sex workers",
+          "truck stop"
+        ],
+        "lastSearchTime": "2026-03-29T10:50:38Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "Candy Land",
+        "overview": "Remy, a seemingly naive and devout young woman, finds herself cast out from her religious cult. With no place to turn, she immerses herself into the underground world of truck stop sex workers. Under the watchful eye of their matriarch and an enigmatic local lawman, Remy navigates between her strained belief system and the code to find her true calling in life.",
+        "path": "/movies/Candy Land (2023)",
+        "physicalRelease": "2023-08-04T00:00:00Z",
+        "popularity": 3.2328,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 5.3,
+            "votes": 5060
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 70,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 75,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.2,
+            "votes": 189
+          },
+          "trakt": {
+            "type": "user",
+            "value": 5.65551,
+            "votes": 508
+          }
+        },
+        "releaseDate": "2023-01-06T00:00:00Z",
+        "runtime": 93,
+        "secondaryYear": 2022,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "candy land",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "Roxwell Films",
+        "tags": [
+          1
+        ],
+        "title": "Candy Land",
+        "titleSlug": "826753",
+        "tmdbId": 826753,
+        "website": "",
+        "year": 2023,
+        "youTubeTrailerId": "s9iIE9EU4PE"
+      },
+      {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "candyman",
+        "collection": {
+          "title": "Candyman Collection",
+          "tmdbId": 98580
+        },
+        "digitalRelease": "1996-03-29T00:00:00Z",
+        "folderName": "/movies/Candyman (1992)",
+        "genres": [
+          "Drama",
+          "Horror",
+          "Thriller"
+        ],
+        "hasFile": false,
+        "id": 20,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/jQtgkgDZE7egMq532sOt83DnT83.jpg",
+            "url": "/MediaCover/20/poster.jpg?h=a75b3e969b8fb4de9865"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/l0JgqFNxeMb1OoHq1CzdYC3Y5J8.jpg",
+            "url": "/MediaCover/20/fanart.jpg?h=1b46799330baf1615150"
+          }
+        ],
+        "imdbId": "tt0103919",
+        "inCinemas": "1992-10-16T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "antagonistic",
+          "based on novel or book",
+          "candyman",
+          "evil",
+          "halloween",
+          "hook for a hand",
+          "housing project",
+          "investigation",
+          "melancholy",
+          "university",
+          "urban",
+          "urban decay",
+          "urban gothic",
+          "urban legend"
+        ],
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "Candyman",
+        "overview": "The Candyman, a murderous soul with a hook for a hand, is accidentally summoned to reality by a skeptic grad student researching the monster's myth.",
+        "path": "/movies/Candyman (1992)",
+        "physicalRelease": "1993-07-06T00:00:00Z",
+        "popularity": 4.211,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.8,
+            "votes": 111747
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 61,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 79,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.7,
+            "votes": 1913
+          },
+          "trakt": {
+            "type": "user",
+            "value": 6.89221,
+            "votes": 3785
+          }
+        },
+        "releaseDate": "1993-07-06T00:00:00Z",
+        "runtime": 100,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "candyman",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "Propaganda Films",
+        "tags": [],
+        "title": "Candyman",
+        "titleSlug": "9529",
+        "tmdbId": 9529,
+        "website": "",
+        "year": 1992,
+        "youTubeTrailerId": "CeLZMhkFTuU"
+      },
+      {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "cleanTitle": "cashback",
+        "digitalRelease": "2006-10-12T00:00:00Z",
+        "folderName": "/movies/Cashback (2007)",
+        "genres": [
+          "Drama",
+          "Comedy",
+          "Romance"
+        ],
+        "hasFile": false,
+        "id": 21,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/iXJKrcjHXrL148OfmovdGPBvnSw.jpg",
+            "url": "/MediaCover/21/poster.jpg?h=5d46b3cb17819adc8146"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/3g8KRLnSoyG2vV7HctDPBsEqbFb.jpg",
+            "url": "/MediaCover/21/fanart.jpg?h=9e07184dabe23859a65a"
+          }
+        ],
+        "imdbId": "tt0460740",
+        "inCinemas": "2007-01-17T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "art",
+          "art school",
+          "based on short film",
+          "boredom",
+          "break-up",
+          "duringcreditsstinger",
+          "ex-boyfriend ex-girlfriend relationship",
+          "first kiss",
+          "insomnia",
+          "london, england",
+          "magic realism",
+          "memory",
+          "night shift",
+          "painting",
+          "sexual attraction",
+          "sexual fantasy",
+          "supermarket",
+          "time",
+          "time freeze "
+        ],
+        "lastSearchTime": "2026-03-29T10:51:21Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "Cashback",
+        "overview": "After a painful breakup, Ben develops insomnia. To kill time, he starts working the late night shift at the local supermarket, where his artistic imagination runs wild.",
+        "path": "/movies/Cashback (2007)",
+        "popularity": 4.0307,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 7.1,
+            "votes": 95514
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 54,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 47,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.952,
+            "votes": 1467
+          },
+          "trakt": {
+            "type": "user",
+            "value": 6.93049,
+            "votes": 2762
+          }
+        },
+        "releaseDate": "2006-10-12T00:00:00Z",
+        "runtime": 102,
+        "secondaryYear": 2006,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "cashback",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "Left Turn Films",
+        "tags": [
+          1
+        ],
+        "title": "Cashback",
+        "titleSlug": "12225",
+        "tmdbId": 12225,
+        "website": "http://www.cashbackfilm.com/",
+        "year": 2007,
+        "youTubeTrailerId": "JEBhL6ks7E4"
+      },
+      {
+        "added": "2026-04-30T19:22:04Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "clayface",
+        "digitalRelease": "2026-12-07T00:00:00Z",
+        "folderName": "/movies/Clayface (2026) {tmdb-1400940}",
+        "genres": [
+          "Horror",
+          "Thriller",
+          "Science Fiction"
+        ],
+        "hasFile": false,
+        "id": 197,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/9l1NuFjel2j89hiuiJbsxfblqjy.jpg",
+            "url": "/MediaCover/197/poster.jpg?h=b44cad4f9cceed812273"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/VnT9D7NogVWrmN2UuT30exIYPh.jpg",
+            "url": "/MediaCover/197/fanart.jpg?h=ba736ae3e3b5bf339197"
+          }
+        ],
+        "imdbId": "tt34890576",
+        "inCinemas": "2026-10-21T00:00:00Z",
+        "isAvailable": false,
+        "keywords": [
+          "aspiring actor",
+          "based on comic",
+          "body horror",
+          "dc universe (dcu)",
+          "disfigured face",
+          "female scientist",
+          "hollywood actor",
+          "mobster",
+          "monster",
+          "revenge",
+          "scientific experiment",
+          "shapeshifting",
+          "tragedy",
+          "unrequited love"
+        ],
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "Clayface",
+        "overview": "Matt Hagen's meteoric rise from Gotham street kid to Hollywood leading man is tragically cut short when a local crime boss's actions leave him horribly disfigured. Abandoned by his team and with nothing left, Matt seeks out a cutting edge treatment that miraculously returns him to his former self… but also unexpectedly affects his grip on reality, spiraling him down a destructive path of all-consuming revenge.",
+        "path": "/movies/Clayface (2026) {tmdb-1400940}",
+        "physicalRelease": "2027-02-24T00:00:00Z",
+        "popularity": 81.5657,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 7.5,
+            "votes": 47939
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 59,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 7.433,
+            "votes": 423
+          }
+        },
+        "releaseDate": "2026-12-07T00:00:00Z",
+        "runtime": 109,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "clayface",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "inCinemas",
+        "studio": "DC Studios",
+        "tags": [
+          1
+        ],
+        "title": "Clayface",
+        "titleSlug": "1400940",
+        "tmdbId": 1400940,
+        "website": "https://www.clayfacemovie.com",
+        "year": 2026,
+        "youTubeTrailerId": "f7jlCqdtwdM"
+      },
+      {
+        "added": "2026-03-15T13:17:10Z",
+        "alternateTitles": [],
+        "certification": "NR",
+        "cleanTitle": "coherence",
+        "digitalRelease": "2014-08-06T00:00:00Z",
+        "folderName": "/movies/Coherence (2014) {tmdb-220289}",
+        "genres": [
+          "Thriller",
+          "Science Fiction"
+        ],
+        "hasFile": false,
+        "id": 162,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/ezUtb9m5DeLwL2gxi4gktzNCvQv.jpg",
+            "url": "/MediaCover/162/poster.jpg?h=fd0f3ef121cecc7e8819"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/cvGE73s935bXEAVt2W0zADPPegG.jpg",
+            "url": "/MediaCover/162/fanart.jpg?h=bb303983bf079329eb13"
+          }
+        ],
+        "imdbId": "tt2866360",
+        "inCinemas": "2014-04-06T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "alter ego",
+          "alternative reality",
+          "biting",
+          "broken cellphone",
+          "candle",
+          "clone",
+          "comet",
+          "dinner party",
+          "excited",
+          "friends",
+          "glowstick",
+          "ketamine",
+          "parallel world",
+          "paranoia",
+          "power outage",
+          "psychological thriller",
+          "quantum physics",
+          "reunion",
+          "time travel"
+        ],
+        "lastSearchTime": "2026-03-29T10:51:59Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "Coherence",
+        "overview": "Four couples gather for dinner the night a mysterious and powerful comet passes overhead.",
+        "path": "/movies/Coherence (2014) {tmdb-220289}",
+        "physicalRelease": "2015-01-20T00:00:00Z",
+        "popularity": 6.258,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 7.1,
+            "votes": 181238
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 65,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 89,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 7.209,
+            "votes": 3712
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.49848,
+            "votes": 10169
+          }
+        },
+        "releaseDate": "2014-08-06T00:00:00Z",
+        "runtime": 89,
+        "secondaryYear": 2013,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "coherence",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "Bellanova Films",
+        "tags": [
+          1
+        ],
+        "title": "Coherence",
+        "titleSlug": "220289",
+        "tmdbId": 220289,
+        "website": "https://independent-ent.com/production/coherence",
+        "year": 2014,
+        "youTubeTrailerId": "YixSld-6PqM"
+      },
+      {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "PG-13",
+        "cleanTitle": "thedarkknightrises",
+        "collection": {
+          "title": "The Dark Knight Collection",
+          "tmdbId": 263
+        },
+        "digitalRelease": "2012-11-28T00:00:00Z",
+        "folderName": "/movies/The Dark Knight Rises (2012)",
+        "genres": [
+          "Action",
+          "Crime",
+          "Thriller"
+        ],
+        "hasFile": false,
+        "id": 108,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/hr0L2aueqlP2BYUblTTjmtn0hw4.jpg",
+            "url": "/MediaCover/108/poster.jpg?h=4d38f50ed421ba81386f"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/c3OHQncTAnKFhdOTX7D3LTW6son.jpg",
+            "url": "/MediaCover/108/fanart.jpg?h=561ff748f4b139ae3ab2"
+          }
+        ],
+        "imdbId": "tt1345836",
+        "inCinemas": "2012-07-17T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "airplane",
+          "based on comic",
+          "burglar",
+          "cat burglar",
+          "cover-up",
+          "crime fighter",
+          "criminal underworld",
+          "destruction",
+          "fight",
+          "fighting",
+          "flood",
+          "hostage",
+          "mobile",
+          "secret identity",
+          "superhero",
+          "terrorism",
+          "time bomb",
+          "tragic hero",
+          "vigilante",
+          "villainess"
+        ],
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Dark Knight Rises",
+        "overview": "Following the death of District Attorney Harvey Dent, Batman assumes responsibility for Dent's crimes to protect the late attorney's reputation and is subsequently hunted by the Gotham City Police Department. Eight years later, Batman encounters the mysterious Selina Kyle and the villainous Bane, a new terrorist leader who overwhelms Gotham's finest. The Dark Knight resurfaces to protect a city that has branded him an enemy.",
+        "path": "/movies/The Dark Knight Rises (2012)",
+        "physicalRelease": "2012-11-08T00:00:00Z",
+        "popularity": 21.1934,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 8.4,
+            "votes": 2037725
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 78,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 87,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 7.801,
+            "votes": 25293
+          },
+          "trakt": {
+            "type": "user",
+            "value": 8.28101,
+            "votes": 39910
+          }
+        },
+        "releaseDate": "2012-11-08T00:00:00Z",
+        "runtime": 165,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "dark knight rises",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "Syncopy",
+        "tags": [
+          1
+        ],
+        "title": "The Dark Knight Rises",
+        "titleSlug": "49026",
+        "tmdbId": 49026,
+        "website": "http://www.thedarkknightrises.com/",
+        "year": 2012,
+        "youTubeTrailerId": "GAjBzu8ggi0"
+      },
+      {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "darkman",
+        "collection": {
+          "title": "Darkman Collection",
+          "tmdbId": 45154
+        },
+        "digitalRelease": "1998-03-14T00:00:00Z",
+        "folderName": "/movies/Darkman (1990)",
+        "genres": [
+          "Action",
+          "Science Fiction",
+          "Thriller"
+        ],
+        "hasFile": false,
+        "id": 26,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/9fxGRzlINIvfPFhizMgbQaDDrK.jpg",
+            "url": "/MediaCover/26/poster.jpg?h=745c8bc73b85b2ece930"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/AmYRSICb6OjblGlyAEFiJ4cMfKF.jpg",
+            "url": "/MediaCover/26/fanart.jpg?h=daadb66e94dd0e394c0e"
+          }
+        ],
+        "imdbId": "tt0099365",
+        "inCinemas": "1990-08-24T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "burn",
+          "conflagration",
+          "corruption",
+          "disfigurement",
+          "enthusiastic",
+          "experiment",
+          "gangster",
+          "los angeles, california",
+          "madness",
+          "mask",
+          "outsider",
+          "revenge",
+          "scientist",
+          "superhero"
+        ],
+        "lastSearchTime": "2026-03-29T10:52:37Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "Darkman",
+        "overview": "Dr. Peyton Westlake is on the verge of realizing a major breakthrough in synthetic skin when his laboratory is destroyed by gangsters. Having been burned beyond recognition and forever altered by an experimental medical procedure, Westlake becomes known as Darkman, assuming alternate identities in his quest for revenge and a new life with a former love.",
+        "path": "/movies/Darkman (1990)",
+        "physicalRelease": "1991-02-14T00:00:00Z",
+        "popularity": 3.3559,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.4,
+            "votes": 75973
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 65,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 80,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.424,
+            "votes": 1615
+          },
+          "trakt": {
+            "type": "user",
+            "value": 6.56735,
+            "votes": 2346
+          }
+        },
+        "releaseDate": "1991-02-14T00:00:00Z",
+        "runtime": 95,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "darkman",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "Universal Pictures",
+        "tags": [
+          1
+        ],
+        "title": "Darkman",
+        "titleSlug": "9556",
+        "tmdbId": 9556,
+        "website": "",
+        "year": 1990,
+        "youTubeTrailerId": "W8oGHvO2RgU"
+      },
+      {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "NR",
+        "cleanTitle": "thedayafter",
+        "digitalRelease": "1983-11-20T00:00:00Z",
+        "folderName": "/movies/The Day After (1983)",
+        "genres": [
+          "Science Fiction",
+          "Drama",
+          "TV Movie"
+        ],
+        "hasFile": false,
+        "id": 109,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/brieV17D6R6HcubOqehLNYuxnvs.jpg",
+            "url": "/MediaCover/109/poster.jpg?h=fee1ad04949cb859de5f"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/AfBGTLp9JtsWNUJC6rP1U1XCPCE.jpg",
+            "url": "/MediaCover/109/fanart.jpg?h=b29d3343db0de81ebb64"
+          }
+        ],
+        "imdbId": "tt0085404",
+        "inCinemas": "1983-12-10T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "anarchy",
+          "apocalypse",
+          "armageddon",
+          "catastrophe",
+          "chaos",
+          "cold war",
+          "college campus",
+          "danger",
+          "darkness",
+          "delirium",
+          "destroyed city",
+          "disaster",
+          "disfigurement",
+          "emp",
+          "end of the world",
+          "environmental protection agency",
+          "epa",
+          "high school",
+          "hysteria",
+          "insanity",
+          "isolation",
+          "kansas, usa",
+          "lawlessness",
+          "mass destruction",
+          "mass grave",
+          "mass killing",
+          "mushroom cloud",
+          "nightmare becomes reality",
+          "nuclear",
+          "nuclear explosion",
+          "nuclear fallout",
+          "nuclear holocaust",
+          "nuclear radiation",
+          "nuclear threat",
+          "nuclear war",
+          "nuclear winter",
+          "post-apocalyptic future",
+          "psychotronic film",
+          "radiation",
+          "radiation sickness",
+          "refugee",
+          "refugee camp",
+          "revolver",
+          "world war iii"
+        ],
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Day After",
+        "overview": "In the mid-1980s, the U.S. is poised on the brink of nuclear war. This shadow looms over the residents of a small town in Kansas as they continue their daily lives. Dr. Russell Oakes maintains his busy schedule at the hospital, Denise Dahlberg prepares for her upcoming wedding, and Stephen Klein is deep in his graduate studies. When the unthinkable happens and the bombs come down, the town's residents are thrust into the horrors of nuclear winter.",
+        "path": "/movies/The Day After (1983)",
+        "popularity": 3.99,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 7,
+            "votes": 20806
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 86,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.8,
+            "votes": 470
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.03291,
+            "votes": 790
+          }
+        },
+        "releaseDate": "1983-11-20T00:00:00Z",
+        "runtime": 127,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "day after",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "ABC Circle Films",
+        "tags": [],
+        "title": "The Day After",
+        "titleSlug": "7012",
+        "tmdbId": 7012,
+        "website": "",
+        "year": 1983,
+        "youTubeTrailerId": "gIk6aBLCoHg"
+      },
+      {
+        "added": "2026-03-15T13:17:10Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "deadtalentssociety",
+        "digitalRelease": "2025-03-26T00:00:00Z",
+        "folderName": "/movies/Dead Talents Society (2024) {tmdb-1006724}",
+        "genres": [
+          "Horror",
+          "Comedy"
+        ],
+        "hasFile": false,
+        "id": 158,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/yDcc3OWNEtzjDtJly1OyZShtTMV.jpg",
+            "url": "/MediaCover/158/poster.jpg?h=ac2511aa54a53148ba5c"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/rGnf32URcZAqdTxtkoC6aUD1GBS.jpg",
+            "url": "/MediaCover/158/fanart.jpg?h=9a6a61962738cf33df62"
+          }
+        ],
+        "imdbId": "tt17079606",
+        "inCinemas": "2024-08-07T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "ghost",
+          "urban legend"
+        ],
+        "lastSearchTime": "2026-03-29T10:53:26Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 10,
+          "name": "Chinese"
+        },
+        "originalTitle": "鬼才之道",
+        "overview": "When ghosts must compete to survive in the underworld by haunting the living, one unassuming young woman needs help creating a lasting performance while under the tutelage of a passionate agent and a washed-up diva.",
+        "path": "/movies/Dead Talents Society (2024) {tmdb-1006724}",
+        "popularity": 2.8544,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 7,
+            "votes": 4285
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 95,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.9,
+            "votes": 113
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.23762,
+            "votes": 303
+          }
+        },
+        "releaseDate": "2025-03-26T00:00:00Z",
+        "runtime": 110,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "dead talents society",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "Activator Marketing Company",
+        "tags": [
+          1
+        ],
+        "title": "Dead Talents Society",
+        "titleSlug": "1006724",
+        "tmdbId": 1006724,
+        "website": "https://www.sonypictures.com/movies/deadtalentssociety",
+        "year": 2024,
+        "youTubeTrailerId": "YrWJ_jVa0ys"
+      },
+      {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "thedeathdicklong",
+        "digitalRelease": "2019-12-08T00:00:00Z",
+        "folderName": "/movies/The Death of Dick Long (2019)",
+        "genres": [
+          "Comedy",
+          "Crime",
+          "Drama"
+        ],
+        "hasFile": false,
+        "id": 110,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/vURitOcmtcH8Dr1bWryTvfkeyJX.jpg",
+            "url": "/MediaCover/110/poster.jpg?h=0733eb4cd2b2186ccd52"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/gTNCO9iTeOq9m4pyUZwNoMCvdGf.jpg",
+            "url": "/MediaCover/110/fanart.jpg?h=8f64bb10e0875b8b3449"
+          }
+        ],
+        "imdbId": "tt9356952",
+        "inCinemas": "2019-09-27T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "bestiality",
+          "cover-up attempt",
+          "horse",
+          "rape of a male",
+          "sexual violence",
+          "zoophilia"
+        ],
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Death of Dick Long",
+        "overview": "Dick died last night, and Zeke and Earl don’t want anybody finding out how. That’s too bad though, cause news travels fast in small-town Alabama.",
+        "path": "/movies/The Death of Dick Long (2019)",
+        "popularity": 2.4827,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.4,
+            "votes": 8626
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 69,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 75,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.2,
+            "votes": 193
+          },
+          "trakt": {
+            "type": "user",
+            "value": 6.59589,
+            "votes": 584
+          }
+        },
+        "releaseDate": "2019-12-08T00:00:00Z",
+        "runtime": 100,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "death of dick long",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "A24",
+        "tags": [
+          1
+        ],
+        "title": "The Death of Dick Long",
+        "titleSlug": "565383",
+        "tmdbId": 565383,
+        "website": "https://a24films.com/films/the-death-of-dick-long",
+        "year": 2019,
+        "youTubeTrailerId": "dGBe8xsWGlo"
+      },
+      {
+        "added": "2026-04-02T17:32:37Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "thedescent",
+        "collection": {
+          "title": "The Descent Collection",
+          "tmdbId": 87258
+        },
+        "digitalRelease": "2008-11-21T00:00:00Z",
+        "folderName": "/movies/The Descent (2005) {tmdb-9392}",
+        "genres": [
+          "Adventure",
+          "Horror"
+        ],
+        "hasFile": false,
+        "id": 192,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/mxFPI4KYBk5ri9cPteIS8jiDFgj.jpg",
+            "url": "/MediaCover/192/poster.jpg?h=77de18f3d826b9f1530d"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/9T5D5RGuCsC6CeqYZJTv4rT4RPy.jpg",
+            "url": "/MediaCover/192/fanart.jpg?h=eea7086778587006511b"
+          }
+        ],
+        "imdbId": "tt0435625",
+        "inCinemas": "2005-07-08T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "ambivalent",
+          "appalachia",
+          "best friend",
+          "camcorder",
+          "cave",
+          "claustrophobia",
+          "climbing",
+          "creature",
+          "darkness",
+          "expedition",
+          "female friendship",
+          "female protagonist",
+          "friends",
+          "gore",
+          "grieving",
+          "mutant",
+          "panic",
+          "rope",
+          "speleology",
+          "survival horror",
+          "suspenseful",
+          "trauma"
+        ],
+        "lastSearchTime": "2026-11-01T16:37:18Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Descent",
+        "overview": "After a personal tragedy, Sarah joins her friends on a caving expedition in the Appalachian Mountains. But when a rockfall traps them deep underground, their adventure turns into a nightmare. As they search for a way out, the group discovers they are not alone—lurking in the darkness are savage, cave-dwelling creatures. With rising tension and dwindling trust, the women must fight to survive against both the predators and each other.",
+        "path": "/movies/The Descent (2005) {tmdb-9392}",
+        "physicalRelease": "2005-11-07T00:00:00Z",
+        "popularity": 7.6263,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 7.2,
+            "votes": 279638
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 71,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 87,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 7,
+            "votes": 4665
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.18258,
+            "votes": 7761
+          }
+        },
+        "releaseDate": "2005-11-07T00:00:00Z",
+        "runtime": 100,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "descent",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "Celador Films",
+        "tags": [
+          1
+        ],
+        "title": "The Descent",
+        "titleSlug": "9392",
+        "tmdbId": 9392,
+        "website": "",
+        "year": 2005,
+        "youTubeTrailerId": "_onLUDusszw"
+      },
+      {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "thedevilsbackbone",
+        "digitalRelease": "2001-08-01T00:00:00Z",
+        "folderName": "/movies/The Devil's Backbone (2001)",
+        "genres": [
+          "Fantasy",
+          "Drama",
+          "Horror",
+          "Thriller"
+        ],
+        "hasFile": false,
+        "id": 111,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/iP1z1aJzPnkP8FHg77TS7ukqoEZ.jpg",
+            "url": "/MediaCover/111/poster.jpg?h=5522524b25e7fb0a53b5"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/iUFylO8khUHGiSJanUZQfzZYyXI.jpg",
+            "url": "/MediaCover/111/fanart.jpg?h=a8c8d111802ad0fcdef8"
+          }
+        ],
+        "imdbId": "tt0256009",
+        "inCinemas": "2001-04-20T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "1930s",
+          "ghost",
+          "ghost child",
+          "gothic horror",
+          "isolated place",
+          "orphanage",
+          "political repression",
+          "sinister",
+          "spain",
+          "spanish civil war (1936-39)",
+          "supernatural being"
+        ],
+        "lastSearchTime": "2026-06-24T11:38:00Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 3,
+          "name": "Spanish"
+        },
+        "originalTitle": "El espinazo del diablo",
+        "overview": "Spain, 1939. In the last days of the Spanish Civil War, the young Carlos arrives at the Santa Lucía orphanage, where he will make friends and enemies as he follows the quiet footsteps of a mysterious presence eager for revenge.",
+        "path": "/movies/The Devil's Backbone (2001)",
+        "popularity": 3.3558,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 7.3,
+            "votes": 76682
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 78,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 93,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 7.3,
+            "votes": 1455
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.32346,
+            "votes": 1824
+          }
+        },
+        "releaseDate": "2001-08-01T00:00:00Z",
+        "runtime": 108,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "devils backbone",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "Tequila Gang",
+        "tags": [
+          1
+        ],
+        "title": "The Devil's Backbone",
+        "titleSlug": "1433",
+        "tmdbId": 1433,
+        "website": "",
+        "year": 2001,
+        "youTubeTrailerId": "RZi4geYuSNE"
+      }
+    ],
+    "sortDirection": "ascending",
+    "sortKey": "movieMetadata.sortTitle",
+    "totalRecords": 91
+  },
+  "recordedAt": "2026-11-11T12:12:58Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/wanted/missing?page=1&pageSize=20&sortKey=movieMetadata.sortTitle&sortDirection=ascending"
+  },
+  "status": 200
+}

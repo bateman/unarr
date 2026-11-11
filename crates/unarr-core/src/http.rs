@@ -31,11 +31,22 @@ pub fn user_agent() -> String {
 /// [`user_agent`], the Servarr team is told, and the goldens are recorded
 /// again. Read by [`servarr_proxy_user_agent`] alone; nothing else may
 /// depend on which one is in use.
-const SERVARR_PROXY_USER_AGENT: &str = "Sonarr/4.0.20.3014 (ubuntu 24.04)";
+const SONARR_SERVARR_PROXY_USER_AGENT: &str = "Sonarr/4.0.20.3014 (ubuntu 24.04)";
 
-/// The `User-Agent` for requests to the Servarr metadata proxies.
-pub fn servarr_proxy_user_agent() -> &'static str {
-    SERVARR_PROXY_USER_AGENT
+/// The same exception for the Radarr personality towards
+/// `api.radarr.video`, under the same exit condition: the pinned Radarr's
+/// user agent while the movie metadata path is being established.
+const RADARR_SERVARR_PROXY_USER_AGENT: &str = "Radarr/6.4.4.10685 (ubuntu 24.04)";
+
+/// The `User-Agent` a personality sends to the Servarr metadata proxies:
+/// one constant each, read here and nowhere else. Lidarr, which emulates
+/// nothing yet, goes by Unarr's own name.
+pub fn servarr_proxy_user_agent(personality: crate::Personality) -> String {
+    match personality {
+        crate::Personality::Sonarr => SONARR_SERVARR_PROXY_USER_AGENT.to_string(),
+        crate::Personality::Radarr => RADARR_SERVARR_PROXY_USER_AGENT.to_string(),
+        crate::Personality::Lidarr => user_agent(),
+    }
 }
 
 /// Build a client with Unarr's defaults, following the process's proxy
@@ -166,6 +177,54 @@ pub fn redact(url: &str) -> String {
         out.push_str(f);
     }
     out
+}
+
+/// The HTTP clients of one personality with the settings they follow. One
+/// process serves several personalities, and each has its own proxy and
+/// certificate settings in Settings > General: a client built over the
+/// handle of one never follows a save of another.
+#[derive(Debug, Clone)]
+pub struct Clients {
+    /// What Settings > General says about outgoing connections; whoever
+    /// saves them sets it here.
+    pub outbound: crate::outbound::Handle,
+    pub client: reqwest::Client,
+    /// For torrent downloads, see [`no_redirect`].
+    pub no_redirect: reqwest::Client,
+}
+
+impl Clients {
+    /// Clients of their own over settings of their own.
+    pub fn new() -> Clients {
+        let outbound = crate::outbound::Handle::default();
+        Clients {
+            client: build_with(Duration::from_secs(100), &outbound),
+            no_redirect: builder(&outbound)
+                .timeout(Duration::from_secs(100))
+                .redirect(reqwest::redirect::Policy::none())
+                .build()
+                .expect("reqwest client with static configuration"),
+            outbound,
+        }
+    }
+
+    /// The clients [`shared`] and [`no_redirect`] hand out, over the
+    /// settings [`crate::outbound::process`] holds: what the series side
+    /// takes where it is not handed a client, and so the Sonarr
+    /// personality's. No other personality may set those settings.
+    pub fn process() -> Clients {
+        Clients {
+            outbound: crate::outbound::process().clone(),
+            client: shared().clone(),
+            no_redirect: no_redirect().clone(),
+        }
+    }
+}
+
+impl Default for Clients {
+    fn default() -> Self {
+        Clients::new()
+    }
 }
 
 /// The process-wide client. The originals use 100 s for indexers and

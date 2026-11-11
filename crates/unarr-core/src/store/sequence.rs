@@ -77,7 +77,7 @@ mod tests {
     #[test]
     fn ids_keep_counting_past_deleted_rows() {
         let mut conn = Connection::open_in_memory().unwrap();
-        crate::db::migrate(&mut conn).unwrap();
+        crate::db::migrate(&mut conn, crate::Personality::Sonarr).unwrap();
         conn.execute("CREATE TABLE things (id INTEGER PRIMARY KEY)", [])
             .unwrap();
         conn.execute("INSERT INTO things (id) VALUES (5)", []).unwrap();

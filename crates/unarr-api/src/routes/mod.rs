@@ -15,6 +15,7 @@ pub mod mediafiles;
 pub mod notification_writes;
 pub mod providers;
 pub mod queue;
+pub mod radarr;
 pub mod release;
 pub mod series;
 pub mod series_writes;
@@ -26,10 +27,40 @@ pub mod system;
 use axum::routing::{delete, get, post, put};
 use axum::Router;
 
+use unarr_core::Personality;
+
 use crate::state::AppState;
 
-/// Routes under `/api/v3` (Sonarr, Radarr) or `/api/v1` (Lidarr).
-pub fn api_router(_state: &AppState) -> Router<AppState> {
+/// Routes under `/api/v3` (Sonarr, Radarr) or `/api/v1` (Lidarr): each
+/// personality has its own table. Lidarr has none yet and shows Sonarr's,
+/// as every personality did before there were two.
+pub fn api_router(state: &AppState) -> Router<AppState> {
+    match state.personality() {
+        Personality::Sonarr | Personality::Lidarr => sonarr_api_router(),
+        Personality::Radarr => radarr::api_router(),
+    }
+}
+
+/// What is opened with the API key outside the API prefix. The calendar feed:
+/// `/feed/v3/calendar/Sonarr.ics` or `Radarr.ics`, and the lower-case
+/// spelling the originals' case-insensitive routing also answers.
+pub fn feed_router(state: &AppState) -> Router<AppState> {
+    let name = state.personality().app_name();
+    let handler = match state.personality() {
+        Personality::Sonarr | Personality::Lidarr => get(feed::calendar),
+        Personality::Radarr => get(radarr::feed::calendar),
+    };
+    let router = match state.personality() {
+        // `GET /api`, which Radarr answers with the versions it speaks.
+        Personality::Radarr => Router::new().route("/api", get(radarr::system::api_root)),
+        Personality::Sonarr | Personality::Lidarr => Router::new(),
+    };
+    router
+        .route(&format!("/feed/v3/calendar/{name}.ics"), handler.clone())
+        .route(&format!("/feed/v3/calendar/{}.ics", name.to_lowercase()), handler)
+}
+
+fn sonarr_api_router() -> Router<AppState> {
     Router::new()
         .fallback(unknown_api_route)
         .route("/indexerflag", get(catalog::indexer_flags))
@@ -356,7 +387,8 @@ pub fn api_router(_state: &AppState) -> Router<AppState> {
         .route("/localization/language", get(system::localization_language))
 }
 
-/// Routes outside the API prefix.
+/// Routes outside the API prefix. SignalR is the same hub protocol for
+/// every personality.
 pub fn ui_router(_state: &AppState) -> Router<AppState> {
     Router::new()
         .route("/signalr/messages/negotiate", post(signalr::negotiate))
@@ -364,6 +396,6 @@ pub fn ui_router(_state: &AppState) -> Router<AppState> {
 }
 
 /// The originals answer an unknown API path with an empty 404.
-async fn unknown_api_route() -> axum::http::StatusCode {
+pub(crate) async fn unknown_api_route() -> axum::http::StatusCode {
     axum::http::StatusCode::NOT_FOUND
 }

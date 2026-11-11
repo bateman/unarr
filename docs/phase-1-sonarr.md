@@ -64,7 +64,7 @@ notifications, Radarr, Lidarr.
 
 The fixture was first a synthetic database built by driving Sonarr's API, then
 replaced by the maintainer's own installation anonymised with
-`scripts/sonarr-anonymize.py`. The second brought 13 golden mismatches and a
+`scripts/arr-anonymize.py`. The second brought 13 golden mismatches and a
 two-second endpoint; all fixed, see `docs/DESIGN.md` sections 6, 9 and 11.
 
 An independent review of the branch then listed twenty findings (ten to fix
@@ -96,7 +96,7 @@ container; if one is available, prefer recording golden files from the real
 application.
 
 *Outcome:* the user provided a backup of their installation; it is the fixture
-now, anonymised by `scripts/sonarr-anonymize.py` (see
+now, anonymised by `scripts/arr-anonymize.py` (see
 `tests/fixtures/sonarr/README.md`). The synthetic generator was removed once it
 had served its purpose: left in the tree it could overwrite the real fixture.
 The official release runs without Docker, so the goldens are recorded from it.

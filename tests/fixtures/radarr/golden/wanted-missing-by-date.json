@@ -1,0 +1,2026 @@
+{
+  "body": {
+    "page": 1,
+    "pageSize": 20,
+    "records": [
+      {
+        "added": "2026-04-30T19:22:04Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "clayface",
+        "digitalRelease": "2026-12-07T00:00:00Z",
+        "folderName": "/movies/Clayface (2026) {tmdb-1400940}",
+        "genres": [
+          "Horror",
+          "Thriller",
+          "Science Fiction"
+        ],
+        "hasFile": false,
+        "id": 197,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/9l1NuFjel2j89hiuiJbsxfblqjy.jpg",
+            "url": "/MediaCover/197/poster.jpg?h=b44cad4f9cceed812273"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/VnT9D7NogVWrmN2UuT30exIYPh.jpg",
+            "url": "/MediaCover/197/fanart.jpg?h=ba736ae3e3b5bf339197"
+          }
+        ],
+        "imdbId": "tt34890576",
+        "inCinemas": "2026-10-21T00:00:00Z",
+        "isAvailable": false,
+        "keywords": [
+          "aspiring actor",
+          "based on comic",
+          "body horror",
+          "dc universe (dcu)",
+          "disfigured face",
+          "female scientist",
+          "hollywood actor",
+          "mobster",
+          "monster",
+          "revenge",
+          "scientific experiment",
+          "shapeshifting",
+          "tragedy",
+          "unrequited love"
+        ],
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "Clayface",
+        "overview": "Matt Hagen's meteoric rise from Gotham street kid to Hollywood leading man is tragically cut short when a local crime boss's actions leave him horribly disfigured. Abandoned by his team and with nothing left, Matt seeks out a cutting edge treatment that miraculously returns him to his former self… but also unexpectedly affects his grip on reality, spiraling him down a destructive path of all-consuming revenge.",
+        "path": "/movies/Clayface (2026) {tmdb-1400940}",
+        "physicalRelease": "2027-02-24T00:00:00Z",
+        "popularity": 81.5657,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 7.5,
+            "votes": 47939
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 59,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 7.433,
+            "votes": 423
+          }
+        },
+        "releaseDate": "2026-12-07T00:00:00Z",
+        "runtime": 109,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "clayface",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "inCinemas",
+        "studio": "DC Studios",
+        "tags": [
+          1
+        ],
+        "title": "Clayface",
+        "titleSlug": "1400940",
+        "tmdbId": 1400940,
+        "website": "https://www.clayfacemovie.com",
+        "year": 2026,
+        "youTubeTrailerId": "f7jlCqdtwdM"
+      },
+      {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "theodyssey",
+        "digitalRelease": "2026-11-17T00:00:00Z",
+        "folderName": "/movies/The Odyssey (2026)",
+        "genres": [
+          "Adventure",
+          "Action",
+          "Fantasy"
+        ],
+        "hasFile": false,
+        "id": 125,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/krVa7rKCQb4OBfsr2LTJv4rTz5q.jpg",
+            "url": "/MediaCover/125/poster.jpg?h=7df0bc9abf3f04cc080f"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/twiVn9oFXOVR0uoYgawyEBlnFu8.jpg",
+            "url": "/MediaCover/125/fanart.jpg?h=c64ef1badc3271e7378f"
+          }
+        ],
+        "imdbId": "tt33764258",
+        "inCinemas": "2026-07-15T00:00:00Z",
+        "isAvailable": false,
+        "keywords": [
+          "ancient",
+          "ancient world",
+          "based on song, poem or rhyme",
+          "bronze age",
+          "epic fantasy",
+          "greek history",
+          "greek mythology",
+          "historical fiction",
+          "mediterranean sea",
+          "mythical",
+          "odyssey",
+          "peplum",
+          "period drama",
+          "ship",
+          "sword and sandal",
+          "trojan horse",
+          "trojan war",
+          "voyage"
+        ],
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Odyssey",
+        "overview": "Odysseus, the legendary King of Ithaca, embarks on a long and perilous journey home following the Trojan War. Throughout his voyage, he is forced to confront the whims of gods, mythological monsters, and trials that stretch both his cunning and his humanity to the breaking point.",
+        "path": "/movies/The Odyssey (2026)",
+        "physicalRelease": "2026-11-17T00:00:00Z",
+        "popularity": 443.4768,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 8.4,
+            "votes": 551533
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 88,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 8.019,
+            "votes": 4612
+          },
+          "trakt": {
+            "type": "user",
+            "value": 5.75,
+            "votes": 116
+          }
+        },
+        "releaseDate": "2026-11-17T00:00:00Z",
+        "runtime": 173,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "odyssey",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "inCinemas",
+        "studio": "Universal Pictures",
+        "tags": [],
+        "title": "The Odyssey",
+        "titleSlug": "1368337",
+        "tmdbId": 1368337,
+        "website": "https://www.universalpictures.com/movies/the-odyssey",
+        "year": 2026,
+        "youTubeTrailerId": "AyIZ9tiiN8I"
+      },
+      {
+        "added": "2026-10-16T05:43:26Z",
+        "alternateTitles": [],
+        "certification": "PG-13",
+        "cleanTitle": "streetfighter",
+        "digitalRelease": "2026-11-11T00:00:00Z",
+        "folderName": "/movies/Street Fighter (2026) {tmdb-1153576}",
+        "genres": [
+          "Action",
+          "Fantasy",
+          "Comedy"
+        ],
+        "hasFile": false,
+        "id": 304,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/dJPT2Uf12X6aFg8i5N67NTpIZ9t.jpg",
+            "url": "/MediaCover/304/poster.jpg?h=3911f70fdd89c37b3cd5"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/3BBjkQmdGacKYZtpmK2vIfuDmON.jpg",
+            "url": "/MediaCover/304/fanart.jpg?h=5ac52c5c0ed92bef7fb9"
+          }
+        ],
+        "imdbId": "tt27419420",
+        "inCinemas": "2026-10-14T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "1990s",
+          "amused",
+          "based on video game",
+          "battle royale",
+          "duringcreditsstinger",
+          "hand to hand combat",
+          "martial arts",
+          "martial arts tournament",
+          "power",
+          "powers",
+          "ridiculous",
+          "shocking",
+          "wuxia"
+        ],
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "Street Fighter",
+        "overview": "In 1993, estranged Street Fighters Ryu and Ken Masters are thrown back into combat when the mysterious Chun-Li recruits them for the next World Warrior Tournament: a brutal clash of fists, fate, and fury. But behind this battle royale lies a deadly conspiracy that forces them to face off against each other and the demons of their past. And if they don't, it's GAME OVER!",
+        "path": "/movies/Street Fighter (2026) {tmdb-1153576}",
+        "popularity": 58.1816,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.2,
+            "votes": 22019
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 46,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.347,
+            "votes": 226
+          }
+        },
+        "releaseDate": "2026-11-11T00:00:00Z",
+        "runtime": 120,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "street fighter",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "Capcom",
+        "tags": [
+          1
+        ],
+        "title": "Street Fighter",
+        "titleSlug": "1153576",
+        "tmdbId": 1153576,
+        "website": "https://www.streetfightermovie.com",
+        "year": 2026,
+        "youTubeTrailerId": "U6sbm1OaJb8"
+      },
+      {
+        "added": "2026-07-19T21:57:27Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "hope",
+        "digitalRelease": "2026-10-13T00:00:00Z",
+        "folderName": "/movies/Hope (2026) {tmdb-1058424}",
+        "genres": [
+          "Science Fiction",
+          "Mystery",
+          "Action"
+        ],
+        "hasFile": false,
+        "id": 246,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/6VY1ZKgpsc8CfGsQcCGiYEgHdH0.jpg",
+            "url": "/MediaCover/246/poster.jpg?h=5f700d7445c6d0b0a04a"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/j96rurZqmBjyY37Fncl3IB0qJNe.jpg",
+            "url": "/MediaCover/246/fanart.jpg?h=a4dae06f3d45bb608dfb"
+          }
+        ],
+        "imdbId": "tt27369017",
+        "inCinemas": "2026-07-15T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "20th century",
+          "aliens",
+          "chasing",
+          "dinosaurs",
+          "duringcreditsstinger",
+          "fight for survival",
+          "horror",
+          "horse",
+          "hunted",
+          "police officer",
+          "police shootout",
+          "remote village",
+          "shootout",
+          "supernatural",
+          "unknown entity"
+        ],
+        "lastSearchTime": "2026-10-13T09:51:48Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 21,
+          "name": "Korean"
+        },
+        "originalTitle": "호프",
+        "overview": "In the remote South Korean village of Hope Harbor, police chief Bum-seok and officer Sung-ae are called to investigate a mysterious creature wreaking havoc on the community. But all is not as it seems, and perceptions can be misleading. What begins as ignorance plants the seed of disaster, escalating through human conflict into a tragedy of cosmic proportions.",
+        "path": "/movies/Hope (2026) {tmdb-1058424}",
+        "physicalRelease": "2026-12-09T00:00:00Z",
+        "popularity": 396.0525,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.6,
+            "votes": 29523
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 66,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.688,
+            "votes": 544
+          },
+          "trakt": {
+            "type": "user",
+            "value": 1,
+            "votes": 2
+          }
+        },
+        "releaseDate": "2026-10-13T00:00:00Z",
+        "runtime": 157,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "hope",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "Forged Films",
+        "tags": [
+          1
+        ],
+        "title": "Hope",
+        "titleSlug": "1058424",
+        "tmdbId": 1058424,
+        "website": "https://www.neonrated.com/film/hope",
+        "year": 2026,
+        "youTubeTrailerId": "OFaJzL83y0Q"
+      },
+      {
+        "added": "2026-09-20T18:50:54Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "theinvite",
+        "digitalRelease": "2026-08-11T00:00:00Z",
+        "folderName": "/movies/The Invite (2026) {tmdb-950028}",
+        "genres": [
+          "Comedy",
+          "Drama",
+          "Romance"
+        ],
+        "hasFile": false,
+        "id": 286,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/b7Dr8Chzse8VagexAporUu2RtLx.jpg",
+            "url": "/MediaCover/286/poster.jpg?h=c8199cb07058b2f82b7a"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/lEwqBGNR65KZv6Ej5ufcmhZu2y2.jpg",
+            "url": "/MediaCover/286/fanart.jpg?h=527de7a44ef22ae4b220"
+          }
+        ],
+        "imdbId": "tt14173636",
+        "inCinemas": "2026-06-25T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "aggressive",
+          "anxious",
+          "candid",
+          "dark comedy",
+          "exuberant",
+          "firefighter",
+          "husband wife relationship",
+          "neighbors",
+          "remake",
+          "san francisco, california",
+          "sexologist"
+        ],
+        "lastSearchTime": "2026-09-20T18:51:09Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Invite",
+        "overview": "Joe and Angela's marriage is on thin ice. When they invite their enigmatic upstairs neighbors for a dinner party, the night spirals into unexpected places. Have they reignited the spark or lit the match that burns it all down?",
+        "path": "/movies/The Invite (2026) {tmdb-950028}",
+        "physicalRelease": "2026-10-05T00:00:00Z",
+        "popularity": 17.6122,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 7.4,
+            "votes": 97538
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 82,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 7.206,
+            "votes": 934
+          },
+          "trakt": {
+            "type": "user",
+            "value": 8.08359,
+            "votes": 323
+          }
+        },
+        "releaseDate": "2026-08-11T00:00:00Z",
+        "runtime": 107,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "invite",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "Annapurna Pictures",
+        "tags": [
+          1
+        ],
+        "title": "The Invite",
+        "titleSlug": "950028",
+        "tmdbId": 950028,
+        "website": "https://a24films.com/films/the-invite",
+        "year": 2026,
+        "youTubeTrailerId": "nelkiuezJxg"
+      },
+      {
+        "added": "2026-03-15T13:17:10Z",
+        "alternateTitles": [],
+        "certification": "NR",
+        "cleanTitle": "resurrection",
+        "digitalRelease": "2026-02-25T00:00:00Z",
+        "folderName": "/movies/Resurrection (2025) {tmdb-878608}",
+        "genres": [
+          "Science Fiction",
+          "Fantasy",
+          "Drama"
+        ],
+        "hasFile": false,
+        "id": 163,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/4asJAxshXzQriox6tnIoEnWN1nu.jpg",
+            "url": "/MediaCover/163/poster.jpg?h=7ef81716677f4e28338d"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/gry8VX2ssomFFv0ogcmlv3ZGUWd.jpg",
+            "url": "/MediaCover/163/fanart.jpg?h=87df621461528ff0c660"
+          }
+        ],
+        "imdbId": "tt29002950",
+        "inCinemas": "2025-11-22T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "experimental cinema",
+          "five senses"
+        ],
+        "lastSearchTime": "2026-03-15T13:17:59Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 10,
+          "name": "Chinese"
+        },
+        "originalTitle": "狂野时代",
+        "overview": "In a world where humanity has lost the ability to dream in exchange for eternal life, one creature remains entranced by the fading illusions of the dreamworld. This monster, adrift in reverie, clings to visions no one else can see - until a woman appears. As she allows him to dream one final time, his life of different identities is replayed as they journey through his century of existence.",
+        "path": "/movies/Resurrection (2025) {tmdb-878608}",
+        "physicalRelease": "2026-04-21T00:00:00Z",
+        "popularity": 5.0203,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 7.2,
+            "votes": 6132
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 87,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 91,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 7.1,
+            "votes": 138
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.06731,
+            "votes": 208
+          }
+        },
+        "releaseDate": "2026-02-25T00:00:00Z",
+        "runtime": 159,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "resurrection",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "Dangmai Films",
+        "tags": [
+          1
+        ],
+        "title": "Resurrection",
+        "titleSlug": "878608",
+        "tmdbId": 878608,
+        "website": "",
+        "year": 2025,
+        "youTubeTrailerId": "ZIJezWgFUEY"
+      },
+      {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "theplague",
+        "digitalRelease": "2026-02-23T00:00:00Z",
+        "folderName": "/movies/The Plague (2025)",
+        "genres": [
+          "Drama",
+          "Thriller"
+        ],
+        "hasFile": false,
+        "id": 127,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/b0RWuqzgvyfiIYU4QfgJHhmxZF4.jpg",
+            "url": "/MediaCover/127/poster.jpg?h=7970a56957da00b75e56"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/kHyN3PejjlYWYz1Eah3jS64oV0g.jpg",
+            "url": "/MediaCover/127/fanart.jpg?h=279c60323cc81cc2fd47"
+          }
+        ],
+        "imdbId": "tt32792934",
+        "inCinemas": "2026-01-02T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "biting",
+          "body horror",
+          "bullying",
+          "clinical",
+          "distressing",
+          "euphoric",
+          "foreboding",
+          "harsh",
+          "hazing",
+          "independent film",
+          "melancholy",
+          "psychological horror",
+          "summer camp",
+          "teen horror",
+          "teenager",
+          "water polo"
+        ],
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Plague",
+        "overview": "A socially awkward tween endures the ruthless hierarchy at a water polo camp, his anxiety spiraling into psychological turmoil over the summer.",
+        "path": "/movies/The Plague (2025)",
+        "popularity": 4.79,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.4,
+            "votes": 8166
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 79,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 97,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.4,
+            "votes": 150
+          },
+          "trakt": {
+            "type": "user",
+            "value": 6.27372,
+            "votes": 548
+          }
+        },
+        "releaseDate": "2026-02-23T00:00:00Z",
+        "runtime": 98,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "plague",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "Spooky Pictures",
+        "tags": [],
+        "title": "The Plague",
+        "titleSlug": "1370814",
+        "tmdbId": 1370814,
+        "website": "",
+        "year": 2025,
+        "youTubeTrailerId": "QGMRkHPAaVU"
+      },
+      {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "primate",
+        "digitalRelease": "2026-02-10T00:00:00Z",
+        "folderName": "/movies/Primate (2026)",
+        "genres": [
+          "Horror",
+          "Thriller"
+        ],
+        "hasFile": false,
+        "id": 78,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/rKleYiEj4pFqxedTRWfujLooi84.jpg",
+            "url": "/MediaCover/78/poster.jpg?h=46274a562af3b345551f"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/d5C5Wsx4fnMRA0tj9BK1kTPcgQe.jpg",
+            "url": "/MediaCover/78/fanart.jpg?h=4bc626052117af235eb0"
+          }
+        ],
+        "imdbId": "tt33028778",
+        "inCinemas": "2026-01-01T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "animal",
+          "animal attack",
+          "animal horror",
+          "chimpanzee",
+          "gore",
+          "hawaii",
+          "horror",
+          "mongoose",
+          "monkey",
+          "party",
+          "pet",
+          "pool",
+          "pool party",
+          "primate",
+          "rabies",
+          "survival",
+          "survival horror",
+          "teen horror"
+        ],
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "Primate",
+        "overview": "College student Lucy and her friends spend their vacation at her family's home in Hawaii, which includes her pet chimpanzee, Ben. However, when Ben contracts rabies after being bitten by a rabid animal, the group must fight for their lives in order to avoid the now-violent chimp.",
+        "path": "/movies/Primate (2026)",
+        "physicalRelease": "2026-04-21T00:00:00Z",
+        "popularity": 6.7568,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 5.8,
+            "votes": 39293
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 58,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.424,
+            "votes": 972
+          },
+          "trakt": {
+            "type": "user",
+            "value": 6.19206,
+            "votes": 4056
+          }
+        },
+        "releaseDate": "2026-02-10T00:00:00Z",
+        "runtime": 89,
+        "secondaryYear": 2025,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "primate",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "18Hz Productions",
+        "tags": [
+          1
+        ],
+        "title": "Primate",
+        "titleSlug": "1315303",
+        "tmdbId": 1315303,
+        "website": "http://www.primatemovie.com",
+        "year": 2026,
+        "youTubeTrailerId": "wo87F-va410"
+      },
+      {
+        "added": "2026-06-01T13:12:21Z",
+        "alternateTitles": [],
+        "certification": "PG",
+        "cleanTitle": "exit8",
+        "digitalRelease": "2026-02-05T00:00:00Z",
+        "folderName": "/movies/Exit 8 (2025) {tmdb-1408208}",
+        "genres": [
+          "Mystery",
+          "Thriller",
+          "Horror"
+        ],
+        "hasFile": false,
+        "id": 212,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/nQXYTvm6AY4WmtcPskroqC7Skh.jpg",
+            "url": "/MediaCover/212/poster.jpg?h=abf45a6047957aa5200d"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/3cVrg7tzSf5AgEecYWDOSAzXAeX.jpg",
+            "url": "/MediaCover/212/fanart.jpg?h=3ee6ea8b383a2e07a0fa"
+          }
+        ],
+        "imdbId": "tt35222590",
+        "inCinemas": "2025-08-28T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "ambiguous",
+          "anomaly",
+          "based on video game",
+          "bewildered",
+          "cautionary",
+          "endless cycle",
+          "exit",
+          "exit 8",
+          "found footage",
+          "found footage adjacent",
+          "introspective",
+          "liminal",
+          "liminal horror",
+          "liminal space",
+          "metro",
+          "ominous",
+          "psychological",
+          "psychological horror",
+          "station"
+        ],
+        "lastSearchTime": "2026-06-24T21:07:12Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 8,
+          "name": "Japanese"
+        },
+        "originalTitle": "８番出口",
+        "overview": "A man trapped in an endless sterile subway passageway sets out to find Exit 8. The rules of his quest are simple: do not overlook anything out of the ordinary. If you discover an anomaly, turn back immediately. If you don’t, carry on. Then leave from Exit 8. But even a single oversight will send him back to the beginning. Will he ever reach his goal and escape this infinite corridor?",
+        "path": "/movies/Exit 8 (2025) {tmdb-1408208}",
+        "physicalRelease": "2026-02-04T00:00:00Z",
+        "popularity": 11.8802,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.5,
+            "votes": 38377
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 71,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.983,
+            "votes": 919
+          },
+          "trakt": {
+            "type": "user",
+            "value": 6.75805,
+            "votes": 3352
+          }
+        },
+        "releaseDate": "2026-02-04T00:00:00Z",
+        "runtime": 95,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "exit 8",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "TOHO",
+        "tags": [],
+        "title": "Exit 8",
+        "titleSlug": "1408208",
+        "tmdbId": 1408208,
+        "website": "https://www.neonrated.com/film/exit-8",
+        "year": 2025,
+        "youTubeTrailerId": "zzEDWwhtAHc"
+      },
+      {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "PG-13",
+        "cleanTitle": "eternity",
+        "digitalRelease": "2025-12-22T00:00:00Z",
+        "folderName": "/movies/Eternity (2025)",
+        "genres": [
+          "Romance",
+          "Comedy",
+          "Drama"
+        ],
+        "hasFile": false,
+        "id": 31,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/yiwGcjfDKXD5PqQnyKUU9kspWQQ.jpg",
+            "url": "/MediaCover/31/poster.jpg?h=fa610ca445f412f0c51e"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/fuacZLpnohQtLD0AhtCErcPVL98.jpg",
+            "url": "/MediaCover/31/fanart.jpg?h=4b471aed0d69c58140ba"
+          }
+        ],
+        "imdbId": "tt24950660",
+        "inCinemas": "2025-11-26T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "afterlife",
+          "death of husband",
+          "death of spouse",
+          "difficult choice",
+          "eternity",
+          "fantasy",
+          "first love",
+          "loving",
+          "marriage",
+          "memories",
+          "reflective",
+          "reminiscent",
+          "romcom",
+          "souls",
+          "widow",
+          "woman between two men"
+        ],
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "Eternity",
+        "overview": "In an afterlife where souls have one week to decide where to spend eternity, Joan is faced with the impossible choice between the man she spent her life with and her first love, who died young and has waited decades for her to arrive.",
+        "path": "/movies/Eternity (2025)",
+        "popularity": 7.6684,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.9,
+            "votes": 70683
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 58,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 76,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 7.1,
+            "votes": 918
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.42783,
+            "votes": 6145
+          }
+        },
+        "releaseDate": "2025-12-22T00:00:00Z",
+        "runtime": 114,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "eternity",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "A24",
+        "tags": [
+          1
+        ],
+        "title": "Eternity",
+        "titleSlug": "1259102",
+        "tmdbId": 1259102,
+        "website": "https://a24films.com/films/eternity",
+        "year": 2025,
+        "youTubeTrailerId": "GzkoY6hUvQQ"
+      },
+      {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "sheridesshotgun",
+        "digitalRelease": "2025-08-26T00:00:00Z",
+        "folderName": "/movies/She Rides Shotgun (2025)",
+        "genres": [
+          "Action",
+          "Thriller",
+          "Crime"
+        ],
+        "hasFile": false,
+        "id": 92,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/nvqW8mOm818QDio3GKKmPLK8kXj.jpg",
+            "url": "/MediaCover/92/poster.jpg?h=970bd883a1e14ccecac9"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/ytCi1wg6YHpYcFRWCO2jpzN31Kf.jpg",
+            "url": "/MediaCover/92/fanart.jpg?h=53132e9cda221b6cbdbb"
+          }
+        ],
+        "imdbId": "tt27986457",
+        "inCinemas": "2025-07-31T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "based on novel or book",
+          "broken family",
+          "crime",
+          "escape journey",
+          "estranged daughter",
+          "father and daughter",
+          "father daughter relationship",
+          "fugitive life",
+          "loss of a parent",
+          "on the run",
+          "prison gang",
+          "protective father",
+          "revenge threat",
+          "sacrifice",
+          "traumatized child",
+          "young girl"
+        ],
+        "lastSearchTime": "2026-03-29T20:13:48Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "She Rides Shotgun",
+        "overview": "Newly released from prison and marked for death by unrelenting enemies, Nate must now protect his estranged 11-year-old daughter, Polly, at all costs. With scant resources and no one to trust, Nate and Polly forge a bond under fire as he shows her how to fight and survive—and she teaches him the true meaning of unconditional love.",
+        "path": "/movies/She Rides Shotgun (2025)",
+        "physicalRelease": "2026-08-25T00:00:00Z",
+        "popularity": 3.1797,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.5,
+            "votes": 15550
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 74,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 87,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 7,
+            "votes": 357
+          },
+          "trakt": {
+            "type": "user",
+            "value": 6.94487,
+            "votes": 1433
+          }
+        },
+        "releaseDate": "2025-08-26T00:00:00Z",
+        "runtime": 120,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "she rides shotgun",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "Fifth Season",
+        "tags": [
+          1
+        ],
+        "title": "She Rides Shotgun",
+        "titleSlug": "1196573",
+        "tmdbId": 1196573,
+        "website": "",
+        "year": 2025,
+        "youTubeTrailerId": "U9OkHjOnQPg"
+      },
+      {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "cleanTitle": "kotoko",
+        "digitalRelease": "2025-07-04T00:00:00Z",
+        "folderName": "/movies/Kotoko (2011)",
+        "genres": [
+          "Drama",
+          "Horror"
+        ],
+        "hasFile": false,
+        "id": 59,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/c0oZUpUVJ3sMBbeyPqShaCdgQ1T.jpg",
+            "url": "/MediaCover/59/poster.jpg?h=8bda9959183998d4a4ac"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/8mJSuA8wT7Wn4hQjuJUxCY5UPC0.jpg",
+            "url": "/MediaCover/59/fanart.jpg?h=ded1da91f7c171626116"
+          }
+        ],
+        "imdbId": "tt1842532",
+        "inCinemas": "2011-11-26T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "mental illness",
+          "psychological drama",
+          "single mother"
+        ],
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 8,
+          "name": "Japanese"
+        },
+        "originalTitle": "KOTOKO",
+        "overview": "When a single mother suffers a nervous breakdown, she is suspected of child abuse and her child is taken away. Her mental suffering escalates as she succumbs to her darkest fantasies.",
+        "path": "/movies/Kotoko (2011)",
+        "popularity": 2.3541,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.8,
+            "votes": 2860
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 7.2,
+            "votes": 129
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.16981,
+            "votes": 159
+          }
+        },
+        "releaseDate": "2025-07-04T00:00:00Z",
+        "runtime": 91,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "kotoko",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "Kaijyu Theater",
+        "tags": [],
+        "title": "Kotoko",
+        "titleSlug": "85032",
+        "tmdbId": 85032,
+        "website": "",
+        "year": 2011,
+        "youTubeTrailerId": "ILChkxK-w70"
+      },
+      {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "PG-13",
+        "cleanTitle": "theballadwallisisland",
+        "digitalRelease": "2025-05-06T00:00:00Z",
+        "folderName": "/movies/The Ballad of Wallis Island (2025)",
+        "genres": [
+          "Comedy",
+          "Drama",
+          "Music"
+        ],
+        "hasFile": false,
+        "id": 104,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/haS6bnqDqZoi5sYcCPJWaj2yMbB.jpg",
+            "url": "/MediaCover/104/poster.jpg?h=c18198a806ac14085722"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/1nn7nCFRTKeWOXbtjrFxfSvf1EI.jpg",
+            "url": "/MediaCover/104/fanart.jpg?h=abfe64e5c222d4dd92f1"
+          }
+        ],
+        "imdbId": "tt27674982",
+        "inCinemas": "2025-05-08T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "adoring",
+          "duet",
+          "eccentric millionaire",
+          "empathetic",
+          "folk music",
+          "former lovers",
+          "indie folk",
+          "inspirational",
+          "island",
+          "isolated island",
+          "lottery winner",
+          "lovers reunion",
+          "musician",
+          "reunion",
+          "thoughtful",
+          "wales"
+        ],
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Ballad of Wallis Island",
+        "overview": "An eccentric lottery winner who lives alone on a remote island tries to make his fantasies come true by getting his favourite musicians to perform at his home.",
+        "path": "/movies/The Ballad of Wallis Island (2025)",
+        "popularity": 2.7204,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 7.4,
+            "votes": 26480
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 78,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 97,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 7.268,
+            "votes": 233
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.49252,
+            "votes": 1137
+          }
+        },
+        "releaseDate": "2025-05-06T00:00:00Z",
+        "runtime": 100,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "ballad of wallis island",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "Baby Cow Productions",
+        "tags": [],
+        "title": "The Ballad of Wallis Island",
+        "titleSlug": "1122099",
+        "tmdbId": 1122099,
+        "website": "https://www.focusfeatures.com/the-ballad-of-wallis-island",
+        "year": 2025,
+        "youTubeTrailerId": "GjbVZWVWzPU"
+      },
+      {
+        "added": "2026-03-15T13:17:10Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "deadtalentssociety",
+        "digitalRelease": "2025-03-26T00:00:00Z",
+        "folderName": "/movies/Dead Talents Society (2024) {tmdb-1006724}",
+        "genres": [
+          "Horror",
+          "Comedy"
+        ],
+        "hasFile": false,
+        "id": 158,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/yDcc3OWNEtzjDtJly1OyZShtTMV.jpg",
+            "url": "/MediaCover/158/poster.jpg?h=ac2511aa54a53148ba5c"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/rGnf32URcZAqdTxtkoC6aUD1GBS.jpg",
+            "url": "/MediaCover/158/fanart.jpg?h=9a6a61962738cf33df62"
+          }
+        ],
+        "imdbId": "tt17079606",
+        "inCinemas": "2024-08-07T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "ghost",
+          "urban legend"
+        ],
+        "lastSearchTime": "2026-03-29T10:53:26Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 10,
+          "name": "Chinese"
+        },
+        "originalTitle": "鬼才之道",
+        "overview": "When ghosts must compete to survive in the underworld by haunting the living, one unassuming young woman needs help creating a lasting performance while under the tutelage of a passionate agent and a washed-up diva.",
+        "path": "/movies/Dead Talents Society (2024) {tmdb-1006724}",
+        "popularity": 2.8544,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 7,
+            "votes": 4285
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 95,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.9,
+            "votes": 113
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.23762,
+            "votes": 303
+          }
+        },
+        "releaseDate": "2025-03-26T00:00:00Z",
+        "runtime": 110,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "dead talents society",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "Activator Marketing Company",
+        "tags": [
+          1
+        ],
+        "title": "Dead Talents Society",
+        "titleSlug": "1006724",
+        "tmdbId": 1006724,
+        "website": "https://www.sonypictures.com/movies/deadtalentssociety",
+        "year": 2024,
+        "youTubeTrailerId": "YrWJ_jVa0ys"
+      },
+      {
+        "added": "2026-06-06T13:04:49Z",
+        "alternateTitles": [],
+        "certification": "NR",
+        "cleanTitle": "marsexpress",
+        "digitalRelease": "2024-04-30T00:00:00Z",
+        "folderName": "/movies/Mars Express (2023) {tmdb-586810}",
+        "genres": [
+          "Animation",
+          "Science Fiction",
+          "Thriller"
+        ],
+        "hasFile": false,
+        "id": 217,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/g8rUn0khoYB3G4gPPGTF1Xv9Olu.jpg",
+            "url": "/MediaCover/217/poster.jpg?h=7e391e80aaf41dfeac19"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/yIOw17XdfsoCaydtrkzlZBCcHk6.jpg",
+            "url": "/MediaCover/217/fanart.jpg?h=dcaf3b1e0800e19effcc"
+          }
+        ],
+        "imdbId": "tt26915336",
+        "inCinemas": "2023-11-22T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "adult animation",
+          "android",
+          "arrogant",
+          "cliché",
+          "cyberpunk",
+          "female protagonist",
+          "hacker",
+          "man vs machine",
+          "near future",
+          "planet mars",
+          "private detective",
+          "robot"
+        ],
+        "lastSearchTime": "2026-06-06T13:04:52Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 2,
+          "name": "French"
+        },
+        "originalTitle": "Mars Express",
+        "overview": "In 2200, private detective Aline Ruby and her android partner Carlos Rivera are hired by a wealthy businessman to track down a notorious hacker. On Mars, they descend deep into the underbelly of the planet's capital city where they uncover a darker story of brain farms, political corruption, and a missing girl who holds a secret about the robots that threatens to change the face of the universe.",
+        "path": "/movies/Mars Express (2023) {tmdb-586810}",
+        "physicalRelease": "2024-05-22T00:00:00Z",
+        "popularity": 3.987,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 7.5,
+            "votes": 15878
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 76,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 100,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 7.5,
+            "votes": 615
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.65889,
+            "votes": 1586
+          }
+        },
+        "releaseDate": "2024-04-30T00:00:00Z",
+        "runtime": 89,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "mars express",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "Gébéka Films",
+        "tags": [
+          1
+        ],
+        "title": "Mars Express",
+        "titleSlug": "586810",
+        "tmdbId": 586810,
+        "website": "https://gkids.com/films/mars-express",
+        "year": 2023,
+        "youTubeTrailerId": "okQT4Sk4e8Q"
+      },
+      {
+        "added": "2026-10-28T06:43:46Z",
+        "alternateTitles": [],
+        "cleanTitle": "thegentlemen",
+        "digitalRelease": "2024-03-07T00:00:00Z",
+        "folderName": "/movies/The Gentlemen () {tmdb-1810044}",
+        "genres": [
+          "Crime",
+          "Drama"
+        ],
+        "hasFile": false,
+        "id": 307,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/b9jxkMWPF4EqgF7xOaDvgP9qrGr.jpg",
+            "url": "/MediaCover/307/poster.jpg?h=c22610b886872b7f1821"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/6vanh60rNEoh49cAZ4OJb8IkXl7.jpg",
+            "url": "/MediaCover/307/fanart.jpg?h=94c54f139465ba02fc6f"
+          }
+        ],
+        "imdbId": "tt13210838",
+        "isAvailable": true,
+        "keywords": [],
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Gentlemen",
+        "overview": "After inheriting his family's country estate, British aristocrat Eddie Horniman discovers that it hides a vast illegal cannabis operation run by the criminal Glass family. As rival gangsters threaten his family and fortune, Eddie must navigate the criminal underworld, where his privileged upbringing may prove just as useful as his military training.",
+        "path": "/movies/The Gentlemen () {tmdb-1810044}",
+        "popularity": 0.479,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 8.1,
+            "votes": 212990
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 0,
+            "votes": 0
+          }
+        },
+        "releaseDate": "2024-03-07T00:00:00Z",
+        "runtime": 841,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "gentlemen",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "",
+        "tags": [
+          1
+        ],
+        "title": "The Gentlemen",
+        "titleSlug": "1810044",
+        "tmdbId": 1810044,
+        "website": "",
+        "year": 2024,
+        "youTubeTrailerId": ""
+      },
+      {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "theholdovers",
+        "digitalRelease": "2023-11-28T00:00:00Z",
+        "folderName": "/movies/The Holdovers (2023)",
+        "genres": [
+          "Drama",
+          "Comedy"
+        ],
+        "hasFile": false,
+        "id": 116,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/VHSzNBTwxV8vh7wylo7O9CLdac.jpg",
+            "url": "/MediaCover/116/poster.jpg?h=df95230171c62dbcf7e4"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/57fhbxl9is7W7ur5v6UuvlNsoSg.jpg",
+            "url": "/MediaCover/116/fanart.jpg?h=92bcd22c192446beef11"
+          }
+        ],
+        "imdbId": "tt14849194",
+        "inCinemas": "2023-10-27T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "1970s",
+          "adoring",
+          "alcoholism",
+          "boarding school",
+          "boston, massachusetts",
+          "boys' boarding school",
+          "christmas",
+          "christmastime",
+          "cook",
+          "grief",
+          "holiday",
+          "loss of son",
+          "melancholy",
+          "mental illness",
+          "misfit",
+          "new england",
+          "peaceful",
+          "teacher student relationship",
+          "troubled youth",
+          "vietnam war",
+          "winter",
+          "winter break"
+        ],
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Holdovers",
+        "overview": "A curmudgeonly instructor at a New England prep school is forced to remain on campus during Christmas break to babysit the handful of students with nowhere to go. Eventually, he forms an unlikely bond with one of them — a damaged, brainy troublemaker — and with the school’s head cook, who has just lost a son in Vietnam.",
+        "path": "/movies/The Holdovers (2023)",
+        "physicalRelease": "2024-01-02T00:00:00Z",
+        "popularity": 7.2706,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 7.9,
+            "votes": 276206
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 82,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 97,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 7.65,
+            "votes": 2774
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.95453,
+            "votes": 12734
+          }
+        },
+        "releaseDate": "2023-11-28T00:00:00Z",
+        "runtime": 133,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "holdovers",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "Miramax",
+        "tags": [
+          1
+        ],
+        "title": "The Holdovers",
+        "titleSlug": "840430",
+        "tmdbId": 840430,
+        "website": "http://focusfeatures.com/the-holdovers",
+        "year": 2023,
+        "youTubeTrailerId": "AhKLpJmHhIg"
+      },
+      {
+        "added": "2026-04-02T05:22:12Z",
+        "alternateTitles": [],
+        "cleanTitle": "themoon",
+        "digitalRelease": "2023-09-28T00:00:00Z",
+        "folderName": "/movies/The Moon (2023) {tmdb-753091}",
+        "genres": [
+          "Drama",
+          "Adventure",
+          "Science Fiction"
+        ],
+        "hasFile": false,
+        "id": 190,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/cQHy5XAxUCBFyoJpZSQAsyON2As.jpg",
+            "url": "/MediaCover/190/poster.jpg?h=2f8c1d63dad0226fcd61"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/pLwIQMNT4s2DbyftxR5LY390Gkc.jpg",
+            "url": "/MediaCover/190/fanart.jpg?h=44f1c039164e475d33ba"
+          }
+        ],
+        "imdbId": "tt27688034",
+        "inCinemas": "2023-08-02T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "astronaut",
+          "duringcreditsstinger",
+          "isolation",
+          "moon",
+          "space",
+          "stranded",
+          "struggle for survival",
+          "survival"
+        ],
+        "lastSearchTime": "2026-04-02T06:08:56Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 21,
+          "name": "Korean"
+        },
+        "originalTitle": "더 문",
+        "overview": "In 2029, Korea's lunar probe Woori embarks on a historic journey to the moon, capturing global attention.",
+        "path": "/movies/The Moon (2023) {tmdb-753091}",
+        "physicalRelease": "2024-01-18T00:00:00Z",
+        "popularity": 3.9434,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 5.8,
+            "votes": 10371
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.5,
+            "votes": 221
+          },
+          "trakt": {
+            "type": "user",
+            "value": 6.2963,
+            "votes": 540
+          }
+        },
+        "releaseDate": "2023-09-28T00:00:00Z",
+        "runtime": 129,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "moon",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "Blaad Studios",
+        "tags": [],
+        "title": "The Moon",
+        "titleSlug": "753091",
+        "tmdbId": 753091,
+        "website": "",
+        "year": 2023,
+        "youTubeTrailerId": "QSz5YWDAvzk"
+      },
+      {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "cleanTitle": "influencer",
+        "collection": {
+          "title": "Influencer Collection",
+          "tmdbId": 1493634
+        },
+        "digitalRelease": "2023-05-18T00:00:00Z",
+        "folderName": "/movies/Influencer (2023)",
+        "genres": [
+          "Horror",
+          "Thriller"
+        ],
+        "hasFile": false,
+        "id": 52,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/mtXV301BF7pqwvRjsWhQo6sD10F.jpg",
+            "url": "/MediaCover/52/poster.jpg?h=3599702bbe66ec4259fa"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/ABuIGbnT6uQtHULIst9DiR7pyG.jpg",
+            "url": "/MediaCover/52/fanart.jpg?h=6e784926e91a69a1fd86"
+          }
+        ],
+        "imdbId": "tt13309170",
+        "inCinemas": "2023-05-18T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "fake identity",
+          "female protagonist",
+          "island",
+          "social media influencer",
+          "stolen identity",
+          "thailand"
+        ],
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "Influencer",
+        "overview": "While struggling on a solo backpacking trip in Thailand, social media influencer Madison meets CW, who travels with ease and shows her a more uninhibited way of living. But CW's interest in her takes a darker turn.",
+        "path": "/movies/Influencer (2023)",
+        "physicalRelease": "2023-09-06T00:00:00Z",
+        "popularity": 1.8939,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.2,
+            "votes": 23523
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 66,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 89,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.236,
+            "votes": 407
+          },
+          "trakt": {
+            "type": "user",
+            "value": 6.28484,
+            "votes": 1313
+          }
+        },
+        "releaseDate": "2023-05-18T00:00:00Z",
+        "runtime": 92,
+        "secondaryYear": 2022,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "influencer",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "Octane Entertainment",
+        "tags": [],
+        "title": "Influencer",
+        "titleSlug": "1020910",
+        "tmdbId": 1020910,
+        "website": "",
+        "year": 2023,
+        "youTubeTrailerId": "max4YbL3idk"
+      },
+      {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "cleanTitle": "candyland",
+        "digitalRelease": "2023-01-06T00:00:00Z",
+        "folderName": "/movies/Candy Land (2023)",
+        "genres": [
+          "Horror",
+          "Thriller"
+        ],
+        "hasFile": false,
+        "id": 19,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/3upBKM4ZFZ1fEEnWrnTZMuyPrzI.jpg",
+            "url": "/MediaCover/19/poster.jpg?h=882ea1d026d05a8fe210"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/obBe7n3FVvHfwK3wP182MrsBbCk.jpg",
+            "url": "/MediaCover/19/fanart.jpg?h=7f6762cf0b2a4b6c8b05"
+          }
+        ],
+        "imdbId": "tt13857556",
+        "inCinemas": "2023-01-06T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "murder",
+          "prostitution",
+          "religious cult",
+          "serial killer",
+          "sex work",
+          "sex workers",
+          "truck stop"
+        ],
+        "lastSearchTime": "2026-03-29T10:50:38Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "Candy Land",
+        "overview": "Remy, a seemingly naive and devout young woman, finds herself cast out from her religious cult. With no place to turn, she immerses herself into the underground world of truck stop sex workers. Under the watchful eye of their matriarch and an enigmatic local lawman, Remy navigates between her strained belief system and the code to find her true calling in life.",
+        "path": "/movies/Candy Land (2023)",
+        "physicalRelease": "2023-08-04T00:00:00Z",
+        "popularity": 3.2328,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 5.3,
+            "votes": 5060
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 70,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 75,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.2,
+            "votes": 189
+          },
+          "trakt": {
+            "type": "user",
+            "value": 5.65551,
+            "votes": 508
+          }
+        },
+        "releaseDate": "2023-01-06T00:00:00Z",
+        "runtime": 93,
+        "secondaryYear": 2022,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "candy land",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "Roxwell Films",
+        "tags": [
+          1
+        ],
+        "title": "Candy Land",
+        "titleSlug": "826753",
+        "tmdbId": 826753,
+        "website": "",
+        "year": 2023,
+        "youTubeTrailerId": "s9iIE9EU4PE"
+      }
+    ],
+    "sortDirection": "descending",
+    "sortKey": "movieMetadata.digitalRelease",
+    "totalRecords": 91
+  },
+  "recordedAt": "2026-11-11T12:12:58Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/wanted/missing?page=1&pageSize=20&sortKey=movieMetadata.digitalRelease&sortDirection=descending"
+  },
+  "status": 200
+}

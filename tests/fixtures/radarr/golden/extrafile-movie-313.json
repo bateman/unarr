@@ -1,0 +1,43 @@
+{
+  "body": [
+    {
+      "extension": ".srt",
+      "id": 195,
+      "languageTags": [],
+      "movieFileId": 0,
+      "movieId": 313,
+      "relativePath": "Legion.en.srt",
+      "type": "subtitle"
+    },
+    {
+      "extension": ".nfo",
+      "id": 10,
+      "movieFileId": 0,
+      "movieId": 313,
+      "relativePath": "Legion.nfo",
+      "type": "other"
+    },
+    {
+      "extension": ".nfo-orig",
+      "id": 12,
+      "movieFileId": 0,
+      "movieId": 313,
+      "relativePath": "Legion.nfo-orig",
+      "type": "other"
+    },
+    {
+      "extension": ".tbn",
+      "id": 11,
+      "movieFileId": 0,
+      "movieId": 313,
+      "relativePath": "Legion.tbn",
+      "type": "other"
+    }
+  ],
+  "recordedAt": "2026-11-11T12:12:52Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/extrafile?movieId=313"
+  },
+  "status": 200
+}

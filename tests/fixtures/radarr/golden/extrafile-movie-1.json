@@ -1,0 +1,19 @@
+{
+  "body": [
+    {
+      "extension": ".srt",
+      "id": 107,
+      "languageTags": [],
+      "movieFileId": 1,
+      "movieId": 1,
+      "relativePath": "Its.Never.Over.Jeff.Buckley.2025.2160p.HMAX.WEB-DL.DD.5.1.H.265-playWEB.it.srt",
+      "type": "subtitle"
+    }
+  ],
+  "recordedAt": "2026-11-11T12:12:52Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/extrafile?movieId=1"
+  },
+  "status": 200
+}

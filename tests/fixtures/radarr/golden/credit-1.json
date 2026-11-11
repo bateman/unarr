@@ -1,0 +1,24 @@
+{
+  "body": {
+    "character": "Self (archive footage)",
+    "creditTmdbId": "689b651b965db5e8f55e3e9b",
+    "id": 1,
+    "images": [
+      {
+        "coverType": "headshot",
+        "remoteUrl": "https://image.tmdb.org/t/p/original/x6e3d61Ua0WREbufK2h089LWoCh.jpg"
+      }
+    ],
+    "movieMetadataId": 1,
+    "order": 0,
+    "personName": "Jeff Buckley",
+    "personTmdbId": 544962,
+    "type": "cast"
+  },
+  "recordedAt": "2026-11-11T12:12:55Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/credit/1"
+  },
+  "status": 200
+}

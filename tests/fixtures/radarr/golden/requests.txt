@@ -1,0 +1,172 @@
+# Requests replayed against the real Radarr to record golden responses, and
+# against Unarr by the contract tests. Format: <name> <METHOD> <path> [body],
+# where body names a JSON file under bodies/ sent as application/json.
+# Names starting with "noauth" are sent without the X-Api-Key header, names
+# starting with "session" with the cookie of a forms login.
+# Requests run in this order on both sides, so a write is visible to the
+# reads that follow it: writes belong at the end, after every read-only
+# golden. Milestone 4a has none.
+
+# system
+system-status GET /api/v3/system/status
+noauth-system-status GET /api/v3/system/status
+apikey-query-system-status GET /api/v3/system/status?apikey=0123456789abcdef0123456789abcdef
+health GET /api/v3/health
+diskspace GET /api/v3/diskspace
+system-task GET /api/v3/system/task
+system-task-1 GET /api/v3/system/task/1
+system-backup GET /api/v3/system/backup
+log GET /api/v3/log?page=1&pageSize=10&sortKey=time&sortDirection=descending
+log-file GET /api/v3/log/file
+log-file-update GET /api/v3/log/file/update
+update GET /api/v3/update
+command GET /api/v3/command
+localization GET /api/v3/localization
+localization-language GET /api/v3/localization/language
+noauth-initialize-json GET /initialize.json
+session-initialize-json GET /initialize.json
+noauth-ping GET /ping
+signalr-negotiate POST /signalr/messages/negotiate?access_token=0123456789abcdef0123456789abcdef
+api-unknown-route GET /api/v3/doesnotexist
+api-root GET /api
+
+# movies
+movie GET /api/v3/movie
+movie-by-tmdb GET /api/v3/movie?tmdbId=945961
+movie-by-tmdb-unknown GET /api/v3/movie?tmdbId=1
+movie-exclude-local-covers GET /api/v3/movie?excludeLocalCovers=true
+movie-language GET /api/v3/movie?tmdbId=945961&language=2
+movie-1 GET /api/v3/movie/1
+movie-3 GET /api/v3/movie/3
+movie-6 GET /api/v3/movie/6
+movie-11 GET /api/v3/movie/11
+movie-125 GET /api/v3/movie/125
+movie-225 GET /api/v3/movie/225
+movie-304 GET /api/v3/movie/304
+movie-404 GET /api/v3/movie/999
+
+# movie files and extras
+moviefile-movie-1 GET /api/v3/moviefile?movieId=1
+moviefile-movie-3 GET /api/v3/moviefile?movieId=3
+moviefile-movie-6 GET /api/v3/moviefile?movieId=6
+moviefile-movie-several GET /api/v3/moviefile?movieId=1&movieId=6&movieId=11
+moviefile-ids GET /api/v3/moviefile?movieFileIds=1&movieFileIds=213
+moviefile-no-filter GET /api/v3/moviefile
+moviefile-1 GET /api/v3/moviefile/1
+moviefile-213 GET /api/v3/moviefile/213
+moviefile-404 GET /api/v3/moviefile/99999
+extrafile-movie-1 GET /api/v3/extrafile?movieId=1
+extrafile-movie-6 GET /api/v3/extrafile?movieId=6
+extrafile-movie-309 GET /api/v3/extrafile?movieId=309
+extrafile-movie-313 GET /api/v3/extrafile?movieId=313
+
+# collections, credits, alternative titles
+collection GET /api/v3/collection
+collection-by-tmdb GET /api/v3/collection?tmdbId=263
+collection-1 GET /api/v3/collection/1
+collection-3 GET /api/v3/collection/3
+collection-404 GET /api/v3/collection/999
+credit-movie-1 GET /api/v3/credit?movieId=1
+credit-movie-11 GET /api/v3/credit?movieId=11
+credit-metadata-1 GET /api/v3/credit?movieMetadataId=1
+credit-1 GET /api/v3/credit/1
+alttitle-movie-1 GET /api/v3/alttitle?movieId=1
+alttitle-movie-11 GET /api/v3/alttitle?movieId=11
+alttitle-metadata-11 GET /api/v3/alttitle?movieMetadataId=11
+alttitle-no-filter GET /api/v3/alttitle
+alttitle-1 GET /api/v3/alttitle/1
+
+# catalogues and profiles
+qualityprofile GET /api/v3/qualityprofile
+qualityprofile-1 GET /api/v3/qualityprofile/1
+qualityprofile-11 GET /api/v3/qualityprofile/11
+qualityprofile-schema GET /api/v3/qualityprofile/schema
+qualitydefinition GET /api/v3/qualitydefinition
+qualitydefinition-1 GET /api/v3/qualitydefinition/1
+qualitydefinition-limits GET /api/v3/qualitydefinition/limits
+customformat GET /api/v3/customformat
+customformat-1 GET /api/v3/customformat/1
+customformat-62 GET /api/v3/customformat/62
+rootfolder GET /api/v3/rootfolder
+rootfolder-1 GET /api/v3/rootfolder/1
+tag GET /api/v3/tag
+tag-detail GET /api/v3/tag/detail
+tag-detail-1 GET /api/v3/tag/detail/1
+tag-1 GET /api/v3/tag/1
+language GET /api/v3/language
+language-1 GET /api/v3/language/1
+delayprofile GET /api/v3/delayprofile
+delayprofile-1 GET /api/v3/delayprofile/1
+releaseprofile GET /api/v3/releaseprofile
+remotepathmapping GET /api/v3/remotepathmapping
+customfilter GET /api/v3/customfilter
+indexerflag GET /api/v3/indexerflag
+autotagging GET /api/v3/autotagging
+
+# config
+config-naming GET /api/v3/config/naming
+config-naming-examples GET /api/v3/config/naming/examples
+config-mediamanagement GET /api/v3/config/mediamanagement
+config-host GET /api/v3/config/host
+config-ui GET /api/v3/config/ui
+config-downloadclient GET /api/v3/config/downloadclient
+config-importlist GET /api/v3/config/importlist
+config-indexer GET /api/v3/config/indexer
+config-metadata GET /api/v3/config/metadata
+
+# activity
+history GET /api/v3/history?page=1&pageSize=20&sortKey=date&sortDirection=descending&includeMovie=true
+history-page-2 GET /api/v3/history?page=2&pageSize=10&sortKey=date&sortDirection=descending
+history-no-sort GET /api/v3/history?page=1&pageSize=5
+history-event-type GET /api/v3/history?page=1&pageSize=10&sortKey=date&sortDirection=descending&eventType=3
+history-movie-ids GET /api/v3/history?page=1&pageSize=10&sortKey=date&sortDirection=ascending&movieIds=4&movieIds=105
+history-by-title GET /api/v3/history?page=1&pageSize=10&sortKey=movieMetadata.sortTitle&sortDirection=ascending
+history-movie-4 GET /api/v3/history/movie?movieId=4
+history-movie-105-grabbed GET /api/v3/history/movie?movieId=105&eventType=1&includeMovie=true
+history-since GET /api/v3/history/since?date=2020-01-01T00:00:00Z&includeMovie=true
+history-since-recent GET /api/v3/history/since?date=2026-10-01T00:00:00Z&eventType=3
+queue GET /api/v3/queue?page=1&pageSize=20&includeUnknownMovieItems=true&includeMovie=true
+queue-status GET /api/v3/queue/status
+queue-details GET /api/v3/queue/details?includeMovie=true
+blocklist GET /api/v3/blocklist?page=1&pageSize=20&sortKey=date&sortDirection=descending
+blocklist-page-2 GET /api/v3/blocklist?page=2&pageSize=50&sortKey=sourceTitle&sortDirection=ascending
+blocklist-by-title GET /api/v3/blocklist?page=1&pageSize=10&sortKey=movieMetadata.sortTitle&sortDirection=ascending
+blocklist-movie GET /api/v3/blocklist/movie?movieId=4
+calendar GET /api/v3/calendar?start=2026-10-01T00:00:00Z&end=2026-10-31T00:00:00Z&unmonitored=true
+calendar-monitored GET /api/v3/calendar?start=2026-09-01T00:00:00Z&end=2026-09-30T00:00:00Z
+calendar-next GET /api/v3/calendar?start=2026-11-01T00:00:00Z&end=2026-12-31T00:00:00Z&unmonitored=true
+calendar-past GET /api/v3/calendar?start=2025-01-01T00:00:00Z&end=2025-12-31T00:00:00Z&unmonitored=true
+calendar-tags GET /api/v3/calendar?start=2026-06-01T00:00:00Z&end=2026-12-31T00:00:00Z&unmonitored=true&tags=1
+calendar-empty GET /api/v3/calendar?start=2030-01-01T00:00:00Z&end=2030-01-07T00:00:00Z
+calendar-no-range GET /api/v3/calendar
+wanted-missing GET /api/v3/wanted/missing?page=1&pageSize=20&sortKey=movieMetadata.sortTitle&sortDirection=ascending
+wanted-missing-by-date GET /api/v3/wanted/missing?page=1&pageSize=20&sortKey=movieMetadata.digitalRelease&sortDirection=descending
+wanted-missing-unmonitored GET /api/v3/wanted/missing?page=1&pageSize=5&sortKey=movieMetadata.sortTitle&sortDirection=ascending&monitored=false
+wanted-missing-no-sort GET /api/v3/wanted/missing?page=2&pageSize=5
+wanted-cutoff GET /api/v3/wanted/cutoff?page=1&pageSize=20&sortKey=movieMetadata.sortTitle&sortDirection=ascending
+wanted-cutoff-unmonitored GET /api/v3/wanted/cutoff?page=1&pageSize=5&sortKey=movieMetadata.year&sortDirection=descending&monitored=false
+
+# providers
+indexer GET /api/v3/indexer
+indexer-1 GET /api/v3/indexer/1
+indexer-7 GET /api/v3/indexer/7
+indexer-404 GET /api/v3/indexer/999
+downloadclient GET /api/v3/downloadclient
+downloadclient-1 GET /api/v3/downloadclient/1
+notification GET /api/v3/notification
+notification-3 GET /api/v3/notification/3
+importlist GET /api/v3/importlist
+importlist-1 GET /api/v3/importlist/1
+metadata GET /api/v3/metadata
+metadata-1 GET /api/v3/metadata/1
+exclusions GET /api/v3/exclusions
+exclusions-paged GET /api/v3/exclusions/paged?page=1&pageSize=10&sortKey=movieTitle&sortDirection=ascending
+exclusions-1 GET /api/v3/exclusions/1
+importlistexclusion GET /api/v3/importlistexclusion
+
+# the calendar feed
+feed-calendar GET /feed/v3/calendar/Radarr.ics?apikey=0123456789abcdef0123456789abcdef
+feed-calendar-lowercase GET /feed/v3/calendar/radarr.ics?apikey=0123456789abcdef0123456789abcdef&pastDays=30&futureDays=60
+feed-calendar-unmonitored GET /feed/v3/calendar/Radarr.ics?apikey=0123456789abcdef0123456789abcdef&unmonitored=true&pastDays=60&futureDays=60
+feed-calendar-tags GET /feed/v3/calendar/Radarr.ics?apikey=0123456789abcdef0123456789abcdef&unmonitored=true&pastDays=200&futureDays=60&tags=1
+noauth-feed-calendar GET /feed/v3/calendar/Radarr.ics

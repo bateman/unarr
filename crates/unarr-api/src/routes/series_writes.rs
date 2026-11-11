@@ -44,7 +44,7 @@ fn proxied() -> &'static Mutex<HashMap<String, (String, std::time::Instant)>> {
 const PROXY_TTL: std::time::Duration = std::time::Duration::from_secs(24 * 3600);
 
 /// `RegisterUrl`: the proxy URL of a remote image, remembered.
-fn register_proxy(url_base: &str, remote: &str) -> String {
+pub(crate) fn register_proxy(url_base: &str, remote: &str) -> String {
     let url = unarr_core::tv::covers::proxy_url(url_base, remote);
     let hash = url.rsplit('/').nth(1).unwrap_or("").to_string();
     let mut cache = proxied().lock().unwrap();
@@ -67,10 +67,16 @@ pub async fn media_cover_proxy(
     let Some(remote) = remote else {
         return ApiError::Internal(anyhow::anyhow!("Url no longer in cache")).into_response();
     };
-    let Ok(runtime) = state.commands() else {
-        return StatusCode::SERVICE_UNAVAILABLE.into_response();
+    // Through the command runtime's client where there is one; a
+    // personality without a runtime fetches with its own.
+    let augment = match state.commands() {
+        Ok(runtime) => runtime.augment_client(),
+        Err(_) => unarr_core::metadata::augment::Augment::new(
+            state.http().client.clone(),
+            state.metadata_upstreams(),
+        ),
     };
-    match runtime.augment_client().download(&remote).await {
+    match augment.download(&remote).await {
         Ok(bytes) => {
             let content_type = if remote.to_ascii_lowercase().ends_with(".png") {
                 "image/png"

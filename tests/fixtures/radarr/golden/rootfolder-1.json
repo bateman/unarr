@@ -1,0 +1,15 @@
+{
+  "body": {
+    "accessible": true,
+    "freeSpace": 22116589568,
+    "id": 1,
+    "path": "/movies",
+    "unmappedFolders": []
+  },
+  "recordedAt": "2026-11-11T12:12:55Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/rootfolder/1"
+  },
+  "status": 200
+}

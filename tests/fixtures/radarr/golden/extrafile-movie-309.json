@@ -1,0 +1,59 @@
+{
+  "body": [
+    {
+      "extension": ".srt",
+      "id": 200,
+      "languageTags": [],
+      "movieFileId": 372,
+      "movieId": 309,
+      "relativePath": "Alta tensione.it.srt",
+      "type": "subtitle"
+    },
+    {
+      "extension": ".jpg",
+      "id": 4916,
+      "movieFileId": 372,
+      "movieId": 309,
+      "relativePath": "fanart.jpg",
+      "type": "metadata"
+    },
+    {
+      "extension": ".jpg",
+      "id": 4914,
+      "movieFileId": 372,
+      "movieId": 309,
+      "relativePath": "poster.jpg",
+      "type": "metadata"
+    },
+    {
+      "extension": ".jpg",
+      "id": 4915,
+      "movieFileId": 372,
+      "movieId": 309,
+      "relativePath": "poster.jpg",
+      "type": "metadata"
+    },
+    {
+      "extension": ".URL",
+      "id": 6,
+      "movieFileId": 0,
+      "movieId": 309,
+      "relativePath": "Alta tensione - IMDb.URL",
+      "type": "other"
+    },
+    {
+      "extension": ".nfo",
+      "id": 5,
+      "movieFileId": 0,
+      "movieId": 309,
+      "relativePath": "Alta tensione.nfo",
+      "type": "other"
+    }
+  ],
+  "recordedAt": "2026-11-11T12:12:52Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/extrafile?movieId=309"
+  },
+  "status": 200
+}

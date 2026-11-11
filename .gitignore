@@ -9,3 +9,5 @@
 !/crates/unarr-api/ui/sonarr/.gitkeep
 __pycache__/
 /scratchpad
+/crates/unarr-api/ui/radarr/*
+!/crates/unarr-api/ui/radarr/.gitkeep

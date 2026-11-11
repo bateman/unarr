@@ -1,0 +1,38 @@
+{
+  "body": [
+    {
+      "bypassIfAboveCustomFormatScore": false,
+      "bypassIfHighestQuality": true,
+      "enableTorrent": true,
+      "enableUsenet": true,
+      "id": 1,
+      "minimumCustomFormatScore": 0,
+      "order": 2147483647,
+      "preferredProtocol": "usenet",
+      "tags": [],
+      "torrentDelay": 0,
+      "usenetDelay": 0
+    },
+    {
+      "bypassIfAboveCustomFormatScore": false,
+      "bypassIfHighestQuality": false,
+      "enableTorrent": false,
+      "enableUsenet": true,
+      "id": 2,
+      "minimumCustomFormatScore": 0,
+      "order": 1,
+      "preferredProtocol": "usenet",
+      "tags": [
+        3
+      ],
+      "torrentDelay": 0,
+      "usenetDelay": 0
+    }
+  ],
+  "recordedAt": "2026-11-11T12:12:55Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/delayprofile"
+  },
+  "status": 200
+}

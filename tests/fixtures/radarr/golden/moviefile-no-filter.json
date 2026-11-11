@@ -1,0 +1,12 @@
+{
+  "body": {
+    "content": "movieId or movieFileIds must be provided",
+    "message": "BadRequest: movieId or movieFileIds must be provided"
+  },
+  "recordedAt": "2026-11-11T12:12:52Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/moviefile"
+  },
+  "status": 400
+}

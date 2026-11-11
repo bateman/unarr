@@ -1,0 +1,2059 @@
+{
+  "body": [
+    {
+      "added": "2026-07-19T21:57:27Z",
+      "alternateTitles": [
+        {
+          "id": 2072,
+          "movieMetadataId": 381,
+          "sourceType": "tmdb",
+          "title": "湖浦港"
+        },
+        {
+          "id": 2083,
+          "movieMetadataId": 381,
+          "sourceType": "tmdb",
+          "title": "โฮป"
+        },
+        {
+          "id": 2311,
+          "movieMetadataId": 381,
+          "sourceType": "tmdb",
+          "title": "Hope: El primer impacto"
+        },
+        {
+          "id": 2346,
+          "movieMetadataId": 381,
+          "sourceType": "tmdb",
+          "title": "Witajcie w Hope"
+        },
+        {
+          "id": 2382,
+          "movieMetadataId": 381,
+          "sourceType": "tmdb",
+          "title": "ចម្បាំងបង្ហូរឈាមអវសានលោក"
+        },
+        {
+          "id": 2386,
+          "movieMetadataId": 381,
+          "sourceType": "tmdb",
+          "title": "הופ"
+        },
+        {
+          "id": 2388,
+          "movieMetadataId": 381,
+          "sourceType": "tmdb",
+          "title": "Espoir"
+        },
+        {
+          "id": 2545,
+          "movieMetadataId": 381,
+          "sourceType": "tmdb",
+          "title": "Hopeu"
+        },
+        {
+          "id": 2550,
+          "movieMetadataId": 381,
+          "sourceType": "tmdb",
+          "title": "希望"
+        },
+        {
+          "id": 2560,
+          "movieMetadataId": 381,
+          "sourceType": "tmdb",
+          "title": "Lootuse sadam"
+        },
+        {
+          "id": 2566,
+          "movieMetadataId": 381,
+          "sourceType": "tmdb",
+          "title": "Upanje"
+        }
+      ],
+      "certification": "R",
+      "cleanTitle": "hope",
+      "digitalRelease": "2026-10-13T00:00:00Z",
+      "folderName": "/movies/Hope (2026) {tmdb-1058424}",
+      "genres": [
+        "Science Fiction",
+        "Mystery",
+        "Action"
+      ],
+      "hasFile": false,
+      "id": 246,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/6VY1ZKgpsc8CfGsQcCGiYEgHdH0.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/j96rurZqmBjyY37Fncl3IB0qJNe.jpg"
+        }
+      ],
+      "imdbId": "tt27369017",
+      "inCinemas": "2026-07-15T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "20th century",
+        "aliens",
+        "chasing",
+        "dinosaurs",
+        "duringcreditsstinger",
+        "fight for survival",
+        "horror",
+        "horse",
+        "hunted",
+        "police officer",
+        "police shootout",
+        "remote village",
+        "shootout",
+        "supernatural",
+        "unknown entity"
+      ],
+      "lastSearchTime": "2026-10-13T09:51:48Z",
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 21,
+        "name": "Korean"
+      },
+      "originalTitle": "호프",
+      "overview": "In the remote South Korean village of Hope Harbor, police chief Bum-seok and officer Sung-ae are called to investigate a mysterious creature wreaking havoc on the community. But all is not as it seems, and perceptions can be misleading. What begins as ignorance plants the seed of disaster, escalating through human conflict into a tragedy of cosmic proportions.",
+      "path": "/movies/Hope (2026) {tmdb-1058424}",
+      "physicalRelease": "2026-12-09T00:00:00Z",
+      "popularity": 396.0525,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 6.6,
+          "votes": 29523
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 66,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 6.688,
+          "votes": 544
+        },
+        "trakt": {
+          "type": "user",
+          "value": 1,
+          "votes": 2
+        }
+      },
+      "releaseDate": "2026-10-13T00:00:00Z",
+      "runtime": 157,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 0,
+      "sortTitle": "hope",
+      "statistics": {
+        "movieFileCount": 0,
+        "movieFileQualities": [],
+        "releaseGroups": [],
+        "sizeOnDisk": 0
+      },
+      "status": "released",
+      "studio": "Forged Films",
+      "tags": [
+        1
+      ],
+      "title": "Hope",
+      "titleSlug": "1058424",
+      "tmdbId": 1058424,
+      "website": "https://www.neonrated.com/film/hope",
+      "year": 2026,
+      "youTubeTrailerId": "OFaJzL83y0Q"
+    },
+    {
+      "added": "2026-03-07T09:12:06Z",
+      "alternateTitles": [
+        {
+          "id": 976,
+          "movieMetadataId": 125,
+          "sourceType": "tmdb",
+          "title": "האודיסיאה"
+        },
+        {
+          "id": 2036,
+          "movieMetadataId": 125,
+          "sourceType": "tmdb",
+          "title": "Odysseen"
+        },
+        {
+          "id": 2041,
+          "movieMetadataId": 125,
+          "sourceType": "tmdb",
+          "title": "奧德賽"
+        },
+        {
+          "id": 2053,
+          "movieMetadataId": 125,
+          "sourceType": "tmdb",
+          "title": "Οδύσσεια"
+        },
+        {
+          "id": 2057,
+          "movieMetadataId": 125,
+          "sourceType": "tmdb",
+          "title": "دی اوڈیسی"
+        },
+        {
+          "id": 2058,
+          "movieMetadataId": 125,
+          "sourceType": "tmdb",
+          "title": "ادیسه"
+        },
+        {
+          "id": 2060,
+          "movieMetadataId": 125,
+          "sourceType": "tmdb",
+          "title": "দ্য অডিচি"
+        },
+        {
+          "id": 2061,
+          "movieMetadataId": 125,
+          "sourceType": "tmdb",
+          "title": "দ্য ওডিসি"
+        },
+        {
+          "id": 2080,
+          "movieMetadataId": 125,
+          "sourceType": "tmdb",
+          "title": "Адысея"
+        },
+        {
+          "id": 2118,
+          "movieMetadataId": 125,
+          "sourceType": "tmdb",
+          "title": "Odisseya"
+        },
+        {
+          "id": 2447,
+          "movieMetadataId": 125,
+          "sourceType": "tmdb",
+          "title": "Odisėja"
+        },
+        {
+          "id": 2780,
+          "movieMetadataId": 125,
+          "sourceType": "tmdb",
+          "title": "L'Odyssée"
+        },
+        {
+          "id": 2782,
+          "movieMetadataId": 125,
+          "sourceType": "tmdb",
+          "title": "La Odisea"
+        }
+      ],
+      "certification": "R",
+      "cleanTitle": "theodyssey",
+      "digitalRelease": "2026-11-17T00:00:00Z",
+      "folderName": "/movies/The Odyssey (2026)",
+      "genres": [
+        "Adventure",
+        "Action",
+        "Fantasy"
+      ],
+      "hasFile": false,
+      "id": 125,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/krVa7rKCQb4OBfsr2LTJv4rTz5q.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/twiVn9oFXOVR0uoYgawyEBlnFu8.jpg"
+        }
+      ],
+      "imdbId": "tt33764258",
+      "inCinemas": "2026-07-15T00:00:00Z",
+      "isAvailable": false,
+      "keywords": [
+        "ancient",
+        "ancient world",
+        "based on song, poem or rhyme",
+        "bronze age",
+        "epic fantasy",
+        "greek history",
+        "greek mythology",
+        "historical fiction",
+        "mediterranean sea",
+        "mythical",
+        "odyssey",
+        "peplum",
+        "period drama",
+        "ship",
+        "sword and sandal",
+        "trojan horse",
+        "trojan war",
+        "voyage"
+      ],
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "The Odyssey",
+      "overview": "Odysseus, the legendary King of Ithaca, embarks on a long and perilous journey home following the Trojan War. Throughout his voyage, he is forced to confront the whims of gods, mythological monsters, and trials that stretch both his cunning and his humanity to the breaking point.",
+      "path": "/movies/The Odyssey (2026)",
+      "physicalRelease": "2026-11-17T00:00:00Z",
+      "popularity": 443.4768,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 8.4,
+          "votes": 551533
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 88,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 8.019,
+          "votes": 4612
+        },
+        "trakt": {
+          "type": "user",
+          "value": 5.75,
+          "votes": 116
+        }
+      },
+      "releaseDate": "2026-11-17T00:00:00Z",
+      "runtime": 173,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 0,
+      "sortTitle": "odyssey",
+      "statistics": {
+        "movieFileCount": 0,
+        "movieFileQualities": [],
+        "releaseGroups": [],
+        "sizeOnDisk": 0
+      },
+      "status": "inCinemas",
+      "studio": "Universal Pictures",
+      "tags": [],
+      "title": "The Odyssey",
+      "titleSlug": "1368337",
+      "tmdbId": 1368337,
+      "website": "https://www.universalpictures.com/movies/the-odyssey",
+      "year": 2026,
+      "youTubeTrailerId": "AyIZ9tiiN8I"
+    },
+    {
+      "added": "2026-07-14T21:35:25Z",
+      "alternateTitles": [
+        {
+          "id": 2030,
+          "movieMetadataId": 373,
+          "sourceType": "tmdb",
+          "title": "A Bad Day at Camp Tivoli"
+        },
+        {
+          "id": 2181,
+          "movieMetadataId": 373,
+          "sourceType": "tmdb",
+          "title": "Sex a smrt v kempu Miasma"
+        },
+        {
+          "id": 2255,
+          "movieMetadataId": 373,
+          "sourceType": "tmdb",
+          "title": "Sexe et mort chez les ados au Camp Miasma"
+        },
+        {
+          "id": 2383,
+          "movieMetadataId": 373,
+          "sourceType": "tmdb",
+          "title": "มิอัสมา ค่ายสยองของสองเรา"
+        },
+        {
+          "id": 2424,
+          "movieMetadataId": 373,
+          "sourceType": "tmdb",
+          "title": "Dục vọng tuổi mới lớn và Cái chết ở Trại Miasma"
+        },
+        {
+          "id": 2563,
+          "movieMetadataId": 373,
+          "sourceType": "tmdb",
+          "title": "瘴气营地的青春与死亡"
+        }
+      ],
+      "certification": "R",
+      "cleanTitle": "teenagesexdeathatcampmiasma",
+      "digitalRelease": "2026-09-18T00:00:00Z",
+      "folderName": "/movies/Teenage Sex and Death at Camp Miasma (2026) {tmdb-1240889}",
+      "genres": [
+        "Comedy",
+        "Horror",
+        "Romance"
+      ],
+      "hasFile": true,
+      "id": 244,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/jcGvB76v8p1sqYXXkBetWASV0uM.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/c3N1tHx6cKmhbv7Gt8M4cwHWPUZ.jpg"
+        }
+      ],
+      "imdbId": "tt35298123",
+      "inCinemas": "2026-08-06T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "absurd",
+        "actress",
+        "aftercreditsstinger",
+        "baffled",
+        "camp",
+        "camp counselor",
+        "casting",
+        "distorted reality",
+        "filmmaker",
+        "final girl",
+        "independent film",
+        "lesbian relationship",
+        "lgbt",
+        "loss of virginity",
+        "marijuana",
+        "meta",
+        "nonbinary director",
+        "older woman younger woman relationship",
+        "polyamory",
+        "provocative",
+        "psychosexual",
+        "recluse",
+        "remake",
+        "satire",
+        "serial killer",
+        "sexuality",
+        "slasher",
+        "talent agent",
+        "topless women",
+        "transgender",
+        "transphobia",
+        "trauma",
+        "zoom call"
+      ],
+      "minimumAvailability": "released",
+      "monitored": false,
+      "movieFile": {
+        "customFormatScore": 2000,
+        "customFormats": [
+          {
+            "id": 53,
+            "name": "AAC"
+          },
+          {
+            "id": 57,
+            "name": "MULTi"
+          },
+          {
+            "id": 18,
+            "name": "x265 (HD)"
+          },
+          {
+            "id": 56,
+            "name": "x265 (no HDR/DV)"
+          }
+        ],
+        "dateAdded": "2026-09-23T11:22:41Z",
+        "edition": "",
+        "id": 342,
+        "indexerFlags": 1,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 129164,
+          "audioChannels": 2,
+          "audioCodec": "AAC",
+          "audioLanguages": "ita/eng",
+          "audioStreamCount": 2,
+          "resolution": "1920x1036",
+          "runTime": "1:52:26",
+          "scanType": "Progressive",
+          "subtitles": "ger/eng/spa/spa/fre/ita/ita/dut/por/tur",
+          "videoBitDepth": 10,
+          "videoBitrate": 2106664,
+          "videoCodec": "x265",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 24
+        },
+        "movieId": 244,
+        "originalFilePath": "Teenage.Sex.and.Death.at.Camp.Miasma.2026.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R.mkv",
+        "path": "/movies/Teenage Sex and Death at Camp Miasma (2026) {tmdb-1240889}/Teenage Sex and Death at Camp Miasma (2026) {tmdb-1240889} - [MULTi][WEBRip-1080p][AAC 2.0][x265]-V3SP4EV3R.mkv",
+        "quality": {
+          "quality": {
+            "id": 15,
+            "modifier": "none",
+            "name": "WEBRip-1080p",
+            "resolution": 1080,
+            "source": "webrip"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Teenage Sex and Death at Camp Miasma (2026) {tmdb-1240889} - [MULTi][WEBRip-1080p][AAC 2.0][x265]-V3SP4EV3R.mkv",
+        "releaseGroup": "V3SP4EV3R",
+        "sceneName": "Teenage.Sex.and.Death.at.Camp.Miasma.2026.1080p.ITA-ENG.MULTI.WEBRip.x265.AAC-V3SP4EV3R",
+        "size": 1997237997
+      },
+      "movieFileId": 342,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Teenage Sex and Death at Camp Miasma",
+      "overview": "An ambitious director sets out to revive a faded slasher franchise, but her meeting with the film’s reclusive original star spirals into a terrifying maze of obsession, fear, and blood-soaked delusion.",
+      "path": "/movies/Teenage Sex and Death at Camp Miasma (2026) {tmdb-1240889}",
+      "physicalRelease": "2026-12-14T00:00:00Z",
+      "popularity": 15.3417,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 6.4,
+          "votes": 26754
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 89,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 6.101,
+          "votes": 393
+        }
+      },
+      "releaseDate": "2026-09-18T00:00:00Z",
+      "runtime": 112,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 1997237997,
+      "sortTitle": "teenage sex and death at camp miasma",
+      "statistics": {
+        "movieFileCount": 1,
+        "movieFileQualities": [
+          {
+            "id": 15,
+            "modifier": "none",
+            "name": "WEBRip-1080p",
+            "resolution": 1080,
+            "source": "webrip"
+          }
+        ],
+        "releaseGroups": [
+          "V3SP4EV3R"
+        ],
+        "sizeOnDisk": 1997237997
+      },
+      "status": "released",
+      "studio": "MUBI",
+      "tags": [
+        1
+      ],
+      "title": "Teenage Sex and Death at Camp Miasma",
+      "titleSlug": "1240889",
+      "tmdbId": 1240889,
+      "website": "https://mubi.com/en/campmiasma",
+      "year": 2026,
+      "youTubeTrailerId": "j9TsiTgYZGw"
+    },
+    {
+      "added": "2026-11-10T19:52:02Z",
+      "alternateTitles": [
+        {
+          "id": 2787,
+          "movieMetadataId": 517,
+          "sourceType": "tmdb",
+          "title": "Código: Venganza"
+        },
+        {
+          "id": 2788,
+          "movieMetadataId": 517,
+          "sourceType": "tmdb",
+          "title": "คนระห่ำห้ามรอด"
+        },
+        {
+          "id": 2789,
+          "movieMetadataId": 517,
+          "sourceType": "tmdb",
+          "title": "El Motin"
+        },
+        {
+          "id": 2790,
+          "movieMetadataId": 517,
+          "sourceType": "tmdb",
+          "title": "Mutinerie"
+        }
+      ],
+      "certification": "R",
+      "cleanTitle": "mutiny",
+      "digitalRelease": "2026-09-08T00:00:00Z",
+      "folderName": "/movies/Mutiny (2026) {tmdb-1288445}",
+      "genres": [
+        "Action",
+        "Thriller"
+      ],
+      "hasFile": true,
+      "id": 326,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/pu2VxGlpGwffOx292w18b1tv96j.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/qDa0fqDqIBCovRp975RvtGPcuN3.jpg"
+        }
+      ],
+      "imdbId": "tt32338669",
+      "inCinemas": "2026-08-19T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "cargo ship",
+        "conspiracy",
+        "framed for murder",
+        "one man army",
+        "revenge"
+      ],
+      "lastSearchTime": "2026-11-10T19:52:32Z",
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 50,
+            "name": "DD+"
+          },
+          {
+            "id": 61,
+            "name": "Line/Mic Dubbed"
+          },
+          {
+            "id": 18,
+            "name": "x265 (HD)"
+          },
+          {
+            "id": 56,
+            "name": "x265 (no HDR/DV)"
+          }
+        ],
+        "dateAdded": "2026-11-10T20:07:33Z",
+        "edition": "",
+        "id": 402,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 320000,
+          "audioChannels": 2,
+          "audioCodec": "MP3",
+          "audioLanguages": "ita/eng",
+          "audioStreamCount": 2,
+          "resolution": "1920x960",
+          "runTime": "1:35:03",
+          "scanType": "Progressive",
+          "subtitles": "eng",
+          "videoBitDepth": 10,
+          "videoBitrate": 2467456,
+          "videoCodec": "x265",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "movieId": 326,
+        "originalFilePath": "Mutiny Inverti la rotta (2026) 1080p x265 ita eng sub eng MD eac3 - Faccio.mkv",
+        "path": "/movies/Mutiny (2026) {tmdb-1288445}/Mutiny (2026) {tmdb-1288445} - [WEBDL-1080p][MP3 2.0][x265].mkv",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "modifier": "none",
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "webdl"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Mutiny (2026) {tmdb-1288445} - [WEBDL-1080p][MP3 2.0][x265].mkv",
+        "sceneName": "Mutiny Inverti la rotta (2026) 1080p x265 ita eng sub eng MD eac3 - Faccio",
+        "size": 2262743736
+      },
+      "movieFileId": 402,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Mutiny",
+      "overview": "After witnessing his billionaire boss' murder and being framed for the crime, Cole Reed boards a cargo ship on a one-man crusade to avenge his boss' death only to discover an international conspiracy.",
+      "path": "/movies/Mutiny (2026) {tmdb-1288445}",
+      "physicalRelease": "2026-12-11T00:00:00Z",
+      "popularity": 79.2795,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 5.7,
+          "votes": 25591
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 52,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 7.628,
+          "votes": 1049
+        }
+      },
+      "releaseDate": "2026-09-08T00:00:00Z",
+      "runtime": 96,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 2262743736,
+      "sortTitle": "mutiny",
+      "statistics": {
+        "movieFileCount": 1,
+        "movieFileQualities": [
+          {
+            "id": 3,
+            "modifier": "none",
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "webdl"
+          }
+        ],
+        "releaseGroups": [],
+        "sizeOnDisk": 2262743736
+      },
+      "status": "released",
+      "studio": "Punch Palace Productions",
+      "tags": [
+        1
+      ],
+      "title": "Mutiny",
+      "titleSlug": "1288445",
+      "tmdbId": 1288445,
+      "website": "https://www.mutiny.movie",
+      "year": 2026,
+      "youTubeTrailerId": "2Iqvbe98Gb4"
+    },
+    {
+      "added": "2026-03-19T18:33:28Z",
+      "alternateTitles": [
+        {
+          "id": 1519,
+          "movieMetadataId": 294,
+          "sourceType": "tmdb",
+          "title": "Vzhlížet ke hvězdám"
+        },
+        {
+          "id": 1541,
+          "movieMetadataId": 294,
+          "sourceType": "tmdb",
+          "title": "La Constellation du chien"
+        },
+        {
+          "id": 1588,
+          "movieMetadataId": 294,
+          "sourceType": "tmdb",
+          "title": "La guerra de los últimos"
+        },
+        {
+          "id": 1826,
+          "movieMetadataId": 294,
+          "sourceType": "tmdb",
+          "title": "Köpek ve Yıldızlar"
+        },
+        {
+          "id": 2290,
+          "movieMetadataId": 294,
+          "sourceType": "tmdb",
+          "title": "Na Companhia das Estrelas"
+        },
+        {
+          "id": 2320,
+          "movieMetadataId": 294,
+          "sourceType": "tmdb",
+          "title": "Собачьи звезды"
+        },
+        {
+          "id": 2321,
+          "movieMetadataId": 294,
+          "sourceType": "tmdb",
+          "title": "La Constelación del Perro"
+        },
+        {
+          "id": 2342,
+          "movieMetadataId": 294,
+          "sourceType": "tmdb",
+          "title": "เดอะ ด็อก สตารส์"
+        },
+        {
+          "id": 2385,
+          "movieMetadataId": 294,
+          "sourceType": "tmdb",
+          "title": "Gwiazdozbiór psa"
+        },
+        {
+          "id": 2571,
+          "movieMetadataId": 294,
+          "sourceType": "tmdb",
+          "title": "Das Ende der Sterne"
+        },
+        {
+          "id": 2572,
+          "movieMetadataId": 294,
+          "sourceType": "tmdb",
+          "title": "Ponto Sem Retorno"
+        }
+      ],
+      "certification": "R",
+      "cleanTitle": "thedogstars",
+      "digitalRelease": "2026-10-27T00:00:00Z",
+      "folderName": "/movies/The Dog Stars (2026) {tmdb-1384216}",
+      "genres": [
+        "Action",
+        "Thriller",
+        "Science Fiction"
+      ],
+      "hasFile": true,
+      "id": 183,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/5O616X9vmRzQdB68PHzBewPittd.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/3k7GzxOdLZkN3eZsuhLi2eRzkXO.jpg"
+        }
+      ],
+      "imdbId": "tt21285562",
+      "inCinemas": "2026-08-26T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "based on novel or book",
+        "colorado",
+        "death of wife",
+        "denver, colorado",
+        "depressing",
+        "derisive",
+        "detached",
+        "dogs",
+        "dystopia",
+        "grief",
+        "group",
+        "joyful",
+        "lonely man",
+        "loving",
+        "pandemic",
+        "pilot",
+        "post-apocalyptic",
+        "scavengers",
+        "wonder"
+      ],
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFile": {
+        "customFormatScore": -8000,
+        "customFormats": [
+          {
+            "id": 50,
+            "name": "DD+"
+          },
+          {
+            "id": 58,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 57,
+            "name": "MULTi"
+          }
+        ],
+        "dateAdded": "2026-10-28T17:14:25Z",
+        "edition": "",
+        "id": 369,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 2,
+            "name": "French"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 640000,
+          "audioChannels": 7.1,
+          "audioCodec": "EAC3",
+          "audioLanguages": "fre/eng",
+          "audioStreamCount": 2,
+          "resolution": "1920x798",
+          "runTime": "1:58:20",
+          "scanType": "Progressive",
+          "subtitles": "fre/fre",
+          "videoBitDepth": 8,
+          "videoBitrate": 6624742,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 24
+        },
+        "movieId": 183,
+        "originalFilePath": "The.Dog.Stars.2026.MULTI.1080p.WEB.H264-LOST/The.Dog.Stars.2026.MULTI.1080p.WEB.H264-LOST.mkv",
+        "path": "/movies/The Dog Stars (2026) {tmdb-1384216}/The Dog Stars (2026) {tmdb-1384216} - [MULTi][WEBDL-1080p][EAC3 7.1][h264]-LOST.mkv",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "modifier": "none",
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "webdl"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "The Dog Stars (2026) {tmdb-1384216} - [MULTi][WEBDL-1080p][EAC3 7.1][h264]-LOST.mkv",
+        "releaseGroup": "LOST",
+        "sceneName": "The.Dog.Stars.2026.MULTI.1080p.WEB.H264-LOST",
+        "size": 7131544465
+      },
+      "movieFileId": 369,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "The Dog Stars",
+      "overview": "After the world's population has been ravaged by a pandemic, a man lives a lonesome existence in a Colorado airplane hangar with his dog and a dour gunman he has befriended. When a mysterious transmission comes through on the radio while he’s flying his old Cessna, it sparks a hunt for the provenance of the sound.",
+      "path": "/movies/The Dog Stars (2026) {tmdb-1384216}",
+      "physicalRelease": "2026-12-01T00:00:00Z",
+      "popularity": 74.4521,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 6.3,
+          "votes": 27791
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 49,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 7.197,
+          "votes": 931
+        }
+      },
+      "releaseDate": "2026-10-27T00:00:00Z",
+      "runtime": 119,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 7131544465,
+      "sortTitle": "dog stars",
+      "statistics": {
+        "movieFileCount": 1,
+        "movieFileQualities": [
+          {
+            "id": 3,
+            "modifier": "none",
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "webdl"
+          }
+        ],
+        "releaseGroups": [
+          "LOST"
+        ],
+        "sizeOnDisk": 7131544465
+      },
+      "status": "released",
+      "studio": "20th Century Studios",
+      "tags": [
+        1
+      ],
+      "title": "The Dog Stars",
+      "titleSlug": "1384216",
+      "tmdbId": 1384216,
+      "website": "https://www.20thcenturystudios.com/movies/the-dog-stars",
+      "year": 2026,
+      "youTubeTrailerId": "-xSxaE1ClEE"
+    },
+    {
+      "added": "2026-09-18T18:39:51Z",
+      "alternateTitles": [
+        {
+          "id": 2394,
+          "movieMetadataId": 445,
+          "sourceType": "tmdb",
+          "title": "Бадді"
+        },
+        {
+          "id": 2426,
+          "movieMetadataId": 445,
+          "sourceType": "tmdb",
+          "title": "Buddy: The Sing-Along Version"
+        },
+        {
+          "id": 2552,
+          "movieMetadataId": 445,
+          "sourceType": "tmdb",
+          "title": "Бадди"
+        }
+      ],
+      "certification": "R",
+      "cleanTitle": "buddy",
+      "digitalRelease": "2026-10-13T00:00:00Z",
+      "folderName": "/movies/Buddy (2026) {tmdb-1514026}",
+      "genres": [
+        "Horror",
+        "Comedy",
+        "Fantasy"
+      ],
+      "hasFile": true,
+      "id": 285,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/1BdZbNvl1SfrrX8J9X5tQzN6Ivu.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/sMmG82PtjK8A9rVc34gwKQtCm3A.jpg"
+        }
+      ],
+      "imdbId": "tt37281055",
+      "inCinemas": "2026-08-28T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "burlesque",
+        "dark comedy",
+        "gore",
+        "independent film",
+        "kids show",
+        "madness",
+        "missing children",
+        "slasher",
+        "suburban",
+        "supernatural",
+        "supernatural horror",
+        "tv host",
+        "unicorn"
+      ],
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFile": {
+        "customFormatScore": -10000,
+        "customFormats": [
+          {
+            "id": 53,
+            "name": "AAC"
+          },
+          {
+            "id": 58,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 12,
+            "name": "LQ"
+          }
+        ],
+        "dateAdded": "2026-10-13T05:30:05Z",
+        "edition": "",
+        "id": 362,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 384000,
+          "audioChannels": 5.1,
+          "audioCodec": "AAC",
+          "audioLanguages": "und",
+          "audioStreamCount": 1,
+          "resolution": "1384x1040",
+          "runTime": "1:35:50",
+          "scanType": "Progressive",
+          "subtitles": "",
+          "videoBitDepth": 8,
+          "videoBitrate": 2248655,
+          "videoCodec": "x264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "movieId": 285,
+        "originalFilePath": "buddy.2026.1080p.webrip.x264.aac5.1-yts.gg-yts.bz/buddy.2026.1080p.webrip.x264.aac5.1-yts.gg-yts.bz.mp4",
+        "path": "/movies/Buddy (2026) {tmdb-1514026}/Buddy (2026) {tmdb-1514026} - [WEBRip-1080p][AAC 5.1][x264]-yts.mp4",
+        "quality": {
+          "quality": {
+            "id": 15,
+            "modifier": "none",
+            "name": "WEBRip-1080p",
+            "resolution": 1080,
+            "source": "webrip"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Buddy (2026) {tmdb-1514026} - [WEBRip-1080p][AAC 5.1][x264]-yts.mp4",
+        "releaseGroup": "yts",
+        "sceneName": "buddy.2026.1080p.webrip.x264.aac5.1-yts.gg-yts.bz",
+        "size": 1896292383
+      },
+      "movieFileId": 362,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Buddy",
+      "overview": "Inside the colorful world of \"It's Buddy!\", a group of children spend their days singing, dancing, and helping Buddy - bright orange unicorn - spread happiness. But when one child refuses to play along, Buddy is not pleased and cracks begin to appear in this seemingly perfect world.",
+      "path": "/movies/Buddy (2026) {tmdb-1514026}",
+      "physicalRelease": "2026-12-08T00:00:00Z",
+      "popularity": 120.1111,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 6.6,
+          "votes": 24050
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 67,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 6.8,
+          "votes": 267
+        }
+      },
+      "releaseDate": "2026-10-13T00:00:00Z",
+      "runtime": 96,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 1896292383,
+      "sortTitle": "buddy",
+      "statistics": {
+        "movieFileCount": 1,
+        "movieFileQualities": [
+          {
+            "id": 15,
+            "modifier": "none",
+            "name": "WEBRip-1080p",
+            "resolution": 1080,
+            "source": "webrip"
+          }
+        ],
+        "releaseGroups": [
+          "yts"
+        ],
+        "sizeOnDisk": 1896292383
+      },
+      "status": "released",
+      "studio": "BoulderLight Pictures",
+      "tags": [
+        1
+      ],
+      "title": "Buddy",
+      "titleSlug": "1514026",
+      "tmdbId": 1514026,
+      "website": "https://roadsideattractions.com/filmography/Buddy/",
+      "year": 2026,
+      "youTubeTrailerId": ""
+    },
+    {
+      "added": "2026-06-15T18:58:47Z",
+      "alternateTitles": [
+        {
+          "id": 1820,
+          "movieMetadataId": 349,
+          "sourceType": "tmdb",
+          "title": "V srdci divočiny"
+        },
+        {
+          "id": 2345,
+          "movieMetadataId": 349,
+          "sourceType": "tmdb",
+          "title": "W sercu dziczy"
+        },
+        {
+          "id": 2350,
+          "movieMetadataId": 349,
+          "sourceType": "tmdb",
+          "title": "Skarbās zemes sirdī"
+        },
+        {
+          "id": 2391,
+          "movieMetadataId": 349,
+          "sourceType": "tmdb",
+          "title": "El corazon de la bestia"
+        },
+        {
+          "id": 2392,
+          "movieMetadataId": 349,
+          "sourceType": "tmdb",
+          "title": "Heart of the Beast - Heróis Inseparáveis"
+        },
+        {
+          "id": 2393,
+          "movieMetadataId": 349,
+          "sourceType": "tmdb",
+          "title": "Au cœur de la bête"
+        },
+        {
+          "id": 2417,
+          "movieMetadataId": 349,
+          "sourceType": "tmdb",
+          "title": "หัวใจผจญไพร"
+        },
+        {
+          "id": 2555,
+          "movieMetadataId": 349,
+          "sourceType": "tmdb",
+          "title": "狂野雄心"
+        },
+        {
+          "id": 2764,
+          "movieMetadataId": 349,
+          "sourceType": "tmdb",
+          "title": "Coração Selvagem"
+        },
+        {
+          "id": 2766,
+          "movieMetadataId": 349,
+          "sourceType": "tmdb",
+          "title": "Vahşetin Kalbi"
+        }
+      ],
+      "certification": "PG-13",
+      "cleanTitle": "heartbeast",
+      "digitalRelease": "2026-11-10T00:00:00Z",
+      "folderName": "/movies/Heart of the Beast (2026) {tmdb-1263337}",
+      "genres": [
+        "Adventure",
+        "Thriller"
+      ],
+      "hasFile": true,
+      "id": 224,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/6sYemVUn79UPKz1ZsSG6kPU4RVy.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/6uVRPFflyJpo8Cx872olmlGTWla.jpg"
+        }
+      ],
+      "imdbId": "tt7526136",
+      "inCinemas": "2026-09-23T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "alaska",
+        "american wilderness",
+        "dog",
+        "extreme conditions",
+        "inspirational",
+        "man vs nature",
+        "military",
+        "plane crash",
+        "special forces",
+        "survival thriller"
+      ],
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 54,
+            "name": "DD"
+          },
+          {
+            "id": 18,
+            "name": "x265 (HD)"
+          },
+          {
+            "id": 56,
+            "name": "x265 (no HDR/DV)"
+          }
+        ],
+        "dateAdded": "2026-11-11T07:00:07Z",
+        "edition": "",
+        "id": 403,
+        "indexerFlags": 1,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 448000,
+          "audioChannels": 5.1,
+          "audioCodec": "AC3",
+          "audioLanguages": "ita/eng",
+          "audioStreamCount": 2,
+          "resolution": "1920x800",
+          "runTime": "1:44:59",
+          "scanType": "Progressive",
+          "subtitles": "ita/ita/eng/eng",
+          "videoBitDepth": 8,
+          "videoBitrate": 2859946,
+          "videoCodec": "x265",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "movieId": 224,
+        "originalFilePath": "Heart Of The Beast - Nel Profondo Selvaggio (2026) 1080p WEB-DL H265 Ita Eng AC3 5.1 Sub Ita Eng iDN_CreW.mkv",
+        "path": "/movies/Heart of the Beast (2026) {tmdb-1263337}/Heart of the Beast (2026) {tmdb-1263337} - [WEBDL-1080p][AC3 5.1][x265].mkv",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "modifier": "none",
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "webdl"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Heart of the Beast (2026) {tmdb-1263337} - [WEBDL-1080p][AC3 5.1][x265].mkv",
+        "sceneName": "Heart Of The Beast - Nel Profondo Selvaggio (2026) 1080p WEB-DL H265 Ita Eng AC3 5.1 Sub Ita Eng iDN_CreW",
+        "size": 2959421173
+      },
+      "movieFileId": 403,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Heart of the Beast",
+      "overview": "After a harrowing plane crash, Special Forces officer James Belmont and his combat dog, Odin, find themselves stranded deep in the Alaskan wilderness. Together, they are forced into a brutal fight for survival against the elements.",
+      "path": "/movies/Heart of the Beast (2026) {tmdb-1263337}",
+      "popularity": 445.8409,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 7.1,
+          "votes": 43512
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 7.362,
+          "votes": 577
+        }
+      },
+      "releaseDate": "2026-11-10T00:00:00Z",
+      "runtime": 101,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 2959421173,
+      "sortTitle": "heart of the beast",
+      "statistics": {
+        "movieFileCount": 1,
+        "movieFileQualities": [
+          {
+            "id": 3,
+            "modifier": "none",
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "webdl"
+          }
+        ],
+        "releaseGroups": [],
+        "sizeOnDisk": 2959421173
+      },
+      "status": "released",
+      "studio": "Paramount Pictures",
+      "tags": [
+        1
+      ],
+      "title": "Heart of the Beast",
+      "titleSlug": "1263337",
+      "tmdbId": 1263337,
+      "website": "https://www.heartofthebeastmovie.com",
+      "year": 2026,
+      "youTubeTrailerId": "UkMuGKqAux4"
+    },
+    {
+      "added": "2026-10-16T05:43:26Z",
+      "alternateTitles": [
+        {
+          "id": 2553,
+          "movieMetadataId": 462,
+          "sourceType": "tmdb",
+          "title": "Street Fighter: le film"
+        },
+        {
+          "id": 2554,
+          "movieMetadataId": 462,
+          "sourceType": "tmdb",
+          "title": "สตรีท ไฟเตอร์"
+        },
+        {
+          "id": 2561,
+          "movieMetadataId": 462,
+          "sourceType": "tmdb",
+          "title": "Street Fighter: Filmas"
+        }
+      ],
+      "certification": "PG-13",
+      "cleanTitle": "streetfighter",
+      "digitalRelease": "2026-11-11T00:00:00Z",
+      "folderName": "/movies/Street Fighter (2026) {tmdb-1153576}",
+      "genres": [
+        "Action",
+        "Fantasy",
+        "Comedy"
+      ],
+      "hasFile": false,
+      "id": 304,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/dJPT2Uf12X6aFg8i5N67NTpIZ9t.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/3BBjkQmdGacKYZtpmK2vIfuDmON.jpg"
+        }
+      ],
+      "imdbId": "tt27419420",
+      "inCinemas": "2026-10-14T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "1990s",
+        "amused",
+        "based on video game",
+        "battle royale",
+        "duringcreditsstinger",
+        "hand to hand combat",
+        "martial arts",
+        "martial arts tournament",
+        "power",
+        "powers",
+        "ridiculous",
+        "shocking",
+        "wuxia"
+      ],
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Street Fighter",
+      "overview": "In 1993, estranged Street Fighters Ryu and Ken Masters are thrown back into combat when the mysterious Chun-Li recruits them for the next World Warrior Tournament: a brutal clash of fists, fate, and fury. But behind this battle royale lies a deadly conspiracy that forces them to face off against each other and the demons of their past. And if they don't, it's GAME OVER!",
+      "path": "/movies/Street Fighter (2026) {tmdb-1153576}",
+      "popularity": 58.1816,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 6.2,
+          "votes": 22019
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 46,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 6.347,
+          "votes": 226
+        }
+      },
+      "releaseDate": "2026-11-11T00:00:00Z",
+      "runtime": 120,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 0,
+      "sortTitle": "street fighter",
+      "statistics": {
+        "movieFileCount": 0,
+        "movieFileQualities": [],
+        "releaseGroups": [],
+        "sizeOnDisk": 0
+      },
+      "status": "released",
+      "studio": "Capcom",
+      "tags": [
+        1
+      ],
+      "title": "Street Fighter",
+      "titleSlug": "1153576",
+      "tmdbId": 1153576,
+      "website": "https://www.streetfightermovie.com",
+      "year": 2026,
+      "youTubeTrailerId": "U6sbm1OaJb8"
+    },
+    {
+      "added": "2026-04-30T19:22:04Z",
+      "alternateTitles": [
+        {
+          "id": 2449,
+          "movieMetadataId": 313,
+          "sourceType": "tmdb",
+          "title": "Moliaveidis"
+        },
+        {
+          "id": 2565,
+          "movieMetadataId": 313,
+          "sourceType": "tmdb",
+          "title": "Cara de Barro"
+        },
+        {
+          "id": 2737,
+          "movieMetadataId": 313,
+          "sourceType": "tmdb",
+          "title": "Глиноликий"
+        },
+        {
+          "id": 2763,
+          "movieMetadataId": 313,
+          "sourceType": "tmdb",
+          "title": "เคลย์เฟซ"
+        }
+      ],
+      "certification": "R",
+      "cleanTitle": "clayface",
+      "digitalRelease": "2026-12-07T00:00:00Z",
+      "folderName": "/movies/Clayface (2026) {tmdb-1400940}",
+      "genres": [
+        "Horror",
+        "Thriller",
+        "Science Fiction"
+      ],
+      "hasFile": false,
+      "id": 197,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/9l1NuFjel2j89hiuiJbsxfblqjy.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/VnT9D7NogVWrmN2UuT30exIYPh.jpg"
+        }
+      ],
+      "imdbId": "tt34890576",
+      "inCinemas": "2026-10-21T00:00:00Z",
+      "isAvailable": false,
+      "keywords": [
+        "aspiring actor",
+        "based on comic",
+        "body horror",
+        "dc universe (dcu)",
+        "disfigured face",
+        "female scientist",
+        "hollywood actor",
+        "mobster",
+        "monster",
+        "revenge",
+        "scientific experiment",
+        "shapeshifting",
+        "tragedy",
+        "unrequited love"
+      ],
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Clayface",
+      "overview": "Matt Hagen's meteoric rise from Gotham street kid to Hollywood leading man is tragically cut short when a local crime boss's actions leave him horribly disfigured. Abandoned by his team and with nothing left, Matt seeks out a cutting edge treatment that miraculously returns him to his former self… but also unexpectedly affects his grip on reality, spiraling him down a destructive path of all-consuming revenge.",
+      "path": "/movies/Clayface (2026) {tmdb-1400940}",
+      "physicalRelease": "2027-02-24T00:00:00Z",
+      "popularity": 81.5657,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 7.5,
+          "votes": 47939
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 59,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 7.433,
+          "votes": 423
+        }
+      },
+      "releaseDate": "2026-12-07T00:00:00Z",
+      "runtime": 109,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 0,
+      "sortTitle": "clayface",
+      "statistics": {
+        "movieFileCount": 0,
+        "movieFileQualities": [],
+        "releaseGroups": [],
+        "sizeOnDisk": 0
+      },
+      "status": "inCinemas",
+      "studio": "DC Studios",
+      "tags": [
+        1
+      ],
+      "title": "Clayface",
+      "titleSlug": "1400940",
+      "tmdbId": 1400940,
+      "website": "https://www.clayfacemovie.com",
+      "year": 2026,
+      "youTubeTrailerId": "f7jlCqdtwdM"
+    },
+    {
+      "added": "2026-05-02T19:29:33Z",
+      "alternateTitles": [
+        {
+          "id": 1570,
+          "movieMetadataId": 315,
+          "sourceType": "tmdb",
+          "title": "Meet the Parents 4"
+        },
+        {
+          "id": 1664,
+          "movieMetadataId": 315,
+          "sourceType": "tmdb",
+          "title": "Zor Baba 4"
+        },
+        {
+          "id": 1921,
+          "movieMetadataId": 315,
+          "sourceType": "tmdb",
+          "title": "Entrando Na Maior Fria"
+        },
+        {
+          "id": 1922,
+          "movieMetadataId": 315,
+          "sourceType": "tmdb",
+          "title": "Entrando Numa Fria 4"
+        }
+      ],
+      "certification": "PG-13",
+      "cleanTitle": "fockerinlaw",
+      "collection": {
+        "title": "Meet the Parents Collection",
+        "tmdbId": 51509
+      },
+      "folderName": "/movies/Focker-In-Law (2026) {tmdb-1400336}",
+      "genres": [
+        "Comedy",
+        "Romance"
+      ],
+      "hasFile": false,
+      "id": 199,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/gPdzdeehaoaYqxH2rA6yayEDSsS.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/6IfsmHoVWwgJwzxA9DLim2XZbSn.jpg"
+        }
+      ],
+      "imdbId": "tt34966140",
+      "inCinemas": "2026-11-25T00:00:00Z",
+      "isAvailable": false,
+      "keywords": [
+        "daughter–in–law father–in–law relationship",
+        "overbearing father",
+        "sequel"
+      ],
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Focker-in-Law",
+      "overview": "Henry, son of Greg and Pam Focker, faces family chaos when he decides to marry a strong-willed woman who appears to be his complete mismatch.",
+      "path": "/movies/Focker-In-Law (2026) {tmdb-1400336}",
+      "popularity": 13.4571,
+      "qualityProfileId": 11,
+      "ratings": {
+        "tmdb": {
+          "type": "user",
+          "value": 0,
+          "votes": 0
+        }
+      },
+      "releaseDate": "2027-02-23T00:00:00Z",
+      "runtime": 105,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 0,
+      "sortTitle": "fockerinlaw",
+      "statistics": {
+        "movieFileCount": 0,
+        "movieFileQualities": [],
+        "releaseGroups": [],
+        "sizeOnDisk": 0
+      },
+      "status": "announced",
+      "studio": "Universal Pictures",
+      "tags": [
+        1
+      ],
+      "title": "Focker-in-Law",
+      "titleSlug": "1400336",
+      "tmdbId": 1400336,
+      "website": "https://www.universalpictures.com/movies/focker-in-law/",
+      "year": 2026,
+      "youTubeTrailerId": "9CKu3WoMYCg"
+    },
+    {
+      "added": "2026-03-19T18:33:28Z",
+      "alternateTitles": [
+        {
+          "id": 1476,
+          "movieMetadataId": 296,
+          "sourceType": "tmdb",
+          "title": "듄 3"
+        },
+        {
+          "id": 1477,
+          "movieMetadataId": 296,
+          "sourceType": "tmdb",
+          "title": "Dune 3"
+        },
+        {
+          "id": 1478,
+          "movieMetadataId": 296,
+          "sourceType": "tmdb",
+          "title": "Dune: Part 3"
+        },
+        {
+          "id": 1479,
+          "movieMetadataId": 296,
+          "sourceType": "tmdb",
+          "title": "חולית 3"
+        },
+        {
+          "id": 1480,
+          "movieMetadataId": 296,
+          "sourceType": "tmdb",
+          "title": "Duna 3"
+        },
+        {
+          "id": 1481,
+          "movieMetadataId": 296,
+          "sourceType": "tmdb",
+          "title": "Duna: Parte 3"
+        },
+        {
+          "id": 1873,
+          "movieMetadataId": 296,
+          "sourceType": "tmdb",
+          "title": "Dune: Bagian Tiga"
+        },
+        {
+          "id": 2316,
+          "movieMetadataId": 296,
+          "sourceType": "tmdb",
+          "title": "Dyun 3"
+        },
+        {
+          "id": 2340,
+          "movieMetadataId": 296,
+          "sourceType": "tmdb",
+          "title": "Dyun: 3-cü Hissə"
+        },
+        {
+          "id": 2343,
+          "movieMetadataId": 296,
+          "sourceType": "tmdb",
+          "title": "Dune : Troisième partie"
+        },
+        {
+          "id": 2344,
+          "movieMetadataId": 296,
+          "sourceType": "tmdb",
+          "title": "Dune : Partie 3"
+        },
+        {
+          "id": 2437,
+          "movieMetadataId": 296,
+          "sourceType": "tmdb",
+          "title": "Duna: Parte Tres"
+        },
+        {
+          "id": 2739,
+          "movieMetadataId": 296,
+          "sourceType": "tmdb",
+          "title": "Дюна: Частина Третя"
+        }
+      ],
+      "certification": "PG-13",
+      "cleanTitle": "dunepartthree",
+      "collection": {
+        "title": "Dune Collection",
+        "tmdbId": 726871
+      },
+      "folderName": "/movies/Dune Part Three (2026) {tmdb-1170608}",
+      "genres": [
+        "Science Fiction",
+        "Adventure"
+      ],
+      "hasFile": false,
+      "id": 185,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/glt0v4I89rMWstDNCaFXc5SNyO1.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/i5E9H7Ik0u61ylDDTbmUpTL3Yw.jpg"
+        }
+      ],
+      "imdbId": "tt31378509",
+      "inCinemas": "2026-12-16T00:00:00Z",
+      "isAvailable": false,
+      "keywords": [
+        "based on novel or book",
+        "desert",
+        "messianic",
+        "planet",
+        "political conspiracy",
+        "religious war",
+        "sequel",
+        "space",
+        "space adventure",
+        "space opera"
+      ],
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Dune: Part Three",
+      "overview": "Nearly two decades after he seized control of the Imperium, Paul Atreides is now a ruthless Emperor, and must face the consequences of his reign as old allies return, terrifying new threats emerge, and betrayal lurks in every shadow. Haunted by visions of Imperial collapse and the reappearance of his long-lost love, Paul is drawn into a sweeping conspiracy, with Chani at the heart of its unfolding mystery. As enemies close in, Paul must confront the true cost of power and the fate of those he loves the most.",
+      "path": "/movies/Dune Part Three (2026) {tmdb-1170608}",
+      "popularity": 25.3031,
+      "qualityProfileId": 11,
+      "ratings": {
+        "tmdb": {
+          "type": "user",
+          "value": 0,
+          "votes": 0
+        }
+      },
+      "releaseDate": "2027-03-16T00:00:00Z",
+      "runtime": 150,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 0,
+      "sortTitle": "dune part three",
+      "statistics": {
+        "movieFileCount": 0,
+        "movieFileQualities": [],
+        "releaseGroups": [],
+        "sizeOnDisk": 0
+      },
+      "status": "announced",
+      "studio": "Legendary Pictures",
+      "tags": [
+        1
+      ],
+      "title": "Dune: Part Three",
+      "titleSlug": "1170608",
+      "tmdbId": 1170608,
+      "website": "https://www.dunemovie.com",
+      "year": 2026,
+      "youTubeTrailerId": "uJqaGLmZpGo"
+    },
+    {
+      "added": "2026-11-07T19:39:26Z",
+      "alternateTitles": [
+        {
+          "id": 2767,
+          "movieMetadataId": 516,
+          "sourceType": "tmdb",
+          "title": "Werwulf : la bête maudite"
+        },
+        {
+          "id": 2768,
+          "movieMetadataId": 516,
+          "sourceType": "tmdb",
+          "title": "L'homme loup"
+        }
+      ],
+      "certification": "R",
+      "cleanTitle": "werwulf",
+      "folderName": "/movies/Werwulf (2026) {tmdb-1421903}",
+      "genres": [
+        "Horror"
+      ],
+      "hasFile": false,
+      "id": 325,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/imnkSt4PSQpxIuyiRpJCiLk3SZz.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/jmW9NkzbpI9vhyxJU2x644Nj7VU.jpg"
+        }
+      ],
+      "imdbId": "tt35514120",
+      "inCinemas": "2026-12-25T00:00:00Z",
+      "isAvailable": false,
+      "keywords": [
+        "1300s",
+        "14th century",
+        "based on myths, legends or folklore",
+        "body horror",
+        "creature",
+        "curse",
+        "england",
+        "farmer",
+        "folk horror",
+        "gothic",
+        "gothic horror",
+        "grimdark",
+        "lycanthrope",
+        "medieval england",
+        "metamorphosis",
+        "middle english",
+        "monster",
+        "mute",
+        "occult",
+        "peasant",
+        "period piece",
+        "religious themes",
+        "satanism",
+        "supernatural curse",
+        "supernatural horror",
+        "superstition",
+        "village",
+        "werewolf",
+        "witchcraft"
+      ],
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Werwulf",
+      "overview": "A harrowing tale of devotion, damnation and the devil within.",
+      "path": "/movies/Werwulf (2026) {tmdb-1421903}",
+      "popularity": 5.9561,
+      "qualityProfileId": 11,
+      "ratings": {
+        "tmdb": {
+          "type": "user",
+          "value": 0,
+          "votes": 0
+        }
+      },
+      "releaseDate": "2027-03-25T00:00:00Z",
+      "runtime": 120,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 0,
+      "sortTitle": "werwulf",
+      "statistics": {
+        "movieFileCount": 0,
+        "movieFileQualities": [],
+        "releaseGroups": [],
+        "sizeOnDisk": 0
+      },
+      "status": "announced",
+      "studio": "Working Title",
+      "tags": [
+        1
+      ],
+      "title": "Werwulf",
+      "titleSlug": "1421903",
+      "tmdbId": 1421903,
+      "website": "https://www.focusfeatures.com/werwulf",
+      "year": 2026,
+      "youTubeTrailerId": "CL1EFACsWag"
+    }
+  ],
+  "recordedAt": "2026-11-11T12:12:58Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/calendar?start=2026-11-01T00:00:00Z&end=2026-12-31T00:00:00Z&unmonitored=true"
+  },
+  "status": 200
+}

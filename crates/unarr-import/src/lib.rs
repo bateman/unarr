@@ -5,7 +5,10 @@
 //! `VersionInfo` table; the importer checks that version and maps what it knows.
 
 pub mod config_xml;
+mod legacy;
+pub mod radarr;
+mod shared;
 pub mod sonarr;
 
-pub use sonarr::ImportReport;
+pub use legacy::ImportReport;
 pub use unarr_core::config::{AuthenticationMethod, AuthenticationRequired, HostConfig};

@@ -2,9 +2,10 @@
 //! authentication around it (forms login with a signed cookie, basic auth,
 //! local-address bypass), as the originals do it.
 //!
-//! The UI bundle is copied into `crates/unarr-api/ui/sonarr` by `make ui`
-//! (GPL-3.0, like Unarr) and embedded by `rust-embed`; source maps are left
-//! out. Without the bundle the daemon still runs and `/` says how to get it.
+//! The UI bundles are copied into `crates/unarr-api/ui/sonarr` and
+//! `ui/radarr` by `make ui` (GPL-3.0, like Unarr) and embedded by
+//! `rust-embed`, one per personality; source maps are left out. Without a
+//! bundle the daemon still runs and `/` says how to get it.
 
 use axum::body::Body;
 use axum::extract::{ConnectInfo, Request, State};
@@ -19,6 +20,7 @@ use sha2::{Digest, Sha256};
 use unarr_core::config::{AuthenticationMethod, AuthenticationRequired};
 use unarr_core::model::User;
 use unarr_core::store;
+use unarr_core::Personality;
 
 use crate::auth::key_matches;
 use crate::state::AppState;
@@ -27,15 +29,31 @@ use crate::state::AppState;
 #[folder = "ui/sonarr/"]
 #[exclude = "*.map"]
 #[exclude = ".gitkeep"]
-struct Assets;
+struct SonarrAssets;
 
-/// Whether `make ui` has been run for this build.
-pub fn available() -> bool {
-    Assets::get("index.html").is_some()
+#[derive(Embed)]
+#[folder = "ui/radarr/"]
+#[exclude = "*.map"]
+#[exclude = ".gitkeep"]
+struct RadarrAssets;
+
+/// A file of the frontend a personality serves. Lidarr's is not embedded
+/// yet.
+fn asset(personality: Personality, path: &str) -> Option<rust_embed::EmbeddedFile> {
+    match personality {
+        Personality::Sonarr => SonarrAssets::get(path),
+        Personality::Radarr => RadarrAssets::get(path),
+        Personality::Lidarr => None,
+    }
 }
 
-fn serve_asset(path: &str) -> Option<Response> {
-    let file = Assets::get(path)?;
+/// Whether `make ui` has been run for this build.
+pub fn available(personality: Personality) -> bool {
+    asset(personality, "index.html").is_some()
+}
+
+fn serve_asset(personality: Personality, path: &str) -> Option<Response> {
+    let file = asset(personality, path)?;
     let mime = file.metadata.mimetype();
     let mut headers = HeaderMap::new();
     headers.insert(
@@ -54,14 +72,14 @@ fn serve_asset(path: &str) -> Option<Response> {
 
 /// `index.html` with the URL base applied to asset links and to the
 /// `window.Sonarr` bootstrap, as the originals' `IndexHtmlMapper` does.
-fn index_html(url_base: &str) -> Option<String> {
-    let file = Assets::get("index.html")?;
+fn index_html(personality: Personality, url_base: &str) -> Option<String> {
+    let file = asset(personality, "index.html")?;
     let text = String::from_utf8_lossy(&file.data).into_owned();
     Some(rewrite_html(&text, url_base).replace("__URL_BASE__", url_base))
 }
 
-fn login_html(url_base: &str, theme: &str) -> Option<String> {
-    let file = Assets::get("login.html")?;
+fn login_html(personality: Personality, url_base: &str, theme: &str) -> Option<String> {
+    let file = asset(personality, "login.html")?;
     let text = String::from_utf8_lossy(&file.data).into_owned();
     Some(
         rewrite_html(&text, url_base)
@@ -120,30 +138,32 @@ fn no_ui_page() -> Response {
 pub async fn spa(State(state): State<AppState>, uri: Uri) -> Response {
     let path = uri.path().trim_start_matches('/');
     if !path.is_empty() && path.contains('.') && !path.contains("..") {
-        if let Some(r) = serve_asset(path) {
+        if let Some(r) = serve_asset(state.personality(), path) {
             return r;
         }
         return StatusCode::NOT_FOUND.into_response();
     }
-    match index_html(&state.settings().url_base) {
+    match index_html(state.personality(), &state.settings().url_base) {
         Some(page) => html(page),
         None => no_ui_page(),
     }
 }
 
-pub async fn content(uri: Uri) -> Response {
+pub async fn content(State(state): State<AppState>, uri: Uri) -> Response {
     let path = uri.path().trim_start_matches('/');
     // Case-insensitive prefix, as the originals route it.
     let rel = path.get("content/".len()..).unwrap_or("");
     if rel.contains("..") {
         return StatusCode::NOT_FOUND.into_response();
     }
-    serve_asset(&format!("Content/{rel}")).unwrap_or_else(|| StatusCode::NOT_FOUND.into_response())
+    serve_asset(state.personality(), &format!("Content/{rel}"))
+        .unwrap_or_else(|| StatusCode::NOT_FOUND.into_response())
 }
 
-pub async fn favicon() -> Response {
-    serve_asset("Content/Images/Icons/favicon.ico")
-        .or_else(|| serve_asset("Content/Images/Icons/favicon-32x32.png"))
+pub async fn favicon(State(state): State<AppState>) -> Response {
+    let personality = state.personality();
+    serve_asset(personality, "Content/Images/Icons/favicon.ico")
+        .or_else(|| serve_asset(personality, "Content/Images/Icons/favicon-32x32.png"))
         .unwrap_or_else(|| StatusCode::NOT_FOUND.into_response())
 }
 
@@ -161,7 +181,7 @@ pub struct LoginForm {
 
 pub async fn login_page(State(state): State<AppState>) -> Response {
     let s = state.settings();
-    match login_html(&s.url_base, &s.host.theme) {
+    match login_html(state.personality(), &s.url_base, &s.host.theme) {
         Some(page) => html(page),
         None => no_ui_page(),
     }

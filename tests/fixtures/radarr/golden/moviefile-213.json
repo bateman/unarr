@@ -1,0 +1,70 @@
+{
+  "body": {
+    "customFormatScore": 0,
+    "customFormats": [
+      {
+        "id": 50,
+        "name": "DD+"
+      }
+    ],
+    "dateAdded": "2026-05-01T20:38:16Z",
+    "edition": "",
+    "id": 213,
+    "indexerFlags": 0,
+    "languages": [
+      {
+        "id": 5,
+        "name": "Italian"
+      },
+      {
+        "id": 1,
+        "name": "English"
+      }
+    ],
+    "mediaInfo": {
+      "audioBitrate": 1024000,
+      "audioChannels": 7.1,
+      "audioCodec": "EAC3",
+      "audioLanguages": "ita/ita/eng",
+      "audioStreamCount": 3,
+      "resolution": "1920x804",
+      "runTime": "1:59:01",
+      "scanType": "Progressive",
+      "subtitles": "ita/ita/ita/eng",
+      "videoBitDepth": 8,
+      "videoBitrate": 8508386,
+      "videoCodec": "x264",
+      "videoDynamicRange": "",
+      "videoDynamicRangeType": "",
+      "videoFps": 23.976
+    },
+    "movieId": 6,
+    "originalFilePath": "Alien.Romulus.2024.iTA-ENG.Bluray.1080p.x264-CYBER/Alien.Romulus.2024.iTA-ENG.Bluray.1080p.x264-CYBER.mkv",
+    "path": "/movies/Alien Romulus (2024)/Alien Romulus (2024) {tmdb-945961} - [Bluray-1080p][EAC3 7.1][x264]-CYBER.mkv",
+    "quality": {
+      "quality": {
+        "id": 7,
+        "modifier": "none",
+        "name": "Bluray-1080p",
+        "resolution": 1080,
+        "source": "bluray"
+      },
+      "revision": {
+        "isRepack": false,
+        "real": 0,
+        "version": 1
+      }
+    },
+    "qualityCutoffNotMet": false,
+    "relativePath": "Alien Romulus (2024) {tmdb-945961} - [Bluray-1080p][EAC3 7.1][x264]-CYBER.mkv",
+    "releaseGroup": "CYBER",
+    "sceneName": "Alien.Romulus.2024.iTA-ENG.Bluray.1080p.x264-CYBER",
+    "size": 10372936014
+  },
+  "recordedAt": "2026-11-11T12:12:52Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/moviefile/213"
+  },
+  "status": 200
+}

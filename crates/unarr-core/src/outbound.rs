@@ -403,8 +403,10 @@ impl ClientSessionStore for Sessions {
     }
 }
 
-/// The settings of the process: one client serves it, so one set of
-/// outgoing settings does.
+/// The settings the process-wide clients of [`crate::http`] follow. The
+/// series side takes those clients, so these are the Sonarr personality's
+/// settings; every other personality has a handle and clients of its own
+/// ([`crate::http::Clients`]).
 pub fn process() -> &'static Handle {
     static HANDLE: std::sync::OnceLock<Handle> = std::sync::OnceLock::new();
     HANDLE.get_or_init(Handle::default)

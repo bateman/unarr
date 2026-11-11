@@ -15,9 +15,9 @@ use crate::state::AppState;
 /// A provider as the API shows it: the implementation's schema entry (its
 /// capabilities and field metadata), the stored values filled into `fields`,
 /// and the per-kind flags.
-pub fn provider_resource(p: &Provider) -> Value {
+pub fn provider_resource(personality: unarr_core::Personality, p: &Provider) -> Value {
     let kind = SchemaKind::Provider(p.kind);
-    let mut out: Map<String, Value> = match schemas::lookup(kind, &p.implementation) {
+    let mut out: Map<String, Value> = match schemas::lookup(personality, kind, &p.implementation) {
         Some(schema) => {
             let mut m = schema.as_object().cloned().unwrap_or_default();
             m.remove("presets");
@@ -82,7 +82,10 @@ async fn list_kind(state: &AppState, kind: ProviderKind) -> anyhow::Result<Vec<V
         .await?;
     // The originals list providers by name.
     providers.sort_by(|a, b| unarr_core::collation::compare(&a.name, &b.name));
-    Ok(providers.iter().map(provider_resource).collect())
+    Ok(providers
+        .iter()
+        .map(|p| provider_resource(state.personality(), p))
+        .collect())
 }
 
 async fn get_kind(state: &AppState, kind: ProviderKind, id: i64) -> ApiResult<Json<Value>> {
@@ -90,7 +93,7 @@ async fn get_kind(state: &AppState, kind: ProviderKind, id: i64) -> ApiResult<Js
         .db()
         .call(move |conn| store::providers::get_provider(conn, kind, id))
         .await?;
-    Ok(Json(provider_resource(&found(p)?)))
+    Ok(Json(provider_resource(state.personality(), &found(p)?)))
 }
 
 macro_rules! provider_routes {
@@ -102,8 +105,8 @@ macro_rules! provider_routes {
             get_kind(&state, $kind, id).await
         }
         /// The implementations available, with their field schemas.
-        pub async fn $schema() -> Json<Vec<Value>> {
-            Json(schemas::all(SchemaKind::Provider($kind)).to_vec())
+        pub async fn $schema(State(state): State<AppState>) -> Json<Vec<Value>> {
+            Json(schemas::all(state.personality(), SchemaKind::Provider($kind)).to_vec())
         }
     };
 }
@@ -298,7 +301,7 @@ pub async fn import_list_exclusions_paged(
 }
 
 /// Auto-tagging rules; specifications are rendered like custom format ones.
-fn auto_tagging_resource(a: &unarr_core::model::AutoTagging) -> Value {
+fn auto_tagging_resource(personality: unarr_core::Personality, a: &unarr_core::model::AutoTagging) -> Value {
     let specs: Vec<Value> = a
         .specifications
         .as_array()
@@ -316,7 +319,7 @@ fn auto_tagging_resource(a: &unarr_core::model::AutoTagging) -> Value {
                         "fields": [],
                     });
                     if let Some(schema) =
-                        schemas::lookup(SchemaKind::AutoTaggingSpecification, implementation)
+                        schemas::lookup(personality, SchemaKind::AutoTaggingSpecification, implementation)
                     {
                         out["implementationName"] = schema["implementationName"].clone();
                         out["fields"] = Value::Array(schemas::render_fields(schema, body));
@@ -340,15 +343,19 @@ pub async fn auto_tagging(State(state): State<AppState>) -> ApiResult<Json<Vec<V
         .db()
         .call(|c| store::providers::list_auto_tagging(c))
         .await?;
-    Ok(Json(all.iter().map(auto_tagging_resource).collect()))
+    Ok(Json(
+        all.iter()
+            .map(|a| auto_tagging_resource(state.personality(), a))
+            .collect(),
+    ))
 }
 
-pub async fn auto_tagging_schema() -> Json<Vec<Value>> {
-    Json(schemas::all(SchemaKind::AutoTaggingSpecification).to_vec())
+pub async fn auto_tagging_schema(State(state): State<AppState>) -> Json<Vec<Value>> {
+    Json(schemas::all(state.personality(), SchemaKind::AutoTaggingSpecification).to_vec())
 }
 
-pub async fn custom_format_schema() -> Json<Vec<Value>> {
-    Json(schemas::all(SchemaKind::CustomFormatSpecification).to_vec())
+pub async fn custom_format_schema(State(state): State<AppState>) -> Json<Vec<Value>> {
+    Json(schemas::all(state.personality(), SchemaKind::CustomFormatSpecification).to_vec())
 }
 
 /// `PUT /metadata/{id}`: Settings > Metadata saves a consumer's switch and
@@ -380,6 +387,7 @@ pub async fn metadata_update(
         updated.name = name.to_string();
     }
     if let Some(schema) = schemas::lookup(
+        state.personality(),
         SchemaKind::Provider(ProviderKind::Metadata),
         &existing.implementation,
     ) {
@@ -399,12 +407,12 @@ pub async fn metadata_update(
             .await?;
         state.hub().broadcast(
             "metadata",
-            json!({"action": "updated", "resource": provider_resource(&updated)}),
+            json!({"action": "updated", "resource": provider_resource(state.personality(), &updated)}),
         );
     }
     Ok((
         axum::http::StatusCode::ACCEPTED,
-        Json(provider_resource(&updated)),
+        Json(provider_resource(state.personality(), &updated)),
     )
         .into_response())
 }
@@ -425,7 +433,7 @@ mod tests {
             tags: vec![],
             attributes: json!({"enableRss": true, "priority": 25}),
         };
-        let r = provider_resource(&p);
+        let r = provider_resource(unarr_core::Personality::Sonarr, &p);
         assert_eq!(r["supportsRss"], true);
         assert_eq!(r["protocol"], "usenet");
         assert_eq!(r["priority"], 25);
@@ -441,7 +449,7 @@ mod tests {
             implementation: "FutureIndexer".into(),
             ..p
         };
-        let r = provider_resource(&unknown);
+        let r = provider_resource(unarr_core::Personality::Sonarr, &unknown);
         assert_eq!(r["fields"].as_array().unwrap().len(), 3);
     }
 }

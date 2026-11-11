@@ -29,9 +29,12 @@ async fn series_info_with_the_originals_user_agent() {
             "/services.sonarr.tv/v1/dailyseries"
         ]
     );
-    assert!(requests
-        .iter()
-        .all(|r| r.user_agent == unarr_core::http::servarr_proxy_user_agent()));
+    assert!(
+        requests
+            .iter()
+            .all(|r| r.user_agent
+                == unarr_core::http::servarr_proxy_user_agent(unarr_core::Personality::Sonarr))
+    );
 }
 
 #[tokio::test]

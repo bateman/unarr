@@ -1,0 +1,115 @@
+{
+  "body": {
+    "id": 1,
+    "images": [
+      {
+        "coverType": "poster",
+        "remoteUrl": "https://image.tmdb.org/t/p/original/pJdItyeP5Ep5oYoqHlPpX4BEnPC.jpg"
+      },
+      {
+        "coverType": "fanart",
+        "remoteUrl": "https://image.tmdb.org/t/p/original/nklXuO1cBEViut27TpChoKIzyI5.jpg"
+      }
+    ],
+    "minimumAvailability": "released",
+    "missingMovies": 1,
+    "monitored": false,
+    "movies": [
+      {
+        "cleanTitle": "alienromulus",
+        "folder": "Alien Romulus (2024) {tmdb-945961}",
+        "genres": [
+          "Horror",
+          "Science Fiction"
+        ],
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/2uSWRTtCG336nuBiG8jOTEUKSy8.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/iYqSQaWDttQIQzsxg9xHyg0bttG.jpg"
+          }
+        ],
+        "imdbId": "tt18412256",
+        "isExcluded": false,
+        "isExisting": true,
+        "overview": "While scavenging the deep ends of a derelict space station, a group of young space colonizers come face to face with the most terrifying life form in the universe.",
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 7.1,
+            "votes": 295979
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 64,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 80,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 7.159,
+            "votes": 4953
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.36965,
+            "votes": 23349
+          }
+        },
+        "runtime": 119,
+        "sortTitle": "alien romulus",
+        "status": "released",
+        "title": "Alien: Romulus",
+        "tmdbId": 945961,
+        "year": 2024
+      },
+      {
+        "cleanTitle": "untitledalienromulussequel",
+        "folder": "Untitled Alien Romulus Sequel () {tmdb-1434936}",
+        "genres": [
+          "Horror",
+          "Science Fiction"
+        ],
+        "images": [],
+        "imdbId": "tt37351051",
+        "isExcluded": false,
+        "isExisting": false,
+        "overview": "The sequel to Alien: Romulus. Plot TBA.",
+        "ratings": {
+          "tmdb": {
+            "type": "user",
+            "value": 0,
+            "votes": 0
+          }
+        },
+        "runtime": 0,
+        "sortTitle": "untitled alien romulus sequel",
+        "status": "announced",
+        "title": "Untitled Alien: Romulus Sequel",
+        "tmdbId": 1434936,
+        "year": 0
+      }
+    ],
+    "overview": "A series of films set in the Alien universe, overlapping chronologically with the events of the original series.",
+    "qualityProfileId": 4,
+    "rootFolderPath": "/movies",
+    "searchOnAdd": false,
+    "sortTitle": "alien romulus collection",
+    "tags": [],
+    "title": "Alien: Romulus Collection",
+    "tmdbId": 1434946
+  },
+  "recordedAt": "2026-11-11T12:12:52Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/collection/1"
+  },
+  "status": 200
+}

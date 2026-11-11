@@ -11,6 +11,7 @@ use unarr_core::model::ScheduledTask;
 use unarr_core::store;
 use unarr_core::store::paging::Paging;
 use unarr_core::time;
+use unarr_core::Personality;
 
 use crate::compat;
 use crate::error::{found, ApiResult};
@@ -356,14 +357,19 @@ pub async fn update(State(state): State<AppState>) -> Json<Vec<Value>> {
 
 // --- localization
 
-const LOCALIZATION_EN: &str = include_str!("../../schemas/sonarr/localization-en.json");
+const SONARR_LOCALIZATION_EN: &str = include_str!("../../schemas/sonarr/localization-en.json");
+const RADARR_LOCALIZATION_EN: &str = include_str!("../../schemas/radarr/localization-en.json");
 
-/// The UI strings of the mirrored release (English).
-pub async fn localization() -> impl IntoResponse {
-    (
-        [(header::CONTENT_TYPE, "application/json")],
-        format!("{{\"strings\":{}}}", LOCALIZATION_EN.trim()),
-    )
+/// The UI strings of the mirrored release (English). Radarr spells the
+/// key with a capital, as recorded.
+pub async fn localization(State(state): State<AppState>) -> impl IntoResponse {
+    let body = match state.personality() {
+        Personality::Radarr => format!("{{\"Strings\":{}}}", RADARR_LOCALIZATION_EN.trim()),
+        Personality::Sonarr | Personality::Lidarr => {
+            format!("{{\"strings\":{}}}", SONARR_LOCALIZATION_EN.trim())
+        }
+    };
+    ([(header::CONTENT_TYPE, "application/json")], body)
 }
 
 pub async fn localization_language() -> Json<Value> {

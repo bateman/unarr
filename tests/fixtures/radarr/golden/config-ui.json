@@ -1,0 +1,22 @@
+{
+  "body": {
+    "calendarWeekColumnHeader": "ddd DD/MM",
+    "enableColorImpairedMode": false,
+    "firstDayOfWeek": 1,
+    "id": 1,
+    "longDateFormat": "dddd, D MMMM YYYY",
+    "movieInfoLanguage": 1,
+    "movieRuntimeFormat": "hoursMinutes",
+    "shortDateFormat": "DD MMM YYYY",
+    "showRelativeDates": true,
+    "theme": "auto",
+    "timeFormat": "HH:mm",
+    "uiLanguage": 1
+  },
+  "recordedAt": "2026-11-11T12:12:55Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/config/ui"
+  },
+  "status": 200
+}

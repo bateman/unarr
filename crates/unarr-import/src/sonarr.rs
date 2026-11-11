@@ -7,18 +7,13 @@
 //! `Items`, `Settings`...); each is decoded here into the matching model or
 //! kept verbatim where Unarr does not interpret it yet.
 
-use std::collections::BTreeMap;
 use std::path::Path;
 
 use anyhow::Context;
-use chrono::{DateTime, NaiveDate, Utc};
-use rusqlite::types::{FromSql, Value as SqlValue};
-use rusqlite::{Connection, OpenFlags, Row, Statement};
-use serde::de::DeserializeOwned;
+use chrono::Utc;
 use serde_json::{json, Value};
 use unarr_core::decision::{ReleaseSource, SeriesMatchType};
 use unarr_core::downloads::pending::{PendingRelease, PendingReleaseReason};
-use unarr_core::indexers::rss::ReleaseInfo;
 use unarr_core::mediafiles::extras::{ExtraFile, Kind as ExtraKind};
 use unarr_core::model::*;
 use unarr_core::store;
@@ -27,24 +22,18 @@ use unarr_core::store::import_lists::{ListItem, SyncStatus};
 use unarr_core::store::provider_status::ProviderStatus;
 use unarr_core::{time, Db};
 
+pub use crate::legacy::ImportReport;
+use crate::legacy::{
+    history_event, legacy_release, open_legacy, protocol, provider_row as provider, quality_model,
+    read_statuses, read_table, skipped_tables, LegacyRow,
+};
+use crate::shared::{provider_sequences, SharedTables};
+
 /// Oldest migration level the mapping was written against (196 added
 /// `FinaleType`; everything older is best effort).
 pub const MIN_MIGRATION: i64 = 196;
 /// Newest migration level checked against the Sonarr sources (develop branch).
 pub const MAX_KNOWN_MIGRATION: i64 = 240;
-
-/// What an import did.
-#[derive(Debug, Default)]
-pub struct ImportReport {
-    pub migration_version: i64,
-    /// Rows imported per legacy table.
-    pub counts: BTreeMap<&'static str, usize>,
-    /// Human-readable notes about anything skipped or defaulted.
-    pub notes: Vec<String>,
-    /// Legacy tables with rows the importer does not carry over, with
-    /// their row counts.
-    pub skipped: BTreeMap<String, i64>,
-}
 
 /// Legacy tables the importer reads. Anything else with rows is logged.
 const HANDLED_TABLES: &[&str] = &[
@@ -86,247 +75,6 @@ const HANDLED_TABLES: &[&str] = &[
     "sqlite_sequence",
 ];
 
-/// Tables with rows that nothing reads, by name.
-fn skipped_tables(legacy: &Connection) -> anyhow::Result<BTreeMap<String, i64>> {
-    let mut stmt = legacy.prepare("SELECT name FROM sqlite_master WHERE type = 'table' ORDER BY name")?;
-    let names: Vec<String> = stmt
-        .query_map([], |r| r.get::<_, String>(0))?
-        .collect::<Result<_, _>>()?;
-    let mut out = BTreeMap::new();
-    for name in names {
-        if HANDLED_TABLES.contains(&name.as_str()) {
-            continue;
-        }
-        let rows: i64 = legacy.query_row(&format!("SELECT count(*) FROM \"{name}\""), [], |r| r.get(0))?;
-        if rows > 0 {
-            out.insert(name, rows);
-        }
-    }
-    Ok(out)
-}
-
-/// A release as the originals store it (`ReleaseInfo` serialised by their
-/// JSON settings: `downloadProtocol`, languages as objects), mapped to
-/// Unarr's.
-fn legacy_release(v: &Value) -> ReleaseInfo {
-    let text = |k: &str| v[k].as_str().map(String::from);
-    let int = |k: &str| v[k].as_i64().unwrap_or(0);
-    ReleaseInfo {
-        guid: text("guid").unwrap_or_default(),
-        title: text("title").unwrap_or_default(),
-        size: int("size"),
-        download_url: text("downloadUrl"),
-        info_url: text("infoUrl"),
-        comment_url: text("commentUrl"),
-        indexer_id: int("indexerId"),
-        indexer: text("indexer").unwrap_or_default(),
-        indexer_priority: v["indexerPriority"].as_i64().unwrap_or(25),
-        season_search_maximum_single_episode_age: int("seasonSearchMaximumSingleEpisodeAge"),
-        protocol: match v["downloadProtocol"]
-            .as_str()
-            .map(str::to_ascii_lowercase)
-            .as_deref()
-        {
-            Some("usenet") => Protocol::Usenet,
-            Some("torrent") => Protocol::Torrent,
-            _ => protocol(int("downloadProtocol")),
-        },
-        tvdb_id: int("tvdbId"),
-        tv_rage_id: int("tvRageId"),
-        imdb_id: text("imdbId"),
-        publish_date: text("publishDate")
-            .and_then(|s| time::parse_utc(&s))
-            .unwrap_or(DateTime::<Utc>::UNIX_EPOCH),
-        languages: v["languages"]
-            .as_array()
-            .map(|a| {
-                a.iter()
-                    .filter_map(|l| l["id"].as_i64().or_else(|| l.as_i64()))
-                    .collect()
-            })
-            .unwrap_or_default(),
-        indexer_flags: int("indexerFlags"),
-        magnet_url: text("magnetUrl"),
-        info_hash: text("infoHash"),
-        seeders: v["seeders"].as_i64(),
-        peers: v["peers"].as_i64(),
-        container: text("container"),
-        pending_release_reason: None,
-    }
-}
-
-/// The status rows of a provider kind.
-fn read_statuses(legacy: &Connection, table: &'static str) -> anyhow::Result<Vec<(i64, ProviderStatus)>> {
-    read_table(legacy, table, |r| {
-        Ok((
-            r.req("ProviderId")?,
-            ProviderStatus {
-                initial_failure: r.timestamp("InitialFailure")?,
-                most_recent_failure: r.timestamp("MostRecentFailure")?,
-                escalation_level: r.or("EscalationLevel", 0)?,
-                disabled_till: r.timestamp("DisabledTill")?,
-                last_rss_sync_release_info: r
-                    .json_opt("LastRssSyncReleaseInfo")?
-                    .map(|v| serde_json::to_string(&legacy_release(&v)).unwrap_or_default()),
-            },
-        ))
-    })
-}
-
-/// Open the legacy database read-only, and only read-only: the original files
-/// are never modified, as the README promises. A leftover `-wal` is replayed
-/// by SQLite as long as the `-shm` can be created, which read-only mode allows
-/// when the directory is writable; a leftover rollback journal cannot be
-/// applied without writing, so that import stops with a message.
-fn open_legacy(path: &Path) -> anyhow::Result<Connection> {
-    let ro = OpenFlags::SQLITE_OPEN_READ_ONLY | OpenFlags::SQLITE_OPEN_NO_MUTEX;
-    let conn = Connection::open_with_flags(path, ro)
-        .with_context(|| format!("opening {} read-only", path.display()))?;
-    // Force a read so journal recovery problems surface here.
-    conn.query_row("SELECT count(*) FROM VersionInfo", [], |r| r.get::<_, i64>(0))
-        .with_context(|| {
-            format!(
-                "reading {} read-only; if the original application left a journal behind, \
-                 stop it or copy its files (the database with any -wal and -shm) and import the copy",
-                path.display()
-            )
-        })?;
-    Ok(conn)
-}
-
-/// Row with column lookup by name that tolerates absent columns.
-struct LegacyRow<'a> {
-    row: &'a Row<'a>,
-    names: &'a [String],
-    table: &'static str,
-}
-
-impl LegacyRow<'_> {
-    fn index(&self, name: &str) -> Option<usize> {
-        self.names.iter().position(|n| n == name)
-    }
-
-    /// Required column.
-    fn req<T: FromSql>(&self, name: &str) -> anyhow::Result<T> {
-        let i = self
-            .index(name)
-            .ok_or_else(|| anyhow::anyhow!("{}.{name} is missing in this database", self.table))?;
-        self.row
-            .get::<_, T>(i)
-            .with_context(|| format!("{}.{name}", self.table))
-    }
-
-    /// Column that may be NULL or absent.
-    fn opt<T: FromSql>(&self, name: &str) -> anyhow::Result<Option<T>> {
-        match self.index(name) {
-            None => Ok(None),
-            Some(i) => self
-                .row
-                .get::<_, Option<T>>(i)
-                .with_context(|| format!("{}.{name}", self.table)),
-        }
-    }
-
-    /// Column with a default when NULL or absent.
-    fn or<T: FromSql>(&self, name: &str, default: T) -> anyhow::Result<T> {
-        Ok(self.opt(name)?.unwrap_or(default))
-    }
-
-    fn text(&self, name: &str) -> anyhow::Result<Option<String>> {
-        // Sonarr stores the empty string for "no value" in several text
-        // columns; the API omits those, so they become None here.
-        Ok(self.opt::<String>(name)?.filter(|s| !s.is_empty()))
-    }
-
-    fn flag(&self, name: &str, default: bool) -> anyhow::Result<bool> {
-        Ok(self.or::<i64>(name, default as i64)? != 0)
-    }
-
-    fn json<T: DeserializeOwned + Default>(&self, name: &str) -> anyhow::Result<T> {
-        match self.opt::<String>(name)? {
-            Some(s) if !s.trim().is_empty() => {
-                serde_json::from_str(&s).with_context(|| format!("{}.{name} JSON", self.table))
-            }
-            _ => Ok(T::default()),
-        }
-    }
-
-    fn json_opt(&self, name: &str) -> anyhow::Result<Option<Value>> {
-        match self.opt::<String>(name)? {
-            Some(s) if !s.trim().is_empty() => Ok(Some(
-                serde_json::from_str(&s).with_context(|| format!("{}.{name} JSON", self.table))?,
-            )),
-            _ => Ok(None),
-        }
-    }
-
-    fn timestamp(&self, name: &str) -> anyhow::Result<Option<DateTime<Utc>>> {
-        match self.opt::<SqlValue>(name)? {
-            None | Some(SqlValue::Null) => Ok(None),
-            Some(SqlValue::Text(s)) => time::parse_utc(&s)
-                .map(Some)
-                .ok_or_else(|| anyhow::anyhow!("{}.{name}: bad timestamp {s:?}", self.table)),
-            Some(other) => anyhow::bail!("{}.{name}: unexpected {other:?}", self.table),
-        }
-    }
-
-    fn timestamp_req(&self, name: &str) -> anyhow::Result<DateTime<Utc>> {
-        self.timestamp(name)?
-            .ok_or_else(|| anyhow::anyhow!("{}.{name} is NULL", self.table))
-    }
-
-    fn date(&self, name: &str) -> anyhow::Result<Option<NaiveDate>> {
-        match self.text(name)? {
-            None => Ok(None),
-            Some(s) => time::parse_date(&s)
-                .map(Some)
-                .ok_or_else(|| anyhow::anyhow!("{}.{name}: bad date {s:?}", self.table)),
-        }
-    }
-}
-
-/// Run `SELECT * FROM table` and map every row.
-fn read_table<T>(
-    legacy: &Connection,
-    table: &'static str,
-    mut map: impl FnMut(&LegacyRow) -> anyhow::Result<T>,
-) -> anyhow::Result<Vec<T>> {
-    let exists: i64 = legacy.query_row(
-        "SELECT count(*) FROM sqlite_master WHERE type = 'table' AND name = ?1",
-        [table],
-        |r| r.get(0),
-    )?;
-    if exists == 0 {
-        tracing::warn!(table, "legacy table missing, skipping");
-        return Ok(Vec::new());
-    }
-    let mut stmt: Statement = legacy.prepare(&format!("SELECT * FROM \"{table}\" ORDER BY Id"))?;
-    let names: Vec<String> = stmt.column_names().map(|s| s.to_string()).collect();
-    let mut rows = stmt.query([])?;
-    let mut out = Vec::new();
-    while let Some(row) = rows.next()? {
-        out.push(map(&LegacyRow {
-            row,
-            names: &names,
-            table,
-        })?);
-    }
-    Ok(out)
-}
-
-/// `{"quality": 7, "revision": {"version": 1, "real": 0, "isRepack": false}}`
-fn quality_model(v: Option<Value>) -> QualityModel {
-    let Some(v) = v else {
-        return QualityModel::default();
-    };
-    QualityModel {
-        quality_id: v["quality"].as_i64().unwrap_or(0),
-        version: v["revision"]["version"].as_i64().unwrap_or(1),
-        real: v["revision"]["real"].as_i64().unwrap_or(0),
-        is_repack: v["revision"]["isRepack"].as_bool().unwrap_or(false),
-    }
-}
-
 fn series_status(v: i64) -> SeriesStatus {
     match v {
         -1 => SeriesStatus::Deleted,
@@ -352,18 +100,6 @@ fn release_type(v: i64) -> ReleaseType {
         4 => ReleaseType::MultiSeasonPack,
         _ => ReleaseType::Unknown,
     }
-}
-
-fn protocol(v: i64) -> Protocol {
-    match v {
-        1 => Protocol::Usenet,
-        2 => Protocol::Torrent,
-        _ => Protocol::Unknown,
-    }
-}
-
-fn history_event(v: i64) -> HistoryEvent {
-    HistoryEvent::from_number(v).unwrap_or(HistoryEvent::Unknown)
 }
 
 /// Sonarr's `MonitorTypes`, in declaration order.
@@ -428,37 +164,6 @@ pub fn import(legacy_db: &Path, db: &Db) -> anyhow::Result<ImportReport> {
         report.notes.push(note);
     }
 
-    // --- read everything first, so a mapping error leaves the target untouched
-    let tags = read_table(&legacy, "Tags", |r| {
-        Ok(Tag {
-            id: r.req("Id")?,
-            label: r.req("Label")?,
-        })
-    })?;
-    let root_folders = read_table(&legacy, "RootFolders", |r| {
-        Ok(RootFolder {
-            id: r.req("Id")?,
-            path: r.req("Path")?,
-        })
-    })?;
-    let quality_definitions = read_table(&legacy, "QualityDefinitions", |r| {
-        Ok(QualityDefinition {
-            id: r.req("Id")?,
-            quality_id: r.req("Quality")?,
-            title: r.req("Title")?,
-            min_size: r.opt("MinSize")?,
-            max_size: r.opt("MaxSize")?,
-            preferred_size: r.opt("PreferredSize")?,
-        })
-    })?;
-    let custom_formats = read_table(&legacy, "CustomFormats", |r| {
-        Ok(CustomFormat {
-            id: r.req("Id")?,
-            name: r.req("Name")?,
-            include_when_renaming: r.flag("IncludeCustomFormatWhenRenaming", false)?,
-            specifications: r.json_opt("Specifications")?.unwrap_or(json!([])),
-        })
-    })?;
     let quality_profiles = read_table(&legacy, "QualityProfiles", |r| {
         Ok(QualityProfile {
             id: r.req("Id")?,
@@ -472,6 +177,7 @@ pub fn import(legacy_db: &Path, db: &Db) -> anyhow::Result<ImportReport> {
             min_upgrade_format_score: r.or("MinUpgradeFormatScore", 1)?,
         })
     })?;
+    let sequences = provider_sequences(&legacy);
     let series = read_table(&legacy, "Series", |r| {
         let seasons: Vec<LegacySeason> = r.json("Seasons")?;
         let ratings: Ratings = r.json("Ratings")?;
@@ -590,18 +296,7 @@ pub fn import(legacy_db: &Path, db: &Db) -> anyhow::Result<ImportReport> {
         })
     })?;
 
-    let provider = |r: &LegacyRow, kind: ProviderKind, attributes: Value| -> anyhow::Result<Provider> {
-        Ok(Provider {
-            kind,
-            id: r.req("Id")?,
-            name: r.req("Name")?,
-            implementation: r.req("Implementation")?,
-            config_contract: r.or("ConfigContract", String::new())?,
-            settings: r.json_opt("Settings")?.unwrap_or(json!({})),
-            tags: r.json("Tags")?,
-            attributes,
-        })
-    };
+    let shared = SharedTables::read(&legacy)?;
     let mut providers = read_table(&legacy, "Indexers", |r| {
         let attributes = json!({
             "enableRss": r.flag("EnableRss", false)?,
@@ -662,113 +357,11 @@ pub fn import(legacy_db: &Path, db: &Db) -> anyhow::Result<ImportReport> {
         provider(r, ProviderKind::Metadata, attributes)
     })?);
 
-    // AUTOINCREMENT sequences of the provider tables, so ids created later
-    // continue where the original left off rather than reusing deleted ones.
-    let sequences: Vec<(ProviderKind, i64)> = [
-        ("Indexers", ProviderKind::Indexer),
-        ("DownloadClients", ProviderKind::DownloadClient),
-        ("Notifications", ProviderKind::Notification),
-        ("ImportLists", ProviderKind::ImportList),
-        ("Metadata", ProviderKind::Metadata),
-    ]
-    .into_iter()
-    .filter_map(|(table, kind)| {
-        legacy
-            .query_row("SELECT seq FROM sqlite_sequence WHERE name = ?1", [table], |r| {
-                r.get::<_, i64>(0)
-            })
-            .ok()
-            .map(|seq| (kind, seq))
-    })
-    .collect();
-
-    let delay_profiles = read_table(&legacy, "DelayProfiles", |r| {
-        Ok(DelayProfile {
-            id: r.req("Id")?,
-            enable_usenet: r.flag("EnableUsenet", true)?,
-            enable_torrent: r.flag("EnableTorrent", true)?,
-            preferred_protocol: protocol(r.or("PreferredProtocol", 1)?),
-            usenet_delay: r.or("UsenetDelay", 0)?,
-            torrent_delay: r.or("TorrentDelay", 0)?,
-            order: r.or("Order", i32::MAX as i64)?,
-            tags: r.json("Tags")?,
-            bypass_if_highest_quality: r.flag("BypassIfHighestQuality", false)?,
-            bypass_if_above_custom_format_score: r.flag("BypassIfAboveCustomFormatScore", false)?,
-            minimum_custom_format_score: r.or("MinimumCustomFormatScore", 0)?,
-        })
-    })?;
-    // Older schemas kept Required/Ignored as newline-separated text.
-    let term_list = |r: &LegacyRow, column: &str| -> anyhow::Result<Vec<String>> {
-        match r.opt::<String>(column)? {
-            None => Ok(Vec::new()),
-            Some(s) if s.trim_start().starts_with('[') => Ok(serde_json::from_str(&s)?),
-            Some(s) => Ok(s
-                .split(['\n', ','])
-                .map(|t| t.trim().to_string())
-                .filter(|t| !t.is_empty())
-                .collect()),
-        }
-    };
-    let release_profiles = read_table(&legacy, "ReleaseProfiles", |r| {
-        Ok(ReleaseProfile {
-            id: r.req("Id")?,
-            name: r.text("Name")?,
-            enabled: r.flag("Enabled", true)?,
-            required: term_list(r, "Required")?,
-            ignored: term_list(r, "Ignored")?,
-            indexer_id: r.or("IndexerId", 0)?,
-            tags: r.json("Tags")?,
-        })
-    })?;
-    let remote_path_mappings = read_table(&legacy, "RemotePathMappings", |r| {
-        Ok(RemotePathMapping {
-            id: r.req("Id")?,
-            host: r.req("Host")?,
-            remote_path: r.req("RemotePath")?,
-            local_path: r.req("LocalPath")?,
-        })
-    })?;
-    let custom_filters = read_table(&legacy, "CustomFilters", |r| {
-        Ok(CustomFilter {
-            id: r.req("Id")?,
-            filter_type: r.req("Type")?,
-            label: r.req("Label")?,
-            filters: r.json_opt("Filters")?.unwrap_or(json!([])),
-        })
-    })?;
     let exclusions = read_table(&legacy, "ImportListExclusions", |r| {
         Ok(ImportListExclusion {
             id: r.req("Id")?,
             tvdb_id: r.req("TvdbId")?,
             title: r.or("Title", String::new())?,
-        })
-    })?;
-    let auto_tagging = read_table(&legacy, "AutoTagging", |r| {
-        Ok(AutoTagging {
-            id: r.req("Id")?,
-            name: r.req("Name")?,
-            remove_tags_automatically: r.flag("RemoveTagsAutomatically", false)?,
-            tags: r.json("Tags")?,
-            specifications: r.json_opt("Specifications")?.unwrap_or(json!([])),
-        })
-    })?;
-    let users = read_table(&legacy, "Users", |r| {
-        Ok(User {
-            id: r.req("Id")?,
-            identifier: r.req("Identifier")?,
-            username: r.req("Username")?,
-            password: r.req("Password")?,
-            salt: r.text("Salt")?,
-            iterations: r.opt("Iterations")?,
-        })
-    })?;
-    let scheduled_tasks = read_table(&legacy, "ScheduledTasks", |r| {
-        Ok(ScheduledTask {
-            id: r.req("Id")?,
-            type_name: r.req("TypeName")?,
-            interval_minutes: r.or("Interval", 0)?,
-            last_execution: r.timestamp("LastExecution")?,
-            last_start_time: r.timestamp("LastStartTime")?,
         })
     })?;
     let blocklist = read_table(&legacy, "Blocklist", |r| {
@@ -859,13 +452,10 @@ pub fn import(legacy_db: &Path, db: &Db) -> anyhow::Result<ImportReport> {
             specials_folder_format: r.or("SpecialsFolderFormat", d.specials_folder_format)?,
         })
     })?;
-    let config = read_table(&legacy, "Config", |r| {
-        Ok((r.req::<String>("Key")?, r.or("Value", String::new())?))
-    })?;
 
     // Tags referenced by a series but missing from Tags would break the
     // foreign key; the originals tolerate that, so note and drop them.
-    let tag_ids: std::collections::HashSet<i64> = tags.iter().map(|t| t.id).collect();
+    let tag_ids: std::collections::HashSet<i64> = shared.tags.iter().map(|t| t.id).collect();
     let series: Vec<Series> = series
         .into_iter()
         .map(|mut s| {
@@ -1019,17 +609,17 @@ pub fn import(legacy_db: &Path, db: &Db) -> anyhow::Result<ImportReport> {
         .filter(|i| provider_exists(ProviderKind::ImportList, i.import_list_id))
         .collect();
 
-    report.skipped = skipped_tables(&legacy)?;
+    report.skipped = skipped_tables(&legacy, HANDLED_TABLES)?;
     for (table, rows) in &report.skipped {
         tracing::info!(table, rows, "legacy table not imported");
     }
 
     // --- write in one transaction
     let counts = [
-        ("Tags", tags.len()),
-        ("RootFolders", root_folders.len()),
-        ("QualityDefinitions", quality_definitions.len()),
-        ("CustomFormats", custom_formats.len()),
+        ("Tags", shared.tags.len()),
+        ("RootFolders", shared.root_folders.len()),
+        ("QualityDefinitions", shared.quality_definitions.len()),
+        ("CustomFormats", shared.custom_formats.len()),
         ("QualityProfiles", quality_profiles.len()),
         ("Series", series.len()),
         ("Episodes", episodes.len()),
@@ -1070,20 +660,20 @@ pub fn import(legacy_db: &Path, db: &Db) -> anyhow::Result<ImportReport> {
                 .filter(|p| p.kind == ProviderKind::Metadata)
                 .count(),
         ),
-        ("DelayProfiles", delay_profiles.len()),
-        ("ReleaseProfiles", release_profiles.len()),
-        ("RemotePathMappings", remote_path_mappings.len()),
-        ("CustomFilters", custom_filters.len()),
+        ("DelayProfiles", shared.delay_profiles.len()),
+        ("ReleaseProfiles", shared.release_profiles.len()),
+        ("RemotePathMappings", shared.remote_path_mappings.len()),
+        ("CustomFilters", shared.custom_filters.len()),
         ("ImportListExclusions", exclusions.len()),
-        ("AutoTagging", auto_tagging.len()),
-        ("Users", users.len()),
-        ("ScheduledTasks", scheduled_tasks.len()),
+        ("AutoTagging", shared.auto_tagging.len()),
+        ("Users", shared.users.len()),
+        ("ScheduledTasks", shared.scheduled_tasks.len()),
         ("Blocklist", blocklist.len()),
         ("SubtitleFiles", subtitle_files.len()),
         ("ExtraFiles", other_extra_files.len()),
         ("SceneMappings", scene_mappings.len()),
         ("NamingConfig", naming.len()),
-        ("Config", config.len()),
+        ("Config", shared.config.len()),
         ("PendingReleases", pending_releases.len()),
         ("DownloadHistory", download_history.len()),
         ("IndexerStatus", indexer_statuses.len()),
@@ -1101,18 +691,7 @@ pub fn import(legacy_db: &Path, db: &Db) -> anyhow::Result<ImportReport> {
             "target database already holds data; import into an empty database"
         );
         let tx = conn.transaction()?;
-        for t in &tags {
-            store::catalog::insert_tag(&tx, t)?;
-        }
-        for r in &root_folders {
-            store::catalog::insert_root_folder(&tx, r)?;
-        }
-        for d in &quality_definitions {
-            store::catalog::insert_quality_definition(&tx, d)?;
-        }
-        for c in &custom_formats {
-            store::catalog::insert_custom_format(&tx, c)?;
-        }
+        shared.write(&tx)?;
         for p in &quality_profiles {
             store::catalog::insert_quality_profile(&tx, p)?;
         }
@@ -1159,32 +738,8 @@ pub fn import(legacy_db: &Path, db: &Db) -> anyhow::Result<ImportReport> {
         for p in &providers {
             store::providers::insert_provider(&tx, p)?;
         }
-        for d in &delay_profiles {
-            store::providers::insert_delay_profile(&tx, d)?;
-        }
-        for r in &release_profiles {
-            store::providers::insert_release_profile(&tx, r)?;
-        }
-        for m in &remote_path_mappings {
-            store::providers::insert_remote_path_mapping(&tx, m)?;
-        }
-        for f in &custom_filters {
-            store::providers::insert_custom_filter(&tx, f)?;
-        }
         for e in &exclusions {
             store::providers::insert_import_list_exclusion(&tx, e)?;
-        }
-        for a in &auto_tagging {
-            store::providers::insert_auto_tagging(&tx, a)?;
-        }
-        for u in &users {
-            store::providers::insert_user(&tx, u)?;
-        }
-        // A blank first start seeds the default tasks with ids of its own;
-        // the original's rows, last runs included, take their place.
-        tx.execute("DELETE FROM scheduled_tasks", [])?;
-        for t in &scheduled_tasks {
-            store::providers::insert_scheduled_task(&tx, t)?;
         }
         for b in &blocklist {
             store::history::insert_blocklist(&tx, b)?;
@@ -1226,9 +781,6 @@ pub fn import(legacy_db: &Path, db: &Db) -> anyhow::Result<ImportReport> {
         }
         if let Some(n) = naming.first() {
             store::config::set_naming(&tx, n)?;
-        }
-        for (k, v) in &config {
-            store::config::set_config(&tx, k, v)?;
         }
         for (kind, last_id) in &sequences {
             store::providers::set_provider_sequence(&tx, *kind, *last_id)?;
@@ -1488,7 +1040,7 @@ mod tests {
         let dir = std::env::temp_dir().join(format!("unarr-import-test-{}", std::process::id()));
         std::fs::create_dir_all(&dir).unwrap();
         let path = dir.join("other.db");
-        Connection::open(&path)
+        rusqlite::Connection::open(&path)
             .unwrap()
             .execute_batch("CREATE TABLE t (x)")
             .unwrap();

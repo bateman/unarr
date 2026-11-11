@@ -21,12 +21,17 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
         with: { components: "rustfmt, clippy" }
       - uses: Swatinem/rust-cache@v2
-      # The embedded web UI comes from the pinned Sonarr release; the tests
-      # need it (login page, HTML goldens). Cache the tarball between runs.
+      # The embedded web UIs come from the pinned Sonarr and Radarr releases;
+      # the tests need them (login pages, HTML goldens). Cache the tarballs
+      # between runs, each keyed by the script that pins its release.
       - uses: actions/cache@v4
         with:
           path: .cache/sonarr/*.tar.gz
           key: sonarr-release-${{ hashFiles('scripts/sonarr-fixture.sh') }}
+      - uses: actions/cache@v4
+        with:
+          path: .cache/radarr/*.tar.gz
+          key: radarr-release-${{ hashFiles('scripts/radarr-fixture.sh') }}
       - run: make ui
       - run: make check
 
@@ -43,11 +48,15 @@ jobs:
     permissions: { contents: read, packages: write }
     steps:
       - uses: actions/checkout@v4
-      # The UI is part of the build context: the image embeds it.
+      # The UIs are part of the build context: the image embeds both.
       - uses: actions/cache@v4
         with:
           path: .cache/sonarr/*.tar.gz
           key: sonarr-release-${{ hashFiles('scripts/sonarr-fixture.sh') }}
+      - uses: actions/cache@v4
+        with:
+          path: .cache/radarr/*.tar.gz
+          key: radarr-release-${{ hashFiles('scripts/radarr-fixture.sh') }}
       - run: make ui
       - uses: docker/setup-buildx-action@v3
       - uses: docker/login-action@v3

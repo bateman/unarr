@@ -1,0 +1,14 @@
+{
+  "body": {
+    "id": 1,
+    "movieTitle": "Fever Dream",
+    "movieYear": 2021,
+    "tmdbId": 595280
+  },
+  "recordedAt": "2026-11-11T12:12:58Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/exclusions/1"
+  },
+  "status": 200
+}

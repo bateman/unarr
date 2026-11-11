@@ -1,0 +1,77 @@
+{
+  "body": {
+    "page": 1,
+    "pageSize": 10,
+    "records": [
+      {
+        "id": 13,
+        "movieTitle": "Alien: Covenant - Advent",
+        "movieYear": 2017,
+        "tmdbId": 1696541
+      },
+      {
+        "id": 17,
+        "movieTitle": "Alien: Covenant - Advent",
+        "movieYear": 2017,
+        "tmdbId": 1765713
+      },
+      {
+        "id": 5,
+        "movieTitle": "Alien: Covenant - Epilogue: Advent",
+        "movieYear": 2017,
+        "tmdbId": 1471612
+      },
+      {
+        "id": 6,
+        "movieTitle": "Alien: Covenant - Meet Walter",
+        "movieYear": 2017,
+        "tmdbId": 1439793
+      },
+      {
+        "id": 18,
+        "movieTitle": "Alien: Covenant - Meet Walter",
+        "movieYear": 2017,
+        "tmdbId": 1782981
+      },
+      {
+        "id": 10,
+        "movieTitle": "Alien: Covenant - Prologue - Last Supper",
+        "movieYear": 2017,
+        "tmdbId": 1696543
+      },
+      {
+        "id": 12,
+        "movieTitle": "Alien: Covenant - Prologue - Meet Walter",
+        "movieYear": 2017,
+        "tmdbId": 1696546
+      },
+      {
+        "id": 11,
+        "movieTitle": "Alien: Covenant - Prologue - The Crossing",
+        "movieYear": 2017,
+        "tmdbId": 1696550
+      },
+      {
+        "id": 7,
+        "movieTitle": "Alien: Covenant - Prologue: Last Supper",
+        "movieYear": 2017,
+        "tmdbId": 1472042
+      },
+      {
+        "id": 16,
+        "movieTitle": "Alien: Covenant - Prologue: Last Supper",
+        "movieYear": 0,
+        "tmdbId": 1752245
+      }
+    ],
+    "sortDirection": "ascending",
+    "sortKey": "movieTitle",
+    "totalRecords": 21
+  },
+  "recordedAt": "2026-11-11T12:12:58Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/exclusions/paged?page=1&pageSize=10&sortKey=movieTitle&sortDirection=ascending"
+  },
+  "status": 200
+}

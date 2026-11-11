@@ -19,11 +19,11 @@ use crate::query::Params;
 use crate::state::AppState;
 
 const CALENDAR_NAME: &str = "Sonarr TV Schedule";
-const PRODUCT_ID: &str = "-//github.com/ical-org/ical.net//NONSGML ical.net 4.0//EN";
+pub(crate) const PRODUCT_ID: &str = "-//github.com/ical-org/ical.net//NONSGML ical.net 4.0//EN";
 
 /// A text value as iCalendar wants it: backslash, semicolon and comma
 /// escaped, a line break as `\n`.
-fn escape(text: &str) -> String {
+pub(crate) fn escape(text: &str) -> String {
     let mut out = String::with_capacity(text.len());
     let mut chars = text.chars().peekable();
     while let Some(c) = chars.next() {
@@ -45,7 +45,7 @@ fn escape(text: &str) -> String {
 }
 
 /// A content line, folded: 74 characters, then lines of a space and 73.
-fn line(out: &mut String, text: &str) {
+pub(crate) fn line(out: &mut String, text: &str) {
     let chars: Vec<char> = text.chars().collect();
     let mut rest = &chars[..];
     let mut first = true;
@@ -65,7 +65,7 @@ fn line(out: &mut String, text: &str) {
     }
 }
 
-fn stamp(at: DateTime<Utc>) -> String {
+pub(crate) fn stamp(at: DateTime<Utc>) -> String {
     at.format("%Y%m%dT%H%M%SZ").to_string()
 }
 
@@ -133,7 +133,7 @@ pub fn render(episodes: &[(Series, Episode)], all_day: bool, now: DateTime<Utc>)
 }
 
 /// Midnight today where the server is, as an instant.
-fn local_midnight(now: DateTime<Utc>) -> DateTime<Utc> {
+pub(crate) fn local_midnight(now: DateTime<Utc>) -> DateTime<Utc> {
     let today = now.with_timezone(&Local).date_naive();
     Local
         .from_local_datetime(&today.and_hms_opt(0, 0, 0).expect("midnight exists"))

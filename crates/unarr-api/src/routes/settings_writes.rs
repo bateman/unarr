@@ -1777,13 +1777,13 @@ pub async fn exclusion_bulk_delete(
 
 /// API specifications to the stored `[{type, body}]`: the schema's fields
 /// read into the body, with the condition's own flags beside them.
-fn stored_specifications(kind: SchemaKind, specs: &Value) -> Value {
+fn stored_specifications(personality: unarr_core::Personality, kind: SchemaKind, specs: &Value) -> Value {
     let list = specs.as_array().cloned().unwrap_or_default();
     Value::Array(
         list.iter()
             .map(|spec| {
                 let implementation = spec["implementation"].as_str().unwrap_or("");
-                let mut body = match schemas::lookup(kind, implementation) {
+                let mut body = match schemas::lookup(personality, kind, implementation) {
                     Some(schema) => {
                         let mut b = schemas::read_fields(schema, &spec["fields"], None);
                         b["implementationName"] = schema["implementationName"].clone();
@@ -1853,7 +1853,11 @@ async fn auto_tagging_failures(state: &AppState, body: &Value, id: i64) -> ApiRe
     Ok(failures)
 }
 
-fn auto_tagging_row(body: &Value, id: i64) -> unarr_core::model::AutoTagging {
+fn auto_tagging_row(
+    personality: unarr_core::Personality,
+    body: &Value,
+    id: i64,
+) -> unarr_core::model::AutoTagging {
     unarr_core::model::AutoTagging {
         id,
         name: text(body, "name"),
@@ -1862,7 +1866,11 @@ fn auto_tagging_row(body: &Value, id: i64) -> unarr_core::model::AutoTagging {
             .and_then(Value::as_bool)
             .unwrap_or(false),
         tags: ints(body, "tags"),
-        specifications: stored_specifications(SchemaKind::AutoTaggingSpecification, &body["specifications"]),
+        specifications: stored_specifications(
+            personality,
+            SchemaKind::AutoTaggingSpecification,
+            &body["specifications"],
+        ),
     }
 }
 
@@ -1883,7 +1891,7 @@ pub async fn auto_tagging_create(
     let id = insert_new(
         &state,
         "auto_tagging",
-        auto_tagging_row(&body, 0),
+        auto_tagging_row(state.personality(), &body, 0),
         |r, id| r.id = id,
         store::providers::insert_auto_tagging,
     )
@@ -1898,9 +1906,13 @@ pub async fn auto_tagging_update(
     Json(body): Json<Value>,
 ) -> ApiResult<Response> {
     check(auto_tagging_failures(&state, &body, id).await?)?;
-    if !replace(&state, "auto_tagging", id, auto_tagging_row(&body, id), |c, r| {
-        store::providers::insert_auto_tagging(c, r)
-    })
+    if !replace(
+        &state,
+        "auto_tagging",
+        id,
+        auto_tagging_row(state.personality(), &body, id),
+        store::providers::insert_auto_tagging,
+    )
     .await?
     {
         return Err(ApiError::NotFound);
@@ -1953,7 +1965,7 @@ async fn custom_format_failures(
     Ok(failures)
 }
 
-fn custom_format_row(body: &Value, id: i64) -> ApiResult<CustomFormat> {
+fn custom_format_row(personality: unarr_core::Personality, body: &Value, id: i64) -> ApiResult<CustomFormat> {
     if let Some(inner) = bad_regex(&body["specifications"]) {
         tracing::debug!(%inner, "custom format with a regular expression that does not compile");
         return Err(ApiError::ServerException {
@@ -1968,7 +1980,11 @@ fn custom_format_row(body: &Value, id: i64) -> ApiResult<CustomFormat> {
             .get("includeCustomFormatWhenRenaming")
             .and_then(Value::as_bool)
             .unwrap_or(false),
-        specifications: stored_specifications(SchemaKind::CustomFormatSpecification, &body["specifications"]),
+        specifications: stored_specifications(
+            personality,
+            SchemaKind::CustomFormatSpecification,
+            &body["specifications"],
+        ),
     })
 }
 
@@ -1979,7 +1995,7 @@ pub async fn custom_format_create(
     Json(body): Json<Value>,
 ) -> ApiResult<Response> {
     check(custom_format_failures(&state, &body, 0).await?)?;
-    let mut row = custom_format_row(&body, 0)?;
+    let mut row = custom_format_row(state.personality(), &body, 0)?;
     let id = state
         .db()
         .call(move |conn| {
@@ -2011,7 +2027,7 @@ pub async fn custom_format_update(
     Json(body): Json<Value>,
 ) -> ApiResult<Response> {
     check(custom_format_failures(&state, &body, id).await?)?;
-    let row = custom_format_row(&body, id)?;
+    let row = custom_format_row(state.personality(), &body, id)?;
     if !replace(&state, "custom_formats", id, row, |c, r| {
         store::catalog::insert_custom_format(c, r)
     })
@@ -2102,7 +2118,7 @@ pub async fn custom_format_bulk_update(
     Ok(accepted(Value::Array(
         formats
             .iter()
-            .map(crate::routes::catalog::custom_format_resource)
+            .map(|f| crate::routes::catalog::custom_format_resource(state.personality(), f))
             .collect(),
     )))
 }

@@ -1,0 +1,849 @@
+{
+  "body": [
+    {
+      "added": "2026-06-21T19:33:12Z",
+      "alternateTitles": [
+        {
+          "id": 1831,
+          "movieMetadataId": 350,
+          "sourceType": "tmdb",
+          "title": "Nekaunīgā laupīšana"
+        },
+        {
+          "id": 1832,
+          "movieMetadataId": 350,
+          "sourceType": "tmdb",
+          "title": "Zona de riesgo"
+        },
+        {
+          "id": 1858,
+          "movieMetadataId": 350,
+          "sourceType": "tmdb",
+          "title": "Взрив"
+        },
+        {
+          "id": 2033,
+          "movieMetadataId": 350,
+          "sourceType": "tmdb",
+          "title": "Fünye"
+        }
+      ],
+      "certification": "R",
+      "cleanTitle": "fuze",
+      "digitalRelease": "2026-06-02T00:00:00Z",
+      "folderName": "/movies/Fuze (2026) {tmdb-1242265}",
+      "genres": [
+        "Action",
+        "Crime",
+        "Thriller"
+      ],
+      "hasFile": true,
+      "id": 225,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/oMFdQE5hMJ9JjhNORegwTo0GKmh.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/8wIaBCeGv3UhIn5CJOWQGHT1Cif.jpg"
+        }
+      ],
+      "imdbId": "tt31189814",
+      "inCinemas": "2026-03-23T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "betrayal",
+        "bomb",
+        "conspiracy thriller",
+        "father son relationship",
+        "heist",
+        "london, england",
+        "malicious",
+        "mother son relationship",
+        "paranoid",
+        "plot twist",
+        "surveillance",
+        "techno thriller"
+      ],
+      "lastSearchTime": "2026-06-21T19:33:25Z",
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFile": {
+        "customFormatScore": -10000,
+        "customFormats": [
+          {
+            "id": 46,
+            "name": "DTS-HD MA"
+          },
+          {
+            "id": 58,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 12,
+            "name": "LQ"
+          }
+        ],
+        "dateAdded": "2026-06-26T19:04:22Z",
+        "edition": "",
+        "id": 265,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 3310698,
+          "audioChannels": 5.1,
+          "audioCodec": "DTS-HD MA",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "1:36:58",
+          "scanType": "Progressive",
+          "subtitles": "eng/eng",
+          "videoBitDepth": 8,
+          "videoBitrate": 33626396,
+          "videoCodec": "AVC",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "movieId": 225,
+        "originalFilePath": "Fuze.2025.1080p.Blu-ray.Remux.AVC.DTS-HD.MA.5.1-HDT/Fuze.2025.1080p.Blu-ray.Remux.AVC.DTS-HD.MA.5.1-HDT.mkv",
+        "path": "/movies/Fuze (2026) {tmdb-1242265}/Fuze (2026) {tmdb-1242265} - [Remux-1080p][DTS-HD MA 5.1][AVC]-HDT.mkv",
+        "quality": {
+          "quality": {
+            "id": 30,
+            "modifier": "remux",
+            "name": "Remux-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Fuze (2026) {tmdb-1242265} - [Remux-1080p][DTS-HD MA 5.1][AVC]-HDT.mkv",
+        "releaseGroup": "HDT",
+        "sceneName": "Fuze.2025.1080p.Blu-ray.Remux.AVC.DTS-HD.MA.5.1-HDT",
+        "size": 26905646673
+      },
+      "movieFileId": 265,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Fuze",
+      "overview": "An unexploded WWII bomb is discovered on a busy construction site in the centre of London. Chaos ensues as the military and police begin a mass evacuation against a ticking clock.",
+      "path": "/movies/Fuze (2026) {tmdb-1242265}",
+      "physicalRelease": "2026-09-15T00:00:00Z",
+      "popularity": 9.1078,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 6.3,
+          "votes": 20392
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 60,
+          "votes": 0
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 72,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 7.1,
+          "votes": 494
+        },
+        "trakt": {
+          "type": "user",
+          "value": 6.87525,
+          "votes": 1507
+        }
+      },
+      "releaseDate": "2026-06-02T00:00:00Z",
+      "runtime": 96,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 26905646673,
+      "sortTitle": "fuze",
+      "statistics": {
+        "movieFileCount": 1,
+        "movieFileQualities": [
+          {
+            "id": 30,
+            "modifier": "remux",
+            "name": "Remux-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          }
+        ],
+        "releaseGroups": [
+          "HDT"
+        ],
+        "sizeOnDisk": 26905646673
+      },
+      "status": "released",
+      "studio": "Anton",
+      "tags": [
+        1
+      ],
+      "title": "Fuze",
+      "titleSlug": "1242265",
+      "tmdbId": 1242265,
+      "website": "https://www.fuzefilm.co.uk/",
+      "year": 2025,
+      "youTubeTrailerId": "1aNywiElPSY"
+    },
+    {
+      "added": "2026-09-20T18:50:54Z",
+      "alternateTitles": [
+        {
+          "id": 2403,
+          "movieMetadataId": 447,
+          "sourceType": "tmdb",
+          "title": "La Muerte De Robin Hood"
+        },
+        {
+          "id": 2404,
+          "movieMetadataId": 447,
+          "sourceType": "tmdb",
+          "title": "On l'appelait Robin des Bois"
+        },
+        {
+          "id": 2405,
+          "movieMetadataId": 447,
+          "sourceType": "tmdb",
+          "title": "Smrt Robina Hooda"
+        },
+        {
+          "id": 2406,
+          "movieMetadataId": 447,
+          "sourceType": "tmdb",
+          "title": "โรบินฮู้ด บันทึกสุดท้ายของจอมโจร"
+        },
+        {
+          "id": 2416,
+          "movieMetadataId": 447,
+          "sourceType": "tmdb",
+          "title": "Robin Hudun Ölümü"
+        }
+      ],
+      "certification": "R",
+      "cleanTitle": "thedeathrobinhood",
+      "digitalRelease": "2026-07-28T00:00:00Z",
+      "folderName": "/movies/The Death of Robin Hood (2026) {tmdb-1284465}",
+      "genres": [
+        "Adventure",
+        "Drama",
+        "Action"
+      ],
+      "hasFile": true,
+      "id": 287,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/13MmRwmG5NmaMfU8qNrtgGXisiD.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/lh3BDkmWJh998n4fQcHYcVi7dpm.jpg"
+        }
+      ],
+      "imdbId": "tt32273171",
+      "inCinemas": "2026-06-18T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "based on myths, legends or folklore",
+        "grim",
+        "grimdark",
+        "robin hood",
+        "salvation",
+        "somber"
+      ],
+      "lastSearchTime": "2026-09-20T18:51:07Z",
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFile": {
+        "customFormatScore": -8000,
+        "customFormats": [
+          {
+            "id": 46,
+            "name": "DTS-HD MA"
+          },
+          {
+            "id": 58,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 13,
+            "name": "LQ (Release Title)"
+          },
+          {
+            "id": 57,
+            "name": "MULTi"
+          }
+        ],
+        "dateAdded": "2026-10-10T14:55:54Z",
+        "edition": "",
+        "id": 356,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 3,
+            "name": "Spanish"
+          },
+          {
+            "id": 2,
+            "name": "French"
+          },
+          {
+            "id": 11,
+            "name": "Russian"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 3630693,
+          "audioChannels": 5.1,
+          "audioCodec": "DTS-HD MA",
+          "audioLanguages": "eng/eng/spa/fre/rus/eng",
+          "audioStreamCount": 6,
+          "resolution": "1920x1080",
+          "runTime": "2:01:54",
+          "scanType": "Progressive",
+          "subtitles": "eng/eng/spa/fre/por/por/alb/ara/dan/ger/gre/fin/ind/dut/nor/rus/swe/tur",
+          "videoBitDepth": 8,
+          "videoBitrate": 32008375,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "movieId": 287,
+        "originalFilePath": "The.Death.Of.Robin.Hood.2026.1080p.BluRay.Remux.MULTi-Ben.The.Men/The.Death.Of.Robin.Hood.2026.1080p.BluRay.Remux.MULTi-Ben.The.Men.mkv",
+        "path": "/movies/The Death of Robin Hood (2026) {tmdb-1284465}/The Death of Robin Hood (2026) {tmdb-1284465} - [MULTi][Remux-1080p][DTS-HD MA 5.1][h264]-Ben.mkv",
+        "quality": {
+          "quality": {
+            "id": 30,
+            "modifier": "remux",
+            "name": "Remux-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "The Death of Robin Hood (2026) {tmdb-1284465} - [MULTi][Remux-1080p][DTS-HD MA 5.1][h264]-Ben.mkv",
+        "releaseGroup": "Ben",
+        "sceneName": "The.Death.Of.Robin.Hood.2026.1080p.BluRay.Remux.MULTi-Ben.The.Men",
+        "size": 36027834772
+      },
+      "movieFileId": 356,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "The Death of Robin Hood",
+      "overview": "Grappling with his past after a life of crime and murder, Robin Hood finds himself gravely injured after a battle he thought would be his last. In the hands of a mysterious woman, he is offered a chance at salvation.",
+      "path": "/movies/The Death of Robin Hood (2026) {tmdb-1284465}",
+      "physicalRelease": "2026-09-25T00:00:00Z",
+      "popularity": 19.3758,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 6,
+          "votes": 26293
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 61,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 6.7,
+          "votes": 614
+        },
+        "trakt": {
+          "type": "user",
+          "value": 6.46875,
+          "votes": 576
+        }
+      },
+      "releaseDate": "2026-07-28T00:00:00Z",
+      "runtime": 123,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 36027834772,
+      "sortTitle": "death of robin hood",
+      "statistics": {
+        "movieFileCount": 1,
+        "movieFileQualities": [
+          {
+            "id": 30,
+            "modifier": "remux",
+            "name": "Remux-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          }
+        ],
+        "releaseGroups": [
+          "Ben"
+        ],
+        "sizeOnDisk": 36027834772
+      },
+      "status": "released",
+      "studio": "Lyrical Media",
+      "tags": [
+        1
+      ],
+      "title": "The Death of Robin Hood",
+      "titleSlug": "1284465",
+      "tmdbId": 1284465,
+      "website": "https://a24films.com/films/the-death-of-robin-hood",
+      "year": 2026,
+      "youTubeTrailerId": "tlSDDuWxO_0"
+    },
+    {
+      "added": "2026-11-10T19:52:02Z",
+      "alternateTitles": [
+        {
+          "id": 2787,
+          "movieMetadataId": 517,
+          "sourceType": "tmdb",
+          "title": "Código: Venganza"
+        },
+        {
+          "id": 2788,
+          "movieMetadataId": 517,
+          "sourceType": "tmdb",
+          "title": "คนระห่ำห้ามรอด"
+        },
+        {
+          "id": 2789,
+          "movieMetadataId": 517,
+          "sourceType": "tmdb",
+          "title": "El Motin"
+        },
+        {
+          "id": 2790,
+          "movieMetadataId": 517,
+          "sourceType": "tmdb",
+          "title": "Mutinerie"
+        }
+      ],
+      "certification": "R",
+      "cleanTitle": "mutiny",
+      "digitalRelease": "2026-09-08T00:00:00Z",
+      "folderName": "/movies/Mutiny (2026) {tmdb-1288445}",
+      "genres": [
+        "Action",
+        "Thriller"
+      ],
+      "hasFile": true,
+      "id": 326,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/pu2VxGlpGwffOx292w18b1tv96j.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/qDa0fqDqIBCovRp975RvtGPcuN3.jpg"
+        }
+      ],
+      "imdbId": "tt32338669",
+      "inCinemas": "2026-08-19T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "cargo ship",
+        "conspiracy",
+        "framed for murder",
+        "one man army",
+        "revenge"
+      ],
+      "lastSearchTime": "2026-11-10T19:52:32Z",
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 50,
+            "name": "DD+"
+          },
+          {
+            "id": 61,
+            "name": "Line/Mic Dubbed"
+          },
+          {
+            "id": 18,
+            "name": "x265 (HD)"
+          },
+          {
+            "id": 56,
+            "name": "x265 (no HDR/DV)"
+          }
+        ],
+        "dateAdded": "2026-11-10T20:07:33Z",
+        "edition": "",
+        "id": 402,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 320000,
+          "audioChannels": 2,
+          "audioCodec": "MP3",
+          "audioLanguages": "ita/eng",
+          "audioStreamCount": 2,
+          "resolution": "1920x960",
+          "runTime": "1:35:03",
+          "scanType": "Progressive",
+          "subtitles": "eng",
+          "videoBitDepth": 10,
+          "videoBitrate": 2467456,
+          "videoCodec": "x265",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "movieId": 326,
+        "originalFilePath": "Mutiny Inverti la rotta (2026) 1080p x265 ita eng sub eng MD eac3 - Faccio.mkv",
+        "path": "/movies/Mutiny (2026) {tmdb-1288445}/Mutiny (2026) {tmdb-1288445} - [WEBDL-1080p][MP3 2.0][x265].mkv",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "modifier": "none",
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "webdl"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Mutiny (2026) {tmdb-1288445} - [WEBDL-1080p][MP3 2.0][x265].mkv",
+        "sceneName": "Mutiny Inverti la rotta (2026) 1080p x265 ita eng sub eng MD eac3 - Faccio",
+        "size": 2262743736
+      },
+      "movieFileId": 402,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Mutiny",
+      "overview": "After witnessing his billionaire boss' murder and being framed for the crime, Cole Reed boards a cargo ship on a one-man crusade to avenge his boss' death only to discover an international conspiracy.",
+      "path": "/movies/Mutiny (2026) {tmdb-1288445}",
+      "physicalRelease": "2026-12-11T00:00:00Z",
+      "popularity": 79.2795,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 5.7,
+          "votes": 25591
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 52,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 7.628,
+          "votes": 1049
+        }
+      },
+      "releaseDate": "2026-09-08T00:00:00Z",
+      "runtime": 96,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 2262743736,
+      "sortTitle": "mutiny",
+      "statistics": {
+        "movieFileCount": 1,
+        "movieFileQualities": [
+          {
+            "id": 3,
+            "modifier": "none",
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "webdl"
+          }
+        ],
+        "releaseGroups": [],
+        "sizeOnDisk": 2262743736
+      },
+      "status": "released",
+      "studio": "Punch Palace Productions",
+      "tags": [
+        1
+      ],
+      "title": "Mutiny",
+      "titleSlug": "1288445",
+      "tmdbId": 1288445,
+      "website": "https://www.mutiny.movie",
+      "year": 2026,
+      "youTubeTrailerId": "2Iqvbe98Gb4"
+    },
+    {
+      "added": "2026-06-15T18:58:47Z",
+      "alternateTitles": [
+        {
+          "id": 1820,
+          "movieMetadataId": 349,
+          "sourceType": "tmdb",
+          "title": "V srdci divočiny"
+        },
+        {
+          "id": 2345,
+          "movieMetadataId": 349,
+          "sourceType": "tmdb",
+          "title": "W sercu dziczy"
+        },
+        {
+          "id": 2350,
+          "movieMetadataId": 349,
+          "sourceType": "tmdb",
+          "title": "Skarbās zemes sirdī"
+        },
+        {
+          "id": 2391,
+          "movieMetadataId": 349,
+          "sourceType": "tmdb",
+          "title": "El corazon de la bestia"
+        },
+        {
+          "id": 2392,
+          "movieMetadataId": 349,
+          "sourceType": "tmdb",
+          "title": "Heart of the Beast - Heróis Inseparáveis"
+        },
+        {
+          "id": 2393,
+          "movieMetadataId": 349,
+          "sourceType": "tmdb",
+          "title": "Au cœur de la bête"
+        },
+        {
+          "id": 2417,
+          "movieMetadataId": 349,
+          "sourceType": "tmdb",
+          "title": "หัวใจผจญไพร"
+        },
+        {
+          "id": 2555,
+          "movieMetadataId": 349,
+          "sourceType": "tmdb",
+          "title": "狂野雄心"
+        },
+        {
+          "id": 2764,
+          "movieMetadataId": 349,
+          "sourceType": "tmdb",
+          "title": "Coração Selvagem"
+        },
+        {
+          "id": 2766,
+          "movieMetadataId": 349,
+          "sourceType": "tmdb",
+          "title": "Vahşetin Kalbi"
+        }
+      ],
+      "certification": "PG-13",
+      "cleanTitle": "heartbeast",
+      "digitalRelease": "2026-11-10T00:00:00Z",
+      "folderName": "/movies/Heart of the Beast (2026) {tmdb-1263337}",
+      "genres": [
+        "Adventure",
+        "Thriller"
+      ],
+      "hasFile": true,
+      "id": 224,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/6sYemVUn79UPKz1ZsSG6kPU4RVy.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/6uVRPFflyJpo8Cx872olmlGTWla.jpg"
+        }
+      ],
+      "imdbId": "tt7526136",
+      "inCinemas": "2026-09-23T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "alaska",
+        "american wilderness",
+        "dog",
+        "extreme conditions",
+        "inspirational",
+        "man vs nature",
+        "military",
+        "plane crash",
+        "special forces",
+        "survival thriller"
+      ],
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 54,
+            "name": "DD"
+          },
+          {
+            "id": 18,
+            "name": "x265 (HD)"
+          },
+          {
+            "id": 56,
+            "name": "x265 (no HDR/DV)"
+          }
+        ],
+        "dateAdded": "2026-11-11T07:00:07Z",
+        "edition": "",
+        "id": 403,
+        "indexerFlags": 1,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 448000,
+          "audioChannels": 5.1,
+          "audioCodec": "AC3",
+          "audioLanguages": "ita/eng",
+          "audioStreamCount": 2,
+          "resolution": "1920x800",
+          "runTime": "1:44:59",
+          "scanType": "Progressive",
+          "subtitles": "ita/ita/eng/eng",
+          "videoBitDepth": 8,
+          "videoBitrate": 2859946,
+          "videoCodec": "x265",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "movieId": 224,
+        "originalFilePath": "Heart Of The Beast - Nel Profondo Selvaggio (2026) 1080p WEB-DL H265 Ita Eng AC3 5.1 Sub Ita Eng iDN_CreW.mkv",
+        "path": "/movies/Heart of the Beast (2026) {tmdb-1263337}/Heart of the Beast (2026) {tmdb-1263337} - [WEBDL-1080p][AC3 5.1][x265].mkv",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "modifier": "none",
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "webdl"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Heart of the Beast (2026) {tmdb-1263337} - [WEBDL-1080p][AC3 5.1][x265].mkv",
+        "sceneName": "Heart Of The Beast - Nel Profondo Selvaggio (2026) 1080p WEB-DL H265 Ita Eng AC3 5.1 Sub Ita Eng iDN_CreW",
+        "size": 2959421173
+      },
+      "movieFileId": 403,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Heart of the Beast",
+      "overview": "After a harrowing plane crash, Special Forces officer James Belmont and his combat dog, Odin, find themselves stranded deep in the Alaskan wilderness. Together, they are forced into a brutal fight for survival against the elements.",
+      "path": "/movies/Heart of the Beast (2026) {tmdb-1263337}",
+      "popularity": 445.8409,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 7.1,
+          "votes": 43512
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 7.362,
+          "votes": 577
+        }
+      },
+      "releaseDate": "2026-11-10T00:00:00Z",
+      "runtime": 101,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 2959421173,
+      "sortTitle": "heart of the beast",
+      "statistics": {
+        "movieFileCount": 1,
+        "movieFileQualities": [
+          {
+            "id": 3,
+            "modifier": "none",
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "webdl"
+          }
+        ],
+        "releaseGroups": [],
+        "sizeOnDisk": 2959421173
+      },
+      "status": "released",
+      "studio": "Paramount Pictures",
+      "tags": [
+        1
+      ],
+      "title": "Heart of the Beast",
+      "titleSlug": "1263337",
+      "tmdbId": 1263337,
+      "website": "https://www.heartofthebeastmovie.com",
+      "year": 2026,
+      "youTubeTrailerId": "UkMuGKqAux4"
+    }
+  ],
+  "recordedAt": "2026-11-11T12:12:58Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/calendar?start=2026-09-01T00:00:00Z&end=2026-09-30T00:00:00Z"
+  },
+  "status": 200
+}

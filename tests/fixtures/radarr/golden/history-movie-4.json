@@ -1,0 +1,1907 @@
+{
+  "body": [
+    {
+      "customFormatScore": 0,
+      "customFormats": [],
+      "data": {
+        "customFormatScore": "0",
+        "downloadClient": "qBittorrent",
+        "downloadClientName": "Download client",
+        "droppedPath": "/downloads/Adventureland.2009.BluRay.1080p.DTS.ITA.AC3.ENG.Subs.x264-WGZ.mkv",
+        "fileId": "243",
+        "importedPath": "/movies/Adventureland (2009)/Adventureland (2009) {tmdb-16614} - [Bluray-1080p][DTS 5.1][x264]-WGZ.mkv",
+        "indexerFlags": "0",
+        "releaseGroup": "WGZ",
+        "size": "8548159580"
+      },
+      "date": "2026-06-14T03:33:06Z",
+      "downloadId": "a3aee8476eca3f09367c39fd195cf9e7d0ecae25",
+      "eventType": "downloadFolderImported",
+      "id": 457,
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        },
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movieId": 4,
+      "quality": {
+        "quality": {
+          "id": 7,
+          "modifier": "none",
+          "name": "Bluray-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "sourceTitle": "Adventureland.2009.BluRay.1080p.DTS.ITA.AC3.ENG.Subs.x264-WGZ"
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [],
+      "data": {
+        "age": "0",
+        "ageHours": "0.0014718590555555557",
+        "ageMinutes": "0.088311705",
+        "customFormatScore": "0",
+        "downloadClient": "qBittorrent",
+        "downloadClientName": "Download client",
+        "downloadUrl": "magnet:?xt=urn:btih:6bff20fb61ca7a3c1b005492052b6397047f53ed",
+        "guid": "29cde24c7c2d0598f8f739b389f598fb",
+        "imdbId": "0",
+        "indexer": "Indexer",
+        "indexerFlags": "0",
+        "indexerId": "14",
+        "movieMatchType": "Title",
+        "nzbInfoUrl": null,
+        "protocol": "2",
+        "publishedDate": "2026-06-13T13:23:16Z",
+        "releaseGroup": "WGZ",
+        "releaseSource": "UserInvokedSearch",
+        "size": "8548159580",
+        "tmdbId": "0",
+        "torrentInfoHash": "29cde24c7c2d0598f8f739b389f598fb"
+      },
+      "date": "2026-06-13T13:23:21Z",
+      "downloadId": "a3aee8476eca3f09367c39fd195cf9e7d0ecae25",
+      "eventType": "grabbed",
+      "id": 456,
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        },
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movieId": 4,
+      "quality": {
+        "quality": {
+          "id": 7,
+          "modifier": "none",
+          "name": "Bluray-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "sourceTitle": "Adventureland.2009.BluRay.1080p.DTS.ITA.AC3.ENG.Subs.x264-WGZ.mkv"
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [],
+      "data": {
+        "age": "0",
+        "ageHours": "0.0015464953333333333",
+        "ageMinutes": "0.09278999333333333",
+        "customFormatScore": "0",
+        "downloadClient": "redacted",
+        "downloadClientName": "Download client",
+        "downloadUrl": "magnet:?xt=urn:btih:6bff20fb61ca7a3c1b005492052b6397047f53ed",
+        "guid": "29cde24c7c2d0598f8f739b389f598fb",
+        "imdbId": "0",
+        "indexer": "Indexer",
+        "indexerFlags": "0",
+        "indexerId": "14",
+        "movieMatchType": "Title",
+        "nzbInfoUrl": null,
+        "protocol": "2",
+        "publishedDate": "2026-06-13T13:01:04Z",
+        "releaseGroup": "WGZ",
+        "releaseSource": "UserInvokedSearch",
+        "size": "8548159580",
+        "tmdbId": "0",
+        "torrentInfoHash": "29cde24c7c2d0598f8f739b389f598fb"
+      },
+      "date": "2026-06-13T13:01:09Z",
+      "downloadId": "a3aee8476eca3f09367c39fd195cf9e7d0ecae25",
+      "eventType": "grabbed",
+      "id": 455,
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        },
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movieId": 4,
+      "quality": {
+        "quality": {
+          "id": 7,
+          "modifier": "none",
+          "name": "Bluray-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "sourceTitle": "Adventureland.2009.BluRay.1080p.DTS.ITA.AC3.ENG.Subs.x264-WGZ.mkv"
+    },
+    {
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 54,
+          "name": "DD"
+        },
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "LQ"
+        }
+      ],
+      "data": {
+        "indexerFlags": "0",
+        "reason": "Manual",
+        "releaseGroup": "nikt0",
+        "size": "5124205059"
+      },
+      "date": "2026-06-13T10:50:44Z",
+      "eventType": "movieFileDeleted",
+      "id": 454,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movieId": 4,
+      "quality": {
+        "quality": {
+          "id": 7,
+          "modifier": "none",
+          "name": "Bluray-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "sourceTitle": "/movies/Adventureland (2009)/Adventureland (2009) {tmdb-16614} - [Bluray-1080p][AC3 5.1][x264]-nikt0.mkv"
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [],
+      "data": {
+        "downloadClient": "redacted",
+        "downloadClientName": "Download client",
+        "indexer": "Indexer",
+        "message": "redacted",
+        "releaseGroup": "bt",
+        "size": "0"
+      },
+      "date": "2026-06-12T23:30:00Z",
+      "downloadId": "5a197c287eaac6d621de8f1678536b54996cf6b7",
+      "eventType": "downloadFailed",
+      "id": 453,
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        }
+      ],
+      "movieId": 4,
+      "quality": {
+        "quality": {
+          "id": 2,
+          "modifier": "none",
+          "name": "DVD",
+          "resolution": 0,
+          "source": "dvd"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "Adventureland.2009.iTALiAN.DVDRip.XviD-Republic-[WiNetwork-bt]"
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [],
+      "data": {
+        "age": "0",
+        "ageHours": "0.01108558436111111",
+        "ageMinutes": "0.6651351833333333",
+        "customFormatScore": "0",
+        "downloadClient": "redacted",
+        "downloadClientName": "Download client",
+        "downloadUrl": "http://indexer.invalid/b3dac704c77d",
+        "guid": "magnet:?xt=urn:btih:35533a74c10c665f31d4cfd5aba587e00834828e",
+        "imdbId": "0",
+        "indexer": "Indexer",
+        "indexerFlags": "G_Freeleech",
+        "indexerId": "12",
+        "movieMatchType": "Title",
+        "nzbInfoUrl": "http://indexer.invalid/8f3aca23e7ec",
+        "protocol": "2",
+        "publishedDate": "2026-06-12T21:04:06Z",
+        "releaseGroup": "bt",
+        "releaseSource": "InteractiveSearch",
+        "size": "1460288896",
+        "tmdbId": "0",
+        "torrentInfoHash": "36d18c66e841c81a5604259105b0ca076ff82819"
+      },
+      "date": "2026-06-12T21:04:45Z",
+      "downloadId": "5a197c287eaac6d621de8f1678536b54996cf6b7",
+      "eventType": "grabbed",
+      "id": 449,
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        }
+      ],
+      "movieId": 4,
+      "quality": {
+        "quality": {
+          "id": 2,
+          "modifier": "none",
+          "name": "DVD",
+          "resolution": 0,
+          "source": "dvd"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "Adventureland.2009.iTALiAN.DVDRip.XviD-Republic-[WiNetwork-bt]"
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [],
+      "data": {
+        "age": "0",
+        "ageHours": "0.009886190222222223",
+        "ageMinutes": "0.5931715366666667",
+        "customFormatScore": "0",
+        "downloadClient": "qBittorrent",
+        "downloadClientName": "Download client",
+        "downloadUrl": "http://indexer.invalid/6e8e983e9941",
+        "guid": "magnet:?xt=urn:btih:ac944a84150b18681db84ac42f08b745f7c547bb",
+        "imdbId": "0",
+        "indexer": "Indexer",
+        "indexerFlags": "G_Freeleech",
+        "indexerId": "12",
+        "movieMatchType": "Title",
+        "nzbInfoUrl": "http://indexer.invalid/f244c920b0c1",
+        "protocol": "2",
+        "publishedDate": "2026-06-12T21:04:06Z",
+        "releaseGroup": "TRL",
+        "releaseSource": "InteractiveSearch",
+        "size": "1471026304",
+        "tmdbId": "0",
+        "torrentInfoHash": "6af18570e4b3eeb0b03a3b99de5982269882e0b8"
+      },
+      "date": "2026-06-12T21:04:41Z",
+      "downloadId": "e4daf359841a9f01097af7f2eb7d514fc6000334",
+      "eventType": "grabbed",
+      "id": 448,
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        }
+      ],
+      "movieId": 4,
+      "quality": {
+        "quality": {
+          "id": 2,
+          "modifier": "none",
+          "name": "DVD",
+          "resolution": 0,
+          "source": "dvd"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "Adventureland 2009 iTALiAN DVDRip XviD-TRL[survivalofmisa]"
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 54,
+          "name": "DD"
+        }
+      ],
+      "data": {
+        "downloadClient": "redacted",
+        "downloadClientName": "Download client",
+        "indexer": "Indexer",
+        "message": "redacted",
+        "releaseGroup": null,
+        "size": "1941914891"
+      },
+      "date": "2026-06-09T11:45:00Z",
+      "downloadId": "a0e32cfbf308b441d95613783562870231d19c8a",
+      "eventType": "downloadFailed",
+      "id": 439,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        },
+        {
+          "id": 5,
+          "name": "Italian"
+        }
+      ],
+      "movieId": 4,
+      "quality": {
+        "quality": {
+          "id": 20,
+          "modifier": "none",
+          "name": "Bluray-480p",
+          "resolution": 480,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "Adventureland (2009).BRrip.XviD - Italian English.Ac3 5.1 Sub It ..."
+    },
+    {
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "LQ"
+        }
+      ],
+      "data": {
+        "customFormatScore": "0",
+        "downloadClient": "NZBGet",
+        "downloadClientName": "Download client",
+        "droppedPath": "/downloads/Adventureland.2009.1080p.BluRay.x264-nikt0.mkv",
+        "fileId": "226",
+        "importedPath": "/movies/Adventureland (2009)/Adventureland (2009) {tmdb-16614} - [Bluray-1080p][AC3 5.1][x264]-nikt0.mkv",
+        "indexerFlags": "0",
+        "releaseGroup": "nikt0",
+        "size": "5124205059"
+      },
+      "date": "2026-05-16T12:34:29Z",
+      "downloadId": "82ec03bbcdb7084ff6130415dd7734f7",
+      "eventType": "downloadFolderImported",
+      "id": 393,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movieId": 4,
+      "quality": {
+        "quality": {
+          "id": 7,
+          "modifier": "none",
+          "name": "Bluray-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "sourceTitle": "Adventureland.2009.1080p.BluRay.x264-nikt0"
+    },
+    {
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "LQ"
+        }
+      ],
+      "data": {
+        "age": "179",
+        "ageHours": "4313.3819789383615",
+        "ageMinutes": "258802.91873645",
+        "customFormatScore": "0",
+        "downloadClient": "NZBGet",
+        "downloadClientName": "Download client",
+        "downloadUrl": "http://indexer.invalid/906ac521cb53",
+        "guid": "http://indexer.invalid/4a3536a3fe2e",
+        "imdbId": "1091722",
+        "indexer": "Indexer",
+        "indexerFlags": "0",
+        "indexerId": "3",
+        "movieMatchType": "Id",
+        "nzbInfoUrl": "http://indexer.invalid/4a3536a3fe2e",
+        "protocol": "1",
+        "publishedDate": "2025-11-17T19:04:22Z",
+        "releaseGroup": "nikt0",
+        "releaseSource": "InteractiveSearch",
+        "size": "5828188006",
+        "tmdbId": "0"
+      },
+      "date": "2026-05-16T12:27:17Z",
+      "downloadId": "82ec03bbcdb7084ff6130415dd7734f7",
+      "eventType": "grabbed",
+      "id": 392,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movieId": 4,
+      "quality": {
+        "quality": {
+          "id": 7,
+          "modifier": "none",
+          "name": "Bluray-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "sourceTitle": "Adventureland.2009.1080p.BluRay.x264-nikt0"
+    },
+    {
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 46,
+          "name": "DTS-HD MA"
+        },
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        }
+      ],
+      "data": {
+        "age": "730",
+        "ageHours": "17520.00195718114",
+        "ageMinutes": "1051200.117430995",
+        "customFormatScore": "0",
+        "downloadClient": "redacted",
+        "downloadClientName": "Download client",
+        "downloadUrl": "http://indexer.invalid/b953a4eff29a",
+        "guid": "magnet:?xt=urn:btih:3fea8a44778c367741d331753bb2390228473963",
+        "imdbId": "0",
+        "indexer": "Indexer",
+        "indexerFlags": "G_Freeleech",
+        "indexerId": "12",
+        "movieMatchType": "Title",
+        "nzbInfoUrl": "http://indexer.invalid/bcfb33587e2b",
+        "protocol": "2",
+        "publishedDate": "2024-05-16T12:26:13Z",
+        "releaseGroup": "HiFi",
+        "releaseSource": "Search",
+        "size": "28561532928",
+        "tmdbId": "0",
+        "torrentInfoHash": "17e427e633f6dd89507bcc8e12510b3abb6842e9"
+      },
+      "date": "2026-05-16T12:26:20Z",
+      "downloadId": "17e427e633f6dd89507bcc8e12510b3abb6842e9",
+      "eventType": "grabbed",
+      "id": 391,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movieId": 4,
+      "quality": {
+        "quality": {
+          "id": 30,
+          "modifier": "remux",
+          "name": "Remux-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "Adventureland 2009 BluRay Remux 1080p AVC DTS-HD MA 5 1-HiFi"
+    },
+    {
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 46,
+          "name": "DTS-HD MA"
+        },
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        }
+      ],
+      "data": {
+        "downloadClient": "NZBGet",
+        "downloadClientName": "Download client",
+        "indexer": "Indexer",
+        "message": "redacted",
+        "releaseGroup": "HiFi",
+        "size": "31366933064"
+      },
+      "date": "2026-05-16T12:26:12Z",
+      "downloadId": "e75e6d8311a297353a52becabd2ef61e",
+      "eventType": "downloadFailed",
+      "id": 390,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movieId": 4,
+      "quality": {
+        "quality": {
+          "id": 30,
+          "modifier": "remux",
+          "name": "Remux-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "Adventureland.2009.BluRay.Remux.1080p.AVC.DTS-HD.MA.5.1-HiFi"
+    },
+    {
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 46,
+          "name": "DTS-HD MA"
+        },
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        }
+      ],
+      "data": {
+        "age": "1278",
+        "ageHours": "30691.870689945696",
+        "ageMinutes": "1841512.24139686",
+        "customFormatScore": "0",
+        "downloadClient": "NZBGet",
+        "downloadClientName": "Download client",
+        "downloadUrl": "http://indexer.invalid/fa512abc3487",
+        "guid": "http://indexer.invalid/ad0bd1ad0c57",
+        "imdbId": "1091722",
+        "indexer": "Indexer",
+        "indexerFlags": "0",
+        "indexerId": "1",
+        "movieMatchType": "Id",
+        "nzbInfoUrl": "http://indexer.invalid/ad0bd1ad0c57",
+        "protocol": "1",
+        "publishedDate": "2022-11-14T16:33:53Z",
+        "releaseGroup": "HiFi",
+        "releaseSource": "UserInvokedSearch",
+        "size": "31366933000",
+        "tmdbId": "0"
+      },
+      "date": "2026-05-16T12:26:07Z",
+      "downloadId": "e75e6d8311a297353a52becabd2ef61e",
+      "eventType": "grabbed",
+      "id": 389,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movieId": 4,
+      "quality": {
+        "quality": {
+          "id": 30,
+          "modifier": "remux",
+          "name": "Remux-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "Adventureland.2009.BluRay.Remux.1080p.AVC.DTS-HD.MA.5.1-HiFi"
+    },
+    {
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 46,
+          "name": "DTS-HD MA"
+        },
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        }
+      ],
+      "data": {
+        "downloadClient": "NZBGet",
+        "downloadClientName": "Download client",
+        "indexer": "Indexer",
+        "message": "redacted",
+        "releaseGroup": "FraMeSToR",
+        "size": "32281900522"
+      },
+      "date": "2026-05-16T12:25:11Z",
+      "downloadId": "865dd7734f1c9854db1038d6cd0cc6ff",
+      "eventType": "downloadFailed",
+      "id": 388,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movieId": 4,
+      "quality": {
+        "quality": {
+          "id": 30,
+          "modifier": "remux",
+          "name": "Remux-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "Adventureland.2009.BluRay.1080p.DTS-HD.MA.5.1.AVC.REMUX-FraMeSToR"
+    },
+    {
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 46,
+          "name": "DTS-HD MA"
+        },
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        }
+      ],
+      "data": {
+        "age": "1098",
+        "ageHours": "26365.263209402667",
+        "ageMinutes": "1581915.7925642966",
+        "customFormatScore": "0",
+        "downloadClient": "NZBGet",
+        "downloadClientName": "Download client",
+        "downloadUrl": "http://indexer.invalid/84ad5df782fc",
+        "guid": "http://indexer.invalid/2046d939bbbe",
+        "imdbId": "1091722",
+        "indexer": "Indexer",
+        "indexerFlags": "0",
+        "indexerId": "3",
+        "movieMatchType": "Id",
+        "nzbInfoUrl": "http://indexer.invalid/2046d939bbbe",
+        "protocol": "1",
+        "publishedDate": "2023-05-13T23:09:19Z",
+        "releaseGroup": "FraMeSToR",
+        "releaseSource": "UserInvokedSearch",
+        "size": "32281900522",
+        "tmdbId": "0"
+      },
+      "date": "2026-05-16T12:25:06Z",
+      "downloadId": "865dd7734f1c9854db1038d6cd0cc6ff",
+      "eventType": "grabbed",
+      "id": 387,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movieId": 4,
+      "quality": {
+        "quality": {
+          "id": 30,
+          "modifier": "remux",
+          "name": "Remux-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "Adventureland.2009.BluRay.1080p.DTS-HD.MA.5.1.AVC.REMUX-FraMeSToR"
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 54,
+          "name": "DD"
+        }
+      ],
+      "data": {
+        "age": "4100",
+        "ageHours": "98413.38582175864",
+        "ageMinutes": "5904803.149305671",
+        "customFormatScore": "0",
+        "downloadClient": "redacted",
+        "downloadClientName": "Download client",
+        "downloadUrl": "http://indexer.invalid/6c073d9d6b15",
+        "guid": "http://indexer.invalid/4229b26d5912",
+        "imdbId": "0",
+        "indexer": "Indexer",
+        "indexerFlags": "G_Freeleech",
+        "indexerId": "9",
+        "movieMatchType": "Title",
+        "nzbInfoUrl": "http://indexer.invalid/4229b26d5912",
+        "protocol": "2",
+        "publishedDate": "2015-02-05T16:55:50Z",
+        "releaseGroup": null,
+        "releaseSource": "InteractiveSearch",
+        "size": "1941914880",
+        "tmdbId": "0",
+        "torrentInfoHash": "a0e32cfbf308b441d95613783562870231d19c8a"
+      },
+      "date": "2026-04-29T06:18:58Z",
+      "downloadId": "a0e32cfbf308b441d95613783562870231d19c8a",
+      "eventType": "grabbed",
+      "id": 325,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        },
+        {
+          "id": 5,
+          "name": "Italian"
+        }
+      ],
+      "movieId": 4,
+      "quality": {
+        "quality": {
+          "id": 20,
+          "modifier": "none",
+          "name": "Bluray-480p",
+          "resolution": 480,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "Adventureland (2009).BRrip.XviD - Italian English.Ac3 5.1 Sub It ..."
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 54,
+          "name": "DD"
+        }
+      ],
+      "data": {
+        "downloadClient": "redacted",
+        "downloadClientName": "Download client",
+        "indexer": "Indexer",
+        "message": "redacted",
+        "releaseGroup": null,
+        "size": "1941914891"
+      },
+      "date": "2026-04-04T14:00:03Z",
+      "downloadId": "a0e32cfbf308b441d95613783562870231d19c8a",
+      "eventType": "downloadFailed",
+      "id": 286,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        },
+        {
+          "id": 5,
+          "name": "Italian"
+        }
+      ],
+      "movieId": 4,
+      "quality": {
+        "quality": {
+          "id": 20,
+          "modifier": "none",
+          "name": "Bluray-480p",
+          "resolution": 480,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "Adventureland (2009) BRrip XviD   Italian English Ac3 5.1 Sub Ita Eng MIRCrew"
+    },
+    {
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        }
+      ],
+      "data": {
+        "downloadClient": "NZBGet",
+        "downloadClientName": "Download client",
+        "indexer": "Indexer",
+        "message": "redacted",
+        "releaseGroup": null,
+        "size": "7778514752"
+      },
+      "date": "2026-04-03T17:38:03Z",
+      "downloadId": "111219a8eadc9ad71d86ac5ef66b086c",
+      "eventType": "downloadFailed",
+      "id": 279,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        },
+        {
+          "id": 4,
+          "name": "German"
+        }
+      ],
+      "movieId": 4,
+      "quality": {
+        "quality": {
+          "id": 23,
+          "modifier": "remux",
+          "name": "DVD-R",
+          "resolution": 480,
+          "source": "dvd"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "Adventureland.2009.DVD9.TR.EN.IT.DE.Untouched.LecterDisc"
+    },
+    {
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        }
+      ],
+      "data": {
+        "age": "4812",
+        "ageHours": "115495.15257035928",
+        "ageMinutes": "6929709.154221695",
+        "customFormatScore": "-10000",
+        "downloadClient": "NZBGet",
+        "downloadClientName": "Download client",
+        "downloadUrl": "http://indexer.invalid/de072e9df915",
+        "guid": "http://indexer.invalid/a80cf9131644",
+        "imdbId": "1091722",
+        "indexer": "Indexer",
+        "indexerFlags": "0",
+        "indexerId": "1",
+        "movieMatchType": "Id",
+        "nzbInfoUrl": "http://indexer.invalid/a80cf9131644",
+        "protocol": "1",
+        "publishedDate": "2013-01-29T10:28:49Z",
+        "releaseGroup": null,
+        "releaseSource": "InteractiveSearch",
+        "size": "7778515000",
+        "tmdbId": "0"
+      },
+      "date": "2026-04-03T17:37:58Z",
+      "downloadId": "111219a8eadc9ad71d86ac5ef66b086c",
+      "eventType": "grabbed",
+      "id": 278,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        },
+        {
+          "id": 4,
+          "name": "German"
+        }
+      ],
+      "movieId": 4,
+      "quality": {
+        "quality": {
+          "id": 23,
+          "modifier": "remux",
+          "name": "DVD-R",
+          "resolution": 480,
+          "source": "dvd"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "Adventureland.2009.DVD9.TR.EN.IT.DE.Untouched.LecterDisc"
+    },
+    {
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        }
+      ],
+      "data": {
+        "downloadClient": "NZBGet",
+        "downloadClientName": "Download client",
+        "indexer": "Indexer",
+        "message": "redacted",
+        "releaseGroup": null,
+        "size": "7778514752"
+      },
+      "date": "2026-04-03T17:36:17Z",
+      "downloadId": "3edaec5764c4444f7df51c699f9f8a81",
+      "eventType": "downloadFailed",
+      "id": 277,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        },
+        {
+          "id": 4,
+          "name": "German"
+        }
+      ],
+      "movieId": 4,
+      "quality": {
+        "quality": {
+          "id": 23,
+          "modifier": "remux",
+          "name": "DVD-R",
+          "resolution": 480,
+          "source": "dvd"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "Adventureland.2009.DVD9.TR.EN.IT.DE.Untouched.LecterDisc"
+    },
+    {
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        }
+      ],
+      "data": {
+        "age": "4812",
+        "ageHours": "115495.1230794915",
+        "ageMinutes": "6929707.384769636",
+        "customFormatScore": "-10000",
+        "downloadClient": "NZBGet",
+        "downloadClientName": "Download client",
+        "downloadUrl": "http://indexer.invalid/640c85fcf33f",
+        "guid": "http://indexer.invalid/a80cf9131644",
+        "imdbId": "1091722",
+        "indexer": "Indexer",
+        "indexerFlags": "0",
+        "indexerId": "1",
+        "movieMatchType": "Id",
+        "nzbInfoUrl": "http://indexer.invalid/a80cf9131644",
+        "protocol": "1",
+        "publishedDate": "2013-01-29T10:28:49Z",
+        "releaseGroup": null,
+        "releaseSource": "InteractiveSearch",
+        "size": "7778515000",
+        "tmdbId": "0"
+      },
+      "date": "2026-04-03T17:36:12Z",
+      "downloadId": "3edaec5764c4444f7df51c699f9f8a81",
+      "eventType": "grabbed",
+      "id": 276,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        },
+        {
+          "id": 4,
+          "name": "German"
+        }
+      ],
+      "movieId": 4,
+      "quality": {
+        "quality": {
+          "id": 23,
+          "modifier": "remux",
+          "name": "DVD-R",
+          "resolution": 480,
+          "source": "dvd"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "Adventureland.2009.DVD9.TR.EN.IT.DE.Untouched.LecterDisc"
+    },
+    {
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        }
+      ],
+      "data": {
+        "downloadClient": "NZBGet",
+        "downloadClientName": "Download client",
+        "indexer": "Indexer",
+        "message": "redacted",
+        "releaseGroup": null,
+        "size": "7778514752"
+      },
+      "date": "2026-04-03T17:35:26Z",
+      "downloadId": "355a823d4e598dd2e5bdcb049a2634c9",
+      "eventType": "downloadFailed",
+      "id": 275,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        },
+        {
+          "id": 4,
+          "name": "German"
+        }
+      ],
+      "movieId": 4,
+      "quality": {
+        "quality": {
+          "id": 23,
+          "modifier": "remux",
+          "name": "DVD-R",
+          "resolution": 480,
+          "source": "dvd"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "Adventureland.2009.DVD9.TR.EN.IT.DE.Untouched.LecterDisc"
+    },
+    {
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        }
+      ],
+      "data": {
+        "age": "4812",
+        "ageHours": "115495.10881927992",
+        "ageMinutes": "6929706.52915695",
+        "customFormatScore": "-10000",
+        "downloadClient": "NZBGet",
+        "downloadClientName": "Download client",
+        "downloadUrl": "http://indexer.invalid/640c85fcf33f",
+        "guid": "http://indexer.invalid/a80cf9131644",
+        "imdbId": "1091722",
+        "indexer": "Indexer",
+        "indexerFlags": "0",
+        "indexerId": "1",
+        "movieMatchType": "Id",
+        "nzbInfoUrl": "http://indexer.invalid/a80cf9131644",
+        "protocol": "1",
+        "publishedDate": "2013-01-29T10:28:49Z",
+        "releaseGroup": null,
+        "releaseSource": "InteractiveSearch",
+        "size": "7778515000",
+        "tmdbId": "0"
+      },
+      "date": "2026-04-03T17:35:20Z",
+      "downloadId": "355a823d4e598dd2e5bdcb049a2634c9",
+      "eventType": "grabbed",
+      "id": 274,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        },
+        {
+          "id": 4,
+          "name": "German"
+        }
+      ],
+      "movieId": 4,
+      "quality": {
+        "quality": {
+          "id": 23,
+          "modifier": "remux",
+          "name": "DVD-R",
+          "resolution": 480,
+          "source": "dvd"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "Adventureland.2009.DVD9.TR.EN.IT.DE.Untouched.LecterDisc"
+    },
+    {
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        }
+      ],
+      "data": {
+        "downloadClient": "NZBGet",
+        "downloadClientName": "Download client",
+        "indexer": "Indexer",
+        "message": "redacted",
+        "releaseGroup": null,
+        "size": "7778514752"
+      },
+      "date": "2026-04-03T17:34:55Z",
+      "downloadId": "e467835872b7f8dec42c2c9392775a8c",
+      "eventType": "downloadFailed",
+      "id": 273,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        },
+        {
+          "id": 4,
+          "name": "German"
+        }
+      ],
+      "movieId": 4,
+      "quality": {
+        "quality": {
+          "id": 23,
+          "modifier": "remux",
+          "name": "DVD-R",
+          "resolution": 480,
+          "source": "dvd"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "Adventureland.2009.DVD9.TR.EN.IT.DE.Untouched.LecterDisc"
+    },
+    {
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        }
+      ],
+      "data": {
+        "age": "4812",
+        "ageHours": "115495.10033912805",
+        "ageMinutes": "6929706.020347863",
+        "customFormatScore": "-10000",
+        "downloadClient": "NZBGet",
+        "downloadClientName": "Download client",
+        "downloadUrl": "http://indexer.invalid/640c85fcf33f",
+        "guid": "http://indexer.invalid/a80cf9131644",
+        "imdbId": "1091722",
+        "indexer": "Indexer",
+        "indexerFlags": "0",
+        "indexerId": "1",
+        "movieMatchType": "Id",
+        "nzbInfoUrl": "http://indexer.invalid/a80cf9131644",
+        "protocol": "1",
+        "publishedDate": "2013-01-29T10:28:49Z",
+        "releaseGroup": null,
+        "releaseSource": "InteractiveSearch",
+        "size": "7778515000",
+        "tmdbId": "0"
+      },
+      "date": "2026-04-03T17:34:50Z",
+      "downloadId": "e467835872b7f8dec42c2c9392775a8c",
+      "eventType": "grabbed",
+      "id": 272,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        },
+        {
+          "id": 4,
+          "name": "German"
+        }
+      ],
+      "movieId": 4,
+      "quality": {
+        "quality": {
+          "id": 23,
+          "modifier": "remux",
+          "name": "DVD-R",
+          "resolution": 480,
+          "source": "dvd"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "Adventureland.2009.DVD9.TR.EN.IT.DE.Untouched.LecterDisc"
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 54,
+          "name": "DD"
+        }
+      ],
+      "data": {
+        "age": "365",
+        "ageHours": "8760.00931598939",
+        "ageMinutes": "525600.5589596384",
+        "customFormatScore": "0",
+        "downloadClient": "redacted",
+        "downloadClientName": "Download client",
+        "downloadUrl": "http://indexer.invalid/256b1f7f5dfd",
+        "guid": "http://indexer.invalid/1331cc525e7e",
+        "imdbId": "0",
+        "indexer": "Indexer",
+        "indexerFlags": "G_Freeleech",
+        "indexerId": "6",
+        "movieMatchType": "Title",
+        "nzbInfoUrl": "http://indexer.invalid/1331cc525e7e",
+        "protocol": "2",
+        "publishedDate": "2025-04-03T17:33:50Z",
+        "releaseGroup": null,
+        "releaseSource": "InteractiveSearch",
+        "size": "1943472640",
+        "tmdbId": "0",
+        "torrentInfoHash": "a0e32cfbf308b441d95613783562870231d19c8a"
+      },
+      "date": "2026-04-03T17:34:23Z",
+      "downloadId": "a0e32cfbf308b441d95613783562870231d19c8a",
+      "eventType": "grabbed",
+      "id": 271,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        },
+        {
+          "id": 5,
+          "name": "Italian"
+        }
+      ],
+      "movieId": 4,
+      "quality": {
+        "quality": {
+          "id": 20,
+          "modifier": "none",
+          "name": "Bluray-480p",
+          "resolution": 480,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "Adventureland (2009) BRrip XviD   Italian English Ac3 5.1 Sub Ita Eng MIRCrew"
+    },
+    {
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 46,
+          "name": "DTS-HD MA"
+        },
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        }
+      ],
+      "data": {
+        "indexerFlags": "0",
+        "reason": "Manual",
+        "releaseGroup": "HiFi",
+        "size": "28508359333"
+      },
+      "date": "2026-03-31T15:13:24Z",
+      "eventType": "movieFileDeleted",
+      "id": 200,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movieId": 4,
+      "quality": {
+        "quality": {
+          "id": 30,
+          "modifier": "remux",
+          "name": "Remux-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "/movies/Adventureland (2009)/Adventureland (2009) {tmdb-16614} - [Remux-1080p][DTS-HD MA 5.1][AVC]-HiFi.mkv"
+    },
+    {
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 46,
+          "name": "DTS-HD MA"
+        },
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        }
+      ],
+      "data": {
+        "customFormatScore": "0",
+        "downloadClient": "NZBGet",
+        "downloadClientName": "Download client",
+        "droppedPath": "/downloads/Adventureland.2009.BluRay.Remux.1080p.AVC.DTS-HD.MA.5.1-HiFi.mkv",
+        "fileId": "178",
+        "importedPath": "/movies/Adventureland (2009)/Adventureland (2009) {tmdb-16614} - [Remux-1080p][DTS-HD MA 5.1][AVC]-HiFi.mkv",
+        "indexerFlags": "0",
+        "releaseGroup": "HiFi",
+        "size": "28508359333"
+      },
+      "date": "2026-03-30T05:26:09Z",
+      "downloadId": "ddd09f033d882e68e5503bf2709a968e",
+      "eventType": "downloadFolderImported",
+      "id": 193,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movieId": 4,
+      "quality": {
+        "quality": {
+          "id": 30,
+          "modifier": "remux",
+          "name": "Remux-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "Adventureland.2009.BluRay.Remux.1080p.AVC.DTS-HD.MA.5.1-HiFi"
+    },
+    {
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 46,
+          "name": "DTS-HD MA"
+        },
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        }
+      ],
+      "data": {
+        "age": "1231",
+        "ageHours": "29548.97904188447",
+        "ageMinutes": "1772938.7425131516",
+        "customFormatScore": "0",
+        "downloadClient": "NZBGet",
+        "downloadClientName": "Download client",
+        "downloadUrl": "http://indexer.invalid/46b32cea80c9",
+        "guid": "http://indexer.invalid/ad0bd1ad0c57",
+        "imdbId": "1091722",
+        "indexer": "Indexer",
+        "indexerFlags": "0",
+        "indexerId": "1",
+        "movieMatchType": "Id",
+        "nzbInfoUrl": "http://indexer.invalid/ad0bd1ad0c57",
+        "protocol": "1",
+        "publishedDate": "2022-11-14T16:33:53Z",
+        "releaseGroup": "HiFi",
+        "releaseSource": "Search",
+        "size": "31366933000",
+        "tmdbId": "0"
+      },
+      "date": "2026-03-29T21:32:37Z",
+      "downloadId": "ddd09f033d882e68e5503bf2709a968e",
+      "eventType": "grabbed",
+      "id": 192,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movieId": 4,
+      "quality": {
+        "quality": {
+          "id": 30,
+          "modifier": "remux",
+          "name": "Remux-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "Adventureland.2009.BluRay.Remux.1080p.AVC.DTS-HD.MA.5.1-HiFi"
+    },
+    {
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 46,
+          "name": "DTS-HD MA"
+        },
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        }
+      ],
+      "data": {
+        "downloadClient": "NZBGet",
+        "downloadClientName": "Download client",
+        "indexer": "Indexer",
+        "message": "redacted",
+        "releaseGroup": "FraMeSToR",
+        "size": "32281900522"
+      },
+      "date": "2026-03-29T21:32:28Z",
+      "downloadId": "a628188f7ae74d94632e2c55028e8989",
+      "eventType": "downloadFailed",
+      "id": 191,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movieId": 4,
+      "quality": {
+        "quality": {
+          "id": 30,
+          "modifier": "remux",
+          "name": "Remux-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "Adventureland.2009.BluRay.1080p.DTS-HD.MA.5.1.AVC.REMUX-FraMeSToR"
+    },
+    {
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 46,
+          "name": "DTS-HD MA"
+        },
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        }
+      ],
+      "data": {
+        "age": "1050",
+        "ageHours": "25221.671481796668",
+        "ageMinutes": "1513300.2889078816",
+        "customFormatScore": "0",
+        "downloadClient": "NZBGet",
+        "downloadClientName": "Download client",
+        "downloadUrl": "http://indexer.invalid/e3254560a183",
+        "guid": "http://indexer.invalid/2046d939bbbe",
+        "imdbId": "1091722",
+        "indexer": "Indexer",
+        "indexerFlags": "0",
+        "indexerId": "3",
+        "movieMatchType": "Id",
+        "nzbInfoUrl": "http://indexer.invalid/2046d939bbbe",
+        "protocol": "1",
+        "publishedDate": "2023-05-13T23:09:19Z",
+        "releaseGroup": "FraMeSToR",
+        "releaseSource": "Search",
+        "size": "32281900522",
+        "tmdbId": "0"
+      },
+      "date": "2026-03-29T20:49:36Z",
+      "downloadId": "a628188f7ae74d94632e2c55028e8989",
+      "eventType": "grabbed",
+      "id": 188,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movieId": 4,
+      "quality": {
+        "quality": {
+          "id": 30,
+          "modifier": "remux",
+          "name": "Remux-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "Adventureland.2009.BluRay.1080p.DTS-HD.MA.5.1.AVC.REMUX-FraMeSToR"
+    },
+    {
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        }
+      ],
+      "data": {
+        "downloadClient": "NZBGet",
+        "downloadClientName": "Download client",
+        "indexer": "Indexer",
+        "message": "redacted",
+        "releaseGroup": null,
+        "size": "7778514752"
+      },
+      "date": "2026-03-29T20:49:25Z",
+      "downloadId": "381c4330cfe25e1d7bc7b88a969db5a9",
+      "eventType": "downloadFailed",
+      "id": 187,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        },
+        {
+          "id": 4,
+          "name": "German"
+        }
+      ],
+      "movieId": 4,
+      "quality": {
+        "quality": {
+          "id": 23,
+          "modifier": "remux",
+          "name": "DVD-R",
+          "resolution": 480,
+          "source": "dvd"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "Adventureland.2009.DVD9.TR.EN.IT.DE.Untouched.LecterDisc"
+    },
+    {
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        }
+      ],
+      "data": {
+        "age": "4807",
+        "ageHours": "115378.08857133934",
+        "ageMinutes": "6922685.314280447",
+        "customFormatScore": "0",
+        "downloadClient": "NZBGet",
+        "downloadClientName": "Download client",
+        "downloadUrl": "http://indexer.invalid/359de5e5e034",
+        "guid": "http://indexer.invalid/a80cf9131644",
+        "imdbId": "1091722",
+        "indexer": "Indexer",
+        "indexerFlags": "0",
+        "indexerId": "1",
+        "movieMatchType": "Id",
+        "nzbInfoUrl": "http://indexer.invalid/a80cf9131644",
+        "protocol": "1",
+        "publishedDate": "2013-01-29T10:28:49Z",
+        "releaseGroup": null,
+        "releaseSource": "InteractiveSearch",
+        "size": "7778515000",
+        "tmdbId": "0"
+      },
+      "date": "2026-03-29T20:34:07Z",
+      "downloadId": "381c4330cfe25e1d7bc7b88a969db5a9",
+      "eventType": "grabbed",
+      "id": 183,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        },
+        {
+          "id": 4,
+          "name": "German"
+        }
+      ],
+      "movieId": 4,
+      "quality": {
+        "quality": {
+          "id": 23,
+          "modifier": "remux",
+          "name": "DVD-R",
+          "resolution": 480,
+          "source": "dvd"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "Adventureland.2009.DVD9.TR.EN.IT.DE.Untouched.LecterDisc"
+    },
+    {
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 46,
+          "name": "DTS-HD MA"
+        },
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        }
+      ],
+      "data": {
+        "age": "1050",
+        "ageHours": "25221.17223895861",
+        "ageMinutes": "1513270.3343376084",
+        "customFormatScore": "0",
+        "downloadClient": "NZBGet",
+        "downloadClientName": "Download client",
+        "downloadUrl": "http://indexer.invalid/69deb7ef67d3",
+        "guid": "http://indexer.invalid/2046d939bbbe",
+        "imdbId": "1091722",
+        "indexer": "Indexer",
+        "indexerFlags": "0",
+        "indexerId": "3",
+        "movieMatchType": "Id",
+        "nzbInfoUrl": "http://indexer.invalid/2046d939bbbe",
+        "protocol": "1",
+        "publishedDate": "2023-05-13T23:09:19Z",
+        "releaseGroup": "FraMeSToR",
+        "releaseSource": "UserInvokedSearch",
+        "size": "32281900522",
+        "tmdbId": "0"
+      },
+      "date": "2026-03-29T20:19:39Z",
+      "downloadId": "f52e732abcabb6c7b807b88e4ea948db",
+      "eventType": "grabbed",
+      "id": 177,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movieId": 4,
+      "quality": {
+        "quality": {
+          "id": 30,
+          "modifier": "remux",
+          "name": "Remux-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "Adventureland.2009.BluRay.1080p.DTS-HD.MA.5.1.AVC.REMUX-FraMeSToR"
+    },
+    {
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        }
+      ],
+      "data": {
+        "indexerFlags": "0",
+        "reason": "Manual",
+        "releaseGroup": null,
+        "size": "1447361825"
+      },
+      "date": "2026-03-29T20:19:23Z",
+      "eventType": "movieFileDeleted",
+      "id": 176,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movieId": 4,
+      "quality": {
+        "quality": {
+          "id": 7,
+          "modifier": "none",
+          "name": "Bluray-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "sourceTitle": "/movies/Adventureland (2009)/Adventureland (2009) Bluray-1080p.mkv"
+    }
+  ],
+  "recordedAt": "2026-11-11T12:12:56Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/history/movie?movieId=4"
+  },
+  "status": 200
+}

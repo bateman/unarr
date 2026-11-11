@@ -1,0 +1,202 @@
+{
+  "body": {
+    "added": "2026-06-21T19:33:12Z",
+    "alternateTitles": [
+      {
+        "id": 1831,
+        "movieMetadataId": 350,
+        "sourceType": "tmdb",
+        "title": "Nekaunīgā laupīšana"
+      },
+      {
+        "id": 1832,
+        "movieMetadataId": 350,
+        "sourceType": "tmdb",
+        "title": "Zona de riesgo"
+      },
+      {
+        "id": 1858,
+        "movieMetadataId": 350,
+        "sourceType": "tmdb",
+        "title": "Взрив"
+      },
+      {
+        "id": 2033,
+        "movieMetadataId": 350,
+        "sourceType": "tmdb",
+        "title": "Fünye"
+      }
+    ],
+    "certification": "R",
+    "cleanTitle": "fuze",
+    "digitalRelease": "2026-06-02T00:00:00Z",
+    "folderName": "/movies/Fuze (2026) {tmdb-1242265}",
+    "genres": [
+      "Action",
+      "Crime",
+      "Thriller"
+    ],
+    "hasFile": true,
+    "id": 225,
+    "images": [
+      {
+        "coverType": "poster",
+        "remoteUrl": "https://image.tmdb.org/t/p/original/oMFdQE5hMJ9JjhNORegwTo0GKmh.jpg",
+        "url": "/MediaCover/225/poster.jpg?h=b0582bccbb7cbd537685"
+      },
+      {
+        "coverType": "fanart",
+        "remoteUrl": "https://image.tmdb.org/t/p/original/8wIaBCeGv3UhIn5CJOWQGHT1Cif.jpg",
+        "url": "/MediaCover/225/fanart.jpg?h=c4a63623eaa83ff0a8a3"
+      }
+    ],
+    "imdbId": "tt31189814",
+    "inCinemas": "2026-03-23T00:00:00Z",
+    "isAvailable": true,
+    "keywords": [
+      "betrayal",
+      "bomb",
+      "conspiracy thriller",
+      "father son relationship",
+      "heist",
+      "london, england",
+      "malicious",
+      "mother son relationship",
+      "paranoid",
+      "plot twist",
+      "surveillance",
+      "techno thriller"
+    ],
+    "lastSearchTime": "2026-06-21T19:33:25Z",
+    "minimumAvailability": "released",
+    "monitored": true,
+    "movieFile": {
+      "dateAdded": "2026-06-26T19:04:22Z",
+      "edition": "",
+      "id": 265,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 3310698,
+        "audioChannels": 5.1,
+        "audioCodec": "DTS-HD MA",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "1:36:58",
+        "scanType": "Progressive",
+        "subtitles": "eng/eng",
+        "videoBitDepth": 8,
+        "videoBitrate": 33626396,
+        "videoCodec": "AVC",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 23.976
+      },
+      "movieId": 225,
+      "originalFilePath": "Fuze.2025.1080p.Blu-ray.Remux.AVC.DTS-HD.MA.5.1-HDT/Fuze.2025.1080p.Blu-ray.Remux.AVC.DTS-HD.MA.5.1-HDT.mkv",
+      "path": "/movies/Fuze (2026) {tmdb-1242265}/Fuze (2026) {tmdb-1242265} - [Remux-1080p][DTS-HD MA 5.1][AVC]-HDT.mkv",
+      "quality": {
+        "quality": {
+          "id": 30,
+          "modifier": "remux",
+          "name": "Remux-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "relativePath": "Fuze (2026) {tmdb-1242265} - [Remux-1080p][DTS-HD MA 5.1][AVC]-HDT.mkv",
+      "releaseGroup": "HDT",
+      "sceneName": "Fuze.2025.1080p.Blu-ray.Remux.AVC.DTS-HD.MA.5.1-HDT",
+      "size": 26905646673
+    },
+    "movieFileId": 265,
+    "originalLanguage": {
+      "id": 1,
+      "name": "English"
+    },
+    "originalTitle": "Fuze",
+    "overview": "An unexploded WWII bomb is discovered on a busy construction site in the centre of London. Chaos ensues as the military and police begin a mass evacuation against a ticking clock.",
+    "path": "/movies/Fuze (2026) {tmdb-1242265}",
+    "physicalRelease": "2026-09-15T00:00:00Z",
+    "popularity": 9.1078,
+    "qualityProfileId": 11,
+    "ratings": {
+      "imdb": {
+        "type": "user",
+        "value": 6.3,
+        "votes": 20392
+      },
+      "metacritic": {
+        "type": "user",
+        "value": 60,
+        "votes": 0
+      },
+      "rottenTomatoes": {
+        "type": "user",
+        "value": 72,
+        "votes": 0
+      },
+      "tmdb": {
+        "type": "user",
+        "value": 7.1,
+        "votes": 494
+      },
+      "trakt": {
+        "type": "user",
+        "value": 6.87525,
+        "votes": 1507
+      }
+    },
+    "releaseDate": "2026-06-02T00:00:00Z",
+    "rootFolderPath": "/movies",
+    "runtime": 96,
+    "secondaryYearSourceId": 0,
+    "sizeOnDisk": 26905646673,
+    "sortTitle": "fuze",
+    "statistics": {
+      "movieFileCount": 1,
+      "movieFileQualities": [
+        {
+          "id": 30,
+          "modifier": "remux",
+          "name": "Remux-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        }
+      ],
+      "releaseGroups": [
+        "HDT"
+      ],
+      "sizeOnDisk": 26905646673
+    },
+    "status": "released",
+    "studio": "Anton",
+    "tags": [
+      1
+    ],
+    "title": "Fuze",
+    "titleSlug": "1242265",
+    "tmdbId": 1242265,
+    "website": "https://www.fuzefilm.co.uk/",
+    "year": 2025,
+    "youTubeTrailerId": "1aNywiElPSY"
+  },
+  "recordedAt": "2026-11-11T12:12:52Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/movie/225"
+  },
+  "status": 200
+}

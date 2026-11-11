@@ -1,0 +1,1381 @@
+{
+  "body": {
+    "page": 1,
+    "pageSize": 10,
+    "records": [
+      {
+        "customFormats": [
+          {
+            "id": 58,
+            "name": "Language not Italian"
+          }
+        ],
+        "date": "2026-04-03T17:38:04Z",
+        "id": 29,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 4,
+            "name": "German"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "adventureland",
+          "digitalRelease": "2009-07-01T00:00:00Z",
+          "folderName": "/movies/Adventureland (2009)",
+          "genres": [
+            "Comedy",
+            "Drama",
+            "Romance"
+          ],
+          "id": 4,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/eeSJNAR1aWcgANq26KWIHm3cbyB.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/4dm60JrE7rCWQvqio1KdzQvfCvS.jpg"
+            }
+          ],
+          "imdbId": "tt1091722",
+          "inCinemas": "2009-04-03T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "1980s",
+            "aimless youth",
+            "amusement park",
+            "carny",
+            "duringcreditsstinger",
+            "infidelity",
+            "job seeking",
+            "leaving home",
+            "marijuana joint",
+            "reconciliation",
+            "summer job",
+            "sympathetic",
+            "ticket booth",
+            "young adult"
+          ],
+          "lastSearchTime": "2026-06-13T13:23:16Z",
+          "minimumAvailability": "released",
+          "monitored": false,
+          "movieFileId": 243,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Adventureland",
+          "overview": "It's the summer of 1987, and recent college grad James Brennan can't wait to begin his long-anticipated dream trip to Europe. Unfortunately, James' plans come to a screeching halt when his parents announce that they are unable to subsidize his trip. Forced to take a job at the local amusement park, James prepares for the worst summer ever, until he finds love with a captivating co-worker named Em.",
+          "path": "/movies/Adventureland (2009)",
+          "physicalRelease": "2009-08-25T00:00:00Z",
+          "popularity": 2.4877,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.8,
+              "votes": 175723
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 76,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 89,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.4,
+              "votes": 2449
+            },
+            "trakt": {
+              "type": "user",
+              "value": 6.73585,
+              "votes": 4047
+            }
+          },
+          "releaseDate": "2009-07-01T00:00:00Z",
+          "runtime": 107,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "adventureland",
+          "status": "released",
+          "studio": "Miramax",
+          "tags": [
+            1
+          ],
+          "title": "Adventureland",
+          "titleSlug": "16614",
+          "tmdbId": 16614,
+          "website": "",
+          "year": 2009,
+          "youTubeTrailerId": "4F--nHysJkw"
+        },
+        "movieId": 4,
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 23,
+            "modifier": "remux",
+            "name": "DVD-R",
+            "resolution": 480,
+            "source": "dvd"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "Adventureland.2009.DVD9.TR.EN.IT.DE.Untouched.LecterDisc"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 54,
+            "name": "DD"
+          }
+        ],
+        "date": "2026-04-04T14:00:03Z",
+        "id": 30,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "adventureland",
+          "digitalRelease": "2009-07-01T00:00:00Z",
+          "folderName": "/movies/Adventureland (2009)",
+          "genres": [
+            "Comedy",
+            "Drama",
+            "Romance"
+          ],
+          "id": 4,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/eeSJNAR1aWcgANq26KWIHm3cbyB.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/4dm60JrE7rCWQvqio1KdzQvfCvS.jpg"
+            }
+          ],
+          "imdbId": "tt1091722",
+          "inCinemas": "2009-04-03T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "1980s",
+            "aimless youth",
+            "amusement park",
+            "carny",
+            "duringcreditsstinger",
+            "infidelity",
+            "job seeking",
+            "leaving home",
+            "marijuana joint",
+            "reconciliation",
+            "summer job",
+            "sympathetic",
+            "ticket booth",
+            "young adult"
+          ],
+          "lastSearchTime": "2026-06-13T13:23:16Z",
+          "minimumAvailability": "released",
+          "monitored": false,
+          "movieFileId": 243,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Adventureland",
+          "overview": "It's the summer of 1987, and recent college grad James Brennan can't wait to begin his long-anticipated dream trip to Europe. Unfortunately, James' plans come to a screeching halt when his parents announce that they are unable to subsidize his trip. Forced to take a job at the local amusement park, James prepares for the worst summer ever, until he finds love with a captivating co-worker named Em.",
+          "path": "/movies/Adventureland (2009)",
+          "physicalRelease": "2009-08-25T00:00:00Z",
+          "popularity": 2.4877,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.8,
+              "votes": 175723
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 76,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 89,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.4,
+              "votes": 2449
+            },
+            "trakt": {
+              "type": "user",
+              "value": 6.73585,
+              "votes": 4047
+            }
+          },
+          "releaseDate": "2009-07-01T00:00:00Z",
+          "runtime": 107,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "adventureland",
+          "status": "released",
+          "studio": "Miramax",
+          "tags": [
+            1
+          ],
+          "title": "Adventureland",
+          "titleSlug": "16614",
+          "tmdbId": 16614,
+          "website": "",
+          "year": 2009,
+          "youTubeTrailerId": "4F--nHysJkw"
+        },
+        "movieId": 4,
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 20,
+            "modifier": "none",
+            "name": "Bluray-480p",
+            "resolution": 480,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "Adventureland (2009) BRrip XviD   Italian English Ac3 5.1 Sub Ita Eng MIRCrew"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 46,
+            "name": "DTS-HD MA"
+          },
+          {
+            "id": 58,
+            "name": "Language not Italian"
+          }
+        ],
+        "date": "2026-05-16T12:25:12Z",
+        "id": 39,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "adventureland",
+          "digitalRelease": "2009-07-01T00:00:00Z",
+          "folderName": "/movies/Adventureland (2009)",
+          "genres": [
+            "Comedy",
+            "Drama",
+            "Romance"
+          ],
+          "id": 4,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/eeSJNAR1aWcgANq26KWIHm3cbyB.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/4dm60JrE7rCWQvqio1KdzQvfCvS.jpg"
+            }
+          ],
+          "imdbId": "tt1091722",
+          "inCinemas": "2009-04-03T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "1980s",
+            "aimless youth",
+            "amusement park",
+            "carny",
+            "duringcreditsstinger",
+            "infidelity",
+            "job seeking",
+            "leaving home",
+            "marijuana joint",
+            "reconciliation",
+            "summer job",
+            "sympathetic",
+            "ticket booth",
+            "young adult"
+          ],
+          "lastSearchTime": "2026-06-13T13:23:16Z",
+          "minimumAvailability": "released",
+          "monitored": false,
+          "movieFileId": 243,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Adventureland",
+          "overview": "It's the summer of 1987, and recent college grad James Brennan can't wait to begin his long-anticipated dream trip to Europe. Unfortunately, James' plans come to a screeching halt when his parents announce that they are unable to subsidize his trip. Forced to take a job at the local amusement park, James prepares for the worst summer ever, until he finds love with a captivating co-worker named Em.",
+          "path": "/movies/Adventureland (2009)",
+          "physicalRelease": "2009-08-25T00:00:00Z",
+          "popularity": 2.4877,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.8,
+              "votes": 175723
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 76,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 89,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.4,
+              "votes": 2449
+            },
+            "trakt": {
+              "type": "user",
+              "value": 6.73585,
+              "votes": 4047
+            }
+          },
+          "releaseDate": "2009-07-01T00:00:00Z",
+          "runtime": 107,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "adventureland",
+          "status": "released",
+          "studio": "Miramax",
+          "tags": [
+            1
+          ],
+          "title": "Adventureland",
+          "titleSlug": "16614",
+          "tmdbId": 16614,
+          "website": "",
+          "year": 2009,
+          "youTubeTrailerId": "4F--nHysJkw"
+        },
+        "movieId": 4,
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 30,
+            "modifier": "remux",
+            "name": "Remux-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "Adventureland.2009.BluRay.1080p.DTS-HD.MA.5.1.AVC.REMUX-FraMeSToR"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 46,
+            "name": "DTS-HD MA"
+          },
+          {
+            "id": 58,
+            "name": "Language not Italian"
+          }
+        ],
+        "date": "2026-05-16T12:26:13Z",
+        "id": 40,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "adventureland",
+          "digitalRelease": "2009-07-01T00:00:00Z",
+          "folderName": "/movies/Adventureland (2009)",
+          "genres": [
+            "Comedy",
+            "Drama",
+            "Romance"
+          ],
+          "id": 4,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/eeSJNAR1aWcgANq26KWIHm3cbyB.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/4dm60JrE7rCWQvqio1KdzQvfCvS.jpg"
+            }
+          ],
+          "imdbId": "tt1091722",
+          "inCinemas": "2009-04-03T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "1980s",
+            "aimless youth",
+            "amusement park",
+            "carny",
+            "duringcreditsstinger",
+            "infidelity",
+            "job seeking",
+            "leaving home",
+            "marijuana joint",
+            "reconciliation",
+            "summer job",
+            "sympathetic",
+            "ticket booth",
+            "young adult"
+          ],
+          "lastSearchTime": "2026-06-13T13:23:16Z",
+          "minimumAvailability": "released",
+          "monitored": false,
+          "movieFileId": 243,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Adventureland",
+          "overview": "It's the summer of 1987, and recent college grad James Brennan can't wait to begin his long-anticipated dream trip to Europe. Unfortunately, James' plans come to a screeching halt when his parents announce that they are unable to subsidize his trip. Forced to take a job at the local amusement park, James prepares for the worst summer ever, until he finds love with a captivating co-worker named Em.",
+          "path": "/movies/Adventureland (2009)",
+          "physicalRelease": "2009-08-25T00:00:00Z",
+          "popularity": 2.4877,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.8,
+              "votes": 175723
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 76,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 89,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.4,
+              "votes": 2449
+            },
+            "trakt": {
+              "type": "user",
+              "value": 6.73585,
+              "votes": 4047
+            }
+          },
+          "releaseDate": "2009-07-01T00:00:00Z",
+          "runtime": 107,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "adventureland",
+          "status": "released",
+          "studio": "Miramax",
+          "tags": [
+            1
+          ],
+          "title": "Adventureland",
+          "titleSlug": "16614",
+          "tmdbId": 16614,
+          "website": "",
+          "year": 2009,
+          "youTubeTrailerId": "4F--nHysJkw"
+        },
+        "movieId": 4,
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 30,
+            "modifier": "remux",
+            "name": "Remux-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "Adventureland.2009.BluRay.Remux.1080p.AVC.DTS-HD.MA.5.1-HiFi"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 54,
+            "name": "DD"
+          }
+        ],
+        "date": "2026-06-09T11:45:00Z",
+        "id": 48,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "adventureland",
+          "digitalRelease": "2009-07-01T00:00:00Z",
+          "folderName": "/movies/Adventureland (2009)",
+          "genres": [
+            "Comedy",
+            "Drama",
+            "Romance"
+          ],
+          "id": 4,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/eeSJNAR1aWcgANq26KWIHm3cbyB.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/4dm60JrE7rCWQvqio1KdzQvfCvS.jpg"
+            }
+          ],
+          "imdbId": "tt1091722",
+          "inCinemas": "2009-04-03T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "1980s",
+            "aimless youth",
+            "amusement park",
+            "carny",
+            "duringcreditsstinger",
+            "infidelity",
+            "job seeking",
+            "leaving home",
+            "marijuana joint",
+            "reconciliation",
+            "summer job",
+            "sympathetic",
+            "ticket booth",
+            "young adult"
+          ],
+          "lastSearchTime": "2026-06-13T13:23:16Z",
+          "minimumAvailability": "released",
+          "monitored": false,
+          "movieFileId": 243,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Adventureland",
+          "overview": "It's the summer of 1987, and recent college grad James Brennan can't wait to begin his long-anticipated dream trip to Europe. Unfortunately, James' plans come to a screeching halt when his parents announce that they are unable to subsidize his trip. Forced to take a job at the local amusement park, James prepares for the worst summer ever, until he finds love with a captivating co-worker named Em.",
+          "path": "/movies/Adventureland (2009)",
+          "physicalRelease": "2009-08-25T00:00:00Z",
+          "popularity": 2.4877,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.8,
+              "votes": 175723
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 76,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 89,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.4,
+              "votes": 2449
+            },
+            "trakt": {
+              "type": "user",
+              "value": 6.73585,
+              "votes": 4047
+            }
+          },
+          "releaseDate": "2009-07-01T00:00:00Z",
+          "runtime": 107,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "adventureland",
+          "status": "released",
+          "studio": "Miramax",
+          "tags": [
+            1
+          ],
+          "title": "Adventureland",
+          "titleSlug": "16614",
+          "tmdbId": 16614,
+          "website": "",
+          "year": 2009,
+          "youTubeTrailerId": "4F--nHysJkw"
+        },
+        "movieId": 4,
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 20,
+            "modifier": "none",
+            "name": "Bluray-480p",
+            "resolution": 480,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "Adventureland (2009).BRrip.XviD - Italian English.Ac3 5.1 Sub It ..."
+      },
+      {
+        "customFormats": [],
+        "date": "2026-06-12T23:30:01Z",
+        "id": 50,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "adventureland",
+          "digitalRelease": "2009-07-01T00:00:00Z",
+          "folderName": "/movies/Adventureland (2009)",
+          "genres": [
+            "Comedy",
+            "Drama",
+            "Romance"
+          ],
+          "id": 4,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/eeSJNAR1aWcgANq26KWIHm3cbyB.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/4dm60JrE7rCWQvqio1KdzQvfCvS.jpg"
+            }
+          ],
+          "imdbId": "tt1091722",
+          "inCinemas": "2009-04-03T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "1980s",
+            "aimless youth",
+            "amusement park",
+            "carny",
+            "duringcreditsstinger",
+            "infidelity",
+            "job seeking",
+            "leaving home",
+            "marijuana joint",
+            "reconciliation",
+            "summer job",
+            "sympathetic",
+            "ticket booth",
+            "young adult"
+          ],
+          "lastSearchTime": "2026-06-13T13:23:16Z",
+          "minimumAvailability": "released",
+          "monitored": false,
+          "movieFileId": 243,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Adventureland",
+          "overview": "It's the summer of 1987, and recent college grad James Brennan can't wait to begin his long-anticipated dream trip to Europe. Unfortunately, James' plans come to a screeching halt when his parents announce that they are unable to subsidize his trip. Forced to take a job at the local amusement park, James prepares for the worst summer ever, until he finds love with a captivating co-worker named Em.",
+          "path": "/movies/Adventureland (2009)",
+          "physicalRelease": "2009-08-25T00:00:00Z",
+          "popularity": 2.4877,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.8,
+              "votes": 175723
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 76,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 89,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.4,
+              "votes": 2449
+            },
+            "trakt": {
+              "type": "user",
+              "value": 6.73585,
+              "votes": 4047
+            }
+          },
+          "releaseDate": "2009-07-01T00:00:00Z",
+          "runtime": 107,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "adventureland",
+          "status": "released",
+          "studio": "Miramax",
+          "tags": [
+            1
+          ],
+          "title": "Adventureland",
+          "titleSlug": "16614",
+          "tmdbId": 16614,
+          "website": "",
+          "year": 2009,
+          "youTubeTrailerId": "4F--nHysJkw"
+        },
+        "movieId": 4,
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 2,
+            "modifier": "none",
+            "name": "DVD",
+            "resolution": 0,
+            "source": "dvd"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "Adventureland.2009.iTALiAN.DVDRip.XviD-Republic-[WiNetwork-bt]"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 46,
+            "name": "DTS-HD MA"
+          },
+          {
+            "id": 58,
+            "name": "Language not Italian"
+          }
+        ],
+        "date": "2026-03-29T20:29:22Z",
+        "id": 11,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "alienromulus",
+          "collection": {
+            "title": "Alien: Romulus Collection",
+            "tmdbId": 1434946
+          },
+          "digitalRelease": "2024-10-15T00:00:00Z",
+          "folderName": "/movies/Alien Romulus (2024)",
+          "genres": [
+            "Horror",
+            "Science Fiction"
+          ],
+          "id": 6,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/2uSWRTtCG336nuBiG8jOTEUKSy8.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/iYqSQaWDttQIQzsxg9xHyg0bttG.jpg"
+            }
+          ],
+          "imdbId": "tt18412256",
+          "inCinemas": "2024-08-14T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "abandoned station",
+            "alien contact",
+            "alien encounter",
+            "alien life-form",
+            "alien monster",
+            "biological contamination",
+            "cryonics chamber",
+            "hostile organism",
+            "interstellar isolation",
+            "sci-fi horror",
+            "space capsule",
+            "space exploration",
+            "spaceship",
+            "spin off",
+            "xenomorph threat"
+          ],
+          "lastSearchTime": "2026-06-21T11:55:44Z",
+          "minimumAvailability": "released",
+          "monitored": false,
+          "movieFileId": 213,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Alien: Romulus",
+          "overview": "While scavenging the deep ends of a derelict space station, a group of young space colonizers come face to face with the most terrifying life form in the universe.",
+          "path": "/movies/Alien Romulus (2024)",
+          "physicalRelease": "2024-12-02T00:00:00Z",
+          "popularity": 31.7807,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 7.1,
+              "votes": 295979
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 64,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 80,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7.159,
+              "votes": 4953
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.36965,
+              "votes": 23349
+            }
+          },
+          "releaseDate": "2024-10-15T00:00:00Z",
+          "runtime": 119,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "alien romulus",
+          "status": "released",
+          "studio": "20th Century Studios",
+          "tags": [],
+          "title": "Alien: Romulus",
+          "titleSlug": "945961",
+          "tmdbId": 945961,
+          "website": "https://www.20thcenturystudios.com/movies/alien-romulus",
+          "year": 2024,
+          "youTubeTrailerId": "x0XDEhP4MQs"
+        },
+        "movieId": 6,
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 30,
+            "modifier": "remux",
+            "name": "Remux-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "Alien.Romulus.2024.1080p.BluRay.REMUX.AVC.DTS-HD-MA.7.1-UnKn0wn"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 52,
+            "name": "DTS"
+          },
+          {
+            "id": 1,
+            "name": "HD Bluray Tier 01"
+          },
+          {
+            "id": 58,
+            "name": "Language not Italian"
+          }
+        ],
+        "date": "2026-03-15T13:31:39Z",
+        "id": 2,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-15T13:17:10Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "animalkingdom",
+          "folderName": "/movies/Animal Kingdom (2010) {tmdb-44629}",
+          "genres": [
+            "Crime",
+            "Drama"
+          ],
+          "id": 156,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/zhj8YPQKuRev5N3KoHacsPnF4mB.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/dxOv6K3LNbZfQaGDyx7Tp94Koy.jpg"
+            }
+          ],
+          "imdbId": "tt1313092",
+          "inCinemas": "2010-06-03T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "armed robbery",
+            "drug dealer",
+            "female gangleader",
+            "heroin",
+            "interrogation",
+            "melbourne, australia",
+            "murder of a police officer",
+            "neo-noir",
+            "police custody",
+            "trial"
+          ],
+          "lastSearchTime": "2026-06-14T06:09:16Z",
+          "minimumAvailability": "released",
+          "monitored": false,
+          "movieFileId": 255,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Animal Kingdom",
+          "overview": "Joshua “J” is taken in by his extended family after his mother dies of an overdose. The clan, ruled by J’s scheming grandmother, is heavily involved in criminal activities, and J is soon indoctrinated into their way of life. But J is given a chance to take another path when a cop seeks to help him.",
+          "path": "/movies/Animal Kingdom (2010) {tmdb-44629}",
+          "physicalRelease": "2011-02-23T00:00:00Z",
+          "popularity": 1.9352,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 7.2,
+              "votes": 64045
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 83,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 94,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.8,
+              "votes": 949
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.09831,
+              "votes": 1424
+            }
+          },
+          "releaseDate": "2011-02-23T00:00:00Z",
+          "runtime": 113,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "animal kingdom",
+          "status": "released",
+          "studio": "Porchlight Films",
+          "tags": [],
+          "title": "Animal Kingdom",
+          "titleSlug": "44629",
+          "tmdbId": 44629,
+          "website": "http://www.animalkingdommovie.com/",
+          "year": 2010,
+          "youTubeTrailerId": "YNszOl14AWg"
+        },
+        "movieId": 156,
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "Animal.Kingdom.2010.1080p.BluRay.DTS.x264-BMF"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 54,
+            "name": "DD"
+          }
+        ],
+        "date": "2026-04-29T08:45:02Z",
+        "id": 31,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-15T13:17:10Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "animalkingdom",
+          "folderName": "/movies/Animal Kingdom (2010) {tmdb-44629}",
+          "genres": [
+            "Crime",
+            "Drama"
+          ],
+          "id": 156,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/zhj8YPQKuRev5N3KoHacsPnF4mB.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/dxOv6K3LNbZfQaGDyx7Tp94Koy.jpg"
+            }
+          ],
+          "imdbId": "tt1313092",
+          "inCinemas": "2010-06-03T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "armed robbery",
+            "drug dealer",
+            "female gangleader",
+            "heroin",
+            "interrogation",
+            "melbourne, australia",
+            "murder of a police officer",
+            "neo-noir",
+            "police custody",
+            "trial"
+          ],
+          "lastSearchTime": "2026-06-14T06:09:16Z",
+          "minimumAvailability": "released",
+          "monitored": false,
+          "movieFileId": 255,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Animal Kingdom",
+          "overview": "Joshua “J” is taken in by his extended family after his mother dies of an overdose. The clan, ruled by J’s scheming grandmother, is heavily involved in criminal activities, and J is soon indoctrinated into their way of life. But J is given a chance to take another path when a cop seeks to help him.",
+          "path": "/movies/Animal Kingdom (2010) {tmdb-44629}",
+          "physicalRelease": "2011-02-23T00:00:00Z",
+          "popularity": 1.9352,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 7.2,
+              "votes": 64045
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 83,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 94,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.8,
+              "votes": 949
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.09831,
+              "votes": 1424
+            }
+          },
+          "releaseDate": "2011-02-23T00:00:00Z",
+          "runtime": 113,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "animal kingdom",
+          "status": "released",
+          "studio": "Porchlight Films",
+          "tags": [],
+          "title": "Animal Kingdom",
+          "titleSlug": "44629",
+          "tmdbId": 44629,
+          "website": "http://www.animalkingdommovie.com/",
+          "year": 2010,
+          "youTubeTrailerId": "YNszOl14AWg"
+        },
+        "movieId": 156,
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 0,
+            "modifier": "none",
+            "name": "Unknown",
+            "resolution": 0,
+            "source": "unknown"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "Animal Kingdom (2010)   [XviD   Ita Ac3] Drammatico, Azione, MirCrew"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 50,
+            "name": "DD+"
+          }
+        ],
+        "date": "2026-11-01T16:36:20Z",
+        "id": 107,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "PG-13",
+          "cleanTitle": "batmanbegins",
+          "collection": {
+            "title": "The Dark Knight Collection",
+            "tmdbId": 263
+          },
+          "digitalRelease": "2008-05-19T00:00:00Z",
+          "folderName": "/movies/Batman Begins (2005)",
+          "genres": [
+            "Drama",
+            "Crime",
+            "Action"
+          ],
+          "id": 11,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/sPX89Td70IDDjVr85jdSBb4rWGr.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/9IIBboV7MCT0bTxzXHmWK1Hq558.jpg"
+            }
+          ],
+          "imdbId": "tt0372784",
+          "inCinemas": "2005-06-15T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "based on comic",
+            "crime fighter",
+            "evil doctor",
+            "haunted by the past",
+            "inspirational",
+            "loss of loved one",
+            "martial arts",
+            "master villain",
+            "ninja",
+            "rivalry",
+            "secret identity",
+            "super power",
+            "superhero",
+            "tragic hero",
+            "undercover",
+            "unfulfilled love",
+            "vigilante"
+          ],
+          "lastSearchTime": "2026-11-01T16:38:56Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 391,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Batman Begins",
+          "overview": "Driven by tragedy, billionaire Bruce Wayne dedicates his life to uncovering and defeating the corruption that plagues his home, Gotham City.  Unable to work within the system, he instead creates a new identity, a symbol of fear for the criminal underworld - The Batman.",
+          "path": "/movies/Batman Begins (2005)",
+          "physicalRelease": "2005-10-14T00:00:00Z",
+          "popularity": 18.1463,
+          "qualityProfileId": 10,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 8.2,
+              "votes": 1753601
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 70,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 85,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7.733,
+              "votes": 23504
+            },
+            "trakt": {
+              "type": "user",
+              "value": 8.2092,
+              "votes": 38361
+            }
+          },
+          "releaseDate": "2005-10-14T00:00:00Z",
+          "runtime": 140,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "batman begins",
+          "status": "released",
+          "studio": "Warner Bros. Pictures",
+          "tags": [
+            1
+          ],
+          "title": "Batman Begins",
+          "titleSlug": "272",
+          "tmdbId": 272,
+          "website": "https://www.warnerbros.com/movies/batman-begins/",
+          "year": 2005,
+          "youTubeTrailerId": "lirBhHXvDSg"
+        },
+        "movieId": 11,
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 15,
+            "modifier": "none",
+            "name": "WEBRip-1080p",
+            "resolution": 1080,
+            "source": "webrip"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "Batman.Begins.2005.WEBRip.1080p.x264.EAC3.ITA.ENG.SUB.ITA.ENG-Lullozzo"
+      }
+    ],
+    "sortDirection": "ascending",
+    "sortKey": "movieMetadata.sortTitle",
+    "totalRecords": 86
+  },
+  "recordedAt": "2026-11-11T12:12:57Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/blocklist?page=1&pageSize=10&sortKey=movieMetadata.sortTitle&sortDirection=ascending"
+  },
+  "status": 200
+}

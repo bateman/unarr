@@ -93,6 +93,7 @@ pub fn file_formats(catalog: &Catalog, file: &EpisodeFile, series: &Series) -> (
         indexer_flags: file.indexer_flags,
         release_type: file.release_type,
         series_original_language: series.original_language_id,
+        movie: None,
     };
     let matched = customformat::evaluate(&catalog.formats, &input);
     let ids: Vec<i64> = matched.iter().map(|f| f.id).collect();

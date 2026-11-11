@@ -1,9 +1,9 @@
 # syntax=docker/dockerfile:1
 # Static musl build, shipped on distroless. Image published as ghcr.io/bateman/unarr.
 #
-# The official web UI is embedded at compile time from crates/unarr-api/ui/sonarr,
-# which `make ui` fills in before the build (CI does this); without it the image
-# serves the API and a placeholder page.
+# The official web UIs are embedded at compile time from crates/unarr-api/ui/sonarr
+# and ui/radarr, which `make ui` fills in before the build (CI does this); without
+# them the image serves the API and a placeholder page.
 FROM rust:1-alpine AS build
 RUN apk add --no-cache musl-dev
 WORKDIR /src

@@ -83,6 +83,7 @@ pub fn local_formats(catalog: &Catalog, local: &LocalEpisode) -> Vec<CustomForma
         indexer_flags: local.indexer_flags,
         release_type: local.release_type,
         series_original_language: local.series.as_ref().map(|s| s.original_language_id).unwrap_or(0),
+        movie: None,
     };
     customformat::evaluate(&catalog.formats, &input)
         .into_iter()

@@ -1,0 +1,3098 @@
+{
+  "body": {
+    "page": 1,
+    "pageSize": 20,
+    "records": [
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 52,
+            "name": "DTS"
+          }
+        ],
+        "data": {
+          "customFormatScore": "0",
+          "downloadClient": "redacted",
+          "downloadClientName": "Download client",
+          "droppedPath": "/downloads/Predestination.2014.DTS.ITA.ENG.1080p.BluRay.x264-BLUWORLD.mkv",
+          "fileId": "404",
+          "importedPath": "/movies/Predestination (2014) {tmdb-206487}/Predestination (2014) {tmdb-206487} - [Bluray-1080p][DTS 5.1][x264]-BLUWORLD.mkv",
+          "indexerFlags": "G_Halfleech",
+          "releaseGroup": "BLUWORLD",
+          "size": "8735974490"
+        },
+        "date": "2026-11-11T11:53:43Z",
+        "downloadId": "932161398c8420b934b0d047c43b66b8d1337383",
+        "eventType": "downloadFolderImported",
+        "id": 1008,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-11-11T07:53:41Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "predestination",
+          "digitalRelease": "2014-08-28T00:00:00Z",
+          "folderName": "/movies/Predestination (2014) {tmdb-206487}",
+          "genres": [
+            "Science Fiction",
+            "Thriller"
+          ],
+          "id": 327,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/38Xr1JnV1ZcLQ55zmdSp6n475cZ.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/cvq9cRMDJIGzNpHaPVGFftqPcLj.jpg"
+            }
+          ],
+          "imdbId": "tt2397535",
+          "inCinemas": "2014-08-28T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "baffled",
+            "bartender",
+            "based on short story",
+            "bomber",
+            "determinism",
+            "excited",
+            "fate",
+            "intersex",
+            "intersexuality",
+            "loner",
+            "mission",
+            "orphanage",
+            "philosophical",
+            "pregnancy",
+            "secret organization",
+            "shocking",
+            "temporal agent",
+            "terrorism",
+            "time machine",
+            "time paradox",
+            "time travel"
+          ],
+          "lastSearchTime": "2026-11-11T07:54:45Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 404,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Predestination",
+          "overview": "Predestination chronicles the life of a Temporal Agent sent on an intricate series of time-travel journeys designed to prevent future killers from committing their crimes. Now, on his final assignment, the Agent must stop the one criminal that has eluded him throughout time and prevent a devastating attack in which thousands of lives will be lost.",
+          "path": "/movies/Predestination (2014) {tmdb-206487}",
+          "physicalRelease": "2014-11-28T00:00:00Z",
+          "popularity": 7.7869,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 7.4,
+              "votes": 343095
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 69,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 84,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7.412,
+              "votes": 7468
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.54082,
+              "votes": 13193
+            }
+          },
+          "releaseDate": "2014-08-28T00:00:00Z",
+          "runtime": 98,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "predestination",
+          "status": "released",
+          "studio": "Screen Queensland",
+          "tags": [
+            1
+          ],
+          "title": "Predestination",
+          "titleSlug": "206487",
+          "tmdbId": 206487,
+          "website": "https://www.sonypictures.com/movies/predestination",
+          "year": 2014,
+          "youTubeTrailerId": "xxG-YfedrfU"
+        },
+        "movieId": 327,
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "Predestination.2014.DTS.ITA.ENG.1080p.BluRay.x264-BLUWORLD"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 52,
+            "name": "DTS"
+          }
+        ],
+        "data": {
+          "age": "2318",
+          "ageHours": "55641.91606649264",
+          "ageMinutes": "3338514.963989713",
+          "customFormatScore": "0",
+          "downloadClient": "redacted",
+          "downloadClientName": "Download client",
+          "downloadUrl": "http://indexer.invalid/d7d810b5969e",
+          "guid": "http://indexer.invalid/8568914edcb1",
+          "imdbId": "0",
+          "indexer": "Indexer",
+          "indexerFlags": "G_Halfleech",
+          "indexerId": "17",
+          "movieMatchType": "Title",
+          "nzbInfoUrl": "http://indexer.invalid/4d29e242a089",
+          "protocol": "2",
+          "publishedDate": "2020-07-06T22:00:00Z",
+          "releaseGroup": null,
+          "releaseSource": "Search",
+          "size": "8740258447",
+          "tmdbId": "0",
+          "torrentInfoHash": "03c05d18105e259cbc7fff4eef9033733e52e80b"
+        },
+        "date": "2026-11-11T07:54:57Z",
+        "downloadId": "932161398c8420b934b0d047c43b66b8d1337383",
+        "eventType": "grabbed",
+        "id": 1007,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-11-11T07:53:41Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "predestination",
+          "digitalRelease": "2014-08-28T00:00:00Z",
+          "folderName": "/movies/Predestination (2014) {tmdb-206487}",
+          "genres": [
+            "Science Fiction",
+            "Thriller"
+          ],
+          "id": 327,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/38Xr1JnV1ZcLQ55zmdSp6n475cZ.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/cvq9cRMDJIGzNpHaPVGFftqPcLj.jpg"
+            }
+          ],
+          "imdbId": "tt2397535",
+          "inCinemas": "2014-08-28T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "baffled",
+            "bartender",
+            "based on short story",
+            "bomber",
+            "determinism",
+            "excited",
+            "fate",
+            "intersex",
+            "intersexuality",
+            "loner",
+            "mission",
+            "orphanage",
+            "philosophical",
+            "pregnancy",
+            "secret organization",
+            "shocking",
+            "temporal agent",
+            "terrorism",
+            "time machine",
+            "time paradox",
+            "time travel"
+          ],
+          "lastSearchTime": "2026-11-11T07:54:45Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 404,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Predestination",
+          "overview": "Predestination chronicles the life of a Temporal Agent sent on an intricate series of time-travel journeys designed to prevent future killers from committing their crimes. Now, on his final assignment, the Agent must stop the one criminal that has eluded him throughout time and prevent a devastating attack in which thousands of lives will be lost.",
+          "path": "/movies/Predestination (2014) {tmdb-206487}",
+          "physicalRelease": "2014-11-28T00:00:00Z",
+          "popularity": 7.7869,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 7.4,
+              "votes": 343095
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 69,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 84,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7.412,
+              "votes": 7468
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.54082,
+              "votes": 13193
+            }
+          },
+          "releaseDate": "2014-08-28T00:00:00Z",
+          "runtime": 98,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "predestination",
+          "status": "released",
+          "studio": "Screen Queensland",
+          "tags": [
+            1
+          ],
+          "title": "Predestination",
+          "titleSlug": "206487",
+          "tmdbId": 206487,
+          "website": "https://www.sonypictures.com/movies/predestination",
+          "year": 2014,
+          "youTubeTrailerId": "xxG-YfedrfU"
+        },
+        "movieId": 327,
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "Predestination 2014 DTS ITA ENG 1080p BluRay x264 BLUWORLD mkv torrent"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 54,
+            "name": "DD"
+          },
+          {
+            "id": 18,
+            "name": "x265 (HD)"
+          },
+          {
+            "id": 56,
+            "name": "x265 (no HDR/DV)"
+          }
+        ],
+        "data": {
+          "customFormatScore": "0",
+          "downloadClient": "redacted",
+          "downloadClientName": "Download client",
+          "droppedPath": "/downloads/Heart Of The Beast - Nel Profondo Selvaggio (2026) 1080p WEB-DL H265 Ita Eng AC3 5.1 Sub Ita Eng iDN_CreW.mkv",
+          "fileId": "403",
+          "importedPath": "/movies/Heart of the Beast (2026) {tmdb-1263337}/Heart of the Beast (2026) {tmdb-1263337} - [WEBDL-1080p][AC3 5.1][x265].mkv",
+          "indexerFlags": "G_Freeleech",
+          "releaseGroup": null,
+          "size": "2959421173"
+        },
+        "date": "2026-11-11T07:00:10Z",
+        "downloadId": "1cbe166dd34596cc4fba469f1d7781e91e3e8072",
+        "eventType": "downloadFolderImported",
+        "id": 1006,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-06-15T18:58:47Z",
+          "alternateTitles": [],
+          "certification": "PG-13",
+          "cleanTitle": "heartbeast",
+          "digitalRelease": "2026-11-10T00:00:00Z",
+          "folderName": "/movies/Heart of the Beast (2026) {tmdb-1263337}",
+          "genres": [
+            "Adventure",
+            "Thriller"
+          ],
+          "id": 224,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/6sYemVUn79UPKz1ZsSG6kPU4RVy.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/6uVRPFflyJpo8Cx872olmlGTWla.jpg"
+            }
+          ],
+          "imdbId": "tt7526136",
+          "inCinemas": "2026-09-23T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "alaska",
+            "american wilderness",
+            "dog",
+            "extreme conditions",
+            "inspirational",
+            "man vs nature",
+            "military",
+            "plane crash",
+            "special forces",
+            "survival thriller"
+          ],
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 403,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Heart of the Beast",
+          "overview": "After a harrowing plane crash, Special Forces officer James Belmont and his combat dog, Odin, find themselves stranded deep in the Alaskan wilderness. Together, they are forced into a brutal fight for survival against the elements.",
+          "path": "/movies/Heart of the Beast (2026) {tmdb-1263337}",
+          "popularity": 445.8409,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 7.1,
+              "votes": 43512
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7.362,
+              "votes": 577
+            }
+          },
+          "releaseDate": "2026-11-10T00:00:00Z",
+          "runtime": 101,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "heart of the beast",
+          "status": "released",
+          "studio": "Paramount Pictures",
+          "tags": [
+            1
+          ],
+          "title": "Heart of the Beast",
+          "titleSlug": "1263337",
+          "tmdbId": 1263337,
+          "website": "https://www.heartofthebeastmovie.com",
+          "year": 2026,
+          "youTubeTrailerId": "UkMuGKqAux4"
+        },
+        "movieId": 224,
+        "quality": {
+          "quality": {
+            "id": 3,
+            "modifier": "none",
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "webdl"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "sourceTitle": "Heart Of The Beast - Nel Profondo Selvaggio (2026) 1080p WEB-DL H265 Ita Eng AC3 5.1 Sub Ita Eng iDN_CreW"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 54,
+            "name": "DD"
+          },
+          {
+            "id": 18,
+            "name": "x265 (HD)"
+          },
+          {
+            "id": 56,
+            "name": "x265 (no HDR/DV)"
+          }
+        ],
+        "data": {
+          "age": "0",
+          "ageHours": "0.008644030611111112",
+          "ageMinutes": "0.5186421316666666",
+          "customFormatScore": "0",
+          "downloadClient": "redacted",
+          "downloadClientName": "Download client",
+          "downloadUrl": "http://indexer.invalid/5ec8d7c67e05",
+          "guid": "http://indexer.invalid/b86521477b85",
+          "imdbId": "0",
+          "indexer": "Indexer",
+          "indexerFlags": "G_Freeleech",
+          "indexerId": "6",
+          "movieMatchType": "Title",
+          "nzbInfoUrl": "http://indexer.invalid/b86521477b85",
+          "protocol": "2",
+          "publishedDate": "2026-11-11T06:55:06Z",
+          "releaseGroup": "AC3",
+          "releaseSource": "Rss",
+          "size": "2963527434",
+          "tmdbId": "0",
+          "torrentInfoHash": "1cbe166dd34596cc4fba469f1d7781e91e3e8072"
+        },
+        "date": "2026-11-11T06:55:37Z",
+        "downloadId": "1cbe166dd34596cc4fba469f1d7781e91e3e8072",
+        "eventType": "grabbed",
+        "id": 1005,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-06-15T18:58:47Z",
+          "alternateTitles": [],
+          "certification": "PG-13",
+          "cleanTitle": "heartbeast",
+          "digitalRelease": "2026-11-10T00:00:00Z",
+          "folderName": "/movies/Heart of the Beast (2026) {tmdb-1263337}",
+          "genres": [
+            "Adventure",
+            "Thriller"
+          ],
+          "id": 224,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/6sYemVUn79UPKz1ZsSG6kPU4RVy.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/6uVRPFflyJpo8Cx872olmlGTWla.jpg"
+            }
+          ],
+          "imdbId": "tt7526136",
+          "inCinemas": "2026-09-23T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "alaska",
+            "american wilderness",
+            "dog",
+            "extreme conditions",
+            "inspirational",
+            "man vs nature",
+            "military",
+            "plane crash",
+            "special forces",
+            "survival thriller"
+          ],
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 403,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Heart of the Beast",
+          "overview": "After a harrowing plane crash, Special Forces officer James Belmont and his combat dog, Odin, find themselves stranded deep in the Alaskan wilderness. Together, they are forced into a brutal fight for survival against the elements.",
+          "path": "/movies/Heart of the Beast (2026) {tmdb-1263337}",
+          "popularity": 445.8409,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 7.1,
+              "votes": 43512
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7.362,
+              "votes": 577
+            }
+          },
+          "releaseDate": "2026-11-10T00:00:00Z",
+          "runtime": 101,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "heart of the beast",
+          "status": "released",
+          "studio": "Paramount Pictures",
+          "tags": [
+            1
+          ],
+          "title": "Heart of the Beast",
+          "titleSlug": "1263337",
+          "tmdbId": 1263337,
+          "website": "https://www.heartofthebeastmovie.com",
+          "year": 2026,
+          "youTubeTrailerId": "UkMuGKqAux4"
+        },
+        "movieId": 224,
+        "quality": {
+          "quality": {
+            "id": 3,
+            "modifier": "none",
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "webdl"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "sourceTitle": "Heart-Of-The-Beast--Nel-Profondo-Selvaggio-(2026)-1080p-WEB-DL-H265-Ita-Eng-AC3-.."
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 50,
+            "name": "DD+"
+          },
+          {
+            "id": 61,
+            "name": "Line/Mic Dubbed"
+          },
+          {
+            "id": 18,
+            "name": "x265 (HD)"
+          },
+          {
+            "id": 56,
+            "name": "x265 (no HDR/DV)"
+          }
+        ],
+        "data": {
+          "customFormatScore": "0",
+          "downloadClient": "qBittorrent",
+          "downloadClientName": "Download client",
+          "droppedPath": "/downloads/Mutiny Inverti la rotta (2026) 1080p x265 ita eng sub eng MD eac3 - Faccio.mkv",
+          "fileId": "402",
+          "importedPath": "/movies/Mutiny (2026) {tmdb-1288445}/Mutiny (2026) {tmdb-1288445} - [WEBDL-1080p][MP3 2.0][x265].mkv",
+          "indexerFlags": "0",
+          "releaseGroup": null,
+          "size": "2262743736"
+        },
+        "date": "2026-11-10T20:07:34Z",
+        "downloadId": "c272b98d8b94697d1258092351b700b4ae5fd3ff",
+        "eventType": "downloadFolderImported",
+        "id": 1004,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-11-10T19:52:02Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "mutiny",
+          "digitalRelease": "2026-09-08T00:00:00Z",
+          "folderName": "/movies/Mutiny (2026) {tmdb-1288445}",
+          "genres": [
+            "Action",
+            "Thriller"
+          ],
+          "id": 326,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/pu2VxGlpGwffOx292w18b1tv96j.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/qDa0fqDqIBCovRp975RvtGPcuN3.jpg"
+            }
+          ],
+          "imdbId": "tt32338669",
+          "inCinemas": "2026-08-19T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "cargo ship",
+            "conspiracy",
+            "framed for murder",
+            "one man army",
+            "revenge"
+          ],
+          "lastSearchTime": "2026-11-10T19:52:32Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 402,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Mutiny",
+          "overview": "After witnessing his billionaire boss' murder and being framed for the crime, Cole Reed boards a cargo ship on a one-man crusade to avenge his boss' death only to discover an international conspiracy.",
+          "path": "/movies/Mutiny (2026) {tmdb-1288445}",
+          "physicalRelease": "2026-12-11T00:00:00Z",
+          "popularity": 79.2795,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 5.7,
+              "votes": 25591
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 52,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7.628,
+              "votes": 1049
+            }
+          },
+          "releaseDate": "2026-09-08T00:00:00Z",
+          "runtime": 96,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "mutiny",
+          "status": "released",
+          "studio": "Punch Palace Productions",
+          "tags": [
+            1
+          ],
+          "title": "Mutiny",
+          "titleSlug": "1288445",
+          "tmdbId": 1288445,
+          "website": "https://www.mutiny.movie",
+          "year": 2026,
+          "youTubeTrailerId": "2Iqvbe98Gb4"
+        },
+        "movieId": 326,
+        "quality": {
+          "quality": {
+            "id": 3,
+            "modifier": "none",
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "webdl"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "sourceTitle": "Mutiny Inverti la rotta (2026) 1080p x265 ita eng sub eng MD eac3 - Faccio"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 50,
+            "name": "DD+"
+          },
+          {
+            "id": 61,
+            "name": "Line/Mic Dubbed"
+          },
+          {
+            "id": 18,
+            "name": "x265 (HD)"
+          },
+          {
+            "id": 56,
+            "name": "x265 (no HDR/DV)"
+          }
+        ],
+        "data": {
+          "age": "0",
+          "ageHours": "0.008958943861111112",
+          "ageMinutes": "0.537536905",
+          "customFormatScore": "0",
+          "downloadClient": "qBittorrent",
+          "downloadClientName": "Download client",
+          "downloadUrl": "magnet:?xt=urn:btih:770467a094eace07493bfaaf51e57694b730af32",
+          "guid": "7325d2fc182062f613ca766523f7ccd2",
+          "imdbId": "0",
+          "indexer": "Indexer",
+          "indexerFlags": "0",
+          "indexerId": "14",
+          "movieMatchType": "Title",
+          "nzbInfoUrl": null,
+          "protocol": "2",
+          "publishedDate": "2026-11-10T19:52:15Z",
+          "releaseGroup": null,
+          "releaseSource": "Search",
+          "size": "2262743736",
+          "tmdbId": "0",
+          "torrentInfoHash": "7325d2fc182062f613ca766523f7ccd2"
+        },
+        "date": "2026-11-10T19:52:47Z",
+        "downloadId": "c272b98d8b94697d1258092351b700b4ae5fd3ff",
+        "eventType": "grabbed",
+        "id": 1003,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-11-10T19:52:02Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "mutiny",
+          "digitalRelease": "2026-09-08T00:00:00Z",
+          "folderName": "/movies/Mutiny (2026) {tmdb-1288445}",
+          "genres": [
+            "Action",
+            "Thriller"
+          ],
+          "id": 326,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/pu2VxGlpGwffOx292w18b1tv96j.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/qDa0fqDqIBCovRp975RvtGPcuN3.jpg"
+            }
+          ],
+          "imdbId": "tt32338669",
+          "inCinemas": "2026-08-19T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "cargo ship",
+            "conspiracy",
+            "framed for murder",
+            "one man army",
+            "revenge"
+          ],
+          "lastSearchTime": "2026-11-10T19:52:32Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 402,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Mutiny",
+          "overview": "After witnessing his billionaire boss' murder and being framed for the crime, Cole Reed boards a cargo ship on a one-man crusade to avenge his boss' death only to discover an international conspiracy.",
+          "path": "/movies/Mutiny (2026) {tmdb-1288445}",
+          "physicalRelease": "2026-12-11T00:00:00Z",
+          "popularity": 79.2795,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 5.7,
+              "votes": 25591
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 52,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7.628,
+              "votes": 1049
+            }
+          },
+          "releaseDate": "2026-09-08T00:00:00Z",
+          "runtime": 96,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "mutiny",
+          "status": "released",
+          "studio": "Punch Palace Productions",
+          "tags": [
+            1
+          ],
+          "title": "Mutiny",
+          "titleSlug": "1288445",
+          "tmdbId": 1288445,
+          "website": "https://www.mutiny.movie",
+          "year": 2026,
+          "youTubeTrailerId": "2Iqvbe98Gb4"
+        },
+        "movieId": 326,
+        "quality": {
+          "quality": {
+            "id": 3,
+            "modifier": "none",
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "webdl"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "sourceTitle": "Mutiny Inverti la rotta (2026) 1080p x265 ita eng sub eng MD eac3 - Faccio.mkv"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 54,
+            "name": "DD"
+          }
+        ],
+        "data": {
+          "indexerFlags": "G_Freeleech",
+          "reason": "Manual",
+          "releaseGroup": null,
+          "size": "1588840448"
+        },
+        "date": "2026-11-09T09:11:23Z",
+        "eventType": "movieFileDeleted",
+        "id": 1002,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "projectx",
+          "digitalRelease": "2013-06-05T00:00:00Z",
+          "folderName": "/movies/Project X (2012)",
+          "genres": [
+            "Comedy"
+          ],
+          "id": 79,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/lUPDGT3lyRrq8SvWuNWG2DP64bR.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/cUqXHZtnptgvyAE1hN47Wsf3ami.jpg"
+            }
+          ],
+          "imdbId": "tt1636826",
+          "inCinemas": "2012-03-01T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "birthday",
+            "birthday party",
+            "fake documentary",
+            "faux documentary",
+            "high school",
+            "high school student",
+            "house party",
+            "mockumentary",
+            "teen movie"
+          ],
+          "lastSearchTime": "2026-11-08T19:20:40Z",
+          "minimumAvailability": "released",
+          "monitored": false,
+          "movieFileId": 401,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Project X",
+          "overview": "Three high school seniors throw a party to make a name for themselves. As the night progresses, things spiral out of control as word of the party spreads.",
+          "path": "/movies/Project X (2012)",
+          "physicalRelease": "2012-12-18T00:00:00Z",
+          "popularity": 10.3314,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.7,
+              "votes": 263993
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 46,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 28,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.926,
+              "votes": 7135
+            },
+            "trakt": {
+              "type": "user",
+              "value": 6.93928,
+              "votes": 7674
+            }
+          },
+          "releaseDate": "2012-12-18T00:00:00Z",
+          "runtime": 88,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "project x",
+          "status": "released",
+          "studio": "Silver Pictures",
+          "tags": [
+            1
+          ],
+          "title": "Project X",
+          "titleSlug": "57214",
+          "tmdbId": 57214,
+          "website": "https://www.warnerbros.com/movies/project-x",
+          "year": 2012,
+          "youTubeTrailerId": "X28d7fbRGSQ"
+        },
+        "movieId": 79,
+        "quality": {
+          "quality": {
+            "id": 1,
+            "modifier": "none",
+            "name": "SDTV",
+            "resolution": 480,
+            "source": "tv"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "sourceTitle": "/movies/Project X (2012)/Project X (2012) {tmdb-57214} - [SDTV][AC3 5.1][XviD].avi"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 50,
+            "name": "DD+"
+          },
+          {
+            "id": 18,
+            "name": "x265 (HD)"
+          },
+          {
+            "id": 56,
+            "name": "x265 (no HDR/DV)"
+          }
+        ],
+        "data": {
+          "age": "0",
+          "ageHours": "0.002624186138888889",
+          "ageMinutes": "0.15745130333333332",
+          "customFormatScore": "0",
+          "downloadClient": "qBittorrent",
+          "downloadClientName": "Download client",
+          "downloadUrl": "magnet:?xt=urn:btih:2b0af25d4cb389b32fe893f9c61a5440c170583f",
+          "guid": "58b5b1e90c09c8428dd8443810540fb2",
+          "imdbId": "0",
+          "indexer": "Indexer",
+          "indexerFlags": "0",
+          "indexerId": "14",
+          "movieMatchType": "Title",
+          "nzbInfoUrl": null,
+          "protocol": "2",
+          "publishedDate": "2026-11-08T19:20:40Z",
+          "releaseGroup": null,
+          "releaseSource": "UserInvokedSearch",
+          "size": "2745830138",
+          "tmdbId": "0",
+          "torrentInfoHash": "58b5b1e90c09c8428dd8443810540fb2"
+        },
+        "date": "2026-11-08T19:20:49Z",
+        "downloadId": "aa99375ecfbaa70f9fdf654f080aa040c2b9e661",
+        "eventType": "grabbed",
+        "id": 1001,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "projectx",
+          "digitalRelease": "2013-06-05T00:00:00Z",
+          "folderName": "/movies/Project X (2012)",
+          "genres": [
+            "Comedy"
+          ],
+          "id": 79,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/lUPDGT3lyRrq8SvWuNWG2DP64bR.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/cUqXHZtnptgvyAE1hN47Wsf3ami.jpg"
+            }
+          ],
+          "imdbId": "tt1636826",
+          "inCinemas": "2012-03-01T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "birthday",
+            "birthday party",
+            "fake documentary",
+            "faux documentary",
+            "high school",
+            "high school student",
+            "house party",
+            "mockumentary",
+            "teen movie"
+          ],
+          "lastSearchTime": "2026-11-08T19:20:40Z",
+          "minimumAvailability": "released",
+          "monitored": false,
+          "movieFileId": 401,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Project X",
+          "overview": "Three high school seniors throw a party to make a name for themselves. As the night progresses, things spiral out of control as word of the party spreads.",
+          "path": "/movies/Project X (2012)",
+          "physicalRelease": "2012-12-18T00:00:00Z",
+          "popularity": 10.3314,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.7,
+              "votes": 263993
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 46,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 28,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.926,
+              "votes": 7135
+            },
+            "trakt": {
+              "type": "user",
+              "value": 6.93928,
+              "votes": 7674
+            }
+          },
+          "releaseDate": "2012-12-18T00:00:00Z",
+          "runtime": 88,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "project x",
+          "status": "released",
+          "studio": "Silver Pictures",
+          "tags": [
+            1
+          ],
+          "title": "Project X",
+          "titleSlug": "57214",
+          "tmdbId": 57214,
+          "website": "https://www.warnerbros.com/movies/project-x",
+          "year": 2012,
+          "youTubeTrailerId": "X28d7fbRGSQ"
+        },
+        "movieId": 79,
+        "quality": {
+          "quality": {
+            "id": 3,
+            "modifier": "none",
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "webdl"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "sourceTitle": "Project.X.(2012).1080p.x265.ITA.ENG.EAC3.sub.ITA.ENG.mkv"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [],
+        "data": {
+          "downloadClient": "redacted",
+          "downloadClientName": "Download client",
+          "indexer": "Indexer",
+          "message": "redacted",
+          "releaseGroup": null,
+          "size": "0"
+        },
+        "date": "2026-11-08T19:15:00Z",
+        "downloadId": "5bb3ecd732c74c30a9c8872b660c05e116ce5fcb",
+        "eventType": "downloadFailed",
+        "id": 1000,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "projectx",
+          "digitalRelease": "2013-06-05T00:00:00Z",
+          "folderName": "/movies/Project X (2012)",
+          "genres": [
+            "Comedy"
+          ],
+          "id": 79,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/lUPDGT3lyRrq8SvWuNWG2DP64bR.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/cUqXHZtnptgvyAE1hN47Wsf3ami.jpg"
+            }
+          ],
+          "imdbId": "tt1636826",
+          "inCinemas": "2012-03-01T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "birthday",
+            "birthday party",
+            "fake documentary",
+            "faux documentary",
+            "high school",
+            "high school student",
+            "house party",
+            "mockumentary",
+            "teen movie"
+          ],
+          "lastSearchTime": "2026-11-08T19:20:40Z",
+          "minimumAvailability": "released",
+          "monitored": false,
+          "movieFileId": 401,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Project X",
+          "overview": "Three high school seniors throw a party to make a name for themselves. As the night progresses, things spiral out of control as word of the party spreads.",
+          "path": "/movies/Project X (2012)",
+          "physicalRelease": "2012-12-18T00:00:00Z",
+          "popularity": 10.3314,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.7,
+              "votes": 263993
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 46,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 28,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.926,
+              "votes": 7135
+            },
+            "trakt": {
+              "type": "user",
+              "value": 6.93928,
+              "votes": 7674
+            }
+          },
+          "releaseDate": "2012-12-18T00:00:00Z",
+          "runtime": 88,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "project x",
+          "status": "released",
+          "studio": "Silver Pictures",
+          "tags": [
+            1
+          ],
+          "title": "Project X",
+          "titleSlug": "57214",
+          "tmdbId": 57214,
+          "website": "https://www.warnerbros.com/movies/project-x",
+          "year": 2012,
+          "youTubeTrailerId": "X28d7fbRGSQ"
+        },
+        "movieId": 79,
+        "quality": {
+          "quality": {
+            "id": 9,
+            "modifier": "none",
+            "name": "HDTV-1080p",
+            "resolution": 1080,
+            "source": "tv"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "sourceTitle": "The Lost Dinosaurs The Dinosaur Project 2012 1080p H264 Ac3 Ita Aac Eng artemix MIRCrew"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [],
+        "data": {
+          "age": "329",
+          "ageHours": "7913.848310208055",
+          "ageMinutes": "474830.898612615",
+          "customFormatScore": "0",
+          "downloadClient": "redacted",
+          "downloadClientName": "Download client",
+          "downloadUrl": "http://indexer.invalid/dd529eeff291",
+          "guid": "magnet:?xt=urn:btih:82841c236624854f47f7df28d1847e4ef89eceeb",
+          "imdbId": "0",
+          "indexer": "Indexer",
+          "indexerFlags": "G_Freeleech",
+          "indexerId": "17",
+          "movieMatchType": "Unknown",
+          "nzbInfoUrl": "http://indexer.invalid/68285e7f9f4b",
+          "protocol": "2",
+          "publishedDate": "2025-12-13T23:00:00Z",
+          "releaseGroup": null,
+          "releaseSource": "InteractiveSearch",
+          "size": "1513975971",
+          "tmdbId": "0",
+          "torrentInfoHash": "bcf8d74f182a07f144c41751ef6f0d6956afc85e"
+        },
+        "date": "2026-11-08T16:50:53Z",
+        "downloadId": "5bb3ecd732c74c30a9c8872b660c05e116ce5fcb",
+        "eventType": "grabbed",
+        "id": 999,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "projectx",
+          "digitalRelease": "2013-06-05T00:00:00Z",
+          "folderName": "/movies/Project X (2012)",
+          "genres": [
+            "Comedy"
+          ],
+          "id": 79,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/lUPDGT3lyRrq8SvWuNWG2DP64bR.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/cUqXHZtnptgvyAE1hN47Wsf3ami.jpg"
+            }
+          ],
+          "imdbId": "tt1636826",
+          "inCinemas": "2012-03-01T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "birthday",
+            "birthday party",
+            "fake documentary",
+            "faux documentary",
+            "high school",
+            "high school student",
+            "house party",
+            "mockumentary",
+            "teen movie"
+          ],
+          "lastSearchTime": "2026-11-08T19:20:40Z",
+          "minimumAvailability": "released",
+          "monitored": false,
+          "movieFileId": 401,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Project X",
+          "overview": "Three high school seniors throw a party to make a name for themselves. As the night progresses, things spiral out of control as word of the party spreads.",
+          "path": "/movies/Project X (2012)",
+          "physicalRelease": "2012-12-18T00:00:00Z",
+          "popularity": 10.3314,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.7,
+              "votes": 263993
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 46,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 28,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.926,
+              "votes": 7135
+            },
+            "trakt": {
+              "type": "user",
+              "value": 6.93928,
+              "votes": 7674
+            }
+          },
+          "releaseDate": "2012-12-18T00:00:00Z",
+          "runtime": 88,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "project x",
+          "status": "released",
+          "studio": "Silver Pictures",
+          "tags": [
+            1
+          ],
+          "title": "Project X",
+          "titleSlug": "57214",
+          "tmdbId": 57214,
+          "website": "https://www.warnerbros.com/movies/project-x",
+          "year": 2012,
+          "youTubeTrailerId": "X28d7fbRGSQ"
+        },
+        "movieId": 79,
+        "quality": {
+          "quality": {
+            "id": 9,
+            "modifier": "none",
+            "name": "HDTV-1080p",
+            "resolution": 1080,
+            "source": "tv"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "sourceTitle": "The Lost Dinosaurs The Dinosaur Project 2012 1080p H264 Ac3 Ita Aac Eng artemix MIRCrew"
+      },
+      {
+        "customFormatScore": -10000,
+        "customFormats": [
+          {
+            "id": 58,
+            "name": "Language not Italian"
+          }
+        ],
+        "data": {
+          "age": "4898",
+          "ageHours": "117570.81269649544",
+          "ageMinutes": "7054248.761789968",
+          "customFormatScore": "0",
+          "downloadClient": "redacted",
+          "downloadClientName": "Download client",
+          "downloadUrl": "http://indexer.invalid/002f704236f1",
+          "guid": "http://indexer.invalid/1a39f875be84",
+          "imdbId": "0",
+          "indexer": "Indexer",
+          "indexerFlags": "G_Freeleech",
+          "indexerId": "17",
+          "movieMatchType": "Unknown",
+          "nzbInfoUrl": "http://indexer.invalid/383bf5597737",
+          "protocol": "2",
+          "publishedDate": "2013-06-10T22:00:00Z",
+          "releaseGroup": null,
+          "releaseSource": "InteractiveSearch",
+          "size": "2920577761",
+          "tmdbId": "0",
+          "torrentInfoHash": "278f2b6a6c55f7bd0330373ac1d752acb3659f7b"
+        },
+        "date": "2026-11-08T16:48:45Z",
+        "downloadId": "b1edd99508c29a520c904f1bc2da120f435163fa",
+        "eventType": "grabbed",
+        "id": 998,
+        "languages": [
+          {
+            "id": 0,
+            "name": "Unknown"
+          }
+        ],
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "projectx",
+          "digitalRelease": "2013-06-05T00:00:00Z",
+          "folderName": "/movies/Project X (2012)",
+          "genres": [
+            "Comedy"
+          ],
+          "id": 79,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/lUPDGT3lyRrq8SvWuNWG2DP64bR.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/cUqXHZtnptgvyAE1hN47Wsf3ami.jpg"
+            }
+          ],
+          "imdbId": "tt1636826",
+          "inCinemas": "2012-03-01T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "birthday",
+            "birthday party",
+            "fake documentary",
+            "faux documentary",
+            "high school",
+            "high school student",
+            "house party",
+            "mockumentary",
+            "teen movie"
+          ],
+          "lastSearchTime": "2026-11-08T19:20:40Z",
+          "minimumAvailability": "released",
+          "monitored": false,
+          "movieFileId": 401,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Project X",
+          "overview": "Three high school seniors throw a party to make a name for themselves. As the night progresses, things spiral out of control as word of the party spreads.",
+          "path": "/movies/Project X (2012)",
+          "physicalRelease": "2012-12-18T00:00:00Z",
+          "popularity": 10.3314,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.7,
+              "votes": 263993
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 46,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 28,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.926,
+              "votes": 7135
+            },
+            "trakt": {
+              "type": "user",
+              "value": 6.93928,
+              "votes": 7674
+            }
+          },
+          "releaseDate": "2012-12-18T00:00:00Z",
+          "runtime": 88,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "project x",
+          "status": "released",
+          "studio": "Silver Pictures",
+          "tags": [
+            1
+          ],
+          "title": "Project X",
+          "titleSlug": "57214",
+          "tmdbId": 57214,
+          "website": "https://www.warnerbros.com/movies/project-x",
+          "year": 2012,
+          "youTubeTrailerId": "X28d7fbRGSQ"
+        },
+        "movieId": 79,
+        "quality": {
+          "quality": {
+            "id": 0,
+            "modifier": "none",
+            "name": "Unknown",
+            "resolution": 0,
+            "source": "unknown"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "sourceTitle": "Project X Una Festa Che Spacca Nourizadeh 2012 "
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 52,
+            "name": "DTS"
+          }
+        ],
+        "data": {
+          "customFormatScore": "0",
+          "downloadClient": "qBittorrent",
+          "downloadClientName": "Download client",
+          "droppedPath": "/downloads/Van.Helsing.2004.DTS.ITA.ENG.FRA.SPA.GER.1080p.BluRay.x264-BLUWORLD.mkv",
+          "fileId": "399",
+          "importedPath": "/movies/Van Helsing (2004) {tmdb-7131}/Van Helsing (2004) {tmdb-7131} - [Bluray-1080p][DTS 5.1][x264]-BLUWORLD.mkv",
+          "indexerFlags": "0",
+          "releaseGroup": "BLUWORLD",
+          "size": "24278085946"
+        },
+        "date": "2026-11-07T22:15:37Z",
+        "downloadId": "e01e9a5e797f2b67439e3ea9caae4a4384aebe49",
+        "eventType": "downloadFolderImported",
+        "id": 997,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 2,
+            "name": "French"
+          },
+          {
+            "id": 3,
+            "name": "Spanish"
+          },
+          {
+            "id": 4,
+            "name": "German"
+          }
+        ],
+        "movie": {
+          "added": "2026-11-07T19:39:26Z",
+          "alternateTitles": [],
+          "certification": "PG-13",
+          "cleanTitle": "vanhelsing",
+          "digitalRelease": "2004-12-20T00:00:00Z",
+          "folderName": "/movies/Van Helsing (2004) {tmdb-7131}",
+          "genres": [
+            "Horror",
+            "Adventure",
+            "Action"
+          ],
+          "id": 324,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/gsFun8nATm52aGHeT8ueAel98nE.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/d72ROyJqXQtw2OupW0l15eicRAF.jpg"
+            }
+          ],
+          "imdbId": "tt0338526",
+          "inCinemas": "2004-05-03T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "19th century",
+            "bite",
+            "castle",
+            "dracula",
+            "fantasy",
+            "frankenstein",
+            "gothic horror",
+            "mr. hyde",
+            "notre dame cathedral",
+            "steampunk",
+            "transylvania",
+            "vampire",
+            "van helsing",
+            "vatican (holy see)",
+            "werewolf"
+          ],
+          "lastSearchTime": "2026-11-07T19:39:57Z",
+          "minimumAvailability": "released",
+          "monitored": false,
+          "movieFileId": 399,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Van Helsing",
+          "overview": "Famed monster slayer Gabriel Van Helsing is dispatched to Transylvania to assist the last of the Valerious bloodline in defeating Count Dracula. Anna Valerious reveals that Dracula has formed an unholy alliance with Dr. Frankenstein's monster and is hell-bent on exacting a centuries-old curse on her family.",
+          "path": "/movies/Van Helsing (2004) {tmdb-7131}",
+          "physicalRelease": "2004-08-10T00:00:00Z",
+          "popularity": 15.671,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.1,
+              "votes": 311773
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 35,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.432,
+              "votes": 6941
+            },
+            "trakt": {
+              "type": "user",
+              "value": 6.54847,
+              "votes": 9964
+            }
+          },
+          "releaseDate": "2004-08-10T00:00:00Z",
+          "runtime": 132,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "van helsing",
+          "status": "released",
+          "studio": "Universal Pictures",
+          "tags": [
+            1
+          ],
+          "title": "Van Helsing",
+          "titleSlug": "7131",
+          "tmdbId": 7131,
+          "website": "https://www.uphe.com/movies/van-helsing",
+          "year": 2004,
+          "youTubeTrailerId": "3fdRKme00uI"
+        },
+        "movieId": 324,
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "Van.Helsing.2004.DTS.ITA.ENG.FRA.SPA.GER.1080p.BluRay.x264-BLUWORLD"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 52,
+            "name": "DTS"
+          }
+        ],
+        "data": {
+          "age": "0",
+          "ageHours": "0.007796760138888889",
+          "ageMinutes": "0.46780577166666665",
+          "customFormatScore": "0",
+          "downloadClient": "qBittorrent",
+          "downloadClientName": "Download client",
+          "downloadUrl": "magnet:?xt=urn:btih:cdc0537ef9b5c53af837d78012cdc574333f3225",
+          "guid": "19ea745a517a1aab1b5d05c3ad44fc3a",
+          "imdbId": "0",
+          "indexer": "Indexer",
+          "indexerFlags": "0",
+          "indexerId": "14",
+          "movieMatchType": "Title",
+          "nzbInfoUrl": null,
+          "protocol": "2",
+          "publishedDate": "2026-11-07T19:39:40Z",
+          "releaseGroup": "BLUWORLD",
+          "releaseSource": "Search",
+          "size": "24278085946",
+          "tmdbId": "0",
+          "torrentInfoHash": "19ea745a517a1aab1b5d05c3ad44fc3a"
+        },
+        "date": "2026-11-07T19:40:08Z",
+        "downloadId": "e01e9a5e797f2b67439e3ea9caae4a4384aebe49",
+        "eventType": "grabbed",
+        "id": 996,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 2,
+            "name": "French"
+          },
+          {
+            "id": 4,
+            "name": "German"
+          }
+        ],
+        "movie": {
+          "added": "2026-11-07T19:39:26Z",
+          "alternateTitles": [],
+          "certification": "PG-13",
+          "cleanTitle": "vanhelsing",
+          "digitalRelease": "2004-12-20T00:00:00Z",
+          "folderName": "/movies/Van Helsing (2004) {tmdb-7131}",
+          "genres": [
+            "Horror",
+            "Adventure",
+            "Action"
+          ],
+          "id": 324,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/gsFun8nATm52aGHeT8ueAel98nE.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/d72ROyJqXQtw2OupW0l15eicRAF.jpg"
+            }
+          ],
+          "imdbId": "tt0338526",
+          "inCinemas": "2004-05-03T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "19th century",
+            "bite",
+            "castle",
+            "dracula",
+            "fantasy",
+            "frankenstein",
+            "gothic horror",
+            "mr. hyde",
+            "notre dame cathedral",
+            "steampunk",
+            "transylvania",
+            "vampire",
+            "van helsing",
+            "vatican (holy see)",
+            "werewolf"
+          ],
+          "lastSearchTime": "2026-11-07T19:39:57Z",
+          "minimumAvailability": "released",
+          "monitored": false,
+          "movieFileId": 399,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Van Helsing",
+          "overview": "Famed monster slayer Gabriel Van Helsing is dispatched to Transylvania to assist the last of the Valerious bloodline in defeating Count Dracula. Anna Valerious reveals that Dracula has formed an unholy alliance with Dr. Frankenstein's monster and is hell-bent on exacting a centuries-old curse on her family.",
+          "path": "/movies/Van Helsing (2004) {tmdb-7131}",
+          "physicalRelease": "2004-08-10T00:00:00Z",
+          "popularity": 15.671,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.1,
+              "votes": 311773
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 35,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.432,
+              "votes": 6941
+            },
+            "trakt": {
+              "type": "user",
+              "value": 6.54847,
+              "votes": 9964
+            }
+          },
+          "releaseDate": "2004-08-10T00:00:00Z",
+          "runtime": 132,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "van helsing",
+          "status": "released",
+          "studio": "Universal Pictures",
+          "tags": [
+            1
+          ],
+          "title": "Van Helsing",
+          "titleSlug": "7131",
+          "tmdbId": 7131,
+          "website": "https://www.uphe.com/movies/van-helsing",
+          "year": 2004,
+          "youTubeTrailerId": "3fdRKme00uI"
+        },
+        "movieId": 324,
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "Van.Helsing.2004.DTS.ITA.ENG.FRA.SPA.GER.1080p.BluRay.x264-BLUWORLD.mkv"
+      },
+      {
+        "customFormatScore": 2000,
+        "customFormats": [
+          {
+            "id": 17,
+            "name": "AV1"
+          },
+          {
+            "id": 57,
+            "name": "MULTi"
+          }
+        ],
+        "data": {
+          "customFormatScore": "2000",
+          "downloadClient": "NZBGet",
+          "downloadClientName": "Download client",
+          "droppedPath": "/downloads/The.Northman.2022.1080p.Bluray.AV1.Opus.Multi6.mkv",
+          "fileId": "398",
+          "importedPath": "/movies/The Northman (2022)/The Northman (2022) {tmdb-639933} - [MULTi][Bluray-1080p][Opus 7.1][AV1].mkv",
+          "indexerFlags": "0",
+          "releaseGroup": null,
+          "size": "10096047308"
+        },
+        "date": "2026-11-07T14:53:38Z",
+        "downloadId": "4f07d47f4d1d35ca940a4a5c89997852",
+        "eventType": "downloadFolderImported",
+        "id": 995,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 3,
+            "name": "Spanish"
+          },
+          {
+            "id": 2,
+            "name": "French"
+          },
+          {
+            "id": 11,
+            "name": "Russian"
+          },
+          {
+            "id": 4,
+            "name": "German"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "thenorthman",
+          "digitalRelease": "2022-05-12T00:00:00Z",
+          "folderName": "/movies/The Northman (2022)",
+          "genres": [
+            "Action",
+            "Adventure",
+            "Fantasy"
+          ],
+          "id": 124,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/aSSJMnHknzKjlZ6zybwD7eyJ4Po.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/fMiEp00v8gGWEceL4QeLu6H6z69.jpg"
+            }
+          ],
+          "imdbId": "tt11138512",
+          "inCinemas": "2022-04-07T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "10th century",
+            "admiring",
+            "amused",
+            "based on myths, legends or folklore",
+            "bold",
+            "brutality",
+            "commanding",
+            "dramatic",
+            "fantasy",
+            "fate",
+            "gore",
+            "grimdark",
+            "iceland",
+            "king",
+            "nordic",
+            "northern ireland",
+            "ominous",
+            "prince",
+            "revenge",
+            "suspenseful",
+            "sword",
+            "sword fight",
+            "vikings (norsemen)",
+            "wonder"
+          ],
+          "lastSearchTime": "2026-11-07T14:36:45Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 398,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "The Northman",
+          "overview": "Prince Amleth is on the verge of becoming a man when his father is brutally murdered by his uncle, who kidnaps the boy's mother. Two decades later, Amleth is now a Viking who's on a mission to save his mother, kill his uncle and avenge his father.",
+          "path": "/movies/The Northman (2022)",
+          "physicalRelease": "2022-06-07T00:00:00Z",
+          "popularity": 8.5016,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 7,
+              "votes": 308969
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 82,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 90,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7.019,
+              "votes": 5399
+            },
+            "trakt": {
+              "type": "user",
+              "value": 6.91273,
+              "votes": 15768
+            }
+          },
+          "releaseDate": "2022-05-12T00:00:00Z",
+          "runtime": 137,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "northman",
+          "status": "released",
+          "studio": "Regency Enterprises",
+          "tags": [
+            1
+          ],
+          "title": "The Northman",
+          "titleSlug": "639933",
+          "tmdbId": 639933,
+          "website": "https://www.focusfeatures.com/the-northman",
+          "year": 2022,
+          "youTubeTrailerId": "6WrpvCmv0hk"
+        },
+        "movieId": 124,
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "The.Northman.2022.1080p.Bluray.AV1.Opus.Multi6"
+      },
+      {
+        "customFormatScore": 2000,
+        "customFormats": [
+          {
+            "id": 17,
+            "name": "AV1"
+          },
+          {
+            "id": 57,
+            "name": "MULTi"
+          }
+        ],
+        "data": {
+          "age": "644",
+          "ageHours": "15459.955551105111",
+          "ageMinutes": "927597.3330666167",
+          "customFormatScore": "2000",
+          "downloadClient": "NZBGet",
+          "downloadClientName": "Download client",
+          "downloadUrl": "http://indexer.invalid/7184193b7d49",
+          "guid": "http://indexer.invalid/90b59840a597",
+          "imdbId": "11138512",
+          "indexer": "Indexer",
+          "indexerFlags": "0",
+          "indexerId": "1",
+          "movieMatchType": "Id",
+          "nzbInfoUrl": "http://indexer.invalid/90b59840a597",
+          "protocol": "1",
+          "publishedDate": "2025-02-01T10:39:42Z",
+          "releaseGroup": null,
+          "releaseSource": "UserInvokedSearch",
+          "size": "10627844000",
+          "tmdbId": "0"
+        },
+        "date": "2026-11-07T14:37:01Z",
+        "downloadId": "4f07d47f4d1d35ca940a4a5c89997852",
+        "eventType": "grabbed",
+        "id": 994,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 2,
+            "name": "French"
+          },
+          {
+            "id": 4,
+            "name": "German"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 11,
+            "name": "Russian"
+          },
+          {
+            "id": 3,
+            "name": "Spanish"
+          }
+        ],
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "thenorthman",
+          "digitalRelease": "2022-05-12T00:00:00Z",
+          "folderName": "/movies/The Northman (2022)",
+          "genres": [
+            "Action",
+            "Adventure",
+            "Fantasy"
+          ],
+          "id": 124,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/aSSJMnHknzKjlZ6zybwD7eyJ4Po.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/fMiEp00v8gGWEceL4QeLu6H6z69.jpg"
+            }
+          ],
+          "imdbId": "tt11138512",
+          "inCinemas": "2022-04-07T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "10th century",
+            "admiring",
+            "amused",
+            "based on myths, legends or folklore",
+            "bold",
+            "brutality",
+            "commanding",
+            "dramatic",
+            "fantasy",
+            "fate",
+            "gore",
+            "grimdark",
+            "iceland",
+            "king",
+            "nordic",
+            "northern ireland",
+            "ominous",
+            "prince",
+            "revenge",
+            "suspenseful",
+            "sword",
+            "sword fight",
+            "vikings (norsemen)",
+            "wonder"
+          ],
+          "lastSearchTime": "2026-11-07T14:36:45Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 398,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "The Northman",
+          "overview": "Prince Amleth is on the verge of becoming a man when his father is brutally murdered by his uncle, who kidnaps the boy's mother. Two decades later, Amleth is now a Viking who's on a mission to save his mother, kill his uncle and avenge his father.",
+          "path": "/movies/The Northman (2022)",
+          "physicalRelease": "2022-06-07T00:00:00Z",
+          "popularity": 8.5016,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 7,
+              "votes": 308969
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 82,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 90,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7.019,
+              "votes": 5399
+            },
+            "trakt": {
+              "type": "user",
+              "value": 6.91273,
+              "votes": 15768
+            }
+          },
+          "releaseDate": "2022-05-12T00:00:00Z",
+          "runtime": 137,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "northman",
+          "status": "released",
+          "studio": "Regency Enterprises",
+          "tags": [
+            1
+          ],
+          "title": "The Northman",
+          "titleSlug": "639933",
+          "tmdbId": 639933,
+          "website": "https://www.focusfeatures.com/the-northman",
+          "year": 2022,
+          "youTubeTrailerId": "6WrpvCmv0hk"
+        },
+        "movieId": 124,
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "The.Northman.2022.1080p.Bluray.AV1.Opus.Multi6"
+      },
+      {
+        "customFormatScore": -10000,
+        "customFormats": [
+          {
+            "id": 58,
+            "name": "Language not Italian"
+          }
+        ],
+        "data": {
+          "indexerFlags": "0",
+          "reason": "Manual",
+          "releaseGroup": null,
+          "size": "1466359209"
+        },
+        "date": "2026-11-07T07:59:57Z",
+        "eventType": "movieFileDeleted",
+        "id": 993,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-10-30T22:53:18Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "splinter",
+          "folderName": "/movies/Splinter (2008)",
+          "genres": [
+            "Horror",
+            "Thriller",
+            "Crime",
+            "Science Fiction"
+          ],
+          "id": 319,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/tFNReQlU92jmN7uuR1HHLiFkEua.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/h6NOPc2nUoKmobs5lia33z4syNM.jpg"
+            }
+          ],
+          "imdbId": "tt1031280",
+          "inCinemas": "2009-04-23T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "alien infection",
+            "creature",
+            "monster"
+          ],
+          "lastSearchTime": "2026-11-02T19:24:56Z",
+          "minimumAvailability": "released",
+          "monitored": false,
+          "movieFileId": 397,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Splinter",
+          "overview": "When their plans for a nature trip go awry, Polly and boyfriend Seth decide to check into a motel. On their way, they're carjacked and kidnapped by low-rent crooks Dennis and Lacey, who take the victims and their SUV to a nearby gas station. Along the way, they encounter an increasingly terrifying horde of parasites, and if any of them intend to survive, they'll have to outsmart the deadly organisms.",
+          "path": "/movies/Splinter (2008)",
+          "physicalRelease": "2009-03-30T00:00:00Z",
+          "popularity": 7.2814,
+          "qualityProfileId": 10,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.1,
+              "votes": 45014
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 58,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 74,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.2,
+              "votes": 858
+            },
+            "trakt": {
+              "type": "user",
+              "value": 6.3045,
+              "votes": 1156
+            }
+          },
+          "releaseDate": "2009-03-30T00:00:00Z",
+          "runtime": 82,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "splinter",
+          "status": "released",
+          "studio": "Indion Entertainment Group",
+          "tags": [],
+          "title": "Splinter",
+          "titleSlug": "13220",
+          "tmdbId": 13220,
+          "website": "",
+          "year": 2008,
+          "youTubeTrailerId": "LYfvKLhG4Iw"
+        },
+        "movieId": 319,
+        "quality": {
+          "quality": {
+            "id": 4,
+            "modifier": "none",
+            "name": "HDTV-720p",
+            "resolution": 720,
+            "source": "tv"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "sourceTitle": "/movies/Splinter (2008)/Splinter.mp4"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [],
+        "data": {
+          "downloadClient": "qBittorrent",
+          "downloadClientName": "Download client",
+          "indexer": "Indexer",
+          "message": "redacted",
+          "releaseGroup": null,
+          "size": "790258383"
+        },
+        "date": "2026-11-02T19:24:43Z",
+        "downloadId": "c6b2eb50b1024533b891f5a3cb208dca919b4693",
+        "eventType": "downloadFailed",
+        "id": 985,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "movie": {
+          "added": "2026-10-30T22:53:18Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "splinter",
+          "folderName": "/movies/Splinter (2008)",
+          "genres": [
+            "Horror",
+            "Thriller",
+            "Crime",
+            "Science Fiction"
+          ],
+          "id": 319,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/tFNReQlU92jmN7uuR1HHLiFkEua.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/h6NOPc2nUoKmobs5lia33z4syNM.jpg"
+            }
+          ],
+          "imdbId": "tt1031280",
+          "inCinemas": "2009-04-23T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "alien infection",
+            "creature",
+            "monster"
+          ],
+          "lastSearchTime": "2026-11-02T19:24:56Z",
+          "minimumAvailability": "released",
+          "monitored": false,
+          "movieFileId": 397,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Splinter",
+          "overview": "When their plans for a nature trip go awry, Polly and boyfriend Seth decide to check into a motel. On their way, they're carjacked and kidnapped by low-rent crooks Dennis and Lacey, who take the victims and their SUV to a nearby gas station. Along the way, they encounter an increasingly terrifying horde of parasites, and if any of them intend to survive, they'll have to outsmart the deadly organisms.",
+          "path": "/movies/Splinter (2008)",
+          "physicalRelease": "2009-03-30T00:00:00Z",
+          "popularity": 7.2814,
+          "qualityProfileId": 10,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.1,
+              "votes": 45014
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 58,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 74,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.2,
+              "votes": 858
+            },
+            "trakt": {
+              "type": "user",
+              "value": 6.3045,
+              "votes": 1156
+            }
+          },
+          "releaseDate": "2009-03-30T00:00:00Z",
+          "runtime": 82,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "splinter",
+          "status": "released",
+          "studio": "Indion Entertainment Group",
+          "tags": [],
+          "title": "Splinter",
+          "titleSlug": "13220",
+          "tmdbId": 13220,
+          "website": "",
+          "year": 2008,
+          "youTubeTrailerId": "LYfvKLhG4Iw"
+        },
+        "movieId": 319,
+        "quality": {
+          "quality": {
+            "id": 6,
+            "modifier": "none",
+            "name": "Bluray-720p",
+            "resolution": 720,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "sourceTitle": "Splinter.(2008).BluRay.ita.mp4"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [],
+        "data": {
+          "customFormatScore": "0",
+          "downloadClient": "redacted",
+          "downloadClientName": "Download client",
+          "droppedPath": "/downloads/The.Dark.Knight.(2008).BDRip.IMAX.AC3.AAC.ITA.ENG.MultiSub.1080p.[ICV-MIRCrew].mkv",
+          "fileId": "394",
+          "importedPath": "/movies/The Dark Knight (2008)/The Dark Knight (2008) {tmdb-155} - {edition-IMAX} [Bluray-1080p][AC3 5.1][x264]-MIRCrew.mkv",
+          "indexerFlags": "0",
+          "releaseGroup": "MIRCrew",
+          "size": "8738160055"
+        },
+        "date": "2026-11-02T16:02:07Z",
+        "downloadId": "617995ad69f8a15902d72bee95c40f576cd88c3e",
+        "eventType": "downloadFolderImported",
+        "id": 984,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "PG-13",
+          "cleanTitle": "thedarkknight",
+          "collection": {
+            "title": "The Dark Knight Collection",
+            "tmdbId": 263
+          },
+          "digitalRelease": "2011-01-29T00:00:00Z",
+          "folderName": "/movies/The Dark Knight (2008)",
+          "genres": [
+            "Action",
+            "Thriller",
+            "Crime"
+          ],
+          "id": 107,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/qJ2tW6WMUDux911r6m7haRef0WH.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/cfT29Im5VDvjE0RpyKOSdCKZal7.jpg"
+            }
+          ],
+          "imdbId": "tt0468569",
+          "inCinemas": "2008-07-16T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "anti hero",
+            "anti villain",
+            "based on comic",
+            "bold",
+            "chaos",
+            "crime fighter",
+            "criminal mastermind",
+            "district attorney",
+            "neo-noir",
+            "organized crime",
+            "sadism",
+            "scarecrow",
+            "secret identity",
+            "super power",
+            "super villain",
+            "superhero",
+            "tragic hero",
+            "vigilante"
+          ],
+          "lastSearchTime": "2026-11-02T14:28:06Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 394,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "The Dark Knight",
+          "overview": "Batman raises the stakes in his war on crime. With the help of Lt. Jim Gordon and District Attorney Harvey Dent, Batman sets out to dismantle the remaining criminal organizations that plague the streets. The partnership proves to be effective, but they soon find themselves prey to a reign of chaos unleashed by a rising criminal mastermind known to the terrified citizens of Gotham as the Joker.",
+          "path": "/movies/The Dark Knight (2008)",
+          "physicalRelease": "2008-10-22T00:00:00Z",
+          "popularity": 462.4186,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 9.1,
+              "votes": 3248829
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 85,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 94,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 8.54,
+              "votes": 37321
+            },
+            "trakt": {
+              "type": "user",
+              "value": 8.95208,
+              "votes": 59657
+            }
+          },
+          "releaseDate": "2008-10-22T00:00:00Z",
+          "runtime": 152,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "dark knight",
+          "status": "released",
+          "studio": "Warner Bros. Pictures",
+          "tags": [
+            1
+          ],
+          "title": "The Dark Knight",
+          "titleSlug": "155",
+          "tmdbId": 155,
+          "website": "https://www.warnerbros.com/movies/dark-knight/",
+          "year": 2008,
+          "youTubeTrailerId": "_PZpmTj1Q8Q"
+        },
+        "movieId": 107,
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "The.Dark.Knight.(2008).BDRip.IMAX.AC3.AAC.ITA.ENG.MultiSub.1080p.[ICV-MIRCrew]"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 18,
+            "name": "x265 (HD)"
+          },
+          {
+            "id": 56,
+            "name": "x265 (no HDR/DV)"
+          }
+        ],
+        "data": {
+          "downloadClient": "redacted",
+          "downloadClientName": "Download client",
+          "indexer": "Indexer",
+          "message": "redacted",
+          "releaseGroup": "Paso77",
+          "size": "0"
+        },
+        "date": "2026-11-02T14:44:28Z",
+        "downloadId": "a4d261c85f6b6a450f82ac3a513505909a5b41dd",
+        "eventType": "downloadFailed",
+        "id": 983,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "diehard",
+          "collection": {
+            "title": "Die Hard Collection",
+            "tmdbId": 1570
+          },
+          "digitalRelease": "2003-04-25T00:00:00Z",
+          "folderName": "/movies/Die Hard (1988)",
+          "genres": [
+            "Action",
+            "Thriller"
+          ],
+          "id": 28,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/7Bjd8kfmDSOzpmhySpEhkUyK2oH.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/bvk2AAH64lP2YZs02Q3jskfHT8j.jpg"
+            }
+          ],
+          "imdbId": "tt0095016",
+          "inCinemas": "1988-07-15T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "1980s",
+            "absurd",
+            "action hero",
+            "amused",
+            "based on novel or book",
+            "christmas party",
+            "explosion",
+            "fbi",
+            "heist",
+            "high octane",
+            "hostage negotiator",
+            "hostages",
+            "husband wife relationship",
+            "lapd",
+            "los angeles, california",
+            "murder",
+            "one man army",
+            "one night",
+            "police officer",
+            "s.w.a.t.",
+            "shootout",
+            "terrorism",
+            "vault"
+          ],
+          "lastSearchTime": "2026-11-02T14:44:40Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Die Hard",
+          "overview": "High above the city of L.A. a team of terrorists has seized a building, taken hostages, and declared war. One man has manages to escape... An off-duty cop hiding somewhere inside. He's alone, tired... and the only chance anyone has got.",
+          "path": "/movies/Die Hard (1988)",
+          "physicalRelease": "1989-01-26T00:00:00Z",
+          "popularity": 15.5534,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 8.2,
+              "votes": 1044387
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 72,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 94,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7.817,
+              "votes": 12852
+            },
+            "trakt": {
+              "type": "user",
+              "value": 8.27644,
+              "votes": 26707
+            }
+          },
+          "releaseDate": "1989-01-26T00:00:00Z",
+          "runtime": 132,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "die hard",
+          "status": "released",
+          "studio": "Gordon Company",
+          "tags": [
+            1
+          ],
+          "title": "Die Hard",
+          "titleSlug": "562",
+          "tmdbId": 562,
+          "website": "https://www.20thcenturystudios.com/movies/die-hard",
+          "year": 1988,
+          "youTubeTrailerId": "TotSHi0ViUc"
+        },
+        "movieId": 28,
+        "quality": {
+          "quality": {
+            "id": 9,
+            "modifier": "none",
+            "name": "HDTV-1080p",
+            "resolution": 1080,
+            "source": "tv"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "sourceTitle": "Die Hard (1988 ITA ENG) [10bit] [1080p x265] [Paso77]"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 18,
+            "name": "x265 (HD)"
+          },
+          {
+            "id": 56,
+            "name": "x265 (no HDR/DV)"
+          }
+        ],
+        "data": {
+          "age": "365",
+          "ageHours": "8760.009826492333",
+          "ageMinutes": "525600.5895897166",
+          "customFormatScore": "0",
+          "downloadClient": "redacted",
+          "downloadClientName": "Download client",
+          "downloadUrl": "http://indexer.invalid/f48d967a10b6",
+          "guid": "http://indexer.invalid/fcf8eeef463f",
+          "imdbId": "0",
+          "indexer": "Indexer",
+          "indexerFlags": "G_Freeleech",
+          "indexerId": "6",
+          "movieMatchType": "Title",
+          "nzbInfoUrl": "http://indexer.invalid/fcf8eeef463f",
+          "protocol": "2",
+          "publishedDate": "2025-11-02T14:27:57Z",
+          "releaseGroup": "Paso77",
+          "releaseSource": "Search",
+          "size": "6012954214",
+          "tmdbId": "0",
+          "torrentInfoHash": "a4d261c85f6b6a450f82ac3a513505909a5b41dd"
+        },
+        "date": "2026-11-02T14:28:32Z",
+        "downloadId": "a4d261c85f6b6a450f82ac3a513505909a5b41dd",
+        "eventType": "grabbed",
+        "id": 982,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "diehard",
+          "collection": {
+            "title": "Die Hard Collection",
+            "tmdbId": 1570
+          },
+          "digitalRelease": "2003-04-25T00:00:00Z",
+          "folderName": "/movies/Die Hard (1988)",
+          "genres": [
+            "Action",
+            "Thriller"
+          ],
+          "id": 28,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/7Bjd8kfmDSOzpmhySpEhkUyK2oH.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/bvk2AAH64lP2YZs02Q3jskfHT8j.jpg"
+            }
+          ],
+          "imdbId": "tt0095016",
+          "inCinemas": "1988-07-15T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "1980s",
+            "absurd",
+            "action hero",
+            "amused",
+            "based on novel or book",
+            "christmas party",
+            "explosion",
+            "fbi",
+            "heist",
+            "high octane",
+            "hostage negotiator",
+            "hostages",
+            "husband wife relationship",
+            "lapd",
+            "los angeles, california",
+            "murder",
+            "one man army",
+            "one night",
+            "police officer",
+            "s.w.a.t.",
+            "shootout",
+            "terrorism",
+            "vault"
+          ],
+          "lastSearchTime": "2026-11-02T14:44:40Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Die Hard",
+          "overview": "High above the city of L.A. a team of terrorists has seized a building, taken hostages, and declared war. One man has manages to escape... An off-duty cop hiding somewhere inside. He's alone, tired... and the only chance anyone has got.",
+          "path": "/movies/Die Hard (1988)",
+          "physicalRelease": "1989-01-26T00:00:00Z",
+          "popularity": 15.5534,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 8.2,
+              "votes": 1044387
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 72,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 94,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7.817,
+              "votes": 12852
+            },
+            "trakt": {
+              "type": "user",
+              "value": 8.27644,
+              "votes": 26707
+            }
+          },
+          "releaseDate": "1989-01-26T00:00:00Z",
+          "runtime": 132,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "die hard",
+          "status": "released",
+          "studio": "Gordon Company",
+          "tags": [
+            1
+          ],
+          "title": "Die Hard",
+          "titleSlug": "562",
+          "tmdbId": 562,
+          "website": "https://www.20thcenturystudios.com/movies/die-hard",
+          "year": 1988,
+          "youTubeTrailerId": "TotSHi0ViUc"
+        },
+        "movieId": 28,
+        "quality": {
+          "quality": {
+            "id": 9,
+            "modifier": "none",
+            "name": "HDTV-1080p",
+            "resolution": 1080,
+            "source": "tv"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "sourceTitle": "Die Hard (1988 ITA ENG) [10bit] [1080p x265] [Paso77]"
+      }
+    ],
+    "sortDirection": "descending",
+    "sortKey": "date",
+    "totalRecords": 669
+  },
+  "recordedAt": "2026-11-11T12:12:56Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/history?page=1&pageSize=20&sortKey=date&sortDirection=descending&includeMovie=true"
+  },
+  "status": 200
+}

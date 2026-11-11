@@ -1,0 +1,2781 @@
+{
+  "body": [
+    {
+      "added": "2026-03-07T09:12:06Z",
+      "alternateTitles": [
+        {
+          "id": 881,
+          "movieMetadataId": 114,
+          "sourceType": "tmdb",
+          "title": "La inmensidad"
+        },
+        {
+          "id": 882,
+          "movieMetadataId": 114,
+          "sourceType": "tmdb",
+          "title": "더 캐니언"
+        },
+        {
+          "id": 883,
+          "movieMetadataId": 114,
+          "sourceType": "tmdb",
+          "title": "The Canyon"
+        },
+        {
+          "id": 884,
+          "movieMetadataId": 114,
+          "sourceType": "tmdb",
+          "title": "הגיא"
+        },
+        {
+          "id": 885,
+          "movieMetadataId": 114,
+          "sourceType": "tmdb",
+          "title": "Tarpeklis"
+        },
+        {
+          "id": 886,
+          "movieMetadataId": 114,
+          "sourceType": "tmdb",
+          "title": "Ущелье"
+        },
+        {
+          "id": 887,
+          "movieMetadataId": 114,
+          "sourceType": "tmdb",
+          "title": "禁谷"
+        },
+        {
+          "id": 888,
+          "movieMetadataId": 114,
+          "sourceType": "tmdb",
+          "title": "Hẻm Núi"
+        },
+        {
+          "id": 889,
+          "movieMetadataId": 114,
+          "sourceType": "tmdb",
+          "title": "峡谷"
+        },
+        {
+          "id": 890,
+          "movieMetadataId": 114,
+          "sourceType": "tmdb",
+          "title": "ხეობა"
+        },
+        {
+          "id": 891,
+          "movieMetadataId": 114,
+          "sourceType": "tmdb",
+          "title": "الأخدود"
+        }
+      ],
+      "certification": "PG-13",
+      "cleanTitle": "thegorge",
+      "digitalRelease": "2025-02-13T00:00:00Z",
+      "folderName": "/movies/The Gorge (2025)",
+      "genres": [
+        "Romance",
+        "Science Fiction",
+        "Thriller"
+      ],
+      "hasFile": true,
+      "id": 114,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/7iMBZzVZtG0oBug4TfqDb9ZxAOa.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/9nhjGaFLKtddDPtPaX5EmKqsWdH.jpg"
+        }
+      ],
+      "imdbId": "tt13654226",
+      "isAvailable": true,
+      "keywords": [
+        "elite sniper",
+        "enigmatic environment",
+        "espionage mission",
+        "fog",
+        "isolation",
+        "long-term observation",
+        "mysterious canyon",
+        "paranoia",
+        "restricted zone",
+        "sci‑fi romance",
+        "snipers",
+        "surveillance partners",
+        "survival pressure",
+        "tower",
+        "trust issues",
+        "unknown threat"
+      ],
+      "minimumAvailability": "released",
+      "monitored": false,
+      "movieFile": {
+        "customFormatScore": 0,
+        "customFormats": [],
+        "dateAdded": "2026-03-07T09:20:35Z",
+        "edition": "",
+        "id": 97,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 192000,
+          "audioChannels": 5.1,
+          "audioCodec": "AAC",
+          "audioLanguages": "ita/eng",
+          "audioStreamCount": 2,
+          "resolution": "1920x1038",
+          "runTime": "2:07:47",
+          "scanType": "Progressive",
+          "subtitles": "ara/bul/cze/dan/ger/gre/eng/eng/eng/spa/spa/est/fin/fre/fre/heb/hin/hun/ind/ita/ita/jpn/kor/lit/lav/may/dut/nor/pol/por/por/rus/slo/slv/swe/tam/tel/tha/tur/ukr/vie/chi/chi/chi",
+          "videoBitDepth": 10,
+          "videoBitrate": 1557946,
+          "videoCodec": "x265",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "movieId": 114,
+        "path": "/movies/The Gorge (2025)/The Gorge (2025) WEBRip-1080p.mkv",
+        "quality": {
+          "quality": {
+            "id": 15,
+            "modifier": "none",
+            "name": "WEBRip-1080p",
+            "resolution": 1080,
+            "source": "webrip"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "The Gorge (2025) WEBRip-1080p.mkv",
+        "size": 1866570490
+      },
+      "movieFileId": 97,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "The Gorge",
+      "overview": "Two highly trained operatives grow close from a distance after being sent to guard opposite sides of a mysterious gorge. When an evil below emerges, they must work together to survive what lies within.",
+      "path": "/movies/The Gorge (2025)",
+      "popularity": 28.9702,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 6.7,
+          "votes": 182901
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 57,
+          "votes": 0
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 62,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 7.707,
+          "votes": 4331
+        },
+        "trakt": {
+          "type": "user",
+          "value": 7.34189,
+          "votes": 19477
+        }
+      },
+      "releaseDate": "2025-02-13T00:00:00Z",
+      "runtime": 128,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 1866570490,
+      "sortTitle": "gorge",
+      "statistics": {
+        "movieFileCount": 1,
+        "movieFileQualities": [
+          {
+            "id": 15,
+            "modifier": "none",
+            "name": "WEBRip-1080p",
+            "resolution": 1080,
+            "source": "webrip"
+          }
+        ],
+        "releaseGroups": [],
+        "sizeOnDisk": 1866570490
+      },
+      "status": "released",
+      "studio": "Skydance Media",
+      "tags": [
+        1
+      ],
+      "title": "The Gorge",
+      "titleSlug": "950396",
+      "tmdbId": 950396,
+      "website": "https://tv.apple.com/movie/umc.cmc.26o403koqo2klixc0jtqy6tmc",
+      "year": 2025,
+      "youTubeTrailerId": "rUSdnuOLebE"
+    },
+    {
+      "added": "2026-03-07T09:12:06Z",
+      "alternateTitles": [
+        {
+          "id": 613,
+          "movieMetadataId": 77,
+          "sourceType": "tmdb",
+          "title": "المفترس: قاتل القتلة"
+        },
+        {
+          "id": 614,
+          "movieMetadataId": 77,
+          "sourceType": "tmdb",
+          "title": "Predátor: Zabiják zabijáků"
+        },
+        {
+          "id": 615,
+          "movieMetadataId": 77,
+          "sourceType": "tmdb",
+          "title": "Սպանողներին սպանողը"
+        },
+        {
+          "id": 616,
+          "movieMetadataId": 77,
+          "sourceType": "tmdb",
+          "title": "Predador: Assassino de Assassinos"
+        }
+      ],
+      "certification": "R",
+      "cleanTitle": "predatorkillerkillers",
+      "digitalRelease": "2025-06-05T00:00:00Z",
+      "folderName": "/movies/Predator Killer of Killers (2025)",
+      "genres": [
+        "Animation",
+        "Action",
+        "Science Fiction",
+        "Thriller"
+      ],
+      "hasFile": true,
+      "id": 77,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/2XDQa6EmFHSA37j1t0w88vpWqj9.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/3AGZKVr2DPT9H53gYtkSEC1tK1E.jpg"
+        }
+      ],
+      "imdbId": "tt36463894",
+      "isAvailable": true,
+      "keywords": [
+        "airplane flight",
+        "alien attack",
+        "alien technology",
+        "anthology",
+        "beheaded",
+        "broken down car",
+        "cloaking device",
+        "cryogenics",
+        "death of father",
+        "female warrior",
+        "feudal japan",
+        "fight to death",
+        "florida",
+        "forced to kill",
+        "harpoon",
+        "japan",
+        "katana",
+        "mother son relationship",
+        "ninja",
+        "ninja warrior",
+        "pilot",
+        "predator",
+        "shipyard",
+        "stick fight",
+        "torso cut in half",
+        "underwater fight",
+        "vikings (norsemen)",
+        "world war ii"
+      ],
+      "lastSearchTime": "2026-03-28T18:27:07Z",
+      "minimumAvailability": "released",
+      "monitored": false,
+      "movieFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 53,
+            "name": "AAC"
+          }
+        ],
+        "dateAdded": "2026-06-06T10:44:46Z",
+        "edition": "",
+        "id": 232,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 191999,
+          "audioChannels": 5.1,
+          "audioCodec": "AAC",
+          "audioLanguages": "ita/eng",
+          "audioStreamCount": 2,
+          "resolution": "1920x804",
+          "runTime": "1:24:47",
+          "scanType": "Progressive",
+          "subtitles": "ita/ita/eng/eng",
+          "videoBitDepth": 8,
+          "videoBitrate": 2276009,
+          "videoCodec": "x264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 24
+        },
+        "movieId": 77,
+        "originalFilePath": "Predator.Killer.of.Killers.2025.1080p.ITA-ENG.WEBRip.x264.AAC-V3SP4EV3R/Predator.Killer.of.Killers.2025.1080p.ITA-ENG.WEBRip.x264.AAC-V3SP4EV3R.mkv",
+        "path": "/movies/Predator Killer of Killers (2025)/Predator Killer of Killers (2025) {tmdb-1376434} - [WEBRip-1080p][AAC 5.1][x264]-V3SP4EV3R.mkv",
+        "quality": {
+          "quality": {
+            "id": 15,
+            "modifier": "none",
+            "name": "WEBRip-1080p",
+            "resolution": 1080,
+            "source": "webrip"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Predator Killer of Killers (2025) {tmdb-1376434} - [WEBRip-1080p][AAC 5.1][x264]-V3SP4EV3R.mkv",
+        "releaseGroup": "V3SP4EV3R",
+        "sceneName": "Predator.Killer.of.Killers.2025.1080p.ITA-ENG.WEBRip.x264.AAC-V3SP4EV3R",
+        "size": 1692711965
+      },
+      "movieFileId": 232,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Predator: Killer of Killers",
+      "overview": "While three of the fiercest warriors in human history—a Viking raider, a ninja in feudal Japan, and a WWII pilot—are killers in their own right, they are merely prey for their new opponent: the ultimate killer of killers.",
+      "path": "/movies/Predator Killer of Killers (2025)",
+      "popularity": 6.2834,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 7.4,
+          "votes": 64097
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 78,
+          "votes": 0
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 94,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 7.758,
+          "votes": 1386
+        },
+        "trakt": {
+          "type": "user",
+          "value": 7.69774,
+          "votes": 5922
+        }
+      },
+      "releaseDate": "2025-06-05T00:00:00Z",
+      "runtime": 85,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 1692711965,
+      "sortTitle": "predator killer of killers",
+      "statistics": {
+        "movieFileCount": 1,
+        "movieFileQualities": [
+          {
+            "id": 15,
+            "modifier": "none",
+            "name": "WEBRip-1080p",
+            "resolution": 1080,
+            "source": "webrip"
+          }
+        ],
+        "releaseGroups": [
+          "V3SP4EV3R"
+        ],
+        "sizeOnDisk": 1692711965
+      },
+      "status": "released",
+      "studio": "20th Century Studios",
+      "tags": [
+        1
+      ],
+      "title": "Predator: Killer of Killers",
+      "titleSlug": "1376434",
+      "tmdbId": 1376434,
+      "website": "https://www.20thcenturystudios.com/movies/predator-killer-of-killers",
+      "year": 2025,
+      "youTubeTrailerId": "fbddYji1F8s"
+    },
+    {
+      "added": "2026-03-07T09:12:06Z",
+      "alternateTitles": [
+        {
+          "id": 499,
+          "movieMetadataId": 59,
+          "sourceType": "tmdb",
+          "title": "코토코"
+        }
+      ],
+      "cleanTitle": "kotoko",
+      "digitalRelease": "2025-07-04T00:00:00Z",
+      "folderName": "/movies/Kotoko (2011)",
+      "genres": [
+        "Drama",
+        "Horror"
+      ],
+      "hasFile": false,
+      "id": 59,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/c0oZUpUVJ3sMBbeyPqShaCdgQ1T.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/8mJSuA8wT7Wn4hQjuJUxCY5UPC0.jpg"
+        }
+      ],
+      "imdbId": "tt1842532",
+      "inCinemas": "2011-11-26T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "mental illness",
+        "psychological drama",
+        "single mother"
+      ],
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 8,
+        "name": "Japanese"
+      },
+      "originalTitle": "KOTOKO",
+      "overview": "When a single mother suffers a nervous breakdown, she is suspected of child abuse and her child is taken away. Her mental suffering escalates as she succumbs to her darkest fantasies.",
+      "path": "/movies/Kotoko (2011)",
+      "popularity": 2.3541,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 6.8,
+          "votes": 2860
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 7.2,
+          "votes": 129
+        },
+        "trakt": {
+          "type": "user",
+          "value": 7.16981,
+          "votes": 159
+        }
+      },
+      "releaseDate": "2025-07-04T00:00:00Z",
+      "runtime": 91,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 0,
+      "sortTitle": "kotoko",
+      "statistics": {
+        "movieFileCount": 0,
+        "movieFileQualities": [],
+        "releaseGroups": [],
+        "sizeOnDisk": 0
+      },
+      "status": "released",
+      "studio": "Kaijyu Theater",
+      "tags": [],
+      "title": "Kotoko",
+      "titleSlug": "85032",
+      "tmdbId": 85032,
+      "website": "",
+      "year": 2011,
+      "youTubeTrailerId": "ILChkxK-w70"
+    },
+    {
+      "added": "2026-03-15T13:17:10Z",
+      "alternateTitles": [
+        {
+          "id": 1348,
+          "movieMetadataId": 243,
+          "sourceType": "tmdb",
+          "title": "诡才之道"
+        },
+        {
+          "id": 1349,
+          "movieMetadataId": 243,
+          "sourceType": "tmdb",
+          "title": "귀재지도"
+        },
+        {
+          "id": 1350,
+          "movieMetadataId": 243,
+          "sourceType": "tmdb",
+          "title": "Gui Cai Zhi Dao"
+        },
+        {
+          "id": 1351,
+          "movieMetadataId": 243,
+          "sourceType": "tmdb",
+          "title": "鬼才の道"
+        },
+        {
+          "id": 1352,
+          "movieMetadataId": 243,
+          "sourceType": "tmdb",
+          "title": "SOCIEDADE DOS TALENTOS MORTOS"
+        },
+        {
+          "id": 1353,
+          "movieMetadataId": 243,
+          "sourceType": "tmdb",
+          "title": "Tìm Kiếm Tài Năng Âm Phủ"
+        },
+        {
+          "id": 1354,
+          "movieMetadataId": 243,
+          "sourceType": "tmdb",
+          "title": "Stowarzyszenie umarłych gwiazdorów"
+        },
+        {
+          "id": 1355,
+          "movieMetadataId": 243,
+          "sourceType": "tmdb",
+          "title": "انجمن استعدادهای مرده"
+        }
+      ],
+      "certification": "R",
+      "cleanTitle": "deadtalentssociety",
+      "digitalRelease": "2025-03-26T00:00:00Z",
+      "folderName": "/movies/Dead Talents Society (2024) {tmdb-1006724}",
+      "genres": [
+        "Horror",
+        "Comedy"
+      ],
+      "hasFile": false,
+      "id": 158,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/yDcc3OWNEtzjDtJly1OyZShtTMV.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/rGnf32URcZAqdTxtkoC6aUD1GBS.jpg"
+        }
+      ],
+      "imdbId": "tt17079606",
+      "inCinemas": "2024-08-07T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "ghost",
+        "urban legend"
+      ],
+      "lastSearchTime": "2026-03-29T10:53:26Z",
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 10,
+        "name": "Chinese"
+      },
+      "originalTitle": "鬼才之道",
+      "overview": "When ghosts must compete to survive in the underworld by haunting the living, one unassuming young woman needs help creating a lasting performance while under the tutelage of a passionate agent and a washed-up diva.",
+      "path": "/movies/Dead Talents Society (2024) {tmdb-1006724}",
+      "popularity": 2.8544,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 7,
+          "votes": 4285
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 95,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 6.9,
+          "votes": 113
+        },
+        "trakt": {
+          "type": "user",
+          "value": 7.23762,
+          "votes": 303
+        }
+      },
+      "releaseDate": "2025-03-26T00:00:00Z",
+      "runtime": 110,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 0,
+      "sortTitle": "dead talents society",
+      "statistics": {
+        "movieFileCount": 0,
+        "movieFileQualities": [],
+        "releaseGroups": [],
+        "sizeOnDisk": 0
+      },
+      "status": "released",
+      "studio": "Activator Marketing Company",
+      "tags": [
+        1
+      ],
+      "title": "Dead Talents Society",
+      "titleSlug": "1006724",
+      "tmdbId": 1006724,
+      "website": "https://www.sonypictures.com/movies/deadtalentssociety",
+      "year": 2024,
+      "youTubeTrailerId": "YrWJ_jVa0ys"
+    },
+    {
+      "added": "2026-03-07T09:12:06Z",
+      "alternateTitles": [
+        {
+          "id": 492,
+          "movieMetadataId": 58,
+          "sourceType": "tmdb",
+          "title": "Juror No. 2"
+        },
+        {
+          "id": 493,
+          "movieMetadataId": 58,
+          "sourceType": "tmdb",
+          "title": "Jurado #2"
+        },
+        {
+          "id": 494,
+          "movieMetadataId": 58,
+          "sourceType": "tmdb",
+          "title": "Присяжный №2"
+        },
+        {
+          "id": 495,
+          "movieMetadataId": 58,
+          "sourceType": "tmdb",
+          "title": "二号陪审员"
+        },
+        {
+          "id": 496,
+          "movieMetadataId": 58,
+          "sourceType": "tmdb",
+          "title": "Jurado Nº 2"
+        },
+        {
+          "id": 497,
+          "movieMetadataId": 58,
+          "sourceType": "tmdb",
+          "title": "Juror Number 2"
+        },
+        {
+          "id": 498,
+          "movieMetadataId": 58,
+          "sourceType": "tmdb",
+          "title": "二號陪審員"
+        },
+        {
+          "id": 1572,
+          "movieMetadataId": 58,
+          "sourceType": "tmdb",
+          "title": "Giurato numero 2"
+        }
+      ],
+      "certification": "PG-13",
+      "cleanTitle": "juror2",
+      "digitalRelease": "2024-12-02T00:00:00Z",
+      "folderName": "/movies/Juror #2 (2024)",
+      "genres": [
+        "Drama",
+        "Thriller"
+      ],
+      "hasFile": true,
+      "id": 58,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/ugQkpGajKFQ8eyOEhGheR0HfWQ.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/wHXyGLjYPm4bHNKFQPCfYWiTeSH.jpg"
+        }
+      ],
+      "imdbId": "tt27403986",
+      "inCinemas": "2024-10-30T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "apathetic",
+        "apologetic",
+        "courtroom drama",
+        "depressing",
+        "empathetic",
+        "jury duty",
+        "moral dilemma",
+        "murder trial",
+        "philosophical",
+        "suspenseful"
+      ],
+      "minimumAvailability": "released",
+      "monitored": false,
+      "movieFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 54,
+            "name": "DD"
+          }
+        ],
+        "dateAdded": "2026-04-29T05:19:24Z",
+        "edition": "",
+        "id": 207,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 640000,
+          "audioChannels": 5.1,
+          "audioCodec": "AC3",
+          "audioLanguages": "ita/eng",
+          "audioStreamCount": 2,
+          "resolution": "1920x804",
+          "runTime": "1:53:50",
+          "scanType": "Progressive",
+          "subtitles": "ita/ita/eng",
+          "videoBitDepth": 8,
+          "videoBitrate": 8506426,
+          "videoCodec": "x264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "movieId": 58,
+        "originalFilePath": "Giurato.Numero.2.2024.iTA-ENG.Bluray.1080p.x264-CYBER/Giurato.Numero.2.2024.iTA-ENG.Bluray.1080p.x264-CYBER.mkv",
+        "path": "/movies/Juror #2 (2024)/Juror #2 (2024) {tmdb-1106739} - [Bluray-1080p][AC3 5.1][x264]-CYBER.mkv",
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "relativePath": "Juror #2 (2024) {tmdb-1106739} - [Bluray-1080p][AC3 5.1][x264]-CYBER.mkv",
+        "releaseGroup": "CYBER",
+        "sceneName": "Giurato.Numero.2.2024.iTA-ENG.Bluray.1080p.x264-CYBER",
+        "size": 8358305851
+      },
+      "movieFileId": 207,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Juror #2",
+      "overview": "While serving as a juror in a high profile murder trial, family man Justin Kemp finds himself struggling with a serious moral dilemma…one he could use to sway the jury verdict and potentially convict—or free—the accused killer.",
+      "path": "/movies/Juror #2 (2024)",
+      "physicalRelease": "2025-01-13T00:00:00Z",
+      "popularity": 4.6529,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 7,
+          "votes": 133206
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 72,
+          "votes": 0
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 93,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 6.9,
+          "votes": 2710
+        },
+        "trakt": {
+          "type": "user",
+          "value": 7.15203,
+          "votes": 10136
+        }
+      },
+      "releaseDate": "2024-12-02T00:00:00Z",
+      "runtime": 114,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 8358305851,
+      "sortTitle": "juror 2",
+      "statistics": {
+        "movieFileCount": 1,
+        "movieFileQualities": [
+          {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          }
+        ],
+        "releaseGroups": [
+          "CYBER"
+        ],
+        "sizeOnDisk": 8358305851
+      },
+      "status": "released",
+      "studio": "Warner Bros. Pictures",
+      "tags": [
+        1
+      ],
+      "title": "Juror #2",
+      "titleSlug": "1106739",
+      "tmdbId": 1106739,
+      "website": "https://www.warnerbros.com/movies/juror-2",
+      "year": 2024,
+      "youTubeTrailerId": "czYUXo0R0oA"
+    },
+    {
+      "added": "2026-03-07T09:12:06Z",
+      "alternateTitles": [
+        {
+          "id": 785,
+          "movieMetadataId": 104,
+          "sourceType": "tmdb",
+          "title": "One For the Money"
+        }
+      ],
+      "certification": "PG-13",
+      "cleanTitle": "theballadwallisisland",
+      "digitalRelease": "2025-05-06T00:00:00Z",
+      "folderName": "/movies/The Ballad of Wallis Island (2025)",
+      "genres": [
+        "Comedy",
+        "Drama",
+        "Music"
+      ],
+      "hasFile": false,
+      "id": 104,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/haS6bnqDqZoi5sYcCPJWaj2yMbB.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/1nn7nCFRTKeWOXbtjrFxfSvf1EI.jpg"
+        }
+      ],
+      "imdbId": "tt27674982",
+      "inCinemas": "2025-05-08T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "adoring",
+        "duet",
+        "eccentric millionaire",
+        "empathetic",
+        "folk music",
+        "former lovers",
+        "indie folk",
+        "inspirational",
+        "island",
+        "isolated island",
+        "lottery winner",
+        "lovers reunion",
+        "musician",
+        "reunion",
+        "thoughtful",
+        "wales"
+      ],
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "The Ballad of Wallis Island",
+      "overview": "An eccentric lottery winner who lives alone on a remote island tries to make his fantasies come true by getting his favourite musicians to perform at his home.",
+      "path": "/movies/The Ballad of Wallis Island (2025)",
+      "popularity": 2.7204,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 7.4,
+          "votes": 26480
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 78,
+          "votes": 0
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 97,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 7.268,
+          "votes": 233
+        },
+        "trakt": {
+          "type": "user",
+          "value": 7.49252,
+          "votes": 1137
+        }
+      },
+      "releaseDate": "2025-05-06T00:00:00Z",
+      "runtime": 100,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 0,
+      "sortTitle": "ballad of wallis island",
+      "statistics": {
+        "movieFileCount": 0,
+        "movieFileQualities": [],
+        "releaseGroups": [],
+        "sizeOnDisk": 0
+      },
+      "status": "released",
+      "studio": "Baby Cow Productions",
+      "tags": [],
+      "title": "The Ballad of Wallis Island",
+      "titleSlug": "1122099",
+      "tmdbId": 1122099,
+      "website": "https://www.focusfeatures.com/the-ballad-of-wallis-island",
+      "year": 2025,
+      "youTubeTrailerId": "GjbVZWVWzPU"
+    },
+    {
+      "added": "2026-03-07T09:12:06Z",
+      "alternateTitles": [
+        {
+          "id": 919,
+          "movieMetadataId": 118,
+          "sourceType": "tmdb",
+          "title": "La Vida De Chuck"
+        },
+        {
+          "id": 920,
+          "movieMetadataId": 118,
+          "sourceType": "tmdb",
+          "title": "Życie Chucka"
+        },
+        {
+          "id": 921,
+          "movieMetadataId": 118,
+          "sourceType": "tmdb",
+          "title": "Жизнь Чака"
+        },
+        {
+          "id": 922,
+          "movieMetadataId": 118,
+          "sourceType": "tmdb",
+          "title": "A Vida de Chuck"
+        },
+        {
+          "id": 923,
+          "movieMetadataId": 118,
+          "sourceType": "tmdb",
+          "title": "查克的一生"
+        },
+        {
+          "id": 924,
+          "movieMetadataId": 118,
+          "sourceType": "tmdb",
+          "title": "Chucki elu"
+        },
+        {
+          "id": 925,
+          "movieMetadataId": 118,
+          "sourceType": "tmdb",
+          "title": "Η ζωή του Τσάκ"
+        },
+        {
+          "id": 926,
+          "movieMetadataId": 118,
+          "sourceType": "tmdb",
+          "title": "Kha'yav shel Chuck"
+        },
+        {
+          "id": 927,
+          "movieMetadataId": 118,
+          "sourceType": "tmdb",
+          "title": "Чаков живот"
+        },
+        {
+          "id": 928,
+          "movieMetadataId": 118,
+          "sourceType": "tmdb",
+          "title": "Chuck'ın Hayatı"
+        }
+      ],
+      "certification": "R",
+      "cleanTitle": "thelifechuck",
+      "digitalRelease": "2025-07-29T00:00:00Z",
+      "folderName": "/movies/The Life of Chuck (2025)",
+      "genres": [
+        "Drama",
+        "Fantasy"
+      ],
+      "hasFile": true,
+      "id": 118,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/reMosvnsgjXk1fU40KYx5vKjzGS.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/1SgD8XMa6dDSBKbPU4TDe2cmfGK.jpg"
+        }
+      ],
+      "imdbId": "tt12908150",
+      "inCinemas": "2025-06-05T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "accepting death",
+        "accountant",
+        "adaptation",
+        "based on short story",
+        "brain tumor",
+        "cancer",
+        "child raised by grandparents",
+        "childhood memory",
+        "coming of age",
+        "dance club",
+        "death",
+        "deathbed",
+        "dying man",
+        "life",
+        "life and death",
+        "moments of life",
+        "orphan boy",
+        "reconsidering of life",
+        "reverse chronology",
+        "school dance",
+        "slice of life",
+        "subconscious",
+        "vision of the future",
+        "walt whitman"
+      ],
+      "minimumAvailability": "released",
+      "monitored": false,
+      "movieFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 50,
+            "name": "DD+"
+          }
+        ],
+        "dateAdded": "2026-04-30T05:24:57Z",
+        "edition": "",
+        "id": 210,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 640000,
+          "audioChannels": 5.1,
+          "audioCodec": "EAC3",
+          "audioLanguages": "ita/ita/eng",
+          "audioStreamCount": 3,
+          "resolution": "1920x1080",
+          "runTime": "1:50:56",
+          "scanType": "Progressive",
+          "subtitles": "ita/ita/eng/eng",
+          "videoBitDepth": 8,
+          "videoBitrate": 11976250,
+          "videoCodec": "x264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "movieId": 118,
+        "originalFilePath": "The.Life.of.Chuck.2024.iTA-ENG.Bluray.1080p.x264-CYBER/The.Life.of.Chuck.2024.iTA-ENG.Bluray.1080p.x264-CYBER.mkv",
+        "path": "/movies/The Life of Chuck (2025)/The Life of Chuck (2025) {tmdb-842924} - [Bluray-1080p][EAC3 5.1][x264]-CYBER.mkv",
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "relativePath": "The Life of Chuck (2025) {tmdb-842924} - [Bluray-1080p][EAC3 5.1][x264]-CYBER.mkv",
+        "releaseGroup": "CYBER",
+        "sceneName": "The.Life.of.Chuck.2024.iTA-ENG.Bluray.1080p.x264-CYBER",
+        "size": 12325279084
+      },
+      "movieFileId": 210,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "The Life of Chuck",
+      "overview": "In this extraordinary story of an ordinary man, Charles 'Chuck' Krantz experiences the wonder of love, the heartbreak of loss, and the multitudes contained in all of us.",
+      "path": "/movies/The Life of Chuck (2025)",
+      "physicalRelease": "2025-09-30T00:00:00Z",
+      "popularity": 5.3142,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 7.3,
+          "votes": 81352
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 67,
+          "votes": 0
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 80,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 7.3,
+          "votes": 1349
+        },
+        "trakt": {
+          "type": "user",
+          "value": 7.38949,
+          "votes": 4262
+        }
+      },
+      "releaseDate": "2025-07-29T00:00:00Z",
+      "runtime": 111,
+      "secondaryYear": 2024,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 12325279084,
+      "sortTitle": "life of chuck",
+      "statistics": {
+        "movieFileCount": 1,
+        "movieFileQualities": [
+          {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          }
+        ],
+        "releaseGroups": [
+          "CYBER"
+        ],
+        "sizeOnDisk": 12325279084
+      },
+      "status": "released",
+      "studio": "Intrepid Pictures",
+      "tags": [
+        1
+      ],
+      "title": "The Life of Chuck",
+      "titleSlug": "842924",
+      "tmdbId": 842924,
+      "website": "https://www.neonrated.com/film/the-life-of-chuck",
+      "year": 2025,
+      "youTubeTrailerId": "jlN1Mmj6YNo"
+    },
+    {
+      "added": "2026-03-07T09:12:06Z",
+      "alternateTitles": [
+        {
+          "id": 1097,
+          "movieMetadataId": 137,
+          "sourceType": "tmdb",
+          "title": "ทูเกเธอร์"
+        },
+        {
+          "id": 1700,
+          "movieMetadataId": 137,
+          "sourceType": "tmdb",
+          "title": "Tsmoodim"
+        }
+      ],
+      "certification": "R",
+      "cleanTitle": "together",
+      "digitalRelease": "2025-08-26T00:00:00Z",
+      "folderName": "/movies/Together (2025)",
+      "genres": [
+        "Horror",
+        "Romance"
+      ],
+      "hasFile": true,
+      "id": 137,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/80slKYVM5teFH3kz6ouWrZXveqj.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/39Niij05MXfibXBsHiUU0Ml0POX.jpg"
+        }
+      ],
+      "imdbId": "tt31184028",
+      "inCinemas": "2025-07-30T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "baffled",
+        "body horror",
+        "cave",
+        "church",
+        "countryside",
+        "couple",
+        "cult",
+        "musician",
+        "psychological horror",
+        "psychotic",
+        "romance",
+        "supernatural horror",
+        "teacher",
+        "woods"
+      ],
+      "lastSearchTime": "2026-03-29T20:34:39Z",
+      "minimumAvailability": "released",
+      "monitored": false,
+      "movieFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 54,
+            "name": "DD"
+          }
+        ],
+        "dateAdded": "2026-03-29T20:53:54Z",
+        "edition": "",
+        "id": 177,
+        "indexerFlags": 1,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 640000,
+          "audioChannels": 5.1,
+          "audioCodec": "AC3",
+          "audioLanguages": "ita/eng",
+          "audioStreamCount": 2,
+          "resolution": "1920x1038",
+          "runTime": "1:42:16",
+          "scanType": "Progressive",
+          "subtitles": "ita/ita",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "x264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 24
+        },
+        "movieId": 137,
+        "originalFilePath": "Together (2025) iTA-ENG.Bluray.1080p.x264-Dr4gon.mkv",
+        "path": "/movies/Together (2025)/Together (2025) {tmdb-1242011} - [Bluray-1080p][AC3 5.1][x264]-Dr4gon.mkv",
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "relativePath": "Together (2025) {tmdb-1242011} - [Bluray-1080p][AC3 5.1][x264]-Dr4gon.mkv",
+        "releaseGroup": "Dr4gon",
+        "sceneName": "Together (2025) iTA-ENG.Bluray.1080p.x264-Dr4gon",
+        "size": 3312990167
+      },
+      "movieFileId": 177,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Together",
+      "overview": "Years into their relationship, Tim and Millie find themselves at a crossroads as they move to the country, abandoning all that is familiar in their lives except each other. With tensions already flaring, a nightmarish encounter with a mysterious, unnatural force threatens to corrupt their lives, their love, and their flesh.",
+      "path": "/movies/Together (2025)",
+      "physicalRelease": "2025-11-11T00:00:00Z",
+      "popularity": 5.4193,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 6.7,
+          "votes": 92317
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 75,
+          "votes": 0
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 89,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 6.898,
+          "votes": 1450
+        },
+        "trakt": {
+          "type": "user",
+          "value": 6.85406,
+          "votes": 6578
+        }
+      },
+      "releaseDate": "2025-08-26T00:00:00Z",
+      "runtime": 102,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 3312990167,
+      "sortTitle": "together",
+      "statistics": {
+        "movieFileCount": 1,
+        "movieFileQualities": [
+          {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          }
+        ],
+        "releaseGroups": [
+          "Dr4gon"
+        ],
+        "sizeOnDisk": 3312990167
+      },
+      "status": "released",
+      "studio": "Picturestart",
+      "tags": [
+        1
+      ],
+      "title": "Together",
+      "titleSlug": "1242011",
+      "tmdbId": 1242011,
+      "website": "https://www.neonrated.com/film/together",
+      "year": 2025,
+      "youTubeTrailerId": "9bqIwMH3En8"
+    },
+    {
+      "added": "2026-03-07T09:12:06Z",
+      "alternateTitles": [
+        {
+          "id": 707,
+          "movieMetadataId": 92,
+          "sourceType": "tmdb",
+          "title": "הנוסעת שליד הנהג"
+        },
+        {
+          "id": 708,
+          "movieMetadataId": 92,
+          "sourceType": "tmdb",
+          "title": "La place du mort"
+        },
+        {
+          "id": 709,
+          "movieMetadataId": 92,
+          "sourceType": "tmdb",
+          "title": "Fuga Fatal"
+        },
+        {
+          "id": 710,
+          "movieMetadataId": 92,
+          "sourceType": "tmdb",
+          "title": "Die Rache der Polly McClusky"
+        },
+        {
+          "id": 711,
+          "movieMetadataId": 92,
+          "sourceType": "tmdb",
+          "title": "Ο τιμωρός"
+        },
+        {
+          "id": 712,
+          "movieMetadataId": 92,
+          "sourceType": "tmdb",
+          "title": "Детка на драйве"
+        },
+        {
+          "id": 713,
+          "movieMetadataId": 92,
+          "sourceType": "tmdb",
+          "title": "我的殺手爸爸"
+        },
+        {
+          "id": 714,
+          "movieMetadataId": 92,
+          "sourceType": "tmdb",
+          "title": "Втікачі"
+        },
+        {
+          "id": 715,
+          "movieMetadataId": 92,
+          "sourceType": "tmdb",
+          "title": "Ela Vai de Copiloto"
+        }
+      ],
+      "certification": "R",
+      "cleanTitle": "sheridesshotgun",
+      "digitalRelease": "2025-08-26T00:00:00Z",
+      "folderName": "/movies/She Rides Shotgun (2025)",
+      "genres": [
+        "Action",
+        "Thriller",
+        "Crime"
+      ],
+      "hasFile": false,
+      "id": 92,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/nvqW8mOm818QDio3GKKmPLK8kXj.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/ytCi1wg6YHpYcFRWCO2jpzN31Kf.jpg"
+        }
+      ],
+      "imdbId": "tt27986457",
+      "inCinemas": "2025-07-31T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "based on novel or book",
+        "broken family",
+        "crime",
+        "escape journey",
+        "estranged daughter",
+        "father and daughter",
+        "father daughter relationship",
+        "fugitive life",
+        "loss of a parent",
+        "on the run",
+        "prison gang",
+        "protective father",
+        "revenge threat",
+        "sacrifice",
+        "traumatized child",
+        "young girl"
+      ],
+      "lastSearchTime": "2026-03-29T20:13:48Z",
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "She Rides Shotgun",
+      "overview": "Newly released from prison and marked for death by unrelenting enemies, Nate must now protect his estranged 11-year-old daughter, Polly, at all costs. With scant resources and no one to trust, Nate and Polly forge a bond under fire as he shows her how to fight and survive—and she teaches him the true meaning of unconditional love.",
+      "path": "/movies/She Rides Shotgun (2025)",
+      "physicalRelease": "2026-08-25T00:00:00Z",
+      "popularity": 3.1797,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 6.5,
+          "votes": 15550
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 74,
+          "votes": 0
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 87,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 7,
+          "votes": 357
+        },
+        "trakt": {
+          "type": "user",
+          "value": 6.94487,
+          "votes": 1433
+        }
+      },
+      "releaseDate": "2025-08-26T00:00:00Z",
+      "runtime": 120,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 0,
+      "sortTitle": "she rides shotgun",
+      "statistics": {
+        "movieFileCount": 0,
+        "movieFileQualities": [],
+        "releaseGroups": [],
+        "sizeOnDisk": 0
+      },
+      "status": "released",
+      "studio": "Fifth Season",
+      "tags": [
+        1
+      ],
+      "title": "She Rides Shotgun",
+      "titleSlug": "1196573",
+      "tmdbId": 1196573,
+      "website": "",
+      "year": 2025,
+      "youTubeTrailerId": "U9OkHjOnQPg"
+    },
+    {
+      "added": "2026-03-05T22:38:47Z",
+      "alternateTitles": [
+        {
+          "id": 1,
+          "movieMetadataId": 1,
+          "sourceType": "tmdb",
+          "title": "Music Box:  It's Never Over, Jeff Buckley"
+        }
+      ],
+      "certification": "NR",
+      "cleanTitle": "itsneveroverjeffbuckley",
+      "digitalRelease": "2025-08-25T00:00:00Z",
+      "folderName": "/movies/It's Never Over, Jeff Buckley (2025)",
+      "genres": [
+        "Documentary",
+        "Music"
+      ],
+      "hasFile": true,
+      "id": 1,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/rrKe8bC6UKFKvfZHvbwA9Bq5hkR.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/rU0P9XGl2thKlC7BbOdGc1mQFQ7.jpg"
+        }
+      ],
+      "imdbId": "tt34966650",
+      "inCinemas": "2025-08-08T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "documentary",
+        "jeff buckley",
+        "singer"
+      ],
+      "lastSearchTime": "2026-03-05T22:40:07Z",
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFile": {
+        "customFormatScore": -10000,
+        "customFormats": [
+          {
+            "id": 54,
+            "name": "DD"
+          },
+          {
+            "id": 26,
+            "name": "HMAX"
+          },
+          {
+            "id": 58,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 5,
+            "name": "WEB Tier 02"
+          }
+        ],
+        "dateAdded": "2026-03-05T22:44:42Z",
+        "edition": "",
+        "id": 1,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 256000,
+          "audioChannels": 5.1,
+          "audioCodec": "EAC3",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "3840x2160",
+          "runTime": "1:47:06",
+          "scanType": "Progressive",
+          "subtitles": "eng/eng",
+          "videoBitDepth": 10,
+          "videoBitrate": 11935628,
+          "videoCodec": "h265",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "movieId": 1,
+        "originalFilePath": "Its.Never.Over.Jeff.Buckley.2025.2160p.HMAX.WEB-DL.DD.5.1.H.265-playWEB/Its.Never.Over.Jeff.Buckley.2025.2160p.HMAX.WEB-DL.DD+5.1.H.265-playWEB.mkv",
+        "path": "/movies/It's Never Over, Jeff Buckley (2025)/Its.Never.Over.Jeff.Buckley.2025.2160p.HMAX.WEB-DL.DD.5.1.H.265-playWEB.mkv",
+        "quality": {
+          "quality": {
+            "id": 18,
+            "modifier": "none",
+            "name": "WEBDL-2160p",
+            "resolution": 2160,
+            "source": "webdl"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Its.Never.Over.Jeff.Buckley.2025.2160p.HMAX.WEB-DL.DD.5.1.H.265-playWEB.mkv",
+        "releaseGroup": "playWEB",
+        "sceneName": "Its.Never.Over.Jeff.Buckley.2025.2160p.HMAX.WEB-DL.DD.5.1.H.265-playWEB",
+        "size": 9795855896
+      },
+      "movieFileId": 1,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "It's Never Over, Jeff Buckley",
+      "overview": "Rising musician Jeff Buckley had only released one album when he died suddenly in 1997. Now, never-before-seen footage, exclusive voice messages, and accounts from those closest to him offer a portrait of the captivating singer.",
+      "path": "/movies/It's Never Over, Jeff Buckley (2025)",
+      "popularity": 1.406,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 7.6,
+          "votes": 3496
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 72,
+          "votes": 0
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 99,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 7.729,
+          "votes": 48
+        },
+        "trakt": {
+          "type": "user",
+          "value": 7.87234,
+          "votes": 188
+        }
+      },
+      "releaseDate": "2025-08-25T00:00:00Z",
+      "runtime": 106,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 9795855896,
+      "sortTitle": "its never over jeff buckley",
+      "statistics": {
+        "movieFileCount": 1,
+        "movieFileQualities": [
+          {
+            "id": 18,
+            "modifier": "none",
+            "name": "WEBDL-2160p",
+            "resolution": 2160,
+            "source": "webdl"
+          }
+        ],
+        "releaseGroups": [
+          "playWEB"
+        ],
+        "sizeOnDisk": 9795855896
+      },
+      "status": "released",
+      "studio": "Disarming Films",
+      "tags": [
+        1
+      ],
+      "title": "It's Never Over, Jeff Buckley",
+      "titleSlug": "1400381",
+      "tmdbId": 1400381,
+      "website": "https://www.magpictures.com/jeffbuckley",
+      "year": 2025,
+      "youTubeTrailerId": "DRrcgLRX8Qc"
+    },
+    {
+      "added": "2026-06-01T13:12:21Z",
+      "alternateTitles": [
+        {
+          "id": 1674,
+          "movieMetadataId": 334,
+          "sourceType": "tmdb",
+          "title": "8-ban Deguchi"
+        },
+        {
+          "id": 1675,
+          "movieMetadataId": 334,
+          "sourceType": "tmdb",
+          "title": "8號出口"
+        },
+        {
+          "id": 1676,
+          "movieMetadataId": 334,
+          "sourceType": "tmdb",
+          "title": "The Exit 8"
+        },
+        {
+          "id": 1679,
+          "movieMetadataId": 334,
+          "sourceType": "tmdb",
+          "title": "A Saída 8"
+        },
+        {
+          "id": 1680,
+          "movieMetadataId": 334,
+          "sourceType": "tmdb",
+          "title": "Hachiban Deguchi"
+        },
+        {
+          "id": 1681,
+          "movieMetadataId": 334,
+          "sourceType": "tmdb",
+          "title": "Exit Eight"
+        },
+        {
+          "id": 1682,
+          "movieMetadataId": 334,
+          "sourceType": "tmdb",
+          "title": "The Exit Eight"
+        },
+        {
+          "id": 2736,
+          "movieMetadataId": 334,
+          "sourceType": "tmdb",
+          "title": "Salida 8"
+        }
+      ],
+      "certification": "PG",
+      "cleanTitle": "exit8",
+      "digitalRelease": "2026-02-05T00:00:00Z",
+      "folderName": "/movies/Exit 8 (2025) {tmdb-1408208}",
+      "genres": [
+        "Mystery",
+        "Thriller",
+        "Horror"
+      ],
+      "hasFile": false,
+      "id": 212,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/nQXYTvm6AY4WmtcPskroqC7Skh.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/3cVrg7tzSf5AgEecYWDOSAzXAeX.jpg"
+        }
+      ],
+      "imdbId": "tt35222590",
+      "inCinemas": "2025-08-28T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "ambiguous",
+        "anomaly",
+        "based on video game",
+        "bewildered",
+        "cautionary",
+        "endless cycle",
+        "exit",
+        "exit 8",
+        "found footage",
+        "found footage adjacent",
+        "introspective",
+        "liminal",
+        "liminal horror",
+        "liminal space",
+        "metro",
+        "ominous",
+        "psychological",
+        "psychological horror",
+        "station"
+      ],
+      "lastSearchTime": "2026-06-24T21:07:12Z",
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 8,
+        "name": "Japanese"
+      },
+      "originalTitle": "８番出口",
+      "overview": "A man trapped in an endless sterile subway passageway sets out to find Exit 8. The rules of his quest are simple: do not overlook anything out of the ordinary. If you discover an anomaly, turn back immediately. If you don’t, carry on. Then leave from Exit 8. But even a single oversight will send him back to the beginning. Will he ever reach his goal and escape this infinite corridor?",
+      "path": "/movies/Exit 8 (2025) {tmdb-1408208}",
+      "physicalRelease": "2026-02-04T00:00:00Z",
+      "popularity": 11.8802,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 6.5,
+          "votes": 38377
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 71,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 6.983,
+          "votes": 919
+        },
+        "trakt": {
+          "type": "user",
+          "value": 6.75805,
+          "votes": 3352
+        }
+      },
+      "releaseDate": "2026-02-04T00:00:00Z",
+      "runtime": 95,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 0,
+      "sortTitle": "exit 8",
+      "statistics": {
+        "movieFileCount": 0,
+        "movieFileQualities": [],
+        "releaseGroups": [],
+        "sizeOnDisk": 0
+      },
+      "status": "released",
+      "studio": "TOHO",
+      "tags": [],
+      "title": "Exit 8",
+      "titleSlug": "1408208",
+      "tmdbId": 1408208,
+      "website": "https://www.neonrated.com/film/exit-8",
+      "year": 2025,
+      "youTubeTrailerId": "zzEDWwhtAHc"
+    },
+    {
+      "added": "2026-03-07T09:12:06Z",
+      "alternateTitles": [
+        {
+          "id": 118,
+          "movieMetadataId": 18,
+          "sourceType": "tmdb",
+          "title": "Save the Green Planet!"
+        },
+        {
+          "id": 119,
+          "movieMetadataId": 18,
+          "sourceType": "tmdb",
+          "title": "Բուգոնիա"
+        },
+        {
+          "id": 120,
+          "movieMetadataId": 18,
+          "sourceType": "tmdb",
+          "title": "Буґонія"
+        },
+        {
+          "id": 121,
+          "movieMetadataId": 18,
+          "sourceType": "tmdb",
+          "title": "拯救地球"
+        },
+        {
+          "id": 122,
+          "movieMetadataId": 18,
+          "sourceType": "tmdb",
+          "title": "부고니아"
+        },
+        {
+          "id": 123,
+          "movieMetadataId": 18,
+          "sourceType": "tmdb",
+          "title": "Βουγονία"
+        },
+        {
+          "id": 124,
+          "movieMetadataId": 18,
+          "sourceType": "tmdb",
+          "title": "La Bugonia"
+        },
+        {
+          "id": 125,
+          "movieMetadataId": 18,
+          "sourceType": "tmdb",
+          "title": "暴蜂尼亞"
+        },
+        {
+          "id": 126,
+          "movieMetadataId": 18,
+          "sourceType": "tmdb",
+          "title": "บูโกเนีย"
+        },
+        {
+          "id": 127,
+          "movieMetadataId": 18,
+          "sourceType": "tmdb",
+          "title": "Бугония"
+        },
+        {
+          "id": 128,
+          "movieMetadataId": 18,
+          "sourceType": "tmdb",
+          "title": "Бугонија"
+        },
+        {
+          "id": 129,
+          "movieMetadataId": 18,
+          "sourceType": "tmdb",
+          "title": "Bugonija"
+        },
+        {
+          "id": 130,
+          "movieMetadataId": 18,
+          "sourceType": "tmdb",
+          "title": "بوغونيا"
+        },
+        {
+          "id": 131,
+          "movieMetadataId": 18,
+          "sourceType": "tmdb",
+          "title": "بوگونیا"
+        },
+        {
+          "id": 132,
+          "movieMetadataId": 18,
+          "sourceType": "tmdb",
+          "title": "בוגוניה"
+        },
+        {
+          "id": 133,
+          "movieMetadataId": 18,
+          "sourceType": "tmdb",
+          "title": "بوجونيا"
+        },
+        {
+          "id": 134,
+          "movieMetadataId": 18,
+          "sourceType": "tmdb",
+          "title": "ბუგონია"
+        },
+        {
+          "id": 135,
+          "movieMetadataId": 18,
+          "sourceType": "tmdb",
+          "title": "Bĩ Cực Thái Lai"
+        }
+      ],
+      "certification": "R",
+      "cleanTitle": "bugonia",
+      "digitalRelease": "2025-11-24T00:00:00Z",
+      "folderName": "/movies/Bugonia (2025)",
+      "genres": [
+        "Science Fiction",
+        "Thriller",
+        "Comedy"
+      ],
+      "hasFile": true,
+      "id": 18,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/rSdOua3wKMEaFWDcKAYWRjXQWOt.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/tN3pTxkQoP96wtaEahYuRVdUWb2.jpg"
+        }
+      ],
+      "imdbId": "tt12300742",
+      "inCinemas": "2025-10-23T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "absurdism",
+        "alien",
+        "alien conspiracy",
+        "alien invasion",
+        "capitalism",
+        "comedy horror",
+        "dark comedy",
+        "delusion",
+        "ecologism",
+        "excited",
+        "extraterrestrial",
+        "global threat",
+        "hierarchy",
+        "kidnapping",
+        "mental illness",
+        "paranoia",
+        "political conflict",
+        "power politics",
+        "remake",
+        "satire",
+        "saving the world",
+        "social critique",
+        "symbolism",
+        "vistavision"
+      ],
+      "lastSearchTime": "2026-06-14T07:10:21Z",
+      "minimumAvailability": "released",
+      "monitored": false,
+      "movieFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 54,
+            "name": "DD"
+          }
+        ],
+        "dateAdded": "2026-06-14T07:55:01Z",
+        "edition": "",
+        "id": 245,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 640000,
+          "audioChannels": 5.1,
+          "audioCodec": "AC3",
+          "audioLanguages": "ita/eng",
+          "audioStreamCount": 2,
+          "resolution": "1620x1080",
+          "runTime": "1:58:14",
+          "scanType": "Progressive",
+          "subtitles": "ita/ita/eng/eng",
+          "videoBitDepth": 8,
+          "videoBitrate": 9226550,
+          "videoCodec": "x264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "movieId": 18,
+        "originalFilePath": "Bugonia.2025.iTA-ENG.Bluray.1080p.x264-CYBER/Bugonia.2025.iTA-ENG.Bluray.1080p.x264-CYBER.mkv",
+        "path": "/movies/Bugonia (2025)/Bugonia (2025) {tmdb-701387} - [Bluray-1080p][AC3 5.1][x264]-CYBER.mkv",
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "relativePath": "Bugonia (2025) {tmdb-701387} - [Bluray-1080p][AC3 5.1][x264]-CYBER.mkv",
+        "releaseGroup": "CYBER",
+        "sceneName": "Bugonia.2025.iTA-ENG.Bluray.1080p.x264-CYBER",
+        "size": 9319093089
+      },
+      "movieFileId": 245,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Bugonia",
+      "overview": "Two conspiracy obsessed young men kidnap the high-powered CEO of a major company, convinced that she is an alien intent on destroying planet Earth.",
+      "path": "/movies/Bugonia (2025)",
+      "physicalRelease": "2025-12-23T00:00:00Z",
+      "popularity": 12.5471,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 7.4,
+          "votes": 233811
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 72,
+          "votes": 0
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 87,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 7.3,
+          "votes": 2590
+        },
+        "trakt": {
+          "type": "user",
+          "value": 7.42385,
+          "votes": 13762
+        }
+      },
+      "releaseDate": "2025-11-24T00:00:00Z",
+      "runtime": 119,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 9319093089,
+      "sortTitle": "bugonia",
+      "statistics": {
+        "movieFileCount": 1,
+        "movieFileQualities": [
+          {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          }
+        ],
+        "releaseGroups": [
+          "CYBER"
+        ],
+        "sizeOnDisk": 9319093089
+      },
+      "status": "released",
+      "studio": "Element Pictures",
+      "tags": [
+        1
+      ],
+      "title": "Bugonia",
+      "titleSlug": "701387",
+      "tmdbId": 701387,
+      "website": "https://www.focusfeatures.com/bugonia",
+      "year": 2025,
+      "youTubeTrailerId": "7VBigr-JHB0"
+    },
+    {
+      "added": "2026-03-07T09:12:06Z",
+      "alternateTitles": [
+        {
+          "id": 638,
+          "movieMetadataId": 82,
+          "sourceType": "tmdb",
+          "title": "レンタルファミリー"
+        },
+        {
+          "id": 639,
+          "movieMetadataId": 82,
+          "sourceType": "tmdb",
+          "title": "Семья напрокат"
+        },
+        {
+          "id": 640,
+          "movieMetadataId": 82,
+          "sourceType": "tmdb",
+          "title": "Familia de alquiler"
+        },
+        {
+          "id": 1497,
+          "movieMetadataId": 82,
+          "sourceType": "tmdb",
+          "title": "日租家庭"
+        }
+      ],
+      "certification": "PG-13",
+      "cleanTitle": "rentalfamily",
+      "digitalRelease": "2026-01-13T00:00:00Z",
+      "folderName": "/movies/Rental Family (2025)",
+      "genres": [
+        "Comedy",
+        "Drama"
+      ],
+      "hasFile": true,
+      "id": 82,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/A5lswNlytTUrnMWsuD0NFfhZlf3.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/euoXeFAOt9o7yAWA9zGZk7DdZWZ.jpg"
+        }
+      ],
+      "imdbId": "tt14142060",
+      "inCinemas": "2025-11-20T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "actor",
+        "bold",
+        "candid",
+        "coping with grief",
+        "emotional bonding",
+        "emotional healing",
+        "expatriate life",
+        "hopeful",
+        "human connection",
+        "inner conflict",
+        "longing for belonging",
+        "professional actor",
+        "rental family",
+        "search for identity",
+        "self-discovery",
+        "social isolation",
+        "surrogate roles",
+        "tokyo, japan"
+      ],
+      "minimumAvailability": "released",
+      "monitored": false,
+      "movieFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 54,
+            "name": "DD"
+          }
+        ],
+        "dateAdded": "2026-05-01T05:22:13Z",
+        "edition": "",
+        "id": 212,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 640000,
+          "audioChannels": 5.1,
+          "audioCodec": "AC3",
+          "audioLanguages": "ita/eng",
+          "audioStreamCount": 2,
+          "resolution": "1920x960",
+          "runTime": "1:49:58",
+          "scanType": "Progressive",
+          "subtitles": "ita/ita/eng",
+          "videoBitDepth": 8,
+          "videoBitrate": 9274733,
+          "videoCodec": "x264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "movieId": 82,
+        "originalFilePath": "Rental.Family.2025.iTA-ENG.Bluray.1080p.x264-CYBER/Rental.Family.2025.iTA-ENG.Bluray.1080p.x264-CYBER.mkv",
+        "path": "/movies/Rental Family (2025)/Rental Family (2025) {tmdb-1208348} - [Bluray-1080p][AC3 5.1][x264]-CYBER.mkv",
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "relativePath": "Rental Family (2025) {tmdb-1208348} - [Bluray-1080p][AC3 5.1][x264]-CYBER.mkv",
+        "releaseGroup": "CYBER",
+        "sceneName": "Rental.Family.2025.iTA-ENG.Bluray.1080p.x264-CYBER",
+        "size": 9424941596
+      },
+      "movieFileId": 212,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Rental Family",
+      "overview": "An American actor in Tokyo struggles to find purpose until he lands an unusual gig: working for a Japanese 'rental family' agency, playing stand-in roles for strangers. As he immerses himself in his clients' worlds, he begins to form genuine bonds that blur the lines between performance and reality.",
+      "path": "/movies/Rental Family (2025)",
+      "physicalRelease": "2026-02-17T00:00:00Z",
+      "popularity": 6.1842,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 7.5,
+          "votes": 68971
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 64,
+          "votes": 0
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 87,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 7.7,
+          "votes": 1084
+        },
+        "trakt": {
+          "type": "user",
+          "value": 7.98469,
+          "votes": 5878
+        }
+      },
+      "releaseDate": "2026-01-13T00:00:00Z",
+      "runtime": 110,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 9424941596,
+      "sortTitle": "rental family",
+      "statistics": {
+        "movieFileCount": 1,
+        "movieFileQualities": [
+          {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          }
+        ],
+        "releaseGroups": [
+          "CYBER"
+        ],
+        "sizeOnDisk": 9424941596
+      },
+      "status": "released",
+      "studio": "Sight Unseen Pictures",
+      "tags": [
+        1
+      ],
+      "title": "Rental Family",
+      "titleSlug": "1208348",
+      "tmdbId": 1208348,
+      "website": "https://www.searchlightpictures.com/rental-family",
+      "year": 2025,
+      "youTubeTrailerId": "dWSSjaIGdDI"
+    },
+    {
+      "added": "2026-03-15T13:17:10Z",
+      "alternateTitles": [
+        {
+          "id": 1378,
+          "movieMetadataId": 248,
+          "sourceType": "tmdb",
+          "title": "Kuang ye shi dai"
+        },
+        {
+          "id": 1379,
+          "movieMetadataId": 248,
+          "sourceType": "tmdb",
+          "title": "القيامة"
+        },
+        {
+          "id": 1380,
+          "movieMetadataId": 248,
+          "sourceType": "tmdb",
+          "title": "رستاخیز"
+        },
+        {
+          "id": 1381,
+          "movieMetadataId": 248,
+          "sourceType": "tmdb",
+          "title": "Възкресение"
+        },
+        {
+          "id": 1382,
+          "movieMetadataId": 248,
+          "sourceType": "tmdb",
+          "title": "Resurrección"
+        },
+        {
+          "id": 1383,
+          "movieMetadataId": 248,
+          "sourceType": "tmdb",
+          "title": "광야시대"
+        },
+        {
+          "id": 1384,
+          "movieMetadataId": 248,
+          "sourceType": "tmdb",
+          "title": "Zmartwychwstanie"
+        },
+        {
+          "id": 1385,
+          "movieMetadataId": 248,
+          "sourceType": "tmdb",
+          "title": "Воскрешение"
+        },
+        {
+          "id": 1386,
+          "movieMetadataId": 248,
+          "sourceType": "tmdb",
+          "title": "狂野時代"
+        },
+        {
+          "id": 1387,
+          "movieMetadataId": 248,
+          "sourceType": "tmdb",
+          "title": "Prisikėlimas"
+        },
+        {
+          "id": 1537,
+          "movieMetadataId": 248,
+          "sourceType": "tmdb",
+          "title": "Vzkříšení"
+        }
+      ],
+      "certification": "NR",
+      "cleanTitle": "resurrection",
+      "digitalRelease": "2026-02-25T00:00:00Z",
+      "folderName": "/movies/Resurrection (2025) {tmdb-878608}",
+      "genres": [
+        "Science Fiction",
+        "Fantasy",
+        "Drama"
+      ],
+      "hasFile": false,
+      "id": 163,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/4asJAxshXzQriox6tnIoEnWN1nu.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/gry8VX2ssomFFv0ogcmlv3ZGUWd.jpg"
+        }
+      ],
+      "imdbId": "tt29002950",
+      "inCinemas": "2025-11-22T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "experimental cinema",
+        "five senses"
+      ],
+      "lastSearchTime": "2026-03-15T13:17:59Z",
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 10,
+        "name": "Chinese"
+      },
+      "originalTitle": "狂野时代",
+      "overview": "In a world where humanity has lost the ability to dream in exchange for eternal life, one creature remains entranced by the fading illusions of the dreamworld. This monster, adrift in reverie, clings to visions no one else can see - until a woman appears. As she allows him to dream one final time, his life of different identities is replayed as they journey through his century of existence.",
+      "path": "/movies/Resurrection (2025) {tmdb-878608}",
+      "physicalRelease": "2026-04-21T00:00:00Z",
+      "popularity": 5.0203,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 7.2,
+          "votes": 6132
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 87,
+          "votes": 0
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 91,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 7.1,
+          "votes": 138
+        },
+        "trakt": {
+          "type": "user",
+          "value": 7.06731,
+          "votes": 208
+        }
+      },
+      "releaseDate": "2026-02-25T00:00:00Z",
+      "runtime": 159,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 0,
+      "sortTitle": "resurrection",
+      "statistics": {
+        "movieFileCount": 0,
+        "movieFileQualities": [],
+        "releaseGroups": [],
+        "sizeOnDisk": 0
+      },
+      "status": "released",
+      "studio": "Dangmai Films",
+      "tags": [
+        1
+      ],
+      "title": "Resurrection",
+      "titleSlug": "878608",
+      "tmdbId": 878608,
+      "website": "",
+      "year": 2025,
+      "youTubeTrailerId": "ZIJezWgFUEY"
+    },
+    {
+      "added": "2026-03-07T09:12:06Z",
+      "alternateTitles": [
+        {
+          "id": 255,
+          "movieMetadataId": 31,
+          "sourceType": "tmdb",
+          "title": "이터니티"
+        },
+        {
+          "id": 256,
+          "movieMetadataId": 31,
+          "sourceType": "tmdb",
+          "title": "Navždy s tebou?"
+        },
+        {
+          "id": 257,
+          "movieMetadataId": 31,
+          "sourceType": "tmdb",
+          "title": "สามรัก หนึ่งนิรันดร์"
+        },
+        {
+          "id": 258,
+          "movieMetadataId": 31,
+          "sourceType": "tmdb",
+          "title": "저세상 로맨스"
+        },
+        {
+          "id": 259,
+          "movieMetadataId": 31,
+          "sourceType": "tmdb",
+          "title": "‎'저세상 로맨스' - Eternity"
+        },
+        {
+          "id": 260,
+          "movieMetadataId": 31,
+          "sourceType": "tmdb",
+          "title": "Tình Yêu Vĩnh Cửu - Eternity"
+        },
+        {
+          "id": 261,
+          "movieMetadataId": 31,
+          "sourceType": "tmdb",
+          "title": "Wieczność"
+        },
+        {
+          "id": 1877,
+          "movieMetadataId": 31,
+          "sourceType": "tmdb",
+          "title": "Вечность"
+        }
+      ],
+      "certification": "PG-13",
+      "cleanTitle": "eternity",
+      "digitalRelease": "2025-12-22T00:00:00Z",
+      "folderName": "/movies/Eternity (2025)",
+      "genres": [
+        "Romance",
+        "Comedy",
+        "Drama"
+      ],
+      "hasFile": false,
+      "id": 31,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/yiwGcjfDKXD5PqQnyKUU9kspWQQ.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/fuacZLpnohQtLD0AhtCErcPVL98.jpg"
+        }
+      ],
+      "imdbId": "tt24950660",
+      "inCinemas": "2025-11-26T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "afterlife",
+        "death of husband",
+        "death of spouse",
+        "difficult choice",
+        "eternity",
+        "fantasy",
+        "first love",
+        "loving",
+        "marriage",
+        "memories",
+        "reflective",
+        "reminiscent",
+        "romcom",
+        "souls",
+        "widow",
+        "woman between two men"
+      ],
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Eternity",
+      "overview": "In an afterlife where souls have one week to decide where to spend eternity, Joan is faced with the impossible choice between the man she spent her life with and her first love, who died young and has waited decades for her to arrive.",
+      "path": "/movies/Eternity (2025)",
+      "popularity": 7.6684,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 6.9,
+          "votes": 70683
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 58,
+          "votes": 0
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 76,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 7.1,
+          "votes": 918
+        },
+        "trakt": {
+          "type": "user",
+          "value": 7.42783,
+          "votes": 6145
+        }
+      },
+      "releaseDate": "2025-12-22T00:00:00Z",
+      "runtime": 114,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 0,
+      "sortTitle": "eternity",
+      "statistics": {
+        "movieFileCount": 0,
+        "movieFileQualities": [],
+        "releaseGroups": [],
+        "sizeOnDisk": 0
+      },
+      "status": "released",
+      "studio": "A24",
+      "tags": [
+        1
+      ],
+      "title": "Eternity",
+      "titleSlug": "1259102",
+      "tmdbId": 1259102,
+      "website": "https://a24films.com/films/eternity",
+      "year": 2025,
+      "youTubeTrailerId": "GzkoY6hUvQQ"
+    }
+  ],
+  "recordedAt": "2026-11-11T12:12:58Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/calendar?start=2025-01-01T00:00:00Z&end=2025-12-31T00:00:00Z&unmonitored=true"
+  },
+  "status": 200
+}

@@ -9,6 +9,7 @@ use serde_json::{json, Value};
 use unarr_core::model::{CustomFormat, ProfileItem, ProviderKind, QualityProfile, RootFolder};
 use unarr_core::quality::{Quality, LANGUAGES, LAST_RELEASED_LANGUAGE_ID};
 use unarr_core::store;
+use unarr_core::Personality;
 
 use crate::error::{found, ApiResult};
 use crate::fs;
@@ -120,12 +121,26 @@ fn root_folder_resource(r: &RootFolder, series_paths: &[String]) -> Value {
     out
 }
 
+/// The folders of the library: one per series, or one per movie.
+fn library_paths(conn: &rusqlite::Connection, personality: Personality) -> anyhow::Result<Vec<String>> {
+    Ok(match personality {
+        Personality::Radarr => unarr_core::movies::store::list_movies(conn)?
+            .into_iter()
+            .map(|m| m.path)
+            .collect(),
+        Personality::Sonarr | Personality::Lidarr => {
+            store::series::list(conn)?.into_iter().map(|s| s.path).collect()
+        }
+    })
+}
+
 async fn root_folders_all(state: &AppState) -> anyhow::Result<Vec<Value>> {
+    let personality = state.personality();
     let (roots, paths) = state
         .db()
-        .call(|conn| {
+        .call(move |conn| {
             let roots = store::catalog::list_root_folders(conn)?;
-            let paths: Vec<String> = store::series::list(conn)?.into_iter().map(|s| s.path).collect();
+            let paths = library_paths(conn, personality)?;
             Ok((roots, paths))
         })
         .await?;
@@ -280,7 +295,7 @@ pub async fn quality_profile(State(state): State<AppState>, Path(id): Path<i64>)
 
 /// Stored specifications are `[{type, body}]`; the API shows each with its
 /// schema's field metadata and the body's values filled in.
-pub fn custom_format_resource(cf: &CustomFormat) -> Value {
+pub fn custom_format_resource(personality: Personality, cf: &CustomFormat) -> Value {
     let specs: Vec<Value> = cf
         .specifications
         .as_array()
@@ -299,7 +314,7 @@ pub fn custom_format_resource(cf: &CustomFormat) -> Value {
                         "fields": [],
                     });
                     if let Some(schema) =
-                        schemas::lookup(SchemaKind::CustomFormatSpecification, implementation)
+                        schemas::lookup(personality, SchemaKind::CustomFormatSpecification, implementation)
                     {
                         out["implementationName"] = schema["implementationName"].clone();
                         out["infoLink"] = schema["infoLink"].clone();
@@ -323,7 +338,12 @@ pub async fn custom_formats(State(state): State<AppState>) -> ApiResult<Json<Vec
         .db()
         .call(|c| store::catalog::list_custom_formats(c))
         .await?;
-    Ok(Json(formats.iter().map(custom_format_resource).collect()))
+    Ok(Json(
+        formats
+            .iter()
+            .map(|f| custom_format_resource(state.personality(), f))
+            .collect(),
+    ))
 }
 
 pub async fn custom_format(State(state): State<AppState>, Path(id): Path<i64>) -> ApiResult<Json<Value>> {
@@ -332,21 +352,25 @@ pub async fn custom_format(State(state): State<AppState>, Path(id): Path<i64>) -
         .call(|c| store::catalog::list_custom_formats(c))
         .await?;
     Ok(Json(found(
-        formats.iter().find(|f| f.id == id).map(custom_format_resource),
+        formats
+            .iter()
+            .find(|f| f.id == id)
+            .map(|f| custom_format_resource(state.personality(), f)),
     )?))
 }
 
 // --- disk space
 
 pub async fn disk_space(State(state): State<AppState>) -> ApiResult<Json<Vec<Value>>> {
+    let personality = state.personality();
     let (roots, paths) = state
         .db()
-        .call(|conn| {
+        .call(move |conn| {
             let roots: Vec<String> = store::catalog::list_root_folders(conn)?
                 .into_iter()
                 .map(|r| r.path)
                 .collect();
-            let paths: Vec<String> = store::series::list(conn)?.into_iter().map(|s| s.path).collect();
+            let paths = library_paths(conn, personality)?;
             Ok((roots, paths))
         })
         .await?;

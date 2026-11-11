@@ -1,0 +1,4958 @@
+{
+  "body": {
+    "page": 2,
+    "pageSize": 50,
+    "records": [
+      {
+        "customFormats": [
+          {
+            "id": 54,
+            "name": "DD"
+          }
+        ],
+        "date": "2026-03-30T05:30:03Z",
+        "id": 14,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "runningscared",
+          "digitalRelease": "2008-08-30T00:00:00Z",
+          "folderName": "/movies/Running Scared (2006)",
+          "genres": [
+            "Action",
+            "Crime",
+            "Drama",
+            "Thriller"
+          ],
+          "id": 87,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/f2LU6M8wFmt6G1fzv9JFWbIkRd9.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/p5z5X3GRnaFEqgtEa7fiGhgtUkA.jpg"
+            }
+          ],
+          "imdbId": "tt0404390",
+          "inCinemas": "2006-01-06T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "ankle holster",
+            "bratva (russian mafia)",
+            "breaking finger",
+            "hidden identity",
+            "pedophile",
+            "police investigation",
+            "racism",
+            "shot",
+            "undercover agent"
+          ],
+          "lastSearchTime": "2026-06-14T07:08:03Z",
+          "minimumAvailability": "released",
+          "monitored": false,
+          "movieFileId": 242,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Running Scared",
+          "overview": "A low-ranking thug is entrusted by his boss to dispose of a gun that killed corrupt cops, but things spiral out of control when the gun ends up in wrong hands.",
+          "path": "/movies/Running Scared (2006)",
+          "physicalRelease": "2006-10-26T00:00:00Z",
+          "popularity": 2.385,
+          "qualityProfileId": 9,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 7.3,
+              "votes": 107614
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 41,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 41,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7,
+              "votes": 1230
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.1082,
+              "votes": 1756
+            }
+          },
+          "releaseDate": "2006-10-26T00:00:00Z",
+          "runtime": 122,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "running scared",
+          "status": "released",
+          "studio": "True Grit Productions",
+          "tags": [
+            1
+          ],
+          "title": "Running Scared",
+          "titleSlug": "7304",
+          "tmdbId": 7304,
+          "website": "https://www.warnerbros.com/running-scared",
+          "year": 2006,
+          "youTubeTrailerId": "bBboyvN3s-o"
+        },
+        "movieId": 87,
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 20,
+            "modifier": "none",
+            "name": "Bluray-480p",
+            "resolution": 480,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "Running Scared (2006) BRrip XviD   Italian English Ac3.5.1 Sub ita eng MIRCrew"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 54,
+            "name": "DD"
+          }
+        ],
+        "date": "2026-05-13T19:14:24Z",
+        "id": 36,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-05-13T19:02:04Z",
+          "alternateTitles": [],
+          "certification": "PG-13",
+          "cleanTitle": "themartian",
+          "digitalRelease": "2015-12-22T00:00:00Z",
+          "folderName": "/movies/The Martian (2015) {tmdb-286217}",
+          "genres": [
+            "Science Fiction",
+            "Drama",
+            "Adventure"
+          ],
+          "id": 203,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/5BHuvQ6p9kfc091Z8RiFNhCwL4b.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/lzMS0CI3FLQYC5EgJoWeIaEt0lm.jpg"
+            }
+          ],
+          "imdbId": "tt3659388",
+          "inCinemas": "2015-09-30T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "2030s",
+            "aftercreditsstinger",
+            "astronaut",
+            "based on novel or book",
+            "botanist",
+            "deep space",
+            "duringcreditsstinger",
+            "engineering",
+            "faithful adaptation",
+            "isolation",
+            "nasa",
+            "planet mars",
+            "space",
+            "spacecraft",
+            "stranded",
+            "struggle for survival",
+            "survival"
+          ],
+          "lastSearchTime": "2026-05-13T19:15:51Z",
+          "minimumAvailability": "released",
+          "monitored": false,
+          "movieFileId": 222,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "The Martian",
+          "overview": "During a manned mission to Mars, Astronaut Mark Watney is presumed dead after a fierce storm and left behind by his crew. But Watney has survived and finds himself stranded and alone on the hostile planet. With only meager supplies, he must draw upon his ingenuity, wit and spirit to subsist and find a way to signal to Earth that he is alive.",
+          "path": "/movies/The Martian (2015) {tmdb-286217}",
+          "physicalRelease": "2016-01-12T00:00:00Z",
+          "popularity": 17.6128,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 8,
+              "votes": 1036143
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 80,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 91,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7.713,
+              "votes": 22098
+            },
+            "trakt": {
+              "type": "user",
+              "value": 8.12433,
+              "votes": 38406
+            }
+          },
+          "releaseDate": "2015-12-22T00:00:00Z",
+          "runtime": 141,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "martian",
+          "status": "released",
+          "studio": "Genre Films",
+          "tags": [
+            1
+          ],
+          "title": "The Martian",
+          "titleSlug": "286217",
+          "tmdbId": 286217,
+          "website": "https://www.20thcenturystudios.com/movies/the-martian",
+          "year": 2015,
+          "youTubeTrailerId": "ej3ioOneTy8"
+        },
+        "movieId": 203,
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 0,
+            "modifier": "none",
+            "name": "Unknown",
+            "resolution": 0,
+            "source": "unknown"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "Sopravvissuto The Martian 2015 Italian AC3 Webdlrip XviD-CRIME"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 54,
+            "name": "DD"
+          }
+        ],
+        "date": "2026-05-13T19:15:24Z",
+        "id": 37,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-05-13T19:02:04Z",
+          "alternateTitles": [],
+          "certification": "PG-13",
+          "cleanTitle": "themartian",
+          "digitalRelease": "2015-12-22T00:00:00Z",
+          "folderName": "/movies/The Martian (2015) {tmdb-286217}",
+          "genres": [
+            "Science Fiction",
+            "Drama",
+            "Adventure"
+          ],
+          "id": 203,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/5BHuvQ6p9kfc091Z8RiFNhCwL4b.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/lzMS0CI3FLQYC5EgJoWeIaEt0lm.jpg"
+            }
+          ],
+          "imdbId": "tt3659388",
+          "inCinemas": "2015-09-30T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "2030s",
+            "aftercreditsstinger",
+            "astronaut",
+            "based on novel or book",
+            "botanist",
+            "deep space",
+            "duringcreditsstinger",
+            "engineering",
+            "faithful adaptation",
+            "isolation",
+            "nasa",
+            "planet mars",
+            "space",
+            "spacecraft",
+            "stranded",
+            "struggle for survival",
+            "survival"
+          ],
+          "lastSearchTime": "2026-05-13T19:15:51Z",
+          "minimumAvailability": "released",
+          "monitored": false,
+          "movieFileId": 222,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "The Martian",
+          "overview": "During a manned mission to Mars, Astronaut Mark Watney is presumed dead after a fierce storm and left behind by his crew. But Watney has survived and finds himself stranded and alone on the hostile planet. With only meager supplies, he must draw upon his ingenuity, wit and spirit to subsist and find a way to signal to Earth that he is alive.",
+          "path": "/movies/The Martian (2015) {tmdb-286217}",
+          "physicalRelease": "2016-01-12T00:00:00Z",
+          "popularity": 17.6128,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 8,
+              "votes": 1036143
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 80,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 91,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7.713,
+              "votes": 22098
+            },
+            "trakt": {
+              "type": "user",
+              "value": 8.12433,
+              "votes": 38406
+            }
+          },
+          "releaseDate": "2015-12-22T00:00:00Z",
+          "runtime": 141,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "martian",
+          "status": "released",
+          "studio": "Genre Films",
+          "tags": [
+            1
+          ],
+          "title": "The Martian",
+          "titleSlug": "286217",
+          "tmdbId": 286217,
+          "website": "https://www.20thcenturystudios.com/movies/the-martian",
+          "year": 2015,
+          "youTubeTrailerId": "ej3ioOneTy8"
+        },
+        "movieId": 203,
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 0,
+            "modifier": "none",
+            "name": "Unknown",
+            "resolution": 0,
+            "source": "unknown"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "Sopravvissuto The Martian 2015 Italian AC3 Webdlrip XviD-CRIME"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 54,
+            "name": "DD"
+          }
+        ],
+        "date": "2026-05-13T19:07:21Z",
+        "id": 34,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-05-13T19:02:04Z",
+          "alternateTitles": [],
+          "certification": "PG-13",
+          "cleanTitle": "themartian",
+          "digitalRelease": "2015-12-22T00:00:00Z",
+          "folderName": "/movies/The Martian (2015) {tmdb-286217}",
+          "genres": [
+            "Science Fiction",
+            "Drama",
+            "Adventure"
+          ],
+          "id": 203,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/5BHuvQ6p9kfc091Z8RiFNhCwL4b.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/lzMS0CI3FLQYC5EgJoWeIaEt0lm.jpg"
+            }
+          ],
+          "imdbId": "tt3659388",
+          "inCinemas": "2015-09-30T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "2030s",
+            "aftercreditsstinger",
+            "astronaut",
+            "based on novel or book",
+            "botanist",
+            "deep space",
+            "duringcreditsstinger",
+            "engineering",
+            "faithful adaptation",
+            "isolation",
+            "nasa",
+            "planet mars",
+            "space",
+            "spacecraft",
+            "stranded",
+            "struggle for survival",
+            "survival"
+          ],
+          "lastSearchTime": "2026-05-13T19:15:51Z",
+          "minimumAvailability": "released",
+          "monitored": false,
+          "movieFileId": 222,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "The Martian",
+          "overview": "During a manned mission to Mars, Astronaut Mark Watney is presumed dead after a fierce storm and left behind by his crew. But Watney has survived and finds himself stranded and alone on the hostile planet. With only meager supplies, he must draw upon his ingenuity, wit and spirit to subsist and find a way to signal to Earth that he is alive.",
+          "path": "/movies/The Martian (2015) {tmdb-286217}",
+          "physicalRelease": "2016-01-12T00:00:00Z",
+          "popularity": 17.6128,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 8,
+              "votes": 1036143
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 80,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 91,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7.713,
+              "votes": 22098
+            },
+            "trakt": {
+              "type": "user",
+              "value": 8.12433,
+              "votes": 38406
+            }
+          },
+          "releaseDate": "2015-12-22T00:00:00Z",
+          "runtime": 141,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "martian",
+          "status": "released",
+          "studio": "Genre Films",
+          "tags": [
+            1
+          ],
+          "title": "The Martian",
+          "titleSlug": "286217",
+          "tmdbId": 286217,
+          "website": "https://www.20thcenturystudios.com/movies/the-martian",
+          "year": 2015,
+          "youTubeTrailerId": "ej3ioOneTy8"
+        },
+        "movieId": 203,
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 0,
+            "modifier": "none",
+            "name": "Unknown",
+            "resolution": 0,
+            "source": "unknown"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "Sopravvissuto.The.Martian.2015.iTALiAN.AC3.WEBDLRip.XviD-CRiME"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 54,
+            "name": "DD"
+          }
+        ],
+        "date": "2026-05-13T19:12:23Z",
+        "id": 35,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-05-13T19:02:04Z",
+          "alternateTitles": [],
+          "certification": "PG-13",
+          "cleanTitle": "themartian",
+          "digitalRelease": "2015-12-22T00:00:00Z",
+          "folderName": "/movies/The Martian (2015) {tmdb-286217}",
+          "genres": [
+            "Science Fiction",
+            "Drama",
+            "Adventure"
+          ],
+          "id": 203,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/5BHuvQ6p9kfc091Z8RiFNhCwL4b.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/lzMS0CI3FLQYC5EgJoWeIaEt0lm.jpg"
+            }
+          ],
+          "imdbId": "tt3659388",
+          "inCinemas": "2015-09-30T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "2030s",
+            "aftercreditsstinger",
+            "astronaut",
+            "based on novel or book",
+            "botanist",
+            "deep space",
+            "duringcreditsstinger",
+            "engineering",
+            "faithful adaptation",
+            "isolation",
+            "nasa",
+            "planet mars",
+            "space",
+            "spacecraft",
+            "stranded",
+            "struggle for survival",
+            "survival"
+          ],
+          "lastSearchTime": "2026-05-13T19:15:51Z",
+          "minimumAvailability": "released",
+          "monitored": false,
+          "movieFileId": 222,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "The Martian",
+          "overview": "During a manned mission to Mars, Astronaut Mark Watney is presumed dead after a fierce storm and left behind by his crew. But Watney has survived and finds himself stranded and alone on the hostile planet. With only meager supplies, he must draw upon his ingenuity, wit and spirit to subsist and find a way to signal to Earth that he is alive.",
+          "path": "/movies/The Martian (2015) {tmdb-286217}",
+          "physicalRelease": "2016-01-12T00:00:00Z",
+          "popularity": 17.6128,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 8,
+              "votes": 1036143
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 80,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 91,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7.713,
+              "votes": 22098
+            },
+            "trakt": {
+              "type": "user",
+              "value": 8.12433,
+              "votes": 38406
+            }
+          },
+          "releaseDate": "2015-12-22T00:00:00Z",
+          "runtime": 141,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "martian",
+          "status": "released",
+          "studio": "Genre Films",
+          "tags": [
+            1
+          ],
+          "title": "The Martian",
+          "titleSlug": "286217",
+          "tmdbId": 286217,
+          "website": "https://www.20thcenturystudios.com/movies/the-martian",
+          "year": 2015,
+          "youTubeTrailerId": "ej3ioOneTy8"
+        },
+        "movieId": 203,
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 0,
+            "modifier": "none",
+            "name": "Unknown",
+            "resolution": 0,
+            "source": "unknown"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "Sopravvissuto.The.Martian.2015.iTALiAN.AC3.WEBDLRip.XviD-CRiME"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 54,
+            "name": "DD"
+          }
+        ],
+        "date": "2026-05-13T19:15:46Z",
+        "id": 38,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-05-13T19:02:04Z",
+          "alternateTitles": [],
+          "certification": "PG-13",
+          "cleanTitle": "themartian",
+          "digitalRelease": "2015-12-22T00:00:00Z",
+          "folderName": "/movies/The Martian (2015) {tmdb-286217}",
+          "genres": [
+            "Science Fiction",
+            "Drama",
+            "Adventure"
+          ],
+          "id": 203,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/5BHuvQ6p9kfc091Z8RiFNhCwL4b.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/lzMS0CI3FLQYC5EgJoWeIaEt0lm.jpg"
+            }
+          ],
+          "imdbId": "tt3659388",
+          "inCinemas": "2015-09-30T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "2030s",
+            "aftercreditsstinger",
+            "astronaut",
+            "based on novel or book",
+            "botanist",
+            "deep space",
+            "duringcreditsstinger",
+            "engineering",
+            "faithful adaptation",
+            "isolation",
+            "nasa",
+            "planet mars",
+            "space",
+            "spacecraft",
+            "stranded",
+            "struggle for survival",
+            "survival"
+          ],
+          "lastSearchTime": "2026-05-13T19:15:51Z",
+          "minimumAvailability": "released",
+          "monitored": false,
+          "movieFileId": 222,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "The Martian",
+          "overview": "During a manned mission to Mars, Astronaut Mark Watney is presumed dead after a fierce storm and left behind by his crew. But Watney has survived and finds himself stranded and alone on the hostile planet. With only meager supplies, he must draw upon his ingenuity, wit and spirit to subsist and find a way to signal to Earth that he is alive.",
+          "path": "/movies/The Martian (2015) {tmdb-286217}",
+          "physicalRelease": "2016-01-12T00:00:00Z",
+          "popularity": 17.6128,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 8,
+              "votes": 1036143
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 80,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 91,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7.713,
+              "votes": 22098
+            },
+            "trakt": {
+              "type": "user",
+              "value": 8.12433,
+              "votes": 38406
+            }
+          },
+          "releaseDate": "2015-12-22T00:00:00Z",
+          "runtime": 141,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "martian",
+          "status": "released",
+          "studio": "Genre Films",
+          "tags": [
+            1
+          ],
+          "title": "The Martian",
+          "titleSlug": "286217",
+          "tmdbId": 286217,
+          "website": "https://www.20thcenturystudios.com/movies/the-martian",
+          "year": 2015,
+          "youTubeTrailerId": "ej3ioOneTy8"
+        },
+        "movieId": 203,
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 0,
+            "modifier": "none",
+            "name": "Unknown",
+            "resolution": 0,
+            "source": "unknown"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "Sopravvissuto.The.Martian.2015.iTALiAN.AC3.WEBDLRip.XviD-CRiME"
+      },
+      {
+        "customFormats": [],
+        "date": "2026-11-02T19:24:44Z",
+        "id": 113,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-10-30T22:53:18Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "splinter",
+          "folderName": "/movies/Splinter (2008)",
+          "genres": [
+            "Horror",
+            "Thriller",
+            "Crime",
+            "Science Fiction"
+          ],
+          "id": 319,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/tFNReQlU92jmN7uuR1HHLiFkEua.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/h6NOPc2nUoKmobs5lia33z4syNM.jpg"
+            }
+          ],
+          "imdbId": "tt1031280",
+          "inCinemas": "2009-04-23T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "alien infection",
+            "creature",
+            "monster"
+          ],
+          "lastSearchTime": "2026-11-02T19:24:56Z",
+          "minimumAvailability": "released",
+          "monitored": false,
+          "movieFileId": 397,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Splinter",
+          "overview": "When their plans for a nature trip go awry, Polly and boyfriend Seth decide to check into a motel. On their way, they're carjacked and kidnapped by low-rent crooks Dennis and Lacey, who take the victims and their SUV to a nearby gas station. Along the way, they encounter an increasingly terrifying horde of parasites, and if any of them intend to survive, they'll have to outsmart the deadly organisms.",
+          "path": "/movies/Splinter (2008)",
+          "physicalRelease": "2009-03-30T00:00:00Z",
+          "popularity": 7.2814,
+          "qualityProfileId": 10,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.1,
+              "votes": 45014
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 58,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 74,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.2,
+              "votes": 858
+            },
+            "trakt": {
+              "type": "user",
+              "value": 6.3045,
+              "votes": 1156
+            }
+          },
+          "releaseDate": "2009-03-30T00:00:00Z",
+          "runtime": 82,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "splinter",
+          "status": "released",
+          "studio": "Indion Entertainment Group",
+          "tags": [],
+          "title": "Splinter",
+          "titleSlug": "13220",
+          "tmdbId": 13220,
+          "website": "",
+          "year": 2008,
+          "youTubeTrailerId": "LYfvKLhG4Iw"
+        },
+        "movieId": 319,
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 6,
+            "modifier": "none",
+            "name": "Bluray-720p",
+            "resolution": 720,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "Splinter.(2008).BluRay.ita.mp4"
+      },
+      {
+        "customFormats": [],
+        "date": "2026-04-01T07:15:02Z",
+        "id": 23,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "swissarmyman",
+          "digitalRelease": "2016-10-14T00:00:00Z",
+          "folderName": "/movies/Swiss Army Man (2016)",
+          "genres": [
+            "Comedy",
+            "Drama",
+            "Romance",
+            "Fantasy",
+            "Adventure"
+          ],
+          "id": 101,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/xE2QfqvAGI8n8ckIiy9FzS9XF94.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/xo6Sedrdj4DVnh4ZEzDM4D0QQYU.jpg"
+            }
+          ],
+          "imdbId": "tt4034354",
+          "inCinemas": "2016-06-24T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "beach",
+            "buddy comedy",
+            "corpse",
+            "dead body",
+            "deserted island",
+            "fart",
+            "friends",
+            "survival"
+          ],
+          "lastSearchTime": "2026-04-01T07:22:00Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Swiss Army Man",
+          "overview": "Alone on a tiny deserted island, Hank has given up all hope of ever making it home again. But one day everything changes when a dead body washes ashore, and he soon realizes it may be his last opportunity to escape certain death. Armed with his new “friend” and an unusual bag of tricks, the duo go on an epic adventure to bring Hank back to the woman of his dreams.",
+          "path": "/movies/Swiss Army Man (2016)",
+          "physicalRelease": "2016-10-04T00:00:00Z",
+          "popularity": 4.8761,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.9,
+              "votes": 143315
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 64,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 73,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.903,
+              "votes": 3963
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.02255,
+              "votes": 6520
+            }
+          },
+          "releaseDate": "2016-10-04T00:00:00Z",
+          "runtime": 97,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "swiss army man",
+          "status": "released",
+          "studio": "BlackBird",
+          "tags": [
+            1
+          ],
+          "title": "Swiss Army Man",
+          "titleSlug": "347031",
+          "tmdbId": 347031,
+          "website": "http://swissarmyman.com/",
+          "year": 2016,
+          "youTubeTrailerId": "4v92gXetGqA"
+        },
+        "movieId": 101,
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "Swiss Army Man Un Amico Multiuso 2016 iTA ENG Bluray 1080p x264 Bymonello78 mkv"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 55,
+            "name": "HDR"
+          }
+        ],
+        "date": "2026-03-31T20:43:05Z",
+        "id": 19,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "terminator2judgmentday",
+          "collection": {
+            "title": "The Terminator Collection",
+            "tmdbId": 528
+          },
+          "digitalRelease": "1995-10-08T00:00:00Z",
+          "folderName": "/movies/Terminator 2 Judgment Day (1991)",
+          "genres": [
+            "Action",
+            "Thriller",
+            "Science Fiction"
+          ],
+          "id": 103,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/jFTVD4XoWQTcg7wdyJKa8PEds5q.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/izkMjmhauFx9DjoBQqM5sM5WAwE.jpg"
+            }
+          ],
+          "imdbId": "tt0103064",
+          "inCinemas": "1991-07-03T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "action hero",
+            "artificial intelligence (a.i.)",
+            "catch phrase",
+            "cyborg",
+            "dystopia",
+            "fictional war",
+            "good versus evil",
+            "juvenile delinquent",
+            "man vs machine",
+            "mental institution",
+            "moral ambiguity",
+            "morphing",
+            "nuclear weapons",
+            "post-apocalyptic future",
+            "savior",
+            "sequel",
+            "shape shifter",
+            "shotgun",
+            "time travel",
+            "troubled teen",
+            "urban setting",
+            "villain"
+          ],
+          "lastSearchTime": "2026-11-01T16:29:46Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 392,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Terminator 2: Judgment Day",
+          "overview": "Ten years after the events of the original, a reprogrammed T-800 is sent back in time to protect young John Connor from the shape-shifting T-1000. Together with his mother Sarah, he fights to stop Skynet from triggering a nuclear apocalypse.",
+          "path": "/movies/Terminator 2 Judgment Day (1991)",
+          "physicalRelease": "1991-12-11T00:00:00Z",
+          "popularity": 22.0019,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 8.6,
+              "votes": 1310120
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 75,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 90,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 8.177,
+              "votes": 15172
+            },
+            "trakt": {
+              "type": "user",
+              "value": 8.51585,
+              "votes": 25967
+            }
+          },
+          "releaseDate": "1991-12-11T00:00:00Z",
+          "runtime": 137,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "terminator 2 judgment day",
+          "status": "released",
+          "studio": "Carolco Pictures",
+          "tags": [
+            1
+          ],
+          "title": "Terminator 2: Judgment Day",
+          "titleSlug": "280",
+          "tmdbId": 280,
+          "website": "https://www.lionsgate.com/movies/terminator-2-judgment-day",
+          "year": 1991,
+          "youTubeTrailerId": "BuBD2s2NmEM"
+        },
+        "movieId": 103,
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 31,
+            "modifier": "remux",
+            "name": "Remux-2160p",
+            "resolution": 2160,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "Terminator.2.Judgment.Day.1991.4K.HDR.DV.2160p.BDRemux.Ita.Eng.x265-NAHOM"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 46,
+            "name": "DTS-HD MA"
+          },
+          {
+            "id": 58,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 12,
+            "name": "LQ"
+          }
+        ],
+        "date": "2026-03-28T23:18:18Z",
+        "id": 9,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "terminator2judgmentday",
+          "collection": {
+            "title": "The Terminator Collection",
+            "tmdbId": 528
+          },
+          "digitalRelease": "1995-10-08T00:00:00Z",
+          "folderName": "/movies/Terminator 2 Judgment Day (1991)",
+          "genres": [
+            "Action",
+            "Thriller",
+            "Science Fiction"
+          ],
+          "id": 103,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/jFTVD4XoWQTcg7wdyJKa8PEds5q.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/izkMjmhauFx9DjoBQqM5sM5WAwE.jpg"
+            }
+          ],
+          "imdbId": "tt0103064",
+          "inCinemas": "1991-07-03T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "action hero",
+            "artificial intelligence (a.i.)",
+            "catch phrase",
+            "cyborg",
+            "dystopia",
+            "fictional war",
+            "good versus evil",
+            "juvenile delinquent",
+            "man vs machine",
+            "mental institution",
+            "moral ambiguity",
+            "morphing",
+            "nuclear weapons",
+            "post-apocalyptic future",
+            "savior",
+            "sequel",
+            "shape shifter",
+            "shotgun",
+            "time travel",
+            "troubled teen",
+            "urban setting",
+            "villain"
+          ],
+          "lastSearchTime": "2026-11-01T16:29:46Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 392,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Terminator 2: Judgment Day",
+          "overview": "Ten years after the events of the original, a reprogrammed T-800 is sent back in time to protect young John Connor from the shape-shifting T-1000. Together with his mother Sarah, he fights to stop Skynet from triggering a nuclear apocalypse.",
+          "path": "/movies/Terminator 2 Judgment Day (1991)",
+          "physicalRelease": "1991-12-11T00:00:00Z",
+          "popularity": 22.0019,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 8.6,
+              "votes": 1310120
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 75,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 90,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 8.177,
+              "votes": 15172
+            },
+            "trakt": {
+              "type": "user",
+              "value": 8.51585,
+              "votes": 25967
+            }
+          },
+          "releaseDate": "1991-12-11T00:00:00Z",
+          "runtime": 137,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "terminator 2 judgment day",
+          "status": "released",
+          "studio": "Carolco Pictures",
+          "tags": [
+            1
+          ],
+          "title": "Terminator 2: Judgment Day",
+          "titleSlug": "280",
+          "tmdbId": 280,
+          "website": "https://www.lionsgate.com/movies/terminator-2-judgment-day",
+          "year": 1991,
+          "youTubeTrailerId": "BuBD2s2NmEM"
+        },
+        "movieId": 103,
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 30,
+            "modifier": "remux",
+            "name": "Remux-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "Terminator.2.Judgment.Day.1991.EXTENDED.REMASTERED.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-FGT"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 46,
+            "name": "DTS-HD MA"
+          },
+          {
+            "id": 55,
+            "name": "HDR"
+          }
+        ],
+        "date": "2026-03-31T15:42:01Z",
+        "id": 15,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 2,
+            "name": "French"
+          },
+          {
+            "id": 4,
+            "name": "German"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "terminator2judgmentday",
+          "collection": {
+            "title": "The Terminator Collection",
+            "tmdbId": 528
+          },
+          "digitalRelease": "1995-10-08T00:00:00Z",
+          "folderName": "/movies/Terminator 2 Judgment Day (1991)",
+          "genres": [
+            "Action",
+            "Thriller",
+            "Science Fiction"
+          ],
+          "id": 103,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/jFTVD4XoWQTcg7wdyJKa8PEds5q.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/izkMjmhauFx9DjoBQqM5sM5WAwE.jpg"
+            }
+          ],
+          "imdbId": "tt0103064",
+          "inCinemas": "1991-07-03T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "action hero",
+            "artificial intelligence (a.i.)",
+            "catch phrase",
+            "cyborg",
+            "dystopia",
+            "fictional war",
+            "good versus evil",
+            "juvenile delinquent",
+            "man vs machine",
+            "mental institution",
+            "moral ambiguity",
+            "morphing",
+            "nuclear weapons",
+            "post-apocalyptic future",
+            "savior",
+            "sequel",
+            "shape shifter",
+            "shotgun",
+            "time travel",
+            "troubled teen",
+            "urban setting",
+            "villain"
+          ],
+          "lastSearchTime": "2026-11-01T16:29:46Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 392,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Terminator 2: Judgment Day",
+          "overview": "Ten years after the events of the original, a reprogrammed T-800 is sent back in time to protect young John Connor from the shape-shifting T-1000. Together with his mother Sarah, he fights to stop Skynet from triggering a nuclear apocalypse.",
+          "path": "/movies/Terminator 2 Judgment Day (1991)",
+          "physicalRelease": "1991-12-11T00:00:00Z",
+          "popularity": 22.0019,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 8.6,
+              "votes": 1310120
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 75,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 90,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 8.177,
+              "votes": 15172
+            },
+            "trakt": {
+              "type": "user",
+              "value": 8.51585,
+              "votes": 25967
+            }
+          },
+          "releaseDate": "1991-12-11T00:00:00Z",
+          "runtime": 137,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "terminator 2 judgment day",
+          "status": "released",
+          "studio": "Carolco Pictures",
+          "tags": [
+            1
+          ],
+          "title": "Terminator 2: Judgment Day",
+          "titleSlug": "280",
+          "tmdbId": 280,
+          "website": "https://www.lionsgate.com/movies/terminator-2-judgment-day",
+          "year": 1991,
+          "youTubeTrailerId": "BuBD2s2NmEM"
+        },
+        "movieId": 103,
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 31,
+            "modifier": "remux",
+            "name": "Remux-2160p",
+            "resolution": 2160,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "Terminator.2.Judgment.Day.1991.Theatrical.Cut.Eng.Fre.Ger.Ita.Spa.2160p.BluRay.Remux.HDR.HEVC.DTS-HD.MA-SGF"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 18,
+            "name": "x265 (HD)"
+          },
+          {
+            "id": 56,
+            "name": "x265 (no HDR/DV)"
+          }
+        ],
+        "date": "2026-06-14T07:57:22Z",
+        "id": 53,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "thebookeli",
+          "digitalRelease": "2012-01-07T00:00:00Z",
+          "folderName": "/movies/The Book of Eli (2010)",
+          "genres": [
+            "Action",
+            "Thriller",
+            "Science Fiction"
+          ],
+          "id": 105,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg"
+            }
+          ],
+          "imdbId": "tt1037705",
+          "inCinemas": "2010-01-14T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "2040s",
+            "bible",
+            "blind",
+            "brutality",
+            "cannibal",
+            "carnage",
+            "chaos",
+            "combat",
+            "dystopia",
+            "faith",
+            "grimdark",
+            "gunfight",
+            "post-apocalyptic future",
+            "survival"
+          ],
+          "lastSearchTime": "2026-09-13T07:05:09Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "The Book of Eli",
+          "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+          "path": "/movies/The Book of Eli (2010)",
+          "physicalRelease": "2010-06-15T00:00:00Z",
+          "popularity": 17.3108,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.8,
+              "votes": 365126
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 53,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 46,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.811,
+              "votes": 6958
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.1625,
+              "votes": 12203
+            }
+          },
+          "releaseDate": "2010-06-15T00:00:00Z",
+          "runtime": 118,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "book of eli",
+          "status": "released",
+          "studio": "Alcon Entertainment",
+          "tags": [],
+          "title": "The Book of Eli",
+          "titleSlug": "20504",
+          "tmdbId": 20504,
+          "website": "",
+          "year": 2010,
+          "youTubeTrailerId": "yAQcwKY0Dik"
+        },
+        "movieId": 105,
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 9,
+            "modifier": "none",
+            "name": "HDTV-1080p",
+            "resolution": 1080,
+            "source": "tv"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "The Book of Eli (2010 ITA/ENG) [1080p x265] [Paso77]"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 18,
+            "name": "x265 (HD)"
+          },
+          {
+            "id": 56,
+            "name": "x265 (no HDR/DV)"
+          }
+        ],
+        "date": "2026-08-23T18:50:29Z",
+        "id": 83,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "thebookeli",
+          "digitalRelease": "2012-01-07T00:00:00Z",
+          "folderName": "/movies/The Book of Eli (2010)",
+          "genres": [
+            "Action",
+            "Thriller",
+            "Science Fiction"
+          ],
+          "id": 105,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg"
+            }
+          ],
+          "imdbId": "tt1037705",
+          "inCinemas": "2010-01-14T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "2040s",
+            "bible",
+            "blind",
+            "brutality",
+            "cannibal",
+            "carnage",
+            "chaos",
+            "combat",
+            "dystopia",
+            "faith",
+            "grimdark",
+            "gunfight",
+            "post-apocalyptic future",
+            "survival"
+          ],
+          "lastSearchTime": "2026-09-13T07:05:09Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "The Book of Eli",
+          "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+          "path": "/movies/The Book of Eli (2010)",
+          "physicalRelease": "2010-06-15T00:00:00Z",
+          "popularity": 17.3108,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.8,
+              "votes": 365126
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 53,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 46,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.811,
+              "votes": 6958
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.1625,
+              "votes": 12203
+            }
+          },
+          "releaseDate": "2010-06-15T00:00:00Z",
+          "runtime": 118,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "book of eli",
+          "status": "released",
+          "studio": "Alcon Entertainment",
+          "tags": [],
+          "title": "The Book of Eli",
+          "titleSlug": "20504",
+          "tmdbId": 20504,
+          "website": "",
+          "year": 2010,
+          "youTubeTrailerId": "yAQcwKY0Dik"
+        },
+        "movieId": 105,
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 9,
+            "modifier": "none",
+            "name": "HDTV-1080p",
+            "resolution": 1080,
+            "source": "tv"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "The Book of Eli (2010 ITA/ENG) [1080p x265] [Paso77]"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 54,
+            "name": "DD"
+          }
+        ],
+        "date": "2026-11-01T16:38:28Z",
+        "id": 108,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "PG-13",
+          "cleanTitle": "thedarkknight",
+          "collection": {
+            "title": "The Dark Knight Collection",
+            "tmdbId": 263
+          },
+          "digitalRelease": "2011-01-29T00:00:00Z",
+          "folderName": "/movies/The Dark Knight (2008)",
+          "genres": [
+            "Action",
+            "Thriller",
+            "Crime"
+          ],
+          "id": 107,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/qJ2tW6WMUDux911r6m7haRef0WH.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/cfT29Im5VDvjE0RpyKOSdCKZal7.jpg"
+            }
+          ],
+          "imdbId": "tt0468569",
+          "inCinemas": "2008-07-16T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "anti hero",
+            "anti villain",
+            "based on comic",
+            "bold",
+            "chaos",
+            "crime fighter",
+            "criminal mastermind",
+            "district attorney",
+            "neo-noir",
+            "organized crime",
+            "sadism",
+            "scarecrow",
+            "secret identity",
+            "super power",
+            "super villain",
+            "superhero",
+            "tragic hero",
+            "vigilante"
+          ],
+          "lastSearchTime": "2026-11-02T14:28:06Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 394,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "The Dark Knight",
+          "overview": "Batman raises the stakes in his war on crime. With the help of Lt. Jim Gordon and District Attorney Harvey Dent, Batman sets out to dismantle the remaining criminal organizations that plague the streets. The partnership proves to be effective, but they soon find themselves prey to a reign of chaos unleashed by a rising criminal mastermind known to the terrified citizens of Gotham as the Joker.",
+          "path": "/movies/The Dark Knight (2008)",
+          "physicalRelease": "2008-10-22T00:00:00Z",
+          "popularity": 462.4186,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 9.1,
+              "votes": 3248829
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 85,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 94,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 8.54,
+              "votes": 37321
+            },
+            "trakt": {
+              "type": "user",
+              "value": 8.95208,
+              "votes": 59657
+            }
+          },
+          "releaseDate": "2008-10-22T00:00:00Z",
+          "runtime": 152,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "dark knight",
+          "status": "released",
+          "studio": "Warner Bros. Pictures",
+          "tags": [
+            1
+          ],
+          "title": "The Dark Knight",
+          "titleSlug": "155",
+          "tmdbId": 155,
+          "website": "https://www.warnerbros.com/movies/dark-knight/",
+          "year": 2008,
+          "youTubeTrailerId": "_PZpmTj1Q8Q"
+        },
+        "movieId": 107,
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "The Dark Knight (2008) [BDrip 1080p - H264 - Ita Eng Ac3] [Tntvi"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 18,
+            "name": "x265 (HD)"
+          },
+          {
+            "id": 56,
+            "name": "x265 (no HDR/DV)"
+          }
+        ],
+        "date": "2026-11-02T14:27:54Z",
+        "id": 110,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "PG-13",
+          "cleanTitle": "thedarkknight",
+          "collection": {
+            "title": "The Dark Knight Collection",
+            "tmdbId": 263
+          },
+          "digitalRelease": "2011-01-29T00:00:00Z",
+          "folderName": "/movies/The Dark Knight (2008)",
+          "genres": [
+            "Action",
+            "Thriller",
+            "Crime"
+          ],
+          "id": 107,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/qJ2tW6WMUDux911r6m7haRef0WH.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/cfT29Im5VDvjE0RpyKOSdCKZal7.jpg"
+            }
+          ],
+          "imdbId": "tt0468569",
+          "inCinemas": "2008-07-16T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "anti hero",
+            "anti villain",
+            "based on comic",
+            "bold",
+            "chaos",
+            "crime fighter",
+            "criminal mastermind",
+            "district attorney",
+            "neo-noir",
+            "organized crime",
+            "sadism",
+            "scarecrow",
+            "secret identity",
+            "super power",
+            "super villain",
+            "superhero",
+            "tragic hero",
+            "vigilante"
+          ],
+          "lastSearchTime": "2026-11-02T14:28:06Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 394,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "The Dark Knight",
+          "overview": "Batman raises the stakes in his war on crime. With the help of Lt. Jim Gordon and District Attorney Harvey Dent, Batman sets out to dismantle the remaining criminal organizations that plague the streets. The partnership proves to be effective, but they soon find themselves prey to a reign of chaos unleashed by a rising criminal mastermind known to the terrified citizens of Gotham as the Joker.",
+          "path": "/movies/The Dark Knight (2008)",
+          "physicalRelease": "2008-10-22T00:00:00Z",
+          "popularity": 462.4186,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 9.1,
+              "votes": 3248829
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 85,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 94,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 8.54,
+              "votes": 37321
+            },
+            "trakt": {
+              "type": "user",
+              "value": 8.95208,
+              "votes": 59657
+            }
+          },
+          "releaseDate": "2008-10-22T00:00:00Z",
+          "runtime": 152,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "dark knight",
+          "status": "released",
+          "studio": "Warner Bros. Pictures",
+          "tags": [
+            1
+          ],
+          "title": "The Dark Knight",
+          "titleSlug": "155",
+          "tmdbId": 155,
+          "website": "https://www.warnerbros.com/movies/dark-knight/",
+          "year": 2008,
+          "youTubeTrailerId": "_PZpmTj1Q8Q"
+        },
+        "movieId": 107,
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "The Dark Knight 2008 BDRip ITA ENG IMAX 1080p x265 Paso77.mkv"
+      },
+      {
+        "customFormats": [],
+        "date": "2026-04-02T18:30:03Z",
+        "id": 25,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-04-02T17:32:37Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "thedescent",
+          "collection": {
+            "title": "The Descent Collection",
+            "tmdbId": 87258
+          },
+          "digitalRelease": "2008-11-21T00:00:00Z",
+          "folderName": "/movies/The Descent (2005) {tmdb-9392}",
+          "genres": [
+            "Adventure",
+            "Horror"
+          ],
+          "id": 192,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/mxFPI4KYBk5ri9cPteIS8jiDFgj.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/9T5D5RGuCsC6CeqYZJTv4rT4RPy.jpg"
+            }
+          ],
+          "imdbId": "tt0435625",
+          "inCinemas": "2005-07-08T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "ambivalent",
+            "appalachia",
+            "best friend",
+            "camcorder",
+            "cave",
+            "claustrophobia",
+            "climbing",
+            "creature",
+            "darkness",
+            "expedition",
+            "female friendship",
+            "female protagonist",
+            "friends",
+            "gore",
+            "grieving",
+            "mutant",
+            "panic",
+            "rope",
+            "speleology",
+            "survival horror",
+            "suspenseful",
+            "trauma"
+          ],
+          "lastSearchTime": "2026-11-01T16:37:18Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "The Descent",
+          "overview": "After a personal tragedy, Sarah joins her friends on a caving expedition in the Appalachian Mountains. But when a rockfall traps them deep underground, their adventure turns into a nightmare. As they search for a way out, the group discovers they are not alone—lurking in the darkness are savage, cave-dwelling creatures. With rising tension and dwindling trust, the women must fight to survive against both the predators and each other.",
+          "path": "/movies/The Descent (2005) {tmdb-9392}",
+          "physicalRelease": "2005-11-07T00:00:00Z",
+          "popularity": 7.6263,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 7.2,
+              "votes": 279638
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 71,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 87,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7,
+              "votes": 4665
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.18258,
+              "votes": 7761
+            }
+          },
+          "releaseDate": "2005-11-07T00:00:00Z",
+          "runtime": 100,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "descent",
+          "status": "released",
+          "studio": "Celador Films",
+          "tags": [
+            1
+          ],
+          "title": "The Descent",
+          "titleSlug": "9392",
+          "tmdbId": 9392,
+          "website": "",
+          "year": 2005,
+          "youTubeTrailerId": "_onLUDusszw"
+        },
+        "movieId": 192,
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 4,
+            "modifier": "none",
+            "name": "HDTV-720p",
+            "resolution": 720,
+            "source": "tv"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "The Descent (2005) 720p Ita Eng MIRCrew"
+      },
+      {
+        "customFormats": [],
+        "date": "2026-11-08T19:15:00Z",
+        "id": 115,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "projectx",
+          "digitalRelease": "2013-06-05T00:00:00Z",
+          "folderName": "/movies/Project X (2012)",
+          "genres": [
+            "Comedy"
+          ],
+          "id": 79,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/lUPDGT3lyRrq8SvWuNWG2DP64bR.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/cUqXHZtnptgvyAE1hN47Wsf3ami.jpg"
+            }
+          ],
+          "imdbId": "tt1636826",
+          "inCinemas": "2012-03-01T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "birthday",
+            "birthday party",
+            "fake documentary",
+            "faux documentary",
+            "high school",
+            "high school student",
+            "house party",
+            "mockumentary",
+            "teen movie"
+          ],
+          "lastSearchTime": "2026-11-08T19:20:40Z",
+          "minimumAvailability": "released",
+          "monitored": false,
+          "movieFileId": 401,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Project X",
+          "overview": "Three high school seniors throw a party to make a name for themselves. As the night progresses, things spiral out of control as word of the party spreads.",
+          "path": "/movies/Project X (2012)",
+          "physicalRelease": "2012-12-18T00:00:00Z",
+          "popularity": 10.3314,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.7,
+              "votes": 263993
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 46,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 28,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.926,
+              "votes": 7135
+            },
+            "trakt": {
+              "type": "user",
+              "value": 6.93928,
+              "votes": 7674
+            }
+          },
+          "releaseDate": "2012-12-18T00:00:00Z",
+          "runtime": 88,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "project x",
+          "status": "released",
+          "studio": "Silver Pictures",
+          "tags": [
+            1
+          ],
+          "title": "Project X",
+          "titleSlug": "57214",
+          "tmdbId": 57214,
+          "website": "https://www.warnerbros.com/movies/project-x",
+          "year": 2012,
+          "youTubeTrailerId": "X28d7fbRGSQ"
+        },
+        "movieId": 79,
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 9,
+            "modifier": "none",
+            "name": "HDTV-1080p",
+            "resolution": 1080,
+            "source": "tv"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "The Lost Dinosaurs The Dinosaur Project 2012 1080p H264 Ac3 Ita Aac Eng artemix MIRCrew"
+      },
+      {
+        "customFormats": [],
+        "date": "2026-03-31T22:00:04Z",
+        "id": 20,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "thenorthman",
+          "digitalRelease": "2022-05-12T00:00:00Z",
+          "folderName": "/movies/The Northman (2022)",
+          "genres": [
+            "Action",
+            "Adventure",
+            "Fantasy"
+          ],
+          "id": 124,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/aSSJMnHknzKjlZ6zybwD7eyJ4Po.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/fMiEp00v8gGWEceL4QeLu6H6z69.jpg"
+            }
+          ],
+          "imdbId": "tt11138512",
+          "inCinemas": "2022-04-07T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "10th century",
+            "admiring",
+            "amused",
+            "based on myths, legends or folklore",
+            "bold",
+            "brutality",
+            "commanding",
+            "dramatic",
+            "fantasy",
+            "fate",
+            "gore",
+            "grimdark",
+            "iceland",
+            "king",
+            "nordic",
+            "northern ireland",
+            "ominous",
+            "prince",
+            "revenge",
+            "suspenseful",
+            "sword",
+            "sword fight",
+            "vikings (norsemen)",
+            "wonder"
+          ],
+          "lastSearchTime": "2026-11-07T14:36:45Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 398,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "The Northman",
+          "overview": "Prince Amleth is on the verge of becoming a man when his father is brutally murdered by his uncle, who kidnaps the boy's mother. Two decades later, Amleth is now a Viking who's on a mission to save his mother, kill his uncle and avenge his father.",
+          "path": "/movies/The Northman (2022)",
+          "physicalRelease": "2022-06-07T00:00:00Z",
+          "popularity": 8.5016,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 7,
+              "votes": 308969
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 82,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 90,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7.019,
+              "votes": 5399
+            },
+            "trakt": {
+              "type": "user",
+              "value": 6.91273,
+              "votes": 15768
+            }
+          },
+          "releaseDate": "2022-05-12T00:00:00Z",
+          "runtime": 137,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "northman",
+          "status": "released",
+          "studio": "Regency Enterprises",
+          "tags": [
+            1
+          ],
+          "title": "The Northman",
+          "titleSlug": "639933",
+          "tmdbId": 639933,
+          "website": "https://www.focusfeatures.com/the-northman",
+          "year": 2022,
+          "youTubeTrailerId": "6WrpvCmv0hk"
+        },
+        "movieId": 124,
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "The Northman 2022 iTA ENG Bluray 1080p x264"
+      },
+      {
+        "customFormats": [],
+        "date": "2026-06-25T21:42:39Z",
+        "id": 65,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "thebookeli",
+          "digitalRelease": "2012-01-07T00:00:00Z",
+          "folderName": "/movies/The Book of Eli (2010)",
+          "genres": [
+            "Action",
+            "Thriller",
+            "Science Fiction"
+          ],
+          "id": 105,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg"
+            }
+          ],
+          "imdbId": "tt1037705",
+          "inCinemas": "2010-01-14T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "2040s",
+            "bible",
+            "blind",
+            "brutality",
+            "cannibal",
+            "carnage",
+            "chaos",
+            "combat",
+            "dystopia",
+            "faith",
+            "grimdark",
+            "gunfight",
+            "post-apocalyptic future",
+            "survival"
+          ],
+          "lastSearchTime": "2026-09-13T07:05:09Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "The Book of Eli",
+          "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+          "path": "/movies/The Book of Eli (2010)",
+          "physicalRelease": "2010-06-15T00:00:00Z",
+          "popularity": 17.3108,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.8,
+              "votes": 365126
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 53,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 46,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.811,
+              "votes": 6958
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.1625,
+              "votes": 12203
+            }
+          },
+          "releaseDate": "2010-06-15T00:00:00Z",
+          "runtime": 118,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "book of eli",
+          "status": "released",
+          "studio": "Alcon Entertainment",
+          "tags": [],
+          "title": "The Book of Eli",
+          "titleSlug": "20504",
+          "tmdbId": 20504,
+          "website": "",
+          "year": 2010,
+          "youTubeTrailerId": "yAQcwKY0Dik"
+        },
+        "movieId": 105,
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 9,
+            "modifier": "none",
+            "name": "HDTV-1080p",
+            "resolution": 1080,
+            "source": "tv"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "The.Book.of.Eli.2010.1920x1080p.Remux.AVC.ENG.DTS-HD.MA.5.1.ENG.ITA.AC3.Subs.mkv"
+      },
+      {
+        "customFormats": [],
+        "date": "2026-06-26T17:28:57Z",
+        "id": 67,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "thebookeli",
+          "digitalRelease": "2012-01-07T00:00:00Z",
+          "folderName": "/movies/The Book of Eli (2010)",
+          "genres": [
+            "Action",
+            "Thriller",
+            "Science Fiction"
+          ],
+          "id": 105,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg"
+            }
+          ],
+          "imdbId": "tt1037705",
+          "inCinemas": "2010-01-14T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "2040s",
+            "bible",
+            "blind",
+            "brutality",
+            "cannibal",
+            "carnage",
+            "chaos",
+            "combat",
+            "dystopia",
+            "faith",
+            "grimdark",
+            "gunfight",
+            "post-apocalyptic future",
+            "survival"
+          ],
+          "lastSearchTime": "2026-09-13T07:05:09Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "The Book of Eli",
+          "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+          "path": "/movies/The Book of Eli (2010)",
+          "physicalRelease": "2010-06-15T00:00:00Z",
+          "popularity": 17.3108,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.8,
+              "votes": 365126
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 53,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 46,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.811,
+              "votes": 6958
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.1625,
+              "votes": 12203
+            }
+          },
+          "releaseDate": "2010-06-15T00:00:00Z",
+          "runtime": 118,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "book of eli",
+          "status": "released",
+          "studio": "Alcon Entertainment",
+          "tags": [],
+          "title": "The Book of Eli",
+          "titleSlug": "20504",
+          "tmdbId": 20504,
+          "website": "",
+          "year": 2010,
+          "youTubeTrailerId": "yAQcwKY0Dik"
+        },
+        "movieId": 105,
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 9,
+            "modifier": "none",
+            "name": "HDTV-1080p",
+            "resolution": 1080,
+            "source": "tv"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "The.Book.of.Eli.2010.1920x1080p.Remux.AVC.ENG.DTS-HD.MA.5.1.ENG.ITA.AC3.Subs.mkv"
+      },
+      {
+        "customFormats": [],
+        "date": "2026-08-23T18:48:20Z",
+        "id": 82,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "thebookeli",
+          "digitalRelease": "2012-01-07T00:00:00Z",
+          "folderName": "/movies/The Book of Eli (2010)",
+          "genres": [
+            "Action",
+            "Thriller",
+            "Science Fiction"
+          ],
+          "id": 105,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg"
+            }
+          ],
+          "imdbId": "tt1037705",
+          "inCinemas": "2010-01-14T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "2040s",
+            "bible",
+            "blind",
+            "brutality",
+            "cannibal",
+            "carnage",
+            "chaos",
+            "combat",
+            "dystopia",
+            "faith",
+            "grimdark",
+            "gunfight",
+            "post-apocalyptic future",
+            "survival"
+          ],
+          "lastSearchTime": "2026-09-13T07:05:09Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "The Book of Eli",
+          "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+          "path": "/movies/The Book of Eli (2010)",
+          "physicalRelease": "2010-06-15T00:00:00Z",
+          "popularity": 17.3108,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.8,
+              "votes": 365126
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 53,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 46,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.811,
+              "votes": 6958
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.1625,
+              "votes": 12203
+            }
+          },
+          "releaseDate": "2010-06-15T00:00:00Z",
+          "runtime": 118,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "book of eli",
+          "status": "released",
+          "studio": "Alcon Entertainment",
+          "tags": [],
+          "title": "The Book of Eli",
+          "titleSlug": "20504",
+          "tmdbId": 20504,
+          "website": "",
+          "year": 2010,
+          "youTubeTrailerId": "yAQcwKY0Dik"
+        },
+        "movieId": 105,
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 9,
+            "modifier": "none",
+            "name": "HDTV-1080p",
+            "resolution": 1080,
+            "source": "tv"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "The.Book.of.Eli.2010.1920x1080p.Remux.AVC.ENG.DTS-HD.MA.5.1.ENG.ITA.AC3.Subs.mkv"
+      },
+      {
+        "customFormats": [],
+        "date": "2026-08-25T20:39:40Z",
+        "id": 84,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "thebookeli",
+          "digitalRelease": "2012-01-07T00:00:00Z",
+          "folderName": "/movies/The Book of Eli (2010)",
+          "genres": [
+            "Action",
+            "Thriller",
+            "Science Fiction"
+          ],
+          "id": 105,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg"
+            }
+          ],
+          "imdbId": "tt1037705",
+          "inCinemas": "2010-01-14T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "2040s",
+            "bible",
+            "blind",
+            "brutality",
+            "cannibal",
+            "carnage",
+            "chaos",
+            "combat",
+            "dystopia",
+            "faith",
+            "grimdark",
+            "gunfight",
+            "post-apocalyptic future",
+            "survival"
+          ],
+          "lastSearchTime": "2026-09-13T07:05:09Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "The Book of Eli",
+          "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+          "path": "/movies/The Book of Eli (2010)",
+          "physicalRelease": "2010-06-15T00:00:00Z",
+          "popularity": 17.3108,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.8,
+              "votes": 365126
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 53,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 46,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.811,
+              "votes": 6958
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.1625,
+              "votes": 12203
+            }
+          },
+          "releaseDate": "2010-06-15T00:00:00Z",
+          "runtime": 118,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "book of eli",
+          "status": "released",
+          "studio": "Alcon Entertainment",
+          "tags": [],
+          "title": "The Book of Eli",
+          "titleSlug": "20504",
+          "tmdbId": 20504,
+          "website": "",
+          "year": 2010,
+          "youTubeTrailerId": "yAQcwKY0Dik"
+        },
+        "movieId": 105,
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 9,
+            "modifier": "none",
+            "name": "HDTV-1080p",
+            "resolution": 1080,
+            "source": "tv"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "The.Book.of.Eli.2010.1920x1080p.Remux.AVC.ENG.DTS-HD.MA.5.1.ENG.ITA.AC3.Subs.mkv"
+      },
+      {
+        "customFormats": [],
+        "date": "2026-08-25T20:50:46Z",
+        "id": 85,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "thebookeli",
+          "digitalRelease": "2012-01-07T00:00:00Z",
+          "folderName": "/movies/The Book of Eli (2010)",
+          "genres": [
+            "Action",
+            "Thriller",
+            "Science Fiction"
+          ],
+          "id": 105,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg"
+            }
+          ],
+          "imdbId": "tt1037705",
+          "inCinemas": "2010-01-14T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "2040s",
+            "bible",
+            "blind",
+            "brutality",
+            "cannibal",
+            "carnage",
+            "chaos",
+            "combat",
+            "dystopia",
+            "faith",
+            "grimdark",
+            "gunfight",
+            "post-apocalyptic future",
+            "survival"
+          ],
+          "lastSearchTime": "2026-09-13T07:05:09Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "The Book of Eli",
+          "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+          "path": "/movies/The Book of Eli (2010)",
+          "physicalRelease": "2010-06-15T00:00:00Z",
+          "popularity": 17.3108,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.8,
+              "votes": 365126
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 53,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 46,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.811,
+              "votes": 6958
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.1625,
+              "votes": 12203
+            }
+          },
+          "releaseDate": "2010-06-15T00:00:00Z",
+          "runtime": 118,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "book of eli",
+          "status": "released",
+          "studio": "Alcon Entertainment",
+          "tags": [],
+          "title": "The Book of Eli",
+          "titleSlug": "20504",
+          "tmdbId": 20504,
+          "website": "",
+          "year": 2010,
+          "youTubeTrailerId": "yAQcwKY0Dik"
+        },
+        "movieId": 105,
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 9,
+            "modifier": "none",
+            "name": "HDTV-1080p",
+            "resolution": 1080,
+            "source": "tv"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "The.Book.of.Eli.2010.1920x1080p.Remux.AVC.ENG.DTS-HD.MA.5.1.ENG.ITA.AC3.Subs.mkv"
+      },
+      {
+        "customFormats": [],
+        "date": "2026-08-26T21:19:14Z",
+        "id": 86,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "thebookeli",
+          "digitalRelease": "2012-01-07T00:00:00Z",
+          "folderName": "/movies/The Book of Eli (2010)",
+          "genres": [
+            "Action",
+            "Thriller",
+            "Science Fiction"
+          ],
+          "id": 105,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg"
+            }
+          ],
+          "imdbId": "tt1037705",
+          "inCinemas": "2010-01-14T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "2040s",
+            "bible",
+            "blind",
+            "brutality",
+            "cannibal",
+            "carnage",
+            "chaos",
+            "combat",
+            "dystopia",
+            "faith",
+            "grimdark",
+            "gunfight",
+            "post-apocalyptic future",
+            "survival"
+          ],
+          "lastSearchTime": "2026-09-13T07:05:09Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "The Book of Eli",
+          "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+          "path": "/movies/The Book of Eli (2010)",
+          "physicalRelease": "2010-06-15T00:00:00Z",
+          "popularity": 17.3108,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.8,
+              "votes": 365126
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 53,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 46,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.811,
+              "votes": 6958
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.1625,
+              "votes": 12203
+            }
+          },
+          "releaseDate": "2010-06-15T00:00:00Z",
+          "runtime": 118,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "book of eli",
+          "status": "released",
+          "studio": "Alcon Entertainment",
+          "tags": [],
+          "title": "The Book of Eli",
+          "titleSlug": "20504",
+          "tmdbId": 20504,
+          "website": "",
+          "year": 2010,
+          "youTubeTrailerId": "yAQcwKY0Dik"
+        },
+        "movieId": 105,
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 9,
+            "modifier": "none",
+            "name": "HDTV-1080p",
+            "resolution": 1080,
+            "source": "tv"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "The.Book.of.Eli.2010.1920x1080p.Remux.AVC.ENG.DTS-HD.MA.5.1.ENG.ITA.AC3.Subs.mkv"
+      },
+      {
+        "customFormats": [],
+        "date": "2026-08-28T06:30:26Z",
+        "id": 87,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "thebookeli",
+          "digitalRelease": "2012-01-07T00:00:00Z",
+          "folderName": "/movies/The Book of Eli (2010)",
+          "genres": [
+            "Action",
+            "Thriller",
+            "Science Fiction"
+          ],
+          "id": 105,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg"
+            }
+          ],
+          "imdbId": "tt1037705",
+          "inCinemas": "2010-01-14T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "2040s",
+            "bible",
+            "blind",
+            "brutality",
+            "cannibal",
+            "carnage",
+            "chaos",
+            "combat",
+            "dystopia",
+            "faith",
+            "grimdark",
+            "gunfight",
+            "post-apocalyptic future",
+            "survival"
+          ],
+          "lastSearchTime": "2026-09-13T07:05:09Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "The Book of Eli",
+          "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+          "path": "/movies/The Book of Eli (2010)",
+          "physicalRelease": "2010-06-15T00:00:00Z",
+          "popularity": 17.3108,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.8,
+              "votes": 365126
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 53,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 46,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.811,
+              "votes": 6958
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.1625,
+              "votes": 12203
+            }
+          },
+          "releaseDate": "2010-06-15T00:00:00Z",
+          "runtime": 118,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "book of eli",
+          "status": "released",
+          "studio": "Alcon Entertainment",
+          "tags": [],
+          "title": "The Book of Eli",
+          "titleSlug": "20504",
+          "tmdbId": 20504,
+          "website": "",
+          "year": 2010,
+          "youTubeTrailerId": "yAQcwKY0Dik"
+        },
+        "movieId": 105,
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 9,
+            "modifier": "none",
+            "name": "HDTV-1080p",
+            "resolution": 1080,
+            "source": "tv"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "The.Book.of.Eli.2010.1920x1080p.Remux.AVC.ENG.DTS-HD.MA.5.1.ENG.ITA.AC3.Subs.mkv"
+      },
+      {
+        "customFormats": [],
+        "date": "2026-09-08T10:07:06Z",
+        "id": 89,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "thebookeli",
+          "digitalRelease": "2012-01-07T00:00:00Z",
+          "folderName": "/movies/The Book of Eli (2010)",
+          "genres": [
+            "Action",
+            "Thriller",
+            "Science Fiction"
+          ],
+          "id": 105,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg"
+            }
+          ],
+          "imdbId": "tt1037705",
+          "inCinemas": "2010-01-14T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "2040s",
+            "bible",
+            "blind",
+            "brutality",
+            "cannibal",
+            "carnage",
+            "chaos",
+            "combat",
+            "dystopia",
+            "faith",
+            "grimdark",
+            "gunfight",
+            "post-apocalyptic future",
+            "survival"
+          ],
+          "lastSearchTime": "2026-09-13T07:05:09Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "The Book of Eli",
+          "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+          "path": "/movies/The Book of Eli (2010)",
+          "physicalRelease": "2010-06-15T00:00:00Z",
+          "popularity": 17.3108,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.8,
+              "votes": 365126
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 53,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 46,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.811,
+              "votes": 6958
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.1625,
+              "votes": 12203
+            }
+          },
+          "releaseDate": "2010-06-15T00:00:00Z",
+          "runtime": 118,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "book of eli",
+          "status": "released",
+          "studio": "Alcon Entertainment",
+          "tags": [],
+          "title": "The Book of Eli",
+          "titleSlug": "20504",
+          "tmdbId": 20504,
+          "website": "",
+          "year": 2010,
+          "youTubeTrailerId": "yAQcwKY0Dik"
+        },
+        "movieId": 105,
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 9,
+            "modifier": "none",
+            "name": "HDTV-1080p",
+            "resolution": 1080,
+            "source": "tv"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "The.Book.of.Eli.2010.1920x1080p.Remux.AVC.ENG.DTS-HD.MA.5.1.ENG.ITA.AC3.Subs.mkv"
+      },
+      {
+        "customFormats": [],
+        "date": "2026-09-08T20:14:34Z",
+        "id": 90,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "thebookeli",
+          "digitalRelease": "2012-01-07T00:00:00Z",
+          "folderName": "/movies/The Book of Eli (2010)",
+          "genres": [
+            "Action",
+            "Thriller",
+            "Science Fiction"
+          ],
+          "id": 105,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg"
+            }
+          ],
+          "imdbId": "tt1037705",
+          "inCinemas": "2010-01-14T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "2040s",
+            "bible",
+            "blind",
+            "brutality",
+            "cannibal",
+            "carnage",
+            "chaos",
+            "combat",
+            "dystopia",
+            "faith",
+            "grimdark",
+            "gunfight",
+            "post-apocalyptic future",
+            "survival"
+          ],
+          "lastSearchTime": "2026-09-13T07:05:09Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "The Book of Eli",
+          "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+          "path": "/movies/The Book of Eli (2010)",
+          "physicalRelease": "2010-06-15T00:00:00Z",
+          "popularity": 17.3108,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.8,
+              "votes": 365126
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 53,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 46,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.811,
+              "votes": 6958
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.1625,
+              "votes": 12203
+            }
+          },
+          "releaseDate": "2010-06-15T00:00:00Z",
+          "runtime": 118,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "book of eli",
+          "status": "released",
+          "studio": "Alcon Entertainment",
+          "tags": [],
+          "title": "The Book of Eli",
+          "titleSlug": "20504",
+          "tmdbId": 20504,
+          "website": "",
+          "year": 2010,
+          "youTubeTrailerId": "yAQcwKY0Dik"
+        },
+        "movieId": 105,
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 9,
+            "modifier": "none",
+            "name": "HDTV-1080p",
+            "resolution": 1080,
+            "source": "tv"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "The.Book.of.Eli.2010.1920x1080p.Remux.AVC.ENG.DTS-HD.MA.5.1.ENG.ITA.AC3.Subs.mkv"
+      },
+      {
+        "customFormats": [],
+        "date": "2026-09-09T15:18:40Z",
+        "id": 91,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "thebookeli",
+          "digitalRelease": "2012-01-07T00:00:00Z",
+          "folderName": "/movies/The Book of Eli (2010)",
+          "genres": [
+            "Action",
+            "Thriller",
+            "Science Fiction"
+          ],
+          "id": 105,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg"
+            }
+          ],
+          "imdbId": "tt1037705",
+          "inCinemas": "2010-01-14T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "2040s",
+            "bible",
+            "blind",
+            "brutality",
+            "cannibal",
+            "carnage",
+            "chaos",
+            "combat",
+            "dystopia",
+            "faith",
+            "grimdark",
+            "gunfight",
+            "post-apocalyptic future",
+            "survival"
+          ],
+          "lastSearchTime": "2026-09-13T07:05:09Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "The Book of Eli",
+          "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+          "path": "/movies/The Book of Eli (2010)",
+          "physicalRelease": "2010-06-15T00:00:00Z",
+          "popularity": 17.3108,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.8,
+              "votes": 365126
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 53,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 46,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.811,
+              "votes": 6958
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.1625,
+              "votes": 12203
+            }
+          },
+          "releaseDate": "2010-06-15T00:00:00Z",
+          "runtime": 118,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "book of eli",
+          "status": "released",
+          "studio": "Alcon Entertainment",
+          "tags": [],
+          "title": "The Book of Eli",
+          "titleSlug": "20504",
+          "tmdbId": 20504,
+          "website": "",
+          "year": 2010,
+          "youTubeTrailerId": "yAQcwKY0Dik"
+        },
+        "movieId": 105,
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 9,
+            "modifier": "none",
+            "name": "HDTV-1080p",
+            "resolution": 1080,
+            "source": "tv"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "The.Book.of.Eli.2010.1920x1080p.Remux.AVC.ENG.DTS-HD.MA.5.1.ENG.ITA.AC3.Subs.mkv"
+      },
+      {
+        "customFormats": [],
+        "date": "2026-09-09T21:18:58Z",
+        "id": 93,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "thebookeli",
+          "digitalRelease": "2012-01-07T00:00:00Z",
+          "folderName": "/movies/The Book of Eli (2010)",
+          "genres": [
+            "Action",
+            "Thriller",
+            "Science Fiction"
+          ],
+          "id": 105,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg"
+            }
+          ],
+          "imdbId": "tt1037705",
+          "inCinemas": "2010-01-14T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "2040s",
+            "bible",
+            "blind",
+            "brutality",
+            "cannibal",
+            "carnage",
+            "chaos",
+            "combat",
+            "dystopia",
+            "faith",
+            "grimdark",
+            "gunfight",
+            "post-apocalyptic future",
+            "survival"
+          ],
+          "lastSearchTime": "2026-09-13T07:05:09Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "The Book of Eli",
+          "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+          "path": "/movies/The Book of Eli (2010)",
+          "physicalRelease": "2010-06-15T00:00:00Z",
+          "popularity": 17.3108,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.8,
+              "votes": 365126
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 53,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 46,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.811,
+              "votes": 6958
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.1625,
+              "votes": 12203
+            }
+          },
+          "releaseDate": "2010-06-15T00:00:00Z",
+          "runtime": 118,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "book of eli",
+          "status": "released",
+          "studio": "Alcon Entertainment",
+          "tags": [],
+          "title": "The Book of Eli",
+          "titleSlug": "20504",
+          "tmdbId": 20504,
+          "website": "",
+          "year": 2010,
+          "youTubeTrailerId": "yAQcwKY0Dik"
+        },
+        "movieId": 105,
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 9,
+            "modifier": "none",
+            "name": "HDTV-1080p",
+            "resolution": 1080,
+            "source": "tv"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "The.Book.of.Eli.2010.1920x1080p.Remux.AVC.ENG.DTS-HD.MA.5.1.ENG.ITA.AC3.Subs.mkv"
+      },
+      {
+        "customFormats": [],
+        "date": "2026-09-10T05:41:28Z",
+        "id": 94,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "thebookeli",
+          "digitalRelease": "2012-01-07T00:00:00Z",
+          "folderName": "/movies/The Book of Eli (2010)",
+          "genres": [
+            "Action",
+            "Thriller",
+            "Science Fiction"
+          ],
+          "id": 105,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg"
+            }
+          ],
+          "imdbId": "tt1037705",
+          "inCinemas": "2010-01-14T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "2040s",
+            "bible",
+            "blind",
+            "brutality",
+            "cannibal",
+            "carnage",
+            "chaos",
+            "combat",
+            "dystopia",
+            "faith",
+            "grimdark",
+            "gunfight",
+            "post-apocalyptic future",
+            "survival"
+          ],
+          "lastSearchTime": "2026-09-13T07:05:09Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "The Book of Eli",
+          "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+          "path": "/movies/The Book of Eli (2010)",
+          "physicalRelease": "2010-06-15T00:00:00Z",
+          "popularity": 17.3108,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.8,
+              "votes": 365126
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 53,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 46,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.811,
+              "votes": 6958
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.1625,
+              "votes": 12203
+            }
+          },
+          "releaseDate": "2010-06-15T00:00:00Z",
+          "runtime": 118,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "book of eli",
+          "status": "released",
+          "studio": "Alcon Entertainment",
+          "tags": [],
+          "title": "The Book of Eli",
+          "titleSlug": "20504",
+          "tmdbId": 20504,
+          "website": "",
+          "year": 2010,
+          "youTubeTrailerId": "yAQcwKY0Dik"
+        },
+        "movieId": 105,
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 9,
+            "modifier": "none",
+            "name": "HDTV-1080p",
+            "resolution": 1080,
+            "source": "tv"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "The.Book.of.Eli.2010.1920x1080p.Remux.AVC.ENG.DTS-HD.MA.5.1.ENG.ITA.AC3.Subs.mkv"
+      },
+      {
+        "customFormats": [],
+        "date": "2026-09-11T06:16:54Z",
+        "id": 95,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "thebookeli",
+          "digitalRelease": "2012-01-07T00:00:00Z",
+          "folderName": "/movies/The Book of Eli (2010)",
+          "genres": [
+            "Action",
+            "Thriller",
+            "Science Fiction"
+          ],
+          "id": 105,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg"
+            }
+          ],
+          "imdbId": "tt1037705",
+          "inCinemas": "2010-01-14T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "2040s",
+            "bible",
+            "blind",
+            "brutality",
+            "cannibal",
+            "carnage",
+            "chaos",
+            "combat",
+            "dystopia",
+            "faith",
+            "grimdark",
+            "gunfight",
+            "post-apocalyptic future",
+            "survival"
+          ],
+          "lastSearchTime": "2026-09-13T07:05:09Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "The Book of Eli",
+          "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+          "path": "/movies/The Book of Eli (2010)",
+          "physicalRelease": "2010-06-15T00:00:00Z",
+          "popularity": 17.3108,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.8,
+              "votes": 365126
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 53,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 46,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.811,
+              "votes": 6958
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.1625,
+              "votes": 12203
+            }
+          },
+          "releaseDate": "2010-06-15T00:00:00Z",
+          "runtime": 118,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "book of eli",
+          "status": "released",
+          "studio": "Alcon Entertainment",
+          "tags": [],
+          "title": "The Book of Eli",
+          "titleSlug": "20504",
+          "tmdbId": 20504,
+          "website": "",
+          "year": 2010,
+          "youTubeTrailerId": "yAQcwKY0Dik"
+        },
+        "movieId": 105,
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 9,
+            "modifier": "none",
+            "name": "HDTV-1080p",
+            "resolution": 1080,
+            "source": "tv"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "The.Book.of.Eli.2010.1920x1080p.Remux.AVC.ENG.DTS-HD.MA.5.1.ENG.ITA.AC3.Subs.mkv"
+      },
+      {
+        "customFormats": [],
+        "date": "2026-09-12T12:32:47Z",
+        "id": 96,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "thebookeli",
+          "digitalRelease": "2012-01-07T00:00:00Z",
+          "folderName": "/movies/The Book of Eli (2010)",
+          "genres": [
+            "Action",
+            "Thriller",
+            "Science Fiction"
+          ],
+          "id": 105,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg"
+            }
+          ],
+          "imdbId": "tt1037705",
+          "inCinemas": "2010-01-14T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "2040s",
+            "bible",
+            "blind",
+            "brutality",
+            "cannibal",
+            "carnage",
+            "chaos",
+            "combat",
+            "dystopia",
+            "faith",
+            "grimdark",
+            "gunfight",
+            "post-apocalyptic future",
+            "survival"
+          ],
+          "lastSearchTime": "2026-09-13T07:05:09Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "The Book of Eli",
+          "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+          "path": "/movies/The Book of Eli (2010)",
+          "physicalRelease": "2010-06-15T00:00:00Z",
+          "popularity": 17.3108,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.8,
+              "votes": 365126
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 53,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 46,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.811,
+              "votes": 6958
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.1625,
+              "votes": 12203
+            }
+          },
+          "releaseDate": "2010-06-15T00:00:00Z",
+          "runtime": 118,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "book of eli",
+          "status": "released",
+          "studio": "Alcon Entertainment",
+          "tags": [],
+          "title": "The Book of Eli",
+          "titleSlug": "20504",
+          "tmdbId": 20504,
+          "website": "",
+          "year": 2010,
+          "youTubeTrailerId": "yAQcwKY0Dik"
+        },
+        "movieId": 105,
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 9,
+            "modifier": "none",
+            "name": "HDTV-1080p",
+            "resolution": 1080,
+            "source": "tv"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "The.Book.of.Eli.2010.1920x1080p.Remux.AVC.ENG.DTS-HD.MA.5.1.ENG.ITA.AC3.Subs.mkv"
+      },
+      {
+        "customFormats": [],
+        "date": "2026-09-13T07:04:56Z",
+        "id": 97,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "thebookeli",
+          "digitalRelease": "2012-01-07T00:00:00Z",
+          "folderName": "/movies/The Book of Eli (2010)",
+          "genres": [
+            "Action",
+            "Thriller",
+            "Science Fiction"
+          ],
+          "id": 105,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg"
+            }
+          ],
+          "imdbId": "tt1037705",
+          "inCinemas": "2010-01-14T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "2040s",
+            "bible",
+            "blind",
+            "brutality",
+            "cannibal",
+            "carnage",
+            "chaos",
+            "combat",
+            "dystopia",
+            "faith",
+            "grimdark",
+            "gunfight",
+            "post-apocalyptic future",
+            "survival"
+          ],
+          "lastSearchTime": "2026-09-13T07:05:09Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "The Book of Eli",
+          "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+          "path": "/movies/The Book of Eli (2010)",
+          "physicalRelease": "2010-06-15T00:00:00Z",
+          "popularity": 17.3108,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.8,
+              "votes": 365126
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 53,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 46,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.811,
+              "votes": 6958
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.1625,
+              "votes": 12203
+            }
+          },
+          "releaseDate": "2010-06-15T00:00:00Z",
+          "runtime": 118,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "book of eli",
+          "status": "released",
+          "studio": "Alcon Entertainment",
+          "tags": [],
+          "title": "The Book of Eli",
+          "titleSlug": "20504",
+          "tmdbId": 20504,
+          "website": "",
+          "year": 2010,
+          "youTubeTrailerId": "yAQcwKY0Dik"
+        },
+        "movieId": 105,
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 9,
+            "modifier": "none",
+            "name": "HDTV-1080p",
+            "resolution": 1080,
+            "source": "tv"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "The.Book.of.Eli.2010.1920x1080p.Remux.AVC.ENG.DTS-HD.MA.5.1.ENG.ITA.AC3.Subs.mkv"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 53,
+            "name": "AAC"
+          },
+          {
+            "id": 58,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 12,
+            "name": "LQ"
+          }
+        ],
+        "date": "2026-06-04T22:00:00Z",
+        "id": 44,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "extraordinary",
+          "digitalRelease": "2019-07-06T00:00:00Z",
+          "folderName": "/movies/Extra Ordinary (2019)",
+          "genres": [
+            "Fantasy",
+            "Comedy",
+            "Horror"
+          ],
+          "id": 32,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/z3IRiGKXx2eMhxtV8GktKwvWkhm.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/6Rie2qP3R7DCnexj87XGaeCFb70.jpg"
+            }
+          ],
+          "imdbId": "tt8233874",
+          "inCinemas": "2019-09-13T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "abduction",
+            "driving school",
+            "exorcism",
+            "floating",
+            "ghost",
+            "horror spoof",
+            "pact with the devil",
+            "paranormal phenomena",
+            "possession"
+          ],
+          "lastSearchTime": "2026-06-05T10:31:21Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Extra Ordinary",
+          "overview": "A driving instructor must use her other-worldly gifts to save a lonely man’s daughter from a rock star looking to use her for Satanic purposes.",
+          "path": "/movies/Extra Ordinary (2019)",
+          "popularity": 3.3877,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.4,
+              "votes": 13011
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 72,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 98,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.4,
+              "votes": 294
+            },
+            "trakt": {
+              "type": "user",
+              "value": 6.7426,
+              "votes": 1014
+            }
+          },
+          "releaseDate": "2019-07-06T00:00:00Z",
+          "runtime": 94,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "extra ordinary",
+          "status": "released",
+          "studio": "uMedia",
+          "tags": [],
+          "title": "Extra Ordinary",
+          "titleSlug": "538227",
+          "tmdbId": 538227,
+          "website": "",
+          "year": 2019,
+          "youTubeTrailerId": "x1TvL5ZL6Sc"
+        },
+        "movieId": 32,
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 15,
+            "modifier": "none",
+            "name": "WEBRip-1080p",
+            "resolution": 1080,
+            "source": "webrip"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "The.Extraordinary.Ordinary.2019.1080p.WEBRip.x264.AAC-LAMA"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 44,
+            "name": "DD+ ATMOS"
+          },
+          {
+            "id": 55,
+            "name": "HDR"
+          },
+          {
+            "id": 13,
+            "name": "LQ (Release Title)"
+          },
+          {
+            "id": 30,
+            "name": "MAX"
+          }
+        ],
+        "date": "2026-03-31T15:42:02Z",
+        "id": 16,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 26,
+            "name": "Hindi"
+          },
+          {
+            "id": 18,
+            "name": "Portuguese"
+          },
+          {
+            "id": 37,
+            "name": "Spanish (Latino)"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 3,
+            "name": "Spanish"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 2,
+            "name": "French"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "thematrix",
+          "collection": {
+            "title": "The Matrix Collection",
+            "tmdbId": 2344
+          },
+          "digitalRelease": "2001-03-19T00:00:00Z",
+          "folderName": "/movies/The Matrix (1999)",
+          "genres": [
+            "Action",
+            "Science Fiction"
+          ],
+          "id": 121,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/dXNAPwY7VrqMAo51EKhhCJfaGb5.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/tlm8UkiQsitc8rSuIAscQDCnP8d.jpg"
+            }
+          ],
+          "imdbId": "tt0133093",
+          "inCinemas": "1999-03-31T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "allegory",
+            "artificial intelligence (a.i.)",
+            "chosen one",
+            "christ allegory",
+            "christ figure",
+            "christian allegory",
+            "cyberpunk",
+            "dystopia",
+            "fortune teller",
+            "gnosticism",
+            "insurgence",
+            "man vs machine",
+            "martial arts",
+            "messiah",
+            "philosophy",
+            "prophecy",
+            "saving the world",
+            "simulated reality "
+          ],
+          "lastSearchTime": "2026-03-31T15:42:08Z",
+          "minimumAvailability": "released",
+          "monitored": false,
+          "movieFileId": 188,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "The Matrix",
+          "overview": "Set in the 22nd century, The Matrix tells the story of a computer hacker who joins a group of underground insurgents fighting the vast and powerful computers who now rule the earth.",
+          "path": "/movies/The Matrix (1999)",
+          "physicalRelease": "1999-11-25T00:00:00Z",
+          "popularity": 36.6527,
+          "qualityProfileId": 9,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 8.7,
+              "votes": 2292989
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 73,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 83,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 8.263,
+              "votes": 29222
+            },
+            "trakt": {
+              "type": "user",
+              "value": 8.78249,
+              "votes": 54916
+            }
+          },
+          "releaseDate": "1999-11-25T00:00:00Z",
+          "runtime": 136,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "matrix",
+          "status": "released",
+          "studio": "Village Roadshow Pictures",
+          "tags": [
+            1
+          ],
+          "title": "The Matrix",
+          "titleSlug": "603",
+          "tmdbId": 603,
+          "website": "http://www.warnerbros.com/matrix",
+          "year": 1999,
+          "youTubeTrailerId": "FVI84Dfx2-I"
+        },
+        "movieId": 121,
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 18,
+            "modifier": "none",
+            "name": "WEBDL-2160p",
+            "resolution": 2160,
+            "source": "webdl"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "The.Matrix.1999.2160p.MAX.WEB-DL.DV.HDR.ENG.LATINO.CASTELLANO.ITA.FRE.HINDI.PORTUGUESE.DDP5.1.Atmos.H265.MP4-BEN.THE.MEN"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 46,
+            "name": "DTS-HD MA"
+          },
+          {
+            "id": 58,
+            "name": "Language not Italian"
+          }
+        ],
+        "date": "2026-03-29T08:55:16Z",
+        "id": 10,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "thething",
+          "collection": {
+            "title": "The Thing Collection",
+            "tmdbId": 479888
+          },
+          "digitalRelease": "2012-08-04T00:00:00Z",
+          "folderName": "/movies/The Thing (2011)",
+          "genres": [
+            "Horror",
+            "Science Fiction",
+            "Mystery"
+          ],
+          "id": 131,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/dmn2nVo8h7LMnk694JxCRIwK06p.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/qgSlGJurPzgSHKYlqBiDmr3vjrc.jpg"
+            }
+          ],
+          "imdbId": "tt0905372",
+          "inCinemas": "2011-10-12T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "1980s",
+            "aggressive",
+            "alien life-form",
+            "alien spaceship",
+            "antarctica",
+            "assimilation",
+            "based on novel or book",
+            "blizzard",
+            "body horror",
+            "duringcreditsstinger",
+            "halloween",
+            "norwegian",
+            "paranoia",
+            "prequel",
+            "research station",
+            "survival",
+            "survival horror",
+            "suspenseful"
+          ],
+          "lastSearchTime": "2026-03-31T15:35:02Z",
+          "minimumAvailability": "released",
+          "monitored": false,
+          "movieFileId": 181,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "The Thing",
+          "overview": "When paleontologist Kate Lloyd travels to an isolated outpost in Antarctica for the expedition of a lifetime, she joins an international team that unearths a remarkable discovery. Their elation quickly turns to fear as they realize that their experiment has freed a mysterious being from its frozen prison. Paranoia spreads like an epidemic as a creature that can mimic anything it touches will pit human against human as it tries to survive and flourish in this spine-tingling thriller.",
+          "path": "/movies/The Thing (2011)",
+          "physicalRelease": "2012-02-06T00:00:00Z",
+          "popularity": 5.0292,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.3,
+              "votes": 156647
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 49,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 34,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.3,
+              "votes": 3390
+            },
+            "trakt": {
+              "type": "user",
+              "value": 6.58559,
+              "votes": 5135
+            }
+          },
+          "releaseDate": "2012-02-06T00:00:00Z",
+          "runtime": 103,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "thing",
+          "status": "released",
+          "studio": "Universal Pictures",
+          "tags": [
+            1
+          ],
+          "title": "The Thing",
+          "titleSlug": "60935",
+          "tmdbId": 60935,
+          "website": "http://www.uphe.com/movies/the-thing-2011",
+          "year": 2011,
+          "youTubeTrailerId": "JIdw2B6zipc"
+        },
+        "movieId": 131,
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 30,
+            "modifier": "remux",
+            "name": "Remux-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "The.Thing.2011.BluRay.1080p.DTS-HD.MA.5.1.AVC.HYBRID.REMUX-FraMeSToR"
+      }
+    ],
+    "sortDirection": "ascending",
+    "sortKey": "sourceTitle",
+    "totalRecords": 86
+  },
+  "recordedAt": "2026-11-11T12:12:57Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/blocklist?page=2&pageSize=50&sortKey=sourceTitle&sortDirection=ascending"
+  },
+  "status": 200
+}

@@ -34,6 +34,7 @@ pub fn release_formats(catalog: &Catalog, remote: &RemoteEpisode, size: i64) -> 
         indexer_flags: remote.release.indexer_flags,
         release_type: parsed.release_type(),
         series_original_language: series_language,
+        movie: None,
     };
     evaluate(catalog, &input)
 }
@@ -66,6 +67,7 @@ pub fn file_formats(catalog: &Catalog, file: &EpisodeFile, series: &Series) -> V
         indexer_flags: file.indexer_flags,
         release_type: file.release_type,
         series_original_language: series.original_language_id,
+        movie: None,
     };
     evaluate(catalog, &input)
 }
@@ -99,6 +101,7 @@ pub fn history_formats(catalog: &Catalog, history: &HistoryEntry, series: &Serie
         indexer_flags,
         release_type,
         series_original_language: series.original_language_id,
+        movie: None,
     };
     evaluate(catalog, &input)
 }
@@ -120,6 +123,7 @@ pub fn queued_formats(catalog: &Catalog, queued: &QueuedRelease, series: &Series
         indexer_flags: queued.indexer_flags,
         release_type: queued.release_type,
         series_original_language: series.original_language_id,
+        movie: None,
     };
     evaluate(catalog, &input)
 }

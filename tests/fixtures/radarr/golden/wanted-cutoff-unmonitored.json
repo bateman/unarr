@@ -1,0 +1,618 @@
+{
+  "body": {
+    "page": 1,
+    "pageSize": 5,
+    "records": [
+      {
+        "added": "2026-07-14T21:35:25Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "teenagesexdeathatcampmiasma",
+        "digitalRelease": "2026-09-18T00:00:00Z",
+        "folderName": "/movies/Teenage Sex and Death at Camp Miasma (2026) {tmdb-1240889}",
+        "genres": [
+          "Comedy",
+          "Horror",
+          "Romance"
+        ],
+        "hasFile": true,
+        "id": 244,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/jcGvB76v8p1sqYXXkBetWASV0uM.jpg",
+            "url": "/MediaCover/244/poster.jpg?h=ae55db88abcf8922bf71"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/c3N1tHx6cKmhbv7Gt8M4cwHWPUZ.jpg",
+            "url": "/MediaCover/244/fanart.jpg?h=57c757236771c9d9bab8"
+          }
+        ],
+        "imdbId": "tt35298123",
+        "inCinemas": "2026-08-06T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "absurd",
+          "actress",
+          "aftercreditsstinger",
+          "baffled",
+          "camp",
+          "camp counselor",
+          "casting",
+          "distorted reality",
+          "filmmaker",
+          "final girl",
+          "independent film",
+          "lesbian relationship",
+          "lgbt",
+          "loss of virginity",
+          "marijuana",
+          "meta",
+          "nonbinary director",
+          "older woman younger woman relationship",
+          "polyamory",
+          "provocative",
+          "psychosexual",
+          "recluse",
+          "remake",
+          "satire",
+          "serial killer",
+          "sexuality",
+          "slasher",
+          "talent agent",
+          "topless women",
+          "transgender",
+          "transphobia",
+          "trauma",
+          "zoom call"
+        ],
+        "minimumAvailability": "released",
+        "monitored": false,
+        "movieFileId": 342,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "Teenage Sex and Death at Camp Miasma",
+        "overview": "An ambitious director sets out to revive a faded slasher franchise, but her meeting with the film’s reclusive original star spirals into a terrifying maze of obsession, fear, and blood-soaked delusion.",
+        "path": "/movies/Teenage Sex and Death at Camp Miasma (2026) {tmdb-1240889}",
+        "physicalRelease": "2026-12-14T00:00:00Z",
+        "popularity": 15.3417,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.4,
+            "votes": 26754
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 89,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.101,
+            "votes": 393
+          }
+        },
+        "releaseDate": "2026-09-18T00:00:00Z",
+        "runtime": 112,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 1997237997,
+        "sortTitle": "teenage sex and death at camp miasma",
+        "statistics": {
+          "movieFileCount": 1,
+          "movieFileQualities": [
+            {
+              "id": 15,
+              "modifier": "none",
+              "name": "WEBRip-1080p",
+              "resolution": 1080,
+              "source": "webrip"
+            }
+          ],
+          "releaseGroups": [
+            "V3SP4EV3R"
+          ],
+          "sizeOnDisk": 1997237997
+        },
+        "status": "released",
+        "studio": "MUBI",
+        "tags": [
+          1
+        ],
+        "title": "Teenage Sex and Death at Camp Miasma",
+        "titleSlug": "1240889",
+        "tmdbId": 1240889,
+        "website": "https://mubi.com/en/campmiasma",
+        "year": 2026,
+        "youTubeTrailerId": "j9TsiTgYZGw"
+      },
+      {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "predatorkillerkillers",
+        "digitalRelease": "2025-06-05T00:00:00Z",
+        "folderName": "/movies/Predator Killer of Killers (2025)",
+        "genres": [
+          "Animation",
+          "Action",
+          "Science Fiction",
+          "Thriller"
+        ],
+        "hasFile": true,
+        "id": 77,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/2XDQa6EmFHSA37j1t0w88vpWqj9.jpg",
+            "url": "/MediaCover/77/poster.jpg?h=49076c74278e1775555a"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/3AGZKVr2DPT9H53gYtkSEC1tK1E.jpg",
+            "url": "/MediaCover/77/fanart.jpg?h=42b102dbbb9102e3a8e6"
+          }
+        ],
+        "imdbId": "tt36463894",
+        "isAvailable": true,
+        "keywords": [
+          "airplane flight",
+          "alien attack",
+          "alien technology",
+          "anthology",
+          "beheaded",
+          "broken down car",
+          "cloaking device",
+          "cryogenics",
+          "death of father",
+          "female warrior",
+          "feudal japan",
+          "fight to death",
+          "florida",
+          "forced to kill",
+          "harpoon",
+          "japan",
+          "katana",
+          "mother son relationship",
+          "ninja",
+          "ninja warrior",
+          "pilot",
+          "predator",
+          "shipyard",
+          "stick fight",
+          "torso cut in half",
+          "underwater fight",
+          "vikings (norsemen)",
+          "world war ii"
+        ],
+        "lastSearchTime": "2026-03-28T18:27:07Z",
+        "minimumAvailability": "released",
+        "monitored": false,
+        "movieFileId": 232,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "Predator: Killer of Killers",
+        "overview": "While three of the fiercest warriors in human history—a Viking raider, a ninja in feudal Japan, and a WWII pilot—are killers in their own right, they are merely prey for their new opponent: the ultimate killer of killers.",
+        "path": "/movies/Predator Killer of Killers (2025)",
+        "popularity": 6.2834,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 7.4,
+            "votes": 64097
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 78,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 94,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 7.758,
+            "votes": 1386
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.69774,
+            "votes": 5922
+          }
+        },
+        "releaseDate": "2025-06-05T00:00:00Z",
+        "runtime": 85,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 1692711965,
+        "sortTitle": "predator killer of killers",
+        "statistics": {
+          "movieFileCount": 1,
+          "movieFileQualities": [
+            {
+              "id": 15,
+              "modifier": "none",
+              "name": "WEBRip-1080p",
+              "resolution": 1080,
+              "source": "webrip"
+            }
+          ],
+          "releaseGroups": [
+            "V3SP4EV3R"
+          ],
+          "sizeOnDisk": 1692711965
+        },
+        "status": "released",
+        "studio": "20th Century Studios",
+        "tags": [
+          1
+        ],
+        "title": "Predator: Killer of Killers",
+        "titleSlug": "1376434",
+        "tmdbId": 1376434,
+        "website": "https://www.20thcenturystudios.com/movies/predator-killer-of-killers",
+        "year": 2025,
+        "youTubeTrailerId": "fbddYji1F8s"
+      },
+      {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "PG-13",
+        "cleanTitle": "thegorge",
+        "digitalRelease": "2025-02-13T00:00:00Z",
+        "folderName": "/movies/The Gorge (2025)",
+        "genres": [
+          "Romance",
+          "Science Fiction",
+          "Thriller"
+        ],
+        "hasFile": true,
+        "id": 114,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/7iMBZzVZtG0oBug4TfqDb9ZxAOa.jpg",
+            "url": "/MediaCover/114/poster.jpg?h=0bbd9cbcd3db9c8f4750"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/9nhjGaFLKtddDPtPaX5EmKqsWdH.jpg",
+            "url": "/MediaCover/114/fanart.jpg?h=9cbd30aa2cc5c5f349fe"
+          }
+        ],
+        "imdbId": "tt13654226",
+        "isAvailable": true,
+        "keywords": [
+          "elite sniper",
+          "enigmatic environment",
+          "espionage mission",
+          "fog",
+          "isolation",
+          "long-term observation",
+          "mysterious canyon",
+          "paranoia",
+          "restricted zone",
+          "sci‑fi romance",
+          "snipers",
+          "surveillance partners",
+          "survival pressure",
+          "tower",
+          "trust issues",
+          "unknown threat"
+        ],
+        "minimumAvailability": "released",
+        "monitored": false,
+        "movieFileId": 97,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Gorge",
+        "overview": "Two highly trained operatives grow close from a distance after being sent to guard opposite sides of a mysterious gorge. When an evil below emerges, they must work together to survive what lies within.",
+        "path": "/movies/The Gorge (2025)",
+        "popularity": 28.9702,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.7,
+            "votes": 182901
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 57,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 62,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 7.707,
+            "votes": 4331
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.34189,
+            "votes": 19477
+          }
+        },
+        "releaseDate": "2025-02-13T00:00:00Z",
+        "runtime": 128,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 1866570490,
+        "sortTitle": "gorge",
+        "statistics": {
+          "movieFileCount": 1,
+          "movieFileQualities": [
+            {
+              "id": 15,
+              "modifier": "none",
+              "name": "WEBRip-1080p",
+              "resolution": 1080,
+              "source": "webrip"
+            }
+          ],
+          "releaseGroups": [],
+          "sizeOnDisk": 1866570490
+        },
+        "status": "released",
+        "studio": "Skydance Media",
+        "tags": [
+          1
+        ],
+        "title": "The Gorge",
+        "titleSlug": "950396",
+        "tmdbId": 950396,
+        "website": "https://tv.apple.com/movie/umc.cmc.26o403koqo2klixc0jtqy6tmc",
+        "year": 2025,
+        "youTubeTrailerId": "rUSdnuOLebE"
+      },
+      {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "wolfs",
+        "digitalRelease": "2024-09-26T00:00:00Z",
+        "folderName": "/movies/Wolfs (2024)",
+        "genres": [
+          "Crime",
+          "Comedy"
+        ],
+        "hasFile": true,
+        "id": 144,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/vOX1Zng472PC2KnS0B9nRfM8aaZ.jpg",
+            "url": "/MediaCover/144/poster.jpg?h=b2d967076ffd76780daf"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/nSVwus6Vcnw06zqKAa1ioacrpUF.jpg",
+            "url": "/MediaCover/144/fanart.jpg?h=2b38825f50faca244ef9"
+          }
+        ],
+        "imdbId": "tt14257582",
+        "inCinemas": "2024-09-20T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "buddy comedy",
+          "crime cleanup mission",
+          "dark comedy",
+          "double‑crossing",
+          "drug kingpin",
+          "drugs",
+          "duringcreditsstinger",
+          "elite fixer duo",
+          "hit gone wrong",
+          "lone wolf",
+          "luxury hotel room",
+          "private suites",
+          "professional fixer",
+          "sharp banter",
+          "unexpected partnership",
+          "urban nightlife setting"
+        ],
+        "minimumAvailability": "released",
+        "monitored": false,
+        "movieFileId": 124,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "Wolfs",
+        "overview": "Hired to cover up a high-profile crime, a fixer soon finds his night spiralling out of control when he's forced to work with an unexpected counterpart.",
+        "path": "/movies/Wolfs (2024)",
+        "popularity": 5.9993,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.5,
+            "votes": 109716
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 60,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 66,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.5,
+            "votes": 1649
+          },
+          "trakt": {
+            "type": "user",
+            "value": 6.88814,
+            "votes": 9637
+          }
+        },
+        "releaseDate": "2024-09-26T00:00:00Z",
+        "runtime": 108,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 2947509828,
+        "sortTitle": "wolfs",
+        "statistics": {
+          "movieFileCount": 1,
+          "movieFileQualities": [
+            {
+              "id": 3,
+              "modifier": "none",
+              "name": "WEBDL-1080p",
+              "resolution": 1080,
+              "source": "webdl"
+            }
+          ],
+          "releaseGroups": [],
+          "sizeOnDisk": 2947509828
+        },
+        "status": "released",
+        "studio": "Smokehouse Pictures",
+        "tags": [
+          1
+        ],
+        "title": "Wolfs",
+        "titleSlug": "877817",
+        "tmdbId": 877817,
+        "website": "https://tv.apple.com/movie/umc.cmc.c3xhu25rw4jxxxzq4oio6snu",
+        "year": 2024,
+        "youTubeTrailerId": "5RSUcuGIiI0"
+      },
+      {
+        "added": "2026-03-15T13:17:10Z",
+        "alternateTitles": [],
+        "certification": "PG-13",
+        "cleanTitle": "thecourier",
+        "digitalRelease": "2021-04-16T00:00:00Z",
+        "folderName": "/movies/The Courier (2020)/",
+        "genres": [
+          "Thriller",
+          "History",
+          "Drama"
+        ],
+        "hasFile": true,
+        "id": 176,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/zFIjKtZrzhmc7HecdFXXjsLR2Ig.jpg",
+            "url": "/MediaCover/176/poster.jpg?h=e7cb00d9ad8d2dc3efb5"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/sFEDBymGs32vSZ5rkfGWYpQpaEf.jpg",
+            "url": "/MediaCover/176/fanart.jpg?h=8c3fbd9349d07056cd94"
+          }
+        ],
+        "imdbId": "tt8368512",
+        "inCinemas": "2020-01-24T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "based on true story",
+          "british spy",
+          "central intelligence agency (cia)",
+          "cold war",
+          "mi6",
+          "russian spy",
+          "undercover"
+        ],
+        "lastSearchTime": "2026-03-15T13:18:29Z",
+        "minimumAvailability": "released",
+        "monitored": false,
+        "movieFileId": 136,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Courier",
+        "overview": "Cold War spy Greville Wynne and his Russian source try to put an end to the Cuban Missile Crisis.",
+        "path": "/movies/The Courier (2020)/",
+        "physicalRelease": "2021-06-28T00:00:00Z",
+        "popularity": 11.7127,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 7.2,
+            "votes": 82995
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 65,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 85,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 7.034,
+            "votes": 1432
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.23908,
+            "votes": 4237
+          }
+        },
+        "releaseDate": "2021-04-16T00:00:00Z",
+        "runtime": 112,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 70104246454,
+        "sortTitle": "courier",
+        "statistics": {
+          "movieFileCount": 1,
+          "movieFileQualities": [
+            {
+              "id": 31,
+              "modifier": "remux",
+              "name": "Remux-2160p",
+              "resolution": 2160,
+              "source": "bluray"
+            }
+          ],
+          "releaseGroups": [],
+          "sizeOnDisk": 70104246454
+        },
+        "status": "released",
+        "studio": "SunnyMarch",
+        "tags": [
+          1
+        ],
+        "title": "The Courier",
+        "titleSlug": "522241",
+        "tmdbId": 522241,
+        "website": "https://www.thecouriermovie.com",
+        "year": 2020,
+        "youTubeTrailerId": "Qeo8qs9xohM"
+      }
+    ],
+    "sortDirection": "descending",
+    "sortKey": "movieMetadata.year",
+    "totalRecords": 26
+  },
+  "recordedAt": "2026-11-11T12:12:58Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/wanted/cutoff?page=1&pageSize=5&sortKey=movieMetadata.year&sortDirection=descending&monitored=false"
+  },
+  "status": 200
+}

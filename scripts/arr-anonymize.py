@@ -1,13 +1,14 @@
 #!/usr/bin/env python3
-"""Make an anonymised copy of a Sonarr installation's config.xml and sonarr.db.
+"""Make an anonymised copy of a Sonarr or Radarr installation's config.xml and database.
 
-Input is either a Sonarr backup zip (System > Backup > Backup Now; it holds a
+Input is either a backup zip (System > Backup > Backup Now; it holds a
 consistent snapshot of both files) or a directory with `config.xml` and
-`sonarr.db` (plus `sonarr.db-wal` / `sonarr.db-shm` if Sonarr was writing).
-Output is a directory with the two files, ready to drop into
-`tests/fixtures/sonarr/`.
+`sonarr.db` (plus `sonarr.db-wal` / `sonarr.db-shm` if Sonarr was writing);
+`radarr.db` with `--app radarr`. Output is a directory with the two files,
+ready to drop into `tests/fixtures/sonarr/` or `tests/fixtures/radarr/`.
 
-    scripts/sonarr-anonymize.py --from sonarr_backup_v4.0.20.3014_2026.11.07_10.00.00.zip --out .cache/anonymized
+    scripts/arr-anonymize.py --from sonarr_backup_v4.0.20.3014_2026.11.07_10.00.00.zip --out .cache/anonymized
+    scripts/arr-anonymize.py --app radarr --from radarr_backup_v6.4.4.10685_2026.11.11_12.07.09.zip --out .cache/anonymized
 
 What is removed or replaced, keeping every shape the API exposes:
 
@@ -27,11 +28,14 @@ What is removed or replaced, keeping every shape the API exposes:
   URLs, indexer and download client names, failure messages redacted; release
   GUIDs, torrent hashes and download client ids replaced by stable pseudonyms
   (rows that referred to the same release still do); paths rewritten.
-- Root folders and every path under them rewritten to `/tv`, `/tv2`, ...;
+- Root folders and every path under them rewritten to `/tv`, `/tv2`, ...
+  (`/movies`, `/movies2`, ... for Radarr, collections' root folders included);
   paths outside a root folder (download folders) reduced to their last
   component under `/downloads`. Remote path mappings normalised.
 - Commands and the provider status tables emptied (stack traces, last RSS
   releases). The database is then checkpointed, vacuumed and integrity-checked.
+- Movies, movie files, credits, collections, translations and list items
+  are public data and stay as they are.
 - Release names (`SceneName`, `ReleaseGroup`, `SourceTitle`) are kept by
   default: they are public and the parser needs them. `--scrub-releases` blanks
   them.
@@ -73,6 +77,9 @@ SECRET_KEY = re.compile(
 SAFE_KEY = re.compile(
     r"^(port|useSsl|apiPath|categories|animeCategories|animeStandardFormatSearch|"
     r"multiLanguages|failDownloads|tvCategory|tvDirectory|recentTvPriority|olderTvPriority|"
+    r"movieCategory|movieDirectory|recentMoviePriority|olderMoviePriority|"
+    r"movieMetadata|movieMetadataURL|movieMetadataLanguage|movieImages|useMovieNfo|"
+    r"addCollectionName|removeAccents|removeYear|requiredFlags|"
     r"addPaused|initialState|sequentialOrder|firstAndLast|contentLayout|method|"
     r"priority|retention|minimumSeeders|seedCriteria|seedRatio|seedTime|seasonPackSeedTime|"
     r"rejectBlocklistedTorrentHashesWhileGrabbing|removeCompletedDownloads|"
@@ -86,7 +93,7 @@ SAFE_KEY = re.compile(
 )
 URL_RE = re.compile(r"^[a-z][a-z0-9+.-]*://", re.IGNORECASE)
 # What this script writes; an original that already looks like it is not tracked.
-PLACEHOLDER_RE = re.compile(r"\.invalid(/|$)|^redacted$|^/tv\d*(/|$)|^/downloads\d*(/|$)|^/remote\d+/")
+PLACEHOLDER_RE = re.compile(r"\.invalid(/|$)|^redacted$|^/(tv|movies)\d*(/|$)|^/downloads\d*(/|$)|^/remote\d+/")
 EMAIL_RE = re.compile(r"^[^@\s]+@[^@\s]+\.[^@\s]+$")
 # The C# source adds these in PascalCase; the stored JSON is camelCase. Compared lowercased.
 HISTORY_URL_KEYS = {"downloadurl", "guid", "nzbinfourl", "infourl", "magneturl"}
@@ -99,10 +106,19 @@ HISTORY_RELEASE_KEYS = {"releasegroup", "sourcetitle", "title"}
 TOKEN_KEYS = {"guid", "torrentinfohash", "infohash", "downloadid", "releasehash", "hash"}
 HEX_TOKEN_RE = re.compile(r"^[0-9a-fA-F]{24,}$")
 
+# What differs between the applications: the database file, the library
+# root the paths are rewritten to, the table holding the library's folders
+# and the one holding its files.
+APPS = {
+    "sonarr": {"name": "Sonarr", "db": "sonarr.db", "root": "/tv", "library": "Series", "files": "EpisodeFiles", "file": "episode file"},
+    "radarr": {"name": "Radarr", "db": "radarr.db", "root": "/movies", "library": "Movies", "files": "MovieFiles", "file": "movie file"},
+}
+
 
 class Anonymizer:
-    def __init__(self, con: sqlite3.Connection, scrub_releases: bool):
+    def __init__(self, con: sqlite3.Connection, scrub_releases: bool, app: dict = APPS["sonarr"]):
         self.con = con
+        self.app = app
         self.scrub_releases = scrub_releases
         self.secrets: dict[str, str] = {}  # original value -> kind; none may survive
         self.report: dict[str, int] = {}
@@ -162,7 +178,7 @@ class Anonymizer:
         return bool(re.match(r"^[A-Za-z]:[\\/]", path)) or path.startswith("\\\\")
 
     def rewrite_path(self, path):
-        """Map a path under a root folder to /tvN/...; anything else to /downloads/<last>."""
+        """Map a path under a root folder to /tvN/... (/moviesN/...); anything else to /downloads/<last>."""
         if not isinstance(path, str) or not path:
             return path
         norm = path.replace("\\", "/") if self.is_windows(path) else path
@@ -185,21 +201,24 @@ class Anonymizer:
             return
         rows = self.con.execute("SELECT Id, Path FROM RootFolders ORDER BY Id").fetchall()
         for n, (id_, path) in enumerate(rows, start=1):
-            new = "/tv" if n == 1 else f"/tv{n}"
+            new = self.app["root"] if n == 1 else f"{self.app['root']}{n}"
             self.root_map[path] = new
             self.forget(path.rstrip("/\\"), "root folder")
             self.con.execute("UPDATE RootFolders SET Path=? WHERE Id=?", (new, id_))
             self.count("root folders renamed")
 
-    def series_paths(self):
-        if not self.has("Series", "Path"):
+    def library_paths(self):
+        library = self.app["library"]
+        if not self.has(library, "Path"):
             return
-        for id_, path in self.con.execute("SELECT Id, Path FROM Series").fetchall():
-            self.con.execute("UPDATE Series SET Path=? WHERE Id=?", (self.rewrite_path(path), id_))
-            self.count("series paths rewritten")
-        if self.has("ImportLists", "RootFolderPath"):
-            for id_, path in self.con.execute("SELECT Id, RootFolderPath FROM ImportLists").fetchall():
-                self.con.execute("UPDATE ImportLists SET RootFolderPath=? WHERE Id=?", (self.rewrite_path(path), id_))
+        for id_, path in self.con.execute(f"SELECT Id, Path FROM {library}").fetchall():
+            self.con.execute(f"UPDATE {library} SET Path=? WHERE Id=?", (self.rewrite_path(path), id_))
+            self.count(f"{library.lower()} paths rewritten")
+        # Radarr's collections remember the root folder their movies go to.
+        for table in ("ImportLists", "Collections"):
+            if self.has(table, "RootFolderPath"):
+                for id_, path in self.con.execute(f"SELECT Id, RootFolderPath FROM {table}").fetchall():
+                    self.con.execute(f"UPDATE {table} SET RootFolderPath=? WHERE Id=?", (self.rewrite_path(path), id_))
 
     def users(self):
         if not self.has("Users", "Identifier", "Username", "Password", "Salt", "Iterations"):
@@ -415,32 +434,33 @@ class Anonymizer:
                     ("downloadclient.invalid", f"/remote{id_}/", f"/downloads{id_}/", id_),
                 )
                 self.count("remote path mappings rewritten")
-        if self.has("EpisodeFiles", "MediaInfo"):
+        files, kind = self.app["files"], self.app["file"]
+        if self.has(files, "MediaInfo"):
             # The raw ffprobe output keeps the full file name; the parsed fields do not.
-            for id_, raw in self.con.execute("SELECT Id, MediaInfo FROM EpisodeFiles").fetchall():
+            for id_, raw in self.con.execute(f"SELECT Id, MediaInfo FROM {files}").fetchall():
                 try:
                     info = json.loads(raw) if raw else None
                 except json.JSONDecodeError:
                     continue
                 if isinstance(info, dict) and "rawStreamData" in info:
                     del info["rawStreamData"]
-                    self.con.execute("UPDATE EpisodeFiles SET MediaInfo=? WHERE Id=?", (json.dumps(info, indent=2), id_))
-                    self.count("episode file raw ffprobe data dropped")
-        if self.has("EpisodeFiles", "OriginalFilePath"):
+                    self.con.execute(f"UPDATE {files} SET MediaInfo=? WHERE Id=?", (json.dumps(info, indent=2), id_))
+                    self.count(f"{kind} raw ffprobe data dropped")
+        if self.has(files, "OriginalFilePath"):
             # Usually "<release folder>/<file>"; absolute when imported from a loose file.
-            for id_, original in self.con.execute("SELECT Id, OriginalFilePath FROM EpisodeFiles").fetchall():
+            for id_, original in self.con.execute(f"SELECT Id, OriginalFilePath FROM {files}").fetchall():
                 if isinstance(original, str) and (original.startswith("/") or self.is_windows(original)):
                     self.forget_path(original)
                     name = (PureWindowsPath(original) if self.is_windows(original) else PurePosixPath(original)).name
-                    self.con.execute("UPDATE EpisodeFiles SET OriginalFilePath=? WHERE Id=?", (name, id_))
-                    self.count("episode file original paths reduced")
-        if self.scrub_releases and self.has("EpisodeFiles", "SceneName", "ReleaseGroup", "OriginalFilePath"):
-            self.con.execute("UPDATE EpisodeFiles SET SceneName=NULL, ReleaseGroup=NULL, OriginalFilePath=NULL")
-            self.count("episode file release names blanked")
+                    self.con.execute(f"UPDATE {files} SET OriginalFilePath=? WHERE Id=?", (name, id_))
+                    self.count(f"{kind} original paths reduced")
+        if self.scrub_releases and self.has(files, "SceneName", "ReleaseGroup", "OriginalFilePath"):
+            self.con.execute(f"UPDATE {files} SET SceneName=NULL, ReleaseGroup=NULL, OriginalFilePath=NULL")
+            self.count(f"{kind} release names blanked")
 
     def run(self):
         self.root_folders()
-        self.series_paths()
+        self.library_paths()
         self.users()
         self.config_table()
         self.providers()
@@ -507,45 +527,48 @@ def anonymize_config_xml(text: str, new_key: str, instance_name: str | None) -> 
     return text, found
 
 
-def locate_inputs(source: Path, work: Path) -> tuple[Path, Path]:
-    """Copy config.xml and sonarr.db (with WAL side files) from a zip or a directory into `work`."""
+def locate_inputs(source: Path, work: Path, app: dict) -> tuple[Path, Path]:
+    """Copy config.xml and the database (with WAL side files) from a zip or a directory into `work`."""
+    db, name = app["db"], app["name"]
     if source.is_file() and zipfile.is_zipfile(source):
         with zipfile.ZipFile(source) as z:
             names = {Path(n).name.lower(): n for n in z.namelist()}
-            for wanted in ("config.xml", "sonarr.db"):
+            for wanted in ("config.xml", db):
                 if wanted not in names:
                     sys.exit(f"{source}: no {wanted} inside the zip")
                 with z.open(names[wanted]) as src, open(work / wanted, "wb") as dst:
                     shutil.copyfileobj(src, dst)
     elif source.is_dir():
-        for wanted in ("config.xml", "sonarr.db"):
+        for wanted in ("config.xml", db):
             if not (source / wanted).exists():
-                sys.exit(f"{source}: no {wanted}. If Sonarr uses PostgreSQL there is no sonarr.db to anonymise.")
+                sys.exit(f"{source}: no {wanted}. If {name} uses PostgreSQL there is no {db} to anonymise.")
             shutil.copy2(source / wanted, work / wanted)
-        for side in ("sonarr.db-wal", "sonarr.db-shm"):
+        for side in (db + "-wal", db + "-shm"):
             if (source / side).exists():
                 shutil.copy2(source / side, work / side)
     else:
-        sys.exit(f"{source}: expected a Sonarr backup zip or a directory with config.xml and sonarr.db")
-    return work / "config.xml", work / "sonarr.db"
+        sys.exit(f"{source}: expected a {name} backup zip or a directory with config.xml and {db}")
+    return work / "config.xml", work / db
 
 
 def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
-    ap.add_argument("--from", dest="source", required=True, type=Path, help="Sonarr backup zip, or a directory with config.xml and sonarr.db")
+    ap.add_argument("--app", choices=sorted(APPS), default="sonarr", help="the application the backup is from (default: sonarr)")
+    ap.add_argument("--from", dest="source", required=True, type=Path, help="backup zip, or a directory with config.xml and the database")
     ap.add_argument("--out", required=True, type=Path, help="output directory (created; must be empty)")
     ap.add_argument("--instance-name", help="replace <InstanceName> in config.xml (kept by default)")
     ap.add_argument("--api-key", help="API key to write in config.xml, 32 hex digits (default: random); the contract tests expect 0123456789abcdef0123456789abcdef")
     ap.add_argument("--scrub-releases", action="store_true", help="also blank release names and groups")
     args = ap.parse_args()
+    app = APPS[args.app]
 
     args.out.mkdir(parents=True, exist_ok=True)
     if any(args.out.iterdir()):
         sys.exit(f"{args.out} is not empty; refusing to overwrite")
 
-    with tempfile.TemporaryDirectory(prefix="sonarr-anonymize-") as tmp:
+    with tempfile.TemporaryDirectory(prefix="arr-anonymize-") as tmp:
         work = Path(tmp)
-        xml_path, db_path = locate_inputs(args.source, work)
+        xml_path, db_path = locate_inputs(args.source, work, app)
 
         new_key = args.api_key or random_api_key()
         if not re.fullmatch(r"[0-9a-f]{32}", new_key):
@@ -558,7 +581,7 @@ def main():
         con.execute("PRAGMA journal_mode=DELETE")
         level = con.execute("SELECT MAX(Version) FROM VersionInfo").fetchone()[0] if con.execute(
             "SELECT 1 FROM sqlite_master WHERE name='VersionInfo'").fetchone() else None
-        anon = Anonymizer(con, args.scrub_releases)
+        anon = Anonymizer(con, args.scrub_releases, app)
         anon.run()
         con.execute("VACUUM")
         integrity = con.execute("PRAGMA integrity_check").fetchone()[0]
@@ -576,13 +599,13 @@ def main():
             if len(leaked) > 20:
                 print(f"  ... and {len(leaked) - 20} more", file=sys.stderr)
             sys.exit(1)
-        for side in ("sonarr.db-wal", "sonarr.db-shm"):
+        for side in (app["db"] + "-wal", app["db"] + "-shm"):
             if (work / side).exists():
                 (work / side).unlink()
-        shutil.copy2(db_path, args.out / "sonarr.db")
+        shutil.copy2(db_path, args.out / app["db"])
         (args.out / "config.xml").write_text(xml, encoding="utf-8")
 
-    print(f"wrote {args.out / 'config.xml'} and {args.out / 'sonarr.db'} (migration level {level})")
+    print(f"wrote {args.out / 'config.xml'} and {args.out / app['db']} (migration level {level})")
     print(f"  API key: {new_key}  (old key removed)")
     print("  web login: unarr / fixture  (original users removed)")
     if "InstanceName" in found and args.instance_name is None:

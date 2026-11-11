@@ -104,6 +104,7 @@ fn history_resource(
                     .unwrap_or(0),
                 release_type,
                 series_original_language: s.original_language_id,
+                movie: None,
                 ..Input::default()
             };
             let (formats, score) = release_formats(catalog, s, title, input);
@@ -354,6 +355,7 @@ fn blocklist_resource(catalog: &Catalog, b: &BlocklistEntry) -> Value {
                 indexer_flags: b.indexer_flags,
                 release_type: b.release_type,
                 series_original_language: s.original_language_id,
+                movie: None,
                 ..Input::default()
             };
             release_formats(catalog, s, b.source_title.as_deref().unwrap_or(""), input).0

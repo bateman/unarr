@@ -1,0 +1,541 @@
+{
+  "body": {
+    "page": 2,
+    "pageSize": 5,
+    "records": [
+      {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "timecrimes",
+        "folderName": "/movies/Timecrimes (2007)",
+        "genres": [
+          "Science Fiction",
+          "Thriller"
+        ],
+        "hasFile": false,
+        "id": 136,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/zdxQRP7mzczMJBwKnv8MCPRq7rQ.jpg",
+            "url": "/MediaCover/136/poster.jpg?h=0df41bce657a9d766e6d"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/anA2hEvG5SWrYETwcJ1SUPUfKDz.jpg",
+            "url": "/MediaCover/136/fanart.jpg?h=733672de475ab47a511b"
+          }
+        ],
+        "imdbId": "tt0480669",
+        "inCinemas": "2007-11-01T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "bicycle",
+          "binoculars",
+          "car accident",
+          "injury",
+          "loop",
+          "machine",
+          "radio",
+          "scientist",
+          "scissors",
+          "surrealism",
+          "time travel",
+          "voyeur",
+          "woods"
+        ],
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 3,
+          "name": "Spanish"
+        },
+        "originalTitle": "Los cronocrímenes",
+        "overview": "A man accidentally gets into a time machine and travels back in time nearly an hour. Finding himself will be the first of a series of disasters of unforeseeable consequences.",
+        "path": "/movies/Timecrimes (2007)",
+        "physicalRelease": "2009-03-31T00:00:00Z",
+        "popularity": 9.36,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 7.1,
+            "votes": 77054
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 68,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 90,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 7,
+            "votes": 1565
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.18669,
+            "votes": 3005
+          }
+        },
+        "releaseDate": "2009-03-31T00:00:00Z",
+        "runtime": 93,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "timecrimes",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "Arsénico Producciones",
+        "tags": [
+          1
+        ],
+        "title": "Timecrimes",
+        "titleSlug": "14139",
+        "tmdbId": 14139,
+        "website": "",
+        "year": 2007,
+        "youTubeTrailerId": "0XSAGj2liCI"
+      },
+      {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "thething",
+        "collection": {
+          "title": "The Thing Collection",
+          "tmdbId": 479888
+        },
+        "digitalRelease": "2001-12-29T00:00:00Z",
+        "folderName": "/movies/The Thing (1982)",
+        "genres": [
+          "Horror",
+          "Mystery",
+          "Science Fiction"
+        ],
+        "hasFile": false,
+        "id": 130,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/tzGY49kseSE9QAKk47uuDGwnSCu.jpg",
+            "url": "/MediaCover/130/poster.jpg?h=7fde06762239ebb463ab"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/r9leYNa8nTRCceZrZhP1DXkgKVb.jpg",
+            "url": "/MediaCover/130/fanart.jpg?h=761eea7e91f8cf67b340"
+          }
+        ],
+        "imdbId": "tt0084787",
+        "inCinemas": "1982-06-25T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "alien",
+          "alien infection",
+          "alien life-form",
+          "alien monster",
+          "alien parasites",
+          "ambiguity",
+          "antarctica",
+          "based on novel or book",
+          "blood test",
+          "body horror",
+          "cold",
+          "creature",
+          "halloween",
+          "helicopter",
+          "helicopter pilot",
+          "horrified",
+          "isolated place",
+          "isolation",
+          "lovecraftian",
+          "mutation",
+          "paranoia",
+          "remake",
+          "research station",
+          "shape shifting alien",
+          "sled dogs",
+          "snowstorm",
+          "space marine",
+          "spacecraft",
+          "survival",
+          "survival horror",
+          "tense",
+          "uncertainty"
+        ],
+        "lastSearchTime": "2026-11-01T16:31:32Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Thing",
+        "overview": "A research team in Antarctica is hunted by a shape-shifting alien that assumes the appearance of its victims.",
+        "path": "/movies/The Thing (1982)",
+        "physicalRelease": "1987-03-19T00:00:00Z",
+        "popularity": 16.5323,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 8.2,
+            "votes": 541632
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 57,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 85,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 8.074,
+            "votes": 8428
+          },
+          "trakt": {
+            "type": "user",
+            "value": 8.14887,
+            "votes": 13139
+          }
+        },
+        "releaseDate": "1987-03-19T00:00:00Z",
+        "runtime": 109,
+        "secondaryYear": 2005,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "thing",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "Universal Pictures",
+        "tags": [
+          1
+        ],
+        "title": "The Thing",
+        "titleSlug": "1091",
+        "tmdbId": 1091,
+        "website": "http://www.theofficialjohncarpenter.com/the-thing/",
+        "year": 1982,
+        "youTubeTrailerId": "GigeANz21rk"
+      },
+      {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "swissarmyman",
+        "digitalRelease": "2016-10-14T00:00:00Z",
+        "folderName": "/movies/Swiss Army Man (2016)",
+        "genres": [
+          "Comedy",
+          "Drama",
+          "Romance",
+          "Fantasy",
+          "Adventure"
+        ],
+        "hasFile": false,
+        "id": 101,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/xE2QfqvAGI8n8ckIiy9FzS9XF94.jpg",
+            "url": "/MediaCover/101/poster.jpg?h=7146c04e9ab758847dd3"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/xo6Sedrdj4DVnh4ZEzDM4D0QQYU.jpg",
+            "url": "/MediaCover/101/fanart.jpg?h=acf4ad896ca9e8b7dafd"
+          }
+        ],
+        "imdbId": "tt4034354",
+        "inCinemas": "2016-06-24T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "beach",
+          "buddy comedy",
+          "corpse",
+          "dead body",
+          "deserted island",
+          "fart",
+          "friends",
+          "survival"
+        ],
+        "lastSearchTime": "2026-04-01T07:22:00Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "Swiss Army Man",
+        "overview": "Alone on a tiny deserted island, Hank has given up all hope of ever making it home again. But one day everything changes when a dead body washes ashore, and he soon realizes it may be his last opportunity to escape certain death. Armed with his new “friend” and an unusual bag of tricks, the duo go on an epic adventure to bring Hank back to the woman of his dreams.",
+        "path": "/movies/Swiss Army Man (2016)",
+        "physicalRelease": "2016-10-04T00:00:00Z",
+        "popularity": 4.8761,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.9,
+            "votes": 143315
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 64,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 73,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.903,
+            "votes": 3963
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.02255,
+            "votes": 6520
+          }
+        },
+        "releaseDate": "2016-10-04T00:00:00Z",
+        "runtime": 97,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "swiss army man",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "BlackBird",
+        "tags": [
+          1
+        ],
+        "title": "Swiss Army Man",
+        "titleSlug": "347031",
+        "tmdbId": 347031,
+        "website": "http://swissarmyman.com/",
+        "year": 2016,
+        "youTubeTrailerId": "4v92gXetGqA"
+      },
+      {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "cleanTitle": "superhost",
+        "digitalRelease": "2021-09-02T00:00:00Z",
+        "folderName": "/movies/Superhost (2021)",
+        "genres": [
+          "Horror",
+          "Thriller"
+        ],
+        "hasFile": false,
+        "id": 100,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/3YBdvIrYlWGXAp2jJGNMbwXp7tZ.jpg",
+            "url": "/MediaCover/100/poster.jpg?h=7c8b1a2511b6122da97d"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/kYS5oHeMjmgwHZQ1voxMbsqXpqd.jpg",
+            "url": "/MediaCover/100/fanart.jpg?h=537e6b7541f43100b164"
+          }
+        ],
+        "imdbId": "tt13309978",
+        "isAvailable": true,
+        "keywords": [],
+        "lastSearchTime": "2026-03-28T18:37:01Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "Superhost",
+        "overview": "Two travel vloggers check into a vacation rental with a host that will do anything for a good review.",
+        "path": "/movies/Superhost (2021)",
+        "physicalRelease": "2022-04-20T00:00:00Z",
+        "popularity": 3.55,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 5.5,
+            "votes": 5794
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 85,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 5.8,
+            "votes": 208
+          },
+          "trakt": {
+            "type": "user",
+            "value": 5.72045,
+            "votes": 440
+          }
+        },
+        "releaseDate": "2021-09-02T00:00:00Z",
+        "runtime": 83,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "superhost",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "Superchill",
+        "tags": [
+          1
+        ],
+        "title": "Superhost",
+        "titleSlug": "849369",
+        "tmdbId": 849369,
+        "website": "https://www.shudder.com/movies/watch/superhost/0aba2467c183c6a0",
+        "year": 2021,
+        "youTubeTrailerId": "k5wK0Z1ocpM"
+      },
+      {
+        "added": "2026-10-16T05:43:26Z",
+        "alternateTitles": [],
+        "certification": "PG-13",
+        "cleanTitle": "streetfighter",
+        "digitalRelease": "2026-11-11T00:00:00Z",
+        "folderName": "/movies/Street Fighter (2026) {tmdb-1153576}",
+        "genres": [
+          "Action",
+          "Fantasy",
+          "Comedy"
+        ],
+        "hasFile": false,
+        "id": 304,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/dJPT2Uf12X6aFg8i5N67NTpIZ9t.jpg",
+            "url": "/MediaCover/304/poster.jpg?h=3911f70fdd89c37b3cd5"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/3BBjkQmdGacKYZtpmK2vIfuDmON.jpg",
+            "url": "/MediaCover/304/fanart.jpg?h=5ac52c5c0ed92bef7fb9"
+          }
+        ],
+        "imdbId": "tt27419420",
+        "inCinemas": "2026-10-14T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "1990s",
+          "amused",
+          "based on video game",
+          "battle royale",
+          "duringcreditsstinger",
+          "hand to hand combat",
+          "martial arts",
+          "martial arts tournament",
+          "power",
+          "powers",
+          "ridiculous",
+          "shocking",
+          "wuxia"
+        ],
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "Street Fighter",
+        "overview": "In 1993, estranged Street Fighters Ryu and Ken Masters are thrown back into combat when the mysterious Chun-Li recruits them for the next World Warrior Tournament: a brutal clash of fists, fate, and fury. But behind this battle royale lies a deadly conspiracy that forces them to face off against each other and the demons of their past. And if they don't, it's GAME OVER!",
+        "path": "/movies/Street Fighter (2026) {tmdb-1153576}",
+        "popularity": 58.1816,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.2,
+            "votes": 22019
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 46,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.347,
+            "votes": 226
+          }
+        },
+        "releaseDate": "2026-11-11T00:00:00Z",
+        "runtime": 120,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 0,
+        "sortTitle": "street fighter",
+        "statistics": {
+          "movieFileCount": 0,
+          "movieFileQualities": [],
+          "releaseGroups": [],
+          "sizeOnDisk": 0
+        },
+        "status": "released",
+        "studio": "Capcom",
+        "tags": [
+          1
+        ],
+        "title": "Street Fighter",
+        "titleSlug": "1153576",
+        "tmdbId": 1153576,
+        "website": "https://www.streetfightermovie.com",
+        "year": 2026,
+        "youTubeTrailerId": "U6sbm1OaJb8"
+      }
+    ],
+    "sortDirection": "descending",
+    "sortKey": "movieMetadata.sortTitle",
+    "totalRecords": 91
+  },
+  "recordedAt": "2026-11-11T12:12:58Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/wanted/missing?page=2&pageSize=5"
+  },
+  "status": 200
+}

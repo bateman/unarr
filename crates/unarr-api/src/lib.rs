@@ -60,8 +60,8 @@ async fn lowercase_api_path(
 }
 
 /// Resources whose `PUT` takes an id: `[RestPutById]` in the originals,
-/// which is `HttpPut("{id:int?}")`.
-const PUT_BY_ID: &[&str] = &[
+/// which is `HttpPut("{id:int?}")`. Sonarr's.
+const SONARR_PUT_BY_ID: &[&str] = &[
     "autotagging",
     "config/downloadclient",
     "config/host",
@@ -89,9 +89,46 @@ const PUT_BY_ID: &[&str] = &[
     "tag",
 ];
 
+/// Radarr's.
+const RADARR_PUT_BY_ID: &[&str] = &[
+    "autotagging",
+    "collection",
+    "config/downloadclient",
+    "config/host",
+    "config/importlist",
+    "config/indexer",
+    "config/mediamanagement",
+    "config/metadata",
+    "config/naming",
+    "config/ui",
+    "customfilter",
+    "customformat",
+    "delayprofile",
+    "downloadclient",
+    "exclusions",
+    "importlist",
+    "indexer",
+    "metadata",
+    "movie",
+    "moviefile",
+    "notification",
+    "qualitydefinition",
+    "qualityprofile",
+    "releaseprofile",
+    "remotepathmapping",
+    "tag",
+];
+
+fn put_by_id(personality: unarr_core::Personality) -> &'static [&'static str] {
+    match personality {
+        unarr_core::Personality::Radarr => RADARR_PUT_BY_ID,
+        unarr_core::Personality::Sonarr | unarr_core::Personality::Lidarr => SONARR_PUT_BY_ID,
+    }
+}
+
 /// Split an API path into what precedes the resource, the resource and the
-/// id in the route, when the resource is one of [`PUT_BY_ID`].
-fn put_by_id_target(path: &str) -> Option<(&str, Option<&str>)> {
+/// id in the route, when the resource is one of `resources`.
+fn put_by_id_target<'a>(resources: &[&str], path: &'a str) -> Option<(&'a str, Option<&'a str>)> {
     let api = path.find("/api/v")?;
     let resource_start = api + 1 + path[api + 1..].find('/')? + 1;
     let resource_start = resource_start + path[resource_start..].find('/')? + 1;
@@ -102,7 +139,7 @@ fn put_by_id_target(path: &str) -> Option<(&str, Option<&str>)> {
         }
         _ => (rest, None),
     };
-    PUT_BY_ID
+    resources
         .contains(&resource)
         .then(|| (&path[..resource_start + resource.len()], id))
 }
@@ -113,6 +150,7 @@ fn put_by_id_target(path: &str) -> Option<(&str, Option<&str>)> {
 /// one that counts there; `0` stands for "none", which the API router
 /// rejects as the originals' validation does.
 async fn put_resource_id(
+    axum::extract::State(state): axum::extract::State<AppState>,
     request: axum::extract::Request,
     next: axum::middleware::Next,
 ) -> axum::response::Response {
@@ -120,7 +158,7 @@ async fn put_resource_id(
         return next.run(request).await;
     }
     let uri = request.uri().clone();
-    let Some((base, route_id)) = put_by_id_target(uri.path()) else {
+    let Some((base, route_id)) = put_by_id_target(put_by_id(state.personality()), uri.path()) else {
         return next.run(request).await;
     };
     let (mut parts, body) = request.into_parts();
@@ -193,9 +231,27 @@ async fn version_header(
     response
 }
 
+/// Radarr's 404 problem details name RFC 9110 where Sonarr's name RFC
+/// 7231: the handlers both share answer Sonarr's, replaced here.
+async fn radarr_problem_details(
+    request: axum::extract::Request,
+    next: axum::middleware::Next,
+) -> axum::response::Response {
+    let response = next.run(request).await;
+    if response.extensions().get::<error::NotFoundProblem>().is_some() {
+        return error::not_found_problem(error::NOT_FOUND_TYPE_RFC9110);
+    }
+    response
+}
+
 /// Build the router for one personality.
 pub fn router(state: AppState) -> Router {
-    let api = routes::api_router(&state)
+    let api = routes::api_router(&state);
+    let api = match state.personality() {
+        unarr_core::Personality::Radarr => api.layer(axum::middleware::from_fn(radarr_problem_details)),
+        unarr_core::Personality::Sonarr | unarr_core::Personality::Lidarr => api,
+    };
+    let api = api
         .route_layer(axum::middleware::from_fn(reject_put_without_id))
         .route_layer(axum::middleware::from_fn_with_state(
             state.clone(),
@@ -260,19 +316,10 @@ pub fn router(state: AppState) -> Router {
         .merge(routes::ui_router(&state));
 
     // The calendar feed: opened with the API key, as the API is.
-    let feed = Router::new()
-        .route(
-            "/feed/v3/calendar/Sonarr.ics",
-            axum::routing::get(routes::feed::calendar),
-        )
-        .route(
-            "/feed/v3/calendar/sonarr.ics",
-            axum::routing::get(routes::feed::calendar),
-        )
-        .route_layer(axum::middleware::from_fn_with_state(
-            state.clone(),
-            auth::require_api_key,
-        ));
+    let feed = routes::feed_router(&state).route_layer(axum::middleware::from_fn_with_state(
+        state.clone(),
+        auth::require_api_key,
+    ));
 
     let app = Router::new()
         .nest(state.personality().api_prefix(), api)
@@ -302,7 +349,10 @@ pub fn router(state: AppState) -> Router {
     // host check sit on an outer router whose only route is the real one.
     Router::new()
         .fallback_service(app)
-        .layer(axum::middleware::from_fn(put_resource_id))
+        .layer(axum::middleware::from_fn_with_state(
+            state.clone(),
+            put_resource_id,
+        ))
         .layer(axum::middleware::from_fn(lowercase_api_path))
         .layer(axum::middleware::from_fn_with_state(
             state.clone(),

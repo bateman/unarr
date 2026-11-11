@@ -67,7 +67,7 @@ through a proxy) and the anonymisation.
      download still do.
    - Paths: every absolute path keeps its last component (two if it names a
      file inside a folder) under `/downloads/`.
-   - Release names are kept, as `sonarr-anonymize.py` keeps them: they are
+   - Release names are kept, as `arr-anonymize.py` keeps them: they are
      public and the parser needs them. `--replace OLD=NEW` rewrites anything
      else you spot while reviewing the output; it accepts several.
 

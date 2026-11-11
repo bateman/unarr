@@ -1,0 +1,46 @@
+{
+  "body": [
+    {
+      "freeSpace": 22123720704,
+      "label": "",
+      "path": "/",
+      "totalSpace": 270553174016
+    },
+    {
+      "freeSpace": 0,
+      "label": "",
+      "path": "/mnt/skills/examples",
+      "totalSpace": 6160384
+    },
+    {
+      "freeSpace": 0,
+      "label": "",
+      "path": "/mnt/skills/public",
+      "totalSpace": 786432
+    },
+    {
+      "freeSpace": 27435008,
+      "label": "",
+      "path": "/opt/claude-code",
+      "totalSpace": 374689792
+    },
+    {
+      "freeSpace": 16416768,
+      "label": "",
+      "path": "/opt/env-runner",
+      "totalSpace": 50839552
+    },
+    {
+      "freeSpace": 0,
+      "label": "",
+      "path": "/opt/rclone",
+      "totalSpace": 13107200
+    }
+  ],
+  "recordedAt": "2026-11-11T12:12:51Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/diskspace"
+  },
+  "status": 200
+}

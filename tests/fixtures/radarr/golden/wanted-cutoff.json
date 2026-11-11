@@ -1,0 +1,1509 @@
+{
+  "body": {
+    "page": 1,
+    "pageSize": 20,
+    "records": [
+      {
+        "added": "2026-09-18T18:39:51Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "buddy",
+        "digitalRelease": "2026-10-13T00:00:00Z",
+        "folderName": "/movies/Buddy (2026) {tmdb-1514026}",
+        "genres": [
+          "Horror",
+          "Comedy",
+          "Fantasy"
+        ],
+        "hasFile": true,
+        "id": 285,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/1BdZbNvl1SfrrX8J9X5tQzN6Ivu.jpg",
+            "url": "/MediaCover/285/poster.jpg?h=56407983847cdb8b7b0c"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/sMmG82PtjK8A9rVc34gwKQtCm3A.jpg",
+            "url": "/MediaCover/285/fanart.jpg?h=06d2aa8eb8b239473c48"
+          }
+        ],
+        "imdbId": "tt37281055",
+        "inCinemas": "2026-08-28T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "burlesque",
+          "dark comedy",
+          "gore",
+          "independent film",
+          "kids show",
+          "madness",
+          "missing children",
+          "slasher",
+          "suburban",
+          "supernatural",
+          "supernatural horror",
+          "tv host",
+          "unicorn"
+        ],
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 362,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "Buddy",
+        "overview": "Inside the colorful world of \"It's Buddy!\", a group of children spend their days singing, dancing, and helping Buddy - bright orange unicorn - spread happiness. But when one child refuses to play along, Buddy is not pleased and cracks begin to appear in this seemingly perfect world.",
+        "path": "/movies/Buddy (2026) {tmdb-1514026}",
+        "physicalRelease": "2026-12-08T00:00:00Z",
+        "popularity": 120.1111,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.6,
+            "votes": 24050
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 67,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.8,
+            "votes": 267
+          }
+        },
+        "releaseDate": "2026-10-13T00:00:00Z",
+        "runtime": 96,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 1896292383,
+        "sortTitle": "buddy",
+        "statistics": {
+          "movieFileCount": 1,
+          "movieFileQualities": [
+            {
+              "id": 15,
+              "modifier": "none",
+              "name": "WEBRip-1080p",
+              "resolution": 1080,
+              "source": "webrip"
+            }
+          ],
+          "releaseGroups": [
+            "yts"
+          ],
+          "sizeOnDisk": 1896292383
+        },
+        "status": "released",
+        "studio": "BoulderLight Pictures",
+        "tags": [
+          1
+        ],
+        "title": "Buddy",
+        "titleSlug": "1514026",
+        "tmdbId": 1514026,
+        "website": "https://roadsideattractions.com/filmography/Buddy/",
+        "year": 2026,
+        "youTubeTrailerId": ""
+      },
+      {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "PG-13",
+        "cleanTitle": "consolewars",
+        "digitalRelease": "2020-09-23T00:00:00Z",
+        "folderName": "/movies/Console Wars (2020)",
+        "genres": [
+          "Documentary"
+        ],
+        "hasFile": true,
+        "id": 24,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/1y9uIazgq9gKawFqXuO71Xjs44Z.jpg",
+            "url": "/MediaCover/24/poster.jpg?h=91407f90bdaad15be724"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/21W3SrVdbkbOobZ3hqw9pyQ9qMX.jpg",
+            "url": "/MediaCover/24/fanart.jpg?h=8784cc5b151cf815bc97"
+          }
+        ],
+        "imdbId": "tt5215462",
+        "isAvailable": true,
+        "keywords": [
+          "based on video game",
+          "business competition",
+          "history and legacy",
+          "marketing",
+          "nintendo",
+          "retro video games",
+          "sega",
+          "video game console",
+          "video game consoles",
+          "video game history"
+        ],
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 20,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "Console Wars",
+        "overview": "In 1990, SEGA, a fledgling arcade company assembled a team of misfits to take on the greatest video game company in the world, Nintendo. It was a once-in-a-lifetime, no-holds-barred conflict that pit brother against brother, kids against grownups, Sonic against Mario, and uniquely American capitalism against centuries-old Japanese tradition. For the first time ever, the men and women who fought on the front lines for Sega and Nintendo discuss this battle that defined a generation.",
+        "path": "/movies/Console Wars (2020)",
+        "popularity": 1.389,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 7,
+            "votes": 2520
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 85,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 7.1,
+            "votes": 88
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.31762,
+            "votes": 403
+          }
+        },
+        "releaseDate": "2020-09-23T00:00:00Z",
+        "runtime": 93,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 6437678525,
+        "sortTitle": "console wars",
+        "statistics": {
+          "movieFileCount": 1,
+          "movieFileQualities": [
+            {
+              "id": 3,
+              "modifier": "none",
+              "name": "WEBDL-1080p",
+              "resolution": 1080,
+              "source": "webdl"
+            }
+          ],
+          "releaseGroups": [],
+          "sizeOnDisk": 6437678525
+        },
+        "status": "released",
+        "studio": "Scott Rudin Productions",
+        "tags": [
+          1
+        ],
+        "title": "Console Wars",
+        "titleSlug": "344031",
+        "tmdbId": 344031,
+        "website": "",
+        "year": 2020,
+        "youTubeTrailerId": "MjkdxCcCi1U"
+      },
+      {
+        "added": "2026-09-20T18:50:54Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "thedeathrobinhood",
+        "digitalRelease": "2026-07-28T00:00:00Z",
+        "folderName": "/movies/The Death of Robin Hood (2026) {tmdb-1284465}",
+        "genres": [
+          "Adventure",
+          "Drama",
+          "Action"
+        ],
+        "hasFile": true,
+        "id": 287,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/13MmRwmG5NmaMfU8qNrtgGXisiD.jpg",
+            "url": "/MediaCover/287/poster.jpg?h=1fc8a0dcadbe8d8c9d1e"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/lh3BDkmWJh998n4fQcHYcVi7dpm.jpg",
+            "url": "/MediaCover/287/fanart.jpg?h=030e89f814989f0b15ab"
+          }
+        ],
+        "imdbId": "tt32273171",
+        "inCinemas": "2026-06-18T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "based on myths, legends or folklore",
+          "grim",
+          "grimdark",
+          "robin hood",
+          "salvation",
+          "somber"
+        ],
+        "lastSearchTime": "2026-09-20T18:51:07Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 356,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Death of Robin Hood",
+        "overview": "Grappling with his past after a life of crime and murder, Robin Hood finds himself gravely injured after a battle he thought would be his last. In the hands of a mysterious woman, he is offered a chance at salvation.",
+        "path": "/movies/The Death of Robin Hood (2026) {tmdb-1284465}",
+        "physicalRelease": "2026-09-25T00:00:00Z",
+        "popularity": 19.3758,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6,
+            "votes": 26293
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 61,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.7,
+            "votes": 614
+          },
+          "trakt": {
+            "type": "user",
+            "value": 6.46875,
+            "votes": 576
+          }
+        },
+        "releaseDate": "2026-07-28T00:00:00Z",
+        "runtime": 123,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 36027834772,
+        "sortTitle": "death of robin hood",
+        "statistics": {
+          "movieFileCount": 1,
+          "movieFileQualities": [
+            {
+              "id": 30,
+              "modifier": "remux",
+              "name": "Remux-1080p",
+              "resolution": 1080,
+              "source": "bluray"
+            }
+          ],
+          "releaseGroups": [
+            "Ben"
+          ],
+          "sizeOnDisk": 36027834772
+        },
+        "status": "released",
+        "studio": "Lyrical Media",
+        "tags": [
+          1
+        ],
+        "title": "The Death of Robin Hood",
+        "titleSlug": "1284465",
+        "tmdbId": 1284465,
+        "website": "https://a24films.com/films/the-death-of-robin-hood",
+        "year": 2026,
+        "youTubeTrailerId": "tlSDDuWxO_0"
+      },
+      {
+        "added": "2026-03-19T18:33:28Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "thedogstars",
+        "digitalRelease": "2026-10-27T00:00:00Z",
+        "folderName": "/movies/The Dog Stars (2026) {tmdb-1384216}",
+        "genres": [
+          "Action",
+          "Thriller",
+          "Science Fiction"
+        ],
+        "hasFile": true,
+        "id": 183,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/5O616X9vmRzQdB68PHzBewPittd.jpg",
+            "url": "/MediaCover/183/poster.jpg?h=7833ce7eb2f2f7b85b3e"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/3k7GzxOdLZkN3eZsuhLi2eRzkXO.jpg",
+            "url": "/MediaCover/183/fanart.jpg?h=6d9835edc6cd498b252f"
+          }
+        ],
+        "imdbId": "tt21285562",
+        "inCinemas": "2026-08-26T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "based on novel or book",
+          "colorado",
+          "death of wife",
+          "denver, colorado",
+          "depressing",
+          "derisive",
+          "detached",
+          "dogs",
+          "dystopia",
+          "grief",
+          "group",
+          "joyful",
+          "lonely man",
+          "loving",
+          "pandemic",
+          "pilot",
+          "post-apocalyptic",
+          "scavengers",
+          "wonder"
+        ],
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 369,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Dog Stars",
+        "overview": "After the world's population has been ravaged by a pandemic, a man lives a lonesome existence in a Colorado airplane hangar with his dog and a dour gunman he has befriended. When a mysterious transmission comes through on the radio while he’s flying his old Cessna, it sparks a hunt for the provenance of the sound.",
+        "path": "/movies/The Dog Stars (2026) {tmdb-1384216}",
+        "physicalRelease": "2026-12-01T00:00:00Z",
+        "popularity": 74.4521,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.3,
+            "votes": 27791
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 49,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 7.197,
+            "votes": 931
+          }
+        },
+        "releaseDate": "2026-10-27T00:00:00Z",
+        "runtime": 119,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 7131544465,
+        "sortTitle": "dog stars",
+        "statistics": {
+          "movieFileCount": 1,
+          "movieFileQualities": [
+            {
+              "id": 3,
+              "modifier": "none",
+              "name": "WEBDL-1080p",
+              "resolution": 1080,
+              "source": "webdl"
+            }
+          ],
+          "releaseGroups": [
+            "LOST"
+          ],
+          "sizeOnDisk": 7131544465
+        },
+        "status": "released",
+        "studio": "20th Century Studios",
+        "tags": [
+          1
+        ],
+        "title": "The Dog Stars",
+        "titleSlug": "1384216",
+        "tmdbId": 1384216,
+        "website": "https://www.20thcenturystudios.com/movies/the-dog-stars",
+        "year": 2026,
+        "youTubeTrailerId": "-xSxaE1ClEE"
+      },
+      {
+        "added": "2026-03-14T22:45:14Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "theexorcistbeliever",
+        "collection": {
+          "title": "The Exorcist Collection",
+          "tmdbId": 12263
+        },
+        "digitalRelease": "2023-10-24T00:00:00Z",
+        "folderName": "/movies/The Exorcist Believer (2023) {tmdb-807172}",
+        "genres": [
+          "Horror"
+        ],
+        "hasFile": true,
+        "id": 151,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/fFXkAlMH2iQrNknv4eq7LGTkcti.jpg",
+            "url": "/MediaCover/151/poster.jpg?h=af4f50aca66c621f9b83"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/d7zDEW6AkRCvEOT2Cela4h0F3Nb.jpg",
+            "url": "/MediaCover/151/fanart.jpg?h=913722bce704a3488545"
+          }
+        ],
+        "imdbId": "tt12921446",
+        "inCinemas": "2023-10-04T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "awestruck",
+          "based on novel or book",
+          "death of mother",
+          "demon",
+          "demonic possession",
+          "disappearance",
+          "exorcism",
+          "exorcist",
+          "faith",
+          "father daughter relationship",
+          "frightened",
+          "horrified",
+          "missing children",
+          "possession",
+          "priest",
+          "reboot",
+          "religious horror",
+          "roman catholic church",
+          "sequel",
+          "supernatural horror"
+        ],
+        "lastSearchTime": "2026-11-01T15:14:36Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 388,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Exorcist: Believer",
+        "overview": "Since his wife's death, Victor has raised his daughter Angela alone. After she and her friend return from a three-day disappearance with missing memories, they begin displaying frightening behavior reminiscent of the MacNeil possession fifty years prior.",
+        "path": "/movies/The Exorcist Believer (2023) {tmdb-807172}",
+        "physicalRelease": "2023-12-19T00:00:00Z",
+        "popularity": 9.6271,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 4.8,
+            "votes": 51694
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 39,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 22,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 5.796,
+            "votes": 1352
+          },
+          "trakt": {
+            "type": "user",
+            "value": 5.49961,
+            "votes": 3849
+          }
+        },
+        "releaseDate": "2023-10-24T00:00:00Z",
+        "runtime": 111,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 8762304061,
+        "sortTitle": "exorcist believer",
+        "statistics": {
+          "movieFileCount": 1,
+          "movieFileQualities": [
+            {
+              "id": 3,
+              "modifier": "none",
+              "name": "WEBDL-1080p",
+              "resolution": 1080,
+              "source": "webdl"
+            }
+          ],
+          "releaseGroups": [],
+          "sizeOnDisk": 8762304061
+        },
+        "status": "released",
+        "studio": "Universal Pictures",
+        "tags": [
+          1
+        ],
+        "title": "The Exorcist: Believer",
+        "titleSlug": "807172",
+        "tmdbId": 807172,
+        "website": "https://www.theexorcistbeliever.movie",
+        "year": 2023,
+        "youTubeTrailerId": "r71FmJBoSDs"
+      },
+      {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "cleanTitle": "frombedroomstobillionsamigayears",
+        "collection": {
+          "title": "From Bedroom to Billions Collection",
+          "tmdbId": 739953
+        },
+        "folderName": "/movies/From Bedrooms to Billions The Amiga Years! (2016)",
+        "genres": [
+          "Documentary"
+        ],
+        "hasFile": true,
+        "id": 37,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/5Lj3MTjm6sQdgn0t2ZOwmiSMhnM.jpg",
+            "url": "/MediaCover/37/poster.jpg?h=06c2f54ffaca0b18268e"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/fqyCAi4ZN2T6oBfFweYPC1rpqz5.jpg",
+            "url": "/MediaCover/37/fanart.jpg?h=7a758defb42d95df352d"
+          }
+        ],
+        "imdbId": "tt4603210",
+        "inCinemas": "2016-05-10T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "based on true story",
+          "commodore",
+          "friend",
+          "video game",
+          "video game development"
+        ],
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 31,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "From Bedrooms to Billions: The Amiga Years",
+        "overview": "A feature documentary that explores the influence of the Commodore Amiga and how it took video game development, music and publishing to a whole new level and changed the video games industry forever.",
+        "path": "/movies/From Bedrooms to Billions The Amiga Years! (2016)",
+        "popularity": 1.3357,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 7.6,
+            "votes": 456
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 7.2,
+            "votes": 25
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.61538,
+            "votes": 91
+          }
+        },
+        "releaseDate": "2016-08-08T00:00:00Z",
+        "runtime": 152,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 3237935090,
+        "sortTitle": "from bedrooms to billions the amiga years",
+        "statistics": {
+          "movieFileCount": 1,
+          "movieFileQualities": [
+            {
+              "id": 14,
+              "modifier": "none",
+              "name": "WEBRip-720p",
+              "resolution": 720,
+              "source": "webrip"
+            }
+          ],
+          "releaseGroups": [],
+          "sizeOnDisk": 3237935090
+        },
+        "status": "released",
+        "studio": "Gracious Films",
+        "tags": [],
+        "title": "From Bedrooms to Billions: The Amiga Years",
+        "titleSlug": "339586",
+        "tmdbId": 339586,
+        "website": "http://www.frombedroomstobillions.com/amiga",
+        "year": 2016,
+        "youTubeTrailerId": "r3ooSiw83a8"
+      },
+      {
+        "added": "2026-06-21T19:33:12Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "fuze",
+        "digitalRelease": "2026-06-02T00:00:00Z",
+        "folderName": "/movies/Fuze (2026) {tmdb-1242265}",
+        "genres": [
+          "Action",
+          "Crime",
+          "Thriller"
+        ],
+        "hasFile": true,
+        "id": 225,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/oMFdQE5hMJ9JjhNORegwTo0GKmh.jpg",
+            "url": "/MediaCover/225/poster.jpg?h=b0582bccbb7cbd537685"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/8wIaBCeGv3UhIn5CJOWQGHT1Cif.jpg",
+            "url": "/MediaCover/225/fanart.jpg?h=c4a63623eaa83ff0a8a3"
+          }
+        ],
+        "imdbId": "tt31189814",
+        "inCinemas": "2026-03-23T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "betrayal",
+          "bomb",
+          "conspiracy thriller",
+          "father son relationship",
+          "heist",
+          "london, england",
+          "malicious",
+          "mother son relationship",
+          "paranoid",
+          "plot twist",
+          "surveillance",
+          "techno thriller"
+        ],
+        "lastSearchTime": "2026-06-21T19:33:25Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 265,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "Fuze",
+        "overview": "An unexploded WWII bomb is discovered on a busy construction site in the centre of London. Chaos ensues as the military and police begin a mass evacuation against a ticking clock.",
+        "path": "/movies/Fuze (2026) {tmdb-1242265}",
+        "physicalRelease": "2026-09-15T00:00:00Z",
+        "popularity": 9.1078,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.3,
+            "votes": 20392
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 60,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 72,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 7.1,
+            "votes": 494
+          },
+          "trakt": {
+            "type": "user",
+            "value": 6.87525,
+            "votes": 1507
+          }
+        },
+        "releaseDate": "2026-06-02T00:00:00Z",
+        "runtime": 96,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 26905646673,
+        "sortTitle": "fuze",
+        "statistics": {
+          "movieFileCount": 1,
+          "movieFileQualities": [
+            {
+              "id": 30,
+              "modifier": "remux",
+              "name": "Remux-1080p",
+              "resolution": 1080,
+              "source": "bluray"
+            }
+          ],
+          "releaseGroups": [
+            "HDT"
+          ],
+          "sizeOnDisk": 26905646673
+        },
+        "status": "released",
+        "studio": "Anton",
+        "tags": [
+          1
+        ],
+        "title": "Fuze",
+        "titleSlug": "1242265",
+        "tmdbId": 1242265,
+        "website": "https://www.fuzefilm.co.uk/",
+        "year": 2025,
+        "youTubeTrailerId": "1aNywiElPSY"
+      },
+      {
+        "added": "2026-08-06T19:07:24Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "goodluckhavefundontdie",
+        "digitalRelease": "2026-03-10T00:00:00Z",
+        "folderName": "/movies/Good Luck Have Fun Dont Die (2026) {tmdb-1119449}",
+        "genres": [
+          "Science Fiction",
+          "Action",
+          "Comedy"
+        ],
+        "hasFile": true,
+        "id": 254,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/rWcfOdY7TU6lTdazWj0ebDZnAfO.jpg",
+            "url": "/MediaCover/254/poster.jpg?h=79e868f718813bd1a110"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/drRxbu2OHG0DEENptZ8wI5f0uEU.jpg",
+            "url": "/MediaCover/254/fanart.jpg?h=e3132467314b8cf75b27"
+          }
+        ],
+        "imdbId": "tt1341338",
+        "inCinemas": "2026-02-13T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "adventure comedy",
+          "artificial intelligence (a.i.)",
+          "assertive",
+          "blunt",
+          "cautionary",
+          "dark future",
+          "diner",
+          "exuberant",
+          "frustrated",
+          "los angeles, california",
+          "mother son relationship",
+          "team mission",
+          "time travel",
+          "transhumanism"
+        ],
+        "lastSearchTime": "2026-08-06T19:07:38Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 295,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "Good Luck, Have Fun, Don't Die",
+        "overview": "A 'Man from the Future' arrives at an LA diner where he must recruit the precise combination of disgruntled patrons to join him on a one-night quest to save the world from the terminal threat of a rogue artificial intelligence.",
+        "path": "/movies/Good Luck Have Fun Dont Die (2026) {tmdb-1119449}",
+        "physicalRelease": "2026-04-21T00:00:00Z",
+        "popularity": 10.0153,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 7,
+            "votes": 86375
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 66,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 7.113,
+            "votes": 1186
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.34743,
+            "votes": 5653
+          }
+        },
+        "releaseDate": "2026-03-10T00:00:00Z",
+        "runtime": 134,
+        "secondaryYear": 2025,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 40329896310,
+        "sortTitle": "good luck have fun dont die",
+        "statistics": {
+          "movieFileCount": 1,
+          "movieFileQualities": [
+            {
+              "id": 30,
+              "modifier": "remux",
+              "name": "Remux-1080p",
+              "resolution": 1080,
+              "source": "bluray"
+            }
+          ],
+          "releaseGroups": [
+            "d3g"
+          ],
+          "sizeOnDisk": 40329896310
+        },
+        "status": "released",
+        "studio": "Constantin Film",
+        "tags": [
+          1
+        ],
+        "title": "Good Luck, Have Fun, Don't Die",
+        "titleSlug": "1119449",
+        "tmdbId": 1119449,
+        "website": "https://www.goodluckhavefundontdiemovie.com",
+        "year": 2026,
+        "youTubeTrailerId": "Nm4WbapDzDQ"
+      },
+      {
+        "added": "2026-06-15T18:58:47Z",
+        "alternateTitles": [],
+        "certification": "PG-13",
+        "cleanTitle": "heartbeast",
+        "digitalRelease": "2026-11-10T00:00:00Z",
+        "folderName": "/movies/Heart of the Beast (2026) {tmdb-1263337}",
+        "genres": [
+          "Adventure",
+          "Thriller"
+        ],
+        "hasFile": true,
+        "id": 224,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/6sYemVUn79UPKz1ZsSG6kPU4RVy.jpg",
+            "url": "/MediaCover/224/poster.jpg?h=1a26303b2eb68503cd62"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/6uVRPFflyJpo8Cx872olmlGTWla.jpg",
+            "url": "/MediaCover/224/fanart.jpg?h=adb9af23cafe22f34ae2"
+          }
+        ],
+        "imdbId": "tt7526136",
+        "inCinemas": "2026-09-23T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "alaska",
+          "american wilderness",
+          "dog",
+          "extreme conditions",
+          "inspirational",
+          "man vs nature",
+          "military",
+          "plane crash",
+          "special forces",
+          "survival thriller"
+        ],
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 403,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "Heart of the Beast",
+        "overview": "After a harrowing plane crash, Special Forces officer James Belmont and his combat dog, Odin, find themselves stranded deep in the Alaskan wilderness. Together, they are forced into a brutal fight for survival against the elements.",
+        "path": "/movies/Heart of the Beast (2026) {tmdb-1263337}",
+        "popularity": 445.8409,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 7.1,
+            "votes": 43512
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 7.362,
+            "votes": 577
+          }
+        },
+        "releaseDate": "2026-11-10T00:00:00Z",
+        "runtime": 101,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 2959421173,
+        "sortTitle": "heart of the beast",
+        "statistics": {
+          "movieFileCount": 1,
+          "movieFileQualities": [
+            {
+              "id": 3,
+              "modifier": "none",
+              "name": "WEBDL-1080p",
+              "resolution": 1080,
+              "source": "webdl"
+            }
+          ],
+          "releaseGroups": [],
+          "sizeOnDisk": 2959421173
+        },
+        "status": "released",
+        "studio": "Paramount Pictures",
+        "tags": [
+          1
+        ],
+        "title": "Heart of the Beast",
+        "titleSlug": "1263337",
+        "tmdbId": 1263337,
+        "website": "https://www.heartofthebeastmovie.com",
+        "year": 2026,
+        "youTubeTrailerId": "UkMuGKqAux4"
+      },
+      {
+        "added": "2026-03-05T22:38:47Z",
+        "alternateTitles": [],
+        "certification": "NR",
+        "cleanTitle": "itsneveroverjeffbuckley",
+        "digitalRelease": "2025-08-25T00:00:00Z",
+        "folderName": "/movies/It's Never Over, Jeff Buckley (2025)",
+        "genres": [
+          "Documentary",
+          "Music"
+        ],
+        "hasFile": true,
+        "id": 1,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/rrKe8bC6UKFKvfZHvbwA9Bq5hkR.jpg",
+            "url": "/MediaCover/1/poster.jpg?h=4029ce16fcd05437732e"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/rU0P9XGl2thKlC7BbOdGc1mQFQ7.jpg",
+            "url": "/MediaCover/1/fanart.jpg?h=0d1298349498b3afc079"
+          }
+        ],
+        "imdbId": "tt34966650",
+        "inCinemas": "2025-08-08T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "documentary",
+          "jeff buckley",
+          "singer"
+        ],
+        "lastSearchTime": "2026-03-05T22:40:07Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 1,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "It's Never Over, Jeff Buckley",
+        "overview": "Rising musician Jeff Buckley had only released one album when he died suddenly in 1997. Now, never-before-seen footage, exclusive voice messages, and accounts from those closest to him offer a portrait of the captivating singer.",
+        "path": "/movies/It's Never Over, Jeff Buckley (2025)",
+        "popularity": 1.406,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 7.6,
+            "votes": 3496
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 72,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 99,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 7.729,
+            "votes": 48
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.87234,
+            "votes": 188
+          }
+        },
+        "releaseDate": "2025-08-25T00:00:00Z",
+        "runtime": 106,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 9795855896,
+        "sortTitle": "its never over jeff buckley",
+        "statistics": {
+          "movieFileCount": 1,
+          "movieFileQualities": [
+            {
+              "id": 18,
+              "modifier": "none",
+              "name": "WEBDL-2160p",
+              "resolution": 2160,
+              "source": "webdl"
+            }
+          ],
+          "releaseGroups": [
+            "playWEB"
+          ],
+          "sizeOnDisk": 9795855896
+        },
+        "status": "released",
+        "studio": "Disarming Films",
+        "tags": [
+          1
+        ],
+        "title": "It's Never Over, Jeff Buckley",
+        "titleSlug": "1400381",
+        "tmdbId": 1400381,
+        "website": "https://www.magpictures.com/jeffbuckley",
+        "year": 2025,
+        "youTubeTrailerId": "DRrcgLRX8Qc"
+      },
+      {
+        "added": "2026-11-10T19:52:02Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "mutiny",
+        "digitalRelease": "2026-09-08T00:00:00Z",
+        "folderName": "/movies/Mutiny (2026) {tmdb-1288445}",
+        "genres": [
+          "Action",
+          "Thriller"
+        ],
+        "hasFile": true,
+        "id": 326,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/pu2VxGlpGwffOx292w18b1tv96j.jpg",
+            "url": "/MediaCover/326/poster.jpg?h=e3c066e51aa7646d9e2d"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/qDa0fqDqIBCovRp975RvtGPcuN3.jpg",
+            "url": "/MediaCover/326/fanart.jpg?h=69cf3f01d026ce8c8561"
+          }
+        ],
+        "imdbId": "tt32338669",
+        "inCinemas": "2026-08-19T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "cargo ship",
+          "conspiracy",
+          "framed for murder",
+          "one man army",
+          "revenge"
+        ],
+        "lastSearchTime": "2026-11-10T19:52:32Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 402,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "Mutiny",
+        "overview": "After witnessing his billionaire boss' murder and being framed for the crime, Cole Reed boards a cargo ship on a one-man crusade to avenge his boss' death only to discover an international conspiracy.",
+        "path": "/movies/Mutiny (2026) {tmdb-1288445}",
+        "physicalRelease": "2026-12-11T00:00:00Z",
+        "popularity": 79.2795,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 5.7,
+            "votes": 25591
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 52,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 7.628,
+            "votes": 1049
+          }
+        },
+        "releaseDate": "2026-09-08T00:00:00Z",
+        "runtime": 96,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 2262743736,
+        "sortTitle": "mutiny",
+        "statistics": {
+          "movieFileCount": 1,
+          "movieFileQualities": [
+            {
+              "id": 3,
+              "modifier": "none",
+              "name": "WEBDL-1080p",
+              "resolution": 1080,
+              "source": "webdl"
+            }
+          ],
+          "releaseGroups": [],
+          "sizeOnDisk": 2262743736
+        },
+        "status": "released",
+        "studio": "Punch Palace Productions",
+        "tags": [
+          1
+        ],
+        "title": "Mutiny",
+        "titleSlug": "1288445",
+        "tmdbId": 1288445,
+        "website": "https://www.mutiny.movie",
+        "year": 2026,
+        "youTubeTrailerId": "2Iqvbe98Gb4"
+      },
+      {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "NR",
+        "cleanTitle": "mysuperpsychosweet16",
+        "collection": {
+          "title": "My Super Psycho Sweet 16 Collection",
+          "tmdbId": 698905
+        },
+        "digitalRelease": "2009-10-23T00:00:00Z",
+        "folderName": "/movies/My Super Psycho Sweet 16 (2009)",
+        "genres": [
+          "Horror",
+          "TV Movie"
+        ],
+        "hasFile": true,
+        "id": 65,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/5EeYLxKgrcaLq52BnPo7noVpTXc.jpg",
+            "url": "/MediaCover/65/poster.jpg?h=2a8cb6b754dcc57b59c3"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/ng4pyEOMiQh171nYoaj9njxkF25.jpg",
+            "url": "/MediaCover/65/fanart.jpg?h=8913e00a221b46d1c7c4"
+          }
+        ],
+        "imdbId": "tt1488584",
+        "inCinemas": "2009-10-15T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "birthday party",
+          "roller skating rink",
+          "serial killer",
+          "slasher"
+        ],
+        "lastSearchTime": "2026-03-29T11:15:35Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 56,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "My Super Psycho Sweet 16",
+        "overview": "A spoiled teen’s birthday bash turns killer after she convinced her parents to re-open a roller skating rink where a series of brutal murders took place and the killer comes back to wreak havoc during her party.",
+        "path": "/movies/My Super Psycho Sweet 16 (2009)",
+        "popularity": 2.4733,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6,
+            "votes": 1675
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.3,
+            "votes": 37
+          },
+          "trakt": {
+            "type": "user",
+            "value": 6.17073,
+            "votes": 41
+          }
+        },
+        "releaseDate": "2009-10-23T00:00:00Z",
+        "runtime": 84,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 1989883394,
+        "sortTitle": "my super psycho sweet 16",
+        "statistics": {
+          "movieFileCount": 1,
+          "movieFileQualities": [
+            {
+              "id": 2,
+              "modifier": "none",
+              "name": "DVD",
+              "resolution": 0,
+              "source": "dvd"
+            }
+          ],
+          "releaseGroups": [],
+          "sizeOnDisk": 1989883394
+        },
+        "status": "released",
+        "studio": "MTV Films",
+        "tags": [
+          1
+        ],
+        "title": "My Super Psycho Sweet 16",
+        "titleSlug": "35759",
+        "tmdbId": 35759,
+        "website": "",
+        "year": 2009,
+        "youTubeTrailerId": "Wqqr6fsGGok"
+      },
+      {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "neworder",
+        "digitalRelease": "2020-09-29T00:00:00Z",
+        "folderName": "/movies/New Order (2020)",
+        "genres": [
+          "Drama",
+          "Thriller"
+        ],
+        "hasFile": true,
+        "id": 67,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/v6NodCMzqilx0Xw541P65WFnDfE.jpg",
+            "url": "/MediaCover/67/poster.jpg?h=6e78d3b4195f5b457350"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/rCQp2lOfGeiUnXxRk3B3FEq59rC.jpg",
+            "url": "/MediaCover/67/fanart.jpg?h=e25d17b5363bf1c37cab"
+          }
+        ],
+        "imdbId": "tt12474056",
+        "inCinemas": "2020-10-22T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "captive",
+          "cdmx",
+          "dystopia",
+          "execution",
+          "recreational drug use",
+          "sexual assault",
+          "torture",
+          "wedding"
+        ],
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 59,
+        "originalLanguage": {
+          "id": 3,
+          "name": "Spanish"
+        },
+        "originalTitle": "Nuevo orden",
+        "overview": "In the near future, a popular uprising in Mexico City interrupts a wedding held at the home of a wealthy family. After the riots have been quashed, they discover the bride has gone missing and plea with the military to help locate her.",
+        "path": "/movies/New Order (2020)",
+        "popularity": 3.3845,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.5,
+            "votes": 11350
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 62,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 67,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.4,
+            "votes": 393
+          },
+          "trakt": {
+            "type": "user",
+            "value": 6.46667,
+            "votes": 465
+          }
+        },
+        "releaseDate": "2020-09-29T00:00:00Z",
+        "runtime": 88,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 2107484235,
+        "sortTitle": "new order",
+        "statistics": {
+          "movieFileCount": 1,
+          "movieFileQualities": [
+            {
+              "id": 3,
+              "modifier": "none",
+              "name": "WEBDL-1080p",
+              "resolution": 1080,
+              "source": "webdl"
+            }
+          ],
+          "releaseGroups": [],
+          "sizeOnDisk": 2107484235
+        },
+        "status": "released",
+        "studio": "Teorema",
+        "tags": [
+          1
+        ],
+        "title": "New Order",
+        "titleSlug": "575446",
+        "tmdbId": 575446,
+        "website": "",
+        "year": 2020,
+        "youTubeTrailerId": "S_TWI2-xUEg"
+      },
+      {
+        "added": "2026-10-30T22:53:18Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "twonightstand",
+        "digitalRelease": "2014-10-31T00:00:00Z",
+        "folderName": "/movies/Two Night Stand (2014) {tmdb-286554}",
+        "genres": [
+          "Romance",
+          "Comedy"
+        ],
+        "hasFile": true,
+        "id": 321,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/rz0YnlHieXP9SBuJU4ANBW8ttIw.jpg",
+            "url": "/MediaCover/321/poster.jpg?h=e634c5fe61c144977b75"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/dgZ5e1q6dGUYLUxepmZTmoGqwEy.jpg",
+            "url": "/MediaCover/321/fanart.jpg?h=48e4f95e6cd51246d63d"
+          }
+        ],
+        "imdbId": "tt2140619",
+        "inCinemas": "2014-09-26T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "manhattan, new york city",
+          "new year's eve",
+          "new york city",
+          "one-night stand",
+          "online dating",
+          "overflowing toilet",
+          "relationship",
+          "snowstorm"
+        ],
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 383,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "Two Night Stand",
+        "overview": "After an extremely regrettable one night stand, two strangers wake up to find themselves snowed in after sleeping through a blizzard that put all of Manhattan on ice. They're now trapped together in a tiny apartment, forced to get to know each other way more than any one night stand should.",
+        "path": "/movies/Two Night Stand (2014) {tmdb-286554}",
+        "physicalRelease": "2014-09-26T00:00:00Z",
+        "popularity": 1.8101,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.3,
+            "votes": 77046
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 45,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 38,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.413,
+            "votes": 1964
+          },
+          "trakt": {
+            "type": "user",
+            "value": 6.56884,
+            "votes": 2099
+          }
+        },
+        "releaseDate": "2014-09-26T00:00:00Z",
+        "runtime": 86,
+        "secondaryYearSourceId": 0,
+        "sizeOnDisk": 732430668,
+        "sortTitle": "two night stand",
+        "statistics": {
+          "movieFileCount": 1,
+          "movieFileQualities": [
+            {
+              "id": 2,
+              "modifier": "none",
+              "name": "DVD",
+              "resolution": 0,
+              "source": "dvd"
+            }
+          ],
+          "releaseGroups": [],
+          "sizeOnDisk": 732430668
+        },
+        "status": "released",
+        "studio": "Demarest Films",
+        "tags": [],
+        "title": "Two Night Stand",
+        "titleSlug": "286554",
+        "tmdbId": 286554,
+        "website": "http://haveatwonightstand.com/",
+        "year": 2014,
+        "youTubeTrailerId": "wc3QfS0beAM"
+      }
+    ],
+    "sortDirection": "ascending",
+    "sortKey": "movieMetadata.sortTitle",
+    "totalRecords": 14
+  },
+  "recordedAt": "2026-11-11T12:12:58Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/wanted/cutoff?page=1&pageSize=20&sortKey=movieMetadata.sortTitle&sortDirection=ascending"
+  },
+  "status": 200
+}

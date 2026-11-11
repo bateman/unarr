@@ -54,16 +54,13 @@ impl From<anyhow::Error> for ApiError {
 impl IntoResponse for ApiError {
     fn into_response(self) -> Response {
         match self {
-            ApiError::NotFound => (
-                StatusCode::NOT_FOUND,
-                Json(json!({
-                    "type": "https://tools.ietf.org/html/rfc7231#section-6.5.4",
-                    "title": "Not Found",
-                    "status": 404,
-                    "traceId": trace_id(),
-                })),
-            )
-                .into_response(),
+            ApiError::NotFound => {
+                let mut response = not_found_problem(NOT_FOUND_TYPE_RFC7231);
+                // Marked, so a personality whose original names another
+                // document can say so (`lib.rs`).
+                response.extensions_mut().insert(NotFoundProblem);
+                response
+            }
             ApiError::BadRequest(message) => (
                 StatusCode::BAD_REQUEST,
                 Json(json!({ "message": format!("BadRequest: {message}"), "content": message })),
@@ -133,6 +130,29 @@ impl IntoResponse for ApiError {
             }
         }
     }
+}
+
+/// Marks the response of [`ApiError::NotFound`].
+#[derive(Debug, Clone, Copy)]
+pub struct NotFoundProblem;
+
+/// The document ASP.NET's problem details point at for a 404: Sonarr's
+/// runtime names RFC 7231, Radarr's newer one RFC 9110.
+pub const NOT_FOUND_TYPE_RFC7231: &str = "https://tools.ietf.org/html/rfc7231#section-6.5.4";
+pub const NOT_FOUND_TYPE_RFC9110: &str = "https://tools.ietf.org/html/rfc9110#section-15.5.5";
+
+/// ASP.NET's problem details for a resource that is not there.
+pub fn not_found_problem(document: &str) -> Response {
+    (
+        StatusCode::NOT_FOUND,
+        Json(json!({
+            "type": document,
+            "title": "Not Found",
+            "status": 404,
+            "traceId": trace_id(),
+        })),
+    )
+        .into_response()
 }
 
 /// The body of an `NzbDroneClientException`: the message, and a description

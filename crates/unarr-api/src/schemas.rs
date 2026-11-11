@@ -1,7 +1,8 @@
 //! Field schemas of pluggable implementations (indexers, download clients,
 //! notifications, import lists, metadata, custom format and auto-tagging
-//! specifications), recorded from the real Sonarr's `*/schema` endpoints by
-//! `make golden` and embedded here. They supply the labels, help texts and
+//! specifications), recorded from the real Sonarr's and Radarr's `*/schema`
+//! endpoints by `make golden` and `make golden-radarr` and embedded here, one
+//! catalogue per application. They supply the labels, help texts and
 //! select options the API returns next to every stored `settings` value.
 
 use std::collections::HashMap;
@@ -11,13 +12,38 @@ use serde_json::{json, Map, Value};
 
 use unarr_core::model::ProviderKind;
 
-const INDEXER: &str = include_str!("../schemas/sonarr/indexer-schema.json");
-const DOWNLOAD_CLIENT: &str = include_str!("../schemas/sonarr/downloadclient-schema.json");
-const NOTIFICATION: &str = include_str!("../schemas/sonarr/notification-schema.json");
-const IMPORT_LIST: &str = include_str!("../schemas/sonarr/importlist-schema.json");
-const METADATA: &str = include_str!("../schemas/sonarr/metadata-schema.json");
-const CUSTOM_FORMAT: &str = include_str!("../schemas/sonarr/customformat-schema.json");
-const AUTO_TAGGING: &str = include_str!("../schemas/sonarr/autotagging-schema.json");
+use unarr_core::Personality;
+
+/// The seven recorded schema documents of one application.
+struct Sources {
+    indexer: &'static str,
+    download_client: &'static str,
+    notification: &'static str,
+    import_list: &'static str,
+    metadata: &'static str,
+    custom_format: &'static str,
+    auto_tagging: &'static str,
+}
+
+const SONARR: Sources = Sources {
+    indexer: include_str!("../schemas/sonarr/indexer-schema.json"),
+    download_client: include_str!("../schemas/sonarr/downloadclient-schema.json"),
+    notification: include_str!("../schemas/sonarr/notification-schema.json"),
+    import_list: include_str!("../schemas/sonarr/importlist-schema.json"),
+    metadata: include_str!("../schemas/sonarr/metadata-schema.json"),
+    custom_format: include_str!("../schemas/sonarr/customformat-schema.json"),
+    auto_tagging: include_str!("../schemas/sonarr/autotagging-schema.json"),
+};
+
+const RADARR: Sources = Sources {
+    indexer: include_str!("../schemas/radarr/indexer-schema.json"),
+    download_client: include_str!("../schemas/radarr/downloadclient-schema.json"),
+    notification: include_str!("../schemas/radarr/notification-schema.json"),
+    import_list: include_str!("../schemas/radarr/importlist-schema.json"),
+    metadata: include_str!("../schemas/radarr/metadata-schema.json"),
+    custom_format: include_str!("../schemas/radarr/customformat-schema.json"),
+    auto_tagging: include_str!("../schemas/radarr/autotagging-schema.json"),
+};
 
 /// Which family of schemas to look in.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
@@ -31,37 +57,65 @@ struct Catalogue {
     by_kind: HashMap<SchemaKind, Vec<Value>>,
 }
 
-fn catalogue() -> &'static Catalogue {
-    static CATALOGUE: OnceLock<Catalogue> = OnceLock::new();
-    CATALOGUE.get_or_init(|| {
+impl Catalogue {
+    fn parse(sources: &Sources) -> Catalogue {
         let parse =
             |s: &str| -> Vec<Value> { serde_json::from_str(s).expect("embedded schema is valid JSON") };
         let mut by_kind = HashMap::new();
-        by_kind.insert(SchemaKind::Provider(ProviderKind::Indexer), parse(INDEXER));
+        by_kind.insert(
+            SchemaKind::Provider(ProviderKind::Indexer),
+            parse(sources.indexer),
+        );
         by_kind.insert(
             SchemaKind::Provider(ProviderKind::DownloadClient),
-            parse(DOWNLOAD_CLIENT),
+            parse(sources.download_client),
         );
         by_kind.insert(
             SchemaKind::Provider(ProviderKind::Notification),
-            parse(NOTIFICATION),
+            parse(sources.notification),
         );
-        by_kind.insert(SchemaKind::Provider(ProviderKind::ImportList), parse(IMPORT_LIST));
-        by_kind.insert(SchemaKind::Provider(ProviderKind::Metadata), parse(METADATA));
-        by_kind.insert(SchemaKind::CustomFormatSpecification, parse(CUSTOM_FORMAT));
-        by_kind.insert(SchemaKind::AutoTaggingSpecification, parse(AUTO_TAGGING));
+        by_kind.insert(
+            SchemaKind::Provider(ProviderKind::ImportList),
+            parse(sources.import_list),
+        );
+        by_kind.insert(
+            SchemaKind::Provider(ProviderKind::Metadata),
+            parse(sources.metadata),
+        );
+        by_kind.insert(
+            SchemaKind::CustomFormatSpecification,
+            parse(sources.custom_format),
+        );
+        by_kind.insert(SchemaKind::AutoTaggingSpecification, parse(sources.auto_tagging));
         Catalogue { by_kind }
-    })
+    }
+}
+
+/// The catalogue of the application a personality stands for, parsed on
+/// first use. Lidarr has none recorded yet and shows Sonarr's.
+fn catalogue(personality: Personality) -> &'static Catalogue {
+    static SONARR_CATALOGUE: OnceLock<Catalogue> = OnceLock::new();
+    static RADARR_CATALOGUE: OnceLock<Catalogue> = OnceLock::new();
+    match personality {
+        Personality::Sonarr | Personality::Lidarr => {
+            SONARR_CATALOGUE.get_or_init(|| Catalogue::parse(&SONARR))
+        }
+        Personality::Radarr => RADARR_CATALOGUE.get_or_init(|| Catalogue::parse(&RADARR)),
+    }
 }
 
 /// All schema entries of a kind, as the `*/schema` endpoints return them.
-pub fn all(kind: SchemaKind) -> &'static [Value] {
-    catalogue().by_kind.get(&kind).map(Vec::as_slice).unwrap_or(&[])
+pub fn all(personality: Personality, kind: SchemaKind) -> &'static [Value] {
+    catalogue(personality)
+        .by_kind
+        .get(&kind)
+        .map(Vec::as_slice)
+        .unwrap_or(&[])
 }
 
 /// The schema entry for one implementation.
-pub fn lookup(kind: SchemaKind, implementation: &str) -> Option<&'static Value> {
-    all(kind)
+pub fn lookup(personality: Personality, kind: SchemaKind, implementation: &str) -> Option<&'static Value> {
+    all(personality, kind)
         .iter()
         .find(|s| s["implementation"].as_str() == Some(implementation))
 }
@@ -211,7 +265,12 @@ mod tests {
 
     #[test]
     fn nested_field_names_read_nested_settings() {
-        let torznab = lookup(SchemaKind::Provider(ProviderKind::Indexer), "Torznab").unwrap();
+        let torznab = lookup(
+            Personality::Sonarr,
+            SchemaKind::Provider(ProviderKind::Indexer),
+            "Torznab",
+        )
+        .unwrap();
         let fields = render_fields(
             torznab,
             &serde_json::json!({"seedCriteria": {"seedRatio": 2.5, "seedTime": 60}, "minimumSeeders": 1}),
@@ -225,7 +284,12 @@ mod tests {
 
     #[test]
     fn fields_are_read_back_into_settings() {
-        let torznab = lookup(SchemaKind::Provider(ProviderKind::Indexer), "Torznab").unwrap();
+        let torznab = lookup(
+            Personality::Sonarr,
+            SchemaKind::Provider(ProviderKind::Indexer),
+            "Torznab",
+        )
+        .unwrap();
         let settings = read_fields(
             torznab,
             &json!([
@@ -246,14 +310,24 @@ mod tests {
         assert_eq!(settings["seedCriteria"]["seedTime"], Value::Null);
         assert_eq!(settings["animeStandardFormatSearch"], false);
         assert!(settings.get("unknownField").is_none());
-        let newznab = lookup(SchemaKind::Provider(ProviderKind::Indexer), "Newznab").unwrap();
+        let newznab = lookup(
+            Personality::Sonarr,
+            SchemaKind::Provider(ProviderKind::Indexer),
+            "Newznab",
+        )
+        .unwrap();
         let fresh = read_fields(newznab, &json!([{"name": "apiKey", "value": "********"}]), None);
         assert_eq!(fresh["apiKey"], Value::Null);
     }
 
     #[test]
     fn schemas_load_and_render_values() {
-        let newznab = lookup(SchemaKind::Provider(ProviderKind::Indexer), "Newznab").unwrap();
+        let newznab = lookup(
+            Personality::Sonarr,
+            SchemaKind::Provider(ProviderKind::Indexer),
+            "Newznab",
+        )
+        .unwrap();
         assert_eq!(newznab["configContract"], "NewznabSettings");
         let fields = render_fields(
             newznab,
@@ -264,7 +338,17 @@ mod tests {
         assert_eq!(by_name("apiKey")["value"], "********");
         assert_eq!(by_name("categories")["value"], serde_json::json!([5030]));
         assert!(by_name("additionalParameters").get("value").is_none());
-        assert!(lookup(SchemaKind::CustomFormatSpecification, "ReleaseTitleSpecification").is_some());
-        assert!(lookup(SchemaKind::Provider(ProviderKind::Notification), "Nope").is_none());
+        assert!(lookup(
+            Personality::Sonarr,
+            SchemaKind::CustomFormatSpecification,
+            "ReleaseTitleSpecification"
+        )
+        .is_some());
+        assert!(lookup(
+            Personality::Sonarr,
+            SchemaKind::Provider(ProviderKind::Notification),
+            "Nope"
+        )
+        .is_none());
     }
 }

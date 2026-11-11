@@ -117,7 +117,7 @@ compatibility is a hope.
 How it is done in practice (phase 1): the fixture under
 `tests/fixtures/sonarr/` is a real homelab installation (38 series, 346 files,
 two thousand history rows, 40 custom formats, 15 indexers) passed through
-`scripts/sonarr-anonymize.py`, which replaces every credential, URL, host,
+`scripts/arr-anonymize.py`, which replaces every credential, URL, host,
 e-mail and path, pseudonymises release identifiers, and refuses to write if
 any original value survives. `make golden` downloads the official
 self-contained Sonarr release pinned by SHA-256, runs it without Docker on a
@@ -276,6 +276,13 @@ case.
    everything carrying the originals' rules is bound to series and
    episodes, so a movie twin of each has to be written beside the shared
    pieces: about phase 2's size. See `docs/phase-4-radarr.md`.
+   *4a done, November 2026*: 145 of the 146 read goldens recorded from the
+   real Radarr 6.4.4 on the maintainer's anonymised installation replay
+   identically (the one left, the naming examples, needs 4c's file name
+   builder); the embedded Radarr UI browses every page of the milestone
+   against Unarr on 7878 while Sonarr answers on 8989 in the same process;
+   `scripts/bazarr-replay.py --app radarr` confirms the fields Bazarr
+   reads. Section 15 records the decisions.
 5. **Lidarr** last: MusicBrainz, per-track matching, Chromaprint fingerprints.
    Expected at phase 2's size or above; the most divergent personality.
 
@@ -340,7 +347,7 @@ from 86 ms to 50 ms by not decoding the cast (2.5 MB of JSON no resource
 shows) and loading only the queue's series for the queue, and the rest is the
 950 rows' remaining JSON columns (35 ms) and the season statistics over
 25,000 episodes (15 ms). The design target of 10 ms at that size is not met;
-section 15 says what the next step would be.
+section 16 says what the next step would be.
 
 The idle figures are what `malloc_trim` leaves after the import: without it
 the scaled fixture's import left the process at 232 MB, holding pages it no
@@ -446,7 +453,47 @@ the list once per page load and follows the changes over SignalR, so it
 bought fifty milliseconds nobody waits for at the cost of a second code
 path and a validity rule tied to the clock. Ten milliseconds at this size
 is, for 2.3 MB of JSON built on request, not within reach of an index or
-a query; section 15 asks which library size the target is for.
+a query; section 16 asks which library size the target is for.
+
+End of phase 4a (release build, x86-64, in the cloud session, a client
+script over the loopback). The two real fixtures: Sonarr's (38 series,
+1,012 episodes) and Radarr's (193 movies, 100 files, 9,935 credits, 669
+history rows). The idle figure is read 35 seconds after the start, once a
+memory release has run; "after the requests" is right after some 900
+requests to the Radarr side (200 each of the endpoints below, 50 of the
+collections, one full `history/since`) and 200 `GET /series`; "at rest" 35
+seconds later:
+
+| Metric | Sonarr alone | Radarr alone | Both in one process |
+|--------|--------------|--------------|---------------------|
+| Binary, with both embedded UIs | 27.3 MiB | | |
+| Cold start to first response, import included | 0.27 s | 0.20 s | 0.46 s |
+| Idle RSS | 35 to 38 MB | 18 MB | 39 to 45 MB |
+| RSS after the requests | 36 MB | 54 MB | 73 MB |
+| RSS at rest | 30 MB | 36 MB | 48 MB |
+| `GET /api/v3/movie` (193 movies, 0.7 MB), p50 / p99 | | 15.5 / 23.3 ms | 13.9 / 20.1 ms |
+| `GET /api/v3/movie/{id}`, p50 / p99 | | 3.2 / 4.8 ms | 2.5 / 3.5 ms |
+| `GET /api/v3/history` page of 20 with the movie, p50 / p99 | | 10.6 / 17.7 ms | 10.9 / 17.5 ms |
+| `GET /api/v3/wanted/missing` page of 20, p50 / p99 | | 7.8 / 11.4 ms | 8.1 / 11.4 ms |
+| `GET /api/v3/calendar` one month, p50 / p99 | | 8.8 / 14.3 ms | 9.2 / 13.1 ms |
+| `GET /api/v3/collection` (32 collections, 0.2 MB), p50 / p99 | | 7.8 / 9.6 ms | 8.1 / 11.7 ms |
+| `GET /api/v3/history/since` from the epoch with movies (669 rows, 1.9 MB) | | 0.37 s | 0.31 s |
+| `GET /api/v3/series`, p50 / p99 | 2.3 / 3.8 ms | | 2.5 / 3.9 ms |
+
+The second personality costs less than the first: the two idle at 39 to
+45 MB where Sonarr alone idles at 35 to 38, since the process, its
+allocator arenas and the parser tables are there once. That leaves room
+under the 60 MB target, but on two small libraries: the target is for
+1,000 series and 2,000 movies, and neither side has been scaled in this
+milestone. The binary grew by the Radarr frontend (4.4 MB) and its
+schemas. The first measurement found Radarr alone at 54 MB at rest after
+the requests and never lower: it runs no command runtime yet, so nothing
+called `malloc_trim` for it; the daemon now releases memory on a
+thirty-second timer for a personality without a scheduler (36 MB).
+`GET /movie` builds 0.7 MB of JSON in 15 ms for 193 movies, the files'
+media info and the alternative titles included; at 2,000 movies that is
+the same order as `/series` at 950 series, and the same question
+(section 16).
 
 ## 10. Naming and distribution
 
@@ -902,7 +949,7 @@ a query; section 15 asks which library size the target is for.
   or off, a scan remembers the extras next to episode files, a rename
   takes them along and deleting the episode file sends them to the
   recycling bin, as in the originals. Unarr drives no metadata consumer
-  (section 15), and the `MetadataFiles` rows are not imported. Of the
+  (section 16), and the `MetadataFiles` rows are not imported. Of the
   files that are not subtitles, a scan remembers only those named exactly
   as their episode file (an nfo): a rename gives an other extra the
   episode file's name and nothing else, which would turn a media
@@ -929,7 +976,7 @@ a query; section 15 asks which library size the target is for.
   validation was off would keep being accepted. One process has one
   HTTP client, so with several personalities in one process
   (`--personalities sonarr,radarr`) the settings of the last one started
-  or saved apply to all (section 15).
+  or saved apply to all (section 16).
 - **The environment wins over the settings.** The originals' variables
   (`Sonarr__Server__Port`, `Sonarr__Auth__ApiKey`, `Sonarr__Log__Level`
   and the others of the Server, Auth, App, Log and Update sections that
@@ -1061,19 +1108,142 @@ a query; section 15 asks which library size the target is for.
   fixture's `AllowedHosts` of `*` makes the General page refuse to save in
   Sonarr as well; the page was checked after correcting the field.
 
-## 15. Open questions
+## 15. Decisions taken in phase 4a
+
+- **The oracle is the Radarr the maintainer runs.** `scripts/radarr-fixture.sh`
+  pins the official 6.4.4.10685 release by SHA-256 and runs it without
+  Docker on a copy of the fixture with its scheduled tasks frozen, as the
+  Sonarr script does; it is a twin of that script, not a mode of it, so
+  the script the Sonarr goldens depend on did not change. Milestone 4a
+  reads only, so the recording starts no mock: Radarr runs without the
+  environment's proxy and reaches nothing. `make ui` fetches both
+  frontends, `make golden-radarr` records, `make radarr` keeps the
+  original up for comparison.
+- **The fixture is real from the first commit.** The maintainer's Radarr
+  backup arrived before any code, so the synthetic fixture the work order
+  allowed for was never built. The anonymiser takes the application
+  (`scripts/arr-anonymize.py --app radarr`, renamed since it serves
+  both): the database name, the `/movies` root, the movie and movie-file
+  tables and the collections' root folders are Radarr's; the scan that
+  refuses to write when an original value survives is the same. The raw
+  backup never entered the repository; before the squash the branch's
+  history was scanned for 73 original values (keys, hosts, user names,
+  provider names, paths) taken from it.
+- **A migration set per personality, shared tables written once.** The
+  tables both applications have live under `migrations/shared` and are
+  applied by both sets. Sonarr's set composes them with its series side
+  into the same nine steps, so existing `unarr-sonarr.db` files keep
+  their `user_version` and a fresh one has the same schema (checked
+  before and after the split). Radarr's is one step: the shared tables as
+  they stand today plus the movie side. A `unarr-radarr.db` left by the
+  clone behaviour of earlier builds holds Sonarr's tables and nothing
+  else; it is **refused** with what to do (move it away, start again with
+  the original to import) rather than migrated or silently replaced.
+- **Parallel modules, as the work order decided.** `unarr_core::movies`
+  (model, store, qualities, availability, custom formats of files and
+  history, folder naming) next to the series modules; `unarr_import::radarr`
+  next to `sonarr`; `routes::radarr` next to the Sonarr route table, which
+  did not change. What was extracted, each at its second use and in its
+  own commit: the importer's database reading and shared tables
+  (`legacy.rs`, `shared.rs`), the replay's helpers (`tests/common`), the
+  feed's line writer (opened to the crate). The custom-format matcher is
+  shared and learned three things when its input is a movie's: Radarr's
+  own numbering of sources, the quality modifier, and the edition and
+  year conditions.
+- **Shared handlers serve both; a personality has its own where the
+  shape differs.** Tags, root folders, disk space, custom formats, the
+  providers with their schemas, delay and release profiles, host
+  settings, tasks, logs, backups list and updates are the same code for
+  both, reading the schema catalogue, the strings and the library of the
+  personality in the state. Radarr has its own quality definitions and
+  profiles (modifier, language), languages, indexer flags, tag details,
+  config resources and everything about movies. Radarr's 404 problem
+  details name RFC 9110 where Sonarr's name RFC 7231: a marker on the
+  shared 404 lets Radarr's router say so, instead of a second error type
+  through every handler.
+- **Radarr runs no command runtime yet.** The queue, the scheduler and
+  what they execute are bound to series and episodes; starting them on a
+  movie database would fail at the first tick. Until 4b gives Radarr its
+  commands: `GET /command` is empty, `health` is empty, `system/task`
+  shows the imported rows unchanged, the queue endpoints answer empty in
+  the original's shapes, and nothing runs in the background. Every write
+  answers 405 and the routes of later milestones the original's empty
+  404, as Sonarr's did after phase 1.
+- **HTTP clients per personality.** The outgoing settings (proxy,
+  certificate validation) and the clients built over them belong to the
+  personality's state. The series side keeps taking the process-wide
+  clients, which only the Sonarr personality now sets; any other
+  personality builds its own, and whatever shared machinery it comes to
+  use in 4b (the indexer client, the download client service) is handed
+  them through the constructors that already take a client. This closes
+  the question phase 3b left; a test saves a proxy for each personality
+  and checks the other's is untouched. The user agent towards the Servarr
+  proxies is one constant per personality (`Radarr/6.4.4.10685 (ubuntu
+  24.04)` for `api.radarr.video`), read by one function; nothing calls
+  that host yet.
+- **Two originals, two folders.** Each original has a folder of its own,
+  with its `config.xml` and its database. `--import-from` takes several
+  (repeated, or comma separated in `UNARR_IMPORT_FROM`): each personality
+  imports from the one that holds its database, so the homelab keeps its
+  read-only mounts, one per application. Without the option each
+  personality still looks in `<data>/<personality>` and then in `<data>`.
+  A directory given that holds no database of a selected personality
+  stops the start, as before.
+- **What the original computes is ported and checked on the whole
+  fixture, not sampled.** Availability and the release date agree with
+  the recorded library for all 193 movies; the custom formats and scores
+  of the 100 files, the 669 history rows and the 86 blocklist entries
+  replay; the collections' folders come from a port of the folder format
+  (`movies::naming`), the file name builder being 4c's.
+- **Asked of the original rather than assumed.** A cover's local address
+  ends in `?h=` and the first twenty hex digits of the SHA-256 of its
+  remote URL (Radarr 6 replaced the file time Sonarr appends); credits
+  asked for one movie show their headshots through the cover proxy, one
+  credit or all of them do not; `popularity` is a single-precision
+  number, printed as such; `/localization` spells its key `Strings`;
+  the importer keeps empty strings, since the API shows `""` where the
+  original stored it. `wanted/missing` leaves one monitored movie
+  without a file out: the fixture could not say whether for its year of
+  zero or for having no release date, so the real Radarr was started on
+  a copy with one movie's year zeroed and another's dates removed; it
+  drops the first and lists the second. Movies sharing a cinema date
+  come out of `calendar` in TMDB id order, which is inferred from two
+  pairs in the goldens and from the original's index, not probed.
+- **Left for their milestone, on purpose.** `config/naming/examples`
+  (recorded, pending: it needs the movie file name builder, 4c);
+  `movie/lookup`, `importlist/movie`, `release`, `rename`, `manualimport`,
+  `parse`, `filesystem` (the UI asks for them on pages 4b and 4c make
+  work); Radarr's defaults on a blank start (an imported installation has
+  them; they come with the settings writes); the edition of a history
+  row's release, which the title parser of 4b finds.
+
+## 16. Open questions
 
 - Metadata provider: decided (section 7, option A) and implemented behind
   a trait. Open is the switch to Unarr's own user agent towards the Servarr
   proxies, due now that phase 3b's exit criteria are met, and the
   conversation with the Servarr team that goes with it.
-- One HTTP client serves the process, and with it one proxy and one
-  certificate validation level: each personality installs its own at
-  start and at every save, so the last one started or saved decides for
-  all. The default runs Sonarr alone; `--personalities sonarr,radarr`
-  already runs two, and phase 4 makes the second one real. Each then
-  needs its own client, or a proxy set for one is bypassed by a save of
-  the other.
+- One HTTP client served the process until phase 4a; each personality now
+  has its own clients and outgoing settings (section 15). What is left of
+  it: the series side still reaches for the process-wide clients rather
+  than being handed them, which is correct while only Sonarr is built on
+  it and must be kept in mind if a second personality ever reuses a
+  series-side service that builds its client itself.
+- Radarr, from 4a. The Bazarr movie requests replayed are Bazarr's as
+  remembered from its source, not recorded from a running Bazarr, and
+  Bazarr itself was not run. `calendar`'s order among movies of one cinema
+  date is inferred (section 15). The fixture has no `MediaCover` folder,
+  so the cover addresses are compared and no cover was served. `GET
+  /movie` costs 15 ms for 193 movies; nothing was scaled, so what a
+  2,000-movie library costs, in time and in memory, is not known, and
+  the 60 MB target of section 9 is so far met only on two small
+  libraries. Radarr's `health` is empty until it has checks to run: a
+  root folder that is missing shows in `rootfolder`, not as a warning.
+- The maintainer's Recyclarr configuration for Radarr is in their homelab
+  repository (`docker/recyclarr.yml`); it was not read in 4a, which writes
+  nothing. 4c records the exchange with the real Recyclarr and the real
+  Radarr from it, as phase 3b did for Sonarr. The import list in use is
+  the IMDb watchlist (`IMDbListImport`), the one 4c drives.
 - SignalR: `series` and `episode` messages follow the refresh, the adds and
   the edits since 3b. The UI's pages were driven in a browser; no client
   other than the UI listens.

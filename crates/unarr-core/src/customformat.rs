@@ -24,8 +24,26 @@ pub struct Input<'a> {
     pub size: i64,
     pub indexer_flags: i64,
     pub release_type: ReleaseType,
-    /// The series' original language, for `Original` (-2) language conditions.
+    /// The original language of the series or of the movie, for `Original`
+    /// (-2) language conditions.
     pub series_original_language: i64,
+    /// Set when the release or file is a movie's: Radarr numbers its
+    /// sources its own way and has conditions Sonarr lacks.
+    pub movie: Option<MovieFacts<'a>>,
+}
+
+/// What Radarr's specifications look at beyond what both applications
+/// share: the quality's source and modifier as Radarr numbers them
+/// (`QualitySource`: cam 1, telesync 2, telecine 3, workprint 4, dvd 5,
+/// tv 6, webdl 7, webrip 8, bluray 9; `Modifier`: regional 1, screener 2,
+/// rawhd 3, brdisk 4, remux 5), its resolution, the edition and the year.
+#[derive(Debug, Clone, Copy, Default)]
+pub struct MovieFacts<'a> {
+    pub source: i64,
+    pub resolution: i64,
+    pub modifier: i64,
+    pub edition: Option<&'a str>,
+    pub year: i64,
 }
 
 impl Default for Input<'_> {
@@ -40,6 +58,7 @@ impl Default for Input<'_> {
             indexer_flags: 0,
             release_type: ReleaseType::Unknown,
             series_original_language: 0,
+            movie: None,
         }
     }
 }
@@ -133,11 +152,24 @@ fn satisfied_without_negate(spec: &Spec, input: &Input) -> bool {
             let size = input.size as f64;
             size > min && size <= max
         }
-        "SourceSpecification" => {
-            let source = Quality::by_id(input.quality.quality_id).source;
-            source_ordinal(source) == value_int
-        }
-        "ResolutionSpecification" => Quality::by_id(input.quality.quality_id).resolution == value_int,
+        "SourceSpecification" => match input.movie {
+            Some(movie) => movie.source == value_int,
+            None => source_ordinal(Quality::by_id(input.quality.quality_id).source) == value_int,
+        },
+        "ResolutionSpecification" => match input.movie {
+            Some(movie) => movie.resolution == value_int,
+            None => Quality::by_id(input.quality.quality_id).resolution == value_int,
+        },
+        // Radarr's own conditions; a series has none of the three.
+        "QualityModifierSpecification" => input.movie.is_some_and(|m| m.modifier == value_int),
+        "EditionSpecification" => input
+            .movie
+            .is_some_and(|m| regex_matches(value_str, Some(m.edition.unwrap_or("")))),
+        "YearSpecification" => input.movie.is_some_and(|m| {
+            let min = spec.body["min"].as_i64().unwrap_or(0);
+            let max = spec.body["max"].as_i64().unwrap_or(0);
+            m.year >= min && m.year <= max
+        }),
         "IndexerFlagSpecification" => input.indexer_flags & value_int == value_int && value_int != 0,
         "ReleaseTypeSpecification" => release_type_ordinal(input.release_type) == value_int,
         other => {
@@ -271,6 +303,7 @@ mod tests {
             },
             languages: &[1],
             series_original_language: 1,
+            movie: None,
             ..Input::default()
         };
         assert!(matches(&f, &input));

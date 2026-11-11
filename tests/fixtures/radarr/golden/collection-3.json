@@ -1,0 +1,202 @@
+{
+  "body": {
+    "id": 3,
+    "images": [
+      {
+        "coverType": "poster",
+        "remoteUrl": "https://image.tmdb.org/t/p/original/ogyw5LTmL53dVxsppcy8Dlm30Fu.jpg"
+      },
+      {
+        "coverType": "fanart",
+        "remoteUrl": "https://image.tmdb.org/t/p/original/xyhrCEdB4XRkelfVsqXeUZ6rLHi.jpg"
+      }
+    ],
+    "minimumAvailability": "released",
+    "missingMovies": 0,
+    "monitored": true,
+    "movies": [
+      {
+        "cleanTitle": "batmanbegins",
+        "folder": "Batman Begins (2005) {tmdb-272}",
+        "genres": [
+          "Drama",
+          "Crime",
+          "Action"
+        ],
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/sPX89Td70IDDjVr85jdSBb4rWGr.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/9IIBboV7MCT0bTxzXHmWK1Hq558.jpg"
+          }
+        ],
+        "imdbId": "tt0372784",
+        "isExcluded": false,
+        "isExisting": true,
+        "overview": "Driven by tragedy, billionaire Bruce Wayne dedicates his life to uncovering and defeating the corruption that plagues his home, Gotham City.  Unable to work within the system, he instead creates a new identity, a symbol of fear for the criminal underworld - The Batman.",
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 8.2,
+            "votes": 1753601
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 70,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 85,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 7.733,
+            "votes": 23504
+          },
+          "trakt": {
+            "type": "user",
+            "value": 8.2092,
+            "votes": 38361
+          }
+        },
+        "runtime": 140,
+        "sortTitle": "batman begins",
+        "status": "released",
+        "title": "Batman Begins",
+        "tmdbId": 272,
+        "year": 2005
+      },
+      {
+        "cleanTitle": "thedarkknight",
+        "folder": "The Dark Knight (2008) {tmdb-155}",
+        "genres": [
+          "Action",
+          "Thriller",
+          "Crime"
+        ],
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/qJ2tW6WMUDux911r6m7haRef0WH.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/cfT29Im5VDvjE0RpyKOSdCKZal7.jpg"
+          }
+        ],
+        "imdbId": "tt0468569",
+        "isExcluded": false,
+        "isExisting": true,
+        "overview": "Batman raises the stakes in his war on crime. With the help of Lt. Jim Gordon and District Attorney Harvey Dent, Batman sets out to dismantle the remaining criminal organizations that plague the streets. The partnership proves to be effective, but they soon find themselves prey to a reign of chaos unleashed by a rising criminal mastermind known to the terrified citizens of Gotham as the Joker.",
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 9.1,
+            "votes": 3248829
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 85,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 94,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 8.54,
+            "votes": 37321
+          },
+          "trakt": {
+            "type": "user",
+            "value": 8.95208,
+            "votes": 59657
+          }
+        },
+        "runtime": 152,
+        "sortTitle": "dark knight",
+        "status": "released",
+        "title": "The Dark Knight",
+        "tmdbId": 155,
+        "year": 2008
+      },
+      {
+        "cleanTitle": "thedarkknightrises",
+        "folder": "The Dark Knight Rises (2012) {tmdb-49026}",
+        "genres": [
+          "Action",
+          "Crime",
+          "Thriller"
+        ],
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/hr0L2aueqlP2BYUblTTjmtn0hw4.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/c3OHQncTAnKFhdOTX7D3LTW6son.jpg"
+          }
+        ],
+        "imdbId": "tt1345836",
+        "isExcluded": false,
+        "isExisting": true,
+        "overview": "Following the death of District Attorney Harvey Dent, Batman assumes responsibility for Dent's crimes to protect the late attorney's reputation and is subsequently hunted by the Gotham City Police Department. Eight years later, Batman encounters the mysterious Selina Kyle and the villainous Bane, a new terrorist leader who overwhelms Gotham's finest. The Dark Knight resurfaces to protect a city that has branded him an enemy.",
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 8.4,
+            "votes": 2037725
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 78,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 87,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 7.801,
+            "votes": 25293
+          },
+          "trakt": {
+            "type": "user",
+            "value": 8.28101,
+            "votes": 39910
+          }
+        },
+        "runtime": 165,
+        "sortTitle": "dark knight rises",
+        "status": "released",
+        "title": "The Dark Knight Rises",
+        "tmdbId": 49026,
+        "year": 2012
+      }
+    ],
+    "overview": "With minimal usage of CGI and a focus on character driven narratives, Christopher Nolan's dark, gritty portrayal of Bruce Wayne's transition into Batman and his struggles as Gotham's superhero set the precedent for modern superhero films.",
+    "qualityProfileId": 4,
+    "rootFolderPath": "/movies",
+    "searchOnAdd": false,
+    "sortTitle": "dark knight collection",
+    "tags": [],
+    "title": "The Dark Knight Collection",
+    "tmdbId": 263
+  },
+  "recordedAt": "2026-11-11T12:12:52Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/collection/3"
+  },
+  "status": 200
+}

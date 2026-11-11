@@ -90,7 +90,7 @@ impl Augment {
         if servarr {
             request = request.header(
                 reqwest::header::USER_AGENT,
-                crate::http::servarr_proxy_user_agent(),
+                crate::http::servarr_proxy_user_agent(crate::Personality::Sonarr),
             );
         }
         let response = request.send().await.map_err(|e| anyhow::anyhow!(cause(&e)))?;

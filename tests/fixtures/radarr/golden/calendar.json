@@ -1,0 +1,1284 @@
+{
+  "body": [
+    {
+      "added": "2026-03-07T09:12:06Z",
+      "alternateTitles": [
+        {
+          "id": 396,
+          "movieMetadataId": 46,
+          "sourceType": "tmdb",
+          "title": "Hot Tub"
+        },
+        {
+          "id": 397,
+          "movieMetadataId": 46,
+          "sourceType": "tmdb",
+          "title": "冰火时光机之回到80后"
+        },
+        {
+          "id": 398,
+          "movieMetadataId": 46,
+          "sourceType": "tmdb",
+          "title": "온천탕 타임머신"
+        },
+        {
+          "id": 399,
+          "movieMetadataId": 46,
+          "sourceType": "tmdb",
+          "title": "Hot Tub: Solteros en el Tiempo"
+        },
+        {
+          "id": 400,
+          "movieMetadataId": 46,
+          "sourceType": "tmdb",
+          "title": "Hot Tub - Der Whirlpool... ist 'ne verdammte Zeitmaschine"
+        },
+        {
+          "id": 401,
+          "movieMetadataId": 46,
+          "sourceType": "tmdb",
+          "title": "オフロでGO！！！！！ タイムマシンはジェット式"
+        }
+      ],
+      "certification": "R",
+      "cleanTitle": "hottubtimemachine",
+      "collection": {
+        "title": "Hot Tub Time Machine Collection",
+        "tmdbId": 313576
+      },
+      "digitalRelease": "2026-10-07T00:00:00Z",
+      "folderName": "/movies/Hot Tub Time Machine (2010)",
+      "genres": [
+        "Science Fiction",
+        "Comedy",
+        "Adventure"
+      ],
+      "hasFile": true,
+      "id": 46,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/wjzbVXAes1acbh6k4OO5xVfy5.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/wwzuxanisjA7GhZOPYaWlfmlCKY.jpg"
+        }
+      ],
+      "imdbId": "tt1231587",
+      "inCinemas": "2010-03-26T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "1980s",
+        "80s throwback",
+        "butterfly effect",
+        "change the past",
+        "forty something",
+        "one-night stand",
+        "poison",
+        "singer",
+        "ski resort",
+        "snow skiing",
+        "time travel"
+      ],
+      "lastSearchTime": "2026-09-07T19:30:24Z",
+      "minimumAvailability": "released",
+      "monitored": false,
+      "movieFile": {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 54,
+            "name": "DD"
+          },
+          {
+            "id": 18,
+            "name": "x265 (HD)"
+          },
+          {
+            "id": 56,
+            "name": "x265 (no HDR/DV)"
+          }
+        ],
+        "dateAdded": "2026-09-08T06:31:30Z",
+        "edition": "Unrated",
+        "id": 326,
+        "indexerFlags": 1,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 640000,
+          "audioChannels": 5.1,
+          "audioCodec": "AC3",
+          "audioLanguages": "ita/eng",
+          "audioStreamCount": 2,
+          "resolution": "1920x1036",
+          "runTime": "1:40:37",
+          "scanType": "Progressive",
+          "subtitles": "ita/ita/eng",
+          "videoBitDepth": 8,
+          "videoBitrate": 7041456,
+          "videoCodec": "x265",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "movieId": 46,
+        "originalFilePath": "Hot Tube Time Machine Unrated 2010 BDRip ITA ENG 1080p x265 Paso77.mkv",
+        "path": "/movies/Hot Tub Time Machine (2010)/Hot Tub Time Machine (2010) {tmdb-23048} - {edition-Unrated} [Bluray-1080p][AC3 5.1][x265]-Paso77.mkv",
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "relativePath": "Hot Tub Time Machine (2010) {tmdb-23048} - {edition-Unrated} [Bluray-1080p][AC3 5.1][x265]-Paso77.mkv",
+        "releaseGroup": "Paso77",
+        "sceneName": "Hot Tub Time Machine - Unrated (2010 ITA/ENG) [1080p x265] [Paso77]",
+        "size": 6304871317
+      },
+      "movieFileId": 326,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Hot Tub Time Machine",
+      "overview": "Four pals are stuck in a rut in adulthood: Adam has just been dumped, Lou is a hopeless party animal, Nick is a henpecked husband, and Jacob does nothing but play video games in his basement. But they get a chance to brighten their future by changing their past after a night of heavy drinking in a ski-resort hot tub results in their waking up in 1986.",
+      "path": "/movies/Hot Tub Time Machine (2010)",
+      "popularity": 5.213,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 6.4,
+          "votes": 200478
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 63,
+          "votes": 0
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 64,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 6.1,
+          "votes": 2872
+        },
+        "trakt": {
+          "type": "user",
+          "value": 6.57478,
+          "votes": 6225
+        }
+      },
+      "releaseDate": "2026-10-07T00:00:00Z",
+      "runtime": 101,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 6304871317,
+      "sortTitle": "hot tub time machine",
+      "statistics": {
+        "movieFileCount": 1,
+        "movieFileQualities": [
+          {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          }
+        ],
+        "releaseGroups": [
+          "Paso77"
+        ],
+        "sizeOnDisk": 6304871317
+      },
+      "status": "released",
+      "studio": "Metro-Goldwyn-Mayer",
+      "tags": [
+        1
+      ],
+      "title": "Hot Tub Time Machine",
+      "titleSlug": "23048",
+      "tmdbId": 23048,
+      "website": "",
+      "year": 2010,
+      "youTubeTrailerId": "CZoViO13tq8"
+    },
+    {
+      "added": "2026-09-20T18:50:54Z",
+      "alternateTitles": [
+        {
+          "id": 2397,
+          "movieMetadataId": 446,
+          "sourceType": "tmdb",
+          "title": "Запрошення"
+        },
+        {
+          "id": 2398,
+          "movieMetadataId": 446,
+          "sourceType": "tmdb",
+          "title": "Ha'Hazmana"
+        },
+        {
+          "id": 2399,
+          "movieMetadataId": 446,
+          "sourceType": "tmdb",
+          "title": "開放性邀請"
+        },
+        {
+          "id": 2400,
+          "movieMetadataId": 446,
+          "sourceType": "tmdb",
+          "title": "誘人飯聚"
+        },
+        {
+          "id": 2401,
+          "movieMetadataId": 446,
+          "sourceType": "tmdb",
+          "title": "Pozvání."
+        }
+      ],
+      "certification": "R",
+      "cleanTitle": "theinvite",
+      "digitalRelease": "2026-08-11T00:00:00Z",
+      "folderName": "/movies/The Invite (2026) {tmdb-950028}",
+      "genres": [
+        "Comedy",
+        "Drama",
+        "Romance"
+      ],
+      "hasFile": false,
+      "id": 286,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/b7Dr8Chzse8VagexAporUu2RtLx.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/lEwqBGNR65KZv6Ej5ufcmhZu2y2.jpg"
+        }
+      ],
+      "imdbId": "tt14173636",
+      "inCinemas": "2026-06-25T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "aggressive",
+        "anxious",
+        "candid",
+        "dark comedy",
+        "exuberant",
+        "firefighter",
+        "husband wife relationship",
+        "neighbors",
+        "remake",
+        "san francisco, california",
+        "sexologist"
+      ],
+      "lastSearchTime": "2026-09-20T18:51:09Z",
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "The Invite",
+      "overview": "Joe and Angela's marriage is on thin ice. When they invite their enigmatic upstairs neighbors for a dinner party, the night spirals into unexpected places. Have they reignited the spark or lit the match that burns it all down?",
+      "path": "/movies/The Invite (2026) {tmdb-950028}",
+      "physicalRelease": "2026-10-05T00:00:00Z",
+      "popularity": 17.6122,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 7.4,
+          "votes": 97538
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 82,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 7.206,
+          "votes": 934
+        },
+        "trakt": {
+          "type": "user",
+          "value": 8.08359,
+          "votes": 323
+        }
+      },
+      "releaseDate": "2026-08-11T00:00:00Z",
+      "runtime": 107,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 0,
+      "sortTitle": "invite",
+      "statistics": {
+        "movieFileCount": 0,
+        "movieFileQualities": [],
+        "releaseGroups": [],
+        "sizeOnDisk": 0
+      },
+      "status": "released",
+      "studio": "Annapurna Pictures",
+      "tags": [
+        1
+      ],
+      "title": "The Invite",
+      "titleSlug": "950028",
+      "tmdbId": 950028,
+      "website": "https://a24films.com/films/the-invite",
+      "year": 2026,
+      "youTubeTrailerId": "nelkiuezJxg"
+    },
+    {
+      "added": "2026-07-19T21:57:27Z",
+      "alternateTitles": [
+        {
+          "id": 2072,
+          "movieMetadataId": 381,
+          "sourceType": "tmdb",
+          "title": "湖浦港"
+        },
+        {
+          "id": 2083,
+          "movieMetadataId": 381,
+          "sourceType": "tmdb",
+          "title": "โฮป"
+        },
+        {
+          "id": 2311,
+          "movieMetadataId": 381,
+          "sourceType": "tmdb",
+          "title": "Hope: El primer impacto"
+        },
+        {
+          "id": 2346,
+          "movieMetadataId": 381,
+          "sourceType": "tmdb",
+          "title": "Witajcie w Hope"
+        },
+        {
+          "id": 2382,
+          "movieMetadataId": 381,
+          "sourceType": "tmdb",
+          "title": "ចម្បាំងបង្ហូរឈាមអវសានលោក"
+        },
+        {
+          "id": 2386,
+          "movieMetadataId": 381,
+          "sourceType": "tmdb",
+          "title": "הופ"
+        },
+        {
+          "id": 2388,
+          "movieMetadataId": 381,
+          "sourceType": "tmdb",
+          "title": "Espoir"
+        },
+        {
+          "id": 2545,
+          "movieMetadataId": 381,
+          "sourceType": "tmdb",
+          "title": "Hopeu"
+        },
+        {
+          "id": 2550,
+          "movieMetadataId": 381,
+          "sourceType": "tmdb",
+          "title": "希望"
+        },
+        {
+          "id": 2560,
+          "movieMetadataId": 381,
+          "sourceType": "tmdb",
+          "title": "Lootuse sadam"
+        },
+        {
+          "id": 2566,
+          "movieMetadataId": 381,
+          "sourceType": "tmdb",
+          "title": "Upanje"
+        }
+      ],
+      "certification": "R",
+      "cleanTitle": "hope",
+      "digitalRelease": "2026-10-13T00:00:00Z",
+      "folderName": "/movies/Hope (2026) {tmdb-1058424}",
+      "genres": [
+        "Science Fiction",
+        "Mystery",
+        "Action"
+      ],
+      "hasFile": false,
+      "id": 246,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/6VY1ZKgpsc8CfGsQcCGiYEgHdH0.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/j96rurZqmBjyY37Fncl3IB0qJNe.jpg"
+        }
+      ],
+      "imdbId": "tt27369017",
+      "inCinemas": "2026-07-15T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "20th century",
+        "aliens",
+        "chasing",
+        "dinosaurs",
+        "duringcreditsstinger",
+        "fight for survival",
+        "horror",
+        "horse",
+        "hunted",
+        "police officer",
+        "police shootout",
+        "remote village",
+        "shootout",
+        "supernatural",
+        "unknown entity"
+      ],
+      "lastSearchTime": "2026-10-13T09:51:48Z",
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 21,
+        "name": "Korean"
+      },
+      "originalTitle": "호프",
+      "overview": "In the remote South Korean village of Hope Harbor, police chief Bum-seok and officer Sung-ae are called to investigate a mysterious creature wreaking havoc on the community. But all is not as it seems, and perceptions can be misleading. What begins as ignorance plants the seed of disaster, escalating through human conflict into a tragedy of cosmic proportions.",
+      "path": "/movies/Hope (2026) {tmdb-1058424}",
+      "physicalRelease": "2026-12-09T00:00:00Z",
+      "popularity": 396.0525,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 6.6,
+          "votes": 29523
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 66,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 6.688,
+          "votes": 544
+        },
+        "trakt": {
+          "type": "user",
+          "value": 1,
+          "votes": 2
+        }
+      },
+      "releaseDate": "2026-10-13T00:00:00Z",
+      "runtime": 157,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 0,
+      "sortTitle": "hope",
+      "statistics": {
+        "movieFileCount": 0,
+        "movieFileQualities": [],
+        "releaseGroups": [],
+        "sizeOnDisk": 0
+      },
+      "status": "released",
+      "studio": "Forged Films",
+      "tags": [
+        1
+      ],
+      "title": "Hope",
+      "titleSlug": "1058424",
+      "tmdbId": 1058424,
+      "website": "https://www.neonrated.com/film/hope",
+      "year": 2026,
+      "youTubeTrailerId": "OFaJzL83y0Q"
+    },
+    {
+      "added": "2026-03-19T18:33:28Z",
+      "alternateTitles": [
+        {
+          "id": 1519,
+          "movieMetadataId": 294,
+          "sourceType": "tmdb",
+          "title": "Vzhlížet ke hvězdám"
+        },
+        {
+          "id": 1541,
+          "movieMetadataId": 294,
+          "sourceType": "tmdb",
+          "title": "La Constellation du chien"
+        },
+        {
+          "id": 1588,
+          "movieMetadataId": 294,
+          "sourceType": "tmdb",
+          "title": "La guerra de los últimos"
+        },
+        {
+          "id": 1826,
+          "movieMetadataId": 294,
+          "sourceType": "tmdb",
+          "title": "Köpek ve Yıldızlar"
+        },
+        {
+          "id": 2290,
+          "movieMetadataId": 294,
+          "sourceType": "tmdb",
+          "title": "Na Companhia das Estrelas"
+        },
+        {
+          "id": 2320,
+          "movieMetadataId": 294,
+          "sourceType": "tmdb",
+          "title": "Собачьи звезды"
+        },
+        {
+          "id": 2321,
+          "movieMetadataId": 294,
+          "sourceType": "tmdb",
+          "title": "La Constelación del Perro"
+        },
+        {
+          "id": 2342,
+          "movieMetadataId": 294,
+          "sourceType": "tmdb",
+          "title": "เดอะ ด็อก สตารส์"
+        },
+        {
+          "id": 2385,
+          "movieMetadataId": 294,
+          "sourceType": "tmdb",
+          "title": "Gwiazdozbiór psa"
+        },
+        {
+          "id": 2571,
+          "movieMetadataId": 294,
+          "sourceType": "tmdb",
+          "title": "Das Ende der Sterne"
+        },
+        {
+          "id": 2572,
+          "movieMetadataId": 294,
+          "sourceType": "tmdb",
+          "title": "Ponto Sem Retorno"
+        }
+      ],
+      "certification": "R",
+      "cleanTitle": "thedogstars",
+      "digitalRelease": "2026-10-27T00:00:00Z",
+      "folderName": "/movies/The Dog Stars (2026) {tmdb-1384216}",
+      "genres": [
+        "Action",
+        "Thriller",
+        "Science Fiction"
+      ],
+      "hasFile": true,
+      "id": 183,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/5O616X9vmRzQdB68PHzBewPittd.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/3k7GzxOdLZkN3eZsuhLi2eRzkXO.jpg"
+        }
+      ],
+      "imdbId": "tt21285562",
+      "inCinemas": "2026-08-26T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "based on novel or book",
+        "colorado",
+        "death of wife",
+        "denver, colorado",
+        "depressing",
+        "derisive",
+        "detached",
+        "dogs",
+        "dystopia",
+        "grief",
+        "group",
+        "joyful",
+        "lonely man",
+        "loving",
+        "pandemic",
+        "pilot",
+        "post-apocalyptic",
+        "scavengers",
+        "wonder"
+      ],
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFile": {
+        "customFormatScore": -8000,
+        "customFormats": [
+          {
+            "id": 50,
+            "name": "DD+"
+          },
+          {
+            "id": 58,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 57,
+            "name": "MULTi"
+          }
+        ],
+        "dateAdded": "2026-10-28T17:14:25Z",
+        "edition": "",
+        "id": 369,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 2,
+            "name": "French"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 640000,
+          "audioChannels": 7.1,
+          "audioCodec": "EAC3",
+          "audioLanguages": "fre/eng",
+          "audioStreamCount": 2,
+          "resolution": "1920x798",
+          "runTime": "1:58:20",
+          "scanType": "Progressive",
+          "subtitles": "fre/fre",
+          "videoBitDepth": 8,
+          "videoBitrate": 6624742,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 24
+        },
+        "movieId": 183,
+        "originalFilePath": "The.Dog.Stars.2026.MULTI.1080p.WEB.H264-LOST/The.Dog.Stars.2026.MULTI.1080p.WEB.H264-LOST.mkv",
+        "path": "/movies/The Dog Stars (2026) {tmdb-1384216}/The Dog Stars (2026) {tmdb-1384216} - [MULTi][WEBDL-1080p][EAC3 7.1][h264]-LOST.mkv",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "modifier": "none",
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "webdl"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "The Dog Stars (2026) {tmdb-1384216} - [MULTi][WEBDL-1080p][EAC3 7.1][h264]-LOST.mkv",
+        "releaseGroup": "LOST",
+        "sceneName": "The.Dog.Stars.2026.MULTI.1080p.WEB.H264-LOST",
+        "size": 7131544465
+      },
+      "movieFileId": 369,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "The Dog Stars",
+      "overview": "After the world's population has been ravaged by a pandemic, a man lives a lonesome existence in a Colorado airplane hangar with his dog and a dour gunman he has befriended. When a mysterious transmission comes through on the radio while he’s flying his old Cessna, it sparks a hunt for the provenance of the sound.",
+      "path": "/movies/The Dog Stars (2026) {tmdb-1384216}",
+      "physicalRelease": "2026-12-01T00:00:00Z",
+      "popularity": 74.4521,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 6.3,
+          "votes": 27791
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 49,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 7.197,
+          "votes": 931
+        }
+      },
+      "releaseDate": "2026-10-27T00:00:00Z",
+      "runtime": 119,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 7131544465,
+      "sortTitle": "dog stars",
+      "statistics": {
+        "movieFileCount": 1,
+        "movieFileQualities": [
+          {
+            "id": 3,
+            "modifier": "none",
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "webdl"
+          }
+        ],
+        "releaseGroups": [
+          "LOST"
+        ],
+        "sizeOnDisk": 7131544465
+      },
+      "status": "released",
+      "studio": "20th Century Studios",
+      "tags": [
+        1
+      ],
+      "title": "The Dog Stars",
+      "titleSlug": "1384216",
+      "tmdbId": 1384216,
+      "website": "https://www.20thcenturystudios.com/movies/the-dog-stars",
+      "year": 2026,
+      "youTubeTrailerId": "-xSxaE1ClEE"
+    },
+    {
+      "added": "2026-09-18T18:39:51Z",
+      "alternateTitles": [
+        {
+          "id": 2394,
+          "movieMetadataId": 445,
+          "sourceType": "tmdb",
+          "title": "Бадді"
+        },
+        {
+          "id": 2426,
+          "movieMetadataId": 445,
+          "sourceType": "tmdb",
+          "title": "Buddy: The Sing-Along Version"
+        },
+        {
+          "id": 2552,
+          "movieMetadataId": 445,
+          "sourceType": "tmdb",
+          "title": "Бадди"
+        }
+      ],
+      "certification": "R",
+      "cleanTitle": "buddy",
+      "digitalRelease": "2026-10-13T00:00:00Z",
+      "folderName": "/movies/Buddy (2026) {tmdb-1514026}",
+      "genres": [
+        "Horror",
+        "Comedy",
+        "Fantasy"
+      ],
+      "hasFile": true,
+      "id": 285,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/1BdZbNvl1SfrrX8J9X5tQzN6Ivu.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/sMmG82PtjK8A9rVc34gwKQtCm3A.jpg"
+        }
+      ],
+      "imdbId": "tt37281055",
+      "inCinemas": "2026-08-28T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "burlesque",
+        "dark comedy",
+        "gore",
+        "independent film",
+        "kids show",
+        "madness",
+        "missing children",
+        "slasher",
+        "suburban",
+        "supernatural",
+        "supernatural horror",
+        "tv host",
+        "unicorn"
+      ],
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFile": {
+        "customFormatScore": -10000,
+        "customFormats": [
+          {
+            "id": 53,
+            "name": "AAC"
+          },
+          {
+            "id": 58,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 12,
+            "name": "LQ"
+          }
+        ],
+        "dateAdded": "2026-10-13T05:30:05Z",
+        "edition": "",
+        "id": 362,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 384000,
+          "audioChannels": 5.1,
+          "audioCodec": "AAC",
+          "audioLanguages": "und",
+          "audioStreamCount": 1,
+          "resolution": "1384x1040",
+          "runTime": "1:35:50",
+          "scanType": "Progressive",
+          "subtitles": "",
+          "videoBitDepth": 8,
+          "videoBitrate": 2248655,
+          "videoCodec": "x264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "movieId": 285,
+        "originalFilePath": "buddy.2026.1080p.webrip.x264.aac5.1-yts.gg-yts.bz/buddy.2026.1080p.webrip.x264.aac5.1-yts.gg-yts.bz.mp4",
+        "path": "/movies/Buddy (2026) {tmdb-1514026}/Buddy (2026) {tmdb-1514026} - [WEBRip-1080p][AAC 5.1][x264]-yts.mp4",
+        "quality": {
+          "quality": {
+            "id": 15,
+            "modifier": "none",
+            "name": "WEBRip-1080p",
+            "resolution": 1080,
+            "source": "webrip"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "relativePath": "Buddy (2026) {tmdb-1514026} - [WEBRip-1080p][AAC 5.1][x264]-yts.mp4",
+        "releaseGroup": "yts",
+        "sceneName": "buddy.2026.1080p.webrip.x264.aac5.1-yts.gg-yts.bz",
+        "size": 1896292383
+      },
+      "movieFileId": 362,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Buddy",
+      "overview": "Inside the colorful world of \"It's Buddy!\", a group of children spend their days singing, dancing, and helping Buddy - bright orange unicorn - spread happiness. But when one child refuses to play along, Buddy is not pleased and cracks begin to appear in this seemingly perfect world.",
+      "path": "/movies/Buddy (2026) {tmdb-1514026}",
+      "physicalRelease": "2026-12-08T00:00:00Z",
+      "popularity": 120.1111,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 6.6,
+          "votes": 24050
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 67,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 6.8,
+          "votes": 267
+        }
+      },
+      "releaseDate": "2026-10-13T00:00:00Z",
+      "runtime": 96,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 1896292383,
+      "sortTitle": "buddy",
+      "statistics": {
+        "movieFileCount": 1,
+        "movieFileQualities": [
+          {
+            "id": 15,
+            "modifier": "none",
+            "name": "WEBRip-1080p",
+            "resolution": 1080,
+            "source": "webrip"
+          }
+        ],
+        "releaseGroups": [
+          "yts"
+        ],
+        "sizeOnDisk": 1896292383
+      },
+      "status": "released",
+      "studio": "BoulderLight Pictures",
+      "tags": [
+        1
+      ],
+      "title": "Buddy",
+      "titleSlug": "1514026",
+      "tmdbId": 1514026,
+      "website": "https://roadsideattractions.com/filmography/Buddy/",
+      "year": 2026,
+      "youTubeTrailerId": ""
+    },
+    {
+      "added": "2026-10-16T05:43:26Z",
+      "alternateTitles": [
+        {
+          "id": 2553,
+          "movieMetadataId": 462,
+          "sourceType": "tmdb",
+          "title": "Street Fighter: le film"
+        },
+        {
+          "id": 2554,
+          "movieMetadataId": 462,
+          "sourceType": "tmdb",
+          "title": "สตรีท ไฟเตอร์"
+        },
+        {
+          "id": 2561,
+          "movieMetadataId": 462,
+          "sourceType": "tmdb",
+          "title": "Street Fighter: Filmas"
+        }
+      ],
+      "certification": "PG-13",
+      "cleanTitle": "streetfighter",
+      "digitalRelease": "2026-11-11T00:00:00Z",
+      "folderName": "/movies/Street Fighter (2026) {tmdb-1153576}",
+      "genres": [
+        "Action",
+        "Fantasy",
+        "Comedy"
+      ],
+      "hasFile": false,
+      "id": 304,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/dJPT2Uf12X6aFg8i5N67NTpIZ9t.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/3BBjkQmdGacKYZtpmK2vIfuDmON.jpg"
+        }
+      ],
+      "imdbId": "tt27419420",
+      "inCinemas": "2026-10-14T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "1990s",
+        "amused",
+        "based on video game",
+        "battle royale",
+        "duringcreditsstinger",
+        "hand to hand combat",
+        "martial arts",
+        "martial arts tournament",
+        "power",
+        "powers",
+        "ridiculous",
+        "shocking",
+        "wuxia"
+      ],
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Street Fighter",
+      "overview": "In 1993, estranged Street Fighters Ryu and Ken Masters are thrown back into combat when the mysterious Chun-Li recruits them for the next World Warrior Tournament: a brutal clash of fists, fate, and fury. But behind this battle royale lies a deadly conspiracy that forces them to face off against each other and the demons of their past. And if they don't, it's GAME OVER!",
+      "path": "/movies/Street Fighter (2026) {tmdb-1153576}",
+      "popularity": 58.1816,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 6.2,
+          "votes": 22019
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 46,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 6.347,
+          "votes": 226
+        }
+      },
+      "releaseDate": "2026-11-11T00:00:00Z",
+      "runtime": 120,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 0,
+      "sortTitle": "street fighter",
+      "statistics": {
+        "movieFileCount": 0,
+        "movieFileQualities": [],
+        "releaseGroups": [],
+        "sizeOnDisk": 0
+      },
+      "status": "released",
+      "studio": "Capcom",
+      "tags": [
+        1
+      ],
+      "title": "Street Fighter",
+      "titleSlug": "1153576",
+      "tmdbId": 1153576,
+      "website": "https://www.streetfightermovie.com",
+      "year": 2026,
+      "youTubeTrailerId": "U6sbm1OaJb8"
+    },
+    {
+      "added": "2026-04-30T19:22:04Z",
+      "alternateTitles": [
+        {
+          "id": 2449,
+          "movieMetadataId": 313,
+          "sourceType": "tmdb",
+          "title": "Moliaveidis"
+        },
+        {
+          "id": 2565,
+          "movieMetadataId": 313,
+          "sourceType": "tmdb",
+          "title": "Cara de Barro"
+        },
+        {
+          "id": 2737,
+          "movieMetadataId": 313,
+          "sourceType": "tmdb",
+          "title": "Глиноликий"
+        },
+        {
+          "id": 2763,
+          "movieMetadataId": 313,
+          "sourceType": "tmdb",
+          "title": "เคลย์เฟซ"
+        }
+      ],
+      "certification": "R",
+      "cleanTitle": "clayface",
+      "digitalRelease": "2026-12-07T00:00:00Z",
+      "folderName": "/movies/Clayface (2026) {tmdb-1400940}",
+      "genres": [
+        "Horror",
+        "Thriller",
+        "Science Fiction"
+      ],
+      "hasFile": false,
+      "id": 197,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/9l1NuFjel2j89hiuiJbsxfblqjy.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/VnT9D7NogVWrmN2UuT30exIYPh.jpg"
+        }
+      ],
+      "imdbId": "tt34890576",
+      "inCinemas": "2026-10-21T00:00:00Z",
+      "isAvailable": false,
+      "keywords": [
+        "aspiring actor",
+        "based on comic",
+        "body horror",
+        "dc universe (dcu)",
+        "disfigured face",
+        "female scientist",
+        "hollywood actor",
+        "mobster",
+        "monster",
+        "revenge",
+        "scientific experiment",
+        "shapeshifting",
+        "tragedy",
+        "unrequited love"
+      ],
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Clayface",
+      "overview": "Matt Hagen's meteoric rise from Gotham street kid to Hollywood leading man is tragically cut short when a local crime boss's actions leave him horribly disfigured. Abandoned by his team and with nothing left, Matt seeks out a cutting edge treatment that miraculously returns him to his former self… but also unexpectedly affects his grip on reality, spiraling him down a destructive path of all-consuming revenge.",
+      "path": "/movies/Clayface (2026) {tmdb-1400940}",
+      "physicalRelease": "2027-02-24T00:00:00Z",
+      "popularity": 81.5657,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 7.5,
+          "votes": 47939
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 59,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 7.433,
+          "votes": 423
+        }
+      },
+      "releaseDate": "2026-12-07T00:00:00Z",
+      "runtime": 109,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 0,
+      "sortTitle": "clayface",
+      "statistics": {
+        "movieFileCount": 0,
+        "movieFileQualities": [],
+        "releaseGroups": [],
+        "sizeOnDisk": 0
+      },
+      "status": "inCinemas",
+      "studio": "DC Studios",
+      "tags": [
+        1
+      ],
+      "title": "Clayface",
+      "titleSlug": "1400940",
+      "tmdbId": 1400940,
+      "website": "https://www.clayfacemovie.com",
+      "year": 2026,
+      "youTubeTrailerId": "f7jlCqdtwdM"
+    },
+    {
+      "added": "2026-10-04T07:54:24Z",
+      "alternateTitles": [],
+      "cleanTitle": "thewaitingman",
+      "folderName": "/movies/The Waiting Man (2026) {tmdb-1654479}",
+      "genres": [
+        "Horror"
+      ],
+      "hasFile": false,
+      "id": 296,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/17jt9h9fNZ6mELhyPsL25YZIEPm.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/iSKY5cPHd75UnrY3ZXeAno2xOjQ.jpg"
+        }
+      ],
+      "imdbId": "tt40758636",
+      "inCinemas": "2026-10-30T00:00:00Z",
+      "isAvailable": false,
+      "keywords": [
+        "fear",
+        "found footage",
+        "horror",
+        "mystery",
+        "streamer",
+        "sweden"
+      ],
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "The Waiting Man",
+      "overview": "In 2022, the famous streaming group TOMNI was at the height of its popularity with over 7 million followers. Over the course of a week, their content changed and then they suddenly vanished. This is the footage recovered from their social media, computers, and SD cards. Experts believe the footage shows the worldwide phenomenon known as Alikabiha, also called the Waiting Man.",
+      "path": "/movies/The Waiting Man (2026) {tmdb-1654479}",
+      "popularity": 0.7605,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 7.5,
+          "votes": 9
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 0,
+          "votes": 0
+        }
+      },
+      "releaseDate": "2027-01-28T00:00:00Z",
+      "runtime": 98,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 0,
+      "sortTitle": "waiting man",
+      "statistics": {
+        "movieFileCount": 0,
+        "movieFileQualities": [],
+        "releaseGroups": [],
+        "sizeOnDisk": 0
+      },
+      "status": "inCinemas",
+      "studio": "NPE Productions",
+      "tags": [
+        1
+      ],
+      "title": "The Waiting Man",
+      "titleSlug": "1654479",
+      "tmdbId": 1654479,
+      "website": "",
+      "year": 2026,
+      "youTubeTrailerId": "LGUt5VU1ITg"
+    }
+  ],
+  "recordedAt": "2026-11-11T12:12:57Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/calendar?start=2026-10-01T00:00:00Z&end=2026-10-31T00:00:00Z&unmonitored=true"
+  },
+  "status": 200
+}

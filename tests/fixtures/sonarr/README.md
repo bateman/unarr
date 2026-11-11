@@ -7,7 +7,7 @@ against it.
 
 | File | Origin |
 |------|--------|
-| `config.xml` | The installation's file passed through `scripts/sonarr-anonymize.py`: API key `0123456789abcdef0123456789abcdef`, forms authentication (always required), allowed hosts `*`, no trusted networks, telemetry off. |
+| `config.xml` | The installation's file passed through `scripts/arr-anonymize.py`: API key `0123456789abcdef0123456789abcdef`, forms authentication (always required), allowed hosts `*`, no trusted networks, telemetry off. |
 | `sonarr.db` | The installation's database (migration level 217) passed through the same script: one user `unarr` / `fixture`, every credential, URL, host and e-mail replaced, release ids pseudonymised, root folder `/tv`, raw ffprobe output dropped, commands and provider status emptied. |
 | `golden/requests.txt` | The requests replayed, one per line: `name METHOD path`. |
 | `golden/*.json` | `{"request", "recordedAt", "status", "body"}` as recorded by `scripts/record-golden.py` against the real Sonarr. `recordedAt` pins Unarr's clock during the replay, so `nextAiring`, statistics and the wanted lists do not drift as the calendar moves on. |
@@ -74,7 +74,7 @@ these per endpoint and compare the rest.
 Take a backup from the real Sonarr (System > Backup > Backup Now, then
 download the zip; it holds a consistent `config.xml` and `sonarr.db`) and run
 
-    scripts/sonarr-anonymize.py --from ~/Downloads/sonarr_backup_v4.0.20.3014_2026.11.07_10.00.00.zip \
+    scripts/arr-anonymize.py --from ~/Downloads/sonarr_backup_v4.0.20.3014_2026.11.07_10.00.00.zip \
         --out .cache/anonymized --api-key 0123456789abcdef0123456789abcdef
 
 The script re-reads its output and refuses to write if any original value is

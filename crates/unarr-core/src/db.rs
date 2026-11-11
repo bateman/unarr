@@ -10,19 +10,54 @@ use std::thread;
 
 use rusqlite::Connection;
 
-/// Schema migrations, applied in order. `PRAGMA user_version` records how many
-/// have run.
-const MIGRATIONS: &[&str] = &[
-    include_str!("../migrations/0001_initial.sql"),
-    include_str!("../migrations/0002_provider_status.sql"),
-    include_str!("../migrations/0003_download_history.sql"),
-    include_str!("../migrations/0004_commands.sql"),
-    include_str!("../migrations/0005_history_download_id.sql"),
-    include_str!("../migrations/0006_import.sql"),
-    include_str!("../migrations/0007_import_lists.sql"),
-    include_str!("../migrations/0008_episode_statistics.sql"),
-    include_str!("../migrations/0009_extra_files.sql"),
+use crate::Personality;
+
+/// Sonarr's schema migrations, applied in order. `PRAGMA user_version`
+/// records how many have run. The tables every personality has are written
+/// once, under `migrations/shared`, and applied with the series side; the
+/// sequence is the one `unarr-sonarr.db` files have gone through since
+/// phase 1 and must stay so.
+const SONARR_MIGRATIONS: &[&str] = &[
+    concat!(
+        include_str!("../migrations/shared/0001_core.sql"),
+        include_str!("../migrations/sonarr/0001_series.sql")
+    ),
+    include_str!("../migrations/shared/0002_provider_status.sql"),
+    include_str!("../migrations/sonarr/0003_download_history.sql"),
+    concat!(
+        include_str!("../migrations/shared/0004_commands.sql"),
+        include_str!("../migrations/sonarr/0004_pending_releases.sql")
+    ),
+    include_str!("../migrations/sonarr/0005_history_download_id.sql"),
+    include_str!("../migrations/shared/0006_sequences.sql"),
+    concat!(
+        include_str!("../migrations/sonarr/0007_import_list_items.sql"),
+        include_str!("../migrations/shared/0007_import_list_status.sql")
+    ),
+    include_str!("../migrations/sonarr/0008_episode_statistics.sql"),
+    include_str!("../migrations/sonarr/0009_extra_files.sql"),
 ];
+
+/// Radarr's: the same shared tables as they stand today, then the movie
+/// side.
+const RADARR_MIGRATIONS: &[&str] = &[concat!(
+    include_str!("../migrations/shared/0001_core.sql"),
+    include_str!("../migrations/shared/0002_provider_status.sql"),
+    include_str!("../migrations/shared/0004_commands.sql"),
+    include_str!("../migrations/shared/0006_sequences.sql"),
+    include_str!("../migrations/shared/0007_import_list_status.sql"),
+    include_str!("../migrations/radarr/0001_movies.sql")
+)];
+
+/// The migration set of a personality's database. Lidarr has none yet and
+/// gets Sonarr's, as it did before the sets were split: it serves nothing
+/// of its own.
+fn migrations(personality: Personality) -> &'static [&'static str] {
+    match personality {
+        Personality::Sonarr | Personality::Lidarr => SONARR_MIGRATIONS,
+        Personality::Radarr => RADARR_MIGRATIONS,
+    }
+}
 
 type Job = Box<dyn FnOnce(&mut Connection) + Send + 'static>;
 
@@ -40,25 +75,31 @@ impl std::fmt::Debug for Db {
 }
 
 impl Db {
-    /// Open (creating if needed) the database at `path`, enable WAL and
-    /// foreign keys, and bring the schema up to date.
-    pub fn open(path: &Path) -> anyhow::Result<Db> {
+    /// Open (creating if needed) the database of `personality` at `path`,
+    /// enable WAL and foreign keys, and bring the schema up to date.
+    pub fn open(path: &Path, personality: Personality) -> anyhow::Result<Db> {
         let conn = Connection::open(path)?;
         conn.pragma_update(None, "journal_mode", "WAL")?;
         conn.pragma_update(None, "synchronous", "NORMAL")?;
         conn.busy_timeout(std::time::Duration::from_secs(5))?;
-        Self::start(conn)
+        Self::start(conn, personality)
     }
 
-    /// A private in-memory database with the schema applied. For tests and
-    /// for importing without touching disk.
+    /// A private in-memory database with Sonarr's schema applied. For tests
+    /// and for importing without touching disk.
     pub fn open_in_memory() -> anyhow::Result<Db> {
-        Self::start(Connection::open_in_memory()?)
+        Self::open_in_memory_for(Personality::Sonarr)
     }
 
-    fn start(mut conn: Connection) -> anyhow::Result<Db> {
+    /// A private in-memory database with the schema of `personality`.
+    pub fn open_in_memory_for(personality: Personality) -> anyhow::Result<Db> {
+        Self::start(Connection::open_in_memory()?, personality)
+    }
+
+    fn start(mut conn: Connection, personality: Personality) -> anyhow::Result<Db> {
         conn.pragma_update(None, "foreign_keys", "ON")?;
-        migrate(&mut conn)?;
+        refuse_another_personality(&conn, personality)?;
+        migrate(&mut conn, personality)?;
         let (tx, rx) = mpsc::channel::<Job>();
         // The thread logs where its opener does: one process serves several
         // personalities, each with a `tracing` dispatcher of its own.
@@ -108,16 +149,44 @@ impl Db {
     }
 }
 
-/// Apply the migrations not yet recorded in `user_version`.
-pub fn migrate(conn: &mut Connection) -> anyhow::Result<()> {
+/// Before the migration sets were split, `--personalities radarr` gave
+/// `unarr-radarr.db` Sonarr's tables. Such a file holds nothing (nothing
+/// was imported into it and it served a clone of Sonarr) and its
+/// `user_version` counts another sequence, so it is refused with what to do
+/// rather than migrated or silently replaced.
+fn refuse_another_personality(conn: &Connection, personality: Personality) -> anyhow::Result<()> {
+    let has = |table: &str| -> rusqlite::Result<bool> {
+        conn.query_row(
+            "SELECT EXISTS (SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = ?1)",
+            [table],
+            |r| r.get(0),
+        )
+    };
+    let foreign = match personality {
+        Personality::Radarr => has("series")?,
+        Personality::Sonarr | Personality::Lidarr => has("movies")?,
+    };
+    anyhow::ensure!(
+        !foreign,
+        "{} holds another application's tables (a build older than the Radarr personality gave \
+         unarr-radarr.db Sonarr's schema and no data): move the file away and start again, with \
+         --import-from to import the original installation",
+        personality.db_file()
+    );
+    Ok(())
+}
+
+/// Apply the migrations of `personality` not yet recorded in `user_version`.
+pub fn migrate(conn: &mut Connection, personality: Personality) -> anyhow::Result<()> {
+    let migrations = migrations(personality);
     let current: i64 = conn.pragma_query_value(None, "user_version", |r| r.get(0))?;
     let current = usize::try_from(current).unwrap_or(usize::MAX);
     anyhow::ensure!(
-        current <= MIGRATIONS.len(),
+        current <= migrations.len(),
         "database schema version {current} is newer than this build ({})",
-        MIGRATIONS.len()
+        migrations.len()
     );
-    for (i, sql) in MIGRATIONS.iter().enumerate().skip(current) {
+    for (i, sql) in migrations.iter().enumerate().skip(current) {
         let version = i + 1;
         tracing::info!(version, "applying schema migration");
         let tx = conn.transaction()?;
@@ -135,12 +204,13 @@ mod tests {
     #[test]
     fn migrations_apply_once_and_are_idempotent() {
         let mut conn = Connection::open_in_memory().unwrap();
-        migrate(&mut conn).unwrap();
-        migrate(&mut conn).unwrap();
+        migrate(&mut conn, Personality::Sonarr).unwrap();
+        migrate(&mut conn, Personality::Sonarr).unwrap();
         let v: i64 = conn
             .pragma_query_value(None, "user_version", |r| r.get(0))
             .unwrap();
-        assert_eq!(v as usize, MIGRATIONS.len());
+        // The sequence existing unarr-sonarr.db files went through.
+        assert_eq!(v, 9);
         let tables: i64 = conn
             .query_row(
                 "SELECT count(*) FROM sqlite_master WHERE type = 'table' AND name = 'series'",
@@ -155,7 +225,94 @@ mod tests {
     fn refuses_a_database_from_the_future() {
         let mut conn = Connection::open_in_memory().unwrap();
         conn.pragma_update(None, "user_version", 999).unwrap();
-        assert!(migrate(&mut conn).is_err());
+        assert!(migrate(&mut conn, Personality::Sonarr).is_err());
+    }
+
+    #[test]
+    fn radarr_has_its_own_schema_over_the_shared_tables() {
+        let mut conn = Connection::open_in_memory().unwrap();
+        migrate(&mut conn, Personality::Radarr).unwrap();
+        migrate(&mut conn, Personality::Radarr).unwrap();
+        let has = |table: &str| -> bool {
+            conn.query_row(
+                "SELECT EXISTS (SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = ?1)",
+                [table],
+                |r| r.get(0),
+            )
+            .unwrap()
+        };
+        for table in [
+            "movies",
+            "movie_metadata",
+            "movie_files",
+            "tags",
+            "providers",
+            "commands",
+            "sequences",
+        ] {
+            assert!(has(table), "{table}");
+        }
+        for table in ["series", "episodes", "scene_mappings"] {
+            assert!(!has(table), "{table}");
+        }
+    }
+
+    #[test]
+    fn the_shared_tables_are_the_same_in_both_schemas() {
+        let schema = |personality| {
+            let mut conn = Connection::open_in_memory().unwrap();
+            migrate(&mut conn, personality).unwrap();
+            let mut stmt = conn
+                .prepare("SELECT name, sql FROM sqlite_master WHERE type = 'table' ORDER BY name")
+                .unwrap();
+            let rows: Vec<(String, String)> = stmt
+                .query_map([], |r| Ok((r.get(0)?, r.get(1)?)))
+                .unwrap()
+                .map(Result::unwrap)
+                .collect();
+            rows
+        };
+        let sonarr = schema(Personality::Sonarr);
+        let radarr = schema(Personality::Radarr);
+        // quality_profiles is shared and then altered by Radarr.
+        for table in [
+            "meta",
+            "tags",
+            "root_folders",
+            "quality_definitions",
+            "custom_formats",
+            "providers",
+            "config",
+            "delay_profiles",
+            "release_profiles",
+            "remote_path_mappings",
+            "custom_filters",
+            "auto_tagging",
+            "users",
+            "scheduled_tasks",
+            "provider_status",
+            "commands",
+            "sequences",
+            "import_list_status",
+        ] {
+            let find =
+                |rows: &[(String, String)]| rows.iter().find(|(n, _)| n == table).map(|(_, s)| s.clone());
+            assert_eq!(find(&sonarr), find(&radarr), "{table}");
+            assert!(find(&sonarr).is_some(), "{table}");
+        }
+    }
+
+    #[test]
+    fn a_radarr_database_with_sonarr_tables_is_refused() {
+        let dir = std::env::temp_dir().join(format!("unarr-db-clone-{}", std::process::id()));
+        std::fs::create_dir_all(&dir).unwrap();
+        let path = dir.join("unarr-radarr.db");
+        let _ = std::fs::remove_file(&path);
+        // What `--personalities radarr` left behind before the sets were split.
+        drop(Db::open(&path, Personality::Sonarr).unwrap());
+        let err = Db::open(&path, Personality::Radarr).unwrap_err().to_string();
+        assert!(err.contains("another application's tables"), "{err}");
+        std::fs::remove_dir_all(&dir).unwrap();
     }
 
     #[tokio::test]

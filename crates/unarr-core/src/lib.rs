@@ -22,6 +22,7 @@ pub mod indexers;
 pub mod mediafiles;
 pub mod metadata;
 pub mod model;
+pub mod movies;
 pub mod naming;
 pub mod notifications;
 pub mod outbound;

@@ -1,0 +1,278 @@
+{
+  "body": {
+    "added": "2026-03-07T09:12:06Z",
+    "alternateTitles": [
+      {
+        "id": 63,
+        "movieMetadataId": 11,
+        "sourceType": "tmdb",
+        "title": "האביר האפל: באטמן מתחיל"
+      },
+      {
+        "id": 64,
+        "movieMetadataId": 11,
+        "sourceType": "tmdb",
+        "title": "Betmen počinje"
+      },
+      {
+        "id": 65,
+        "movieMetadataId": 11,
+        "sourceType": "tmdb",
+        "title": "Kara Şövalye: Batman Başlıyor"
+      },
+      {
+        "id": 66,
+        "movieMetadataId": 11,
+        "sourceType": "tmdb",
+        "title": "蝙蝠侠5：侠影之谜"
+      },
+      {
+        "id": 68,
+        "movieMetadataId": 11,
+        "sourceType": "tmdb",
+        "title": "Batman I: Batman Begins"
+      },
+      {
+        "id": 69,
+        "movieMetadataId": 11,
+        "sourceType": "tmdb",
+        "title": "The Dark Knight 1: Batman Begins"
+      },
+      {
+        "id": 70,
+        "movieMetadataId": 11,
+        "sourceType": "tmdb",
+        "title": "バットマン ビギンズ：2005"
+      },
+      {
+        "id": 71,
+        "movieMetadataId": 11,
+        "sourceType": "tmdb",
+        "title": "The Dark Knight: Batman Begins"
+      },
+      {
+        "id": 72,
+        "movieMetadataId": 11,
+        "sourceType": "tmdb",
+        "title": "Người Dơi Xuất Hiện"
+      },
+      {
+        "id": 73,
+        "movieMetadataId": 11,
+        "sourceType": "tmdb",
+        "title": "Batman (El caballero oscuro) - 1. Batman Begins"
+      },
+      {
+        "id": 74,
+        "movieMetadataId": 11,
+        "sourceType": "tmdb",
+        "title": "Batman 5 Początek"
+      },
+      {
+        "id": 1217,
+        "movieMetadataId": 11,
+        "sourceType": "tmdb",
+        "title": "Batman počinje"
+      },
+      {
+        "id": 1520,
+        "movieMetadataId": 11,
+        "sourceType": "tmdb",
+        "title": "The Intimidation Game"
+      },
+      {
+        "id": 1670,
+        "movieMetadataId": 11,
+        "sourceType": "tmdb",
+        "title": "Batman 1 - Batman Begins"
+      },
+      {
+        "id": 2265,
+        "movieMetadataId": 11,
+        "sourceType": "tmdb",
+        "title": "Batman Başlayır"
+      }
+    ],
+    "certification": "PG-13",
+    "cleanTitle": "batmanbegins",
+    "collection": {
+      "title": "The Dark Knight Collection",
+      "tmdbId": 263
+    },
+    "digitalRelease": "2008-05-19T00:00:00Z",
+    "folderName": "/movies/Batman Begins (2005)",
+    "genres": [
+      "Drama",
+      "Crime",
+      "Action"
+    ],
+    "hasFile": true,
+    "id": 11,
+    "images": [
+      {
+        "coverType": "poster",
+        "remoteUrl": "https://image.tmdb.org/t/p/original/sPX89Td70IDDjVr85jdSBb4rWGr.jpg",
+        "url": "/MediaCover/11/poster.jpg?h=b13d0000283177bdb95a"
+      },
+      {
+        "coverType": "fanart",
+        "remoteUrl": "https://image.tmdb.org/t/p/original/9IIBboV7MCT0bTxzXHmWK1Hq558.jpg",
+        "url": "/MediaCover/11/fanart.jpg?h=5d354bd1395b08fee78f"
+      }
+    ],
+    "imdbId": "tt0372784",
+    "inCinemas": "2005-06-15T00:00:00Z",
+    "isAvailable": true,
+    "keywords": [
+      "based on comic",
+      "crime fighter",
+      "evil doctor",
+      "haunted by the past",
+      "inspirational",
+      "loss of loved one",
+      "martial arts",
+      "master villain",
+      "ninja",
+      "rivalry",
+      "secret identity",
+      "super power",
+      "superhero",
+      "tragic hero",
+      "undercover",
+      "unfulfilled love",
+      "vigilante"
+    ],
+    "lastSearchTime": "2026-11-01T16:38:56Z",
+    "minimumAvailability": "released",
+    "monitored": true,
+    "movieFile": {
+      "dateAdded": "2026-11-01T17:42:01Z",
+      "edition": "",
+      "id": 391,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        },
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 320000,
+        "audioChannels": 5.1,
+        "audioCodec": "EAC3",
+        "audioLanguages": "ita/eng",
+        "audioStreamCount": 2,
+        "resolution": "1920x800",
+        "runTime": "2:20:05",
+        "scanType": "Progressive",
+        "subtitles": "ita/ita/eng",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "x265",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 23.976
+      },
+      "movieId": 11,
+      "originalFilePath": "Batman Begins (2005) [WEB-DL AMZN h265 1080p EAC3 5.1 ITA ENG Sub ITA ENG by elenaVelena].mkv",
+      "path": "/movies/Batman Begins (2005)/Batman Begins (2005) {tmdb-272} - [AMZN][WEBDL-1080p][EAC3 5.1][x265].mkv",
+      "quality": {
+        "quality": {
+          "id": 3,
+          "modifier": "none",
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "webdl"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Batman Begins (2005) {tmdb-272} - [AMZN][WEBDL-1080p][EAC3 5.1][x265].mkv",
+      "sceneName": "Batman Begins (2005) [WEB-DL AMZN h265 1080p EAC3 5.1 ITA ENG Sub ITA ENG by elenaVelena]",
+      "size": 3424169807
+    },
+    "movieFileId": 391,
+    "originalLanguage": {
+      "id": 1,
+      "name": "English"
+    },
+    "originalTitle": "Batman Begins",
+    "overview": "Driven by tragedy, billionaire Bruce Wayne dedicates his life to uncovering and defeating the corruption that plagues his home, Gotham City.  Unable to work within the system, he instead creates a new identity, a symbol of fear for the criminal underworld - The Batman.",
+    "path": "/movies/Batman Begins (2005)",
+    "physicalRelease": "2005-10-14T00:00:00Z",
+    "popularity": 18.1463,
+    "qualityProfileId": 10,
+    "ratings": {
+      "imdb": {
+        "type": "user",
+        "value": 8.2,
+        "votes": 1753601
+      },
+      "metacritic": {
+        "type": "user",
+        "value": 70,
+        "votes": 0
+      },
+      "rottenTomatoes": {
+        "type": "user",
+        "value": 85,
+        "votes": 0
+      },
+      "tmdb": {
+        "type": "user",
+        "value": 7.733,
+        "votes": 23504
+      },
+      "trakt": {
+        "type": "user",
+        "value": 8.2092,
+        "votes": 38361
+      }
+    },
+    "releaseDate": "2005-10-14T00:00:00Z",
+    "rootFolderPath": "/movies",
+    "runtime": 140,
+    "secondaryYearSourceId": 0,
+    "sizeOnDisk": 3424169807,
+    "sortTitle": "batman begins",
+    "statistics": {
+      "movieFileCount": 1,
+      "movieFileQualities": [
+        {
+          "id": 3,
+          "modifier": "none",
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "webdl"
+        }
+      ],
+      "releaseGroups": [],
+      "sizeOnDisk": 3424169807
+    },
+    "status": "released",
+    "studio": "Warner Bros. Pictures",
+    "tags": [
+      1
+    ],
+    "title": "Batman Begins",
+    "titleSlug": "272",
+    "tmdbId": 272,
+    "website": "https://www.warnerbros.com/movies/batman-begins/",
+    "year": 2005,
+    "youTubeTrailerId": "lirBhHXvDSg"
+  },
+  "recordedAt": "2026-11-11T12:12:52Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/movie/11"
+  },
+  "status": 200
+}

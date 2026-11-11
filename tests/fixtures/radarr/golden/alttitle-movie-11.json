@@ -1,0 +1,100 @@
+{
+  "body": [
+    {
+      "id": 63,
+      "movieMetadataId": 11,
+      "sourceType": "tmdb",
+      "title": "האביר האפל: באטמן מתחיל"
+    },
+    {
+      "id": 64,
+      "movieMetadataId": 11,
+      "sourceType": "tmdb",
+      "title": "Betmen počinje"
+    },
+    {
+      "id": 65,
+      "movieMetadataId": 11,
+      "sourceType": "tmdb",
+      "title": "Kara Şövalye: Batman Başlıyor"
+    },
+    {
+      "id": 66,
+      "movieMetadataId": 11,
+      "sourceType": "tmdb",
+      "title": "蝙蝠侠5：侠影之谜"
+    },
+    {
+      "id": 68,
+      "movieMetadataId": 11,
+      "sourceType": "tmdb",
+      "title": "Batman I: Batman Begins"
+    },
+    {
+      "id": 69,
+      "movieMetadataId": 11,
+      "sourceType": "tmdb",
+      "title": "The Dark Knight 1: Batman Begins"
+    },
+    {
+      "id": 70,
+      "movieMetadataId": 11,
+      "sourceType": "tmdb",
+      "title": "バットマン ビギンズ：2005"
+    },
+    {
+      "id": 71,
+      "movieMetadataId": 11,
+      "sourceType": "tmdb",
+      "title": "The Dark Knight: Batman Begins"
+    },
+    {
+      "id": 72,
+      "movieMetadataId": 11,
+      "sourceType": "tmdb",
+      "title": "Người Dơi Xuất Hiện"
+    },
+    {
+      "id": 73,
+      "movieMetadataId": 11,
+      "sourceType": "tmdb",
+      "title": "Batman (El caballero oscuro) - 1. Batman Begins"
+    },
+    {
+      "id": 74,
+      "movieMetadataId": 11,
+      "sourceType": "tmdb",
+      "title": "Batman 5 Początek"
+    },
+    {
+      "id": 1217,
+      "movieMetadataId": 11,
+      "sourceType": "tmdb",
+      "title": "Batman počinje"
+    },
+    {
+      "id": 1520,
+      "movieMetadataId": 11,
+      "sourceType": "tmdb",
+      "title": "The Intimidation Game"
+    },
+    {
+      "id": 1670,
+      "movieMetadataId": 11,
+      "sourceType": "tmdb",
+      "title": "Batman 1 - Batman Begins"
+    },
+    {
+      "id": 2265,
+      "movieMetadataId": 11,
+      "sourceType": "tmdb",
+      "title": "Batman Başlayır"
+    }
+  ],
+  "recordedAt": "2026-11-11T12:12:55Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/alttitle?movieId=11"
+  },
+  "status": 200
+}

@@ -1,0 +1,16 @@
+{
+  "body": {
+    "page": 1,
+    "pageSize": 20,
+    "records": [],
+    "sortDirection": "descending",
+    "sortKey": "timeleft",
+    "totalRecords": 0
+  },
+  "recordedAt": "2026-11-11T12:12:57Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/queue?page=1&pageSize=20&includeUnknownMovieItems=true&includeMovie=true"
+  },
+  "status": 200
+}

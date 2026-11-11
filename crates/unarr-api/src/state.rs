@@ -140,6 +140,9 @@ struct Inner {
     lifecycle: tokio::sync::watch::Sender<Option<Lifecycle>>,
     /// How the program applies a log level, when it said how.
     log_level: OnceLock<LogLevelHook>,
+    /// This personality's HTTP clients and the outgoing settings they
+    /// follow.
+    http: unarr_core::http::Clients,
 }
 
 /// How the program applies a log level.
@@ -185,6 +188,13 @@ impl AppState {
             session_secret: OnceLock::new(),
             lifecycle: tokio::sync::watch::channel(None).0,
             log_level: OnceLock::new(),
+            // The series side takes the process-wide clients; any other
+            // personality has its own, so that the proxy and certificate
+            // settings saved for one never reach another's requests.
+            http: match personality {
+                Personality::Sonarr => unarr_core::http::Clients::process(),
+                Personality::Radarr | Personality::Lidarr => unarr_core::http::Clients::new(),
+            },
         }))
     }
 
@@ -196,6 +206,13 @@ impl AppState {
             return Ok(());
         }
         self.apply_network_settings().await?;
+        // The command queue, the scheduler and what they run are bound to
+        // series and episodes; Radarr gets its own with the acquisition
+        // milestone. Until then it answers from what the import brought
+        // and runs nothing in the background.
+        if self.personality() == Personality::Radarr {
+            return Ok(());
+        }
         let fixed = self.0.fixed_now.clone();
         let clock: unarr_core::commands::executor::Clock =
             Arc::new(move || fixed.lock().unwrap().unwrap_or_else(Utc::now));
@@ -316,8 +333,24 @@ impl AppState {
             .db()
             .call(|conn| unarr_core::outbound::Outbound::load(conn))
             .await?;
-        unarr_core::outbound::process().set(outbound);
+        self.0.http.outbound.set(outbound);
         Ok(())
+    }
+
+    /// The HTTP clients of this personality.
+    pub fn http(&self) -> &unarr_core::http::Clients {
+        &self.0.http
+    }
+
+    /// Where the metadata and artwork hosts are asked: the real ones,
+    /// unless a mock was set.
+    pub fn metadata_upstreams(&self) -> unarr_core::metadata::Upstreams {
+        self.0
+            .metadata
+            .lock()
+            .unwrap()
+            .clone()
+            .unwrap_or_else(unarr_core::metadata::Upstreams::real)
     }
 
     /// The key session cookies are signed with: random, made on first use

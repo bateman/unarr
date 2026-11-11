@@ -12,8 +12,12 @@ Torznab indexers (Prowlarr can manage them), decides with the originals'
 rules, hands releases to SABnzbd, NZBGet, qBittorrent or Transmission, imports
 and renames what they finish, notifies Discord, webhooks and Plex, looks up,
 adds and refreshes series, and saves every settings page (Recyclarr syncs
-through it). Radarr is next ([docs/phase-4-radarr.md](docs/phase-4-radarr.md));
-until then `--personalities radarr` and `lidarr` start but are not usable. See
+through it). Radarr is under way ([docs/phase-4-radarr.md](docs/phase-4-radarr.md)):
+`--personalities sonarr,radarr` imports `radarr.db` and serves the official
+Radarr web UI, Bazarr and every read of the API next to Sonarr in one
+process, read-only for now; searching, importing and settings writes for
+movies are the next milestones. `--personalities lidarr` starts but is not
+usable. See
 [docs/DESIGN.md](docs/DESIGN.md), the work orders of each phase under `docs/`,
 [docs/audit/README.md](docs/audit/README.md) and, for running it in place of
 Sonarr, [docs/homelab-compose.md](docs/homelab-compose.md).
@@ -36,7 +40,10 @@ Sonarr, [docs/homelab-compose.md](docs/homelab-compose.md).
 The daemon is `unarrd`. Each personality listens on the port of the application it
 replaces: Sonarr on 8989, Radarr on 7878, Lidarr on 8686, on the `BindAddress`
 of its `config.xml` unless `--bind` says otherwise. Select them with
-`--personalities sonarr,radarr` or `UNARR_PERSONALITIES`. The image runs as
+`--personalities sonarr,radarr` or `UNARR_PERSONALITIES`; with several, name
+each original's folder with `--import-from` (repeated, or comma separated in
+`UNARR_IMPORT_FROM`) and each personality imports from the one that holds its
+database. The image runs as
 user 65532; when mounting a host directory on `/config`, pass `--user` with
 its owner, or the daemon cannot create its files there.
 
@@ -78,19 +85,21 @@ login is the one configured in Sonarr.
 
 ### Web UI
 
-The official Sonarr frontend is embedded at build time. `make ui` fetches it
-from the pinned Sonarr release into `crates/unarr-api/ui/sonarr/` before
-`cargo build`; without it the binary serves the API and a placeholder page.
+The official Sonarr and Radarr frontends are embedded at build time. `make ui`
+fetches them from the pinned releases into `crates/unarr-api/ui/sonarr/` and
+`ui/radarr/` before `cargo build`; without them the binary serves the API and
+a placeholder page.
 
 ## Development
 
     make help          # list targets
     make check         # fmt check, clippy, tests (what CI runs)
     make run           # run unarrd from source on the Sonarr fixture
-    make ui            # fetch the official Sonarr UI for embedding (needed by make check)
-    make golden        # re-record the contract-test goldens
-    make bazarr        # replay Bazarr's requests against a running unarrd
-    make anonymize     # anonymised copy of a Sonarr backup zip (FROM=..., OUT=...)
+    make run-both      # Sonarr on 8989 and Radarr on 7878, on both fixtures
+    make ui            # fetch the official Sonarr and Radarr UIs for embedding (needed by make check)
+    make golden        # re-record the Sonarr contract-test goldens (golden-radarr for Radarr's)
+    make bazarr        # replay Bazarr's requests against a running unarrd (bazarr-radarr for movies)
+    make anonymize     # anonymised copy of a backup zip (FROM=..., APP=sonarr|radarr, OUT=...)
     make docker        # build ghcr.io/bateman/unarr:dev locally
     make check-name    # name availability across registries (NAME=...)
 

@@ -91,9 +91,14 @@ async fn validate_resource(
 
 /// `NotificationResourceMapper.ToModel`: the stored provider a resource
 /// describes, every event flag false unless sent.
-fn to_model(body: &Value, id: i64, existing: Option<&Provider>) -> ApiResult<Provider> {
+fn to_model(
+    personality: unarr_core::Personality,
+    body: &Value,
+    id: i64,
+    existing: Option<&Provider>,
+) -> ApiResult<Provider> {
     let implementation = body["implementation"].as_str().unwrap_or("").to_string();
-    let Some(schema) = schemas::lookup(SchemaKind::Provider(KIND), &implementation) else {
+    let Some(schema) = schemas::lookup(personality, SchemaKind::Provider(KIND), &implementation) else {
         return Err(ApiError::BadRequest(format!(
             "Unknown implementation {implementation:?}"
         )));
@@ -155,7 +160,7 @@ pub async fn create(State(state): State<AppState>, uri: Uri, Json(body): Json<Va
         ));
     }
     validate_resource(&state, &body, 0, "POST", false).await?;
-    let mut provider = to_model(&body, 0, None)?;
+    let mut provider = to_model(state.personality(), &body, 0, None)?;
     let def = definition(&provider);
     if def.enabled() {
         verify(def.validate_settings(), !force_save)?;
@@ -169,7 +174,7 @@ pub async fn create(State(state): State<AppState>, uri: Uri, Json(body): Json<Va
             Ok(provider)
         })
         .await?;
-    let resource = provider_resource(&stored);
+    let resource = provider_resource(state.personality(), &stored);
     broadcast(&state, "created", resource.clone());
     let location = format!("{}/api/v3/notification/{}", state.settings().url_base, stored.id);
     Ok((
@@ -202,7 +207,7 @@ pub async fn update(
         Some(p) => p,
         None => find(&state, body_id).await?.ok_or(ApiError::NotFound)?,
     };
-    let provider = to_model(&body, existing.id, Some(&existing))?;
+    let provider = to_model(state.personality(), &body, existing.id, Some(&existing))?;
     let changed = provider != existing;
     let def = definition(&provider);
     if def.enabled() {
@@ -219,7 +224,7 @@ pub async fn update(
             .await?;
     }
     let stored = find(&state, existing.id).await?.ok_or(ApiError::NotFound)?;
-    let resource = provider_resource(&stored);
+    let resource = provider_resource(state.personality(), &stored);
     if changed {
         broadcast(&state, "updated", resource.clone());
     }
@@ -248,7 +253,7 @@ pub async fn test(
     let id = body["id"].as_i64().unwrap_or(0);
     validate_resource(&state, &body, id, "POST", true).await?;
     let existing = if id > 0 { find(&state, id).await? } else { None };
-    let provider = to_model(&body, id, existing.as_ref())?;
+    let provider = to_model(state.personality(), &body, id, existing.as_ref())?;
     verify(definition(&provider).validate_settings(), !force_test)?;
     verify(test_provider(&state, &provider).await?, true)?;
     Ok(Json(json!({})))
@@ -301,7 +306,7 @@ pub async fn action(
 ) -> ApiResult<Json<Value>> {
     let id = body["id"].as_i64().unwrap_or(0);
     let existing = if id > 0 { find(&state, id).await? } else { None };
-    to_model(&body, id, existing.as_ref())?;
+    to_model(state.personality(), &body, id, existing.as_ref())?;
     Ok(Json(json!({})))
 }
 
@@ -346,7 +351,7 @@ pub async fn bulk_update(State(state): State<AppState>, Json(body): Json<Value>)
             .db()
             .call(move |conn| store::providers::update_provider(conn, &to_store))
             .await?;
-        let resource = provider_resource(&p);
+        let resource = provider_resource(state.personality(), &p);
         broadcast(&state, "updated", resource.clone());
         updated.push(resource);
     }

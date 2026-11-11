@@ -30,9 +30,12 @@ struct Args {
 
     /// Directory with the original application's config.xml and database to
     /// import on first start. Defaults to the personality's data directory,
-    /// then to --data itself (a Sonarr /config mounted as is).
-    #[arg(long, env = "UNARR_IMPORT_FROM")]
-    import_from: Option<PathBuf>,
+    /// then to --data itself (a Sonarr /config mounted as is). With several
+    /// personalities, give one directory per original (repeat the option,
+    /// or separate them with commas): each personality takes the one that
+    /// holds its database.
+    #[arg(long, env = "UNARR_IMPORT_FROM", value_delimiter = ',')]
+    import_from: Vec<PathBuf>,
 
     /// The ffprobe binary for media info; `ffprobe` on the PATH when unset.
     #[arg(long, env = "UNARR_FFPROBE")]
@@ -182,11 +185,14 @@ fn legacy_source(
     personality: Personality,
     own_dir: &Path,
     data: &Path,
-    explicit: Option<&Path>,
+    explicit: &[PathBuf],
 ) -> Option<PathBuf> {
-    let candidates: Vec<PathBuf> = match explicit {
-        Some(p) => vec![p.to_path_buf()],
-        None => vec![own_dir.to_path_buf(), data.to_path_buf()],
+    // Each original has a folder of its own: among those given, this
+    // personality's is the one holding its database.
+    let candidates: Vec<PathBuf> = if explicit.is_empty() {
+        vec![own_dir.to_path_buf(), data.to_path_buf()]
+    } else {
+        explicit.to_vec()
     };
     candidates
         .into_iter()
@@ -201,7 +207,7 @@ fn already_imported(personality: Personality, own_dir: &Path) -> anyhow::Result<
     if !path.is_file() {
         return Ok(false);
     }
-    let db = Db::open(&path)?;
+    let db = Db::open(&path, personality)?;
     Ok(db
         .call_blocking(|conn| unarr_core::store::config::meta(conn, "source.app"))?
         .is_some())
@@ -211,22 +217,28 @@ fn already_imported(personality: Personality, own_dir: &Path) -> anyhow::Result<
 /// one selected personality, unless that personality was imported already.
 /// Otherwise a typo in the path would start a blank installation with a new
 /// API key and no login, and silently at that.
-fn check_import_source(import_from: &Path, personalities: &[Personality], data: &Path) -> anyhow::Result<()> {
-    let mut found = false;
-    for p in personalities {
-        if import_from.join(p.legacy_db_file()).is_file()
-            || already_imported(*p, &data.join(personality_dir(*p)))?
-        {
-            found = true;
-        }
-    }
+fn check_import_source(
+    import_from: &[PathBuf],
+    personalities: &[Personality],
+    data: &Path,
+) -> anyhow::Result<()> {
     let expected: Vec<&str> = personalities.iter().map(|p| p.legacy_db_file()).collect();
-    anyhow::ensure!(
-        found,
-        "--import-from {}: no {} found there and nothing imported yet; check the path",
-        import_from.display(),
-        expected.join(" or ")
-    );
+    for dir in import_from {
+        let mut found = false;
+        for p in personalities {
+            if dir.join(p.legacy_db_file()).is_file()
+                || already_imported(*p, &data.join(personality_dir(*p)))?
+            {
+                found = true;
+            }
+        }
+        anyhow::ensure!(
+            found,
+            "--import-from {}: no {} found there and nothing imported yet; check the path",
+            dir.display(),
+            expected.join(" or ")
+        );
+    }
     Ok(())
 }
 
@@ -424,7 +436,7 @@ fn open_database(
     own_dir: &Path,
     legacy: Option<&Path>,
 ) -> anyhow::Result<(Db, HostConfig)> {
-    let db = Db::open(&own_dir.join(personality.db_file()))?;
+    let db = Db::open(&own_dir.join(personality.db_file()), personality)?;
     let imported = db
         .call_blocking(|conn| unarr_core::store::config::meta(conn, "source.app"))?
         .is_some();
@@ -432,9 +444,10 @@ fn open_database(
 
     if !imported {
         if let Some(src) = legacy {
+            let source = src.join(personality.legacy_db_file());
             match personality {
                 Personality::Sonarr => {
-                    let report = unarr_import::sonarr::import(&src.join(personality.legacy_db_file()), &db)?;
+                    let report = unarr_import::sonarr::import(&source, &db)?;
                     tracing::info!(
                         from = %src.display(),
                         migration = report.migration_version,
@@ -443,11 +456,23 @@ fn open_database(
                         "imported legacy database"
                     );
                 }
-                other => tracing::warn!(?other, "import not implemented yet for this personality"),
+                Personality::Radarr => {
+                    let report = unarr_import::radarr::import(&source, &db)?;
+                    tracing::info!(
+                        from = %src.display(),
+                        migration = report.migration_version,
+                        movies = report.counts.get("Movies").copied().unwrap_or(0),
+                        files = report.counts.get("MovieFiles").copied().unwrap_or(0),
+                        "imported legacy database"
+                    );
+                }
+                Personality::Lidarr => tracing::warn!("import not implemented yet for Lidarr"),
             }
         }
     }
-    // What the originals make sure is there at every start.
+    // What the originals make sure is there at every start. Radarr's
+    // defaults (its qualities, its profiles) come with the milestone that
+    // writes settings; an imported installation has them already.
     if personality == Personality::Sonarr {
         db.call_blocking(|conn| unarr_core::defaults::ensure(conn))?;
     }
@@ -481,7 +506,7 @@ fn open_restoring(
 fn open_personality(personality: Personality, args: &Args, logs: &LogBuffer) -> anyhow::Result<Opened> {
     let own_dir = args.data.join(personality_dir(personality));
     std::fs::create_dir_all(&own_dir).with_context(|| format!("creating {}", own_dir.display()))?;
-    let legacy = legacy_source(personality, &own_dir, &args.data, args.import_from.as_deref());
+    let legacy = legacy_source(personality, &own_dir, &args.data, &args.import_from);
     let (db, mut host) = open_restoring(personality, &own_dir, legacy.as_deref())?;
 
     // Host settings saved through the API since: the original's
@@ -661,6 +686,18 @@ async fn serve(
     // The import read whole tables into memory; the allocator keeps the
     // pages unless told otherwise.
     unarr_core::fs::release_memory();
+    // The command runtime's scheduler gives freed pages back on every
+    // tick; a personality that runs none yet (Radarr, until it has its
+    // commands) would keep what its largest answer needed.
+    if state.commands().is_err() {
+        tokio::spawn(async {
+            let mut tick = tokio::time::interval(std::time::Duration::from_secs(30));
+            loop {
+                tick.tick().await;
+                unarr_core::fs::release_memory();
+            }
+        });
+    }
     // A (host, port) pair resolves names and IPv6 literals such as `::`.
     let listener = tokio::net::TcpListener::bind((bind.as_str(), port))
         .await
@@ -705,8 +742,8 @@ fn main() -> anyhow::Result<()> {
             "ffprobe not found; media info and sample detection are off"
         ),
     }
-    if let Some(import_from) = &args.import_from {
-        check_import_source(import_from, &personalities, &args.data)?;
+    if !args.import_from.is_empty() {
+        check_import_source(&args.import_from, &personalities, &args.data)?;
     }
 
     // Whatever an earlier run said: nothing listens yet.
@@ -857,28 +894,30 @@ mod tests {
         let all = [Personality::Sonarr, Personality::Radarr];
 
         // Nothing anywhere: a typo in the path, most likely.
-        let err = check_import_source(&source, &all, &data).unwrap_err().to_string();
+        let err = check_import_source(std::slice::from_ref(&source), &all, &data)
+            .unwrap_err()
+            .to_string();
         assert!(err.contains("sonarr.db or radarr.db"), "{err}");
 
         // The original database is there for one of the personalities.
         std::fs::write(source.join("radarr.db"), b"").unwrap();
-        check_import_source(&source, &all, &data).unwrap();
+        check_import_source(std::slice::from_ref(&source), &all, &data).unwrap();
 
         // A database left by a blank first start is not an import.
         std::fs::remove_file(source.join("radarr.db")).unwrap();
         let own_dir = data.join("sonarr");
         std::fs::create_dir_all(&own_dir).unwrap();
-        drop(Db::open(&own_dir.join(Personality::Sonarr.db_file())).unwrap());
-        assert!(check_import_source(&source, &all, &data).is_err());
+        drop(Db::open(&own_dir.join(Personality::Sonarr.db_file()), Personality::Sonarr).unwrap());
+        assert!(check_import_source(std::slice::from_ref(&source), &all, &data).is_err());
 
         // Once the importer has recorded its source, the personality counts as imported.
         {
-            let db = Db::open(&own_dir.join(Personality::Sonarr.db_file())).unwrap();
+            let db = Db::open(&own_dir.join(Personality::Sonarr.db_file()), Personality::Sonarr).unwrap();
             db.call_blocking(|conn| unarr_core::store::config::set_meta(conn, "source.app", "sonarr"))
                 .unwrap();
         }
-        check_import_source(&source, &all, &data).unwrap();
-        assert!(check_import_source(&source, &[Personality::Radarr], &data).is_err());
+        check_import_source(std::slice::from_ref(&source), &all, &data).unwrap();
+        assert!(check_import_source(std::slice::from_ref(&source), &[Personality::Radarr], &data).is_err());
 
         let _ = std::fs::remove_dir_all(&dir);
     }
@@ -950,6 +989,54 @@ mod tests {
         let _ = std::fs::remove_dir_all(&dir);
     }
 
+    /// Each original's folder placed as Unarr's own, as two personalities
+    /// in one process are set up: each imports its database once, with its
+    /// own importer, and reads its own `config.xml` in place.
+    #[test]
+    fn two_personalities_import_their_own_installations() {
+        let dir = std::env::temp_dir().join(format!("unarr-two-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&dir);
+        for p in [Personality::Sonarr, Personality::Radarr] {
+            let own_dir = dir.join(personality_dir(p));
+            std::fs::create_dir_all(&own_dir).unwrap();
+            let fixture = Path::new(concat!(env!("CARGO_MANIFEST_DIR"), "/../../tests/fixtures"))
+                .join(personality_dir(p));
+            for file in ["config.xml", p.legacy_db_file()] {
+                std::fs::copy(fixture.join(file), own_dir.join(file)).unwrap();
+            }
+        }
+        for (p, port, app, table, rows) in [
+            (Personality::Sonarr, 8989, "Sonarr", "series", 38),
+            (Personality::Radarr, 7878, "Radarr", "movies", 193),
+        ] {
+            let own_dir = dir.join(personality_dir(p));
+            let legacy = legacy_source(p, &own_dir, &dir, &[]).expect("the original is found in place");
+            // Named with --import-from, one folder per original, each
+            // personality takes the one that holds its database.
+            let both = [dir.join("sonarr"), dir.join("radarr")];
+            assert_eq!(legacy_source(p, &own_dir, &dir, &both), Some(own_dir.clone()));
+            let (db, host) = open_database(p, &own_dir, Some(&legacy)).unwrap();
+            assert_eq!(host.port, port);
+            assert_eq!(meta(&db, "source.app").as_deref(), Some(app));
+            let count: i64 = db
+                .call_blocking(move |conn| {
+                    Ok(conn.query_row(&format!("SELECT count(*) FROM {table}"), [], |r| r.get(0))?)
+                })
+                .unwrap();
+            assert_eq!(count, rows, "{app}");
+            drop(db);
+            // A second start imports nothing again and finds the same rows.
+            let (db, _) = open_database(p, &own_dir, Some(&legacy)).unwrap();
+            let again: i64 = db
+                .call_blocking(move |conn| {
+                    Ok(conn.query_row(&format!("SELECT count(*) FROM {table}"), [], |r| r.get(0))?)
+                })
+                .unwrap();
+            assert_eq!(again, rows, "{app}");
+        }
+        let _ = std::fs::remove_dir_all(&dir);
+    }
+
     fn meta(db: &Db, key: &'static str) -> Option<String> {
         db.call_blocking(move |conn| unarr_core::store::config::meta(conn, key))
             .unwrap()
@@ -968,7 +1055,7 @@ mod tests {
 
         // The backup: a database that says so, and its settings file.
         {
-            let db = Db::open(&staged.join(p.db_file())).unwrap();
+            let db = Db::open(&staged.join(p.db_file()), p).unwrap();
             db.call_blocking(|conn| unarr_core::store::config::set_meta(conn, "test.state", "backup"))
                 .unwrap();
             db.call_blocking(|conn| {
@@ -996,7 +1083,7 @@ mod tests {
         assert_eq!(host.api_key, before.api_key);
         assert!(!staged.exists());
         drop(db);
-        let kept = Db::open(&before_restore(&own_dir.join(p.db_file()))).unwrap();
+        let kept = Db::open(&before_restore(&own_dir.join(p.db_file())), p).unwrap();
         assert_eq!(meta(&kept, "test.state").as_deref(), Some("current"));
         drop(kept);
 

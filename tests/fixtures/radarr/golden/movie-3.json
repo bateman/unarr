@@ -1,0 +1,141 @@
+{
+  "body": {
+    "added": "2026-03-07T09:12:06Z",
+    "alternateTitles": [
+      {
+        "id": 6,
+        "movieMetadataId": 3,
+        "sourceType": "tmdb",
+        "title": "억셉티드"
+      },
+      {
+        "id": 7,
+        "movieMetadataId": 3,
+        "sourceType": "tmdb",
+        "title": "จิ๊จ๊ะมหาลัยคนรักแห้ว"
+      },
+      {
+        "id": 8,
+        "movieMetadataId": 3,
+        "sourceType": "tmdb",
+        "title": "Admitido"
+      },
+      {
+        "id": 9,
+        "movieMetadataId": 3,
+        "sourceType": "tmdb",
+        "title": "Prihvaћeno"
+      },
+      {
+        "id": 1571,
+        "movieMetadataId": 3,
+        "sourceType": "tmdb",
+        "title": "Nas pryinyaly!​"
+      }
+    ],
+    "certification": "PG-13",
+    "cleanTitle": "accepted",
+    "digitalRelease": "2007-01-31T00:00:00Z",
+    "folderName": "/movies/Accepted (2006)",
+    "genres": [
+      "Comedy"
+    ],
+    "hasFile": false,
+    "id": 3,
+    "images": [
+      {
+        "coverType": "poster",
+        "remoteUrl": "https://image.tmdb.org/t/p/original/pMh1dCw5vhMATmJs0ve0OpoSVED.jpg",
+        "url": "/MediaCover/3/poster.jpg?h=c1abb18df3048b437540"
+      },
+      {
+        "coverType": "fanart",
+        "remoteUrl": "https://image.tmdb.org/t/p/original/bKdNEAJ4TEN7w9Y8MgUwiC7F8Xd.jpg",
+        "url": "/MediaCover/3/fanart.jpg?h=9427b126a124f293b5f0"
+      }
+    ],
+    "imdbId": "tt0384793",
+    "inCinemas": "2006-08-18T00:00:00Z",
+    "isAvailable": true,
+    "keywords": [
+      "best friends",
+      "college",
+      "college admission",
+      "comedy",
+      "electro shock",
+      "frat party",
+      "fraud",
+      "girlfriend",
+      "straitjacket ",
+      "university"
+    ],
+    "lastSearchTime": "2026-06-14T07:13:43Z",
+    "minimumAvailability": "released",
+    "monitored": true,
+    "movieFileId": 0,
+    "originalLanguage": {
+      "id": 1,
+      "name": "English"
+    },
+    "originalTitle": "Accepted",
+    "overview": "A high school slacker who's rejected by every school he applies to opts to create his own institution of higher learning, the South Harmon Institute of Technology, on a rundown piece of property near his hometown.",
+    "path": "/movies/Accepted (2006)",
+    "physicalRelease": "2006-11-14T00:00:00Z",
+    "popularity": 8.9708,
+    "qualityProfileId": 9,
+    "ratings": {
+      "imdb": {
+        "type": "user",
+        "value": 6.4,
+        "votes": 149699
+      },
+      "metacritic": {
+        "type": "user",
+        "value": 47,
+        "votes": 0
+      },
+      "rottenTomatoes": {
+        "type": "user",
+        "value": 38,
+        "votes": 0
+      },
+      "tmdb": {
+        "type": "user",
+        "value": 6.5,
+        "votes": 1873
+      },
+      "trakt": {
+        "type": "user",
+        "value": 6.68673,
+        "votes": 3473
+      }
+    },
+    "releaseDate": "2006-11-14T00:00:00Z",
+    "rootFolderPath": "/movies",
+    "runtime": 93,
+    "secondaryYearSourceId": 0,
+    "sizeOnDisk": 0,
+    "sortTitle": "accepted",
+    "statistics": {
+      "movieFileCount": 0,
+      "movieFileQualities": [],
+      "releaseGroups": [],
+      "sizeOnDisk": 0
+    },
+    "status": "released",
+    "studio": "Universal Pictures",
+    "tags": [],
+    "title": "Accepted",
+    "titleSlug": "9788",
+    "tmdbId": 9788,
+    "website": "https://www.uphe.com/movies/accepted",
+    "year": 2006,
+    "youTubeTrailerId": "NRfS_Pvk0Kg"
+  },
+  "recordedAt": "2026-11-11T12:12:52Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/movie/3"
+  },
+  "status": 200
+}

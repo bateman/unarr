@@ -1,0 +1,12 @@
+{
+  "body": {
+    "id": 1,
+    "label": "ita"
+  },
+  "recordedAt": "2026-11-11T12:12:55Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/tag/1"
+  },
+  "status": 200
+}

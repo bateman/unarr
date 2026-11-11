@@ -1,0 +1,3296 @@
+{
+  "body": [
+    {
+      "customFormatScore": 0,
+      "customFormats": [],
+      "data": {
+        "age": "0",
+        "ageHours": "0.002427711777777778",
+        "ageMinutes": "0.14566285166666668",
+        "customFormatScore": "0",
+        "downloadClient": "qBittorrent",
+        "downloadClientName": "Download client",
+        "downloadUrl": "magnet:?xt=urn:btih:8c7f15d3cc4842f95a65b08ff5259aa7f7e6ab5c",
+        "guid": "e190faed0f8d7f008d51b10c93c26da8",
+        "imdbId": "0",
+        "indexer": "Indexer",
+        "indexerFlags": "0",
+        "indexerId": "14",
+        "movieMatchType": "Title",
+        "nzbInfoUrl": null,
+        "protocol": "2",
+        "publishedDate": "2026-09-12T12:32:59Z",
+        "releaseGroup": null,
+        "releaseSource": "Search",
+        "size": "26138289400",
+        "tmdbId": "0",
+        "torrentInfoHash": "e190faed0f8d7f008d51b10c93c26da8"
+      },
+      "date": "2026-09-12T12:33:07Z",
+      "downloadId": "c46c8ee5fdb825f63d1ecbcaf4454fa98a56e052",
+      "eventType": "grabbed",
+      "id": 769,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        },
+        {
+          "id": 5,
+          "name": "Italian"
+        }
+      ],
+      "movie": {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "thebookeli",
+        "digitalRelease": "2012-01-07T00:00:00Z",
+        "folderName": "/movies/The Book of Eli (2010)",
+        "genres": [
+          "Action",
+          "Thriller",
+          "Science Fiction"
+        ],
+        "id": 105,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg"
+          }
+        ],
+        "imdbId": "tt1037705",
+        "inCinemas": "2010-01-14T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "2040s",
+          "bible",
+          "blind",
+          "brutality",
+          "cannibal",
+          "carnage",
+          "chaos",
+          "combat",
+          "dystopia",
+          "faith",
+          "grimdark",
+          "gunfight",
+          "post-apocalyptic future",
+          "survival"
+        ],
+        "lastSearchTime": "2026-09-13T07:05:09Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Book of Eli",
+        "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+        "path": "/movies/The Book of Eli (2010)",
+        "physicalRelease": "2010-06-15T00:00:00Z",
+        "popularity": 17.3108,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.8,
+            "votes": 365126
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 53,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 46,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.811,
+            "votes": 6958
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.1625,
+            "votes": 12203
+          }
+        },
+        "releaseDate": "2010-06-15T00:00:00Z",
+        "runtime": 118,
+        "secondaryYearSourceId": 0,
+        "sortTitle": "book of eli",
+        "status": "released",
+        "studio": "Alcon Entertainment",
+        "tags": [],
+        "title": "The Book of Eli",
+        "titleSlug": "20504",
+        "tmdbId": 20504,
+        "website": "",
+        "year": 2010,
+        "youTubeTrailerId": "yAQcwKY0Dik"
+      },
+      "movieId": 105,
+      "quality": {
+        "quality": {
+          "id": 9,
+          "modifier": "none",
+          "name": "HDTV-1080p",
+          "resolution": 1080,
+          "source": "tv"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "The.Book.of.Eli.2010.1920x1080p.Remux.AVC.ENG.DTS-HD.MA.5.1.ENG.ITA.AC3.Subs.mkv"
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [],
+      "data": {
+        "age": "0",
+        "ageHours": "0.0020902465555555556",
+        "ageMinutes": "0.12541512166666666",
+        "customFormatScore": "0",
+        "downloadClient": "qBittorrent",
+        "downloadClientName": "Download client",
+        "downloadUrl": "magnet:?xt=urn:btih:8c7f15d3cc4842f95a65b08ff5259aa7f7e6ab5c",
+        "guid": "e190faed0f8d7f008d51b10c93c26da8",
+        "imdbId": "0",
+        "indexer": "Indexer",
+        "indexerFlags": "0",
+        "indexerId": "14",
+        "movieMatchType": "Title",
+        "nzbInfoUrl": null,
+        "protocol": "2",
+        "publishedDate": "2026-09-11T06:17:07Z",
+        "releaseGroup": null,
+        "releaseSource": "Search",
+        "size": "26138289400",
+        "tmdbId": "0",
+        "torrentInfoHash": "e190faed0f8d7f008d51b10c93c26da8"
+      },
+      "date": "2026-09-11T06:17:14Z",
+      "downloadId": "c46c8ee5fdb825f63d1ecbcaf4454fa98a56e052",
+      "eventType": "grabbed",
+      "id": 765,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        },
+        {
+          "id": 5,
+          "name": "Italian"
+        }
+      ],
+      "movie": {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "thebookeli",
+        "digitalRelease": "2012-01-07T00:00:00Z",
+        "folderName": "/movies/The Book of Eli (2010)",
+        "genres": [
+          "Action",
+          "Thriller",
+          "Science Fiction"
+        ],
+        "id": 105,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg"
+          }
+        ],
+        "imdbId": "tt1037705",
+        "inCinemas": "2010-01-14T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "2040s",
+          "bible",
+          "blind",
+          "brutality",
+          "cannibal",
+          "carnage",
+          "chaos",
+          "combat",
+          "dystopia",
+          "faith",
+          "grimdark",
+          "gunfight",
+          "post-apocalyptic future",
+          "survival"
+        ],
+        "lastSearchTime": "2026-09-13T07:05:09Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Book of Eli",
+        "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+        "path": "/movies/The Book of Eli (2010)",
+        "physicalRelease": "2010-06-15T00:00:00Z",
+        "popularity": 17.3108,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.8,
+            "votes": 365126
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 53,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 46,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.811,
+            "votes": 6958
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.1625,
+            "votes": 12203
+          }
+        },
+        "releaseDate": "2010-06-15T00:00:00Z",
+        "runtime": 118,
+        "secondaryYearSourceId": 0,
+        "sortTitle": "book of eli",
+        "status": "released",
+        "studio": "Alcon Entertainment",
+        "tags": [],
+        "title": "The Book of Eli",
+        "titleSlug": "20504",
+        "tmdbId": 20504,
+        "website": "",
+        "year": 2010,
+        "youTubeTrailerId": "yAQcwKY0Dik"
+      },
+      "movieId": 105,
+      "quality": {
+        "quality": {
+          "id": 9,
+          "modifier": "none",
+          "name": "HDTV-1080p",
+          "resolution": 1080,
+          "source": "tv"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "The.Book.of.Eli.2010.1920x1080p.Remux.AVC.ENG.DTS-HD.MA.5.1.ENG.ITA.AC3.Subs.mkv"
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [],
+      "data": {
+        "age": "0",
+        "ageHours": "0.027001221305555555",
+        "ageMinutes": "1.6200738383333333",
+        "customFormatScore": "0",
+        "downloadClient": "qBittorrent",
+        "downloadClientName": "Download client",
+        "downloadUrl": "magnet:?xt=urn:btih:8c7f15d3cc4842f95a65b08ff5259aa7f7e6ab5c",
+        "guid": "e190faed0f8d7f008d51b10c93c26da8",
+        "imdbId": "0",
+        "indexer": "Indexer",
+        "indexerFlags": "0",
+        "indexerId": "14",
+        "movieMatchType": "Title",
+        "nzbInfoUrl": null,
+        "protocol": "2",
+        "publishedDate": "2026-09-10T05:41:42Z",
+        "releaseGroup": null,
+        "releaseSource": "Search",
+        "size": "26138289400",
+        "tmdbId": "0",
+        "torrentInfoHash": "e190faed0f8d7f008d51b10c93c26da8"
+      },
+      "date": "2026-09-10T05:43:19Z",
+      "downloadId": "c46c8ee5fdb825f63d1ecbcaf4454fa98a56e052",
+      "eventType": "grabbed",
+      "id": 760,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        },
+        {
+          "id": 5,
+          "name": "Italian"
+        }
+      ],
+      "movie": {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "thebookeli",
+        "digitalRelease": "2012-01-07T00:00:00Z",
+        "folderName": "/movies/The Book of Eli (2010)",
+        "genres": [
+          "Action",
+          "Thriller",
+          "Science Fiction"
+        ],
+        "id": 105,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg"
+          }
+        ],
+        "imdbId": "tt1037705",
+        "inCinemas": "2010-01-14T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "2040s",
+          "bible",
+          "blind",
+          "brutality",
+          "cannibal",
+          "carnage",
+          "chaos",
+          "combat",
+          "dystopia",
+          "faith",
+          "grimdark",
+          "gunfight",
+          "post-apocalyptic future",
+          "survival"
+        ],
+        "lastSearchTime": "2026-09-13T07:05:09Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Book of Eli",
+        "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+        "path": "/movies/The Book of Eli (2010)",
+        "physicalRelease": "2010-06-15T00:00:00Z",
+        "popularity": 17.3108,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.8,
+            "votes": 365126
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 53,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 46,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.811,
+            "votes": 6958
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.1625,
+            "votes": 12203
+          }
+        },
+        "releaseDate": "2010-06-15T00:00:00Z",
+        "runtime": 118,
+        "secondaryYearSourceId": 0,
+        "sortTitle": "book of eli",
+        "status": "released",
+        "studio": "Alcon Entertainment",
+        "tags": [],
+        "title": "The Book of Eli",
+        "titleSlug": "20504",
+        "tmdbId": 20504,
+        "website": "",
+        "year": 2010,
+        "youTubeTrailerId": "yAQcwKY0Dik"
+      },
+      "movieId": 105,
+      "quality": {
+        "quality": {
+          "id": 9,
+          "modifier": "none",
+          "name": "HDTV-1080p",
+          "resolution": 1080,
+          "source": "tv"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "The.Book.of.Eli.2010.1920x1080p.Remux.AVC.ENG.DTS-HD.MA.5.1.ENG.ITA.AC3.Subs.mkv"
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [],
+      "data": {
+        "age": "0",
+        "ageHours": "0.0023941474722222224",
+        "ageMinutes": "0.143649",
+        "customFormatScore": "0",
+        "downloadClient": "qBittorrent",
+        "downloadClientName": "Download client",
+        "downloadUrl": "magnet:?xt=urn:btih:8c7f15d3cc4842f95a65b08ff5259aa7f7e6ab5c",
+        "guid": "e190faed0f8d7f008d51b10c93c26da8",
+        "imdbId": "0",
+        "indexer": "Indexer",
+        "indexerFlags": "0",
+        "indexerId": "14",
+        "movieMatchType": "Title",
+        "nzbInfoUrl": null,
+        "protocol": "2",
+        "publishedDate": "2026-09-09T21:19:10Z",
+        "releaseGroup": null,
+        "releaseSource": "Search",
+        "size": "26138289400",
+        "tmdbId": "0",
+        "torrentInfoHash": "e190faed0f8d7f008d51b10c93c26da8"
+      },
+      "date": "2026-09-09T21:19:18Z",
+      "downloadId": "c46c8ee5fdb825f63d1ecbcaf4454fa98a56e052",
+      "eventType": "grabbed",
+      "id": 755,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        },
+        {
+          "id": 5,
+          "name": "Italian"
+        }
+      ],
+      "movie": {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "thebookeli",
+        "digitalRelease": "2012-01-07T00:00:00Z",
+        "folderName": "/movies/The Book of Eli (2010)",
+        "genres": [
+          "Action",
+          "Thriller",
+          "Science Fiction"
+        ],
+        "id": 105,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg"
+          }
+        ],
+        "imdbId": "tt1037705",
+        "inCinemas": "2010-01-14T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "2040s",
+          "bible",
+          "blind",
+          "brutality",
+          "cannibal",
+          "carnage",
+          "chaos",
+          "combat",
+          "dystopia",
+          "faith",
+          "grimdark",
+          "gunfight",
+          "post-apocalyptic future",
+          "survival"
+        ],
+        "lastSearchTime": "2026-09-13T07:05:09Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Book of Eli",
+        "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+        "path": "/movies/The Book of Eli (2010)",
+        "physicalRelease": "2010-06-15T00:00:00Z",
+        "popularity": 17.3108,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.8,
+            "votes": 365126
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 53,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 46,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.811,
+            "votes": 6958
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.1625,
+            "votes": 12203
+          }
+        },
+        "releaseDate": "2010-06-15T00:00:00Z",
+        "runtime": 118,
+        "secondaryYearSourceId": 0,
+        "sortTitle": "book of eli",
+        "status": "released",
+        "studio": "Alcon Entertainment",
+        "tags": [],
+        "title": "The Book of Eli",
+        "titleSlug": "20504",
+        "tmdbId": 20504,
+        "website": "",
+        "year": 2010,
+        "youTubeTrailerId": "yAQcwKY0Dik"
+      },
+      "movieId": 105,
+      "quality": {
+        "quality": {
+          "id": 9,
+          "modifier": "none",
+          "name": "HDTV-1080p",
+          "resolution": 1080,
+          "source": "tv"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "The.Book.of.Eli.2010.1920x1080p.Remux.AVC.ENG.DTS-HD.MA.5.1.ENG.ITA.AC3.Subs.mkv"
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [],
+      "data": {
+        "age": "0",
+        "ageHours": "0.0020334979166666666",
+        "ageMinutes": "0.12201055833333334",
+        "customFormatScore": "0",
+        "downloadClient": "qBittorrent",
+        "downloadClientName": "Download client",
+        "downloadUrl": "magnet:?xt=urn:btih:8c7f15d3cc4842f95a65b08ff5259aa7f7e6ab5c",
+        "guid": "e190faed0f8d7f008d51b10c93c26da8",
+        "imdbId": "0",
+        "indexer": "Indexer",
+        "indexerFlags": "0",
+        "indexerId": "14",
+        "movieMatchType": "Title",
+        "nzbInfoUrl": null,
+        "protocol": "2",
+        "publishedDate": "2026-09-09T15:18:52Z",
+        "releaseGroup": null,
+        "releaseSource": "Search",
+        "size": "26138289400",
+        "tmdbId": "0",
+        "torrentInfoHash": "e190faed0f8d7f008d51b10c93c26da8"
+      },
+      "date": "2026-09-09T15:18:59Z",
+      "downloadId": "c46c8ee5fdb825f63d1ecbcaf4454fa98a56e052",
+      "eventType": "grabbed",
+      "id": 743,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        },
+        {
+          "id": 5,
+          "name": "Italian"
+        }
+      ],
+      "movie": {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "thebookeli",
+        "digitalRelease": "2012-01-07T00:00:00Z",
+        "folderName": "/movies/The Book of Eli (2010)",
+        "genres": [
+          "Action",
+          "Thriller",
+          "Science Fiction"
+        ],
+        "id": 105,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg"
+          }
+        ],
+        "imdbId": "tt1037705",
+        "inCinemas": "2010-01-14T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "2040s",
+          "bible",
+          "blind",
+          "brutality",
+          "cannibal",
+          "carnage",
+          "chaos",
+          "combat",
+          "dystopia",
+          "faith",
+          "grimdark",
+          "gunfight",
+          "post-apocalyptic future",
+          "survival"
+        ],
+        "lastSearchTime": "2026-09-13T07:05:09Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Book of Eli",
+        "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+        "path": "/movies/The Book of Eli (2010)",
+        "physicalRelease": "2010-06-15T00:00:00Z",
+        "popularity": 17.3108,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.8,
+            "votes": 365126
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 53,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 46,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.811,
+            "votes": 6958
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.1625,
+            "votes": 12203
+          }
+        },
+        "releaseDate": "2010-06-15T00:00:00Z",
+        "runtime": 118,
+        "secondaryYearSourceId": 0,
+        "sortTitle": "book of eli",
+        "status": "released",
+        "studio": "Alcon Entertainment",
+        "tags": [],
+        "title": "The Book of Eli",
+        "titleSlug": "20504",
+        "tmdbId": 20504,
+        "website": "",
+        "year": 2010,
+        "youTubeTrailerId": "yAQcwKY0Dik"
+      },
+      "movieId": 105,
+      "quality": {
+        "quality": {
+          "id": 9,
+          "modifier": "none",
+          "name": "HDTV-1080p",
+          "resolution": 1080,
+          "source": "tv"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "The.Book.of.Eli.2010.1920x1080p.Remux.AVC.ENG.DTS-HD.MA.5.1.ENG.ITA.AC3.Subs.mkv"
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [],
+      "data": {
+        "age": "0",
+        "ageHours": "0.004138748277777778",
+        "ageMinutes": "0.24832503",
+        "customFormatScore": "0",
+        "downloadClient": "qBittorrent",
+        "downloadClientName": "Download client",
+        "downloadUrl": "magnet:?xt=urn:btih:8c7f15d3cc4842f95a65b08ff5259aa7f7e6ab5c",
+        "guid": "e190faed0f8d7f008d51b10c93c26da8",
+        "imdbId": "0",
+        "indexer": "Indexer",
+        "indexerFlags": "0",
+        "indexerId": "14",
+        "movieMatchType": "Title",
+        "nzbInfoUrl": null,
+        "protocol": "2",
+        "publishedDate": "2026-09-08T20:14:47Z",
+        "releaseGroup": null,
+        "releaseSource": "Search",
+        "size": "26138289400",
+        "tmdbId": "0",
+        "torrentInfoHash": "e190faed0f8d7f008d51b10c93c26da8"
+      },
+      "date": "2026-09-08T20:15:01Z",
+      "downloadId": "c46c8ee5fdb825f63d1ecbcaf4454fa98a56e052",
+      "eventType": "grabbed",
+      "id": 741,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        },
+        {
+          "id": 5,
+          "name": "Italian"
+        }
+      ],
+      "movie": {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "thebookeli",
+        "digitalRelease": "2012-01-07T00:00:00Z",
+        "folderName": "/movies/The Book of Eli (2010)",
+        "genres": [
+          "Action",
+          "Thriller",
+          "Science Fiction"
+        ],
+        "id": 105,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg"
+          }
+        ],
+        "imdbId": "tt1037705",
+        "inCinemas": "2010-01-14T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "2040s",
+          "bible",
+          "blind",
+          "brutality",
+          "cannibal",
+          "carnage",
+          "chaos",
+          "combat",
+          "dystopia",
+          "faith",
+          "grimdark",
+          "gunfight",
+          "post-apocalyptic future",
+          "survival"
+        ],
+        "lastSearchTime": "2026-09-13T07:05:09Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Book of Eli",
+        "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+        "path": "/movies/The Book of Eli (2010)",
+        "physicalRelease": "2010-06-15T00:00:00Z",
+        "popularity": 17.3108,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.8,
+            "votes": 365126
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 53,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 46,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.811,
+            "votes": 6958
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.1625,
+            "votes": 12203
+          }
+        },
+        "releaseDate": "2010-06-15T00:00:00Z",
+        "runtime": 118,
+        "secondaryYearSourceId": 0,
+        "sortTitle": "book of eli",
+        "status": "released",
+        "studio": "Alcon Entertainment",
+        "tags": [],
+        "title": "The Book of Eli",
+        "titleSlug": "20504",
+        "tmdbId": 20504,
+        "website": "",
+        "year": 2010,
+        "youTubeTrailerId": "yAQcwKY0Dik"
+      },
+      "movieId": 105,
+      "quality": {
+        "quality": {
+          "id": 9,
+          "modifier": "none",
+          "name": "HDTV-1080p",
+          "resolution": 1080,
+          "source": "tv"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "The.Book.of.Eli.2010.1920x1080p.Remux.AVC.ENG.DTS-HD.MA.5.1.ENG.ITA.AC3.Subs.mkv"
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [],
+      "data": {
+        "age": "0",
+        "ageHours": "0.0022132276388888887",
+        "ageMinutes": "0.13279379333333333",
+        "customFormatScore": "0",
+        "downloadClient": "qBittorrent",
+        "downloadClientName": "Download client",
+        "downloadUrl": "magnet:?xt=urn:btih:8c7f15d3cc4842f95a65b08ff5259aa7f7e6ab5c",
+        "guid": "e190faed0f8d7f008d51b10c93c26da8",
+        "imdbId": "0",
+        "indexer": "Indexer",
+        "indexerFlags": "0",
+        "indexerId": "14",
+        "movieMatchType": "Title",
+        "nzbInfoUrl": null,
+        "protocol": "2",
+        "publishedDate": "2026-09-08T10:07:18Z",
+        "releaseGroup": null,
+        "releaseSource": "Search",
+        "size": "26138289400",
+        "tmdbId": "0",
+        "torrentInfoHash": "e190faed0f8d7f008d51b10c93c26da8"
+      },
+      "date": "2026-09-08T10:07:25Z",
+      "downloadId": "c46c8ee5fdb825f63d1ecbcaf4454fa98a56e052",
+      "eventType": "grabbed",
+      "id": 739,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        },
+        {
+          "id": 5,
+          "name": "Italian"
+        }
+      ],
+      "movie": {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "thebookeli",
+        "digitalRelease": "2012-01-07T00:00:00Z",
+        "folderName": "/movies/The Book of Eli (2010)",
+        "genres": [
+          "Action",
+          "Thriller",
+          "Science Fiction"
+        ],
+        "id": 105,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg"
+          }
+        ],
+        "imdbId": "tt1037705",
+        "inCinemas": "2010-01-14T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "2040s",
+          "bible",
+          "blind",
+          "brutality",
+          "cannibal",
+          "carnage",
+          "chaos",
+          "combat",
+          "dystopia",
+          "faith",
+          "grimdark",
+          "gunfight",
+          "post-apocalyptic future",
+          "survival"
+        ],
+        "lastSearchTime": "2026-09-13T07:05:09Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Book of Eli",
+        "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+        "path": "/movies/The Book of Eli (2010)",
+        "physicalRelease": "2010-06-15T00:00:00Z",
+        "popularity": 17.3108,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.8,
+            "votes": 365126
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 53,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 46,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.811,
+            "votes": 6958
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.1625,
+            "votes": 12203
+          }
+        },
+        "releaseDate": "2010-06-15T00:00:00Z",
+        "runtime": 118,
+        "secondaryYearSourceId": 0,
+        "sortTitle": "book of eli",
+        "status": "released",
+        "studio": "Alcon Entertainment",
+        "tags": [],
+        "title": "The Book of Eli",
+        "titleSlug": "20504",
+        "tmdbId": 20504,
+        "website": "",
+        "year": 2010,
+        "youTubeTrailerId": "yAQcwKY0Dik"
+      },
+      "movieId": 105,
+      "quality": {
+        "quality": {
+          "id": 9,
+          "modifier": "none",
+          "name": "HDTV-1080p",
+          "resolution": 1080,
+          "source": "tv"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "The.Book.of.Eli.2010.1920x1080p.Remux.AVC.ENG.DTS-HD.MA.5.1.ENG.ITA.AC3.Subs.mkv"
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [],
+      "data": {
+        "age": "0",
+        "ageHours": "0.0026509953333333333",
+        "ageMinutes": "0.15906003833333332",
+        "customFormatScore": "0",
+        "downloadClient": "qBittorrent",
+        "downloadClientName": "Download client",
+        "downloadUrl": "magnet:?xt=urn:btih:8c7f15d3cc4842f95a65b08ff5259aa7f7e6ab5c",
+        "guid": "e190faed0f8d7f008d51b10c93c26da8",
+        "imdbId": "0",
+        "indexer": "Indexer",
+        "indexerFlags": "0",
+        "indexerId": "14",
+        "movieMatchType": "Title",
+        "nzbInfoUrl": null,
+        "protocol": "2",
+        "publishedDate": "2026-08-28T06:30:38Z",
+        "releaseGroup": null,
+        "releaseSource": "Search",
+        "size": "26138289400",
+        "tmdbId": "0",
+        "torrentInfoHash": "e190faed0f8d7f008d51b10c93c26da8"
+      },
+      "date": "2026-08-28T06:30:47Z",
+      "downloadId": "c46c8ee5fdb825f63d1ecbcaf4454fa98a56e052",
+      "eventType": "grabbed",
+      "id": 718,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        },
+        {
+          "id": 5,
+          "name": "Italian"
+        }
+      ],
+      "movie": {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "thebookeli",
+        "digitalRelease": "2012-01-07T00:00:00Z",
+        "folderName": "/movies/The Book of Eli (2010)",
+        "genres": [
+          "Action",
+          "Thriller",
+          "Science Fiction"
+        ],
+        "id": 105,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg"
+          }
+        ],
+        "imdbId": "tt1037705",
+        "inCinemas": "2010-01-14T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "2040s",
+          "bible",
+          "blind",
+          "brutality",
+          "cannibal",
+          "carnage",
+          "chaos",
+          "combat",
+          "dystopia",
+          "faith",
+          "grimdark",
+          "gunfight",
+          "post-apocalyptic future",
+          "survival"
+        ],
+        "lastSearchTime": "2026-09-13T07:05:09Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Book of Eli",
+        "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+        "path": "/movies/The Book of Eli (2010)",
+        "physicalRelease": "2010-06-15T00:00:00Z",
+        "popularity": 17.3108,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.8,
+            "votes": 365126
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 53,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 46,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.811,
+            "votes": 6958
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.1625,
+            "votes": 12203
+          }
+        },
+        "releaseDate": "2010-06-15T00:00:00Z",
+        "runtime": 118,
+        "secondaryYearSourceId": 0,
+        "sortTitle": "book of eli",
+        "status": "released",
+        "studio": "Alcon Entertainment",
+        "tags": [],
+        "title": "The Book of Eli",
+        "titleSlug": "20504",
+        "tmdbId": 20504,
+        "website": "",
+        "year": 2010,
+        "youTubeTrailerId": "yAQcwKY0Dik"
+      },
+      "movieId": 105,
+      "quality": {
+        "quality": {
+          "id": 9,
+          "modifier": "none",
+          "name": "HDTV-1080p",
+          "resolution": 1080,
+          "source": "tv"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "The.Book.of.Eli.2010.1920x1080p.Remux.AVC.ENG.DTS-HD.MA.5.1.ENG.ITA.AC3.Subs.mkv"
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [],
+      "data": {
+        "age": "0",
+        "ageHours": "0.0022813834722222224",
+        "ageMinutes": "0.13688315333333334",
+        "customFormatScore": "0",
+        "downloadClient": "qBittorrent",
+        "downloadClientName": "Download client",
+        "downloadUrl": "magnet:?xt=urn:btih:8c7f15d3cc4842f95a65b08ff5259aa7f7e6ab5c",
+        "guid": "e190faed0f8d7f008d51b10c93c26da8",
+        "imdbId": "0",
+        "indexer": "Indexer",
+        "indexerFlags": "0",
+        "indexerId": "14",
+        "movieMatchType": "Title",
+        "nzbInfoUrl": null,
+        "protocol": "2",
+        "publishedDate": "2026-08-26T21:42:43Z",
+        "releaseGroup": null,
+        "releaseSource": "UserInvokedSearch",
+        "size": "26138289400",
+        "tmdbId": "0",
+        "torrentInfoHash": "e190faed0f8d7f008d51b10c93c26da8"
+      },
+      "date": "2026-08-26T21:42:51Z",
+      "downloadId": "c46c8ee5fdb825f63d1ecbcaf4454fa98a56e052",
+      "eventType": "grabbed",
+      "id": 716,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        },
+        {
+          "id": 5,
+          "name": "Italian"
+        }
+      ],
+      "movie": {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "thebookeli",
+        "digitalRelease": "2012-01-07T00:00:00Z",
+        "folderName": "/movies/The Book of Eli (2010)",
+        "genres": [
+          "Action",
+          "Thriller",
+          "Science Fiction"
+        ],
+        "id": 105,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg"
+          }
+        ],
+        "imdbId": "tt1037705",
+        "inCinemas": "2010-01-14T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "2040s",
+          "bible",
+          "blind",
+          "brutality",
+          "cannibal",
+          "carnage",
+          "chaos",
+          "combat",
+          "dystopia",
+          "faith",
+          "grimdark",
+          "gunfight",
+          "post-apocalyptic future",
+          "survival"
+        ],
+        "lastSearchTime": "2026-09-13T07:05:09Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Book of Eli",
+        "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+        "path": "/movies/The Book of Eli (2010)",
+        "physicalRelease": "2010-06-15T00:00:00Z",
+        "popularity": 17.3108,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.8,
+            "votes": 365126
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 53,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 46,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.811,
+            "votes": 6958
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.1625,
+            "votes": 12203
+          }
+        },
+        "releaseDate": "2010-06-15T00:00:00Z",
+        "runtime": 118,
+        "secondaryYearSourceId": 0,
+        "sortTitle": "book of eli",
+        "status": "released",
+        "studio": "Alcon Entertainment",
+        "tags": [],
+        "title": "The Book of Eli",
+        "titleSlug": "20504",
+        "tmdbId": 20504,
+        "website": "",
+        "year": 2010,
+        "youTubeTrailerId": "yAQcwKY0Dik"
+      },
+      "movieId": 105,
+      "quality": {
+        "quality": {
+          "id": 9,
+          "modifier": "none",
+          "name": "HDTV-1080p",
+          "resolution": 1080,
+          "source": "tv"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "The.Book.of.Eli.2010.1920x1080p.Remux.AVC.ENG.DTS-HD.MA.5.1.ENG.ITA.AC3.Subs.mkv"
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [],
+      "data": {
+        "age": "0",
+        "ageHours": "0.005637011833333334",
+        "ageMinutes": "0.33822100666666666",
+        "customFormatScore": "0",
+        "downloadClient": "qBittorrent",
+        "downloadClientName": "Download client",
+        "downloadUrl": "magnet:?xt=urn:btih:8c7f15d3cc4842f95a65b08ff5259aa7f7e6ab5c",
+        "guid": "e190faed0f8d7f008d51b10c93c26da8",
+        "imdbId": "0",
+        "indexer": "Indexer",
+        "indexerFlags": "0",
+        "indexerId": "14",
+        "movieMatchType": "Title",
+        "nzbInfoUrl": null,
+        "protocol": "2",
+        "publishedDate": "2026-08-26T21:19:26Z",
+        "releaseGroup": null,
+        "releaseSource": "Search",
+        "size": "26138289400",
+        "tmdbId": "0",
+        "torrentInfoHash": "e190faed0f8d7f008d51b10c93c26da8"
+      },
+      "date": "2026-08-26T21:19:46Z",
+      "downloadId": "c46c8ee5fdb825f63d1ecbcaf4454fa98a56e052",
+      "eventType": "grabbed",
+      "id": 715,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        },
+        {
+          "id": 5,
+          "name": "Italian"
+        }
+      ],
+      "movie": {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "thebookeli",
+        "digitalRelease": "2012-01-07T00:00:00Z",
+        "folderName": "/movies/The Book of Eli (2010)",
+        "genres": [
+          "Action",
+          "Thriller",
+          "Science Fiction"
+        ],
+        "id": 105,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg"
+          }
+        ],
+        "imdbId": "tt1037705",
+        "inCinemas": "2010-01-14T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "2040s",
+          "bible",
+          "blind",
+          "brutality",
+          "cannibal",
+          "carnage",
+          "chaos",
+          "combat",
+          "dystopia",
+          "faith",
+          "grimdark",
+          "gunfight",
+          "post-apocalyptic future",
+          "survival"
+        ],
+        "lastSearchTime": "2026-09-13T07:05:09Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Book of Eli",
+        "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+        "path": "/movies/The Book of Eli (2010)",
+        "physicalRelease": "2010-06-15T00:00:00Z",
+        "popularity": 17.3108,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.8,
+            "votes": 365126
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 53,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 46,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.811,
+            "votes": 6958
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.1625,
+            "votes": 12203
+          }
+        },
+        "releaseDate": "2010-06-15T00:00:00Z",
+        "runtime": 118,
+        "secondaryYearSourceId": 0,
+        "sortTitle": "book of eli",
+        "status": "released",
+        "studio": "Alcon Entertainment",
+        "tags": [],
+        "title": "The Book of Eli",
+        "titleSlug": "20504",
+        "tmdbId": 20504,
+        "website": "",
+        "year": 2010,
+        "youTubeTrailerId": "yAQcwKY0Dik"
+      },
+      "movieId": 105,
+      "quality": {
+        "quality": {
+          "id": 9,
+          "modifier": "none",
+          "name": "HDTV-1080p",
+          "resolution": 1080,
+          "source": "tv"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "The.Book.of.Eli.2010.1920x1080p.Remux.AVC.ENG.DTS-HD.MA.5.1.ENG.ITA.AC3.Subs.mkv"
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [],
+      "data": {
+        "age": "0",
+        "ageHours": "0.002257085861111111",
+        "ageMinutes": "0.13542529333333334",
+        "customFormatScore": "0",
+        "downloadClient": "qBittorrent",
+        "downloadClientName": "Download client",
+        "downloadUrl": "magnet:?xt=urn:btih:8c7f15d3cc4842f95a65b08ff5259aa7f7e6ab5c",
+        "guid": "e190faed0f8d7f008d51b10c93c26da8",
+        "imdbId": "0",
+        "indexer": "Indexer",
+        "indexerFlags": "0",
+        "indexerId": "14",
+        "movieMatchType": "Title",
+        "nzbInfoUrl": null,
+        "protocol": "2",
+        "publishedDate": "2026-08-25T20:50:58Z",
+        "releaseGroup": null,
+        "releaseSource": "Search",
+        "size": "26138289400",
+        "tmdbId": "0",
+        "torrentInfoHash": "e190faed0f8d7f008d51b10c93c26da8"
+      },
+      "date": "2026-08-25T20:51:06Z",
+      "downloadId": "c46c8ee5fdb825f63d1ecbcaf4454fa98a56e052",
+      "eventType": "grabbed",
+      "id": 708,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        },
+        {
+          "id": 5,
+          "name": "Italian"
+        }
+      ],
+      "movie": {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "thebookeli",
+        "digitalRelease": "2012-01-07T00:00:00Z",
+        "folderName": "/movies/The Book of Eli (2010)",
+        "genres": [
+          "Action",
+          "Thriller",
+          "Science Fiction"
+        ],
+        "id": 105,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg"
+          }
+        ],
+        "imdbId": "tt1037705",
+        "inCinemas": "2010-01-14T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "2040s",
+          "bible",
+          "blind",
+          "brutality",
+          "cannibal",
+          "carnage",
+          "chaos",
+          "combat",
+          "dystopia",
+          "faith",
+          "grimdark",
+          "gunfight",
+          "post-apocalyptic future",
+          "survival"
+        ],
+        "lastSearchTime": "2026-09-13T07:05:09Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Book of Eli",
+        "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+        "path": "/movies/The Book of Eli (2010)",
+        "physicalRelease": "2010-06-15T00:00:00Z",
+        "popularity": 17.3108,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.8,
+            "votes": 365126
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 53,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 46,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.811,
+            "votes": 6958
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.1625,
+            "votes": 12203
+          }
+        },
+        "releaseDate": "2010-06-15T00:00:00Z",
+        "runtime": 118,
+        "secondaryYearSourceId": 0,
+        "sortTitle": "book of eli",
+        "status": "released",
+        "studio": "Alcon Entertainment",
+        "tags": [],
+        "title": "The Book of Eli",
+        "titleSlug": "20504",
+        "tmdbId": 20504,
+        "website": "",
+        "year": 2010,
+        "youTubeTrailerId": "yAQcwKY0Dik"
+      },
+      "movieId": 105,
+      "quality": {
+        "quality": {
+          "id": 9,
+          "modifier": "none",
+          "name": "HDTV-1080p",
+          "resolution": 1080,
+          "source": "tv"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "The.Book.of.Eli.2010.1920x1080p.Remux.AVC.ENG.DTS-HD.MA.5.1.ENG.ITA.AC3.Subs.mkv"
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [],
+      "data": {
+        "age": "0",
+        "ageHours": "0.0018803495555555555",
+        "ageMinutes": "0.11282114",
+        "customFormatScore": "0",
+        "downloadClient": "qBittorrent",
+        "downloadClientName": "Download client",
+        "downloadUrl": "magnet:?xt=urn:btih:8c7f15d3cc4842f95a65b08ff5259aa7f7e6ab5c",
+        "guid": "e190faed0f8d7f008d51b10c93c26da8",
+        "imdbId": "0",
+        "indexer": "Indexer",
+        "indexerFlags": "0",
+        "indexerId": "14",
+        "movieMatchType": "Title",
+        "nzbInfoUrl": null,
+        "protocol": "2",
+        "publishedDate": "2026-08-25T20:39:53Z",
+        "releaseGroup": null,
+        "releaseSource": "Search",
+        "size": "26138289400",
+        "tmdbId": "0",
+        "torrentInfoHash": "e190faed0f8d7f008d51b10c93c26da8"
+      },
+      "date": "2026-08-25T20:39:59Z",
+      "downloadId": "c46c8ee5fdb825f63d1ecbcaf4454fa98a56e052",
+      "eventType": "grabbed",
+      "id": 706,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        },
+        {
+          "id": 5,
+          "name": "Italian"
+        }
+      ],
+      "movie": {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "thebookeli",
+        "digitalRelease": "2012-01-07T00:00:00Z",
+        "folderName": "/movies/The Book of Eli (2010)",
+        "genres": [
+          "Action",
+          "Thriller",
+          "Science Fiction"
+        ],
+        "id": 105,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg"
+          }
+        ],
+        "imdbId": "tt1037705",
+        "inCinemas": "2010-01-14T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "2040s",
+          "bible",
+          "blind",
+          "brutality",
+          "cannibal",
+          "carnage",
+          "chaos",
+          "combat",
+          "dystopia",
+          "faith",
+          "grimdark",
+          "gunfight",
+          "post-apocalyptic future",
+          "survival"
+        ],
+        "lastSearchTime": "2026-09-13T07:05:09Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Book of Eli",
+        "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+        "path": "/movies/The Book of Eli (2010)",
+        "physicalRelease": "2010-06-15T00:00:00Z",
+        "popularity": 17.3108,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.8,
+            "votes": 365126
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 53,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 46,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.811,
+            "votes": 6958
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.1625,
+            "votes": 12203
+          }
+        },
+        "releaseDate": "2010-06-15T00:00:00Z",
+        "runtime": 118,
+        "secondaryYearSourceId": 0,
+        "sortTitle": "book of eli",
+        "status": "released",
+        "studio": "Alcon Entertainment",
+        "tags": [],
+        "title": "The Book of Eli",
+        "titleSlug": "20504",
+        "tmdbId": 20504,
+        "website": "",
+        "year": 2010,
+        "youTubeTrailerId": "yAQcwKY0Dik"
+      },
+      "movieId": 105,
+      "quality": {
+        "quality": {
+          "id": 9,
+          "modifier": "none",
+          "name": "HDTV-1080p",
+          "resolution": 1080,
+          "source": "tv"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "The.Book.of.Eli.2010.1920x1080p.Remux.AVC.ENG.DTS-HD.MA.5.1.ENG.ITA.AC3.Subs.mkv"
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [],
+      "data": {
+        "age": "0",
+        "ageHours": "0.002242165361111111",
+        "ageMinutes": "0.134530075",
+        "customFormatScore": "0",
+        "downloadClient": "qBittorrent",
+        "downloadClientName": "Download client",
+        "downloadUrl": "magnet:?xt=urn:btih:8c7f15d3cc4842f95a65b08ff5259aa7f7e6ab5c",
+        "guid": "e190faed0f8d7f008d51b10c93c26da8",
+        "imdbId": "0",
+        "indexer": "Indexer",
+        "indexerFlags": "0",
+        "indexerId": "14",
+        "movieMatchType": "Title",
+        "nzbInfoUrl": null,
+        "protocol": "2",
+        "publishedDate": "2026-08-23T18:50:41Z",
+        "releaseGroup": null,
+        "releaseSource": "Search",
+        "size": "26138289400",
+        "tmdbId": "0",
+        "torrentInfoHash": "e190faed0f8d7f008d51b10c93c26da8"
+      },
+      "date": "2026-08-23T18:50:49Z",
+      "downloadId": "c46c8ee5fdb825f63d1ecbcaf4454fa98a56e052",
+      "eventType": "grabbed",
+      "id": 697,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        },
+        {
+          "id": 5,
+          "name": "Italian"
+        }
+      ],
+      "movie": {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "thebookeli",
+        "digitalRelease": "2012-01-07T00:00:00Z",
+        "folderName": "/movies/The Book of Eli (2010)",
+        "genres": [
+          "Action",
+          "Thriller",
+          "Science Fiction"
+        ],
+        "id": 105,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg"
+          }
+        ],
+        "imdbId": "tt1037705",
+        "inCinemas": "2010-01-14T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "2040s",
+          "bible",
+          "blind",
+          "brutality",
+          "cannibal",
+          "carnage",
+          "chaos",
+          "combat",
+          "dystopia",
+          "faith",
+          "grimdark",
+          "gunfight",
+          "post-apocalyptic future",
+          "survival"
+        ],
+        "lastSearchTime": "2026-09-13T07:05:09Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Book of Eli",
+        "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+        "path": "/movies/The Book of Eli (2010)",
+        "physicalRelease": "2010-06-15T00:00:00Z",
+        "popularity": 17.3108,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.8,
+            "votes": 365126
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 53,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 46,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.811,
+            "votes": 6958
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.1625,
+            "votes": 12203
+          }
+        },
+        "releaseDate": "2010-06-15T00:00:00Z",
+        "runtime": 118,
+        "secondaryYearSourceId": 0,
+        "sortTitle": "book of eli",
+        "status": "released",
+        "studio": "Alcon Entertainment",
+        "tags": [],
+        "title": "The Book of Eli",
+        "titleSlug": "20504",
+        "tmdbId": 20504,
+        "website": "",
+        "year": 2010,
+        "youTubeTrailerId": "yAQcwKY0Dik"
+      },
+      "movieId": 105,
+      "quality": {
+        "quality": {
+          "id": 9,
+          "modifier": "none",
+          "name": "HDTV-1080p",
+          "resolution": 1080,
+          "source": "tv"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "The.Book.of.Eli.2010.1920x1080p.Remux.AVC.ENG.DTS-HD.MA.5.1.ENG.ITA.AC3.Subs.mkv"
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 18,
+          "name": "x265 (HD)"
+        },
+        {
+          "id": 56,
+          "name": "x265 (no HDR/DV)"
+        }
+      ],
+      "data": {
+        "age": "2278",
+        "ageHours": "54692.81594563834",
+        "ageMinutes": "3281568.9567384883",
+        "customFormatScore": "0",
+        "downloadClient": "redacted",
+        "downloadClientName": "Download client",
+        "downloadUrl": "http://indexer.invalid/04bf487ab6a7",
+        "guid": "http://indexer.invalid/310f14c61a7a",
+        "imdbId": "0",
+        "indexer": "Indexer",
+        "indexerFlags": "G_Freeleech",
+        "indexerId": "16",
+        "movieMatchType": "Title",
+        "nzbInfoUrl": "http://indexer.invalid/310f14c61a7a",
+        "protocol": "2",
+        "publishedDate": "2020-05-27T22:00:00Z",
+        "releaseGroup": "Paso77",
+        "releaseSource": "Search",
+        "size": "7335804141",
+        "tmdbId": "0",
+        "torrentInfoHash": "35edc0413bf14d9c807d008b4a33b15cbe8c965d"
+      },
+      "date": "2026-08-23T18:48:57Z",
+      "downloadId": "35edc0413bf14d9c807d008b4a33b15cbe8c965d",
+      "eventType": "grabbed",
+      "id": 695,
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        },
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movie": {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "thebookeli",
+        "digitalRelease": "2012-01-07T00:00:00Z",
+        "folderName": "/movies/The Book of Eli (2010)",
+        "genres": [
+          "Action",
+          "Thriller",
+          "Science Fiction"
+        ],
+        "id": 105,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg"
+          }
+        ],
+        "imdbId": "tt1037705",
+        "inCinemas": "2010-01-14T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "2040s",
+          "bible",
+          "blind",
+          "brutality",
+          "cannibal",
+          "carnage",
+          "chaos",
+          "combat",
+          "dystopia",
+          "faith",
+          "grimdark",
+          "gunfight",
+          "post-apocalyptic future",
+          "survival"
+        ],
+        "lastSearchTime": "2026-09-13T07:05:09Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Book of Eli",
+        "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+        "path": "/movies/The Book of Eli (2010)",
+        "physicalRelease": "2010-06-15T00:00:00Z",
+        "popularity": 17.3108,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.8,
+            "votes": 365126
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 53,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 46,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.811,
+            "votes": 6958
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.1625,
+            "votes": 12203
+          }
+        },
+        "releaseDate": "2010-06-15T00:00:00Z",
+        "runtime": 118,
+        "secondaryYearSourceId": 0,
+        "sortTitle": "book of eli",
+        "status": "released",
+        "studio": "Alcon Entertainment",
+        "tags": [],
+        "title": "The Book of Eli",
+        "titleSlug": "20504",
+        "tmdbId": 20504,
+        "website": "",
+        "year": 2010,
+        "youTubeTrailerId": "yAQcwKY0Dik"
+      },
+      "movieId": 105,
+      "quality": {
+        "quality": {
+          "id": 9,
+          "modifier": "none",
+          "name": "HDTV-1080p",
+          "resolution": 1080,
+          "source": "tv"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "The Book of Eli (2010 ITA/ENG) [1080p x265] [Paso77]"
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [],
+      "data": {
+        "age": "0",
+        "ageHours": "0.001761793861111111",
+        "ageMinutes": "0.10570788166666667",
+        "customFormatScore": "0",
+        "downloadClient": "qBittorrent",
+        "downloadClientName": "Download client",
+        "downloadUrl": "magnet:?xt=urn:btih:8c7f15d3cc4842f95a65b08ff5259aa7f7e6ab5c",
+        "guid": "e190faed0f8d7f008d51b10c93c26da8",
+        "imdbId": "0",
+        "indexer": "Indexer",
+        "indexerFlags": "0",
+        "indexerId": "14",
+        "movieMatchType": "Title",
+        "nzbInfoUrl": null,
+        "protocol": "2",
+        "publishedDate": "2026-08-23T13:17:47Z",
+        "releaseGroup": null,
+        "releaseSource": "UserInvokedSearch",
+        "size": "26138289400",
+        "tmdbId": "0",
+        "torrentInfoHash": "e190faed0f8d7f008d51b10c93c26da8"
+      },
+      "date": "2026-08-23T13:17:53Z",
+      "downloadId": "c46c8ee5fdb825f63d1ecbcaf4454fa98a56e052",
+      "eventType": "grabbed",
+      "id": 693,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        },
+        {
+          "id": 5,
+          "name": "Italian"
+        }
+      ],
+      "movie": {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "thebookeli",
+        "digitalRelease": "2012-01-07T00:00:00Z",
+        "folderName": "/movies/The Book of Eli (2010)",
+        "genres": [
+          "Action",
+          "Thriller",
+          "Science Fiction"
+        ],
+        "id": 105,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg"
+          }
+        ],
+        "imdbId": "tt1037705",
+        "inCinemas": "2010-01-14T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "2040s",
+          "bible",
+          "blind",
+          "brutality",
+          "cannibal",
+          "carnage",
+          "chaos",
+          "combat",
+          "dystopia",
+          "faith",
+          "grimdark",
+          "gunfight",
+          "post-apocalyptic future",
+          "survival"
+        ],
+        "lastSearchTime": "2026-09-13T07:05:09Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Book of Eli",
+        "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+        "path": "/movies/The Book of Eli (2010)",
+        "physicalRelease": "2010-06-15T00:00:00Z",
+        "popularity": 17.3108,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.8,
+            "votes": 365126
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 53,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 46,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.811,
+            "votes": 6958
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.1625,
+            "votes": 12203
+          }
+        },
+        "releaseDate": "2010-06-15T00:00:00Z",
+        "runtime": 118,
+        "secondaryYearSourceId": 0,
+        "sortTitle": "book of eli",
+        "status": "released",
+        "studio": "Alcon Entertainment",
+        "tags": [],
+        "title": "The Book of Eli",
+        "titleSlug": "20504",
+        "tmdbId": 20504,
+        "website": "",
+        "year": 2010,
+        "youTubeTrailerId": "yAQcwKY0Dik"
+      },
+      "movieId": 105,
+      "quality": {
+        "quality": {
+          "id": 9,
+          "modifier": "none",
+          "name": "HDTV-1080p",
+          "resolution": 1080,
+          "source": "tv"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "The.Book.of.Eli.2010.1920x1080p.Remux.AVC.ENG.DTS-HD.MA.5.1.ENG.ITA.AC3.Subs.mkv"
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 54,
+          "name": "DD"
+        }
+      ],
+      "data": {
+        "age": "0",
+        "ageHours": "0.023749708055555555",
+        "ageMinutes": "1.42498264",
+        "customFormatScore": "0",
+        "downloadClient": "qBittorrent",
+        "downloadClientName": "Download client",
+        "downloadUrl": "magnet:?xt=urn:btih:ab6236c9e4e1a45793febe98c700ed1103ca3ebf",
+        "guid": "d21cc1667ff727b3cf7a2cfe19634325",
+        "imdbId": "0",
+        "indexer": "Indexer",
+        "indexerFlags": "0",
+        "indexerId": "14",
+        "movieMatchType": "Unknown",
+        "nzbInfoUrl": null,
+        "protocol": "2",
+        "publishedDate": "2026-06-26T17:31:13Z",
+        "releaseGroup": null,
+        "releaseSource": "InteractiveSearch",
+        "size": "4666443771",
+        "tmdbId": "0",
+        "torrentInfoHash": "d21cc1667ff727b3cf7a2cfe19634325"
+      },
+      "date": "2026-06-26T17:32:38Z",
+      "downloadId": "29b8c40c4211b00c38da5ed983d649c8b9dd0b2b",
+      "eventType": "grabbed",
+      "id": 545,
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        },
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movie": {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "thebookeli",
+        "digitalRelease": "2012-01-07T00:00:00Z",
+        "folderName": "/movies/The Book of Eli (2010)",
+        "genres": [
+          "Action",
+          "Thriller",
+          "Science Fiction"
+        ],
+        "id": 105,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg"
+          }
+        ],
+        "imdbId": "tt1037705",
+        "inCinemas": "2010-01-14T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "2040s",
+          "bible",
+          "blind",
+          "brutality",
+          "cannibal",
+          "carnage",
+          "chaos",
+          "combat",
+          "dystopia",
+          "faith",
+          "grimdark",
+          "gunfight",
+          "post-apocalyptic future",
+          "survival"
+        ],
+        "lastSearchTime": "2026-09-13T07:05:09Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Book of Eli",
+        "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+        "path": "/movies/The Book of Eli (2010)",
+        "physicalRelease": "2010-06-15T00:00:00Z",
+        "popularity": 17.3108,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.8,
+            "votes": 365126
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 53,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 46,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.811,
+            "votes": 6958
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.1625,
+            "votes": 12203
+          }
+        },
+        "releaseDate": "2010-06-15T00:00:00Z",
+        "runtime": 118,
+        "secondaryYearSourceId": 0,
+        "sortTitle": "book of eli",
+        "status": "released",
+        "studio": "Alcon Entertainment",
+        "tags": [],
+        "title": "The Book of Eli",
+        "titleSlug": "20504",
+        "tmdbId": 20504,
+        "website": "",
+        "year": 2010,
+        "youTubeTrailerId": "yAQcwKY0Dik"
+      },
+      "movieId": 105,
+      "quality": {
+        "quality": {
+          "id": 7,
+          "modifier": "none",
+          "name": "Bluray-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "sourceTitle": "Codice.Genesi.-.The.Book.of.Eli.2010.1080p.iTA.eNG.AC3.BDrip.x264.Mokona.mkv"
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [],
+      "data": {
+        "age": "0",
+        "ageHours": "0.0016980950277777779",
+        "ageMinutes": "0.10188591666666667",
+        "customFormatScore": "0",
+        "downloadClient": "qBittorrent",
+        "downloadClientName": "Download client",
+        "downloadUrl": "magnet:?xt=urn:btih:8c7f15d3cc4842f95a65b08ff5259aa7f7e6ab5c",
+        "guid": "e190faed0f8d7f008d51b10c93c26da8",
+        "imdbId": "0",
+        "indexer": "Indexer",
+        "indexerFlags": "0",
+        "indexerId": "14",
+        "movieMatchType": "Title",
+        "nzbInfoUrl": null,
+        "protocol": "2",
+        "publishedDate": "2026-06-26T17:29:09Z",
+        "releaseGroup": null,
+        "releaseSource": "Search",
+        "size": "26138289400",
+        "tmdbId": "0",
+        "torrentInfoHash": "e190faed0f8d7f008d51b10c93c26da8"
+      },
+      "date": "2026-06-26T17:29:15Z",
+      "downloadId": "c46c8ee5fdb825f63d1ecbcaf4454fa98a56e052",
+      "eventType": "grabbed",
+      "id": 544,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        },
+        {
+          "id": 5,
+          "name": "Italian"
+        }
+      ],
+      "movie": {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "thebookeli",
+        "digitalRelease": "2012-01-07T00:00:00Z",
+        "folderName": "/movies/The Book of Eli (2010)",
+        "genres": [
+          "Action",
+          "Thriller",
+          "Science Fiction"
+        ],
+        "id": 105,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg"
+          }
+        ],
+        "imdbId": "tt1037705",
+        "inCinemas": "2010-01-14T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "2040s",
+          "bible",
+          "blind",
+          "brutality",
+          "cannibal",
+          "carnage",
+          "chaos",
+          "combat",
+          "dystopia",
+          "faith",
+          "grimdark",
+          "gunfight",
+          "post-apocalyptic future",
+          "survival"
+        ],
+        "lastSearchTime": "2026-09-13T07:05:09Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Book of Eli",
+        "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+        "path": "/movies/The Book of Eli (2010)",
+        "physicalRelease": "2010-06-15T00:00:00Z",
+        "popularity": 17.3108,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.8,
+            "votes": 365126
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 53,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 46,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.811,
+            "votes": 6958
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.1625,
+            "votes": 12203
+          }
+        },
+        "releaseDate": "2010-06-15T00:00:00Z",
+        "runtime": 118,
+        "secondaryYearSourceId": 0,
+        "sortTitle": "book of eli",
+        "status": "released",
+        "studio": "Alcon Entertainment",
+        "tags": [],
+        "title": "The Book of Eli",
+        "titleSlug": "20504",
+        "tmdbId": 20504,
+        "website": "",
+        "year": 2010,
+        "youTubeTrailerId": "yAQcwKY0Dik"
+      },
+      "movieId": 105,
+      "quality": {
+        "quality": {
+          "id": 9,
+          "modifier": "none",
+          "name": "HDTV-1080p",
+          "resolution": 1080,
+          "source": "tv"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "The.Book.of.Eli.2010.1920x1080p.Remux.AVC.ENG.DTS-HD.MA.5.1.ENG.ITA.AC3.Subs.mkv"
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [],
+      "data": {
+        "age": "0",
+        "ageHours": "0.0020817470277777776",
+        "ageMinutes": "0.12490498166666666",
+        "customFormatScore": "0",
+        "downloadClient": "qBittorrent",
+        "downloadClientName": "Download client",
+        "downloadUrl": "magnet:?xt=urn:btih:8c7f15d3cc4842f95a65b08ff5259aa7f7e6ab5c",
+        "guid": "e190faed0f8d7f008d51b10c93c26da8",
+        "imdbId": "0",
+        "indexer": "Indexer",
+        "indexerFlags": "0",
+        "indexerId": "14",
+        "movieMatchType": "Title",
+        "nzbInfoUrl": null,
+        "protocol": "2",
+        "publishedDate": "2026-06-25T21:42:52Z",
+        "releaseGroup": null,
+        "releaseSource": "Search",
+        "size": "26138289400",
+        "tmdbId": "0",
+        "torrentInfoHash": "e190faed0f8d7f008d51b10c93c26da8"
+      },
+      "date": "2026-06-25T21:42:59Z",
+      "downloadId": "c46c8ee5fdb825f63d1ecbcaf4454fa98a56e052",
+      "eventType": "grabbed",
+      "id": 540,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        },
+        {
+          "id": 5,
+          "name": "Italian"
+        }
+      ],
+      "movie": {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "thebookeli",
+        "digitalRelease": "2012-01-07T00:00:00Z",
+        "folderName": "/movies/The Book of Eli (2010)",
+        "genres": [
+          "Action",
+          "Thriller",
+          "Science Fiction"
+        ],
+        "id": 105,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg"
+          }
+        ],
+        "imdbId": "tt1037705",
+        "inCinemas": "2010-01-14T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "2040s",
+          "bible",
+          "blind",
+          "brutality",
+          "cannibal",
+          "carnage",
+          "chaos",
+          "combat",
+          "dystopia",
+          "faith",
+          "grimdark",
+          "gunfight",
+          "post-apocalyptic future",
+          "survival"
+        ],
+        "lastSearchTime": "2026-09-13T07:05:09Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Book of Eli",
+        "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+        "path": "/movies/The Book of Eli (2010)",
+        "physicalRelease": "2010-06-15T00:00:00Z",
+        "popularity": 17.3108,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.8,
+            "votes": 365126
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 53,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 46,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.811,
+            "votes": 6958
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.1625,
+            "votes": 12203
+          }
+        },
+        "releaseDate": "2010-06-15T00:00:00Z",
+        "runtime": 118,
+        "secondaryYearSourceId": 0,
+        "sortTitle": "book of eli",
+        "status": "released",
+        "studio": "Alcon Entertainment",
+        "tags": [],
+        "title": "The Book of Eli",
+        "titleSlug": "20504",
+        "tmdbId": 20504,
+        "website": "",
+        "year": 2010,
+        "youTubeTrailerId": "yAQcwKY0Dik"
+      },
+      "movieId": 105,
+      "quality": {
+        "quality": {
+          "id": 9,
+          "modifier": "none",
+          "name": "HDTV-1080p",
+          "resolution": 1080,
+          "source": "tv"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "The.Book.of.Eli.2010.1920x1080p.Remux.AVC.ENG.DTS-HD.MA.5.1.ENG.ITA.AC3.Subs.mkv"
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [],
+      "data": {
+        "age": "0",
+        "ageHours": "0.0018959760555555556",
+        "ageMinutes": "0.1137587",
+        "customFormatScore": "0",
+        "downloadClient": "qBittorrent",
+        "downloadClientName": "Download client",
+        "downloadUrl": "magnet:?xt=urn:btih:8c7f15d3cc4842f95a65b08ff5259aa7f7e6ab5c",
+        "guid": "e190faed0f8d7f008d51b10c93c26da8",
+        "imdbId": "0",
+        "indexer": "Indexer",
+        "indexerFlags": "0",
+        "indexerId": "14",
+        "movieMatchType": "Title",
+        "nzbInfoUrl": null,
+        "protocol": "2",
+        "publishedDate": "2026-06-24T19:44:40Z",
+        "releaseGroup": null,
+        "releaseSource": "UserInvokedSearch",
+        "size": "26138289400",
+        "tmdbId": "0",
+        "torrentInfoHash": "e190faed0f8d7f008d51b10c93c26da8"
+      },
+      "date": "2026-06-24T19:44:46Z",
+      "downloadId": "c46c8ee5fdb825f63d1ecbcaf4454fa98a56e052",
+      "eventType": "grabbed",
+      "id": 526,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        },
+        {
+          "id": 5,
+          "name": "Italian"
+        }
+      ],
+      "movie": {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "thebookeli",
+        "digitalRelease": "2012-01-07T00:00:00Z",
+        "folderName": "/movies/The Book of Eli (2010)",
+        "genres": [
+          "Action",
+          "Thriller",
+          "Science Fiction"
+        ],
+        "id": 105,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg"
+          }
+        ],
+        "imdbId": "tt1037705",
+        "inCinemas": "2010-01-14T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "2040s",
+          "bible",
+          "blind",
+          "brutality",
+          "cannibal",
+          "carnage",
+          "chaos",
+          "combat",
+          "dystopia",
+          "faith",
+          "grimdark",
+          "gunfight",
+          "post-apocalyptic future",
+          "survival"
+        ],
+        "lastSearchTime": "2026-09-13T07:05:09Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Book of Eli",
+        "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+        "path": "/movies/The Book of Eli (2010)",
+        "physicalRelease": "2010-06-15T00:00:00Z",
+        "popularity": 17.3108,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.8,
+            "votes": 365126
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 53,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 46,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.811,
+            "votes": 6958
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.1625,
+            "votes": 12203
+          }
+        },
+        "releaseDate": "2010-06-15T00:00:00Z",
+        "runtime": 118,
+        "secondaryYearSourceId": 0,
+        "sortTitle": "book of eli",
+        "status": "released",
+        "studio": "Alcon Entertainment",
+        "tags": [],
+        "title": "The Book of Eli",
+        "titleSlug": "20504",
+        "tmdbId": 20504,
+        "website": "",
+        "year": 2010,
+        "youTubeTrailerId": "yAQcwKY0Dik"
+      },
+      "movieId": 105,
+      "quality": {
+        "quality": {
+          "id": 9,
+          "modifier": "none",
+          "name": "HDTV-1080p",
+          "resolution": 1080,
+          "source": "tv"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "The.Book.of.Eli.2010.1920x1080p.Remux.AVC.ENG.DTS-HD.MA.5.1.ENG.ITA.AC3.Subs.mkv"
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 18,
+          "name": "x265 (HD)"
+        },
+        {
+          "id": 56,
+          "name": "x265 (no HDR/DV)"
+        }
+      ],
+      "data": {
+        "age": "1095",
+        "ageHours": "26280.00530688622",
+        "ageMinutes": "1576800.31841336",
+        "customFormatScore": "0",
+        "downloadClient": "redacted",
+        "downloadClientName": "Download client",
+        "downloadUrl": "http://indexer.invalid/0c6b44842e06",
+        "guid": "magnet:?xt=urn:btih:b5486fda21a3fe413513e604a337c3f7075f4a90",
+        "imdbId": "0",
+        "indexer": "Indexer",
+        "indexerFlags": "G_Freeleech",
+        "indexerId": "12",
+        "movieMatchType": "Title",
+        "nzbInfoUrl": "http://indexer.invalid/c895deb20b2a",
+        "protocol": "2",
+        "publishedDate": "2023-06-15T07:10:56Z",
+        "releaseGroup": "Paso77",
+        "releaseSource": "UserInvokedSearch",
+        "size": "7301444608",
+        "tmdbId": "0",
+        "torrentInfoHash": "19bb67b34560ae0d071b684946ce07abf8b29f46"
+      },
+      "date": "2026-06-14T07:11:15Z",
+      "downloadId": "19bb67b34560ae0d071b684946ce07abf8b29f46",
+      "eventType": "grabbed",
+      "id": 465,
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        },
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movie": {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "thebookeli",
+        "digitalRelease": "2012-01-07T00:00:00Z",
+        "folderName": "/movies/The Book of Eli (2010)",
+        "genres": [
+          "Action",
+          "Thriller",
+          "Science Fiction"
+        ],
+        "id": 105,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg"
+          }
+        ],
+        "imdbId": "tt1037705",
+        "inCinemas": "2010-01-14T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "2040s",
+          "bible",
+          "blind",
+          "brutality",
+          "cannibal",
+          "carnage",
+          "chaos",
+          "combat",
+          "dystopia",
+          "faith",
+          "grimdark",
+          "gunfight",
+          "post-apocalyptic future",
+          "survival"
+        ],
+        "lastSearchTime": "2026-09-13T07:05:09Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Book of Eli",
+        "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+        "path": "/movies/The Book of Eli (2010)",
+        "physicalRelease": "2010-06-15T00:00:00Z",
+        "popularity": 17.3108,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.8,
+            "votes": 365126
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 53,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 46,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.811,
+            "votes": 6958
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.1625,
+            "votes": 12203
+          }
+        },
+        "releaseDate": "2010-06-15T00:00:00Z",
+        "runtime": 118,
+        "secondaryYearSourceId": 0,
+        "sortTitle": "book of eli",
+        "status": "released",
+        "studio": "Alcon Entertainment",
+        "tags": [],
+        "title": "The Book of Eli",
+        "titleSlug": "20504",
+        "tmdbId": 20504,
+        "website": "",
+        "year": 2010,
+        "youTubeTrailerId": "yAQcwKY0Dik"
+      },
+      "movieId": 105,
+      "quality": {
+        "quality": {
+          "id": 9,
+          "modifier": "none",
+          "name": "HDTV-1080p",
+          "resolution": 1080,
+          "source": "tv"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "The Book of Eli (2010 ITA/ENG) [1080p x265] [Paso77]"
+    },
+    {
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 46,
+          "name": "DTS-HD MA"
+        },
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 7,
+          "name": "Repack/Proper"
+        }
+      ],
+      "data": {
+        "age": "312",
+        "ageHours": "7496.657975956445",
+        "ageMinutes": "449799.47855757835",
+        "customFormatScore": "0",
+        "downloadClient": "NZBGet",
+        "downloadClientName": "Download client",
+        "downloadUrl": "http://indexer.invalid/4cf24691a8c5",
+        "guid": "http://indexer.invalid/099e1fc5c6b3",
+        "imdbId": "1037705",
+        "indexer": "Indexer",
+        "indexerFlags": "0",
+        "indexerId": "3",
+        "movieMatchType": "Id",
+        "nzbInfoUrl": "http://indexer.invalid/099e1fc5c6b3",
+        "protocol": "1",
+        "publishedDate": "2025-05-12T22:55:52Z",
+        "releaseGroup": "FraMeSToR",
+        "releaseSource": "UserInvokedSearch",
+        "size": "28523840873",
+        "tmdbId": "0"
+      },
+      "date": "2026-03-21T07:35:20Z",
+      "downloadId": "63a94699bb6809cb3ba3594b37b49d49",
+      "eventType": "grabbed",
+      "id": 59,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movie": {
+        "added": "2026-03-07T09:12:06Z",
+        "alternateTitles": [],
+        "certification": "R",
+        "cleanTitle": "thebookeli",
+        "digitalRelease": "2012-01-07T00:00:00Z",
+        "folderName": "/movies/The Book of Eli (2010)",
+        "genres": [
+          "Action",
+          "Thriller",
+          "Science Fiction"
+        ],
+        "id": 105,
+        "images": [
+          {
+            "coverType": "poster",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/1H1y9ZiqNFaLgQiRDDZLA55PviW.jpg"
+          },
+          {
+            "coverType": "fanart",
+            "remoteUrl": "https://image.tmdb.org/t/p/original/aPrrrGtSjXbw8XnpzsVJgF0ioq3.jpg"
+          }
+        ],
+        "imdbId": "tt1037705",
+        "inCinemas": "2010-01-14T00:00:00Z",
+        "isAvailable": true,
+        "keywords": [
+          "2040s",
+          "bible",
+          "blind",
+          "brutality",
+          "cannibal",
+          "carnage",
+          "chaos",
+          "combat",
+          "dystopia",
+          "faith",
+          "grimdark",
+          "gunfight",
+          "post-apocalyptic future",
+          "survival"
+        ],
+        "lastSearchTime": "2026-09-13T07:05:09Z",
+        "minimumAvailability": "released",
+        "monitored": true,
+        "movieFileId": 0,
+        "originalLanguage": {
+          "id": 1,
+          "name": "English"
+        },
+        "originalTitle": "The Book of Eli",
+        "overview": "A post-apocalyptic tale, in which a lone man fights his way across America in order to protect a sacred book that holds the secrets to saving humankind.",
+        "path": "/movies/The Book of Eli (2010)",
+        "physicalRelease": "2010-06-15T00:00:00Z",
+        "popularity": 17.3108,
+        "qualityProfileId": 11,
+        "ratings": {
+          "imdb": {
+            "type": "user",
+            "value": 6.8,
+            "votes": 365126
+          },
+          "metacritic": {
+            "type": "user",
+            "value": 53,
+            "votes": 0
+          },
+          "rottenTomatoes": {
+            "type": "user",
+            "value": 46,
+            "votes": 0
+          },
+          "tmdb": {
+            "type": "user",
+            "value": 6.811,
+            "votes": 6958
+          },
+          "trakt": {
+            "type": "user",
+            "value": 7.1625,
+            "votes": 12203
+          }
+        },
+        "releaseDate": "2010-06-15T00:00:00Z",
+        "runtime": 118,
+        "secondaryYearSourceId": 0,
+        "sortTitle": "book of eli",
+        "status": "released",
+        "studio": "Alcon Entertainment",
+        "tags": [],
+        "title": "The Book of Eli",
+        "titleSlug": "20504",
+        "tmdbId": 20504,
+        "website": "",
+        "year": 2010,
+        "youTubeTrailerId": "yAQcwKY0Dik"
+      },
+      "movieId": 105,
+      "quality": {
+        "quality": {
+          "id": 30,
+          "modifier": "remux",
+          "name": "Remux-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 2
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "The.Book.of.Eli.2010.PROPER.BluRay.1080p.DTS-HD.MA.5.1.AVC.REMUX-FraMeSToR"
+    }
+  ],
+  "recordedAt": "2026-11-11T12:12:56Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/history/movie?movieId=105&eventType=1&includeMovie=true"
+  },
+  "status": 200
+}

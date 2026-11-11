@@ -1,0 +1,60 @@
+{
+  "body": [
+    {
+      "id": 1,
+      "name": "G_Freeleech",
+      "nameLower": "g_freeleech"
+    },
+    {
+      "id": 2,
+      "name": "G_Halfleech",
+      "nameLower": "g_halfleech"
+    },
+    {
+      "id": 4,
+      "name": "G_DoubleUpload",
+      "nameLower": "g_doubleupload"
+    },
+    {
+      "id": 8,
+      "name": "PTP_Golden",
+      "nameLower": "ptp_golden"
+    },
+    {
+      "id": 16,
+      "name": "PTP_Approved",
+      "nameLower": "ptp_approved"
+    },
+    {
+      "id": 32,
+      "name": "G_Internal",
+      "nameLower": "g_internal"
+    },
+    {
+      "id": 128,
+      "name": "G_Scene",
+      "nameLower": "g_scene"
+    },
+    {
+      "id": 256,
+      "name": "G_Freeleech75",
+      "nameLower": "g_freeleech75"
+    },
+    {
+      "id": 512,
+      "name": "G_Freeleech25",
+      "nameLower": "g_freeleech25"
+    },
+    {
+      "id": 2048,
+      "name": "Nuked",
+      "nameLower": "nuked"
+    }
+  ],
+  "recordedAt": "2026-11-11T12:12:55Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/indexerflag"
+  },
+  "status": 200
+}

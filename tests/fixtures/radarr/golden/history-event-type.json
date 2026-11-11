@@ -1,0 +1,598 @@
+{
+  "body": {
+    "page": 1,
+    "pageSize": 10,
+    "records": [
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 52,
+            "name": "DTS"
+          }
+        ],
+        "data": {
+          "customFormatScore": "0",
+          "downloadClient": "redacted",
+          "downloadClientName": "Download client",
+          "droppedPath": "/downloads/Predestination.2014.DTS.ITA.ENG.1080p.BluRay.x264-BLUWORLD.mkv",
+          "fileId": "404",
+          "importedPath": "/movies/Predestination (2014) {tmdb-206487}/Predestination (2014) {tmdb-206487} - [Bluray-1080p][DTS 5.1][x264]-BLUWORLD.mkv",
+          "indexerFlags": "G_Halfleech",
+          "releaseGroup": "BLUWORLD",
+          "size": "8735974490"
+        },
+        "date": "2026-11-11T11:53:43Z",
+        "downloadId": "932161398c8420b934b0d047c43b66b8d1337383",
+        "eventType": "downloadFolderImported",
+        "id": 1008,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movieId": 327,
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "Predestination.2014.DTS.ITA.ENG.1080p.BluRay.x264-BLUWORLD"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 54,
+            "name": "DD"
+          },
+          {
+            "id": 18,
+            "name": "x265 (HD)"
+          },
+          {
+            "id": 56,
+            "name": "x265 (no HDR/DV)"
+          }
+        ],
+        "data": {
+          "customFormatScore": "0",
+          "downloadClient": "redacted",
+          "downloadClientName": "Download client",
+          "droppedPath": "/downloads/Heart Of The Beast - Nel Profondo Selvaggio (2026) 1080p WEB-DL H265 Ita Eng AC3 5.1 Sub Ita Eng iDN_CreW.mkv",
+          "fileId": "403",
+          "importedPath": "/movies/Heart of the Beast (2026) {tmdb-1263337}/Heart of the Beast (2026) {tmdb-1263337} - [WEBDL-1080p][AC3 5.1][x265].mkv",
+          "indexerFlags": "G_Freeleech",
+          "releaseGroup": null,
+          "size": "2959421173"
+        },
+        "date": "2026-11-11T07:00:10Z",
+        "downloadId": "1cbe166dd34596cc4fba469f1d7781e91e3e8072",
+        "eventType": "downloadFolderImported",
+        "id": 1006,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movieId": 224,
+        "quality": {
+          "quality": {
+            "id": 3,
+            "modifier": "none",
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "webdl"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "sourceTitle": "Heart Of The Beast - Nel Profondo Selvaggio (2026) 1080p WEB-DL H265 Ita Eng AC3 5.1 Sub Ita Eng iDN_CreW"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 50,
+            "name": "DD+"
+          },
+          {
+            "id": 61,
+            "name": "Line/Mic Dubbed"
+          },
+          {
+            "id": 18,
+            "name": "x265 (HD)"
+          },
+          {
+            "id": 56,
+            "name": "x265 (no HDR/DV)"
+          }
+        ],
+        "data": {
+          "customFormatScore": "0",
+          "downloadClient": "qBittorrent",
+          "downloadClientName": "Download client",
+          "droppedPath": "/downloads/Mutiny Inverti la rotta (2026) 1080p x265 ita eng sub eng MD eac3 - Faccio.mkv",
+          "fileId": "402",
+          "importedPath": "/movies/Mutiny (2026) {tmdb-1288445}/Mutiny (2026) {tmdb-1288445} - [WEBDL-1080p][MP3 2.0][x265].mkv",
+          "indexerFlags": "0",
+          "releaseGroup": null,
+          "size": "2262743736"
+        },
+        "date": "2026-11-10T20:07:34Z",
+        "downloadId": "c272b98d8b94697d1258092351b700b4ae5fd3ff",
+        "eventType": "downloadFolderImported",
+        "id": 1004,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movieId": 326,
+        "quality": {
+          "quality": {
+            "id": 3,
+            "modifier": "none",
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "webdl"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "sourceTitle": "Mutiny Inverti la rotta (2026) 1080p x265 ita eng sub eng MD eac3 - Faccio"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 52,
+            "name": "DTS"
+          }
+        ],
+        "data": {
+          "customFormatScore": "0",
+          "downloadClient": "qBittorrent",
+          "downloadClientName": "Download client",
+          "droppedPath": "/downloads/Van.Helsing.2004.DTS.ITA.ENG.FRA.SPA.GER.1080p.BluRay.x264-BLUWORLD.mkv",
+          "fileId": "399",
+          "importedPath": "/movies/Van Helsing (2004) {tmdb-7131}/Van Helsing (2004) {tmdb-7131} - [Bluray-1080p][DTS 5.1][x264]-BLUWORLD.mkv",
+          "indexerFlags": "0",
+          "releaseGroup": "BLUWORLD",
+          "size": "24278085946"
+        },
+        "date": "2026-11-07T22:15:37Z",
+        "downloadId": "e01e9a5e797f2b67439e3ea9caae4a4384aebe49",
+        "eventType": "downloadFolderImported",
+        "id": 997,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 2,
+            "name": "French"
+          },
+          {
+            "id": 3,
+            "name": "Spanish"
+          },
+          {
+            "id": 4,
+            "name": "German"
+          }
+        ],
+        "movieId": 324,
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "Van.Helsing.2004.DTS.ITA.ENG.FRA.SPA.GER.1080p.BluRay.x264-BLUWORLD"
+      },
+      {
+        "customFormatScore": 2000,
+        "customFormats": [
+          {
+            "id": 17,
+            "name": "AV1"
+          },
+          {
+            "id": 57,
+            "name": "MULTi"
+          }
+        ],
+        "data": {
+          "customFormatScore": "2000",
+          "downloadClient": "NZBGet",
+          "downloadClientName": "Download client",
+          "droppedPath": "/downloads/The.Northman.2022.1080p.Bluray.AV1.Opus.Multi6.mkv",
+          "fileId": "398",
+          "importedPath": "/movies/The Northman (2022)/The Northman (2022) {tmdb-639933} - [MULTi][Bluray-1080p][Opus 7.1][AV1].mkv",
+          "indexerFlags": "0",
+          "releaseGroup": null,
+          "size": "10096047308"
+        },
+        "date": "2026-11-07T14:53:38Z",
+        "downloadId": "4f07d47f4d1d35ca940a4a5c89997852",
+        "eventType": "downloadFolderImported",
+        "id": 995,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 3,
+            "name": "Spanish"
+          },
+          {
+            "id": 2,
+            "name": "French"
+          },
+          {
+            "id": 11,
+            "name": "Russian"
+          },
+          {
+            "id": 4,
+            "name": "German"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "movieId": 124,
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "The.Northman.2022.1080p.Bluray.AV1.Opus.Multi6"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [],
+        "data": {
+          "customFormatScore": "0",
+          "downloadClient": "redacted",
+          "downloadClientName": "Download client",
+          "droppedPath": "/downloads/The.Dark.Knight.(2008).BDRip.IMAX.AC3.AAC.ITA.ENG.MultiSub.1080p.[ICV-MIRCrew].mkv",
+          "fileId": "394",
+          "importedPath": "/movies/The Dark Knight (2008)/The Dark Knight (2008) {tmdb-155} - {edition-IMAX} [Bluray-1080p][AC3 5.1][x264]-MIRCrew.mkv",
+          "indexerFlags": "0",
+          "releaseGroup": "MIRCrew",
+          "size": "8738160055"
+        },
+        "date": "2026-11-02T16:02:07Z",
+        "downloadId": "617995ad69f8a15902d72bee95c40f576cd88c3e",
+        "eventType": "downloadFolderImported",
+        "id": 984,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movieId": 107,
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "The.Dark.Knight.(2008).BDRip.IMAX.AC3.AAC.ITA.ENG.MultiSub.1080p.[ICV-MIRCrew]"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 50,
+            "name": "DD+"
+          },
+          {
+            "id": 18,
+            "name": "x265 (HD)"
+          },
+          {
+            "id": 56,
+            "name": "x265 (no HDR/DV)"
+          }
+        ],
+        "data": {
+          "customFormatScore": "0",
+          "downloadClient": "qBittorrent",
+          "downloadClientName": "Download client",
+          "droppedPath": "/downloads/Rec (2007) BluRay 1080p x265 10bit Ita Spa EAC3 5.1 Sub Ita-K0rS4R.mkv",
+          "fileId": "393",
+          "importedPath": "/movies/[Rec] (2007)/REC (2007) {tmdb-8329} - [Bluray-1080p][EAC3 5.1][x265]-K0rS4R.mkv",
+          "indexerFlags": "0",
+          "releaseGroup": "K0rS4R",
+          "size": "1635395311"
+        },
+        "date": "2026-11-02T05:30:02Z",
+        "downloadId": "fa47af1752e3f6fafac0ad4fc385b75fe43a4832",
+        "eventType": "downloadFolderImported",
+        "id": 978,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 3,
+            "name": "Spanish"
+          }
+        ],
+        "movieId": 322,
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "Rec (2007) BluRay 1080p x265 10bit Ita Spa EAC3 5.1 Sub Ita-K0rS4R"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 18,
+            "name": "x265 (HD)"
+          },
+          {
+            "id": 56,
+            "name": "x265 (no HDR/DV)"
+          }
+        ],
+        "data": {
+          "customFormatScore": "0",
+          "downloadClient": "qBittorrent",
+          "downloadClientName": "Download client",
+          "droppedPath": "/downloads/Terminator 2 Judgment Day 1991 BDRip ITA ENG 1080p x265 Paso77.mkv",
+          "fileId": "392",
+          "importedPath": "/movies/Terminator 2 Judgment Day (1991)/Terminator 2 Judgment Day (1991) {tmdb-280} - [Bluray-1080p][AC3 2.0][x265].mkv",
+          "indexerFlags": "0",
+          "releaseGroup": null,
+          "size": "9523111896"
+        },
+        "date": "2026-11-01T18:27:05Z",
+        "downloadId": "08c1a34cdff9e0e3c2420d1d6a73212202dbe553",
+        "eventType": "downloadFolderImported",
+        "id": 977,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movieId": 103,
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "Terminator 2 Judgment Day 1991 BDRip ITA ENG 1080p x265 Paso77"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 19,
+            "name": "AMZN"
+          },
+          {
+            "id": 50,
+            "name": "DD+"
+          },
+          {
+            "id": 18,
+            "name": "x265 (HD)"
+          },
+          {
+            "id": 56,
+            "name": "x265 (no HDR/DV)"
+          }
+        ],
+        "data": {
+          "customFormatScore": "0",
+          "downloadClient": "qBittorrent",
+          "downloadClientName": "Download client",
+          "droppedPath": "/downloads/Batman Begins (2005) [WEB-DL AMZN h265 1080p EAC3 5.1 ITA ENG Sub ITA ENG by elenaVelena].mkv",
+          "fileId": "391",
+          "importedPath": "/movies/Batman Begins (2005)/Batman Begins (2005) {tmdb-272} - [AMZN][WEBDL-1080p][EAC3 5.1][x265].mkv",
+          "indexerFlags": "0",
+          "releaseGroup": null,
+          "size": "3424169807"
+        },
+        "date": "2026-11-01T17:42:02Z",
+        "downloadId": "330db154f5f18d23739ebec335ee58e790625115",
+        "eventType": "downloadFolderImported",
+        "id": 976,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movieId": 11,
+        "quality": {
+          "quality": {
+            "id": 3,
+            "modifier": "none",
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "webdl"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "Batman Begins (2005) [WEB-DL AMZN h265 1080p EAC3 5.1 ITA ENG Sub ITA ENG by elenaVelena]"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 54,
+            "name": "DD"
+          }
+        ],
+        "data": {
+          "customFormatScore": "0",
+          "downloadClient": "qBittorrent",
+          "downloadClientName": "Download client",
+          "droppedPath": "/downloads/Constantine.(2005).BDRip.H264.AC3.ITA.ENG.MultiSub.1080p.[iCV-MIRCrew].mkv",
+          "fileId": "390",
+          "importedPath": "/movies/Constantine (2005)/Constantine (2005) {tmdb-561} - [Bluray-1080p][AC3 5.1][x264]-MIRCrew.mkv",
+          "indexerFlags": "0",
+          "releaseGroup": "MIRCrew",
+          "size": "9309259555"
+        },
+        "date": "2026-11-01T17:12:00Z",
+        "downloadId": "85d31d08a7073c56bb347c965971650bef0cfa87",
+        "eventType": "downloadFolderImported",
+        "id": 975,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movieId": 25,
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "Constantine.(2005).BDRip.H264.AC3.ITA.ENG.MultiSub.1080p.[iCV-MIRCrew]"
+      }
+    ],
+    "sortDirection": "descending",
+    "sortKey": "date",
+    "totalRecords": 142
+  },
+  "recordedAt": "2026-11-11T12:12:56Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/history?page=1&pageSize=10&sortKey=date&sortDirection=descending&eventType=3"
+  },
+  "status": 200
+}

@@ -48,7 +48,7 @@ impl Skyhook {
             .get(self.upstreams.url(url))
             .header(
                 reqwest::header::USER_AGENT,
-                crate::http::servarr_proxy_user_agent(),
+                crate::http::servarr_proxy_user_agent(crate::Personality::Sonarr),
             )
             .header(reqwest::header::ACCEPT, "application/json")
             .send()
