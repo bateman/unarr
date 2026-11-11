@@ -16,16 +16,16 @@ use unarr_core::{Db, Personality};
 struct Args {
     /// Address to bind each personality to. Defaults to the BindAddress of
     /// its config.xml (`*` meaning every address); the port comes from there too.
-    #[arg(long, env = "UNARR_BIND")]
+    #[arg(long, env = "UNARR_BIND", global = true)]
     bind: Option<String>,
 
     /// Personalities to run.
-    #[arg(long, env = "UNARR_PERSONALITIES", value_delimiter = ',', default_values = ["sonarr"])]
+    #[arg(long, env = "UNARR_PERSONALITIES", value_delimiter = ',', default_values = ["sonarr"], global = true)]
     personalities: Vec<String>,
 
     /// Directory holding Unarr's databases and configuration, one
     /// sub-directory per personality.
-    #[arg(long, env = "UNARR_CONFIG", default_value = "/config")]
+    #[arg(long, env = "UNARR_CONFIG", default_value = "/config", global = true)]
     data: PathBuf,
 
     /// Directory with the original application's config.xml and database to
@@ -37,6 +37,101 @@ struct Args {
     /// The ffprobe binary for media info; `ffprobe` on the PATH when unset.
     #[arg(long, env = "UNARR_FFPROBE")]
     ffprobe: Option<PathBuf>,
+
+    #[command(subcommand)]
+    command: Option<Command>,
+}
+
+#[derive(clap::Subcommand, Debug)]
+enum Command {
+    /// Ask the daemon running on this machine whether it answers: `GET
+    /// /ping` on every personality, exit status 0 when all do. What a
+    /// container's health check runs; the image has no shell and no curl.
+    Healthcheck,
+}
+
+/// Where a personality listens, worked out as the daemon works it out and
+/// without touching what it has open: `config.xml`, the host settings
+/// saved since, the environment, `--bind`.
+fn listen_address(personality: Personality, args: &Args) -> anyhow::Result<(String, u16, String)> {
+    let own_dir = args.data.join(personality_dir(personality));
+    let mut host = unarr_import::config_xml::read(&own_dir.join("config.xml"), personality.default_port())
+        .context("the daemon has not written its configuration yet")?;
+    // A database that cannot be read says nothing about saved settings;
+    // the ping then goes where the file says.
+    let saved = unarr_core::store::config::meta_of_file(
+        &own_dir.join(personality.db_file()),
+        unarr_api::routes::settings_writes::HOST_OVERRIDES,
+    )
+    .unwrap_or_default();
+    unarr_api::routes::settings_writes::apply_saved_host_overrides(&mut host, saved.as_deref());
+    host.apply_environment(personality.app_name(), std::env::vars());
+    // Whatever address it listens on, this machine reaches it on the loopback.
+    let address = match args.bind.as_deref().unwrap_or(&host.bind_address) {
+        "*" | "" | "0.0.0.0" => "127.0.0.1".to_string(),
+        "::" | "[::]" => "::1".to_string(),
+        other => other.trim_matches(['[', ']']).to_string(),
+    };
+    Ok((address, host.port, host.normalized_url_base()))
+}
+
+/// `GET <base>/ping` over a plain connection: whether the answer is 200.
+/// By hand, so that no proxy setting and no runtime stands between the
+/// check and the daemon.
+fn ping(address: &str, port: u16, url_base: &str, timeout: std::time::Duration) -> anyhow::Result<()> {
+    use std::io::{Read, Write};
+    use std::net::ToSocketAddrs;
+    let target = (address, port)
+        .to_socket_addrs()?
+        .next()
+        .with_context(|| format!("{address} is not an address"))?;
+    let mut stream = std::net::TcpStream::connect_timeout(&target, timeout)?;
+    stream.set_read_timeout(Some(timeout))?;
+    stream.set_write_timeout(Some(timeout))?;
+    // In one piece: a request sent in several is still a request, but
+    // there is no reason to make the daemon wait for the rest.
+    let request = format!("GET {url_base}/ping HTTP/1.1\r\nHost: localhost\r\nConnection: close\r\n\r\n");
+    stream.write_all(request.as_bytes())?;
+    let mut answer = [0u8; 64];
+    let mut read = 0;
+    while read < answer.len() {
+        match stream.read(&mut answer[read..])? {
+            0 => break,
+            n => read += n,
+        }
+        if answer[..read].contains(&b'\n') {
+            break;
+        }
+    }
+    let line = String::from_utf8_lossy(&answer[..read]);
+    let status = line.lines().next().unwrap_or("").to_string();
+    anyhow::ensure!(
+        status.split_whitespace().nth(1) == Some("200"),
+        "answered {:?}",
+        status
+    );
+    Ok(())
+}
+
+/// The `healthcheck` command: one line per personality, and whether all
+/// of them answered.
+fn healthcheck(args: &Args, personalities: &[Personality]) -> bool {
+    let mut healthy = true;
+    for personality in personalities {
+        let name = personality.app_name();
+        let outcome = listen_address(*personality, args).and_then(|(address, port, url_base)| {
+            ping(&address, port, &url_base, std::time::Duration::from_secs(5))
+                .with_context(|| format!("http://{address}:{port}{url_base}/ping"))
+        });
+        match outcome {
+            Ok(()) => println!("{name}: ok"),
+            Err(e) => {
+                eprintln!("{name}: {e:#}");
+                healthy = false;
+            }
+        }
+    }
+    healthy
 }
 
 fn parse_personality(s: &str) -> anyhow::Result<Personality> {
@@ -545,6 +640,15 @@ async fn serve(personality: Personality, state: AppState, bind: String, port: u1
 }
 
 fn main() -> anyhow::Result<()> {
+    let args = Args::parse();
+    if let Some(Command::Healthcheck) = args.command {
+        let personalities: Vec<Personality> = args
+            .personalities
+            .iter()
+            .map(|name| parse_personality(name))
+            .collect::<anyhow::Result<_>>()?;
+        std::process::exit(if healthcheck(&args, &personalities) { 0 } else { 1 });
+    }
     unarr_core::fs::tune_allocator();
     // What is logged outside any personality goes to the console and, through
     // `process_log`, to every personality's recent lines and files.
@@ -554,7 +658,6 @@ fn main() -> anyhow::Result<()> {
         .with(tracing_subscriber::fmt::layer())
         .with(process_log.clone())
         .init();
-    let args = Args::parse();
 
     let personalities: Vec<Personality> = args
         .personalities
@@ -909,6 +1012,85 @@ mod tests {
         assert!(!staged.exists());
 
         let _ = std::fs::remove_dir_all(&dir);
+    }
+
+    /// A listener that answers every connection with `status`.
+    fn answering(status: &'static str) -> u16 {
+        use std::io::{Read, Write};
+        let listener = std::net::TcpListener::bind("127.0.0.1:0").unwrap();
+        let port = listener.local_addr().unwrap().port();
+        std::thread::spawn(move || {
+            for stream in listener.incoming() {
+                let Ok(mut stream) = stream else { break };
+                // The whole request, however many pieces it comes in.
+                let mut request = Vec::new();
+                let mut piece = [0u8; 512];
+                while !request.windows(4).any(|w| w == b"\r\n\r\n") {
+                    match stream.read(&mut piece) {
+                        Ok(n) if n > 0 => request.extend_from_slice(&piece[..n]),
+                        _ => break,
+                    }
+                }
+                let path = String::from_utf8_lossy(&request).into_owned();
+                // Only the path asked for is the health check's.
+                let line = if path.starts_with("GET /tv/ping ") || path.starts_with("GET /ping ") {
+                    status
+                } else {
+                    "404 Not Found"
+                };
+                let _ = write!(stream, "HTTP/1.1 {line}\r\ncontent-length: 0\r\n\r\n");
+            }
+        });
+        port
+    }
+
+    /// The health check is healthy on a 200 and on nothing else: another
+    /// status, another path, nobody listening.
+    #[test]
+    fn the_ping_is_healthy_only_on_a_200() {
+        let wait = std::time::Duration::from_secs(2);
+        let up = answering("200 OK");
+        ping("127.0.0.1", up, "", wait).expect("a 200 is healthy");
+        assert!(ping("127.0.0.1", up, "/tv", wait).is_ok());
+        assert!(ping("127.0.0.1", up, "/elsewhere", wait).is_err());
+        let failing = answering("500 Internal Server Error");
+        let error = ping("127.0.0.1", failing, "", wait).unwrap_err().to_string();
+        assert!(error.contains("500"), "{error}");
+        // A port nobody listens on.
+        let free = std::net::TcpListener::bind("127.0.0.1:0")
+            .unwrap()
+            .local_addr()
+            .unwrap()
+            .port();
+        assert!(ping("127.0.0.1", free, "", wait).is_err());
+    }
+
+    /// The address asked is the one the daemon listens on: the port and
+    /// the URL base of `config.xml`, every-address turned into the
+    /// loopback, `--bind` over the file.
+    #[test]
+    fn the_health_check_asks_where_the_daemon_listens() {
+        let data = std::env::temp_dir().join(format!("unarr-healthcheck-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&data);
+        std::fs::create_dir_all(data.join("sonarr")).unwrap();
+        let mut args = Args::parse_from(["unarrd", "--data", data.to_str().unwrap(), "healthcheck"]);
+        // Not started yet: nothing to ask.
+        assert!(listen_address(Personality::Sonarr, &args).is_err());
+        std::fs::write(
+            data.join("sonarr/config.xml"),
+            "<Config><ApiKey>0123456789abcdef0123456789abcdef</ApiKey><Port>8990</Port><BindAddress>*</BindAddress><UrlBase>tv/</UrlBase></Config>",
+        )
+        .unwrap();
+        assert_eq!(
+            listen_address(Personality::Sonarr, &args).unwrap(),
+            ("127.0.0.1".to_string(), 8990, "/tv".to_string())
+        );
+        args.bind = Some("192.168.250.251".into());
+        assert_eq!(
+            listen_address(Personality::Sonarr, &args).unwrap().0,
+            "192.168.250.251"
+        );
+        let _ = std::fs::remove_dir_all(&data);
     }
 
     /// The level of Settings > General changes what a personality logs

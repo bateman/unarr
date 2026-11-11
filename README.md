@@ -40,6 +40,19 @@ of its `config.xml` unless `--bind` says otherwise. Select them with
 user 65532; when mounting a host directory on `/config`, pass `--user` with
 its owner, or the daemon cannot create its files there.
 
+### Health check
+
+The image has no shell and no `curl`, so the daemon checks itself:
+`unarrd healthcheck` asks `GET /ping` of every personality on the port and
+URL base it is configured with, and exits with 0 when all answer. The image
+declares it as its `HEALTHCHECK`; in a compose file that sets its own:
+
+    healthcheck:
+      test: ["CMD", "/usr/local/bin/unarrd", "healthcheck"]
+
+`GET /ping` itself needs no key and answers `{"status":"OK"}`, for monitors
+such as Uptime Kuma.
+
 ### Importing an existing Sonarr
 
     unarrd --data /config --import-from /path/to/sonarr/config

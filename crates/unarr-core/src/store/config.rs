@@ -132,6 +132,17 @@ pub fn meta(conn: &Connection, key: &str) -> anyhow::Result<Option<String>> {
         .optional()?)
 }
 
+/// A `meta` value read from a database file without opening it for
+/// work: read-only, no migrations, beside a daemon that has it open. For
+/// the health check, which must not disturb what it checks.
+pub fn meta_of_file(path: &std::path::Path, key: &str) -> anyhow::Result<Option<String>> {
+    let conn = Connection::open_with_flags(
+        path,
+        rusqlite::OpenFlags::SQLITE_OPEN_READ_ONLY | rusqlite::OpenFlags::SQLITE_OPEN_NO_MUTEX,
+    )?;
+    meta(&conn, key)
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
