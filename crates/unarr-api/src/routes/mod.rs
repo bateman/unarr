@@ -50,12 +50,9 @@ pub fn feed_router(state: &AppState) -> Router<AppState> {
         Personality::Sonarr | Personality::Lidarr => get(feed::calendar),
         Personality::Radarr => get(radarr::feed::calendar),
     };
-    let router = match state.personality() {
-        // `GET /api`, which Radarr answers with the versions it speaks.
-        Personality::Radarr => Router::new().route("/api", get(radarr::system::api_root)),
-        Personality::Sonarr | Personality::Lidarr => Router::new(),
-    };
-    router
+    // `GET /api`, which the originals answer with the versions they speak.
+    Router::new()
+        .route("/api", get(system::api_root))
         .route(&format!("/feed/v3/calendar/{name}.ics"), handler.clone())
         .route(&format!("/feed/v3/calendar/{}.ics", name.to_lowercase()), handler)
 }

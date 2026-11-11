@@ -1,6 +1,7 @@
 //! API key authentication, as the originals do it: the key travels in the
-//! `X-Api-Key` header or the `apikey` query parameter (the query parameter is
-//! checked first), and a missing or wrong key gets an empty 401.
+//! `apikey` query parameter, the `X-Api-Key` header or as a bearer token,
+//! looked for in that order: the first one present is the one checked. A
+//! missing or wrong key gets an empty 401.
 
 use axum::extract::{Request, State};
 use axum::http::{HeaderMap, StatusCode, Uri};
@@ -19,10 +20,16 @@ pub fn presented_key(uri: &Uri, headers: &HeaderMap) -> Option<String> {
             }
         }
     }
+    if let Some(key) = headers.get("x-api-key") {
+        return key.to_str().ok().map(str::to_string);
+    }
+    // `Authorization: Bearer <key>`, spelled so: what SignalR clients
+    // outside a browser send.
     headers
-        .get("x-api-key")
+        .get(axum::http::header::AUTHORIZATION)
         .and_then(|v| v.to_str().ok())
-        .map(|s| s.to_string())
+        .and_then(|v| v.strip_prefix("Bearer "))
+        .map(|key| key.trim().to_string())
 }
 
 /// Decode `%XX` escapes and `+` as the originals' query parser does.
@@ -96,6 +103,15 @@ mod tests {
         let mut headers = HeaderMap::new();
         headers.insert("X-Api-Key", "hdr".parse().unwrap());
         assert_eq!(presented_key(&uri, &headers).as_deref(), Some("hdr"));
+        // The header counts even when a bearer token is there too.
+        headers.insert("Authorization", "Bearer tok".parse().unwrap());
+        assert_eq!(presented_key(&uri, &headers).as_deref(), Some("hdr"));
+        headers.remove("X-Api-Key");
+        assert_eq!(presented_key(&uri, &headers).as_deref(), Some("tok"));
+        headers.insert("Authorization", "bearer tok".parse().unwrap());
+        assert_eq!(presented_key(&uri, &headers), None);
+        headers.insert("Authorization", "Basic dTpw".parse().unwrap());
+        assert_eq!(presented_key(&uri, &headers), None);
         assert!(key_matches("abc", "abc"));
         assert!(!key_matches("abc", "abd"));
         assert!(!key_matches("abc", "ab"));

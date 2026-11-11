@@ -16,8 +16,3 @@ pub async fn status(state: State<AppState>) -> ApiResult<Json<Value>> {
     out["isContainerized"] = json!(is_docker);
     Ok(Json(out))
 }
-
-/// `GET /api`: the API versions this application speaks.
-pub async fn api_root() -> Json<Value> {
-    Json(json!({"current": "v3", "deprecated": []}))
-}

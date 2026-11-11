@@ -151,3 +151,46 @@ Medium
 - 4.5 `manifest.json` served with literal `__INSTANCE_NAME__` / `__URL_BASE__`.
 
 Rows marked **[fw]** rest on framework defaults I did not read in either repository; the ones that carry a medium rating on that basis alone are 1.16 (trailing slash), 1.24/1.25 (fallback policy on unmatched paths), 1.29 (axum's default body limit) and the cookie defaults in 3.4/3.6. One live request each against the real Sonarr would settle them.
+
+## Live run, and what was changed
+
+The rows above were read, not run. `scripts/http-audit.py`
+(`make http-audit`) sends the same read-only requests to the original and
+to Unarr, both on one fixture, and compares the status and the headers a
+client can depend on. Run against Radarr 6.4.4.10685 (232 requests) and
+Sonarr 4.0.20.3014 (354 requests: `make http-audit AUDIT_APP=sonarr`), it
+found the same thirteen differences on both, all in the layer the
+personalities share. Each was decided on what the two originals do, and is
+now in `api/http.rs` unless said otherwise; `api/tests/http.rs` holds them.
+
+| # | Rows | Measured on both originals | Who depends on it | Now |
+|---|------|----------------------------|-------------------|-----|
+| 1 | 1.22 | `Cache-Control: no-cache, no-store`, `Pragma: no-cache`, `Expires: -1` on every answer of the API, of the feed and of SignalR's negotiation once the key is accepted; none on a 401, none on `OPTIONS`; `max-age=31536000, public` and `Last-Modified` under `/api/…/mediacover` | caching proxies | same |
+| 2 | 1.31 | `application/json; charset=utf-8` | nobody known; costs nothing | same |
+| 3 | 1.19 | gzip or Brotli for `text/plain`, CSS, JavaScript, HTML, XML, JSON and wasm, of any size, pages and bundles included; not `application/problem+json`, `text/calendar`, images or SignalR; `Vary: Accept-Encoding` on those types | browsers, proxies, slow links | gzip only: a client that takes Brotli gets gzip. `Vary` also goes to a client that sent no `Accept-Encoding`, where the originals leave it out |
+| 4 | — | a 404 the framework writes is `application/problem+json; charset=utf-8` on Radarr and `application/json; charset=utf-8` on Sonarr, whose covers alone say `problem+json` | nobody known | same, per personality |
+| 5 | 1.20 | `X-Application-Version` on every answer under `/api` once the key is accepted (200, 404, 405, 415, the framework's 400) and on `GET /api`; not on a 401, and not on an answer the exception handler writes (a thrown 400, 404, 409 or 500), which is also `application/json` without charset, `no-cache,no-store` without the space, and never compressed | Prowlarr reads the header on answers that have it either way | same; `GET /api` answers on Sonarr too |
+| 6 | 3.2 | `Authorization: Bearer <key>` accepted, spelled so, after `apikey=` and `X-Api-Key`: the first of the three that is present is the one checked | SignalR clients outside a browser, scripts | same, API and SignalR |
+| 7 | 1.17 | a preflight on a path an action takes: 204, `Access-Control-Allow-Origin: *`, the method and the headers asked for echoed, no key needed; `Access-Control-Allow-Origin: *` on any answer to a request with `Origin`, a 401 included; neither on a path no action takes, on the feed or on SignalR | dashboards on another origin | same |
+| 8 | 1.32 | `HEAD` on a `GET`-only action: 405, `Allow: GET`; `Allow` lists the declared methods, sorted, `, ` between them; `/ping` answers `HEAD` | nobody; done so that `Allow` tells the truth | same on the API and the feed. Pages still answer `HEAD` (the originals: 401) |
+| 9 | 1.16 | one trailing slash is ignored on every route (`/api/v3/tag/`, `/login/`, `/ping/`); two are a 404 | scripts that build URLs | same |
+| 10 | — | an id that is not a number, or too large for one: 404 with no body | nobody known | same |
+| 11 | — | a body that is not JSON, or empty: 400 with the validation problem details, `application/problem+json`, but `application/json` on `POST /command`; a body not announced as JSON: 415 with no body | clients that parse the error | same statuses and types; the parser's message is serde's |
+| 12 | — | the redirect to the login page names the whole URL (`http://host/login?returnUrl=%2F…`), the return path escaped as one value | browsers and proxies either way; a proxy that rewrites `Location` only sees absolute ones | same: `Host`, or `X-Forwarded-Host` and `X-Forwarded-Proto` from a proxy in `TrustedNetworks`; a path when the request names no host |
+| 13 | 4.10, 4.18 | pages are `text/html` with `Pragma` and `Expires` beside `Cache-Control` | nobody | same |
+| 13 | 4.9 | `/ping` is `max-age=31536000, public` with `Last-Modified`, as is every path that is neither the API nor a page | nobody, and a proxy that honoured it would answer the health check itself | **not done, on purpose**: listed as `DELIBERATE` in the script, reported and not counted |
+
+Also measured and aligned: a path under `/api/v3` that no action takes
+asks for the key before saying 404.
+
+What the script still reports after this, none of it the shared layer's:
+`GET /api/v3/config/naming/examples` is missing on Radarr (404);
+`GET /api/v3/manualimport?seriesId=1` and `GET /api/v3/series/50/folder`
+on Sonarr answer for a state the golden list builds with the writes the
+script does not replay.
+
+Seen with the probes and left as it is: static files (`/Content/…`) are
+`max-age=31536000, public` on the originals and `no-cache` here (row 4.9):
+theirs are safe to keep because the pages link them with `?h=<hash>`,
+which Unarr's pages do not do yet; `/favicon.ico` is behind the login on
+the originals; non-v3 paths under `/api` (row 1.24).

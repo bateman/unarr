@@ -53,9 +53,23 @@ impl From<anyhow::Error> for ApiError {
 
 impl IntoResponse for ApiError {
     fn into_response(self) -> Response {
+        // Everything but `NotFound` is an exception in the originals, and
+        // the exception handler writes its answer.
+        let thrown = !matches!(self, ApiError::NotFound);
+        let mut response = self.response();
+        if thrown {
+            response.extensions_mut().insert(Thrown);
+        }
+        response
+    }
+}
+
+impl ApiError {
+    fn response(self) -> Response {
         match self {
             ApiError::NotFound => {
-                let mut response = not_found_problem(NOT_FOUND_TYPE_RFC7231);
+                let mut response =
+                    not_found_problem(NOT_FOUND_TYPE_RFC7231, "application/json; charset=utf-8");
                 // Marked, so a personality whose original names another
                 // document can say so (`lib.rs`).
                 response.extensions_mut().insert(NotFoundProblem);
@@ -132,6 +146,11 @@ impl IntoResponse for ApiError {
     }
 }
 
+/// Marks an answer the originals' exception handler writes: it starts from
+/// an empty response, so what the pipeline had set is gone (`http.rs`).
+#[derive(Debug, Clone, Copy)]
+pub struct Thrown;
+
 /// Marks the response of [`ApiError::NotFound`].
 #[derive(Debug, Clone, Copy)]
 pub struct NotFoundProblem;
@@ -141,16 +160,20 @@ pub struct NotFoundProblem;
 pub const NOT_FOUND_TYPE_RFC7231: &str = "https://tools.ietf.org/html/rfc7231#section-6.5.4";
 pub const NOT_FOUND_TYPE_RFC9110: &str = "https://tools.ietf.org/html/rfc9110#section-15.5.5";
 
-/// ASP.NET's problem details for a resource that is not there.
-pub fn not_found_problem(document: &str) -> Response {
+/// ASP.NET's problem details for a resource that is not there. Sonarr's
+/// runtime sends them as `application/json`, Radarr's as
+/// `application/problem+json`.
+pub fn not_found_problem(document: &str, content_type: &'static str) -> Response {
     (
         StatusCode::NOT_FOUND,
-        Json(json!({
+        [(axum::http::header::CONTENT_TYPE, content_type)],
+        json!({
             "type": document,
             "title": "Not Found",
             "status": 404,
             "traceId": trace_id(),
-        })),
+        })
+        .to_string(),
     )
         .into_response()
 }
@@ -165,7 +188,7 @@ fn client_exception(message: &str) -> serde_json::Value {
 }
 
 /// A W3C trace-context style id, as ASP.NET emits in problem details.
-fn trace_id() -> String {
+pub(crate) fn trace_id() -> String {
     let nanos = std::time::SystemTime::now()
         .duration_since(std::time::UNIX_EPOCH)
         .map(|d| d.as_nanos())

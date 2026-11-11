@@ -328,7 +328,7 @@ async fn a_trusted_proxy_lets_local_clients_skip_the_login() {
     };
     let login = (
         StatusCode::FOUND,
-        Some("/login?returnUrl=/system/status".to_string()),
+        Some("/login?returnUrl=%2Fsystem%2Fstatus".to_string()),
     );
     const PROXY: &str = "172.29.4.2:41000";
 

@@ -153,6 +153,11 @@ pub async fn initialize_json(State(state): State<AppState>) -> impl IntoResponse
     )
 }
 
+/// `GET /api`: the API versions this application speaks.
+pub async fn api_root() -> Json<serde_json::Value> {
+    Json(serde_json::json!({"current": "v3", "deprecated": []}))
+}
+
 /// `GET /ping` (`PingController`): open to anyone, for uptime checks and
 /// container healthchecks; 500 when the database does not answer.
 pub async fn ping(State(state): State<AppState>) -> impl IntoResponse {

@@ -111,11 +111,15 @@ fn rewrite_html(html: &str, url_base: &str) -> String {
     out
 }
 
+/// A page, as `StaticResourceController` sends it: no charset on the
+/// content type (the pages name theirs), and never cached.
 fn html(body: String) -> Response {
     (
         [
-            (header::CONTENT_TYPE, "text/html; charset=utf-8"),
+            (header::CONTENT_TYPE, "text/html"),
             (header::CACHE_CONTROL, "no-cache, no-store"),
+            (header::PRAGMA, "no-cache"),
+            (header::EXPIRES, "-1"),
         ],
         body,
     )
@@ -394,6 +398,37 @@ fn over_https(state: &AppState, remote: Option<std::net::IpAddr>, headers: &Head
             .is_some_and(|proto| proto.trim().eq_ignore_ascii_case("https"))
 }
 
+/// `scheme://host` as the client names this server: the `Host` header, or
+/// what a proxy `TrustedNetworks` believes says it was asked for. `None`
+/// for a request that names no host (HTTP/1.0).
+fn origin(state: &AppState, remote: Option<std::net::IpAddr>, headers: &HeaderMap) -> Option<String> {
+    let trusted = remote.is_some_and(|peer| state.settings().trusted_networks.contains(peer));
+    let forwarded = headers
+        .get_all("x-forwarded-host")
+        .iter()
+        .filter_map(|v| v.to_str().ok())
+        .flat_map(|v| v.split(','))
+        .next_back()
+        .filter(|_| trusted);
+    let host = forwarded
+        .or_else(|| headers.get(header::HOST).and_then(|v| v.to_str().ok()))
+        .map(str::trim)
+        // A host name, with a port or without: nothing that could start
+        // another header or another URL.
+        .filter(|h| {
+            !h.is_empty()
+                && h.bytes().all(|b| {
+                    b.is_ascii_alphanumeric() || matches!(b, b'.' | b'-' | b':' | b'[' | b']' | b'_')
+                })
+        })?;
+    let scheme = if over_https(state, remote, headers) {
+        "https"
+    } else {
+        "http"
+    };
+    Some(format!("{scheme}://{host}"))
+}
+
 /// Basic authentication sends the password on every request, posters
 /// included: the user is read on the database thread and the slow hash runs
 /// on a blocking worker, never on the async ones.
@@ -514,10 +549,14 @@ pub async fn require_ui_auth(State(state): State<AppState>, request: Request, ne
                 .path_and_query()
                 .map(|p| p.to_string())
                 .unwrap_or_default();
+            // As ASP.NET's cookie authentication challenges: the whole
+            // URL of the login page, and where to come back to as one
+            // escaped value.
             found(&format!(
-                "{}/login?returnUrl={}",
+                "{}{}/login?returnUrl={}",
+                origin(&state, remote, headers).unwrap_or_default(),
                 state.settings().url_base,
-                percent_encode(&return_url)
+                escape_data(&return_url)
             ))
         }
     }
@@ -592,9 +631,29 @@ fn percent_encode(s: &str) -> String {
     out
 }
 
+/// `Uri.EscapeDataString`: everything but letters, digits and `-_.~`.
+fn escape_data(s: &str) -> String {
+    let mut out = String::new();
+    for b in s.bytes() {
+        match b {
+            b'A'..=b'Z' | b'a'..=b'z' | b'0'..=b'9' | b'-' | b'_' | b'.' | b'~' => out.push(b as char),
+            _ => out.push_str(&format!("%{b:02X}")),
+        }
+    }
+    out
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn the_return_url_is_one_escaped_value() {
+        assert_eq!(
+            escape_data("/settings/general?x=1&y=a%20b"),
+            "%2Fsettings%2Fgeneral%3Fx%3D1%26y%3Da%2520b"
+        );
+    }
 
     #[test]
     fn rewrites_root_links_with_the_url_base() {

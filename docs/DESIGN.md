@@ -1383,8 +1383,11 @@ a parser.
   audit as low: no cache headers on API answers, no charset on the JSON
   content type, no compression, no CORS preflight, `HEAD` answered, the
   key as a bearer token refused, a trailing slash not ignored, the
-  version header sent on errors too. Not changed in this milestone: it
-  is not Radarr's, and each needs the same comparison on Sonarr first.
+  version header sent on errors too. Not changed in that milestone: it
+  was not Radarr's. Since compared on Sonarr 4.0.20 as well, found the
+  same there, and brought into line in `unarr-api/src/http.rs`, item by
+  item in `docs/audit/2-http.md` ("Live run, and what was changed");
+  `/ping` alone is deliberately not made cacheable for a year.
 - **Implemented from the source, not replayed.** `MissingMoviesSearch`
   and `CutoffUnmetMoviesSearch` (on the original they would search some
   ninety movies at the indexers' pace) and a release kept pending for

@@ -14,6 +14,7 @@ pub mod error;
 pub mod forwarded;
 pub mod fs;
 pub mod hosts;
+pub mod http;
 pub mod json;
 pub mod logbuf;
 pub mod logfile;
@@ -35,25 +36,28 @@ pub use logfile::{LogFiles, ProcessLog};
 pub use state::{AppState, Lifecycle, RuntimeInfo, Settings};
 
 /// The originals route API paths case-insensitively (Bazarr asks for
-/// `episodeFile`); lower-case the path before matching.
-async fn lowercase_api_path(
+/// `episodeFile`) and take a path with one slash after it for the same
+/// path: lower-case the API part and drop that slash before matching.
+async fn normalize_path(
+    axum::extract::State(state): axum::extract::State<AppState>,
     mut request: axum::extract::Request,
     next: axum::middleware::Next,
 ) -> axum::response::Response {
     let uri = request.uri().clone();
-    let path = uri.path();
+    let path = http::without_trailing_slash(uri.path(), &state.settings().url_base);
     let lower = path.to_ascii_lowercase();
     // Only the API part: a URL base such as /Sonarr keeps its case.
-    if let Some(i) = lower.find("/api/v") {
-        if path[i..].chars().any(|c| c.is_ascii_uppercase()) {
-            let new_path = format!("{}{}", &path[..i], &lower[i..]);
-            let lowered = match uri.query() {
-                Some(q) => format!("{new_path}?{q}"),
-                None => new_path,
-            };
-            if let Ok(new_uri) = lowered.parse() {
-                *request.uri_mut() = new_uri;
-            }
+    let new_path = match lower.find("/api/v") {
+        Some(i) => format!("{}{}", &path[..i], &lower[i..]),
+        None => path.to_owned(),
+    };
+    if new_path != uri.path() {
+        let rewritten = match uri.query() {
+            Some(q) => format!("{new_path}?{q}"),
+            None => new_path,
+        };
+        if let Ok(new_uri) = rewritten.parse() {
+            *request.uri_mut() = new_uri;
         }
     }
     next.run(request).await
@@ -214,32 +218,19 @@ async fn reject_put_without_id(
     next.run(request).await
 }
 
-/// `X-Application-Version` on every API response: Prowlarr reads it from
-/// the indexer test to check the version it talks to.
-async fn version_header(
-    axum::extract::State(state): axum::extract::State<AppState>,
-    request: axum::extract::Request,
-    next: axum::middleware::Next,
-) -> axum::response::Response {
-    let mut response = next.run(request).await;
-    if let Ok(value) = axum::http::HeaderValue::from_str(compat::emulated_version(state.personality())) {
-        response
-            .headers_mut()
-            .entry("X-Application-Version")
-            .or_insert(value);
-    }
-    response
-}
-
 /// Radarr's 404 problem details name RFC 9110 where Sonarr's name RFC
-/// 7231: the handlers both share answer Sonarr's, replaced here.
+/// 7231, and say so as `application/problem+json`: the handlers both share
+/// answer Sonarr's, replaced here.
 async fn radarr_problem_details(
     request: axum::extract::Request,
     next: axum::middleware::Next,
 ) -> axum::response::Response {
     let response = next.run(request).await;
     if response.extensions().get::<error::NotFoundProblem>().is_some() {
-        return error::not_found_problem(error::NOT_FOUND_TYPE_RFC9110);
+        return error::not_found_problem(
+            error::NOT_FOUND_TYPE_RFC9110,
+            "application/problem+json; charset=utf-8",
+        );
     }
     response
 }
@@ -251,16 +242,19 @@ pub fn router(state: AppState) -> Router {
         unarr_core::Personality::Radarr => api.layer(axum::middleware::from_fn(radarr_problem_details)),
         unarr_core::Personality::Sonarr | unarr_core::Personality::Lidarr => api,
     };
+    // From the inside out: what the pipeline does once the key is good,
+    // the key (on a path no action takes too: an empty 401, not a 404),
+    // compression, and CORS, which answers a preflight before the key is
+    // asked for but only where there is an action.
     let api = api
         .route_layer(axum::middleware::from_fn(reject_put_without_id))
-        .route_layer(axum::middleware::from_fn_with_state(
+        .layer(axum::middleware::from_fn_with_state(state.clone(), http::finish))
+        .layer(axum::middleware::from_fn_with_state(
             state.clone(),
             auth::require_api_key,
         ))
-        .layer(axum::middleware::from_fn_with_state(
-            state.clone(),
-            version_header,
-        ));
+        .layer(http::compression())
+        .route_layer(axum::middleware::from_fn(http::cors));
 
     // Pages and bootstrap the browser loads: behind the UI policy.
     let pages = Router::new()
@@ -302,24 +296,34 @@ pub fn router(state: AppState) -> Router {
         .layer(axum::middleware::from_fn_with_state(
             state.clone(),
             ui::require_ui_auth,
-        ));
+        ))
+        .layer(http::compression());
 
     // Open to anonymous browsers: static content, the login form, SignalR
     // (which checks its own token).
     let open = Router::new()
         .route("/favicon.ico", axum::routing::get(ui::favicon))
-        .route("/ping", axum::routing::get(routes::system::ping))
+        .route(
+            "/ping",
+            axum::routing::get(routes::system::ping)
+                .layer(axum::middleware::map_response(http::with_json_charset)),
+        )
         .route("/Content/{*path}", axum::routing::get(ui::content))
         .route("/content/{*path}", axum::routing::get(ui::content))
         .route("/login", axum::routing::get(ui::login_page).post(ui::login))
         .route("/logout", axum::routing::get(ui::logout))
-        .merge(routes::ui_router(&state));
+        .layer(http::compression())
+        // SignalR's negotiation is not compressed, and not to be kept.
+        .merge(routes::ui_router(&state).layer(axum::middleware::map_response(http::no_cache)));
 
     // The calendar feed: opened with the API key, as the API is.
-    let feed = routes::feed_router(&state).route_layer(axum::middleware::from_fn_with_state(
-        state.clone(),
-        auth::require_api_key,
-    ));
+    let feed = routes::feed_router(&state)
+        .route_layer(axum::middleware::from_fn_with_state(state.clone(), http::finish))
+        .route_layer(axum::middleware::from_fn_with_state(
+            state.clone(),
+            auth::require_api_key,
+        ))
+        .route_layer(http::compression());
 
     let app = Router::new()
         .nest(state.personality().api_prefix(), api)
@@ -353,7 +357,11 @@ pub fn router(state: AppState) -> Router {
             state.clone(),
             put_resource_id,
         ))
-        .layer(axum::middleware::from_fn(lowercase_api_path))
+        .layer(axum::middleware::from_fn_with_state(state.clone(), http::methods))
+        .layer(axum::middleware::from_fn_with_state(
+            state.clone(),
+            normalize_path,
+        ))
         .layer(axum::middleware::from_fn_with_state(
             state.clone(),
             hosts::require_allowed_host,
