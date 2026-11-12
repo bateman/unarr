@@ -121,7 +121,7 @@ Decided here so the phase does not start with a rewrite:
   contact it: recorded answers under `tests/fixtures/metadata/api.radarr.video/`
   (and the TMDB image host for covers) serve both the oracle and Unarr.
 
-## Scope, in three milestones
+## Scope, in four milestones
 
 Each milestone lands on `main` on its own, squashed, with its status table in
 this document, as the Sonarr phases did. If a conversation grows long, the
@@ -201,41 +201,103 @@ Exit: on the fixture with the mocks, an `RssSync` and a `MoviesSearch` each
 end in a grab with the queue, history, SignalR and command shapes matching
 the oracle; the parser and decision vectors pass; Prowlarr's sync replays.
 
-### 4c. Library (the Sonarr phases 3a and 3b ground)
+### 4c. Import, rename, notify (the Sonarr phase 3a ground)
 
-1. **Import and rename**: completed download handling with Radarr's
-   `MovieImport/Specifications`, disk scan (`RescanMovie`,
-   `DownloadedMoviesScan`), media info, manual import, `rename?movieId=` and
-   `RenameFiles`/`RenameMovie`, naming with the movie tokens (`{Movie
-   Title}`, `{Release Year}`, `{Edition Tags}`, `{ImdbId}`, `{TmdbId}`, the
-   movie folder format) checked against the oracle, extra files, recycling
-   bin, `moviefile` deletes and editor.
-2. **Notifications**: Discord, webhook and Plex with the movie payloads and
-   the movie-section refresh; the others keep their settings as in Sonarr.
-3. **Metadata and movie management**: `api.radarr.video` client, `movie/lookup`
-   (term, `tmdb:`, `imdb:`), `POST movie` with `addOptions`, `PUT`, `DELETE`,
-   `movie/editor`, `movie/import`, `RefreshMovie` with covers, minimum
-   availability, collections (`RefreshCollections`, `PUT collection`),
-   import exclusions.
-4. **Settings writes** for everything 4a reads, with validation in the
-   originals' shape; Recyclarr's Radarr sync replayed against an exchange
-   recorded with the real Recyclarr and the real Radarr, as for Sonarr.
-5. **Import lists**: only the implementations the maintainer uses, asked at
-   the start; the rest keep their settings.
-6. **Backups**, log files, and the audit method of `docs/audit/` applied to
-   Radarr once (settings applied, HTTP behaviour outside the bodies, routes
-   declared, UI calls, events and commands), fixing the high and medium
-   findings before closing.
-7. **Measurements**: both personalities running, idle and after an RSS sync,
-   an import and a full refresh, on glibc and on the published musl image
-   (still unmeasured, `docs/DESIGN.md` section 17); the figures against
-   section 9's target for three personalities.
+The library milestone was cut in two after 4b landed, as phase 3 was: 4a
+and 4b together added 21 thousand lines, and the Sonarr phases this ground
+retraces added 35 thousand. One landing would have been as large as the
+two before it.
 
-Exit: a mock client's completed movie download ends as a named movie file
-with history, SignalR and notifications matching the oracle; the UI adds a
-movie and saves every settings page; Recyclarr syncs; the audit's high and
-medium findings are closed; and, on the homelab, Unarr replaces Radarr next
-to Sonarr for one movie from search to Plex.
+1. **Completed download handling**: from the `importPending` download
+   `movies::downloads` leaves with its import item resolved, through
+   Radarr's `MovieImport/Specifications` (ported with the original's
+   fixtures as tests), the transfer modes of `config/mediamanagement`, the
+   `MovieFile` row with media info from the ffprobe the pinned release ships,
+   the upgrade's delete into the recycling bin, removal from the client,
+   `DownloadFolderImported` and `MovieFileDeleted` history with Radarr's
+   `data`, the queue emptying.
+2. **Disk scan and the library's commands**: `RescanMovie` first (Bazarr
+   posts it and gets a 500 today), `DownloadedMoviesScan`, the scheduled
+   rescan, the skips the original applies, extra and subtitle files;
+   `RefreshMovie` accepted and completing without effect until 4d, as
+   `RefreshSeries` was in phase 2; `Housekeeping`, `Backup` and the other
+   listed tasks no longer answering 500.
+3. **Rename**: `GET rename?movieId=`, `RenameFiles`, `RenameMovie` and the
+   movie folder, on `movies::naming` (already a port of Radarr's
+   `FileNameBuilder`, compared with the original on 444 formats); any
+   difference the oracle shows is fixed in the port.
+4. **Manual import and movie files**: `GET` and `POST manualimport`,
+   `moviefile` delete, bulk and editor.
+5. **Notifications**: CRUD, `test` and `testall` for Radarr's providers and
+   the events (grab, download, upgrade, rename, movie file delete, health,
+   manual interaction) to Discord, the webhook and Plex with the movie
+   payloads and the movie-section refresh, recorded by the mock targets from
+   the real Radarr. The fixture has exactly these three; the other
+   implementations keep their settings, as in Sonarr.
+6. **Health** of the import (root folders, remote path mappings, completed
+   download handling, mounts) with Radarr's messages and links; `DELETE
+   blocklist` and its bulk form.
+7. **Memory**. Section 9's target does not hold since 4b: 74 MB at rest with
+   both personalities once Radarr has searched, 21 MB of it the movie
+   parser's compiled patterns. Before adding more, find what brings it back
+   (patterns the two parsers have in common compiled once, compilation on
+   first use per pattern rather than per parser, the engine's cache limits,
+   a leaner matcher for the patterns that need no look-around) and either
+   meet 60 MB or put the measured floor to the maintainer as the new target.
+   Measure the published musl image as well: it has never been measured.
+8. **A look at the screen.** The queue, the interactive search and the
+   command messages of 4b were verified by goldens and hub assertions only;
+   drive them, and this milestone's pages (Activity, movie page, Manual
+   Import, rename preview), in a browser against the release binary.
+
+Exit: on the fixture with the mock SABnzbd and qBittorrent completing
+items, the movie files appear under the root folder named by the fixture's
+naming settings, with media info, history, SignalR messages and the three
+notifications equal to the oracle; `scripts/bazarr-replay.py --app radarr`
+passes with `RescanMovie` answered; the pages render; the memory point is
+settled one way or the other; the Sonarr goldens are untouched.
+
+### 4d. Metadata, movie management, settings writes (the Sonarr phase 3b ground)
+
+1. **Metadata and movie management**: `api.radarr.video` client behind the
+   movie-shaped trait (recorded answers under
+   `tests/fixtures/metadata/api.radarr.video/`, Radarr's user agent in one
+   constant, per `docs/DESIGN.md` section 7), `movie/lookup` (term, `tmdb:`,
+   `imdb:`), `POST movie` with `addOptions`, `PUT` with the folder move,
+   `DELETE`, `movie/editor`, `movie/import`, `RefreshMovie` made real with
+   covers, minimum availability, collections (`RefreshCollections`, `PUT
+   collection`), import exclusions.
+2. **Settings writes** for everything 4a reads (every `config/*`, tags, root
+   folders, quality profiles and definitions, custom formats, delay and
+   release profiles, remote path mappings, custom filters, auto tagging),
+   with validation in the originals' shape, on the Sonarr handlers where
+   the resource is the same.
+3. **Recyclarr**: the exchange between the real Recyclarr and the real
+   Radarr recorded from the maintainer's configuration
+   (`tests/fixtures/recyclarr/radarr.yml`, already in the tree) and replayed
+   against Unarr; `delete_old_custom_formats` must leave alone the formats
+   Recyclarr did not create (`docs/DESIGN.md` section 17).
+4. **Import list**: the IMDb watchlist (`IMDbListImport`), the one the
+   maintainer uses, against a mock; the rest keep their settings.
+5. **Backups** and log files for Radarr; the audit method of `docs/audit/`
+   applied to Radarr (settings applied, routes declared, UI calls, events
+   and commands; the HTTP audit already runs against both, `make
+   http-audit`), fixing the high and medium findings before closing.
+6. **Measurements**: both personalities, idle and after an RSS sync, an
+   import and a full refresh, a library scaled to 2,000 movies beside the
+   950-series one, on glibc and on the image.
+7. **The review's open suggestion** (`docs/DESIGN.md` section 17): share
+   between the two pipelines the pieces that carry no media notion (the
+   refresh loop over the clients, what a grab's failure means, the release
+   comparisons, the push validation). Take it up here if the two sides are
+   by then visibly the same code, in commits of their own with both replays
+   green before and after; otherwise say why not.
+
+Exit: the UI adds a movie and saves every settings page; the watchlist sync
+adds movies against the mock; Recyclarr's exchange replays; the audit's
+high and medium findings are closed; and, on the homelab, Unarr replaces
+Radarr next to Sonarr in one container for one movie from search to Plex
+(`docs/homelab-compose.md` gains the Radarr service block).
 
 ## Out of scope
 
@@ -257,6 +319,11 @@ half to two thirds of its TV counterpart. Expect 25 to 30 thousand lines and
 about 500 new goldens: the size of phase 2, in three milestones of roughly
 a quarter, a third and the rest.
 
+Revised after 4b: 4a and 4b came to 21 thousand lines and 312 goldens
+between them. The Sonarr ground still to retrace (phases 3a and 3b) was 35
+thousand lines; at half to two thirds, 4c and 4d are 9 to 11 thousand lines
+each, so the phase ends near 40 thousand, a third above phase 2.
+
 ## Verification strategy
 
 As every Sonarr phase: record from the real Radarr before implementing a
@@ -269,7 +336,7 @@ credentials; no Docker in the cloud session. Added by experience:
   settings that must take effect, routes the UI calls rarely) are checked by
   the audit method, not by goldens. Do it once per milestone for what the
   milestone added, rather than once at the end.
-- The homelab run is part of 4c's exit; `docs/homelab-compose.md` gains the
+- The homelab run is part of 4d's exit; `docs/homelab-compose.md` gains the
   Radarr service block and what changes when one container serves both.
 
 ## Conventions
@@ -278,7 +345,8 @@ credentials; no Docker in the cloud session. Added by experience:
 `unarr` in identifiers and Unarr in prose; commits with an imperative
 subject and a body that says why, no model identifiers; one branch per
 milestone, named as `CLAUDE.md` asks (`radarr/phase-4a-readonly`,
-`radarr/phase-4b-acquisition`, `radarr/phase-4c-library`), squashed into
+`radarr/phase-4b-acquisition`, `radarr/phase-4c-import-rename-notify`,
+`radarr/phase-4d-library`), squashed into
 `main`; before integrating, check
 that the branch history holds no homelab data that is not anonymised;
 `docs/DESIGN.md` kept current (a decisions section per milestone, the open

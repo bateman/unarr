@@ -266,7 +266,7 @@ case.
      `docs/phase-3b-library.md`.
    Sizing from phase 2's 32k lines: 3a about two thirds of it, 3b about half,
    together about equal to phase 2.
-4. **Radarr** as a second personality on the existing core, in three
+4. **Radarr** as a second personality on the existing core, in
    milestones that retrace the Sonarr phases: 4a read-only (importer, read
    endpoints, the Radarr UI, both personalities in one process), 4b
    acquisition (movie parser, `t=movie` searches, decision engine, grab,
@@ -283,6 +283,16 @@ case.
    against Unarr on 7878 while Sonarr answers on 8989 in the same process;
    `scripts/bazarr-replay.py --app radarr` confirms the fields Bazarr
    reads. Section 15 records the decisions.
+   *4b done, November 2026, against mocks*: an `RssSync` and a
+   `MoviesSearch` each end in a grab with the queue, history and commands
+   equal to the oracle; 312 Radarr goldens, 1,076 parser cases and the
+   decision vectors pass; Prowlarr's Radarr sync replays. The memory target
+   does not hold with both personalities (74 MB at rest, section 9).
+   Section 16 records the decisions.
+   The library milestone was then cut in two, as phase 3 was: **4c** import,
+   rename and notifications, with the memory point to settle; **4d**
+   `api.radarr.video`, movie management, settings writes, Recyclarr, the
+   IMDb watchlist, the audit and the homelab run.
 5. **Lidarr** last: MusicBrainz, per-track matching, Chromaprint fingerprints.
    Expected at phase 2's size or above; the most divergent personality.
 
