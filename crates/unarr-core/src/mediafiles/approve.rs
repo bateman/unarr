@@ -256,7 +256,8 @@ pub fn change_file_date(
         return false;
     };
     let target: Option<DateTime<Utc>> = match config.file_date {
-        FileDateType::None => None,
+        // The movie dates are Radarr's values of the setting.
+        FileDateType::None | FileDateType::Cinemas | FileDateType::Release => None,
         FileDateType::UtcAirDate => first.air_date_utc,
         FileDateType::LocalAirDate => {
             let (Some(date), Some(time)) = (
@@ -288,7 +289,10 @@ pub fn change_file_date(
     if current.is_some_and(|c| c.timestamp() == target.timestamp()) {
         return false;
     }
-    transfer::set_last_write_time(Path::new(path), target);
+    if let Err(e) = transfer::try_set_last_write_time(Path::new(path), target) {
+        tracing::warn!(error = %e, "Unable to set date of file [{path}]");
+        return false;
+    }
     tracing::debug!("Date of file [{path}] changed to '{target}'");
     true
 }

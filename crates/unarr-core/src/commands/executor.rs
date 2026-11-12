@@ -1248,6 +1248,7 @@ impl Runtime {
                 if let Ok(events) = &events {
                     crate::movies::import::extras::handle_scanned(&db, &movie, &events.0, now);
                     scan::backfill_media_info(&db, &env2, &movie, &events.0);
+                    crate::movies::import::filedate::handle_scanned(&db, &env2.config, &movie, &events.0);
                 }
                 (messages, events)
             })

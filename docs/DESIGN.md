@@ -1626,10 +1626,21 @@ the same libraries were not measured.
   RSS interval, so a sync finds the patterns gone and pays the
   compilation, under a second, once per sync.
 - **What is stored and not applied, or not sent**, each because nothing
-  on the fixture exercises it: the file date setting, the 3D token beyond
-  the stream's view count, the notifications for a movie added, movies
+  on the fixture exercises it: the notifications for a movie added, movies
   deleted and an application update, the ping to plex.tv before a library
-  update.
+  update. The file date setting and the 3D token were on this list when
+  the milestone closed and were done right after. The file date is
+  compared as the original compares it, the UTC day the file was written
+  against the wanted date, so a file already dated is left alone at the
+  next scan, and one whose date cannot be set (a share the process does
+  not own) is warned about and not counted as changed; a
+  hardlinked file shares its date with the download it came from, in the
+  original too. The view count is the probe's to write (two when the
+  video stream carries a `stereo_mode` tag), for both personalities,
+  though only the movie names read it. A 3D file probed before this
+  change keeps no view count until it is probed again: the schema
+  revision was not raised for it, which would have sent every file the
+  originals probed back to the probe.
 - **The maintainer's Radarr logs were used as facts only.** They are not
   anonymised and are not in the tree, in any commit of the branch: they
   confirmed the transfer modes in use, the absence of a recycling bin,
@@ -1724,8 +1735,8 @@ the same libraries were not measured.
   by the maintainer's decision it is a recorded miss, deferred with the
   others (section 9). The eviction
   interval (five minutes) is a constant, not a setting. Nothing was
-  scaled. The file date setting, the 3D token and the three notifications
-  listed in section 17 are open, as is the place of the metadata
+  scaled. The three notifications listed in section 17 are open, as is the
+  place of the metadata
   consumers among the extras, inferred from the source. The image was not
   built, so its figure is the static musl binary's. `RefreshMovie`
   does nothing. The homelab run for Radarr is left to the end of 4d.

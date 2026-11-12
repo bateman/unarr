@@ -564,10 +564,16 @@ What 4c delivered against its eight points:
 
 What does not hold, or was not verified:
 
-- **Radarr's file date setting** (the file's date set to the cinema or
-  release date) is stored and not applied.
-- **`{MediaInfo 3D}`** reads the stream's view count only; the fixture has
-  no 3D file.
+- **Radarr's file date setting** was stored and not applied when the
+  milestone closed. It is applied since: on import, on rename and after a
+  scan, as `UpdateMovieFileService` does. Tried on the original with the
+  setting on "cinemas": Candyman's imported file is dated 16 October 1992
+  by both.
+- **`{MediaInfo 3D}`** was always empty for a file Unarr probed: the
+  probe did not write the view count the token reads. It now writes two
+  for a video stream with a `stereo_mode` tag, as the original's reader
+  does. Tried with a clip made for it, through the system's ffprobe and
+  the one Radarr ships; no 3D file went through the original.
 - **Notifications not wired**: movie added, movies deleted, application
   update. The metadata they would carry belongs to 4d. Plex is refreshed
   directly; plex.tv is not pinged first, as on the Sonarr side.

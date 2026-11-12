@@ -180,6 +180,10 @@ pub enum FileDateType {
     None,
     LocalAirDate,
     UtcAirDate,
+    /// Radarr's `Cinemas`.
+    Cinemas,
+    /// Radarr's `Release`.
+    Release,
 }
 
 /// `RescanAfterRefreshType`.
@@ -270,6 +274,8 @@ impl MediaManagementConfig {
             {
                 Some("localairdate") => FileDateType::LocalAirDate,
                 Some("utcairdate") => FileDateType::UtcAirDate,
+                Some("cinemas") => FileDateType::Cinemas,
+                Some("release") => FileDateType::Release,
                 _ => FileDateType::None,
             },
             rescan_after_refresh: match text("RescanAfterRefresh")?

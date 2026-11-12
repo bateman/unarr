@@ -486,6 +486,10 @@ fn probe_inner(file: &Path) -> anyhow::Result<MediaInfo> {
     );
     put("videoProfile", opt(video.and_then(|v| str_of(v, "profile"))));
     put("videoBitrate", json!(video.map(bit_rate).unwrap_or(0)));
+    put(
+        "videoMultiViewCount",
+        json!(video.map(multi_view_count).unwrap_or(1)),
+    );
     put("videoBitDepth", json!(bit_depth));
     put("videoColourPrimaries", opt(colour_primaries));
     put("videoTransferCharacteristics", opt(transfer));
@@ -559,6 +563,20 @@ fn probe_inner(file: &Path) -> anyhow::Result<MediaInfo> {
     })
 }
 
+/// `VideoMultiViewCount`: two for a stream that carries a `stereo_mode`
+/// tag (what Matroska calls a 3D layout), one otherwise. The originals'
+/// probe library reads tag names without regard to case.
+fn multi_view_count(stream: &Value) -> i64 {
+    let stereo = stream["tags"]
+        .as_object()
+        .is_some_and(|tags| tags.keys().any(|k| k.eq_ignore_ascii_case("stereo_mode")));
+    if stereo {
+        2
+    } else {
+        1
+    }
+}
+
 fn opt(s: Option<&str>) -> Value {
     match s {
         Some(s) => Value::from(s),
@@ -590,6 +608,20 @@ mod tests {
         assert_eq!(parse_timespan_seconds("1.01:01:01.5000000"), 90061.5);
         assert_eq!(parse_timespan_seconds("0:10:10.128000"), 610.128);
         assert_eq!(parse_duration_text("12.5"), 12.5);
+    }
+
+    #[test]
+    fn a_stereo_mode_tag_makes_two_views() {
+        assert_eq!(multi_view_count(&json!({"codec_name": "h264"})), 1);
+        assert_eq!(multi_view_count(&json!({"tags": {"language": "eng"}})), 1);
+        assert_eq!(
+            multi_view_count(&json!({"tags": {"stereo_mode": "left_right"}})),
+            2
+        );
+        assert_eq!(
+            multi_view_count(&json!({"tags": {"STEREO_MODE": "top_bottom"}})),
+            2
+        );
     }
 
     #[test]

@@ -163,9 +163,8 @@ fn ensure_movie_folder(
 }
 
 /// `TransferFile` of `MovieFileMovingService`: the file to its place in
-/// the library, the relative path set, the folder's date and the
-/// permissions applied. The file dates Radarr can set (the cinema or the
-/// release date) are not: the setting is read as "none".
+/// the library, the relative path set, the file's date as the setting
+/// asks, the folder's date and the permissions applied.
 fn transfer_into_library(
     env: &MovieEnvironment,
     movie: &Movie,
@@ -184,6 +183,7 @@ fn transfer_into_library(
     }
     file.relative_path = relative_path(&movie.path, destination).to_string();
     transfer::transfer_file(Path::new(source), Path::new(destination), mode)?;
+    super::filedate::change_file_date(&env.config, destination, movie);
     transfer::set_last_write_time(Path::new(&movie.path), file.date_added);
     transfer::set_permissions(&env.config, Path::new(destination));
     Ok(())

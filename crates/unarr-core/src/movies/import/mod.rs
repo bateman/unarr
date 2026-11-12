@@ -20,6 +20,7 @@ pub mod deletion;
 pub mod downloaded;
 pub mod events;
 pub mod extras;
+pub mod filedate;
 pub mod local;
 pub mod manual;
 pub mod rename;
