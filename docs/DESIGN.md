@@ -209,6 +209,13 @@ nothing else in the code may depend on which one is in use. Towards every
 other upstream (indexers, download clients, notification targets) Unarr
 already uses its own user agent and keeps doing so.
 
+**On hold, 12 November 2026.** The maintainer keeps the originals' user
+agents towards the Servarr proxies until he says otherwise: the exit
+condition above no longer fires by itself when a phase closes. No milestone,
+review or work order schedules the switch or the conversation with the
+Servarr team; they happen when the maintainer asks for them, for all
+personalities at once.
+
 Keys, where a provider needs one, are the user's or Unarr's own in every
 case.
 
@@ -1721,9 +1728,10 @@ the same libraries were not measured.
 ## 18. Open questions
 
 - Metadata provider: decided (section 7, option A) and implemented behind
-  a trait. Open is the switch to Unarr's own user agent towards the Servarr
-  proxies, due now that phase 3b's exit criteria are met, and the
-  conversation with the Servarr team that goes with it.
+  a trait. The switch to Unarr's own user agent towards the Servarr
+  proxies, and the conversation with the Servarr team that goes with it,
+  are on hold until the maintainer asks for them (section 7); not a task
+  to propose.
 - One HTTP client served the process until phase 4a; each personality now
   has its own clients and outgoing settings (section 15). What is left of
   it: the series side still reaches for the process-wide clients rather
@@ -1755,7 +1763,10 @@ the same libraries were not measured.
   with the same time left, and of the calendar among movies equal on all
   three dates, is not the original's to reproduce (a hash table) or was
   not probed (the fixture has no such movies). The server-wide header
-  differences the live audit measured are open, for both personalities.
+  differences the live audit measured were brought into line afterwards
+  (section 16, and `docs/audit/2-http.md`, "Live run, and what was
+  changed"); what that table leaves is Brotli, `HEAD` on pages, the cache
+  lifetime of static files and of `/ping`.
   Three things found on the way concern Sonarr and were left to tasks of
   their own: the same look-behind defect in its release group pattern
   (fixed on `main` while this milestone was under way), the fixture
