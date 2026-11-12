@@ -1802,13 +1802,16 @@ the same libraries were not measured.
   and probed again there, which is harmless. What the three revisions in
   between changed in the model was not compared.
 - SignalR. Radarr's hub is recorded from the original and compared
-  (section 17); Sonarr's is not, and what the Radarr recording corrected
-  is likely wrong there too: an episode grabbed is not announced, the
-  tasks are not told to sync after a command, the health is announced
-  only when a verdict changes. They were left as they are until Sonarr's
-  hub is recorded the same way, which means recording its whole list
-  again. `series` and `episode` messages follow the refresh, the adds and
-  the edits since 3b. The UI's pages were driven in a browser; no client
+  (section 17). Sonarr's is recorded for a list of its own
+  (`tests/fixtures/sonarr/golden-hub`, with `GOLDEN_SIGNALR=1`), not for
+  the long one: the tags, the root folders, the quality definitions and
+  the tasks after a command follow that recording and are compared with
+  it. What the Radarr recording corrected and is still as it was for
+  Sonarr: an episode grabbed is not announced, the health is announced
+  only when a verdict changes (the recording shows it after every run).
+  A change to either starts from a step added to that list and recorded,
+  which no longer means recording the long list again. `series` and
+  `episode` messages follow the refresh, the adds and the edits since 3b. The UI's pages were driven in a browser; no client
   other than the UI listens.
 - The collation approximates ICU for ASCII names. Titles with accented or
   non-Latin characters may sort differently from the originals; a full UCA

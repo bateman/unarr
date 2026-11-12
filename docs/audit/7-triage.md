@@ -9,19 +9,25 @@ than present or same, read against `main` at `0a61101`, Sonarr personality
 and the layer both personalities share. Report 5 (the UI in a browser) had
 no finding.
 
+Updated the same day, after fifteen of the open and partial rows were
+settled (items 1, 2, 4, 5, 7 and 11 of the list below; fourteen closed,
+one a decision to differ): the rows say so with the code, and the golden
+or the test, that settled them, and the counts are the new ones. Each was recorded from Sonarr 4.0.20, or
+tried on it, first; "What was closed afterwards" says how.
+
 ## Result
 
 | Report | Rows | Closed | Open | Partial | Deliberate | Not applicable |
 |--------|------|--------|------|---------|------------|----------------|
 | 1. Settings | 18 | 11 | 4 | 1 | 0 | 2 |
-| 2. HTTP | 58 | 19 | 30 | 6 | 2 | 1 |
-| 3 and 4. Routes and UI calls | 78 | 30 | 34 | 3 | 2 | 9 |
-| 6. Events, commands, housekeeping | 39 | 23 | 10 | 3 | 2 | 1 |
-| Together | 193 | 83 | 78 | 13 | 6 | 13 |
+| 2. HTTP | 58 | 21 | 27 | 6 | 3 | 1 |
+| 3 and 4. Routes and UI calls | 78 | 36 | 29 | 2 | 2 | 9 |
+| 6. Events, commands, housekeeping | 39 | 29 | 6 | 1 | 2 | 1 |
+| Together | 193 | 97 | 66 | 10 | 7 | 13 |
 
-Some gaps are counted in two reports (the manifest, the SignalR transports
-and four SignalR messages, the file dates), so the distinct open items are
-about eighty. States: **closed**, does what the report says the original
+Before the update: 83 closed, 78 open, 13 partial, 6 deliberate. Some gaps
+are counted in two reports (the SignalR transports, the file dates), so the
+distinct open items are about seventy. States: **closed**, does what the report says the original
 does; **open**; **partial**; **deliberate**, a recorded decision to differ;
 **not applicable**, nothing to port.
 
@@ -41,25 +47,26 @@ not in the tree, so what the original does is taken from the reports.
 
 Would show in ordinary use:
 
-1. **Health checks are not re-run after a save** (`6-events.md`, `CheckOn`):
-   a warning about a root folder, a remote path mapping, the proxy or an
-   import list outlives its fix, or stays hidden, until the six-hourly check.
-   Small.
-2. **The web app manifest is served with its placeholders** (4.5): a phone
-   that adds the UI to its home screen shows `__INSTANCE_NAME__` and broken
-   icons. Trivial.
+1. ~~Health checks are not re-run after a save~~ (`6-events.md`,
+   `CheckOn`). Closed.
+2. ~~The web app manifest is served with its placeholders~~ (4.5, 4.6).
+   Closed.
 3. **Open pages do not repaint on a grab**: SignalR `calendar`,
    `wanted/missing`, `wanted/cutoff`, and `episode` with `grabbed=true`.
    Small in code; `docs/DESIGN.md` section 18 ties any change to Sonarr's
-   hub to recording it from the original first, which re-records the list.
-4. **The blocklist's Protocol filter shows every row** (`protocols=` is not
-   read). Small.
-5. **A queue item imported by a rescan or a drop-folder scan lingers** up to
-   a minute. Trivial.
+   hub to recording it from the original first. That no longer means
+   recording the long list again: `tests/fixtures/sonarr/golden-hub` is a
+   list of its own with the hub listened to, and a grab added to it
+   records these. The same recording shows two more the hub sends and
+   Unarr does not: `health` after every run of the checks, and `command`
+   sync after a `MessagingCleanup`.
+4. ~~The blocklist's Protocol filter shows every row~~. Closed.
+5. ~~A queue item imported by a rescan or a drop-folder scan lingers~~.
+   Closed.
 6. **Static files are fetched again on each page load** (4.9 with 4.3): the
    links carry no hash, so only the hashed bundles are cached. Small.
-7. **Lists in a second tab are stale**: SignalR `tag`, `rootfolder`,
-   `qualitydefinition`, `system/task`. Trivial each.
+7. ~~Lists in a second tab are stale~~: SignalR `tag`, `rootfolder`,
+   `qualitydefinition`, `system/task`. Closed.
 
 Would show in a particular set-up:
 
@@ -71,8 +78,8 @@ Would show in a particular set-up:
    every request is refused. Small.
 10. **A proxy that does not pass WebSocket upgrades** (2.11): no live
     updates. Larger.
-11. **A body over 2 MiB** (1.29): 413 on a large library import or manual
-    import. Trivial.
+11. ~~A body over 2 MiB~~ (1.29). Closed: the limit is 64 MiB, a decision
+    to differ from the original, which has none.
 12. **Log-based intrusion detection** (1.8): no line for a failed or
     successful login. Small.
 13. **Change File Date switched on** (`FileDate`): nothing after a series
@@ -107,6 +114,48 @@ The maintainer's installation, by the fixtures: no URL base, no script
 import, Change File Date off, English UI, Traefik in front (which passes
 `Host` and WebSockets). Items 8 to 10 and 13 to 15 do not touch it.
 
+## What was closed afterwards
+
+Each on the original first. `<golden>` is
+`tests/fixtures/sonarr/golden`, `<hub>` is
+`tests/fixtures/sonarr/golden-hub`, a second request list recorded with the
+hub listened to (`GOLDEN_SIGNALR=1` with `make golden`, its header says
+how), which the long list did not have to be recorded again for.
+
+- **Health checks after a save.** The sets are the `CheckOn` attributes of
+  Sonarr 4.0.20's checks, read from `Sonarr.Core.dll`, and its trace log
+  shows the same checks starting five seconds after each save: every
+  settings page but the naming runs `ImportMechanismCheck` and
+  `ProxyCheck`, the host page included; a root folder added runs the three
+  download client checks of folders and `ImportListRootFolderCheck`, not
+  `RootFolderCheck`, which follows a series deleted or moved; a mapping
+  added or changed runs the same three and `RemotePathMappingCheck`.
+  Against the row: a root folder or a mapping removed runs nothing in the
+  original, which deletes them by id without an event, and neither does
+  Unarr. Not a golden, the health dictionary being what it is: tests.
+- **The manifest and the tile description.** Two goldens, and the same
+  tried on Radarr 6.4.4 and under a URL base with another instance name.
+- **The blocklist's Protocol filter.** Eight goldens: names in any case or
+  numbers, repeated; what the framework cannot bind is a 400 naming it.
+- **The refresh after a scan imports.** `<hub>`: five seconds after a
+  `RescanSeries` and after a `DownloadedEpisodesScan` that imported, the
+  original's command list shows a `RefreshMonitoredDownloads` nobody
+  scheduled.
+- **The lists of a second tab.** `<hub>/signalr.json`. Against the rows:
+  the original sends `tag` sync and no resource; `rootfolder` only when
+  one is added; `qualitydefinition` only after the reset, not after a
+  save of the definitions.
+- **The body limit.** Sonarr answered 202 to a `PUT` of 120 MiB. Unarr
+  takes 64 MiB once the key is good, the ceiling it already had on what it
+  reads from indexers and clients; no limit at all would let one request
+  end the process every personality runs in.
+
+Found on the way and left, with no row of their own: with a proxy whose
+name does not resolve the original's `ProxyCheck` throws and the whole run
+ends without a verdict, where Unarr reports "Failed to resolve the IP
+Address"; a check that throws (`UpdateCheck` without a network, for one)
+silently ends the original's run with it.
+
 ## Documentation the triage found stale
 
 - `docs/DESIGN.md` section 14 said `X-Forwarded-Proto` and
@@ -119,7 +168,7 @@ import, Change File Date off, English UI, Traefik in front (which passes
 
 ## The server outside the API bodies (`2-http.md`)
 
-58 rows were DIFFERENT, MISSING or UNSURE: 19 closed, 30 open, 6 partial, 2
+58 rows were DIFFERENT, MISSING or UNSURE: 21 closed, 27 open, 6 partial, 3
 deliberate, 1 not applicable. Read, and where reading did not settle it tried
 on a debug build of `unarrd` on the Sonarr fixture ("live"). The original's
 side of rows 1.6, 1.11, 1.15, 1.18, 1.30, 1.34, 2.12, 4.11 and 4.20 was never
@@ -150,7 +199,7 @@ is `crates/unarr-api/src/`.
 | 1.24 | `/api`, `/api/v1/…`, other paths that are not v3 | medium | PARTIAL | `GET /api` answers; live: `/api/v1/foo` and `/api/foo` reach the page fallback, a 302 to the login under Forms, key or not | a client that probes versions or mistypes a path gets a redirect, not 401 or 404 |
 | 1.25 | unknown v3 route without a key: 401 | low | CLOSED | `api/lib.rs:269`; test | |
 | 1.27 | `If-Modified-Since` | low | NOT APPLICABLE | the original's never fires | |
-| 1.29 | request body limit | medium | OPEN | 2 MiB (`api/lib.rs:217`); only the backup upload is raised; live: 413 on a 3 MiB body | a library import or a manual import with a body over 2 MiB |
+| 1.29 | request body limit | medium | DELIBERATE | 64 MiB once the key is good (`api/lib.rs:231`, `:285`), where the original has none (202 to a `PUT` of 120 MiB); the login form keeps 2 MiB; test `tests/http.rs:427` | a body over 64 MiB: 413 |
 | 1.30 | 406 for an `Accept` without JSON | low | OPEN | live: 200 JSON | nobody |
 | 1.31 | `application/json; charset=utf-8` | low | CLOSED | `api/http.rs:89` | |
 | 1.32 | `HEAD` | low | PARTIAL | API and feed 405, `/ping` 200 (`api/http.rs:63`); pages and static files still answer | nobody |
@@ -176,8 +225,8 @@ is `crates/unarr-api/src/`.
 | 3.16 | IPv6 site-local counts as local | low | CLOSED | `core/outbound.rs:208`; test | |
 | 3.17 | `/favicon.ico` behind the login | low | OPEN | anonymous (`api/lib.rs:325`) | nobody |
 | 4.3 | `?h=` cache breaker on asset links | low | OPEN | `api/ui.rs:92` adds the base only | stands in the way of 4.9 |
-| 4.5 | `manifest.json` placeholders | medium | OPEN | served as is (`api/ui.rs:156`); live: `__INSTANCE_NAME__`, `__URL_BASE__` | a browser installing the UI as an app: wrong name, broken icons and start address |
-| 4.6 | `browserconfig.xml` placeholder | low | OPEN | same handler | legacy Windows tile |
+| 4.5 | `manifest.json` placeholders | medium | CLOSED | `api/ui.rs:177`; golden `noauth-content-manifest`; test `tests/http.rs:379`, both personalities | its cache lifetime is row 4.9 |
+| 4.6 | `browserconfig.xml` placeholder | low | CLOSED | same handler; golden `noauth-content-browserconfig`; same test | |
 | 4.7 | `/robots.txt` | low | OPEN | no route; `/Content/robots.txt` is served | crawlers, on an instance exposed without a login |
 | 4.9 | cache headers on static files | low | OPEN | `api/ui.rs:63`: hashed bundles one year, the rest `no-cache`. `/ping` uncached is deliberate | fonts, icons and styles are fetched again on each page load |
 | 4.10 | cache headers on HTML | low | CLOSED | `api/ui.rs:116` | |
@@ -191,7 +240,8 @@ is `crates/unarr-api/src/`.
 What the triage found against the report and the README:
 
 - Seven medium rows of this report were never in the README's numbered
-  list and are open or partial: 1.3, 1.8, 1.10, 1.24, 1.29, 2.11, 4.5.
+  list and were open or partial: 1.3, 1.8, 1.10, 1.24, 1.29, 2.11, 4.5
+  (1.29 and 4.5 since closed).
 - Row 1.35 was unsure and is a real difference: a URL base saved from the
   UI is half applied until the restart.
 - Row 1.13 understates: the release profile aborts on a panic, so the
@@ -202,7 +252,7 @@ What the triage found against the report and the README:
 
 ## Routes and UI calls (`3-4-routes.md`)
 
-78 rows were MISSING, PARTIAL, IGNORED or UNSURE: 30 closed, 34 open, 3
+78 rows were MISSING, PARTIAL, IGNORED or UNSURE: 36 closed, 29 open, 2
 partial, 2 deliberate, 9 not applicable. Static: nothing was run. `mod.rs`
 is `crates/unarr-api/src/routes/mod.rs` (Sonarr's list is
 `sonarr_api_router`); the other files are under `crates/unarr-api/src/` and
@@ -248,16 +298,17 @@ declared, 404 and 405 are what the router gives by construction.
 | B | `GET /delayprofile/schema` | NOT APPLICABLE | dead UI code; the original has no such route | nobody |
 | B | the iCal link's parameters | CLOSED | `feed.rs:159` reads `unmonitored`, `premieresOnly`, `asAllDay`, `tags`, `pastDays`, `futureDays` | UI, calendar apps |
 | B | SignalR `calendar`, `wanted/missing`, `wanted/cutoff` updated | OPEN (3) | `relay.rs` sends `episodefile`, `episode`, `series` only | UI: the open page does not repaint on a grab |
-| B | SignalR `tag` sync | OPEN | no hub call in the tag writes | UI: a tag made elsewhere shows after a reload |
-| B | SignalR `rootfolder`, `qualitydefinition` | OPEN (2) | no hub call in those writes | UI: a second tab is stale |
-| B | SignalR `system/task`, `command` sync | OPEN (2) | the relay exists (`state.rs:302`) but the event is emitted for Radarr only (`core/commands/executor.rs:737`); `state.rs:293` sends `updated` only | nothing visible |
+| B | SignalR `tag` sync | CLOSED | `settings_writes.rs:1073`, after a tag or an auto tagging rule is added, changed or removed; `golden-hub/signalr.json`, test `tests/contract.rs:1616` | UI, second tab |
+| B | SignalR `rootfolder`, `qualitydefinition` | CLOSED (2) | `settings_writes.rs:1237` (`created`; the original sends nothing for a removal), `state.rs:302` (`sync` after `ResetQualityDefinitions`; the original sends nothing after a save); same recording and test | UI, second tab |
+| B | SignalR `system/task` sync | CLOSED | `core/commands/executor.rs:760`, `state.rs:302`: after every command, for Sonarr as for Radarr; same recording and test | UI, System > Tasks |
+| B | SignalR `command` sync | OPEN | `state.rs:293` sends `updated` only; the recording shows `sync` after `MessagingCleanup` | nothing visible |
 | B | SignalR `metadata` updated | CLOSED | `providers.rs:408` | UI, second tab |
 | B | commands `ClearLog`, `DeleteLogFiles`, `ResetQualityDefinitions`, `ResetApiKey` | CLOSED (4) | `core/commands/mod.rs:712-718`, `executor.rs:911-934`, `state.rs:535-553`; goldens for the first three, none for `ResetApiKey` | UI buttons |
 | B | `GET /config/naming/examples` with the pending form | CLOSED | `settings.rs:155`; goldens `config-naming-examples-form`, `-invalid`, `-no-id` | UI, naming examples while typing |
-| B | `GET /blocklist?protocols=` | OPEN | `activity.rs:381` reads `seriesIds` only | UI: a custom filter on Protocol shows every row |
+| B | `GET /blocklist?protocols=` | CLOSED | `activity.rs:385`, `core/store/history.rs:237`; goldens `blocklist-protocol-*` (8) | UI, custom filter on Protocol |
 | B | `PUT /series/{id}?moveFolder=true` | NOT APPLICABLE | parity: the original reads `moveFiles`, and so does `series_writes.rs:375` | nothing |
 | B | SignalR transport fallback | PARTIAL | the Table A row | as above |
-| B | `/Content/manifest.json`, `/Content/browserconfig.xml` | PARTIAL | served raw (`lib.rs:331`, `ui.rs:156`): `__INSTANCE_NAME__` and `__URL_BASE__` are replaced in `index.html` and `login.html` only | a browser installing the UI as an app shows the placeholder name and broken icon addresses, with or without a URL base |
+| B | `/Content/manifest.json`, `/Content/browserconfig.xml` | CLOSED | `ui.rs:177`; goldens `noauth-content-manifest`, `noauth-content-browserconfig`; test `tests/http.rs:379` | a browser installing the UI as an app |
 | B | `GET /oauth.html` | CLOSED | in the embedded bundle, served by the page fallback (`lib.rs:313`) behind the login | UI: the OAuth pop-up of an import list |
 
 What the triage found against the report and the README:
@@ -273,7 +324,7 @@ What the triage found against the report and the README:
 
 ## Events, commands, housekeeping (`6-events.md`)
 
-39 rows were MISSING, PARTIAL or UNSURE: 23 closed, 10 open, 3 partial, 2
+39 rows were MISSING, PARTIAL or UNSURE: 29 closed, 6 open, 1 partial, 2
 deliberate, 1 not applicable. Static. `core/` is `crates/unarr-core/src/`,
 `api/` is `crates/unarr-api/src/`, `import/` is `crates/unarr-import/src/`.
 The line numbers inside the report itself are stale; these are current.
@@ -283,16 +334,16 @@ The line numbers inside the report itself are stale; these are current.
 | (a) start: quality definitions | missing ones not inserted | medium | CLOSED | `core/defaults.rs:30`, called at every start (`unarrd/src/main.rs:476`) | |
 | (a) start: default profiles | none on a blank start | medium | CLOSED | `core/defaults.rs:137`, `:184` | |
 | (a) start: legacy user | `config.xml` user and password moved into Users | low | OPEN | `import/config_xml.rs:52` parses neither element; no start-up step | only a `config.xml` never started on Sonarr v3 or later: the login would have no user |
-| (a) tags, auto tags changed | no SignalR `tag` sync | low | OPEN | `api/routes/settings_writes.rs:1068`, `:1886` make no hub call | a tag made elsewhere shows after a reload |
-| (a) command executed: `system/task` | Tasks page not told to sync | low | OPEN | emitted for Radarr only (`core/commands/executor.rs:737`); left until Sonarr's hub is recorded (`docs/DESIGN.md` section 18) | System > Tasks does not update while open |
-| (a) command executed: `qualitydefinition` | no sync after a reset | low | OPEN | the command works (`executor.rs:929`), nothing broadcasts | another open tab on Settings > Quality |
+| (a) tags, auto tags changed | no SignalR `tag` sync | low | CLOSED | `api/routes/settings_writes.rs:1073`; `golden-hub/signalr.json`, test `api/tests/contract.rs:1616` | |
+| (a) command executed: `system/task` | Tasks page not told to sync | low | CLOSED | `core/commands/executor.rs:760`, `api/state.rs:302`; same recording and test | |
+| (a) command executed: `qualitydefinition` | no sync after a reset | low | CLOSED | `api/state.rs:302`; same recording and test | |
 | (a) config file saved: logging | saved log level not applied | low | CLOSED | `settings_writes.rs:1004`, `unarrd/src/main.rs:765`; `RUST_LOG`, when set, still decides | |
 | (a) config saved: authorisation | re-read not traced | unsure | CLOSED | `api/ui.rs:476` reads the settings on every request | |
 | (a) custom format deleted | scores not reset | medium | CLOSED | `settings_writes.rs:2052` | |
 | (a) episode grabbed | no `episode` with `grabbed=true` | low | OPEN | no `grabbed` in Sonarr's routes; deferred with the hub recording | the row flips to "downloading" when the queue details arrive |
-| (a) episode imported: client refresh | an import outside the queue asks no client | low | PARTIAL | done after queue processing and manual import (`executor.rs:1234`, `:1606`), not after a rescan or a drop-folder import (`:2260`, `:2320`) | a queue item imported by a rescan lingers up to a minute |
-| (a) health `CheckOn` triggers | checks re-run on some events only | low-medium | PARTIAL | wired for indexer and client writes, status changes, import outcomes; no trigger in the settings, root folder, remote path mapping or import list writes, nor on a series delete or move; `ProxyCheck` runs in the full set only; no `RemovedSeriesCheck` | a warning outlives its fix, or stays hidden, until the six-hourly check or a manual one |
-| (a) root folder changed | no SignalR `rootfolder` | low | OPEN | `settings_writes.rs:1197` | the list is stale in other tabs |
+| (a) episode imported: client refresh | an import outside the queue asks no client | low | CLOSED | `executor.rs:2301`, after a rescan (`:2290`) and a drop-folder import (`:2385`) that brought a file in; `golden-hub/command-after-rescan`, `command-after-downloaded-scan`, test `api/tests/contract.rs:1616` | |
+| (a) health `CheckOn` triggers | checks re-run on some events only | low-medium | CLOSED | `core/health.rs:250` (the sets), `api/state.rs:347`, `settings_writes.rs:159`, `:1233`, `:1313`, `:1332`, `importlist_writes.rs:290`, `executor.rs:2156`, `:2216`; tests `core/health.rs:1276`, `api/tests/contract.rs:1397` | the checks Unarr does not have are not run: `RemovedSeriesCheck`, `ImportListStatusCheck`, `ApiKeyValidationCheck` |
+| (a) root folder changed | no SignalR `rootfolder` | low | CLOSED | `settings_writes.rs:1237`: `created`; the original sends nothing for a removal; `golden-hub/signalr.json`, same test | |
 | (a) indexer settings cache | equivalent not found | low | NOT APPLICABLE | settings are read from the database for every decision (`core/decision/lookup.rs:189`) | |
 | (a) series edited | a type change queues no refresh | medium | CLOSED | `api/routes/series_writes.rs:427`; test `tests/contract.rs:1333` | |
 | (a) series imported | no `POST /series/import` | medium | CLOSED | `api/routes/mod.rs:79` | |
@@ -335,7 +386,7 @@ open, 1 partial, 2 not applicable.
 | `UseScriptImport`, `ScriptImportPath` | not applied | medium | OPEN | stored and shown (`settings_writes.rs:349`), no occurrence in `unarr-core` | whoever imports through a script gets Unarr's own move or hardlink, with no warning |
 | `ImportExtraFiles`, `ExtraFileExtensions` | not applied | medium | CLOSED | `core/mediafiles/extras.rs:334` | |
 | `UILanguage` | not applied | low | OPEN | `api/routes/system.rs:364` always serves the English dictionary, the only one in the tree | whoever picks another language: the interface stays English |
-| proxy (8 settings) | not applied | high | CLOSED | `core/http.rs:71`, `core/outbound.rs:308`; test `core/http.rs:325` | `ProxyCheck` is not re-run on a save |
+| proxy (8 settings) | not applied | high | CLOSED | `core/http.rs:71`, `core/outbound.rs:308`; test `core/http.rs:325` | `ProxyCheck` runs again five seconds after a save of the settings (`core/health.rs:250`) |
 | `CertificateValidation` | not applied | medium | CLOSED | `core/outbound.rs:317`; test `:604` | |
 | `TrustCgnatIpAddresses` | not applied | medium | CLOSED | `api/ui.rs:500`, `core/outbound.rs:227` | |
 
@@ -344,7 +395,7 @@ What the triage found against the reports and the README:
 - Two medium findings of `1-settings.md` were never in the README's
   numbered list and are not closed: script import, and file dates after a
   series scan (the fix of `e0a81e4` was for movies). The `CheckOn` row,
-  low-medium, is unchanged.
+  low-medium, was unchanged at the triage and is closed since.
 - `docs/DESIGN.md` section 14, "Logs", said the debug and trace files
   follow `RUST_LOG` alone, while the saved Log Level applies at once.
 - The same gap carries different severities in two reports (the recycling

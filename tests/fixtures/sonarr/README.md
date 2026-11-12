@@ -11,6 +11,7 @@ against it.
 | `sonarr.db` | The installation's database (migration level 217) passed through the same script: one user `unarr` / `fixture`, every credential, URL, host and e-mail replaced, release ids pseudonymised, root folder `/tv`, raw ffprobe output dropped, commands and provider status emptied. |
 | `golden/requests.txt` | The requests replayed, one per line: `name METHOD path`. |
 | `golden/*.json` | `{"request", "recordedAt", "status", "body"}` as recorded by `scripts/record-golden.py` against the real Sonarr. `recordedAt` pins Unarr's clock during the replay, so `nextAiring`, statistics and the wanted lists do not drift as the calendar moves on. |
+| `golden-hub/` | A second, short request list with its answers and `signalr.json`, what the hub sent after each step: recorded with `GOLDEN_SIGNALR=1` (the list's header has the command), replayed by `the_hub_tells_other_tabs_what_the_original_tells_them`. Steps that need the hub recorded go here, so the long list is not recorded again for them. |
 
 `make golden` re-records the responses: it downloads the official linux-x64
 release (self-contained, no Docker needed) into `.cache/sonarr/`, pinned by
