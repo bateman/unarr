@@ -576,8 +576,10 @@ What does not hold, or was not verified:
 - **`RefreshMovie` was left out of the recording**: on the original it
   reached the metadata server, so its answers changed between recordings.
   It is 4d's.
-- **Working memory** is where 4b left it (above); neither library was
-  scaled.
+- **Working memory** is where 4b left it (above). The libraries were
+  scaled after the milestone closed (950 series, 2,123 movies): idle
+  memory holds at 51 MB, and the answers built from every movie are slow
+  (`GET /movie` a quarter of a second); `docs/DESIGN.md` section 9.
 - **Not run**: Bazarr itself; the image; the homelab, by the maintainer's
   choice left to the end of 4d. The maintainer's Radarr logs were read for
   the facts they hold (hardlink or copy from qBittorrent, a move from the

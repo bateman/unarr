@@ -328,10 +328,10 @@ maintainer's daily driver.
 | Target | Measured | Since | State |
 |--------|----------|-------|-------|
 | Idle RSS under 60 MB | Idle for five minutes: 45 MB (glibc), 40 MB (static musl), both personalities on two small libraries. Working, and until the compiled patterns are released: 100 to 125 MB. The patterns of the two title parsers are 54 MB | 4b | Missed while working; deferred |
-| The same, on 1,000 series and 2,000 movies, three personalities | Not measured: neither library was scaled with both personalities, and Lidarr does not exist | | Unknown |
-| `GET /api/v3/series` p99 under 10 ms | 5.8 ms on the fixture's 38 series; 53 to 59 ms on 950 series | phase 1 review | Missed at 950 series; deferred |
+| The same, on 1,000 series and 2,000 movies, three personalities | Two personalities on 950 series and 2,123 movies: 51 MB idle after the start and again after five idle minutes; 101 MB after reading the libraries, 130 MB after the parsers worked. Lidarr does not exist | 4c | Met idle with two personalities; missed while working; deferred |
+| `GET /api/v3/series` p99 under 10 ms | 5.8 ms on the fixture's 38 series; 53 to 59 ms on 950 series (104 ms with Radarr beside it and a refresh running). No target was set for `GET /api/v3/movie`: 338 ms at p99 on 2,123 movies | phase 1 review | Missed at 950 series; deferred |
 | Container image under 15 MB compressed | Not built since both UIs are embedded. The binary is 29.6 MiB, 11.9 MiB under `gzip -9` | | Unknown; close to the limit |
-| Cold start to first response under 1 s | 0.24 to 0.34 s, import included | | Met |
+| Cold start to first response under 1 s | 0.20 to 0.46 s on the fixtures, import included (0.46 s with both personalities); 6.1 s on the scaled libraries, which is the import of both databases, done once | 4c | Met on the fixtures; the first start on a large library is the import |
 
 First measurement, skeleton only (one `system/status` route per personality):
 1.7 MiB binary, 4.3 MB idle RSS, unchanged after 500 requests.
@@ -615,7 +615,48 @@ its time under the target and rises to some 100 to 125 MB at each sync
 and each import. The maintainer's decision: the target stays, the working
 figure is a recorded miss (the table at the head of this section) and is
 taken up after Unarr has proved itself as a daily driver.
-Neither library was scaled; the patterns do not grow with the library.
+The patterns do not grow with the library.
+
+The same binary on libraries at the targets' size (`make scale-fixture`:
+950 series with 25,300 episodes, 2,123 movies with 1,100 files, 50,000
+history rows each), both personalities, glibc, fifty requests each over
+the loopback. The metadata hosts are pointed at nothing, so Sonarr's
+overdue refresh of its 950 series ran and failed through the first
+minutes, beside the requests:
+
+| Metric | Scaled libraries |
+|--------|------------------|
+| Cold start to both personalities answering, both imports included | 6.1 s |
+| Idle RSS, 35 s after the start | 50.5 MB |
+| RSS after the reads below | 101.1 MB |
+| RSS after the parsers worked | 129.5 MB |
+| RSS at rest, 35 s later | 109.7 MB |
+| RSS after 330 s without a request | 51.6 MB |
+| `GET /series` (2.3 MB), p50 / p99 | 72 / 104 ms |
+| Sonarr `GET /history` page of 20, p50 / p99 | 31 / 94 ms |
+| Sonarr `GET /wanted/missing` page of 20, p50 / p99 | 38 / 69 ms |
+| Sonarr `GET /calendar`, p50 / p99 | 34 / 46 ms |
+| `GET /movie` (7.4 MB), p50 / p99 | 264 / 338 ms |
+| `GET /movie/{id}`, p50 / p99 | 20 / 36 ms |
+| Radarr `GET /history` page of 20 with the movie, p50 / p99 | 48 / 130 ms |
+| Radarr `GET /wanted/missing` page of 20, p50 / p99 | 111 / 174 ms |
+| `GET /moviefile?movieId=`, p50 / p99 | 24 / 36 ms |
+| Radarr `GET /queue` page of 20, p50 / p99 | 23 / 42 ms |
+| `GET /collection` (0.6 MB), p50 / p99 | 102 / 121 ms |
+| Radarr `GET /calendar`, p50 / p99 | 106 / 146 ms |
+
+Idle, the two personalities stay under 60 MB at this size: a library
+ten times larger costs 13 MB more than the fixtures' 38. What grows with
+the library is the time of the answers built from every row. `GET
+/movie` reads and encodes 2,123 movies with their alternative titles,
+translations' titles and files on each call, 7.4 MB of JSON in a quarter
+of a second, and the UI asks for it on every visit to the index; a page
+of twenty of the wanted list or a month of the calendar costs a tenth of
+a second, which says they read all the movies to return a few. `GET
+/movie/{id}` at 20 ms for one movie says the same of the single read.
+None of these has a target; they are recorded with the misses and left,
+by the decision at the head of this section. The original's times on
+the same libraries were not measured.
 
 ## 10. Naming and distribution
 

@@ -72,8 +72,9 @@ ui-sonarr: ## Fetch the official Sonarr web UI into crates/unarr-api/ui/sonarr
 ui-radarr: ## Fetch the official Radarr web UI into crates/unarr-api/ui/radarr
 	@scripts/radarr-fixture.sh ui
 
-scale-fixture: ## Grow the fixture to 950 series and 50,000 history rows in .cache/scaled, for measurements
-	@python3 -I scripts/scale-fixture.py --out .cache/scaled
+scale-fixture: ## Grow the fixtures to 950 series and 2,123 movies with 50,000 history rows each in .cache/scaled, for measurements
+	@python3 -I scripts/scale-fixture.py --out .cache/scaled/sonarr
+	@python3 -I scripts/scale-fixture.py --app radarr --out .cache/scaled/radarr
 
 bazarr: ## Replay Bazarr's requests against a running unarrd (UNARR_URL, UNARR_API_KEY)
 	@python3 -I scripts/bazarr-replay.py --base-url $(UNARR_URL) --api-key $(UNARR_API_KEY)
