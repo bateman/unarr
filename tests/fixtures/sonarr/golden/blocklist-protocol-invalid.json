@@ -1,0 +1,19 @@
+{
+  "body": {
+    "errors": {
+      "protocols": [
+        "The value 'bogus' is not valid."
+      ]
+    },
+    "status": 400,
+    "title": "One or more validation errors occurred.",
+    "traceId": "00-4182508a06d7ef865e0cbc9a8b56752b-0f5f70c2a6e2efb0-00",
+    "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1"
+  },
+  "recordedAt": "2026-11-12T22:59:55Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/blocklist?page=1&pageSize=5&sortKey=date&sortDirection=descending&protocols=bogus"
+  },
+  "status": 400
+}

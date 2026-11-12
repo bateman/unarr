@@ -1,0 +1,235 @@
+{
+  "body": {
+    "page": 1,
+    "pageSize": 5,
+    "records": [
+      {
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          }
+        ],
+        "date": "2026-03-18T16:30:02Z",
+        "episodeIds": [
+          26
+        ],
+        "id": 156,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "message": "redacted",
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "series": {
+          "added": "2026-03-06T07:44:38Z",
+          "airTime": "21:00",
+          "cleanTitle": "thepitt",
+          "ended": false,
+          "firstAired": "2025-01-09T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 1,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/banners/6972a4aba4c5d.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/backgrounds/675c4f787cfc4.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/clearlogo/675d049994d06.png"
+            }
+          ],
+          "imdbId": "tt31938062",
+          "languageProfileId": 1,
+          "lastAired": "2026-04-16T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "HBO Max",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "The staff of Pittsburgh's Trauma Medical Center work around the clock to save lives in an overcrowded and underfunded emergency department.",
+          "path": "/tv/The Pitt",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.9,
+            "votes": 178410
+          },
+          "runtime": 48,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "pitt",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "The Pitt",
+          "titleSlug": "the-pitt",
+          "tmdbId": 250307,
+          "tvMazeId": 75632,
+          "tvRageId": 0,
+          "tvdbId": 448176,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 1,
+        "sourceTitle": "The Pitt S02E11 1080p WEB h264 ETHEL"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 36,
+            "name": "Language not Italian"
+          }
+        ],
+        "date": "2026-03-15T13:30:50Z",
+        "episodeIds": [
+          26
+        ],
+        "id": 155,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "message": "redacted",
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "series": {
+          "added": "2026-03-06T07:44:38Z",
+          "airTime": "21:00",
+          "cleanTitle": "thepitt",
+          "ended": false,
+          "firstAired": "2025-01-09T00:00:00Z",
+          "genres": [
+            "Drama"
+          ],
+          "id": 1,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/banners/6972a4aba4c5d.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/backgrounds/675c4f787cfc4.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/clearlogo/675d049994d06.png"
+            }
+          ],
+          "imdbId": "tt31938062",
+          "languageProfileId": 1,
+          "lastAired": "2026-04-16T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "HBO Max",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "The staff of Pittsburgh's Trauma Medical Center work around the clock to save lives in an overcrowded and underfunded emergency department.",
+          "path": "/tv/The Pitt",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.9,
+            "votes": 178410
+          },
+          "runtime": 48,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "pitt",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "The Pitt",
+          "titleSlug": "the-pitt",
+          "tmdbId": 250307,
+          "tvMazeId": 75632,
+          "tvRageId": 0,
+          "tvdbId": 448176,
+          "useSceneNumbering": false,
+          "year": 2025
+        },
+        "seriesId": 1,
+        "sourceTitle": "The Pitt S02E11 1080p WEB h264 ETHEL"
+      }
+    ],
+    "sortDirection": "descending",
+    "sortKey": "date",
+    "totalRecords": 2
+  },
+  "recordedAt": "2026-11-12T22:59:55Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/blocklist?page=1&pageSize=5&sortKey=date&sortDirection=descending&protocols=Torrent&seriesIds=1"
+  },
+  "status": 200
+}

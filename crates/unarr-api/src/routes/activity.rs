@@ -378,7 +378,45 @@ fn blocklist_resource(catalog: &Catalog, b: &BlocklistEntry) -> Value {
     })
 }
 
-pub async fn blocklist(State(state): State<AppState>, uri: Uri) -> ApiResult<Json<PagingResource<Value>>> {
+/// `protocols` as the framework binds a `DownloadProtocol[]`: repeated,
+/// each a name in any case or a number; a list in one value is read as
+/// flags, which no protocol is. `Err` is what it says of a value it does
+/// not take, as recorded.
+fn protocols_filter(p: &Params) -> Result<Option<Vec<unarr_core::model::Protocol>>, String> {
+    use unarr_core::model::Protocol;
+    let values = p.all("protocols");
+    if values.is_empty() {
+        return Ok(None);
+    }
+    let mut out = Vec::new();
+    for value in values {
+        let mut flags = 0i64;
+        for part in value.split(',') {
+            let part = part.trim();
+            flags |= match part.to_ascii_lowercase().as_str() {
+                "unknown" => 0,
+                "usenet" => 1,
+                "torrent" => 2,
+                _ => match part.parse::<i64>() {
+                    Ok(n) if !part.is_empty() => n,
+                    _ if value.is_empty() => return Err(format!("The value '{value}' is invalid.")),
+                    _ => return Err(format!("The value '{value}' is not valid.")),
+                },
+            };
+        }
+        out.push(match flags {
+            0 => Protocol::Unknown,
+            1 => Protocol::Usenet,
+            2 => Protocol::Torrent,
+            _ => return Err(format!("The value '{value}' is invalid.")),
+        });
+    }
+    Ok(Some(out))
+}
+
+/// `GET /blocklist`: a page, of some series and some protocols when the
+/// UI's filter asks (`seriesIds`, `protocols`).
+pub async fn blocklist(State(state): State<AppState>, uri: Uri) -> ApiResult<Response> {
     let p = Params::from_uri(&uri);
     let paging = Paging::resolve(
         p.i64("page"),
@@ -389,11 +427,22 @@ pub async fn blocklist(State(state): State<AppState>, uri: Uri) -> ApiResult<Jso
         "date",
     );
     let series_ids = p.ints("seriesIds");
+    let protocols = match protocols_filter(&p) {
+        Ok(protocols) => protocols,
+        Err(message) => {
+            return Ok(crate::error::validation_problem(
+                crate::error::BAD_REQUEST_TYPE_RFC7231,
+                "application/problem+json; charset=utf-8",
+                json!({"protocols": [message]}),
+            ))
+        }
+    };
     let paging_for_db = paging.clone();
     let (entries, total, catalog) = state
         .db()
         .call(move |conn| {
-            let (entries, total) = store::history::blocklist_paged(conn, &paging_for_db, &series_ids)?;
+            let (entries, total) =
+                store::history::blocklist_paged(conn, &paging_for_db, &series_ids, protocols.as_deref())?;
             let ids: Vec<i64> = entries.iter().map(|b| b.series_id).collect();
             let catalog = Catalog::load_for(conn, &ids)?;
             Ok((entries, total, catalog))
@@ -404,7 +453,7 @@ pub async fn blocklist(State(state): State<AppState>, uri: Uri) -> ApiResult<Jso
         PagingResource::new(&paging, total, records)
     })
     .await?;
-    Ok(Json(out))
+    Ok(Json(out).into_response())
 }
 
 /// `DELETE /blocklist/{id}`: one entry removed.
@@ -444,4 +493,38 @@ pub async fn history_mark_failed(
     }
     crate::routes::queue::broadcast_queue(&state);
     Ok(Json(json!({})))
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use unarr_core::model::Protocol;
+
+    /// The values Sonarr 4.0.20 took and refused for `protocols`, with its
+    /// two wordings.
+    #[test]
+    fn the_protocol_filter_binds_as_the_original() {
+        let filter = |query: &str| {
+            let uri: Uri = format!("/blocklist?{query}").parse().unwrap();
+            protocols_filter(&Params::from_uri(&uri))
+        };
+        assert_eq!(filter("page=1"), Ok(None));
+        assert_eq!(filter("protocols=torrent"), Ok(Some(vec![Protocol::Torrent])));
+        assert_eq!(filter("Protocols=Usenet"), Ok(Some(vec![Protocol::Usenet])));
+        assert_eq!(
+            filter("protocols=1&protocols=2"),
+            Ok(Some(vec![Protocol::Usenet, Protocol::Torrent]))
+        );
+        assert_eq!(filter("protocols=0"), Ok(Some(vec![Protocol::Unknown])));
+        assert_eq!(
+            filter("protocols=bogus"),
+            Err("The value 'bogus' is not valid.".into())
+        );
+        for refused in ["1,2", "3", ""] {
+            assert_eq!(
+                filter(&format!("protocols={refused}")),
+                Err(format!("The value '{refused}' is invalid."))
+            );
+        }
+    }
 }

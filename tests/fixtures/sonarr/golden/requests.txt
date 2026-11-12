@@ -89,6 +89,16 @@ queue-status GET /api/v3/queue/status
 queue-details GET /api/v3/queue/details?includeSeries=true&includeEpisode=true
 blocklist GET /api/v3/blocklist?page=1&pageSize=20&sortKey=date&sortDirection=descending
 blocklist-page-3 GET /api/v3/blocklist?page=3&pageSize=50&sortKey=sourceTitle&sortDirection=ascending
+# The UI's Protocol filter: names in any case or numbers, repeated; a
+# value the framework cannot bind is a 400 that names it.
+blocklist-protocol-torrent GET /api/v3/blocklist?page=1&pageSize=5&sortKey=date&sortDirection=descending&protocols=torrent
+blocklist-protocol-number GET /api/v3/blocklist?page=1&pageSize=5&sortKey=date&sortDirection=descending&protocols=1
+blocklist-protocol-both GET /api/v3/blocklist?page=1&pageSize=5&sortKey=date&sortDirection=descending&protocols=usenet&protocols=torrent
+blocklist-protocol-unknown GET /api/v3/blocklist?page=1&pageSize=5&sortKey=date&sortDirection=descending&protocols=unknown
+blocklist-protocol-series GET /api/v3/blocklist?page=1&pageSize=5&sortKey=date&sortDirection=descending&protocols=Torrent&seriesIds=1
+blocklist-protocol-invalid GET /api/v3/blocklist?page=1&pageSize=5&sortKey=date&sortDirection=descending&protocols=bogus
+blocklist-protocol-comma GET /api/v3/blocklist?page=1&pageSize=5&sortKey=date&sortDirection=descending&protocols=1,2
+blocklist-protocol-empty GET /api/v3/blocklist?page=1&pageSize=5&sortKey=date&sortDirection=descending&protocols=
 calendar GET /api/v3/calendar?start=2026-10-01T00:00:00Z&end=2026-10-31T00:00:00Z&includeSeries=true&includeEpisodeFile=true&unmonitored=true
 calendar-monitored GET /api/v3/calendar?start=2026-09-01T00:00:00Z&end=2026-09-30T00:00:00Z
 calendar-past GET /api/v3/calendar?start=2025-01-01T00:00:00Z&end=2025-01-31T00:00:00Z&includeEpisodeFile=true

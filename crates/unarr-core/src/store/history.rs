@@ -238,6 +238,7 @@ pub fn blocklist_paged(
     conn: &Connection,
     paging: &Paging,
     series_ids: &[i64],
+    protocols: Option<&[Protocol]>,
 ) -> anyhow::Result<(Vec<BlocklistEntry>, i64)> {
     let column = match paging.sort_key.as_str() {
         "indexer" => "b.indexer",
@@ -250,6 +251,15 @@ pub fn blocklist_paged(
     } else {
         let ids: Vec<String> = series_ids.iter().map(i64::to_string).collect();
         format!("b.series_id IN ({})", ids.join(","))
+    };
+    // The rows of the protocols asked for; of none, when the filter names
+    // only a protocol no row has.
+    let filter = match protocols {
+        None => filter,
+        Some(protocols) => {
+            let names: Vec<String> = protocols.iter().map(|p| format!("'{}'", p.as_str())).collect();
+            format!("{filter} AND b.protocol IN ({})", names.join(","))
+        }
     };
     let base = format!("FROM blocklist b JOIN series s ON s.id = b.series_id WHERE {filter}");
     let total: i64 = conn.query_row(&format!("SELECT count(*) {base}"), [], |r| r.get(0))?;
@@ -368,7 +378,7 @@ mod tests {
             assert_eq!(all[0], mk(2, 20, HistoryEvent::EpisodeFileDeleted));
             assert_eq!(for_series(conn, 9, None, None)?.len(), 0);
             let paging = Paging::resolve(None, Some(10), None, None, &["date"], "date");
-            let (page, total) = blocklist_paged(conn, &paging, &[])?;
+            let (page, total) = blocklist_paged(conn, &paging, &[], Some(&[Protocol::Torrent]))?;
             assert_eq!((page.len(), total), (0, 0));
             Ok(())
         })

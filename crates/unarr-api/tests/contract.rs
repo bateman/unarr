@@ -67,6 +67,9 @@ fn mode(name: &str) -> Mode {
         n if n.starts_with("filesystem-") => Mode::Exact(&["lastModified"]),
         n if n.contains("feed-calendar") && !n.starts_with("noauth") => Mode::Calendar,
         n if n.starts_with("mediacover-api-") => Mode::Exact(&["traceId"]),
+        "blocklist-protocol-invalid" | "blocklist-protocol-comma" | "blocklist-protocol-empty" => {
+            Mode::Exact(&["traceId"])
+        }
         "series-after-delete-pete"
         | "series-after-importlist-sync-54"
         | "importlist-get-missing"

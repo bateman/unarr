@@ -1,0 +1,630 @@
+{
+  "body": {
+    "page": 1,
+    "pageSize": 5,
+    "records": [
+      {
+        "customFormats": [
+          {
+            "id": 18,
+            "name": "ATVP"
+          }
+        ],
+        "date": "2026-09-26T14:49:48Z",
+        "episodeIds": [
+          1325
+        ],
+        "id": 243,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "series": {
+          "added": "2026-03-07T15:32:32Z",
+          "airTime": "00:00",
+          "certification": "TV-MA",
+          "cleanTitle": "sugar2024",
+          "ended": true,
+          "firstAired": "2024-04-05T00:00:00Z",
+          "genres": [
+            "Drama",
+            "Thriller"
+          ],
+          "id": 35,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/421070/banners/65dc08e382aeb.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/421070/posters/6a18881d42952.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/421070/backgrounds/6622312cecc2d.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/421070/clearlogo/65e80a5bd6e2c.png"
+            }
+          ],
+          "imdbId": "tt16418808",
+          "languageProfileId": 1,
+          "lastAired": "2026-08-07T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Sugar is a contemporary noir drama following an enigmatic Los Angeles private detective known for his sharp instincts and deep love of classic cinema. As he takes on complex cases across the city, his work is shaped by personal struggles with personal demons and a ongoing search for his missing sister.",
+          "path": "/tv/Sugar (2024)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.4,
+            "votes": 51231
+          },
+          "runtime": 38,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "sugar 2024",
+          "status": "ended",
+          "tags": [],
+          "title": "Sugar (2024)",
+          "titleSlug": "sugar-2024",
+          "tmdbId": 203744,
+          "tvMazeId": 62463,
+          "tvRageId": 0,
+          "tvdbId": 421070,
+          "useSceneNumbering": false,
+          "year": 2024
+        },
+        "seriesId": 35,
+        "sourceTitle": "Sugar.2024.S01E08.Addii.ITA.ENG.1080p.ATVP.WEB-DL.DDP5.1.H.264-MeM.GP"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 18,
+            "name": "ATVP"
+          }
+        ],
+        "date": "2026-09-26T14:48:51Z",
+        "episodeIds": [
+          1324
+        ],
+        "id": 242,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "series": {
+          "added": "2026-03-07T15:32:32Z",
+          "airTime": "00:00",
+          "certification": "TV-MA",
+          "cleanTitle": "sugar2024",
+          "ended": true,
+          "firstAired": "2024-04-05T00:00:00Z",
+          "genres": [
+            "Drama",
+            "Thriller"
+          ],
+          "id": 35,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/421070/banners/65dc08e382aeb.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/421070/posters/6a18881d42952.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/421070/backgrounds/6622312cecc2d.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/421070/clearlogo/65e80a5bd6e2c.png"
+            }
+          ],
+          "imdbId": "tt16418808",
+          "languageProfileId": 1,
+          "lastAired": "2026-08-07T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Sugar is a contemporary noir drama following an enigmatic Los Angeles private detective known for his sharp instincts and deep love of classic cinema. As he takes on complex cases across the city, his work is shaped by personal struggles with personal demons and a ongoing search for his missing sister.",
+          "path": "/tv/Sugar (2024)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.4,
+            "votes": 51231
+          },
+          "runtime": 38,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "sugar 2024",
+          "status": "ended",
+          "tags": [],
+          "title": "Sugar (2024)",
+          "titleSlug": "sugar-2024",
+          "tmdbId": 203744,
+          "tvMazeId": 62463,
+          "tvRageId": 0,
+          "tvdbId": 421070,
+          "useSceneNumbering": false,
+          "year": 2024
+        },
+        "seriesId": 35,
+        "sourceTitle": "Sugar.2024.S01E07.Quali.amicizie.preservare.ITA.ENG.1080p.ATVP.WEB-DL.DDP5.1.H.264-MeM.GP"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 18,
+            "name": "ATVP"
+          }
+        ],
+        "date": "2026-09-26T14:48:48Z",
+        "episodeIds": [
+          1323
+        ],
+        "id": 241,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "series": {
+          "added": "2026-03-07T15:32:32Z",
+          "airTime": "00:00",
+          "certification": "TV-MA",
+          "cleanTitle": "sugar2024",
+          "ended": true,
+          "firstAired": "2024-04-05T00:00:00Z",
+          "genres": [
+            "Drama",
+            "Thriller"
+          ],
+          "id": 35,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/421070/banners/65dc08e382aeb.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/421070/posters/6a18881d42952.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/421070/backgrounds/6622312cecc2d.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/421070/clearlogo/65e80a5bd6e2c.png"
+            }
+          ],
+          "imdbId": "tt16418808",
+          "languageProfileId": 1,
+          "lastAired": "2026-08-07T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Sugar is a contemporary noir drama following an enigmatic Los Angeles private detective known for his sharp instincts and deep love of classic cinema. As he takes on complex cases across the city, his work is shaped by personal struggles with personal demons and a ongoing search for his missing sister.",
+          "path": "/tv/Sugar (2024)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.4,
+            "votes": 51231
+          },
+          "runtime": 38,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "sugar 2024",
+          "status": "ended",
+          "tags": [],
+          "title": "Sugar (2024)",
+          "titleSlug": "sugar-2024",
+          "tmdbId": 203744,
+          "tvMazeId": 62463,
+          "tvRageId": 0,
+          "tvdbId": 421070,
+          "useSceneNumbering": false,
+          "year": 2024
+        },
+        "seriesId": 35,
+        "sourceTitle": "Sugar.2024.S01E06.Torna.a.casa.ITA.ENG.1080p.ATVP.WEB-DL.DDP5.1.H.264-MeM.GP"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 18,
+            "name": "ATVP"
+          }
+        ],
+        "date": "2026-09-26T14:43:42Z",
+        "episodeIds": [
+          1321
+        ],
+        "id": 240,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "message": "redacted",
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "series": {
+          "added": "2026-03-07T15:32:32Z",
+          "airTime": "00:00",
+          "certification": "TV-MA",
+          "cleanTitle": "sugar2024",
+          "ended": true,
+          "firstAired": "2024-04-05T00:00:00Z",
+          "genres": [
+            "Drama",
+            "Thriller"
+          ],
+          "id": 35,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/421070/banners/65dc08e382aeb.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/421070/posters/6a18881d42952.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/421070/backgrounds/6622312cecc2d.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/421070/clearlogo/65e80a5bd6e2c.png"
+            }
+          ],
+          "imdbId": "tt16418808",
+          "languageProfileId": 1,
+          "lastAired": "2026-08-07T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "Apple TV",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Sugar is a contemporary noir drama following an enigmatic Los Angeles private detective known for his sharp instincts and deep love of classic cinema. As he takes on complex cases across the city, his work is shaped by personal struggles with personal demons and a ongoing search for his missing sister.",
+          "path": "/tv/Sugar (2024)",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 7.4,
+            "votes": 51231
+          },
+          "runtime": 38,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 1
+            },
+            {
+              "monitored": true,
+              "seasonNumber": 2
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "sugar 2024",
+          "status": "ended",
+          "tags": [],
+          "title": "Sugar (2024)",
+          "titleSlug": "sugar-2024",
+          "tmdbId": 203744,
+          "tvMazeId": 62463,
+          "tvRageId": 0,
+          "tvdbId": 421070,
+          "useSceneNumbering": false,
+          "year": 2024
+        },
+        "seriesId": 35,
+        "sourceTitle": "Sugar.2024.S01E04.Sognante.ITA.ENG.1080p.ATVP.WEB-DL.DDP5.1.H.264-MeM.GP"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 1,
+            "name": "Italian 2160p"
+          },
+          {
+            "id": 4,
+            "name": "LQ (Release Title)"
+          },
+          {
+            "id": 26,
+            "name": "MAX"
+          },
+          {
+            "id": 35,
+            "name": "MULTi"
+          }
+        ],
+        "date": "2026-08-03T14:03:17Z",
+        "episodeIds": [
+          130
+        ],
+        "id": 218,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 2,
+            "name": "French"
+          },
+          {
+            "id": 27,
+            "name": "Hindi"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 11,
+            "name": "Russian"
+          },
+          {
+            "id": 3,
+            "name": "Spanish"
+          }
+        ],
+        "message": "redacted",
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 18,
+            "name": "WEBDL-2160p",
+            "resolution": 2160,
+            "source": "web"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "series": {
+          "added": "2026-03-07T11:22:23Z",
+          "airTime": "22:00",
+          "certification": "TV-MA",
+          "cleanTitle": "aknightsevenkingdoms",
+          "ended": false,
+          "firstAired": "2026-01-18T00:00:00Z",
+          "genres": [
+            "Action",
+            "Adventure",
+            "Drama",
+            "Fantasy"
+          ],
+          "id": 5,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433631/banners/696d01d889ebf.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433631/posters/6934ab30720ee.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433631/backgrounds/6934a76d9bbba.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/433631/clearlogo/696cfcd38cd4e.png"
+            }
+          ],
+          "imdbId": "tt27497448",
+          "languageProfileId": 1,
+          "lastAired": "2026-02-22T00:00:00Z",
+          "monitorNewItems": "all",
+          "monitored": true,
+          "network": "HBO",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "A century before the events of Game of Thrones, two unlikely heroes wandered Westeros, a young knight, Ser Duncan the Tall, and his squire, Egg, set in an age when the Targaryen line still holds the Iron Throne.",
+          "path": "/tv/A Knight of the Seven Kingdoms",
+          "qualityProfileId": 10,
+          "ratings": {
+            "value": 8.6,
+            "votes": 292326
+          },
+          "runtime": 33,
+          "seasonFolder": true,
+          "seasons": [
+            {
+              "monitored": false,
+              "seasonNumber": 0
+            },
+            {
+              "monitored": false,
+              "seasonNumber": 1
+            }
+          ],
+          "seriesType": "standard",
+          "sortTitle": "knight of the seven kingdoms",
+          "status": "continuing",
+          "tags": [
+            1
+          ],
+          "title": "A Knight of the Seven Kingdoms",
+          "titleSlug": "a-knight-of-the-seven-kingdoms",
+          "tmdbId": 224372,
+          "tvMazeId": 53063,
+          "tvRageId": 0,
+          "tvdbId": 433631,
+          "useSceneNumbering": false,
+          "year": 2026
+        },
+        "seriesId": 5,
+        "sourceTitle": "A.Knight.Of.The.Seven.Kingdoms.S01E06.2160p.MAX.WEB-DL.DV.HDR.MULTi-Ben.The.Men"
+      }
+    ],
+    "sortDirection": "descending",
+    "sortKey": "date",
+    "totalRecords": 177
+  },
+  "recordedAt": "2026-11-12T22:59:55Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/blocklist?page=1&pageSize=5&sortKey=date&sortDirection=descending&protocols=1"
+  },
+  "status": 200
+}
