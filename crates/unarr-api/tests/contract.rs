@@ -1583,7 +1583,7 @@ async fn the_feed_refuses_absurd_ranges_and_blank_keys() {
 /// shows. What else the original's hub sent in `golden-hub` (the health
 /// after each run, the grabbed and wanted episodes, `command` syncs) is in
 /// the recording for when those are taken up.
-const HUB_NAMES: &[&str] = &[];
+const HUB_NAMES: &[&str] = &["tag", "rootfolder", "qualitydefinition", "system/task"];
 
 /// A hub message as it is compared: its name and action, and the folder a
 /// `rootfolder` one carries.
@@ -1796,6 +1796,7 @@ async fn the_hub_tells_other_tabs_what_the_original_tells_them() {
         names.first().map(|n| n.to_string()).unwrap_or_default()
     };
     let mut problems = Vec::new();
+    assert!(original.iter().flatten().count() > 10, "the recording is read");
     for (at, (want, got)) in original.iter_mut().zip(stretches.iter_mut()).enumerate() {
         // Which messages, not how many: `system/task` follows every
         // command, the scheduler's own refresh of each minute among them,

@@ -44,8 +44,9 @@ pub enum Event {
     /// `HealthCheckCompleteEvent`: for Sonarr when a verdict changed, for
     /// Radarr after every check, as its hub was recorded.
     HealthChanged,
-    /// `CommandExecutedEvent`: a command ended, whoever it was for.
-    CommandExecuted,
+    /// `CommandExecutedEvent`: a command ended, whoever it was for; its
+    /// name, for the handlers that wait for one command.
+    CommandExecuted { name: &'static str },
     /// `MovieGrabbedEvent`: a release of this movie went to a client.
     MovieGrabbed { movie_id: i64 },
     /// What the importer raised: `EpisodeImportedEvent`,
@@ -754,11 +755,9 @@ impl Runtime {
         };
         self.broadcast(&ended);
         // `CommandExecutedEvent` -> `TaskController`, which tells the UI to
-        // read the tasks again. Recorded from Radarr's hub; Sonarr's was
-        // not recorded and is left as it was.
-        if self.personality == crate::Personality::Radarr {
-            self.emit(Event::CommandExecuted);
-        }
+        // read the tasks again, and `QualityDefinitionController` after a
+        // reset. Recorded from both hubs.
+        self.emit(Event::CommandExecuted { name: ended.name() });
         // `CommandExecutedEvent` -> `TaskManager`.
         let body = ended.body.clone();
         let started = ended.started_at.unwrap_or(now);

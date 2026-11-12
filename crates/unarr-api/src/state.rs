@@ -299,7 +299,16 @@ impl AppState {
                         _ => crate::routes::queue::broadcast_queue(&state),
                     },
                     Ok(Event::HealthChanged) => state.hub().broadcast("health", json!({"action": "sync"})),
-                    Ok(Event::CommandExecuted) => state.hub().broadcast("system/task", json!({"action": "sync"})),
+                    Ok(Event::CommandExecuted { name }) => {
+                        state.hub().broadcast("system/task", json!({"action": "sync"}));
+                        // `QualityDefinitionController`: the list as the
+                        // reset left it. Sonarr's alone was recorded.
+                        if name == "ResetQualityDefinitions" && state.personality() != Personality::Radarr {
+                            state
+                                .hub()
+                                .broadcast("qualitydefinition", json!({"action": "sync"}));
+                        }
+                    }
                     Ok(Event::MovieGrabbed { movie_id }) => {
                         let _ = movie_events.send(HubMovieEvent::Grabbed(movie_id));
                     }

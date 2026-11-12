@@ -1068,6 +1068,12 @@ fn ok_empty() -> Response {
 // tags
 
 /// `POST /tag`: an existing label is answered as is; labels are lower case.
+/// `TagsUpdatedEvent` and `AutoTagsUpdatedEvent`, which `TagController`
+/// answers alike: the UI is told to read the tags again, with no resource.
+fn tags_updated(state: &AppState) {
+    state.hub().broadcast("tag", json!({"action": "sync"}));
+}
+
 pub async fn tag_create(State(state): State<AppState>, Json(body): Json<Value>) -> ApiResult<Response> {
     let label = text(&body, "label");
     let existing = state
@@ -1088,7 +1094,9 @@ pub async fn tag_create(State(state): State<AppState>, Json(body): Json<Value>) 
                 id: 0,
                 label: label.to_lowercase(),
             };
-            insert_new(&state, "tags", tag, |t, id| t.id = id, store::catalog::insert_tag).await?
+            let id = insert_new(&state, "tags", tag, |t, id| t.id = id, store::catalog::insert_tag).await?;
+            tags_updated(&state);
+            id
         }
     };
     let Json(out) = crate::routes::catalog::tag(State(state.clone()), Path(id)).await?;
@@ -1108,6 +1116,7 @@ pub async fn tag_update(
     if !replace(&state, "tags", id, tag, store::catalog::insert_tag).await? {
         return Err(ApiError::NotFound);
     }
+    tags_updated(&state);
     let Json(out) = crate::routes::catalog::tag(State(state), Path(id)).await?;
     Ok(accepted(out))
 }
@@ -1135,7 +1144,9 @@ pub async fn tag_delete(State(state): State<AppState>, Path(id): Path<i64>) -> A
             )));
         }
     }
-    delete_from(&state, "tags", id).await?;
+    if delete_from(&state, "tags", id).await? {
+        tags_updated(&state);
+    }
     Ok(ok_empty())
 }
 
@@ -1217,9 +1228,13 @@ pub async fn root_folder_create(
         store::catalog::insert_root_folder,
     )
     .await?;
-    // `ModelEvent<RootFolder>`: the health checks tied to it.
+    // `ModelEvent<RootFolder>`: the health checks tied to it, and the new
+    // folder on the hub.
     state.check_health_after(unarr_core::health::CheckSet::RootFolders);
     let Json(out) = crate::routes::catalog::root_folder(State(state.clone()), Path(id)).await?;
+    state
+        .hub()
+        .broadcast("rootfolder", json!({"action": "created", "resource": out}));
     Ok(created(&state, "rootfolder", id, out))
 }
 
@@ -1908,6 +1923,7 @@ pub async fn auto_tagging_create(
         store::providers::insert_auto_tagging,
     )
     .await?;
+    tags_updated(&state);
     let out = auto_tagging_json(&state, id).await?;
     Ok(created(&state, "autotagging", id, out))
 }
@@ -1929,11 +1945,14 @@ pub async fn auto_tagging_update(
     {
         return Err(ApiError::NotFound);
     }
+    tags_updated(&state);
     Ok(accepted(auto_tagging_json(&state, id).await?))
 }
 
 pub async fn auto_tagging_delete(State(state): State<AppState>, Path(id): Path<i64>) -> ApiResult<Response> {
-    delete_from(&state, "auto_tagging", id).await?;
+    if delete_from(&state, "auto_tagging", id).await? {
+        tags_updated(&state);
+    }
     Ok(ok_empty())
 }
 
