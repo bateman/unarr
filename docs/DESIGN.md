@@ -1212,7 +1212,7 @@ the same libraries were not measured.
   `sonarr.0.txt`, `sonarr.1.txt`... above one megabyte, fifty archives
   kept (`LogSizeLimit` and `LogRotate`'s defaults; neither is a setting
   yet); `sonarr.debug.txt` and `sonarr.trace.txt` exist when the process
-  logs at those levels (`RUST_LOG`). The names follow the personality, so
+  logs at those levels (the saved Log Level, or `RUST_LOG` when set). The names follow the personality, so
   what reads `sonarr.txt` today finds it, and Radarr's and Lidarr's will
   be `radarr.txt` and `lidarr.txt` in their own folders. A data folder
   that already holds the original's `sonarr.txt` has it continued, and
@@ -1240,8 +1240,10 @@ the same libraries were not measured.
   running in place of Sonarr on the maintainer's NAS the setting was
   stored and shown but not read, so every request through Traefik was
   asked to log in. A saved setting applies at once, where the originals
-  ask for a restart. `X-Forwarded-Proto` and `X-Forwarded-Host` are not
-  read: Unarr's redirects are relative. The setting is not validated on
+  ask for a restart. `X-Forwarded-Proto` and `X-Forwarded-Host` were not
+  read then; since the live HTTP run they are, from a trusted proxy, for
+  the cookie's `Secure` and the login redirect's absolute address. The
+  host filter still reads `Host` alone (`docs/audit/7-triage.md`, row 1.3). The setting is not validated on
   save yet (the originals refuse a list that does not parse).
 - **Each personality logs on its own.** One process serves several
   personalities and a log line does not say whose it is. Rather than mark

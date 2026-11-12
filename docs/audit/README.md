@@ -17,6 +17,7 @@ that source.
 | 4. Requests the web UI makes | [3-4-routes.md](3-4-routes.md), table B | 242 calls | 23 missing, 3 parameters ignored |
 | 5. The UI at several screen densities | [5-browser.md](5-browser.md) | 36 pages on 5 screens | none |
 | 6. Event handlers, commands, housekeeping | [6-events.md](6-events.md) | 214 entries | 29 missing, 6 partial, none high |
+| 7. Where each row stands now | [7-triage.md](7-triage.md) | 193 rows of reports 1, 2, 3, 4 and 6 | 78 open, 13 partial |
 
 The search, grab, import and delete chains are complete. The gaps are at
 the edges.
@@ -135,4 +136,8 @@ Not recorded against the original, and so not changed: `PUT
 config/naming` does not yet refuse a format whose sample name fails the
 same parse-back check.
 
-Still open: the low ones.
+Still open: see [7-triage.md](7-triage.md), which read every row of the
+four static reports against `main` on 12 November 2026. Of 193 rows, 83 are
+closed, 78 open, 13 partial, 6 deliberate and 13 not applicable. "The low
+ones" was not the whole of it: nine findings the reports rated medium were
+never in the numbered list above and are open or partial.
