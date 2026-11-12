@@ -285,7 +285,9 @@ settled one way or the other; the Sonarr goldens are untouched.
    http-audit`), fixing the high and medium findings before closing.
 6. **Measurements**: both personalities, idle and after an RSS sync, an
    import and a full refresh, a library scaled to 2,000 movies beside the
-   950-series one, on glibc and on the image.
+   950-series one, on glibc and on the image. A target missed is added to
+   the table of `docs/DESIGN.md` section 9 and left there: correctness
+   first, by the maintainer's decision at the end of 4c.
 7. **The review's open suggestion** (`docs/DESIGN.md` section 18): share
    between the two pipelines the pieces that carry no media notion (the
    refresh loop over the clients, what a grab's failure means, the release
@@ -503,7 +505,7 @@ carry the clock.
 | History, SignalR and the three notifications equal to the oracle | History: yes, goldens. Notifications: yes, the bodies the mock Discord and webhook received and the requests the mock Plex received are goldens (10 snapshots), with Plex seeing the library under another path as on the maintainer's installation. SignalR: not recorded from the original, as before; the replay asserts what the hub sends. |
 | `scripts/bazarr-replay.py --app radarr` passes with `RescanMovie` answered | Yes (`make bazarr-radarr` against the release binary on both fixtures): 193 movies and 100 files checked, `RescanMovie` answered 201 and completed; the Sonarr side replayed against the same process. Bazarr itself was not run. |
 | The pages render | Yes, with Playwright against the release binary on both fixtures after 388 requests of the list: login, queue (three rows, one blocked), the queue's manual import, history, blocklist, wanted, a movie page with its imported file, the movie's history, the rename preview, the interactive search (nine releases), Manage Files, tasks, status, Settings > Connect and the Plex form, events, the movie index. Nineteen steps, no page error; the requests that failed are the covers the fixture does not have. |
-| The memory point is settled | Measured and brought down at idle, not at work; the reading of the target is the maintainer's to confirm (below, and `docs/DESIGN.md` section 9). |
+| The memory point is settled | Yes, by decision: brought down at idle, not at work; the maintainer keeps the target and defers the miss until Unarr is a daily driver (below, and `docs/DESIGN.md` section 9). |
 | The Sonarr goldens are untouched | Yes. |
 | The goldens replay | All 463 (453 answers and 10 mock snapshots), none pending, recorded from the real Radarr before each shape was written. |
 
@@ -552,9 +554,10 @@ What 4c delivered against its eight points:
    the two parsers together are 54 MB compiled (series 42, movies 14), and
    what made them smaller cost speed or changed what they match
    (`docs/DESIGN.md` section 9). The
-   proposal put to the maintainer: keep 60 MB as the idle figure, read
-   after the release interval, and state the working figure beside it
-   (125 MB on glibc, 100 MB on musl, on two small libraries). The musl
+   maintainer's decision: make it run, then make it fast. The target
+   stays, the working figure (125 MB on glibc, 100 MB on musl, on two
+   small libraries) is recorded as a miss with the others and taken up
+   once Unarr is a daily driver. The musl
    build was measured for the first time; the image itself was not built.
 8. **A look at the screen.** As in the table; 4b's queue, interactive
    search and command messages included.

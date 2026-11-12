@@ -299,8 +299,9 @@ case.
    goldens replay, none pending; the import specifications carry the
    original's fixtures as tests; the pages of 4b and 4c were driven in a
    browser. The compiled patterns are released when idle, which brings the
-   idle figure back under the target and leaves the working one above it
-   (section 9). Section 17 records the decisions.
+   idle figure back under the target and leaves the working one above it,
+   a miss recorded and deferred (section 9). Section 17 records the
+   decisions.
 5. **Lidarr** last: MusicBrainz, per-track matching, Chromaprint fingerprints.
    Expected at phase 2's size or above; the most divergent personality.
 
@@ -314,6 +315,23 @@ Self-set, to be measured in CI against a fixed fixture database:
 | Container image, compressed | under 15 MB |
 | `GET /api/v3/series` on the fixture, p99 | under 10 ms |
 | Cold start to first response | under 1 s |
+
+**Make it run, then make it fast** (the maintainer's decision, November
+2026, at the end of phase 4c). The targets stay as written. Until Unarr
+has shown itself correct and fit to replace the originals day by day,
+a measurement that misses one is recorded in the table below and left:
+no milestone is held back by it and no behaviour of the originals is
+given up for it. Each milestone measures again and updates the table.
+The misses are taken up together once the bugs are out and Unarr is the
+maintainer's daily driver.
+
+| Target | Measured | Since | State |
+|--------|----------|-------|-------|
+| Idle RSS under 60 MB | Idle for five minutes: 45 MB (glibc), 40 MB (static musl), both personalities on two small libraries. Working, and until the compiled patterns are released: 100 to 125 MB. The patterns of the two title parsers are 54 MB | 4b | Missed while working; deferred |
+| The same, on 1,000 series and 2,000 movies, three personalities | Not measured: neither library was scaled with both personalities, and Lidarr does not exist | | Unknown |
+| `GET /api/v3/series` p99 under 10 ms | 5.8 ms on the fixture's 38 series; 53 to 59 ms on 950 series | phase 1 review | Missed at 950 series; deferred |
+| Container image under 15 MB compressed | Not built since both UIs are embedded. The binary is 29.6 MiB, 11.9 MiB under `gzip -9` | | Unknown; close to the limit |
+| Cold start to first response under 1 s | 0.24 to 0.34 s, import included | | Met |
 
 First measurement, skeleton only (one `system/status` route per personality):
 1.7 MiB binary, 4.3 MB idle RSS, unchanged after 500 requests.
@@ -594,9 +612,9 @@ The 60 MB target therefore holds for a process left alone for five
 minutes, and not for one that searches every few minutes. With the RSS
 sync at the fixture's interval (100 minutes) the process spends most of
 its time under the target and rises to some 100 to 125 MB at each sync
-and each import. Proposed to the maintainer: keep
-"idle RSS under 60 MB", read after the release interval, and state the
-working figure beside it rather than pretend one number covers both.
+and each import. The maintainer's decision: the target stays, the working
+figure is a recorded miss (the table at the head of this section) and is
+taken up after Unarr has proved itself as a daily driver.
 Neither library was scaled; the patterns do not grow with the library.
 
 ## 10. Naming and distribution
@@ -1612,6 +1630,10 @@ Neither library was scaled; the patterns do not grow with the library.
   was compared by shape only. One finding was not taken: `RescanMovie`
   can run while a rename does, and so it can in the original, whose
   command does not ask for the disk.
+- **Correctness first; the targets' misses are recorded, not chased.**
+  Decided by the maintainer when the memory figures were put to them:
+  section 9 keeps one table of the targets missed or not measured, and
+  they wait until Unarr is a daily driver.
 
 ## 18. Open questions
 
@@ -1657,9 +1679,9 @@ Neither library was scaled; the patterns do not grow with the library.
   script's ICU check that can pass without ICU and its port variable
   that does not move the copy, and its queue status over SignalR, which
   leaves the pending releases out.
-- Radarr, from 4c. The memory target: met idle, exceeded at work
-  (section 9); whether the idle reading is the target, and what figure to
-  state for a working process, is the maintainer's to say. The eviction
+- Radarr, from 4c. The memory target is met idle and exceeded at work;
+  by the maintainer's decision it is a recorded miss, deferred with the
+  others (section 9). The eviction
   interval (five minutes) is a constant, not a setting. Nothing was
   scaled. The file date setting, the 3D token and the three notifications
   listed in section 17 are open, as is the place of the metadata
@@ -1732,9 +1754,9 @@ Neither library was scaled; the patterns do not grow with the library.
   the fixture": the real fixture's 38 series meet it (5.8 ms). Since the
   phase 1 review it has also been read against the 950-series fixture,
   where it stands at 53 to 59 ms and is out of reach without keeping the
-  answer. Which library size the target is for, and at what figure, is
-  the maintainer's call; the original's time on the same library has not
-  been measured.
+  answer. It is a recorded miss, deferred (section 9); which library
+  size the target is for is settled when the misses are taken up. The
+  original's time on the same library has not been measured.
 - Phase 3b has not run on the homelab: a series added from the UI or by
   the Simkl list, searched, grabbed and imported end to end, against the
   real Skyhook and the real Simkl.
