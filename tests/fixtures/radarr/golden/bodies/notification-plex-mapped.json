@@ -1,0 +1,54 @@
+{
+  "onGrab": false,
+  "onDownload": true,
+  "onUpgrade": true,
+  "onRename": true,
+  "onMovieAdded": true,
+  "onMovieDelete": true,
+  "onMovieFileDelete": true,
+  "onMovieFileDeleteForUpgrade": true,
+  "onHealthIssue": false,
+  "onHealthRestored": false,
+  "onApplicationUpdate": false,
+  "onManualInteractionRequired": false,
+  "includeHealthWarnings": false,
+  "tags": [],
+  "name": "Mock Plex",
+  "implementation": "PlexServer",
+  "configContract": "PlexServerSettings",
+  "fields": [
+    {
+      "name": "host",
+      "value": "127.0.0.1"
+    },
+    {
+      "name": "port",
+      "value": 18989
+    },
+    {
+      "name": "useSsl",
+      "value": false
+    },
+    {
+      "name": "urlBase",
+      "value": ""
+    },
+    {
+      "name": "authToken",
+      "value": "mock-plex-token"
+    },
+    {
+      "name": "updateLibrary",
+      "value": true
+    },
+    {
+      "name": "mapFrom",
+      "value": "/movies"
+    },
+    {
+      "name": "mapTo",
+      "value": "/media/movies"
+    }
+  ],
+  "id": 6
+}

@@ -691,6 +691,21 @@ pub fn import(legacy_db: &std::path::Path, db: &Db) -> anyhow::Result<ImportRepo
                 store::sequence::seed(&tx, ours, seq)?;
             }
         }
+        // The extra files keep the ids of the three tables they come from,
+        // and each kind counts on from its own table's sequence.
+        for (table, kind) in [
+            ("SubtitleFiles", ExtraKind::Subtitle),
+            ("MetadataFiles", ExtraKind::Metadata),
+            ("ExtraFiles", ExtraKind::Other),
+        ] {
+            if let Ok(seq) =
+                legacy.query_row("SELECT seq FROM sqlite_sequence WHERE name = ?1", [table], |r| {
+                    r.get::<_, i64>(0)
+                })
+            {
+                movies::seed_extra_file_sequence(&tx, kind, seq)?;
+            }
+        }
         for p in &providers {
             store::providers::insert_provider(&tx, p)?;
         }
@@ -799,6 +814,17 @@ mod tests {
             .call_blocking(|conn| store::sequence::next_id(conn, "movies"))
             .unwrap();
         assert_eq!(next, 328);
+        // The extra files count on within their kind.
+        let next = db
+            .call_blocking(|conn| {
+                Ok([
+                    movies::next_extra_file_id(conn, ExtraKind::Subtitle)?,
+                    movies::next_extra_file_id(conn, ExtraKind::Metadata)?,
+                    movies::next_extra_file_id(conn, ExtraKind::Other)?,
+                ])
+            })
+            .unwrap();
+        assert_eq!(next, [212, 5076, 27]);
     }
 
     #[test]

@@ -1,0 +1,41 @@
+{
+  "onGrab": true,
+  "onDownload": true,
+  "onUpgrade": true,
+  "onRename": true,
+  "onMovieAdded": true,
+  "onMovieDelete": true,
+  "onMovieFileDelete": true,
+  "onMovieFileDeleteForUpgrade": true,
+  "onHealthIssue": true,
+  "onHealthRestored": true,
+  "onApplicationUpdate": true,
+  "onManualInteractionRequired": true,
+  "includeHealthWarnings": false,
+  "tags": [],
+  "name": "",
+  "implementation": "Webhook",
+  "configContract": "WebhookSettings",
+  "fields": [
+    {
+      "name": "url",
+      "value": "not a url"
+    },
+    {
+      "name": "method",
+      "value": 1
+    },
+    {
+      "name": "username",
+      "value": ""
+    },
+    {
+      "name": "password",
+      "value": ""
+    },
+    {
+      "name": "headers",
+      "value": []
+    }
+  ]
+}

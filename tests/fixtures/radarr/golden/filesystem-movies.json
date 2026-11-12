@@ -1,0 +1,56 @@
+{
+  "body": {
+    "directories": [
+      {
+        "lastModified": "2026-11-12T10:00:09Z",
+        "name": "Backcountry (2015)",
+        "path": "/movies/Backcountry (2015)/",
+        "size": 0,
+        "type": "folder"
+      },
+      {
+        "lastModified": "2026-11-12T09:58:45Z",
+        "name": "BlacKkKlansman (2018)",
+        "path": "/movies/BlacKkKlansman (2018)/",
+        "size": 0,
+        "type": "folder"
+      },
+      {
+        "lastModified": "2026-11-12T09:58:21Z",
+        "name": "Candyman (1992)",
+        "path": "/movies/Candyman (1992)/",
+        "size": 0,
+        "type": "folder"
+      },
+      {
+        "lastModified": "2026-11-12T10:00:45Z",
+        "name": "Last Night in Soho (2021)",
+        "path": "/movies/Last Night in Soho (2021)/",
+        "size": 0,
+        "type": "folder"
+      },
+      {
+        "lastModified": "2026-11-12T10:00:57Z",
+        "name": "Nightmare Alley (2021)",
+        "path": "/movies/Nightmare Alley (2021)/",
+        "size": 0,
+        "type": "folder"
+      },
+      {
+        "lastModified": "2026-11-12T09:59:37Z",
+        "name": "The Holdovers (2023)",
+        "path": "/movies/The Holdovers (2023)/",
+        "size": 0,
+        "type": "folder"
+      }
+    ],
+    "files": [],
+    "parent": "/"
+  },
+  "recordedAt": "2026-11-12T10:01:09Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/filesystem?path=/movies/&includeFiles=false&allowFoldersWithoutTrailingSlashes=false"
+  },
+  "status": 200
+}

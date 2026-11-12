@@ -335,29 +335,6 @@ impl Drop for ReplayDirs {
     }
 }
 
-/// Every string in `v` with the replay directories mapped back to the
-/// recorded ones.
-fn unmap_paths(v: &Value, mappings: &[(String, &str)]) -> Value {
-    match v {
-        Value::String(s) => {
-            let mut out = s.clone();
-            for (replay, recorded) in mappings {
-                if out.contains(replay.as_str()) {
-                    out = out.replace(replay.as_str(), recorded);
-                }
-            }
-            Value::String(out)
-        }
-        Value::Array(items) => Value::Array(items.iter().map(|v| unmap_paths(v, mappings)).collect()),
-        Value::Object(map) => Value::Object(
-            map.iter()
-                .map(|(k, v)| (k.clone(), unmap_paths(v, mappings)))
-                .collect(),
-        ),
-        _ => v.clone(),
-    }
-}
-
 /// The fixture imported, its library moved under `dirs` when given.
 fn build_state_in(dirs: Option<&ReplayDirs>, adjust: impl FnOnce(&mut HostConfig)) -> AppState {
     use_bundled_ffprobe();
@@ -434,33 +411,6 @@ fn mock_filter(name: &str, v: Value) -> Value {
     }
 }
 
-/// The recording's `/tv` and `/downloads` in a request's path or body
-/// become the replay directories: after `=` or `"`, up to the next `/`,
-/// `"`, `&` or the end, so that `/downloads/tv/...` maps once.
-fn map_paths(text: &str, mappings: &[(String, &str)]) -> String {
-    let mut out = String::with_capacity(text.len());
-    let mut rest = text;
-    'outer: while !rest.is_empty() {
-        for (replay, recorded) in mappings {
-            for lead in ['=', '"'] {
-                let needle = format!("{lead}{recorded}");
-                if let Some(after) = rest.strip_prefix(needle.as_str()) {
-                    if after.is_empty() || after.starts_with(['/', '"', '&']) {
-                        out.push(lead);
-                        out.push_str(replay);
-                        rest = after;
-                        continue 'outer;
-                    }
-                }
-            }
-        }
-        let ch = rest.chars().next().unwrap();
-        out.push(ch);
-        rest = &rest[ch.len_utf8()..];
-    }
-    out
-}
-
 async fn send(
     app: &axum::Router,
     g: &Golden,
@@ -519,6 +469,7 @@ async fn start_mock(dirs: &ReplayDirs) -> unarr_mock::Mock {
         unarr_mock::MockDirs {
             downloads: Some(dirs.downloads.clone()),
             tv: Some(dirs.tv.clone()),
+            movies: None,
         },
     )
     .await

@@ -1,0 +1,9 @@
+{
+  "body": null,
+  "recordedAt": "2026-11-12T10:01:09Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/parse?path=/movies/The%20Holdovers%20(2023)/The.Holdovers.2023.1080p.BluRay.x264-GRP.mkv"
+  },
+  "status": 204
+}

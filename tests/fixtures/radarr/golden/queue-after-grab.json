@@ -4,7 +4,7 @@
     "pageSize": 20,
     "records": [
       {
-        "added": "2026-11-11T22:00:26Z",
+        "added": "2026-11-12T09:55:49Z",
         "customFormatScore": 0,
         "customFormats": [
           {
@@ -15,7 +15,7 @@
         "downloadClient": "Mock Transmission",
         "downloadClientHasPostImportCategory": false,
         "downloadId": "5AE419C220561D2F40DDBB4026B5D0121DCC040E",
-        "estimatedCompletionTime": "2026-11-11T22:10:28Z",
+        "estimatedCompletionTime": "2026-11-12T10:05:50Z",
         "id": 936833475,
         "indexer": "Mock Torznab (Prowlarr)",
         "languages": [
@@ -133,7 +133,7 @@
             "tarot cards",
             "violence"
           ],
-          "lastSearchTime": "2026-11-11T22:00:20Z",
+          "lastSearchTime": "2026-11-12T09:55:43Z",
           "minimumAvailability": "released",
           "monitored": true,
           "movieFileId": 0,
@@ -215,13 +215,13 @@
         "trackedDownloadStatus": "ok"
       },
       {
-        "added": "2026-11-11T22:00:24Z",
+        "added": "2026-11-12T09:55:47Z",
         "customFormatScore": 0,
         "customFormats": [],
         "downloadClient": "Mock qBittorrent",
         "downloadClientHasPostImportCategory": false,
         "downloadId": "13706ED57ADBE030F510BEDCD37595376901117C",
-        "estimatedCompletionTime": "2026-11-11T22:10:28Z",
+        "estimatedCompletionTime": "2026-11-12T10:05:50Z",
         "id": 1132538262,
         "indexer": "Mock Torznab (Prowlarr)",
         "languages": [
@@ -444,13 +444,13 @@
         "trackedDownloadStatus": "ok"
       },
       {
-        "added": "2026-11-11T22:00:22Z",
+        "added": "2026-11-12T09:55:45Z",
         "customFormatScore": 0,
         "customFormats": [],
         "downloadClient": "Mock SABnzbd",
         "downloadClientHasPostImportCategory": false,
         "downloadId": "SABnzbd_nzo_mock1",
-        "estimatedCompletionTime": "2026-11-11T22:10:28Z",
+        "estimatedCompletionTime": "2026-11-12T10:05:50Z",
         "id": 503947115,
         "indexer": "Mock Newznab (Prowlarr)",
         "languages": [
@@ -512,7 +512,7 @@
             "winter",
             "winter break"
           ],
-          "lastSearchTime": "2026-11-11T22:00:16Z",
+          "lastSearchTime": "2026-11-12T09:55:39Z",
           "minimumAvailability": "released",
           "monitored": true,
           "movieFileId": 0,
@@ -599,7 +599,7 @@
     "sortKey": "timeleft",
     "totalRecords": 3
   },
-  "recordedAt": "2026-11-11T22:00:38Z",
+  "recordedAt": "2026-11-12T09:56:01Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/queue?page=1&pageSize=20&sortKey=timeleft&sortDirection=ascending&includeUnknownMovieItems=false&includeMovie=true"

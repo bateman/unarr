@@ -1,0 +1,15 @@
+{
+  "body": {
+    "status": 404,
+    "title": "Not Found",
+    "traceId": "00-103d114d86146ffe01996a138965ee11-296bc30b1c8402ad-00",
+    "type": "https://tools.ietf.org/html/rfc9110#section-15.5.5"
+  },
+  "recordedAt": "2026-11-12T09:57:20Z",
+  "request": {
+    "body": "bodies/notification-update-missing.json",
+    "method": "PUT",
+    "path": "/api/v3/notification/999"
+  },
+  "status": 404
+}

@@ -1,0 +1,37 @@
+{
+  "body": {
+    "body": {
+      "isExclusive": false,
+      "isLongRunning": false,
+      "isTypeExclusive": false,
+      "movieId": 10,
+      "name": "RescanMovie",
+      "requiresDiskAccess": false,
+      "sendUpdatesToClient": true,
+      "suppressMessages": false,
+      "trigger": "manual",
+      "updateScheduledTask": true
+    },
+    "commandName": "Rescan Movie",
+    "duration": "00:00:00.0939157",
+    "ended": "2026-11-12T09:58:33Z",
+    "id": 472994,
+    "message": "Scanning disk for Backcountry",
+    "name": "RescanMovie",
+    "priority": "normal",
+    "queued": "2026-11-12T09:58:33Z",
+    "result": "successful",
+    "sendUpdatesToClient": true,
+    "started": "2026-11-12T09:58:33Z",
+    "stateChangeTime": "2026-11-12T09:58:33Z",
+    "status": "completed",
+    "trigger": "manual",
+    "updateScheduledTask": true
+  },
+  "recordedAt": "2026-11-12T09:58:45Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/command/472994"
+  },
+  "status": 200
+}

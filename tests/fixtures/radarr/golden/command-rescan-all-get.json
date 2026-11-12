@@ -1,0 +1,36 @@
+{
+  "body": {
+    "body": {
+      "isExclusive": false,
+      "isLongRunning": false,
+      "isTypeExclusive": false,
+      "name": "RescanMovie",
+      "requiresDiskAccess": false,
+      "sendUpdatesToClient": true,
+      "suppressMessages": false,
+      "trigger": "manual",
+      "updateScheduledTask": true
+    },
+    "commandName": "Rescan Movie",
+    "duration": "00:00:03.2688896",
+    "ended": "2026-11-12T09:59:04Z",
+    "id": 472999,
+    "message": "Scanning disk for Predestination",
+    "name": "RescanMovie",
+    "priority": "normal",
+    "queued": "2026-11-12T09:59:01Z",
+    "result": "successful",
+    "sendUpdatesToClient": true,
+    "started": "2026-11-12T09:59:01Z",
+    "stateChangeTime": "2026-11-12T09:59:01Z",
+    "status": "completed",
+    "trigger": "manual",
+    "updateScheduledTask": true
+  },
+  "recordedAt": "2026-11-12T09:59:21Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/command/472999"
+  },
+  "status": 200
+}

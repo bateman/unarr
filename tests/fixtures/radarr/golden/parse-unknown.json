@@ -1,0 +1,60 @@
+{
+  "body": {
+    "customFormatScore": 0,
+    "customFormats": [
+      {
+        "id": 58,
+        "name": "Language not Italian"
+      }
+    ],
+    "languages": [
+      {
+        "id": 0,
+        "name": "Unknown"
+      }
+    ],
+    "parsedMovieInfo": {
+      "edition": "",
+      "imdbId": "",
+      "languages": [
+        {
+          "id": 0,
+          "name": "Unknown"
+        }
+      ],
+      "movieTitle": "Some Other Movie",
+      "movieTitles": [
+        "Some Other Movie"
+      ],
+      "originalTitle": "Some.Other.Movie.2019.720p.HDTV.x264-GRP",
+      "primaryMovieTitle": "Some Other Movie",
+      "quality": {
+        "quality": {
+          "id": 4,
+          "modifier": "none",
+          "name": "HDTV-720p",
+          "resolution": 720,
+          "source": "tv"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "releaseGroup": "GRP",
+      "releaseHash": "",
+      "releaseTitle": "Some.Other.Movie.2019.720p.HDTV.x264-GRP",
+      "simpleReleaseTitle": "A.Movie.2019.720p.HDTV.x264-GRP",
+      "tmdbId": 0,
+      "year": 2019
+    },
+    "title": "Some.Other.Movie.2019.720p.HDTV.x264-GRP"
+  },
+  "recordedAt": "2026-11-12T10:01:09Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/parse?title=Some.Other.Movie.2019.720p.HDTV.x264-GRP"
+  },
+  "status": 200
+}

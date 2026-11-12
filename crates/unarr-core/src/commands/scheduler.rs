@@ -366,8 +366,25 @@ mod tests {
         );
         assert!(CommandBody::parse_for(Personality::Sonarr, "SeriesSearch", &body).is_some());
         assert!(CommandBody::parse_for(Personality::Radarr, "RssSync", &body).is_some());
-        // A task Radarr lists and does not run yet.
-        assert!(!CommandBody::Housekeeping.runs_in(Personality::Radarr));
+        // The tasks with no media in them run in both; the library's
+        // commands under each application's own names.
+        assert!(CommandBody::Housekeeping.runs_in(Personality::Radarr));
         assert!(CommandBody::Housekeeping.runs_in(Personality::Sonarr));
+        assert!(CommandBody::parse_for(Personality::Radarr, "RescanMovie", &body).is_some());
+        assert!(CommandBody::parse_for(Personality::Sonarr, "RescanMovie", &body).is_none());
+        assert!(CommandBody::parse_for(Personality::Radarr, "RescanSeries", &body).is_none());
+        // A task Radarr lists and does not run yet.
+        assert!(!CommandBody::ImportListSync { definition_id: None }.runs_in(Personality::Radarr));
+        // Whatever the body says, a backup posted to Radarr is a manual one.
+        assert_eq!(
+            CommandBody::parse_for(
+                Personality::Radarr,
+                "Backup",
+                &serde_json::json!({"type": "scheduled"})
+            ),
+            Some(CommandBody::Backup {
+                kind: super::super::BackupType::Manual
+            })
+        );
     }
 }

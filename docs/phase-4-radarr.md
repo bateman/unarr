@@ -111,7 +111,7 @@ Decided here so the phase does not start with a rewrite:
   `ui_router` finally read their state: a Radarr route list, a
   `schemas/radarr/` catalogue recorded from the original, `ui/radarr/`
   embedded next to `ui/sonarr/`, `/feed/v3/calendar/Radarr.ics`.
-- **One HTTP client per personality** (`docs/DESIGN.md` section 17): each
+- **One HTTP client per personality** (`docs/DESIGN.md` section 18): each
   personality's proxy and certificate settings apply to its own requests.
   This is a precondition for running two, not a nicety.
 - **Metadata: `api.radarr.video`** behind a movie-shaped trait next to the
@@ -276,7 +276,7 @@ settled one way or the other; the Sonarr goldens are untouched.
    Radarr recorded from the maintainer's configuration
    (`tests/fixtures/recyclarr/radarr.yml`, already in the tree) and replayed
    against Unarr; `delete_old_custom_formats` must leave alone the formats
-   Recyclarr did not create (`docs/DESIGN.md` section 17).
+   Recyclarr did not create (`docs/DESIGN.md` section 18).
 4. **Import list**: the IMDb watchlist (`IMDbListImport`), the one the
    maintainer uses, against a mock; the rest keep their settings.
 5. **Backups** and log files for Radarr; the audit method of `docs/audit/`
@@ -286,7 +286,7 @@ settled one way or the other; the Sonarr goldens are untouched.
 6. **Measurements**: both personalities, idle and after an RSS sync, an
    import and a full refresh, a library scaled to 2,000 movies beside the
    950-series one, on glibc and on the image.
-7. **The review's open suggestion** (`docs/DESIGN.md` section 17): share
+7. **The review's open suggestion** (`docs/DESIGN.md` section 18): share
    between the two pipelines the pieces that carry no media notion (the
    refresh loop over the clients, what a grab's failure means, the release
    comparisons, the push validation). Take it up here if the two sides are
@@ -306,7 +306,7 @@ levels beyond what the chosen import lists need; the Kodi, Plex and
 Emby metadata file writers; notification implementations beyond Discord,
 webhook and Plex; download clients beyond the four; HTTPS serving; the
 switch of the Servarr-proxy user agents to Unarr's own, which is its own
-decision (`docs/DESIGN.md` section 17) and not part of this phase.
+decision (`docs/DESIGN.md` section 18) and not part of this phase.
 
 ## Sizing
 
@@ -396,7 +396,7 @@ read through the schema catalogue and not yet through typed settings
 (`movieCategory` is in the schemas, not in `downloadclients::settings`);
 the personality's HTTP clients are in `AppState::http()` for the indexer
 and download client services to be built on. `docs/DESIGN.md` section 15
-has the decisions, section 17 what is open.
+has the decisions, section 18 what is open.
 
 ## Status of 4b, November 2026
 
@@ -484,4 +484,113 @@ last pending golden; compared with the original on 444 formats of the
 settings form) and nothing renames with it yet; the command runtime runs Radarr's commands through
 `movies::commands`, where the library's commands go; the scheduled tasks
 of the library are listed and skipped by `CommandBody::runs_in`.
-`docs/DESIGN.md` section 16 has the decisions, section 17 what is open.
+`docs/DESIGN.md` section 16 has the decisions, section 18 what is open.
+
+## Status of 4c, November 2026
+
+Recorded and replayed on the same fixture. The recording's mocks now
+complete downloads with real clips under a movie library of their own
+(`scripts/mock-servarr.py --movies`), and keep what the mock Discord, the
+webhook and the mock Plex receive; the replay's mocks (`unarr-mock`) do the
+same. The whole list is one recording of the original, taken in one run:
+two recordings nine hours apart could not be mixed, because the answers
+carry the clock.
+
+| Exit criterion | Status |
+|----------------|--------|
+| `make ui && make check` green | Yes: fmt, clippy `-D warnings`, 628 tests in 31 test binaries. Sonarr's replay is unchanged: the same 634 goldens, none re-recorded. |
+| Completed items end as movie files under the root folder, named by the fixture's naming settings, with media info | Yes. The mock qBittorrent and SABnzbd complete three items; two import (hardlink or copy, the maintainer's mode) and one waits for manual interaction, as in the original. The file names, `movieFile` rows and media info (from the ffprobe the pinned Radarr release ships, also used by the replay) are goldens. |
+| History, SignalR and the three notifications equal to the oracle | History: yes, goldens. Notifications: yes, the bodies the mock Discord and webhook received and the requests the mock Plex received are goldens (10 snapshots), with Plex seeing the library under another path as on the maintainer's installation. SignalR: not recorded from the original, as before; the replay asserts what the hub sends. |
+| `scripts/bazarr-replay.py --app radarr` passes with `RescanMovie` answered | Yes (`make bazarr-radarr` against the release binary on both fixtures): 193 movies and 100 files checked, `RescanMovie` answered 201 and completed; the Sonarr side replayed against the same process. Bazarr itself was not run. |
+| The pages render | Yes, with Playwright against the release binary on both fixtures after 388 requests of the list: login, queue (three rows, one blocked), the queue's manual import, history, blocklist, wanted, a movie page with its imported file, the movie's history, the rename preview, the interactive search (nine releases), Manage Files, tasks, status, Settings > Connect and the Plex form, events, the movie index. Nineteen steps, no page error; the requests that failed are the covers the fixture does not have. |
+| The memory point is settled | Measured and brought down at idle, not at work; the reading of the target is the maintainer's to confirm (below, and `docs/DESIGN.md` section 9). |
+| The Sonarr goldens are untouched | Yes. |
+| The goldens replay | All 463 (453 answers and 10 mock snapshots), none pending, recorded from the real Radarr before each shape was written. |
+
+What 4c delivered against its eight points:
+
+1. **Completed download handling.** `movies::import`: the ten
+   specifications of Radarr's `MovieImport/Specifications` in the
+   original's order with its fixtures as tests, the aggregators, sample
+   detection, the three transfer modes and the recycling bin, the upgrade,
+   `DownloadFolderImported` and `MovieFileDeleted` history, removal from
+   the client, `ManualInteractionRequired`.
+2. **Disk scan and the library's commands.** `RescanMovie`,
+   `DownloadedMoviesScan`, the scheduled rescan with the original's skips
+   and exclusions, extra and subtitle files (found, imported, renamed and
+   deleted with their movie file), `Housekeeping` (seventeen housekeepers),
+   `Backup`, `CleanUpRecycleBin`; `RefreshMovie` is accepted and completes
+   without effect.
+3. **Rename.** `GET rename`, `RenameFiles`, `RenameMovie` with the folder
+   move, on `movies::naming`.
+4. **Manual import and movie files.** `GET` and `POST manualimport`, the
+   `ManualImport` command, `moviefile` `PUT`, editor, bulk and `DELETE`,
+   `filesystem`, `parse`.
+5. **Notifications.** CRUD, `test`, `testall` and the actions; grab,
+   download, upgrade, rename, movie file delete, health, health restored
+   and manual interaction to Discord, the webhook and Plex, the latter with
+   its path mapping and the movie-section refresh.
+6. **Health and blocklist.** The import's checks (root folders, the
+   collections' root folders, remote path mappings, completed download
+   handling, mounts) with Radarr's messages and links; `DELETE blocklist`
+   and `blocklist/bulk`.
+7. **Memory.** The compiled patterns of both parsers and of the custom
+   formats are now released after five minutes without use and compiled
+   again on demand (under a second for all of them). Release build, both
+   personalities on the two fixtures:
+
+   | | glibc | static musl (the image's build) |
+   |---|-------|------|
+   | Idle after start | 37.6 MB | 30.1 MB |
+   | After a search, an RSS sync and the imports | 122.9 MB | 97.9 MB |
+   | At rest, 35 s later | 104.4 MB | 97.8 MB |
+   | After 330 s idle | 45.4 MB | 39.5 MB |
+   | Working again | 125.1 MB | 98.2 MB |
+
+   So the 60 MB target holds for a process that has been idle for five
+   minutes and does not hold while it works or just after: the patterns of
+   the two parsers together are 54 MB compiled (series 42, movies 14), and
+   what made them smaller cost speed or changed what they match
+   (`docs/DESIGN.md` section 9). The
+   proposal put to the maintainer: keep 60 MB as the idle figure, read
+   after the release interval, and state the working figure beside it
+   (125 MB on glibc, 100 MB on musl, on two small libraries). The musl
+   build was measured for the first time; the image itself was not built.
+8. **A look at the screen.** As in the table; 4b's queue, interactive
+   search and command messages included.
+
+What does not hold, or was not verified:
+
+- **Radarr's file date setting** (the file's date set to the cinema or
+  release date) is stored and not applied.
+- **`{MediaInfo 3D}`** reads the stream's view count only; the fixture has
+  no 3D file.
+- **Notifications not wired**: movie added, movies deleted, application
+  update. The metadata they would carry belongs to 4d. Plex is refreshed
+  directly; plex.tv is not pinged first, as on the Sonarr side.
+- **The metadata consumers' place** in the order of the extras is partly
+  inferred from the source: none is enabled on the fixture.
+- **`RefreshMovie` was left out of the recording**: on the original it
+  reached the metadata server, so its answers changed between recordings.
+  It is 4d's.
+- **Working memory** is where 4b left it (above); neither library was
+  scaled.
+- **Not run**: Bazarr itself; the image; the homelab, by the maintainer's
+  choice left to the end of 4d. The maintainer's Radarr logs were read for
+  the facts they hold (hardlink or copy from qBittorrent, a move from the
+  second torrent client, no recycling bin, Plex under another path, the
+  ping to plex.tv) and confirm the import's sequence; none of their
+  content is in the tree.
+- One test of the mock writes under the real `/downloads` of the machine
+  it runs on; it should use a directory of its own.
+
+What 4d starts from: `RefreshMovie` is accepted and does nothing, and
+everything that depends on fresh metadata (the notifications above,
+minimum availability moving with time, covers) waits for it; movies are
+never added, edited, moved or deleted through the API (`PUT moviefile` and
+the monitored flag an import sets are the only movie-side writes); the
+settings writes are those of the providers, the notifications and
+`PUT delayprofile/{id}`; `Backup` runs for Radarr, the restore and the log
+files do not; the import list is listed and skipped. The audit method has
+not been applied to Radarr beyond `make http-audit`. `docs/DESIGN.md`
+section 17 has the decisions, section 18 what is open.

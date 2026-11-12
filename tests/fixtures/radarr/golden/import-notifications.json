@@ -1,0 +1,651 @@
+{
+  "body": [
+    {
+      "body": {
+        "embeds": [
+          {
+            "author": {
+              "icon_url": "https://raw.githubusercontent.com/Radarr/Radarr/develop/Logo/256.png",
+              "name": "Radarr"
+            },
+            "color": 2605644,
+            "description": "Movie Imported",
+            "fields": [
+              {
+                "inline": false,
+                "name": "Overview",
+                "value": "The Candyman, a murderous soul with a hook for a hand, is accidentally summoned to reality by a skeptic grad student researching the monster's myth."
+              },
+              {
+                "inline": false,
+                "name": "Rating",
+                "value": "6.7"
+              },
+              {
+                "inline": false,
+                "name": "Genres",
+                "value": "Drama, Horror, Thriller"
+              },
+              {
+                "inline": true,
+                "name": "Quality",
+                "value": "WEBDL-480p"
+              },
+              {
+                "inline": true,
+                "name": "Codecs",
+                "value": "x264 / AAC 1"
+              },
+              {
+                "inline": false,
+                "name": "Group",
+                "value": "MeM"
+              },
+              {
+                "inline": true,
+                "name": "Size",
+                "value": "117.2 KB"
+              },
+              {
+                "inline": false,
+                "name": "Languages",
+                "value": "eng"
+              },
+              {
+                "inline": false,
+                "name": "Subtitles",
+                "value": "eng"
+              },
+              {
+                "inline": false,
+                "name": "Links",
+                "value": "[TMDb](https://themoviedb.org/movie/9529) / [Trakt](https://trakt.tv/movies/tt0103919) / [IMDb](https://imdb.com/title/tt0103919/) / [YouTube](https://www.youtube.com/watch?v=CeLZMhkFTuU)"
+              },
+              {
+                "inline": false,
+                "name": "Release",
+                "value": "```Candyman.1992.iTA.ENG.1080p.WEB-DL.DD5.1.H264-MeM```"
+              }
+            ],
+            "image": {
+              "url": "https://image.tmdb.org/t/p/original/l0JgqFNxeMb1OoHq1CzdYC3Y5J8.jpg"
+            },
+            "thumbnail": {
+              "url": "https://image.tmdb.org/t/p/original/jQtgkgDZE7egMq532sOt83DnT83.jpg"
+            },
+            "timestamp": "2026-11-12T09:57:21.1735669Z",
+            "title": "Candyman (1992)",
+            "url": "https://www.themoviedb.org/movie/9529"
+          }
+        ],
+        "username": "Unarr fixture"
+      },
+      "headers": {
+        "content-type": "application/json"
+      },
+      "method": "POST",
+      "path": "/discord/api/webhooks/100/fixturetoken",
+      "query": {},
+      "service": "discord"
+    },
+    {
+      "body": {
+        "applicationUrl": "",
+        "customFormatInfo": {
+          "customFormatScore": -10000,
+          "customFormats": [
+            {
+              "id": 54,
+              "name": "DD"
+            },
+            {
+              "id": 58,
+              "name": "Language not Italian"
+            }
+          ]
+        },
+        "downloadClient": "Mock SABnzbd",
+        "downloadClientType": "SABnzbd",
+        "downloadId": "SABnzbd_nzo_mock7",
+        "eventType": "Download",
+        "instanceName": "Radarr",
+        "isUpgrade": false,
+        "movie": {
+          "folderPath": "/movies/Candyman (1992)",
+          "genres": [
+            "Drama",
+            "Horror",
+            "Thriller"
+          ],
+          "id": 20,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/jQtgkgDZE7egMq532sOt83DnT83.jpg",
+              "url": "/MediaCover/20/poster.jpg?h=a75b3e969b8fb4de9865"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/l0JgqFNxeMb1OoHq1CzdYC3Y5J8.jpg",
+              "url": "/MediaCover/20/fanart.jpg?h=1b46799330baf1615150"
+            }
+          ],
+          "imdbId": "tt0103919",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "The Candyman, a murderous soul with a hook for a hand, is accidentally summoned to reality by a skeptic grad student researching the monster's myth.",
+          "releaseDate": "1993-07-06",
+          "tags": [],
+          "title": "Candyman",
+          "tmdbId": 9529,
+          "year": 1992
+        },
+        "movieFile": {
+          "dateAdded": "2026-11-12T09:57:21.0477572Z",
+          "id": 405,
+          "indexerFlags": "0",
+          "languages": [
+            {
+              "id": 1,
+              "name": "English"
+            }
+          ],
+          "mediaInfo": {
+            "audioChannels": 1.0,
+            "audioCodec": "AAC",
+            "audioLanguages": [
+              "eng"
+            ],
+            "height": 64,
+            "subtitles": [
+              "eng"
+            ],
+            "videoCodec": "x264",
+            "videoDynamicRange": "",
+            "videoDynamicRangeType": "",
+            "width": 64
+          },
+          "path": "/movies/Candyman (1992)/Candyman (1992) {tmdb-9529} - [WEBDL-480p][AAC 1.0][x264]-MeM.mkv",
+          "quality": "WEBDL-480p",
+          "qualityVersion": 1,
+          "relativePath": "Candyman (1992) {tmdb-9529} - [WEBDL-480p][AAC 1.0][x264]-MeM.mkv",
+          "releaseGroup": "MeM",
+          "sceneName": "Candyman.1992.iTA.ENG.1080p.WEB-DL.DD5.1.H264-MeM",
+          "size": 119980,
+          "sourcePath": "/downloads/complete/movies/Candyman.1992.iTA.ENG.1080p.WEB-DL.DD5.1.H264-MeM/Candyman.1992.iTA.ENG.1080p.WEB-DL.DD5.1.H264-MeM.mkv"
+        },
+        "release": {
+          "indexer": "Mock Newznab (Prowlarr)",
+          "indexerFlags": [],
+          "releaseTitle": "Candyman.1992.iTA.ENG.1080p.WEB-DL.DD5.1.H264-MeM",
+          "size": 6979321856
+        },
+        "remoteMovie": {
+          "imdbId": "tt0103919",
+          "title": "Candyman",
+          "tmdbId": 9529,
+          "year": 1992
+        }
+      },
+      "headers": {
+        "authorization": "Basic aG9vazpzZWNyZXQ=",
+        "content-type": "application/json",
+        "x-fixture": "yes"
+      },
+      "method": "PUT",
+      "path": "/webhook/updated",
+      "query": {},
+      "service": "webhook"
+    },
+    {
+      "body": null,
+      "headers": {},
+      "method": "GET",
+      "path": "/identity",
+      "query": {
+        "X-Plex-Client-Identifier": "b77809cf-c4e6-47e0-abcb-f1af24c5301b",
+        "X-Plex-Device-Name": "Radarr",
+        "X-Plex-Platform": "Windows",
+        "X-Plex-Platform-Version": "7",
+        "X-Plex-Product": "Radarr",
+        "X-Plex-Token": "mock-plex-token",
+        "X-Plex-Version": "6.4.4.10685"
+      },
+      "service": "plex"
+    },
+    {
+      "body": null,
+      "headers": {},
+      "method": "GET",
+      "path": "/library/sections",
+      "query": {
+        "X-Plex-Client-Identifier": "b77809cf-c4e6-47e0-abcb-f1af24c5301b",
+        "X-Plex-Device-Name": "Radarr",
+        "X-Plex-Platform": "Windows",
+        "X-Plex-Platform-Version": "7",
+        "X-Plex-Product": "Radarr",
+        "X-Plex-Token": "mock-plex-token",
+        "X-Plex-Version": "6.4.4.10685"
+      },
+      "service": "plex"
+    },
+    {
+      "body": null,
+      "headers": {},
+      "method": "GET",
+      "path": "/library/sections/1/refresh",
+      "query": {
+        "X-Plex-Client-Identifier": "b77809cf-c4e6-47e0-abcb-f1af24c5301b",
+        "X-Plex-Device-Name": "Radarr",
+        "X-Plex-Platform": "Windows",
+        "X-Plex-Platform-Version": "7",
+        "X-Plex-Product": "Radarr",
+        "X-Plex-Token": "mock-plex-token",
+        "X-Plex-Version": "6.4.4.10685",
+        "path": "/movies/Candyman (1992)"
+      },
+      "service": "plex"
+    },
+    {
+      "body": {
+        "embeds": [
+          {
+            "author": {
+              "icon_url": "https://raw.githubusercontent.com/Radarr/Radarr/develop/Logo/256.png",
+              "name": "Radarr"
+            },
+            "color": 2605644,
+            "description": "Movie Imported",
+            "fields": [
+              {
+                "inline": false,
+                "name": "Overview",
+                "value": "Colorado Springs, late 1970s. Ron Stallworth, an African American police officer, and Flip Zimmerman, his Jewish colleague, run an undercover operation to infiltrate the Ku Klux Klan."
+              },
+              {
+                "inline": false,
+                "name": "Rating",
+                "value": "7.484"
+              },
+              {
+                "inline": false,
+                "name": "Genres",
+                "value": "Crime, Drama, History"
+              },
+              {
+                "inline": true,
+                "name": "Quality",
+                "value": "WEBDL-480p"
+              },
+              {
+                "inline": true,
+                "name": "Codecs",
+                "value": "x264 / AAC 1"
+              },
+              {
+                "inline": false,
+                "name": "Group",
+                "value": "MeM"
+              },
+              {
+                "inline": true,
+                "name": "Size",
+                "value": "173.7 KB"
+              },
+              {
+                "inline": false,
+                "name": "Languages",
+                "value": "eng/ita"
+              },
+              {
+                "inline": false,
+                "name": "Subtitles",
+                "value": "eng/ita"
+              },
+              {
+                "inline": false,
+                "name": "Links",
+                "value": "[TMDb](https://themoviedb.org/movie/487558) / [Trakt](https://trakt.tv/movies/tt7349662) / [IMDb](https://imdb.com/title/tt7349662/) / [YouTube](https://www.youtube.com/watch?v=7tgMuagdEhc) / [Website](https://www.focusfeatures.com/blackkklansman)"
+              },
+              {
+                "inline": false,
+                "name": "Release",
+                "value": "```BlacKkKlansman.2018.iTA.ENG.1080p.WEB-DL.DD5.1.H264-MeM```"
+              }
+            ],
+            "image": {
+              "url": "https://image.tmdb.org/t/p/original/ot3eZ9XfOF42a3zFWluMPWkfCHB.jpg"
+            },
+            "thumbnail": {
+              "url": "https://image.tmdb.org/t/p/original/8jxqAvSDoneSKRczaK8v9X5gqBp.jpg"
+            },
+            "timestamp": "2026-11-12T09:57:33.0190428Z",
+            "title": "BlacKkKlansman (2018)",
+            "url": "https://www.themoviedb.org/movie/487558"
+          }
+        ],
+        "username": "Unarr fixture"
+      },
+      "headers": {
+        "content-type": "application/json"
+      },
+      "method": "POST",
+      "path": "/discord/api/webhooks/100/fixturetoken",
+      "query": {},
+      "service": "discord"
+    },
+    {
+      "body": {
+        "applicationUrl": "",
+        "customFormatInfo": {
+          "customFormatScore": 0,
+          "customFormats": [
+            {
+              "id": 54,
+              "name": "DD"
+            }
+          ]
+        },
+        "downloadClient": "Mock SABnzbd",
+        "downloadClientType": "SABnzbd",
+        "downloadId": "SABnzbd_nzo_mock6",
+        "eventType": "Download",
+        "instanceName": "Radarr",
+        "isUpgrade": false,
+        "movie": {
+          "folderPath": "/movies/BlacKkKlansman (2018)",
+          "genres": [
+            "Crime",
+            "Drama",
+            "History"
+          ],
+          "id": 13,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/8jxqAvSDoneSKRczaK8v9X5gqBp.jpg",
+              "url": "/MediaCover/13/poster.jpg?h=5c08b6ad5cfb4d6bd012"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/ot3eZ9XfOF42a3zFWluMPWkfCHB.jpg",
+              "url": "/MediaCover/13/fanart.jpg?h=3491da30d2db857b5159"
+            }
+          ],
+          "imdbId": "tt7349662",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Colorado Springs, late 1970s. Ron Stallworth, an African American police officer, and Flip Zimmerman, his Jewish colleague, run an undercover operation to infiltrate the Ku Klux Klan.",
+          "releaseDate": "2018-11-06",
+          "tags": [],
+          "title": "BlacKkKlansman",
+          "tmdbId": 487558,
+          "year": 2018
+        },
+        "movieFile": {
+          "dateAdded": "2026-11-12T09:57:32.9930585Z",
+          "id": 406,
+          "indexerFlags": "0",
+          "languages": [
+            {
+              "id": 1,
+              "name": "English"
+            },
+            {
+              "id": 5,
+              "name": "Italian"
+            }
+          ],
+          "mediaInfo": {
+            "audioChannels": 1.0,
+            "audioCodec": "AAC",
+            "audioLanguages": [
+              "eng",
+              "ita"
+            ],
+            "height": 64,
+            "subtitles": [
+              "eng",
+              "ita"
+            ],
+            "videoCodec": "x264",
+            "videoDynamicRange": "",
+            "videoDynamicRangeType": "",
+            "width": 64
+          },
+          "path": "/movies/BlacKkKlansman (2018)/BlacKkKlansman (2018) {tmdb-487558} - [WEBDL-480p][AAC 1.0][x264]-MeM.mkv",
+          "quality": "WEBDL-480p",
+          "qualityVersion": 1,
+          "relativePath": "BlacKkKlansman (2018) {tmdb-487558} - [WEBDL-480p][AAC 1.0][x264]-MeM.mkv",
+          "releaseGroup": "MeM",
+          "sceneName": "BlacKkKlansman.2018.iTA.ENG.1080p.WEB-DL.DD5.1.H264-MeM",
+          "size": 177860,
+          "sourcePath": "/downloads/complete/movies/BlacKkKlansman.2018.iTA.ENG.1080p.WEB-DL.DD5.1.H264-MeM/BlacKkKlansman.2018.iTA.ENG.1080p.WEB-DL.DD5.1.H264-MeM.mkv"
+        },
+        "release": {
+          "indexer": "Mock Newznab (Prowlarr)",
+          "indexerFlags": [],
+          "releaseTitle": "BlacKkKlansman.2018.iTA.ENG.1080p.WEB-DL.DD5.1.H264-MeM",
+          "size": 7516192768
+        },
+        "remoteMovie": {
+          "imdbId": "tt7349662",
+          "title": "BlacKkKlansman",
+          "tmdbId": 487558,
+          "year": 2018
+        }
+      },
+      "headers": {
+        "authorization": "Basic aG9vazpzZWNyZXQ=",
+        "content-type": "application/json",
+        "x-fixture": "yes"
+      },
+      "method": "PUT",
+      "path": "/webhook/updated",
+      "query": {},
+      "service": "webhook"
+    },
+    {
+      "body": null,
+      "headers": {},
+      "method": "GET",
+      "path": "/library/sections",
+      "query": {
+        "X-Plex-Client-Identifier": "b77809cf-c4e6-47e0-abcb-f1af24c5301b",
+        "X-Plex-Device-Name": "Radarr",
+        "X-Plex-Platform": "Windows",
+        "X-Plex-Platform-Version": "7",
+        "X-Plex-Product": "Radarr",
+        "X-Plex-Token": "mock-plex-token",
+        "X-Plex-Version": "6.4.4.10685"
+      },
+      "service": "plex"
+    },
+    {
+      "body": null,
+      "headers": {},
+      "method": "GET",
+      "path": "/library/sections/1/refresh",
+      "query": {
+        "X-Plex-Client-Identifier": "b77809cf-c4e6-47e0-abcb-f1af24c5301b",
+        "X-Plex-Device-Name": "Radarr",
+        "X-Plex-Platform": "Windows",
+        "X-Plex-Platform-Version": "7",
+        "X-Plex-Product": "Radarr",
+        "X-Plex-Token": "mock-plex-token",
+        "X-Plex-Version": "6.4.4.10685",
+        "path": "/movies/BlacKkKlansman (2018)"
+      },
+      "service": "plex"
+    },
+    {
+      "body": {
+        "embeds": [
+          {
+            "author": {
+              "icon_url": "https://raw.githubusercontent.com/Radarr/Radarr/develop/Logo/256.png",
+              "name": "Radarr"
+            },
+            "color": 16761392,
+            "description": "Manual interaction needed",
+            "fields": [
+              {
+                "inline": false,
+                "name": "Overview",
+                "value": "A young girl, passionate about fashion design, is mysteriously able to enter the 1960s where she encounters her idol, a dazzling wannabe singer. But 1960s London is not what it seems, and time seems to be falling apart with shady consequences."
+              },
+              {
+                "inline": false,
+                "name": "Rating",
+                "value": "7.253"
+              },
+              {
+                "inline": false,
+                "name": "Genres",
+                "value": "Horror, Mystery, Thriller"
+              },
+              {
+                "inline": true,
+                "name": "Quality",
+                "value": "Bluray-1080p"
+              },
+              {
+                "inline": false,
+                "name": "Group",
+                "value": "MIRCrew"
+              },
+              {
+                "inline": true,
+                "name": "Size",
+                "value": "750 KB"
+              },
+              {
+                "inline": false,
+                "name": "Links",
+                "value": "[TMDb](https://themoviedb.org/movie/576845) / [Trakt](https://trakt.tv/movies/tt9639470) / [IMDb](https://imdb.com/title/tt9639470/) / [YouTube](https://www.youtube.com/watch?v=XgNrL4Kf7yU) / [Website](https://www.focusfeatures.com/last-night-in-soho)"
+              },
+              {
+                "inline": false,
+                "name": "Download",
+                "value": "```c8949b89db6f20a1e049aa8170a7a05c```"
+              },
+              {
+                "inline": false,
+                "name": "Tags",
+                "value": "ita"
+              }
+            ],
+            "image": {
+              "url": "https://image.tmdb.org/t/p/original/nPWy5KISy7BbUOQcg588dflKzTL.jpg"
+            },
+            "thumbnail": {
+              "url": "https://image.tmdb.org/t/p/original/n1ZRmjlk1BJTY7aASqACfPAaLn2.jpg"
+            },
+            "timestamp": "2026-11-12T09:57:44.9455357Z",
+            "title": "Last Night in Soho (2021)",
+            "url": "https://www.themoviedb.org/movie/576845"
+          }
+        ],
+        "username": "Unarr fixture"
+      },
+      "headers": {
+        "content-type": "application/json"
+      },
+      "method": "POST",
+      "path": "/discord/api/webhooks/100/fixturetoken",
+      "query": {},
+      "service": "discord"
+    },
+    {
+      "body": {
+        "applicationUrl": "",
+        "customFormatInfo": {
+          "customFormatScore": 0,
+          "customFormats": []
+        },
+        "downloadClient": "Mock qBittorrent",
+        "downloadClientType": "qBittorrent",
+        "downloadId": "13706ED57ADBE030F510BEDCD37595376901117C",
+        "downloadInfo": {
+          "quality": "Bluray-1080p",
+          "qualityVersion": 1,
+          "size": 768000,
+          "title": "c8949b89db6f20a1e049aa8170a7a05c"
+        },
+        "downloadStatus": "Warning",
+        "downloadStatusMessages": [
+          {
+            "messages": [
+              "Found matching movie via grab history, but release was matched to movie by ID. Manual Import required."
+            ],
+            "title": "c8949b89db6f20a1e049aa8170a7a05c"
+          }
+        ],
+        "eventType": "ManualInteractionRequired",
+        "instanceName": "Radarr",
+        "movie": {
+          "folderPath": "/movies/Last Night in Soho (2021)",
+          "genres": [
+            "Horror",
+            "Mystery",
+            "Thriller"
+          ],
+          "id": 62,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/n1ZRmjlk1BJTY7aASqACfPAaLn2.jpg",
+              "url": "/MediaCover/62/poster.jpg?h=e2c7a7c8b650dc5a4033"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/nPWy5KISy7BbUOQcg588dflKzTL.jpg",
+              "url": "/MediaCover/62/fanart.jpg?h=801e2d53afe364a10c9d"
+            }
+          ],
+          "imdbId": "tt9639470",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "A young girl, passionate about fashion design, is mysteriously able to enter the 1960s where she encounters her idol, a dazzling wannabe singer. But 1960s London is not what it seems, and time seems to be falling apart with shady consequences.",
+          "releaseDate": "2022-01-18",
+          "tags": [
+            "ita"
+          ],
+          "title": "Last Night in Soho",
+          "tmdbId": 576845,
+          "year": 2021
+        },
+        "release": {
+          "indexer": "Mock Torznab (Prowlarr)",
+          "indexerFlags": [
+            "G_Freeleech"
+          ],
+          "releaseTitle": "Last.Night.in.Soho.2021.iTA.ENG.1080p.BluRay.x264-MIRCrew",
+          "size": 6979321856
+        }
+      },
+      "headers": {
+        "authorization": "Basic aG9vazpzZWNyZXQ=",
+        "content-type": "application/json",
+        "x-fixture": "yes"
+      },
+      "method": "PUT",
+      "path": "/webhook/updated",
+      "query": {},
+      "service": "webhook"
+    }
+  ],
+  "recordedAt": "2026-11-12T09:58:09Z",
+  "request": {
+    "method": "GET",
+    "path": "/mock/notifications",
+    "target": "mock"
+  },
+  "status": 200
+}

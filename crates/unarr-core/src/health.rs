@@ -191,6 +191,11 @@ fn checks(set: CheckSet) -> Vec<(&'static str, Condition, Check)> {
             if set == CheckSet::All {
                 out.extend([
                     ("RootFolderCheck", Always, check!(root_folder)),
+                    (
+                        "MovieCollectionRootFolderCheck",
+                        Always,
+                        check!(movie_collection_root_folder),
+                    ),
                     ("RecyclingBinCheck", Always, check!(recycling_bin)),
                     ("MountCheck", Always, check!(mount)),
                     ("ProxyCheck", Always, check!(proxy)),
@@ -245,6 +250,10 @@ pub async fn run(ctx: &Context<'_>, sets: &[CheckSet], standing: &[HealthCheck])
             }
             // Import lists are Radarr's with a later milestone.
             if ctx.personality == crate::Personality::Radarr && source == "ImportListRootFolderCheck" {
+                continue;
+            }
+            // Collections are Radarr's alone.
+            if ctx.personality != crate::Personality::Radarr && source == "MovieCollectionRootFolderCheck" {
                 continue;
             }
             seen.push(source);
@@ -726,6 +735,75 @@ async fn root_folder(ctx: &Context<'_>) -> anyhow::Result<HealthCheck> {
     }
 }
 
+/// Radarr's `MovieCollectionRootFolderCheck`: the folder each collection
+/// adds its movies under must be a root folder that exists.
+async fn movie_collection_root_folder(ctx: &Context<'_>) -> anyhow::Result<HealthCheck> {
+    const SOURCE: &str = "MovieCollectionRootFolderCheck";
+    let (collections, root_folders) = ctx
+        .db
+        .call(|conn| {
+            let collections: Vec<(String, String)> = crate::movies::store::list_collections(conn)?
+                .into_iter()
+                .map(|c| (c.root_folder_path.unwrap_or_default(), c.title))
+                .collect();
+            let roots: Vec<String> = store::catalog::list_root_folders(conn)?
+                .into_iter()
+                .map(|r| r.path)
+                .collect();
+            Ok((collections, roots))
+        })
+        .await?;
+    Ok(collection_root_folders_verdict(
+        SOURCE,
+        &collections,
+        &root_folders,
+        |path| std::path::Path::new(path).is_dir(),
+    ))
+}
+
+/// The verdict of `MovieCollectionRootFolderCheck` over `(root folder,
+/// title)` pairs: the missing folders in the order met, each with the
+/// collections under it.
+fn collection_root_folders_verdict(
+    source: &'static str,
+    collections: &[(String, String)],
+    root_folders: &[String],
+    exists: impl Fn(&str) -> bool,
+) -> HealthCheck {
+    let mut missing: Vec<(String, Vec<String>)> = Vec::new();
+    for (path, title) in collections {
+        if let Some((_, titles)) = missing.iter_mut().find(|(p, _)| p == path) {
+            titles.push(title.clone());
+            continue;
+        }
+        let known = root_folders
+            .iter()
+            .any(|r| crate::mediafiles::path_equals(r.trim_end_matches('/'), path.trim_end_matches('/')));
+        if path.trim().is_empty() || !remote_path::is_rooted(path) || !known || !exists(path) {
+            missing.push((path.clone(), vec![title.clone()]));
+        }
+    }
+    let format = |(path, titles): &(String, Vec<String>)| format!("{path} ({})", titles.join(", "));
+    match missing.as_slice() {
+        [] => HealthCheck::ok(source),
+        [one] => HealthCheck::new(
+            source,
+            HealthType::Error,
+            format!("Missing root folder for movie collection: {}", format(one)),
+            "#movie-collection-missing-root-folder",
+        ),
+        many => HealthCheck::new(
+            source,
+            HealthType::Error,
+            format!(
+                "Multiple root folders are missing for movie collections: {}",
+                many.iter().map(format).collect::<Vec<_>>().join(" | ")
+            ),
+            "#movie-collection-missing-root-folder",
+        ),
+    }
+}
+
 /// `ImportListRootFolderCheck`: every import list's root folder must be a
 /// known, existing root folder.
 async fn import_list_root_folder(ctx: &Context<'_>) -> anyhow::Result<HealthCheck> {
@@ -1113,6 +1191,56 @@ async fn remote_path_mapping_after_failure(ctx: &Context<'_>) -> anyhow::Result<
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn collections_under_a_missing_root_folder_are_named() {
+        const SOURCE: &str = "MovieCollectionRootFolderCheck";
+        let roots = vec!["/movies".to_string()];
+        let on_disk = |path: &str| path.trim_end_matches('/') == "/movies";
+        let collection = |path: &str, title: &str| (path.to_string(), title.to_string());
+        // Every collection under a root folder that is there: no verdict.
+        let fine = collection_root_folders_verdict(
+            SOURCE,
+            &[
+                collection("/movies", "Alien Collection"),
+                collection("/movies/", "Dune Collection"),
+            ],
+            &roots,
+            on_disk,
+        );
+        assert_eq!(fine.kind, HealthType::Ok);
+        // One folder that is no root folder, with both its collections.
+        let one = collection_root_folders_verdict(
+            SOURCE,
+            &[
+                collection("/films", "Alien Collection"),
+                collection("/movies", "Dune Collection"),
+                collection("/films", "Blade Runner Collection"),
+            ],
+            &roots,
+            on_disk,
+        );
+        assert_eq!(one.kind, HealthType::Error);
+        assert_eq!(
+            one.message,
+            "Missing root folder for movie collection: /films (Alien Collection, Blade Runner Collection)"
+        );
+        assert!(one.wiki_url.ends_with("#movie-collection-missing-root-folder"));
+        // A root folder that is known and not on the disk, and a blank one.
+        let many = collection_root_folders_verdict(
+            SOURCE,
+            &[
+                collection("/movies", "Alien Collection"),
+                collection("", "Dune Collection"),
+            ],
+            &roots,
+            |_| false,
+        );
+        assert_eq!(
+            many.message,
+            "Multiple root folders are missing for movie collections: /movies (Alien Collection) |  (Dune Collection)"
+        );
+    }
 
     #[test]
     fn mounts_are_read_and_matched() {

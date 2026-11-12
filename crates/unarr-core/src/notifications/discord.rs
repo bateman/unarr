@@ -18,11 +18,11 @@ use crate::validation::ValidationFailure;
 const ICON_URL: &str = "https://raw.githubusercontent.com/Sonarr/Sonarr/develop/Logo/256.png";
 
 /// `DiscordColors`.
-const COLOR_DANGER: i64 = 15749200;
-const COLOR_SUCCESS: i64 = 2605644;
-const COLOR_WARNING: i64 = 16753920;
-const COLOR_STANDARD: i64 = 16761392;
-const COLOR_UPGRADE: i64 = 4089856;
+pub(crate) const COLOR_DANGER: i64 = 15749200;
+pub(crate) const COLOR_SUCCESS: i64 = 2605644;
+pub(crate) const COLOR_WARNING: i64 = 16753920;
+pub(crate) const COLOR_STANDARD: i64 = 16761392;
+pub(crate) const COLOR_UPGRADE: i64 = 4089856;
 
 /// `DiscordGrabFieldType`.
 mod grab_field {
@@ -191,7 +191,7 @@ fn image(series: Option<&Series>, cover_type: &str) -> Value {
 }
 
 /// `Overview`, cut at 300 characters.
-fn overview(text: Option<&str>) -> String {
+pub(crate) fn overview(text: Option<&str>) -> String {
     let text = text.unwrap_or("");
     if text.chars().count() <= 300 {
         text.to_string()
@@ -233,7 +233,7 @@ fn genres(series: &Series) -> String {
 }
 
 /// `CreatePayload`.
-fn payload(settings: &Settings, content: Option<&str>, embeds: Option<Vec<Value>>) -> Value {
+pub(crate) fn payload(settings: &Settings, content: Option<&str>, embeds: Option<Vec<Value>>) -> Value {
     let mut m = Map::new();
     if let Some(c) = content {
         m.insert("content".into(), json!(c));
@@ -253,7 +253,11 @@ fn payload(settings: &Settings, content: Option<&str>, embeds: Option<Vec<Value>
 /// `DiscordProxy.SendPayload`: a failed HTTP call is a
 /// `DiscordException("Unable to post payload")`; a call that never got an
 /// answer escapes as it is.
-async fn send(http: &reqwest::Client, settings: &Settings, payload: &Value) -> Result<(), SendError> {
+pub(crate) async fn send(
+    http: &reqwest::Client,
+    settings: &Settings,
+    payload: &Value,
+) -> Result<(), SendError> {
     let request = http
         .post(&settings.web_hook_url)
         .header(reqwest::header::ACCEPT, "application/json")
@@ -272,7 +276,7 @@ async fn send(http: &reqwest::Client, settings: &Settings, payload: &Value) -> R
     }
 }
 
-fn send_error_message(e: SendError) -> String {
+pub(crate) fn send_error_message(e: SendError) -> String {
     match e {
         SendError::Status(_, m) | SendError::Transport(m) => m,
     }

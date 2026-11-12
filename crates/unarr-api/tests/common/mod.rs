@@ -403,3 +403,53 @@ pub fn compare(mode: Mode, want_body: &Value, got_body: &Value) -> Vec<String> {
     }
     problems
 }
+
+/// Every string in `v` with the replay directories mapped back to the
+/// recorded ones.
+pub fn unmap_paths(v: &Value, mappings: &[(String, &str)]) -> Value {
+    match v {
+        Value::String(s) => {
+            let mut out = s.clone();
+            for (replay, recorded) in mappings {
+                if out.contains(replay.as_str()) {
+                    out = out.replace(replay.as_str(), recorded);
+                }
+            }
+            Value::String(out)
+        }
+        Value::Array(items) => Value::Array(items.iter().map(|v| unmap_paths(v, mappings)).collect()),
+        Value::Object(map) => Value::Object(
+            map.iter()
+                .map(|(k, v)| (k.clone(), unmap_paths(v, mappings)))
+                .collect(),
+        ),
+        _ => v.clone(),
+    }
+}
+
+/// The recording's directories (`/tv`, `/movies`, `/downloads`) in a request's path or body
+/// become the replay directories: after `=` or `"`, up to the next `/`,
+/// `"`, `&` or the end, so that `/downloads/tv/...` maps once.
+pub fn map_paths(text: &str, mappings: &[(String, &str)]) -> String {
+    let mut out = String::with_capacity(text.len());
+    let mut rest = text;
+    'outer: while !rest.is_empty() {
+        for (replay, recorded) in mappings {
+            for lead in ['=', '"'] {
+                let needle = format!("{lead}{recorded}");
+                if let Some(after) = rest.strip_prefix(needle.as_str()) {
+                    if after.is_empty() || after.starts_with(['/', '"', '&']) {
+                        out.push(lead);
+                        out.push_str(replay);
+                        rest = after;
+                        continue 'outer;
+                    }
+                }
+            }
+        }
+        let ch = rest.chars().next().unwrap();
+        out.push(ch);
+        rest = &rest[ch.len_utf8()..];
+    }
+    out
+}

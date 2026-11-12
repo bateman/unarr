@@ -112,6 +112,11 @@ pub struct ClientState {
     pub downloads: String,
     /// The TV library location Plex reports.
     pub tv: String,
+    /// The movie library location Plex reports.
+    pub movies: String,
+    /// The same when a test moved it away from `movies`
+    /// (`POST /mock/plex/sections?movies=<path>`).
+    pub plex_movies: Option<String>,
     /// `tests/fixtures/media`, the clips `complete` copies.
     pub media: PathBuf,
     seq: i64,
@@ -129,6 +134,8 @@ impl Default for ClientState {
             notifications: Vec::new(),
             downloads: "/downloads".into(),
             tv: "/tv".into(),
+            movies: "/movies".into(),
+            plex_movies: None,
             media: crate::fixtures_dir().join("media"),
             seq: 0,
             initialised: false,
@@ -145,14 +152,16 @@ impl ClientState {
 
     /// Forget every item and notification; the directories stay.
     pub fn reset(&mut self) {
-        let (downloads, tv, media) = (
+        let (downloads, tv, movies, media) = (
             std::mem::take(&mut self.downloads),
             std::mem::take(&mut self.tv),
+            std::mem::take(&mut self.movies),
             std::mem::take(&mut self.media),
         );
         *self = ClientState {
             downloads,
             tv,
+            movies,
             media,
             ..ClientState::default()
         };
@@ -190,7 +199,7 @@ impl ClientState {
         if !path.starts_with('/') || format!("{path}/").contains("/../") {
             return false;
         }
-        [&self.downloads, &self.tv]
+        [&self.downloads, &self.tv, &self.movies]
             .iter()
             .any(|d| path == d.as_str() || path.starts_with(&format!("{d}/")))
     }
@@ -538,12 +547,26 @@ fn control(state: &mut ClientState, rest: &str, query: &BTreeMap<String, String>
         state.notifications.clear();
         return json_reply(StatusCode::OK, json!({"ok": true}), "mock/notifications/clear");
     }
+    if rest == "plex/sections" {
+        // Where Plex says its movie library is, when it sees the files
+        // under another path than the application does.
+        state.plex_movies = query
+            .get("movies")
+            .map(|p| p.trim_end_matches('/').to_string())
+            .filter(|p| !p.is_empty());
+        let movies = state.plex_movies.clone().unwrap_or_else(|| state.movies.clone());
+        return json_reply(
+            StatusCode::OK,
+            json!({"ok": true, "movies": movies}),
+            "mock/plex/sections",
+        );
+    }
     if rest == "fs/write" || rest == "fs/remove" {
         let path = query.get("path").cloned().unwrap_or_default();
         if !state.inside_mock_dirs(&path) {
             return json_reply(
                 StatusCode::BAD_REQUEST,
-                json!({"ok": false, "error": format!("{path} is not under {} or {}", state.downloads, state.tv)}),
+                json!({"ok": false, "error": format!("{path} is not under {}, {} or {}", state.downloads, state.tv, state.movies)}),
                 format!("mock/{rest}"),
             );
         }
@@ -657,7 +680,7 @@ fn plex(
             StatusCode::OK,
             json!({"MediaContainer": {"size": 2, "allowSync": false, "title1": "Plex Library", "Directory": [
                 {"allowSync": true, "art": "/:/resources/show-fanart.jpg", "composite": "/library/sections/2/composite/1736478720", "filters": true, "refreshing": false, "thumb": "/:/resources/show.png", "key": "2", "type": "show", "title": "TV Shows", "agent": "tv.plex.agents.series", "scanner": "Plex TV Series", "language": "en-US", "uuid": "0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0", "updatedAt": 1736478720, "createdAt": 1736478720, "scannedAt": 1736478720, "content": true, "directory": true, "contentChangedAt": 1, "hidden": 0, "Location": [{"id": 2, "path": state.tv}]},
-                {"allowSync": true, "art": "/:/resources/movie-fanart.jpg", "composite": "/library/sections/1/composite/1736478720", "filters": true, "refreshing": false, "thumb": "/:/resources/movie.png", "key": "1", "type": "movie", "title": "Movies", "agent": "tv.plex.agents.movie", "scanner": "Plex Movie", "language": "en-US", "uuid": "1a2b3c4d-5e6f-7081-92a3-b4c5d6e7f809", "updatedAt": 1736478720, "createdAt": 1736478720, "scannedAt": 1736478720, "content": true, "directory": true, "contentChangedAt": 1, "hidden": 0, "Location": [{"id": 1, "path": "/movies"}]},
+                {"allowSync": true, "art": "/:/resources/movie-fanart.jpg", "composite": "/library/sections/1/composite/1736478720", "filters": true, "refreshing": false, "thumb": "/:/resources/movie.png", "key": "1", "type": "movie", "title": "Movies", "agent": "tv.plex.agents.movie", "scanner": "Plex Movie", "language": "en-US", "uuid": "1a2b3c4d-5e6f-7081-92a3-b4c5d6e7f809", "updatedAt": 1736478720, "createdAt": 1736478720, "scannedAt": 1736478720, "content": true, "directory": true, "contentChangedAt": 1, "hidden": 0, "Location": [{"id": 1, "path": state.plex_movies.clone().unwrap_or_else(|| state.movies.clone())}]},
             ]}}),
             "plex/sections",
         );

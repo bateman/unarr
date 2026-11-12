@@ -4,7 +4,7 @@
     "pageSize": 20,
     "records": [
       {
-        "added": "2026-11-11T22:00:26Z",
+        "added": "2026-11-12T09:55:49Z",
         "customFormatScore": 0,
         "customFormats": [
           {
@@ -15,7 +15,7 @@
         "downloadClient": "Mock Transmission",
         "downloadClientHasPostImportCategory": false,
         "downloadId": "5AE419C220561D2F40DDBB4026B5D0121DCC040E",
-        "estimatedCompletionTime": "2026-11-11T22:11:16Z",
+        "estimatedCompletionTime": "2026-11-12T10:06:37Z",
         "id": 936833475,
         "indexer": "Mock Torznab (Prowlarr)",
         "languages": [
@@ -55,13 +55,13 @@
         "trackedDownloadStatus": "ok"
       },
       {
-        "added": "2026-11-11T22:00:42Z",
+        "added": "2026-11-12T09:56:03Z",
         "customFormatScore": 0,
         "customFormats": [],
         "downloadClient": "Mock qBittorrent",
         "downloadClientHasPostImportCategory": false,
         "downloadId": "13706ED57ADBE030F510BEDCD37595376901117C",
-        "estimatedCompletionTime": "2026-11-11T22:11:16Z",
+        "estimatedCompletionTime": "2026-11-12T10:06:37Z",
         "id": 1132538262,
         "indexer": "Mock Torznab (Prowlarr)",
         "languages": [
@@ -100,13 +100,13 @@
         "trackedDownloadStatus": "ok"
       },
       {
-        "added": "2026-11-11T22:00:54Z",
+        "added": "2026-11-12T09:56:15Z",
         "customFormatScore": 0,
         "customFormats": [],
         "downloadClient": "Mock SABnzbd",
         "downloadClientHasPostImportCategory": false,
         "downloadId": "SABnzbd_nzo_mock3",
-        "estimatedCompletionTime": "2026-11-11T22:11:16Z",
+        "estimatedCompletionTime": "2026-11-12T10:06:37Z",
         "id": 1692936012,
         "indexer": "Mock Newznab (Prowlarr)",
         "languages": [
@@ -149,7 +149,7 @@
     "sortKey": "timeleft",
     "totalRecords": 3
   },
-  "recordedAt": "2026-11-11T22:01:20Z",
+  "recordedAt": "2026-11-12T09:56:41Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/queue?page=1&pageSize=20&sortKey=timeleft&sortDirection=ascending"

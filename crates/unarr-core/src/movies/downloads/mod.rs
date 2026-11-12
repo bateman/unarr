@@ -46,6 +46,12 @@ pub struct MovieDownloads {
     /// The command queue, once the runtime is up, for the search a failed
     /// download triggers.
     commands: OnceLock<Arc<CommandQueue>>,
+    /// What a refresh raised for whoever relays events
+    /// (`ManualInteractionRequiredEvent`, published by the completed
+    /// download check), until the runtime takes it.
+    raised: Mutex<Vec<crate::movies::import::events::MovieImportEvent>>,
+    /// The notifications, once the runtime is up: a grab tells them.
+    notifier: OnceLock<Arc<crate::movies::notifications::MovieNotifier>>,
 }
 
 impl MovieDownloads {
@@ -58,6 +64,43 @@ impl MovieDownloads {
             dirty: AtomicBool::new(true),
             refresh_lock: tokio::sync::Mutex::new(()),
             commands: OnceLock::new(),
+            raised: Mutex::new(Vec::new()),
+            notifier: OnceLock::new(),
+        }
+    }
+
+    /// The events the refreshes raised since they were last taken.
+    pub fn take_raised_events(&self) -> Vec<crate::movies::import::events::MovieImportEvent> {
+        std::mem::take(&mut *self.raised.lock().unwrap())
+    }
+
+    /// Hand over the notifications; the first call wins.
+    pub fn set_notifier(&self, notifier: Arc<crate::movies::notifications::MovieNotifier>) {
+        let _ = self.notifier.set(notifier);
+    }
+
+    pub fn notifier(&self) -> Option<&Arc<crate::movies::notifications::MovieNotifier>> {
+        self.notifier.get()
+    }
+
+    /// The covers of the movie a tracked download holds, given their local
+    /// addresses: what building a webhook payload for that movie left
+    /// behind in the original (`WebhookBase.GetMovie` writes them into the
+    /// movie object it is handed, the one the tracked download keeps). The
+    /// queue and the manual import of the download show them from then
+    /// on, until the download is matched to its movie afresh.
+    pub fn convert_covers_of(&self, download_id: &str, url_base: &str) {
+        let mut tracked = self.tracked.lock().unwrap();
+        if let Some(movie) = tracked
+            .get_mut(download_id)
+            .and_then(|t| t.remote.as_mut())
+            .and_then(|r| r.movie.as_mut())
+        {
+            crate::movies::notifications::convert_to_local_urls(
+                url_base,
+                movie.id,
+                &mut movie.metadata.images,
+            );
         }
     }
 
@@ -155,6 +198,28 @@ impl MovieDownloads {
                 tracked.remove(id);
             }
         }
+        self.rebuild_queue(now);
+    }
+
+    /// Put back a tracked download the importer changed, if it is still
+    /// tracked. One past importing leaves the queue (`DownloadIsTrackable`).
+    pub fn update_tracked(&self, mut t: TrackedMovieDownload) {
+        if matches!(
+            t.state,
+            crate::downloads::TrackedDownloadState::Imported
+                | crate::downloads::TrackedDownloadState::Failed
+                | crate::downloads::TrackedDownloadState::Ignored
+        ) {
+            t.is_trackable = false;
+        }
+        let mut tracked = self.tracked.lock().unwrap();
+        if tracked.contains_key(&t.item.download_id) {
+            tracked.insert(t.item.download_id.clone(), t);
+        }
+    }
+
+    /// The queue built again from the tracked downloads as they stand.
+    pub fn rebuild_queue_now(&self, now: DateTime<Utc>) {
         self.rebuild_queue(now);
     }
 

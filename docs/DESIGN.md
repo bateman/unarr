@@ -293,6 +293,14 @@ case.
    rename and notifications, with the memory point to settle; **4d**
    `api.radarr.video`, movie management, settings writes, Recyclarr, the
    IMDb watchlist, the audit and the homelab run.
+   *4c done, November 2026, against mocks*: the mock clients' completed
+   downloads end as named movie files with media info, history and the
+   Discord, webhook and Plex notifications equal to the oracle; 463 Radarr
+   goldens replay, none pending; the import specifications carry the
+   original's fixtures as tests; the pages of 4b and 4c were driven in a
+   browser. The compiled patterns are released when idle, which brings the
+   idle figure back under the target and leaves the working one above it
+   (section 9). Section 17 records the decisions.
 5. **Lidarr** last: MusicBrainz, per-track matching, Chromaprint fingerprints.
    Expected at phase 2's size or above; the most divergent personality.
 
@@ -357,7 +365,7 @@ from 86 ms to 50 ms by not decoding the cast (2.5 MB of JSON no resource
 shows) and loading only the queue's series for the queue, and the rest is the
 950 rows' remaining JSON columns (35 ms) and the season statistics over
 25,000 episodes (15 ms). The design target of 10 ms at that size is not met;
-section 17 says what the next step would be.
+section 18 says what the next step would be.
 
 The idle figures are what `malloc_trim` leaves after the import: without it
 the scaled fixture's import left the process at 232 MB, holding pages it no
@@ -463,7 +471,7 @@ the list once per page load and follows the changes over SignalR, so it
 bought fifty milliseconds nobody waits for at the cost of a second code
 path and a validity rule tied to the clock. Ten milliseconds at this size
 is, for 2.3 MB of JSON built on request, not within reach of an index or
-a query; section 17 asks which library size the target is for.
+a query; section 18 asks which library size the target is for.
 
 End of phase 4a (release build, x86-64, in the cloud session, a client
 script over the loopback). The two real fixtures: Sonarr's (38 series,
@@ -503,7 +511,7 @@ thirty-second timer for a personality without a scheduler (36 MB).
 `GET /movie` builds 0.7 MB of JSON in 15 ms for 193 movies, the files'
 media info and the alternative titles included; at 2,000 movies that is
 the same order as `/series` at 950 series, and the same question
-(section 17).
+(section 18).
 
 End of phase 4b (release build, x86-64, in the cloud session, a client
 script over the loopback). The Radarr fixture with the mock indexers and
@@ -541,10 +549,55 @@ same kind; the two were ported apart, as the originals are, and share
 nothing. Whether to bring the patterns down (compile fewer of them, or
 build them so that the two parsers share the automata they have in
 common) or to state the target per personality is an open question
-(section 17). The history page takes twice what it did in 4a (10.6 ms):
+(section 18). The history page takes twice what it did in 4a (10.6 ms):
 each row's custom formats are now computed from the release title as the
 movie parser reads it, edition and group included, where 4a went without
 a parser.
+
+End of phase 4c (release build, x86-64, in the cloud session). Both
+personalities in one process on the two fixtures, with the mocks of
+`scripts/mock-servarr.py`; the work is the Radarr request list up to the
+imports (an interactive search, an RSS sync, three downloads completed,
+two imported) with Sonarr idle beside it. The static musl build is the
+one the image holds; the image itself was not built.
+
+| RSS, both personalities | glibc | static musl |
+|-------------------------|-------|-------------|
+| Idle, 35 s after the start | 37.6 MB | 30.1 MB |
+| After the work | 122.9 MB | 97.9 MB |
+| At rest, 35 s after the last request | 104.4 MB | 97.8 MB |
+| After 330 s without a request | 45.4 MB | 39.5 MB |
+| After the same work again | 125.1 MB | 98.2 MB |
+
+What the compiled patterns cost was measured apart
+(`cargo run --release --example parser_memory -p unarr-core`): the series
+parser's 42 MB, the movie parser's 14 MB, both 54 MB; 57.6 MB falls to
+10.4 MB when they are released, and all of them compile again in under a
+second. The weight is in the series parser, not in the 21 MB of movie
+patterns phase 4b pointed at. Two things made the compiled patterns
+smaller: lowering the engine's cache limit, some 10 MB for a quarter of
+the parsing speed, and unrolling the counted repetitions less, another
+10 MB, which changes what the patterns match. Neither reaches the target
+and the second gives up equality with the originals. Compiling the
+automata the two parsers have in common once was not tried: they were
+ported apart and no measurement says how much they share. So the patterns are now
+dropped after five minutes without a match and compiled again when next
+needed (section 17): the idle figure is back under the target, on glibc
+and on musl, and the working figure is not, because parsing one release
+title needs most of one parser's patterns. On musl the "at rest" figure
+does not fall on its own, as expected of an allocator without
+`malloc_trim`; the release of the patterns returns the memory all the
+same, since the automata are large allocations that go back to the
+system when freed.
+
+The 60 MB target therefore holds for a process left alone for five
+minutes, and not for one that searches every few minutes. With the RSS
+sync at the fixture's interval (100 minutes) the process spends most of
+its time under the target and rises to some 100 to 125 MB at each sync
+and each import. Proposed to the maintainer: keep
+"idle RSS under 60 MB", read after the release interval, and state the
+working figure beside it rather than pretend one number covers both.
+Neither library was scaled; the patterns do not grow with the library.
 
 ## 10. Naming and distribution
 
@@ -1000,7 +1053,7 @@ a parser.
   or off, a scan remembers the extras next to episode files, a rename
   takes them along and deleting the episode file sends them to the
   recycling bin, as in the originals. Unarr drives no metadata consumer
-  (section 17), and the `MetadataFiles` rows are not imported. Of the
+  (section 18), and the `MetadataFiles` rows are not imported. Of the
   files that are not subtitles, a scan remembers only those named exactly
   as their episode file (an nfo): a rename gives an other extra the
   episode file's name and nothing else, which would turn a media
@@ -1027,7 +1080,7 @@ a parser.
   validation was off would keep being accepted. One process has one
   HTTP client, so with several personalities in one process
   (`--personalities sonarr,radarr`) the settings of the last one started
-  or saved apply to all (section 17).
+  or saved apply to all (section 18).
 - **The environment wins over the settings.** The originals' variables
   (`Sonarr__Server__Port`, `Sonarr__Auth__ApiKey`, `Sonarr__Log__Level`
   and the others of the Server, Auth, App, Log and Update sections that
@@ -1457,7 +1510,73 @@ a parser.
   that repeats Sonarr's is left as it is, with the rest of the
   near-copies.
 
-## 17. Open questions
+## 17. Decisions taken in phase 4c
+
+- **One recording, taken in one run.** The Radarr list is recorded whole
+  each time it grows. Two recordings hours apart were mixed once and the
+  replay's clock, pinned to the recording's, disagreed with the status
+  rows of the indexers; the answers carry the time in too many places to
+  patch. The recorder freezes the scheduled tasks, and the replay now does
+  the same, after an extra health check ran in the middle of one.
+- **The mocks complete downloads into a movie library and remember what
+  they are told.** `--movies` (and `MockDirs::movies`) gives the mock
+  clients' output and the mock Plex's section a place; what Discord, the
+  webhook and Plex receive is compared as goldens of their own. Plex's
+  updates are sent from a background flush some seconds after the event,
+  so the list pauses before it asks the mock what arrived; without the
+  pause a deletion's update was recorded after the section had moved.
+- **The mock Plex sees the library under another path**, as the
+  maintainer's does: the path mapping of the Plex connection is exercised
+  by the recording, not by a unit test alone.
+- **`RefreshMovie` is not in the recording.** Posted to the original, it
+  reached the metadata server despite the environment (twice, changing
+  the votes of a movie between recordings). It is accepted and does
+  nothing until 4d, when the metadata host gets recorded answers.
+- **A parallel import pipeline**, as for 4b: `movies::import` is a port of
+  Radarr's `MediaFiles` and `MovieImport`, beside `import`. The ten
+  specifications run in the original's order (already imported, free
+  space, grabbed release quality, audio track, matches folder, matches
+  grab, not multi-part, not sample, not unpacking, upgrade), with its
+  messages. What the two sides share was extracted where it already had
+  no media notion: the transfer (hardlink, copy, move, verification), the
+  recycling bin, the notification transports and their settings, the
+  backup. The Sonarr goldens replayed before and after each extraction.
+- **The commands kept the original's names, so two of them have two
+  meanings.** `RenameFiles` and `ManualImport` exist in both
+  applications with different bodies; `parse_for` reads the body for the
+  application the runtime serves. `DownloadedMoviesScan` does not send
+  its updates to the client and has no "failed to import" message, and a
+  posted `Backup` is always a manual one in Radarr: each was the
+  recording's correction of a guess.
+- **Housekeeping covers what Unarr stores for movies**: seventeen of the
+  original's housekeepers, on the tables the importer fills.
+- **The collections' root folders have a health check of their own**
+  (`MovieCollectionRootFolderCheck`), which the original runs beside the
+  movies' one; the fixture triggered it.
+- **Compiled patterns are evictable.** A pattern holds its automaton in a
+  slot that a registry can empty; `fs::release_idle_memory` empties those
+  not matched for five minutes, on the scheduler's tick and on the
+  daemon's thirty-second timer, and the custom formats' cache does the
+  same. A match on an emptied pattern compiles it again, for both
+  personalities and in the same code. Rejected after measuring: a lower
+  cache limit on the engine (10 MB for a quarter of the speed) and less
+  unrolling of counted repetitions (10 MB, and a different behaviour).
+  Not tried: one set of automata shared by the two parsers, and a leaner
+  matcher for the patterns without look-around, which would be a second
+  engine to keep equal to the originals' one. Five minutes is below the
+  RSS interval, so a sync finds the patterns gone and pays the
+  compilation, under a second, once per sync.
+- **What is stored and not applied, or not sent**, each because nothing
+  on the fixture exercises it: the file date setting, the 3D token beyond
+  the stream's view count, the notifications for a movie added, movies
+  deleted and an application update, the ping to plex.tv before a library
+  update.
+- **The maintainer's Radarr logs were used as facts only.** They are not
+  anonymised and are not in the tree, in any commit of the branch: they
+  confirmed the transfer modes in use, the absence of a recycling bin,
+  the Plex mapping and the order of an import's steps.
+
+## 18. Open questions
 
 - Metadata provider: decided (section 7, option A) and implemented behind
   a trait. Open is the switch to Unarr's own user agent towards the Servarr
@@ -1487,8 +1606,8 @@ a parser.
   both personalities after a search, 63 MB with Radarr alone, on small
   libraries (section 9); the movie parser's compiled patterns are 21 MB
   of it. Bazarr's `RescanMovie`, and any command of a later milestone,
-  answers 500 as an unknown name until 4c. Radarr sends no notification
-  yet, neither on a grab nor on a health verdict. The commands and paths
+  answered 500 as an unknown name until 4c, and Radarr sent no
+  notification until then. The commands and paths
   listed at the end of section 16 were written from the source and not
   replayed against the original. The order of the queue among downloads
   with the same time left, and of the calendar among movies equal on all
@@ -1501,9 +1620,19 @@ a parser.
   script's ICU check that can pass without ICU and its port variable
   that does not move the copy, and its queue status over SignalR, which
   leaves the pending releases out.
+- Radarr, from 4c. The memory target: met idle, exceeded at work
+  (section 9); whether the idle reading is the target, and what figure to
+  state for a working process, is the maintainer's to say. The eviction
+  interval (five minutes) is a constant, not a setting. Nothing was
+  scaled. The file date setting, the 3D token and the three notifications
+  listed in section 17 are open, as is the place of the metadata
+  consumers among the extras, inferred from the source. The image was not
+  built, so its figure is the static musl binary's. A test of the mock
+  writes under `/downloads` of the machine that runs it. `RefreshMovie`
+  does nothing. The homelab run for Radarr is left to the end of 4d.
 - The maintainer's Recyclarr configuration for Radarr is in the tree
   (`tests/fixtures/recyclarr/radarr.yml`) and nothing runs with it yet:
-  4c records the exchange between the real Recyclarr and the real Radarr
+  4d records the exchange between the real Recyclarr and the real Radarr
   from it, as phase 3b did for Sonarr. It syncs two guide profiles, six
   named ones, the MULTi format, the `plex-tmdb` naming and the propers
   setting, all of which the fixture already shows as synced; the
@@ -1511,7 +1640,7 @@ a parser.
   are the maintainer's own, made in the UI, so `delete_old_custom_formats`
   must leave the latter alone, as the real Recyclarr does for formats it
   did not create. The import list in use is the IMDb watchlist
-  (`IMDbListImport`), the one 4c drives.
+  (`IMDbListImport`), the one 4d drives.
 - SignalR: `series` and `episode` messages follow the refresh, the adds and
   the edits since 3b. The UI's pages were driven in a browser; no client
   other than the UI listens.

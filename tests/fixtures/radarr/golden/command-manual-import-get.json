@@ -1,0 +1,71 @@
+{
+  "body": {
+    "body": {
+      "files": [
+        {
+          "downloadId": "13706ED57ADBE030F510BEDCD37595376901117C",
+          "folderName": "c8949b89db6f20a1e049aa8170a7a05c",
+          "indexerFlags": 0,
+          "languages": [
+            {
+              "id": 1,
+              "name": "English"
+            },
+            {
+              "id": 5,
+              "name": "Italian"
+            }
+          ],
+          "movieId": 62,
+          "path": "/downloads/movies/c8949b89db6f20a1e049aa8170a7a05c/c8949b89db6f20a1e049aa8170a7a05c.mkv",
+          "quality": {
+            "quality": {
+              "id": 7,
+              "modifier": "none",
+              "name": "Bluray-1080p",
+              "resolution": 1080,
+              "source": "bluray"
+            },
+            "revision": {
+              "isRepack": false,
+              "real": 0,
+              "version": 1
+            }
+          },
+          "releaseGroup": "MIRCrew"
+        }
+      ],
+      "importMode": "auto",
+      "isExclusive": false,
+      "isLongRunning": false,
+      "isTypeExclusive": false,
+      "name": "ManualImport",
+      "requiresDiskAccess": true,
+      "sendUpdatesToClient": true,
+      "suppressMessages": false,
+      "trigger": "manual",
+      "updateScheduledTask": true
+    },
+    "commandName": "Manual Import",
+    "duration": "00:00:00.0562028",
+    "ended": "2026-11-12T10:00:33Z",
+    "id": 473014,
+    "message": "Manually imported 1 files",
+    "name": "ManualImport",
+    "priority": "high",
+    "queued": "2026-11-12T10:00:33Z",
+    "result": "successful",
+    "sendUpdatesToClient": true,
+    "started": "2026-11-12T10:00:33Z",
+    "stateChangeTime": "2026-11-12T10:00:33Z",
+    "status": "completed",
+    "trigger": "manual",
+    "updateScheduledTask": true
+  },
+  "recordedAt": "2026-11-12T10:00:45Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/command/473014"
+  },
+  "status": 200
+}

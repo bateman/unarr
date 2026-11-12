@@ -1,0 +1,150 @@
+{
+  "body": [
+    {
+      "body": {
+        "content": "Renamed",
+        "embeds": [
+          {
+            "color": 0,
+            "description": "Backcountry.2015.1080p.BluRay.x264-GRP.mkv renamed to Backcountry (2015) {tmdb-228973} - [Bluray-1080p][AAC 1.0][x264]-GRP.mkv",
+            "title": "Backcountry"
+          }
+        ],
+        "username": "Unarr fixture"
+      },
+      "headers": {
+        "content-type": "application/json"
+      },
+      "method": "POST",
+      "path": "/discord/api/webhooks/100/fixturetoken",
+      "query": {},
+      "service": "discord"
+    },
+    {
+      "body": {
+        "applicationUrl": "",
+        "eventType": "Rename",
+        "instanceName": "Radarr",
+        "movie": {
+          "folderPath": "/movies/Backcountry (2015)",
+          "genres": [
+            "Horror",
+            "Thriller",
+            "Drama"
+          ],
+          "id": 10,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/AdIkDCWcBqv1B10ncm71sMiqEEF.jpg",
+              "url": "/MediaCover/10/poster.jpg?h=2f0d229f328b0179acc7"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/fX8OjnkkWnGJdQ7tkpf8z7la4Xu.jpg",
+              "url": "/MediaCover/10/fanart.jpg?h=34bc6fd77c4a7f46287d"
+            }
+          ],
+          "imdbId": "tt2944198",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "A couple on a deep-wilderness hike become hopelessly lost within an aggressive black bear's territory.",
+          "releaseDate": "2015-05-28",
+          "tags": [
+            "ita"
+          ],
+          "title": "Backcountry",
+          "tmdbId": 228973,
+          "year": 2015
+        },
+        "renamedMovieFiles": [
+          {
+            "dateAdded": "2026-11-12T09:58:33.2003933Z",
+            "id": 408,
+            "indexerFlags": "0",
+            "languages": [
+              {
+                "id": 1,
+                "name": "English"
+              }
+            ],
+            "mediaInfo": {
+              "audioChannels": 1.0,
+              "audioCodec": "AAC",
+              "audioLanguages": [
+                "eng"
+              ],
+              "height": 1080,
+              "subtitles": [
+                "eng"
+              ],
+              "videoCodec": "h264",
+              "videoDynamicRange": "",
+              "videoDynamicRangeType": "",
+              "width": 1920
+            },
+            "path": "/movies/Backcountry (2015)/Backcountry (2015) {tmdb-228973} - [Bluray-1080p][AAC 1.0][x264]-GRP.mkv",
+            "previousPath": "/movies/Backcountry (2015)/Backcountry.2015.1080p.BluRay.x264-GRP.mkv",
+            "previousRelativePath": "Backcountry.2015.1080p.BluRay.x264-GRP.mkv",
+            "quality": "Bluray-1080p",
+            "qualityVersion": 1,
+            "relativePath": "Backcountry (2015) {tmdb-228973} - [Bluray-1080p][AAC 1.0][x264]-GRP.mkv",
+            "releaseGroup": "GRP",
+            "size": 1106640
+          }
+        ]
+      },
+      "headers": {
+        "authorization": "Basic aG9vazpzZWNyZXQ=",
+        "content-type": "application/json",
+        "x-fixture": "yes"
+      },
+      "method": "PUT",
+      "path": "/webhook/updated",
+      "query": {},
+      "service": "webhook"
+    },
+    {
+      "body": null,
+      "headers": {},
+      "method": "GET",
+      "path": "/library/sections",
+      "query": {
+        "X-Plex-Client-Identifier": "b77809cf-c4e6-47e0-abcb-f1af24c5301b",
+        "X-Plex-Device-Name": "Radarr",
+        "X-Plex-Platform": "Windows",
+        "X-Plex-Platform-Version": "7",
+        "X-Plex-Product": "Radarr",
+        "X-Plex-Token": "mock-plex-token",
+        "X-Plex-Version": "6.4.4.10685"
+      },
+      "service": "plex"
+    },
+    {
+      "body": null,
+      "headers": {},
+      "method": "GET",
+      "path": "/library/sections/1/refresh",
+      "query": {
+        "X-Plex-Client-Identifier": "b77809cf-c4e6-47e0-abcb-f1af24c5301b",
+        "X-Plex-Device-Name": "Radarr",
+        "X-Plex-Platform": "Windows",
+        "X-Plex-Platform-Version": "7",
+        "X-Plex-Product": "Radarr",
+        "X-Plex-Token": "mock-plex-token",
+        "X-Plex-Version": "6.4.4.10685",
+        "path": "/movies/Backcountry (2015)"
+      },
+      "service": "plex"
+    }
+  ],
+  "recordedAt": "2026-11-12T10:00:33Z",
+  "request": {
+    "method": "GET",
+    "path": "/mock/notifications",
+    "target": "mock"
+  },
+  "status": 200
+}

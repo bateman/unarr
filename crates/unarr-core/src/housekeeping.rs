@@ -120,7 +120,7 @@ fn orphaned_pending_releases(conn: &Connection, _: DateTime<Utc>) -> anyhow::Res
 
 /// Releases held back because no client could take them, or as a
 /// fallback, and still there two weeks later.
-fn stale_pending_releases(conn: &Connection, now: DateTime<Utc>) -> anyhow::Result<usize> {
+pub(crate) fn stale_pending_releases(conn: &Connection, now: DateTime<Utc>) -> anyhow::Result<usize> {
     use crate::downloads::pending::PendingReleaseReason;
     Ok(conn.execute(
         "DELETE FROM pending_releases WHERE added < ?1 AND reason IN (?2, ?3)",
@@ -134,7 +134,7 @@ fn stale_pending_releases(conn: &Connection, now: DateTime<Utc>) -> anyhow::Resu
 
 /// The back-off records of indexers, download clients, notifications and
 /// import lists that no longer exist.
-fn orphaned_provider_status(conn: &Connection, _: DateTime<Utc>) -> anyhow::Result<usize> {
+pub(crate) fn orphaned_provider_status(conn: &Connection, _: DateTime<Utc>) -> anyhow::Result<usize> {
     let statuses = conn.execute(
         "DELETE FROM provider_status
          WHERE NOT EXISTS (SELECT 1 FROM providers p
@@ -153,7 +153,7 @@ fn orphaned_provider_status(conn: &Connection, _: DateTime<Utc>) -> anyhow::Resu
 /// disabled for longer than their back-off allows: both are brought back.
 /// The originals add the period, which is in seconds, as minutes; so does
 /// this.
-fn future_status_times(conn: &Connection, now: DateTime<Utc>) -> anyhow::Result<usize> {
+pub(crate) fn future_status_times(conn: &Connection, now: DateTime<Utc>) -> anyhow::Result<usize> {
     let now_text = time::format_utc(now);
     let mut fixed = 0;
     for (level, period) in PERIODS.iter().enumerate() {

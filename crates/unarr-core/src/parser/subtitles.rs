@@ -74,25 +74,53 @@ fn tokens(part: &str) -> impl Iterator<Item = &str> {
     part.split(['-', '_', '.', ' ']).filter(|t| !t.is_empty())
 }
 
-/// `IsoLanguages.Find(code)?.Language`.
-fn language_of(code: &str) -> i64 {
-    crate::mediafiles::language_from_iso(&code.to_ascii_lowercase()).unwrap_or(0)
+/// How an application names languages. Sonarr and Radarr number their
+/// languages differently and do not know the same ones, so each reads a
+/// subtitle's name with its own tables.
+#[derive(Clone, Copy)]
+pub struct LanguageLookup {
+    /// `IsoLanguages.Find(code)?.Language`, the code in lower case.
+    pub by_iso_code: fn(&str) -> Option<i64>,
+    /// The first of `Language.All` whose name ends the text, which is in
+    /// lower case.
+    pub by_name_at_end: fn(&str) -> Option<i64>,
 }
 
-/// `ParseSubtitleLanguage`: the language code at the end of the name, or
-/// a language's name there.
-pub fn parse_subtitle_language(file_name: &str) -> i64 {
-    let simple = simple_name(file_name);
-    if let Ok(Some(found)) = language_regex().captures(simple) {
-        return found.name("iso").map(|m| language_of(m.as_str())).unwrap_or(0);
-    }
-    let lower = simple.to_lowercase();
+/// Sonarr's tables: what the functions without a lookup read names with.
+pub const SERIES_LANGUAGES: LanguageLookup = LanguageLookup {
+    by_iso_code: crate::mediafiles::language_from_iso,
+    by_name_at_end: series_language_named_at_end,
+};
+
+fn series_language_named_at_end(lower: &str) -> Option<i64> {
     LANGUAGES
         .iter()
         .find(|l| lower.ends_with(&l.name.to_lowercase()))
         .map(|l| l.id)
         .filter(|id| *id > 0)
-        .unwrap_or(0)
+}
+
+/// `IsoLanguages.Find(code)?.Language`.
+fn language_of(languages: &LanguageLookup, code: &str) -> i64 {
+    (languages.by_iso_code)(&code.to_ascii_lowercase()).unwrap_or(0)
+}
+
+/// `ParseSubtitleLanguage`: the language code at the end of the name, or
+/// a language's name there.
+pub fn parse_subtitle_language(file_name: &str) -> i64 {
+    parse_subtitle_language_in(&SERIES_LANGUAGES, file_name)
+}
+
+/// [`parse_subtitle_language`] with the tables of the application asking.
+pub fn parse_subtitle_language_in(languages: &LanguageLookup, file_name: &str) -> i64 {
+    let simple = simple_name(file_name);
+    if let Ok(Some(found)) = language_regex().captures(simple) {
+        return found
+            .name("iso")
+            .map(|m| language_of(languages, m.as_str()))
+            .unwrap_or(0);
+    }
+    (languages.by_name_at_end)(&simple.to_lowercase()).unwrap_or(0)
 }
 
 /// `ParseLanguageTags`: the tags around the language code, lower-cased.
@@ -111,9 +139,14 @@ pub fn parse_language_tags(file_name: &str) -> Vec<String> {
 
 /// `ParseBasicSubtitle`: language and tags, no title.
 pub fn parse_basic_subtitle(file_name: &str) -> SubtitleTitleInfo {
+    parse_basic_subtitle_in(&SERIES_LANGUAGES, file_name)
+}
+
+/// [`parse_basic_subtitle`] with the tables of the application asking.
+pub fn parse_basic_subtitle_in(languages: &LanguageLookup, file_name: &str) -> SubtitleTitleInfo {
     SubtitleTitleInfo {
         language_tags: parse_language_tags(file_name),
-        language: parse_subtitle_language(file_name),
+        language: parse_subtitle_language_in(languages, file_name),
         ..Default::default()
     }
 }
@@ -121,9 +154,15 @@ pub fn parse_basic_subtitle(file_name: &str) -> SubtitleTitleInfo {
 /// `ParseSubtitleLanguageInformation`: with a title when the name has one
 /// and exactly one language code.
 pub fn parse_subtitle_information(file_name: &str) -> SubtitleTitleInfo {
+    parse_subtitle_information_in(&SERIES_LANGUAGES, file_name)
+}
+
+/// [`parse_subtitle_information`] with the tables of the application
+/// asking.
+pub fn parse_subtitle_information_in(languages: &LanguageLookup, file_name: &str) -> SubtitleTitleInfo {
     let simple = simple_name(file_name);
     let Ok(Some(found)) = title_regex().captures(simple) else {
-        return parse_basic_subtitle(file_name);
+        return parse_basic_subtitle_in(languages, file_name);
     };
     let part = |name: &str| found.name(name).map(|m| m.as_str()).unwrap_or("");
     let before: Vec<&str> = part("before").split('.').filter(|t| !t.is_empty()).collect();
@@ -135,7 +174,7 @@ pub fn parse_subtitle_information(file_name: &str) -> SubtitleTitleInfo {
         .filter(|t| !is_tag(t))
         .collect();
     if codes.len() != 1 {
-        return parse_basic_subtitle(file_name);
+        return parse_basic_subtitle_in(languages, file_name);
     }
     let tags_before: Vec<&str> = before.iter().copied().filter(|t| is_tag(t)).collect();
     let mut language_tags: Vec<String> = Vec::new();
@@ -148,7 +187,7 @@ pub fn parse_subtitle_information(file_name: &str) -> SubtitleTitleInfo {
     }
     let mut info = SubtitleTitleInfo {
         // The last capture of the code, as the originals' `Group.Value`.
-        language: language_of(codes[0]),
+        language: language_of(languages, codes[0]),
         language_tags,
         raw_title: Some(part("title").to_string()),
         title: None,

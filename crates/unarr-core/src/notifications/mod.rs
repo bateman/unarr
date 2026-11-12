@@ -365,13 +365,31 @@ impl Notifier {
         &self.identity
     }
 
+    /// The stored connections of kind Notification, by id.
+    pub(crate) async fn providers(&self) -> anyhow::Result<Vec<Provider>> {
+        self.db
+            .call(|conn| store::providers::list_providers(conn, KIND))
+            .await
+    }
+
+    /// `NotificationStatusService.GetBlockedProviders`: the ids in back-off
+    /// at `now`.
+    pub(crate) async fn blocked(&self, now: DateTime<Utc>) -> Vec<i64> {
+        self.db
+            .call(|conn| store::provider_status::provider_statuses(conn, KIND))
+            .await
+            .unwrap_or_default()
+            .into_iter()
+            .filter(|(_, s)| s.is_disabled(now))
+            .map(|(id, _)| id)
+            .collect()
+    }
+
     /// Every stored notification, by id.
     pub async fn definitions(&self) -> anyhow::Result<Vec<NotificationDefinition>> {
-        let providers = self
-            .db
-            .call(|conn| store::providers::list_providers(conn, KIND))
-            .await?;
-        Ok(providers
+        Ok(self
+            .providers()
+            .await?
             .iter()
             .map(NotificationDefinition::from_provider)
             .collect())
@@ -388,14 +406,7 @@ impl Notifier {
             }
         };
         let blocked: Vec<i64> = if filter_blocked {
-            self.db
-                .call(|conn| store::provider_status::provider_statuses(conn, KIND))
-                .await
-                .unwrap_or_default()
-                .into_iter()
-                .filter(|(_, s)| s.is_disabled(now))
-                .map(|(id, _)| id)
-                .collect()
+            self.blocked(now).await
         } else {
             Vec::new()
         };
@@ -412,7 +423,7 @@ impl Notifier {
             .collect()
     }
 
-    async fn context_parts(&self) -> (String, Vec<Tag>) {
+    pub(crate) async fn context_parts(&self) -> (String, Vec<Tag>) {
         self.db
             .call(|conn| {
                 Ok((
@@ -476,11 +487,23 @@ impl Notifier {
         now: DateTime<Utc>,
         result: Result<(), String>,
     ) {
+        self.deliver_to(def.id, &def.name, what, now, result).await;
+    }
+
+    /// The same for a connection known by its id and name.
+    pub(crate) async fn deliver_to(
+        &self,
+        id: i64,
+        name: &str,
+        what: &str,
+        now: DateTime<Utc>,
+        result: Result<(), String>,
+    ) {
         match result {
-            Ok(()) => self.record_success(def.id).await,
+            Ok(()) => self.record_success(id).await,
             Err(e) => {
-                self.record_failure(def.id, now).await;
-                tracing::warn!(notification = %def.name, error = %e, "unable to send {what} notification");
+                self.record_failure(id, now).await;
+                tracing::warn!(notification = %name, error = %e, "unable to send {what} notification");
             }
         }
     }

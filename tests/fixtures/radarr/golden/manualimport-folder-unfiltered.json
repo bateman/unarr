@@ -1,0 +1,47 @@
+{
+  "body": [
+    {
+      "customFormatScore": 0,
+      "customFormats": [],
+      "id": 1955259751,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 0,
+          "name": "Unknown"
+        }
+      ],
+      "name": "c8949b89db6f20a1e049aa8170a7a05c",
+      "path": "/downloads/movies/c8949b89db6f20a1e049aa8170a7a05c/c8949b89db6f20a1e049aa8170a7a05c.mkv",
+      "quality": {
+        "quality": {
+          "id": 5,
+          "modifier": "none",
+          "name": "WEBDL-720p",
+          "resolution": 720,
+          "source": "webdl"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityWeight": 16,
+      "rejections": [
+        {
+          "reason": "Unknown Movie",
+          "type": "permanent"
+        }
+      ],
+      "relativePath": "c8949b89db6f20a1e049aa8170a7a05c.mkv",
+      "size": 119980
+    }
+  ],
+  "recordedAt": "2026-11-12T10:00:33Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/manualimport?folder=/downloads/movies/c8949b89db6f20a1e049aa8170a7a05c&filterExistingFiles=false"
+  },
+  "status": 200
+}

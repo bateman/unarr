@@ -40,7 +40,11 @@ fn by_path(path: &str, is_special: bool) -> DetectSampleResult {
     DetectSampleResult::Indeterminate
 }
 
-fn by_runtime(path: &str, file_runtime_seconds: f64, expected_runtime_minutes: i64) -> DetectSampleResult {
+pub(crate) fn by_runtime(
+    path: &str,
+    file_runtime_seconds: f64,
+    expected_runtime_minutes: i64,
+) -> DetectSampleResult {
     let minimum = minimum_allowed_runtime(expected_runtime_minutes);
     if file_runtime_seconds == 0.0 {
         tracing::error!("[{path}] has a runtime of 0, is it a valid video file?");

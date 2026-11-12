@@ -1,0 +1,12 @@
+{
+  "body": {
+    "content": "movieId must be provided",
+    "message": "BadRequest: movieId must be provided"
+  },
+  "recordedAt": "2026-11-12T10:00:09Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/rename"
+  },
+  "status": 400
+}

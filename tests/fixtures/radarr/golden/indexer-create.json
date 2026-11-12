@@ -480,7 +480,7 @@
     "supportsSearch": true,
     "tags": []
   },
-  "recordedAt": "2026-11-11T22:00:06Z",
+  "recordedAt": "2026-11-12T09:55:29Z",
   "request": {
     "body": "bodies/indexer-create.json",
     "method": "POST",

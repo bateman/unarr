@@ -1,0 +1,29 @@
+{
+  "movieFileIds": [
+    "{id:manualimport-moviefiles-62}"
+  ],
+  "quality": {
+    "quality": {
+      "id": 6,
+      "name": "Bluray-720p",
+      "source": "bluray",
+      "resolution": 720,
+      "modifier": "none"
+    },
+    "revision": {
+      "version": 1,
+      "real": 0,
+      "isRepack": false
+    }
+  },
+  "languages": [
+    {
+      "id": 1,
+      "name": "English"
+    },
+    {
+      "id": -1,
+      "name": "Any"
+    }
+  ]
+}

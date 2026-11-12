@@ -1,7 +1,7 @@
 {
   "body": [
     {
-      "added": "2026-11-11T22:01:45Z",
+      "added": "2026-11-12T09:57:06Z",
       "customFormatScore": 0,
       "customFormats": [
         {
@@ -42,11 +42,11 @@
       "size": 6979321856,
       "sizeleft": 6979321856,
       "status": "delay",
-      "timeleft": "363.13:38:14.7868281",
+      "timeleft": "363.01:42:53.7958845",
       "title": "Candyman.1992.iTA.ENG.1080p.WEB-DL.DD5.1.H264-MeM"
     }
   ],
-  "recordedAt": "2026-11-11T22:01:45Z",
+  "recordedAt": "2026-11-12T09:57:06Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/queue/details?movieId=20"

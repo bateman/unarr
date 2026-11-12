@@ -82,6 +82,8 @@ pub struct MockDirs {
     pub downloads: Option<PathBuf>,
     /// The TV library location Plex reports; `/tv` when `None`.
     pub tv: Option<PathBuf>,
+    /// The movie library location Plex reports; `/movies` when `None`.
+    pub movies: Option<PathBuf>,
 }
 
 impl Mock {
@@ -101,6 +103,9 @@ impl Mock {
         }
         if let Some(d) = &dirs.tv {
             state.tv = d.to_string_lossy().trim_end_matches('/').to_string();
+        }
+        if let Some(d) = &dirs.movies {
+            state.movies = d.to_string_lossy().trim_end_matches('/').to_string();
         }
         let shared = Shared {
             fixtures,

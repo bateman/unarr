@@ -1,0 +1,20 @@
+{
+  "body": [
+    {
+      "name": "Backcountry (2015) {tmdb-228973} - [Bluray-1080p][AAC 1.0][x264]-GRP.mkv",
+      "path": "/movies/Backcountry (2015)/Backcountry (2015) {tmdb-228973} - [Bluray-1080p][AAC 1.0][x264]-GRP.mkv",
+      "relativePath": "Backcountry (2015) {tmdb-228973} - [Bluray-1080p][AAC 1.0][x264]-GRP.mkv"
+    },
+    {
+      "name": "backcountry-sample.mkv",
+      "path": "/movies/Backcountry (2015)/Sample/backcountry-sample.mkv",
+      "relativePath": "Sample/backcountry-sample.mkv"
+    }
+  ],
+  "recordedAt": "2026-11-12T10:01:09Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/filesystem/mediafiles?path=/movies/Backcountry%20(2015)/"
+  },
+  "status": 200
+}

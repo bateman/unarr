@@ -209,12 +209,11 @@ async fn radarr_writes_only_what_its_milestones_brought() {
         ("POST", "/api/v3/movie"),
         ("PUT", "/api/v3/movie/6"),
         ("DELETE", "/api/v3/movie/6"),
-        ("DELETE", "/api/v3/moviefile/213"),
         ("POST", "/api/v3/tag"),
         ("PUT", "/api/v3/qualityprofile/11"),
         ("PUT", "/api/v3/config/ui/1"),
-        ("DELETE", "/api/v3/blocklist/1"),
-        ("POST", "/api/v3/notification"),
+        // Radarr's notification controller does not route the bulk actions.
+        ("PUT", "/api/v3/notification/bulk"),
     ] {
         let status = send(&radarr, method, uri).await;
         assert!(
@@ -224,17 +223,28 @@ async fn radarr_writes_only_what_its_milestones_brought() {
     }
     // Milestone 4b brought the indexers and the download clients: a body
     // that says nothing is refused as invalid, not as a method.
-    for uri in ["/api/v3/indexer", "/api/v3/downloadclient"] {
+    // The notifications came with the import of milestone 4c.
+    for uri in [
+        "/api/v3/indexer",
+        "/api/v3/downloadclient",
+        "/api/v3/notification",
+    ] {
         assert_eq!(send(&radarr, "POST", uri).await, StatusCode::BAD_REQUEST, "{uri}");
     }
     // Nothing was written.
     let (status, body) = get(&radarr, "/api/v3/movie/6").await;
     assert_eq!(status, StatusCode::OK);
     assert!(body.contains("\"title\":\"Alien: Romulus\""));
-    // What milestone 4c brings is not a route yet.
-    for uri in ["/api/v3/movie/lookup?term=alien", "/api/v3/rename?movieId=6"] {
-        assert_eq!(get(&radarr, uri).await.0, StatusCode::NOT_FOUND, "{uri}");
-    }
+    // What milestone 4d brings is not a route yet.
+    assert_eq!(
+        get(&radarr, "/api/v3/movie/lookup?term=alien").await.0,
+        StatusCode::NOT_FOUND
+    );
+    // Milestone 4c brought the rename preview: nothing to rename for a
+    // movie whose file the fixture's library does not hold on disk under
+    // another name than the settings give it.
+    assert_eq!(get(&radarr, "/api/v3/rename?movieId=6").await.0, StatusCode::OK);
+    assert_eq!(get(&radarr, "/api/v3/rename").await.0, StatusCode::BAD_REQUEST);
 }
 
 #[tokio::test]

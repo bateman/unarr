@@ -8,6 +8,7 @@ pub mod activity;
 pub mod catalog;
 pub mod config;
 pub mod feed;
+pub mod manualimport;
 pub mod movies;
 pub mod providers;
 pub mod queue;
@@ -20,7 +21,7 @@ use axum::Router;
 
 use crate::routes::{
     backup, catalog as shared_catalog, config as shared_config, downloadclient_writes, indexer_writes,
-    providers as shared_providers, system as shared_system,
+    notification_writes, providers as shared_providers, system as shared_system,
 };
 use crate::state::AppState;
 
@@ -134,9 +135,26 @@ pub fn api_router() -> Router<AppState> {
                 .put(downloadclient_writes::update)
                 .delete(downloadclient_writes::delete),
         )
-        .route("/notification", get(shared_providers::notifications))
+        .route(
+            "/notification",
+            get(shared_providers::notifications).post(notification_writes::create),
+        )
         .route("/notification/schema", get(shared_providers::notification_schema))
-        .route("/notification/{id}", get(shared_providers::notification))
+        .route("/notification/test", post(notification_writes::test))
+        .route("/notification/testall", post(notification_writes::test_all))
+        .route("/notification/action/{name}", post(notification_writes::action))
+        // `NotificationController` takes the bulk actions off its routes
+        // (`[NonAction]`), and `bulk` is no id (`{id:int?}`).
+        .route(
+            "/notification/bulk",
+            axum::routing::any(crate::routes::unknown_api_route),
+        )
+        .route(
+            "/notification/{id}",
+            get(shared_providers::notification)
+                .put(notification_writes::update)
+                .delete(notification_writes::delete),
+        )
         .route("/importlist", get(shared_providers::import_lists))
         .route("/importlist/schema", get(shared_providers::import_list_schema))
         .route("/importlist/{id}", get(shared_providers::import_list))
@@ -174,7 +192,32 @@ pub fn api_router() -> Router<AppState> {
             get(crate::routes::series_writes::media_cover_api),
         )
         .route("/moviefile", get(movies::files))
-        .route("/moviefile/{id}", get(movies::file))
+        .route("/moviefile/editor", put(movies::file_editor))
+        .route(
+            "/moviefile/bulk",
+            put(movies::file_bulk_update).delete(movies::file_bulk_delete),
+        )
+        .route(
+            "/moviefile/{id}",
+            get(movies::file)
+                .put(movies::file_update)
+                .delete(movies::file_delete),
+        )
+        .route("/filesystem", get(crate::routes::series_writes::filesystem))
+        .route(
+            "/filesystem/type",
+            get(crate::routes::series_writes::filesystem_type),
+        )
+        .route(
+            "/filesystem/mediafiles",
+            get(crate::routes::series_writes::filesystem_media_files),
+        )
+        .route(
+            "/manualimport",
+            get(manualimport::list).post(manualimport::reprocess),
+        )
+        .route("/parse", get(manualimport::parse))
+        .route("/rename", get(movies::rename_preview))
         .route("/extrafile", get(movies::extra_files))
         .route("/collection", get(movies::collections))
         .route("/collection/{id}", get(movies::collection))
@@ -188,6 +231,14 @@ pub fn api_router() -> Router<AppState> {
         .route("/history/failed/{id}", post(activity::history_mark_failed))
         .route("/blocklist", get(activity::blocklist))
         .route("/blocklist/movie", get(activity::blocklist_movie))
+        .route(
+            "/blocklist/bulk",
+            delete(crate::routes::activity::blocklist_bulk_delete),
+        )
+        .route(
+            "/blocklist/{id}",
+            delete(crate::routes::activity::blocklist_delete),
+        )
         .route("/calendar", get(activity::calendar))
         .route("/wanted/missing", get(activity::missing))
         .route("/wanted/cutoff", get(activity::cutoff))

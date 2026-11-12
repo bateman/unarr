@@ -281,6 +281,38 @@ pub enum CommandBody {
     Backup {
         kind: BackupType,
     },
+    /// Radarr's `RescanMovieCommand`: one movie's folder, or every one's.
+    RescanMovie {
+        movie_id: Option<i64>,
+    },
+    /// Radarr's `DownloadedMoviesScanCommand`: a path a third party asks
+    /// to import.
+    DownloadedMoviesScan {
+        path: Option<String>,
+        download_client_id: Option<String>,
+        import_mode: crate::mediafiles::ImportMode,
+    },
+    /// Radarr's `RenameFilesCommand`: the same name as Sonarr's, about a
+    /// movie's files.
+    RenameMovieFiles {
+        movie_id: i64,
+        files: Vec<i64>,
+    },
+    /// Radarr's `ManualImportCommand`: the same name as Sonarr's, about
+    /// movie files.
+    ManualImportMovies {
+        files: Vec<crate::movies::import::manual::ManualImportFile>,
+        import_mode: crate::mediafiles::ImportMode,
+    },
+    /// Radarr's `RenameMovieCommand`: every file of each movie.
+    RenameMovie {
+        movie_ids: Vec<i64>,
+    },
+    /// Radarr's `RefreshMovieCommand`.
+    RefreshMovie {
+        movie_ids: Vec<i64>,
+        is_new_movie: bool,
+    },
     /// Radarr's `MoviesSearchCommand`.
     MoviesSearch {
         movie_ids: Vec<i64>,
@@ -394,6 +426,22 @@ const NAMES: &[(&str, &str)] = &[
         "NzbDrone.Core.ImportLists.ImportListSyncCommand",
     ),
     ("Backup", "NzbDrone.Core.Backup.BackupCommand"),
+    (
+        "RescanMovie",
+        "NzbDrone.Core.MediaFiles.Commands.RescanMovieCommand",
+    ),
+    (
+        "DownloadedMoviesScan",
+        "NzbDrone.Core.MediaFiles.Commands.DownloadedMoviesScanCommand",
+    ),
+    (
+        "RefreshMovie",
+        "NzbDrone.Core.Movies.Commands.RefreshMovieCommand",
+    ),
+    (
+        "RenameMovie",
+        "NzbDrone.Core.MediaFiles.Commands.RenameMovieCommand",
+    ),
     ("MoviesSearch", "NzbDrone.Core.IndexerSearch.MoviesSearchCommand"),
     (
         "MissingMoviesSearch",
@@ -485,6 +533,60 @@ fn manual_import_file_json(f: &crate::mediafiles::manual::ManualImportFile) -> V
     Value::Object(m)
 }
 
+/// Radarr's `ManualImportFile`, from a command body.
+fn manual_import_movie_file(v: &Value) -> crate::movies::import::manual::ManualImportFile {
+    let text = |key: &str| v[key].as_str().map(str::to_string);
+    crate::movies::import::manual::ManualImportFile {
+        path: v["path"].as_str().unwrap_or("").to_string(),
+        folder_name: text("folderName"),
+        movie_id: v["movieId"].as_i64().unwrap_or(0),
+        quality: quality_model_from_json(&v["quality"]),
+        languages: language_ids_from_json(&v["languages"]),
+        release_group: text("releaseGroup"),
+        indexer_flags: v["indexerFlags"].as_i64().unwrap_or(0),
+        download_id: text("downloadId"),
+    }
+}
+
+/// The same as the command's body shows it, nulls left out.
+fn manual_import_movie_file_json(f: &crate::movies::import::manual::ManualImportFile) -> Value {
+    use crate::movies::quality::{MovieLanguage, MovieQuality};
+    let mut m = Map::new();
+    m.insert("path".into(), json!(f.path));
+    if let Some(folder) = &f.folder_name {
+        m.insert("folderName".into(), json!(folder));
+    }
+    m.insert(
+        "quality".into(),
+        json!({
+            "quality": MovieQuality::by_id(f.quality.quality_id),
+            "revision": {
+                "version": f.quality.version,
+                "real": f.quality.real,
+                "isRepack": f.quality.is_repack,
+            },
+        }),
+    );
+    m.insert(
+        "languages".into(),
+        Value::Array(
+            f.languages
+                .iter()
+                .map(|id| json!({"id": id, "name": MovieLanguage::name_of(*id)}))
+                .collect(),
+        ),
+    );
+    if let Some(group) = &f.release_group {
+        m.insert("releaseGroup".into(), json!(group));
+    }
+    m.insert("indexerFlags".into(), json!(f.indexer_flags));
+    if let Some(id) = &f.download_id {
+        m.insert("downloadId".into(), json!(id));
+    }
+    m.insert("movieId".into(), json!(f.movie_id));
+    Value::Object(m)
+}
+
 fn ints(v: &Value) -> Vec<i64> {
     v.as_array()
         .map(|a| a.iter().filter_map(Value::as_i64).collect())
@@ -505,18 +607,52 @@ impl CommandBody {
     /// [`CommandBody::parse`] for one application: a name only the other
     /// knows is no command here, as it is none in the original.
     pub fn parse_for(personality: crate::Personality, name: &str, body: &Value) -> Option<CommandBody> {
-        Self::parse(name, body).filter(|command| command.runs_in(personality))
+        let radarr = personality == crate::Personality::Radarr;
+        // The names both applications have with different bodies.
+        if radarr && name.eq_ignore_ascii_case("RenameFiles") {
+            return Some(CommandBody::RenameMovieFiles {
+                movie_id: body["movieId"].as_i64().unwrap_or(0),
+                files: ints(&body["files"]),
+            });
+        }
+        if radarr && name.eq_ignore_ascii_case("ManualImport") {
+            return Some(CommandBody::ManualImportMovies {
+                files: body["files"]
+                    .as_array()
+                    .map(|a| a.iter().map(manual_import_movie_file).collect())
+                    .unwrap_or_default(),
+                import_mode: body["importMode"]
+                    .as_str()
+                    .map(crate::mediafiles::ImportMode::parse)
+                    .unwrap_or_default(),
+            });
+        }
+        let command = Self::parse(name, body).filter(|command| command.runs_in(personality))?;
+        Some(match (personality, command) {
+            // Radarr's `BackupCommand.Type` is read from the trigger, not
+            // from the body: anything posted is a manual backup.
+            (crate::Personality::Radarr, CommandBody::Backup { .. }) => CommandBody::Backup {
+                kind: BackupType::Manual,
+            },
+            (_, command) => command,
+        })
     }
 
     /// Whether the application has this command. Radarr has what its
-    /// milestones brought so far: the acquisition commands and the two
-    /// that keep the queue and the health checks going.
+    /// milestones brought so far: the acquisition commands, the library's
+    /// (scans, imports) and the ones with no media in them.
     pub fn runs_in(&self, personality: crate::Personality) -> bool {
         let movies = matches!(
             self,
             CommandBody::MoviesSearch { .. }
                 | CommandBody::MissingMoviesSearch { .. }
                 | CommandBody::CutoffUnmetMoviesSearch { .. }
+                | CommandBody::RescanMovie { .. }
+                | CommandBody::DownloadedMoviesScan { .. }
+                | CommandBody::RefreshMovie { .. }
+                | CommandBody::RenameMovieFiles { .. }
+                | CommandBody::ManualImportMovies { .. }
+                | CommandBody::RenameMovie { .. }
         );
         match personality {
             crate::Personality::Radarr => {
@@ -528,6 +664,9 @@ impl CommandBody {
                             | CommandBody::ProcessMonitoredDownloads
                             | CommandBody::MessagingCleanup
                             | CommandBody::CheckHealth
+                            | CommandBody::Housekeeping
+                            | CommandBody::CleanUpRecycleBin
+                            | CommandBody::Backup { .. }
                     )
             }
             _ => !movies,
@@ -660,6 +799,30 @@ impl CommandBody {
                     _ => BackupType::Scheduled,
                 },
             },
+            "RescanMovie" => CommandBody::RescanMovie {
+                movie_id: body["movieId"].as_i64(),
+            },
+            "DownloadedMoviesScan" => CommandBody::DownloadedMoviesScan {
+                path: body["path"]
+                    .as_str()
+                    .map(str::to_string)
+                    .filter(|p| !p.trim().is_empty()),
+                download_client_id: body["downloadClientId"]
+                    .as_str()
+                    .map(str::to_string)
+                    .filter(|p| !p.trim().is_empty()),
+                import_mode: body["importMode"]
+                    .as_str()
+                    .map(crate::mediafiles::ImportMode::parse)
+                    .unwrap_or_default(),
+            },
+            "RenameMovie" => CommandBody::RenameMovie {
+                movie_ids: ints(&body["movieIds"]),
+            },
+            "RefreshMovie" => CommandBody::RefreshMovie {
+                movie_ids: ints(&body["movieIds"]),
+                is_new_movie: body["isNewMovie"].as_bool().unwrap_or(false),
+            },
             "MoviesSearch" => CommandBody::MoviesSearch {
                 movie_ids: ints(&body["movieIds"]),
             },
@@ -708,6 +871,12 @@ impl CommandBody {
             CommandBody::CleanUpRecycleBin => "CleanUpRecycleBin",
             CommandBody::ImportListSync { .. } => "ImportListSync",
             CommandBody::Backup { .. } => "Backup",
+            CommandBody::RescanMovie { .. } => "RescanMovie",
+            CommandBody::DownloadedMoviesScan { .. } => "DownloadedMoviesScan",
+            CommandBody::RefreshMovie { .. } => "RefreshMovie",
+            CommandBody::RenameMovieFiles { .. } => "RenameFiles",
+            CommandBody::ManualImportMovies { .. } => "ManualImport",
+            CommandBody::RenameMovie { .. } => "RenameMovie",
             CommandBody::MoviesSearch { .. } => "MoviesSearch",
             CommandBody::MissingMoviesSearch { .. } => "MissingMoviesSearch",
             CommandBody::CutoffUnmetMoviesSearch { .. } => "CutoffUnmetMoviesSearch",
@@ -732,6 +901,7 @@ impl CommandBody {
             CommandBody::RefreshMonitoredDownloads
                 | CommandBody::ProcessMonitoredDownloads
                 | CommandBody::DownloadedEpisodesScan { .. }
+                | CommandBody::DownloadedMoviesScan { .. }
                 | CommandBody::MessagingCleanup
                 | CommandBody::CheckHealth
                 | CommandBody::Housekeeping
@@ -746,8 +916,10 @@ impl CommandBody {
             self,
             CommandBody::RssSync
                 | CommandBody::RefreshSeries { .. }
+                | CommandBody::RefreshMovie { .. }
                 | CommandBody::ProcessMonitoredDownloads
                 | CommandBody::DownloadedEpisodesScan { .. }
+                | CommandBody::DownloadedMoviesScan { .. }
         )
     }
 
@@ -760,9 +932,13 @@ impl CommandBody {
             self,
             CommandBody::ProcessMonitoredDownloads
                 | CommandBody::DownloadedEpisodesScan { .. }
+                | CommandBody::DownloadedMoviesScan { .. }
                 | CommandBody::ManualImport { .. }
                 | CommandBody::RenameFiles { .. }
                 | CommandBody::RenameSeries { .. }
+                | CommandBody::RenameMovieFiles { .. }
+                | CommandBody::ManualImportMovies { .. }
+                | CommandBody::RenameMovie { .. }
                 | CommandBody::MoveSeries { .. }
                 | CommandBody::BulkMoveSeries { .. }
         )
@@ -773,6 +949,7 @@ impl CommandBody {
     pub fn updates_scheduled_task(&self) -> bool {
         match self {
             CommandBody::RefreshSeries { series_ids, .. } => series_ids.is_empty(),
+            CommandBody::RefreshMovie { movie_ids, .. } => movie_ids.is_empty(),
             CommandBody::ImportListSync { definition_id } => definition_id.is_none(),
             CommandBody::Backup { kind } => *kind == BackupType::Scheduled,
             _ => true,
@@ -781,7 +958,7 @@ impl CommandBody {
 
     pub fn completion_message(&self) -> Option<&'static str> {
         match self {
-            CommandBody::RefreshSeries { .. } => Some("Completed"),
+            CommandBody::RefreshSeries { .. } | CommandBody::RefreshMovie { .. } => Some("Completed"),
             _ => None,
         }
     }
@@ -882,6 +1059,45 @@ impl CommandBody {
             }
             CommandBody::MoviesSearch { movie_ids } => {
                 m.insert("movieIds".into(), json!(movie_ids));
+            }
+            CommandBody::RescanMovie { movie_id: Some(id) } => {
+                m.insert("movieId".into(), json!(id));
+            }
+            CommandBody::ManualImportMovies { files, import_mode } => {
+                m.insert(
+                    "files".into(),
+                    Value::Array(files.iter().map(manual_import_movie_file_json).collect()),
+                );
+                m.insert("importMode".into(), json!(import_mode.as_str()));
+            }
+            CommandBody::RenameMovieFiles { movie_id, files } => {
+                m.insert("movieId".into(), json!(movie_id));
+                m.insert("files".into(), json!(files));
+            }
+            CommandBody::RenameMovie { movie_ids } => {
+                m.insert("movieIds".into(), json!(movie_ids));
+            }
+            CommandBody::DownloadedMoviesScan {
+                path,
+                download_client_id,
+                import_mode,
+            } => {
+                if let Some(p) = path {
+                    m.insert("path".into(), json!(p));
+                }
+                if let Some(d) = download_client_id {
+                    m.insert("downloadClientId".into(), json!(d));
+                }
+                m.insert("importMode".into(), json!(import_mode.as_str()));
+                // The class's own `SendUpdates`, which nothing sets.
+                m.insert("sendUpdates".into(), json!(false));
+            }
+            CommandBody::RefreshMovie {
+                movie_ids,
+                is_new_movie,
+            } => {
+                m.insert("movieIds".into(), json!(movie_ids));
+                m.insert("isNewMovie".into(), json!(is_new_movie));
             }
             CommandBody::MissingMoviesSearch {
                 filter_key,

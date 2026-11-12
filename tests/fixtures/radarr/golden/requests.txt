@@ -372,6 +372,246 @@ blocklist-after-pending GET /api/v3/blocklist?page=1&pageSize=2&sortKey=date&sor
 history-after-bulk GET /api/v3/history?page=1&pageSize=4&sortKey=date&sortDirection=descending&eventType=1
 blocklist-after-bulk GET /api/v3/blocklist?page=1&pageSize=4&sortKey=date&sortDirection=descending
 delayprofile-restore PUT /api/v3/delayprofile/1 bodies/delayprofile-restore.json
+# Import: downloads the mock clients complete end up in the library. The
+# notification targets go first (tested before they exist, then created;
+# the fixture's own three point at hosts that do not resolve), so the
+# imports below reach the mock's Plex, Discord and webhook; `mock` lines
+# complete items and read back what the targets received. One completion
+# per refresh, so the original numbers the new files in a known order. In
+# the queue at this point: Backcountry, BlacKkKlansman and Candyman on the
+# mock SABnzbd, Last Night in Soho on qBittorrent, The Holdovers and
+# Nightmare Alley on Transmission, the torrents under names that are hashes.
+notification-test-discord POST /api/v3/notification/test bodies/notification-create-discord.json
+notification-test-webhook POST /api/v3/notification/test bodies/notification-create-webhook.json
+notification-test-plex POST /api/v3/notification/test bodies/notification-create-plex.json
+notification-test-plex-badtoken POST /api/v3/notification/test bodies/notification-test-plex-badtoken.json
+notification-test-webhook-unreachable POST /api/v3/notification/test bodies/notification-test-webhook-unreachable.json
+mock notifications-after-test GET /mock/notifications
+mock - POST /mock/notifications/clear
+notification-create-discord POST /api/v3/notification bodies/notification-create-discord.json
+notification-create-webhook POST /api/v3/notification bodies/notification-create-webhook.json
+notification-create-plex POST /api/v3/notification bodies/notification-create-plex.json
+notification-create-invalid POST /api/v3/notification bodies/notification-create-invalid.json
+notification-after-create GET /api/v3/notification
+notification-4 GET /api/v3/notification/4
+notification-test-existing POST /api/v3/notification/test bodies/notification-create-discord.json
+notification-testall POST /api/v3/notification/testall
+notification-update PUT /api/v3/notification/5 bodies/notification-update-webhook.json
+notification-update-missing PUT /api/v3/notification/999 bodies/notification-update-missing.json
+notification-5-after-update GET /api/v3/notification/5
+mock notifications-after-testall GET /mock/notifications
+mock - POST /mock/notifications/clear
+# Candyman from SABnzbd, a plain file; BlacKkKlansman with two audio
+# languages and a sample beside it; Soho's torrent, whose folder and file
+# are named by a hash; The Holdovers' torrent holding nothing but a sample.
+mock - POST /mock/sabnzbd/complete?title=Candyman.1992.iTA.ENG.1080p.WEB-DL.DD5.1.H264-MeM&clip=episode
+import-refresh-1 POST /api/v3/command bodies/command-refresh-downloads.json
+sleep 12
+import-refresh-1-get GET /api/v3/command/{id:import-refresh-1}
+import-queue-1 GET /api/v3/queue?page=1&pageSize=20&sortKey=timeleft&sortDirection=ascending&includeUnknownMovieItems=true&includeMovie=true
+import-moviefiles-20 GET /api/v3/moviefile?movieId=20
+import-movie-20 GET /api/v3/movie/20
+mock - POST /mock/sabnzbd/complete?title=BlacKkKlansman.2018.iTA.ENG.1080p.WEB-DL.DD5.1.H264-MeM&clip=episode-dual&extras=sample:Sample/{title}.sample.mkv
+import-refresh-2 POST /api/v3/command bodies/command-refresh-downloads.json
+sleep 12
+import-queue-2 GET /api/v3/queue?page=1&pageSize=20&sortKey=timeleft&sortDirection=ascending&includeUnknownMovieItems=true&includeMovie=true
+mock - POST /mock/qbittorrent/complete?title=c8949b89db6f20a1e049aa8170a7a05c&clip=episode
+import-refresh-3 POST /api/v3/command bodies/command-refresh-downloads.json
+sleep 12
+import-queue-3 GET /api/v3/queue?page=1&pageSize=20&sortKey=timeleft&sortDirection=ascending&includeUnknownMovieItems=true&includeMovie=true
+mock - POST /mock/transmission/complete?title=d94f74e9588477404bd8d34ffc605870&clip=sample
+import-refresh-4 POST /api/v3/command bodies/command-refresh-downloads.json
+sleep 12
+import-queue-after GET /api/v3/queue?page=1&pageSize=20&sortKey=timeleft&sortDirection=ascending&includeUnknownMovieItems=true&includeMovie=true
+import-queue-status GET /api/v3/queue/status
+import-queue-details GET /api/v3/queue/details?includeMovie=true
+import-history GET /api/v3/history?page=1&pageSize=10&sortKey=date&sortDirection=descending&includeMovie=true
+import-history-imported GET /api/v3/history?page=1&pageSize=10&sortKey=date&sortDirection=descending&eventType=3
+import-history-movie-20 GET /api/v3/history/movie?movieId=20
+import-moviefiles-13 GET /api/v3/moviefile?movieId=13
+import-moviefiles-62 GET /api/v3/moviefile?movieId=62
+import-moviefile-405 GET /api/v3/moviefile/405
+import-moviefile-missing GET /api/v3/moviefile/999999
+import-movie-13 GET /api/v3/movie/13
+import-movie-62 GET /api/v3/movie/62
+import-movie-116 GET /api/v3/movie/116
+import-wanted-missing GET /api/v3/wanted/missing?page=1&pageSize=5&sortKey=movieMetadata.sortTitle&sortDirection=ascending&monitored=true
+import-health GET /api/v3/health
+mock import-notifications GET /mock/notifications
+mock - POST /mock/notifications/clear
+# An upgrade: Candyman's file came in as the clip's 480p, a Bluray release
+# pushed for it is grabbed, and the mock completes it with the 1080p clip.
+# The file it replaces is deleted for good, no recycling bin being set.
+import-push-upgrade POST /api/v3/release/push bodies/import-push-upgrade.json
+sleep 12
+upgrade-queue-grabbed GET /api/v3/queue/details?movieId=20
+mock - POST /mock/sabnzbd/complete?title=Candyman.1992.iTA.ENG.1080p.BluRay.x264-MIRCrew&clip=episode-1080
+upgrade-refresh POST /api/v3/command bodies/command-refresh-downloads.json
+sleep 12
+upgrade-refresh-get GET /api/v3/command/{id:upgrade-refresh}
+upgrade-queue-after GET /api/v3/queue/details?movieId=20
+upgrade-moviefiles-20 GET /api/v3/moviefile?movieId=20
+upgrade-movie-20 GET /api/v3/movie/20
+upgrade-history-movie-20 GET /api/v3/history/movie?movieId=20
+upgrade-history-deleted GET /api/v3/history?page=1&pageSize=5&sortKey=date&sortDirection=descending&eventType=6&includeMovie=false
+mock upgrade-notifications GET /mock/notifications
+mock - POST /mock/notifications/clear
+# Disk scan and the library's commands. Bazarr posts RescanMovie after it
+# writes a subtitle. A file put in Backcountry's folder (with a subtitle and
+# a sample beside it) is found by the scan of that movie; BlacKkKlansman's
+# file is removed from the disk and its scan drops the row; then every
+# movie is scanned. A release folder dropped outside any client is
+# imported by DownloadedMoviesScan, as Unpackerr asks; The Holdovers'
+# torrent, which held a sample, gets the movie's file and is scanned by its
+# download id.
+mock - POST /mock/fs/write?path=/movies/Backcountry%20(2015)/Backcountry.2015.1080p.BluRay.x264-GRP.mkv&clip=episode-1080
+mock - POST /mock/fs/write?path=/movies/Backcountry%20(2015)/Backcountry.2015.1080p.BluRay.x264-GRP.en.srt&clip=sample
+mock - POST /mock/fs/write?path=/movies/Backcountry%20(2015)/Sample/backcountry-sample.mkv&clip=sample
+command-rescan-movie POST /api/v3/command bodies/command-rescan-movie.json
+sleep 12
+command-rescan-movie-get GET /api/v3/command/{id:command-rescan-movie}
+rescan-moviefiles-10 GET /api/v3/moviefile?movieId=10
+rescan-movie-10 GET /api/v3/movie/10
+rescan-extrafile-10 GET /api/v3/extrafile?movieId=10
+rescan-history-movie-10 GET /api/v3/history/movie?movieId=10
+mock - POST /mock/fs/remove?path=/movies/BlacKkKlansman%20(2018)/BlacKkKlansman%20(2018)%20{tmdb-487558}%20-%20[WEBDL-480p][AAC%201.0][x264]-MeM.mkv
+command-rescan-movie-13 POST /api/v3/command bodies/command-rescan-movie-13.json
+sleep 12
+rescan-moviefiles-13 GET /api/v3/moviefile?movieId=13
+rescan-movie-13 GET /api/v3/movie/13
+rescan-history-movie-13 GET /api/v3/history/movie?movieId=13
+command-rescan-missing POST /api/v3/command bodies/command-rescan-missing.json
+sleep 4
+command-rescan-missing-get GET /api/v3/command/{id:command-rescan-missing}
+command-rescan-all POST /api/v3/command bodies/command-rescan-all.json
+sleep 20
+command-rescan-all-get GET /api/v3/command/{id:command-rescan-all}
+rescan-history GET /api/v3/history?page=1&pageSize=8&sortKey=date&sortDirection=descending&includeMovie=false
+rescan-wanted-missing GET /api/v3/wanted/missing?page=1&pageSize=5&sortKey=movieMetadata.sortTitle&sortDirection=ascending&monitored=true
+mock rescan-notifications GET /mock/notifications
+mock - POST /mock/notifications/clear
+mock - POST /mock/fs/write?path=/downloads/drop/Nightmare.Alley.2021.1080p.BluRay.x264-MIRCrew/Nightmare.Alley.2021.1080p.BluRay.x264-MIRCrew.mkv&clip=episode-1080
+command-scan-path POST /api/v3/command bodies/command-scan-path.json
+sleep 12
+command-scan-path-get GET /api/v3/command/{id:command-scan-path}
+scan-moviefiles-70 GET /api/v3/moviefile?movieId=70
+scan-history-movie-70 GET /api/v3/history/movie?movieId=70
+command-scan-missing-path POST /api/v3/command bodies/command-scan-missing-path.json
+sleep 4
+command-scan-missing-path-get GET /api/v3/command/{id:command-scan-missing-path}
+mock - POST /mock/fs/write?path=/downloads/movies/d94f74e9588477404bd8d34ffc605870/The.Holdovers.2023.iTA.ENG.1080p.BluRay.x264-MIRCrew.mkv&clip=episode-dual
+command-scan-download POST /api/v3/command bodies/command-scan-download.json
+sleep 12
+command-scan-download-get GET /api/v3/command/{id:command-scan-download}
+scan-moviefiles-116 GET /api/v3/moviefile?movieId=116
+scan-history-movie-116 GET /api/v3/history/movie?movieId=116
+scan-queue-after GET /api/v3/queue?page=1&pageSize=20&sortKey=timeleft&sortDirection=ascending&includeUnknownMovieItems=true&includeMovie=false
+mock scan-notifications GET /mock/notifications
+mock - POST /mock/notifications/clear
+# The commands of the library that have no movie in them. RefreshMovie is
+# not among them: the original would ask its metadata server, which the
+# recording must not reach.
+command-housekeeping POST /api/v3/command bodies/command-housekeeping.json
+sleep 8
+command-housekeeping-get GET /api/v3/command/{id:command-housekeeping}
+command-cleanup-recyclebin POST /api/v3/command bodies/command-cleanup-recyclebin.json
+sleep 4
+command-cleanup-recyclebin-get GET /api/v3/command/{id:command-cleanup-recyclebin}
+command-backup POST /api/v3/command bodies/command-backup.json
+sleep 8
+command-backup-get GET /api/v3/command/{id:command-backup}
+system-backup-after GET /api/v3/system/backup
+system-task-after-library GET /api/v3/system/task
+# Rename: Backcountry's file came in by a scan under the name it had, so
+# the preview has something to rename and RenameFiles does it; RenameMovie
+# renames Candyman's folder to what the folder format says.
+rename-preview-10 GET /api/v3/rename?movieId=10
+rename-preview-20 GET /api/v3/rename?movieId=20
+rename-preview-missing GET /api/v3/rename?movieId=999999
+rename-preview-nomovie GET /api/v3/rename
+command-rename-files POST /api/v3/command bodies/command-rename-files.json
+sleep 12
+command-rename-files-get GET /api/v3/command/{id:command-rename-files}
+rename-moviefiles-10 GET /api/v3/moviefile?movieId=10
+rename-extrafile-10 GET /api/v3/extrafile?movieId=10
+rename-history GET /api/v3/history?page=1&pageSize=5&sortKey=date&sortDirection=descending&eventType=8&includeMovie=false
+rename-preview-10-after GET /api/v3/rename?movieId=10
+command-rename-movie POST /api/v3/command bodies/command-rename-movie.json
+sleep 12
+command-rename-movie-get GET /api/v3/command/{id:command-rename-movie}
+rename-movie-20 GET /api/v3/movie/20
+rename-moviefiles-20 GET /api/v3/moviefile?movieId=20
+mock rename-notifications GET /mock/notifications
+mock - POST /mock/notifications/clear
+# Manual import of Soho's torrent, which waits blocked in the queue: what
+# the UI shows for the download and for its folder, the reprocessing of an
+# edited row, and the command that imports it.
+manualimport-download GET /api/v3/manualimport?downloadId=13706ED57ADBE030F510BEDCD37595376901117C&filterExistingFiles=true
+manualimport-folder GET /api/v3/manualimport?folder=/downloads/movies/c8949b89db6f20a1e049aa8170a7a05c&filterExistingFiles=true
+manualimport-folder-unfiltered GET /api/v3/manualimport?folder=/downloads/movies/c8949b89db6f20a1e049aa8170a7a05c&filterExistingFiles=false
+manualimport-movie-10 GET /api/v3/manualimport?movieId=10
+manualimport-missing-folder GET /api/v3/manualimport?folder=/downloads/nothing-here&filterExistingFiles=true
+manualimport-missing-download GET /api/v3/manualimport?downloadId=NOTTRACKED&filterExistingFiles=true
+manualimport-reprocess-nomovie POST /api/v3/manualimport bodies/manualimport-reprocess-nomovie.json
+manualimport-reprocess POST /api/v3/manualimport bodies/manualimport-reprocess.json
+command-manual-import POST /api/v3/command bodies/command-manual-import.json
+sleep 12
+command-manual-import-get GET /api/v3/command/{id:command-manual-import}
+manualimport-queue-after GET /api/v3/queue?page=1&pageSize=20&sortKey=timeleft&sortDirection=ascending&includeUnknownMovieItems=true&includeMovie=false
+manualimport-moviefiles-62 GET /api/v3/moviefile?movieId=62
+manualimport-history-movie-62 GET /api/v3/history/movie?movieId=62
+mock manualimport-notifications GET /mock/notifications
+mock - POST /mock/notifications/clear
+# Movie files edited one by one, by the editor and in bulk, then deleted.
+# From here on Plex sees the library under another path than Radarr does,
+# as on the maintainer's installation: the mock reports its movie section at
+# /media/movies and the Plex connection maps /movies to it, so the first
+# deletion's refresh names the mapped folder. Then the section moves where
+# no mapping leads, and the second deletion finds no section for its path.
+mock - POST /mock/plex/sections?movies=/media/movies
+notification-plex-mapped PUT /api/v3/notification/6 bodies/notification-plex-mapped.json
+moviefile-put PUT /api/v3/moviefile/{id:manualimport-moviefiles-62} bodies/moviefile-put.json
+moviefile-after-put GET /api/v3/moviefile/{id:manualimport-moviefiles-62}
+moviefile-editor PUT /api/v3/moviefile/editor bodies/moviefile-editor.json
+moviefile-bulk-put PUT /api/v3/moviefile/bulk bodies/moviefile-bulk-put.json
+moviefile-put-missing PUT /api/v3/moviefile/999999 bodies/moviefile-put.json
+moviefile-delete DELETE /api/v3/moviefile/{id:manualimport-moviefiles-62}
+moviefile-delete-missing DELETE /api/v3/moviefile/{id:manualimport-moviefiles-62}
+# The original sends a deletion's Plex update in the background, after it
+# has failed on the fixture's own connections: the pause lets it finish
+# while the section is still where the mapping leads.
+sleep 12
+mock delete-notifications-mapped GET /mock/notifications
+mock - POST /mock/notifications/clear
+mock - POST /mock/plex/sections?movies=/elsewhere/movies
+moviefile-bulk-delete DELETE /api/v3/moviefile/bulk bodies/moviefile-bulk-delete.json
+sleep 12
+moviefile-bulk-delete-empty DELETE /api/v3/moviefile/bulk bodies/moviefile-bulk-delete-empty.json
+delete-moviefiles-62 GET /api/v3/moviefile?movieId=62
+delete-movie-62 GET /api/v3/movie/62
+delete-movie-70 GET /api/v3/movie/70
+delete-history GET /api/v3/history?page=1&pageSize=5&sortKey=date&sortDirection=descending&eventType=6&includeMovie=false
+mock delete-notifications GET /mock/notifications
+mock - POST /mock/notifications/clear
+mock - POST /mock/plex/sections
+# What the UI asks while a release or a folder is picked.
+parse-release GET /api/v3/parse?title=Candyman.1992.iTA.ENG.1080p.BluRay.x264-MIRCrew
+parse-unknown GET /api/v3/parse?title=Some.Other.Movie.2019.720p.HDTV.x264-GRP
+parse-path GET /api/v3/parse?path=/movies/The%20Holdovers%20(2023)/The.Holdovers.2023.1080p.BluRay.x264-GRP.mkv
+parse-empty GET /api/v3/parse
+filesystem-movies GET /api/v3/filesystem?path=/movies/&includeFiles=false&allowFoldersWithoutTrailingSlashes=false
+filesystem-movie-files GET /api/v3/filesystem?path=/movies/Backcountry%20(2015)/&includeFiles=true&allowFoldersWithoutTrailingSlashes=false
+filesystem-type GET /api/v3/filesystem/type?path=/movies
+filesystem-mediafiles GET /api/v3/filesystem/mediafiles?path=/movies/Backcountry%20(2015)/
+filesystem-missing GET /api/v3/filesystem?path=/nowhere/&includeFiles=false
+# The blocklist's removals, one and several, and the health after all of
+# the above.
+blocklist-delete DELETE /api/v3/blocklist/{id:blocklist-after-fail}
+blocklist-delete-missing DELETE /api/v3/blocklist/999999
+blocklist-bulk-delete DELETE /api/v3/blocklist/bulk bodies/blocklist-bulk-delete.json
+blocklist-after-deletes GET /api/v3/blocklist?page=1&pageSize=3&sortKey=date&sortDirection=descending
+blocklist-movie-116-after-delete GET /api/v3/blocklist/movie?movieId=116
+health-after-library GET /api/v3/health
 downloadclient-action POST /api/v3/downloadclient/action/getCategories bodies/downloadclient-action.json
 downloadclient-bulk PUT /api/v3/downloadclient/bulk bodies/downloadclient-bulk.json
 downloadclient-bulk-empty PUT /api/v3/downloadclient/bulk bodies/downloadclient-bulk-empty.json

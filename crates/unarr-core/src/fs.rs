@@ -48,6 +48,23 @@ pub fn tune_allocator() {
     }
 }
 
+/// How long a compiled pattern may go unused before it is let go.
+pub const PATTERN_IDLE: std::time::Duration = std::time::Duration::from_secs(300);
+
+/// What the daemon does when it has a quiet moment: the compiled patterns
+/// of the title parsers and of the custom formats that nothing used for
+/// [`PATTERN_IDLE`] are dropped (they are compiled again on their next
+/// use, a second for the lot), then the allocator's free pages go back to
+/// the system.
+pub fn release_idle_memory() {
+    let patterns = crate::parser::netregex::release_idle(PATTERN_IDLE);
+    let formats = crate::customformat::release_idle(PATTERN_IDLE);
+    if patterns + formats > 0 {
+        tracing::debug!(patterns, formats, "released the compiled patterns left idle");
+    }
+    release_memory();
+}
+
 /// Hand the pages the allocator no longer uses back to the system. glibc
 /// keeps freed memory for reuse, so a process that read a whole database
 /// for an import, or built a large response once, looks that big for good;

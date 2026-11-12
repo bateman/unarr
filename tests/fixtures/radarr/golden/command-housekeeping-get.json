@@ -1,0 +1,35 @@
+{
+  "body": {
+    "body": {
+      "isExclusive": false,
+      "isLongRunning": false,
+      "isTypeExclusive": false,
+      "name": "Housekeeping",
+      "requiresDiskAccess": false,
+      "sendUpdatesToClient": true,
+      "suppressMessages": true,
+      "trigger": "manual",
+      "updateScheduledTask": true
+    },
+    "commandName": "Housekeeping",
+    "duration": "00:00:00.1663934",
+    "ended": "2026-11-12T09:59:49Z",
+    "id": 473007,
+    "name": "Housekeeping",
+    "priority": "normal",
+    "queued": "2026-11-12T09:59:49Z",
+    "result": "successful",
+    "sendUpdatesToClient": true,
+    "started": "2026-11-12T09:59:49Z",
+    "stateChangeTime": "2026-11-12T09:59:49Z",
+    "status": "completed",
+    "trigger": "manual",
+    "updateScheduledTask": true
+  },
+  "recordedAt": "2026-11-12T09:59:57Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/command/473007"
+  },
+  "status": 200
+}

@@ -1,0 +1,35 @@
+{
+  "body": {
+    "body": {
+      "importMode": "auto",
+      "isExclusive": false,
+      "isLongRunning": true,
+      "isTypeExclusive": false,
+      "name": "DownloadedMoviesScan",
+      "path": "/downloads/nothing-here",
+      "requiresDiskAccess": true,
+      "sendUpdates": false,
+      "sendUpdatesToClient": false,
+      "suppressMessages": true,
+      "trigger": "manual",
+      "updateScheduledTask": true
+    },
+    "commandName": "Downloaded Movies Scan",
+    "id": 473003,
+    "name": "DownloadedMoviesScan",
+    "priority": "normal",
+    "queued": "2026-11-12T09:59:33Z",
+    "result": "unknown",
+    "sendUpdatesToClient": false,
+    "status": "queued",
+    "trigger": "manual",
+    "updateScheduledTask": true
+  },
+  "recordedAt": "2026-11-12T09:59:33Z",
+  "request": {
+    "body": "bodies/command-scan-missing-path.json",
+    "method": "POST",
+    "path": "/api/v3/command"
+  },
+  "status": 201
+}

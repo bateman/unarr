@@ -246,7 +246,7 @@
     "removeFailedDownloads": true,
     "tags": []
   },
-  "recordedAt": "2026-11-11T22:00:14Z",
+  "recordedAt": "2026-11-12T09:55:37Z",
   "request": {
     "body": "bodies/downloadclient-create-qbittorrent.json",
     "method": "POST",

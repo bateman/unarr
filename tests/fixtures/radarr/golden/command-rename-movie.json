@@ -1,0 +1,35 @@
+{
+  "body": {
+    "body": {
+      "isExclusive": false,
+      "isLongRunning": false,
+      "isTypeExclusive": false,
+      "movieIds": [
+        20
+      ],
+      "name": "RenameMovie",
+      "requiresDiskAccess": true,
+      "sendUpdatesToClient": true,
+      "suppressMessages": false,
+      "trigger": "manual",
+      "updateScheduledTask": true
+    },
+    "commandName": "Rename Movie",
+    "id": 473012,
+    "name": "RenameMovie",
+    "priority": "normal",
+    "queued": "2026-11-12T10:00:21Z",
+    "result": "unknown",
+    "sendUpdatesToClient": true,
+    "status": "queued",
+    "trigger": "manual",
+    "updateScheduledTask": true
+  },
+  "recordedAt": "2026-11-12T10:00:21Z",
+  "request": {
+    "body": "bodies/command-rename-movie.json",
+    "method": "POST",
+    "path": "/api/v3/command"
+  },
+  "status": 201
+}

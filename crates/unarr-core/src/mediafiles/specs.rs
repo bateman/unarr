@@ -133,7 +133,7 @@ fn already_imported(
 }
 
 /// `DateTime.ToLocalTime()` as .NET prints it; the daemon runs in UTC.
-fn local_time(d: DateTime<Utc>) -> String {
+pub(crate) fn local_time(d: DateTime<Utc>) -> String {
     d.format("%m/%d/%Y %H:%M:%S").to_string()
 }
 

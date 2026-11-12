@@ -694,7 +694,7 @@ async fn serve(
             let mut tick = tokio::time::interval(std::time::Duration::from_secs(30));
             loop {
                 tick.tick().await;
-                unarr_core::fs::release_memory();
+                unarr_core::fs::release_idle_memory();
             }
         });
     }

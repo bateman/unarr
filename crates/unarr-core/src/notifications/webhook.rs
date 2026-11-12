@@ -61,28 +61,28 @@ impl Settings {
 
 /// A payload object: the originals serialise with nulls left out, so a
 /// value only joins when it is there.
-struct Object(Map<String, Value>);
+pub(crate) struct Object(Map<String, Value>);
 
 impl Object {
-    fn new() -> Object {
+    pub(crate) fn new() -> Object {
         Object(Map::new())
     }
 
-    fn set(&mut self, key: &str, value: Value) -> &mut Self {
+    pub(crate) fn set(&mut self, key: &str, value: Value) -> &mut Self {
         if !value.is_null() {
             self.0.insert(key.into(), value);
         }
         self
     }
 
-    fn opt<T: serde::Serialize>(&mut self, key: &str, value: Option<T>) -> &mut Self {
+    pub(crate) fn opt<T: serde::Serialize>(&mut self, key: &str, value: Option<T>) -> &mut Self {
         if let Some(v) = value {
             self.0.insert(key.into(), json!(v));
         }
         self
     }
 
-    fn done(self) -> Value {
+    pub(crate) fn done(self) -> Value {
         Value::Object(self.0)
     }
 }
@@ -282,7 +282,11 @@ fn delete_reason(reason: DeleteReason) -> &'static str {
 /// `WebhookProxy.SendWebhook`: a failed HTTP call is a
 /// `WebhookException("Unable to post to webhook: {0}")`; a call that never
 /// got an answer escapes as it is.
-async fn send(http: &reqwest::Client, settings: &Settings, payload: &Value) -> Result<(), SendError> {
+pub(crate) async fn send(
+    http: &reqwest::Client,
+    settings: &Settings,
+    payload: &Value,
+) -> Result<(), SendError> {
     let mut request = match settings.method {
         METHOD_PUT => http.put(&settings.url),
         _ => http.post(&settings.url),
@@ -309,7 +313,7 @@ async fn send(http: &reqwest::Client, settings: &Settings, payload: &Value) -> R
     }
 }
 
-fn send_error_message(e: SendError) -> String {
+pub(crate) fn send_error_message(e: SendError) -> String {
     match e {
         SendError::Status(_, m) | SendError::Transport(m) => m,
     }

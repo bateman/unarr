@@ -92,8 +92,16 @@ pub async fn start(
         .ok_or_else(|| ApiError::Internal(anyhow::anyhow!("Sequence contains no matching element")))?;
     let runtime = state.commands()?;
     let sends = body["sendUpdatesToClient"].as_bool().unwrap_or(false) || command.sends_updates();
+    // The API turns the updates on for every command but Radarr's
+    // `DownloadedMoviesScan`, whose class answers with its own
+    // `SendUpdates`, false unless the request sets it.
+    let forced_updates = !matches!(command, CommandBody::DownloadedMoviesScan { .. })
+        || body["sendUpdates"].as_bool().unwrap_or(false);
     // The originals push manual imports ahead of the rest.
-    let priority = if matches!(command, CommandBody::ManualImport { .. }) {
+    let priority = if matches!(
+        command,
+        CommandBody::ManualImport { .. } | CommandBody::ManualImportMovies { .. }
+    ) {
         CommandPriority::High
     } else {
         CommandPriority::Normal
@@ -107,7 +115,7 @@ pub async fn start(
         .queue()
         .push_with(command, priority, CommandTrigger::Manual, state.now(), |m| {
             m.suppress_messages = !sends;
-            m.send_updates_to_client = true;
+            m.send_updates_to_client = forced_updates;
             m.client_user_agent = agent;
         })
         .await?;

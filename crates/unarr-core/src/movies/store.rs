@@ -384,6 +384,20 @@ pub fn movies_by_ids(conn: &Connection, ids: &[i64]) -> anyhow::Result<Vec<Movie
     query_movies(conn, "m.id IN (SELECT value FROM json_each(?1))", &[&ids])
 }
 
+/// `MovieService.MoviePathExists`: a movie whose folder is `path`.
+pub fn movie_path_exists(conn: &Connection, path: &str) -> anyhow::Result<bool> {
+    let wanted = path.trim_end_matches('/');
+    let mut stmt = conn.prepare("SELECT path FROM movies")?;
+    let mut rows = stmt.query([])?;
+    while let Some(row) = rows.next()? {
+        let folder: String = row.get(0)?;
+        if crate::mediafiles::path_equals(folder.trim_end_matches('/'), wanted) {
+            return Ok(true);
+        }
+    }
+    Ok(false)
+}
+
 pub fn count_movies(conn: &Connection) -> anyhow::Result<i64> {
     Ok(conn.query_row("SELECT count(*) FROM movies", [], |r| r.get(0))?)
 }
@@ -469,6 +483,95 @@ pub fn movie_files_by_ids(conn: &Connection, ids: &[i64]) -> anyhow::Result<Vec<
 pub fn movie_files_by_movies(conn: &Connection, movie_ids: &[i64]) -> anyhow::Result<Vec<MovieFile>> {
     let ids = serde_json::to_string(movie_ids)?;
     query_movie_files(conn, "movie_id IN (SELECT value FROM json_each(?1))", &[&ids])
+}
+
+/// The files of one movie.
+pub fn movie_files_of(conn: &Connection, movie_id: i64) -> anyhow::Result<Vec<MovieFile>> {
+    query_movie_files(conn, "movie_id = ?1", &[&movie_id])
+}
+
+/// `MediaFileRepository.GetFilesWithRelativePath`.
+pub fn movie_files_with_relative_path(
+    conn: &Connection,
+    movie_id: i64,
+    relative_path: &str,
+) -> anyhow::Result<Vec<MovieFile>> {
+    query_movie_files(
+        conn,
+        "movie_id = ?1 AND lower(relative_path) = lower(?2)",
+        &[&movie_id, &relative_path],
+    )
+}
+
+/// `MediaFileService.Add`: the row under the next id of the original's
+/// sequence, which a deleted file never gives back.
+pub fn add_movie_file(conn: &Connection, f: &mut MovieFile) -> anyhow::Result<()> {
+    f.id = crate::store::sequence::next_id(conn, "movie_files")?;
+    insert_movie_file(conn, f)
+}
+
+/// `MediaFileRepository.Update`: every column but the id.
+pub fn update_movie_file(conn: &Connection, f: &MovieFile) -> anyhow::Result<()> {
+    conn.execute(
+        "UPDATE movie_files SET movie_id = ?2, relative_path = ?3, original_file_path = ?4, size = ?5,
+            date_added = ?6, scene_name = ?7, release_group = ?8, edition = ?9, quality_id = ?10,
+            revision_version = ?11, revision_real = ?12, revision_is_repack = ?13, languages = ?14,
+            media_info = ?15, indexer_flags = ?16
+         WHERE id = ?1",
+        params![
+            f.id,
+            f.movie_id,
+            f.relative_path,
+            f.original_file_path,
+            f.size,
+            ts(Some(f.date_added)),
+            f.scene_name,
+            f.release_group,
+            f.edition,
+            f.quality.quality_id,
+            f.quality.version,
+            f.quality.real,
+            f.quality.is_repack,
+            to_json(&f.languages)?,
+            f.media_info.as_ref().map(to_json).transpose()?,
+            f.indexer_flags,
+        ],
+    )?;
+    Ok(())
+}
+
+/// `MediaFileRepository.Delete`: the row goes; the movie that pointed at
+/// it is detached by the caller, as the original's event handler does.
+pub fn delete_movie_file(conn: &Connection, id: i64) -> anyhow::Result<()> {
+    conn.execute("DELETE FROM movie_files WHERE id = ?1", params![id])?;
+    Ok(())
+}
+
+/// `MovieRepository.SetFileId`.
+pub fn set_movie_file_id(conn: &Connection, movie_id: i64, file_id: i64) -> anyhow::Result<()> {
+    conn.execute(
+        "UPDATE movies SET movie_file_id = ?1 WHERE id = ?2",
+        params![file_id, movie_id],
+    )?;
+    Ok(())
+}
+
+/// Detach the movie that points at `file_id`.
+pub fn clear_movie_file_id(conn: &Connection, file_id: i64) -> anyhow::Result<()> {
+    conn.execute(
+        "UPDATE movies SET movie_file_id = 0 WHERE movie_file_id = ?1",
+        params![file_id],
+    )?;
+    Ok(())
+}
+
+/// `MovieRepository.SetMonitored`, for one movie.
+pub fn set_movie_monitored(conn: &Connection, movie_id: i64, monitored: bool) -> anyhow::Result<()> {
+    conn.execute(
+        "UPDATE movies SET monitored = ?1 WHERE id = ?2",
+        params![monitored, movie_id],
+    )?;
+    Ok(())
 }
 
 // --- alternative titles, translations, credits
@@ -1233,4 +1336,123 @@ pub fn profile_languages(conn: &Connection) -> anyhow::Result<HashMap<i64, i64>>
     let mut stmt = conn.prepare("SELECT id, language FROM quality_profiles")?;
     let rows = stmt.query_map([], |r| Ok((r.get::<_, i64>(0)?, r.get::<_, i64>(1)?)))?;
     Ok(rows.collect::<Result<_, _>>()?)
+}
+
+// --- extra files (writes)
+
+/// The counter of a kind of extra file. The originals keep one table for
+/// each kind (`SubtitleFiles`, `MetadataFiles`, `ExtraFiles`), so each
+/// kind counts on its own.
+fn extra_file_sequence(kind: ExtraKind) -> &'static str {
+    match kind {
+        ExtraKind::Subtitle => "extra_files.subtitle",
+        ExtraKind::Metadata => "extra_files.metadata",
+        ExtraKind::Other => "extra_files.other",
+    }
+}
+
+/// Seed the counter of a kind (from the original's `sqlite_sequence`),
+/// never lowering it below the rows already there or the ids already
+/// handed out.
+pub fn seed_extra_file_sequence(conn: &Connection, kind: ExtraKind, value: i64) -> anyhow::Result<()> {
+    conn.execute(
+        "INSERT INTO sequences (name, value)
+         SELECT ?1, max(?3, coalesce((SELECT max(source_id) FROM extra_files WHERE kind = ?2), 0))
+         WHERE true
+         ON CONFLICT (name) DO UPDATE SET value = max(value, excluded.value)",
+        params![extra_file_sequence(kind), kind.as_str(), value],
+    )?;
+    Ok(())
+}
+
+/// The next id within a kind: past the highest one the kind ever had.
+pub fn next_extra_file_id(conn: &Connection, kind: ExtraKind) -> anyhow::Result<i64> {
+    // The counter starts at the kind's highest row, which the shared
+    // sequence cannot read from a table three kinds share.
+    seed_extra_file_sequence(conn, kind, 0)?;
+    crate::store::sequence::next_id(conn, extra_file_sequence(kind))
+}
+
+/// `ExtraFileRepository.Update`: every column but the kind and the id.
+pub fn update_extra_file(conn: &Connection, e: &MovieExtraFile) -> anyhow::Result<()> {
+    conn.execute(
+        "UPDATE extra_files SET movie_id = ?3, movie_file_id = ?4, relative_path = ?5, extension = ?6,
+            added = ?7, last_updated = ?8, language = ?9, language_tags = ?10, title = ?11, copy = ?12,
+            consumer = ?13, metadata_type = ?14, hash = ?15
+         WHERE kind = ?1 AND source_id = ?2",
+        params![
+            e.kind.as_str(),
+            e.id,
+            e.movie_id,
+            e.movie_file_id,
+            e.relative_path,
+            e.extension,
+            ts(e.added),
+            ts(e.last_updated),
+            e.language,
+            to_json(&e.language_tags)?,
+            e.title,
+            e.copy,
+            e.consumer,
+            e.metadata_type,
+            e.hash,
+        ],
+    )?;
+    Ok(())
+}
+
+/// `ExtraFileService.Upsert`: a row without an id is new and dated now;
+/// one with an id is written again. Either way it was last updated now.
+pub fn upsert_extra_file(
+    conn: &Connection,
+    e: &mut MovieExtraFile,
+    now: DateTime<Utc>,
+) -> anyhow::Result<()> {
+    e.last_updated = Some(now);
+    if e.id == 0 {
+        e.added = Some(now);
+        e.id = next_extra_file_id(conn, e.kind)?;
+        insert_extra_file(conn, e)
+    } else {
+        update_extra_file(conn, e)
+    }
+}
+
+/// `ExtraFileRepository.Delete(id)`.
+pub fn delete_extra_file(conn: &Connection, kind: ExtraKind, id: i64) -> anyhow::Result<()> {
+    conn.execute(
+        "DELETE FROM extra_files WHERE kind = ?1 AND source_id = ?2",
+        params![kind.as_str(), id],
+    )?;
+    Ok(())
+}
+
+/// `ExtraFileRepository.GetFilesByMovieFile`, the three kinds together in
+/// the order [`extra_files_of`] gives them.
+pub fn extra_files_of_movie_file(
+    conn: &Connection,
+    movie_file_id: i64,
+) -> anyhow::Result<Vec<MovieExtraFile>> {
+    let movie_ids: Vec<i64> = {
+        let mut stmt = conn.prepare("SELECT DISTINCT movie_id FROM extra_files WHERE movie_file_id = ?1")?;
+        let rows = stmt.query_map([movie_file_id], |r| r.get(0))?;
+        rows.collect::<Result<_, _>>()?
+    };
+    let mut out = Vec::new();
+    for movie_id in movie_ids {
+        out.extend(
+            extra_files_of(conn, movie_id)?
+                .into_iter()
+                .filter(|e| e.movie_file_id == Some(movie_file_id)),
+        );
+    }
+    Ok(out)
+}
+
+/// `ExtraFileRepository.DeleteForMovieFile`, for the three kinds.
+pub fn delete_extra_files_of_movie_file(conn: &Connection, movie_file_id: i64) -> anyhow::Result<usize> {
+    Ok(conn.execute(
+        "DELETE FROM extra_files WHERE movie_file_id = ?1",
+        params![movie_file_id],
+    )?)
 }

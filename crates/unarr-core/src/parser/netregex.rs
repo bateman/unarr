@@ -20,23 +20,80 @@
 //! it meant.
 
 use std::collections::HashMap;
-use std::sync::OnceLock;
+use std::sync::atomic::{AtomicU64, Ordering};
+use std::sync::{Arc, Mutex, OnceLock, Weak};
+use std::time::{Duration, Instant};
 
 /// Iterations of a repeated capturing group kept apart, as `Captures` would.
 pub const MAX_ITERATIONS: usize = 10;
 
-/// A compiled pattern with its .NET group bookkeeping.
+/// A pattern with its .NET group bookkeeping. The compiled automaton is
+/// built when the pattern is first matched and may be let go again once
+/// it has not been used for a while ([`release_idle`]): a parser's few
+/// hundred patterns weigh tens of megabytes compiled, and are needed for
+/// a second every quarter of an hour.
 pub struct NetRegex {
-    re: fancy_regex::Regex,
+    /// The pattern as the engine takes it: groups renamed and unrolled.
+    full: String,
     /// Compiled group indices by .NET name, in textual order.
     names: HashMap<String, Vec<usize>>,
     /// Ordered .NET names, for `$N` numbering of named groups.
     numbered: Vec<usize>,
+    slot: Arc<Slot>,
+}
+
+/// The compiled automaton of one pattern, while it is kept.
+struct Slot {
+    re: Mutex<Option<Arc<fancy_regex::Regex>>>,
+    /// Seconds since the process started when the pattern last matched.
+    last_used: AtomicU64,
+}
+
+/// Every pattern compiled so far, for [`release_idle`] to walk.
+fn registry() -> &'static Mutex<Vec<Weak<Slot>>> {
+    static REGISTRY: OnceLock<Mutex<Vec<Weak<Slot>>>> = OnceLock::new();
+    REGISTRY.get_or_init(|| Mutex::new(Vec::new()))
+}
+
+/// Seconds since the first pattern was used.
+fn uptime() -> u64 {
+    static START: OnceLock<Instant> = OnceLock::new();
+    START.get_or_init(Instant::now).elapsed().as_secs()
+}
+
+/// Let go of the compiled automata of the patterns nothing matched with
+/// for `max_idle`; they are compiled again when next used. Returns how
+/// many were released.
+pub fn release_idle(max_idle: Duration) -> usize {
+    let now = uptime();
+    let mut released = 0;
+    let mut slots = registry().lock().unwrap();
+    slots.retain(|weak| {
+        let Some(slot) = weak.upgrade() else {
+            return false;
+        };
+        if now.saturating_sub(slot.last_used.load(Ordering::Relaxed)) >= max_idle.as_secs() {
+            // Dropped from the registry too: compiling again adds it back.
+            if slot.re.lock().unwrap().take().is_some() {
+                released += 1;
+            }
+            return false;
+        }
+        true
+    });
+    released
+}
+
+fn compile(full: &str) -> Result<fancy_regex::Regex, String> {
+    fancy_regex::RegexBuilder::new(full)
+        .backtrack_limit(10_000_000)
+        .build()
+        .map_err(|e| e.to_string())
 }
 
 impl std::fmt::Debug for NetRegex {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "NetRegex({})", self.re.as_str())
+        write!(f, "NetRegex({})", self.full)
     }
 }
 
@@ -495,23 +552,45 @@ impl NetRegex {
         } else {
             renamed
         };
-        let re = fancy_regex::RegexBuilder::new(&full)
-            .backtrack_limit(10_000_000)
-            .build()
-            .map_err(|e| e.to_string())?;
-        Ok(NetRegex { re, names, numbered })
+        // Compiled once here, so that a pattern the engine refuses is
+        // refused when it is built and never later.
+        let re = compile(&full)?;
+        let slot = Arc::new(Slot {
+            re: Mutex::new(Some(Arc::new(re))),
+            last_used: AtomicU64::new(uptime()),
+        });
+        registry().lock().unwrap().push(Arc::downgrade(&slot));
+        Ok(NetRegex {
+            full,
+            names,
+            numbered,
+            slot,
+        })
+    }
+
+    /// The compiled automaton, built again if it was let go.
+    fn re(&self) -> Arc<fancy_regex::Regex> {
+        self.slot.last_used.store(uptime(), Ordering::Relaxed);
+        let mut held = self.slot.re.lock().unwrap();
+        if let Some(re) = held.as_ref() {
+            return re.clone();
+        }
+        let re = Arc::new(compile(&self.full).expect("a pattern that compiled once compiles again"));
+        *held = Some(re.clone());
+        registry().lock().unwrap().push(Arc::downgrade(&self.slot));
+        re
     }
 
     pub fn as_str(&self) -> &str {
-        self.re.as_str()
+        &self.full
     }
 
     pub fn is_match(&self, text: &str) -> bool {
-        self.re.is_match(text).unwrap_or(false)
+        self.re().is_match(text).unwrap_or(false)
     }
 
     pub fn captures<'t>(&self, text: &'t str) -> Option<NetCaptures<'_, 't>> {
-        self.re
+        self.re()
             .captures(text)
             .ok()
             .flatten()
@@ -519,7 +598,7 @@ impl NetRegex {
     }
 
     pub fn captures_iter<'t>(&self, text: &'t str) -> Vec<NetCaptures<'_, 't>> {
-        self.re
+        self.re()
             .captures_iter(text)
             .filter_map(|c| c.ok())
             .map(|caps| NetCaptures { re: self, caps })
@@ -667,6 +746,34 @@ impl<'t> NetCaptures<'_, 't> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn a_released_pattern_is_compiled_again_and_matches_the_same() {
+        let re = NetRegex::new(r"(?<title>.+?)[. ](?<year>(19|20)\d{2})", true).unwrap();
+        let before = re.captures("The.Movie.2019.1080p").map(|c| {
+            (
+                c.value("title").map(str::to_string),
+                c.value("year").map(str::to_string),
+            )
+        });
+        assert_eq!(before, Some((Some("The.Movie".into()), Some("2019".into()))));
+        // Other tests compile patterns of their own meanwhile: only this
+        // one's state is looked at.
+        release_idle(Duration::ZERO);
+        assert!(re.slot.re.lock().unwrap().is_none(), "the automaton was let go");
+        let after = re.captures("The.Movie.2019.1080p").map(|c| {
+            (
+                c.value("title").map(str::to_string),
+                c.value("year").map(str::to_string),
+            )
+        });
+        assert_eq!(after, before);
+        assert!(re.slot.re.lock().unwrap().is_some(), "and built again on use");
+        // A pattern in use is kept.
+        assert!(re.is_match("A.Movie.2001"));
+        release_idle(Duration::from_secs(3600));
+        assert!(re.slot.re.lock().unwrap().is_some());
+    }
 
     /// A release profile term can hold any text; an unfinished group must
     /// fail to compile, not stop the daemon.

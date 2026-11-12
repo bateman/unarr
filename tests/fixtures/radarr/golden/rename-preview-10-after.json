@@ -1,0 +1,9 @@
+{
+  "body": [],
+  "recordedAt": "2026-11-12T10:00:21Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/rename?movieId=10"
+  },
+  "status": 200
+}

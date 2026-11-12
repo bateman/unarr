@@ -121,12 +121,12 @@ the real Plex.
   resizing; the `series` and `episode` SignalR messages a metadata refresh
   emits (the import already emits them through
   `crates/unarr-api/src/relay.rs`).
-- **A trap for series writes** (`docs/DESIGN.md` section 17): listing series
+- **A trap for series writes** (`docs/DESIGN.md` section 18): listing series
   skips the `actors` column, the largest JSON one; a write must load the
   cast first or update columns, never write back a series read from a list.
 - **`/series` latency** on the 950-series fixture is still tens of
   milliseconds against the 10 ms target; a per-series cache invalidated by
-  writes is the next step section 17 names, and 3b is the phase that adds
+  writes is the next step section 18 names, and 3b is the phase that adds
   the writes to invalidate on.
 - **Notifications**: Discord, Webhook and Plex Media Server are driven; plex.tv
   is never called. 3b's series add and delete fire the `SeriesAdd` and
@@ -226,4 +226,4 @@ downloads and restores, an original Sonarr backup included, the restore
 applied at the next start; the daemon writes `logs/sonarr.txt` with its
 archives and `log/file` lists and serves them; `system/routes` is not
 implemented, the UI does not ask for it. `docs/DESIGN.md` section 14
-records the decisions and the divergences, section 17 what stays open.
+records the decisions and the divergences, section 18 what stays open.

@@ -51,7 +51,9 @@ fn cover_hash(remote_url: &str) -> String {
 pub enum Covers {
     /// With the address Unarr serves them at (`MediaCoverService.ConvertToLocalUrls`).
     Local,
-    /// As the metadata server names them.
+    /// As the metadata server names them, with the address a cover
+    /// already carries: a movie object the original gave local addresses
+    /// to (`ConvertToLocalUrls`) keeps them wherever it is shown.
     Remote,
 }
 
@@ -60,6 +62,9 @@ pub fn images_resource(images: &[Image], movie_id: i64, url_base: &str, covers: 
         .iter()
         .map(|i| {
             let mut out = json!({"coverType": i.cover_type});
+            if let (Covers::Remote, Some(url)) = (covers, &i.url) {
+                out["url"] = json!(url);
+            }
             if let Some(remote) = &i.remote_url {
                 out["remoteUrl"] = json!(remote);
                 if covers == Covers::Local {

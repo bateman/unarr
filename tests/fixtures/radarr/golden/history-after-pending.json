@@ -13,8 +13,8 @@
         ],
         "data": {
           "age": "1",
-          "ageHours": "36.029763052805556",
-          "ageMinutes": "2161.7857832366667",
+          "ageHours": "47.952258678305554",
+          "ageMinutes": "2877.1355207916667",
           "customFormatScore": "0",
           "downloadClient": "SABnzbd",
           "downloadClientName": "Mock SABnzbd",
@@ -33,7 +33,7 @@
           "size": "6979321856",
           "tmdbId": "0"
         },
-        "date": "2026-11-11T22:01:47Z",
+        "date": "2026-11-12T09:57:08Z",
         "downloadId": "SABnzbd_nzo_mock7",
         "eventType": "grabbed",
         "id": 1020,
@@ -74,9 +74,9 @@
           }
         ],
         "data": {
-          "age": "1",
-          "ageHours": "38.029209948916666",
-          "ageMinutes": "2281.75259705",
+          "age": "2",
+          "ageHours": "49.95170233319445",
+          "ageMinutes": "2997.10214012",
           "customFormatScore": "0",
           "downloadClient": "SABnzbd",
           "downloadClientName": "Mock SABnzbd",
@@ -95,7 +95,7 @@
           "size": "7516192768",
           "tmdbId": "0"
         },
-        "date": "2026-11-11T22:01:45Z",
+        "date": "2026-11-12T09:57:06Z",
         "downloadId": "SABnzbd_nzo_mock6",
         "eventType": "grabbed",
         "id": 1019,
@@ -144,9 +144,9 @@
           }
         ],
         "data": {
-          "age": "2",
-          "ageHours": "71.34532090094444",
-          "ageMinutes": "4280.719254176666",
+          "age": "3",
+          "ageHours": "83.26781551594445",
+          "ageMinutes": "4996.068931108333",
           "customFormatScore": "0",
           "downloadClient": "SABnzbd",
           "downloadClientName": "Mock SABnzbd",
@@ -165,7 +165,7 @@
           "size": "5153960755",
           "tmdbId": "0"
         },
-        "date": "2026-11-11T22:01:43Z",
+        "date": "2026-11-12T09:57:04Z",
         "downloadId": "SABnzbd_nzo_mock5",
         "eventType": "grabbed",
         "id": 1018,
@@ -198,7 +198,7 @@
     "sortKey": "date",
     "totalRecords": 681
   },
-  "recordedAt": "2026-11-11T22:01:59Z",
+  "recordedAt": "2026-11-12T09:57:20Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/history?page=1&pageSize=3&sortKey=date&sortDirection=descending&includeMovie=false"

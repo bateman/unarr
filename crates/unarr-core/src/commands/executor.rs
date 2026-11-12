@@ -46,6 +46,9 @@ pub enum Event {
     /// What the importer raised: `EpisodeImportedEvent`,
     /// `EpisodeFileDeletedEvent`, `DownloadCompletedEvent` and the rest.
     Import(Box<ImportEvent>),
+    /// The same for Radarr: `MovieFileImportedEvent`,
+    /// `MovieFileDeletedEvent`, `DownloadCompletedEvent` and the rest.
+    MovieImport(Box<crate::movies::import::events::MovieImportEvent>),
     /// `SeriesUpdatedEvent` and `MediaCoversUpdatedEvent` with a change:
     /// the series resource the UI holds is stale.
     SeriesUpdated { series_id: i64 },
@@ -92,6 +95,8 @@ pub struct Runtime {
     /// Set at shutdown: the workers take no further command.
     stopping: std::sync::atomic::AtomicBool,
     notifier: Arc<Notifier>,
+    /// Radarr's notifications, over the same connections and transports.
+    movie_notifier: Option<Arc<crate::movies::notifications::MovieNotifier>>,
     /// When the runtime came up, for the health checks' startup grace.
     started_at: DateTime<Utc>,
     /// `_hasRunHealthChecksAfterGracePeriod`: health verdicts reach the
@@ -175,6 +180,11 @@ impl Runtime {
         }
         let notifier = Arc::new(Notifier::new(db.clone(), identity, now));
         downloads.set_notifier(notifier.clone());
+        let movie_notifier = movies.as_ref().map(|side| {
+            let movie_notifier = Arc::new(crate::movies::notifications::MovieNotifier::new(notifier.clone()));
+            side.downloads.set_notifier(movie_notifier.clone());
+            movie_notifier
+        });
         let (events, _) = broadcast::channel(256);
         let runtime = Arc::new(Runtime {
             personality,
@@ -197,6 +207,7 @@ impl Runtime {
             is_docker: std::path::Path::new("/.dockerenv").exists(),
             stopping: std::sync::atomic::AtomicBool::new(false),
             notifier,
+            movie_notifier,
             started_at: now,
             health_armed: std::sync::atomic::AtomicBool::new(false),
             metadata: std::sync::RwLock::new(Arc::new(crate::metadata::Skyhook::new(
@@ -286,6 +297,36 @@ impl Runtime {
         &self.notifier
     }
 
+    /// Radarr's notifications; `None` for Sonarr's runtime.
+    pub fn movie_notifier(&self) -> Option<&Arc<crate::movies::notifications::MovieNotifier>> {
+        self.movie_notifier.as_ref()
+    }
+
+    /// `Handle(HealthCheckFailedEvent)` of the application's notifications.
+    async fn notify_health_issue(&self, check: &HealthCheck, now: DateTime<Utc>) {
+        match &self.movie_notifier {
+            Some(movies) => movies.on_health_issue(check, now).await,
+            None => self.notifier.on_health_issue(check, now).await,
+        }
+    }
+
+    /// `Handle(HealthCheckRestoredEvent)` of the application's notifications.
+    async fn notify_health_restored(&self, check: &HealthCheck, now: DateTime<Utc>) {
+        match &self.movie_notifier {
+            Some(movies) => movies.on_health_restored(check, now).await,
+            None => self.notifier.on_health_restored(check, now).await,
+        }
+    }
+
+    /// `NotificationService.ProcessQueue` of the application's
+    /// notifications: the media servers perform the updates they queued.
+    async fn process_notification_queue(&self, now: DateTime<Utc>) {
+        match &self.movie_notifier {
+            Some(movies) => movies.process_queue(now).await,
+            None => self.notifier.process_queue(now).await,
+        }
+    }
+
     /// The health verdicts that stand.
     pub fn health(&self) -> Vec<HealthCheck> {
         self.health.lock().unwrap().clone()
@@ -345,14 +386,14 @@ impl Runtime {
         }
         if self.health_armed.load(std::sync::atomic::Ordering::SeqCst) {
             for check in &failed {
-                self.notifier.on_health_issue(check, now).await;
+                self.notify_health_issue(check, now).await;
             }
             for check in &restored {
-                self.notifier.on_health_restored(check, now).await;
+                self.notify_health_restored(check, now).await;
             }
         }
         // `HealthCheckCompleteEvent`.
-        self.notifier.process_queue(now).await;
+        self.process_notification_queue(now).await;
         changed
     }
 
@@ -361,11 +402,6 @@ impl Runtime {
     /// reaches the notifications; from then on new verdicts do too.
     async fn arm_health_notifications(&self) {
         use std::sync::atomic::Ordering;
-        // Radarr's notifications come with a later milestone: its verdicts
-        // stay in the health list.
-        if self.movies.is_some() {
-            return;
-        }
         if self.health_armed.load(Ordering::SeqCst) || self.now() < self.started_at + HEALTH_GRACE {
             return;
         }
@@ -373,7 +409,7 @@ impl Runtime {
         self.health_armed.store(true, Ordering::SeqCst);
         let now = self.now();
         for check in self.health() {
-            self.notifier.on_health_issue(&check, now).await;
+            self.notify_health_issue(&check, now).await;
         }
     }
 
@@ -572,7 +608,7 @@ impl Runtime {
             if let Err(e) = self.tick_scheduler().await {
                 tracing::error!(error = %e, "scheduler tick failed");
             }
-            crate::fs::release_memory();
+            crate::fs::release_idle_memory();
         }
     }
 
@@ -891,7 +927,13 @@ impl Runtime {
             }
             CommandBody::MoviesSearch { .. }
             | CommandBody::MissingMoviesSearch { .. }
-            | CommandBody::CutoffUnmetMoviesSearch { .. } => {
+            | CommandBody::CutoffUnmetMoviesSearch { .. }
+            | CommandBody::RescanMovie { .. }
+            | CommandBody::DownloadedMoviesScan { .. }
+            | CommandBody::RenameMovieFiles { .. }
+            | CommandBody::ManualImportMovies { .. }
+            | CommandBody::RenameMovie { .. }
+            | CommandBody::RefreshMovie { .. } => {
                 anyhow::bail!("{} is not a command of this application", model.name())
             }
         }
@@ -925,7 +967,12 @@ impl Runtime {
             CommandBody::RefreshMonitoredDownloads => {
                 // `DownloadMonitoringService.Refresh`: the clients asked,
                 // then the processing queued as its own command.
-                if side.downloads.refresh(now).await? {
+                let changed = side.downloads.refresh(now).await?;
+                // `ManualInteractionRequiredEvent`, which the completed
+                // download check publishes while the clients are read.
+                self.emit_movie_import_events(side, side.downloads.take_raised_events())
+                    .await;
+                if changed {
                     self.emit(Event::QueueUpdated);
                 }
                 self.queue
@@ -940,14 +987,98 @@ impl Runtime {
             }
             CommandBody::ProcessMonitoredDownloads => {
                 // Failed downloads are dealt with as the refresh finds
-                // them; importing the completed ones comes with the
-                // milestone that imports.
+                // them; the completed ones are imported here.
+                // What a refresh outside a command raised goes first.
+                let mut events = side.downloads.take_raised_events();
+                events.extend(
+                    crate::movies::import::completed::process_monitored_downloads(&side.downloads, now)
+                        .await?,
+                );
+                self.emit_movie_import_events(side, events).await;
+                // `DownloadsProcessedEvent` -> the queue, and the
+                // notifications perform what they queued.
                 self.emit(Event::QueueUpdated);
+                self.process_notification_queue(self.now()).await;
                 return Ok(());
             }
             CommandBody::MessagingCleanup => return self.queue.clean(now).await,
             CommandBody::CheckHealth => {
                 self.check_health(CheckSet::All).await;
+                return Ok(());
+            }
+            CommandBody::RescanMovie { movie_id } => return self.rescan_movie(side, id, *movie_id).await,
+            CommandBody::DownloadedMoviesScan {
+                path,
+                download_client_id,
+                import_mode,
+            } => {
+                return self
+                    .downloaded_movies_scan(
+                        side,
+                        id,
+                        path.as_deref(),
+                        download_client_id.as_deref(),
+                        *import_mode,
+                    )
+                    .await
+            }
+            CommandBody::RenameMovieFiles { movie_id, files } => {
+                let renamed = self
+                    .rename_movie_files(side, id, *movie_id, Some(files.clone()))
+                    .await;
+                // `RenameCompletedEvent`, which a rename that threw never
+                // publishes.
+                if renamed.is_ok() {
+                    self.process_notification_queue(self.now()).await;
+                }
+                return renamed;
+            }
+            CommandBody::ManualImportMovies { files, import_mode } => {
+                return self.manual_import_movies(side, id, files, *import_mode).await
+            }
+            CommandBody::RenameMovie { movie_ids } => {
+                tracing::debug!("Renaming movie files for selected movie");
+                for movie_id in movie_ids {
+                    self.rename_movie_files(side, id, *movie_id, None).await?;
+                }
+                // `RenameCompletedEvent`.
+                self.process_notification_queue(self.now()).await;
+                return Ok(());
+            }
+            CommandBody::RefreshMovie { .. } => {
+                // The metadata of a movie is refreshed from the milestone
+                // that brings its provider; until then the command is
+                // accepted and completes.
+                tracing::debug!(name = model.name(), "nothing to do for this command yet");
+                return Ok(());
+            }
+            CommandBody::Backup { kind } => {
+                let context = self.backup.read().unwrap().clone();
+                let Some(context) = context else {
+                    tracing::debug!("no app data directory set, nothing to back up");
+                    return Ok(());
+                };
+                self.progress(id, "Starting Backup".into());
+                let path = crate::backup::create(&self.db, &context, *kind, now).await?;
+                tracing::debug!(path = %path.display(), "backup written");
+                self.progress(id, "Backup zip created".into());
+                return Ok(());
+            }
+            CommandBody::CleanUpRecycleBin => {
+                let config = self
+                    .db
+                    .call(|conn| crate::store::config::MediaManagementConfig::load(conn))
+                    .await?;
+                tokio::task::spawn_blocking(move || {
+                    crate::mediafiles::transfer::clean_up_recycle_bin(&config, now)
+                })
+                .await?;
+                return Ok(());
+            }
+            CommandBody::Housekeeping => {
+                self.db
+                    .call(move |conn| Ok(crate::movies::housekeeping::run(conn, now)))
+                    .await?;
                 return Ok(());
             }
             _ => anyhow::bail!("{} is not a command of this application", model.name()),
@@ -1061,6 +1192,331 @@ impl Runtime {
         self.emit(Event::QueueUpdated);
         self.notifier.process_queue(self.now()).await;
         Ok(())
+    }
+
+    /// `DiskScanService.Execute(RescanMovieCommand)`: the movie asked for,
+    /// or every one.
+    async fn rescan_movie(&self, side: &MovieSide, id: i64, movie_id: Option<i64>) -> anyhow::Result<()> {
+        use crate::movies::import::{decide::MovieEnvironment, scan};
+        let now = self.now();
+        let (env, movies) = self
+            .db
+            .call(move |conn| {
+                let movies = match movie_id {
+                    Some(mid) => crate::movies::store::get_movie(conn, mid)?
+                        .map(|m| vec![m])
+                        .ok_or_else(|| anyhow::anyhow!("Movie with ID {mid} does not exist"))?,
+                    None => crate::movies::store::list_movies(conn)?,
+                };
+                Ok((MovieEnvironment::load(conn, now)?, movies))
+            })
+            .await?;
+        for movie in movies {
+            let (db, env2) = (self.db.clone(), env.clone());
+            let (messages, events) = tokio::task::spawn_blocking(move || {
+                let mut messages = Vec::new();
+                let events = scan::scan(&db, &env2, &movie, now, &mut |m| messages.push(m));
+                // `ExistingExtraFileService.Handle(MovieScannedEvent)`,
+                // with the movie as the scan was handed it.
+                if let Ok(events) = &events {
+                    crate::movies::import::extras::handle_scanned(&db, &movie, &events.0, now);
+                }
+                (messages, events)
+            })
+            .await?;
+            for m in messages {
+                self.progress(id, m);
+            }
+            self.emit_movie_import_events(side, events?.into_vec()).await;
+        }
+        Ok(())
+    }
+
+    /// `RenameMovieFileService.Execute`: the files named of one movie
+    /// (`RenameFilesCommand`), or all of them (`RenameMovieCommand`).
+    async fn rename_movie_files(
+        &self,
+        side: &MovieSide,
+        id: i64,
+        movie_id: i64,
+        files: Option<Vec<i64>>,
+    ) -> anyhow::Result<()> {
+        use crate::movies::import::{decide::MovieEnvironment, rename};
+        let now = self.now();
+        let selected = files.is_some();
+        let (env, movie, files) = self
+            .db
+            .call(move |conn| {
+                let movie = crate::movies::store::get_movie(conn, movie_id)?
+                    .ok_or_else(|| anyhow::anyhow!("Movie with ID {movie_id} does not exist"))?;
+                let files = match files {
+                    Some(ids) => crate::movies::store::movie_files_by_ids(conn, &ids)?,
+                    None => crate::movies::store::movie_files_of(conn, movie.id)?,
+                };
+                Ok((MovieEnvironment::load(conn, now)?, movie, files))
+            })
+            .await?;
+        let title = movie.metadata.title.clone();
+        self.progress(
+            id,
+            if selected {
+                format!("Renaming {} files for {title}", files.len())
+            } else {
+                format!("Renaming movie files for {title}")
+            },
+        );
+        let db = self.db.clone();
+        let events = tokio::task::spawn_blocking(move || rename::rename_files(&db, &env, &movie, files, now))
+            .await??
+            .into_vec();
+        let renamed = events
+            .iter()
+            .filter(|e| matches!(e, crate::movies::import::events::MovieImportEvent::FileRenamed(_)))
+            .count();
+        self.progress(
+            id,
+            if selected {
+                format!("{renamed} selected movie files renamed for {title}")
+            } else {
+                format!("{renamed} movie files renamed for {title}")
+            },
+        );
+        self.emit_movie_import_events(side, events).await;
+        Ok(())
+    }
+
+    /// `DownloadedMovieCommandService.Execute(DownloadedMoviesScanCommand)`.
+    async fn downloaded_movies_scan(
+        &self,
+        side: &MovieSide,
+        id: i64,
+        path: Option<&str>,
+        download_client_id: Option<&str>,
+        import_mode: ImportMode,
+    ) -> anyhow::Result<()> {
+        use crate::movies::import::{completed, decide::MovieEnvironment, downloaded, events::MovieEvents};
+        let Some(path) = path.map(str::to_string) else {
+            anyhow::bail!("A path must be provided (Parameter 'path')");
+        };
+        let now = self.now();
+        let env = self
+            .db
+            .call(move |conn| MovieEnvironment::load(conn, now))
+            .await?;
+        let mut results = Vec::new();
+        if !std::path::Path::new(&path).exists() {
+            tracing::warn!("Folder/File specified for import scan [{path}] doesn't exist.");
+        } else {
+            let mut tracked = download_client_id.and_then(|d| side.downloads.tracked(d));
+            match (download_client_id, tracked.as_ref()) {
+                (Some(d), None) => tracing::warn!(
+                    "External directory scan request for unknown download {d}, attempting normal import. [{path}]"
+                ),
+                (Some(d), Some(_)) => {
+                    tracing::debug!("External directory scan request for known download {d}. [{path}]")
+                }
+                _ => {}
+            }
+            let db = self.db.clone();
+            let (imported, updated, verify_events) = tokio::task::spawn_blocking(move || {
+                let (movie, item, flags) = match tracked.as_ref() {
+                    Some(t) => (
+                        t.remote.as_ref().and_then(|r| r.movie.clone()),
+                        Some(t.item.clone()),
+                        t.remote.as_ref().map(|r| r.release.indexer_flags),
+                    ),
+                    None => (None, None, None),
+                };
+                let imported = downloaded::process_path(
+                    &db,
+                    &env,
+                    &path,
+                    import_mode,
+                    movie.as_ref(),
+                    item.as_ref(),
+                    flags,
+                    now,
+                );
+                let mut events = MovieEvents::default();
+                if let Some(t) = tracked.as_mut() {
+                    completed::verify_import(&db, t, &imported.results, now, &mut events);
+                }
+                (imported, tracked, events)
+            })
+            .await?;
+            if let Some(mut t) = updated {
+                if verify_events.0.iter().any(|e| {
+                    matches!(
+                        e,
+                        crate::movies::import::events::MovieImportEvent::DownloadCompleted(_)
+                    )
+                }) {
+                    completed::download_completed(&side.downloads, &mut t, now).await;
+                }
+                side.downloads.update_tracked(t);
+                side.downloads.rebuild_queue_now(now);
+                self.emit(Event::QueueUpdated);
+            }
+            results = imported.results;
+            let mut events = imported.events;
+            events.extend(verify_events);
+            self.emit_movie_import_events(side, events.into_vec()).await;
+        }
+        if results
+            .iter()
+            .all(|r| r.result() != crate::mediafiles::local::ImportResultType::Imported)
+        {
+            // The command completes, but reports as unsuccessful. Its
+            // "Failed to import" is a progress message, which a command
+            // that sends no updates to the client does not keep.
+            tracing::debug!("Failed to import");
+            self.queue.set_result(id, super::CommandResult::Unsuccessful);
+        }
+        Ok(())
+    }
+
+    /// Radarr's `ManualImportService.Execute(ManualImportCommand)`.
+    async fn manual_import_movies(
+        &self,
+        side: &MovieSide,
+        id: i64,
+        files: &[crate::movies::import::manual::ManualImportFile],
+        mode: ImportMode,
+    ) -> anyhow::Result<()> {
+        use crate::movies::import::{completed, decide::MovieEnvironment, manual};
+        let now = self.now();
+        let env = self
+            .db
+            .call(move |conn| MovieEnvironment::load(conn, now))
+            .await?;
+        let (db, downloads, files) = (self.db.clone(), side.downloads.clone(), files.to_vec());
+        let (messages, outcome) = tokio::task::spawn_blocking(move || {
+            let mut messages = Vec::new();
+            let outcome = manual::execute(&db, &env, &downloads, &files, mode, now, &mut |m| {
+                messages.push(m)
+            });
+            (messages, outcome)
+        })
+        .await?;
+        for m in messages {
+            self.progress(id, m);
+        }
+        let outcome = outcome.map_err(|e| anyhow::anyhow!("{e}"))?;
+        // `DownloadCompletedEvent`: the client told, the item removed when
+        // its client is set to, and the download out of the queue.
+        for mut t in outcome.completed {
+            completed::download_completed(&side.downloads, &mut t, now).await;
+            side.downloads.update_tracked(t);
+        }
+        side.downloads.rebuild_queue_now(now);
+        // The movie of a manual import is the one the request names, read
+        // anew: not the object the tracked download holds.
+        self.emit_movie_events(side, outcome.events.into_vec(), false)
+            .await;
+        self.emit(Event::QueueUpdated);
+        Ok(())
+    }
+
+    /// What a movie import raised, handed on: the notifications first
+    /// (`NotificationService`'s synchronous handlers, in event order), the
+    /// health checks its outcome triggers, debounced (their completion is
+    /// what performs the media servers' queued updates when nothing else
+    /// does), then each event to whoever listens.
+    async fn emit_movie_import_events(
+        &self,
+        side: &MovieSide,
+        events: Vec<crate::movies::import::events::MovieImportEvent>,
+    ) {
+        self.emit_movie_events(side, events, true).await;
+    }
+
+    /// The same; `imports_hold_tracked_movie` says whether the movie of an
+    /// imported file is the object its tracked download holds (the import
+    /// of a download) or one read for the occasion (a manual import).
+    async fn emit_movie_events(
+        &self,
+        side: &MovieSide,
+        events: Vec<crate::movies::import::events::MovieImportEvent>,
+        imports_hold_tracked_movie: bool,
+    ) {
+        use crate::movies::import::events::MovieImportEvent;
+        use crate::movies::notifications::ConvertedBy;
+        if let Some(notifier) = &self.movie_notifier {
+            let now = self.now();
+            let converted = notifier.on_import_events(&events, now).await;
+            // The movie a webhook payload was built for is, for a tracked
+            // download, the one the download holds: its covers carry
+            // their local addresses from here on.
+            let url_base = &notifier.base().identity().url_base;
+            let mut any = false;
+            for c in &converted {
+                if c.by == ConvertedBy::ManualInteraction || imports_hold_tracked_movie {
+                    side.downloads.convert_covers_of(&c.download_id, url_base);
+                    any = true;
+                }
+            }
+            if any {
+                side.downloads.rebuild_queue_now(now);
+            }
+        }
+        let failure = events.iter().find_map(|e| match e {
+            MovieImportEvent::ImportFailed(f) => Some(ImportFailure {
+                path: Some(f.local.path.clone()).filter(|p| !p.is_empty()),
+                download_client: f.client.as_ref().map(|c| c.name.clone()),
+                download_id: f.download_id.clone(),
+                output_path: f
+                    .download_id
+                    .as_deref()
+                    .and_then(|id| side.downloads.tracked(id))
+                    .and_then(|t| {
+                        t.import_item
+                            .as_ref()
+                            .or(Some(&t.item))
+                            .and_then(|i| i.output_path.clone())
+                    }),
+            }),
+            _ => None,
+        });
+        if let Some(f) = failure {
+            self.check_health_later_with(CheckSet::ImportFailed, Some(f));
+        }
+        if events.iter().any(|e| matches!(e, MovieImportEvent::Imported(_))) {
+            self.check_health_later_with(CheckSet::ImportSucceeded, None);
+        }
+        for e in events {
+            if let MovieImportEvent::RescanRequested { movie_id } = &e {
+                let (queue, movie_id, now) = (self.queue.clone(), *movie_id, self.now());
+                tokio::spawn(async move {
+                    if let Err(err) = queue
+                        .push(
+                            CommandBody::RescanMovie {
+                                movie_id: Some(movie_id),
+                            },
+                            CommandPriority::Normal,
+                            CommandTrigger::Unspecified,
+                            now,
+                        )
+                        .await
+                    {
+                        tracing::warn!(error = %err, "failed to queue the rescan");
+                    }
+                });
+                continue;
+            }
+            self.emit(Event::MovieImport(Box::new(e)));
+        }
+    }
+
+    /// The same for Radarr's: a movie file deleted through the API.
+    pub async fn publish_movie_import_events(
+        &self,
+        events: Vec<crate::movies::import::events::MovieImportEvent>,
+    ) {
+        if let Some(side) = &self.movies {
+            self.emit_movie_import_events(side, events).await;
+            // `DeleteCompletedEvent`.
+            self.process_notification_queue(self.now()).await;
+        }
     }
 
     /// Events the API raised outside a command (a file deleted through it):

@@ -1,0 +1,61 @@
+{
+  "body": {
+    "page": 1,
+    "pageSize": 5,
+    "records": [
+      {
+        "customFormatScore": -10000,
+        "customFormats": [
+          {
+            "id": 58,
+            "name": "Language not Italian"
+          }
+        ],
+        "data": {
+          "indexerFlags": "0",
+          "path": "/movies/Backcountry (2015)/Backcountry (2015) {tmdb-228973} - [Bluray-1080p][AAC 1.0][x264]-GRP.mkv",
+          "relativePath": "Backcountry (2015) {tmdb-228973} - [Bluray-1080p][AAC 1.0][x264]-GRP.mkv",
+          "releaseGroup": "GRP",
+          "size": "1106640",
+          "sourcePath": "/movies/Backcountry (2015)/Backcountry.2015.1080p.BluRay.x264-GRP.mkv",
+          "sourceRelativePath": "Backcountry.2015.1080p.BluRay.x264-GRP.mkv"
+        },
+        "date": "2026-11-12T10:00:09Z",
+        "eventType": "movieFileRenamed",
+        "id": 1129,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movieId": 10,
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "/movies/Backcountry (2015)/Backcountry.2015.1080p.BluRay.x264-GRP.mkv"
+      }
+    ],
+    "sortDirection": "descending",
+    "sortKey": "date",
+    "totalRecords": 1
+  },
+  "recordedAt": "2026-11-12T10:00:21Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/history?page=1&pageSize=5&sortKey=date&sortDirection=descending&eventType=8&includeMovie=false"
+  },
+  "status": 200
+}

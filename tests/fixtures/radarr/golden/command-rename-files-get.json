@@ -1,0 +1,40 @@
+{
+  "body": {
+    "body": {
+      "files": [
+        408
+      ],
+      "isExclusive": false,
+      "isLongRunning": false,
+      "isTypeExclusive": false,
+      "movieId": 10,
+      "name": "RenameFiles",
+      "requiresDiskAccess": true,
+      "sendUpdatesToClient": true,
+      "suppressMessages": false,
+      "trigger": "manual",
+      "updateScheduledTask": true
+    },
+    "commandName": "Rename Files",
+    "duration": "00:00:00.0657656",
+    "ended": "2026-11-12T10:00:09Z",
+    "id": 473010,
+    "message": "1 selected movie files renamed for Backcountry",
+    "name": "RenameFiles",
+    "priority": "normal",
+    "queued": "2026-11-12T10:00:09Z",
+    "result": "successful",
+    "sendUpdatesToClient": true,
+    "started": "2026-11-12T10:00:09Z",
+    "stateChangeTime": "2026-11-12T10:00:09Z",
+    "status": "completed",
+    "trigger": "manual",
+    "updateScheduledTask": true
+  },
+  "recordedAt": "2026-11-12T10:00:21Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/command/473010"
+  },
+  "status": 200
+}

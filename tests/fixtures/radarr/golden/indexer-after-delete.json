@@ -6670,7 +6670,7 @@
       "tags": []
     }
   ],
-  "recordedAt": "2026-11-11T22:01:59Z",
+  "recordedAt": "2026-11-12T10:01:10Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/indexer"

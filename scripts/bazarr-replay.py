@@ -10,7 +10,8 @@ present with the expected type. It is a stand-in for running Bazarr itself.
 
 For Radarr (`--app radarr`; bazarr/radarr/sync/*.py) it reads the version,
 the quality profiles, the tags, the root folders, every movie with its file,
-each movie on its own, its file, and the grabs of its history.
+each movie on its own, its file, and the grabs of its history; then it
+posts the `RescanMovie` command Bazarr sends after writing a subtitle.
 
     scripts/bazarr-replay.py --base-url http://127.0.0.1:8989 --api-key KEY
     scripts/bazarr-replay.py --app radarr --base-url http://127.0.0.1:7878 --api-key KEY
@@ -24,6 +25,7 @@ from __future__ import annotations
 import argparse
 import json
 import sys
+import urllib.error
 import urllib.request
 
 
@@ -31,6 +33,21 @@ def get(base: str, path: str, key: str):
     sep = "&" if "?" in path else "?"
     with urllib.request.urlopen(f"{base}/api/v3/{path}{sep}apikey={key}", timeout=60) as r:
         return json.loads(r.read())
+
+
+def post(base: str, path: str, key: str, body: dict):
+    """A POST as Bazarr makes it: JSON, the key in the query string. The status and the answer."""
+    request = urllib.request.Request(
+        f"{base}/api/v3/{path}?apikey={key}",
+        data=json.dumps(body).encode(),
+        headers={"Content-Type": "application/json"},
+        method="POST",
+    )
+    try:
+        with urllib.request.urlopen(request, timeout=60) as r:
+            return r.status, json.loads(r.read() or b"null")
+    except urllib.error.HTTPError as e:
+        return e.code, None
 
 
 def expect(obj: dict, field: str, kinds: tuple, where: str, problems: list):
@@ -119,6 +136,16 @@ def radarr(base: str, key: str, problems: list):
                 expect(row, "eventType", (str,), where + " history", problems)
             paged = get(base, f"history?eventType=1&movieIds={movie['id']}", key)
             expect(paged, "records", (list,), where + " history", problems)
+    # After it writes a subtitle next to a movie, Bazarr asks for that
+    # movie's folder to be scanned again (bazarr/radarr/notify.py).
+    if movies:
+        status, command = post(base, "command", key, {"name": "RescanMovie", "movieId": movies[0]["id"]})
+        if status != 201:
+            problems.append(f"RescanMovie: answered {status}, expected 201")
+        elif not isinstance(command, dict) or command.get("name") != "RescanMovie" or "id" not in command:
+            problems.append(f"RescanMovie: unexpected answer {command!r}")
+        else:
+            print(f"[bazarr] RescanMovie accepted as command {command['id']}")
     print(f"[bazarr] {len(movies)} movies, {files_seen} files checked")
 
 

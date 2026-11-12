@@ -4,60 +4,67 @@
     "pageSize": 10,
     "records": [
       {
+        "id": 8,
+        "level": "info",
+        "logger": "Radarr.Http.Authentication.ApiKeyAuthenticationHandler",
+        "message": "AuthenticationScheme: API was challenged.",
+        "time": "2026-11-12T09:55:21Z"
+      },
+      {
         "id": 7,
         "level": "info",
         "logger": "Microsoft.Hosting.Lifetime",
         "message": "Content root path: /home/(removed)/unarr",
-        "time": "2026-11-11T22:00:00Z"
+        "time": "2026-11-12T09:55:21Z"
       },
       {
         "id": 6,
         "level": "info",
         "logger": "Microsoft.Hosting.Lifetime",
         "message": "Hosting environment: Production",
-        "time": "2026-11-11T22:00:00Z"
+        "time": "2026-11-12T09:55:21Z"
       },
       {
         "id": 5,
         "level": "info",
         "logger": "Microsoft.Hosting.Lifetime",
         "message": "Application started. Press Ctrl+C to shut down.",
-        "time": "2026-11-11T22:00:00Z"
+        "time": "2026-11-12T09:55:21Z"
       },
       {
         "id": 4,
         "level": "info",
         "logger": "CommandExecutor",
         "message": "Starting 2 threads for tasks.",
-        "time": "2026-11-11T22:00:00Z"
+        "time": "2026-11-12T09:55:21Z"
       },
       {
         "id": 3,
         "level": "info",
         "logger": "UpdaterConfigProvider",
         "message": "Update mechanism Docker not supported in the current configuration, changing to BuiltIn.",
-        "time": "2026-11-11T22:00:00Z"
+        "time": "2026-11-12T09:55:21Z"
       },
       {
         "id": 2,
         "level": "info",
         "logger": "Microsoft.Hosting.Lifetime",
         "message": "Now listening on: http://0.0.0.0:7878",
-        "time": "2026-11-11T22:00:00Z"
+        "time": "2026-11-12T09:55:21Z"
       },
       {
         "id": 1,
         "level": "info",
         "logger": "ConfigureHostFilteringOptions",
         "message": "Accepting requests for hosts: *, localhost, 127.0.0.1, [::1], vm",
-        "time": "2026-11-11T22:00:00Z"
+        "time": "2026-11-12T09:55:21Z"
       }
     ],
     "sortDirection": "descending",
     "sortKey": "time",
-    "totalRecords": 7
+    "totalRecords": 8
   },
-  "recordedAt": "2026-11-11T22:00:01Z",
+  "recordedAt": "2026-11-12T09:55:22Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/log?page=1&pageSize=10&sortKey=time&sortDirection=descending"

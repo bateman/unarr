@@ -5,8 +5,8 @@
       "customFormats": [],
       "data": {
         "age": "2",
-        "ageHours": "48.77304310458333",
-        "ageMinutes": "2926.38258637",
+        "ageHours": "60.69600636097222",
+        "ageMinutes": "3641.76038184",
         "customFormatScore": "0",
         "downloadClient": "SABnzbd",
         "downloadClientName": "Mock SABnzbd",
@@ -25,7 +25,7 @@
         "size": "7945689497",
         "tmdbId": "840430"
       },
-      "date": "2026-11-11T22:00:22Z",
+      "date": "2026-11-12T09:55:45Z",
       "downloadId": "SABnzbd_nzo_mock1",
       "eventType": "grabbed",
       "id": 1009,
@@ -124,7 +124,7 @@
       "sourceTitle": "The.Holdovers.2023.PROPER.BluRay.1080p.DTS-HD.MA.5.1.AVC.REMUX-FraMeSToR"
     }
   ],
-  "recordedAt": "2026-11-11T22:00:39Z",
+  "recordedAt": "2026-11-12T09:56:01Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/history/movie?movieId=116&eventType=1"

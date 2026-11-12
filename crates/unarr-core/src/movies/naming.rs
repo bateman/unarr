@@ -196,6 +196,12 @@ pub fn language_by_iso_code(code: &str) -> Option<i64> {
     }
 }
 
+/// `IsoLanguages.Get(language)?.TwoLetterCode`: the code a language is
+/// written with, `None` for one the table has no row for.
+pub fn iso_two_letter_code(language_id: i64) -> Option<&'static str> {
+    ISO_LANGUAGES.iter().find(|l| l.3 == language_id).map(|l| l.0)
+}
+
 /// Letters the decomposition leaves whole, as `RemoveDiacritics` folds them.
 fn fold_letter(c: char, out: &mut String) {
     match c {

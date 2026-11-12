@@ -567,6 +567,7 @@ async fn health_checks_follow_the_providers_and_the_library() {
         unarr_mock::MockDirs {
             downloads: Some(downloads.clone()),
             tv: None,
+            movies: None,
         },
     )
     .await

@@ -1,0 +1,338 @@
+{
+  "body": [
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 53,
+          "name": "AAC"
+        }
+      ],
+      "data": {
+        "indexerFlags": "0",
+        "reason": "MissingFromDisk",
+        "releaseGroup": "MeM",
+        "size": "177860"
+      },
+      "date": "2026-11-12T09:58:45Z",
+      "eventType": "movieFileDeleted",
+      "id": 1026,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        },
+        {
+          "id": 5,
+          "name": "Italian"
+        }
+      ],
+      "movieId": 13,
+      "quality": {
+        "quality": {
+          "id": 8,
+          "modifier": "none",
+          "name": "WEBDL-480p",
+          "resolution": 480,
+          "source": "webdl"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "/movies/BlacKkKlansman (2018)/BlacKkKlansman (2018) {tmdb-487558} - [WEBDL-480p][AAC 1.0][x264]-MeM.mkv"
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 54,
+          "name": "DD"
+        }
+      ],
+      "data": {
+        "customFormatScore": "0",
+        "downloadClient": "SABnzbd",
+        "downloadClientName": "Mock SABnzbd",
+        "droppedPath": "/downloads/complete/movies/BlacKkKlansman.2018.iTA.ENG.1080p.WEB-DL.DD5.1.H264-MeM/BlacKkKlansman.2018.iTA.ENG.1080p.WEB-DL.DD5.1.H264-MeM.mkv",
+        "fileId": "406",
+        "importedPath": "/movies/BlacKkKlansman (2018)/BlacKkKlansman (2018) {tmdb-487558} - [WEBDL-480p][AAC 1.0][x264]-MeM.mkv",
+        "indexerFlags": "0",
+        "releaseGroup": "MeM",
+        "size": "177860"
+      },
+      "date": "2026-11-12T09:57:33Z",
+      "downloadId": "SABnzbd_nzo_mock6",
+      "eventType": "downloadFolderImported",
+      "id": 1022,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        },
+        {
+          "id": 5,
+          "name": "Italian"
+        }
+      ],
+      "movieId": 13,
+      "quality": {
+        "quality": {
+          "id": 8,
+          "modifier": "none",
+          "name": "WEBDL-480p",
+          "resolution": 480,
+          "source": "webdl"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "BlacKkKlansman.2018.iTA.ENG.1080p.WEB-DL.DD5.1.H264-MeM"
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 54,
+          "name": "DD"
+        }
+      ],
+      "data": {
+        "age": "2",
+        "ageHours": "49.95170233319445",
+        "ageMinutes": "2997.10214012",
+        "customFormatScore": "0",
+        "downloadClient": "SABnzbd",
+        "downloadClientName": "Mock SABnzbd",
+        "downloadUrl": "http://127.0.0.1:18989/movies/newznab/download/push-blackkklansman-2018.nzb",
+        "guid": "PUSH-http://127.0.0.1:18989/movies/newznab/download/push-blackkklansman-2018.nzb",
+        "imdbId": "0",
+        "indexer": "Mock Newznab (Prowlarr)",
+        "indexerFlags": "0",
+        "indexerId": "20",
+        "movieMatchType": "Title",
+        "nzbInfoUrl": null,
+        "protocol": "1",
+        "publishedDate": "2026-11-10T08:00:00Z",
+        "releaseGroup": "MeM",
+        "releaseSource": "ReleasePush",
+        "size": "7516192768",
+        "tmdbId": "0"
+      },
+      "date": "2026-11-12T09:57:06Z",
+      "downloadId": "SABnzbd_nzo_mock6",
+      "eventType": "grabbed",
+      "id": 1019,
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        },
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movieId": 13,
+      "quality": {
+        "quality": {
+          "id": 3,
+          "modifier": "none",
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "webdl"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "BlacKkKlansman.2018.iTA.ENG.1080p.WEB-DL.DD5.1.H264-MeM"
+    },
+    {
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 52,
+          "name": "DTS"
+        },
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "LQ"
+        }
+      ],
+      "data": {
+        "indexerFlags": "0",
+        "reason": "Manual",
+        "releaseGroup": "PRoDJi",
+        "size": "9350762038"
+      },
+      "date": "2026-11-01T14:55:57Z",
+      "eventType": "movieFileDeleted",
+      "id": 889,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movieId": 13,
+      "quality": {
+        "quality": {
+          "id": 7,
+          "modifier": "none",
+          "name": "Bluray-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "sourceTitle": "/movies/BlacKkKlansman (2018)/BlacKkKlansman (2018) {tmdb-487558} - [Bluray-1080p][DTS 5.1][x264]-PRoDJi.mkv"
+    },
+    {
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 52,
+          "name": "DTS"
+        },
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "LQ"
+        }
+      ],
+      "data": {
+        "customFormatScore": "0",
+        "downloadClient": "NZBGet",
+        "downloadClientName": "Download client",
+        "droppedPath": "/downloads/BlacKkKlansman.2018.BluRay.1080p.DTS.x264-PRoDJi.mkv",
+        "fileId": "217",
+        "importedPath": "/movies/BlacKkKlansman (2018)/BlacKkKlansman (2018) {tmdb-487558} - [Bluray-1080p][DTS 5.1][x264]-PRoDJi.mkv",
+        "indexerFlags": "0",
+        "releaseGroup": "PRoDJi",
+        "size": "9350762038"
+      },
+      "date": "2026-05-05T05:21:33Z",
+      "downloadId": "3aa052b784d9cf0158919f687617f1dd",
+      "eventType": "downloadFolderImported",
+      "id": 352,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movieId": 13,
+      "quality": {
+        "quality": {
+          "id": 7,
+          "modifier": "none",
+          "name": "Bluray-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "sourceTitle": "BlacKkKlansman.2018.BluRay.1080p.DTS.x264-PRoDJi"
+    },
+    {
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 52,
+          "name": "DTS"
+        },
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 12,
+          "name": "LQ"
+        }
+      ],
+      "data": {
+        "age": "0",
+        "ageHours": "7.4919083199722225",
+        "ageMinutes": "449.51449954833333",
+        "customFormatScore": "0",
+        "downloadClient": "NZBGet",
+        "downloadClientName": "Download client",
+        "downloadUrl": "http://indexer.invalid/77708be7b348",
+        "guid": "http://indexer.invalid/33524fe91922",
+        "imdbId": "7349662",
+        "indexer": "Indexer",
+        "indexerFlags": "0",
+        "indexerId": "1",
+        "movieMatchType": "Id",
+        "nzbInfoUrl": "http://indexer.invalid/33524fe91922",
+        "protocol": "1",
+        "publishedDate": "2026-05-04T21:38:29Z",
+        "releaseGroup": "PRoDJi",
+        "releaseSource": "Rss",
+        "size": "11583950000",
+        "tmdbId": "0"
+      },
+      "date": "2026-05-05T05:07:59Z",
+      "downloadId": "3aa052b784d9cf0158919f687617f1dd",
+      "eventType": "grabbed",
+      "id": 350,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movieId": 13,
+      "quality": {
+        "quality": {
+          "id": 7,
+          "modifier": "none",
+          "name": "Bluray-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "sourceTitle": "BlacKkKlansman.2018.BluRay.1080p.DTS.x264-PRoDJi"
+    }
+  ],
+  "recordedAt": "2026-11-12T09:58:57Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/history/movie?movieId=13"
+  },
+  "status": 200
+}

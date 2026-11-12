@@ -1,0 +1,223 @@
+{
+  "body": {
+    "added": "2026-03-07T09:12:06Z",
+    "alternateTitles": [
+      {
+        "id": 137,
+        "movieMetadataId": 20,
+        "sourceType": "tmdb",
+        "title": "Candyman : Le Spectre Maléfique"
+      },
+      {
+        "id": 138,
+        "movieMetadataId": 20,
+        "sourceType": "tmdb",
+        "title": "Candyman, El Dominio de la Mente"
+      },
+      {
+        "id": 139,
+        "movieMetadataId": 20,
+        "sourceType": "tmdb",
+        "title": "Кэндимен"
+      },
+      {
+        "id": 140,
+        "movieMetadataId": 20,
+        "sourceType": "tmdb",
+        "title": "Кондитер"
+      },
+      {
+        "id": 141,
+        "movieMetadataId": 20,
+        "sourceType": "tmdb",
+        "title": "Κάντιμαν"
+      },
+      {
+        "id": 142,
+        "movieMetadataId": 20,
+        "sourceType": "tmdb",
+        "title": "Clive Barker's Candyman"
+      },
+      {
+        "id": 1704,
+        "movieMetadataId": 20,
+        "sourceType": "tmdb",
+        "title": "The Forbidden"
+      }
+    ],
+    "certification": "R",
+    "cleanTitle": "candyman",
+    "collection": {
+      "title": "Candyman Collection",
+      "tmdbId": 98580
+    },
+    "digitalRelease": "1996-03-29T00:00:00Z",
+    "folderName": "/movies/Candyman (1992)",
+    "genres": [
+      "Drama",
+      "Horror",
+      "Thriller"
+    ],
+    "hasFile": true,
+    "id": 20,
+    "images": [
+      {
+        "coverType": "poster",
+        "remoteUrl": "https://image.tmdb.org/t/p/original/jQtgkgDZE7egMq532sOt83DnT83.jpg",
+        "url": "/MediaCover/20/poster.jpg?h=a75b3e969b8fb4de9865"
+      },
+      {
+        "coverType": "fanart",
+        "remoteUrl": "https://image.tmdb.org/t/p/original/l0JgqFNxeMb1OoHq1CzdYC3Y5J8.jpg",
+        "url": "/MediaCover/20/fanart.jpg?h=1b46799330baf1615150"
+      }
+    ],
+    "imdbId": "tt0103919",
+    "inCinemas": "1992-10-16T00:00:00Z",
+    "isAvailable": true,
+    "keywords": [
+      "antagonistic",
+      "based on novel or book",
+      "candyman",
+      "evil",
+      "halloween",
+      "hook for a hand",
+      "housing project",
+      "investigation",
+      "melancholy",
+      "university",
+      "urban",
+      "urban decay",
+      "urban gothic",
+      "urban legend"
+    ],
+    "minimumAvailability": "released",
+    "monitored": true,
+    "movieFile": {
+      "dateAdded": "2026-11-12T09:58:21Z",
+      "edition": "",
+      "id": 407,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 0,
+        "audioChannels": 1,
+        "audioCodec": "AAC",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "10:10",
+        "scanType": "Progressive",
+        "subtitles": "eng",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "x264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 1000
+      },
+      "movieId": 20,
+      "originalFilePath": "Candyman.1992.iTA.ENG.1080p.BluRay.x264-MIRCrew/Candyman.1992.iTA.ENG.1080p.BluRay.x264-MIRCrew.mkv",
+      "path": "/movies/Candyman (1992)/Candyman (1992) {tmdb-9529} - [Bluray-1080p][AAC 1.0][x264]-MIRCrew.mkv",
+      "quality": {
+        "quality": {
+          "id": 7,
+          "modifier": "none",
+          "name": "Bluray-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Candyman (1992) {tmdb-9529} - [Bluray-1080p][AAC 1.0][x264]-MIRCrew.mkv",
+      "releaseGroup": "MIRCrew",
+      "sceneName": "Candyman.1992.iTA.ENG.1080p.BluRay.x264-MIRCrew",
+      "size": 1106640
+    },
+    "movieFileId": 407,
+    "originalLanguage": {
+      "id": 1,
+      "name": "English"
+    },
+    "originalTitle": "Candyman",
+    "overview": "The Candyman, a murderous soul with a hook for a hand, is accidentally summoned to reality by a skeptic grad student researching the monster's myth.",
+    "path": "/movies/Candyman (1992)",
+    "physicalRelease": "1993-07-06T00:00:00Z",
+    "popularity": 4.211,
+    "qualityProfileId": 11,
+    "ratings": {
+      "imdb": {
+        "type": "user",
+        "value": 6.8,
+        "votes": 111747
+      },
+      "metacritic": {
+        "type": "user",
+        "value": 61,
+        "votes": 0
+      },
+      "rottenTomatoes": {
+        "type": "user",
+        "value": 79,
+        "votes": 0
+      },
+      "tmdb": {
+        "type": "user",
+        "value": 6.7,
+        "votes": 1913
+      },
+      "trakt": {
+        "type": "user",
+        "value": 6.89221,
+        "votes": 3785
+      }
+    },
+    "releaseDate": "1993-07-06T00:00:00Z",
+    "rootFolderPath": "/movies",
+    "runtime": 100,
+    "secondaryYearSourceId": 0,
+    "sizeOnDisk": 1106640,
+    "sortTitle": "candyman",
+    "statistics": {
+      "movieFileCount": 1,
+      "movieFileQualities": [
+        {
+          "id": 7,
+          "modifier": "none",
+          "name": "Bluray-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        }
+      ],
+      "releaseGroups": [
+        "MIRCrew"
+      ],
+      "sizeOnDisk": 1106640
+    },
+    "status": "released",
+    "studio": "Propaganda Films",
+    "tags": [],
+    "title": "Candyman",
+    "titleSlug": "9529",
+    "tmdbId": 9529,
+    "website": "",
+    "year": 1992,
+    "youTubeTrailerId": "CeLZMhkFTuU"
+  },
+  "recordedAt": "2026-11-12T10:00:33Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/movie/20"
+  },
+  "status": 200
+}

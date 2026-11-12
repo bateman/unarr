@@ -1,0 +1,163 @@
+{
+  "body": [
+    {
+      "body": {
+        "embeds": [
+          {
+            "author": {
+              "icon_url": "https://raw.githubusercontent.com/Radarr/Radarr/develop/Logo/256.png",
+              "name": "Radarr"
+            },
+            "color": 15749200,
+            "description": "Movie File Deleted",
+            "fields": [
+              {
+                "inline": false,
+                "name": "Reason",
+                "value": "Manual"
+              },
+              {
+                "inline": false,
+                "name": "File name",
+                "value": "```/movies/Nightmare Alley (2021)/Nightmare Alley (2021) {tmdb-597208} - [Bluray-1080p][AAC 1.0][x264]-MIRCrew.mkv```"
+              }
+            ],
+            "timestamp": "2026-11-12T10:00:57.8010597Z",
+            "title": "Nightmare Alley (2021)",
+            "url": "https://www.themoviedb.org/movie/597208"
+          }
+        ],
+        "username": "Unarr fixture"
+      },
+      "headers": {
+        "content-type": "application/json"
+      },
+      "method": "POST",
+      "path": "/discord/api/webhooks/100/fixturetoken",
+      "query": {},
+      "service": "discord"
+    },
+    {
+      "body": {
+        "applicationUrl": "",
+        "deleteReason": "manual",
+        "eventType": "MovieFileDelete",
+        "instanceName": "Radarr",
+        "movie": {
+          "folderPath": "/movies/Nightmare Alley (2021)",
+          "genres": [
+            "Crime",
+            "Drama",
+            "Thriller"
+          ],
+          "id": 70,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/vfn1feL0V9HNSXuLLpaxAW8O6LO.jpg",
+              "url": "/MediaCover/70/poster.jpg?h=e6af977704638a1c94c4"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/g0YNGpmlXsgHfhGnJz3c5uyzZ1B.jpg",
+              "url": "/MediaCover/70/fanart.jpg?h=f1255ff62dff6043f010"
+            }
+          ],
+          "imdbId": "tt7740496",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "An ambitious carnival man with a talent for manipulating people with a few well-chosen words hooks up with a female psychologist who is even more dangerous than he is.",
+          "releaseDate": "2022-03-16",
+          "tags": [],
+          "title": "Nightmare Alley",
+          "tmdbId": 597208,
+          "year": 2021
+        },
+        "movieFile": {
+          "dateAdded": "2026-11-12T09:59:21.360551Z",
+          "id": 409,
+          "indexerFlags": "0",
+          "languages": [
+            {
+              "id": 1,
+              "name": "English"
+            }
+          ],
+          "mediaInfo": {
+            "audioChannels": 1.0,
+            "audioCodec": "AAC",
+            "audioLanguages": [
+              "eng"
+            ],
+            "height": 1080,
+            "subtitles": [
+              "eng"
+            ],
+            "videoCodec": "x264",
+            "videoDynamicRange": "",
+            "videoDynamicRangeType": "",
+            "width": 1920
+          },
+          "path": "/movies/Nightmare Alley (2021)/Nightmare Alley (2021) {tmdb-597208} - [Bluray-1080p][AAC 1.0][x264]-MIRCrew.mkv",
+          "quality": "Bluray-1080p",
+          "qualityVersion": 1,
+          "relativePath": "Nightmare Alley (2021) {tmdb-597208} - [Bluray-1080p][AAC 1.0][x264]-MIRCrew.mkv",
+          "releaseGroup": "MIRCrew",
+          "sceneName": "Nightmare.Alley.2021.1080p.BluRay.x264-MIRCrew",
+          "size": 1106640
+        }
+      },
+      "headers": {
+        "authorization": "Basic aG9vazpzZWNyZXQ=",
+        "content-type": "application/json",
+        "x-fixture": "yes"
+      },
+      "method": "PUT",
+      "path": "/webhook/updated",
+      "query": {},
+      "service": "webhook"
+    },
+    {
+      "body": null,
+      "headers": {},
+      "method": "GET",
+      "path": "/library/sections",
+      "query": {
+        "X-Plex-Client-Identifier": "b77809cf-c4e6-47e0-abcb-f1af24c5301b",
+        "X-Plex-Device-Name": "Radarr",
+        "X-Plex-Platform": "Windows",
+        "X-Plex-Platform-Version": "7",
+        "X-Plex-Product": "Radarr",
+        "X-Plex-Token": "mock-plex-token",
+        "X-Plex-Version": "6.4.4.10685"
+      },
+      "service": "plex"
+    },
+    {
+      "body": null,
+      "headers": {},
+      "method": "GET",
+      "path": "/library/sections/1/refresh",
+      "query": {
+        "X-Plex-Client-Identifier": "b77809cf-c4e6-47e0-abcb-f1af24c5301b",
+        "X-Plex-Device-Name": "Radarr",
+        "X-Plex-Platform": "Windows",
+        "X-Plex-Platform-Version": "7",
+        "X-Plex-Product": "Radarr",
+        "X-Plex-Token": "mock-plex-token",
+        "X-Plex-Version": "6.4.4.10685",
+        "path": "/elsewhere/movies/Nightmare Alley (2021)"
+      },
+      "service": "plex"
+    }
+  ],
+  "recordedAt": "2026-11-12T10:01:09Z",
+  "request": {
+    "method": "GET",
+    "path": "/mock/notifications",
+    "target": "mock"
+  },
+  "status": 200
+}

@@ -1,0 +1,11 @@
+{
+  "body": {
+    "type": "folder"
+  },
+  "recordedAt": "2026-11-12T10:01:09Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/filesystem/type?path=/movies"
+  },
+  "status": 200
+}

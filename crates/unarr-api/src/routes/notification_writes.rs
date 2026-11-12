@@ -5,6 +5,12 @@
 //! (resource rules, then settings, then the connection test) and fails in
 //! their shapes. A test whose request never got an answer escapes as a
 //! 500, as the originals' does.
+//!
+//! Both personalities are served from here: the controller is the same
+//! class in the two originals, and what differs (the event flags of the
+//! definition, which of them enable it, what a test sends) is asked of
+//! the personality's own notifications. Radarr's controller does not
+//! route the bulk actions (`[NonAction]`), so its router leaves them out.
 
 use axum::extract::{Path, State};
 use axum::http::{header, StatusCode, Uri};
@@ -12,9 +18,11 @@ use axum::response::{IntoResponse, Response};
 use axum::Json;
 use serde_json::{json, Map, Value};
 use unarr_core::model::{Provider, ProviderKind};
+use unarr_core::movies::notifications::{self as movie_notifications, MovieNotificationDefinition};
 use unarr_core::notifications::{self, NotificationDefinition, TestOutcome};
 use unarr_core::store;
 use unarr_core::validation::{self, ValidationFailure};
+use unarr_core::Personality;
 
 use crate::error::{ApiError, ApiResult};
 use crate::query::Params;
@@ -105,7 +113,11 @@ fn to_model(
     };
     let settings = schemas::read_fields(schema, &body["fields"], existing.map(|e| &e.settings));
     let mut attributes = Map::new();
-    for name in notifications::FLAGS {
+    let flags = match personality {
+        Personality::Radarr => movie_notifications::FLAGS,
+        _ => notifications::FLAGS,
+    };
+    for name in flags {
         let value = body.get(*name).and_then(Value::as_bool).unwrap_or(false);
         attributes.insert((*name).to_string(), Value::Bool(value));
     }
@@ -125,14 +137,50 @@ fn to_model(
     })
 }
 
-fn definition(p: &Provider) -> NotificationDefinition {
-    NotificationDefinition::from_provider(p)
+/// What the handlers ask of a definition, whichever application's it is.
+struct Definition {
+    /// `NotificationDefinition.Enable`.
+    enabled: bool,
+    /// `definition.Settings.Validate()`.
+    settings_failures: Vec<ValidationFailure>,
+}
+
+fn definition(personality: Personality, p: &Provider) -> Definition {
+    match personality {
+        Personality::Radarr => {
+            let def = MovieNotificationDefinition::from_provider(p);
+            Definition {
+                enabled: def.enabled(),
+                settings_failures: def.validate_settings(),
+            }
+        }
+        _ => {
+            let def = NotificationDefinition::from_provider(p);
+            Definition {
+                enabled: def.enabled(),
+                settings_failures: def.validate_settings(),
+            }
+        }
+    }
 }
 
 /// `_notificationFactory.Test(definition)`.
 async fn test_provider(state: &AppState, p: &Provider) -> ApiResult<Vec<ValidationFailure>> {
     let runtime = state.commands()?;
-    match runtime.notifier().test(&definition(p), state.now()).await {
+    let outcome = match runtime.movie_notifier() {
+        Some(movies) => {
+            movies
+                .test(&MovieNotificationDefinition::from_provider(p), state.now())
+                .await
+        }
+        None => {
+            runtime
+                .notifier()
+                .test(&NotificationDefinition::from_provider(p), state.now())
+                .await
+        }
+    };
+    match outcome {
         TestOutcome::Failures(f) => Ok(f),
         TestOutcome::Error(message) => Err(ApiError::Internal(anyhow::anyhow!(message))),
     }
@@ -161,9 +209,9 @@ pub async fn create(State(state): State<AppState>, uri: Uri, Json(body): Json<Va
     }
     validate_resource(&state, &body, 0, "POST", false).await?;
     let mut provider = to_model(state.personality(), &body, 0, None)?;
-    let def = definition(&provider);
-    if def.enabled() {
-        verify(def.validate_settings(), !force_save)?;
+    let def = definition(state.personality(), &provider);
+    if def.enabled {
+        verify(def.settings_failures, !force_save)?;
         verify(test_provider(&state, &provider).await?, !force_save)?;
     }
     let stored = state
@@ -209,9 +257,9 @@ pub async fn update(
     };
     let provider = to_model(state.personality(), &body, existing.id, Some(&existing))?;
     let changed = provider != existing;
-    let def = definition(&provider);
-    if def.enabled() {
-        verify(def.validate_settings(), !force_save)?;
+    let def = definition(state.personality(), &provider);
+    if def.enabled {
+        verify(def.settings_failures, !force_save)?;
         if !force_save && changed {
             verify(test_provider(&state, &provider).await?, true)?;
         }
@@ -254,7 +302,10 @@ pub async fn test(
     validate_resource(&state, &body, id, "POST", true).await?;
     let existing = if id > 0 { find(&state, id).await? } else { None };
     let provider = to_model(state.personality(), &body, id, existing.as_ref())?;
-    verify(definition(&provider).validate_settings(), !force_test)?;
+    verify(
+        definition(state.personality(), &provider).settings_failures,
+        !force_test,
+    )?;
     verify(test_provider(&state, &provider).await?, true)?;
     Ok(Json(json!({})))
 }
@@ -268,9 +319,9 @@ pub async fn test_all(State(state): State<AppState>) -> ApiResult<Response> {
     let mut providers = list(&state).await?;
     providers.sort_by_key(|p| p.id);
     for p in providers {
-        let def = definition(&p);
-        let settings_failures = def.validate_settings();
-        if validation::has_errors(&settings_failures) || !def.enabled() {
+        let def = definition(state.personality(), &p);
+        let settings_failures = def.settings_failures;
+        if validation::has_errors(&settings_failures) || !def.enabled {
             continue;
         }
         let mut failures: Vec<ValidationFailure> =

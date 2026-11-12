@@ -1,0 +1,1595 @@
+{
+  "body": {
+    "page": 1,
+    "pageSize": 10,
+    "records": [
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 54,
+            "name": "DD"
+          }
+        ],
+        "data": {
+          "customFormatScore": "0",
+          "downloadClient": "SABnzbd",
+          "downloadClientName": "Mock SABnzbd",
+          "droppedPath": "/downloads/complete/movies/BlacKkKlansman.2018.iTA.ENG.1080p.WEB-DL.DD5.1.H264-MeM/BlacKkKlansman.2018.iTA.ENG.1080p.WEB-DL.DD5.1.H264-MeM.mkv",
+          "fileId": "406",
+          "importedPath": "/movies/BlacKkKlansman (2018)/BlacKkKlansman (2018) {tmdb-487558} - [WEBDL-480p][AAC 1.0][x264]-MeM.mkv",
+          "indexerFlags": "0",
+          "releaseGroup": "MeM",
+          "size": "177860"
+        },
+        "date": "2026-11-12T09:57:33Z",
+        "downloadId": "SABnzbd_nzo_mock6",
+        "eventType": "downloadFolderImported",
+        "id": 1022,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "blackkklansman",
+          "digitalRelease": "2018-10-23T00:00:00Z",
+          "folderName": "/movies/BlacKkKlansman (2018)",
+          "genres": [
+            "Crime",
+            "Drama",
+            "History"
+          ],
+          "id": 13,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/8jxqAvSDoneSKRczaK8v9X5gqBp.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/ot3eZ9XfOF42a3zFWluMPWkfCHB.jpg"
+            }
+          ],
+          "imdbId": "tt7349662",
+          "inCinemas": "2018-08-09T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "1970s",
+            "based on memoir or autobiography",
+            "based on novel or book",
+            "based on true story",
+            "biography",
+            "black panther party",
+            "defiant",
+            "kkk rally",
+            "ku klux klan",
+            "racism",
+            "revisionist history",
+            "thoughtful",
+            "undercover cop",
+            "white supremacy"
+          ],
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 406,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "BlacKkKlansman",
+          "overview": "Colorado Springs, late 1970s. Ron Stallworth, an African American police officer, and Flip Zimmerman, his Jewish colleague, run an undercover operation to infiltrate the Ku Klux Klan.",
+          "path": "/movies/BlacKkKlansman (2018)",
+          "physicalRelease": "2018-11-06T00:00:00Z",
+          "popularity": 6.1066,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 7.5,
+              "votes": 318659
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 83,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 95,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7.484,
+              "votes": 8366
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.64445,
+              "votes": 13385
+            }
+          },
+          "releaseDate": "2018-10-23T00:00:00Z",
+          "runtime": 136,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "blackkklansman",
+          "status": "released",
+          "studio": "Legendary Pictures",
+          "tags": [],
+          "title": "BlacKkKlansman",
+          "titleSlug": "487558",
+          "tmdbId": 487558,
+          "website": "https://www.focusfeatures.com/blackkklansman",
+          "year": 2018,
+          "youTubeTrailerId": "7tgMuagdEhc"
+        },
+        "movieId": 13,
+        "quality": {
+          "quality": {
+            "id": 8,
+            "modifier": "none",
+            "name": "WEBDL-480p",
+            "resolution": 480,
+            "source": "webdl"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "sourceTitle": "BlacKkKlansman.2018.iTA.ENG.1080p.WEB-DL.DD5.1.H264-MeM"
+      },
+      {
+        "customFormatScore": -10000,
+        "customFormats": [
+          {
+            "id": 54,
+            "name": "DD"
+          },
+          {
+            "id": 58,
+            "name": "Language not Italian"
+          }
+        ],
+        "data": {
+          "customFormatScore": "-10000",
+          "downloadClient": "SABnzbd",
+          "downloadClientName": "Mock SABnzbd",
+          "droppedPath": "/downloads/complete/movies/Candyman.1992.iTA.ENG.1080p.WEB-DL.DD5.1.H264-MeM/Candyman.1992.iTA.ENG.1080p.WEB-DL.DD5.1.H264-MeM.mkv",
+          "fileId": "405",
+          "importedPath": "/movies/Candyman (1992)/Candyman (1992) {tmdb-9529} - [WEBDL-480p][AAC 1.0][x264]-MeM.mkv",
+          "indexerFlags": "0",
+          "releaseGroup": "MeM",
+          "size": "119980"
+        },
+        "date": "2026-11-12T09:57:21Z",
+        "downloadId": "SABnzbd_nzo_mock7",
+        "eventType": "downloadFolderImported",
+        "id": 1021,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "candyman",
+          "collection": {
+            "title": "Candyman Collection",
+            "tmdbId": 98580
+          },
+          "digitalRelease": "1996-03-29T00:00:00Z",
+          "folderName": "/movies/Candyman (1992)",
+          "genres": [
+            "Drama",
+            "Horror",
+            "Thriller"
+          ],
+          "id": 20,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/jQtgkgDZE7egMq532sOt83DnT83.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/l0JgqFNxeMb1OoHq1CzdYC3Y5J8.jpg"
+            }
+          ],
+          "imdbId": "tt0103919",
+          "inCinemas": "1992-10-16T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "antagonistic",
+            "based on novel or book",
+            "candyman",
+            "evil",
+            "halloween",
+            "hook for a hand",
+            "housing project",
+            "investigation",
+            "melancholy",
+            "university",
+            "urban",
+            "urban decay",
+            "urban gothic",
+            "urban legend"
+          ],
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 405,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Candyman",
+          "overview": "The Candyman, a murderous soul with a hook for a hand, is accidentally summoned to reality by a skeptic grad student researching the monster's myth.",
+          "path": "/movies/Candyman (1992)",
+          "physicalRelease": "1993-07-06T00:00:00Z",
+          "popularity": 4.211,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.8,
+              "votes": 111747
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 61,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 79,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.7,
+              "votes": 1913
+            },
+            "trakt": {
+              "type": "user",
+              "value": 6.89221,
+              "votes": 3785
+            }
+          },
+          "releaseDate": "1993-07-06T00:00:00Z",
+          "runtime": 100,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "candyman",
+          "status": "released",
+          "studio": "Propaganda Films",
+          "tags": [],
+          "title": "Candyman",
+          "titleSlug": "9529",
+          "tmdbId": 9529,
+          "website": "",
+          "year": 1992,
+          "youTubeTrailerId": "CeLZMhkFTuU"
+        },
+        "movieId": 20,
+        "quality": {
+          "quality": {
+            "id": 8,
+            "modifier": "none",
+            "name": "WEBDL-480p",
+            "resolution": 480,
+            "source": "webdl"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "sourceTitle": "Candyman.1992.iTA.ENG.1080p.WEB-DL.DD5.1.H264-MeM"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 54,
+            "name": "DD"
+          }
+        ],
+        "data": {
+          "age": "1",
+          "ageHours": "47.952258678305554",
+          "ageMinutes": "2877.1355207916667",
+          "customFormatScore": "0",
+          "downloadClient": "SABnzbd",
+          "downloadClientName": "Mock SABnzbd",
+          "downloadUrl": "http://127.0.0.1:18989/movies/newznab/download/push-candyman-1992.nzb",
+          "guid": "PUSH-http://127.0.0.1:18989/movies/newznab/download/push-candyman-1992.nzb",
+          "imdbId": "0",
+          "indexer": "Mock Newznab (Prowlarr)",
+          "indexerFlags": "0",
+          "indexerId": "20",
+          "movieMatchType": "Title",
+          "nzbInfoUrl": null,
+          "protocol": "1",
+          "publishedDate": "2026-11-10T10:00:00Z",
+          "releaseGroup": "MeM",
+          "releaseSource": "ReleasePush",
+          "size": "6979321856",
+          "tmdbId": "0"
+        },
+        "date": "2026-11-12T09:57:08Z",
+        "downloadId": "SABnzbd_nzo_mock7",
+        "eventType": "grabbed",
+        "id": 1020,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "candyman",
+          "collection": {
+            "title": "Candyman Collection",
+            "tmdbId": 98580
+          },
+          "digitalRelease": "1996-03-29T00:00:00Z",
+          "folderName": "/movies/Candyman (1992)",
+          "genres": [
+            "Drama",
+            "Horror",
+            "Thriller"
+          ],
+          "id": 20,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/jQtgkgDZE7egMq532sOt83DnT83.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/l0JgqFNxeMb1OoHq1CzdYC3Y5J8.jpg"
+            }
+          ],
+          "imdbId": "tt0103919",
+          "inCinemas": "1992-10-16T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "antagonistic",
+            "based on novel or book",
+            "candyman",
+            "evil",
+            "halloween",
+            "hook for a hand",
+            "housing project",
+            "investigation",
+            "melancholy",
+            "university",
+            "urban",
+            "urban decay",
+            "urban gothic",
+            "urban legend"
+          ],
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 405,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Candyman",
+          "overview": "The Candyman, a murderous soul with a hook for a hand, is accidentally summoned to reality by a skeptic grad student researching the monster's myth.",
+          "path": "/movies/Candyman (1992)",
+          "physicalRelease": "1993-07-06T00:00:00Z",
+          "popularity": 4.211,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.8,
+              "votes": 111747
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 61,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 79,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.7,
+              "votes": 1913
+            },
+            "trakt": {
+              "type": "user",
+              "value": 6.89221,
+              "votes": 3785
+            }
+          },
+          "releaseDate": "1993-07-06T00:00:00Z",
+          "runtime": 100,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "candyman",
+          "status": "released",
+          "studio": "Propaganda Films",
+          "tags": [],
+          "title": "Candyman",
+          "titleSlug": "9529",
+          "tmdbId": 9529,
+          "website": "",
+          "year": 1992,
+          "youTubeTrailerId": "CeLZMhkFTuU"
+        },
+        "movieId": 20,
+        "quality": {
+          "quality": {
+            "id": 3,
+            "modifier": "none",
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "webdl"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "sourceTitle": "Candyman.1992.iTA.ENG.1080p.WEB-DL.DD5.1.H264-MeM"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 54,
+            "name": "DD"
+          }
+        ],
+        "data": {
+          "age": "2",
+          "ageHours": "49.95170233319445",
+          "ageMinutes": "2997.10214012",
+          "customFormatScore": "0",
+          "downloadClient": "SABnzbd",
+          "downloadClientName": "Mock SABnzbd",
+          "downloadUrl": "http://127.0.0.1:18989/movies/newznab/download/push-blackkklansman-2018.nzb",
+          "guid": "PUSH-http://127.0.0.1:18989/movies/newznab/download/push-blackkklansman-2018.nzb",
+          "imdbId": "0",
+          "indexer": "Mock Newznab (Prowlarr)",
+          "indexerFlags": "0",
+          "indexerId": "20",
+          "movieMatchType": "Title",
+          "nzbInfoUrl": null,
+          "protocol": "1",
+          "publishedDate": "2026-11-10T08:00:00Z",
+          "releaseGroup": "MeM",
+          "releaseSource": "ReleasePush",
+          "size": "7516192768",
+          "tmdbId": "0"
+        },
+        "date": "2026-11-12T09:57:06Z",
+        "downloadId": "SABnzbd_nzo_mock6",
+        "eventType": "grabbed",
+        "id": 1019,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "blackkklansman",
+          "digitalRelease": "2018-10-23T00:00:00Z",
+          "folderName": "/movies/BlacKkKlansman (2018)",
+          "genres": [
+            "Crime",
+            "Drama",
+            "History"
+          ],
+          "id": 13,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/8jxqAvSDoneSKRczaK8v9X5gqBp.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/ot3eZ9XfOF42a3zFWluMPWkfCHB.jpg"
+            }
+          ],
+          "imdbId": "tt7349662",
+          "inCinemas": "2018-08-09T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "1970s",
+            "based on memoir or autobiography",
+            "based on novel or book",
+            "based on true story",
+            "biography",
+            "black panther party",
+            "defiant",
+            "kkk rally",
+            "ku klux klan",
+            "racism",
+            "revisionist history",
+            "thoughtful",
+            "undercover cop",
+            "white supremacy"
+          ],
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 406,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "BlacKkKlansman",
+          "overview": "Colorado Springs, late 1970s. Ron Stallworth, an African American police officer, and Flip Zimmerman, his Jewish colleague, run an undercover operation to infiltrate the Ku Klux Klan.",
+          "path": "/movies/BlacKkKlansman (2018)",
+          "physicalRelease": "2018-11-06T00:00:00Z",
+          "popularity": 6.1066,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 7.5,
+              "votes": 318659
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 83,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 95,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7.484,
+              "votes": 8366
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.64445,
+              "votes": 13385
+            }
+          },
+          "releaseDate": "2018-10-23T00:00:00Z",
+          "runtime": 136,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "blackkklansman",
+          "status": "released",
+          "studio": "Legendary Pictures",
+          "tags": [],
+          "title": "BlacKkKlansman",
+          "titleSlug": "487558",
+          "tmdbId": 487558,
+          "website": "https://www.focusfeatures.com/blackkklansman",
+          "year": 2018,
+          "youTubeTrailerId": "7tgMuagdEhc"
+        },
+        "movieId": 13,
+        "quality": {
+          "quality": {
+            "id": 3,
+            "modifier": "none",
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "webdl"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "sourceTitle": "BlacKkKlansman.2018.iTA.ENG.1080p.WEB-DL.DD5.1.H264-MeM"
+      },
+      {
+        "customFormatScore": -10000,
+        "customFormats": [
+          {
+            "id": 50,
+            "name": "DD+"
+          },
+          {
+            "id": 58,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 4,
+            "name": "WEB Tier 01"
+          }
+        ],
+        "data": {
+          "age": "3",
+          "ageHours": "83.26781551594445",
+          "ageMinutes": "4996.068931108333",
+          "customFormatScore": "0",
+          "downloadClient": "SABnzbd",
+          "downloadClientName": "Mock SABnzbd",
+          "downloadUrl": "http://127.0.0.1:18989/movies/newznab/download/a21dcc90a30f28c9f1321274f0a62f4c.nzb",
+          "guid": "http://127.0.0.1:18989/movies/newznab/details/a21dcc90a30f28c9f1321274f0a62f4c",
+          "imdbId": "0",
+          "indexer": "Mock Newznab (Prowlarr)",
+          "indexerFlags": "0",
+          "indexerId": "20",
+          "movieMatchType": "Unknown",
+          "nzbInfoUrl": "http://127.0.0.1:18989/movies/newznab/details/a21dcc90a30f28c9f1321274f0a62f4c",
+          "protocol": "1",
+          "publishedDate": "2026-11-08T22:41:00Z",
+          "releaseGroup": "NTb",
+          "releaseSource": "Rss",
+          "size": "5153960755",
+          "tmdbId": "0"
+        },
+        "date": "2026-11-12T09:57:04Z",
+        "downloadId": "SABnzbd_nzo_mock5",
+        "eventType": "grabbed",
+        "id": 1018,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "backcountry",
+          "digitalRelease": "2020-10-09T00:00:00Z",
+          "folderName": "/movies/Backcountry (2015)",
+          "genres": [
+            "Horror",
+            "Thriller",
+            "Drama"
+          ],
+          "id": 10,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/AdIkDCWcBqv1B10ncm71sMiqEEF.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/fX8OjnkkWnGJdQ7tkpf8z7la4Xu.jpg"
+            }
+          ],
+          "imdbId": "tt2944198",
+          "inCinemas": "2015-03-20T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "animal attack",
+            "based on true story",
+            "bear",
+            "bear attack",
+            "black bear",
+            "camping",
+            "canoe",
+            "frightened",
+            "gore",
+            "grave",
+            "lost in the woods",
+            "nature",
+            "ontario, canada",
+            "survival",
+            "tragic",
+            "woods"
+          ],
+          "lastSearchTime": "2026-06-24T19:43:56Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Backcountry",
+          "overview": "A couple on a deep-wilderness hike become hopelessly lost within an aggressive black bear's territory.",
+          "path": "/movies/Backcountry (2015)",
+          "physicalRelease": "2015-05-28T00:00:00Z",
+          "popularity": 2.177,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6,
+              "votes": 27766
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 62,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 93,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 5.968,
+              "votes": 760
+            },
+            "trakt": {
+              "type": "user",
+              "value": 6.22392,
+              "votes": 1246
+            }
+          },
+          "releaseDate": "2015-05-28T00:00:00Z",
+          "runtime": 92,
+          "secondaryYear": 2014,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "backcountry",
+          "status": "released",
+          "studio": "Fella Films",
+          "tags": [
+            1
+          ],
+          "title": "Backcountry",
+          "titleSlug": "228973",
+          "tmdbId": 228973,
+          "website": "http://backcountryfilm.com/",
+          "year": 2015,
+          "youTubeTrailerId": "46uwmzTf5nA"
+        },
+        "movieId": 10,
+        "quality": {
+          "quality": {
+            "id": 3,
+            "modifier": "none",
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "webdl"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": true,
+        "sourceTitle": "An.Unknown.Movie.2024.1080p.WEB-DL.DDP5.1.H.264-NTb"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 52,
+            "name": "DTS"
+          }
+        ],
+        "data": {
+          "downloadClient": "redacted",
+          "downloadClientName": null,
+          "indexer": "Indexer",
+          "message": "Manually marked as failed",
+          "releaseGroup": null,
+          "size": "8740258447"
+        },
+        "date": "2026-11-12T09:56:53Z",
+        "downloadId": "932161398c8420b934b0d047c43b66b8d1337383",
+        "eventType": "downloadFailed",
+        "id": 1017,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-11-11T07:53:41Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "predestination",
+          "digitalRelease": "2014-08-28T00:00:00Z",
+          "folderName": "/movies/Predestination (2014) {tmdb-206487}",
+          "genres": [
+            "Science Fiction",
+            "Thriller"
+          ],
+          "id": 327,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/38Xr1JnV1ZcLQ55zmdSp6n475cZ.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/cvq9cRMDJIGzNpHaPVGFftqPcLj.jpg"
+            }
+          ],
+          "imdbId": "tt2397535",
+          "inCinemas": "2014-08-28T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "baffled",
+            "bartender",
+            "based on short story",
+            "bomber",
+            "determinism",
+            "excited",
+            "fate",
+            "intersex",
+            "intersexuality",
+            "loner",
+            "mission",
+            "orphanage",
+            "philosophical",
+            "pregnancy",
+            "secret organization",
+            "shocking",
+            "temporal agent",
+            "terrorism",
+            "time machine",
+            "time paradox",
+            "time travel"
+          ],
+          "lastSearchTime": "2026-11-12T09:56:55Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 404,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Predestination",
+          "overview": "Predestination chronicles the life of a Temporal Agent sent on an intricate series of time-travel journeys designed to prevent future killers from committing their crimes. Now, on his final assignment, the Agent must stop the one criminal that has eluded him throughout time and prevent a devastating attack in which thousands of lives will be lost.",
+          "path": "/movies/Predestination (2014) {tmdb-206487}",
+          "physicalRelease": "2014-11-28T00:00:00Z",
+          "popularity": 7.7869,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 7.4,
+              "votes": 343095
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 69,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 84,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7.412,
+              "votes": 7468
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.54082,
+              "votes": 13193
+            }
+          },
+          "releaseDate": "2014-08-28T00:00:00Z",
+          "runtime": 98,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "predestination",
+          "status": "released",
+          "studio": "Screen Queensland",
+          "tags": [
+            1
+          ],
+          "title": "Predestination",
+          "titleSlug": "206487",
+          "tmdbId": 206487,
+          "website": "https://www.sonypictures.com/movies/predestination",
+          "year": 2014,
+          "youTubeTrailerId": "xxG-YfedrfU"
+        },
+        "movieId": 327,
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "Predestination 2014 DTS ITA ENG 1080p BluRay x264 BLUWORLD mkv torrent"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [],
+        "data": {
+          "age": "2",
+          "ageHours": "60.44558300486111",
+          "ageMinutes": "3626.7349803883335",
+          "customFormatScore": "0",
+          "downloadClient": "Transmission",
+          "downloadClientName": "Mock Transmission",
+          "downloadUrl": "http://127.0.0.1:18989/movies/torznab/download/d94f74e9588477404bd8d34ffc605870.torrent",
+          "guid": "http://127.0.0.1:18989/movies/torznab/details/d94f74e9588477404bd8d34ffc605870",
+          "imdbId": "0",
+          "indexer": "Mock Torznab (Prowlarr)",
+          "indexerFlags": "0",
+          "indexerId": "21",
+          "movieMatchType": "Title",
+          "nzbInfoUrl": "http://127.0.0.1:18989/movies/torznab/details/d94f74e9588477404bd8d34ffc605870",
+          "protocol": "2",
+          "publishedDate": "2026-11-09T21:30:00Z",
+          "releaseGroup": "MIRCrew",
+          "releaseSource": "Search",
+          "size": "7945689497",
+          "tmdbId": "0",
+          "torrentInfoHash": "7e59b884110362736e39ead456edcbdac5ef0fe6"
+        },
+        "date": "2026-11-12T09:56:44Z",
+        "downloadId": "B133034E90669E52E3BA3460A651D3545769CB85",
+        "eventType": "grabbed",
+        "id": 1016,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "theholdovers",
+          "digitalRelease": "2023-11-28T00:00:00Z",
+          "folderName": "/movies/The Holdovers (2023)",
+          "genres": [
+            "Drama",
+            "Comedy"
+          ],
+          "id": 116,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/VHSzNBTwxV8vh7wylo7O9CLdac.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/57fhbxl9is7W7ur5v6UuvlNsoSg.jpg"
+            }
+          ],
+          "imdbId": "tt14849194",
+          "inCinemas": "2023-10-27T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "1970s",
+            "adoring",
+            "alcoholism",
+            "boarding school",
+            "boston, massachusetts",
+            "boys' boarding school",
+            "christmas",
+            "christmastime",
+            "cook",
+            "grief",
+            "holiday",
+            "loss of son",
+            "melancholy",
+            "mental illness",
+            "misfit",
+            "new england",
+            "peaceful",
+            "teacher student relationship",
+            "troubled youth",
+            "vietnam war",
+            "winter",
+            "winter break"
+          ],
+          "lastSearchTime": "2026-11-12T09:56:42Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "The Holdovers",
+          "overview": "A curmudgeonly instructor at a New England prep school is forced to remain on campus during Christmas break to babysit the handful of students with nowhere to go. Eventually, he forms an unlikely bond with one of them — a damaged, brainy troublemaker — and with the school’s head cook, who has just lost a son in Vietnam.",
+          "path": "/movies/The Holdovers (2023)",
+          "physicalRelease": "2024-01-02T00:00:00Z",
+          "popularity": 7.2706,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 7.9,
+              "votes": 276206
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 82,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 97,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7.65,
+              "votes": 2774
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.95453,
+              "votes": 12734
+            }
+          },
+          "releaseDate": "2023-11-28T00:00:00Z",
+          "runtime": 133,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "holdovers",
+          "status": "released",
+          "studio": "Miramax",
+          "tags": [
+            1
+          ],
+          "title": "The Holdovers",
+          "titleSlug": "840430",
+          "tmdbId": 840430,
+          "website": "http://focusfeatures.com/the-holdovers",
+          "year": 2023,
+          "youTubeTrailerId": "AhKLpJmHhIg"
+        },
+        "movieId": 116,
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "The.Holdovers.2023.iTA.ENG.1080p.BluRay.x264-MIRCrew"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [],
+        "data": {
+          "downloadClient": "SABnzbd",
+          "downloadClientName": "Mock SABnzbd",
+          "indexer": "Mock Newznab (Prowlarr)",
+          "message": "Unpacking failed, archive requires a password",
+          "releaseGroup": "MIRCrew",
+          "size": "768000"
+        },
+        "date": "2026-11-12T09:56:41Z",
+        "downloadId": "SABnzbd_nzo_mock3",
+        "eventType": "downloadFailed",
+        "id": 1015,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "theholdovers",
+          "digitalRelease": "2023-11-28T00:00:00Z",
+          "folderName": "/movies/The Holdovers (2023)",
+          "genres": [
+            "Drama",
+            "Comedy"
+          ],
+          "id": 116,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/VHSzNBTwxV8vh7wylo7O9CLdac.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/57fhbxl9is7W7ur5v6UuvlNsoSg.jpg"
+            }
+          ],
+          "imdbId": "tt14849194",
+          "inCinemas": "2023-10-27T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "1970s",
+            "adoring",
+            "alcoholism",
+            "boarding school",
+            "boston, massachusetts",
+            "boys' boarding school",
+            "christmas",
+            "christmastime",
+            "cook",
+            "grief",
+            "holiday",
+            "loss of son",
+            "melancholy",
+            "mental illness",
+            "misfit",
+            "new england",
+            "peaceful",
+            "teacher student relationship",
+            "troubled youth",
+            "vietnam war",
+            "winter",
+            "winter break"
+          ],
+          "lastSearchTime": "2026-11-12T09:56:42Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "The Holdovers",
+          "overview": "A curmudgeonly instructor at a New England prep school is forced to remain on campus during Christmas break to babysit the handful of students with nowhere to go. Eventually, he forms an unlikely bond with one of them — a damaged, brainy troublemaker — and with the school’s head cook, who has just lost a son in Vietnam.",
+          "path": "/movies/The Holdovers (2023)",
+          "physicalRelease": "2024-01-02T00:00:00Z",
+          "popularity": 7.2706,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 7.9,
+              "votes": 276206
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 82,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 97,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7.65,
+              "votes": 2774
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.95453,
+              "votes": 12734
+            }
+          },
+          "releaseDate": "2023-11-28T00:00:00Z",
+          "runtime": 133,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "holdovers",
+          "status": "released",
+          "studio": "Miramax",
+          "tags": [
+            1
+          ],
+          "title": "The Holdovers",
+          "titleSlug": "840430",
+          "tmdbId": 840430,
+          "website": "http://focusfeatures.com/the-holdovers",
+          "year": 2023,
+          "youTubeTrailerId": "AhKLpJmHhIg"
+        },
+        "movieId": 116,
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "The.Holdovers.2023.iTA.ENG.1080p.BluRay.x264-MIRCrew"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [],
+        "data": {
+          "age": "2",
+          "ageHours": "60.70440643902778",
+          "ageMinutes": "3642.2643864666666",
+          "customFormatScore": "0",
+          "downloadClient": "SABnzbd",
+          "downloadClientName": "Mock SABnzbd",
+          "downloadUrl": "http://127.0.0.1:18989/movies/newznab/download/fd04f3b8c14e7d33d5e992475f5fef5b.nzb",
+          "guid": "http://127.0.0.1:18989/movies/newznab/details/fd04f3b8c14e7d33d5e992475f5fef5b",
+          "imdbId": "14849194",
+          "indexer": "Mock Newznab (Prowlarr)",
+          "indexerFlags": "0",
+          "indexerId": "20",
+          "movieMatchType": "Id",
+          "nzbInfoUrl": "http://127.0.0.1:18989/movies/newznab/details/fd04f3b8c14e7d33d5e992475f5fef5b",
+          "protocol": "1",
+          "publishedDate": "2026-11-09T21:14:00Z",
+          "releaseGroup": "MIRCrew",
+          "releaseSource": "UserInvokedSearch",
+          "size": "7945689497",
+          "tmdbId": "840430"
+        },
+        "date": "2026-11-12T09:56:15Z",
+        "downloadId": "SABnzbd_nzo_mock3",
+        "eventType": "grabbed",
+        "id": 1014,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "theholdovers",
+          "digitalRelease": "2023-11-28T00:00:00Z",
+          "folderName": "/movies/The Holdovers (2023)",
+          "genres": [
+            "Drama",
+            "Comedy"
+          ],
+          "id": 116,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/VHSzNBTwxV8vh7wylo7O9CLdac.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/57fhbxl9is7W7ur5v6UuvlNsoSg.jpg"
+            }
+          ],
+          "imdbId": "tt14849194",
+          "inCinemas": "2023-10-27T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "1970s",
+            "adoring",
+            "alcoholism",
+            "boarding school",
+            "boston, massachusetts",
+            "boys' boarding school",
+            "christmas",
+            "christmastime",
+            "cook",
+            "grief",
+            "holiday",
+            "loss of son",
+            "melancholy",
+            "mental illness",
+            "misfit",
+            "new england",
+            "peaceful",
+            "teacher student relationship",
+            "troubled youth",
+            "vietnam war",
+            "winter",
+            "winter break"
+          ],
+          "lastSearchTime": "2026-11-12T09:56:42Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "The Holdovers",
+          "overview": "A curmudgeonly instructor at a New England prep school is forced to remain on campus during Christmas break to babysit the handful of students with nowhere to go. Eventually, he forms an unlikely bond with one of them — a damaged, brainy troublemaker — and with the school’s head cook, who has just lost a son in Vietnam.",
+          "path": "/movies/The Holdovers (2023)",
+          "physicalRelease": "2024-01-02T00:00:00Z",
+          "popularity": 7.2706,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 7.9,
+              "votes": 276206
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 82,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 97,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7.65,
+              "votes": 2774
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.95453,
+              "votes": 12734
+            }
+          },
+          "releaseDate": "2023-11-28T00:00:00Z",
+          "runtime": 133,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "holdovers",
+          "status": "released",
+          "studio": "Miramax",
+          "tags": [
+            1
+          ],
+          "title": "The Holdovers",
+          "titleSlug": "840430",
+          "tmdbId": 840430,
+          "website": "http://focusfeatures.com/the-holdovers",
+          "year": 2023,
+          "youTubeTrailerId": "AhKLpJmHhIg"
+        },
+        "movieId": 116,
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "The.Holdovers.2023.iTA.ENG.1080p.BluRay.x264-MIRCrew"
+      },
+      {
+        "customFormatScore": 0,
+        "customFormats": [],
+        "data": {
+          "age": "2",
+          "ageHours": "62.85109034422222",
+          "ageMinutes": "3771.0654208016667",
+          "customFormatScore": "0",
+          "downloadClient": "qBittorrent",
+          "downloadClientName": "Mock qBittorrent",
+          "downloadUrl": "http://127.0.0.1:18989/movies/torznab/download/c8949b89db6f20a1e049aa8170a7a05c.torrent",
+          "guid": "http://127.0.0.1:18989/movies/torznab/details/c8949b89db6f20a1e049aa8170a7a05c",
+          "imdbId": "9639470",
+          "indexer": "Mock Torznab (Prowlarr)",
+          "indexerFlags": "G_Freeleech",
+          "indexerId": "21",
+          "movieMatchType": "Id",
+          "nzbInfoUrl": "http://127.0.0.1:18989/movies/torznab/details/c8949b89db6f20a1e049aa8170a7a05c",
+          "protocol": "2",
+          "publishedDate": "2026-11-09T19:05:00Z",
+          "releaseGroup": "MIRCrew",
+          "releaseSource": "Rss",
+          "size": "6979321856",
+          "tmdbId": "0",
+          "torrentInfoHash": "d0c1309e36cdb92c5d7b4abfd794f9bdff969920"
+        },
+        "date": "2026-11-12T09:56:03Z",
+        "downloadId": "13706ED57ADBE030F510BEDCD37595376901117C",
+        "eventType": "grabbed",
+        "id": 1013,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "lastnightinsoho",
+          "digitalRelease": "2021-11-19T00:00:00Z",
+          "folderName": "/movies/Last Night in Soho (2021)",
+          "genres": [
+            "Horror",
+            "Mystery",
+            "Thriller"
+          ],
+          "id": 62,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/n1ZRmjlk1BJTY7aASqACfPAaLn2.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/nPWy5KISy7BbUOQcg588dflKzTL.jpg"
+            }
+          ],
+          "imdbId": "tt9639470",
+          "inCinemas": "2021-10-09T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "1960s",
+            "amused",
+            "audacious",
+            "burlesque",
+            "clairvoyant",
+            "fashion design",
+            "fashion designer",
+            "go-go dancer",
+            "london, england",
+            "mirror",
+            "murder",
+            "mysterious",
+            "nightmare",
+            "nostalgia",
+            "psychological horror",
+            "pub",
+            "soho london",
+            "somber",
+            "suspenseful",
+            "time travel"
+          ],
+          "lastSearchTime": "2026-03-12T19:45:03Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Last Night in Soho",
+          "overview": "A young girl, passionate about fashion design, is mysteriously able to enter the 1960s where she encounters her idol, a dazzling wannabe singer. But 1960s London is not what it seems, and time seems to be falling apart with shady consequences.",
+          "path": "/movies/Last Night in Soho (2021)",
+          "physicalRelease": "2022-01-18T00:00:00Z",
+          "popularity": 5.6875,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 7,
+              "votes": 203777
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 65,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 75,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7.253,
+              "votes": 4115
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.08181,
+              "votes": 8728
+            }
+          },
+          "releaseDate": "2021-11-19T00:00:00Z",
+          "runtime": 116,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "last night in soho",
+          "status": "released",
+          "studio": "Focus Features",
+          "tags": [
+            1
+          ],
+          "title": "Last Night in Soho",
+          "titleSlug": "576845",
+          "tmdbId": 576845,
+          "website": "https://www.focusfeatures.com/last-night-in-soho",
+          "year": 2021,
+          "youTubeTrailerId": "XgNrL4Kf7yU"
+        },
+        "movieId": 62,
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "sourceTitle": "Last.Night.in.Soho.2021.iTA.ENG.1080p.BluRay.x264-MIRCrew"
+      }
+    ],
+    "sortDirection": "descending",
+    "sortKey": "date",
+    "totalRecords": 683
+  },
+  "recordedAt": "2026-11-12T09:58:08Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/history?page=1&pageSize=10&sortKey=date&sortDirection=descending&includeMovie=true"
+  },
+  "status": 200
+}

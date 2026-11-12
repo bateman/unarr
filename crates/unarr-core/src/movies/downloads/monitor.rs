@@ -13,6 +13,7 @@ use crate::decision::ReleaseSource;
 use crate::downloadclients::{Client, DownloadClientDefinition, DownloadClientItem, DownloadItemStatus};
 use crate::downloads::TrackedDownloadState;
 use crate::movies::decision::{mapping, MovieCatalog, MovieLookup, MovieMatchType, StoreMovieLookup};
+use crate::movies::import::events::{MovieImportEvent, MovieManualInteractionRequired};
 use crate::movies::model::{Movie, MovieHistoryEvent};
 use crate::movies::parser::parse_movie_title;
 use crate::movies::store;
@@ -51,12 +52,13 @@ pub async fn refresh(downloads: &MovieDownloads, now: DateTime<Utc>) -> anyhow::
     }
     let existing = downloads.tracked_downloads();
     let config = downloads.db().call(|conn| EngineConfig::load(conn)).await?;
-    let tracked_now: Vec<TrackedMovieDownload> = downloads
+    let (tracked_now, raised): (Vec<TrackedMovieDownload>, Vec<MovieImportEvent>) = downloads
         .db()
         .call(move |conn| {
             let catalog = MovieCatalog::load(conn, now)?;
             let lookup = StoreMovieLookup { conn };
             let mut out = Vec::new();
+            let mut raised = Vec::new();
             for (definition, item, import_item) in fetched {
                 let previous = existing
                     .iter()
@@ -73,14 +75,14 @@ pub async fn refresh(downloads: &MovieDownloads, now: DateTime<Utc>) -> anyhow::
                             TrackedDownloadState::Downloading | TrackedDownloadState::ImportBlocked
                         ) {
                             failed::check(conn, &mut t)?;
-                            completed_check(conn, &lookup, &mut t)?;
+                            completed_check(conn, &lookup, &mut t, &mut raised)?;
                         }
                         out.push(t);
                     }
                     Err(e) => tracing::error!(title, error = %e, "couldn't process tracked download"),
                 }
             }
-            Ok(out)
+            Ok((out, raised))
         })
         .await?;
     // `DownloadProcessingService`: failures past their check are recorded.
@@ -121,11 +123,12 @@ pub async fn refresh(downloads: &MovieDownloads, now: DateTime<Utc>) -> anyhow::
         }
     }
     downloads.rebuild_queue(now);
+    downloads.raised.lock().unwrap().extend(raised);
     Ok(downloads.queue() != before)
 }
 
 /// `ParsingService.GetMovie(title)`.
-fn movie_for_title(lookup: &dyn MovieLookup, title: &str) -> Option<Movie> {
+pub(crate) fn movie_for_title(lookup: &dyn MovieLookup, title: &str) -> Option<Movie> {
     match parse_movie_title(title, false) {
         Some(parsed) => mapping::find_movie(lookup, &parsed, "", 0, None)
             .ok()
@@ -137,12 +140,34 @@ fn movie_for_title(lookup: &dyn MovieLookup, title: &str) -> Option<Movie> {
     }
 }
 
+/// `SetStateToImportBlocked`: blocked, and `ManualInteractionRequiredEvent`
+/// raised the first time, with what the grabs of the download say.
+fn set_import_blocked(
+    t: &mut TrackedMovieDownload,
+    grabbed: &[crate::movies::model::MovieHistoryEntry],
+    raised: &mut Vec<MovieImportEvent>,
+) {
+    t.state = TrackedDownloadState::ImportBlocked;
+    if t.has_notified_manual_interaction_required {
+        return;
+    }
+    t.has_notified_manual_interaction_required = true;
+    let release = (!grabbed.is_empty()).then(|| crate::movies::import::aggregate::grabbed_release(grabbed));
+    raised.push(MovieImportEvent::ManualInteractionRequired(Box::new(
+        MovieManualInteractionRequired {
+            tracked: t.clone(),
+            release,
+        },
+    )));
+}
+
 /// `CompletedDownloadService.Check` up to the point an import would start:
 /// the download is left `ImportPending` for the importer of milestone 4c.
 fn completed_check(
     conn: &rusqlite::Connection,
     lookup: &dyn MovieLookup,
     t: &mut TrackedMovieDownload,
+    raised: &mut Vec<MovieImportEvent>,
 ) -> anyhow::Result<()> {
     if t.item.status != DownloadItemStatus::Completed {
         return Ok(());
@@ -189,7 +214,7 @@ fn completed_check(
         };
         let (Some(_), Some(h)) = (movie, history_item) else {
             t.warn("Movie title mismatch, automatic import is not possible. Manual Import required.");
-            t.state = TrackedDownloadState::ImportBlocked;
+            set_import_blocked(t, &grabbed, raised);
             return Ok(());
         };
         let match_type = h.data["movieMatchType"].as_str().unwrap_or("");
@@ -200,7 +225,7 @@ fn completed_check(
             t.warn(
                 "Found matching movie via grab history, but release was matched to movie by ID. Manual Import required.",
             );
-            t.state = TrackedDownloadState::ImportBlocked;
+            set_import_blocked(t, &grabbed, raised);
             return Ok(());
         }
     }

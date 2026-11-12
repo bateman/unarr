@@ -2,10 +2,10 @@
   "body": {
     "status": 404,
     "title": "Not Found",
-    "traceId": "00-34bd07d5626cdbc706bb919df72d7e9f-4681d33c0ea93e9a-00",
+    "traceId": "00-d37dff07e4dcf5c58cf11d91e80de049-971b3d4d1e874b26-00",
     "type": "https://tools.ietf.org/html/rfc9110#section-15.5.5"
   },
-  "recordedAt": "2026-11-11T22:01:20Z",
+  "recordedAt": "2026-11-12T09:56:41Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/command/999999"

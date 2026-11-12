@@ -39,7 +39,7 @@
       "hash": "a1d726129535e739d4efaf93b5fdd771bb1c78349f55ceac70e365e37b5a12a3",
       "installable": false,
       "installed": true,
-      "installedOn": "2026-11-11T22:00:00Z",
+      "installedOn": "2026-11-12T09:55:21Z",
       "latest": true,
       "releaseDate": "2026-09-16T18:13:40Z",
       "url": "https://github.com/Radarr/Radarr/releases/download/v6.4.4.10685/Radarr.master.6.4.4.10685.linux-core-x64.tar.gz",
@@ -130,7 +130,7 @@
       "version": "6.0.4.10291"
     }
   ],
-  "recordedAt": "2026-11-11T22:00:01Z",
+  "recordedAt": "2026-11-12T09:55:22Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/update"

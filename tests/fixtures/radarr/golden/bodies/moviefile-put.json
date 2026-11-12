@@ -1,0 +1,28 @@
+{
+  "id": "{id:manualimport-moviefiles-62}",
+  "movieId": 62,
+  "quality": {
+    "quality": {
+      "id": 3,
+      "name": "WEBDL-1080p",
+      "source": "webdl",
+      "resolution": 1080,
+      "modifier": "none"
+    },
+    "revision": {
+      "version": 1,
+      "real": 0,
+      "isRepack": false
+    }
+  },
+  "languages": [
+    {
+      "id": 5,
+      "name": "Italian"
+    }
+  ],
+  "edition": "Extended",
+  "releaseGroup": "GRP",
+  "sceneName": "Last.Night.in.Soho.2021.1080p.WEB-DL.x264-GRP",
+  "indexerFlags": 1
+}

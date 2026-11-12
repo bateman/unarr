@@ -1,0 +1,9 @@
+{
+  "body": [],
+  "recordedAt": "2026-11-12T09:58:57Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/moviefile?movieId=13"
+  },
+  "status": 200
+}

@@ -95,9 +95,40 @@ fn specs(format: &CustomFormat) -> Vec<Spec<'_>> {
 /// Compiled specification regexes, by pattern. A library has a few hundred
 /// specifications and every file and history row is matched against all of
 /// them, so compiling on each call dominated response times.
+type PatternCache = Mutex<HashMap<String, Option<Arc<fancy_regex::Regex>>>>;
+
+fn pattern_cache() -> &'static PatternCache {
+    static CACHE: OnceLock<PatternCache> = OnceLock::new();
+    CACHE.get_or_init(Default::default)
+}
+
+/// When a specification regex was last asked for.
+fn last_used() -> &'static Mutex<Option<std::time::Instant>> {
+    static LAST: OnceLock<Mutex<Option<std::time::Instant>>> = OnceLock::new();
+    LAST.get_or_init(Default::default)
+}
+
+/// Forget the compiled specification regexes when none was asked for in
+/// `max_idle`; they are compiled again when next matched. Returns how
+/// many were let go.
+pub fn release_idle(max_idle: std::time::Duration) -> usize {
+    let idle = last_used()
+        .lock()
+        .unwrap()
+        .is_none_or(|at| at.elapsed() >= max_idle);
+    if !idle {
+        return 0;
+    }
+    let mut cache = pattern_cache().lock().unwrap();
+    let released = cache.len();
+    cache.clear();
+    cache.shrink_to_fit();
+    released
+}
+
 fn compiled(pattern: &str) -> Option<Arc<fancy_regex::Regex>> {
-    static CACHE: OnceLock<Mutex<HashMap<String, Option<Arc<fancy_regex::Regex>>>>> = OnceLock::new();
-    let cache = CACHE.get_or_init(Default::default);
+    let cache = pattern_cache();
+    *last_used().lock().unwrap() = Some(std::time::Instant::now());
     if let Some(hit) = cache.lock().unwrap().get(pattern) {
         return hit.clone();
     }

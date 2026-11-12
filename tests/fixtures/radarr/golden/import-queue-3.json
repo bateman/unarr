@@ -1,0 +1,903 @@
+{
+  "body": {
+    "page": 1,
+    "pageSize": 20,
+    "records": [
+      {
+        "added": "2026-11-12T09:56:03Z",
+        "customFormatScore": 0,
+        "customFormats": [],
+        "downloadClient": "Mock qBittorrent",
+        "downloadClientHasPostImportCategory": false,
+        "downloadId": "13706ED57ADBE030F510BEDCD37595376901117C",
+        "estimatedCompletionTime": "2026-11-12T09:57:50Z",
+        "id": 1132538262,
+        "indexer": "Mock Torznab (Prowlarr)",
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [
+            {
+              "id": 507,
+              "movieMetadataId": 62,
+              "sourceType": "tmdb",
+              "title": "Ultima Notte A Soho"
+            },
+            {
+              "id": 508,
+              "movieMetadataId": 62,
+              "sourceType": "tmdb",
+              "title": "Une dernière nuit à Soho"
+            },
+            {
+              "id": 509,
+              "movieMetadataId": 62,
+              "sourceType": "tmdb",
+              "title": "蘇豪的最後一夜"
+            },
+            {
+              "id": 510,
+              "movieMetadataId": 62,
+              "sourceType": "tmdb",
+              "title": "Última noche en el Soho"
+            },
+            {
+              "id": 511,
+              "movieMetadataId": 62,
+              "sourceType": "tmdb",
+              "title": "Последна нощ в Сохо"
+            },
+            {
+              "id": 512,
+              "movieMetadataId": 62,
+              "sourceType": "tmdb",
+              "title": "ฝัน-หลอน-ที่โซโห"
+            },
+            {
+              "id": 513,
+              "movieMetadataId": 62,
+              "sourceType": "tmdb",
+              "title": "Dün Gece Soho'da"
+            },
+            {
+              "id": 514,
+              "movieMetadataId": 62,
+              "sourceType": "tmdb",
+              "title": "Ostatniej nocy w Soho"
+            },
+            {
+              "id": 515,
+              "movieMetadataId": 62,
+              "sourceType": "tmdb",
+              "title": "El misterio de Soho"
+            },
+            {
+              "id": 516,
+              "movieMetadataId": 62,
+              "sourceType": "tmdb",
+              "title": "Noite Passada em Soho"
+            },
+            {
+              "id": 517,
+              "movieMetadataId": 62,
+              "sourceType": "tmdb",
+              "title": "ラストナイト・イン・ソーホー：2021"
+            },
+            {
+              "id": 518,
+              "movieMetadataId": 62,
+              "sourceType": "tmdb",
+              "title": "Última nit al Soho"
+            },
+            {
+              "id": 519,
+              "movieMetadataId": 62,
+              "sourceType": "tmdb",
+              "title": "Վերջին գիշերը Սոհոյում"
+            }
+          ],
+          "certification": "R",
+          "cleanTitle": "lastnightinsoho",
+          "digitalRelease": "2021-11-19T00:00:00Z",
+          "folderName": "/movies/Last Night in Soho (2021)",
+          "genres": [
+            "Horror",
+            "Mystery",
+            "Thriller"
+          ],
+          "id": 62,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/n1ZRmjlk1BJTY7aASqACfPAaLn2.jpg",
+              "url": "/MediaCover/62/poster.jpg?h=e2c7a7c8b650dc5a4033"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/nPWy5KISy7BbUOQcg588dflKzTL.jpg",
+              "url": "/MediaCover/62/fanart.jpg?h=801e2d53afe364a10c9d"
+            }
+          ],
+          "imdbId": "tt9639470",
+          "inCinemas": "2021-10-09T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "1960s",
+            "amused",
+            "audacious",
+            "burlesque",
+            "clairvoyant",
+            "fashion design",
+            "fashion designer",
+            "go-go dancer",
+            "london, england",
+            "mirror",
+            "murder",
+            "mysterious",
+            "nightmare",
+            "nostalgia",
+            "psychological horror",
+            "pub",
+            "soho london",
+            "somber",
+            "suspenseful",
+            "time travel"
+          ],
+          "lastSearchTime": "2026-03-12T19:45:03Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Last Night in Soho",
+          "overview": "A young girl, passionate about fashion design, is mysteriously able to enter the 1960s where she encounters her idol, a dazzling wannabe singer. But 1960s London is not what it seems, and time seems to be falling apart with shady consequences.",
+          "path": "/movies/Last Night in Soho (2021)",
+          "physicalRelease": "2022-01-18T00:00:00Z",
+          "popularity": 5.6875,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 7,
+              "votes": 203777
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 65,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 75,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7.253,
+              "votes": 4115
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.08181,
+              "votes": 8728
+            }
+          },
+          "releaseDate": "2021-11-19T00:00:00Z",
+          "runtime": 116,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "last night in soho",
+          "status": "released",
+          "studio": "Focus Features",
+          "tags": [
+            1
+          ],
+          "title": "Last Night in Soho",
+          "titleSlug": "576845",
+          "tmdbId": 576845,
+          "website": "https://www.focusfeatures.com/last-night-in-soho",
+          "year": 2021,
+          "youTubeTrailerId": "XgNrL4Kf7yU"
+        },
+        "movieId": 62,
+        "outputPath": "/downloads/movies/c8949b89db6f20a1e049aa8170a7a05c",
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "size": 768000,
+        "sizeleft": 0,
+        "status": "completed",
+        "statusMessages": [
+          {
+            "messages": [
+              "Found matching movie via grab history, but release was matched to movie by ID. Manual Import required."
+            ],
+            "title": "c8949b89db6f20a1e049aa8170a7a05c"
+          }
+        ],
+        "timeleft": "00:00:00",
+        "title": "c8949b89db6f20a1e049aa8170a7a05c",
+        "trackedDownloadState": "importBlocked",
+        "trackedDownloadStatus": "warning"
+      },
+      {
+        "added": "2026-11-12T09:57:04Z",
+        "customFormatScore": -10000,
+        "customFormats": [
+          {
+            "id": 50,
+            "name": "DD+"
+          },
+          {
+            "id": 58,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 4,
+            "name": "WEB Tier 01"
+          }
+        ],
+        "downloadClient": "Mock SABnzbd",
+        "downloadClientHasPostImportCategory": false,
+        "downloadId": "SABnzbd_nzo_mock5",
+        "estimatedCompletionTime": "2026-11-12T10:07:50Z",
+        "id": 2039898284,
+        "indexer": "Mock Newznab (Prowlarr)",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [
+            {
+              "id": 54,
+              "movieMetadataId": 10,
+              "sourceType": "tmdb",
+              "title": "Backcountry - Gnadenlose Wildnis"
+            },
+            {
+              "id": 55,
+              "movieMetadataId": 10,
+              "sourceType": "tmdb",
+              "title": "En el bosque sobrevive"
+            },
+            {
+              "id": 56,
+              "movieMetadataId": 10,
+              "sourceType": "tmdb",
+              "title": "Blackfoot Trail"
+            },
+            {
+              "id": 57,
+              "movieMetadataId": 10,
+              "sourceType": "tmdb",
+              "title": "Sobrevivente"
+            },
+            {
+              "id": 58,
+              "movieMetadataId": 10,
+              "sourceType": "tmdb",
+              "title": "Shtegu i tmerrit"
+            },
+            {
+              "id": 59,
+              "movieMetadataId": 10,
+              "sourceType": "tmdb",
+              "title": "ブラックフット"
+            },
+            {
+              "id": 60,
+              "movieMetadataId": 10,
+              "sourceType": "tmdb",
+              "title": "Na szlaku"
+            },
+            {
+              "id": 61,
+              "movieMetadataId": 10,
+              "sourceType": "tmdb",
+              "title": "Sobrevivientes"
+            },
+            {
+              "id": 62,
+              "movieMetadataId": 10,
+              "sourceType": "tmdb",
+              "title": "Backcountry - Sobreviventes"
+            },
+            {
+              "id": 2783,
+              "movieMetadataId": 10,
+              "sourceType": "tmdb",
+              "title": "Глушь"
+            }
+          ],
+          "certification": "R",
+          "cleanTitle": "backcountry",
+          "digitalRelease": "2020-10-09T00:00:00Z",
+          "folderName": "/movies/Backcountry (2015)",
+          "genres": [
+            "Horror",
+            "Thriller",
+            "Drama"
+          ],
+          "id": 10,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/AdIkDCWcBqv1B10ncm71sMiqEEF.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/fX8OjnkkWnGJdQ7tkpf8z7la4Xu.jpg"
+            }
+          ],
+          "imdbId": "tt2944198",
+          "inCinemas": "2015-03-20T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "animal attack",
+            "based on true story",
+            "bear",
+            "bear attack",
+            "black bear",
+            "camping",
+            "canoe",
+            "frightened",
+            "gore",
+            "grave",
+            "lost in the woods",
+            "nature",
+            "ontario, canada",
+            "survival",
+            "tragic",
+            "woods"
+          ],
+          "lastSearchTime": "2026-06-24T19:43:56Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Backcountry",
+          "overview": "A couple on a deep-wilderness hike become hopelessly lost within an aggressive black bear's territory.",
+          "path": "/movies/Backcountry (2015)",
+          "physicalRelease": "2015-05-28T00:00:00Z",
+          "popularity": 2.177,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6,
+              "votes": 27766
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 62,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 93,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 5.968,
+              "votes": 760
+            },
+            "trakt": {
+              "type": "user",
+              "value": 6.22392,
+              "votes": 1246
+            }
+          },
+          "releaseDate": "2015-05-28T00:00:00Z",
+          "runtime": 92,
+          "secondaryYear": 2014,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "backcountry",
+          "status": "released",
+          "studio": "Fella Films",
+          "tags": [
+            1
+          ],
+          "title": "Backcountry",
+          "titleSlug": "228973",
+          "tmdbId": 228973,
+          "website": "http://backcountryfilm.com/",
+          "year": 2015,
+          "youTubeTrailerId": "46uwmzTf5nA"
+        },
+        "movieId": 10,
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "modifier": "none",
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "webdl"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "size": 765460,
+        "sizeleft": 765460,
+        "status": "downloading",
+        "statusMessages": [],
+        "timeleft": "00:10:00",
+        "title": "An.Unknown.Movie.2024.1080p.WEB-DL.DDP5.1.H.264-NTb",
+        "trackedDownloadState": "downloading",
+        "trackedDownloadStatus": "ok"
+      },
+      {
+        "added": "2026-11-12T09:56:44Z",
+        "customFormatScore": 0,
+        "customFormats": [],
+        "downloadClient": "Mock Transmission",
+        "downloadClientHasPostImportCategory": false,
+        "downloadId": "B133034E90669E52E3BA3460A651D3545769CB85",
+        "estimatedCompletionTime": "2026-11-12T10:07:50Z",
+        "id": 1613248858,
+        "indexer": "Mock Torznab (Prowlarr)",
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [
+            {
+              "id": 892,
+              "movieMetadataId": 116,
+              "sourceType": "tmdb",
+              "title": "Barton Academy"
+            },
+            {
+              "id": 893,
+              "movieMetadataId": 116,
+              "sourceType": "tmdb",
+              "title": "Os Rejeitados"
+            },
+            {
+              "id": 894,
+              "movieMetadataId": 116,
+              "sourceType": "tmdb",
+              "title": "جاماندگان"
+            },
+            {
+              "id": 895,
+              "movieMetadataId": 116,
+              "sourceType": "tmdb",
+              "title": "Os Excluídos"
+            },
+            {
+              "id": 896,
+              "movieMetadataId": 116,
+              "sourceType": "tmdb",
+              "title": "Залишені"
+            },
+            {
+              "id": 897,
+              "movieMetadataId": 116,
+              "sourceType": "tmdb",
+              "title": "Zadržki"
+            },
+            {
+              "id": 898,
+              "movieMetadataId": 116,
+              "sourceType": "tmdb",
+              "title": "Mahajäänud"
+            },
+            {
+              "id": 899,
+              "movieMetadataId": 116,
+              "sourceType": "tmdb",
+              "title": "Winter Break"
+            },
+            {
+              "id": 900,
+              "movieMetadataId": 116,
+              "sourceType": "tmdb",
+              "title": "ฤดูหนาวนี้ไม่ไร้ไออุ่น"
+            },
+            {
+              "id": 901,
+              "movieMetadataId": 116,
+              "sourceType": "tmdb",
+              "title": "მიტოვებულები"
+            },
+            {
+              "id": 902,
+              "movieMetadataId": 116,
+              "sourceType": "tmdb",
+              "title": "留校联盟"
+            }
+          ],
+          "certification": "R",
+          "cleanTitle": "theholdovers",
+          "digitalRelease": "2023-11-28T00:00:00Z",
+          "folderName": "/movies/The Holdovers (2023)",
+          "genres": [
+            "Drama",
+            "Comedy"
+          ],
+          "id": 116,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/VHSzNBTwxV8vh7wylo7O9CLdac.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/57fhbxl9is7W7ur5v6UuvlNsoSg.jpg"
+            }
+          ],
+          "imdbId": "tt14849194",
+          "inCinemas": "2023-10-27T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "1970s",
+            "adoring",
+            "alcoholism",
+            "boarding school",
+            "boston, massachusetts",
+            "boys' boarding school",
+            "christmas",
+            "christmastime",
+            "cook",
+            "grief",
+            "holiday",
+            "loss of son",
+            "melancholy",
+            "mental illness",
+            "misfit",
+            "new england",
+            "peaceful",
+            "teacher student relationship",
+            "troubled youth",
+            "vietnam war",
+            "winter",
+            "winter break"
+          ],
+          "lastSearchTime": "2026-11-12T09:56:42Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "The Holdovers",
+          "overview": "A curmudgeonly instructor at a New England prep school is forced to remain on campus during Christmas break to babysit the handful of students with nowhere to go. Eventually, he forms an unlikely bond with one of them — a damaged, brainy troublemaker — and with the school’s head cook, who has just lost a son in Vietnam.",
+          "path": "/movies/The Holdovers (2023)",
+          "physicalRelease": "2024-01-02T00:00:00Z",
+          "popularity": 7.2706,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 7.9,
+              "votes": 276206
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 82,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 97,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7.65,
+              "votes": 2774
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.95453,
+              "votes": 12734
+            }
+          },
+          "releaseDate": "2023-11-28T00:00:00Z",
+          "runtime": 133,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "holdovers",
+          "status": "released",
+          "studio": "Miramax",
+          "tags": [
+            1
+          ],
+          "title": "The Holdovers",
+          "titleSlug": "840430",
+          "tmdbId": 840430,
+          "website": "http://focusfeatures.com/the-holdovers",
+          "year": 2023,
+          "youTubeTrailerId": "AhKLpJmHhIg"
+        },
+        "movieId": 116,
+        "outputPath": "/downloads/movies/d94f74e9588477404bd8d34ffc605870",
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "size": 768000,
+        "sizeleft": 768000,
+        "status": "downloading",
+        "statusMessages": [],
+        "timeleft": "00:10:00",
+        "title": "d94f74e9588477404bd8d34ffc605870",
+        "trackedDownloadState": "downloading",
+        "trackedDownloadStatus": "ok"
+      },
+      {
+        "added": "2026-11-12T09:55:49Z",
+        "customFormatScore": 0,
+        "customFormats": [
+          {
+            "id": 50,
+            "name": "DD+"
+          }
+        ],
+        "downloadClient": "Mock Transmission",
+        "downloadClientHasPostImportCategory": false,
+        "downloadId": "5AE419C220561D2F40DDBB4026B5D0121DCC040E",
+        "estimatedCompletionTime": "2026-11-12T10:07:50Z",
+        "id": 936833475,
+        "indexer": "Mock Torznab (Prowlarr)",
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [
+            {
+              "id": 554,
+              "movieMetadataId": 70,
+              "sourceType": "tmdb",
+              "title": "Nightmare Alley: Vision in Darkness and Light"
+            },
+            {
+              "id": 555,
+              "movieMetadataId": 70,
+              "sourceType": "tmdb",
+              "title": "Nightmare Alley - Beco das Almas Perdidas"
+            },
+            {
+              "id": 556,
+              "movieMetadataId": 70,
+              "sourceType": "tmdb",
+              "title": "Zaułek koszmarów"
+            },
+            {
+              "id": 557,
+              "movieMetadataId": 70,
+              "sourceType": "tmdb",
+              "title": "Beco do Pesadelo"
+            },
+            {
+              "id": 558,
+              "movieMetadataId": 70,
+              "sourceType": "tmdb",
+              "title": "El callejón de las almas perdidas"
+            },
+            {
+              "id": 559,
+              "movieMetadataId": 70,
+              "sourceType": "tmdb",
+              "title": "毒心術"
+            },
+            {
+              "id": 560,
+              "movieMetadataId": 70,
+              "sourceType": "tmdb",
+              "title": "Nightmare Alley: Vision in Darkness & Light. Extended Director's Cut"
+            },
+            {
+              "id": 561,
+              "movieMetadataId": 70,
+              "sourceType": "tmdb",
+              "title": "کوچه کابوس"
+            },
+            {
+              "id": 2785,
+              "movieMetadataId": 70,
+              "sourceType": "tmdb",
+              "title": "Košmarų alėja"
+            }
+          ],
+          "certification": "R",
+          "cleanTitle": "nightmarealley",
+          "digitalRelease": "2022-02-01T00:00:00Z",
+          "folderName": "/movies/Nightmare Alley (2021)",
+          "genres": [
+            "Crime",
+            "Drama",
+            "Thriller"
+          ],
+          "id": 70,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/vfn1feL0V9HNSXuLLpaxAW8O6LO.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/g0YNGpmlXsgHfhGnJz3c5uyzZ1B.jpg"
+            }
+          ],
+          "imdbId": "tt7740496",
+          "inCinemas": "2021-12-02T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "1940s",
+            "alcoholic",
+            "based on novel or book",
+            "carnival",
+            "carny",
+            "con artist",
+            "freak show",
+            "fugitive",
+            "grifter",
+            "hustler",
+            "infidelity",
+            "lie",
+            "love triangle",
+            "mentalist",
+            "mentor",
+            "murder",
+            "neo-noir",
+            "spiritism",
+            "supernatural",
+            "séance",
+            "tarot cards",
+            "violence"
+          ],
+          "lastSearchTime": "2026-11-12T09:56:27Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Nightmare Alley",
+          "overview": "An ambitious carnival man with a talent for manipulating people with a few well-chosen words hooks up with a female psychologist who is even more dangerous than he is.",
+          "path": "/movies/Nightmare Alley (2021)",
+          "physicalRelease": "2022-03-16T00:00:00Z",
+          "popularity": 6.2105,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 7,
+              "votes": 185744
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 70,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 80,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.9,
+              "votes": 3554
+            },
+            "trakt": {
+              "type": "user",
+              "value": 6.95479,
+              "votes": 8427
+            }
+          },
+          "releaseDate": "2022-02-01T00:00:00Z",
+          "runtime": 151,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "nightmare alley",
+          "status": "released",
+          "studio": "Searchlight Pictures",
+          "tags": [],
+          "title": "Nightmare Alley",
+          "titleSlug": "597208",
+          "tmdbId": 597208,
+          "website": "https://www.searchlightpictures.com/nightmarealley/",
+          "year": 2021,
+          "youTubeTrailerId": "Q81Yf46Oj3s"
+        },
+        "movieId": 70,
+        "outputPath": "/downloads/movies/bc295ecb0fb56b9e5df74be19469cef4",
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "modifier": "none",
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "webdl"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "size": 768000,
+        "sizeleft": 768000,
+        "status": "downloading",
+        "statusMessages": [],
+        "timeleft": "00:10:00",
+        "title": "bc295ecb0fb56b9e5df74be19469cef4",
+        "trackedDownloadState": "downloading",
+        "trackedDownloadStatus": "ok"
+      }
+    ],
+    "sortDirection": "ascending",
+    "sortKey": "timeleft",
+    "totalRecords": 4
+  },
+  "recordedAt": "2026-11-12T09:57:56Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/queue?page=1&pageSize=20&sortKey=timeleft&sortDirection=ascending&includeUnknownMovieItems=true&includeMovie=true"
+  },
+  "status": 200
+}

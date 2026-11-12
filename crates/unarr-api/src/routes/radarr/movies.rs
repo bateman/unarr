@@ -4,7 +4,8 @@
 use std::collections::{HashMap, HashSet};
 
 use axum::extract::{Path, State};
-use axum::http::Uri;
+use axum::http::{StatusCode, Uri};
+use axum::response::{IntoResponse, Response};
 use axum::Json;
 use serde_json::{json, Value};
 use unarr_core::movies::model::{
@@ -436,4 +437,309 @@ pub async fn alternative_title(State(state): State<AppState>, Path(id): Path<i64
         .call(move |c| movies::get_alternative_title(c, id))
         .await?;
     Ok(Json(alternative_title_resource(&found(t)?)))
+}
+
+// --- the importer's events on SignalR
+
+/// What `MovieFileController` and `MovieController` broadcast for an
+/// import's events: the movie file added (`updated`) or gone (`deleted`),
+/// and the movie a deletion detached from its file (`MovieEditedEvent`).
+pub async fn relay_import(state: &AppState, e: &unarr_core::movies::import::events::MovieImportEvent) {
+    use unarr_core::movies::import::events::MovieImportEvent;
+    match e {
+        MovieImportEvent::Imported(ev) => {
+            let Ok(ctx) = MovieContext::load(state).await else {
+                return;
+            };
+            if let Ok(files) = files_with_movies(state, Vec::new(), vec![ev.file.id]).await {
+                for resource in file_resources(&ctx, &files) {
+                    state
+                        .hub()
+                        .broadcast("moviefile", json!({"action": "updated", "resource": resource}));
+                }
+            }
+        }
+        MovieImportEvent::FileDeleted(ev) => {
+            state.hub().broadcast(
+                "moviefile",
+                json!({"action": "deleted", "resource": {"id": ev.file.id}}),
+            );
+            let Ok(ctx) = MovieContext::load(state).await else {
+                return;
+            };
+            if let Ok(library) = load_library(state, None, Some(ev.movie.id)).await {
+                for resource in library_resources(&ctx, &library, Covers::Local) {
+                    state
+                        .hub()
+                        .broadcast("movie", json!({"action": "updated", "resource": resource}));
+                }
+            }
+        }
+        MovieImportEvent::ImportFailed(_)
+        | MovieImportEvent::DownloadCompleted(_)
+        | MovieImportEvent::ManualInteractionRequired(_)
+        | MovieImportEvent::RescanRequested { .. }
+        | MovieImportEvent::Scanned { .. }
+        | MovieImportEvent::ScanSkipped { .. } => {}
+        // `MovieController.Handle(MovieRenamedEvent)`; the files' new
+        // paths reach the UI with the movie's page, as in the original.
+        MovieImportEvent::MovieRenamed { movie_id, .. } => {
+            let Ok(ctx) = MovieContext::load(state).await else {
+                return;
+            };
+            if let Ok(library) = load_library(state, None, Some(*movie_id)).await {
+                for resource in library_resources(&ctx, &library, Covers::Local) {
+                    state
+                        .hub()
+                        .broadcast("movie", json!({"action": "updated", "resource": resource}));
+                }
+            }
+        }
+        MovieImportEvent::FileRenamed(_) => {}
+    }
+}
+
+// --- rename
+
+/// `GET /rename?movieId=` (repeatable): the files of those movies the
+/// naming settings would call otherwise.
+pub async fn rename_preview(State(state): State<AppState>, uri: Uri) -> ApiResult<Json<Vec<Value>>> {
+    let movie_ids = Params::from_uri(&uri).ints("movieId");
+    if movie_ids.is_empty() {
+        return Err(ApiError::BadRequest("movieId must be provided".into()));
+    }
+    let now = state.now();
+    let previews = state
+        .db()
+        .call(move |conn| {
+            let env = unarr_core::movies::import::decide::MovieEnvironment::load(conn, now)?;
+            unarr_core::movies::import::rename::previews_for_movies(conn, &env, &movie_ids)
+        })
+        .await?;
+    Ok(Json(
+        previews
+            .iter()
+            .map(|p| {
+                json!({
+                    "movieId": p.movie_id,
+                    "movieFileId": p.movie_file_id,
+                    "existingPath": p.existing_path,
+                    "newPath": p.new_path,
+                })
+            })
+            .collect(),
+    ))
+}
+
+// --- movie file writes
+
+fn accepted(body: Value) -> Response {
+    (StatusCode::ACCEPTED, Json(body)).into_response()
+}
+
+/// A quality model as a resource carries it.
+fn quality_from_json(v: &Value) -> unarr_core::model::QualityModel {
+    unarr_core::model::QualityModel {
+        quality_id: v["quality"]["id"].as_i64().unwrap_or(0),
+        version: v["revision"]["version"].as_i64().unwrap_or(1),
+        real: v["revision"]["real"].as_i64().unwrap_or(0),
+        is_repack: v["revision"]["isRepack"].as_bool().unwrap_or(false),
+    }
+}
+
+/// The languages of a resource; a file is never set to 'Any' or
+/// 'Original' by the editors.
+fn languages_from_json(v: &Value, editor: bool) -> Vec<i64> {
+    use unarr_core::movies::parser::language::lang;
+    v.as_array()
+        .map(|a| {
+            a.iter()
+                .filter_map(|l| l["id"].as_i64())
+                .filter(|id| !editor || (*id != lang::ANY && *id != lang::ORIGINAL))
+                .collect()
+        })
+        .unwrap_or_default()
+}
+
+/// A scene name is taken only when it reads as one (`SceneChecker`).
+fn scene_name_from_json(v: &Value) -> Option<String> {
+    v.as_str()
+        .filter(|s| unarr_core::parser::title::is_scene_title(s))
+        .map(str::to_string)
+}
+
+/// What `PUT moviefile/editor` and `PUT moviefile/bulk` set: only what
+/// the request names.
+fn apply_edits(file: &mut MovieFile, edits: &Value) {
+    if edits["languages"].is_array() {
+        file.languages = languages_from_json(&edits["languages"], true);
+    }
+    if edits["quality"].is_object() {
+        file.quality = quality_from_json(&edits["quality"]);
+    }
+    if let Some(flags) = edits["indexerFlags"].as_i64() {
+        file.indexer_flags = flags;
+    }
+    if let Some(edition) = edits["edition"].as_str() {
+        file.edition = Some(edition.to_string());
+    }
+    if let Some(group) = edits["releaseGroup"].as_str() {
+        file.release_group = Some(group.to_string());
+    }
+    if let Some(scene) = scene_name_from_json(&edits["sceneName"]) {
+        file.scene_name = Some(scene);
+    }
+}
+
+async fn file_resources_by_ids(state: &AppState, ids: Vec<i64>) -> ApiResult<Vec<Value>> {
+    let ctx = MovieContext::load(state).await?;
+    let files = files_with_movies(state, Vec::new(), ids).await?;
+    Ok(file_resources(&ctx, &files))
+}
+
+/// `PUT /moviefile/{id}`: the file the body names (not the path's id, as
+/// in the original) gets the body's quality, languages, edition and
+/// flags outright, its release group and scene name when given.
+pub async fn file_update(State(state): State<AppState>, Json(body): Json<Value>) -> ApiResult<Response> {
+    let id = body["id"].as_i64().unwrap_or(0);
+    let body2 = body.clone();
+    let found = state
+        .db()
+        .call(move |conn| {
+            let Some(mut file) = movies::get_movie_file(conn, id)? else {
+                return Ok(false);
+            };
+            file.indexer_flags = body2["indexerFlags"].as_i64().unwrap_or(0);
+            file.quality = quality_from_json(&body2["quality"]);
+            file.languages = languages_from_json(&body2["languages"], false);
+            file.edition = body2["edition"].as_str().map(str::to_string);
+            if let Some(group) = body2["releaseGroup"].as_str() {
+                file.release_group = Some(group.to_string());
+            }
+            if let Some(scene) = scene_name_from_json(&body2["sceneName"]) {
+                file.scene_name = Some(scene);
+            }
+            movies::update_movie_file(conn, &file)?;
+            Ok(true)
+        })
+        .await?;
+    if !found {
+        return Err(ApiError::ModelNotFound(format!(
+            "MovieFile with ID {id} does not exist"
+        )));
+    }
+    let mut resources = file_resources_by_ids(&state, vec![id]).await?;
+    Ok(accepted(resources.pop().unwrap_or(Value::Null)))
+}
+
+/// `PUT /moviefile/editor` (the original's obsolete one).
+pub async fn file_editor(State(state): State<AppState>, Json(body): Json<Value>) -> ApiResult<Response> {
+    let ids: Vec<i64> = body["movieFileIds"]
+        .as_array()
+        .map(|a| a.iter().filter_map(Value::as_i64).collect())
+        .unwrap_or_default();
+    let (ids2, body2) = (ids.clone(), body.clone());
+    state
+        .db()
+        .call(move |conn| {
+            for mut file in movies::movie_files_by_ids(conn, &ids2)? {
+                apply_edits(&mut file, &body2);
+                movies::update_movie_file(conn, &file)?;
+            }
+            Ok(())
+        })
+        .await?;
+    Ok(accepted(Value::Array(file_resources_by_ids(&state, ids).await?)))
+}
+
+/// `PUT /moviefile/bulk`: `SetPropertiesBulk`.
+pub async fn file_bulk_update(State(state): State<AppState>, Json(body): Json<Value>) -> ApiResult<Response> {
+    let items = body.as_array().cloned().unwrap_or_default();
+    let ids: Vec<i64> = items.iter().filter_map(|i| i["id"].as_i64()).collect();
+    let (ids2, items2) = (ids.clone(), items.clone());
+    state
+        .db()
+        .call(move |conn| {
+            for mut file in movies::movie_files_by_ids(conn, &ids2)? {
+                if let Some(item) = items2.iter().find(|i| i["id"].as_i64() == Some(file.id)) {
+                    apply_edits(&mut file, item);
+                    movies::update_movie_file(conn, &file)?;
+                }
+            }
+            Ok(())
+        })
+        .await?;
+    Ok(accepted(Value::Array(file_resources_by_ids(&state, ids).await?)))
+}
+
+/// `MediaFileDeletionService.DeleteMovieFile` for one file, with the
+/// original's status codes.
+async fn delete_one(state: &AppState, id: i64) -> ApiResult<()> {
+    use unarr_core::movies::import::{deletion, events::MovieImportEvent};
+    let now = state.now();
+    let (config, movie, file) = state
+        .db()
+        .call(move |conn| {
+            let Some(file) = movies::get_movie_file(conn, id)? else {
+                return Ok(None);
+            };
+            let movie = movies::get_movie(conn, file.movie_id)?;
+            let config = unarr_core::store::config::MediaManagementConfig::load(conn)?;
+            Ok(Some((config, movie, file)))
+        })
+        .await?
+        .ok_or_else(|| ApiError::ModelNotFound(format!("MovieFile with ID {id} does not exist")))?;
+    let movie = movie
+        .ok_or_else(|| ApiError::ModelNotFound(format!("Movie with ID {} does not exist", file.movie_id)))?;
+    let db = state.db().clone();
+    let result =
+        crate::blocking::run(move || deletion::delete_movie_file(&db, &config, &movie, &file, now)).await?;
+    match result {
+        Ok(deleted) => {
+            if let Ok(runtime) = state.commands() {
+                runtime
+                    .publish_movie_import_events(vec![MovieImportEvent::FileDeleted(Box::new(deleted))])
+                    .await;
+            }
+            Ok(())
+        }
+        Err(e) => Err(match e.status() {
+            409 => ApiError::ConflictMessage(e.to_string()),
+            _ => ApiError::ServerMessage(e.to_string()),
+        }),
+    }
+}
+
+/// `DELETE /moviefile/{id}`.
+pub async fn file_delete(State(state): State<AppState>, Path(id): Path<i64>) -> ApiResult<Response> {
+    delete_one(&state, id).await?;
+    Ok(StatusCode::OK.into_response())
+}
+
+/// `DELETE /moviefile/bulk`.
+pub async fn file_bulk_delete(
+    State(state): State<AppState>,
+    Json(body): Json<Value>,
+) -> ApiResult<Json<Value>> {
+    let ids: Vec<i64> = body["movieFileIds"]
+        .as_array()
+        .map(|a| a.iter().filter_map(Value::as_i64).collect())
+        .unwrap_or_default();
+    if ids.is_empty() {
+        return Err(ApiError::BadRequest("movieFileIds must be provided".into()));
+    }
+    let ids2 = ids.clone();
+    let existing: Vec<i64> = state
+        .db()
+        .call(move |conn| {
+            Ok(movies::movie_files_by_ids(conn, &ids2)?
+                .into_iter()
+                .map(|f| f.id)
+                .collect())
+        })
+        .await?;
+    for id in existing {
+        delete_one(&state, id).await?;
+    }
+    Ok(Json(json!({})))
 }

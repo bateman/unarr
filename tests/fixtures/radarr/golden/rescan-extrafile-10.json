@@ -1,0 +1,19 @@
+{
+  "body": [
+    {
+      "extension": ".srt",
+      "id": 212,
+      "languageTags": [],
+      "movieFileId": 0,
+      "movieId": 10,
+      "relativePath": "Backcountry.2015.1080p.BluRay.x264-GRP.en.srt",
+      "type": "subtitle"
+    }
+  ],
+  "recordedAt": "2026-11-12T09:58:45Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/extrafile?movieId=10"
+  },
+  "status": 200
+}

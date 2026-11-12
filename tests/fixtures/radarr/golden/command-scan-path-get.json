@@ -1,0 +1,38 @@
+{
+  "body": {
+    "body": {
+      "importMode": "auto",
+      "isExclusive": false,
+      "isLongRunning": true,
+      "isTypeExclusive": false,
+      "name": "DownloadedMoviesScan",
+      "path": "/downloads/drop/Nightmare.Alley.2021.1080p.BluRay.x264-MIRCrew",
+      "requiresDiskAccess": true,
+      "sendUpdates": false,
+      "sendUpdatesToClient": false,
+      "suppressMessages": true,
+      "trigger": "manual",
+      "updateScheduledTask": true
+    },
+    "commandName": "Downloaded Movies Scan",
+    "duration": "00:00:00.0788992",
+    "ended": "2026-11-12T09:59:21Z",
+    "id": 473000,
+    "name": "DownloadedMoviesScan",
+    "priority": "normal",
+    "queued": "2026-11-12T09:59:21Z",
+    "result": "successful",
+    "sendUpdatesToClient": false,
+    "started": "2026-11-12T09:59:21Z",
+    "stateChangeTime": "2026-11-12T09:59:21Z",
+    "status": "completed",
+    "trigger": "manual",
+    "updateScheduledTask": true
+  },
+  "recordedAt": "2026-11-12T09:59:33Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/command/473000"
+  },
+  "status": 200
+}

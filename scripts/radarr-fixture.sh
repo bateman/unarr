@@ -108,7 +108,7 @@ start_mock() {
     if curl -fsS -o /dev/null "http://127.0.0.1:$MOCK_PORT/movies/newznab/api?t=caps&apikey=$API_KEY" 2>/dev/null; then
         die "something already listens on port $MOCK_PORT; stop it (pkill -f mock-servarr.py) and retry"
     fi
-    python3 -I "$REPO/scripts/mock-servarr.py" --listen "127.0.0.1:$MOCK_PORT" --fixtures "$REPO/tests/fixtures" --log "$logfile" --downloads "$DOWNLOADS_DIR" \
+    python3 -I "$REPO/scripts/mock-servarr.py" --listen "127.0.0.1:$MOCK_PORT" --fixtures "$REPO/tests/fixtures" --log "$logfile" --downloads "$DOWNLOADS_DIR" --movies "$MOVIES_DIR" \
         2>"$CACHE/mock.stderr.log" &
     MOCK_PID=$!
     for _ in $(seq 1 20); do

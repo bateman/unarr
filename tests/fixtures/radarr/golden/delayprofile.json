@@ -29,7 +29,7 @@
       "usenetDelay": 0
     }
   ],
-  "recordedAt": "2026-11-11T22:00:03Z",
+  "recordedAt": "2026-11-12T09:55:24Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/delayprofile"

@@ -1,0 +1,241 @@
+{
+  "body": {
+    "added": "2026-03-07T09:12:06Z",
+    "alternateTitles": [
+      {
+        "id": 54,
+        "movieMetadataId": 10,
+        "sourceType": "tmdb",
+        "title": "Backcountry - Gnadenlose Wildnis"
+      },
+      {
+        "id": 55,
+        "movieMetadataId": 10,
+        "sourceType": "tmdb",
+        "title": "En el bosque sobrevive"
+      },
+      {
+        "id": 56,
+        "movieMetadataId": 10,
+        "sourceType": "tmdb",
+        "title": "Blackfoot Trail"
+      },
+      {
+        "id": 57,
+        "movieMetadataId": 10,
+        "sourceType": "tmdb",
+        "title": "Sobrevivente"
+      },
+      {
+        "id": 58,
+        "movieMetadataId": 10,
+        "sourceType": "tmdb",
+        "title": "Shtegu i tmerrit"
+      },
+      {
+        "id": 59,
+        "movieMetadataId": 10,
+        "sourceType": "tmdb",
+        "title": "ブラックフット"
+      },
+      {
+        "id": 60,
+        "movieMetadataId": 10,
+        "sourceType": "tmdb",
+        "title": "Na szlaku"
+      },
+      {
+        "id": 61,
+        "movieMetadataId": 10,
+        "sourceType": "tmdb",
+        "title": "Sobrevivientes"
+      },
+      {
+        "id": 62,
+        "movieMetadataId": 10,
+        "sourceType": "tmdb",
+        "title": "Backcountry - Sobreviventes"
+      },
+      {
+        "id": 2783,
+        "movieMetadataId": 10,
+        "sourceType": "tmdb",
+        "title": "Глушь"
+      }
+    ],
+    "certification": "R",
+    "cleanTitle": "backcountry",
+    "digitalRelease": "2020-10-09T00:00:00Z",
+    "folderName": "/movies/Backcountry (2015)",
+    "genres": [
+      "Horror",
+      "Thriller",
+      "Drama"
+    ],
+    "hasFile": true,
+    "id": 10,
+    "images": [
+      {
+        "coverType": "poster",
+        "remoteUrl": "https://image.tmdb.org/t/p/original/AdIkDCWcBqv1B10ncm71sMiqEEF.jpg",
+        "url": "/MediaCover/10/poster.jpg?h=2f0d229f328b0179acc7"
+      },
+      {
+        "coverType": "fanart",
+        "remoteUrl": "https://image.tmdb.org/t/p/original/fX8OjnkkWnGJdQ7tkpf8z7la4Xu.jpg",
+        "url": "/MediaCover/10/fanart.jpg?h=34bc6fd77c4a7f46287d"
+      }
+    ],
+    "imdbId": "tt2944198",
+    "inCinemas": "2015-03-20T00:00:00Z",
+    "isAvailable": true,
+    "keywords": [
+      "animal attack",
+      "based on true story",
+      "bear",
+      "bear attack",
+      "black bear",
+      "camping",
+      "canoe",
+      "frightened",
+      "gore",
+      "grave",
+      "lost in the woods",
+      "nature",
+      "ontario, canada",
+      "survival",
+      "tragic",
+      "woods"
+    ],
+    "lastSearchTime": "2026-06-24T19:43:56Z",
+    "minimumAvailability": "released",
+    "monitored": true,
+    "movieFile": {
+      "dateAdded": "2026-11-12T09:58:33Z",
+      "edition": "",
+      "id": 408,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 0,
+        "audioChannels": 1,
+        "audioCodec": "AAC",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "1920x1080",
+        "runTime": "10:10",
+        "scanType": "Progressive",
+        "subtitles": "eng",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 1000
+      },
+      "movieId": 10,
+      "path": "/movies/Backcountry (2015)/Backcountry.2015.1080p.BluRay.x264-GRP.mkv",
+      "quality": {
+        "quality": {
+          "id": 7,
+          "modifier": "none",
+          "name": "Bluray-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Backcountry.2015.1080p.BluRay.x264-GRP.mkv",
+      "releaseGroup": "GRP",
+      "size": 1106640
+    },
+    "movieFileId": 408,
+    "originalLanguage": {
+      "id": 1,
+      "name": "English"
+    },
+    "originalTitle": "Backcountry",
+    "overview": "A couple on a deep-wilderness hike become hopelessly lost within an aggressive black bear's territory.",
+    "path": "/movies/Backcountry (2015)",
+    "physicalRelease": "2015-05-28T00:00:00Z",
+    "popularity": 2.177,
+    "qualityProfileId": 11,
+    "ratings": {
+      "imdb": {
+        "type": "user",
+        "value": 6,
+        "votes": 27766
+      },
+      "metacritic": {
+        "type": "user",
+        "value": 62,
+        "votes": 0
+      },
+      "rottenTomatoes": {
+        "type": "user",
+        "value": 93,
+        "votes": 0
+      },
+      "tmdb": {
+        "type": "user",
+        "value": 5.968,
+        "votes": 760
+      },
+      "trakt": {
+        "type": "user",
+        "value": 6.22392,
+        "votes": 1246
+      }
+    },
+    "releaseDate": "2015-05-28T00:00:00Z",
+    "rootFolderPath": "/movies",
+    "runtime": 92,
+    "secondaryYear": 2014,
+    "secondaryYearSourceId": 0,
+    "sizeOnDisk": 1106640,
+    "sortTitle": "backcountry",
+    "statistics": {
+      "movieFileCount": 1,
+      "movieFileQualities": [
+        {
+          "id": 7,
+          "modifier": "none",
+          "name": "Bluray-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        }
+      ],
+      "releaseGroups": [
+        "GRP"
+      ],
+      "sizeOnDisk": 1106640
+    },
+    "status": "released",
+    "studio": "Fella Films",
+    "tags": [
+      1
+    ],
+    "title": "Backcountry",
+    "titleSlug": "228973",
+    "tmdbId": 228973,
+    "website": "http://backcountryfilm.com/",
+    "year": 2015,
+    "youTubeTrailerId": "46uwmzTf5nA"
+  },
+  "recordedAt": "2026-11-12T09:58:45Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/movie/10"
+  },
+  "status": 200
+}

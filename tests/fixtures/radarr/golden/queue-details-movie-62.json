@@ -1,13 +1,13 @@
 {
   "body": [
     {
-      "added": "2026-11-11T22:00:24Z",
+      "added": "2026-11-12T09:55:47Z",
       "customFormatScore": 0,
       "customFormats": [],
       "downloadClient": "Mock qBittorrent",
       "downloadClientHasPostImportCategory": false,
       "downloadId": "13706ED57ADBE030F510BEDCD37595376901117C",
-      "estimatedCompletionTime": "2026-11-11T22:10:28Z",
+      "estimatedCompletionTime": "2026-11-12T10:05:50Z",
       "id": 1132538262,
       "indexer": "Mock Torznab (Prowlarr)",
       "languages": [
@@ -230,7 +230,7 @@
       "trackedDownloadStatus": "ok"
     }
   ],
-  "recordedAt": "2026-11-11T22:00:38Z",
+  "recordedAt": "2026-11-12T09:56:01Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/queue/details?movieId=62&includeMovie=true"

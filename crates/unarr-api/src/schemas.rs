@@ -263,6 +263,36 @@ fn lookup_path<'a>(settings: &'a Map<String, Value>, name: &str) -> Option<&'a V
 mod tests {
     use super::*;
 
+    /// The `supportsOn*` the resource shows come from the schema the real
+    /// Radarr printed; the notifications Unarr drives declare the same.
+    #[test]
+    fn radarr_notifications_support_what_their_schema_says() {
+        use unarr_core::movies::notifications::{Supports, FLAGS};
+        use unarr_core::notifications::Kind;
+        for implementation in ["Discord", "Webhook", "PlexServer"] {
+            let schema = lookup(
+                Personality::Radarr,
+                SchemaKind::Provider(ProviderKind::Notification),
+                implementation,
+            )
+            .unwrap();
+            let supports = Supports::of(Kind::from_implementation(implementation).unwrap());
+            let mut seen = 0;
+            for (key, value) in schema.as_object().unwrap() {
+                if key.starts_with("supportsOn") {
+                    assert_eq!(supports.get(key), value.as_bool(), "{implementation} {key}");
+                    seen += 1;
+                }
+            }
+            // One for every event flag: all but `includeHealthWarnings`.
+            assert_eq!(seen, FLAGS.len() - 1, "{implementation}");
+            for flag in FLAGS.iter().filter(|f| f.starts_with("on")) {
+                let key = format!("supports{}{}", flag[..1].to_uppercase(), &flag[1..]);
+                assert!(supports.get(&key).is_some(), "{key}");
+            }
+        }
+    }
+
     #[test]
     fn nested_field_names_read_nested_settings() {
         let torznab = lookup(

@@ -1,0 +1,179 @@
+{
+  "body": {
+    "added": "2026-03-07T09:12:06Z",
+    "alternateTitles": [
+      {
+        "id": 554,
+        "movieMetadataId": 70,
+        "sourceType": "tmdb",
+        "title": "Nightmare Alley: Vision in Darkness and Light"
+      },
+      {
+        "id": 555,
+        "movieMetadataId": 70,
+        "sourceType": "tmdb",
+        "title": "Nightmare Alley - Beco das Almas Perdidas"
+      },
+      {
+        "id": 556,
+        "movieMetadataId": 70,
+        "sourceType": "tmdb",
+        "title": "Zaułek koszmarów"
+      },
+      {
+        "id": 557,
+        "movieMetadataId": 70,
+        "sourceType": "tmdb",
+        "title": "Beco do Pesadelo"
+      },
+      {
+        "id": 558,
+        "movieMetadataId": 70,
+        "sourceType": "tmdb",
+        "title": "El callejón de las almas perdidas"
+      },
+      {
+        "id": 559,
+        "movieMetadataId": 70,
+        "sourceType": "tmdb",
+        "title": "毒心術"
+      },
+      {
+        "id": 560,
+        "movieMetadataId": 70,
+        "sourceType": "tmdb",
+        "title": "Nightmare Alley: Vision in Darkness & Light. Extended Director's Cut"
+      },
+      {
+        "id": 561,
+        "movieMetadataId": 70,
+        "sourceType": "tmdb",
+        "title": "کوچه کابوس"
+      },
+      {
+        "id": 2785,
+        "movieMetadataId": 70,
+        "sourceType": "tmdb",
+        "title": "Košmarų alėja"
+      }
+    ],
+    "certification": "R",
+    "cleanTitle": "nightmarealley",
+    "digitalRelease": "2022-02-01T00:00:00Z",
+    "folderName": "/movies/Nightmare Alley (2021)",
+    "genres": [
+      "Crime",
+      "Drama",
+      "Thriller"
+    ],
+    "hasFile": false,
+    "id": 70,
+    "images": [
+      {
+        "coverType": "poster",
+        "remoteUrl": "https://image.tmdb.org/t/p/original/vfn1feL0V9HNSXuLLpaxAW8O6LO.jpg",
+        "url": "/MediaCover/70/poster.jpg?h=e6af977704638a1c94c4"
+      },
+      {
+        "coverType": "fanart",
+        "remoteUrl": "https://image.tmdb.org/t/p/original/g0YNGpmlXsgHfhGnJz3c5uyzZ1B.jpg",
+        "url": "/MediaCover/70/fanart.jpg?h=f1255ff62dff6043f010"
+      }
+    ],
+    "imdbId": "tt7740496",
+    "inCinemas": "2021-12-02T00:00:00Z",
+    "isAvailable": true,
+    "keywords": [
+      "1940s",
+      "alcoholic",
+      "based on novel or book",
+      "carnival",
+      "carny",
+      "con artist",
+      "freak show",
+      "fugitive",
+      "grifter",
+      "hustler",
+      "infidelity",
+      "lie",
+      "love triangle",
+      "mentalist",
+      "mentor",
+      "murder",
+      "neo-noir",
+      "spiritism",
+      "supernatural",
+      "séance",
+      "tarot cards",
+      "violence"
+    ],
+    "lastSearchTime": "2026-11-12T09:56:27Z",
+    "minimumAvailability": "released",
+    "monitored": false,
+    "movieFileId": 0,
+    "originalLanguage": {
+      "id": 1,
+      "name": "English"
+    },
+    "originalTitle": "Nightmare Alley",
+    "overview": "An ambitious carnival man with a talent for manipulating people with a few well-chosen words hooks up with a female psychologist who is even more dangerous than he is.",
+    "path": "/movies/Nightmare Alley (2021)",
+    "physicalRelease": "2022-03-16T00:00:00Z",
+    "popularity": 6.2105,
+    "qualityProfileId": 11,
+    "ratings": {
+      "imdb": {
+        "type": "user",
+        "value": 7,
+        "votes": 185744
+      },
+      "metacritic": {
+        "type": "user",
+        "value": 70,
+        "votes": 0
+      },
+      "rottenTomatoes": {
+        "type": "user",
+        "value": 80,
+        "votes": 0
+      },
+      "tmdb": {
+        "type": "user",
+        "value": 6.9,
+        "votes": 3554
+      },
+      "trakt": {
+        "type": "user",
+        "value": 6.95479,
+        "votes": 8427
+      }
+    },
+    "releaseDate": "2022-02-01T00:00:00Z",
+    "rootFolderPath": "/movies",
+    "runtime": 151,
+    "secondaryYearSourceId": 0,
+    "sizeOnDisk": 0,
+    "sortTitle": "nightmare alley",
+    "statistics": {
+      "movieFileCount": 0,
+      "movieFileQualities": [],
+      "releaseGroups": [],
+      "sizeOnDisk": 0
+    },
+    "status": "released",
+    "studio": "Searchlight Pictures",
+    "tags": [],
+    "title": "Nightmare Alley",
+    "titleSlug": "597208",
+    "tmdbId": 597208,
+    "website": "https://www.searchlightpictures.com/nightmarealley/",
+    "year": 2021,
+    "youTubeTrailerId": "Q81Yf46Oj3s"
+  },
+  "recordedAt": "2026-11-12T10:01:09Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/movie/70"
+  },
+  "status": 200
+}

@@ -1,0 +1,523 @@
+{
+  "body": [
+    {
+      "customFormatScore": 0,
+      "customFormats": [],
+      "data": {
+        "customFormatScore": "0",
+        "downloadClient": "qBittorrent",
+        "downloadClientName": "Mock qBittorrent",
+        "droppedPath": "/downloads/movies/c8949b89db6f20a1e049aa8170a7a05c/c8949b89db6f20a1e049aa8170a7a05c.mkv",
+        "fileId": "411",
+        "importedPath": "/movies/Last Night in Soho (2021)/Last Night in Soho (2021) {tmdb-576845} - [Bluray-1080p][AAC 1.0][x264]-MIRCrew.mkv",
+        "indexerFlags": "G_Freeleech",
+        "releaseGroup": "MIRCrew",
+        "size": "119980"
+      },
+      "date": "2026-11-12T10:00:33Z",
+      "downloadId": "13706ED57ADBE030F510BEDCD37595376901117C",
+      "eventType": "downloadFolderImported",
+      "id": 1130,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        },
+        {
+          "id": 5,
+          "name": "Italian"
+        }
+      ],
+      "movieId": 62,
+      "quality": {
+        "quality": {
+          "id": 7,
+          "modifier": "none",
+          "name": "Bluray-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "sourceTitle": "Last.Night.in.Soho.2021.iTA.ENG.1080p.BluRay.x264-MIRCrew"
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [],
+      "data": {
+        "age": "2",
+        "ageHours": "62.85109034422222",
+        "ageMinutes": "3771.0654208016667",
+        "customFormatScore": "0",
+        "downloadClient": "qBittorrent",
+        "downloadClientName": "Mock qBittorrent",
+        "downloadUrl": "http://127.0.0.1:18989/movies/torznab/download/c8949b89db6f20a1e049aa8170a7a05c.torrent",
+        "guid": "http://127.0.0.1:18989/movies/torznab/details/c8949b89db6f20a1e049aa8170a7a05c",
+        "imdbId": "9639470",
+        "indexer": "Mock Torznab (Prowlarr)",
+        "indexerFlags": "G_Freeleech",
+        "indexerId": "21",
+        "movieMatchType": "Id",
+        "nzbInfoUrl": "http://127.0.0.1:18989/movies/torznab/details/c8949b89db6f20a1e049aa8170a7a05c",
+        "protocol": "2",
+        "publishedDate": "2026-11-09T19:05:00Z",
+        "releaseGroup": "MIRCrew",
+        "releaseSource": "Rss",
+        "size": "6979321856",
+        "tmdbId": "0",
+        "torrentInfoHash": "d0c1309e36cdb92c5d7b4abfd794f9bdff969920"
+      },
+      "date": "2026-11-12T09:56:03Z",
+      "downloadId": "13706ED57ADBE030F510BEDCD37595376901117C",
+      "eventType": "grabbed",
+      "id": 1013,
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        },
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movieId": 62,
+      "quality": {
+        "quality": {
+          "id": 7,
+          "modifier": "none",
+          "name": "Bluray-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "sourceTitle": "Last.Night.in.Soho.2021.iTA.ENG.1080p.BluRay.x264-MIRCrew"
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [],
+      "data": {
+        "downloadClient": "qBittorrent",
+        "downloadClientName": "Mock qBittorrent",
+        "indexer": "Mock Torznab (Prowlarr)",
+        "message": "Manually marked as failed",
+        "releaseGroup": "MIRCrew",
+        "size": "768000"
+      },
+      "date": "2026-11-12T09:56:01Z",
+      "downloadId": "13706ED57ADBE030F510BEDCD37595376901117C",
+      "eventType": "downloadFailed",
+      "id": 1012,
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        },
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movieId": 62,
+      "quality": {
+        "quality": {
+          "id": 7,
+          "modifier": "none",
+          "name": "Bluray-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "sourceTitle": "Last.Night.in.Soho.2021.iTA.ENG.1080p.BluRay.x264-MIRCrew"
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [],
+      "data": {
+        "age": "2",
+        "ageHours": "62.846561026833335",
+        "ageMinutes": "3770.7936617416667",
+        "customFormatScore": "0",
+        "downloadClient": "qBittorrent",
+        "downloadClientName": "Mock qBittorrent",
+        "downloadUrl": "http://127.0.0.1:18989/movies/torznab/download/c8949b89db6f20a1e049aa8170a7a05c.torrent",
+        "guid": "http://127.0.0.1:18989/movies/torznab/details/c8949b89db6f20a1e049aa8170a7a05c",
+        "imdbId": "9639470",
+        "indexer": "Mock Torznab (Prowlarr)",
+        "indexerFlags": "G_Freeleech",
+        "indexerId": "21",
+        "movieMatchType": "Id",
+        "nzbInfoUrl": "http://127.0.0.1:18989/movies/torznab/details/c8949b89db6f20a1e049aa8170a7a05c",
+        "protocol": "2",
+        "publishedDate": "2026-11-09T19:05:00Z",
+        "releaseGroup": "MIRCrew",
+        "releaseSource": "Rss",
+        "size": "6979321856",
+        "tmdbId": "0",
+        "torrentInfoHash": "d0c1309e36cdb92c5d7b4abfd794f9bdff969920"
+      },
+      "date": "2026-11-12T09:55:47Z",
+      "downloadId": "13706ED57ADBE030F510BEDCD37595376901117C",
+      "eventType": "grabbed",
+      "id": 1010,
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        },
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movieId": 62,
+      "quality": {
+        "quality": {
+          "id": 7,
+          "modifier": "none",
+          "name": "Bluray-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "sourceTitle": "Last.Night.in.Soho.2021.iTA.ENG.1080p.BluRay.x264-MIRCrew"
+    },
+    {
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 41,
+          "name": "TrueHD ATMOS"
+        }
+      ],
+      "data": {
+        "indexerFlags": "0",
+        "reason": "Manual",
+        "releaseGroup": "LEGi0N",
+        "size": "31318344139"
+      },
+      "date": "2026-03-29T10:56:33Z",
+      "eventType": "movieFileDeleted",
+      "id": 148,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movieId": 62,
+      "quality": {
+        "quality": {
+          "id": 30,
+          "modifier": "remux",
+          "name": "Remux-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "/movies/Last Night in Soho (2021)/Last Night in Soho (2021) {tmdb-576845} - [Remux-1080p][TrueHD Atmos 7.1][AVC]-LEGi0N.mkv"
+    },
+    {
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        }
+      ],
+      "data": {
+        "customFormatScore": "0",
+        "downloadClient": "NZBGet",
+        "downloadClientName": "Download client",
+        "droppedPath": "/downloads/Last.Night.in.Soho.2021.BluRay.1080p.REMUX.AVC.Atmos.DTS-HD.MA.7.1-LEGi0N.mkv",
+        "fileId": "128",
+        "importedPath": "/movies/Last Night in Soho (2021)/Last Night in Soho (2021) {tmdb-576845} - [Remux-1080p][TrueHD Atmos 7.1][AVC]-LEGi0N.mkv",
+        "indexerFlags": "0",
+        "releaseGroup": "LEGi0N",
+        "size": "31318344139"
+      },
+      "date": "2026-03-12T20:43:30Z",
+      "downloadId": "fdb8984597bb398788c85e564ab9e9af",
+      "eventType": "downloadFolderImported",
+      "id": 13,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movieId": 62,
+      "quality": {
+        "quality": {
+          "id": 30,
+          "modifier": "remux",
+          "name": "Remux-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "Last.Night.in.Soho.2021.BluRay.1080p.REMUX.AVC.Atmos.DTS-HD.MA.7.1-LEGi0N"
+    },
+    {
+      "customFormatScore": 0,
+      "customFormats": [],
+      "data": {
+        "indexerFlags": "0",
+        "reason": "Upgrade",
+        "releaseGroup": null,
+        "size": "52253476876"
+      },
+      "date": "2026-03-12T20:43:29Z",
+      "eventType": "movieFileDeleted",
+      "id": 12,
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        },
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movieId": 62,
+      "quality": {
+        "quality": {
+          "id": 31,
+          "modifier": "remux",
+          "name": "Remux-2160p",
+          "resolution": 2160,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "/movies/Last Night in Soho (2021)/Last Night in Soho (2021) Remux-2160p.mkv"
+    },
+    {
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        }
+      ],
+      "data": {
+        "age": "1514",
+        "ageHours": "36336.497298847615",
+        "ageMinutes": "2180189.8379309885",
+        "customFormatScore": "0",
+        "downloadClient": "NZBGet",
+        "downloadClientName": "Download client",
+        "downloadUrl": "http://indexer.invalid/460ee094d101",
+        "guid": "http://indexer.invalid/5269ca5c9553",
+        "imdbId": "9639470",
+        "indexer": "Indexer",
+        "indexerFlags": "0",
+        "indexerId": "1",
+        "movieMatchType": "Id",
+        "nzbInfoUrl": "http://indexer.invalid/5269ca5c9553",
+        "protocol": "1",
+        "publishedDate": "2022-01-18T19:15:22Z",
+        "releaseGroup": "LEGi0N",
+        "releaseSource": "UserInvokedSearch",
+        "size": "32924765000",
+        "tmdbId": "0"
+      },
+      "date": "2026-03-12T19:45:12Z",
+      "downloadId": "fdb8984597bb398788c85e564ab9e9af",
+      "eventType": "grabbed",
+      "id": 11,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movieId": 62,
+      "quality": {
+        "quality": {
+          "id": 30,
+          "modifier": "remux",
+          "name": "Remux-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "Last.Night.in.Soho.2021.BluRay.1080p.REMUX.AVC.Atmos.DTS-HD.MA.7.1-LEGi0N"
+    },
+    {
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 53,
+          "name": "AAC"
+        },
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 32,
+          "name": "PCOK"
+        }
+      ],
+      "data": {
+        "downloadClient": "NZBGet",
+        "downloadClientName": "Download client",
+        "indexer": "Indexer",
+        "message": "redacted",
+        "releaseGroup": "OnlyWeb",
+        "size": "4487891134"
+      },
+      "date": "2026-03-12T19:45:01Z",
+      "downloadId": "54ea4c75b0272cb6c86cbfa188ce1f1e",
+      "eventType": "downloadFailed",
+      "id": 10,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movieId": 62,
+      "quality": {
+        "quality": {
+          "id": 3,
+          "modifier": "none",
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "webdl"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "Looking.in.the.Mirror.2021.1080p.PCOK.WEB-DL.AAC.2.0.H.264-OnlyWeb"
+    },
+    {
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 53,
+          "name": "AAC"
+        },
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        },
+        {
+          "id": 32,
+          "name": "PCOK"
+        }
+      ],
+      "data": {
+        "age": "0",
+        "ageHours": "0.30347958677777775",
+        "ageMinutes": "18.208775363333334",
+        "customFormatScore": "0",
+        "downloadClient": "NZBGet",
+        "downloadClientName": "Download client",
+        "downloadUrl": "http://indexer.invalid/18b234f761b5",
+        "guid": "http://indexer.invalid/09218f7c9c36",
+        "imdbId": "9639470",
+        "indexer": "Indexer",
+        "indexerFlags": "0",
+        "indexerId": "3",
+        "movieMatchType": "Id",
+        "nzbInfoUrl": "http://indexer.invalid/09218f7c9c36",
+        "protocol": "1",
+        "publishedDate": "2026-03-12T18:34:13Z",
+        "releaseGroup": "OnlyWeb",
+        "releaseSource": "Rss",
+        "size": "4487891134",
+        "tmdbId": "0"
+      },
+      "date": "2026-03-12T18:52:25Z",
+      "downloadId": "54ea4c75b0272cb6c86cbfa188ce1f1e",
+      "eventType": "grabbed",
+      "id": 9,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "movieId": 62,
+      "quality": {
+        "quality": {
+          "id": 3,
+          "modifier": "none",
+          "name": "WEBDL-1080p",
+          "resolution": 1080,
+          "source": "webdl"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "sourceTitle": "Looking.in.the.Mirror.2021.1080p.PCOK.WEB-DL.AAC.2.0.H.264-OnlyWeb"
+    }
+  ],
+  "recordedAt": "2026-11-12T10:00:45Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/history/movie?movieId=62"
+  },
+  "status": 200
+}

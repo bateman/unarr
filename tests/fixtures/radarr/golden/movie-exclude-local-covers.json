@@ -36166,7 +36166,7 @@
       "youTubeTrailerId": "xxG-YfedrfU"
     }
   ],
-  "recordedAt": "2026-11-11T22:00:02Z",
+  "recordedAt": "2026-11-12T09:55:23Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/movie?excludeLocalCovers=true"

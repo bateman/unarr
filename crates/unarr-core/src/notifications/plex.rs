@@ -237,6 +237,16 @@ fn check_for_error(text: &str) -> Result<(), PlexError> {
 
 /// `GetTvSections`: the sections of type `show`.
 async fn sections(notifier: &Notifier, settings: &Settings) -> Result<Vec<Section>, PlexError> {
+    sections_of(notifier, settings, "show").await
+}
+
+/// `GetTvSections` / `GetMovieSections`: the sections of one type (`show`
+/// for series, `movie` for movies).
+pub(crate) async fn sections_of(
+    notifier: &Notifier,
+    settings: &Settings,
+    section_type: &str,
+) -> Result<Vec<Section>, PlexError> {
     tracing::debug!(host = %settings.host, "getting sections from Plex host");
     let text = get(notifier, settings, "library/sections", &[]).await?;
     let v: Value = serde_json::from_str(&text)
@@ -251,7 +261,7 @@ async fn sections(notifier: &Notifier, settings: &Settings) -> Result<Vec<Sectio
     };
     Ok(directories
         .iter()
-        .filter(|d| d["type"].as_str() == Some("show"))
+        .filter(|d| d["type"].as_str() == Some(section_type))
         .map(|d| Section {
             id: d["key"]
                 .as_i64()
@@ -287,6 +297,11 @@ async fn version(notifier: &Notifier, settings: &Settings) -> Result<String, Ple
 /// `GetVersion` + `ValidateVersion`: the leading four numbers, with the
 /// one release whose library updates were broken refused.
 fn validate_version(raw: &str) -> Result<(), PlexError> {
+    validate_version_for(raw, "Sonarr")
+}
+
+/// The same, naming the application the message tells to restart.
+pub(crate) fn validate_version_for(raw: &str, app: &str) -> Result<(), PlexError> {
     let mut parts = Vec::new();
     for piece in raw.split(['.', '-']) {
         match piece.parse::<i64>() {
@@ -296,7 +311,7 @@ fn validate_version(raw: &str) -> Result<(), PlexError> {
     }
     if parts.len() >= 3 && parts[0] == 1 && parts[1] == 3 && parts[2] == 0 {
         return Err(PlexError::Other(format!(
-            "Found version {raw}, upgrade to PMS 1.3.1 to fix library updating and then restart Sonarr"
+            "Found version {raw}, upgrade to PMS 1.3.1 to fix library updating and then restart {app}"
         )));
     }
     Ok(())
@@ -320,7 +335,7 @@ async fn refresh(
 }
 
 /// `OsPath(MapTo) + (rootFolder - OsPath(MapFrom))`.
-fn mapped_root(root: &str, settings: &Settings) -> String {
+pub(crate) fn mapped_root(root: &str, settings: &Settings) -> String {
     if settings.map_to.trim().is_empty() {
         return root.to_string();
     }
@@ -344,40 +359,91 @@ async fn update_sections(
     sections: &[Section],
     root_folders: &[RootFolder],
 ) -> Result<(), PlexError> {
-    let root = crate::mediafiles::approve::best_root_folder_path(root_folders, &series.path);
-    let relative = crate::mediafiles::relative_path(&root, &series.path).to_string();
+    update_sections_for(notifier, settings, &series.path, sections, root_folders, "TV").await
+}
+
+/// What `UpdateSections` asks Plex for: the section and the path of every
+/// refresh, the one matching location first when there is one.
+pub(crate) fn section_updates(
+    settings: &Settings,
+    path: &str,
+    sections: &[Section],
+    root_folders: &[RootFolder],
+    library: &str,
+) -> Vec<(i64, String)> {
+    let root = crate::mediafiles::approve::best_root_folder_path(root_folders, path);
+    let relative = crate::mediafiles::relative_path(&root, path).to_string();
     let mapped = mapped_root(&root, settings);
     for section in sections {
         for location in &section.locations {
             if crate::mediafiles::path_equals(location, &mapped) {
                 tracing::debug!(location, "updating matching section location");
-                return update_section_path(notifier, settings, &relative, section.id, location).await;
+                return vec![(section.id, section_path(&relative, location))];
             }
         }
     }
-    tracing::debug!("unable to find matching section location, updating all TV sections");
-    for section in sections {
-        for location in &section.locations {
-            update_section_path(notifier, settings, &relative, section.id, location).await?;
-        }
+    tracing::debug!("unable to find matching section location, updating all {library} sections");
+    sections
+        .iter()
+        .flat_map(|section| {
+            section
+                .locations
+                .iter()
+                .map(|location| (section.id, section_path(&relative, location)))
+        })
+        .collect()
+}
+
+/// `UpdateSections` for a folder of the library, whatever it holds: a
+/// series' for the TV sections, a movie's for the movie sections.
+pub(crate) async fn update_sections_for(
+    notifier: &Notifier,
+    settings: &Settings,
+    path: &str,
+    sections: &[Section],
+    root_folders: &[RootFolder],
+    library: &str,
+) -> Result<(), PlexError> {
+    for (section, path) in section_updates(settings, path, sections, root_folders, library) {
+        tracing::debug!(path, "updating section location");
+        refresh(notifier, settings, section, &path).await?;
     }
     Ok(())
 }
 
-/// `UpdateSectionPath`: the location plus the series' path under its root,
-/// with the location's separator.
-async fn update_section_path(
-    notifier: &Notifier,
-    settings: &Settings,
-    relative: &str,
-    section: i64,
-    location: &str,
-) -> Result<(), PlexError> {
+/// `UpdateSectionPath`: the location plus the folder's path under its
+/// root, with the location's separator.
+fn section_path(relative: &str, location: &str) -> String {
     let separator = if location.contains('\\') { "\\" } else { "/" };
     let relative = relative.replace(['\\', '/'], separator);
-    let path = format!("{location}{separator}{relative}");
-    tracing::debug!(location, "updating section location");
-    refresh(notifier, settings, section, &path).await
+    format!("{location}{separator}{relative}")
+}
+
+/// `_versionCache.Get(settings.Host, () => GetVersion(settings), 2 hours)`.
+pub(crate) async fn cached_version(
+    notifier: &Notifier,
+    settings: &Settings,
+    now: DateTime<Utc>,
+) -> Result<String, PlexError> {
+    let cached = {
+        let versions = notifier.plex_versions().lock().unwrap();
+        versions
+            .get(&settings.host)
+            .filter(|(_, at)| *at + Duration::hours(2) > now)
+            .map(|(v, _)| v.clone())
+    };
+    match cached {
+        Some(v) => Ok(v),
+        None => {
+            let v = version(notifier, settings).await?;
+            notifier
+                .plex_versions()
+                .lock()
+                .unwrap()
+                .insert(settings.host.clone(), (v.clone(), now));
+            Ok(v)
+        }
+    }
 }
 
 /// `PlexServerService.UpdateLibrary`.
@@ -388,25 +454,7 @@ pub async fn update_library(
     now: DateTime<Utc>,
 ) -> Result<(), PlexError> {
     tracing::debug!("sending update request to Plex server");
-    let cached = {
-        let versions = notifier.plex_versions().lock().unwrap();
-        versions
-            .get(&settings.host)
-            .filter(|(_, at)| *at + Duration::hours(2) > now)
-            .map(|(v, _)| v.clone())
-    };
-    let version = match cached {
-        Some(v) => v,
-        None => {
-            let v = version(notifier, settings).await?;
-            notifier
-                .plex_versions()
-                .lock()
-                .unwrap()
-                .insert(settings.host.clone(), (v.clone(), now));
-            v
-        }
-    };
+    let version = cached_version(notifier, settings, now).await?;
     validate_version(&version)?;
     let sections = sections(notifier, settings).await?;
     let root_folders = notifier
@@ -424,12 +472,22 @@ pub async fn update_library(
 /// `PlexServerService.Test`: the sections, with the cached version
 /// forgotten; every failure is a validation failure, never an error.
 pub async fn test(notifier: &Notifier, settings: &Settings, _now: DateTime<Utc>) -> TestOutcome {
+    test_for(notifier, settings, "show", "At least one TV library is required").await
+}
+
+/// The same for the sections of one type, with what a server without one
+/// is told.
+pub(crate) async fn test_for(
+    notifier: &Notifier,
+    settings: &Settings,
+    section_type: &str,
+    no_library: &str,
+) -> TestOutcome {
     notifier.plex_versions().lock().unwrap().remove(&settings.host);
-    match sections(notifier, settings).await {
-        Ok(sections) if sections.is_empty() => TestOutcome::Failures(vec![ValidationFailure::error(
-            "Host",
-            "At least one TV library is required",
-        )]),
+    match sections_of(notifier, settings, section_type).await {
+        Ok(sections) if sections.is_empty() => {
+            TestOutcome::Failures(vec![ValidationFailure::error("Host", no_library)])
+        }
         Ok(_) => TestOutcome::Failures(Vec::new()),
         Err(PlexError::Authentication) => {
             tracing::error!("unable to connect to Plex Media Server: the auth token is invalid");

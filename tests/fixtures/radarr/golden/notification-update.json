@@ -1,0 +1,115 @@
+{
+  "body": {
+    "configContract": "WebhookSettings",
+    "fields": [
+      {
+        "advanced": false,
+        "isFloat": false,
+        "label": "Webhook URL",
+        "name": "url",
+        "order": 0,
+        "privacy": "normal",
+        "type": "url",
+        "value": "http://127.0.0.1:18989/webhook/updated"
+      },
+      {
+        "advanced": false,
+        "helpText": "Which HTTP method to use submit to the Webservice",
+        "isFloat": false,
+        "label": "Method",
+        "name": "method",
+        "order": 1,
+        "privacy": "normal",
+        "selectOptions": [
+          {
+            "dividerAfter": false,
+            "name": "POST",
+            "order": 1,
+            "value": 1
+          },
+          {
+            "dividerAfter": false,
+            "name": "PUT",
+            "order": 2,
+            "value": 2
+          }
+        ],
+        "type": "select",
+        "value": 2
+      },
+      {
+        "advanced": false,
+        "isFloat": false,
+        "label": "Username",
+        "name": "username",
+        "order": 2,
+        "privacy": "userName",
+        "type": "textbox",
+        "value": "hook"
+      },
+      {
+        "advanced": false,
+        "isFloat": false,
+        "label": "Password",
+        "name": "password",
+        "order": 3,
+        "privacy": "password",
+        "type": "password",
+        "value": "********"
+      },
+      {
+        "advanced": true,
+        "isFloat": false,
+        "label": "Headers",
+        "name": "headers",
+        "order": 4,
+        "privacy": "normal",
+        "type": "keyValueList",
+        "value": [
+          {
+            "key": "X-Fixture",
+            "value": "yes"
+          }
+        ]
+      }
+    ],
+    "id": 5,
+    "implementation": "Webhook",
+    "implementationName": "Webhook",
+    "includeHealthWarnings": false,
+    "infoLink": "https://wiki.servarr.com/radarr/supported#webhook",
+    "name": "Mock Webhook (PUT)",
+    "onApplicationUpdate": true,
+    "onDownload": true,
+    "onGrab": false,
+    "onHealthIssue": true,
+    "onHealthRestored": true,
+    "onManualInteractionRequired": true,
+    "onMovieAdded": true,
+    "onMovieDelete": true,
+    "onMovieFileDelete": true,
+    "onMovieFileDeleteForUpgrade": true,
+    "onRename": true,
+    "onUpgrade": true,
+    "supportsOnApplicationUpdate": true,
+    "supportsOnDownload": true,
+    "supportsOnGrab": true,
+    "supportsOnHealthIssue": true,
+    "supportsOnHealthRestored": true,
+    "supportsOnManualInteractionRequired": true,
+    "supportsOnMovieAdded": true,
+    "supportsOnMovieDelete": true,
+    "supportsOnMovieFileDelete": true,
+    "supportsOnMovieFileDeleteForUpgrade": true,
+    "supportsOnRename": true,
+    "supportsOnUpgrade": true,
+    "tags": []
+  },
+  "recordedAt": "2026-11-12T09:57:20Z",
+  "request": {
+    "body": "bodies/notification-update-webhook.json",
+    "method": "PUT",
+    "path": "/api/v3/notification/5"
+  },
+  "status": 202
+}

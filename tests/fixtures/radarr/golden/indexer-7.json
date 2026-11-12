@@ -594,7 +594,7 @@
     "supportsSearch": true,
     "tags": []
   },
-  "recordedAt": "2026-11-11T22:00:06Z",
+  "recordedAt": "2026-11-12T09:55:28Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/indexer/7"

@@ -176,7 +176,7 @@ fn language_names(languages: &[i64]) -> String {
 }
 
 /// `Movie.ToString()`.
-fn movie_string(movie: &Movie) -> String {
+pub(crate) fn movie_string(movie: &Movie) -> String {
     format!(
         "[{} ({})][{}, {}]",
         movie.metadata.title,

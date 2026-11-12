@@ -8,7 +8,7 @@ use crate::movies::model::{Movie, MovieBlocklistEntry, MovieFile, MovieHistoryEn
 use crate::movies::parser::{parse_movie_title, simplify_release_title};
 use crate::movies::quality::{modifier_number, source_number, MovieQuality};
 
-fn facts<'a>(quality: &QualityModel, edition: Option<&'a str>, movie: &Movie) -> MovieFacts<'a> {
+pub(crate) fn facts<'a>(quality: &QualityModel, edition: Option<&'a str>, movie: &Movie) -> MovieFacts<'a> {
     let q = MovieQuality::by_id(quality.quality_id);
     MovieFacts {
         source: source_number(q.source),

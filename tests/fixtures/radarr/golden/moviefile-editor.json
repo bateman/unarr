@@ -1,0 +1,73 @@
+{
+  "body": [
+    {
+      "customFormatScore": -10000,
+      "customFormats": [
+        {
+          "id": 53,
+          "name": "AAC"
+        },
+        {
+          "id": 58,
+          "name": "Language not Italian"
+        }
+      ],
+      "dateAdded": "2026-11-12T10:00:33Z",
+      "edition": "Extended",
+      "id": 411,
+      "indexerFlags": 1,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 0,
+        "audioChannels": 1,
+        "audioCodec": "AAC",
+        "audioLanguages": "eng",
+        "audioStreamCount": 1,
+        "resolution": "64x64",
+        "runTime": "10:10",
+        "scanType": "Progressive",
+        "subtitles": "eng",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "x264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 2
+      },
+      "movieId": 62,
+      "originalFilePath": "c8949b89db6f20a1e049aa8170a7a05c/c8949b89db6f20a1e049aa8170a7a05c.mkv",
+      "path": "/movies/Last Night in Soho (2021)/Last Night in Soho (2021) {tmdb-576845} - [Bluray-1080p][AAC 1.0][x264]-MIRCrew.mkv",
+      "quality": {
+        "quality": {
+          "id": 6,
+          "modifier": "none",
+          "name": "Bluray-720p",
+          "resolution": 720,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "relativePath": "Last Night in Soho (2021) {tmdb-576845} - [Bluray-1080p][AAC 1.0][x264]-MIRCrew.mkv",
+      "releaseGroup": "GRP",
+      "sceneName": "Last.Night.in.Soho.2021.1080p.WEB-DL.x264-GRP",
+      "size": 119980
+    }
+  ],
+  "recordedAt": "2026-11-12T10:00:45Z",
+  "request": {
+    "body": "bodies/moviefile-editor.json",
+    "method": "PUT",
+    "path": "/api/v3/moviefile/editor"
+  },
+  "status": 202
+}

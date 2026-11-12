@@ -1,0 +1,39 @@
+{
+  "body": {
+    "body": {
+      "downloadClientId": "B133034E90669E52E3BA3460A651D3545769CB85",
+      "importMode": "copy",
+      "isExclusive": false,
+      "isLongRunning": true,
+      "isTypeExclusive": false,
+      "name": "DownloadedMoviesScan",
+      "path": "/downloads/movies/d94f74e9588477404bd8d34ffc605870",
+      "requiresDiskAccess": true,
+      "sendUpdates": false,
+      "sendUpdatesToClient": false,
+      "suppressMessages": true,
+      "trigger": "manual",
+      "updateScheduledTask": true
+    },
+    "commandName": "Downloaded Movies Scan",
+    "duration": "00:00:00.0715388",
+    "ended": "2026-11-12T09:59:37Z",
+    "id": 473004,
+    "name": "DownloadedMoviesScan",
+    "priority": "normal",
+    "queued": "2026-11-12T09:59:37Z",
+    "result": "successful",
+    "sendUpdatesToClient": false,
+    "started": "2026-11-12T09:59:37Z",
+    "stateChangeTime": "2026-11-12T09:59:37Z",
+    "status": "completed",
+    "trigger": "manual",
+    "updateScheduledTask": true
+  },
+  "recordedAt": "2026-11-12T09:59:49Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/command/473004"
+  },
+  "status": 200
+}

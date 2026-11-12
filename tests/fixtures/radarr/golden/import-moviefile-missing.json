@@ -1,0 +1,14 @@
+{
+  "body": {
+    "status": 404,
+    "title": "Not Found",
+    "traceId": "00-7fa111d36b0f9911d435800afcdfde3a-cf2b064dd2bbdc7f-00",
+    "type": "https://tools.ietf.org/html/rfc9110#section-15.5.5"
+  },
+  "recordedAt": "2026-11-12T09:58:09Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/moviefile/999999"
+  },
+  "status": 404
+}

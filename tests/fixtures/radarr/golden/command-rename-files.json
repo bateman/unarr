@@ -1,0 +1,36 @@
+{
+  "body": {
+    "body": {
+      "files": [
+        408
+      ],
+      "isExclusive": false,
+      "isLongRunning": false,
+      "isTypeExclusive": false,
+      "movieId": 10,
+      "name": "RenameFiles",
+      "requiresDiskAccess": true,
+      "sendUpdatesToClient": true,
+      "suppressMessages": false,
+      "trigger": "manual",
+      "updateScheduledTask": true
+    },
+    "commandName": "Rename Files",
+    "id": 473010,
+    "name": "RenameFiles",
+    "priority": "normal",
+    "queued": "2026-11-12T10:00:09Z",
+    "result": "unknown",
+    "sendUpdatesToClient": true,
+    "status": "queued",
+    "trigger": "manual",
+    "updateScheduledTask": true
+  },
+  "recordedAt": "2026-11-12T10:00:09Z",
+  "request": {
+    "body": "bodies/command-rename-files.json",
+    "method": "POST",
+    "path": "/api/v3/command"
+  },
+  "status": 201
+}

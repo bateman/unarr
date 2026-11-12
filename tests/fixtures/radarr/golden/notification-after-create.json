@@ -1,0 +1,1310 @@
+{
+  "body": [
+    {
+      "configContract": "DiscordSettings",
+      "fields": [
+        {
+          "advanced": false,
+          "helpText": "Discord channel webhook url",
+          "isFloat": false,
+          "label": "Webhook URL",
+          "name": "webHookUrl",
+          "order": 0,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": "http://discord.invalid/"
+        },
+        {
+          "advanced": false,
+          "helpText": "The username to post as, defaults to Discord webhook default",
+          "isFloat": false,
+          "label": "Username",
+          "name": "username",
+          "order": 1,
+          "privacy": "userName",
+          "type": "textbox",
+          "value": "redacted"
+        },
+        {
+          "advanced": false,
+          "helpText": "Change the avatar that is used for messages from this integration",
+          "isFloat": false,
+          "label": "Avatar",
+          "name": "avatar",
+          "order": 2,
+          "privacy": "normal",
+          "type": "textbox"
+        },
+        {
+          "advanced": true,
+          "helpText": "Override the embed author that shows for this notification. Blank is instance name",
+          "isFloat": false,
+          "label": "Author",
+          "name": "author",
+          "order": 3,
+          "privacy": "normal",
+          "type": "textbox"
+        },
+        {
+          "advanced": true,
+          "helpText": "Change the fields that are passed in for this 'on grab' notification",
+          "isFloat": false,
+          "label": "On Grab Fields",
+          "name": "grabFields",
+          "order": 4,
+          "privacy": "normal",
+          "selectOptions": [
+            {
+              "dividerAfter": false,
+              "name": "Overview",
+              "order": 0,
+              "value": 0
+            },
+            {
+              "dividerAfter": false,
+              "name": "Rating",
+              "order": 1,
+              "value": 1
+            },
+            {
+              "dividerAfter": false,
+              "name": "Genres",
+              "order": 2,
+              "value": 2
+            },
+            {
+              "dividerAfter": false,
+              "name": "Quality",
+              "order": 3,
+              "value": 3
+            },
+            {
+              "dividerAfter": false,
+              "name": "Group",
+              "order": 4,
+              "value": 4
+            },
+            {
+              "dividerAfter": false,
+              "name": "Size",
+              "order": 5,
+              "value": 5
+            },
+            {
+              "dividerAfter": false,
+              "name": "Links",
+              "order": 6,
+              "value": 6
+            },
+            {
+              "dividerAfter": false,
+              "name": "Release",
+              "order": 7,
+              "value": 7
+            },
+            {
+              "dividerAfter": false,
+              "name": "Poster",
+              "order": 8,
+              "value": 8
+            },
+            {
+              "dividerAfter": false,
+              "name": "Fanart",
+              "order": 9,
+              "value": 9
+            },
+            {
+              "dividerAfter": false,
+              "name": "Indexer",
+              "order": 10,
+              "value": 10
+            },
+            {
+              "dividerAfter": false,
+              "name": "CustomFormats",
+              "order": 11,
+              "value": 11
+            },
+            {
+              "dividerAfter": false,
+              "name": "CustomFormatScore",
+              "order": 12,
+              "value": 12
+            },
+            {
+              "dividerAfter": false,
+              "name": "Tags",
+              "order": 13,
+              "value": 13
+            }
+          ],
+          "type": "select",
+          "value": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13
+          ]
+        },
+        {
+          "advanced": true,
+          "helpText": "Change the fields that are passed in for this 'on import' notification",
+          "isFloat": false,
+          "label": "On Import Fields",
+          "name": "importFields",
+          "order": 5,
+          "privacy": "normal",
+          "selectOptions": [
+            {
+              "dividerAfter": false,
+              "name": "Overview",
+              "order": 0,
+              "value": 0
+            },
+            {
+              "dividerAfter": false,
+              "name": "Rating",
+              "order": 1,
+              "value": 1
+            },
+            {
+              "dividerAfter": false,
+              "name": "Genres",
+              "order": 2,
+              "value": 2
+            },
+            {
+              "dividerAfter": false,
+              "name": "Quality",
+              "order": 3,
+              "value": 3
+            },
+            {
+              "dividerAfter": false,
+              "name": "Codecs",
+              "order": 4,
+              "value": 4
+            },
+            {
+              "dividerAfter": false,
+              "name": "Group",
+              "order": 5,
+              "value": 5
+            },
+            {
+              "dividerAfter": false,
+              "name": "Size",
+              "order": 6,
+              "value": 6
+            },
+            {
+              "dividerAfter": false,
+              "name": "Languages",
+              "order": 7,
+              "value": 7
+            },
+            {
+              "dividerAfter": false,
+              "name": "Subtitles",
+              "order": 8,
+              "value": 8
+            },
+            {
+              "dividerAfter": false,
+              "name": "Links",
+              "order": 9,
+              "value": 9
+            },
+            {
+              "dividerAfter": false,
+              "name": "Release",
+              "order": 10,
+              "value": 10
+            },
+            {
+              "dividerAfter": false,
+              "name": "Poster",
+              "order": 11,
+              "value": 11
+            },
+            {
+              "dividerAfter": false,
+              "name": "Fanart",
+              "order": 12,
+              "value": 12
+            },
+            {
+              "dividerAfter": false,
+              "name": "Tags",
+              "order": 13,
+              "value": 13
+            },
+            {
+              "dividerAfter": false,
+              "name": "CustomFormats",
+              "order": 14,
+              "value": 14
+            },
+            {
+              "dividerAfter": false,
+              "name": "CustomFormatScore",
+              "order": 15,
+              "value": 15
+            }
+          ],
+          "type": "select",
+          "value": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13
+          ]
+        },
+        {
+          "advanced": true,
+          "helpText": "Change the fields that are passed in for this 'on manual interation' notification",
+          "isFloat": false,
+          "label": "On Manual Interaction Fields",
+          "name": "manualInteractionFields",
+          "order": 6,
+          "privacy": "normal",
+          "selectOptions": [
+            {
+              "dividerAfter": false,
+              "name": "Overview",
+              "order": 0,
+              "value": 0
+            },
+            {
+              "dividerAfter": false,
+              "name": "Rating",
+              "order": 1,
+              "value": 1
+            },
+            {
+              "dividerAfter": false,
+              "name": "Genres",
+              "order": 2,
+              "value": 2
+            },
+            {
+              "dividerAfter": false,
+              "name": "Quality",
+              "order": 3,
+              "value": 3
+            },
+            {
+              "dividerAfter": false,
+              "name": "Group",
+              "order": 4,
+              "value": 4
+            },
+            {
+              "dividerAfter": false,
+              "name": "Size",
+              "order": 5,
+              "value": 5
+            },
+            {
+              "dividerAfter": false,
+              "name": "Links",
+              "order": 6,
+              "value": 6
+            },
+            {
+              "dividerAfter": false,
+              "name": "DownloadTitle",
+              "order": 7,
+              "value": 7
+            },
+            {
+              "dividerAfter": false,
+              "name": "Poster",
+              "order": 8,
+              "value": 8
+            },
+            {
+              "dividerAfter": false,
+              "name": "Fanart",
+              "order": 9,
+              "value": 9
+            },
+            {
+              "dividerAfter": false,
+              "name": "Tags",
+              "order": 10,
+              "value": 10
+            }
+          ],
+          "type": "select",
+          "value": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        }
+      ],
+      "id": 1,
+      "implementation": "Discord",
+      "implementationName": "Discord",
+      "includeHealthWarnings": false,
+      "infoLink": "https://wiki.servarr.com/radarr/supported#discord",
+      "name": "Discord 1",
+      "onApplicationUpdate": false,
+      "onDownload": true,
+      "onGrab": true,
+      "onHealthIssue": false,
+      "onHealthRestored": false,
+      "onManualInteractionRequired": false,
+      "onMovieAdded": false,
+      "onMovieDelete": false,
+      "onMovieFileDelete": false,
+      "onMovieFileDeleteForUpgrade": true,
+      "onRename": false,
+      "onUpgrade": true,
+      "supportsOnApplicationUpdate": true,
+      "supportsOnDownload": true,
+      "supportsOnGrab": true,
+      "supportsOnHealthIssue": true,
+      "supportsOnHealthRestored": true,
+      "supportsOnManualInteractionRequired": true,
+      "supportsOnMovieAdded": true,
+      "supportsOnMovieDelete": true,
+      "supportsOnMovieFileDelete": true,
+      "supportsOnMovieFileDeleteForUpgrade": true,
+      "supportsOnRename": true,
+      "supportsOnUpgrade": true,
+      "tags": []
+    },
+    {
+      "configContract": "DiscordSettings",
+      "fields": [
+        {
+          "advanced": false,
+          "helpText": "Discord channel webhook url",
+          "isFloat": false,
+          "label": "Webhook URL",
+          "name": "webHookUrl",
+          "order": 0,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": "http://127.0.0.1:18989/discord/api/webhooks/100/fixturetoken"
+        },
+        {
+          "advanced": false,
+          "helpText": "The username to post as, defaults to Discord webhook default",
+          "isFloat": false,
+          "label": "Username",
+          "name": "username",
+          "order": 1,
+          "privacy": "userName",
+          "type": "textbox",
+          "value": "Unarr fixture"
+        },
+        {
+          "advanced": false,
+          "helpText": "Change the avatar that is used for messages from this integration",
+          "isFloat": false,
+          "label": "Avatar",
+          "name": "avatar",
+          "order": 2,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": ""
+        },
+        {
+          "advanced": true,
+          "helpText": "Override the embed author that shows for this notification. Blank is instance name",
+          "isFloat": false,
+          "label": "Author",
+          "name": "author",
+          "order": 3,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": ""
+        },
+        {
+          "advanced": true,
+          "helpText": "Change the fields that are passed in for this 'on grab' notification",
+          "isFloat": false,
+          "label": "On Grab Fields",
+          "name": "grabFields",
+          "order": 4,
+          "privacy": "normal",
+          "selectOptions": [
+            {
+              "dividerAfter": false,
+              "name": "Overview",
+              "order": 0,
+              "value": 0
+            },
+            {
+              "dividerAfter": false,
+              "name": "Rating",
+              "order": 1,
+              "value": 1
+            },
+            {
+              "dividerAfter": false,
+              "name": "Genres",
+              "order": 2,
+              "value": 2
+            },
+            {
+              "dividerAfter": false,
+              "name": "Quality",
+              "order": 3,
+              "value": 3
+            },
+            {
+              "dividerAfter": false,
+              "name": "Group",
+              "order": 4,
+              "value": 4
+            },
+            {
+              "dividerAfter": false,
+              "name": "Size",
+              "order": 5,
+              "value": 5
+            },
+            {
+              "dividerAfter": false,
+              "name": "Links",
+              "order": 6,
+              "value": 6
+            },
+            {
+              "dividerAfter": false,
+              "name": "Release",
+              "order": 7,
+              "value": 7
+            },
+            {
+              "dividerAfter": false,
+              "name": "Poster",
+              "order": 8,
+              "value": 8
+            },
+            {
+              "dividerAfter": false,
+              "name": "Fanart",
+              "order": 9,
+              "value": 9
+            },
+            {
+              "dividerAfter": false,
+              "name": "Indexer",
+              "order": 10,
+              "value": 10
+            },
+            {
+              "dividerAfter": false,
+              "name": "CustomFormats",
+              "order": 11,
+              "value": 11
+            },
+            {
+              "dividerAfter": false,
+              "name": "CustomFormatScore",
+              "order": 12,
+              "value": 12
+            },
+            {
+              "dividerAfter": false,
+              "name": "Tags",
+              "order": 13,
+              "value": 13
+            }
+          ],
+          "type": "select",
+          "value": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13
+          ]
+        },
+        {
+          "advanced": true,
+          "helpText": "Change the fields that are passed in for this 'on import' notification",
+          "isFloat": false,
+          "label": "On Import Fields",
+          "name": "importFields",
+          "order": 5,
+          "privacy": "normal",
+          "selectOptions": [
+            {
+              "dividerAfter": false,
+              "name": "Overview",
+              "order": 0,
+              "value": 0
+            },
+            {
+              "dividerAfter": false,
+              "name": "Rating",
+              "order": 1,
+              "value": 1
+            },
+            {
+              "dividerAfter": false,
+              "name": "Genres",
+              "order": 2,
+              "value": 2
+            },
+            {
+              "dividerAfter": false,
+              "name": "Quality",
+              "order": 3,
+              "value": 3
+            },
+            {
+              "dividerAfter": false,
+              "name": "Codecs",
+              "order": 4,
+              "value": 4
+            },
+            {
+              "dividerAfter": false,
+              "name": "Group",
+              "order": 5,
+              "value": 5
+            },
+            {
+              "dividerAfter": false,
+              "name": "Size",
+              "order": 6,
+              "value": 6
+            },
+            {
+              "dividerAfter": false,
+              "name": "Languages",
+              "order": 7,
+              "value": 7
+            },
+            {
+              "dividerAfter": false,
+              "name": "Subtitles",
+              "order": 8,
+              "value": 8
+            },
+            {
+              "dividerAfter": false,
+              "name": "Links",
+              "order": 9,
+              "value": 9
+            },
+            {
+              "dividerAfter": false,
+              "name": "Release",
+              "order": 10,
+              "value": 10
+            },
+            {
+              "dividerAfter": false,
+              "name": "Poster",
+              "order": 11,
+              "value": 11
+            },
+            {
+              "dividerAfter": false,
+              "name": "Fanart",
+              "order": 12,
+              "value": 12
+            },
+            {
+              "dividerAfter": false,
+              "name": "Tags",
+              "order": 13,
+              "value": 13
+            },
+            {
+              "dividerAfter": false,
+              "name": "CustomFormats",
+              "order": 14,
+              "value": 14
+            },
+            {
+              "dividerAfter": false,
+              "name": "CustomFormatScore",
+              "order": 15,
+              "value": 15
+            }
+          ],
+          "type": "select",
+          "value": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10,
+            11,
+            12,
+            13
+          ]
+        },
+        {
+          "advanced": true,
+          "helpText": "Change the fields that are passed in for this 'on manual interation' notification",
+          "isFloat": false,
+          "label": "On Manual Interaction Fields",
+          "name": "manualInteractionFields",
+          "order": 6,
+          "privacy": "normal",
+          "selectOptions": [
+            {
+              "dividerAfter": false,
+              "name": "Overview",
+              "order": 0,
+              "value": 0
+            },
+            {
+              "dividerAfter": false,
+              "name": "Rating",
+              "order": 1,
+              "value": 1
+            },
+            {
+              "dividerAfter": false,
+              "name": "Genres",
+              "order": 2,
+              "value": 2
+            },
+            {
+              "dividerAfter": false,
+              "name": "Quality",
+              "order": 3,
+              "value": 3
+            },
+            {
+              "dividerAfter": false,
+              "name": "Group",
+              "order": 4,
+              "value": 4
+            },
+            {
+              "dividerAfter": false,
+              "name": "Size",
+              "order": 5,
+              "value": 5
+            },
+            {
+              "dividerAfter": false,
+              "name": "Links",
+              "order": 6,
+              "value": 6
+            },
+            {
+              "dividerAfter": false,
+              "name": "DownloadTitle",
+              "order": 7,
+              "value": 7
+            },
+            {
+              "dividerAfter": false,
+              "name": "Poster",
+              "order": 8,
+              "value": 8
+            },
+            {
+              "dividerAfter": false,
+              "name": "Fanart",
+              "order": 9,
+              "value": 9
+            },
+            {
+              "dividerAfter": false,
+              "name": "Tags",
+              "order": 10,
+              "value": 10
+            }
+          ],
+          "type": "select",
+          "value": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5,
+            6,
+            7,
+            8,
+            9,
+            10
+          ]
+        }
+      ],
+      "id": 4,
+      "implementation": "Discord",
+      "implementationName": "Discord",
+      "includeHealthWarnings": false,
+      "infoLink": "https://wiki.servarr.com/radarr/supported#discord",
+      "name": "Mock Discord",
+      "onApplicationUpdate": true,
+      "onDownload": true,
+      "onGrab": true,
+      "onHealthIssue": true,
+      "onHealthRestored": true,
+      "onManualInteractionRequired": true,
+      "onMovieAdded": true,
+      "onMovieDelete": true,
+      "onMovieFileDelete": true,
+      "onMovieFileDeleteForUpgrade": true,
+      "onRename": true,
+      "onUpgrade": true,
+      "supportsOnApplicationUpdate": true,
+      "supportsOnDownload": true,
+      "supportsOnGrab": true,
+      "supportsOnHealthIssue": true,
+      "supportsOnHealthRestored": true,
+      "supportsOnManualInteractionRequired": true,
+      "supportsOnMovieAdded": true,
+      "supportsOnMovieDelete": true,
+      "supportsOnMovieFileDelete": true,
+      "supportsOnMovieFileDeleteForUpgrade": true,
+      "supportsOnRename": true,
+      "supportsOnUpgrade": true,
+      "tags": []
+    },
+    {
+      "configContract": "PlexServerSettings",
+      "fields": [
+        {
+          "advanced": false,
+          "helpText": "Select server from plex.tv account after authenticating",
+          "isFloat": false,
+          "label": "Server",
+          "name": "server",
+          "order": 0,
+          "privacy": "normal",
+          "selectOptionsProviderAction": "servers",
+          "type": "select"
+        },
+        {
+          "advanced": false,
+          "isFloat": false,
+          "label": "Host",
+          "name": "host",
+          "order": 1,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": "127.0.0.1"
+        },
+        {
+          "advanced": false,
+          "isFloat": false,
+          "label": "Port",
+          "name": "port",
+          "order": 2,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": 18989
+        },
+        {
+          "advanced": false,
+          "helpText": "Connect to Plex over HTTPS instead of HTTP",
+          "isFloat": false,
+          "label": "Use SSL",
+          "name": "useSsl",
+          "order": 3,
+          "privacy": "normal",
+          "type": "checkbox",
+          "value": false
+        },
+        {
+          "advanced": true,
+          "helpText": "Adds a prefix to the Plex url, such as http://[host]:[port]/[urlBase]/plex",
+          "isFloat": false,
+          "label": "URL Base",
+          "name": "urlBase",
+          "order": 4,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": ""
+        },
+        {
+          "advanced": true,
+          "isFloat": false,
+          "label": "Auth Token",
+          "name": "authToken",
+          "order": 5,
+          "privacy": "apiKey",
+          "type": "textbox",
+          "value": "********"
+        },
+        {
+          "advanced": false,
+          "isFloat": false,
+          "label": "Authenticate with Plex.tv",
+          "name": "signIn",
+          "order": 6,
+          "privacy": "normal",
+          "type": "oAuth",
+          "value": "startOAuth"
+        },
+        {
+          "advanced": false,
+          "isFloat": false,
+          "label": "Update Library",
+          "name": "updateLibrary",
+          "order": 7,
+          "privacy": "normal",
+          "type": "checkbox",
+          "value": true
+        },
+        {
+          "advanced": true,
+          "helpText": "Radarr path, used to modify movie paths when Plex sees library path location differently from Radarr (Requires 'Update Library')",
+          "isFloat": false,
+          "label": "Map Paths From",
+          "name": "mapFrom",
+          "order": 8,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": ""
+        },
+        {
+          "advanced": true,
+          "helpText": "Plex path, used to modify movie paths when Plex sees library path location differently from Radarr (Requires 'Update Library')",
+          "isFloat": false,
+          "label": "Map Paths To",
+          "name": "mapTo",
+          "order": 9,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": ""
+        }
+      ],
+      "id": 6,
+      "implementation": "PlexServer",
+      "implementationName": "Plex Media Server",
+      "includeHealthWarnings": false,
+      "infoLink": "https://wiki.servarr.com/radarr/supported#plexserver",
+      "name": "Mock Plex",
+      "onApplicationUpdate": false,
+      "onDownload": true,
+      "onGrab": false,
+      "onHealthIssue": false,
+      "onHealthRestored": false,
+      "onManualInteractionRequired": false,
+      "onMovieAdded": true,
+      "onMovieDelete": true,
+      "onMovieFileDelete": true,
+      "onMovieFileDeleteForUpgrade": true,
+      "onRename": true,
+      "onUpgrade": true,
+      "supportsOnApplicationUpdate": false,
+      "supportsOnDownload": true,
+      "supportsOnGrab": false,
+      "supportsOnHealthIssue": false,
+      "supportsOnHealthRestored": false,
+      "supportsOnManualInteractionRequired": false,
+      "supportsOnMovieAdded": false,
+      "supportsOnMovieDelete": true,
+      "supportsOnMovieFileDelete": true,
+      "supportsOnMovieFileDeleteForUpgrade": true,
+      "supportsOnRename": true,
+      "supportsOnUpgrade": true,
+      "tags": []
+    },
+    {
+      "configContract": "WebhookSettings",
+      "fields": [
+        {
+          "advanced": false,
+          "isFloat": false,
+          "label": "Webhook URL",
+          "name": "url",
+          "order": 0,
+          "privacy": "normal",
+          "type": "url",
+          "value": "http://127.0.0.1:18989/webhook"
+        },
+        {
+          "advanced": false,
+          "helpText": "Which HTTP method to use submit to the Webservice",
+          "isFloat": false,
+          "label": "Method",
+          "name": "method",
+          "order": 1,
+          "privacy": "normal",
+          "selectOptions": [
+            {
+              "dividerAfter": false,
+              "name": "POST",
+              "order": 1,
+              "value": 1
+            },
+            {
+              "dividerAfter": false,
+              "name": "PUT",
+              "order": 2,
+              "value": 2
+            }
+          ],
+          "type": "select",
+          "value": 1
+        },
+        {
+          "advanced": false,
+          "isFloat": false,
+          "label": "Username",
+          "name": "username",
+          "order": 2,
+          "privacy": "userName",
+          "type": "textbox",
+          "value": "hook"
+        },
+        {
+          "advanced": false,
+          "isFloat": false,
+          "label": "Password",
+          "name": "password",
+          "order": 3,
+          "privacy": "password",
+          "type": "password",
+          "value": "********"
+        },
+        {
+          "advanced": true,
+          "isFloat": false,
+          "label": "Headers",
+          "name": "headers",
+          "order": 4,
+          "privacy": "normal",
+          "type": "keyValueList",
+          "value": [
+            {
+              "key": "X-Fixture",
+              "value": "yes"
+            }
+          ]
+        }
+      ],
+      "id": 5,
+      "implementation": "Webhook",
+      "implementationName": "Webhook",
+      "includeHealthWarnings": false,
+      "infoLink": "https://wiki.servarr.com/radarr/supported#webhook",
+      "name": "Mock Webhook",
+      "onApplicationUpdate": true,
+      "onDownload": true,
+      "onGrab": true,
+      "onHealthIssue": true,
+      "onHealthRestored": true,
+      "onManualInteractionRequired": true,
+      "onMovieAdded": true,
+      "onMovieDelete": true,
+      "onMovieFileDelete": true,
+      "onMovieFileDeleteForUpgrade": true,
+      "onRename": true,
+      "onUpgrade": true,
+      "supportsOnApplicationUpdate": true,
+      "supportsOnDownload": true,
+      "supportsOnGrab": true,
+      "supportsOnHealthIssue": true,
+      "supportsOnHealthRestored": true,
+      "supportsOnManualInteractionRequired": true,
+      "supportsOnMovieAdded": true,
+      "supportsOnMovieDelete": true,
+      "supportsOnMovieFileDelete": true,
+      "supportsOnMovieFileDeleteForUpgrade": true,
+      "supportsOnRename": true,
+      "supportsOnUpgrade": true,
+      "tags": []
+    },
+    {
+      "configContract": "PlexServerSettings",
+      "fields": [
+        {
+          "advanced": false,
+          "helpText": "Select server from plex.tv account after authenticating",
+          "isFloat": false,
+          "label": "Server",
+          "name": "server",
+          "order": 0,
+          "privacy": "normal",
+          "selectOptionsProviderAction": "servers",
+          "type": "select"
+        },
+        {
+          "advanced": false,
+          "isFloat": false,
+          "label": "Host",
+          "name": "host",
+          "order": 1,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": "plexserver.invalid"
+        },
+        {
+          "advanced": false,
+          "isFloat": false,
+          "label": "Port",
+          "name": "port",
+          "order": 2,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": 32400
+        },
+        {
+          "advanced": false,
+          "helpText": "Connect to Plex over HTTPS instead of HTTP",
+          "isFloat": false,
+          "label": "Use SSL",
+          "name": "useSsl",
+          "order": 3,
+          "privacy": "normal",
+          "type": "checkbox",
+          "value": false
+        },
+        {
+          "advanced": true,
+          "helpText": "Adds a prefix to the Plex url, such as http://[host]:[port]/[urlBase]/plex",
+          "isFloat": false,
+          "label": "URL Base",
+          "name": "urlBase",
+          "order": 4,
+          "privacy": "normal",
+          "type": "textbox"
+        },
+        {
+          "advanced": true,
+          "isFloat": false,
+          "label": "Auth Token",
+          "name": "authToken",
+          "order": 5,
+          "privacy": "apiKey",
+          "type": "textbox",
+          "value": "********"
+        },
+        {
+          "advanced": false,
+          "isFloat": false,
+          "label": "Authenticate with Plex.tv",
+          "name": "signIn",
+          "order": 6,
+          "privacy": "normal",
+          "type": "oAuth",
+          "value": "startOAuth"
+        },
+        {
+          "advanced": false,
+          "isFloat": false,
+          "label": "Update Library",
+          "name": "updateLibrary",
+          "order": 7,
+          "privacy": "normal",
+          "type": "checkbox",
+          "value": true
+        },
+        {
+          "advanced": true,
+          "helpText": "Radarr path, used to modify movie paths when Plex sees library path location differently from Radarr (Requires 'Update Library')",
+          "isFloat": false,
+          "label": "Map Paths From",
+          "name": "mapFrom",
+          "order": 8,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": "/movies"
+        },
+        {
+          "advanced": true,
+          "helpText": "Plex path, used to modify movie paths when Plex sees library path location differently from Radarr (Requires 'Update Library')",
+          "isFloat": false,
+          "label": "Map Paths To",
+          "name": "mapTo",
+          "order": 9,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": "/downloads/movies"
+        }
+      ],
+      "id": 3,
+      "implementation": "PlexServer",
+      "implementationName": "Plex Media Server",
+      "includeHealthWarnings": false,
+      "infoLink": "https://wiki.servarr.com/radarr/supported#plexserver",
+      "name": "PlexServer 3",
+      "onApplicationUpdate": false,
+      "onDownload": true,
+      "onGrab": false,
+      "onHealthIssue": false,
+      "onHealthRestored": false,
+      "onManualInteractionRequired": false,
+      "onMovieAdded": false,
+      "onMovieDelete": true,
+      "onMovieFileDelete": true,
+      "onMovieFileDeleteForUpgrade": true,
+      "onRename": true,
+      "onUpgrade": true,
+      "supportsOnApplicationUpdate": false,
+      "supportsOnDownload": true,
+      "supportsOnGrab": false,
+      "supportsOnHealthIssue": false,
+      "supportsOnHealthRestored": false,
+      "supportsOnManualInteractionRequired": false,
+      "supportsOnMovieAdded": false,
+      "supportsOnMovieDelete": true,
+      "supportsOnMovieFileDelete": true,
+      "supportsOnMovieFileDeleteForUpgrade": true,
+      "supportsOnRename": true,
+      "supportsOnUpgrade": true,
+      "tags": []
+    },
+    {
+      "configContract": "WebhookSettings",
+      "fields": [
+        {
+          "advanced": false,
+          "isFloat": false,
+          "label": "Webhook URL",
+          "name": "url",
+          "order": 0,
+          "privacy": "normal",
+          "type": "url",
+          "value": "http://webhook.invalid/"
+        },
+        {
+          "advanced": false,
+          "helpText": "Which HTTP method to use submit to the Webservice",
+          "isFloat": false,
+          "label": "Method",
+          "name": "method",
+          "order": 1,
+          "privacy": "normal",
+          "selectOptions": [
+            {
+              "dividerAfter": false,
+              "name": "POST",
+              "order": 1,
+              "value": 1
+            },
+            {
+              "dividerAfter": false,
+              "name": "PUT",
+              "order": 2,
+              "value": 2
+            }
+          ],
+          "type": "select",
+          "value": 1
+        },
+        {
+          "advanced": false,
+          "isFloat": false,
+          "label": "Username",
+          "name": "username",
+          "order": 2,
+          "privacy": "userName",
+          "type": "textbox",
+          "value": ""
+        },
+        {
+          "advanced": false,
+          "isFloat": false,
+          "label": "Password",
+          "name": "password",
+          "order": 3,
+          "privacy": "password",
+          "type": "password",
+          "value": "********"
+        },
+        {
+          "advanced": true,
+          "isFloat": false,
+          "label": "Headers",
+          "name": "headers",
+          "order": 4,
+          "privacy": "normal",
+          "type": "keyValueList",
+          "value": []
+        }
+      ],
+      "id": 2,
+      "implementation": "Webhook",
+      "implementationName": "Webhook",
+      "includeHealthWarnings": false,
+      "infoLink": "https://wiki.servarr.com/radarr/supported#webhook",
+      "name": "Webhook 2",
+      "onApplicationUpdate": false,
+      "onDownload": false,
+      "onGrab": false,
+      "onHealthIssue": false,
+      "onHealthRestored": false,
+      "onManualInteractionRequired": false,
+      "onMovieAdded": false,
+      "onMovieDelete": false,
+      "onMovieFileDelete": false,
+      "onMovieFileDeleteForUpgrade": false,
+      "onRename": false,
+      "onUpgrade": false,
+      "supportsOnApplicationUpdate": true,
+      "supportsOnDownload": true,
+      "supportsOnGrab": true,
+      "supportsOnHealthIssue": true,
+      "supportsOnHealthRestored": true,
+      "supportsOnManualInteractionRequired": true,
+      "supportsOnMovieAdded": true,
+      "supportsOnMovieDelete": true,
+      "supportsOnMovieFileDelete": true,
+      "supportsOnMovieFileDeleteForUpgrade": true,
+      "supportsOnRename": true,
+      "supportsOnUpgrade": true,
+      "tags": []
+    }
+  ],
+  "recordedAt": "2026-11-12T09:57:20Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/notification"
+  },
+  "status": 200
+}

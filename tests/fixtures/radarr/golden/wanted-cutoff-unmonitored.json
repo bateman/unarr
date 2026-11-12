@@ -609,7 +609,7 @@
     "sortKey": "movieMetadata.year",
     "totalRecords": 26
   },
-  "recordedAt": "2026-11-11T22:00:06Z",
+  "recordedAt": "2026-11-12T09:55:28Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/wanted/cutoff?page=1&pageSize=5&sortKey=movieMetadata.year&sortDirection=descending&monitored=false"

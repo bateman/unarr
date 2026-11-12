@@ -269,9 +269,9 @@ impl AppState {
         if let Some(upstreams) = self.0.metadata.lock().unwrap().clone() {
             runtime.set_upstreams(upstreams);
         }
+        runtime.set_backup(self.backup_context());
         if self.personality() != Personality::Radarr {
             runtime.set_media_cover_dir(self.runtime().media_cover_dir.clone());
-            runtime.set_backup(self.backup_context());
             runtime.set_host_hooks(self.host_hooks());
         }
         runtime.start();
@@ -290,6 +290,7 @@ impl AppState {
                     },
                     Ok(Event::HealthChanged) => state.hub().broadcast("health", json!({"action": "sync"})),
                     Ok(Event::Import(e)) => crate::relay::relay_import(&state, &e).await,
+                    Ok(Event::MovieImport(e)) => crate::routes::radarr::movies::relay_import(&state, &e).await,
                     Ok(Event::SeriesUpdated { series_id }) => crate::relay::broadcast_series(&state, series_id).await,
                     Err(tokio::sync::broadcast::error::RecvError::Lagged(_)) => continue,
                     Err(tokio::sync::broadcast::error::RecvError::Closed) => break,

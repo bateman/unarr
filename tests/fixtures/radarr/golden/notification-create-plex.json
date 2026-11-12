@@ -1,0 +1,150 @@
+{
+  "body": {
+    "configContract": "PlexServerSettings",
+    "fields": [
+      {
+        "advanced": false,
+        "helpText": "Select server from plex.tv account after authenticating",
+        "isFloat": false,
+        "label": "Server",
+        "name": "server",
+        "order": 0,
+        "privacy": "normal",
+        "selectOptionsProviderAction": "servers",
+        "type": "select"
+      },
+      {
+        "advanced": false,
+        "isFloat": false,
+        "label": "Host",
+        "name": "host",
+        "order": 1,
+        "privacy": "normal",
+        "type": "textbox",
+        "value": "127.0.0.1"
+      },
+      {
+        "advanced": false,
+        "isFloat": false,
+        "label": "Port",
+        "name": "port",
+        "order": 2,
+        "privacy": "normal",
+        "type": "textbox",
+        "value": 18989
+      },
+      {
+        "advanced": false,
+        "helpText": "Connect to Plex over HTTPS instead of HTTP",
+        "isFloat": false,
+        "label": "Use SSL",
+        "name": "useSsl",
+        "order": 3,
+        "privacy": "normal",
+        "type": "checkbox",
+        "value": false
+      },
+      {
+        "advanced": true,
+        "helpText": "Adds a prefix to the Plex url, such as http://[host]:[port]/[urlBase]/plex",
+        "isFloat": false,
+        "label": "URL Base",
+        "name": "urlBase",
+        "order": 4,
+        "privacy": "normal",
+        "type": "textbox",
+        "value": ""
+      },
+      {
+        "advanced": true,
+        "isFloat": false,
+        "label": "Auth Token",
+        "name": "authToken",
+        "order": 5,
+        "privacy": "apiKey",
+        "type": "textbox",
+        "value": "********"
+      },
+      {
+        "advanced": false,
+        "isFloat": false,
+        "label": "Authenticate with Plex.tv",
+        "name": "signIn",
+        "order": 6,
+        "privacy": "normal",
+        "type": "oAuth",
+        "value": "startOAuth"
+      },
+      {
+        "advanced": false,
+        "isFloat": false,
+        "label": "Update Library",
+        "name": "updateLibrary",
+        "order": 7,
+        "privacy": "normal",
+        "type": "checkbox",
+        "value": true
+      },
+      {
+        "advanced": true,
+        "helpText": "Radarr path, used to modify movie paths when Plex sees library path location differently from Radarr (Requires 'Update Library')",
+        "isFloat": false,
+        "label": "Map Paths From",
+        "name": "mapFrom",
+        "order": 8,
+        "privacy": "normal",
+        "type": "textbox",
+        "value": ""
+      },
+      {
+        "advanced": true,
+        "helpText": "Plex path, used to modify movie paths when Plex sees library path location differently from Radarr (Requires 'Update Library')",
+        "isFloat": false,
+        "label": "Map Paths To",
+        "name": "mapTo",
+        "order": 9,
+        "privacy": "normal",
+        "type": "textbox",
+        "value": ""
+      }
+    ],
+    "id": 6,
+    "implementation": "PlexServer",
+    "implementationName": "Plex Media Server",
+    "includeHealthWarnings": false,
+    "infoLink": "https://wiki.servarr.com/radarr/supported#plexserver",
+    "name": "Mock Plex",
+    "onApplicationUpdate": false,
+    "onDownload": true,
+    "onGrab": false,
+    "onHealthIssue": false,
+    "onHealthRestored": false,
+    "onManualInteractionRequired": false,
+    "onMovieAdded": true,
+    "onMovieDelete": true,
+    "onMovieFileDelete": true,
+    "onMovieFileDeleteForUpgrade": true,
+    "onRename": true,
+    "onUpgrade": true,
+    "supportsOnApplicationUpdate": false,
+    "supportsOnDownload": true,
+    "supportsOnGrab": false,
+    "supportsOnHealthIssue": false,
+    "supportsOnHealthRestored": false,
+    "supportsOnManualInteractionRequired": false,
+    "supportsOnMovieAdded": false,
+    "supportsOnMovieDelete": true,
+    "supportsOnMovieFileDelete": true,
+    "supportsOnMovieFileDeleteForUpgrade": true,
+    "supportsOnRename": true,
+    "supportsOnUpgrade": true,
+    "tags": []
+  },
+  "recordedAt": "2026-11-12T09:57:20Z",
+  "request": {
+    "body": "bodies/notification-create-plex.json",
+    "method": "POST",
+    "path": "/api/v3/notification"
+  },
+  "status": 201
+}

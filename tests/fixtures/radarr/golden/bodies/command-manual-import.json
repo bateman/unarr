@@ -1,0 +1,38 @@
+{
+  "name": "ManualImport",
+  "importMode": "auto",
+  "files": [
+    {
+      "path": "/downloads/movies/c8949b89db6f20a1e049aa8170a7a05c/c8949b89db6f20a1e049aa8170a7a05c.mkv",
+      "downloadId": "13706ED57ADBE030F510BEDCD37595376901117C",
+      "movieId": 62,
+      "releaseGroup": "MIRCrew",
+      "quality": {
+        "quality": {
+          "id": 7,
+          "name": "Bluray-1080p",
+          "source": "bluray",
+          "resolution": 1080,
+          "modifier": "none"
+        },
+        "revision": {
+          "version": 1,
+          "real": 0,
+          "isRepack": false
+        }
+      },
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        },
+        {
+          "id": 5,
+          "name": "Italian"
+        }
+      ],
+      "indexerFlags": 0,
+      "folderName": "c8949b89db6f20a1e049aa8170a7a05c"
+    }
+  ]
+}

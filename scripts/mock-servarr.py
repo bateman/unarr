@@ -70,16 +70,18 @@ with method, path, query, the headers that matter and the parsed body:
 
     GET  /mock/notifications                           what the notification targets received
     POST /mock/notifications/clear                     forget them
+    POST /mock/plex/sections?movies=<path>             report the movie section there (none: back to --movies)
 
 Plex answers one TV section whose location is `--tv DIR` (`/tv` by default,
-the fixture's root folder), accepts the token `mock-plex-token` and rejects
+the Sonarr fixture's root folder) and one movie section at `--movies DIR`
+(`/movies`, the Radarr fixture's), accepts the token `mock-plex-token` and rejects
 any other with 401, as a real server does.
 
 A removal that asks for the data to go (SABnzbd `del_files=1`, NZBGet
 `GroupFinalDelete`, qBittorrent `deleteFiles=true`, Transmission
 `delete-local-data`) deletes the item's folder, as the real clients do. Two
 more control endpoints put files on disk for the disk-scan and drop-folder
-flows, under the downloads or TV directory only:
+flows, under the downloads, TV or movies directory only:
 
     POST /mock/fs/write?path=<absolute>&clip=<name>   copy a clip there (parents created)
     POST /mock/fs/remove?path=<absolute>              delete that file or folder
@@ -132,9 +134,13 @@ PLEX_TOKEN = "mock-plex-token"
 PLEX_VERSION = "1.41.0.8992-8e6b099a8"
 
 # Where the download clients say their files are, and where Plex says the TV
-# library is; both are real directories when the goldens are recorded.
+# and movie libraries are; real directories when the goldens are recorded.
 DOWNLOADS = "/downloads"
 TV = "/tv"
+MOVIES = "/movies"
+# The movie section's location as Plex reports it, when a recording moves
+# it away from MOVIES (`POST /mock/plex/sections?movies=<path>`).
+PLEX_MOVIES = None
 # The clips `complete` copies into the download folders.
 MEDIA = Path("tests/fixtures/media")
 
@@ -416,7 +422,7 @@ def inside_mock_dirs(path: str) -> bool:
     """Only the mock's own directories are written to or deleted from."""
     if not path.startswith("/") or "/../" in path + "/":
         return False
-    return any(path == d or path.startswith(d + "/") for d in (DOWNLOADS, TV))
+    return any(path == d or path.startswith(d + "/") for d in (DOWNLOADS, TV, MOVIES))
 
 
 def remove_path(path: str) -> bool:
@@ -631,6 +637,12 @@ class Handler(http.server.BaseHTTPRequestHandler):
         if rest == "notifications/clear":
             STATE.notifications.clear()
             return self.json({"ok": True}, "mock/notifications/clear")
+        if rest == "plex/sections":
+            # Where Plex says its movie library is, when it sees the files
+            # under another path than the application does.
+            global PLEX_MOVIES
+            PLEX_MOVIES = (q.get("movies") or "").rstrip("/") or None
+            return self.json({"ok": True, "movies": PLEX_MOVIES or MOVIES}, "mock/plex/sections")
         client, _, action = rest.partition("/")
         if client in ("sabnzbd", "nzbget", "qbittorrent", "transmission") and action in ("complete", "fail"):
             found = STATE.advance(client, q.get("id", ""), "completed" if action == "complete" else "failed", q)
@@ -638,7 +650,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
         if rest in ("fs/write", "fs/remove"):
             path = q.get("path", "")
             if not inside_mock_dirs(path):
-                return self.json({"ok": False, "error": f"{path} is not under {DOWNLOADS} or {TV}"}, f"mock/{rest}", 400)
+                return self.json({"ok": False, "error": f"{path} is not under {DOWNLOADS}, {TV} or {MOVIES}"}, f"mock/{rest}", 400)
             if rest == "fs/write":
                 source = MEDIA / f"{q.get('clip') or 'episode'}.mkv"
                 if not source.is_file():
@@ -675,7 +687,7 @@ class Handler(http.server.BaseHTTPRequestHandler):
         if path == "/library/sections":
             return self.json({"MediaContainer": {"size": 2, "allowSync": False, "title1": "Plex Library", "Directory": [
                 {"allowSync": True, "art": "/:/resources/show-fanart.jpg", "composite": "/library/sections/2/composite/1736478720", "filters": True, "refreshing": False, "thumb": "/:/resources/show.png", "key": "2", "type": "show", "title": "TV Shows", "agent": "tv.plex.agents.series", "scanner": "Plex TV Series", "language": "en-US", "uuid": "0f1e2d3c-4b5a-6978-8796-a5b4c3d2e1f0", "updatedAt": 1736478720, "createdAt": 1736478720, "scannedAt": 1736478720, "content": True, "directory": True, "contentChangedAt": 1, "hidden": 0, "Location": [{"id": 2, "path": TV}]},
-                {"allowSync": True, "art": "/:/resources/movie-fanart.jpg", "composite": "/library/sections/1/composite/1736478720", "filters": True, "refreshing": False, "thumb": "/:/resources/movie.png", "key": "1", "type": "movie", "title": "Movies", "agent": "tv.plex.agents.movie", "scanner": "Plex Movie", "language": "en-US", "uuid": "1a2b3c4d-5e6f-7081-92a3-b4c5d6e7f809", "updatedAt": 1736478720, "createdAt": 1736478720, "scannedAt": 1736478720, "content": True, "directory": True, "contentChangedAt": 1, "hidden": 0, "Location": [{"id": 1, "path": "/movies"}]},
+                {"allowSync": True, "art": "/:/resources/movie-fanart.jpg", "composite": "/library/sections/1/composite/1736478720", "filters": True, "refreshing": False, "thumb": "/:/resources/movie.png", "key": "1", "type": "movie", "title": "Movies", "agent": "tv.plex.agents.movie", "scanner": "Plex Movie", "language": "en-US", "uuid": "1a2b3c4d-5e6f-7081-92a3-b4c5d6e7f809", "updatedAt": 1736478720, "createdAt": 1736478720, "scannedAt": 1736478720, "content": True, "directory": True, "contentChangedAt": 1, "hidden": 0, "Location": [{"id": 1, "path": PLEX_MOVIES or MOVIES}]},
             ]}}, "plex/sections")
         m = re.fullmatch(r"/library/sections/(\d+)/refresh", path)
         if m:
@@ -1113,13 +1125,14 @@ class Server(socketserver.ThreadingMixIn, http.server.HTTPServer):
 
 
 def main() -> None:
-    global DOWNLOADS, TV, MEDIA
+    global DOWNLOADS, TV, MOVIES, MEDIA
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("--listen", default="127.0.0.1:18989")
     ap.add_argument("--fixtures", default="tests/fixtures", type=Path)
     ap.add_argument("--log", type=Path, help="append one JSON line per request here")
     ap.add_argument("--downloads", default=DOWNLOADS, help="the directory the download clients report and fill (default /downloads)")
     ap.add_argument("--tv", default=TV, help="the TV library location Plex reports (default /tv)")
+    ap.add_argument("--movies", default=MOVIES, help="the movie library location Plex reports (default /movies)")
     ap.add_argument("--tls-cert", type=Path, help="certificate for the metadata hosts' CONNECT tunnels")
     ap.add_argument("--tls-key", type=Path, help="its private key")
     ap.add_argument("--record-metadata", action="store_true", help="fetch a missing metadata fixture from the real host and keep it")
@@ -1131,6 +1144,7 @@ def main() -> None:
     Handler.record_metadata = args.record_metadata
     DOWNLOADS = args.downloads.rstrip("/") or "/"
     TV = args.tv.rstrip("/") or "/"
+    MOVIES = args.movies.rstrip("/") or "/"
     MEDIA = args.fixtures / "media"
     STATE.reset()
     host, _, port = args.listen.rpartition(":")

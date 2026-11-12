@@ -1,0 +1,39 @@
+{
+  "body": {
+    "body": {
+      "isExclusive": false,
+      "isLongRunning": false,
+      "isTypeExclusive": false,
+      "movieIds": [
+        20
+      ],
+      "name": "RenameMovie",
+      "requiresDiskAccess": true,
+      "sendUpdatesToClient": true,
+      "suppressMessages": false,
+      "trigger": "manual",
+      "updateScheduledTask": true
+    },
+    "commandName": "Rename Movie",
+    "duration": "00:00:00.0098485",
+    "ended": "2026-11-12T10:00:21Z",
+    "id": 473012,
+    "message": "0 movie files renamed for Candyman",
+    "name": "RenameMovie",
+    "priority": "normal",
+    "queued": "2026-11-12T10:00:21Z",
+    "result": "successful",
+    "sendUpdatesToClient": true,
+    "started": "2026-11-12T10:00:21Z",
+    "stateChangeTime": "2026-11-12T10:00:21Z",
+    "status": "completed",
+    "trigger": "manual",
+    "updateScheduledTask": true
+  },
+  "recordedAt": "2026-11-12T10:00:33Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/command/473012"
+  },
+  "status": 200
+}

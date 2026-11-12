@@ -32,7 +32,7 @@ const SUBTITLE_EXTENSIONS: &[&str] = &[
     ".utf-8", ".vtt",
 ];
 
-fn is_subtitle_extension(extension: &str) -> bool {
+pub(crate) fn is_subtitle_extension(extension: &str) -> bool {
     SUBTITLE_EXTENSIONS
         .iter()
         .any(|e| e.eq_ignore_ascii_case(extension))

@@ -61,6 +61,133 @@ const COMMAND_STARTING: &[&str] = &[
 fn mode(name: &str) -> Mode {
     match name {
         n if n.contains("feed-calendar") && !n.starts_with("noauth") => Mode::Calendar,
+        // The notifications of milestone 4c. A target that does not
+        // resolve or refuses the connection: the original lets the
+        // exception escape as a 500 that carries its type and its stack.
+        "notification-testall" | "notification-test-webhook-unreachable" => Mode::Shape,
+        "notification-update-missing" => Mode::Exact(&["traceId"]),
+        // What the notification targets received. The Discord test message
+        // names the local time it was posted at.
+        "notifications-after-test" | "notifications-after-testall" => Mode::Exact(&["content"]),
+        // The original performs the Plex update a deletion through the
+        // API queued in the background, wherever that falls among the
+        // requests that follow.
+        "delete-notifications" | "delete-notifications-mapped" => Mode::Multiset(&["timestamp", "dateAdded"]),
+        // Discord embeds carry the moment they were built, webhook payloads
+        // the moment their file was added: both fall, in the replay, on
+        // the other side of the recording's pause.
+        n if n.ends_with("-notifications") => Mode::Exact(&["timestamp", "dateAdded"]),
+        // The import of milestone 4c: a refresh the recording posted and
+        // read back after a pause runs, in the replay, during the pause,
+        // so what it stamps (the file, the history row, the grab's age) is
+        // on the other side of it; the queue's order is a hash table's.
+        "import-moviefile-missing" => Mode::Exact(&["traceId"]),
+        // The manual import of milestone 4c. A `ModelNotFoundException`
+        // and the exception the original lets escape when it evaluates
+        // again a file nothing can be parsed from carry their stack.
+        "manualimport-reprocess" | "manualimport-reprocess-nomovie" | "moviefile-delete-missing" => {
+            Mode::Exact(&["description"])
+        }
+        "manualimport-queue-after" => {
+            Mode::Unordered(&["estimatedCompletionTime", "lastSearchTime", "added", "timeleft"])
+        }
+        "manualimport-history-movie-62" => Mode::Exact(&["date", "ageHours", "ageMinutes"]),
+        // The items' ids hash their path, which the replay moves; the
+        // file a movie shows was imported while the recording paused.
+        n if n.starts_with("manualimport-") => Mode::Exact(&["id", "dateAdded"]),
+        // The file the manual import brought, edited and deleted: it was
+        // added, and the deletions before it were recorded, by commands
+        // that ran while the recording paused; so was the search that
+        // stamped the other movie.
+        n if n.starts_with("moviefile-put")
+            || n == "moviefile-after-put"
+            || n == "moviefile-editor"
+            || n == "moviefile-bulk-put" =>
+        {
+            Mode::Exact(&["dateAdded"])
+        }
+        "delete-history" => Mode::Exact(&["date"]),
+        "delete-movie-70" => Mode::Exact(&["lastSearchTime"]),
+        // The file of the movie a title found was imported while the
+        // recording paused.
+        "parse-release" => Mode::Exact(&["dateAdded"]),
+        // The folder browser shows when the disk last changed. The parent
+        // of the replay's stand-in for `/movies` is not the root.
+        "filesystem-movies" => Mode::Exact(&["lastModified", "parent"]),
+        n if n.starts_with("filesystem-") => Mode::Exact(&["lastModified"]),
+        // The rename previews and commands.
+        "rename-preview-missing" => Mode::Shape,
+        "rename-preview-nomovie" => Mode::Exact(&["traceId"]),
+        n if n.starts_with("command-rename") => {
+            if n.ends_with("-get") {
+                Mode::Exact(COMMAND_CLOCKS)
+            } else {
+                Mode::Exact(COMMAND_STARTING)
+            }
+        }
+        n if n.starts_with("rename-") => Mode::Exact(&[
+            "date",
+            "dateAdded",
+            "age",
+            "ageHours",
+            "ageMinutes",
+            "lastSearchTime",
+        ]),
+        // The library's commands of milestone 4c, and what they leave.
+        // The original's exception carries its type and its stack.
+        "command-rescan-missing-get" => Mode::Exact(&[
+            "id",
+            "queued",
+            "started",
+            "ended",
+            "duration",
+            "stateChangeTime",
+            "lastExecutionTime",
+            "exception",
+        ]),
+        n if n.starts_with("command-rescan")
+            || n.starts_with("command-scan")
+            || n.starts_with("command-housekeeping")
+            || n.starts_with("command-cleanup")
+            || n.starts_with("command-backup") =>
+        {
+            if n.ends_with("-get") {
+                Mode::Exact(COMMAND_CLOCKS)
+            } else {
+                Mode::Exact(COMMAND_STARTING)
+            }
+        }
+        "scan-queue-after" => {
+            Mode::Unordered(&["estimatedCompletionTime", "lastSearchTime", "added", "timeleft"])
+        }
+        "system-task-after-library" => Mode::Shape,
+        // The backup's name carries the second it was made at.
+        "system-backup-after" => Mode::Exact(&["id", "name", "path", "size", "time"]),
+        n if n.starts_with("rescan-") || n.starts_with("scan-") => Mode::Exact(&[
+            "date",
+            "dateAdded",
+            "age",
+            "ageHours",
+            "ageMinutes",
+            "lastSearchTime",
+        ]),
+        n if (n.starts_with("import-") || n.starts_with("upgrade-")) && n.ends_with("-get") => {
+            Mode::Exact(COMMAND_CLOCKS)
+        }
+        n if n.starts_with("import-refresh") || n == "upgrade-refresh" => Mode::Exact(COMMAND_STARTING),
+        n if n.starts_with("import-queue") || n.starts_with("upgrade-queue") => {
+            Mode::Unordered(&["estimatedCompletionTime", "lastSearchTime", "added", "timeleft"])
+        }
+        "import-health" | "health-after-library" => Mode::Multiset(&[]),
+        "import-push-upgrade" => Mode::Exact(&["ageHours", "ageMinutes", "description"]),
+        n if n.starts_with("import-") || n.starts_with("upgrade-") => Mode::Exact(&[
+            "date",
+            "dateAdded",
+            "age",
+            "ageHours",
+            "ageMinutes",
+            "lastSearchTime",
+        ]),
         // What the machine, the build and the moment decide. Unarr's own
         // identity goes in the package fields, which the original leaves
         // out when it is not packaged.
@@ -162,11 +289,91 @@ fn fixture_dir() -> PathBuf {
     Path::new(env!("CARGO_MANIFEST_DIR")).join("../../tests/fixtures/radarr")
 }
 
-/// The fixture imported into an in-memory database with Radarr's schema.
-fn build_state() -> AppState {
+/// The goldens were recorded with the ffprobe the pinned Radarr ships,
+/// which `make ui` leaves under `.cache`; the replay probes with the same
+/// build when it is there, else with `UNARR_FFPROBE` or the `PATH`'s.
+fn use_bundled_ffprobe() {
+    let bundled = Path::new(env!("CARGO_MANIFEST_DIR")).join("../../.cache/radarr/Radarr/ffprobe");
+    // The bundled build is the original's Linux one: elsewhere it does not
+    // run, and the system's is better than none.
+    let runs = std::process::Command::new(&bundled)
+        .arg("-version")
+        .output()
+        .is_ok_and(|o| o.status.success());
+    if runs && std::env::var_os("UNARR_FFPROBE").is_none() {
+        unarr_core::mediafiles::mediainfo::set_ffprobe_path(Some(bundled));
+    }
+}
+
+/// The directories the replay stands in for the recording's `/movies` and
+/// `/downloads`, under one temporary root.
+struct ReplayDirs {
+    root: PathBuf,
+    movies: PathBuf,
+    downloads: PathBuf,
+}
+
+impl ReplayDirs {
+    fn create() -> ReplayDirs {
+        let root = std::env::temp_dir().join(format!("unarr_contract_radarr_{}_replay", std::process::id()));
+        let _ = std::fs::remove_dir_all(&root);
+        let movies = root.join("movies");
+        let downloads = root.join("downloads");
+        std::fs::create_dir_all(&movies).expect("temp movies dir");
+        std::fs::create_dir_all(&downloads).expect("temp downloads dir");
+        ReplayDirs {
+            root,
+            movies,
+            downloads,
+        }
+    }
+
+    /// `(replay path, recorded path)` pairs.
+    fn mappings(&self) -> Vec<(String, &'static str)> {
+        vec![
+            (self.downloads.to_string_lossy().into_owned(), "/downloads"),
+            (self.movies.to_string_lossy().into_owned(), "/movies"),
+        ]
+    }
+}
+
+impl Drop for ReplayDirs {
+    fn drop(&mut self) {
+        let _ = std::fs::remove_dir_all(&self.root);
+    }
+}
+
+/// The fixture imported into an in-memory database with Radarr's schema,
+/// its library moved under `dirs`.
+fn build_state(dirs: &ReplayDirs) -> AppState {
+    use_bundled_ffprobe();
     let dir = fixture_dir();
     let db = Db::open_in_memory_for(Personality::Radarr).expect("in-memory db");
     unarr_import::radarr::import(&dir.join("radarr.db"), &db).expect("import fixture");
+    let movies = dirs.movies.to_string_lossy().into_owned();
+    db.call_blocking(move |conn| {
+        conn.execute(
+            "UPDATE root_folders SET path = ?1 WHERE path = '/movies'",
+            [&movies],
+        )?;
+        conn.execute(
+            "UPDATE movies SET path = ?1 || substr(path, 8) WHERE path LIKE '/movies/%'",
+            [&movies],
+        )?;
+        conn.execute(
+            "UPDATE collections SET root_folder_path = ?1 || substr(root_folder_path, 8)
+              WHERE root_folder_path = '/movies' OR root_folder_path LIKE '/movies/%'",
+            [&movies],
+        )?;
+        // The import list's root folder names the same path.
+        conn.execute(
+            "UPDATE providers SET settings = replace(settings, '\"/movies\"', '\"' || ?1 || '\"'),
+                attributes = replace(attributes, '\"/movies\"', '\"' || ?1 || '\"')",
+            [&movies],
+        )?;
+        Ok(())
+    })
+    .expect("move the library under the replay directory");
     let host = unarr_import::config_xml::read(&dir.join("config.xml"), Personality::Radarr.default_port())
         .expect("config.xml");
     let settings = Settings::from_host_config(host, Personality::Radarr);
@@ -176,6 +383,8 @@ fn build_state() -> AppState {
     let app_data = std::env::temp_dir().join(format!("unarr_contract_radarr_{}", std::process::id()));
     let logs_dir = app_data.join("logs");
     std::fs::create_dir_all(&logs_dir).expect("app data");
+    // The backup the replay makes takes the configuration file with it.
+    std::fs::copy(dir.join("config.xml"), app_data.join("config.xml")).expect("config.xml copy");
     let written = std::time::SystemTime::now();
     for name in ["radarr.debug.txt", "radarr.txt"] {
         std::fs::write(logs_dir.join(name), "").expect("log file");
@@ -193,8 +402,15 @@ fn build_state() -> AppState {
     AppState::new(Personality::Radarr, db, settings, runtime, logs)
 }
 
-async fn send(app: &axum::Router, g: &Golden, session: &str) -> (StatusCode, Value) {
-    let mut req = Request::builder().method(g.method.as_str()).uri(&g.path);
+async fn send(
+    app: &axum::Router,
+    g: &Golden,
+    session: &str,
+    mappings: &[(String, &str)],
+) -> (StatusCode, Value) {
+    let mut req = Request::builder()
+        .method(g.method.as_str())
+        .uri(map_paths(&g.path, mappings));
     if g.name.starts_with("session") {
         req = req.header("cookie", session);
     } else if !g.name.starts_with("noauth") && !g.path.contains("apikey=") {
@@ -203,7 +419,7 @@ async fn send(app: &axum::Router, g: &Golden, session: &str) -> (StatusCode, Val
     let body = match &g.request_body {
         Some(json) => {
             req = req.header("content-type", "application/json");
-            Body::from(json.clone())
+            Body::from(map_paths(json, mappings))
         }
         None => Body::empty(),
     };
@@ -238,24 +454,57 @@ async fn send(app: &axum::Router, g: &Golden, session: &str) -> (StatusCode, Val
 async fn radarr_golden_responses_match() {
     // The mock indexers and clients the write goldens were recorded
     // against, on the port the recorded provider settings carry.
-    let mock = unarr_mock::Mock::start(unarr_mock::fixtures_dir(), 18989)
-        .await
-        .expect("port 18989 free for the mock indexers (stop a stale scripts/mock-servarr.py)");
-    let state = build_state();
+    let dirs = ReplayDirs::create();
+    let mappings = dirs.mappings();
+    let mock = unarr_mock::Mock::start_with(
+        unarr_mock::fixtures_dir(),
+        18989,
+        unarr_mock::MockDirs {
+            downloads: Some(dirs.downloads.clone()),
+            tv: None,
+            movies: Some(dirs.movies.clone()),
+        },
+    )
+    .await
+    .expect("port 18989 free for the mock indexers (stop a stale scripts/mock-servarr.py)");
+    // Radarr's Discord embeds are signed with the instance's name, not the
+    // machine's as Sonarr's are: nothing of the recording machine to pin.
+    let state = build_state(&dirs);
     let goldens = load_goldens(&fixture_dir().join("golden"));
     // The free space specification reads the disk the movies would land on,
-    // here the one under `/movies`: the goldens were recorded with room for
-    // their eight gigabyte releases, and need the same to replay.
-    let free = Path::new("/movies")
+    // here the replay's stand-in for `/movies`: the goldens were recorded
+    // with room for their eight gigabyte releases, and need the same to
+    // replay.
+    let free = dirs
+        .movies
         .ancestors()
         .find_map(unarr_core::fs::free_space)
         .unwrap_or(i64::MAX);
     assert!(
         free > 9 * 1024 * 1024 * 1024,
-        "the Radarr goldens need 9 GB free where /movies would be, found {} GB: \
+        "the Radarr goldens need 9 GB free in the temporary directory, found {} GB: \
          the releases they approve would be rejected for want of disk space",
         free / (1024 * 1024 * 1024)
     );
+    // The recorder marks every scheduled task as just run before it starts
+    // (scripts/radarr-fixture.sh), so that no health check, RSS sync or
+    // housekeeping runs while it records; the replay starts the same way.
+    if let Some(start) = goldens.iter().filter_map(|g| g.recorded_at).min() {
+        state
+            .db()
+            .call(move |conn| {
+                let ids: Vec<i64> = conn
+                    .prepare("SELECT id FROM scheduled_tasks")?
+                    .query_map([], |r| r.get(0))?
+                    .collect::<Result<_, _>>()?;
+                for id in ids {
+                    unarr_core::store::providers::set_scheduled_task_execution(conn, id, start, start)?;
+                }
+                Ok(())
+            })
+            .await
+            .expect("freeze the scheduled tasks");
+    }
     state.start_runtime().await.expect("the runtime");
     let app = unarr_api::router(state.clone());
     let session = login_cookie(&app).await;
@@ -314,27 +563,72 @@ async fn radarr_golden_responses_match() {
         }
         let g = &g;
         if g.to_mock {
-            // A control call to the mock services: a download failed.
+            // A control call to the mock services (a download failed or
+            // completed, a file put on disk), naming the recording's
+            // directories; or, under a name, what the mock holds, compared
+            // as a golden: what the notification targets received.
+            let mut path = g.path.clone();
+            for (replay, recorded) in &mappings {
+                path = path.replace(&format!("path={recorded}"), &format!("path={replay}"));
+            }
             let body = g.request_body.as_deref().unwrap_or("").as_bytes();
-            let (status, _) = mock.call(&g.method, &g.path, body);
-            assert!(
-                status.is_success(),
-                "mock {} {} answered {status}",
-                g.method,
-                g.path
-            );
-            checked -= 1;
+            let (status, bytes) = mock.call(&g.method, &path, body);
+            if g.name == "-" {
+                // A control call that fails (an item a pending golden never
+                // grabbed, say) shows up in the goldens that follow.
+                if !status.is_success() {
+                    eprintln!(
+                        "mock {} {} answered {status}: {}",
+                        g.method,
+                        g.path,
+                        String::from_utf8_lossy(&bytes)
+                    );
+                }
+                checked -= 1;
+                continue;
+            }
+            let body: Value = serde_json::from_slice(&bytes).unwrap_or(Value::Null);
+            let body = unmap_paths(&body, &mappings);
+            if std::env::var("UNARR_CONTRACT_DUMP")
+                .map(|v| v.split(',').any(|n| n == g.name))
+                .unwrap_or(false)
+            {
+                eprintln!(
+                    "--- {} (mock) answered {status}:\n{}",
+                    g.name,
+                    serde_json::to_string_pretty(&body).unwrap_or_default()
+                );
+            }
+            if status.as_u16() != g.status {
+                failures.push(format!(
+                    "{}: status {} expected, {} got",
+                    g.name, g.status, status
+                ));
+                continue;
+            }
+            let mut problems = Vec::new();
+            let (want, got) = match mode(&g.name) {
+                Mode::Exact(ignore) => (normalize(&g.body, ignore), normalize(&body, ignore)),
+                Mode::Multiset(ignore) => (
+                    sorted_list(normalize(&g.body, ignore)),
+                    sorted_list(normalize(&body, ignore)),
+                ),
+                _ => panic!("mock goldens compare exactly"),
+            };
+            diff("", &want, &got, &mut problems);
+            if !problems.is_empty() {
+                failures.push(format!(
+                    "{} (mock {} {}):\n    {}",
+                    g.name,
+                    g.method,
+                    g.path,
+                    problems.join("\n    ")
+                ));
+            }
             continue;
         }
-        let (status, mut body) = send(&app, g, &session).await;
-        // The root folder check sees the machine: where `/movies` cannot
-        // exist (the recording made it) its warning is the machine's, not
-        // the code's, as the disk space is off Linux.
-        if g.name == "health-after" && !Path::new("/movies").exists() {
-            if let Some(verdicts) = body.as_array_mut() {
-                verdicts.retain(|v| v["source"] != "RootFolderCheck");
-            }
-        }
+        let (status, body) = send(&app, g, &session, &mappings).await;
+        let body = unmap_paths(&body, &mappings);
         // As the recorder: the answer's id, or its first item's.
         if let Some(id) = body
             .get("id")

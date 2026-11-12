@@ -10,7 +10,7 @@
             "name": "DD"
           }
         ],
-        "date": "2026-11-11T22:01:47Z",
+        "date": "2026-11-12T09:57:08Z",
         "id": 120,
         "indexer": "Mock Newznab (Prowlarr)",
         "languages": [
@@ -140,7 +140,7 @@
             "name": "DD"
           }
         ],
-        "date": "2026-11-11T22:01:45Z",
+        "date": "2026-11-12T09:57:06Z",
         "id": 119,
         "indexer": "Mock Newznab (Prowlarr)",
         "languages": [
@@ -263,7 +263,7 @@
             "name": "DTS"
           }
         ],
-        "date": "2026-11-11T22:01:32Z",
+        "date": "2026-11-12T09:56:53Z",
         "id": 118,
         "indexer": "Indexer",
         "languages": [
@@ -325,7 +325,7 @@
             "time paradox",
             "time travel"
           ],
-          "lastSearchTime": "2026-11-11T22:01:35Z",
+          "lastSearchTime": "2026-11-12T09:56:55Z",
           "minimumAvailability": "released",
           "monitored": true,
           "movieFileId": 404,
@@ -402,7 +402,7 @@
       },
       {
         "customFormats": [],
-        "date": "2026-11-11T22:01:20Z",
+        "date": "2026-11-12T09:56:41Z",
         "id": 117,
         "indexer": "Mock Newznab (Prowlarr)",
         "languages": [
@@ -465,7 +465,7 @@
             "winter",
             "winter break"
           ],
-          "lastSearchTime": "2026-11-11T22:01:21Z",
+          "lastSearchTime": "2026-11-12T09:56:42Z",
           "minimumAvailability": "released",
           "monitored": true,
           "movieFileId": 0,
@@ -545,7 +545,7 @@
     "sortKey": "date",
     "totalRecords": 91
   },
-  "recordedAt": "2026-11-11T22:01:59Z",
+  "recordedAt": "2026-11-12T09:57:20Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/blocklist?page=1&pageSize=4&sortKey=date&sortDirection=descending"

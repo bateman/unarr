@@ -1,0 +1,9 @@
+{
+  "body": null,
+  "recordedAt": "2026-11-12T10:01:09Z",
+  "request": {
+    "method": "DELETE",
+    "path": "/api/v3/blocklist/117"
+  },
+  "status": 200
+}

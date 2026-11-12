@@ -1,0 +1,35 @@
+{
+  "body": {
+    "body": {
+      "isExclusive": false,
+      "isLongRunning": false,
+      "isTypeExclusive": false,
+      "name": "CleanUpRecycleBin",
+      "requiresDiskAccess": false,
+      "sendUpdatesToClient": true,
+      "suppressMessages": true,
+      "trigger": "manual",
+      "updateScheduledTask": true
+    },
+    "commandName": "Clean Up Recycle Bin",
+    "duration": "00:00:00.0036709",
+    "ended": "2026-11-12T09:59:57Z",
+    "id": 473008,
+    "name": "CleanUpRecycleBin",
+    "priority": "normal",
+    "queued": "2026-11-12T09:59:57Z",
+    "result": "successful",
+    "sendUpdatesToClient": true,
+    "started": "2026-11-12T09:59:57Z",
+    "stateChangeTime": "2026-11-12T09:59:57Z",
+    "status": "completed",
+    "trigger": "manual",
+    "updateScheduledTask": true
+  },
+  "recordedAt": "2026-11-12T10:00:01Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/command/473008"
+  },
+  "status": 200
+}

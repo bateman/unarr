@@ -315,7 +315,7 @@
     "sortKey": "date",
     "totalRecords": 669
   },
-  "recordedAt": "2026-11-11T22:00:03Z",
+  "recordedAt": "2026-11-12T09:55:25Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/history?page=1&pageSize=5"

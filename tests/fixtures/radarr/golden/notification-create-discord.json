@@ -1,0 +1,416 @@
+{
+  "body": {
+    "configContract": "DiscordSettings",
+    "fields": [
+      {
+        "advanced": false,
+        "helpText": "Discord channel webhook url",
+        "isFloat": false,
+        "label": "Webhook URL",
+        "name": "webHookUrl",
+        "order": 0,
+        "privacy": "normal",
+        "type": "textbox",
+        "value": "http://127.0.0.1:18989/discord/api/webhooks/100/fixturetoken"
+      },
+      {
+        "advanced": false,
+        "helpText": "The username to post as, defaults to Discord webhook default",
+        "isFloat": false,
+        "label": "Username",
+        "name": "username",
+        "order": 1,
+        "privacy": "userName",
+        "type": "textbox",
+        "value": "Unarr fixture"
+      },
+      {
+        "advanced": false,
+        "helpText": "Change the avatar that is used for messages from this integration",
+        "isFloat": false,
+        "label": "Avatar",
+        "name": "avatar",
+        "order": 2,
+        "privacy": "normal",
+        "type": "textbox",
+        "value": ""
+      },
+      {
+        "advanced": true,
+        "helpText": "Override the embed author that shows for this notification. Blank is instance name",
+        "isFloat": false,
+        "label": "Author",
+        "name": "author",
+        "order": 3,
+        "privacy": "normal",
+        "type": "textbox",
+        "value": ""
+      },
+      {
+        "advanced": true,
+        "helpText": "Change the fields that are passed in for this 'on grab' notification",
+        "isFloat": false,
+        "label": "On Grab Fields",
+        "name": "grabFields",
+        "order": 4,
+        "privacy": "normal",
+        "selectOptions": [
+          {
+            "dividerAfter": false,
+            "name": "Overview",
+            "order": 0,
+            "value": 0
+          },
+          {
+            "dividerAfter": false,
+            "name": "Rating",
+            "order": 1,
+            "value": 1
+          },
+          {
+            "dividerAfter": false,
+            "name": "Genres",
+            "order": 2,
+            "value": 2
+          },
+          {
+            "dividerAfter": false,
+            "name": "Quality",
+            "order": 3,
+            "value": 3
+          },
+          {
+            "dividerAfter": false,
+            "name": "Group",
+            "order": 4,
+            "value": 4
+          },
+          {
+            "dividerAfter": false,
+            "name": "Size",
+            "order": 5,
+            "value": 5
+          },
+          {
+            "dividerAfter": false,
+            "name": "Links",
+            "order": 6,
+            "value": 6
+          },
+          {
+            "dividerAfter": false,
+            "name": "Release",
+            "order": 7,
+            "value": 7
+          },
+          {
+            "dividerAfter": false,
+            "name": "Poster",
+            "order": 8,
+            "value": 8
+          },
+          {
+            "dividerAfter": false,
+            "name": "Fanart",
+            "order": 9,
+            "value": 9
+          },
+          {
+            "dividerAfter": false,
+            "name": "Indexer",
+            "order": 10,
+            "value": 10
+          },
+          {
+            "dividerAfter": false,
+            "name": "CustomFormats",
+            "order": 11,
+            "value": 11
+          },
+          {
+            "dividerAfter": false,
+            "name": "CustomFormatScore",
+            "order": 12,
+            "value": 12
+          },
+          {
+            "dividerAfter": false,
+            "name": "Tags",
+            "order": 13,
+            "value": 13
+          }
+        ],
+        "type": "select",
+        "value": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13
+        ]
+      },
+      {
+        "advanced": true,
+        "helpText": "Change the fields that are passed in for this 'on import' notification",
+        "isFloat": false,
+        "label": "On Import Fields",
+        "name": "importFields",
+        "order": 5,
+        "privacy": "normal",
+        "selectOptions": [
+          {
+            "dividerAfter": false,
+            "name": "Overview",
+            "order": 0,
+            "value": 0
+          },
+          {
+            "dividerAfter": false,
+            "name": "Rating",
+            "order": 1,
+            "value": 1
+          },
+          {
+            "dividerAfter": false,
+            "name": "Genres",
+            "order": 2,
+            "value": 2
+          },
+          {
+            "dividerAfter": false,
+            "name": "Quality",
+            "order": 3,
+            "value": 3
+          },
+          {
+            "dividerAfter": false,
+            "name": "Codecs",
+            "order": 4,
+            "value": 4
+          },
+          {
+            "dividerAfter": false,
+            "name": "Group",
+            "order": 5,
+            "value": 5
+          },
+          {
+            "dividerAfter": false,
+            "name": "Size",
+            "order": 6,
+            "value": 6
+          },
+          {
+            "dividerAfter": false,
+            "name": "Languages",
+            "order": 7,
+            "value": 7
+          },
+          {
+            "dividerAfter": false,
+            "name": "Subtitles",
+            "order": 8,
+            "value": 8
+          },
+          {
+            "dividerAfter": false,
+            "name": "Links",
+            "order": 9,
+            "value": 9
+          },
+          {
+            "dividerAfter": false,
+            "name": "Release",
+            "order": 10,
+            "value": 10
+          },
+          {
+            "dividerAfter": false,
+            "name": "Poster",
+            "order": 11,
+            "value": 11
+          },
+          {
+            "dividerAfter": false,
+            "name": "Fanart",
+            "order": 12,
+            "value": 12
+          },
+          {
+            "dividerAfter": false,
+            "name": "Tags",
+            "order": 13,
+            "value": 13
+          },
+          {
+            "dividerAfter": false,
+            "name": "CustomFormats",
+            "order": 14,
+            "value": 14
+          },
+          {
+            "dividerAfter": false,
+            "name": "CustomFormatScore",
+            "order": 15,
+            "value": 15
+          }
+        ],
+        "type": "select",
+        "value": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10,
+          11,
+          12,
+          13
+        ]
+      },
+      {
+        "advanced": true,
+        "helpText": "Change the fields that are passed in for this 'on manual interation' notification",
+        "isFloat": false,
+        "label": "On Manual Interaction Fields",
+        "name": "manualInteractionFields",
+        "order": 6,
+        "privacy": "normal",
+        "selectOptions": [
+          {
+            "dividerAfter": false,
+            "name": "Overview",
+            "order": 0,
+            "value": 0
+          },
+          {
+            "dividerAfter": false,
+            "name": "Rating",
+            "order": 1,
+            "value": 1
+          },
+          {
+            "dividerAfter": false,
+            "name": "Genres",
+            "order": 2,
+            "value": 2
+          },
+          {
+            "dividerAfter": false,
+            "name": "Quality",
+            "order": 3,
+            "value": 3
+          },
+          {
+            "dividerAfter": false,
+            "name": "Group",
+            "order": 4,
+            "value": 4
+          },
+          {
+            "dividerAfter": false,
+            "name": "Size",
+            "order": 5,
+            "value": 5
+          },
+          {
+            "dividerAfter": false,
+            "name": "Links",
+            "order": 6,
+            "value": 6
+          },
+          {
+            "dividerAfter": false,
+            "name": "DownloadTitle",
+            "order": 7,
+            "value": 7
+          },
+          {
+            "dividerAfter": false,
+            "name": "Poster",
+            "order": 8,
+            "value": 8
+          },
+          {
+            "dividerAfter": false,
+            "name": "Fanart",
+            "order": 9,
+            "value": 9
+          },
+          {
+            "dividerAfter": false,
+            "name": "Tags",
+            "order": 10,
+            "value": 10
+          }
+        ],
+        "type": "select",
+        "value": [
+          0,
+          1,
+          2,
+          3,
+          4,
+          5,
+          6,
+          7,
+          8,
+          9,
+          10
+        ]
+      }
+    ],
+    "id": 4,
+    "implementation": "Discord",
+    "implementationName": "Discord",
+    "includeHealthWarnings": false,
+    "infoLink": "https://wiki.servarr.com/radarr/supported#discord",
+    "name": "Mock Discord",
+    "onApplicationUpdate": true,
+    "onDownload": true,
+    "onGrab": true,
+    "onHealthIssue": true,
+    "onHealthRestored": true,
+    "onManualInteractionRequired": true,
+    "onMovieAdded": true,
+    "onMovieDelete": true,
+    "onMovieFileDelete": true,
+    "onMovieFileDeleteForUpgrade": true,
+    "onRename": true,
+    "onUpgrade": true,
+    "supportsOnApplicationUpdate": true,
+    "supportsOnDownload": true,
+    "supportsOnGrab": true,
+    "supportsOnHealthIssue": true,
+    "supportsOnHealthRestored": true,
+    "supportsOnManualInteractionRequired": true,
+    "supportsOnMovieAdded": true,
+    "supportsOnMovieDelete": true,
+    "supportsOnMovieFileDelete": true,
+    "supportsOnMovieFileDeleteForUpgrade": true,
+    "supportsOnRename": true,
+    "supportsOnUpgrade": true,
+    "tags": []
+  },
+  "recordedAt": "2026-11-12T09:57:20Z",
+  "request": {
+    "body": "bodies/notification-create-discord.json",
+    "method": "POST",
+    "path": "/api/v3/notification"
+  },
+  "status": 201
+}
