@@ -113,6 +113,74 @@ fn update_media_info(
     }
 }
 
+/// `UpdateMediaInfoService.Handle(MovieScannedEvent)`: the movie's files
+/// that have no media info, or one of a schema older than the least still
+/// read, are probed again after a scan that ran. Returns how many got
+/// theirs. A file whose probe failed at import, or a row that came from
+/// the original's database without media info, gets it this way.
+pub fn backfill_media_info(
+    db: &Db,
+    env: &MovieEnvironment,
+    movie: &Movie,
+    events: &[MovieImportEvent],
+) -> usize {
+    let scanned = events
+        .iter()
+        .any(|e| matches!(e, MovieImportEvent::Scanned { movie_id, .. } if *movie_id == movie.id));
+    if !scanned {
+        return 0;
+    }
+    if !env.config.enable_media_info {
+        tracing::debug!("MediaInfo is disabled");
+        return 0;
+    }
+    let id = movie.id;
+    let files = match db.call_blocking(move |conn| store::movie_files_of(conn, id)) {
+        Ok(files) => files,
+        Err(e) => {
+            tracing::error!(
+                error = %format!("{e:#}"),
+                "UpdateMediaInfoService failed while processing [MovieScannedEvent]"
+            );
+            return 0;
+        }
+    };
+    let stale: Vec<MovieFile> = files
+        .into_iter()
+        .filter(|file| media_info_is_stale(file.media_info.as_ref()))
+        .collect();
+    // Without ffprobe every probe would fail, and say so, at every scan.
+    if stale.is_empty() || !mediainfo::ffprobe_available() {
+        return 0;
+    }
+    let mut updated = 0;
+    for mut file in stale {
+        let path = join(&movie.path, &file.relative_path);
+        if !Path::new(&path).is_file() {
+            tracing::debug!("Can't update MediaInfo because '{path}' does not exist");
+            continue;
+        }
+        match update_media_info(db, env, &mut file, movie) {
+            Ok(true) => updated += 1,
+            Ok(false) => {}
+            Err(e) => tracing::warn!(error = %format!("{e:#}"), "could not store the media info of '{path}'"),
+        }
+    }
+    updated
+}
+
+/// No media info, or one older than the least the probe's own schema
+/// still reads. The probe is one for both applications and stamps what it
+/// writes with Sonarr's revision (11), below Radarr's minimum (14): held
+/// to Radarr's number, every file Unarr probed would be probed again at
+/// each scan.
+fn media_info_is_stale(info: Option<&serde_json::Value>) -> bool {
+    let revision = info
+        .filter(|info| !info.is_null())
+        .map(|info| info.get("schemaRevision").and_then(|r| r.as_i64()).unwrap_or(0));
+    revision.is_none_or(|r| r < mediainfo::MINIMUM_MEDIA_INFO_SCHEMA_REVISION)
+}
+
 /// `Scan(movie)`. File work: call it off the async runtime.
 pub fn scan(
     db: &Db,
@@ -237,4 +305,26 @@ pub fn scan(
         possible_extra_files,
     });
     Ok(events)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::media_info_is_stale;
+    use crate::mediafiles::mediainfo;
+    use serde_json::json;
+
+    #[test]
+    fn files_without_media_info_or_with_an_old_one_are_probed_again() {
+        assert!(media_info_is_stale(None));
+        assert!(media_info_is_stale(Some(&json!(null))));
+        assert!(media_info_is_stale(Some(&json!({"videoFormat": "h264"}))));
+        assert!(media_info_is_stale(Some(&json!({
+            "schemaRevision": mediainfo::MINIMUM_MEDIA_INFO_SCHEMA_REVISION - 1
+        }))));
+        // What the probe writes, and what the original's database holds.
+        assert!(!media_info_is_stale(Some(&json!({
+            "schemaRevision": mediainfo::CURRENT_MEDIA_INFO_SCHEMA_REVISION
+        }))));
+        assert!(!media_info_is_stale(Some(&json!({"schemaRevision": 14}))));
+    }
 }

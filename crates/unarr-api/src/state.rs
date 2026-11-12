@@ -261,6 +261,7 @@ impl AppState {
                     downloads: self.movie_downloads().clone(),
                     search: self.movie_search(),
                     indexers: self.indexer_service(),
+                    http: Some(self.http().client.clone()),
                 };
                 Runtime::new_radarr(self.db().clone(), side, clock, identity).await?
             }

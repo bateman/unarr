@@ -160,7 +160,10 @@ fn mode(name: &str) -> Mode {
         "scan-queue-after" => {
             Mode::Unordered(&["estimatedCompletionTime", "lastSearchTime", "added", "timeleft"])
         }
-        "system-task-after-library" => Mode::Shape,
+        // The tasks the library's commands ran, by everything but when.
+        "system-task-after-library" => {
+            Mode::Exact(&["lastExecution", "lastStartTime", "nextExecution", "lastDuration"])
+        }
         // The backup's name carries the second it was made at.
         "system-backup-after" => Mode::Exact(&["id", "name", "path", "size", "time"]),
         n if n.starts_with("rescan-") || n.starts_with("scan-") => Mode::Exact(&[

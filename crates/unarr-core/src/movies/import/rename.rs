@@ -107,10 +107,13 @@ pub fn rename_files(
                 let ev = MovieFileRenamed {
                     movie: movie.clone(),
                     file: file.clone(),
-                    original_path: previous_path,
+                    original_path: previous_path.clone(),
                 };
                 let (ev2, config) = (ev.clone(), env.config.clone());
-                db.call_blocking(move |conn| {
+                // The file has moved: a row that cannot be written is this
+                // file's failure, logged as the original logs any, and the
+                // other files still get their turn.
+                let stored = db.call_blocking(move |conn| {
                     store::update_movie_file(conn, &ev2.file)?;
                     events::record_renamed(conn, &ev2, now)?;
                     // The subtitles and the other extras follow the file.
@@ -118,7 +121,11 @@ pub fn rename_files(
                         tracing::warn!(error = %e, "failed to move the extra files of {}", ev2.file.relative_path);
                     }
                     Ok(())
-                })?;
+                });
+                if let Err(e) = stored {
+                    tracing::error!("Failed to rename file: {previous_path}: {e:#}");
+                    continue;
+                }
                 tracing::debug!("Renamed movie file: {}", file.relative_path);
                 events.push(MovieImportEvent::FileRenamed(Box::new(ev.clone())));
                 renamed.push(ev);

@@ -114,6 +114,7 @@ async fn runtime(db: &Db) -> (Arc<Runtime>, Arc<MovieDownloads>) {
         downloads: downloads.clone(),
         search: MovieSearchService::new(db.clone(), service.clone()).with_queue(downloads.queue_source()),
         indexers: service,
+        http: None,
     };
     let runtime = Runtime::new_radarr(db.clone(), side, Arc::new(now), Default::default())
         .await

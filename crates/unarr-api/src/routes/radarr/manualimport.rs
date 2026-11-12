@@ -86,6 +86,10 @@ impl Shown {
             .call(move |conn| {
                 let mut titles = HashMap::new();
                 for movie in &shown {
+                    // Two hundred files of one movie are one movie.
+                    if titles.contains_key(&movie.metadata.id) {
+                        continue;
+                    }
                     titles.insert(
                         movie.metadata.id,
                         movies::alternative_titles_of(conn, movie.metadata.id)?,

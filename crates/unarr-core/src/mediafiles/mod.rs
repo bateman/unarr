@@ -58,15 +58,48 @@ pub fn relative_path<'a>(parent: &str, child: &'a str) -> &'a str {
     }
 }
 
+/// A path with its `.` and `..` segments resolved by name alone, as
+/// `Path.GetFullPath` does: no link is followed, and `..` at the root
+/// stays at the root. Borrowed when there is nothing to resolve.
+fn resolve_dots(path: &str) -> std::borrow::Cow<'_, str> {
+    if !path.split('/').any(|segment| segment == "." || segment == "..") {
+        return std::borrow::Cow::Borrowed(path);
+    }
+    let absolute = path.starts_with('/');
+    let mut kept: Vec<&str> = Vec::new();
+    for segment in path.split('/') {
+        match segment {
+            "" | "." => {}
+            ".." => {
+                if kept.last().is_some_and(|s| *s != "..") {
+                    kept.pop();
+                } else if !absolute {
+                    kept.push("..");
+                }
+            }
+            other => kept.push(other),
+        }
+    }
+    let joined = kept.join("/");
+    std::borrow::Cow::Owned(if absolute { format!("/{joined}") } else { joined })
+}
+
 /// `IsParentPath`: whether `child` is inside `parent` (not equal to it),
 /// comparing paths as the originals do, case-insensitively.
 pub fn is_parent_path(parent: &str, child: &str) -> bool {
+    // The originals compare `DirectoryInfo.FullName`s, which have no `.`
+    // or `..` left in them: `/movies/A/../B/x.mkv` is not inside `A`.
+    let (parent, child) = (resolve_dots(parent), resolve_dots(child));
     let parent = parent.trim_end_matches('/');
     let child = child.trim_end_matches('/');
+    // Bytes, not `str` slices: the parent's length may fall inside a
+    // character of the child (a download named in Japanese against a
+    // movie folder in ASCII), where slicing a `str` panics.
+    let (parent, child) = (parent.as_bytes(), child.as_bytes());
     if parent.len() >= child.len() {
         return false;
     }
-    child[..parent.len()].eq_ignore_ascii_case(parent) && child[parent.len()..].starts_with('/')
+    child[..parent.len()].eq_ignore_ascii_case(parent) && child[parent.len()] == b'/'
 }
 
 /// The root folder a series path belongs to: the longest root folder that is
@@ -271,6 +304,48 @@ pub fn language_from_iso(code: &str) -> Option<i64> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    #[test]
+    fn parent_paths_are_compared_at_any_byte() {
+        assert!(is_parent_path(
+            "/movies/Amelie (2001)",
+            "/movies/amelie (2001)/Amelie.mkv"
+        ));
+        assert!(!is_parent_path("/movies/Amelie (2001)", "/movies/Amelie (2001)"));
+        assert!(!is_parent_path(
+            "/movies/Amelie",
+            "/movies/Amelie (2001)/Amelie.mkv"
+        ));
+        // The parent's 21 bytes end inside a three-byte character here.
+        assert!(!is_parent_path(
+            "/movies/Amelie (2001)",
+            "/downloads/complete/アメリ.2001.1080p.BluRay.x264-GRP/アメリ.mkv"
+        ));
+        assert!(is_parent_path(
+            "/movies/アメリ (2001)",
+            "/movies/アメリ (2001)/アメリ.mkv"
+        ));
+        assert!(!is_parent_path(
+            "/movies/アメリ (2001)",
+            "/movies/アメル (2001)/アメリ.mkv"
+        ));
+    }
+
+    #[test]
+    fn parent_paths_are_compared_after_resolving_dots() {
+        assert!(!is_parent_path(
+            "/movies/A (2019)",
+            "/movies/A (2019)/../Other (2019)/x.mkv"
+        ));
+        assert!(is_parent_path(
+            "/movies/A (2019)",
+            "/movies/A (2019)/./extras/../x.mkv"
+        ));
+        assert!(is_parent_path("/movies/B/../A (2019)", "/movies/A (2019)/x.mkv"));
+        assert_eq!(resolve_dots("/a/../../b"), "/b");
+        assert_eq!(resolve_dots("a/../../b"), "../b");
+        assert_eq!(resolve_dots("/movies/A/x.mkv"), "/movies/A/x.mkv");
+    }
 
     #[test]
     fn path_helpers_follow_the_originals() {

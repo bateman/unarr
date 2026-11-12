@@ -1576,6 +1576,43 @@ Neither library was scaled; the patterns do not grow with the library.
   confirmed the transfer modes in use, the absence of a recycling bin,
   the Plex mapping and the order of an import's steps.
 
+- **What a review of `main` after the merge found.** A path compared by
+  slicing a `str` at the other path's length stopped the process when the
+  cut fell inside a character (a download named in Japanese against a
+  movie folder in ASCII; the release build aborts on a panic, so both
+  personalities went with it, and the same download was tried again at
+  the next start): `is_parent_path` compares bytes, and resolves `.` and
+  `..` first, as the originals' `DirectoryInfo` does, so a manual import
+  cannot name a file of another movie as one already in place. A copy
+  that failed half way left its partial file in the library, where the
+  original deletes the target on any error. A tracked download imported
+  with the movie as it was when the download was matched: two releases
+  of one movie arriving together skipped the upgrade rule, and the worse
+  file could replace the better; the movie is now read again before an
+  import. The original reads its copy the same way, so this is a
+  deliberate departure, visible only in that race. Commands read back
+  from the table were parsed as Sonarr's whatever the application, which
+  lost a Radarr `ManualImport` queued at a restart. Radarr's
+  notifications went out through the process-wide HTTP client, that is
+  through Sonarr's proxy and certificate settings; they have Radarr's
+  own. A Plex error carried its URL, token included, into the log and
+  into the answer of a connection test. The movie scan did not probe
+  again the files without media info (`UpdateMediaInfoService` on
+  `MovieScannedEvent`); it does, held to the probe's own schema revision
+  rather than Radarr's 14, which the shared probe does not write.
+  Sonarr's extras lacked the guard the movie copy has against an extra
+  that would take the video's own name, which with a video extension
+  among the extras and a move deleted the episode just imported. A
+  rename whose row could not be written ended the whole command, where
+  the original logs the file and goes on; `RenameMovie` with an id that
+  is no movie renamed the others before failing, where the original
+  fails first. Smaller: the alternative titles were read once per file
+  shown by a manual import, the pattern cache took its two locks in
+  either order, and the golden of the tasks after the library's commands
+  was compared by shape only. One finding was not taken: `RescanMovie`
+  can run while a rename does, and so it can in the original, whose
+  command does not ask for the disk.
+
 ## 18. Open questions
 
 - Metadata provider: decided (section 7, option A) and implemented behind
@@ -1641,6 +1678,12 @@ Neither library was scaled; the patterns do not grow with the library.
   must leave the latter alone, as the real Recyclarr does for formats it
   did not create. The import list in use is the IMDb watchlist
   (`IMDbListImport`), the one 4d drives.
+- Media info schema revisions. The probe is one for both applications
+  and stamps Sonarr's revision (11); Radarr's is 14, and the rows that
+  come from its database say so. A file Unarr probed for Radarr would be
+  read as outdated by the original if the database ever went back to it,
+  and probed again there, which is harmless. What the three revisions in
+  between changed in the model was not compared.
 - SignalR: `series` and `episode` messages follow the refresh, the adds and
   the edits since 3b. The UI's pages were driven in a browser; no client
   other than the UI listens.

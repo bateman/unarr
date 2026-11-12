@@ -1236,7 +1236,10 @@ impl CommandQueue {
         let (next_id, queued) = db
             .call(move |conn| {
                 store::commands::orphan_started(conn, now)?;
-                Ok((store::commands::next_id(conn)?, store::commands::queued(conn)?))
+                Ok((
+                    store::commands::next_id(conn)?,
+                    store::commands::queued(conn, personality)?,
+                ))
             })
             .await?;
         Ok(CommandQueue {
@@ -1327,7 +1330,10 @@ impl CommandQueue {
         if let Some(c) = self.find(id) {
             return Ok(Some(c));
         }
-        self.db.call(move |conn| store::commands::get(conn, id)).await
+        let personality = self.personality;
+        self.db
+            .call(move |conn| store::commands::get(conn, personality, id))
+            .await
     }
 
     /// `RemoveIfQueued`: `false` when the command is not queued (it is
@@ -1546,6 +1552,58 @@ mod tests {
             split_camel_case("RefreshMonitoredDownloads"),
             "Refresh Monitored Downloads"
         );
+    }
+
+    #[tokio::test]
+    async fn a_radarr_queue_reads_its_commands_back_as_radarrs() {
+        let db = Db::open_in_memory_for(crate::Personality::Radarr).unwrap();
+        let now = Utc::now();
+        let rename = CommandBody::RenameMovieFiles {
+            movie_id: 7,
+            files: vec![1, 2],
+        };
+        let manual = CommandBody::ManualImportMovies {
+            files: Vec::new(),
+            import_mode: crate::mediafiles::ImportMode::Move,
+        };
+        let (rename_id, manual_id) = {
+            let queue = CommandQueue::open_for(db.clone(), crate::Personality::Radarr)
+                .await
+                .unwrap();
+            let a = queue
+                .push(
+                    rename.clone(),
+                    CommandPriority::Normal,
+                    CommandTrigger::Manual,
+                    now,
+                )
+                .await
+                .unwrap();
+            let b = queue
+                .push(
+                    manual.clone(),
+                    CommandPriority::Normal,
+                    CommandTrigger::Manual,
+                    now,
+                )
+                .await
+                .unwrap();
+            (a.id, b.id)
+        };
+        // The daemon restarts with both still queued: they share their
+        // names with two of Sonarr's commands and must not come back as
+        // those, which this application would refuse to run.
+        let queue = CommandQueue::open_for(db.clone(), crate::Personality::Radarr)
+            .await
+            .unwrap();
+        assert_eq!(queue.find(rename_id).map(|c| c.body), Some(rename.clone()));
+        assert_eq!(queue.find(manual_id).map(|c| c.body), Some(manual));
+        // And from the table, once the queue has let go of it.
+        let stored = db
+            .call(move |conn| store::commands::get(conn, crate::Personality::Radarr, rename_id))
+            .await
+            .unwrap();
+        assert_eq!(stored.map(|c| c.body), Some(rename));
     }
 
     #[tokio::test]

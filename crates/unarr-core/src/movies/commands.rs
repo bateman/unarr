@@ -22,6 +22,10 @@ pub struct MovieSide {
     pub downloads: Arc<MovieDownloads>,
     pub search: MovieSearchService,
     pub indexers: IndexerService,
+    /// The application's own HTTP client, built from its proxy and
+    /// certificate settings, for its notifications; the process-wide one
+    /// (Sonarr's) when `None`.
+    pub http: Option<reqwest::Client>,
 }
 
 /// What a command did that its caller acts on: the queue to refresh after

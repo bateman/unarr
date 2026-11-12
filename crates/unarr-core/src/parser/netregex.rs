@@ -577,6 +577,9 @@ impl NetRegex {
         }
         let re = Arc::new(compile(&self.full).expect("a pattern that compiled once compiles again"));
         *held = Some(re.clone());
+        // The slot's lock is let go before the registry's is taken: the
+        // release of idle patterns takes them the other way round.
+        drop(held);
         registry().lock().unwrap().push(Arc::downgrade(&self.slot));
         re
     }

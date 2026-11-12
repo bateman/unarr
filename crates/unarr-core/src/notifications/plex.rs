@@ -190,7 +190,14 @@ async fn get(
         .header(reqwest::header::ACCEPT, "application/json")
         .send()
         .await
-        .map_err(|e| PlexError::Plex(format!("Unable to connect to Plex Media Server, {e}")))?;
+        // Without its URL: the query carries the token, and this text goes
+        // to the log and to the answer of a connection test.
+        .map_err(|e| {
+            PlexError::Plex(format!(
+                "Unable to connect to Plex Media Server, {}",
+                e.without_url()
+            ))
+        })?;
     let status = response.status();
     if status == reqwest::StatusCode::UNAUTHORIZED {
         return Err(PlexError::Authentication);

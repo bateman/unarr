@@ -278,8 +278,15 @@ fn import_file(
     read_only: bool,
     suffix: &str,
     extension: &str,
-) -> Result<String, transfer::TransferError> {
+) -> Result<Option<String>, transfer::TransferError> {
     let target = target_path(series, episode_file, suffix, extension);
+    // An extra that would take the episode file's own name (a video
+    // extension listed among the extras, a sample next to the episode)
+    // is left where it is: importing it would delete the episode first.
+    if super::path_equals(&target, &super::join(&series.path, &episode_file.relative_path)) {
+        tracing::debug!("Extra file {source} not imported, due to naming interference with episode file");
+        return Ok(None);
+    }
     let mode = match (read_only, config.copy_using_hardlinks) {
         (false, _) => TransferMode::Move,
         (true, true) => TransferMode::HardLinkOrCopy,
@@ -289,7 +296,7 @@ fn import_file(
         std::fs::remove_file(&target)?;
     }
     transfer::transfer_file(Path::new(source), Path::new(&target), mode)?;
-    Ok(super::relative_path(&series.path, &target).to_string())
+    Ok(Some(super::relative_path(&series.path, &target).to_string()))
 }
 
 /// Whether an extra next to a download is the episode's: its name starts
@@ -413,7 +420,8 @@ pub fn import_episode(
                 &suffix,
                 &extra.extension,
             ) {
-                Ok(relative) => {
+                Ok(None) => {}
+                Ok(Some(relative)) => {
                     extra.relative_path = relative;
                     transfer::set_permissions(
                         config,
@@ -446,7 +454,8 @@ pub fn import_episode(
         }
         let extension = super::extension(&path).to_string();
         match import_file(config, series, episode_file, &path, read_only, "", &extension) {
-            Ok(relative) => {
+            Ok(None) => {}
+            Ok(Some(relative)) => {
                 transfer::set_permissions(config, Path::new(&super::join(&series.path, &relative)));
                 let mut row = ExtraFile::new(Kind::Other, series, episode_file, relative, &extension);
                 db.call_blocking(move |conn| {
@@ -466,7 +475,7 @@ pub fn import_episode(
 fn move_file(series: &Series, episode_file: &EpisodeFile, extra: &mut ExtraFile, suffix: &str) -> bool {
     let existing = super::join(&series.path, &extra.relative_path);
     let target = target_path(series, episode_file, suffix, &extra.extension);
-    if existing == target {
+    if super::path_equals(&existing, &target) {
         return false;
     }
     tracing::trace!("Renaming extra file: {existing} to {target}");
@@ -809,6 +818,36 @@ mod tests {
 
     /// What came with a download is imported under the episode file's name
     /// when the settings ask for it, and only the extensions they list.
+    #[test]
+    fn an_extra_that_would_take_the_episodes_name_is_left_alone() {
+        let lib = library("interference");
+        let downloads = lib.root.join("downloads");
+        fs::create_dir_all(&downloads).unwrap();
+        let sample = downloads.join("Show.S01E01.sample.mkv");
+        fs::write(&sample, b"sample").unwrap();
+        let config = MediaManagementConfig::default();
+        // `mkv` listed among the extra extensions, and a move: the target
+        // is the episode file itself.
+        let imported = import_file(
+            &config,
+            &lib.series,
+            &lib.file,
+            &sample.to_string_lossy(),
+            false,
+            "",
+            ".mkv",
+        )
+        .unwrap();
+        assert_eq!(imported, None);
+        assert!(sample.is_file(), "the sample was moved");
+        assert_eq!(
+            fs::read(lib.root.join("tv/Show").join(&lib.file.relative_path)).unwrap(),
+            b"video",
+            "the episode file was replaced"
+        );
+        let _ = fs::remove_dir_all(&lib.root);
+    }
+
     #[test]
     fn the_extras_of_a_download_come_with_the_episode() {
         let lib = library("import");

@@ -22,7 +22,7 @@ use crate::mediafiles::file_name;
 use crate::mediafiles::local::{ImportMode, ImportResultType};
 use crate::model::ProviderKind;
 use crate::movies::downloads::{MovieDownloads, TrackedMovieDownload};
-use crate::movies::model::{MovieHistoryEntry, MovieHistoryEvent};
+use crate::movies::model::{Movie, MovieHistoryEntry, MovieHistoryEvent};
 use crate::movies::store;
 
 /// `FailDownloads` values of an indexer's settings.
@@ -187,6 +187,26 @@ pub fn verify_import(
     false
 }
 
+/// The movie as the database has it now. A tracked download keeps the
+/// movie it was matched to and, once past downloading, is handed back
+/// unchanged at every refresh: by the time it is imported another download
+/// of the same movie may have put a file in, and the copy still says the
+/// movie has none, which skips the upgrade and already-imported rules and
+/// lets a worse file replace a better one, left on disk without a row.
+/// The original reads its copy the same way; this is a deliberate
+/// departure, visible only in that race.
+pub fn current_movie(db: &Db, tracked: Movie) -> Movie {
+    let id = tracked.id;
+    match db.call_blocking(move |conn| store::get_movie(conn, id)) {
+        Ok(Some(movie)) => movie,
+        Ok(None) => tracked,
+        Err(e) => {
+            tracing::warn!(error = %format!("{e:#}"), "could not read the movie again before importing");
+            tracked
+        }
+    }
+}
+
 /// `Import(trackedDownload)`. File work: call it off the async runtime.
 pub fn import(
     db: &Db,
@@ -206,6 +226,7 @@ pub fn import(
         set_import_blocked(db, t, &mut events);
         return events;
     };
+    let movie = current_movie(db, movie);
     t.state = TrackedDownloadState::Importing;
     let import_item = t.import_item.clone().expect("set above");
     let output_path = import_item.output_path.clone().unwrap_or_default();

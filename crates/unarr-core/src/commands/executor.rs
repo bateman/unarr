@@ -178,7 +178,12 @@ impl Runtime {
         if let Some(side) = &movies {
             side.downloads.set_commands(queue.clone());
         }
-        let notifier = Arc::new(Notifier::new(db.clone(), identity, now));
+        // Radarr's Discord, webhook and Plex go out through Radarr's proxy
+        // and certificate settings, not through Sonarr's.
+        let notifier = Arc::new(match movies.as_ref().and_then(|side| side.http.clone()) {
+            Some(http) => Notifier::with_client(db.clone(), http, identity, now),
+            None => Notifier::new(db.clone(), identity, now),
+        });
         downloads.set_notifier(notifier.clone());
         let movie_notifier = movies.as_ref().map(|side| {
             let movie_notifier = Arc::new(crate::movies::notifications::MovieNotifier::new(notifier.clone()));
@@ -1038,6 +1043,28 @@ impl Runtime {
             }
             CommandBody::RenameMovie { movie_ids } => {
                 tracing::debug!("Renaming movie files for selected movie");
+                // `GetMovies(ids)` first: one id that is not a movie fails
+                // the command before any file is renamed.
+                let wanted = movie_ids.clone();
+                let found = self
+                    .db
+                    .call(move |conn| {
+                        let distinct: std::collections::BTreeSet<i64> = wanted.iter().copied().collect();
+                        let mut found = 0;
+                        for movie_id in distinct {
+                            if crate::movies::store::get_movie(conn, movie_id)?.is_some() {
+                                found += 1;
+                            }
+                        }
+                        Ok(found)
+                    })
+                    .await?;
+                if found != movie_ids.len() {
+                    anyhow::bail!(
+                        "Expected query to return {} rows but returned {found}",
+                        movie_ids.len()
+                    );
+                }
                 for movie_id in movie_ids {
                     self.rename_movie_files(side, id, *movie_id, None).await?;
                 }
@@ -1220,6 +1247,7 @@ impl Runtime {
                 // with the movie as the scan was handed it.
                 if let Ok(events) = &events {
                     crate::movies::import::extras::handle_scanned(&db, &movie, &events.0, now);
+                    scan::backfill_media_info(&db, &env2, &movie, &events.0);
                 }
                 (messages, events)
             })
@@ -1321,7 +1349,10 @@ impl Runtime {
             let (imported, updated, verify_events) = tokio::task::spawn_blocking(move || {
                 let (movie, item, flags) = match tracked.as_ref() {
                     Some(t) => (
-                        t.remote.as_ref().and_then(|r| r.movie.clone()),
+                        t.remote
+                            .as_ref()
+                            .and_then(|r| r.movie.clone())
+                            .map(|movie| completed::current_movie(&db, movie)),
                         Some(t.item.clone()),
                         t.remote.as_ref().map(|r| r.release.indexer_flags),
                     ),

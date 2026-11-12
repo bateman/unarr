@@ -145,6 +145,7 @@ const SECRET_PARAMS: &[&str] = &[
     "api_key",
     "passkey",
     "token",
+    "x-plex-token",
     "key",
     "password",
     "ma_username",
@@ -272,6 +273,10 @@ mod tests {
             "http://sab.invalid/api?mode=queue&APIKEY=(removed)&ma_password=(removed)#f"
         );
         assert_eq!(redact("http://plain.invalid/path"), "http://plain.invalid/path");
+        assert_eq!(
+            redact("http://plex.invalid:32400/identity?X-Plex-Token=secret"),
+            "http://plex.invalid:32400/identity?X-Plex-Token=(removed)"
+        );
     }
 
     #[test]

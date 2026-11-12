@@ -82,7 +82,12 @@ pub fn transfer_file(
 
 fn copy_verified(source: &Path, target: &Path) -> Result<(), TransferError> {
     let expected = fs::metadata(source)?.len();
-    let copied = fs::copy(source, target)?;
+    // `TryCopyFileVerified` deletes the target whatever went wrong: a copy
+    // that stops half way (a full disk, a share that drops) must not leave
+    // a truncated file for the next scan to take as the real one.
+    let copied = fs::copy(source, target).inspect_err(|_| {
+        let _ = fs::remove_file(target);
+    })?;
     if copied != expected {
         let _ = fs::remove_file(target);
         return Err(io::Error::other(format!(
@@ -440,6 +445,19 @@ mod tests {
             .duration_since(std::time::UNIX_EPOCH)
             .unwrap()
             .as_nanos()
+    }
+
+    /// A copy that fails after the target exists: `/proc/self/mem` opens
+    /// and cannot be read from its start.
+    #[cfg(target_os = "linux")]
+    #[test]
+    fn a_copy_that_fails_half_way_leaves_no_target() {
+        let dir = temp();
+        let target = dir.join("partial.mkv");
+        let result = copy_verified(Path::new("/proc/self/mem"), &target);
+        assert!(result.is_err(), "reading /proc/self/mem from offset 0 fails");
+        assert!(!target.exists(), "the partial copy was left behind");
+        let _ = fs::remove_dir_all(dir);
     }
 
     #[test]

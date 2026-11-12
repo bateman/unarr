@@ -66,11 +66,13 @@ pub fn update(conn: &Connection, c: &CommandModel) -> anyhow::Result<()> {
 
 const COLUMNS: &str = "id, name, body, priority, status, result, queued_at, started_at, ended_at, duration_ms, exception, trigger, message";
 
-fn from_row(row: &Row) -> anyhow::Result<CommandModel> {
+/// A stored command, read as a command of `personality`: `RenameFiles` and
+/// `ManualImport` are two different commands under one name.
+fn from_row(personality: crate::Personality, row: &Row) -> anyhow::Result<CommandModel> {
     let name: String = row.get(1)?;
     let body_text: String = row.get(2)?;
     let body_json: serde_json::Value = serde_json::from_str(&body_text).unwrap_or_default();
-    let body = CommandBody::parse(&name, &body_json)
+    let body = CommandBody::parse_for(personality, &name, &body_json)
         .ok_or_else(|| anyhow::anyhow!("unknown command {name:?} in the commands table"))?;
     let duration_ms: Option<i64> = row.get(9)?;
     Ok(CommandModel {
@@ -101,24 +103,28 @@ fn from_row(row: &Row) -> anyhow::Result<CommandModel> {
     })
 }
 
-pub fn get(conn: &Connection, id: i64) -> anyhow::Result<Option<CommandModel>> {
+pub fn get(
+    conn: &Connection,
+    personality: crate::Personality,
+    id: i64,
+) -> anyhow::Result<Option<CommandModel>> {
     let mut stmt = conn.prepare(&format!("SELECT {COLUMNS} FROM commands WHERE id = ?1"))?;
     let mut rows = stmt.query(params![id])?;
     match rows.next()? {
-        Some(row) => Ok(Some(from_row(row)?)),
+        Some(row) => Ok(Some(from_row(personality, row)?)),
         None => Ok(None),
     }
 }
 
 /// `Queued`: commands to run again after a restart.
-pub fn queued(conn: &Connection) -> anyhow::Result<Vec<CommandModel>> {
+pub fn queued(conn: &Connection, personality: crate::Personality) -> anyhow::Result<Vec<CommandModel>> {
     let mut stmt = conn.prepare(&format!(
         "SELECT {COLUMNS} FROM commands WHERE status = ?1 ORDER BY id"
     ))?;
     let mut rows = stmt.query(params![CommandStatus::Queued.as_i64()])?;
     let mut out = Vec::new();
     while let Some(row) = rows.next()? {
-        match from_row(row) {
+        match from_row(personality, row) {
             Ok(c) => out.push(c),
             Err(e) => tracing::warn!(error = %e, "skipping a stored command"),
         }
