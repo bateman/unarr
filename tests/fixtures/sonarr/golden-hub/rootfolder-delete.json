@@ -1,0 +1,9 @@
+{
+  "body": null,
+  "recordedAt": "2026-11-12T23:37:27Z",
+  "request": {
+    "method": "DELETE",
+    "path": "/api/v3/rootfolder/2"
+  },
+  "status": 200
+}

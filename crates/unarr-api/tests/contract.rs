@@ -1579,6 +1579,247 @@ async fn the_feed_refuses_absurd_ranges_and_blank_keys() {
     assert_eq!(status_of(&blank, header).await, StatusCode::UNAUTHORIZED);
 }
 
+/// The hub messages this replay answers for: the lists another tab
+/// shows. What else the original's hub sent in `golden-hub` (the health
+/// after each run, the grabbed and wanted episodes, `command` syncs) is in
+/// the recording for when those are taken up.
+const HUB_NAMES: &[&str] = &[];
+
+/// A hub message as it is compared: its name and action, and the folder a
+/// `rootfolder` one carries.
+fn hub_line(message: &Value, mappings: &[(String, &str)]) -> Option<String> {
+    let name = message["name"].as_str()?;
+    if !HUB_NAMES.contains(&name) {
+        return None;
+    }
+    let body = &message["body"];
+    let mut line = format!("{name} {}", body["action"].as_str().unwrap_or("?"));
+    let resource = unmap_paths(&body["resource"], mappings);
+    if !resource.is_null() {
+        line.push_str(&format!(
+            " id={} path={}",
+            resource["id"],
+            resource["path"].as_str().unwrap_or("?")
+        ));
+    }
+    Some(line)
+}
+
+/// Sonarr's hub around the writes whose lists another tab shows, against a
+/// recording of its own (`tests/fixtures/sonarr/golden-hub`, `make golden`
+/// with `GOLDEN_SIGNALR=1`): `tag` after a tag or an auto tagging rule
+/// changes, `rootfolder` after one is added and nothing after one goes,
+/// `qualitydefinition` after the reset and after no other save, and
+/// `system/task` after every command. The same list shows the refresh of
+/// the downloads a rescan queues when it imports a file.
+#[tokio::test]
+async fn the_hub_tells_other_tabs_what_the_original_tells_them() {
+    let golden_dir = fixture_dir().join("golden-hub");
+    let dirs = ReplayDirs::create_named("hub");
+    let mappings = dirs.mappings();
+    // A mock of its own on a free port: the long list's holds the port
+    // the fixture's providers name, which are pointed here instead.
+    let mock = unarr_mock::Mock::start_with(
+        unarr_mock::fixtures_dir(),
+        0,
+        unarr_mock::MockDirs {
+            downloads: Some(dirs.downloads.clone()),
+            tv: Some(dirs.tv.clone()),
+            movies: None,
+        },
+    )
+    .await
+    .expect("a mock on a free port");
+    let state = build_state_in(Some(&dirs), |_| {});
+    let port = mock.port().to_string();
+    state
+        .db()
+        .call(move |conn| {
+            conn.execute(
+                "UPDATE providers SET settings = replace(settings, ':18989', ':' || ?1)",
+                [&port],
+            )?;
+            Ok(())
+        })
+        .await
+        .expect("the providers pointed at this test's mock");
+    state.set_metadata_upstreams(unarr_core::metadata::Upstreams::mock(&mock.url()));
+    let goldens = load_goldens(&golden_dir);
+    // As the recorder leaves them: every scheduled task just run.
+    let start = goldens
+        .iter()
+        .filter_map(|g| g.recorded_at)
+        .min()
+        .expect("a recording time");
+    state
+        .db()
+        .call(move |conn| {
+            let ids: Vec<i64> = conn
+                .prepare("SELECT id FROM scheduled_tasks")?
+                .query_map([], |r| r.get(0))?
+                .collect::<Result<_, _>>()?;
+            for id in ids {
+                unarr_core::store::providers::set_scheduled_task_execution(conn, id, start, start)?;
+            }
+            Ok(())
+        })
+        .await
+        .expect("freeze the scheduled tasks");
+    state.set_now(Some(start));
+    state.start_runtime().await.expect("the command runtime");
+    let mut hub = state.hub().subscribe();
+    let app = unarr_api::router(state.clone());
+    let session = login_cookie(&app).await;
+
+    // What the hub said, stretch by stretch: a stretch ends with a pause
+    // of the list, when Unarr's own work is waited for.
+    let mut stretches: Vec<Vec<String>> = vec![Vec::new()];
+    let mut stretch_of: std::collections::HashMap<String, usize> = std::collections::HashMap::new();
+    let mut ids: std::collections::HashMap<String, i64> = std::collections::HashMap::new();
+    let mut answers: std::collections::HashMap<String, Value> = std::collections::HashMap::new();
+    let mut failures = Vec::new();
+    for g in &goldens {
+        if g.method == "sleep" {
+            let seconds: i64 = g.path.parse().expect("sleep seconds");
+            state.set_now(Some(state.now() + chrono::Duration::seconds(seconds)));
+            tokio::time::timeout(
+                std::time::Duration::from_secs(60),
+                state.commands().unwrap().wait_idle(),
+            )
+            .await
+            .expect("commands finish within a minute");
+            // The relay sends on a task of its own.
+            while let Ok(Ok(message)) =
+                tokio::time::timeout(std::time::Duration::from_millis(300), hub.recv()).await
+            {
+                stretches
+                    .last_mut()
+                    .unwrap()
+                    .extend(hub_line(&message, &mappings));
+            }
+            stretches.push(Vec::new());
+            continue;
+        }
+        let path = substitute_ids(&g.path, &ids);
+        if g.to_mock {
+            let mut path = path;
+            for (replay, recorded) in &mappings {
+                path = path.replace(&format!("path={recorded}"), &format!("path={replay}"));
+            }
+            let (status, _) = mock.call(&g.method, &path, &[]);
+            assert!(status.is_success(), "mock {} {path}: {status}", g.method);
+            continue;
+        }
+        stretch_of.insert(g.name.clone(), stretches.len() - 1);
+        // A body names the id of an earlier answer as the path does.
+        let mut sent = g.clone();
+        sent.request_body = g.request_body.as_ref().map(|body| {
+            ids.iter().fold(body.clone(), |body, (name, id)| {
+                body.replace(&format!("\"{{id:{name}}}\""), &id.to_string())
+            })
+        });
+        let (status, body) = send(&app, &sent, &session, &path, &mappings).await;
+        let body = unmap_paths(&body, &mappings);
+        if let Some(id) = body.get("id").and_then(Value::as_i64) {
+            ids.insert(g.name.clone(), id);
+        }
+        if status.as_u16() != g.status {
+            failures.push(format!("{}: status {} expected, {status} got", g.name, g.status));
+        }
+        // The resources these writes answer with, as recorded, compared
+        // as the long list compares the steps of the same names; the
+        // commands are compared for what the test is about, below.
+        if !g.name.starts_with("command-") {
+            let problems = compare(mode(&g.name), &g.body, &body);
+            if !problems.is_empty() {
+                failures.push(format!("{}:\n    {}", g.name, problems.join("\n    ")));
+            }
+        }
+        answers.insert(g.name.clone(), body);
+    }
+    assert!(failures.is_empty(), "{}", failures.join("\n"));
+
+    // Each scan imported the file dropped for it, and the import asked for
+    // the downloads to be refreshed: in the original's list of commands
+    // and in Unarr's, after the scan and queued by nobody (`unspecified`,
+    // where the scheduler's own refresh would say `scheduled`).
+    for (list_name, scan) in [
+        ("command-after-rescan", "RescanSeries"),
+        ("command-after-downloaded-scan", "DownloadedEpisodesScan"),
+    ] {
+        let recorded = goldens
+            .iter()
+            .find(|g| g.name == list_name)
+            .unwrap_or_else(|| panic!("{list_name} is recorded"));
+        for (who, list) in [("the original", &recorded.body), ("Unarr", &answers[list_name])] {
+            let commands: Vec<&Value> = list.as_array().into_iter().flatten().collect();
+            let scanned = commands
+                .iter()
+                .find(|c| c["name"] == scan)
+                .unwrap_or_else(|| panic!("{who} lists no {scan}: {list}"));
+            let refreshed = commands.iter().any(|c| {
+                c["name"] == "RefreshMonitoredDownloads"
+                    && c["trigger"] == "unspecified"
+                    && c["queued"].as_str() >= scanned["queued"].as_str()
+            });
+            assert!(
+                refreshed,
+                "{who} queued no refresh of the downloads after {scan}: {list}"
+            );
+        }
+    }
+
+    // The hub, stretch by stretch.
+    let text = std::fs::read_to_string(golden_dir.join("signalr.json")).expect("signalr.json");
+    let steps: Vec<Value> = serde_json::from_str(&text).expect("signalr.json");
+    let mut original: Vec<Vec<String>> = vec![Vec::new(); stretches.len()];
+    for step in &steps {
+        let after = step["after"].as_str().unwrap_or("");
+        let at = if after == "(start)" {
+            0
+        } else {
+            *stretch_of
+                .get(after)
+                .unwrap_or_else(|| panic!("signalr.json names a step the list does not have: {after}"))
+        };
+        for message in step["messages"].as_array().into_iter().flatten() {
+            original[at].extend(hub_line(message, &[]));
+        }
+    }
+    let first_step = |at: usize| {
+        let mut names: Vec<&String> = stretch_of
+            .iter()
+            .filter(|(_, stretch)| **stretch == at)
+            .map(|(name, _)| name)
+            .collect();
+        names.sort();
+        names.first().map(|n| n.to_string()).unwrap_or_default()
+    };
+    let mut problems = Vec::new();
+    for (at, (want, got)) in original.iter_mut().zip(stretches.iter_mut()).enumerate() {
+        // Which messages, not how many: `system/task` follows every
+        // command, the scheduler's own refresh of each minute among them,
+        // which falls where it falls in a recording.
+        for lines in [&mut *want, &mut *got] {
+            lines.sort();
+            lines.dedup();
+        }
+        if want != got {
+            problems.push(format!(
+                "stretch {at} ({}):\n    the original: {want:?}\n    Unarr:        {got:?}",
+                first_step(at)
+            ));
+        }
+    }
+    assert!(
+        problems.is_empty(),
+        "the hub differs from the original's (golden-hub/signalr.json):\n{}",
+        problems.join("\n")
+    );
+    drop(mock);
+    drop(dirs);
+}
+
 /// The `queue/status` messages on the hub from now on, in order.
 async fn queue_statuses(hub: &mut tokio::sync::broadcast::Receiver<Value>) -> Vec<Value> {
     let mut out = Vec::new();

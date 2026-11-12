@@ -1,0 +1,22 @@
+{
+  "body": {
+    "accessible": true,
+    "freeSpace": 13143355392,
+    "id": 2,
+    "path": "/downloads",
+    "unmappedFolders": [
+      {
+        "name": "drop",
+        "path": "/downloads/drop",
+        "relativePath": "drop"
+      }
+    ]
+  },
+  "recordedAt": "2026-11-12T23:37:18Z",
+  "request": {
+    "body": "bodies/rootfolder-create.json",
+    "method": "POST",
+    "path": "/api/v3/rootfolder"
+  },
+  "status": 201
+}

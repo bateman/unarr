@@ -1,0 +1,22 @@
+{
+  "body": {
+    "id": 1,
+    "maxSize": 199.9,
+    "minSize": 1,
+    "preferredSize": 95,
+    "quality": {
+      "id": 0,
+      "name": "Unknown",
+      "resolution": 0,
+      "source": "unknown"
+    },
+    "title": "Unknown",
+    "weight": 1
+  },
+  "recordedAt": "2026-11-12T23:37:54Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/qualitydefinition/1"
+  },
+  "status": 200
+}

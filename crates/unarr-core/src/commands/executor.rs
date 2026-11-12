@@ -128,6 +128,14 @@ pub struct Runtime {
 /// `HealthCheckService`'s startup grace: fifteen minutes.
 const HEALTH_GRACE: chrono::Duration = chrono::Duration::minutes(15);
 
+/// Whether an episode file came in among these events
+/// (`EpisodeImportedEvent`).
+fn imports_an_episode(events: &[ImportEvent]) -> bool {
+    events
+        .iter()
+        .any(|e| matches!(e, ImportEvent::EpisodeImported(_)))
+}
+
 impl Runtime {
     /// Open the queue over `db`, bring the scheduled tasks in line with
     /// the defaults, and hand the queue to the downloads for the searches
@@ -2263,6 +2271,7 @@ impl Runtime {
                 Ok((Environment::load(conn, now)?, series))
             })
             .await?;
+        let mut imported = false;
         for s in series {
             let (db, env2) = (self.db.clone(), env.clone());
             let (messages, events) = tokio::task::spawn_blocking(move || {
@@ -2274,9 +2283,35 @@ impl Runtime {
             for m in messages {
                 self.progress(id, m);
             }
-            self.emit_import_events(events?.into_vec()).await;
+            let events = events?.into_vec();
+            imported |= imports_an_episode(&events);
+            self.emit_import_events(events).await;
+        }
+        if imported {
+            self.refresh_downloads_after_import().await;
         }
         Ok(())
+    }
+
+    /// `DownloadMonitoringService.Handle(EpisodeImportedEvent)`: an import
+    /// that did not come out of the queue's own processing asks the
+    /// clients again, so that a download whose file a scan picked up
+    /// leaves the queue now and not with the next minute's refresh. The
+    /// original waits five seconds for more imports first; the command is
+    /// the one a grab queues.
+    async fn refresh_downloads_after_import(&self) {
+        if let Err(e) = self
+            .queue
+            .push(
+                CommandBody::RefreshMonitoredDownloads,
+                CommandPriority::High,
+                CommandTrigger::Unspecified,
+                self.now(),
+            )
+            .await
+        {
+            tracing::warn!(error = %e, "failed to queue the refresh of the downloads");
+        }
     }
 
     /// `DownloadedEpisodesCommandService.Execute(DownloadedEpisodesScanCommand)`.
@@ -2344,7 +2379,12 @@ impl Runtime {
             for series_id in imported.rescan_series {
                 events.push(ImportEvent::RescanRequested { series_id });
             }
-            self.emit_import_events(events.into_vec()).await;
+            let events = events.into_vec();
+            let imported = imports_an_episode(&events);
+            self.emit_import_events(events).await;
+            if imported {
+                self.refresh_downloads_after_import().await;
+            }
         }
         if results.iter().all(|r| r.episode_file.is_none()) {
             // The command completes, but reports as unsuccessful.

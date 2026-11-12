@@ -1,0 +1,21 @@
+{
+ "name": "Anime",
+ "removeTagsAutomatically": false,
+ "tags": [
+  1
+ ],
+ "specifications": [
+  {
+   "name": "Anime type",
+   "implementation": "SeriesTypeSpecification",
+   "negate": false,
+   "required": true,
+   "fields": [
+    {
+     "name": "value",
+     "value": 2
+    }
+   ]
+  }
+ ]
+}

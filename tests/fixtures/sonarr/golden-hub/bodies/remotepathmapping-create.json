@@ -1,0 +1,5 @@
+{
+ "host": "nzbget.invalid",
+ "remotePath": "/remote/complete/",
+ "localPath": "/downloads/"
+}

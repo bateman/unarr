@@ -189,11 +189,15 @@ cmd_golden() {
     # GOLDEN_REQUESTS and GOLDEN_OUT record another request list somewhere
     # else: a probe of the original, or new requests tried on their own
     # before they join the list (bodies are read next to the list).
-    local requests="${GOLDEN_REQUESTS:-$GOLDEN_DIR/requests.txt}" out="${GOLDEN_OUT:-$GOLDEN_DIR}"
+    # GOLDEN_SIGNALR=1 also listens to the hub and writes signalr.json
+    # beside the answers: what the UI was told after each step. For a list
+    # of its own (golden-hub); the main list is compared by answers only.
+    local requests="${GOLDEN_REQUESTS:-$GOLDEN_DIR/requests.txt}" out="${GOLDEN_OUT:-$GOLDEN_DIR}" hub=()
+    [ "${GOLDEN_SIGNALR:-0}" = 1 ] && hub=(--signalr)
     mkdir -p "$out"
     python3 -I "$REPO/scripts/record-golden.py" \
         --base-url "http://127.0.0.1:$SONARR_PORT" --api-key "$API_KEY" --mock-url "http://127.0.0.1:$MOCK_PORT" \
-        --requests "$requests" --out "$out" --login unarr:fixture
+        --requests "$requests" --out "$out" --login unarr:fixture "${hub[@]}"
     [ "$out" = "$GOLDEN_DIR" ] && record_schemas
     stop_sonarr
     stop_mock

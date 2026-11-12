@@ -1,0 +1,13 @@
+{
+  "body": {
+    "id": 3,
+    "label": "recyclarr"
+  },
+  "recordedAt": "2026-11-12T23:37:10Z",
+  "request": {
+    "body": "bodies/tag-update.json",
+    "method": "PUT",
+    "path": "/api/v3/tag/3"
+  },
+  "status": 202
+}
