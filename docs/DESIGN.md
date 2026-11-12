@@ -1664,8 +1664,7 @@ Neither library was scaled; the patterns do not grow with the library.
   scaled. The file date setting, the 3D token and the three notifications
   listed in section 17 are open, as is the place of the metadata
   consumers among the extras, inferred from the source. The image was not
-  built, so its figure is the static musl binary's. A test of the mock
-  writes under `/downloads` of the machine that runs it. `RefreshMovie`
+  built, so its figure is the static musl binary's. `RefreshMovie`
   does nothing. The homelab run for Radarr is left to the end of 4d.
 - The maintainer's Recyclarr configuration for Radarr is in the tree
   (`tests/fixtures/recyclarr/radarr.yml`) and nothing runs with it yet:

@@ -110,6 +110,10 @@ pub struct ClientState {
     /// The directory the clients report their files under, no trailing
     /// slash; `/downloads` unless the mock was started on a real one.
     pub downloads: String,
+    /// The directories the mock was started on, the only ones it writes to
+    /// or deletes from. The default ones are names to report: `/downloads`
+    /// may be a real folder of the machine the tests run on.
+    pub owned: Vec<String>,
     /// The TV library location Plex reports.
     pub tv: String,
     /// The movie library location Plex reports.
@@ -133,6 +137,7 @@ impl Default for ClientState {
             transmission: Vec::new(),
             notifications: Vec::new(),
             downloads: "/downloads".into(),
+            owned: Vec::new(),
             tv: "/tv".into(),
             movies: "/movies".into(),
             plex_movies: None,
@@ -152,14 +157,16 @@ impl ClientState {
 
     /// Forget every item and notification; the directories stay.
     pub fn reset(&mut self) {
-        let (downloads, tv, movies, media) = (
+        let (downloads, owned, tv, movies, media) = (
             std::mem::take(&mut self.downloads),
+            std::mem::take(&mut self.owned),
             std::mem::take(&mut self.tv),
             std::mem::take(&mut self.movies),
             std::mem::take(&mut self.media),
         );
         *self = ClientState {
             downloads,
+            owned,
             tv,
             movies,
             media,
@@ -194,12 +201,13 @@ impl ClientState {
         }
     }
 
-    /// Only the mock's own directories are written to or deleted from.
+    /// Only the directories the mock was started on are written to or
+    /// deleted from.
     pub fn inside_mock_dirs(&self, path: &str) -> bool {
         if !path.starts_with('/') || format!("{path}/").contains("/../") {
             return false;
         }
-        [&self.downloads, &self.tv, &self.movies]
+        self.owned
             .iter()
             .any(|d| path == d.as_str() || path.starts_with(&format!("{d}/")))
     }
@@ -216,6 +224,10 @@ impl ClientState {
     /// `clip` names the main one (`<title>.mkv`), `extras` adds
     /// `<clip>:<relative name>` pairs with `{title}` replaced.
     fn materialise(&self, folder: &str, title: &str, query: &BTreeMap<String, String>) {
+        if !self.inside_mock_dirs(folder) {
+            tracing::debug!(folder, "not a directory the mock was started on; nothing written");
+            return;
+        }
         let target = PathBuf::from(folder);
         let mut files = vec![(
             query.get("clip").cloned().unwrap_or_else(|| "episode".into()),
@@ -566,7 +578,10 @@ fn control(state: &mut ClientState, rest: &str, query: &BTreeMap<String, String>
         if !state.inside_mock_dirs(&path) {
             return json_reply(
                 StatusCode::BAD_REQUEST,
-                json!({"ok": false, "error": format!("{path} is not under {}, {} or {}", state.downloads, state.tv, state.movies)}),
+                json!({"ok": false, "error": match state.owned.as_slice() {
+                    [] => format!("{path}: the mock was started on no directory and writes nowhere"),
+                    owned => format!("{path} is not under {}", owned.join(", ")),
+                }}),
                 format!("mock/{rest}"),
             );
         }
@@ -1452,5 +1467,33 @@ mod tests {
         let fields = form_urlencoded(b"urls=magnet%3A%3Fxt%3Dx&stopped=false");
         assert_eq!(fields[0], ("urls".to_string(), "magnet:?xt=x".to_string()));
         assert_eq!(hms(3725), "1:02:05");
+    }
+}
+
+#[cfg(test)]
+mod owned_dirs {
+    use super::*;
+
+    #[test]
+    fn the_default_directories_are_names_and_never_written_to() {
+        let state = ClientState::default();
+        assert_eq!(state.downloads, "/downloads");
+        assert!(!state.inside_mock_dirs("/downloads/complete/tv/Some.Release"));
+        assert!(!state.inside_mock_dirs("/tv/Some Series"));
+        assert!(!state.inside_mock_dirs("/movies/Some Movie (2018)"));
+    }
+
+    #[test]
+    fn a_directory_the_mock_was_started_on_is_its_own() {
+        let mut state = ClientState {
+            downloads: "/tmp/mock-downloads".into(),
+            owned: vec!["/tmp/mock-downloads".into()],
+            ..ClientState::default()
+        };
+        assert!(state.inside_mock_dirs("/tmp/mock-downloads/complete/tv/Some.Release"));
+        assert!(!state.inside_mock_dirs("/tmp/mock-downloads/../elsewhere"));
+        assert!(!state.inside_mock_dirs("/tv/Some Series"));
+        state.reset();
+        assert!(state.inside_mock_dirs("/tmp/mock-downloads/complete"));
     }
 }

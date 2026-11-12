@@ -581,8 +581,6 @@ What does not hold, or was not verified:
   second torrent client, no recycling bin, Plex under another path, the
   ping to plex.tv) and confirm the import's sequence; none of their
   content is in the tree.
-- One test of the mock writes under the real `/downloads` of the machine
-  it runs on; it should use a directory of its own.
 
 What 4d starts from: `RefreshMovie` is accepted and does nothing, and
 everything that depends on fresh metadata (the notifications above,

@@ -77,8 +77,9 @@ pub fn fixtures_dir() -> PathBuf {
 /// Where the mock's download clients and Plex say their files are.
 #[derive(Debug, Clone, Default)]
 pub struct MockDirs {
-    /// The directory the download clients report and fill on `complete`;
-    /// `/downloads`, the recorder's real one, when `None`.
+    /// The directory the download clients report and fill on `complete`.
+    /// When `None` they report `/downloads`, the recorder's, and write
+    /// nothing: only directories given here are written to.
     pub downloads: Option<PathBuf>,
     /// The TV library location Plex reports; `/tv` when `None`.
     pub tv: Option<PathBuf>,
@@ -100,12 +101,15 @@ impl Mock {
         state.media = fixtures.join("media");
         if let Some(d) = &dirs.downloads {
             state.downloads = d.to_string_lossy().trim_end_matches('/').to_string();
+            state.owned.push(state.downloads.clone());
         }
         if let Some(d) = &dirs.tv {
             state.tv = d.to_string_lossy().trim_end_matches('/').to_string();
+            state.owned.push(state.tv.clone());
         }
         if let Some(d) = &dirs.movies {
             state.movies = d.to_string_lossy().trim_end_matches('/').to_string();
+            state.owned.push(state.movies.clone());
         }
         let shared = Shared {
             fixtures,
