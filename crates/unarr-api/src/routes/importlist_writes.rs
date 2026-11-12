@@ -285,6 +285,12 @@ pub async fn create(State(state): State<AppState>, uri: Uri, Json(body): Json<Va
         .into_response())
 }
 
+/// `ProviderUpdatedEvent<IImportList>` or its `Deleted` twin: the health
+/// check tied to them runs again. A list added raises neither.
+fn lists_changed(state: &AppState) {
+    state.check_health_after(unarr_core::health::CheckSet::ImportLists);
+}
+
 /// `PUT /importlist/{id}[?forceSave=true]`.
 pub async fn update(
     State(state): State<AppState>,
@@ -327,6 +333,7 @@ pub async fn update(
     if changed {
         broadcast(&state, "updated", resource.clone());
         queue_sync(&state, stored.id).await?;
+        lists_changed(&state);
     }
     Ok((StatusCode::ACCEPTED, Json(resource)).into_response())
 }
@@ -340,6 +347,7 @@ pub async fn delete(State(state): State<AppState>, Path(id): Path<i64>) -> ApiRe
     if removed {
         broadcast(&state, "deleted", json!({"id": id}));
         state.commands()?.import_list_deleted().await;
+        lists_changed(&state);
     }
     Ok(Json(json!({})))
 }
@@ -469,6 +477,9 @@ pub async fn bulk_update(State(state): State<AppState>, Json(body): Json<Value>)
         queue_sync(&state, p.id).await?;
         updated.push(resource);
     }
+    if !updated.is_empty() {
+        lists_changed(&state);
+    }
     Ok((StatusCode::ACCEPTED, Json(Value::Array(updated))).into_response())
 }
 
@@ -491,6 +502,7 @@ pub async fn bulk_delete(State(state): State<AppState>, Json(body): Json<Value>)
     }
     if any {
         state.commands()?.import_list_deleted().await;
+        lists_changed(&state);
     }
     Ok(Json(json!({})))
 }

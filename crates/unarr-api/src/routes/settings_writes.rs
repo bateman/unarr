@@ -154,6 +154,9 @@ async fn save_config(state: &AppState, body: &Value, fields: &[(&str, Kind)]) ->
             Ok(())
         })
         .await?;
+    // `ConfigSavedEvent`, raised by every save whether or not a value
+    // changed: the health checks tied to it run again.
+    state.check_health_after(unarr_core::health::CheckSet::ConfigSaved);
     Ok(())
 }
 
@@ -1214,10 +1217,15 @@ pub async fn root_folder_create(
         store::catalog::insert_root_folder,
     )
     .await?;
+    // `ModelEvent<RootFolder>`: the health checks tied to it.
+    state.check_health_after(unarr_core::health::CheckSet::RootFolders);
     let Json(out) = crate::routes::catalog::root_folder(State(state.clone()), Path(id)).await?;
     Ok(created(&state, "rootfolder", id, out))
 }
 
+/// `DELETE /rootfolder/{id}`. The original deletes the row by its id,
+/// which raises no event: nothing on the hub and no health check, as
+/// recorded.
 pub async fn root_folder_delete(State(state): State<AppState>, Path(id): Path<i64>) -> ApiResult<Response> {
     delete_from(&state, "root_folders", id).await?;
     Ok(ok_empty())
@@ -1286,6 +1294,8 @@ pub async fn remote_path_mapping_create(
         store::providers::insert_remote_path_mapping,
     )
     .await?;
+    // `ModelEvent<RemotePathMapping>`: the health checks tied to it.
+    state.check_health_after(unarr_core::health::CheckSet::RemotePathMappings);
     let Json(out) = crate::routes::providers::remote_path_mapping(State(state.clone()), Path(id)).await?;
     Ok(created(&state, "remotepathmapping", id, out))
 }
@@ -1304,6 +1314,7 @@ pub async fn remote_path_mapping_update(
     {
         return Err(ApiError::NotFound);
     }
+    state.check_health_after(unarr_core::health::CheckSet::RemotePathMappings);
     let Json(out) = crate::routes::providers::remote_path_mapping(State(state), Path(id)).await?;
     Ok(accepted(out))
 }
@@ -1312,6 +1323,7 @@ pub async fn remote_path_mapping_delete(
     State(state): State<AppState>,
     Path(id): Path<i64>,
 ) -> ApiResult<Response> {
+    // Deleted by its id, as a root folder is: no event, no health check.
     delete_from(&state, "remote_path_mappings", id).await?;
     Ok(ok_empty())
 }

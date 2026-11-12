@@ -713,4 +713,15 @@ async fn health_checks_follow_the_providers_and_the_library() {
         proxy.wiki_url,
         "https://wiki.servarr.com/sonarr/system#proxy-failed-resolve-ip"
     );
+
+    // The checks a save of the settings asks for (`ConfigSavedEvent`) see
+    // the proxy switched off again, and leave the other verdicts alone.
+    let others = runtime.health().len() - 1;
+    db.call(|conn| unarr_core::store::config::set_config(conn, "proxyenabled", "False"))
+        .await
+        .unwrap();
+    assert!(runtime.check_health(CheckSet::ConfigSaved).await);
+    let health = runtime.health();
+    assert!(health.iter().all(|h| h.source != "ProxyCheck"));
+    assert_eq!(health.len(), others);
 }

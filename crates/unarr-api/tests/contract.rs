@@ -1386,6 +1386,153 @@ async fn changing_the_series_type_queues_a_refresh() {
     assert_eq!(refreshes(&state).await, before + 1);
 }
 
+/// The originals' `CheckOn` attributes: a save of something a health
+/// check reads asks for the checks tied to it, behind the debounce. What
+/// each set holds is tested with the checks; here, which write asks for
+/// which.
+#[tokio::test]
+async fn saves_ask_for_the_health_checks_tied_to_them() {
+    use unarr_core::health::CheckSet;
+    let dirs = ReplayDirs::create_named("checkon");
+    let state = build_state_in(Some(&dirs), |_| {});
+    // The list sync a list's save queues must reach no host.
+    state.set_metadata_upstreams(unarr_core::metadata::Upstreams::mock("http://127.0.0.1:1"));
+    state.start_runtime().await.expect("the command runtime");
+    let app = unarr_api::router(state.clone());
+    let runtime = state.commands().unwrap().clone();
+    let call = |method: &'static str, path: String, body: Option<Value>| {
+        let app = app.clone();
+        async move {
+            let request = Request::builder()
+                .method(method)
+                .uri(path)
+                .header("X-Api-Key", API_KEY)
+                .header("content-type", "application/json")
+                .body(body.map_or(Body::empty(), |b| Body::from(b.to_string())))
+                .unwrap();
+            let response = app.oneshot(request).await.unwrap();
+            let status = response.status();
+            let bytes = response.into_body().collect().await.unwrap().to_bytes();
+            (
+                status,
+                serde_json::from_slice::<Value>(&bytes).unwrap_or(Value::Null),
+            )
+        }
+    };
+    // The start asks for every check.
+    assert_eq!(runtime.take_pending_health_checks(), [CheckSet::All]);
+
+    // The settings: every page raises `ConfigSavedEvent`, changed or not,
+    // except the naming, which is not kept with them.
+    for page in [
+        "mediamanagement",
+        "indexer",
+        "downloadclient",
+        "importlist",
+        "ui",
+        "host",
+    ] {
+        let (_, mut body) = call("GET", format!("/api/v3/config/{page}"), None).await;
+        if page == "host" {
+            // The page as the UI saves it, with the proxy filled in.
+            let saved = fixture_dir().join("golden/bodies/config-host-proxy.json");
+            body = serde_json::from_str(&std::fs::read_to_string(saved).unwrap()).unwrap();
+        }
+        let (status, _) = call("PUT", format!("/api/v3/config/{page}/1"), Some(body)).await;
+        assert_eq!(status, StatusCode::ACCEPTED, "{page}");
+        let asked = runtime.take_pending_health_checks();
+        assert!(!asked.is_empty(), "{page}");
+        assert!(
+            asked.iter().all(|s| *s == CheckSet::ConfigSaved),
+            "{page}: {asked:?}"
+        );
+    }
+    let (_, body) = call("GET", "/api/v3/config/naming".into(), None).await;
+    let (status, _) = call("PUT", "/api/v3/config/naming/1".into(), Some(body)).await;
+    assert_eq!(status, StatusCode::ACCEPTED);
+    assert_eq!(runtime.take_pending_health_checks(), []);
+
+    // Root folders: one added; a refused one asks for nothing, and neither
+    // does a removal, which the original does by id without an event (its
+    // log shows no check after one, nor after a mapping's).
+    let folder = dirs.root.join("more");
+    std::fs::create_dir_all(&folder).unwrap();
+    let folder = folder.to_string_lossy().into_owned();
+    let (status, _) = call(
+        "POST",
+        "/api/v3/rootfolder".into(),
+        Some(serde_json::json!({"path": "/nowhere/at/all"})),
+    )
+    .await;
+    assert_eq!(status, StatusCode::BAD_REQUEST);
+    assert_eq!(runtime.take_pending_health_checks(), []);
+    let (status, created) = call(
+        "POST",
+        "/api/v3/rootfolder".into(),
+        Some(serde_json::json!({"path": folder})),
+    )
+    .await;
+    assert_eq!(status, StatusCode::CREATED);
+    assert_eq!(runtime.take_pending_health_checks(), [CheckSet::RootFolders]);
+    let (status, _) = call("DELETE", format!("/api/v3/rootfolder/{}", created["id"]), None).await;
+    assert_eq!(status, StatusCode::OK);
+    assert_eq!(runtime.take_pending_health_checks(), []);
+
+    // Remote path mappings: added and changed; not removed.
+    let mapping =
+        serde_json::json!({"host": "client.example", "remotePath": "/remote/", "localPath": folder});
+    let (status, created) = call("POST", "/api/v3/remotepathmapping".into(), Some(mapping.clone())).await;
+    assert_eq!(status, StatusCode::CREATED);
+    assert_eq!(
+        runtime.take_pending_health_checks(),
+        [CheckSet::RemotePathMappings]
+    );
+    let path = format!("/api/v3/remotepathmapping/{}", created["id"]);
+    let (status, _) = call("PUT", path.clone(), Some(mapping)).await;
+    assert_eq!(status, StatusCode::ACCEPTED);
+    assert_eq!(
+        runtime.take_pending_health_checks(),
+        [CheckSet::RemotePathMappings]
+    );
+    let (status, _) = call("DELETE", path, None).await;
+    assert_eq!(status, StatusCode::OK);
+    assert_eq!(runtime.take_pending_health_checks(), []);
+
+    // Import lists: changed and removed.
+    let (_, lists) = call("GET", "/api/v3/importlist".into(), None).await;
+    let mut list = lists[0].clone();
+    let path = format!("/api/v3/importlist/{}?forceSave=true", list["id"]);
+    list["name"] = Value::String("Another name".into());
+    let (status, _) = call("PUT", path, Some(list.clone())).await;
+    assert_eq!(status, StatusCode::ACCEPTED);
+    assert_eq!(runtime.take_pending_health_checks(), [CheckSet::ImportLists]);
+    let (status, _) = call("DELETE", format!("/api/v3/importlist/{}", list["id"]), None).await;
+    assert_eq!(status, StatusCode::OK);
+    assert_eq!(runtime.take_pending_health_checks(), [CheckSet::ImportLists]);
+
+    // A series moved, then deleted.
+    let (_, mut series) = call("GET", "/api/v3/series/1".into(), None).await;
+    let from = series["path"].as_str().unwrap().to_string();
+    std::fs::create_dir_all(&from).unwrap();
+    let to = format!("{from} moved");
+    series["path"] = Value::String(to.clone());
+    let (status, _) = call("PUT", "/api/v3/series/1?moveFiles=true".into(), Some(series)).await;
+    assert_eq!(status, StatusCode::ACCEPTED);
+    let mut asked = Vec::new();
+    for _ in 0..200 {
+        asked = runtime.take_pending_health_checks();
+        if !asked.is_empty() {
+            break;
+        }
+        tokio::time::sleep(std::time::Duration::from_millis(20)).await;
+    }
+    assert_eq!(asked, [CheckSet::SeriesGone], "after the move");
+    assert!(std::path::Path::new(&to).is_dir());
+    let (status, _) = call("DELETE", "/api/v3/series/1".into(), None).await;
+    assert_eq!(status, StatusCode::OK);
+    assert_eq!(runtime.take_pending_health_checks(), [CheckSet::SeriesGone]);
+}
+
 /// The calendar feed refuses a range no calendar reaches instead of
 /// computing with it, and a key that is blank opens nothing.
 #[tokio::test]

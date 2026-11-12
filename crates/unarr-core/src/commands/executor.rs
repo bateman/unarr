@@ -438,6 +438,17 @@ impl Runtime {
         self.check_health_later_with(set, None);
     }
 
+    /// Take the sets waiting for the debounce to end, in the order they
+    /// were asked for; the run they waited for then finds nothing to do.
+    /// For tests, which read from it what a write asked for without
+    /// running the checks.
+    pub fn take_pending_health_checks(&self) -> Vec<CheckSet> {
+        std::mem::take(&mut *self.health_pending.lock().unwrap())
+            .into_iter()
+            .map(|(set, _)| set)
+            .collect()
+    }
+
     /// `HealthCheckService.HandleAsync(IEvent)` through the debouncer: the
     /// set joins what is pending; one run, five seconds after the first
     /// request, covers them all.
@@ -2133,6 +2144,10 @@ impl Runtime {
                     .await;
             }
         }
+        // The checks with `CheckOn(SeriesDeletedEvent)`.
+        if !series.is_empty() {
+            self.check_health_later_with(CheckSet::SeriesGone, None);
+        }
     }
 
     /// `MoveSeriesService.MoveSingleSeries`.
@@ -2190,6 +2205,8 @@ impl Runtime {
             Ok(()) => {
                 self.progress(id, format!("{title} moved successfully to {destination}"));
                 self.emit(Event::SeriesUpdated { series_id });
+                // `SeriesMovedEvent`, and the checks tied to it.
+                self.check_health_later_with(CheckSet::SeriesGone, None);
             }
             Err(e) => {
                 tracing::error!(error = %e, "Unable to move series from '{source}' to '{destination}'. Try moving files manually");

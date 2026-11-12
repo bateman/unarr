@@ -73,8 +73,14 @@ impl HealthCheck {
 /// Which checks to run: all of them (startup, schedule, a manual
 /// `CheckHealth`), those that follow a provider change, those that
 /// follow a provider's status change (cheap, plus the clients' reach), or
-/// those the originals' `CheckOn` attributes tie to an import that failed
-/// or succeeded.
+/// those the originals' `CheckOn` attributes tie to an event: an import
+/// that failed or succeeded, a save of the settings, of a root folder, of
+/// a remote path mapping or of an import list, a series deleted or moved.
+/// The sets of the saves are the attributes of Sonarr 4.0.20's checks,
+/// read from its assembly, less the checks Unarr does not have
+/// (`AllowedHostsCheck`, `ApiKeyValidationCheck`, `ImportListStatusCheck`,
+/// `RemovedSeriesCheck`, `UpdateCheck`); its log shows the same checks
+/// starting five seconds after each of those saves.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
 pub enum CheckSet {
     All,
@@ -84,6 +90,21 @@ pub enum CheckSet {
     ImportFailed,
     /// `EpisodeImportedEvent`: the checks whose failure an import clears.
     ImportSucceeded,
+    /// `ConfigSavedEvent`: a save of the settings kept in the database,
+    /// the proxy's among them.
+    ConfigSaved,
+    /// `ModelEvent<RootFolder>`: a root folder added; one removed raises
+    /// no event. Not `RootFolderCheck`, which the originals tie to the
+    /// series instead.
+    RootFolders,
+    /// `ModelEvent<RemotePathMapping>`: a mapping added or changed; one
+    /// removed raises no event.
+    RemotePathMappings,
+    /// `ProviderUpdatedEvent<IImportList>` and its `Deleted` twin; adding
+    /// a list runs nothing.
+    ImportLists,
+    /// `SeriesDeletedEvent` and `SeriesMovedEvent`.
+    SeriesGone,
 }
 
 /// `CheckOnCondition`: whether a check tied to an event runs only while
@@ -225,6 +246,63 @@ fn checks(set: CheckSet) -> Vec<(&'static str, Condition, Check)> {
                 check!(import_list_root_folder),
             ),
             ("RecyclingBinCheck", FailedOnly, check!(recycling_bin)),
+        ],
+        CheckSet::ConfigSaved => vec![
+            ("ImportMechanismCheck", Always, check!(import_mechanism)),
+            ("ProxyCheck", Always, check!(proxy)),
+        ],
+        CheckSet::RootFolders => vec![
+            (
+                "DownloadClientSortingCheck",
+                Always,
+                check!(download_client_sorting),
+            ),
+            (
+                "DownloadClientRootFolderCheck",
+                Always,
+                check!(download_client_root_folder),
+            ),
+            (
+                "ImportListRootFolderCheck",
+                Always,
+                check!(import_list_root_folder),
+            ),
+            (
+                "DownloadClientRemovesCompletedDownloadsCheck",
+                Always,
+                check!(download_client_removes_completed_downloads),
+            ),
+        ],
+        CheckSet::RemotePathMappings => vec![
+            (
+                "DownloadClientSortingCheck",
+                Always,
+                check!(download_client_sorting),
+            ),
+            ("RemotePathMappingCheck", Always, check!(remote_path_mapping)),
+            (
+                "DownloadClientRootFolderCheck",
+                Always,
+                check!(download_client_root_folder),
+            ),
+            (
+                "DownloadClientRemovesCompletedDownloadsCheck",
+                Always,
+                check!(download_client_removes_completed_downloads),
+            ),
+        ],
+        CheckSet::ImportLists => vec![(
+            "ImportListRootFolderCheck",
+            Always,
+            check!(import_list_root_folder),
+        )],
+        CheckSet::SeriesGone => vec![
+            (
+                "ImportListRootFolderCheck",
+                Always,
+                check!(import_list_root_folder),
+            ),
+            ("RootFolderCheck", Always, check!(root_folder)),
         ],
     }
 }
@@ -1191,6 +1269,50 @@ async fn remote_path_mapping_after_failure(ctx: &Context<'_>) -> anyhow::Result<
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// The `CheckOn` attributes of Sonarr 4.0.20's checks for the events
+    /// of a save, as its assembly declares them.
+    #[test]
+    fn the_sets_of_a_save_are_the_originals() {
+        let sources = |set: CheckSet| -> Vec<&'static str> {
+            let mut names: Vec<_> = checks(set)
+                .into_iter()
+                .map(|(source, condition, _)| {
+                    assert_eq!(condition, Condition::Always, "{source}");
+                    source
+                })
+                .collect();
+            names.sort_unstable();
+            names
+        };
+        assert_eq!(
+            sources(CheckSet::ConfigSaved),
+            ["ImportMechanismCheck", "ProxyCheck"]
+        );
+        assert_eq!(
+            sources(CheckSet::RootFolders),
+            [
+                "DownloadClientRemovesCompletedDownloadsCheck",
+                "DownloadClientRootFolderCheck",
+                "DownloadClientSortingCheck",
+                "ImportListRootFolderCheck",
+            ]
+        );
+        assert_eq!(
+            sources(CheckSet::RemotePathMappings),
+            [
+                "DownloadClientRemovesCompletedDownloadsCheck",
+                "DownloadClientRootFolderCheck",
+                "DownloadClientSortingCheck",
+                "RemotePathMappingCheck",
+            ]
+        );
+        assert_eq!(sources(CheckSet::ImportLists), ["ImportListRootFolderCheck"]);
+        assert_eq!(
+            sources(CheckSet::SeriesGone),
+            ["ImportListRootFolderCheck", "RootFolderCheck"]
+        );
+    }
 
     #[test]
     fn collections_under_a_missing_root_folder_are_named() {

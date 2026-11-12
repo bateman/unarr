@@ -329,8 +329,15 @@ impl AppState {
     /// A provider changed: the health checks that follow one, in the
     /// background, when the runtime is up.
     pub fn providers_changed(&self) {
+        self.check_health_after(unarr_core::health::CheckSet::Providers);
+    }
+
+    /// Something a health check reads was saved: the checks the originals
+    /// tie to that event (`CheckOn`), in the background after the
+    /// debounce, when the runtime is up.
+    pub fn check_health_after(&self, set: unarr_core::health::CheckSet) {
         if let Ok(runtime) = self.commands() {
-            runtime.check_health_later(unarr_core::health::CheckSet::Providers);
+            runtime.check_health_later(set);
         }
     }
 
