@@ -185,8 +185,14 @@ async fn put_resource_id(
     let Some((base, route_id)) = put_by_id_target(put_by_id(state.personality()), uri.path()) else {
         return next.run(request).await;
     };
+    // Nothing is read for a caller without the key: the API answers 401
+    // whatever the path says.
+    let key = auth::presented_key(&uri, request.headers());
+    if !key.is_some_and(|key| auth::key_matches(&state.settings().host.api_key, &key)) {
+        return next.run(request).await;
+    }
     let (mut parts, body) = request.into_parts();
-    let bytes = match axum::body::to_bytes(body, PUT_BODY_LIMIT).await {
+    let bytes = match axum::body::to_bytes(body, API_BODY_LIMIT).await {
         Ok(bytes) => bytes,
         Err(_) => return axum::http::StatusCode::PAYLOAD_TOO_LARGE.into_response(),
     };
@@ -213,8 +219,16 @@ async fn put_resource_id(
     .await
 }
 
-/// What a `PUT` body may weigh: the default limit of the JSON extractor.
-const PUT_BODY_LIMIT: usize = 2 * 1024 * 1024;
+/// What the body of an API request may weigh. The originals set no limit
+/// (Sonarr 4.0.20 took a `PUT` of 120 MiB), and the extractors' default of
+/// 2 MiB refused a library import or a manual import of a few hundred
+/// items. Raised rather than removed: a body is held whole, and again as
+/// the JSON read from it, by one process that serves every personality
+/// and ends on a failed allocation. 64 MiB is the ceiling already set on
+/// what is read from an indexer or a client, some 25,000 series in one
+/// library import. It is granted once the key is good; the login form
+/// keeps the default.
+pub const API_BODY_LIMIT: usize = 64 * 1024 * 1024;
 
 /// A `PUT` with no id in the body nor in the route: the originals'
 /// `Id > 0` rule answers.
@@ -267,6 +281,8 @@ pub fn router(state: AppState) -> Router {
     // compression, and CORS, which answers a preflight before the key is
     // asked for but only where there is an action.
     let api = api
+        // A route with a limit of its own (the backup upload) keeps it.
+        .layer(axum::extract::DefaultBodyLimit::max(API_BODY_LIMIT))
         .route_layer(axum::middleware::from_fn(reject_put_without_id))
         .layer(axum::middleware::from_fn_with_state(state.clone(), http::finish))
         .layer(axum::middleware::from_fn_with_state(

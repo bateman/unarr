@@ -419,6 +419,84 @@ async fn the_manifest_and_the_tile_description_are_filled_in() {
     }
 }
 
+/// A body over the extractors' 2 MiB is taken, as the originals take it
+/// (Sonarr 4.0.20 answered 202 to a `PUT` of 120 MiB): a library import
+/// or a manual import of a large folder. The ceiling is far above, and
+/// stands only for a caller with the key.
+#[tokio::test]
+async fn a_large_body_is_taken_from_a_caller_with_the_key() {
+    let send = |app: axum::Router, method: &'static str, path: &'static str, key: bool, body: Vec<u8>| async move {
+        let mut request = Request::builder()
+            .method(method)
+            .uri(path)
+            .header("content-type", "application/json");
+        if key {
+            request = request.header("X-Api-Key", KEY);
+        }
+        app.oneshot(request.body(Body::from(body)).unwrap())
+            .await
+            .unwrap()
+            .status()
+    };
+    let padded = |mib: usize, mut resource: serde_json::Value| {
+        resource["padding"] = serde_json::Value::String("x".repeat(mib * 1024 * 1024));
+        resource.to_string().into_bytes()
+    };
+    for personality in [Personality::Sonarr, Personality::Radarr] {
+        let app = app_for(personality, "");
+        let (_, _, ui) = ask(&app, "GET", "/api/v3/config/ui", &[("X-Api-Key", KEY)], "").await;
+        let ui: serde_json::Value = serde_json::from_slice(&ui).unwrap();
+        // A `POST`, whose body only the handler reads: a command of 3 MiB
+        // is refused for what it says, not for its size.
+        let command = padded(3, serde_json::json!({"name": "NoSuchCommand"}));
+        let status = send(app.clone(), "POST", "/api/v3/command", true, command).await;
+        assert_ne!(status, StatusCode::PAYLOAD_TOO_LARGE, "{personality:?}");
+        // Past the ceiling, 413; without the key, 401 and nothing read.
+        let huge = padded(65, ui.clone());
+        assert_eq!(
+            send(app.clone(), "POST", "/api/v3/command", true, huge.clone()).await,
+            StatusCode::PAYLOAD_TOO_LARGE,
+            "{personality:?}"
+        );
+        assert_eq!(
+            send(app.clone(), "PUT", "/api/v3/config/ui/1", false, huge).await,
+            StatusCode::UNAUTHORIZED,
+            "{personality:?}"
+        );
+    }
+    // A `PUT`, whose body is read before the route for the id it carries.
+    let app = app();
+    let (_, _, ui) = ask(&app, "GET", "/api/v3/config/ui", &[("X-Api-Key", KEY)], "").await;
+    let ui: serde_json::Value = serde_json::from_slice(&ui).unwrap();
+    assert_eq!(
+        send(
+            app.clone(),
+            "PUT",
+            "/api/v3/config/ui/1",
+            true,
+            padded(3, ui.clone())
+        )
+        .await,
+        StatusCode::ACCEPTED
+    );
+    assert_eq!(
+        send(app.clone(), "PUT", "/api/v3/config/ui/1", true, padded(65, ui)).await,
+        StatusCode::PAYLOAD_TOO_LARGE
+    );
+    // The login form is anyone's to send: it keeps the small limit.
+    let form = format!("username=u&password={}", "x".repeat(3 * 1024 * 1024));
+    let request = Request::builder()
+        .method("POST")
+        .uri("/login")
+        .header("content-type", "application/x-www-form-urlencoded")
+        .body(Body::from(form))
+        .unwrap();
+    assert_eq!(
+        app.oneshot(request).await.unwrap().status(),
+        StatusCode::PAYLOAD_TOO_LARGE
+    );
+}
+
 /// A client that refuses the answer as it is still gets it, as from the
 /// originals: never a 406 after the handler has done its work.
 #[tokio::test]
