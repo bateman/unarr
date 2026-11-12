@@ -4,7 +4,7 @@
     "pageSize": 20,
     "records": [
       {
-        "added": "2026-11-12T09:57:08Z",
+        "added": "2026-11-12T14:20:53Z",
         "customFormatScore": 0,
         "customFormats": [
           {
@@ -15,7 +15,7 @@
         "downloadClient": "Mock SABnzbd",
         "downloadClientHasPostImportCategory": false,
         "downloadId": "SABnzbd_nzo_mock7",
-        "estimatedCompletionTime": "2026-11-12T10:07:09Z",
+        "estimatedCompletionTime": "2026-11-12T14:30:54Z",
         "id": 242503491,
         "indexer": "Mock Newznab (Prowlarr)",
         "languages": [
@@ -54,7 +54,7 @@
         "trackedDownloadStatus": "ok"
       },
       {
-        "added": "2026-11-12T09:57:06Z",
+        "added": "2026-11-12T14:20:51Z",
         "customFormatScore": 0,
         "customFormats": [
           {
@@ -65,7 +65,7 @@
         "downloadClient": "Mock SABnzbd",
         "downloadClientHasPostImportCategory": false,
         "downloadId": "SABnzbd_nzo_mock6",
-        "estimatedCompletionTime": "2026-11-12T10:07:09Z",
+        "estimatedCompletionTime": "2026-11-12T14:30:54Z",
         "id": 304550030,
         "indexer": "Mock Newznab (Prowlarr)",
         "languages": [
@@ -104,7 +104,7 @@
         "trackedDownloadStatus": "ok"
       },
       {
-        "added": "2026-11-12T09:57:04Z",
+        "added": "2026-11-12T14:20:49Z",
         "customFormatScore": -10000,
         "customFormats": [
           {
@@ -123,7 +123,7 @@
         "downloadClient": "Mock SABnzbd",
         "downloadClientHasPostImportCategory": false,
         "downloadId": "SABnzbd_nzo_mock5",
-        "estimatedCompletionTime": "2026-11-12T10:07:09Z",
+        "estimatedCompletionTime": "2026-11-12T14:30:54Z",
         "id": 2039898284,
         "indexer": "Mock Newznab (Prowlarr)",
         "languages": [
@@ -158,13 +158,13 @@
         "trackedDownloadStatus": "ok"
       },
       {
-        "added": "2026-11-12T09:56:44Z",
+        "added": "2026-11-12T14:20:29Z",
         "customFormatScore": 0,
         "customFormats": [],
         "downloadClient": "Mock Transmission",
         "downloadClientHasPostImportCategory": false,
         "downloadId": "B133034E90669E52E3BA3460A651D3545769CB85",
-        "estimatedCompletionTime": "2026-11-12T10:07:09Z",
+        "estimatedCompletionTime": "2026-11-12T14:30:54Z",
         "id": 1613248858,
         "indexer": "Mock Torznab (Prowlarr)",
         "languages": [
@@ -204,7 +204,7 @@
         "trackedDownloadStatus": "ok"
       },
       {
-        "added": "2026-11-12T09:55:49Z",
+        "added": "2026-11-12T14:19:35Z",
         "customFormatScore": 0,
         "customFormats": [
           {
@@ -215,7 +215,7 @@
         "downloadClient": "Mock Transmission",
         "downloadClientHasPostImportCategory": false,
         "downloadId": "5AE419C220561D2F40DDBB4026B5D0121DCC040E",
-        "estimatedCompletionTime": "2026-11-12T10:07:09Z",
+        "estimatedCompletionTime": "2026-11-12T14:30:54Z",
         "id": 936833475,
         "indexer": "Mock Torznab (Prowlarr)",
         "languages": [
@@ -255,13 +255,13 @@
         "trackedDownloadStatus": "ok"
       },
       {
-        "added": "2026-11-12T09:56:03Z",
+        "added": "2026-11-12T14:19:49Z",
         "customFormatScore": 0,
         "customFormats": [],
         "downloadClient": "Mock qBittorrent",
         "downloadClientHasPostImportCategory": false,
         "downloadId": "13706ED57ADBE030F510BEDCD37595376901117C",
-        "estimatedCompletionTime": "2026-11-12T10:07:09Z",
+        "estimatedCompletionTime": "2026-11-12T14:30:54Z",
         "id": 1132538262,
         "indexer": "Mock Torznab (Prowlarr)",
         "languages": [
@@ -304,7 +304,7 @@
     "sortKey": "timeleft",
     "totalRecords": 6
   },
-  "recordedAt": "2026-11-12T09:57:20Z",
+  "recordedAt": "2026-11-12T14:21:05Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/queue?page=1&pageSize=20&sortKey=timeleft&sortDirection=ascending"

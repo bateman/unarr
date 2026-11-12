@@ -51,7 +51,7 @@
     },
     "title": "Some.Other.Movie.2019.720p.HDTV.x264-GRP"
   },
-  "recordedAt": "2026-11-12T10:01:09Z",
+  "recordedAt": "2026-11-12T14:24:55Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/parse?title=Some.Other.Movie.2019.720p.HDTV.x264-GRP"

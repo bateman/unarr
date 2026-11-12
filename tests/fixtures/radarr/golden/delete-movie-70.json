@@ -107,7 +107,7 @@
       "tarot cards",
       "violence"
     ],
-    "lastSearchTime": "2026-11-12T09:56:27Z",
+    "lastSearchTime": "2026-11-12T14:20:13Z",
     "minimumAvailability": "released",
     "monitored": false,
     "movieFileId": 0,
@@ -170,7 +170,7 @@
     "year": 2021,
     "youTubeTrailerId": "Q81Yf46Oj3s"
   },
-  "recordedAt": "2026-11-12T10:01:09Z",
+  "recordedAt": "2026-11-12T14:24:55Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/movie/70"

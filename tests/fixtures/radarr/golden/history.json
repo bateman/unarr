@@ -3089,7 +3089,7 @@
     "sortKey": "date",
     "totalRecords": 669
   },
-  "recordedAt": "2026-11-12T09:55:25Z",
+  "recordedAt": "2026-11-12T14:19:10Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/history?page=1&pageSize=20&sortKey=date&sortDirection=descending&includeMovie=true"

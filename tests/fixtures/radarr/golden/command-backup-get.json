@@ -13,22 +13,22 @@
       "updateScheduledTask": false
     },
     "commandName": "Backup",
-    "duration": "00:00:01.3064321",
-    "ended": "2026-11-12T10:00:02Z",
+    "duration": "00:00:01.3127837",
+    "ended": "2026-11-12T14:23:48Z",
     "id": 473009,
     "message": "Backup zip created",
     "name": "Backup",
     "priority": "normal",
-    "queued": "2026-11-12T10:00:01Z",
+    "queued": "2026-11-12T14:23:47Z",
     "result": "successful",
     "sendUpdatesToClient": true,
-    "started": "2026-11-12T10:00:01Z",
-    "stateChangeTime": "2026-11-12T10:00:01Z",
+    "started": "2026-11-12T14:23:47Z",
+    "stateChangeTime": "2026-11-12T14:23:47Z",
     "status": "completed",
     "trigger": "manual",
     "updateScheduledTask": false
   },
-  "recordedAt": "2026-11-12T10:00:09Z",
+  "recordedAt": "2026-11-12T14:23:55Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/command/473009"

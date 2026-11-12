@@ -23,7 +23,7 @@
         "releaseGroup": "MeM",
         "size": "119980"
       },
-      "date": "2026-11-12T09:57:21Z",
+      "date": "2026-11-12T14:21:06Z",
       "downloadId": "SABnzbd_nzo_mock7",
       "eventType": "downloadFolderImported",
       "id": 1021,
@@ -60,9 +60,9 @@
         }
       ],
       "data": {
-        "age": "1",
-        "ageHours": "47.952258678305554",
-        "ageMinutes": "2877.1355207916667",
+        "age": "2",
+        "ageHours": "52.34825040361111",
+        "ageMinutes": "3140.8950243066665",
         "customFormatScore": "0",
         "downloadClient": "SABnzbd",
         "downloadClientName": "Mock SABnzbd",
@@ -81,7 +81,7 @@
         "size": "6979321856",
         "tmdbId": "0"
       },
-      "date": "2026-11-12T09:57:08Z",
+      "date": "2026-11-12T14:20:53Z",
       "downloadId": "SABnzbd_nzo_mock7",
       "eventType": "grabbed",
       "id": 1020,
@@ -155,7 +155,7 @@
       "sourceTitle": "/movies/Candyman (1992)/Candyman (1992) Bluray-1080p.mkv"
     }
   ],
-  "recordedAt": "2026-11-12T09:58:08Z",
+  "recordedAt": "2026-11-12T14:21:54Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/history/movie?movieId=20"

@@ -25,12 +25,12 @@
     "packageUpdateMechanism": "builtIn",
     "runtimeName": "netcore",
     "runtimeVersion": "8.0.27",
-    "startTime": "2026-11-12T09:55:19Z",
+    "startTime": "2026-11-12T14:19:04Z",
     "startupPath": "/home/user/unarr/.cache/radarr/Radarr",
     "urlBase": "",
     "version": "6.4.4.10685"
   },
-  "recordedAt": "2026-11-12T09:55:21Z",
+  "recordedAt": "2026-11-12T14:19:06Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/system/status"

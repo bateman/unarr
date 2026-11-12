@@ -3,7 +3,7 @@
     {
       "customFormatScore": 0,
       "customFormats": [],
-      "dateAdded": "2026-11-12T09:57:32Z",
+      "dateAdded": "2026-11-12T14:21:18Z",
       "edition": "",
       "id": 406,
       "indexerFlags": 0,
@@ -58,7 +58,7 @@
       "size": 177860
     }
   ],
-  "recordedAt": "2026-11-12T09:58:08Z",
+  "recordedAt": "2026-11-12T14:21:54Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/moviefile?movieId=13"

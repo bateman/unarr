@@ -1,7 +1,7 @@
 {
   "body": [
     {
-      "added": "2026-11-12T09:55:49Z",
+      "added": "2026-11-12T14:19:35Z",
       "customFormatScore": 0,
       "customFormats": [
         {
@@ -12,7 +12,7 @@
       "downloadClient": "Mock Transmission",
       "downloadClientHasPostImportCategory": false,
       "downloadId": "5AE419C220561D2F40DDBB4026B5D0121DCC040E",
-      "estimatedCompletionTime": "2026-11-12T10:05:50Z",
+      "estimatedCompletionTime": "2026-11-12T14:29:36Z",
       "id": 936833475,
       "indexer": "Mock Torznab (Prowlarr)",
       "languages": [
@@ -130,7 +130,7 @@
           "tarot cards",
           "violence"
         ],
-        "lastSearchTime": "2026-11-12T09:55:43Z",
+        "lastSearchTime": "2026-11-12T14:19:28Z",
         "minimumAvailability": "released",
         "monitored": true,
         "movieFileId": 0,
@@ -212,13 +212,13 @@
       "trackedDownloadStatus": "ok"
     },
     {
-      "added": "2026-11-12T09:55:47Z",
+      "added": "2026-11-12T14:19:33Z",
       "customFormatScore": 0,
       "customFormats": [],
       "downloadClient": "Mock qBittorrent",
       "downloadClientHasPostImportCategory": false,
       "downloadId": "13706ED57ADBE030F510BEDCD37595376901117C",
-      "estimatedCompletionTime": "2026-11-12T10:05:50Z",
+      "estimatedCompletionTime": "2026-11-12T14:29:36Z",
       "id": 1132538262,
       "indexer": "Mock Torznab (Prowlarr)",
       "languages": [
@@ -441,13 +441,13 @@
       "trackedDownloadStatus": "ok"
     },
     {
-      "added": "2026-11-12T09:55:45Z",
+      "added": "2026-11-12T14:19:31Z",
       "customFormatScore": 0,
       "customFormats": [],
       "downloadClient": "Mock SABnzbd",
       "downloadClientHasPostImportCategory": false,
       "downloadId": "SABnzbd_nzo_mock1",
-      "estimatedCompletionTime": "2026-11-12T10:05:50Z",
+      "estimatedCompletionTime": "2026-11-12T14:29:36Z",
       "id": 503947115,
       "indexer": "Mock Newznab (Prowlarr)",
       "languages": [
@@ -509,7 +509,7 @@
           "winter",
           "winter break"
         ],
-        "lastSearchTime": "2026-11-12T09:55:39Z",
+        "lastSearchTime": "2026-11-12T14:19:24Z",
         "minimumAvailability": "released",
         "monitored": true,
         "movieFileId": 0,
@@ -592,7 +592,7 @@
       "trackedDownloadStatus": "ok"
     }
   ],
-  "recordedAt": "2026-11-12T09:56:01Z",
+  "recordedAt": "2026-11-12T14:19:47Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/queue/details?includeMovie=true"

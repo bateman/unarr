@@ -4,13 +4,13 @@
     "pageSize": 2,
     "records": [
       {
-        "added": "2026-11-12T09:55:45Z",
+        "added": "2026-11-12T14:19:31Z",
         "customFormatScore": 0,
         "customFormats": [],
         "downloadClient": "Mock SABnzbd",
         "downloadClientHasPostImportCategory": false,
         "downloadId": "SABnzbd_nzo_mock1",
-        "estimatedCompletionTime": "2026-11-12T10:05:50Z",
+        "estimatedCompletionTime": "2026-11-12T14:29:36Z",
         "id": 503947115,
         "indexer": "Mock Newznab (Prowlarr)",
         "languages": [
@@ -49,13 +49,13 @@
         "trackedDownloadStatus": "ok"
       },
       {
-        "added": "2026-11-12T09:55:47Z",
+        "added": "2026-11-12T14:19:33Z",
         "customFormatScore": 0,
         "customFormats": [],
         "downloadClient": "Mock qBittorrent",
         "downloadClientHasPostImportCategory": false,
         "downloadId": "13706ED57ADBE030F510BEDCD37595376901117C",
-        "estimatedCompletionTime": "2026-11-12T10:05:50Z",
+        "estimatedCompletionTime": "2026-11-12T14:29:36Z",
         "id": 1132538262,
         "indexer": "Mock Torznab (Prowlarr)",
         "languages": [
@@ -98,7 +98,7 @@
     "sortKey": "title",
     "totalRecords": 3
   },
-  "recordedAt": "2026-11-12T09:56:01Z",
+  "recordedAt": "2026-11-12T14:19:47Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/queue?page=5&pageSize=2&sortKey=title&sortDirection=descending"

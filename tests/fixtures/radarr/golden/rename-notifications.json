@@ -61,7 +61,7 @@
         },
         "renamedMovieFiles": [
           {
-            "dateAdded": "2026-11-12T09:58:33.2003933Z",
+            "dateAdded": "2026-11-12T14:22:18.9118694Z",
             "id": 408,
             "indexerFlags": "0",
             "languages": [
@@ -140,7 +140,7 @@
       "service": "plex"
     }
   ],
-  "recordedAt": "2026-11-12T10:00:33Z",
+  "recordedAt": "2026-11-12T14:24:19Z",
   "request": {
     "method": "GET",
     "path": "/mock/notifications",

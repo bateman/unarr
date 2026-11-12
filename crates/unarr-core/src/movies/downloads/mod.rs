@@ -52,7 +52,13 @@ pub struct MovieDownloads {
     raised: Mutex<Vec<crate::movies::import::events::MovieImportEvent>>,
     /// The notifications, once the runtime is up: a grab tells them.
     notifier: OnceLock<Arc<crate::movies::notifications::MovieNotifier>>,
+    /// Who hears of a grab besides the notifications: the runtime, which
+    /// tells the UI (`MovieControllerWithSignalR.Handle(MovieGrabbedEvent)`).
+    grab_listener: OnceLock<GrabListener>,
 }
+
+/// Called with the id of a movie whose release went to a client.
+pub type GrabListener = Box<dyn Fn(i64) + Send + Sync>;
 
 impl MovieDownloads {
     pub fn new(db: Db, clients: DownloadClientService) -> MovieDownloads {
@@ -66,6 +72,7 @@ impl MovieDownloads {
             commands: OnceLock::new(),
             raised: Mutex::new(Vec::new()),
             notifier: OnceLock::new(),
+            grab_listener: OnceLock::new(),
         }
     }
 
@@ -77,6 +84,17 @@ impl MovieDownloads {
     /// Hand over the notifications; the first call wins.
     pub fn set_notifier(&self, notifier: Arc<crate::movies::notifications::MovieNotifier>) {
         let _ = self.notifier.set(notifier);
+    }
+
+    /// Hand over the grab listener; the first call wins.
+    pub fn set_grab_listener(&self, listener: GrabListener) {
+        let _ = self.grab_listener.set(listener);
+    }
+
+    pub(crate) fn grabbed(&self, movie_id: i64) {
+        if let Some(listener) = self.grab_listener.get() {
+            listener(movie_id);
+        }
     }
 
     pub fn notifier(&self) -> Option<&Arc<crate::movies::notifications::MovieNotifier>> {

@@ -1,6 +1,6 @@
 {
   "body": {},
-  "recordedAt": "2026-11-12T10:01:09Z",
+  "recordedAt": "2026-11-12T14:24:55Z",
   "request": {
     "body": "bodies/indexer-bulk-delete.json",
     "method": "DELETE",

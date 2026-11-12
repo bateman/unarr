@@ -1372,7 +1372,7 @@
     "sortKey": "movieMetadata.sortTitle",
     "totalRecords": 86
   },
-  "recordedAt": "2026-11-12T09:55:27Z",
+  "recordedAt": "2026-11-12T14:19:13Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/blocklist?page=1&pageSize=10&sortKey=movieMetadata.sortTitle&sortDirection=ascending"

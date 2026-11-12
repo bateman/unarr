@@ -19,7 +19,7 @@
         "releaseGroup": "MIRCrew",
         "size": "1106640"
       },
-      "date": "2026-11-12T09:59:21Z",
+      "date": "2026-11-12T14:23:07Z",
       "eventType": "downloadFolderImported",
       "id": 1127,
       "languages": [
@@ -55,9 +55,9 @@
         }
       ],
       "data": {
-        "age": "3",
-        "ageHours": "93.36377440577778",
-        "ageMinutes": "5601.826464466667",
+        "age": "4",
+        "ageHours": "97.75973041075",
+        "ageMinutes": "5865.583824753333",
         "customFormatScore": "0",
         "downloadClient": "Transmission",
         "downloadClientName": "Mock Transmission",
@@ -77,7 +77,7 @@
         "tmdbId": "0",
         "torrentInfoHash": "2076338e94f6fc307b43e478146e941fbd6ef7ba"
       },
-      "date": "2026-11-12T09:55:49Z",
+      "date": "2026-11-12T14:19:35Z",
       "downloadId": "5AE419C220561D2F40DDBB4026B5D0121DCC040E",
       "eventType": "grabbed",
       "id": 1011,
@@ -289,7 +289,7 @@
       "sourceTitle": "Nightmare Alley 2021 PROPER Criterion UHD BluRay 1080p DD Atmos 5 1 DoVi HD"
     }
   ],
-  "recordedAt": "2026-11-12T09:59:33Z",
+  "recordedAt": "2026-11-12T14:23:19Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/history/movie?movieId=70"

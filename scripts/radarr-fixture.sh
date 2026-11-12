@@ -195,7 +195,7 @@ cmd_golden() {
     mkdir -p "$out"
     python3 -I "$REPO/scripts/record-golden.py" \
         --base-url "http://127.0.0.1:$RADARR_PORT" --api-key "$API_KEY" --mock-url "http://127.0.0.1:$MOCK_PORT" \
-        --requests "$requests" --out "$out" --login unarr:fixture
+        --requests "$requests" --out "$out" --login unarr:fixture --signalr
     [ "$out" = "$GOLDEN_DIR" ] && record_schemas
     stop_radarr
     stop_mock

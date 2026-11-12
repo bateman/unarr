@@ -18,14 +18,14 @@
     "id": 473003,
     "name": "DownloadedMoviesScan",
     "priority": "normal",
-    "queued": "2026-11-12T09:59:33Z",
+    "queued": "2026-11-12T14:23:19Z",
     "result": "unknown",
     "sendUpdatesToClient": false,
     "status": "queued",
     "trigger": "manual",
     "updateScheduledTask": true
   },
-  "recordedAt": "2026-11-12T09:59:33Z",
+  "recordedAt": "2026-11-12T14:23:19Z",
   "request": {
     "body": "bodies/command-scan-missing-path.json",
     "method": "POST",

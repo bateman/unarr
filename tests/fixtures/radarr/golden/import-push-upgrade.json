@@ -1,9 +1,9 @@
 {
   "body": [
     {
-      "age": 1,
-      "ageHours": 46.96919925052778,
-      "ageMinutes": 2818.151955038333,
+      "age": 2,
+      "ageHours": 51.36522322325,
+      "ageMinutes": 3081.9133934066667,
       "approved": true,
       "customFormatScore": 0,
       "customFormats": [],
@@ -59,7 +59,7 @@
       "tmdbId": 0
     }
   ],
-  "recordedAt": "2026-11-12T09:58:09Z",
+  "recordedAt": "2026-11-12T14:21:54Z",
   "request": {
     "body": "bodies/import-push-upgrade.json",
     "method": "POST",

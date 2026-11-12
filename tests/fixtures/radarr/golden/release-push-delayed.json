@@ -2,8 +2,8 @@
   "body": [
     {
       "age": 2,
-      "ageHours": 49.95056111561111,
-      "ageMinutes": 2997.033666951667,
+      "ageHours": 54.346547250916664,
+      "ageMinutes": 3260.7928350766665,
       "approved": false,
       "customFormatScore": 0,
       "customFormats": [
@@ -66,7 +66,7 @@
       "tmdbId": 0
     }
   ],
-  "recordedAt": "2026-11-12T09:57:02Z",
+  "recordedAt": "2026-11-12T14:20:47Z",
   "request": {
     "body": "bodies/release-push-delayed.json",
     "method": "POST",

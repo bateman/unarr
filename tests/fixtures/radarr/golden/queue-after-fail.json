@@ -1,13 +1,13 @@
 {
   "body": [
     {
-      "added": "2026-11-12T09:56:44Z",
+      "added": "2026-11-12T14:20:29Z",
       "customFormatScore": 0,
       "customFormats": [],
       "downloadClient": "Mock Transmission",
       "downloadClientHasPostImportCategory": false,
       "downloadId": "B133034E90669E52E3BA3460A651D3545769CB85",
-      "estimatedCompletionTime": "2026-11-12T10:06:49Z",
+      "estimatedCompletionTime": "2026-11-12T14:30:34Z",
       "id": 1613248858,
       "indexer": "Mock Torznab (Prowlarr)",
       "languages": [
@@ -47,7 +47,7 @@
       "trackedDownloadStatus": "ok"
     }
   ],
-  "recordedAt": "2026-11-12T09:56:53Z",
+  "recordedAt": "2026-11-12T14:20:39Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/queue/details?movieId=116"

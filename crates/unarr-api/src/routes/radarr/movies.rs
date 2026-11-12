@@ -441,39 +441,135 @@ pub async fn alternative_title(State(state): State<AppState>, Path(id): Path<i64
 
 // --- the importer's events on SignalR
 
-/// What `MovieFileController` and `MovieController` broadcast for an
+/// What the runtime raised about movies, for the hub.
+pub enum HubMovieEvent {
+    /// `MovieGrabbedEvent`.
+    Grabbed(i64),
+    /// The importer's events.
+    Import(Box<unarr_core::movies::import::events::MovieImportEvent>),
+}
+
+/// The movie events on the hub, in the order they were raised, on a task
+/// of their own: each one reads the movie it is about, and a scan that
+/// drops a hundred files raises a hundred of them, which must not hold up
+/// the command and queue messages. The context every resource is built
+/// with (profiles, formats, the translations of the whole library) is
+/// read once for a run of events and let go when the run ends.
+pub async fn relay_movie_events(
+    state: AppState,
+    mut events: tokio::sync::mpsc::UnboundedReceiver<HubMovieEvent>,
+) {
+    let mut ctx: Option<MovieContext> = None;
+    while let Some(event) = events.recv().await {
+        if ctx.is_none() {
+            ctx = MovieContext::load(&state).await.ok();
+        }
+        if let Some(ctx) = &ctx {
+            match event {
+                HubMovieEvent::Grabbed(movie_id) => broadcast_movie_change(&state, ctx, movie_id, true).await,
+                HubMovieEvent::Import(e) => relay_import(&state, ctx, &e).await,
+            }
+        }
+        if events.is_empty() {
+            ctx = None;
+        }
+    }
+}
+
+/// The movie as `GET /movie/{id}` answers it, for the hub.
+async fn movie_for_hub(state: &AppState, ctx: &MovieContext, movie_id: i64) -> Option<Value> {
+    let library = load_library(state, None, Some(movie_id)).await.ok()?;
+    library_resources(ctx, &library, Covers::Local).into_iter().next()
+}
+
+/// The three names whose controllers share `MovieControllerWithSignalR`,
+/// in the order the original's hub sent them. Their resource has no root
+/// folder: only `MovieController`'s own mapping adds it.
+fn broadcast_under_three_names(state: &AppState, resource: &Value, names: &[&str]) {
+    let mut resource = resource.clone();
+    if let Some(fields) = resource.as_object_mut() {
+        fields.remove("rootFolderPath");
+    }
+    for name in names {
+        state
+            .hub()
+            .broadcast(name, json!({"action": "updated", "resource": resource.clone()}));
+    }
+}
+
+/// `MovieControllerWithSignalR.Handle` for a grab and an import: the movie
+/// under the three names, `grabbed` set by a grab.
+async fn broadcast_movie_change(state: &AppState, ctx: &MovieContext, movie_id: i64, grabbed: bool) {
+    let Some(mut resource) = movie_for_hub(state, ctx, movie_id).await else {
+        return;
+    };
+    if grabbed {
+        if let Some(fields) = resource.as_object_mut() {
+            fields.insert("grabbed".into(), json!(true));
+        }
+    }
+    broadcast_under_three_names(state, &resource, &["wanted/cutoff", "wanted/missing", "movie"]);
+}
+
+/// A movie file is gone. The original tells the UI as the deletion
+/// happens, when the movie has no file: `MovieController` first (the
+/// movie edited, root folder included), then the wanted lists, the file,
+/// and the movie again. Unarr relays after the fact, and by then an
+/// upgrade has put the new file in: the movie is shown as it was in
+/// between, and the import's own messages follow.
+async fn broadcast_file_deleted(state: &AppState, ctx: &MovieContext, movie_id: i64, file_id: i64) {
+    let resource = movie_for_hub(state, ctx, movie_id).await.map(|mut resource| {
+        if let Some(fields) = resource.as_object_mut() {
+            if fields.get("movieFileId").and_then(Value::as_i64).unwrap_or(0) != 0 {
+                fields.insert("hasFile".into(), json!(false));
+                fields.insert("movieFileId".into(), json!(0));
+                fields.insert("sizeOnDisk".into(), json!(0));
+                fields.insert(
+                    "statistics".into(),
+                    json!({"movieFileCount": 0, "movieFileQualities": [], "releaseGroups": [], "sizeOnDisk": 0}),
+                );
+                fields.remove("movieFile");
+            }
+        }
+        resource
+    });
+    if let Some(resource) = &resource {
+        state
+            .hub()
+            .broadcast("movie", json!({"action": "updated", "resource": resource}));
+        broadcast_under_three_names(state, resource, &["wanted/cutoff", "wanted/missing"]);
+    }
+    state.hub().broadcast(
+        "moviefile",
+        json!({"action": "deleted", "resource": {"id": file_id}}),
+    );
+    if let Some(resource) = &resource {
+        broadcast_under_three_names(state, resource, &["movie"]);
+    }
+}
+
+/// What `MovieFileController` and the movie controllers broadcast for an
 /// import's events: the movie file added (`updated`) or gone (`deleted`),
-/// and the movie a deletion detached from its file (`MovieEditedEvent`).
-pub async fn relay_import(state: &AppState, e: &unarr_core::movies::import::events::MovieImportEvent) {
+/// and the movie either touched.
+async fn relay_import(
+    state: &AppState,
+    ctx: &MovieContext,
+    e: &unarr_core::movies::import::events::MovieImportEvent,
+) {
     use unarr_core::movies::import::events::MovieImportEvent;
     match e {
         MovieImportEvent::Imported(ev) => {
-            let Ok(ctx) = MovieContext::load(state).await else {
-                return;
-            };
             if let Ok(files) = files_with_movies(state, Vec::new(), vec![ev.file.id]).await {
-                for resource in file_resources(&ctx, &files) {
+                for resource in file_resources(ctx, &files) {
                     state
                         .hub()
                         .broadcast("moviefile", json!({"action": "updated", "resource": resource}));
                 }
             }
+            broadcast_movie_change(state, ctx, ev.file.movie_id, false).await;
         }
         MovieImportEvent::FileDeleted(ev) => {
-            state.hub().broadcast(
-                "moviefile",
-                json!({"action": "deleted", "resource": {"id": ev.file.id}}),
-            );
-            let Ok(ctx) = MovieContext::load(state).await else {
-                return;
-            };
-            if let Ok(library) = load_library(state, None, Some(ev.movie.id)).await {
-                for resource in library_resources(&ctx, &library, Covers::Local) {
-                    state
-                        .hub()
-                        .broadcast("movie", json!({"action": "updated", "resource": resource}));
-                }
-            }
+            broadcast_file_deleted(state, ctx, ev.movie.id, ev.file.id).await;
         }
         MovieImportEvent::ImportFailed(_)
         | MovieImportEvent::DownloadCompleted(_)
@@ -484,11 +580,8 @@ pub async fn relay_import(state: &AppState, e: &unarr_core::movies::import::even
         // `MovieController.Handle(MovieRenamedEvent)`; the files' new
         // paths reach the UI with the movie's page, as in the original.
         MovieImportEvent::MovieRenamed { movie_id, .. } => {
-            let Ok(ctx) = MovieContext::load(state).await else {
-                return;
-            };
             if let Ok(library) = load_library(state, None, Some(*movie_id)).await {
-                for resource in library_resources(&ctx, &library, Covers::Local) {
+                for resource in library_resources(ctx, &library, Covers::Local) {
                     state
                         .hub()
                         .broadcast("movie", json!({"action": "updated", "resource": resource}));

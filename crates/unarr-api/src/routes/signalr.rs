@@ -41,7 +41,9 @@ impl Default for Hub {
 
 impl Hub {
     pub fn new() -> Hub {
-        let (tx, _) = broadcast::channel(256);
+        // Three messages per movie touched: a scan of the library sends
+        // hundreds at once, and a connection that lags loses the oldest.
+        let (tx, _) = broadcast::channel(4096);
         Hub { tx }
     }
 

@@ -15,21 +15,21 @@
       "updateScheduledTask": true
     },
     "commandName": "Downloaded Movies Scan",
-    "duration": "00:00:00.0027005",
-    "ended": "2026-11-12T09:59:33Z",
+    "duration": "00:00:00.0023382",
+    "ended": "2026-11-12T14:23:19Z",
     "id": 473003,
     "name": "DownloadedMoviesScan",
     "priority": "normal",
-    "queued": "2026-11-12T09:59:33Z",
+    "queued": "2026-11-12T14:23:19Z",
     "result": "unsuccessful",
     "sendUpdatesToClient": false,
-    "started": "2026-11-12T09:59:33Z",
-    "stateChangeTime": "2026-11-12T09:59:33Z",
+    "started": "2026-11-12T14:23:19Z",
+    "stateChangeTime": "2026-11-12T14:23:19Z",
     "status": "completed",
     "trigger": "manual",
     "updateScheduledTask": true
   },
-  "recordedAt": "2026-11-12T09:59:37Z",
+  "recordedAt": "2026-11-12T14:23:23Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/command/473003"

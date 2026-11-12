@@ -114,7 +114,7 @@
     "minimumAvailability": "released",
     "monitored": true,
     "movieFile": {
-      "dateAdded": "2026-11-12T09:57:32Z",
+      "dateAdded": "2026-11-12T14:21:18Z",
       "edition": "",
       "id": 406,
       "indexerFlags": 0,
@@ -238,7 +238,7 @@
     "year": 2018,
     "youTubeTrailerId": "7tgMuagdEhc"
   },
-  "recordedAt": "2026-11-12T09:58:09Z",
+  "recordedAt": "2026-11-12T14:21:54Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/movie/13"

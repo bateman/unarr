@@ -41,8 +41,13 @@ pub enum Event {
     CommandUpdated(Box<CommandModel>),
     /// `QueueUpdatedEvent` / `PendingReleasesUpdatedEvent`.
     QueueUpdated,
-    /// `HealthCheckCompleteEvent`, when a verdict changed.
+    /// `HealthCheckCompleteEvent`: for Sonarr when a verdict changed, for
+    /// Radarr after every check, as its hub was recorded.
     HealthChanged,
+    /// `CommandExecutedEvent`: a command ended, whoever it was for.
+    CommandExecuted,
+    /// `MovieGrabbedEvent`: a release of this movie went to a client.
+    MovieGrabbed { movie_id: i64 },
     /// What the importer raised: `EpisodeImportedEvent`,
     /// `EpisodeFileDeletedEvent`, `DownloadCompletedEvent` and the rest.
     Import(Box<ImportEvent>),
@@ -190,7 +195,16 @@ impl Runtime {
             side.downloads.set_notifier(movie_notifier.clone());
             movie_notifier
         });
-        let (events, _) = broadcast::channel(256);
+        // Room for a scan of the whole library, which raises an event per
+        // file gone: a listener that falls behind loses the oldest, and the
+        // UI would never hear of them.
+        let (events, _) = broadcast::channel(4096);
+        if let Some(side) = &movies {
+            let events: broadcast::Sender<Event> = events.clone();
+            side.downloads.set_grab_listener(Box::new(move |movie_id| {
+                let _ = events.send(Event::MovieGrabbed { movie_id });
+            }));
+        }
         let runtime = Arc::new(Runtime {
             personality,
             search: SearchService::new(db.clone()).with_queue(downloads.queue_source()),
@@ -386,7 +400,7 @@ impl Runtime {
                 .collect();
             (changed, failed, restored)
         };
-        if changed {
+        if changed || self.personality == crate::Personality::Radarr {
             self.emit(Event::HealthChanged);
         }
         if self.health_armed.load(std::sync::atomic::Ordering::SeqCst) {
@@ -720,6 +734,12 @@ impl Runtime {
             }
         };
         self.broadcast(&ended);
+        // `CommandExecutedEvent` -> `TaskController`, which tells the UI to
+        // read the tasks again. Recorded from Radarr's hub; Sonarr's was
+        // not recorded and is left as it was.
+        if self.personality == crate::Personality::Radarr {
+            self.emit(Event::CommandExecuted);
+        }
         // `CommandExecutedEvent` -> `TaskManager`.
         let body = ended.body.clone();
         let started = ended.started_at.unwrap_or(now);

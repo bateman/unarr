@@ -16,14 +16,14 @@
     "id": 472998,
     "name": "RescanMovie",
     "priority": "normal",
-    "queued": "2026-11-12T09:58:57Z",
+    "queued": "2026-11-12T14:22:43Z",
     "result": "unknown",
     "sendUpdatesToClient": true,
     "status": "queued",
     "trigger": "manual",
     "updateScheduledTask": true
   },
-  "recordedAt": "2026-11-12T09:58:57Z",
+  "recordedAt": "2026-11-12T14:22:43Z",
   "request": {
     "body": "bodies/command-rescan-missing.json",
     "method": "POST",

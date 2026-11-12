@@ -73,7 +73,7 @@
             "thumbnail": {
               "url": "https://image.tmdb.org/t/p/original/vfn1feL0V9HNSXuLLpaxAW8O6LO.jpg"
             },
-            "timestamp": "2026-11-12T09:59:21.3890939Z",
+            "timestamp": "2026-11-12T14:23:07.1622830Z",
             "title": "Nightmare Alley (2021)",
             "url": "https://www.themoviedb.org/movie/597208"
           }
@@ -136,7 +136,7 @@
           "year": 2021
         },
         "movieFile": {
-          "dateAdded": "2026-11-12T09:59:21.360551Z",
+          "dateAdded": "2026-11-12T14:23:07.1310448Z",
           "id": 409,
           "indexerFlags": "0",
           "languages": [
@@ -2018,7 +2018,7 @@
             "thumbnail": {
               "url": "https://image.tmdb.org/t/p/original/VHSzNBTwxV8vh7wylo7O9CLdac.jpg"
             },
-            "timestamp": "2026-11-12T09:59:37.4198575Z",
+            "timestamp": "2026-11-12T14:23:23.2730570Z",
             "title": "The Holdovers (2023)",
             "url": "https://www.themoviedb.org/movie/840430"
           }
@@ -2080,7 +2080,7 @@
           "year": 2023
         },
         "movieFile": {
-          "dateAdded": "2026-11-12T09:59:37.3978386Z",
+          "dateAdded": "2026-11-12T14:23:23.2466964Z",
           "id": 410,
           "indexerFlags": "0",
           "languages": [
@@ -2176,7 +2176,7 @@
       "service": "plex"
     }
   ],
-  "recordedAt": "2026-11-12T09:59:49Z",
+  "recordedAt": "2026-11-12T14:23:35Z",
   "request": {
     "method": "GET",
     "path": "/mock/notifications",

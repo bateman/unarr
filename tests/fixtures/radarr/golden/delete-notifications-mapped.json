@@ -38,7 +38,7 @@
                 "value": "```/movies/Last Night in Soho (2021)/Last Night in Soho (2021) {tmdb-576845} - [Bluray-1080p][AAC 1.0][x264]-MIRCrew.mkv```"
               }
             ],
-            "timestamp": "2026-11-12T10:00:45.7632588Z",
+            "timestamp": "2026-11-12T14:24:31.5843155Z",
             "title": "Last Night in Soho (2021)",
             "url": "https://www.themoviedb.org/movie/576845"
           }
@@ -94,7 +94,7 @@
           "year": 2021
         },
         "movieFile": {
-          "dateAdded": "2026-11-12T10:00:33.6540513Z",
+          "dateAdded": "2026-11-12T14:24:19.497687Z",
           "id": 411,
           "indexerFlags": "G_Freeleech",
           "languages": [
@@ -187,7 +187,7 @@
       "service": "plex"
     }
   ],
-  "recordedAt": "2026-11-12T10:00:57Z",
+  "recordedAt": "2026-11-12T14:24:43Z",
   "request": {
     "method": "GET",
     "path": "/mock/notifications",

@@ -18,14 +18,14 @@
     "id": 473000,
     "name": "DownloadedMoviesScan",
     "priority": "normal",
-    "queued": "2026-11-12T09:59:21Z",
+    "queued": "2026-11-12T14:23:07Z",
     "result": "unknown",
     "sendUpdatesToClient": false,
     "status": "queued",
     "trigger": "manual",
     "updateScheduledTask": true
   },
-  "recordedAt": "2026-11-12T09:59:21Z",
+  "recordedAt": "2026-11-12T14:23:07Z",
   "request": {
     "body": "bodies/command-scan-path.json",
     "method": "POST",

@@ -502,7 +502,7 @@ carry the clock.
 |----------------|--------|
 | `make ui && make check` green | Yes: fmt, clippy `-D warnings`, 628 tests in 31 test binaries. Sonarr's replay is unchanged: the same 634 goldens, none re-recorded. |
 | Completed items end as movie files under the root folder, named by the fixture's naming settings, with media info | Yes. The mock qBittorrent and SABnzbd complete three items; two import (hardlink or copy, the maintainer's mode) and one waits for manual interaction, as in the original. The file names, `movieFile` rows and media info (from the ffprobe the pinned Radarr release ships, also used by the replay) are goldens. |
-| History, SignalR and the three notifications equal to the oracle | History: yes, goldens. Notifications: yes, the bodies the mock Discord and webhook received and the requests the mock Plex received are goldens (10 snapshots), with Plex seeing the library under another path as on the maintainer's installation. SignalR: not recorded from the original, as before; the replay asserts what the hub sends. |
+| History, SignalR and the three notifications equal to the oracle | History: yes, goldens. Notifications: yes, the bodies the mock Discord and webhook received and the requests the mock Plex received are goldens (10 snapshots), with Plex seeing the library under another path as on the maintainer's installation. SignalR: not recorded from the original when the milestone closed; recorded since, with the goldens, and compared in the replay (below). |
 | `scripts/bazarr-replay.py --app radarr` passes with `RescanMovie` answered | Yes (`make bazarr-radarr` against the release binary on both fixtures): 193 movies and 100 files checked, `RescanMovie` answered 201 and completed; the Sonarr side replayed against the same process. Bazarr itself was not run. |
 | The pages render | Yes, with Playwright against the release binary on both fixtures after 388 requests of the list: login, queue (three rows, one blocked), the queue's manual import, history, blocklist, wanted, a movie page with its imported file, the movie's history, the rename preview, the interactive search (nine releases), Manage Files, tasks, status, Settings > Connect and the Plex form, events, the movie index. Nineteen steps, no page error; the requests that failed are the covers the fixture does not have. |
 | The memory point is settled | Yes, by decision: brought down at idle, not at work; the maintainer keeps the target and defers the miss until Unarr is a daily driver (below, and `docs/DESIGN.md` section 9). |
@@ -586,6 +586,16 @@ What does not hold, or was not verified:
   scaled after the milestone closed (950 series, 2,123 movies): idle
   memory holds at 51 MB, and the answers built from every movie are slow
   (`GET /movie` a quarter of a second); `docs/DESIGN.md` section 9.
+- **SignalR** was the one criterion taken on trust. `record-golden.py
+  --signalr` now listens to the original's hub while the goldens are
+  recorded (903 messages over the list) and the replay compares Unarr's
+  hub with it. It found that Unarr never told the UI about the movie a
+  grab, an import or a deleted file touched (the original sends it under
+  `movie`, `wanted/missing` and `wanted/cutoff`), nor to read the tasks
+  again after a command, and told it of the health only when a verdict
+  changed. All sent now; the comparison passes with nothing set aside.
+  What it compares, and what it leaves to the original's timers, is in
+  `docs/DESIGN.md` section 17.
 - **Not run**: Bazarr itself; the image; the homelab, by the maintainer's
   choice left to the end of 4d. The maintainer's Radarr logs were read for
   the facts they hold (hardlink or copy from qBittorrent, a move from the

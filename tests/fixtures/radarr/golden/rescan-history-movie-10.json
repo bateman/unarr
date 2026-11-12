@@ -18,8 +18,8 @@
       ],
       "data": {
         "age": "3",
-        "ageHours": "83.26781551594445",
-        "ageMinutes": "4996.068931108333",
+        "ageHours": "87.66380775941667",
+        "ageMinutes": "5259.828465706667",
         "customFormatScore": "0",
         "downloadClient": "SABnzbd",
         "downloadClientName": "Mock SABnzbd",
@@ -38,7 +38,7 @@
         "size": "5153960755",
         "tmdbId": "0"
       },
-      "date": "2026-11-12T09:57:04Z",
+      "date": "2026-11-12T14:20:49Z",
       "downloadId": "SABnzbd_nzo_mock5",
       "eventType": "grabbed",
       "id": 1018,
@@ -229,7 +229,7 @@
       "sourceTitle": "Backcountry.Gnadenlose.Wildnis.2014.German.DL.1080p.BluRay.AVC-SCiENTOLOGY"
     }
   ],
-  "recordedAt": "2026-11-12T09:58:45Z",
+  "recordedAt": "2026-11-12T14:22:30Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/history/movie?movieId=10"

@@ -5,7 +5,7 @@
     "records": [
       {
         "customFormats": [],
-        "date": "2026-11-12T09:56:01Z",
+        "date": "2026-11-12T14:19:47Z",
         "id": 116,
         "indexer": "Mock Torznab (Prowlarr)",
         "languages": [
@@ -701,7 +701,7 @@
     "sortKey": "date",
     "totalRecords": 87
   },
-  "recordedAt": "2026-11-12T09:56:01Z",
+  "recordedAt": "2026-11-12T14:19:47Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/blocklist?page=1&pageSize=5&sortKey=date&sortDirection=descending"

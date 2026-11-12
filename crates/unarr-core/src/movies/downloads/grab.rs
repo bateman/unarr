@@ -149,6 +149,10 @@ pub async fn download_report(
     if let Err(e) = record_grab(downloads, remote, &definition, download_id.as_deref(), now).await {
         tracing::error!(title = %release.title, error = %format!("{e:#}"), "the grab was sent to the client but its history could not be written");
     }
+    // `MovieControllerWithSignalR.Handle(MovieGrabbedEvent)`.
+    if let Some(movie) = remote.movie.as_ref() {
+        downloads.grabbed(movie.id);
+    }
     // `NotificationService.Handle(MovieGrabbedEvent)`.
     if let Some(notifier) = downloads.notifier() {
         notifier

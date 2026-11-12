@@ -38,7 +38,7 @@
       "size": 119980
     }
   ],
-  "recordedAt": "2026-11-12T10:00:33Z",
+  "recordedAt": "2026-11-12T14:24:19Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/manualimport?folder=/downloads/movies/c8949b89db6f20a1e049aa8170a7a05c&filterExistingFiles=false"

@@ -1686,6 +1686,37 @@ the same libraries were not measured.
   Decided by the maintainer when the memory figures were put to them:
   section 9 keeps one table of the targets missed or not measured, and
   they wait until Unarr is a daily driver.
+- **The hub is recorded with the goldens, and compared by what the UI is
+  told, not when.** `scripts/record-golden.py --signalr` connects to
+  `/signalr/messages` as the UI does (a WebSocket and the JSON protocol,
+  written on the standard library) and keeps the messages under the
+  request they followed, in `signalr.json`. The replay cuts the list into
+  stretches at its `sleep` lines, where both the recording and the replay
+  wait for the background work to end. Messages that carry a resource
+  are compared stretch by stretch as sets: the name, the action, the
+  resource's id and, for a movie, `grabbed` and `hasFile`; a command the
+  list posted counts when it ends, by name and last message. Messages
+  that only say "read this again" (`queue`, `queue/details`,
+  `system/task`, `health`) are compared over the whole list by name: how
+  often and when the original sends them is the work of its debounce
+  timers, as are the queue's counts and a command's states before its
+  end, and a scheduled command is the clock's doing. The bodies are not
+  compared beyond those fields. The order is checked where the original
+  has one worth keeping, around each movie file: an import is the file,
+  the two wanted lists, the movie; a deletion the movie with its root
+  folder, the two wanted lists, the file, the movie again. The recording
+  is held to it as the replay is. The movie events reach the hub on a
+  task of their own, in the order they were raised, with the context
+  the resources are built from read once per run of events: a scan that
+  drops a hundred files no longer holds the command and queue messages
+  behind a hundred reads of the library's translations. What the comparison found is in
+  `docs/phase-4-radarr.md`; two things it settled on the way: a deleted
+  file is announced as the original does while it deletes (the movie
+  with its root folder, the two wanted lists, the file, the movie
+  again, all without a file, even when an upgrade has already put the
+  new one in), and the event channels hold 4,096 messages where they
+  held 256, since a scan that drops a hundred files sends four hundred
+  at once and a listener that fell behind lost the oldest.
 
 ## 18. Open questions
 
@@ -1757,7 +1788,13 @@ the same libraries were not measured.
   read as outdated by the original if the database ever went back to it,
   and probed again there, which is harmless. What the three revisions in
   between changed in the model was not compared.
-- SignalR: `series` and `episode` messages follow the refresh, the adds and
+- SignalR. Radarr's hub is recorded from the original and compared
+  (section 17); Sonarr's is not, and what the Radarr recording corrected
+  is likely wrong there too: an episode grabbed is not announced, the
+  tasks are not told to sync after a command, the health is announced
+  only when a verdict changes. They were left as they are until Sonarr's
+  hub is recorded the same way, which means recording its whole list
+  again. `series` and `episode` messages follow the refresh, the adds and
   the edits since 3b. The UI's pages were driven in a browser; no client
   other than the UI listens.
 - The collation approximates ICU for ASCII names. Titles with accented or

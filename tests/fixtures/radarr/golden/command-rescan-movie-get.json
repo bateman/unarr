@@ -13,22 +13,22 @@
       "updateScheduledTask": true
     },
     "commandName": "Rescan Movie",
-    "duration": "00:00:00.0939157",
-    "ended": "2026-11-12T09:58:33Z",
+    "duration": "00:00:00.1695504",
+    "ended": "2026-11-12T14:22:19Z",
     "id": 472994,
     "message": "Scanning disk for Backcountry",
     "name": "RescanMovie",
     "priority": "normal",
-    "queued": "2026-11-12T09:58:33Z",
+    "queued": "2026-11-12T14:22:18Z",
     "result": "successful",
     "sendUpdatesToClient": true,
-    "started": "2026-11-12T09:58:33Z",
-    "stateChangeTime": "2026-11-12T09:58:33Z",
+    "started": "2026-11-12T14:22:18Z",
+    "stateChangeTime": "2026-11-12T14:22:18Z",
     "status": "completed",
     "trigger": "manual",
     "updateScheduledTask": true
   },
-  "recordedAt": "2026-11-12T09:58:45Z",
+  "recordedAt": "2026-11-12T14:22:30Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/command/472994"

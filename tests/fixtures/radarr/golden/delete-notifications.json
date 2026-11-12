@@ -22,7 +22,7 @@
                 "value": "```/movies/Nightmare Alley (2021)/Nightmare Alley (2021) {tmdb-597208} - [Bluray-1080p][AAC 1.0][x264]-MIRCrew.mkv```"
               }
             ],
-            "timestamp": "2026-11-12T10:00:57.8010597Z",
+            "timestamp": "2026-11-12T14:24:43.6355008Z",
             "title": "Nightmare Alley (2021)",
             "url": "https://www.themoviedb.org/movie/597208"
           }
@@ -76,7 +76,7 @@
           "year": 2021
         },
         "movieFile": {
-          "dateAdded": "2026-11-12T09:59:21.360551Z",
+          "dateAdded": "2026-11-12T14:23:07.1310448Z",
           "id": 409,
           "indexerFlags": "0",
           "languages": [
@@ -153,7 +153,7 @@
       "service": "plex"
     }
   ],
-  "recordedAt": "2026-11-12T10:01:09Z",
+  "recordedAt": "2026-11-12T14:24:55Z",
   "request": {
     "method": "GET",
     "path": "/mock/notifications",

@@ -15,22 +15,22 @@
       "updateScheduledTask": true
     },
     "commandName": "Movies Search",
-    "duration": "00:00:02.0432843",
-    "ended": "2026-11-12T09:56:15Z",
+    "duration": "00:00:02.0443133",
+    "ended": "2026-11-12T14:20:01Z",
     "id": 472960,
     "message": "Completed search for 1 movies. 1 reports downloaded.",
     "name": "MoviesSearch",
     "priority": "normal",
-    "queued": "2026-11-12T09:56:13Z",
+    "queued": "2026-11-12T14:19:59Z",
     "result": "successful",
     "sendUpdatesToClient": true,
-    "started": "2026-11-12T09:56:13Z",
-    "stateChangeTime": "2026-11-12T09:56:13Z",
+    "started": "2026-11-12T14:19:59Z",
+    "stateChangeTime": "2026-11-12T14:19:59Z",
     "status": "completed",
     "trigger": "manual",
     "updateScheduledTask": true
   },
-  "recordedAt": "2026-11-12T09:56:25Z",
+  "recordedAt": "2026-11-12T14:20:11Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/command/472960"

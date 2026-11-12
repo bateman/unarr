@@ -522,8 +522,13 @@ async fn radarr_golden_responses_match() {
     // What the hub would send the UI while the goldens replay.
     let mut hub = state.hub().subscribe();
     let mut broadcasts: Vec<Value> = Vec::new();
+    // The same messages by stretch of the list: a stretch ends at each
+    // `sleep`, where the recording waited for the original's background
+    // work and the replay waits for Unarr's.
+    let mut stretches: Vec<Vec<Value>> = vec![Vec::new()];
     for g in &goldens {
         while let Ok(message) = hub.try_recv() {
+            stretches.last_mut().unwrap().push(message.clone());
             broadcasts.push(message);
         }
         if g.method == "sleep" {
@@ -537,6 +542,14 @@ async fn radarr_golden_responses_match() {
             )
             .await
             .expect("commands finish within a minute");
+            // What the wait produced belongs to the stretch it ends. The
+            // relay to the hub is a task of its own, and a scan of the whole
+            // library hands it hundreds of events: wait until it is quiet.
+            for message in drain_hub(&mut hub).await {
+                stretches.last_mut().unwrap().push(message.clone());
+                broadcasts.push(message);
+            }
+            stretches.push(Vec::new());
             continue;
         }
         // `UNARR_CONTRACT_ALL=1` replays the pending ones too, to see how far
@@ -674,9 +687,16 @@ async fn radarr_golden_responses_match() {
     // with its last message, and the queue told to read itself again with
     // its new count. Nothing under a name only Sonarr's UI knows.
     if only.is_empty() && std::env::var_os("UNARR_CONTRACT_ALL").is_none() {
-        while let Ok(message) = hub.try_recv() {
+        for message in drain_hub(&mut hub).await {
+            stretches.last_mut().unwrap().push(message.clone());
             broadcasts.push(message);
         }
+        let problems = signalr_differences(&fixture_dir().join("golden"), &goldens, &stretches);
+        assert!(
+            problems.is_empty(),
+            "the hub differs from the original's (golden/signalr.json):\n  {}",
+            problems.join("\n  ")
+        );
         let named = |name: &str| -> Vec<&Value> { broadcasts.iter().filter(|m| m["name"] == name).collect() };
         let command_ended = |command: &str, message: &str| {
             named("command").iter().any(|m| {
@@ -730,7 +750,9 @@ async fn radarr_golden_responses_match() {
             named("queue/status")
         );
         assert!(named("health").iter().any(|m| m["body"]["action"] == "sync"));
-        for name in ["series", "episode", "episodefile", "calendar", "wanted/missing"] {
+        // `wanted/missing` is a name Radarr's hub uses too, for the movie
+        // a grab or an import touched: the recording shows it.
+        for name in ["series", "episode", "episodefile", "calendar"] {
             assert!(named(name).is_empty(), "a {name} message from Radarr");
         }
     }
@@ -840,4 +862,256 @@ async fn pending_list_only_names_recorded_goldens() {
             "PENDING_PREFIXES names no golden: {p}"
         );
     }
+}
+
+/// Everything the hub has sent, once it has been quiet for a moment.
+async fn drain_hub(hub: &mut tokio::sync::broadcast::Receiver<Value>) -> Vec<Value> {
+    use tokio::sync::broadcast::error::TryRecvError;
+    let mut out = Vec::new();
+    let mut quiet = 0;
+    while quiet < 4 {
+        match hub.try_recv() {
+            Ok(message) => {
+                out.push(message);
+                quiet = 0;
+            }
+            Err(TryRecvError::Lagged(missed)) => panic!("the test fell {missed} hub messages behind"),
+            Err(_) => {
+                quiet += 1;
+                tokio::time::sleep(std::time::Duration::from_millis(50)).await;
+            }
+        }
+    }
+    out
+}
+
+/// What identifies a hub message that carries a resource: the name it was
+/// sent under, the action, the resource's id and, for a movie, the two
+/// fields a grab and an import change. A command the list posted counts
+/// once it has ended, by its name and last message: the states before are debounced by the
+/// original and arrive or not as the clock has it. `None` for a message
+/// without a resource (`sync`), and for the queue's counts, which are
+/// debounced too.
+fn hub_key(message: &Value) -> Option<String> {
+    let name = message["name"].as_str()?;
+    let body = &message["body"];
+    let action = body["action"].as_str().unwrap_or("");
+    let resource = body["resource"].as_object()?;
+    let field = |k: &str| resource.get(k).map(|v| v.to_string()).unwrap_or_default();
+    match name {
+        "queue/status" | "version" => None,
+        // A scheduled run is the clock's doing, not the list's.
+        "command" => (resource.get("status")? == "completed" && resource.get("trigger")? != "scheduled")
+            .then(|| format!("command {} ended: {}", field("name"), field("message"))),
+        "movie" | "wanted/missing" | "wanted/cutoff" => Some(format!(
+            "{name} {action} id={} grabbed={} hasFile={}",
+            field("id"),
+            field("grabbed"),
+            field("hasFile")
+        )),
+        _ => Some(format!("{name} {action} id={}", field("id"))),
+    }
+}
+
+/// A message without a resource, by name and action.
+fn hub_sync_key(message: &Value) -> Option<String> {
+    let body = &message["body"];
+    if body["resource"].is_object() || message["name"] == "version" {
+        return None;
+    }
+    Some(format!(
+        "{} {}",
+        message["name"].as_str()?,
+        body["action"].as_str().unwrap_or("")
+    ))
+}
+
+/// The messages about movies and their files, in the order sent, each as
+/// a word: `movie+root` is the movie as `MovieController` maps it, with
+/// its root folder; `movie` the one the shared handler sends without.
+fn movie_words(messages: &[&Value]) -> Vec<(String, String)> {
+    messages
+        .iter()
+        .filter_map(|m| {
+            let name = m["name"].as_str()?;
+            let body = &m["body"];
+            let resource = body["resource"].as_object()?;
+            let id = resource.get("id").map(|v| v.to_string()).unwrap_or_default();
+            let word = match name {
+                "movie" if resource.contains_key("rootFolderPath") => "movie+root".to_string(),
+                "movie" | "wanted/cutoff" | "wanted/missing" => name.to_string(),
+                "moviefile" => format!("moviefile {}", body["action"].as_str().unwrap_or("")),
+                _ => return None,
+            };
+            Some((word, id))
+        })
+        .collect()
+}
+
+/// What surrounds each movie file message, against the order the original
+/// announces an import (the file, the two wanted lists, the movie) and a
+/// deletion (the movie with its root folder, the two wanted lists, the
+/// file, the movie again) in.
+fn movie_file_order_problems(messages: &[&Value]) -> Vec<String> {
+    let words = movie_words(messages);
+    let word = |i: usize| words.get(i).map(|(w, _)| w.as_str()).unwrap_or("(nothing)");
+    let mut problems = Vec::new();
+    for (i, (name, id)) in words.iter().enumerate() {
+        match name.as_str() {
+            "moviefile updated" => {
+                let after = [word(i + 1), word(i + 2), word(i + 3)];
+                if after != ["wanted/cutoff", "wanted/missing", "movie"] {
+                    problems.push(format!("movie file {id} imported, then {after:?}"));
+                }
+            }
+            "moviefile deleted" => {
+                let before = [
+                    i.checked_sub(3).map(word).unwrap_or("(nothing)"),
+                    i.checked_sub(2).map(word).unwrap_or("(nothing)"),
+                    i.checked_sub(1).map(word).unwrap_or("(nothing)"),
+                ];
+                if before != ["movie+root", "wanted/cutoff", "wanted/missing"] || word(i + 1) != "movie" {
+                    problems.push(format!(
+                        "movie file {id} deleted after {before:?} and before {:?}",
+                        word(i + 1)
+                    ));
+                }
+            }
+            _ => {}
+        }
+    }
+    problems
+}
+
+/// Hub messages Unarr is known to send differently, each with its reason;
+/// a line is a key of `hub_key` or `hub_sync_key`.
+const PENDING_HUB: &[&str] = &[];
+
+/// The hub against the original's (`signalr.json`, recorded with the
+/// goldens by `record-golden.py --signalr`). Messages that carry a resource
+/// are compared stretch by stretch, as sets: which resources the UI was
+/// told about between two pauses of the list. Messages that only say
+/// "read this again" are compared over the whole list, by name: when and
+/// how often they are sent follows the original's debounce timers. The
+/// order of the messages around each movie file is checked apart, on the
+/// recording as on the replay.
+fn signalr_differences(
+    golden_dir: &std::path::Path,
+    goldens: &[Golden],
+    replayed: &[Vec<Value>],
+) -> Vec<String> {
+    use std::collections::{BTreeMap, BTreeSet};
+    let Ok(text) = std::fs::read_to_string(golden_dir.join("signalr.json")) else {
+        return vec!["signalr.json is missing: record it with `make golden-radarr`".into()];
+    };
+    let recorded: Vec<Value> = serde_json::from_str(&text).expect("signalr.json");
+    // The stretch each step of the list is in. The recorder names a step by
+    // the request's name, or by its position when it has none.
+    let mut stretch_of: BTreeMap<String, usize> = BTreeMap::new();
+    stretch_of.insert("(start)".into(), 0);
+    let mut stretch = 0;
+    for (index, g) in goldens.iter().enumerate() {
+        if g.method == "sleep" {
+            stretch += 1;
+            continue;
+        }
+        let step = if g.name == "-" {
+            format!("#{}", index + 1)
+        } else {
+            g.name.clone()
+        };
+        stretch_of.insert(step, stretch);
+    }
+    let mut problems = Vec::new();
+    let mut original: Vec<BTreeSet<String>> = vec![BTreeSet::new(); stretch + 1];
+    let mut original_sync: BTreeSet<String> = BTreeSet::new();
+    let mut first_step: BTreeMap<usize, String> = BTreeMap::new();
+    for step in &recorded {
+        let after = step["after"].as_str().unwrap_or("");
+        let Some(&at) = stretch_of.get(after) else {
+            problems.push(format!(
+                "signalr.json names a step the list does not have: {after}"
+            ));
+            continue;
+        };
+        first_step.entry(at).or_insert_with(|| after.to_string());
+        for message in step["messages"].as_array().into_iter().flatten() {
+            if let Some(key) = hub_key(message) {
+                original[at].insert(key);
+            } else if let Some(key) = hub_sync_key(message) {
+                original_sync.insert(key);
+            }
+        }
+    }
+    let mut ours_sync: BTreeSet<String> = BTreeSet::new();
+    let pending = |key: &String| PENDING_HUB.contains(&key.as_str());
+    for (at, wanted) in original.iter().enumerate() {
+        let empty = Vec::new();
+        let messages = replayed.get(at).unwrap_or(&empty);
+        let ours: BTreeSet<String> = messages.iter().filter_map(hub_key).collect();
+        ours_sync.extend(messages.iter().filter_map(hub_sync_key));
+        let place = first_step
+            .get(&at)
+            .map(|s| format!("stretch {at} (from {s})"))
+            .unwrap_or_else(|| format!("stretch {at}"));
+        for key in wanted.difference(&ours).filter(|k| !pending(k)) {
+            problems.push(format!("{place}: the original sent, Unarr did not: {key}"));
+        }
+        for key in ours.difference(wanted).filter(|k| !pending(k)) {
+            problems.push(format!("{place}: Unarr sent, the original did not: {key}"));
+        }
+    }
+    // The order around a movie file, which the sets above cannot see.
+    let recorded_messages: Vec<&Value> = recorded
+        .iter()
+        .flat_map(|step| step["messages"].as_array().into_iter().flatten())
+        .collect();
+    let replayed_messages: Vec<&Value> = replayed.iter().flatten().collect();
+    for (who, messages) in [("the original", recorded_messages), ("Unarr", replayed_messages)] {
+        problems.extend(
+            movie_file_order_problems(&messages)
+                .into_iter()
+                .map(|p| format!("{who}: {p}")),
+        );
+    }
+    for key in original_sync.difference(&ours_sync).filter(|k| !pending(k)) {
+        problems.push(format!("the original sent, Unarr never did: {key}"));
+    }
+    for key in ours_sync.difference(&original_sync).filter(|k| !pending(k)) {
+        problems.push(format!("Unarr sent, the original never did: {key}"));
+    }
+    problems
+}
+
+#[test]
+fn the_order_check_sees_a_file_announced_out_of_turn() {
+    let message = |name: &str, action: &str, resource: Value| serde_json::json!({"name": name, "body": {"action": action, "resource": resource}});
+    let movie = serde_json::json!({"id": 7});
+    let rooted = serde_json::json!({"id": 7, "rootFolderPath": "/movies"});
+    let file = serde_json::json!({"id": 40});
+    let right = [
+        message("movie", "updated", rooted.clone()),
+        message("wanted/cutoff", "updated", movie.clone()),
+        message("wanted/missing", "updated", movie.clone()),
+        message("moviefile", "deleted", file.clone()),
+        message("movie", "updated", movie.clone()),
+        message("queue", "sync", Value::Null),
+        message("moviefile", "updated", file.clone()),
+        message("wanted/cutoff", "updated", movie.clone()),
+        message("wanted/missing", "updated", movie.clone()),
+        message("movie", "updated", movie.clone()),
+    ];
+    assert!(movie_file_order_problems(&right.iter().collect::<Vec<_>>()).is_empty());
+    // The file first, the movie after: the sets are the same.
+    let wrong = [
+        message("moviefile", "deleted", file.clone()),
+        message("movie", "updated", rooted),
+        message("wanted/cutoff", "updated", movie.clone()),
+        message("wanted/missing", "updated", movie.clone()),
+        message("movie", "updated", movie),
+    ];
+    assert_eq!(
+        movie_file_order_problems(&wrong.iter().collect::<Vec<_>>()).len(),
+        1
+    );
 }

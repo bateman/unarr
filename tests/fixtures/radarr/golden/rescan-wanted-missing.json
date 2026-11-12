@@ -522,7 +522,7 @@
     "sortKey": "movieMetadata.sortTitle",
     "totalRecords": 88
   },
-  "recordedAt": "2026-11-12T09:59:21Z",
+  "recordedAt": "2026-11-12T14:23:07Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/wanted/missing?page=1&pageSize=5&sortKey=movieMetadata.sortTitle&sortDirection=ascending&monitored=true"

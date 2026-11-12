@@ -14,7 +14,7 @@
         "releaseGroup": "MIRCrew",
         "size": "119980"
       },
-      "date": "2026-11-12T10:00:33Z",
+      "date": "2026-11-12T14:24:19Z",
       "downloadId": "13706ED57ADBE030F510BEDCD37595376901117C",
       "eventType": "downloadFolderImported",
       "id": 1130,
@@ -51,8 +51,8 @@
       "customFormats": [],
       "data": {
         "age": "2",
-        "ageHours": "62.85109034422222",
-        "ageMinutes": "3771.0654208016667",
+        "ageHours": "67.24704415894445",
+        "ageMinutes": "4034.8226496583334",
         "customFormatScore": "0",
         "downloadClient": "qBittorrent",
         "downloadClientName": "Mock qBittorrent",
@@ -72,7 +72,7 @@
         "tmdbId": "0",
         "torrentInfoHash": "d0c1309e36cdb92c5d7b4abfd794f9bdff969920"
       },
-      "date": "2026-11-12T09:56:03Z",
+      "date": "2026-11-12T14:19:49Z",
       "downloadId": "13706ED57ADBE030F510BEDCD37595376901117C",
       "eventType": "grabbed",
       "id": 1013,
@@ -115,7 +115,7 @@
         "releaseGroup": "MIRCrew",
         "size": "768000"
       },
-      "date": "2026-11-12T09:56:01Z",
+      "date": "2026-11-12T14:19:47Z",
       "downloadId": "13706ED57ADBE030F510BEDCD37595376901117C",
       "eventType": "downloadFailed",
       "id": 1012,
@@ -152,8 +152,8 @@
       "customFormats": [],
       "data": {
         "age": "2",
-        "ageHours": "62.846561026833335",
-        "ageMinutes": "3770.7936617416667",
+        "ageHours": "67.24251997538889",
+        "ageMinutes": "4034.5511986516667",
         "customFormatScore": "0",
         "downloadClient": "qBittorrent",
         "downloadClientName": "Mock qBittorrent",
@@ -173,7 +173,7 @@
         "tmdbId": "0",
         "torrentInfoHash": "d0c1309e36cdb92c5d7b4abfd794f9bdff969920"
       },
-      "date": "2026-11-12T09:55:47Z",
+      "date": "2026-11-12T14:19:33Z",
       "downloadId": "13706ED57ADBE030F510BEDCD37595376901117C",
       "eventType": "grabbed",
       "id": 1010,
@@ -514,7 +514,7 @@
       "sourceTitle": "Looking.in.the.Mirror.2021.1080p.PCOK.WEB-DL.AAC.2.0.H.264-OnlyWeb"
     }
   ],
-  "recordedAt": "2026-11-12T10:00:45Z",
+  "recordedAt": "2026-11-12T14:24:31Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/history/movie?movieId=62"

@@ -278,7 +278,16 @@ impl AppState {
         runtime.start();
         let mut events = runtime.subscribe();
         let state = self.clone();
+        // Radarr's movie events go to the hub on a task of their own.
+        let (movie_events, movie_events_rx) = tokio::sync::mpsc::unbounded_channel();
+        if self.personality() == Personality::Radarr {
+            tokio::spawn(crate::routes::radarr::movies::relay_movie_events(
+                self.clone(),
+                movie_events_rx,
+            ));
+        }
         tokio::spawn(async move {
+            use crate::routes::radarr::movies::HubMovieEvent;
             loop {
                 match events.recv().await {
                     Ok(Event::CommandUpdated(c)) => state.hub().broadcast(
@@ -290,8 +299,14 @@ impl AppState {
                         _ => crate::routes::queue::broadcast_queue(&state),
                     },
                     Ok(Event::HealthChanged) => state.hub().broadcast("health", json!({"action": "sync"})),
+                    Ok(Event::CommandExecuted) => state.hub().broadcast("system/task", json!({"action": "sync"})),
+                    Ok(Event::MovieGrabbed { movie_id }) => {
+                        let _ = movie_events.send(HubMovieEvent::Grabbed(movie_id));
+                    }
                     Ok(Event::Import(e)) => crate::relay::relay_import(&state, &e).await,
-                    Ok(Event::MovieImport(e)) => crate::routes::radarr::movies::relay_import(&state, &e).await,
+                    Ok(Event::MovieImport(e)) => {
+                        let _ = movie_events.send(HubMovieEvent::Import(e));
+                    }
                     Ok(Event::SeriesUpdated { series_id }) => crate::relay::broadcast_series(&state, series_id).await,
                     Err(tokio::sync::broadcast::error::RecvError::Lagged(_)) => continue,
                     Err(tokio::sync::broadcast::error::RecvError::Closed) => break,

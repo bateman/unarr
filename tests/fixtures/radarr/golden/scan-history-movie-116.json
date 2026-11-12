@@ -14,7 +14,7 @@
         "releaseGroup": "MIRCrew",
         "size": "177860"
       },
-      "date": "2026-11-12T09:59:37Z",
+      "date": "2026-11-12T14:23:23Z",
       "downloadId": "B133034E90669E52E3BA3460A651D3545769CB85",
       "eventType": "downloadFolderImported",
       "id": 1128,
@@ -51,8 +51,8 @@
       "customFormats": [],
       "data": {
         "age": "2",
-        "ageHours": "60.44558300486111",
-        "ageMinutes": "3626.7349803883335",
+        "ageHours": "64.84158477394445",
+        "ageMinutes": "3890.4950865966666",
         "customFormatScore": "0",
         "downloadClient": "Transmission",
         "downloadClientName": "Mock Transmission",
@@ -72,7 +72,7 @@
         "tmdbId": "0",
         "torrentInfoHash": "7e59b884110362736e39ead456edcbdac5ef0fe6"
       },
-      "date": "2026-11-12T09:56:44Z",
+      "date": "2026-11-12T14:20:29Z",
       "downloadId": "B133034E90669E52E3BA3460A651D3545769CB85",
       "eventType": "grabbed",
       "id": 1016,
@@ -115,7 +115,7 @@
         "releaseGroup": "MIRCrew",
         "size": "768000"
       },
-      "date": "2026-11-12T09:56:41Z",
+      "date": "2026-11-12T14:20:27Z",
       "downloadId": "SABnzbd_nzo_mock3",
       "eventType": "downloadFailed",
       "id": 1015,
@@ -152,8 +152,8 @@
       "customFormats": [],
       "data": {
         "age": "2",
-        "ageHours": "60.70440643902778",
-        "ageMinutes": "3642.2643864666666",
+        "ageHours": "65.10038343466667",
+        "ageMinutes": "3906.0230062",
         "customFormatScore": "0",
         "downloadClient": "SABnzbd",
         "downloadClientName": "Mock SABnzbd",
@@ -172,7 +172,7 @@
         "size": "7945689497",
         "tmdbId": "840430"
       },
-      "date": "2026-11-12T09:56:15Z",
+      "date": "2026-11-12T14:20:01Z",
       "downloadId": "SABnzbd_nzo_mock3",
       "eventType": "grabbed",
       "id": 1014,
@@ -209,8 +209,8 @@
       "customFormats": [],
       "data": {
         "age": "2",
-        "ageHours": "60.69600636097222",
-        "ageMinutes": "3641.76038184",
+        "ageHours": "65.0919609173611",
+        "ageMinutes": "3905.5176552",
         "customFormatScore": "0",
         "downloadClient": "SABnzbd",
         "downloadClientName": "Mock SABnzbd",
@@ -229,7 +229,7 @@
         "size": "7945689497",
         "tmdbId": "840430"
       },
-      "date": "2026-11-12T09:55:45Z",
+      "date": "2026-11-12T14:19:31Z",
       "downloadId": "SABnzbd_nzo_mock1",
       "eventType": "grabbed",
       "id": 1009,
@@ -473,7 +473,7 @@
       "sourceTitle": "The.Holdovers.2023.PROPER.BluRay.1080p.DTS-HD.MA.5.1.AVC.REMUX-FraMeSToR"
     }
   ],
-  "recordedAt": "2026-11-12T09:59:49Z",
+  "recordedAt": "2026-11-12T14:23:35Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/history/movie?movieId=116"

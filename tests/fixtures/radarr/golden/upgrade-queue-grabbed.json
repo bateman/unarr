@@ -1,13 +1,13 @@
 {
   "body": [
     {
-      "added": "2026-11-12T09:58:09Z",
+      "added": "2026-11-12T14:21:54Z",
       "customFormatScore": 0,
       "customFormats": [],
       "downloadClient": "Mock SABnzbd",
       "downloadClientHasPostImportCategory": false,
       "downloadId": "SABnzbd_nzo_mock8",
-      "estimatedCompletionTime": "2026-11-12T10:08:14Z",
+      "estimatedCompletionTime": "2026-11-12T14:31:59Z",
       "id": 40473848,
       "indexer": "Mock Newznab (Prowlarr)",
       "languages": [
@@ -46,7 +46,7 @@
       "trackedDownloadStatus": "ok"
     }
   ],
-  "recordedAt": "2026-11-12T09:58:21Z",
+  "recordedAt": "2026-11-12T14:22:06Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/queue/details?movieId=20"

@@ -8,8 +8,8 @@
         "customFormats": [],
         "data": {
           "age": "2",
-          "ageHours": "60.69600636097222",
-          "ageMinutes": "3641.76038184",
+          "ageHours": "65.0919609173611",
+          "ageMinutes": "3905.5176552",
           "customFormatScore": "0",
           "downloadClient": "SABnzbd",
           "downloadClientName": "Mock SABnzbd",
@@ -28,7 +28,7 @@
           "size": "7945689497",
           "tmdbId": "840430"
         },
-        "date": "2026-11-12T09:55:45Z",
+        "date": "2026-11-12T14:19:31Z",
         "downloadId": "SABnzbd_nzo_mock1",
         "eventType": "grabbed",
         "id": 1009,
@@ -65,7 +65,7 @@
     "sortKey": "date",
     "totalRecords": 1
   },
-  "recordedAt": "2026-11-12T09:56:01Z",
+  "recordedAt": "2026-11-12T14:19:47Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/history?page=1&pageSize=5&sortKey=date&sortDirection=descending&downloadId=SABnzbd_nzo_mock1"

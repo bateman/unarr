@@ -1,7 +1,7 @@
 {
   "body": [
     {
-      "added": "2026-11-12T09:57:01Z",
+      "added": "2026-11-12T14:20:47Z",
       "customFormatScore": 0,
       "customFormats": [
         {
@@ -42,11 +42,11 @@
       "size": 7516192768,
       "sizeleft": 7516192768,
       "status": "delay",
-      "timeleft": "362.23:42:57.9053827",
+      "timeleft": "362.19:19:12.3419708",
       "title": "BlacKkKlansman.2018.iTA.ENG.1080p.WEB-DL.DD5.1.H264-MeM"
     }
   ],
-  "recordedAt": "2026-11-12T09:57:02Z",
+  "recordedAt": "2026-11-12T14:20:47Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/queue/details?movieId=13"

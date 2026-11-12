@@ -12,22 +12,22 @@
       "updateScheduledTask": true
     },
     "commandName": "Rescan Movie",
-    "duration": "00:00:03.2688896",
-    "ended": "2026-11-12T09:59:04Z",
+    "duration": "00:00:04.9169489",
+    "ended": "2026-11-12T14:22:51Z",
     "id": 472999,
     "message": "Scanning disk for Predestination",
     "name": "RescanMovie",
     "priority": "normal",
-    "queued": "2026-11-12T09:59:01Z",
+    "queued": "2026-11-12T14:22:47Z",
     "result": "successful",
     "sendUpdatesToClient": true,
-    "started": "2026-11-12T09:59:01Z",
-    "stateChangeTime": "2026-11-12T09:59:01Z",
+    "started": "2026-11-12T14:22:47Z",
+    "stateChangeTime": "2026-11-12T14:22:47Z",
     "status": "completed",
     "trigger": "manual",
     "updateScheduledTask": true
   },
-  "recordedAt": "2026-11-12T09:59:21Z",
+  "recordedAt": "2026-11-12T14:23:07Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/command/472999"

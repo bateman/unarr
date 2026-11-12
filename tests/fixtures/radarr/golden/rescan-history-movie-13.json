@@ -14,7 +14,7 @@
         "releaseGroup": "MeM",
         "size": "177860"
       },
-      "date": "2026-11-12T09:58:45Z",
+      "date": "2026-11-12T14:22:30Z",
       "eventType": "movieFileDeleted",
       "id": 1026,
       "languages": [
@@ -64,7 +64,7 @@
         "releaseGroup": "MeM",
         "size": "177860"
       },
-      "date": "2026-11-12T09:57:33Z",
+      "date": "2026-11-12T14:21:18Z",
       "downloadId": "SABnzbd_nzo_mock6",
       "eventType": "downloadFolderImported",
       "id": 1022,
@@ -106,8 +106,8 @@
       ],
       "data": {
         "age": "2",
-        "ageHours": "49.95170233319445",
-        "ageMinutes": "2997.10214012",
+        "ageHours": "54.347696950916664",
+        "ageMinutes": "3260.8618172083334",
         "customFormatScore": "0",
         "downloadClient": "SABnzbd",
         "downloadClientName": "Mock SABnzbd",
@@ -126,7 +126,7 @@
         "size": "7516192768",
         "tmdbId": "0"
       },
-      "date": "2026-11-12T09:57:06Z",
+      "date": "2026-11-12T14:20:51Z",
       "downloadId": "SABnzbd_nzo_mock6",
       "eventType": "grabbed",
       "id": 1019,
@@ -329,7 +329,7 @@
       "sourceTitle": "BlacKkKlansman.2018.BluRay.1080p.DTS.x264-PRoDJi"
     }
   ],
-  "recordedAt": "2026-11-12T09:58:57Z",
+  "recordedAt": "2026-11-12T14:22:43Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/history/movie?movieId=13"

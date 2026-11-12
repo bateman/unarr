@@ -94,7 +94,7 @@
     "minimumAvailability": "released",
     "monitored": true,
     "movieFile": {
-      "dateAdded": "2026-11-12T09:58:21Z",
+      "dateAdded": "2026-11-12T14:22:06Z",
       "edition": "",
       "id": 407,
       "indexerFlags": 0,
@@ -214,7 +214,7 @@
     "year": 1992,
     "youTubeTrailerId": "CeLZMhkFTuU"
   },
-  "recordedAt": "2026-11-12T10:00:33Z",
+  "recordedAt": "2026-11-12T14:24:19Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/movie/20"

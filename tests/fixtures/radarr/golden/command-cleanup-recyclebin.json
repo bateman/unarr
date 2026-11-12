@@ -15,14 +15,14 @@
     "id": 473008,
     "name": "CleanUpRecycleBin",
     "priority": "normal",
-    "queued": "2026-11-12T09:59:57Z",
+    "queued": "2026-11-12T14:23:43Z",
     "result": "unknown",
     "sendUpdatesToClient": true,
     "status": "queued",
     "trigger": "manual",
     "updateScheduledTask": true
   },
-  "recordedAt": "2026-11-12T09:59:57Z",
+  "recordedAt": "2026-11-12T14:23:43Z",
   "request": {
     "body": "bodies/command-cleanup-recyclebin.json",
     "method": "POST",
