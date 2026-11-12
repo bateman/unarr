@@ -160,8 +160,44 @@ pub async fn content(State(state): State<AppState>, uri: Uri) -> Response {
     if rel.contains("..") {
         return StatusCode::NOT_FOUND.into_response();
     }
+    if let Some(name) = FILLED_IN.iter().find(|name| rel.eq_ignore_ascii_case(name)) {
+        let s = state.settings();
+        if let Some(r) = filled_in_asset(state.personality(), name, &s.url_base, &s.instance_name) {
+            return r;
+        }
+    }
     serve_asset(state.personality(), &format!("Content/{rel}"))
         .unwrap_or_else(|| StatusCode::NOT_FOUND.into_response())
+}
+
+/// The files under `/Content` the originals fill in as they serve them
+/// (`ManifestMapper`, `BrowserConfig`): the web app manifest carries the
+/// instance name and, like the tile description, addresses under the URL
+/// base. Asked in any case, as the originals answer them.
+const FILLED_IN: [&str; 2] = ["manifest.json", "browserconfig.xml"];
+
+fn filled_in_asset(
+    personality: Personality,
+    name: &str,
+    url_base: &str,
+    instance_name: &str,
+) -> Option<Response> {
+    let file = asset(personality, &format!("Content/{name}"))?;
+    let text = String::from_utf8_lossy(&file.data)
+        .replace("__URL_BASE__", url_base)
+        .replace("__INSTANCE_NAME__", instance_name);
+    let mime = HeaderValue::from_str(file.metadata.mimetype())
+        .unwrap_or(HeaderValue::from_static("application/octet-stream"));
+    Some(
+        (
+            [
+                (header::CONTENT_TYPE, mime),
+                (header::CACHE_CONTROL, HeaderValue::from_static("no-cache")),
+            ],
+            text,
+        )
+            .into_response(),
+    )
 }
 
 pub async fn favicon(State(state): State<AppState>) -> Response {

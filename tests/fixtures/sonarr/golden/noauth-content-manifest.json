@@ -1,0 +1,27 @@
+{
+  "body": {
+    "background_color": "#3a3f51",
+    "display": "standalone",
+    "icons": [
+      {
+        "sizes": "192x192",
+        "src": "/Content/Images/Icons/android-chrome-192x192.png",
+        "type": "image/png"
+      },
+      {
+        "sizes": "512x512",
+        "src": "/Content/Images/Icons/android-chrome-512x512.png",
+        "type": "image/png"
+      }
+    ],
+    "name": "Sonarr",
+    "start_url": "/",
+    "theme_color": "#3a3f51"
+  },
+  "recordedAt": "2026-11-12T22:59:54Z",
+  "request": {
+    "method": "GET",
+    "path": "/Content/manifest.json"
+  },
+  "status": 200
+}

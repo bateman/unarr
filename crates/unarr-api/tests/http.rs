@@ -19,6 +19,11 @@ fn app() -> axum::Router {
 
 /// One personality on its fixture, under a URL base when one is given.
 fn app_for(personality: Personality, url_base: &str) -> axum::Router {
+    app_named(personality, url_base, None)
+}
+
+/// The same under another instance name, when one is given.
+fn app_named(personality: Personality, url_base: &str, instance_name: Option<&str>) -> axum::Router {
     let name = personality.app_name().to_lowercase();
     let dir = fixtures_dir().join(&name);
     let db = Db::open_in_memory_for(personality).unwrap();
@@ -31,6 +36,9 @@ fn app_for(personality: Personality, url_base: &str) -> axum::Router {
     let mut host = unarr_import::config_xml::read(&dir.join("config.xml"), personality.default_port())
         .expect("config.xml");
     host.url_base = url_base.to_string();
+    if let Some(name) = instance_name {
+        host.instance_name = Some(name.to_string());
+    }
     let mut runtime = RuntimeInfo::detect(dir);
     runtime.media_cover_dir = covers_dir(personality);
     let state = AppState::new(
@@ -359,6 +367,56 @@ async fn the_root_under_a_url_base_takes_a_trailing_slash() {
     }
     // Outside the base there is nothing.
     assert_eq!(ask(&app, "GET", "/", &[], "").await.0, StatusCode::NOT_FOUND);
+}
+
+/// The web app manifest and the tile description are filled in as they
+/// are served: the instance name, and the addresses under the URL base.
+/// The values are those Sonarr 4.0.20 and Radarr 6.4.4 answered on their
+/// fixtures, without a base under their own name and under `/tv-app` as
+/// "Sonarr Salotto", `/film` as "Radarr 4K"; without a login, in any case
+/// of the path.
+#[tokio::test]
+async fn the_manifest_and_the_tile_description_are_filled_in() {
+    for (personality, base, name) in [
+        (Personality::Sonarr, "", None),
+        (Personality::Sonarr, "/tv-app", Some("Sonarr Salotto")),
+        (Personality::Radarr, "", None),
+        (Personality::Radarr, "/film", Some("Radarr 4K")),
+    ] {
+        let app = app_named(personality, base, name);
+        let shown = name.unwrap_or(personality.app_name());
+        for path in ["/Content/manifest.json", "/content/Manifest.json"] {
+            let (status, headers, body) = ask(&app, "GET", &format!("{base}{path}"), &[], "").await;
+            assert_eq!(status, StatusCode::OK, "{base}{path}");
+            assert_eq!(header(&headers, "content-type"), Some("application/json"));
+            let manifest: serde_json::Value = serde_json::from_slice(&body).expect("a JSON manifest");
+            assert_eq!(manifest["name"], shown);
+            assert_eq!(manifest["start_url"], format!("{base}/"));
+            assert_eq!(
+                manifest["icons"][0]["src"],
+                format!("{base}/Content/Images/Icons/android-chrome-192x192.png")
+            );
+            assert_eq!(
+                manifest["icons"][1]["src"],
+                format!("{base}/Content/Images/Icons/android-chrome-512x512.png")
+            );
+            // The icon the manifest names is there to be fetched.
+            let icon = manifest["icons"][0]["src"].as_str().unwrap();
+            assert_eq!(ask(&app, "GET", icon, &[], "").await.0, StatusCode::OK);
+        }
+        let (status, headers, body) =
+            ask(&app, "GET", &format!("{base}/Content/browserconfig.xml"), &[], "").await;
+        assert_eq!(status, StatusCode::OK);
+        assert_eq!(header(&headers, "content-type"), Some("text/xml"));
+        let text = String::from_utf8(body).unwrap();
+        assert!(
+            text.contains(&format!(
+                "<square150x150logo src=\"{base}/Content/Images/Icons/mstile-150x150.png\" />"
+            )),
+            "{text}"
+        );
+        assert!(!text.contains("__"), "{text}");
+    }
 }
 
 /// A client that refuses the answer as it is still gets it, as from the

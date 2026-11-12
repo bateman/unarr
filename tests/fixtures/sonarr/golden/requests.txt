@@ -20,6 +20,11 @@ localization GET /api/v3/localization
 noauth-initialize-json GET /initialize.json
 session-initialize-json GET /initialize.json
 signalr-negotiate POST /signalr/messages/negotiate?access_token=0123456789abcdef0123456789abcdef
+# The two files under /Content the original fills in as it serves them:
+# the instance name and the URL base in the web app manifest, the URL base
+# in the tile description.
+noauth-content-manifest GET /Content/manifest.json
+noauth-content-browserconfig GET /Content/browserconfig.xml
 
 # series
 series GET /api/v3/series

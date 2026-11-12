@@ -1,0 +1,9 @@
+{
+  "body": "<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<browserconfig>\n\t<msapplication>\n\t\t<tile>\n\t\t\t<square150x150logo src=\"/Content/Images/Icons/mstile-150x150.png\" />\n\t\t\t<TileColor>\n\t\t\t\t#00ccff\n\t\t\t</TileColor>\n\t\t</tile>\n\t</msapplication>\n</browserconfig>\n",
+  "recordedAt": "2026-11-12T22:59:54Z",
+  "request": {
+    "method": "GET",
+    "path": "/Content/browserconfig.xml"
+  },
+  "status": 200
+}
