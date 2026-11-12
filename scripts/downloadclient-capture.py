@@ -52,6 +52,9 @@ through a proxy) and the anonymisation.
    - Hosts: the target's host and every `Host` header seen become
      `downloadclient.invalid`; any other host or address named with `--host`
      too. Values that look like IPv4 addresses become 127.0.0.1.
+   - The installation's exposure: qBittorrent's peer ports (`listen_port`,
+     `ssl_listen_port`) and the networks it lets in without a login
+     (`bypass_auth_subnet_whitelist`) become a fresh install's values.
    - Credentials: `Authorization` headers become `unarr:fixture`; API keys in
      the query string (`apikey=`), in JSON (`apikey`, `api_key`, `password`,
      `username`...) and in form bodies are replaced; qBittorrent session
@@ -425,6 +428,15 @@ PLACEHOLDER_TORRENT_B64 = base64.b64encode(
 ).decode()
 
 
+# qBittorrent's preferences that describe the installation's exposure, and
+# the values a fresh qBittorrent has for them.
+INSTALLATION_DEFAULTS = {
+    "listen_port": 6881,
+    "ssl_listen_port": 0,
+    "bypass_auth_subnet_whitelist": "",
+}
+
+
 class Anonymizer:
     def __init__(self, client: str, hosts: list[str], replacements: list[tuple[str, str]]):
         self.client = client
@@ -532,6 +544,11 @@ class Anonymizer:
             return {k: self.scrub_json(x, k) for k, x in v.items()}
         if isinstance(v, list):
             return [self.scrub_json(x, key) for x in v]
+        # What says how the installation is reached from outside, replaced
+        # by the client's defaults: the ports it listens on for peers and
+        # the networks it lets in without a login.
+        if key in INSTALLATION_DEFAULTS and not isinstance(v, bool):
+            return INSTALLATION_DEFAULTS[key]
         if isinstance(v, str):
             if SECRET_JSON_KEY.search(key) and v:
                 self.remember(v, key)

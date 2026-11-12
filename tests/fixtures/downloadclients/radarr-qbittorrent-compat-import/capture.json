@@ -1,0 +1,175 @@
+[
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/webapiVersion"
+  },
+  "response": {
+   "body": "2.0",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 1,
+  "time": "2026-11-10T21:07:32Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/app/preferences"
+  },
+  "response": {
+   "body": "{\"save_path\": \"/downloads/emule\", \"temp_path\": \"/downloads/emule/.incomplete\", \"dht\": true, \"max_ratio_enabled\": false, \"max_ratio\": -1, \"max_seeding_time_enabled\": false, \"max_seeding_time\": -1, \"max_inactive_seeding_time_enabled\": false, \"max_inactive_seeding_time\": -1}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 2,
+  "time": "2026-11-10T21:07:32Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/info?category=movies"
+  },
+  "response": {
+   "body": "[{\"hash\": \"54461b1ce945e5c20356db081ca0378156f8f0cb\", \"name\": \"Mutiny Inverti la rotta (2026) 1080p x265 ita eng sub eng MD eac3 - Faccio.mkv\", \"size\": 2262743736, \"progress\": 1, \"dlspeed\": 0, \"upspeed\": 0, \"priority\": 0, \"num_seeds\": 0, \"num_leechers\": 0, \"state\": \"pausedUP\", \"save_path\": \"/downloads/emule\", \"content_path\": \"/downloads/Mutiny Inverti la rotta (2026) 1080p x265 ita eng sub eng MD eac3 - Faccio.mkv\", \"added_on\": 1794341252, \"eta\": 0, \"category\": \"movies\", \"uploaded\": 0, \"ratio\": 0, \"seeding_time\": 0, \"ratio_limit\": 0, \"seeding_time_limit\": -1, \"inactive_seeding_time_limit\": -1}]",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 3,
+  "time": "2026-11-10T21:07:32Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/files?hash=54461b1ce945e5c20356db081ca0378156f8f0cb"
+  },
+  "response": {
+   "body": "[{\"index\": 0, \"is_seed\": true, \"name\": \"Mutiny Inverti la rotta (2026) 1080p x265 ita eng sub eng MD eac3 - Faccio.mkv\", \"priority\": 1, \"progress\": 1, \"size\": 2262743736, \"availability\": 1}]",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 4,
+  "time": "2026-11-10T21:07:32Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/properties?hash=54461b1ce945e5c20356db081ca0378156f8f0cb"
+  },
+  "response": {
+   "body": "{\"addition_date\": 0, \"comment\": \"\", \"completion_date\": 1794341252, \"created_by\": \"\", \"dl_speed\": 0, \"eta\": 0, \"isPrivate\": false, \"peers\": 0, \"save_path\": \"/downloads/emule\", \"seeding_time\": 0, \"seeds\": 0, \"seeds_total\": 0, \"share_ratio\": 0, \"total_downloaded\": 2262743736, \"total_size\": 2262743736, \"total_uploaded\": 0, \"up_limit\": -1, \"up_speed\": 0, \"up_speed_avg\": 0}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 5,
+  "time": "2026-11-10T21:07:32Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/files?hash=54461b1ce945e5c20356db081ca0378156f8f0cb"
+  },
+  "response": {
+   "body": "[{\"index\": 0, \"is_seed\": true, \"name\": \"Mutiny Inverti la rotta (2026) 1080p x265 ita eng sub eng MD eac3 - Faccio.mkv\", \"priority\": 1, \"progress\": 1, \"size\": 2262743736, \"availability\": 1}]",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 6,
+  "time": "2026-11-10T21:07:32Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Host": "downloadclient.invalid"
+   },
+   "method": "GET",
+   "path": "/api/as-qbittorrent/api/v2/torrents/properties?hash=54461b1ce945e5c20356db081ca0378156f8f0cb"
+  },
+  "response": {
+   "body": "{\"addition_date\": 0, \"comment\": \"\", \"completion_date\": 1794341252, \"created_by\": \"\", \"dl_speed\": 0, \"eta\": 0, \"isPrivate\": false, \"peers\": 0, \"save_path\": \"/downloads/emule\", \"seeding_time\": 0, \"seeds\": 0, \"seeds_total\": 0, \"share_ratio\": 0, \"total_downloaded\": 2262743736, \"total_size\": 2262743736, \"total_uploaded\": 0, \"up_limit\": -1, \"up_speed\": 0, \"up_speed_avg\": 0}",
+   "headers": {
+    "Content-Type": "application/json"
+   },
+   "status": 200
+  },
+  "seq": 7,
+  "time": "2026-11-10T21:07:32Z"
+ },
+ {
+  "request": {
+   "body": "hashes=54461b1ce945e5c20356db081ca0378156f8f0cb&deleteFiles=true",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/api/as-qbittorrent/api/v2/torrents/delete"
+  },
+  "response": {
+   "body": "Ok.",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 8,
+  "time": "2026-11-10T21:07:34Z"
+ },
+ {
+  "request": {
+   "body": "urls=magnet%3A%3Fxt%3Durn%3Abtih%3A54461b1ce945e5c20356db081ca0378156f8f0cb%26dn%3Ded2k%253A%252F%252F%257Cfile%257CMutiny%252520Inverti%252520la%252520rotta%252520%282026%29%2525201080p%252520x265%252520ita%252520eng%252520sub%252520eng%252520MD%252520eac3%252520-%252520Faccio.mkv%257C2262743736%257C0123456789ABCDEF0123456789ABCDEF%257C%252F&category=movies&paused=False",
+   "headers": {
+    "Content-Type": "text/plain",
+    "Host": "downloadclient.invalid"
+   },
+   "method": "POST",
+   "path": "/api/as-qbittorrent/api/v2/torrents/add"
+  },
+  "response": {
+   "body": "Ok.",
+   "headers": {
+    "Content-Type": "text/plain"
+   },
+   "status": 200
+  },
+  "seq": 9,
+  "time": "2026-11-10T20:52:46Z"
+ }
+]

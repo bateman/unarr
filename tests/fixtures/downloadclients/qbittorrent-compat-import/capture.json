@@ -28,7 +28,7 @@
    "path": "/api/as-qbittorrent/api/v2/app/preferences"
   },
   "response": {
-   "body": "{\"save_path\": \"/downloads/emule\", \"temp_path\": \"/downloads/emule/.incomplete\", \"dht\": true, \"max_ratio_enabled\": false, \"max_ratio\": -1, \"max_seeding_time_enabled\": false, \"max_seeding_time\": -1, \"max_inactive_seeding_time_enabled\": false, \"max_inactive_seeding_time\": -1, \"web_ui_username\": \"admin\", \"bypass_auth_subnet_whitelist\": \"0.0.0.0/0\"}",
+   "body": "{\"save_path\": \"/downloads/emule\", \"temp_path\": \"/downloads/emule/.incomplete\", \"dht\": true, \"max_ratio_enabled\": false, \"max_ratio\": -1, \"max_seeding_time_enabled\": false, \"max_seeding_time\": -1, \"max_inactive_seeding_time_enabled\": false, \"max_inactive_seeding_time\": -1, \"web_ui_username\": \"admin\", \"bypass_auth_subnet_whitelist\": \"\"}",
    "headers": {
     "Content-Type": "application/json"
    },

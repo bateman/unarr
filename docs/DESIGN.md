@@ -1710,8 +1710,16 @@ Neither library was scaled; the patterns do not grow with the library.
   a season pack still downloading, and its removal with data after the
   import; `qbittorrent-compat-import` the same for the program speaking
   API 2.0, where the output path comes from `files` and `properties`
-  rather than from the listing. Any exchange with SABnzbd or Transmission
-  would extend the replays.
+  rather than from the listing. Four more come from the maintainer's
+  Radarr (`radarr-*`): one movie torrent on qBittorrent 5.1 from the grab
+  (answered with a JSON summary, not "Ok.") through a refresh at 27 % to
+  the refresh that found it stopped and its removal; the same on the
+  qBittorrent-compatible program; and NZBGet 26 answering Radarr with a
+  queue of nineteen groups that are all Sonarr's, of which Radarr shows
+  none. Unarr's clients, configured as Radarr configures them, passed
+  against all four as they were, with no request the real Radarr had not
+  made. Any exchange with SABnzbd or Transmission would extend the
+  replays.
 - The memory figures in section 9 come from a glibc build, where
   `malloc_trim` returns freed pages. The published image is a static musl
   build: musl's allocator has no `malloc_trim` (the call is compiled out)
