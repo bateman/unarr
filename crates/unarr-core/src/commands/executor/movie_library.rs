@@ -40,6 +40,14 @@ impl refresh::CollectionEvents for NewCollection<'_> {
         Box::pin(async move {
             let command = *self.command.lock().unwrap();
             if let Some(command_id) = command {
+                // The wait holds a worker. When every other worker is
+                // already waiting like this one (a library import of
+                // movies that each bring a collection), nobody is left
+                // to run what they wait for: this one goes on, as the
+                // original's two commands would have raced anyway.
+                let Ok(_permit) = self.runtime.waiting_on_commands.try_acquire() else {
+                    return;
+                };
                 self.runtime
                     .wait_for_command(command_id, NEW_COLLECTION_WAIT)
                     .await;

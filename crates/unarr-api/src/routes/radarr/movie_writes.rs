@@ -320,7 +320,7 @@ fn ints(v: &Value) -> Vec<i64> {
 
 /// `MinimumAvailability` as a client sends it: the enumeration's name in
 /// any case, or its number; `tba` when it says nothing.
-fn minimum_availability(v: &Value) -> MovieStatus {
+pub(crate) fn minimum_availability(v: &Value) -> MovieStatus {
     match v {
         Value::String(name) => [
             MovieStatus::Tba,

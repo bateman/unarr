@@ -14,9 +14,12 @@ use serde_json::{json, Value};
 
 use crate::db::Db;
 use crate::indexers::status;
+use crate::metadata::BoxFuture;
 use crate::model::{Provider, ProviderKind};
 use crate::movies::library::{self, NewMovie, WriteError};
-use crate::movies::metadata::{MapContext, MovieMetadataError, MovieMetadataProvider};
+use crate::movies::metadata::{
+    CollectionInfo, MapContext, MovieInfo, MovieMetadataError, MovieMetadataProvider,
+};
 use crate::movies::model::MovieStatus;
 use crate::movies::store as movies;
 use crate::store;
@@ -117,14 +120,15 @@ impl Settings {
 }
 
 /// What a sync changed in the library.
-#[derive(Debug, Clone, Default, PartialEq)]
+#[derive(Debug, Clone, Default)]
 pub struct Outcome {
     /// The movies added, in the order they were.
     pub added: Vec<i64>,
     /// The movies the library clean unmonitored.
     pub updated: Vec<i64>,
-    /// The movies it removed, and whether their files went with them.
-    pub removed: Vec<(i64, bool)>,
+    /// The movies it removed with the collections they left empty, and
+    /// whether their files are to go with them.
+    pub removed: Option<(library::Deleted, bool)>,
 }
 
 /// `ListSyncLevelType`: what happens to a movie no list names any more.
@@ -146,6 +150,80 @@ impl SyncLevel {
             "removeanddelete" => SyncLevel::RemoveAndDelete,
             _ => SyncLevel::Disabled,
         }
+    }
+}
+
+/// A provider that remembers the movies it was asked for during one
+/// sync. The original asks twice for every movie a list adds, once to map
+/// the list's item and once to add it; the second answer is the first.
+struct Remembering<'p> {
+    inner: &'p dyn MovieMetadataProvider,
+    movies: std::sync::Mutex<std::collections::HashMap<i64, MovieInfo>>,
+}
+
+impl<'p> Remembering<'p> {
+    fn new(inner: &'p dyn MovieMetadataProvider) -> Remembering<'p> {
+        Remembering {
+            inner,
+            movies: std::sync::Mutex::new(std::collections::HashMap::new()),
+        }
+    }
+}
+
+impl MovieMetadataProvider for Remembering<'_> {
+    fn movie_info<'a>(
+        &'a self,
+        tmdb_id: i64,
+        ctx: &'a MapContext,
+    ) -> BoxFuture<'a, Result<MovieInfo, MovieMetadataError>> {
+        Box::pin(async move {
+            if let Some(known) = self.movies.lock().unwrap().get(&tmdb_id).cloned() {
+                return Ok(known);
+            }
+            let info = self.inner.movie_info(tmdb_id, ctx).await?;
+            self.movies.lock().unwrap().insert(tmdb_id, info.clone());
+            Ok(info)
+        })
+    }
+
+    fn movie_by_imdb_id<'a>(
+        &'a self,
+        imdb_id: &'a str,
+        ctx: &'a MapContext,
+    ) -> BoxFuture<'a, Result<Option<MovieInfo>, MovieMetadataError>> {
+        self.inner.movie_by_imdb_id(imdb_id, ctx)
+    }
+
+    fn collection_info<'a>(
+        &'a self,
+        tmdb_id: i64,
+        ctx: &'a MapContext,
+    ) -> BoxFuture<'a, Result<CollectionInfo, MovieMetadataError>> {
+        self.inner.collection_info(tmdb_id, ctx)
+    }
+
+    fn search<'a>(
+        &'a self,
+        q: &'a str,
+        year: &'a str,
+        ctx: &'a MapContext,
+    ) -> BoxFuture<'a, Result<Vec<MovieInfo>, MovieMetadataError>> {
+        self.inner.search(q, year, ctx)
+    }
+
+    fn changed_movies(
+        &self,
+        since: DateTime<Utc>,
+    ) -> BoxFuture<'_, Result<std::collections::HashSet<i64>, MovieMetadataError>> {
+        self.inner.changed_movies(since)
+    }
+
+    fn list<'a>(
+        &'a self,
+        route: &'a str,
+        ctx: &'a MapContext,
+    ) -> BoxFuture<'a, Result<Vec<MovieInfo>, MovieMetadataError>> {
+        self.inner.list(route, ctx)
     }
 }
 
@@ -347,6 +425,8 @@ impl MovieImportLists {
         progress: &(dyn Fn(String) + Send + Sync),
     ) -> anyhow::Result<Outcome> {
         let ctx = crate::movies::refresh::map_context(&self.db, now).await?;
+        let remembering = Remembering::new(provider);
+        let provider: &dyn MovieMetadataProvider = &remembering;
         let lists = self.definitions().await?;
         let mut named: Vec<(i64, Vec<i64>)> = Vec::new();
         match definition_id {
@@ -538,6 +618,7 @@ impl MovieImportLists {
                 }
                 let listed = movies::list_movies_for(conn, &enabled)?;
                 let mut outcome = Outcome::default();
+                let mut to_remove = Vec::new();
                 for mut movie in movies::list_movies(conn)? {
                     let named = listed.iter().any(|l| {
                         let m = &l.metadata;
@@ -569,10 +650,16 @@ impl MovieImportLists {
                                 "{title} was in your library, but not found in your lists --> Removing from library{}",
                                 if files { " and deleting files" } else { " (keeping files)" }
                             );
-                            movies::delete_movie_cascade(conn, &movie)?;
-                            outcome.removed.push((movie.id, files));
+                            to_remove.push(movie.id);
                         }
                         _ => {}
+                    }
+                }
+                if !to_remove.is_empty() {
+                    // `MovieService.DeleteMovie`, as the API's own delete
+                    // does it: the rows, and the collections left empty.
+                    if let Ok(deleted) = library::delete(conn, &to_remove, false)? {
+                        outcome.removed = Some((deleted, level == SyncLevel::RemoveAndDelete));
                     }
                 }
                 Ok(outcome)
@@ -598,13 +685,121 @@ pub async fn fetch_items(
     let route = format!("list/imdb/{}", settings.list_id);
     match provider.list(&route, ctx).await {
         Ok(items) => Ok(items.into_iter().map(|i| i.metadata.tmdb_id).collect()),
-        Err(MovieMetadataError::Unavailable(message)) => Err(FetchFailure {
+        // `HttpImportListBase.FetchReleases`: only a host that does not
+        // resolve or connect is a connection failure; an error status, a
+        // timeout or an answer that does not parse is the list's own.
+        Err(MovieMetadataError::Unreachable(message)) => Err(FetchFailure {
             message,
-            connection: false,
+            connection: true,
         }),
         Err(e) => Err(FetchFailure {
             message: e.to_string(),
-            connection: true,
+            connection: false,
         }),
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    /// A provider that fails a list request the way it is told to and
+    /// counts the movies it is asked for.
+    struct Failing {
+        error: fn() -> MovieMetadataError,
+        asked: std::sync::atomic::AtomicUsize,
+    }
+
+    impl MovieMetadataProvider for Failing {
+        fn movie_info<'a>(
+            &'a self,
+            tmdb_id: i64,
+            _: &'a MapContext,
+        ) -> BoxFuture<'a, Result<MovieInfo, MovieMetadataError>> {
+            self.asked.fetch_add(1, std::sync::atomic::Ordering::SeqCst);
+            Box::pin(async move { Err(MovieMetadataError::MovieNotFound(tmdb_id.to_string())) })
+        }
+        fn movie_by_imdb_id<'a>(
+            &'a self,
+            _: &'a str,
+            _: &'a MapContext,
+        ) -> BoxFuture<'a, Result<Option<MovieInfo>, MovieMetadataError>> {
+            Box::pin(async { Ok(None) })
+        }
+        fn collection_info<'a>(
+            &'a self,
+            tmdb_id: i64,
+            _: &'a MapContext,
+        ) -> BoxFuture<'a, Result<CollectionInfo, MovieMetadataError>> {
+            Box::pin(async move { Err(MovieMetadataError::MovieNotFound(tmdb_id.to_string())) })
+        }
+        fn search<'a>(
+            &'a self,
+            _: &'a str,
+            _: &'a str,
+            _: &'a MapContext,
+        ) -> BoxFuture<'a, Result<Vec<MovieInfo>, MovieMetadataError>> {
+            Box::pin(async { Ok(Vec::new()) })
+        }
+        fn changed_movies(
+            &self,
+            _: DateTime<Utc>,
+        ) -> BoxFuture<'_, Result<std::collections::HashSet<i64>, MovieMetadataError>> {
+            Box::pin(async { Ok(std::collections::HashSet::new()) })
+        }
+        fn list<'a>(
+            &'a self,
+            _: &'a str,
+            _: &'a MapContext,
+        ) -> BoxFuture<'a, Result<Vec<MovieInfo>, MovieMetadataError>> {
+            let error = (self.error)();
+            Box::pin(async move { Err(error) })
+        }
+    }
+
+    fn failing(error: fn() -> MovieMetadataError) -> Failing {
+        Failing {
+            error,
+            asked: std::sync::atomic::AtomicUsize::new(0),
+        }
+    }
+
+    #[tokio::test]
+    async fn only_a_host_that_cannot_be_reached_is_a_connection_failure() {
+        let ctx = MapContext::new(Utc::now(), "US");
+        let settings = Settings {
+            list_id: "ur0000001".into(),
+        };
+        // `RecordConnectionFailure`: the back-off does not escalate.
+        let unreachable = failing(|| MovieMetadataError::Unreachable("no such host".into()));
+        let failure = fetch_items(&unreachable, &ctx, &settings).await.err().unwrap();
+        assert!(failure.connection);
+        // `RecordFailure`: an error status and an answer that does not
+        // parse are the list's own.
+        for error in [
+            (|| MovieMetadataError::Unavailable("[NotFound]".into())) as fn() -> MovieMetadataError,
+            || MovieMetadataError::Invalid("not JSON".into()),
+        ] {
+            let failure = fetch_items(&failing(error), &ctx, &settings).await.err().unwrap();
+            assert!(!failure.connection, "{}", failure.message);
+        }
+    }
+
+    #[tokio::test]
+    async fn an_answer_that_failed_is_asked_for_again() {
+        let ctx = MapContext::new(Utc::now(), "US");
+        let inner = failing(|| MovieMetadataError::Invalid(String::new()));
+        let remembering = Remembering::new(&inner);
+        // A failure is not remembered: the movie is asked for again.
+        assert!(remembering.movie_info(603, &ctx).await.is_err());
+        assert!(remembering.movie_info(603, &ctx).await.is_err());
+        assert_eq!(inner.asked.load(std::sync::atomic::Ordering::SeqCst), 2);
+    }
+
+    #[test]
+    fn the_list_id_is_one_of_three_shapes() {
+        let valid = |id: &str| Settings { list_id: id.into() }.validate().is_empty();
+        assert!(valid("ur12345678") && valid("top250") && valid("popular"));
+        assert!(!valid("") && !valid("ls12345678") && !valid("ur") && !valid("nope"));
     }
 }

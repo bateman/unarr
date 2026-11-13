@@ -125,6 +125,9 @@ pub struct Runtime {
     is_docker: bool,
     /// Set at shutdown: the workers take no further command.
     stopping: std::sync::atomic::AtomicBool,
+    /// How many commands may wait on another command at once: one worker
+    /// fewer than there are, so that the command waited for can run.
+    waiting_on_commands: tokio::sync::Semaphore,
     notifier: Arc<Notifier>,
     /// Radarr's notifications, over the same connections and transports.
     movie_notifier: Option<Arc<crate::movies::notifications::MovieNotifier>>,
@@ -273,6 +276,7 @@ impl Runtime {
             health_statuses: Mutex::new(None),
             is_docker: std::path::Path::new("/.dockerenv").exists(),
             stopping: std::sync::atomic::AtomicBool::new(false),
+            waiting_on_commands: tokio::sync::Semaphore::new(WORKERS - 1),
             notifier,
             movie_notifier,
             started_at: now,
@@ -1295,11 +1299,11 @@ impl Runtime {
                 for movie_id in outcome.updated {
                     self.emit(Event::MovieUpdated { movie_id });
                 }
-                if !outcome.removed.is_empty() {
-                    for (movie_id, _) in &outcome.removed {
-                        self.emit(Event::MovieDeleted { movie_id: *movie_id });
-                    }
-                    self.check_health_later_with(CheckSet::MoviesGone, None);
+                if let Some((deleted, delete_files)) = outcome.removed {
+                    // `MoviesDeletedEvent`: the folders when the level
+                    // asks for them, the covers, the collections left
+                    // empty, the queue and the health checks.
+                    self.movies_deleted(deleted, delete_files).await;
                 }
                 return Ok(());
             }

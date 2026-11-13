@@ -629,6 +629,9 @@ fn ints(v: &Value) -> Vec<i64> {
         .unwrap_or_default()
 }
 
+/// The type Radarr's scheduled tasks name its update check by.
+pub const RADARR_UPDATE_CHECK_TYPE: &str = "NzbDrone.Core.Update.Commands.ApplicationCheckUpdateCommand";
+
 impl CommandBody {
     /// The command a `POST /command` body asks for, by its `name`; `None`
     /// for a name no command carries.
@@ -728,6 +731,11 @@ impl CommandBody {
 
     /// The command a .NET type name (a scheduled task) names.
     pub fn from_type_name(type_name: &str) -> Option<CommandBody> {
+        // Radarr's class for the update check, which it names the other
+        // way round (see `name_in`).
+        if type_name == RADARR_UPDATE_CHECK_TYPE {
+            return Some(Self::from_name("ApplicationUpdateCheck", &json!({})));
+        }
         let short = type_name.rsplit('.').next().unwrap_or(type_name);
         let name = NAMES
             .iter()

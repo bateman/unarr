@@ -9,7 +9,7 @@ use axum::Json;
 use serde_json::{json, Value};
 use unarr_core::commands::{CommandBody, CommandPriority, CommandTrigger};
 use unarr_core::model::ProviderKind;
-use unarr_core::movies::model::{ImportExclusion, MovieStatus};
+use unarr_core::movies::model::ImportExclusion;
 use unarr_core::movies::store as movies;
 use unarr_core::store;
 use unarr_core::validation::{display_name, ValidationFailure};
@@ -423,7 +423,14 @@ pub async fn exclusion_bulk_create(
             .flat_map(|e| exclusion_failures(e, int(e, "id"), &all))
             .collect(),
     )?;
-    let mut rows: Vec<ImportExclusion> = sent.iter().map(|e| exclusion(e, 0)).collect();
+    // `DeDupeExclusions`: a movie named twice in one request is excluded
+    // once.
+    let mut rows: Vec<ImportExclusion> = Vec::new();
+    for row in sent.iter().map(|e| exclusion(e, 0)) {
+        if !rows.iter().any(|r| r.tmdb_id == row.tmdb_id) {
+            rows.push(row);
+        }
+    }
     let rows = state
         .db()
         .call(move |conn| {
@@ -490,10 +497,7 @@ pub async fn collection_update(
             c.quality_profile_id = int(&sent, "qualityProfileId");
             c.root_folder_path = sent["rootFolderPath"].as_str().map(str::to_string);
             c.search_on_add = sent["searchOnAdd"].as_bool().unwrap_or(false);
-            c.minimum_availability = sent["minimumAvailability"]
-                .as_str()
-                .and_then(MovieStatus::parse)
-                .unwrap_or(MovieStatus::Tba);
+            c.minimum_availability = super::movie_writes::minimum_availability(&sent["minimumAvailability"]);
             c.tags = crate::routes::settings_writes::ints(&sent, "tags");
             movies::update_collection(conn, &c)?;
             Ok(true)
@@ -535,8 +539,9 @@ pub async fn collection_update_many(
                 if let Some(v) = sent["qualityProfileId"].as_i64() {
                     c.quality_profile_id = v;
                 }
-                if let Some(v) = sent["minimumAvailability"].as_str().and_then(MovieStatus::parse) {
-                    c.minimum_availability = v;
+                if !sent["minimumAvailability"].is_null() {
+                    c.minimum_availability =
+                        super::movie_writes::minimum_availability(&sent["minimumAvailability"]);
                 }
                 if let Some(v) = sent["rootFolderPath"].as_str().filter(|p| !p.trim().is_empty()) {
                     c.root_folder_path = Some(v.to_string());

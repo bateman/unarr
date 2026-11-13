@@ -58,6 +58,11 @@ pub enum MovieMetadataError {
     /// The provider could not be reached or answered with an error status
     /// (`HttpException`, `WebException`).
     Unavailable(String),
+    /// The provider's host could not be resolved or connected to
+    /// (`WebException` with `NameResolutionFailure` or `ConnectFailure`):
+    /// what the originals record as a connection failure, which does
+    /// not escalate a provider's back-off.
+    Unreachable(String),
     /// The provider answered something that does not parse.
     Invalid(String),
 }
@@ -73,7 +78,9 @@ impl std::fmt::Display for MovieMetadataError {
                 f,
                 "Movie with IMDBId {id} was not found, it may have been removed from TMDb."
             ),
-            MovieMetadataError::Unavailable(m) | MovieMetadataError::Invalid(m) => f.write_str(m),
+            MovieMetadataError::Unavailable(m)
+            | MovieMetadataError::Unreachable(m)
+            | MovieMetadataError::Invalid(m) => f.write_str(m),
         }
     }
 }
@@ -162,7 +169,13 @@ impl RadarrApi {
             .header(reqwest::header::ACCEPT, "application/json")
             .send()
             .await
-            .map_err(|e| MovieMetadataError::Unavailable(transport_message(&e)))?;
+            .map_err(|e| {
+                if e.is_connect() {
+                    MovieMetadataError::Unreachable(transport_message(&e))
+                } else {
+                    MovieMetadataError::Unavailable(transport_message(&e))
+                }
+            })?;
         let status = response.status();
         let body = crate::http::read_body(response, crate::http::MAX_RESPONSE_BYTES)
             .await

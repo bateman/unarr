@@ -349,19 +349,17 @@ pub async fn folder(State(state): State<AppState>, Path(id): Path<i64>) -> ApiRe
         .await?
         .ok_or_else(|| crate::error::ApiError::ModelNotFound(format!("Movie with ID {id} does not exist")))?;
     let metadata_id = movie.metadata.id;
-    let (naming, title) = state
+    // Every translated title under its own language, as the add and the
+    // move read them: a format may ask for any of them.
+    let (naming, translations) = state
         .db()
         .call(move |conn| {
-            let language = unarr_core::store::config::config(conn, "movieinfolanguage")?
-                .and_then(|v| v.parse().ok())
-                .unwrap_or(1);
-            let title = movies::translations_in(conn, language)?
-                .get(&metadata_id)
-                .and_then(|t| t.title.clone());
-            Ok((movies::naming(conn)?, title))
+            Ok((
+                movies::naming(conn)?,
+                movies::translation_titles(conn, metadata_id)?,
+            ))
         })
         .await?;
-    let translations: Vec<(i64, String)> = title.into_iter().map(|t| (1, t)).collect();
     let folder = movie_naming::movie_folder(
         &movie_naming::NamingMovie {
             metadata: &movie.metadata,

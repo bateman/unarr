@@ -54,7 +54,13 @@ pub async fn refresh_collection_info(
     Ok(db
         .call(move |conn| {
             let tx = conn.unchecked_transaction()?;
-            let mut collection = collection;
+            // Read again now that the provider has answered: what the
+            // user decided about the collection while it was asked
+            // (monitored, profile, root folder, tags) is not the
+            // refresh's to write back.
+            let Some(mut collection) = store::get_collection(&tx, collection.id)? else {
+                anyhow::bail!("MovieCollection with ID {} does not exist", collection.id);
+            };
             collection.title = info.title;
             collection.overview = info.overview;
             collection.clean_title = Some(info.clean_title);

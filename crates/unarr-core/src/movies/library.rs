@@ -131,9 +131,9 @@ pub async fn lookup(
         term.to_string()
     };
     let failed = |e: MovieMetadataError| match e {
-        MovieMetadataError::Unavailable(detail) => LookupFailed(format!(
-            "Search for '{title}' failed. Unable to communicate with RadarrAPI. {detail}"
-        )),
+        MovieMetadataError::Unavailable(detail) | MovieMetadataError::Unreachable(detail) => LookupFailed(
+            format!("Search for '{title}' failed. Unable to communicate with RadarrAPI. {detail}"),
+        ),
         other => invalid(&title, &other.to_string()),
     };
     let lower = title.to_lowercase().replace('.', "");
@@ -603,7 +603,29 @@ pub async fn add(
 ) -> Result<Movie, WriteError> {
     let movie = prepare(db, provider, ctx, new).await?.movie;
     tracing::info!("Adding Movie {} Path: [{}]", movie.metadata.title, movie.path);
-    Ok(db.call(move |conn| insert(conn, movie)).await?)
+    // The provider was asked between the validation and here: a second
+    // request for the same movie may have added it meanwhile, and is
+    // told what the validation would have said, in one transaction with
+    // the insert, before the metadata row is touched.
+    let added = db
+        .call(move |conn| {
+            let tx = conn.unchecked_transaction()?;
+            if !store::movies_by_tmdb_id(&tx, movie.metadata.tmdb_id)?.is_empty() {
+                return Ok(Err(movie.metadata.tmdb_id));
+            }
+            let movie = insert(&tx, movie)?;
+            tx.commit()?;
+            Ok(Ok(movie))
+        })
+        .await?;
+    added.map_err(|tmdb_id| {
+        WriteError::Invalid(vec![ValidationFailure::rule(
+            "TmdbId",
+            "MovieExistsValidator",
+            "This movie has already been added",
+            json!(tmdb_id),
+        )])
+    })
 }
 
 /// `AddMovieService.AddMovies`: several movies, added together at one

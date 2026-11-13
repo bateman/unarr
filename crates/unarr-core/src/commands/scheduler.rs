@@ -89,10 +89,7 @@ fn radarr_tasks(conn: &Connection) -> anyhow::Result<Vec<(String, i64)>> {
     });
     Ok([
         ("NzbDrone.Core.Messaging.Commands.MessagingCleanupCommand", 5),
-        (
-            "NzbDrone.Core.Update.Commands.ApplicationCheckUpdateCommand",
-            6 * 60,
-        ),
+        (super::RADARR_UPDATE_CHECK_TYPE, 6 * 60),
         ("NzbDrone.Core.HealthCheck.CheckHealthCommand", 6 * 60),
         ("NzbDrone.Core.Movies.Commands.RefreshMovieCommand", 24 * 60),
         ("NzbDrone.Core.Housekeeping.HousekeepingCommand", 24 * 60),
@@ -229,10 +226,14 @@ pub fn record_execution(
         return Ok(false);
     }
     let type_name = body.type_name();
+    // The task is found by the command it names, not by the spelling of
+    // its type: Radarr's update check is the same command under another.
     match store::providers::list_scheduled_tasks(conn)?
         .into_iter()
-        .find(|t| t.type_name == type_name)
-    {
+        .find(|t| {
+            t.type_name == type_name
+                || CommandBody::from_type_name(&t.type_name).is_some_and(|b| b.name() == body.name())
+        }) {
         Some(task) => {
             tracing::trace!(task = type_name, "updating last run time");
             store::providers::set_scheduled_task_execution(conn, task.id, last_execution, started_at)?;
@@ -356,6 +357,18 @@ mod tests {
                 assert!(tasks.iter().any(|t| t.type_name == name), "{name}");
             }
             assert!(tasks.iter().all(|t| !t.type_name.contains("Series")));
+            // Radarr's update check is found under its own type name,
+            // to be run and to have its run recorded.
+            let check = CommandBody::from_type_name(crate::commands::RADARR_UPDATE_CHECK_TYPE)
+                .expect("the update check");
+            assert_eq!(check.name_in(Personality::Radarr), "ApplicationCheckUpdate");
+            let later = now + chrono::Duration::hours(7);
+            assert!(record_execution(conn, &check, later, later)?);
+            let task = store::providers::list_scheduled_tasks(conn)?
+                .into_iter()
+                .find(|t| t.type_name == crate::commands::RADARR_UPDATE_CHECK_TYPE)
+                .unwrap();
+            assert_eq!(task.last_execution, Some(later));
             // Running it again changes nothing.
             ensure_defaults_for(conn, Personality::Radarr, now)?;
             assert_eq!(store::providers::list_scheduled_tasks(conn)?.len(), 11);
