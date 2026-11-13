@@ -80,13 +80,34 @@ it is what the maintainer's run tries first.
     volumes:
       - ./config/unarr:/config
       - ./config/sonarr:/sonarr-config:ro
-      - ./config/radarr:/radarr-config:ro
+      # A copy, writable: see below.
+      - ./config/radarr-import:/radarr-config
       - /share/data:/data
     labels:
       # the Sonarr router as it is, plus Radarr's on 7878
       - traefik.http.services.radarr.loadbalancer.server.port=7878
       # ... the router, the middlewares and the host rule as radarr has them
+      # Two services on one container: each router names its own, or
+      # Traefik drops both ("too many services").
+      - traefik.http.routers.radarr.service=radarr
+      - traefik.http.routers.sonarr.service=sonarr
 ```
+
+Radarr's database is imported from a copy, made with Radarr stopped:
+
+```sh
+docker compose stop radarr
+sudo cp -a config/radarr config/radarr-import
+```
+
+Not from `config/radarr` mounted read-only, as Sonarr's is: Radarr keeps its
+database in WAL mode, and SQLite opens such a file, even to read it, only
+when it can create the `-shm` file next to it. On a read-only mount the
+first start fails with `unable to open database file` (error 14) and the
+container restarts in a loop, taking Sonarr down with it. The copy is read
+once, at the first start; it can be deleted once the import is done, and
+`config/radarr` itself is never touched, so going back to Radarr stays
+possible.
 
 Then the `radarr` service is commented out, not deleted, and its
 `container_name` freed: Prowlarr, Bazarr, Recyclarr and the Uptime Kuma
@@ -101,6 +122,26 @@ Aliases keep the rest of the repository unchanged:
       proxy:
 ```
 
+The homelab's `scripts/auto-recover-cron.sh` runs every fifteen minutes
+and reconciles the stack with `docker compose up -d --remove-orphans` over
+a fixed list of files (`COMPOSE_FILES`, `compose.yml` and
+`compose.media.yml`). An override kept in a file of its own is undone at
+its next run: `sonarr` is recreated without Radarr and the `radarr`
+service, if it is only stopped, comes back. On the run of 2026-11-13 this
+happened twelve minutes in, and the checks that followed were answered by
+the original Radarr without anything saying so. So either:
+
+- the change goes into `compose.media.yml` itself, with the `radarr`
+  service commented out (as above), before the script next runs; or
+- for a trial, the script's crontab line is commented out for the
+  duration and restored at the end (`/etc/config/crontab`, then
+  `crontab /etc/config/crontab`), knowing that no unhealthy container is
+  restarted meanwhile.
+
+To tell which application answers on 7878: `GET /api/v3/system/status`
+says `"packageAuthor": "Unarr"` and `"appData": "/config/radarr"` for
+Unarr, and the original's own values otherwise.
+
 Unarr keeps Radarr's API key, as it keeps Sonarr's, so Recyclarr's
 `radarr:` section, Bazarr's movie provider and Prowlarr's application
 entry need no change.
@@ -110,7 +151,10 @@ entry need no change.
 Before, on the NAS:
 
 - [ ] A backup of `config/radarr` beside `config/sonarr` (the restore
-      steps of the runbook name both).
+      steps of the runbook name both). Some files under `asp/` belong to
+      the containers' user: `sudo tar`.
+- [ ] The writable copy `config/radarr-import`, taken with Radarr stopped.
+- [ ] `auto-recover-cron.sh` either knows of the change or is paused.
 - [ ] `make_dir "${CONFIG_ROOT}/unarr"` already exists from the Sonarr
       step; nothing to add for Radarr, which lands under
       `config/unarr/radarr/`.
@@ -160,7 +204,7 @@ change. Found on 2026-11-11:
 | `scripts/lib/report-common.sh` | **breaks**: `ARR_GET` runs `docker exec <container> sh -c …`, and the image has no shell. `make check-usenet` and `make check-seeders` lose their Sonarr rows until the request is made from another container or from the host. Their self-tests (`make test`) do not see it: they stub `docker` |
 | `scripts/assess-logs.sh` | **breaks quietly**: `internal_log_paths` reads `/config/logs/sonarr.txt` through `docker exec … sh`. The file is now `/config/sonarr/logs/sonarr.txt` and there is no `sh` nor `tail`: read it from the host path `docker/config/unarr/sonarr/logs/` instead. `docker logs` keeps working |
 | `Makefile` `check_arr_health` | works as is (reads `Health.Status`). Its `Failed to bind` restart-loop count never matches Unarr's log: harmless, but dead for this container |
-| `scripts/auto-recover-cron.sh` | works as is (reads `Health.Status`) |
+| `scripts/auto-recover-cron.sh` | **undoes an override**: besides restarting unhealthy containers it runs `docker compose up -d --remove-orphans` over the fixed `COMPOSE_FILES` of its line 47, so a change kept in another compose file is reverted within fifteen minutes. Put the change in `compose.media.yml`, or add the file to that list |
 | `docker/duplicati-filters.conf`, `docs/operations/runbook-backup-restore.md` | back up `config/unarr`; the restore steps name Sonarr's files |
 | `docs/diagram/services.yaml` | `svc: sonarr` still exists, so the workflow passes; change the display name and the one-line role if the diagram should say Unarr |
 | `docs/network/rack-homelab-config.md` service table, `docs/setup/nas-setup.md`, `docs/setup/arr-tuning-guide.md` | say which application answers on 8989; the Trusted Networks step of the *arr checklist has no counterpart to set by hand if the import carried it over (check on the NAS) |
