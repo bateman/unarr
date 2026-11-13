@@ -1,0 +1,25 @@
+{
+  "body": [
+    {
+      "attemptedValue": 0,
+      "errorCode": "GreaterThanValidator",
+      "errorMessage": "'Quality Profile Id' must be greater than '0'.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "comparisonProperty": "",
+        "comparisonValue": 0,
+        "propertyName": "Quality Profile Id",
+        "propertyValue": 0
+      },
+      "propertyName": "QualityProfileId",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:38:48Z",
+  "request": {
+    "body": "bodies/movie-add-no-profile.json",
+    "method": "POST",
+    "path": "/api/v3/movie"
+  },
+  "status": 400
+}

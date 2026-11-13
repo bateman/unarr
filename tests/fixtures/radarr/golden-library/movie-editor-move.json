@@ -1,0 +1,449 @@
+{
+  "body": [
+    {
+      "added": "2026-11-13T12:38:48Z",
+      "alternateTitles": [
+        {
+          "id": 2805,
+          "movieMetadataId": 298,
+          "sourceType": "tmdb",
+          "title": "デューン"
+        },
+        {
+          "id": 2806,
+          "movieMetadataId": 298,
+          "sourceType": "tmdb",
+          "title": "Dune: Part One"
+        },
+        {
+          "id": 2807,
+          "movieMetadataId": 298,
+          "sourceType": "tmdb",
+          "title": "חולית: חלק ראשון"
+        },
+        {
+          "id": 2808,
+          "movieMetadataId": 298,
+          "sourceType": "tmdb",
+          "title": "デューン 砂の惑星"
+        },
+        {
+          "id": 2809,
+          "movieMetadataId": 298,
+          "sourceType": "tmdb",
+          "title": "DUNE デューン 砂の惑星"
+        },
+        {
+          "id": 2810,
+          "movieMetadataId": 298,
+          "sourceType": "tmdb",
+          "title": "Duna: Parte Um"
+        },
+        {
+          "id": 2811,
+          "movieMetadataId": 298,
+          "sourceType": "tmdb",
+          "title": "Duna: Primeira Part"
+        },
+        {
+          "id": 2812,
+          "movieMetadataId": 298,
+          "sourceType": "tmdb",
+          "title": "Dune - Première partie"
+        },
+        {
+          "id": 2813,
+          "movieMetadataId": 298,
+          "sourceType": "tmdb",
+          "title": "Duna: Pjesa e Parë"
+        },
+        {
+          "id": 2814,
+          "movieMetadataId": 298,
+          "sourceType": "tmdb",
+          "title": "Dune: Parte uno"
+        },
+        {
+          "id": 2815,
+          "movieMetadataId": 298,
+          "sourceType": "tmdb",
+          "title": "Duna: Parte 1"
+        },
+        {
+          "id": 2816,
+          "movieMetadataId": 298,
+          "sourceType": "tmdb",
+          "title": "沙丘瀚戰：第一章"
+        },
+        {
+          "id": 2817,
+          "movieMetadataId": 298,
+          "sourceType": "tmdb",
+          "title": "Դյունա"
+        },
+        {
+          "id": 2818,
+          "movieMetadataId": 298,
+          "sourceType": "tmdb",
+          "title": "デューン 砂の惑星PART1"
+        },
+        {
+          "id": 2819,
+          "movieMetadataId": 298,
+          "sourceType": "tmdb",
+          "title": "სილახვავი"
+        },
+        {
+          "id": 2820,
+          "movieMetadataId": 298,
+          "sourceType": "tmdb",
+          "title": "Dyun"
+        },
+        {
+          "id": 2821,
+          "movieMetadataId": 298,
+          "sourceType": "tmdb",
+          "title": "Dyuna : 1-ci Hissə"
+        },
+        {
+          "id": 2822,
+          "movieMetadataId": 298,
+          "sourceType": "tmdb",
+          "title": "Дюна: Часть первая"
+        }
+      ],
+      "certification": "PG-13",
+      "cleanTitle": "dune",
+      "collection": {
+        "title": "Dune Collection",
+        "tmdbId": 726871
+      },
+      "digitalRelease": "2021-10-21T00:00:00Z",
+      "folderName": "/movies/Dune (2021) {tmdb-438631}",
+      "genres": [
+        "Science Fiction",
+        "Adventure"
+      ],
+      "id": 328,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/v1tRXZ4JtD2Iv6fjkPvT4GiwslV.jpg",
+          "url": "/MediaCover/328/poster.jpg?h=bd15f9a27331fc78d4df"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/qVgZu5BTx6pu4owCvVOm4zjTfOi.jpg",
+          "url": "/MediaCover/328/fanart.jpg?h=251f444906d2ce7ea00b"
+        }
+      ],
+      "imdbId": "tt1160419",
+      "inCinemas": "2021-09-15T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "army",
+        "baron",
+        "based on novel or book",
+        "betrayal",
+        "chosen one",
+        "complex",
+        "creature",
+        "desert",
+        "destiny",
+        "dystopia",
+        "emperor",
+        "empire",
+        "future",
+        "giant creature",
+        "giant worm",
+        "hallucinogen",
+        "knife fight",
+        "messiah",
+        "mother son relationship",
+        "premonition",
+        "prophecy",
+        "revenge",
+        "sand",
+        "sand dune",
+        "space",
+        "space opera",
+        "spice",
+        "treason",
+        "water shortage"
+      ],
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFile": {
+        "dateAdded": "2026-11-13T12:39:59Z",
+        "edition": "",
+        "id": 405,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 0,
+          "audioChannels": 1,
+          "audioCodec": "AAC",
+          "audioLanguages": "eng",
+          "audioStreamCount": 1,
+          "resolution": "1920x1080",
+          "runTime": "10:10",
+          "scanType": "Progressive",
+          "subtitles": "eng",
+          "videoBitDepth": 8,
+          "videoBitrate": 0,
+          "videoCodec": "h264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 1000
+        },
+        "movieId": 328,
+        "path": "/movies/Dune (2021) {tmdb-438631}/Dune.2021.1080p.BluRay.x264-GRP.mkv",
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "relativePath": "Dune.2021.1080p.BluRay.x264-GRP.mkv",
+        "releaseGroup": "GRP",
+        "size": 1106640
+      },
+      "movieFileId": 405,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Dune",
+      "overview": "Paul Atreides, a brilliant and gifted young man born into a great destiny beyond his understanding, must travel to the most dangerous planet in the universe to ensure the future of his family and his people. As malevolent forces explode into conflict over the planet's exclusive supply of the most precious resource in existence - a commodity capable of unlocking humanity's greatest potential - only those who can conquer their fear will survive.",
+      "path": "/movies/Dune (2021) {tmdb-438631}",
+      "physicalRelease": "2021-12-22T00:00:00Z",
+      "popularity": 40.3549,
+      "qualityProfileId": 4,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 8,
+          "votes": 1101251
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 74,
+          "votes": 0
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 83,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 7.8,
+          "votes": 15942
+        },
+        "trakt": {
+          "type": "user",
+          "value": 8.14492,
+          "votes": 57693
+        }
+      },
+      "releaseDate": "2021-10-21T00:00:00Z",
+      "rootFolderPath": "/movies",
+      "runtime": 155,
+      "secondaryYearSourceId": 0,
+      "sortTitle": "dune",
+      "status": "released",
+      "studio": "Legendary Pictures",
+      "tags": [],
+      "title": "Dune",
+      "titleSlug": "438631",
+      "tmdbId": 438631,
+      "website": "https://www.warnerbros.com/movies/dune",
+      "year": 2021,
+      "youTubeTrailerId": "w0HgHet0sxg"
+    },
+    {
+      "added": "2026-11-13T12:39:38Z",
+      "alternateTitles": [
+        {
+          "id": 2855,
+          "movieMetadataId": 521,
+          "sourceType": "tmdb",
+          "title": "Whiplash, Música y Obsesión"
+        },
+        {
+          "id": 2856,
+          "movieMetadataId": 521,
+          "sourceType": "tmdb",
+          "title": "Whiplash - Zum Erfolg getrieben"
+        },
+        {
+          "id": 2857,
+          "movieMetadataId": 521,
+          "sourceType": "tmdb",
+          "title": "Ритам лудила"
+        },
+        {
+          "id": 2858,
+          "movieMetadataId": 521,
+          "sourceType": "tmdb",
+          "title": "위플래쉬"
+        },
+        {
+          "id": 2859,
+          "movieMetadataId": 521,
+          "sourceType": "tmdb",
+          "title": "進擊的鼓手"
+        },
+        {
+          "id": 2860,
+          "movieMetadataId": 521,
+          "sourceType": "tmdb",
+          "title": "Whiplash 2014"
+        },
+        {
+          "id": 2861,
+          "movieMetadataId": 521,
+          "sourceType": "tmdb",
+          "title": "爆裂鼓手"
+        },
+        {
+          "id": 2862,
+          "movieMetadataId": 521,
+          "sourceType": "tmdb",
+          "title": "Մոլեգնություն"
+        },
+        {
+          "id": 2863,
+          "movieMetadataId": 521,
+          "sourceType": "tmdb",
+          "title": "Whiplash: Em Busca da Perfeição"
+        }
+      ],
+      "certification": "R",
+      "cleanTitle": "whiplash",
+      "digitalRelease": "2014-09-19T00:00:00Z",
+      "folderName": "/movies/Whiplash (2014) {tmdb-244786}",
+      "genres": [
+        "Drama",
+        "Music",
+        "Thriller"
+      ],
+      "id": 331,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/7fn624j5lj3xTme2SgiLCeuedmO.jpg",
+          "url": "/MediaCover/331/poster.jpg?h=dc3230e5e17521242510"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/fRGxZuo7jJUWQsVg9PREb98Aclp.jpg",
+          "url": "/MediaCover/331/fanart.jpg?h=1408d3155874e8e4bb8b"
+        }
+      ],
+      "imdbId": "tt2582802",
+      "inCinemas": "2014-10-10T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "based on short film",
+        "bold",
+        "conservatory",
+        "disapproving",
+        "drummer",
+        "drums",
+        "emotional abuse",
+        "jazz",
+        "jazz band",
+        "montage",
+        "music school",
+        "music teacher",
+        "musician",
+        "new york city",
+        "obsession",
+        "perfectionist",
+        "psychological drama",
+        "public humiliation",
+        "romantic",
+        "verbal abuse",
+        "young adult"
+      ],
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Whiplash",
+      "overview": "Under the direction of a ruthless instructor, a talented young drummer begins to pursue perfection at any cost, even his humanity.",
+      "path": "/movies/Whiplash (2014) {tmdb-244786}",
+      "physicalRelease": "2015-02-24T00:00:00Z",
+      "popularity": 29.3552,
+      "qualityProfileId": 4,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 8.5,
+          "votes": 1192004
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 89,
+          "votes": 0
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 94,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 8.376,
+          "votes": 17385
+        },
+        "trakt": {
+          "type": "user",
+          "value": 8.52507,
+          "votes": 28057
+        }
+      },
+      "releaseDate": "2014-09-19T00:00:00Z",
+      "rootFolderPath": "/movies",
+      "runtime": 107,
+      "secondaryYearSourceId": 0,
+      "sortTitle": "whiplash",
+      "status": "released",
+      "studio": "Bold Films",
+      "tags": [
+        2
+      ],
+      "title": "Whiplash",
+      "titleSlug": "244786",
+      "tmdbId": 244786,
+      "website": "https://www.sonyclassics.com//film//whiplash#",
+      "year": 2014,
+      "youTubeTrailerId": "Q7kZy3T6vRM"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:40:20Z",
+  "request": {
+    "body": "bodies/movie-editor-move.json",
+    "method": "PUT",
+    "path": "/api/v3/movie/editor"
+  },
+  "status": 202
+}

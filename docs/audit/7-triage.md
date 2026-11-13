@@ -164,7 +164,7 @@ the checks ends with it, without a verdict and without a word on the hub
 (so does any check that throws: `UpdateCheck` without a network, for one).
 Unarr reports "Failed to resolve the IP Address for the Configured Proxy
 Host", the message the original has for the case and never reaches: kept,
-as a decision (`docs/DESIGN.md` section 18). And `GET /blocklist` takes
+as a decision (`docs/DESIGN.md` section 19). And `GET /blocklist` takes
 `seriesIds=x` for no filter where the framework would answer 400: not
 recorded for Sonarr, left.
 

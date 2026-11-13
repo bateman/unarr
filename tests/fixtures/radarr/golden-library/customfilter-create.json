@@ -1,0 +1,23 @@
+{
+  "body": {
+    "filters": [
+      {
+        "key": "monitored",
+        "type": "equal",
+        "value": [
+          false
+        ]
+      }
+    ],
+    "id": 4,
+    "label": "Unmonitored",
+    "type": "movieIndex"
+  },
+  "recordedAt": "2026-11-13T12:41:28Z",
+  "request": {
+    "body": "bodies/customfilter-create.json",
+    "method": "POST",
+    "path": "/api/v3/customfilter"
+  },
+  "status": 201
+}

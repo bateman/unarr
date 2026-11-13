@@ -1,0 +1,36 @@
+{
+  "body": [
+    {
+      "attemptedValue": "{Quality Full}",
+      "errorCode": "IllegalMovieFolderTokensValidator",
+      "errorMessage": "Must not contain deprecated tokens derived from file properties: {Quality Full}",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Movie Folder Format",
+        "propertyValue": "{Quality Full}",
+        "tokens": "{Quality Full}"
+      },
+      "propertyName": "MovieFolderFormat",
+      "severity": "error"
+    },
+    {
+      "attemptedValue": "{Quality Full}",
+      "errorCode": "ValidMovieFolderFormatValidator",
+      "errorMessage": "Must contain movie title",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Movie Folder Format",
+        "propertyValue": "{Quality Full}"
+      },
+      "propertyName": "MovieFolderFormat",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:41:12Z",
+  "request": {
+    "body": "bodies/config-naming-put-folder-no-title.json",
+    "method": "PUT",
+    "path": "/api/v3/config/naming/1"
+  },
+  "status": 400
+}

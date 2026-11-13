@@ -1,0 +1,16 @@
+{
+  "body": [
+    {
+      "errorMessage": "Indexer does not exist",
+      "propertyName": "IndexerId",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:41:28Z",
+  "request": {
+    "body": "bodies/releaseprofile-create-missing-indexer.json",
+    "method": "POST",
+    "path": "/api/v3/releaseprofile"
+  },
+  "status": 400
+}

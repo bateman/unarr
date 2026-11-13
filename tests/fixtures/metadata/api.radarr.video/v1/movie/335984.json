@@ -1,0 +1,1395 @@
+{
+ "TmdbId": 335984,
+ "ImdbId": "tt1856101",
+ "Title": "Blade Runner 2049",
+ "Overview": "Thirty years after the events of the first film, a new blade runner, LAPD Officer K, unearths a long-buried secret that has the potential to plunge what's left of society into chaos. K's discovery leads him on a quest to find Rick Deckard, a former LAPD blade runner who has been missing for 30 years.",
+ "OriginalTitle": "Blade Runner 2049",
+ "OriginalLanguage": "en",
+ "TitleSlug": "335984",
+ "Runtime": 164,
+ "Popularity": 28.9999,
+ "Year": 2017,
+ "Premier": "2017-10-03T00:00:00Z",
+ "InCinema": "2017-10-04T00:00:00Z",
+ "PhysicalRelease": "2018-01-16T00:00:00Z",
+ "DigitalRelease": "2017-12-26T00:00:00Z",
+ "Images": [
+  {
+   "CoverType": "Poster",
+   "Url": "https://image.tmdb.org/t/p/original/gajva2L0rPYkEWjzgFlBXCAVBE5.jpg"
+  },
+  {
+   "CoverType": "Fanart",
+   "Url": "https://image.tmdb.org/t/p/original/gNdLJU9TxrpGx4dkZidjys3fyy0.jpg"
+  }
+ ],
+ "Ratings": [
+  {
+   "Count": 16009,
+   "Value": 7.614,
+   "Origin": "Tmdb",
+   "Type": "User"
+  }
+ ],
+ "MovieRatings": {
+  "Tmdb": {
+   "Count": 16009,
+   "Value": 7.614,
+   "Type": "User"
+  },
+  "Imdb": {
+   "Count": 775743,
+   "Value": 8,
+   "Type": "User"
+  },
+  "Metacritic": {
+   "Count": 0,
+   "Value": 81,
+   "Type": "User"
+  },
+  "RottenTomatoes": {
+   "Count": 0,
+   "Value": 88,
+   "Type": "User"
+  },
+  "Trakt": {
+   "Count": 33371,
+   "Value": 7.89062,
+   "Type": "User"
+  }
+ },
+ "Genres": [
+  "Science Fiction",
+  "Drama"
+ ],
+ "Keywords": [
+  "2040s",
+  "android",
+  "artificial intelligence (a.i.)",
+  "blade runner",
+  "bounty hunter",
+  "cyber thriller",
+  "cyberpunk",
+  "dystopia",
+  "future",
+  "humanoid robot",
+  "las vegas",
+  "los angeles, california",
+  "sequel",
+  "slow burn",
+  "tech noir",
+  "transhumanism"
+ ],
+ "AlternativeTitles": [
+  {
+   "Title": "Blade Runner 2",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "Blejd Raner 2049",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "Бегущий по лезвию 2",
+   "Type": "Tmdb",
+   "Language": "ru"
+  },
+  {
+   "Title": "Blade Runner 2049 3D",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "ブレードランナー 2049",
+   "Type": "Tmdb",
+   "Language": "ja"
+  },
+  {
+   "Title": "블레이드 러너 2049",
+   "Type": "Tmdb",
+   "Language": "ko"
+  },
+  {
+   "Title": "블레이드러너 2049",
+   "Type": "Tmdb",
+   "Language": "ko"
+  },
+  {
+   "Title": "Blade Runner 2049: Bıçak Sırtı",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "银翼杀手2049",
+   "Type": "Tmdb",
+   "Language": "zh"
+  },
+  {
+   "Title": "Շեղբի վրայով վազողը 2049",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "Bıçak Sırtı 2049",
+   "Type": "Tmdb",
+   "Language": "en"
+  }
+ ],
+ "Translations": [
+  {
+   "Title": "Blade Runner 2049",
+   "Overview": "Thirty years after the events of the first film, a new blade runner, LAPD Officer K, unearths a long-buried secret that has the potential to plunge what's left of society into chaos. K's discovery leads him on a quest to find Rick Deckard, a former LAPD blade runner who has been missing for 30 years.",
+   "Language": "en-US"
+  },
+  {
+   "Title": "Blade Runner 2049",
+   "Overview": "En 2049, la société est fragilisée par les nombreuses tensions entre les humains et leurs esclaves créés par bioingénierie. L’officier K est un Blade Runner : il fait partie d’une force d’intervention d’élite chargée de trouver et d’éliminer ceux qui n’obéissent pas aux ordres des humains. Lorsqu’il découvre un secret enfoui depuis longtemps et capable de changer le monde, les plus hautes instances décident que c’est à son tour d’être traqué et éliminé. Son seul espoir est de retrouver Rick Deckard, un ancien Blade Runner qui a disparu depuis des décennies…",
+   "Language": "fr-FR"
+  },
+  {
+   "Title": "Blade Runner 2049",
+   "Overview": "Im Jahr 2023 wird die Herstellung von Replikanten – künstlichen Menschen, die zum Einsatz in den Weltall-Kolonien gezüchtet werden – nach mehreren schwerwiegenden Vorfällen verboten. Als der brillante Industrielle Niander Wallace ein neues, verbessertes Modell, den „Nexus 9“, vorstellt, wird die Produktion 2036 jedoch wieder erlaubt. Um ältere und somit nicht zugelassene Replikanten-Modelle, die sich auf der Erde verstecken, aufzuspüren und zu eliminieren, ist weiterhin die sogenannte „Blade Runner“-Einheit des LAPD im Einsatz, zu der auch K gehört. Bei seiner Arbeit stößt K auf ein düsteres, gut gehütetes Geheimnis von enormer Sprengkraft, das ihn auf die Spur eines ehemaligen Blade Runners bringt: Rick Deckard, der vor 30 Jahren aus Los Angeles verschwand ...",
+   "Language": "de-DE"
+  },
+  {
+   "Title": "Blade Runner 2049",
+   "Overview": "Han pasado 30 años desde los acontecimientos ocurridos en Blade Runner (1982). El oficial K, un blade runner caza-replicantes del Departamento de Policía de Los Ángeles, descubre un secreto que ha estado enterrado durante mucho tiempo y que tiene el potencial de llevar a la sociedad al caos. Su investigación le conducirá a la búsqueda del legendario Rick Deckard, un antiguo blade runner en paradero desconocido, que lleva desaparecido 30 años.",
+   "Language": "es-ES"
+  },
+  {
+   "Title": "Blade Runner 2049",
+   "Overview": "Trent'anni dopo gli eventi del primo film, un nuovo blade runner, l'Agente K della Polizia di Los Angeles  scopre un segreto sepolto da tempo che ha il potenziale di far precipitare nel caos quello che è rimasto della società. La scoperta di K lo spinge verso la ricerca di Rick Deckard, un ex-blade runner della polizia di Los Angeles sparito nel nulla da 30 anni.",
+   "Language": "it-IT"
+  },
+  {
+   "Title": "Blade Runner 2049",
+   "Overview": "30 χρόνια έχουν περάσει από τα γνωστά γεγονότα, και ένας νέος blade-runner, ο αστυνόμος του Λος Άντζελες Κ, φέρνει στην επιφάνεια ένα χρόνια κρυμμένο μυστικό, το οποίο έχει προοπτικές να βυθίσει ότι απέμεινε από τον πολιτισμό στο χάος. Η ανακάλυψη του Κ τον οδηγεί στην αναζήτηση του Ρικ Ντέκαρντ, ενός παλιού συνάδελφου που έχει χαθεί επί 30 χρόνια.",
+   "Language": "el-GR"
+  },
+  {
+   "Title": "Szárnyas fejvadász 2049",
+   "Overview": "Már 30 éve, hogy Rick Deckard, a szárnyas fejvadász eltűnt a színről. K ügynök felfedez egy régi titkot, ami a társadalmat totális káoszba taszíthatja. Az információ arra készteti a rendőrt, hogy felkeresse Deckardot, s együtt tegyenek valamit.",
+   "Language": "hu-HU"
+  },
+  {
+   "Title": "Blade Runner 2049",
+   "Overview": "Trinta anos após os acontecimentos do primeiro filme, um novo blade runner, o oficial K da polícia de Los Angeles, desenterra um segredo há muito enterrado que tem o potencial de mergulhar o que resta da sociedade no caos. A descoberta de K o leva a uma busca para encontrar Rick Deckard, um ex-blade runner do LAPD que está desaparecido há 30 anos.",
+   "Language": "pt-BR"
+  },
+  {
+   "Title": "בלייד ראנר 2049",
+   "Overview": "שלושים שנים לאחר אירועי הסרט הראשון, יש בלייד ראנר חדש – קיי, שוטר במשטרת לוס אנג'לס (ריאן גוסלינג), חושף סוד ישן אשר עלול להמיט אסון על מה שנותר מהאנושות. מה שקיי מגלה מוביל אותו לצאת ולמצוא את ריק דוקארד (האריסון פורד), בלייד ראנר לשעבר שנעלם לפני 30 שנה.",
+   "Language": "he-IL"
+  },
+  {
+   "Title": "Бегущий по лезвию 2049",
+   "Overview": "Содержимое тайной могилы вызывает интерес промышленного магната, а также офицера Кей из полиции Лос-Анджелеса, который отправляется на поиски пропавшей легенды.",
+   "Language": "ru-RU"
+  },
+  {
+   "Title": "블레이드 러너 2049",
+   "Overview": "인간과 리플리컨트가 혼재된 2049년. 인간의 통제를 벗어난 리플리컨트를 쫓는 블레이드 러너 K는 임무 수행 도중 약 30년 전 여자 리플리컨트의 유골을 발견하고 충격적으로 출산의 흔적까지 찾아낸다. 리플리컨트가 출산까지 가능하다는 사실이 알려지면사회에 큰 혼란이 야기되므로 이를 덮으려는 경찰 조직과, 그 비밀의 단서를 찾아내 더욱 완벽한 리플리컨트를 거느리고 세상을 장악하기 위해 K를 쫓는 니안더 월레스. 리플리컨트의 숨겨진 진실에 접근할수록 점차 정체성의 혼란을 겪게 되는 K는 과거 블레이드 러너였던 릭 데커드를 만나 전혀 상상치 못한 진실을 마주하게 되는데...",
+   "Language": "ko-KR"
+  },
+  {
+   "Title": "Той, хто біжить по лезу 2049",
+   "Overview": "Офіцер поліції Лос-Анджелеса на імя Кей розслідує давно забуту таємницю, здатну занурити в хаос залишки суспільства. Це відкриття змушує його відшукати зниклого 30 років тому Ріка Декарда - колишнього службовця спеціального підрозділу правоохоронних органів, який займався пошуком і знищенням втікачів-андроїдів ...",
+   "Language": "uk-UA"
+  },
+  {
+   "Title": "Blade Runner 2049: Bıçak Sırtı",
+   "Overview": "İlk filmdeki olayların üzerinden 30 yıldan daha uzun bir zaman geçmişken, Los Angeles Polis Departmanı'nda görev yapan Memur K, insanlığı büyük kargaşaya sürükleyecek ve hatta sonunu bile getirebilecek bir sırrı ortaya çıkarmıştır. Büyük bir felaketi önleyebilmek için Rick Deckard'ı bulup ondan bazı soruların yanıtlarını alması şarttır.",
+   "Language": "tr-TR"
+  },
+  {
+   "Title": "ブレードランナー 2049",
+   "Overview": "2022年にアメリカ西海岸で大規模な停電が起きたのをきっかけに世界は食物供給が混乱するなど危機的状況を迎える。2025年、科学者ウォレスが遺伝子組み換え食品を開発し、人類の危機を救う。そして、元捜査官デッカードが突然行方をくらませて以来30年の月日が流れた2049年には、レプリカント（人造人間）の寿命に制限がなくなっていた。",
+   "Language": "ja-JP"
+  },
+  {
+   "Title": "Blade Runner 2049",
+   "Overview": "V roce 2049 odhaluje nový Blade Runner a důstojník policie dlouho ukryté tajemství, které by mohlo zcela rozvrátit poslední zbytky lidské společnosti. Toto odhalení ho nutí zahájit pátrání po již 30 let nezvěstném bývalém Blade Runnerovi.",
+   "Language": "cs-CZ"
+  },
+  {
+   "Title": "Блейд Рънър 2049",
+   "Overview": "Новият блейд рънър Кей е полицай от Лос Анджелис, който разследва тайна, която може да доведе до пълен хаос и да застраши обществото. За да реши проблема Кей ще трябва да открие бившия блейд рънър Рик, който е изчезнал преди 30 години.",
+   "Language": "bg-BG"
+  },
+  {
+   "Title": "Blade Runner 2049",
+   "Overview": "Los Angeles 2049. Politimanden K, en blade runner, jager gamle replikanter, som skal \"pensioneres\". Han kommer på sporet af et barn og en hemmelighed, der kan potentielt styrte resten af det civiliserede samfund i grus. Rick Deckard, en anden blade runner, kender barnet og sandheden, men har været forsvundet de sidste 30 år.",
+   "Language": "da-DK"
+  },
+  {
+   "Title": "Blade Runner 2049",
+   "Overview": "Minęło 30 lat od wydarzeń przedstawionych w filmie \"Łowca androidów\" Ridleya Scotta. Wtedy w 2019 roku agent Rick Deckard ścigał w Los Angeles zbuntowane androidy z serii Nexus 6. Teraz w 2049 roku do akcji wkracza nowy Blade Runner, czyli łowca - oficer K . Niespodziewanie funkcjonariusz odkrywa spisek, który może zniszczyć pozostałości dawnego porządku i społeczeństwa. Żeby uratować i tak już zrujnowany świat, K musi poprosić o pomoc Deckarda. Problem w tym, że Rick ukrywa się od czasu, gdy w 2019 roku uciekł z Los Angeles...",
+   "Language": "pl-PL"
+  },
+  {
+   "Title": "Blade Runner 2049",
+   "Overview": "Blade Runner 2049 sa odohráva tridsať rokov po prvom filme. Na scénu prichádza nový blade runner menom K, aby odhalil tajomstvo, ktoré môže uvrhnúť zvyšky spoločnosti do chaosu. Jeho pátranie ho privedie až k bývalému blade runnerovi, ktorý bol tridsať rokov nezvestný…",
+   "Language": "sk-SK"
+  },
+  {
+   "Title": "银翼杀手2049",
+   "Overview": "在《银翼杀手》（1982）事件发生三十年后，新一代银翼杀手、洛杉矶警察“K”发现了一个尘封已久的秘密，这个秘密有可能使所剩无几的社会陷入混乱。K的这一发现引领他踏上寻找失踪三十年的前洛杉矶警察银翼杀手瑞克·戴克之路。[华纳兄弟影业]",
+   "Language": "zh-CN"
+  },
+  {
+   "Title": "Блејд Ранер 2049",
+   "Overview": "Тридесет година након догађаја из првог дела, нови блејд ранер, полицајац К (Рајан Гослинг) открива давно скривену тајну која би могла да оно што је остало од друштва претвори у хаос. К креће у потрагу за Риком Декардом (Харисон Форд), бившим блејд ранером који је нестао пре 30 година.",
+   "Language": "sr-RS"
+  },
+  {
+   "Title": "Blade Runner 2049",
+   "Overview": "Tiga puluh tahun setelah peristiwa pada film sebelumnya, blade runner yang baru, petugas LAPD bernama K, membongkar rahasia yang telah tersimpan lama yang dapat membuat kekacauan di masyarakat. Penemuan tsb membuat K terdorong untuk mencari Rick Deckard, mantan polisi yang telah hilang selama 30 tahun.",
+   "Language": "id-ID"
+  },
+  {
+   "Title": "Blade Runner 2049",
+   "Overview": "Trinta anos após os eventos do primeiro filme, K, um novo blade runner, oficial da LAPD, desvenda um segredo há muito enterrado que pode potencialmente mergulhar no caos o que resta da sociedade. A descoberta de K leva-o numa missão para localizar Rick Deckard, um antigo blade runner da LAPD, desaparecido há 30 anos.",
+   "Language": "pt-PT"
+  },
+  {
+   "Title": "Blade Runner 2049",
+   "Overview": "Dertig jaar na de gebeurtenissen in de eerste film ontdekt een nieuwe Blade Runner, LAPD agent K, een verborgen geheim dat wat nog overblijft van de huidige maatschappij mogelijk in chaos kan doen verzinken.",
+   "Language": "nl-NL"
+  },
+  {
+   "Title": "銀翼殺手2049",
+   "Overview": "故事描述在未來2049年時，複製人奴隸已成為文明躍進過程的關鍵，儘管掌權者試圖築起高牆以區分人種，但人造人與真實人類的界線卻越趨模糊、真假難分，引發正反兩面的一連串影響。  由萊恩葛斯林飾演的銀翼殺手K，為阻止現況演變成不可挽救的局面，因此踏上尋找掌握重要線索的關鍵人物、由哈里遜福特飾演的第一代銀翼殺手瑞克戴克之路，欲挖掘隱匿許久的事實真相。兩代銀翼殺手將聯手抗衡強大反派的追殺，與破解隱藏背後的秘密詭計。",
+   "Language": "zh-TW"
+  },
+  {
+   "Title": "เบลด รันเนอร์ 2049",
+   "Overview": "Blade Runner 2049 ว่าด้วยเรื่องราวต่อจาก 30 ปีที่แล้ว บริษัทไทเรล ล่มสลายจากการก่อกบฎทำให้เกิดข้อห้ามการสร้างมนุษย์เทียม กาลเวลาผ่านไป ถือกำเนิดบริษัทใหม่ Wallace Corporation นำโดย ไนแอนเดอร์ วอลเลซ (รับบทโดย จาเร็ด เลโต) เข้ามาแทนที่ เขาได้ดีงเอาเทคโนโลยีของไทเรลมาผนวกกับวิสัยทัศน์ใหม่ และได้เริ่มผลิตมนุษย์เทียมรุ่น Nexus-9 ขึ้นมา พร้อมออกกฎให้ปราบปรามหุ่นรุ่นเก่าอันเป็นต้นเหตุของการก่อกบฎให้หมดสิ้น",
+   "Language": "th-TH"
+  },
+  {
+   "Title": "Blade Runner 2049",
+   "Overview": "En ny ”blade runner” oppdager en hemmelighet som kan skape kaos i det som er igjen av samfunnet. Det fører ham ut på en søken etter Rick Deckard som har vært savnet i 30 år.",
+   "Language": "no-NO"
+  },
+  {
+   "Title": "Tội Phạm Nhân Bản 2049",
+   "Overview": "Một chàng trai trẻ khám phá ra bí mật khiến xã hội rơi vào cảnh hỗn mang. Anh lên đường đi tìm một người khác đã mất tích cách đây ba mươi năm, để rồi cả hai cùng bước vào hành trình cứu thế giới. 35 năm sau ngày phần đầu tiên ra mắt, Blade Runner trở lại với những gương mặt mới, câu chuyện mới, đầy hứa hẹn vẫn sẽ giữ được cái “chất” khiến thương hiệu này trở thành tác phẩm kinh điển trong lịch sử điện ảnh. Nhà sản xuất vừa tung ra trailer đầu tiên của phim do bộ đôi Ridley Scott - sản xuất và Denis Villeneuve - đạo diễn với vô số tình tiết bất ngờ có thể hứa hẹn đây là sẽ bom tấn đáng để chúng ta ra rạp thưởng thức. Phim được xem là tác phẩm kinh điển của thể loại khoa học viễn tưởng.",
+   "Language": "vi-VN"
+  },
+  {
+   "Title": "Bėgantis skustuvo ašmenimis 2049",
+   "Overview": "Istorija prasideda praėjus trisdešimčiai metų po pirmojo filmo įvykių. Jaunas Los Andželo policijos pareigūnas K (aktorius Ryan‘as Gosling‘as) priklauso specialiam „Blade Runner“ likvidatorių padaliniui. Jo užduotis – susekti ir sunaikinti išlikusius androidus („replikantus“). Vieną dieną K sužino paslaptį, potencialiai galinčią sunaikinti žmoniją. Siekdamas išsiaiškinti, kas už to slypi, likvidatorius išsiruošia ieškoti legendinio Riko Dekarto (akt. Harrison‘as Ford‘as), pradingusio prieš 30 metų. Pagaliau suradęs savo pirmtaką, pareigūnas K supranta, kad Dekarto ieškojo ne tik jis. O tai, ką slepia buvęs „Blade Runner“ pareigūnas, gali tapti lemiamu veiksniu žmonijos išlikimo istorijoje.",
+   "Language": "lt-LT"
+  },
+  {
+   "Title": "Vânătorul de recompense 2049",
+   "Overview": "La treizeci de ani de la evenimentele primului film, un nou Vânător de Recompense, ofițerul K din LAPD, descoperă un vechi secret, care are potențialul de a arunca ce a mai rămas din societate, în haos. Descoperirea lui K, îl duce pe acesta în căutarea lui Rick Deckard, un fost Vânător de Recompense din LAPD care e dat dispărut timp de 30 de ani.",
+   "Language": "ro-RO"
+  },
+  {
+   "Title": "Iztrebljevalec 2049",
+   "Overview": "Iztrebljevalec 2049 je nadaljevanje legendarnega filma iz leta 1982, ki je za ljubitelje znanstvenofantastičnih filmov vedno na seznamu najboljših. Presežke tokrat obljublja odlična igralska zasedba, v kateri najdemo Ryana Goslinga, Harrisona Forda, Robina Wrighta, Davea Bautista in Jareda Leta. Trideset let po dogodkih iz prvega filma novi iztrebljevalec, policist K iz Los Angelesa (Gosling), razkrije dolgo zakopano skrivnost, ki bi utegnila pahniti delček družbe, ki še ostaja, v popoln kaos. To odkritje ga prisili na lov za Rickom Deckardom (Ford), nekdanjim iztrebljevalcem, za katerim so se pred 30 leti izgubile vse sledi.",
+   "Language": "sl-SI"
+  },
+  {
+   "Title": "Blade Runner 2049",
+   "Overview": "Trettio år har gått sedan sist. En ny blade runner – Los Angeles-polisen K – avslöjar en sedan länge begravd hemlighet med potential att rasera det lilla som nu återstår av samhället. K:s avslöjande leder honom ut på en jakt efter Rick Deckard, en tidigare blade runner som varit försvunnen i tre decennier.",
+   "Language": "sv-SE"
+  },
+  {
+   "Title": "Blade Runner 2049",
+   "Overview": "Californie, 2049. La planète se relève péniblement de la crise de l'écosystème de 2022. Une entreprise a racheté la Tyrell Corporation afin de fabriquer de nouvelles entités technologiques. Les Réplicants demeurent toutefois interdits et les Blade Runner sont parfois appelés pour les éliminer. C'est le rôle de K, un officier solitaire. Envoyé sur une ferme recluse, il découvre dans le sol une valise contenant un secret vieux de 30 ans. En enquêtant, le policier risque de réveiller des forces obscures et de se mettre à dos des gens puissants qui cherchent à enterrer le passé.",
+   "Language": "fr-CA"
+  },
+  {
+   "Title": "Blade Runner 2049",
+   "Overview": "En 2049, K es uno de los esclavos androides de la nueva serie Nexus-9 llamados replicantes. K también es un Blade Runner, un cazador de replicantes rebeldes, que termina realizando un importante descubrimiento durante una de sus misiones. Luego de ser ordenado buscar y destruir cualquier evidencia del suceso, el androide termina tras la pista de Rick Deckard, un misterioso ex Blade Runner desparecido por más de 30 años. Secuela del icónico filme de ciencia ficción de 1982, Blade Runner.",
+   "Language": "es-MX"
+  },
+  {
+   "Title": "Pa asmeni skrejošais 2049",
+   "Overview": "Jaunais \"pa asmeni skrejošais\" policists K atklāj ilgi glabātu noslēpumu, un tas palīdz viņam nākt uz pēdām iepriekšējam pa asmeni skrejošajam, Rikam Dekardam, kurš 30 gadus ir pazudis bez vēsts.",
+   "Language": "lv-LV"
+  },
+  {
+   "Title": "Blade Runner 2049",
+   "Overview": "LAPD:n poliisi K saa selville kauan hautautuneena olleen salaisuuden, joka saattaa syöstä viimeisetkin yhteiskunnan rippeet kaaokseen. K:n löytö johdattaa hänet etsimään Rick Deckhardia, entistä LAPD:n blade runneria, joka on ollut kateissa viimeiset 30 vuotta.",
+   "Language": "fi-FI"
+  },
+  {
+   "Title": "Беглы па лязе 2049",
+   "Overview": "Прадаўжэнне культавага фільма «Беглы па лязе», дзеянне якога разгортваецца цераз некалькі дзесяцігоддзяў.",
+   "Language": "be-BY"
+  },
+  {
+   "Title": "Blade Runner 2049",
+   "Overview": "Trideset godina nakon događaja iz prvog filma, novi istrebljivač, losanđeleski policajac K pronalazi dugo skrivenu tajnu koja ima potencijala ono malo ljudskog društva što je preostalo baciti u potpuni kaos. Njegovo otkriće odvest će ga u potragu za Rickom Deckardom, bivšim istrebljivačem koji je nestao prije trideset godina…",
+   "Language": "hr-HR"
+  },
+  {
+   "Title": "Klingokontrabandisto 2049",
+   "Overview": "",
+   "Language": "eo-EO"
+  },
+  {
+   "Title": "銀翼殺手 2049",
+   "Overview": "時隔 30 年，地球陷入一片狂亂，人類與複製人更加難分難解，新「銀翼殺手」K (賴恩高斯寧 飾) 延續任務，維持世界秩序，但製造複製人的 Wallace (謝拉力圖 飾) 卻認為複製人才是物種的未來. . . . . . K 在追查之中發現一個埋藏已久、關乎複製人生死存亡的秘密，這個發現更引領他尋找已經消聲匿跡的前銀翼殺手 Rick Deckard (夏里遜福 飾)！\r 隱伏多年的謎底即將揭曉. . . . . .",
+   "Language": "zh-HK"
+  },
+  {
+   "Title": "დანის პირზე მორბენალი 2049",
+   "Overview": "უახლოეს მომავალში დედამიწა დასახლებულია არა მხოლოდ ადამიანებით, არამედ ქმნილებებით, რომლებიც ყველაზე მძიმე სამუშაოს შესასრულებლად გამოიყენებიან. პოლიციის ოფიცრის, კეის მოვალეობა მათი კონტროლია. შემთხვევით, კეი საიდუმლო ინფორმაციას შეიტყობს, რაც კაცობრიობის არსებობას კითხვის ნიშნის ქვეშ აყენებს. გამოსავლის საპოვნელად ის იწყებს ყოფილი პოლიციელის, რიკის ძებნას, რომელიც წლებია, უკვალოდ არის გამქრალი.",
+   "Language": "ka-GE"
+  },
+  {
+   "Title": "بلید رانر ۲۰۴۹",
+   "Overview": "بلید رانر ۲۰۴۹ (به انگلیسی: Blade Runner 2049) فیلمی آمریکایی در سبک نئو نوآر علمی–تخیلی به کارگردانی دنی ویلنوو و نویسندگی مایکل گرین و همپتن فنچر است. این فیلم دنباله‌ای بر فیلم بلید رانر (۱۹۸۲) به‌شمار می‌رود و هریسون فورد یکبار دیگر به ایفای نقش ریک دکارد می‌پردازد. از دیگر بازیگران آن می‌توان به رایان گاسلینگ، دیوید باتیستا، آنا د آرماس، رابین رایت، سیلفیا هوکس، لنی جیمز و جرد لتو اشاره کرد. بلید رانر ۲۰۴۹ در تاریخ ۶ اکتبر ۲۰۱۷، به صورت دو بعدی، سه‌بعدی و آی‌مکس سه‌بعدی در ایالات متحده اکران شد. فیلم با استقبال بسیار بالایی همراه بود و منتقدین آنرا یکی از بهترین فیلم‌های سال ۲۰۱۷ می‌دانند. همچنین برخی از منتقدین این فیلم را نسبت به قسمت اول اثری بهتر و جذاب‌تری دانستند. بلید رانر ۲۰۴۹ در نودمین دوره جوایز اسکار در پنج رشته از جمله از جمله بهترین میکس صدا، بهترین تدوین صدا و بهترین طراحی صحنه نامزد بود که در نهایت موفق شد دو جایزه بهترین فیلم‌برداری برای راجر دیکینز و بهترین جلوه‌های ویژه را به خود اختصاص دهد.",
+   "Language": "fa-IR"
+  },
+  {
+   "Title": "بليد رانر ٢٠٤٩",
+   "Overview": "ثلاثين سنة بعد أحداث الفيلم الأول، بليد رنر جديد،ضابط لوس انجلوس \"كي\"  يكشف عن سر مدفون منذ زمن بعيد من المحتمل له أن يدفع ماتبقى من المجتمع نحو الفوضى، إكتشاف كي يقوده لمهمة ايجاد ريك ديكارد ضابط لوس انجلوس و بليد رنر سابق مفقود منذ ثلاثين عاماً.",
+   "Language": "ar-SA"
+  },
+  {
+   "Title": "Blade Runner 2049",
+   "Overview": "Han passat 30 anys des dels esdeveniments ocorreguts a Blade Runner (1982). L'oficial K, un blade runner caça-replicants del Departament de Policia de Los Angeles, descobreix un secret que ha estat enterrat durant molt de temps i que té el potencial de portar la societat al caos. La seva investigació el conduirà a la recerca del llegendari Rick Deckard, un antic blade runner en parador desconegut, que fa 30 anys que està desaparegut.",
+   "Language": "ca-ES"
+  },
+  {
+   "Title": "Blade Runner 2049",
+   "Overview": "Palavalt oodatud järg kultuslikule ulmefilmile \"Blade Runner\". Teise osa lugu toimub 30 aastat pärast esimese filmi sündmusi. Uus blade runner (androidide jahtija) on Los Angelese politseinik K, kes avastab kaua varjul olnud saladuse, mis võib ühiskonna riismed veelgi suuremasse kaosesse paisata. K avastus sunnib ta kunagise blade runneri Rick Deckardi otsinguile, kes on kolmkümmend aastat kadunud olnud.",
+   "Language": "et-EE"
+  },
+  {
+   "Title": "Blade Runner 2049",
+   "Overview": "Innholdet i en skjult grav fanger interessen til en industrimagnat og får en blade runner fra Los Angeles-politiet til å legge ut på jakt etter en forsvunnet legende.",
+   "Language": "nb-NO"
+  },
+  {
+   "Title": "Blade Runner 2049",
+   "Overview": "Innholdet i en skjult grav fanger interessen til en industrimagnat og får en blade runner fra Los Angeles-politiet til å legge ut på jakt etter en forsvunnet legende.",
+   "Language": "nn-NN"
+  },
+  {
+   "Title": "银翼杀手 2049",
+   "Overview": "隐藏墓穴里的东西引起工业巨头的兴趣，洛杉矶警局的银翼杀手 K 警官奉命寻找一位失踪的传奇人物。",
+   "Language": "zh-SG"
+  },
+  {
+   "Title": "بليد رانر ٢٠٤٩",
+   "Overview": "تجذب محتويات صندوق خفيّ اهتمام عملاق صناعي، وتقود المحقق \"كاي\"، وهو \"بلايد رانر\" من شرطة \"لوس أنجلوس\"، إلى رحلة للعثور على أسطورة مفقودة.",
+   "Language": "ar-AE"
+  },
+  {
+   "Title": "Blade Runner 2049",
+   "Overview": "Der Inhalt eines versteckten Grabs erregt das Interesse eines Wirtschaftsmagnaten und veranlasst Replikanten-Jäger Officer K zur Suche nach einer verschollenen Legende.",
+   "Language": "de-AT"
+  },
+  {
+   "Title": "Blade Runner 2049",
+   "Overview": "Der Inhalt eines versteckten Grabs erregt das Interesse eines Wirtschaftsmagnaten und veranlasst Replikanten-Jäger Officer K zur Suche nach einer verschollenen Legende.",
+   "Language": "de-CH"
+  },
+  {
+   "Title": "Blade Runner 2049",
+   "Overview": "Kandungan sebuah kubur tersembunyi menarik perhatian seorang usahawan terkemuka dan menyebabkan Pegawai K, Blade Runner LAPD, mula mencari legenda yang hilang.",
+   "Language": "ms-MY"
+  },
+  {
+   "Title": "Blade Runner 2049",
+   "Overview": "Kandungan sebuah kubur tersembunyi menarik perhatian seorang usahawan terkemuka dan menyebabkan Pegawai K, Blade Runner LAPD, mula mencari legenda yang hilang.",
+   "Language": "ms-SG"
+  },
+  {
+   "Title": "ब्लेड रनर २०४९",
+   "Overview": "एक छिपी हुई कब्र में मिली चीज़ें एक बड़े इंडस्ट्रियलिस्ट का ध्यान खींचती हैं और फिर लॉस एंजेलिस पुलिस विभाग का ब्लेड रनर ऑफ़िसर एक लापता लेजेंड की खोज में निकल पड़ता है।",
+   "Language": "hi-IN"
+  },
+  {
+   "Title": "Blade Runner 2049",
+   "Overview": "De inhoud van een verborgen graf trekt de aandacht van een grootindustrieel en stuurt agent K, een blade runner uit L.A., op een zoektocht naar een vermiste legende.",
+   "Language": "nl-BE"
+  }
+ ],
+ "Recommendations": [
+  {
+   "TmdbId": 280,
+   "Title": "Terminator 2: Judgment Day"
+  },
+  {
+   "TmdbId": 218,
+   "Title": "The Terminator"
+  },
+  {
+   "TmdbId": 78,
+   "Title": "Blade Runner"
+  },
+  {
+   "TmdbId": 624860,
+   "Title": "The Matrix Resurrections"
+  },
+  {
+   "TmdbId": 296,
+   "Title": "Terminator 3: Rise of the Machines"
+  },
+  {
+   "TmdbId": 198184,
+   "Title": "Chappie"
+  },
+  {
+   "TmdbId": 290859,
+   "Title": "Terminator: Dark Fate"
+  },
+  {
+   "TmdbId": 83542,
+   "Title": "Cloud Atlas"
+  },
+  {
+   "TmdbId": 534,
+   "Title": "Terminator Salvation"
+  },
+  {
+   "TmdbId": 500664,
+   "Title": "Upgrade"
+  }
+ ],
+ "Credits": {
+  "Cast": [
+   {
+    "Name": "Ryan Gosling",
+    "Order": 0,
+    "Character": "'K'",
+    "TmdbId": 30614,
+    "CreditId": "575d7fb69251414a82004702",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/lyUyVARQKhGxaxy0FbPJCQRpiaW.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Harrison Ford",
+    "Order": 1,
+    "Character": "Rick Deckard",
+    "TmdbId": 3,
+    "CreditId": "575d7fc7c3a36831a40043e6",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/pjBMJVPpcZK23Vt1nzr1zEBTWrP.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Ana de Armas",
+    "Order": 2,
+    "Character": "Joi",
+    "TmdbId": 224513,
+    "CreditId": "575d7fd6c3a368451600115b",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/ngHnBOofQzCO3AvMyuW3UMRWg1B.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Dave Bautista",
+    "Order": 3,
+    "Character": "Sapper Morton",
+    "TmdbId": 543530,
+    "CreditId": "575d7fce925141189e001471",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/snk6JiXOOoRjPtHU5VMoy6qbd32.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Robin Wright",
+    "Order": 4,
+    "Character": "Lieutenant Joshi",
+    "TmdbId": 32,
+    "CreditId": "575d7fbd92514103e800009f",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/d3rIv0y2p0jMsQ7ViR7O1606NZa.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Sylvia Hoeks",
+    "Order": 5,
+    "Character": "Luv",
+    "TmdbId": 104632,
+    "CreditId": "575d7fdd925141540300091c",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/wKC9LgqgJRCXuzs1kUKaK7Uicv.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Mackenzie Davis",
+    "Order": 6,
+    "Character": "Mariette",
+    "TmdbId": 1110405,
+    "CreditId": "575d7fe592514104230000ae",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/ekQbEIKh26jbz17P0wwLbo6uNs9.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Jared Leto",
+    "Order": 7,
+    "Character": "Niander Wallace",
+    "TmdbId": 7499,
+    "CreditId": "57e76841925141414601061b",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/ca3x0OfIKbJppZh8S1Alx3GfUZO.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Carla Juri",
+    "Order": 8,
+    "Character": "Dr. Ana Stelline",
+    "TmdbId": 1013973,
+    "CreditId": "575d7fecc3a36831a40043ee",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/7Tu9PCmTyLD1wWP8PGCzZpuImre.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Hiam Abbass",
+    "Order": 9,
+    "Character": "Freysa",
+    "TmdbId": 765,
+    "CreditId": "5790caebc3a36865eb00965a",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/2cz9mO3qhUQeGdVHzWkS2Pwx94l.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Lennie James",
+    "Order": 10,
+    "Character": "Mister Cotton",
+    "TmdbId": 1120,
+    "CreditId": "579a3f939251411328003a68",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/lUcouck90jXNzyJr5uBJJiYMHAN.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "David Dastmalchian",
+    "Order": 11,
+    "Character": "Coco",
+    "TmdbId": 83854,
+    "CreditId": "5790cae49251414b32004b2c",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/eLafwcpL64CqzwjjSgKpO7Rv4ae.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Sean Young",
+    "Order": 12,
+    "Character": "Rachael",
+    "TmdbId": 586,
+    "CreditId": "59d71988c3a36861ec0075ad",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/yfJADYt6xYPpg1g7Z7TTW0bcL2s.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Edward James Olmos",
+    "Order": 13,
+    "Character": "Gaff",
+    "TmdbId": 587,
+    "CreditId": "58c7f555c3a3683df300ebb6",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/yleTij2PUEgaMLw8xYbLAt7UqIo.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Barkhad Abdi",
+    "Order": 14,
+    "Character": "Doc Badger",
+    "TmdbId": 1261694,
+    "CreditId": "5790cadb9251416bb400174b",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/utfeg8GnGyW3aVNcRfhII9RCXB6.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Wood Harris",
+    "Order": 15,
+    "Character": "Nandez",
+    "TmdbId": 65829,
+    "CreditId": "59d0ff15c3a368792901f225",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/v3puIl2KncqUd6amDyD1Y0crzkF.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Tómas Lemarquis",
+    "Order": 16,
+    "Character": "File Clerk",
+    "TmdbId": 18818,
+    "CreditId": "59d7193692514124c50076e5",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/1R9CGk1kSePpzfRjdJjGfK1Pz5x.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Sallie Harmsen",
+    "Order": 17,
+    "Character": "Replicant",
+    "TmdbId": 544096,
+    "CreditId": "59ec24d492514119fc004ca9",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/2JNkJ7UUAKwLkaPeOdzi0bQUzK4.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Loren Peta",
+    "Order": 18,
+    "Character": "Rachael Double",
+    "TmdbId": 1901526,
+    "CreditId": "59d85140c3a368620001f20f",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/XuWNeNu7g3stBzPX6n2PjNBOr1.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Mark Arnold",
+    "Order": 19,
+    "Character": "Interviewer",
+    "TmdbId": 119893,
+    "CreditId": "59d0ff3792514114520205d7",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/dTfoxBUC6jpZry0ijlS8g4Y5cuS.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Krista Kosonen",
+    "Order": 20,
+    "Character": "Doxie #2",
+    "TmdbId": 72482,
+    "CreditId": "59bd9a579251413525018b41",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/7iW2mxbxBgV5sX2y0fSY78lewW4.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Elarica Johnson",
+    "Order": 21,
+    "Character": "Doxie #3",
+    "TmdbId": 89387,
+    "CreditId": "59d0fee69251411452020546",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/iiMfkwUSyUki9Q6YbfoVBOGSheq.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "David Benson",
+    "Order": 22,
+    "Character": "Liberace Look-A-Like",
+    "TmdbId": 1380395,
+    "CreditId": "58265038c3a368360b0104b3",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/5xA8oSRBfzBN9QAOC0MAI8Jqb0.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Kingston Taylor",
+    "Order": 23,
+    "Character": "Boy with One Ear",
+    "TmdbId": 1813834,
+    "CreditId": "5912d5b7c3a36864ec04c406",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/pwivZzhZf1JCV49YBlkRycUGGTB.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Ben Thompson",
+    "Order": 24,
+    "Character": "Elvis Look-A-Like",
+    "TmdbId": 1898019,
+    "CreditId": "59d0ff69925141468f015aba",
+    "Images": []
+   },
+   {
+    "Name": "Ellie Wright",
+    "Order": 25,
+    "Character": "Little Ellie",
+    "TmdbId": 1813833,
+    "CreditId": "5912d5a5c3a36864d40537f8",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/xF7ww2FNyQGOOKQ1kdH4COkQEZ5.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Suzie Kennedy",
+    "Order": 26,
+    "Character": "Marilyn Look-A-Like",
+    "TmdbId": 1148965,
+    "CreditId": "59d0ffa4925141142f01fbe2",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/qEm5LOUIvVYp5iTGALj76pxkcyr.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Stephen Triffitt",
+    "Order": 27,
+    "Character": "Sinatra Look-A-Like",
+    "TmdbId": 1898020,
+    "CreditId": "59d0ffd1925141468f015b8e",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/eoiyH3cJ7wpa5ED9Dbpehl8poXg.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Vilma Szécsi",
+    "Order": 28,
+    "Character": "Angry Old Lady",
+    "TmdbId": 2146286,
+    "CreditId": "5bbcf5ac0e0a26660801fdab",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/6bQYnho9aP3WEdQQa4PaO0jxbKr.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Kincsö Sánta",
+    "Order": 29,
+    "Character": "Birthday Girl",
+    "TmdbId": 2146289,
+    "CreditId": "5bbcf5d20e0a26661801dbd3",
+    "Images": []
+   }
+  ],
+  "Crew": [
+   {
+    "Name": "Denis Villeneuve",
+    "Order": 0,
+    "Job": "Director",
+    "Department": "Directing",
+    "TmdbId": 137427,
+    "CreditId": "5e924dda4202280015e26cec",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/xzQYqb4nR8xT7Zdw5itbEL9K3fd.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Michael Green",
+    "Order": 1,
+    "Job": "Screenplay",
+    "Department": "Writing",
+    "TmdbId": 191937,
+    "CreditId": "5725289bc3a368305a001789",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/A7zyzx1U5Fc5Cq979WkbEVpSepy.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Hampton Fancher",
+    "Order": 2,
+    "Job": "Screenplay",
+    "Department": "Writing",
+    "TmdbId": 583,
+    "CreditId": "55311eedc3a36841250026a4",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/qCvawbNUyrgLhaN2KqFqpy1IO2w.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Cynthia Sikes",
+    "Order": 3,
+    "Job": "Producer",
+    "Department": "Production",
+    "TmdbId": 96765,
+    "CreditId": "575d80c692514103e80000c9",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/nZS8wr4pWpwx4QINfkqxa7bMhfH.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Bud Yorkin",
+    "Order": 4,
+    "Job": "Producer",
+    "Department": "Production",
+    "TmdbId": 69946,
+    "CreditId": "575d80da92514124430027c6",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/m66f4nyjCb4Zeg4JUoYzpzt4zWL.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Broderick Johnson",
+    "Order": 5,
+    "Job": "Producer",
+    "Department": "Production",
+    "TmdbId": 47285,
+    "CreditId": "575d808fc3a36836e5000110",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/lACnKu6Mxx5fGpWLt8qh0oevaQU.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Andrew A. Kosove",
+    "Order": 6,
+    "Job": "Producer",
+    "Department": "Production",
+    "TmdbId": 47286,
+    "CreditId": "575d809ec3a36836e5000113",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/kkH3S2KsRd3XSH91GpeQmr7Raq0.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Ridley Scott",
+    "Order": 7,
+    "Job": "Executive Producer",
+    "Department": "Production",
+    "TmdbId": 578,
+    "CreditId": "5913da47c3a36842690046c7",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/zABJmN9opmqD4orWl3KSdCaSo7Q.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Bill Carraro",
+    "Order": 8,
+    "Job": "Executive Producer",
+    "Department": "Production",
+    "TmdbId": 23420,
+    "CreditId": "575d8015c3a3681318002658",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/qt2ZxwwjbQe0kytalxbdLka6Vzn.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Frank Giustra",
+    "Order": 9,
+    "Job": "Executive Producer",
+    "Department": "Production",
+    "TmdbId": 1634532,
+    "CreditId": "575d807ec3a36837310000fe",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/alOHWwtgXhWfu2CnJMocWpcDU4l.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Tim Gamble",
+    "Order": 10,
+    "Job": "Executive Producer",
+    "Department": "Production",
+    "TmdbId": 1121571,
+    "CreditId": "575d8037c3a36837910000d2",
+    "Images": []
+   },
+   {
+    "Name": "Val Hill",
+    "Order": 11,
+    "Job": "Executive Producer",
+    "Department": "Production",
+    "TmdbId": 2146313,
+    "CreditId": "5bbcf81d925141378e01d391",
+    "Images": []
+   },
+   {
+    "Name": "Yale Badik",
+    "Order": 12,
+    "Job": "Executive Producer",
+    "Department": "Production",
+    "TmdbId": 2146311,
+    "CreditId": "5bbcf7b80e0a266603020a2e",
+    "Images": []
+   },
+   {
+    "Name": "Roger Deakins",
+    "Order": 13,
+    "Job": "Director of Photography",
+    "Department": "Camera",
+    "TmdbId": 151,
+    "CreditId": "556e6bbb925141157d00070f",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/y6tSqoDvl705BnLELyCuUqQujfv.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Hans Zimmer",
+    "Order": 14,
+    "Job": "Original Music Composer",
+    "Department": "Sound",
+    "TmdbId": 947,
+    "CreditId": "59d5446d9251414b4501d233",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/tpQnDeHY15szIXvpnhlprufz4d.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Francine Maisler",
+    "Order": 15,
+    "Job": "Casting",
+    "Department": "Production",
+    "TmdbId": 6410,
+    "CreditId": "575d80f0c3a36879bb000852",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/j97ggx3P5YRTbXEtPorQq9ge9JH.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Hampton Fancher",
+    "Order": 16,
+    "Job": "Story",
+    "Department": "Writing",
+    "TmdbId": 583,
+    "CreditId": "55311ee2c3a3680a940022d1",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/qCvawbNUyrgLhaN2KqFqpy1IO2w.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Philip K. Dick",
+    "Order": 17,
+    "Job": "Characters",
+    "Department": "Writing",
+    "TmdbId": 584,
+    "CreditId": "5b850698c3a368654e049b71",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/8J46Z9coRCXApsA5WoTC2CLAaOw.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Eniko Fulop",
+    "Order": 18,
+    "Job": "Stunts",
+    "Department": "Crew",
+    "TmdbId": 2069535,
+    "CreditId": "5b2bce8992514164fc007f17",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/xoYaskmRgAKexpobG0D9EpkHiN0.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Dennis Gassner",
+    "Order": 19,
+    "Job": "Production Design",
+    "Department": "Art",
+    "TmdbId": 4248,
+    "CreditId": "5912d6319251414ead04e108",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/5ROXnKVaSNU0bAHrvfBn4Xs7jsL.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Ryota Nakanishi",
+    "Order": 20,
+    "Job": "Thanks",
+    "Department": "Crew",
+    "TmdbId": 1276612,
+    "CreditId": "5b2bc85ec3a3687d11008681",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/jibdyC9IDxprL1EhdgaoxTg3tR1.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Bill Corso",
+    "Order": 21,
+    "Job": "Makeup Artist",
+    "Department": "Costume & Make-Up",
+    "TmdbId": 15017,
+    "CreditId": "5bbcfb02925141378e01d965",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/9TMCAH1HQ0dUfCr3Dj7zSYpIrre.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Donald Mowat",
+    "Order": 22,
+    "Job": "Makeup Department Head",
+    "Department": "Costume & Make-Up",
+    "TmdbId": 1315700,
+    "CreditId": "575d80fc925141536d00090b",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/ikdaVXZvwu9wdgbtJWbeokb0fVL.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Martin De Boer",
+    "Order": 23,
+    "Job": "Stunt Double",
+    "Department": "Crew",
+    "TmdbId": 1452866,
+    "CreditId": "5b2bcd070e0a260862007d55",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/1rW45F4VBwBzaK2kXdCOQ6vjJuj.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Martin De Boer",
+    "Order": 24,
+    "Job": "Stunts",
+    "Department": "Crew",
+    "TmdbId": 1452866,
+    "CreditId": "5b2bcebf92514164d50059b4",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/1rW45F4VBwBzaK2kXdCOQ6vjJuj.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Mark Mangini",
+    "Order": 25,
+    "Job": "Supervising Sound Editor",
+    "Department": "Sound",
+    "TmdbId": 8376,
+    "CreditId": "59d8f4d2c3a36861ec028eb2",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/q2LCMIFYJZlZtSCIJjwS8zfAnfE.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Pierre Gill",
+    "Order": 26,
+    "Job": "Second Unit Director of Photography",
+    "Department": "Camera",
+    "TmdbId": 25744,
+    "CreditId": "59f8ff2e9251414c31005702",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/3ArCxrQdXL1s7l16EsOvbPxsZpd.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "John Nelson",
+    "Order": 27,
+    "Job": "Visual Effects Supervisor",
+    "Department": "Visual Effects",
+    "TmdbId": 1456374,
+    "CreditId": "575d81ee925141189e0014f5",
+    "Images": []
+   },
+   {
+    "Name": "Domonkos Párdányi",
+    "Order": 28,
+    "Job": "Stunt Coordinator",
+    "Department": "Crew",
+    "TmdbId": 1392635,
+    "CreditId": "5b2bcd17c3a3687d1d009663",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/9zTwg9gBZtsfEGizQeIUn09pWf3.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Ron Bartlett",
+    "Order": 29,
+    "Job": "Sound Re-Recording Mixer",
+    "Department": "Sound",
+    "TmdbId": 16177,
+    "CreditId": "59d8f49892514124c90290fd",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/AmFG81joHLkvnh4Io20TdCCBk8P.jpg"
+     }
+    ]
+   }
+  ]
+ },
+ "Studio": "Alcon Entertainment",
+ "YoutubeTrailerId": "geFtxCSz8xI",
+ "Certifications": [
+  {
+   "Country": "AU",
+   "Certification": "MA 15+"
+  },
+  {
+   "Country": "BE",
+   "Certification": "18"
+  },
+  {
+   "Country": "BG",
+   "Certification": "D"
+  },
+  {
+   "Country": "BR",
+   "Certification": "14"
+  },
+  {
+   "Country": "CH",
+   "Certification": "16"
+  },
+  {
+   "Country": "CZ",
+   "Certification": "15+"
+  },
+  {
+   "Country": "DE",
+   "Certification": "12"
+  },
+  {
+   "Country": "DK",
+   "Certification": "15"
+  },
+  {
+   "Country": "ES",
+   "Certification": "12"
+  },
+  {
+   "Country": "FI",
+   "Certification": "K-16"
+  },
+  {
+   "Country": "FR",
+   "Certification": "TP"
+  },
+  {
+   "Country": "GB",
+   "Certification": "15"
+  },
+  {
+   "Country": "GR",
+   "Certification": "K15"
+  },
+  {
+   "Country": "HK",
+   "Certification": "IIB"
+  },
+  {
+   "Country": "HU",
+   "Certification": "16"
+  },
+  {
+   "Country": "IE",
+   "Certification": "15A"
+  },
+  {
+   "Country": "IL",
+   "Certification": "14"
+  },
+  {
+   "Country": "IT",
+   "Certification": "T"
+  },
+  {
+   "Country": "KR",
+   "Certification": "15"
+  },
+  {
+   "Country": "LT",
+   "Certification": "N-13"
+  },
+  {
+   "Country": "NL",
+   "Certification": "16"
+  },
+  {
+   "Country": "NO",
+   "Certification": "15"
+  },
+  {
+   "Country": "NZ",
+   "Certification": "R13"
+  },
+  {
+   "Country": "PL",
+   "Certification": "16"
+  },
+  {
+   "Country": "PT",
+   "Certification": "M/14"
+  },
+  {
+   "Country": "RO",
+   "Certification": "18"
+  },
+  {
+   "Country": "RU",
+   "Certification": "16+"
+  },
+  {
+   "Country": "SE",
+   "Certification": "15"
+  },
+  {
+   "Country": "SK",
+   "Certification": "15"
+  },
+  {
+   "Country": "TH",
+   "Certification": "15"
+  },
+  {
+   "Country": "TR",
+   "Certification": "15+"
+  },
+  {
+   "Country": "TW",
+   "Certification": "輔導12歲級"
+  },
+  {
+   "Country": "US",
+   "Certification": "R"
+  },
+  {
+   "Country": "VN",
+   "Certification": "C18"
+  }
+ ],
+ "Status": null,
+ "Collection": {
+  "TmdbId": 422837,
+  "Name": "Blade Runner Collection",
+  "Images": null,
+  "Overview": null,
+  "Translations": null,
+  "Parts": null
+ },
+ "Homepage": "http://bladerunnermovie.com/"
+}

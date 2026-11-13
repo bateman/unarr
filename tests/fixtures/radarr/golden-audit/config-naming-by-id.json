@@ -1,0 +1,16 @@
+{
+  "body": {
+    "colonReplacementFormat": "smart",
+    "id": 1,
+    "movieFolderFormat": "{Movie CleanTitle} ({Release Year}) {tmdb-{TmdbId}}",
+    "renameMovies": true,
+    "replaceIllegalCharacters": true,
+    "standardMovieFormat": "{Movie CleanTitle} {(Release Year)} {tmdb-{TmdbId}} - {edition-{Edition Tags}} {[MediaInfo 3D]}{[Custom Formats]}{[Quality Full]}{[Mediainfo AudioCodec}{ Mediainfo AudioChannels]}{[MediaInfo VideoDynamicRangeType]}{[Mediainfo VideoCodec]}{-Release Group}"
+  },
+  "recordedAt": "2026-11-13T15:38:04Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/config/naming/1"
+  },
+  "status": 200
+}

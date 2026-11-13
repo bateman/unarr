@@ -339,6 +339,9 @@ maintainer's daily driver.
 | `GET /api/v3/series` p99 under 10 ms | 5.8 ms on the fixture's 38 series; 53 to 59 ms on 950 series (104 ms with Radarr beside it and a refresh running). No target was set for `GET /api/v3/movie`: 338 ms at p99 on 2,123 movies | phase 1 review | Missed at 950 series; deferred |
 | Container image under 15 MB compressed | Not built since both UIs are embedded. The binary is 29.6 MiB, 11.9 MiB under `gzip -9` | | Unknown; close to the limit |
 | Cold start to first response under 1 s | 0.20 to 0.46 s on the fixtures, import included (0.46 s with both personalities); 6.1 s on the scaled libraries, which is the import of both databases, done once | 4c | Met on the fixtures; the first start on a large library is the import |
+| Idle RSS under 60 MB, measured again at the end of 4d | Both personalities on 950 series and 2,123 movies, started on the databases they had already imported: 0.23 s to the first answer, 23.6 MB at start, 36.0 MB after a minute idle, 38.2 MB after five. Radarr alone: 27.3 MB idle, 89.2 MB while it reads its 2,123 movies, 28.5 MB two minutes later. The run that imports both databases peaks at 197 MB and settles at 72 MB after a minute, 91 MB after the libraries have been read | 4d | Met idle, in the steady state the homelab runs; the import is the peak |
+| `GET /api/v3/series` p99 under 10 ms, measured again at the end of 4d | 70 ms on 950 series, with Radarr beside it. No target for the movie routes: `GET /api/v3/movie` 289 ms on 2,123 movies, `GET /api/v3/collection` 123 ms, a page of `GET /api/v3/history` 150 ms | 4d | Missed; deferred, as in 4c |
+| Container image under 15 MB compressed, measured again at the end of 4d | The binary with both UIs embedded is 30.6 MiB, 12.3 MiB under `gzip -9` | 4d | Unknown as an image; the binary alone is close to the limit |
 
 First measurement, skeleton only (one `system/status` route per personality):
 1.7 MiB binary, 4.3 MB idle RSS, unchanged after 500 requests.
@@ -390,7 +393,7 @@ from 86 ms to 50 ms by not decoding the cast (2.5 MB of JSON no resource
 shows) and loading only the queue's series for the queue, and the rest is the
 950 rows' remaining JSON columns (35 ms) and the season statistics over
 25,000 episodes (15 ms). The design target of 10 ms at that size is not met;
-section 18 says what the next step would be.
+section 19 says what the next step would be.
 
 The idle figures are what `malloc_trim` leaves after the import: without it
 the scaled fixture's import left the process at 232 MB, holding pages it no
@@ -496,7 +499,7 @@ the list once per page load and follows the changes over SignalR, so it
 bought fifty milliseconds nobody waits for at the cost of a second code
 path and a validity rule tied to the clock. Ten milliseconds at this size
 is, for 2.3 MB of JSON built on request, not within reach of an index or
-a query; section 18 asks which library size the target is for.
+a query; section 19 asks which library size the target is for.
 
 End of phase 4a (release build, x86-64, in the cloud session, a client
 script over the loopback). The two real fixtures: Sonarr's (38 series,
@@ -536,7 +539,7 @@ thirty-second timer for a personality without a scheduler (36 MB).
 `GET /movie` builds 0.7 MB of JSON in 15 ms for 193 movies, the files'
 media info and the alternative titles included; at 2,000 movies that is
 the same order as `/series` at 950 series, and the same question
-(section 18).
+(section 19).
 
 End of phase 4b (release build, x86-64, in the cloud session, a client
 script over the loopback). The Radarr fixture with the mock indexers and
@@ -574,7 +577,7 @@ same kind; the two were ported apart, as the originals are, and share
 nothing. Whether to bring the patterns down (compile fewer of them, or
 build them so that the two parsers share the automata they have in
 common) or to state the target per personality is an open question
-(section 18). The history page takes twice what it did in 4a (10.6 ms):
+(section 19). The history page takes twice what it did in 4a (10.6 ms):
 each row's custom formats are now computed from the release title as the
 movie parser reads it, edition and group included, where 4a went without
 a parser.
@@ -1119,7 +1122,7 @@ the same libraries were not measured.
   or off, a scan remembers the extras next to episode files, a rename
   takes them along and deleting the episode file sends them to the
   recycling bin, as in the originals. Unarr drives no metadata consumer
-  (section 18), and the `MetadataFiles` rows are not imported. Of the
+  (section 19), and the `MetadataFiles` rows are not imported. Of the
   files that are not subtitles, a scan remembers only those named exactly
   as their episode file (an nfo): a rename gives an other extra the
   episode file's name and nothing else, which would turn a media
@@ -1146,7 +1149,7 @@ the same libraries were not measured.
   validation was off would keep being accepted. One process has one
   HTTP client, so with several personalities in one process
   (`--personalities sonarr,radarr`) the settings of the last one started
-  or saved apply to all (section 18).
+  or saved apply to all (section 19).
 - **The environment wins over the settings.** The originals' variables
   (`Sonarr__Server__Port`, `Sonarr__Auth__ApiKey`, `Sonarr__Log__Level`
   and the others of the Server, Auth, App, Log and Update sections that
@@ -1727,7 +1730,59 @@ the same libraries were not measured.
   held 256, since a scan that drops a hundred files sends four hundred
   at once and a listener that fell behind lost the oldest.
 
-## 18. Open questions
+## 18. Decisions taken in phase 4d
+
+- **The metadata server is asked for movies behind a movie-shaped trait**
+  (`movies::metadata::MovieMetadataProvider`), as section 7 decided for
+  the series side: `api.radarr.video` through Radarr's own HTTP client
+  and user agent, with every answer the tests need recorded under
+  `tests/fixtures/metadata/api.radarr.video/`. No test reaches the real
+  server: the original reached it through `scripts/mock-servarr.py` while
+  the goldens were recorded, and the replay asks the Rust mock for the
+  same files.
+- **A movie and the collection it brings are written in one order**, which
+  the original leaves to chance: the collection's row first, its refresh
+  queued, the titles, translations and credits written, then the movie's
+  metadata row once that command has ended (ten seconds at most). The
+  original lets the two commands race for the same row, so its popularity
+  and votes differ from one recording to the next; Unarr lets the movie's
+  own refresh have the last word.
+- **The settings writes follow each controller, not one shape.** Where
+  Radarr's rules differ from Sonarr's they are Radarr's: a quality
+  definition is validated against its neighbours, a profile keeps the
+  language its column holds and a taken name is the database's 409, a
+  profile in use by a movie, a list or a collection cannot go, a tag's
+  label is matched against the original's expression, a delay profile
+  takes the order it is sent with. The rules both originals share were
+  brought to Sonarr too (a release profile's indexer must exist, a host's
+  remote path is mapped once).
+- **A collection edited one by one raises its event** (the UI is told and
+  the collections' root folder check runs again); a bulk edit raises
+  none and queues the refresh of all of them, as the original does.
+- **The import lists name movies through the same service as the series'**
+  where the API is concerned, and through a movie-shaped one underneath:
+  the IMDb lists are fetched (the watchlist the maintainer syncs), the
+  rest keep their settings and are skipped. A list saved or added is
+  synced at once; the sync of every list waits for the twelve hours the
+  original's interval names, the sync of one list does not.
+- **The review's suggestion to share the two pipelines is declined**, with
+  the measurement that says why. After renaming series to movies and
+  episodes to items, the files the review named still differ in 40 to
+  100 per cent of their lines (`downloads/monitor.rs` 126 of 220,
+  `failed.rs` 392 of 490, `pending.rs` 717 of 650, `tracked.rs` 278 of
+  260): what they share is the shape, not the code. The types differ all
+  the way down (`TrackedDownload` against `TrackedMovieDownload`,
+  `Catalog` against `MovieCatalog`, the events each side raises), so
+  sharing them means a trait with six or eight associated types over
+  every pipeline stage, which buys no behaviour and puts both replays at
+  risk. Left as it is; the pieces that really are the same (the clients,
+  the decision specifications' engine, the custom formats, the history
+  and the queue's store) are already shared.
+- **`DeleteUpdateLogFiles` fails in Radarr** and does nothing in Sonarr:
+  the first is what the real Radarr does on an installation that never
+  updated, recorded; the second is what Sonarr's recording leaves unsaid.
+
+## 19. Open questions
 
 - Metadata provider: decided (section 7, option A) and implemented behind
   a trait. The switch to Unarr's own user agent towards the Servarr

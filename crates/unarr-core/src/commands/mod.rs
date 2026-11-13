@@ -215,6 +215,11 @@ pub enum CommandBody {
         monitored: bool,
     },
     ClearBlocklist,
+    /// Radarr's `RenameMovieFolderCommand`: a command its API takes and
+    /// no service runs, so it fails as it is dequeued.
+    RenameMovieFolder {
+        movie_ids: Vec<i64>,
+    },
     /// The recent log lines, emptied.
     ClearLog,
     /// The log files on disk, deleted.
@@ -313,6 +318,24 @@ pub enum CommandBody {
         movie_ids: Vec<i64>,
         is_new_movie: bool,
     },
+    /// Radarr's `MoveMovieCommand`: a movie folder moved after a path
+    /// edit.
+    MoveMovie {
+        movie_id: i64,
+        source_path: String,
+        destination_path: String,
+    },
+    /// Radarr's `BulkMoveMovieCommand`: the editor's move to a root
+    /// folder, `(movie id, source path)` each.
+    BulkMoveMovie {
+        destination_root_folder: String,
+        movies: Vec<(i64, String)>,
+    },
+    /// Radarr's `RefreshCollectionsCommand`: the collections named, or
+    /// every one that is due.
+    RefreshCollections {
+        collection_ids: Vec<i64>,
+    },
     /// Radarr's `MoviesSearchCommand`.
     MoviesSearch {
         movie_ids: Vec<i64>,
@@ -359,6 +382,10 @@ const NAMES: &[(&str, &str)] = &[
     (
         "ClearBlocklist",
         "NzbDrone.Core.Blocklisting.ClearBlocklistCommand",
+    ),
+    (
+        "RenameMovieFolder",
+        "NzbDrone.Core.MediaFiles.Commands.RenameMovieFolderCommand",
     ),
     (
         "ClearLog",
@@ -437,6 +464,15 @@ const NAMES: &[(&str, &str)] = &[
     (
         "RefreshMovie",
         "NzbDrone.Core.Movies.Commands.RefreshMovieCommand",
+    ),
+    (
+        "RefreshCollections",
+        "NzbDrone.Core.Movies.Commands.RefreshCollectionsCommand",
+    ),
+    ("MoveMovie", "NzbDrone.Core.Movies.Commands.MoveMovieCommand"),
+    (
+        "BulkMoveMovie",
+        "NzbDrone.Core.Movies.Commands.BulkMoveMovieCommand",
     ),
     (
         "RenameMovie",
@@ -608,6 +644,11 @@ impl CommandBody {
     /// knows is no command here, as it is none in the original.
     pub fn parse_for(personality: crate::Personality, name: &str, body: &Value) -> Option<CommandBody> {
         let radarr = personality == crate::Personality::Radarr;
+        if radarr && name.eq_ignore_ascii_case("ApplicationCheckUpdate") {
+            return Some(CommandBody::ApplicationUpdateCheck {
+                install_major_update: body["installMajorUpdate"].as_bool().unwrap_or(false),
+            });
+        }
         // The names both applications have with different bodies.
         if radarr && name.eq_ignore_ascii_case("RenameFiles") {
             return Some(CommandBody::RenameMovieFiles {
@@ -650,6 +691,9 @@ impl CommandBody {
                 | CommandBody::RescanMovie { .. }
                 | CommandBody::DownloadedMoviesScan { .. }
                 | CommandBody::RefreshMovie { .. }
+                | CommandBody::RefreshCollections { .. }
+                | CommandBody::MoveMovie { .. }
+                | CommandBody::BulkMoveMovie { .. }
                 | CommandBody::RenameMovieFiles { .. }
                 | CommandBody::ManualImportMovies { .. }
                 | CommandBody::RenameMovie { .. }
@@ -667,6 +711,15 @@ impl CommandBody {
                             | CommandBody::Housekeeping
                             | CommandBody::CleanUpRecycleBin
                             | CommandBody::Backup { .. }
+                            | CommandBody::ResetQualityDefinitions { .. }
+                            | CommandBody::ImportListSync { .. }
+                            | CommandBody::ClearBlocklist
+                            | CommandBody::ClearLog
+                            | CommandBody::DeleteLogFiles
+                            | CommandBody::DeleteUpdateLogFiles
+                            | CommandBody::ResetApiKey
+                            | CommandBody::ApplicationUpdateCheck { .. }
+                            | CommandBody::RenameMovieFolder { .. }
                     )
             }
             _ => !movies,
@@ -819,6 +872,31 @@ impl CommandBody {
             "RenameMovie" => CommandBody::RenameMovie {
                 movie_ids: ints(&body["movieIds"]),
             },
+            "MoveMovie" => CommandBody::MoveMovie {
+                movie_id: body["movieId"].as_i64().unwrap_or(0),
+                source_path: body["sourcePath"].as_str().unwrap_or("").to_string(),
+                destination_path: body["destinationPath"].as_str().unwrap_or("").to_string(),
+            },
+            "BulkMoveMovie" => CommandBody::BulkMoveMovie {
+                destination_root_folder: body["destinationRootFolder"].as_str().unwrap_or("").to_string(),
+                movies: body["movies"]
+                    .as_array()
+                    .into_iter()
+                    .flatten()
+                    .map(|m| {
+                        (
+                            m["movieId"].as_i64().unwrap_or(0),
+                            m["sourcePath"].as_str().unwrap_or("").to_string(),
+                        )
+                    })
+                    .collect(),
+            },
+            "RenameMovieFolder" => CommandBody::RenameMovieFolder {
+                movie_ids: ints(&body["movieIds"]),
+            },
+            "RefreshCollections" => CommandBody::RefreshCollections {
+                collection_ids: ints(&body["collectionIds"]),
+            },
             "RefreshMovie" => CommandBody::RefreshMovie {
                 movie_ids: ints(&body["movieIds"]),
                 is_new_movie: body["isNewMovie"].as_bool().unwrap_or(false),
@@ -850,6 +928,7 @@ impl CommandBody {
             CommandBody::MissingEpisodeSearch { .. } => "MissingEpisodeSearch",
             CommandBody::CutoffUnmetEpisodeSearch { .. } => "CutoffUnmetEpisodeSearch",
             CommandBody::ClearBlocklist => "ClearBlocklist",
+            CommandBody::RenameMovieFolder { .. } => "RenameMovieFolder",
             CommandBody::ClearLog => "ClearLog",
             CommandBody::DeleteLogFiles => "DeleteLogFiles",
             CommandBody::DeleteUpdateLogFiles => "DeleteUpdateLogFiles",
@@ -874,12 +953,34 @@ impl CommandBody {
             CommandBody::RescanMovie { .. } => "RescanMovie",
             CommandBody::DownloadedMoviesScan { .. } => "DownloadedMoviesScan",
             CommandBody::RefreshMovie { .. } => "RefreshMovie",
+            CommandBody::RefreshCollections { .. } => "RefreshCollections",
+            CommandBody::MoveMovie { .. } => "MoveMovie",
+            CommandBody::BulkMoveMovie { .. } => "BulkMoveMovie",
             CommandBody::RenameMovieFiles { .. } => "RenameFiles",
             CommandBody::ManualImportMovies { .. } => "ManualImport",
             CommandBody::RenameMovie { .. } => "RenameMovie",
             CommandBody::MoviesSearch { .. } => "MoviesSearch",
             CommandBody::MissingMoviesSearch { .. } => "MissingMoviesSearch",
             CommandBody::CutoffUnmetMoviesSearch { .. } => "CutoffUnmetMoviesSearch",
+        }
+    }
+
+    /// Whether the API may force `SendUpdatesToClient` on. The originals'
+    /// controller sets it for every posted command, but a command whose
+    /// class declares the property read-only keeps what it declares.
+    pub fn client_updates_are_fixed(&self) -> bool {
+        matches!(self, CommandBody::RenameMovieFolder { .. })
+    }
+
+    /// How an application spells this command's name. Radarr calls the
+    /// update check `ApplicationCheckUpdate` where Sonarr has
+    /// `ApplicationUpdateCheck`; the rest they spell alike.
+    pub fn name_in(&self, personality: crate::Personality) -> &'static str {
+        match (personality, self) {
+            (crate::Personality::Radarr, CommandBody::ApplicationUpdateCheck { .. }) => {
+                "ApplicationCheckUpdate"
+            }
+            _ => self.name(),
         }
     }
 
@@ -908,6 +1009,7 @@ impl CommandBody {
                 | CommandBody::UpdateSceneMapping
                 | CommandBody::CleanUpRecycleBin
                 | CommandBody::ResetQualityDefinitions { .. }
+                | CommandBody::RenameMovieFolder { .. }
         )
     }
 
@@ -917,6 +1019,7 @@ impl CommandBody {
             CommandBody::RssSync
                 | CommandBody::RefreshSeries { .. }
                 | CommandBody::RefreshMovie { .. }
+                | CommandBody::RefreshCollections { .. }
                 | CommandBody::ProcessMonitoredDownloads
                 | CommandBody::DownloadedEpisodesScan { .. }
                 | CommandBody::DownloadedMoviesScan { .. }
@@ -941,7 +1044,15 @@ impl CommandBody {
                 | CommandBody::RenameMovie { .. }
                 | CommandBody::MoveSeries { .. }
                 | CommandBody::BulkMoveSeries { .. }
+                | CommandBody::MoveMovie { .. }
+                | CommandBody::BulkMoveMovie { .. }
         )
+    }
+
+    /// `Command.IsTypeExclusive`: only Radarr's commands carry it, and
+    /// only its import list sync sets it.
+    pub fn type_exclusive(&self) -> bool {
+        matches!(self, CommandBody::ImportListSync { .. })
     }
 
     /// `UpdateScheduledTask`: whether running it counts as the scheduled
@@ -950,6 +1061,7 @@ impl CommandBody {
         match self {
             CommandBody::RefreshSeries { series_ids, .. } => series_ids.is_empty(),
             CommandBody::RefreshMovie { movie_ids, .. } => movie_ids.is_empty(),
+            CommandBody::RefreshCollections { collection_ids } => collection_ids.is_empty(),
             CommandBody::ImportListSync { definition_id } => definition_id.is_none(),
             CommandBody::Backup { kind } => *kind == BackupType::Scheduled,
             _ => true,
@@ -958,7 +1070,9 @@ impl CommandBody {
 
     pub fn completion_message(&self) -> Option<&'static str> {
         match self {
-            CommandBody::RefreshSeries { .. } | CommandBody::RefreshMovie { .. } => Some("Completed"),
+            CommandBody::RefreshSeries { .. }
+            | CommandBody::RefreshMovie { .. }
+            | CommandBody::RefreshCollections { .. } => Some("Completed"),
             _ => None,
         }
     }
@@ -972,6 +1086,9 @@ impl CommandBody {
             }
             CommandBody::ResetQualityDefinitions { reset_titles } => {
                 m.insert("resetTitles".into(), json!(reset_titles));
+            }
+            CommandBody::RenameMovieFolder { movie_ids } => {
+                m.insert("movieIds".into(), json!(movie_ids));
             }
             CommandBody::SeasonSearch {
                 series_id,
@@ -1099,6 +1216,31 @@ impl CommandBody {
                 m.insert("movieIds".into(), json!(movie_ids));
                 m.insert("isNewMovie".into(), json!(is_new_movie));
             }
+            CommandBody::RefreshCollections { collection_ids } => {
+                m.insert("collectionIds".into(), json!(collection_ids));
+            }
+            CommandBody::MoveMovie {
+                movie_id,
+                source_path,
+                destination_path,
+            } => {
+                m.insert("movieId".into(), json!(movie_id));
+                m.insert("sourcePath".into(), json!(source_path));
+                m.insert("destinationPath".into(), json!(destination_path));
+            }
+            CommandBody::BulkMoveMovie {
+                destination_root_folder,
+                movies,
+            } => {
+                m.insert("destinationRootFolder".into(), json!(destination_root_folder));
+                m.insert(
+                    "movies".into(),
+                    json!(movies
+                        .iter()
+                        .map(|(id, path)| json!({"movieId": id, "sourcePath": path}))
+                        .collect::<Vec<_>>()),
+                );
+            }
             CommandBody::MissingMoviesSearch {
                 filter_key,
                 filter_value,
@@ -1174,7 +1316,7 @@ impl CommandModel {
 
     /// `Command` as `PolymorphicWriteOnlyJsonConverter` writes it: the
     /// declared properties of the class and its base, nulls left out.
-    pub fn body_json(&self) -> Value {
+    pub fn body_json(&self, personality: crate::Personality) -> Value {
         let mut m = self.body.own_properties();
         m.insert("sendUpdatesToClient".into(), json!(self.send_updates_to_client));
         m.insert(
@@ -1193,7 +1335,7 @@ impl CommandModel {
             m.insert("isTypeExclusive".into(), json!(exclusive));
         }
         m.insert("isLongRunning".into(), json!(self.body.is_long_running()));
-        m.insert("name".into(), json!(self.body.name()));
+        m.insert("name".into(), json!(self.body.name_in(personality)));
         if let Some(t) = self.last_execution_time {
             m.insert("lastExecutionTime".into(), json!(crate::time::format_utc(t)));
         }
@@ -1284,6 +1426,7 @@ impl CommandQueue {
                 return Ok(existing.clone());
             }
             let sends = body.sends_updates();
+            let type_exclusive = body.type_exclusive();
             let mut model = CommandModel {
                 id: self.next_id.fetch_add(1, Ordering::SeqCst),
                 body,
@@ -1302,15 +1445,16 @@ impl CommandQueue {
                 client_user_agent: None,
                 last_execution_time: None,
                 last_start_time: None,
-                type_exclusive: (self.personality == crate::Personality::Radarr).then_some(false),
+                type_exclusive: (self.personality == crate::Personality::Radarr).then_some(type_exclusive),
             };
             adjust(&mut model);
             items.push(model.clone());
             model
         };
         let stored = model.clone();
+        let personality = self.personality;
         self.db
-            .call(move |conn| store::commands::insert(conn, &stored))
+            .call(move |conn| store::commands::insert(conn, personality, &stored))
             .await?;
         self.changed.notify_waiters();
         Ok(model)

@@ -14,16 +14,17 @@ use crate::routes::queue::timespan;
 use crate::state::AppState;
 
 /// `CommandResource`, nulls left out.
-pub fn command_resource(c: &CommandModel) -> Value {
+pub fn command_resource(personality: unarr_core::Personality, c: &CommandModel) -> Value {
     let mut m = Map::new();
     let time = unarr_core::time::format_utc;
     m.insert("id".into(), json!(c.id));
-    m.insert("name".into(), json!(c.name()));
-    m.insert("commandName".into(), json!(split_camel_case(c.name())));
+    let name = c.body.name_in(personality);
+    m.insert("name".into(), json!(name));
+    m.insert("commandName".into(), json!(split_camel_case(name)));
     if let Some(message) = &c.message {
         m.insert("message".into(), json!(message));
     }
-    m.insert("body".into(), c.body_json());
+    m.insert("body".into(), c.body_json(personality));
     m.insert("priority".into(), json!(c.priority.as_str()));
     m.insert("status".into(), json!(c.status.as_str()));
     m.insert("result".into(), json!(c.result.as_str()));
@@ -97,6 +98,9 @@ pub async fn start(
     // `SendUpdates`, false unless the request sets it.
     let forced_updates = !matches!(command, CommandBody::DownloadedMoviesScan { .. })
         || body["sendUpdates"].as_bool().unwrap_or(false);
+    // A command whose class declares the property read-only keeps what it
+    // declares, whatever the controller assigns.
+    let fixed_updates = command.client_updates_are_fixed();
     // The originals push manual imports ahead of the rest.
     let priority = if matches!(
         command,
@@ -115,12 +119,18 @@ pub async fn start(
         .queue()
         .push_with(command, priority, CommandTrigger::Manual, state.now(), |m| {
             m.suppress_messages = !sends;
-            m.send_updates_to_client = forced_updates;
+            if !fixed_updates {
+                m.send_updates_to_client = forced_updates;
+            }
             m.client_user_agent = agent;
         })
         .await?;
     let current = runtime.queue().get(model.id).await?.unwrap_or(model);
-    Ok((StatusCode::CREATED, Json(command_resource(&current))).into_response())
+    Ok((
+        StatusCode::CREATED,
+        Json(command_resource(state.personality(), &current)),
+    )
+        .into_response())
 }
 
 /// `GET /command`: started first, then by status, the higher priority
@@ -133,12 +143,16 @@ pub async fn list(State(state): State<AppState>) -> ApiResult<Json<Vec<Value>>> 
             .cmp(&b.status.list_rank())
             .then_with(|| b.priority.cmp(&a.priority))
     });
-    Ok(Json(all.iter().map(command_resource).collect()))
+    Ok(Json(
+        all.iter()
+            .map(|c| command_resource(state.personality(), c))
+            .collect(),
+    ))
 }
 
 pub async fn get(State(state): State<AppState>, Path(id): Path<i64>) -> ApiResult<Json<Value>> {
     match state.commands()?.queue().get(id).await? {
-        Some(c) => Ok(Json(command_resource(&c))),
+        Some(c) => Ok(Json(command_resource(state.personality(), &c))),
         None => Err(ApiError::NotFound),
     }
 }

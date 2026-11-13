@@ -1,0 +1,1 @@
+{"id": "{id:customformat-create}", "name": "Library Test 2", "includeCustomFormatWhenRenaming": true, "specifications": [{"name": "Test", "implementation": "ReleaseTitleSpecification", "negate": false, "required": false, "fields": [{"name": "value", "value": "\\bTEST\\b"}]}]}

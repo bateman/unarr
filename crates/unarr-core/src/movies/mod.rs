@@ -6,17 +6,22 @@
 //! where the two differ.
 
 pub mod availability;
+pub mod collections;
 pub mod commands;
 pub mod decision;
 pub mod downloads;
 pub mod formats;
 pub mod housekeeping;
 pub mod import;
+pub mod importlists;
+pub mod library;
+pub mod metadata;
 pub mod model;
 pub mod naming;
 pub mod notifications;
 pub mod parser;
 pub mod quality;
+pub mod refresh;
 pub mod request;
 pub mod search;
 pub mod store;

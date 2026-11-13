@@ -1,0 +1,1006 @@
+{
+  "body": [
+    {
+      "character": "Paul Atreides",
+      "creditTmdbId": "5b4d01bac3a36823d803cd45",
+      "id": 44174,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/dFxpwRpmzpVfP1zjluH68DeQhyj.jpg",
+          "url": "/MediaCoverProxy/272c52f04fadecd7119785dc6254a2ae3fff5144a46a6cf07cd526d544ed88ec/dFxpwRpmzpVfP1zjluH68DeQhyj.jpg"
+        }
+      ],
+      "movieMetadataId": 298,
+      "order": 0,
+      "personName": "Timothée Chalamet",
+      "personTmdbId": 1190668,
+      "type": "cast"
+    },
+    {
+      "character": "Lady Jessica Atreides",
+      "creditTmdbId": "5b90742fc3a368222e002f41",
+      "id": 44175,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/ty8ZPzaCBBlqIr5qzpOXI24iC8j.jpg",
+          "url": "/MediaCoverProxy/d1a919b4fdce8cf3d93711b7ec94b84269c413b141e56c4b3a778503879b2abe/ty8ZPzaCBBlqIr5qzpOXI24iC8j.jpg"
+        }
+      ],
+      "movieMetadataId": 298,
+      "order": 1,
+      "personName": "Rebecca Ferguson",
+      "personTmdbId": 933238,
+      "type": "cast"
+    },
+    {
+      "character": "Duke Leto Atreides",
+      "creditTmdbId": "5c50bc070e0a2612cccedcb3",
+      "id": 44176,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/dW5U5yrIIPmMjRThR9KT2xH6nTz.jpg",
+          "url": "/MediaCoverProxy/03c5615d818547426be39d107605f51aabf448a110990ef2dea03df7d339af0a/dW5U5yrIIPmMjRThR9KT2xH6nTz.jpg"
+        }
+      ],
+      "movieMetadataId": 298,
+      "order": 2,
+      "personName": "Oscar Isaac",
+      "personTmdbId": 25072,
+      "type": "cast"
+    },
+    {
+      "character": "Duncan Idaho",
+      "creditTmdbId": "5c6610319251412fc6017577",
+      "id": 44177,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/3troAR6QbSb6nUFMDu61YCCWLKa.jpg",
+          "url": "/MediaCoverProxy/490df79da8dc22bd241782aa06e5f55eda23be650da0f9da72b2ee66ff0d4e88/3troAR6QbSb6nUFMDu61YCCWLKa.jpg"
+        }
+      ],
+      "movieMetadataId": 298,
+      "order": 3,
+      "personName": "Jason Momoa",
+      "personTmdbId": 117642,
+      "type": "cast"
+    },
+    {
+      "character": "Baron Vladimir Harkonnen",
+      "creditTmdbId": "5c364b61c3a368273c1c5fee",
+      "id": 44178,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/mW7xmtGV4y79kQGn0zkKVGDMAmw.jpg",
+          "url": "/MediaCoverProxy/923573453816b82de51584ea99b7b2b3bc1154af7bdb4a7d39f6050bf6c341c6/mW7xmtGV4y79kQGn0zkKVGDMAmw.jpg"
+        }
+      ],
+      "movieMetadataId": 298,
+      "order": 4,
+      "personName": "Stellan Skarsgård",
+      "personTmdbId": 1640,
+      "type": "cast"
+    },
+    {
+      "character": "Thufir Hawat",
+      "creditTmdbId": "61468a6985c0a20043d24c95",
+      "id": 44179,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/z2weSPo4sdMNj47tP5o0me41r2z.jpg",
+          "url": "/MediaCoverProxy/cf33eff2fbdd45d27d13c900fca4eabf1ca91cba9ca02d84630864e20dfb2d2e/z2weSPo4sdMNj47tP5o0me41r2z.jpg"
+        }
+      ],
+      "movieMetadataId": 298,
+      "order": 5,
+      "personName": "Stephen McKinley Henderson",
+      "personTmdbId": 196179,
+      "type": "cast"
+    },
+    {
+      "character": "Gurney Halleck",
+      "creditTmdbId": "5c64750d9251412fb4feec3e",
+      "id": 44180,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/7QpneI3HoZCCDVPyWx3p3t7yeo7.jpg",
+          "url": "/MediaCoverProxy/3b78a66fe8c79c96d389778267fcf583a51ed8ea44f50d2aaef88efd4c23f5ed/7QpneI3HoZCCDVPyWx3p3t7yeo7.jpg"
+        }
+      ],
+      "movieMetadataId": 298,
+      "order": 6,
+      "personName": "Josh Brolin",
+      "personTmdbId": 16851,
+      "type": "cast"
+    },
+    {
+      "character": "Stilgar",
+      "creditTmdbId": "5c55434c0e0a26567ac66f76",
+      "id": 44181,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/zfRID0jx8DKBluPGU9xtk9sZWUt.jpg",
+          "url": "/MediaCoverProxy/459a87699257e5b5fa00700539906a807799847df449287ce7e6604a6bcb0a86/zfRID0jx8DKBluPGU9xtk9sZWUt.jpg"
+        }
+      ],
+      "movieMetadataId": 298,
+      "order": 7,
+      "personName": "Javier Bardem",
+      "personTmdbId": 3810,
+      "type": "cast"
+    },
+    {
+      "character": "Dr. Liet Kynes",
+      "creditTmdbId": "5e37991c4ca676001252ea99",
+      "id": 44182,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/gp5h6rOrqBrIGgID4AMd58O6Ow6.jpg",
+          "url": "/MediaCoverProxy/f866d96d388e97620386f172e71b6677feb4f9b79cc8d7617158cb530311183d/gp5h6rOrqBrIGgID4AMd58O6Ow6.jpg"
+        }
+      ],
+      "movieMetadataId": 298,
+      "order": 8,
+      "personName": "Sharon Duncan-Brewster",
+      "personTmdbId": 195666,
+      "type": "cast"
+    },
+    {
+      "character": "Dr. Wellington Yueh",
+      "creditTmdbId": "5c8e6e129251410ff4a1c158",
+      "id": 44183,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/tkROVkn6yoqF3AcQ4hneOursHXR.jpg",
+          "url": "/MediaCoverProxy/cc325200a378050f14471e403fbc97473eb6927762964c823ec9e40f4dac0933/tkROVkn6yoqF3AcQ4hneOursHXR.jpg"
+        }
+      ],
+      "movieMetadataId": 298,
+      "order": 9,
+      "personName": "Chang Chen",
+      "personTmdbId": 1622,
+      "type": "cast"
+    },
+    {
+      "character": "Beast Rabban Harkonnen",
+      "creditTmdbId": "5c342d10c3a36851f8b52ac9",
+      "id": 44184,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/snk6JiXOOoRjPtHU5VMoy6qbd32.jpg",
+          "url": "/MediaCoverProxy/b45033b6bf844bbadeec87ef0d7def713c329b4641f073909a0bb9ce75565ee1/snk6JiXOOoRjPtHU5VMoy6qbd32.jpg"
+        }
+      ],
+      "movieMetadataId": 298,
+      "order": 10,
+      "personName": "Dave Bautista",
+      "personTmdbId": 543530,
+      "type": "cast"
+    },
+    {
+      "character": "Piter de Vries",
+      "creditTmdbId": "5c6c967b0e0a261e069f48b6",
+      "id": 44185,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/eLafwcpL64CqzwjjSgKpO7Rv4ae.jpg",
+          "url": "/MediaCoverProxy/e761be3d84c83b38724ab708b7401ae172ae230cf9230a69f44204a23050cca1/eLafwcpL64CqzwjjSgKpO7Rv4ae.jpg"
+        }
+      ],
+      "movieMetadataId": 298,
+      "order": 11,
+      "personName": "David Dastmalchian",
+      "personTmdbId": 83854,
+      "type": "cast"
+    },
+    {
+      "character": "Chani",
+      "creditTmdbId": "5c5241fa0e0a2612ccd0fc9c",
+      "id": 44186,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/1qup8tSt95HLbcy2c2xrx4iJNxv.jpg",
+          "url": "/MediaCoverProxy/5c8ccb6f1555dd2fb887d13df36517a0987eb8f41132ee2d1198c65d00ec4084/1qup8tSt95HLbcy2c2xrx4iJNxv.jpg"
+        }
+      ],
+      "movieMetadataId": 298,
+      "order": 12,
+      "personName": "Zendaya",
+      "personTmdbId": 505710,
+      "type": "cast"
+    },
+    {
+      "character": "Reverend Mother Mohiam",
+      "creditTmdbId": "5c3e88ba9251415524ae5623",
+      "id": 44187,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/7fhg5FCcl0VfYERP5D0unpybqgx.jpg",
+          "url": "/MediaCoverProxy/34852c592945f70a34199b70cf2b5307b1391cf6f29965cf40bdc5679fd22609/7fhg5FCcl0VfYERP5D0unpybqgx.jpg"
+        }
+      ],
+      "movieMetadataId": 298,
+      "order": 13,
+      "personName": "Charlotte Rampling",
+      "personTmdbId": 44079,
+      "type": "cast"
+    },
+    {
+      "character": "Jamis",
+      "creditTmdbId": "5e3799110c27100013728d9c",
+      "id": 44188,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/bqycmpUrpISeLzQniiYwAZ5X1RN.jpg",
+          "url": "/MediaCoverProxy/1e11d2aebcb253db9bcd7503b7c5713027d17d55a09312b8c002db6b50072e6e/bqycmpUrpISeLzQniiYwAZ5X1RN.jpg"
+        }
+      ],
+      "movieMetadataId": 298,
+      "order": 14,
+      "personName": "Babs Olusanmokun",
+      "personTmdbId": 205923,
+      "type": "cast"
+    },
+    {
+      "character": "Herald of the Change",
+      "creditTmdbId": "61098872dcf875004856d399",
+      "id": 44189,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/johpHbzqrue6XDG63vapfugGbnn.jpg",
+          "url": "/MediaCoverProxy/9216fb3c036d91de91e6acc7e05111d771fc34183d9d950fbeae105a3fd24887/johpHbzqrue6XDG63vapfugGbnn.jpg"
+        }
+      ],
+      "movieMetadataId": 298,
+      "order": 15,
+      "personName": "Benjamin Clementine",
+      "personTmdbId": 3185383,
+      "type": "cast"
+    },
+    {
+      "character": "Bene Gesserit Sister",
+      "creditTmdbId": "6109894e255dba002de4620e",
+      "id": 44190,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/aEGdIch9eRzJcsAGbF7mAZPUiXt.jpg",
+          "url": "/MediaCoverProxy/9afaa42d069899f21d98d4c1c80489b38b99f92b53a045b2a53edfd00523746f/aEGdIch9eRzJcsAGbF7mAZPUiXt.jpg"
+        }
+      ],
+      "movieMetadataId": 298,
+      "order": 16,
+      "personName": "Souad Faress",
+      "personTmdbId": 261927,
+      "type": "cast"
+    },
+    {
+      "character": "Shadout Mapes",
+      "creditTmdbId": "60621d77d7a70a007430f1df",
+      "id": 44191,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/nlSIvTWzMEzZGljKYgpZxGcsJtv.jpg",
+          "url": "/MediaCoverProxy/2cf3215956a6384063d13b535f2d5bd343b946959ee6c7035aa70e5607bda25f/nlSIvTWzMEzZGljKYgpZxGcsJtv.jpg"
+        }
+      ],
+      "movieMetadataId": 298,
+      "order": 17,
+      "personName": "Golda Rosheuvel",
+      "personTmdbId": 1856875,
+      "type": "cast"
+    },
+    {
+      "character": "Lieutenant Lanville",
+      "creditTmdbId": "604c3692ae28110029cfb466",
+      "id": 44192,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/jHdxbT6n3ToYKw0DVFIUkva86SO.jpg",
+          "url": "/MediaCoverProxy/17bf7276f9e0aa08a24fb5b175944d438c1b8146c57579d2b9e2a499d5ad6ecc/jHdxbT6n3ToYKw0DVFIUkva86SO.jpg"
+        }
+      ],
+      "movieMetadataId": 298,
+      "order": 18,
+      "personName": "Roger Yuan",
+      "personTmdbId": 2974,
+      "type": "cast"
+    },
+    {
+      "character": "Arrakeen Residency Gardener",
+      "creditTmdbId": "617019e6a097dc00920af978",
+      "id": 44193,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/33szNjKtUsTxlwV039Gec2PKQS2.jpg",
+          "url": "/MediaCoverProxy/6127a0899f3a8cad387f14070518c65a13fe251a70049a88203998ef7c1393ce/33szNjKtUsTxlwV039Gec2PKQS2.jpg"
+        }
+      ],
+      "movieMetadataId": 298,
+      "order": 19,
+      "personName": "Seun Shote",
+      "personTmdbId": 2411333,
+      "type": "cast"
+    },
+    {
+      "character": "Sardaukar Bashar",
+      "creditTmdbId": "617019e6a097dc0065e51a15",
+      "id": 44194,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/3K3dDytqtTSaGrDZ3qOHYpJUGea.jpg",
+          "url": "/MediaCoverProxy/dec2ea8a3d443d1b27801e671ca7d900afd9e7de09e4f645350d019ba6f38a5b/3K3dDytqtTSaGrDZ3qOHYpJUGea.jpg"
+        }
+      ],
+      "movieMetadataId": 298,
+      "order": 20,
+      "personName": "Neil Bell",
+      "personTmdbId": 178629,
+      "type": "cast"
+    },
+    {
+      "character": "Hawat Specialist",
+      "creditTmdbId": "5e446b483dd12600165a37d1",
+      "id": 44195,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/S0YPiYOSikfqjR6HMuxoFDzh0f.jpg",
+          "url": "/MediaCoverProxy/cfe57eb63ee4a96a15b80a81bfd56b0f224d890d6c6d88ae0439fcd06c858e3c/S0YPiYOSikfqjR6HMuxoFDzh0f.jpg"
+        }
+      ],
+      "movieMetadataId": 298,
+      "order": 21,
+      "personName": "Oliver Ryan",
+      "personTmdbId": 1638835,
+      "type": "cast"
+    },
+    {
+      "character": "Harkonnen Trooper",
+      "creditTmdbId": "5e446b99596a91001301aefc",
+      "id": 44196,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/86LlKrbvYVmR4Ca9fARwUoY5TgJ.jpg",
+          "url": "/MediaCoverProxy/c9b2d29eb7fa6c0c28694777167fd8ae2ee3ae98f06caf01b96df29aacdb1ddf/86LlKrbvYVmR4Ca9fARwUoY5TgJ.jpg"
+        }
+      ],
+      "movieMetadataId": 298,
+      "order": 22,
+      "personName": "Stephen Collins",
+      "personTmdbId": 1929092,
+      "type": "cast"
+    },
+    {
+      "character": "Harkonnen Trooper",
+      "creditTmdbId": "5e446a8a41465c001ad29ace",
+      "id": 44197,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/zsARROMEHNANOAI8wntYcn3BpOM.jpg",
+          "url": "/MediaCoverProxy/e483b0d0eda1fcbeeeb374ee007e4395706573221b6a541f2fac1bf4b3bcc256/zsARROMEHNANOAI8wntYcn3BpOM.jpg"
+        }
+      ],
+      "movieMetadataId": 298,
+      "order": 23,
+      "personName": "Charlie Rawes",
+      "personTmdbId": 1083177,
+      "type": "cast"
+    },
+    {
+      "character": "Harkonnen Trooper",
+      "creditTmdbId": "616d8946ba131b008e16d46f",
+      "id": 44198,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/vwMG8213y9UiCDXBPIUwzhVxUcX.jpg",
+          "url": "/MediaCoverProxy/177724021d029d59f2f1a447c72f3dcfa945ef1b1109289250d761b4622ddfe5/vwMG8213y9UiCDXBPIUwzhVxUcX.jpg"
+        }
+      ],
+      "movieMetadataId": 298,
+      "order": 24,
+      "personName": "Richard Carter",
+      "personTmdbId": 3275311,
+      "type": "cast"
+    },
+    {
+      "character": "Sardaukar Assassin",
+      "creditTmdbId": "617019e6d4b9d9008a7b018e",
+      "id": 44199,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/reXJcitDu5hsCO7Hlra2ZFzr6Nn.jpg",
+          "url": "/MediaCoverProxy/d5a5347cc3de7a7677a47d67ac6ec6334de52cb82f5d5eeb8690e3425337a58d/reXJcitDu5hsCO7Hlra2ZFzr6Nn.jpg"
+        }
+      ],
+      "movieMetadataId": 298,
+      "order": 25,
+      "personName": "Benjamin Dilloway",
+      "personTmdbId": 1269682,
+      "type": "cast"
+    },
+    {
+      "character": "Shamir",
+      "creditTmdbId": "610988955541fa005d8e28cf",
+      "id": 44200,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/kMH7mX7rzVrrPuWL0qVeYExXVcx.jpg",
+          "url": "/MediaCoverProxy/6bd4011247ace78083d4e16e75ec6dbd68381e15ddc5afc04c705ab0f7739878/kMH7mX7rzVrrPuWL0qVeYExXVcx.jpg"
+        }
+      ],
+      "movieMetadataId": 298,
+      "order": 26,
+      "personName": "Elmi Rashid Elmi",
+      "personTmdbId": 3063993,
+      "type": "cast"
+    },
+    {
+      "character": "Tanat",
+      "creditTmdbId": "617019e6d4b9d9008a7b0191",
+      "id": 44201,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/ywvojfXK3uzw0IgVEVg3j00GPuy.jpg",
+          "url": "/MediaCoverProxy/e456b2ea92b6602b86725146c49421afb3075955da7e1af7da276031272028cf/ywvojfXK3uzw0IgVEVg3j00GPuy.jpg"
+        }
+      ],
+      "movieMetadataId": 298,
+      "order": 27,
+      "personName": "Tachia Newall",
+      "personTmdbId": 1466868,
+      "type": "cast"
+    },
+    {
+      "character": "Female Fremen",
+      "creditTmdbId": "5e35cc0c4ca676001a513c4a",
+      "id": 44202,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/8vRsNhtxFzYsHQItIKwcMW9flts.jpg",
+          "url": "/MediaCoverProxy/a56995871d5647bd6f6e12e2aeb667b1f0f395df873d046f60f4cbf9e0c7dd35/8vRsNhtxFzYsHQItIKwcMW9flts.jpg"
+        }
+      ],
+      "movieMetadataId": 298,
+      "order": 28,
+      "personName": "Gloria Obianyo",
+      "personTmdbId": 1982903,
+      "type": "cast"
+    },
+    {
+      "character": "Male Fremen",
+      "creditTmdbId": "6195ce78fc5f060046a85373",
+      "id": 44203,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/lNpDOJn9wMkMg8XLqTvdwxDcztL.jpg",
+          "url": "/MediaCoverProxy/a4cea812b957eb62b5f675fe2ac93b195cce5d9d662db899ae0cef1bb9f0fd06/lNpDOJn9wMkMg8XLqTvdwxDcztL.jpg"
+        }
+      ],
+      "movieMetadataId": 298,
+      "order": 29,
+      "personName": "Fehinti Balogun",
+      "personTmdbId": 2160722,
+      "type": "cast"
+    },
+    {
+      "creditTmdbId": "58920db99251412dd10093b4",
+      "department": "Directing",
+      "id": 44204,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/xzQYqb4nR8xT7Zdw5itbEL9K3fd.jpg",
+          "url": "/MediaCoverProxy/f1f92277f4d6a4c1a19cd552b63656bc5355a396878b6e402a15dd88f654e3e3/xzQYqb4nR8xT7Zdw5itbEL9K3fd.jpg"
+        }
+      ],
+      "job": "Director",
+      "movieMetadataId": 298,
+      "order": 0,
+      "personName": "Denis Villeneuve",
+      "personTmdbId": 137427,
+      "type": "crew"
+    },
+    {
+      "creditTmdbId": "5c6dada90e0a266dacad0df3",
+      "department": "Writing",
+      "id": 44205,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/xzQYqb4nR8xT7Zdw5itbEL9K3fd.jpg",
+          "url": "/MediaCoverProxy/f1f92277f4d6a4c1a19cd552b63656bc5355a396878b6e402a15dd88f654e3e3/xzQYqb4nR8xT7Zdw5itbEL9K3fd.jpg"
+        }
+      ],
+      "job": "Screenplay",
+      "movieMetadataId": 298,
+      "order": 1,
+      "personName": "Denis Villeneuve",
+      "personTmdbId": 137427,
+      "type": "crew"
+    },
+    {
+      "creditTmdbId": "5c6dad950e0a267f9d9a1f7d",
+      "department": "Writing",
+      "id": 44206,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/vHWaxFjztf880pXp1PJwyI26oeB.jpg",
+          "url": "/MediaCoverProxy/764a470892f9142725b6813d7a8adec989f5013ba3077da1e83a63cd1b16cf76/vHWaxFjztf880pXp1PJwyI26oeB.jpg"
+        }
+      ],
+      "job": "Screenplay",
+      "movieMetadataId": 298,
+      "order": 2,
+      "personName": "Eric Roth",
+      "personTmdbId": 27,
+      "type": "crew"
+    },
+    {
+      "creditTmdbId": "5c6dadd992514129d5051200",
+      "department": "Writing",
+      "id": 44207,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/n5JF0cYCWe8AUqb4Sto042rnG4e.jpg",
+          "url": "/MediaCoverProxy/2b29b73cba2750327031e434ad002fbc58d88a948054851ba81961e28b499fe7/n5JF0cYCWe8AUqb4Sto042rnG4e.jpg"
+        }
+      ],
+      "job": "Screenplay",
+      "movieMetadataId": 298,
+      "order": 3,
+      "personName": "Jon Spaihts",
+      "personTmdbId": 564940,
+      "type": "crew"
+    },
+    {
+      "creditTmdbId": "5be8c8cb0e0a263bf80350b9",
+      "department": "Production",
+      "id": 44208,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/xzQYqb4nR8xT7Zdw5itbEL9K3fd.jpg",
+          "url": "/MediaCoverProxy/f1f92277f4d6a4c1a19cd552b63656bc5355a396878b6e402a15dd88f654e3e3/xzQYqb4nR8xT7Zdw5itbEL9K3fd.jpg"
+        }
+      ],
+      "job": "Producer",
+      "movieMetadataId": 298,
+      "order": 4,
+      "personName": "Denis Villeneuve",
+      "personTmdbId": 137427,
+      "type": "crew"
+    },
+    {
+      "creditTmdbId": "58e54dd29251412810030495",
+      "department": "Production",
+      "id": 44209,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/jTh9ngfGF8DQvKwGM8rXSmfbQTj.jpg",
+          "url": "/MediaCoverProxy/a948dcaab49d63feccaacf4b2b0933cf7cc18f31afde2c3893a23990119e9a4b/jTh9ngfGF8DQvKwGM8rXSmfbQTj.jpg"
+        }
+      ],
+      "job": "Producer",
+      "movieMetadataId": 298,
+      "order": 5,
+      "personName": "Mary Parent",
+      "personTmdbId": 114408,
+      "type": "crew"
+    },
+    {
+      "creditTmdbId": "58e54deb925141281903016f",
+      "department": "Production",
+      "id": 44210,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/jeRsKRHuSJcTdciWmkO6LrBULw2.jpg",
+          "url": "/MediaCoverProxy/a4d2867d000b231c9b7a279d212841840a948b3b2e4f95aaa2111ca58ddf6d80/jeRsKRHuSJcTdciWmkO6LrBULw2.jpg"
+        }
+      ],
+      "job": "Producer",
+      "movieMetadataId": 298,
+      "order": 6,
+      "personName": "Cale Boyter",
+      "personTmdbId": 17315,
+      "type": "crew"
+    },
+    {
+      "creditTmdbId": "5c8fbd8ec3a3681c954baf37",
+      "department": "Production",
+      "id": 44211,
+      "images": [],
+      "job": "Producer",
+      "movieMetadataId": 298,
+      "order": 7,
+      "personName": "Joseph M. Caracciolo Jr.",
+      "personTmdbId": 10570,
+      "type": "crew"
+    },
+    {
+      "creditTmdbId": "5c8fbcb69251410feda409f4",
+      "department": "Production",
+      "id": 44212,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/n5JF0cYCWe8AUqb4Sto042rnG4e.jpg",
+          "url": "/MediaCoverProxy/2b29b73cba2750327031e434ad002fbc58d88a948054851ba81961e28b499fe7/n5JF0cYCWe8AUqb4Sto042rnG4e.jpg"
+        }
+      ],
+      "job": "Executive Producer",
+      "movieMetadataId": 298,
+      "order": 8,
+      "personName": "Jon Spaihts",
+      "personTmdbId": 564940,
+      "type": "crew"
+    },
+    {
+      "creditTmdbId": "5c8fe3600e0a266237567ad2",
+      "department": "Production",
+      "id": 44213,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/fSIQqm9PqqyPexLDRU5WCwS76L6.jpg",
+          "url": "/MediaCoverProxy/19c053356aab08a4ce23842fb6457bf2af34db578f792d939183796d21e0b858/fSIQqm9PqqyPexLDRU5WCwS76L6.jpg"
+        }
+      ],
+      "job": "Executive Producer",
+      "movieMetadataId": 298,
+      "order": 9,
+      "personName": "Tanya Lapointe",
+      "personTmdbId": 1905971,
+      "type": "crew"
+    },
+    {
+      "creditTmdbId": "58e54e0bc3a36872ee033025",
+      "department": "Production",
+      "id": 44214,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/gRvTHmNKEqzyt2sGvpjrAvmloy0.jpg",
+          "url": "/MediaCoverProxy/0bc12748ca583d78799907f306042ae3d69aa458c77ab5aee555ea69057e19b9/gRvTHmNKEqzyt2sGvpjrAvmloy0.jpg"
+        }
+      ],
+      "job": "Executive Producer",
+      "movieMetadataId": 298,
+      "order": 10,
+      "personName": "Thomas Tull",
+      "personTmdbId": 54211,
+      "type": "crew"
+    },
+    {
+      "creditTmdbId": "58e54e2892514127f60318e0",
+      "department": "Production",
+      "id": 44215,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/aUkuwDrFeOZU5BAXk1JeMGC6iL3.jpg",
+          "url": "/MediaCoverProxy/47b9218438e0b1f909e493f5f9c290c9c1dab97e6545354bcab1a3b11db44479/aUkuwDrFeOZU5BAXk1JeMGC6iL3.jpg"
+        }
+      ],
+      "job": "Executive Producer",
+      "movieMetadataId": 298,
+      "order": 11,
+      "personName": "Brian Herbert",
+      "personTmdbId": 1790474,
+      "type": "crew"
+    },
+    {
+      "creditTmdbId": "6195c4a3cb75d1009010eaff",
+      "department": "Production",
+      "id": 44216,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/1W6lkgvwYUHj0DiJJZ5i98bMPG8.jpg",
+          "url": "/MediaCoverProxy/448d523b4b6d36ce3fc532623ea043eb48b8c1adcf4af3c279d392d4088aa3ff/1W6lkgvwYUHj0DiJJZ5i98bMPG8.jpg"
+        }
+      ],
+      "job": "Executive Producer",
+      "movieMetadataId": 298,
+      "order": 12,
+      "personName": "Richard P. Rubinstein",
+      "personTmdbId": 15000,
+      "type": "crew"
+    },
+    {
+      "creditTmdbId": "5c8fbd31c3a36861074ea1a2",
+      "department": "Production",
+      "id": 44217,
+      "images": [],
+      "job": "Executive Producer",
+      "movieMetadataId": 298,
+      "order": 13,
+      "personName": "Herb Gains",
+      "personTmdbId": 62739,
+      "type": "crew"
+    },
+    {
+      "creditTmdbId": "6195c56f497560002cf6ad09",
+      "department": "Production",
+      "id": 44218,
+      "images": [],
+      "job": "Executive Producer",
+      "movieMetadataId": 298,
+      "order": 14,
+      "personName": "John Harrison",
+      "personTmdbId": 13367,
+      "type": "crew"
+    },
+    {
+      "creditTmdbId": "58e54e5992514127f00325ca",
+      "department": "Production",
+      "id": 44219,
+      "images": [],
+      "job": "Executive Producer",
+      "movieMetadataId": 298,
+      "order": 15,
+      "personName": "Kim Herbert",
+      "personTmdbId": 1790476,
+      "type": "crew"
+    },
+    {
+      "creditTmdbId": "5ea9a19407291c001eec281f",
+      "department": "Production",
+      "id": 44220,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/ml68ZszfnKN5VGPQXkxqdVmrRW9.jpg",
+          "url": "/MediaCoverProxy/4e760ee5be048e220dcab06ad83bee89448bfd0d6f1e94518f9dfaa864bef163/ml68ZszfnKN5VGPQXkxqdVmrRW9.jpg"
+        }
+      ],
+      "job": "Executive Producer",
+      "movieMetadataId": 298,
+      "order": 16,
+      "personName": "Joshua Grode",
+      "personTmdbId": 2364439,
+      "type": "crew"
+    },
+    {
+      "creditTmdbId": "58e54e41c3a368732602fd47",
+      "department": "Production",
+      "id": 44221,
+      "images": [],
+      "job": "Executive Producer",
+      "movieMetadataId": 298,
+      "order": 17,
+      "personName": "Byron Merritt",
+      "personTmdbId": 1790475,
+      "type": "crew"
+    },
+    {
+      "creditTmdbId": "5c080b760e0a2636ce118c46",
+      "department": "Camera",
+      "id": 44222,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/cwj0aValmr7TGQ2OOQk5CAy1PWf.jpg",
+          "url": "/MediaCoverProxy/868141d7c98b9ba394aed0efb21b02ce617590d795d2e783c1d1f718e633d604/cwj0aValmr7TGQ2OOQk5CAy1PWf.jpg"
+        }
+      ],
+      "job": "Director of Photography",
+      "movieMetadataId": 298,
+      "order": 18,
+      "personName": "Greig Fraser",
+      "personTmdbId": 67113,
+      "type": "crew"
+    },
+    {
+      "creditTmdbId": "614bcfca1cac8c008cf2033c",
+      "department": "Sound",
+      "id": 44223,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/tpQnDeHY15szIXvpnhlprufz4d.jpg",
+          "url": "/MediaCoverProxy/1451db45c5eba0e11a43bf336906f9cd8760826b463d1d6152431b8ec9a3d0a2/tpQnDeHY15szIXvpnhlprufz4d.jpg"
+        }
+      ],
+      "job": "Music Producer",
+      "movieMetadataId": 298,
+      "order": 19,
+      "personName": "Hans Zimmer",
+      "personTmdbId": 947,
+      "type": "crew"
+    },
+    {
+      "creditTmdbId": "5c8fd3b69251410fe7a42229",
+      "department": "Sound",
+      "id": 44224,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/tpQnDeHY15szIXvpnhlprufz4d.jpg",
+          "url": "/MediaCoverProxy/1451db45c5eba0e11a43bf336906f9cd8760826b463d1d6152431b8ec9a3d0a2/tpQnDeHY15szIXvpnhlprufz4d.jpg"
+        }
+      ],
+      "job": "Original Music Composer",
+      "movieMetadataId": 298,
+      "order": 20,
+      "personName": "Hans Zimmer",
+      "personTmdbId": 947,
+      "type": "crew"
+    },
+    {
+      "creditTmdbId": "6195c8eeae3843006171ad18",
+      "department": "Production",
+      "id": 44225,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/6IG0L5UgQ8jzDkiCI6Umy9qAq9x.jpg",
+          "url": "/MediaCoverProxy/79c28c0d1c67a82f34c664b22b224fd0f7e83a1b48b2a3e9becf89c3f06be017/6IG0L5UgQ8jzDkiCI6Umy9qAq9x.jpg"
+        }
+      ],
+      "job": "Casting",
+      "movieMetadataId": 298,
+      "order": 21,
+      "personName": "Jina Jay",
+      "personTmdbId": 474,
+      "type": "crew"
+    },
+    {
+      "creditTmdbId": "6195c789a6e2d2008c5fa60f",
+      "department": "Production",
+      "id": 44226,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/j97ggx3P5YRTbXEtPorQq9ge9JH.jpg",
+          "url": "/MediaCoverProxy/993e077bd065a00184b2a7d547fa4a7abb52c2135659b524a7464ed52e91d7eb/j97ggx3P5YRTbXEtPorQq9ge9JH.jpg"
+        }
+      ],
+      "job": "Casting",
+      "movieMetadataId": 298,
+      "order": 22,
+      "personName": "Francine Maisler",
+      "personTmdbId": 6410,
+      "type": "crew"
+    },
+    {
+      "creditTmdbId": "6195d1c7cb75d10020ff5d2a",
+      "department": "Crew",
+      "id": 44227,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/jHdxbT6n3ToYKw0DVFIUkva86SO.jpg",
+          "url": "/MediaCoverProxy/17bf7276f9e0aa08a24fb5b175944d438c1b8146c57579d2b9e2a499d5ad6ecc/jHdxbT6n3ToYKw0DVFIUkva86SO.jpg"
+        }
+      ],
+      "job": "Fight Choreographer",
+      "movieMetadataId": 298,
+      "order": 23,
+      "personName": "Roger Yuan",
+      "personTmdbId": 2974,
+      "type": "crew"
+    },
+    {
+      "creditTmdbId": "6195d2f167b613004475df4d",
+      "department": "Crew",
+      "id": 44228,
+      "images": [],
+      "job": "Stunt Coordinator",
+      "movieMetadataId": 298,
+      "order": 24,
+      "personName": "Dave Judge",
+      "personTmdbId": 1402593,
+      "type": "crew"
+    },
+    {
+      "creditTmdbId": "66b742065b96d9a5cff299fc",
+      "department": "Camera",
+      "id": 44229,
+      "images": [],
+      "job": "Second Assistant \"A\" Camera",
+      "movieMetadataId": 298,
+      "order": 25,
+      "personName": "Tom Lane",
+      "personTmdbId": 1822636,
+      "type": "crew"
+    },
+    {
+      "creditTmdbId": "6265d0d70b5fd60f7576c8ee",
+      "department": "Crew",
+      "id": 44230,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/xoYaskmRgAKexpobG0D9EpkHiN0.jpg",
+          "url": "/MediaCoverProxy/8688aac766b372c267bf0e7990d2a5986f40e6cc20be3adbade4b319a08c3699/xoYaskmRgAKexpobG0D9EpkHiN0.jpg"
+        }
+      ],
+      "job": "Stunts",
+      "movieMetadataId": 298,
+      "order": 26,
+      "personName": "Eniko Fulop",
+      "personTmdbId": 2069535,
+      "type": "crew"
+    },
+    {
+      "creditTmdbId": "6195d4c4528b2e002b490146",
+      "department": "Crew",
+      "id": 44231,
+      "images": [
+        {
+          "coverType": "headshot",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/6QDtKNoL6DXwJHpzDrvWG3rKSwa.jpg",
+          "url": "/MediaCoverProxy/8a065f9fc7eac14ff10dea56c87c9df55e213d60c6540a7becedc1e522e3177c/6QDtKNoL6DXwJHpzDrvWG3rKSwa.jpg"
+        }
+      ],
+      "job": "Stunt Double",
+      "movieMetadataId": 298,
+      "order": 27,
+      "personName": "Magdalena Šittová",
+      "personTmdbId": 2832950,
+      "type": "crew"
+    },
+    {
+      "creditTmdbId": "66b745176cc9ee7dc09edd4d",
+      "department": "Sound",
+      "id": 44232,
+      "images": [],
+      "job": "Sound Designer",
+      "movieMetadataId": 298,
+      "order": 28,
+      "personName": "Dave Whitehead",
+      "personTmdbId": 1406066,
+      "type": "crew"
+    },
+    {
+      "creditTmdbId": "5e5d48ab87e63e001a7443d3",
+      "department": "Camera",
+      "id": 44233,
+      "images": [],
+      "job": "First Assistant \"A\" Camera",
+      "movieMetadataId": 298,
+      "order": 29,
+      "personName": "Jake Marcuson",
+      "personTmdbId": 1578871,
+      "type": "crew"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:39:08Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/credit?movieId=328"
+  },
+  "status": 200
+}

@@ -1,0 +1,25 @@
+{
+  "body": [
+    {
+      "attemptedValue": -1,
+      "errorCode": "GreaterThanOrEqualValidator",
+      "errorMessage": "'Minimum Age' must be greater than or equal to '0'.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "comparisonProperty": "",
+        "comparisonValue": 0,
+        "propertyName": "Minimum Age",
+        "propertyValue": -1
+      },
+      "propertyName": "MinimumAge",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:41:12Z",
+  "request": {
+    "body": "bodies/config-indexer-put-minimum-age.json",
+    "method": "PUT",
+    "path": "/api/v3/config/indexer/1"
+  },
+  "status": 400
+}

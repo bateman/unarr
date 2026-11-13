@@ -87,7 +87,8 @@ flows, under the downloads, TV or movies directory only:
     POST /mock/fs/remove?path=<absolute>              delete that file or folder
 
 Metadata upstreams. The originals call Skyhook, the Servarr services, XEM
-and TheTVDB's artwork host over HTTPS at fixed addresses, so the mock is
+and TheTVDB's artwork host (Sonarr), api.radarr.video, the Servarr services
+and TMDB's image host (Radarr) over HTTPS at fixed addresses, so the mock is
 also an HTTP proxy for them: the recording Sonarr is told to use it (its
 proxy settings, with certificate validation off), every `CONNECT` to one
 of METADATA_HOSTS is answered with TLS on `--tls-cert`/`--tls-key`, and
@@ -99,7 +100,9 @@ while goldens are recorded.
     /<host>/<path>?<query>   tests/fixtures/metadata/<host>/<path>[/<slug(query)>].json
                              (a `.status` file next to it holds a status other than 200)
     /artworks.thetvdb.com/…  an image from tests/fixtures/metadata/artwork/, by cover type
-    /services.sonarr.tv/v1/time  the current time, not a recording
+    /image.tmdb.org/…        the same; TMDB's paths name no cover type, so the poster
+    /services.sonarr.tv/v1/time, /radarr.servarr.com/v1/time  the current time, not a recording
+    /api.radarr.video/v1/movie/changed?since=…  one recording whatever the moment
 
 A missing file answers 404, unless `--record-metadata` is given: then the
 request is sent to the real host with the client's own user agent and
@@ -167,7 +170,21 @@ def slug(text: str) -> str:
 
 
 # The HTTPS hosts the originals fetch metadata and artwork from.
-METADATA_HOSTS = ("skyhook.sonarr.tv", "services.sonarr.tv", "thexem.info", "artworks.thetvdb.com", "api.simkl.com")
+METADATA_HOSTS = (
+    "skyhook.sonarr.tv",
+    "services.sonarr.tv",
+    "thexem.info",
+    "artworks.thetvdb.com",
+    "api.simkl.com",
+    # Radarr's: its metadata server, the Servarr services and TMDB's images.
+    "api.radarr.video",
+    "radarr.servarr.com",
+    "image.tmdb.org",
+)
+# The hosts that serve images: answered with a stand-in, never fetched.
+ARTWORK_HOSTS = ("artworks.thetvdb.com", "image.tmdb.org")
+# The Servarr services, whose `v1/time` is answered with the clock.
+SERVICES_HOSTS = ("services.sonarr.tv", "radarr.servarr.com")
 # Hosts whose fixtures are hand-made: a request for a missing one is never
 # passed on, since it would carry an account's token.
 NEVER_RECORDED = ("api.simkl.com",)
@@ -176,6 +193,10 @@ NEVER_RECORDED = ("api.simkl.com",)
 def metadata_name(path: str, query: str) -> str:
     """The fixture name, relative to `metadata/<host>/`, for a path and query."""
     name = path.strip("/") or "index"
+    # The movies changed since a moment: the moment is the clock's, and one
+    # recording answers for all of them.
+    if name == "v1/movie/changed":
+        return name
     if query:
         name += "/" + (slug(urllib.parse.unquote_plus(query)) or "query")
     return name
@@ -1045,16 +1066,16 @@ class Handler(http.server.BaseHTTPRequestHandler):
     # --- Metadata upstreams
 
     def metadata(self, host: str, path: str, query: str) -> None:
-        if host == "artworks.thetvdb.com":
+        if host in ARTWORK_HOSTS:
             name = artwork_file(path)
             image = self.fixtures / "metadata" / "artwork" / name
             content_type = "image/png" if name.endswith(".png") else "image/jpeg"
             return self.reply(200, image.read_bytes(), content_type, f"artwork/{name}")
-        if host == "services.sonarr.tv" and path == "/v1/time":
+        if host in SERVICES_HOSTS and path == "/v1/time":
             # The originals' system time check compares this with their own
             # clock; a recorded answer would be days off on the next run.
             now = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.%f0Z")
-            return self.json({"dateTimeUtc": now}, "services.sonarr.tv/v1/time (now)")
+            return self.json({"dateTimeUtc": now}, f"{host}/v1/time (now)")
         name = metadata_name(path, query)
         stored = self.fixtures / "metadata" / host / f"{name}.json"
         status_file = stored.with_suffix(".status")

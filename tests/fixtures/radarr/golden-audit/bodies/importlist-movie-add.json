@@ -1,0 +1,15 @@
+[
+ {
+  "tmdbId": 157336,
+  "title": "Interstellar",
+  "year": 2014,
+  "rootFolderPath": "/movies",
+  "qualityProfileId": 11,
+  "monitored": true,
+  "minimumAvailability": "released",
+  "addOptions": {
+   "monitor": "movieOnly",
+   "searchForMovie": false
+  }
+ }
+]

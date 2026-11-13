@@ -1,0 +1,209 @@
+{
+  "body": [
+    {
+      "added": "2026-11-13T12:40:47Z",
+      "alternateTitles": [
+        {
+          "id": 2864,
+          "movieMetadataId": 522,
+          "sourceType": "tmdb",
+          "title": "致命魔术"
+        },
+        {
+          "id": 2865,
+          "movieMetadataId": 522,
+          "sourceType": "tmdb",
+          "title": "Престиж"
+        },
+        {
+          "id": 2866,
+          "movieMetadataId": 522,
+          "sourceType": "tmdb",
+          "title": "El Truco Final (El Prestigio)"
+        },
+        {
+          "id": 2867,
+          "movieMetadataId": 522,
+          "sourceType": "tmdb",
+          "title": "Prestiż"
+        },
+        {
+          "id": 2868,
+          "movieMetadataId": 522,
+          "sourceType": "tmdb",
+          "title": "El Truco Final"
+        },
+        {
+          "id": 2869,
+          "movieMetadataId": 522,
+          "sourceType": "tmdb",
+          "title": "프레스티지"
+        },
+        {
+          "id": 2870,
+          "movieMetadataId": 522,
+          "sourceType": "tmdb",
+          "title": "プレステージ"
+        },
+        {
+          "id": 2871,
+          "movieMetadataId": 522,
+          "sourceType": "tmdb",
+          "title": "حیثیت"
+        },
+        {
+          "id": 2872,
+          "movieMetadataId": 522,
+          "sourceType": "tmdb",
+          "title": "O Grande Truque"
+        },
+        {
+          "id": 2873,
+          "movieMetadataId": 522,
+          "sourceType": "tmdb",
+          "title": "O Terceiro Passo"
+        },
+        {
+          "id": 2874,
+          "movieMetadataId": 522,
+          "sourceType": "tmdb",
+          "title": "Prestij"
+        },
+        {
+          "id": 2875,
+          "movieMetadataId": 522,
+          "sourceType": "tmdb",
+          "title": "A tökéletes trükk"
+        },
+        {
+          "id": 2876,
+          "movieMetadataId": 522,
+          "sourceType": "tmdb",
+          "title": "Ảo Thuật Gia Đấu Trí"
+        }
+      ],
+      "certification": "PG-13",
+      "cleanTitle": "theprestige",
+      "digitalRelease": "2009-09-01T00:00:00Z",
+      "folderName": "/movies/The Prestige (2006)",
+      "genres": [
+        "Drama",
+        "Mystery",
+        "Science Fiction"
+      ],
+      "hasFile": false,
+      "id": 332,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/Ag2B2KHKQPukjH7WutmgnnSNurZ.jpg",
+          "url": "/MediaCover/332/poster.jpg?h=cb6c8ba0aeaf56c924d7"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/yaExZh6qE2cfyK3o4kAMEq0mkgy.jpg",
+          "url": "/MediaCover/332/fanart.jpg?h=598403f8ae73bb3898bf"
+        }
+      ],
+      "imdbId": "tt0482571",
+      "inCinemas": "2006-10-19T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "19th century",
+        "based on novel or book",
+        "bittersweet",
+        "class",
+        "class society",
+        "competition",
+        "cruelty",
+        "diary",
+        "dying and death",
+        "hanging",
+        "hostility",
+        "illusion",
+        "jail cell",
+        "london, england",
+        "magic",
+        "magician",
+        "mind-blowing",
+        "nikola tesla",
+        "obsession",
+        "partner",
+        "rivalry",
+        "secret",
+        "steampunk",
+        "suicide",
+        "tesla coil",
+        "tricks",
+        "twist"
+      ],
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "The Prestige",
+      "overview": "A mysterious story of two magicians whose intense rivalry leads them on a life-long battle for supremacy -- full of obsession, deceit and jealousy with dangerous and deadly consequences.",
+      "path": "/movies/The Prestige (2006)",
+      "physicalRelease": "2007-06-06T00:00:00Z",
+      "popularity": 18.951,
+      "qualityProfileId": 4,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 8.5,
+          "votes": 1640237
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 66,
+          "votes": 0
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 77,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 8.212,
+          "votes": 18448
+        },
+        "trakt": {
+          "type": "user",
+          "value": 8.46334,
+          "votes": 30755
+        }
+      },
+      "releaseDate": "2007-06-06T00:00:00Z",
+      "rootFolderPath": "/movies",
+      "runtime": 131,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 0,
+      "sortTitle": "prestige",
+      "statistics": {
+        "movieFileCount": 0,
+        "movieFileQualities": [],
+        "releaseGroups": [],
+        "sizeOnDisk": 0
+      },
+      "status": "released",
+      "studio": "Warner Bros. Pictures",
+      "tags": [],
+      "title": "The Prestige",
+      "titleSlug": "1124",
+      "tmdbId": 1124,
+      "website": "https://www.warnerbros.co.uk/movies/prestige",
+      "year": 2006,
+      "youTubeTrailerId": "ObGVA1WOqyE"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:41:12Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/movie?tmdbId=1124"
+  },
+  "status": 200
+}

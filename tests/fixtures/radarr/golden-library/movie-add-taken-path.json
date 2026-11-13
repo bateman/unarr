@@ -1,0 +1,24 @@
+{
+  "body": [
+    {
+      "attemptedValue": "/movies/The Holdovers (2023)",
+      "errorCode": "MoviePathValidator",
+      "errorMessage": "Path '/movies/The Holdovers (2023)' is already configured for an existing movie",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "path": "/movies/The Holdovers (2023)",
+        "propertyName": "Path",
+        "propertyValue": "/movies/The Holdovers (2023)"
+      },
+      "propertyName": "Path",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:38:48Z",
+  "request": {
+    "body": "bodies/movie-add-taken-path.json",
+    "method": "POST",
+    "path": "/api/v3/movie"
+  },
+  "status": 400
+}

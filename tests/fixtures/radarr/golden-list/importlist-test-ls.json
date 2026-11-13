@@ -1,0 +1,18 @@
+{
+  "body": [
+    {
+      "attemptedValue": "ls12345678",
+      "errorMessage": "List ID must be 'top250', 'popular' or an IMDb user watchlist of the form 'ur12345678'",
+      "isWarning": false,
+      "propertyName": "ListId",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T13:34:16Z",
+  "request": {
+    "body": "bodies/importlist-test-ls.json",
+    "method": "POST",
+    "path": "/api/v3/importlist/test"
+  },
+  "status": 400
+}

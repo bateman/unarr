@@ -1,0 +1,25 @@
+{
+  "body": {
+    "enabled": true,
+    "id": 1,
+    "ignored": [
+      "cam",
+      "/\\bts\\b/i"
+    ],
+    "indexerId": 0,
+    "name": "No cams",
+    "required": [
+      "1080p"
+    ],
+    "tags": [
+      1
+    ]
+  },
+  "recordedAt": "2026-11-13T12:41:28Z",
+  "request": {
+    "body": "bodies/releaseprofile-create.json",
+    "method": "POST",
+    "path": "/api/v3/releaseprofile"
+  },
+  "status": 201
+}

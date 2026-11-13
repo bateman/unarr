@@ -1,0 +1,435 @@
+{
+  "body": [
+    {
+      "certification": "R",
+      "collection": {
+        "added": "0001-01-01T00:00:00Z",
+        "id": 0,
+        "images": [],
+        "minimumAvailability": "tba",
+        "monitored": false,
+        "qualityProfileId": 0,
+        "searchOnAdd": false,
+        "tags": [],
+        "title": "Alien: Romulus Collection",
+        "tmdbId": 1434946
+      },
+      "digitalRelease": "2024-10-15T00:00:00Z",
+      "folder": "Alien Romulus (2024) {tmdb-945961}",
+      "genres": [
+        "Horror",
+        "Science Fiction"
+      ],
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/2uSWRTtCG336nuBiG8jOTEUKSy8.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/iYqSQaWDttQIQzsxg9xHyg0bttG.jpg"
+        }
+      ],
+      "imdbId": "tt18412256",
+      "inCinemas": "2024-08-14T00:00:00Z",
+      "isExcluded": false,
+      "isExisting": true,
+      "isPopular": false,
+      "isRecommendation": false,
+      "isTrending": false,
+      "lists": [
+        1,
+        2
+      ],
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "overview": "While scavenging the deep ends of a derelict space station, a group of young space colonizers come face to face with the most terrifying life form in the universe.",
+      "physicalRelease": "2024-12-02T00:00:00Z",
+      "popularity": 31.7807,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 7.1,
+          "votes": 295979
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 64,
+          "votes": 0
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 80,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 7.159,
+          "votes": 4953
+        },
+        "trakt": {
+          "type": "user",
+          "value": 7.36965,
+          "votes": 23349
+        }
+      },
+      "remotePoster": "https://image.tmdb.org/t/p/original/2uSWRTtCG336nuBiG8jOTEUKSy8.jpg",
+      "runtime": 119,
+      "sortTitle": "alien romulus",
+      "status": "released",
+      "studio": "20th Century Studios",
+      "title": "Alien: Romulus",
+      "tmdbId": 945961,
+      "website": "https://www.20thcenturystudios.com/movies/alien-romulus",
+      "year": 2024,
+      "youTubeTrailerId": "x0XDEhP4MQs"
+    },
+    {
+      "certification": "R",
+      "collection": {
+        "added": "0001-01-01T00:00:00Z",
+        "id": 0,
+        "images": [],
+        "minimumAvailability": "tba",
+        "monitored": false,
+        "qualityProfileId": 0,
+        "searchOnAdd": false,
+        "tags": [],
+        "tmdbId": 0
+      },
+      "digitalRelease": "2021-10-19T00:00:00Z",
+      "folder": "Titane (2021) {tmdb-630240}",
+      "genres": [
+        "Drama",
+        "Thriller",
+        "Horror"
+      ],
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/mBlpouG3gqB8WLdP65LCOXb3jFb.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/dVOlJVHYRWx7DhMQRNLnbf5bT1q.jpg"
+        }
+      ],
+      "imdbId": "tt10944760",
+      "inCinemas": "2021-07-14T00:00:00Z",
+      "isExcluded": true,
+      "isExisting": false,
+      "isPopular": false,
+      "isRecommendation": false,
+      "isTrending": false,
+      "lists": [
+        1
+      ],
+      "originalLanguage": {
+        "id": 2,
+        "name": "French"
+      },
+      "overview": "A woman with a metal plate in her head from a childhood car accident embarks on a bizarre journey, bringing her into contact with a firefighter who's reunited with his missing son after 10 years.",
+      "physicalRelease": "2021-11-16T00:00:00Z",
+      "popularity": 4.4078,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 6.4,
+          "votes": 68306
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 75,
+          "votes": 0
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 90,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 6.327,
+          "votes": 1787
+        },
+        "trakt": {
+          "type": "user",
+          "value": 6.3301,
+          "votes": 2787
+        }
+      },
+      "remotePoster": "https://image.tmdb.org/t/p/original/mBlpouG3gqB8WLdP65LCOXb3jFb.jpg",
+      "runtime": 108,
+      "sortTitle": "titane",
+      "status": "released",
+      "studio": "Kazak Productions",
+      "title": "Titane",
+      "tmdbId": 630240,
+      "website": "https://titanemovie.com",
+      "year": 2021,
+      "youTubeTrailerId": "_DmFHh7KsWc"
+    },
+    {
+      "certification": "PG-13",
+      "collection": {
+        "added": "0001-01-01T00:00:00Z",
+        "id": 0,
+        "images": [],
+        "minimumAvailability": "tba",
+        "monitored": false,
+        "qualityProfileId": 0,
+        "searchOnAdd": false,
+        "tags": [],
+        "tmdbId": 0
+      },
+      "digitalRelease": "2009-09-01T00:00:00Z",
+      "folder": "The Prestige (2006) {tmdb-1124}",
+      "genres": [
+        "Drama",
+        "Mystery",
+        "Science Fiction"
+      ],
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/Ag2B2KHKQPukjH7WutmgnnSNurZ.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/yaExZh6qE2cfyK3o4kAMEq0mkgy.jpg"
+        }
+      ],
+      "imdbId": "tt0482571",
+      "inCinemas": "2006-10-19T00:00:00Z",
+      "isExcluded": false,
+      "isExisting": true,
+      "isPopular": false,
+      "isRecommendation": false,
+      "isTrending": false,
+      "lists": [
+        1
+      ],
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "overview": "A mysterious story of two magicians whose intense rivalry leads them on a life-long battle for supremacy -- full of obsession, deceit and jealousy with dangerous and deadly consequences.",
+      "physicalRelease": "2007-06-06T00:00:00Z",
+      "popularity": 18.951,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 8.5,
+          "votes": 1640237
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 66,
+          "votes": 0
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 77,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 8.212,
+          "votes": 18448
+        },
+        "trakt": {
+          "type": "user",
+          "value": 8.46334,
+          "votes": 30755
+        }
+      },
+      "remotePoster": "https://image.tmdb.org/t/p/original/Ag2B2KHKQPukjH7WutmgnnSNurZ.jpg",
+      "runtime": 131,
+      "sortTitle": "prestige",
+      "status": "released",
+      "studio": "Warner Bros. Pictures",
+      "title": "The Prestige",
+      "tmdbId": 1124,
+      "website": "https://www.warnerbros.co.uk/movies/prestige",
+      "year": 2006,
+      "youTubeTrailerId": "ObGVA1WOqyE"
+    },
+    {
+      "certification": "PG-13",
+      "collection": {
+        "added": "0001-01-01T00:00:00Z",
+        "id": 0,
+        "images": [],
+        "minimumAvailability": "tba",
+        "monitored": false,
+        "qualityProfileId": 0,
+        "searchOnAdd": false,
+        "tags": [],
+        "tmdbId": 0
+      },
+      "digitalRelease": "2018-03-04T00:00:00Z",
+      "folder": "Gravity (2013) {tmdb-49047}",
+      "genres": [
+        "Science Fiction",
+        "Thriller",
+        "Drama"
+      ],
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/kZ2nZw8D681aphje8NJi8EfbL1U.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/a2n6bKD7qhCPCAEALgsAhWOAQcc.jpg"
+        }
+      ],
+      "imdbId": "tt1454468",
+      "inCinemas": "2013-10-03T00:00:00Z",
+      "isExcluded": false,
+      "isExisting": true,
+      "isPopular": false,
+      "isRecommendation": false,
+      "isTrending": false,
+      "lists": [
+        1
+      ],
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "overview": "Dr Ryan Stone, an engineer on her first space mission, and Matt Kowalski, an astronaut on his final expedition, have to survive in space after they are hit by debris while spacewalking.",
+      "physicalRelease": "2014-01-29T00:00:00Z",
+      "popularity": 9.6727,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 7.7,
+          "votes": 909284
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 96,
+          "votes": 0
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 96,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 7.172,
+          "votes": 16869
+        },
+        "trakt": {
+          "type": "user",
+          "value": 7.50158,
+          "votes": 25001
+        }
+      },
+      "remotePoster": "https://image.tmdb.org/t/p/original/kZ2nZw8D681aphje8NJi8EfbL1U.jpg",
+      "runtime": 91,
+      "sortTitle": "gravity",
+      "status": "released",
+      "studio": "Esperanto Filmoj",
+      "title": "Gravity",
+      "tmdbId": 49047,
+      "website": "http://gravitymovie.warnerbros.com",
+      "year": 2013,
+      "youTubeTrailerId": "OiTiKOy59o4"
+    },
+    {
+      "certification": "R",
+      "collection": {
+        "added": "0001-01-01T00:00:00Z",
+        "id": 0,
+        "images": [],
+        "minimumAvailability": "tba",
+        "monitored": false,
+        "qualityProfileId": 0,
+        "searchOnAdd": false,
+        "tags": [],
+        "tmdbId": 0
+      },
+      "digitalRelease": "2023-04-05T00:00:00Z",
+      "folder": "Air (2023) {tmdb-964980}",
+      "genres": [
+        "Drama",
+        "History"
+      ],
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/76AKQPdH3M8cvsFR9K8JsOzVlY5.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/aT3sRVqgpkyCo23fp9myVfKPWbA.jpg"
+        }
+      ],
+      "imdbId": "tt16419074",
+      "inCinemas": "2023-04-05T00:00:00Z",
+      "isExcluded": false,
+      "isExisting": true,
+      "isPopular": false,
+      "isRecommendation": false,
+      "isTrending": false,
+      "lists": [
+        2
+      ],
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "overview": "Discover the game-changing partnership between a then undiscovered Michael Jordan and Nike's fledgling basketball division which revolutionized the world of sports and culture with the Air Jordan brand.",
+      "physicalRelease": "2023-09-12T00:00:00Z",
+      "popularity": 5.9408,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 7.4,
+          "votes": 200699
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 73,
+          "votes": 0
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 93,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 7.277,
+          "votes": 2527
+        },
+        "trakt": {
+          "type": "user",
+          "value": 7.63103,
+          "votes": 9654
+        }
+      },
+      "remotePoster": "https://image.tmdb.org/t/p/original/76AKQPdH3M8cvsFR9K8JsOzVlY5.jpg",
+      "runtime": 112,
+      "sortTitle": "air",
+      "status": "released",
+      "studio": "Amazon Studios",
+      "title": "Air",
+      "tmdbId": 964980,
+      "website": "https://www.amazon.com/salp/air?hhf",
+      "year": 2023,
+      "youTubeTrailerId": "Euy4Yu6B3nU"
+    }
+  ],
+  "recordedAt": "2026-11-13T13:34:40Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/importlist/movie"
+  },
+  "status": 200
+}

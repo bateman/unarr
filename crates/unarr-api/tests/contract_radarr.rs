@@ -44,6 +44,22 @@ const COMMAND_CLOCKS: &[&str] = &[
     "lastExecutionTime",
 ];
 
+/// The same for a command the original fails, whose exception names its
+/// stack.
+const COMMAND_FAILING: &[&str] = &[
+    "message",
+    "id",
+    "queued",
+    "started",
+    "ended",
+    "duration",
+    "stateChangeTime",
+    "lastExecutionTime",
+    "status",
+    "result",
+    "exception",
+];
+
 /// The same for a command just posted, which may or may not have started.
 const COMMAND_STARTING: &[&str] = &[
     "id",
@@ -392,7 +408,7 @@ fn build_state(dirs: &ReplayDirs) -> AppState {
     // An application data folder of its own, with the log files the
     // original had written by `log-file`: written at one instant, so the
     // list (last written first) keeps the order of their names.
-    let app_data = std::env::temp_dir().join(format!("unarr_contract_radarr_{}", std::process::id()));
+    let app_data = dirs.root.join("appdata");
     let logs_dir = app_data.join("logs");
     std::fs::create_dir_all(&logs_dir).expect("app data");
     // The backup the replay makes takes the configuration file with it.
@@ -407,8 +423,7 @@ fn build_state(dirs: &ReplayDirs) -> AppState {
             .expect("log file time");
     }
     let mut runtime = RuntimeInfo::detect(app_data);
-    runtime.media_cover_dir =
-        std::env::temp_dir().join(format!("unarr_contract_radarr_covers_{}", std::process::id()));
+    runtime.media_cover_dir = dirs.root.join("MediaCover");
     let logs = LogBuffer::new();
     logs.push("info", "unarr", "contract test".into(), None);
     AppState::new(Personality::Radarr, db, settings, runtime, logs)
@@ -993,6 +1008,388 @@ async fn the_hub_and_the_refresh_after_a_scan_are_the_originals() {
     );
     drop(mock);
     drop(dirs);
+}
+
+/// Milestone 4d, the library: movies looked up, refreshed, added, edited,
+/// moved and deleted, the settings written, against a recording of its
+/// own (`tests/fixtures/radarr/golden-library`), so that the long list was
+/// not recorded again. The original reached its metadata server through
+/// `scripts/mock-servarr.py`, which answered from
+/// `tests/fixtures/metadata`; Unarr asks the Rust mock for the same files.
+#[tokio::test]
+async fn the_library_goldens_match() {
+    replay_list("golden-library", library_mode, &[]).await;
+}
+
+/// Milestone 4d, the routes the audit of `docs/audit/` found declared by
+/// Radarr or called by its UI and missing, against
+/// `tests/fixtures/radarr/golden-audit`.
+#[tokio::test]
+async fn the_audit_goldens_match() {
+    replay_list("golden-audit", audit_mode, &["queue sync", "queue/details sync"]).await;
+}
+
+/// Milestone 4d, the backups and the log files, against
+/// `tests/fixtures/radarr/golden-backup`.
+#[tokio::test]
+async fn the_backup_goldens_match() {
+    replay_list(
+        "golden-backup",
+        backup_mode,
+        &["queue sync", "queue/details sync"],
+    )
+    .await;
+}
+
+/// Milestone 4d, the import lists: the IMDb watchlist written, tested and
+/// synced, against `tests/fixtures/radarr/golden-list`.
+#[tokio::test]
+async fn the_import_list_goldens_match() {
+    // The recording spans seventy seconds, in which the original's
+    // scheduler refreshed the download clients once and told the UI to
+    // read the queue again. The replay moves its clock in jumps and the
+    // scheduler looks every thirty seconds of its own time, which this
+    // short list does not reach: the queue it would announce is the same
+    // empty one, and the long list next door checks that announcement.
+    replay_list("golden-list", list_mode, &["queue sync", "queue/details sync"]).await;
+}
+
+/// One recorded list replayed: the fixture restored into a directory of
+/// its own, the mock on a free port, the clock moved by the recording.
+async fn replay_list(list: &'static str, mode: fn(&str) -> Mode, excused_hub: &[&str]) {
+    let golden_dir = fixture_dir().join(list);
+    let dirs = ReplayDirs::create_named(list);
+    let mappings = dirs.mappings();
+    let mock = unarr_mock::Mock::start_with(
+        unarr_mock::fixtures_dir(),
+        0,
+        unarr_mock::MockDirs {
+            downloads: Some(dirs.downloads.clone()),
+            tv: None,
+            movies: Some(dirs.movies.clone()),
+        },
+    )
+    .await
+    .expect("a mock on a free port");
+    let state = build_state(&dirs);
+    state.set_metadata_upstreams(unarr_core::metadata::Upstreams::mock(&mock.url()));
+    let port = mock.port().to_string();
+    state
+        .db()
+        .call(move |conn| {
+            conn.execute(
+                "UPDATE providers SET settings = replace(settings, ':18989', ':' || ?1)",
+                [&port],
+            )?;
+            Ok(())
+        })
+        .await
+        .expect("the providers pointed at this test's mock");
+    let goldens = load_goldens(&golden_dir);
+    let start = goldens
+        .iter()
+        .filter_map(|g| g.recorded_at)
+        .min()
+        .expect("a recording time");
+    state
+        .db()
+        .call(move |conn| {
+            let ids: Vec<i64> = conn
+                .prepare("SELECT id FROM scheduled_tasks")?
+                .query_map([], |r| r.get(0))?
+                .collect::<Result<_, _>>()?;
+            for id in ids {
+                unarr_core::store::providers::set_scheduled_task_execution(conn, id, start, start)?;
+            }
+            Ok(())
+        })
+        .await
+        .expect("freeze the scheduled tasks");
+    state.set_now(Some(start));
+    // The recording's `/movies` holds the marker of the script that made
+    // it, so the root folder is not empty and a movie's scan is not
+    // skipped: the same here.
+    std::fs::write(dirs.movies.join(".unarr-fixture"), "").expect("the marker");
+    state.start_runtime().await.expect("the runtime");
+    // The checks of the start, which the original ran five seconds in,
+    // before the list reads the health: now, not five seconds from now.
+    let runtime = state.commands().expect("the runtime").clone();
+    runtime.take_pending_health_checks();
+    runtime.check_health(unarr_core::health::CheckSet::All).await;
+    let mut hub = state.hub().subscribe();
+    let app = unarr_api::router(state.clone());
+    let session = login_cookie(&app).await;
+    let only: Vec<String> = std::env::var("UNARR_CONTRACT_ONLY")
+        .map(|v| v.split(',').map(str::to_string).collect())
+        .unwrap_or_default();
+    let dump: Vec<String> = std::env::var("UNARR_CONTRACT_DUMP")
+        .map(|v| v.split(',').map(str::to_string).collect())
+        .unwrap_or_default();
+    let mut stretches: Vec<Vec<Value>> = vec![Vec::new()];
+    let mut ids: std::collections::HashMap<String, i64> = std::collections::HashMap::new();
+    let mut failures = Vec::new();
+    let mut checked = 0;
+    for g in &goldens {
+        while let Ok(message) = hub.try_recv() {
+            stretches.last_mut().unwrap().push(message);
+        }
+        if g.method == "sleep" {
+            let seconds: i64 = g.path.parse().expect("sleep seconds");
+            state.set_now(Some(state.now() + chrono::Duration::seconds(seconds)));
+            tokio::time::timeout(
+                std::time::Duration::from_secs(60),
+                state.commands().expect("the runtime").wait_idle(),
+            )
+            .await
+            .expect("commands finish within a minute");
+            let heard = drain_hub(&mut hub).await;
+            stretches.last_mut().unwrap().extend(heard);
+            stretches.push(Vec::new());
+            continue;
+        }
+        state.set_now(g.recorded_at);
+        let mut sent = g.clone();
+        sent.path = substitute_ids(&g.path, &ids);
+        if let Some(body) = &g.request_body {
+            let mut body = body.clone();
+            for (name, id) in &ids {
+                body = body.replace(&format!("\"{{id:{name}}}\""), &id.to_string());
+            }
+            sent.request_body = Some(body);
+        }
+        if g.to_mock {
+            let mut path = sent.path.clone();
+            for (replay, recorded) in &mappings {
+                path = path.replace(&format!("path={recorded}"), &format!("path={replay}"));
+            }
+            let body = sent.request_body.as_deref().unwrap_or("").as_bytes();
+            let (status, _) = mock.call(&g.method, &path, body);
+            assert!(status.is_success(), "mock {} {path}: {status}", g.method);
+            continue;
+        }
+        let (status, body) = send(&app, &sent, &session, &mappings).await;
+        let body = unmap_paths(&body, &mappings);
+        if let Some(id) = body
+            .get("id")
+            .or_else(|| body.get(0).and_then(|first| first.get("id")))
+            .and_then(Value::as_i64)
+        {
+            ids.insert(g.name.clone(), id);
+        }
+        if dump.contains(&g.name) {
+            eprintln!(
+                "--- {} answered {status}:\n{}",
+                g.name,
+                serde_json::to_string_pretty(&body).unwrap_or_default()
+            );
+        }
+        if pending(&g.name) && std::env::var_os("UNARR_CONTRACT_ALL").is_none() {
+            continue;
+        }
+        if !only.is_empty() && !only.iter().any(|p| g.name.starts_with(p.as_str())) {
+            continue;
+        }
+        checked += 1;
+        if status.as_u16() != g.status {
+            failures.push(format!(
+                "{}: status {} expected, {} got: {}",
+                g.name,
+                g.status,
+                status,
+                short(&body)
+            ));
+            continue;
+        }
+        let problems = compare(mode(&g.name), &g.body, &body);
+        if !problems.is_empty() {
+            failures.push(format!(
+                "{} ({} {}):\n    {}",
+                g.name,
+                g.method,
+                g.path,
+                problems.join("\n    ")
+            ));
+        }
+    }
+    if only.is_empty() {
+        let heard = drain_hub(&mut hub).await;
+        stretches.last_mut().unwrap().extend(heard);
+        // A command's message names the folders it moved.
+        let stretches: Vec<Vec<Value>> = stretches
+            .iter()
+            .map(|stretch| stretch.iter().map(|m| unmap_paths(m, &mappings)).collect())
+            .collect();
+        let problems: Vec<String> = signalr_differences(&golden_dir, &goldens, &stretches)
+            .into_iter()
+            .filter(|p| !excused_hub.iter().any(|e| p.ends_with(e)))
+            .collect();
+        if !problems.is_empty() {
+            failures.push(format!(
+                "the hub differs from the original's ({list}/signalr.json):\n  {}",
+                problems.join("\n  ")
+            ));
+        }
+    }
+    assert!(checked > 0, "no goldens checked");
+    assert!(
+        failures.is_empty(),
+        "{} of {} goldens differ:\n{}",
+        failures.len(),
+        checked,
+        failures.join("\n")
+    );
+    drop(mock);
+    drop(dirs);
+}
+
+/// How each answer of the audit recording is compared.
+fn audit_mode(name: &str) -> Mode {
+    match name {
+        // A command the original takes and no service of its runs: the
+        // exception carries the type it looked for and its stack.
+        // Two commands the original fails: one no service of its runs,
+        // one for want of an update log folder, which Unarr, updated by
+        // replacing its image, never writes. Each exception names the
+        // type it looked for and carries its stack.
+        "command-rename-movie-folder"
+        | "command-rename-movie-folder-done"
+        | "command-delete-update-log-files" => Mode::Exact(COMMAND_FAILING),
+        n if n.starts_with("command-after-") => Mode::QueuedCommands(COMMAND_CLOCKS),
+        n if n.starts_with("command-") => Mode::Exact(COMMAND_STARTING),
+        n if n.starts_with("health") => Mode::Multiset(&[]),
+        // The movie the Discover page added, with the moment it was.
+        "importlist-movie-add" | "movie-added-from-discover" => Mode::Exact(&["added"]),
+        "movie-folder-missing" => Mode::Exact(&["description"]),
+        // The blocklist's own rows.
+        n if n.starts_with("blocklist") => Mode::Exact(&["ageHours", "ageMinutes", "date", "id"]),
+        _ => Mode::Exact(&[]),
+    }
+}
+
+/// How each answer of the backup recording is compared.
+fn backup_mode(name: &str) -> Mode {
+    match name {
+        // The zip the recording made: its name, size and moment are its
+        // own, and so is the id they hash to.
+        n if n.starts_with("system-backup") => Mode::Exact(&["id", "name", "path", "size", "time"]),
+        n if n.starts_with("command-") => Mode::Exact(COMMAND_STARTING),
+        // The files the original wrote, with the moments it wrote them.
+        n if n.starts_with("log-file") => Mode::Exact(&[
+            "id",
+            "lastWriteTime",
+            "filename",
+            "contentsUrl",
+            "downloadUrl",
+            "traceId",
+        ]),
+        _ => Mode::Exact(&[]),
+    }
+}
+
+/// How each answer of the import list's recording is compared.
+fn list_mode(name: &str) -> Mode {
+    match name {
+        // The commands the writes and the syncs queued, with the
+        // original's own refresh of the downloads coming and going.
+        // A command that failed carries the exception's stack.
+        n if n.starts_with("command-after-") => Mode::QueuedCommands(&[
+            "id",
+            "queued",
+            "started",
+            "ended",
+            "duration",
+            "stateChangeTime",
+            "lastExecutionTime",
+            "exception",
+        ]),
+        n if n.starts_with("command-") => Mode::Exact(COMMAND_STARTING),
+        n if n.starts_with("health") => Mode::Multiset(&[]),
+        // A movie added by a list carries the moment it was added and,
+        // for the one the sync searched for, when that happened.
+        // The two movies a sync adds are refreshed side by side, and
+        // their alternative titles get their ids in the order that
+        // happens to be.
+        "movie-prestige" | "movie-gravity" | "movie-after-sync" => {
+            Mode::Exact(&["added", "lastSearchTime", "id"])
+        }
+        "history-after-sync" => Mode::Exact(&["date", "id", "movieId", "ageHours", "ageMinutes"]),
+        "movie-delete-excluded" => Mode::Exact(&["traceId"]),
+        _ => Mode::Exact(&[]),
+    }
+}
+
+/// How each answer of the library list is compared.
+fn library_mode(name: &str) -> Mode {
+    match name {
+        // An exception the original lets escape carries its stack.
+        "movie-lookup-empty"
+        | "movie-lookup-no-term"
+        | "movie-lookup-route-tmdb-missing"
+        | "movie-lookup-route-imdb-missing"
+        | "movie-add-no-tmdb"
+        | "config-mediamanagement-put-bin-relative"
+        | "tag-create-taken"
+        | "tag-update-missing"
+        | "tag-delete-missing"
+        | "tag-delete-used"
+        | "remotepathmapping-create-duplicate"
+        | "customformat-create-bad-regex"
+        | "customformat-delete-missing"
+        | "qualityprofile-create-taken"
+        | "qualityprofile-delete-used"
+        | "exclusion-update-missing"
+        | "collection-put-missing" => Mode::Exact(&["description"]),
+        // A model binding error names the request it refused.
+        "config-metadata-put-country" => Mode::Exact(&["traceId"]),
+        // The disk the recording ran on.
+        n if n.starts_with("rootfolder") => Mode::Exact(&["freeSpace"]),
+        // `QualityDefinitionController.UpdateMany` answers from the
+        // service's five-second cache, which the read just before it
+        // filled: the definitions as they were. What it wrote is read
+        // back by the next golden.
+        "qualitydefinition-update-many" => Mode::Exact(&["title", "minSize", "maxSize", "preferredSize"]),
+        // The commands the list or a write queued; the original's own
+        // refresh of the downloads, each minute, comes and goes with the
+        // clock.
+        "command-after-add"
+        | "command-after-add-collection"
+        | "command-after-move"
+        | "command-after-editor-move"
+        | "command-after-import"
+        | "command-after-collection-put" => Mode::QueuedCommands(COMMAND_CLOCKS),
+        n if n.starts_with("command-") && n.ends_with("-get") => Mode::Exact(COMMAND_CLOCKS),
+        n if n.starts_with("command-") => Mode::Exact(COMMAND_STARTING),
+        // The verdicts are a hash table's.
+        n if n.starts_with("health") => Mode::Multiset(&[]),
+        // A search the post-add actions queued ran, in the recording,
+        // before the pause the replay moves its clock by. The movie's
+        // metadata row is written by its own refresh and by the refresh
+        // of the collection it brought, two commands the original runs
+        // side by side: which of them has the last word differs from one
+        // recording to the next (its popularity and votes, a minute
+        // apart). Unarr lets the movie's own be the last.
+        "movie-added-collection" => Mode::Exact(&["lastSearchTime", "added", "popularity", "ratings"]),
+        "collection-after-add" => Mode::Exact(&["ratings"]),
+        "movie-brought-by-collection" => Mode::Exact(&["lastSearchTime", "added"]),
+        // The file a rescan found was added while the recording paused.
+        "movie-after-rescan"
+        | "movie-put-move"
+        | "movie-after-move"
+        | "movie-editor"
+        | "movie-editor-replace-tags"
+        | "movie-editor-remove-tags"
+        | "movie-editor-move"
+        | "movie-after-editor-move" => Mode::Exact(&["dateAdded"]),
+        // The folder browser shows when the disk last changed; the parent
+        // of the replay's stand-in for `/movies` is not the root.
+        n if n.starts_with("filesystem-") => Mode::Exact(&["lastModified", "parent"]),
+        "movie-deleted" => Mode::Exact(&["traceId"]),
+        "movie-delete-missing" | "movie-import-existing" => Mode::Exact(&["description"]),
+        // The two movies of an import are refreshed side by side, and
+        // their titles get their ids in the order that happens to be.
+        "movie-imported" | "movie-imported-second" => Mode::Exact(&["id"]),
+        _ => Mode::Exact(&[]),
+    }
 }
 
 #[tokio::test]

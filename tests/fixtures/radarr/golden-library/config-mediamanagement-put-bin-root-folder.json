@@ -1,0 +1,24 @@
+{
+  "body": [
+    {
+      "attemptedValue": "/movies",
+      "errorCode": "RootFolderValidator",
+      "errorMessage": "Path '/movies' is already configured as a root folder",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "path": "/movies",
+        "propertyName": "Recycle Bin",
+        "propertyValue": "/movies"
+      },
+      "propertyName": "RecycleBin",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:41:12Z",
+  "request": {
+    "body": "bodies/config-mediamanagement-put-bin-root-folder.json",
+    "method": "PUT",
+    "path": "/api/v3/config/mediamanagement/1"
+  },
+  "status": 400
+}

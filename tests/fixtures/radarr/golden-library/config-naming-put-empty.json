@@ -1,0 +1,35 @@
+{
+  "body": [
+    {
+      "attemptedValue": "",
+      "errorCode": "NotEmptyValidator",
+      "errorMessage": "'Standard Movie Format' must not be empty.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Standard Movie Format",
+        "propertyValue": ""
+      },
+      "propertyName": "StandardMovieFormat",
+      "severity": "error"
+    },
+    {
+      "attemptedValue": "",
+      "errorCode": "ValidMovieFormatValidator",
+      "errorMessage": "Must contain either movie title and release year OR Original Title/Filename",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Standard Movie Format",
+        "propertyValue": ""
+      },
+      "propertyName": "StandardMovieFormat",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:41:12Z",
+  "request": {
+    "body": "bodies/config-naming-put-empty.json",
+    "method": "PUT",
+    "path": "/api/v3/config/naming/1"
+  },
+  "status": 400
+}

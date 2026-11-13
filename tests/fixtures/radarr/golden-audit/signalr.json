@@ -1,0 +1,2007 @@
+[
+  {
+    "after": "config-host",
+    "messages": [
+      {
+        "body": {
+          "version": "6.4.4.10685"
+        },
+        "name": "version"
+      }
+    ]
+  },
+  {
+    "after": "config-host-put-proxy",
+    "messages": [
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "health"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "health"
+      }
+    ]
+  },
+  {
+    "after": "metadata-update",
+    "messages": [
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "configContract": "XbmcMetadataSettings",
+            "enable": true,
+            "fields": [
+              {
+                "advanced": false,
+                "helpText": ".nfo with full movie metadata",
+                "isFloat": false,
+                "label": "Movie Metadata",
+                "name": "movieMetadata",
+                "order": 0,
+                "privacy": "normal",
+                "section": "metadata",
+                "type": "checkbox",
+                "value": true
+              },
+              {
+                "advanced": false,
+                "helpText": "Write metadata to movie.nfo instead of the default <movie-filename>.nfo",
+                "isFloat": false,
+                "label": "Use movie.nfo",
+                "name": "useMovieNfo",
+                "order": 1,
+                "privacy": "normal",
+                "section": "metadata",
+                "type": "checkbox",
+                "value": true
+              },
+              {
+                "advanced": false,
+                "helpText": "Include selected language if available in .nfo",
+                "isFloat": false,
+                "label": "Movie Metadata Language",
+                "name": "movieMetadataLanguage",
+                "order": 2,
+                "privacy": "normal",
+                "section": "metadata",
+                "selectOptions": [
+                  {
+                    "dividerAfter": true,
+                    "name": "Original",
+                    "order": 0,
+                    "value": -2
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Afrikaans",
+                    "order": 0,
+                    "value": 51
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Albanian",
+                    "order": 0,
+                    "value": 50
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Arabic",
+                    "order": 0,
+                    "value": 31
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Bengali",
+                    "order": 0,
+                    "value": 34
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Bosnian",
+                    "order": 0,
+                    "value": 41
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Bulgarian",
+                    "order": 0,
+                    "value": 29
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Catalan",
+                    "order": 0,
+                    "value": 38
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Chinese",
+                    "order": 0,
+                    "value": 10
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Croatian",
+                    "order": 0,
+                    "value": 39
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Czech",
+                    "order": 0,
+                    "value": 25
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Danish",
+                    "order": 0,
+                    "value": 6
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Dutch",
+                    "order": 0,
+                    "value": 7
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "English",
+                    "order": 0,
+                    "value": 1
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Estonian",
+                    "order": 0,
+                    "value": 42
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Finnish",
+                    "order": 0,
+                    "value": 16
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Flemish",
+                    "order": 0,
+                    "value": 19
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "French",
+                    "order": 0,
+                    "value": 2
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Georgian",
+                    "order": 0,
+                    "value": 57
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "German",
+                    "order": 0,
+                    "value": 4
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Greek",
+                    "order": 0,
+                    "value": 20
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Hebrew",
+                    "order": 0,
+                    "value": 23
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Hindi",
+                    "order": 0,
+                    "value": 26
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Hungarian",
+                    "order": 0,
+                    "value": 22
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Icelandic",
+                    "order": 0,
+                    "value": 9
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Indonesian",
+                    "order": 0,
+                    "value": 44
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Italian",
+                    "order": 0,
+                    "value": 5
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Japanese",
+                    "order": 0,
+                    "value": 8
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Kannada",
+                    "order": 0,
+                    "value": 49
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Korean",
+                    "order": 0,
+                    "value": 21
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Latvian",
+                    "order": 0,
+                    "value": 36
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Lithuanian",
+                    "order": 0,
+                    "value": 24
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Macedonian",
+                    "order": 0,
+                    "value": 46
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Malayalam",
+                    "order": 0,
+                    "value": 48
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Marathi",
+                    "order": 0,
+                    "value": 52
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Mongolian",
+                    "order": 0,
+                    "value": 56
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Norwegian",
+                    "order": 0,
+                    "value": 15
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Persian",
+                    "order": 0,
+                    "value": 33
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Polish",
+                    "order": 0,
+                    "value": 12
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Portuguese",
+                    "order": 0,
+                    "value": 18
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Portuguese (Brazil)",
+                    "order": 0,
+                    "value": 30
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Romanian",
+                    "order": 0,
+                    "value": 27
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Romansh",
+                    "order": 0,
+                    "value": 55
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Russian",
+                    "order": 0,
+                    "value": 11
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Serbian",
+                    "order": 0,
+                    "value": 40
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Slovak",
+                    "order": 0,
+                    "value": 35
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Slovenian",
+                    "order": 0,
+                    "value": 47
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Spanish",
+                    "order": 0,
+                    "value": 3
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Spanish (Latino)",
+                    "order": 0,
+                    "value": 37
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Swedish",
+                    "order": 0,
+                    "value": 14
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Tagalog",
+                    "order": 0,
+                    "value": 53
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Tamil",
+                    "order": 0,
+                    "value": 43
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Telugu",
+                    "order": 0,
+                    "value": 45
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Thai",
+                    "order": 0,
+                    "value": 28
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Turkish",
+                    "order": 0,
+                    "value": 17
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Ukrainian",
+                    "order": 0,
+                    "value": 32
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Urdu",
+                    "order": 0,
+                    "value": 54
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Vietnamese",
+                    "order": 0,
+                    "value": 13
+                  }
+                ],
+                "type": "select",
+                "value": 1
+              },
+              {
+                "advanced": true,
+                "helpText": "Include TMDb and IMDb movie URLs in .nfo",
+                "isFloat": false,
+                "label": "Movie Metadata URL",
+                "name": "movieMetadataURL",
+                "order": 3,
+                "privacy": "normal",
+                "section": "metadata",
+                "type": "checkbox",
+                "value": false
+              },
+              {
+                "advanced": true,
+                "helpText": "Include collection name in .nfo",
+                "isFloat": false,
+                "label": "Movie Collection Name",
+                "name": "addCollectionName",
+                "order": 4,
+                "privacy": "normal",
+                "section": "metadata",
+                "type": "checkbox",
+                "value": false
+              },
+              {
+                "advanced": false,
+                "helpText": "fanart.jpg, poster.jpg",
+                "isFloat": false,
+                "label": "Movie Images",
+                "name": "movieImages",
+                "order": 5,
+                "privacy": "normal",
+                "section": "image",
+                "type": "checkbox",
+                "value": true
+              }
+            ],
+            "id": 1,
+            "implementation": "XbmcMetadata",
+            "implementationName": "Kodi (XBMC) / Emby",
+            "infoLink": "https://wiki.servarr.com/radarr/supported#xbmcmetadata",
+            "name": "XbmcMetadata 1",
+            "tags": []
+          }
+        },
+        "name": "metadata"
+      }
+    ]
+  },
+  {
+    "after": "metadata-restore",
+    "messages": [
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "configContract": "XbmcMetadataSettings",
+            "enable": false,
+            "fields": [
+              {
+                "advanced": false,
+                "helpText": ".nfo with full movie metadata",
+                "isFloat": false,
+                "label": "Movie Metadata",
+                "name": "movieMetadata",
+                "order": 0,
+                "privacy": "normal",
+                "section": "metadata",
+                "type": "checkbox",
+                "value": true
+              },
+              {
+                "advanced": false,
+                "helpText": "Write metadata to movie.nfo instead of the default <movie-filename>.nfo",
+                "isFloat": false,
+                "label": "Use movie.nfo",
+                "name": "useMovieNfo",
+                "order": 1,
+                "privacy": "normal",
+                "section": "metadata",
+                "type": "checkbox",
+                "value": false
+              },
+              {
+                "advanced": false,
+                "helpText": "Include selected language if available in .nfo",
+                "isFloat": false,
+                "label": "Movie Metadata Language",
+                "name": "movieMetadataLanguage",
+                "order": 2,
+                "privacy": "normal",
+                "section": "metadata",
+                "selectOptions": [
+                  {
+                    "dividerAfter": true,
+                    "name": "Original",
+                    "order": 0,
+                    "value": -2
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Afrikaans",
+                    "order": 0,
+                    "value": 51
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Albanian",
+                    "order": 0,
+                    "value": 50
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Arabic",
+                    "order": 0,
+                    "value": 31
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Bengali",
+                    "order": 0,
+                    "value": 34
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Bosnian",
+                    "order": 0,
+                    "value": 41
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Bulgarian",
+                    "order": 0,
+                    "value": 29
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Catalan",
+                    "order": 0,
+                    "value": 38
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Chinese",
+                    "order": 0,
+                    "value": 10
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Croatian",
+                    "order": 0,
+                    "value": 39
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Czech",
+                    "order": 0,
+                    "value": 25
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Danish",
+                    "order": 0,
+                    "value": 6
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Dutch",
+                    "order": 0,
+                    "value": 7
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "English",
+                    "order": 0,
+                    "value": 1
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Estonian",
+                    "order": 0,
+                    "value": 42
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Finnish",
+                    "order": 0,
+                    "value": 16
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Flemish",
+                    "order": 0,
+                    "value": 19
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "French",
+                    "order": 0,
+                    "value": 2
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Georgian",
+                    "order": 0,
+                    "value": 57
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "German",
+                    "order": 0,
+                    "value": 4
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Greek",
+                    "order": 0,
+                    "value": 20
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Hebrew",
+                    "order": 0,
+                    "value": 23
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Hindi",
+                    "order": 0,
+                    "value": 26
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Hungarian",
+                    "order": 0,
+                    "value": 22
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Icelandic",
+                    "order": 0,
+                    "value": 9
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Indonesian",
+                    "order": 0,
+                    "value": 44
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Italian",
+                    "order": 0,
+                    "value": 5
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Japanese",
+                    "order": 0,
+                    "value": 8
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Kannada",
+                    "order": 0,
+                    "value": 49
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Korean",
+                    "order": 0,
+                    "value": 21
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Latvian",
+                    "order": 0,
+                    "value": 36
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Lithuanian",
+                    "order": 0,
+                    "value": 24
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Macedonian",
+                    "order": 0,
+                    "value": 46
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Malayalam",
+                    "order": 0,
+                    "value": 48
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Marathi",
+                    "order": 0,
+                    "value": 52
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Mongolian",
+                    "order": 0,
+                    "value": 56
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Norwegian",
+                    "order": 0,
+                    "value": 15
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Persian",
+                    "order": 0,
+                    "value": 33
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Polish",
+                    "order": 0,
+                    "value": 12
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Portuguese",
+                    "order": 0,
+                    "value": 18
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Portuguese (Brazil)",
+                    "order": 0,
+                    "value": 30
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Romanian",
+                    "order": 0,
+                    "value": 27
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Romansh",
+                    "order": 0,
+                    "value": 55
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Russian",
+                    "order": 0,
+                    "value": 11
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Serbian",
+                    "order": 0,
+                    "value": 40
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Slovak",
+                    "order": 0,
+                    "value": 35
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Slovenian",
+                    "order": 0,
+                    "value": 47
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Spanish",
+                    "order": 0,
+                    "value": 3
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Spanish (Latino)",
+                    "order": 0,
+                    "value": 37
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Swedish",
+                    "order": 0,
+                    "value": 14
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Tagalog",
+                    "order": 0,
+                    "value": 53
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Tamil",
+                    "order": 0,
+                    "value": 43
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Telugu",
+                    "order": 0,
+                    "value": 45
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Thai",
+                    "order": 0,
+                    "value": 28
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Turkish",
+                    "order": 0,
+                    "value": 17
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Ukrainian",
+                    "order": 0,
+                    "value": 32
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Urdu",
+                    "order": 0,
+                    "value": 54
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Vietnamese",
+                    "order": 0,
+                    "value": 13
+                  }
+                ],
+                "type": "select",
+                "value": 1
+              },
+              {
+                "advanced": true,
+                "helpText": "Include TMDb and IMDb movie URLs in .nfo",
+                "isFloat": false,
+                "label": "Movie Metadata URL",
+                "name": "movieMetadataURL",
+                "order": 3,
+                "privacy": "normal",
+                "section": "metadata",
+                "type": "checkbox",
+                "value": false
+              },
+              {
+                "advanced": true,
+                "helpText": "Include collection name in .nfo",
+                "isFloat": false,
+                "label": "Movie Collection Name",
+                "name": "addCollectionName",
+                "order": 4,
+                "privacy": "normal",
+                "section": "metadata",
+                "type": "checkbox",
+                "value": true
+              },
+              {
+                "advanced": false,
+                "helpText": "fanart.jpg, poster.jpg",
+                "isFloat": false,
+                "label": "Movie Images",
+                "name": "movieImages",
+                "order": 5,
+                "privacy": "normal",
+                "section": "image",
+                "type": "checkbox",
+                "value": true
+              }
+            ],
+            "id": 1,
+            "implementation": "XbmcMetadata",
+            "implementationName": "Kodi (XBMC) / Emby",
+            "infoLink": "https://wiki.servarr.com/radarr/supported#xbmcmetadata",
+            "name": "XbmcMetadata 1",
+            "tags": []
+          }
+        },
+        "name": "metadata"
+      }
+    ]
+  },
+  {
+    "after": "importlist-movie-add",
+    "messages": [
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "body": {
+              "completionMessage": "Completed",
+              "isExclusive": false,
+              "isLongRunning": true,
+              "isNewMovie": true,
+              "isTypeExclusive": false,
+              "movieIds": [
+                328
+              ],
+              "name": "RefreshMovie",
+              "requiresDiskAccess": false,
+              "sendUpdatesToClient": true,
+              "suppressMessages": false,
+              "trigger": "unspecified",
+              "updateScheduledTask": false
+            },
+            "commandName": "Refresh Movie",
+            "id": 472955,
+            "message": "Updating info for Interstellar",
+            "name": "RefreshMovie",
+            "priority": "normal",
+            "queued": "2026-11-13T15:38:05Z",
+            "result": "unknown",
+            "sendUpdatesToClient": true,
+            "started": "2026-11-13T15:38:05Z",
+            "stateChangeTime": "2026-11-13T15:38:05Z",
+            "status": "started",
+            "trigger": "unspecified",
+            "updateScheduledTask": false
+          }
+        },
+        "name": "command"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "addOptions": {
+              "addMethod": "manual",
+              "ignoreEpisodesWithFiles": false,
+              "ignoreEpisodesWithoutFiles": false,
+              "monitor": "movieOnly",
+              "searchForMovie": false
+            },
+            "added": "2026-11-13T15:38:04Z",
+            "alternateTitles": [
+              {
+                "id": 2804,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "星际穿越"
+              },
+              {
+                "id": 2805,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "星際啟示錄"
+              },
+              {
+                "id": 2806,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Interestelar"
+              },
+              {
+                "id": 2807,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Csillagok Között"
+              },
+              {
+                "id": 2808,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "インターステラー"
+              },
+              {
+                "id": 2809,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "ინტერსტელარი"
+              },
+              {
+                "id": 2810,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Hố Đen Tử Thần"
+              },
+              {
+                "id": 2811,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Ulduzlararası"
+              },
+              {
+                "id": 2812,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Interstellaire"
+              },
+              {
+                "id": 2813,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Интерстеллар"
+              },
+              {
+                "id": 2814,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Интерстелар"
+              },
+              {
+                "id": 2815,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "بين النجوم"
+              },
+              {
+                "id": 2816,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Інтэрстэлар"
+              },
+              {
+                "id": 2817,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "میان‌ ستاره‌ ای"
+              },
+              {
+                "id": 2818,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "इंटरस्टेलर"
+              },
+              {
+                "id": 2819,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "ਇੰਟਰਸਟੈਲਰ"
+              },
+              {
+                "id": 2820,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Tähtedevaheline"
+              },
+              {
+                "id": 2821,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "בין כוכבים"
+              },
+              {
+                "id": 2822,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "ვარსკვლავთშორისი"
+              },
+              {
+                "id": 2823,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Tarp žvaigždžių"
+              },
+              {
+                "id": 2824,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "ഇന്റർസ്റ്റെല്ലാർ"
+              },
+              {
+                "id": 2825,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "قائم بين النجوم"
+              },
+              {
+                "id": 2826,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "اینتر استلار"
+              },
+              {
+                "id": 2827,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Одод хооронд"
+              },
+              {
+                "id": 2828,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "इन्टरस्टेलर"
+              },
+              {
+                "id": 2829,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Interstellar: Călătorind Prin Univers"
+              },
+              {
+                "id": 2830,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Medzvezdje"
+              },
+              {
+                "id": 2831,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "இன்டர்‌ஸ்டெலர்"
+              },
+              {
+                "id": 2832,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Інтерстеллар"
+              },
+              {
+                "id": 2833,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "انٹرسٹیلر"
+              },
+              {
+                "id": 2834,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Međuzvjezdani"
+              },
+              {
+                "id": 2835,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Yıldızlararası"
+              },
+              {
+                "id": 2836,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Међузвездани"
+              },
+              {
+                "id": 2837,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "ఇంటర్ స్టెల్లర్"
+              },
+              {
+                "id": 2838,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "อินเตอร์สเตลลาร์ ทะยานดาวกู้โลก"
+              },
+              {
+                "id": 2839,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "인터스텔라"
+              },
+              {
+                "id": 2840,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "星際效應"
+              },
+              {
+                "id": 2841,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Ինտերստելեր"
+              },
+              {
+                "id": 2842,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "در میان ستارگان"
+              },
+              {
+                "id": 2843,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "أنترستيلر"
+              },
+              {
+                "id": 2844,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Интерстеллэр"
+              },
+              {
+                "id": 2845,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "星際啓示錄"
+              }
+            ],
+            "certification": "PG-13",
+            "cleanTitle": "interstellar",
+            "digitalRelease": "2014-11-07T00:00:00Z",
+            "folderName": "/movies/Interstellar (2014) {tmdb-157336}",
+            "genres": [
+              "Adventure",
+              "Drama",
+              "Science Fiction"
+            ],
+            "hasFile": false,
+            "id": 328,
+            "images": [
+              {
+                "coverType": "poster",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/yQvGrMoipbRoddT0ZR8tPoR7NfX.jpg",
+                "url": "/MediaCover/328/poster.jpg?h=6ea857fa1664e710ba38"
+              },
+              {
+                "coverType": "fanart",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/8sNiAPPYU14PUepFNeSNGUTiHW.jpg",
+                "url": "/MediaCover/328/fanart.jpg?h=09050d90b1d43db56511"
+              }
+            ],
+            "imdbId": "tt0816692",
+            "inCinemas": "2014-11-05T00:00:00Z",
+            "isAvailable": true,
+            "keywords": [
+              "2060s",
+              "artificial intelligence (a.i.)",
+              "astronaut",
+              "audacious",
+              "black hole",
+              "cryonics",
+              "dystopia",
+              "enthusiastic",
+              "expedition",
+              "family relationships",
+              "famine",
+              "father daughter relationship",
+              "gravity",
+              "hibernation",
+              "nasa",
+              "planet",
+              "quantum mechanics",
+              "race against time",
+              "scientist",
+              "single father",
+              "space",
+              "space adventure",
+              "space station",
+              "space travel",
+              "spacecraft",
+              "time travel",
+              "time warp",
+              "time-manipulation",
+              "wormhole"
+            ],
+            "minimumAvailability": "released",
+            "monitored": true,
+            "movieFileId": 0,
+            "originalLanguage": {
+              "id": 1,
+              "name": "English"
+            },
+            "originalTitle": "Interstellar",
+            "overview": "The adventures of a group of explorers who make use of a newly discovered wormhole to surpass the limitations on human space travel and conquer the vast distances involved in an interstellar voyage.",
+            "path": "/movies/Interstellar (2014) {tmdb-157336}",
+            "physicalRelease": "2015-03-31T00:00:00Z",
+            "popularity": 53.1428,
+            "qualityProfileId": 11,
+            "ratings": {
+              "imdb": {
+                "type": "user",
+                "value": 8.7,
+                "votes": 2631937
+              },
+              "metacritic": {
+                "type": "user",
+                "value": 74,
+                "votes": 0
+              },
+              "rottenTomatoes": {
+                "type": "user",
+                "value": 73,
+                "votes": 0
+              },
+              "tmdb": {
+                "type": "user",
+                "value": 8.5,
+                "votes": 41867
+              },
+              "trakt": {
+                "type": "user",
+                "value": 8.83471,
+                "votes": 74602
+              }
+            },
+            "releaseDate": "2014-11-07T00:00:00Z",
+            "rootFolderPath": "/movies",
+            "runtime": 169,
+            "secondaryYearSourceId": 0,
+            "sizeOnDisk": 0,
+            "sortTitle": "interstellar",
+            "statistics": {
+              "movieFileCount": 0,
+              "movieFileQualities": [],
+              "releaseGroups": [],
+              "sizeOnDisk": 0
+            },
+            "status": "released",
+            "studio": "Legendary Pictures",
+            "tags": [],
+            "title": "Interstellar",
+            "titleSlug": "157336",
+            "tmdbId": 157336,
+            "website": "http://www.interstellarmovie.net/",
+            "year": 2014,
+            "youTubeTrailerId": "LY19rHKAaAg"
+          }
+        },
+        "name": "movie"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "system/task"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "body": {
+              "completionMessage": "Completed",
+              "isExclusive": false,
+              "isLongRunning": true,
+              "isNewMovie": true,
+              "isTypeExclusive": false,
+              "movieIds": [
+                328
+              ],
+              "name": "RefreshMovie",
+              "requiresDiskAccess": false,
+              "sendUpdatesToClient": true,
+              "suppressMessages": false,
+              "trigger": "unspecified",
+              "updateScheduledTask": false
+            },
+            "commandName": "Refresh Movie",
+            "duration": "00:00:00.1666700",
+            "ended": "2026-11-13T15:38:05Z",
+            "id": 472955,
+            "message": "Completed",
+            "name": "RefreshMovie",
+            "priority": "normal",
+            "queued": "2026-11-13T15:38:05Z",
+            "result": "successful",
+            "sendUpdatesToClient": true,
+            "started": "2026-11-13T15:38:05Z",
+            "stateChangeTime": "2026-11-13T15:38:05Z",
+            "status": "completed",
+            "trigger": "unspecified",
+            "updateScheduledTask": false
+          }
+        },
+        "name": "command"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "added": "2026-11-13T15:38:04Z",
+            "alternateTitles": [
+              {
+                "id": 2804,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "星际穿越"
+              },
+              {
+                "id": 2805,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "星際啟示錄"
+              },
+              {
+                "id": 2806,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Interestelar"
+              },
+              {
+                "id": 2807,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Csillagok Között"
+              },
+              {
+                "id": 2808,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "インターステラー"
+              },
+              {
+                "id": 2809,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "ინტერსტელარი"
+              },
+              {
+                "id": 2810,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Hố Đen Tử Thần"
+              },
+              {
+                "id": 2811,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Ulduzlararası"
+              },
+              {
+                "id": 2812,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Interstellaire"
+              },
+              {
+                "id": 2813,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Интерстеллар"
+              },
+              {
+                "id": 2814,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Интерстелар"
+              },
+              {
+                "id": 2815,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "بين النجوم"
+              },
+              {
+                "id": 2816,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Інтэрстэлар"
+              },
+              {
+                "id": 2817,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "میان‌ ستاره‌ ای"
+              },
+              {
+                "id": 2818,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "इंटरस्टेलर"
+              },
+              {
+                "id": 2819,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "ਇੰਟਰਸਟੈਲਰ"
+              },
+              {
+                "id": 2820,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Tähtedevaheline"
+              },
+              {
+                "id": 2821,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "בין כוכבים"
+              },
+              {
+                "id": 2822,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "ვარსკვლავთშორისი"
+              },
+              {
+                "id": 2823,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Tarp žvaigždžių"
+              },
+              {
+                "id": 2824,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "ഇന്റർസ്റ്റെല്ലാർ"
+              },
+              {
+                "id": 2825,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "قائم بين النجوم"
+              },
+              {
+                "id": 2826,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "اینتر استلار"
+              },
+              {
+                "id": 2827,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Одод хооронд"
+              },
+              {
+                "id": 2828,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "इन्टरस्टेलर"
+              },
+              {
+                "id": 2829,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Interstellar: Călătorind Prin Univers"
+              },
+              {
+                "id": 2830,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Medzvezdje"
+              },
+              {
+                "id": 2831,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "இன்டர்‌ஸ்டெலர்"
+              },
+              {
+                "id": 2832,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Інтерстеллар"
+              },
+              {
+                "id": 2833,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "انٹرسٹیلر"
+              },
+              {
+                "id": 2834,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Međuzvjezdani"
+              },
+              {
+                "id": 2835,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Yıldızlararası"
+              },
+              {
+                "id": 2836,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Међузвездани"
+              },
+              {
+                "id": 2837,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "ఇంటర్ స్టెల్లర్"
+              },
+              {
+                "id": 2838,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "อินเตอร์สเตลลาร์ ทะยานดาวกู้โลก"
+              },
+              {
+                "id": 2839,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "인터스텔라"
+              },
+              {
+                "id": 2840,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "星際效應"
+              },
+              {
+                "id": 2841,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Ինտերստելեր"
+              },
+              {
+                "id": 2842,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "در میان ستارگان"
+              },
+              {
+                "id": 2843,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "أنترستيلر"
+              },
+              {
+                "id": 2844,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Интерстеллэр"
+              },
+              {
+                "id": 2845,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "星際啓示錄"
+              }
+            ],
+            "certification": "PG-13",
+            "cleanTitle": "interstellar",
+            "digitalRelease": "2014-11-07T00:00:00Z",
+            "folderName": "/movies/Interstellar (2014) {tmdb-157336}",
+            "genres": [
+              "Adventure",
+              "Drama",
+              "Science Fiction"
+            ],
+            "hasFile": false,
+            "id": 328,
+            "images": [
+              {
+                "coverType": "poster",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/yQvGrMoipbRoddT0ZR8tPoR7NfX.jpg",
+                "url": "/MediaCover/328/poster.jpg?h=6ea857fa1664e710ba38"
+              },
+              {
+                "coverType": "fanart",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/8sNiAPPYU14PUepFNeSNGUTiHW.jpg",
+                "url": "/MediaCover/328/fanart.jpg?h=09050d90b1d43db56511"
+              }
+            ],
+            "imdbId": "tt0816692",
+            "inCinemas": "2014-11-05T00:00:00Z",
+            "isAvailable": true,
+            "keywords": [
+              "2060s",
+              "artificial intelligence (a.i.)",
+              "astronaut",
+              "audacious",
+              "black hole",
+              "cryonics",
+              "dystopia",
+              "enthusiastic",
+              "expedition",
+              "family relationships",
+              "famine",
+              "father daughter relationship",
+              "gravity",
+              "hibernation",
+              "nasa",
+              "planet",
+              "quantum mechanics",
+              "race against time",
+              "scientist",
+              "single father",
+              "space",
+              "space adventure",
+              "space station",
+              "space travel",
+              "spacecraft",
+              "time travel",
+              "time warp",
+              "time-manipulation",
+              "wormhole"
+            ],
+            "minimumAvailability": "released",
+            "monitored": true,
+            "movieFileId": 0,
+            "originalLanguage": {
+              "id": 1,
+              "name": "English"
+            },
+            "originalTitle": "Interstellar",
+            "overview": "The adventures of a group of explorers who make use of a newly discovered wormhole to surpass the limitations on human space travel and conquer the vast distances involved in an interstellar voyage.",
+            "path": "/movies/Interstellar (2014) {tmdb-157336}",
+            "physicalRelease": "2015-03-31T00:00:00Z",
+            "popularity": 53.1428,
+            "qualityProfileId": 11,
+            "ratings": {
+              "imdb": {
+                "type": "user",
+                "value": 8.7,
+                "votes": 2631937
+              },
+              "metacritic": {
+                "type": "user",
+                "value": 74,
+                "votes": 0
+              },
+              "rottenTomatoes": {
+                "type": "user",
+                "value": 73,
+                "votes": 0
+              },
+              "tmdb": {
+                "type": "user",
+                "value": 8.5,
+                "votes": 41867
+              },
+              "trakt": {
+                "type": "user",
+                "value": 8.83471,
+                "votes": 74602
+              }
+            },
+            "releaseDate": "2014-11-07T00:00:00Z",
+            "rootFolderPath": "/movies",
+            "runtime": 169,
+            "secondaryYearSourceId": 0,
+            "sizeOnDisk": 0,
+            "sortTitle": "interstellar",
+            "statistics": {
+              "movieFileCount": 0,
+              "movieFileQualities": [],
+              "releaseGroups": [],
+              "sizeOnDisk": 0
+            },
+            "status": "released",
+            "studio": "Legendary Pictures",
+            "tags": [],
+            "title": "Interstellar",
+            "titleSlug": "157336",
+            "tmdbId": 157336,
+            "website": "http://www.interstellarmovie.net/",
+            "year": 2014,
+            "youTubeTrailerId": "LY19rHKAaAg"
+          }
+        },
+        "name": "movie"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "health"
+      }
+    ]
+  },
+  {
+    "after": "command-delete-update-log-files",
+    "messages": [
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "system/task"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "system/task"
+      }
+    ]
+  },
+  {
+    "after": "command-clear-blocklist",
+    "messages": [
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "system/task"
+      }
+    ]
+  },
+  {
+    "after": "command-check-update",
+    "messages": [
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "system/task"
+      }
+    ]
+  },
+  {
+    "after": "command-rename-movie-folder",
+    "messages": [
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "system/task"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "system/task"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "body": {
+              "isExclusive": false,
+              "isLongRunning": false,
+              "isTypeExclusive": false,
+              "name": "ClearLog",
+              "requiresDiskAccess": false,
+              "sendUpdatesToClient": true,
+              "suppressMessages": false,
+              "trigger": "manual",
+              "updateScheduledTask": true
+            },
+            "commandName": "Clear Log",
+            "duration": "00:00:00.0068149",
+            "ended": "2026-11-13T15:38:16Z",
+            "id": 472956,
+            "name": "ClearLog",
+            "priority": "normal",
+            "queued": "2026-11-13T15:38:16Z",
+            "result": "successful",
+            "sendUpdatesToClient": true,
+            "started": "2026-11-13T15:38:16Z",
+            "stateChangeTime": "2026-11-13T15:38:16Z",
+            "status": "completed",
+            "trigger": "manual",
+            "updateScheduledTask": true
+          }
+        },
+        "name": "command"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "body": {
+              "isExclusive": false,
+              "isLongRunning": false,
+              "isTypeExclusive": false,
+              "name": "DeleteLogFiles",
+              "requiresDiskAccess": false,
+              "sendUpdatesToClient": true,
+              "suppressMessages": false,
+              "trigger": "manual",
+              "updateScheduledTask": true
+            },
+            "commandName": "Delete Log Files",
+            "duration": "00:00:00.0049338",
+            "ended": "2026-11-13T15:38:16Z",
+            "id": 472957,
+            "name": "DeleteLogFiles",
+            "priority": "normal",
+            "queued": "2026-11-13T15:38:16Z",
+            "result": "successful",
+            "sendUpdatesToClient": true,
+            "started": "2026-11-13T15:38:16Z",
+            "stateChangeTime": "2026-11-13T15:38:16Z",
+            "status": "completed",
+            "trigger": "manual",
+            "updateScheduledTask": true
+          }
+        },
+        "name": "command"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "body": {
+              "isExclusive": false,
+              "isLongRunning": false,
+              "isTypeExclusive": false,
+              "name": "DeleteUpdateLogFiles",
+              "requiresDiskAccess": false,
+              "sendUpdatesToClient": true,
+              "suppressMessages": false,
+              "trigger": "manual",
+              "updateScheduledTask": true
+            },
+            "commandName": "Delete Update Log Files",
+            "duration": "00:00:00.0037536",
+            "ended": "2026-11-13T15:38:16Z",
+            "exception": "System.IO.DirectoryNotFoundException: Could not find a part of the path '/config/UpdateLogs'.\n   at System.IO.Enumeration.FileSystemEnumerator`1.CreateDirectoryHandle(String path, Boolean ignoreNotFound)\n   at System.IO.Enumeration.FileSystemEnumerator`1.Init()\n   at System.IO.Enumeration.FileSystemEnumerable`1..ctor(String directory, FindTransform transform, EnumerationOptions options, Boolean isNormalized)\n   at System.IO.Enumeration.FileSystemEnumerableFactory.UserFiles(String directory, String expression, EnumerationOptions options)\n   at System.IO.Directory.InternalEnumeratePaths(String path, String searchPattern, SearchTarget searchTarget, EnumerationOptions options)\n   at NzbDrone.Common.Disk.DiskProviderBase.GetFiles(String path, Boolean recursive) in ./NzbDrone.Common/Disk/DiskProviderBase.cs:line 168\n   at NzbDrone.Common.Disk.DiskProviderBase.EmptyFolder(String path) in ./NzbDrone.Common/Disk/DiskProviderBase.cs:line 464\n   at NzbDrone.Core.Instrumentation.DeleteLogFilesService.Execute(DeleteUpdateLogFilesCommand message) in ./NzbDrone.Core/Instrumentation/DeleteLogFilesService.cs:line 36\n   at NzbDrone.Core.Messaging.Commands.CommandExecutor.ExecuteCommand[TCommand](TCommand command, CommandModel commandModel) in ./NzbDrone.Core/Messaging/Commands/CommandExecutor.cs:line 81",
+            "id": 472958,
+            "message": "Failed",
+            "name": "DeleteUpdateLogFiles",
+            "priority": "normal",
+            "queued": "2026-11-13T15:38:16Z",
+            "result": "unknown",
+            "sendUpdatesToClient": true,
+            "started": "2026-11-13T15:38:16Z",
+            "stateChangeTime": "2026-11-13T15:38:16Z",
+            "status": "failed",
+            "trigger": "manual",
+            "updateScheduledTask": true
+          }
+        },
+        "name": "command"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "body": {
+              "isExclusive": false,
+              "isLongRunning": false,
+              "isTypeExclusive": false,
+              "name": "ClearBlocklist",
+              "requiresDiskAccess": false,
+              "sendUpdatesToClient": true,
+              "suppressMessages": false,
+              "trigger": "manual",
+              "updateScheduledTask": true
+            },
+            "commandName": "Clear Blocklist",
+            "duration": "00:00:00.0032127",
+            "ended": "2026-11-13T15:38:16Z",
+            "id": 472959,
+            "name": "ClearBlocklist",
+            "priority": "normal",
+            "queued": "2026-11-13T15:38:16Z",
+            "result": "successful",
+            "sendUpdatesToClient": true,
+            "started": "2026-11-13T15:38:16Z",
+            "stateChangeTime": "2026-11-13T15:38:16Z",
+            "status": "completed",
+            "trigger": "manual",
+            "updateScheduledTask": true
+          }
+        },
+        "name": "command"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "body": {
+              "installMajorUpdate": false,
+              "isExclusive": false,
+              "isLongRunning": false,
+              "isTypeExclusive": false,
+              "name": "ApplicationCheckUpdate",
+              "requiresDiskAccess": false,
+              "sendUpdatesToClient": true,
+              "suppressMessages": false,
+              "trigger": "manual",
+              "updateScheduledTask": true
+            },
+            "commandName": "Application Check Update",
+            "duration": "00:00:00.0101773",
+            "ended": "2026-11-13T15:38:16Z",
+            "id": 472960,
+            "message": "No update available",
+            "name": "ApplicationCheckUpdate",
+            "priority": "normal",
+            "queued": "2026-11-13T15:38:16Z",
+            "result": "successful",
+            "sendUpdatesToClient": true,
+            "started": "2026-11-13T15:38:16Z",
+            "stateChangeTime": "2026-11-13T15:38:16Z",
+            "status": "completed",
+            "trigger": "manual",
+            "updateScheduledTask": true
+          }
+        },
+        "name": "command"
+      }
+    ]
+  }
+]

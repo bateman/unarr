@@ -1,0 +1,24 @@
+{
+  "body": [
+    {
+      "attemptedValue": "/movies",
+      "errorCode": "RootFolderValidator",
+      "errorMessage": "Path '/movies' is already configured as a root folder",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "path": "/movies",
+        "propertyName": "Path",
+        "propertyValue": "/movies"
+      },
+      "propertyName": "Path",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:39:58Z",
+  "request": {
+    "body": "bodies/movie-put-root-as-path.json",
+    "method": "PUT",
+    "path": "/api/v3/movie/328"
+  },
+  "status": 400
+}

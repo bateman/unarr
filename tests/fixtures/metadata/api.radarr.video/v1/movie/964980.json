@@ -1,0 +1,1186 @@
+{
+ "TmdbId": 964980,
+ "ImdbId": "tt16419074",
+ "Title": "Air",
+ "Overview": "Discover the game-changing partnership between a then undiscovered Michael Jordan and Nike's fledgling basketball division which revolutionized the world of sports and culture with the Air Jordan brand.",
+ "OriginalTitle": "Air",
+ "OriginalLanguage": "en",
+ "TitleSlug": "964980",
+ "Runtime": 112,
+ "Popularity": 5.9408,
+ "Year": 2023,
+ "Premier": "2023-03-18T00:00:00Z",
+ "InCinema": "2023-04-05T00:00:00Z",
+ "PhysicalRelease": "2023-09-12T00:00:00Z",
+ "DigitalRelease": "2023-04-05T00:00:00Z",
+ "Images": [
+  {
+   "CoverType": "Poster",
+   "Url": "https://image.tmdb.org/t/p/original/76AKQPdH3M8cvsFR9K8JsOzVlY5.jpg"
+  },
+  {
+   "CoverType": "Fanart",
+   "Url": "https://image.tmdb.org/t/p/original/aT3sRVqgpkyCo23fp9myVfKPWbA.jpg"
+  }
+ ],
+ "Ratings": [
+  {
+   "Count": 2527,
+   "Value": 7.277,
+   "Origin": "Tmdb",
+   "Type": "User"
+  }
+ ],
+ "MovieRatings": {
+  "Tmdb": {
+   "Count": 2527,
+   "Value": 7.277,
+   "Type": "User"
+  },
+  "Imdb": {
+   "Count": 200699,
+   "Value": 7.4,
+   "Type": "User"
+  },
+  "Metacritic": {
+   "Count": 0,
+   "Value": 73,
+   "Type": "User"
+  },
+  "RottenTomatoes": {
+   "Count": 0,
+   "Value": 93,
+   "Type": "User"
+  },
+  "Trakt": {
+   "Count": 9654,
+   "Value": 7.63103,
+   "Type": "User"
+  }
+ },
+ "Genres": [
+  "Drama",
+  "History"
+ ],
+ "Keywords": [
+  "1980s",
+  "based on true story",
+  "basketball",
+  "duringcreditsstinger",
+  "national basketball association (nba)",
+  "shoe",
+  "sports"
+ ],
+ "AlternativeTitles": [
+  {
+   "Title": "Air Jordan",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "Air: O Filme",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "Air: Courting a Legend",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "Air: A Story of Greatness",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "如履青雲",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "如履轻云",
+   "Type": "Tmdb",
+   "Language": "zh"
+  },
+  {
+   "Title": "AIR: Theo Đuổi Một Huyền Thoại",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "集氣",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "Air: Κυνηγώντας Ένα Θρύλο",
+   "Type": "Tmdb",
+   "Language": "en"
+  }
+ ],
+ "Translations": [
+  {
+   "Title": "Air",
+   "Overview": "Discover the game-changing partnership between a then undiscovered Michael Jordan and Nike's fledgling basketball division which revolutionized the world of sports and culture with the Air Jordan brand.",
+   "Language": "en-US"
+  },
+  {
+   "Title": "Air",
+   "Overview": "AIR dévoile le partenariat qui a changé la donne entre Michael Jordan, alors inconnu, et le tout jeune département basket de Nike, qui a révolutionné le monde du sport et de la culture avec la marque Air Jordan.",
+   "Language": "fr-FR"
+  },
+  {
+   "Title": "에어",
+   "Overview": "1984년, 농구화 시장에서 경쟁사에 밀린 나이키의 농구 부문은 부진한 판매와 부족한 예산으로 위기에 놓인다. 계약 선수를 찾던 스카우터 소니 바카로는 신인 마이클 조던의 경기 영상을 보며 다른 누구도 대신할 수 없는 가능성을 발견한다. 그러나 조던은 아디다스를 선호하고, 회사 안에서도 한 선수에게 모든 자원을 거는 모험을 쉽게 받아들이지 못한다. 소니는 경영진을 설득하는 한편 조던의 가족을 직접 찾아가, 어머니 델로리스에게 아들의 미래를 위한 제안을 건넨다. 작은 팀은 제한된 시간 안에 신발과 계약 전략을 마련하며 선수를 브랜드의 중심에 세울 방법을 찾는다. 모두가 불가능하다고 보는 만남을 성사시키려면, 소니는 아직 증명되지 않은 재능을 믿는 이유부터 보여줘야 한다.",
+   "Language": "ko-KR"
+  },
+  {
+   "Title": "Air",
+   "Overview": "Narra la increíble y revolucionaria asociación entre Michael Jordan -un novato en ese momento- y la incipiente sección de baloncesto de Nike que revolucionó el mundo del deporte y la cultura contemporánea con la marca Air Jordan. Cuenta la atrevida apuesta que definió la carrera de un equipo poco convencional, la visión implacable de una madre que conoce el valor del inmenso talento de su hijo y el fenómeno del baloncesto que se convertiría en el más grande de todos los tiempos.",
+   "Language": "es-ES"
+  },
+  {
+   "Title": "Air: Zrození legendy",
+   "Overview": "Komediální drama o podnikavém manažerovi společnosti Nike, Sonny Vaccarovi odhaluje neuvěřitelnou spolupráci mezi tehdejším nováčkem Michaelem Jordanem a začínající basketbalovou divizí Nike, která díky značce Air Jordan způsobila revoluci ve světě sportu a současné kultuře. Příběh sleduje hazardní hru nekonvenčního týmu, který rozhoduje o kariéře a v němž jde o všechno a nekompromisní vizi matky, která zná hodnotu obrovského talentu svého syna, a basketbalového fenoména, jenž se stane nejlepším hráčem všech dob.",
+   "Language": "cs-CZ"
+  },
+  {
+   "Title": "Air: A História Por Trás do Logo",
+   "Overview": "A história do esforço da Nike para contratar o astro do basquete em ascensão Michael Jordan para sua empresa de calçados em meados da década de 1980, um endosso que parecia impossível na época, mas que, graças ao vendedor de tênis independente Sonny Vaccarro, se tornaria o relacionamento mais significativo entre uma marca atlética e um atleta de todos os tempos.",
+   "Language": "pt-BR"
+  },
+  {
+   "Title": "Air - La storia del grande salto",
+   "Overview": "Sonny Vaccaro, organizzatore di tornei di pallacanestro di provincia e personaggio apparentemente senza arte né parte, viene assunto negli anni '70 dalla Nike per convincere giocatori e allenatori a diventare rappresentanti del giovane marchio sportivo. Vaccaro sarà l'unica persona in grado di convincere un giovanissimo Michael Jordan a firmare per la Nike, cambiando per sempre la storia dello sport, del marketing e dell'abbigliamento sportivo.",
+   "Language": "it-IT"
+  },
+  {
+   "Title": "Ейр",
+   "Overview": "Фільм розповідає про легендарне партнерство між тоді ще спортсменом-початківцем Майклом Джорданом і нещодавно створеним баскетбольним підрозділом компанії Nike. Разом вони створили бренд Air Jordan, який зробив революцію у спорті та сучасній культурі. Це зворушлива історія про визначний карʼєрний момент нестандартної команди, яка пішла ва-банк зі своєю ідеєю, про безкомпромісне бачення матері, яка знає, чого вартий талант її сина, а також про найвеличніший баскетбольний феномен усіх часів.",
+   "Language": "uk-UA"
+  },
+  {
+   "Title": "Air",
+   "Overview": "Opowieść o przełomowej współpracy między Michaelem Jordanem a nowo powstałym działem koszykówki Nike, która zrewolucjonizowała świat sportu i kultury.",
+   "Language": "pl-PL"
+  },
+  {
+   "Title": "Air: La historia detrás del logo",
+   "Overview": "La increíble asociación revolucionaria entre el entonces novato Michael Jordan y la incipiente división de baloncesto de Nike, que revolucionó el mundo de los deportes y la cultura contemporánea con la marca Air Jordan.",
+   "Language": "es-MX"
+  },
+  {
+   "Title": "แอร์ แผนล่าลายเซ็นยอดตำนาน",
+   "Overview": "ผลงานจากเจ้าของรางวัลออสการ์ เบน แอฟเฟล็ก นำแสดงโดย แมตต์ เดมอน กับภาพยนตร์เรื่อง AIR เปิดเรื่องราวพลิกเกมอันน่าเหลือเชื่อของสองคู่ค้าธุรกิจ ไมเคิล จอร์แดน ดาวรุ่งหน้าใหม่ในตอนนั้นกับ Nike ที่ปฏิวัติโลกของกีฬาและวัฒนธรรมร่วมสมัยด้วยแบรนด์ Air Jordan  AIR ร่วมแสดงโดย เบน แอฟเฟล็ก, เจสัน เบทแมน, คริส เมสซีนา, มาร์ลอน เวย์นส์, คริส ทัคเกอร์ และวิโอลา เดวิส เพื่อถ่ายทอดเรื่องราวชวนประทับใจ ตั้งแต่การลงทุนที่ทำให้การงานอาชีพต้องแขวนอยู่บนเส้นด้าย วิสัยทัศน์ที่แน่วแน่ของแม่ที่รู้คุณค่าของความสามารถเหลือของลูกชาย และนักกีฬาบาสเก็ตบอลที่กลายเป็นตำนานที่ยิ่งใหญ่ที่สุดตลอดกาล",
+   "Language": "th-TH"
+  },
+  {
+   "Title": "AIR/エア",
+   "Overview": "1983 年、ナイキ本社。ソニー・ヴァッカロ（マット・デイモン）は、CEO であるフィル・ナイト（ベン・アフレック）からバスケットボール部門を立て直すよう言い渡される。業界の負け犬だったナイキチームは、無名の選手マイケル・ジョーダンを見つけ、今までのルールを変える一発逆転の賭けと取引に出るのだった・・・",
+   "Language": "ja-JP"
+  },
+  {
+   "Title": "Air - Der grosse Wurf",
+   "Overview": "Anfang der 1980er-Jahre ist Nike-Mitarbeiter Sonny Vaccaro davon überzeugt, dass seine Firma das aufstrebende Basketball-Talent Michael Jordan unter Vertrag nehmen sollte. Doch sein Boss, Nike-Gründer Phil Knight, ist skeptisch. Eine derartige Rekordsumme für einen jungen Spieler auf den Tisch legen, der noch keine einzige Minute in der Spitzenliga NBA gespielt hat? Doch Vaccaro hat große Pläne, will sogar einen eigenen Schuh für den Jungstar konzipieren. Und die Zeit drängt, baggert doch auch die deutsche Konkurrenz von Adidas an Jordan. Der ist sich noch nicht sicher, wo und ob er unterschreiben soll. Doch Vaccaro hat ein Ass im Ärmel: Er hat erkannt, dass Jordans Mutter Deloris (Viola Davis) der Schlüssel zu seinem Erfolg ist. Für welches Unternehmen das Basketball-Wunderkind künftig auflaufen wird, hängt auch von ihrer Meinung und ihrem Rat an ihren Sohn ab.",
+   "Language": "de-DE"
+  },
+  {
+   "Title": "אייר",
+   "Overview": "הסיפור הבלתי יאמן של חברת הנעליים נייק שגייסה בשנות ה-80' את השחקן הטירון דאז מייקל ג'ורדן להוביל את מותג נעלי הכדורסל שלה. החלטה אשר חוללה מהפכה בעולם הספורט והתרבות העכשווית. סוני ואקארו הוא סוכן מכירות עקשן שחולם בגדול ומחליט ללכת על כל הקופה: להחתים את השחקן הצעיר מייקל ג'ורדן על חוזה בלעדי עם נייקי. בדרכו הוא צריך לשכנע את הבוס שלו, את מנכ\"ל נייקי פיל נייט ואת אמו של ג'ורדן - שיחד הם יכולים לעשות היסטוריה ולשנות את המשחק כולו.",
+   "Language": "he-IL"
+  },
+  {
+   "Title": "قفزة إلي العظمة",
+   "Overview": "فيلم للمخرج الحائز على الجوائز \"بن أفليك\"، تكشف \"قفزة إلي العظمة\" عن شراكة غيرت قواعد اللعبة والتي تمت بين \"مايكل جوردن\" الذي لم يكن مكتشفاً بعد آنذاك وقسم كرة السلة الصغير في \"نايكي\" والتي أحدثت ثورة في عالم الرياضة والثقافة من خلال العلامة التجارية \"آير جوردن\". الفيلم من بطولة \"مات ديمون\" و\"بن أفليك\" و\"جيسون بيتمان\" و\"كريس ميسينا\" و\"مارلون ويانز\" و\"كريس تاكر\" و\"فيولا ديفيس\".",
+   "Language": "ar-SA"
+  },
+  {
+   "Title": "Air",
+   "Overview": "奧斯卡最佳電影《ARGO 救參任務》兼金球獎最佳導演賓艾佛力 (Ben Affleck)，最新自導自演話題新作——《AIR》，找來老拍檔麥迪文，暨謝遜比文、馬龍韋恩斯、基斯梅辛拿、基斯德加及維奧拉戴維斯等演技派紅星，揭開 Nike 公司旗下 Air Jordan 籃球鞋的崛起史、兼寫下改變巨大企業遊戲規則的勵志傳奇故事。\r 當年正值起飛的 NBA 界新秀米高佐敦，與剛剛起步的 Nike，正周旋合作機會。在 Nike 裏拼命工作的，是一班不循規蹈矩「非一般」籃球鞋生產團隊，他們賭上一切，開山劈石，只是為了在市場上爭一革命性席位；與此同時，米高佐敦的母親，同樣抱有偉大願景，對自己毫不妥協，更堅信兒子擁有巨大潛能。最終憑著眾人之力，令 Air Jordan 這個全新球鞋品牌順利誕生，徹底顛覆體育世界及當代文化。",
+   "Language": "zh-HK"
+  },
+  {
+   "Title": "Air",
+   "Overview": "Film nas vraća u razdoblje osamdesetih godina prošlog stoljeća. Matt Damon tumači lik Sonnyja Vaccara, zaslužnog za potpisivanje unosnog ugovora s tada mladom košarkaškom zvijezdom Michaelom Jordanom. Ben Affleck je u ulozi suosnivača Nikea, legendarnog Phila Knighta, Jason Bateman je u ulozi Roba Strassera – njegovog direktora marketinga, dok je Viola Davis u ulozi beskompromisne majke koja zna vrijednost neizmjernog talenta svog sina i košarkaškog fenomena koji će postati najveća sportska legenda svih vremena.",
+   "Language": "hr-HR"
+  },
+  {
+   "Title": "AIR 傳奇誕生",
+   "Overview": "《集氣》由獲獎導演班艾佛列克執導，揭示了當時尚未被發現的麥可喬丹與耐吉公司剛起步的籃球部門之間改變遊戲規則的合作關係，並透過飛人喬丹品牌徹底改變了體育界和文化界。主要演員包括麥特戴蒙、班艾佛列克、傑森貝特曼、克里斯梅西納、馬龍韋恩斯、克里斯塔克和薇拉戴維絲。",
+   "Language": "zh-TW"
+  },
+  {
+   "Title": "AIR: Theo Đuổi Một Huyền Thoại",
+   "Overview": "Từ đạo diễn đã từng đoạt giải thưởng Ben Affleck, AIR hé lộ mối quan hệ đột phá giữa huyền thoại Michael Jordan khi mới bắt đầu sự nghiệp và bộ phận bóng rổ còn non trẻ của Nike, đã làm thay đổi thế giới thể thao và văn hóa đương đại với thương hiệu Air Jordan. Câu chuyện cảm động này kể về sự đánh cược khi đặt lên bàn cân tình hình kinh doanh của cả công ty, tầm nhìn vĩ đại của một người mẹ biết giá trị và tài năng của con trai mình, và một siêu sao bóng rổ đã trở thành huyền thoại.",
+   "Language": "vi-VN"
+  },
+  {
+   "Title": "Air",
+   "Overview": "Uskomaton tarina koripallon silloisen keltanokan Michael Jordanin ja Niken kokemattoman koripallo-osaston välisestä suhteesta. Tämä kumppanuus synnytti brändin nimeltä Air Jordan, joka mullisti urheilumaailman ja nykykulttuurin.",
+   "Language": "fi-FI"
+  },
+  {
+   "Title": "Air – Harc a legendáért",
+   "Overview": "A sport világa többé soha nem lesz olyan, mint volt. Egy hízásra hajlamos, korosodó kosaras játékos-megfigyelő (Matt Damon) a Nike alkamazottja lesz. Szenvedélyesen keresi azt a kosarast, akivel szerződve az akkor még kis cég megmutathatja a világnak, mit tud. Keresi, keresi, végül megtalálja az emberét: egy olyan játékos személyében, aki még egy percet sem töltött az NBA pályáin. Ő mégis harcba száll azért, amiben hisz: hogy ha ezzel a zöldfülű kosarassal kötnek szerződést, az magasra viheti a céget. Új cipőt terveztet. Újfaja szerződést köt. Mindenkivel szembeszáll... Ő és társai másképpen gondolkodtak, mint a szakmájukban mindenki más. Mindent kockára tettek és igazuk lett.",
+   "Language": "hu-HU"
+  },
+  {
+   "Title": "Air: Κυνηγώντας Ένα Θρύλο",
+   "Overview": "Το “AIR” του βραβευμένου με Όσκαρ σκηνοθέτη, Μπεν Άφλεκ, αποκαλύπτει την απίστευτη και επαναστατική συνέργεια ανάμεσα στον τότε πρωτάρη Μάικλ Τζόρνταν και το ανερχόμενο τμήμα καλαθοσφαίρισης της Nike, το οποίο και έφερε την επανάσταση στον κόσμο των σπορ και της σύγχρονης κουλτούρας με το μπραντ του Air Jordan. Η συγκινητική αυτή ιστορία καταγράφει το καθοριστικό ρίσκο που πήρε μία αντισυμβατική ομάδα κόντρα σε όλους, το ασυμβίβαστο όραμα μιας μητέρας που γνωρίζει πολύ καλά την αξία του τεράστιου ταλέντου του γιου της, και το φαινόμενο του μπάσκετ που έμελλε να γίνει το μεγαλύτερο όλων των εποχών.",
+   "Language": "el-GR"
+  },
+  {
+   "Title": "Air: Большой прыжок",
+   "Overview": "1980-е. Продавец кроссовок из фирмы Nike Сонни Ваккаро и соучредитель Nike Фил Найт пытаются подписать контракт с многообещающим спортсменом Майклом Джорданом.",
+   "Language": "ru-RU"
+  },
+  {
+   "Title": "气垫传奇",
+   "Overview": "讲述当年还是新人球员的迈克尔·乔丹，和耐克成立不久的篮球部门合作，凭着Air Jordan改写体育世界及流行文化。片中的故事感动人心，呈现一个不按牌理出牌的团队赌上一切、一位清楚知道自己儿子有着无比才华及巨大价值的母亲，以及一位将成为史上最伟大的篮球天才。",
+   "Language": "zh-CN"
+  },
+  {
+   "Title": "Air",
+   "Overview": "Beno Afflecko režisuota komiška drama „Air“ atskleidžia neįtikėtinos tuomet dar tik pradedančio krepšininko Michaelo Jordano ir vos įkurto „Nike“ krepšinio padalinio partnerystės pradžią, su Air Jordan prekės ženklu sukėlusią visa pakeitusį perversmą sporto ir šiuolaikinės kultūros pasaulyje. Ši jaudinanti istorija pasakoja apie savo karjeras ant kortos pastačiusios netradicinės komandos lošimą va bank ir bekompromisę viziją mamos, žinančios milžinišką vertę talento savo sūnaus, kuriam lemta tapti visų laikų didžiausiu krepšinio fenomenu.",
+   "Language": "lt-LT"
+  },
+  {
+   "Title": "Air",
+   "Overview": "Ödüllü yönetmen Ben Affleck'in filmi AIR, Air Jordan markasıyla spor ve kültür dünyasında devrim yaratacak olan henüz keşfedilmemiş Michael Jordan ile Nike'ın yeni gelişmekte olan basketbol departmanı arasındaki ortaklığı gözler önüne seriyor. Başrollerde Matt Damon, Ben Affleck, Jason Bateman, Chris Messina, Marlon Wayans, Chris Tucker ve Viola Davis yer alıyor.",
+   "Language": "tr-TR"
+  },
+  {
+   "Title": "Air",
+   "Overview": "Här skildras partnerskapet mellan den dåvarande rookien Michael Jordan och Nikes nystartade basketdivision som revolutionerade sportvärlden och populärkulturen med varumärket Air Jordan. Projektet var en karriärdefinierande chansning där allt stod på spel och där den kompromisslösa visionen hos en mamma som visste värdet av sin sons enorma talang spelade en avgörande roll.",
+   "Language": "sv-SE"
+  },
+  {
+   "Title": "Air",
+   "Overview": "Descoperiți parteneriatul care a schimbat jocul dintre un Michael Jordan nedescoperit pe atunci și divizia de baschet a Nike, care a revoluționat lumea sportului și a culturii cu brandul Air Jordan.",
+   "Language": "ro-RO"
+  },
+  {
+   "Title": "Air",
+   "Overview": "“Air” conta a história da visionária parceria que mudou para sempre as regras do jogo. O inimaginável contrato entre o jovem promissor Michael Jordan e a principiante divisão de basquetebol da Nike, transformou o mundo do desporto e da cultura contemporânea com o lançamento da marca Air Jordan.",
+   "Language": "pt-PT"
+  },
+  {
+   "Title": "Air",
+   "Overview": "'Air' vertelt het waargebeurde verhaal van schoenenverkoper Sonny Vaccaro. Om een iconische sneaker voor Nike te creëren gaat hij een samenwerking aan met een basketbalspeler, Michael Jordan genaamd. De deal zal resulteren in een groot succes en is de aanzet tot vele andere overeenkomsten van topsporters.",
+   "Language": "nl-NL"
+  },
+  {
+   "Title": "Air: Zrodenie legendy",
+   "Overview": "Air, v hlavnej úlohe s Mattom Damonom v réžii Bena Afflecka, odhaľuje neuveriteľné spojenie, ktoré zmení budúcnosť jednej značky. A to všetko vďaka partnerstvu medzi vtedajším nováčikom a budúcou legendou Michaelom Jordanom a začínajúcou basketbalovou divíziou tenisiek Nike, ktoré so značkou Air Jordan spôsobilo revolúciu vo svete športu a súčasnej kultúry. Dojímavý príbeh nekonvenčného tímu o stávke na jednu kartu, ktorá môže buď všetko zničiť, alebo zmeniť športové dejiny, o nekompromisnej vízii matky, ktorá vie, aká je hodnota obrovského talentu jej syna, a o najväčšom basketbalovom fenoméne všetkých čias.",
+   "Language": "sk-SK"
+  },
+  {
+   "Title": "Ваздух",
+   "Overview": "Откријте партнерство које мења игру између тада неоткривеног Мајкла Џордана и новонастале Најкове кошаркашке дивизије које је револуционисало свет спорта и културе са брендом Ер Џордан.",
+   "Language": "sr-RS"
+  },
+  {
+   "Title": "Air",
+   "Overview": "Følger historien om sportsmarketingchefen Sonny Vaccaro, og hvordan han førte Nike i deres jagt på den største atlet i basketballhistorien, Michael Jordan.",
+   "Language": "da-DK"
+  },
+  {
+   "Title": "Air",
+   "Overview": "Narra la increïble i revolucionària associació entre Michael Jordan -un novell en aquell moment- i la incipient secció de bàsquet de Nike que va revolucionar el món de l'esport i la cultura contemporània amb la marca Air Jordan. L'atrevida aposta explica que va definir la carrera d'un equip poc convencional, la visió implacable d'una mare que coneix el valor de l'immens talent del seu fill i el fenomen del bàsquet que esdevindria el més gran de tots els temps.",
+   "Language": "ca-ES"
+  },
+  {
+   "Title": "Air",
+   "Overview": "Film o eni najvplivnejših športnih znamk na svetu, legendarna poslovna zgodba, ki je zaznamovala svet.  Zgodba o legendarni supergi, ki je navdušila Jordana in »rešila« Nike, nas popelje nazaj v osemdeseta leta, kjer se Sonny Vaccaro prizadeva, da prepriča takrat še mlado vzhajajočo zvezdo lige NBA Michaela Jordana v podpis partnerske pogodbe – ravno tiste, ki je Nikeu zagotovila položaj največje znamke športnih oblačil in obutve vse do danes.",
+   "Language": "sl-SI"
+  },
+  {
+   "Title": "Въздушния",
+   "Overview": "Създаден от носителя на Оскар Бен Афлек, „Въздушния“ разказва историята за легендарното партньорството между Майкъл Джордан и Nike. Сделката за линията Air Jordan е революционна за времето си и променя изцяло света на спорта и съвременната култура. Филмът показва битката за надмощие в бизнеса между екипа, който ще заложи всичко на карта и безмилостната конкуренция. Те трябва да спечелят на своя страна една безкомпромисна майка, която знае стойността на сина си и вярва в несравнимия му талант и баскетболния феномен, който ще се превърне в най-великия играч на всички времена.",
+   "Language": "bg-BG"
+  },
+  {
+   "Title": "Air",
+   "Overview": "L’incroyable collaboration entre Michael Jordan, alors jeune recrue, et la division naissante d’articles pour le basketball de l’entreprise Nike qui, avec la marque Air Jordan, révolutionna le monde du sport et la culture contemporaine. Cette histoire émouvante relate la gageure décisive d’une équipe hors-norme qui mit tout dans la balance, la vision d’une mère qui connaissait la valeur de l’immense talent de son fils et le phénomène du basket qui allait devenir le plus grand de tous les temps.",
+   "Language": "fr-CA"
+  },
+  {
+   "Title": "AIR: ჯორდანი",
+   "Overview": "",
+   "Language": "ka-GE"
+  },
+  {
+   "Title": "Air. Milzu lēciens",
+   "Overview": "",
+   "Language": "lv-LV"
+  }
+ ],
+ "Recommendations": [
+  {
+   "TmdbId": 136797,
+   "Title": "Need for Speed"
+  },
+  {
+   "TmdbId": 7214,
+   "Title": "Coach Carter"
+  },
+  {
+   "TmdbId": 1078581,
+   "Title": "Giant"
+  },
+  {
+   "TmdbId": 292011,
+   "Title": "Richard Jewell"
+  },
+  {
+   "TmdbId": 653851,
+   "Title": "Devotion"
+  },
+  {
+   "TmdbId": 760336,
+   "Title": "Munich - The Edge of War"
+  },
+  {
+   "TmdbId": 13537,
+   "Title": "Shattered Glass"
+  },
+  {
+   "TmdbId": 1144932,
+   "Title": "Queen of the Ring"
+  },
+  {
+   "TmdbId": 972433,
+   "Title": "Race for Glory: Audi vs. Lancia"
+  },
+  {
+   "TmdbId": 649394,
+   "Title": "Worth"
+  }
+ ],
+ "Credits": {
+  "Cast": [
+   {
+    "Name": "Matt Damon",
+    "Order": 0,
+    "Character": "Sonny Vaccaro",
+    "TmdbId": 1892,
+    "CreditId": "625f49dbbefb090098952ce3",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/aCvBXTAR9B1qRjIRzMBYhhbm1fR.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Jason Bateman",
+    "Order": 1,
+    "Character": "Rob Strasser",
+    "TmdbId": 23532,
+    "CreditId": "62a38f31e22d2800a889a4fb",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/8e6mt0vGjPo6eW52gqRuXy5YnfN.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Ben Affleck",
+    "Order": 2,
+    "Character": "Phil Knight",
+    "TmdbId": 880,
+    "CreditId": "625f49fc0792e1017842e9bf",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/aTcqu8cI4wMohU17xTdqmXKTGrw.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Chris Messina",
+    "Order": 3,
+    "Character": "David Falk",
+    "TmdbId": 61659,
+    "CreditId": "62a38f4cd556970051ec06c0",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/l9DbQTK5pI6SOGpmfbADGLhdOYS.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Viola Davis",
+    "Order": 4,
+    "Character": "Deloris Jordan",
+    "TmdbId": 19492,
+    "CreditId": "62a38f25d55697009c5dd0a3",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/xDssw6vpYNRjsybvMPRE30e0dPN.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Julius Tennon",
+    "Order": 5,
+    "Character": "James Jordan",
+    "TmdbId": 156405,
+    "CreditId": "62a390447f6c8d146d9a44b2",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/AojbyDoUCCIgMpNCoG8svP8iTW9.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Damian Young",
+    "Order": 6,
+    "Character": "Michael Jordan",
+    "TmdbId": 3968886,
+    "CreditId": "6416b017e9c0dc007b99a8de",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/g5OMohYL2i4vt9BzcrIu4dsFhGp.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Chris Tucker",
+    "Order": 7,
+    "Character": "Howard White",
+    "TmdbId": 66,
+    "CreditId": "62a38f417e12f02ff65578f8",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/rE5OaSWp45pNpMm2TYbAwLgYoCn.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Matthew Maher",
+    "Order": 8,
+    "Character": "Peter Moore",
+    "TmdbId": 1232599,
+    "CreditId": "62a3901053866e4f80ff59bf",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/3RPEUaliXJ9lcoL5R5IbcAOwd5D.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Gustaf Skarsgård",
+    "Order": 9,
+    "Character": "Horst Dassler",
+    "TmdbId": 63764,
+    "CreditId": "6302a6addfe31d007b82a69f",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/bfh0yP6Qr55jg9CGTGScXAw8Ftu.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Barbara Sukowa",
+    "Order": 10,
+    "Character": "Kathy Dassler",
+    "TmdbId": 23378,
+    "CreditId": "6416b09d0d5d85008386e739",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/lBPD683veT1RYdXqMAdAsldAtvI.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Jay Mohr",
+    "Order": 11,
+    "Character": "John Fisher",
+    "TmdbId": 12217,
+    "CreditId": "6416b0a50d5d8500ba0f83eb",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/wDDvg2DbLx669dcwiphRpk9h2PZ.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Joel Gretsch",
+    "Order": 12,
+    "Character": "John O'Neil",
+    "TmdbId": 25376,
+    "CreditId": "6302a6944fd141007fc5042a",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/8sTiI294vfMpli7hBEi8bDAVZ1t.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Michael O'Neill",
+    "Order": 13,
+    "Character": "Joe Dean",
+    "TmdbId": 21710,
+    "CreditId": "6416b0b95690b500bb019154",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/u9Ejl9iS4ZJ36Y653UCe8huLaOn.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Marlon Wayans",
+    "Order": 14,
+    "Character": "George Raveling",
+    "TmdbId": 9562,
+    "CreditId": "62a38fe7e38bd80099a549ce",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/7LYnX3vluHFBs1WCRKUjSIEDEkn.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Asanté Deshon",
+    "Order": 15,
+    "Character": "7-Eleven Clerk",
+    "TmdbId": 3968887,
+    "CreditId": "6416b0c3e74146008671c1e4",
+    "Images": []
+   },
+   {
+    "Name": "Billy Smith",
+    "Order": 16,
+    "Character": "Bill",
+    "TmdbId": 1218180,
+    "CreditId": "6416b0eee9c0dc00c3bde2e2",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/uzFxV2l3ODxfknHhIAgvLf0ihH6.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Al Madrigal",
+    "Order": 17,
+    "Character": "Tim",
+    "TmdbId": 90534,
+    "CreditId": "6416b0f7e9c0dc00a40bbbef",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/p4vN80EGGlzLb5J7G8Ss3n9K2pc.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Jackson Damon",
+    "Order": 18,
+    "Character": "Stan",
+    "TmdbId": 1730746,
+    "CreditId": "6416b1165690b500bb019180",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/AfR5CBFGmG5NVEPspydwWR5Ihl7.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Dan Bucatinsky",
+    "Order": 19,
+    "Character": "Richard",
+    "TmdbId": 87034,
+    "CreditId": "6416b11de7414600f7ee505d",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/5MmGUnWjNeOwcWhndqhQPi7URvv.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Jessica Green",
+    "Order": 20,
+    "Character": "Katrina Sainz",
+    "TmdbId": 1255055,
+    "CreditId": "635538e543250f007d048d47",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/4JSodEaThdJfbJVYOdW6IvWLQZ6.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Gabrielle Bourne",
+    "Order": 21,
+    "Character": "Tiffany",
+    "TmdbId": 1850158,
+    "CreditId": "6416b14531032500c5a9d87c",
+    "Images": []
+   },
+   {
+    "Name": "Joshua Funk",
+    "Order": 22,
+    "Character": "Yes Man",
+    "TmdbId": 1521489,
+    "CreditId": "6416b14c31032500e8a21474",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/qMZBYrboQF0F1csE8KQTWz2Q4Zq.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Andy Hirsch",
+    "Order": 23,
+    "Character": "Robinson",
+    "TmdbId": 1327400,
+    "CreditId": "6416b1535690b500bb019191",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/nbUpeq2au83wcu7SLwwHrAwWhjX.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Tami Jordan",
+    "Order": 24,
+    "Character": "Sports Book Clerk",
+    "TmdbId": 3968888,
+    "CreditId": "6416b15ee7414600d88eeea1",
+    "Images": []
+   },
+   {
+    "Name": "Jeff Cook",
+    "Order": 25,
+    "Character": "Jeff",
+    "TmdbId": 3968889,
+    "CreditId": "6416b1805690b500a2176d84",
+    "Images": []
+   },
+   {
+    "Name": "Albert Stroth",
+    "Order": 26,
+    "Character": "Al",
+    "TmdbId": 2509552,
+    "CreditId": "6416b1896a222700e9758e94",
+    "Images": []
+   },
+   {
+    "Name": "Mackenzie Rayne",
+    "Order": 27,
+    "Character": "Susan",
+    "TmdbId": 2433405,
+    "CreditId": "6416b1905690b501016257ce",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/mrMNlobDygXQxjwIWj2ZFhZPUCM.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Jerry Plummer",
+    "Order": 28,
+    "Character": "Waiter",
+    "TmdbId": 3968890,
+    "CreditId": "6416b19c6a2227008de7fd1a",
+    "Images": []
+   },
+   {
+    "Name": "Ari Davis",
+    "Order": 29,
+    "Character": "Restaurant Guest (uncredited)",
+    "TmdbId": 582821,
+    "CreditId": "645df8e2aafebd00e39e6226",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/xFmkwuPZO5pBfBwPNZ7eDRVHfHv.jpg"
+     }
+    ]
+   }
+  ],
+  "Crew": [
+   {
+    "Name": "Ben Affleck",
+    "Order": 0,
+    "Job": "Director",
+    "Department": "Directing",
+    "TmdbId": 880,
+    "CreditId": "625f4a11e61e6d00a79f3f15",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/aTcqu8cI4wMohU17xTdqmXKTGrw.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Alex Convery",
+    "Order": 1,
+    "Job": "Writer",
+    "Department": "Writing",
+    "TmdbId": 3672370,
+    "CreditId": "6302a5b6f056d50090c868dd",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/dE5kBGuocvsWyRPN9b1PkeRySRk.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Matt Damon",
+    "Order": 2,
+    "Job": "Producer",
+    "Department": "Production",
+    "TmdbId": 1892,
+    "CreditId": "625f4a4c9defda01641f78d0",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/aCvBXTAR9B1qRjIRzMBYhhbm1fR.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Ben Affleck",
+    "Order": 3,
+    "Job": "Producer",
+    "Department": "Production",
+    "TmdbId": 880,
+    "CreditId": "625f4a2ae61e6d0050f7c458",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/aTcqu8cI4wMohU17xTdqmXKTGrw.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "David Ellison",
+    "Order": 4,
+    "Job": "Producer",
+    "Department": "Production",
+    "TmdbId": 58433,
+    "CreditId": "6302a772fb52990082817d37",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/gaT9cIEJPm7nWxpJyZWMy4Ayv6y.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Peter Guber",
+    "Order": 5,
+    "Job": "Producer",
+    "Department": "Production",
+    "TmdbId": 3804,
+    "CreditId": "6302a626b39e350082d5e2ba",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/6QILn3KDqoJrRMz8rRzTYS3igCc.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Jason Michael Berman",
+    "Order": 6,
+    "Job": "Producer",
+    "Department": "Production",
+    "TmdbId": 1301687,
+    "CreditId": "6302a62c7ad08c0082501580",
+    "Images": []
+   },
+   {
+    "Name": "Jeff Robinov",
+    "Order": 7,
+    "Job": "Producer",
+    "Department": "Production",
+    "TmdbId": 58207,
+    "CreditId": "6302a7625f4b73007af13b64",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/qkrprpYjhglpwyeTx1rwi49xOEd.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Madison Ainley",
+    "Order": 8,
+    "Job": "Producer",
+    "Department": "Production",
+    "TmdbId": 2050917,
+    "CreditId": "6302a76d0816c7009241626b",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/agmAeVEEBkqaLZMY46kaSZxwQpk.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Dana Goldberg",
+    "Order": 9,
+    "Job": "Executive Producer",
+    "Department": "Production",
+    "TmdbId": 29018,
+    "CreditId": "6302a851097c490091109d24",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/AtiT0HTrrrvVVjZgOXpxKxVFyAb.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Kevin Halloran",
+    "Order": 10,
+    "Job": "Executive Producer",
+    "Department": "Production",
+    "TmdbId": 95849,
+    "CreditId": "6302a86167e0f7007a8ba6cf",
+    "Images": []
+   },
+   {
+    "Name": "Jon Weinbach",
+    "Order": 11,
+    "Job": "Executive Producer",
+    "Department": "Production",
+    "TmdbId": 1084962,
+    "CreditId": "6302a83021118f0080a08f19",
+    "Images": []
+   },
+   {
+    "Name": "Don Granger",
+    "Order": 12,
+    "Job": "Executive Producer",
+    "Department": "Production",
+    "TmdbId": 56737,
+    "CreditId": "6302a85bdfe31d007b82a6dc",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/xoNLvv80bmhqGs8o4u03ZIE3EgT.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Jesse Sisgold",
+    "Order": 13,
+    "Job": "Executive Producer",
+    "Department": "Production",
+    "TmdbId": 3672397,
+    "CreditId": "6302a8457d41aa008153a647",
+    "Images": []
+   },
+   {
+    "Name": "Peter E. Strauss",
+    "Order": 14,
+    "Job": "Executive Producer",
+    "Department": "Production",
+    "TmdbId": 68693,
+    "CreditId": "6302a8b296e30b007fdf48f6",
+    "Images": []
+   },
+   {
+    "Name": "Jordan Moldo",
+    "Order": 15,
+    "Job": "Executive Producer",
+    "Department": "Production",
+    "TmdbId": 3571096,
+    "CreditId": "6302a8a30816c7007b69a49a",
+    "Images": []
+   },
+   {
+    "Name": "Michael Joe",
+    "Order": 16,
+    "Job": "Executive Producer",
+    "Department": "Production",
+    "TmdbId": 1519661,
+    "CreditId": "6302a86e0816c7007b69a48c",
+    "Images": []
+   },
+   {
+    "Name": "John Graham",
+    "Order": 17,
+    "Job": "Executive Producer",
+    "Department": "Production",
+    "TmdbId": 2446692,
+    "CreditId": "6302a8923503980082ad0c1c",
+    "Images": []
+   },
+   {
+    "Name": "Drew Vinton",
+    "Order": 18,
+    "Job": "Executive Producer",
+    "Department": "Production",
+    "TmdbId": 2368762,
+    "CreditId": "6302a89928723c007dab66c3",
+    "Images": []
+   },
+   {
+    "Name": "Robert Richardson",
+    "Order": 19,
+    "Job": "Director of Photography",
+    "Department": "Camera",
+    "TmdbId": 149,
+    "CreditId": "62a0fa0f389da100503fd3c7",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/lmJy31oZtN5l2VAGpkrt3xEXsxL.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Mary Vernieu",
+    "Order": 20,
+    "Job": "Casting",
+    "Department": "Production",
+    "TmdbId": 5914,
+    "CreditId": "699c31c111b8a91d1dc5a906",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/z37Cmn0MJdWCSC8ydkyoseiYUYk.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Andy Nelson",
+    "Order": 21,
+    "Job": "Sound Re-Recording Mixer",
+    "Department": "Sound",
+    "TmdbId": 1338976,
+    "CreditId": "63f2f31052497800dc441bcf",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/Ape71jbTSS8tPu4Mj6H4n3U29Tz.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Dan O'Connell",
+    "Order": 22,
+    "Job": "Foley Artist",
+    "Department": "Sound",
+    "TmdbId": 1338372,
+    "CreditId": "641738a26a2227010c4bf603",
+    "Images": []
+   },
+   {
+    "Name": "Willie D. Burton",
+    "Order": 23,
+    "Job": "Sound Mixer",
+    "Department": "Sound",
+    "TmdbId": 1546115,
+    "CreditId": "6417388531032500c5aa0ba3",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/scUZhjN7gsFGquUUBFdrVU34t9y.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Dan Kenyon",
+    "Order": 24,
+    "Job": "Sound Effects Editor",
+    "Department": "Sound",
+    "TmdbId": 1576849,
+    "CreditId": "63f2f2d94a4bfc008642b0eb",
+    "Images": []
+   },
+   {
+    "Name": "Ai-Ling Lee",
+    "Order": 25,
+    "Job": "Supervising Sound Editor",
+    "Department": "Sound",
+    "TmdbId": 1367494,
+    "CreditId": "63f2f2e6caaca200b9f676c4",
+    "Images": []
+   },
+   {
+    "Name": "Ai-Ling Lee",
+    "Order": 26,
+    "Job": "Sound Re-Recording Mixer",
+    "Department": "Sound",
+    "TmdbId": 1367494,
+    "CreditId": "63f2f2ee15376c00b1ef0cd8",
+    "Images": []
+   },
+   {
+    "Name": "Ai-Ling Lee",
+    "Order": 27,
+    "Job": "Sound Designer",
+    "Department": "Sound",
+    "TmdbId": 1367494,
+    "CreditId": "63f2f2f7524978009e7866d9",
+    "Images": []
+   },
+   {
+    "Name": "William Goldenberg",
+    "Order": 28,
+    "Job": "Editor",
+    "Department": "Editing",
+    "TmdbId": 15841,
+    "CreditId": "62d94238764b9905e56a703f",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/eOgoea8HbZt2TfLn0tDNI1TepSN.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "David Webb",
+    "Order": 29,
+    "Job": "First Assistant Director",
+    "Department": "Directing",
+    "TmdbId": 82133,
+    "CreditId": "6873ee77c7334f7c17c099c6",
+    "Images": []
+   }
+  ]
+ },
+ "Studio": "Amazon Studios",
+ "YoutubeTrailerId": "Euy4Yu6B3nU",
+ "Certifications": [
+  {
+   "Country": "AU",
+   "Certification": "M"
+  },
+  {
+   "Country": "BE",
+   "Certification": "16"
+  },
+  {
+   "Country": "CA",
+   "Certification": "18A"
+  },
+  {
+   "Country": "CZ",
+   "Certification": "12+"
+  },
+  {
+   "Country": "DE",
+   "Certification": "6"
+  },
+  {
+   "Country": "ES",
+   "Certification": "7"
+  },
+  {
+   "Country": "FI",
+   "Certification": "S"
+  },
+  {
+   "Country": "FR",
+   "Certification": "12"
+  },
+  {
+   "Country": "GB",
+   "Certification": "15"
+  },
+  {
+   "Country": "GR",
+   "Certification": "K12"
+  },
+  {
+   "Country": "HK",
+   "Certification": "IIB"
+  },
+  {
+   "Country": "IE",
+   "Certification": "15A"
+  },
+  {
+   "Country": "IL",
+   "Certification": "All"
+  },
+  {
+   "Country": "IT",
+   "Certification": "6+"
+  },
+  {
+   "Country": "KR",
+   "Certification": "15"
+  },
+  {
+   "Country": "LT",
+   "Certification": "N-16"
+  },
+  {
+   "Country": "MX",
+   "Certification": "C"
+  },
+  {
+   "Country": "NL",
+   "Certification": "AL"
+  },
+  {
+   "Country": "NO",
+   "Certification": "9"
+  },
+  {
+   "Country": "PR",
+   "Certification": "R"
+  },
+  {
+   "Country": "RO",
+   "Certification": "12"
+  },
+  {
+   "Country": "SE",
+   "Certification": "Btl"
+  },
+  {
+   "Country": "SG",
+   "Certification": "NC16"
+  },
+  {
+   "Country": "TH",
+   "Certification": "G"
+  },
+  {
+   "Country": "TR",
+   "Certification": "16+"
+  },
+  {
+   "Country": "TW",
+   "Certification": "6+"
+  },
+  {
+   "Country": "US",
+   "Certification": "R"
+  }
+ ],
+ "Status": null,
+ "Collection": null,
+ "Homepage": "https://www.amazon.com/salp/air?hhf"
+}

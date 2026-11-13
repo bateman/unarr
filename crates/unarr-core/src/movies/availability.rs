@@ -8,12 +8,18 @@ use super::model::{Movie, MovieStatus};
 /// `GetReleaseDate`: the day the movie is released in the sense its
 /// minimum availability asks for. For `released`, the earlier of the
 /// digital and the physical release, else whichever there is, else ninety
-/// days after the cinemas; for `inCinemas`, the cinema date. `announced`
-/// and `tba` have no date: the movie is available as soon as it is known.
+/// days after the cinemas; for `inCinemas`, the cinema date; for `announced`
+/// and `tba`, the first of the three dates there are (the movie itself is
+/// available as soon as it is known).
 pub fn release_date(movie: &Movie) -> Option<DateTime<Utc>> {
     let md = &movie.metadata;
     match movie.minimum_availability {
-        MovieStatus::Tba | MovieStatus::Announced | MovieStatus::Deleted => None,
+        // `GetReleaseDate`: the first of the three dates there are.
+        MovieStatus::Tba | MovieStatus::Announced => [md.in_cinemas, md.digital_release, md.physical_release]
+            .into_iter()
+            .flatten()
+            .min(),
+        MovieStatus::Deleted => None,
         MovieStatus::InCinemas => md.in_cinemas.or_else(|| released_date(movie)),
         MovieStatus::Released => released_date(movie),
     }

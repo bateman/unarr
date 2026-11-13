@@ -1,0 +1,24 @@
+{
+  "body": {
+    "id": 1,
+    "maxSize": 120,
+    "minSize": 1.5,
+    "preferredSize": 60,
+    "quality": {
+      "id": 0,
+      "modifier": "none",
+      "name": "Unknown",
+      "resolution": 0,
+      "source": "unknown"
+    },
+    "title": "Renamed",
+    "weight": 1
+  },
+  "recordedAt": "2026-11-13T12:41:29Z",
+  "request": {
+    "body": "bodies/qualitydefinition-put.json",
+    "method": "PUT",
+    "path": "/api/v3/qualitydefinition/1"
+  },
+  "status": 202
+}

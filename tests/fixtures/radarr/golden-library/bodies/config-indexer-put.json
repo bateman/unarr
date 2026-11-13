@@ -1,0 +1,1 @@
+{"$from": "config-indexer", "$set": {"minimumAge": 10, "retention": 100, "maximumSize": 5000, "rssSyncInterval": 60, "preferIndexerFlags": true, "availabilityDelay": 2, "allowHardcodedSubs": true, "whitelistedHardcodedSubs": "ita"}}

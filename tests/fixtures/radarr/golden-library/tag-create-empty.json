@@ -1,0 +1,23 @@
+{
+  "body": [
+    {
+      "attemptedValue": "",
+      "errorCode": "NotEmptyValidator",
+      "errorMessage": "'Label' must not be empty.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Label",
+        "propertyValue": ""
+      },
+      "propertyName": "Label",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:41:20Z",
+  "request": {
+    "body": "bodies/tag-create-empty.json",
+    "method": "POST",
+    "path": "/api/v3/tag"
+  },
+  "status": 400
+}

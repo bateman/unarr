@@ -1,0 +1,37 @@
+{
+  "body": [
+    {
+      "attemptedValue": "movies/Dune",
+      "errorCode": "PathValidator",
+      "errorMessage": "Invalid Path: 'movies/Dune'",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "path": "movies/Dune",
+        "propertyName": "Path",
+        "propertyValue": "movies/Dune"
+      },
+      "propertyName": "Path",
+      "severity": "error"
+    },
+    {
+      "attemptedValue": "movies/Dune",
+      "errorCode": "PathValidator",
+      "errorMessage": "Invalid Path: 'movies/Dune'",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "path": "movies/Dune",
+        "propertyName": "Path",
+        "propertyValue": "movies/Dune"
+      },
+      "propertyName": "Path",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:38:48Z",
+  "request": {
+    "body": "bodies/movie-add-relative-path.json",
+    "method": "POST",
+    "path": "/api/v3/movie"
+  },
+  "status": 400
+}

@@ -1,0 +1,25 @@
+{
+  "body": [
+    {
+      "attemptedValue": 0,
+      "errorCode": "GreaterThanOrEqualValidator",
+      "errorMessage": "The UI Language value cannot be less than 1",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "comparisonProperty": "",
+        "comparisonValue": 1,
+        "propertyName": "UI Language",
+        "propertyValue": 0
+      },
+      "propertyName": "UILanguage",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:41:12Z",
+  "request": {
+    "body": "bodies/config-ui-put-language-zero.json",
+    "method": "PUT",
+    "path": "/api/v3/config/ui/1"
+  },
+  "status": 400
+}

@@ -1,0 +1,1021 @@
+{
+ "TmdbId": 49047,
+ "ImdbId": "tt1454468",
+ "Title": "Gravity",
+ "Overview": "Dr Ryan Stone, an engineer on her first space mission, and Matt Kowalski, an astronaut on his final expedition, have to survive in space after they are hit by debris while spacewalking.",
+ "OriginalTitle": "Gravity",
+ "OriginalLanguage": "en",
+ "TitleSlug": "49047",
+ "Runtime": 91,
+ "Popularity": 9.6727,
+ "Year": 2013,
+ "Premier": "2013-08-28T00:00:00Z",
+ "InCinema": "2013-10-03T00:00:00Z",
+ "PhysicalRelease": "2014-01-29T00:00:00Z",
+ "DigitalRelease": "2018-03-04T00:00:00Z",
+ "Images": [
+  {
+   "CoverType": "Poster",
+   "Url": "https://image.tmdb.org/t/p/original/kZ2nZw8D681aphje8NJi8EfbL1U.jpg"
+  },
+  {
+   "CoverType": "Fanart",
+   "Url": "https://image.tmdb.org/t/p/original/a2n6bKD7qhCPCAEALgsAhWOAQcc.jpg"
+  }
+ ],
+ "Ratings": [
+  {
+   "Count": 16869,
+   "Value": 7.172,
+   "Origin": "Tmdb",
+   "Type": "User"
+  }
+ ],
+ "MovieRatings": {
+  "Tmdb": {
+   "Count": 16869,
+   "Value": 7.172,
+   "Type": "User"
+  },
+  "Imdb": {
+   "Count": 909284,
+   "Value": 7.7,
+   "Type": "User"
+  },
+  "Metacritic": {
+   "Count": 0,
+   "Value": 96,
+   "Type": "User"
+  },
+  "RottenTomatoes": {
+   "Count": 0,
+   "Value": 96,
+   "Type": "User"
+  },
+  "Trakt": {
+   "Count": 25001,
+   "Value": 7.50158,
+   "Type": "User"
+  }
+ },
+ "Genres": [
+  "Science Fiction",
+  "Thriller",
+  "Drama"
+ ],
+ "Keywords": [
+  "astronaut",
+  "loss",
+  "space",
+  "space mission",
+  "space station",
+  "trapped in space"
+ ],
+ "AlternativeTitles": [
+  {
+   "Title": "Gravitatsioon",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "Ko'akh Meshikha",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "Gravity: Misiune in spatiu",
+   "Type": "Tmdb",
+   "Language": "ro"
+  },
+  {
+   "Title": "Гравiтацiя",
+   "Type": "Tmdb",
+   "Language": "uk"
+  },
+  {
+   "Title": "כוח משיכה",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "גרביטי",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "גראביטי",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "Gravity 3D",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "그래비티",
+   "Type": "Tmdb",
+   "Language": "ko"
+  },
+  {
+   "Title": "Gravity 2013",
+   "Type": "Tmdb",
+   "Language": "ja"
+  },
+  {
+   "Title": "Cuộc Chiến Không Trọng Lực",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "Yerçəkimi",
+   "Type": "Tmdb",
+   "Language": "en"
+  }
+ ],
+ "Translations": [
+  {
+   "Title": "Gravity",
+   "Overview": "Dr Ryan Stone, an engineer on her first space mission, and Matt Kowalski, an astronaut on his final expedition, have to survive in space after they are hit by debris while spacewalking.",
+   "Language": "en-US"
+  },
+  {
+   "Title": "Gravity",
+   "Overview": "Pour sa première expédition à bord d'une navette spatiale, le docteur Ryan Stone, brillante experte en ingénierie médicale, accompagne l'astronaute chevronné Matt Kowalski qui effectue son dernier vol avant de prendre sa retraite. Mais alors qu'il s'agit apparemment d'une banale sortie dans l'espace, une catastrophe se produit. Lorsque la navette est pulvérisée, Stone et Kowalski se retrouvent totalement seuls, livrés à eux-mêmes dans l'univers...",
+   "Language": "fr-FR"
+  },
+  {
+   "Title": "Gravidade",
+   "Overview": "Quando detritos destroem o seu vaivém, uma engenheira e um veterano astronauta ficam a flutuar no espaço, sem qualquer contacto com a Terra.",
+   "Language": "pt-PT"
+  },
+  {
+   "Title": "Gravity",
+   "Overview": "Gli astronauti Ryan Stone e Matt Kowalsky lavorano ad alcune riparazioni di una stazione orbitante nello spazio quando un'imprevedibile catena di eventi gli scaraventa contro una tempesta di detriti. L'impatto è devastante, distrugge la loro stazione e li lascia a vagare nello spazio nel disperato tentativo di sopravvivere e trovare una maniera per tornare sulla Terra.",
+   "Language": "it-IT"
+  },
+  {
+   "Title": "Gravity",
+   "Overview": "Durante un paseo espacial rutinario, dos astronautas sufren un grave accidente y quedan flotando en el espacio. Una es la doctora Ryan Stone, una brillante ingeniera en su primera misión espacial en la Shuttle. Su acompañante es el veterano astronauta Matt Kowalsky. Durante el paseo algo sale mal y ocurre el desastre: el shuttle queda destrozado, dejando a Ryan y Matt completamente solos, momento a partir del cual intentarán por todos los medios volver a la Tierra.",
+   "Language": "es-ES"
+  },
+  {
+   "Title": "Gravity",
+   "Overview": "Die brillante Bio-Medizinerin Dr. Ryan Stone geht auf ihre erste Weltraum-Mission. An ihrer Seite ist der Astronaut Matt Kowalski, ein Veteran auf seinem letzten Trip ins All vor dem Ruhestand. Doch ein Routineausflug der beiden Astronauten außerhalb der Raumkapsel endet im Desaster. Das Shuttle wird zerstört, Ryan und Matt befinden sich plötzlich ganz alleine in den dunklen Tiefen des Weltraums - um sie herum nur Stille. Die Raumfahrer haben jeglichen Kontakt zur Erde verloren und es gibt keine Aussicht auf eine Rettung, während ein Verbindungsband wenigstens verhindert, dass sich die beiden auch noch gegenseitig verlieren. Jeder Atemzug frisst etwas mehr von dem wenigen Sauerstoff, den sie noch haben, und schließlich wird Angst zu Panik und dann zu tiefer, hoffnungsloser Verzweiflung.",
+   "Language": "de-DE"
+  },
+  {
+   "Title": "Gravitáció",
+   "Overview": "A nem túl távoli jövőben baleset történik egy űrállomáson: a váratlanul becsapódó meteorok megsemmisítik a bázist, és a két - éppen az űrhajón kívül dolgozó - asztronautát elszakítják a hajótól. Az újonc dr. Stone és a sokat próbált Kowalsky csupán egymáshoz kötve sodródik a végtelen űrben. Nincs, ami megállítsa őket, és nincs, aki a segítségükre siessen: a sisakjukban visszhangzó csend azt jelzi, hogy semmilyen kapcsolatuk nem maradt a földi irányítással.  A félelem fokozatosan pánikba fordul. Minden lélegzet számít. Minden másodperc létfontosságú. A hazavezető egyetlen út az univerzum rémítő ürességén keresztül vezet.",
+   "Language": "hu-HU"
+  },
+  {
+   "Title": "Гравитация",
+   "Overview": "Доктор Райан Стоун, блестящий специалист в области медицинского инжиниринга, отправляется в свою первую космическую миссию под командованием ветерана астронавтики Мэтта Ковальски, для которого этот полет — последний перед отставкой. Но во время, казалось бы, рутинной работы за бортом случается катастрофа. Шаттл уничтожен, а Стоун и Ковальски остаются совершенно одни; они находятся в связке друг с другом, и все, что они могут, — это двигаться по орбите в абсолютно черном пространстве без всякой связи с Землей и какой-либо надежды на спасение.",
+   "Language": "ru-RU"
+  },
+  {
+   "Title": "Gravity",
+   "Overview": "Dr. Ryan Stone is een briljante medische ingenieur die op haar eerste shuttlemissie gaat met de ervaren astronaut Matt Kowalsky, die het commando heeft over zijn laatste vlucht voor hij op pensioen gaat. Maar een schijnbaar routine ruimtewandeling draait uit op een ramp.",
+   "Language": "nl-NL"
+  },
+  {
+   "Title": "地心引力",
+   "Overview": "瑞安·斯通博士首次执行太空任务，与经验丰富的宇航员马特·科沃斯基搭乘“探索者”号航天飞机，在太空中维修哈勃太空望远镜，而这也是科沃斯基退休前的最后一次飞行。就在两人进行舱外作业时，一颗俄罗斯卫星被摧毁后产生的大量碎片引发连锁碰撞，“探索者”号也遭到重创。突如其来的灾难令两人与地面失去联系，被困在浩瀚无垠的太空之中。面对高速袭来的碎片、不断消耗的氧气和几乎无处可逃的绝境，两名幸存者只能彼此依靠，寻找返回地球的一线生机……",
+   "Language": "zh-CN"
+  },
+  {
+   "Title": "Gravitácia",
+   "Overview": "Oscarová Sandra Bullock a George Clooney sa predstavia v hlavných úlohách dychberúceho thrilleru režiséra Alfonsa Cuaróna \"Gravitácia\", ktorý vás zavedie do nekonečných a neúprosných hlbín vesmíru. Doktorka Ryan Stone sa vydáva na svoju prvú vesmírnu misiu. Sprevádza ju skúsený astronaut matt Kowalsky, ktorý plánuje po návrate na Zem odísť do dôchodku. Ich raketoplán má však vážnu poruchu a na prvý pohľad rutinná misia sa razom mení na boj o život. Stone a Kowalsky sa ocitajú úplne sami uprostred čiernej prázdnoty, len priviazaní jeden o druhého. Skľučujúce ticho je dôkazom definitívnej straty spojenia so Zemou... a šance na záchranu. Strach sa mení na paniku a s každým nádychom sa zmenšujú zásoby kyslíka. Možno jediný spôsob ako sa vrátiť domov, je vrhnúť sa do nekonečného prázdna.",
+   "Language": "sk-SK"
+  },
+  {
+   "Title": "Grawitacja",
+   "Overview": "Dr Ryan Stone jest wybitną specjalistką od inżynierii medycznej. Zatrudniona przez NASA trafia do zespołu pracującego przy naprawie teleskopu Hubble'a. Dowódcą misji jest Matt Kowalsky, który po powrocie na Ziemię ma zakończyć karierę astronauty. Kiedy w prom kosmiczny, którym astronauci przylecieli na orbitę, uderzają szczątki starego rosyjskiego satelity, ginie większość członków misji. Przy życiu pozostają tylko dr Stone i Kowalsky. Od tej chwili są zdani tylko na siebie. Muszą dotrzeć do innego promu, ale zapas powietrza w uszkodzonych zbiornikach nieubłaganie się wyczerpuje...",
+   "Language": "pl-PL"
+  },
+  {
+   "Title": "Gravity",
+   "Overview": "To amerikanske astronauter, den erfarne Matt og hans uprøvede, kvindelige kollega Ryan, reparerer Hubble-teleskopet oppe i atmosfæren. En sværm af rumvraggods vender op og ned på deres mission. Deres fartøj bliver ødelagt, og uden radiokontakt til Jorden efterlades Ryan og Matt frit svævende i rummet. Deres eneste håb er at nå over til ISS' redningskapsel, men iltreserverne svinder hurtigt ind ...",
+   "Language": "da-DK"
+  },
+  {
+   "Title": "Gravity",
+   "Overview": "Dr Ryan Stone, en ingenjör på sitt första rymduppdrag och astronauten Matt Kowalski på sin sista, hamnar i en oväntad katastrof som isolerar dem i rymdens tysta mörker.  Plötsligt har de bara varandra och en rädsla som sakta men säkert övergår i panik när syret börjar ta slut.",
+   "Language": "sv-SE"
+  },
+  {
+   "Title": "Gravitace",
+   "Overview": "Sandra Bullock ve filmu hraje doktorku Ryan Stone, skvělou lékařku – inženýrku na její první vesmírné misi. George Clooney ztvárnil vesmírného veterána Matta Kowalskyho, který velí svému poslednímu letu před odchodem do důchodu. Jenže během zdánlivě rutinní výpravy do kosmu dojde ke katastrofě. Loď je zničená a Stone a Kowalsky zůstanou ve vesmíru sami, odkázáni jeden na druhého a směřujíc dál do temného vesmíru. Hluboké ticho dává oběma jasně najevo, že ztratili jakékoli spojení se Zemí... a tím i jakoukoli šanci na záchranu. Strach se pomalu mění v paniku, zejména když si oba uvědomí, jak málo kyslíku jim zbývá. Přitom paradoxně jediný možný způsob návratu je pokračování v cestě do hlubokého vesmíru.",
+   "Language": "cs-CZ"
+  },
+  {
+   "Title": "Yerçekimi",
+   "Overview": "Dr. Ryan Stone zeki bir tıp mühendisidir ve emekliliğinden önce son görevine çıkan yetenekli ve deneyimli astronot Matt Kowalsky'nin yönetimindeki mekikte ilk uzay yolculuğuna çıkar. Her şey yolunda gibi görünürken rutin bir keşif yürüyüşü sırasında bir felaket yaşanır. Mekik çarpan bir cisim sonucu paramparça olur. İki bilim insanı uzay boşluğunda yapayalnız kalırlar. Yeryüzü ile iletişimleri tamamen kopmuştur ve sonsuz karanlıkla baş başadırlar. Şimdi korkunun yerini panik alır, üstelik var olan sınırlı oksijenleri de gitgide tükenmektedir. İkili eve, dünyaya dönüş yolunu bulabilecek midir?",
+   "Language": "tr-TR"
+  },
+  {
+   "Title": "Gravity",
+   "Overview": "Η Δόκτωρ Ράιαν Στόουν είναι μια ιατρική μηχανικός στην πρώτη της διαστημική αποστολή και συνοδεύεται από το βετεράνο αστροναύτη Ματ Κοβάλσκι, επικεφαλής της αποστολής. Κατά τη διάρκεια ενός διαστημικού περιπάτου, ο διαστημικός σταθμός καταστρέφεται και οι Στόουν και Κοβάλσκι μένουν εγκαταλελειμμένοι στο διάστημα χωρίς καμία επικοινωνία με τη Γη.",
+   "Language": "el-GR"
+  },
+  {
+   "Title": "Гравитация",
+   "Overview": "Д-р Райън Стоун е медицински инженер на първата си мисия под командването на ветерана астронавт Мат Ковалски. Въпреки че мисията е рутинна, се случва злополука. Совалката е унищожена, а Стоун и Ковалски остават съвсем сами да се носят из космическия мрак. Те разбират, че са загубили всякаква връзка със Земята и страхът бързо прераства в паника. Ще намерят ли начин да се върнат у дома?",
+   "Language": "bg-BG"
+  },
+  {
+   "Title": "Gravity",
+   "Overview": "Ryan Stone on lahjakas lääkintäupseeri ensimmäisellä sukkulalennollaan konkariastronautti Matt Kowalskyn kanssa, joka taas johtaa viimeistä lentoaan ennen eläkkeelle jäämistä. Katastrofi iskee kuitenkin rutiininomaisella avaruuskävelyllä. Kun sukkula tuhoutuu, Stone ja Kowalsky jäävät tyystin oman onnensa nojaan — pimeyden syövereitä kohti leijaillessaan he eivät ole kiinni missään muualla kuin toisissaan. Painostava hiljaisuus kertoo, että yhteys maahan on lopullisesti menetetty... ja sen mukana kaikki toivo pelastumisesta. Pelon vaihtuessa paniikkiin jokainen hengenveto kuluttaa jo ennestään rajallisia happivaroja. Kenties viimeinen toivo kotiinpääsystä onkin matkaaminen yhä syvemmälle avaruuden pelottavaan syleilyyn.",
+   "Language": "fi-FI"
+  },
+  {
+   "Title": "กราวิตี้ มฤตยูแรงโน้มถ่วง",
+   "Overview": "บุลล็อครับบทเป็น ดร.ไรอัน สโตน วิศวกรรมอัจฉริยะด้านการแพทย์ที่อยู่ในภารกิจบนยานอวกาศเป็นครั้งแรกร่วมกับแม็ตต์ โควัลสกี้ มนุษย์อวกาศที่มากประสบการณ์ (คลูนีย์) แต่ช่วงที่เดินสำรวจอวกาศได้เกิดเหตุร้ายขึ้น ยานอวกาศพังสิ้นสภาพจนสโตนและโควัลสกี้ต้องอยู่อย่างเคว้งคว้ง ไม่สามารถยึดติดกับสิ่งใดได้นอกจากพวกเขาที่ต้องโคจรออกไปในความมืด  ความเงียบสงัดบอกกับพวกเขาว่าหมดทางติดต่อกับโลก…และโอกาสในการได้รับความช่วยเหลือแล้ว ขณะที่ความกลัวเปลี่ยนเป็นอาการขวัญเสีย ห้วงอวกาศที่กว้างใหญ่ก็ทำให้ออกซิเจนที่มีน้อยนิดค่อยๆ หมดลง",
+   "Language": "th-TH"
+  },
+  {
+   "Title": "Гравітація",
+   "Overview": "Група астронавтів коротає дні на космічній станції біля кордонів сонячної системи. Одного разу, коли капітан і його миловидна колега виконують завдання у відкритому космосі, уламки супутника, що вибухнув, вбивають весь екіпаж. Двоє бідолах залишаються зовсім самі за мільйони миль від Землі, намагаючись знайти спосіб повернутися додому.",
+   "Language": "uk-UA"
+  },
+  {
+   "Title": "그래비티",
+   "Overview": "허블 우주망원경을 수리하던 라이언 스톤 박사는 파괴된 인공위성의 잔해가 작업 구역을 덮치는 사고로 우주 공간에 내던져진다. 타고 온 왕복선은 망가졌고, 몸을 붙들 곳 없는 공간에서 산소마저 줄어들자 공포가 밀려온다. 가까스로 다가온 베테랑 우주비행사 매트 코왈스키는 스톤과 함께 살아서 지구로 돌아갈 방법을 찾기 시작한다. 두 사람이 의지할 수 있는 것은 서로의 목소리와 경험, 그리고 가까운 국제우주정거장으로 이동할 수 있다는 희망뿐이다. 하지만 지구를 한 바퀴 도는 잔해가 다시 덮치기까지 남은 시간은 90분이라, 두려움을 추스를 틈도 없이 움직여야 한다. 아름답게 빛나는 지구를 바라보며, 스톤은 한 번의 실수도 되돌리기 어려운 진공 속에서 다음 손잡이를 향해 나아간다.",
+   "Language": "ko-KR"
+  },
+  {
+   "Title": "ゼロ・グラビティ",
+   "Overview": "地表から600キロメートルも離れた宇宙で、ミッションを遂行していたメディカルエンジニアのライアン・ストーン博士とベテラン宇宙飛行士マット・コワルスキー。すると、スペースシャトルが大破するという想定外の事故が発生し、二人は一本のロープでつながれたまま漆黒の無重力空間へと放り出される。地球に戻る交通手段であったスペースシャトルを失い、残された酸素も2時間分しかない絶望的な状況で、彼らは懸命に生還する方法を探っていく。",
+   "Language": "ja-JP"
+  },
+  {
+   "Title": "כח משיכה",
+   "Overview": "דר' ראיין סטון היא מהנדסת רפואית מבריקה בטיסתה הראשונה לחלל עם האסטרונאוט הוותיק מאט קובלסקי בטיסת החלל האחרונה שלו. כאשר קורה אסון במהלך פעולה שיגרתית במעבורת החלל, מקור כוחה של המעבורת נהרס ומשאיר את ראיין ומאט לבד בחלל החשוך. בעקבות השקט השורר הם מבינים שאיבדו כל קשר ותקווה לחילוצם. האם בכל זאת השניים ישרדו?",
+   "Language": "he-IL"
+  },
+  {
+   "Title": "Gravity",
+   "Overview": "Astronaut Ryan Stone er en dyktig ingeniør som er ute på sitt første romfergeoppdrag sammen med veteranastronaut Matt Kowalski. Da en ulykke ødelegger romfergen, virvler Stone og Kowalski ut i mørket, og den eneste veien hjem, er å bevege seg enda lengre ut i det skremmende, endeløse rommet.",
+   "Language": "no-NO"
+  },
+  {
+   "Title": "Gravity: Misiune în spațiu",
+   "Overview": "Un inginer medical pleacă în prima sa misiune în spațiu, alături de un astronaut veteran. Ei încearcă să supraviețuiască după ce nava le e distrusă.",
+   "Language": "ro-RO"
+  },
+  {
+   "Title": "Gravidade",
+   "Overview": "Matt Kowalski é um astronauta experiente que está em missão de conserto ao telescópio Hubble juntamente com a doutora Ryan Stone. Ambos são surpreendidos por uma chuva de destroços decorrente da destruição de um satélite por um míssil russo, que faz com que sejam jogados no espaço sideral. Sem qualquer apoio da base terrestre da NASA, eles precisam encontrar um meio de sobreviver em meio a um ambiente completamente inóspito para a vida humana.",
+   "Language": "pt-BR"
+  },
+  {
+   "Title": "地心引力",
+   "Overview": "蕾恩史東博士（珊卓布拉克 飾）是一名傑出的醫學工程師，這是她第一次執行太空任務；資深太空人麥特科沃斯基（喬治克隆尼 飾）與她同行，這是他退休前最後一次指揮太空飛行。很不幸地，在一場看似簡單的例行太空漫步中，災難發生了，太空梭全毀，使得萊安和麥特兩人突然變得孤立無援，他們只能繫住彼此，不斷被捲入黑暗之中。周遭的一片死寂表示他們已失去跟地球的任何聯繫，同時也失去獲救的任何機會。隨著每次呼吸都一再吞噬所剩不多的氧氣，他們的恐懼也逐漸轉為恐慌。然而，他們回家的唯一途徑可能是繼續深入浩瀚無際的可怕太空。",
+   "Language": "zh-TW"
+  },
+  {
+   "Title": "Gravité",
+   "Overview": "L'ingénieure Ryan Stone a été choisie pour une mission dans l'espace. Elle fait le voyage avec l'astronaute chevronné Matt Kowalsky qui entreprend son dernier vol avant la retraite. Alors qu'ils font des travaux à l'extérieur de la navette, une pluie de débris les surprend et détruit tout sur son passage. Bientôt, le docteur Stone et l'astronaute Kowalsky flottent dans le vide et n'ont plus aucun contact avec la NASA. Malgré la panique qui l'habite, Stone écoute attentivement les instructions de son acolyte. Pour survivre, les deux humains en pénurie d'oxygène doivent s'enfoncer dans la noirceur afin de rejoindre une station spatiale d'où ils pourraient peut-être communiquer avec la Terre.",
+   "Language": "fr-CA"
+  },
+  {
+   "Title": "Gravitacija",
+   "Overview": "Režiser fantazijskih spektaklov Harry Potter in jetnik iz Azkabana ter Jaz pa tebi mamo predstavlja osupljivo vesoljsko pustolovščino, v kateri se znajdeta znanstvenica Ryan in astronavt Matt. Med poletom v zemeljsko orbito opravljata rutinski sprehod po vesolju, ko deli odsluženega satelita zadenejo in uničijo njuno plovilo. Prepuščena lastni iznajdljivosti se morata soočiti z vrtoglavo gravitacijo in drugimi elementi surovega vesolja, možnost njunega preživetja pa se manjša iz minute v minuto.",
+   "Language": "sl-SI"
+  },
+  {
+   "Title": "جاذبه",
+   "Overview": "داستان فیلم در مورد دو فضانورد است (جرج کلونی و ساندرا بولاک) که بعد از یک حادثه سفینه آن ها متلاشی شده و آن دو در فضای بدون جاذبه سرگردان می شوند و باید به کمک یکدیگر راهی برای زنده ماندن پیدا کنند...",
+   "Language": "fa-IR"
+  },
+  {
+   "Title": "Gravity",
+   "Overview": "La doctora Ryan Stone coincideix en el seu primer viatge espacial amb l'experimentat astronauta Matt Kowalski, que gaudeix de l'última missió de la seva dilatada carrera. Però el que havia de ser una missió rutinària, aviat es converteix en un malson. L'impacte d'un míssil provoca una reacció en cadena que fa que les restes d'un munt de satèl·lits afectats arribin a l'estació espacial on estan treballant la doctora Stone i en Kowalski.",
+   "Language": "ca-ES"
+  },
+  {
+   "Title": "Gravedad",
+   "Overview": "La doctora Ryan Stone, ingeniera en su primera misión espacial, y Matt Kowalski, astronauta en su última expedición, tienen que sobrevivir en el espacio tras ser alcanzados por escombros durante una caminata espacial.",
+   "Language": "es-MX"
+  },
+  {
+   "Title": "Гравитација",
+   "Overview": "Докторка Рајан Стон је врсна медицинска инжењерка на свом првом свемирском путовању шатлом, заједно са ветераном астронаутом Метом Ковалским, који је на последњем лету пред пензију. Оно што је требало да представља рутинску шетњу свемиром, претвара се у катастрофу. Шатл је уништен, а Рајан и Ковалски потпуно сами у космосу завезани једно за друго плутајући у бескрају. Гробна тишина им говори да су остали и без контакта са Земљом, и надом у спас... Када страх почне да се претвара у панику, сваки уздах троши још више драгоценог преосталог кисеоника, а можда једини пут кући води преко отискивања дубље у мрачно пространство свемира.",
+   "Language": "sr-RS"
+  },
+  {
+   "Title": "Cuộc Chiến Không Trọng Lực",
+   "Overview": "Tiến sĩ Ryan Stone, một kỹ sư y tế xuất sắc trong nhiệm vụ Tàu con thoi đầu tiên của cô, cùng với phi hành gia kỳ cựu Matt Kowalsky chỉ huy chuyến bay cuối cùng trước khi nghỉ hưu.  Nhưng trên một chuyến đi bộ ngoài không gian dường như thường lệ, thảm họa đã ập đến.  Tàu con thoi bị phá hủy, khiến Stone và Kowalsky hoàn toàn bị trói buộc vào nhau và rơi vào bóng tối của không gian.  Sự im lặng chói tai cho họ biết họ đã mất bất kỳ liên kết nào với Trái đất và bất kỳ cơ hội giải cứu nào.  Khi nỗi sợ hãi chuyển sang hoảng sợ, mỗi luồng không khí sẽ ăn hết lượng oxy ít ỏi còn lại.  Nhưng cách duy nhất về nhà có thể là đi xa hơn vào khoảng không gian rộng lớn đáng sợ.",
+   "Language": "vi-VN"
+  },
+  {
+   "Title": "გრავიტაცია",
+   "Overview": "",
+   "Language": "ka-GE"
+  },
+  {
+   "Title": "Gravitacija",
+   "Overview": "Medicinos inžinierė daktarė Rajan Stoun iškeliauja į savo pirmąją kosminę misiją. Kartu su ja vyksta astronautas-veteranas Matas Kovalskis, kuriam tai bus paskutinė išvyka į žvaigždes. Tyrinėtojus ištinka tragedija, kuomet kosminio palydovo nuolauža praktiškai nepataisomai sugadina jų erdvėlaivį. Netekę ryšio su Žemeir sparčiai senkant deguonies atsargoms, astronautai privalo surasti išeitį iš beviltiškos padėties. Prasideda įtempta kosmoso tylos apgaubta kova už gyvybę.",
+   "Language": "lt-LT"
+  },
+  {
+   "Title": "جاذبية",
+   "Overview": "لا تتركها\r الدكتور ريان ستون ، مهندس طبي لامع في أول مهمة مكوك لها ، مع رائد الفضاء المخضرم مات كوالسكي في قيادة رحلته الأخيرة قبل تقاعده. ولكن في السير في الفضاء الذي يبدو روتينيا ، تقع كارثة. تم تدمير المكوك ، تاركا ستون وكوالسكي وحيدين تماما غير بعضهما البعض ويخرجان إلى سواد الفضاء. يخبرهم الصمت الذي يصم الآذان أنهم فقدوا أي صلة بالأرض وأي فرصة للإنقاذ. عندما يتحول الخوف إلى ذعر ، فإن كل جرعة من الهواء تأكل ما تبقى من الأكسجين القليل. لكن الطريقة الوحيدة للعودة إلى المنزل قد تكون الذهاب إلى أبعد من ذلك في الامتداد المرعب للفضاء.",
+   "Language": "ar-SA"
+  },
+  {
+   "Title": "引力邊緣",
+   "Overview": "優秀的醫學工程師石博士（珊迪娜布洛飾）進行她的第一次太空飛行任務，同行的有資深宇航員高華斯基（佐治古尼飾）。一次例行的太空任務突然遇上災難。太空船被摧毀，留下石博士和高華斯基二人孤身流落在黑暗的太空。震耳欲聾的沉默告訴他們已與地球失去了所有聯絡和救援的機會。隨著剩下的氧氣一口一口地耗盡，兩人由徬徨慢慢變成了恐慌。進一步邁進可怕的無邊太空可能就是回家唯一的方法。",
+   "Language": "zh-HK"
+  },
+  {
+   "Title": "Gravitāte",
+   "Overview": "Medicīnas inženiere doktore Raiena Stouna devusies savā pirmajā atspoļkuģa misijā kopā ar astronautikas veterānu, komandieri Metu Kovaļski, kuram tas ir pēdējais lidojums pirms došanās pensijā. Diemžēl ikdienišķa iziešana atklātā kosmosā beidzas ar katastrofu.",
+   "Language": "lv-LV"
+  },
+  {
+   "Title": "Gravitacija",
+   "Overview": "Sandra Bullock glumi doktoricu Stone, koja odlazi na svoju prvu misiju u svemir, a Clooney iskusnog astronauta Matta Kowalsokg kojem je ovo posljednji let. Međutim, prilikom rutinske svemirske šetnje dogodi se katastrofa i Stone i Kowalski se odvajaju od shuttla, lebdeći bespomoćno u beskrajnu tamu…  Zaglušujuća tišina govori im da je veza sa Zemljom prekinuta, kao i svaka nada za spas… Strah prerasta u paniku dok se razina preostalog kisika smanjuje sa svakim novim udahom. Jedini put za spas zastrašujuće je prostranstvo svemira.",
+   "Language": "hr-HR"
+  },
+  {
+   "Title": "Gravitatsiya",
+   "Overview": "",
+   "Language": "uz-UZ"
+  },
+  {
+   "Title": "Gravitatsioon",
+   "Overview": "Bullocki kehastatud geniaalne biomeditsiinitehnik dr Ryan Stone on esimesel süstikumissioonil ühes veteranist astronaudi Matt Kowalskyga (Clooney), kellele see on viimane lend enne pensionipõlve. Kuid rutiinse kosmoses viibimise käigus tabab neid katastroof. Süstik hävib ning Stone ja Kowalsky jäävad täiesti ihuüksi – nad on vaid teineteise külge seotud ning nad heljuvad pimedasse kosmosesse.  Kuna side Maaga on katkenud, puudub neil ka igasugune pääsemislootus. Hirmust saab paanika ning iga hingetõmme viib lähemale hapniku lõppemisele.  Kuid võimalik, et koju jõudmiseks tuleb neil lasta end veelgi kaugemale hirmuäratavasse kosmosesse kanda.",
+   "Language": "et-EE"
+  },
+  {
+   "Title": "Gravity",
+   "Overview": "Dr Ryan Stone, seorang insinyur yang pertama kali menjalankan misi luar angkasa, dan Matt Kowalski, seorang astronot dalam ekspedisi terakhirnya, harus bertahan hidup di luar angkasa setelah mereka terkena puing-puing saat berjalan di luar angkasa.",
+   "Language": "id-ID"
+  }
+ ],
+ "Recommendations": [
+  {
+   "TmdbId": 157336,
+   "Title": "Interstellar"
+  },
+  {
+   "TmdbId": 1101383,
+   "Title": "The End of Oak Street"
+  },
+  {
+   "TmdbId": 871,
+   "Title": "Planet of the Apes"
+  },
+  {
+   "TmdbId": 17431,
+   "Title": "Moon"
+  },
+  {
+   "TmdbId": 274855,
+   "Title": "Geostorm"
+  },
+  {
+   "TmdbId": 37686,
+   "Title": "Super 8"
+  },
+  {
+   "TmdbId": 522402,
+   "Title": "Finch"
+  },
+  {
+   "TmdbId": 9341,
+   "Title": "The Core"
+  },
+  {
+   "TmdbId": 201,
+   "Title": "Star Trek: Nemesis"
+  },
+  {
+   "TmdbId": 419704,
+   "Title": "Ad Astra"
+  }
+ ],
+ "Credits": {
+  "Cast": [
+   {
+    "Name": "Sandra Bullock",
+    "Order": 0,
+    "Character": "Ryan Stone",
+    "TmdbId": 18277,
+    "CreditId": "52fe4783c3a36847f8139d6b",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/4rfjISL3Flx16jfiusXoHbpt87X.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "George Clooney",
+    "Order": 1,
+    "Character": "Matt Kowalski",
+    "TmdbId": 1461,
+    "CreditId": "52fe4783c3a36847f8139d6f",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/dt0a7DT0SQeHb7NpURD6ifyEzsN.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Ed Harris",
+    "Order": 2,
+    "Character": "Mission Control (voice)",
+    "TmdbId": 228,
+    "CreditId": "52fe4783c3a36847f8139dad",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/kUbUA70WPiosPT4kBJMWtGk0ASd.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Orto Ignatiussen",
+    "Order": 3,
+    "Character": "Aningaaq (voice)",
+    "TmdbId": 1223440,
+    "CreditId": "52fe4783c3a36847f8139db5",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/jpbMzoXaPjgZGjNOtGAxnZSO3Pz.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Phaldut Sharma",
+    "Order": 4,
+    "Character": "Shariff (voice)",
+    "TmdbId": 58587,
+    "CreditId": "52fe4783c3a36847f8139db1",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/iJKcwRJXEcZngnvseylidVHCg6j.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Amy Warren",
+    "Order": 5,
+    "Character": "Explorer Captain (voice)",
+    "TmdbId": 1223442,
+    "CreditId": "52fe4783c3a36847f8139db9",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/6HVjs4uho7gGEfRobKrwbqFeF37.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Basher Savage",
+    "Order": 6,
+    "Character": "Russian Space Station Captain (voice)",
+    "TmdbId": 1027852,
+    "CreditId": "52fe4783c3a36847f8139d8b",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/xv1ZQEOOshYhFv764unwbb9Zsl6.jpg"
+     }
+    ]
+   }
+  ],
+  "Crew": [
+   {
+    "Name": "Alfonso Cuarón",
+    "Order": 0,
+    "Job": "Director",
+    "Department": "Directing",
+    "TmdbId": 11218,
+    "CreditId": "52fe4783c3a36847f8139d67",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/gaHhrzPfxfc3cbQLkDt54gtP3n1.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Alfonso Cuarón",
+    "Order": 1,
+    "Job": "Writer",
+    "Department": "Writing",
+    "TmdbId": 11218,
+    "CreditId": "52fe4783c3a36847f8139dc5",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/gaHhrzPfxfc3cbQLkDt54gtP3n1.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Jonás Cuarón",
+    "Order": 2,
+    "Job": "Writer",
+    "Department": "Writing",
+    "TmdbId": 1003190,
+    "CreditId": "52fe4783c3a36847f8139dcb",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/xaUVbPyTdcX4K5PvCCNtipuGIXK.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Alfonso Cuarón",
+    "Order": 3,
+    "Job": "Producer",
+    "Department": "Production",
+    "TmdbId": 11218,
+    "CreditId": "52fe4783c3a36847f8139d91",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/gaHhrzPfxfc3cbQLkDt54gtP3n1.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "David Heyman",
+    "Order": 4,
+    "Job": "Producer",
+    "Department": "Production",
+    "TmdbId": 10968,
+    "CreditId": "52fe4783c3a36847f8139d9d",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/m39R6xbVfHfCEO4H0s2Fhwh9mkt.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Christopher DeFaria",
+    "Order": 5,
+    "Job": "Executive Producer",
+    "Department": "Production",
+    "TmdbId": 66897,
+    "CreditId": "52fe4783c3a36847f8139d97",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/e7sPWVvfV9UfVNPegDlcf1z73su.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Nikki Penny",
+    "Order": 6,
+    "Job": "Executive Producer",
+    "Department": "Production",
+    "TmdbId": 1290901,
+    "CreditId": "52fe4783c3a36847f8139dbf",
+    "Images": []
+   },
+   {
+    "Name": "Stephen Jones",
+    "Order": 7,
+    "Job": "Executive Producer",
+    "Department": "Production",
+    "TmdbId": 1121617,
+    "CreditId": "52fe4783c3a36847f8139da3",
+    "Images": []
+   },
+   {
+    "Name": "Emmanuel Lubezki",
+    "Order": 8,
+    "Job": "Director of Photography",
+    "Department": "Camera",
+    "TmdbId": 4185,
+    "CreditId": "52fe4783c3a36847f8139dd1",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/v5reoqVqGobAVAq4RploSoWD3DZ.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Guillermo del Toro",
+    "Order": 9,
+    "Job": "Thanks",
+    "Department": "Crew",
+    "TmdbId": 10828,
+    "CreditId": "5bbe40f3925141237b000978",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/gldeyCtKcaqnK1v4Vu9vqayhzUQ.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "James Cameron",
+    "Order": 10,
+    "Job": "Thanks",
+    "Department": "Crew",
+    "TmdbId": 2710,
+    "CreditId": "5bbe4106925141238f0007ca",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/9NAZnTjBQ9WcXAQEzZpKy4vdQto.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "David Fincher",
+    "Order": 11,
+    "Job": "Thanks",
+    "Department": "Crew",
+    "TmdbId": 7467,
+    "CreditId": "5bbe411892514123930007ba",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/tpEczFclQZeKAiCeKZZ0adRvtfz.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Alfonso Cuarón",
+    "Order": 12,
+    "Job": "Editor",
+    "Department": "Editing",
+    "TmdbId": 11218,
+    "CreditId": "52fe4783c3a36847f8139d75",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/gaHhrzPfxfc3cbQLkDt54gtP3n1.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Alejandro G. Iñárritu",
+    "Order": 13,
+    "Job": "Thanks",
+    "Department": "Crew",
+    "TmdbId": 223,
+    "CreditId": "5bbe413192514123860008c3",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/opRQx3XlOoXH5EFlm0v8Q3O1ccn.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Steven Price",
+    "Order": 14,
+    "Job": "Original Music Composer",
+    "Department": "Sound",
+    "TmdbId": 16368,
+    "CreditId": "52fe4783c3a36847f8139da9",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/mlxbYKZv6PCTojJ3T7SHYZBWHV0.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Ivan Weightman",
+    "Order": 15,
+    "Job": "3D Modeller",
+    "Department": "Visual Effects",
+    "TmdbId": 2146792,
+    "CreditId": "5bbe16a1925141378e0318b3",
+    "Images": []
+   },
+   {
+    "Name": "George Bird",
+    "Order": 16,
+    "Job": "Lighting Technician",
+    "Department": "Lighting",
+    "TmdbId": 1790849,
+    "CreditId": "5bbe3e0c925141239300038c",
+    "Images": []
+   },
+   {
+    "Name": "David Rubin",
+    "Order": 17,
+    "Job": "Casting",
+    "Department": "Production",
+    "TmdbId": 5490,
+    "CreditId": "52fe4783c3a36847f8139d87",
+    "Images": []
+   },
+   {
+    "Name": "Richard Hicks",
+    "Order": 18,
+    "Job": "Casting",
+    "Department": "Production",
+    "TmdbId": 25365,
+    "CreditId": "52fe4783c3a36847f8139d81",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/rZQo6lSThjDzZNYEwt2gZNFA8y5.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Neil Corbould",
+    "Order": 19,
+    "Job": "Special Effects Supervisor",
+    "Department": "Visual Effects",
+    "TmdbId": 6060,
+    "CreditId": "5b02bd420e0a2623bf016d4b",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/tyrIWpWILlaDroOuzRNI18G9PXn.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Glenn Freemantle",
+    "Order": 20,
+    "Job": "Sound Designer",
+    "Department": "Sound",
+    "TmdbId": 40810,
+    "CreditId": "554388c5c3a3680ce3001cf8",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/qbPg2w1AoSVrbHJbQUbs9P5jD8y.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Glenn Freemantle",
+    "Order": 21,
+    "Job": "Supervising Sound Editor",
+    "Department": "Sound",
+    "TmdbId": 40810,
+    "CreditId": "554389539251415865001f04",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/qbPg2w1AoSVrbHJbQUbs9P5jD8y.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Nicolas Becker",
+    "Order": 22,
+    "Job": "Foley",
+    "Department": "Sound",
+    "TmdbId": 17428,
+    "CreditId": "5543896cc3a3680ce8001e49",
+    "Images": []
+   },
+   {
+    "Name": "Joaquim Dos Santos",
+    "Order": 23,
+    "Job": "Rotoscoping Artist",
+    "Department": "Visual Effects",
+    "TmdbId": 89596,
+    "CreditId": "5bbe86ca9251413d4d002beb",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/w45GPb3cW6TqPw4FxB5Hc6zzAwx.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Mark Southworth",
+    "Order": 24,
+    "Job": "Stunt Coordinator",
+    "Department": "Crew",
+    "TmdbId": 40737,
+    "CreditId": "686582879b16f613f4869964",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/Ak1hp4UEp9jGkWH0f1EkGNg0IXt.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Robert Richardson",
+    "Order": 25,
+    "Job": "Thanks",
+    "Department": "Crew",
+    "TmdbId": 149,
+    "CreditId": "5bbe41a3925141239300086f",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/lmJy31oZtN5l2VAGpkrt3xEXsxL.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Chris Lawrence",
+    "Order": 26,
+    "Job": "CG Supervisor",
+    "Department": "Crew",
+    "TmdbId": 1461613,
+    "CreditId": "55438b5ac3a3680cdf001ed1",
+    "Images": []
+   },
+   {
+    "Name": "Chris Navarro",
+    "Order": 27,
+    "Job": "ADR Mixer",
+    "Department": "Sound",
+    "TmdbId": 1491848,
+    "CreditId": "5bbe28c5c3a368590102e1dd",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/tKQjPzFDhYVZkzaq2j4NCKb4oVe.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Franklin Mark Henson",
+    "Order": 28,
+    "Job": "Stunt Coordinator",
+    "Department": "Crew",
+    "TmdbId": 1032072,
+    "CreditId": "55438fdc9251415868001de3",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/iyTeqHYfMbw1hHZeXGttRUBoCZT.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Jany Temime",
+    "Order": 29,
+    "Job": "Costume Design",
+    "Department": "Costume & Make-Up",
+    "TmdbId": 11227,
+    "CreditId": "5bbe050dc3a36857dc00c503",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/1G8TxAQnndnY5CLqVApBQ8RUT4A.jpg"
+     }
+    ]
+   }
+  ]
+ },
+ "Studio": "Esperanto Filmoj",
+ "YoutubeTrailerId": "OiTiKOy59o4",
+ "Certifications": [
+  {
+   "Country": "AU",
+   "Certification": "M"
+  },
+  {
+   "Country": "BE",
+   "Certification": "14"
+  },
+  {
+   "Country": "BG",
+   "Certification": "C"
+  },
+  {
+   "Country": "BR",
+   "Certification": "12"
+  },
+  {
+   "Country": "CA",
+   "Certification": "PG"
+  },
+  {
+   "Country": "CH",
+   "Certification": "14"
+  },
+  {
+   "Country": "CZ",
+   "Certification": "15+"
+  },
+  {
+   "Country": "DE",
+   "Certification": "12"
+  },
+  {
+   "Country": "DK",
+   "Certification": "11"
+  },
+  {
+   "Country": "ES",
+   "Certification": "12"
+  },
+  {
+   "Country": "FI",
+   "Certification": "K-12"
+  },
+  {
+   "Country": "FR",
+   "Certification": "TP"
+  },
+  {
+   "Country": "GB",
+   "Certification": "12A"
+  },
+  {
+   "Country": "GR",
+   "Certification": "Κ"
+  },
+  {
+   "Country": "HK",
+   "Certification": "IIA"
+  },
+  {
+   "Country": "HU",
+   "Certification": "16"
+  },
+  {
+   "Country": "IE",
+   "Certification": "12A"
+  },
+  {
+   "Country": "IT",
+   "Certification": "T"
+  },
+  {
+   "Country": "KR",
+   "Certification": "12"
+  },
+  {
+   "Country": "MO",
+   "Certification": "B"
+  },
+  {
+   "Country": "MX",
+   "Certification": "B"
+  },
+  {
+   "Country": "NL",
+   "Certification": "12"
+  },
+  {
+   "Country": "NO",
+   "Certification": "15"
+  },
+  {
+   "Country": "NZ",
+   "Certification": "M"
+  },
+  {
+   "Country": "PL",
+   "Certification": "16"
+  },
+  {
+   "Country": "PT",
+   "Certification": "M/12"
+  },
+  {
+   "Country": "RO",
+   "Certification": "12"
+  },
+  {
+   "Country": "RU",
+   "Certification": "12+"
+  },
+  {
+   "Country": "SE",
+   "Certification": "11"
+  },
+  {
+   "Country": "SK",
+   "Certification": "12"
+  },
+  {
+   "Country": "TR",
+   "Certification": "10+"
+  },
+  {
+   "Country": "TW",
+   "Certification": "6+"
+  },
+  {
+   "Country": "US",
+   "Certification": "PG-13"
+  }
+ ],
+ "Status": null,
+ "Collection": null,
+ "Homepage": "http://gravitymovie.warnerbros.com"
+}

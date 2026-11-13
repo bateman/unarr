@@ -1,0 +1,33 @@
+{
+  "body": [
+    {
+      "errorCode": "NotEmptyValidator",
+      "errorMessage": "'Path' must not be empty.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Path",
+        "propertyValue": null
+      },
+      "propertyName": "Path",
+      "severity": "error"
+    },
+    {
+      "errorCode": "NotEmptyValidator",
+      "errorMessage": "'Root Folder Path' must not be empty.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Root Folder Path",
+        "propertyValue": null
+      },
+      "propertyName": "RootFolderPath",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:38:48Z",
+  "request": {
+    "body": "bodies/movie-add-no-path.json",
+    "method": "POST",
+    "path": "/api/v3/movie"
+  },
+  "status": 400
+}

@@ -1,0 +1,1 @@
+{"name": "Library Test", "includeCustomFormatWhenRenaming": false, "specifications": [{"name": "Test", "implementation": "ReleaseTitleSpecification", "negate": false, "required": false, "fields": [{"name": "value", "value": "\\bTEST\\b"}]}]}

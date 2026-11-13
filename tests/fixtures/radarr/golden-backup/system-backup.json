@@ -1,0 +1,18 @@
+{
+  "body": [
+    {
+      "id": 1453437342,
+      "name": "radarr_backup_v6.4.4.10685_2026.11.13_14.05.37.zip",
+      "path": "/backup/manual/radarr_backup_v6.4.4.10685_2026.11.13_14.05.37.zip",
+      "size": 3398364,
+      "time": "2026-11-13T14:05:39Z",
+      "type": "manual"
+    }
+  ],
+  "recordedAt": "2026-11-13T14:05:47Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/system/backup"
+  },
+  "status": 200
+}

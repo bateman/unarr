@@ -1,0 +1,23 @@
+{
+  "body": [
+    {
+      "attemptedValue": 1,
+      "errorCode": "ValidCutoffValidator`1",
+      "errorMessage": "Cutoff must be an allowed quality or group",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Cutoff",
+        "propertyValue": 1
+      },
+      "propertyName": "Cutoff",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:41:29Z",
+  "request": {
+    "body": "bodies/qualityprofile-create-bad-cutoff.json",
+    "method": "POST",
+    "path": "/api/v3/qualityprofile"
+  },
+  "status": 400
+}

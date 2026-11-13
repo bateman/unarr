@@ -102,6 +102,17 @@ impl MovieQuality {
     }
 }
 
+/// `Quality.DefaultQualityDefinitions`: the sizes (megabytes per minute)
+/// a definition starts with and goes back to on a reset. Up to WEBRip-1080p
+/// a range, from Bluray-1080p on no limit.
+pub fn default_sizes(quality_id: i64) -> (f64, Option<f64>, Option<f64>) {
+    if MovieQuality::weight(quality_id) <= 18 {
+        (0.0, Some(100.0), Some(95.0))
+    } else {
+        (0.0, None, None)
+    }
+}
+
 /// `QualitySource`, as Radarr numbers it.
 pub fn source_number(source: &str) -> i64 {
     match source {

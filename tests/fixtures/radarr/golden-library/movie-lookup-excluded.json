@@ -1,0 +1,138 @@
+{
+  "body": [
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "alternateTitles": [
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Titanium"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "變鈦"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "티탄"
+        }
+      ],
+      "certification": "R",
+      "cleanTitle": "titane",
+      "digitalRelease": "2021-10-19T00:00:00Z",
+      "folder": "Titane (2021) {tmdb-630240}",
+      "folderName": "",
+      "genres": [
+        "Drama",
+        "Thriller",
+        "Horror"
+      ],
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/mBlpouG3gqB8WLdP65LCOXb3jFb.jpg",
+          "url": "/MediaCoverProxy/f6df127b59f6053b2adac1068958c5925c499044a8e8730068a19cd7cafa12cc/mBlpouG3gqB8WLdP65LCOXb3jFb.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/dVOlJVHYRWx7DhMQRNLnbf5bT1q.jpg",
+          "url": "/MediaCoverProxy/93523e5729992b773ea533b3f331d8096b2a3d56826b685aa073f33c0d5e7fd2/dVOlJVHYRWx7DhMQRNLnbf5bT1q.jpg"
+        }
+      ],
+      "imdbId": "tt10944760",
+      "inCinemas": "2021-07-14T00:00:00Z",
+      "isAvailable": true,
+      "isExcluded": true,
+      "keywords": [
+        "abortion",
+        "absurd",
+        "body horror",
+        "car accident",
+        "car crash",
+        "depressing",
+        "disgusted",
+        "distressing",
+        "disturbed",
+        "female serial killer",
+        "firefighter",
+        "frantic",
+        "hard",
+        "harsh",
+        "head wound",
+        "horrified",
+        "immaculate conception",
+        "intense",
+        "introspective",
+        "masculinity",
+        "missing son",
+        "objectum sexuality",
+        "pregnancy",
+        "serial killer",
+        "trauma",
+        "woman director",
+        "woman disguised as man"
+      ],
+      "minimumAvailability": "tba",
+      "monitored": false,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 2,
+        "name": "French"
+      },
+      "originalTitle": "Titane",
+      "overview": "A woman with a metal plate in her head from a childhood car accident embarks on a bizarre journey, bringing her into contact with a firefighter who's reunited with his missing son after 10 years.",
+      "physicalRelease": "2021-11-16T00:00:00Z",
+      "popularity": 4.4078,
+      "qualityProfileId": 0,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 6.4,
+          "votes": 68306
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 75,
+          "votes": 0
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 90,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 6.327,
+          "votes": 1787
+        },
+        "trakt": {
+          "type": "user",
+          "value": 6.3301,
+          "votes": 2787
+        }
+      },
+      "releaseDate": "2021-07-14T00:00:00Z",
+      "remotePoster": "https://image.tmdb.org/t/p/original/mBlpouG3gqB8WLdP65LCOXb3jFb.jpg",
+      "runtime": 108,
+      "secondaryYearSourceId": 0,
+      "sortTitle": "titane",
+      "status": "released",
+      "studio": "Kazak Productions",
+      "tags": [],
+      "title": "Titane",
+      "titleSlug": "630240",
+      "tmdbId": 630240,
+      "website": "https://titanemovie.com",
+      "year": 2021,
+      "youTubeTrailerId": "_DmFHh7KsWc"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:38:02Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/movie/lookup?term=tmdb:630240"
+  },
+  "status": 200
+}

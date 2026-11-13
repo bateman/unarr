@@ -1,0 +1,1515 @@
+{
+ "TmdbId": 1368337,
+ "ImdbId": "tt33764258",
+ "Title": "The Odyssey",
+ "Overview": "Odysseus, the legendary King of Ithaca, embarks on a long and perilous journey home following the Trojan War. Throughout his voyage, he is forced to confront the whims of gods, mythological monsters, and trials that stretch both his cunning and his humanity to the breaking point.",
+ "OriginalTitle": "The Odyssey",
+ "OriginalLanguage": "en",
+ "TitleSlug": "1368337",
+ "Runtime": 173,
+ "Popularity": 452.6652,
+ "Year": 2026,
+ "Premier": "2026-07-06T00:00:00Z",
+ "InCinema": "2026-07-15T00:00:00Z",
+ "PhysicalRelease": "2026-11-17T00:00:00Z",
+ "DigitalRelease": "2026-11-17T00:00:00Z",
+ "Images": [
+  {
+   "CoverType": "Poster",
+   "Url": "https://image.tmdb.org/t/p/original/5rhTDKUhPYvpdQIijFIs5VoWsON.jpg"
+  },
+  {
+   "CoverType": "Fanart",
+   "Url": "https://image.tmdb.org/t/p/original/twiVn9oFXOVR0uoYgawyEBlnFu8.jpg"
+  }
+ ],
+ "Ratings": [
+  {
+   "Count": 4719,
+   "Value": 8.021,
+   "Origin": "Tmdb",
+   "Type": "User"
+  }
+ ],
+ "MovieRatings": {
+  "Tmdb": {
+   "Count": 4719,
+   "Value": 8.021,
+   "Type": "User"
+  },
+  "Imdb": {
+   "Count": 551533,
+   "Value": 8.4,
+   "Type": "User"
+  },
+  "Metacritic": {
+   "Count": 0,
+   "Value": 88,
+   "Type": "User"
+  },
+  "RottenTomatoes": null,
+  "Trakt": {
+   "Count": 116,
+   "Value": 5.75,
+   "Type": "User"
+  }
+ },
+ "Genres": [
+  "Adventure",
+  "Action",
+  "Fantasy"
+ ],
+ "Keywords": [
+  "ancient",
+  "ancient world",
+  "based on song, poem or rhyme",
+  "bronze age",
+  "epic fantasy",
+  "greek history",
+  "greek mythology",
+  "historical fiction",
+  "mediterranean sea",
+  "mythical",
+  "odyssey",
+  "peplum",
+  "period drama",
+  "ship",
+  "sword and sandal",
+  "trojan horse",
+  "trojan war",
+  "voyage"
+ ],
+ "AlternativeTitles": [
+  {
+   "Title": "האודיסיאה",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "Odysseen",
+   "Type": "Tmdb",
+   "Language": "no"
+  },
+  {
+   "Title": "奧德賽",
+   "Type": "Tmdb",
+   "Language": "zh"
+  },
+  {
+   "Title": "Οδύσσεια",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "دی اوڈیسی",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "ادیسه",
+   "Type": "Tmdb",
+   "Language": "fa"
+  },
+  {
+   "Title": "দ্য অডিচি",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "দ্য ওডিসি",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "Адысея",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "Odisseya",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "Odisėja",
+   "Type": "Tmdb",
+   "Language": "lt"
+  },
+  {
+   "Title": "The Odyssey",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "L'Odyssée",
+   "Type": "Tmdb",
+   "Language": "fr"
+  },
+  {
+   "Title": "La Odisea",
+   "Type": "Tmdb",
+   "Language": "es"
+  },
+  {
+   "Title": "ओडिसी",
+   "Type": "Tmdb",
+   "Language": "en"
+  }
+ ],
+ "Translations": [
+  {
+   "Title": "The Odyssey",
+   "Overview": "Odysseus, the legendary King of Ithaca, embarks on a long and perilous journey home following the Trojan War. Throughout his voyage, he is forced to confront the whims of gods, mythological monsters, and trials that stretch both his cunning and his humanity to the breaking point.",
+   "Language": "en-US"
+  },
+  {
+   "Title": "A Odisseia",
+   "Overview": "Após o fim da Guerra de Troia, Ulisses, o lendário rei de Ítaca, embarca numa longa e perigosa viagem de regresso a casa. Durante dez anos de provações, enfrenta a fúria dos deuses e cruza-se com figuras míticas como o ciclope Polifemo, as sereias e a feiticeira Circe. Determinado a sobreviver, tenta voltar para junto da esposa, Penélope, e do filho, Telémaco, e recuperar o seu reino.",
+   "Language": "pt-PT"
+  },
+  {
+   "Title": "오디세이",
+   "Overview": "10년간 이어진 트로이 전쟁을 승리로 이끈 영웅 '오디세우스'는 왕의 부재를 틈타 침탈과 권력 다툼이 벌어진 왕국에서 그를 기다리고 있는 아내 '페넬로페'와 아들 '텔레마코스'에게 돌아가기 위한 여정에 나선다. 그러나 신들의 분노를 산 그의 귀환 앞에는 거대한 폭풍과 괴물들, 그리고 거스를 수 없는 운명의 시련이 기다리고 있는데…",
+   "Language": "ko-KR"
+  },
+  {
+   "Title": "L'Odyssée",
+   "Overview": "Ulysse, roi d'Ithaque, entreprend un périple périlleux pour regagner son royaume après la guerre de Troie. Alors qu'ils traversent la Méditerranée avec ses soldats, ils se retrouvent bientôt à lutter non seulement contre les éléments, mais aussi contre une multitude d'obstacles mortels et de créatures mythiques.",
+   "Language": "fr-FR"
+  },
+  {
+   "Title": "Die Odyssee",
+   "Overview": "Folgt Odysseus, dem legendären griechischen König von Ithaka, auf seiner langen und gefährlichen Heimreise nach dem Trojanischen Krieg und schildert seine Begegnungen mit mythischen Wesen wie dem Zyklopen Polyphem, den Sirenen und der Hexengöttin Circe, während er versucht, wieder mit seiner Frau Penelope zusammenzukommen.",
+   "Language": "de-DE"
+  },
+  {
+   "Title": "The Odyssey",
+   "Overview": "Câu chuyện theo chân Odysseus trong hành trình kéo dài 10 năm trở về nhà sau cuộc chiến thành Troy, nơi ông phải đối mặt với các vị thần, quái vật và vô vàn thử thách, đồng thời nỗ lực đoàn tụ với vợ và giành lại vương quốc của mình.",
+   "Language": "vi-VN"
+  },
+  {
+   "Title": "La Odisea",
+   "Overview": "Tras la caída de Troya, el legendario rey de Ítaca, Odiseo a.k.a. Ulises, emprende un largo y peligroso viaje para regresar junto a su esposa Penélope y su hijo Telémaco. En el camino deberá enfrentarse a criaturas mitológicas, dioses caprichosos y pruebas que pondrán a prueba su ingenio, su resistencia y su humanidad. Mientras tanto, en Ítaca, el futuro de su reino pende de un hilo ante la creciente amenaza de quienes creen que jamás volverá.",
+   "Language": "es-ES"
+  },
+  {
+   "Title": "Одиссея",
+   "Overview": "После окончания Троянской войны царь Итаки - Одиссей вместе со своими воинами отправляется домой, надеясь наконец воссоединиться с женой Пенелопой и сыном Телемахом. Однако обратный путь превращается в опасное путешествие, полное испытаний, древних чудовищ и вмешательства богов. Столкнувшись с циклопом Полифемом, коварными сиренами и могущественной волшебницей Цирцеей, Одиссей должен проявить хитрость и мужество, чтобы сохранить жизнь себе и своим спутникам. Тем временем на Итаке, Пенелопа и Телемах продолжают ждать его возвращения, несмотря на растущую угрозу со стороны претендентов на трон.",
+   "Language": "ru-RU"
+  },
+  {
+   "Title": "A Odisseia",
+   "Overview": "Acompanhe o rei grego Odisseu em sua perigosa jornada de 20 anos para voltar a Ítaca após a Guerra de Troia, enfrentando monstros e deuses enquanto sua esposa Penélope resiste em seu reino.",
+   "Language": "pt-BR"
+  },
+  {
+   "Title": "Odyssey",
+   "Overview": "İthaka'nın efsanevi kralı Odysseus, Truva Savaşı'nın ardından evine dönmek üzere uzun ve tehlikeli bir yolculuğa çıkar. Yolculuğu boyunca tanrıların keyfi istekleriyle, mitolojik canavarlarla ve insanlığını kırılma noktasına kadar zorlayan çetin sınavlarla yüzleşmek zorunda kalır.",
+   "Language": "tr-TR"
+  },
+  {
+   "Title": "奧德賽",
+   "Overview": "講述奧德修斯在特洛伊戰爭後歷經艱險返鄉，途中遭遇獨眼巨人、女妖與女巫，最終與妻子重逢的傳奇旅程。",
+   "Language": "zh-TW"
+  },
+  {
+   "Title": "Одіссея",
+   "Overview": "Екранізація однойменного епічного твору Гомера, яка описує небезпечну подорож Одіссея додому після Троянської війни, демонструючи його зустрічі з Поліфемом, Сиренами та Цирцеєю і завершуючись возз’єднанням із дружиною Пенелопою.",
+   "Language": "uk-UA"
+  },
+  {
+   "Title": "The Odyssey",
+   "Overview": "I en adaption av Homeros episka epos får vi följa Odysseus, den legendariske kungen av Ithaka, på hans långa och farofyllda resa hem efter det trojanska kriget. Under sin färd ställs han inför gudars nycker, mytologiska monstrum och prövningar som tänjer både hans list och hans mänsklighet till bristningsgränsen.",
+   "Language": "sv-SE"
+  },
+  {
+   "Title": "奥德赛",
+   "Overview": "特洛伊战争结束后，奥德修斯在返回伊萨卡的途中历经艰险，沿途遇到了独眼巨人波吕斐摩斯、塞壬女妖和喀耳刻等神奇生物。",
+   "Language": "zh-CN"
+  },
+  {
+   "Title": "La Odisea",
+   "Overview": "Odiseo, el legendario rey de Ítaca, emprende un largo y peligroso viaje de regreso a casa tras la guerra de Troya. A lo largo de su travesía, se ve obligado a enfrentarse a los caprichos de los dioses, a monstruos mitológicos y a pruebas que ponen a prueba su astucia y su humanidad hasta el límite.",
+   "Language": "es-MX"
+  },
+  {
+   "Title": "Odyseja",
+   "Overview": "Odyseusz, legendarny grecki król Itaki, po wojnie trojańskiej wyrusza w długą i niebezpieczną podróż do domu, opisując swoje spotkania z mitycznymi istotami, takimi jak cyklop Polifem, syreny i czarownica-bogini Circe.",
+   "Language": "pl-PL"
+  },
+  {
+   "Title": "Odissea",
+   "Overview": "Ogni leggenda ha un prezzo. Ogni ritorno richiede un sacrificio. Mentre il mare diventa il suo più grande nemico, Ulisse affronta un cammino fatto di illusioni, battaglie e prove impossibili. Un'epica odissea che mette alla prova il coraggio di un uomo contro il volere degli dèi.",
+   "Language": "it-IT"
+  },
+  {
+   "Title": "Одисея",
+   "Overview": "Одисей, легендарният цар на Итака, поема на дълго и опасно пътешествие към дома след края на Троянската война. По време на своето странстване той е принуден да се изправи срещу прищевките на боговете, митологични чудовища и изпитания, които изпитват до краен предел както неговата хитрост, така и човечността му.",
+   "Language": "bg-BG"
+  },
+  {
+   "Title": "มหากาพย์โอดิสซี",
+   "Overview": "เรื่องราวที่ดัดแปลงมาจากบทกวีมหากาพย์ชื่อเดียวกันของ โฮเมอร์ ติดตามเรื่องราวของ โอดิสเซียส​ ในการเดินทางกลับบ้านที่แสนอันตราย หลังจากสงครามโทรจัน เปิดเผยให้เห็นถึงการเผชิญหน้าของเขากับ โพลีฟีมัส, เหล่าไซเรน, เซอร์ซี และสิ้นสุดด้วยการกลับมาพบกับ เพเนโลพี ภรรยาของเขาอีกครั้ง",
+   "Language": "th-TH"
+  },
+  {
+   "Title": "האודיסאה",
+   "Overview": "לאחר מלחמת טרויה, אודיסאוס עומד בפני מסע מסוכן בחזרה לאיתקה, כשהוא פוגש יצורים כמו הקיקלופ פוליפמוס, הסירנות, וקירקה לאורך המסע.",
+   "Language": "he-IL"
+  },
+  {
+   "Title": "ოდისეა",
+   "Overview": "ოდისევსი, ითაკას ლეგენდარული ბერძენი მეფე, ტროას ომის შემდეგ სახლში დაბრუნების ხანგრძლივ და სახიფათო მოგზაურობას იწყებს, სადაც აღწერს ისეთ მითიურ არსებებთან შეხვედრებს, როგორებიც არიან ციკლოპი პოლიფემოსი, სირენები და ჯადოქარი ქალღმერთი კირკე...",
+   "Language": "ka-GE"
+  },
+  {
+   "Title": "Odiseja",
+   "Overview": "Adaptacija istoimenog Homerovog epa prati Odiseja na njegovom opasnom putovanju kući nakon Trojanskog rata, prikazujući njegove susrete s Polifemom, Sirenama, Kirkom, a završava ponovnim susretom sa suprugom Penelopom.",
+   "Language": "hr-HR"
+  },
+  {
+   "Title": "Odüsszeia",
+   "Overview": "Odüsszeusz, Ithaka legendás görög királya a trójai háború után hosszú és veszélyes útra indul hazafelé. Útközben olyan mitikus lényekkel találkozik mint a küklopsz, Polüphémosz, a szirének és a boszorkányistennő, Kirké.  Christopher Nolan következő filmje, az Odüsszeia egy mitikus akcióeposz, melyet számos helyszínen forgattak IMAX® technológiával.",
+   "Language": "hu-HU"
+  },
+  {
+   "Title": "الأوديسة",
+   "Overview": "يتتبع الفيلم رحلة أوديسيوس، الملك الأسطوري لـ \"إيثاكا\"، في عودته الطويلة والخطرة إلى وطنه بعد انتهاء حرب طروادة. تستغرق رحلته عشر سنوات، وخلالها يواجه أوديسيوس العديد من التحديات والمخاطر والمخلوقات الأسطورية",
+   "Language": "ar-SA"
+  },
+  {
+   "Title": "اُدیسه",
+   "Overview": "پس از پایان جنگ تروا، اودیسئوس، پادشاه ایتاکا، سفری طولانی و خطرناک را برای بازگشت به خانه آغاز می‌کند.  او در طول این سفر با موجودات افسانه‌ای، هیولاها، خدایان و خطرات گوناگونی روبه‌رو می‌شود. در همین حال، همسرش پنه‌لوپه و پسرش تلماخوس در انتظار بازگشت او هستند.  این داستان یکی از مشهورترین آثار ادبیات اسطوره‌ای یونان باستان است.",
+   "Language": "fa-IR"
+  },
+  {
+   "Title": "奧德賽",
+   "Overview": "改編自荷馬同名史詩，講述奧德修斯在特洛伊戰爭後的危險歸途，展示他與獨眼巨人波利斐摩斯、海妖、西西裏女巫的遭遇，最後與妻子佩涅洛佩團聚。",
+   "Language": "zh-HK"
+  },
+  {
+   "Title": "L'Odyssée",
+   "Overview": "Ulysse, le légendaire roi grec d'Ithaque, entreprend un périlleux voyage de retour après la guerre de Troie. Son parcours sera marqué par des rencontres avec des êtres mythiques tels que le cyclope Polyphème, les Sirènes et la déesse-sorcière Circé, jusqu’à ses retrouvailles tant attendues avec son épouse, Pénélope.",
+   "Language": "fr-CA"
+  },
+  {
+   "Title": "Η Οδύσσεια",
+   "Overview": "Ο Οδυσσέας, ο θρυλικός βασιλιάς της Ιθάκης, ξεκινά ένα μακρύ και επικίνδυνο ταξίδι για την πατρίδα του μετά τον Τρωικό Πόλεμο. Κατά τη διάρκεια του ταξιδιού του, αναγκάζεται να αντιμετωπίσει τα καπρίτσια των θεών, μυθολογικά τέρατα, καθώς και δοκιμασίες που δοκιμάζουν τόσο την πονηριά όσο και την ανθρωπιά του μέχρι το οριακό τους σημείο.",
+   "Language": "el-GR"
+  },
+  {
+   "Title": "Odisėja",
+   "Overview": "Po Trojos karo Odisėjas leidžiasi į dešimtmetį trunkančią ir pavojingą kelionę namo į Itaką. Jį persekioja dievai, gundo sirenos, laukia susidūrimas su vienakiu milžinu Polifemu, o kelią namo temdo magijos kerai. Tuo metu namuose jo žmona Penelopė ir sūnus Telemachas kovoja su negailestingu laiku, nežinia ir sostą užgrobti siekiančiais piršliais. Odisėjas privalo įveikti ne tik jūrų ir dievų išbandymus, bet ir savo paties silpnumą, kad susigrąžintų šeimą, garbę ir karalystę.",
+   "Language": "lt-LT"
+  },
+  {
+   "Title": "Odiseea",
+   "Overview": "Povestea lui Odysseus în călătoria sa periculoasă spre casă după Războiul Troian, prezentând întâlnirile sale cu Polyphemus, Sirenele, Circe și terminând cu reîntâlnirea cu soția sa, Penelope.",
+   "Language": "ro-RO"
+  },
+  {
+   "Title": "The Odyssey",
+   "Overview": "Odysseus, raja legendaris Yunani dari Ithaca, memulai perjalanan panjang dan berbahaya untuk pulang setelah Perang Troya, yang mengisahkan perjumpaannya dengan makhluk-makhluk mitologis seperti Cyclops Polyphemus, para Siren, dan penyihir-dewi Circe.",
+   "Language": "id-ID"
+  },
+  {
+   "Title": "Odüsseia",
+   "Overview": "",
+   "Language": "et-EE"
+  },
+  {
+   "Title": "Odisseya",
+   "Overview": "Troya müharibəsindən sonra İtaka kralı Odissey kiçik bir qoşunun başında həyat yoldaşı Penelopanın yanına, evinə qayıtmaq üçün yola çıxır. Bu uzun səfər boyunca Odissey saysız-hesabsız sınaqlarla üzləşir, sikloplarla, sirenlərlə və nəhəng adamyeyənlərlə qarşılaşır.",
+   "Language": "az-AZ"
+  },
+  {
+   "Title": "オデュッセイア",
+   "Overview": "トロイア戦争の終結後、イタケーの伝説的な王オデュッセウスは、故郷への長く危険に満ちた帰還の旅に出る。その航海の途上、彼は神々の気まぐれや神話の怪物たち、そして自身の知略と人間性の双方を極限まで試す過酷な試練に立ち向かうことを余儀なくされる――。",
+   "Language": "ja-JP"
+  },
+  {
+   "Title": "Odiseja",
+   "Overview": "Epski spektakel Christopherja Nolana prinaša sodobno upodobitev Homerjevega epa. Po padcu Troje se kralj Odisej poda na nevarno pot proti domovini Itaki. Zaradi zamere bogovom njegovo vračanje traja desetletje, polno mitoloških grozot - od spopada s Kiklopom do petja Siren. Medtem ko se doma Penelopa brani vztrajnih snubcev, mora Odisej premagati lastne slabosti in se soočiti z usodo.",
+   "Language": "sl-SI"
+  },
+  {
+   "Title": "Odyssea",
+   "Overview": "Odysseus  byl král řeckého ostrova Ithaka, který dle legend a básníka Homéra vymyslel slavného Trójského koně, jenž výraznou měrou pomohl obelstít obránce Tróji a ukončit tak vyčerpávající dobývání tohoto města. Po skončení bojů netouží Odysseus po ničem jiném než vrátit se domů, za manželkou Pénelopé a synem Télemachem. Svými odvážnými činy však dle pověstí rozhněval bohy a ti se mu rozhodli návrat co nejvíc zkomplikovat. I proto se slovo „odysea“ stalo synonymem pro cestu plnou překážek, které poutníka odvádějí od jeho cíle, místo toho, aby ho k němu přibližovaly. Zatímco Odysseus vzdoruje bohům, obrům, svůdné kouzelnici Kirké a dalším nebezpečím, jeho žena Pénelopé vzdoruje mužům, kteří chtějí uchvátit ji a s ní celé ithacké království.",
+   "Language": "cs-CZ"
+  },
+  {
+   "Title": "Odysea",
+   "Overview": "Filmové spracovanie starogréckej epickej básne „Odysea“, ktorú napísal Homér a ktorá rozpráva príbeh ithackého kráľa Odysea (Matt Damon), vracajúceho sa domov po trójskej vojne. Počas svojej desaťročnej púte sa stretáva s množstvom mýtických bytostí a nebezpečných prekážok, aby sa mohol znovu stretnúť so svojou manželkou Penelopé.",
+   "Language": "sk-SK"
+  },
+  {
+   "Title": "Odiseja",
+   "Overview": "Pēc Trojas kara Odisejs, Itakas valdnieks dodas mājās pie savas sievas Pēnelopes. Viņa ceļš mājup būs ilgs un pārbaudījumiem bagāts.",
+   "Language": "lv-LV"
+  },
+  {
+   "Title": "Адысея",
+   "Overview": "",
+   "Language": "be-BY"
+  },
+  {
+   "Title": "দ্য ওডিসি",
+   "Overview": "",
+   "Language": "bn-BD"
+  },
+  {
+   "Title": "द ओडिसी",
+   "Overview": "",
+   "Language": "hi-IN"
+  },
+  {
+   "Title": "Одиссея",
+   "Overview": "",
+   "Language": "kk-KZ"
+  },
+  {
+   "Title": "Одисеја",
+   "Overview": "Одисеј, легендарни краљ Итаке, креће на дуго и опасно путовање кући након Тројанског рата. Током свог путовања, приморан је да се суочи са хировима богова, митолошким чудовиштима и искушењима која истежу и његову лукавост и његову човечност до тачке пуцања.",
+   "Language": "sr-RS"
+  },
+  {
+   "Title": "ది ఒడిస్సీ",
+   "Overview": "",
+   "Language": "te-IN"
+  },
+  {
+   "Title": "دی اوڈیسی",
+   "Overview": "",
+   "Language": "ur-PK"
+  },
+  {
+   "Title": "Ոդիսևս",
+   "Overview": "",
+   "Language": "hy-AM"
+  },
+  {
+   "Title": "Одисеја",
+   "Overview": "",
+   "Language": "mk-MK"
+  },
+  {
+   "Title": "Одиссэй",
+   "Overview": "",
+   "Language": "mn-MN"
+  },
+  {
+   "Title": "The Odyssey",
+   "Overview": "Odysseus, de legendarische koning van Ithaca, begint na de Trojaanse Oorlog aan een lange en gevaarlijke reis naar huis. Tijdens zijn tocht krijgt hij te maken met de grillen van goden, mythologische monsters en beproevingen die zowel zijn sluwheid als zijn menselijkheid tot het uiterste op de proef stellen.",
+   "Language": "nl-NL"
+  },
+  {
+   "Title": "الأوديسة",
+   "Overview": "يتتبع الفيلم رحلة أوديسيوس، الملك الأسطوري لـ \"إيثاكا\"، في عودته الطويلة والخطرة إلى وطنه بعد انتهاء حرب طروادة. تستغرق رحلته عشر سنوات، وخلالها يواجه أوديسيوس العديد من التحديات والمخاطر والمخلوقات الأسطورية",
+   "Language": "ar-AE"
+  },
+  {
+   "Title": "L'Odissea",
+   "Overview": "Una epopeia mitològica que segueix la història d'Odisseu i el seu llarg viatge a casa, de deu anys de durada, després de la guerra de Troia.",
+   "Language": "ca-ES"
+  },
+  {
+   "Title": "ද ඔඩිසි",
+   "Overview": "ට්‍රෝජන් යුද්ධයෙන් පසු, ඉතිකාහි සුප්‍රකට රජු වන ඔඩිසියස් සිය මව්බිම බලා දිගු මෙන්ම අන්තරායකර ගමනක් ආරම්භ කරයි. මෙම සංචාරය පුරාම ඔහුට දෙවිවරුන්ගේ විවිධ බලපෑම්වලට, මිථ්‍යා කථා පිටුපස සිටින බියකරු සත්ත්වයන්ට මෙන්ම ඔහුගේ ප්‍රඥාව සහ මනුෂ්‍යත්වය දැඩි ලෙස පරීක්ෂාවට ලක් කෙරෙන අභියෝග රැසකට මුහුණ දීමට සිදුවෙයි.",
+   "Language": "si-LK"
+  },
+  {
+   "Title": "Odisseya",
+   "Overview": "Troya urushidan so‘ng Odissey Itakaga qaytishda xavfli safarga duch keladi va yo‘l-yo‘lakay Polifem (tsiklop), Sirenlar hamda Kalipso kabi mavjudotlarga duch keladi.",
+   "Language": "uz-UZ"
+  },
+  {
+   "Title": "The Odyssey",
+   "Overview": "Odysseus, den legendariske kongen av Ithaca, legger ut på en lang og farefull reise hjem etter den trojanske krig. Underveis blir han tvunget til å møte gudenes luner, mytologiske monstre og prøvelser som tøyer både hans list og hans menneskelighet til bristepunktet.",
+   "Language": "no-NO"
+  },
+  {
+   "Title": "দ্য অডিচি",
+   "Overview": "",
+   "Language": "as-AS"
+  },
+  {
+   "Title": "دی اوڈیسی",
+   "Overview": "",
+   "Language": "ks-KS"
+  },
+  {
+   "Title": "ມະຫາກາບໂອດິສຊີ",
+   "Overview": "",
+   "Language": "lo-LO"
+  },
+  {
+   "Title": "奥德赛",
+   "Overview": "改编自荷马同名史诗，讲述奥德修斯在特洛伊战争后的危险归途，展示他与独眼巨人波利斐摩斯、海妖、西西里女巫的遭遇，最后与妻子佩涅洛佩团聚。",
+   "Language": "zh-SG"
+  },
+  {
+   "Title": "The Odyssey",
+   "Overview": "Odysseus, den legendariske konge af Ithaka, begiver sig ud på en lang og farefuld rejse hjem efter den trojanske krig. Gennem hele sin rejse bliver han tvunget til at konfrontere gudernes luner, mytologiske monstre og prøvelser, der sætter både hans list og hans menneskelighed på prøve til bristepunktet.",
+   "Language": "da-DK"
+  },
+  {
+   "Title": "தி ஒடிசி",
+   "Overview": "",
+   "Language": "ta-IN"
+  },
+  {
+   "Title": "দ্য ওডিসি",
+   "Overview": "",
+   "Language": "bn-IN"
+  },
+  {
+   "Title": "The Odyssey",
+   "Overview": "Odysseus, de legendarische koning van Ithaca, begint na de Trojaanse Oorlog aan een lange en gevaarlijke reis naar huis. Tijdens zijn tocht krijgt hij te maken met de grillen van goden, mythologische monsters en beproevingen die zowel zijn sluwheid als zijn menselijkheid tot het uiterste op de proef stellen.",
+   "Language": "nl-BE"
+  },
+  {
+   "Title": "Die Odyssee",
+   "Overview": "Folgt Odysseus, dem legendären griechischen König von Ithaka, auf seiner langen und gefährlichen Heimreise nach dem Trojanischen Krieg und schildert seine Begegnungen mit mythischen Wesen wie dem Zyklopen Polyphem, den Sirenen und der Hexengöttin Circe, während er versucht, wieder mit seiner Frau Penelope zusammenzukommen.",
+   "Language": "de-AT"
+  },
+  {
+   "Title": "Die Odyssee",
+   "Overview": "Folgt Odysseus, dem legendären griechischen König von Ithaka, auf seiner langen und gefährlichen Heimreise nach dem Trojanischen Krieg und schildert seine Begegnungen mit mythischen Wesen wie dem Zyklopen Polyphem, den Sirenen und der Hexengöttin Circe, während er versucht, wieder mit seiner Frau Penelope zusammenzukommen.",
+   "Language": "de-CH"
+  },
+  {
+   "Title": "Die Odyssee",
+   "Overview": "Odysseus, die legendariese koning van Ithaka, onderneem ná die Trojaanse Oorlog een lang en gevaarlike reis huis toe. Op pad moet hy die grille van gode, mitologiese monsters en beproewings die hoof bied – uitdagings wat beide sy sluheid en sy menslikheid op die uiterste toets stel.",
+   "Language": "af-ZA"
+  },
+  {
+   "Title": "The Odyssey",
+   "Overview": "Christopher Nolanin ohjaama The Odyssey perustuu Homeroksen klassiseen antiikin kreikkalaiseen eepokseen. Elokuva seuraa Ithakan kuninkaan Odysseuksen vuosikymmenen mittaista, vaarojen täyttämää kotimatkaa Troijan sodan jälkeen sekä hänen perheensä selviytymistaistelua kotirintamalla.  Troijan kukistumisen jälkeen kreikkalainen sotasankari ja Ithakan kuningas Odysseus lähtee miehistöineen pitkälle ja vaaralliselle merimatkalle halki Välimeren palatakseen perheensä luo. Kotimatkalla he joutuvat kohtaamaan oikukkaiden jumalten vihan, petollisia myrskyjä sekä mytologisia hirviöitä, kuten kyklooppi Polyfemoksen, seireenit ja nymfi Kalypson. Samaan aikaan kotona Ithakassa aika on käymässä vähiin, kun hänen vaimonsa kuningatar Penelope ja poikansa prinssi Telemakhos joutuvat äärimmäisen paineen alle valtaistuimesta kilpailevien kosijoiden piirittäessä palatsia.",
+   "Language": "fi-FI"
+  }
+ ],
+ "Recommendations": [
+  {
+   "TmdbId": 652,
+   "Title": "Troy"
+  },
+  {
+   "TmdbId": 184315,
+   "Title": "Hercules"
+  },
+  {
+   "TmdbId": 639933,
+   "Title": "The Northman"
+  },
+  {
+   "TmdbId": 37958,
+   "Title": "Immortals"
+  },
+  {
+   "TmdbId": 9387,
+   "Title": "Conan the Barbarian"
+  },
+  {
+   "TmdbId": 1911,
+   "Title": "The 13th Warrior"
+  },
+  {
+   "TmdbId": 324544,
+   "Title": "In the Lost Lands"
+  },
+  {
+   "TmdbId": 11527,
+   "Title": "Excalibur"
+  },
+  {
+   "TmdbId": 9610,
+   "Title": "Conan the Destroyer"
+  },
+  {
+   "TmdbId": 17897,
+   "Title": "The Golden Voyage of Sinbad"
+  }
+ ],
+ "Credits": {
+  "Cast": [
+   {
+    "Name": "Matt Damon",
+    "Order": 0,
+    "Character": "Odysseus",
+    "TmdbId": 1892,
+    "CreditId": "671d0f9e1ea33928297d5ff6",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/aCvBXTAR9B1qRjIRzMBYhhbm1fR.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Tom Holland",
+    "Order": 1,
+    "Character": "Telemachus",
+    "TmdbId": 1136406,
+    "CreditId": "671d0fa6a4ac8a432c5c7209",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/xKBAaPIa1c7tzZD3Y0MhBLv4hPE.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Anne Hathaway",
+    "Order": 2,
+    "Character": "Penelope",
+    "TmdbId": 1813,
+    "CreditId": "672e6e76fc658fd33c2a292b",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/s6tflSD20MGz04ZR2R1lZvhmC4Y.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Robert Pattinson",
+    "Order": 3,
+    "Character": "Antinous",
+    "TmdbId": 11288,
+    "CreditId": "673e8130764da4251e876d9c",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/3qZ09UE7lN6AtorfXFRYpEtSY93.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Himesh Patel",
+    "Order": 4,
+    "Character": "Eurylochus",
+    "TmdbId": 1227717,
+    "CreditId": "6984cd90c0f61b819c6e7f3e",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/icqsXLmU0FxBGTv63kkA0GcrecO.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Charlize Theron",
+    "Order": 5,
+    "Character": "Calypso",
+    "TmdbId": 6885,
+    "CreditId": "6744fbf646260e14fbeb5f22",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/gd7ShD0yt4bsR2STeQ19KQ6hvXL.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "John Leguizamo",
+    "Order": 6,
+    "Character": "Eumaeus",
+    "TmdbId": 5723,
+    "CreditId": "6984cd6f76696dd2b34f6c14",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/kwYCdxTlDh9zauUCg4mp2XTCQTw.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Travis Scott",
+    "Order": 7,
+    "Character": "Bard",
+    "TmdbId": 1978406,
+    "CreditId": "6984d10ef0960f4c029d1bda",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/eBdm7HQS6lLGg4BocgfoJ5qB9yp.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Corey Hawkins",
+    "Order": 8,
+    "Character": "Polybus",
+    "TmdbId": 1154054,
+    "CreditId": "6984d073f0960f4c029d1bba",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/wRt0Bc0chN5BSjvYzmg2evgqNzp.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Jarreth J. Merz",
+    "Order": 9,
+    "Character": "Leodes",
+    "TmdbId": 84706,
+    "CreditId": "69bd589102ec617f1606e865",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/ze8WDEujZmTXdCLcUy0IaymwlcS.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Niko Nicotera",
+    "Order": 10,
+    "Character": "Peisander",
+    "TmdbId": 1008750,
+    "CreditId": "69bd5925d28ffbd81bee3308",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/ffSAiwXMmvQP1vJuPguLznNpPOI.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Elliot Page",
+    "Order": 11,
+    "Character": "Sinon",
+    "TmdbId": 27578,
+    "CreditId": "6984d02b76b7985eb69995c3",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/eCeFgzS8dYHnMfWQT0oQitCrsSz.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Shiloh Fernandez",
+    "Order": 12,
+    "Character": "First Trojan",
+    "TmdbId": 79795,
+    "CreditId": "6984d067115ddaf91999971b",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/ug0p4QtE1Am7JySNClm7u8iISOB.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Rafi Gavron",
+    "Order": 13,
+    "Character": "Second Trojan",
+    "TmdbId": 21660,
+    "CreditId": "6984d05c59b03e4cb24f6acc",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/avCWoO9fLwEhbT6cvu0TJcSj49g.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Elyes Gabel",
+    "Order": 14,
+    "Character": "Elatus",
+    "TmdbId": 78050,
+    "CreditId": "69bd595174f12ac96606e87b",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/z9IqYTYxhVR9ADxaksbPQwiYQns.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Iddo Goldberg",
+    "Order": 15,
+    "Character": "Amphimedon",
+    "TmdbId": 94958,
+    "CreditId": "6984d0a57745f6b37999963b",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/dJGHbLmYKxLy87jduKGm5jDtBnR.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Jamie Harris",
+    "Order": 16,
+    "Character": "Agelus",
+    "TmdbId": 111195,
+    "CreditId": "69bd591768f8977836ee331c",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/iqc9RropHWLe2wLCgUHtZZDJ7w.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "John Ales",
+    "Order": 17,
+    "Character": "Beggar in Ithaca",
+    "TmdbId": 64343,
+    "CreditId": "6a52df0c4939fdcd7c6037eb",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/rASQsyvYk1VD8hvo2Pi1Tq3Wwlm.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Raimy Lang",
+    "Order": 18,
+    "Character": "Teenage Antinous",
+    "TmdbId": 6342035,
+    "CreditId": "6a52df44d4bd8376b8b9c581",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/blAgz5a4IRmwycftKnrRMfWCYF3.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Mason Cufari",
+    "Order": 19,
+    "Character": "Teenage Sinon",
+    "TmdbId": 3235164,
+    "CreditId": "6a52df5e49f41c373f4e2fbf",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/9o9bNDomtugse7iHQtPfVY6S6LM.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Mia Goth",
+    "Order": 20,
+    "Character": "Melantho",
+    "TmdbId": 1137824,
+    "CreditId": "6984ce162187ab64b71a2892",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/rwko7XVaKFcJH1dtAIIsrgLMzHb.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Ryan Hurst",
+    "Order": 21,
+    "Character": "Mentor",
+    "TmdbId": 43858,
+    "CreditId": "6984d0bdb716ec7b7c9d1b51",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/467wpYYeeDyF4MeoDMuNp4bwgzH.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Kate Fuglei",
+    "Order": 22,
+    "Character": "Eurycleia",
+    "TmdbId": 1455911,
+    "CreditId": "6a52df8ef8e3480006603632",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/tm9IbjrFfOe3ueImBuHiBYrRIo2.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Benny Safdie",
+    "Order": 23,
+    "Character": "Agamemnon",
+    "TmdbId": 227564,
+    "CreditId": "679ac6ddceb49e671d344d04",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/u10A5DpUYRB1zMF7YoGYcyvhois.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Adam Croasdell",
+    "Order": 24,
+    "Character": "Antinous' Father",
+    "TmdbId": 62500,
+    "CreditId": "69bd590a43d3077ac46e58a3",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/vTScKZOLq9xPmkbNdOSb5p5kYB8.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Mickey Shilowich",
+    "Order": 25,
+    "Character": "Infant Telemachus",
+    "TmdbId": 6342036,
+    "CreditId": "6a52dfb6d694efebb52837c6",
+    "Images": []
+   },
+   {
+    "Name": "Katerina Antemel",
+    "Order": 26,
+    "Character": "Iphigenia",
+    "TmdbId": 6342039,
+    "CreditId": "6a52dff648d12b3c8a1dbde1",
+    "Images": []
+   },
+   {
+    "Name": "Jovan Adepo",
+    "Order": 27,
+    "Character": "Elpenor",
+    "TmdbId": 1607522,
+    "CreditId": "6984d0d507d331ee909d1ba4",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/aJcuEbYru85meNGzM0oSeW3nsd6.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Andrew Howard",
+    "Order": 28,
+    "Character": "Polites",
+    "TmdbId": 67206,
+    "CreditId": "6a206475a19239f39dd6851b",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/kba1JeCUYHufjB933G5xPRhO8lV.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Josh Stewart",
+    "Order": 29,
+    "Character": "Antiphates",
+    "TmdbId": 40039,
+    "CreditId": "6984d0b1d96af61e8b1a283c",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/prgoT9fq5Z2ZCGmC1rrSZkq4wH9.jpg"
+     }
+    ]
+   }
+  ],
+  "Crew": [
+   {
+    "Name": "Christopher Nolan",
+    "Order": 0,
+    "Job": "Director",
+    "Department": "Directing",
+    "TmdbId": 525,
+    "CreditId": "671d0fe427bd57d91f62cdda",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/xuAIuYSmsUzKlUMBFGVZaWsY3DZ.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Christopher Nolan",
+    "Order": 1,
+    "Job": "Writer",
+    "Department": "Writing",
+    "TmdbId": 525,
+    "CreditId": "671e82155d0de89042d97484",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/xuAIuYSmsUzKlUMBFGVZaWsY3DZ.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Christopher Nolan",
+    "Order": 2,
+    "Job": "Producer",
+    "Department": "Production",
+    "TmdbId": 525,
+    "CreditId": "671f2df59ff681d9e0a49013",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/xuAIuYSmsUzKlUMBFGVZaWsY3DZ.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Emma Thomas",
+    "Order": 3,
+    "Job": "Producer",
+    "Department": "Production",
+    "TmdbId": 556,
+    "CreditId": "671f2e006d6b705dc871e468",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/utc1PS6WVWR5tknzTJqXtnD0kBp.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Thomas Hayslip",
+    "Order": 4,
+    "Job": "Executive Producer",
+    "Department": "Production",
+    "TmdbId": 1417407,
+    "CreditId": "69498be1a1b37fcb9ab1ce4b",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/j0GdUhLhCwu0i8g5uPHArMurQtk.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Hoyte van Hoytema",
+    "Order": 5,
+    "Job": "Director of Photography",
+    "Department": "Camera",
+    "TmdbId": 74401,
+    "CreditId": "67b387273afc11a5bd6dbf5c",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/y2HXvac1oPzciwxfdyWc5syThRk.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Christopher Nolan",
+    "Order": 6,
+    "Job": "Songs",
+    "Department": "Sound",
+    "TmdbId": 525,
+    "CreditId": "6a6067e765b65297ead3b79f",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/xuAIuYSmsUzKlUMBFGVZaWsY3DZ.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Travis Scott",
+    "Order": 7,
+    "Job": "Songs",
+    "Department": "Sound",
+    "TmdbId": 1978406,
+    "CreditId": "6a5cbc24d792b6796b750311",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/eBdm7HQS6lLGg4BocgfoJ5qB9yp.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Jonathan Nolan",
+    "Order": 8,
+    "Job": "Thanks",
+    "Department": "Crew",
+    "TmdbId": 527,
+    "CreditId": "6a6067990534f9ed0c718249",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/qgTOwfg2B4C0ZFGAP4EnRZ7domo.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Ludwig Göransson",
+    "Order": 9,
+    "Job": "Original Music Composer",
+    "Department": "Sound",
+    "TmdbId": 928158,
+    "CreditId": "6773987cfbe3722a98617ec2",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/3phYwmonUBcDXZ1DY5kHYjYYoor.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Ludwig Göransson",
+    "Order": 10,
+    "Job": "Songs",
+    "Department": "Sound",
+    "TmdbId": 928158,
+    "CreditId": "6a6067dcf25cb1724ea3f514",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/3phYwmonUBcDXZ1DY5kHYjYYoor.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Homer",
+    "Order": 11,
+    "Job": "Poem",
+    "Department": "Crew",
+    "TmdbId": 9812,
+    "CreditId": "68a2ab6c588c5bedffe94c24",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/u60xNzQODN5t8Q5luKxA5Z46QIG.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "John Papsidera",
+    "Order": 12,
+    "Job": "Casting",
+    "Department": "Production",
+    "TmdbId": 561,
+    "CreditId": "67de7a2429923784937a9ed6",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/egwEVyrAmdWhtuLqE5fcThZf41E.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Kevin O'Connell",
+    "Order": 13,
+    "Job": "Sound Re-Recording Mixer",
+    "Department": "Sound",
+    "TmdbId": 1378171,
+    "CreditId": "6a6068351d8a0f8158b8f131",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/3S1AGmA9zP8R1XmkVGQzwE4imZH.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Dan O'Connell",
+    "Order": 14,
+    "Job": "Foley Artist",
+    "Department": "Sound",
+    "TmdbId": 1338372,
+    "CreditId": "6a9744230e03553ea9bd5b58",
+    "Images": []
+   },
+   {
+    "Name": "George Cottle",
+    "Order": 15,
+    "Job": "Stunt Coordinator",
+    "Department": "Crew",
+    "TmdbId": 1081074,
+    "CreditId": "67b49d3b4e89ccd7886e1cb9",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/hGvlKt3Zm7rpO6I9RXFRWGmZUw0.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Zack Duhame",
+    "Order": 16,
+    "Job": "Stunts",
+    "Department": "Crew",
+    "TmdbId": 186573,
+    "CreditId": "6a972e2a646c98cf4c3cb40b",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/mI6sdZQaeHDi3jXinS4g1jizywk.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Alicia Vela-Bailey",
+    "Order": 17,
+    "Job": "Stunts",
+    "Department": "Crew",
+    "TmdbId": 1186027,
+    "CreditId": "6a9739da90f2e2dd3dcce9e1",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/avxkIPEgSMzTe6SloYSQAwDIDwj.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Willie D. Burton",
+    "Order": 18,
+    "Job": "Sound Mixer",
+    "Department": "Sound",
+    "TmdbId": 1546115,
+    "CreditId": "6a973ef088f433bc3e5edfba",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/scUZhjN7gsFGquUUBFdrVU34t9y.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Gary Rizzo",
+    "Order": 19,
+    "Job": "Sound Re-Recording Mixer",
+    "Department": "Sound",
+    "TmdbId": 138618,
+    "CreditId": "6a60682ee10e095a306b1f5b",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/m8vT9fYRLwM8WPpJiq8QIMBSueQ.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Daniel Arrias",
+    "Order": 20,
+    "Job": "Stunts",
+    "Department": "Crew",
+    "TmdbId": 1340940,
+    "CreditId": "6a972c181287fc71adbea6b4",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/oJ5sjnCEgZT9PshlT559s5xHkKO.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Lauren Shaw",
+    "Order": 21,
+    "Job": "Stunts",
+    "Department": "Crew",
+    "TmdbId": 1550831,
+    "CreditId": "6a9732c44572c1591fbea706",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/huomTbMfK2xrct5O1tUD7J3LuLo.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Martin De Boer",
+    "Order": 22,
+    "Job": "Stunts",
+    "Department": "Crew",
+    "TmdbId": 1452866,
+    "CreditId": "6a972cf41366b244d156f48f",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/1rW45F4VBwBzaK2kXdCOQ6vjJuj.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Nilo Otero",
+    "Order": 23,
+    "Job": "First Assistant Director",
+    "Department": "Directing",
+    "TmdbId": 1566280,
+    "CreditId": "67d78943f6b8d57b4a7bc2c2",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/8anaNQUEb1dBy6vXjjUbiGpZJcw.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Alfred Hsing",
+    "Order": 24,
+    "Job": "Stunts",
+    "Department": "Crew",
+    "TmdbId": 1110537,
+    "CreditId": "6a972fdc66fe428a1fc86253",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/b1cXnVypaxUzj7bq7GpyNAE6rCt.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Matt Curtis",
+    "Order": 25,
+    "Job": "Title Designer",
+    "Department": "Art",
+    "TmdbId": 1665616,
+    "CreditId": "6a4c43676e0a8423e5e74358",
+    "Images": []
+   },
+   {
+    "Name": "Markie Farnsley",
+    "Order": 26,
+    "Job": "Stunts",
+    "Department": "Crew",
+    "TmdbId": 1736940,
+    "CreditId": "6a972ed35fca6b3aac3cb505",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/aMcQPglUqlQsBatgsRy7OdNHsRa.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Melinda Sue Gordon",
+    "Order": 27,
+    "Job": "Still Photographer",
+    "Department": "Camera",
+    "TmdbId": 1324652,
+    "CreditId": "6a972ae0207522aaf7bea526",
+    "Images": []
+   },
+   {
+    "Name": "Devyn Dalton",
+    "Order": 28,
+    "Job": "Stunts",
+    "Department": "Crew",
+    "TmdbId": 1164341,
+    "CreditId": "6a972ce6664501a26fc861bb",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/rYkYdtv2grwzDX4RFCIK3zzP4gD.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Dan Mast",
+    "Order": 29,
+    "Job": "Stunts",
+    "Department": "Crew",
+    "TmdbId": 2047173,
+    "CreditId": "6a9730a35027369c245edf56",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/jLYJLW8BUTXlbQtlLI7GSKhtDpk.jpg"
+     }
+    ]
+   }
+  ]
+ },
+ "Studio": "Universal Pictures",
+ "YoutubeTrailerId": "AyIZ9tiiN8I",
+ "Certifications": [
+  {
+   "Country": "AR",
+   "Certification": "ATP"
+  },
+  {
+   "Country": "AT",
+   "Certification": "14"
+  },
+  {
+   "Country": "AU",
+   "Certification": "M"
+  },
+  {
+   "Country": "BE",
+   "Certification": "16"
+  },
+  {
+   "Country": "BG",
+   "Certification": "C"
+  },
+  {
+   "Country": "BR",
+   "Certification": "14"
+  },
+  {
+   "Country": "CA",
+   "Certification": "14A"
+  },
+  {
+   "Country": "CH",
+   "Certification": "14"
+  },
+  {
+   "Country": "CL",
+   "Certification": "14"
+  },
+  {
+   "Country": "CZ",
+   "Certification": "15+"
+  },
+  {
+   "Country": "DE",
+   "Certification": "12"
+  },
+  {
+   "Country": "DK",
+   "Certification": "11"
+  },
+  {
+   "Country": "ES",
+   "Certification": "16"
+  },
+  {
+   "Country": "FI",
+   "Certification": "K-16"
+  },
+  {
+   "Country": "FR",
+   "Certification": "12"
+  },
+  {
+   "Country": "GB",
+   "Certification": "15"
+  },
+  {
+   "Country": "HK",
+   "Certification": "IIB"
+  },
+  {
+   "Country": "HU",
+   "Certification": "16"
+  },
+  {
+   "Country": "ID",
+   "Certification": "13+"
+  },
+  {
+   "Country": "IE",
+   "Certification": "15A"
+  },
+  {
+   "Country": "IL",
+   "Certification": "14"
+  },
+  {
+   "Country": "IN",
+   "Certification": "A"
+  },
+  {
+   "Country": "IT",
+   "Certification": "10+"
+  },
+  {
+   "Country": "JP",
+   "Certification": "G"
+  },
+  {
+   "Country": "KR",
+   "Certification": "15"
+  },
+  {
+   "Country": "LT",
+   "Certification": "N-13"
+  },
+  {
+   "Country": "LU",
+   "Certification": "16"
+  },
+  {
+   "Country": "LV",
+   "Certification": "16+"
+  },
+  {
+   "Country": "MO",
+   "Certification": "C"
+  },
+  {
+   "Country": "MX",
+   "Certification": "B"
+  },
+  {
+   "Country": "NL",
+   "Certification": "16"
+  },
+  {
+   "Country": "NO",
+   "Certification": "12"
+  },
+  {
+   "Country": "NZ",
+   "Certification": "M"
+  },
+  {
+   "Country": "PH",
+   "Certification": "R-13"
+  },
+  {
+   "Country": "PL",
+   "Certification": "16"
+  },
+  {
+   "Country": "PR",
+   "Certification": "R"
+  },
+  {
+   "Country": "PT",
+   "Certification": "M/14"
+  },
+  {
+   "Country": "SE",
+   "Certification": "15"
+  },
+  {
+   "Country": "SG",
+   "Certification": "NC16"
+  },
+  {
+   "Country": "SK",
+   "Certification": "12"
+  },
+  {
+   "Country": "TH",
+   "Certification": "15"
+  },
+  {
+   "Country": "TR",
+   "Certification": "16+"
+  },
+  {
+   "Country": "TW",
+   "Certification": "12+"
+  },
+  {
+   "Country": "UA",
+   "Certification": "16+"
+  },
+  {
+   "Country": "US",
+   "Certification": "R"
+  },
+  {
+   "Country": "ZA",
+   "Certification": "16"
+  }
+ ],
+ "Status": null,
+ "Collection": null,
+ "Homepage": "https://www.universalpictures.com/movies/the-odyssey"
+}

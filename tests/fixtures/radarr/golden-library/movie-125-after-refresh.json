@@ -1,0 +1,199 @@
+{
+  "body": {
+    "added": "2026-03-07T09:12:06Z",
+    "alternateTitles": [
+      {
+        "id": 976,
+        "movieMetadataId": 125,
+        "sourceType": "tmdb",
+        "title": "האודיסיאה"
+      },
+      {
+        "id": 2036,
+        "movieMetadataId": 125,
+        "sourceType": "tmdb",
+        "title": "Odysseen"
+      },
+      {
+        "id": 2041,
+        "movieMetadataId": 125,
+        "sourceType": "tmdb",
+        "title": "奧德賽"
+      },
+      {
+        "id": 2053,
+        "movieMetadataId": 125,
+        "sourceType": "tmdb",
+        "title": "Οδύσσεια"
+      },
+      {
+        "id": 2057,
+        "movieMetadataId": 125,
+        "sourceType": "tmdb",
+        "title": "دی اوڈیسی"
+      },
+      {
+        "id": 2058,
+        "movieMetadataId": 125,
+        "sourceType": "tmdb",
+        "title": "ادیسه"
+      },
+      {
+        "id": 2060,
+        "movieMetadataId": 125,
+        "sourceType": "tmdb",
+        "title": "দ্য অডিচি"
+      },
+      {
+        "id": 2061,
+        "movieMetadataId": 125,
+        "sourceType": "tmdb",
+        "title": "দ্য ওডিসি"
+      },
+      {
+        "id": 2080,
+        "movieMetadataId": 125,
+        "sourceType": "tmdb",
+        "title": "Адысея"
+      },
+      {
+        "id": 2118,
+        "movieMetadataId": 125,
+        "sourceType": "tmdb",
+        "title": "Odisseya"
+      },
+      {
+        "id": 2447,
+        "movieMetadataId": 125,
+        "sourceType": "tmdb",
+        "title": "Odisėja"
+      },
+      {
+        "id": 2780,
+        "movieMetadataId": 125,
+        "sourceType": "tmdb",
+        "title": "L'Odyssée"
+      },
+      {
+        "id": 2782,
+        "movieMetadataId": 125,
+        "sourceType": "tmdb",
+        "title": "La Odisea"
+      },
+      {
+        "id": 2804,
+        "movieMetadataId": 125,
+        "sourceType": "tmdb",
+        "title": "ओडिसी"
+      }
+    ],
+    "certification": "R",
+    "cleanTitle": "theodyssey",
+    "digitalRelease": "2026-11-17T00:00:00Z",
+    "folderName": "/movies/The Odyssey (2026)",
+    "genres": [
+      "Adventure",
+      "Action",
+      "Fantasy"
+    ],
+    "hasFile": false,
+    "id": 125,
+    "images": [
+      {
+        "coverType": "poster",
+        "remoteUrl": "https://image.tmdb.org/t/p/original/5rhTDKUhPYvpdQIijFIs5VoWsON.jpg",
+        "url": "/MediaCover/125/poster.jpg?h=3f0aaf34044123d571bc"
+      },
+      {
+        "coverType": "fanart",
+        "remoteUrl": "https://image.tmdb.org/t/p/original/twiVn9oFXOVR0uoYgawyEBlnFu8.jpg",
+        "url": "/MediaCover/125/fanart.jpg?h=c64ef1badc3271e7378f"
+      }
+    ],
+    "imdbId": "tt33764258",
+    "inCinemas": "2026-07-15T00:00:00Z",
+    "isAvailable": false,
+    "keywords": [
+      "ancient",
+      "ancient world",
+      "based on song, poem or rhyme",
+      "bronze age",
+      "epic fantasy",
+      "greek history",
+      "greek mythology",
+      "historical fiction",
+      "mediterranean sea",
+      "mythical",
+      "odyssey",
+      "peplum",
+      "period drama",
+      "ship",
+      "sword and sandal",
+      "trojan horse",
+      "trojan war",
+      "voyage"
+    ],
+    "minimumAvailability": "released",
+    "monitored": true,
+    "movieFileId": 0,
+    "originalLanguage": {
+      "id": 1,
+      "name": "English"
+    },
+    "originalTitle": "The Odyssey",
+    "overview": "Odysseus, the legendary King of Ithaca, embarks on a long and perilous journey home following the Trojan War. Throughout his voyage, he is forced to confront the whims of gods, mythological monsters, and trials that stretch both his cunning and his humanity to the breaking point.",
+    "path": "/movies/The Odyssey (2026)",
+    "physicalRelease": "2026-11-17T00:00:00Z",
+    "popularity": 452.6652,
+    "qualityProfileId": 11,
+    "ratings": {
+      "imdb": {
+        "type": "user",
+        "value": 8.4,
+        "votes": 551533
+      },
+      "metacritic": {
+        "type": "user",
+        "value": 88,
+        "votes": 0
+      },
+      "tmdb": {
+        "type": "user",
+        "value": 8.021,
+        "votes": 4719
+      },
+      "trakt": {
+        "type": "user",
+        "value": 5.75,
+        "votes": 116
+      }
+    },
+    "releaseDate": "2026-11-17T00:00:00Z",
+    "rootFolderPath": "/movies",
+    "runtime": 173,
+    "secondaryYearSourceId": 0,
+    "sizeOnDisk": 0,
+    "sortTitle": "odyssey",
+    "statistics": {
+      "movieFileCount": 0,
+      "movieFileQualities": [],
+      "releaseGroups": [],
+      "sizeOnDisk": 0
+    },
+    "status": "inCinemas",
+    "studio": "Universal Pictures",
+    "tags": [],
+    "title": "The Odyssey",
+    "titleSlug": "1368337",
+    "tmdbId": 1368337,
+    "website": "https://www.universalpictures.com/movies/the-odyssey",
+    "year": 2026,
+    "youTubeTrailerId": "AyIZ9tiiN8I"
+  },
+  "recordedAt": "2026-11-13T12:38:48Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/movie/125"
+  },
+  "status": 200
+}

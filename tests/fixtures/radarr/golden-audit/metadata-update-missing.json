@@ -1,0 +1,23 @@
+{
+  "body": [
+    {
+      "attemptedValue": "XbmcMetadata 1",
+      "errorCode": "PredicateValidator",
+      "errorMessage": "Should be unique",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Name",
+        "propertyValue": "XbmcMetadata 1"
+      },
+      "propertyName": "Name",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T15:38:04Z",
+  "request": {
+    "body": "bodies/metadata-update-missing.json",
+    "method": "PUT",
+    "path": "/api/v3/metadata/999"
+  },
+  "status": 400
+}

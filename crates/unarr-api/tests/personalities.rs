@@ -205,16 +205,8 @@ async fn each_personality_serves_its_own_routes_and_strings() {
 #[tokio::test]
 async fn radarr_writes_only_what_its_milestones_brought() {
     let radarr = unarr_api::router(build_state(Personality::Radarr));
-    for (method, uri) in [
-        ("POST", "/api/v3/movie"),
-        ("PUT", "/api/v3/movie/6"),
-        ("DELETE", "/api/v3/movie/6"),
-        ("POST", "/api/v3/tag"),
-        ("PUT", "/api/v3/qualityprofile/11"),
-        ("PUT", "/api/v3/config/ui/1"),
-        // Radarr's notification controller does not route the bulk actions.
-        ("PUT", "/api/v3/notification/bulk"),
-    ] {
+    // Radarr's notification controller does not route the bulk actions.
+    for (method, uri) in [("PUT", "/api/v3/notification/bulk")] {
         let status = send(&radarr, method, uri).await;
         assert!(
             status == StatusCode::METHOD_NOT_ALLOWED || status == StatusCode::NOT_FOUND,
@@ -223,22 +215,33 @@ async fn radarr_writes_only_what_its_milestones_brought() {
     }
     // Milestone 4b brought the indexers and the download clients: a body
     // that says nothing is refused as invalid, not as a method.
-    // The notifications came with the import of milestone 4c.
-    for uri in [
-        "/api/v3/indexer",
-        "/api/v3/downloadclient",
-        "/api/v3/notification",
+    // The notifications came with the import of milestone 4c, adding a
+    // movie with the library of 4d.
+    // The settings came with 4d too.
+    for (method, uri) in [
+        ("POST", "/api/v3/indexer"),
+        ("POST", "/api/v3/downloadclient"),
+        ("POST", "/api/v3/notification"),
+        ("POST", "/api/v3/movie"),
+        ("POST", "/api/v3/tag"),
+        ("PUT", "/api/v3/qualityprofile/11"),
+        ("POST", "/api/v3/exclusions"),
     ] {
-        assert_eq!(send(&radarr, "POST", uri).await, StatusCode::BAD_REQUEST, "{uri}");
+        assert_eq!(
+            send(&radarr, method, uri).await,
+            StatusCode::BAD_REQUEST,
+            "{method} {uri}"
+        );
     }
     // Nothing was written.
     let (status, body) = get(&radarr, "/api/v3/movie/6").await;
     assert_eq!(status, StatusCode::OK);
     assert!(body.contains("\"title\":\"Alien: Romulus\""));
-    // What milestone 4d brings is not a route yet.
+    // Milestone 4d brought the lookup: a route, which without a command
+    // runtime to ask the metadata server through has nothing to answer.
     assert_eq!(
         get(&radarr, "/api/v3/movie/lookup?term=alien").await.0,
-        StatusCode::NOT_FOUND
+        StatusCode::INTERNAL_SERVER_ERROR
     );
     // Milestone 4c brought the rename preview: nothing to rename for a
     // movie whose file the fixture's library does not hold on disk under

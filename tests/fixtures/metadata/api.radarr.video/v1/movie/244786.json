@@ -1,0 +1,1307 @@
+{
+ "TmdbId": 244786,
+ "ImdbId": "tt2582802",
+ "Title": "Whiplash",
+ "Overview": "Under the direction of a ruthless instructor, a talented young drummer begins to pursue perfection at any cost, even his humanity.",
+ "OriginalTitle": "Whiplash",
+ "OriginalLanguage": "en",
+ "TitleSlug": "244786",
+ "Runtime": 107,
+ "Popularity": 29.3552,
+ "Year": 2014,
+ "Premier": "2014-01-16T00:00:00Z",
+ "InCinema": "2014-10-10T00:00:00Z",
+ "PhysicalRelease": "2015-02-24T00:00:00Z",
+ "DigitalRelease": "2014-09-19T00:00:00Z",
+ "Images": [
+  {
+   "CoverType": "Poster",
+   "Url": "https://image.tmdb.org/t/p/original/7fn624j5lj3xTme2SgiLCeuedmO.jpg"
+  },
+  {
+   "CoverType": "Fanart",
+   "Url": "https://image.tmdb.org/t/p/original/fRGxZuo7jJUWQsVg9PREb98Aclp.jpg"
+  }
+ ],
+ "Ratings": [
+  {
+   "Count": 17385,
+   "Value": 8.376,
+   "Origin": "Tmdb",
+   "Type": "User"
+  }
+ ],
+ "MovieRatings": {
+  "Tmdb": {
+   "Count": 17385,
+   "Value": 8.376,
+   "Type": "User"
+  },
+  "Imdb": {
+   "Count": 1192004,
+   "Value": 8.5,
+   "Type": "User"
+  },
+  "Metacritic": {
+   "Count": 0,
+   "Value": 89,
+   "Type": "User"
+  },
+  "RottenTomatoes": {
+   "Count": 0,
+   "Value": 94,
+   "Type": "User"
+  },
+  "Trakt": {
+   "Count": 28057,
+   "Value": 8.52507,
+   "Type": "User"
+  }
+ },
+ "Genres": [
+  "Drama",
+  "Music",
+  "Thriller"
+ ],
+ "Keywords": [
+  "based on short film",
+  "bold",
+  "conservatory",
+  "disapproving",
+  "drummer",
+  "drums",
+  "emotional abuse",
+  "jazz",
+  "jazz band",
+  "montage",
+  "music school",
+  "music teacher",
+  "musician",
+  "new york city",
+  "obsession",
+  "perfectionist",
+  "psychological drama",
+  "public humiliation",
+  "romantic",
+  "verbal abuse",
+  "young adult"
+ ],
+ "AlternativeTitles": [
+  {
+   "Title": "Whiplash, Música y Obsesión",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "Whiplash - Zum Erfolg getrieben",
+   "Type": "Tmdb",
+   "Language": "de"
+  },
+  {
+   "Title": "Whiplash - Musica y obsesion",
+   "Type": "Tmdb",
+   "Language": "es"
+  },
+  {
+   "Title": "Ритам лудила",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "위플래쉬",
+   "Type": "Tmdb",
+   "Language": "ko"
+  },
+  {
+   "Title": "Whiplash. Música y obsesión",
+   "Type": "Tmdb",
+   "Language": "es"
+  },
+  {
+   "Title": "進擊的鼓手",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "Whiplash 2014",
+   "Type": "Tmdb",
+   "Language": "ja"
+  },
+  {
+   "Title": "爆裂鼓手",
+   "Type": "Tmdb",
+   "Language": "zh"
+  },
+  {
+   "Title": "Մոլեգնություն",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "Whiplash: Em Busca da Perfeição",
+   "Type": "Tmdb",
+   "Language": "en"
+  }
+ ],
+ "Translations": [
+  {
+   "Title": "Whiplash",
+   "Overview": "Under the direction of a ruthless instructor, a talented young drummer begins to pursue perfection at any cost, even his humanity.",
+   "Language": "en-US"
+  },
+  {
+   "Title": "Одержимость",
+   "Overview": "Эндрю мечтает стать великим. Казалось бы, вот-вот его мечта осуществится. Юношу замечает настоящий гений, дирижер лучшего в стране оркестра. Желание Эндрю добиться успеха быстро становится одержимостью, а безжалостный наставник продолжает подталкивать его все дальше и дальше – за пределы человеческих возможностей. Кто выйдет победителем из этой схватки?",
+   "Language": "ru-RU"
+  },
+  {
+   "Title": "Whiplash",
+   "Overview": "Andrew, 19 ans, rêve de devenir l’un des meilleurs batteurs de jazz de sa génération. Mais la concurrence est rude au conservatoire de Manhattan où il s’entraîne avec acharnement. Il a pour objectif d’intégrer le fleuron des orchestres dirigé par Terence Fletcher, professeur féroce et intraitable. Lorsque celui-ci le repère enfin, Andrew se lance, sous sa direction, dans la quête de l’excellence…",
+   "Language": "fr-FR"
+  },
+  {
+   "Title": "爆裂鼓手",
+   "Overview": "年轻的爵士鼓手安德鲁·奈曼就读于全国顶尖的音乐学院，师从令人畏惧的爵士乐导师特伦斯·弗莱彻，在成为顶尖爵士鼓手的道路上奋力挣扎。",
+   "Language": "zh-CN"
+  },
+  {
+   "Title": "Whiplash",
+   "Overview": "Andrew studia batteria jazz nella più prestigiosa ed importante scuola di musica di New York, è al suo primo anno e già viene notato da Terence Fletcher, temutissimo e inflessibile insegnante che a sorpresa lo vuole nella propria band. Il ragazzo è eccitato dalla possibilità ma non sa che in realtà sarà un inferno di prove, esercizi e umiliazioni come non pensava fosse possibile. Gli standard richiesti da Fletcher sono mostruosi e progressivamente alienano sempre di più Andrew dalle altre parti della sua vita.",
+   "Language": "it-IT"
+  },
+  {
+   "Title": "Whiplash",
+   "Overview": "Der 19-jährige Andrew Neiman ist ein begnadeter Schlagzeuger. In einer der renommiertesten Musikschulen des Landes wird er vom Dirigenten Terence Fletcher unter die Fittiche genommen. Der bekannte Bandleader fördert den jungen Drummer, aber er fordert ihn noch mehr: Mit rabiaten Unterrichtsmethoden, die immer mehr zu Gewaltexzessen ausarten, will er Andrew zu Höchstleistungen treiben und führt ihn an seine physischen und emotionalen Grenzen. Der Nachwuchsmusiker stellt sich der Tortur, denn es ist sein sehnlichster Wunsch, einer der größten Schlagzeuger der Welt zu werden. Während sein besorgter Vater Jim immer mehr an den Methoden und den Absichten des Lehrers zweifelt, hält Andrew hartnäckig durch. Doch wieviel mehr kann der Teenager noch ertragen?",
+   "Language": "de-DE"
+  },
+  {
+   "Title": "Whiplash",
+   "Overview": "El objetivo de Andrew Neiman, un joven y ambicioso baterista de jazz, es triunfar en el elitista Conservatorio de Música de la Costa Este en el que estudia. Marcado por el fracaso de la carrera literaria de su padre, Andrew alberga sueños de grandeza. Terence Fletcher, un profesor conocido tanto por su talento como por sus rigurosos métodos de enseñanza, dirige el mejor conjunto de jazz del Conservatorio. Cuando Fletcher elige a Andrew y para formar parte del conjunto musical que dirige, cambia para siempre la vida del joven. La pasión de Andrew por alcanzar la perfección se convierte en obsesión, al tiempo que su despiadado profesor lo lleva al límite de su capacidad y de su salud mental.",
+   "Language": "es-ES"
+  },
+  {
+   "Title": "וויפלאש",
+   "Overview": "אנדרו, סטודנט צעיר בקולג', חולם להיות מתופף ג'אז מצליח. המורה שלו למוסיקה, פלטשר מעביר אותו משטר לימודים אינטנסיבי ולא שגרתי. שיטת הלימוד של פלטשר מוכיחה עצמה וגורמת לאנדרו לצבור ביטחון עצמי כמתופף, אך מרחיקה אותו מאביו, מחברתו ומחייו הקודמים.",
+   "Language": "he-IL"
+  },
+  {
+   "Title": "Whiplash",
+   "Overview": "Andrew (Miles Teller) jest utalentowanym młodym perkusistą, uczniem konserwatorium muzycznego na Manhattanie. Chłopak marzy o wielkiej karierze. Aby zrealizować plany, postanawia dołączyć do szkolnej orkiestry jazzowej prowadzonej przez okrutnego nauczyciela Terence'a Fletchera (J.K. Simmons), który często wyładowuje swoje frustracje na uczniach. Pod kierunkiem bezwzględnego Fletchera, Andrew zaczyna dążyć do doskonałości za wszelką cenę - nawet własnego człowieczeństwa.",
+   "Language": "pl-PL"
+  },
+  {
+   "Title": "Whiplash",
+   "Overview": "Andrew híres akar lenni. New York, tehát az Egyesült Államok, tehát az egész világ egyik leghíresebb zeneiskolájába, a Shaffer Konzervatóriumba jár, dobolni tanul, rengeteget gyakorol, és mindenre képes volna a siker érdekében. Legalább is, azt hiszi. De találkozik egy tanárral, aki még nála is elszántabb. Ő abban hisz, hogy a tehetséget mindenáron fel kell szabadítani, és ami bujkál, azt ki kell préselni a tanulókból. Akkor is, ha kínlódnak, ha sírnak vagy belehalnak. A kezdő zenész és a sokat látott veterán egymásnak feszül. A tanár felveszi a kezdő dobost a zenekarába, de az első örömöt nagyon sok keserűség követi. És egyikük sem adja fel könnyen, amit elkezdett. Mindketten tartják a ritmust...",
+   "Language": "hu-HU"
+  },
+  {
+   "Title": "Χωρίς Μέτρο",
+   "Overview": "Ο Άντριου Νέιμαν είναι ένας φιλόδοξος ντράμερ της τζαζ, με μόνο πράγμα κατά νου να ξεχωρίσει στην ελίτ της ανατολικής ακτής. Επιφορτισμένος την αποτυχημένη καριέρα του πατέρα του στη συγγραφή, ο Άντριου ζει κάθε μέρα με τη σκέψη να συγκαταλεχθεί στους καλύτερους. Ο Τέρενς Φλέτσερ, εξίσου γνωστός για το ταλέντο του στη μουσική εκπαίδευση με τις τρομακτικές του μεθόδους, είναι επικεφαλής ενός τζαζ γκρουπ στο σχολείο. Θα ανακαλύψει τον Άντριου και θα τον πάρει στην μπάντα. Από αυτό το σημείο, το πάθος του νεαρού για την τελειότητα θα του γίνει εμμονή, ενώ ο αδίστακτος δάσκαλος θα τραβήξει τα όρια τόσο των ικανοτήτων του, όσο και της ψυχής του.",
+   "Language": "el-GR"
+  },
+  {
+   "Title": "Whiplash",
+   "Overview": "Filmen 'Whiplash' handler om den unge dreng Andrew Neyman, der går på en af de bedste musikskoler i USA, hvor hans underviser er en frygtet og hensynsløs jazz-maestro. Her kæmper han hårdt for at blive en dygtig jazz-trommeslager.  Andrew og hans underviser udvikler efterhånden en umage relation til hinanden, i hans forsøg på at opnå storhed og underviserens stædige insisteren på at stoppe ham.",
+   "Language": "da-DK"
+  },
+  {
+   "Title": "Whiplash: Nos Limites",
+   "Overview": "Sob a direção do impiedoso professor Terence Fletcher, Andrew Neiman, um jovem e talentoso baterista, procura a perfeição a qualquer custo, mesmo que isso signifique perder a sua humanidade.",
+   "Language": "pt-PT"
+  },
+  {
+   "Title": "Whiplash",
+   "Overview": "Andrew is een veelbelovende 19-jarige drummer die studeert aan een berucht conservatorium in Manhattan. Hij wil echter niet zo maar een muzikant zijn. Achtervolgd door de mislukte carrière van zijn vader, die schrijver was, en de angst dat het wel eens genetisch kan zijn, droomt hij ervan om de top te bereiken.",
+   "Language": "nl-NL"
+  },
+  {
+   "Title": "Whiplash",
+   "Overview": "Bir tarafta öğrencilerinin korkulu rüyası, jazz öğretmeni Terrence Fletcher, diğer tarafta \\\"en iyi\\\" olmayı kafaya koymuş, aşırı hırslı genç öğrencisi Andrew Neyman. İki taraf da baskın karakterinden taviz vermeyince çok geçmeden mantık dışı olaylar gelişmeye başlar. Bu süreçte elleri çalışmaktan kanlar içinde kalan Neyman, küfürbaz Fletcher'ın hakaretle bezeli eğitim tekniklerine boyun eğmek zorunda kalır. Ama Neyman'ın da kendine göre numaraları vardır ve en sonunda, karşı karşıya kalacakları müzikal düellodan önce işler iyice çıkmaza girer.",
+   "Language": "tr-TR"
+  },
+  {
+   "Title": "Одержимість",
+   "Overview": "Ендрю мріє стати великим ударником. Здавалося, його мрія от-от здійсниться — ним зацікавився найкращий диригент консерваторії. Але якби ж усе було так просто.",
+   "Language": "uk-UA"
+  },
+  {
+   "Title": "Whiplash",
+   "Overview": "Andrew Neiman je devatenáctiletý jazzový bubeník, který sní o slávě, ale není si jistý tím, zda se jeho sny někdy naplní. Pronásledovaný neúspěšnou spisovatelskou kariérou svého otce je rozhodnutý vystoupat až na samotný vrchol nejprestižnější hudební konzervatoře. Jednoho večera na Andrewa, který právě cvičí na bicí, narazí Terence Fletcher, dirigent, proslavený svým učitelským talentem ve stejné míře jako svými nemilosrdnými praktikami. Ačkoliv si spolu toho večera příliš mnoho nesdělí, probudí Fletcher v Andrewovi touhu dosáhnout svého cíle. K Andrewovu překvapení dalšího dne Fletcher požádá o to, aby byl Andrew přidělen k jeho kapele. Tento jediný čin mladíkovi navždy změní život. Zpočátku je Andrew nucen fungovat pouze jako „záskok\" a otáčet partituru hlavnímu bubeníkovi. Ale na příští soutěži, které se kapela účastní, hlavní bubeník řízením osudu či něčím přičiněním ztratí svou partituru. Andrew, který zná celý part nazpaměť, dostane šanci hrát.",
+   "Language": "cs-CZ"
+  },
+  {
+   "Title": "Камшичен удар",
+   "Overview": "Андрю е обещаващ 19-годишен барабанист в манхатънска музикална школа който изобщо не иска да бъде просто музикант. Преследван от провалената писателска кариера на баща си и белязан от ужаса, че посредствеността може да е наследствена, Андрю непрестанно се стреми към съвършенство. С твърдото решение да не последва пътя на баща си, той репетира всекидневно, докато ръцете му буквално започнат да кървят.",
+   "Language": "bg-BG"
+  },
+  {
+   "Title": "Whiplash",
+   "Overview": "En ung och talangfull trummis har blivit antagen till en av världens mest prestigefyllda musikskolor. Där möts han av en skoningslös professor som är fast besluten att få sina studenter att åstadkomma stordåd, till vilket pris som helst.",
+   "Language": "sv-SE"
+  },
+  {
+   "Title": "위플래쉬",
+   "Overview": "최고의 드러머가 되기 위해서라면 무엇이든 할 각오가 되어있는 음악대학 신입생 앤드류는 아무도 없는 지하실에서 혼자 드럼을 연습하던 중 우연한 기회로 누구든지 성공으로 이끄는 최고의 실력자이지만, 또한 동시에 최악의 폭군인 플렛처 교수에게 발탁되어 그의 밴드에 들어가게 된다. 설레는 마음으로 참가한 첫 연습에서, 그는 플렛처 교수의 진짜 얼굴을 마주치게 된다. 폭언과 학대 속에 좌절과 성취를 동시에 안겨주는 플렛처의 지독한 교육방식은 천재가 되길 갈망하는 앤드류의 집착을 끌어내며 그를 점점 광기로 몰아넣는데...",
+   "Language": "ko-KR"
+  },
+  {
+   "Title": "Whiplash",
+   "Overview": "Andrew Neyman on kunnianhimoinen nuori jazz-rumpali, joka on vakaasti päättänyt nousta Yhdysvaltain itärannikolla sijaitsevan eliittikonservatorionsa huipulle. Isänsä epäonnistuneen kirjailijanuran varjostama Andrew janoaa tunnustusta taidoistaan. Terence Fletcher – soitonopettaja, joka on yhtä tunnettu pätevyydestään lahjakkuuksien koulijana kuin kammottavista opetusmenetelmistään – johtaa koulun parasta jazz-yhtyettä. Fletcher huomaa Andrewn kyvyt, siirtää nuoren muusikonalun omaan bändiinsä ja tulee samalla mullistaneeksi tämän elämän ikiajoiksi. Andrewn intohimoinen täydellisyyden tavoittelu muuttuu nopeasti pakkomielteeksi hänen armottoman opettajansa patistaessa häntä kykyjensä – ja lopulta hulluuden – rajamaille.",
+   "Language": "fi-FI"
+  },
+  {
+   "Title": "Whiplash",
+   "Overview": "একটি নির্মম প্রশিক্ষকের নির্দেশনায়, একটি প্রতিভাবান তরুণ ঢাকি, তার দক্ষতায় পরিপূর্ণতা নিয়ে আসার প্রচেষ্টা করে যে কোনো কিছুর বিনিময়ে, এমন কি তার মানবতার বিনিময়েও।",
+   "Language": "bn-BD"
+  },
+  {
+   "Title": "Whiplash",
+   "Overview": "Demi impian menjadi pemain drum terhebat, Andrew, drummer muda berbakat mendaftar di sebuah konservatorium musik dengan mentor Terence Fletcher - yang terkenal dengan cara pengajaran sangat brutal.",
+   "Language": "id-ID"
+  },
+  {
+   "Title": "Whiplash",
+   "Overview": "Andrew e un baterist care se înscrie la un conservator prestigios. Aici, sub îndrumarea celor mai buni profesori, visul său ar putea prinde contur.",
+   "Language": "ro-RO"
+  },
+  {
+   "Title": "ويبلاش",
+   "Overview": "تحت إشراف مدرب لا يرحم ، يبدأ عازف إيقاع شاب موهوب في السعي وراء الكمال بأي ثمن ، حتى إنسانيته.",
+   "Language": "ar-SA"
+  },
+  {
+   "Title": "ตีให้ลั่น เพราะฝันยังไม่จบ",
+   "Overview": "ผลงานจากผู้สร้าง Juno ภาพยนตร์ที่ได้รับเกียรติเปิดเทศกาลหนังซันแด๊นซ์ และได้รับรางวัล Grand Jury Prize มาครอง เรื่องราวของ แอนดรูว์ (รับบทโดย ไมลส์ เทลเลอร์ จาก Divergent) มือกลองหนุ่มวัย 19 ปี ที่ต้องการเป็นมากกกว่าฉากหลังในวงดนตรี โดยความฝันในการเป็นมือกลองระดับโลกก็เริ่มต้นขึ้น เมื่อเขาถูกค้นพบโดย เทอเรนซ์ เฟลชเชอร์ (เจเค ซิมมอนซ์) ครูสอนดนตรีที่มีวิธีการสอนที่เข้มข้น โดยเฉพาะเมื่อเขาเห็นพรสวรรค์ที่อยู่ในตัวเด็กคนนี้ เปิดฉายรอบพิเศษต้อนรับการประกาศผลรางวัลออสการ์ตั้งแต่วันที่ 19 กุมภาพันธ์ ณ โรงภาพยนตร์พารากอนซีนีเพล็กซ์ เอสพลานาดซีนีเพล็กซ์ เมเจอร์ซีนีเพล็กซ์รัชโยธิน เมกาซีนีเพล็กซ์ และเมเจอร์ซีนีเพล็กซ์ เซ็นทรัลเฟสติวัลเชียงใหม่",
+   "Language": "th-TH"
+  },
+  {
+   "Title": "Whiplash",
+   "Overview": "Mladi bubnjar koji obećava prijavljuje se na slavni muzički konzervatorijum gdje njegove snove o veličini mentoriše instruktor koga ništa ne može zaustaviti da ostvari njegov potrencijal.",
+   "Language": "bs-BS"
+  },
+  {
+   "Title": "Whiplash: Em Busca da Perfeição",
+   "Overview": "Andrew sonha em ser o melhor baterista de sua geração. Ele chama a atenção do impiedoso mestre do jazz Terence Fletcher, que ultrapassa os limites e transforma seu sonho em uma obsessão, colocando em risco a saúde física e mental do jovem músico.",
+   "Language": "pt-BR"
+  },
+  {
+   "Title": "Mükemmellik Axtarisinda",
+   "Overview": "",
+   "Language": "az-AZ"
+  },
+  {
+   "Title": "Ritam ludila",
+   "Overview": "Pod vodstvom nemilosrdnog instruktora, nadareni mladi bubnjar počinje težiti savršenstvu pod svaku cijenu.",
+   "Language": "hr-HR"
+  },
+  {
+   "Title": "セッション",
+   "Overview": "名門音楽学校へと入学し、世界に通用するジャズドラマーになろうと決意するニーマン。そんな彼を待ち受けていたのは、鬼教師として名をはせるフレッチャーだった。ひたすら罵声を浴びせ、完璧な演奏を引き出すためには暴力をも辞さない彼におののきながらも、その指導に必死に食らい付いていくニーマン。だが、フレッチャーのレッスンは次第に狂気じみたものへと変化していく。",
+   "Language": "ja-JP"
+  },
+  {
+   "Title": "Atkirtis",
+   "Overview": "Šeiferio muzikos mokyklos studentas Endriu (akt. Miles Teller) svajoja tapti didžiu būgnininku. Regis, talentingo vaikino svajonė yra ranka pasiekiama – jaunuolį pastebi geriausio šalies džiazo orkestro dirigentas (akt. J. K. Simmons), užnugaryje vadinamas tiesiog genijumi. Pamažu Endriu noras tapti geriausiu virsta apsėdimu ir manija, o geležiniu kumščiu orkestrui diriguojantis Flečeris vis labiau stumia jį už žmogaus galimybių ribos. Tačiau ar Endriu pasiryžęs įgyvendinti svajonę pagal radikalius ir protu nesuvokiamus dirigento įgeidžius, ar tėra silpnas ir palūžti linkęs verksnys?",
+   "Language": "lt-LT"
+  },
+  {
+   "Title": "進擊的鼓手",
+   "Overview": "立志成為頂尖爵士鼓手的安德魯，進入音樂學院的第一天就遇上魔鬼教師費查，費查教學手段變態激烈，而安德魯更是不計代價瘋狂練習，對音樂皆懷抱深遠理想的兩人在激烈交鋒下，終將彼此推至人性的懸崖。",
+   "Language": "zh-TW"
+  },
+  {
+   "Title": "Whiplash: Música y Obsesión",
+   "Overview": "El objetivo de Andrew Neiman, un joven y ambicioso baterista de jazz, es triunfar en el elitista Conservatorio de Música de la Costa Este en el que estudia. Marcado por el fracaso de la carrera literaria de su padre, Andrew alberga sueños de grandeza. Terence Fletcher, un profesor conocido tanto por su talento como por sus rigurosos métodos de enseñanza, dirige el mejor conjunto de jazz del Conservatorio. Cuando Fletcher elige a Andrew y para formar parte del conjunto musical que dirige, cambia para siempre la vida del joven. La pasión de Andrew por alcanzar la perfección se convierte en obsesión, al tiempo que su despiadado profesor lo lleva al límite de su capacidad y de su salud mental.",
+   "Language": "es-MX"
+  },
+  {
+   "Title": "Whiplash",
+   "Overview": "Andrew Neiman je mladý a ambiciózny džezový bubeník, pevne rozhodnutý presadiť sa na elitnej hudobnej akadémii na východnom pobreží USA. Andrew, na ktorom sa negatívne podpísala skrachovaná spisovateľská kariéra jeho otca, dňom i nocou živí nádej, že sa z neho stane velikán. Pedagóg Terence Fletcher, známy pre svoj učiteľský talent ako aj pre svoje desivé metódy, vedie najlepší džezový ansámbel na škole. Fletcher objaví Andrewa a preradí ho do svojej kapely, čím mladíkovi navždy zmení život. Z jeho vášne pre dokonalosť sa rýchlo stáva posadnutosť, keď ho bezcitný mentor neustále tlačí na pokraj jeho schopností - aj zdravého rozumu.",
+   "Language": "sk-SK"
+  },
+  {
+   "Title": "Khát Vọng Nhịp Điệu",
+   "Overview": "Trong “Whiplash”, Miles Teller vào vai Andrew Neyman, một tay trống nhạc jazz trẻ khá tham vọng và quyết tâm theo đuổi đỉnh cao trong sự nghiệp âm nhạc bên bờ biển miền Đông nước Mỹ. Ám ảnh bởi sự nghiệp viết nhạc thất bại của người cha, Andrew ngày đêm nung nấu trở thành một nhạc công vĩ đại. Nhân vật thứ hai, Terence Fletcher (Simmons) là một huấn luyện viên nổi danh nhờ tài năng giảng dạy nhưng cũng khét tiếng bởi các phương pháp khắc nghiệt của ông, chuyên dẫn dắt các tài năng nhạc jazz hàng đầu trong trường nhạc. Fletcher phát hiện ra Andrew và mang tay trống về ban nhạc riêng của mình, thay đổi mãi mãi cuộc đời của chàng trai trẻ. Đam mê vươn tới sự hoàn hảo khiến Andrew rơi vào vòng xoáy của sự ám ảnh, bởi ông thầy tàn nhẫn ...",
+   "Language": "vi-VN"
+  },
+  {
+   "Title": "Ritem norosti",
+   "Overview": "Devetnajstletni Andrew je ambiciozen študent jazz bobnov na prestižnem glasbenem konservatoriju. V strahu pred povprečnostjo vadi dneve in noči. Ko ga ugledni in strahospoštovani glasbeni profesor Fletcher povabi v elitni šolski jazz ansambel, se njegovo življenje spremeni za vedno. Fletcherjeve brutalne, sadistične metode še bolj podžgejo Andrewovo obsedenost, da bi dosegel popolnost za vsako ceno, neizprosni učitelj pa ga žene na rob njegovih sposobnosti in zdravja. Film je od premiere na filmskemu festivalu Sundance 2014, kjer je povzročil pravo senzacijo in osvojil tako nagrado žirije kot nagrado občinstva, zagotovljena festivalska uspešnica, pospremljena s stoječimi ovacijami, kjerkoli se pojavi.",
+   "Language": "sl-SI"
+  },
+  {
+   "Title": "Ритам лудила",
+   "Overview": "Ендру Ниман је амбициозни млади џез-бубњар, одлучан да постане један од најбољих на свом елитном музичком конзерваторијуму на источној обали САД-а. Оптерећен неуспешном списатељском каријером свог оца, Ендру даноноћно вежба да би постао један од великана. Теренс Флечер, професор познат по свом предавачком таленту, али и по застрашујућим педагошким методама, предводи најбољи џез-оркестар у школи. Флечер открива Ендруа и пребацује перспективног бубњара у свој бенд, заувек мењајући живот овог младића. Ендруова жеља да достигне савршенство убрзо прераста у опсесију, док га бескрупулозни професор непрестано гура преко границе његових могућности – и здравог разума.",
+   "Language": "sr-RS"
+  },
+  {
+   "Title": "شلاق",
+   "Overview": "اندرو (مایلز تلر) که پدرش یک نویسنده ناموفق است و وضع مالی زیاد خوبی ندارد وارد یک آکادمی موسیقی می شود تا هنر درام خود را به مرحله حرفه ای برساند اما در آنجا با مربی ای بسیار سخت گیر روبرو می شود که...",
+   "Language": "fa-IR"
+  },
+  {
+   "Title": "鼓動真我",
+   "Overview": "受寫作事業失敗的父親影響，19 歲 Andrew（米爾斯泰勒\r 飾），一心想成為東岸爵士樂鼓神，因為不知美夢能否成真，唯有日練夜練…\r 某夜苦練之際，竟被校內的魔鬼導師 Terence Fletcher（J.K. 西蒙斯\r 飾）賞識，獲安排到旗下的校內爵士樂隊。Andrew 癒在打鼓上追求完美，跟全世界距離便癒來癒遠，惟獨跟 Terence 癒接近，但 Terence 的瘋狂性格，亦同時在破壞這段師生關係，Andrew 漸漸變成世上最孤獨的人。\r Andrew 終於踏上著名的卡內基音樂廳（Carnegie Hall）大舞台，這最後一戰，可能令他成為全國最偉大的少年鼓神，亦可能令他步入真正瘋狂！",
+   "Language": "zh-HK"
+  },
+  {
+   "Title": "შეპყრობილი",
+   "Overview": "",
+   "Language": "ka-GE"
+  },
+  {
+   "Title": "Atsitiens",
+   "Overview": "Endrjū ir jauns un ambiciozs džeza bundzinieks, gatavs kļūt par labāko no labākajiem ASV austrumkrasta mūzikas akadēmijā – atspēriena punktā uz lielo skatuvi. Despotiskais pasniedzējs Terenss pamana Endrjū un iekļauj viņu džeza orķestra sastāvā – uz visiem laikiem izmainot jaunieša dzīvi.\r Endrjū vēlme kļūt par labāko drīz pārvēršas apsēstībā, un Terensa nežēlīgās mācību metodes nostāda viņu gan uz fizisko spēju, gan arī saprāta robežas.",
+   "Language": "lv-LV"
+  },
+  {
+   "Title": "Whiplash",
+   "Overview": "L'Andrew Neiman és un bateria jove i ambiciós. La seva carrera canvia quan en Terence Fletcher, que dirigeix el conjunt de jazz d'un conservatori de prestigi, el tria per formar part del grup. La passió de noi, combinada amb l'exigència del professor, portarà el protagonista al límit de les seves capacitats.",
+   "Language": "ca-ES"
+  },
+  {
+   "Title": "Whiplash",
+   "Overview": "Ambitsioonikas noor džässtrummar Andrew Neyman (Miles Teller) õpib mainekas konservatooriumis, janunedes olla parimatest parim. Terence Fletcher (J.K. Simmons) on pedagoog, kes on tuntud nii oma akadeemilise võimekuse kui ka küsitavalt tooreste meetodite poolest. Fletcher avastab Andrew talendi ning kutsub püüdliku õpilase oma elitaarsesse džässansamblisse. Andrew püüdlus saavutada täiuslikkus eskaleerub märkamatult kinnisideeks, samal ajal kui halastamatu õpetaja poisi võimete piire otsib ning ta murdumise äärele viib.",
+   "Language": "et-EE"
+  },
+  {
+   "Title": "Whiplash",
+   "Overview": "Un aspirant batteur fait ses preuves auprès du chef de l'orchestre de jazz d'une prestigieuse école de musique, un individu manipulateur usant de violence et de cruauté mentale.",
+   "Language": "fr-CA"
+  }
+ ],
+ "Recommendations": [
+  {
+   "TmdbId": 33408,
+   "Title": "The Crush"
+  },
+  {
+   "TmdbId": 502033,
+   "Title": "Sound of Metal"
+  },
+  {
+   "TmdbId": 1580,
+   "Title": "Rope"
+  },
+  {
+   "TmdbId": 12104,
+   "Title": "Pink Floyd: The Wall"
+  },
+  {
+   "TmdbId": 835113,
+   "Title": "Woman of the Hour"
+  },
+  {
+   "TmdbId": 846956,
+   "Title": "Rogue Agent"
+  },
+  {
+   "TmdbId": 482,
+   "Title": "Shaft"
+  },
+  {
+   "TmdbId": 3537,
+   "Title": "Fame"
+  },
+  {
+   "TmdbId": 15393,
+   "Title": "Play Misty for Me"
+  },
+  {
+   "TmdbId": 504562,
+   "Title": "Motherless Brooklyn"
+  }
+ ],
+ "Credits": {
+  "Cast": [
+   {
+    "Name": "Miles Teller",
+    "Order": 0,
+    "Character": "Andrew",
+    "TmdbId": 996701,
+    "CreditId": "52fe4ef7c3a36847f82b3fc3",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/kDf3sW3USjEBDQ3Ua7lbwOfwty6.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "J.K. Simmons",
+    "Order": 1,
+    "Character": "Fletcher",
+    "TmdbId": 18999,
+    "CreditId": "52fe4ef7c3a36847f82b3fc7",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/ScmKoJ9eiSUOthAt1PDNLi8Fkw.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Paul Reiser",
+    "Order": 2,
+    "Character": "Jim",
+    "TmdbId": 781,
+    "CreditId": "5466cd46eaeb817274000acb",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/rGryzG00uSk8LsidacSBXVgo3iv.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Melissa Benoist",
+    "Order": 3,
+    "Character": "Nicole",
+    "TmdbId": 129104,
+    "CreditId": "52fe4ef7c3a36847f82b3fe3",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/1F0fCPNhb5W0WyFe8Tszfbx1DEp.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Austin Stowell",
+    "Order": 4,
+    "Character": "Ryan",
+    "TmdbId": 970216,
+    "CreditId": "52fe4ef7c3a36847f82b3fe7",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/At09XQpVXnChgedNsxu4ceR5W9i.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Nate Lang",
+    "Order": 5,
+    "Character": "Carl",
+    "TmdbId": 1451540,
+    "CreditId": "5525414d925141720c001b56",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/6TC0gKxJIttIhXLnCttANV9gd1G.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Chris Mulkey",
+    "Order": 6,
+    "Character": "Uncle Frank",
+    "TmdbId": 15824,
+    "CreditId": "5525415fc3a3687df80016c4",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/51SbuIbzmpbDYtv5gvcqB9Ysu91.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Damon Gupton",
+    "Order": 7,
+    "Character": "Mr. Kramer",
+    "TmdbId": 53454,
+    "CreditId": "5525416c9251417276001927",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/cGLo2i8ghhq5wVkKDlAw3o4Pa36.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Suanne Spoke",
+    "Order": 8,
+    "Character": "Aunt Emma",
+    "TmdbId": 1212459,
+    "CreditId": "55254179c3a3687ded0016cf",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/c3eHskplBRwuORgUWSwnsi6KZpV.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Max Kasch",
+    "Order": 9,
+    "Character": "Dorm Neighbor",
+    "TmdbId": 52939,
+    "CreditId": "552541869251417be200a8f2",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/7BvCZldRpYB4UxJv5IxNSMSYgoe.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Charlie Ian",
+    "Order": 10,
+    "Character": "Dustin",
+    "TmdbId": 1451542,
+    "CreditId": "552541959251415c7c00bd61",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/5ondXm5m2LoC7sdXhTziNAmuDfw.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Jayson Blair",
+    "Order": 11,
+    "Character": "Travis",
+    "TmdbId": 223012,
+    "CreditId": "52fe4ef7c3a36847f82b3feb",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/zUMEMibklFznVD2kkpbNTs63UVX.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Kofi Siriboe",
+    "Order": 12,
+    "Character": "Bassist (Nassau)",
+    "TmdbId": 1451543,
+    "CreditId": "552541ae925141720c001b71",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/gy3Zi29R3cH0VOm8ZrC4Y7979ko.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Kavita Patil",
+    "Order": 13,
+    "Character": "Assistant - Sophie",
+    "TmdbId": 159366,
+    "CreditId": "52fe4ef7c3a36847f82b3fef",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/iDnY0MDtHM6NZPADnGryCbaOVjj.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "C.J. Vana",
+    "Order": 14,
+    "Character": "Metz",
+    "TmdbId": 1451545,
+    "CreditId": "552541c7c3a3687e08001774",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/b8Dql6EEshNGOGXlmIsnVRi8B8B.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Tarik Lowe",
+    "Order": 15,
+    "Character": "Pianist (Studio Band)",
+    "TmdbId": 171766,
+    "CreditId": "55e6d136c3a3685f85002956",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/7p4fPwQPe2jwdCqEOaIakka8MGD.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Tyler Kimball",
+    "Order": 16,
+    "Character": "Saxophonist #2 (Studio Band)",
+    "TmdbId": 1398714,
+    "CreditId": "55e6d136c3a3685f98002c48",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/l7Th75VBqIYPLs9cmztTMFNF9S0.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Rogelio Douglas Jr.",
+    "Order": 17,
+    "Character": "Trumpeter #1 (Studio Band)",
+    "TmdbId": 1503721,
+    "CreditId": "55e6d136c3a3685f8e002617",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/gfYB1q24wiVnbEKAr33glzd20gC.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Adrian Burks",
+    "Order": 18,
+    "Character": "Trumpeter #2 (Studio Band)",
+    "TmdbId": 1503834,
+    "CreditId": "55e6d137c3a3685f9100272e",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/hnidFJRRPEgXAH7ntB8iDZ9GPmj.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Calvin C. Winbush",
+    "Order": 19,
+    "Character": "Saxophonist (Studio Band)",
+    "TmdbId": 1145677,
+    "CreditId": "55e6d22f9251410f1300293a",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/m62DdAXKrWwQrarmJxPy0H4mKLz.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Joseph Bruno",
+    "Order": 20,
+    "Character": "Technician (Overbrook) - Mike",
+    "TmdbId": 1503835,
+    "CreditId": "55e6d1379251410f0a0026b6",
+    "Images": []
+   },
+   {
+    "Name": "Michael D. Cohen",
+    "Order": 21,
+    "Character": "Stage Hand (Overbrook)",
+    "TmdbId": 1296849,
+    "CreditId": "55e6d1379251410f0d002526",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/eEs2yjMUQnmIvwPx66bhL4f55eI.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Jocelyn Ayanna",
+    "Order": 22,
+    "Character": "Passerby (Bus Station)",
+    "TmdbId": 1098246,
+    "CreditId": "55e6d1389251410f10002836",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/rIBzNIQcoA7ILHf5mj9j2j2Vk49.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Keenan Henson",
+    "Order": 23,
+    "Character": "Truck Driver",
+    "TmdbId": 1503836,
+    "CreditId": "55e6d1389251410f0700274e",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/g9jHx4LxRwN73eFoz1npO5j8IGV.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Janet Hoskins",
+    "Order": 24,
+    "Character": "Passerby (Dunellen)",
+    "TmdbId": 1503837,
+    "CreditId": "55e6d138c3a3685f8e00261a",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/Ab9wA1GipllwMV63t3IlNOfR77S.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "April Grace",
+    "Order": 25,
+    "Character": "Rachel Bornholdt",
+    "TmdbId": 10691,
+    "CreditId": "55e6d138c3a3685f91002733",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/nV8nnymN0ClT3xppwhlAtUnjSxa.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Clifton 'Fou Fou' Eddie",
+    "Order": 26,
+    "Character": "Drummer (Quartet)",
+    "TmdbId": 1503838,
+    "CreditId": "55e6d139c3a3685f98002c4c",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/jIxkjRSTGvfnr06zVRHeOk3uDsb.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Marcus Henderson",
+    "Order": 27,
+    "Character": "Bassist (JVC)",
+    "TmdbId": 1291961,
+    "CreditId": "55e6d22fc3a3685f98002c83",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/vTevIy7GKjhmpoAhoayifnwqgn2.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Tony Baker",
+    "Order": 28,
+    "Character": "Stage Hand (Carnegie Hall)",
+    "TmdbId": 1503841,
+    "CreditId": "55e6d2309251410f17002943",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/48jzlzMUOHSGO1umjhZlU65mapZ.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Henry G. Sanders",
+    "Order": 29,
+    "Character": "Red Henderson",
+    "TmdbId": 16506,
+    "CreditId": "55e6d230c3a3685f96002a6b",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/4HWUP5K5kPxt5c0Xp65QOyV5gPG.jpg"
+     }
+    ]
+   }
+  ],
+  "Crew": [
+   {
+    "Name": "Damien Chazelle",
+    "Order": 0,
+    "Job": "Director",
+    "Department": "Directing",
+    "TmdbId": 136495,
+    "CreditId": "52fe4ef7c3a36847f82b3fad",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/14kRZ3XxNMyBv717YQSXr3wCucy.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Damien Chazelle",
+    "Order": 1,
+    "Job": "Writer",
+    "Department": "Writing",
+    "TmdbId": 136495,
+    "CreditId": "629baca1992fe60050b3f306",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/14kRZ3XxNMyBv717YQSXr3wCucy.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Jason Blum",
+    "Order": 2,
+    "Job": "Producer",
+    "Department": "Production",
+    "TmdbId": 84348,
+    "CreditId": "52fe4ef7c3a36847f82b3fcd",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/oOsdVzSXyj1L1mKN3d2QcF01hkc.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Michel Litvak",
+    "Order": 3,
+    "Job": "Producer",
+    "Department": "Production",
+    "TmdbId": 66726,
+    "CreditId": "52fe4ef7c3a36847f82b3fdf",
+    "Images": []
+   },
+   {
+    "Name": "David Lancaster",
+    "Order": 4,
+    "Job": "Producer",
+    "Department": "Production",
+    "TmdbId": 60864,
+    "CreditId": "52fe4ef7c3a36847f82b3fd9",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/bBTYGOWuF3WJBgiqVSpNBuL9qlg.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Helen Estabrook",
+    "Order": 5,
+    "Job": "Producer",
+    "Department": "Production",
+    "TmdbId": 1287961,
+    "CreditId": "52fe4ef7c3a36847f82b3fd3",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/gudRZd8fTL1ytvQQLb6zD2Lz12Q.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Jason Reitman",
+    "Order": 6,
+    "Job": "Executive Producer",
+    "Department": "Production",
+    "TmdbId": 52443,
+    "CreditId": "56407e4ac3a3685059000c7c",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/eNNN1dwfB6b6p2hoEG1xyoa7H2p.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Jeanette Volturno",
+    "Order": 7,
+    "Job": "Executive Producer",
+    "Department": "Production",
+    "TmdbId": 1030966,
+    "CreditId": "56407e7f9251417052000c7c",
+    "Images": []
+   },
+   {
+    "Name": "Gary Michael Walters",
+    "Order": 8,
+    "Job": "Executive Producer",
+    "Department": "Production",
+    "TmdbId": 66727,
+    "CreditId": "56407e8b9251417052000c80",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/tz0JL10EVQiGUSqtveiRDJjq6c2.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Couper Samuelson",
+    "Order": 9,
+    "Job": "Executive Producer",
+    "Department": "Production",
+    "TmdbId": 1319040,
+    "CreditId": "56407e599251417050000bac",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/hI048XF1FEzccLfDrPIxOk5E3xS.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Sharone Meir",
+    "Order": 10,
+    "Job": "Director of Photography",
+    "Department": "Camera",
+    "TmdbId": 53181,
+    "CreditId": "52fe4ef7c3a36847f82b3fb9",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/lOTztJAlbtfIwx5KJFXeYdzaaoX.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Damien Chazelle",
+    "Order": 11,
+    "Job": "Original Film Writer",
+    "Department": "Writing",
+    "TmdbId": 136495,
+    "CreditId": "69b3f56b3e41a5ddffdf4c33",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/14kRZ3XxNMyBv717YQSXr3wCucy.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Justin Hurwitz",
+    "Order": 12,
+    "Job": "Original Music Composer",
+    "Department": "Sound",
+    "TmdbId": 1419631,
+    "CreditId": "679df327a74d8ee23b262202",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/4a03MPhWE8u0NGJF9wt0wbBcFWn.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Barbara Harris",
+    "Order": 13,
+    "Job": "ADR Voice Casting",
+    "Department": "Production",
+    "TmdbId": 230436,
+    "CreditId": "679dfd59b06437a4ee262355",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/d1BGeZT2b81Wa9gCOPdrXGWUtmR.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Laura Wiest",
+    "Order": 14,
+    "Job": "Sound Mix Technician",
+    "Department": "Sound",
+    "TmdbId": 1473445,
+    "CreditId": "679dfce37b4153a3b995487f",
+    "Images": []
+   },
+   {
+    "Name": "Boman Modine",
+    "Order": 15,
+    "Job": "Set Production Assistant",
+    "Department": "Crew",
+    "TmdbId": 1946989,
+    "CreditId": "679dfb0d3fd9d12e1d2628fa",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/d8jA83118Qg7NCDy4V8ZKjD1OEF.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Terri Taylor",
+    "Order": 16,
+    "Job": "Casting",
+    "Department": "Production",
+    "TmdbId": 494,
+    "CreditId": "679df2be7ebb0614ff2620fd",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/jSpPyN8MYCNgUKmCUanuK3BtuZ5.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Nicholas Britell",
+    "Order": 17,
+    "Job": "Co-Producer",
+    "Department": "Production",
+    "TmdbId": 1533516,
+    "CreditId": "679df3549e2bc4b0bc953c27",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/AruRbW6IEk09KCFokffFecZIzZU.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Craig Mann",
+    "Order": 18,
+    "Job": "Supervising Sound Editor",
+    "Department": "Sound",
+    "TmdbId": 1406825,
+    "CreditId": "679dfc25176fdb2244cb4237",
+    "Images": []
+   },
+   {
+    "Name": "Craig Mann",
+    "Order": 19,
+    "Job": "Sound Re-Recording Mixer",
+    "Department": "Sound",
+    "TmdbId": 1406825,
+    "CreditId": "679dfc557b4153a3b9954861",
+    "Images": []
+   },
+   {
+    "Name": "Chris Squires",
+    "Order": 20,
+    "Job": "\"A\" Camera Operator",
+    "Department": "Camera",
+    "TmdbId": 1017376,
+    "CreditId": "679df5b27ebb0614ff262182",
+    "Images": []
+   },
+   {
+    "Name": "Chris Squires",
+    "Order": 21,
+    "Job": "Steadicam Operator",
+    "Department": "Camera",
+    "TmdbId": 1017376,
+    "CreditId": "679df5b99e2bc4b0bc953d29",
+    "Images": []
+   },
+   {
+    "Name": "Scott Curtis",
+    "Order": 22,
+    "Job": "Foley Mixer",
+    "Department": "Sound",
+    "TmdbId": 113043,
+    "CreditId": "679dfd3cebb9962403262c3e",
+    "Images": []
+   },
+   {
+    "Name": "Ben Wilkins",
+    "Order": 23,
+    "Job": "Supervising Sound Editor",
+    "Department": "Sound",
+    "TmdbId": 1049456,
+    "CreditId": "679dfc3ba8935914159536b2",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/30VKN6GCNy9ux0BfmJ0cTo4HHQT.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Ben Wilkins",
+    "Order": 24,
+    "Job": "Sound Re-Recording Mixer",
+    "Department": "Sound",
+    "TmdbId": 1049456,
+    "CreditId": "679dfc4ba8935914159536c1",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/30VKN6GCNy9ux0BfmJ0cTo4HHQT.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Tom Cross",
+    "Order": 25,
+    "Job": "Editor",
+    "Department": "Editing",
+    "TmdbId": 1156888,
+    "CreditId": "679df302f0f9dbdba6954029",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/wbVgrmQKnDmBjqk0RNMgXTCE90m.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Joe Schiff",
+    "Order": 26,
+    "Job": "Dialogue Editor",
+    "Department": "Sound",
+    "TmdbId": 1547656,
+    "CreditId": "679dfc72ac5a7951b9cb3f74",
+    "Images": []
+   },
+   {
+    "Name": "Daniel C. McFadden",
+    "Order": 27,
+    "Job": "Still Photographer",
+    "Department": "Camera",
+    "TmdbId": 1420326,
+    "CreditId": "679df67bac5a7951b9cb3e11",
+    "Images": []
+   },
+   {
+    "Name": "Sarah Domeier Lindo",
+    "Order": 28,
+    "Job": "Casting Associate",
+    "Department": "Production",
+    "TmdbId": 1533529,
+    "CreditId": "679dfbae3fd9d12e1d262928",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/vpvgNtUfZxLmbAq7SwxEcsb1gXW.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Nicolas Harvard",
+    "Order": 29,
+    "Job": "First Assistant Director",
+    "Department": "Directing",
+    "TmdbId": 1197441,
+    "CreditId": "679df38ea74d8ee23b262233",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/6mhAwz64RwJs7gIaSqUOYODMIdR.jpg"
+     }
+    ]
+   }
+  ]
+ },
+ "Studio": "Bold Films",
+ "YoutubeTrailerId": "Q7kZy3T6vRM",
+ "Certifications": [
+  {
+   "Country": "AR",
+   "Certification": "12"
+  },
+  {
+   "Country": "AT",
+   "Certification": "12"
+  },
+  {
+   "Country": "AU",
+   "Certification": "MA 15+"
+  },
+  {
+   "Country": "BE",
+   "Certification": "18"
+  },
+  {
+   "Country": "BR",
+   "Certification": "12"
+  },
+  {
+   "Country": "CA",
+   "Certification": "R"
+  },
+  {
+   "Country": "CH",
+   "Certification": "12"
+  },
+  {
+   "Country": "CZ",
+   "Certification": "18+"
+  },
+  {
+   "Country": "DE",
+   "Certification": "12"
+  },
+  {
+   "Country": "DK",
+   "Certification": "15"
+  },
+  {
+   "Country": "ES",
+   "Certification": "12"
+  },
+  {
+   "Country": "FI",
+   "Certification": "K-12"
+  },
+  {
+   "Country": "FR",
+   "Certification": "TP"
+  },
+  {
+   "Country": "GB",
+   "Certification": "15"
+  },
+  {
+   "Country": "GR",
+   "Certification": "13"
+  },
+  {
+   "Country": "HK",
+   "Certification": "IIB"
+  },
+  {
+   "Country": "HU",
+   "Certification": "18"
+  },
+  {
+   "Country": "IE",
+   "Certification": "15A"
+  },
+  {
+   "Country": "IS",
+   "Certification": "16"
+  },
+  {
+   "Country": "JP",
+   "Certification": "G"
+  },
+  {
+   "Country": "KR",
+   "Certification": "15"
+  },
+  {
+   "Country": "LT",
+   "Certification": "N-16"
+  },
+  {
+   "Country": "NL",
+   "Certification": "12"
+  },
+  {
+   "Country": "NZ",
+   "Certification": "R13"
+  },
+  {
+   "Country": "PL",
+   "Certification": "16"
+  },
+  {
+   "Country": "PT",
+   "Certification": "M/14"
+  },
+  {
+   "Country": "RO",
+   "Certification": "18"
+  },
+  {
+   "Country": "RU",
+   "Certification": "16+"
+  },
+  {
+   "Country": "SE",
+   "Certification": "15"
+  },
+  {
+   "Country": "UA",
+   "Certification": "16+"
+  },
+  {
+   "Country": "US",
+   "Certification": "R"
+  }
+ ],
+ "Status": null,
+ "Collection": null,
+ "Homepage": "https://www.sonyclassics.com//film//whiplash#"
+}

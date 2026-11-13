@@ -225,7 +225,9 @@ async fn read_log_file(state: &AppState, filename: &str) -> Option<(String, Vec<
 pub async fn log_file(State(state): State<AppState>, Path(filename): Path<String>) -> Response {
     match read_log_file(&state, &filename).await {
         Some((_, bytes)) => ([(header::CONTENT_TYPE, "text/plain; charset=utf-8")], bytes).into_response(),
-        None => ApiError::NotFoundException.into_response(),
+        // `NotFound()` from the controller: the runtime's problem details,
+        // not the exception's `{"message": "NotFound"}`.
+        None => ApiError::NotFound.into_response(),
     }
 }
 

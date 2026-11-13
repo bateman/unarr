@@ -1,0 +1,17 @@
+{
+  "body": [
+    {
+      "attemptedValue": 999999999,
+      "errorMessage": "A movie with this ID was not found. Path: /movies/Nothing",
+      "propertyName": "TmdbId",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:40:47Z",
+  "request": {
+    "body": "bodies/movie-import-one-invalid.json",
+    "method": "POST",
+    "path": "/api/v3/movie/import"
+  },
+  "status": 400
+}

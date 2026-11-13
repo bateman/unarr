@@ -19,6 +19,8 @@ pub enum ApiError {
     ConflictMessage(String),
     /// `ModelNotFoundException`: a 404 with the message and a description.
     ModelNotFound(String),
+    /// `ModelConflictException`: a 409 with the message and a description.
+    ModelConflict(String),
     /// `NotFoundException` thrown by a controller: `{"message": "NotFound"}`.
     NotFoundException,
     /// `BadRequestException`: `{"message": "BadRequest: ...", "content": "..."}`.
@@ -42,6 +44,12 @@ pub enum ApiError {
     },
     /// `MethodNotAllowedException`: a 405 with message and content.
     MethodNotAllowed(String),
+    /// An exception the originals answer 503 for (the metadata server
+    /// could not be asked): its message and a description that names it.
+    Unavailable {
+        message: String,
+        exception: String,
+    },
     Internal(anyhow::Error),
 }
 
@@ -99,6 +107,14 @@ impl ApiError {
                 })),
             )
                 .into_response(),
+            ApiError::ModelConflict(message) => (
+                StatusCode::CONFLICT,
+                Json(json!({
+                    "message": message,
+                    "description": format!("NzbDrone.Core.Datastore.ModelConflictException: {message}"),
+                })),
+            )
+                .into_response(),
             ApiError::NotFoundException => {
                 (StatusCode::NOT_FOUND, Json(json!({"message": "NotFound"}))).into_response()
             }
@@ -112,6 +128,14 @@ impl ApiError {
             }
             ApiError::ServerException { message, exception } => (
                 StatusCode::INTERNAL_SERVER_ERROR,
+                Json(json!({
+                    "message": message,
+                    "description": format!("{exception}: {message}"),
+                })),
+            )
+                .into_response(),
+            ApiError::Unavailable { message, exception } => (
+                StatusCode::SERVICE_UNAVAILABLE,
                 Json(json!({
                     "message": message,
                     "description": format!("{exception}: {message}"),

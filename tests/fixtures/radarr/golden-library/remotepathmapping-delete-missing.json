@@ -1,0 +1,9 @@
+{
+  "body": null,
+  "recordedAt": "2026-11-13T12:41:28Z",
+  "request": {
+    "method": "DELETE",
+    "path": "/api/v3/remotepathmapping/999"
+  },
+  "status": 200
+}

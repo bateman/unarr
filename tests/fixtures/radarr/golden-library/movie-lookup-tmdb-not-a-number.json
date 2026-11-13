@@ -1,0 +1,9 @@
+{
+  "body": [],
+  "recordedAt": "2026-11-13T12:38:02Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/movie/lookup?term=tmdb:dune"
+  },
+  "status": 200
+}

@@ -1,0 +1,222 @@
+{
+  "body": [
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "alternateTitles": [
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "デューン"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Dune: Part One"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "חולית: חלק ראשון"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "デューン 砂の惑星"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "DUNE デューン 砂の惑星"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Dune: Part One"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Duna: Parte Um"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Duna: Primeira Part"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Dune - Première partie"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Duna: Pjesa e Parë"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Dune: Parte uno"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Duna: Parte 1"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "沙丘瀚戰：第一章"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Դյունա"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "デューン 砂の惑星PART1"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "სილახვავი"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Dyun"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Dyuna : 1-ci Hissə"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Дюна: Часть первая"
+        }
+      ],
+      "certification": "PG-13",
+      "cleanTitle": "dune",
+      "collection": {
+        "title": "Dune Collection",
+        "tmdbId": 726871
+      },
+      "digitalRelease": "2021-10-21T00:00:00Z",
+      "folder": "Dune (2021) {tmdb-438631}",
+      "folderName": "",
+      "genres": [
+        "Science Fiction",
+        "Adventure"
+      ],
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/v1tRXZ4JtD2Iv6fjkPvT4GiwslV.jpg",
+          "url": "/MediaCoverProxy/bd15f9a27331fc78d4df4cfd2800eff60ef759afc06230b0b87f135ec8eeb3e6/v1tRXZ4JtD2Iv6fjkPvT4GiwslV.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/qVgZu5BTx6pu4owCvVOm4zjTfOi.jpg",
+          "url": "/MediaCoverProxy/251f444906d2ce7ea00b72df037076c4480ae049abb7743acc5776ad34f53adf/qVgZu5BTx6pu4owCvVOm4zjTfOi.jpg"
+        }
+      ],
+      "imdbId": "tt1160419",
+      "inCinemas": "2021-09-15T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "army",
+        "baron",
+        "based on novel or book",
+        "betrayal",
+        "chosen one",
+        "complex",
+        "creature",
+        "desert",
+        "destiny",
+        "dystopia",
+        "emperor",
+        "empire",
+        "future",
+        "giant creature",
+        "giant worm",
+        "hallucinogen",
+        "knife fight",
+        "messiah",
+        "mother son relationship",
+        "premonition",
+        "prophecy",
+        "revenge",
+        "sand",
+        "sand dune",
+        "space",
+        "space opera",
+        "spice",
+        "treason",
+        "water shortage"
+      ],
+      "minimumAvailability": "tba",
+      "monitored": false,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Dune",
+      "overview": "Paul Atreides, a brilliant and gifted young man born into a great destiny beyond his understanding, must travel to the most dangerous planet in the universe to ensure the future of his family and his people. As malevolent forces explode into conflict over the planet's exclusive supply of the most precious resource in existence - a commodity capable of unlocking humanity's greatest potential - only those who can conquer their fear will survive.",
+      "physicalRelease": "2021-12-22T00:00:00Z",
+      "popularity": 40.1035,
+      "qualityProfileId": 0,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 8,
+          "votes": 1101251
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 74,
+          "votes": 0
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 83,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 7.787,
+          "votes": 15939
+        },
+        "trakt": {
+          "type": "user",
+          "value": 8.14492,
+          "votes": 57693
+        }
+      },
+      "releaseDate": "2021-09-15T00:00:00Z",
+      "remotePoster": "https://image.tmdb.org/t/p/original/v1tRXZ4JtD2Iv6fjkPvT4GiwslV.jpg",
+      "runtime": 155,
+      "secondaryYearSourceId": 0,
+      "sortTitle": "dune",
+      "status": "released",
+      "studio": "Legendary Pictures",
+      "tags": [],
+      "title": "Dune",
+      "titleSlug": "438631",
+      "tmdbId": 438631,
+      "website": "https://www.warnerbros.com/movies/dune",
+      "year": 2021,
+      "youTubeTrailerId": "w0HgHet0sxg"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:38:02Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/movie/lookup?term=https://www.imdb.com/title/tt1160419/"
+  },
+  "status": 200
+}

@@ -1,0 +1,21 @@
+{
+  "body": {
+    "accessible": true,
+    "freeSpace": 12120080384,
+    "id": 2,
+    "path": "/downloads/library",
+    "unmappedFolders": [
+      {
+        "name": "Some Movie (2020)",
+        "path": "/downloads/library/Some Movie (2020)",
+        "relativePath": "Some Movie (2020)"
+      }
+    ]
+  },
+  "recordedAt": "2026-11-13T12:41:20Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/rootfolder/2"
+  },
+  "status": 200
+}

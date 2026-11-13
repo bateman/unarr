@@ -1,0 +1,11 @@
+{
+  "body": {
+    "folder": "Alien Romulus (2024) {tmdb-945961}"
+  },
+  "recordedAt": "2026-11-13T15:38:04Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/movie/6/folder"
+  },
+  "status": 200
+}

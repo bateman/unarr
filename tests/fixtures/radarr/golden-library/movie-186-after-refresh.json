@@ -1,0 +1,81 @@
+{
+  "body": {
+    "added": "2026-03-19T18:33:28Z",
+    "alternateTitles": [
+      {
+        "id": 1474,
+        "movieMetadataId": 297,
+        "sourceType": "tmdb",
+        "title": "Ghost Writer"
+      },
+      {
+        "id": 1475,
+        "movieMetadataId": 297,
+        "sourceType": "tmdb",
+        "title": "Acorns"
+      }
+    ],
+    "cleanTitle": "thegreatbeyond",
+    "folderName": "/movies/The Great Beyond (2026) {tmdb-1288211}",
+    "genres": [
+      "Drama",
+      "Adventure",
+      "Action"
+    ],
+    "hasFile": false,
+    "id": 186,
+    "images": [],
+    "imdbId": "tt33075482",
+    "inCinemas": "2027-09-29T00:00:00Z",
+    "isAvailable": false,
+    "keywords": [],
+    "minimumAvailability": "released",
+    "monitored": true,
+    "movieFileId": 0,
+    "originalLanguage": {
+      "id": 1,
+      "name": "English"
+    },
+    "originalTitle": "The Great Beyond",
+    "overview": "An author of popular fantasy novels discovers that the mythical world he’s known for creating is actually real.",
+    "path": "/movies/The Great Beyond (2026) {tmdb-1288211}",
+    "popularity": 2.299,
+    "qualityProfileId": 11,
+    "ratings": {
+      "tmdb": {
+        "type": "user",
+        "value": 0,
+        "votes": 0
+      }
+    },
+    "releaseDate": "2027-12-28T00:00:00Z",
+    "rootFolderPath": "/movies",
+    "runtime": 0,
+    "secondaryYearSourceId": 0,
+    "sizeOnDisk": 0,
+    "sortTitle": "great beyond",
+    "statistics": {
+      "movieFileCount": 0,
+      "movieFileQualities": [],
+      "releaseGroups": [],
+      "sizeOnDisk": 0
+    },
+    "status": "deleted",
+    "studio": "Warner Bros. Pictures",
+    "tags": [
+      1
+    ],
+    "title": "The Great Beyond",
+    "titleSlug": "1288211",
+    "tmdbId": 1288211,
+    "website": "",
+    "year": 2027,
+    "youTubeTrailerId": ""
+  },
+  "recordedAt": "2026-11-13T12:38:48Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/movie/186"
+  },
+  "status": 200
+}

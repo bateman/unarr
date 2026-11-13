@@ -1,0 +1,25 @@
+{
+  "body": [
+    {
+      "attemptedValue": -1,
+      "errorCode": "GreaterThanOrEqualTo",
+      "errorMessage": "'Min Size' must be greater than or equal to '0'.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "comparisonProperty": "",
+        "comparisonValue": 0,
+        "propertyName": "Min Size",
+        "propertyValue": -1
+      },
+      "propertyName": "MinSize",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:41:29Z",
+  "request": {
+    "body": "bodies/qualitydefinition-put-negative.json",
+    "method": "PUT",
+    "path": "/api/v3/qualitydefinition/1"
+  },
+  "status": 400
+}

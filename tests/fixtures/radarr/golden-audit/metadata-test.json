@@ -1,0 +1,10 @@
+{
+  "body": {},
+  "recordedAt": "2026-11-13T15:38:04Z",
+  "request": {
+    "body": "bodies/metadata-test.json",
+    "method": "POST",
+    "path": "/api/v3/metadata/test"
+  },
+  "status": 200
+}

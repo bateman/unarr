@@ -1,0 +1,1 @@
+{"$from": "movie-added", "$set": {"monitored": false, "minimumAvailability": "inCinemas", "qualityProfileId": 7, "tags": [1, 2]}}

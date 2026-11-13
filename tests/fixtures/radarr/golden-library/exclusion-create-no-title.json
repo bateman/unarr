@@ -1,0 +1,23 @@
+{
+  "body": [
+    {
+      "attemptedValue": "",
+      "errorCode": "NotEmptyValidator",
+      "errorMessage": "'Movie Title' must not be empty.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Movie Title",
+        "propertyValue": ""
+      },
+      "propertyName": "MovieTitle",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:41:43Z",
+  "request": {
+    "body": "bodies/exclusion-create-no-title.json",
+    "method": "POST",
+    "path": "/api/v3/exclusions"
+  },
+  "status": 400
+}

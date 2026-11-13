@@ -1,0 +1,356 @@
+{
+  "body": [
+    {
+      "addOptions": {
+        "addMethod": "manual",
+        "ignoreEpisodesWithFiles": false,
+        "ignoreEpisodesWithoutFiles": false,
+        "monitor": "movieOnly",
+        "searchForMovie": false
+      },
+      "added": "2026-11-13T12:40:47Z",
+      "alternateTitles": [
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "致命魔术"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Престиж"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "El Truco Final (El Prestigio)"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Prestiż"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "El Truco Final"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "프레스티지"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "プレステージ"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "حیثیت"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "O Grande Truque"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "O Terceiro Passo"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Prestij"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "A tökéletes trükk"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Ảo Thuật Gia Đấu Trí"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "The Prestige"
+        }
+      ],
+      "certification": "PG-13",
+      "cleanTitle": "theprestige",
+      "digitalRelease": "2009-09-01T00:00:00Z",
+      "folderName": "/movies/The Prestige (2006)",
+      "genres": [
+        "Drama",
+        "Mystery",
+        "Science Fiction"
+      ],
+      "id": 332,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/Ag2B2KHKQPukjH7WutmgnnSNurZ.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/yaExZh6qE2cfyK3o4kAMEq0mkgy.jpg"
+        }
+      ],
+      "imdbId": "tt0482571",
+      "inCinemas": "2006-10-19T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "19th century",
+        "based on novel or book",
+        "bittersweet",
+        "class",
+        "class society",
+        "competition",
+        "cruelty",
+        "diary",
+        "dying and death",
+        "hanging",
+        "hostility",
+        "illusion",
+        "jail cell",
+        "london, england",
+        "magic",
+        "magician",
+        "mind-blowing",
+        "nikola tesla",
+        "obsession",
+        "partner",
+        "rivalry",
+        "secret",
+        "steampunk",
+        "suicide",
+        "tesla coil",
+        "tricks",
+        "twist"
+      ],
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "The Prestige",
+      "overview": "A mysterious story of two magicians whose intense rivalry leads them on a life-long battle for supremacy -- full of obsession, deceit and jealousy with dangerous and deadly consequences.",
+      "path": "/movies/The Prestige (2006)",
+      "physicalRelease": "2007-06-06T00:00:00Z",
+      "popularity": 18.951,
+      "qualityProfileId": 4,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 8.5,
+          "votes": 1640237
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 66,
+          "votes": 0
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 77,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 8.212,
+          "votes": 18448
+        },
+        "trakt": {
+          "type": "user",
+          "value": 8.46334,
+          "votes": 30755
+        }
+      },
+      "releaseDate": "2007-06-06T00:00:00Z",
+      "runtime": 131,
+      "secondaryYearSourceId": 0,
+      "sortTitle": "prestige",
+      "status": "released",
+      "studio": "Warner Bros. Pictures",
+      "tags": [],
+      "title": "The Prestige",
+      "titleSlug": "1124",
+      "tmdbId": 1124,
+      "website": "https://www.warnerbros.co.uk/movies/prestige",
+      "year": 2006,
+      "youTubeTrailerId": "ObGVA1WOqyE"
+    },
+    {
+      "addOptions": {
+        "addMethod": "manual",
+        "ignoreEpisodesWithFiles": false,
+        "ignoreEpisodesWithoutFiles": false,
+        "monitor": "none",
+        "searchForMovie": false
+      },
+      "added": "2026-11-13T12:40:47Z",
+      "alternateTitles": [
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Gravitatsioon"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Ko'akh Meshikha"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Gravity: Misiune in spatiu"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Гравiтацiя"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "כוח משיכה"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "גרביטי"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "גראביטי"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Gravity 3D"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "그래비티"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Gravity 2013"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Cuộc Chiến Không Trọng Lực"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Yerçəkimi"
+        }
+      ],
+      "certification": "PG-13",
+      "cleanTitle": "gravity",
+      "digitalRelease": "2018-03-04T00:00:00Z",
+      "folderName": "/movies/Gravity (2013)",
+      "genres": [
+        "Science Fiction",
+        "Thriller",
+        "Drama"
+      ],
+      "id": 333,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/kZ2nZw8D681aphje8NJi8EfbL1U.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/a2n6bKD7qhCPCAEALgsAhWOAQcc.jpg"
+        }
+      ],
+      "imdbId": "tt1454468",
+      "inCinemas": "2013-10-03T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "astronaut",
+        "loss",
+        "space",
+        "space mission",
+        "space station",
+        "trapped in space"
+      ],
+      "minimumAvailability": "announced",
+      "monitored": false,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Gravity",
+      "overview": "Dr Ryan Stone, an engineer on her first space mission, and Matt Kowalski, an astronaut on his final expedition, have to survive in space after they are hit by debris while spacewalking.",
+      "path": "/movies/Gravity (2013)",
+      "physicalRelease": "2014-01-29T00:00:00Z",
+      "popularity": 9.6727,
+      "qualityProfileId": 1,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 7.7,
+          "votes": 909284
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 96,
+          "votes": 0
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 96,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 7.172,
+          "votes": 16869
+        },
+        "trakt": {
+          "type": "user",
+          "value": 7.50158,
+          "votes": 25001
+        }
+      },
+      "releaseDate": "2013-10-03T00:00:00Z",
+      "runtime": 91,
+      "secondaryYearSourceId": 0,
+      "sortTitle": "gravity",
+      "status": "released",
+      "studio": "Esperanto Filmoj",
+      "tags": [
+        1
+      ],
+      "title": "Gravity",
+      "titleSlug": "49047",
+      "tmdbId": 49047,
+      "website": "http://gravitymovie.warnerbros.com",
+      "year": 2013,
+      "youTubeTrailerId": "OiTiKOy59o4"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:40:47Z",
+  "request": {
+    "body": "bodies/movie-import.json",
+    "method": "POST",
+    "path": "/api/v3/movie/import"
+  },
+  "status": 200
+}

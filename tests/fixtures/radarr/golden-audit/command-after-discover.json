@@ -1,0 +1,43 @@
+{
+  "body": [
+    {
+      "body": {
+        "completionMessage": "Completed",
+        "isExclusive": false,
+        "isLongRunning": true,
+        "isNewMovie": true,
+        "isTypeExclusive": false,
+        "movieIds": [
+          328
+        ],
+        "name": "RefreshMovie",
+        "requiresDiskAccess": false,
+        "sendUpdatesToClient": true,
+        "suppressMessages": false,
+        "trigger": "unspecified",
+        "updateScheduledTask": false
+      },
+      "commandName": "Refresh Movie",
+      "duration": "00:00:00.1666700",
+      "ended": "2026-11-13T15:38:05Z",
+      "id": 472955,
+      "message": "Completed",
+      "name": "RefreshMovie",
+      "priority": "normal",
+      "queued": "2026-11-13T15:38:05Z",
+      "result": "successful",
+      "sendUpdatesToClient": true,
+      "started": "2026-11-13T15:38:05Z",
+      "stateChangeTime": "2026-11-13T15:38:05Z",
+      "status": "completed",
+      "trigger": "unspecified",
+      "updateScheduledTask": false
+    }
+  ],
+  "recordedAt": "2026-11-13T15:38:15Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/command"
+  },
+  "status": 200
+}

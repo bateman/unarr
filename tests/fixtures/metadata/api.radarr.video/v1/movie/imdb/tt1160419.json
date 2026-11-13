@@ -1,0 +1,1684 @@
+[
+ {
+  "TmdbId": 438631,
+  "ImdbId": "tt1160419",
+  "Title": "Dune",
+  "Overview": "Paul Atreides, a brilliant and gifted young man born into a great destiny beyond his understanding, must travel to the most dangerous planet in the universe to ensure the future of his family and his people. As malevolent forces explode into conflict over the planet's exclusive supply of the most precious resource in existence - a commodity capable of unlocking humanity's greatest potential - only those who can conquer their fear will survive.",
+  "OriginalTitle": "Dune",
+  "OriginalLanguage": "en",
+  "TitleSlug": "438631",
+  "Runtime": 155,
+  "Popularity": 40.1035,
+  "Year": 2021,
+  "Premier": "2021-09-03T00:00:00Z",
+  "InCinema": "2021-09-15T00:00:00Z",
+  "PhysicalRelease": "2021-12-22T00:00:00Z",
+  "DigitalRelease": "2021-10-21T00:00:00Z",
+  "Images": [
+   {
+    "CoverType": "Poster",
+    "Url": "https://image.tmdb.org/t/p/original/v1tRXZ4JtD2Iv6fjkPvT4GiwslV.jpg"
+   },
+   {
+    "CoverType": "Fanart",
+    "Url": "https://image.tmdb.org/t/p/original/qVgZu5BTx6pu4owCvVOm4zjTfOi.jpg"
+   }
+  ],
+  "Ratings": [
+   {
+    "Count": 15939,
+    "Value": 7.787,
+    "Origin": "Tmdb",
+    "Type": "User"
+   }
+  ],
+  "MovieRatings": {
+   "Tmdb": {
+    "Count": 15939,
+    "Value": 7.787,
+    "Type": "User"
+   },
+   "Imdb": {
+    "Count": 1101251,
+    "Value": 8,
+    "Type": "User"
+   },
+   "Metacritic": {
+    "Count": 0,
+    "Value": 74,
+    "Type": "User"
+   },
+   "RottenTomatoes": {
+    "Count": 0,
+    "Value": 83,
+    "Type": "User"
+   },
+   "Trakt": {
+    "Count": 57693,
+    "Value": 8.14492,
+    "Type": "User"
+   }
+  },
+  "Genres": [
+   "Science Fiction",
+   "Adventure"
+  ],
+  "Keywords": [
+   "army",
+   "baron",
+   "based on novel or book",
+   "betrayal",
+   "chosen one",
+   "complex",
+   "creature",
+   "desert",
+   "destiny",
+   "dystopia",
+   "emperor",
+   "empire",
+   "future",
+   "giant creature",
+   "giant worm",
+   "hallucinogen",
+   "knife fight",
+   "messiah",
+   "mother son relationship",
+   "premonition",
+   "prophecy",
+   "revenge",
+   "sand",
+   "sand dune",
+   "space",
+   "space opera",
+   "spice",
+   "treason",
+   "water shortage"
+  ],
+  "AlternativeTitles": [
+   {
+    "Title": "デューン",
+    "Type": "Tmdb",
+    "Language": "ja"
+   },
+   {
+    "Title": "Dune: Part One",
+    "Type": "Tmdb",
+    "Language": "en"
+   },
+   {
+    "Title": "חולית: חלק ראשון",
+    "Type": "Tmdb",
+    "Language": "en"
+   },
+   {
+    "Title": "デューン 砂の惑星",
+    "Type": "Tmdb",
+    "Language": "ja"
+   },
+   {
+    "Title": "DUNE デューン 砂の惑星",
+    "Type": "Tmdb",
+    "Language": "ja"
+   },
+   {
+    "Title": "Dune: Part One",
+    "Type": "Tmdb",
+    "Language": "en"
+   },
+   {
+    "Title": "Duna: Parte Um",
+    "Type": "Tmdb",
+    "Language": "en"
+   },
+   {
+    "Title": "Duna: Primeira Part",
+    "Type": "Tmdb",
+    "Language": "en"
+   },
+   {
+    "Title": "Dune - Première partie",
+    "Type": "Tmdb",
+    "Language": "fr"
+   },
+   {
+    "Title": "Duna: Pjesa e Parë",
+    "Type": "Tmdb",
+    "Language": "en"
+   },
+   {
+    "Title": "Dune: Parte uno",
+    "Type": "Tmdb",
+    "Language": "es"
+   },
+   {
+    "Title": "Duna: Parte 1",
+    "Type": "Tmdb",
+    "Language": "en"
+   },
+   {
+    "Title": "沙丘瀚戰：第一章",
+    "Type": "Tmdb",
+    "Language": "zh"
+   },
+   {
+    "Title": "Դյունա",
+    "Type": "Tmdb",
+    "Language": "en"
+   },
+   {
+    "Title": "デューン 砂の惑星PART1",
+    "Type": "Tmdb",
+    "Language": "ja"
+   },
+   {
+    "Title": "სილახვავი",
+    "Type": "Tmdb",
+    "Language": "en"
+   },
+   {
+    "Title": "Dyun",
+    "Type": "Tmdb",
+    "Language": "en"
+   },
+   {
+    "Title": "Dyuna : 1-ci Hissə",
+    "Type": "Tmdb",
+    "Language": "en"
+   },
+   {
+    "Title": "Дюна: Часть первая",
+    "Type": "Tmdb",
+    "Language": "ru"
+   }
+  ],
+  "Translations": [
+   {
+    "Title": "Dune",
+    "Overview": "Paul Atreides, a brilliant and gifted young man born into a great destiny beyond his understanding, must travel to the most dangerous planet in the universe to ensure the future of his family and his people. As malevolent forces explode into conflict over the planet's exclusive supply of the most precious resource in existence - a commodity capable of unlocking humanity's greatest potential - only those who can conquer their fear will survive.",
+    "Language": "en-US"
+   },
+   {
+    "Title": "Дюн",
+    "Overview": "Потомък на благородната династия Атреиди търси възмездие за смъртта на баща си, като в същото време е призван да защитава планетата на подправките Аракис, известна още като Дюн.",
+    "Language": "bg-BG"
+   },
+   {
+    "Title": "Dune",
+    "Overview": "L'histoire de Paul Atreides, jeune homme aussi doué que brillant, voué à connaître un destin hors du commun qui le dépasse totalement. Car, s'il veut préserver l'avenir de sa famille et de son peuple, il devra se rendre sur Dune, la planète la plus dangereuse de l'Univers. Mais aussi la seule à même de fournir la ressource la plus précieuse capable de décupler la puissance de l'Humanité. Tandis que des forces maléfiques se disputent le contrôle de cette planète, seuls ceux qui parviennent à dominer leur peur pourront survivre…",
+    "Language": "fr-FR"
+   },
+   {
+    "Title": "Dune",
+    "Overview": "„Dune“ erzählt die packende Geschichte des brillanten jungen Helden Paul Atreides, dem das Schicksal eine Rolle vorherbestimmt hat, von der er niemals geträumt hätte. Um die Zukunft seiner Familie und seines gesamten Volkes zu sichern, muss Paul auf den gefährlichsten Planeten des Universums reisen. Nur auf dieser Welt existiert ein wertvoller Rohstoff, der es der Menschheit ermöglichen könnte, ihr vollständiges geistiges Potenzial auszuschöpfen. Doch finstere Mächte wollen die Kontrolle über die kostbare Substanz an sich reißen. Es entbrennt ein erbitterter Kampf, den nur diejenigen überleben werden, die ihre eigenen Ängste besiegen.",
+    "Language": "de-DE"
+   },
+   {
+    "Title": "Dune",
+    "Overview": "Paul Atreides is de erfgenaam van het Huis Atreides. Hij staat op het punt om met zijn familie de planeet Caladan te verlaten voor Arrakis, een woestijnplaneet die ook bekend staat als ‘Dune’. De nieuwe planeet is rijk aan melange, dat meestal ‘the spice’ genoemd wordt. De unieke drug met levensverlengende, geestverruimende en soms dodelijke krachten wordt beschouwd als het meest waardevolle goed in het hele universum.",
+    "Language": "nl-NL"
+   },
+   {
+    "Title": "듄",
+    "Overview": "10191년, 아트레이데스 가문의 후계자인 폴은 시간과 공간을 초월해 과거와 미래를 모두 볼 수 있고, 더 나은 미래를 만들 유일한 구원자인 예지된 자의 운명을 타고났다. 그리고 어떤 계시처럼 매일 꿈에서 아라키스의 행성에 있는 한 여인을 만난다. 귀족들이 지지하는 아트레이데스 가문에 대한 황제의 질투는 폴과 그 일족들을 죽음이 기다리는 아라키스로 이끄는데...",
+    "Language": "ko-KR"
+   },
+   {
+    "Title": "Dune",
+    "Overview": "En un lejano futuro, la galaxia conocida es gobernada mediante un sistema feudal de casas nobles bajo el mandato del Emperador. Las alianzas y la política giran entorno a un pequeño planeta, Dune,  del que extrae la 'especia melange', la materia prima que permite los viajes espaciales. La Casa Atreides, bajo el mandato del Duque Leto Atreides recibe el encargo de custodiar el planeta, relevando en la encomienda a sus históricos enemigos, los Harkonnen. Paul Atreides, hijo del duque, se verá atrapado en las intrigas políticas mientras descubre el destino que le deparan los desiertos de Dune.",
+    "Language": "es-ES"
+   },
+   {
+    "Title": "Дюна",
+    "Overview": "Наследник знаменитого дома Атрейдесов Пол отправляется вместе с семьей на одну из самых опасных планет во Вселенной — Арракис. Здесь нет ничего, кроме песка, палящего солнца, гигантских чудовищ и основной причины межгалактических конфликтов — невероятно ценного ресурса, который называется меланж. В результате захвата власти Пол вынужден бежать и скрываться, и это становится началом его эпического путешествия. Враждебный мир Арракиса приготовил для него множество тяжелых испытаний, но только тот, кто готов взглянуть в глаза своему страху, достоин стать избранным.",
+    "Language": "ru-RU"
+   },
+   {
+    "Title": "Dune - Duna",
+    "Overview": "Nesta viagem mítica e emocional, “Dune -Duna” conta a história de Paul Adreides, um jovem brilhante e talentoso com um grande destino para além da sua compreensão, que tem de viajar para o planeta mais perigoso do universo para garantir o futuro da sua família e do seu povo. Quando forças malévolas entram em conflito para obter uma quantidade exclusiva do recurso mais precioso do planeta –uma substância capaz de desbloquear o maior potencial da humanidade – apenas os que conquistam os seus medos conseguiram sobreviver.",
+    "Language": "pt-PT"
+   },
+   {
+    "Title": "Duna",
+    "Overview": "Kultovní sci-fi dílo vypráví o mocenských bojích uvnitř galaktického Impéria, v nichž jde o ovládnutí planety Arrakis: zdroje vzácného koření - melanže, jež poskytuje zvláštní psychické schopnosti, které umožňují cestování vesmírem. Padišáh imperátor svěří správu nad Arrakisem a s ní i komplikovanou těžbu neobyčejné látky vévodovi rodu Atreidů. Celá anabáze je ale součástí spiknutí, z něhož se podaří vyváznout jen vévodovu synovi Paulovi a jeho matce, kteří uprchnou do pouště. Jejich jedinou nadějí jsou nedůvěřiví domorodí obyvatelé fremeni, schopní trvale přežít ve vyprahlé pustině. Mohl by Paul Atreides být spasitelem, na kterého tak dlouho čekají?",
+    "Language": "cs-CZ"
+   },
+   {
+    "Title": "Duna",
+    "Overview": "Em um futuro distante, planetas são comandados por casas nobres que fazem parte de um império feudal intergalático. Paul Atreides é um jovem cuja família toma o controle do planeta deserto Arrakis, também conhecido como Duna. A única fonte da especiaria Melange, a substância mais importante do cosmos, Arrakis se mostra ser um planeta nem um pouco fácil de governar.",
+    "Language": "pt-BR"
+   },
+   {
+    "Title": "Diuna",
+    "Overview": "Diuna opowiada historię niezwykłej, pełnej przygód i emocji podróży Paula Atreidesa (Timothée Chalamet). Temu genialnemu i utalentowanemu młodemu człowiekowi pisane jest wspaniałe przeznaczenie, którego on sam nie jest w stanie pojąć. Najpierw jednak Paul musi się udać na najbardziej niebezpieczną planetę we wszechświecie, żeby ratować rodzinę i rodaków. Na planecie wybucha zażarty konflikt o dostęp do niewystępującej nigdzie indziej, najcenniejszej ze znanych substancji. Wyzwala ona w ludziach ich największy potencjał. Ale wojnę przetrwają tylko ci, którzy pokonają swój strach.",
+    "Language": "pl-PL"
+   },
+   {
+    "Title": "沙丘",
+    "Overview": "改编自弗兰克·赫伯特的科幻小说《沙丘》。保罗·厄崔迪随家族前往沙漠星球厄拉科斯，卷入围绕珍贵资源“香料”的权力争斗，并逐渐发现自己肩负的命运。",
+    "Language": "zh-CN"
+   },
+   {
+    "Title": "Dűne",
+    "Overview": "A távoli jövőben, a bolygóközi királyságok korában járunk. A királyságok az Arrakis bolygó feletti uralomért harcolnak, de a naprendszereken átívelő cselszövések, háborúk és politikai manőverek közepette van egy ember, aki talán békét hozhat az univerzumnak. De ehhez harcolnia kell.",
+    "Language": "hu-HU"
+   },
+   {
+    "Title": "Dune: Çöl Gezegeni",
+    "Overview": "Paul Atreides, kavrayışının ötesinde büyük bir kaderle dünyaya gelmiş zeki ve yetenekli bir gençtir. Paul, ailesinin ve halkının geleceğini güvence altına almak için evrendeki en tehlikeli gezegene gitmek zorunda kalır. İnsanlığın en büyük potansiyelini açığa çıkarma gücüne sahip, var olan en değerli maddenin tek kaynağı olan gezegenin üzerinde kötü niyetli güçler çatışmaya tutuşurken, yalnızca korkularını yenebilenler hayatta kalabilecektir.",
+    "Language": "tr-TR"
+   },
+   {
+    "Title": "Dune",
+    "Overview": "Paul Atreides doit se rendre sur la planète la plus dangereuse de l’univers afin d’assurer l’avenir de sa famille et de son peuple. Cette planète est la source exclusive de la ressource la plus précieuse qui soit – une substance capable de libérer le plein potentiel de l’humanité –, pour laquelle des forces sinistres déclenchent un conflit dont seuls ceux sachant maîtriser leurs peurs survivront.",
+    "Language": "fr-CA"
+   },
+   {
+    "Title": "Dune",
+    "Overview": "Paul Atreides, un brillante e dotato giovane nato per un grande destino oltre la sua comprensione, deve viaggiare sul pianeta più pericoloso dell'universo per garantire il futuro della sua famiglia e del suo popolo. Mentre forze malevole esplodono in conflitti per la riserva esclusiva del pianeta della risorsa più preziosa esistente, \"la spezia\", una merce capace di sbloccare il massimo potenziale dell'umanità, soltanto chi riesce a superare la propria paura sopravvivrà.",
+    "Language": "it-IT"
+   },
+   {
+    "Title": "Dyyni",
+    "Overview": "Paul Atreides on syntynyt täyttämään suuren kohtalon, joka ylittää hänen ymmärryksensä. Hän joutuu matkustamaan universumin vaarallisimmalle planeetalle varmistaakseen perheensä ja kansansa tulevaisuuden. Kun pahansuovat voimat ryhtyvät taisteluun planeetalta löytyvästä ainutlaatuisesta ja arvokkaimmasta tunnetusta raaka-aineesta - hyödykkeestä, joka voi toteuttaa ihmiskunnan suurimmat mahdollisuudet - vain pelkonsa voittavat selviävät.",
+    "Language": "fi-FI"
+   },
+   {
+    "Title": "Дюна",
+    "Overview": "Міфічна й емоційно заряджена подорож головного героя, Пола Атріда. На цього блискучого й обдарованого хлопця чекають великі справи, які йому важко осягнути. Він вирушить на найнебезпечнішу планету у Всесвіті, щоб врятувати майбутнє своєї родини та свого народу. Адже ворожі сили вступають у конфлікт через найцінніший і найрідкісніший ресурс — речовину, здатну розкрити найбільший потенціал людства. Виживуть лише ті, кому вдасться перемогти власні страхи.",
+    "Language": "uk-UA"
+   },
+   {
+    "Title": "Duna",
+    "Overview": "Paul Atreides, un joven brillante y talentoso nacido en un gran destino más allá de su entendimiento, debe viajar al planeta más peligroso del universo para asegurar el futuro de su familia y de su pueblo.",
+    "Language": "es-MX"
+   },
+   {
+    "Title": "Duna",
+    "Overview": "V galaktickom Impériu zúria mocenské boje, ktorých cieľom je ovládnutie púštnej planéty Arrakis (prezývanej Duna). Tento nehostinný svet je zdrojom vzácneho korenia – melanže, ktoré rozširuje psychické schopnosti a umožňuje medzihviezdne cestovanie.  Arrakis bol dlho pod nadvládou krutého rodu Harkonnenovcov na čele s barónom Vladimirom Harkonnenom. Teraz však Arrakis z rozhodnutia Imperátora pripadne rodu Atreidesov na čele s vojvodom Letom a jeho synom Paulom. Netušia však, že na Arrakise ich čaká smrteľné nebezpečenstvo, a to nielen od obrovských piesočných červov. Budú sa musieť vysporiadať nielen so zradou a sprisahaním, ale aj s nedôverčivými domorodými obyvateľmi planéty – Fremenmi, schopnými trvalo prežiť vo vprahnutej pustatine. Začne sa ukazovať, že práve Paul by mohol byť ich dlhoočakávaným spasiteľom…",
+    "Language": "sk-SK"
+   },
+   {
+    "Title": "Dune",
+    "Overview": "Paul Atreides är en briljant och talangfull ung man född med ett storslaget öde som måste resa till den farligaste planeten i universum för att säkra sin familjs och sitt folks framtid. När illasinnade krafter kastas in i en konflikt om tillgången till planetens mest värdefulla råvara - ett ämne med förmågan att låsa upp mänsklighetens fulla potential - kommer bara de som övervinner sina rädslor att överleva.",
+    "Language": "sv-SE"
+   },
+   {
+    "Title": "חולית",
+    "Overview": "פול מגיע לכוכב מדברי עתיר סכנות, עליו עתיד לשלוט אביו הדוכס. בעקבות בגידה הוא נאלץ לברוח ולהילחם על חייו.",
+    "Language": "he-IL"
+   },
+   {
+    "Title": "Dune",
+    "Overview": "Paul Atreides, en dygtig og talentfuld ung mand født med en storslået skæbne, må rejse til den farligste planet i universet for at sikre sin families og sit folks fremtid. Da ondsindede kræfter kastes ind i en konflikt om adgangen til planetens mest værdifulde råvare – et stof med evnen til at låse op for menneskehedens fulde potentiale – vil kun de, som overvinder deres frygt, overleve.",
+    "Language": "da-DK"
+   },
+   {
+    "Title": "沙丘",
+    "Overview": "保羅亞崔迪是一個聰明又富有天賦的年輕人，肩負超越自己理解的偉大天命，且必須遠行至宇宙中最危險的行星，以確保他家人及族人未來的延續。敵對勢力為搶奪唯有此行星才出產的珍貴資源大打出手，而這也是人類最珍視的資源，一種能解鎖人類偉大潛能的物質，唯有能戰勝自己恐懼的人才能存活。",
+    "Language": "zh-TW"
+   },
+   {
+    "Title": "Dune",
+    "Overview": "En mytisk og følelsesladet heltereise. DUNE forteller historien om Paul Atreides, en ung mann begavet med mystiske evner og profetiske visjoner og forutbestemt til å bli leder for å gjenopprette freden blant de stridende adelsfamiliene som i generasjoner har kjempet om makten for å kontrollere verdens mest dyrebare ressurs - et verdifullt krydder som kan forlenge livet. Når ondskapsfulle krefter eksploderer i konflikt om eneretten til tilgangen på krydderet, må Paul overkomme farer og ondsinnede planer mot ham for å sikre fremtiden for familien og folket hans. Han må våge seg inn i en verden der bare de som kan overvinne frykten, vil overleve.",
+    "Language": "no-NO"
+   },
+   {
+    "Title": "Dina",
+    "Overview": "Priča prati Paula Atreidesa iz kuće Atreides, sjajnog i nadarenog mladića rođenog za velike stvari, koji mora otputovati na najopasniji planet u svemiru kako bi osigurao budućnost svoje obitelj i svog naroda. Nađe se usred sukoba oko ekskluzivne opskrbe najcjenjenijim resursom koji postoji, najvrijednijem elementu galaksije koji se nalazi samo na Arrakisu i koji može otključati najveći potencijal čovječanstva, u kojem će preživjet samo oni koji mogu pobijediti svoj strah.",
+    "Language": "hr-HR"
+   },
+   {
+    "Title": "沙丘瀚戰",
+    "Overview": "才華洋溢、滿有天賦的少年 Paul Atreides，命中注定要完成超乎他認知的偉業。他要勇闖宇宙中最危險的星球，以守護家人和子民的未來。多個邪惡勢力為了奪取這個星球獨有的珍貴資源 – 一種能夠開啟人類最強潛能的必需品，而展開戰爭。只有戰勝恐懼的人們才得以生存。",
+    "Language": "zh-HK"
+   },
+   {
+    "Title": "Дина",
+    "Overview": "Прича прати Пола Атреидеса из куће Атреидес, сјајног и надареног младића  рођеног за велике ствари, који мора да отпутује на најопаснију планету у  свемиру како би осигурао будућност своје породице и свог народа. Када се нађе усред сукоба око ексклузивне дистрибуције најцењенијим ресурсом који постоји, највреднијем елементу галаксије који се налази само на Аракису и  који може откључати највећи потенцијал човечанства, у ком ће преживети само они који могу да победе свој страх.",
+    "Language": "sr-RS"
+   },
+   {
+    "Title": "Düün",
+    "Overview": "Paul Atreides on nutikas ja andekas noormees, keda ootab talle endale hoomamatu vägev saatus. Oma pere ja rahva tuleviku tagamiseks tuleb tal universumi kõige ohtlikumale planeedile rännata. Kui kurjad jõud asuvad võitlema planeedil asuva hinnalisima ressursi – inimkonna suurima potentsiaali valla päästva eseme - varu pärast, jäävad ellu vaid need, kes suudavad oma hirmudest jagu saada.",
+    "Language": "et-EE"
+   },
+   {
+    "Title": "Kāpa",
+    "Overview": "Pols Atreidīss – spožs un apdāvināts jauns vīrietis, kuram zvaigznēs ierakstīts ievērojams liktenis. Viņam jādodas uz bīstamāko planētu Visumā, lai nodrošinātu savas ģimenes un savas tautas nākotni. Starp ļaunajiem spēkiem uzplaiksnī cīņa par resursiem, kas atrodami vienīgi uz šīs planētas un spēj atraisīt cilvēces dižāko potenciālu, bet izdzīvos vienīgi tie, kuri spēs pārvarēt savas bailes.",
+    "Language": "lv-LV"
+   },
+   {
+    "Title": "Kopa",
+    "Overview": "Polą Atreidą, kartu su visa savo kilminga gimine priverstą keliauti į tolimą, atšiaurią ir vieną pavojingiausių Visatoje dykumų planetą Arakį, dar vadinamą Kopa. Nors atšiaurus gyvenimui, Arakis yra ypatinga planeta, kadangi tik joje yra išgaunama vertingiausia Visatos medžiaga, pažadinanti ypatingas žmogaus proto galias. Daugėjant intrigų dėl siekio valdyti šio neįkainojamo ištekliaus gavybą, Polas ir jo motina priversti iškeliauti pas fremenus – dykumose gyvenančius vietinius Arakio gyventojus. Prasideda Polo Atreido kelionė link to, kuo tapti jam lemta nuo pat gimimo: žmogumi, kuris pakeis ne tik savo giminės, bet viso Arakio bei visos Visatos istoriją.",
+    "Language": "lt-LT"
+   },
+   {
+    "Title": "Hành Tinh Cát",
+    "Overview": "Là chuyến hành trình sử thi đầy cảm xúc của Paul Atreides – một chàng thanh niên trẻ tài ba xuất chúng được sinh ra với một sứ mệnh vĩ đại vượt ngoài tầm hiểu biết của chính bản thân anh. Paul đã phải du hành tới hành tinh nguy hiểm nhất trong Vũ trụ để đảm bảo được tương lai cho gia đình cũng như những người dân của anh ấy. Khi các thế lực tàn độc bắt đầu lao vào cuộc xung đột nhằm tranh giành độc quyền nguồn tài nguyên có giá trị nhất hành tinh – thứ nhiên liệu quý giá có khả năng kích hoạt những tiềm năng lớn nhất của nhân loại – chỉ những người chiến thắng được nỗi sợ hãi của mình mới có thể sống sót.",
+    "Language": "vi-VN"
+   },
+   {
+    "Title": "Dune",
+    "Overview": "Ο Πολ Ατρείδης, ο χαρισματικός διάδοχος του Οίκου των Ατρειδών, καλείται να υπηρετήσει το ασύλληπτο πεπρωμένο του και να ταξιδέψει στον πιο επικίνδυνο πλανήτη του διαστήματος για να διασφαλίσει το μέλλον της οικογένειας και του λαού του. Με τις μεγάλες δυνάμεις να παρασύρονται σε μια ανελέητη σύγκρουση για το «μπαχαρικό των μπαχαρικών» του πλανήτη Αρράκις, της πολυτιμότερης ουσίας στην Αυτοκρατορία, μόνο όσοι δαμάσουν τον φόβο τους θα μπορέσουν να επιβιώσουν.",
+    "Language": "el-GR"
+   },
+   {
+    "Title": "ดูน",
+    "Overview": "เรื่องราวของ \"พอล อาร์เทรดีส\" อัจฉริยะหนุ่มผู้มีพรสวรรค์ที่เกิดมาพร้อมโชคชะตาอันยิ่งใหญ่เกินกว่าจะเข้าใจ เขาต้องเดินทางไปยังดาวเคราะห์ที่อันตรายที่สุดในจักรวาลเพื่อความอยู่รอดและอนาคตของครอบครัวรวมถึงผู้คนของเขา หลังถูกรุกรานโดยกองกำลังวายร้ายหน้าเลือดที่หวังแย่งชิงทรัพยากรที่ล้ำค่ามากที่สุดเท่าที่เคยมีมา ซึ่งสามารถใช้ดึงศักยภาพที่ซ่อนเร้นของมนุษยชาติออกมาได้ และมีเพียงผู้ที่สามารถเอาชนะความกลัวได้เท่านั้นที่จะอยู่รอดในศึกครั้งนี้",
+    "Language": "th-TH"
+   },
+   {
+    "Title": "كثيب",
+    "Overview": "بول أتريدس ، شاب لامع وموهوب ولد في مصير عظيم يفوق إدراكه ، يجب أن يسافر إلى أخطر كوكب في الكون لضمان مستقبل عائلته وشعبه. بينما تنفجر القوى الخبيثة في صراع حول الإمداد الحصري للكوكب بأثمن مورد في الوجود - سلعة قادرة على إطلاق العنان لإمكانات البشرية الأعظم - فقط أولئك الذين يستطيعون التغلب على خوفهم سيبقون على قيد الحياة.",
+    "Language": "ar-AE"
+   },
+   {
+    "Title": "DUNE／デューン 砂の惑星",
+    "Overview": "アトレイデス家の後継者、ポール。彼には”未来が視える”能力があった。  宇宙帝国の皇帝からの命令で、その惑星を制する者が全宇宙を制すると言われる、  過酷な《砂の惑星デューン》へと移住するが、それは罠だった…。  そこで宇宙支配を狙う宿敵ハルコンネン家の壮絶な戦いが勃発！！  父を殺され、巨大なサンドワームが襲い来るその惑星で、全宇宙のために立ち上がるー",
+    "Language": "ja-JP"
+   },
+   {
+    "Title": "كثيب",
+    "Overview": "بول أتريدس ، شاب لامع وموهوب ولد لمصير عظيم يفوق إدراكه، وعليه أن يسافر إلى أخطر كوكب في الكون لضمان مستقبل عائلته وشعبه. بينما تنفجر القوى الخبيثة في صراع حول الإمداد الحصري للكوكب بأثمن مورد في الوجود - سلعة قادرة على إطلاق العنان لقدرات البشرية العليا - فقط أولئك الذين يستطيعون التغلب على خوفهم سيبقون على قيد الحياة.",
+    "Language": "ar-SA"
+   },
+   {
+    "Title": "تل‌ ماسه",
+    "Overview": "پل آتریدیس، پسر یک خانواده اصیل و سخاوتمند است که پس از وقوع اتفاقی ناگوار، وظیفه‌ محافظت از باارزش ‌ترین دارایی و حیاتی ‌ترین عنصر کهکشان در سیاره‌ آراکیس به او سپرده شده است و...",
+    "Language": "fa-IR"
+   },
+   {
+    "Title": "Dune",
+    "Overview": "Dune berkisah tentang seorang pemuda bernama Paul Atreides yang diperankan oleh Timothee Chalamet yang akan pindah dari tempat tinggalnya saat ini di Caladan bersama anggota keluarganya.  Paul dan keluarganya akan menjalani hidup baru di sebuah planet lain yang bernama planet Arrakis. Arrakis merupakan planet dengan kondisi alam berupa gurun pasir yang luas.  Sekilas, planet Arrakis merupakan planet yang gersang karena merupakan gurun. Akan tetapi Arrakis menyimpan hal istimewa di dalamnya. Arrakis menyimpan rempah-rempah yang disebut spice. Spice di Arrakis sangat melimpah dan mengandung khasiat istimewa.",
+    "Language": "id-ID"
+   },
+   {
+    "Title": "Dune",
+    "Overview": "Paul Atreides, waa wiil dhallinyaro ah oo hibo leh kuna dhashay qaddar weyn oo ka baxsan fahamkiisa, waa inuu u socdaalaa meeraha ugu khatarta badan caalamka si uu u hubiyo mustaqbalka qoyskiisa iyo dadkiisa.  Ayyadoo xoogagga xun-xun ay ka dhex qarxayso isku dhacyo ku saabsan helitaanka ilaha gaarka u ah meeraha ee kheyraadka ugu weyn ee aadanaha laga helo - badeecad awood u leh in ay furto awoodaha ugu weyn ee aadanaha - kaliya kuwa ka adkaan kara cabsidooda ayaa badbaadaya.",
+    "Language": "so-SO"
+   },
+   {
+    "Title": "Dune: Peščeni planet",
+    "Overview": "Zgodba spremlja Paula Atreidesa iz hiše Atreides, sijajnega in nadarjenega mladeniča, rojenega za velike stvari, ki mora odpotovati na najnevarnejši planet v vesolju, da bi zagotovil prihodnost svoji družini in narodu. Znajde se sredi boja za ekskluzivno oskrbo najbolj dragocenega vira, ki obstaja, najdražjim elementom galaksije, ki se nahaja samo na Arrakisu in ki lahko odklene največji potencial človeštva, v katerem bodo preživeli samo tisti, ki zmorejo premagati svoj strah.",
+    "Language": "sl-SI"
+   },
+   {
+    "Title": "Dune",
+    "Overview": "Paul Atreides, un tânăr strălucit și talentat născut cu un mare destin, dincolo de capacitatea lui de înțelegere, trebuie să călătorească pe cea mai periculoasă planetă din univers pentru a asigura viitorul familiei și poporului său. Pe măsură ce forțe malefice intră în conflict pentru monopolul asupra celei mai de preț resurse a planetei - o marfă capabilă să descătușeze cel mai mare potențial al umanității, doar cei care își pot învinge frica vor supraviețui.",
+    "Language": "ro-RO"
+   },
+   {
+    "Title": "დიუნი",
+    "Overview": "ახალგაზრდა არისტოკრატის, პოლ ატრეიდისის შესახებ, რომელიც სამყაროში ყველაზე საშიშ პლანეტა- არაკისში მიდის, რათა მისი ოჯახის და მისი ხალხის მომავალი უზრუნველყოს. არაკისში უნიკალური ნივთიერება – “მელანჟი” მოიპოვება, რომელიც კოსმოსურ ხომალდს კომპიუტერების დახმარების გარეშე კოსმოსური სივრცის გადალახვაში ეხმარება. ატრეიდესი და მისი ოჯახი იმპერატორის ბრძანებით პლანეტის მართვის უფლებას მიიღებენ, მაგრამ მალე ჰარკონენების ჯარების მიერ თავდასხმის შედეგად თითქმის ყველა დაიღუპება. მხოლოდ პოლი და მისი დედა გადარჩება, რომლებიც უდაბნოში დაიმალებიან, სადაც ატრეიდესი უდაბნოს ხალხის – ფრემენების საზოგადოების წევრი გახდება. ფრემენები ხვდებიან, რომ ახალგაზრდა გმირი რჩეულია, და პოლს, ჰარკონენების და იმპერიის წინააღმდეგ ბრძოლაში მხარს უჭერენ. სანამ ბოროტი ძალები რესურსებში ყველაზე ფასეული – საქონლის გამო კონფლიქტში შედიან, რომელსაც კაცობრიობის უდიდესი პოტენციალის გამოვლენა შეუძლია – გადარჩებიან მხოლოდ ისინი, ვინც საკუთარი შისების დამარცხებას შეძლებს.",
+    "Language": "ka-GE"
+   },
+   {
+    "Title": "ड्यून",
+    "Overview": "",
+    "Language": "hi-IN"
+   },
+   {
+    "Title": "Dune",
+    "Overview": "En un futur llunyà, la galàxia coneguda és governada mitjançant un sistema feudal de cases nobles sota el mandat de l'Emperador. Les aliances i la política giren al voltant d'un petit planeta, Dune, del qual extreu l'espècia \"melange”, la matèria primera que permet els viatges espacials. La Casa Atreides, sota el mandat del Duc Leto Atreides rep l'encàrrec de custodiar el planeta, rellevant en la comanda als seus històrics enemics, els Harkonnen. Paul Atreides, fill del duc, es veurà atrapat a les intrigues polítiques mentre descobreix el destí que li ofereixen els deserts de Dune.",
+    "Language": "ca-ES"
+   },
+   {
+    "Title": "Dúna",
+    "Overview": "",
+    "Language": "is-IS"
+   },
+   {
+    "Title": "ດູນ",
+    "Overview": "",
+    "Language": "lo-LO"
+   },
+   {
+    "Title": "Duna",
+    "Overview": "Paul Atreides, një i ri brilant dhe i talentuar i lindur në një fat të madh përtej të kuptuarit të tij, duhet të udhëtojë në planetin më të rrezikshëm në univers për të siguruar të ardhmen e familjes dhe njerëzve të tij. Ndërsa forcat keqdashëse shpërthejnë në konflikt mbi furnizimin ekskluziv të planetit me burimin më të çmuar në ekzistencë - një mall i aftë për të zhbllokuar potencialin më të madh të njerëzimit - vetëm ata që mund të mposhtin frikën e tyre do të mbijetojnë.",
+    "Language": "sq-AL"
+   },
+   {
+    "Title": "Құмбел",
+    "Overview": "",
+    "Language": "kk-KZ"
+   },
+   {
+    "Title": "Дина",
+    "Overview": "",
+    "Language": "mk-MK"
+   },
+   {
+    "Title": "Dyuna",
+    "Overview": "Məşhur Atreydes evinin varisi Pol ailəsi ilə birlikdə Kainatın ən təhlükəli planetlərindən birinə - Arrakisə gedir. Burada qum, yandıran günəş, nəhəng bədheybətlər və qalaktikalararası qarşıdurmaların əsas səbəbi melanj adlı inanılmaz qiymətli bir qaynaqdan başqa heç nə yoxdur... Hakimiyyətin ələ keçirilməsi nəticəsində Pol qaçmaq və gizlənmək məcburiyyətində qalır və bu onun epik səyahətinin başlanğıcı olur.",
+    "Language": "az-AZ"
+   },
+   {
+    "Title": "Дюналар",
+    "Overview": "",
+    "Language": "ba-BA"
+   },
+   {
+    "Title": "Дзюна",
+    "Overview": "",
+    "Language": "be-BY"
+   },
+   {
+    "Title": "ডিউন",
+    "Overview": "",
+    "Language": "bn-BD"
+   },
+   {
+    "Title": "تەپۆڵکەلم",
+    "Overview": "",
+    "Language": "ku-TR"
+   },
+   {
+    "Title": "Ավազաբլուր",
+    "Overview": "",
+    "Language": "hy-AM"
+   },
+   {
+    "Title": "ឌូន",
+    "Overview": "",
+    "Language": "km-KM"
+   },
+   {
+    "Title": "Dune: Part One",
+    "Overview": "",
+    "Language": "lb-LB"
+   },
+   {
+    "Title": "Манхан",
+    "Overview": "",
+    "Language": "mn-MN"
+   },
+   {
+    "Title": "ਡਿਊਨ",
+    "Overview": "",
+    "Language": "pa-IN"
+   },
+   {
+    "Title": "டூன்: பாகம் ஒன்று",
+    "Overview": "",
+    "Language": "ta-IN"
+   },
+   {
+    "Title": "డ్యూన్",
+    "Overview": "",
+    "Language": "te-IN"
+   },
+   {
+    "Title": "Төн",
+    "Overview": "",
+    "Language": "tt-TT"
+   },
+   {
+    "Title": "ڈیون.ٹیلہ.",
+    "Overview": "",
+    "Language": "ur-PK"
+   },
+   {
+    "Title": "Duin",
+    "Overview": "",
+    "Language": "af-ZA"
+   },
+   {
+    "Title": "ডিউন",
+    "Overview": "",
+    "Language": "bn-IN"
+   },
+   {
+    "Title": "Dina",
+    "Overview": "",
+    "Language": "bs-BS"
+   },
+   {
+    "Title": "Twyn tywod",
+    "Overview": "",
+    "Language": "cy-GB"
+   },
+   {
+    "Title": "Duno",
+    "Overview": "",
+    "Language": "eo-EO"
+   },
+   {
+    "Title": "Duna",
+    "Overview": "",
+    "Language": "eu-ES"
+   },
+   {
+    "Title": "Veinukunuku",
+    "Overview": "",
+    "Language": "fj-FJ"
+   },
+   {
+    "Title": "Dún",
+    "Overview": "",
+    "Language": "fy-FY"
+   },
+   {
+    "Title": "Dumhach",
+    "Overview": "",
+    "Language": "ga-IE"
+   },
+   {
+    "Title": "Duna",
+    "Overview": "",
+    "Language": "gl-ES"
+   },
+   {
+    "Title": "Din",
+    "Overview": "",
+    "Language": "ht-HT"
+   },
+   {
+    "Title": "Duna",
+    "Overview": "",
+    "Language": "ia-IA"
+   },
+   {
+    "Title": "ಮರಳುದಿಣ್ಣೆ",
+    "Overview": "",
+    "Language": "kn-IN"
+   },
+   {
+    "Title": "дюна",
+    "Overview": "",
+    "Language": "ky-KG"
+   },
+   {
+    "Title": "Thinium",
+    "Overview": "",
+    "Language": "la-LA"
+   },
+   {
+    "Title": "Dongom-pasika",
+    "Overview": "",
+    "Language": "mg-MG"
+   },
+   {
+    "Title": "മണൽക്കുന്ന്‌",
+    "Overview": "",
+    "Language": "ml-IN"
+   },
+   {
+    "Title": "Gumuk",
+    "Overview": "",
+    "Language": "ms-MY"
+   },
+   {
+    "Title": "Gumuk",
+    "Overview": "",
+    "Language": "ms-SG"
+   },
+   {
+    "Title": "Sanddyne",
+    "Overview": "",
+    "Language": "nb-NO"
+   },
+   {
+    "Title": "Sanddyne",
+    "Overview": "",
+    "Language": "nn-NN"
+   },
+   {
+    "Title": "Duna",
+    "Overview": "",
+    "Language": "oc-FR"
+   },
+   {
+    "Title": "Дюнæ",
+    "Overview": "",
+    "Language": "os-OS"
+   },
+   {
+    "Title": "ڀٽ",
+    "Overview": "",
+    "Language": "sd-SD"
+   },
+   {
+    "Title": "Dina",
+    "Overview": "",
+    "Language": "sh-SH"
+   },
+   {
+    "Title": "වැලි කඳු",
+    "Overview": "",
+    "Language": "si-LK"
+   },
+   {
+    "Title": "Tuta la mchanga",
+    "Overview": "",
+    "Language": "sw-TZ"
+   },
+   {
+    "Title": "Burol ng buhangin",
+    "Overview": "",
+    "Language": "tl-PH"
+   },
+   {
+    "Title": "Dyuna",
+    "Overview": "",
+    "Language": "uz-UZ"
+   },
+   {
+    "Title": "沙王星",
+    "Overview": "",
+    "Language": "zh-SG"
+   },
+   {
+    "Title": "Dune",
+    "Overview": "Paul Atreides is de erfgenaam van het Huis Atreides. Hij staat op het punt om met zijn familie de planeet Caladan te verlaten voor Arrakis, een woestijnplaneet die ook bekend staat als ‘Dune’. De nieuwe planeet is rijk aan melange, dat meestal ‘the spice’ genoemd wordt. De unieke drug met levensverlengende, geestverruimende en soms dodelijke krachten wordt beschouwd als het meest waardevolle goed in het hele universum.",
+    "Language": "nl-BE"
+   }
+  ],
+  "Recommendations": [
+   {
+    "TmdbId": 693134,
+    "Title": "Dune: Part Two"
+   },
+   {
+    "TmdbId": 603,
+    "Title": "The Matrix"
+   },
+   {
+    "TmdbId": 101299,
+    "Title": "The Hunger Games: Catching Fire"
+   },
+   {
+    "TmdbId": 695721,
+    "Title": "The Hunger Games: The Ballad of Songbirds & Snakes"
+   },
+   {
+    "TmdbId": 74,
+    "Title": "War of the Worlds"
+   },
+   {
+    "TmdbId": 1895,
+    "Title": "Star Wars: Episode III - Revenge of the Sith"
+   },
+   {
+    "TmdbId": 262500,
+    "Title": "Insurgent"
+   },
+   {
+    "TmdbId": 2493,
+    "Title": "The Princess Bride"
+   },
+   {
+    "TmdbId": 871,
+    "Title": "Planet of the Apes"
+   },
+   {
+    "TmdbId": 339964,
+    "Title": "Valerian and the City of a Thousand Planets"
+   }
+  ],
+  "Credits": {
+   "Cast": [
+    {
+     "Name": "Timothée Chalamet",
+     "Order": 0,
+     "Character": "Paul Atreides",
+     "TmdbId": 1190668,
+     "CreditId": "5b4d01bac3a36823d803cd45",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/dFxpwRpmzpVfP1zjluH68DeQhyj.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Rebecca Ferguson",
+     "Order": 1,
+     "Character": "Lady Jessica Atreides",
+     "TmdbId": 933238,
+     "CreditId": "5b90742fc3a368222e002f41",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/ty8ZPzaCBBlqIr5qzpOXI24iC8j.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Oscar Isaac",
+     "Order": 2,
+     "Character": "Duke Leto Atreides",
+     "TmdbId": 25072,
+     "CreditId": "5c50bc070e0a2612cccedcb3",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/dW5U5yrIIPmMjRThR9KT2xH6nTz.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Jason Momoa",
+     "Order": 3,
+     "Character": "Duncan Idaho",
+     "TmdbId": 117642,
+     "CreditId": "5c6610319251412fc6017577",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/3troAR6QbSb6nUFMDu61YCCWLKa.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Stellan Skarsgård",
+     "Order": 4,
+     "Character": "Baron Vladimir Harkonnen",
+     "TmdbId": 1640,
+     "CreditId": "5c364b61c3a368273c1c5fee",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/mW7xmtGV4y79kQGn0zkKVGDMAmw.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Stephen McKinley Henderson",
+     "Order": 5,
+     "Character": "Thufir Hawat",
+     "TmdbId": 196179,
+     "CreditId": "61468a6985c0a20043d24c95",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/z2weSPo4sdMNj47tP5o0me41r2z.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Josh Brolin",
+     "Order": 6,
+     "Character": "Gurney Halleck",
+     "TmdbId": 16851,
+     "CreditId": "5c64750d9251412fb4feec3e",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/7QpneI3HoZCCDVPyWx3p3t7yeo7.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Javier Bardem",
+     "Order": 7,
+     "Character": "Stilgar",
+     "TmdbId": 3810,
+     "CreditId": "5c55434c0e0a26567ac66f76",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/zfRID0jx8DKBluPGU9xtk9sZWUt.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Sharon Duncan-Brewster",
+     "Order": 8,
+     "Character": "Dr. Liet Kynes",
+     "TmdbId": 195666,
+     "CreditId": "5e37991c4ca676001252ea99",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/gp5h6rOrqBrIGgID4AMd58O6Ow6.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Chang Chen",
+     "Order": 9,
+     "Character": "Dr. Wellington Yueh",
+     "TmdbId": 1622,
+     "CreditId": "5c8e6e129251410ff4a1c158",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/tkROVkn6yoqF3AcQ4hneOursHXR.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Dave Bautista",
+     "Order": 10,
+     "Character": "Beast Rabban Harkonnen",
+     "TmdbId": 543530,
+     "CreditId": "5c342d10c3a36851f8b52ac9",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/snk6JiXOOoRjPtHU5VMoy6qbd32.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "David Dastmalchian",
+     "Order": 11,
+     "Character": "Piter de Vries",
+     "TmdbId": 83854,
+     "CreditId": "5c6c967b0e0a261e069f48b6",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/eLafwcpL64CqzwjjSgKpO7Rv4ae.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Zendaya",
+     "Order": 12,
+     "Character": "Chani",
+     "TmdbId": 505710,
+     "CreditId": "5c5241fa0e0a2612ccd0fc9c",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/1qup8tSt95HLbcy2c2xrx4iJNxv.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Charlotte Rampling",
+     "Order": 13,
+     "Character": "Reverend Mother Mohiam",
+     "TmdbId": 44079,
+     "CreditId": "5c3e88ba9251415524ae5623",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/7fhg5FCcl0VfYERP5D0unpybqgx.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Babs Olusanmokun",
+     "Order": 14,
+     "Character": "Jamis",
+     "TmdbId": 205923,
+     "CreditId": "5e3799110c27100013728d9c",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/bqycmpUrpISeLzQniiYwAZ5X1RN.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Benjamin Clementine",
+     "Order": 15,
+     "Character": "Herald of the Change",
+     "TmdbId": 3185383,
+     "CreditId": "61098872dcf875004856d399",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/johpHbzqrue6XDG63vapfugGbnn.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Souad Faress",
+     "Order": 16,
+     "Character": "Bene Gesserit Sister",
+     "TmdbId": 261927,
+     "CreditId": "6109894e255dba002de4620e",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/aEGdIch9eRzJcsAGbF7mAZPUiXt.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Golda Rosheuvel",
+     "Order": 17,
+     "Character": "Shadout Mapes",
+     "TmdbId": 1856875,
+     "CreditId": "60621d77d7a70a007430f1df",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/nlSIvTWzMEzZGljKYgpZxGcsJtv.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Roger Yuan",
+     "Order": 18,
+     "Character": "Lieutenant Lanville",
+     "TmdbId": 2974,
+     "CreditId": "604c3692ae28110029cfb466",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/jHdxbT6n3ToYKw0DVFIUkva86SO.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Seun Shote",
+     "Order": 19,
+     "Character": "Arrakeen Residency Gardener",
+     "TmdbId": 2411333,
+     "CreditId": "617019e6a097dc00920af978",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/33szNjKtUsTxlwV039Gec2PKQS2.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Neil Bell",
+     "Order": 20,
+     "Character": "Sardaukar Bashar",
+     "TmdbId": 178629,
+     "CreditId": "617019e6a097dc0065e51a15",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/3K3dDytqtTSaGrDZ3qOHYpJUGea.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Oliver Ryan",
+     "Order": 21,
+     "Character": "Hawat Specialist",
+     "TmdbId": 1638835,
+     "CreditId": "5e446b483dd12600165a37d1",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/S0YPiYOSikfqjR6HMuxoFDzh0f.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Stephen Collins",
+     "Order": 22,
+     "Character": "Harkonnen Trooper",
+     "TmdbId": 1929092,
+     "CreditId": "5e446b99596a91001301aefc",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/86LlKrbvYVmR4Ca9fARwUoY5TgJ.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Charlie Rawes",
+     "Order": 23,
+     "Character": "Harkonnen Trooper",
+     "TmdbId": 1083177,
+     "CreditId": "5e446a8a41465c001ad29ace",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/zsARROMEHNANOAI8wntYcn3BpOM.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Richard Carter",
+     "Order": 24,
+     "Character": "Harkonnen Trooper",
+     "TmdbId": 3275311,
+     "CreditId": "616d8946ba131b008e16d46f",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/vwMG8213y9UiCDXBPIUwzhVxUcX.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Benjamin Dilloway",
+     "Order": 25,
+     "Character": "Sardaukar Assassin",
+     "TmdbId": 1269682,
+     "CreditId": "617019e6d4b9d9008a7b018e",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/reXJcitDu5hsCO7Hlra2ZFzr6Nn.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Elmi Rashid Elmi",
+     "Order": 26,
+     "Character": "Shamir",
+     "TmdbId": 3063993,
+     "CreditId": "610988955541fa005d8e28cf",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/kMH7mX7rzVrrPuWL0qVeYExXVcx.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Tachia Newall",
+     "Order": 27,
+     "Character": "Tanat",
+     "TmdbId": 1466868,
+     "CreditId": "617019e6d4b9d9008a7b0191",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/ywvojfXK3uzw0IgVEVg3j00GPuy.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Gloria Obianyo",
+     "Order": 28,
+     "Character": "Female Fremen",
+     "TmdbId": 1982903,
+     "CreditId": "5e35cc0c4ca676001a513c4a",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/8vRsNhtxFzYsHQItIKwcMW9flts.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Fehinti Balogun",
+     "Order": 29,
+     "Character": "Male Fremen",
+     "TmdbId": 2160722,
+     "CreditId": "6195ce78fc5f060046a85373",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/lNpDOJn9wMkMg8XLqTvdwxDcztL.jpg"
+      }
+     ]
+    }
+   ],
+   "Crew": [
+    {
+     "Name": "Denis Villeneuve",
+     "Order": 0,
+     "Job": "Director",
+     "Department": "Directing",
+     "TmdbId": 137427,
+     "CreditId": "58920db99251412dd10093b4",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/xzQYqb4nR8xT7Zdw5itbEL9K3fd.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Denis Villeneuve",
+     "Order": 1,
+     "Job": "Screenplay",
+     "Department": "Writing",
+     "TmdbId": 137427,
+     "CreditId": "5c6dada90e0a266dacad0df3",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/xzQYqb4nR8xT7Zdw5itbEL9K3fd.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Eric Roth",
+     "Order": 2,
+     "Job": "Screenplay",
+     "Department": "Writing",
+     "TmdbId": 27,
+     "CreditId": "5c6dad950e0a267f9d9a1f7d",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/vHWaxFjztf880pXp1PJwyI26oeB.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Jon Spaihts",
+     "Order": 3,
+     "Job": "Screenplay",
+     "Department": "Writing",
+     "TmdbId": 564940,
+     "CreditId": "5c6dadd992514129d5051200",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/n5JF0cYCWe8AUqb4Sto042rnG4e.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Denis Villeneuve",
+     "Order": 4,
+     "Job": "Producer",
+     "Department": "Production",
+     "TmdbId": 137427,
+     "CreditId": "5be8c8cb0e0a263bf80350b9",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/xzQYqb4nR8xT7Zdw5itbEL9K3fd.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Cale Boyter",
+     "Order": 5,
+     "Job": "Producer",
+     "Department": "Production",
+     "TmdbId": 17315,
+     "CreditId": "58e54deb925141281903016f",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/jeRsKRHuSJcTdciWmkO6LrBULw2.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Mary Parent",
+     "Order": 6,
+     "Job": "Producer",
+     "Department": "Production",
+     "TmdbId": 114408,
+     "CreditId": "58e54dd29251412810030495",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/jTh9ngfGF8DQvKwGM8rXSmfbQTj.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Joseph M. Caracciolo Jr.",
+     "Order": 7,
+     "Job": "Producer",
+     "Department": "Production",
+     "TmdbId": 10570,
+     "CreditId": "5c8fbd8ec3a3681c954baf37",
+     "Images": []
+    },
+    {
+     "Name": "Jon Spaihts",
+     "Order": 8,
+     "Job": "Executive Producer",
+     "Department": "Production",
+     "TmdbId": 564940,
+     "CreditId": "5c8fbcb69251410feda409f4",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/n5JF0cYCWe8AUqb4Sto042rnG4e.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Thomas Tull",
+     "Order": 9,
+     "Job": "Executive Producer",
+     "Department": "Production",
+     "TmdbId": 54211,
+     "CreditId": "58e54e0bc3a36872ee033025",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/gRvTHmNKEqzyt2sGvpjrAvmloy0.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Tanya Lapointe",
+     "Order": 10,
+     "Job": "Executive Producer",
+     "Department": "Production",
+     "TmdbId": 1905971,
+     "CreditId": "5c8fe3600e0a266237567ad2",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/fSIQqm9PqqyPexLDRU5WCwS76L6.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Herb Gains",
+     "Order": 11,
+     "Job": "Executive Producer",
+     "Department": "Production",
+     "TmdbId": 62739,
+     "CreditId": "5c8fbd31c3a36861074ea1a2",
+     "Images": []
+    },
+    {
+     "Name": "Richard P. Rubinstein",
+     "Order": 12,
+     "Job": "Executive Producer",
+     "Department": "Production",
+     "TmdbId": 15000,
+     "CreditId": "6195c4a3cb75d1009010eaff",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/1W6lkgvwYUHj0DiJJZ5i98bMPG8.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Brian Herbert",
+     "Order": 13,
+     "Job": "Executive Producer",
+     "Department": "Production",
+     "TmdbId": 1790474,
+     "CreditId": "58e54e2892514127f60318e0",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/aUkuwDrFeOZU5BAXk1JeMGC6iL3.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "John Harrison",
+     "Order": 14,
+     "Job": "Executive Producer",
+     "Department": "Production",
+     "TmdbId": 13367,
+     "CreditId": "6195c56f497560002cf6ad09",
+     "Images": []
+    },
+    {
+     "Name": "Joshua Grode",
+     "Order": 15,
+     "Job": "Executive Producer",
+     "Department": "Production",
+     "TmdbId": 2364439,
+     "CreditId": "5ea9a19407291c001eec281f",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/ml68ZszfnKN5VGPQXkxqdVmrRW9.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Byron Merritt",
+     "Order": 16,
+     "Job": "Executive Producer",
+     "Department": "Production",
+     "TmdbId": 1790475,
+     "CreditId": "58e54e41c3a368732602fd47",
+     "Images": []
+    },
+    {
+     "Name": "Kim Herbert",
+     "Order": 17,
+     "Job": "Executive Producer",
+     "Department": "Production",
+     "TmdbId": 1790476,
+     "CreditId": "58e54e5992514127f00325ca",
+     "Images": []
+    },
+    {
+     "Name": "Greig Fraser",
+     "Order": 18,
+     "Job": "Director of Photography",
+     "Department": "Camera",
+     "TmdbId": 67113,
+     "CreditId": "5c080b760e0a2636ce118c46",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/cwj0aValmr7TGQ2OOQk5CAy1PWf.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Hans Zimmer",
+     "Order": 19,
+     "Job": "Music Producer",
+     "Department": "Sound",
+     "TmdbId": 947,
+     "CreditId": "614bcfca1cac8c008cf2033c",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/tpQnDeHY15szIXvpnhlprufz4d.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Hans Zimmer",
+     "Order": 20,
+     "Job": "Original Music Composer",
+     "Department": "Sound",
+     "TmdbId": 947,
+     "CreditId": "5c8fd3b69251410fe7a42229",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/tpQnDeHY15szIXvpnhlprufz4d.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Jina Jay",
+     "Order": 21,
+     "Job": "Casting",
+     "Department": "Production",
+     "TmdbId": 474,
+     "CreditId": "6195c8eeae3843006171ad18",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/6IG0L5UgQ8jzDkiCI6Umy9qAq9x.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Francine Maisler",
+     "Order": 22,
+     "Job": "Casting",
+     "Department": "Production",
+     "TmdbId": 6410,
+     "CreditId": "6195c789a6e2d2008c5fa60f",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/j97ggx3P5YRTbXEtPorQq9ge9JH.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Eniko Fulop",
+     "Order": 23,
+     "Job": "Stunts",
+     "Department": "Crew",
+     "TmdbId": 2069535,
+     "CreditId": "6265d0d70b5fd60f7576c8ee",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/xoYaskmRgAKexpobG0D9EpkHiN0.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Richard Taylor",
+     "Order": 24,
+     "Job": "Special Effects",
+     "Department": "Crew",
+     "TmdbId": 1323,
+     "CreditId": "5e687b9a459ad600115d5d66",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/bPPFdE7FRGuBiIAN5P3bzaUQN0Y.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Roger Yuan",
+     "Order": 25,
+     "Job": "Fight Choreographer",
+     "Department": "Crew",
+     "TmdbId": 2974,
+     "CreditId": "6195d1c7cb75d10020ff5d2a",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/jHdxbT6n3ToYKw0DVFIUkva86SO.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Donald Mowat",
+     "Order": 26,
+     "Job": "Makeup Department Head",
+     "Department": "Costume & Make-Up",
+     "TmdbId": 1315700,
+     "CreditId": "5c900387c3a36861194f4469",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/ikdaVXZvwu9wdgbtJWbeokb0fVL.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Donald Mowat",
+     "Order": 27,
+     "Job": "Prosthetic Designer",
+     "Department": "Costume & Make-Up",
+     "TmdbId": 1315700,
+     "CreditId": "5dbf427fefe37c001383f966",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/ikdaVXZvwu9wdgbtJWbeokb0fVL.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Donald Mowat",
+     "Order": 28,
+     "Job": "Makeup Designer",
+     "Department": "Costume & Make-Up",
+     "TmdbId": 1315700,
+     "CreditId": "5dbf429fef4889001714cba5",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/ikdaVXZvwu9wdgbtJWbeokb0fVL.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Donald Mowat",
+     "Order": 29,
+     "Job": "Hair Designer",
+     "Department": "Costume & Make-Up",
+     "TmdbId": 1315700,
+     "CreditId": "5dbf42b09638640012e47f55",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/ikdaVXZvwu9wdgbtJWbeokb0fVL.jpg"
+      }
+     ]
+    }
+   ]
+  },
+  "Studio": "Legendary Pictures",
+  "YoutubeTrailerId": "w0HgHet0sxg",
+  "Certifications": [
+   {
+    "Country": "AE",
+    "Certification": "18TC"
+   },
+   {
+    "Country": "AR",
+    "Certification": "+13"
+   },
+   {
+    "Country": "AU",
+    "Certification": "M"
+   },
+   {
+    "Country": "BE",
+    "Certification": "14"
+   },
+   {
+    "Country": "BR",
+    "Certification": "14"
+   },
+   {
+    "Country": "CH",
+    "Certification": "12"
+   },
+   {
+    "Country": "CZ",
+    "Certification": "12+"
+   },
+   {
+    "Country": "DE",
+    "Certification": "12"
+   },
+   {
+    "Country": "DK",
+    "Certification": "11"
+   },
+   {
+    "Country": "ES",
+    "Certification": "12"
+   },
+   {
+    "Country": "FI",
+    "Certification": "K-12"
+   },
+   {
+    "Country": "FR",
+    "Certification": "12"
+   },
+   {
+    "Country": "GB",
+    "Certification": "12A"
+   },
+   {
+    "Country": "GR",
+    "Certification": "Κ-12"
+   },
+   {
+    "Country": "HK",
+    "Certification": "IIA"
+   },
+   {
+    "Country": "HU",
+    "Certification": "16"
+   },
+   {
+    "Country": "IE",
+    "Certification": "12A"
+   },
+   {
+    "Country": "IL",
+    "Certification": "All"
+   },
+   {
+    "Country": "IN",
+    "Certification": "UA"
+   },
+   {
+    "Country": "IT",
+    "Certification": "T"
+   },
+   {
+    "Country": "JP",
+    "Certification": "G"
+   },
+   {
+    "Country": "KR",
+    "Certification": "12"
+   },
+   {
+    "Country": "LT",
+    "Certification": "N-13"
+   },
+   {
+    "Country": "MX",
+    "Certification": "B"
+   },
+   {
+    "Country": "NL",
+    "Certification": "12"
+   },
+   {
+    "Country": "NO",
+    "Certification": "12"
+   },
+   {
+    "Country": "NZ",
+    "Certification": "M"
+   },
+   {
+    "Country": "PH",
+    "Certification": "PG"
+   },
+   {
+    "Country": "PL",
+    "Certification": "12"
+   },
+   {
+    "Country": "PR",
+    "Certification": "PG-13"
+   },
+   {
+    "Country": "PT",
+    "Certification": "M/12"
+   },
+   {
+    "Country": "RO",
+    "Certification": "12"
+   },
+   {
+    "Country": "RU",
+    "Certification": "12+"
+   },
+   {
+    "Country": "SE",
+    "Certification": "11"
+   },
+   {
+    "Country": "SG",
+    "Certification": "PG13"
+   },
+   {
+    "Country": "TH",
+    "Certification": "G"
+   },
+   {
+    "Country": "TR",
+    "Certification": "13+"
+   },
+   {
+    "Country": "TW",
+    "Certification": "6+"
+   },
+   {
+    "Country": "UA",
+    "Certification": "12+"
+   },
+   {
+    "Country": "US",
+    "Certification": "PG-13"
+   }
+  ],
+  "Status": null,
+  "Collection": {
+   "TmdbId": 726871,
+   "Name": "Dune Collection",
+   "Images": null,
+   "Overview": null,
+   "Translations": null,
+   "Parts": null
+  },
+  "Homepage": "https://www.warnerbros.com/movies/dune"
+ }
+]

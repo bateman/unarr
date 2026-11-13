@@ -1,0 +1,23 @@
+{
+  "body": [
+    {
+      "attemptedValue": "",
+      "errorCode": "NotEmptyValidator",
+      "errorMessage": "'Name' must not be empty.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Name",
+        "propertyValue": ""
+      },
+      "propertyName": "Name",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:41:28Z",
+  "request": {
+    "body": "bodies/autotagging-create-no-name.json",
+    "method": "POST",
+    "path": "/api/v3/autotagging"
+  },
+  "status": 400
+}

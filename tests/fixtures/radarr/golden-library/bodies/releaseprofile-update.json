@@ -1,0 +1,1 @@
+{"name": "No cams", "enabled": false, "required": ["1080p"], "ignored": ["cam"], "indexerId": 0, "tags": [1], "id": "{id:releaseprofile-create}"}

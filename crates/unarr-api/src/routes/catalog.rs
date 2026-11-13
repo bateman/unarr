@@ -88,7 +88,8 @@ async fn tag_details_all(state: &AppState) -> anyhow::Result<Vec<Value>> {
 
 // --- root folders
 
-fn root_folder_resource(r: &RootFolder, series_paths: &[String]) -> Value {
+/// Radarr's resource has no `totalSpace`.
+fn root_folder_resource(r: &RootFolder, series_paths: &[String], total_space: bool) -> Value {
     let path = FsPath::new(&r.path);
     let mut out =
         json!({"id": r.id, "path": r.path.trim_end_matches('/'), "accessible": false, "unmappedFolders": []});
@@ -96,7 +97,9 @@ fn root_folder_resource(r: &RootFolder, series_paths: &[String]) -> Value {
         out["accessible"] = json!(true);
         if let Some((free, total)) = fs::disk_space(path) {
             out["freeSpace"] = json!(free);
-            out["totalSpace"] = json!(total);
+            if total_space {
+                out["totalSpace"] = json!(total);
+            }
         }
         let mut unmapped = Vec::new();
         if let Ok(entries) = std::fs::read_dir(path) {
@@ -146,7 +149,14 @@ async fn root_folders_all(state: &AppState) -> anyhow::Result<Vec<Value>> {
         .await?;
     // Free space and directory listings touch the disks: a hung network
     // mount must not park an async worker.
-    crate::blocking::run(move || roots.iter().map(|r| root_folder_resource(r, &paths)).collect()).await
+    let total_space = personality != Personality::Radarr;
+    crate::blocking::run(move || {
+        roots
+            .iter()
+            .map(|r| root_folder_resource(r, &paths, total_space))
+            .collect()
+    })
+    .await
 }
 
 pub async fn root_folders(State(state): State<AppState>) -> ApiResult<Json<Vec<Value>>> {

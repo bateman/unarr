@@ -111,7 +111,7 @@ Decided here so the phase does not start with a rewrite:
   `ui_router` finally read their state: a Radarr route list, a
   `schemas/radarr/` catalogue recorded from the original, `ui/radarr/`
   embedded next to `ui/sonarr/`, `/feed/v3/calendar/Radarr.ics`.
-- **One HTTP client per personality** (`docs/DESIGN.md` section 18): each
+- **One HTTP client per personality** (`docs/DESIGN.md` section 19): each
   personality's proxy and certificate settings apply to its own requests.
   This is a precondition for running two, not a nicety.
 - **Metadata: `api.radarr.video`** behind a movie-shaped trait next to the
@@ -276,7 +276,7 @@ settled one way or the other; the Sonarr goldens are untouched.
    Radarr recorded from the maintainer's configuration
    (`tests/fixtures/recyclarr/radarr.yml`, already in the tree) and replayed
    against Unarr; `delete_old_custom_formats` must leave alone the formats
-   Recyclarr did not create (`docs/DESIGN.md` section 18).
+   Recyclarr did not create (`docs/DESIGN.md` section 19).
 4. **Import list**: the IMDb watchlist (`IMDbListImport`), the one the
    maintainer uses, against a mock; the rest keep their settings.
 5. **Backups** and log files for Radarr; the audit method of `docs/audit/`
@@ -288,7 +288,7 @@ settled one way or the other; the Sonarr goldens are untouched.
    950-series one, on glibc and on the image. A target missed is added to
    the table of `docs/DESIGN.md` section 9 and left there: correctness
    first, by the maintainer's decision at the end of 4c.
-7. **The review's open suggestion** (`docs/DESIGN.md` section 18): share
+7. **The review's open suggestion** (`docs/DESIGN.md` section 19): share
    between the two pipelines the pieces that carry no media notion (the
    refresh loop over the clients, what a grab's failure means, the release
    comparisons, the push validation). Take it up here if the two sides are
@@ -308,7 +308,7 @@ levels beyond what the chosen import lists need; the Kodi, Plex and
 Emby metadata file writers; notification implementations beyond Discord,
 webhook and Plex; download clients beyond the four; HTTPS serving; the
 switch of the Servarr-proxy user agents to Unarr's own, which is its own
-decision (`docs/DESIGN.md` section 18) and not part of this phase.
+decision (`docs/DESIGN.md` section 19) and not part of this phase.
 
 ## Sizing
 
@@ -398,7 +398,7 @@ read through the schema catalogue and not yet through typed settings
 (`movieCategory` is in the schemas, not in `downloadclients::settings`);
 the personality's HTTP clients are in `AppState::http()` for the indexer
 and download client services to be built on. `docs/DESIGN.md` section 15
-has the decisions, section 18 what is open.
+has the decisions, section 19 what is open.
 
 ## Status of 4b, November 2026
 
@@ -486,7 +486,7 @@ last pending golden; compared with the original on 444 formats of the
 settings form) and nothing renames with it yet; the command runtime runs Radarr's commands through
 `movies::commands`, where the library's commands go; the scheduled tasks
 of the library are listed and skipped by `CommandBody::runs_in`.
-`docs/DESIGN.md` section 16 has the decisions, section 18 what is open.
+`docs/DESIGN.md` section 16 has the decisions, section 19 what is open.
 
 ## Status of 4c, November 2026
 
@@ -612,7 +612,7 @@ settings writes are those of the providers, the notifications and
 `PUT delayprofile/{id}`; `Backup` runs for Radarr, the restore and the log
 files do not; the import list is listed and skipped. The audit method has
 not been applied to Radarr beyond `make http-audit`. `docs/DESIGN.md`
-section 17 has the decisions, section 18 what is open.
+section 17 has the decisions, section 19 what is open.
 
 Added on 13 November 2026, after the audit's rows were triaged
 (`docs/audit/7-triage.md`) and twenty of them closed on `main`:
@@ -643,3 +643,42 @@ Added on 13 November 2026, after the audit's rows were triaged
   profile aborts on a panic (`docs/audit/7-triage.md`, row 1.13). It is the
   maintainer's decision, open, and worth having before the homelab run
   puts Radarr and Sonarr in one container.
+
+## Status of 4d, November 2026
+
+Four recordings of their own, each taken from the real Radarr
+6.4.4.10685 in one run, next to the 474 goldens of the earlier
+milestones, which were not recorded again:
+`golden-library` (260 answers and the hub, the movies and the settings),
+`golden-list` (43, the IMDb watchlist), `golden-backup` (12, the backups
+and the log files) and `golden-audit` (32, what the audit found missing).
+
+| Exit criterion | Status |
+|----------------|--------|
+| `make ui && make check` green | Yes: fmt, clippy `-D warnings`, 667 tests in 31 test binaries. Sonarr's replay is unchanged: the same 644 goldens, none re-recorded. |
+| The UI adds a movie and saves every settings page | The writes each page sends are goldens, recorded from the original and replayed: the seven `config/*` pages, tags, root folders, remote path mappings, delay and release profiles, custom filters, auto tagging, custom formats, quality profiles and definitions with their reset, the lists' exclusions, the collections, the import lists, the metadata consumers. The pages themselves were not driven with a browser in this milestone, as 4a and 4c did. |
+| The watchlist sync adds movies against the mock | Yes: `the_import_list_goldens_match`. The IMDb list the maintainer uses is served by the mock from a hand-made fixture; the sync adds the two movies the library lacks, rejects the one it has and the one the exclusions name, and a movie deleted with an exclusion does not come back. |
+| Recyclarr's exchange replays | Yes, both ways: the recording was taken between Recyclarr 8.8.1 and the real Radarr, and the real Recyclarr run against Unarr sends the same requests, gets the same answers and prints the same output (`make recyclarr-radarr`, `tests/fixtures/recyclarr/radarr-exchange.json`). `delete_old_custom_formats` leaves the format the maintainer made by hand alone. |
+| The audit's high and medium findings are closed | Yes: `docs/audit/8-radarr.md`. Nine findings, nine closed, each recorded from the original first; what is left is low and listed there. |
+| The measurements are taken with both personalities | Yes, on 950 series and 2,123 movies: 38 MB idle, 0.23 s to the first answer, `GET /movie` at 289 ms p99 (`docs/DESIGN.md` section 9). The `GET /series` target is still missed and still deferred. |
+| The homelab run | Not done. The maintainer runs it after this milestone is on `main` (`docs/homelab-compose.md`, the Radarr block and its checklist). |
+
+What 4d delivered against its seven points:
+
+1. **Metadata and movie management.** `api.radarr.video` behind a
+   movie-shaped trait with its answers recorded under
+   `tests/fixtures/metadata/`, `movie/lookup` in its three forms, `POST
+   movie` with `addOptions`, `PUT` with the folder move, `DELETE`,
+   `movie/editor`, `movie/import`, a real `RefreshMovie` with covers,
+   minimum availability, the collections (`RefreshCollections`, `PUT
+   collection` one by one and in bulk) and the import exclusions.
+2. **Settings writes** for everything 4a reads, with the originals'
+   validation: Radarr's own where its controllers differ (quality
+   definitions, profiles with a language, tags, exclusions, the delay
+   profile's order), the shared handlers elsewhere.
+3. **Recyclarr**, recorded and replayed both ways.
+4. **The IMDb watchlist**, with the Discover page's listing.
+5. **Backups and log files**, and the audit of `docs/audit/8-radarr.md`.
+6. **Measurements**, in `docs/DESIGN.md` section 9.
+7. **The review's open suggestion** was taken up and declined, with the
+   measurement that says why (`docs/DESIGN.md` section 18).

@@ -1,0 +1,40 @@
+{
+  "body": {
+    "body": {
+      "isExclusive": false,
+      "isLongRunning": false,
+      "isTypeExclusive": false,
+      "movieIds": [
+        6
+      ],
+      "name": "RenameMovieFolder",
+      "requiresDiskAccess": false,
+      "sendUpdatesToClient": false,
+      "suppressMessages": true,
+      "trigger": "manual",
+      "updateScheduledTask": true
+    },
+    "commandName": "Rename Movie Folder",
+    "duration": "00:00:00.0015389",
+    "ended": "2026-11-13T15:38:16Z",
+    "exception": "System.InvalidOperationException: No service for type 'NzbDrone.Core.Messaging.Commands.IExecute`1[NzbDrone.Core.MediaFiles.Commands.RenameMovieFolderCommand]' has been registered.\n   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)\n   at NzbDrone.Common.ServiceFactory.Build(Type contract) in ./NzbDrone.Common/ServiceFactory.cs:line 41\n   at NzbDrone.Core.Messaging.Commands.CommandExecutor.ExecuteCommand[TCommand](TCommand command, CommandModel commandModel) in ./NzbDrone.Core/Messaging/Commands/CommandExecutor.cs:line 65",
+    "id": 472961,
+    "message": "Failed",
+    "name": "RenameMovieFolder",
+    "priority": "normal",
+    "queued": "2026-11-13T15:38:16Z",
+    "result": "unknown",
+    "sendUpdatesToClient": false,
+    "started": "2026-11-13T15:38:16Z",
+    "stateChangeTime": "2026-11-13T15:38:16Z",
+    "status": "failed",
+    "trigger": "manual",
+    "updateScheduledTask": true
+  },
+  "recordedAt": "2026-11-13T15:38:26Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/command/472961"
+  },
+  "status": 200
+}

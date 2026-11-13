@@ -1,0 +1,6 @@
+{
+ "$from": "importlist-after-put",
+ "$set": {
+  "qualityProfileId": 999
+ }
+}

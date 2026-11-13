@@ -1,0 +1,67 @@
+{
+  "body": [
+    {
+      "filters": [
+        {
+          "key": "qualityProfileId",
+          "type": "equal",
+          "value": [
+            7
+          ]
+        }
+      ],
+      "id": 1,
+      "label": "HD BR",
+      "type": "movieIndex"
+    },
+    {
+      "filters": [
+        {
+          "key": "protocol",
+          "type": "equal",
+          "value": [
+            "usenet"
+          ]
+        }
+      ],
+      "id": 2,
+      "label": "Usenet",
+      "type": "releases"
+    },
+    {
+      "filters": [
+        {
+          "key": "qualityProfileId",
+          "type": "equal",
+          "value": [
+            1,
+            4
+          ]
+        }
+      ],
+      "id": 3,
+      "label": "Quality any",
+      "type": "movieIndex"
+    },
+    {
+      "filters": [
+        {
+          "key": "monitored",
+          "type": "equal",
+          "value": [
+            false
+          ]
+        }
+      ],
+      "id": 4,
+      "label": "Not monitored",
+      "type": "movieIndex"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:41:28Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/customfilter"
+  },
+  "status": 200
+}

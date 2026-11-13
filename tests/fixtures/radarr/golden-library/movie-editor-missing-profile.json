@@ -1,0 +1,23 @@
+{
+  "body": [
+    {
+      "attemptedValue": 999,
+      "errorCode": "QualityProfileExistsValidator",
+      "errorMessage": "Quality Profile does not exist",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Quality Profile Id",
+        "propertyValue": 999
+      },
+      "propertyName": "QualityProfileId",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:40:20Z",
+  "request": {
+    "body": "bodies/movie-editor-missing-profile.json",
+    "method": "PUT",
+    "path": "/api/v3/movie/editor"
+  },
+  "status": 400
+}

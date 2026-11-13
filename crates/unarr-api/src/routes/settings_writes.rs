@@ -20,16 +20,16 @@ use unarr_core::model::{CustomFormat, QualityProfile};
 
 // --- helpers
 
-fn object(body: &Value) -> ApiResult<&Map<String, Value>> {
+pub(crate) fn object(body: &Value) -> ApiResult<&Map<String, Value>> {
     body.as_object()
         .ok_or_else(|| ApiError::BadRequest("The request body must be a JSON object".into()))
 }
 
-fn rule(property: &str, code: &str, message: &str, attempted: Value) -> ValidationFailure {
+pub(crate) fn rule(property: &str, code: &str, message: &str, attempted: Value) -> ValidationFailure {
     ValidationFailure::rule(property, code, message, attempted)
 }
 
-fn check(failures: Vec<ValidationFailure>) -> ApiResult<()> {
+pub(crate) fn check(failures: Vec<ValidationFailure>) -> ApiResult<()> {
     if failures.is_empty() {
         Ok(())
     } else {
@@ -38,7 +38,7 @@ fn check(failures: Vec<ValidationFailure>) -> ApiResult<()> {
 }
 
 /// `'X' must be greater than or equal to 'n'.`
-fn at_least(property: &str, value: i64, min: i64) -> Option<ValidationFailure> {
+pub(crate) fn at_least(property: &str, value: i64, min: i64) -> Option<ValidationFailure> {
     (value < min).then(|| {
         let mut f = rule(
             property,
@@ -58,7 +58,7 @@ fn at_least(property: &str, value: i64, min: i64) -> Option<ValidationFailure> {
 }
 
 /// `'X' must be between a and b. You entered v.`
-fn between(property: &str, value: i64, from: i64, to: i64) -> Option<ValidationFailure> {
+pub(crate) fn between(property: &str, value: i64, from: i64, to: i64) -> Option<ValidationFailure> {
     (value < from || value > to).then(|| {
         let mut f = rule(
             property,
@@ -74,24 +74,24 @@ fn between(property: &str, value: i64, from: i64, to: i64) -> Option<ValidationF
     })
 }
 
-fn created(state: &AppState, path: &str, id: i64, body: Value) -> Response {
+pub(crate) fn created(state: &AppState, path: &str, id: i64, body: Value) -> Response {
     let location = format!("{}/api/v3/{path}/{id}", state.settings().url_base);
     (StatusCode::CREATED, [(header::LOCATION, location)], Json(body)).into_response()
 }
 
-fn accepted(body: Value) -> Response {
+pub(crate) fn accepted(body: Value) -> Response {
     (StatusCode::ACCEPTED, Json(body)).into_response()
 }
 
-fn int(body: &Value, key: &str) -> i64 {
+pub(crate) fn int(body: &Value, key: &str) -> i64 {
     body.get(key).and_then(Value::as_i64).unwrap_or(0)
 }
 
-fn text(body: &Value, key: &str) -> String {
+pub(crate) fn text(body: &Value, key: &str) -> String {
     body.get(key).and_then(Value::as_str).unwrap_or("").to_string()
 }
 
-fn ints(body: &Value, key: &str) -> Vec<i64> {
+pub(crate) fn ints(body: &Value, key: &str) -> Vec<i64> {
     body.get(key)
         .and_then(Value::as_array)
         .into_iter()
@@ -100,7 +100,7 @@ fn ints(body: &Value, key: &str) -> Vec<i64> {
         .collect()
 }
 
-fn strings(body: &Value, key: &str) -> Vec<String> {
+pub(crate) fn strings(body: &Value, key: &str) -> Vec<String> {
     body.get(key)
         .and_then(Value::as_array)
         .into_iter()
@@ -112,7 +112,7 @@ fn strings(body: &Value, key: &str) -> Vec<String> {
 /// How a setting is stored in the `Config` table (`ConfigService.SetValue`:
 /// `ToString()` of the value).
 #[derive(Clone, Copy)]
-enum Kind {
+pub(crate) enum Kind {
     Bool,
     Int,
     Str,
@@ -120,7 +120,7 @@ enum Kind {
     Enum,
 }
 
-fn upper_first(s: &str) -> String {
+pub(crate) fn upper_first(s: &str) -> String {
     let mut c = s.chars();
     match c.next() {
         Some(f) => f.to_uppercase().collect::<String>() + c.as_str(),
@@ -130,7 +130,7 @@ fn upper_first(s: &str) -> String {
 
 /// `SaveConfigDictionary`: the given resource fields written to their
 /// keys (the property names, as the originals store them lowercased).
-async fn save_config(state: &AppState, body: &Value, fields: &[(&str, Kind)]) -> ApiResult<()> {
+pub(crate) async fn save_config(state: &AppState, body: &Value, fields: &[(&str, Kind)]) -> ApiResult<()> {
     let mut rows = Vec::new();
     for (field, kind) in fields {
         let Some(v) = body.get(*field) else { continue };
@@ -191,7 +191,7 @@ fn current_user() -> String {
 /// and can be written to; it is not a root folder nor a folder above one,
 /// not the program's folder nor one inside it, not a system folder, and
 /// not the folder of a series. Every rule that fails is reported.
-fn recycle_bin_failures(
+pub(crate) fn recycle_bin_failures(
     bin: &str,
     root_folders: &[String],
     series: &[(i64, String)],
@@ -639,7 +639,7 @@ pub async fn naming(State(state): State<AppState>, Json(body): Json<Value>) -> A
 /// daemon lays these over the file it reads at start.
 pub const HOST_OVERRIDES: &str = "host_overrides";
 
-async fn host_overrides(state: &AppState) -> ApiResult<Map<String, Value>> {
+pub(crate) async fn host_overrides(state: &AppState) -> ApiResult<Map<String, Value>> {
     let raw = state
         .db()
         .call(|conn| store::config::meta(conn, HOST_OVERRIDES))
@@ -650,7 +650,7 @@ async fn host_overrides(state: &AppState) -> ApiResult<Map<String, Value>> {
         .unwrap_or_default())
 }
 
-async fn save_host_overrides(state: &AppState, overrides: Map<String, Value>) -> ApiResult<()> {
+pub(crate) async fn save_host_overrides(state: &AppState, overrides: Map<String, Value>) -> ApiResult<()> {
     let text = Value::Object(overrides.clone()).to_string();
     state
         .db()
@@ -1012,7 +1012,13 @@ pub async fn host(State(state): State<AppState>, Json(body): Json<Value>) -> Api
 // --- the catalogues
 
 /// A catalogue row replaced under its id (an update), in one transaction.
-async fn replace<T, F>(state: &AppState, table: &'static str, id: i64, row: T, insert: F) -> ApiResult<bool>
+pub(crate) async fn replace<T, F>(
+    state: &AppState,
+    table: &'static str,
+    id: i64,
+    row: T,
+    insert: F,
+) -> ApiResult<bool>
 where
     T: Send + 'static,
     F: FnOnce(&rusqlite::Connection, &T) -> anyhow::Result<()> + Send + 'static,
@@ -1032,7 +1038,7 @@ where
 }
 
 /// A new row's id from the table's sequence, then the insert.
-async fn insert_new<T, F>(
+pub(crate) async fn insert_new<T, F>(
     state: &AppState,
     table: &'static str,
     mut row: T,
@@ -1054,14 +1060,14 @@ where
         .await?)
 }
 
-async fn delete_from(state: &AppState, table: &'static str, id: i64) -> ApiResult<bool> {
+pub(crate) async fn delete_from(state: &AppState, table: &'static str, id: i64) -> ApiResult<bool> {
     Ok(state
         .db()
         .call(move |conn| store::catalog::delete_row(conn, table, id))
         .await?)
 }
 
-fn ok_empty() -> Response {
+pub(crate) fn ok_empty() -> Response {
     StatusCode::OK.into_response()
 }
 
@@ -1074,8 +1080,54 @@ fn tags_updated(state: &AppState) {
     state.hub().broadcast("tag", json!({"action": "sync"}));
 }
 
+/// Radarr's `TagController` rule: a label, of letters, digits and hyphens.
+fn radarr_label_failures(label: &str) -> Vec<ValidationFailure> {
+    if label.is_empty() {
+        return vec![ValidationFailure::not_empty("Label", json!(label))];
+    }
+    if !label.chars().all(|c| c.is_ascii_alphanumeric() || c == '-') {
+        let mut f = rule(
+            "Label",
+            "RegularExpressionValidator",
+            "Allowed characters a-z, 0-9 and -",
+            json!(label),
+        );
+        f.placeholders = vec![("regularExpression".into(), json!("^[a-z0-9-]+$"))];
+        return vec![f];
+    }
+    Vec::new()
+}
+
+/// `TagService` of Radarr: a tag found by its label as sent, else the label
+/// in lower case inserted, which the unique index refuses when the lower
+/// case one is there.
+async fn radarr_label_taken(state: &AppState, label: &str, id: i64) -> ApiResult<()> {
+    let lower = label.to_lowercase();
+    let taken = state
+        .db()
+        .call(move |conn| {
+            Ok(store::catalog::list_tags(conn)?
+                .iter()
+                .any(|t| t.label == lower && t.id != id))
+        })
+        .await?;
+    if taken {
+        return Err(ApiError::ConflictMessage(
+            "constraint failed\nUNIQUE constraint failed: Tags.Label".into(),
+        ));
+    }
+    Ok(())
+}
+
+fn radarr(state: &AppState) -> bool {
+    state.personality() == unarr_core::Personality::Radarr
+}
+
 pub async fn tag_create(State(state): State<AppState>, Json(body): Json<Value>) -> ApiResult<Response> {
     let label = text(&body, "label");
+    if radarr(&state) {
+        check(radarr_label_failures(&label))?;
+    }
     let existing = state
         .db()
         .call({
@@ -1090,6 +1142,9 @@ pub async fn tag_create(State(state): State<AppState>, Json(body): Json<Value>) 
     let id = match existing {
         Some(t) => t.id,
         None => {
+            if radarr(&state) {
+                radarr_label_taken(&state, &label, 0).await?;
+            }
             let tag = unarr_core::model::Tag {
                 id: 0,
                 label: label.to_lowercase(),
@@ -1109,11 +1164,23 @@ pub async fn tag_update(
     Json(body): Json<Value>,
 ) -> ApiResult<Response> {
     let id = body.get("id").and_then(Value::as_i64).unwrap_or(id);
+    let label = text(&body, "label");
+    if radarr(&state) {
+        check(radarr_label_failures(&label))?;
+        radarr_label_taken(&state, &label, id).await?;
+    }
     let tag = unarr_core::model::Tag {
         id,
-        label: text(&body, "label").to_lowercase(),
+        label: label.to_lowercase(),
     };
     if !replace(&state, "tags", id, tag, store::catalog::insert_tag).await? {
+        if radarr(&state) {
+            // Radarr's update of nothing passes; the answer, read back by
+            // the id, does not.
+            return Err(ApiError::ModelNotFound(format!(
+                "Tag with ID {id} does not exist"
+            )));
+        }
         return Err(ApiError::NotFound);
     }
     tags_updated(&state);
@@ -1123,6 +1190,9 @@ pub async fn tag_update(
 
 /// `DELETE /tag/{id}`: refused while something uses it.
 pub async fn tag_delete(State(state): State<AppState>, Path(id): Path<i64>) -> ApiResult<Response> {
+    if radarr(&state) {
+        return radarr_tag_delete(&state, id).await;
+    }
     let details = crate::routes::catalog::tag_detail(State(state.clone()), Path(id)).await;
     if let Ok(Json(d)) = &details {
         let in_use = [
@@ -1146,6 +1216,38 @@ pub async fn tag_delete(State(state): State<AppState>, Path(id): Path<i64>) -> A
     }
     if delete_from(&state, "tags", id).await? {
         tags_updated(&state);
+    }
+    Ok(ok_empty())
+}
+
+/// Radarr's `TagService.Delete`: the details first, so a tag that is not
+/// there is a 404, then the conflict the movies are part of.
+async fn radarr_tag_delete(state: &AppState, id: i64) -> ApiResult<Response> {
+    let Ok(Json(d)) = crate::routes::radarr::catalog::tag_detail(State(state.clone()), Path(id)).await else {
+        return Err(ApiError::ModelNotFound(format!(
+            "Tag with ID {id} does not exist"
+        )));
+    };
+    let in_use = [
+        "movieIds",
+        "notificationIds",
+        "releaseProfileIds",
+        "delayProfileIds",
+        "importListIds",
+        "indexerIds",
+        "autoTagIds",
+        "downloadClientIds",
+    ]
+    .iter()
+    .any(|k| d[*k].as_array().is_some_and(|a| !a.is_empty()));
+    if in_use {
+        return Err(ApiError::ModelConflict(format!(
+            "Tag with ID {id} '{}' cannot be deleted since it's still in use",
+            d["label"].as_str().unwrap_or("")
+        )));
+    }
+    if delete_from(state, "tags", id).await? {
+        tags_updated(state);
     }
     Ok(ok_empty())
 }
@@ -1295,12 +1397,36 @@ fn remote_path_mapping(body: &Value, id: i64) -> unarr_core::model::RemotePathMa
     }
 }
 
+/// `RemotePathMappingService.ValidateMapping`: a host's remote path once.
+async fn remote_path_mapping_unique(
+    state: &AppState,
+    row: &unarr_core::model::RemotePathMapping,
+) -> ApiResult<()> {
+    let (id, host, remote) = (row.id, row.host.clone(), row.remote_path.clone());
+    let taken = state
+        .db()
+        .call(move |c| {
+            Ok(store::providers::list_remote_path_mappings(c)?
+                .iter()
+                .any(|m| m.id != id && m.host == host && m.remote_path == remote))
+        })
+        .await?;
+    if taken {
+        return Err(ApiError::ServerException {
+            message: "RemotePath already configured.".into(),
+            exception: "System.InvalidOperationException".into(),
+        });
+    }
+    Ok(())
+}
+
 pub async fn remote_path_mapping_create(
     State(state): State<AppState>,
     Json(body): Json<Value>,
 ) -> ApiResult<Response> {
     check(remote_path_mapping_failures(&body).await)?;
     let row = remote_path_mapping(&body, 0);
+    remote_path_mapping_unique(&state, &row).await?;
     let id = insert_new(
         &state,
         "remote_path_mappings",
@@ -1322,6 +1448,7 @@ pub async fn remote_path_mapping_update(
 ) -> ApiResult<Response> {
     check(remote_path_mapping_failures(&body).await)?;
     let row = remote_path_mapping(&body, id);
+    remote_path_mapping_unique(&state, &row).await?;
     if !replace(&state, "remote_path_mappings", id, row, |c, r| {
         store::providers::insert_remote_path_mapping(c, r)
     })
@@ -1462,6 +1589,9 @@ pub async fn delay_profile_update(
 ) -> ApiResult<Response> {
     check(delay_profile_failures(&state, &body, id).await?)?;
     let b = body.clone();
+    // Radarr's `DelayProfileService.Update` writes the order the resource
+    // carries, nothing when it carries none.
+    let sent_order = radarr(&state).then(|| int(&body, "order"));
     let done = state
         .db()
         .call(move |conn| {
@@ -1473,7 +1603,10 @@ pub async fn delay_profile_update(
             };
             let tx = conn.unchecked_transaction()?;
             store::catalog::delete_row(&tx, "delay_profiles", id)?;
-            store::providers::insert_delay_profile(&tx, &delay_profile(&b, id, old.order))?;
+            store::providers::insert_delay_profile(
+                &tx,
+                &delay_profile(&b, id, sent_order.unwrap_or(old.order)),
+            )?;
             tx.commit()?;
             Ok(true)
         })
@@ -1567,6 +1700,32 @@ pub async fn delay_profile_reorder(
 
 // release profiles
 
+/// `ReleaseProfileController`'s rules, the indexer's among them.
+async fn release_profile_failures_with_indexer(
+    state: &AppState,
+    body: &Value,
+) -> ApiResult<Vec<ValidationFailure>> {
+    let mut failures = release_profile_failures(body);
+    let indexer = int(body, "indexerId");
+    let enabled = body.get("enabled").and_then(Value::as_bool).unwrap_or(false);
+    if enabled && indexer != 0 {
+        let exists = state
+            .db()
+            .call(move |c| {
+                Ok(
+                    store::providers::list_providers(c, unarr_core::model::ProviderKind::Indexer)?
+                        .iter()
+                        .any(|p| p.id == indexer),
+                )
+            })
+            .await?;
+        if !exists {
+            failures.push(ValidationFailure::bare("IndexerId", "Indexer does not exist"));
+        }
+    }
+    Ok(failures)
+}
+
 fn release_profile_failures(body: &Value) -> Vec<ValidationFailure> {
     let required = strings(body, "required");
     let ignored = strings(body, "ignored");
@@ -1608,7 +1767,7 @@ pub async fn release_profile_create(
     State(state): State<AppState>,
     Json(body): Json<Value>,
 ) -> ApiResult<Response> {
-    check(release_profile_failures(&body))?;
+    check(release_profile_failures_with_indexer(&state, &body).await?)?;
     let id = insert_new(
         &state,
         "release_profiles",
@@ -1626,7 +1785,7 @@ pub async fn release_profile_update(
     Path(id): Path<i64>,
     Json(body): Json<Value>,
 ) -> ApiResult<Response> {
-    check(release_profile_failures(&body))?;
+    check(release_profile_failures_with_indexer(&state, &body).await?)?;
     if !replace(
         &state,
         "release_profiles",
@@ -1843,12 +2002,17 @@ fn named_failures(body: &Value, id: i64, taken: &[(i64, String)]) -> Vec<Validat
     failures
 }
 
-fn condition_failures(body: &Value) -> Vec<ValidationFailure> {
+/// The conditions' rules. Radarr's `CustomFormatController` has no
+/// `NotEmpty` on the list, only the rule that adds a bare failure;
+/// `not_empty` says whether the list's own rule is there.
+fn condition_failures(body: &Value, not_empty: bool) -> Vec<ValidationFailure> {
     let specs = body.get("specifications").cloned().unwrap_or(json!([]));
     let list = specs.as_array().cloned().unwrap_or_default();
     let mut failures = Vec::new();
     if list.is_empty() {
-        failures.push(ValidationFailure::not_empty("Specifications", specs.clone()));
+        if not_empty {
+            failures.push(ValidationFailure::not_empty("Specifications", specs.clone()));
+        }
         failures.push(ValidationFailure::bare("", "Must contain at least one Condition"));
     }
     if list
@@ -1876,7 +2040,7 @@ async fn auto_tagging_failures(state: &AppState, body: &Value, id: i64) -> ApiRe
     if tags.is_empty() {
         failures.push(ValidationFailure::not_empty("Tags", json!(tags)));
     }
-    failures.extend(condition_failures(body));
+    failures.extend(condition_failures(body, true));
     Ok(failures)
 }
 
@@ -1992,7 +2156,7 @@ async fn custom_format_failures(
         .await?;
     let taken: Vec<(i64, String)> = all.into_iter().map(|f| (f.id, f.name)).collect();
     let mut failures = named_failures(body, id, &taken);
-    failures.extend(condition_failures(body));
+    failures.extend(condition_failures(body, !radarr(state)));
     Ok(failures)
 }
 
@@ -2041,8 +2205,7 @@ pub async fn custom_format_create(
                         score: 0,
                     },
                 );
-                store::catalog::delete_row(&tx, "quality_profiles", p.id)?;
-                store::catalog::insert_quality_profile(&tx, &p)?;
+                store::catalog::update_quality_profile(&tx, &p)?;
             }
             tx.commit()?;
             Ok(row.id)
@@ -2095,8 +2258,7 @@ fn delete_custom_formats(conn: &rusqlite::Connection, ids: &[i64]) -> anyhow::Re
             changed = true;
         }
         if changed {
-            store::catalog::delete_row(&tx, "quality_profiles", p.id)?;
-            store::catalog::insert_quality_profile(&tx, &p)?;
+            store::catalog::update_quality_profile(&tx, &p)?;
         }
     }
     tx.commit()?;
@@ -2169,7 +2331,7 @@ fn size(body: &Value, key: &str) -> Option<f64> {
     body.get(key).and_then(Value::as_f64)
 }
 
-fn quality_definition_row(body: &Value, id: i64) -> unarr_core::model::QualityDefinition {
+pub(crate) fn quality_definition_row(body: &Value, id: i64) -> unarr_core::model::QualityDefinition {
     unarr_core::model::QualityDefinition {
         id,
         quality_id: body["quality"]["id"].as_i64().unwrap_or(0),
@@ -2249,7 +2411,7 @@ fn profile_items(v: &Value) -> Vec<unarr_core::model::ProfileItem> {
         .collect()
 }
 
-fn quality_profile_row(body: &Value, id: i64) -> QualityProfile {
+pub(crate) fn quality_profile_row(body: &Value, id: i64) -> QualityProfile {
     QualityProfile {
         id,
         name: text(body, "name"),

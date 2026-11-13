@@ -1,0 +1,1 @@
+{"name": "No cams", "enabled": true, "required": ["1080p"], "ignored": ["cam", "/\\bts\\b/i"], "indexerId": 999, "tags": [1]}

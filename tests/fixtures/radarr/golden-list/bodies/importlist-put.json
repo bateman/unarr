@@ -1,0 +1,13 @@
+{
+ "$from": "importlist-1",
+ "$set": {
+  "fields": [
+   {
+    "name": "listId",
+    "value": "ur0000001"
+   }
+  ],
+  "name": "IMDb Watchlist",
+  "searchOnAdd": true
+ }
+}

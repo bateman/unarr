@@ -1,0 +1,38 @@
+{
+  "body": [
+    {
+      "attemptedValue": "/nowhere/bin",
+      "errorCode": "FolderWritableValidator",
+      "errorMessage": "Folder '/nowhere/bin' is not writable by user 'root'",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "path": "/nowhere/bin",
+        "propertyName": "Recycle Bin",
+        "propertyValue": "/nowhere/bin",
+        "user": "root"
+      },
+      "propertyName": "RecycleBin",
+      "severity": "error"
+    },
+    {
+      "attemptedValue": "/nowhere/bin",
+      "errorCode": "PathExistsValidator",
+      "errorMessage": "Path '/nowhere/bin' does not exist",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "path": "/nowhere/bin",
+        "propertyName": "Recycle Bin",
+        "propertyValue": "/nowhere/bin"
+      },
+      "propertyName": "RecycleBin",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:41:12Z",
+  "request": {
+    "body": "bodies/config-mediamanagement-put-bin-missing.json",
+    "method": "PUT",
+    "path": "/api/v3/config/mediamanagement/1"
+  },
+  "status": 400
+}

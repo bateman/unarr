@@ -1,0 +1,17 @@
+{
+  "body": {
+    "colonReplacementFormat": "dash",
+    "id": 1,
+    "movieFolderFormat": "{Movie Title} ({Release Year})",
+    "renameMovies": false,
+    "replaceIllegalCharacters": false,
+    "standardMovieFormat": "{Movie Title} ({Release Year}) {Quality Full}"
+  },
+  "recordedAt": "2026-11-13T12:41:12Z",
+  "request": {
+    "body": "bodies/config-naming-put.json",
+    "method": "PUT",
+    "path": "/api/v3/config/naming/1"
+  },
+  "status": 202
+}

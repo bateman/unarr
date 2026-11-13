@@ -48,7 +48,14 @@ pub fn list_root_folders(conn: &Connection) -> anyhow::Result<Vec<RootFolder>> {
 /// `QualityDefinitionService.Execute(ResetQualityDefinitionsCommand)`:
 /// every definition's sizes back to the defaults, its title too when
 /// asked.
-pub fn reset_quality_definitions(conn: &Connection, reset_titles: bool) -> anyhow::Result<()> {
+pub fn reset_quality_definitions(
+    conn: &Connection,
+    personality: crate::Personality,
+    reset_titles: bool,
+) -> anyhow::Result<()> {
+    if personality == crate::Personality::Radarr {
+        return reset_movie_quality_definitions(conn, reset_titles);
+    }
     for default in crate::quality::SONARR_QUALITIES {
         conn.execute(
             "UPDATE quality_definitions SET min_size = ?2, max_size = ?3, preferred_size = ?4,
@@ -59,6 +66,27 @@ pub fn reset_quality_definitions(conn: &Connection, reset_titles: bool) -> anyho
                 default.min_size,
                 default.max_size,
                 default.preferred_size,
+                reset_titles,
+                default.quality.name
+            ],
+        )?;
+    }
+    Ok(())
+}
+
+/// Radarr's reset, from its own table of qualities.
+fn reset_movie_quality_definitions(conn: &Connection, reset_titles: bool) -> anyhow::Result<()> {
+    for default in crate::movies::quality::RADARR_QUALITIES {
+        let (min, max, preferred) = crate::movies::quality::default_sizes(default.quality.id);
+        conn.execute(
+            "UPDATE quality_definitions SET min_size = ?2, max_size = ?3, preferred_size = ?4,
+                title = CASE WHEN ?5 THEN ?6 ELSE title END
+             WHERE quality_id = ?1",
+            params![
+                default.quality.id,
+                min,
+                max,
+                preferred,
                 reset_titles,
                 default.quality.name
             ],
@@ -144,6 +172,28 @@ pub fn insert_quality_profile(conn: &Connection, p: &QualityProfile) -> anyhow::
     Ok(())
 }
 
+/// A profile's row rewritten in place: what a column of Radarr's alone
+/// (the language) holds stays.
+pub fn update_quality_profile(conn: &Connection, p: &QualityProfile) -> anyhow::Result<()> {
+    conn.execute(
+        "UPDATE quality_profiles SET name = ?2, cutoff = ?3, upgrade_allowed = ?4, items = ?5, format_items = ?6,
+            min_format_score = ?7, cutoff_format_score = ?8, min_upgrade_format_score = ?9
+         WHERE id = ?1",
+        params![
+            p.id,
+            p.name,
+            p.cutoff,
+            p.upgrade_allowed,
+            to_json(&p.items)?,
+            to_json(&p.format_items)?,
+            p.min_format_score,
+            p.cutoff_format_score,
+            p.min_upgrade_format_score
+        ],
+    )?;
+    Ok(())
+}
+
 pub fn list_quality_profiles(conn: &Connection) -> anyhow::Result<Vec<QualityProfile>> {
     let mut stmt = conn.prepare(
         "SELECT id, name, cutoff, upgrade_allowed, items, format_items, min_format_score, cutoff_format_score,
@@ -181,6 +231,7 @@ pub fn delete_row(conn: &Connection, table: &str, id: i64) -> anyhow::Result<boo
         "remote_path_mappings",
         "custom_filters",
         "import_list_exclusions",
+        "import_exclusions",
         "auto_tagging",
     ];
     anyhow::ensure!(TABLES.contains(&table), "not a catalogue table: {table}");

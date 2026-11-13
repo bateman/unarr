@@ -1,0 +1,19 @@
+{
+  "body": {
+    "allowHardcodedSubs": false,
+    "availabilityDelay": 0,
+    "id": 1,
+    "maximumSize": 0,
+    "minimumAge": 0,
+    "preferIndexerFlags": false,
+    "retention": 0,
+    "rssSyncInterval": 100,
+    "whitelistedHardcodedSubs": ""
+  },
+  "recordedAt": "2026-11-13T12:41:12Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/config/indexer"
+  },
+  "status": 200
+}

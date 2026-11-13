@@ -1,0 +1,1 @@
+{"$from": "config-mediamanagement", "$set": {"autoUnmonitorPreviouslyDownloadedMovies": false, "recycleBinCleanupDays": 3, "minimumFreeSpaceWhenImporting": 200, "copyUsingHardlinks": false, "importExtraFiles": true, "extraFileExtensions": "srt,nfo", "fileDate": "cinemas", "rescanAfterRefresh": "afterManual", "deleteEmptyFolders": true, "skipFreeSpaceCheckWhenImporting": true}}

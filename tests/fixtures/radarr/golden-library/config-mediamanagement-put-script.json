@@ -1,0 +1,24 @@
+{
+  "body": [
+    {
+      "attemptedValue": "script.sh",
+      "errorCode": "PathValidator",
+      "errorMessage": "Invalid Path: 'script.sh'",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "path": "script.sh",
+        "propertyName": "Script Import Path",
+        "propertyValue": "script.sh"
+      },
+      "propertyName": "ScriptImportPath",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:41:12Z",
+  "request": {
+    "body": "bodies/config-mediamanagement-put-script.json",
+    "method": "PUT",
+    "path": "/api/v3/config/mediamanagement/1"
+  },
+  "status": 400
+}

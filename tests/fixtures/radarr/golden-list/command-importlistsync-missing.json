@@ -1,0 +1,33 @@
+{
+  "body": {
+    "body": {
+      "definitionId": 999,
+      "isExclusive": false,
+      "isLongRunning": false,
+      "isTypeExclusive": true,
+      "name": "ImportListSync",
+      "requiresDiskAccess": false,
+      "sendUpdatesToClient": true,
+      "suppressMessages": false,
+      "trigger": "manual",
+      "updateScheduledTask": false
+    },
+    "commandName": "Import List Sync",
+    "id": 472965,
+    "name": "ImportListSync",
+    "priority": "normal",
+    "queued": "2026-11-13T13:35:01Z",
+    "result": "unknown",
+    "sendUpdatesToClient": true,
+    "status": "queued",
+    "trigger": "manual",
+    "updateScheduledTask": false
+  },
+  "recordedAt": "2026-11-13T13:35:01Z",
+  "request": {
+    "body": "bodies/command-importlistsync-missing.json",
+    "method": "POST",
+    "path": "/api/v3/command"
+  },
+  "status": 201
+}

@@ -211,9 +211,12 @@ async fn blocklist_resources(state: &AppState, rows: Vec<MovieBlocklistEntry>) -
 pub async fn blocklist(State(state): State<AppState>, uri: Uri) -> ApiResult<Response> {
     let p = Params::from_uri(&uri);
     let refused = |name: &str, message: String| {
+        // Measured against the original: a value it cannot bind from the
+        // query of a paged list answers plain JSON, where the problem
+        // details of a body or of a missing route say `problem+json`.
         crate::error::validation_problem(
             crate::error::BAD_REQUEST_TYPE_RFC9110,
-            "application/problem+json; charset=utf-8",
+            "application/json; charset=utf-8",
             json!({ name: [message] }),
         )
     };

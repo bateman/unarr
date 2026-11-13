@@ -1,0 +1,33 @@
+{
+  "body": {
+    "body": {
+      "installMajorUpdate": false,
+      "isExclusive": false,
+      "isLongRunning": false,
+      "isTypeExclusive": false,
+      "name": "ApplicationCheckUpdate",
+      "requiresDiskAccess": false,
+      "sendUpdatesToClient": true,
+      "suppressMessages": false,
+      "trigger": "manual",
+      "updateScheduledTask": true
+    },
+    "commandName": "Application Check Update",
+    "id": 472960,
+    "name": "ApplicationCheckUpdate",
+    "priority": "normal",
+    "queued": "2026-11-13T15:38:16Z",
+    "result": "unknown",
+    "sendUpdatesToClient": true,
+    "status": "queued",
+    "trigger": "manual",
+    "updateScheduledTask": true
+  },
+  "recordedAt": "2026-11-13T15:38:16Z",
+  "request": {
+    "body": "bodies/command-check-update.json",
+    "method": "POST",
+    "path": "/api/v3/command"
+  },
+  "status": 201
+}

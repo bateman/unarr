@@ -1,0 +1,14 @@
+{
+ "$from": "importlist-after-put",
+ "$set": {
+  "id": 0,
+  "name": "IMDb Top 250",
+  "enableAuto": false,
+  "fields": [
+   {
+    "name": "listId",
+    "value": "top250"
+   }
+  ]
+ }
+}

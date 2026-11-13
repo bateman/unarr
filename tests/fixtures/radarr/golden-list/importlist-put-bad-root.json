@@ -1,0 +1,24 @@
+{
+  "body": [
+    {
+      "attemptedValue": "/not/there",
+      "errorCode": "RootFolderExistsValidator",
+      "errorMessage": "Root folder '/not/there' does not exist",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "path": "/not/there",
+        "propertyName": "Root Folder Path",
+        "propertyValue": "/not/there"
+      },
+      "propertyName": "RootFolderPath",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T13:34:06Z",
+  "request": {
+    "body": "bodies/importlist-put-bad-root.json",
+    "method": "PUT",
+    "path": "/api/v3/importlist/1"
+  },
+  "status": 400
+}

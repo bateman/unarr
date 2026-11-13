@@ -1,0 +1,1 @@
+{"$from": "collection-41", "$set": {"monitored": true, "searchOnAdd": false, "minimumAvailability": "announced", "qualityProfileId": 4}}

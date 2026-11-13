@@ -1,0 +1,1359 @@
+{
+ "TmdbId": 1124,
+ "ImdbId": "tt0482571",
+ "Title": "The Prestige",
+ "Overview": "A mysterious story of two magicians whose intense rivalry leads them on a life-long battle for supremacy -- full of obsession, deceit and jealousy with dangerous and deadly consequences.",
+ "OriginalTitle": "The Prestige",
+ "OriginalLanguage": "en",
+ "TitleSlug": "1124",
+ "Runtime": 131,
+ "Popularity": 18.951,
+ "Year": 2006,
+ "Premier": "2006-10-17T00:00:00Z",
+ "InCinema": "2006-10-19T00:00:00Z",
+ "PhysicalRelease": "2007-06-06T00:00:00Z",
+ "DigitalRelease": "2009-09-01T00:00:00Z",
+ "Images": [
+  {
+   "CoverType": "Poster",
+   "Url": "https://image.tmdb.org/t/p/original/Ag2B2KHKQPukjH7WutmgnnSNurZ.jpg"
+  },
+  {
+   "CoverType": "Fanart",
+   "Url": "https://image.tmdb.org/t/p/original/yaExZh6qE2cfyK3o4kAMEq0mkgy.jpg"
+  }
+ ],
+ "Ratings": [
+  {
+   "Count": 18448,
+   "Value": 8.212,
+   "Origin": "Tmdb",
+   "Type": "User"
+  }
+ ],
+ "MovieRatings": {
+  "Tmdb": {
+   "Count": 18448,
+   "Value": 8.212,
+   "Type": "User"
+  },
+  "Imdb": {
+   "Count": 1640237,
+   "Value": 8.5,
+   "Type": "User"
+  },
+  "Metacritic": {
+   "Count": 0,
+   "Value": 66,
+   "Type": "User"
+  },
+  "RottenTomatoes": {
+   "Count": 0,
+   "Value": 77,
+   "Type": "User"
+  },
+  "Trakt": {
+   "Count": 30755,
+   "Value": 8.46334,
+   "Type": "User"
+  }
+ },
+ "Genres": [
+  "Drama",
+  "Mystery",
+  "Science Fiction"
+ ],
+ "Keywords": [
+  "19th century",
+  "based on novel or book",
+  "bittersweet",
+  "class",
+  "class society",
+  "competition",
+  "cruelty",
+  "diary",
+  "dying and death",
+  "hanging",
+  "hostility",
+  "illusion",
+  "jail cell",
+  "london, england",
+  "magic",
+  "magician",
+  "mind-blowing",
+  "nikola tesla",
+  "obsession",
+  "partner",
+  "rivalry",
+  "secret",
+  "steampunk",
+  "suicide",
+  "tesla coil",
+  "tricks",
+  "twist"
+ ],
+ "AlternativeTitles": [
+  {
+   "Title": "致命魔术",
+   "Type": "Tmdb",
+   "Language": "zh"
+  },
+  {
+   "Title": "Престиж",
+   "Type": "Tmdb",
+   "Language": "ru"
+  },
+  {
+   "Title": "El Truco Final (El Prestigio)",
+   "Type": "Tmdb",
+   "Language": "es"
+  },
+  {
+   "Title": "Prestiż",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "El Truco Final",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "프레스티지",
+   "Type": "Tmdb",
+   "Language": "ko"
+  },
+  {
+   "Title": "プレステージ",
+   "Type": "Tmdb",
+   "Language": "ja"
+  },
+  {
+   "Title": "حیثیت",
+   "Type": "Tmdb",
+   "Language": "fa"
+  },
+  {
+   "Title": "O Grande Truque",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "O Terceiro Passo",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "Prestij",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "A tökéletes trükk",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "Ảo Thuật Gia Đấu Trí",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "The Prestige",
+   "Type": "Tmdb",
+   "Language": "ko"
+  }
+ ],
+ "Translations": [
+  {
+   "Title": "The Prestige",
+   "Overview": "A mysterious story of two magicians whose intense rivalry leads them on a life-long battle for supremacy -- full of obsession, deceit and jealousy with dangerous and deadly consequences.",
+   "Language": "en-US"
+  },
+  {
+   "Title": "Prestige - Die Meister der Magie",
+   "Overview": "Im viktorianischen Zeitalter, zur Zeit der Jahrhundertwende, lernen sich die konkurrierenden Magier Robert Angier und Alfred Borden kennen. Aus freundschaftlicher, jugendlicher Konkurrenz erwächst jedoch bald etwas wesentlich Schlimmeres, denn nicht nur neidet jeder dem Anderen das Talent, Roberts Frau stirbt auch bei einem von Alfreds risikobewehrten Tricks. Über Jahre belauern und bekämpfen sie sich gegenseitig und reißen damit ihr gesamtes Umfeld in die Tiefe, nur um hinter die Tricks des jeweils anderen zu kommen. Dabei schrecken die beiden am Ende nicht einmal vor Mord zurück, denn das \"Prestige\", der unglaubliche letzte Teil eines perfekten Zaubertricks, ist jeden Einsatz wert...",
+   "Language": "de-DE"
+  },
+  {
+   "Title": "The Prestige",
+   "Overview": "Due giovani maghi apprendisti, Robert Angier e Alfred Borden, vengono istruiti e seguiti da Cutter, un ingegnere illusionista ed ex mago, ma durante un numero in cui una donna viene legata e messa in una cassa di vetro piena d'acqua, qualcosa va storto e Angier incolperà l'amico dell'accaduto, tentando di vendicarsi. Inizia così un crudele gioco tra i due uomini su chi sia il migliore e la rivalità si trasformerà pian piano in ossessione.",
+   "Language": "it-IT"
+  },
+  {
+   "Title": "A Tökéletes trükk",
+   "Overview": "A bűvészek a múlt századforduló Londonjának legnagyobb sztárjai. Két fiatal varázsló van feljövőben. A feltűnő és kifinomult Robert Angier a közönség kedvence. A kissé bárdolatlan, egyszerű Alfred Borden viszont igazi géniusz, de hiányzik belőle az a képesség, hogy lebilincselje nézőközönségét. Eleinte barátsággal és tisztelettel viseltetnek egymás iránt, de mikor a nagy mutatványuk rosszul sül el, egy életre ellenséggé válnak. Ettől kezdve legfőbb vágyuk, hogy legyőzzék a másikat. Minden trükk és minden fellépés egyre fokozza a gyilkos versenyt közöttük.",
+   "Language": "hu-HU"
+  },
+  {
+   "Title": "The Prestige",
+   "Overview": "Ystävykset Robert ja Alfred ovat taikureita, joista tulee toistensa kilpailijoita. Kun Alfred esittelee kaikkien aikojen temppunsa, Robert haluaa tietää, kuinka se tehdään. Mutta mitä enemmän hän tutkii temppua, sitä enemmän alkaa näyttää siltä, ettei mitään temppua olekaan.",
+   "Language": "fi-FI"
+  },
+  {
+   "Title": "致命魔术",
+   "Overview": "19世纪末的伦敦，罗伯特·安吉尔与阿尔弗雷德·伯登原本是共同登台的魔术师，却因一次舞台事故反目成仇。此后，两人各自发展魔术事业，为了超越对方，不断推出更加惊人的表演，甚至不惜窥探和破坏彼此的魔术秘密。当伯登展示出一个几乎无法破解的幻术后，安吉尔愈发执着于揭开其中的奥秘。随着较量不断升级，两人的竞争逐渐演变成一场充满欺骗、报复与危险的对决……",
+   "Language": "zh-CN"
+  },
+  {
+   "Title": "Prestij",
+   "Overview": "19. yüzyılın sonlarında Londra'da yaşayan Robert Angier ve Alfred Borden, trajik bir kazanın ardından birbirine düşman kesilen iki yetenekli sihirbazdır. Zamanla rakibinin üstün yeteneğini ve imza hilesini çözmeyi takıntı haline getiren ikili, sahnede birbirini alt etmek için sınır tanımayan amansız bir savaşa girişir. İhtiras, kıskançlık ve aldatmacayla örülü bu rekabet, her ikisi için de geri dönülemez ve ölümcül bir saplantıya dönüşür.",
+   "Language": "tr-TR"
+  },
+  {
+   "Title": "Le Prestige",
+   "Overview": "Londres, au début du siècle dernier… Robert Angier et Alfred Borden sont deux magiciens surdoués, promis dès leur plus jeune âge à un glorieux avenir. Une compétition amicale les oppose d'abord l'un à l'autre, mais l'émulation tourne vite à la jalousie, puis à la haine. Devenus de farouches ennemis, les deux rivaux vont s'efforcer de se détruire l'un l'autre en usant des plus noirs secrets de leur art. Cette obsession aura pour leur entourage des conséquences dramatiques…",
+   "Language": "fr-FR"
+  },
+  {
+   "Title": "O Terceiro Passo",
+   "Overview": "Durante a época vitoriana, dois mágicos desenvolvem uma terrível rivalidade que se alimenta de truques e de uma vontade insaciável de desvendar os segredos um do outro. Robert é sofisticado e tem o dom do espectáculo, enquanto Alfred, apesar de ser genial na criação, não tem os dotes da apresentação dos truques. Os dois começam por colaborar mas, truque após truque, a concorrência aumenta e, entre ciência e espectáculo, trilham-se caminhos cujos resultados só podem ser fatais.",
+   "Language": "pt-PT"
+  },
+  {
+   "Title": "El truco final (El prestigio)",
+   "Overview": "Robert Angier es un ilusionista respetado que se obsesiona con uno de los trucos de su rival Alfred Borden. Para conseguir el truco hará todo lo posible, sin saber hasta qué punto cambiará su vida...",
+   "Language": "es-ES"
+  },
+  {
+   "Title": "Престиж",
+   "Overview": "Роберт и Альфред - фокусники-иллюзионисты, которые на рубеже XIX и XX веков соперничали друг с другом в Лондоне. С годами их дружеская конкуренция на профессиональной почве перерастает в настоящую войну. Они готовы на все, чтобы выведать друг у друга секреты фантастических трюков и сорвать их исполнение. Непримиримая вражда, вспыхнувшая между ними, начинает угрожать жизни окружающих их людей…",
+   "Language": "ru-RU"
+  },
+  {
+   "Title": "Dokonalý trik",
+   "Overview": "Hugh Jackman a Christian Bale hrají dva mladé kouzelníky, jejichž rivalita je dostane až na vrchol slávy — ale s hroznými následky. Zrovna když se dva přátelé a kouzelníci začínají učit své umění, Robert Angier a Alfred Borden se po náhlé tragédii stanou zapřisáhlými nepřáteli. Oba zasvětí své životy soupeření na londýnském jevišti a jejich oběti, aby pokračoval stále více smrtící koloběh pomsty, vedou ke slávě a tragédii.",
+   "Language": "cs-CZ"
+  },
+  {
+   "Title": "Prestiż",
+   "Overview": "Tajemnicza opowieść o dwóch iluzjonistach między którymi rodzi się zażarta rywalizacja, która przeradza się w wojnę na sztuczki i nieposkromione pragnienie odkrycia tajemnic zawodowych rywala. Gdy nadchodzi chwila konfrontacji obu bohaterów - odwagi z pragnieniem, estradowego talentu z nauką i ambicji z przyjaźnią - skutki stają się śmiertelnie niebezpieczne.",
+   "Language": "pl-PL"
+  },
+  {
+   "Title": "The Prestige",
+   "Overview": "London i slutet av 1800-talet. En mystisk berättelse om två magiker vars intensiva rivalitet leder dem in i en livslång kamp om överhöghet – full av besatthet, bedrägeri och svartsjuka med farliga och dödliga konsekvenser.",
+   "Language": "sv-SE"
+  },
+  {
+   "Title": "The Prestige",
+   "Overview": "Rupert Angier en Alfred Borden zijn al van jongs af aan, toen ze nog lerende goochelaars waren, elkaars rivalen geweest. Nu, rond 1900, zijn ze beiden volleerde illusionisten en is hun rivaliteit tot immense proporties gegroeid.",
+   "Language": "nl-NL"
+  },
+  {
+   "Title": "The Prestige",
+   "Overview": "Man siger, at konkurrence er sundt, men for de to tryllekunstnere Robert Angie og Alfred Borden har det taget overhånd. Fra de mødtes som helt unge, har de konkurreret om at være den bedste, og det har udviklet sig til en intens og altomsluttende besættelse, som bryder ud i lys lue, da Alfred præsenterer det mest mystiske og fascinerende trick nogensinde.",
+   "Language": "da-DK"
+  },
+  {
+   "Title": "The Prestige",
+   "Overview": "Έπειτα από ένα τρομερό ατύχημα, ο ανταγωνισμός ανάμεσα σε δυο φιλόδοξους ταχυδακτυλουργούς φουντώνει. Στόχος, να δημιουργήσουν την απόλυτη ψευδαίσθηση... ακόμα κι αν χρειαστεί να θυσιάσουν τα πάντα.",
+   "Language": "el-GR"
+  },
+  {
+   "Title": "프레스티지",
+   "Overview": "관객을 사로잡는 쇼맨십의 로버트 앤지어와 기발한 기술을 가진 알프레드 보든은 같은 무대에서 일하며 최고의 마술사를 꿈꾼다. 하지만 수중 탈출 마술 도중 벌어진 사고가 두 사람의 관계를 무너뜨리고, 함께 품었던 꿈은 상대를 꺾어야 한다는 집착으로 바뀐다. 각자의 공연을 시작한 뒤에도 이들은 서로의 무대에 숨어들어 기술을 알아내고 상대의 성공을 방해한다. 보든이 설명하기 어려운 마술을 선보이자 앤지어는 그 비밀을 알아내는 데 더 많은 것을 걸기 시작한다. 마침내 조수 올리비아를 보든에게 접근시키면서 무대 위 경쟁은 두 사람과 가까운 이들의 관계까지 끌어들인다. 관객에게 완벽한 환상을 보여 주려는 욕망과 상대에게 패배할 수 없다는 분노가 두 마술사를 위험한 선택으로 몰아간다.",
+   "Language": "ko-KR"
+  },
+  {
+   "Title": "יוקרה",
+   "Overview": "שני קוסמים מתחרים זה בזה בקסמים נועזים, העיקר לגלות את סודותיו של היריב, אבל התחרות מתחילה לגבות קורבנות.",
+   "Language": "he-IL"
+  },
+  {
+   "Title": "حیثیت",
+   "Overview": "داستان فیلم درباره دو تردست در سال‌های نخست قرن بیستم است. آلفرد بوردن (کریستین بل) و روپرت انجی‌یر (هیو جکمن) دو دوست که در جوانی کار شعبده‌بازی را با هم آغاز کرده‌اند با مرگ همسر روپرت در یکی از شعبده‌بازی‌ها به دشمنانی سخت بدل می‌شود. سال‌ها می‌گذرد آن‌ها تبدیل به شعبده‌بازانی نامی می‌شوند که در کنار تلاش برای بهتر شدن در کارشان، سعی می‌کنند از اسرار کار دیگری آگاه شوند و انتقام گذشته‌ها بگیرند. پای دانشمندانی همچون تسلا نیز به این رقابت باز می‌شود با اختراعاتی میان علم و جادو…",
+   "Language": "fa-IR"
+  },
+  {
+   "Title": "プレステージ",
+   "Overview": "ライバルとして競い合う2人の天才マジシャン、アンジャーとボーデン。ある日、水槽脱出に失敗したアンジャーが溺死し、ボーデンは殺人罪で逮捕されて……。伏線だらけの衝撃サスペンス。",
+   "Language": "ja-JP"
+  },
+  {
+   "Title": "Prestigiul",
+   "Overview": "În Londra victoriană, doi magicieni talentați ajung rivali înverșunați după ce o tragedie le schimbă viețile. Pe măsură ce fiecare încearcă să creeze iluzia perfectă și să descopere secretele celuilalt, competiția lor devine o obsesie periculoasă, cu consecințe tot mai grave.",
+   "Language": "ro-RO"
+  },
+  {
+   "Title": "Престиж",
+   "Overview": "Има ли тайна, заради която сте готови да убивате? В този наелектризиращ, изпълнен с напрежение трилър двама илюзионисти в безжалостната си конкуренция стигат до смъртоносни измами.",
+   "Language": "bg-BG"
+  },
+  {
+   "Title": "Dokonalý trik",
+   "Overview": "Robert Angier a Alfred Borden spolu súťažili už od doby, kedy ako mladí čarodejníci začínali. Ich priateľská rivalita však skončila, keď Alfred prišiel s trikom, ktorý zanechal všetkých divákov vrátane Roberta v úžase. Ako dokázal niečo tak úžasného? Táto otázka Robertovi stále vŕta hlavou. Oveľa dôležitejšie však je, ako taký dokonalý trik napodobniť. Za každú cenu musí zistiť aké tajomstvo Alfred skrýva. Ide tu predsa o jeho prestíž.",
+   "Language": "sk-SK"
+  },
+  {
+   "Title": "O Grande Truque",
+   "Overview": "No século 19, em Londres, dois amigos ilusionistas e mágicos, Alfred Borden e Rupert Angier, acabam construindo uma rivalidade, uma batalha por supremacia, que se estende ao longo dos anos e que se transforma em obsessão, cujos resultados serão inevitavelmente trágicos.",
+   "Language": "pt-BR"
+  },
+  {
+   "Title": "Престиж",
+   "Overview": "Роберт Енжер і Альфред Борден - фокусники-ілюзіоністи, які на межі XIX і XX століть змагалися один з одним в Лондоні. З роками їх дружня конкуренція на професійному ґрунті переростає в справжню війну. Вони готові на все, щоб вивідати один у одного секрети фантастичних трюків і зірвати їх виконання. Непримиренна ворожнеча, що спалахнула між ними, починає загрожувати життю людей, що їх оточують…",
+   "Language": "uk-UA"
+  },
+  {
+   "Title": "Skrivnostna sled",
+   "Overview": "Rupert Angier (Jackman) in Alfred Borden (Bale) sta slavna londonska čarovnika, ki poleg izrednih spretnosti, očarljivosti in talenta posedujeta tudi močno tekmovalno žilico. Njuno rivalstvo za zdaj še ni ušlo nadzoru, toda kmalu se vse to spremeni. Nekega dne Alfred izvede osupljivo iluzijo, za katero se zdi, da zanjo ne obstaja nobena logična razlaga. Razjarjeni Rupert je odločen, da bo odkril najgloblje skrivnosti svojega tekmeca. Njun odnos se tako spremeni v goreče sovraštvo, ki ju popolnoma prevzame in slabo vpliva na njuno poklicno ter zasebno življenje.",
+   "Language": "sl-SI"
+  },
+  {
+   "Title": "頂尖對決",
+   "Overview": "兩個敵對魔術師的精采生平，兩人因極度對立而展開長達一生的對決，狂熱、欺騙與忌妒讓雙方企圖凌駕另一方，彼此皆不惜身陷危險與致命的後果。從他們當年還是魔術師新秀時首度相遇，勞勃安吉爾與艾佛瑞波登就成為勁敵，他們的友情競爭逐步轉變成敵意對立，不僅彼此成為生活中的凶狠敵手，更讓他們週遭親友也陷入致命危機..",
+   "Language": "zh-TW"
+  },
+  {
+   "Title": "El Gran Truco",
+   "Overview": "Robert Angier es un ilusionista respetado que se obsesiona con uno de los trucos de su rival Alfred Borden. Para conseguir el truco hará todo lo posible, sin saber hasta qué punto cambiará su vida...",
+   "Language": "es-MX"
+  },
+  {
+   "Title": "Prestiž",
+   "Overview": "Godine 1878, dva mlada mađioničara sukobe se u mračnom salonu tokom izvedbe točke. Od tog trenutka nadalje, njihovi životi postanu mreža laži, prevara i razotkrivanja, tajni i otkrića, dok se međusobno bore kako bi nadmašili i uništili jedan drugoga. Njihovo suparništvo obojicu dovodi do vrha karijere, no pod veliku cijenu.",
+   "Language": "hr-HR"
+  },
+  {
+   "Title": "Престиж",
+   "Overview": "У овом напетом филму, причи пуној преокрета и тајни, два магичара викторијанског доба започињу моћно ривалство које ће ескалирати у борбу триковима и неутаживу жеђ за откривањем тајни заната оног другог.",
+   "Language": "sr-RS"
+  },
+  {
+   "Title": "Ilūzija",
+   "Overview": "",
+   "Language": "lv-LV"
+  },
+  {
+   "Title": "Prestižas",
+   "Overview": "Prašmatni ir rafinuota istorija, kupina šokiruojančių apgavysčių, triukų ir magijos, įtrauks į tamsų, paslaptingą ir jaudinantį amžiaus pradžios Londono magijos pasaulį, kuriame sudėtingiausi triukai balansuoja ant žmogiškųjų galimybių ribos…Jūs turėsite garbės dalyvauti savotiškame magijos spektaklyje, kurio pagrindiniai dalyviai yra du talentingi iliuzionistai, tapę nesutaikomais priešais ir apakinti aistros įminti vienas kito paslaptis, tarp kurių – ir nepakartojamas triukas Naujasis perkeliamas žmogus...",
+   "Language": "lt-LT"
+  },
+  {
+   "Title": "死亡魔法",
+   "Overview": "在上世紀初的倫敦，其時魔術師具有特殊地位，受到上流社會的崇拜。兩位新進魔術師羅拔．安格 (曉治．積曼飾) 及艾法．布丹 (基斯頓．比爾飾)，正朝著魔法之路揚名立萬。他倆開始時是互相欣賞的朋友及好拍檔。但在一次表演失敗後，兩人即懷怨恨，各走極端，誓要將對方比下去。他們的積怨癒深，魔法比併癒加詭異危險，在科學天才尼高利泰沙 (大衞．寶兒飾) 的推波助瀾下，兩人的決鬥更達到白熱化，甚至危害身邊的人。在重重詭秘驚異的魔法中，人性的黑暗面完全被戮破。",
+   "Language": "zh-HK"
+  },
+  {
+   "Title": "The Prestige",
+   "Overview": "Finnes det en hemmelighet du kunne ha drept for å få høre? To unge tryllekunstnere i Victoriatidens England utkjemper en vennskapelig konkurranse som utarter til bitter rivalisering etter at et dristig triks ender i tragedie. De setter eget og andres liv i fare for å flytte magiske grenser og knuse hverandre.",
+   "Language": "no-NO"
+  },
+  {
+   "Title": "Ảo Thuật Gia Đấu Trí",
+   "Overview": "The Prestige xoay quanh hai ảo thuật gia đại tài là Robert Angier (Hugh Jackman) và Alfred Borden (Christian Bale). Ban đầu họ là những người bạn, thế nhưng bởi giấc mơ tạo ra tiết mục hấp dẫn nhất quá lớn, khiến họ đã bị cuốn vào một cuộc cạnh tranh một mất một còn với kết cục bi thảm.  Cũng mang đậm dấu ấn như bao phim khác của Christopher Nolan, The Prestige có kết cấu tương đối phức tạp. Cách kể chuyện không theo trình tự thời gian dẫn đến có đôi chỗ người xem sẽ cảm thấy mơ hồ, khó nắm bắt.",
+   "Language": "vi-VN"
+  },
+  {
+   "Title": "პრესტიჟი",
+   "Overview": "",
+   "Language": "ka-GE"
+  },
+  {
+   "Title": "العظمة",
+   "Overview": "يتنافس الساحران روبرت أنجير وألفريد بوردن في لندن أواخر القرن التاسع عشر، بعدما تحولت صداقتهما إلى عداوة شرسة بسبب حادث مأساوي. يسعى كل منهما إلى التفوق على الآخر وتقديم الخدعة الأكثر إبهارًا، فيبدأ الصراع بينهما بالتصاعد حتى يصبح هوسًا يدفعهما إلى التضحية بكل شيء من أجل كشف أسرار منافسه والتفوق عليه. ومع استخدامهما أساليب أكثر خطورة وغموضًا، تتشابك الخدع والأسرار والخيانة، لتكشف المنافسة عن عواقب مدمرة تتجاوز حدود المسرح.",
+   "Language": "ar-SA"
+  },
+  {
+   "Title": "เดอะ เพรสทีจ ศึกมายากลหยุดโลก",
+   "Overview": "เป็นภาพยนตร์แนวเขย่าขวัญลึกลับของอเมริกัน-อังกฤษ ที่เขียน กำกับ และอำนวยการสร้างโดยคริสโตเฟอร์ โนแลน ซึ่งบทภาพยนตร์ดัดแปลงจากผลงานนวนิยาย ค.ศ. 1995 ในชื่อ เดอะเพรสทิจ ของคริสโตเฟอร์ พริสท์ โดยเรื่องราวกล่าวถึง โรเบิร์ต แองกิเออร์ และ อัลเฟรด บอร์เดน สองคู่แข่งนักมายากลเวทีในกรุงลอนดอนช่วงปลายศตวรรษที่ 19 ที่ถูกครอบงำจิตใจจากความต้องการที่จะสร้างมายากลเวทีที่ดีที่สุด พวกเขาได้ร่วมแข่งขันกันโดยสูญเสียความเป็นมนุษย์และก่อให้เกิดผลลัพธ์อันน่าเศร้า",
+   "Language": "th-TH"
+  },
+  {
+   "Title": "El truc final",
+   "Overview": "Robert Angier és un il·lusionista respectat que s'obsessiona amb un dels trucs del rival Alfred Borden. Per aconseguir el truc farà tot el possible, sense saber fins a quin punt canviarà la vida...",
+   "Language": "ca-ES"
+  },
+  {
+   "Title": "Lõppvaatus",
+   "Overview": "19. sajandi lõpus kohtuvad Londonis esimest korda kaks tõusuteel olevat mustkunstnikku Robert Angier ja Alfred Borden. Nende sõbralikult alanud võistlus muutub peagi kibestunud rivaalitsemisest kantud lahinguks, mis seab ohtu ka kõik nende läheduses olijad.",
+   "Language": "et-EE"
+  },
+  {
+   "Title": "The Prestige",
+   "Overview": "Im viktorianischen Zeitalter, zur Zeit der Jahrhundertwende, lernen sich die konkurrierenden Magier Robert Angier und Alfred Borden kennen. Aus freundschaftlicher, jugendlicher Konkurrenz erwächst jedoch bald etwas wesentlich Schlimmeres, denn nicht nur neidet jeder dem Anderen das Talent, Roberts Frau stirbt auch bei einem von Alfreds risikobewehrten Tricks. Über Jahre belauern und bekämpfen sie sich gegenseitig und reißen damit ihr gesamtes Umfeld in die Tiefe, nur um hinter die Tricks des jeweils anderen zu kommen. Dabei schrecken die beiden am Ende nicht einmal vor Mord zurück, denn das \"Prestige\", der unglaubliche letzte Teil eines perfekten Zaubertricks, ist jeden Einsatz wert.",
+   "Language": "de-AT"
+  },
+  {
+   "Title": "Le prestige",
+   "Overview": "Londres, au début du siècle dernier… Robert Angier et Alfred Borden sont deux magiciens surdoués, promis dès leur plus jeune âge à un glorieux avenir. Une compétition amicale les oppose d'abord l'un à l'autre, mais l'émulation tourne vite à la jalousie, puis à la haine. Devenus de farouches ennemis, les deux rivaux vont s'efforcer de se détruire l'un l'autre en usant des plus noirs secrets de leur art. Cette obsession aura pour leur entourage des conséquences dramatiques…",
+   "Language": "fr-CA"
+  },
+  {
+   "Title": "जादू एक धोखा",
+   "Overview": "",
+   "Language": "hi-IN"
+  },
+  {
+   "Title": "Prestij",
+   "Overview": "İki dost və həmkarlar olan sehrbaz, gözlənilməz bir faciədən sonra amansız düşmənə çevrilirlər. Onlar bütün varlıqları ilə bu rəqabətə köklənərkən, özlərinə şöhrət gətirən, lakin dəhşətli nəticələrə səbəb olan qurbanlar verirlər.",
+   "Language": "az-AZ"
+  },
+  {
+   "Title": "جادو ایک دھوکہ",
+   "Overview": "",
+   "Language": "ur-PK"
+  },
+  {
+   "Title": "The Prestige",
+   "Overview": "Rupert Angier en Alfred Borden zijn al van jongs af aan, toen ze nog lerende goochelaars waren, elkaars rivalen geweest. Nu, rond 1900, zijn ze beiden volleerde illusionisten en is hun rivaliteit tot immense proporties gegroeid.",
+   "Language": "nl-BE"
+  }
+ ],
+ "Recommendations": [
+  {
+   "TmdbId": 198663,
+   "Title": "The Maze Runner"
+  },
+  {
+   "TmdbId": 10740,
+   "Title": "Birth"
+  },
+  {
+   "TmdbId": 450465,
+   "Title": "Glass"
+  },
+  {
+   "TmdbId": 1032892,
+   "Title": "In the Blink of an Eye"
+  },
+  {
+   "TmdbId": 12101,
+   "Title": "Soylent Green"
+  },
+  {
+   "TmdbId": 354285,
+   "Title": "The Sense of an Ending"
+  },
+  {
+   "TmdbId": 6107,
+   "Title": "Murder in Three Acts"
+  },
+  {
+   "TmdbId": 749395,
+   "Title": "Agatha and the Midnight Murders"
+  },
+  {
+   "TmdbId": 4520,
+   "Title": "Sleuth"
+  },
+  {
+   "TmdbId": 228968,
+   "Title": "Kidnapping Mr. Heineken"
+  }
+ ],
+ "Credits": {
+  "Cast": [
+   {
+    "Name": "Hugh Jackman",
+    "Order": 0,
+    "Character": "Robert Angier",
+    "TmdbId": 6968,
+    "CreditId": "52fe42e8c3a36847f802bf27",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/4Xujtewxqt6aU0Y81tsS9gkjizk.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Christian Bale",
+    "Order": 1,
+    "Character": "Alfred Borden",
+    "TmdbId": 3894,
+    "CreditId": "52fe42e8c3a36847f802bf2b",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/7Pxez9J8fuPd2Mn9kex13YALrCQ.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Michael Caine",
+    "Order": 2,
+    "Character": "Cutter",
+    "TmdbId": 3895,
+    "CreditId": "52fe42e8c3a36847f802bf2f",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/bVZRMlpjTAO2pJK6v90buFgVbSW.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Piper Perabo",
+    "Order": 3,
+    "Character": "Julia McCullough",
+    "TmdbId": 15555,
+    "CreditId": "52fe42e8c3a36847f802bf3f",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/5XrzISDEox0KubRDzJU668Oxmxy.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Rebecca Hall",
+    "Order": 4,
+    "Character": "Sarah",
+    "TmdbId": 15556,
+    "CreditId": "52fe42e8c3a36847f802bf43",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/coC58ANiDbqRIyle5zEl9QDektf.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Scarlett Johansson",
+    "Order": 5,
+    "Character": "Olivia Wenscombe",
+    "TmdbId": 1245,
+    "CreditId": "52fe42e8c3a36847f802bf33",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/TiJIJGNWk0r1Y4bYuB50clneUd.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Samantha Mahurin",
+    "Order": 6,
+    "Character": "Jess",
+    "TmdbId": 1580598,
+    "CreditId": "56c8aedfc3a368408c003e82",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/sjC2WFVNnDlh5n4O1UCxKALYK42.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "David Bowie",
+    "Order": 7,
+    "Character": "Tesla",
+    "TmdbId": 7487,
+    "CreditId": "52fe42e8c3a36847f802bf3b",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/8NHhlyuj9CJq7Q5gSCo9rQ6pbf3.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Andy Serkis",
+    "Order": 8,
+    "Character": "Alley",
+    "TmdbId": 1333,
+    "CreditId": "52fe42e8c3a36847f802bf37",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/eNGqhebQ4cDssjVeNFrKtUvweV5.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Daniel Davis",
+    "Order": 9,
+    "Character": "Judge",
+    "TmdbId": 177765,
+    "CreditId": "52fe42e8c3a36847f802bf47",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/tzUjClFGhYDcTb2hYc8uk5oYfSs.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Jim Piddock",
+    "Order": 10,
+    "Character": "Prosecutor",
+    "TmdbId": 120560,
+    "CreditId": "56d9c30bc3a3681e360226bb",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/kcEcWZVNkF1h9LQr5N60vViVZxu.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Christopher Neame",
+    "Order": 11,
+    "Character": "Defender",
+    "TmdbId": 58860,
+    "CreditId": "56d9c378c3a3682cef012047",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/6eLLa8rOAMGIjMrtedV9ERaGvZY.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Mark Ryan",
+    "Order": 12,
+    "Character": "Captain",
+    "TmdbId": 19541,
+    "CreditId": "56d9c3a0c3a3682cef01204c",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/9I0mFMnJJutVwVsCJhh3PtfqtFv.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Roger Rees",
+    "Order": 13,
+    "Character": "Owens",
+    "TmdbId": 16407,
+    "CreditId": "52fe42e8c3a36847f802bf4b",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/pVZwILdpzTXECMUvLOSu12RbTHa.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Jamie Harris",
+    "Order": 14,
+    "Character": "Sullen Warder",
+    "TmdbId": 111195,
+    "CreditId": "56d9c3d7c3a36870ac01079a",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/iqc9RropHWLe2wLCgUHtZZDJ7w.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Monty Stuart",
+    "Order": 15,
+    "Character": "Stagecoach Driver",
+    "TmdbId": 1476065,
+    "CreditId": "56d9c407c3a36870ac0107a4",
+    "Images": []
+   },
+   {
+    "Name": "Ron Perkins",
+    "Order": 16,
+    "Character": "Hotel Manager",
+    "TmdbId": 125024,
+    "CreditId": "56d9c435925141340201f4b2",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/ld3OJ0WpMv0Rcml59WuVzKoQWaB.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Ricky Jay",
+    "Order": 17,
+    "Character": "Milton",
+    "TmdbId": 10743,
+    "CreditId": "55044ad39251412bfa000ec4",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/aIRux5DCFQn1lcZa1lclWBT3kgR.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "J. Paul Moore",
+    "Order": 18,
+    "Character": "Virgil",
+    "TmdbId": 4870534,
+    "CreditId": "66b274746ca0a24c4aad3d3d",
+    "Images": []
+   },
+   {
+    "Name": "Anthony De Marco",
+    "Order": 19,
+    "Character": "Boy",
+    "TmdbId": 144162,
+    "CreditId": "56d9c47492514162b700b3dd",
+    "Images": []
+   },
+   {
+    "Name": "Chao Li Chi",
+    "Order": 20,
+    "Character": "Chung Ling Soo",
+    "TmdbId": 995587,
+    "CreditId": "56d9c4aa92514162b700b3e4",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/ppbDeOKRND51Av76pLCBWFVWZZV.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Gregory Humphreys",
+    "Order": 21,
+    "Character": "Policeman",
+    "TmdbId": 3171808,
+    "CreditId": "66b27491623741947d171a87",
+    "Images": []
+   },
+   {
+    "Name": "John B. Crye",
+    "Order": 22,
+    "Character": "Voice",
+    "TmdbId": 228954,
+    "CreditId": "56d9c5ae9251412fe8006c31",
+    "Images": []
+   },
+   {
+    "Name": "William Morgan Sheppard",
+    "Order": 23,
+    "Character": "Merrit",
+    "TmdbId": 938390,
+    "CreditId": "56d9c5ed92514162b700b41f",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/pg6ruMIClxACsA2hBUq9ulKX5AP.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Sean Howse",
+    "Order": 24,
+    "Character": "Man",
+    "TmdbId": 4860682,
+    "CreditId": "66b274c1a053e56304e53a4e",
+    "Images": []
+   },
+   {
+    "Name": "Julia Sanford",
+    "Order": 25,
+    "Character": "Elegant Lady",
+    "TmdbId": 2053053,
+    "CreditId": "66b274d2f7a06306d86f55b1",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/e2bqc4uuuX2RPsHFTiqWvPGNPqi.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Ezra Buzzington",
+    "Order": 26,
+    "Character": "Ticket Hawker",
+    "TmdbId": 59285,
+    "CreditId": "56d9c66e9251412fe8006c55",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/vnkdumEom4lVAqdh7Odsf2nZpjB.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "James Lancaster",
+    "Order": 27,
+    "Character": "Moderator",
+    "TmdbId": 178557,
+    "CreditId": "56d9c6bd925141391f00f23c",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/3cy9mgK1VMnwRp5spBJMHjm6spV.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Olivia Merg",
+    "Order": 28,
+    "Character": "Jess (Toddler)",
+    "TmdbId": 4870541,
+    "CreditId": "66b274ef0388ba231ab5bacd",
+    "Images": []
+   },
+   {
+    "Name": "Zoe Merg",
+    "Order": 29,
+    "Character": "Jess (Toddler)",
+    "TmdbId": 4870542,
+    "CreditId": "66b274f9defd11ddf0e53a56",
+    "Images": []
+   }
+  ],
+  "Crew": [
+   {
+    "Name": "Christopher Nolan",
+    "Order": 0,
+    "Job": "Director",
+    "Department": "Directing",
+    "TmdbId": 525,
+    "CreditId": "5e83ad1888bbe60013a69c6b",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/xuAIuYSmsUzKlUMBFGVZaWsY3DZ.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Christopher Nolan",
+    "Order": 1,
+    "Job": "Screenplay",
+    "Department": "Writing",
+    "TmdbId": 525,
+    "CreditId": "52fe42e8c3a36847f802bef9",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/xuAIuYSmsUzKlUMBFGVZaWsY3DZ.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Jonathan Nolan",
+    "Order": 2,
+    "Job": "Screenplay",
+    "Department": "Writing",
+    "TmdbId": 527,
+    "CreditId": "52fe42e8c3a36847f802bef3",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/qgTOwfg2B4C0ZFGAP4EnRZ7domo.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Christopher Nolan",
+    "Order": 3,
+    "Job": "Producer",
+    "Department": "Production",
+    "TmdbId": 525,
+    "CreditId": "5674abdac3a368167a000dd2",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/xuAIuYSmsUzKlUMBFGVZaWsY3DZ.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Emma Thomas",
+    "Order": 4,
+    "Job": "Producer",
+    "Department": "Production",
+    "TmdbId": 556,
+    "CreditId": "52fe42e8c3a36847f802bf11",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/utc1PS6WVWR5tknzTJqXtnD0kBp.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Aaron Ryder",
+    "Order": 5,
+    "Job": "Producer",
+    "Department": "Production",
+    "TmdbId": 554,
+    "CreditId": "52fe42e8c3a36847f802bf0b",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/2ReBSLRRFjud0Qp3BfnvLheddBj.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Charles J.D. Schlissel",
+    "Order": 6,
+    "Job": "Executive Producer",
+    "Department": "Production",
+    "TmdbId": 77512,
+    "CreditId": "5674ac0dc3a368167a000de2",
+    "Images": []
+   },
+   {
+    "Name": "Christopher Ball",
+    "Order": 7,
+    "Job": "Executive Producer",
+    "Department": "Production",
+    "TmdbId": 44633,
+    "CreditId": "5674ac3892514179e1000dcb",
+    "Images": []
+   },
+   {
+    "Name": "William Tyrer",
+    "Order": 8,
+    "Job": "Executive Producer",
+    "Department": "Production",
+    "TmdbId": 44634,
+    "CreditId": "5674ac29c3a368167c000e11",
+    "Images": []
+   },
+   {
+    "Name": "Valerie Dean",
+    "Order": 9,
+    "Job": "Executive Producer",
+    "Department": "Production",
+    "TmdbId": 962222,
+    "CreditId": "5674abef92514179db000dc7",
+    "Images": []
+   },
+   {
+    "Name": "Wally Pfister",
+    "Order": 10,
+    "Job": "Director of Photography",
+    "Department": "Camera",
+    "TmdbId": 559,
+    "CreditId": "52fe42e8c3a36847f802bf1d",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/uyWeYsERTTLjpjkE79QeSETLIoA.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "John Papsidera",
+    "Order": 11,
+    "Job": "Casting",
+    "Department": "Production",
+    "TmdbId": 561,
+    "CreditId": "56d9cfebc3a36870ac0109d2",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/egwEVyrAmdWhtuLqE5fcThZf41E.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Lee Smith",
+    "Order": 12,
+    "Job": "Editor",
+    "Department": "Editing",
+    "TmdbId": 3904,
+    "CreditId": "52fe42e8c3a36847f802bf23",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/zlnK1i7CqdzIFTFqfMsYLyt2Sk8.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Richard King",
+    "Order": 13,
+    "Job": "Supervising Sound Editor",
+    "Department": "Sound",
+    "TmdbId": 1341403,
+    "CreditId": "5674ab21c3a368167c000dcf",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/6gR9Q5Tj0LbGP3YQJegdKJvds4u.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Richard King",
+    "Order": 14,
+    "Job": "Sound Designer",
+    "Department": "Sound",
+    "TmdbId": 1341403,
+    "CreditId": "5674aafc92514179e3000d0e",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/6gR9Q5Tj0LbGP3YQJegdKJvds4u.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Nathan Crowley",
+    "Order": 15,
+    "Job": "Production Design",
+    "Department": "Art",
+    "TmdbId": 15327,
+    "CreditId": "5674a88092514179d4000d31",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/hvxjQvBCYBK2rNJhUlaLpHRVLjj.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Gary Rizzo",
+    "Order": 16,
+    "Job": "Sound Re-Recording Mixer",
+    "Department": "Sound",
+    "TmdbId": 138618,
+    "CreditId": "5674aabac3a368167c000dbf",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/m8vT9fYRLwM8WPpJiq8QIMBSueQ.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Barbara Harris",
+    "Order": 17,
+    "Job": "ADR Voice Casting",
+    "Department": "Production",
+    "TmdbId": 230436,
+    "CreditId": "5cc4cf120e0a2678a0ec3093",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/d1BGeZT2b81Wa9gCOPdrXGWUtmR.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Thom Khoury Williams",
+    "Order": 18,
+    "Job": "Stunts",
+    "Department": "Crew",
+    "TmdbId": 1452956,
+    "CreditId": "6732c6897ef2c31d78edceef",
+    "Images": []
+   },
+   {
+    "Name": "Joni Avery",
+    "Order": 19,
+    "Job": "Stunt Double",
+    "Department": "Crew",
+    "TmdbId": 1610245,
+    "CreditId": "6442cab0b3f6f504c89e1726",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/o1fDxkAnyGCU9Fs2jfUHHzfXXiS.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Stephane Ceretti",
+    "Order": 20,
+    "Job": "Visual Effects Supervisor",
+    "Department": "Visual Effects",
+    "TmdbId": 1327025,
+    "CreditId": "56d9d54dc3a3681e4a0220f2",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/1X38vdC0jUJ2vk34NyRM8gZox5G.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Rick Avery",
+    "Order": 21,
+    "Job": "Stunt Coordinator",
+    "Department": "Crew",
+    "TmdbId": 81687,
+    "CreditId": "56d9d244c3a3681e50020f29",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/7CiosKnycMKSi3UD2cXFJJNceAZ.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Lora Hirschberg",
+    "Order": 22,
+    "Job": "Sound Re-Recording Mixer",
+    "Department": "Sound",
+    "TmdbId": 1327030,
+    "CreditId": "5674aac9c3a3681680000cfc",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/8IJl1itNV99LhKg24yeIGHjYaQd.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Brian Machleit",
+    "Order": 23,
+    "Job": "Stunt Double",
+    "Department": "Crew",
+    "TmdbId": 1391698,
+    "CreditId": "6732c68e7ef2c31d78edcef9",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/k488kl4tWUWIrhsrCluhxoPIaGU.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "David Copperfield",
+    "Order": 24,
+    "Job": "Thanks",
+    "Department": "Crew",
+    "TmdbId": 189761,
+    "CreditId": "56d9d45ac3a36870ac010a83",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/9qECAXWe3vlHI5FKKceD9a1emek.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Meegan E. Godfrey",
+    "Order": 25,
+    "Job": "Stunt Double",
+    "Department": "Crew",
+    "TmdbId": 2057487,
+    "CreditId": "643ab8f7b6c26404c039e316",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/768CMWF8sWwtTvrHD7BJbiPS9xz.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Russ Fega",
+    "Order": 26,
+    "Job": "Location Manager",
+    "Department": "Production",
+    "TmdbId": 535,
+    "CreditId": "56d9c73dc3a36870ac01083f",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/d0W7kq97Ul8Iz5LZIVNDKxSly8M.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Steve Hart",
+    "Order": 27,
+    "Job": "Stunt Double",
+    "Department": "Crew",
+    "TmdbId": 2113984,
+    "CreditId": "6732c6460d758040eb4b31b9",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/uxeCotfiz0bdXfC7cXgJ0jDKv1Q.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Terry Baliel",
+    "Order": 28,
+    "Job": "Hairstylist",
+    "Department": "Costume & Make-Up",
+    "TmdbId": 589942,
+    "CreditId": "5674a9dcc3a368168b000ccb",
+    "Images": []
+   },
+   {
+    "Name": "Kevin Kavanaugh",
+    "Order": 29,
+    "Job": "Art Direction",
+    "Department": "Art",
+    "TmdbId": 15328,
+    "CreditId": "5674a8bd92514179e7000c88",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/ovTzJdjG7arCadMcnNjiqndiq6M.jpg"
+     }
+    ]
+   }
+  ]
+ },
+ "Studio": "Warner Bros. Pictures",
+ "YoutubeTrailerId": "ObGVA1WOqyE",
+ "Certifications": [
+  {
+   "Country": "AR",
+   "Certification": "+13"
+  },
+  {
+   "Country": "AT",
+   "Certification": "12"
+  },
+  {
+   "Country": "AU",
+   "Certification": "M"
+  },
+  {
+   "Country": "BE",
+   "Certification": "14"
+  },
+  {
+   "Country": "BG",
+   "Certification": "C"
+  },
+  {
+   "Country": "BR",
+   "Certification": "14"
+  },
+  {
+   "Country": "CA",
+   "Certification": "PG"
+  },
+  {
+   "Country": "CZ",
+   "Certification": "12"
+  },
+  {
+   "Country": "DE",
+   "Certification": "12"
+  },
+  {
+   "Country": "DK",
+   "Certification": "11"
+  },
+  {
+   "Country": "ES",
+   "Certification": "12"
+  },
+  {
+   "Country": "FI",
+   "Certification": "K-12"
+  },
+  {
+   "Country": "FR",
+   "Certification": "TP"
+  },
+  {
+   "Country": "GB",
+   "Certification": "12"
+  },
+  {
+   "Country": "GR",
+   "Certification": "13"
+  },
+  {
+   "Country": "HK",
+   "Certification": "IIA"
+  },
+  {
+   "Country": "HU",
+   "Certification": "16"
+  },
+  {
+   "Country": "ID",
+   "Certification": "17+"
+  },
+  {
+   "Country": "IE",
+   "Certification": "12A"
+  },
+  {
+   "Country": "IN",
+   "Certification": "U"
+  },
+  {
+   "Country": "IT",
+   "Certification": "T"
+  },
+  {
+   "Country": "JP",
+   "Certification": "G"
+  },
+  {
+   "Country": "KR",
+   "Certification": "15"
+  },
+  {
+   "Country": "MX",
+   "Certification": "B-15"
+  },
+  {
+   "Country": "MY",
+   "Certification": "18PL"
+  },
+  {
+   "Country": "NL",
+   "Certification": "12"
+  },
+  {
+   "Country": "NO",
+   "Certification": "15"
+  },
+  {
+   "Country": "NZ",
+   "Certification": "M"
+  },
+  {
+   "Country": "PH",
+   "Certification": "R-13"
+  },
+  {
+   "Country": "PL",
+   "Certification": "12"
+  },
+  {
+   "Country": "PT",
+   "Certification": "M/12"
+  },
+  {
+   "Country": "RO",
+   "Certification": "15"
+  },
+  {
+   "Country": "RU",
+   "Certification": "12+"
+  },
+  {
+   "Country": "SE",
+   "Certification": "11"
+  },
+  {
+   "Country": "SG",
+   "Certification": "PG"
+  },
+  {
+   "Country": "TH",
+   "Certification": "13"
+  },
+  {
+   "Country": "TR",
+   "Certification": "16+"
+  },
+  {
+   "Country": "TW",
+   "Certification": "保護級"
+  },
+  {
+   "Country": "US",
+   "Certification": "PG-13"
+  },
+  {
+   "Country": "ZA",
+   "Certification": "13"
+  }
+ ],
+ "Status": null,
+ "Collection": null,
+ "Homepage": "https://www.warnerbros.co.uk/movies/prestige"
+}

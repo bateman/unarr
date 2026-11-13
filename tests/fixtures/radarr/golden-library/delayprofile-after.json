@@ -1,0 +1,54 @@
+{
+  "body": [
+    {
+      "bypassIfAboveCustomFormatScore": false,
+      "bypassIfHighestQuality": true,
+      "enableTorrent": true,
+      "enableUsenet": true,
+      "id": 1,
+      "minimumCustomFormatScore": 0,
+      "order": 2147483647,
+      "preferredProtocol": "usenet",
+      "tags": [],
+      "torrentDelay": 0,
+      "usenetDelay": 0
+    },
+    {
+      "bypassIfAboveCustomFormatScore": false,
+      "bypassIfHighestQuality": false,
+      "enableTorrent": false,
+      "enableUsenet": true,
+      "id": 2,
+      "minimumCustomFormatScore": 0,
+      "order": 2,
+      "preferredProtocol": "usenet",
+      "tags": [
+        3
+      ],
+      "torrentDelay": 0,
+      "usenetDelay": 0
+    },
+    {
+      "bypassIfAboveCustomFormatScore": false,
+      "bypassIfHighestQuality": true,
+      "enableTorrent": true,
+      "enableUsenet": true,
+      "id": 3,
+      "minimumCustomFormatScore": 0,
+      "order": 1,
+      "preferredProtocol": "torrent",
+      "tags": [
+        1,
+        2
+      ],
+      "torrentDelay": 20,
+      "usenetDelay": 60
+    }
+  ],
+  "recordedAt": "2026-11-13T12:41:28Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/delayprofile"
+  },
+  "status": 200
+}

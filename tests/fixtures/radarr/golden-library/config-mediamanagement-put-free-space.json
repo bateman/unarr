@@ -1,0 +1,25 @@
+{
+  "body": [
+    {
+      "attemptedValue": 50,
+      "errorCode": "GreaterThanOrEqualValidator",
+      "errorMessage": "'Minimum Free Space When Importing' must be greater than or equal to '100'.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "comparisonProperty": "",
+        "comparisonValue": 100,
+        "propertyName": "Minimum Free Space When Importing",
+        "propertyValue": 50
+      },
+      "propertyName": "MinimumFreeSpaceWhenImporting",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:41:12Z",
+  "request": {
+    "body": "bodies/config-mediamanagement-put-free-space.json",
+    "method": "PUT",
+    "path": "/api/v3/config/mediamanagement/1"
+  },
+  "status": 400
+}

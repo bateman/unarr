@@ -1,0 +1,17 @@
+{
+  "body": [
+    {
+      "errorMessage": "Unable to connect to import list: Radarr API call resulted in an unexpected StatusCode [NotFound]. Check the log surrounding this error for details.",
+      "isWarning": false,
+      "propertyName": "",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T13:34:16Z",
+  "request": {
+    "body": "bodies/importlist-test-missing.json",
+    "method": "POST",
+    "path": "/api/v3/importlist/test"
+  },
+  "status": 400
+}

@@ -1,0 +1,16 @@
+{
+  "body": [
+    {
+      "errorMessage": "Must contain at least one Condition",
+      "propertyName": "",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:41:29Z",
+  "request": {
+    "body": "bodies/customformat-create-no-specs.json",
+    "method": "POST",
+    "path": "/api/v3/customformat"
+  },
+  "status": 400
+}

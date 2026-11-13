@@ -1,0 +1,185 @@
+{
+  "body": [
+    {
+      "added": "2026-11-13T13:34:08Z",
+      "alternateTitles": [
+        {
+          "id": 2804,
+          "movieMetadataId": 521,
+          "sourceType": "tmdb",
+          "title": "Gravitatsioon"
+        },
+        {
+          "id": 2805,
+          "movieMetadataId": 521,
+          "sourceType": "tmdb",
+          "title": "Ko'akh Meshikha"
+        },
+        {
+          "id": 2806,
+          "movieMetadataId": 521,
+          "sourceType": "tmdb",
+          "title": "Gravity: Misiune in spatiu"
+        },
+        {
+          "id": 2807,
+          "movieMetadataId": 521,
+          "sourceType": "tmdb",
+          "title": "Гравiтацiя"
+        },
+        {
+          "id": 2808,
+          "movieMetadataId": 521,
+          "sourceType": "tmdb",
+          "title": "כוח משיכה"
+        },
+        {
+          "id": 2809,
+          "movieMetadataId": 521,
+          "sourceType": "tmdb",
+          "title": "גרביטי"
+        },
+        {
+          "id": 2810,
+          "movieMetadataId": 521,
+          "sourceType": "tmdb",
+          "title": "גראביטי"
+        },
+        {
+          "id": 2811,
+          "movieMetadataId": 521,
+          "sourceType": "tmdb",
+          "title": "Gravity 3D"
+        },
+        {
+          "id": 2812,
+          "movieMetadataId": 521,
+          "sourceType": "tmdb",
+          "title": "그래비티"
+        },
+        {
+          "id": 2813,
+          "movieMetadataId": 521,
+          "sourceType": "tmdb",
+          "title": "Gravity 2013"
+        },
+        {
+          "id": 2814,
+          "movieMetadataId": 521,
+          "sourceType": "tmdb",
+          "title": "Cuộc Chiến Không Trọng Lực"
+        },
+        {
+          "id": 2815,
+          "movieMetadataId": 521,
+          "sourceType": "tmdb",
+          "title": "Yerçəkimi"
+        }
+      ],
+      "certification": "PG-13",
+      "cleanTitle": "gravity",
+      "digitalRelease": "2018-03-04T00:00:00Z",
+      "folderName": "/movies/Gravity (2013) {tmdb-49047}",
+      "genres": [
+        "Science Fiction",
+        "Thriller",
+        "Drama"
+      ],
+      "hasFile": false,
+      "id": 329,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/kZ2nZw8D681aphje8NJi8EfbL1U.jpg",
+          "url": "/MediaCover/329/poster.jpg?h=4bec224bff500bb8e466"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/a2n6bKD7qhCPCAEALgsAhWOAQcc.jpg",
+          "url": "/MediaCover/329/fanart.jpg?h=b5ed21e051629541b0fd"
+        }
+      ],
+      "imdbId": "tt1454468",
+      "inCinemas": "2013-10-03T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "astronaut",
+        "loss",
+        "space",
+        "space mission",
+        "space station",
+        "trapped in space"
+      ],
+      "lastSearchTime": "2026-11-13T13:34:08Z",
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Gravity",
+      "overview": "Dr Ryan Stone, an engineer on her first space mission, and Matt Kowalski, an astronaut on his final expedition, have to survive in space after they are hit by debris while spacewalking.",
+      "path": "/movies/Gravity (2013) {tmdb-49047}",
+      "physicalRelease": "2014-01-29T00:00:00Z",
+      "popularity": 9.6727,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 7.7,
+          "votes": 909284
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 96,
+          "votes": 0
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 96,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 7.172,
+          "votes": 16869
+        },
+        "trakt": {
+          "type": "user",
+          "value": 7.50158,
+          "votes": 25001
+        }
+      },
+      "releaseDate": "2014-01-29T00:00:00Z",
+      "rootFolderPath": "/movies",
+      "runtime": 91,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 0,
+      "sortTitle": "gravity",
+      "statistics": {
+        "movieFileCount": 0,
+        "movieFileQualities": [],
+        "releaseGroups": [],
+        "sizeOnDisk": 0
+      },
+      "status": "released",
+      "studio": "Esperanto Filmoj",
+      "tags": [
+        1
+      ],
+      "title": "Gravity",
+      "titleSlug": "49047",
+      "tmdbId": 49047,
+      "website": "http://gravitymovie.warnerbros.com",
+      "year": 2013,
+      "youTubeTrailerId": "OiTiKOy59o4"
+    }
+  ],
+  "recordedAt": "2026-11-13T13:35:01Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/movie?tmdbId=49047"
+  },
+  "status": 200
+}

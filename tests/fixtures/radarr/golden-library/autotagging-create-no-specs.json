@@ -1,0 +1,28 @@
+{
+  "body": [
+    {
+      "attemptedValue": [],
+      "errorCode": "NotEmptyValidator",
+      "errorMessage": "'Specifications' must not be empty.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Specifications",
+        "propertyValue": []
+      },
+      "propertyName": "Specifications",
+      "severity": "error"
+    },
+    {
+      "errorMessage": "Must contain at least one Condition",
+      "propertyName": "",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:41:28Z",
+  "request": {
+    "body": "bodies/autotagging-create-no-specs.json",
+    "method": "POST",
+    "path": "/api/v3/autotagging"
+  },
+  "status": 400
+}

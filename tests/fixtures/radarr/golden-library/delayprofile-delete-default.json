@@ -1,0 +1,12 @@
+{
+  "body": {
+    "content": "Cannot delete global delay profile",
+    "message": "MethodNotAllowed: Cannot delete global delay profile"
+  },
+  "recordedAt": "2026-11-13T12:41:28Z",
+  "request": {
+    "method": "DELETE",
+    "path": "/api/v3/delayprofile/1"
+  },
+  "status": 405
+}

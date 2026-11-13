@@ -108,8 +108,20 @@ start_mock() {
     if curl -fsS -o /dev/null "http://127.0.0.1:$MOCK_PORT/movies/newznab/api?t=caps&apikey=$API_KEY" 2>/dev/null; then
         die "something already listens on port $MOCK_PORT; stop it (pkill -f mock-servarr.py) and retry"
     fi
+    # The mock is also the HTTP proxy the library's request list turns on
+    # (milestone 4d): it answers for api.radarr.video, the Servarr services
+    # and TMDB's image host from tests/fixtures/metadata, inside TLS tunnels
+    # under this certificate. RECORD_METADATA=1 lets it fetch an answer it
+    # does not have from the real host, once, and keep it.
+    local cert="$CACHE/mock-tls.crt" key="$CACHE/mock-tls.key" record=()
+    if [ ! -f "$cert" ]; then
+        openssl req -x509 -newkey rsa:2048 -nodes -days 3650 -subj "/CN=unarr-mock" \
+            -addext "subjectAltName=DNS:api.radarr.video,DNS:radarr.servarr.com,DNS:image.tmdb.org" \
+            -keyout "$key" -out "$cert" 2>/dev/null || die "openssl could not make the mock's certificate"
+    fi
+    [ "${RECORD_METADATA:-0}" = 1 ] && record=(--record-metadata) && log "metadata fixtures missing from tests/fixtures/metadata are fetched from the real hosts"
     python3 -I "$REPO/scripts/mock-servarr.py" --listen "127.0.0.1:$MOCK_PORT" --fixtures "$REPO/tests/fixtures" --log "$logfile" --downloads "$DOWNLOADS_DIR" --movies "$MOVIES_DIR" \
-        2>"$CACHE/mock.stderr.log" &
+        --tls-cert "$cert" --tls-key "$key" "${record[@]}" 2>"$CACHE/mock.stderr.log" &
     MOCK_PID=$!
     for _ in $(seq 1 20); do
         if curl -fsS -o /dev/null "http://127.0.0.1:$MOCK_PORT/movies/newznab/api?t=caps&apikey=$API_KEY" 2>/dev/null; then
@@ -195,7 +207,8 @@ cmd_golden() {
     mkdir -p "$out"
     python3 -I "$REPO/scripts/record-golden.py" \
         --base-url "http://127.0.0.1:$RADARR_PORT" --api-key "$API_KEY" --mock-url "http://127.0.0.1:$MOCK_PORT" \
-        --requests "$requests" --out "$out" --login unarr:fixture --signalr
+        --requests "$requests" --out "$out" --login unarr:fixture --signalr \
+        --data-dir "$CACHE/golden-data"
     [ "$out" = "$GOLDEN_DIR" ] && record_schemas
     stop_radarr
     stop_mock

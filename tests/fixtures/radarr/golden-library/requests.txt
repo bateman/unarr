@@ -1,0 +1,393 @@
+# Milestone 4d, the library: movies looked up, refreshed, added, edited,
+# moved and deleted, and the settings written. A recording of its own, so
+# that the long list next door did not have to be recorded again; same
+# format, and signalr.json holds what the hub sent after each step.
+#
+#   GOLDEN_REQUESTS=tests/fixtures/radarr/golden-library/requests.txt \
+#       GOLDEN_OUT=tests/fixtures/radarr/golden-library make golden-radarr
+#
+# The original reaches api.radarr.video, the Servarr services and TMDB's
+# images through scripts/mock-servarr.py, which becomes its HTTP proxy
+# here: certificate validation off for the mock's self-signed tunnels, the
+# fixture's dead *.invalid providers bypassed so that they fail as before.
+# The fixture's own AllowedHosts '*' is refused by the validation of the
+# same PUT first. RECORD_METADATA=1 lets the mock fetch an answer that
+# tests/fixtures/metadata does not have yet.
+config-host GET /api/v3/config/host
+config-host-put-allowedhosts-star PUT /api/v3/config/host/1 bodies/config-host-proxy-star.json
+config-host-put-proxy PUT /api/v3/config/host/1 bodies/config-host-proxy.json
+sleep 8
+config-host-after-proxy GET /api/v3/config/host
+health-after-proxy GET /api/v3/health
+
+# Lookups. A term whose movie is in the library (The Holdovers, without a
+# file), ids of a movie with a file (Air), of one the library does not
+# have (Dune, part of a collection), of one the lists exclude (Titane);
+# ids nobody has; a link; a release name, whose title and year are what
+# is searched for; no term at all, which the original answers 503.
+movie-lookup-library GET /api/v3/movie/lookup?term=the%20holdovers
+movie-lookup-library-file GET /api/v3/movie/lookup?term=tmdb:964980
+movie-lookup-tmdb GET /api/v3/movie/lookup?term=tmdb:438631
+movie-lookup-tmdbid GET /api/v3/movie/lookup?term=TmdbId:%20438631
+movie-lookup-imdb GET /api/v3/movie/lookup?term=imdb:tt1160419
+movie-lookup-excluded GET /api/v3/movie/lookup?term=tmdb:630240
+movie-lookup-tmdb-missing GET /api/v3/movie/lookup?term=tmdb:999999999
+movie-lookup-tmdb-not-a-number GET /api/v3/movie/lookup?term=tmdb:dune
+movie-lookup-imdb-missing GET /api/v3/movie/lookup?term=imdb:tt9999999999
+movie-lookup-url-tmdb GET /api/v3/movie/lookup?term=https://www.themoviedb.org/movie/438631-dune
+movie-lookup-url-imdb GET /api/v3/movie/lookup?term=https://www.imdb.com/title/tt1160419/
+movie-lookup-release-name GET /api/v3/movie/lookup?term=Titane.2021.1080p.BluRay.x264-GRP
+movie-lookup-empty GET /api/v3/movie/lookup?term=
+movie-lookup-no-term GET /api/v3/movie/lookup
+movie-lookup-route-tmdb GET /api/v3/movie/lookup/tmdb?tmdbId=438631
+movie-lookup-route-tmdb-missing GET /api/v3/movie/lookup/tmdb?tmdbId=999999999
+movie-lookup-route-imdb GET /api/v3/movie/lookup/imdb?imdbId=tt1160419
+movie-lookup-route-imdb-missing GET /api/v3/movie/lookup/imdb?imdbId=tt9999999999
+
+# A manual refresh of one movie: its metadata, alternative titles,
+# translations and credits from the metadata server, its covers, a rescan.
+command-refresh-movie POST /api/v3/command bodies/command-refresh-movie.json
+sleep 20
+command-refresh-movie-get GET /api/v3/command/{id:command-refresh-movie}
+movie-116-after-refresh GET /api/v3/movie/116
+credit-116-after-refresh GET /api/v3/credit?movieId=116
+alttitle-116-after-refresh GET /api/v3/alttitle?movieId=116
+
+# Three more: one with a file (Air), one still in cinemas (The Odyssey),
+# and one the metadata server answers 404 for (The Great Beyond, by a
+# hand-made fixture): it is marked as deleted and the health says so.
+command-refresh-movies POST /api/v3/command bodies/command-refresh-movies.json
+sleep 25
+command-refresh-movies-get GET /api/v3/command/{id:command-refresh-movies}
+movie-5-after-refresh GET /api/v3/movie/5
+movie-125-after-refresh GET /api/v3/movie/125
+movie-186-after-refresh GET /api/v3/movie/186
+health-after-refresh GET /api/v3/health
+
+# Adding a movie. What the validation refuses first, one rule at a time:
+# neither a path nor a root folder, a root folder that is none, a path
+# that is relative, that is a root folder, that another movie has, a
+# profile that does not exist, none at all, no TMDB id, a movie the
+# library has, one TMDB does not.
+movie-add-no-path POST /api/v3/movie bodies/movie-add-no-path.json
+movie-add-missing-root POST /api/v3/movie bodies/movie-add-missing-root.json
+movie-add-relative-path POST /api/v3/movie bodies/movie-add-relative-path.json
+movie-add-root-as-path POST /api/v3/movie bodies/movie-add-root-as-path.json
+movie-add-taken-path POST /api/v3/movie bodies/movie-add-taken-path.json
+movie-add-missing-profile POST /api/v3/movie bodies/movie-add-missing-profile.json
+movie-add-no-profile POST /api/v3/movie bodies/movie-add-no-profile.json
+movie-add-no-tmdb POST /api/v3/movie bodies/movie-add-no-tmdb.json
+movie-add-existing POST /api/v3/movie bodies/movie-add-existing.json
+movie-add-unknown POST /api/v3/movie bodies/movie-add-unknown.json
+
+# Dune, as the Add New page sends it: the lookup's answer with a root
+# folder, a profile, a tag and the options. Its collection is in the
+# library already (Dune: Part Three is). The movie is refreshed and
+# scanned; nothing is searched for.
+movie-add POST /api/v3/movie bodies/movie-add.json
+sleep 20
+movie-added GET /api/v3/movie/{id:movie-add}
+movie-added-by-tmdb GET /api/v3/movie?tmdbId=438631
+movie-added-credits GET /api/v3/credit?movieId={id:movie-add}
+command-after-add GET /api/v3/command
+
+# Blade Runner 2049, monitored with its collection and searched for. The
+# library does not have the collection: it comes with the movie, is
+# refreshed (its other movie becomes known) and ends up monitored.
+movie-lookup-route-tmdb-collection GET /api/v3/movie/lookup/tmdb?tmdbId=335984
+movie-add-collection POST /api/v3/movie bodies/movie-add-collection.json
+sleep 30
+movie-added-collection GET /api/v3/movie/{id:movie-add-collection}
+collection-after-add GET /api/v3/collection
+command-after-add-collection GET /api/v3/command
+
+# The collection brought its other movie, Blade Runner, into the library
+# by being monitored: adding it by hand now is refused.
+movie-add-by-collection POST /api/v3/movie bodies/movie-add-by-collection.json
+movie-brought-by-collection GET /api/v3/movie?tmdbId=78
+
+# A movie added under a path of its own, unmonitored, with no more than
+# its TMDB id and a title (Whiplash).
+movie-add-path POST /api/v3/movie bodies/movie-add-path.json
+sleep 20
+movie-added-path GET /api/v3/movie/{id:movie-add-path}
+health-after-add GET /api/v3/health
+
+# Editing a movie. What the validation refuses: a profile that does not
+# exist, a path that is a root folder, that is empty, that another movie
+# has; a movie that does not exist. Then Dune as the edit form sends it
+# back, unmonitored, with another profile, availability and tags.
+movie-put-missing-profile PUT /api/v3/movie/{id:movie-add} bodies/movie-put-missing-profile.json
+movie-put-root-as-path PUT /api/v3/movie/{id:movie-add} bodies/movie-put-root-as-path.json
+movie-put-empty-path PUT /api/v3/movie/{id:movie-add} bodies/movie-put-empty-path.json
+movie-put-taken-path PUT /api/v3/movie/{id:movie-add} bodies/movie-put-taken-path.json
+movie-put-missing PUT /api/v3/movie/999999 bodies/movie-put-missing.json
+movie-put PUT /api/v3/movie/{id:movie-add} bodies/movie-put.json
+movie-after-put GET /api/v3/movie/{id:movie-add}
+
+# Its folder moved with it: a file is put in the folder and found by a
+# rescan, then the path is changed with moveFiles. The folder and its
+# file follow; the file's row keeps its relative path.
+mock - POST /mock/fs/write?path=/movies/Dune%20(2021)%20{tmdb-438631}/Dune.2021.1080p.BluRay.x264-GRP.mkv&clip=episode-1080
+command-rescan-added POST /api/v3/command bodies/command-rescan-added.json
+sleep 12
+movie-after-rescan GET /api/v3/movie/{id:movie-add}
+movie-put-move PUT /api/v3/movie/{id:movie-add}?moveFiles=true bodies/movie-put-move.json
+sleep 10
+command-after-move GET /api/v3/command
+movie-after-move GET /api/v3/movie/{id:movie-add}
+filesystem-after-move GET /api/v3/filesystem?path=/movies/Dune%20Moved/&includeFiles=true
+filesystem-movies-after-move GET /api/v3/filesystem?path=/movies/
+
+# A path changed without moveFiles: the row alone.
+movie-put-path PUT /api/v3/movie/{id:movie-add-path} bodies/movie-put-path.json
+
+# The editor of the movie index, on two movies: fields, tags added,
+# replaced and removed; a root folder that is none, a profile that is
+# none; then a root folder with moveFiles, which gives each movie the
+# folder the naming would and moves the one that has a folder on disk;
+# and a root folder without moveFiles, which keeps the folder's name.
+movie-editor PUT /api/v3/movie/editor bodies/movie-editor.json
+movie-editor-replace-tags PUT /api/v3/movie/editor bodies/movie-editor-replace-tags.json
+movie-editor-remove-tags PUT /api/v3/movie/editor bodies/movie-editor-remove-tags.json
+movie-editor-missing-root PUT /api/v3/movie/editor bodies/movie-editor-missing-root.json
+movie-editor-missing-profile PUT /api/v3/movie/editor bodies/movie-editor-missing-profile.json
+movie-editor-move PUT /api/v3/movie/editor bodies/movie-editor-move.json
+sleep 10
+command-after-editor-move GET /api/v3/command
+movie-after-editor-move GET /api/v3/movie/{id:movie-add}
+movie-path-after-editor-move GET /api/v3/movie/{id:movie-add-path}
+filesystem-movies-after-editor-move GET /api/v3/filesystem?path=/movies/
+movie-editor-root PUT /api/v3/movie/editor bodies/movie-editor-root.json
+
+# Deleting. Dune with its files and an exclusion: the folder goes, the
+# lists will not bring it back. A movie that does not exist. Blade Runner
+# 2049 with nothing else, then Blade Runner through the editor: the
+# collection the two of them brought has no movie left and goes too.
+movie-delete DELETE /api/v3/movie/{id:movie-add}?deleteFiles=true&addImportExclusion=true
+sleep 8
+movie-deleted GET /api/v3/movie/{id:movie-add}
+moviefile-after-delete GET /api/v3/moviefile?movieId={id:movie-add}
+history-after-delete GET /api/v3/history/movie?movieId={id:movie-add}
+exclusions-after-delete GET /api/v3/exclusions
+filesystem-movies-after-delete GET /api/v3/filesystem?path=/movies/
+movie-delete-missing DELETE /api/v3/movie/999999
+movie-delete-plain DELETE /api/v3/movie/{id:movie-add-collection}
+movie-editor-delete DELETE /api/v3/movie/editor bodies/movie-editor-delete.json
+sleep 8
+collection-after-delete GET /api/v3/collection
+movie-list-after-delete GET /api/v3/movie?tmdbId=78
+health-after-delete GET /api/v3/health
+
+# Library Import: several movies added together under folders that are
+# theirs already. One the server does not know refuses them all; a movie
+# the library has is refused as well.
+movie-import-one-invalid POST /api/v3/movie/import bodies/movie-import-one-invalid.json
+movie-import-existing POST /api/v3/movie/import bodies/movie-import-existing.json
+movie-import POST /api/v3/movie/import bodies/movie-import.json
+sleep 25
+command-after-import GET /api/v3/command
+movie-imported GET /api/v3/movie?tmdbId=1124
+movie-imported-second GET /api/v3/movie?tmdbId=49047
+
+# Milestone 4d, the settings. Each page read, saved with something
+# changed, read back, refused where its validation refuses, and put back
+# as it was. The health checks the original ties to a save run after
+# each; the pause before the health is read lets them.
+config-ui GET /api/v3/config/ui
+config-ui-put PUT /api/v3/config/ui/1 bodies/config-ui-put.json
+config-ui-after-put GET /api/v3/config/ui
+config-ui-put-language-missing PUT /api/v3/config/ui/1 bodies/config-ui-put-language-missing.json
+config-ui-put-language-zero PUT /api/v3/config/ui/1 bodies/config-ui-put-language-zero.json
+config-ui-restore PUT /api/v3/config/ui/1 bodies/config-ui-restore.json
+config-mediamanagement GET /api/v3/config/mediamanagement
+config-mediamanagement-put PUT /api/v3/config/mediamanagement/1 bodies/config-mediamanagement-put.json
+config-mediamanagement-after-put GET /api/v3/config/mediamanagement
+config-mediamanagement-put-free-space PUT /api/v3/config/mediamanagement/1 bodies/config-mediamanagement-put-free-space.json
+config-mediamanagement-put-bin-root-folder PUT /api/v3/config/mediamanagement/1 bodies/config-mediamanagement-put-bin-root-folder.json
+config-mediamanagement-put-bin-relative PUT /api/v3/config/mediamanagement/1 bodies/config-mediamanagement-put-bin-relative.json
+config-mediamanagement-put-bin-missing PUT /api/v3/config/mediamanagement/1 bodies/config-mediamanagement-put-bin-missing.json
+config-mediamanagement-put-cleanup-days PUT /api/v3/config/mediamanagement/1 bodies/config-mediamanagement-put-cleanup-days.json
+config-mediamanagement-put-chmod PUT /api/v3/config/mediamanagement/1 bodies/config-mediamanagement-put-chmod.json
+config-mediamanagement-put-script PUT /api/v3/config/mediamanagement/1 bodies/config-mediamanagement-put-script.json
+config-mediamanagement-restore PUT /api/v3/config/mediamanagement/1 bodies/config-mediamanagement-restore.json
+config-naming GET /api/v3/config/naming
+config-naming-put PUT /api/v3/config/naming/1 bodies/config-naming-put.json
+config-naming-after-put GET /api/v3/config/naming
+config-naming-put-no-tokens PUT /api/v3/config/naming/1 bodies/config-naming-put-no-tokens.json
+config-naming-put-folder-no-title PUT /api/v3/config/naming/1 bodies/config-naming-put-folder-no-title.json
+config-naming-put-empty PUT /api/v3/config/naming/1 bodies/config-naming-put-empty.json
+config-naming-restore PUT /api/v3/config/naming/1 bodies/config-naming-restore.json
+config-indexer GET /api/v3/config/indexer
+config-indexer-put PUT /api/v3/config/indexer/1 bodies/config-indexer-put.json
+config-indexer-after-put GET /api/v3/config/indexer
+config-indexer-put-minimum-age PUT /api/v3/config/indexer/1 bodies/config-indexer-put-minimum-age.json
+config-indexer-put-rss-interval PUT /api/v3/config/indexer/1 bodies/config-indexer-put-rss-interval.json
+config-indexer-put-retention PUT /api/v3/config/indexer/1 bodies/config-indexer-put-retention.json
+config-indexer-restore PUT /api/v3/config/indexer/1 bodies/config-indexer-restore.json
+config-downloadclient GET /api/v3/config/downloadclient
+config-downloadclient-put PUT /api/v3/config/downloadclient/1 bodies/config-downloadclient-put.json
+config-downloadclient-after-put GET /api/v3/config/downloadclient
+config-downloadclient-restore PUT /api/v3/config/downloadclient/1 bodies/config-downloadclient-restore.json
+config-importlist GET /api/v3/config/importlist
+config-importlist-put PUT /api/v3/config/importlist/1 bodies/config-importlist-put.json
+config-importlist-after-put GET /api/v3/config/importlist
+config-importlist-put-level PUT /api/v3/config/importlist/1 bodies/config-importlist-put-level.json
+config-importlist-restore PUT /api/v3/config/importlist/1 bodies/config-importlist-restore.json
+config-metadata GET /api/v3/config/metadata
+config-metadata-put PUT /api/v3/config/metadata/1 bodies/config-metadata-put.json
+config-metadata-after-put GET /api/v3/config/metadata
+config-metadata-put-country PUT /api/v3/config/metadata/1 bodies/config-metadata-put-country.json
+config-metadata-restore PUT /api/v3/config/metadata/1 bodies/config-metadata-restore.json
+sleep 8
+health-after-config GET /api/v3/health
+
+# Tags: created, renamed, listed with what uses them, deleted; a label
+# that is taken or empty, a tag that is in use.
+tag-create POST /api/v3/tag bodies/tag-create.json
+tag-create-taken POST /api/v3/tag bodies/tag-create-taken.json
+tag-create-empty POST /api/v3/tag bodies/tag-create-empty.json
+tag-update PUT /api/v3/tag/{id:tag-create} bodies/tag-update.json
+tag-update-missing PUT /api/v3/tag/999 bodies/tag-update-missing.json
+tag-after GET /api/v3/tag
+tag-detail-after GET /api/v3/tag/detail
+tag-delete DELETE /api/v3/tag/{id:tag-create}
+tag-delete-missing DELETE /api/v3/tag/999
+tag-delete-used DELETE /api/v3/tag/1
+tag-after-delete GET /api/v3/tag
+
+# Root folders: a folder that exists, one that does not, one that is a
+# root folder already, one that is relative; then removed.
+mock - POST /mock/fs/write?path=/downloads/library/Some%20Movie%20(2020)/Some.Movie.2020.1080p.WEB-DL.x264-GRP.mkv&clip=episode
+rootfolder-create POST /api/v3/rootfolder bodies/rootfolder-create.json
+rootfolder-create-missing POST /api/v3/rootfolder bodies/rootfolder-create-missing.json
+rootfolder-create-existing POST /api/v3/rootfolder bodies/rootfolder-create-existing.json
+rootfolder-create-relative POST /api/v3/rootfolder bodies/rootfolder-create-relative.json
+rootfolder-create-empty POST /api/v3/rootfolder bodies/rootfolder-create-empty.json
+rootfolder-after GET /api/v3/rootfolder
+rootfolder-one GET /api/v3/rootfolder/{id:rootfolder-create}
+sleep 8
+health-after-rootfolder GET /api/v3/health
+rootfolder-delete DELETE /api/v3/rootfolder/{id:rootfolder-create}
+rootfolder-delete-missing DELETE /api/v3/rootfolder/999
+rootfolder-after-delete GET /api/v3/rootfolder
+
+# Remote path mappings.
+remotepathmapping-create POST /api/v3/remotepathmapping bodies/remotepathmapping-create.json
+remotepathmapping-create-duplicate POST /api/v3/remotepathmapping bodies/remotepathmapping-create-duplicate.json
+remotepathmapping-create-no-host POST /api/v3/remotepathmapping bodies/remotepathmapping-create-no-host.json
+remotepathmapping-create-missing-local POST /api/v3/remotepathmapping bodies/remotepathmapping-create-missing-local.json
+remotepathmapping-update PUT /api/v3/remotepathmapping/{id:remotepathmapping-create} bodies/remotepathmapping-update.json
+remotepathmapping-after GET /api/v3/remotepathmapping
+remotepathmapping-delete DELETE /api/v3/remotepathmapping/{id:remotepathmapping-create}
+remotepathmapping-delete-missing DELETE /api/v3/remotepathmapping/999
+
+# Delay profiles: one for a tag, changed, moved before the default,
+# removed; the default cannot go, and a profile needs a tag.
+delayprofile-create POST /api/v3/delayprofile bodies/delayprofile-create.json
+delayprofile-create-no-tags POST /api/v3/delayprofile bodies/delayprofile-create-no-tags.json
+delayprofile-create-no-protocol POST /api/v3/delayprofile bodies/delayprofile-create-no-protocol.json
+delayprofile-update PUT /api/v3/delayprofile/{id:delayprofile-create} bodies/delayprofile-update.json
+delayprofile-reorder PUT /api/v3/delayprofile/reorder/{id:delayprofile-create}
+delayprofile-after GET /api/v3/delayprofile
+delayprofile-delete DELETE /api/v3/delayprofile/{id:delayprofile-create}
+delayprofile-delete-default DELETE /api/v3/delayprofile/1
+delayprofile-after-delete GET /api/v3/delayprofile
+
+# Release profiles, custom filters and auto tagging rules.
+releaseprofile-create POST /api/v3/releaseprofile bodies/releaseprofile-create.json
+releaseprofile-create-no-terms POST /api/v3/releaseprofile bodies/releaseprofile-create-no-terms.json
+releaseprofile-create-missing-indexer POST /api/v3/releaseprofile bodies/releaseprofile-create-missing-indexer.json
+releaseprofile-update PUT /api/v3/releaseprofile/{id:releaseprofile-create} bodies/releaseprofile-update.json
+releaseprofile-after GET /api/v3/releaseprofile
+releaseprofile-delete DELETE /api/v3/releaseprofile/{id:releaseprofile-create}
+customfilter-create POST /api/v3/customfilter bodies/customfilter-create.json
+customfilter-update PUT /api/v3/customfilter/{id:customfilter-create} bodies/customfilter-update.json
+customfilter-after GET /api/v3/customfilter
+customfilter-delete DELETE /api/v3/customfilter/{id:customfilter-create}
+autotagging-create POST /api/v3/autotagging bodies/autotagging-create.json
+autotagging-create-no-name POST /api/v3/autotagging bodies/autotagging-create-no-name.json
+autotagging-create-no-tags POST /api/v3/autotagging bodies/autotagging-create-no-tags.json
+autotagging-create-no-specs POST /api/v3/autotagging bodies/autotagging-create-no-specs.json
+autotagging-update PUT /api/v3/autotagging/{id:autotagging-create} bodies/autotagging-update.json
+autotagging-after GET /api/v3/autotagging
+autotagging-delete DELETE /api/v3/autotagging/{id:autotagging-create}
+
+# Custom formats: created, changed, changed in bulk, removed; a name
+# that is taken, a format with no condition. A format the profiles score
+# keeps its place in them.
+customformat-create POST /api/v3/customformat bodies/customformat-create.json
+customformat-create-taken POST /api/v3/customformat bodies/customformat-create-taken.json
+customformat-create-no-specs POST /api/v3/customformat bodies/customformat-create-no-specs.json
+customformat-create-bad-regex POST /api/v3/customformat bodies/customformat-create-bad-regex.json
+customformat-update PUT /api/v3/customformat/{id:customformat-create} bodies/customformat-update.json
+customformat-one GET /api/v3/customformat/{id:customformat-create}
+customformat-bulk-update PUT /api/v3/customformat/bulk bodies/customformat-bulk-update.json
+qualityprofile-after-customformat GET /api/v3/qualityprofile/4
+customformat-delete DELETE /api/v3/customformat/{id:customformat-create}
+customformat-delete-missing DELETE /api/v3/customformat/99999
+customformat-create-again POST /api/v3/customformat bodies/customformat-create-again.json
+customformat-bulk-delete DELETE /api/v3/customformat/bulk bodies/customformat-bulk-delete.json
+
+# Quality profiles: the schema, a profile made from it, changed,
+# removed; a profile with nothing allowed, a cutoff it does not allow, a
+# name that is taken; a profile in use cannot go.
+qualityprofile-schema GET /api/v3/qualityprofile/schema
+qualityprofile-4 GET /api/v3/qualityprofile/4
+qualityprofile-create-nothing-allowed POST /api/v3/qualityprofile bodies/qualityprofile-create-nothing-allowed.json
+qualityprofile-create POST /api/v3/qualityprofile bodies/qualityprofile-create.json
+qualityprofile-create-taken POST /api/v3/qualityprofile bodies/qualityprofile-create-taken.json
+qualityprofile-create-no-name POST /api/v3/qualityprofile bodies/qualityprofile-create-no-name.json
+qualityprofile-create-bad-cutoff POST /api/v3/qualityprofile bodies/qualityprofile-create-bad-cutoff.json
+qualityprofile-update PUT /api/v3/qualityprofile/{id:qualityprofile-create} bodies/qualityprofile-update.json
+qualityprofile-after GET /api/v3/qualityprofile/{id:qualityprofile-create}
+qualityprofile-delete DELETE /api/v3/qualityprofile/{id:qualityprofile-create}
+qualityprofile-delete-missing DELETE /api/v3/qualityprofile/999
+qualityprofile-delete-used DELETE /api/v3/qualityprofile/11
+
+# Quality definitions: one changed, several at once, the limits, and
+# the reset of all of them.
+qualitydefinition-1 GET /api/v3/qualitydefinition/1
+qualitydefinition-put PUT /api/v3/qualitydefinition/1 bodies/qualitydefinition-put.json
+qualitydefinition-put-min-over-max PUT /api/v3/qualitydefinition/1 bodies/qualitydefinition-put-min-over-max.json
+qualitydefinition-put-negative PUT /api/v3/qualitydefinition/1 bodies/qualitydefinition-put-negative.json
+qualitydefinition-after GET /api/v3/qualitydefinition/1
+qualitydefinition-update-many PUT /api/v3/qualitydefinition/update bodies/qualitydefinition-update-many.json
+sleep 6
+qualitydefinition-after-many GET /api/v3/qualitydefinition
+qualitydefinition-limits GET /api/v3/qualitydefinition/limits
+command-reset-qualitydefinitions POST /api/v3/command bodies/command-reset-qualitydefinitions.json
+sleep 8
+qualitydefinition-after-reset GET /api/v3/qualitydefinition
+
+# List exclusions: one added, changed, several added at once, removed
+# one by one and together; a movie that is excluded already, one with no
+# title.
+exclusion-create POST /api/v3/exclusions bodies/exclusion-create.json
+exclusion-create-taken POST /api/v3/exclusions bodies/exclusion-create-taken.json
+exclusion-create-no-title POST /api/v3/exclusions bodies/exclusion-create-no-title.json
+exclusion-create-no-tmdb POST /api/v3/exclusions bodies/exclusion-create-no-tmdb.json
+exclusion-update PUT /api/v3/exclusions/{id:exclusion-create} bodies/exclusion-update.json
+exclusion-one GET /api/v3/exclusions/{id:exclusion-create}
+exclusion-bulk-create POST /api/v3/exclusions/bulk bodies/exclusion-bulk-create.json
+exclusion-paged GET /api/v3/exclusions/paged?page=1&pageSize=5&sortKey=tmdbId&sortDirection=descending
+exclusion-delete DELETE /api/v3/exclusions/{id:exclusion-create}
+exclusion-delete-missing DELETE /api/v3/exclusions/9999
+exclusion-bulk-delete DELETE /api/v3/exclusions/bulk bodies/exclusion-bulk-delete.json
+exclusion-after GET /api/v3/exclusions
+
+# Collections: one changed, which monitors it and so brings the movie
+# of its that is out and that neither the library nor the exclusions
+# have (Dune: Part Two; Dune itself was deleted with an exclusion);
+# then several at once.
+collection-41 GET /api/v3/collection/41
+collection-put PUT /api/v3/collection/41 bodies/collection-put.json
+sleep 25
+collection-after-put GET /api/v3/collection/41
+movie-brought-by-collection-put GET /api/v3/movie?tmdbId=693134
+command-after-collection-put GET /api/v3/command
+collection-put-missing PUT /api/v3/collection/9999 bodies/collection-put-missing.json
+collections-put PUT /api/v3/collection bodies/collections-put.json
+sleep 8
+collection-after-bulk GET /api/v3/collection/41
+health-after-settings GET /api/v3/health

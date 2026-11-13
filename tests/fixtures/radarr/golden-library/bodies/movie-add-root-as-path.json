@@ -1,0 +1,1 @@
+{"$from": "movie-lookup-route-tmdb", "$set": {"path": "/movies", "qualityProfileId": 4, "monitored": true, "minimumAvailability": "released"}}

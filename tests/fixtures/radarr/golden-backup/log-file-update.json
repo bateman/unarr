@@ -1,0 +1,9 @@
+{
+  "body": [],
+  "recordedAt": "2026-11-13T14:05:48Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/log/file/update"
+  },
+  "status": 200
+}

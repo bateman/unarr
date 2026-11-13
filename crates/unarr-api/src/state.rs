@@ -271,10 +271,8 @@ impl AppState {
             runtime.set_upstreams(upstreams);
         }
         runtime.set_backup(self.backup_context());
-        if self.personality() != Personality::Radarr {
-            runtime.set_media_cover_dir(self.runtime().media_cover_dir.clone());
-            runtime.set_host_hooks(self.host_hooks());
-        }
+        runtime.set_media_cover_dir(self.runtime().media_cover_dir.clone());
+        runtime.set_host_hooks(self.host_hooks());
         runtime.start();
         let mut events = runtime.subscribe();
         let state = self.clone();
@@ -293,7 +291,7 @@ impl AppState {
                     Ok(Event::CommandUpdated(c)) => {
                         state.hub().broadcast(
                             "command",
-                            json!({"action": "updated", "resource": crate::routes::command::command_resource(&c)}),
+                            json!({"action": "updated", "resource": crate::routes::command::command_resource(state.personality(), &c)}),
                         );
                         // `CommandController`: once the old commands are
                         // gone the UI reads the list again. Recorded from
@@ -335,6 +333,19 @@ impl AppState {
                     }
                     Ok(Event::SeriesUpdated { series_id }) => {
                         crate::relay::broadcast_series(&state, series_id).await
+                    }
+                    Ok(Event::MovieUpdated { movie_id }) | Ok(Event::MovieCoversUpdated { movie_id }) => {
+                        let _ = movie_events.send(HubMovieEvent::Updated(movie_id));
+                    }
+                    Ok(Event::MovieDeleted { movie_id }) => {
+                        let _ = movie_events.send(HubMovieEvent::Deleted(movie_id));
+                    }
+                    Ok(Event::CollectionChanged {
+                        collection_id,
+                        action,
+                    }) => {
+                        crate::routes::radarr::movies::broadcast_collection(&state, collection_id, action)
+                            .await
                     }
                     Err(tokio::sync::broadcast::error::RecvError::Lagged(_)) => continue,
                     Err(tokio::sync::broadcast::error::RecvError::Closed) => break,

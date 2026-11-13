@@ -1,0 +1,61 @@
+# Milestone 4d, the audit: the routes the audit of `docs/audit/` found
+# declared by Radarr or called by its UI and missing from Unarr. A
+# recording of its own; same format.
+#
+#   GOLDEN_REQUESTS=tests/fixtures/radarr/golden-audit/requests.txt \
+#       GOLDEN_OUT=tests/fixtures/radarr/golden-audit make golden-radarr
+#
+# The original reaches api.radarr.video through scripts/mock-servarr.py,
+# as golden-library's recording does, for the movies the Discover page
+# adds. Restart and shutdown come last: they stop the instance.
+config-host GET /api/v3/config/host
+config-host-put-proxy PUT /api/v3/config/host/1 bodies/config-host-proxy.json
+sleep 8
+
+# The settings pages' own reads, by the id the UI sends.
+config-host-by-id GET /api/v3/config/host/1
+config-naming-by-id GET /api/v3/config/naming/1
+config-ui-by-id GET /api/v3/config/ui/1
+
+# Settings > Metadata: the page saves a consumer, which Radarr stores
+# and answers as a provider.
+metadata GET /api/v3/metadata
+metadata-1 GET /api/v3/metadata/1
+metadata-update PUT /api/v3/metadata/1 bodies/metadata-update.json
+metadata-after-update GET /api/v3/metadata/1
+metadata-restore PUT /api/v3/metadata/1 bodies/metadata-restore.json
+metadata-update-missing PUT /api/v3/metadata/999 bodies/metadata-update-missing.json
+metadata-test POST /api/v3/metadata/test bodies/metadata-test.json
+metadata-testall POST /api/v3/metadata/testall
+
+# The folder a movie would have under the naming settings, which the
+# movie editor asks for before it moves one.
+movie-folder GET /api/v3/movie/6/folder
+movie-folder-missing GET /api/v3/movie/999999/folder
+
+# Discover: the page adds the movies the lists named, the same way the
+# library import does.
+importlist-movie-add POST /api/v3/importlist/movie bodies/importlist-movie-add.json
+sleep 10
+movie-added-from-discover GET /api/v3/movie?tmdbId=157336
+command-after-discover GET /api/v3/command
+
+# The commands the log, quality and blocklist pages post, and the one
+# the movie editor sends to rename folders.
+blocklist-before-clear GET /api/v3/blocklist?page=1&pageSize=5
+command-clear-log POST /api/v3/command bodies/command-clear-log.json
+command-delete-log-files POST /api/v3/command bodies/command-delete-log-files.json
+command-delete-update-log-files POST /api/v3/command bodies/command-delete-update-log-files.json
+command-clear-blocklist POST /api/v3/command bodies/command-clear-blocklist.json
+command-check-update POST /api/v3/command bodies/command-check-update.json
+command-rename-movie-folder POST /api/v3/command bodies/command-rename-movie-folder.json
+sleep 10
+command-clear-log-done GET /api/v3/command/{id:command-clear-log}
+command-clear-blocklist-done GET /api/v3/command/{id:command-clear-blocklist}
+command-rename-movie-folder-done GET /api/v3/command/{id:command-rename-movie-folder}
+blocklist-after-clear GET /api/v3/blocklist?page=1&pageSize=5
+movie-after-folder-rename GET /api/v3/movie/6
+
+# The header menu's two actions, which answer before they act.
+system-restart POST /api/v3/system/restart
+system-shutdown POST /api/v3/system/shutdown

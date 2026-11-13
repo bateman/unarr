@@ -1,0 +1,13 @@
+{
+  "body": {
+    "certificationCountry": "us",
+    "id": 1
+  },
+  "recordedAt": "2026-11-13T12:41:12Z",
+  "request": {
+    "body": "bodies/config-metadata-restore.json",
+    "method": "PUT",
+    "path": "/api/v3/config/metadata/1"
+  },
+  "status": 202
+}

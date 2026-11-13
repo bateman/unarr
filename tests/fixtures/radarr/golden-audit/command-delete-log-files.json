@@ -1,0 +1,32 @@
+{
+  "body": {
+    "body": {
+      "isExclusive": false,
+      "isLongRunning": false,
+      "isTypeExclusive": false,
+      "name": "DeleteLogFiles",
+      "requiresDiskAccess": false,
+      "sendUpdatesToClient": true,
+      "suppressMessages": false,
+      "trigger": "manual",
+      "updateScheduledTask": true
+    },
+    "commandName": "Delete Log Files",
+    "id": 472957,
+    "name": "DeleteLogFiles",
+    "priority": "normal",
+    "queued": "2026-11-13T15:38:16Z",
+    "result": "unknown",
+    "sendUpdatesToClient": true,
+    "status": "queued",
+    "trigger": "manual",
+    "updateScheduledTask": true
+  },
+  "recordedAt": "2026-11-13T15:38:16Z",
+  "request": {
+    "body": "bodies/command-delete-log-files.json",
+    "method": "POST",
+    "path": "/api/v3/command"
+  },
+  "status": 201
+}

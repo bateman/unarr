@@ -1,0 +1,128 @@
+{
+  "body": {
+    "addOptions": {
+      "addMethod": "manual",
+      "ignoreEpisodesWithFiles": false,
+      "ignoreEpisodesWithoutFiles": false,
+      "monitor": "movieAndCollection",
+      "searchForMovie": true
+    },
+    "added": "2026-11-13T12:39:08Z",
+    "alternateTitles": [],
+    "certification": "R",
+    "cleanTitle": "bladerunner2049",
+    "collection": {
+      "title": "Blade Runner Collection",
+      "tmdbId": 422837
+    },
+    "digitalRelease": "2017-12-26T00:00:00Z",
+    "folderName": "/movies/Blade Runner 2049 (2017) {tmdb-335984}",
+    "genres": [
+      "Science Fiction",
+      "Drama"
+    ],
+    "hasFile": false,
+    "id": 329,
+    "images": [
+      {
+        "coverType": "poster",
+        "remoteUrl": "https://image.tmdb.org/t/p/original/gajva2L0rPYkEWjzgFlBXCAVBE5.jpg",
+        "url": "/MediaCover/329/poster.jpg?h=ad244719f1b6472728d2"
+      },
+      {
+        "coverType": "fanart",
+        "remoteUrl": "https://image.tmdb.org/t/p/original/gNdLJU9TxrpGx4dkZidjys3fyy0.jpg",
+        "url": "/MediaCover/329/fanart.jpg?h=d6597a53a04564e4d049"
+      }
+    ],
+    "imdbId": "tt1856101",
+    "inCinemas": "2017-10-04T00:00:00Z",
+    "isAvailable": true,
+    "keywords": [
+      "2040s",
+      "android",
+      "artificial intelligence (a.i.)",
+      "blade runner",
+      "bounty hunter",
+      "cyber thriller",
+      "cyberpunk",
+      "dystopia",
+      "future",
+      "humanoid robot",
+      "las vegas",
+      "los angeles, california",
+      "sequel",
+      "slow burn",
+      "tech noir",
+      "transhumanism"
+    ],
+    "minimumAvailability": "inCinemas",
+    "monitored": true,
+    "movieFileId": 0,
+    "originalLanguage": {
+      "id": 1,
+      "name": "English"
+    },
+    "originalTitle": "Blade Runner 2049",
+    "overview": "Thirty years after the events of the first film, a new blade runner, LAPD Officer K, unearths a long-buried secret that has the potential to plunge what's left of society into chaos. K's discovery leads him on a quest to find Rick Deckard, a former LAPD blade runner who has been missing for 30 years.",
+    "path": "/movies/Blade Runner 2049 (2017) {tmdb-335984}",
+    "physicalRelease": "2018-01-16T00:00:00Z",
+    "popularity": 28.9999,
+    "qualityProfileId": 7,
+    "ratings": {
+      "imdb": {
+        "type": "user",
+        "value": 8,
+        "votes": 775743
+      },
+      "metacritic": {
+        "type": "user",
+        "value": 81,
+        "votes": 0
+      },
+      "rottenTomatoes": {
+        "type": "user",
+        "value": 88,
+        "votes": 0
+      },
+      "tmdb": {
+        "type": "user",
+        "value": 7.614,
+        "votes": 16009
+      },
+      "trakt": {
+        "type": "user",
+        "value": 7.89062,
+        "votes": 33371
+      }
+    },
+    "releaseDate": "2017-10-04T00:00:00Z",
+    "rootFolderPath": "/movies",
+    "runtime": 164,
+    "secondaryYearSourceId": 0,
+    "sizeOnDisk": 0,
+    "sortTitle": "blade runner 2049",
+    "statistics": {
+      "movieFileCount": 0,
+      "movieFileQualities": [],
+      "releaseGroups": [],
+      "sizeOnDisk": 0
+    },
+    "status": "released",
+    "studio": "Alcon Entertainment",
+    "tags": [],
+    "title": "Blade Runner 2049",
+    "titleSlug": "335984",
+    "tmdbId": 335984,
+    "website": "http://bladerunnermovie.com/",
+    "year": 2017,
+    "youTubeTrailerId": "geFtxCSz8xI"
+  },
+  "recordedAt": "2026-11-13T12:39:08Z",
+  "request": {
+    "body": "bodies/movie-add-collection.json",
+    "method": "POST",
+    "path": "/api/v3/movie"
+  },
+  "status": 201
+}

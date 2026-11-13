@@ -1,0 +1,23 @@
+{
+  "body": [
+    {
+      "attemptedValue": "Library Test",
+      "errorCode": "PredicateValidator",
+      "errorMessage": "Must be unique.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Name",
+        "propertyValue": "Library Test"
+      },
+      "propertyName": "Name",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:41:29Z",
+  "request": {
+    "body": "bodies/customformat-create-taken.json",
+    "method": "POST",
+    "path": "/api/v3/customformat"
+  },
+  "status": 400
+}

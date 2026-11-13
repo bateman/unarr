@@ -1,0 +1,1 @@
+{"$from": "config-mediamanagement", "$set": {"useScriptImport": true, "scriptImportPath": "script.sh"}}

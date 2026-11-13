@@ -1,0 +1,25 @@
+{
+  "body": [
+    {
+      "enabled": false,
+      "id": 1,
+      "ignored": [
+        "cam"
+      ],
+      "indexerId": 0,
+      "name": "No cams",
+      "required": [
+        "1080p"
+      ],
+      "tags": [
+        1
+      ]
+    }
+  ],
+  "recordedAt": "2026-11-13T12:41:28Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/releaseprofile"
+  },
+  "status": 200
+}

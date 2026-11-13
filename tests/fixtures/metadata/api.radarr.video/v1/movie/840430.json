@@ -1,0 +1,1255 @@
+{
+ "TmdbId": 840430,
+ "ImdbId": "tt14849194",
+ "Title": "The Holdovers",
+ "Overview": "A curmudgeonly instructor at a New England prep school is forced to remain on campus during Christmas break to babysit the handful of students with nowhere to go. Eventually, he forms an unlikely bond with one of them — a damaged, brainy troublemaker — and with the school’s head cook, who has just lost a son in Vietnam.",
+ "OriginalTitle": "The Holdovers",
+ "OriginalLanguage": "en",
+ "TitleSlug": "840430",
+ "Runtime": 133,
+ "Popularity": 7.2706,
+ "Year": 2023,
+ "Premier": "2023-08-31T00:00:00Z",
+ "InCinema": "2023-10-27T00:00:00Z",
+ "PhysicalRelease": "2024-01-02T00:00:00Z",
+ "DigitalRelease": "2023-11-28T00:00:00Z",
+ "Images": [
+  {
+   "CoverType": "Poster",
+   "Url": "https://image.tmdb.org/t/p/original/VHSzNBTwxV8vh7wylo7O9CLdac.jpg"
+  },
+  {
+   "CoverType": "Fanart",
+   "Url": "https://image.tmdb.org/t/p/original/57fhbxl9is7W7ur5v6UuvlNsoSg.jpg"
+  }
+ ],
+ "Ratings": [
+  {
+   "Count": 2774,
+   "Value": 7.65,
+   "Origin": "Tmdb",
+   "Type": "User"
+  }
+ ],
+ "MovieRatings": {
+  "Tmdb": {
+   "Count": 2774,
+   "Value": 7.65,
+   "Type": "User"
+  },
+  "Imdb": {
+   "Count": 276206,
+   "Value": 7.9,
+   "Type": "User"
+  },
+  "Metacritic": {
+   "Count": 0,
+   "Value": 82,
+   "Type": "User"
+  },
+  "RottenTomatoes": {
+   "Count": 0,
+   "Value": 97,
+   "Type": "User"
+  },
+  "Trakt": {
+   "Count": 12734,
+   "Value": 7.95453,
+   "Type": "User"
+  }
+ },
+ "Genres": [
+  "Drama",
+  "Comedy"
+ ],
+ "Keywords": [
+  "1970s",
+  "adoring",
+  "alcoholism",
+  "boarding school",
+  "boston, massachusetts",
+  "boys' boarding school",
+  "christmas",
+  "christmastime",
+  "cook",
+  "grief",
+  "holiday",
+  "loss of son",
+  "melancholy",
+  "mental illness",
+  "misfit",
+  "new england",
+  "peaceful",
+  "teacher student relationship",
+  "troubled youth",
+  "vietnam war",
+  "winter",
+  "winter break"
+ ],
+ "AlternativeTitles": [
+  {
+   "Title": "Barton Academy",
+   "Type": "Tmdb",
+   "Language": "ko"
+  },
+  {
+   "Title": "Os Rejeitados",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "جاماندگان",
+   "Type": "Tmdb",
+   "Language": "fa"
+  },
+  {
+   "Title": "Os Excluídos",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "Залишені",
+   "Type": "Tmdb",
+   "Language": "uk"
+  },
+  {
+   "Title": "Zadržki",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "Mahajäänud",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "Winter Break",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "ฤดูหนาวนี้ไม่ไร้ไออุ่น",
+   "Type": "Tmdb",
+   "Language": "th"
+  },
+  {
+   "Title": "მიტოვებულები",
+   "Type": "Tmdb",
+   "Language": "en"
+  },
+  {
+   "Title": "留校联盟",
+   "Type": "Tmdb",
+   "Language": "zh"
+  }
+ ],
+ "Translations": [
+  {
+   "Title": "The Holdovers",
+   "Overview": "A curmudgeonly instructor at a New England prep school is forced to remain on campus during Christmas break to babysit the handful of students with nowhere to go. Eventually, he forms an unlikely bond with one of them — a damaged, brainy troublemaker — and with the school’s head cook, who has just lost a son in Vietnam.",
+   "Language": "en-US"
+  },
+  {
+   "Title": "Los que se quedan",
+   "Overview": "Un instructor cascarrabias en una prestigiosa escuela estadounidense se ve obligado a permanecer en el campus durante las vacaciones de Navidad para cuidar de un grupo de estudiantes que no tienen a dónde ir. Con el tiempo, establece un vínculo inesperado con uno de ellos, un problemático alumno, y con la jefa de cocina de la escuela, que acaba de perder a su hijo en Vietnam.",
+   "Language": "es-MX"
+  },
+  {
+   "Title": "Los que se quedan",
+   "Overview": "A nadie le gusta el profesor Paul Hunham (Giamatti), ni a sus alumnos, ni a sus compañeros, ni al director de la escuela secundaria donde trabaja, a todos les resulta exasperante su pomposidad y rigidez. Sin familia y sin ningún lugar a donde ir durante las vacaciones de Navidad de 1970, Paul se queda en la escuela para supervisar a los estudiantes que no han podido viajar a casa. Después de unos días, solo queda allí un estudiante: un problemático chico de 15 años llamado Angus, un buen estudiante cuyo mal comportamiento siempre amenaza con expulsarlo. Junto a Paul y Angus está la cocinera Mary (Randolph), una mujer afroamericana que atiende a hijos privilegiados y cuyo propio hijo perdió la vida recientemente en Vietnam. Estos tres náufragos tan diferentes formarán una improbable familia durante dos semanas muy nevadas en Nueva Inglaterra.",
+   "Language": "es-ES"
+  },
+  {
+   "Title": "Winter Break",
+   "Overview": "Un instructeur maussade d'une école préparatoire de la Nouvelle-Angleterre reste sur le campus pendant les vacances de Noël pour garder une poignée d'étudiants qui n'ont nulle part où aller. Il noue bientôt un lien improbable avec un fauteur de troubles intelligent, mais endommagé, et avec la cuisinière en chef de l'école, une femme qui vient de perdre un fils pendant la guerre du Vietnam.",
+   "Language": "fr-FR"
+  },
+  {
+   "Title": "Przesilenie zimowe",
+   "Overview": "Zbliżają się święta Bożego Narodzenia w 1970 roku i Paul, nie mając rodziny, nigdzie nie wyjeżdża. Nauczyciel zostaje w szkole, aby pilnować uczniów, którzy nie mogą wrócić do domu. Po kilku dniach zostaje tylko jeden uczeń - sprawiający kłopoty 15-latek o imieniu Angus, któremu grozi wydalenie za fatalne zachowanie. Do Paula i Angusa dołącza kucharka Mary, której syn niedawno zginął w Wietnamie.",
+   "Language": "pl-PL"
+  },
+  {
+   "Title": "The Holdovers - Lezioni di vita",
+   "Overview": "Un istruttore bisbetico di una scuola privata del New England è costretto a rimanere nel campus durante le vacanze di Natale per fare da babysitter a una manciata di studenti che non hanno un posto dove andare. Alla fine, stringe un improbabile legame con uno di loro - un problematico cervellone danneggiato - e con il capo cuoco della scuola, che ha appena perso un figlio in Vietnam.",
+   "Language": "it-IT"
+  },
+  {
+   "Title": "Téli szünet",
+   "Overview": "Eljön a téli szünet, ám a jó nevű amerikai iskolából nem megy mindenki haza az ünnepekre. Tully, a jó eszű, ám különc és bajkeverő diák családi zűrök miatt. Mary, az iskola szakácsnője azért, mert egyetlen fiát gyászolja, aki nemrég esett el Vietnamban, és az iskola az utolsó hely, ahol együtt volt vele. Hunham, a történelemtanár pedig azért nem, mert az igazgató őt jelölte ki felvigyázónak az iskolában rekedtek mellé...",
+   "Language": "hu-HU"
+  },
+  {
+   "Title": "바튼 아카데미",
+   "Overview": "미국 뉴잉글랜주의 한 고등학교의 선생으로 재직 중인 폴은 가족이나 이렇다 할 친구 하나 없이 자기만의 세상에 갇혀 사는 중년 남성이다. 곧 크리스마스가 다가오는 어느 날, 집에 가지 못하고 학교 기숙사에 남아야 하는 학생들을 지도하는 역할을 맡게 되고, 그 중에서도 집에 가기를 열망했으나 허사가 된 앵거스와 학교에 남게 된다. 거기에 아들과 사별한 기숙사 주방장 메리까지, 이 셋의 외로운 학교 ‘지킴이’ 생활이 시작되지만 크리스마스 기간 동안에도 공부를 강요하는 폴과 자유로운 영혼인 앵거스는 서로 부딪히기만 하는데…",
+   "Language": "ko-KR"
+  },
+  {
+   "Title": "Os Rejeitados",
+   "Overview": "Um professor mal-humorado de uma prestigiada escola americana é forçado a cuidar de um grupo de alunos que não tem para onde ir durante as férias de Natal. Ele acaba criando um vínculo com um dos estudantes e com a cozinheira da escola, que acaba de perder seu filho no Vietnã.",
+   "Language": "pt-BR"
+  },
+  {
+   "Title": "Ceux qui restent",
+   "Overview": "Les élèves de l’académie Barton s’apprêtent à retourner auprès de leur famille pour les vacances de Noël. Quelques-uns n’ont toutefois pas cette chance et doivent rester sur place sous la supervision d’un enseignant. En cette année 1970, cette tâche incombe à Paul Hunham, professeur de civilisations anciennes reconnu pour son intransigeance. Parmi les cinq garçons dont il a la charge se trouve Angus, qui a osé le défier en classe. Frustré d’avoir été délaissé par sa mère en cette période de réjouissance, Angus, d’un tempérament irascible, entame donc cette quinzaine à reculons. Lorsque les autres pensionnaires obtiennent la permission parentale de quitter l’établissement pour une excursion de ski, Angus se retrouve seul avec Paul et Mary, la cheffe des cuisines qui pleure la mort de son fils.",
+   "Language": "fr-CA"
+  },
+  {
+   "Title": "The Holdovers",
+   "Overview": "Jääräpäinen opettaja joutuu jäämään kampukselle joululoman ajaksi kaitsemaan oppilaita, joilla ei ole paikkaa, minne mennä. Lopulta hän muodostaa odottamattoman siteen erään rikkinäisen, mutta fiksun oppilaan sekä poikansa Vietnamin sodassa juuri menettäneen koulun pääkokin kanssa.",
+   "Language": "fi-FI"
+  },
+  {
+   "Title": "Geride Kalanlar",
+   "Overview": "New England'daki bir hazırlık okulunda çalışan, kimsenin sevmediği huysuz bir öğretmen, gidecek yeri olmayan birkaç öğrenciye göz kulak olmak için Noel tatili boyunca okulda kalmak zorunda kalır. Birkaç gün sonra okulda kalan tek öğrenci, 15 yaşındaki zeki ve baş belası Angus ve oğlunu Vietnam’da yeni kaybetmiş olan, okulun şef aşçısı Mary ile beklenmedik bir bağ kurar.",
+   "Language": "tr-TR"
+  },
+  {
+   "Title": "الباقون",
+   "Overview": "يدور العمل حول المدرس (بول هونهام) حاد الطباع والذي يكرهه كل طلابه وزملائه، وفي عطلة رأس السنة يتقاطع طريقه مع الطالب المشاغب (أجنوس)، وسرعان ما تتطور الأمور بينهما إلى صداقة غير متوقعة.",
+   "Language": "ar-SA"
+  },
+  {
+   "Title": "Залишенці",
+   "Overview": "1970 рік. Пол Ганем, вчитель підготовчої школи в Новій Англії, змушений залишатися в кампусі під час різдвяних канікул, щоб доглядати жменьку студентів, які не можуть повернутися додому. За кілька днів залишається лише один студент — 15-річний хуліган на ім’я Анґус, розумний обурювач спокою, чия погана поведінка завжди загрожує відрахуванням. До Пола та Анґуса приєднується кухар школи Мері, яка щойно втратила сина у В’єтнамі.",
+   "Language": "uk-UA"
+  },
+  {
+   "Title": "Оставленные",
+   "Overview": "Декабрь 1970 года. Ученики академии Бартон, престижной закрытой школы для мальчиков, разъезжаются на рождественские каникулы, но несколько неудачников, родители которых не могут или не хотят их забирать, вынуждены остаться на кампусе. Присматривать за ребятами назначен ненавистный учитель истории мистер Ханэм — принципиальный приверженец строгих педагогических методов, и повариха Мэри, скорбящая по погибшему во Вьетнаме сыну.",
+   "Language": "ru-RU"
+  },
+  {
+   "Title": "The Holdovers",
+   "Overview": "Niemand mag den Lehrer Paul Hunham (Paul Giamatti) – weder seine Schüler noch seine Kollegen, noch der Schulleiter. Alle finden seine Aufgeblasenheit und Starrheit nervtötend. Da er keine Familie hat und in den Weihnachtsferien 1970 nirgendwo hingehen kann, bleibt Paul trotzdem in der Schule, um die Schüler zu beaufsichtigen, die nicht nach Hause fahren können. Nach ein paar Tagen ist nur noch ein Schüler übrig, ein 15-Jähriger namens Angus (Dominic Sessa), ein guter Schüler, der wegen seines schlechten Benehmens jedoch immer von der Schule zu fliegen droht. Zu Paul und Angus gesellt sich die Chefköchin Mary (Da'Vine Joy Randolph) – eine afroamerikanische Frau, die sich um die Söhne von Privilegierten kümmert und deren eigener Sohn kürzlich im Vietnamkrieg gefallen ist. Diese drei sehr unterschiedlichen Schiffbrüchigen bilden eine unwahrscheinliche Weihnachtsfamilie, die während zwei sehr verschneiten Wochen in Neuengland komische Missgeschicke erlebt.",
+   "Language": "de-DE"
+  },
+  {
+   "Title": "留校联盟",
+   "Overview": "新英格兰一所预科学校里，一位古板苛刻的老师被迫在圣诞假期留守校园，照看几个无处可去的学生。最终，他与其中一人——一个内心受创却聪明的捣蛋鬼，以及刚在越战中失去儿子的学校主厨——建立了意外的联系。",
+   "Language": "zh-CN"
+  },
+  {
+   "Title": "נשארים לחג",
+   "Overview": "‫מורה קפדן להיסטוריה קלאסית עתיקה בפנימייה בניו אינגלנד שבצפון-מזרח ארצות הברית נאלץ ללוות מספר תלמידים שאין להם לאן ללכת בחופשת חג המולד. לצידו משחקים דומיניק ססה, אחד התלמידים, ודאווין ג'וי רנדולף, מנהלת הקפיטריה של הפנימייה.",
+   "Language": "he-IL"
+  },
+  {
+   "Title": "The Holdovers",
+   "Overview": "Een chagrijnige instructeur op een middelbare school in New England wordt gedwongen tijdens de kerstvakantie op de campus te blijven om op te passen voor het handjevol studenten die nergens heen kunnen. Uiteindelijk vormt hij een onwaarschijnlijke band met een van hen – een beschadigde, slimme onruststoker – en met de chef-kok van de school, die zojuist een zoon heeft verloren in Vietnam.",
+   "Language": "nl-NL"
+  },
+  {
+   "Title": "Zimní prázdniny",
+   "Overview": "Prokřehlý instruktor na přípravné škole v Nové Anglii je nucen během vánočních prázdnin zůstat na škole a hlídat hrstku studentů, kteří nemají kam jít. Nakonec si vytvoří nepravděpodobné pouto s jedním z nich - narušeným, chytrým výtržníkem - a s vedoucím kuchařem školy, který právě přišel o syna ve Vietnamu.",
+   "Language": "cs-CZ"
+  },
+  {
+   "Title": "Những Người Lưu Lại",
+   "Overview": "Những Người Lưu Lại – The Holdovers, Từ đạo diễn Alexander Payne, phim kể về một giáo viên lịch sử khó ưa buộc phải ở lại trường cấp 3 trong kỳ nghỉ lễ giáng sinh cùng với một nhóm học sinh cá biệt không có nơi nào để đi.",
+   "Language": "vi-VN"
+  },
+  {
+   "Title": "Svajonių atostogos",
+   "Overview": "Atokioje internatinėje mokykloje dirglus istorijos mokytojas priverstas per atostogas likti miestelyje su probleminiu mokiniu, kuris neturi kur išvykti.",
+   "Language": "lt-LT"
+  },
+  {
+   "Title": "The Holdovers",
+   "Overview": "Det er jul, og alle elever og lærere på efterskolen, hvor gnavpotten Paul Hunman underviser, sendes hjem på ferie. Kun Paul, kokken Mary og den rebelske, men intelligente teenager Angus ender med at blive tilbage. Paul ser det som sin opgave at holde Angus i ørerne. Der er ikke ligefrem varme følelser mellem dem, men alligevel knytter de to efterhånden et uventet bånd.",
+   "Language": "da-DK"
+  },
+  {
+   "Title": "The Holdovers",
+   "Overview": "En allmänt ogillad historielärare på en avlägsen privatskola tvingas stanna kvar på campus över julledigheten med en student som inte har någonstans att ta vägen. Tillsammans med skolans chefskock, Mary, vars egen son nyligen har dött i Vietnam, bygger de en osannolik vänskap när de tillbringar julen ihop under två mycket snörika veckor i 1970-talets New England.",
+   "Language": "sv-SE"
+  },
+  {
+   "Title": "Ostavljeni",
+   "Overview": "Paul Hunham, učitelj u pripremnoj školi u Novoj Engleskoj, prisiljen je ostati na kampusu tijekom božićnih praznika kako bi se brinuo za nekolicinu učenika koji se ne mogu vratiti kući. Za nekoliko dana ostaje samo jedan učenik - 15-godišnji nasilnik po imenu Angus, pametni gnjavator čije loše ponašanje uvijek prijeti izbacivanjem. Paulu i Angusu pridružuje se školska kuharica Mary, koja je upravo izgubila sina u Vijetnamu.",
+   "Language": "hr-HR"
+  },
+  {
+   "Title": "جاماندگان",
+   "Overview": "یک معلم تاریخ بداخلاق که در یک دانشگاه شبانه روزی دورافتاده تدریس می کند، مجبور می شود در حین تعطیلات کریسمس، کنار دانش آموزی که جایی برای رفتن ندارد بماند و...",
+   "Language": "fa-IR"
+  },
+  {
+   "Title": "Останалите",
+   "Overview": "Раздразнителен учител по история в отдалечено подготвително училище е принуден да остане на територията на училището по време на ваканцията заедно с проблемен ученик, който няма къде да отиде.",
+   "Language": "bg-BG"
+  },
+  {
+   "Title": "Τα Παιδιά του Χειμώνα",
+   "Overview": "Ένας στριμμένος καθηγητής σε ένα Αμερικανικό Κολέγιο υψηλού κύρους, υποχρεώνεται να παραμείνει στην πανεπιστημιούπολη κατά τη διάρκεια των Χριστουγεννιάτικων διακοπών του, για να προσέχει λίγους σπουδαστές του, οι οποίοι δεν έχουν πουθενά αλλού να πάνε. Τελικά, αναπτύσσει μία απίθανη σχέση με έναν από αυτούς – έναν κατεστραμμένο, ιδιοφυή ταραχοποιό - και την αρχιμαγείρισσα του κολεγίου, η οποία έχασε μόλις τον γιο της στον πόλεμο του Βιετνάμ.",
+   "Language": "el-GR"
+  },
+  {
+   "Title": "滯留生",
+   "Overview": "描繪搞怪老師與叛逆學生的真摯情誼，滿滿復古氛圍，令人回味無窮。1970年聖誕假期，性情孤僻暴躁的歷史老師保羅被迫留校監管幾名無處可去的學生，沒想到卻和一位聰明過人但桀驁不馴的少年，以及剛因越戰失去兒子的學校主廚建立了意想不到的緊密關係。",
+   "Language": "zh-TW"
+  },
+  {
+   "Title": "Bartonova akademija",
+   "Overview": "Vedno zlovoljni učitelj in kuharica Mary sta prisiljena preživeti božične praznike v internatu kjer službujeta, družbo jima dela osiroteli in težavni dijak Angus, ki nima kam iti. Vzdušje je sprva klavrno, a se postopoma spremeni in med nenavadnim božičem se spletejo nepričakovana prijateljstva.",
+   "Language": "sl-SI"
+  },
+  {
+   "Title": "Бартонова академија",
+   "Overview": "Скромни инструктор у припремној школи у Новој Енглеској приморан је да остане у кампусу током божићног распуста да чува шачицу ученика који немају где да оду. На крају, он ствара невероватну везу са једним од њих - оштећеним, паметним изазивачем проблема - и са главном куварицом школе, која је управо изгубила сина у Вијетнаму.",
+   "Language": "sr-RS"
+  },
+  {
+   "Title": "The Holdovers",
+   "Overview": "Satt til 70-tallet ved Barton Academy, møter vi den gretne læreren Paul Hunham, mislikt av både kolleger og elever. Paul blir valgt til å bli igjen på campus over juleferien, for å passe på et fåtall elever som ikke får reist hjem til jul. I løpet av denne perioden møter han utfordringer med den utagerende eleven, Angus, som sliter med tapet av sin far.",
+   "Language": "no-NO"
+  },
+  {
+   "Title": "หนาวนี้ไม่ไร้ไออุ่น",
+   "Overview": "คุณครูใจร้าย แม่ครัวใจสลาย และนักเรียนค้างปี พวกเขาจะมาอยู่คนเดียวไปด้วยกัน",
+   "Language": "th-TH"
+  },
+  {
+   "Title": "滯留生",
+   "Overview": "《酒佬日記》《繼承大丈夫》名導演亞歷山大比恩又一次鑽進小人物的情感心窩，在《滯留生》與男主角保羅哲阿馬田再度合作，台前幕後一唱一和。保羅飾演英國一名校的孤僻老師，脾氣暴躁總不獲愛戴。聖誕寒假期間，他被迫留校當值，水靜河飛下只需要監管一個學生 —— 他雖然好動聰明，心靈受創卻變得叛逆頑抗，屢屢為老師帶來煩膠事；連同因為越戰剛經歷喪子之痛的飯堂失意女廚師（本屆奧斯卡女配角提名：達芬採兒蘭杜芙），在一片暴雪驕陽下相聚此刻，三顆寂寞心像家人般限時緊扣著，有笑有淚，改變彼此一生。",
+   "Language": "zh-HK"
+  },
+  {
+   "Title": "Os Excluídos",
+   "Overview": "Um professor rabugento de uma escola preparatória de Nova Inglaterra é forçado a permanecer no campus durante as férias de Natal para tomar conta de um punhado de alunos que não têm para onde ir. Acaba por criar uma ligação improvável com um deles - um problemático e inteligente arruaceiro - e com a cozinheira-chefe da escola, que acaba de perder um filho no Vietname.",
+   "Language": "pt-PT"
+  },
+  {
+   "Title": "ホールドオーバーズ 置いてけぼりのホリディ",
+   "Overview": "ニューイングランドの寄宿制名門高校に勤務する古代史の非常勤教師ポール（ポール・ジアマッティ）は、その頑固で偏屈な性格ゆえ、生徒たちからはもちろん、校長や同僚たちからも疎まれていた。そんな彼は、多くの生徒や教師たちが家族と過ごすクリスマス休暇中に学校の寮に残らざるをえなくなった数名の生徒たちの子守をすることを余儀なくされる。やがて、生徒のひとりで優等生ではあるが問題行動の多いアンガス（ドミニク・セッサ）、そしてベトナム戦争で息子を亡くしたばかりの料理長（ダヴァイン・ジョイ・ランドルフ）とともに、ポールは思いがけない時間を過ごしてゆく……。",
+   "Language": "ja-JP"
+  },
+  {
+   "Title": "ნამსხვრევები",
+   "Overview": "",
+   "Language": "ka-GE"
+  },
+  {
+   "Title": "Zimné prázdniny",
+   "Overview": "Profesor Hunham je človek, ktorého by za učiteľa nechcel žiadny normálny študent. Je to postarší, mrzutý samotár, ktorý sa skôr, ako v súčasnosti, lepšie orientuje v antickej literatúre a každým, kto nezdieľa jeho svetonázor hlboko pohŕda. Mladý Angus  je študent, ktorého by žiadny normálny profesor nechcel vo svojej triede. Magnet na problémy, rebel bez príčiny, ničiteľ a narušiteľ školských pravidiel. Títo dvaja zostanú počas vianočných prázdnin na univerzitnej pôde, pretože ani jeden z nich nemá kam ísť. Učiteľ je sám a študent nezapadá do prázdninových plánov svojich rodičov. “Svätú” trojicu dopĺňa školská kuchárka Mary, ktorá nie je vianočne naladená, pretože sa práve dozvedela, že jej syn zahynul vo vojne vo Vietname. Šanca na to, že si k sebe tieto tri osamelé duše nájdu cestu je takmer nulová. Ale zázraky sa dejú a niekedy stačí len trochu dobrej vôle, aby sme videli, že ľudia môžu byť v skutočnosti iní, ako sa na prvý pohľad zdajú.",
+   "Language": "sk-SK"
+  },
+  {
+   "Title": "Mahajäänud",
+   "Overview": "Giamatti kehastab pahurat õppejõudu Paul Hunhamit, kelle töö on valgustada teadmistega prestiižika Bartoni internaatkooli kasvandikke. Hunham pole eriti populaarne ei õpetajate ega ka tudengite seas, seega saab just tema kohustuse jääda jõuluvaheajaks kooli koos õpilastega, kellel pole võimalik pühadeks koju minna. Loomulikult on Hunhami esimene instinkt panna koolijääjad kannatama ja ei möödu kaua, kui õpilaste vastupanuliikumine on saanud kindlameelse liidri – 15-aastase mässulise Anguse – kellega Hunham ristab raevukalt piigid.",
+   "Language": "et-EE"
+  },
+  {
+   "Title": "Atstātie",
+   "Overview": "1970. gada Ziemassvētki. Prestižā skolā uz svētku brīvdienām paliek visu nīstais skolotājs Pols, skolas pavāre Mērija un piecpadsmit gadus vecais Anguss. Pa šīm dienām šie tik ļoti atšķirīgie cilvēki ne tikai iemācīsies sadzīvot un saprast viens otru, bet arī mainīs viens otra dzīves uz visiem laikiem.",
+   "Language": "lv-LV"
+  },
+  {
+   "Title": "Vacanța de iarnă",
+   "Overview": "Forțat să petreacă vacanța de Crăciun la școala sa pregătitoare, un instructor ursuz dezvoltă o legătură improbabilă cu un student tulburat și bucătarul șef.",
+   "Language": "ro-RO"
+  },
+  {
+   "Title": "The Holdovers",
+   "Overview": "A ningú no li agrada el professor Paul Hunham (Giamatti), ni als seus alumnes, ni als seus companys, ni al director de l'escola secundària on treballa, a tots resulta exasperant la seva pompositat i rigidesa. Sense família i sense cap lloc on anar durant les vacances de Nadal del 1970, Paul es queda a l'escola per supervisar els estudiants que no han pogut viatjar a casa. Després d'uns dies, només hi queda un estudiant: un problemàtic noi de 15 anys anomenat Angus, un bon estudiant el mal comportament del qual sempre amenaça d'expulsar-lo. Al costat de Paul i Angus hi ha la cuinera Mary (Randolph), una dona afroamericana que atén fills privilegiats i el fill mateix va perdre la vida recentment al Vietnam. Aquests tres nàufrags tan diferents formaran una improbable família durant dues setmanes molt nevades a Nova Anglaterra.",
+   "Language": "ca-ES"
+  }
+ ],
+ "Recommendations": [
+  {
+   "TmdbId": 207,
+   "Title": "Dead Poets Society"
+  },
+  {
+   "TmdbId": 1585,
+   "Title": "It's a Wonderful Life"
+  },
+  {
+   "TmdbId": 334541,
+   "Title": "Manchester by the Sea"
+  },
+  {
+   "TmdbId": 74308,
+   "Title": "Detachment"
+  },
+  {
+   "TmdbId": 85350,
+   "Title": "Boyhood"
+  },
+  {
+   "TmdbId": 632856,
+   "Title": "Spirited"
+  },
+  {
+   "TmdbId": 10312,
+   "Title": "Patch Adams"
+  },
+  {
+   "TmdbId": 333348,
+   "Title": "Love the Coopers"
+  },
+  {
+   "TmdbId": 10400,
+   "Title": "The Hurricane"
+  },
+  {
+   "TmdbId": 57157,
+   "Title": "Young Adult"
+  }
+ ],
+ "Credits": {
+  "Cast": [
+   {
+    "Name": "Paul Giamatti",
+    "Order": 0,
+    "Character": "Paul Hunham",
+    "TmdbId": 13242,
+    "CreditId": "60c79208d132d60072a04057",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/wbrVVJRr5TwhDZuvijBgOorzcAb.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Dominic Sessa",
+    "Order": 1,
+    "Character": "Angus Tully",
+    "TmdbId": 3918497,
+    "CreditId": "63e9a14d63aad200a14cfd20",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/tSRLahrkA3iHJmKjkh3R2ZBFIQN.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Da'Vine Joy Randolph",
+    "Order": 2,
+    "Character": "Mary Lamb",
+    "TmdbId": 1180099,
+    "CreditId": "61f171626e938a00f4a08116",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/7RuYeGxTwFRt2q8fkT8nuEz1nIC.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Carrie Preston",
+    "Order": 3,
+    "Character": "Miss Lydia Crane",
+    "TmdbId": 7465,
+    "CreditId": "62b4fb881b722c00941a4f30",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/Aawu3RmB8ZDha13XIjtDDQF9XfD.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Brady Hepner",
+    "Order": 4,
+    "Character": "Teddy Kountze",
+    "TmdbId": 3013234,
+    "CreditId": "6503f27aea37e000c6391da2",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/gdOm2ynlLWBgSOVdQuKAwFbVVAf.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Ian Dolley",
+    "Order": 5,
+    "Character": "Alex Ollerman",
+    "TmdbId": 3797133,
+    "CreditId": "6503f2846a222701372ecf50",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/jiOpvomZz75JwzQtiWUyfHcQnsr.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Jim Kaplan",
+    "Order": 6,
+    "Character": "Ye-Joon Park",
+    "TmdbId": 3650522,
+    "CreditId": "6503f28fefea7a011ab9a7f8",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/3L6nfVojsnoSBOtrrGcpKq61d7N.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Michael Provost",
+    "Order": 7,
+    "Character": "Jason Smith",
+    "TmdbId": 1517841,
+    "CreditId": "6503f2a0db4ed61038575f52",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/vwQzWeCk3yu9fxEwx7wEpUuF7Nt.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Andrew Garman",
+    "Order": 8,
+    "Character": "Dr. Hardy Woodrup",
+    "TmdbId": 206902,
+    "CreditId": "6503f2ac63aad201380087f0",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/q5laaFn2OhYWjPFWKuE2Dv9pAnJ.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Naheem Garcia",
+    "Order": 9,
+    "Character": "Danny",
+    "TmdbId": 1745909,
+    "CreditId": "6503f2f4ffc9de0ee3c77854",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/l8YjAz3lTT0Pz01Z3XuUdNup3FQ.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Stephen Thorne",
+    "Order": 10,
+    "Character": "Thomas Tully",
+    "TmdbId": 3359764,
+    "CreditId": "6503f2fe6a222701372ecf8b",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/1IdobCSx0cUxMBIEZmgumQGNkwJ.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Gillian Vigman",
+    "Order": 11,
+    "Character": "Judy Clotfelter",
+    "TmdbId": 61182,
+    "CreditId": "62b4fbb0383df2008bf82215",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/oyGFIJCGwLx6UFZLIRGMlzuqdT7.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Tate Donovan",
+    "Order": 12,
+    "Character": "Stanley Clotfelter",
+    "TmdbId": 15455,
+    "CreditId": "6503f30c6a222700abaa1ab1",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/1SVx1zVO2lR5mUoduURUL64mIDH.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Darby Lee-Stack",
+    "Order": 13,
+    "Character": "Elise",
+    "TmdbId": 3450037,
+    "CreditId": "6503f3586a2227011a7c7aa8",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/fEfWi9TJF8OrmvUdgHZtQWJmyMl.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Bill Mootos",
+    "Order": 14,
+    "Character": "Mr. Endicott",
+    "TmdbId": 1593005,
+    "CreditId": "62b4fccb30f79c00626df230",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/jUo82h7PIZGVlc6SqGuRgGbMcvy.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Dustin Tucker",
+    "Order": 15,
+    "Character": "Mr. Rosensweig",
+    "TmdbId": 1732327,
+    "CreditId": "62b4fc96383df200613d8370",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/9wVwGqOPOCkO6I1zFwiPi0caaEf.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Juanita Pearl",
+    "Order": 16,
+    "Character": "Mary's Sister Peggy",
+    "TmdbId": 4272730,
+    "CreditId": "6503f372e0ca7f00ae40c9ad",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/ig5VHMRBV9DEMPYyo4vAHDVmmtf.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Alexander Cook",
+    "Order": 17,
+    "Character": "Priest / Bartender",
+    "TmdbId": 1168858,
+    "CreditId": "6503f37ddb4ed610430aa3a6",
+    "Images": []
+   },
+   {
+    "Name": "Liz Bishop",
+    "Order": 18,
+    "Character": "Office Lady",
+    "TmdbId": 3225232,
+    "CreditId": "6503f398ea37e001005260bc",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/6BI2nQdTLYqUH9odgsyzlN6e8g3.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Cole Tristan Murphy",
+    "Order": 19,
+    "Character": "Toothbrushing Student",
+    "TmdbId": 2734294,
+    "CreditId": "6503f3a5d7dcd2011c622958",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/tGujikfrbEogAGRedogr3h1yhwE.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Will Sussbauer",
+    "Order": 20,
+    "Character": "Cobb Salad Student",
+    "TmdbId": 4156467,
+    "CreditId": "6503f3b3db4ed61033a3b2a4",
+    "Images": []
+   },
+   {
+    "Name": "Carter Shimp",
+    "Order": 21,
+    "Character": "Weed Buyer Harriman",
+    "TmdbId": 2794891,
+    "CreditId": "6503f3c1e0ca7f012eba4cfe",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/11tD6FzzCsBMkPVcxU73XG1N6Ng.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Michael Malvesti",
+    "Order": 22,
+    "Character": "Christmas Tree Guy",
+    "TmdbId": 2029531,
+    "CreditId": "6503f3cd1bf266013a76a459",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/tqgUs1k7dJkzY2pDc7prWgDnIRf.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Dakota Lustick",
+    "Order": 23,
+    "Character": "Christmas Tree Helper",
+    "TmdbId": 1964636,
+    "CreditId": "6503f3d71bf26600c5d78a19",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/atTRmuMQNUidocBaH1MgVFeD5bi.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Melissa McMeekin",
+    "Order": 24,
+    "Character": "Hooker",
+    "TmdbId": 1371551,
+    "CreditId": "6503f3e2ffc9de0ee20ac391",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/wl0MMHtQYcrZLsII72J5SVNcTE3.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Jonathan von Mering",
+    "Order": 25,
+    "Character": "ER Doctor",
+    "TmdbId": 3297957,
+    "CreditId": "6503f3eeefea7a00e036f6db",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/j1ZThWHdsizPsCsgESQ0nr6AfU.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Rena Maliszewski",
+    "Order": 26,
+    "Character": "ER Nurse",
+    "TmdbId": 1956550,
+    "CreditId": "6503f3fc6a222700fd220d98",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/79bg6qaITfSrNL9d0VbXEd4PZML.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Osmani Rodriguez",
+    "Order": 27,
+    "Character": "Pharmacist",
+    "TmdbId": 205231,
+    "CreditId": "6503f406e0ca7f00ec8e7883",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/duHSocE9c1sPyyUoJQbGyV5tK7y.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Oscar Wahlberg",
+    "Order": 28,
+    "Character": "Pinball Player",
+    "TmdbId": 1730745,
+    "CreditId": "6503f412efea7a00aad92c29",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/dMtvqbcCrxtsK0O7iimESUoWHoL.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Dan Aid",
+    "Order": 29,
+    "Character": "Vietnam Vet Kenneth",
+    "TmdbId": 2259640,
+    "CreditId": "62b4fc2e031a1d00897a3ccd",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/emwiTOBqgHn2o9WZtuYQ7M8jJZQ.jpg"
+     }
+    ]
+   }
+  ],
+  "Crew": [
+   {
+    "Name": "Alexander Payne",
+    "Order": 0,
+    "Job": "Director",
+    "Department": "Directing",
+    "TmdbId": 13235,
+    "CreditId": "60c79219cf4b8b007757fc91",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/d8mwLxuCMxMxcE8Qys9sdUb7UZg.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "David Hemingson",
+    "Order": 1,
+    "Job": "Writer",
+    "Department": "Writing",
+    "TmdbId": 1224468,
+    "CreditId": "60c792213679a100585c7687",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/xYEPUUqwlOAJDAaZOyQat0rXfYZ.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Mark Johnson",
+    "Order": 2,
+    "Job": "Producer",
+    "Department": "Production",
+    "TmdbId": 5162,
+    "CreditId": "60c792368e8702003fc22978",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/gLuXkOQjqB81aHMGJ2OtYzEpHQu.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "David Hemingson",
+    "Order": 3,
+    "Job": "Producer",
+    "Department": "Production",
+    "TmdbId": 1224468,
+    "CreditId": "62b4fe21a349110061752c30",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/xYEPUUqwlOAJDAaZOyQat0rXfYZ.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Bill Block",
+    "Order": 4,
+    "Job": "Producer",
+    "Department": "Production",
+    "TmdbId": 72102,
+    "CreditId": "62b4fdbee33f830061b1d883",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/lIyEBU1aHtmSCgIue2hcgiYdDx6.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Thom Zadra",
+    "Order": 5,
+    "Job": "Executive Producer",
+    "Department": "Production",
+    "TmdbId": 2732851,
+    "CreditId": "6507129d373ac200e21b00b4",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/zfky7LXMNj3Ywj41PRQL2M6AeQW.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Andrew Golov",
+    "Order": 6,
+    "Job": "Executive Producer",
+    "Department": "Production",
+    "TmdbId": 72447,
+    "CreditId": "65071288fa27f400ae9eb358",
+    "Images": []
+   },
+   {
+    "Name": "Tom Williams",
+    "Order": 7,
+    "Job": "Executive Producer",
+    "Department": "Production",
+    "TmdbId": 213665,
+    "CreditId": "65071293fa27f4010c4aab4a",
+    "Images": []
+   },
+   {
+    "Name": "Eigil Bryld",
+    "Order": 8,
+    "Job": "Director of Photography",
+    "Department": "Camera",
+    "TmdbId": 29231,
+    "CreditId": "650115686a222700e0f2879a",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/v07NEVbUvdWxMCrpnyJYSiY2Qcq.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Ryan Warren Smith",
+    "Order": 9,
+    "Job": "Production Design",
+    "Department": "Art",
+    "TmdbId": 90280,
+    "CreditId": "61b615511c632900695b3db7",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/A2UgEIvNKjcxmln5i30l3cLz3FJ.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Markus Wittman",
+    "Order": 10,
+    "Job": "Set Decoration",
+    "Department": "Art",
+    "TmdbId": 1434560,
+    "CreditId": "6501141effc9de0ee00da34b",
+    "Images": []
+   },
+   {
+    "Name": "Biko Gogaladze",
+    "Order": 11,
+    "Job": "Foley Artist",
+    "Department": "Sound",
+    "TmdbId": 2812726,
+    "CreditId": "650710c242d8a500e1580326",
+    "Images": []
+   },
+   {
+    "Name": "Wendy Chuck",
+    "Order": 12,
+    "Job": "Costume Design",
+    "Department": "Costume & Make-Up",
+    "TmdbId": 35514,
+    "CreditId": "61b6156ba3d0270089760d85",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/lqZEGwaCqC93sX6oUFItsTLyKeS.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "David J. Schwartz",
+    "Order": 13,
+    "Job": "Sound Mixer",
+    "Department": "Sound",
+    "TmdbId": 1551352,
+    "CreditId": "62b4ff801b722c0053c4d020",
+    "Images": []
+   },
+   {
+    "Name": "Susan Shopmaker",
+    "Order": 14,
+    "Job": "Casting",
+    "Department": "Production",
+    "TmdbId": 32604,
+    "CreditId": "65ecee67edeb430186c1b25f",
+    "Images": []
+   },
+   {
+    "Name": "Kevin Tent",
+    "Order": 15,
+    "Job": "Editor",
+    "Department": "Editing",
+    "TmdbId": 32796,
+    "CreditId": "65071223394a87013915e41f",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/npJ1M2Gorgf7drYUMAifTECvtV2.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Scott Hersh",
+    "Order": 16,
+    "Job": "Makeup Artist",
+    "Department": "Costume & Make-Up",
+    "TmdbId": 1500318,
+    "CreditId": "62b4fedda349110061752cb6",
+    "Images": []
+   },
+   {
+    "Name": "Scott Hersh",
+    "Order": 17,
+    "Job": "Key Makeup Artist",
+    "Department": "Costume & Make-Up",
+    "TmdbId": 1500318,
+    "CreditId": "6565d645d9542000ab64c28d",
+    "Images": []
+   },
+   {
+    "Name": "Jeremy Woolsey",
+    "Order": 18,
+    "Job": "Art Direction",
+    "Department": "Art",
+    "TmdbId": 1127245,
+    "CreditId": "61b6155fbfeb8b001daa5dd5",
+    "Images": []
+   },
+   {
+    "Name": "Amy Greene",
+    "Order": 19,
+    "Job": "Stunt Coordinator",
+    "Department": "Crew",
+    "TmdbId": 1681846,
+    "CreditId": "65071207fa27f400caa4548f",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/wPiR0ETmo7pqMetCwMwMqpBjspT.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Aaron Bouchard",
+    "Order": 20,
+    "Job": "Utility Sound",
+    "Department": "Sound",
+    "TmdbId": 2926244,
+    "CreditId": "650710e1fa27f400eb17bfa6",
+    "Images": []
+   },
+   {
+    "Name": "Melissa Morris",
+    "Order": 21,
+    "Job": "Casting Associate",
+    "Department": "Production",
+    "TmdbId": 3099941,
+    "CreditId": "699c5527c35f3c499b6a3e0c",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/ogOA8ESXcKeIWhk7xcSy7GIRBC2.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "John Vincent Mason",
+    "Order": 22,
+    "Job": "Stunts",
+    "Department": "Crew",
+    "TmdbId": 138798,
+    "CreditId": "6507124afa27f4014eb1b6ab",
+    "Images": []
+   },
+   {
+    "Name": "Rod Smith",
+    "Order": 23,
+    "Job": "First Assistant Director",
+    "Department": "Directing",
+    "TmdbId": 2381647,
+    "CreditId": "6501145d5545ca00e1b002ac",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/fUrIc4yik0NK8ZSlCdcE8sqGWhh.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Angela Peri",
+    "Order": 24,
+    "Job": "Local Casting",
+    "Department": "Production",
+    "TmdbId": 1419108,
+    "CreditId": "699c550e23c7ba8bed80f484",
+    "Images": []
+   },
+   {
+    "Name": "Glenn Kaplan",
+    "Order": 25,
+    "Job": "Focus Puller",
+    "Department": "Camera",
+    "TmdbId": 1308529,
+    "CreditId": "6565dab3156cc7010cb35b56",
+    "Images": []
+   },
+   {
+    "Name": "Joe Gawler",
+    "Order": 26,
+    "Job": "Colorist",
+    "Department": "Editing",
+    "TmdbId": 1377116,
+    "CreditId": "6565d8243d745400ac1f8a1b",
+    "Images": []
+   },
+   {
+    "Name": "Justin Sulham",
+    "Order": 27,
+    "Job": "Grip",
+    "Department": "Camera",
+    "TmdbId": 2105801,
+    "CreditId": "65071174fa27f400eb17bff3",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/6h6ebyvxOIuYOba2oPWxrfaog1F.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "A.J. Paratore",
+    "Order": 28,
+    "Job": "Stunts",
+    "Department": "Crew",
+    "TmdbId": 1664766,
+    "CreditId": "6507125342d8a501389a9331",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/wfgnzK7bIOExtsGKpLuIb6CSCPz.jpg"
+     }
+    ]
+   },
+   {
+    "Name": "Corey Hibbert",
+    "Order": 29,
+    "Job": "Stunts",
+    "Department": "Crew",
+    "TmdbId": 2700648,
+    "CreditId": "65071240109dec00aeafd697",
+    "Images": [
+     {
+      "CoverType": "Headshot",
+      "Url": "https://image.tmdb.org/t/p/original/f7nt4UrgN01sJYaWK5w2aDcDiQK.jpg"
+     }
+    ]
+   }
+  ]
+ },
+ "Studio": "Miramax",
+ "YoutubeTrailerId": "AhKLpJmHhIg",
+ "Certifications": [
+  {
+   "Country": "AR",
+   "Certification": "+13"
+  },
+  {
+   "Country": "AU",
+   "Certification": "M"
+  },
+  {
+   "Country": "BE",
+   "Certification": "14"
+  },
+  {
+   "Country": "BR",
+   "Certification": "16"
+  },
+  {
+   "Country": "CA",
+   "Certification": "14A"
+  },
+  {
+   "Country": "CZ",
+   "Certification": "U"
+  },
+  {
+   "Country": "DE",
+   "Certification": "12"
+  },
+  {
+   "Country": "ES",
+   "Certification": "12"
+  },
+  {
+   "Country": "FI",
+   "Certification": "K-16"
+  },
+  {
+   "Country": "GB",
+   "Certification": "15"
+  },
+  {
+   "Country": "HK",
+   "Certification": "IIB"
+  },
+  {
+   "Country": "HU",
+   "Certification": "12"
+  },
+  {
+   "Country": "ID",
+   "Certification": "13+"
+  },
+  {
+   "Country": "IE",
+   "Certification": "15A"
+  },
+  {
+   "Country": "IL",
+   "Certification": "All"
+  },
+  {
+   "Country": "IN",
+   "Certification": "UA"
+  },
+  {
+   "Country": "KR",
+   "Certification": "15"
+  },
+  {
+   "Country": "MX",
+   "Certification": "B"
+  },
+  {
+   "Country": "NL",
+   "Certification": "12"
+  },
+  {
+   "Country": "NZ",
+   "Certification": "M"
+  },
+  {
+   "Country": "PR",
+   "Certification": "R"
+  },
+  {
+   "Country": "PT",
+   "Certification": "M/14"
+  },
+  {
+   "Country": "SE",
+   "Certification": "7"
+  },
+  {
+   "Country": "SG",
+   "Certification": "NC16"
+  },
+  {
+   "Country": "SK",
+   "Certification": "12"
+  },
+  {
+   "Country": "TH",
+   "Certification": "G"
+  },
+  {
+   "Country": "TW",
+   "Certification": "6+"
+  },
+  {
+   "Country": "US",
+   "Certification": "R"
+  }
+ ],
+ "Status": null,
+ "Collection": null,
+ "Homepage": "http://focusfeatures.com/the-holdovers"
+}

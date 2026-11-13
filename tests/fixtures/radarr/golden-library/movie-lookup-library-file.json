@@ -1,0 +1,214 @@
+{
+  "body": [
+    {
+      "added": "2026-03-07T09:12:06Z",
+      "alternateTitles": [
+        {
+          "id": 12,
+          "movieMetadataId": 5,
+          "sourceType": "tmdb",
+          "title": "Air Jordan"
+        },
+        {
+          "id": 13,
+          "movieMetadataId": 5,
+          "sourceType": "tmdb",
+          "title": "Air: O Filme"
+        },
+        {
+          "id": 14,
+          "movieMetadataId": 5,
+          "sourceType": "tmdb",
+          "title": "Air: Courting a Legend"
+        },
+        {
+          "id": 15,
+          "movieMetadataId": 5,
+          "sourceType": "tmdb",
+          "title": "Air: A Story of Greatness"
+        },
+        {
+          "id": 16,
+          "movieMetadataId": 5,
+          "sourceType": "tmdb",
+          "title": "如履青雲"
+        },
+        {
+          "id": 17,
+          "movieMetadataId": 5,
+          "sourceType": "tmdb",
+          "title": "如履轻云"
+        },
+        {
+          "id": 18,
+          "movieMetadataId": 5,
+          "sourceType": "tmdb",
+          "title": "AIR: Theo Đuổi Một Huyền Thoại"
+        },
+        {
+          "id": 19,
+          "movieMetadataId": 5,
+          "sourceType": "tmdb",
+          "title": "集氣"
+        },
+        {
+          "id": 20,
+          "movieMetadataId": 5,
+          "sourceType": "tmdb",
+          "title": "Air: Κυνηγώντας Ένα Θρύλο"
+        }
+      ],
+      "certification": "R",
+      "cleanTitle": "air",
+      "digitalRelease": "2023-04-05T00:00:00Z",
+      "folder": "Air (2023) {tmdb-964980}",
+      "folderName": "/movies/Air (2023)",
+      "genres": [
+        "Drama",
+        "History"
+      ],
+      "id": 5,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/76AKQPdH3M8cvsFR9K8JsOzVlY5.jpg",
+          "url": "/MediaCover/5/poster.jpg?h=f9ba225753cba66238ae"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/aT3sRVqgpkyCo23fp9myVfKPWbA.jpg",
+          "url": "/MediaCover/5/fanart.jpg?h=be659cd8937c908128ea"
+        }
+      ],
+      "imdbId": "tt16419074",
+      "inCinemas": "2023-04-05T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "1980s",
+        "based on true story",
+        "basketball",
+        "duringcreditsstinger",
+        "national basketball association (nba)",
+        "shoe",
+        "sports"
+      ],
+      "minimumAvailability": "released",
+      "monitored": false,
+      "movieFile": {
+        "dateAdded": "2026-04-27T21:42:24Z",
+        "edition": "",
+        "id": 203,
+        "indexerFlags": 0,
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "mediaInfo": {
+          "audioBitrate": 640000,
+          "audioChannels": 5.1,
+          "audioCodec": "EAC3",
+          "audioLanguages": "ita/ita/eng",
+          "audioStreamCount": 3,
+          "resolution": "1920x1036",
+          "runTime": "1:54:17",
+          "scanType": "Progressive",
+          "subtitles": "ita/ita/eng",
+          "videoBitDepth": 8,
+          "videoBitrate": 10942436,
+          "videoCodec": "x264",
+          "videoDynamicRange": "",
+          "videoDynamicRangeType": "",
+          "videoFps": 23.976
+        },
+        "movieId": 5,
+        "originalFilePath": "Air.La.Storia.Del.Grande.Salto.2023.iTA-ENG.Bluray.1080p.x264-CYBER/Air.La.Storia.Del.Grande.Salto.2023.iTA-ENG.Bluray.1080p.x264-CYBER.mkv",
+        "path": "/movies/Air (2023)/Air (2023) {tmdb-964980} - [Bluray-1080p][EAC3 5.1][x264]-CYBER.mkv",
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "qualityCutoffNotMet": false,
+        "relativePath": "Air (2023) {tmdb-964980} - [Bluray-1080p][EAC3 5.1][x264]-CYBER.mkv",
+        "releaseGroup": "CYBER",
+        "sceneName": "Air.La.Storia.Del.Grande.Salto.2023.iTA-ENG.Bluray.1080p.x264-CYBER",
+        "size": 10799194660
+      },
+      "movieFileId": 203,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Air",
+      "overview": "Discover the game-changing partnership between a then undiscovered Michael Jordan and Nike's fledgling basketball division which revolutionized the world of sports and culture with the Air Jordan brand.",
+      "path": "/movies/Air (2023)",
+      "physicalRelease": "2023-09-12T00:00:00Z",
+      "popularity": 5.9408,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 7.4,
+          "votes": 200699
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 73,
+          "votes": 0
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 93,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 7.277,
+          "votes": 2527
+        },
+        "trakt": {
+          "type": "user",
+          "value": 7.63103,
+          "votes": 9654
+        }
+      },
+      "releaseDate": "2023-04-05T00:00:00Z",
+      "remotePoster": "https://image.tmdb.org/t/p/original/76AKQPdH3M8cvsFR9K8JsOzVlY5.jpg",
+      "runtime": 112,
+      "secondaryYearSourceId": 0,
+      "sortTitle": "air",
+      "status": "released",
+      "studio": "Amazon Studios",
+      "tags": [
+        1
+      ],
+      "title": "Air",
+      "titleSlug": "964980",
+      "tmdbId": 964980,
+      "website": "https://www.amazon.com/salp/air?hhf",
+      "year": 2023,
+      "youTubeTrailerId": "Euy4Yu6B3nU"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:38:02Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/movie/lookup?term=tmdb:964980"
+  },
+  "status": 200
+}

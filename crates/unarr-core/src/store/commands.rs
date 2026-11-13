@@ -20,7 +20,7 @@ pub fn next_id(conn: &Connection) -> anyhow::Result<i64> {
     Ok(max.unwrap_or(0).max(seeded.unwrap_or(0)) + 1)
 }
 
-pub fn insert(conn: &Connection, c: &CommandModel) -> anyhow::Result<()> {
+pub fn insert(conn: &Connection, personality: crate::Personality, c: &CommandModel) -> anyhow::Result<()> {
     conn.execute(
         "INSERT INTO commands (id, name, body, priority, status, result, queued_at, started_at, ended_at,
                                duration_ms, exception, trigger, message)
@@ -28,7 +28,7 @@ pub fn insert(conn: &Connection, c: &CommandModel) -> anyhow::Result<()> {
         params![
             c.id,
             c.name(),
-            c.body_json().to_string(),
+            c.body_json(personality).to_string(),
             c.priority.as_i64(),
             c.status.as_i64(),
             c.result.as_i64(),

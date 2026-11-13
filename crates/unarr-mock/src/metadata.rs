@@ -1,5 +1,6 @@
 //! The metadata upstreams: Skyhook, the Servarr services, XEM, TheTVDB's
-//! artwork host and Simkl, served from `tests/fixtures/metadata/` under
+//! artwork host and Simkl for Sonarr, api.radarr.video, the Servarr
+//! services and TMDB's image host for Radarr, served from `tests/fixtures/metadata/` under
 //! `/<host><path>`, with the rules `scripts/mock-servarr.py` documents. The
 //! Python mock reaches the same handler through the HTTPS tunnels the
 //! recording Sonarr opens; Unarr's tests ask for `/<host><path>` directly.
@@ -17,7 +18,16 @@ pub const HOSTS: &[&str] = &[
     "thexem.info",
     "artworks.thetvdb.com",
     "api.simkl.com",
+    // Radarr's: its metadata server, the Servarr services, TMDB's images.
+    "api.radarr.video",
+    "radarr.servarr.com",
+    "image.tmdb.org",
 ];
+
+/// The hosts that serve images, answered with a stand-in.
+const ARTWORK_HOSTS: &[&str] = &["artworks.thetvdb.com", "image.tmdb.org"];
+/// The Servarr services, whose `v1/time` is the clock.
+const SERVICES_HOSTS: &[&str] = &["services.sonarr.tv", "radarr.servarr.com"];
 
 /// Which stand-in image an artwork path gets, by the folder its kind
 /// names; the first match wins.
@@ -42,6 +52,10 @@ pub fn fixture_name(path: &str, raw_query: &str) -> String {
     if name.is_empty() {
         name = "index".into();
     }
+    // The movies changed since a moment: one recording for every moment.
+    if name == "v1/movie/changed" {
+        return name;
+    }
     if !raw_query.is_empty() {
         let slugged = crate::slug(&percent_decode(raw_query));
         name.push('/');
@@ -59,7 +73,7 @@ pub fn handle(fixtures: &Path, full_path: &str, raw_query: &str) -> Option<Reply
         return None;
     }
     let path = format!("/{path}");
-    if host == "artworks.thetvdb.com" {
+    if ARTWORK_HOSTS.contains(&host) {
         let lowered = path.to_ascii_lowercase();
         let name = ARTWORK_KINDS
             .iter()
@@ -73,7 +87,7 @@ pub fn handle(fixtures: &Path, full_path: &str, raw_query: &str) -> Option<Reply
         let body = std::fs::read(fixtures.join("metadata/artwork").join(name)).unwrap_or_default();
         return Some((StatusCode::OK, body, content_type, format!("artwork/{name}")).into());
     }
-    if host == "services.sonarr.tv" && path == "/v1/time" {
+    if SERVICES_HOSTS.contains(&host) && path == "/v1/time" {
         let now = chrono::Utc::now().format("%Y-%m-%dT%H:%M:%S%.7fZ");
         let body = format!("{{\"dateTimeUtc\":\"{now}\"}}").into_bytes();
         return Some(
@@ -81,7 +95,7 @@ pub fn handle(fixtures: &Path, full_path: &str, raw_query: &str) -> Option<Reply
                 StatusCode::OK,
                 body,
                 "application/json",
-                "services.sonarr.tv/v1/time (now)".into(),
+                format!("{host}/v1/time (now)"),
             )
                 .into(),
         );

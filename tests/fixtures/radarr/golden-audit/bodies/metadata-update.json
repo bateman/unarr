@@ -1,0 +1,28 @@
+{
+ "$from": "metadata-1",
+ "$set": {
+  "enable": true,
+  "fields": [
+   {
+    "name": "movieMetadata",
+    "value": true
+   },
+   {
+    "name": "movieMetadataURL",
+    "value": false
+   },
+   {
+    "name": "movieImages",
+    "value": true
+   },
+   {
+    "name": "useMovieNfo",
+    "value": true
+   },
+   {
+    "name": "addCollectionName",
+    "value": false
+   }
+  ]
+ }
+}

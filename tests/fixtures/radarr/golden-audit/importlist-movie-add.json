@@ -1,0 +1,371 @@
+{
+  "body": [
+    {
+      "addOptions": {
+        "addMethod": "manual",
+        "ignoreEpisodesWithFiles": false,
+        "ignoreEpisodesWithoutFiles": false,
+        "monitor": "movieOnly",
+        "searchForMovie": false
+      },
+      "added": "2026-11-13T15:38:04Z",
+      "alternateTitles": [
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "星际穿越"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "星際啟示錄"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Interestelar"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Csillagok Között"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "インターステラー"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "ინტერსტელარი"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Hố Đen Tử Thần"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Interestelar"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Ulduzlararası"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Interstellaire"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Интерстеллар"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Интерстелар"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "بين النجوم"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Інтэрстэлар"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "میان‌ ستاره‌ ای"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "इंटरस्टेलर"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "ਇੰਟਰਸਟੈਲਰ"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Интерстелар"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Tähtedevaheline"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "בין כוכבים"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "ვარსკვლავთშორისი"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Tarp žvaigždžių"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "ഇന്റർസ്റ്റെല്ലാർ"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "قائم بين النجوم"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "اینتر استلار"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Одод хооронд"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "इन्टरस्टेलर"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Interstellar: Călătorind Prin Univers"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Medzvezdje"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "இன்டர்‌ஸ்டெலர்"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Інтерстеллар"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "انٹرسٹیلر"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "星際啟示錄"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Međuzvjezdani"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Yıldızlararası"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Међузвездани"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "ఇంటర్ స్టెల్లర్"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "อินเตอร์สเตลลาร์ ทะยานดาวกู้โลก"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "인터스텔라"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "星際效應"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Ինտերստելեր"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "در میان ستارگان"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "أنترستيلر"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Interstellaire"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Интерстеллар"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Интерстеллэр"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Interstellar"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "星際啓示錄"
+        }
+      ],
+      "certification": "PG-13",
+      "cleanTitle": "interstellar",
+      "digitalRelease": "2014-11-07T00:00:00Z",
+      "folderName": "/movies/Interstellar (2014) {tmdb-157336}",
+      "genres": [
+        "Adventure",
+        "Drama",
+        "Science Fiction"
+      ],
+      "id": 328,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/yQvGrMoipbRoddT0ZR8tPoR7NfX.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/8sNiAPPYU14PUepFNeSNGUTiHW.jpg"
+        }
+      ],
+      "imdbId": "tt0816692",
+      "inCinemas": "2014-11-05T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "2060s",
+        "artificial intelligence (a.i.)",
+        "astronaut",
+        "audacious",
+        "black hole",
+        "cryonics",
+        "dystopia",
+        "enthusiastic",
+        "expedition",
+        "family relationships",
+        "famine",
+        "father daughter relationship",
+        "gravity",
+        "hibernation",
+        "nasa",
+        "planet",
+        "quantum mechanics",
+        "race against time",
+        "scientist",
+        "single father",
+        "space",
+        "space adventure",
+        "space station",
+        "space travel",
+        "spacecraft",
+        "time travel",
+        "time warp",
+        "time-manipulation",
+        "wormhole"
+      ],
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Interstellar",
+      "overview": "The adventures of a group of explorers who make use of a newly discovered wormhole to surpass the limitations on human space travel and conquer the vast distances involved in an interstellar voyage.",
+      "path": "/movies/Interstellar (2014) {tmdb-157336}",
+      "physicalRelease": "2015-03-31T00:00:00Z",
+      "popularity": 53.1428,
+      "qualityProfileId": 11,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 8.7,
+          "votes": 2631937
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 74,
+          "votes": 0
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 73,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 8.5,
+          "votes": 41867
+        },
+        "trakt": {
+          "type": "user",
+          "value": 8.83471,
+          "votes": 74602
+        }
+      },
+      "releaseDate": "2014-11-07T00:00:00Z",
+      "rootFolderPath": "/movies",
+      "runtime": 169,
+      "secondaryYearSourceId": 0,
+      "sortTitle": "interstellar",
+      "status": "released",
+      "studio": "Legendary Pictures",
+      "tags": [],
+      "title": "Interstellar",
+      "titleSlug": "157336",
+      "tmdbId": 157336,
+      "website": "http://www.interstellarmovie.net/",
+      "year": 2014,
+      "youTubeTrailerId": "LY19rHKAaAg"
+    }
+  ],
+  "recordedAt": "2026-11-13T15:38:05Z",
+  "request": {
+    "body": "bodies/importlist-movie-add.json",
+    "method": "POST",
+    "path": "/api/v3/importlist/movie"
+  },
+  "status": 200
+}

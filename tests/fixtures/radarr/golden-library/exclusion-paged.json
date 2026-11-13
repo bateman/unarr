@@ -1,0 +1,47 @@
+{
+  "body": {
+    "page": 1,
+    "pageSize": 5,
+    "records": [
+      {
+        "id": 19,
+        "movieTitle": "Alien: Covenant - Prologue: The Crossing",
+        "movieYear": 2017,
+        "tmdbId": 1782999
+      },
+      {
+        "id": 18,
+        "movieTitle": "Alien: Covenant - Meet Walter",
+        "movieYear": 2017,
+        "tmdbId": 1782981
+      },
+      {
+        "id": 20,
+        "movieTitle": "Alien: Covenant - Prologue: Last Supper",
+        "movieYear": 2017,
+        "tmdbId": 1778030
+      },
+      {
+        "id": 17,
+        "movieTitle": "Alien: Covenant - Advent",
+        "movieYear": 2017,
+        "tmdbId": 1765713
+      },
+      {
+        "id": 16,
+        "movieTitle": "Alien: Covenant - Prologue: Last Supper",
+        "movieYear": 0,
+        "tmdbId": 1752245
+      }
+    ],
+    "sortDirection": "descending",
+    "sortKey": "tmdbId",
+    "totalRecords": 23
+  },
+  "recordedAt": "2026-11-13T12:41:43Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/exclusions/paged?page=1&pageSize=5&sortKey=tmdbId&sortDirection=descending"
+  },
+  "status": 200
+}

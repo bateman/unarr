@@ -1,0 +1,23 @@
+{
+  "body": [
+    {
+      "attemptedValue": "IMDb Watchlist",
+      "errorCode": "PredicateValidator",
+      "errorMessage": "Should be unique",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Name",
+        "propertyValue": "IMDb Watchlist"
+      },
+      "propertyName": "Name",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T13:34:10Z",
+  "request": {
+    "body": "bodies/importlist-create-taken.json",
+    "method": "POST",
+    "path": "/api/v3/importlist"
+  },
+  "status": 400
+}

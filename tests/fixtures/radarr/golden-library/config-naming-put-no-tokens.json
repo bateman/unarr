@@ -1,0 +1,23 @@
+{
+  "body": [
+    {
+      "attemptedValue": "static name",
+      "errorCode": "ValidMovieFormatValidator",
+      "errorMessage": "Must contain either movie title and release year OR Original Title/Filename",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Standard Movie Format",
+        "propertyValue": "static name"
+      },
+      "propertyName": "StandardMovieFormat",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:41:12Z",
+  "request": {
+    "body": "bodies/config-naming-put-no-tokens.json",
+    "method": "PUT",
+    "path": "/api/v3/config/naming/1"
+  },
+  "status": 400
+}

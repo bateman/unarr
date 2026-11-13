@@ -185,6 +185,14 @@ async fn put_resource_id(
     let Some((base, route_id)) = put_by_id_target(put_by_id(state.personality()), uri.path()) else {
         return next.run(request).await;
     };
+    // Radarr's `PUT /collection` with no id is the edit of several
+    // collections (`CollectionUpdateResource`), not of one.
+    if route_id.is_none()
+        && state.personality() == unarr_core::Personality::Radarr
+        && base.ends_with("/collection")
+    {
+        return next.run(request).await;
+    }
     // Nothing is read for a caller without the key: the API answers 401
     // whatever the path says.
     let key = auth::presented_key(&uri, request.headers());

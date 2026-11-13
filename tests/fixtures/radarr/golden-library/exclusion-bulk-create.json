@@ -1,0 +1,23 @@
+{
+  "body": [
+    {
+      "attemptedValue": 603,
+      "errorCode": "ImportListExclusionExistsValidator",
+      "errorMessage": "This exclusion has already been added.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Tmdb Id",
+        "propertyValue": 603
+      },
+      "propertyName": "TmdbId",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:41:43Z",
+  "request": {
+    "body": "bodies/exclusion-bulk-create.json",
+    "method": "POST",
+    "path": "/api/v3/exclusions/bulk"
+  },
+  "status": 400
+}

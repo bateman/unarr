@@ -1,0 +1,9 @@
+{
+  "body": [],
+  "recordedAt": "2026-11-13T13:34:40Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/movie?tmdbId=630240"
+  },
+  "status": 200
+}

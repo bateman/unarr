@@ -1,0 +1,10 @@
+{
+  "body": {},
+  "recordedAt": "2026-11-13T12:41:29Z",
+  "request": {
+    "body": "bodies/customformat-bulk-delete.json",
+    "method": "DELETE",
+    "path": "/api/v3/customformat/bulk"
+  },
+  "status": 200
+}

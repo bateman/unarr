@@ -84,6 +84,11 @@ impl Augment {
         &self.upstreams
     }
 
+    /// The HTTP client it asks through.
+    pub fn client(&self) -> &reqwest::Client {
+        &self.client
+    }
+
     /// A GET with Sonarr's user agent, its body when the status is 2xx.
     async fn get(&self, url: &str, servarr: bool) -> anyhow::Result<Vec<u8>> {
         let mut request = self.client.get(self.upstreams.url(url));

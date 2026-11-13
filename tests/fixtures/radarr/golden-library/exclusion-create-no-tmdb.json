@@ -1,0 +1,23 @@
+{
+  "body": [
+    {
+      "attemptedValue": 0,
+      "errorCode": "NotEmptyValidator",
+      "errorMessage": "'Tmdb Id' must not be empty.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Tmdb Id",
+        "propertyValue": 0
+      },
+      "propertyName": "TmdbId",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:41:43Z",
+  "request": {
+    "body": "bodies/exclusion-create-no-tmdb.json",
+    "method": "POST",
+    "path": "/api/v3/exclusions"
+  },
+  "status": 400
+}

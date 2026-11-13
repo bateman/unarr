@@ -818,6 +818,74 @@ pub fn list_import_exclusions(conn: &Connection) -> anyhow::Result<Vec<ImportExc
     Ok(rows.collect::<Result<_, _>>()?)
 }
 
+/// `ImportListMovieService.SyncMoviesForList`: the rows the list names
+/// now, the ones it no longer names removed.
+pub fn sync_movies_for_list(
+    conn: &Connection,
+    import_list_id: i64,
+    movie_metadata_ids: &[i64],
+) -> anyhow::Result<()> {
+    let tx = conn.unchecked_transaction()?;
+    let mut stored: Vec<(i64, i64)> = Vec::new();
+    {
+        let mut stmt =
+            tx.prepare("SELECT id, movie_metadata_id FROM import_list_movies WHERE import_list_id = ?1")?;
+        let rows = stmt.query_map([import_list_id], |r| Ok((r.get(0)?, r.get(1)?)))?;
+        for row in rows {
+            stored.push(row?);
+        }
+    }
+    for (id, metadata_id) in &stored {
+        if !movie_metadata_ids.contains(metadata_id) {
+            tx.execute("DELETE FROM import_list_movies WHERE id = ?1", [id])?;
+        }
+    }
+    for metadata_id in movie_metadata_ids {
+        if stored.iter().any(|(_, stored)| stored == metadata_id) {
+            continue;
+        }
+        let id = crate::store::sequence::next_id(&tx, "import_list_movies")?;
+        insert_import_list_movie(&tx, id, import_list_id, *metadata_id)?;
+    }
+    tx.commit()?;
+    Ok(())
+}
+
+/// `ImportListMovieService.GetAllForLists`: what those lists named at
+/// their last sync, each movie's metadata row, in the order they were
+/// stored.
+pub fn list_movies_for(conn: &Connection, import_list_ids: &[i64]) -> anyhow::Result<Vec<ListMovie>> {
+    let mut stmt =
+        conn.prepare("SELECT id, import_list_id, movie_metadata_id FROM import_list_movies ORDER BY id")?;
+    let rows = stmt.query_map([], |r| {
+        Ok((r.get::<_, i64>(0)?, r.get::<_, i64>(1)?, r.get::<_, i64>(2)?))
+    })?;
+    let mut out = Vec::new();
+    for row in rows {
+        let (id, list_id, metadata_id) = row?;
+        if !import_list_ids.contains(&list_id) {
+            continue;
+        }
+        let Some(metadata) = get_metadata(conn, metadata_id)? else {
+            continue;
+        };
+        out.push(ListMovie {
+            id,
+            import_list_id: list_id,
+            metadata,
+        });
+    }
+    Ok(out)
+}
+
+/// A row of `ImportListMovies` with the metadata it names.
+#[derive(Debug, Clone, PartialEq)]
+pub struct ListMovie {
+    pub id: i64,
+    pub import_list_id: i64,
+    pub metadata: MovieMetadata,
+}
+
 pub fn insert_import_list_movie(
     conn: &Connection,
     id: i64,
@@ -1473,4 +1541,365 @@ pub fn delete_extra_files_of_movie_file(conn: &Connection, movie_file_id: i64) -
         "DELETE FROM extra_files WHERE movie_file_id = ?1",
         params![movie_file_id],
     )?)
+}
+
+// --- writes of the library: what a refresh, an add and an edit store
+
+/// `MovieMetadataRepository.Update`: every column but the id.
+pub fn update_metadata(conn: &Connection, m: &MovieMetadata) -> anyhow::Result<()> {
+    conn.execute(
+        "UPDATE movie_metadata SET tmdb_id = :tmdb_id, imdb_id = :imdb_id, title = :title,
+            sort_title = :sort_title, clean_title = :clean_title, original_title = :original_title,
+            clean_original_title = :clean_original_title, original_language_id = :original_language_id,
+            status = :status, overview = :overview, images = :images, genres = :genres, keywords = :keywords,
+            ratings = :ratings, recommendations = :recommendations, runtime = :runtime,
+            in_cinemas = :in_cinemas, physical_release = :physical_release,
+            digital_release = :digital_release, year = :year, secondary_year = :secondary_year,
+            certification = :certification, youtube_trailer_id = :youtube_trailer_id, studio = :studio,
+            website = :website, popularity = :popularity, collection_tmdb_id = :collection_tmdb_id,
+            collection_title = :collection_title, last_info_sync = :last_info_sync
+          WHERE id = :id",
+        named_params! {
+            ":id": m.id, ":tmdb_id": m.tmdb_id, ":imdb_id": m.imdb_id, ":title": m.title,
+            ":sort_title": m.sort_title, ":clean_title": m.clean_title, ":original_title": m.original_title,
+            ":clean_original_title": m.clean_original_title, ":original_language_id": m.original_language_id,
+            ":status": m.status.as_str(), ":overview": m.overview, ":images": to_json(&m.images)?,
+            ":genres": to_json(&m.genres)?, ":keywords": to_json(&m.keywords)?, ":ratings": to_json(&m.ratings)?,
+            ":recommendations": to_json(&m.recommendations)?, ":runtime": m.runtime,
+            ":in_cinemas": ts(m.in_cinemas), ":physical_release": ts(m.physical_release),
+            ":digital_release": ts(m.digital_release), ":year": m.year, ":secondary_year": m.secondary_year,
+            ":certification": m.certification, ":youtube_trailer_id": m.youtube_trailer_id,
+            ":studio": m.studio, ":website": m.website, ":popularity": m.popularity,
+            ":collection_tmdb_id": m.collection_tmdb_id, ":collection_title": m.collection_title,
+            ":last_info_sync": ts(m.last_info_sync),
+        },
+    )?;
+    Ok(())
+}
+
+/// The metadata row of a TMDB id, in the library or only known through a
+/// collection or a list.
+pub fn metadata_by_tmdb_id(conn: &Connection, tmdb_id: i64) -> anyhow::Result<Option<MovieMetadata>> {
+    Ok(query_metadata(conn, "md.tmdb_id = ?1", &[&tmdb_id])?
+        .into_iter()
+        .next())
+}
+
+pub fn get_metadata(conn: &Connection, id: i64) -> anyhow::Result<Option<MovieMetadata>> {
+    Ok(query_metadata(conn, "md.id = ?1", &[&id])?.into_iter().next())
+}
+
+/// `MovieMetadataRepository.UpsertMany` for one row: the row with this
+/// TMDB id updated in place, or a new one under the next id. Returns the
+/// stored id.
+pub fn upsert_metadata(conn: &Connection, m: &mut MovieMetadata) -> anyhow::Result<i64> {
+    match metadata_by_tmdb_id(conn, m.tmdb_id)? {
+        Some(existing) => {
+            m.id = existing.id;
+            update_metadata(conn, m)?;
+        }
+        None => {
+            m.id = crate::store::sequence::next_id(conn, "movie_metadata")?;
+            insert_metadata(conn, m)?;
+        }
+    }
+    Ok(m.id)
+}
+
+pub fn delete_metadata(conn: &Connection, id: i64) -> anyhow::Result<()> {
+    conn.execute("DELETE FROM movie_metadata WHERE id = ?1", [id])?;
+    Ok(())
+}
+
+/// `AlternativeTitleService.UpdateTitles`: the titles of a movie replaced
+/// by what the provider lists now. Left out: the main title, a title
+/// twice, and a title another movie already has. A title the movie had
+/// keeps its row; what the provider no longer lists goes.
+pub fn update_alternative_titles(
+    conn: &Connection,
+    titles: Vec<AlternativeTitle>,
+    metadata: &MovieMetadata,
+) -> anyhow::Result<Vec<AlternativeTitle>> {
+    let mut seen = std::collections::HashSet::new();
+    let mut kept: Vec<AlternativeTitle> = Vec::new();
+    for mut title in titles {
+        title.movie_metadata_id = metadata.id;
+        if title.clean_title == metadata.clean_title || !seen.insert(title.clean_title.clone()) {
+            continue;
+        }
+        let taken: bool = conn.query_row(
+            "SELECT EXISTS(SELECT 1 FROM alternative_titles WHERE clean_title IS ?1 AND movie_metadata_id <> ?2)",
+            params![title.clean_title, metadata.id],
+            |r| r.get(0),
+        )?;
+        if !taken {
+            kept.push(title);
+        }
+    }
+    let mut existing = alternative_titles_of(conn, metadata.id)?;
+    for title in &mut kept {
+        match existing.iter().position(|e| e.clean_title == title.clean_title) {
+            Some(at) => {
+                let old = existing.remove(at);
+                title.id = old.id;
+                if *title != old {
+                    conn.execute(
+                        "UPDATE alternative_titles SET title = ?2, clean_title = ?3, source_type = ?4 WHERE id = ?1",
+                        params![title.id, title.title, title.clean_title, title.source_type],
+                    )?;
+                }
+            }
+            None => {
+                title.id = crate::store::sequence::next_id(conn, "alternative_titles")?;
+                insert_alternative_title(conn, title)?;
+            }
+        }
+    }
+    for gone in existing {
+        conn.execute("DELETE FROM alternative_titles WHERE id = ?1", [gone.id])?;
+    }
+    Ok(kept)
+}
+
+/// Every translation of a movie, in id order.
+pub fn translations_of(conn: &Connection, movie_metadata_id: i64) -> anyhow::Result<Vec<MovieTranslation>> {
+    let mut stmt = conn.prepare(
+        "SELECT id, movie_metadata_id, language_id, title, clean_title, overview FROM movie_translations
+         WHERE movie_metadata_id = ?1 ORDER BY id",
+    )?;
+    let rows = stmt.query_map([movie_metadata_id], |r| {
+        Ok(MovieTranslation {
+            id: r.get(0)?,
+            movie_metadata_id: r.get(1)?,
+            language_id: r.get(2)?,
+            title: r.get(3)?,
+            clean_title: r.get(4)?,
+            overview: r.get(5)?,
+        })
+    })?;
+    Ok(rows.collect::<Result<_, _>>()?)
+}
+
+/// `MovieTranslationService.UpdateTranslations`: one translation per
+/// language the originals know (`language_id` 0 is one they do not).
+pub fn update_translations(
+    conn: &Connection,
+    translations: Vec<MovieTranslation>,
+    movie_metadata_id: i64,
+) -> anyhow::Result<()> {
+    let mut seen = std::collections::HashSet::new();
+    let mut existing = translations_of(conn, movie_metadata_id)?;
+    for mut translation in translations {
+        translation.movie_metadata_id = movie_metadata_id;
+        if translation.language_id == 0 || !seen.insert(translation.language_id) {
+            continue;
+        }
+        match existing
+            .iter()
+            .position(|e| e.language_id == translation.language_id)
+        {
+            Some(at) => {
+                let old = existing.remove(at);
+                translation.id = old.id;
+                if translation != old {
+                    conn.execute(
+                        "UPDATE movie_translations SET title = ?2, clean_title = ?3, overview = ?4 WHERE id = ?1",
+                        params![
+                            translation.id,
+                            translation.title,
+                            translation.clean_title,
+                            translation.overview
+                        ],
+                    )?;
+                }
+            }
+            None => {
+                translation.id = crate::store::sequence::next_id(conn, "movie_translations")?;
+                insert_translation(conn, &translation)?;
+            }
+        }
+    }
+    for gone in existing {
+        conn.execute("DELETE FROM movie_translations WHERE id = ?1", [gone.id])?;
+    }
+    Ok(())
+}
+
+/// `CreditService.UpdateCredits`: the credits of a movie, one per TMDB
+/// credit id.
+pub fn update_credits(conn: &Connection, credits: Vec<Credit>, movie_metadata_id: i64) -> anyhow::Result<()> {
+    let mut seen = std::collections::HashSet::new();
+    let mut existing = credits_of(conn, movie_metadata_id)?;
+    for mut credit in credits {
+        credit.movie_metadata_id = movie_metadata_id;
+        if !seen.insert(credit.credit_tmdb_id.clone()) {
+            continue;
+        }
+        match existing
+            .iter()
+            .position(|e| e.credit_tmdb_id == credit.credit_tmdb_id)
+        {
+            Some(at) => {
+                let old = existing.remove(at);
+                credit.id = old.id;
+                if credit != old {
+                    conn.execute(
+                        "UPDATE credits SET person_tmdb_id = ?2, name = ?3, images = ?4, character = ?5,
+                            sort_order = ?6, job = ?7, department = ?8, type = ?9 WHERE id = ?1",
+                        params![
+                            credit.id,
+                            credit.person_tmdb_id,
+                            credit.name,
+                            to_json(&credit.images)?,
+                            credit.character,
+                            credit.order,
+                            credit.job,
+                            credit.department,
+                            credit.credit_type
+                        ],
+                    )?;
+                }
+            }
+            None => {
+                credit.id = crate::store::sequence::next_id(conn, "credits")?;
+                insert_credit(conn, &credit)?;
+            }
+        }
+    }
+    for gone in existing {
+        conn.execute("DELETE FROM credits WHERE id = ?1", [gone.id])?;
+    }
+    Ok(())
+}
+
+/// `MovieCollectionRepository.Insert`, under the next id.
+pub fn add_collection(conn: &Connection, c: &mut Collection) -> anyhow::Result<()> {
+    c.id = crate::store::sequence::next_id(conn, "collections")?;
+    insert_collection(conn, c)
+}
+
+/// `MovieCollectionRepository.Update`: every column but the id.
+pub fn update_collection(conn: &Connection, c: &Collection) -> anyhow::Result<()> {
+    conn.execute(
+        "UPDATE collections SET tmdb_id = ?2, title = ?3, sort_title = ?4, clean_title = ?5, overview = ?6,
+            images = ?7, monitored = ?8, quality_profile_id = ?9, root_folder_path = ?10,
+            minimum_availability = ?11, search_on_add = ?12, tags = ?13, added = ?14, last_info_sync = ?15
+          WHERE id = ?1",
+        params![
+            c.id,
+            c.tmdb_id,
+            c.title,
+            c.sort_title,
+            c.clean_title,
+            c.overview,
+            to_json(&c.images)?,
+            c.monitored,
+            c.quality_profile_id,
+            c.root_folder_path,
+            c.minimum_availability.as_str(),
+            c.search_on_add,
+            to_json(&c.tags)?,
+            ts(c.added),
+            ts(c.last_info_sync),
+        ],
+    )?;
+    Ok(())
+}
+
+pub fn delete_collection(conn: &Connection, id: i64) -> anyhow::Result<()> {
+    conn.execute("DELETE FROM collections WHERE id = ?1", [id])?;
+    Ok(())
+}
+
+/// `MovieRepository.Update` for what an edit, a refresh's tags or an add's
+/// options change: every column of the movie's own row but its ids.
+pub fn update_movie(conn: &Connection, m: &Movie) -> anyhow::Result<()> {
+    conn.execute(
+        "UPDATE movies SET path = ?2, monitored = ?3, quality_profile_id = ?4, minimum_availability = ?5,
+            tags = ?6, added = ?7, add_options = ?8, last_search_time = ?9 WHERE id = ?1",
+        params![
+            m.id,
+            m.path,
+            m.monitored,
+            m.quality_profile_id,
+            m.minimum_availability.as_str(),
+            to_json(&m.tags)?,
+            ts(m.added),
+            m.add_options.as_ref().map(to_json).transpose()?,
+            ts(m.last_search_time),
+        ],
+    )?;
+    Ok(())
+}
+
+/// `MovieRepository.Insert`, under the next id.
+pub fn add_movie(conn: &Connection, m: &mut Movie) -> anyhow::Result<()> {
+    m.id = crate::store::sequence::next_id(conn, "movies")?;
+    insert_movie(conn, m)
+}
+
+/// The TMDB ids of every movie of the library (`AllMovieTmdbIds`).
+pub fn all_movie_tmdb_ids(conn: &Connection) -> anyhow::Result<std::collections::HashSet<i64>> {
+    let mut stmt = conn
+        .prepare("SELECT md.tmdb_id FROM movies m JOIN movie_metadata md ON md.id = m.movie_metadata_id")?;
+    let ids = stmt.query_map([], |r| r.get(0))?;
+    Ok(ids.collect::<Result<_, _>>()?)
+}
+
+/// Every movie's id and path (`AllMoviePaths`).
+pub fn all_movie_paths(conn: &Connection) -> anyhow::Result<Vec<(i64, String)>> {
+    let mut stmt = conn.prepare("SELECT id, path FROM movies ORDER BY id")?;
+    let rows = stmt.query_map([], |r| Ok((r.get(0)?, r.get(1)?)))?;
+    Ok(rows.collect::<Result<_, _>>()?)
+}
+
+/// `RemoveAddOptions`.
+pub fn clear_add_options(conn: &Connection, movie_id: i64) -> anyhow::Result<()> {
+    conn.execute("UPDATE movies SET add_options = NULL WHERE id = ?1", [movie_id])?;
+    Ok(())
+}
+
+/// The movie of the library a metadata row belongs to, if any.
+pub fn movie_of_metadata(conn: &Connection, movie_metadata_id: i64) -> anyhow::Result<Option<Movie>> {
+    Ok(
+        query_movies(conn, "m.movie_metadata_id = ?1", &[&movie_metadata_id])?
+            .into_iter()
+            .next(),
+    )
+}
+
+/// The movies of the library that belong to a collection.
+pub fn movies_by_collection(conn: &Connection, collection_tmdb_id: i64) -> anyhow::Result<Vec<Movie>> {
+    query_movies(conn, "md.collection_tmdb_id = ?1", &[&collection_tmdb_id])
+}
+
+/// A movie's row and everything the originals' handlers of
+/// `MoviesDeletedEvent` remove with it. The metadata row stays: a
+/// collection or a list may still name it, and the housekeeping removes
+/// the ones nothing does.
+pub fn delete_movie_cascade(conn: &Connection, movie: &Movie) -> anyhow::Result<()> {
+    for (table, column) in [
+        ("movie_files", "movie_id"),
+        ("history", "movie_id"),
+        ("blocklist", "movie_id"),
+        ("download_history", "movie_id"),
+        ("pending_releases", "movie_id"),
+        ("extra_files", "movie_id"),
+    ] {
+        conn.execute(&format!("DELETE FROM {table} WHERE {column} = ?1"), [movie.id])?;
+    }
+    for table in ["alternative_titles", "movie_translations", "credits"] {
+        conn.execute(
+            &format!("DELETE FROM {table} WHERE movie_metadata_id = ?1"),
+            [movie.metadata.id],
+        )?;
+    }
+    conn.execute("DELETE FROM movies WHERE id = ?1", [movie.id])?;
+    Ok(())
+}
+
+/// `ImportListExclusionRepository.Insert`, under the next id.
+pub fn add_import_exclusion(conn: &Connection, e: &mut ImportExclusion) -> anyhow::Result<()> {
+    e.id = crate::store::sequence::next_id(conn, "import_exclusions")?;
+    insert_import_exclusion(conn, e)
 }

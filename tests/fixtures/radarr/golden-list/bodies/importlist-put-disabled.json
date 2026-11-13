@@ -1,0 +1,7 @@
+{
+ "$from": "importlist-after-put",
+ "$set": {
+  "enabled": false,
+  "enableAuto": false
+ }
+}

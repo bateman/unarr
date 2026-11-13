@@ -1,0 +1,721 @@
+{
+  "body": {
+    "page": 1,
+    "pageSize": 5,
+    "records": [
+      {
+        "customFormats": [],
+        "date": "2026-11-08T19:15:00Z",
+        "id": 115,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "projectx",
+          "digitalRelease": "2013-06-05T00:00:00Z",
+          "folderName": "/movies/Project X (2012)",
+          "genres": [
+            "Comedy"
+          ],
+          "id": 79,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/lUPDGT3lyRrq8SvWuNWG2DP64bR.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/cUqXHZtnptgvyAE1hN47Wsf3ami.jpg"
+            }
+          ],
+          "imdbId": "tt1636826",
+          "inCinemas": "2012-03-01T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "birthday",
+            "birthday party",
+            "fake documentary",
+            "faux documentary",
+            "high school",
+            "high school student",
+            "house party",
+            "mockumentary",
+            "teen movie"
+          ],
+          "lastSearchTime": "2026-11-08T19:20:40Z",
+          "minimumAvailability": "released",
+          "monitored": false,
+          "movieFileId": 401,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Project X",
+          "overview": "Three high school seniors throw a party to make a name for themselves. As the night progresses, things spiral out of control as word of the party spreads.",
+          "path": "/movies/Project X (2012)",
+          "physicalRelease": "2012-12-18T00:00:00Z",
+          "popularity": 10.3314,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.7,
+              "votes": 263993
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 46,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 28,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.926,
+              "votes": 7135
+            },
+            "trakt": {
+              "type": "user",
+              "value": 6.93928,
+              "votes": 7674
+            }
+          },
+          "releaseDate": "2012-12-18T00:00:00Z",
+          "runtime": 88,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "project x",
+          "status": "released",
+          "studio": "Silver Pictures",
+          "tags": [
+            1
+          ],
+          "title": "Project X",
+          "titleSlug": "57214",
+          "tmdbId": 57214,
+          "website": "https://www.warnerbros.com/movies/project-x",
+          "year": 2012,
+          "youTubeTrailerId": "X28d7fbRGSQ"
+        },
+        "movieId": 79,
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 9,
+            "modifier": "none",
+            "name": "HDTV-1080p",
+            "resolution": 1080,
+            "source": "tv"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "The Lost Dinosaurs The Dinosaur Project 2012 1080p H264 Ac3 Ita Aac Eng artemix MIRCrew"
+      },
+      {
+        "customFormats": [],
+        "date": "2026-11-02T19:24:44Z",
+        "id": 113,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-10-30T22:53:18Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "splinter",
+          "folderName": "/movies/Splinter (2008)",
+          "genres": [
+            "Horror",
+            "Thriller",
+            "Crime",
+            "Science Fiction"
+          ],
+          "id": 319,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/tFNReQlU92jmN7uuR1HHLiFkEua.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/h6NOPc2nUoKmobs5lia33z4syNM.jpg"
+            }
+          ],
+          "imdbId": "tt1031280",
+          "inCinemas": "2009-04-23T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "alien infection",
+            "creature",
+            "monster"
+          ],
+          "lastSearchTime": "2026-11-02T19:24:56Z",
+          "minimumAvailability": "released",
+          "monitored": false,
+          "movieFileId": 397,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Splinter",
+          "overview": "When their plans for a nature trip go awry, Polly and boyfriend Seth decide to check into a motel. On their way, they're carjacked and kidnapped by low-rent crooks Dennis and Lacey, who take the victims and their SUV to a nearby gas station. Along the way, they encounter an increasingly terrifying horde of parasites, and if any of them intend to survive, they'll have to outsmart the deadly organisms.",
+          "path": "/movies/Splinter (2008)",
+          "physicalRelease": "2009-03-30T00:00:00Z",
+          "popularity": 7.2814,
+          "qualityProfileId": 10,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.1,
+              "votes": 45014
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 58,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 74,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.2,
+              "votes": 858
+            },
+            "trakt": {
+              "type": "user",
+              "value": 6.3045,
+              "votes": 1156
+            }
+          },
+          "releaseDate": "2009-03-30T00:00:00Z",
+          "runtime": 82,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "splinter",
+          "status": "released",
+          "studio": "Indion Entertainment Group",
+          "tags": [],
+          "title": "Splinter",
+          "titleSlug": "13220",
+          "tmdbId": 13220,
+          "website": "",
+          "year": 2008,
+          "youTubeTrailerId": "LYfvKLhG4Iw"
+        },
+        "movieId": 319,
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 6,
+            "modifier": "none",
+            "name": "Bluray-720p",
+            "resolution": 720,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "Splinter.(2008).BluRay.ita.mp4"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 18,
+            "name": "x265 (HD)"
+          },
+          {
+            "id": 56,
+            "name": "x265 (no HDR/DV)"
+          }
+        ],
+        "date": "2026-11-02T14:44:28Z",
+        "id": 112,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "diehard",
+          "collection": {
+            "title": "Die Hard Collection",
+            "tmdbId": 1570
+          },
+          "digitalRelease": "2003-04-25T00:00:00Z",
+          "folderName": "/movies/Die Hard (1988)",
+          "genres": [
+            "Action",
+            "Thriller"
+          ],
+          "id": 28,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/7Bjd8kfmDSOzpmhySpEhkUyK2oH.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/bvk2AAH64lP2YZs02Q3jskfHT8j.jpg"
+            }
+          ],
+          "imdbId": "tt0095016",
+          "inCinemas": "1988-07-15T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "1980s",
+            "absurd",
+            "action hero",
+            "amused",
+            "based on novel or book",
+            "christmas party",
+            "explosion",
+            "fbi",
+            "heist",
+            "high octane",
+            "hostage negotiator",
+            "hostages",
+            "husband wife relationship",
+            "lapd",
+            "los angeles, california",
+            "murder",
+            "one man army",
+            "one night",
+            "police officer",
+            "s.w.a.t.",
+            "shootout",
+            "terrorism",
+            "vault"
+          ],
+          "lastSearchTime": "2026-11-02T14:44:40Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Die Hard",
+          "overview": "High above the city of L.A. a team of terrorists has seized a building, taken hostages, and declared war. One man has manages to escape... An off-duty cop hiding somewhere inside. He's alone, tired... and the only chance anyone has got.",
+          "path": "/movies/Die Hard (1988)",
+          "physicalRelease": "1989-01-26T00:00:00Z",
+          "popularity": 15.5534,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 8.2,
+              "votes": 1044387
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 72,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 94,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7.817,
+              "votes": 12852
+            },
+            "trakt": {
+              "type": "user",
+              "value": 8.27644,
+              "votes": 26707
+            }
+          },
+          "releaseDate": "1989-01-26T00:00:00Z",
+          "runtime": 132,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "die hard",
+          "status": "released",
+          "studio": "Gordon Company",
+          "tags": [
+            1
+          ],
+          "title": "Die Hard",
+          "titleSlug": "562",
+          "tmdbId": 562,
+          "website": "https://www.20thcenturystudios.com/movies/die-hard",
+          "year": 1988,
+          "youTubeTrailerId": "TotSHi0ViUc"
+        },
+        "movieId": 28,
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 9,
+            "modifier": "none",
+            "name": "HDTV-1080p",
+            "resolution": 1080,
+            "source": "tv"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "Die Hard (1988 ITA ENG) [10bit] [1080p x265] [Paso77]"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 53,
+            "name": "AAC"
+          },
+          {
+            "id": 18,
+            "name": "x265 (HD)"
+          },
+          {
+            "id": 56,
+            "name": "x265 (no HDR/DV)"
+          }
+        ],
+        "date": "2026-11-02T14:27:54Z",
+        "id": 111,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "diehard",
+          "collection": {
+            "title": "Die Hard Collection",
+            "tmdbId": 1570
+          },
+          "digitalRelease": "2003-04-25T00:00:00Z",
+          "folderName": "/movies/Die Hard (1988)",
+          "genres": [
+            "Action",
+            "Thriller"
+          ],
+          "id": 28,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/7Bjd8kfmDSOzpmhySpEhkUyK2oH.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/bvk2AAH64lP2YZs02Q3jskfHT8j.jpg"
+            }
+          ],
+          "imdbId": "tt0095016",
+          "inCinemas": "1988-07-15T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "1980s",
+            "absurd",
+            "action hero",
+            "amused",
+            "based on novel or book",
+            "christmas party",
+            "explosion",
+            "fbi",
+            "heist",
+            "high octane",
+            "hostage negotiator",
+            "hostages",
+            "husband wife relationship",
+            "lapd",
+            "los angeles, california",
+            "murder",
+            "one man army",
+            "one night",
+            "police officer",
+            "s.w.a.t.",
+            "shootout",
+            "terrorism",
+            "vault"
+          ],
+          "lastSearchTime": "2026-11-02T14:44:40Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Die Hard",
+          "overview": "High above the city of L.A. a team of terrorists has seized a building, taken hostages, and declared war. One man has manages to escape... An off-duty cop hiding somewhere inside. He's alone, tired... and the only chance anyone has got.",
+          "path": "/movies/Die Hard (1988)",
+          "physicalRelease": "1989-01-26T00:00:00Z",
+          "popularity": 15.5534,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 8.2,
+              "votes": 1044387
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 72,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 94,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7.817,
+              "votes": 12852
+            },
+            "trakt": {
+              "type": "user",
+              "value": 8.27644,
+              "votes": 26707
+            }
+          },
+          "releaseDate": "1989-01-26T00:00:00Z",
+          "runtime": 132,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "die hard",
+          "status": "released",
+          "studio": "Gordon Company",
+          "tags": [
+            1
+          ],
+          "title": "Die Hard",
+          "titleSlug": "562",
+          "tmdbId": 562,
+          "website": "https://www.20thcenturystudios.com/movies/die-hard",
+          "year": 1988,
+          "youTubeTrailerId": "TotSHi0ViUc"
+        },
+        "movieId": 28,
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 15,
+            "modifier": "none",
+            "name": "WEBRip-1080p",
+            "resolution": 1080,
+            "source": "webrip"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "Die.Hard.Trappola.Di.Cristallo.1988.1080p.iTA.ENG.AAC.5.1.WEBRip.x265-T7.mkv"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 18,
+            "name": "x265 (HD)"
+          },
+          {
+            "id": 56,
+            "name": "x265 (no HDR/DV)"
+          }
+        ],
+        "date": "2026-11-02T14:27:54Z",
+        "id": 110,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "PG-13",
+          "cleanTitle": "thedarkknight",
+          "collection": {
+            "title": "The Dark Knight Collection",
+            "tmdbId": 263
+          },
+          "digitalRelease": "2011-01-29T00:00:00Z",
+          "folderName": "/movies/The Dark Knight (2008)",
+          "genres": [
+            "Action",
+            "Thriller",
+            "Crime"
+          ],
+          "id": 107,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/qJ2tW6WMUDux911r6m7haRef0WH.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/cfT29Im5VDvjE0RpyKOSdCKZal7.jpg"
+            }
+          ],
+          "imdbId": "tt0468569",
+          "inCinemas": "2008-07-16T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "anti hero",
+            "anti villain",
+            "based on comic",
+            "bold",
+            "chaos",
+            "crime fighter",
+            "criminal mastermind",
+            "district attorney",
+            "neo-noir",
+            "organized crime",
+            "sadism",
+            "scarecrow",
+            "secret identity",
+            "super power",
+            "super villain",
+            "superhero",
+            "tragic hero",
+            "vigilante"
+          ],
+          "lastSearchTime": "2026-11-02T14:28:06Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 394,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "The Dark Knight",
+          "overview": "Batman raises the stakes in his war on crime. With the help of Lt. Jim Gordon and District Attorney Harvey Dent, Batman sets out to dismantle the remaining criminal organizations that plague the streets. The partnership proves to be effective, but they soon find themselves prey to a reign of chaos unleashed by a rising criminal mastermind known to the terrified citizens of Gotham as the Joker.",
+          "path": "/movies/The Dark Knight (2008)",
+          "physicalRelease": "2008-10-22T00:00:00Z",
+          "popularity": 462.4186,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 9.1,
+              "votes": 3248829
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 85,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 94,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 8.54,
+              "votes": 37321
+            },
+            "trakt": {
+              "type": "user",
+              "value": 8.95208,
+              "votes": 59657
+            }
+          },
+          "releaseDate": "2008-10-22T00:00:00Z",
+          "runtime": 152,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "dark knight",
+          "status": "released",
+          "studio": "Warner Bros. Pictures",
+          "tags": [
+            1
+          ],
+          "title": "The Dark Knight",
+          "titleSlug": "155",
+          "tmdbId": 155,
+          "website": "https://www.warnerbros.com/movies/dark-knight/",
+          "year": 2008,
+          "youTubeTrailerId": "_PZpmTj1Q8Q"
+        },
+        "movieId": 107,
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "The Dark Knight 2008 BDRip ITA ENG IMAX 1080p x265 Paso77.mkv"
+      }
+    ],
+    "sortDirection": "descending",
+    "sortKey": "date",
+    "totalRecords": 86
+  },
+  "recordedAt": "2026-11-13T15:38:15Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/blocklist?page=1&pageSize=5"
+  },
+  "status": 200
+}

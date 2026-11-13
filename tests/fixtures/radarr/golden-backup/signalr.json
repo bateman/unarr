@@ -1,0 +1,137 @@
+[
+  {
+    "after": "system-backup-empty",
+    "messages": [
+      {
+        "body": {
+          "version": "6.4.4.10685"
+        },
+        "name": "version"
+      }
+    ]
+  },
+  {
+    "after": "command-backup",
+    "messages": [
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "body": {
+              "isExclusive": false,
+              "isLongRunning": false,
+              "isTypeExclusive": false,
+              "name": "Backup",
+              "requiresDiskAccess": false,
+              "sendUpdatesToClient": true,
+              "suppressMessages": false,
+              "trigger": "manual",
+              "type": "manual",
+              "updateScheduledTask": false
+            },
+            "commandName": "Backup",
+            "id": 472955,
+            "message": "Backing up database",
+            "name": "Backup",
+            "priority": "normal",
+            "queued": "2026-11-13T14:05:37Z",
+            "result": "unknown",
+            "sendUpdatesToClient": true,
+            "started": "2026-11-13T14:05:37Z",
+            "stateChangeTime": "2026-11-13T14:05:37Z",
+            "status": "started",
+            "trigger": "manual",
+            "updateScheduledTask": false
+          }
+        },
+        "name": "command"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "body": {
+              "isExclusive": false,
+              "isLongRunning": false,
+              "isTypeExclusive": false,
+              "name": "Backup",
+              "requiresDiskAccess": false,
+              "sendUpdatesToClient": true,
+              "suppressMessages": false,
+              "trigger": "manual",
+              "type": "manual",
+              "updateScheduledTask": false
+            },
+            "commandName": "Backup",
+            "id": 472955,
+            "message": "Creating backup zip",
+            "name": "Backup",
+            "priority": "normal",
+            "queued": "2026-11-13T14:05:37Z",
+            "result": "unknown",
+            "sendUpdatesToClient": true,
+            "started": "2026-11-13T14:05:37Z",
+            "stateChangeTime": "2026-11-13T14:05:37Z",
+            "status": "started",
+            "trigger": "manual",
+            "updateScheduledTask": false
+          }
+        },
+        "name": "command"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "health"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "system/task"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "body": {
+              "isExclusive": false,
+              "isLongRunning": false,
+              "isTypeExclusive": false,
+              "name": "Backup",
+              "requiresDiskAccess": false,
+              "sendUpdatesToClient": true,
+              "suppressMessages": false,
+              "trigger": "manual",
+              "type": "manual",
+              "updateScheduledTask": false
+            },
+            "commandName": "Backup",
+            "duration": "00:00:01.7606999",
+            "ended": "2026-11-13T14:05:39Z",
+            "id": 472955,
+            "message": "Backup zip created",
+            "name": "Backup",
+            "priority": "normal",
+            "queued": "2026-11-13T14:05:37Z",
+            "result": "successful",
+            "sendUpdatesToClient": true,
+            "started": "2026-11-13T14:05:37Z",
+            "stateChangeTime": "2026-11-13T14:05:37Z",
+            "status": "completed",
+            "trigger": "manual",
+            "updateScheduledTask": false
+          }
+        },
+        "name": "command"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "health"
+      }
+    ]
+  }
+]

@@ -1,0 +1,37 @@
+{
+  "body": {
+    "id": 63,
+    "includeCustomFormatWhenRenaming": false,
+    "name": "Library Test",
+    "specifications": [
+      {
+        "fields": [
+          {
+            "advanced": false,
+            "helpText": "Custom Format RegEx is Case Insensitive",
+            "isFloat": false,
+            "label": "Regular Expression",
+            "name": "value",
+            "order": 0,
+            "privacy": "normal",
+            "type": "textbox",
+            "value": "\\bTEST\\b"
+          }
+        ],
+        "implementation": "ReleaseTitleSpecification",
+        "implementationName": "Release Title",
+        "infoLink": "https://wiki.servarr.com/radarr/settings#custom-formats-2",
+        "name": "Test",
+        "negate": false,
+        "required": false
+      }
+    ]
+  },
+  "recordedAt": "2026-11-13T12:41:29Z",
+  "request": {
+    "body": "bodies/customformat-create.json",
+    "method": "POST",
+    "path": "/api/v3/customformat"
+  },
+  "status": 201
+}

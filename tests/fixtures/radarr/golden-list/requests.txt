@@ -1,0 +1,82 @@
+# Milestone 4d, the import lists: the IMDb watchlist the maintainer uses
+# (`IMDbListImport`), its settings written and tested, the sync that adds
+# the movies it names, and what an exclusion and a deletion do to the
+# next one. A recording of its own, next to golden-library's; same format,
+# and signalr.json holds what the hub sent after each step.
+#
+#   GOLDEN_REQUESTS=tests/fixtures/radarr/golden-list/requests.txt \
+#       GOLDEN_OUT=tests/fixtures/radarr/golden-list make golden-radarr
+#
+# The watchlist itself is served by scripts/mock-servarr.py from the
+# hand-made tests/fixtures/metadata/api.radarr.video/v1/list/imdb/
+# ur0000001.json, which names four movies: one the library has (Alien:
+# Romulus), one the lists exclude (Titane) and two it adds (The Prestige,
+# Gravity).
+config-host GET /api/v3/config/host
+config-host-put-proxy PUT /api/v3/config/host/1 bodies/config-host-proxy.json
+sleep 8
+config-importlist GET /api/v3/config/importlist
+
+# The list as the fixture holds it, the schema the UI builds its form
+# from, and the settings written: the watchlist the mock serves.
+importlist GET /api/v3/importlist
+importlist-schema GET /api/v3/importlist/schema
+importlist-1 GET /api/v3/importlist/1
+importlist-put PUT /api/v3/importlist/1 bodies/importlist-put.json
+importlist-after-put GET /api/v3/importlist/1
+
+# What the settings refuse: a list id of neither shape, an empty one, a
+# root folder that is not there, a profile that is not there, a name
+# already taken, and the `ls12345678` lists the original dropped.
+importlist-put-bad-id PUT /api/v3/importlist/1 bodies/importlist-put-bad-id.json
+importlist-put-empty-id PUT /api/v3/importlist/1 bodies/importlist-put-empty-id.json
+importlist-put-bad-root PUT /api/v3/importlist/1 bodies/importlist-put-bad-root.json
+importlist-put-bad-profile PUT /api/v3/importlist/1 bodies/importlist-put-bad-profile.json
+importlist-create POST /api/v3/importlist bodies/importlist-create.json
+importlist-create-taken POST /api/v3/importlist bodies/importlist-create-taken.json
+importlist-create-no-name POST /api/v3/importlist bodies/importlist-create-no-name.json
+importlist-after-create GET /api/v3/importlist
+
+# The tests the UI runs: the watchlist answers, one nobody has does not,
+# and `testall` runs both lists.
+importlist-test POST /api/v3/importlist/test bodies/importlist-test.json
+importlist-test-missing POST /api/v3/importlist/test bodies/importlist-test-missing.json
+importlist-test-ls POST /api/v3/importlist/test bodies/importlist-test-ls.json
+importlist-testall POST /api/v3/importlist/testall
+importlist-after-test GET /api/v3/importlist
+
+# The sync of one list by id, then of every list. The movies the
+# watchlist names and the library lacks are added, monitored and searched
+# for as the list asks; the one the library has and the one the lists
+# exclude are not.
+command-importlistsync-one POST /api/v3/command bodies/command-importlistsync-one.json
+sleep 20
+command-after-sync-one GET /api/v3/command
+movie-prestige GET /api/v3/movie?tmdbId=1124
+movie-gravity GET /api/v3/movie?tmdbId=49047
+movie-titane GET /api/v3/movie?tmdbId=630240
+importlist-movie GET /api/v3/importlist/movie
+history-after-sync GET /api/v3/history?page=1&pageSize=10&sortKey=date&sortDirection=descending
+health-after-sync GET /api/v3/health
+
+# A movie deleted with an exclusion does not come back: the next sync
+# rejects it, and the sync of a list that is not there is an error.
+movie-delete-excluded DELETE /api/v3/movie/{id:movie-prestige}?deleteFiles=false&addImportExclusion=true
+exclusions-after-delete GET /api/v3/exclusions
+command-importlistsync POST /api/v3/command bodies/command-importlistsync.json
+sleep 20
+command-after-sync GET /api/v3/command
+movie-prestige-after GET /api/v3/movie?tmdbId=1124
+movie-after-sync GET /api/v3/movie?tmdbId=49047
+command-importlistsync-missing POST /api/v3/command bodies/command-importlistsync-missing.json
+sleep 6
+command-after-sync-missing GET /api/v3/command
+
+# The second list removed, and the first disabled: the lists as they are
+# then, and the health checks a list raises.
+importlist-delete DELETE /api/v3/importlist/{id:importlist-create}
+importlist-delete-missing DELETE /api/v3/importlist/999
+importlist-put-disabled PUT /api/v3/importlist/1 bodies/importlist-put-disabled.json
+importlist-after GET /api/v3/importlist
+importlist-movie-after GET /api/v3/importlist/movie
+health-after-list GET /api/v3/health

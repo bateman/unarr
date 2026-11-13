@@ -1,0 +1,4647 @@
+[
+ {
+  "TmdbId": 630240,
+  "ImdbId": "tt10944760",
+  "Title": "Titane",
+  "Overview": "A woman with a metal plate in her head from a childhood car accident embarks on a bizarre journey, bringing her into contact with a firefighter who's reunited with his missing son after 10 years.",
+  "OriginalTitle": "Titane",
+  "OriginalLanguage": "fr",
+  "TitleSlug": "630240",
+  "Runtime": 108,
+  "Popularity": 4.4078,
+  "Year": 2021,
+  "Premier": "2021-07-13T00:00:00Z",
+  "InCinema": "2021-07-14T00:00:00Z",
+  "PhysicalRelease": "2021-11-16T00:00:00Z",
+  "DigitalRelease": "2021-10-19T00:00:00Z",
+  "Images": [
+   {
+    "CoverType": "Poster",
+    "Url": "https://image.tmdb.org/t/p/original/mBlpouG3gqB8WLdP65LCOXb3jFb.jpg"
+   },
+   {
+    "CoverType": "Fanart",
+    "Url": "https://image.tmdb.org/t/p/original/dVOlJVHYRWx7DhMQRNLnbf5bT1q.jpg"
+   }
+  ],
+  "Ratings": [
+   {
+    "Count": 1787,
+    "Value": 6.327,
+    "Origin": "Tmdb",
+    "Type": "User"
+   }
+  ],
+  "MovieRatings": {
+   "Tmdb": {
+    "Count": 1787,
+    "Value": 6.327,
+    "Type": "User"
+   },
+   "Imdb": {
+    "Count": 68306,
+    "Value": 6.4,
+    "Type": "User"
+   },
+   "Metacritic": {
+    "Count": 0,
+    "Value": 75,
+    "Type": "User"
+   },
+   "RottenTomatoes": {
+    "Count": 0,
+    "Value": 90,
+    "Type": "User"
+   },
+   "Trakt": {
+    "Count": 2787,
+    "Value": 6.3301,
+    "Type": "User"
+   }
+  },
+  "Genres": [
+   "Drama",
+   "Thriller",
+   "Horror"
+  ],
+  "Keywords": [
+   "abortion",
+   "absurd",
+   "body horror",
+   "car accident",
+   "car crash",
+   "depressing",
+   "disgusted",
+   "distressing",
+   "disturbed",
+   "female serial killer",
+   "firefighter",
+   "frantic",
+   "hard",
+   "harsh",
+   "head wound",
+   "horrified",
+   "immaculate conception",
+   "intense",
+   "introspective",
+   "masculinity",
+   "missing son",
+   "objectum sexuality",
+   "pregnancy",
+   "serial killer",
+   "trauma",
+   "woman director",
+   "woman disguised as man"
+  ],
+  "AlternativeTitles": [
+   {
+    "Title": "Titanium",
+    "Type": "Tmdb",
+    "Language": "en"
+   },
+   {
+    "Title": "變鈦",
+    "Type": "Tmdb",
+    "Language": "zh"
+   },
+   {
+    "Title": "티탄",
+    "Type": "Tmdb",
+    "Language": "ko"
+   }
+  ],
+  "Translations": [
+   {
+    "Title": "Titane",
+    "Overview": "A woman with a metal plate in her head from a childhood car accident embarks on a bizarre journey, bringing her into contact with a firefighter who's reunited with his missing son after 10 years.",
+    "Language": "en-US"
+   },
+   {
+    "Title": "Titane",
+    "Overview": "Après une série de crimes inexpliqués, un père retrouve son fils disparu depuis 10 ans. Titane : métal hautement résistant à la chaleur et à la corrosion, donnant des alliages très durs.",
+    "Language": "fr-FR"
+   },
+   {
+    "Title": "티탄",
+    "Overview": "어린 시절 교통사고로 두개골에 티타늄판을 넣은 알렉시아는 자동차 전시장에서 춤을 추며 다른 사람들과 거리를 둔 채 살아간다. 기이한 욕망과 충동에 이끌리던 그녀는 잔혹한 사건들을 일으킨 뒤 경찰의 추적을 피해 자신의 흔적을 지워야 한다. 도망칠 곳을 찾던 알렉시아는 오래전에 실종된 소년의 얼굴을 보고, 몸과 외모를 바꾸어 그 아이인 척하기로 한다. 아들이 돌아오기만을 기다려 온 소방대장 뱅상은 수상한 침묵과 낯선 모습에도 불구하고 그녀를 가족으로 받아들인다. 두 사람은 같은 집에서 서로에게 기대기 시작하지만, 숨겨 둔 정체와 설명할 수 없는 몸의 변화는 거짓된 일상을 위태롭게 만든다. 아무도 믿지 않던 여자와 끝내 믿고 싶은 남자가 불가능해 보이는 가족의 모습을 더듬는다.",
+    "Language": "ko-KR"
+   },
+   {
+    "Title": "Titane",
+    "Overview": "Una mujer con una placa de metal en la cabeza, secuela de un accidente de coche que sufrió de niña, se embarca en un viaje de lo más extraño. Por el camino se cruza con un bombero que, tras diez años de búsqueda, acaba de reencontrarse con su hijo desaparecido.",
+    "Language": "es-ES"
+   },
+   {
+    "Title": "Titane",
+    "Overview": "Seit einem schweren Unfall lebt Alexia mit einer Titanplatte im Kopf. Ihre Obsession gilt Metall und Motoren, menschliche Intimität erträgt sie nicht. Sobald ihr jemand zu nahe kommt, verwandelt sich die junge Frau in eine brutale Killerin. Als sie nach einer Serie von Morden von der Polizei gesucht wird, zertrümmert sie ihr Gesicht und nimmt eine männliche Identität an. Sie taucht bei dem Feuerwehrkommandanten Vincent unter, der in ihr seinen lange vermissten Sohn zu erkennen glaubt. Die beiden gegensätzlichen Personen finden zu einer extremen Verbindung zueinander.",
+    "Language": "de-DE"
+   },
+   {
+    "Title": "Титан",
+    "Overview": "После автоаварии, в которую Алекса попала в детстве, в голове у неё титановая пластина. 15 лет спустя она работает стриптизёршей, а когда беременеет совершенно невероятным образом, это провоцирует у девушки всплеск неконтролируемой агрессии.",
+    "Language": "ru-RU"
+   },
+   {
+    "Title": "Titane",
+    "Overview": "Após uma série de crimes inexplicáveis, um ex-bombeiro se reencontra com seu filho, desaparecido há 10 anos.",
+    "Language": "pt-BR"
+   },
+   {
+    "Title": "Titane",
+    "Overview": "Alexia heeft wat littekens opgelopen in haar jeugd. Om precies te zijn een titanium plaat in haar hoofd, als herinnering aan een auto-ongeluk. In plaats van angst of weerzin hebben auto’s sindsdien een enorme aantrekkingskracht op haar. Het metaal in haar hoofd windt haar op, maar maakt haar ook agressief. Nadat ze zich schuldig heeft gemaakt aan een reeks gewelddadige misdaden slaat ze op de vlucht en neemt ze de identiteit aan van een al jaren vermiste jongen, Adrien. Zijn vader, een getroebleerde brandweerman, onthaalt haar liefdevol als zijn verloren zoon. Zo stillen deze twee eenzame zielen hun honger naar menselijk contact.",
+    "Language": "nl-NL"
+   },
+   {
+    "Title": "Titan",
+    "Overview": "Po sérii nevysvětlitelných trestných činů se otec setká se synem, který byl deset let nezvěstný. Titan: kov vysoce odolný vůči teplu a korozi se slitinami s vysokou pevností v tahu.",
+    "Language": "cs-CZ"
+   },
+   {
+    "Title": "Titane",
+    "Overview": "Alexia adora le automobili, sin da quando, bambina, un incidente le ha donato una placca di titanio nella testa. Facendola rinascere, gonfia di rabbia e amore represso che la trasformeranno in un essere ibrido e nuovo. Perché la metamorfosi si completi, dovrà scoprire la forza potente che muove le cose del mondo: l’essere umani.",
+    "Language": "it-IT"
+   },
+   {
+    "Title": "钛",
+    "Overview": "艾莉克西亚因车祸植入钛金属后性情大变，在与汽车发生关系后意外怀孕。她与苦苦寻找失踪儿子的消防队长文森特相遇后，女扮男装冒充他的儿子，与其共同生活。在隐藏身份和身体变化的同时，两人的关系也逐渐发生改变。",
+    "Language": "zh-CN"
+   },
+   {
+    "Title": "טיטאן",
+    "Overview": "אישה שעברה תאונת דרכים קשה בילדותה חיה עם חתיכת טיטניום שנתקעה בראשה. בבגרותה היא הופכת לרוצחת אכזרית, ומפתחת פטיש לכלי רכב. בעוד שהיא נמלטת מהחוק, הסיפור המוזר שלה נקשר בזה של מפקד תחנת הכיבוי, שבנו נעלם לפני עשור.",
+    "Language": "he-IL"
+   },
+   {
+    "Title": "Titán",
+    "Overview": "Po sérii nevysvetliteľných trestných činov sa otec stretne so svojím synom, ktorý bol 10 rokov nezvestný. Titán: kov vysoko odolný proti teplu a korózii, zložka pevných a ľahkých zliatin, s vysokou pevnosťou v ťahu.",
+    "Language": "sk-SK"
+   },
+   {
+    "Title": "Titane",
+    "Overview": "En kvinna med en inopererad metallplatta i huvudet efter en bilolycka i barndomen ger sig ut på en bisarr resa och kommer i kontakt med en brandman som har återförenats med sin son som har varit försvunnen i 10 år.",
+    "Language": "sv-SE"
+   },
+   {
+    "Title": "Титан",
+    "Overview": "Алексія працює стриптизеркою та має сексуальний потяг до автомобілів. Через важку дитячу травму, а також відсутність батьківської любові, вона виросла схильною до насильства. Коли її неконтрольована агресія заходить занадто далеко, вона змінює зовнішність та видає себе за іншу людину.",
+    "Language": "uk-UA"
+   },
+   {
+    "Title": "鈦",
+    "Overview": "鈦，一種耐高溫、抗腐蝕、強度高、延展佳的稀有金屬，但當它與人體合一，卻會觸發不可收拾的瘋狂異變。一名資深消防員父親，意外找回失蹤超過十年的兒子，而毫無消息的他，其真實身分卻讓這位父親陷入更危險的深淵之中。以激進前衛的懾人影像探觸身體和性別政治，雜揉女性與酷兒視角，驚世駭俗又性感張狂，寫下肉體恐怖類型新篇章。",
+    "Language": "zh-TW"
+   },
+   {
+    "Title": "Titane",
+    "Overview": "Après une série de crimes inexpliqués, un père retrouve son fils disparu depuis 10 ans. Titane : Métal hautement résistant à la chaleur et à la corrosion, donnant des alliages très durs.",
+    "Language": "fr-CA"
+   },
+   {
+    "Title": "Titane",
+    "Overview": "Ta historia nie mogłaby wydarzyć się naprawdę. Dziewczynka imieniem Alexia (Agathe Rousselle) jest ofiarą wypadku samochodowego, w wyniku którego w jej głowę zostaje wszczepiona tytanowa płytka. Lata później dorosła już dziewczyna rozpala do czerwoności toksycznych facetów podziwiających jej wijące się na pięknych samochodach półnagie ciało. Coś jest z nią nie tak – jej wewnętrzne pęknięcie popycha ją do prowadzenia ryzykownych gier z mężczyznami i maszynami, które prowadzą tylko i wyłącznie do orgii przemocy. W pewnej chwili posuwa się za daleko w swych dążeniach, żeby przekroczyć wszystkie granice i znaleźć za nimi prawdziwą siebie. Musi uciekać do innego świata, by spróbować zbudować tam samą siebie od nowa. Szpecąca Alexię tytanowa płytka pomaga jej w metamorfozie – dziewczyna zaczyna podszywać się pod zaginionego lata wcześniej syna kapitana lokalnej straży pożarnej.",
+    "Language": "pl-PL"
+   },
+   {
+    "Title": "Titanė",
+    "Overview": "Po eilės neišaiškintų nusikaltimų, tėvas suranda savo sūnų, kuris dingo prieš dešimt metų. Titanas - mechaniškai tvirtas metalas, atsparus karščiui ir korozijai, bei tempimams.",
+    "Language": "lt-LT"
+   },
+   {
+    "Title": "Titane",
+    "Overview": "Havalimanında yüzü yaralı bir genç bulunur. İsminin Adrien Legrand olduğunu iddia eder. 10 yıl önce kaybolmuş bir çocuğun adıdır bu. Adrien sonunda babasına kavuşur, ancak bu sırada bölgede bir dizi korkunç cinayet işlenir.",
+    "Language": "tr-TR"
+   },
+   {
+    "Title": "Titane",
+    "Overview": "Μετά από μια σειρά ανεξήγητων εγκλημάτων ένας πατέρας ξαναβρίσκει το γιο του, ο οποίος αγνοούνταν για δέκα χρόνια.",
+    "Language": "el-GR"
+   },
+   {
+    "Title": "تيتانيوم",
+    "Overview": "",
+    "Language": "ar-AE"
+   },
+   {
+    "Title": "Titane",
+    "Overview": "Un joven con la cara magullada es descubierto en un aeropuerto. Dice llamarse Adrien Legrand, un niño que desapareció hace 10 años. Para su padre, Vincent, esto supone el final de una larga pesadilla y lo lleva a casa. Simultáneamente, se suceden una serie de horribles asesinatos en la región.",
+    "Language": "es-MX"
+   },
+   {
+    "Title": "Titane",
+    "Overview": "Một người phụ nữ với một chiếc đĩa kim loại trên đầu sau một vụ tai nạn xe hơi thời thơ ấu bắt đầu một cuộc hành trình kỳ lạ, đưa cô tiếp xúc với một người lính cứu hỏa, người đoàn tụ với đứa con trai mất tích của anh ta sau 10 năm.",
+    "Language": "vi-VN"
+   },
+   {
+    "Title": "Titane",
+    "Overview": "Som barn bliver Alexia hårdt kvæstet i en bilulykke og får indopereret en titaniumplade i hjernen. Som ung har hun udviklet sig til en slags seriemorder, men under en flugt fra myndighederne ændrer hun sit udseende og påstår at være den forsvundne søn af en traumatiseret brandmand. Snart eskalerer alting ud af kontrol.",
+    "Language": "da-DK"
+   },
+   {
+    "Title": "Titán",
+    "Overview": "Íme a Titán, egy olyan fém, amely minden korróziónak ellenáll, jól bírja a hőt, és a szakítószilárdsága is kiváló. Főként emiatt is használják a gyógyászatban fémprotézisek előállításához.\r Julia Ducournau korábban olyan hátborzongató alkotásokat tett le az asztalra, mint a Nyers és A bőr alatt, legújabb rendezése, a Titán pedig nem kevésbé hozzá ezt a hangulatot.",
+    "Language": "hu-HU"
+   },
+   {
+    "Title": "Титан",
+    "Overview": "Након низа необјашњивих злочина, отац се поново повезује са сином који је нестао 10 година. Титан: Метал веома отпоран на топлоту и корозију, са легурама високе затезне чврстоће.",
+    "Language": "sr-RS"
+   },
+   {
+    "Title": "變鈦",
+    "Overview": "小時候的 Alexia 曾在車禍中與死神擦身而過，幸好及時動了手術換上鈦金屬頭皮，長大後癖戀汽車，更愛車愛到當上車展性感女郎。因為一次被粉絲追蹤而殺害對方後，她變得肆無忌憚殺人，繼而踏上逃亡之旅；她眼裏總是充滿怒火與懷疑，猶如受過火鐵鑄造，每一步都點火即著！令人難以預料！",
+    "Language": "zh-HK"
+   },
+   {
+    "Title": "تیتان",
+    "Overview": "به دنبال یک سری جنایات غیرقابل توضیح، پدری با پسرش که ۱۰ سال پیش ناپدید شده بود دیدار می کند.",
+    "Language": "fa-IR"
+   },
+   {
+    "Title": "TITANE/チタン",
+    "Overview": "世界が注目するジュリア・デュクルノー監督による、カンヌ映画祭パルムドールに輝く衝撃作。幼い頃の交通事故で頭蓋骨にチタンプレートを埋め込まれた女性がたどる、狂気と愛に満ちた数奇な運命を描いていく。",
+    "Language": "ja-JP"
+   },
+   {
+    "Title": "Titane",
+    "Overview": "Autonäyttelyissä esiintyvä show-tanssija Alexia ajautuu kohtalokkaaseen syöksykierteeseen ja aloittaa täysin uuden elämän varastetun identiteetin turvin.",
+    "Language": "fi-FI"
+   },
+   {
+    "Title": "Titane",
+    "Overview": "امرأة تحمل لوحة معدنية في رأسها من حادث سيارة في مرحلة الطفولة تشرع في رحلة غريبة ، مما يجعلها على اتصال برجل إطفاء لم شمله مع ابنه المفقود بعد 10 سنوات.",
+    "Language": "ar-SA"
+   },
+   {
+    "Title": "Titane",
+    "Overview": "Un noi amb la cara magullada és descobert en un aeroport. Diu que es diu Adrien Legrand, un nen que va desaparèixer fa 10 anys. Per al seu pare, Vincent, això suposa el final d'un llarg malson i el porta a casa. Simultàniament, se succeeixen una sèrie d'horribles assassinats a la regió.",
+    "Language": "ca-ES"
+   },
+   {
+    "Title": "Titan",
+    "Overview": "Ženska s titanovo ploščico v glavi iz otroške prometne nesreče se poda na bizarno potovanje, na katerem naleti na gasilca, ki se po 10 letih znova sreča s svojim pogrešanim sinom.",
+    "Language": "sl-SI"
+   },
+   {
+    "Title": "Titane",
+    "Overview": "Titane, body horror à francesa, é a Palma de Ouro de Cannes 2021.\r Uma mulher com fetiche por carros, uma placa de metal implantada na cabeça e instinto assassino embarca em uma jornada bizarra que envolve identidade, fuga e amor incondicional.",
+    "Language": "pt-PT"
+   },
+   {
+    "Title": "Titane",
+    "Overview": "ผู้หญิงที่มีแผ่นโลหะอยู่ในหัวจากอุบัติเหตุทางรถยนต์ในวัยเด็ก เริ่มต้นการเดินทางที่แปลกประหลาด โดยทำให้เธอได้พบกับนักดับเพลิงที่ได้กลับมาเจอกับลูกชายที่หายตัวไปหลังจากผ่านไป 10 ปี",
+    "Language": "th-TH"
+   },
+   {
+    "Title": "Титан",
+    "Overview": "Сюжетът е интригуващ и предизвикателен: след серия от необясними престъпления баща се среща отново със сина си, десет години след неговото изчезване. Но синът Адриан, суров и издръжлив като метала титан, вече е с друго битие, с друг физически облик и с име Алексия.",
+    "Language": "bg-BG"
+   },
+   {
+    "Title": "Titaan",
+    "Overview": "Lapsepõlves sattus Alexia autoavariisse ja sellest peale on tema pähe monteeritud titaanplaat. Õnnetusest on möödas 15 aastat ning täiskasvanuks saanud tüdruk töötab nüüd striptiisitarina ja tunneb vastupandamatut seksuaalset tõmmet autode vastu. Täiesti uskumatul moel rasedaks jäänud Alexiat hakkavad tabama ohjeldamatu agressiivsuse hood, mis muudavad ta ohtlikuks teistele inimestele tema ümber.",
+    "Language": "et-EE"
+   },
+   {
+    "Title": "Titāns",
+    "Overview": "Bērnībā Aleksai galvā ievietots karstuma un trieciena izturīgā metāla titāna implants. Būdama pieaugusi, viņa izjūt viena no cietākajiem metāliem iedarbību – noslieci uz piromāniju un iznīcināšanu, kā arī nevaldāmu vēlmi pēc seksa ar… mašīnām. Hormonu un benzīna sajaukums viņas ķermenī izraisa agresijas uzplūdus. Orģijas nomaina asiņaina nežēlība, un kad stāsts šķiet sasniedzis kulmināciju, notiek kāda neparasta tikšanās. Cik komiska, tik murgaina, bet noteikti 18+.",
+    "Language": "lv-LV"
+   }
+  ],
+  "Recommendations": [
+   {
+    "TmdbId": 530385,
+    "Title": "Midsommar"
+   },
+   {
+    "TmdbId": 884,
+    "Title": "Crash"
+   },
+   {
+    "TmdbId": 17609,
+    "Title": "Antichrist"
+   },
+   {
+    "TmdbId": 663,
+    "Title": "Saw IV"
+   },
+   {
+    "TmdbId": 1029281,
+    "Title": "Strange Darling"
+   },
+   {
+    "TmdbId": 799546,
+    "Title": "Luckiest Girl Alive"
+   },
+   {
+    "TmdbId": 354251,
+    "Title": "Southbound"
+   },
+   {
+    "TmdbId": 586461,
+    "Title": "Swallow"
+   },
+   {
+    "TmdbId": 65599,
+    "Title": "The Woman"
+   },
+   {
+    "TmdbId": 18256,
+    "Title": "Castle Freak"
+   }
+  ],
+  "Credits": {
+   "Cast": [
+    {
+     "Name": "Vincent Lindon",
+     "Order": 0,
+     "Character": "Vincent",
+     "TmdbId": 5443,
+     "CreditId": "5d8b4391d9f4a6000e516329",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/tjRKMKfsIH7MrqtN7cMPIZubSXa.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Agathe Rousselle",
+     "Order": 1,
+     "Character": "Alexia / Adrien",
+     "TmdbId": 2418333,
+     "CreditId": "5d8b43af79b3d4001786b08e",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/xVeismLfDnAnM6dh2Nwh6s7fzon.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Garance Marillier",
+     "Order": 2,
+     "Character": "Justine",
+     "TmdbId": 1144473,
+     "CreditId": "60bcd407f5c82400570b6439",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/gPIOhXZDUYE8wDbL5s12H7i6uzK.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Laïs Salameh",
+     "Order": 3,
+     "Character": "Rayane",
+     "TmdbId": 2934453,
+     "CreditId": "60bcd40daf95900040e11b18",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/gUUjgXlteMX1KC1nYsktcUn58fc.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Mara Cissé",
+     "Order": 4,
+     "Character": "Jeantet",
+     "TmdbId": 3173736,
+     "CreditId": "60ff2931a58902002f9c5ad8",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/lZpu07faTNHfTebDvpNv3aSTZsn.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Marin Judas",
+     "Order": 5,
+     "Character": "Charrier",
+     "TmdbId": 2474911,
+     "CreditId": "60ff295a7ad08c00748547a9",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/inqEGcHaZbF5mlrTgsuo38pr7Ks.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Diong-Kéba Tacu",
+     "Order": 6,
+     "Character": "Sissoko",
+     "TmdbId": 2463389,
+     "CreditId": "60ff29701684f70046c71e5f",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/16OU03uOXlv4a5p3toH6rqrCNZs.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Myriem Akheddiou",
+     "Order": 7,
+     "Character": "Adrien's Mother",
+     "TmdbId": 1689510,
+     "CreditId": "60edfbfb397df000462e5884",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/9Xw3XoQSAuUcArgyDjV9erC8W3C.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Bertrand Bonello",
+     "Order": 8,
+     "Character": "Alexia's Father",
+     "TmdbId": 146438,
+     "CreditId": "60ff287738e5100045ce79c4",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/2sHTU4YOb7buNcU8MZ3JKpGlF6R.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Céline Carrère",
+     "Order": 9,
+     "Character": "Alexia's Mother",
+     "TmdbId": 1591902,
+     "CreditId": "60ff29847caa47002f57ccaa",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/pCT5T8zxyCUVnqYLWoD6tVDhXfn.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Adèle Guigue",
+     "Order": 10,
+     "Character": "Alexia Aged 7",
+     "TmdbId": 3173747,
+     "CreditId": "60ff2bc84e52ed0048b7eebb",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/sCjtamQHxaEbYLIGKg0Ec5jJP9F.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Thibault Cathalifaud",
+     "Order": 11,
+     "Character": "Fan at Tuning Show",
+     "TmdbId": 2933154,
+     "CreditId": "60ff2cd138e5100045ce829c",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/jlu8gzXOlQpoqf5XHDXMrSGvyRJ.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Dominique Frot",
+     "Order": 12,
+     "Character": "The Macarena Lady",
+     "TmdbId": 19165,
+     "CreditId": "60bcd4158ddc3400409b8318",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/di5JlJvRVxnkCUqR8YlOMGGu67m.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Lamine Cissokho",
+     "Order": 13,
+     "Character": "Jérôme / Jupi",
+     "TmdbId": 1610424,
+     "CreditId": "60edfc26ab1bc70074139e7b",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/aXO6ca3brFkkp8kgIxy1O2ZvO7h.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Florence Janas",
+     "Order": 14,
+     "Character": "Alexia's Doctor",
+     "TmdbId": 1701554,
+     "CreditId": "60ff2c317304b5007e2b6b81",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/bVX3qULhckMh8myBMt7BwXjJY20.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Frédéric Jardin",
+     "Order": 15,
+     "Character": "BPF Inspector",
+     "TmdbId": 232898,
+     "CreditId": "60ff2c6bf85958008315e2e6",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/uiJA1LYyfFcFUuxYBl21F6Hx7BL.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Olivia Venner",
+     "Order": 16,
+     "Character": "Shower Hostess",
+     "TmdbId": 3173750,
+     "CreditId": "60ff2c87a5890200459a16e8",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/AnqfjExnW6BIRM2G1OUsdippanl.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Thibault Villette",
+     "Order": 17,
+     "Character": "Security Guard at Tuning Show",
+     "TmdbId": 3173752,
+     "CreditId": "60ff2c9c127778005d72f51b",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/zk6Fngu1PfclMgcqYw1xTLKlMS1.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Nathalie Boyer",
+     "Order": 18,
+     "Character": "Paramedic (uncredited)",
+     "TmdbId": 1784234,
+     "CreditId": "60edfc0b5f622b002fe33b00",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/rNxFv2IxwOFl0T1IEijTZns2b9O.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Théo Hellermann",
+     "Order": 19,
+     "Character": "Young Man (uncredited)",
+     "TmdbId": 2280365,
+     "CreditId": "60edfc1b8c3159004520b822",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/2EDC6XHBkO1RZiYQSXZKTepGJrM.jpg"
+      }
+     ]
+    }
+   ],
+   "Crew": [
+    {
+     "Name": "Julia Ducournau",
+     "Order": 0,
+     "Job": "Director",
+     "Department": "Directing",
+     "TmdbId": 1392433,
+     "CreditId": "5d77bff339549a001096b351",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/3shIDLkYLA5xIdfwXbxr8B2FMVT.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Julia Ducournau",
+     "Order": 1,
+     "Job": "Writer",
+     "Department": "Writing",
+     "TmdbId": 1392433,
+     "CreditId": "6295a55b5cea18009fd21382",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/3shIDLkYLA5xIdfwXbxr8B2FMVT.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Jean-Christophe Reymond",
+     "Order": 2,
+     "Job": "Producer",
+     "Department": "Production",
+     "TmdbId": 1367026,
+     "CreditId": "5ff2e27921118f003d27086a",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/74qAmKGCCxjKfDuRSjXio6C7mH6.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Amaury Ovise",
+     "Order": 3,
+     "Job": "Producer",
+     "Department": "Production",
+     "TmdbId": 1367025,
+     "CreditId": "6214d5079f5dfb00414c4c26",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/zdRq5tRQMEyVul34Y3AxkvwtINe.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Christophe Hollebeke",
+     "Order": 4,
+     "Job": "Executive Producer",
+     "Department": "Production",
+     "TmdbId": 2714679,
+     "CreditId": "60edfc768c3159005ea17d0f",
+     "Images": []
+    },
+    {
+     "Name": "Ruben Impens",
+     "Order": 5,
+     "Job": "Director of Photography",
+     "Department": "Camera",
+     "TmdbId": 1057377,
+     "CreditId": "60bcd4475b1240002c184d71",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/4nxnyF23uGoSpoL2nvtw9BykZlv.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Jérôme Gaspard",
+     "Order": 6,
+     "Job": "Stunt Coordinator",
+     "Department": "Crew",
+     "TmdbId": 1773768,
+     "CreditId": "6454ea8033ad8f011b403ac8",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/52kIfU0P46gyDcNQtVJnLLuoKev.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Christel Baras",
+     "Order": 7,
+     "Job": "Casting",
+     "Department": "Production",
+     "TmdbId": 96295,
+     "CreditId": "60f203514975600046308efc",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/lZdOrS1y7ADRm99GCl05vpV8zLF.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Emmanuel Lanzi",
+     "Order": 8,
+     "Job": "Stunt Coordinator",
+     "Department": "Crew",
+     "TmdbId": 81053,
+     "CreditId": "6454ea9ec044290164ec0152",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/5oJtCgm3YswkFEaULGH4UZnOSvY.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Olivier Père",
+     "Order": 9,
+     "Job": "Co-Producer",
+     "Department": "Production",
+     "TmdbId": 1451497,
+     "CreditId": "60edfc65cf1afd002a44f4fc",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/w3e88Dn1Usb6fNKNElkVfJBybla.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Philippe Logie",
+     "Order": 10,
+     "Job": "Associate Producer",
+     "Department": "Production",
+     "TmdbId": 1650259,
+     "CreditId": "60edfc6edcf875002f5ffa4b",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/8UmWy9KYlCRnmJ6ExNajmXxmOpJ.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Jean-Christophe Bouzy",
+     "Order": 11,
+     "Job": "Editor",
+     "Department": "Editing",
+     "TmdbId": 1618050,
+     "CreditId": "60bcd440b04605003f714a82",
+     "Images": []
+    },
+    {
+     "Name": "Stéphane Thiébaut",
+     "Order": 12,
+     "Job": "Sound Re-Recording Mixer",
+     "Department": "Sound",
+     "TmdbId": 1046053,
+     "CreditId": "60f202df5294e700453ab1dd",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/tqoN88uYJj7R0gu452aSAVjMKmt.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Constance Demontoy",
+     "Order": 13,
+     "Job": "Casting",
+     "Department": "Production",
+     "TmdbId": 966444,
+     "CreditId": "60f2035e89d97f00465710d7",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/zjUvPxNhToDzIHQcpBiHvKIM8Kg.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Julien Duverger",
+     "Order": 14,
+     "Job": "Stunt Double",
+     "Department": "Crew",
+     "TmdbId": 3066907,
+     "CreditId": "6454ea7633ad8f011b403ac1",
+     "Images": []
+    },
+    {
+     "Name": "Anne-Sophie Gledhill",
+     "Order": 15,
+     "Job": "Costume Design",
+     "Department": "Costume & Make-Up",
+     "TmdbId": 1646369,
+     "CreditId": "60da341d0b5fd6002d30d653",
+     "Images": []
+    },
+    {
+     "Name": "Séverin Favriau",
+     "Order": 16,
+     "Job": "Sound Supervisor",
+     "Department": "Sound",
+     "TmdbId": 1708641,
+     "CreditId": "615a3994ea89f5002421ab3c",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/Amd41h2n5e4w8Hy7G7QWeryY4ww.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Thomas Berliner",
+     "Order": 17,
+     "Job": "Boom Operator",
+     "Department": "Sound",
+     "TmdbId": 2025731,
+     "CreditId": "60f20286d37197005d445c08",
+     "Images": []
+    },
+    {
+     "Name": "Thibault Martegani",
+     "Order": 18,
+     "Job": "Visual Effects Supervisor",
+     "Department": "Visual Effects",
+     "TmdbId": 1566990,
+     "CreditId": "60f46440c439c00029e4ace2",
+     "Images": []
+    },
+    {
+     "Name": "Laurie Colson",
+     "Order": 19,
+     "Job": "Production Design",
+     "Department": "Art",
+     "TmdbId": 1697994,
+     "CreditId": "61193d389f0e19005c3707e1",
+     "Images": []
+    },
+    {
+     "Name": "Jim Williams",
+     "Order": 20,
+     "Job": "Original Music Composer",
+     "Department": "Sound",
+     "TmdbId": 150547,
+     "CreditId": "665406644a3bc9724702f9ca",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/c77O1nhoXS6bZqjhSrjmo27235C.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Abel Djilali",
+     "Order": 21,
+     "Job": "Stunt Double",
+     "Department": "Crew",
+     "TmdbId": 3156782,
+     "CreditId": "6454ea6b091e620186510edf",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/h63vSUSpdp6LxBVBxZ71xpKUBm7.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Florian Cornet",
+     "Order": 22,
+     "Job": "ADR Supervisor",
+     "Department": "Sound",
+     "TmdbId": 2025730,
+     "CreditId": "60f20299435abd002c575238",
+     "Images": []
+    },
+    {
+     "Name": "Dorothée Auboiron",
+     "Order": 23,
+     "Job": "Casting",
+     "Department": "Production",
+     "TmdbId": 2283317,
+     "CreditId": "60f203429c97bd00732ca417",
+     "Images": []
+    },
+    {
+     "Name": "Cassandre Warnauts",
+     "Order": 24,
+     "Job": "Co-Producer",
+     "Department": "Production",
+     "TmdbId": 1815682,
+     "CreditId": "60edfc54dcf8750080323cc0",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/wSWKwo58mGt2EvhmDsGyEBLzLwm.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Jacques Akchoti",
+     "Order": 25,
+     "Job": "Script Consultant",
+     "Department": "Writing",
+     "TmdbId": 64632,
+     "CreditId": "635ebc6a41eee1007a0d79b0",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/AkENAaZYEmYzcRH6r4xPSp1M3gR.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Olivier Afonso",
+     "Order": 26,
+     "Job": "Special Effects Makeup Artist",
+     "Department": "Costume & Make-Up",
+     "TmdbId": 1337034,
+     "CreditId": "685dde860de412b22715592c",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/23qoZnpZJgvQRz1gPAS5BI1uAcl.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Fabrice Osinski",
+     "Order": 27,
+     "Job": "Sound Mixer",
+     "Department": "Sound",
+     "TmdbId": 1860764,
+     "CreditId": "60f202c7435abd002c575245",
+     "Images": []
+    },
+    {
+     "Name": "Victor Praud",
+     "Order": 28,
+     "Job": "ADR Recordist",
+     "Department": "Sound",
+     "TmdbId": 2244482,
+     "CreditId": "60f202d13c887d0075a612e3",
+     "Images": []
+    },
+    {
+     "Name": "Audrey Meschi",
+     "Order": 29,
+     "Job": "Stunt Double",
+     "Department": "Crew",
+     "TmdbId": 1402174,
+     "CreditId": "6454eaaad8f44e0daf4bc57e",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/fMHt2aFeaCaH9BJf08hHe50fCd0.jpg"
+      }
+     ]
+    }
+   ]
+  },
+  "Studio": "Kazak Productions",
+  "YoutubeTrailerId": "_DmFHh7KsWc",
+  "Certifications": [
+   {
+    "Country": "AU",
+    "Certification": "R 18+"
+   },
+   {
+    "Country": "CA",
+    "Certification": "18A"
+   },
+   {
+    "Country": "CH",
+    "Certification": "16"
+   },
+   {
+    "Country": "CZ",
+    "Certification": "18+"
+   },
+   {
+    "Country": "DE",
+    "Certification": "16"
+   },
+   {
+    "Country": "DK",
+    "Certification": "15"
+   },
+   {
+    "Country": "ES",
+    "Certification": "18"
+   },
+   {
+    "Country": "FI",
+    "Certification": "K-18"
+   },
+   {
+    "Country": "FR",
+    "Certification": "16"
+   },
+   {
+    "Country": "GB",
+    "Certification": "18"
+   },
+   {
+    "Country": "GR",
+    "Certification": "Κ-18"
+   },
+   {
+    "Country": "HK",
+    "Certification": "III"
+   },
+   {
+    "Country": "HU",
+    "Certification": "18"
+   },
+   {
+    "Country": "IE",
+    "Certification": "18"
+   },
+   {
+    "Country": "IT",
+    "Certification": "VM18"
+   },
+   {
+    "Country": "KR",
+    "Certification": "19"
+   },
+   {
+    "Country": "LT",
+    "Certification": "N-18 "
+   },
+   {
+    "Country": "MX",
+    "Certification": "C"
+   },
+   {
+    "Country": "NL",
+    "Certification": "16"
+   },
+   {
+    "Country": "NO",
+    "Certification": "15"
+   },
+   {
+    "Country": "PL",
+    "Certification": "16"
+   },
+   {
+    "Country": "PT",
+    "Certification": "M/16"
+   },
+   {
+    "Country": "RU",
+    "Certification": "18+"
+   },
+   {
+    "Country": "SE",
+    "Certification": "15"
+   },
+   {
+    "Country": "SG",
+    "Certification": "R21"
+   },
+   {
+    "Country": "TR",
+    "Certification": "18+"
+   },
+   {
+    "Country": "UA",
+    "Certification": "18+"
+   },
+   {
+    "Country": "US",
+    "Certification": "R"
+   }
+  ],
+  "Status": null,
+  "Collection": null,
+  "Homepage": "https://titanemovie.com"
+ },
+ {
+  "TmdbId": 68726,
+  "ImdbId": "tt1663662",
+  "Title": "Pacific Rim",
+  "Overview": "Using massive piloted robots to combat the alien threat, Earth's survivors take the fight to the invading alien force lurking in the depths of the Pacific Ocean. Nearly defenseless in the face of the relentless enemy, the forces of mankind have no choice but to turn to two unlikely heroes who now stand as Earth's final hope against the mounting apocalypse.",
+  "OriginalTitle": "Pacific Rim",
+  "OriginalLanguage": "en",
+  "TitleSlug": "68726",
+  "Runtime": 131,
+  "Popularity": 13.8456,
+  "Year": 2013,
+  "Premier": null,
+  "InCinema": "2013-07-11T00:00:00Z",
+  "PhysicalRelease": "2013-10-15T00:00:00Z",
+  "DigitalRelease": "2013-07-11T00:00:00Z",
+  "Images": [
+   {
+    "CoverType": "Poster",
+    "Url": "https://image.tmdb.org/t/p/original/mmznhaQDwlHWpUwKuNxtQiubbmM.jpg"
+   },
+   {
+    "CoverType": "Fanart",
+    "Url": "https://image.tmdb.org/t/p/original/9X7Im1YuBhyHYVD8r7CAONPJR5k.jpg"
+   }
+  ],
+  "Ratings": [
+   {
+    "Count": 14013,
+    "Value": 6.951,
+    "Origin": "Tmdb",
+    "Type": "User"
+   }
+  ],
+  "MovieRatings": {
+   "Tmdb": {
+    "Count": 14013,
+    "Value": 6.951,
+    "Type": "User"
+   },
+   "Imdb": {
+    "Count": 566628,
+    "Value": 6.9,
+    "Type": "User"
+   },
+   "Metacritic": {
+    "Count": 0,
+    "Value": 65,
+    "Type": "User"
+   },
+   "RottenTomatoes": {
+    "Count": 0,
+    "Value": 72,
+    "Type": "User"
+   },
+   "Trakt": {
+    "Count": 22110,
+    "Value": 7.30109,
+    "Type": "User"
+   }
+  },
+  "Genres": [
+   "Action",
+   "Science Fiction",
+   "Adventure"
+  ],
+  "Keywords": [
+   "alaska",
+   "alien invasion",
+   "apocalypse",
+   "duringcreditsstinger",
+   "dystopia",
+   "giant monster",
+   "giant robot",
+   "hong kong",
+   "kaiju",
+   "monster",
+   "monster movie",
+   "pacific",
+   "robot"
+  ],
+  "AlternativeTitles": [
+   {
+    "Title": "Titanes del pacifico",
+    "Type": "Tmdb",
+    "Language": "es"
+   },
+   {
+    "Title": "Pacific Rim 1",
+    "Type": "Tmdb",
+    "Language": "en"
+   },
+   {
+    "Title": "퍼시픽림",
+    "Type": "Tmdb",
+    "Language": "ko"
+   },
+   {
+    "Title": "环太平洋",
+    "Type": "Tmdb",
+    "Language": "zh"
+   },
+   {
+    "Title": "Το Δαχτυλίδι της Φωτιάς",
+    "Type": "Tmdb",
+    "Language": "en"
+   },
+   {
+    "Title": "悍戰太平洋",
+    "Type": "Tmdb",
+    "Language": "zh"
+   },
+   {
+    "Title": "Vaikse ookeani võitlus",
+    "Type": "Tmdb",
+    "Language": "en"
+   },
+   {
+    "Title": "Siêu Đại Chiến Thái Bình Dương",
+    "Type": "Tmdb",
+    "Language": "en"
+   },
+   {
+    "Title": "Pacific.Rim",
+    "Type": "Tmdb",
+    "Language": "en"
+   }
+  ],
+  "Translations": [
+   {
+    "Title": "Pacific Rim",
+    "Overview": "Using massive piloted robots to combat the alien threat, Earth's survivors take the fight to the invading alien force lurking in the depths of the Pacific Ocean. Nearly defenseless in the face of the relentless enemy, the forces of mankind have no choice but to turn to two unlikely heroes who now stand as Earth's final hope against the mounting apocalypse.",
+    "Language": "en-US"
+   },
+   {
+    "Title": "Batalha do Pacífico",
+    "Overview": "Quando uma legião de monstruosas criaturas alienígenas, conhecidas com Kaiju, começam a emergir do Pacífico, dá-se início a uma batalha letal. Para combater estes monstros, os humanos desenvolvem uns robôs gigantes, a que dão o nome de Jaegers, como armas de guerra. Controlados simultaneamente por dois pilotos, os Jaegers mostram-se, no entanto, vulneráveis aos ataques dos implacáveis Kaiju. À beira da derrota, as forças em defesa da Humanidade não têm outra escolha senão recorrer a dois heróis improváveis, um ex-piloto e um inexperiente estagiário, que se juntam para conduzir um lendário mas aparentemente obsoleto Jaeger. Juntos, eles são a última esperança da Humanidade face ao apocalipse.",
+    "Language": "pt-PT"
+   },
+   {
+    "Title": "Pacific Rim",
+    "Overview": "De film speelt zich af in twee gescheiden werelden. De eerste is een toekomstige versie van de Aarde waar in november 2012 een gigantisch monster uit de Stille Oceaan opdook en de stad Osaka in Japan aanviel. De andere wereld is de Anteverse, waar het monster vandaan kwam.",
+    "Language": "nl-NL"
+   },
+   {
+    "Title": "Pacific Rim",
+    "Overview": "Surgies des flots, des hordes de créatures monstrueuses, les \"Kaiju\", ont déclenché une guerre qui a fait des millions de victimes et épuisé les ressources naturelles de l'humanité pendant des années. Pour les combattre, une arme d'un genre nouveau a été mise au point : de gigantesques robots, les \"Jaegers\", contrôlés simultanément par deux pilotes qui communiquent par télépathie. Mais même les Jaegers semblent impuissants face aux redoutables Kaiju. Alors que la défaite paraît inéluctable, les forces armées qui protègent l'humanité n'ont d'autre choix que d'avoir recours à deux héros hors normes : un ancien pilote au bout du rouleau et une jeune femme en cours d'entraînement qui font équipe pour manœuvrer un Jaeger légendaire, quoique d'apparence obsolète. Ensemble, ils incarnent désormais le dernier rempart de l'humanité contre une apocalypse de plus en plus imminente…",
+    "Language": "fr-FR"
+   },
+   {
+    "Title": "Tűzgyűrű",
+    "Overview": "Miközben az emberiség és a tengeri lények között folyik a háború, egy volt pilóta és egy újonc párba állnak, hogy egy elavultnak tűnő különleges gépet vezetve megmentsék a világot az apokalipszistől.",
+    "Language": "hu-HU"
+   },
+   {
+    "Title": "Pacific Rim",
+    "Overview": "Legioni di mostruose creature, note come Kaiju, sono emerse dal mare danno il via una guerra che costa milioni di vite e consuma la risorse del pianeta a ritmi vertiginosi. Per combattere i giganteschi Kaiji, sono state ideate delle armi speciali: enormi robot chiamati Jaegers comandati mentalmente da due piloti attraverso delle reti neurali. Ma perfino i Jaegers sembrano impotenti contro i mostri venuti dalle profondità marine. Vicini alla sconfitta, agli abitanti della Terra non resta che affidarsi a due improbabili eroi: uno scapestrato ex pilota e un'inesperta allieva cui viene affidato un vecchio ma glorioso Jaeger. Saranno loro le ultime speranze del genere umano giunto ormai sull’orlo dell’Apolcalisse.",
+    "Language": "it-IT"
+   },
+   {
+    "Title": "环太平洋",
+    "Overview": "近未来，地球环境逐步恶化。神秘外星殖民者通过大洋底部的虫洞“缺口”将身形庞大、残冷迅猛、身藏剧毒的怪兽接连派往地球，有条不紊地实施着它们的殖民毁灭计划。为此，人类联手打造“贼鸥计划”，制造出与怪兽体型相当的机甲战士迎战，但随着怪兽渐次进化，机甲战士全面溃败，各国政要试图修筑偏于防守的“生命之墙”以阻挡侵略者的脚步，无奈很快遭遇挫折。在此危急关头，暗中仍推进“贼鸥计划”的斯特克·潘特考斯特将军找回五年前曾遭受重大打击的“危险流浪者”驾驶员，并通过严格选拔为他选择了新的搭档森麻子。复活的“流浪者”即将与另外三台仅存的机甲战士迎战更强大的怪兽侵略者，同时寻找彻底扫除敌人的良机。苍茫的大海之上，人类保卫之战接连而起……",
+    "Language": "zh-CN"
+   },
+   {
+    "Title": "Pacific Rim",
+    "Overview": "Die Kaiju, monströse außerirdische Kreaturen, erheben sich aus dem Meer und ziehen in einen Krieg gegen die Menschheit, der Unzählige das Leben kosten und die Reserven der Erde bis in alle Zeit aufbrauchen könnte. Um die Kaiju zu bekämpfen, wird eine spezielle Waffe hergestellt: Gigantische Roboter namens Jaeger, die durch zwei Piloten gesteuert werden, deren Gehirne durch eine neurale Brücke ebenfalls miteinander verknüpft werden. Jedoch scheinen selbst die ausgeklügeltsten Waffen an den übermächtigen Aliens zu scheitern. In ihrer Ratlosigkeit wenden sich die Streitkräfte der Erde an den abgehalfterten Ex-Piloten Raleigh Antrobus und seine unerfahrene Novizin Mako Mori, die ein scheinbar schlecht ausgerüstetes, älteres Modell der Jaeger gegen die Kaiju in den Kampf führen sollen. Die beiden werden zur letzten Hoffnung gegen die übermächtige apokalyptische Gewalt aus dem All.",
+    "Language": "de-DE"
+   },
+   {
+    "Title": "Pacific Rim",
+    "Overview": "När stora monster stiger upp från haven inleds ett krig som kostar miljontals liv. För att bekämpa dessa Kaijus, skapar man jättelika robotar, Jaegers, som styrs av två piloter. Men även dessa har problem att ta sig an den hänsynslösa fienden. På gränsen till ett förödande nederlag vänder man sig till två osannolika hjältar. En före detta pilot och en ung tjej är plötsligt mänsklighetens sista hopp inför den stundande apokalypsen.",
+    "Language": "sv-SE"
+   },
+   {
+    "Title": "Pacific Rim",
+    "Overview": "Cuando legiones de monstruosas criaturas, denominadas Kaiju, comienzan a salir del mar, se inicia una guerra que acabará con millones de vidas y que consumirá los recursos de la humanidad durante interminables años. Para combatir a los Kaiju gigantes diseñan un tipo especial de arma: enormes robots, llamados Jaegers, que son controlados simultáneamente por dos pilotos cuyas mentes están bloqueadas en un puente neural. Pero incluso los Jaegers proporcionan poca defensa ante los incansables Kaiju. A punto de la derrota, las fuerzas que defienden a la humanidad no tienen otra elección que recurrir a dos insólitos héroes: un ex piloto acabado (Charlie Hunnam) y un aprendiz que todavía no se ha puesto a prueba (Rinko Kikuchi). Ambos se unen para traer a un legendario pero al parecer obsoleto Jaeger del pasado. Juntos, son la última esperanza de la humanidad frente al Apocalipsis que se avecina.",
+    "Language": "es-ES"
+   },
+   {
+    "Title": "Тихоокеанский рубеж",
+    "Overview": "Когда из морских глубин поднялись легионы чудовищ, известных как кайдзю, началась война, которой суждено было забрать миллионы жизней и свести «человеческие ресурсы» почти к нулю всего за несколько лет. Чтобы сражаться с пришельцами, было создано специальное оружие: огромные роботы, названные егерями, они управлялись одновременно двумя пилотами, чьи сознания соединены с помощью нейронной связи. Но даже егеря оказываются почти бессильны перед лицом безжалостных кайдзю. На грани поражения у защитников человечества нет выбора, кроме как обратиться к двум весьма сомнительным героям – никому не нужному бывшему пилоту и неопытному стажеру – которые объединились, чтобы повести в бой некогда легендарного, но сейчас устаревшего егеря. Вместе они оказываются единственной надеждой человечества, последним препятствием перед надвигающимся апокалипсисом.",
+    "Language": "ru-RU"
+   },
+   {
+    "Title": "Pacific Rim - Útok na Zemi",
+    "Overview": "Z moře se vynoří obrovské příšery Kaiju a pustí se do války s lidstvem, která si vyžádá milióny životů a lidstvo na roky zatíží. Pro boj s Kaiju byla vyvinuta speciální zbraň: masivní roboti zvaní Jaegers, kteří jsou simultánně ovládáni dvěma piloty, jejichž mozky jsou propojeny neurálním mostem. Jenže i tihle roboti se tváří v tvář nezničitelným Kaiju zdají být téměř bezmocní. Na pokraji porážky nakonec síly bránící lidstvo nemají jinou možnost než obrátit svoji naději směrem ke dvěma nečekaným hrdinům: bývalému pilotovi a nezkušenému nováčkovi, kteří se dají dohromady, aby společně řídli slavného, nicméně zároveň zjevně zastaralého Jaegera. Společně budou čelit hrozící apokalypse.",
+    "Language": "cs-CZ"
+   },
+   {
+    "Title": "Το δαχτυλίδι της φωτιάς",
+    "Overview": "Αμέτρητα γιγάντια τέρατα ξεπροβάλλουν από τον Ειρηνικό Ωκεανό, αφήνοντας χάος στο πέρασμά τους. Κι ενώ το ανθρώπινο είδος φαίνεται καταδικασμένο, ένας πρώην πιλότος και μια εκπαιδευόμενη συνεργάζονται για να σώσουν τον πλανήτη.",
+    "Language": "el-GR"
+   },
+   {
+    "Title": "แปซิฟิค ริม สงครามอสูรเหล็ก",
+    "Overview": "เมื่อกองทัพสัตว์ประหลาดที่โหดร้ายในนามของ ไคจู อุบัติขึ้นมาจากทะเล จึงเกิดสงครามที่คร่าชีวิตคนนับล้านและทำลายทรัพยากรของมนุษย์มานานหลายปี ในการต่อสู้กับสัตว์ประหลาดตัวยักษ์ ไคจู ทำให้ต้องมีการประดิษฐ์คิดค้นอาวุธพิเศษขึ้นมา: หุ่นยนต์ยักษ์ที่เรียกว่า เจเกอร์ส ซึ่งต้องควบคุมพร้อมกันโดยผู้ควบคุม 2 คน จิตของพวกเขาจะถูกเชื่อมต่อกับสะพานกระแสจิต แต่ถึงแม้เจเกอร์สจะพิสูจน์ว่าพวกเขาไม่สามารถปกป้องผู้คนให้พ้นจากไคจูจอมอึดได้ บนเส้นทางแห่งความพ่ายแพ้ กองกำลังแห่งมนุษยชาติไม่มีทางเลือก ต้องหวนไปหากลุ่มฮีโร่ที่ไม่น่าเชื่อ ทั้ง 2 คนอย่างอดีตนักบินตกอับ (ชาร์ลี ฮันแนม) และผู้ฝึกหัดที่ยังไม่ผ่านการทดสอบ (ริงโกะ คิคูชิ) ผู้ต้องมาร่วมทีมกันสร้างตำนานเจเกอร์สที่ตกยุคจากอดีต และพวกเขายังยืนหยัดอยู่เป็นความหวังสุดท้ายของเหล่ามวลมนุษย์ที่ต้องต่อสู้กับหายนะล้างโลกที่กำลังทวีคูณ",
+    "Language": "th-TH"
+   },
+   {
+    "Title": "Pasifik Savaşı",
+    "Overview": "Denizden Kaiju adı verilen yaratıklar yükselmeye başlayınca, milyonlarca insanın canına mal olacak ve insan kaynaklarını tüketen bir savaş başlar. Bu devasa Kaijular ile savaşabilmek için özel bir silah üretilir. Jaeger adı verilen büyük robotlar akılları nöral bir köprüde kitlenmiş iki pilot tarafından beyin gücüyle yönetilir. Ama Jaegerlar bile acımasız Kaijuların yanında savunmasız kalırlar. Yenilmenin eşiğindeki insanoğlunun son çaresi eski pilot (Charlie Hunnam) ve deneyimsiz stajyer (Rinko Kikuchi)'dir. Birlikte, kıyamete karşı insanlığın son umudu olacaklardır.",
+    "Language": "tr-TR"
+   },
+   {
+    "Title": "Ohnivý kruh",
+    "Overview": "Z mora sa vynoria obrovské príšery Kaiju a pustia sa do vojny s ľudstvom, ktorá si vyžiada milióny životov a ľudstvo na roky zaťaží. Pre boj s Kaiju bola vyvinutá špeciálna zbraň: masívni roboti zvaní Jaegers, ktorí sú simultánne ovládaní dvomi pilotmi, ktorých mozgy sú prepojené neurálnym mostom. Lenže aj títo roboti sa tvárou v tvár nezničiteľným Kaiju zdajú byť takmer bezmocní. Na pokraji porážky nakoniec sily brániace ľudstvo nemajú inú možnosť než obrátiť svoju nádej smerom k dvom nečakaným hrdinom: bývalému pilotovi a neskúsenému nováčikovi, ktorí sa dajú dohromady, aby spoločne riadili slávneho, avšak zároveň zjavne zastaraného Jaegera. Spoločne budú čeliť hroziacej apokalypse.",
+    "Language": "sk-SK"
+   },
+   {
+    "Title": "Pacific Rim",
+    "Overview": "Ocean Spokojny kryje w sobie wiele tajemnic, lecz nikt się nie spodziewał, że na jego dnie znajduje się zagadkowy, prowadzący do innego wymiaru portal. Pod koniec 2012 roku wyłaniają się z niego ogromnych rozmiarów potwory, które niszczą przybrzeżne miasta i rozpoczynają niszczycielską wędrówkę w głąb lądu, pozostawiając po sobie jedynie zgliszcza. W celu pokonania niebezpieczeństwa wojsko rozpoczyna pracę nad programem \"Jaeger\", mającym na celu stworzenie gigantycznych mechów bojowych, które operowane przez pary pilotów będą w stanie pokonać bestie.",
+    "Language": "pl-PL"
+   },
+   {
+    "Title": "Pacific Rim",
+    "Overview": "Storbyer verden over plages af monstrøse kaiju-uhyrer, der vader op af havet og smadrer alt. Monstrene har længe været holdt i skak af gigantrobotter, de såkaldte Jaegere, som hver styres af to mentalt forbundne piloter. Men menneskeheden er ved at tabe kampen. Deres sidste håb er den uglesete Raleigh og den uprøvede Mako, som viser sig at være en kampdygtig duo, når de sammen bemander en gammel Jaeger.",
+    "Language": "da-DK"
+   },
+   {
+    "Title": "パシフィック・リム",
+    "Overview": "2013年、突然未知の巨大生命体が太平洋の深海から現われる。それは世界各国の都市を次々と破壊して回り、瞬く間に人類は破滅寸前へと追い込まれてしまう。人類は一致団結して科学や軍事のテクノロジーを結集し、生命体に対抗可能な人型巨大兵器イェーガーの開発に成功する。パイロットとして選ばれた精鋭たちはイェーガーに乗り込んで生命体に立ち向かっていくが、その底知れぬパワーに苦戦を強いられていく。",
+    "Language": "ja-JP"
+   },
+   {
+    "Title": "Pacific Rim - Hyökkäys Maahan",
+    "Overview": "Kun suuri joukko hirviömäisiä jättiläisolioita - joista käytetään nimitystä kaiju - nousee merenpohjasta, syttyy sota, joka vaatii miljoonia uhreja ja syö ihmiskunnan voimavaroja vuosikausien ajan. Jättiläishirviöitä vastaan kehitetään erikoisase: valtavat robotit, Jaegerit, joita ohjaa samanaikaisesti kaksi ohjaajaa, joiden aivot on yhdistetty toisiinsa hermosillalla. Mutta edes Jaegerit eivät mahda paljonkaan noille hirmuille. Tappion uhatessa ihmiskunnan puolustajat joutuvat turvautumaan kahden yllättävän sankarin apuun - toinen heistä on parhaat päivänsä nähnyt pilotti (Charlie Hunnam) ja toinen vastaavasti kokematon keltanokka (Rinko Kikuchi) - jotka ryhtyvät yhdessä ohjastamaan legendaarista mutta vanhentunutta Jaegeria menneiltä ajoilta. Nämä kaksi ovat tuhon partaalla keikkuvan ihmiskunnan viimeinen toivo.",
+    "Language": "fi-FI"
+   },
+   {
+    "Title": "Тихоокеанський рубіж",
+    "Overview": "Коли з морських глибин піднялися легіони чудовиськ, відомих як Кайдзу, почалася війна, яка лише за декілька років забрала життя більше половини населення людства. Для боротьби з прибульцями було розроблено спеціальну зброю: Джеґери — величезні роботи, керовані одночасно двома пілотами. з'єднані між собою за допомогою нейронного зв'язку. Але навіть з їх допомогою захисники людства опиняються на межі поразки. Не маючи іншого вибору, вони звертаються до всіма забутого, але дуже досвідченого пілота і його стажера, які об'єднуються, щоб повести у бій колись легендарного, проте зараз вже застарілого Джеґера. Разом вони стають єдиною надією людства, останнім рубежем захисту перед лицем безжалісних Кайдзу.",
+    "Language": "uk-UA"
+   },
+   {
+    "Title": "Bitka za Pacifik",
+    "Overview": "Spektakularna akcija prepuna specijalnih efekata. Bića iz druge dimenzije prijete uništenjem Zemlje, a oduprijeti im se možemo jedino divovskim robotima kojima upravljaju najbolji piloti.  Izvanzemljska prijetnja svijetu došla je iz dubina Pacifika, iz rasjekline iz­među dviju tektonskih ploča, iz portala između dimenzija. Da bi se obranili od čudovišta, čelnici velikih sila su se ujedinili i stvorili vlastita čudovišta—rođen je program Jäger (jeger, njemački: lovac)…  koji će nakon prvotnih uspjeha doći na rub propasti, zajedno sa cijelim svijetom.",
+    "Language": "hr-HR"
+   },
+   {
+    "Title": "Огненият пръстен",
+    "Overview": "Cмъртоносна война започва, когато легиони от ужасяващи извънземни създания, наречени Кайджу, изпълзяват от морските дълбини. За да им се противопоставят, хората изобретяват Йегерите - гигантски роботи, разполагащи с мощни оръжия. Управлявани от двама души, дори Йегерите не успяват да се противопоставят напълно на Кайджу.  На прага на поражението, човечеството трябва да се довери на пропаднал бивш пилот и начинаеща стажантка, които да управляват легендарен, но остарял Йегер. Тези странни герои са последната надежда срещу надигащия се апокалипсис.",
+    "Language": "bg-BG"
+   },
+   {
+    "Title": "퍼시픽 림",
+    "Overview": "태평양 심해의 균열에서 나타난 거대 괴수 카이주가 해안 도시들을 파괴하자, 인류는 두 조종사가 정신을 연결해 움직이는 로봇 예거를 만든다. 그러나 거듭되는 습격으로 전력은 소진되고, 세계의 지도자들은 예거 대신 거대한 방벽에 희망을 건다. 전투 중 형을 잃고 조종석을 떠난 롤리는 방벽마저 무력해진 상황에서 사령관 펜테코스트의 요청으로 복귀한다. 홍콩 기지에 모인 마지막 예거들과 함께할 그에게는 자신의 기억과 상처까지 공유할 새로운 파트너가 필요하다. 뛰어난 자질을 지닌 마코가 후보로 나서지만, 서로의 마음을 연결하는 일은 조종 기술만으로 해결되지 않는다. 더 강한 괴수들이 몰려오는 가운데 두 사람은 공포를 견디며 호흡을 맞춰, 인류에게 남은 마지막 공격 기회를 준비한다.",
+    "Language": "ko-KR"
+   },
+   {
+    "Title": "פסיפיק רים",
+    "Overview": "כדור הארץ והאנושות שוב בסכנת קיום. כשחייזרים מאיימים על הכדור, רובוטים ענקיים מנווטים על ידי בני אדם נכנסים לפעולה כדי להדוף את הסכנה. כשעולים מהים יצורים בשם קייג'ו מתחילה מלחמה הלוקחת את חייהם של מיליונים ומכלה את משאבי המין האנושי לעוד שנים רבות. כדי להילחם בקייג'ן נעזרים בכלי נשק מיוחדים: רובוטים מסיביים הנשלטים בו זמנית על ידי שני טייסים שמוחותיהם נכלאים בגשר עצבי. אבל גם הרובוטים מתקשים לנצח במלחמה. על סף הפסד לא נותרת ברירה והכוחות המגנים על האנושות פונים לשני גיבורים תשושים – טייס לשעבר וחניך, שמצוותים לנהוג על רובוט אגדי מהעבר שכבר יצא מכלל שימוש. יחד הם התקווה היחידה של האנושות מפני אפוקליפסה.",
+    "Language": "he-IL"
+   },
+   {
+    "Title": "Cercul de foc",
+    "Overview": "Când legiuni de creaturi monstruoase, cunoscute sub numele de Kaiju, s-au ridicat din mare, a început un război ce va costa milioane de vieți și va consuma resursele omenirii de-a lungul anilor. Pentru a combate uriașul Kaiju, a fost conceput un tip special de arme: roboți masivi, numiți Jaegers, care sunt controlați simultan de doi piloți ale căror minți sunt împreunate într-o reţea neuronală. Dar chiar și Jaegerii se dovedesc a fi aproape lipsiți de apărare în fața necruţătorilor Kaiju. În pragul înfrângerii, forțele care apără omenirea nu au de ales decât să se întoarcă înspre doi eroi neobişnuiţi - un fost pilot ratat (Charlie Hunnam) și un recrut fără experienţă (Rinko Kikuchi) - care sunt făcuţi coechipieri pentru a conduce un Jaeger legendar dar aparent depășit, din timpuri trecute. Împreună, ei reprezintă ultima speranță a omenirii împotriva apocalipsei mondiale.",
+    "Language": "ro-RO"
+   },
+   {
+    "Title": "Pacific Rim",
+    "Overview": "Da de enorme monstrene, kalt Kaijuer, steg opp fra havet, startet en krig som krevde millioner av liv og kostet menneskene mesteparten av deres ressurser gjennom mange års krigføring. For å nedkjempe monstrene utviklet menneskene såkalte Jaegers, massive kjemperoboter, styrt simultant av to piloter med en felles tankekraft.  Men de menneskeskapte Jaegerene ble nærmest forsvarsløse i kampen mot de nådeløse Kaijuene. I et desperat siste forsøk på å redde menneskeheten fra avgrunnen tvinges styrkene til å vende seg mot det som kan være siste utvei: en eks-pilot (Charlie Hunnam) og en utrent lærling (Rinko Kikuchi), satt sammen i team for å styre en legendarisk men tilsynelatende foreldet Jaeger fra fortiden.  Sammen utgjør de to et lag som blir menneskehetens aller siste håp - for å avverge den siste og tilintetgjørende apokalypsen.",
+    "Language": "no-NO"
+   },
+   {
+    "Title": "Círculo de Fogo",
+    "Overview": "Criaturas monstruosas conhecidas como Kaiju começam a emergir do mar. Para combatê-los, a humanidade desenvolve uma série de robôs gigantescos, os Jaegers. Cada um é controlado por duas pessoas por meio de uma conexão neural. Entretanto, mesmo os Jaegers se mostram insuficientes para derrotar os Kaiju. Diante deste cenário, a última esperança é um velho robô, que passa a ser comandado por um antigo piloto e uma pessoa em treinamento.",
+    "Language": "pt-BR"
+   },
+   {
+    "Title": "環太平洋",
+    "Overview": "2020年，破壞力強大的「怪獸」突然從海底竄出，向人類展開猛烈攻擊。巨型機器人「機甲獵人」與其人類駕駛遂成為拯救世界的唯一希望……",
+    "Language": "zh-TW"
+   },
+   {
+    "Title": "Rives du Pacifique",
+    "Overview": "Depuis que des créatures monstrueuses surnommées Kaiju sont apparues des profondeurs de l'océan, la Terre est en péril. Les gens meurent par millions et l'espoir s'amenuise à chaque jour. Pour affronter cette terrible menace, les êtres humains ont inventé des Jaegers, des robots géants conduits par deux pilotes. Malgré des résultats en dent de scie, la résistance est tenace et elle s'organise. L'avenir de la planète réside donc dans les mains de deux individus que tout oppose : Raleigh qui est un pilote d'expérience traumatisé par le décès brutal de son frère et Mako, une jeune novice qui cache des aptitudes insoupçonnées.",
+    "Language": "fr-CA"
+   },
+   {
+    "Title": "Titanes Del Pacífico",
+    "Overview": "Cuando legiones de monstruosas criaturas, denominadas Kaiju, comienzan a salir del mar, se inicia una guerra que acabará con millones de vidas y que consumirá los recursos de la humanidad durante interminables años. Para combatir a los Kaiju gigantes diseñan un tipo especial de arma: enormes robots, llamados Jaegers, que son controlados simultáneamente por dos pilotos cuyas mentes están bloqueadas en un puente neural. Pero incluso los Jaegers proporcionan poca defensa ante los incansables Kaiju. A punto de la derrota, las fuerzas que defienden a la humanidad no tienen otra elección que recurrir a dos insólitos héroes: un ex piloto acabado y un aprendiz que todavía no se ha puesto a prueba. Ambos se unen para traer a un legendario pero al parecer obsoleto Jaeger del pasado. Juntos, son la última esperanza de la humanidad frente al Apocalipsis que se avecina",
+    "Language": "es-MX"
+   },
+   {
+    "Title": "Ugnies žiedas",
+    "Overview": "Tolimoje ateityje Ramiojo vandenyno gelmėse atsiveria tarpdimensinis portalas, kuriuo į Žemę pradeda plūsti milžiniški padarai, žmonių praminti Kaiju. Norėdami apginti savo planetą nuo pabaisų invazijos, pasaulio vadovybės susivienija ir sukuria ateiviams dydžiu nė kiek nenusileidžiančias mechas (žmonių pilotuojamus robotus), vadinamus \"Jaegers\". Žemė tampa mūšio lauku dėl išgyvenimo.",
+    "Language": "lt-LT"
+   },
+   {
+    "Title": "悍戰太平洋",
+    "Overview": "一群稱為 Kaiju 的異獸從海底掘起，引發一場可能摧毀無數生命、耗盡人類資源的大戰。為了對付這班巨型異獸，人類打造了特別武器 – 大型機械人「機甲獵人」(Jaegers) 應戰。機甲獵人需由兩位駕駛員同時以神經連接來操作，但強捍如機甲獵人也不敵殘酷的異獸。在瀕臨戰敗的邊緣，守衞人類的軍隊在毫無選擇下，起用了一位久疏戰陣的退役駕駛員 (查理漢納姆 飾) 和一位沒有實戰經驗的駕駛訓練員 (菊池凜子 飾)。兩人需要拍檔去操作已過時的傳奇機甲獵人，為人類生存的最後希望而戰。",
+    "Language": "zh-HK"
+   },
+   {
+    "Title": "Pacific Rim",
+    "Overview": "La humanitat va perdent la guerra contra els Kaijus, unes enormes bèsties que sorgeixen del fons de l'oceà Pacífic i que en cada atac destrueixen ciutats i maten desenes de milers de persones. Els Jaegers, unes màquines gegants construïdes per fer front a aquests monstres alienígenes, no van donar els resultats esperats i van ser retirats de la circulació.\r Però, l'any 2025, un militar decideix reunir els pocs Jaegers que queden per millorar-los i destruir definitivament l'amenaça Kaiju. Per a la missió comptarà amb un antic pilot en hores baixes, que haurà de connectar-se neurològicament a una cadet inexperta per moure el Gipsy Danger, un Jaeger obsolet.",
+    "Language": "ca-ES"
+   },
+   {
+    "Title": "Битка за Пацифик",
+    "Overview": "Кад легије монструозних створења по имену каију почну да излазе из мора, почиње рат који ће однети милионе живота и исцрпети људске ресурсе. За борбу против огромних каијуа, дизајнирано је специјално оружје: огромни роботи звани џегери, које симултано контролишу два пилота, чији су мозгови спојени неуралним мостом. Али чак ни џегери не успевају да се одбране од немилосрдних каијуа. На ивици пораза, силе које бране човечанство немају избора осим да позову двоје невероватниих јунака - бившег пилота и кадеткињу на обуци - који треба да управљају легендарним, али изузетно застарелим џегером из прошлости. Они су последња нада човечанства које се бори против надолазеће апокалипсе.",
+    "Language": "sr-RS"
+   },
+   {
+    "Title": "Ognjeni obroč",
+    "Overview": "",
+    "Language": "sl-SI"
+   },
+   {
+    "Title": "Siêu Đại Chiến",
+    "Overview": "Một bộ phim hấp dẫn không thể bỏ qua khi con người phải chiến đấu chống lại những quái vật đến từ kẽ nứt của Thái Bình Dương mang tên gọi Kaiju. Chúng đang đe dọa hủy diệt thế giới loài người khi con người gần như thất bại hoàn toàn trước sức mạnh của lũ quái khổng lồ.  Để tiêu diệt những sinh vật này, một loại vũ khí đặc biệt đã được chế tạo: Những robot khổng lồ, được gọi là Jeager. Được điều khiển đồng thời bởi hai phi công, tâm trí của họ được khóa lại trong một cầu nối thần kinh. Nhưng những robot này thậm chí vẫn không thể nào đối chọi lại được lũ quái vật kia.  Lực lượng phòng vệ của loài người không còn lựa chọn nào khác buộc phải ủy thác tất cả vào hai người hùng mà chẳng ai ngờ tới: Một cựu phi công hay gây rắc rối và một phi công thực tập, còn chưa được sát hạch. Họ cùng phối hợp điều khiển một Jeager từng là huyền thoại nhưng nay đã lỗi thời. Họ trở thành hy vọng cuối cùng của nhân loại trước bờ vực diệt vong...",
+    "Language": "vi-VN"
+   },
+   {
+    "Title": "حافة المحيط الهادئ",
+    "Overview": "تدور احداث الفيلم عندما تخرج من أعماق المحيط وحوش عملاقة آتية من عالم آخر، تقوم بتدمير مدن بأكملها وتودي بحياة الملايين، يقوم البشر بصناعة آليين هائلي الحجم يطلق عليهم \"جياجرز\" لمحاربة تلك الكائنات، على أن يتم التحكم في كل جياجر عن طريق طيارين من البشر، لكن كل هذا لا يجدي نفعاً أمام تلك المخلوقات الجبارة، وتستمر الحرب لأكثر من 20 عامًا، تكاد فيها حضارة البشر أن تنهار، قبل أن يبزغ أمل جديد في الأفق.",
+    "Language": "ar-SA"
+   },
+   {
+    "Title": "წყნარი ოკეანის ტიტანები",
+    "Overview": "",
+    "Language": "ka-GE"
+   },
+   {
+    "Title": "حاشیه اقیانوس آرام",
+    "Overview": "",
+    "Language": "fa-IR"
+   },
+   {
+    "Title": "Pacific Rim",
+    "Overview": "Die Kaiju, monströse außerirdische Kreaturen, erheben sich aus dem Meer und ziehen in einen Krieg gegen die Menschheit, der Unzählige das Leben kosten und die Reserven der Erde bis in alle Zeit aufbrauchen könnte. Um die Kaiju zu bekämpfen, wird eine spezielle Waffe hergestellt: Gigantische Roboter namens Jaeger, die durch zwei Piloten gesteuert werden, deren Gehirne durch eine neurale Brücke ebenfalls miteinander verknüpft werden. Jedoch scheinen selbst die ausgeklügeltsten Waffen an den übermächtigen Aliens zu scheitern. In ihrer Ratlosigkeit wenden sich die Streitkräfte der Erde an den abgehalfterten Ex-Piloten Raleigh Antrobus und seine unerfahrene Novizin Mako Mori, die ein scheinbar schlecht ausgerüstetes, älteres Modell der Jaeger gegen die Kaiju in den Kampf führen sollen. Die beiden werden zur letzten Hoffnung gegen die übermächtige apokalyptische Gewalt aus dem All.",
+    "Language": "de-AT"
+   },
+   {
+    "Title": "Pacific Rim",
+    "Overview": "Saat perang antara umat manusia dan makhluk laut mengerikan terus terjadi, seorang mantan pilot dan seorang peserta pelatihan dipasangkan untuk mengemudikan senjata khusus yang tampaknya sudah ketinggalan zaman dalam upaya putus asa untuk menyelamatkan dunia dari kiamat.",
+    "Language": "id-ID"
+   },
+   {
+    "Title": "Pacific Rim: Uzbrukums Zemei",
+    "Overview": "Kad no okeāna dzīlēm iznirst briesmīgu monstru leģions - Kaijū, aizsākas nebeidzams karš, kurš prasa miljoniem cilvēku dzīvības un izsūc cilvēces resursus. Cīņai ar Kaijū tiek radīti īpaši ieroči - milzu roboti jēgeri, kurus sinhroni vada divi piloti ar neironu saitē saslēgtiem prātiem. Tomēr arī jēgeri izrādās bezspēcīgi nežēlīgā leģiona priekšā.",
+    "Language": "lv-LV"
+   },
+   {
+    "Title": "पेसिफिक रिम: एक फौलादी जंग",
+    "Overview": "",
+    "Language": "hi-IN"
+   }
+  ],
+  "Recommendations": [
+   {
+    "TmdbId": 24428,
+    "Title": "The Avengers"
+   },
+   {
+    "TmdbId": 1061474,
+    "Title": "Superman"
+   },
+   {
+    "TmdbId": 823464,
+    "Title": "Godzilla x Kong: The New Empire"
+   },
+   {
+    "TmdbId": 124905,
+    "Title": "Godzilla"
+   },
+   {
+    "TmdbId": 399566,
+    "Title": "Godzilla vs. Kong"
+   },
+   {
+    "TmdbId": 127585,
+    "Title": "X-Men: Days of Future Past"
+   },
+   {
+    "TmdbId": 293167,
+    "Title": "Kong: Skull Island"
+   },
+   {
+    "TmdbId": 91314,
+    "Title": "Transformers: Age of Extinction"
+   },
+   {
+    "TmdbId": 667538,
+    "Title": "Transformers: Rise of the Beasts"
+   },
+   {
+    "TmdbId": 87101,
+    "Title": "Terminator Genisys"
+   }
+  ],
+  "Credits": {
+   "Cast": [
+    {
+     "Name": "Charlie Hunnam",
+     "Order": 0,
+     "Character": "Raleigh Becket",
+     "TmdbId": 56365,
+     "CreditId": "52fe47a0c3a368484e0d1849",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/5WIDrnY25Ps2RYu0zIzHSVuSt5n.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Rinko Kikuchi",
+     "Order": 1,
+     "Character": "Mako Mori",
+     "TmdbId": 18054,
+     "CreditId": "52fe47a0c3a368484e0d185f",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/lv4UuorZtC37VaFAHO205u4lS73.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Idris Elba",
+     "Order": 2,
+     "Character": "Stacker Pentecost",
+     "TmdbId": 17605,
+     "CreditId": "52fe47a0c3a368484e0d1845",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/be1bVF7qGX91a6c5WeRPs5pKXln.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Max Martini",
+     "Order": 3,
+     "Character": "Herc Hansen",
+     "TmdbId": 94864,
+     "CreditId": "52fe47a0c3a368484e0d1863",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/gehOxb2cgNjcRnbAxaCUnFFJvAY.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Clifton Collins Jr.",
+     "Order": 4,
+     "Character": "Tendo Choi",
+     "TmdbId": 5365,
+     "CreditId": "52fe47a0c3a368484e0d1877",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/xfD0scqaPvAxKCPHYLo8553Le5g.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Ron Perlman",
+     "Order": 5,
+     "Character": "Hannibal Chau",
+     "TmdbId": 2372,
+     "CreditId": "52fe47a0c3a368484e0d1857",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/nfky6J9ueey1gMdWMNU9k9YdfGP.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Charlie Day",
+     "Order": 6,
+     "Character": "Dr. Newton Geiszler",
+     "TmdbId": 95101,
+     "CreditId": "52fe47a0c3a368484e0d184d",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/c0HNhjChGybnHa4eoLyqO4dDu1j.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Burn Gorman",
+     "Order": 7,
+     "Character": "Dr. Hermann Gottlieb",
+     "TmdbId": 39659,
+     "CreditId": "52fe47a0c3a368484e0d185b",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/udgACYWqCSuu6nvtrSjmyU28B0V.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Robert Kazinsky",
+     "Order": 8,
+     "Character": "Chuck Hansen",
+     "TmdbId": 1038379,
+     "CreditId": "52fe47a0c3a368484e0d186b",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/nYWfalUgOSnc8VLIrFMnBwmI1QG.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Robert Maillet",
+     "Order": 9,
+     "Character": "Lt. Aleksis Kaidanovsky",
+     "TmdbId": 112692,
+     "CreditId": "52fe47a0c3a368484e0d1867",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/2P5kMGJm4iIJvocwuwM9IbJqoah.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Heather Doerksen",
+     "Order": 10,
+     "Character": "Lt. Sasha Kaidanovsky",
+     "TmdbId": 83423,
+     "CreditId": "566109e0c3a36875e2005bd4",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/jf5agJ6xYVQ4Ozr7zXf0Ov9AOVj.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Larry Joe Campbell",
+     "Order": 11,
+     "Character": "Tommy T",
+     "TmdbId": 118590,
+     "CreditId": "52fe47a0c3a368484e0d186f",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/lOP81xAI3yNWJAxl9vmkzKADUsI.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Brad William Henke",
+     "Order": 12,
+     "Character": "Miles",
+     "TmdbId": 15376,
+     "CreditId": "52fe47a0c3a368484e0d1873",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/ynte6cntUQ87iZcbWMxesf7mD59.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Diego Klattenhoff",
+     "Order": 13,
+     "Character": "Yancy Becket",
+     "TmdbId": 142193,
+     "CreditId": "52fe47a0c3a368484e0d187b",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/mpdtCA5birAW89dtkuAdR73wr2H.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Santiago Segura",
+     "Order": 14,
+     "Character": "Wizened Man",
+     "TmdbId": 10847,
+     "CreditId": "52fe47a0c3a368484e0d187f",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/w5gSHzLWoivAN2g4z2yaxCSFyTY.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Jane Watson",
+     "Order": 15,
+     "Character": "Raleigh and Yancy's Mom",
+     "TmdbId": 1428550,
+     "CreditId": "54e49936c3a368486f003000",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/k5XsKBBor9QdtEs0te61lOV3exs.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Jung-Yul Kim",
+     "Order": 16,
+     "Character": "Hannibal Chau Thug",
+     "TmdbId": 1480855,
+     "CreditId": "566109bcc3a36875e00062eb",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/l3osGD8HW3nY2NS4MrrqNLacCkU.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Joshua Peace",
+     "Order": 17,
+     "Character": "Officer",
+     "TmdbId": 5925,
+     "CreditId": "56610a10c3a36875f40057a1",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/hzBO3jGfWLUwvcolw2zFxHlaRvO.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Mana Ashida",
+     "Order": 18,
+     "Character": "Young Mako",
+     "TmdbId": 559416,
+     "CreditId": "57e52b3a9251411ab00024f0",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/GkmFEAuslzWJ4yYhj9KahmmGdE.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Joe Pingue",
+     "Order": 19,
+     "Character": "Captain Merrit",
+     "TmdbId": 86237,
+     "CreditId": "57e52bc3c3a36826a7002c30",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/9z9eaG900YmEaW11oHRMENbJhqa.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Milton Barnes",
+     "Order": 20,
+     "Character": "McTighe",
+     "TmdbId": 1226806,
+     "CreditId": "57e52e8ac3a368264b0032d4",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/qCP3CVoEQmLopSHuHLOUooP1RDY.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Brian Frank",
+     "Order": 21,
+     "Character": "1st Officer",
+     "TmdbId": 100464,
+     "CreditId": "57e52f059251411af40028a5",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/gnq7GFO0OVSx3fJY9A1MZ9eefb7.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Ellen McLain",
+     "Order": 22,
+     "Character": "Gipsy Danger AI (voice)",
+     "TmdbId": 1683877,
+     "CreditId": "57e52f64c3a3684ca5004c02",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/31nvcf7KuhCUX15LS0hrWOqDwjc.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "David Fox",
+     "Order": 23,
+     "Character": "Old Man on Beach",
+     "TmdbId": 4569,
+     "CreditId": "57e53568c3a3684ca5004ea6",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/kgdBv3Pk68oolH0DA39rpmUai47.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Jake Goodman",
+     "Order": 24,
+     "Character": "Child",
+     "TmdbId": 1255174,
+     "CreditId": "57e535f3c3a36841e5002d2a",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/eWV3MOL2Dew5VUVEYvbYLfXKcp0.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Robin Thomas",
+     "Order": 25,
+     "Character": "American UN Representative",
+     "TmdbId": 41465,
+     "CreditId": "57e53821c3a36841e5002ea0",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/lc3htZVt1tb8HzlWTDgMDVJrQn3.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Julian Barnes",
+     "Order": 26,
+     "Character": "British UN Representative",
+     "TmdbId": 1379395,
+     "CreditId": "57e53df89251411ab0002e05",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/mSq5pHd56kEST0nT4KMczoFP3iV.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "David Richmond-Peck",
+     "Order": 27,
+     "Character": "Canadian UN Representative",
+     "TmdbId": 46906,
+     "CreditId": "57e53e73c3a36841ae002b1e",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/3qPzkWzWdTbNh8fsAVqlQ7VAoJb.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Sebastian Pigott",
+     "Order": 28,
+     "Character": "Engineer",
+     "TmdbId": 224144,
+     "CreditId": "57e53fb592514106020038bf",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/dFdv24Qa9j3WhJDxchn6s8jeepj.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "J.C. Kenny",
+     "Order": 29,
+     "Character": "TV Reporter",
+     "TmdbId": 1176955,
+     "CreditId": "57e543c1c3a368264b003e61",
+     "Images": []
+    }
+   ],
+   "Crew": [
+    {
+     "Name": "Guillermo del Toro",
+     "Order": 0,
+     "Job": "Director",
+     "Department": "Directing",
+     "TmdbId": 10828,
+     "CreditId": "52fe47a0c3a368484e0d1841",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/gldeyCtKcaqnK1v4Vu9vqayhzUQ.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Guillermo del Toro",
+     "Order": 1,
+     "Job": "Screenplay",
+     "Department": "Writing",
+     "TmdbId": 10828,
+     "CreditId": "52fe47a0c3a368484e0d1885",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/gldeyCtKcaqnK1v4Vu9vqayhzUQ.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Travis Beacham",
+     "Order": 2,
+     "Job": "Screenplay",
+     "Department": "Writing",
+     "TmdbId": 114016,
+     "CreditId": "52fe47a0c3a368484e0d1853",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/hhqDtKmn46Cho8Wy7mJBzjCqxAf.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Guillermo del Toro",
+     "Order": 3,
+     "Job": "Producer",
+     "Department": "Production",
+     "TmdbId": 10828,
+     "CreditId": "5352683f0e0a2655fe002f89",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/gldeyCtKcaqnK1v4Vu9vqayhzUQ.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Mary Parent",
+     "Order": 4,
+     "Job": "Producer",
+     "Department": "Production",
+     "TmdbId": 114408,
+     "CreditId": "535268c10e0a26560e002f8e",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/jTh9ngfGF8DQvKwGM8rXSmfbQTj.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Thomas Tull",
+     "Order": 5,
+     "Job": "Producer",
+     "Department": "Production",
+     "TmdbId": 54211,
+     "CreditId": "535268d20e0a265603003055",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/gRvTHmNKEqzyt2sGvpjrAvmloy0.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Jon Jashni",
+     "Order": 6,
+     "Job": "Producer",
+     "Department": "Production",
+     "TmdbId": 61091,
+     "CreditId": "535268ae0e0a2655fe002f98",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/taHiZqlVvL9gDa4R77KzVtqmV2h.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Callum Greene",
+     "Order": 7,
+     "Job": "Executive Producer",
+     "Department": "Production",
+     "TmdbId": 19770,
+     "CreditId": "535268e30e0a26561100301e",
+     "Images": []
+    },
+    {
+     "Name": "Guillermo Navarro",
+     "Order": 8,
+     "Job": "Director of Photography",
+     "Department": "Camera",
+     "TmdbId": 3113,
+     "CreditId": "52fe47a0c3a368484e0d1897",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/snJxTbayKfmmCjM2WDJ8lHHRgYm.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "John Knoll",
+     "Order": 9,
+     "Job": "Visual Effects Supervisor",
+     "Department": "Visual Effects",
+     "TmdbId": 1401796,
+     "CreditId": "5bfac72292514104be02a02d",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/fI7BXLxINkUnGr51mllgOb4a7Gz.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "David Cronenberg",
+     "Order": 10,
+     "Job": "Thanks",
+     "Department": "Crew",
+     "TmdbId": 224,
+     "CreditId": "625b1d6e9661fc0066baf0cf",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/3xh4e2gWHDilMLtucHzDGsmJMuQ.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Alain Moussi",
+     "Order": 11,
+     "Job": "Stunts",
+     "Department": "Crew",
+     "TmdbId": 1427888,
+     "CreditId": "5fce4a8bc0348b003f11c6f8",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/cIpMdm0ggxVmZIBVj7vz8Q8nPLT.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Ramin Djawadi",
+     "Order": 12,
+     "Job": "Original Music Composer",
+     "Department": "Sound",
+     "TmdbId": 10851,
+     "CreditId": "52fe47a0c3a368484e0d1891",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/wgUxW19nyPnrzj4ViVOpAfmhCdr.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Tom Morello",
+     "Order": 13,
+     "Job": "Musician",
+     "Department": "Sound",
+     "TmdbId": 78299,
+     "CreditId": "5bf9796f92514104da0142c3",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/1MFQ4UzIjqrqj0Fofk4hJVYmx6P.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Bradley James Allan",
+     "Order": 14,
+     "Job": "Fight Choreographer",
+     "Department": "Crew",
+     "TmdbId": 134686,
+     "CreditId": "613250d3b84f94002a448561",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/bw7ZHm5b7E6DNDLKd7WOIlYDwwm.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Gary A. Hecker",
+     "Order": 15,
+     "Job": "Foley Artist",
+     "Department": "Sound",
+     "TmdbId": 1077782,
+     "CreditId": "5bfacaa1c3a3687d7801950f",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/r0onsTOEbxfg7pXRkhA0J0YjEDg.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Chu Chen-On",
+     "Order": 16,
+     "Job": "Line Producer",
+     "Department": "Production",
+     "TmdbId": 127799,
+     "CreditId": "67beae7c6799c482e2efa60e",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/cCdZlDGTo5bFoCyeqUwliU0Jnt1.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Kate Hawley",
+     "Order": 17,
+     "Job": "Costume Design",
+     "Department": "Costume & Make-Up",
+     "TmdbId": 213644,
+     "CreditId": "52fe47a0c3a368484e0d18b5",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/wuZr3Fmx8joPP96CGeVnuTzJgtD.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Becky Sullivan",
+     "Order": 18,
+     "Job": "ADR Supervisor",
+     "Department": "Sound",
+     "TmdbId": 1404903,
+     "CreditId": "5bfaca6792514104c102a828",
+     "Images": []
+    },
+    {
+     "Name": "Carol Spier",
+     "Order": 19,
+     "Job": "Production Design",
+     "Department": "Art",
+     "TmdbId": 8315,
+     "CreditId": "52fe47a0c3a368484e0d18af",
+     "Images": []
+    },
+    {
+     "Name": "Gregg Rudloff",
+     "Order": 20,
+     "Job": "Sound Re-Recording Mixer",
+     "Department": "Sound",
+     "TmdbId": 1341858,
+     "CreditId": "5ab6e841c3a3680a3e013550",
+     "Images": []
+    },
+    {
+     "Name": "Margery Simkin",
+     "Order": 21,
+     "Job": "Casting",
+     "Department": "Production",
+     "TmdbId": 6347,
+     "CreditId": "53526920c3a3681d9800275d",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/4k2WBcsejt4VJtz3V5NDZP24eKN.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Jeff Sutherland",
+     "Order": 22,
+     "Job": "Compositing Supervisor",
+     "Department": "Visual Effects",
+     "TmdbId": 1774880,
+     "CreditId": "5bfac45c92514104d202a2b7",
+     "Images": []
+    },
+    {
+     "Name": "Christopher Geggie",
+     "Order": 23,
+     "Job": "Property Master",
+     "Department": "Art",
+     "TmdbId": 1337452,
+     "CreditId": "5bfc1f21c3a36861f9014bce",
+     "Images": []
+    },
+    {
+     "Name": "Simon Webber",
+     "Order": 24,
+     "Job": "Concept Artist",
+     "Department": "Art",
+     "TmdbId": 117213,
+     "CreditId": "5bfc1e300e0a265b2800d5d7",
+     "Images": []
+    },
+    {
+     "Name": "Thomas J. O'Connell",
+     "Order": 25,
+     "Job": "ADR Mixer",
+     "Department": "Sound",
+     "TmdbId": 1994224,
+     "CreditId": "5bfac9cd92514104c402b485",
+     "Images": []
+    },
+    {
+     "Name": "James Moriana",
+     "Order": 26,
+     "Job": "Foley Artist",
+     "Department": "Sound",
+     "TmdbId": 548439,
+     "CreditId": "5bfacad592514104d802c156",
+     "Images": []
+    },
+    {
+     "Name": "John T. Reitz",
+     "Order": 27,
+     "Job": "Sound Re-Recording Mixer",
+     "Department": "Sound",
+     "TmdbId": 1342626,
+     "CreditId": "5bfacc61c3a3681392031083",
+     "Images": []
+    },
+    {
+     "Name": "Robin D. Cook",
+     "Order": 28,
+     "Job": "Casting",
+     "Department": "Production",
+     "TmdbId": 23545,
+     "CreditId": "5bf979fac3a36813920173b9",
+     "Images": []
+    },
+    {
+     "Name": "Nerses Gezalyan",
+     "Order": 29,
+     "Job": "Foley Mixer",
+     "Department": "Sound",
+     "TmdbId": 548435,
+     "CreditId": "5bfacb0f0e0a263ab602d6f6",
+     "Images": []
+    }
+   ]
+  },
+  "Studio": "Double Dare You",
+  "YoutubeTrailerId": "hQAQxQop6Io",
+  "Certifications": [
+   {
+    "Country": "AU",
+    "Certification": "M"
+   },
+   {
+    "Country": "BE",
+    "Certification": "12"
+   },
+   {
+    "Country": "BR",
+    "Certification": "12"
+   },
+   {
+    "Country": "CA",
+    "Certification": "PG"
+   },
+   {
+    "Country": "CZ",
+    "Certification": "18+"
+   },
+   {
+    "Country": "DE",
+    "Certification": "12"
+   },
+   {
+    "Country": "DK",
+    "Certification": "11"
+   },
+   {
+    "Country": "ES",
+    "Certification": "12"
+   },
+   {
+    "Country": "FR",
+    "Certification": "12"
+   },
+   {
+    "Country": "GB",
+    "Certification": "12A"
+   },
+   {
+    "Country": "GR",
+    "Certification": "K12"
+   },
+   {
+    "Country": "HU",
+    "Certification": "16"
+   },
+   {
+    "Country": "IE",
+    "Certification": "12A"
+   },
+   {
+    "Country": "IL",
+    "Certification": "12"
+   },
+   {
+    "Country": "IT",
+    "Certification": "T"
+   },
+   {
+    "Country": "JP",
+    "Certification": "G"
+   },
+   {
+    "Country": "KR",
+    "Certification": "12"
+   },
+   {
+    "Country": "MX",
+    "Certification": "B"
+   },
+   {
+    "Country": "NL",
+    "Certification": "12"
+   },
+   {
+    "Country": "NZ",
+    "Certification": "M"
+   },
+   {
+    "Country": "PL",
+    "Certification": "16"
+   },
+   {
+    "Country": "RO",
+    "Certification": "12"
+   },
+   {
+    "Country": "RU",
+    "Certification": "12+"
+   },
+   {
+    "Country": "SE",
+    "Certification": "11"
+   },
+   {
+    "Country": "SK",
+    "Certification": "12"
+   },
+   {
+    "Country": "TH",
+    "Certification": "13"
+   },
+   {
+    "Country": "TR",
+    "Certification": "13A"
+   },
+   {
+    "Country": "TW",
+    "Certification": "6+"
+   },
+   {
+    "Country": "UA",
+    "Certification": "12+"
+   },
+   {
+    "Country": "US",
+    "Certification": "PG-13"
+   }
+  ],
+  "Status": null,
+  "Collection": {
+   "TmdbId": 363369,
+   "Name": "Pacific Rim Collection",
+   "Images": null,
+   "Overview": null,
+   "Translations": null,
+   "Parts": null
+  },
+  "Homepage": "https://www.warnerbros.com/movies/pacific-rim"
+ },
+ {
+  "TmdbId": 730840,
+  "ImdbId": "tt12851396",
+  "Title": "Trollhunters: Rise of the Titans",
+  "Overview": "The Guardians of Arcadia reunite to battle the nefarious Arcane Order, who've reawakened the primordial Titans.",
+  "OriginalTitle": "Trollhunters: Rise of the Titans",
+  "OriginalLanguage": "en",
+  "TitleSlug": "730840",
+  "Runtime": 106,
+  "Popularity": 3.2925,
+  "Year": 2021,
+  "Premier": null,
+  "InCinema": null,
+  "PhysicalRelease": null,
+  "DigitalRelease": "2021-07-21T00:00:00Z",
+  "Images": [
+   {
+    "CoverType": "Poster",
+    "Url": "https://image.tmdb.org/t/p/original/efWd3qF4j8SEl83F2ekp1pbCzJZ.jpg"
+   },
+   {
+    "CoverType": "Fanart",
+    "Url": "https://image.tmdb.org/t/p/original/d1i6oB5xdo2a7sOmjprCcElqlrD.jpg"
+   }
+  ],
+  "Ratings": [
+   {
+    "Count": 379,
+    "Value": 7.547,
+    "Origin": "Tmdb",
+    "Type": "User"
+   }
+  ],
+  "MovieRatings": {
+   "Tmdb": {
+    "Count": 379,
+    "Value": 7.547,
+    "Type": "User"
+   },
+   "Imdb": {
+    "Count": 7671,
+    "Value": 6.6,
+    "Type": "User"
+   },
+   "Metacritic": null,
+   "RottenTomatoes": {
+    "Count": 0,
+    "Value": 88,
+    "Type": "User"
+   },
+   "Trakt": {
+    "Count": 706,
+    "Value": 7.02266,
+    "Type": "User"
+   }
+  },
+  "Genres": [
+   "Animation",
+   "Fantasy",
+   "Family",
+   "Action",
+   "Adventure"
+  ],
+  "Keywords": [
+   "3d animation",
+   "tales of arcadia"
+  ],
+  "AlternativeTitles": [
+   {
+    "Title": "巨怪猎人：泰坦的崛起",
+    "Type": "Tmdb",
+    "Language": "zh"
+   },
+   {
+    "Title": "Trollhunters: El despertar de los titanes",
+    "Type": "Tmdb",
+    "Language": "es"
+   },
+   {
+    "Title": "트롤헌터 라이즈 오브 타이탄",
+    "Type": "Tmdb",
+    "Language": "ko"
+   },
+   {
+    "Title": "トロールハンターズ：ライジング・タイタンズ",
+    "Type": "Tmdb",
+    "Language": "ja"
+   },
+   {
+    "Title": "トロールハンターズ ライジング・タイタンズ",
+    "Type": "Tmdb",
+    "Language": "ja"
+   }
+  ],
+  "Translations": [
+   {
+    "Title": "Trollhunters: Rise of the Titans",
+    "Overview": "The Guardians of Arcadia reunite to battle the nefarious Arcane Order, who've reawakened the primordial Titans.",
+    "Language": "en-US"
+   },
+   {
+    "Title": "Caçadores de Trolls: A Ascensão dos Titãs",
+    "Overview": "Arcadia pode parecer uma cidade comum, mas está no centro de linhas mágicas e místicas que a tornam um nexo para muitas batalhas entre criaturas de outro mundo, incluindo trolls, alienígenas e feiticeiros. Agora, os heróis da série de sucesso \"Caçadores de Trolls\", \"3 Entre Nós\", e \"Feiticeiros\" juntam-se na sua aventura mais épica, onde têm de lutar contra a Ordem Arcana para controlar a magia que os une a todos.",
+    "Language": "pt-PT"
+   },
+   {
+    "Title": "Trollvadászok: A titánok felemelkedése",
+    "Overview": "",
+    "Language": "hu-HU"
+   },
+   {
+    "Title": "Chasseurs de Trolls : Le Réveil des titans",
+    "Overview": "Arcadia peut ressembler à une ville ordinaire, mais elle se trouve au centre de lignes magiques et mystiques qui en font le point de convergence de nombreuses batailles entre créatures d'un autre monde, notamment des trolls, des extraterrestres et des sorciers. Différents héros vont maintenant faire équipe dans une aventure épique où ils devront combattre l'Ordre Arcane pour le contrôle de la magie qui les lie tous ensemble.",
+    "Language": "fr-FR"
+   },
+   {
+    "Title": "Lovci trolů: Úsvit Titánů",
+    "Overview": "Hrdinové z „Lovců trolů“, „3 mimo“ a „Kouzelníků“ spojí síly proti tajemným nepřátelům, kteří se chtějí zmocnit jejich světů – a taky zničit Zemi.",
+    "Language": "cs-CZ"
+   },
+   {
+    "Title": "Caçadores de Trolls: A Ascensão dos Titãs",
+    "Overview": "Os heróis de \"Caçadores de Trolls\", \"Os 3 Lá Embaixo\" e \"Magos\" unem forças para enfrentar um misterioso inimigo que ameaça dominar o universo e reiniciar a Terra.",
+    "Language": "pt-BR"
+   },
+   {
+    "Title": "Trollhunters - L'ascesa dei titani",
+    "Overview": "Gli eroi di \"Trollhunters\", \"3 in mezzo a noi\" e \"I Maghi\" devono unire le forze per affrontare un nemico misterioso che minaccia i loro mondi. In seguito agli eventi della trilogia di \"I racconti di Arcadia\", gli eroi di Arcadia devono unirsi per proteggere l'umanità dal crudele Ordine Arcano, che scatena la sua incontrollabile magia nera per invocare alcuni antichi titani intenti a distruggere il mondo.",
+    "Language": "it-IT"
+   },
+   {
+    "Title": "Охотники на троллей: Восстание титанов",
+    "Overview": "Герои сериалов «Охотники на троллей», «Трое с небес» и «Маги» объединяют силы, чтобы победить призрачного врага, угрожающего захватить их миры и уничтожить Землю.",
+    "Language": "ru-RU"
+   },
+   {
+    "Title": "Trollhunters: El despertar de los titanes",
+    "Overview": "Trollhunters: El despertar de los titanes, sirve como cierre y ultima entrega de los Cuentos de Arcadia creados por Guillermo del Toro, que unirá a todos los héroes de las series Trollhunters, Los 3 de Abajo y Magos: Cuentos de Arcadia. En esta nueva aventura los jóvenes héroes se unen para hacer frente a la última de las batallas que tendrá lugar en Arcadia, esa mágica ciudad que nuevamente se convertirá en el epicentro de la acción y albergará a todo tipo de criaturas sobrenaturales; en esta ocasión, los Titanes.",
+    "Language": "es-MX"
+   },
+   {
+    "Title": "巨怪猎人：泰坦的觉醒",
+    "Overview": "故事背景是德尔·托罗在其《天外三侠：世外桃源的传说》三部曲中创造的世界。阿卡狄亚看似是一个普通的小镇，但它位于魔法和神秘线的中心，这使得它成为巨怪、外星人和巫师等异界生物之间许多战斗的枢纽。现在，他们必须联手与奥术团作战，以争夺对束缚他们所有人的魔法的控制权。",
+    "Language": "zh-CN"
+   },
+   {
+    "Title": "ציידי הטרולים: עלייתם של הטיטאנים",
+    "Overview": "הגיבורים של \"ציידי הטרולים\", \"שלושה בהסוואה\" ו\"מכשפים: סיפורי ארקדיה\" מאחדים כוחות כדי להילחם באויב מסתורי שמאיים להשתלט על עולמם – ולהשיב את כדור הארץ לעידן הבריאה.",
+    "Language": "he-IL"
+   },
+   {
+    "Title": "Vânătorii de Troli: Trezirea Titanilor",
+    "Overview": "Eroii din „Vânătorii de troli”, „Trei sub stele” și „Vrăjitorii” luptă cot la cot împotriva unui dușman care amenință să le cucerească lumile și să nimicească Pământul.",
+    "Language": "ro-RO"
+   },
+   {
+    "Title": "트롤헌터: 라이즈 오브 타이탄",
+    "Overview": "어둠의 세력이 다가오고 있다. 지구를 파괴하고 세상을 손에 넣으려 한다. 그에 맞서 일어선 《트롤헌터》 《3 언더》 《위저드》의 영웅들. 굳게 손잡은 그들을 맞이하라. 운명을 걸고 싸워라!",
+    "Language": "ko-KR"
+   },
+   {
+    "Title": "Trolljäger – Das Erwachen der Titanen",
+    "Overview": "Die Helden aus der Trollhunters-Serie kämpfen gemeinsam gegen die böse arkane Ordnung, um die Kontrolle über die Magie, die sie alle verbindet, wiederzuerlangen. Doch das wird nicht einfach, denn die arkane Ordnung hat mit ihrer vereinten Macht uralten Titanen beschworen, die die Welt zerstören sollen...",
+    "Language": "de-DE"
+   },
+   {
+    "Title": "Trolljakten: Titanernas kamp",
+    "Overview": "Hjältarna från Trolljakten, Tre har landat och Trollkarlarna måste arbeta tillsammans för att bekämpa en lömsk fiende som hotar deras världar – och hela planeten.",
+    "Language": "sv-SE"
+   },
+   {
+    "Title": "巨怪獵人：泰坦的覺醒",
+    "Overview": "劇情講述看似平凡無奇的幽林鎮卻是神秘魔法交織的中心地帶，因此引來包括巨怪、外星人與魔法師等異界生物在此輪番戰鬥。而這次幽林鎮的各路英雄必須攜手合作，阻止邪惡的巫師施展可怕的黑魔法，召喚會摧毀世界的泰坦巨人。",
+    "Language": "zh-TW"
+   },
+   {
+    "Title": "Trollhunters: El despertar de los titanes",
+    "Overview": "Los héroes de la serie Trollhunters se unen en una épica aventura para luchar contra la Orden de los Arcanos para determinar quién controla el poder de la magia que los une a todos.",
+    "Language": "es-ES"
+   },
+   {
+    "Title": "Łowcy trolli: Przebudzenie tytanów",
+    "Overview": "Arcadia może wyglądać jak zwykłe miasto, ale leży w centrum magicznych i mistycznych linii, które czynią ją węzłem wielu bitew pomiędzy istotami z innego świata, w tym trollami, kosmitami i czarodziejami. Teraz różni bohaterowie połączą siły w epickiej przygodzie, w której będą musieli walczyć z Zakonem Arcane o kontrolę nad magią, która łączy ich wszystkich razem.",
+    "Language": "pl-PL"
+   },
+   {
+    "Title": "โทรลล์ฮันเตอร์ส ไรส์ออฟเดอะไททันส์",
+    "Overview": "เหล่าผู้กล้าจาก \"โทรลล์ฮันเตอร์ส\" \"ทรีบีโลว์\" และ \"วิซาร์ดส์\" ต้องผนึกกำลังกันต่อกรกับศัตรูในเงามืดที่หมายจะยึดครองและชำระล้างโลก",
+    "Language": "th-TH"
+   },
+   {
+    "Title": "Thợ Săn Yêu Tinh: Titan Trỗi Dậy",
+    "Overview": "Các anh hùng của “Thợ săn yêu tinh”, “Bộ ba trời giáng” và “Pháp sư” bắt tay chống lại kẻ thù mờ ám đe dọa chiếm lấy thế giới của họ – và tái thiết lập cả Trái đất.",
+    "Language": "vi-VN"
+   },
+   {
+    "Title": "Мисливці на тролів: Повстання титанів",
+    "Overview": "Герої із серії Trollhunters об’єднуються для епічної пригоди, щоб битися з Таємним Орденом за контроль над магією, що пов’язує їх усіх.",
+    "Language": "uk-UA"
+   },
+   {
+    "Title": "Trollenjagers: Opkomst van de Titanen",
+    "Overview": "Espen, een arme boerenzoon, begint aan een gevaarlijke zoektocht met zijn broers om de prinses te redden van een gemene trol die bekend staat als de bergkoning. Met de redding van de prinses kunnen ze een beloning opstrijken die is uitgeloofd. Hiermee kunnen ze de boerderij van hun familie redden.",
+    "Language": "nl-NL"
+   },
+   {
+    "Title": "Troldejægerne: Titanernes hævn",
+    "Overview": "Helte fra Troldejægerne, 3 nedenunder og Troldmænd slår sig sammen for at kæmpe mod en lyssky fjende, der truer med at overtage deres verdener – og ødelægge Jorden.",
+    "Language": "da-DK"
+   },
+   {
+    "Title": "Κυνηγοί Τρολ: Το Ξύπνημα των Τιτάνων",
+    "Overview": "Η Αρκάντια μπορεί να μοιάζει με μια συνηθισμένη πόλη, αλλά βρίσκεται στη μέση μαγικών και μυστικιστικών γραμμών που την καθιστά το επίκεντρο για πολλές μάχες ανάμεσα σε απόκοσμα πλάσματα, όπως τρολ, εξωγήινους και μάγους. Μετά τα γεγονότα της τριλογίας “Tales of Arcadia”, οι ήρωες των σειρών “Trollhunters”, “3Below” και “Wizards”, πρέπει να ενώσουν τις δυνάμεις τους για να προστατεύσουν την ανθρωπότητα από το μοχθηρό Απόκρυφο Τάγμα, το οποίο χρησιμοποιεί τη σκοτεινή και ανεξέλεγκτη μαγεία του για να καλεί αρχαίους τιτάνες που απειλούν να καταστρέψουν τον κόσμο.",
+    "Language": "el-GR"
+   },
+   {
+    "Title": "Trol Avcıları: Titanlar Yükseliyor",
+    "Overview": "\"Trol Avcıları\", \"3 Altında\" ve \"Büyücüler\"in kahramanları, Dünya'yı ele geçirip ilk hâline döndürmek isteyen karanlık bir düşmanla savaşmak için güçlerini birleştiriyor.",
+    "Language": "tr-TR"
+   },
+   {
+    "Title": "巨怪獵人：泰坦的覺醒",
+    "Overview": "劇情講述看似平凡無奇的幽林鎮卻是神秘魔法交織的中心地帶，因此引來包括巨怪、外星人與魔法師等異界生物在此輪番戰鬥。而這次幽林鎮的各路英雄必須攜手合作，阻止邪惡的巫師施展可怕的黑魔法，召喚會摧毀世界的泰坦巨人。",
+    "Language": "zh-HK"
+   },
+   {
+    "Title": "Trolių medžiotojai. Titanų iškilimas",
+    "Overview": "„Trolių medžiotojų” serijos didvyriai susivienija kovodami prieš Arkano ordiną dėl juos visus siejančios magijos kontrolės.",
+    "Language": "lt-LT"
+   },
+   {
+    "Title": "صائد الغيلان: عودة الجبابرة",
+    "Overview": "قد تبدو أركاديا كمدينة عادية ، لكنها تقع في مركز الخطوط السحرية والصوفية التي تجعلها حلقة وصل للعديد من المعارك بين المخلوقات الأخرى ، بما في ذلك المتصيدون والأجانب والمعالجات.  الآن ، سيتعاون العديد من الأبطال في مغامرة ملحمية حيث يتعين عليهم محاربة Arcane Order للتحكم في السحر الذي يربطهم جميعًا معًا.",
+    "Language": "ar-SA"
+   },
+   {
+    "Title": "Trollhunters: Rise of the Titans",
+    "Overview": "လူသားတွေ မှင်စာတွေ ဂြိုလ်သားတွေယှဉ်တွဲနေထိုင်ကြတဲ့ကမ္ဘာကြီးမှာ ကောင်းတဲ့မှင်စာတွေရှိသလို မကောင်းတဲ့မှင်စာမိစ္ဆာတွေလည်းရှိခဲ့ပါတယ် ဒီတစ်ခါမှာတော့ ကမ္ဘာကြီးကို အသစ်ကပြန်လည်ဖန်တီးချင်နေတဲ့ လူဆိုးမှင်စာမိစ္ဆာတွေရဲ့အန္တရာယ်ကို ဒီဟီးရိုးတွေ ဘယ်လိုကာကွယ်ကြမလဲဆိုတာတွေ့ရမှာပါအဆောင်လက်ဖွဲ့ပျက်စီးသွားလို့ မှော်အစွမ်းတွေမရှိတော့တဲ့ မှင်စာဖမ်းသမားကရော ဒီဇာတ်ကားမှာ ဘယ်လိုဖြစ်လာမလဲ အစွမ်းတွေမရှိတော့တဲ့အခါ ကမ္ဘာပျက်ကိန်းကို ဘယ်လိုတားဆီးမှာလဲဆိုတာ စောင့်မျှော်ကြည့်ရူရမယ့် ဇာတ်ကားကောင်းပဲဖြစ်ပါတယ်",
+    "Language": "my-MY"
+   },
+   {
+    "Title": "トロールハンターズ: ライジング・タイタンズ",
+    "Overview": "",
+    "Language": "ja-JP"
+   }
+  ],
+  "Recommendations": [
+   {
+    "TmdbId": 41216,
+    "Title": "Legend of the Guardians: The Owls of Ga'Hoole"
+   },
+   {
+    "TmdbId": 1731694,
+    "Title": "LEGO Star Wars: The Mandalorian"
+   },
+   {
+    "TmdbId": 774825,
+    "Title": "The Ice Age Adventures of Buck Wild"
+   },
+   {
+    "TmdbId": 592983,
+    "Title": "Spellbound"
+   },
+   {
+    "TmdbId": 15139,
+    "Title": "The Pagemaster"
+   },
+   {
+    "TmdbId": 410113,
+    "Title": "The Loud House Movie"
+   },
+   {
+    "TmdbId": 416153,
+    "Title": "Arctic Dogs"
+   },
+   {
+    "TmdbId": 832502,
+    "Title": "The Monkey King"
+   },
+   {
+    "TmdbId": 1029119,
+    "Title": "Minions & More Volume 1"
+   },
+   {
+    "TmdbId": 597316,
+    "Title": "My Little Pony: A New Generation"
+   }
+  ],
+  "Credits": {
+   "Cast": [
+    {
+     "Name": "Emile Hirsch",
+     "Order": 0,
+     "Character": "Jim (voice)",
+     "TmdbId": 46593,
+     "CreditId": "5f2d6852596a910035fd6dbd",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/NQjX6KjtDDyLnvbxhrU9xQWaYJ.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Lexi Medrano",
+     "Order": 1,
+     "Character": "Claire (voice)",
+     "TmdbId": 1726658,
+     "CreditId": "5f2d685b9590e30031184959",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/nt6FluRBKfmCHS9xYPHI5ykgEsk.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Charlie Saxton",
+     "Order": 2,
+     "Character": "Toby (voice)",
+     "TmdbId": 95356,
+     "CreditId": "5f2d686d81da3900362d3e6a",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/owVq4RaxeXxkGYTHCdIiKy676bz.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Kelsey Grammer",
+     "Order": 3,
+     "Character": "Blinky (voice)",
+     "TmdbId": 7090,
+     "CreditId": "5f2d687a13af5f00357c1b3c",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/qn38jJHEqRBsj50Gqo2uM38fgJx.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Alfred Molina",
+     "Order": 4,
+     "Character": "Archie (voice)",
+     "TmdbId": 658,
+     "CreditId": "5f2d689513af5f00347b52f2",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/nJo91Czesn6z0d0pkfbDoVZY3sg.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Steven Yeun",
+     "Order": 5,
+     "Character": "Steve (voice)",
+     "TmdbId": 215055,
+     "CreditId": "5f2d68a246e75f003709612c",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/fOMFO2Xx4duzpNgS9Q5ytO44yGb.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Nick Frost",
+     "Order": 6,
+     "Character": "Stuart (voice)",
+     "TmdbId": 11109,
+     "CreditId": "5f2d68ab81da3900342c7e29",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/2CHS4t6miNGLgMQAjhFqb4fFuKS.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Colin O'Donoghue",
+     "Order": 7,
+     "Character": "Douxie (voice)",
+     "TmdbId": 235767,
+     "CreditId": "5f2d68b6cdbaff0034a4fef1",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/8YF6zgCt1KUQ2VEx2RFP1P2CXCJ.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Diego Luna",
+     "Order": 8,
+     "Character": "Krel (voice)",
+     "TmdbId": 8688,
+     "CreditId": "5f2d68c0596a910036fb4806",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/qwbjcyDN37OHiln4a6P4LP31o7F.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Tatiana Maslany",
+     "Order": 9,
+     "Character": "Aja (voice)",
+     "TmdbId": 61134,
+     "CreditId": "5f2d68ca46e75f003807d050",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/pdoZ5tgZt1IdBXckGtyqRJ9DoJB.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Nick Offerman",
+     "Order": 10,
+     "Character": "Vex (voice)",
+     "TmdbId": 17039,
+     "CreditId": "5f2d68d581da3900372cab52",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/f6z3mPVtaF40ewfdmZydprAjmYd.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Cole Sand",
+     "Order": 11,
+     "Character": "Eli (voice)",
+     "TmdbId": 1253350,
+     "CreditId": "5f2d68f3037264003686a469",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/bRHBkh5vkqTgzjUebUNuWLokxqC.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Fred Tatasciore",
+     "Order": 12,
+     "Character": "Aaarrrgghh!!! (voice)",
+     "TmdbId": 60279,
+     "CreditId": "5f2d68fccdbaff0036a4fad9",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/8YCIAGSWcxeTmPfOWMtVjLSwGOH.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Brian Blessed",
+     "Order": 13,
+     "Character": "Charlemagne (voice)",
+     "TmdbId": 8318,
+     "CreditId": "5f2d690846e75f0037096172",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/3mLIr94V5IOA5ndY6GyqKKcyrX6.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Kay Bess",
+     "Order": 14,
+     "Character": "Bellroc (voice)",
+     "TmdbId": 2097420,
+     "CreditId": "5f2d690f03726400358563ef",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/2BxNEYA3a3ZjmjnqtiP5owFkk4y.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Piotr Michael",
+     "Order": 15,
+     "Character": "Bellroc (Male Voice) / Skrael (voice)",
+     "TmdbId": 1449707,
+     "CreditId": "5f2d691681da3900372cac7d",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/A1ph4jVLA1sQmpYOSZ3X0DdQvQs.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "James Hong",
+     "Order": 16,
+     "Character": "Zong Shi (voice)",
+     "TmdbId": 20904,
+     "CreditId": "5f2d6941596a910035fd6ee0",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/v3lfw5aHOy0paOCx6WHiSnwzbH0.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Tom Kenny",
+     "Order": 17,
+     "Character": "Ricky Blank (voice)",
+     "TmdbId": 78798,
+     "CreditId": "5f2d6949cdbaff0033a34fd6",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/kftXtExrcoTTjyeYmSXJ0Ogr3R7.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Angel Lin",
+     "Order": 18,
+     "Character": "Nari (voice)",
+     "TmdbId": 2734643,
+     "CreditId": "5f2d69d846e75f0037096291",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/z8y67WzTxUSB4Gv40wAg0SjF8Vh.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Amy Landecker",
+     "Order": 19,
+     "Character": "Barbara (voice)",
+     "TmdbId": 357551,
+     "CreditId": "5f2d6a9846e75f00360741c9",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/6UMXVrMsM4ogTqB63UFHMDB6mqD.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Jonathan Hyde",
+     "Order": 20,
+     "Character": "Strickler (voice)",
+     "TmdbId": 8537,
+     "CreditId": "5f2d6aa3cdbaff0036a4fc42",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/1uhT5uzPkBRCb57RtR6C9MvgteC.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Bebe Wood",
+     "Order": 21,
+     "Character": "Shannon (voice)",
+     "TmdbId": 1256118,
+     "CreditId": "5f2d6aab46e75f003807d19d",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/AmWu9Aeq915Gw1jK2AIAcia8556.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Laraine Newman",
+     "Order": 22,
+     "Character": "Ms. Janeth (voice)",
+     "TmdbId": 35159,
+     "CreditId": "5f2d6ab181da3900362d45c2",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/c50cGamQWIfDRDgYmHCiuj5Crpx.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Cheryl Hines",
+     "Order": 23,
+     "Character": "Momblank (voice)",
+     "TmdbId": 57854,
+     "CreditId": "5f2d6abe81da3900362d45d6",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/jUW4xdla64Vtq1o2Ob8Oc7MjT9C.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Grey DeLisle",
+     "Order": 24,
+     "Character": "Additional Voices (voice)",
+     "TmdbId": 15761,
+     "CreditId": "5f2d6ab981da3900352c70b6",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/anib3yRL9GyUvTkYNHWxQPlXLUH.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Steve Alterman",
+     "Order": 25,
+     "Character": "Additional Voices (voice)",
+     "TmdbId": 217777,
+     "CreditId": "63ac5f7ac8113d00c88e9ad6",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/drqgxc4BssaGOeRZKO9Wn1VtF82.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Vic Chao",
+     "Order": 26,
+     "Character": "Additional Voices (voice)",
+     "TmdbId": 109423,
+     "CreditId": "63ac5f917ef3811f58c94281",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/pPI9e95fOcLR3nGsIIRZsDokHJT.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "David Chen",
+     "Order": 27,
+     "Character": "Additional Voices (voice)",
+     "TmdbId": 3243214,
+     "CreditId": "63ac5fce79a1c300a027b6e9",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/l5qgAuMKDwfCYtL2ULcxK1IWdqd.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Julie Falls",
+     "Order": 28,
+     "Character": "Additional Voices (voice)",
+     "TmdbId": 2774693,
+     "CreditId": "63ac5fde1f748b00c8b6d086",
+     "Images": []
+    },
+    {
+     "Name": "Peter Falls",
+     "Order": 29,
+     "Character": "Additional Voices (voice)",
+     "TmdbId": 1906853,
+     "CreditId": "63ac5ff1c56d2d00f30da9a8",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/rMTYuIRlGUxfiZNxDF7HjanC7Lu.jpg"
+      }
+     ]
+    }
+   ],
+   "Crew": [
+    {
+     "Name": "Andrew L. Schmidt",
+     "Order": 0,
+     "Job": "Director",
+     "Department": "Directing",
+     "TmdbId": 8042,
+     "CreditId": "5f2d673d46e75f003807cf62",
+     "Images": []
+    },
+    {
+     "Name": "Johane Matte",
+     "Order": 1,
+     "Job": "Director",
+     "Department": "Directing",
+     "TmdbId": 1891091,
+     "CreditId": "5f2d66d0cdbaff0034a4fcc4",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/7gvxFUDxUfu6TIJkvwgo82JEmUc.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Francisco Ruiz Velasco",
+     "Order": 2,
+     "Job": "Director",
+     "Department": "Directing",
+     "TmdbId": 1191828,
+     "CreditId": "5f2d670e81da3900372ca859",
+     "Images": []
+    },
+    {
+     "Name": "Guillermo del Toro",
+     "Order": 3,
+     "Job": "Screenplay",
+     "Department": "Writing",
+     "TmdbId": 10828,
+     "CreditId": "62014612e54d5d001cff1ce9",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/gldeyCtKcaqnK1v4Vu9vqayhzUQ.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Marc Guggenheim",
+     "Order": 4,
+     "Job": "Screenplay",
+     "Department": "Writing",
+     "TmdbId": 171830,
+     "CreditId": "5f2df0e36e938a0038b280ed",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/7vEWjhtI4UGi9JJwx6OqH4u7VZJ.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Dan Hageman",
+     "Order": 5,
+     "Job": "Screenplay",
+     "Department": "Writing",
+     "TmdbId": 1003944,
+     "CreditId": "5f2df0cf5541fa0035c967b6",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/lBxhgOeT2a7xhwVfY17R9Tw1sob.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Kevin Hageman",
+     "Order": 6,
+     "Job": "Screenplay",
+     "Department": "Writing",
+     "TmdbId": 1003945,
+     "CreditId": "5f2df0d9f48b340035adad99",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/b0YwR5lONqW95mdUqqlYZNQiMn9.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Guillermo del Toro",
+     "Order": 7,
+     "Job": "Producer",
+     "Department": "Production",
+     "TmdbId": 10828,
+     "CreditId": "620146f611386c001c6c53a3",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/gldeyCtKcaqnK1v4Vu9vqayhzUQ.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Marc Guggenheim",
+     "Order": 8,
+     "Job": "Producer",
+     "Department": "Production",
+     "TmdbId": 171830,
+     "CreditId": "6201470411386c006a34271f",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/7vEWjhtI4UGi9JJwx6OqH4u7VZJ.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Dan Hageman",
+     "Order": 9,
+     "Job": "Producer",
+     "Department": "Production",
+     "TmdbId": 1003944,
+     "CreditId": "62014713e54d5d010ad2aeb8",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/lBxhgOeT2a7xhwVfY17R9Tw1sob.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Kevin Hageman",
+     "Order": 10,
+     "Job": "Producer",
+     "Department": "Production",
+     "TmdbId": 1003945,
+     "CreditId": "620147205a5ed000992fd94b",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/b0YwR5lONqW95mdUqqlYZNQiMn9.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Chad Hammes",
+     "Order": 11,
+     "Job": "Producer",
+     "Department": "Production",
+     "TmdbId": 43085,
+     "CreditId": "6201472ce8d0b400437e3458",
+     "Images": []
+    },
+    {
+     "Name": "Guillermo del Toro",
+     "Order": 12,
+     "Job": "Book",
+     "Department": "Writing",
+     "TmdbId": 10828,
+     "CreditId": "64aa0d3c3e2ec800af7d3ee7",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/gldeyCtKcaqnK1v4Vu9vqayhzUQ.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Guillermo del Toro",
+     "Order": 13,
+     "Job": "Creator",
+     "Department": "Crew",
+     "TmdbId": 10828,
+     "CreditId": "64aa0d533e2ec800cbcd8c99",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/gldeyCtKcaqnK1v4Vu9vqayhzUQ.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Jeff Danna",
+     "Order": 14,
+     "Job": "Original Music Composer",
+     "Department": "Sound",
+     "TmdbId": 8320,
+     "CreditId": "6a14ff0a7089417e108ec1f0",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/zaDjp7SHmSAw0lbhyet5gijUCZO.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Daniel Kraus",
+     "Order": 15,
+     "Job": "Book",
+     "Department": "Writing",
+     "TmdbId": 1050132,
+     "CreditId": "64aa0d46b686b900edf93c65",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/puDtVAss5qprwxt9byt2gTTQ3bL.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "James Miller",
+     "Order": 16,
+     "Job": "Sound Designer",
+     "Department": "Sound",
+     "TmdbId": 1495179,
+     "CreditId": "6142822b9450fe004311f8de",
+     "Images": []
+    },
+    {
+     "Name": "Yingjue Linda Chen",
+     "Order": 17,
+     "Job": "Art Direction",
+     "Department": "Art",
+     "TmdbId": 4099390,
+     "CreditId": "647efd6b0fb39800fb0d2b8b",
+     "Images": []
+    },
+    {
+     "Name": "Jaena Sta. Ana",
+     "Order": 18,
+     "Job": "Line Producer",
+     "Department": "Production",
+     "TmdbId": 2743648,
+     "CreditId": "6201473a1fd36f0066b9de7b",
+     "Images": []
+    }
+   ]
+  },
+  "Studio": "Double Dare You",
+  "YoutubeTrailerId": "6H4Y21Hg2L8",
+  "Certifications": [
+   {
+    "Country": "BR",
+    "Certification": "10"
+   },
+   {
+    "Country": "DE",
+    "Certification": "6"
+   },
+   {
+    "Country": "DK",
+    "Certification": "7"
+   },
+   {
+    "Country": "ES",
+    "Certification": "7"
+   },
+   {
+    "Country": "GB",
+    "Certification": "PG"
+   },
+   {
+    "Country": "GR",
+    "Certification": "7+"
+   },
+   {
+    "Country": "JP",
+    "Certification": "G"
+   },
+   {
+    "Country": "PL",
+    "Certification": "7"
+   },
+   {
+    "Country": "SE",
+    "Certification": "7"
+   },
+   {
+    "Country": "US",
+    "Certification": "PG"
+   }
+  ],
+  "Status": null,
+  "Collection": null,
+  "Homepage": "https://www.netflix.com/title/81010139"
+ },
+ {
+  "TmdbId": 16237,
+  "ImdbId": "tt0816671",
+  "Title": "Teen Titans: Trouble in Tokyo",
+  "Overview": "After a battle with a high-tech villain named, Saiko-Tek, the Teen Titans travel to the city of Tokyo where they find themselves embroiled in a conflict with an ancient enemy.",
+  "OriginalTitle": "Teen Titans: Trouble in Tokyo",
+  "OriginalLanguage": "en",
+  "TitleSlug": "16237",
+  "Runtime": 75,
+  "Popularity": 4.0015,
+  "Year": 2006,
+  "Premier": null,
+  "InCinema": "2006-09-15T00:00:00Z",
+  "PhysicalRelease": "2007-02-06T00:00:00Z",
+  "DigitalRelease": "2006-09-15T00:00:00Z",
+  "Images": [
+   {
+    "CoverType": "Poster",
+    "Url": "https://image.tmdb.org/t/p/original/4wMlDE1HzkVyYeDKuY1oDOWQlN2.jpg"
+   },
+   {
+    "CoverType": "Fanart",
+    "Url": "https://image.tmdb.org/t/p/original/fey7NzJ61KAAVPfUgcpaahW5gZ5.jpg"
+   }
+  ],
+  "Ratings": [
+   {
+    "Count": 483,
+    "Value": 7.9,
+    "Origin": "Tmdb",
+    "Type": "User"
+   }
+  ],
+  "MovieRatings": {
+   "Tmdb": {
+    "Count": 483,
+    "Value": 7.9,
+    "Type": "User"
+   },
+   "Imdb": {
+    "Count": 8058,
+    "Value": 7,
+    "Type": "User"
+   },
+   "Metacritic": null,
+   "RottenTomatoes": null,
+   "Trakt": {
+    "Count": 487,
+    "Value": 7.05133,
+    "Type": "User"
+   }
+  },
+  "Genres": [
+   "Animation",
+   "Action",
+   "Science Fiction",
+   "TV Movie"
+  ],
+  "Keywords": [
+   "arrested",
+   "based on comic",
+   "fraud",
+   "series finale",
+   "teen superhero",
+   "tokyo, japan",
+   "villain"
+  ],
+  "AlternativeTitles": [
+   {
+    "Title": "Jóvenes Titanes - Misión Tokio",
+    "Type": "Tmdb",
+    "Language": "es"
+   },
+   {
+    "Title": "Jovens Titãs - Missão Tóquio",
+    "Type": "Tmdb",
+    "Language": "en"
+   },
+   {
+    "Title": "Os Jovens Titãs- Missão Tóquio",
+    "Type": "Tmdb",
+    "Language": "en"
+   },
+   {
+    "Title": "Teen Titans : Panique à Tokyo",
+    "Type": "Tmdb",
+    "Language": "fr"
+   }
+  ],
+  "Translations": [
+   {
+    "Title": "Teen Titans: Trouble in Tokyo",
+    "Overview": "After a battle with a high-tech villain named, Saiko-Tek, the Teen Titans travel to the city of Tokyo where they find themselves embroiled in a conflict with an ancient enemy.",
+    "Language": "en-US"
+   },
+   {
+    "Title": "Jóvenes Titanes: Misión Tokio",
+    "Overview": "Cuando unos ninjas con altas tecnologías atacan la torre de la ciudad, Robin, Starfire, Cyborg, Raven y Beast Boy entran en acción. Robin descubre que los ninjas han sido enviados por el misterioso y amenazante criminal japonés conocido como Brushogun, por lo que los titanes deberán viajar hasta Tokio para detener al villano. (FILMAFFINITY)",
+    "Language": "es-ES"
+   },
+   {
+    "Title": "Teen Titans - Aventura em Tóquio",
+    "Overview": "Quando um ninja high-tech vindo do Oriente ataca a Torre Titã, Robin, Estelar, Cyborg, Ravena e Mutano transformam-no em sushi. Depois, descobrem que o guerreiro foi enviado por um poderoso vilão japonês, o ameaçador Brushogun, e a equipa dirige-se para Tóquio para emocionantes aventuras. Mas combater esse incrível oponente do outro lado do mundo não é tarefa fácil. A polícia local não acredita neles e garante que Brushogun é mais um mito da civilização japonesa.",
+    "Language": "pt-PT"
+   },
+   {
+    "Title": "少年泰坦：东京攻略",
+    "Overview": "改编自DC漫画超级英雄团队少年泰坦。动画讲诉了少年泰坦之塔被日本忍者Saico-Tek攻击，少年泰坦们守护了塔却并抓住Saico-Tek审问出幕后黑手的名字-Brushogun，于是前往日本东京寻找，但却遭遇语言不通与怪兽袭击，在明白Brushogun是都市传说后，真正的幕后黑手真相却逐渐浮出水面。",
+    "Language": "zh-CN"
+   },
+   {
+    "Title": "Teen Titans: Trouble in Tokyo",
+    "Overview": "Les Teen Titans, à la poursuite d'un ninja high-tech qui a attaqué leur Tour, découvrent que celui-ci a en fait été envoyé par Brushogun, un criminel japonais. Les jeunes héros partent donc pour Tokyo…",
+    "Language": "fr-FR"
+   },
+   {
+    "Title": "הטיטאנים: צרות בטוקיו",
+    "Overview": "ביתם של הטיטאנים הצעירים מותקף יום אחד ע\"י נינג'ה מוזר ומשוכלל. לאחר שנתפס, הנינג'ה מספר שהוא נשלח מטוקיו ע\"י פושע מסתורי בשם ברשוגאן. בעקבות כך, טסים רובין, סטארפייר, סייבורג, רייבן וביסטבוי לטוקיו על מנת לאתר את ברשוגאן ולהביא אותו לדין.",
+    "Language": "he-IL"
+   },
+   {
+    "Title": "Os Jovens Titãs: Missão Tóquio",
+    "Overview": "Tudo começa quando um vilão ninja ataca a cidade e os titãs tentam impedir. Ao fim da luta, os titãs descobrem que o vilão, Saicotech, fora mandado por Brushogum. A equipe dirige-se a Toquio para investigar as razões de Saicotech der sido enviado e, então, prendê-lo.",
+    "Language": "pt-BR"
+   },
+   {
+    "Title": "Юные Титаны: Происшествие в Токио",
+    "Overview": "Юные Титаны подвергаются атаке таинственного злоумышленника, который обитает в Токио.",
+    "Language": "ru-RU"
+   },
+   {
+    "Title": "Tini Titánok: Gubanc Tokióban",
+    "Overview": "A titánokat megtámadja egy szupernindzsa. Miután elfogják Robinnak sikerül kiszednie belőle, ki küldte őt és mint kiderül a háttérben a rejtélyes japán bűnöző, Brushogun áll. A Titánok csapata így Tokióba utazik, hogy elfogják Brushogunt és életük egyik legnagyobb kalandját élik át.",
+    "Language": "hu-HU"
+   },
+   {
+    "Title": "Mladí Titáni v Tokiu",
+    "Overview": "V americké animované akční komedii se vracejí Robin, Starfire, Cyborg, Raven a Beast Boy, aby zachránili svět. Tentokrát před tajemným a děsivým japonským zločincem zvaným Brushogun, který na naše hrdiny poslal high-tech ninju. Boj právě začal a naše pětice se sbalí a rozjede se do Tokia, aby se tam postavila nejnovější hrozbě. Jenže město, které nikdy nespí, by pro ně mohlo být příliš velkým soustem - a tajemství Brushoguna zas příliš obtížné k rozluštění.",
+    "Language": "cs-CZ"
+   },
+   {
+    "Title": "Los Jovenes Titanes: Misión Tokio",
+    "Overview": "Cuando unos ninjas con altas tecnologías atacan la torre de la ciudad, Robin, Starfire, Cyborg, Raven y Beast Boy entran en acción. Robin descubre que los ninjas han sido enviados por el misterioso y amenazante criminal japonés conocido como Brushogun, por lo que los titanes deberán viajar hasta Tokio para detener al villano.",
+    "Language": "es-MX"
+   },
+   {
+    "Title": "Teen Titans: Trouble in Tokyo",
+    "Overview": "Jump City è attaccata da un misterioso ninja giapponese mascherato chiamato Saico-Tek ma i Teen Titans riescono a catturarlo. Sotto interrogatorio, Saico-Tek rivela l'identità di colui che lo ha mandato: Brushogun. Improvvisamente però scatta l'allarme antincendio e dopo aver controllato, non trovando niente, il ninja misteriosamente scompare. Robin decide di partire per Tokyo, in Giappone, per cercare il ninja.",
+    "Language": "it-IT"
+   },
+   {
+    "Title": "Teen Titans: Trouble in Tokyo",
+    "Overview": "Robin, Starfire, Cyborg, Raven og Beast Boy er tilbage for at redde verden i deres første langfilm, \"Teen Titans: Trouble in Tokyo\". Denne gang må Teen Titans bekæmpe en mystisk og truende japansk forbryder kaldet Brushogun, som har sendt en højteknologisk ninja til angreb mod de unge helte. Kampen er kun lige begyndt for de fem forbryderjægere, som pakker grejet og rejser til Tokyo for at gå i kødet på deres nyeste trussel. Men byen, der aldrig blinker kan vise sig en tand for meget for teenagerne – og mysteriet om Brushogun kan vise sig for svært at løse.",
+    "Language": "da-DK"
+   },
+   {
+    "Title": "Teen Titans: Trouble in Tokyo",
+    "Overview": "Saiko-Tek isimli yüksek teknolojiye sahip kötü bir adamla yapılan savaştan sonra, Teen Titans Tokyo kentine giderek eski bir düşmanla çatışmaya girişirler.",
+    "Language": "tr-TR"
+   },
+   {
+    "Title": "Teen Titans: Rắc Rối Ở Tokyo",
+    "Overview": "Vào một ngày, một tên ninja hiện đại xuất hiện và đã tấn công thành phố cũng như tháp Titans. Các Titan đã rất vả mới có thể bắt được hắn và biết được hắn là Saico Tek, được phái đến bởi một tên tội phạm bí ẩn và nguy hiểm có tên là Brushogun. Và thế là các Titan đã tới Nhật Bản để truy tìm tên tội phạm đó",
+    "Language": "vi-VN"
+   },
+   {
+    "Title": "Підлітки Титани: Халепа у Токіо",
+    "Overview": "Найкрутіші герої Америки відправилися до Японії. Коли високотехнологічний ніндзя атакував вежу титанів, тоді Робін, Зірка, Звір, Рейвен та Кіборг відправились до Японії. Робін дізнається про те, що ніндзя був надісланий таємничим і грізним японським злочинцем, відомим як Брашоґан...",
+    "Language": "uk-UA"
+   },
+   {
+    "Title": "Teen Titans: Περιπέτειες στο Τόκιο",
+    "Overview": "Η καλύτερη ομάδα υπερηρώων της Αμερικής αυτή τη φορά κατευθύνεται στο Τόκιο. Εκεί αναλαμβάνουν δράση, όταν μια νέα απειλή εμφανίζεται, ο δίχρωμος νίντζα Σάικο-Τεκ. Μετά από ένα φοβερό κυνηγητό σε όλη την πόλη οι ήρωες μας καταλήγουν στον πύργο των τιτάνων, όπου και καταφέρνουν να πιάσουν τον δίχρωμο νίντζα. Με τη βοήθεια ενός προγράμματος μετάφρασης, ο Ρόμπιν τον ανακρίνει και προσπαθεί να αποκαλύψει την ταυτότητα του δασκάλου του. Ο νίντζα όμως καταφέρνει και ξεφεύγει, αφήνοντας τους τιτάνες, με μοναδικό στοιχείο για να λύσουν το μυστήριο, μια σκοτεινή φιγούρα γνωστή ως Μπρούσογκαν.",
+    "Language": "el-GR"
+   },
+   {
+    "Title": "少年悍將：東京攻略",
+    "Overview": "少年悍將塔遭到神秘怪物塞特的攻擊，羅賓決定帶著少年悍將來到東京，追查真正的幕後元兇幕府大將軍。在東京市，他們遇到東京部隊指揮官大藏，得知幕府大將軍並不存在；羅賓卻在這時受到陷害被逮捕，少年悍將也遭到不明攻擊。",
+    "Language": "zh-TW"
+   },
+   {
+    "Title": "Teen Titans: Trouble in Tokyo",
+    "Overview": "Amerika's coolste helden Teen Titans gaan naar Japan waar ze in actie komen wanneer een nieuwe dreiging, de dichromatische ninja Saico-Tek, in hun stad verschijnt. Er volgt een achtervolging door de stad, die eindigt bij Titans Tower. Saico-Tek wordt ondervraagd door Robin met behulp van een vertaalprogramma en onthult de identiteit van degene die hem heeft gestuurd. De ninja ontsnapt dan uit zijn boeien en verdwijnt na het vernietigen van een sprinkler, en de enige aanwijzing van de Titanen is het zoeken naar zijn mysterieuze meester - de schimmige figuur die bekend staat als Brushogun.",
+    "Language": "nl-NL"
+   },
+   {
+    "Title": "ทีนไททันส์ป่วนโตเกียว",
+    "Overview": "เหล่าทีนไททันส์ถูกลอบจู่โจมจากจอมวายร้ายคนใหม่ เพื่อสืบหาต้นตอของการโจมตี พวกเขาต้องเดินทางไกลไปถึงประเทศญี่ปุ่น",
+    "Language": "th-TH"
+   },
+   {
+    "Title": "少年悍將：東京攻略",
+    "Overview": "少年悍將塔遭到神秘怪物塞特的攻擊，羅賓決定帶著少年悍將來到東京，追查真正的幕後元兇幕府大將軍。在東京市，他們遇到東京部隊指揮官大藏，得知幕府大將軍並不存在；羅賓卻在這時受到陷害被逮捕，少年悍將也遭到不明攻擊。",
+    "Language": "zh-HK"
+   },
+   {
+    "Title": "تایتان‌های جوان: دردسر در توکیو",
+    "Overview": "پس از نبرد با یک شرور پیشرفته به نام سایکو تک، تایتان‌های نوجوان به شهر توکیو می‌روند و در آنجا خود را درگیر درگیری با یک دشمن باستانی می‌بینند.",
+    "Language": "fa-IR"
+   },
+   {
+    "Title": "Teen Titans: Trouble in Tokyo",
+    "Overview": "بعد معركة مع شرير متطور تقنيًا، ينتقل فريق من الأبطال المراهقين إلى طوكيو، فيجدون أنفسهم في صراع مع عدو قديم.",
+    "Language": "ar-SA"
+   }
+  ],
+  "Recommendations": [
+   {
+    "TmdbId": 324857,
+    "Title": "Spider-Man: Into the Spider-Verse"
+   },
+   {
+    "TmdbId": 177572,
+    "Title": "Big Hero 6"
+   },
+   {
+    "TmdbId": 886396,
+    "Title": "Batman and Superman: Battle of the Super Sons"
+   },
+   {
+    "TmdbId": 556901,
+    "Title": "Teen Titans Go! vs. Teen Titans"
+   },
+   {
+    "TmdbId": 1154598,
+    "Title": "LEGO Marvel Avengers: Code Red"
+   },
+   {
+    "TmdbId": 765172,
+    "Title": "Rise of the Teenage Mutant Ninja Turtles: The Movie"
+   },
+   {
+    "TmdbId": 76589,
+    "Title": "Justice League: Doom"
+   },
+   {
+    "TmdbId": 581997,
+    "Title": "Batman vs Teenage Mutant Ninja Turtles"
+   },
+   {
+    "TmdbId": 20771,
+    "Title": "Kim Possible Movie: So the Drama"
+   },
+   {
+    "TmdbId": 323027,
+    "Title": "Justice League: Gods and Monsters"
+   }
+  ],
+  "Credits": {
+   "Cast": [
+    {
+     "Name": "Greg Cipes",
+     "Order": 0,
+     "Character": "Beast Boy (voice)",
+     "TmdbId": 60227,
+     "CreditId": "5448209ec3a3686d960031d7",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/x6kE9Ox4sR3HnrF6qtnjGNgujzV.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Scott Menville",
+     "Order": 1,
+     "Character": "Robin / Japanese Boy (voice)",
+     "TmdbId": 113916,
+     "CreditId": "52fe46bb9251416c75081b1b",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/iLoApH8LbyJSKFmdgWxNR314GGa.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Khary Payton",
+     "Order": 2,
+     "Character": "Cyborg (voice)",
+     "TmdbId": 65640,
+     "CreditId": "52fe46bb9251416c75081afb",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/4PgEGuAb2KkaRb7P9PdK40pPeVH.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Tara Strong",
+     "Order": 3,
+     "Character": "Raven / Computer (voice)",
+     "TmdbId": 15762,
+     "CreditId": "52fe46bb9251416c75081aff",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/Cm3X7CCSuYbjW1ZKJ8vxCj4SI7.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Hynden Walch",
+     "Order": 4,
+     "Character": "Starfire / Mecha-Boi (voice)",
+     "TmdbId": 113919,
+     "CreditId": "52fe46bb9251416c75081b03",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/oFfZaFF1o724BuZ3cLK6tl9L03.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Robert Ito",
+     "Order": 5,
+     "Character": "Mayor / Bookseller (voice)",
+     "TmdbId": 122154,
+     "CreditId": "52fe46bb9251416c75081b07",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/9QDa4UAvCWlNyzPP2exAHDcsN5g.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Janice Kawaye",
+     "Order": 6,
+     "Character": "Nya-Nya / Timoko (voice)",
+     "TmdbId": 127386,
+     "CreditId": "52fe46bb9251416c75081b0b",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/5OQhHX8HjDbu2Oio6LXbTnEz0lQ.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Yuri Lowenthal",
+     "Order": 7,
+     "Character": "Scarface / Japanese Biker (voice)",
+     "TmdbId": 127387,
+     "CreditId": "52fe46bb9251416c75081b0f",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/aLgXm0kbbIC8I5OBmnsK8TgVKwy.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Cary-Hiroyuki Tagawa",
+     "Order": 8,
+     "Character": "Brushogun (voice)",
+     "TmdbId": 11398,
+     "CreditId": "52fe46bb9251416c75081b13",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/5F8MQ4J4qIqUwGIfcWN4osrTUtP.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Keone Young",
+     "Order": 9,
+     "Character": "Commander Uehara Daizo / Saico-Tek / Sushi Shop Owner (voice)",
+     "TmdbId": 91387,
+     "CreditId": "52fe46bb9251416c75081b17",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/hHtr7OzP2I2U7FfA2hj8rPtAt8z.jpg"
+      }
+     ]
+    }
+   ],
+   "Crew": [
+    {
+     "Name": "Matt Youngberg",
+     "Order": 0,
+     "Job": "Director",
+     "Department": "Directing",
+     "TmdbId": 127382,
+     "CreditId": "52fe46bb9251416c75081aed",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/ea3qDvf5jtt5r05iLCvn2i9Sa8P.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Heather A. Maxwell",
+     "Order": 1,
+     "Job": "Director",
+     "Department": "Directing",
+     "TmdbId": 127381,
+     "CreditId": "52fe46bb9251416c75081ae7",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/42RQVt4N15EThNxNgOGJ3xmdBQC.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Michael Chang",
+     "Order": 2,
+     "Job": "Director",
+     "Department": "Directing",
+     "TmdbId": 127380,
+     "CreditId": "52fe46bb9251416c75081ae1",
+     "Images": []
+    },
+    {
+     "Name": "David Slack",
+     "Order": 3,
+     "Job": "Writer",
+     "Department": "Writing",
+     "TmdbId": 127383,
+     "CreditId": "52fe46bb9251416c75081af3",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/lFxuKUPYGwLlEPzE74QgHfxizjx.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Glen Murakami",
+     "Order": 4,
+     "Job": "Producer",
+     "Department": "Production",
+     "TmdbId": 931819,
+     "CreditId": "6431f79931032501036f0354",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/zDpC6ea1HFXQcLZThjzQ5QMMcty.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "David Slack",
+     "Order": 5,
+     "Job": "Producer",
+     "Department": "Production",
+     "TmdbId": 127383,
+     "CreditId": "61b9f72a223e20001d64bfaa",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/lFxuKUPYGwLlEPzE74QgHfxizjx.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Linda Steiner",
+     "Order": 6,
+     "Job": "Producer",
+     "Department": "Production",
+     "TmdbId": 555774,
+     "CreditId": "61b9f733a44d090064aa87ac",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/ahuE1JR0ASbfqyu5RR1fYUKNhB9.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Sander Schwartz",
+     "Order": 7,
+     "Job": "Executive Producer",
+     "Department": "Production",
+     "TmdbId": 555773,
+     "CreditId": "61b9f7236a300b001d8e8b6b",
+     "Images": []
+    },
+    {
+     "Name": "Joe Gall",
+     "Order": 8,
+     "Job": "Editor",
+     "Department": "Editing",
+     "TmdbId": 998195,
+     "CreditId": "6431f8b38289a000d6b6a274",
+     "Images": []
+    },
+    {
+     "Name": "Armen Ksajikian",
+     "Order": 9,
+     "Job": "Musician",
+     "Department": "Sound",
+     "TmdbId": 1146858,
+     "CreditId": "6350009335818f00799215cc",
+     "Images": []
+    },
+    {
+     "Name": "Kristopher Carter",
+     "Order": 10,
+     "Job": "Original Music Composer",
+     "Department": "Sound",
+     "TmdbId": 497701,
+     "CreditId": "6431f7426dea3a0112e47283",
+     "Images": []
+    },
+    {
+     "Name": "Lolita Ritmanis",
+     "Order": 11,
+     "Job": "Original Music Composer",
+     "Department": "Sound",
+     "TmdbId": 1376311,
+     "CreditId": "6431f7848289a0009885b657",
+     "Images": []
+    },
+    {
+     "Name": "Michael McCuistion",
+     "Order": 12,
+     "Job": "Original Music Composer",
+     "Department": "Sound",
+     "TmdbId": 1521139,
+     "CreditId": "6431f76b8289a000f5eb834d",
+     "Images": []
+    },
+    {
+     "Name": "A.J. Vargas",
+     "Order": 13,
+     "Job": "Associate Producer",
+     "Department": "Production",
+     "TmdbId": 2581827,
+     "CreditId": "61b9f71a6a300b00977afc4d",
+     "Images": []
+    }
+   ]
+  },
+  "Studio": "DC",
+  "YoutubeTrailerId": "zPQei7nDZUE",
+  "Certifications": [
+   {
+    "Country": "BR",
+    "Certification": "L"
+   },
+   {
+    "Country": "IE",
+    "Certification": "PG"
+   },
+   {
+    "Country": "US",
+    "Certification": "G"
+   }
+  ],
+  "Status": null,
+  "Collection": null,
+  "Homepage": ""
+ },
+ {
+  "TmdbId": 834404,
+  "ImdbId": "tt14851194",
+  "Title": "Teen Titans Go! See Space Jam",
+  "Overview": "The Teen Titans are visited by the Nerdlucks, the Space Jam villains who tried to capture Michael Jordan and the Looney Tunes. Astonished to discover his fellow Titans have never seen Space Jam, Cyborg organizes an exclusive watch party.",
+  "OriginalTitle": "Teen Titans Go! See Space Jam",
+  "OriginalLanguage": "en",
+  "TitleSlug": "834404",
+  "Runtime": 83,
+  "Popularity": 2.4482,
+  "Year": 2021,
+  "Premier": null,
+  "InCinema": null,
+  "PhysicalRelease": "2021-09-13T00:00:00Z",
+  "DigitalRelease": "2021-06-20T00:00:00Z",
+  "Images": [
+   {
+    "CoverType": "Poster",
+    "Url": "https://image.tmdb.org/t/p/original/xBOipwFIZS2uLk0FwmKpysCx4HD.jpg"
+   },
+   {
+    "CoverType": "Fanart",
+    "Url": "https://image.tmdb.org/t/p/original/1MxdxiUvKCbuKDoeiuq668eIKb8.jpg"
+   }
+  ],
+  "Ratings": [
+   {
+    "Count": 254,
+    "Value": 6.2,
+    "Origin": "Tmdb",
+    "Type": "User"
+   }
+  ],
+  "MovieRatings": {
+   "Tmdb": {
+    "Count": 254,
+    "Value": 6.2,
+    "Type": "User"
+   },
+   "Imdb": {
+    "Count": 1598,
+    "Value": 4.5,
+    "Type": "User"
+   },
+   "Metacritic": null,
+   "RottenTomatoes": null,
+   "Trakt": {
+    "Count": 183,
+    "Value": 5.6776,
+    "Type": "User"
+   }
+  },
+  "Genres": [
+   "Animation",
+   "Comedy",
+   "Family",
+   "Fantasy",
+   "Science Fiction"
+  ],
+  "Keywords": [
+   "based on comic",
+   "based on movie",
+   "based on tv series",
+   "sequel"
+  ],
+  "AlternativeTitles": [],
+  "Translations": [
+   {
+    "Title": "Teen Titans Go! See Space Jam",
+    "Overview": "The Teen Titans are visited by the Nerdlucks, the Space Jam villains who tried to capture Michael Jordan and the Looney Tunes. Astonished to discover his fellow Titans have never seen Space Jam, Cyborg organizes an exclusive watch party.",
+    "Language": "en-US"
+   },
+   {
+    "Title": "少年泰坦出击：太空大灌篮",
+    "Overview": "少年Titans队被 Nerdlucks 拜访，Nerdlucks 是 Space Jam 的恶棍，他们试图抓住 Michael Jordan 和 Looney Tunes。 Cyborg 惊讶地发现他的Titans同胞从未见过 Space Jam，于是组织了一场独家观看派对。 当然，如果Titans们正在看电影，不要指望沉默是金。 Raven 和 Starfire 提供评论，Cyborg 介绍有趣的事实，Beast Boy 指出屁股，还有 Robin，但 Robin 不信任他们的新外星人朋友。 书呆子们是来参加一个无辜的观看派对，还是他们袖子里有更险恶的动机？",
+    "Language": "zh-CN"
+   },
+   {
+    "Title": "Os Jovens Titãs Assistem A Space Jam",
+    "Overview": "Os Jovens Titãs são visitados pelos Nerdlucks, os vilões do Space Jam que tentaram capturar Michael Jordan e os Looney Tunes. Surpreso ao descobrir que seus companheiros Titãs nunca viram o Space Jam, Cyborg organiza uma festa exclusiva para assistir ao filme.",
+    "Language": "pt-BR"
+   },
+   {
+    "Title": "כח הטיטאנים! צופה בספייס ג'אם",
+    "Overview": "את טיטאנים פוקדים הנרדלוקס, נבלים מהחלל שניסו לתפוס את מייקל ג'ורדן ואת לוני טונס. מייקל נדהם לגלות שחבריו הטיטאנים מעולם לא ראו את Space Jam, ולכן סייבורג מארגן מסיבת צפייה בלעדית. כמובן, אם הטיטאנים צופים בסרט, הם לא ישתקו. רייבן וסטארפייר מספקים את הפרשנות, סייבורג מציגה את העובדות המהנות, וורובין לא סומך על חבריהם הזרים החדשים. האם הנרדלוקס כאן כדי להשתתף במסיבת הצפייה הבלעדית, או שיש להם מניעים מרושעים יותר ?",
+    "Language": "he-IL"
+   },
+   {
+    "Title": "Teen Titans Go! - Los Titans ven Space Jam",
+    "Overview": "Los Jóvenes Titanes son visitados por los Nerdlucks, los villanos de Space Jam que intentaron capturar a Michael Jordan y los Looney Tunes. Asombrado de descubrir que sus compañeros Titanes nunca han visto Space Jam, Cyborg organiza una fiesta de observación exclusiva. Por supuesto, si los Titanes están viendo una película, no espere que el silencio sea dorado. Raven y Starfire brindan el comentario, Cyborg presenta los hechos divertidos, Beast Boy señala los tiros a tope y Robin, pero Robin no confía en sus nuevos amigos alienígenas. ¿Están los Nerdlucks aquí para asistir a una fiesta de vigilancia inocente, o tienen motivos más siniestros bajo la manga?",
+    "Language": "es-ES"
+   },
+   {
+    "Title": "Юные Титаны, вперёд! Космический джем",
+    "Overview": "Юные Титаны вместе с нердлоками, пришельцами из фильма «Космический джем», смотрят этот самый фильм.",
+    "Language": "ru-RU"
+   },
+   {
+    "Title": "¡Los Jóvenes Titanes en acción! ven Space Jam",
+    "Overview": "Los Teen Titans reciben la visita de los Nerdlucks, los villanos de Space Jam que intentaron capturar a Michael Jordan y los Looney Tunes. Asombrado al descubrir que sus compañeros Titanes nunca han visto Space Jam, Cyborg organiza una fiesta exclusiva para verla. Por supuesto, si los Titanes están viendo una película, no esperes que el silencio sea dorado. Raven y Starfire se encargan de los comentarios, Cyborg presenta los datos divertidos, Chico Bestias señala los golpes en el culo y Robin, pero Robin no se fía de sus nuevos amigos alienígenas. ¿Están los Nerdlucks aquí para asistir a una inocente fiesta de observación, o tienen motivos más siniestros bajo la manga?",
+    "Language": "es-MX"
+   },
+   {
+    "Title": "Teen Titans Go découvrent Space Jam",
+    "Overview": "Dans Teen Titans Go découvrent Space Jam, les Teen Titans reçoivent la visite des Nerdlucks, les méchants emblématiques de Space Jam qui ont tenté d'enlever Michael Jordan et les Looney Tunes. Cyborg organise une soirée pour regarder Space Jam après avoir découvert avec stupéfaction que ses amis Titans n'ont jamais vu ce film. Évidemment, quand les Titans regardent un film, le silence n'est pas au rendez-vous. Raven et Starfire y vont de leurs commentaires, Cyborg aligne les anecdotes, Beast Boy relève chaque fois qu'un postérieur apparaît à l'écran, et Robin... eh bien, il ne fait pas confiance à leurs nouveaux compagnons extra-terrestres. Les Nerdlucks sont-ils simplement là pour regarder un film, ou cachent-ils des intentions moins innocentes ?",
+    "Language": "fr-FR"
+   },
+   {
+    "Title": "Genç Titanlar: Space Jam'i Tanıyın",
+    "Overview": "Teen Titans, Michael Jordan ve Looney Tunes'i yakalamaya çalışan uzay reçeli kötülükleri tarafından ziyaret edilmektedir. Titanlarını hiç keşfetmek için şaşırmış, Cyborg, özel bir saat partisi düzenledi. Tabii ki, eğer titanlar bir film izliyorsa, sessizliğin altın olmasını beklemeyin. Raven ve Starfire, yorumu sağlar, Cyborg eğlenceli gerçekleri sunar, canavar çocuğu popo çekimlerini ve Robin'e işaret ediyor, ancak Robin yeni yabancı arkadaşlarına güvenmiyor. NerdLucks, masum bir saat partisine katılmak için buradaki ya da daha çok uğursuz motifleri var mı?",
+    "Language": "tr-TR"
+   },
+   {
+    "Title": "少年悍將GO！看太空船！",
+    "Overview": "少年悍將的第三部電影，也是一部超級英雄的狂想曲！某天，少年悍將們在泳池附近玩耍，突然神秘的外星飛船降落…。",
+    "Language": "zh-TW"
+   },
+   {
+    "Title": "Teen Titans Go! See Space Jam",
+    "Overview": "Οι μικροί τιτάνες δέχονται απρόσμενους επισκέπτες: τους εξωγήινους κακούς από την ταινία 'Διαστημικά Καλάθια'. Όλοι μαζί θα διασκεδάσουν σε μια όμορφη γιορτή... Ή μήπως τα κίνητρα των νέων φίλων τους δεν είναι και τόσο αγνά;",
+    "Language": "el-GR"
+   },
+   {
+    "Title": "ทีน ไททันส์ ลุย! ดู สเปซแจม",
+    "Overview": "Teen Titans ได้รับการเยี่ยมเยียนจาก Nerdlucks ซึ่งเป็นตัวร้ายใน Space Jam ที่พยายามจับตัว Michael Jordan และ Looney Tunes Cyborg ประหลาดใจเมื่อพบว่าเพื่อนร่วมทีม Titans ไม่เคยดู Space Jam จึงจัดงานปาร์ตี้ชมพิเศษ",
+    "Language": "th-TH"
+   },
+   {
+    "Title": "Teen Titans Go! See Space Jam",
+    "Overview": "Teen Titans besøges af Nerdlucks, de let genkendelige skurke fra ”Space Jam”, som ville fange Michael Jordan og tegnefilmsholdet. Cyborg bliver forbløffet over at høre, at de andre titaner aldrig har set ”Space Jam” og arrangerer filmaften.",
+    "Language": "da-DK"
+   },
+   {
+    "Title": "Teen Titans Go! Veem o Space Jam",
+    "Overview": "Os Teen Titans são visitados pelos Nerdlucks, os vilões icónicos de Space Jam que tentaram capturar Michael Jordan e os Looney Tunes. Espantado por descobrir que os seus companheiros Titans nunca viram Space Jam, o Cyborg organiza uma festa para verem o filme em conjunto. Claro que, se os Titans estiverem a ver um filme, não esperem que o silêncio valha ouro. Raven e Starfire fornecem o comentário, Cyborg apresenta os factos divertidos, Beast Boy destaca os planos com rabos, e Robin, bem, Robin não confia nos seus novos amigos extraterrestres. Será que os Nerdlucks estão aqui para assistir a uma inocente festa, ou têm motivos mais sinistros por trás?",
+    "Language": "pt-PT"
+   },
+   {
+    "Title": "I Teen Titans Go! guardano Space Jam",
+    "Overview": "Ti invitiamo alla Titans Tower in occasione dell'evento in cui Cyborg presenterà il famoso film al resto dei Titans, con tanto di battute e scarabocchi stravaganti!",
+    "Language": "it-IT"
+   },
+   {
+    "Title": "Teen Titans Go! See Space Jam",
+    "Overview": "De Teen Titans krijgen bezoek van de Nerdlucks, de Space Jam-schurken die Michael Jordan en de Looney Tunes probeerden te vangen. Verbaasd om te ontdekken dat zijn mede-Titans Space Jam nog nooit hebben gezien, organiseert Cyborg een exclusief kijkfeest.",
+    "Language": "nl-NL"
+   },
+   {
+    "Title": "少年悍將 GO！看太空船！",
+    "Overview": "少年悍將的第三部電影，也是一部超級英雄的狂想曲！某天，少年悍將們在泳池附近玩耍，突然神秘的外星飛船降落…。",
+    "Language": "zh-HK"
+   },
+   {
+    "Title": "Teen Titans Go! See Space Jam",
+    "Overview": "فريق من الأبطال المراهقين يزوره أشرار فيلم شهير، وحين يكتشف أحدهم أن زملاءه لم يشاهدوا الفيلم قط ينظم حفلة مشاهدة حصرية، في فيلم رسوم متحركة.",
+    "Language": "ar-SA"
+   }
+  ],
+  "Recommendations": [
+   {
+    "TmdbId": 1506560,
+    "Title": "Clash of the Thundermans"
+   },
+   {
+    "TmdbId": 324849,
+    "Title": "The Lego Batman Movie"
+   },
+   {
+    "TmdbId": 308531,
+    "Title": "Teenage Mutant Ninja Turtles: Out of the Shadows"
+   },
+   {
+    "TmdbId": 400160,
+    "Title": "The SpongeBob Movie: Sponge on the Run"
+   },
+   {
+    "TmdbId": 1359227,
+    "Title": "LEGO Marvel Avengers: Mission Demolition"
+   },
+   {
+    "TmdbId": 474395,
+    "Title": "Teen Titans Go! To the Movies"
+   },
+   {
+    "TmdbId": 897192,
+    "Title": "Diary of a Wimpy Kid: Rodrick Rules"
+   },
+   {
+    "TmdbId": 556901,
+    "Title": "Teen Titans Go! vs. Teen Titans"
+   },
+   {
+    "TmdbId": 765172,
+    "Title": "Rise of the Teenage Mutant Ninja Turtles: The Movie"
+   },
+   {
+    "TmdbId": 581997,
+    "Title": "Batman vs Teenage Mutant Ninja Turtles"
+   }
+  ],
+  "Credits": {
+   "Cast": [
+    {
+     "Name": "Greg Cipes",
+     "Order": 0,
+     "Character": "Beast Boy (voice)",
+     "TmdbId": 60227,
+     "CreditId": "60b0fd938813e40041a17d42",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/x6kE9Ox4sR3HnrF6qtnjGNgujzV.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Scott Menville",
+     "Order": 1,
+     "Character": "Robin (voice)",
+     "TmdbId": 113916,
+     "CreditId": "60b0fd9ddff66e002ade8777",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/iLoApH8LbyJSKFmdgWxNR314GGa.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Khary Payton",
+     "Order": 2,
+     "Character": "Cyborg (voice)",
+     "TmdbId": 65640,
+     "CreditId": "60b0fdb2c1ffbd0040c416db",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/4PgEGuAb2KkaRb7P9PdK40pPeVH.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Tara Strong",
+     "Order": 3,
+     "Character": "Raven (voice)",
+     "TmdbId": 15762,
+     "CreditId": "60b0fdbb8ee49c003fe00c3f",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/Cm3X7CCSuYbjW1ZKJ8vxCj4SI7.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Hynden Walch",
+     "Order": 4,
+     "Character": "Starfire (voice)",
+     "TmdbId": 113919,
+     "CreditId": "60b0fda7957e6d0057406bda",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/oFfZaFF1o724BuZ3cLK6tl9L03.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "John DiMaggio",
+     "Order": 5,
+     "Character": "Bupkus / Nawt (voice)",
+     "TmdbId": 31531,
+     "CreditId": "61067ff9ee43e8005e3a31c6",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/qcbQe71nSlULDsP1OxTqltEKFbl.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Fred Tatasciore",
+     "Order": 6,
+     "Character": "Pound / Blanko / Bang (voice)",
+     "TmdbId": 60279,
+     "CreditId": "610680227d5f4b0046b5078e",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/8YCIAGSWcxeTmPfOWMtVjLSwGOH.jpg"
+      }
+     ]
+    }
+   ],
+   "Crew": [
+    {
+     "Name": "Peter Rida Michail",
+     "Order": 0,
+     "Job": "Director",
+     "Department": "Directing",
+     "TmdbId": 1903167,
+     "CreditId": "60e84a7cb7d352002fa7bcc6",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/itnEqzFmsj4e14kMXiSkg28tkdA.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Brady Klosterman",
+     "Order": 1,
+     "Job": "Writer",
+     "Department": "Writing",
+     "TmdbId": 3151380,
+     "CreditId": "60e84a86e62719002c9386af",
+     "Images": []
+    },
+    {
+     "Name": "Peggy Regan",
+     "Order": 2,
+     "Job": "Producer",
+     "Department": "Production",
+     "TmdbId": 1274807,
+     "CreditId": "60e84a949979d2004602aced",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/foriHjBeUonRebESVLKEQIUfH0L.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Agnes Kim",
+     "Order": 3,
+     "Job": "Casting",
+     "Department": "Production",
+     "TmdbId": 3151382,
+     "CreditId": "60e84a9d43250f004715271c",
+     "Images": []
+    },
+    {
+     "Name": "Melissa Bailey",
+     "Order": 4,
+     "Job": "Editor",
+     "Department": "Editing",
+     "TmdbId": 1006154,
+     "CreditId": "60e84a6f43250f00471526c8",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/cwcOasfe47aT2n8scoDiIbyP9RU.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Sarah Noonan",
+     "Order": 5,
+     "Job": "Casting",
+     "Department": "Production",
+     "TmdbId": 3638974,
+     "CreditId": "62e0dfff47c9fb016937e0d9",
+     "Images": []
+    },
+    {
+     "Name": "Jonathan Renoni",
+     "Order": 6,
+     "Job": "Art Direction",
+     "Department": "Art",
+     "TmdbId": 3151383,
+     "CreditId": "60e84aad6ee3d7005e55c4fe",
+     "Images": []
+    }
+   ]
+  },
+  "Studio": "Warner Bros. Animation",
+  "YoutubeTrailerId": "-2zRHKsVBvU",
+  "Certifications": [
+   {
+    "Country": "BR",
+    "Certification": "L"
+   },
+   {
+    "Country": "ES",
+    "Certification": "APTA"
+   },
+   {
+    "Country": "FR",
+    "Certification": "U"
+   },
+   {
+    "Country": "GB",
+    "Certification": "U"
+   },
+   {
+    "Country": "IE",
+    "Certification": "G"
+   },
+   {
+    "Country": "US",
+    "Certification": "NR"
+   }
+  ],
+  "Status": null,
+  "Collection": null,
+  "Homepage": ""
+ },
+ {
+  "TmdbId": 824424,
+  "ImdbId": "tt15170394",
+  "Title": "The First Myth: Clash of Gods",
+  "Overview": "At the end of the Yin Shang Dynasty, King Zhou was tyrannical and the people were in desperate straits. The God of Heaven and Shen Gong Bao wanted to take advantage of the chaos to destroy the mortal world by using the Ten Thousand Immortals Formation. In order to fight against the evil forces, Jiang Ziya gathers Yang Jian, Nezha and other immortals to join forces to save the mortal world.",
+  "OriginalTitle": "封神榜：决战万仙阵",
+  "OriginalLanguage": "zh",
+  "TitleSlug": "824424",
+  "Runtime": 92,
+  "Popularity": 1.3411,
+  "Year": 2021,
+  "Premier": null,
+  "InCinema": null,
+  "PhysicalRelease": "2022-01-14T00:00:00Z",
+  "DigitalRelease": "2021-04-30T00:00:00Z",
+  "Images": [
+   {
+    "CoverType": "Poster",
+    "Url": "https://image.tmdb.org/t/p/original/lVxrP1Q4stsFwJS5WGsUm5fJvP4.jpg"
+   },
+   {
+    "CoverType": "Fanart",
+    "Url": "https://image.tmdb.org/t/p/original/syhOgYy9PbToxbXvejX1vT9CBm8.jpg"
+   }
+  ],
+  "Ratings": [
+   {
+    "Count": 9,
+    "Value": 4.7,
+    "Origin": "Tmdb",
+    "Type": "User"
+   }
+  ],
+  "MovieRatings": {
+   "Tmdb": {
+    "Count": 9,
+    "Value": 4.7,
+    "Type": "User"
+   },
+   "Imdb": {
+    "Count": 193,
+    "Value": 4.5,
+    "Type": "User"
+   },
+   "Metacritic": null,
+   "RottenTomatoes": null,
+   "Trakt": {
+    "Count": 18,
+    "Value": 5.05556,
+    "Type": "User"
+   }
+  },
+  "Genres": [
+   "Fantasy",
+   "Action",
+   "Adventure",
+   "Drama"
+  ],
+  "Keywords": [
+   "wuxia"
+  ],
+  "AlternativeTitles": [
+   {
+    "Title": "封神榜大破万仙阵",
+    "Type": "Tmdb",
+    "Language": "zh"
+   },
+   {
+    "Title": "The First Myth: Clash of Gods",
+    "Type": "Tmdb",
+    "Language": "zh"
+   },
+   {
+    "Title": "Investiture of the Gods: The Battle of Ten Thousand Immortals",
+    "Type": "Tmdb",
+    "Language": "zh"
+   },
+   {
+    "Title": "Feng Shen Bang",
+    "Type": "Tmdb",
+    "Language": "zh"
+   },
+   {
+    "Title": "The First Myth: The Clash of Gods",
+    "Type": "Tmdb",
+    "Language": "en"
+   }
+  ],
+  "Translations": [
+   {
+    "Title": "封神榜：决战万仙阵",
+    "Overview": "　　殷商末年，纣王暴虐，民不聊生，通天教主与申公豹想要趁乱利用万仙阵毁灭凡界。为了对抗邪恶势力，姜子牙集结杨戬、哪吒等众仙联手拯救凡界，过去在不同的故事中各领风骚的东方神话英雄热血集结，各显神通。一个波澜壮阔、充满东方神话色彩的正邪对抗的故事就此展开……",
+    "Language": "zh-CN"
+   },
+   {
+    "Title": "The First Myth: Clash of Gods",
+    "Overview": "At the end of the Yin Shang Dynasty, King Zhou was tyrannical and the people were in desperate straits. The God of Heaven and Shen Gong Bao wanted to take advantage of the chaos to destroy the mortal world by using the Ten Thousand Immortals Formation. In order to fight against the evil forces, Jiang Ziya gathers Yang Jian, Nezha and other immortals to join forces to save the mortal world.",
+    "Language": "en-US"
+   },
+   {
+    "Title": "Phong Thần Bảng: Quyết Chiến Vạn Tiên Trận",
+    "Overview": "Phong Thần Bảng: Quyết Chiến Vạn Tiên Trận là phim thần thoại – võ thuật kể về Vũ Vương phạt Trụ, Khương Tử Nha dẫn binh xông phá Đồng Quan, Thân Công Báo cùng Thông Thiên giáo đã thông đồng với nhau, cùng dựng nên Vạn Tiên sát trận, với chủ đích quét sạch quân đội nhà Chu, cùng những thần tiên phản đối sự thống trị của Thương Trụ. Một nhóm các thần gồm Dương Tiễn, Na Tra liều chết chống trả quyết liệt, cuối cùng đã đánh bại bè lũ của Thân Công Báo và Thôn Thiên giáo chủ, giúp thiên đình và nhân gian tránh được kiếp hoạ khó lường, bình ổn thiên giới, an dân thiên hạ.",
+    "Language": "vi-VN"
+   },
+   {
+    "Title": "Le premier mythe : le choc des dieux",
+    "Overview": "À la fin de la dynastie Yin Shang, le roi Zhou était tyrannique et le peuple était désespéré. Le dieu du ciel et Shen Gong Bao voulaient profiter du chaos pour détruire le monde des mortels en utilisant la formation des dix mille immortels. Afin de lutter contre les forces du mal, Jiang Ziya rassemble Yang Jian, Nezha et d'autres immortels pour unir leurs forces pour sauver le monde des mortels.",
+    "Language": "fr-FR"
+   },
+   {
+    "Title": "Первый миф о столкновении богов",
+    "Overview": "В последние годы правления династии Шан, король Чжоу был тираном и люди страдали. Лорд Тунтянь и Шэнь Гунбао хотели воспользоваться десятью тысячами бессмертных, чтобы уничтожить мир. Для борьбы со злыми силами, Цзян Цзыя собрал Ян Цзяня, Нэчжу и других бессмертных, ради спасения мироздания. Герои восточной мифологии разворачивают великолепную историю противостояния добра и зла.",
+    "Language": "ru-RU"
+   },
+   {
+    "Title": "Clash of Gods - Krieg der Titanen",
+    "Overview": "In einer von Menschen, Göttern und allerlei fantastischen Kreaturen bevölkerten Welt steht eine gewaltige Katastrophe an: Der Gott des Himmels hat sich mit einem machthungrigen Zauberer zusammengetan, um die Menschheit auszulöschen und die Welt nach ihren Vorstellungen neu zu gestalten. Doch der mutige Krieger Yang Jian (Zhilu Zhang) will das nicht zulassen und stellt eine schlagkräftige Truppe zusammen, um die Bösewichte zu besiegen...",
+    "Language": "de-DE"
+   },
+   {
+    "Title": "O Primeiro Mito: Choque de Deuses",
+    "Overview": "No final da Dinastia Yin Shang, o Rei Zhou era tirânico e o povo estava em uma situação desesperadora. O Deus do Céu e Shen Gong Bao queriam aproveitar o caos para destruir o mundo mortal usando a Formação Dez Mil Imortais. Para lutar contra as forças do mal, Jiang Ziya reúne Yang Jian, Nezha e outros imortais para unir forças para salvar o mundo mortal.",
+    "Language": "pt-PT"
+   },
+   {
+    "Title": "봉신방",
+    "Overview": "조 왕조 40년, 왕생교의 고념동이 사술로 만족의 신령을 만왕의 몸에 흡수하게 하자 진령사는 사신이 된 수주를 다시 봉인하기 위해 서정에 나선다. 하지만 갑작스러운 만왕의 기습으로 서정군은 대부분 전멸하고 살아남은 진령사 백호기의 소진, 화무상, 영무모는 최후의 전투를 준비한다.",
+    "Language": "ko-KR"
+   },
+   {
+    "Title": "封神榜：決戰萬仙陣",
+    "Overview": "殷商末年，紂王暴虐，民不聊生，通天教主與申公豹想要趁亂利用萬仙陣毀滅凡界。為了對抗邪惡勢力，姜子牙集結楊戩、哪吒等眾仙聯手拯救凡界，過去在不同的故事中各領風騷的東方神話英雄熱血集結，各顯神通。一個波瀾壯闊、充滿東方神話色彩的正邪對抗的故事就此展開……",
+    "Language": "zh-HK"
+   },
+   {
+    "Title": "封神榜：決戰萬仙陣",
+    "Overview": "",
+    "Language": "zh-TW"
+   },
+   {
+    "Title": "封神榜：决战万仙阵",
+    "Overview": "In een wereld bevolkt door mensen, goden en allerlei fantastische wezens dreigt een enorme catastrofe: de God van de hemel werkt samen met een machtsbeluste tovenaar om de mensheid uit te roeien en de wereld opnieuw te maken volgens hun ideeën. Maar de moedige krijger Yang Jian (Zhilu Zhang) wil dat niet laten gebeuren en stelt een krachtig team samen om de schurken te verslaan...",
+    "Language": "nl-NL"
+   },
+   {
+    "Title": "Първият мит: Сблъсъка на боговете",
+    "Overview": "През последните години на династията Шан, крал Чжоу бе тиранин и хората страдаха. Лорд Тонгтиен и Шен Гонг Бао искаха да се възползват от десетте хиляди безсмъртни, за да унищожат света. За да се бори със злите сили, Цзян Цзи Я поведе Ян Цзян, Нечжу и други безсмъртни, за да спаси вселената. Героите на източната митология разгръщат великолепна история за сблъсъка между доброто и злото...",
+    "Language": "bg-BG"
+   },
+   {
+    "Title": "ศึกตัดสินชะตาหมื่นเซียน",
+    "Overview": "อู่อ๋องปราบโจ้วอ๋อง เจียงจื่อหยาพาทหารฝ่าผ่านเมืองถงกวน เซินกงเป้าร่วมมือกับเจ้าสำนักทงเทียน ร่วมกันสร้างค่ายปราบหมื่นเซียนขึ้น หวังจะกำจัดกองทัพราชวงศ์ซางและเหล่าเซียนที่ต่อต้านการปกครองของซางโจ้วอ๋อง หยางเจี่ยน นาจาและพวกพยายามต่อสู้สุดฤทธิ์ ในที่สุดก็กำจัดเซินกงเป้าและเจ้าสำนักทงเทียนพร้อมพวกได้ กอบกู้สรรพสิ่งในโลกได้สำเร็จ",
+    "Language": "th-TH"
+   }
+  ],
+  "Recommendations": [
+   {
+    "TmdbId": 1033462,
+    "Title": "Bureau 749"
+   },
+   {
+    "TmdbId": 611698,
+    "Title": "A Writer's Odyssey"
+   },
+   {
+    "TmdbId": 878608,
+    "Title": "Resurrection"
+   },
+   {
+    "TmdbId": 666243,
+    "Title": "The Witcher: Nightmare of the Wolf"
+   },
+   {
+    "TmdbId": 976720,
+    "Title": "Vesper"
+   },
+   {
+    "TmdbId": 75948,
+    "Title": "The Sorcerer and the White Snake"
+   },
+   {
+    "TmdbId": 34179,
+    "Title": "14 Blades"
+   },
+   {
+    "TmdbId": 300168,
+    "Title": "Dragon Blade"
+   },
+   {
+    "TmdbId": 666750,
+    "Title": "Dragonheart: Vengeance"
+   },
+   {
+    "TmdbId": 44092,
+    "Title": "Reign of Assassins"
+   }
+  ],
+  "Credits": {
+   "Cast": [
+    {
+     "Name": "Sammul Chan",
+     "Order": 0,
+     "Character": "Yang Jian",
+     "TmdbId": 1222624,
+     "CreditId": "64d60f21b6c2641154f86f99",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/emuTVeFoAewmALU0EVzpDxk3dEn.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Zhang Zhilu",
+     "Order": 1,
+     "Character": "Nezha",
+     "TmdbId": 2133763,
+     "CreditId": "608d3d7371ffdf0056644898",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/hPXDCG6D9CPUyOAGZvYJFGCRd9l.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Li Qinyao",
+     "Order": 2,
+     "Character": "Deng Chanyu",
+     "TmdbId": 2330125,
+     "CreditId": "608d4de607e2810059315436",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/hJPL1yqqcW1iSFN5MbwgkqM4gnh.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Yu Fei",
+     "Order": 3,
+     "Character": "Lei Zhenzi",
+     "TmdbId": 2413229,
+     "CreditId": "608d3dcbc5840d002933cf90",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/iP4nQj5LkwFsZTaOn8wuPBlPABe.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Han Mengwu",
+     "Order": 4,
+     "Character": "Tu Xingsun",
+     "TmdbId": 3025365,
+     "CreditId": "608d3deb05a5330078c1acb0",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/hiAu7WwyEdeOpdtCGANxntWTAiV.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Vincent Wan Yeung-ming",
+     "Order": 5,
+     "Character": "Jiang Ziya",
+     "TmdbId": 92833,
+     "CreditId": "608d4e50c433ea0079df991f",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/8agLdueNkpvOvwXVthDbuaO0bEW.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Ma Wenbo",
+     "Order": 6,
+     "Character": "Sun Kung-ming",
+     "TmdbId": 2533481,
+     "CreditId": "608d4e0a20af770056f9ebb7",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/qB8biQtwdbK0uKozNikFhERjKLg.jpg"
+      }
+     ]
+    },
+    {
+     "Name": "Paul Che Biu-Law",
+     "Order": 7,
+     "Character": "Monk",
+     "TmdbId": 564834,
+     "CreditId": "608d4e3b20af77003f71fe33",
+     "Images": [
+      {
+       "CoverType": "Headshot",
+       "Url": "https://image.tmdb.org/t/p/original/qDiFHuBJtIyq2bWkctvu87L4pWc.jpg"
+      }
+     ]
+    }
+   ],
+   "Crew": [
+    {
+     "Name": "Li Boxun",
+     "Order": 0,
+     "Job": "Director",
+     "Department": "Directing",
+     "TmdbId": 2492465,
+     "CreditId": "608d3d25c433ea002b0d1630",
+     "Images": []
+    },
+    {
+     "Name": "Nian Jianlun",
+     "Order": 1,
+     "Job": "Writer",
+     "Department": "Writing",
+     "TmdbId": 3074679,
+     "CreditId": "608d3d4305a5330057ca5833",
+     "Images": []
+    }
+   ]
+  },
+  "Studio": "",
+  "YoutubeTrailerId": "",
+  "Certifications": [
+   {
+    "Country": "DE",
+    "Certification": "16"
+   }
+  ],
+  "Status": null,
+  "Collection": null,
+  "Homepage": ""
+ }
+]

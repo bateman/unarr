@@ -1,0 +1,39 @@
+{
+  "body": {
+    "body": {
+      "completionMessage": "Completed",
+      "isExclusive": false,
+      "isLongRunning": true,
+      "isNewMovie": false,
+      "isTypeExclusive": false,
+      "movieIds": [
+        5,
+        125,
+        186
+      ],
+      "name": "RefreshMovie",
+      "requiresDiskAccess": false,
+      "sendUpdatesToClient": true,
+      "suppressMessages": false,
+      "trigger": "manual",
+      "updateScheduledTask": false
+    },
+    "commandName": "Refresh Movie",
+    "id": 472956,
+    "name": "RefreshMovie",
+    "priority": "normal",
+    "queued": "2026-11-13T12:38:23Z",
+    "result": "unknown",
+    "sendUpdatesToClient": true,
+    "status": "queued",
+    "trigger": "manual",
+    "updateScheduledTask": false
+  },
+  "recordedAt": "2026-11-13T12:38:23Z",
+  "request": {
+    "body": "bodies/command-refresh-movies.json",
+    "method": "POST",
+    "path": "/api/v3/command"
+  },
+  "status": 201
+}

@@ -1,0 +1,24 @@
+{
+  "body": [
+    {
+      "attemptedValue": "/movies",
+      "errorCode": "RootFolderValidator",
+      "errorMessage": "Path '/movies' is already configured as a root folder",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "path": "/movies",
+        "propertyName": "Path",
+        "propertyValue": "/movies"
+      },
+      "propertyName": "Path",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:41:20Z",
+  "request": {
+    "body": "bodies/rootfolder-create-existing.json",
+    "method": "POST",
+    "path": "/api/v3/rootfolder"
+  },
+  "status": 400
+}

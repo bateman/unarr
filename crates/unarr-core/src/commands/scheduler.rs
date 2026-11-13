@@ -20,13 +20,22 @@ fn default_tasks(conn: &Connection) -> anyhow::Result<Vec<(CommandBody, i64, Com
         .and_then(|v| v.trim().parse::<i64>().ok())
         .unwrap_or(7)
         .clamp(1, 7);
+    // `GetRefreshMonitoredInterval`: the setting, at least a minute.
+    let refresh_downloads = store::config::config(conn, "CheckForFinishedDownloadInterval")?
+        .and_then(|v| v.trim().parse::<i64>().ok())
+        .unwrap_or(1)
+        .max(1);
     let rss = match indexer.rss_sync_interval {
         i if i > 0 && i < 10 => 10,
         i if i < 0 => 0,
         i => i,
     };
     Ok(vec![
-        (CommandBody::RefreshMonitoredDownloads, 1, CommandPriority::High),
+        (
+            CommandBody::RefreshMonitoredDownloads,
+            refresh_downloads,
+            CommandPriority::High,
+        ),
         (CommandBody::MessagingCleanup, 5, CommandPriority::Low),
         (
             CommandBody::ApplicationUpdateCheck {
@@ -98,7 +107,10 @@ fn radarr_tasks(conn: &Connection) -> anyhow::Result<Vec<(String, i64)>> {
             interval_of(CommandBody::RssSync),
         ),
         ("NzbDrone.Core.ImportLists.ImportListSyncCommand", 5),
-        ("NzbDrone.Core.Download.RefreshMonitoredDownloadsCommand", 1),
+        (
+            "NzbDrone.Core.Download.RefreshMonitoredDownloadsCommand",
+            interval_of(CommandBody::RefreshMonitoredDownloads),
+        ),
     ]
     .into_iter()
     .map(|(name, interval)| (name.to_string(), interval))
@@ -373,8 +385,9 @@ mod tests {
         assert!(CommandBody::parse_for(Personality::Radarr, "RescanMovie", &body).is_some());
         assert!(CommandBody::parse_for(Personality::Sonarr, "RescanMovie", &body).is_none());
         assert!(CommandBody::parse_for(Personality::Radarr, "RescanSeries", &body).is_none());
-        // A task Radarr lists and does not run yet.
-        assert!(!CommandBody::ImportListSync { definition_id: None }.runs_in(Personality::Radarr));
+        // The import lists' sync runs in both, and names what each
+        // application's lists name.
+        assert!(CommandBody::ImportListSync { definition_id: None }.runs_in(Personality::Radarr));
         // Whatever the body says, a backup posted to Radarr is a manual one.
         assert_eq!(
             CommandBody::parse_for(

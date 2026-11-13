@@ -1,0 +1,23 @@
+{
+  "body": [
+    {
+      "attemptedValue": "",
+      "errorCode": "NotEmptyValidator",
+      "errorMessage": "'Host' must not be empty.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Host",
+        "propertyValue": ""
+      },
+      "propertyName": "Host",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:41:28Z",
+  "request": {
+    "body": "bodies/remotepathmapping-create-no-host.json",
+    "method": "POST",
+    "path": "/api/v3/remotepathmapping"
+  },
+  "status": 400
+}

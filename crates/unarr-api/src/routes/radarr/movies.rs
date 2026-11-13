@@ -264,7 +264,8 @@ fn collection_resource(all: &Collections, c: &Collection) -> Value {
         .collect();
     let missing = members
         .iter()
-        .filter(|m| !all.in_library.contains(&m.tmdb_id))
+        // A movie the lists exclude is not one the collection misses.
+        .filter(|m| !all.in_library.contains(&m.tmdb_id) && !all.excluded.contains(&m.tmdb_id))
         .count();
     let movies: Vec<Value> = members
         .iter()
@@ -339,6 +340,38 @@ pub async fn collections(State(state): State<AppState>, uri: Uri) -> ApiResult<J
     ))
 }
 
+/// `GET /movie/{id}/folder`: the folder the naming settings would give
+/// the movie, which the editor asks for before it moves one.
+pub async fn folder(State(state): State<AppState>, Path(id): Path<i64>) -> ApiResult<Json<Value>> {
+    let movie = state
+        .db()
+        .call(move |conn| movies::get_movie(conn, id))
+        .await?
+        .ok_or_else(|| crate::error::ApiError::ModelNotFound(format!("Movie with ID {id} does not exist")))?;
+    let metadata_id = movie.metadata.id;
+    let (naming, title) = state
+        .db()
+        .call(move |conn| {
+            let language = unarr_core::store::config::config(conn, "movieinfolanguage")?
+                .and_then(|v| v.parse().ok())
+                .unwrap_or(1);
+            let title = movies::translations_in(conn, language)?
+                .get(&metadata_id)
+                .and_then(|t| t.title.clone());
+            Ok((movies::naming(conn)?, title))
+        })
+        .await?;
+    let translations: Vec<(i64, String)> = title.into_iter().map(|t| (1, t)).collect();
+    let folder = movie_naming::movie_folder(
+        &movie_naming::NamingMovie {
+            metadata: &movie.metadata,
+            translations: &translations,
+        },
+        &naming,
+    );
+    Ok(Json(json!({"folder": folder})))
+}
+
 pub async fn collection(State(state): State<AppState>, Path(id): Path<i64>) -> ApiResult<Json<Value>> {
     let all = load_collections(&state).await?;
     Ok(Json(found(
@@ -347,6 +380,37 @@ pub async fn collection(State(state): State<AppState>, Path(id): Path<i64>) -> A
             .find(|c| c.id == id)
             .map(|c| collection_resource(&all, c)),
     )?))
+}
+
+/// `CollectionController`'s handlers of the collection events: the
+/// collection as it reads now, or the id of one that is gone.
+pub async fn broadcast_collection(
+    state: &AppState,
+    collection_id: i64,
+    action: unarr_core::commands::executor::CollectionAction,
+) {
+    use unarr_core::commands::executor::CollectionAction;
+    if action == CollectionAction::Deleted {
+        state.hub().broadcast(
+            "collection",
+            json!({"action": "deleted", "resource": {"id": collection_id}}),
+        );
+        return;
+    }
+    let Ok(all) = load_collections(state).await else {
+        return;
+    };
+    if let Some(collection) = all.collections.iter().find(|c| c.id == collection_id) {
+        let action = if action == CollectionAction::Created {
+            "created"
+        } else {
+            "updated"
+        };
+        state.hub().broadcast(
+            "collection",
+            json!({"action": action, "resource": collection_resource(&all, collection)}),
+        );
+    }
 }
 
 // --- credits and alternative titles
@@ -447,6 +511,11 @@ pub enum HubMovieEvent {
     Grabbed(i64),
     /// The importer's events.
     Import(Box<unarr_core::movies::import::events::MovieImportEvent>),
+    /// `MovieUpdatedEvent` and `MediaCoversUpdatedEvent`: a refresh, an
+    /// edit or a cover changed the movie.
+    Updated(i64),
+    /// `MoviesDeletedEvent`, for one movie.
+    Deleted(i64),
 }
 
 /// The movie events on the hub, in the order they were raised, on a task
@@ -468,6 +537,19 @@ pub async fn relay_movie_events(
             match event {
                 HubMovieEvent::Grabbed(movie_id) => broadcast_movie_change(&state, ctx, movie_id, true).await,
                 HubMovieEvent::Import(e) => relay_import(&state, ctx, &e).await,
+                // `MovieController`'s own handler: the movie as it reads,
+                // root folder included, under its own name alone.
+                HubMovieEvent::Deleted(movie_id) => state.hub().broadcast(
+                    "movie",
+                    json!({"action": "deleted", "resource": {"id": movie_id}}),
+                ),
+                HubMovieEvent::Updated(movie_id) => {
+                    if let Some(resource) = movie_for_hub(&state, ctx, movie_id).await {
+                        state
+                            .hub()
+                            .broadcast("movie", json!({"action": "updated", "resource": resource}));
+                    }
+                }
             }
         }
         if events.is_empty() {

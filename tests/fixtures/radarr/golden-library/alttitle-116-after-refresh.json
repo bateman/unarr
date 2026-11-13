@@ -1,0 +1,76 @@
+{
+  "body": [
+    {
+      "id": 892,
+      "movieMetadataId": 116,
+      "sourceType": "tmdb",
+      "title": "Barton Academy"
+    },
+    {
+      "id": 893,
+      "movieMetadataId": 116,
+      "sourceType": "tmdb",
+      "title": "Os Rejeitados"
+    },
+    {
+      "id": 894,
+      "movieMetadataId": 116,
+      "sourceType": "tmdb",
+      "title": "جاماندگان"
+    },
+    {
+      "id": 895,
+      "movieMetadataId": 116,
+      "sourceType": "tmdb",
+      "title": "Os Excluídos"
+    },
+    {
+      "id": 896,
+      "movieMetadataId": 116,
+      "sourceType": "tmdb",
+      "title": "Залишені"
+    },
+    {
+      "id": 897,
+      "movieMetadataId": 116,
+      "sourceType": "tmdb",
+      "title": "Zadržki"
+    },
+    {
+      "id": 898,
+      "movieMetadataId": 116,
+      "sourceType": "tmdb",
+      "title": "Mahajäänud"
+    },
+    {
+      "id": 899,
+      "movieMetadataId": 116,
+      "sourceType": "tmdb",
+      "title": "Winter Break"
+    },
+    {
+      "id": 900,
+      "movieMetadataId": 116,
+      "sourceType": "tmdb",
+      "title": "ฤดูหนาวนี้ไม่ไร้ไออุ่น"
+    },
+    {
+      "id": 901,
+      "movieMetadataId": 116,
+      "sourceType": "tmdb",
+      "title": "მიტოვებულები"
+    },
+    {
+      "id": 902,
+      "movieMetadataId": 116,
+      "sourceType": "tmdb",
+      "title": "留校联盟"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:38:23Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/alttitle?movieId=116"
+  },
+  "status": 200
+}

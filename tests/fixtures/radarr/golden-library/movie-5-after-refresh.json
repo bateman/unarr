@@ -1,0 +1,164 @@
+{
+  "body": {
+    "added": "2026-03-07T09:12:06Z",
+    "alternateTitles": [
+      {
+        "id": 12,
+        "movieMetadataId": 5,
+        "sourceType": "tmdb",
+        "title": "Air Jordan"
+      },
+      {
+        "id": 13,
+        "movieMetadataId": 5,
+        "sourceType": "tmdb",
+        "title": "Air: O Filme"
+      },
+      {
+        "id": 14,
+        "movieMetadataId": 5,
+        "sourceType": "tmdb",
+        "title": "Air: Courting a Legend"
+      },
+      {
+        "id": 15,
+        "movieMetadataId": 5,
+        "sourceType": "tmdb",
+        "title": "Air: A Story of Greatness"
+      },
+      {
+        "id": 16,
+        "movieMetadataId": 5,
+        "sourceType": "tmdb",
+        "title": "如履青雲"
+      },
+      {
+        "id": 17,
+        "movieMetadataId": 5,
+        "sourceType": "tmdb",
+        "title": "如履轻云"
+      },
+      {
+        "id": 18,
+        "movieMetadataId": 5,
+        "sourceType": "tmdb",
+        "title": "AIR: Theo Đuổi Một Huyền Thoại"
+      },
+      {
+        "id": 19,
+        "movieMetadataId": 5,
+        "sourceType": "tmdb",
+        "title": "集氣"
+      },
+      {
+        "id": 20,
+        "movieMetadataId": 5,
+        "sourceType": "tmdb",
+        "title": "Air: Κυνηγώντας Ένα Θρύλο"
+      }
+    ],
+    "certification": "R",
+    "cleanTitle": "air",
+    "digitalRelease": "2023-04-05T00:00:00Z",
+    "folderName": "/movies/Air (2023)",
+    "genres": [
+      "Drama",
+      "History"
+    ],
+    "hasFile": false,
+    "id": 5,
+    "images": [
+      {
+        "coverType": "poster",
+        "remoteUrl": "https://image.tmdb.org/t/p/original/76AKQPdH3M8cvsFR9K8JsOzVlY5.jpg",
+        "url": "/MediaCover/5/poster.jpg?h=f9ba225753cba66238ae"
+      },
+      {
+        "coverType": "fanart",
+        "remoteUrl": "https://image.tmdb.org/t/p/original/aT3sRVqgpkyCo23fp9myVfKPWbA.jpg",
+        "url": "/MediaCover/5/fanart.jpg?h=be659cd8937c908128ea"
+      }
+    ],
+    "imdbId": "tt16419074",
+    "inCinemas": "2023-04-05T00:00:00Z",
+    "isAvailable": true,
+    "keywords": [
+      "1980s",
+      "based on true story",
+      "basketball",
+      "duringcreditsstinger",
+      "national basketball association (nba)",
+      "shoe",
+      "sports"
+    ],
+    "minimumAvailability": "released",
+    "monitored": false,
+    "movieFileId": 0,
+    "originalLanguage": {
+      "id": 1,
+      "name": "English"
+    },
+    "originalTitle": "Air",
+    "overview": "Discover the game-changing partnership between a then undiscovered Michael Jordan and Nike's fledgling basketball division which revolutionized the world of sports and culture with the Air Jordan brand.",
+    "path": "/movies/Air (2023)",
+    "physicalRelease": "2023-09-12T00:00:00Z",
+    "popularity": 5.9408,
+    "qualityProfileId": 11,
+    "ratings": {
+      "imdb": {
+        "type": "user",
+        "value": 7.4,
+        "votes": 200699
+      },
+      "metacritic": {
+        "type": "user",
+        "value": 73,
+        "votes": 0
+      },
+      "rottenTomatoes": {
+        "type": "user",
+        "value": 93,
+        "votes": 0
+      },
+      "tmdb": {
+        "type": "user",
+        "value": 7.277,
+        "votes": 2527
+      },
+      "trakt": {
+        "type": "user",
+        "value": 7.63103,
+        "votes": 9654
+      }
+    },
+    "releaseDate": "2023-04-05T00:00:00Z",
+    "rootFolderPath": "/movies",
+    "runtime": 112,
+    "secondaryYearSourceId": 0,
+    "sizeOnDisk": 0,
+    "sortTitle": "air",
+    "statistics": {
+      "movieFileCount": 0,
+      "movieFileQualities": [],
+      "releaseGroups": [],
+      "sizeOnDisk": 0
+    },
+    "status": "released",
+    "studio": "Amazon Studios",
+    "tags": [
+      1
+    ],
+    "title": "Air",
+    "titleSlug": "964980",
+    "tmdbId": 964980,
+    "website": "https://www.amazon.com/salp/air?hhf",
+    "year": 2023,
+    "youTubeTrailerId": "Euy4Yu6B3nU"
+  },
+  "recordedAt": "2026-11-13T12:38:48Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/movie/5"
+  },
+  "status": 200
+}

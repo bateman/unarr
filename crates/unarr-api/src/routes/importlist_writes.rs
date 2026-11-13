@@ -14,8 +14,10 @@ use serde_json::{json, Map, Value};
 use unarr_core::commands::{CommandBody, CommandPriority, CommandTrigger};
 use unarr_core::importlists::ImportLists;
 use unarr_core::model::{Provider, ProviderKind};
+use unarr_core::movies::importlists::MovieImportLists;
 use unarr_core::store;
 use unarr_core::validation::{self, ValidationFailure};
+use unarr_core::Personality;
 
 use crate::error::{ApiError, ApiResult};
 use crate::query::Params;
@@ -24,6 +26,20 @@ use crate::schemas::{self, SchemaKind};
 use crate::state::AppState;
 
 const KIND: ProviderKind = ProviderKind::ImportList;
+
+/// Whether this is Radarr, whose lists name movies.
+fn movies(state: &AppState) -> bool {
+    state.personality() == Personality::Radarr
+}
+
+/// The settings' own rules, for the lists of this personality.
+fn validate_settings(state: &AppState, p: &Provider) -> Vec<ValidationFailure> {
+    if movies(state) {
+        MovieImportLists::validate_settings(p)
+    } else {
+        ImportLists::validate_settings(p)
+    }
+}
 
 async fn list(state: &AppState) -> anyhow::Result<Vec<Provider>> {
     state
@@ -126,6 +142,9 @@ async fn validate_resource(
             json!(profile),
         ));
     }
+    if movies(state) && body["minimumAvailability"].is_null() {
+        failures.push(ValidationFailure::not_null("MinimumAvailability"));
+    }
     if method == "POST" && !test && !body["fields"].is_array() {
         failures.push(ValidationFailure::not_null("Fields"));
     }
@@ -147,6 +166,14 @@ const ATTRIBUTES: &[(&str, Value)] = &[
     ("seasonFolder", Value::Bool(false)),
 ];
 
+/// Radarr's: whether the list is read at all, whether what it names is
+/// added, and whether a movie it adds is searched for.
+const MOVIE_ATTRIBUTES: &[(&str, Value)] = &[
+    ("enabled", Value::Bool(false)),
+    ("enableAuto", Value::Bool(false)),
+    ("searchOnAdd", Value::Bool(false)),
+];
+
 /// `ImportListResourceMapper.ToModel`.
 fn to_model(
     personality: unarr_core::Personality,
@@ -161,8 +188,10 @@ fn to_model(
         )));
     };
     let settings = schemas::read_fields(schema, &body["fields"], existing.map(|e| &e.settings));
+    let movies = personality == Personality::Radarr;
     let mut attributes = Map::new();
-    for (name, default) in ATTRIBUTES {
+    let flags = if movies { MOVIE_ATTRIBUTES } else { ATTRIBUTES };
+    for (name, default) in flags {
         let value = body.get(*name).filter(|v| v.is_boolean()).unwrap_or(default);
         attributes.insert((*name).to_string(), value.clone());
     }
@@ -170,9 +199,17 @@ fn to_model(
         let s = body[name].as_str().unwrap_or(default);
         json!(lower_first(s))
     };
-    attributes.insert("shouldMonitor".into(), text("shouldMonitor", "unknown"));
-    attributes.insert("monitorNewItems".into(), text("monitorNewItems", "all"));
-    attributes.insert("seriesType".into(), text("seriesType", "standard"));
+    if movies {
+        attributes.insert("monitor".into(), text("monitor", "movieOnly"));
+        attributes.insert(
+            "minimumAvailability".into(),
+            text("minimumAvailability", "released"),
+        );
+    } else {
+        attributes.insert("shouldMonitor".into(), text("shouldMonitor", "unknown"));
+        attributes.insert("monitorNewItems".into(), text("monitorNewItems", "all"));
+        attributes.insert("seriesType".into(), text("seriesType", "standard"));
+    }
     attributes.insert(
         "rootFolderPath".into(),
         body.get("rootFolderPath").cloned().unwrap_or(Value::Null),
@@ -206,15 +243,31 @@ fn lower_first(s: &str) -> String {
     }
 }
 
-/// `ImportListDefinition.Enable`.
-fn enabled(p: &Provider) -> bool {
-    p.attributes["enableAutomaticAdd"].as_bool().unwrap_or(false)
+/// `ImportListDefinition.Enable`: Radarr reads a list that is enabled,
+/// whether or not it adds what it names; Sonarr only one that adds.
+fn enabled(state: &AppState, p: &Provider) -> bool {
+    let key = if movies(state) {
+        "enabled"
+    } else {
+        "enableAutomaticAdd"
+    };
+    p.attributes[key].as_bool().unwrap_or(false)
 }
 
 /// `_importListFactory.Test(definition)`: a stored list remembers how its
 /// test went.
 async fn test_provider(state: &AppState, p: &Provider) -> ApiResult<Vec<ValidationFailure>> {
-    let lists = state.commands()?.import_lists();
+    let runtime = state.commands()?;
+    if movies(state) {
+        let lists = runtime.movie_import_lists();
+        let ctx = unarr_core::movies::refresh::map_context(state.db(), state.now()).await?;
+        let failures = lists.test(runtime.movie_provider().as_ref(), &ctx, p).await;
+        lists
+            .record_test(p.id, !validation::has_errors(&failures), state.now())
+            .await?;
+        return Ok(failures);
+    }
+    let lists = runtime.import_lists();
     let failures = lists.test(p).await;
     lists
         .record_test(p.id, !validation::has_errors(&failures), state.now())
@@ -262,8 +315,8 @@ pub async fn create(State(state): State<AppState>, uri: Uri, Json(body): Json<Va
     }
     validate_resource(&state, &body, 0, "POST", false).await?;
     let mut provider = to_model(state.personality(), &body, 0, None)?;
-    if enabled(&provider) {
-        verify(ImportLists::validate_settings(&provider), !force_save)?;
+    if enabled(&state, &provider) {
+        verify(validate_settings(&state, &provider), !force_save)?;
         verify(test_provider(&state, &provider).await?, !force_save)?;
     }
     let stored = state
@@ -276,6 +329,11 @@ pub async fn create(State(state): State<AppState>, uri: Uri, Json(body): Json<Va
         .await?;
     let resource = provider_resource(state.personality(), &stored);
     broadcast(&state, "created", resource.clone());
+    if movies(&state) {
+        // `ProviderAddedEvent<IImportList>`, which Radarr's handler takes
+        // as its `Updated` twin: the new list is synced at once.
+        queue_sync(&state, stored.id).await?;
+    }
     let location = format!("{}/api/v3/importlist/{}", state.settings().url_base, stored.id);
     Ok((
         StatusCode::CREATED,
@@ -315,8 +373,8 @@ pub async fn update(
     };
     let provider = to_model(state.personality(), &body, existing.id, Some(&existing))?;
     let changed = provider != existing;
-    if enabled(&provider) {
-        verify(ImportLists::validate_settings(&provider), !force_save)?;
+    if enabled(&state, &provider) {
+        verify(validate_settings(&state, &provider), !force_save)?;
         if !force_save && changed {
             verify(test_provider(&state, &provider).await?, true)?;
         }
@@ -344,12 +402,28 @@ pub async fn delete(State(state): State<AppState>, Path(id): Path<i64>) -> ApiRe
         .db()
         .call(move |conn| store::providers::delete_provider(conn, KIND, id))
         .await?;
+    // `RestController.Delete` announces the deletion whether or not the
+    // list was there; Sonarr's handler of the event does not run for one
+    // that was not.
+    broadcast(&state, "deleted", json!({"id": id}));
     if removed {
-        broadcast(&state, "deleted", json!({"id": id}));
-        state.commands()?.import_list_deleted().await;
+        list_deleted(&state).await?;
         lists_changed(&state);
     }
     Ok(Json(json!({})))
+}
+
+/// `ProviderDeletedEvent<IImportList>`: the library is checked against
+/// the lists that remain.
+async fn list_deleted(state: &AppState) -> ApiResult<()> {
+    if !movies(state) {
+        state.commands()?.import_list_deleted().await;
+        return Ok(());
+    }
+    // Radarr's clean runs with the next sync, not on the deletion: the
+    // movies of the list that went are removed from the Discover page by
+    // the housekeeping.
+    Ok(())
 }
 
 /// `POST /importlist/test[?forceTest=true]`: `{}` when the target answers.
@@ -363,7 +437,7 @@ pub async fn test(
     validate_resource(&state, &body, id, "POST", true).await?;
     let existing = if id > 0 { find(&state, id).await? } else { None };
     let provider = to_model(state.personality(), &body, id, existing.as_ref())?;
-    verify(ImportLists::validate_settings(&provider), !force_test)?;
+    verify(validate_settings(&state, &provider), !force_test)?;
     verify(test_provider(&state, &provider).await?, true)?;
     Ok(Json(json!({})))
 }
@@ -377,8 +451,8 @@ pub async fn test_all(State(state): State<AppState>) -> ApiResult<Response> {
     let mut providers = list(&state).await?;
     providers.sort_by_key(|p| p.id);
     for p in providers {
-        let settings_failures = ImportLists::validate_settings(&p);
-        if validation::has_errors(&settings_failures) || !enabled(&p) {
+        let settings_failures = validate_settings(&state, &p);
+        if validation::has_errors(&settings_failures) || !enabled(&state, &p) {
             continue;
         }
         let mut failures: Vec<ValidationFailure> =
@@ -416,6 +490,10 @@ pub async fn action(
     let existing = if id > 0 { find(&state, id).await? } else { None };
     let provider = to_model(state.personality(), &body, id, existing.as_ref())?;
     let query = Params::from_uri(&uri);
+    if movies(&state) {
+        // No IMDb list has an action.
+        return Ok(Json(json!({})));
+    }
     let answer = state
         .commands()?
         .import_lists()
@@ -462,9 +540,20 @@ pub async fn bulk_update(State(state): State<AppState>, Json(body): Json<Value>)
             p.tags.sort_unstable();
             p.tags.dedup();
         }
-        for name in ["enableAutomaticAdd", "rootFolderPath", "qualityProfileId"] {
-            if !body[name].is_null() {
-                p.attributes[name] = body[name].clone();
+        let bulk: &[&str] = if movies(&state) {
+            &[
+                "enabled",
+                "enableAuto",
+                "rootFolderPath",
+                "qualityProfileId",
+                "minimumAvailability",
+            ]
+        } else {
+            &["enableAutomaticAdd", "rootFolderPath", "qualityProfileId"]
+        };
+        for name in bulk {
+            if !body[*name].is_null() {
+                p.attributes[*name] = body[*name].clone();
             }
         }
         let to_store = p.clone();
@@ -501,7 +590,7 @@ pub async fn bulk_delete(State(state): State<AppState>, Json(body): Json<Value>)
         }
     }
     if any {
-        state.commands()?.import_list_deleted().await;
+        list_deleted(&state).await?;
         lists_changed(&state);
     }
     Ok(Json(json!({})))

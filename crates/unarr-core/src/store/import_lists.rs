@@ -185,10 +185,21 @@ pub fn mark_cleaned(conn: &Connection) -> anyhow::Result<()> {
 
 /// A deleted list takes its items and its status along.
 pub fn delete_list(conn: &Connection, list_id: i64) -> anyhow::Result<()> {
-    conn.execute(
-        "DELETE FROM import_list_items WHERE import_list_id = ?1",
-        params![list_id],
-    )?;
+    // What a list named is one table in Sonarr (series) and another in
+    // Radarr (movies); each database holds only its own.
+    for table in ["import_list_items", "import_list_movies"] {
+        let exists: bool = conn.query_row(
+            "SELECT COUNT(*) > 0 FROM sqlite_master WHERE type = 'table' AND name = ?1",
+            [table],
+            |r| r.get(0),
+        )?;
+        if exists {
+            conn.execute(
+                &format!("DELETE FROM {table} WHERE import_list_id = ?1"),
+                params![list_id],
+            )?;
+        }
+    }
     conn.execute(
         "DELETE FROM import_list_status WHERE provider_id = ?1",
         params![list_id],

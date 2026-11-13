@@ -1,0 +1,20 @@
+{
+  "body": {
+    "errors": {
+      "$.certificationCountry": [
+        "The JSON value could not be converted to NzbDrone.Core.MetadataSource.SkyHook.Resource.TMDbCountryCode. Path: $.certificationCountry | LineNumber: 0 | BytePositionInLine: 34."
+      ]
+    },
+    "status": 400,
+    "title": "One or more validation errors occurred.",
+    "traceId": "00-73743c57f8e4751c1f15d7bfcdba32cf-aece88b1b6f408dc-00",
+    "type": "https://tools.ietf.org/html/rfc9110#section-15.5.1"
+  },
+  "recordedAt": "2026-11-13T12:41:12Z",
+  "request": {
+    "body": "bodies/config-metadata-put-country.json",
+    "method": "PUT",
+    "path": "/api/v3/config/metadata/1"
+  },
+  "status": 400
+}

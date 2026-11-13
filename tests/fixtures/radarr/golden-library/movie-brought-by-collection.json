@@ -1,0 +1,267 @@
+{
+  "body": [
+    {
+      "added": "2026-11-13T12:39:08Z",
+      "alternateTitles": [
+        {
+          "id": 2833,
+          "movieMetadataId": 520,
+          "sourceType": "tmdb",
+          "title": "Dangerous Days"
+        },
+        {
+          "id": 2834,
+          "movieMetadataId": 520,
+          "sourceType": "tmdb",
+          "title": "Той, хто біжить по лез"
+        },
+        {
+          "id": 2835,
+          "movieMetadataId": 520,
+          "sourceType": "tmdb",
+          "title": "Blade Runner - Metropolis 2020"
+        },
+        {
+          "id": 2836,
+          "movieMetadataId": 520,
+          "sourceType": "tmdb",
+          "title": "Blade Runner (International Cut)"
+        },
+        {
+          "id": 2837,
+          "movieMetadataId": 520,
+          "sourceType": "tmdb",
+          "title": "Blade Runner (Final Cut)"
+        },
+        {
+          "id": 2838,
+          "movieMetadataId": 520,
+          "sourceType": "tmdb",
+          "title": "Blade Runner: O Caçador de Andróides"
+        },
+        {
+          "id": 2839,
+          "movieMetadataId": 520,
+          "sourceType": "tmdb",
+          "title": "銀翼殺手"
+        },
+        {
+          "id": 2840,
+          "movieMetadataId": 520,
+          "sourceType": "tmdb",
+          "title": "ブレードランナー"
+        },
+        {
+          "id": 2841,
+          "movieMetadataId": 520,
+          "sourceType": "tmdb",
+          "title": "Blade Runner Director's Cut"
+        },
+        {
+          "id": 2842,
+          "movieMetadataId": 520,
+          "sourceType": "tmdb",
+          "title": "블레이드 러너"
+        },
+        {
+          "id": 2843,
+          "movieMetadataId": 520,
+          "sourceType": "tmdb",
+          "title": "서기 2019년"
+        },
+        {
+          "id": 2844,
+          "movieMetadataId": 520,
+          "sourceType": "tmdb",
+          "title": "서기 2019 블레이드 러너"
+        },
+        {
+          "id": 2845,
+          "movieMetadataId": 520,
+          "sourceType": "tmdb",
+          "title": "ブレードランナー：1982"
+        },
+        {
+          "id": 2846,
+          "movieMetadataId": 520,
+          "sourceType": "tmdb",
+          "title": "2020"
+        },
+        {
+          "id": 2847,
+          "movieMetadataId": 520,
+          "sourceType": "tmdb",
+          "title": "Bıçak Sırtı"
+        },
+        {
+          "id": 2848,
+          "movieMetadataId": 520,
+          "sourceType": "tmdb",
+          "title": "Łowca Androidów"
+        },
+        {
+          "id": 2849,
+          "movieMetadataId": 520,
+          "sourceType": "tmdb",
+          "title": "銀翼殺手 終極版"
+        },
+        {
+          "id": 2850,
+          "movieMetadataId": 520,
+          "sourceType": "tmdb",
+          "title": "블레이드 러너: 파이널 컷"
+        },
+        {
+          "id": 2851,
+          "movieMetadataId": 520,
+          "sourceType": "tmdb",
+          "title": "Blade Runner 1"
+        },
+        {
+          "id": 2852,
+          "movieMetadataId": 520,
+          "sourceType": "tmdb",
+          "title": "Blade Runner 1 - 2019"
+        },
+        {
+          "id": 2853,
+          "movieMetadataId": 520,
+          "sourceType": "tmdb",
+          "title": "Blade Runner 2019"
+        },
+        {
+          "id": 2854,
+          "movieMetadataId": 520,
+          "sourceType": "tmdb",
+          "title": "Блейд Рънър"
+        }
+      ],
+      "certification": "R",
+      "cleanTitle": "bladerunner",
+      "collection": {
+        "title": "Blade Runner Collection",
+        "tmdbId": 422837
+      },
+      "digitalRelease": "2016-12-24T00:00:00Z",
+      "folderName": "/movies/Blade Runner (1982) {tmdb-78}",
+      "genres": [
+        "Science Fiction",
+        "Drama",
+        "Thriller"
+      ],
+      "hasFile": false,
+      "id": 330,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/63N9uy8nd9j7Eog2axPQ8lbr3Wj.jpg",
+          "url": "/MediaCover/330/poster.jpg?h=260418fed1f1d6039c6b"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/2spEHYDcyE9r9mS7AFEscfKVDzO.jpg",
+          "url": "/MediaCover/330/fanart.jpg?h=0b4de9684d06011cd0b4"
+        }
+      ],
+      "imdbId": "tt0083658",
+      "inCinemas": "1982-06-25T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "2010s",
+        "admiring",
+        "alcoholic",
+        "android",
+        "artificial intelligence (a.i.)",
+        "based on novel or book",
+        "blade runner",
+        "bounty hunter",
+        "cult movie",
+        "cyberpunk",
+        "dystopia",
+        "excited",
+        "flying car",
+        "fugitive",
+        "futuristic",
+        "genetics",
+        "grim",
+        "human clone",
+        "humanity",
+        "humanoid robot",
+        "los angeles, california",
+        "neo-noir",
+        "origami",
+        "suspenseful",
+        "tech noir",
+        "unicorn"
+      ],
+      "lastSearchTime": "2026-11-13T12:39:08Z",
+      "minimumAvailability": "inCinemas",
+      "monitored": true,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Blade Runner",
+      "overview": "In the smog-choked dystopian Los Angeles of 2019, blade runner Rick Deckard is called out of retirement to terminate a quartet of replicants who have escaped to Earth seeking their creator for a way to extend their short life spans.",
+      "path": "/movies/Blade Runner (1982) {tmdb-78}",
+      "physicalRelease": "1984-09-07T00:00:00Z",
+      "popularity": 18.175,
+      "qualityProfileId": 7,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 8.1,
+          "votes": 896550
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 84,
+          "votes": 0
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 89,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 7.9,
+          "votes": 15632
+        },
+        "trakt": {
+          "type": "user",
+          "value": 7.97593,
+          "votes": 25757
+        }
+      },
+      "releaseDate": "1982-06-25T00:00:00Z",
+      "rootFolderPath": "/movies",
+      "runtime": 118,
+      "secondaryYearSourceId": 0,
+      "sizeOnDisk": 0,
+      "sortTitle": "blade runner",
+      "statistics": {
+        "movieFileCount": 0,
+        "movieFileQualities": [],
+        "releaseGroups": [],
+        "sizeOnDisk": 0
+      },
+      "status": "released",
+      "studio": "Shaw Brothers",
+      "tags": [],
+      "title": "Blade Runner",
+      "titleSlug": "78",
+      "tmdbId": 78,
+      "website": "http://www.warnerbros.com/blade-runner",
+      "year": 1982,
+      "youTubeTrailerId": "qoEyZoOTtss"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:39:38Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/movie?tmdbId=78"
+  },
+  "status": 200
+}

@@ -1,0 +1,13 @@
+{
+  "body": {
+    "id": 4,
+    "label": "renamed"
+  },
+  "recordedAt": "2026-11-13T12:41:20Z",
+  "request": {
+    "body": "bodies/tag-update.json",
+    "method": "PUT",
+    "path": "/api/v3/tag/4"
+  },
+  "status": 202
+}

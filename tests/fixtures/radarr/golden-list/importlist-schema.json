@@ -1,0 +1,1818 @@
+{
+  "body": [
+    {
+      "configContract": "CouchPotatoSettings",
+      "enableAuto": true,
+      "enabled": false,
+      "fields": [
+        {
+          "advanced": false,
+          "helpText": "URL to access your CouchPotato instance.",
+          "isFloat": false,
+          "label": "CouchPotato URL",
+          "name": "link",
+          "order": 0,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": "http://localhost"
+        },
+        {
+          "advanced": false,
+          "helpText": "Port your CouchPotato instance uses.",
+          "isFloat": false,
+          "label": "CouchPotato Port",
+          "name": "port",
+          "order": 1,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": 5050
+        },
+        {
+          "advanced": false,
+          "helpText": "If you have CouchPotato configured via reverse proxy put the base path here. e.g. couchpotato. Leave blank for no base URL.",
+          "isFloat": false,
+          "label": "CouchPotato Url Base",
+          "name": "urlBase",
+          "order": 2,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": ""
+        },
+        {
+          "advanced": false,
+          "helpText": "CouchPotato API Key. This can found within Settings > General",
+          "isFloat": false,
+          "label": "CouchPotato API Key",
+          "name": "apiKey",
+          "order": 3,
+          "privacy": "apiKey",
+          "type": "textbox"
+        },
+        {
+          "advanced": false,
+          "helpText": "Only add wanted movies.",
+          "isFloat": false,
+          "label": "Only Wanted",
+          "name": "onlyActive",
+          "order": 4,
+          "privacy": "normal",
+          "type": "checkbox",
+          "value": true
+        }
+      ],
+      "implementation": "CouchPotatoImport",
+      "implementationName": "CouchPotato",
+      "infoLink": "https://wiki.servarr.com/radarr/supported#couchpotatoimport",
+      "listOrder": 0,
+      "listType": "program",
+      "minRefreshInterval": "00:30:00",
+      "minimumAvailability": "tba",
+      "monitor": "movieOnly",
+      "presets": [],
+      "qualityProfileId": 0,
+      "searchOnAdd": false,
+      "tags": []
+    },
+    {
+      "configContract": "RadarrListSettings",
+      "enableAuto": true,
+      "enabled": false,
+      "fields": [
+        {
+          "advanced": false,
+          "helpText": "The URL for the movie list",
+          "isFloat": false,
+          "label": "List URL",
+          "name": "url",
+          "order": 0,
+          "privacy": "normal",
+          "type": "textbox"
+        }
+      ],
+      "implementation": "RadarrListImport",
+      "implementationName": "Custom Lists",
+      "infoLink": "https://wiki.servarr.com/radarr/supported#radarrlistimport",
+      "listOrder": 6,
+      "listType": "advanced",
+      "minRefreshInterval": "12:00:00",
+      "minimumAvailability": "tba",
+      "monitor": "movieOnly",
+      "presets": [],
+      "qualityProfileId": 0,
+      "searchOnAdd": false,
+      "tags": []
+    },
+    {
+      "configContract": "IMDbListSettings",
+      "enableAuto": true,
+      "enabled": false,
+      "fields": [
+        {
+          "advanced": false,
+          "helpText": "IMDb user ID (e.g. ur12345678), 'top250' or 'popular'",
+          "isFloat": false,
+          "label": "List/User ID",
+          "name": "listId",
+          "order": 0,
+          "privacy": "normal",
+          "type": "textbox"
+        }
+      ],
+      "implementation": "IMDbListImport",
+      "implementationName": "IMDb Lists",
+      "infoLink": "https://wiki.servarr.com/radarr/supported#imdblistimport",
+      "listOrder": 5,
+      "listType": "other",
+      "minRefreshInterval": "12:00:00",
+      "minimumAvailability": "tba",
+      "monitor": "movieOnly",
+      "presets": [
+        {
+          "configContract": "IMDbListSettings",
+          "enableAuto": true,
+          "enabled": true,
+          "fields": [
+            {
+              "advanced": false,
+              "helpText": "IMDb user ID (e.g. ur12345678), 'top250' or 'popular'",
+              "isFloat": false,
+              "label": "List/User ID",
+              "name": "listId",
+              "order": 0,
+              "privacy": "normal",
+              "type": "textbox",
+              "value": "top250"
+            }
+          ],
+          "implementation": "IMDbListImport",
+          "infoLink": "https://wiki.servarr.com/radarr/supported#imdblistimport",
+          "listOrder": 0,
+          "listType": "program",
+          "minRefreshInterval": "12:00:00",
+          "minimumAvailability": "tba",
+          "monitor": "movieOnly",
+          "name": "IMDb Top 250",
+          "qualityProfileId": 1,
+          "searchOnAdd": false,
+          "tags": []
+        },
+        {
+          "configContract": "IMDbListSettings",
+          "enableAuto": true,
+          "enabled": true,
+          "fields": [
+            {
+              "advanced": false,
+              "helpText": "IMDb user ID (e.g. ur12345678), 'top250' or 'popular'",
+              "isFloat": false,
+              "label": "List/User ID",
+              "name": "listId",
+              "order": 0,
+              "privacy": "normal",
+              "type": "textbox",
+              "value": "popular"
+            }
+          ],
+          "implementation": "IMDbListImport",
+          "infoLink": "https://wiki.servarr.com/radarr/supported#imdblistimport",
+          "listOrder": 0,
+          "listType": "program",
+          "minRefreshInterval": "12:00:00",
+          "minimumAvailability": "tba",
+          "monitor": "movieOnly",
+          "name": "IMDb Popular Movies",
+          "qualityProfileId": 1,
+          "searchOnAdd": false,
+          "tags": []
+        }
+      ],
+      "qualityProfileId": 0,
+      "searchOnAdd": false,
+      "tags": []
+    },
+    {
+      "configContract": "PlexListSettings",
+      "enableAuto": true,
+      "enabled": false,
+      "fields": [
+        {
+          "advanced": false,
+          "hidden": "hidden",
+          "isFloat": false,
+          "label": "Access Token",
+          "name": "accessToken",
+          "order": 0,
+          "privacy": "normal",
+          "type": "textbox"
+        },
+        {
+          "advanced": false,
+          "isFloat": false,
+          "label": "Authenticate with Plex.tv",
+          "name": "signIn",
+          "order": 1,
+          "privacy": "normal",
+          "type": "oAuth",
+          "value": "startOAuth"
+        }
+      ],
+      "implementation": "PlexImport",
+      "implementationName": "Plex Watchlist",
+      "infoLink": "https://wiki.servarr.com/radarr/supported#pleximport",
+      "listOrder": 3,
+      "listType": "plex",
+      "minRefreshInterval": "06:00:00",
+      "minimumAvailability": "tba",
+      "monitor": "movieOnly",
+      "presets": [],
+      "qualityProfileId": 0,
+      "searchOnAdd": false,
+      "tags": []
+    },
+    {
+      "configContract": "PlexRssImportSettings",
+      "enableAuto": true,
+      "enabled": false,
+      "fields": [
+        {
+          "advanced": false,
+          "helpLink": "https://app.plex.tv/desktop/#!/settings/watchlist",
+          "isFloat": false,
+          "label": "Url",
+          "name": "url",
+          "order": 0,
+          "privacy": "normal",
+          "type": "textbox"
+        }
+      ],
+      "implementation": "PlexRssImport",
+      "implementationName": "Plex Watchlist RSS",
+      "infoLink": "https://wiki.servarr.com/radarr/supported#plexrssimport",
+      "listOrder": 3,
+      "listType": "plex",
+      "minRefreshInterval": "06:00:00",
+      "minimumAvailability": "tba",
+      "monitor": "movieOnly",
+      "presets": [],
+      "qualityProfileId": 0,
+      "searchOnAdd": false,
+      "tags": []
+    },
+    {
+      "configContract": "RadarrSettings",
+      "enableAuto": true,
+      "enabled": false,
+      "fields": [
+        {
+          "advanced": false,
+          "helpText": "URL, including port, of the Radarr instance to import from (Radarr 3.0 or higher)",
+          "isFloat": false,
+          "label": "Full URL",
+          "name": "baseUrl",
+          "order": 0,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": ""
+        },
+        {
+          "advanced": false,
+          "helpText": "API Key of the Radarr instance to import from (Radarr 3.0 or higher)",
+          "isFloat": false,
+          "label": "API Key",
+          "name": "apiKey",
+          "order": 1,
+          "privacy": "apiKey",
+          "type": "textbox",
+          "value": ""
+        },
+        {
+          "advanced": false,
+          "helpText": "Quality Profiles from the source instance to import from",
+          "isFloat": false,
+          "label": "Quality Profiles",
+          "name": "profileIds",
+          "order": 2,
+          "privacy": "normal",
+          "selectOptionsProviderAction": "getProfiles",
+          "type": "select",
+          "value": []
+        },
+        {
+          "advanced": false,
+          "helpText": "Tags from the source instance to import from",
+          "isFloat": false,
+          "label": "Tags",
+          "name": "tagIds",
+          "order": 3,
+          "privacy": "normal",
+          "selectOptionsProviderAction": "getTags",
+          "type": "select",
+          "value": []
+        },
+        {
+          "advanced": false,
+          "helpText": "Root Folders from the source instance to import from",
+          "isFloat": false,
+          "label": "Root Folders",
+          "name": "rootFolderPaths",
+          "order": 4,
+          "privacy": "normal",
+          "selectOptionsProviderAction": "getRootFolders",
+          "type": "select",
+          "value": []
+        }
+      ],
+      "implementation": "RadarrImport",
+      "implementationName": "Radarr",
+      "infoLink": "https://wiki.servarr.com/radarr/supported#radarrimport",
+      "listOrder": 0,
+      "listType": "program",
+      "minRefreshInterval": "00:15:00",
+      "minimumAvailability": "tba",
+      "monitor": "movieOnly",
+      "presets": [],
+      "qualityProfileId": 0,
+      "searchOnAdd": false,
+      "tags": []
+    },
+    {
+      "configContract": "RSSImportSettings",
+      "enableAuto": true,
+      "enabled": true,
+      "fields": [
+        {
+          "advanced": false,
+          "helpText": "Link to the rss feed of movies.",
+          "isFloat": false,
+          "label": "RSS Link",
+          "name": "link",
+          "order": 0,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": "https://rss.yoursite.com"
+        }
+      ],
+      "implementation": "RSSImport",
+      "implementationName": "RSS List",
+      "infoLink": "https://wiki.servarr.com/radarr/supported#rssimport",
+      "listOrder": 6,
+      "listType": "advanced",
+      "minRefreshInterval": "12:00:00",
+      "minimumAvailability": "tba",
+      "monitor": "movieOnly",
+      "presets": [
+        {
+          "configContract": "RSSImportSettings",
+          "enableAuto": true,
+          "enabled": true,
+          "fields": [
+            {
+              "advanced": false,
+              "helpText": "Link to the rss feed of movies.",
+              "isFloat": false,
+              "label": "RSS Link",
+              "name": "link",
+              "order": 0,
+              "privacy": "normal",
+              "type": "textbox",
+              "value": "https://rss.imdb.com/list/YOURLISTID"
+            }
+          ],
+          "implementation": "RSSImport",
+          "infoLink": "https://wiki.servarr.com/radarr/supported#rssimport",
+          "listOrder": 0,
+          "listType": "program",
+          "minRefreshInterval": "12:00:00",
+          "minimumAvailability": "tba",
+          "monitor": "movieOnly",
+          "name": "IMDb List",
+          "qualityProfileId": 1,
+          "searchOnAdd": false,
+          "tags": []
+        },
+        {
+          "configContract": "RSSImportSettings",
+          "enableAuto": true,
+          "enabled": true,
+          "fields": [
+            {
+              "advanced": false,
+              "helpText": "Link to the rss feed of movies.",
+              "isFloat": false,
+              "label": "RSS Link",
+              "name": "link",
+              "order": 0,
+              "privacy": "normal",
+              "type": "textbox",
+              "value": "https://rss.imdb.com/user/IMDBUSERID/watchlist"
+            }
+          ],
+          "implementation": "RSSImport",
+          "infoLink": "https://wiki.servarr.com/radarr/supported#rssimport",
+          "listOrder": 0,
+          "listType": "program",
+          "minRefreshInterval": "12:00:00",
+          "minimumAvailability": "tba",
+          "monitor": "movieOnly",
+          "name": "IMDb Watchlist",
+          "qualityProfileId": 1,
+          "searchOnAdd": false,
+          "tags": []
+        }
+      ],
+      "qualityProfileId": 0,
+      "searchOnAdd": false,
+      "tags": []
+    },
+    {
+      "configContract": "SimklUserSettings",
+      "enableAuto": true,
+      "enabled": false,
+      "fields": [
+        {
+          "advanced": false,
+          "hidden": "hidden",
+          "isFloat": false,
+          "label": "Access Token",
+          "name": "accessToken",
+          "order": 0,
+          "privacy": "normal",
+          "type": "textbox"
+        },
+        {
+          "advanced": false,
+          "hidden": "hidden",
+          "isFloat": false,
+          "label": "Refresh Token",
+          "name": "refreshToken",
+          "order": 1,
+          "privacy": "normal",
+          "type": "textbox"
+        },
+        {
+          "advanced": false,
+          "hidden": "hidden",
+          "isFloat": false,
+          "label": "Expires",
+          "name": "expires",
+          "order": 2,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": "0001-01-01T00:00:00Z"
+        },
+        {
+          "advanced": false,
+          "hidden": "hidden",
+          "isFloat": false,
+          "label": "Auth User",
+          "name": "authUser",
+          "order": 3,
+          "privacy": "normal",
+          "type": "textbox"
+        },
+        {
+          "advanced": false,
+          "helpText": "Type of movie you're seeking to import from",
+          "isFloat": false,
+          "label": "Movie Type",
+          "name": "movieType",
+          "order": 4,
+          "privacy": "normal",
+          "selectOptions": [
+            {
+              "dividerAfter": false,
+              "name": "Movies",
+              "order": 0,
+              "value": 0
+            },
+            {
+              "dividerAfter": false,
+              "name": "Anime",
+              "order": 1,
+              "value": 1
+            }
+          ],
+          "type": "select",
+          "value": 0
+        },
+        {
+          "advanced": false,
+          "helpText": "Type of list you're seeking to import from",
+          "isFloat": false,
+          "label": "List Type",
+          "name": "listType",
+          "order": 5,
+          "privacy": "normal",
+          "selectOptions": [
+            {
+              "dividerAfter": false,
+              "hint": "(0)",
+              "name": "Watching",
+              "order": 7,
+              "value": 0
+            },
+            {
+              "dividerAfter": false,
+              "hint": "(1)",
+              "name": "Plan To Watch",
+              "order": 9,
+              "value": 1
+            },
+            {
+              "dividerAfter": false,
+              "hint": "(2)",
+              "name": "Hold",
+              "order": 11,
+              "value": 2
+            },
+            {
+              "dividerAfter": false,
+              "hint": "(3)",
+              "name": "Completed",
+              "order": 13,
+              "value": 3
+            },
+            {
+              "dividerAfter": false,
+              "hint": "(4)",
+              "name": "Dropped",
+              "order": 15,
+              "value": 4
+            }
+          ],
+          "type": "select",
+          "value": 0
+        },
+        {
+          "advanced": false,
+          "isFloat": false,
+          "label": "Authenticate with Simkl",
+          "name": "signIn",
+          "order": 6,
+          "privacy": "normal",
+          "type": "oAuth",
+          "value": "startOAuth"
+        }
+      ],
+      "implementation": "SimklUserImport",
+      "implementationName": "Simkl User Watchlist",
+      "infoLink": "https://wiki.servarr.com/radarr/supported#simkluserimport",
+      "listOrder": 4,
+      "listType": "simkl",
+      "minRefreshInterval": "06:00:00",
+      "minimumAvailability": "tba",
+      "monitor": "movieOnly",
+      "presets": [],
+      "qualityProfileId": 0,
+      "searchOnAdd": false,
+      "tags": []
+    },
+    {
+      "configContract": "StevenLuSettings",
+      "enableAuto": true,
+      "enabled": true,
+      "fields": [
+        {
+          "advanced": false,
+          "helpText": "Don't change this unless you know what you are doing.",
+          "isFloat": false,
+          "label": "URL",
+          "name": "link",
+          "order": 0,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": "https://popular-movies-data.stevenlu.com/movies.json"
+        }
+      ],
+      "implementation": "StevenLuImport",
+      "implementationName": "StevenLu Custom",
+      "infoLink": "https://wiki.servarr.com/radarr/supported#stevenluimport",
+      "listOrder": 6,
+      "listType": "advanced",
+      "minRefreshInterval": "1.00:00:00",
+      "minimumAvailability": "tba",
+      "monitor": "movieOnly",
+      "presets": [],
+      "qualityProfileId": 0,
+      "searchOnAdd": false,
+      "tags": []
+    },
+    {
+      "configContract": "StevenLu2Settings",
+      "enableAuto": true,
+      "enabled": true,
+      "fields": [
+        {
+          "advanced": false,
+          "helpText": "StevenLu ratings source",
+          "isFloat": false,
+          "label": "Rating source",
+          "name": "source",
+          "order": 0,
+          "privacy": "normal",
+          "selectOptions": [
+            {
+              "dividerAfter": false,
+              "name": "Standard",
+              "order": 0,
+              "value": 0
+            },
+            {
+              "dividerAfter": false,
+              "name": "Imdb",
+              "order": 1,
+              "value": 1
+            },
+            {
+              "dividerAfter": false,
+              "name": "Metacritic",
+              "order": 2,
+              "value": 2
+            },
+            {
+              "dividerAfter": false,
+              "name": "RottenTomatoes",
+              "order": 3,
+              "value": 3
+            }
+          ],
+          "type": "select",
+          "value": 0
+        },
+        {
+          "advanced": false,
+          "helpText": "Only applies if 'Rating source' is not 'Standard'",
+          "isFloat": false,
+          "label": "Minimum Score",
+          "name": "minScore",
+          "order": 1,
+          "privacy": "normal",
+          "type": "number",
+          "value": 5
+        }
+      ],
+      "implementation": "StevenLu2Import",
+      "implementationName": "StevenLu List",
+      "infoLink": "https://wiki.servarr.com/radarr/supported#stevenlu2import",
+      "listOrder": 5,
+      "listType": "other",
+      "minRefreshInterval": "12:00:00",
+      "minimumAvailability": "tba",
+      "monitor": "movieOnly",
+      "presets": [],
+      "qualityProfileId": 0,
+      "searchOnAdd": false,
+      "tags": []
+    },
+    {
+      "configContract": "TMDbCompanySettings",
+      "enableAuto": true,
+      "enabled": false,
+      "fields": [
+        {
+          "advanced": false,
+          "helpText": "TMDb Id of Company to Follow",
+          "isFloat": false,
+          "label": "Company Id",
+          "name": "companyId",
+          "order": 0,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": ""
+        }
+      ],
+      "implementation": "TMDbCompanyImport",
+      "implementationName": "TMDb Company",
+      "infoLink": "https://wiki.servarr.com/radarr/supported#tmdbcompanyimport",
+      "listOrder": 1,
+      "listType": "tmdb",
+      "minRefreshInterval": "12:00:00",
+      "minimumAvailability": "tba",
+      "monitor": "movieOnly",
+      "presets": [],
+      "qualityProfileId": 0,
+      "searchOnAdd": false,
+      "tags": []
+    },
+    {
+      "configContract": "TMDbKeywordSettings",
+      "enableAuto": true,
+      "enabled": false,
+      "fields": [
+        {
+          "advanced": false,
+          "helpText": "TMDb Id of keyword to Follow",
+          "isFloat": false,
+          "label": "Keyword Id",
+          "name": "keywordId",
+          "order": 0,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": ""
+        }
+      ],
+      "implementation": "TMDbKeywordImport",
+      "implementationName": "TMDb Keyword",
+      "infoLink": "https://wiki.servarr.com/radarr/supported#tmdbkeywordimport",
+      "listOrder": 1,
+      "listType": "tmdb",
+      "minRefreshInterval": "12:00:00",
+      "minimumAvailability": "tba",
+      "monitor": "movieOnly",
+      "presets": [],
+      "qualityProfileId": 0,
+      "searchOnAdd": false,
+      "tags": []
+    },
+    {
+      "configContract": "TMDbListSettings",
+      "enableAuto": true,
+      "enabled": false,
+      "fields": [
+        {
+          "advanced": false,
+          "helpText": "TMDb Id of List to Follow",
+          "isFloat": false,
+          "label": "ListId",
+          "name": "listId",
+          "order": 0,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": ""
+        }
+      ],
+      "implementation": "TMDbListImport",
+      "implementationName": "TMDb List",
+      "infoLink": "https://wiki.servarr.com/radarr/supported#tmdblistimport",
+      "listOrder": 1,
+      "listType": "tmdb",
+      "minRefreshInterval": "12:00:00",
+      "minimumAvailability": "tba",
+      "monitor": "movieOnly",
+      "presets": [],
+      "qualityProfileId": 0,
+      "searchOnAdd": false,
+      "tags": []
+    },
+    {
+      "configContract": "TMDbPersonSettings",
+      "enableAuto": true,
+      "enabled": false,
+      "fields": [
+        {
+          "advanced": false,
+          "helpText": "TMDb Id of Person to Follow",
+          "isFloat": false,
+          "label": "PersonId",
+          "name": "personId",
+          "order": 0,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": ""
+        },
+        {
+          "advanced": false,
+          "helpText": "Select if you want to include Cast credits",
+          "isFloat": false,
+          "label": "Person Cast",
+          "name": "personCast",
+          "order": 1,
+          "privacy": "normal",
+          "type": "checkbox",
+          "value": false
+        },
+        {
+          "advanced": false,
+          "helpText": "Select if you want to include Director credits",
+          "isFloat": false,
+          "label": "Person Director Credits",
+          "name": "personCastDirector",
+          "order": 2,
+          "privacy": "normal",
+          "type": "checkbox",
+          "value": false
+        },
+        {
+          "advanced": false,
+          "helpText": "Select if you want to include Producer credits",
+          "isFloat": false,
+          "label": "Person Producer Credits",
+          "name": "personCastProducer",
+          "order": 3,
+          "privacy": "normal",
+          "type": "checkbox",
+          "value": false
+        },
+        {
+          "advanced": false,
+          "helpText": "Select if you want to include Sound credits",
+          "isFloat": false,
+          "label": "Person Sound Credits",
+          "name": "personCastSound",
+          "order": 4,
+          "privacy": "normal",
+          "type": "checkbox",
+          "value": false
+        },
+        {
+          "advanced": false,
+          "helpText": "Select if you want to include Writing credits",
+          "isFloat": false,
+          "label": "Person Writing Credits",
+          "name": "personCastWriting",
+          "order": 5,
+          "privacy": "normal",
+          "type": "checkbox",
+          "value": false
+        }
+      ],
+      "implementation": "TMDbPersonImport",
+      "implementationName": "TMDb Person",
+      "infoLink": "https://wiki.servarr.com/radarr/supported#tmdbpersonimport",
+      "listOrder": 1,
+      "listType": "tmdb",
+      "minRefreshInterval": "12:00:00",
+      "minimumAvailability": "tba",
+      "monitor": "movieOnly",
+      "presets": [],
+      "qualityProfileId": 0,
+      "searchOnAdd": false,
+      "tags": []
+    },
+    {
+      "configContract": "TMDbPopularSettings",
+      "enableAuto": true,
+      "enabled": true,
+      "fields": [
+        {
+          "advanced": false,
+          "helpText": "Type of list your seeking to import from",
+          "isFloat": false,
+          "label": "List Type",
+          "name": "tMDbListType",
+          "order": 0,
+          "privacy": "normal",
+          "selectOptions": [
+            {
+              "dividerAfter": false,
+              "name": "Theaters",
+              "order": 1,
+              "value": 1
+            },
+            {
+              "dividerAfter": false,
+              "name": "Popular",
+              "order": 2,
+              "value": 2
+            },
+            {
+              "dividerAfter": false,
+              "name": "Top",
+              "order": 3,
+              "value": 3
+            },
+            {
+              "dividerAfter": false,
+              "name": "Upcoming",
+              "order": 4,
+              "value": 4
+            }
+          ],
+          "type": "select",
+          "value": 2
+        },
+        {
+          "advanced": false,
+          "helpText": "Filter movies by votes (0.0-10.0)",
+          "isFloat": false,
+          "label": "Minimum Vote Average",
+          "name": "filterCriteria.minVoteAverage",
+          "order": 1,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": "5"
+        },
+        {
+          "advanced": false,
+          "helpText": "Filter movies by number of votes",
+          "isFloat": false,
+          "label": "Minimum Number of Votes",
+          "name": "filterCriteria.minVotes",
+          "order": 2,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": "1"
+        },
+        {
+          "advanced": false,
+          "helpText": "Filter movies by a single certification (NR,G,PG,PG-13,R,NC-17)",
+          "isFloat": false,
+          "label": "Certification",
+          "name": "filterCriteria.certification",
+          "order": 3,
+          "privacy": "normal",
+          "type": "textbox"
+        },
+        {
+          "advanced": false,
+          "helpText": "Filter movies by TMDb Genre Ids (Comma Separated)",
+          "isFloat": false,
+          "label": "Include Genre Ids",
+          "name": "filterCriteria.includeGenreIds",
+          "order": 4,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": ""
+        },
+        {
+          "advanced": false,
+          "helpText": "Filter movies by TMDb Genre Ids (Comma Separated)",
+          "isFloat": false,
+          "label": "Exclude Genre Ids",
+          "name": "filterCriteria.excludeGenreIds",
+          "order": 5,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": ""
+        },
+        {
+          "advanced": false,
+          "helpText": "Filter movies by TMDb Company Ids (Comma Separated)",
+          "isFloat": false,
+          "label": "Include Company Ids",
+          "name": "filterCriteria.includeCompanyIds",
+          "order": 6,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": ""
+        },
+        {
+          "advanced": false,
+          "helpText": "Filter movies by TMDb Company Ids (Comma Separated)",
+          "isFloat": false,
+          "label": "Exclude Company Ids",
+          "name": "filterCriteria.excludeCompanyIds",
+          "order": 7,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": ""
+        },
+        {
+          "advanced": false,
+          "helpText": "Filter by Language",
+          "isFloat": false,
+          "label": "Original Language",
+          "name": "filterCriteria.languageCode",
+          "order": 8,
+          "privacy": "normal",
+          "selectOptions": [
+            {
+              "dividerAfter": false,
+              "hint": "Danish",
+              "name": "da",
+              "order": 7,
+              "value": 0
+            },
+            {
+              "dividerAfter": false,
+              "hint": "Dutch",
+              "name": "nl",
+              "order": 9,
+              "value": 1
+            },
+            {
+              "dividerAfter": false,
+              "hint": "English",
+              "name": "en",
+              "order": 11,
+              "value": 2
+            },
+            {
+              "dividerAfter": false,
+              "hint": "Finnish",
+              "name": "fi",
+              "order": 13,
+              "value": 3
+            },
+            {
+              "dividerAfter": false,
+              "hint": "French",
+              "name": "fr",
+              "order": 15,
+              "value": 4
+            },
+            {
+              "dividerAfter": false,
+              "hint": "German",
+              "name": "de",
+              "order": 17,
+              "value": 5
+            },
+            {
+              "dividerAfter": false,
+              "hint": "Greek",
+              "name": "el",
+              "order": 19,
+              "value": 6
+            },
+            {
+              "dividerAfter": false,
+              "hint": "Hungarian",
+              "name": "hu",
+              "order": 21,
+              "value": 7
+            },
+            {
+              "dividerAfter": false,
+              "hint": "Italian",
+              "name": "it",
+              "order": 23,
+              "value": 8
+            },
+            {
+              "dividerAfter": false,
+              "hint": "Japanese",
+              "name": "ja",
+              "order": 25,
+              "value": 9
+            },
+            {
+              "dividerAfter": false,
+              "hint": "Korean",
+              "name": "ko",
+              "order": 27,
+              "value": 10
+            },
+            {
+              "dividerAfter": false,
+              "hint": "Norwegian",
+              "name": "no",
+              "order": 29,
+              "value": 11
+            },
+            {
+              "dividerAfter": false,
+              "hint": "Polish",
+              "name": "pl",
+              "order": 31,
+              "value": 12
+            },
+            {
+              "dividerAfter": false,
+              "hint": "Portuguese",
+              "name": "pt",
+              "order": 33,
+              "value": 13
+            },
+            {
+              "dividerAfter": false,
+              "hint": "Russian",
+              "name": "ru",
+              "order": 35,
+              "value": 14
+            },
+            {
+              "dividerAfter": false,
+              "hint": "Spanish",
+              "name": "es",
+              "order": 37,
+              "value": 15
+            },
+            {
+              "dividerAfter": false,
+              "hint": "Swedish",
+              "name": "sv",
+              "order": 39,
+              "value": 16
+            },
+            {
+              "dividerAfter": false,
+              "hint": "Turkish",
+              "name": "tr",
+              "order": 41,
+              "value": 17
+            },
+            {
+              "dividerAfter": false,
+              "hint": "Vietnamese",
+              "name": "vi",
+              "order": 43,
+              "value": 18
+            },
+            {
+              "dividerAfter": false,
+              "hint": "Chinese",
+              "name": "zh",
+              "order": 45,
+              "value": 19
+            },
+            {
+              "dividerAfter": false,
+              "hint": "Tamil",
+              "name": "ta",
+              "order": 47,
+              "value": 20
+            },
+            {
+              "dividerAfter": false,
+              "hint": "Telugu",
+              "name": "te",
+              "order": 49,
+              "value": 21
+            },
+            {
+              "dividerAfter": false,
+              "hint": "Hindi",
+              "name": "hi",
+              "order": 51,
+              "value": 22
+            },
+            {
+              "dividerAfter": false,
+              "hint": "Bengali",
+              "name": "bn",
+              "order": 53,
+              "value": 23
+            },
+            {
+              "dividerAfter": false,
+              "hint": "Romanian",
+              "name": "ro",
+              "order": 55,
+              "value": 24
+            },
+            {
+              "dividerAfter": false,
+              "hint": "Macedonian",
+              "name": "mk",
+              "order": 57,
+              "value": 25
+            },
+            {
+              "dividerAfter": false,
+              "hint": "Slovenian",
+              "name": "sl",
+              "order": 59,
+              "value": 26
+            },
+            {
+              "dividerAfter": false,
+              "hint": "Malayalam",
+              "name": "ml",
+              "order": 61,
+              "value": 27
+            },
+            {
+              "dividerAfter": false,
+              "hint": "Kannada",
+              "name": "kn",
+              "order": 63,
+              "value": 28
+            },
+            {
+              "dividerAfter": false,
+              "hint": "Albanian",
+              "name": "sq",
+              "order": 65,
+              "value": 29
+            },
+            {
+              "dividerAfter": false,
+              "hint": "Afrikaans",
+              "name": "af",
+              "order": 67,
+              "value": 30
+            },
+            {
+              "dividerAfter": false,
+              "hint": "Marathi",
+              "name": "mr",
+              "order": 69,
+              "value": 31
+            },
+            {
+              "dividerAfter": false,
+              "hint": "Tagalog",
+              "name": "tl",
+              "order": 71,
+              "value": 32
+            },
+            {
+              "dividerAfter": false,
+              "hint": "Urdu",
+              "name": "ur",
+              "order": 73,
+              "value": 33
+            },
+            {
+              "dividerAfter": false,
+              "hint": "Raeto-Romance",
+              "name": "rm",
+              "order": 75,
+              "value": 34
+            },
+            {
+              "dividerAfter": false,
+              "hint": "Mongolian",
+              "name": "mn",
+              "order": 77,
+              "value": 35
+            },
+            {
+              "dividerAfter": false,
+              "hint": "Georgian",
+              "name": "ka",
+              "order": 79,
+              "value": 36
+            }
+          ],
+          "type": "select"
+        }
+      ],
+      "implementation": "TMDbPopularImport",
+      "implementationName": "TMDb Popular",
+      "infoLink": "https://wiki.servarr.com/radarr/supported#tmdbpopularimport",
+      "listOrder": 1,
+      "listType": "tmdb",
+      "minRefreshInterval": "12:00:00",
+      "minimumAvailability": "tba",
+      "monitor": "movieOnly",
+      "presets": [],
+      "qualityProfileId": 0,
+      "searchOnAdd": false,
+      "tags": []
+    },
+    {
+      "configContract": "TMDbUserSettings",
+      "enableAuto": true,
+      "enabled": false,
+      "fields": [
+        {
+          "advanced": false,
+          "hidden": "hidden",
+          "isFloat": false,
+          "label": "Account Id",
+          "name": "accountId",
+          "order": 0,
+          "privacy": "normal",
+          "type": "textbox"
+        },
+        {
+          "advanced": false,
+          "hidden": "hidden",
+          "isFloat": false,
+          "label": "Access Token",
+          "name": "accessToken",
+          "order": 1,
+          "privacy": "normal",
+          "type": "textbox"
+        },
+        {
+          "advanced": false,
+          "helpText": "Type of list your seeking to import from",
+          "isFloat": false,
+          "label": "List Type",
+          "name": "listType",
+          "order": 2,
+          "privacy": "normal",
+          "selectOptions": [
+            {
+              "dividerAfter": false,
+              "name": "Watchlist",
+              "order": 1,
+              "value": 1
+            },
+            {
+              "dividerAfter": false,
+              "name": "Recommendations",
+              "order": 2,
+              "value": 2
+            },
+            {
+              "dividerAfter": false,
+              "name": "Rated",
+              "order": 3,
+              "value": 3
+            },
+            {
+              "dividerAfter": false,
+              "name": "Favorite",
+              "order": 4,
+              "value": 4
+            }
+          ],
+          "type": "select",
+          "value": 1
+        },
+        {
+          "advanced": false,
+          "isFloat": false,
+          "label": "Authenticate with TMDB",
+          "name": "signIn",
+          "order": 3,
+          "privacy": "normal",
+          "type": "oAuth"
+        }
+      ],
+      "implementation": "TMDbUserImport",
+      "implementationName": "TMDb User",
+      "infoLink": "https://wiki.servarr.com/radarr/supported#tmdbuserimport",
+      "listOrder": 1,
+      "listType": "tmdb",
+      "minRefreshInterval": "12:00:00",
+      "minimumAvailability": "tba",
+      "monitor": "movieOnly",
+      "presets": [],
+      "qualityProfileId": 0,
+      "searchOnAdd": false,
+      "tags": []
+    },
+    {
+      "configContract": "TraktListSettings",
+      "enableAuto": true,
+      "enabled": false,
+      "fields": [
+        {
+          "advanced": false,
+          "hidden": "hidden",
+          "isFloat": false,
+          "label": "Access Token",
+          "name": "accessToken",
+          "order": 0,
+          "privacy": "normal",
+          "type": "textbox"
+        },
+        {
+          "advanced": false,
+          "hidden": "hidden",
+          "isFloat": false,
+          "label": "Refresh Token",
+          "name": "refreshToken",
+          "order": 1,
+          "privacy": "normal",
+          "type": "textbox"
+        },
+        {
+          "advanced": false,
+          "hidden": "hidden",
+          "isFloat": false,
+          "label": "Expires",
+          "name": "expires",
+          "order": 2,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": "0001-01-01T00:00:00Z"
+        },
+        {
+          "advanced": false,
+          "hidden": "hidden",
+          "isFloat": false,
+          "label": "Auth User",
+          "name": "authUser",
+          "order": 3,
+          "privacy": "normal",
+          "type": "textbox"
+        },
+        {
+          "advanced": false,
+          "helpText": "Username for the List to import from",
+          "isFloat": false,
+          "label": "Username",
+          "name": "username",
+          "order": 4,
+          "privacy": "userName",
+          "type": "textbox"
+        },
+        {
+          "advanced": false,
+          "helpText": "List name for import, list must be public or you must have access to the list",
+          "isFloat": false,
+          "label": "List Name",
+          "name": "listname",
+          "order": 5,
+          "privacy": "normal",
+          "type": "textbox"
+        },
+        {
+          "advanced": false,
+          "helpText": "Limit the number of movies to get",
+          "isFloat": false,
+          "label": "Limit",
+          "name": "limit",
+          "order": 6,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": 100
+        },
+        {
+          "advanced": false,
+          "isFloat": false,
+          "label": "Authenticate with Trakt",
+          "name": "signIn",
+          "order": 7,
+          "privacy": "normal",
+          "type": "oAuth",
+          "value": "startOAuth"
+        }
+      ],
+      "implementation": "TraktListImport",
+      "implementationName": "Trakt List",
+      "infoLink": "https://wiki.servarr.com/radarr/supported#traktlistimport",
+      "listOrder": 2,
+      "listType": "trakt",
+      "minRefreshInterval": "12:00:00",
+      "minimumAvailability": "tba",
+      "monitor": "movieOnly",
+      "presets": [],
+      "qualityProfileId": 0,
+      "searchOnAdd": false,
+      "tags": []
+    },
+    {
+      "configContract": "TraktPopularSettings",
+      "enableAuto": true,
+      "enabled": false,
+      "fields": [
+        {
+          "advanced": false,
+          "hidden": "hidden",
+          "isFloat": false,
+          "label": "Access Token",
+          "name": "accessToken",
+          "order": 0,
+          "privacy": "normal",
+          "type": "textbox"
+        },
+        {
+          "advanced": false,
+          "hidden": "hidden",
+          "isFloat": false,
+          "label": "Refresh Token",
+          "name": "refreshToken",
+          "order": 1,
+          "privacy": "normal",
+          "type": "textbox"
+        },
+        {
+          "advanced": false,
+          "hidden": "hidden",
+          "isFloat": false,
+          "label": "Expires",
+          "name": "expires",
+          "order": 2,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": "0001-01-01T00:00:00Z"
+        },
+        {
+          "advanced": false,
+          "hidden": "hidden",
+          "isFloat": false,
+          "label": "Auth User",
+          "name": "authUser",
+          "order": 3,
+          "privacy": "normal",
+          "type": "textbox"
+        },
+        {
+          "advanced": false,
+          "helpText": "Type of list you're seeking to import from",
+          "isFloat": false,
+          "label": "List Type",
+          "name": "traktListType",
+          "order": 4,
+          "privacy": "normal",
+          "selectOptions": [
+            {
+              "dividerAfter": false,
+              "hint": "(0)",
+              "name": "Trending Movies",
+              "order": 8,
+              "value": 0
+            },
+            {
+              "dividerAfter": false,
+              "hint": "(1)",
+              "name": "Popular Movies",
+              "order": 11,
+              "value": 1
+            },
+            {
+              "dividerAfter": false,
+              "hint": "(2)",
+              "name": "Top Anticipated Movies",
+              "order": 14,
+              "value": 2
+            },
+            {
+              "dividerAfter": false,
+              "hint": "(3)",
+              "name": "Top Box Office Movies",
+              "order": 17,
+              "value": 3
+            },
+            {
+              "dividerAfter": false,
+              "hint": "(4)",
+              "name": "Top Watched Movies By Week",
+              "order": 20,
+              "value": 4
+            },
+            {
+              "dividerAfter": false,
+              "hint": "(5)",
+              "name": "Top Watched Movies By Month",
+              "order": 23,
+              "value": 5
+            },
+            {
+              "dividerAfter": false,
+              "hint": "(7)",
+              "name": "Top Watched Movies Of All Time",
+              "order": 30,
+              "value": 7
+            },
+            {
+              "dividerAfter": false,
+              "hint": "(8)",
+              "name": "Recommended Movies By Week",
+              "order": 33,
+              "value": 8
+            },
+            {
+              "dividerAfter": false,
+              "hint": "(9)",
+              "name": "Recommended Movies By Month",
+              "order": 36,
+              "value": 9
+            },
+            {
+              "dividerAfter": false,
+              "hint": "(11)",
+              "name": "Recommended Movies By All Time",
+              "order": 43,
+              "value": 11
+            }
+          ],
+          "type": "select",
+          "value": 1
+        },
+        {
+          "advanced": false,
+          "helpText": "Filter movies by rating range (0-100)",
+          "isFloat": false,
+          "label": "Rating",
+          "name": "rating",
+          "order": 5,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": "0-100"
+        },
+        {
+          "advanced": false,
+          "helpText": "Filter movies by a certification (NR,G,PG,PG-13,R,NC-17) (Comma Separated)",
+          "isFloat": false,
+          "label": "Certification",
+          "name": "certification",
+          "order": 6,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": "NR,G,PG,PG-13,R,NC-17"
+        },
+        {
+          "advanced": false,
+          "helpText": "Filter movies by Trakt Genre Slug (Comma Separated) Only for Popular Lists",
+          "isFloat": false,
+          "label": "Genres",
+          "name": "genres",
+          "order": 7,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": ""
+        },
+        {
+          "advanced": false,
+          "helpText": "Filter movies by year or year range",
+          "isFloat": false,
+          "label": "Years",
+          "name": "years",
+          "order": 8,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": ""
+        },
+        {
+          "advanced": true,
+          "helpText": "Additional Trakt API parameters",
+          "isFloat": false,
+          "label": "Additional Parameters",
+          "name": "traktAdditionalParameters",
+          "order": 9,
+          "privacy": "normal",
+          "type": "textbox"
+        },
+        {
+          "advanced": false,
+          "helpText": "Limit the number of movies to get",
+          "isFloat": false,
+          "label": "Limit",
+          "name": "limit",
+          "order": 10,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": 100
+        },
+        {
+          "advanced": false,
+          "isFloat": false,
+          "label": "Authenticate with Trakt",
+          "name": "signIn",
+          "order": 11,
+          "privacy": "normal",
+          "type": "oAuth",
+          "value": "startOAuth"
+        }
+      ],
+      "implementation": "TraktPopularImport",
+      "implementationName": "Trakt Popular List",
+      "infoLink": "https://wiki.servarr.com/radarr/supported#traktpopularimport",
+      "listOrder": 2,
+      "listType": "trakt",
+      "minRefreshInterval": "12:00:00",
+      "minimumAvailability": "tba",
+      "monitor": "movieOnly",
+      "presets": [],
+      "qualityProfileId": 0,
+      "searchOnAdd": false,
+      "tags": []
+    },
+    {
+      "configContract": "TraktUserSettings",
+      "enableAuto": true,
+      "enabled": false,
+      "fields": [
+        {
+          "advanced": false,
+          "hidden": "hidden",
+          "isFloat": false,
+          "label": "Access Token",
+          "name": "accessToken",
+          "order": 0,
+          "privacy": "normal",
+          "type": "textbox"
+        },
+        {
+          "advanced": false,
+          "hidden": "hidden",
+          "isFloat": false,
+          "label": "Refresh Token",
+          "name": "refreshToken",
+          "order": 1,
+          "privacy": "normal",
+          "type": "textbox"
+        },
+        {
+          "advanced": false,
+          "hidden": "hidden",
+          "isFloat": false,
+          "label": "Expires",
+          "name": "expires",
+          "order": 2,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": "0001-01-01T00:00:00Z"
+        },
+        {
+          "advanced": false,
+          "hidden": "hidden",
+          "isFloat": false,
+          "label": "Auth User",
+          "name": "authUser",
+          "order": 3,
+          "privacy": "normal",
+          "type": "textbox"
+        },
+        {
+          "advanced": false,
+          "helpText": "Type of list you're seeking to import from",
+          "isFloat": false,
+          "label": "List Type",
+          "name": "traktListType",
+          "order": 4,
+          "privacy": "normal",
+          "selectOptions": [
+            {
+              "dividerAfter": false,
+              "hint": "(0)",
+              "name": "User Watch List",
+              "order": 7,
+              "value": 0
+            },
+            {
+              "dividerAfter": false,
+              "hint": "(1)",
+              "name": "User Watched List",
+              "order": 9,
+              "value": 1
+            },
+            {
+              "dividerAfter": false,
+              "hint": "(2)",
+              "name": "User Collection List",
+              "order": 11,
+              "value": 2
+            }
+          ],
+          "type": "select",
+          "value": 0
+        },
+        {
+          "advanced": false,
+          "helpText": "If List Type is Watch, select the order to sort the list",
+          "isFloat": false,
+          "label": "Watch List Sorting",
+          "name": "traktWatchSorting",
+          "order": 5,
+          "privacy": "normal",
+          "selectOptions": [
+            {
+              "dividerAfter": false,
+              "name": "Rank",
+              "order": 0,
+              "value": 0
+            },
+            {
+              "dividerAfter": false,
+              "name": "Added",
+              "order": 1,
+              "value": 1
+            },
+            {
+              "dividerAfter": false,
+              "name": "Title",
+              "order": 2,
+              "value": 2
+            },
+            {
+              "dividerAfter": false,
+              "name": "Released",
+              "order": 3,
+              "value": 3
+            }
+          ],
+          "type": "select",
+          "value": 0
+        },
+        {
+          "advanced": false,
+          "helpText": "Username for the List to import from (leave empty to use Auth User)",
+          "isFloat": false,
+          "label": "Username",
+          "name": "username",
+          "order": 6,
+          "privacy": "normal",
+          "type": "textbox"
+        },
+        {
+          "advanced": false,
+          "helpText": "Limit the number of movies to get",
+          "isFloat": false,
+          "label": "Limit",
+          "name": "limit",
+          "order": 7,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": 100
+        },
+        {
+          "advanced": false,
+          "isFloat": false,
+          "label": "Authenticate with Trakt",
+          "name": "signIn",
+          "order": 8,
+          "privacy": "normal",
+          "type": "oAuth",
+          "value": "startOAuth"
+        }
+      ],
+      "implementation": "TraktUserImport",
+      "implementationName": "Trakt User",
+      "infoLink": "https://wiki.servarr.com/radarr/supported#traktuserimport",
+      "listOrder": 2,
+      "listType": "trakt",
+      "minRefreshInterval": "12:00:00",
+      "minimumAvailability": "tba",
+      "monitor": "movieOnly",
+      "presets": [],
+      "qualityProfileId": 0,
+      "searchOnAdd": false,
+      "tags": []
+    }
+  ],
+  "recordedAt": "2026-11-13T13:34:06Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/importlist/schema"
+  },
+  "status": 200
+}

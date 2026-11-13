@@ -1,0 +1,30 @@
+# Milestone 4d, the backups and the log files: a backup made, listed,
+# restored and removed, and the log files as the UI reads them. A
+# recording of its own, next to golden-library's; same format.
+#
+#   GOLDEN_REQUESTS=tests/fixtures/radarr/golden-backup/requests.txt \
+#       GOLDEN_OUT=tests/fixtures/radarr/golden-backup make golden-radarr
+#
+# A restore stages the backup and asks for a restart, which the recording
+# does not do: nothing after it reads the restored database.
+system-backup-empty GET /api/v3/system/backup
+command-backup POST /api/v3/command bodies/command-backup.json
+sleep 10
+command-backup-get GET /api/v3/command/{id:command-backup}
+system-backup GET /api/v3/system/backup
+
+# What is not there, by an id nothing carries.
+system-backup-restore-missing POST /api/v3/system/backup/restore/12345
+system-backup-delete-missing DELETE /api/v3/system/backup/12345
+
+# The backup restored, then removed.
+system-backup-restore POST /api/v3/system/backup/restore/{id:system-backup}
+system-backup-delete DELETE /api/v3/system/backup/{id:system-backup}
+system-backup-after-delete GET /api/v3/system/backup
+
+# The log files the UI lists. The contents of one are not recorded: a
+# log names the paths of the machine that wrote it, and no two runs write
+# the same lines.
+log-file GET /api/v3/log/file
+log-file-update GET /api/v3/log/file/update
+log-file-missing GET /api/v3/log/file/nothing.txt

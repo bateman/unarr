@@ -1,0 +1,44 @@
+{
+  "body": [
+    {
+      "configContract": "IMDbListSettings",
+      "enableAuto": true,
+      "enabled": true,
+      "fields": [
+        {
+          "advanced": false,
+          "helpText": "IMDb user ID (e.g. ur12345678), 'top250' or 'popular'",
+          "isFloat": false,
+          "label": "List/User ID",
+          "name": "listId",
+          "order": 0,
+          "privacy": "normal",
+          "type": "textbox",
+          "value": "redacted"
+        }
+      ],
+      "id": 1,
+      "implementation": "IMDbListImport",
+      "implementationName": "IMDb Lists",
+      "infoLink": "https://wiki.servarr.com/radarr/supported#imdblistimport",
+      "listOrder": 5,
+      "listType": "other",
+      "minRefreshInterval": "12:00:00",
+      "minimumAvailability": "released",
+      "monitor": "movieOnly",
+      "name": "IMDbListImport 1",
+      "qualityProfileId": 11,
+      "rootFolderPath": "/movies",
+      "searchOnAdd": true,
+      "tags": [
+        1
+      ]
+    }
+  ],
+  "recordedAt": "2026-11-13T13:34:06Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/importlist"
+  },
+  "status": 200
+}

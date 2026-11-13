@@ -1,0 +1,13 @@
+{
+  "body": {
+    "id": 4,
+    "label": "library"
+  },
+  "recordedAt": "2026-11-13T12:41:20Z",
+  "request": {
+    "body": "bodies/tag-create.json",
+    "method": "POST",
+    "path": "/api/v3/tag"
+  },
+  "status": 201
+}

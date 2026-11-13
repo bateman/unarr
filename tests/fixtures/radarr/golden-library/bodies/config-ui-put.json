@@ -1,0 +1,1 @@
+{"$from": "config-ui", "$set": {"firstDayOfWeek": 0, "calendarWeekColumnHeader": "ddd M/D", "theme": "dark", "enableColorImpairedMode": true, "showRelativeDates": false}}

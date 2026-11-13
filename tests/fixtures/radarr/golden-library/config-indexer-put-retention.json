@@ -1,0 +1,25 @@
+{
+  "body": [
+    {
+      "attemptedValue": -1,
+      "errorCode": "GreaterThanOrEqualValidator",
+      "errorMessage": "'Retention' must be greater than or equal to '0'.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "comparisonProperty": "",
+        "comparisonValue": 0,
+        "propertyName": "Retention",
+        "propertyValue": -1
+      },
+      "propertyName": "Retention",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:41:12Z",
+  "request": {
+    "body": "bodies/config-indexer-put-retention.json",
+    "method": "PUT",
+    "path": "/api/v3/config/indexer/1"
+  },
+  "status": 400
+}

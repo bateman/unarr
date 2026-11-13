@@ -1,0 +1,1 @@
+{"$from": "config-indexer", "$set": {"minimumAge": -1}}

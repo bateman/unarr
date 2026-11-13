@@ -27,6 +27,8 @@ use crate::profile;
 use crate::search::{SearchService, Trigger};
 use crate::store;
 
+mod movie_library;
+
 /// The source of the current time: the daemon's clock, or a pinned one
 /// in tests.
 pub type Clock = Arc<dyn Fn() -> DateTime<Utc> + Send + Sync>;
@@ -60,6 +62,27 @@ pub enum Event {
     /// `SeriesUpdatedEvent` and `MediaCoversUpdatedEvent` with a change:
     /// the series resource the UI holds is stale.
     SeriesUpdated { series_id: i64 },
+    /// Radarr's `MovieUpdatedEvent`: a refresh or an edit changed the
+    /// movie the UI holds.
+    MovieUpdated { movie_id: i64 },
+    /// Radarr's `MediaCoversUpdatedEvent` with a cover downloaded.
+    MovieCoversUpdated { movie_id: i64 },
+    /// Radarr's `MoviesDeletedEvent`, for one movie.
+    MovieDeleted { movie_id: i64 },
+    /// Radarr's `CollectionAddedEvent`, `CollectionEditedEvent` and
+    /// `CollectionDeletedEvent`.
+    CollectionChanged {
+        collection_id: i64,
+        action: CollectionAction,
+    },
+}
+
+/// What happened to a collection.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum CollectionAction {
+    Created,
+    Updated,
+    Deleted,
 }
 
 /// Health runs the originals' debouncer holds for five seconds after a
@@ -287,8 +310,14 @@ impl Runtime {
     /// point them at a mock.
     pub fn set_upstreams(&self, upstreams: crate::metadata::Upstreams) {
         self.set_metadata(Arc::new(crate::metadata::Skyhook::new(upstreams.clone())));
-        *self.augment.write().unwrap() =
-            crate::metadata::augment::Augment::new(crate::http::shared().clone(), upstreams);
+        // Radarr's covers and metadata go out through its own client,
+        // that is through its own proxy and certificate settings.
+        let client = self
+            .movies
+            .as_ref()
+            .and_then(|side| side.http.clone())
+            .unwrap_or_else(|| crate::http::shared().clone());
+        *self.augment.write().unwrap() = crate::metadata::augment::Augment::new(client, upstreams);
     }
 
     /// Where the series covers live (`<app data>/MediaCover`).
@@ -312,6 +341,11 @@ impl Runtime {
     }
 
     /// The import lists, asked through the same upstreams as the metadata.
+    /// Radarr's import lists, which name movies.
+    pub fn movie_import_lists(&self) -> crate::movies::importlists::MovieImportLists {
+        crate::movies::importlists::MovieImportLists::new(self.db.clone())
+    }
+
     pub fn import_lists(&self) -> crate::importlists::ImportLists {
         crate::importlists::ImportLists::new(
             self.db.clone(),
@@ -807,6 +841,12 @@ impl Runtime {
         if let Some(side) = &self.movies {
             return self.run_radarr(side, model, trigger).await;
         }
+        self.run_shared(model, id, trigger).await
+    }
+
+    /// The arms both applications share, and Radarr's own dispatch falls
+    /// back to for the commands with no media in them.
+    async fn run_shared(&self, model: &CommandModel, id: i64, trigger: Trigger) -> anyhow::Result<()> {
         match &model.body {
             CommandBody::RssSync => self.rss_sync(id).await,
             CommandBody::RefreshMonitoredDownloads => self.refresh_monitored_downloads().await,
@@ -956,12 +996,47 @@ impl Runtime {
                 })
                 .await?
             }
-            // No updater, no update log.
+            // The originals list the update log folder and delete what
+            // is in it; Unarr is updated by replacing its image and never
+            // writes one, so the command fails on the folder as theirs
+            // does on an installation that never updated.
+            CommandBody::DeleteUpdateLogFiles if self.personality == crate::Personality::Radarr => {
+                let folder = self
+                    .backup
+                    .read()
+                    .unwrap()
+                    .as_ref()
+                    .map(|c| c.app_data.join("logs").join("update"));
+                match folder {
+                    Some(folder) if folder.is_dir() => {
+                        tokio::task::spawn_blocking(move || -> anyhow::Result<()> {
+                            for entry in std::fs::read_dir(&folder)?.flatten() {
+                                if entry.file_type().map(|t| t.is_file()).unwrap_or(false) {
+                                    std::fs::remove_file(entry.path())?;
+                                }
+                            }
+                            Ok(())
+                        })
+                        .await??;
+                        Ok(())
+                    }
+                    Some(folder) => anyhow::bail!(
+                        "System.IO.DirectoryNotFoundException: Could not find a part of the path '{}'.",
+                        folder.display()
+                    ),
+                    None => Ok(()),
+                }
+            }
+            // Sonarr's recording says nothing about how this one ends, so
+            // it stays what it was: nothing to do.
             CommandBody::DeleteUpdateLogFiles => Ok(()),
             CommandBody::ResetQualityDefinitions { reset_titles } => {
                 let reset_titles = *reset_titles;
+                let personality = self.personality;
                 self.db
-                    .call(move |conn| store::catalog::reset_quality_definitions(conn, reset_titles))
+                    .call(move |conn| {
+                        store::catalog::reset_quality_definitions(conn, personality, reset_titles)
+                    })
                     .await?;
                 Ok(())
             }
@@ -978,11 +1053,13 @@ impl Runtime {
                 Ok(())
             }
             CommandBody::ApplicationUpdateCheck { .. } => {
-                // Unarr is updated by replacing its image.
-                tracing::debug!(name = model.name(), "nothing to do for this command");
+                // Unarr is updated by replacing its image, so the check
+                // ends as the originals' does with nothing to install.
+                self.progress(id, "No update available".into());
                 Ok(())
             }
-            CommandBody::MoviesSearch { .. }
+            CommandBody::RenameMovieFolder { .. }
+            | CommandBody::MoviesSearch { .. }
             | CommandBody::MissingMoviesSearch { .. }
             | CommandBody::CutoffUnmetMoviesSearch { .. }
             | CommandBody::RescanMovie { .. }
@@ -990,6 +1067,9 @@ impl Runtime {
             | CommandBody::RenameMovieFiles { .. }
             | CommandBody::ManualImportMovies { .. }
             | CommandBody::RenameMovie { .. }
+            | CommandBody::RefreshCollections { .. }
+            | CommandBody::MoveMovie { .. }
+            | CommandBody::BulkMoveMovie { .. }
             | CommandBody::RefreshMovie { .. } => {
                 anyhow::bail!("{} is not a command of this application", model.name())
             }
@@ -1024,14 +1104,13 @@ impl Runtime {
             CommandBody::RefreshMonitoredDownloads => {
                 // `DownloadMonitoringService.Refresh`: the clients asked,
                 // then the processing queued as its own command.
-                let changed = side.downloads.refresh(now).await?;
+                side.downloads.refresh(now).await?;
                 // `ManualInteractionRequiredEvent`, which the completed
                 // download check publishes while the clients are read.
                 self.emit_movie_import_events(side, side.downloads.take_raised_events())
                     .await;
-                if changed {
-                    self.emit(Event::QueueUpdated);
-                }
+                // `TrackedDownloadRefreshedEvent`, raised by every refresh.
+                self.emit(Event::QueueUpdated);
                 self.queue
                     .push(
                         CommandBody::ProcessMonitoredDownloads,
@@ -1124,12 +1203,38 @@ impl Runtime {
                 self.process_notification_queue(self.now()).await;
                 return Ok(());
             }
-            CommandBody::RefreshMovie { .. } => {
-                // The metadata of a movie is refreshed from the milestone
-                // that brings its provider; until then the command is
-                // accepted and completes.
-                tracing::debug!(name = model.name(), "nothing to do for this command yet");
-                return Ok(());
+            CommandBody::RefreshMovie {
+                movie_ids,
+                is_new_movie,
+            } => {
+                return self
+                    .refresh_movies(
+                        side,
+                        id,
+                        movie_ids,
+                        *is_new_movie,
+                        model.trigger,
+                        model.last_start_time,
+                    )
+                    .await;
+            }
+            CommandBody::RefreshCollections { collection_ids } => {
+                return self.refresh_collections(id, collection_ids, model.trigger).await;
+            }
+            CommandBody::MoveMovie {
+                movie_id,
+                source_path,
+                destination_path,
+            } => {
+                return self
+                    .move_movie(id, *movie_id, source_path, destination_path, None)
+                    .await;
+            }
+            CommandBody::BulkMoveMovie {
+                destination_root_folder,
+                movies,
+            } => {
+                return self.bulk_move_movies(id, destination_root_folder, movies).await;
             }
             CommandBody::Backup { kind } => {
                 let context = self.backup.read().unwrap().clone();
@@ -1157,6 +1262,57 @@ impl Runtime {
             CommandBody::Housekeeping => {
                 self.db
                     .call(move |conn| Ok(crate::movies::housekeeping::run(conn, now)))
+                    .await?;
+                return Ok(());
+            }
+            // Radarr's own command that no service of its runs: the API
+            // takes it and the queue fails it, as the original does.
+            CommandBody::RenameMovieFolder { .. } => {
+                anyhow::bail!(
+                    "System.InvalidOperationException: No service for type 'NzbDrone.Core.Messaging.Commands.IExecute`1[NzbDrone.Core.MediaFiles.Commands.RenameMovieFolderCommand]' has been registered."
+                )
+            }
+            // What both applications do alike: the log, the blocklist,
+            // the API key, the update check.
+            CommandBody::ClearBlocklist
+            | CommandBody::ClearLog
+            | CommandBody::DeleteLogFiles
+            | CommandBody::DeleteUpdateLogFiles
+            | CommandBody::ResetApiKey
+            | CommandBody::ApplicationUpdateCheck { .. } => return self.run_shared(model, id, trigger).await,
+            CommandBody::ImportListSync { definition_id } => {
+                let progress = |message: String| self.progress(id, message);
+                let outcome = self
+                    .movie_import_lists()
+                    .sync(
+                        self.movie_provider().as_ref(),
+                        *definition_id,
+                        self.now(),
+                        &progress,
+                    )
+                    .await?;
+                self.movies_added(&outcome.added).await;
+                for movie_id in outcome.updated {
+                    self.emit(Event::MovieUpdated { movie_id });
+                }
+                if !outcome.removed.is_empty() {
+                    for (movie_id, _) in &outcome.removed {
+                        self.emit(Event::MovieDeleted { movie_id: *movie_id });
+                    }
+                    self.check_health_later_with(CheckSet::MoviesGone, None);
+                }
+                return Ok(());
+            }
+            CommandBody::ResetQualityDefinitions { reset_titles } => {
+                let reset_titles = *reset_titles;
+                self.db
+                    .call(move |conn| {
+                        store::catalog::reset_quality_definitions(
+                            conn,
+                            crate::Personality::Radarr,
+                            reset_titles,
+                        )
+                    })
                     .await?;
                 return Ok(());
             }
@@ -1248,9 +1404,10 @@ impl Runtime {
     /// `DownloadMonitoringService.Refresh`: the clients asked, then the
     /// processing of what completed or failed queued as its own command.
     async fn refresh_monitored_downloads(&self) -> anyhow::Result<()> {
-        if self.downloads.refresh(self.now()).await? {
-            self.emit(Event::QueueUpdated);
-        }
+        self.downloads.refresh(self.now()).await?;
+        // `TrackedDownloadRefreshedEvent` goes out whether or not the
+        // queue changed, and `QueueService` tells the UI to read it again.
+        self.emit(Event::QueueUpdated);
         self.queue
             .push(
                 CommandBody::ProcessMonitoredDownloads,
@@ -1598,7 +1755,16 @@ impl Runtime {
                 });
                 continue;
             }
+            let scanned = match &e {
+                MovieImportEvent::Scanned { movie_id, .. } | MovieImportEvent::ScanSkipped { movie_id } => {
+                    Some(*movie_id)
+                }
+                _ => None,
+            };
             self.emit(Event::MovieImport(Box::new(e)));
+            if let Some(movie_id) = scanned {
+                self.after_movie_scan(movie_id).await;
+            }
         }
     }
 

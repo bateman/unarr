@@ -1,0 +1,174 @@
+{
+  "body": [
+    {
+      "added": "2026-11-13T12:39:38Z",
+      "alternateTitles": [
+        {
+          "id": 2855,
+          "movieMetadataId": 521,
+          "sourceType": "tmdb",
+          "title": "Whiplash, Música y Obsesión"
+        },
+        {
+          "id": 2856,
+          "movieMetadataId": 521,
+          "sourceType": "tmdb",
+          "title": "Whiplash - Zum Erfolg getrieben"
+        },
+        {
+          "id": 2857,
+          "movieMetadataId": 521,
+          "sourceType": "tmdb",
+          "title": "Ритам лудила"
+        },
+        {
+          "id": 2858,
+          "movieMetadataId": 521,
+          "sourceType": "tmdb",
+          "title": "위플래쉬"
+        },
+        {
+          "id": 2859,
+          "movieMetadataId": 521,
+          "sourceType": "tmdb",
+          "title": "進擊的鼓手"
+        },
+        {
+          "id": 2860,
+          "movieMetadataId": 521,
+          "sourceType": "tmdb",
+          "title": "Whiplash 2014"
+        },
+        {
+          "id": 2861,
+          "movieMetadataId": 521,
+          "sourceType": "tmdb",
+          "title": "爆裂鼓手"
+        },
+        {
+          "id": 2862,
+          "movieMetadataId": 521,
+          "sourceType": "tmdb",
+          "title": "Մոլեգնություն"
+        },
+        {
+          "id": 2863,
+          "movieMetadataId": 521,
+          "sourceType": "tmdb",
+          "title": "Whiplash: Em Busca da Perfeição"
+        }
+      ],
+      "certification": "R",
+      "cleanTitle": "whiplash",
+      "digitalRelease": "2014-09-19T00:00:00Z",
+      "folderName": "/movies/Whiplash (2014) {tmdb-244786}",
+      "genres": [
+        "Drama",
+        "Music",
+        "Thriller"
+      ],
+      "id": 331,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/7fn624j5lj3xTme2SgiLCeuedmO.jpg",
+          "url": "/MediaCover/331/poster.jpg?h=dc3230e5e17521242510"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/fRGxZuo7jJUWQsVg9PREb98Aclp.jpg",
+          "url": "/MediaCover/331/fanart.jpg?h=1408d3155874e8e4bb8b"
+        }
+      ],
+      "imdbId": "tt2582802",
+      "inCinemas": "2014-10-10T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "based on short film",
+        "bold",
+        "conservatory",
+        "disapproving",
+        "drummer",
+        "drums",
+        "emotional abuse",
+        "jazz",
+        "jazz band",
+        "montage",
+        "music school",
+        "music teacher",
+        "musician",
+        "new york city",
+        "obsession",
+        "perfectionist",
+        "psychological drama",
+        "public humiliation",
+        "romantic",
+        "verbal abuse",
+        "young adult"
+      ],
+      "minimumAvailability": "released",
+      "monitored": true,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Whiplash",
+      "overview": "Under the direction of a ruthless instructor, a talented young drummer begins to pursue perfection at any cost, even his humanity.",
+      "path": "/movies/Whiplash (2014) {tmdb-244786}",
+      "physicalRelease": "2015-02-24T00:00:00Z",
+      "popularity": 29.3552,
+      "qualityProfileId": 4,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 8.5,
+          "votes": 1192004
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 89,
+          "votes": 0
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 94,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 8.376,
+          "votes": 17385
+        },
+        "trakt": {
+          "type": "user",
+          "value": 8.52507,
+          "votes": 28057
+        }
+      },
+      "releaseDate": "2014-09-19T00:00:00Z",
+      "rootFolderPath": "/movies",
+      "runtime": 107,
+      "secondaryYearSourceId": 0,
+      "sortTitle": "whiplash",
+      "status": "released",
+      "studio": "Bold Films",
+      "tags": [
+        2
+      ],
+      "title": "Whiplash",
+      "titleSlug": "244786",
+      "tmdbId": 244786,
+      "website": "https://www.sonyclassics.com//film//whiplash#",
+      "year": 2014,
+      "youTubeTrailerId": "Q7kZy3T6vRM"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:40:30Z",
+  "request": {
+    "body": "bodies/movie-editor-root.json",
+    "method": "PUT",
+    "path": "/api/v3/movie/editor"
+  },
+  "status": 202
+}

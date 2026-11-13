@@ -1,0 +1,16 @@
+{
+  "body": [
+    {
+      "message": "Unable to communicate with Nzbget 1. Name or service not known (nzbget.invalid:6789)",
+      "source": "DownloadClientCheck",
+      "type": "error",
+      "wikiUrl": "https://wiki.servarr.com/radarr/system#unable-to-communicate-with-download-client"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:38:02Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/health"
+  },
+  "status": 200
+}

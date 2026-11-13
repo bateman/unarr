@@ -1,0 +1,23 @@
+{
+  "body": [
+    {
+      "attemptedValue": 840430,
+      "errorCode": "MovieExistsValidator",
+      "errorMessage": "This movie has already been added",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Tmdb Id",
+        "propertyValue": 840430
+      },
+      "propertyName": "TmdbId",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:38:48Z",
+  "request": {
+    "body": "bodies/movie-add-existing.json",
+    "method": "POST",
+    "path": "/api/v3/movie"
+  },
+  "status": 400
+}

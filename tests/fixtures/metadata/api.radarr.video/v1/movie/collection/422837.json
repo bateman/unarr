@@ -1,0 +1,2945 @@
+{
+ "TmdbId": 422837,
+ "Name": "Blade Runner Collection",
+ "Images": [
+  {
+   "CoverType": "Poster",
+   "Url": "https://image.tmdb.org/t/p/original/qTcATCpiFDcgY8snQIfS2j0bFP7.jpg"
+  },
+  {
+   "CoverType": "Fanart",
+   "Url": "https://image.tmdb.org/t/p/original/li3buIx57ph3RX5XlbpMzJPewZ0.jpg"
+  }
+ ],
+ "Overview": "An American neo-noir science-fiction film series set in a dystopian Los Angeles, depicting a future in which synthetic humans known as \"replicants\" are bio-engineered by the powerful Tyrell Corporation, to work on off-world colonies. Based on the novel ‘Do Androids Dream of Electric Sheep?’",
+ "Translations": [
+  {
+   "Title": "Blade Runner - Saga",
+   "Overview": "Une série de films de science-fiction américains se déroulant dans un Los Angeles dystopique et dépeignant un futur dans lequel des humains synthétiques connus comme des réplicants sont créés par la puissante Tyrell Corporation pour travailler sur des colonies hors-monde.",
+   "Language": "fr-FR"
+  },
+  {
+   "Title": "Blade Runner: Coleção",
+   "Overview": "Uma série de filmes de ficção cientifica neo-noir americana em uma distópica Los Angeles, retratando um futuro em que humanos sintéticos, conhecidos como replicantes, são bioengenharia da poderosa Tyrell Corporation, para trabalhar em colônias fora do mundo.",
+   "Language": "pt-BR"
+  },
+  {
+   "Title": "בלייד ראנר - אוסף",
+   "Overview": "",
+   "Language": "he-IL"
+  },
+  {
+   "Title": "블레이드 러너 시리즈",
+   "Overview": "블레이드 러너 시리즈는 타이렐사에 의해 생물 공학적으로 설계되어진 \"레플리칸트\"라고 불리는 합성인간이 외부 식민지에서 일하게 되는 미래의 디스토피아적인 로스엔젤레스를 묘사한 미국의 네오 느와르 SF 시리즈이다. 책 \"안드로이드는 전기양의 꿈을 꾸는가?\"를 바탕으로 만들어졌다.",
+   "Language": "ko-KR"
+  },
+  {
+   "Title": "Blade Runner - Collezione",
+   "Overview": "Blade Runner è un film di fantascienza del 1982, diretto da Ridley Scott e interpretato da Harrison Ford, Rutger Hauer, Sean Young, Edward James Olmos e Daryl Hannah. La sceneggiatura, scritta da Hampton Fancher e David Webb Peoples, è liberamente ispirata al romanzo del 1968 Il cacciatore di androidi (Do Androids Dream of Electric Sheep?) di Philip K. Dick.  Dopo vari tentativi infruttuosi susseguitisi nel corso degli anni, volti a dare un seguito alle vicende di Blade Runner, nel 2017 è stato realizzato il sequel Blade Runner 2049, diretto da Denis Villeneuve, prodotto da Ridley Scott e interpretato da Ryan Gosling e Harrison Ford, quest'ultimo nuovamente nei panni di Rick Deckard.",
+   "Language": "it-IT"
+  },
+  {
+   "Title": "Blade Runner Filmreihe",
+   "Overview": "Eine amerikanische Neo-Noir-Science-Fiction-Filmreihe, die in einem dystopischen Los Angeles spielt und eine Zukunft darstellt, in der synthetische Menschen, die als Replikanten bekannt sind, von der mächtigen Tyrell Corporation biotechnologisch bearbeitet werden, um an außerweltlichen Kolonien zu arbeiten.",
+   "Language": "de-DE"
+  },
+  {
+   "Title": "Blade Runner - Colección",
+   "Overview": "Una serie de películas de ciencia ficción neo-noir estadounidense ambientada en un distópico Los Ángeles, que describe un futuro en el que los humanos sintéticos conocidos como «replicantes» son bio-diseñados por la poderosa Tyrell Corporation, para trabajar en colonias fuera del mundo. Basadas en la novela de Philip K. Dick: ¿Sueñan los androides con ovejas eléctricas?",
+   "Language": "es-ES"
+  },
+  {
+   "Title": "银翼杀手（系列）",
+   "Overview": "银翼杀手系列主题科幻电影，描绘了一个与现今不一样的赛博朋克未来世界。电影以探讨未来科技对环境和社会的影响为主旨，以黑色电影的手法进行展示，引发了人们对于英雄道德观和平庸的人性的探索和深思。",
+   "Language": "zh-CN"
+  },
+  {
+   "Title": "Blade Runner - Kolekcja",
+   "Overview": "Amerykańska seria science-fiction w stylu neo-noir, której akcja rozgrywa się w dystopijnym Los Angeles, przedstawiając przyszłość, w której syntetyczni ludzie znani jako „replikanty” są bioinżynieryjnie stworzeni przez potężną korporację Tyrell w celu pracy w koloniach poza ziemskim światem. Na podstawie powieści „Czy androidy śnią o elektrycznych owcach?”",
+   "Language": "pl-PL"
+  },
+  {
+   "Title": "Blade Runner (kolekce)",
+   "Overview": "Americká sci-fi filmová série odehrávající se v dystopickém Los Angeles, zobrazující budoucnost, ve které jsou syntetičtí lidé známí jako „replikanti“ biokonstruováni silnou Tyrell Corporation, aby pracovali na mimosvětských koloniích.",
+   "Language": "cs-CZ"
+  },
+  {
+   "Title": "Бегущий по лезвию (Коллекция)",
+   "Overview": "Детективу Рику Декарду из полиции Лос-Анджелеса поручен поиск группы киборгов, совершившей побег из космической колонии на Землю. Декарду следует выяснить мотивы действий киборгов, а затем уничтожить их.",
+   "Language": "ru-RU"
+  },
+  {
+   "Title": "Blade Runner (Samling)",
+   "Overview": "Tyrell Corporation bygger replikanter, robotter der ligner mennesker men bliver brugt til slavearbejde. Dem der fanger dem når de flygter kaldes for Blade Runners. Men er grænsen mellem replikanterne og menneskerne så tydelig som de tror?",
+   "Language": "da-DK"
+  },
+  {
+   "Title": "Szárnyas fejvadász gyűjtemény",
+   "Overview": "Egy amerikai sci-fi filmsorozat, mely egy disztópikus Los Angelesben játszódik, és egy olyan jövőt ábrázol, amelyben a befolyásos Tyrell Corporation biomérnökei  létrehoznak szintetikus embereket, más néven \"replikánsokat\", hogy földön kívüli kolóniákon dolgozzanak. Az „Álmodnak-e ​az androidok elektronikus bárányokkal?” című regény alapján.",
+   "Language": "hu-HU"
+  },
+  {
+   "Title": "Той, що біжить по лезу | Колекція",
+   "Overview": "",
+   "Language": "uk-UA"
+  },
+  {
+   "Title": "Blade Runner - Coleção",
+   "Overview": "Uma série de filmes de ciência-ficção neo-noir americana, numa Los Angeles distópica e retrata um futuro em que humanos sintéticos conhecidos como replicantes são desenhados geneticamente pela poderosa Corporação Tyrell para trabalhar em colónias fora do planeta.",
+   "Language": "pt-PT"
+  },
+  {
+   "Title": "Blade Runner (samling)",
+   "Overview": "Upplev Ridley Scotts banbrytande klassiker och Denis Villeneuves storslagna fortsättning i berättelserna som utforskar mänsklighetens innersta kärna. I en värld av neon och skuggor jagar blade runners artificiella människor – men snart suddas gränsen mellan skapare och skapelse ut. Två epoker, en tidlös vision. En resa genom identitet, minne och framtidens mörka drömmar. Baserat på romanen \"Do Androids Dream of Electric Sheep?\" av Philip K. Dick.",
+   "Language": "sv-SE"
+  },
+  {
+   "Title": "Bıçak Sırtı [Seri]",
+   "Overview": "Amerikan yapımı neo-noir bilim kurgu film serisi, distopik bir Los Angeles'ta geçiyor ve güçlü Tyrell Şirketi tarafından, dünya dışı kolonilerde çalışmak üzere biyolojik olarak üretilen \"replikant\" adı verilen sentetik insanların yer aldığı bir geleceği tasvir ediyor. Seri, \"Androidler Elektrikli Koyunların Hayalini Kurar mı?\" adlı romandan uyarlanmıştır.",
+   "Language": "tr-TR"
+  },
+  {
+   "Title": "Blade Runner Collectie",
+   "Overview": "Een Amerikaanse neo-noir science-fiction filmserie die zich afspeelt in een dystopisch Los Angeles, en een toekomst voorstelt waarin synthetische mensen, bekend als \"replicants\", door de machtige Tyrell Corporation bio-engineered worden om te werken in buitenwereldse kolonies. Gebaseerd op de roman \"Do Androids Dream of Electric Sheep?\".",
+   "Language": "nl-NL"
+  },
+  {
+   "Title": "Collection Blade Runner",
+   "Overview": "La saga des films de la série Blade Runner",
+   "Language": "fr-CA"
+  },
+  {
+   "Title": "銀翼殺手（系列）",
+   "Overview": "",
+   "Language": "zh-TW"
+  },
+  {
+   "Title": "Blade Runner (kolekcia)",
+   "Overview": "",
+   "Language": "sk-SK"
+  },
+  {
+   "Title": "ブレードランナー シリーズ",
+   "Overview": "ディストピア的なロサンゼルスを舞台にしたアメリカのネオノワールSF映画シリーズ。強大な企業タイレル社によって「レプリカント」と呼ばれる人工人間がバイオエンジニアリングされ、地球外の植民地で働かされる未来を描いている。原作は小説『アンドロイドは電気羊の夢を見るか？』。",
+   "Language": "ja-JP"
+  },
+  {
+   "Title": "Bėgantis skustuvo ašmenimis",
+   "Overview": "Amerikiečių neo-noiro mokslinės fantastikos filmų serija, kurios veiksmas vyksta distopiniame Los Andžele, vaizduojanti ateitį, kurioje galinga „Tyrell“ korporacija bioinžinerijos būdu kuria sintetinius žmones, vadinamus „replikantais“, darbui užžemiuose esančiose kolonijose. Remiasi romanu „Ar androidai sapnuoja elektrines avis?“",
+   "Language": "lt-LT"
+  },
+  {
+   "Title": "เบลด รันเนอร์ คอลเลคชั่น",
+   "Overview": "เบลดรันเนอร์ เป็นภาพยนตร์แนวไซไฟออกฉายปี ค.ศ. 1982 กำกับภาพยนตร์โดย ริดลีย์ สก็อตต์ แสดงโดย แฮร์ริสัน ฟอร์ด , รัทเจอร์ ฮอร์เออร์ , ฌอน ยัง และ เอ็ดเวิร์ด โอลมอส ภาพยนตร์นี้เขียนบทโดย แฮปทัน แฟนเชอร์ และ เดวิด พีเพิล โดยเอาบทมาจากนวนิยาย Do Androids Dream of Electric Sheep? เมื่อปี 1968 ของฟิลิปส์ เค ดิกส์",
+   "Language": "th-TH"
+  },
+  {
+   "Title": "Blade Runner - Colección",
+   "Overview": "Una serie de películas de ciencia ficción neo-noir estadounidense ambientada en un distópico Los Ángeles, que describe un futuro en el que los humanos sintéticos conocidos como \"replicantes\" son bio-diseñados por la poderosa Tyrell Corporation, para trabajar en colonias fuera del mundo. Basadas en la novela de Philip K. Dick: ¿Sueñan los androides con ovejas eléctricas?",
+   "Language": "es-MX"
+  },
+  {
+   "Title": "Colecția Vânătorul de recompense",
+   "Overview": "",
+   "Language": "ro-RO"
+  },
+  {
+   "Title": "مجموعة بليد رانر",
+   "Overview": "\"Blade Runner\" عبارة عن امتياز إعلامي للخيال العلمي الأمريكي الجديد نشأ من رواية عام 1968 \"هل يحلم Androids بالأغنام الكهربائية؟\" بقلم فيليب ك. ديك، عن شخصية ريك ديكارد. كان أول فيلم مقتبس هو \"Blade Runner\" عام 1982، من إخراج ريدلي سكوت. على الرغم من أن أداء الفيلم كان ضعيفًا في البداية في شباك التذاكر الأمريكي، إلا أنه أصبح من الأفلام الكلاسيكية وكان له تأثير كبير على الخيال العلمي. تم إصدار رواية وتعديل كوميدي للفيلم في نفس العام. من عام 1995 إلى عام 2000، ثلاث روايات كانت بمثابة تكملة لكل من \"Blade Runner\" والرواية الأصلية كتبها كيه دبليو جيتر، صديق ديك. صدر فيلم تكميلي بعنوان \"Blade Runner 2049\" في عام 2017. وللاحتفال بالذكرى الثلاثين لفيلم \"Blade Runner\" في عام 2012، تم إصدار فيلم قصير، وفي الفترة التي سبقت إصدار \"Blade Runner 2049\"، تم إصدار العديد من الأفلام الأخرى. تم إصدار أفلام قصيرة تشرح بالتفصيل الأحداث التي وقعت بين عامي 2019 و2049.",
+   "Language": "ar-SA"
+  },
+  {
+   "Title": "銀翼殺手 (系列)",
+   "Overview": "",
+   "Language": "zh-HK"
+  },
+  {
+   "Title": "სამართებელზე მორბენალი კოლექცია",
+   "Overview": "",
+   "Language": "ka-GE"
+  },
+  {
+   "Title": "Loạt phim Tội Phạm Nhân Bản",
+   "Overview": "",
+   "Language": "vi-VN"
+  },
+  {
+   "Title": "Blade Runner",
+   "Overview": "Μια αμερικανική σειρά ταινιών επιστημονικής φαντασίας neo-noir γυρισμένη σε ένα δυστοπικό Λος Άντζελες, που απεικονίζει ένα μέλλον στο οποίο οι συνθετικοί άνθρωποι γνωστοί ως \"replicants\" είναι βιολογικά κατασκευασμένοι από την ισχυρή Tyrell Corporation, για να εργαστούν σε αποικίες εκτός γης. Βασισμένο στο μυθιστόρημα \"Do Androids Dream of Electric Sheep?\"",
+   "Language": "el-GR"
+  },
+  {
+   "Title": "مجموعه بلید رانر",
+   "Overview": "",
+   "Language": "fa-IR"
+  },
+  {
+   "Title": "Блейд Рънър (поредица)",
+   "Overview": "Американска научнофантастична филмова поредица в стил нео-ноар, чието действие се развива в дистопичния Лос Анджелис. Тя изобразява бъдеще, в което синтетични хора, известни като „репликанти“, са създадени от могъщата корпорация „Тирел“, за да работят в колонии извън световете. Базиран на романа „Мечтаят ли андроидите за електрически овце?“.",
+   "Language": "bg-BG"
+  }
+ ],
+ "Parts": [
+  {
+   "TmdbId": 78,
+   "ImdbId": "tt0083658",
+   "Title": "Blade Runner",
+   "Overview": "In the smog-choked dystopian Los Angeles of 2019, blade runner Rick Deckard is called out of retirement to terminate a quartet of replicants who have escaped to Earth seeking their creator for a way to extend their short life spans.",
+   "OriginalTitle": "Blade Runner",
+   "OriginalLanguage": "en",
+   "TitleSlug": "78",
+   "Runtime": 118,
+   "Popularity": 22.3106,
+   "Year": 1982,
+   "Premier": "1982-08-01T00:00:00Z",
+   "InCinema": "1982-06-25T00:00:00Z",
+   "PhysicalRelease": "1984-09-07T00:00:00Z",
+   "DigitalRelease": "2016-12-24T00:00:00Z",
+   "Images": [
+    {
+     "CoverType": "Poster",
+     "Url": "https://image.tmdb.org/t/p/original/63N9uy8nd9j7Eog2axPQ8lbr3Wj.jpg"
+    },
+    {
+     "CoverType": "Fanart",
+     "Url": "https://image.tmdb.org/t/p/original/2spEHYDcyE9r9mS7AFEscfKVDzO.jpg"
+    }
+   ],
+   "Ratings": [
+    {
+     "Count": 15590,
+     "Value": 7.9,
+     "Origin": "Tmdb",
+     "Type": "User"
+    }
+   ],
+   "MovieRatings": {
+    "Tmdb": {
+     "Count": 15590,
+     "Value": 7.9,
+     "Type": "User"
+    },
+    "Imdb": {
+     "Count": 895937,
+     "Value": 8.1,
+     "Type": "User"
+    },
+    "Metacritic": {
+     "Count": 0,
+     "Value": 84,
+     "Type": "User"
+    },
+    "RottenTomatoes": {
+     "Count": 0,
+     "Value": 89,
+     "Type": "User"
+    },
+    "Trakt": {
+     "Count": 25757,
+     "Value": 7.97593,
+     "Type": "User"
+    }
+   },
+   "Genres": [
+    "Science Fiction",
+    "Drama",
+    "Thriller"
+   ],
+   "Keywords": [
+    "2010s",
+    "admiring",
+    "alcoholic",
+    "android",
+    "artificial intelligence (a.i.)",
+    "based on novel or book",
+    "blade runner",
+    "bounty hunter",
+    "cult movie",
+    "cyberpunk",
+    "dystopia",
+    "excited",
+    "flying car",
+    "fugitive",
+    "futuristic",
+    "genetics",
+    "grim",
+    "human clone",
+    "humanity",
+    "humanoid robot",
+    "los angeles, california",
+    "neo-noir",
+    "origami",
+    "suspenseful",
+    "tech noir",
+    "unicorn"
+   ],
+   "AlternativeTitles": [
+    {
+     "Title": "Dangerous Days",
+     "Type": "Tmdb",
+     "Language": "en"
+    },
+    {
+     "Title": "Той, хто біжить по лез",
+     "Type": "Tmdb",
+     "Language": "uk"
+    },
+    {
+     "Title": "Blade Runner - Metropolis 2020",
+     "Type": "Tmdb",
+     "Language": "fi"
+    },
+    {
+     "Title": "Blade Runner (International Cut)",
+     "Type": "Tmdb",
+     "Language": "en"
+    },
+    {
+     "Title": "Blade Runner (Final Cut)",
+     "Type": "Tmdb",
+     "Language": "en"
+    },
+    {
+     "Title": "Blade Runner (The Final Cut)",
+     "Type": "Tmdb",
+     "Language": "en"
+    },
+    {
+     "Title": "Blade Runner: O Caçador de Andróides",
+     "Type": "Tmdb",
+     "Language": "en"
+    },
+    {
+     "Title": "銀翼殺手",
+     "Type": "Tmdb",
+     "Language": "zh"
+    },
+    {
+     "Title": "ブレードランナー",
+     "Type": "Tmdb",
+     "Language": "ja"
+    },
+    {
+     "Title": "Blade Runner Director's Cut",
+     "Type": "Tmdb",
+     "Language": "en"
+    },
+    {
+     "Title": "블레이드 러너",
+     "Type": "Tmdb",
+     "Language": "ko"
+    },
+    {
+     "Title": "블레이드러너",
+     "Type": "Tmdb",
+     "Language": "ko"
+    },
+    {
+     "Title": "서기 2019년",
+     "Type": "Tmdb",
+     "Language": "ko"
+    },
+    {
+     "Title": "서기 2019 블레이드 러너",
+     "Type": "Tmdb",
+     "Language": "ko"
+    },
+    {
+     "Title": "ブレードランナー：1982",
+     "Type": "Tmdb",
+     "Language": "ja"
+    },
+    {
+     "Title": "2020",
+     "Type": "Tmdb",
+     "Language": "zh"
+    },
+    {
+     "Title": "Blade Runner - The Final Cut",
+     "Type": "Tmdb",
+     "Language": "en"
+    },
+    {
+     "Title": "Blade Runner: The Final Cut",
+     "Type": "Tmdb",
+     "Language": "en"
+    },
+    {
+     "Title": "Bıçak Sırtı",
+     "Type": "Tmdb",
+     "Language": "en"
+    },
+    {
+     "Title": "Łowca Androidów",
+     "Type": "Tmdb",
+     "Language": "en"
+    },
+    {
+     "Title": "銀翼殺手 終極版",
+     "Type": "Tmdb",
+     "Language": "zh"
+    },
+    {
+     "Title": "Blade Runner",
+     "Type": "Tmdb",
+     "Language": "de"
+    },
+    {
+     "Title": "블레이드 러너: 파이널 컷",
+     "Type": "Tmdb",
+     "Language": "ko"
+    },
+    {
+     "Title": "블레이드 러너: 파이널컷",
+     "Type": "Tmdb",
+     "Language": "ko"
+    },
+    {
+     "Title": "Blade Runner 1",
+     "Type": "Tmdb",
+     "Language": "en"
+    },
+    {
+     "Title": "Blade Runner 1 - 2019",
+     "Type": "Tmdb",
+     "Language": "en"
+    },
+    {
+     "Title": "Blade Runner 2019",
+     "Type": "Tmdb",
+     "Language": "en"
+    }
+   ],
+   "Translations": [
+    {
+     "Title": "Blade Runner",
+     "Overview": "In the smog-choked dystopian Los Angeles of 2019, blade runner Rick Deckard is called out of retirement to terminate a quartet of replicants who have escaped to Earth seeking their creator for a way to extend their short life spans.",
+     "Language": "en-US"
+    },
+    {
+     "Title": "Der Blade Runner",
+     "Overview": "Man schreibt das Jahr 2019. Den Replikanten, künstlichen Menschen, ist bei Todesstrafe die Rückkehr zur Erde verboten. Doch trotzdem kehren eines Tages einige dieser Wesen zurück. Diese besondere Spezies verfügt über Kraft und Intelligenz mehrerer Menschen und ist von diesen kaum zu unterscheiden. Sie sollen unschädlich gemacht werden. Nur eine Spezialeinheit kann sie aufspüren: die Blade Runner. Eine atemberaubende Hetzjagd durch die futuristische Welt beginnt.",
+     "Language": "de-DE"
+    },
+    {
+     "Title": "Blade Runner",
+     "Overview": "Rick Deckard è un ex agente del dipartimento di polizia di Los Angeles, richiamato in servizio quando un gruppo di sofisticati androidi replicante Nexus 6 fugge dalle colonie Extra-Mondo e torna clandestinamente sulla Terra in cerca del loro costruttore, colpevole di averli dotati di una vita molto breve. La caccia di Deckard sarà violenta e serrata, resa più complessa dalla presenza di Rachael, un avanzato tipo sperimentale di replicante, femminile quanto e forse più di una donna autentica. I Nexus 6 saranno ritirati uno dopo l'altro fino allo scontro con l'elemento alfa del gruppo, l'angelico demone Roy Batty.",
+     "Language": "it-IT"
+    },
+    {
+     "Title": "Бегущий по лезвию",
+     "Overview": "Ноябрь 2019 года. Бывший охотник на андроидов Рик Декард восстановлен в полиции Лос-Анджелеса для поиска возглавляемой Роем Батти группы репликантов, совершившей побег из космической колонии на Землю. В полиции считают, что андроиды пытаются встретиться с Эндолом Тайреллом - руководителем корпорации, которая разрабатывает кибернетический интеллект. Декард получает задание выяснить мотивы репликантов и уничтожить их.",
+     "Language": "ru-RU"
+    },
+    {
+     "Title": "Blade Runner",
+     "Overview": "2019, Los Angeles. La Terre est surpeuplée et l’humanité est partie coloniser l’espace. Les nouveaux colons sont assistés de Replicants, androïdes que rien ne peut distinguer de l'être humain. Conçus comme de nouveaux esclaves, certains parmi les plus évolués s’affranchissent de leurs chaînes et s’enfuient. Rick Deckard, un ancien Blade Runner, catégorie spéciale de policiers chargés de \"retirer\" ces replicants, accepte une nouvelle mission consistant à retrouver quatre de ces individus qui viennent de regagner la Terre après avoir volé une navette spatiale.",
+     "Language": "fr-FR"
+    },
+    {
+     "Title": "Bıçak Sırtı",
+     "Overview": "2019'un dumanla boğuşan distopik Los Angeles'ında, kısa ömürlerini uzatmanın bir yolunu bulmak için yaratıcılarını arayarak Dünya'ya kaçan birkaç Replicant'ı yok etmek için Rick Deckard emeklilikten çağrılır.",
+     "Language": "tr-TR"
+    },
+    {
+     "Title": "Blade Runner",
+     "Overview": "A principios del siglo XXI, la Tyrell Corporation desarrolló un nuevo tipo de robot llamado Nexus, un ser virtualmente idéntico al hombre y conocido como Replicante.  Los Replicantes Nexus-6 eran superiores en fuerza y agilidad, y al menos iguales en inteligencia, a los ingenieros de genética que los crearon.  En el espacio exterior, los Replicantes fueron usados como trabajadores esclavos en la arriesgada exploración y colonización de otros planetas.  Después de la sangrienta rebelión de un equipo de combate de Nexus-6 en una colonia sideral, los Replicantes fueron declarados proscritos en la Tierra bajo pena de muerte.  Brigadas de policías especiales, con el nombre de Unidades de Blade Runners, tenían órdenes de tirar a matar al ver a cualquier Replicante invasor.  A esto no se le llamó ejecución, se le llamó retiro.",
+     "Language": "es-ES"
+    },
+    {
+     "Title": "Blade Runner",
+     "Overview": "Los Angeles 2019. En flok oprørske replikanter er vendt tilbage til jorden og skjuler sig i storbyen. Dusørjægeren Deckard skal skaffe dem af vejen. Undervejs forelsker han sig i den smukke, sorthårede Rachael, som måske - måske ikke - er replikant. Kærlighedshistorien kaster et nyt lys over hans arbejde og gør det sværere for ham i slutopgøret med replikanternes leder.",
+     "Language": "da-DK"
+    },
+    {
+     "Title": "Blade Runner: The Final Cut",
+     "Overview": "On vuosi 2019. Eläkkeellä oleva poliisi Rick Deckard kutsutaan jahtaamaan geenimanipulaation tuloksena syntyneitä ihmisen näköisiä ja kaltaisia robotteja, replikantteja. Futuristiseen maailmaan ja Los Angelesiin sijoitettu monitasoinen trilleri ja tieteiselokuva pohtii monia kysymyksiä - kuten sitä, mitä on olla ihminen.",
+     "Language": "fi-FI"
+    },
+    {
+     "Title": "Blade Runner: Perigo Iminente",
+     "Overview": "Uma visão do futuro marcada pelo pessimismo, sobre a cidade de Los Angeles, algures no século XXI. Apesar da proclamada filiação em Metropolis de Fritz Lang, Blade Runner é exemplar da transformação da configuração da cidade no cinema e influenciou nitidamente filmes como Batman, Batman Returns e Dick Tracy. Um filme emblemático do fim da cidade racional substituída.",
+     "Language": "pt-PT"
+    },
+    {
+     "Title": "Blade Runner",
+     "Overview": "År 2019 nedstiger en grupp förrymda replikanter på jorden i jakt på sin skapare, Dr Eldon Tyrell. Replikanter – genframställda människor – har visat sig vara farliga för människan eftersom de efter en tid utvecklar sina egna känslor. För att motverka detta är de tillverkade med en fyraårig livsspärr och bannlysta från jorden. De förrymda Replikanternas mål är att få denna livsspärr upphävd men tiden rinner snabbt iväg och mot sig har de Deckard – Blade Runner – med uppdrag att eliminera dem.",
+     "Language": "sv-SE"
+    },
+    {
+     "Title": "Szárnyas fejvadász",
+     "Overview": "2019-et írunk. Egy speciális osztaghoz tartozó Deckard éppen visszavonulni készül, amikor újabb feladatot kap. Öt replikáns eltérített egy űrhajót, hogy visszatérjenek a Földre és megkeressék megalkotójukat: az életüket szeretnék meghosszabbítani. Deckard feladata, hogy megakadályozza ezt, felkutassa és végezzen a replikánsokkal.",
+     "Language": "hu-HU"
+    },
+    {
+     "Title": "Blade Runner",
+     "Overview": "Příběh se odehrává v blízké budoucnosti, kdy věda pokročila a společnost začala vyrábět replikanty, kteří jsou od lidí k nerozeznání. Těm je však po krvavé vzpouře v jedné mimozemské kolonii zakázán vstup na Zemi pod trestem smrti...",
+     "Language": "cs-CZ"
+    },
+    {
+     "Title": "银翼杀手",
+     "Overview": "在一个科技高度发达却因城市与社会凋敝而黯淡的未来，侦探瑞克·戴克奉命追捕叛逃的凶残复制人，同时被一位神秘女子吸引——她的秘密或许将侵蚀他的灵魂。",
+     "Language": "zh-CN"
+    },
+    {
+     "Title": "Łowca androidów",
+     "Overview": "\"Blade Runner\" opowiada o historii jednego z Łowców Androidów, Ricka Deckarda. Replikanci, bo tak nazwano tych androidów, byli używani do niebezpiecznych badań i kolonizacji innych planet. Po krwawym buncie zespołu androidów na pozaziemskiej kolonii, Replikanci nie mogli przebywać legalnie na Ziemi. Są oni owładnięci panicznym strachem przed nieuchronną śmiercią i za wszelką cenę starają się dotrzeć do ich konstruktorów - jedynych ludzi mogących przedłużyć ich życie. Replikanci zostali bowiem zabezpieczeni przed długotrwałym życiem ze względu na rozwijające się w nich uczucia. Specjalny oddział policji - tytułowi \"Łowcy Androidów\" - są detektywami, którzy mają za zadanie odnaleźć i wyeliminować zbiegłych androidów. Akcja rozgrywa się w Los Angeles w 2019 roku gdy jeden z najlepszych Łowców zostaje ranny podczas wykonywania testu Voigta-Kampffa na jednym z androidów i właśnie Deckard przejmuje jego zadanie - wyeliminowanie zbiegłych androidów typu Nexus-6.",
+     "Language": "pl-PL"
+    },
+    {
+     "Title": "Blade Runner",
+     "Overview": "Los Angeles, 2019: Rick Deckard is een 'Blade Runner': een politieagent die ingezet wordt om 'replicants' (androïden) uit te schakelen, omdat onze planeet na een gewelddadige opstand verboden terrein is voor hen.",
+     "Language": "nl-NL"
+    },
+    {
+     "Title": "בלייד ראנר",
+     "Overview": "בלש משטרה בשם דקארד נשכר למשימה מיוחדת - חיסולם של ארבעה אנדרואידים, דמויי אדם, שנמלטו ממושבות החלל וחדרו לכדור הארץ, במטרה למצוא את יוצרם ולהאריך את תוחלת חייהם הקצרה.",
+     "Language": "he-IL"
+    },
+    {
+     "Title": "Blade Runner",
+     "Overview": "Začiatkom 21. storočia dosiahla spoločnosť Tyrell vo výskume robotov fázu Nexus. Jej výrobky boli takmer identické s ľuďmi, nelíšili sa ani inteligenciou. Ľudia používali replikanty pri nebezpečných výpravách alebo ako otrokov pri kolonizácii iných planét. Po krvavej vzbure replikant v jednej z mimozemských kolónií bol robotom pod trestom smrti zakázaný pobyt na Zemi. Na plnenie tohto nariadenia dozerali špeciálne jednotky Blade Runner, poverené vyhľadávaním a likvidáciou replikantov, ktorí zákaz porušia.",
+     "Language": "sk-SK"
+    },
+    {
+     "Title": "Блейд Рънър",
+     "Overview": "През 2019 година, в Лос Анжелис, могъщата корпорация „Тайърел“ е разработила андроиди (наричани репликанти) от ново поколение- „Нексус-6“. Те притежават интелект равностоен на човешкия и значително по-голяма физическа сила. Предназначението им е да участват в проучвания и колонизация на нови светове. След избухването на бунт на андроиди, техният достъпът до Земята е спрян. Всеки репликант промъкнал се на планетата е осъден на смърт. Към полицията са създадени специални отряди от ловци на андроиди. Група от шест хуманоида е отвлякла космическа совалка, избила е пътниците и екипажа и се е отправила към Земята. Целта на репликантите е да намерят своя създател Елдон Тайлър. Той трябва да удължи живота им, продължителността на който е четири години. Репликантите са в състояние да придобиват с времето и емоции - те не се чувстват машини, а човешки същества. Не като такива  обаче ги третират полицията и представителите на корпорация „Тайърел“. За тях те са просто „чучела“.",
+     "Language": "bg-BG"
+    },
+    {
+     "Title": "Μπλέηντ Ράννερ: Ομάδες Εξόντωσης",
+     "Overview": "Η Γη έχει ερημώσει, καθώς οι περισσότεροι κάτοικοι έχουν αναζητήσει καλύτερη τύχη στις διαστημικές αποικίες. Ο Rick Deckard ανήκει σε μια ελίτ αστυνομική ομάδα, τους Blade Runners, που έχουν σαν αποστολή να \"αποσύρουν\" τέλεια ανθρωποειδή ρομπότ, όταν αυτά επιστρέφουν στην Γη.",
+     "Language": "el-GR"
+    },
+    {
+     "Title": "ブレードランナー",
+     "Overview": "2019年、酸性雨が降りしきり、昼なお暗いロサンゼルス。かつて逃亡した人造人間「レプリカント」を処分することが任務の特捜刑事「ブレードランナー」であったデッカードは、引退していたが強引に復職させられ、殺人を犯して逃亡する4体のレプリカントを追う任務に就くことになる。ネクサス6という最新型である彼らは、一見しただけでは普通の人間と区別がつかない。デッカードはネクサス6型を製造するタイレル社へ行き、社長秘書レイチェルに対して警察のレプリカント識別テストを試してみる。",
+     "Language": "ja-JP"
+    },
+    {
+     "Title": "블레이드 러너",
+     "Overview": "2019년, 지구의 파괴와 엄청난 인구증가로 인해 다른 행성을 식민지 이주가 본격화된다. 2주전 6명의 복제 인간 리플리컨트가 식민행성에서 탈출, 23명을 죽이고 우주선을 탈취하여 지구로 잠입한다. 전투용 로이 베티와 리온, 살인 훈련을 받은 조라, 식민행성 군인 클럽 소속의 위안부 프리스가 그들이다. 이들은 타이렐사에 침입하려 하지만 한 사람이 죽고, 직원으로 위장한 리온이 회사 간부의 테스트에 발각되어 도주한다. 이에 경찰은 복제 인간을 구별할 능력을 지닌 블레이드 러너 데커드를 호출하는데...",
+     "Language": "ko-KR"
+    },
+    {
+     "Title": "Vânătorul de recompense",
+     "Overview": "Într-un Los Angeles distopic al viitorului, un grup de replicanți, androizi creați pentru coloniile spațiale, se întoarce pe Pământ în căutarea unei vieți mai lungi. Polițistul Rick Deckard primește misiunea de a-i elimina, dar cazul îl confruntă cu întrebări despre natura umană și ce înseamnă să fii viu.",
+     "Language": "ro-RO"
+    },
+    {
+     "Title": "Blade Runner: O Caçador de Andróides",
+     "Overview": "No início do século 21, uma grande corporação desenvolve um robô que é mais forte e ágil que o ser humano e se equiparando em inteligência. São conhecidos como \"replicantes\" e utilizados como escravos na colonização e exploração de outros planetas. Mas, quando um grupo dos robôs mais evoluídos provoca um motim em uma colônia fora da Terra, este incidente faz os replicantes serem considerados ilegais na Terra, sob pena de morte. A partir de então, policiais de um esquadrão de elite conhecidos como \"Blade Runner\", têm ordem de atirar para matar em replicantes encontrados na Terra. Mas tal ato não é chamado de \"execução\" e sim de \"remoção\". Até que, em novembro de 2019, em Los Angeles, quando cinco replicantes chegam à Terra, o ex-Blade Runner, Deckard, é encarregado de caçá-los.",
+     "Language": "pt-BR"
+    },
+    {
+     "Title": "銀翼殺手",
+     "Overview": "經典級的科幻片，導演雷利史考特（Ridley Scott）改變了一般人對未來世界的刻板印象。...... 2019年，在外太空殖民所增加人口，製造了為數不少的複製人，而這些複製人發生暴動，使得地球政府不得不提前讓他們「退休」。瑞克（Harrison Ford 飾）乃負責執行「銷毀」任務的「銀翼殺手」。而他卻在追殺的過程中，愛上了一位女複製人（《變男變女變變變》《華爾街》Sean Young 飾）……",
+     "Language": "zh-TW"
+    },
+    {
+     "Title": "Той, хто біжить по лезу",
+     "Overview": "Головний герой Рік Декард нишпорить, як хижий звір, в сталевих джунглях Лос-Анджелеса ХХI століття, нашпигованих мікроелектронікою. Він - біжить по лезу, він - той, хто вистежує і вбиває \"реплікантів\" - породження генної інженерії. Але одного разу детектив опиниться перед моральним вибором: в красивій жінці він бачить противника, якого повинен убити ... Інтрига в цій новій версії - поява бачення єдинорога і припущення, що Декард, можливо, гуманоїд. Адже андроїди не бачать снів про електроовець. А може бути, Декард сам \"реплікант\"?",
+     "Language": "uk-UA"
+    },
+    {
+     "Title": "Blade Runner",
+     "Overview": "Deckard era un Blade Runner; un policia encarregat d'encalçar i eliminar replicants, androides creats artificialment. Els seus serveis són requerits quan quatre replicants sobrepassen les barreres d'immigració i arriben a la Terra.",
+     "Language": "ca-ES"
+    },
+    {
+     "Title": "Iztrebljevalec",
+     "Overview": "Eden izmed bolj znanih obskurnih ter nenavadnih filmov je gotovo Blade Runner. Mojstrovina Ridleyja Scotta je kategorija zase – znanstvenofantastični noir film, kjer je Los Angeles antiutopično ozadje teme ter mračnosti.",
+     "Language": "sl-SI"
+    },
+    {
+     "Title": "Blade Runner",
+     "Overview": "Androider gjør opprør mot menneskene i jakten på sitt innerste selv. Politimannen Rick Deckard tar opp jakten, men begynner etter hvert å tvile på om oppdraget er moralsk riktig.",
+     "Language": "no-NO"
+    },
+    {
+     "Title": "Bėgantis skustuvo ašmenimis",
+     "Overview": "Filmo „Bėgantis skustuvo ašmenimis“ scenarijus paremtas romanu „Ar androidai sapnuoja elektronines avis“(Philip K. Dick). Veiksmas vyksta 2019 metų lapkritį, tamsiame ir niūriame Los Andžele. Tai ateitis kurioje egzistuoja dirbtinai sukurtos, protingos būtybės - replikantai. Naujoji šių androidų karta „Nexsus-6“ niekuo nesiskirtų nuo žmonių jei nebūtų stipresni, greitesni ir turėtų emocijas. Šie replikantai atsiduria už įstatymo ribų. Kovoti su jais paskiriami specialūs policijos būriai, o ypatingai žiauriai ir klastingai replikantų grupei sutramdyti pasitelkiamas pagrindinis filmo „Bėgantis skustuvo ašmenimis“ veikėjas Dekardas (vaid. Harisonas Fordas).",
+     "Language": "lt-LT"
+    },
+    {
+     "Title": "Блејд ранер: Истребљивач",
+     "Overview": "Лос Анђелес, година је 2019. Корпорација Тајрел генетским модификацијама креира репликанте тј. хуманоидне андроиде чија је једина сврха понижавајући рад у корист људи на удаљеним Земљиним колонијама. Репликанти су физички снажнији од људи, уграђена им је лажна свест о људском пореклу, а поседују и способност развијања властитих осећаја. Како би се осигурала од евентуалних нежељених последица емотивног сазревања људских „робота“ из властите радионице, корпорација програмира њихов животни век на свега 4 године. Проблеми настају када се шесточлана скупина новог Нексус 6 модела репликаната, предвођена харизматичним Рој Батијем, отима надзору и бежи на Земљу. У френетичној потрази за својим „творцем“, они почињу да сеју смрт и хаос у Лос Анђелесу. Тада на сцену ступа пензионисани полицајац Рик Декард, припадник организације Блејд Ранер, он добија задатак да пронађе и уништи одбегле репликанте. У том процесу Декард  ће се наћи и усред битке с властитим демонима…",
+     "Language": "sr-RS"
+    },
+    {
+     "Title": "დანის პირზე მორბენალი",
+     "Overview": "",
+     "Language": "ka-GE"
+    },
+    {
+     "Title": "Ülgücün üzəri ilə qaçan",
+     "Overview": "",
+     "Language": "az-AZ"
+    },
+    {
+     "Title": "Blade Runner",
+     "Overview": "En l'an 2019, un ex-policier devenu détective privé, Rick Deckard, est rappelé en service pour faire la chasse à des robots d'apparence humaine appelés « replicants ». Deckard doit en éliminer quatre qui se cachent à Los Angeles. La tâche n'est pas facile, mais il arrive à supprimer trois des robots, sans pouvoir empêcher le meurtre d'un important industriel. Le quatrième « replicant », Batty, s'avère particulièrement coriace.",
+     "Language": "fr-CA"
+    },
+    {
+     "Title": "Blade Runner",
+     "Overview": "Rick Deckard deambula por la jungla de acero y microchips de la ciudad de Los Angeles del siglo XXI. Su misión: buscar androides genéticos criminales. Su orden: matarlos. Su delito: querer ser humanos.",
+     "Language": "es-MX"
+    },
+    {
+     "Title": "Pa asmeni skrejošais",
+     "Overview": "Losandželosa, 2019. gads. Riks Dekards ir \"pa asmeni skrejošais\" - policists un atlīdzību mednieks, kura uzdevums ir atrast četrus androīdus-replikantus, kuri nelegāli atgriezās uz Zemes un meklē savu radītāju. Pakaļdzīšanās gaitā Dekards sastopas ar replikantu filozofiju un dzīves uztveri, kas liek tam apšaubīt paša cilvēcību…",
+     "Language": "lv-LV"
+    },
+    {
+     "Title": "Istrebljivač",
+     "Overview": "Tvrtka Tyrell koja proizvodi replikante suočena je s problemom. Roboti koji se ni u čemu ne razlikuju od ljudi, \"samo\" nemaju emocija, pobunili su se i njih nekoliko se vraća na Zemlju. Tamo ih čekaju posebni policajci, \"istrebljivači\" osposobljeni za njihovu likvidaciju. Tvrtka je čak iz mirovine pozvala u pomoć najboljeg od njih, Deckarda.",
+     "Language": "hr-HR"
+    },
+    {
+     "Title": "銀翼殺手",
+     "Overview": "電影描寫了反烏托邦的洛杉磯，大企業公司透過基因設計生產被稱為人造人的一種有機機械人，只用於地外殖民地中危險、卑下或娛樂業的工作。被稱作「銀翼殺手」的特別警察負責追捕及「退役」（即結束生命）反抗禁令並回到地球的人造人。主要劇情聚焦於已退休的銀翼殺手瑞克·戴克勉為其難地接下任務，去追捕一群在近日發動叛亂並偷渡回地球的人造人。在戴克調查的過程中，他與一名先進型號的人造人瑞秋開始了一段關係，使他對於人與人造人之間的人性差別產生質疑。",
+     "Language": "zh-HK"
+    },
+    {
+     "Title": "เบลด รันเนอร์",
+     "Overview": "หนังไซไฟอันดับหนึ่งตลอดกาล! การแสดงภาพสุดตระการตา ฉากแอ็คชั่นสุดมันส์ตลอดทั้งเรื่อง และมีเนื้อหาที่ทรงพลังตั้งแต่ปีแรกที่เริ่มฉาย เบลด รันเนอร์ กลับมาอีกครั้งในภาค ไฟนอล คัต ของผู้กำกับริดลีย์ สก็อตต์ ที่ประกอบไปด้วยฉากขยาย และสเปเชียลเอฟเฟกต์ที่ไม่เคยพบเห็นที่ไหนมาก่อน แฮร์ริสัน ฟอร์ด รับบท ริค เด็คการ์ด นักสืบสวนแห่งศตวรรษที่ 21 เขาได้สร้างคาแรคเตอร์ที่มีนิสัยแข็งนอกอ่อนในจนเป็นที่จดจำในหนังสไตล์ฟิล์มนัวร์สุดระทึกเรื่องนี้ ในโลกอนาคตที่เต็มไปด้วยเทคโนโลยีก้าวล้ำสมัยท่ามกลางเมืองและสังคมที่เน่าเฟะ เด็คการ์ด ออมล่ากลุ่มเรพลิแคนท์ หุ่นแอนดรอยด์อาชญากรที่กำลังหลบหนี และถูกดึงดูดไปกับหญิงสาวลึกลับที่ความลับของเธออาจทำให้เขาสูญเสียจิตวิญญาณ หนังเวอร์ชั่นใหม่นี้เป็นเวอร์ชั่น ไฟนอล คัต ของผู้กำกับเจ้าพ่อไซไฟในตำนานอย่าง ริดลีย์ สก็อตต์",
+     "Language": "th-TH"
+    },
+    {
+     "Title": "Бегчы па лязе",
+     "Overview": "Амерыканская навукова-фантастычная неануар-антыўтопія 1982 года. Пераробленая экранізацыя рамана Філіп К. Дзіка 1968 года \"Ці мрояць андроіды пра электраавечак\".\r Фільм паказвае Лос-Анджэлес лістапада 2019 года, у якім генетычна спраектаваныя рэпліканты, на выгляд неадрозныя ад людзей, вырабляюцца магутнай карпарацыяй Тайрэл і іншымі мега-карпарацыямі па ўсім свеце. На Зямлі рэпліканты забаронены, іх выкарыстоўваюць толькі для небяспечных ці брудных задач у калоніях Знешняга Свету. Рэплікантаў, якія збягаюць на Зямлю, высочваюць і забіваюць (\"адпраўляюць у адстаўку\") асобныя атрады паліцэйскіх, так званых \"бегуноў па лязе\" - блэйдранераў (Blade Runners). Сюжэт паказвае рызыкоўную групу рэплікантаў, што нядаўна ўцяклі і хаваюцца ў Лос-Анджэлесе, і спрактыкаванага блэйдранера Рыка Дэкарда, які неахвотна згаджаецца прыбраць іх.",
+     "Language": "be-BY"
+    },
+    {
+     "Title": "Tội Phạm Người Máy",
+     "Overview": "Blade Runner lấy bối cảnh thế giới tương lai, nơi ô nhiễm môi trường, khủng hoảng lương thực khiến cuộc sống của con người trở thành địa ngục. Để thoát khỏi diệt vong, nhân loại tiến hành khai phá các hành tinh khác trong vũ trụ để thành lập thuộc địa. Họ sử dụng người nhân bản do Eldon Tyrell chế tạo làm nguồn lao động chính. Người nhân bản được tạo ra rất giống với con người, có cảm xúc, suy nghĩ nhưng có tuổi thọ nhất định ở một số phiên bản. Blade Runner là lực lượng cảnh sát được thành lập để săn đuổi và tiêu diệt những người nhân bản lẩn trốn trên trái đất. Trong phần này, các Blade Runner đều là con người. Sang phần phim Blade Runner 2049, các Nexus-9 cũng được tham gia lực lượng này.",
+     "Language": "vi-VN"
+    },
+    {
+     "Title": "بليد رانر",
+     "Overview": "في لوس أنجلوس الملبدة بالضباب الدخاني في عام 2019، يُستدعى صائد الجوائز \"ريك ديكارد\" من تقاعده لتنفيذ مهمة تقضي بإنهاء أربعة من النسخ المتماثلة الذين هربوا إلى الأرض بحثًا عن صانعهم، أملًا في إيجاد طريقة لإطالة أعمارهم القصيرة.",
+     "Language": "ar-SA"
+    },
+    {
+     "Title": "Blade Runner",
+     "Overview": "في لوس أنجلوس المليئة بالضباب الدخاني لعام 2019 ، تم استدعاء عداء الشفرة ريك ديكارد بعد التقاعد لإنهاء مجموعة رباعية من النسخ التي هربت إلى الأرض بحثًا عن طريقة لإطالة أمد حياتها القصيرة.",
+     "Language": "ar-AE"
+    },
+    {
+     "Title": "Blade Runner",
+     "Overview": "In een in smog gehuld, afschrikwekkend Los Angeles wordt de gepensioneerde bladerunner Rick Deckard ingezet om vier ontsnapte 'replicanten' uit te schakelen.",
+     "Language": "nl-BE"
+    },
+    {
+     "Title": "Der Blade Runner",
+     "Overview": "Man schreibt das Jahr 2019. Den Replikanten, künstlichen Menschen, ist bei Todesstrafe die Rückkehr zur Erde verboten. Doch trotzdem kehren eines Tages einige dieser Wesen zurück. Diese besondere Spezies verfügt über Kraft und Intelligenz mehrerer Menschen und ist von diesen kaum zu unterscheiden. Sie sollen unschädlich gemacht werden. Nur eine Spezialeinheit kann sie aufspüren: die Blade Runner. Eine atemberaubende Hetzjagd durch die futuristische Welt beginnt.",
+     "Language": "de-AT"
+    },
+    {
+     "Title": "Der Blade Runner",
+     "Overview": "Man schreibt das Jahr 2019. Den Replikanten, künstlichen Menschen, ist bei Todesstrafe die Rückkehr zur Erde verboten. Doch trotzdem kehren eines Tages einige dieser Wesen zurück. Diese besondere Spezies verfügt über Kraft und Intelligenz mehrerer Menschen und ist von diesen kaum zu unterscheiden. Sie sollen unschädlich gemacht werden. Nur eine Spezialeinheit kann sie aufspüren: die Blade Runner. Eine atemberaubende Hetzjagd durch die futuristische Welt beginnt.",
+     "Language": "de-CH"
+    },
+    {
+     "Title": "Blade Runner",
+     "Overview": "Androider gjør opprør mot menneskene i jakten på sitt innerste selv. Politimannen Rick Deckard tar opp jakten, men begynner etter hvert å tvile på om oppdraget er moralsk riktig.",
+     "Language": "nb-NO"
+    },
+    {
+     "Title": "Blade Runner",
+     "Overview": "Androider gjør opprør mot menneskene i jakten på sitt innerste selv. Politimannen Rick Deckard tar opp jakten, men begynner etter hvert å tvile på om oppdraget er moralsk riktig.",
+     "Language": "nn-NN"
+    },
+    {
+     "Title": "بلید رانر",
+     "Overview": "",
+     "Language": "fa-IR"
+    },
+    {
+     "Title": "Blade Runner",
+     "Overview": "On 2019. aasta Los Angeles - kahvatu neoonvalgustatud, ülerahvastatud tänavatega linn, kus pidevalt sajab happevihma. Detektiiv Rick Deckard peab tabama ja hävitama 4 replikanti, tehislikult loodud inimest, kes põgenesid maavälisest kolooniast, kaaperdades laeva, et tulla maa peale oma loojat otsima.",
+     "Language": "et-EE"
+    }
+   ],
+   "Recommendations": [
+    {
+     "TmdbId": 335984,
+     "Title": "Blade Runner 2049"
+    },
+    {
+     "TmdbId": 280,
+     "Title": "Terminator 2: Judgment Day"
+    },
+    {
+     "TmdbId": 218,
+     "Title": "The Terminator"
+    },
+    {
+     "TmdbId": 296,
+     "Title": "Terminator 3: Rise of the Machines"
+    },
+    {
+     "TmdbId": 290859,
+     "Title": "Terminator: Dark Fate"
+    },
+    {
+     "TmdbId": 5549,
+     "Title": "RoboCop 2"
+    },
+    {
+     "TmdbId": 59967,
+     "Title": "Looper"
+    },
+    {
+     "TmdbId": 534,
+     "Title": "Terminator Salvation"
+    },
+    {
+     "TmdbId": 1635,
+     "Title": "The Island"
+    },
+    {
+     "TmdbId": 500664,
+     "Title": "Upgrade"
+    }
+   ],
+   "Credits": {
+    "Cast": [
+     {
+      "Name": "Harrison Ford",
+      "Order": 0,
+      "Character": "Deckard",
+      "TmdbId": 3,
+      "CreditId": "52fe4214c3a36847f800259f",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/pjBMJVPpcZK23Vt1nzr1zEBTWrP.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Rutger Hauer",
+      "Order": 1,
+      "Character": "Batty",
+      "TmdbId": 585,
+      "CreditId": "52fe4214c3a36847f80025a3",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/xyag0LbjocTwx2Ht7B3RofvCNMT.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Sean Young",
+      "Order": 2,
+      "Character": "Rachael",
+      "TmdbId": 586,
+      "CreditId": "52fe4214c3a36847f80025a7",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/yfJADYt6xYPpg1g7Z7TTW0bcL2s.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Edward James Olmos",
+      "Order": 3,
+      "Character": "Gaff",
+      "TmdbId": 587,
+      "CreditId": "52fe4214c3a36847f80025ab",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/yleTij2PUEgaMLw8xYbLAt7UqIo.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "M. Emmet Walsh",
+      "Order": 4,
+      "Character": "Bryant",
+      "TmdbId": 588,
+      "CreditId": "5402bd1bc3a3684360004649",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/fVWvBxvwyk4aTA9vKZOV9qHRNNk.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Daryl Hannah",
+      "Order": 5,
+      "Character": "Pris",
+      "TmdbId": 589,
+      "CreditId": "52fe4214c3a36847f80025b3",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/5FllFmoiaru7tjXJ6Orc11OpQcw.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "William Sanderson",
+      "Order": 6,
+      "Character": "Sebastian",
+      "TmdbId": 590,
+      "CreditId": "52fe4214c3a36847f80025b7",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/i3JfaavAFq9ayeJ4doUaOGjHMMW.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Brion James",
+      "Order": 7,
+      "Character": "Leon",
+      "TmdbId": 591,
+      "CreditId": "52fe4214c3a36847f80025bb",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/qy5jIIsWrNCV1OVRaUiqYNhLLVT.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Joe Turkel",
+      "Order": 8,
+      "Character": "Tyrell",
+      "TmdbId": 592,
+      "CreditId": "52fe4214c3a36847f80025bf",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/rqpNzjLFCoMrvGSf6SIL5JnWwMT.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Joanna Cassidy",
+      "Order": 9,
+      "Character": "Zhora",
+      "TmdbId": 593,
+      "CreditId": "52fe4214c3a36847f80025c3",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/cgyR6QLZdC6apR8eHnhgqDQmqyr.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "James Hong",
+      "Order": 10,
+      "Character": "Chew",
+      "TmdbId": 20904,
+      "CreditId": "52fe4214c3a36847f8002615",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/v3lfw5aHOy0paOCx6WHiSnwzbH0.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Morgan Paull",
+      "Order": 11,
+      "Character": "Holden",
+      "TmdbId": 58495,
+      "CreditId": "52fe4214c3a36847f8002625",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/y8hQzCz4WEqgD8biDdoBVw8zmNp.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Kevin Thompson",
+      "Order": 12,
+      "Character": "Bear",
+      "TmdbId": 53760,
+      "CreditId": "52fe4214c3a36847f8002629",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/hhJNd4If3wWmhlKV1MLkDpWA6E5.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "John Edward Allen",
+      "Order": 13,
+      "Character": "Kaiser",
+      "TmdbId": 943481,
+      "CreditId": "52fe4214c3a36847f800262d",
+      "Images": []
+     },
+     {
+      "Name": "Hy Pyke",
+      "Order": 14,
+      "Character": "Taffey Lewis",
+      "TmdbId": 107074,
+      "CreditId": "52fe4214c3a36847f8002631",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/uuSQqL8n4VkFXdWDq1XkEHDOvou.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Kimiko Hiroshige",
+      "Order": 15,
+      "Character": "Cambodian Lady",
+      "TmdbId": 951333,
+      "CreditId": "52fe4214c3a36847f8002635",
+      "Images": []
+     },
+     {
+      "Name": "Bob Okazaki",
+      "Order": 16,
+      "Character": "Sushi Master",
+      "TmdbId": 1221198,
+      "CreditId": "52fe4214c3a36847f8002643",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/qLapAz3PzkwUOREYxsI43Y8Xi4F.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Carolyn DeMirjian",
+      "Order": 17,
+      "Character": "Saleslady",
+      "TmdbId": 949610,
+      "CreditId": "52fe4214c3a36847f8002639",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/ifRke3Ct4urlagX33ekt8MJMP2o.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Ben Astar",
+      "Order": 18,
+      "Character": "Abdul Ben Hassan",
+      "TmdbId": 112965,
+      "CreditId": "59c32a68c3a368146100661f",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/wJav95yX8J1tAjPuScD3L3Gq3Tk.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Dawna Lee Heising",
+      "Order": 19,
+      "Character": "Showgirl (uncredited)",
+      "TmdbId": 1198993,
+      "CreditId": "59c9bb7dc3a368031f002581",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/8Ky9a7fx4BhJzdkhbfHA0cOj8Xo.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Alexis Rhee",
+      "Order": 20,
+      "Character": "Geisha #1 (uncredited)",
+      "TmdbId": 58930,
+      "CreditId": "59c9bc36c3a3680347002504",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/hpOqDKHkzzXzPW0dbokXlPWIq2u.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Judith Burnett",
+      "Order": 21,
+      "Character": "Ming-Fa (uncredited)",
+      "TmdbId": 324200,
+      "CreditId": "59c9bb45c3a36803b70024a9",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/cSkw5OEUXzRCHgniWA4ARIrE77e.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Leo Gorcey Jr.",
+      "Order": 22,
+      "Character": "Louie - Bartender (uncredited)",
+      "TmdbId": 1713945,
+      "CreditId": "59c9bb60c3a368031f00256a",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/uCPaZ6sWC4sqkcKAFdaIyxbnbNi.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Sharon Hesky",
+      "Order": 23,
+      "Character": "Bar Patron (uncredited)",
+      "TmdbId": 1894794,
+      "CreditId": "59c9bb94c3a36803c70020b3",
+      "Images": []
+     },
+     {
+      "Name": "Kelly Hine",
+      "Order": 24,
+      "Character": "Showgirl (uncredited)",
+      "TmdbId": 1894795,
+      "CreditId": "59c9bba9c3a36803b7002501",
+      "Images": []
+     },
+     {
+      "Name": "Tom Hutchinson",
+      "Order": 25,
+      "Character": "Bartender (uncredited)",
+      "TmdbId": 1510856,
+      "CreditId": "59c9bbbec3a36803a40024e4",
+      "Images": []
+     },
+     {
+      "Name": "Charles Knapp",
+      "Order": 26,
+      "Character": "Bartender (uncredited)",
+      "TmdbId": 943879,
+      "CreditId": "59c9bbd4c3a36803b7002519",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/pySATu1neWqZ3INnmdcLbGEhBbm.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Rose Mascari",
+      "Order": 27,
+      "Character": "Bar Patron (uncredited)",
+      "TmdbId": 1894796,
+      "CreditId": "59c9bbe792514124010023b6",
+      "Images": []
+     },
+     {
+      "Name": "Jiro Okazaki",
+      "Order": 28,
+      "Character": "Policeman (uncredited)",
+      "TmdbId": 239493,
+      "CreditId": "59c9bbfbc3a368031f0025d9",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/7B8WWT9WK7lmLXeI2lqc6gDcEwb.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Steve Pope",
+      "Order": 29,
+      "Character": "Policeman (uncredited)",
+      "TmdbId": 1701394,
+      "CreditId": "59c9bc0f92514123b9002498",
+      "Images": []
+     }
+    ],
+    "Crew": [
+     {
+      "Name": "Ridley Scott",
+      "Order": 0,
+      "Job": "Director",
+      "Department": "Directing",
+      "TmdbId": 578,
+      "CreditId": "52fe4214c3a36847f8002595",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/zABJmN9opmqD4orWl3KSdCaSo7Q.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "David Webb Peoples",
+      "Order": 1,
+      "Job": "Screenplay",
+      "Department": "Writing",
+      "TmdbId": 7191,
+      "CreditId": "52fe4214c3a36847f8002621",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/rK1eEwQ60MN7CkPbzxSeQPE8mmi.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Hampton Fancher",
+      "Order": 2,
+      "Job": "Screenplay",
+      "Department": "Writing",
+      "TmdbId": 583,
+      "CreditId": "52fe4214c3a36847f800261b",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/qCvawbNUyrgLhaN2KqFqpy1IO2w.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Run Run Shaw",
+      "Order": 3,
+      "Job": "Producer",
+      "Department": "Production",
+      "TmdbId": 21918,
+      "CreditId": "62f6691becbde9007d65c8b3",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/tBExj3hZqyg5dkI9kFLJY20MLzh.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Michael Deeley",
+      "Order": 4,
+      "Job": "Producer",
+      "Department": "Production",
+      "TmdbId": 581,
+      "CreditId": "52fe4214c3a36847f800259b",
+      "Images": []
+     },
+     {
+      "Name": "Jordan Cronenweth",
+      "Order": 5,
+      "Job": "Director of Photography",
+      "Department": "Camera",
+      "TmdbId": 594,
+      "CreditId": "52fe4214c3a36847f80025c9",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/kEZFQZKU5mRjDK2zi5ZjXVFgofj.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Tony Cox",
+      "Order": 6,
+      "Job": "Stunts",
+      "Department": "Crew",
+      "TmdbId": 19754,
+      "CreditId": "6505e4a3fa27f4014eb10b97",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/sbZS0gxvRsAIgHxIEL8STINpn7u.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Run Run Shaw",
+      "Order": 7,
+      "Job": "Presenter",
+      "Department": "Crew",
+      "TmdbId": 21918,
+      "CreditId": "5fb93bd988055100409cc268",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/tBExj3hZqyg5dkI9kFLJY20MLzh.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Jon Title",
+      "Order": 8,
+      "Job": "Sound Effects Editor",
+      "Department": "Sound",
+      "TmdbId": 1342657,
+      "CreditId": "5a898397c3a36862a705f66d",
+      "Images": []
+     },
+     {
+      "Name": "Philip K. Dick",
+      "Order": 9,
+      "Job": "Novel",
+      "Department": "Writing",
+      "TmdbId": 584,
+      "CreditId": "52fe4214c3a36847f800263f",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/8J46Z9coRCXApsA5WoTC2CLAaOw.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Philip K. Dick",
+      "Order": 10,
+      "Job": "Thanks",
+      "Department": "Crew",
+      "TmdbId": 584,
+      "CreditId": "549e9f85c3a3685542004c7b",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/8J46Z9coRCXApsA5WoTC2CLAaOw.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Peter Pennell",
+      "Order": 11,
+      "Job": "Sound Editor",
+      "Department": "Sound",
+      "TmdbId": 1404764,
+      "CreditId": "549e9dd59251414e28003562",
+      "Images": []
+     },
+     {
+      "Name": "Lawrence G. Paull",
+      "Order": 12,
+      "Job": "Production Design",
+      "Department": "Art",
+      "TmdbId": 596,
+      "CreditId": "52fe4214c3a36847f80025d5",
+      "Images": []
+     },
+     {
+      "Name": "Richard L. Hill",
+      "Order": 13,
+      "Job": "Special Effects Technician",
+      "Department": "Crew",
+      "TmdbId": 1589185,
+      "CreditId": "5fb9403ab6abc4003db6a1e3",
+      "Images": []
+     },
+     {
+      "Name": "Gary McLarty",
+      "Order": 14,
+      "Job": "Stunts",
+      "Department": "Crew",
+      "TmdbId": 122106,
+      "CreditId": "648d2fe142bf01013bbc6c38",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/4xSAT88lbNV8BJHDOhXiFqpeZiD.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "David L. Snyder",
+      "Order": 15,
+      "Job": "Art Direction",
+      "Department": "Art",
+      "TmdbId": 601,
+      "CreditId": "52fe4214c3a36847f80025f3",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/u6mr5Eaz85CA53BsuLRicdl6gvp.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Ron Bartlett",
+      "Order": 16,
+      "Job": "Sound Re-Recording Mixer",
+      "Department": "Sound",
+      "TmdbId": 16177,
+      "CreditId": "5a8983510e0a26400b066cc2",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/AmFG81joHLkvnh4Io20TdCCBk8P.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Leslie McCarthy-Frankenheimer",
+      "Order": 17,
+      "Job": "Set Decoration",
+      "Department": "Art",
+      "TmdbId": 603,
+      "CreditId": "52fe4214c3a36847f80025ff",
+      "Images": []
+     },
+     {
+      "Name": "Charles A. Tamburro",
+      "Order": 18,
+      "Job": "Stunts",
+      "Department": "Crew",
+      "TmdbId": 16563,
+      "CreditId": "6505e529109dec014f40ad9c",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/iCygZNkwUc2wSEIT58qUpiIkIC.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Michael Westmore",
+      "Order": 19,
+      "Job": "Prosthetic Makeup Artist",
+      "Department": "Costume & Make-Up",
+      "TmdbId": 16519,
+      "CreditId": "5a89831ec3a36862070626d6",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/2GjBNS64nYQOiyV3COKqR4Wjlun.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Vic Armstrong",
+      "Order": 20,
+      "Job": "Stunt Double",
+      "Department": "Crew",
+      "TmdbId": 15358,
+      "CreditId": "6505e473394a8700ada6f664",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/wO4MjYTEic6yEpsbdKmKEmyNBdT.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Bud Yorkin",
+      "Order": 21,
+      "Job": "Presenter",
+      "Department": "Crew",
+      "TmdbId": 69946,
+      "CreditId": "5fb93c50b6abc4003fb69a2f",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/m66f4nyjCb4Zeg4JUoYzpzt4zWL.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Newt Arnold",
+      "Order": 22,
+      "Job": "First Assistant Director",
+      "Department": "Directing",
+      "TmdbId": 70250,
+      "CreditId": "5fb932d4d9f4a6003f03779c",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/j6MbP81EFKlcERFN2KRqSdvqPPG.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Gary Epper",
+      "Order": 23,
+      "Job": "Stunts",
+      "Department": "Crew",
+      "TmdbId": 161597,
+      "CreditId": "6505e4d245765d00adafcb6c",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/6Jp2FF14bmoLdg4JdGuHyY1lRpW.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Jeff Imada",
+      "Order": 24,
+      "Job": "Stunts",
+      "Department": "Crew",
+      "TmdbId": 169628,
+      "CreditId": "6505e4d7394a8700c5bd1c43",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/sUNSaNQreSHYaJvKr0SfiBqMPDV.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Gary Combs",
+      "Order": 25,
+      "Job": "Stunt Coordinator",
+      "Department": "Crew",
+      "TmdbId": 999716,
+      "CreditId": "549e9e4192514131290084f1",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/7cLJ3YVZcDxEZgQCqIxpfMDXDlR.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Vangelis",
+      "Order": 26,
+      "Job": "Original Music Composer",
+      "Department": "Sound",
+      "TmdbId": 595,
+      "CreditId": "52fe4214c3a36847f80025cf",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/7qSj7Dk0mMytSxSHTsSIi4tmgnu.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Bobby Porter",
+      "Order": 27,
+      "Job": "Stunts",
+      "Department": "Crew",
+      "TmdbId": 18677,
+      "CreditId": "6505e4ff394a8700e2259f6e",
+      "Images": []
+     },
+     {
+      "Name": "Doug Hemphill",
+      "Order": 28,
+      "Job": "Sound Re-Recording Mixer",
+      "Department": "Sound",
+      "TmdbId": 1377220,
+      "CreditId": "5a89838192514175990620a1",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/jpShbzJgiLoM4iZZcDe3KmoqnG4.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "George Sawaya",
+      "Order": 29,
+      "Job": "Stunts",
+      "Department": "Crew",
+      "TmdbId": 100799,
+      "CreditId": "6505e5093cd12c010ccfe305",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/z45qaRI3GOb2BpqdNBPPMU6iV8.jpg"
+       }
+      ]
+     }
+    ]
+   },
+   "Studio": "Shaw Brothers",
+   "YoutubeTrailerId": "qoEyZoOTtss",
+   "Certifications": [
+    {
+     "Country": "AU",
+     "Certification": "M"
+    },
+    {
+     "Country": "BE",
+     "Certification": "16"
+    },
+    {
+     "Country": "BR",
+     "Certification": "14"
+    },
+    {
+     "Country": "CZ",
+     "Certification": "18+"
+    },
+    {
+     "Country": "DE",
+     "Certification": "16"
+    },
+    {
+     "Country": "DK",
+     "Certification": "15"
+    },
+    {
+     "Country": "ES",
+     "Certification": "12"
+    },
+    {
+     "Country": "FI",
+     "Certification": "K-16"
+    },
+    {
+     "Country": "FR",
+     "Certification": "12"
+    },
+    {
+     "Country": "GB",
+     "Certification": "15"
+    },
+    {
+     "Country": "HU",
+     "Certification": "16"
+    },
+    {
+     "Country": "IE",
+     "Certification": "15"
+    },
+    {
+     "Country": "KR",
+     "Certification": "19"
+    },
+    {
+     "Country": "MX",
+     "Certification": "B-15"
+    },
+    {
+     "Country": "NL",
+     "Certification": "12"
+    },
+    {
+     "Country": "NO",
+     "Certification": "15"
+    },
+    {
+     "Country": "NZ",
+     "Certification": "M"
+    },
+    {
+     "Country": "PL",
+     "Certification": "16"
+    },
+    {
+     "Country": "PT",
+     "Certification": "M/12"
+    },
+    {
+     "Country": "RO",
+     "Certification": "18"
+    },
+    {
+     "Country": "RU",
+     "Certification": "18+"
+    },
+    {
+     "Country": "SE",
+     "Certification": "15"
+    },
+    {
+     "Country": "TW",
+     "Certification": "輔15"
+    },
+    {
+     "Country": "US",
+     "Certification": "R"
+    }
+   ],
+   "Status": null,
+   "Collection": {
+    "TmdbId": 422837,
+    "Name": "Blade Runner Collection",
+    "Images": null,
+    "Overview": null,
+    "Translations": null,
+    "Parts": null
+   },
+   "Homepage": "http://www.warnerbros.com/blade-runner"
+  },
+  {
+   "TmdbId": 335984,
+   "ImdbId": "tt1856101",
+   "Title": "Blade Runner 2049",
+   "Overview": "Thirty years after the events of the first film, a new blade runner, LAPD Officer K, unearths a long-buried secret that has the potential to plunge what's left of society into chaos. K's discovery leads him on a quest to find Rick Deckard, a former LAPD blade runner who has been missing for 30 years.",
+   "OriginalTitle": "Blade Runner 2049",
+   "OriginalLanguage": "en",
+   "TitleSlug": "335984",
+   "Runtime": 164,
+   "Popularity": 36.0452,
+   "Year": 2017,
+   "Premier": "2017-10-03T00:00:00Z",
+   "InCinema": "2017-10-04T00:00:00Z",
+   "PhysicalRelease": "2018-01-16T00:00:00Z",
+   "DigitalRelease": "2017-12-26T00:00:00Z",
+   "Images": [
+    {
+     "CoverType": "Poster",
+     "Url": "https://image.tmdb.org/t/p/original/gajva2L0rPYkEWjzgFlBXCAVBE5.jpg"
+    },
+    {
+     "CoverType": "Fanart",
+     "Url": "https://image.tmdb.org/t/p/original/gNdLJU9TxrpGx4dkZidjys3fyy0.jpg"
+    }
+   ],
+   "Ratings": [
+    {
+     "Count": 15957,
+     "Value": 7.613,
+     "Origin": "Tmdb",
+     "Type": "User"
+    }
+   ],
+   "MovieRatings": {
+    "Tmdb": {
+     "Count": 15957,
+     "Value": 7.613,
+     "Type": "User"
+    },
+    "Imdb": {
+     "Count": 774962,
+     "Value": 8,
+     "Type": "User"
+    },
+    "Metacritic": {
+     "Count": 0,
+     "Value": 81,
+     "Type": "User"
+    },
+    "RottenTomatoes": {
+     "Count": 0,
+     "Value": 88,
+     "Type": "User"
+    },
+    "Trakt": {
+     "Count": 33371,
+     "Value": 7.89062,
+     "Type": "User"
+    }
+   },
+   "Genres": [
+    "Science Fiction",
+    "Drama"
+   ],
+   "Keywords": [
+    "2040s",
+    "android",
+    "artificial intelligence (a.i.)",
+    "blade runner",
+    "bounty hunter",
+    "cyber thriller",
+    "cyberpunk",
+    "dystopia",
+    "future",
+    "humanoid robot",
+    "las vegas",
+    "los angeles, california",
+    "sequel",
+    "slow burn",
+    "tech noir",
+    "transhumanism"
+   ],
+   "AlternativeTitles": [
+    {
+     "Title": "Blade Runner 2",
+     "Type": "Tmdb",
+     "Language": "en"
+    },
+    {
+     "Title": "Blejd Raner 2049",
+     "Type": "Tmdb",
+     "Language": "en"
+    },
+    {
+     "Title": "Бегущий по лезвию 2",
+     "Type": "Tmdb",
+     "Language": "ru"
+    },
+    {
+     "Title": "Blade Runner 2049 3D",
+     "Type": "Tmdb",
+     "Language": "en"
+    },
+    {
+     "Title": "ブレードランナー 2049",
+     "Type": "Tmdb",
+     "Language": "ja"
+    },
+    {
+     "Title": "블레이드 러너 2049",
+     "Type": "Tmdb",
+     "Language": "ko"
+    },
+    {
+     "Title": "블레이드러너 2049",
+     "Type": "Tmdb",
+     "Language": "ko"
+    },
+    {
+     "Title": "Blade Runner 2049: Bıçak Sırtı",
+     "Type": "Tmdb",
+     "Language": "en"
+    },
+    {
+     "Title": "银翼杀手2049",
+     "Type": "Tmdb",
+     "Language": "zh"
+    },
+    {
+     "Title": "Շեղբի վրայով վազողը 2049",
+     "Type": "Tmdb",
+     "Language": "en"
+    },
+    {
+     "Title": "Bıçak Sırtı 2049",
+     "Type": "Tmdb",
+     "Language": "en"
+    },
+    {
+     "Title": "Blade Runner 2 - 2049",
+     "Type": "Tmdb",
+     "Language": "en"
+    },
+    {
+     "Title": "Blade Runner 6 - 2049",
+     "Type": "Tmdb",
+     "Language": "en"
+    },
+    {
+     "Title": "Blade Runner 5 - 2049",
+     "Type": "Tmdb",
+     "Language": "en"
+    }
+   ],
+   "Translations": [
+    {
+     "Title": "Blade Runner 2049",
+     "Overview": "Thirty years after the events of the first film, a new blade runner, LAPD Officer K, unearths a long-buried secret that has the potential to plunge what's left of society into chaos. K's discovery leads him on a quest to find Rick Deckard, a former LAPD blade runner who has been missing for 30 years.",
+     "Language": "en-US"
+    },
+    {
+     "Title": "Blade Runner 2049",
+     "Overview": "En 2049, la société est fragilisée par les nombreuses tensions entre les humains et leurs esclaves créés par bioingénierie. L’officier K est un Blade Runner : il fait partie d’une force d’intervention d’élite chargée de trouver et d’éliminer ceux qui n’obéissent pas aux ordres des humains. Lorsqu’il découvre un secret enfoui depuis longtemps et capable de changer le monde, les plus hautes instances décident que c’est à son tour d’être traqué et éliminé. Son seul espoir est de retrouver Rick Deckard, un ancien Blade Runner qui a disparu depuis des décennies…",
+     "Language": "fr-FR"
+    },
+    {
+     "Title": "Blade Runner 2049",
+     "Overview": "Im Jahr 2023 wird die Herstellung von Replikanten – künstlichen Menschen, die zum Einsatz in den Weltall-Kolonien gezüchtet werden – nach mehreren schwerwiegenden Vorfällen verboten. Als der brillante Industrielle Niander Wallace ein neues, verbessertes Modell, den „Nexus 9“, vorstellt, wird die Produktion 2036 jedoch wieder erlaubt. Um ältere und somit nicht zugelassene Replikanten-Modelle, die sich auf der Erde verstecken, aufzuspüren und zu eliminieren, ist weiterhin die sogenannte „Blade Runner“-Einheit des LAPD im Einsatz, zu der auch K gehört. Bei seiner Arbeit stößt K auf ein düsteres, gut gehütetes Geheimnis von enormer Sprengkraft, das ihn auf die Spur eines ehemaligen Blade Runners bringt: Rick Deckard, der vor 30 Jahren aus Los Angeles verschwand ...",
+     "Language": "de-DE"
+    },
+    {
+     "Title": "Blade Runner 2049",
+     "Overview": "Han pasado 30 años desde los acontecimientos ocurridos en Blade Runner (1982). El oficial K, un blade runner caza-replicantes del Departamento de Policía de Los Ángeles, descubre un secreto que ha estado enterrado durante mucho tiempo y que tiene el potencial de llevar a la sociedad al caos. Su investigación le conducirá a la búsqueda del legendario Rick Deckard, un antiguo blade runner en paradero desconocido, que lleva desaparecido 30 años.",
+     "Language": "es-ES"
+    },
+    {
+     "Title": "Blade Runner 2049",
+     "Overview": "Trent'anni dopo gli eventi del primo film, un nuovo blade runner, l'Agente K della Polizia di Los Angeles  scopre un segreto sepolto da tempo che ha il potenziale di far precipitare nel caos quello che è rimasto della società. La scoperta di K lo spinge verso la ricerca di Rick Deckard, un ex-blade runner della polizia di Los Angeles sparito nel nulla da 30 anni.",
+     "Language": "it-IT"
+    },
+    {
+     "Title": "Blade Runner 2049",
+     "Overview": "30 χρόνια έχουν περάσει από τα γνωστά γεγονότα, και ένας νέος blade-runner, ο αστυνόμος του Λος Άντζελες Κ, φέρνει στην επιφάνεια ένα χρόνια κρυμμένο μυστικό, το οποίο έχει προοπτικές να βυθίσει ότι απέμεινε από τον πολιτισμό στο χάος. Η ανακάλυψη του Κ τον οδηγεί στην αναζήτηση του Ρικ Ντέκαρντ, ενός παλιού συνάδελφου που έχει χαθεί επί 30 χρόνια.",
+     "Language": "el-GR"
+    },
+    {
+     "Title": "Szárnyas fejvadász 2049",
+     "Overview": "Már 30 éve, hogy Rick Deckard, a szárnyas fejvadász eltűnt a színről. K ügynök felfedez egy régi titkot, ami a társadalmat totális káoszba taszíthatja. Az információ arra készteti a rendőrt, hogy felkeresse Deckardot, s együtt tegyenek valamit.",
+     "Language": "hu-HU"
+    },
+    {
+     "Title": "Blade Runner 2049",
+     "Overview": "Trinta anos após os acontecimentos do primeiro filme, um novo blade runner, o oficial K da polícia de Los Angeles, desenterra um segredo há muito enterrado que tem o potencial de mergulhar o que resta da sociedade no caos. A descoberta de K o leva a uma busca para encontrar Rick Deckard, um ex-blade runner do LAPD que está desaparecido há 30 anos.",
+     "Language": "pt-BR"
+    },
+    {
+     "Title": "בלייד ראנר 2049",
+     "Overview": "שלושים שנים לאחר אירועי הסרט הראשון, יש בלייד ראנר חדש – קיי, שוטר במשטרת לוס אנג'לס (ריאן גוסלינג), חושף סוד ישן אשר עלול להמיט אסון על מה שנותר מהאנושות. מה שקיי מגלה מוביל אותו לצאת ולמצוא את ריק דוקארד (האריסון פורד), בלייד ראנר לשעבר שנעלם לפני 30 שנה.",
+     "Language": "he-IL"
+    },
+    {
+     "Title": "Бегущий по лезвию 2049",
+     "Overview": "Содержимое тайной могилы вызывает интерес промышленного магната, а также офицера Кей из полиции Лос-Анджелеса, который отправляется на поиски пропавшей легенды.",
+     "Language": "ru-RU"
+    },
+    {
+     "Title": "블레이드 러너 2049",
+     "Overview": "인간과 리플리컨트가 혼재된 2049년. 인간의 통제를 벗어난 리플리컨트를 쫓는 블레이드 러너 K는 임무 수행 도중 약 30년 전 여자 리플리컨트의 유골을 발견하고 충격적으로 출산의 흔적까지 찾아낸다. 리플리컨트가 출산까지 가능하다는 사실이 알려지면사회에 큰 혼란이 야기되므로 이를 덮으려는 경찰 조직과, 그 비밀의 단서를 찾아내 더욱 완벽한 리플리컨트를 거느리고 세상을 장악하기 위해 K를 쫓는 니안더 월레스. 리플리컨트의 숨겨진 진실에 접근할수록 점차 정체성의 혼란을 겪게 되는 K는 과거 블레이드 러너였던 릭 데커드를 만나 전혀 상상치 못한 진실을 마주하게 되는데...",
+     "Language": "ko-KR"
+    },
+    {
+     "Title": "Той, хто біжить по лезу 2049",
+     "Overview": "Офіцер поліції Лос-Анджелеса на імя Кей розслідує давно забуту таємницю, здатну занурити в хаос залишки суспільства. Це відкриття змушує його відшукати зниклого 30 років тому Ріка Декарда - колишнього службовця спеціального підрозділу правоохоронних органів, який займався пошуком і знищенням втікачів-андроїдів ...",
+     "Language": "uk-UA"
+    },
+    {
+     "Title": "Blade Runner 2049: Bıçak Sırtı",
+     "Overview": "İlk filmdeki olayların üzerinden 30 yıldan daha uzun bir zaman geçmişken, Los Angeles Polis Departmanı'nda görev yapan Memur K, insanlığı büyük kargaşaya sürükleyecek ve hatta sonunu bile getirebilecek bir sırrı ortaya çıkarmıştır. Büyük bir felaketi önleyebilmek için Rick Deckard'ı bulup ondan bazı soruların yanıtlarını alması şarttır.",
+     "Language": "tr-TR"
+    },
+    {
+     "Title": "ブレードランナー 2049",
+     "Overview": "2022年にアメリカ西海岸で大規模な停電が起きたのをきっかけに世界は食物供給が混乱するなど危機的状況を迎える。2025年、科学者ウォレスが遺伝子組み換え食品を開発し、人類の危機を救う。そして、元捜査官デッカードが突然行方をくらませて以来30年の月日が流れた2049年には、レプリカント（人造人間）の寿命に制限がなくなっていた。",
+     "Language": "ja-JP"
+    },
+    {
+     "Title": "Blade Runner 2049",
+     "Overview": "V roce 2049 odhaluje nový Blade Runner a důstojník policie dlouho ukryté tajemství, které by mohlo zcela rozvrátit poslední zbytky lidské společnosti. Toto odhalení ho nutí zahájit pátrání po již 30 let nezvěstném bývalém Blade Runnerovi.",
+     "Language": "cs-CZ"
+    },
+    {
+     "Title": "Блейд Рънър 2049",
+     "Overview": "Новият блейд рънър Кей е полицай от Лос Анджелис, който разследва тайна, която може да доведе до пълен хаос и да застраши обществото. За да реши проблема Кей ще трябва да открие бившия блейд рънър Рик, който е изчезнал преди 30 години.",
+     "Language": "bg-BG"
+    },
+    {
+     "Title": "Blade Runner 2049",
+     "Overview": "Los Angeles 2049. Politimanden K, en blade runner, jager gamle replikanter, som skal \"pensioneres\". Han kommer på sporet af et barn og en hemmelighed, der kan potentielt styrte resten af det civiliserede samfund i grus. Rick Deckard, en anden blade runner, kender barnet og sandheden, men har været forsvundet de sidste 30 år.",
+     "Language": "da-DK"
+    },
+    {
+     "Title": "Blade Runner 2049",
+     "Overview": "Minęło 30 lat od wydarzeń przedstawionych w filmie \"Łowca androidów\" Ridleya Scotta. Wtedy w 2019 roku agent Rick Deckard ścigał w Los Angeles zbuntowane androidy z serii Nexus 6. Teraz w 2049 roku do akcji wkracza nowy Blade Runner, czyli łowca - oficer K . Niespodziewanie funkcjonariusz odkrywa spisek, który może zniszczyć pozostałości dawnego porządku i społeczeństwa. Żeby uratować i tak już zrujnowany świat, K musi poprosić o pomoc Deckarda. Problem w tym, że Rick ukrywa się od czasu, gdy w 2019 roku uciekł z Los Angeles...",
+     "Language": "pl-PL"
+    },
+    {
+     "Title": "Blade Runner 2049",
+     "Overview": "Blade Runner 2049 sa odohráva tridsať rokov po prvom filme. Na scénu prichádza nový blade runner menom K, aby odhalil tajomstvo, ktoré môže uvrhnúť zvyšky spoločnosti do chaosu. Jeho pátranie ho privedie až k bývalému blade runnerovi, ktorý bol tridsať rokov nezvestný…",
+     "Language": "sk-SK"
+    },
+    {
+     "Title": "银翼杀手2049",
+     "Overview": "在《银翼杀手》（1982）事件发生三十年后，新一代银翼杀手、洛杉矶警察“K”发现了一个尘封已久的秘密，这个秘密有可能使所剩无几的社会陷入混乱。K的这一发现引领他踏上寻找失踪三十年的前洛杉矶警察银翼杀手瑞克·戴克之路。[华纳兄弟影业]",
+     "Language": "zh-CN"
+    },
+    {
+     "Title": "Блејд Ранер 2049",
+     "Overview": "Тридесет година након догађаја из првог дела, нови блејд ранер, полицајац К (Рајан Гослинг) открива давно скривену тајну која би могла да оно што је остало од друштва претвори у хаос. К креће у потрагу за Риком Декардом (Харисон Форд), бившим блејд ранером који је нестао пре 30 година.",
+     "Language": "sr-RS"
+    },
+    {
+     "Title": "Blade Runner 2049",
+     "Overview": "Tiga puluh tahun setelah peristiwa pada film sebelumnya, blade runner yang baru, petugas LAPD bernama K, membongkar rahasia yang telah tersimpan lama yang dapat membuat kekacauan di masyarakat. Penemuan tsb membuat K terdorong untuk mencari Rick Deckard, mantan polisi yang telah hilang selama 30 tahun.",
+     "Language": "id-ID"
+    },
+    {
+     "Title": "Blade Runner 2049",
+     "Overview": "Trinta anos após os eventos do primeiro filme, K, um novo blade runner, oficial da LAPD, desvenda um segredo há muito enterrado que pode potencialmente mergulhar no caos o que resta da sociedade. A descoberta de K leva-o numa missão para localizar Rick Deckard, um antigo blade runner da LAPD, desaparecido há 30 anos.",
+     "Language": "pt-PT"
+    },
+    {
+     "Title": "Blade Runner 2049",
+     "Overview": "Dertig jaar na de gebeurtenissen in de eerste film ontdekt een nieuwe Blade Runner, LAPD agent K, een verborgen geheim dat wat nog overblijft van de huidige maatschappij mogelijk in chaos kan doen verzinken.",
+     "Language": "nl-NL"
+    },
+    {
+     "Title": "銀翼殺手2049",
+     "Overview": "故事描述在未來2049年時，複製人奴隸已成為文明躍進過程的關鍵，儘管掌權者試圖築起高牆以區分人種，但人造人與真實人類的界線卻越趨模糊、真假難分，引發正反兩面的一連串影響。  由萊恩葛斯林飾演的銀翼殺手K，為阻止現況演變成不可挽救的局面，因此踏上尋找掌握重要線索的關鍵人物、由哈里遜福特飾演的第一代銀翼殺手瑞克戴克之路，欲挖掘隱匿許久的事實真相。兩代銀翼殺手將聯手抗衡強大反派的追殺，與破解隱藏背後的秘密詭計。",
+     "Language": "zh-TW"
+    },
+    {
+     "Title": "เบลด รันเนอร์ 2049",
+     "Overview": "Blade Runner 2049 ว่าด้วยเรื่องราวต่อจาก 30 ปีที่แล้ว บริษัทไทเรล ล่มสลายจากการก่อกบฎทำให้เกิดข้อห้ามการสร้างมนุษย์เทียม กาลเวลาผ่านไป ถือกำเนิดบริษัทใหม่ Wallace Corporation นำโดย ไนแอนเดอร์ วอลเลซ (รับบทโดย จาเร็ด เลโต) เข้ามาแทนที่ เขาได้ดีงเอาเทคโนโลยีของไทเรลมาผนวกกับวิสัยทัศน์ใหม่ และได้เริ่มผลิตมนุษย์เทียมรุ่น Nexus-9 ขึ้นมา พร้อมออกกฎให้ปราบปรามหุ่นรุ่นเก่าอันเป็นต้นเหตุของการก่อกบฎให้หมดสิ้น",
+     "Language": "th-TH"
+    },
+    {
+     "Title": "Blade Runner 2049",
+     "Overview": "En ny ”blade runner” oppdager en hemmelighet som kan skape kaos i det som er igjen av samfunnet. Det fører ham ut på en søken etter Rick Deckard som har vært savnet i 30 år.",
+     "Language": "no-NO"
+    },
+    {
+     "Title": "Tội Phạm Nhân Bản 2049",
+     "Overview": "Một chàng trai trẻ khám phá ra bí mật khiến xã hội rơi vào cảnh hỗn mang. Anh lên đường đi tìm một người khác đã mất tích cách đây ba mươi năm, để rồi cả hai cùng bước vào hành trình cứu thế giới. 35 năm sau ngày phần đầu tiên ra mắt, Blade Runner trở lại với những gương mặt mới, câu chuyện mới, đầy hứa hẹn vẫn sẽ giữ được cái “chất” khiến thương hiệu này trở thành tác phẩm kinh điển trong lịch sử điện ảnh. Nhà sản xuất vừa tung ra trailer đầu tiên của phim do bộ đôi Ridley Scott - sản xuất và Denis Villeneuve - đạo diễn với vô số tình tiết bất ngờ có thể hứa hẹn đây là sẽ bom tấn đáng để chúng ta ra rạp thưởng thức. Phim được xem là tác phẩm kinh điển của thể loại khoa học viễn tưởng.",
+     "Language": "vi-VN"
+    },
+    {
+     "Title": "Bėgantis skustuvo ašmenimis 2049",
+     "Overview": "Istorija prasideda praėjus trisdešimčiai metų po pirmojo filmo įvykių. Jaunas Los Andželo policijos pareigūnas K (aktorius Ryan‘as Gosling‘as) priklauso specialiam „Blade Runner“ likvidatorių padaliniui. Jo užduotis – susekti ir sunaikinti išlikusius androidus („replikantus“). Vieną dieną K sužino paslaptį, potencialiai galinčią sunaikinti žmoniją. Siekdamas išsiaiškinti, kas už to slypi, likvidatorius išsiruošia ieškoti legendinio Riko Dekarto (akt. Harrison‘as Ford‘as), pradingusio prieš 30 metų. Pagaliau suradęs savo pirmtaką, pareigūnas K supranta, kad Dekarto ieškojo ne tik jis. O tai, ką slepia buvęs „Blade Runner“ pareigūnas, gali tapti lemiamu veiksniu žmonijos išlikimo istorijoje.",
+     "Language": "lt-LT"
+    },
+    {
+     "Title": "Vânătorul de recompense 2049",
+     "Overview": "La treizeci de ani de la evenimentele primului film, un nou Vânător de Recompense, ofițerul K din LAPD, descoperă un vechi secret, care are potențialul de a arunca ce a mai rămas din societate, în haos. Descoperirea lui K, îl duce pe acesta în căutarea lui Rick Deckard, un fost Vânător de Recompense din LAPD care e dat dispărut timp de 30 de ani.",
+     "Language": "ro-RO"
+    },
+    {
+     "Title": "Iztrebljevalec 2049",
+     "Overview": "Iztrebljevalec 2049 je nadaljevanje legendarnega filma iz leta 1982, ki je za ljubitelje znanstvenofantastičnih filmov vedno na seznamu najboljših. Presežke tokrat obljublja odlična igralska zasedba, v kateri najdemo Ryana Goslinga, Harrisona Forda, Robina Wrighta, Davea Bautista in Jareda Leta. Trideset let po dogodkih iz prvega filma novi iztrebljevalec, policist K iz Los Angelesa (Gosling), razkrije dolgo zakopano skrivnost, ki bi utegnila pahniti delček družbe, ki še ostaja, v popoln kaos. To odkritje ga prisili na lov za Rickom Deckardom (Ford), nekdanjim iztrebljevalcem, za katerim so se pred 30 leti izgubile vse sledi.",
+     "Language": "sl-SI"
+    },
+    {
+     "Title": "Blade Runner 2049",
+     "Overview": "Trettio år har gått sedan sist. En ny blade runner – Los Angeles-polisen K – avslöjar en sedan länge begravd hemlighet med potential att rasera det lilla som nu återstår av samhället. K:s avslöjande leder honom ut på en jakt efter Rick Deckard, en tidigare blade runner som varit försvunnen i tre decennier.",
+     "Language": "sv-SE"
+    },
+    {
+     "Title": "Blade Runner 2049",
+     "Overview": "Californie, 2049. La planète se relève péniblement de la crise de l'écosystème de 2022. Une entreprise a racheté la Tyrell Corporation afin de fabriquer de nouvelles entités technologiques. Les Réplicants demeurent toutefois interdits et les Blade Runner sont parfois appelés pour les éliminer. C'est le rôle de K, un officier solitaire. Envoyé sur une ferme recluse, il découvre dans le sol une valise contenant un secret vieux de 30 ans. En enquêtant, le policier risque de réveiller des forces obscures et de se mettre à dos des gens puissants qui cherchent à enterrer le passé.",
+     "Language": "fr-CA"
+    },
+    {
+     "Title": "Blade Runner 2049",
+     "Overview": "En 2049, K es uno de los esclavos androides de la nueva serie Nexus-9 llamados replicantes. K también es un Blade Runner, un cazador de replicantes rebeldes, que termina realizando un importante descubrimiento durante una de sus misiones. Luego de ser ordenado buscar y destruir cualquier evidencia del suceso, el androide termina tras la pista de Rick Deckard, un misterioso ex Blade Runner desparecido por más de 30 años. Secuela del icónico filme de ciencia ficción de 1982, Blade Runner.",
+     "Language": "es-MX"
+    },
+    {
+     "Title": "Pa asmeni skrejošais 2049",
+     "Overview": "Jaunais \"pa asmeni skrejošais\" policists K atklāj ilgi glabātu noslēpumu, un tas palīdz viņam nākt uz pēdām iepriekšējam pa asmeni skrejošajam, Rikam Dekardam, kurš 30 gadus ir pazudis bez vēsts.",
+     "Language": "lv-LV"
+    },
+    {
+     "Title": "Blade Runner 2049",
+     "Overview": "LAPD:n poliisi K saa selville kauan hautautuneena olleen salaisuuden, joka saattaa syöstä viimeisetkin yhteiskunnan rippeet kaaokseen. K:n löytö johdattaa hänet etsimään Rick Deckhardia, entistä LAPD:n blade runneria, joka on ollut kateissa viimeiset 30 vuotta.",
+     "Language": "fi-FI"
+    },
+    {
+     "Title": "Беглы па лязе 2049",
+     "Overview": "Прадаўжэнне культавага фільма «Беглы па лязе», дзеянне якога разгортваецца цераз некалькі дзесяцігоддзяў.",
+     "Language": "be-BY"
+    },
+    {
+     "Title": "Blade Runner 2049",
+     "Overview": "Trideset godina nakon događaja iz prvog filma, novi istrebljivač, losanđeleski policajac K pronalazi dugo skrivenu tajnu koja ima potencijala ono malo ljudskog društva što je preostalo baciti u potpuni kaos. Njegovo otkriće odvest će ga u potragu za Rickom Deckardom, bivšim istrebljivačem koji je nestao prije trideset godina…",
+     "Language": "hr-HR"
+    },
+    {
+     "Title": "Klingokontrabandisto 2049",
+     "Overview": "",
+     "Language": "eo-EO"
+    },
+    {
+     "Title": "銀翼殺手 2049",
+     "Overview": "時隔 30 年，地球陷入一片狂亂，人類與複製人更加難分難解，新「銀翼殺手」K (賴恩高斯寧 飾) 延續任務，維持世界秩序，但製造複製人的 Wallace (謝拉力圖 飾) 卻認為複製人才是物種的未來. . . . . . K 在追查之中發現一個埋藏已久、關乎複製人生死存亡的秘密，這個發現更引領他尋找已經消聲匿跡的前銀翼殺手 Rick Deckard (夏里遜福 飾)！\r 隱伏多年的謎底即將揭曉. . . . . .",
+     "Language": "zh-HK"
+    },
+    {
+     "Title": "დანის პირზე მორბენალი 2049",
+     "Overview": "უახლოეს მომავალში დედამიწა დასახლებულია არა მხოლოდ ადამიანებით, არამედ ქმნილებებით, რომლებიც ყველაზე მძიმე სამუშაოს შესასრულებლად გამოიყენებიან. პოლიციის ოფიცრის, კეის მოვალეობა მათი კონტროლია. შემთხვევით, კეი საიდუმლო ინფორმაციას შეიტყობს, რაც კაცობრიობის არსებობას კითხვის ნიშნის ქვეშ აყენებს. გამოსავლის საპოვნელად ის იწყებს ყოფილი პოლიციელის, რიკის ძებნას, რომელიც წლებია, უკვალოდ არის გამქრალი.",
+     "Language": "ka-GE"
+    },
+    {
+     "Title": "بلید رانر ۲۰۴۹",
+     "Overview": "بلید رانر ۲۰۴۹ (به انگلیسی: Blade Runner 2049) فیلمی آمریکایی در سبک نئو نوآر علمی–تخیلی به کارگردانی دنی ویلنوو و نویسندگی مایکل گرین و همپتن فنچر است. این فیلم دنباله‌ای بر فیلم بلید رانر (۱۹۸۲) به‌شمار می‌رود و هریسون فورد یکبار دیگر به ایفای نقش ریک دکارد می‌پردازد. از دیگر بازیگران آن می‌توان به رایان گاسلینگ، دیوید باتیستا، آنا د آرماس، رابین رایت، سیلفیا هوکس، لنی جیمز و جرد لتو اشاره کرد. بلید رانر ۲۰۴۹ در تاریخ ۶ اکتبر ۲۰۱۷، به صورت دو بعدی، سه‌بعدی و آی‌مکس سه‌بعدی در ایالات متحده اکران شد. فیلم با استقبال بسیار بالایی همراه بود و منتقدین آنرا یکی از بهترین فیلم‌های سال ۲۰۱۷ می‌دانند. همچنین برخی از منتقدین این فیلم را نسبت به قسمت اول اثری بهتر و جذاب‌تری دانستند. بلید رانر ۲۰۴۹ در نودمین دوره جوایز اسکار در پنج رشته از جمله از جمله بهترین میکس صدا، بهترین تدوین صدا و بهترین طراحی صحنه نامزد بود که در نهایت موفق شد دو جایزه بهترین فیلم‌برداری برای راجر دیکینز و بهترین جلوه‌های ویژه را به خود اختصاص دهد.",
+     "Language": "fa-IR"
+    },
+    {
+     "Title": "بليد رانر 2049",
+     "Overview": "ثلاثين سنة بعد أحداث الفيلم الأول، بليد رنر جديد،ضابط لوس انجلوس \"كي\"  يكشف عن سر مدفون منذ زمن بعيد من المحتمل له أن يدفع ماتبقى من المجتمع نحو الفوضى، إكتشاف كي يقوده لمهمة ايجاد ريك ديكارد ضابط لوس انجلوس و بليد رنر سابق مفقود منذ ثلاثين عاماً.",
+     "Language": "ar-SA"
+    },
+    {
+     "Title": "Blade Runner 2049",
+     "Overview": "Han passat 30 anys des dels esdeveniments ocorreguts a Blade Runner (1982). L'oficial K, un blade runner caça-replicants del Departament de Policia de Los Angeles, descobreix un secret que ha estat enterrat durant molt de temps i que té el potencial de portar la societat al caos. La seva investigació el conduirà a la recerca del llegendari Rick Deckard, un antic blade runner en parador desconegut, que fa 30 anys que està desaparegut.",
+     "Language": "ca-ES"
+    },
+    {
+     "Title": "Blade Runner 2049",
+     "Overview": "Palavalt oodatud järg kultuslikule ulmefilmile \"Blade Runner\". Teise osa lugu toimub 30 aastat pärast esimese filmi sündmusi. Uus blade runner (androidide jahtija) on Los Angelese politseinik K, kes avastab kaua varjul olnud saladuse, mis võib ühiskonna riismed veelgi suuremasse kaosesse paisata. K avastus sunnib ta kunagise blade runneri Rick Deckardi otsinguile, kes on kolmkümmend aastat kadunud olnud.",
+     "Language": "et-EE"
+    },
+    {
+     "Title": "Blade Runner 2049",
+     "Overview": "Innholdet i en skjult grav fanger interessen til en industrimagnat og får en blade runner fra Los Angeles-politiet til å legge ut på jakt etter en forsvunnet legende.",
+     "Language": "nb-NO"
+    },
+    {
+     "Title": "Blade Runner 2049",
+     "Overview": "Innholdet i en skjult grav fanger interessen til en industrimagnat og får en blade runner fra Los Angeles-politiet til å legge ut på jakt etter en forsvunnet legende.",
+     "Language": "nn-NN"
+    },
+    {
+     "Title": "银翼杀手 2049",
+     "Overview": "隐藏墓穴里的东西引起工业巨头的兴趣，洛杉矶警局的银翼杀手 K 警官奉命寻找一位失踪的传奇人物。",
+     "Language": "zh-SG"
+    },
+    {
+     "Title": "بليد رانر 2049",
+     "Overview": "تجذب محتويات صندوق خفيّ اهتمام عملاق صناعي، وتقود المحقق \"كاي\"، وهو \"بلايد رانر\" من شرطة \"لوس أنجلوس\"، إلى رحلة للعثور على أسطورة مفقودة.",
+     "Language": "ar-AE"
+    },
+    {
+     "Title": "Blade Runner 2049",
+     "Overview": "Der Inhalt eines versteckten Grabs erregt das Interesse eines Wirtschaftsmagnaten und veranlasst Replikanten-Jäger Officer K zur Suche nach einer verschollenen Legende.",
+     "Language": "de-AT"
+    },
+    {
+     "Title": "Blade Runner 2049",
+     "Overview": "Der Inhalt eines versteckten Grabs erregt das Interesse eines Wirtschaftsmagnaten und veranlasst Replikanten-Jäger Officer K zur Suche nach einer verschollenen Legende.",
+     "Language": "de-CH"
+    },
+    {
+     "Title": "Blade Runner 2049",
+     "Overview": "Kandungan sebuah kubur tersembunyi menarik perhatian seorang usahawan terkemuka dan menyebabkan Pegawai K, Blade Runner LAPD, mula mencari legenda yang hilang.",
+     "Language": "ms-MY"
+    },
+    {
+     "Title": "Blade Runner 2049",
+     "Overview": "Kandungan sebuah kubur tersembunyi menarik perhatian seorang usahawan terkemuka dan menyebabkan Pegawai K, Blade Runner LAPD, mula mencari legenda yang hilang.",
+     "Language": "ms-SG"
+    },
+    {
+     "Title": "ब्लेड रनर 2049",
+     "Overview": "एक छिपी हुई कब्र में मिली चीज़ें एक बड़े इंडस्ट्रियलिस्ट का ध्यान खींचती हैं और फिर लॉस एंजेलिस पुलिस विभाग का ब्लेड रनर ऑफ़िसर एक लापता लेजेंड की खोज में निकल पड़ता है.",
+     "Language": "hi-IN"
+    },
+    {
+     "Title": "Blade Runner 2049",
+     "Overview": "De inhoud van een verborgen graf trekt de aandacht van een grootindustrieel en stuurt agent K, een blade runner uit L.A., op een zoektocht naar een vermiste legende.",
+     "Language": "nl-BE"
+    }
+   ],
+   "Recommendations": [
+    {
+     "TmdbId": 280,
+     "Title": "Terminator 2: Judgment Day"
+    },
+    {
+     "TmdbId": 624860,
+     "Title": "The Matrix Resurrections"
+    },
+    {
+     "TmdbId": 78,
+     "Title": "Blade Runner"
+    },
+    {
+     "TmdbId": 218,
+     "Title": "The Terminator"
+    },
+    {
+     "TmdbId": 198184,
+     "Title": "Chappie"
+    },
+    {
+     "TmdbId": 296,
+     "Title": "Terminator 3: Rise of the Machines"
+    },
+    {
+     "TmdbId": 290859,
+     "Title": "Terminator: Dark Fate"
+    },
+    {
+     "TmdbId": 5549,
+     "Title": "RoboCop 2"
+    },
+    {
+     "TmdbId": 534,
+     "Title": "Terminator Salvation"
+    },
+    {
+     "TmdbId": 500664,
+     "Title": "Upgrade"
+    }
+   ],
+   "Credits": {
+    "Cast": [
+     {
+      "Name": "Ryan Gosling",
+      "Order": 0,
+      "Character": "'K'",
+      "TmdbId": 30614,
+      "CreditId": "575d7fb69251414a82004702",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/lyUyVARQKhGxaxy0FbPJCQRpiaW.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Harrison Ford",
+      "Order": 1,
+      "Character": "Rick Deckard",
+      "TmdbId": 3,
+      "CreditId": "575d7fc7c3a36831a40043e6",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/pjBMJVPpcZK23Vt1nzr1zEBTWrP.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Ana de Armas",
+      "Order": 2,
+      "Character": "Joi",
+      "TmdbId": 224513,
+      "CreditId": "575d7fd6c3a368451600115b",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/ngHnBOofQzCO3AvMyuW3UMRWg1B.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Dave Bautista",
+      "Order": 3,
+      "Character": "Sapper Morton",
+      "TmdbId": 543530,
+      "CreditId": "575d7fce925141189e001471",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/snk6JiXOOoRjPtHU5VMoy6qbd32.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Robin Wright",
+      "Order": 4,
+      "Character": "Lieutenant Joshi",
+      "TmdbId": 32,
+      "CreditId": "575d7fbd92514103e800009f",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/d3rIv0y2p0jMsQ7ViR7O1606NZa.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Sylvia Hoeks",
+      "Order": 5,
+      "Character": "Luv",
+      "TmdbId": 104632,
+      "CreditId": "575d7fdd925141540300091c",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/wKC9LgqgJRCXuzs1kUKaK7Uicv.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Mackenzie Davis",
+      "Order": 6,
+      "Character": "Mariette",
+      "TmdbId": 1110405,
+      "CreditId": "575d7fe592514104230000ae",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/ekQbEIKh26jbz17P0wwLbo6uNs9.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Jared Leto",
+      "Order": 7,
+      "Character": "Niander Wallace",
+      "TmdbId": 7499,
+      "CreditId": "57e76841925141414601061b",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/ca3x0OfIKbJppZh8S1Alx3GfUZO.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Carla Juri",
+      "Order": 8,
+      "Character": "Dr. Ana Stelline",
+      "TmdbId": 1013973,
+      "CreditId": "575d7fecc3a36831a40043ee",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/7Tu9PCmTyLD1wWP8PGCzZpuImre.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Hiam Abbass",
+      "Order": 9,
+      "Character": "Freysa",
+      "TmdbId": 765,
+      "CreditId": "5790caebc3a36865eb00965a",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/2cz9mO3qhUQeGdVHzWkS2Pwx94l.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Lennie James",
+      "Order": 10,
+      "Character": "Mister Cotton",
+      "TmdbId": 1120,
+      "CreditId": "579a3f939251411328003a68",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/lUcouck90jXNzyJr5uBJJiYMHAN.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "David Dastmalchian",
+      "Order": 11,
+      "Character": "Coco",
+      "TmdbId": 83854,
+      "CreditId": "5790cae49251414b32004b2c",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/eLafwcpL64CqzwjjSgKpO7Rv4ae.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Sean Young",
+      "Order": 12,
+      "Character": "Rachael",
+      "TmdbId": 586,
+      "CreditId": "59d71988c3a36861ec0075ad",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/yfJADYt6xYPpg1g7Z7TTW0bcL2s.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Edward James Olmos",
+      "Order": 13,
+      "Character": "Gaff",
+      "TmdbId": 587,
+      "CreditId": "58c7f555c3a3683df300ebb6",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/yleTij2PUEgaMLw8xYbLAt7UqIo.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Barkhad Abdi",
+      "Order": 14,
+      "Character": "Doc Badger",
+      "TmdbId": 1261694,
+      "CreditId": "5790cadb9251416bb400174b",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/utfeg8GnGyW3aVNcRfhII9RCXB6.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Wood Harris",
+      "Order": 15,
+      "Character": "Nandez",
+      "TmdbId": 65829,
+      "CreditId": "59d0ff15c3a368792901f225",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/v3puIl2KncqUd6amDyD1Y0crzkF.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Tómas Lemarquis",
+      "Order": 16,
+      "Character": "File Clerk",
+      "TmdbId": 18818,
+      "CreditId": "59d7193692514124c50076e5",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/1R9CGk1kSePpzfRjdJjGfK1Pz5x.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Sallie Harmsen",
+      "Order": 17,
+      "Character": "Replicant",
+      "TmdbId": 544096,
+      "CreditId": "59ec24d492514119fc004ca9",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/2JNkJ7UUAKwLkaPeOdzi0bQUzK4.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Loren Peta",
+      "Order": 18,
+      "Character": "Rachael Double",
+      "TmdbId": 1901526,
+      "CreditId": "59d85140c3a368620001f20f",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/XuWNeNu7g3stBzPX6n2PjNBOr1.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Mark Arnold",
+      "Order": 19,
+      "Character": "Interviewer",
+      "TmdbId": 119893,
+      "CreditId": "59d0ff3792514114520205d7",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/dTfoxBUC6jpZry0ijlS8g4Y5cuS.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Krista Kosonen",
+      "Order": 20,
+      "Character": "Doxie #2",
+      "TmdbId": 72482,
+      "CreditId": "59bd9a579251413525018b41",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/7iW2mxbxBgV5sX2y0fSY78lewW4.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Elarica Johnson",
+      "Order": 21,
+      "Character": "Doxie #3",
+      "TmdbId": 89387,
+      "CreditId": "59d0fee69251411452020546",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/iiMfkwUSyUki9Q6YbfoVBOGSheq.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "David Benson",
+      "Order": 22,
+      "Character": "Liberace Look-A-Like",
+      "TmdbId": 1380395,
+      "CreditId": "58265038c3a368360b0104b3",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/5xA8oSRBfzBN9QAOC0MAI8Jqb0.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Kingston Taylor",
+      "Order": 23,
+      "Character": "Boy with One Ear",
+      "TmdbId": 1813834,
+      "CreditId": "5912d5b7c3a36864ec04c406",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/pwivZzhZf1JCV49YBlkRycUGGTB.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Ben Thompson",
+      "Order": 24,
+      "Character": "Elvis Look-A-Like",
+      "TmdbId": 1898019,
+      "CreditId": "59d0ff69925141468f015aba",
+      "Images": []
+     },
+     {
+      "Name": "Ellie Wright",
+      "Order": 25,
+      "Character": "Little Ellie",
+      "TmdbId": 1813833,
+      "CreditId": "5912d5a5c3a36864d40537f8",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/xF7ww2FNyQGOOKQ1kdH4COkQEZ5.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Suzie Kennedy",
+      "Order": 26,
+      "Character": "Marilyn Look-A-Like",
+      "TmdbId": 1148965,
+      "CreditId": "59d0ffa4925141142f01fbe2",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/qEm5LOUIvVYp5iTGALj76pxkcyr.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Stephen Triffitt",
+      "Order": 27,
+      "Character": "Sinatra Look-A-Like",
+      "TmdbId": 1898020,
+      "CreditId": "59d0ffd1925141468f015b8e",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/eoiyH3cJ7wpa5ED9Dbpehl8poXg.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Vilma Szécsi",
+      "Order": 28,
+      "Character": "Angry Old Lady",
+      "TmdbId": 2146286,
+      "CreditId": "5bbcf5ac0e0a26660801fdab",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/6bQYnho9aP3WEdQQa4PaO0jxbKr.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Kincsö Sánta",
+      "Order": 29,
+      "Character": "Birthday Girl",
+      "TmdbId": 2146289,
+      "CreditId": "5bbcf5d20e0a26661801dbd3",
+      "Images": []
+     }
+    ],
+    "Crew": [
+     {
+      "Name": "Denis Villeneuve",
+      "Order": 0,
+      "Job": "Director",
+      "Department": "Directing",
+      "TmdbId": 137427,
+      "CreditId": "5e924dda4202280015e26cec",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/xzQYqb4nR8xT7Zdw5itbEL9K3fd.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Hampton Fancher",
+      "Order": 1,
+      "Job": "Screenplay",
+      "Department": "Writing",
+      "TmdbId": 583,
+      "CreditId": "55311eedc3a36841250026a4",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/qCvawbNUyrgLhaN2KqFqpy1IO2w.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Michael Green",
+      "Order": 2,
+      "Job": "Screenplay",
+      "Department": "Writing",
+      "TmdbId": 191937,
+      "CreditId": "5725289bc3a368305a001789",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/A7zyzx1U5Fc5Cq979WkbEVpSepy.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Broderick Johnson",
+      "Order": 3,
+      "Job": "Producer",
+      "Department": "Production",
+      "TmdbId": 47285,
+      "CreditId": "575d808fc3a36836e5000110",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/lACnKu6Mxx5fGpWLt8qh0oevaQU.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Andrew A. Kosove",
+      "Order": 4,
+      "Job": "Producer",
+      "Department": "Production",
+      "TmdbId": 47286,
+      "CreditId": "575d809ec3a36836e5000113",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/kkH3S2KsRd3XSH91GpeQmr7Raq0.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Cynthia Sikes",
+      "Order": 5,
+      "Job": "Producer",
+      "Department": "Production",
+      "TmdbId": 96765,
+      "CreditId": "575d80c692514103e80000c9",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/nZS8wr4pWpwx4QINfkqxa7bMhfH.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Bud Yorkin",
+      "Order": 6,
+      "Job": "Producer",
+      "Department": "Production",
+      "TmdbId": 69946,
+      "CreditId": "575d80da92514124430027c6",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/m66f4nyjCb4Zeg4JUoYzpzt4zWL.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Ridley Scott",
+      "Order": 7,
+      "Job": "Executive Producer",
+      "Department": "Production",
+      "TmdbId": 578,
+      "CreditId": "5913da47c3a36842690046c7",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/zABJmN9opmqD4orWl3KSdCaSo7Q.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Bill Carraro",
+      "Order": 8,
+      "Job": "Executive Producer",
+      "Department": "Production",
+      "TmdbId": 23420,
+      "CreditId": "575d8015c3a3681318002658",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/qt2ZxwwjbQe0kytalxbdLka6Vzn.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Tim Gamble",
+      "Order": 9,
+      "Job": "Executive Producer",
+      "Department": "Production",
+      "TmdbId": 1121571,
+      "CreditId": "575d8037c3a36837910000d2",
+      "Images": []
+     },
+     {
+      "Name": "Frank Giustra",
+      "Order": 10,
+      "Job": "Executive Producer",
+      "Department": "Production",
+      "TmdbId": 1634532,
+      "CreditId": "575d807ec3a36837310000fe",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/alOHWwtgXhWfu2CnJMocWpcDU4l.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Val Hill",
+      "Order": 11,
+      "Job": "Executive Producer",
+      "Department": "Production",
+      "TmdbId": 2146313,
+      "CreditId": "5bbcf81d925141378e01d391",
+      "Images": []
+     },
+     {
+      "Name": "Yale Badik",
+      "Order": 12,
+      "Job": "Executive Producer",
+      "Department": "Production",
+      "TmdbId": 2146311,
+      "CreditId": "5bbcf7b80e0a266603020a2e",
+      "Images": []
+     },
+     {
+      "Name": "Roger Deakins",
+      "Order": 13,
+      "Job": "Director of Photography",
+      "Department": "Camera",
+      "TmdbId": 151,
+      "CreditId": "556e6bbb925141157d00070f",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/y6tSqoDvl705BnLELyCuUqQujfv.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Hans Zimmer",
+      "Order": 14,
+      "Job": "Original Music Composer",
+      "Department": "Sound",
+      "TmdbId": 947,
+      "CreditId": "59d5446d9251414b4501d233",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/tpQnDeHY15szIXvpnhlprufz4d.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Francine Maisler",
+      "Order": 15,
+      "Job": "Casting",
+      "Department": "Production",
+      "TmdbId": 6410,
+      "CreditId": "575d80f0c3a36879bb000852",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/j97ggx3P5YRTbXEtPorQq9ge9JH.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Renée April",
+      "Order": 16,
+      "Job": "Costume Design",
+      "Department": "Costume & Make-Up",
+      "TmdbId": 6057,
+      "CreditId": "5912d6b0c3a36864ec04c4ac",
+      "Images": []
+     },
+     {
+      "Name": "John Nelson",
+      "Order": 17,
+      "Job": "Visual Effects Supervisor",
+      "Department": "Visual Effects",
+      "TmdbId": 1456374,
+      "CreditId": "575d81ee925141189e0014f5",
+      "Images": []
+     },
+     {
+      "Name": "Hampton Fancher",
+      "Order": 18,
+      "Job": "Story",
+      "Department": "Writing",
+      "TmdbId": 583,
+      "CreditId": "55311ee2c3a3680a940022d1",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/qCvawbNUyrgLhaN2KqFqpy1IO2w.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Philip K. Dick",
+      "Order": 19,
+      "Job": "Characters",
+      "Department": "Writing",
+      "TmdbId": 584,
+      "CreditId": "5b850698c3a368654e049b71",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/8J46Z9coRCXApsA5WoTC2CLAaOw.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Benjamin Wallfisch",
+      "Order": 20,
+      "Job": "Original Music Composer",
+      "Department": "Sound",
+      "TmdbId": 40825,
+      "CreditId": "59d544a7c3a368455001ef0b",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/dWcshjk0OUi3stGFFrwZIsYKZfQ.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Jason Chu",
+      "Order": 21,
+      "Job": "Stunts",
+      "Department": "Crew",
+      "TmdbId": 1457943,
+      "CreditId": "5b2bcedd92514164d8007922",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/b0G3eynR5r1wMsdpsg0Bi2FDiCq.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "György Mihályi",
+      "Order": 22,
+      "Job": "First Assistant Sound Editor",
+      "Department": "Sound",
+      "TmdbId": 1392616,
+      "CreditId": "5bbd1d830e0a2666150227d7",
+      "Images": []
+     },
+     {
+      "Name": "Jeremy B. Davis",
+      "Order": 23,
+      "Job": "Sound Mix Technician",
+      "Department": "Sound",
+      "TmdbId": 1542762,
+      "CreditId": "5bbd200dc3a3685907021635",
+      "Images": []
+     },
+     {
+      "Name": "Mac Ruth",
+      "Order": 24,
+      "Job": "Production Sound Mixer",
+      "Department": "Sound",
+      "TmdbId": 1784639,
+      "CreditId": "5912d7669251414eca04edcc",
+      "Images": []
+     },
+     {
+      "Name": "Tibor Lázár",
+      "Order": 25,
+      "Job": "Art Direction",
+      "Department": "Art",
+      "TmdbId": 1013552,
+      "CreditId": "5912d671c3a368651904be41",
+      "Images": []
+     },
+     {
+      "Name": "Ron Bartlett",
+      "Order": 26,
+      "Job": "Sound Re-Recording Mixer",
+      "Department": "Sound",
+      "TmdbId": 16177,
+      "CreditId": "59d8f49892514124c90290fd",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/AmFG81joHLkvnh4Io20TdCCBk8P.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Dennis Gassner",
+      "Order": 27,
+      "Job": "Production Design",
+      "Department": "Art",
+      "TmdbId": 4248,
+      "CreditId": "5912d6319251414ead04e108",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/5ROXnKVaSNU0bAHrvfBn4Xs7jsL.jpg"
+       }
+      ]
+     },
+     {
+      "Name": "Lee Gilmore",
+      "Order": 28,
+      "Job": "Sound Effects Editor",
+      "Department": "Sound",
+      "TmdbId": 1360099,
+      "CreditId": "59d8f4a692514124cd0295a5",
+      "Images": []
+     },
+     {
+      "Name": "Zoltán Hódi",
+      "Order": 29,
+      "Job": "Stunts",
+      "Department": "Crew",
+      "TmdbId": 2069532,
+      "CreditId": "5b2bce69925141650f008408",
+      "Images": [
+       {
+        "CoverType": "Headshot",
+        "Url": "https://image.tmdb.org/t/p/original/2WMcsf5nHjSTM9jmqjd9LMJkcCE.jpg"
+       }
+      ]
+     }
+    ]
+   },
+   "Studio": "Alcon Entertainment",
+   "YoutubeTrailerId": "geFtxCSz8xI",
+   "Certifications": [
+    {
+     "Country": "AU",
+     "Certification": "MA 15+"
+    },
+    {
+     "Country": "BE",
+     "Certification": "18"
+    },
+    {
+     "Country": "BG",
+     "Certification": "D"
+    },
+    {
+     "Country": "BR",
+     "Certification": "14"
+    },
+    {
+     "Country": "CH",
+     "Certification": "16"
+    },
+    {
+     "Country": "CZ",
+     "Certification": "15+"
+    },
+    {
+     "Country": "DE",
+     "Certification": "12"
+    },
+    {
+     "Country": "DK",
+     "Certification": "15"
+    },
+    {
+     "Country": "ES",
+     "Certification": "12"
+    },
+    {
+     "Country": "FI",
+     "Certification": "K-16"
+    },
+    {
+     "Country": "FR",
+     "Certification": "TP"
+    },
+    {
+     "Country": "GB",
+     "Certification": "15"
+    },
+    {
+     "Country": "GR",
+     "Certification": "K15"
+    },
+    {
+     "Country": "HK",
+     "Certification": "IIB"
+    },
+    {
+     "Country": "HU",
+     "Certification": "16"
+    },
+    {
+     "Country": "IE",
+     "Certification": "15A"
+    },
+    {
+     "Country": "IL",
+     "Certification": "14"
+    },
+    {
+     "Country": "IT",
+     "Certification": "T"
+    },
+    {
+     "Country": "KR",
+     "Certification": "15"
+    },
+    {
+     "Country": "LT",
+     "Certification": "N-13"
+    },
+    {
+     "Country": "NL",
+     "Certification": "16"
+    },
+    {
+     "Country": "NO",
+     "Certification": "15"
+    },
+    {
+     "Country": "NZ",
+     "Certification": "R13"
+    },
+    {
+     "Country": "PL",
+     "Certification": "16"
+    },
+    {
+     "Country": "PT",
+     "Certification": "M/14"
+    },
+    {
+     "Country": "RO",
+     "Certification": "18"
+    },
+    {
+     "Country": "RU",
+     "Certification": "16+"
+    },
+    {
+     "Country": "SE",
+     "Certification": "15"
+    },
+    {
+     "Country": "SK",
+     "Certification": "15"
+    },
+    {
+     "Country": "TH",
+     "Certification": "15"
+    },
+    {
+     "Country": "TR",
+     "Certification": "15+"
+    },
+    {
+     "Country": "TW",
+     "Certification": "輔導12歲級"
+    },
+    {
+     "Country": "US",
+     "Certification": "R"
+    },
+    {
+     "Country": "VN",
+     "Certification": "C18"
+    }
+   ],
+   "Status": null,
+   "Collection": {
+    "TmdbId": 422837,
+    "Name": "Blade Runner Collection",
+    "Images": null,
+    "Overview": null,
+    "Translations": null,
+    "Parts": null
+   },
+   "Homepage": "http://bladerunnermovie.com/"
+  }
+ ]
+}

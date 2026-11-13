@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
-"""Replay Recyclarr's `sync sonarr` against a Sonarr API, Unarr's or the original's.
+"""Replay Recyclarr's `sync` against one of the two APIs, Unarr's or an original's.
 
-Recyclarr (github.com/recyclarr/recyclarr) syncs TRaSH guide data into Sonarr:
-custom formats, quality sizes, naming, media management, quality profiles.
-tests/fixtures/recyclarr/sonarr-exchange.json is what Recyclarr 8.8.1 and the
-original Sonarr said to each other on the phase 1 fixture, with the
-maintainer's configuration, in four phases:
+Recyclarr (github.com/recyclarr/recyclarr) syncs TRaSH guide data into Sonarr
+and Radarr alike: custom formats, quality sizes, naming, media management,
+quality profiles. `tests/fixtures/recyclarr/<app>-exchange.json` is what
+Recyclarr 8.8.1 and the original said to each other on that application's
+fixture, with the maintainer's configuration, in four phases:
 
 - `old-config`: a sync with an older configuration, one that also scores
   FreeLeech (a format the instance does not have: it is created).
@@ -14,21 +14,26 @@ maintainer's configuration, in four phases:
   propers preferred again, a profile's scores, cutoff and qualities edited.
 - `sync-1`: the sync with the configuration as it is. It creates MULTi,
   repairs the edited format, deletes FreeLeech (`delete_old_custom_formats`),
-  rewrites sizes, naming and propers, updates the seven profiles.
+  rewrites sizes, naming and propers, updates the profiles.
 - `sync-2`: the same sync again. It writes the naming Recyclarr always
   writes, and nothing else.
+
+`delete_old_custom_formats` removes what Recyclarr itself created and no
+longer manages, not what the maintainer made by hand: Radarr's fixture has a
+`Language not Italian` the configuration never names, and the syncs leave it
+alone.
 
 Two ways to use it:
 
     # Replay: send the recorded requests, compare the answers. Needs nothing
     # but a running instance on a fresh copy of the fixture.
-    scripts/recyclarr-replay.py --base-url http://127.0.0.1:8989 --api-key KEY
+    scripts/recyclarr-replay.py --app radarr --base-url http://127.0.0.1:7878 --api-key KEY
 
     # Live: run the real Recyclarr through a recording proxy, then compare
     # with the recording (--expect) or write a new one (--record).
-    scripts/recyclarr-replay.py --base-url ... --api-key ... \\
-        --recyclarr 'dotnet /path/to/recyclarr.dll' --guide /path/to/TRaSH-Guides \\
-        --expect tests/fixtures/recyclarr/sonarr-exchange.json
+    scripts/recyclarr-replay.py --app radarr --base-url ... --api-key ... \\
+        --recyclarr /path/to/recyclarr --guide /path/to/TRaSH-Guides \\
+        --expect tests/fixtures/recyclarr/radarr-exchange.json
 
 The replay is sound because the answers are compared: Recyclarr decides what
 to write from what it reads, so an instance that answers every recorded
@@ -67,14 +72,43 @@ FIXTURES = Path(__file__).resolve().parent.parent / "tests" / "fixtures" / "recy
 PREFIX = "/api/v3/"
 # Read back after each sync.
 SNAPSHOT = ["customformat", "qualitydefinition", "qualityprofile", "config/naming", "config/mediamanagement"]
-# The format the older configuration scored and the current one dropped.
-OLD_FORMAT = ("d7c747094a7c65f4c2de083c24899e8b", "FreeLeech")
-OLD_CONFIG = f"""      - trash_ids:
-          - {OLD_FORMAT[0]}  # {OLD_FORMAT[1]}
-        assign_scores_to:
-          - name: WEB-1080p
-            score: 1
-"""
+# Each application: the section its configuration opens with, where the older
+# configuration's extra format goes, that format (one the fixture does not
+# have, created by the first sync and deleted by the next), the profile it is
+# scored in, and the name of a group of qualities in the fixture's profiles.
+APPS = {
+    "sonarr": {
+        "config": "recyclarr.yml",
+        "section": "sonarr:\n  series:\n",
+        "marker": "    #   # Example: Penalize unwanted formats\n",
+        "old_format": ("d7c747094a7c65f4c2de083c24899e8b", "FreeLeech"),
+        "old_profile": "WEB-1080p",
+        "drift_profile": "HD-1080p",
+        "drift_sizes": ("HDTV-720p", "WEBDL-1080p"),
+    },
+    "radarr": {
+        "config": "radarr.yml",
+        "section": "radarr:\n  movies:\n",
+        # The custom formats the maintainer's configuration scores: the
+        # older one listed a format more.
+        "marker": "    custom_formats:\n",
+        "old_format": ("0d91270a7255a1e388fa85e959f359d8", "FreeLeech"),
+        "old_profile": "HD Bluray + WEB",
+        "drift_profile": "HD-1080p",
+        "drift_sizes": ("HDTV-720p", "WEBDL-1080p"),
+    },
+}
+
+
+def old_config(app: dict) -> str:
+    trash_id, name = app["old_format"]
+    return (
+        f"      - trash_ids:\n"
+        f"          - {trash_id}  # {name}\n"
+        f"        assign_scores_to:\n"
+        f"          - name: {app['old_profile']}\n"
+        f"            score: 1\n"
+    )
 # Answered from the original's five-second cache, see the module docstring.
 CACHED = "qualitydefinition/update"
 
@@ -120,7 +154,7 @@ class Api:
         return answer
 
 
-def drift(api: Api):
+def drift(api: Api, app: dict):
     """What the maintainer could have done in the UI between two syncs, so
     that the next one creates, updates and repairs."""
     formats = api.call("GET", "customformat")
@@ -133,7 +167,7 @@ def drift(api: Api):
     sizes = api.call("GET", "qualitydefinition")
     edited = []
     for d in sizes:
-        if d["quality"]["name"] in ("HDTV-720p", "WEBDL-1080p"):
+        if d["quality"]["name"] in app["drift_sizes"]:
             d = copy.deepcopy(d)
             d["minSize"], d["preferredSize"], d["maxSize"] = 1, 50, 100
             edited.append(d)
@@ -142,7 +176,7 @@ def drift(api: Api):
     mm["downloadPropersAndRepacks"] = "preferAndUpgrade"
     api.call("PUT", f"config/mediamanagement/{mm['id']}", mm)
     profiles = api.call("GET", "qualityprofile")
-    hd = copy.deepcopy(next(p for p in profiles if p["name"] == "HD-1080p"))
+    hd = copy.deepcopy(next(p for p in profiles if p["name"] == app["drift_profile"]))
     hd["upgradeAllowed"] = False
     for item in hd["items"]:
         item["allowed"] = not item["allowed"]
@@ -194,13 +228,13 @@ def proxy(upstream: str, log: list) -> ThreadingHTTPServer:
     return server
 
 
-def live(args) -> list[dict]:
+def live(args, app: dict) -> list[dict]:
     """Run the real Recyclarr: the older configuration, the drift, then the
     configuration as it is, twice. Its state (which formats it manages) lives
     in the configuration directory, so the three runs share one."""
-    marker = "    #   # Example: Penalize unwanted formats\n"
+    marker, section = app["marker"], app["section"]
     text = Path(args.config).read_text()
-    if marker not in text or "sonarr:\n  series:\n" not in text:
+    if marker not in text or section not in text:
         raise SystemExit(f"{args.config}: not the configuration this script knows how to extend")
     log: list[dict] = []
     server = proxy(args.base_url, log)
@@ -212,16 +246,16 @@ def live(args) -> list[dict]:
         f"  - name: guide\n    type: trash-guides\n    path: {Path(args.guide).resolve()}\n    replace_default: true\n"
         f"  - name: templates\n    type: config-templates\n    path: {work / 'templates'}\n    replace_default: true\n"
     )
-    connection = f"sonarr:\n  series:\n    base_url: http://127.0.0.1:{server.server_port}\n    api_key: {args.api_key}\n"
-    current = text.replace("sonarr:\n  series:\n", connection, 1)
-    older = current.replace(marker, OLD_CONFIG + "\n" + marker, 1)
+    connection = f"{section}    base_url: http://127.0.0.1:{server.server_port}\n    api_key: {args.api_key}\n"
+    current = text.replace(section, connection, 1)
+    older = current.replace(marker, marker + old_config(app), 1)
     env = {k: v for k, v in os.environ.items() if k.lower() not in ("http_proxy", "https_proxy", "all_proxy")}
     env.update(RECYCLARR_CONFIG_DIR=str(work), NO_COLOR="1")
 
     def recyclarr(name: str, config: str) -> dict:
         (work / "recyclarr.yml").write_text(config)
         del log[:]
-        done = subprocess.run(shlex.split(args.recyclarr) + ["sync", "sonarr"], env=env, capture_output=True, text=True, timeout=600)
+        done = subprocess.run(shlex.split(args.recyclarr) + ["sync", args.app], env=env, capture_output=True, text=True, timeout=600)
         if done.returncode:
             raise SystemExit(f"recyclarr ({name}) failed:\n{done.stdout[-3000:]}\n{done.stderr[-3000:]}")
         output = [re.sub(r"Completed at .*", "Completed", line) for line in done.stdout.splitlines()]
@@ -231,7 +265,7 @@ def live(args) -> list[dict]:
     try:
         phases = [recyclarr("old-config", older)]
         api = Api(args.base_url, args.api_key)
-        drift(api)
+        drift(api, app)
         time.sleep(args.settle)
         phases.append({"name": "drift", "exchange": api.log, "output": None, "after": None})
         for n in (1, 2):
@@ -348,20 +382,24 @@ def differences(expected: list[dict], got: list[dict]) -> list[str]:
 
 def main() -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n")[0])
+    ap.add_argument("--app", choices=sorted(APPS), default="sonarr")
     ap.add_argument("--base-url", required=True)
     ap.add_argument("--api-key", required=True)
-    ap.add_argument("--expect", default=str(FIXTURES / "sonarr-exchange.json"), help="the recording to replay or compare with")
+    ap.add_argument("--expect", help="the recording to replay or compare with (default: the application's)")
     ap.add_argument("--recyclarr", help="live: the command that runs the real Recyclarr, e.g. 'dotnet recyclarr.dll'")
     ap.add_argument("--guide", help="live: a checkout of TRaSH-Guides (the commit in the fixtures' README)")
-    ap.add_argument("--config", default=str(FIXTURES / "recyclarr.yml"), help="live: the Recyclarr configuration")
+    ap.add_argument("--config", help="live: the Recyclarr configuration (default: the application's)")
     ap.add_argument("--record", help="live: write the exchange here instead of comparing")
     ap.add_argument("--settle", type=float, default=0, help="live: seconds to wait after each write phase (6 for the original)")
     args = ap.parse_args()
+    app = APPS[args.app]
+    args.expect = args.expect or str(FIXTURES / f"{args.app}-exchange.json")
+    args.config = args.config or str(FIXTURES / app["config"])
 
     if args.recyclarr:
         if not args.guide:
             ap.error("--recyclarr needs --guide")
-        got = live(args)
+        got = live(args, app)
     elif args.record:
         ap.error("--record needs --recyclarr")
     else:

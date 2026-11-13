@@ -1,0 +1,1 @@
+{"$from": "qualityprofile-create", "$set": {"name": "Library Copy 2", "upgradeAllowed": true, "minFormatScore": 10, "cutoffFormatScore": 100, "language": {"id": 5, "name": "Italian"}}}

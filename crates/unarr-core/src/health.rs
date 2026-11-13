@@ -105,6 +105,14 @@ pub enum CheckSet {
     ImportLists,
     /// `SeriesDeletedEvent` and `SeriesMovedEvent`.
     SeriesGone,
+    /// Radarr's `MovieRefreshCompleteEvent`, and a `MovieUpdatedEvent` or
+    /// `MoviesDeletedEvent` about a movie TMDB no longer has.
+    MoviesRefreshed,
+    /// Radarr's `MoviesDeletedEvent` and `MovieMovedEvent`.
+    MoviesGone,
+    /// Radarr's `CollectionRefreshCompleteEvent`, `CollectionEditedEvent`
+    /// and `CollectionDeletedEvent`.
+    Collections,
 }
 
 /// `CheckOnCondition`: whether a check tied to an event runs only while
@@ -220,6 +228,7 @@ fn checks(set: CheckSet) -> Vec<(&'static str, Condition, Check)> {
                     ("RecyclingBinCheck", Always, check!(recycling_bin)),
                     ("MountCheck", Always, check!(mount)),
                     ("ProxyCheck", Always, check!(proxy)),
+                    ("RemovedMovieCheck", Always, check!(removed_movie)),
                 ]);
             }
             out
@@ -272,6 +281,11 @@ fn checks(set: CheckSet) -> Vec<(&'static str, Condition, Check)> {
                 Always,
                 check!(download_client_removes_completed_downloads),
             ),
+            (
+                "MovieCollectionRootFolderCheck",
+                Always,
+                check!(movie_collection_root_folder),
+            ),
         ],
         CheckSet::RemotePathMappings => vec![
             (
@@ -304,6 +318,20 @@ fn checks(set: CheckSet) -> Vec<(&'static str, Condition, Check)> {
             ),
             ("RootFolderCheck", Always, check!(root_folder)),
         ],
+        CheckSet::MoviesRefreshed => vec![("RemovedMovieCheck", Always, check!(removed_movie))],
+        CheckSet::MoviesGone => vec![
+            ("RootFolderCheck", Always, check!(root_folder)),
+            (
+                "ImportListRootFolderCheck",
+                Always,
+                check!(import_list_root_folder),
+            ),
+        ],
+        CheckSet::Collections => vec![(
+            "MovieCollectionRootFolderCheck",
+            Always,
+            check!(movie_collection_root_folder),
+        )],
     }
 }
 
@@ -330,8 +358,10 @@ pub async fn run(ctx: &Context<'_>, sets: &[CheckSet], standing: &[HealthCheck])
             if ctx.personality == crate::Personality::Radarr && source == "ImportListRootFolderCheck" {
                 continue;
             }
-            // Collections are Radarr's alone.
-            if ctx.personality != crate::Personality::Radarr && source == "MovieCollectionRootFolderCheck" {
+            // Collections and movies TMDB dropped are Radarr's alone.
+            if ctx.personality != crate::Personality::Radarr
+                && matches!(source, "MovieCollectionRootFolderCheck" | "RemovedMovieCheck")
+            {
                 continue;
             }
             seen.push(source);
@@ -762,7 +792,7 @@ fn paths_equal(a: &str, b: &str) -> bool {
 
 /// `RootFolderService.GetBestRootFolderPath`: the longest root folder
 /// holding the path, else the path's parent.
-fn best_root_folder(path: &str, root_folders: &[String]) -> String {
+pub(crate) fn best_root_folder(path: &str, root_folders: &[String]) -> String {
     root_folders
         .iter()
         .filter(|r| remote_path::contains(r, path))
@@ -811,6 +841,36 @@ async fn root_folder(ctx: &Context<'_>) -> anyhow::Result<HealthCheck> {
             "#missing-root-folder",
         )),
     }
+}
+
+/// Radarr's `RemovedMovieCheck`: the movies TMDB no longer has, which a
+/// refresh marked as deleted.
+async fn removed_movie(ctx: &Context<'_>) -> anyhow::Result<HealthCheck> {
+    const SOURCE: &str = "RemovedMovieCheck";
+    let deleted: Vec<String> = ctx
+        .db
+        .call(|conn| {
+            Ok(crate::movies::store::list_movies(conn)?
+                .into_iter()
+                .filter(|m| m.metadata.status == crate::movies::model::MovieStatus::Deleted)
+                .map(|m| format!("{} (tmdbid {})", m.metadata.title, m.metadata.tmdb_id))
+                .collect())
+        })
+        .await?;
+    if deleted.is_empty() {
+        return Ok(HealthCheck::ok(SOURCE));
+    }
+    let message = if deleted.len() == 1 {
+        format!("Movie {} was removed from TMDb", deleted[0])
+    } else {
+        format!("Movies {} were removed from TMDb", deleted.join(", "))
+    };
+    Ok(HealthCheck::new(
+        SOURCE,
+        HealthType::Error,
+        message,
+        "#movie-was-removed-from-tmdb",
+    ))
 }
 
 /// Radarr's `MovieCollectionRootFolderCheck`: the folder each collection
@@ -1296,8 +1356,17 @@ mod tests {
                 "DownloadClientRootFolderCheck",
                 "DownloadClientSortingCheck",
                 "ImportListRootFolderCheck",
+                // Radarr's alone, left out of a Sonarr run.
+                "MovieCollectionRootFolderCheck",
             ]
         );
+        // Radarr 6.4.4's own, by the attributes of its source.
+        assert_eq!(sources(CheckSet::MoviesRefreshed), ["RemovedMovieCheck"]);
+        assert_eq!(
+            sources(CheckSet::MoviesGone),
+            ["ImportListRootFolderCheck", "RootFolderCheck"]
+        );
+        assert_eq!(sources(CheckSet::Collections), ["MovieCollectionRootFolderCheck"]);
         assert_eq!(
             sources(CheckSet::RemotePathMappings),
             [

@@ -1,0 +1,40 @@
+{
+  "body": [
+    {
+      "message": "All rss-capable indexers are temporarily unavailable due to recent indexer errors",
+      "source": "IndexerRssCheck",
+      "type": "warning",
+      "wikiUrl": "https://wiki.servarr.com/radarr/system#indexers-are-unavailable-due-to-failures"
+    },
+    {
+      "message": "All indexers are unavailable due to failures",
+      "source": "IndexerStatusCheck",
+      "type": "error",
+      "wikiUrl": "https://wiki.servarr.com/radarr/system#indexers-are-unavailable-due-to-failures"
+    },
+    {
+      "message": "Unable to communicate with Nzbget 1. Name or service not known (nzbget.invalid:6789)",
+      "source": "DownloadClientCheck",
+      "type": "error",
+      "wikiUrl": "https://wiki.servarr.com/radarr/system#unable-to-communicate-with-download-client"
+    },
+    {
+      "message": "All search-capable indexers are temporarily unavailable due to recent indexer errors",
+      "source": "IndexerSearchCheck",
+      "type": "warning",
+      "wikiUrl": "https://wiki.servarr.com/radarr/system#indexers-are-unavailable-due-to-failures"
+    },
+    {
+      "message": "Movie The Great Beyond (tmdbid 1288211) was removed from TMDb",
+      "source": "RemovedMovieCheck",
+      "type": "error",
+      "wikiUrl": "https://wiki.servarr.com/radarr/system#movie-was-removed-from-tmdb"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:41:20Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/health"
+  },
+  "status": 200
+}

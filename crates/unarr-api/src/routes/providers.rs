@@ -376,12 +376,35 @@ pub async fn metadata_update(
         body["id"] = json!(route_id);
     }
     let id = body["id"].as_i64().unwrap_or(0);
-    let existing = found(
-        state
-            .db()
-            .call(move |conn| store::providers::get_provider(conn, ProviderKind::Metadata, id))
-            .await?,
-    )?;
+    // `ProviderControllerBase`'s shared rules run before the provider is
+    // read, so a name another consumer has is a 400, not a 404.
+    let all = state
+        .db()
+        .call(|conn| store::providers::list_providers(conn, ProviderKind::Metadata))
+        .await?;
+    let name = body["name"].as_str().unwrap_or("");
+    let mut failures = Vec::new();
+    if name.trim().is_empty() {
+        failures.push(unarr_core::validation::ValidationFailure::not_empty(
+            "Name",
+            body["name"].clone(),
+        ));
+    }
+    if all
+        .iter()
+        .any(|p| p.name.eq_ignore_ascii_case(name) && p.id != id)
+    {
+        failures.push(unarr_core::validation::ValidationFailure::rule(
+            "Name",
+            "PredicateValidator",
+            "Should be unique",
+            body["name"].clone(),
+        ));
+    }
+    if !failures.is_empty() {
+        return Err(crate::error::ApiError::Validation(failures));
+    }
+    let existing = found(all.into_iter().find(|p| p.id == id))?;
     let mut updated = existing.clone();
     if let Some(name) = body["name"].as_str() {
         updated.name = name.to_string();
@@ -415,6 +438,33 @@ pub async fn metadata_update(
         Json(provider_resource(state.personality(), &updated)),
     )
         .into_response())
+}
+
+/// `POST /metadata/test`: a metadata consumer has nothing to connect to,
+/// so the test passes on anything the resource rules accept.
+pub async fn metadata_test(Json(body): Json<Value>) -> ApiResult<Json<Value>> {
+    if !body.is_object() {
+        return Err(crate::error::ApiError::BadRequest(
+            "The request body must be a JSON object".into(),
+        ));
+    }
+    Ok(Json(json!({})))
+}
+
+/// `POST /metadata/testall`: every enabled consumer, each valid.
+pub async fn metadata_test_all(State(state): State<AppState>) -> ApiResult<Json<Vec<Value>>> {
+    let mut providers = state
+        .db()
+        .call(|conn| store::providers::list_providers(conn, ProviderKind::Metadata))
+        .await?;
+    providers.sort_by_key(|p| p.id);
+    Ok(Json(
+        providers
+            .iter()
+            .filter(|p| p.attributes["enable"].as_bool().unwrap_or(false))
+            .map(|p| json!({"id": p.id, "isValid": true, "validationFailures": []}))
+            .collect(),
+    ))
 }
 
 #[cfg(test)]

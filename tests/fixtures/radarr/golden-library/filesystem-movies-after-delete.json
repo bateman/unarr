@@ -1,0 +1,13 @@
+{
+  "body": {
+    "directories": [],
+    "files": [],
+    "parent": "/"
+  },
+  "recordedAt": "2026-11-13T12:40:39Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/filesystem?path=/movies/"
+  },
+  "status": 200
+}

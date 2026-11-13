@@ -1,0 +1,1 @@
+{"$from": "qualitydefinition-1", "$set": {"title": "Renamed", "minSize": 1.5, "maxSize": 120, "preferredSize": 60}}

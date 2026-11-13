@@ -1,0 +1,1 @@
+{"$from": "config-downloadclient", "$set": {"enableCompletedDownloadHandling": false, "checkForFinishedDownloadInterval": 5, "autoRedownloadFailed": false, "autoRedownloadFailedFromInteractiveSearch": false}}

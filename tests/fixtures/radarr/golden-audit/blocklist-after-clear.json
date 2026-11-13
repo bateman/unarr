@@ -1,0 +1,16 @@
+{
+  "body": {
+    "page": 1,
+    "pageSize": 5,
+    "records": [],
+    "sortDirection": "descending",
+    "sortKey": "date",
+    "totalRecords": 0
+  },
+  "recordedAt": "2026-11-13T15:38:26Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/blocklist?page=1&pageSize=5"
+  },
+  "status": 200
+}

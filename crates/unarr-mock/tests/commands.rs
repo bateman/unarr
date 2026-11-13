@@ -516,7 +516,7 @@ async fn the_scheduler_pushes_due_tasks_and_records_their_runs() {
     assert_eq!(refresh.trigger, CommandTrigger::Scheduled);
     assert!(refresh.last_execution_time.is_some());
     assert!(!refresh.send_updates_to_client);
-    assert!(refresh.body_json()["lastExecutionTime"].is_string());
+    assert!(refresh.body_json(unarr_core::Personality::Sonarr)["lastExecutionTime"].is_string());
     // Pushing again while they are queued adds nothing.
     assert_eq!(runtime.tick_scheduler().await.unwrap(), 11);
     assert_eq!(runtime.queue().all().len(), 11);

@@ -1,0 +1,1 @@
+{"name": "Dramas", "removeTagsAutomatically": true, "tags": [1], "specifications": [{"name": "Drama", "implementation": "GenreSpecification", "negate": false, "required": false, "fields": [{"name": "value", "value": ["Drama"]}]}], "id": "{id:autotagging-create}"}

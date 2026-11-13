@@ -1,0 +1,41 @@
+{
+  "body": [
+    {
+      "id": 2,
+      "name": "Dramas",
+      "removeTagsAutomatically": true,
+      "specifications": [
+        {
+          "fields": [
+            {
+              "advanced": false,
+              "isFloat": false,
+              "label": "Genre(s)",
+              "name": "value",
+              "order": 0,
+              "privacy": "normal",
+              "type": "tag",
+              "value": [
+                "Drama"
+              ]
+            }
+          ],
+          "implementation": "GenreSpecification",
+          "implementationName": "Genre",
+          "name": "Drama",
+          "negate": false,
+          "required": false
+        }
+      ],
+      "tags": [
+        1
+      ]
+    }
+  ],
+  "recordedAt": "2026-11-13T12:41:28Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/autotagging"
+  },
+  "status": 200
+}

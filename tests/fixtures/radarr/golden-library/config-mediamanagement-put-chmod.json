@@ -1,0 +1,23 @@
+{
+  "body": [
+    {
+      "attemptedValue": "999",
+      "errorCode": "FolderChmodValidator",
+      "errorMessage": "Must contain a valid Unix permissions octal",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Chmod Folder",
+        "propertyValue": "999"
+      },
+      "propertyName": "ChmodFolder",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:41:12Z",
+  "request": {
+    "body": "bodies/config-mediamanagement-put-chmod.json",
+    "method": "PUT",
+    "path": "/api/v3/config/mediamanagement/1"
+  },
+  "status": 400
+}

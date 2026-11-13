@@ -1,0 +1,674 @@
+{
+  "body": [
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "alternateTitles": [
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Titanium"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "變鈦"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "티탄"
+        }
+      ],
+      "certification": "R",
+      "cleanTitle": "titane",
+      "digitalRelease": "2021-10-19T00:00:00Z",
+      "folder": "Titane (2021) {tmdb-630240}",
+      "folderName": "",
+      "genres": [
+        "Drama",
+        "Thriller",
+        "Horror"
+      ],
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/mBlpouG3gqB8WLdP65LCOXb3jFb.jpg",
+          "url": "/MediaCoverProxy/f6df127b59f6053b2adac1068958c5925c499044a8e8730068a19cd7cafa12cc/mBlpouG3gqB8WLdP65LCOXb3jFb.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/dVOlJVHYRWx7DhMQRNLnbf5bT1q.jpg",
+          "url": "/MediaCoverProxy/93523e5729992b773ea533b3f331d8096b2a3d56826b685aa073f33c0d5e7fd2/dVOlJVHYRWx7DhMQRNLnbf5bT1q.jpg"
+        }
+      ],
+      "imdbId": "tt10944760",
+      "inCinemas": "2021-07-14T00:00:00Z",
+      "isAvailable": true,
+      "isExcluded": true,
+      "keywords": [
+        "abortion",
+        "absurd",
+        "body horror",
+        "car accident",
+        "car crash",
+        "depressing",
+        "disgusted",
+        "distressing",
+        "disturbed",
+        "female serial killer",
+        "firefighter",
+        "frantic",
+        "hard",
+        "harsh",
+        "head wound",
+        "horrified",
+        "immaculate conception",
+        "intense",
+        "introspective",
+        "masculinity",
+        "missing son",
+        "objectum sexuality",
+        "pregnancy",
+        "serial killer",
+        "trauma",
+        "woman director",
+        "woman disguised as man"
+      ],
+      "minimumAvailability": "tba",
+      "monitored": false,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 2,
+        "name": "French"
+      },
+      "originalTitle": "Titane",
+      "overview": "A woman with a metal plate in her head from a childhood car accident embarks on a bizarre journey, bringing her into contact with a firefighter who's reunited with his missing son after 10 years.",
+      "physicalRelease": "2021-11-16T00:00:00Z",
+      "popularity": 4.4078,
+      "qualityProfileId": 0,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 6.4,
+          "votes": 68306
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 75,
+          "votes": 0
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 90,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 6.327,
+          "votes": 1787
+        },
+        "trakt": {
+          "type": "user",
+          "value": 6.3301,
+          "votes": 2787
+        }
+      },
+      "releaseDate": "2021-07-14T00:00:00Z",
+      "remotePoster": "https://image.tmdb.org/t/p/original/mBlpouG3gqB8WLdP65LCOXb3jFb.jpg",
+      "runtime": 108,
+      "secondaryYearSourceId": 0,
+      "sortTitle": "titane",
+      "status": "released",
+      "studio": "Kazak Productions",
+      "tags": [],
+      "title": "Titane",
+      "titleSlug": "630240",
+      "tmdbId": 630240,
+      "website": "https://titanemovie.com",
+      "year": 2021,
+      "youTubeTrailerId": "_DmFHh7KsWc"
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "alternateTitles": [
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Titanes del pacifico"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Pacific Rim 1"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "퍼시픽림"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "环太平洋"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Το Δαχτυλίδι της Φωτιάς"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "悍戰太平洋"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Vaikse ookeani võitlus"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Siêu Đại Chiến Thái Bình Dương"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Pacific.Rim"
+        }
+      ],
+      "certification": "PG-13",
+      "cleanTitle": "pacificrim",
+      "collection": {
+        "title": "Pacific Rim Collection",
+        "tmdbId": 363369
+      },
+      "digitalRelease": "2013-07-11T00:00:00Z",
+      "folder": "Pacific Rim (2013) {tmdb-68726}",
+      "folderName": "",
+      "genres": [
+        "Action",
+        "Science Fiction",
+        "Adventure"
+      ],
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/mmznhaQDwlHWpUwKuNxtQiubbmM.jpg",
+          "url": "/MediaCoverProxy/58f44621bdab5faae7c064efe38f540a2d55b9b7434031bbed9b28baa08db7b6/mmznhaQDwlHWpUwKuNxtQiubbmM.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/9X7Im1YuBhyHYVD8r7CAONPJR5k.jpg",
+          "url": "/MediaCoverProxy/ecb573522285109f08866f80154154caa9b2ec70b3155a626277d960f7eee959/9X7Im1YuBhyHYVD8r7CAONPJR5k.jpg"
+        }
+      ],
+      "imdbId": "tt1663662",
+      "inCinemas": "2013-07-11T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "alaska",
+        "alien invasion",
+        "apocalypse",
+        "duringcreditsstinger",
+        "dystopia",
+        "giant monster",
+        "giant robot",
+        "hong kong",
+        "kaiju",
+        "monster",
+        "monster movie",
+        "pacific",
+        "robot"
+      ],
+      "minimumAvailability": "tba",
+      "monitored": false,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Pacific Rim",
+      "overview": "Using massive piloted robots to combat the alien threat, Earth's survivors take the fight to the invading alien force lurking in the depths of the Pacific Ocean. Nearly defenseless in the face of the relentless enemy, the forces of mankind have no choice but to turn to two unlikely heroes who now stand as Earth's final hope against the mounting apocalypse.",
+      "physicalRelease": "2013-10-15T00:00:00Z",
+      "popularity": 13.8456,
+      "qualityProfileId": 0,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 6.9,
+          "votes": 566628
+        },
+        "metacritic": {
+          "type": "user",
+          "value": 65,
+          "votes": 0
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 72,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 6.951,
+          "votes": 14013
+        },
+        "trakt": {
+          "type": "user",
+          "value": 7.30109,
+          "votes": 22110
+        }
+      },
+      "releaseDate": "2013-07-11T00:00:00Z",
+      "remotePoster": "https://image.tmdb.org/t/p/original/mmznhaQDwlHWpUwKuNxtQiubbmM.jpg",
+      "runtime": 131,
+      "secondaryYearSourceId": 0,
+      "sortTitle": "pacific rim",
+      "status": "released",
+      "studio": "Double Dare You",
+      "tags": [],
+      "title": "Pacific Rim",
+      "titleSlug": "68726",
+      "tmdbId": 68726,
+      "website": "https://www.warnerbros.com/movies/pacific-rim",
+      "year": 2013,
+      "youTubeTrailerId": "hQAQxQop6Io"
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "alternateTitles": [
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "巨怪猎人：泰坦的崛起"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Trollhunters: El despertar de los titanes"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "트롤헌터 라이즈 오브 타이탄"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "トロールハンターズ：ライジング・タイタンズ"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "トロールハンターズ ライジング・タイタンズ"
+        }
+      ],
+      "certification": "PG",
+      "cleanTitle": "trollhuntersrisetitans",
+      "digitalRelease": "2021-07-21T00:00:00Z",
+      "folder": "Trollhunters Rise of the Titans (2021) {tmdb-730840}",
+      "folderName": "",
+      "genres": [
+        "Animation",
+        "Fantasy",
+        "Family",
+        "Action",
+        "Adventure"
+      ],
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/efWd3qF4j8SEl83F2ekp1pbCzJZ.jpg",
+          "url": "/MediaCoverProxy/aa6a0e8710e59f21b7ef5fb049992e0723d1e18d26f1342cc260939d2028b206/efWd3qF4j8SEl83F2ekp1pbCzJZ.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/d1i6oB5xdo2a7sOmjprCcElqlrD.jpg",
+          "url": "/MediaCoverProxy/b277829df1d1fce981182f4cc328c4eec37410744b11e4a5d932d0a33af61703/d1i6oB5xdo2a7sOmjprCcElqlrD.jpg"
+        }
+      ],
+      "imdbId": "tt12851396",
+      "isAvailable": true,
+      "keywords": [
+        "3d animation",
+        "tales of arcadia"
+      ],
+      "minimumAvailability": "tba",
+      "monitored": false,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Trollhunters: Rise of the Titans",
+      "overview": "The Guardians of Arcadia reunite to battle the nefarious Arcane Order, who've reawakened the primordial Titans.",
+      "popularity": 3.2925,
+      "qualityProfileId": 0,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 6.6,
+          "votes": 7671
+        },
+        "rottenTomatoes": {
+          "type": "user",
+          "value": 88,
+          "votes": 0
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 7.547,
+          "votes": 379
+        },
+        "trakt": {
+          "type": "user",
+          "value": 7.02266,
+          "votes": 706
+        }
+      },
+      "releaseDate": "2021-07-21T00:00:00Z",
+      "remotePoster": "https://image.tmdb.org/t/p/original/efWd3qF4j8SEl83F2ekp1pbCzJZ.jpg",
+      "runtime": 106,
+      "secondaryYearSourceId": 0,
+      "sortTitle": "trollhunters rise of the titans",
+      "status": "released",
+      "studio": "Double Dare You",
+      "tags": [],
+      "title": "Trollhunters: Rise of the Titans",
+      "titleSlug": "730840",
+      "tmdbId": 730840,
+      "website": "https://www.netflix.com/title/81010139",
+      "year": 2021,
+      "youTubeTrailerId": "6H4Y21Hg2L8"
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "alternateTitles": [
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Jóvenes Titanes - Misión Tokio"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Jovens Titãs - Missão Tóquio"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Os Jovens Titãs- Missão Tóquio"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Teen Titans : Panique à Tokyo"
+        }
+      ],
+      "certification": "G",
+      "cleanTitle": "teentitanstroubleintokyo",
+      "digitalRelease": "2006-09-15T00:00:00Z",
+      "folder": "Teen Titans Trouble in Tokyo (2006) {tmdb-16237}",
+      "folderName": "",
+      "genres": [
+        "Animation",
+        "Action",
+        "Science Fiction",
+        "TV Movie"
+      ],
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/4wMlDE1HzkVyYeDKuY1oDOWQlN2.jpg",
+          "url": "/MediaCoverProxy/2c22803bf470dfc7aaef313a3b0d00d3c4d36affe4bbc87af18cb669ad18b36d/4wMlDE1HzkVyYeDKuY1oDOWQlN2.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/fey7NzJ61KAAVPfUgcpaahW5gZ5.jpg",
+          "url": "/MediaCoverProxy/91ec723df92106f049858d522f959ac9d055ef00ef205f777aa8c0f4a2def9c3/fey7NzJ61KAAVPfUgcpaahW5gZ5.jpg"
+        }
+      ],
+      "imdbId": "tt0816671",
+      "inCinemas": "2006-09-15T00:00:00Z",
+      "isAvailable": true,
+      "keywords": [
+        "arrested",
+        "based on comic",
+        "fraud",
+        "series finale",
+        "teen superhero",
+        "tokyo, japan",
+        "villain"
+      ],
+      "minimumAvailability": "tba",
+      "monitored": false,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Teen Titans: Trouble in Tokyo",
+      "overview": "After a battle with a high-tech villain named, Saiko-Tek, the Teen Titans travel to the city of Tokyo where they find themselves embroiled in a conflict with an ancient enemy.",
+      "physicalRelease": "2007-02-06T00:00:00Z",
+      "popularity": 4.0015,
+      "qualityProfileId": 0,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 7,
+          "votes": 8058
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 7.9,
+          "votes": 483
+        },
+        "trakt": {
+          "type": "user",
+          "value": 7.05133,
+          "votes": 487
+        }
+      },
+      "releaseDate": "2006-09-15T00:00:00Z",
+      "remotePoster": "https://image.tmdb.org/t/p/original/4wMlDE1HzkVyYeDKuY1oDOWQlN2.jpg",
+      "runtime": 75,
+      "secondaryYearSourceId": 0,
+      "sortTitle": "teen titans trouble in tokyo",
+      "status": "released",
+      "studio": "DC",
+      "tags": [],
+      "title": "Teen Titans: Trouble in Tokyo",
+      "titleSlug": "16237",
+      "tmdbId": 16237,
+      "website": "",
+      "year": 2006,
+      "youTubeTrailerId": "zPQei7nDZUE"
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "alternateTitles": [],
+      "certification": "NR",
+      "cleanTitle": "teentitansgoseespacejam",
+      "digitalRelease": "2021-06-20T00:00:00Z",
+      "folder": "Teen Titans Go! See Space Jam (2021) {tmdb-834404}",
+      "folderName": "",
+      "genres": [
+        "Animation",
+        "Comedy",
+        "Family",
+        "Fantasy",
+        "Science Fiction"
+      ],
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/xBOipwFIZS2uLk0FwmKpysCx4HD.jpg",
+          "url": "/MediaCoverProxy/d1ba70bd980badc545d74cddafc33452aab4cfe4c03fc5a21bdb14cae010ae20/xBOipwFIZS2uLk0FwmKpysCx4HD.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/1MxdxiUvKCbuKDoeiuq668eIKb8.jpg",
+          "url": "/MediaCoverProxy/4cda78c67357882b7b01ffbe42ecf4b95b197b5027ff0b94360f6a369afa80d1/1MxdxiUvKCbuKDoeiuq668eIKb8.jpg"
+        }
+      ],
+      "imdbId": "tt14851194",
+      "isAvailable": true,
+      "keywords": [
+        "based on comic",
+        "based on movie",
+        "based on tv series",
+        "sequel"
+      ],
+      "minimumAvailability": "tba",
+      "monitored": false,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "originalTitle": "Teen Titans Go! See Space Jam",
+      "overview": "The Teen Titans are visited by the Nerdlucks, the Space Jam villains who tried to capture Michael Jordan and the Looney Tunes. Astonished to discover his fellow Titans have never seen Space Jam, Cyborg organizes an exclusive watch party.",
+      "physicalRelease": "2021-09-13T00:00:00Z",
+      "popularity": 2.4482,
+      "qualityProfileId": 0,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 4.5,
+          "votes": 1598
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 6.2,
+          "votes": 254
+        },
+        "trakt": {
+          "type": "user",
+          "value": 5.6776,
+          "votes": 183
+        }
+      },
+      "releaseDate": "2021-06-20T00:00:00Z",
+      "remotePoster": "https://image.tmdb.org/t/p/original/xBOipwFIZS2uLk0FwmKpysCx4HD.jpg",
+      "runtime": 83,
+      "secondaryYearSourceId": 0,
+      "sortTitle": "teen titans go see space jam",
+      "status": "released",
+      "studio": "Warner Bros. Animation",
+      "tags": [],
+      "title": "Teen Titans Go! See Space Jam",
+      "titleSlug": "834404",
+      "tmdbId": 834404,
+      "website": "",
+      "year": 2021,
+      "youTubeTrailerId": "-2zRHKsVBvU"
+    },
+    {
+      "added": "0001-01-01T00:00:00Z",
+      "alternateTitles": [
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "封神榜大破万仙阵"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "The First Myth: Clash of Gods"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Investiture of the Gods: The Battle of Ten Thousand Immortals"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "Feng Shen Bang"
+        },
+        {
+          "movieMetadataId": 0,
+          "sourceType": "tmdb",
+          "title": "The First Myth: The Clash of Gods"
+        }
+      ],
+      "cleanTitle": "thefirstmythclashgods",
+      "digitalRelease": "2021-04-30T00:00:00Z",
+      "folder": "The First Myth Clash of Gods (2021) {tmdb-824424}",
+      "folderName": "",
+      "genres": [
+        "Fantasy",
+        "Action",
+        "Adventure",
+        "Drama"
+      ],
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/lVxrP1Q4stsFwJS5WGsUm5fJvP4.jpg",
+          "url": "/MediaCoverProxy/020e7e12f554d4322c347a0c14a1e19ab59b34aae4eac1ab40cedd7507bd8710/lVxrP1Q4stsFwJS5WGsUm5fJvP4.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/syhOgYy9PbToxbXvejX1vT9CBm8.jpg",
+          "url": "/MediaCoverProxy/bb425f284c65f1bd2b4369eca192e1553e96233c9e71625869c279545e3412b5/syhOgYy9PbToxbXvejX1vT9CBm8.jpg"
+        }
+      ],
+      "imdbId": "tt15170394",
+      "isAvailable": true,
+      "keywords": [
+        "wuxia"
+      ],
+      "minimumAvailability": "tba",
+      "monitored": false,
+      "movieFileId": 0,
+      "originalLanguage": {
+        "id": 10,
+        "name": "Chinese"
+      },
+      "originalTitle": "封神榜：决战万仙阵",
+      "overview": "At the end of the Yin Shang Dynasty, King Zhou was tyrannical and the people were in desperate straits. The God of Heaven and Shen Gong Bao wanted to take advantage of the chaos to destroy the mortal world by using the Ten Thousand Immortals Formation. In order to fight against the evil forces, Jiang Ziya gathers Yang Jian, Nezha and other immortals to join forces to save the mortal world.",
+      "physicalRelease": "2022-01-14T00:00:00Z",
+      "popularity": 1.3411,
+      "qualityProfileId": 0,
+      "ratings": {
+        "imdb": {
+          "type": "user",
+          "value": 4.5,
+          "votes": 193
+        },
+        "tmdb": {
+          "type": "user",
+          "value": 4.7,
+          "votes": 9
+        },
+        "trakt": {
+          "type": "user",
+          "value": 5.05556,
+          "votes": 18
+        }
+      },
+      "releaseDate": "2021-04-30T00:00:00Z",
+      "remotePoster": "https://image.tmdb.org/t/p/original/lVxrP1Q4stsFwJS5WGsUm5fJvP4.jpg",
+      "runtime": 92,
+      "secondaryYearSourceId": 0,
+      "sortTitle": "first myth clash of gods",
+      "status": "released",
+      "studio": "",
+      "tags": [],
+      "title": "The First Myth: Clash of Gods",
+      "titleSlug": "824424",
+      "tmdbId": 824424,
+      "website": "",
+      "year": 2021,
+      "youTubeTrailerId": ""
+    }
+  ],
+  "recordedAt": "2026-11-13T12:38:03Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/movie/lookup?term=Titane.2021.1080p.BluRay.x264-GRP"
+  },
+  "status": 200
+}

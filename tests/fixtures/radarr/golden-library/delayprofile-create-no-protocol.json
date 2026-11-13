@@ -1,0 +1,16 @@
+{
+  "body": [
+    {
+      "errorMessage": "Either Usenet or Torrent should be enabled",
+      "propertyName": "",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:41:28Z",
+  "request": {
+    "body": "bodies/delayprofile-create-no-protocol.json",
+    "method": "POST",
+    "path": "/api/v3/delayprofile"
+  },
+  "status": 400
+}

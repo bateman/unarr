@@ -1,0 +1,24 @@
+{
+  "body": [
+    {
+      "attemptedValue": "/nowhere",
+      "errorCode": "RootFolderExistsValidator",
+      "errorMessage": "Root folder '/nowhere' does not exist",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "path": "/nowhere",
+        "propertyName": "Root Folder Path",
+        "propertyValue": "/nowhere"
+      },
+      "propertyName": "RootFolderPath",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:38:48Z",
+  "request": {
+    "body": "bodies/movie-add-missing-root.json",
+    "method": "POST",
+    "path": "/api/v3/movie"
+  },
+  "status": 400
+}

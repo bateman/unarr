@@ -236,11 +236,19 @@ impl ValidationFailure {
     }
 }
 
+/// FluentValidation's `SplitPascalCase`: a space before a capital that
+/// follows a small letter, and before the last capital of a run that a
+/// small letter follows (`UILanguage` is `UI Language`).
 pub fn display_name(property: &str) -> String {
+    let chars: Vec<char> = property.chars().collect();
     let mut out = String::with_capacity(property.len() + 4);
-    for (i, c) in property.chars().enumerate() {
+    for (i, &c) in chars.iter().enumerate() {
         if i > 0 && c.is_ascii_uppercase() {
-            out.push(' ');
+            let prev = chars[i - 1];
+            let next_small = chars.get(i + 1).is_some_and(|n| n.is_ascii_lowercase());
+            if !prev.is_ascii_uppercase() || next_small {
+                out.push(' ');
+            }
         }
         out.push(c);
     }

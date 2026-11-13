@@ -18,9 +18,15 @@ that source.
 | 5. The UI at several screen densities | [5-browser.md](5-browser.md) | 36 pages on 5 screens | none |
 | 6. Event handlers, commands, housekeeping | [6-events.md](6-events.md) | 214 entries | 29 missing, 6 partial, none high |
 | 7. Where each row stands now | [7-triage.md](7-triage.md) | 193 rows of reports 1, 2, 3, 4 and 6 | 61 open, 10 partial |
+| 8. The same method on Radarr | [8-radarr.md](8-radarr.md) | 259 routes, 79 UI paths, 15 settings, 35 commands, 324 requests | 9 found, 9 closed |
 
 The search, grab, import and delete chains are complete. The gaps are at
 the edges.
+
+Audit 8 repeated the method on Radarr at the end of milestone 4d, by
+machine where the comparison could be made by machine
+(`scripts/route-audit.py`, `make http-audit`): what it found is closed,
+and what it left open it says why.
 
 ## How far to trust them
 

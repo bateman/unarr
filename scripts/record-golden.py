@@ -226,14 +226,16 @@ class SignalrTap(threading.Thread):
             self.step = step
             self.steps.append({"after": step, "messages": []})
 
-    def finish(self, out: Path) -> None:
+    def finish(self, out: Path, scrub=lambda text: text) -> None:
         # Let the last messages arrive, then stop listening.
         time.sleep(2)
         with self.lock:
             steps = [s for s in self.steps if s["messages"]]
         if self.closed.is_set():
             print("[golden] signalr: the connection closed before the end of the recording", file=sys.stderr)
-        (out / "signalr.json").write_text(json.dumps(steps, indent=2, sort_keys=True, ensure_ascii=False) + "\n")
+        (out / "signalr.json").write_text(
+            scrub(json.dumps(steps, indent=2, sort_keys=True, ensure_ascii=False)) + "\n"
+        )
         total = sum(len(s["messages"]) for s in steps)
         print(f"[golden] signalr: {total} messages after {len(steps)} steps -> signalr.json", file=sys.stderr)
 
@@ -247,7 +249,24 @@ def main():
     ap.add_argument("--login", help="user:password for the forms login used by session-* requests")
     ap.add_argument("--mock-url", default="http://127.0.0.1:18989", help="where `mock` lines are sent")
     ap.add_argument("--signalr", action="store_true", help="listen to the SignalR hub and write signalr.json")
+    ap.add_argument(
+        "--data-dir",
+        help="the application's data directory: where it appears in an answer or in an exception "
+        "(a stack that names a folder), it is written down as `/config`, so a recording carries "
+        "no path of the machine that made it",
+    )
     args = ap.parse_args()
+
+    # The data directory of the machine that records, written down as the
+    # path a container would have: a recording is read by everyone and the
+    # answers of the originals quote it in stacks and in error messages.
+    data_dir = str(Path(args.data_dir).resolve()) if args.data_dir else None
+
+    def scrub(text: str) -> str:
+        if not data_dir:
+            return text
+        return text.replace(json.dumps(data_dir)[1:-1], "/config").replace(data_dir, "/config")
+
 
     args.out.mkdir(parents=True, exist_ok=True)
     base = args.base_url.rstrip("/")
@@ -335,11 +354,11 @@ def main():
         }
         if to_mock:
             golden["request"]["target"] = "mock"
-        (args.out / f"{name}.json").write_text(json.dumps(golden, indent=2, sort_keys=True, ensure_ascii=False) + "\n")
+        (args.out / f"{name}.json").write_text(scrub(json.dumps(golden, indent=2, sort_keys=True, ensure_ascii=False)) + "\n")
         print(f"[golden] {status} {method} {path} -> {name}.json", file=sys.stderr)
         count += 1
     if tap:
-        tap.finish(args.out)
+        tap.finish(args.out, scrub)
     print(f"[golden] {count} responses recorded in {args.out}", file=sys.stderr)
 
 

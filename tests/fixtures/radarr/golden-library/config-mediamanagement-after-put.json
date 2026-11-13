@@ -1,0 +1,32 @@
+{
+  "body": {
+    "autoRenameFolders": false,
+    "autoUnmonitorPreviouslyDownloadedMovies": false,
+    "chmodFolder": "755",
+    "chownGroup": "",
+    "copyUsingHardlinks": false,
+    "createEmptyMovieFolders": false,
+    "deleteEmptyFolders": true,
+    "downloadPropersAndRepacks": "doNotPrefer",
+    "enableMediaInfo": true,
+    "extraFileExtensions": "srt,nfo",
+    "fileDate": "cinemas",
+    "id": 1,
+    "importExtraFiles": true,
+    "minimumFreeSpaceWhenImporting": 200,
+    "pathsDefaultStatic": false,
+    "recycleBin": "",
+    "recycleBinCleanupDays": 3,
+    "rescanAfterRefresh": "afterManual",
+    "scriptImportPath": "",
+    "setPermissionsLinux": false,
+    "skipFreeSpaceCheckWhenImporting": true,
+    "useScriptImport": false
+  },
+  "recordedAt": "2026-11-13T12:41:12Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/config/mediamanagement"
+  },
+  "status": 200
+}

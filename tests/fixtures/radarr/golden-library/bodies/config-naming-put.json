@@ -1,0 +1,1 @@
+{"$from": "config-naming", "$set": {"renameMovies": false, "replaceIllegalCharacters": false, "colonReplacementFormat": "dash", "standardMovieFormat": "{Movie Title} ({Release Year}) {Quality Full}", "movieFolderFormat": "{Movie Title} ({Release Year})"}}

@@ -118,22 +118,35 @@ pub fn proxy_url(url_base: &str, remote_url: &str) -> String {
 /// missing or changed size, then the thumbnails. Returns whether anything
 /// was downloaded (`MediaCoversUpdatedEvent.Updated`).
 pub async fn ensure_covers(root: &Path, augment: &Augment, series: &Series) -> bool {
-    forget_last_writes(series.id);
+    ensure_covers_of(root, augment, series.id, &series.title, &series.images).await
+}
+
+/// The same for whatever the folder `MediaCover/{id}/` belongs to: a
+/// series here, a movie in Radarr, whose `MediaCoverService` is the same
+/// code over another model.
+pub async fn ensure_covers_of(
+    root: &Path,
+    augment: &Augment,
+    id: i64,
+    title: &str,
+    images: &[Image],
+) -> bool {
+    forget_last_writes(id);
     let mut updated = false;
     let mut to_resize: Vec<(&Image, bool)> = Vec::new();
-    for cover in &series.images {
+    for cover in images {
         if cover.cover_type == "unknown" {
             continue;
         }
         let Some(remote) = cover.remote_url.as_deref() else {
             continue;
         };
-        let file = cover_path(root, series.id, &cover.cover_type, None);
+        let file = cover_path(root, id, &cover.cover_type, None);
         let mut already_exists = false;
         let outcome: anyhow::Result<()> = async {
             already_exists = already_exists_with_size(augment, remote, &file).await?;
             if !already_exists {
-                tracing::info!("Downloading {} for {} {}", cover.cover_type, series.title, remote);
+                tracing::info!("Downloading {} for {} {}", cover.cover_type, title, remote);
                 let body = augment.download(remote).await?;
                 write_atomically(&file, &body).await?;
                 updated = true;
@@ -142,19 +155,19 @@ pub async fn ensure_covers(root: &Path, augment: &Augment, series: &Series) -> b
         }
         .await;
         if let Err(e) = outcome {
-            tracing::warn!("Couldn't download media cover for {}. {e}", series.title);
+            tracing::warn!("Couldn't download media cover for {}. {e}", title);
         }
         to_resize.push((cover, already_exists));
     }
     for (cover, already_exists) in to_resize {
-        let (root, id, kind) = (root.to_path_buf(), series.id, cover.cover_type.clone());
-        let title = series.title.clone();
+        let (root, kind) = (root.to_path_buf(), cover.cover_type.clone());
+        let title = title.to_string();
         let _ = tokio::task::spawn_blocking(move || {
             ensure_resized(&root, id, &kind, !already_exists, &title);
         })
         .await;
     }
-    forget_last_writes(series.id);
+    forget_last_writes(id);
     updated
 }
 

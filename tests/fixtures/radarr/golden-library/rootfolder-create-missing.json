@@ -1,0 +1,24 @@
+{
+  "body": [
+    {
+      "attemptedValue": "/nowhere",
+      "errorCode": "PathExistsValidator",
+      "errorMessage": "Path '/nowhere' does not exist",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "path": "/nowhere",
+        "propertyName": "Path",
+        "propertyValue": "/nowhere"
+      },
+      "propertyName": "Path",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:41:20Z",
+  "request": {
+    "body": "bodies/rootfolder-create-missing.json",
+    "method": "POST",
+    "path": "/api/v3/rootfolder"
+  },
+  "status": 400
+}

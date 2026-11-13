@@ -1,0 +1,12 @@
+{
+  "body": {
+    "certificationCountry": "it",
+    "id": 1
+  },
+  "recordedAt": "2026-11-13T12:41:12Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/config/metadata"
+  },
+  "status": 200
+}

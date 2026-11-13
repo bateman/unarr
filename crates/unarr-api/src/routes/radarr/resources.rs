@@ -96,7 +96,7 @@ pub fn alternative_title_resource(t: &AlternativeTitle) -> Value {
 
 /// A number the originals keep in single precision, as they print it: the
 /// shortest decimal that reads back to the same `float`.
-fn single_precision(value: f64) -> f64 {
+pub(crate) fn single_precision(value: f64) -> f64 {
     (value as f32).to_string().parse().unwrap_or(value)
 }
 
@@ -325,6 +325,7 @@ pub fn movie_resource(ctx: &MovieContext, movie: &Movie, parts: &MovieParts) -> 
     out.insert("keywords".into(), json!(md.keywords));
     out.insert("tags".into(), json!(movie.tags));
     set(&mut out, "added", ts(movie.added));
+    set(&mut out, "addOptions", movie.add_options.clone());
     out.insert("ratings".into(), md.ratings.clone());
     // A single-precision number in the originals: its shortest spelling.
     out.insert("popularity".into(), json!(single_precision(md.popularity)));

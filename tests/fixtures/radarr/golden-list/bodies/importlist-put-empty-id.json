@@ -1,0 +1,11 @@
+{
+ "$from": "importlist-after-put",
+ "$set": {
+  "fields": [
+   {
+    "name": "listId",
+    "value": ""
+   }
+  ]
+ }
+}

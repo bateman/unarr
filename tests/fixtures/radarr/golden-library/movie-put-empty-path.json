@@ -1,0 +1,23 @@
+{
+  "body": [
+    {
+      "attemptedValue": "",
+      "errorCode": "NotEmptyValidator",
+      "errorMessage": "'Path' must not be empty.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Path",
+        "propertyValue": ""
+      },
+      "propertyName": "Path",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:39:58Z",
+  "request": {
+    "body": "bodies/movie-put-empty-path.json",
+    "method": "PUT",
+    "path": "/api/v3/movie/328"
+  },
+  "status": 400
+}

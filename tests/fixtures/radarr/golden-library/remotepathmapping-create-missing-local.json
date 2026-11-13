@@ -1,0 +1,24 @@
+{
+  "body": [
+    {
+      "attemptedValue": "/nowhere/",
+      "errorCode": "PathExistsValidator",
+      "errorMessage": "Path '/nowhere/' does not exist",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "path": "/nowhere/",
+        "propertyName": "Local Path",
+        "propertyValue": "/nowhere/"
+      },
+      "propertyName": "LocalPath",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:41:28Z",
+  "request": {
+    "body": "bodies/remotepathmapping-create-missing-local.json",
+    "method": "POST",
+    "path": "/api/v3/remotepathmapping"
+  },
+  "status": 400
+}

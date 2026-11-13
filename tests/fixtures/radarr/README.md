@@ -13,6 +13,19 @@ against it.
 | `golden/bodies/*.json` | The bodies of the writes. One with `$from` and `$set` is derived from an earlier answer: the resource a `PUT` sends back changed. |
 | `golden/*.json` | `{"request", "recordedAt", "status", "body"}` as recorded by `scripts/record-golden.py` against the real Radarr. `recordedAt` pins Unarr's clock during the replay, so availability, the calendar and the wanted lists do not drift as the calendar moves on. |
 | `golden-hub/` | A second, short request list with its answers and `signalr.json`, recorded the same way (the list's header has the command) and replayed by `the_hub_and_the_refresh_after_a_scan_are_the_originals`. Steps about the hub or the command list that the long list does not have go here, so the long list is not recorded again for them. |
+| `golden-library/` | Milestone 4d's first list, with `signalr.json`: the movies looked up, refreshed, added, edited, moved and deleted, and every settings page written. Replayed by `the_library_goldens_match`. |
+| `golden-list/` | Milestone 4d's import lists: the IMDb watchlist written, tested and synced, and what an exclusion does to the next sync. Replayed by `the_import_list_goldens_match`. The watchlist is served by the mock from the hand-made `tests/fixtures/metadata/api.radarr.video/v1/list/imdb/ur0000001.json`. |
+| `golden-backup/` | Milestone 4d's backups and log files. Replayed by `the_backup_goldens_match`. The contents of a log file are not recorded: a log names the paths of the machine that wrote it. |
+| `golden-audit/` | Milestone 4d's audit (`docs/audit/8-radarr.md`): the routes and commands the original has and Unarr lacked. Replayed by `the_audit_goldens_match`. |
+
+Each list is recorded in one run of its own, so the long list next door is
+never re-recorded for a step a milestone adds:
+
+    GOLDEN_REQUESTS=tests/fixtures/radarr/golden-list/requests.txt \
+        GOLDEN_OUT=tests/fixtures/radarr/golden-list make golden-radarr
+
+`RECORD_METADATA=1` lets the mock fetch an answer `tests/fixtures/metadata`
+does not hold yet, which is how a new movie's fixtures are made.
 
 `make golden-radarr` re-records the responses: it downloads the official
 linux-core-x64 release (self-contained, no Docker needed) into

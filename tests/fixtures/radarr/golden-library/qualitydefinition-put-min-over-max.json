@@ -1,0 +1,67 @@
+{
+  "body": [
+    {
+      "attemptedValue": 200,
+      "errorCode": "LessThanOrEqualTo",
+      "errorMessage": "'Min Size' must be less than or equal to '150'.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "comparisonProperty": "",
+        "comparisonValue": 150,
+        "propertyName": "Min Size",
+        "propertyValue": 200
+      },
+      "propertyName": "MinSize",
+      "severity": "error"
+    },
+    {
+      "attemptedValue": 150,
+      "errorCode": "GreaterThanOrEqualTo",
+      "errorMessage": "'Preferred Size' must be greater than or equal to '200'.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "comparisonProperty": "",
+        "comparisonValue": 200,
+        "propertyName": "Preferred Size",
+        "propertyValue": 150
+      },
+      "propertyName": "PreferredSize",
+      "severity": "error"
+    },
+    {
+      "attemptedValue": 150,
+      "errorCode": "LessThanOrEqualTo",
+      "errorMessage": "'Preferred Size' must be less than or equal to '100'.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "comparisonProperty": "",
+        "comparisonValue": 100,
+        "propertyName": "Preferred Size",
+        "propertyValue": 150
+      },
+      "propertyName": "PreferredSize",
+      "severity": "error"
+    },
+    {
+      "attemptedValue": 100,
+      "errorCode": "GreaterThanOrEqualTo",
+      "errorMessage": "'Max Size' must be greater than or equal to '150'.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "comparisonProperty": "",
+        "comparisonValue": 150,
+        "propertyName": "Max Size",
+        "propertyValue": 100
+      },
+      "propertyName": "MaxSize",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:41:29Z",
+  "request": {
+    "body": "bodies/qualitydefinition-put-min-over-max.json",
+    "method": "PUT",
+    "path": "/api/v3/qualitydefinition/1"
+  },
+  "status": 400
+}

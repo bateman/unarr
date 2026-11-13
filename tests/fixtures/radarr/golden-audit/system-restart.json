@@ -1,0 +1,11 @@
+{
+  "body": {
+    "restarting": true
+  },
+  "recordedAt": "2026-11-13T15:38:26Z",
+  "request": {
+    "method": "POST",
+    "path": "/api/v3/system/restart"
+  },
+  "status": 200
+}

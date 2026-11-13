@@ -1,0 +1,23 @@
+{
+  "body": [
+    {
+      "attemptedValue": 999,
+      "errorCode": "QualityProfileExistsValidator",
+      "errorMessage": "Quality Profile does not exist",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Quality Profile Id",
+        "propertyValue": 999
+      },
+      "propertyName": "QualityProfileId",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T13:34:06Z",
+  "request": {
+    "body": "bodies/importlist-put-bad-profile.json",
+    "method": "PUT",
+    "path": "/api/v3/importlist/1"
+  },
+  "status": 400
+}

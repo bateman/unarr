@@ -1,0 +1,35 @@
+{
+  "body": {
+    "body": {
+      "isExclusive": false,
+      "isLongRunning": false,
+      "isTypeExclusive": false,
+      "movieIds": [
+        6
+      ],
+      "name": "RenameMovieFolder",
+      "requiresDiskAccess": false,
+      "sendUpdatesToClient": false,
+      "suppressMessages": true,
+      "trigger": "manual",
+      "updateScheduledTask": true
+    },
+    "commandName": "Rename Movie Folder",
+    "id": 472961,
+    "name": "RenameMovieFolder",
+    "priority": "normal",
+    "queued": "2026-11-13T15:38:16Z",
+    "result": "unknown",
+    "sendUpdatesToClient": false,
+    "status": "queued",
+    "trigger": "manual",
+    "updateScheduledTask": true
+  },
+  "recordedAt": "2026-11-13T15:38:16Z",
+  "request": {
+    "body": "bodies/command-rename-movie-folder.json",
+    "method": "POST",
+    "path": "/api/v3/command"
+  },
+  "status": 201
+}

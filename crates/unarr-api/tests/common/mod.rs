@@ -21,6 +21,10 @@ pub enum Mode {
     /// `Exact` over the commands a client started: the originals' own
     /// refreshes and the scheduler's commands come and go with the clock.
     ManualCommands(&'static [&'static str]),
+    /// `Exact` over the commands a client or a write queued, in any
+    /// order: the downloads' refresh of each minute and what it queues are
+    /// the clock's, and commands that run side by side end as they may.
+    QueuedCommands(&'static [&'static str]),
     /// `Exact` over a list whose order the originals do not fix: the
     /// notifications a delete leaves, where the media server's refresh
     /// runs on a background handler and lands wherever it may.
@@ -197,7 +201,64 @@ pub fn derive_body(text: &str, golden_dir: &std::path::Path) -> String {
             target.insert(k.clone(), v.clone());
         }
     }
-    body.to_string()
+    python_dumps(&body)
+}
+
+/// `json.dumps` as the recorder writes a derived body: `, ` and `: `
+/// between items, non-ASCII escaped. A model binding error names the byte
+/// it stopped at, so the replay sends the same bytes.
+pub fn python_dumps(v: &Value) -> String {
+    fn string(s: &str, out: &mut String) {
+        out.push('"');
+        for c in s.chars() {
+            match c {
+                '"' => out.push_str("\\\""),
+                '\\' => out.push_str("\\\\"),
+                '\n' => out.push_str("\\n"),
+                '\r' => out.push_str("\\r"),
+                '\t' => out.push_str("\\t"),
+                c if (c as u32) < 0x20 || (c as u32) > 0x7f => {
+                    let mut buf = [0u16; 2];
+                    for unit in c.encode_utf16(&mut buf) {
+                        out.push_str(&format!("\\u{unit:04x}"));
+                    }
+                }
+                c => out.push(c),
+            }
+        }
+        out.push('"');
+    }
+    fn walk(v: &Value, out: &mut String) {
+        match v {
+            Value::String(s) => string(s, out),
+            Value::Array(items) => {
+                out.push('[');
+                for (i, item) in items.iter().enumerate() {
+                    if i > 0 {
+                        out.push_str(", ");
+                    }
+                    walk(item, out);
+                }
+                out.push(']');
+            }
+            Value::Object(map) => {
+                out.push('{');
+                for (i, (k, item)) in map.iter().enumerate() {
+                    if i > 0 {
+                        out.push_str(", ");
+                    }
+                    string(k, out);
+                    out.push_str(": ");
+                    walk(item, out);
+                }
+                out.push('}');
+            }
+            other => out.push_str(&other.to_string()),
+        }
+    }
+    let mut out = String::new();
+    walk(v, &mut out);
+    out
 }
 
 /// The request list of `golden_dir` with what the original answered.
@@ -346,6 +407,27 @@ pub fn compare(mode: Mode, want_body: &Value, got_body: &Value) -> Vec<String> {
             };
             let want = normalize(&manual(want_body), ignore);
             let got = normalize(&manual(got_body), ignore);
+            diff("", &want, &got, &mut problems);
+        }
+        Mode::QueuedCommands(ignore) => {
+            let queued = |v: &Value| -> Value {
+                Value::Array(
+                    v.as_array()
+                        .map(|a| {
+                            a.iter()
+                                .filter(|c| {
+                                    c["trigger"] != "scheduled"
+                                        && c["name"] != "RefreshMonitoredDownloads"
+                                        && c["name"] != "ProcessMonitoredDownloads"
+                                })
+                                .cloned()
+                                .collect()
+                        })
+                        .unwrap_or_default(),
+                )
+            };
+            let want = sorted_list(normalize(&queued(want_body), ignore));
+            let got = sorted_list(normalize(&queued(got_body), ignore));
             diff("", &want, &got, &mut problems);
         }
         Mode::Calendar => {

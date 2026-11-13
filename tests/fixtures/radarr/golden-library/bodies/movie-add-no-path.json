@@ -1,0 +1,1 @@
+{"$from": "movie-lookup-route-tmdb", "$set": {"qualityProfileId": 4, "monitored": true, "minimumAvailability": "released", "addOptions": {"monitor": "movieOnly", "searchForMovie": false}}}

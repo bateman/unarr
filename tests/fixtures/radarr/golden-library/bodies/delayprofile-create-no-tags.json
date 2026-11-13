@@ -1,0 +1,1 @@
+{"enableUsenet": true, "enableTorrent": true, "preferredProtocol": "torrent", "usenetDelay": 10, "torrentDelay": 20, "bypassIfHighestQuality": true, "bypassIfAboveCustomFormatScore": false, "minimumCustomFormatScore": 0, "tags": []}

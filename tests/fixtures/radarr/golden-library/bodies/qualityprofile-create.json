@@ -1,0 +1,1 @@
+{"$from": "qualityprofile-4", "$set": {"id": 0, "name": "Library Copy"}}

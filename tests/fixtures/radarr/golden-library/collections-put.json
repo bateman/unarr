@@ -1,0 +1,63 @@
+{
+  "body": [
+    {
+      "id": 1,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/pJdItyeP5Ep5oYoqHlPpX4BEnPC.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/nklXuO1cBEViut27TpChoKIzyI5.jpg"
+        }
+      ],
+      "minimumAvailability": "released",
+      "missingMovies": 0,
+      "monitored": false,
+      "movies": [],
+      "overview": "A series of films set in the Alien universe, overlapping chronologically with the events of the original series.",
+      "qualityProfileId": 7,
+      "rootFolderPath": "/movies",
+      "searchOnAdd": true,
+      "sortTitle": "alien romulus collection",
+      "tags": [],
+      "title": "Alien: Romulus Collection",
+      "tmdbId": 1434946
+    },
+    {
+      "id": 41,
+      "images": [
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/lxIGYkpvYjLtYtZH684AQft0FhD.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://image.tmdb.org/t/p/original/fahk0Fu7VUUfK6IkTt1R3waOD9F.jpg"
+        }
+      ],
+      "minimumAvailability": "released",
+      "missingMovies": 0,
+      "monitored": false,
+      "movies": [],
+      "overview": "The Dune Collection chronicles a mythic journey across the desert planet Arrakis, where power, prophecy, and survival intertwine. With striking visuals and layered storytelling, it explores themes of destiny, politics, and ecological balance in a richly imagined sci-fi universe.",
+      "qualityProfileId": 7,
+      "rootFolderPath": "/movies",
+      "searchOnAdd": true,
+      "sortTitle": "dune collection",
+      "tags": [
+        1
+      ],
+      "title": "Dune Collection",
+      "tmdbId": 726871
+    }
+  ],
+  "recordedAt": "2026-11-13T12:42:08Z",
+  "request": {
+    "body": "bodies/collections-put.json",
+    "method": "PUT",
+    "path": "/api/v3/collection"
+  },
+  "status": 202
+}

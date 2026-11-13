@@ -1,0 +1,9 @@
+{
+  "body": null,
+  "recordedAt": "2026-11-13T12:41:29Z",
+  "request": {
+    "method": "DELETE",
+    "path": "/api/v3/qualityprofile/13"
+  },
+  "status": 200
+}

@@ -1,0 +1,1 @@
+{"type": "movieIndex", "label": "Not monitored", "filters": [{"key": "monitored", "value": [false], "type": "equal"}], "id": "{id:customfilter-create}"}

@@ -1,0 +1,13 @@
+{
+  "body": {
+    "id": 1,
+    "listSyncLevel": "disabled"
+  },
+  "recordedAt": "2026-11-13T12:41:12Z",
+  "request": {
+    "body": "bodies/config-importlist-restore.json",
+    "method": "PUT",
+    "path": "/api/v3/config/importlist/1"
+  },
+  "status": 202
+}

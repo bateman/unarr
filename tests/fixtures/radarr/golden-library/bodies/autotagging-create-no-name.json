@@ -1,0 +1,1 @@
+{"name": "", "removeTagsAutomatically": false, "tags": [1], "specifications": [{"name": "Drama", "implementation": "GenreSpecification", "negate": false, "required": false, "fields": [{"name": "value", "value": ["Drama"]}]}]}

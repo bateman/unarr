@@ -1,0 +1,15 @@
+{
+  "body": {
+    "id": 23,
+    "movieTitle": "The Matrix",
+    "movieYear": 1999,
+    "tmdbId": 603
+  },
+  "recordedAt": "2026-11-13T12:41:43Z",
+  "request": {
+    "body": "bodies/exclusion-create.json",
+    "method": "POST",
+    "path": "/api/v3/exclusions"
+  },
+  "status": 201
+}

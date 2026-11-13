@@ -1,0 +1,16 @@
+{
+  "body": [
+    {
+      "errorMessage": "'Must contain' or 'Must not contain' is required",
+      "propertyName": "Required",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T12:41:28Z",
+  "request": {
+    "body": "bodies/releaseprofile-create-no-terms.json",
+    "method": "POST",
+    "path": "/api/v3/releaseprofile"
+  },
+  "status": 400
+}
