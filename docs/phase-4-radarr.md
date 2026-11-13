@@ -613,3 +613,33 @@ settings writes are those of the providers, the notifications and
 files do not; the import list is listed and skipped. The audit method has
 not been applied to Radarr beyond `make http-audit`. `docs/DESIGN.md`
 section 17 has the decisions, section 18 what is open.
+
+Added on 13 November 2026, after the audit's rows were triaged
+(`docs/audit/7-triage.md`) and twenty of them closed on `main`:
+
+- **Both hubs are recorded now.** `record-golden.py --signalr` listens to
+  the original while the goldens are recorded and the replay compares
+  Unarr's hub with it, for Sonarr as for Radarr. Every write 4d adds is
+  recorded with what the hub says after it and has to send the same
+  (`movie`, `collection`, `tag`, `rootfolder`, `qualitydefinition`,
+  `qualityprofile`, `customformat`, `command`, `health`, `system/task`...).
+- **Health checks after a save.** The Sonarr side now runs the checks
+  again after the saves the original ties them to, read from the
+  `CheckOn` attributes of the original's assembly. Radarr's attributes are
+  the same but for the events' names: the settings, root folder, remote
+  path mapping, import list and movie delete or move writes of this
+  milestone queue the same re-checks, from their first commit.
+- **What the triage says to look for.** The gaps the goldens did not see
+  on the Sonarr side were of four kinds, and the audit of point 5 looks
+  for each on Radarr: a setting stored and shown but never read (script
+  import is still one on Sonarr), a save that leaves a health verdict or
+  another tab stale, a route or a parameter of the UI that is not read
+  (`protocols=` was one), and behaviour outside the bodies under a URL
+  base. Radarr's blocklist filters, the refresh after a scan imports and
+  the `command` sync were closed with the Sonarr ones.
+- **The shared layer changed under both**: bodies up to 64 MiB, the web
+  app manifest and the tile description filled in as they are served.
+- **One process, two personalities, and a panic ends both**: the release
+  profile aborts on a panic (`docs/audit/7-triage.md`, row 1.13). It is the
+  maintainer's decision, open, and worth having before the homelab run
+  puts Radarr and Sonarr in one container.
