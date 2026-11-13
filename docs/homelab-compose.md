@@ -131,8 +131,16 @@ service, if it is only stopped, comes back. On the run of 2026-11-13 this
 happened twelve minutes in, and the checks that followed were answered by
 the original Radarr without anything saying so. So either:
 
-- the change goes into `compose.media.yml` itself, with the `radarr`
-  service commented out (as above), before the script next runs; or
+- the change goes into `compose.media.yml` itself, before the script
+  next runs, with the `radarr` service given `profiles: ["disabled"]`
+  rather than commented out (the block stays, for going back). Four
+  services have `radarr` in their `depends_on` (`unpackerr`,
+  `cleanuparr`, `recyclarr` and one more, each next to `sonarr`): it is
+  removed there, or compose refuses the whole file with `depends on
+  undefined service "radarr"`, and with it every later `make` target and
+  the script's own reconcile. Validate the edited file with
+  `docker compose -f compose.yml -f <new file> config --quiet` before it
+  replaces the old one; or
 - for a trial, the script's crontab line is commented out for the
   duration and restored at the end (`/etc/config/crontab`, then
   `crontab /etc/config/crontab`), knowing that no unhealthy container is
@@ -161,6 +169,10 @@ Before, on the NAS:
 - [ ] The memory limit raised to cover both personalities, or measured
       again on the NAS: 38 MB idle on 950 series and 2,123 movies, 197 MB
       while the two databases are imported, once.
+
+`docker compose up --dry-run` is no check on the NAS: run as the user it
+fails on Container Station's home folder, and run with `sudo` it reports
+every container of the stack as to be recreated.
 
 The run itself, one movie from search to Plex:
 
