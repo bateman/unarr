@@ -248,6 +248,12 @@ async fn an_rss_sync_holds_releases_back_for_the_delay_profile_until_grabbed_fro
         .unwrap()
         .is_none());
 
+    // The grab asked for the clients to be read again
+    // (`DownloadMonitoringService.Handle(EpisodeGrabbedEvent)`). Here the
+    // download is gone from the client before they are, as when it is
+    // removed there by hand: nothing is tracked, the queue is empty again.
+    mock.clients().reset();
+    run(&runtime, CommandBody::RefreshMonitoredDownloads).await;
     // Pending again after the next sync (the grabbed episode has no file
     // yet, so the feed's release is still wanted), a further sync sees the
     // release twice, from the feed and from the table, and every decision
@@ -397,8 +403,8 @@ async fn a_release_whose_client_cannot_be_reached_waits_for_another_client() {
     let names: Vec<&str> = runtime.queue().all().iter().map(|c| c.name()).collect();
     assert_eq!(
         names,
-        ["SeasonSearch"],
-        "no grab in the search itself, so no refresh was asked for"
+        ["SeasonSearch", "RefreshMonitoredDownloads"],
+        "the search grabbed nothing and asked for no refresh; the release sent afterwards did"
     );
 }
 

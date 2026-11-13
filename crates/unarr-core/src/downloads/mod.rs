@@ -57,7 +57,13 @@ pub struct Downloads {
     commands: OnceLock<Arc<CommandQueue>>,
     /// The notifications, once the runtime is up, for the grabs.
     notifier: OnceLock<Arc<crate::notifications::Notifier>>,
+    /// Who hears of a grab besides the notifications: the runtime, which
+    /// tells the UI (`EpisodeControllerWithSignalR.Handle(EpisodeGrabbedEvent)`).
+    grab_listener: OnceLock<GrabListener>,
 }
+
+/// Called with the ids of the episodes whose release went to a client.
+pub type GrabListener = Box<dyn Fn(Vec<i64>) + Send + Sync>;
 
 /// What `DELETE /queue/{id}` was asked to do.
 #[derive(Debug, Clone, Copy, Default)]
@@ -96,6 +102,18 @@ impl Downloads {
             refresh_lock: tokio::sync::Mutex::new(()),
             commands: OnceLock::new(),
             notifier: OnceLock::new(),
+            grab_listener: OnceLock::new(),
+        }
+    }
+
+    /// Hand over the grab listener; the first call wins.
+    pub fn set_grab_listener(&self, listener: GrabListener) {
+        let _ = self.grab_listener.set(listener);
+    }
+
+    pub(crate) fn grabbed(&self, episode_ids: Vec<i64>) {
+        if let Some(listener) = self.grab_listener.get() {
+            listener(episode_ids);
         }
     }
 

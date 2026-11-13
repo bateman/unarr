@@ -41,9 +41,11 @@ pub enum Event {
     CommandUpdated(Box<CommandModel>),
     /// `QueueUpdatedEvent` / `PendingReleasesUpdatedEvent`.
     QueueUpdated,
-    /// `HealthCheckCompleteEvent`: for Sonarr when a verdict changed, for
-    /// Radarr after every check, as its hub was recorded.
+    /// `HealthCheckCompleteEvent`: after every run of the checks, whether
+    /// or not a verdict changed, as both hubs were recorded.
     HealthChanged,
+    /// `EpisodeGrabbedEvent`: a release of these episodes went to a client.
+    EpisodesGrabbed { episode_ids: Vec<i64> },
     /// `CommandExecutedEvent`: a command ended, whoever it was for; its
     /// name, for the handlers that wait for one command.
     CommandExecuted { name: &'static str },
@@ -208,6 +210,12 @@ impl Runtime {
         // file gone: a listener that falls behind loses the oldest, and the
         // UI would never hear of them.
         let (events, _) = broadcast::channel(4096);
+        {
+            let events: broadcast::Sender<Event> = events.clone();
+            downloads.set_grab_listener(Box::new(move |episode_ids| {
+                let _ = events.send(Event::EpisodesGrabbed { episode_ids });
+            }));
+        }
         if let Some(side) = &movies {
             let events: broadcast::Sender<Event> = events.clone();
             side.downloads.set_grab_listener(Box::new(move |movie_id| {
@@ -409,9 +417,7 @@ impl Runtime {
                 .collect();
             (changed, failed, restored)
         };
-        if changed || self.personality == crate::Personality::Radarr {
-            self.emit(Event::HealthChanged);
-        }
+        self.emit(Event::HealthChanged);
         if self.health_armed.load(std::sync::atomic::Ordering::SeqCst) {
             for check in &failed {
                 self.notify_health_issue(check, now).await;

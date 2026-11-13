@@ -1580,27 +1580,58 @@ async fn the_feed_refuses_absurd_ranges_and_blank_keys() {
 }
 
 /// The hub messages this replay answers for: the lists another tab
-/// shows. What else the original's hub sent in `golden-hub` (the health
-/// after each run, the grabbed and wanted episodes, `command` syncs) is in
-/// the recording for when those are taken up.
-const HUB_NAMES: &[&str] = &["tag", "rootfolder", "qualitydefinition", "system/task"];
+/// shows, the episodes on the pages that list them, the commands. `health`
+/// is compared apart, below; the queue's and the providers' messages are
+/// the long list's business.
+const HUB_NAMES: &[&str] = &[
+    "tag",
+    "rootfolder",
+    "qualitydefinition",
+    "system/task",
+    "command",
+    "episode",
+    "wanted/missing",
+    "wanted/cutoff",
+    "episodefile",
+    "series",
+];
 
-/// A hub message as it is compared: its name and action, and the folder a
-/// `rootfolder` one carries.
+/// A hub message as it is compared: its name and action, and of what it
+/// carries the id, the folder of a `rootfolder`, whether an episode is
+/// marked as grabbed and comes with its series, file and images.
 fn hub_line(message: &Value, mappings: &[(String, &str)]) -> Option<String> {
     let name = message["name"].as_str()?;
-    if !HUB_NAMES.contains(&name) {
+    if !HUB_NAMES.contains(&name) && name != "health" {
         return None;
     }
     let body = &message["body"];
     let mut line = format!("{name} {}", body["action"].as_str().unwrap_or("?"));
     let resource = unmap_paths(&body["resource"], mappings);
-    if !resource.is_null() {
-        line.push_str(&format!(
+    match name {
+        // Commands carry the ids each application numbers them with, and
+        // the original sends the state one is in when its debounce ends:
+        // which command, not in which state.
+        "command" => {
+            if let Some(command) = resource["name"].as_str() {
+                line.push_str(&format!(" {command}"));
+            }
+        }
+        "rootfolder" => line.push_str(&format!(
             " id={} path={}",
             resource["id"],
             resource["path"].as_str().unwrap_or("?")
-        ));
+        )),
+        "episode" | "wanted/missing" | "wanted/cutoff" => {
+            line.push_str(&format!(" id={}", resource["id"]));
+            for key in ["grabbed", "series", "episodeFile", "images"] {
+                if !resource[key].is_null() {
+                    line.push_str(&format!(" +{key}"));
+                }
+            }
+        }
+        "series" => line.push_str(&format!(" id={}", resource["id"])),
+        // The files the scans import are numbered by each application.
+        _ => {}
     }
     Some(line)
 }
@@ -1609,9 +1640,12 @@ fn hub_line(message: &Value, mappings: &[(String, &str)]) -> Option<String> {
 /// recording of its own (`tests/fixtures/sonarr/golden-hub`, `make golden`
 /// with `GOLDEN_SIGNALR=1`): `tag` after a tag or an auto tagging rule
 /// changes, `rootfolder` after one is added and nothing after one goes,
-/// `qualitydefinition` after the reset and after no other save, and
-/// `system/task` after every command. The same list shows the refresh of
-/// the downloads a rescan queues when it imports a file.
+/// `qualitydefinition` after the reset and after no other save,
+/// `system/task` after every command and `command` sync after the old ones
+/// are cleaned up; an episode under the three names of the pages that list
+/// episodes when it is grabbed, imported or loses its file; `health` after
+/// every run of the checks. The same list shows the refresh of the
+/// downloads a scan queues when it imports a file.
 #[tokio::test]
 async fn the_hub_tells_other_tabs_what_the_original_tells_them() {
     let golden_dir = fixture_dir().join("golden-hub");
@@ -1711,16 +1745,23 @@ async fn the_hub_tells_other_tabs_what_the_original_tells_them() {
             continue;
         }
         stretch_of.insert(g.name.clone(), stretches.len() - 1);
-        // A body names the id of an earlier answer as the path does.
+        // A body names the id of an earlier answer as the path does, and
+        // the mock by the port it was recorded on.
         let mut sent = g.clone();
         sent.request_body = g.request_body.as_ref().map(|body| {
-            ids.iter().fold(body.clone(), |body, (name, id)| {
-                body.replace(&format!("\"{{id:{name}}}\""), &id.to_string())
-            })
+            ids.iter()
+                .fold(body.clone(), |body, (name, id)| {
+                    body.replace(&format!("\"{{id:{name}}}\""), &id.to_string())
+                })
+                .replace("18989", &mock.port().to_string())
         });
         let (status, body) = send(&app, &sent, &session, &path, &mappings).await;
         let body = unmap_paths(&body, &mappings);
-        if let Some(id) = body.get("id").and_then(Value::as_i64) {
+        // As the recorder: the answer's id, or its first item's.
+        let answered = body
+            .get("id")
+            .or_else(|| body.get(0).and_then(|first| first.get("id")));
+        if let Some(id) = answered.and_then(Value::as_i64) {
             ids.insert(g.name.clone(), id);
         }
         if status.as_u16() != g.status {
@@ -1728,8 +1769,19 @@ async fn the_hub_tells_other_tabs_what_the_original_tells_them() {
         }
         // The resources these writes answer with, as recorded, compared
         // as the long list compares the steps of the same names; the
-        // commands are compared for what the test is about, below.
-        if !g.name.starts_with("command-") {
+        // commands are compared for what the test is about, below, and
+        // the grab's steps, which name the mock's port and number files,
+        // are the long list's to compare.
+        let compared = ![
+            "command-",
+            "indexer-",
+            "downloadclient-",
+            "release-",
+            "episodefile",
+        ]
+        .iter()
+        .any(|prefix| g.name.starts_with(prefix));
+        if compared {
             let problems = compare(mode(&g.name), &g.body, &body);
             if !problems.is_empty() {
                 failures.push(format!("{}:\n    {}", g.name, problems.join("\n    ")));
@@ -1738,7 +1790,6 @@ async fn the_hub_tells_other_tabs_what_the_original_tells_them() {
         answers.insert(g.name.clone(), body);
     }
     assert!(failures.is_empty(), "{}", failures.join("\n"));
-
     // Each scan imported the file dropped for it, and the import asked for
     // the downloads to be refreshed: in the original's list of commands
     // and in Unarr's, after the scan and queued by nobody (`unspecified`,
@@ -1786,6 +1837,57 @@ async fn the_hub_tells_other_tabs_what_the_original_tells_them() {
             original[at].extend(hub_line(message, &[]));
         }
     }
+    // Two messages follow work that is not only the list's. `health`
+    // follows every run of the checks, and the original's scheduler
+    // refreshes the downloads each minute of a recording, where a client
+    // that stops answering runs them again; `system/task` follows every
+    // command, the scheduler's own among them, on either side. Both must
+    // be there where the list makes the checks or a command run; `health`
+    // nowhere the original ran no check.
+    const HEALTH: &str = "health sync";
+    const TASKS: &str = "system/task sync";
+    let mut health_problems = Vec::new();
+    for (line, steps) in [
+        (
+            HEALTH,
+            &[
+                "command-rescan-1",
+                "command-downloaded-scan",
+                "rootfolder-create",
+                "remotepathmapping-create",
+                "downloadclient-create-sabnzbd",
+            ][..],
+        ),
+        (
+            TASKS,
+            &[
+                "command-rescan-1",
+                "command-downloaded-scan",
+                "command-reset-quality-definitions",
+                "command-messaging-cleanup",
+                "release-grab-usenet",
+            ][..],
+        ),
+    ] {
+        for step in steps {
+            let at = stretch_of[*step];
+            for (who, lines) in [("the original", &original[at]), ("Unarr", &stretches[at])] {
+                if !lines.iter().any(|l| l == line) {
+                    health_problems.push(format!("{who} sent no `{line}` after {step}"));
+                }
+            }
+        }
+    }
+    for (at, (want, got)) in original.iter_mut().zip(stretches.iter_mut()).enumerate() {
+        if got.iter().any(|l| l == HEALTH) && !want.iter().any(|l| l == HEALTH) {
+            health_problems.push(format!(
+                "Unarr sent `health` in stretch {at}, where the original ran no check"
+            ));
+        }
+        want.retain(|l| l != HEALTH && l != TASKS);
+        got.retain(|l| l != HEALTH && l != TASKS);
+    }
+    assert!(health_problems.is_empty(), "{}", health_problems.join("\n"));
     let first_step = |at: usize| {
         let mut names: Vec<&String> = stretch_of
             .iter()

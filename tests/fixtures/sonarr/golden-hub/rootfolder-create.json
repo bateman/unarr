@@ -1,7 +1,7 @@
 {
   "body": {
     "accessible": true,
-    "freeSpace": 13143355392,
+    "freeSpace": 13258723328,
     "id": 2,
     "path": "/downloads",
     "unmappedFolders": [
@@ -12,7 +12,7 @@
       }
     ]
   },
-  "recordedAt": "2026-11-12T23:37:18Z",
+  "recordedAt": "2026-11-13T07:08:35Z",
   "request": {
     "body": "bodies/rootfolder-create.json",
     "method": "POST",

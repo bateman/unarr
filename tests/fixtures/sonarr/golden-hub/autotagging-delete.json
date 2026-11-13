@@ -1,6 +1,6 @@
 {
   "body": null,
-  "recordedAt": "2026-11-12T23:37:16Z",
+  "recordedAt": "2026-11-13T07:08:33Z",
   "request": {
     "method": "DELETE",
     "path": "/api/v3/autotagging/2"

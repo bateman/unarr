@@ -5,7 +5,7 @@
     "localPath": "/downloads/",
     "remotePath": "/remote/complete/"
   },
-  "recordedAt": "2026-11-12T23:37:36Z",
+  "recordedAt": "2026-11-13T07:08:53Z",
   "request": {
     "body": "bodies/remotepathmapping-create.json",
     "method": "POST",

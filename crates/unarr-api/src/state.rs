@@ -290,10 +290,21 @@ impl AppState {
             use crate::routes::radarr::movies::HubMovieEvent;
             loop {
                 match events.recv().await {
-                    Ok(Event::CommandUpdated(c)) => state.hub().broadcast(
-                        "command",
-                        json!({"action": "updated", "resource": crate::routes::command::command_resource(&c)}),
-                    ),
+                    Ok(Event::CommandUpdated(c)) => {
+                        state.hub().broadcast(
+                            "command",
+                            json!({"action": "updated", "resource": crate::routes::command::command_resource(&c)}),
+                        );
+                        // `CommandController`: once the old commands are
+                        // gone the UI reads the list again. Sonarr's hub
+                        // alone was recorded doing it.
+                        if c.name() == "MessagingCleanup"
+                            && c.status == unarr_core::commands::CommandStatus::Completed
+                            && state.personality() != Personality::Radarr
+                        {
+                            state.hub().broadcast("command", json!({"action": "sync"}));
+                        }
+                    }
                     Ok(Event::QueueUpdated) => match state.personality() {
                         Personality::Radarr => crate::routes::radarr::queue::broadcast_queue(&state),
                         _ => crate::routes::queue::broadcast_queue(&state),
@@ -309,6 +320,9 @@ impl AppState {
                                 .broadcast("qualitydefinition", json!({"action": "sync"}));
                         }
                     }
+                    Ok(Event::EpisodesGrabbed { episode_ids }) => {
+                        crate::relay::relay_grab(&state, &episode_ids).await
+                    }
                     Ok(Event::MovieGrabbed { movie_id }) => {
                         let _ = movie_events.send(HubMovieEvent::Grabbed(movie_id));
                     }
@@ -316,7 +330,9 @@ impl AppState {
                     Ok(Event::MovieImport(e)) => {
                         let _ = movie_events.send(HubMovieEvent::Import(e));
                     }
-                    Ok(Event::SeriesUpdated { series_id }) => crate::relay::broadcast_series(&state, series_id).await,
+                    Ok(Event::SeriesUpdated { series_id }) => {
+                        crate::relay::broadcast_series(&state, series_id).await
+                    }
                     Err(tokio::sync::broadcast::error::RecvError::Lagged(_)) => continue,
                     Err(tokio::sync::broadcast::error::RecvError::Closed) => break,
                 }

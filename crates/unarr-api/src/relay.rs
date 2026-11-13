@@ -1,6 +1,12 @@
-//! The importer's events on SignalR, as the originals' controllers
-//! broadcast them: `episodefile` updated or deleted, `episode` updated for
-//! each episode touched, `series` updated with its statistics.
+//! The importer's events and the grabs on SignalR, as the originals'
+//! controllers broadcast them: `episodefile` updated or deleted, the
+//! episodes touched, `series` updated with its statistics.
+//!
+//! An episode goes out under three names, one for each page that lists
+//! episodes (`EpisodeControllerWithSignalR` and the controllers built on
+//! it): `episode`, `wanted/missing` and `wanted/cutoff`. The calendar is a
+//! fourth such controller and its resource is named `episode` too, so the
+//! originals send that one twice; Unarr sends it once.
 
 use serde_json::json;
 use unarr_core::mediafiles::{DeleteReason, ImportEvent};
@@ -65,8 +71,13 @@ async fn broadcast_episode_file(state: &AppState, file_id: i64) {
     }
 }
 
-async fn broadcast_episodes(state: &AppState, ids: &[i64]) {
-    let ids = ids.to_vec();
+/// The names an episode is announced under.
+const EPISODE_NAMES: [&str; 3] = ["wanted/cutoff", "wanted/missing", "episode"];
+
+/// `Handle(EpisodeGrabbedEvent)`: the episodes as they are, marked as
+/// grabbed, without their series, file or images.
+pub async fn relay_grab(state: &AppState, episode_ids: &[i64]) {
+    let ids = episode_ids.to_vec();
     let resources = state
         .db()
         .call(move |conn| {
@@ -81,9 +92,56 @@ async fn broadcast_episodes(state: &AppState, ids: &[i64]) {
         .await
         .unwrap_or_default();
     for r in resources {
-        state
-            .hub()
-            .broadcast("episode", json!({"action": "updated", "resource": r}));
+        let Ok(mut resource) = serde_json::to_value(&r) else {
+            continue;
+        };
+        resource["grabbed"] = json!(true);
+        for name in EPISODE_NAMES {
+            state
+                .hub()
+                .broadcast(name, json!({"action": "updated", "resource": resource}));
+        }
+    }
+}
+
+/// The episodes a file came to or left, read again whole: with their
+/// series, their file and their images, as the originals' controllers
+/// answer `GET` by id.
+async fn broadcast_episodes(state: &AppState, ids: &[i64]) {
+    let ids = ids.to_vec();
+    let resources = state
+        .db()
+        .call(move |conn| {
+            let episodes = store::episodes::list_episodes_by_ids(conn, &ids)?;
+            let series_ids: Vec<i64> = episodes.iter().map(|e| e.series_id).collect();
+            let catalog = Catalog::load_for(conn, &series_ids)?;
+            let file_ids: Vec<i64> = episodes
+                .iter()
+                .map(|e| e.episode_file_id)
+                .filter(|id| *id > 0)
+                .collect();
+            let files = store::episodes::list_files_by_ids(conn, &file_ids)?;
+            let include = Include {
+                series: true,
+                file: true,
+                images: true,
+            };
+            Ok(episodes
+                .iter()
+                .map(|e| {
+                    let file = files.iter().find(|f| f.id == e.episode_file_id);
+                    episode_resource(&catalog, e, file, include)
+                })
+                .collect::<Vec<_>>())
+        })
+        .await
+        .unwrap_or_default();
+    for r in resources {
+        for name in EPISODE_NAMES {
+            state
+                .hub()
+                .broadcast(name, json!({"action": "updated", "resource": r}));
+        }
     }
 }
 

@@ -157,6 +157,8 @@ pub async fn download_report(
     if let Err(e) = record_grab(downloads, remote, &definition, download_id.as_deref(), now).await {
         tracing::error!(title = %release.title, error = %format!("{e:#}"), "the grab was sent to the client but its history could not be written");
     }
+    // `EpisodeControllerWithSignalR.Handle(EpisodeGrabbedEvent)`.
+    downloads.grabbed(remote.episodes.iter().map(|e| e.id).collect());
     // `NotificationService.Handle(EpisodeGrabbedEvent)`.
     if let Some(notifier) = downloads.notifier() {
         notifier
@@ -173,6 +175,22 @@ pub async fn download_report(
         tracing::error!(title = %release.title, error = %format!("{e:#}"), "the pending releases of the grabbed episodes could not be dropped");
     }
     downloads.mark_dirty();
+    // `DownloadMonitoringService.Handle(EpisodeGrabbedEvent)`: the clients
+    // are asked again, whoever sent the release (a command, the API). One
+    // refresh waiting is enough for any number of grabs.
+    if let Some(queue) = downloads.commands() {
+        if let Err(e) = queue
+            .push(
+                crate::commands::CommandBody::RefreshMonitoredDownloads,
+                crate::commands::CommandPriority::High,
+                crate::commands::CommandTrigger::Unspecified,
+                now,
+            )
+            .await
+        {
+            tracing::warn!(error = %e, "failed to queue the refresh of the downloads");
+        }
+    }
     Ok(Grabbed {
         download_id,
         client: definition,

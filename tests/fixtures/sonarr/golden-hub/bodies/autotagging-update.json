@@ -1,0 +1,7 @@
+{
+ "$from": "autotagging-create",
+ "$set": {
+  "removeTagsAutomatically": true
+ },
+ "id": "{id:autotagging-create}"
+}

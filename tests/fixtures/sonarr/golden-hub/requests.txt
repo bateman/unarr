@@ -31,6 +31,8 @@ tag-delete DELETE /api/v3/tag/{id:tag-create}
 sleep 2
 autotagging-create POST /api/v3/autotagging bodies/autotagging-create.json
 sleep 2
+autotagging-update PUT /api/v3/autotagging/{id:autotagging-create} bodies/autotagging-update.json
+sleep 2
 autotagging-delete DELETE /api/v3/autotagging/{id:autotagging-create}
 sleep 2
 
@@ -59,3 +61,17 @@ command-reset-quality-definitions-done GET /api/v3/command/{id:command-reset-qua
 # any command: the tasks are told to read themselves again
 command-messaging-cleanup POST /api/v3/command bodies/command-messaging-cleanup.json
 sleep 8
+
+# a grab: what the pages that show the episode are told. An indexer and a
+# client of the mock's, a search to fill the cache, the release sent.
+indexer-create POST /api/v3/indexer bodies/indexer-create.json
+downloadclient-create-sabnzbd POST /api/v3/downloadclient bodies/downloadclient-create-sabnzbd.json
+sleep 9
+release-episode GET /api/v3/release?episodeId=1
+release-grab-usenet POST /api/v3/release bodies/release-grab-usenet.json
+sleep 12
+
+# an episode file deleted from the UI: the same pages are told
+episodefiles-1 GET /api/v3/episodefile?seriesId=1
+episodefile-delete DELETE /api/v3/episodefile/{id:episodefiles-1}
+sleep 5
