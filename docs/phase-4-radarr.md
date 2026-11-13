@@ -652,6 +652,9 @@ milestones, which were not recorded again:
 `golden-library` (260 answers and the hub, the movies and the settings),
 `golden-list` (43, the IMDb watchlist), `golden-backup` (12, the backups
 and the log files) and `golden-audit` (32, what the audit found missing).
+A fifth, `golden-review` (19), holds what the reviews of the milestone
+found afterwards: the recycling bin and the system folders as a movie's
+path or a root folder, and a library import without a root folder.
 
 | Exit criterion | Status |
 |----------------|--------|

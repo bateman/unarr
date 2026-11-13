@@ -1,0 +1,26 @@
+{
+  "body": [
+    {
+      "attemptedValue": "/proc",
+      "errorCode": "SystemFolderValidator",
+      "errorMessage": "Path '/proc' is set to system folder /proc",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "path": "/proc",
+        "propertyName": "Path",
+        "propertyValue": "/proc",
+        "relationship": "set to",
+        "systemFolder": "/proc"
+      },
+      "propertyName": "Path",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T18:33:22Z",
+  "request": {
+    "body": "bodies/movie-add-path-is-system-folder.json",
+    "method": "POST",
+    "path": "/api/v3/movie"
+  },
+  "status": 400
+}

@@ -1,0 +1,43 @@
+# The review of milestone 4d: the path rules a movie and a root folder
+# share with the recycling bin and the system folders, and two answers
+# the review found worded otherwise. A recording of its own; same format.
+#
+#   GOLDEN_REQUESTS=tests/fixtures/radarr/golden-review/requests.txt \
+#       GOLDEN_OUT=tests/fixtures/radarr/golden-review make golden-radarr
+#
+# The original reaches api.radarr.video through scripts/mock-servarr.py,
+# as golden-library's recording does, for the movie the import names.
+
+# A recycling bin that exists, set for what follows.
+mock - POST /mock/fs/write?path=/downloads/bin/kept/Some.Movie.2020.1080p.WEB-DL.x264-GRP.mkv&clip=episode
+config-mediamanagement GET /api/v3/config/mediamanagement
+config-mediamanagement-put-bin PUT /api/v3/config/mediamanagement/1 bodies/config-mediamanagement-put-bin.json
+
+# `MovieController`: a movie's path is not the bin, nor inside it, nor a
+# system folder or inside one.
+movie-add-path-is-bin POST /api/v3/movie bodies/movie-add-path-is-bin.json
+movie-add-path-in-bin POST /api/v3/movie bodies/movie-add-path-in-bin.json
+movie-add-path-in-system-folder POST /api/v3/movie bodies/movie-add-path-in-system-folder.json
+movie-add-path-is-system-folder POST /api/v3/movie bodies/movie-add-path-is-system-folder.json
+movie-6 GET /api/v3/movie/6
+movie-put-path-in-bin PUT /api/v3/movie/6 bodies/movie-put-path-in-bin.json
+movie-put-path-in-system-folder PUT /api/v3/movie/6 bodies/movie-put-path-in-system-folder.json
+
+# `AddMovieValidator`, which the library import goes through: the bin,
+# and a movie that names neither a path nor a root folder.
+movie-import-path-in-bin POST /api/v3/movie/import bodies/movie-import-path-in-bin.json
+movie-import-blank-root POST /api/v3/movie/import bodies/movie-import-blank-root.json
+movie-import-no-root POST /api/v3/movie/import bodies/movie-import-no-root.json
+movie-after-imports GET /api/v3/movie?tmdbId=157336
+
+# `RootFolderController`: a root folder is not the bin, nor inside it,
+# nor a system folder.
+rootfolder-create-is-bin POST /api/v3/rootfolder bodies/rootfolder-create-is-bin.json
+rootfolder-create-in-bin POST /api/v3/rootfolder bodies/rootfolder-create-in-bin.json
+rootfolder-create-system-folder POST /api/v3/rootfolder bodies/rootfolder-create-system-folder.json
+rootfolder-after GET /api/v3/rootfolder
+
+# A filter with no value.
+blocklist-movie-ids-empty GET /api/v3/blocklist?page=1&pageSize=5&movieIds=
+
+config-mediamanagement-restore PUT /api/v3/config/mediamanagement/1 bodies/config-mediamanagement-restore.json

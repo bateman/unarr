@@ -553,7 +553,13 @@ pub async fn bulk_update(State(state): State<AppState>, Json(body): Json<Value>)
         };
         for name in bulk {
             if !body[*name].is_null() {
-                p.attributes[*name] = body[*name].clone();
+                // The enumeration by name or by number, stored as the
+                // single edit stores it.
+                p.attributes[*name] = if *name == "minimumAvailability" {
+                    json!(super::radarr::movie_writes::minimum_availability(&body[*name]).as_str())
+                } else {
+                    body[*name].clone()
+                };
             }
         }
         let to_store = p.clone();

@@ -84,6 +84,30 @@ fn resolve_dots(path: &str) -> std::borrow::Cow<'_, str> {
     std::borrow::Cow::Owned(if absolute { format!("/{joined}") } else { joined })
 }
 
+/// The folders `SystemFolders.GetSystemFolders` names on Linux.
+pub const SYSTEM_FOLDERS: [&str; 6] = ["/bin", "/boot", "/lib", "/sbin", "/proc", "/usr/bin"];
+
+/// How `path` stands to `folder`, in the words the originals' validators
+/// put in their messages: `set to` when the two are one, `child of` when
+/// `path` is inside it, `None` when it is neither.
+pub fn relationship_to(folder: &str, path: &str) -> Option<&'static str> {
+    if path_equals(folder, path) {
+        Some("set to")
+    } else if is_parent_path(folder, path) {
+        Some("child of")
+    } else {
+        None
+    }
+}
+
+/// `SystemFolderValidator`: the relationship and the system folder `path`
+/// is or is inside of, the first in the originals' order.
+pub fn system_folder_of(path: &str) -> Option<(&'static str, &'static str)> {
+    SYSTEM_FOLDERS
+        .iter()
+        .find_map(|system| relationship_to(system, path).map(|relationship| (relationship, *system)))
+}
+
 /// `IsParentPath`: whether `child` is inside `parent` (not equal to it),
 /// comparing paths as the originals do, case-insensitively.
 pub fn is_parent_path(parent: &str, child: &str) -> bool {

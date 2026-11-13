@@ -256,6 +256,13 @@ impl Runtime {
                 let _ = events.send(Event::MovieGrabbed { movie_id });
             }));
         }
+        // Radarr's covers and metadata go out through its own client,
+        // that is through its own proxy and certificate settings, from
+        // the start: `set_upstreams` is only called to redirect them.
+        let metadata_client = movies
+            .as_ref()
+            .and_then(|side| side.http.clone())
+            .unwrap_or_else(|| crate::http::shared().clone());
         let runtime = Arc::new(Runtime {
             personality,
             search: SearchService::new(db.clone()).with_queue(downloads.queue_source()),
@@ -285,7 +292,7 @@ impl Runtime {
                 crate::metadata::Upstreams::real(),
             ))),
             augment: std::sync::RwLock::new(crate::metadata::augment::Augment::new(
-                crate::http::shared().clone(),
+                metadata_client,
                 crate::metadata::Upstreams::real(),
             )),
             scene: crate::tv::scene::SceneState::default(),
@@ -1340,20 +1347,10 @@ impl Runtime {
         Ok(())
     }
 
-    /// `ProcessDecisions`, with the queue refreshed after a grab as the
-    /// originals' debounced refresh does.
+    /// `ProcessDecisions`. The grab itself queues the refresh of the
+    /// downloads (`downloads::grab`), once for any number of grabs.
     async fn process(&self, decisions: Vec<Decision>) -> anyhow::Result<Processed> {
         let processed = process::process_decisions(&self.downloads, decisions, self.now()).await?;
-        if !processed.grabbed.is_empty() {
-            self.queue
-                .push(
-                    CommandBody::RefreshMonitoredDownloads,
-                    CommandPriority::High,
-                    CommandTrigger::Unspecified,
-                    self.now(),
-                )
-                .await?;
-        }
         if !processed.pending.is_empty() {
             self.emit(Event::QueueUpdated);
         }

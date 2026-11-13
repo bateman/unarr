@@ -1900,12 +1900,48 @@ async fn the_hub_tells_other_tabs_what_the_original_tells_them() {
     let mut problems = Vec::new();
     assert!(original.iter().flatten().count() > 10, "the recording is read");
     for (at, (want, got)) in original.iter_mut().zip(stretches.iter_mut()).enumerate() {
-        // Which messages, not how many: `system/task` follows every
-        // command, the scheduler's own refresh of each minute among them,
-        // which falls where it falls in a recording.
+        // Which messages and how many of each. Where the original says
+        // one thing several times over and Unarr says it once (or, for
+        // one command, the reverse), the step and the message are named
+        // here and only their presence is compared: a difference that is
+        // known, not one a new change could hide behind.
+        const COUNT_NOT_COMPARED: &[(&str, &[&str])] = &[
+            (
+                "command-rescan-1",
+                &[
+                    "episode updated",
+                    "wanted/cutoff updated",
+                    "wanted/missing updated",
+                ],
+            ),
+            (
+                "command-after-rescan",
+                &[
+                    "episode updated",
+                    "wanted/cutoff updated",
+                    "wanted/missing updated",
+                ],
+            ),
+            (
+                "episodefile-delete",
+                &[
+                    "episode updated",
+                    "wanted/cutoff updated",
+                    "wanted/missing updated",
+                ],
+            ),
+            ("release-episode", &["episode updated"]),
+            ("command-messaging-cleanup", &["command updated MessagingCleanup"]),
+        ];
+        let step = first_step(at);
+        let once: &[&str] = COUNT_NOT_COMPARED
+            .iter()
+            .find(|(name, _)| *name == step)
+            .map(|(_, lines)| *lines)
+            .unwrap_or(&[]);
         for lines in [&mut *want, &mut *got] {
             lines.sort();
-            lines.dedup();
+            lines.dedup_by(|a, b| a == b && once.iter().any(|prefix| a.starts_with(prefix)));
         }
         if want != got {
             problems.push(format!(

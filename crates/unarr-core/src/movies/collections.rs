@@ -51,56 +51,59 @@ pub async fn refresh_collection_info(
         Err(e) => return Err(CollectionError::Other(anyhow::anyhow!("{e}"))),
     };
     let now = ctx.now;
-    Ok(db
-        .call(move |conn| {
-            let tx = conn.unchecked_transaction()?;
-            // Read again now that the provider has answered: what the
-            // user decided about the collection while it was asked
-            // (monitored, profile, root folder, tags) is not the
-            // refresh's to write back.
-            let Some(mut collection) = store::get_collection(&tx, collection.id)? else {
-                anyhow::bail!("MovieCollection with ID {} does not exist", collection.id);
-            };
-            collection.title = info.title;
-            collection.overview = info.overview;
-            collection.clean_title = Some(info.clean_title);
-            collection.sort_title = Some(info.sort_title);
-            collection.last_info_sync = Some(now);
-            collection.images = info.images;
-            let mut before = store::metadata_by_collection(&tx, collection.tmdb_id)?;
-            for part in info.movies {
-                let mut metadata = part.metadata;
-                metadata.collection_tmdb_id = collection.tmdb_id;
-                before.retain(|m| m.tmdb_id != metadata.tmdb_id);
-                // `UpsertMany`: a row the library already has is replaced by
-                // the part as the provider gives it, when the two differ
-                // in anything, the time of its last refresh included.
-                match store::metadata_by_tmdb_id(&tx, metadata.tmdb_id)? {
-                    Some(existing) => {
-                        metadata.id = existing.id;
-                        if metadata != existing {
-                            store::update_metadata(&tx, &metadata)?;
-                        }
-                    }
-                    None => {
-                        store::upsert_metadata(&tx, &mut metadata)?;
+    let collection_id = collection.id;
+    db.call(move |conn| {
+        let tx = conn.unchecked_transaction()?;
+        // Read again now that the provider has answered: what the
+        // user decided about the collection while it was asked
+        // (monitored, profile, root folder, tags) is not the
+        // refresh's to write back.
+        // Deleted meanwhile: there is nothing to refresh, and the
+        // collections after it in the command still are.
+        let Some(mut collection) = store::get_collection(&tx, collection.id)? else {
+            return Ok(None);
+        };
+        collection.title = info.title;
+        collection.overview = info.overview;
+        collection.clean_title = Some(info.clean_title);
+        collection.sort_title = Some(info.sort_title);
+        collection.last_info_sync = Some(now);
+        collection.images = info.images;
+        let mut before = store::metadata_by_collection(&tx, collection.tmdb_id)?;
+        for part in info.movies {
+            let mut metadata = part.metadata;
+            metadata.collection_tmdb_id = collection.tmdb_id;
+            before.retain(|m| m.tmdb_id != metadata.tmdb_id);
+            // `UpsertMany`: a row the library already has is replaced by
+            // the part as the provider gives it, when the two differ
+            // in anything, the time of its last refresh included.
+            match store::metadata_by_tmdb_id(&tx, metadata.tmdb_id)? {
+                Some(existing) => {
+                    metadata.id = existing.id;
+                    if metadata != existing {
+                        store::update_metadata(&tx, &metadata)?;
                     }
                 }
-            }
-            // What the collection no longer names goes, unless a movie of
-            // the library is that row: the original deletes it all the
-            // same and leaves the movie without its metadata.
-            for gone in before {
-                if store::movie_of_metadata(&tx, gone.id)?.is_none() {
-                    store::delete_metadata(&tx, gone.id)?;
+                None => {
+                    store::upsert_metadata(&tx, &mut metadata)?;
                 }
             }
-            store::update_collection(&tx, &collection)?;
-            tx.commit()?;
-            tracing::debug!("Finished collection refresh for {}", collection.title);
-            Ok(collection)
-        })
-        .await?)
+        }
+        // What the collection no longer names goes, unless a movie of
+        // the library is that row: the original deletes it all the
+        // same and leaves the movie without its metadata.
+        for gone in before {
+            if store::movie_of_metadata(&tx, gone.id)?.is_none() {
+                store::delete_metadata(&tx, gone.id)?;
+            }
+        }
+        store::update_collection(&tx, &collection)?;
+        tx.commit()?;
+        tracing::debug!("Finished collection refresh for {}", collection.title);
+        Ok(Some(collection))
+    })
+    .await?
+    .ok_or(CollectionError::NoSuchCollection(collection_id))
 }
 
 /// `SyncCollectionMovies`: the movies of a monitored collection that are

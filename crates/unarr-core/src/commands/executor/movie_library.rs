@@ -48,6 +48,10 @@ impl refresh::CollectionEvents for NewCollection<'_> {
                 let Ok(_permit) = self.runtime.waiting_on_commands.try_acquire() else {
                     return;
                 };
+                // The refresh was queued behind whatever else waits (the
+                // other movies of a bulk add): it goes first, or the
+                // wait would only run out.
+                self.runtime.queue.expedite(command_id);
                 self.runtime
                     .wait_for_command(command_id, NEW_COLLECTION_WAIT)
                     .await;

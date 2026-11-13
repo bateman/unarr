@@ -231,6 +231,23 @@ fn blocklist_from_row(row: &rusqlite::Row) -> anyhow::Result<BlocklistEntry> {
     })
 }
 
+/// The UI's filters on the blocklist, as SQL: the rows of some series or
+/// movies (`id_column`), of some protocols; of none, when the filter names
+/// only a protocol no row has. Ids and protocol names only, no client
+/// text.
+pub(crate) fn blocklist_filter(id_column: &str, ids: &[i64], protocols: Option<&[Protocol]>) -> String {
+    let mut filter = String::from("1 = 1");
+    if !ids.is_empty() {
+        let ids: Vec<String> = ids.iter().map(i64::to_string).collect();
+        filter.push_str(&format!(" AND {id_column} IN ({})", ids.join(",")));
+    }
+    if let Some(protocols) = protocols {
+        let names: Vec<String> = protocols.iter().map(|p| format!("'{}'", p.as_str())).collect();
+        filter.push_str(&format!(" AND b.protocol IN ({})", names.join(",")));
+    }
+    filter
+}
+
 /// One page of the blocklist, joined with series as the originals do. Ties on
 /// the sort column come in id order whatever the direction: SQLite's sorter
 /// keeps the scan order, and the originals add no secondary key.
@@ -246,21 +263,7 @@ pub fn blocklist_paged(
         "sourceTitle" => "b.source_title",
         _ => "b.date",
     };
-    let filter = if series_ids.is_empty() {
-        "1 = 1".to_string()
-    } else {
-        let ids: Vec<String> = series_ids.iter().map(i64::to_string).collect();
-        format!("b.series_id IN ({})", ids.join(","))
-    };
-    // The rows of the protocols asked for; of none, when the filter names
-    // only a protocol no row has.
-    let filter = match protocols {
-        None => filter,
-        Some(protocols) => {
-            let names: Vec<String> = protocols.iter().map(|p| format!("'{}'", p.as_str())).collect();
-            format!("{filter} AND b.protocol IN ({})", names.join(","))
-        }
-    };
+    let filter = blocklist_filter("b.series_id", series_ids, protocols);
     let base = format!("FROM blocklist b JOIN series s ON s.id = b.series_id WHERE {filter}");
     let total: i64 = conn.query_row(&format!("SELECT count(*) {base}"), [], |r| r.get(0))?;
     let sql = format!(

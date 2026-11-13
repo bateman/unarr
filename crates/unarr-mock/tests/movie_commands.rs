@@ -100,6 +100,11 @@ async fn fixture_db(mock: &Mock) -> Db {
 }
 
 async fn runtime(db: &Db) -> (Arc<Runtime>, Arc<MovieDownloads>) {
+    runtime_with(db, None).await
+}
+
+/// The runtime, with Radarr's own HTTP client when `own` is one.
+async fn runtime_with(db: &Db, own: Option<reqwest::Client>) -> (Arc<Runtime>, Arc<MovieDownloads>) {
     let http = unarr_core::http::build(std::time::Duration::from_secs(10));
     let indexers: &'static IndexerClient = Box::leak(Box::new(IndexerClient::for_personality(
         http.clone(),
@@ -114,7 +119,7 @@ async fn runtime(db: &Db) -> (Arc<Runtime>, Arc<MovieDownloads>) {
         downloads: downloads.clone(),
         search: MovieSearchService::new(db.clone(), service.clone()).with_queue(downloads.queue_source()),
         indexers: service,
-        http: None,
+        http: own,
     };
     let runtime = Runtime::new_radarr(db.clone(), side, Arc::new(now), Default::default())
         .await
@@ -461,4 +466,114 @@ async fn a_grab_counts_even_when_its_history_cannot_be_written() {
         0,
         "and its history is what was lost"
     );
+}
+
+/// Radarr's proxy and certificate settings are its own, and its covers
+/// and metadata follow them from the start: nobody has to redirect the
+/// metadata hosts first for the runtime to take the application's client.
+#[tokio::test]
+async fn the_covers_go_out_through_radarrs_own_client_from_the_start() {
+    use tokio::io::{AsyncReadExt, AsyncWriteExt};
+    use unarr_core::outbound::{Handle, Outbound, Proxy, ProxyType};
+
+    // Radarr's settings name a proxy, here a listener of the test's.
+    let listener = tokio::net::TcpListener::bind("127.0.0.1:0").await.unwrap();
+    let port = listener.local_addr().unwrap().port();
+    let settings = Handle::default();
+    settings.set(Outbound {
+        proxy: Some(Proxy::new(
+            ProxyType::Http,
+            "127.0.0.1",
+            i64::from(port),
+            "",
+            "",
+            "",
+            false,
+        )),
+        certificate_validation: Default::default(),
+    });
+    let own = unarr_core::http::build_with(std::time::Duration::from_secs(10), &settings);
+    let asked = tokio::spawn(async move {
+        let (mut socket, _) = listener.accept().await.unwrap();
+        let mut request = vec![0u8; 2048];
+        let read = socket.read(&mut request).await.unwrap();
+        socket
+            .write_all(b"HTTP/1.1 204 No Content\r\nContent-Length: 0\r\nConnection: close\r\n\r\n")
+            .await
+            .unwrap();
+        String::from_utf8_lossy(&request[..read]).to_string()
+    });
+
+    let mock = Mock::start(fixtures_dir(), 0).await.unwrap();
+    let db = fixture_db(&mock).await;
+    // No `set_upstreams`: the runtime as `unarrd` starts it.
+    let (runtime, _) = runtime_with(&db, Some(own)).await;
+    let answer = runtime
+        .augment_client()
+        .client()
+        .get("http://covers.invalid/poster.jpg")
+        .send()
+        .await
+        .expect("the request goes to the proxy of Radarr's settings");
+    assert_eq!(answer.status().as_u16(), 204);
+    let request = asked.await.unwrap();
+    assert!(
+        request.starts_with("GET http://covers.invalid/poster.jpg "),
+        "{request}"
+    );
+}
+
+/// `CleanLibrary` at the two levels that remove: the movie no list names
+/// goes from the library, and the outcome says whether its folder goes
+/// too, which is the caller's to do.
+#[tokio::test]
+async fn cleaning_the_library_says_whether_the_folders_go() {
+    use unarr_core::movies::importlists::MovieImportLists;
+
+    for (level, folders_go) in [("removeAndKeep", false), ("removeAndDelete", true)] {
+        let mock = Mock::start(fixtures_dir(), 0).await.unwrap();
+        let db = fixture_db(&mock).await;
+        db.call(move |conn| {
+            conn.execute("DELETE FROM providers WHERE kind = 'importList'", [])?;
+            store::providers::insert_provider(
+                conn,
+                &Provider {
+                    kind: ProviderKind::ImportList,
+                    id: 1,
+                    name: "Watchlist".into(),
+                    implementation: "IMDbListImport".into(),
+                    config_contract: "IMDbListSettings".into(),
+                    settings: json!({"listId": "ur0000001"}),
+                    tags: vec![],
+                    attributes: json!({"enabled": true, "enableAuto": true}),
+                },
+            )?;
+            // The list names every movie but Nightmare Alley (70).
+            conn.execute("DELETE FROM import_list_movies", [])?;
+            conn.execute(
+                "INSERT INTO import_list_movies (id, import_list_id, movie_metadata_id)
+                 SELECT id, 1, movie_metadata_id FROM movies WHERE id != 70",
+                [],
+            )?;
+            store::config::set_config(conn, "listsynclevel", level)?;
+            Ok(())
+        })
+        .await
+        .unwrap();
+
+        let outcome = MovieImportLists::new(db.clone()).clean_library().await.unwrap();
+        let (deleted, delete_files) = outcome.removed.expect("a movie was removed");
+        let ids: Vec<i64> = deleted.movies.iter().map(|m| m.id).collect();
+        assert_eq!(ids, [70], "{level}");
+        assert_eq!(delete_files, folders_go, "{level}");
+        assert!(outcome.updated.is_empty(), "{level}");
+        assert_eq!(
+            count(&db, "SELECT count(*) FROM movies WHERE id = ?1", 70).await,
+            0
+        );
+        assert_eq!(
+            count(&db, "SELECT count(*) FROM movies WHERE id = ?1", 116).await,
+            1
+        );
+    }
 }

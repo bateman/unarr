@@ -1,0 +1,1 @@
+{"$from": "movie-6", "$set": {"path": "/downloads/bin/kept"}}

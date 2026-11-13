@@ -227,6 +227,9 @@ pub enum WriteError {
     InvalidPlain(Vec<ValidationFailure>),
     /// A null the original dereferences on the way: a 500.
     NullReference,
+    /// `Path.Combine` given no root folder at all: the
+    /// `ArgumentNullException` the original lets escape, a 500.
+    NoRootFolder,
     Other(anyhow::Error),
 }
 
@@ -271,47 +274,108 @@ fn path_failure(property: &str, path: &str) -> ValidationFailure {
     f
 }
 
-/// `IsValidPath`, `RootFolderValidator`, `MoviePathValidator`,
-/// `MovieAncestorValidator`: the first that fails (the cascade stops).
-/// `movie_id` is the movie being edited, whose own path is no clash.
-pub fn path_rules(conn: &Connection, movie_id: i64, path: &str) -> anyhow::Result<Option<ValidationFailure>> {
+/// Whose rules a path is checked with: the two lists differ in their
+/// order and in the system folders, which only the controller looks at.
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum PathRules {
+    /// `MovieController`'s `SharedValidator`: root folder, another
+    /// movie's path, an ancestor of one, the recycling bin, a system
+    /// folder.
+    Controller,
+    /// `AddMovieValidator`: root folder, the recycling bin, another
+    /// movie's path, an ancestor of one.
+    Service,
+}
+
+/// `IsValidPath` and the validators that follow it in `rules`: the first
+/// that fails (the cascade stops). `movie_id` is the movie being edited,
+/// whose own path is no clash.
+pub fn path_rules(
+    conn: &Connection,
+    movie_id: i64,
+    path: &str,
+    rules: PathRules,
+) -> anyhow::Result<Option<ValidationFailure>> {
+    use crate::mediafiles::{is_parent_path, path_equals, relationship_to, system_folder_of};
     if !valid_path(path) {
         return Ok(Some(path_failure("Path", path)));
     }
-    let with_path = |code: &str, message: String| {
+    let with_path = |code: &str, message: String, extra: Vec<(&str, &str)>| {
         let mut f = ValidationFailure::rule("Path", code, &message, json!(path));
         f.placeholders = vec![("path".into(), json!(path))];
+        f.placeholders
+            .extend(extra.into_iter().map(|(k, v)| (k.to_string(), json!(v))));
         f
     };
     if crate::store::catalog::list_root_folders(conn)?
         .iter()
-        .any(|r| crate::mediafiles::path_equals(&r.path, path))
+        .any(|r| path_equals(&r.path, path))
     {
         return Ok(Some(with_path(
             "RootFolderValidator",
             format!("Path '{path}' is already configured as a root folder"),
+            vec![],
         )));
     }
-    let others = store::all_movie_paths(conn)?;
-    if others
-        .iter()
-        .any(|(id, p)| *id != movie_id && crate::mediafiles::path_equals(p, path))
-    {
-        return Ok(Some(with_path(
-            "MoviePathValidator",
-            format!("Path '{path}' is already configured for an existing movie"),
-        )));
+    let recycle_bin = || -> anyhow::Result<Option<ValidationFailure>> {
+        let bin = crate::store::config::config(conn, "recyclebin")?.unwrap_or_default();
+        if bin.trim().is_empty() {
+            return Ok(None);
+        }
+        Ok(relationship_to(&bin, path).map(|relationship| {
+            with_path(
+                "RecycleBinValidator",
+                format!("Path '{path}' is {relationship} configured recycle bin folder"),
+                vec![("relationship", relationship)],
+            )
+        }))
+    };
+    let other_movies = || -> anyhow::Result<Option<ValidationFailure>> {
+        let others = store::all_movie_paths(conn)?;
+        if others
+            .iter()
+            .any(|(id, p)| *id != movie_id && path_equals(p, path))
+        {
+            return Ok(Some(with_path(
+                "MoviePathValidator",
+                format!("Path '{path}' is already configured for an existing movie"),
+                vec![],
+            )));
+        }
+        if others.iter().any(|(_, p)| is_parent_path(path, p)) {
+            return Ok(Some(with_path(
+                "MovieAncestorValidator",
+                format!("Path '{path}' is an ancestor of an existing movie"),
+                vec![],
+            )));
+        }
+        Ok(None)
+    };
+    match rules {
+        PathRules::Service => {
+            if let Some(f) = recycle_bin()? {
+                return Ok(Some(f));
+            }
+            other_movies()
+        }
+        PathRules::Controller => {
+            if let Some(f) = other_movies()? {
+                return Ok(Some(f));
+            }
+            if let Some(f) = recycle_bin()? {
+                return Ok(Some(f));
+            }
+            // The last system folder tried stays in the message's
+            // arguments; the one that matched is the one it names.
+            Ok(system_folder_of(path).map(|(relationship, system)| {
+                with_path(
+                    "SystemFolderValidator",
+                    format!("Path '{path}' is {relationship} system folder {system}"),
+                    vec![("systemFolder", system), ("relationship", relationship)],
+                )
+            }))
+        }
     }
-    if others
-        .iter()
-        .any(|(_, p)| crate::mediafiles::is_parent_path(path, p))
-    {
-        return Ok(Some(with_path(
-            "MovieAncestorValidator",
-            format!("Path '{path}' is an ancestor of an existing movie"),
-        )));
-    }
-    Ok(None)
 }
 
 /// The rules of `MovieController` shared by POST and PUT, on the path and
@@ -324,7 +388,7 @@ fn shared_rules(
     failures: &mut Vec<ValidationFailure>,
 ) -> anyhow::Result<()> {
     if let Some(path) = path.filter(|p| !p.trim().is_empty()) {
-        if let Some(f) = path_rules(conn, movie_id, path)? {
+        if let Some(f) = path_rules(conn, movie_id, path, PathRules::Controller)? {
             failures.push(f);
         }
     }
@@ -542,17 +606,20 @@ async fn prepare(
                     },
                     &store::naming(conn)?,
                 );
-                format!(
-                    "{}/{folder}",
-                    new.root_folder_path
-                        .as_deref()
-                        .unwrap_or("")
-                        .trim_end_matches('/')
-                )
+                // `Path.Combine(RootFolderPath, folder)`: with no root
+                // folder the folder's name is all there is, a relative
+                // path the validation below refuses.
+                match new.root_folder_path.as_deref().map(str::trim) {
+                    Some(root) if !root.is_empty() => {
+                        format!("{}/{folder}", root.trim_end_matches('/'))
+                    }
+                    Some(_) => folder,
+                    None => return Ok(Err(WriteError::NoRootFolder)),
+                }
             }
         };
         // `AddMovieValidator`, on the path the movie ends up with.
-        if let Some(failure) = path_rules(conn, 0, &path)? {
+        if let Some(failure) = path_rules(conn, 0, &path, PathRules::Service)? {
             return Ok(Err(WriteError::Invalid(vec![failure])));
         }
         Ok(Ok(Added {
@@ -680,6 +747,14 @@ pub async fn add_many(
             let tx = conn.unchecked_transaction()?;
             let mut added = Vec::with_capacity(prepared.len());
             for one in prepared {
+                // The provider was asked since the caller looked: a
+                // movie a request added meanwhile is left out of a
+                // list's sync, as the ones that do not validate are.
+                let tmdb_id = one.movie.metadata.tmdb_id;
+                if ignore_errors && !store::movies_by_tmdb_id(&tx, tmdb_id)?.is_empty() {
+                    tracing::debug!("TmdbId {tmdb_id} was not added: it is in the library already");
+                    continue;
+                }
                 added.push(Added {
                     movie: insert(&tx, one.movie)?,
                     alternative_titles: one.alternative_titles,
@@ -780,8 +855,14 @@ fn build_path(
             .collect();
         let best = crate::health::best_root_folder(&movie.path, &roots);
         let best = best.trim_end_matches('/');
-        let relative = if crate::mediafiles::is_parent_path(best, &movie.path) {
-            movie.path[best.len()..].trim_start_matches('/').to_string()
+        // `get`, not an index: `is_parent_path` compares the paths with
+        // their `..` resolved, so the root's length as written may fall
+        // past the movie's path or inside one of its characters.
+        let inside = crate::mediafiles::is_parent_path(best, &movie.path)
+            .then(|| movie.path.get(best.len()..))
+            .flatten();
+        let relative = if let Some(rest) = inside {
+            rest.trim_start_matches('/').to_string()
         } else {
             let name = movie.path.trim_end_matches('/').rsplit('/').next().unwrap_or("");
             tracing::warn!(
@@ -1016,6 +1097,65 @@ mod tests {
             Some("438631")
         );
         assert_eq!(id(&IMDB_URL, "imdb.com/title/tt123"), None);
+    }
+
+    /// `RecycleBinValidator` and `SystemFolderValidator` on a movie's
+    /// path: both for the controller, the bin alone for the service, and
+    /// each list in its own order.
+    #[test]
+    fn a_movies_path_is_not_the_recycling_bin_nor_a_system_folder() {
+        let db = crate::db::Db::open_in_memory_for(crate::Personality::Radarr).unwrap();
+        db.call_blocking(|conn| {
+            crate::store::config::set_config(conn, "recyclebin", "/data/bin")?;
+            let failure = |path: &str, rules: PathRules| {
+                path_rules(conn, 0, path, rules)
+                    .unwrap()
+                    .map(|f| (f.error_code.unwrap_or_default(), f.error_message))
+            };
+            for rules in [PathRules::Controller, PathRules::Service] {
+                assert_eq!(failure("/movies/Dune (2021)", rules), None);
+                assert_eq!(
+                    failure("/data/bin", rules),
+                    Some((
+                        "RecycleBinValidator".into(),
+                        "Path '/data/bin' is set to configured recycle bin folder".into()
+                    ))
+                );
+                assert_eq!(
+                    failure("/data/bin/Dune (2021)", rules),
+                    Some((
+                        "RecycleBinValidator".into(),
+                        "Path '/data/bin/Dune (2021)' is child of configured recycle bin folder".into()
+                    ))
+                );
+                // A folder the bin is inside of is no concern of this rule.
+                assert_eq!(failure("/data", rules), None);
+            }
+            assert_eq!(
+                failure("/usr/bin/Dune (2021)", PathRules::Controller),
+                Some((
+                    "SystemFolderValidator".into(),
+                    "Path '/usr/bin/Dune (2021)' is child of system folder /usr/bin".into()
+                ))
+            );
+            assert_eq!(
+                failure("/proc", PathRules::Controller),
+                Some((
+                    "SystemFolderValidator".into(),
+                    "Path '/proc' is set to system folder /proc".into()
+                ))
+            );
+            // `AddMovieValidator` has no such rule.
+            assert_eq!(failure("/usr/bin/Dune (2021)", PathRules::Service), None);
+            // A relative path, which is what a library import without a
+            // root folder comes to, is refused before any of them.
+            assert_eq!(
+                failure("Dune (2021)", PathRules::Service).map(|f| f.0),
+                Some("PathValidator".into())
+            );
+            Ok(())
+        })
+        .unwrap();
     }
 
     #[test]

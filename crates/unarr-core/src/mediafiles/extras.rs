@@ -816,8 +816,8 @@ mod tests {
         }
     }
 
-    /// What came with a download is imported under the episode file's name
-    /// when the settings ask for it, and only the extensions they list.
+    /// An extra whose target is the episode file itself (a sample with
+    /// the video's extension) is not imported over it.
     #[test]
     fn an_extra_that_would_take_the_episodes_name_is_left_alone() {
         let lib = library("interference");
@@ -848,6 +848,8 @@ mod tests {
         let _ = fs::remove_dir_all(&lib.root);
     }
 
+    /// What came with a download is imported under the episode file's name
+    /// when the settings ask for it, and only the extensions they list.
     #[test]
     fn the_extras_of_a_download_come_with_the_episode() {
         let lib = library("import");

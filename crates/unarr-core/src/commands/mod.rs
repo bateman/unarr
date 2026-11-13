@@ -1370,6 +1370,11 @@ pub struct CommandQueue {
     changed: Notify,
     /// The application the commands are of.
     personality: crate::Personality,
+    /// Queued commands a running command waits for: they start before
+    /// the others whatever their priority, which stays what the client
+    /// reads. The originals have no such wait (see
+    /// `executor::movie_library::NewCollection`).
+    awaited: Mutex<std::collections::HashSet<i64>>,
 }
 
 impl CommandQueue {
@@ -1398,6 +1403,7 @@ impl CommandQueue {
             next_id: AtomicI64::new(next_id),
             changed: Notify::new(),
             personality,
+            awaited: Mutex::new(std::collections::HashSet::new()),
         })
     }
 
@@ -1535,6 +1541,12 @@ impl CommandQueue {
         let disk_busy = started.iter().any(|b| b.requires_disk_access());
         let long_running = started.iter().any(|b| b.is_long_running());
         let exclusive_running = started.iter().any(|b| b.is_exclusive());
+        let mut awaited = self.awaited.lock().unwrap();
+        awaited.retain(|id| {
+            items
+                .iter()
+                .any(|c| c.id == *id && c.status == CommandStatus::Queued)
+        });
         let candidate = items
             .iter()
             .enumerate()
@@ -1542,10 +1554,13 @@ impl CommandQueue {
             .filter(|(_, c)| !(disk_busy && c.body.requires_disk_access()))
             .filter(|(_, c)| !(long_running && c.body.is_exclusive()))
             .max_by(|(ia, a), (ib, b)| {
-                // Highest priority first, then the earliest queued: the
-                // reverse of the originals' OrderByDescending/ThenBy.
-                a.priority
-                    .cmp(&b.priority)
+                // What a running command waits for, then the highest
+                // priority, then the earliest queued: the reverse of the
+                // originals' OrderByDescending/ThenBy.
+                awaited
+                    .contains(&a.id)
+                    .cmp(&awaited.contains(&b.id))
+                    .then_with(|| a.priority.cmp(&b.priority))
                     .then_with(|| b.queued_at.cmp(&a.queued_at))
                     .then_with(|| ib.cmp(ia))
             })
@@ -1565,6 +1580,13 @@ impl CommandQueue {
     /// Wait until the queue changes.
     pub async fn changed(&self) {
         self.changed.notified().await;
+    }
+
+    /// A running command waits for this one: it starts before whatever
+    /// else is queued, as soon as a worker is free.
+    pub fn expedite(&self, id: i64) {
+        self.awaited.lock().unwrap().insert(id);
+        self.changed.notify_waiters();
     }
 
     /// Any command queued or started.
@@ -1756,6 +1778,50 @@ mod tests {
             .await
             .unwrap();
         assert_eq!(stored.map(|c| c.body), Some(rename));
+    }
+
+    /// A command a running one waits for starts before what was queued
+    /// ahead of it, and keeps the priority the client reads.
+    #[tokio::test]
+    async fn an_awaited_command_starts_first() {
+        let db = Db::open_in_memory_for(crate::Personality::Radarr).unwrap();
+        let queue = CommandQueue::open_for(db, crate::Personality::Radarr)
+            .await
+            .unwrap();
+        let now = Utc::now();
+        let mut refreshes = Vec::new();
+        for movie_id in [1, 2] {
+            let refresh = queue
+                .push(
+                    CommandBody::RefreshMovie {
+                        movie_ids: vec![movie_id],
+                        is_new_movie: true,
+                    },
+                    CommandPriority::Normal,
+                    CommandTrigger::Manual,
+                    now,
+                )
+                .await
+                .unwrap();
+            refreshes.push(refresh.id);
+        }
+        let collection = queue
+            .push(
+                CommandBody::RefreshCollections {
+                    collection_ids: vec![7],
+                },
+                CommandPriority::Normal,
+                CommandTrigger::Unspecified,
+                now + Duration::seconds(1),
+            )
+            .await
+            .unwrap();
+        queue.expedite(collection.id);
+        let first = queue.try_start(now).unwrap();
+        assert_eq!(first.id, collection.id);
+        assert_eq!(first.priority, CommandPriority::Normal);
+        // The others follow in the order they were queued.
+        assert_eq!(queue.try_start(now).map(|c| c.id), Some(refreshes[0]));
     }
 
     #[tokio::test]

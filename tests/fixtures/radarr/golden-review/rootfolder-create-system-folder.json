@@ -1,0 +1,26 @@
+{
+  "body": [
+    {
+      "attemptedValue": "/usr/bin",
+      "errorCode": "SystemFolderValidator",
+      "errorMessage": "Path '/usr/bin' is set to system folder /usr/bin",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "path": "/usr/bin",
+        "propertyName": "Path",
+        "propertyValue": "/usr/bin",
+        "relationship": "set to",
+        "systemFolder": "/usr/bin"
+      },
+      "propertyName": "Path",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T18:33:23Z",
+  "request": {
+    "body": "bodies/rootfolder-create-system-folder.json",
+    "method": "POST",
+    "path": "/api/v3/rootfolder"
+  },
+  "status": 400
+}

@@ -243,34 +243,22 @@ pub(crate) fn recycle_bin_failures(
             vec![],
         ));
     }
-    let relationship = |other: &str| {
-        if path_equals(other, bin) {
-            Some("set to")
-        } else if is_parent_path(other, bin) {
-            Some("child of")
-        } else {
-            None
-        }
-    };
-    if let Some(relationship) = relationship(startup_folder) {
+    if let Some(relationship) = unarr_core::mediafiles::relationship_to(startup_folder, bin) {
         failures.push(failure(
             "StartupFolderValidator",
             format!("Path '{bin}' cannot be {relationship} the start up folder"),
             vec![("relationship", json!(relationship))],
         ));
     }
-    for system in ["/bin", "/boot", "/lib", "/sbin", "/proc", "/usr/bin"] {
-        if let Some(relationship) = relationship(system) {
-            failures.push(failure(
-                "SystemFolderValidator",
-                format!("Path '{bin}' is {relationship} system folder {system}"),
-                vec![
-                    ("relationship", json!(relationship)),
-                    ("systemFolder", json!(system)),
-                ],
-            ));
-            break;
-        }
+    if let Some((relationship, system)) = unarr_core::mediafiles::system_folder_of(bin) {
+        failures.push(failure(
+            "SystemFolderValidator",
+            format!("Path '{bin}' is {relationship} system folder {system}"),
+            vec![
+                ("relationship", json!(relationship)),
+                ("systemFolder", json!(system)),
+            ],
+        ));
     }
     // The originals leave out the series whose id is the resource's own.
     if series
@@ -1283,29 +1271,31 @@ async fn root_folder_failure(state: &AppState, path: &str) -> ApiResult<Option<V
             format!("Path '{path}' is already configured as a root folder"),
         )));
     }
-    if !bin.is_empty()
-        && (unarr_core::mediafiles::path_equals(&bin, path)
-            || unarr_core::mediafiles::is_parent_path(path, &bin))
-    {
-        let mut f = with(
-            "RecycleBinValidator",
-            format!(
-                "Path '{path}' is {} configured recycle bin folder",
-                if unarr_core::mediafiles::path_equals(&bin, path) {
-                    "set to"
-                } else {
-                    "child of"
-                }
-            ),
-        );
-        f.placeholders.push(("relationship".into(), json!("set to")));
-        return Ok(Some(f));
+    // `RecycleBinValidator`: the root folder is the bin or inside it.
+    if !bin.trim().is_empty() {
+        if let Some(relationship) = unarr_core::mediafiles::relationship_to(&bin, path) {
+            let mut f = with(
+                "RecycleBinValidator",
+                format!("Path '{path}' is {relationship} configured recycle bin folder"),
+            );
+            f.placeholders.push(("relationship".into(), json!(relationship)));
+            return Ok(Some(f));
+        }
     }
     if !std::path::Path::new(path).is_dir() {
         return Ok(Some(with(
             "PathExistsValidator",
             format!("Path '{path}' does not exist"),
         )));
+    }
+    if let Some((relationship, system)) = unarr_core::mediafiles::system_folder_of(path) {
+        let mut f = with(
+            "SystemFolderValidator",
+            format!("Path '{path}' is {relationship} system folder {system}"),
+        );
+        f.placeholders.push(("systemFolder".into(), json!(system)));
+        f.placeholders.push(("relationship".into(), json!(relationship)));
+        return Ok(Some(f));
     }
     Ok(None)
 }

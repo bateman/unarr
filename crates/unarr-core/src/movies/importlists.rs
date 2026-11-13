@@ -181,7 +181,12 @@ impl MovieMetadataProvider for Remembering<'_> {
                 return Ok(known);
             }
             let info = self.inner.movie_info(tmdb_id, ctx).await?;
-            self.movies.lock().unwrap().insert(tmdb_id, info.clone());
+            // Without the credits, the bulk of an answer: neither the
+            // mapping of a list's item nor an add reads them (the
+            // refresh that follows an add asks for the movie again).
+            let mut kept = info.clone();
+            kept.credits = Vec::new();
+            self.movies.lock().unwrap().insert(tmdb_id, kept);
             Ok(info)
         })
     }

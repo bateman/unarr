@@ -695,7 +695,15 @@ async fn radarr_golden_responses_match() {
             ));
             continue;
         }
-        let problems = compare(mode(&g.name), &g.body, &body);
+        // The message of a folder that cannot be written names the user
+        // the process runs as: root where the recording was taken,
+        // another on a CI runner. The rest of the answer is compared.
+        let expected = if g.name == "config-mediamanagement-put-bin-missing" {
+            as_current_user(&g.body)
+        } else {
+            g.body.clone()
+        };
+        let problems = compare(mode(&g.name), &expected, &body);
         if !problems.is_empty() {
             failures.push(format!(
                 "{} ({} {}):\n    {}",
@@ -1029,6 +1037,33 @@ async fn the_audit_goldens_match() {
     replay_list("golden-audit", audit_mode, &["queue sync", "queue/details sync"]).await;
 }
 
+/// The review of milestone 4d: the path rules of a movie and of a root
+/// folder against the recycling bin and the system folders, against
+/// `tests/fixtures/radarr/golden-review`.
+#[tokio::test]
+async fn the_review_goldens_match() {
+    // `health sync`: the checks a settings write asks for run some
+    // seconds later on either side, and the list does not wait for them.
+    replay_list(
+        "golden-review",
+        review_mode,
+        &["queue sync", "queue/details sync", "health sync"],
+    )
+    .await;
+}
+
+fn review_mode(name: &str) -> Mode {
+    match name {
+        // An exception the original lets escape carries its stack.
+        "movie-import-no-root" => Mode::Exact(&["description"]),
+        // A model binding error names the request it refused.
+        "blocklist-movie-ids-empty" => Mode::Exact(&["traceId"]),
+        // The disk the recording ran on.
+        "rootfolder-after" => Mode::Exact(&["freeSpace"]),
+        _ => Mode::Exact(&[]),
+    }
+}
+
 /// Milestone 4d, the backups and the log files, against
 /// `tests/fixtures/radarr/golden-backup`.
 #[tokio::test]
@@ -1056,6 +1091,24 @@ async fn the_import_list_goldens_match() {
 
 /// One recorded list replayed: the fixture restored into a directory of
 /// its own, the mock on a free port, the clock moved by the recording.
+/// A recorded answer with the user the recording ran as (`root`) replaced
+/// by the one this process runs as, where a message names it.
+fn as_current_user(recorded: &Value) -> Value {
+    let user = std::env::var("USER")
+        .ok()
+        .filter(|u| !u.is_empty())
+        .or_else(|| {
+            let out = std::process::Command::new("id").arg("-un").output().ok()?;
+            Some(String::from_utf8_lossy(&out.stdout).trim().to_string())
+        })
+        .unwrap_or_else(|| "root".into());
+    let text = recorded
+        .to_string()
+        .replace("by user 'root'", &format!("by user '{user}'"))
+        .replace("\"user\":\"root\"", &format!("\"user\":\"{user}\""));
+    serde_json::from_str(&text).expect("the answer is still JSON")
+}
+
 async fn replay_list(list: &'static str, mode: fn(&str) -> Mode, excused_hub: &[&str]) {
     let golden_dir = fixture_dir().join(list);
     let dirs = ReplayDirs::create_named(list);
@@ -1200,7 +1253,15 @@ async fn replay_list(list: &'static str, mode: fn(&str) -> Mode, excused_hub: &[
             ));
             continue;
         }
-        let problems = compare(mode(&g.name), &g.body, &body);
+        // The message of a folder that cannot be written names the user
+        // the process runs as: root where the recording was taken,
+        // another on a CI runner. The rest of the answer is compared.
+        let expected = if g.name == "config-mediamanagement-put-bin-missing" {
+            as_current_user(&g.body)
+        } else {
+            g.body.clone()
+        };
+        let problems = compare(mode(&g.name), &expected, &body);
         if !problems.is_empty() {
             failures.push(format!(
                 "{} ({} {}):\n    {}",
@@ -1339,9 +1400,6 @@ fn library_mode(name: &str) -> Mode {
         | "qualityprofile-delete-used"
         | "exclusion-update-missing"
         | "collection-put-missing" => Mode::Exact(&["description"]),
-        // The message names the user the process runs as: root where the
-        // recording was taken, another on a CI runner.
-        "config-mediamanagement-put-bin-missing" => Mode::Exact(&["errorMessage", "user"]),
         // A model binding error names the request it refused.
         "config-metadata-put-country" => Mode::Exact(&["traceId"]),
         // The disk the recording ran on.

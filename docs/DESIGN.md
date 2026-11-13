@@ -1781,6 +1781,23 @@ the same libraries were not measured.
 - **`DeleteUpdateLogFiles` fails in Radarr** and does nothing in Sonarr:
   the first is what the real Radarr does on an installation that never
   updated, recorded; the second is what Sonarr's recording leaves unsaid.
+- **A command another command waits for starts first, and keeps its
+  priority.** A movie's refresh waits (ten seconds at most) for the
+  refresh of the collection it just brought, which the original queues
+  at normal priority behind whatever else is queued; in a run of single
+  adds that is behind every other movie's refresh, and the wait only ran
+  out. The queue now starts an awaited command before the others
+  (`CommandQueue::expedite`). The priority the client reads stays
+  `normal`, as the original records it: raising it to `high` would have
+  shown in `/command` and on the hub.
+- **A movie's path has two lists of rules, as the original has.**
+  `MovieController` (POST and PUT) checks the root folders, the other
+  movies, the recycling bin and the system folders; `AddMovieValidator`
+  (the library import, the lists, the collections) checks the root
+  folders, the bin and the other movies, and no system folder. A library
+  import that names no root folder at all is the original's 500
+  (`ArgumentNullException`); one whose root folder is blank is a 400 on
+  the folder's bare name. All recorded (`golden-review`).
 
 ## 19. Open questions
 
@@ -1789,6 +1806,14 @@ the same libraries were not measured.
   proxies, and the conversation with the Servarr team that goes with it,
   are on hold until the maintainer asks for them (section 7); not a task
   to propose.
+- Sonarr's hub says some things fewer times than the original does: after
+  a rescan and after an episode file is deleted the original sends
+  `episode updated` four times and `wanted/missing` and `wanted/cutoff`
+  twice where Unarr sends each once, and once more after a grab; Unarr
+  sends one `command updated` more for `MessagingCleanup`. The hub test
+  compares the count of every message and names these five steps as the
+  exceptions (`COUNT_NOT_COMPARED` in `tests/contract.rs`); a client
+  that redraws on each message sees no difference, so they are left.
 - One HTTP client served the process until phase 4a; each personality now
   has its own clients and outgoing settings (section 15). What is left of
   it: the series side still reaches for the process-wide clients rather

@@ -1163,17 +1163,7 @@ pub fn blocklist_page(
     movie_ids: &[i64],
     protocols: Option<&[crate::model::Protocol]>,
 ) -> anyhow::Result<(Vec<MovieBlocklistEntry>, i64)> {
-    // The UI's filters: the rows of some movies, of some protocols; of
-    // none, when the filter names only a protocol no row has.
-    let mut filter = String::from("1 = 1");
-    if !movie_ids.is_empty() {
-        let ids: Vec<String> = movie_ids.iter().map(i64::to_string).collect();
-        filter.push_str(&format!(" AND b.movie_id IN ({})", ids.join(",")));
-    }
-    if let Some(protocols) = protocols {
-        let names: Vec<String> = protocols.iter().map(|p| format!("'{}'", p.as_str())).collect();
-        filter.push_str(&format!(" AND b.protocol IN ({})", names.join(",")));
-    }
+    let filter = crate::store::history::blocklist_filter("b.movie_id", movie_ids, protocols);
     let from = format!(
         "FROM blocklist b JOIN movies m ON m.id = b.movie_id
                 JOIN movie_metadata md ON md.id = m.movie_metadata_id WHERE {filter}"

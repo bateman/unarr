@@ -1,0 +1,26 @@
+{
+  "body": [
+    {
+      "attemptedValue": "/usr/bin/Interstellar (2014)",
+      "errorCode": "SystemFolderValidator",
+      "errorMessage": "Path '/usr/bin/Interstellar (2014)' is child of system folder /usr/bin",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "path": "/usr/bin/Interstellar (2014)",
+        "propertyName": "Path",
+        "propertyValue": "/usr/bin/Interstellar (2014)",
+        "relationship": "child of",
+        "systemFolder": "/usr/bin"
+      },
+      "propertyName": "Path",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T18:33:22Z",
+  "request": {
+    "body": "bodies/movie-add-path-in-system-folder.json",
+    "method": "POST",
+    "path": "/api/v3/movie"
+  },
+  "status": 400
+}

@@ -1,0 +1,1 @@
+{"$from": "config-mediamanagement", "$set": {"recycleBin": "/downloads/bin"}}

@@ -304,6 +304,10 @@ fn write_error(e: WriteError) -> ApiError {
             message: "Object reference not set to an instance of an object.".into(),
             exception: "System.NullReferenceException".into(),
         },
+        WriteError::NoRootFolder => ApiError::ServerException {
+            message: "Value cannot be null. (Parameter 'path1')".into(),
+            exception: "System.ArgumentNullException".into(),
+        },
         WriteError::Other(e) => ApiError::Internal(e),
     }
 }

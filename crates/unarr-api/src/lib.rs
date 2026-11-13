@@ -204,9 +204,14 @@ async fn put_resource_id(
         Ok(bytes) => bytes,
         Err(_) => return axum::http::StatusCode::PAYLOAD_TOO_LARGE.into_response(),
     };
-    let body_id = serde_json::from_slice::<serde_json::Value>(&bytes)
+    // Only the id is read: the rest of the body is the handler's to parse.
+    #[derive(serde::Deserialize)]
+    struct IdOnly {
+        id: Option<serde_json::Value>,
+    }
+    let body_id = serde_json::from_slice::<IdOnly>(&bytes)
         .ok()
-        .and_then(|v| v.get("id").and_then(serde_json::Value::as_i64))
+        .and_then(|body| body.id.as_ref().and_then(serde_json::Value::as_i64))
         .filter(|id| *id > 0);
     let id = match (body_id, route_id) {
         (Some(id), _) => id.to_string(),

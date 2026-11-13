@@ -1,0 +1,25 @@
+{
+  "body": [
+    {
+      "attemptedValue": "/downloads/bin/kept",
+      "errorCode": "RecycleBinValidator",
+      "errorMessage": "Path '/downloads/bin/kept' is child of configured recycle bin folder",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "path": "/downloads/bin/kept",
+        "propertyName": "Path",
+        "propertyValue": "/downloads/bin/kept",
+        "relationship": "child of"
+      },
+      "propertyName": "Path",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T18:33:22Z",
+  "request": {
+    "body": "bodies/movie-put-path-in-bin.json",
+    "method": "PUT",
+    "path": "/api/v3/movie/6"
+  },
+  "status": 400
+}

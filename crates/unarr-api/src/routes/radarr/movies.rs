@@ -242,10 +242,7 @@ async fn load_collections(state: &AppState) -> anyhow::Result<Collections> {
             Ok(Collections {
                 collections: movies::list_collections(conn)?,
                 members: movies::metadata_in_collections(conn)?,
-                in_library: movies::list_movies(conn)?
-                    .into_iter()
-                    .map(|m| m.metadata.tmdb_id)
-                    .collect(),
+                in_library: movies::all_movie_tmdb_ids(conn)?,
                 excluded: movies::list_import_exclusions(conn)?
                     .into_iter()
                     .map(|e| e.tmdb_id)
@@ -528,6 +525,18 @@ pub async fn relay_movie_events(
 ) {
     let mut ctx: Option<MovieContext> = None;
     while let Some(event) = events.recv().await {
+        // `MovieController`'s own handler names the movie by its id and
+        // reads nothing: it is told even when the context cannot be read.
+        if let HubMovieEvent::Deleted(movie_id) = event {
+            state.hub().broadcast(
+                "movie",
+                json!({"action": "deleted", "resource": {"id": movie_id}}),
+            );
+            if events.is_empty() {
+                ctx = None;
+            }
+            continue;
+        }
         if ctx.is_none() {
             ctx = MovieContext::load(&state).await.ok();
         }
@@ -535,12 +544,9 @@ pub async fn relay_movie_events(
             match event {
                 HubMovieEvent::Grabbed(movie_id) => broadcast_movie_change(&state, ctx, movie_id, true).await,
                 HubMovieEvent::Import(e) => relay_import(&state, ctx, &e).await,
+                HubMovieEvent::Deleted(_) => {}
                 // `MovieController`'s own handler: the movie as it reads,
                 // root folder included, under its own name alone.
-                HubMovieEvent::Deleted(movie_id) => state.hub().broadcast(
-                    "movie",
-                    json!({"action": "deleted", "resource": {"id": movie_id}}),
-                ),
                 HubMovieEvent::Updated(movie_id) => {
                     if let Some(resource) = movie_for_hub(&state, ctx, movie_id).await {
                         state

@@ -183,9 +183,17 @@ fn filled_in_asset(
     instance_name: &str,
 ) -> Option<Response> {
     let file = asset(personality, &format!("Content/{name}"))?;
+    // The manifest is JSON: a quote or a backslash in the instance name
+    // goes in escaped, or the browser cannot read the file.
+    let instance_name = if name.to_ascii_lowercase().ends_with(".json") {
+        let quoted = serde_json::Value::from(instance_name).to_string();
+        quoted[1..quoted.len() - 1].to_string()
+    } else {
+        instance_name.to_string()
+    };
     let text = String::from_utf8_lossy(&file.data)
         .replace("__URL_BASE__", url_base)
-        .replace("__INSTANCE_NAME__", instance_name);
+        .replace("__INSTANCE_NAME__", &instance_name);
     let mime = HeaderValue::from_str(file.metadata.mimetype())
         .unwrap_or(HeaderValue::from_static("application/octet-stream"));
     Some(

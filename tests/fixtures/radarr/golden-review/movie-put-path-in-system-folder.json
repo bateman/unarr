@@ -1,0 +1,26 @@
+{
+  "body": [
+    {
+      "attemptedValue": "/lib/movies/Somewhere",
+      "errorCode": "SystemFolderValidator",
+      "errorMessage": "Path '/lib/movies/Somewhere' is child of system folder /lib",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "path": "/lib/movies/Somewhere",
+        "propertyName": "Path",
+        "propertyValue": "/lib/movies/Somewhere",
+        "relationship": "child of",
+        "systemFolder": "/lib"
+      },
+      "propertyName": "Path",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T18:33:22Z",
+  "request": {
+    "body": "bodies/movie-put-path-in-system-folder.json",
+    "method": "PUT",
+    "path": "/api/v3/movie/6"
+  },
+  "status": 400
+}

@@ -192,11 +192,15 @@ async fn get(
         .await
         // Without its URL: the query carries the token, and this text goes
         // to the log and to the answer of a connection test.
+        // The cause at the end of the error's chain says what went wrong
+        // (refused, a name that does not resolve) and names no URL.
         .map_err(|e| {
-            PlexError::Plex(format!(
-                "Unable to connect to Plex Media Server, {}",
-                e.without_url()
-            ))
+            let e = e.without_url();
+            let mut cause: &dyn std::error::Error = &e;
+            while let Some(next) = cause.source() {
+                cause = next;
+            }
+            PlexError::Plex(format!("Unable to connect to Plex Media Server, {cause}"))
         })?;
     let status = response.status();
     if status == reqwest::StatusCode::UNAUTHORIZED {

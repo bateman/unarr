@@ -1,0 +1,25 @@
+{
+  "body": [
+    {
+      "attemptedValue": "/downloads/bin/Interstellar (2014)",
+      "errorCode": "RecycleBinValidator",
+      "errorMessage": "Path '/downloads/bin/Interstellar (2014)' is child of configured recycle bin folder",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "path": "/downloads/bin/Interstellar (2014)",
+        "propertyName": "Path",
+        "propertyValue": "/downloads/bin/Interstellar (2014)",
+        "relationship": "child of"
+      },
+      "propertyName": "Path",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-13T18:33:22Z",
+  "request": {
+    "body": "bodies/movie-add-path-in-bin.json",
+    "method": "POST",
+    "path": "/api/v3/movie"
+  },
+  "status": 400
+}

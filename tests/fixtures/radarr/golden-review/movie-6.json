@@ -1,0 +1,240 @@
+{
+  "body": {
+    "added": "2026-03-07T09:12:06Z",
+    "alternateTitles": [
+      {
+        "id": 21,
+        "movieMetadataId": 6,
+        "sourceType": "tmdb",
+        "title": "에일리언: 로물루스"
+      },
+      {
+        "id": 22,
+        "movieMetadataId": 6,
+        "sourceType": "tmdb",
+        "title": "Alien Renaissance"
+      },
+      {
+        "id": 23,
+        "movieMetadataId": 6,
+        "sourceType": "tmdb",
+        "title": "Yad: Romul"
+      },
+      {
+        "id": 24,
+        "movieMetadataId": 6,
+        "sourceType": "tmdb",
+        "title": "Alien 7"
+      },
+      {
+        "id": 25,
+        "movieMetadataId": 6,
+        "sourceType": "tmdb",
+        "title": "Yaratık: Romulus"
+      },
+      {
+        "id": 26,
+        "movieMetadataId": 6,
+        "sourceType": "tmdb",
+        "title": "異形: 羅穆路斯"
+      },
+      {
+        "id": 27,
+        "movieMetadataId": 6,
+        "sourceType": "tmdb",
+        "title": "異形: 羅穆盧斯"
+      },
+      {
+        "id": 28,
+        "movieMetadataId": 6,
+        "sourceType": "tmdb",
+        "title": "异形：夺命舰"
+      },
+      {
+        "id": 2544,
+        "movieMetadataId": 6,
+        "sourceType": "tmdb",
+        "title": "Svetimas: Romulas"
+      }
+    ],
+    "certification": "R",
+    "cleanTitle": "alienromulus",
+    "collection": {
+      "title": "Alien: Romulus Collection",
+      "tmdbId": 1434946
+    },
+    "digitalRelease": "2024-10-15T00:00:00Z",
+    "folderName": "/movies/Alien Romulus (2024)",
+    "genres": [
+      "Horror",
+      "Science Fiction"
+    ],
+    "hasFile": true,
+    "id": 6,
+    "images": [
+      {
+        "coverType": "poster",
+        "remoteUrl": "https://image.tmdb.org/t/p/original/2uSWRTtCG336nuBiG8jOTEUKSy8.jpg",
+        "url": "/MediaCover/6/poster.jpg?h=8e27a3e38697683d5191"
+      },
+      {
+        "coverType": "fanart",
+        "remoteUrl": "https://image.tmdb.org/t/p/original/iYqSQaWDttQIQzsxg9xHyg0bttG.jpg",
+        "url": "/MediaCover/6/fanart.jpg?h=41ca535e779ef890db99"
+      }
+    ],
+    "imdbId": "tt18412256",
+    "inCinemas": "2024-08-14T00:00:00Z",
+    "isAvailable": true,
+    "keywords": [
+      "abandoned station",
+      "alien contact",
+      "alien encounter",
+      "alien life-form",
+      "alien monster",
+      "biological contamination",
+      "cryonics chamber",
+      "hostile organism",
+      "interstellar isolation",
+      "sci-fi horror",
+      "space capsule",
+      "space exploration",
+      "spaceship",
+      "spin off",
+      "xenomorph threat"
+    ],
+    "lastSearchTime": "2026-06-21T11:55:44Z",
+    "minimumAvailability": "released",
+    "monitored": false,
+    "movieFile": {
+      "dateAdded": "2026-05-01T20:38:16Z",
+      "edition": "",
+      "id": 213,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 5,
+          "name": "Italian"
+        },
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 1024000,
+        "audioChannels": 7.1,
+        "audioCodec": "EAC3",
+        "audioLanguages": "ita/ita/eng",
+        "audioStreamCount": 3,
+        "resolution": "1920x804",
+        "runTime": "1:59:01",
+        "scanType": "Progressive",
+        "subtitles": "ita/ita/ita/eng",
+        "videoBitDepth": 8,
+        "videoBitrate": 8508386,
+        "videoCodec": "x264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 23.976
+      },
+      "movieId": 6,
+      "originalFilePath": "Alien.Romulus.2024.iTA-ENG.Bluray.1080p.x264-CYBER/Alien.Romulus.2024.iTA-ENG.Bluray.1080p.x264-CYBER.mkv",
+      "path": "/movies/Alien Romulus (2024)/Alien Romulus (2024) {tmdb-945961} - [Bluray-1080p][EAC3 7.1][x264]-CYBER.mkv",
+      "quality": {
+        "quality": {
+          "id": 7,
+          "modifier": "none",
+          "name": "Bluray-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": false,
+      "relativePath": "Alien Romulus (2024) {tmdb-945961} - [Bluray-1080p][EAC3 7.1][x264]-CYBER.mkv",
+      "releaseGroup": "CYBER",
+      "sceneName": "Alien.Romulus.2024.iTA-ENG.Bluray.1080p.x264-CYBER",
+      "size": 10372936014
+    },
+    "movieFileId": 213,
+    "originalLanguage": {
+      "id": 1,
+      "name": "English"
+    },
+    "originalTitle": "Alien: Romulus",
+    "overview": "While scavenging the deep ends of a derelict space station, a group of young space colonizers come face to face with the most terrifying life form in the universe.",
+    "path": "/movies/Alien Romulus (2024)",
+    "physicalRelease": "2024-12-02T00:00:00Z",
+    "popularity": 31.7807,
+    "qualityProfileId": 11,
+    "ratings": {
+      "imdb": {
+        "type": "user",
+        "value": 7.1,
+        "votes": 295979
+      },
+      "metacritic": {
+        "type": "user",
+        "value": 64,
+        "votes": 0
+      },
+      "rottenTomatoes": {
+        "type": "user",
+        "value": 80,
+        "votes": 0
+      },
+      "tmdb": {
+        "type": "user",
+        "value": 7.159,
+        "votes": 4953
+      },
+      "trakt": {
+        "type": "user",
+        "value": 7.36965,
+        "votes": 23349
+      }
+    },
+    "releaseDate": "2024-10-15T00:00:00Z",
+    "rootFolderPath": "/movies",
+    "runtime": 119,
+    "secondaryYearSourceId": 0,
+    "sizeOnDisk": 10372936014,
+    "sortTitle": "alien romulus",
+    "statistics": {
+      "movieFileCount": 1,
+      "movieFileQualities": [
+        {
+          "id": 7,
+          "modifier": "none",
+          "name": "Bluray-1080p",
+          "resolution": 1080,
+          "source": "bluray"
+        }
+      ],
+      "releaseGroups": [
+        "CYBER"
+      ],
+      "sizeOnDisk": 10372936014
+    },
+    "status": "released",
+    "studio": "20th Century Studios",
+    "tags": [],
+    "title": "Alien: Romulus",
+    "titleSlug": "945961",
+    "tmdbId": 945961,
+    "website": "https://www.20thcenturystudios.com/movies/alien-romulus",
+    "year": 2024,
+    "youTubeTrailerId": "x0XDEhP4MQs"
+  },
+  "recordedAt": "2026-11-13T18:33:22Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/movie/6"
+  },
+  "status": 200
+}
