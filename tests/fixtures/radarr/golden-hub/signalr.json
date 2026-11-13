@@ -1,0 +1,1886 @@
+[
+  {
+    "after": "command-rescan-movie",
+    "messages": [
+      {
+        "body": {
+          "version": "6.4.4.10685"
+        },
+        "name": "version"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "body": {
+              "isExclusive": false,
+              "isLongRunning": false,
+              "isTypeExclusive": false,
+              "movieId": 10,
+              "name": "RescanMovie",
+              "requiresDiskAccess": false,
+              "sendUpdatesToClient": true,
+              "suppressMessages": false,
+              "trigger": "manual",
+              "updateScheduledTask": true
+            },
+            "commandName": "Rescan Movie",
+            "id": 472955,
+            "message": "Scanning disk for Backcountry",
+            "name": "RescanMovie",
+            "priority": "normal",
+            "queued": "2026-11-13T07:47:38Z",
+            "result": "unknown",
+            "sendUpdatesToClient": true,
+            "started": "2026-11-13T07:47:38Z",
+            "stateChangeTime": "2026-11-13T07:47:38Z",
+            "status": "started",
+            "trigger": "manual",
+            "updateScheduledTask": true
+          }
+        },
+        "name": "command"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "customFormatScore": -10000,
+            "customFormats": [
+              {
+                "id": 58,
+                "name": "Language not Italian"
+              }
+            ],
+            "dateAdded": "2026-11-13T07:47:38Z",
+            "edition": "",
+            "id": 405,
+            "indexerFlags": 0,
+            "languages": [
+              {
+                "id": 1,
+                "name": "English"
+              }
+            ],
+            "mediaInfo": {
+              "audioBitrate": 0,
+              "audioChannels": 1,
+              "audioCodec": "AAC",
+              "audioLanguages": "eng",
+              "audioStreamCount": 1,
+              "resolution": "1920x1080",
+              "runTime": "10:10",
+              "scanType": "Progressive",
+              "subtitles": "eng",
+              "videoBitDepth": 8,
+              "videoBitrate": 0,
+              "videoCodec": "h264",
+              "videoDynamicRange": "",
+              "videoDynamicRangeType": "",
+              "videoFps": 1000
+            },
+            "movieId": 10,
+            "path": "/movies/Backcountry (2015)/Backcountry.2015.1080p.BluRay.x264-GRP.mkv",
+            "quality": {
+              "quality": {
+                "id": 7,
+                "modifier": "none",
+                "name": "Bluray-1080p",
+                "resolution": 1080,
+                "source": "bluray"
+              },
+              "revision": {
+                "isRepack": false,
+                "real": 0,
+                "version": 1
+              }
+            },
+            "qualityCutoffNotMet": false,
+            "relativePath": "Backcountry.2015.1080p.BluRay.x264-GRP.mkv",
+            "releaseGroup": "GRP",
+            "size": 1106640
+          }
+        },
+        "name": "moviefile"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "added": "2026-03-07T09:12:06Z",
+            "alternateTitles": [
+              {
+                "id": 54,
+                "movieMetadataId": 10,
+                "sourceType": "tmdb",
+                "title": "Backcountry - Gnadenlose Wildnis"
+              },
+              {
+                "id": 55,
+                "movieMetadataId": 10,
+                "sourceType": "tmdb",
+                "title": "En el bosque sobrevive"
+              },
+              {
+                "id": 56,
+                "movieMetadataId": 10,
+                "sourceType": "tmdb",
+                "title": "Blackfoot Trail"
+              },
+              {
+                "id": 57,
+                "movieMetadataId": 10,
+                "sourceType": "tmdb",
+                "title": "Sobrevivente"
+              },
+              {
+                "id": 58,
+                "movieMetadataId": 10,
+                "sourceType": "tmdb",
+                "title": "Shtegu i tmerrit"
+              },
+              {
+                "id": 59,
+                "movieMetadataId": 10,
+                "sourceType": "tmdb",
+                "title": "ブラックフット"
+              },
+              {
+                "id": 60,
+                "movieMetadataId": 10,
+                "sourceType": "tmdb",
+                "title": "Na szlaku"
+              },
+              {
+                "id": 61,
+                "movieMetadataId": 10,
+                "sourceType": "tmdb",
+                "title": "Sobrevivientes"
+              },
+              {
+                "id": 62,
+                "movieMetadataId": 10,
+                "sourceType": "tmdb",
+                "title": "Backcountry - Sobreviventes"
+              },
+              {
+                "id": 2783,
+                "movieMetadataId": 10,
+                "sourceType": "tmdb",
+                "title": "Глушь"
+              }
+            ],
+            "certification": "R",
+            "cleanTitle": "backcountry",
+            "digitalRelease": "2020-10-09T00:00:00Z",
+            "folderName": "/movies/Backcountry (2015)",
+            "genres": [
+              "Horror",
+              "Thriller",
+              "Drama"
+            ],
+            "hasFile": true,
+            "id": 10,
+            "images": [
+              {
+                "coverType": "poster",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/AdIkDCWcBqv1B10ncm71sMiqEEF.jpg",
+                "url": "/MediaCover/10/poster.jpg?h=2f0d229f328b0179acc7"
+              },
+              {
+                "coverType": "fanart",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/fX8OjnkkWnGJdQ7tkpf8z7la4Xu.jpg",
+                "url": "/MediaCover/10/fanart.jpg?h=34bc6fd77c4a7f46287d"
+              }
+            ],
+            "imdbId": "tt2944198",
+            "inCinemas": "2015-03-20T00:00:00Z",
+            "isAvailable": true,
+            "keywords": [
+              "animal attack",
+              "based on true story",
+              "bear",
+              "bear attack",
+              "black bear",
+              "camping",
+              "canoe",
+              "frightened",
+              "gore",
+              "grave",
+              "lost in the woods",
+              "nature",
+              "ontario, canada",
+              "survival",
+              "tragic",
+              "woods"
+            ],
+            "lastSearchTime": "2026-06-24T19:43:56Z",
+            "minimumAvailability": "released",
+            "monitored": true,
+            "movieFile": {
+              "customFormatScore": -10000,
+              "customFormats": [
+                {
+                  "id": 58,
+                  "name": "Language not Italian"
+                }
+              ],
+              "dateAdded": "2026-11-13T07:47:38Z",
+              "edition": "",
+              "id": 405,
+              "indexerFlags": 0,
+              "languages": [
+                {
+                  "id": 1,
+                  "name": "English"
+                }
+              ],
+              "mediaInfo": {
+                "audioBitrate": 0,
+                "audioChannels": 1,
+                "audioCodec": "AAC",
+                "audioLanguages": "eng",
+                "audioStreamCount": 1,
+                "resolution": "1920x1080",
+                "runTime": "10:10",
+                "scanType": "Progressive",
+                "subtitles": "eng",
+                "videoBitDepth": 8,
+                "videoBitrate": 0,
+                "videoCodec": "h264",
+                "videoDynamicRange": "",
+                "videoDynamicRangeType": "",
+                "videoFps": 1000
+              },
+              "movieId": 10,
+              "path": "/movies/Backcountry (2015)/Backcountry.2015.1080p.BluRay.x264-GRP.mkv",
+              "quality": {
+                "quality": {
+                  "id": 7,
+                  "modifier": "none",
+                  "name": "Bluray-1080p",
+                  "resolution": 1080,
+                  "source": "bluray"
+                },
+                "revision": {
+                  "isRepack": false,
+                  "real": 0,
+                  "version": 1
+                }
+              },
+              "qualityCutoffNotMet": false,
+              "relativePath": "Backcountry.2015.1080p.BluRay.x264-GRP.mkv",
+              "releaseGroup": "GRP",
+              "size": 1106640
+            },
+            "movieFileId": 405,
+            "originalLanguage": {
+              "id": 1,
+              "name": "English"
+            },
+            "originalTitle": "Backcountry",
+            "overview": "A couple on a deep-wilderness hike become hopelessly lost within an aggressive black bear's territory.",
+            "path": "/movies/Backcountry (2015)",
+            "physicalRelease": "2015-05-28T00:00:00Z",
+            "popularity": 2.177,
+            "qualityProfileId": 11,
+            "ratings": {
+              "imdb": {
+                "type": "user",
+                "value": 6,
+                "votes": 27766
+              },
+              "metacritic": {
+                "type": "user",
+                "value": 62,
+                "votes": 0
+              },
+              "rottenTomatoes": {
+                "type": "user",
+                "value": 93,
+                "votes": 0
+              },
+              "tmdb": {
+                "type": "user",
+                "value": 5.968,
+                "votes": 760
+              },
+              "trakt": {
+                "type": "user",
+                "value": 6.22392,
+                "votes": 1246
+              }
+            },
+            "releaseDate": "2015-05-28T00:00:00Z",
+            "runtime": 92,
+            "secondaryYear": 2014,
+            "secondaryYearSourceId": 0,
+            "sizeOnDisk": 1106640,
+            "sortTitle": "backcountry",
+            "statistics": {
+              "movieFileCount": 1,
+              "movieFileQualities": [
+                {
+                  "id": 7,
+                  "modifier": "none",
+                  "name": "Bluray-1080p",
+                  "resolution": 1080,
+                  "source": "bluray"
+                }
+              ],
+              "releaseGroups": [
+                "GRP"
+              ],
+              "sizeOnDisk": 1106640
+            },
+            "status": "released",
+            "studio": "Fella Films",
+            "tags": [
+              1
+            ],
+            "title": "Backcountry",
+            "titleSlug": "228973",
+            "tmdbId": 228973,
+            "website": "http://backcountryfilm.com/",
+            "year": 2015,
+            "youTubeTrailerId": "46uwmzTf5nA"
+          }
+        },
+        "name": "wanted/cutoff"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "added": "2026-03-07T09:12:06Z",
+            "alternateTitles": [
+              {
+                "id": 54,
+                "movieMetadataId": 10,
+                "sourceType": "tmdb",
+                "title": "Backcountry - Gnadenlose Wildnis"
+              },
+              {
+                "id": 55,
+                "movieMetadataId": 10,
+                "sourceType": "tmdb",
+                "title": "En el bosque sobrevive"
+              },
+              {
+                "id": 56,
+                "movieMetadataId": 10,
+                "sourceType": "tmdb",
+                "title": "Blackfoot Trail"
+              },
+              {
+                "id": 57,
+                "movieMetadataId": 10,
+                "sourceType": "tmdb",
+                "title": "Sobrevivente"
+              },
+              {
+                "id": 58,
+                "movieMetadataId": 10,
+                "sourceType": "tmdb",
+                "title": "Shtegu i tmerrit"
+              },
+              {
+                "id": 59,
+                "movieMetadataId": 10,
+                "sourceType": "tmdb",
+                "title": "ブラックフット"
+              },
+              {
+                "id": 60,
+                "movieMetadataId": 10,
+                "sourceType": "tmdb",
+                "title": "Na szlaku"
+              },
+              {
+                "id": 61,
+                "movieMetadataId": 10,
+                "sourceType": "tmdb",
+                "title": "Sobrevivientes"
+              },
+              {
+                "id": 62,
+                "movieMetadataId": 10,
+                "sourceType": "tmdb",
+                "title": "Backcountry - Sobreviventes"
+              },
+              {
+                "id": 2783,
+                "movieMetadataId": 10,
+                "sourceType": "tmdb",
+                "title": "Глушь"
+              }
+            ],
+            "certification": "R",
+            "cleanTitle": "backcountry",
+            "digitalRelease": "2020-10-09T00:00:00Z",
+            "folderName": "/movies/Backcountry (2015)",
+            "genres": [
+              "Horror",
+              "Thriller",
+              "Drama"
+            ],
+            "hasFile": true,
+            "id": 10,
+            "images": [
+              {
+                "coverType": "poster",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/AdIkDCWcBqv1B10ncm71sMiqEEF.jpg",
+                "url": "/MediaCover/10/poster.jpg?h=2f0d229f328b0179acc7"
+              },
+              {
+                "coverType": "fanart",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/fX8OjnkkWnGJdQ7tkpf8z7la4Xu.jpg",
+                "url": "/MediaCover/10/fanart.jpg?h=34bc6fd77c4a7f46287d"
+              }
+            ],
+            "imdbId": "tt2944198",
+            "inCinemas": "2015-03-20T00:00:00Z",
+            "isAvailable": true,
+            "keywords": [
+              "animal attack",
+              "based on true story",
+              "bear",
+              "bear attack",
+              "black bear",
+              "camping",
+              "canoe",
+              "frightened",
+              "gore",
+              "grave",
+              "lost in the woods",
+              "nature",
+              "ontario, canada",
+              "survival",
+              "tragic",
+              "woods"
+            ],
+            "lastSearchTime": "2026-06-24T19:43:56Z",
+            "minimumAvailability": "released",
+            "monitored": true,
+            "movieFile": {
+              "customFormatScore": -10000,
+              "customFormats": [
+                {
+                  "id": 58,
+                  "name": "Language not Italian"
+                }
+              ],
+              "dateAdded": "2026-11-13T07:47:38Z",
+              "edition": "",
+              "id": 405,
+              "indexerFlags": 0,
+              "languages": [
+                {
+                  "id": 1,
+                  "name": "English"
+                }
+              ],
+              "mediaInfo": {
+                "audioBitrate": 0,
+                "audioChannels": 1,
+                "audioCodec": "AAC",
+                "audioLanguages": "eng",
+                "audioStreamCount": 1,
+                "resolution": "1920x1080",
+                "runTime": "10:10",
+                "scanType": "Progressive",
+                "subtitles": "eng",
+                "videoBitDepth": 8,
+                "videoBitrate": 0,
+                "videoCodec": "h264",
+                "videoDynamicRange": "",
+                "videoDynamicRangeType": "",
+                "videoFps": 1000
+              },
+              "movieId": 10,
+              "path": "/movies/Backcountry (2015)/Backcountry.2015.1080p.BluRay.x264-GRP.mkv",
+              "quality": {
+                "quality": {
+                  "id": 7,
+                  "modifier": "none",
+                  "name": "Bluray-1080p",
+                  "resolution": 1080,
+                  "source": "bluray"
+                },
+                "revision": {
+                  "isRepack": false,
+                  "real": 0,
+                  "version": 1
+                }
+              },
+              "qualityCutoffNotMet": false,
+              "relativePath": "Backcountry.2015.1080p.BluRay.x264-GRP.mkv",
+              "releaseGroup": "GRP",
+              "size": 1106640
+            },
+            "movieFileId": 405,
+            "originalLanguage": {
+              "id": 1,
+              "name": "English"
+            },
+            "originalTitle": "Backcountry",
+            "overview": "A couple on a deep-wilderness hike become hopelessly lost within an aggressive black bear's territory.",
+            "path": "/movies/Backcountry (2015)",
+            "physicalRelease": "2015-05-28T00:00:00Z",
+            "popularity": 2.177,
+            "qualityProfileId": 11,
+            "ratings": {
+              "imdb": {
+                "type": "user",
+                "value": 6,
+                "votes": 27766
+              },
+              "metacritic": {
+                "type": "user",
+                "value": 62,
+                "votes": 0
+              },
+              "rottenTomatoes": {
+                "type": "user",
+                "value": 93,
+                "votes": 0
+              },
+              "tmdb": {
+                "type": "user",
+                "value": 5.968,
+                "votes": 760
+              },
+              "trakt": {
+                "type": "user",
+                "value": 6.22392,
+                "votes": 1246
+              }
+            },
+            "releaseDate": "2015-05-28T00:00:00Z",
+            "runtime": 92,
+            "secondaryYear": 2014,
+            "secondaryYearSourceId": 0,
+            "sizeOnDisk": 1106640,
+            "sortTitle": "backcountry",
+            "statistics": {
+              "movieFileCount": 1,
+              "movieFileQualities": [
+                {
+                  "id": 7,
+                  "modifier": "none",
+                  "name": "Bluray-1080p",
+                  "resolution": 1080,
+                  "source": "bluray"
+                }
+              ],
+              "releaseGroups": [
+                "GRP"
+              ],
+              "sizeOnDisk": 1106640
+            },
+            "status": "released",
+            "studio": "Fella Films",
+            "tags": [
+              1
+            ],
+            "title": "Backcountry",
+            "titleSlug": "228973",
+            "tmdbId": 228973,
+            "website": "http://backcountryfilm.com/",
+            "year": 2015,
+            "youTubeTrailerId": "46uwmzTf5nA"
+          }
+        },
+        "name": "wanted/missing"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "added": "2026-03-07T09:12:06Z",
+            "alternateTitles": [
+              {
+                "id": 54,
+                "movieMetadataId": 10,
+                "sourceType": "tmdb",
+                "title": "Backcountry - Gnadenlose Wildnis"
+              },
+              {
+                "id": 55,
+                "movieMetadataId": 10,
+                "sourceType": "tmdb",
+                "title": "En el bosque sobrevive"
+              },
+              {
+                "id": 56,
+                "movieMetadataId": 10,
+                "sourceType": "tmdb",
+                "title": "Blackfoot Trail"
+              },
+              {
+                "id": 57,
+                "movieMetadataId": 10,
+                "sourceType": "tmdb",
+                "title": "Sobrevivente"
+              },
+              {
+                "id": 58,
+                "movieMetadataId": 10,
+                "sourceType": "tmdb",
+                "title": "Shtegu i tmerrit"
+              },
+              {
+                "id": 59,
+                "movieMetadataId": 10,
+                "sourceType": "tmdb",
+                "title": "ブラックフット"
+              },
+              {
+                "id": 60,
+                "movieMetadataId": 10,
+                "sourceType": "tmdb",
+                "title": "Na szlaku"
+              },
+              {
+                "id": 61,
+                "movieMetadataId": 10,
+                "sourceType": "tmdb",
+                "title": "Sobrevivientes"
+              },
+              {
+                "id": 62,
+                "movieMetadataId": 10,
+                "sourceType": "tmdb",
+                "title": "Backcountry - Sobreviventes"
+              },
+              {
+                "id": 2783,
+                "movieMetadataId": 10,
+                "sourceType": "tmdb",
+                "title": "Глушь"
+              }
+            ],
+            "certification": "R",
+            "cleanTitle": "backcountry",
+            "digitalRelease": "2020-10-09T00:00:00Z",
+            "folderName": "/movies/Backcountry (2015)",
+            "genres": [
+              "Horror",
+              "Thriller",
+              "Drama"
+            ],
+            "hasFile": true,
+            "id": 10,
+            "images": [
+              {
+                "coverType": "poster",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/AdIkDCWcBqv1B10ncm71sMiqEEF.jpg",
+                "url": "/MediaCover/10/poster.jpg?h=2f0d229f328b0179acc7"
+              },
+              {
+                "coverType": "fanart",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/fX8OjnkkWnGJdQ7tkpf8z7la4Xu.jpg",
+                "url": "/MediaCover/10/fanart.jpg?h=34bc6fd77c4a7f46287d"
+              }
+            ],
+            "imdbId": "tt2944198",
+            "inCinemas": "2015-03-20T00:00:00Z",
+            "isAvailable": true,
+            "keywords": [
+              "animal attack",
+              "based on true story",
+              "bear",
+              "bear attack",
+              "black bear",
+              "camping",
+              "canoe",
+              "frightened",
+              "gore",
+              "grave",
+              "lost in the woods",
+              "nature",
+              "ontario, canada",
+              "survival",
+              "tragic",
+              "woods"
+            ],
+            "lastSearchTime": "2026-06-24T19:43:56Z",
+            "minimumAvailability": "released",
+            "monitored": true,
+            "movieFile": {
+              "customFormatScore": -10000,
+              "customFormats": [
+                {
+                  "id": 58,
+                  "name": "Language not Italian"
+                }
+              ],
+              "dateAdded": "2026-11-13T07:47:38Z",
+              "edition": "",
+              "id": 405,
+              "indexerFlags": 0,
+              "languages": [
+                {
+                  "id": 1,
+                  "name": "English"
+                }
+              ],
+              "mediaInfo": {
+                "audioBitrate": 0,
+                "audioChannels": 1,
+                "audioCodec": "AAC",
+                "audioLanguages": "eng",
+                "audioStreamCount": 1,
+                "resolution": "1920x1080",
+                "runTime": "10:10",
+                "scanType": "Progressive",
+                "subtitles": "eng",
+                "videoBitDepth": 8,
+                "videoBitrate": 0,
+                "videoCodec": "h264",
+                "videoDynamicRange": "",
+                "videoDynamicRangeType": "",
+                "videoFps": 1000
+              },
+              "movieId": 10,
+              "path": "/movies/Backcountry (2015)/Backcountry.2015.1080p.BluRay.x264-GRP.mkv",
+              "quality": {
+                "quality": {
+                  "id": 7,
+                  "modifier": "none",
+                  "name": "Bluray-1080p",
+                  "resolution": 1080,
+                  "source": "bluray"
+                },
+                "revision": {
+                  "isRepack": false,
+                  "real": 0,
+                  "version": 1
+                }
+              },
+              "qualityCutoffNotMet": false,
+              "relativePath": "Backcountry.2015.1080p.BluRay.x264-GRP.mkv",
+              "releaseGroup": "GRP",
+              "size": 1106640
+            },
+            "movieFileId": 405,
+            "originalLanguage": {
+              "id": 1,
+              "name": "English"
+            },
+            "originalTitle": "Backcountry",
+            "overview": "A couple on a deep-wilderness hike become hopelessly lost within an aggressive black bear's territory.",
+            "path": "/movies/Backcountry (2015)",
+            "physicalRelease": "2015-05-28T00:00:00Z",
+            "popularity": 2.177,
+            "qualityProfileId": 11,
+            "ratings": {
+              "imdb": {
+                "type": "user",
+                "value": 6,
+                "votes": 27766
+              },
+              "metacritic": {
+                "type": "user",
+                "value": 62,
+                "votes": 0
+              },
+              "rottenTomatoes": {
+                "type": "user",
+                "value": 93,
+                "votes": 0
+              },
+              "tmdb": {
+                "type": "user",
+                "value": 5.968,
+                "votes": 760
+              },
+              "trakt": {
+                "type": "user",
+                "value": 6.22392,
+                "votes": 1246
+              }
+            },
+            "releaseDate": "2015-05-28T00:00:00Z",
+            "runtime": 92,
+            "secondaryYear": 2014,
+            "secondaryYearSourceId": 0,
+            "sizeOnDisk": 1106640,
+            "sortTitle": "backcountry",
+            "statistics": {
+              "movieFileCount": 1,
+              "movieFileQualities": [
+                {
+                  "id": 7,
+                  "modifier": "none",
+                  "name": "Bluray-1080p",
+                  "resolution": 1080,
+                  "source": "bluray"
+                }
+              ],
+              "releaseGroups": [
+                "GRP"
+              ],
+              "sizeOnDisk": 1106640
+            },
+            "status": "released",
+            "studio": "Fella Films",
+            "tags": [
+              1
+            ],
+            "title": "Backcountry",
+            "titleSlug": "228973",
+            "tmdbId": 228973,
+            "website": "http://backcountryfilm.com/",
+            "year": 2015,
+            "youTubeTrailerId": "46uwmzTf5nA"
+          }
+        },
+        "name": "movie"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "system/task"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "health"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "body": {
+              "isExclusive": false,
+              "isLongRunning": false,
+              "isTypeExclusive": false,
+              "movieId": 10,
+              "name": "RescanMovie",
+              "requiresDiskAccess": false,
+              "sendUpdatesToClient": true,
+              "suppressMessages": false,
+              "trigger": "manual",
+              "updateScheduledTask": true
+            },
+            "commandName": "Rescan Movie",
+            "duration": "00:00:01.0538983",
+            "ended": "2026-11-13T07:47:39Z",
+            "id": 472955,
+            "message": "Scanning disk for Backcountry",
+            "name": "RescanMovie",
+            "priority": "normal",
+            "queued": "2026-11-13T07:47:38Z",
+            "result": "successful",
+            "sendUpdatesToClient": true,
+            "started": "2026-11-13T07:47:38Z",
+            "stateChangeTime": "2026-11-13T07:47:38Z",
+            "status": "completed",
+            "trigger": "manual",
+            "updateScheduledTask": true
+          }
+        },
+        "name": "command"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "health"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "queue"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "queue/details"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "system/task"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "queue"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "queue/details"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "system/task"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "health"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "count": 0,
+            "errors": false,
+            "totalCount": 0,
+            "unknownCount": 0,
+            "unknownErrors": false,
+            "unknownWarnings": false,
+            "warnings": false
+          }
+        },
+        "name": "queue/status"
+      }
+    ]
+  },
+  {
+    "after": "command-scan-path",
+    "messages": [
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "customFormatScore": -10000,
+            "customFormats": [
+              {
+                "id": 53,
+                "name": "AAC"
+              },
+              {
+                "id": 58,
+                "name": "Language not Italian"
+              }
+            ],
+            "dateAdded": "2026-11-13T07:47:50Z",
+            "edition": "",
+            "id": 406,
+            "indexerFlags": 0,
+            "languages": [
+              {
+                "id": 1,
+                "name": "English"
+              }
+            ],
+            "mediaInfo": {
+              "audioBitrate": 0,
+              "audioChannels": 1,
+              "audioCodec": "AAC",
+              "audioLanguages": "eng",
+              "audioStreamCount": 1,
+              "resolution": "1920x1080",
+              "runTime": "10:10",
+              "scanType": "Progressive",
+              "subtitles": "eng",
+              "videoBitDepth": 8,
+              "videoBitrate": 0,
+              "videoCodec": "x264",
+              "videoDynamicRange": "",
+              "videoDynamicRangeType": "",
+              "videoFps": 1000
+            },
+            "movieId": 70,
+            "originalFilePath": "Nightmare.Alley.2021.1080p.BluRay.x264-MIRCrew/Nightmare.Alley.2021.1080p.BluRay.x264-MIRCrew.mkv",
+            "path": "/movies/Nightmare Alley (2021)/Nightmare Alley (2021) {tmdb-597208} - [Bluray-1080p][AAC 1.0][x264]-MIRCrew.mkv",
+            "quality": {
+              "quality": {
+                "id": 7,
+                "modifier": "none",
+                "name": "Bluray-1080p",
+                "resolution": 1080,
+                "source": "bluray"
+              },
+              "revision": {
+                "isRepack": false,
+                "real": 0,
+                "version": 1
+              }
+            },
+            "qualityCutoffNotMet": false,
+            "relativePath": "Nightmare Alley (2021) {tmdb-597208} - [Bluray-1080p][AAC 1.0][x264]-MIRCrew.mkv",
+            "releaseGroup": "MIRCrew",
+            "sceneName": "Nightmare.Alley.2021.1080p.BluRay.x264-MIRCrew",
+            "size": 1106640
+          }
+        },
+        "name": "moviefile"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "added": "2026-03-07T09:12:06Z",
+            "alternateTitles": [
+              {
+                "id": 554,
+                "movieMetadataId": 70,
+                "sourceType": "tmdb",
+                "title": "Nightmare Alley: Vision in Darkness and Light"
+              },
+              {
+                "id": 555,
+                "movieMetadataId": 70,
+                "sourceType": "tmdb",
+                "title": "Nightmare Alley - Beco das Almas Perdidas"
+              },
+              {
+                "id": 556,
+                "movieMetadataId": 70,
+                "sourceType": "tmdb",
+                "title": "Zaułek koszmarów"
+              },
+              {
+                "id": 557,
+                "movieMetadataId": 70,
+                "sourceType": "tmdb",
+                "title": "Beco do Pesadelo"
+              },
+              {
+                "id": 558,
+                "movieMetadataId": 70,
+                "sourceType": "tmdb",
+                "title": "El callejón de las almas perdidas"
+              },
+              {
+                "id": 559,
+                "movieMetadataId": 70,
+                "sourceType": "tmdb",
+                "title": "毒心術"
+              },
+              {
+                "id": 560,
+                "movieMetadataId": 70,
+                "sourceType": "tmdb",
+                "title": "Nightmare Alley: Vision in Darkness & Light. Extended Director's Cut"
+              },
+              {
+                "id": 561,
+                "movieMetadataId": 70,
+                "sourceType": "tmdb",
+                "title": "کوچه کابوس"
+              },
+              {
+                "id": 2785,
+                "movieMetadataId": 70,
+                "sourceType": "tmdb",
+                "title": "Košmarų alėja"
+              }
+            ],
+            "certification": "R",
+            "cleanTitle": "nightmarealley",
+            "digitalRelease": "2022-02-01T00:00:00Z",
+            "folderName": "/movies/Nightmare Alley (2021)",
+            "genres": [
+              "Crime",
+              "Drama",
+              "Thriller"
+            ],
+            "hasFile": true,
+            "id": 70,
+            "images": [
+              {
+                "coverType": "poster",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/vfn1feL0V9HNSXuLLpaxAW8O6LO.jpg",
+                "url": "/MediaCover/70/poster.jpg?h=e6af977704638a1c94c4"
+              },
+              {
+                "coverType": "fanart",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/g0YNGpmlXsgHfhGnJz3c5uyzZ1B.jpg",
+                "url": "/MediaCover/70/fanart.jpg?h=f1255ff62dff6043f010"
+              }
+            ],
+            "imdbId": "tt7740496",
+            "inCinemas": "2021-12-02T00:00:00Z",
+            "isAvailable": true,
+            "keywords": [
+              "1940s",
+              "alcoholic",
+              "based on novel or book",
+              "carnival",
+              "carny",
+              "con artist",
+              "freak show",
+              "fugitive",
+              "grifter",
+              "hustler",
+              "infidelity",
+              "lie",
+              "love triangle",
+              "mentalist",
+              "mentor",
+              "murder",
+              "neo-noir",
+              "spiritism",
+              "supernatural",
+              "séance",
+              "tarot cards",
+              "violence"
+            ],
+            "minimumAvailability": "released",
+            "monitored": true,
+            "movieFile": {
+              "customFormatScore": -10000,
+              "customFormats": [
+                {
+                  "id": 53,
+                  "name": "AAC"
+                },
+                {
+                  "id": 58,
+                  "name": "Language not Italian"
+                }
+              ],
+              "dateAdded": "2026-11-13T07:47:50Z",
+              "edition": "",
+              "id": 406,
+              "indexerFlags": 0,
+              "languages": [
+                {
+                  "id": 1,
+                  "name": "English"
+                }
+              ],
+              "mediaInfo": {
+                "audioBitrate": 0,
+                "audioChannels": 1,
+                "audioCodec": "AAC",
+                "audioLanguages": "eng",
+                "audioStreamCount": 1,
+                "resolution": "1920x1080",
+                "runTime": "10:10",
+                "scanType": "Progressive",
+                "subtitles": "eng",
+                "videoBitDepth": 8,
+                "videoBitrate": 0,
+                "videoCodec": "x264",
+                "videoDynamicRange": "",
+                "videoDynamicRangeType": "",
+                "videoFps": 1000
+              },
+              "movieId": 70,
+              "originalFilePath": "Nightmare.Alley.2021.1080p.BluRay.x264-MIRCrew/Nightmare.Alley.2021.1080p.BluRay.x264-MIRCrew.mkv",
+              "path": "/movies/Nightmare Alley (2021)/Nightmare Alley (2021) {tmdb-597208} - [Bluray-1080p][AAC 1.0][x264]-MIRCrew.mkv",
+              "quality": {
+                "quality": {
+                  "id": 7,
+                  "modifier": "none",
+                  "name": "Bluray-1080p",
+                  "resolution": 1080,
+                  "source": "bluray"
+                },
+                "revision": {
+                  "isRepack": false,
+                  "real": 0,
+                  "version": 1
+                }
+              },
+              "qualityCutoffNotMet": false,
+              "relativePath": "Nightmare Alley (2021) {tmdb-597208} - [Bluray-1080p][AAC 1.0][x264]-MIRCrew.mkv",
+              "releaseGroup": "MIRCrew",
+              "sceneName": "Nightmare.Alley.2021.1080p.BluRay.x264-MIRCrew",
+              "size": 1106640
+            },
+            "movieFileId": 406,
+            "originalLanguage": {
+              "id": 1,
+              "name": "English"
+            },
+            "originalTitle": "Nightmare Alley",
+            "overview": "An ambitious carnival man with a talent for manipulating people with a few well-chosen words hooks up with a female psychologist who is even more dangerous than he is.",
+            "path": "/movies/Nightmare Alley (2021)",
+            "physicalRelease": "2022-03-16T00:00:00Z",
+            "popularity": 6.2105,
+            "qualityProfileId": 11,
+            "ratings": {
+              "imdb": {
+                "type": "user",
+                "value": 7,
+                "votes": 185744
+              },
+              "metacritic": {
+                "type": "user",
+                "value": 70,
+                "votes": 0
+              },
+              "rottenTomatoes": {
+                "type": "user",
+                "value": 80,
+                "votes": 0
+              },
+              "tmdb": {
+                "type": "user",
+                "value": 6.9,
+                "votes": 3554
+              },
+              "trakt": {
+                "type": "user",
+                "value": 6.95479,
+                "votes": 8427
+              }
+            },
+            "releaseDate": "2022-02-01T00:00:00Z",
+            "runtime": 151,
+            "secondaryYearSourceId": 0,
+            "sizeOnDisk": 1106640,
+            "sortTitle": "nightmare alley",
+            "statistics": {
+              "movieFileCount": 1,
+              "movieFileQualities": [
+                {
+                  "id": 7,
+                  "modifier": "none",
+                  "name": "Bluray-1080p",
+                  "resolution": 1080,
+                  "source": "bluray"
+                }
+              ],
+              "releaseGroups": [
+                "MIRCrew"
+              ],
+              "sizeOnDisk": 1106640
+            },
+            "status": "released",
+            "studio": "Searchlight Pictures",
+            "tags": [],
+            "title": "Nightmare Alley",
+            "titleSlug": "597208",
+            "tmdbId": 597208,
+            "website": "https://www.searchlightpictures.com/nightmarealley/",
+            "year": 2021,
+            "youTubeTrailerId": "Q81Yf46Oj3s"
+          }
+        },
+        "name": "wanted/cutoff"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "added": "2026-03-07T09:12:06Z",
+            "alternateTitles": [
+              {
+                "id": 554,
+                "movieMetadataId": 70,
+                "sourceType": "tmdb",
+                "title": "Nightmare Alley: Vision in Darkness and Light"
+              },
+              {
+                "id": 555,
+                "movieMetadataId": 70,
+                "sourceType": "tmdb",
+                "title": "Nightmare Alley - Beco das Almas Perdidas"
+              },
+              {
+                "id": 556,
+                "movieMetadataId": 70,
+                "sourceType": "tmdb",
+                "title": "Zaułek koszmarów"
+              },
+              {
+                "id": 557,
+                "movieMetadataId": 70,
+                "sourceType": "tmdb",
+                "title": "Beco do Pesadelo"
+              },
+              {
+                "id": 558,
+                "movieMetadataId": 70,
+                "sourceType": "tmdb",
+                "title": "El callejón de las almas perdidas"
+              },
+              {
+                "id": 559,
+                "movieMetadataId": 70,
+                "sourceType": "tmdb",
+                "title": "毒心術"
+              },
+              {
+                "id": 560,
+                "movieMetadataId": 70,
+                "sourceType": "tmdb",
+                "title": "Nightmare Alley: Vision in Darkness & Light. Extended Director's Cut"
+              },
+              {
+                "id": 561,
+                "movieMetadataId": 70,
+                "sourceType": "tmdb",
+                "title": "کوچه کابوس"
+              },
+              {
+                "id": 2785,
+                "movieMetadataId": 70,
+                "sourceType": "tmdb",
+                "title": "Košmarų alėja"
+              }
+            ],
+            "certification": "R",
+            "cleanTitle": "nightmarealley",
+            "digitalRelease": "2022-02-01T00:00:00Z",
+            "folderName": "/movies/Nightmare Alley (2021)",
+            "genres": [
+              "Crime",
+              "Drama",
+              "Thriller"
+            ],
+            "hasFile": true,
+            "id": 70,
+            "images": [
+              {
+                "coverType": "poster",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/vfn1feL0V9HNSXuLLpaxAW8O6LO.jpg",
+                "url": "/MediaCover/70/poster.jpg?h=e6af977704638a1c94c4"
+              },
+              {
+                "coverType": "fanart",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/g0YNGpmlXsgHfhGnJz3c5uyzZ1B.jpg",
+                "url": "/MediaCover/70/fanart.jpg?h=f1255ff62dff6043f010"
+              }
+            ],
+            "imdbId": "tt7740496",
+            "inCinemas": "2021-12-02T00:00:00Z",
+            "isAvailable": true,
+            "keywords": [
+              "1940s",
+              "alcoholic",
+              "based on novel or book",
+              "carnival",
+              "carny",
+              "con artist",
+              "freak show",
+              "fugitive",
+              "grifter",
+              "hustler",
+              "infidelity",
+              "lie",
+              "love triangle",
+              "mentalist",
+              "mentor",
+              "murder",
+              "neo-noir",
+              "spiritism",
+              "supernatural",
+              "séance",
+              "tarot cards",
+              "violence"
+            ],
+            "minimumAvailability": "released",
+            "monitored": true,
+            "movieFile": {
+              "customFormatScore": -10000,
+              "customFormats": [
+                {
+                  "id": 53,
+                  "name": "AAC"
+                },
+                {
+                  "id": 58,
+                  "name": "Language not Italian"
+                }
+              ],
+              "dateAdded": "2026-11-13T07:47:50Z",
+              "edition": "",
+              "id": 406,
+              "indexerFlags": 0,
+              "languages": [
+                {
+                  "id": 1,
+                  "name": "English"
+                }
+              ],
+              "mediaInfo": {
+                "audioBitrate": 0,
+                "audioChannels": 1,
+                "audioCodec": "AAC",
+                "audioLanguages": "eng",
+                "audioStreamCount": 1,
+                "resolution": "1920x1080",
+                "runTime": "10:10",
+                "scanType": "Progressive",
+                "subtitles": "eng",
+                "videoBitDepth": 8,
+                "videoBitrate": 0,
+                "videoCodec": "x264",
+                "videoDynamicRange": "",
+                "videoDynamicRangeType": "",
+                "videoFps": 1000
+              },
+              "movieId": 70,
+              "originalFilePath": "Nightmare.Alley.2021.1080p.BluRay.x264-MIRCrew/Nightmare.Alley.2021.1080p.BluRay.x264-MIRCrew.mkv",
+              "path": "/movies/Nightmare Alley (2021)/Nightmare Alley (2021) {tmdb-597208} - [Bluray-1080p][AAC 1.0][x264]-MIRCrew.mkv",
+              "quality": {
+                "quality": {
+                  "id": 7,
+                  "modifier": "none",
+                  "name": "Bluray-1080p",
+                  "resolution": 1080,
+                  "source": "bluray"
+                },
+                "revision": {
+                  "isRepack": false,
+                  "real": 0,
+                  "version": 1
+                }
+              },
+              "qualityCutoffNotMet": false,
+              "relativePath": "Nightmare Alley (2021) {tmdb-597208} - [Bluray-1080p][AAC 1.0][x264]-MIRCrew.mkv",
+              "releaseGroup": "MIRCrew",
+              "sceneName": "Nightmare.Alley.2021.1080p.BluRay.x264-MIRCrew",
+              "size": 1106640
+            },
+            "movieFileId": 406,
+            "originalLanguage": {
+              "id": 1,
+              "name": "English"
+            },
+            "originalTitle": "Nightmare Alley",
+            "overview": "An ambitious carnival man with a talent for manipulating people with a few well-chosen words hooks up with a female psychologist who is even more dangerous than he is.",
+            "path": "/movies/Nightmare Alley (2021)",
+            "physicalRelease": "2022-03-16T00:00:00Z",
+            "popularity": 6.2105,
+            "qualityProfileId": 11,
+            "ratings": {
+              "imdb": {
+                "type": "user",
+                "value": 7,
+                "votes": 185744
+              },
+              "metacritic": {
+                "type": "user",
+                "value": 70,
+                "votes": 0
+              },
+              "rottenTomatoes": {
+                "type": "user",
+                "value": 80,
+                "votes": 0
+              },
+              "tmdb": {
+                "type": "user",
+                "value": 6.9,
+                "votes": 3554
+              },
+              "trakt": {
+                "type": "user",
+                "value": 6.95479,
+                "votes": 8427
+              }
+            },
+            "releaseDate": "2022-02-01T00:00:00Z",
+            "runtime": 151,
+            "secondaryYearSourceId": 0,
+            "sizeOnDisk": 1106640,
+            "sortTitle": "nightmare alley",
+            "statistics": {
+              "movieFileCount": 1,
+              "movieFileQualities": [
+                {
+                  "id": 7,
+                  "modifier": "none",
+                  "name": "Bluray-1080p",
+                  "resolution": 1080,
+                  "source": "bluray"
+                }
+              ],
+              "releaseGroups": [
+                "MIRCrew"
+              ],
+              "sizeOnDisk": 1106640
+            },
+            "status": "released",
+            "studio": "Searchlight Pictures",
+            "tags": [],
+            "title": "Nightmare Alley",
+            "titleSlug": "597208",
+            "tmdbId": 597208,
+            "website": "https://www.searchlightpictures.com/nightmarealley/",
+            "year": 2021,
+            "youTubeTrailerId": "Q81Yf46Oj3s"
+          }
+        },
+        "name": "wanted/missing"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "added": "2026-03-07T09:12:06Z",
+            "alternateTitles": [
+              {
+                "id": 554,
+                "movieMetadataId": 70,
+                "sourceType": "tmdb",
+                "title": "Nightmare Alley: Vision in Darkness and Light"
+              },
+              {
+                "id": 555,
+                "movieMetadataId": 70,
+                "sourceType": "tmdb",
+                "title": "Nightmare Alley - Beco das Almas Perdidas"
+              },
+              {
+                "id": 556,
+                "movieMetadataId": 70,
+                "sourceType": "tmdb",
+                "title": "Zaułek koszmarów"
+              },
+              {
+                "id": 557,
+                "movieMetadataId": 70,
+                "sourceType": "tmdb",
+                "title": "Beco do Pesadelo"
+              },
+              {
+                "id": 558,
+                "movieMetadataId": 70,
+                "sourceType": "tmdb",
+                "title": "El callejón de las almas perdidas"
+              },
+              {
+                "id": 559,
+                "movieMetadataId": 70,
+                "sourceType": "tmdb",
+                "title": "毒心術"
+              },
+              {
+                "id": 560,
+                "movieMetadataId": 70,
+                "sourceType": "tmdb",
+                "title": "Nightmare Alley: Vision in Darkness & Light. Extended Director's Cut"
+              },
+              {
+                "id": 561,
+                "movieMetadataId": 70,
+                "sourceType": "tmdb",
+                "title": "کوچه کابوس"
+              },
+              {
+                "id": 2785,
+                "movieMetadataId": 70,
+                "sourceType": "tmdb",
+                "title": "Košmarų alėja"
+              }
+            ],
+            "certification": "R",
+            "cleanTitle": "nightmarealley",
+            "digitalRelease": "2022-02-01T00:00:00Z",
+            "folderName": "/movies/Nightmare Alley (2021)",
+            "genres": [
+              "Crime",
+              "Drama",
+              "Thriller"
+            ],
+            "hasFile": true,
+            "id": 70,
+            "images": [
+              {
+                "coverType": "poster",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/vfn1feL0V9HNSXuLLpaxAW8O6LO.jpg",
+                "url": "/MediaCover/70/poster.jpg?h=e6af977704638a1c94c4"
+              },
+              {
+                "coverType": "fanart",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/g0YNGpmlXsgHfhGnJz3c5uyzZ1B.jpg",
+                "url": "/MediaCover/70/fanart.jpg?h=f1255ff62dff6043f010"
+              }
+            ],
+            "imdbId": "tt7740496",
+            "inCinemas": "2021-12-02T00:00:00Z",
+            "isAvailable": true,
+            "keywords": [
+              "1940s",
+              "alcoholic",
+              "based on novel or book",
+              "carnival",
+              "carny",
+              "con artist",
+              "freak show",
+              "fugitive",
+              "grifter",
+              "hustler",
+              "infidelity",
+              "lie",
+              "love triangle",
+              "mentalist",
+              "mentor",
+              "murder",
+              "neo-noir",
+              "spiritism",
+              "supernatural",
+              "séance",
+              "tarot cards",
+              "violence"
+            ],
+            "minimumAvailability": "released",
+            "monitored": true,
+            "movieFile": {
+              "customFormatScore": -10000,
+              "customFormats": [
+                {
+                  "id": 53,
+                  "name": "AAC"
+                },
+                {
+                  "id": 58,
+                  "name": "Language not Italian"
+                }
+              ],
+              "dateAdded": "2026-11-13T07:47:50Z",
+              "edition": "",
+              "id": 406,
+              "indexerFlags": 0,
+              "languages": [
+                {
+                  "id": 1,
+                  "name": "English"
+                }
+              ],
+              "mediaInfo": {
+                "audioBitrate": 0,
+                "audioChannels": 1,
+                "audioCodec": "AAC",
+                "audioLanguages": "eng",
+                "audioStreamCount": 1,
+                "resolution": "1920x1080",
+                "runTime": "10:10",
+                "scanType": "Progressive",
+                "subtitles": "eng",
+                "videoBitDepth": 8,
+                "videoBitrate": 0,
+                "videoCodec": "x264",
+                "videoDynamicRange": "",
+                "videoDynamicRangeType": "",
+                "videoFps": 1000
+              },
+              "movieId": 70,
+              "originalFilePath": "Nightmare.Alley.2021.1080p.BluRay.x264-MIRCrew/Nightmare.Alley.2021.1080p.BluRay.x264-MIRCrew.mkv",
+              "path": "/movies/Nightmare Alley (2021)/Nightmare Alley (2021) {tmdb-597208} - [Bluray-1080p][AAC 1.0][x264]-MIRCrew.mkv",
+              "quality": {
+                "quality": {
+                  "id": 7,
+                  "modifier": "none",
+                  "name": "Bluray-1080p",
+                  "resolution": 1080,
+                  "source": "bluray"
+                },
+                "revision": {
+                  "isRepack": false,
+                  "real": 0,
+                  "version": 1
+                }
+              },
+              "qualityCutoffNotMet": false,
+              "relativePath": "Nightmare Alley (2021) {tmdb-597208} - [Bluray-1080p][AAC 1.0][x264]-MIRCrew.mkv",
+              "releaseGroup": "MIRCrew",
+              "sceneName": "Nightmare.Alley.2021.1080p.BluRay.x264-MIRCrew",
+              "size": 1106640
+            },
+            "movieFileId": 406,
+            "originalLanguage": {
+              "id": 1,
+              "name": "English"
+            },
+            "originalTitle": "Nightmare Alley",
+            "overview": "An ambitious carnival man with a talent for manipulating people with a few well-chosen words hooks up with a female psychologist who is even more dangerous than he is.",
+            "path": "/movies/Nightmare Alley (2021)",
+            "physicalRelease": "2022-03-16T00:00:00Z",
+            "popularity": 6.2105,
+            "qualityProfileId": 11,
+            "ratings": {
+              "imdb": {
+                "type": "user",
+                "value": 7,
+                "votes": 185744
+              },
+              "metacritic": {
+                "type": "user",
+                "value": 70,
+                "votes": 0
+              },
+              "rottenTomatoes": {
+                "type": "user",
+                "value": 80,
+                "votes": 0
+              },
+              "tmdb": {
+                "type": "user",
+                "value": 6.9,
+                "votes": 3554
+              },
+              "trakt": {
+                "type": "user",
+                "value": 6.95479,
+                "votes": 8427
+              }
+            },
+            "releaseDate": "2022-02-01T00:00:00Z",
+            "runtime": 151,
+            "secondaryYearSourceId": 0,
+            "sizeOnDisk": 1106640,
+            "sortTitle": "nightmare alley",
+            "statistics": {
+              "movieFileCount": 1,
+              "movieFileQualities": [
+                {
+                  "id": 7,
+                  "modifier": "none",
+                  "name": "Bluray-1080p",
+                  "resolution": 1080,
+                  "source": "bluray"
+                }
+              ],
+              "releaseGroups": [
+                "MIRCrew"
+              ],
+              "sizeOnDisk": 1106640
+            },
+            "status": "released",
+            "studio": "Searchlight Pictures",
+            "tags": [],
+            "title": "Nightmare Alley",
+            "titleSlug": "597208",
+            "tmdbId": 597208,
+            "website": "https://www.searchlightpictures.com/nightmarealley/",
+            "year": 2021,
+            "youTubeTrailerId": "Q81Yf46Oj3s"
+          }
+        },
+        "name": "movie"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "system/task"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "health"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "queue"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "queue/details"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "queue"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "queue/details"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "system/task"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "system/task"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "health"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "count": 0,
+            "errors": false,
+            "totalCount": 0,
+            "unknownCount": 0,
+            "unknownErrors": false,
+            "unknownWarnings": false,
+            "warnings": false
+          }
+        },
+        "name": "queue/status"
+      }
+    ]
+  },
+  {
+    "after": "command-messaging-cleanup",
+    "messages": [
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "system/task"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "body": {
+              "isExclusive": false,
+              "isLongRunning": false,
+              "isTypeExclusive": false,
+              "name": "MessagingCleanup",
+              "requiresDiskAccess": false,
+              "sendUpdatesToClient": true,
+              "suppressMessages": true,
+              "trigger": "manual",
+              "updateScheduledTask": true
+            },
+            "commandName": "Messaging Cleanup",
+            "duration": "00:00:00.0045068",
+            "ended": "2026-11-13T07:48:02Z",
+            "id": 472961,
+            "name": "MessagingCleanup",
+            "priority": "normal",
+            "queued": "2026-11-13T07:48:02Z",
+            "result": "successful",
+            "sendUpdatesToClient": true,
+            "started": "2026-11-13T07:48:02Z",
+            "stateChangeTime": "2026-11-13T07:48:02Z",
+            "status": "completed",
+            "trigger": "manual",
+            "updateScheduledTask": true
+          }
+        },
+        "name": "command"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "command"
+      }
+    ]
+  }
+]

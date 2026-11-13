@@ -5,6 +5,7 @@ use std::collections::HashMap;
 
 use axum::extract::State;
 use axum::http::Uri;
+use axum::response::{IntoResponse, Response};
 use axum::Json;
 use chrono::{DateTime, Duration, Utc};
 use serde_json::{json, Value};
@@ -204,8 +205,29 @@ async fn blocklist_resources(state: &AppState, rows: Vec<MovieBlocklistEntry>) -
     .await
 }
 
-pub async fn blocklist(State(state): State<AppState>, uri: Uri) -> ApiResult<Json<PagingResource<Value>>> {
+/// `GET /blocklist`: a page, of some movies and some protocols when the
+/// UI's filter asks (`movieIds`, `protocols`), each bound as the framework
+/// binds it: what it cannot read is a 400 that names the value.
+pub async fn blocklist(State(state): State<AppState>, uri: Uri) -> ApiResult<Response> {
     let p = Params::from_uri(&uri);
+    let refused = |name: &str, message: String| {
+        crate::error::validation_problem(
+            crate::error::BAD_REQUEST_TYPE_RFC9110,
+            "application/problem+json; charset=utf-8",
+            json!({ name: [message] }),
+        )
+    };
+    let mut movie_ids = Vec::new();
+    for value in p.all("movieIds") {
+        match value.trim().parse::<i32>() {
+            Ok(id) => movie_ids.push(i64::from(id)),
+            Err(_) => return Ok(refused("movieIds", format!("The value '{value}' is not valid."))),
+        }
+    }
+    let protocols = match crate::routes::activity::protocols_filter(&p) {
+        Ok(protocols) => protocols,
+        Err(message) => return Ok(refused("protocols", message)),
+    };
     let paging = Paging::resolve(
         p.i64("page"),
         p.i64("pageSize"),
@@ -215,9 +237,12 @@ pub async fn blocklist(State(state): State<AppState>, uri: Uri) -> ApiResult<Jso
         "date",
     );
     let page = paging.clone();
-    let (rows, total) = state.db().call(move |c| movies::blocklist_page(c, &page)).await?;
+    let (rows, total) = state
+        .db()
+        .call(move |c| movies::blocklist_page(c, &page, &movie_ids, protocols.as_deref()))
+        .await?;
     let records = blocklist_resources(&state, rows).await?;
-    Ok(Json(PagingResource::new(&paging, total, records)))
+    Ok(Json(PagingResource::new(&paging, total, records)).into_response())
 }
 
 /// `GET /blocklist/movie?movieId=`.

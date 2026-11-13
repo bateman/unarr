@@ -382,7 +382,7 @@ fn blocklist_resource(catalog: &Catalog, b: &BlocklistEntry) -> Value {
 /// each a name in any case or a number; a list in one value is read as
 /// flags, which no protocol is. `Err` is what it says of a value it does
 /// not take, as recorded.
-fn protocols_filter(p: &Params) -> Result<Option<Vec<unarr_core::model::Protocol>>, String> {
+pub(crate) fn protocols_filter(p: &Params) -> Result<Option<Vec<unarr_core::model::Protocol>>, String> {
     use unarr_core::model::Protocol;
     let values = p.all("protocols");
     if values.is_empty() {

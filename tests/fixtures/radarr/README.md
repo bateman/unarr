@@ -12,6 +12,7 @@ against it.
 | `golden/requests.txt` | The requests replayed, one per line: `name METHOD path [body file]`. `sleep N` pauses the recording while the original's background work runs (the replay moves its clock by as much and waits for its commands to finish); `{id:name}` in a path is the id the answer recorded as `name` carried, or its first item's. |
 | `golden/bodies/*.json` | The bodies of the writes. One with `$from` and `$set` is derived from an earlier answer: the resource a `PUT` sends back changed. |
 | `golden/*.json` | `{"request", "recordedAt", "status", "body"}` as recorded by `scripts/record-golden.py` against the real Radarr. `recordedAt` pins Unarr's clock during the replay, so availability, the calendar and the wanted lists do not drift as the calendar moves on. |
+| `golden-hub/` | A second, short request list with its answers and `signalr.json`, recorded the same way (the list's header has the command) and replayed by `the_hub_and_the_refresh_after_a_scan_are_the_originals`. Steps about the hub or the command list that the long list does not have go here, so the long list is not recorded again for them. |
 
 `make golden-radarr` re-records the responses: it downloads the official
 linux-core-x64 release (self-contained, no Docker needed) into

@@ -1,0 +1,29 @@
+# Radarr's hub and command list around what the long list next door does
+# not show: the refresh of the downloads a scan queues when it imports a
+# file, and what the hub says after the old commands are cleaned up. A recording of its own, so that
+# the long list did not have to be recorded again. Same format as
+# ../golden/requests.txt; signalr.json holds what the hub sent after each
+# step.
+#
+#   GOLDEN_REQUESTS=tests/fixtures/radarr/golden-hub/requests.txt \
+#       GOLDEN_OUT=tests/fixtures/radarr/golden-hub make golden-radarr
+
+# a file dropped into a movie folder and found by a rescan. First in the
+# list, before the scheduler's own refresh of each minute.
+mock - POST /mock/fs/write?path=/movies/Backcountry%20(2015)/Backcountry.2015.1080p.BluRay.x264-GRP.mkv&clip=episode-1080
+command-rescan-movie POST /api/v3/command bodies/command-rescan-movie.json
+sleep 12
+command-after-rescan GET /api/v3/command
+
+# the same for a release folder imported from outside any client
+mock - POST /mock/fs/write?path=/downloads/drop/Nightmare.Alley.2021.1080p.BluRay.x264-MIRCrew/Nightmare.Alley.2021.1080p.BluRay.x264-MIRCrew.mkv&clip=episode-1080
+command-scan-path POST /api/v3/command bodies/command-scan-path.json
+sleep 12
+command-after-scan GET /api/v3/command
+
+# the old commands cleaned up. (The original's hub also says
+# "qualitydefinition" sync after ResetQualityDefinitions, as Sonarr's does:
+# seen in a first recording of this list and left out of it, since Unarr
+# has no such command for Radarr yet.)
+command-messaging-cleanup POST /api/v3/command bodies/command-messaging-cleanup.json
+sleep 8

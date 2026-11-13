@@ -1089,9 +1089,27 @@ pub const BLOCKLIST_SORT_KEYS: &[&str] = &[
 ];
 
 /// One page of the blocklist and its total.
-pub fn blocklist_page(conn: &Connection, paging: &Paging) -> anyhow::Result<(Vec<MovieBlocklistEntry>, i64)> {
-    let from = "FROM blocklist b JOIN movies m ON m.id = b.movie_id
-                JOIN movie_metadata md ON md.id = m.movie_metadata_id";
+pub fn blocklist_page(
+    conn: &Connection,
+    paging: &Paging,
+    movie_ids: &[i64],
+    protocols: Option<&[crate::model::Protocol]>,
+) -> anyhow::Result<(Vec<MovieBlocklistEntry>, i64)> {
+    // The UI's filters: the rows of some movies, of some protocols; of
+    // none, when the filter names only a protocol no row has.
+    let mut filter = String::from("1 = 1");
+    if !movie_ids.is_empty() {
+        let ids: Vec<String> = movie_ids.iter().map(i64::to_string).collect();
+        filter.push_str(&format!(" AND b.movie_id IN ({})", ids.join(",")));
+    }
+    if let Some(protocols) = protocols {
+        let names: Vec<String> = protocols.iter().map(|p| format!("'{}'", p.as_str())).collect();
+        filter.push_str(&format!(" AND b.protocol IN ({})", names.join(",")));
+    }
+    let from = format!(
+        "FROM blocklist b JOIN movies m ON m.id = b.movie_id
+                JOIN movie_metadata md ON md.id = m.movie_metadata_id WHERE {filter}"
+    );
     let total: i64 = conn.query_row(&format!("SELECT count(*) {from}"), [], |r| r.get(0))?;
     let dir = paging.direction_sql();
     let order = match paging.sort_key.as_str() {

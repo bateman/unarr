@@ -1,0 +1,35 @@
+{
+  "body": {
+    "body": {
+      "isExclusive": false,
+      "isLongRunning": false,
+      "isTypeExclusive": false,
+      "movieId": 10,
+      "name": "RescanMovie",
+      "requiresDiskAccess": false,
+      "sendUpdatesToClient": true,
+      "suppressMessages": false,
+      "trigger": "manual",
+      "updateScheduledTask": true
+    },
+    "commandName": "Rescan Movie",
+    "id": 472955,
+    "name": "RescanMovie",
+    "priority": "normal",
+    "queued": "2026-11-13T07:47:38Z",
+    "result": "unknown",
+    "sendUpdatesToClient": true,
+    "started": "2026-11-13T07:47:38Z",
+    "stateChangeTime": "2026-11-13T07:47:38Z",
+    "status": "started",
+    "trigger": "manual",
+    "updateScheduledTask": true
+  },
+  "recordedAt": "2026-11-13T07:47:38Z",
+  "request": {
+    "body": "bodies/command-rescan-movie.json",
+    "method": "POST",
+    "path": "/api/v3/command"
+  },
+  "status": 201
+}

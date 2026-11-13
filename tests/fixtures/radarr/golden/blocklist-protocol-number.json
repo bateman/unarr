@@ -1,0 +1,725 @@
+{
+  "body": {
+    "page": 1,
+    "pageSize": 5,
+    "records": [
+      {
+        "customFormats": [
+          {
+            "id": 50,
+            "name": "DD+"
+          }
+        ],
+        "date": "2026-11-01T16:36:20Z",
+        "id": 107,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-03-07T09:12:06Z",
+          "alternateTitles": [],
+          "certification": "PG-13",
+          "cleanTitle": "batmanbegins",
+          "collection": {
+            "title": "The Dark Knight Collection",
+            "tmdbId": 263
+          },
+          "digitalRelease": "2008-05-19T00:00:00Z",
+          "folderName": "/movies/Batman Begins (2005)",
+          "genres": [
+            "Drama",
+            "Crime",
+            "Action"
+          ],
+          "id": 11,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/sPX89Td70IDDjVr85jdSBb4rWGr.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/9IIBboV7MCT0bTxzXHmWK1Hq558.jpg"
+            }
+          ],
+          "imdbId": "tt0372784",
+          "inCinemas": "2005-06-15T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "based on comic",
+            "crime fighter",
+            "evil doctor",
+            "haunted by the past",
+            "inspirational",
+            "loss of loved one",
+            "martial arts",
+            "master villain",
+            "ninja",
+            "rivalry",
+            "secret identity",
+            "super power",
+            "superhero",
+            "tragic hero",
+            "undercover",
+            "unfulfilled love",
+            "vigilante"
+          ],
+          "lastSearchTime": "2026-11-01T16:38:56Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 391,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Batman Begins",
+          "overview": "Driven by tragedy, billionaire Bruce Wayne dedicates his life to uncovering and defeating the corruption that plagues his home, Gotham City.  Unable to work within the system, he instead creates a new identity, a symbol of fear for the criminal underworld - The Batman.",
+          "path": "/movies/Batman Begins (2005)",
+          "physicalRelease": "2005-10-14T00:00:00Z",
+          "popularity": 18.1463,
+          "qualityProfileId": 10,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 8.2,
+              "votes": 1753601
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 70,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 85,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7.733,
+              "votes": 23504
+            },
+            "trakt": {
+              "type": "user",
+              "value": 8.2092,
+              "votes": 38361
+            }
+          },
+          "releaseDate": "2005-10-14T00:00:00Z",
+          "runtime": 140,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "batman begins",
+          "status": "released",
+          "studio": "Warner Bros. Pictures",
+          "tags": [
+            1
+          ],
+          "title": "Batman Begins",
+          "titleSlug": "272",
+          "tmdbId": 272,
+          "website": "https://www.warnerbros.com/movies/batman-begins/",
+          "year": 2005,
+          "youTubeTrailerId": "lirBhHXvDSg"
+        },
+        "movieId": 11,
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 15,
+            "modifier": "none",
+            "name": "WEBRip-1080p",
+            "resolution": 1080,
+            "source": "webrip"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "Batman.Begins.2005.WEBRip.1080p.x264.EAC3.ITA.ENG.SUB.ITA.ENG-Lullozzo"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 55,
+            "name": "HDR"
+          }
+        ],
+        "date": "2026-11-01T15:26:49Z",
+        "id": 105,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-10-30T22:53:18Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "drive",
+          "digitalRelease": "2012-03-22T00:00:00Z",
+          "folderName": "/movies/Drive (2011)",
+          "genres": [
+            "Drama",
+            "Thriller",
+            "Crime"
+          ],
+          "id": 311,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/602vevIURmpDfzbnv5Ubi6wIkQm.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/hoyAALgfmjMEK7O1wZ4r8wT91RP.jpg"
+            }
+          ],
+          "imdbId": "tt0780504",
+          "inCinemas": "2011-09-15T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "beaten to death",
+            "bold",
+            "brutality",
+            "car mechanic",
+            "crime lord",
+            "existentialism",
+            "getaway driver",
+            "hammer",
+            "jacket",
+            "los angeles, california",
+            "neighbor",
+            "neo-noir",
+            "organized crime",
+            "police chase",
+            "revenge",
+            "robbery",
+            "scorpion",
+            "stunt driver",
+            "stuntman",
+            "toothpick",
+            "vindictive"
+          ],
+          "lastSearchTime": "2026-11-01T15:27:01Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 389,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Drive",
+          "overview": "Driver is a skilled Hollywood stuntman who moonlights as a getaway driver for criminals. Though he projects an icy exterior, lately he's been warming up to a pretty neighbor named Irene and her young son, Benicio. When Irene's husband gets out of jail, he enlists Driver's help in a million-dollar heist. The job goes horribly wrong, and Driver must risk his life to protect Irene and Benicio from the vengeful masterminds behind the robbery.",
+          "path": "/movies/Drive (2011)",
+          "physicalRelease": "2012-01-30T00:00:00Z",
+          "popularity": 12.7537,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 7.8,
+              "votes": 778382
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 79,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 93,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 7.6,
+              "votes": 14234
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.72721,
+              "votes": 22479
+            }
+          },
+          "releaseDate": "2012-01-30T00:00:00Z",
+          "runtime": 100,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "drive",
+          "status": "released",
+          "studio": "FilmDistrict",
+          "tags": [],
+          "title": "Drive",
+          "titleSlug": "64690",
+          "tmdbId": 64690,
+          "website": "http://www.sonypictures.com/movies/drive/",
+          "year": 2011,
+          "youTubeTrailerId": "inTc4Q_gEWQ"
+        },
+        "movieId": 311,
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 19,
+            "modifier": "none",
+            "name": "Bluray-2160p",
+            "resolution": 2160,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "Drive.2011.4K.HDR.2160p.BDRip.Ita.Eng.x265-NAHOM"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 19,
+            "name": "AMZN"
+          },
+          {
+            "id": 58,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 13,
+            "name": "LQ (Release Title)"
+          }
+        ],
+        "date": "2026-10-13T09:45:00Z",
+        "id": 103,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 21,
+            "name": "Korean"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-07-19T21:57:27Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "hope",
+          "digitalRelease": "2026-10-13T00:00:00Z",
+          "folderName": "/movies/Hope (2026) {tmdb-1058424}",
+          "genres": [
+            "Science Fiction",
+            "Mystery",
+            "Action"
+          ],
+          "id": 246,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/6VY1ZKgpsc8CfGsQcCGiYEgHdH0.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/j96rurZqmBjyY37Fncl3IB0qJNe.jpg"
+            }
+          ],
+          "imdbId": "tt27369017",
+          "inCinemas": "2026-07-15T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "20th century",
+            "aliens",
+            "chasing",
+            "dinosaurs",
+            "duringcreditsstinger",
+            "fight for survival",
+            "horror",
+            "horse",
+            "hunted",
+            "police officer",
+            "police shootout",
+            "remote village",
+            "shootout",
+            "supernatural",
+            "unknown entity"
+          ],
+          "lastSearchTime": "2026-10-13T09:51:48Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 21,
+            "name": "Korean"
+          },
+          "originalTitle": "호프",
+          "overview": "In the remote South Korean village of Hope Harbor, police chief Bum-seok and officer Sung-ae are called to investigate a mysterious creature wreaking havoc on the community. But all is not as it seems, and perceptions can be misleading. What begins as ignorance plants the seed of disaster, escalating through human conflict into a tragedy of cosmic proportions.",
+          "path": "/movies/Hope (2026) {tmdb-1058424}",
+          "physicalRelease": "2026-12-09T00:00:00Z",
+          "popularity": 396.0525,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.6,
+              "votes": 29523
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 66,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.688,
+              "votes": 544
+            },
+            "trakt": {
+              "type": "user",
+              "value": 1,
+              "votes": 2
+            }
+          },
+          "releaseDate": "2026-10-13T00:00:00Z",
+          "runtime": 157,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "hope",
+          "status": "released",
+          "studio": "Forged Films",
+          "tags": [
+            1
+          ],
+          "title": "Hope",
+          "titleSlug": "1058424",
+          "tmdbId": 1058424,
+          "website": "https://www.neonrated.com/film/hope",
+          "year": 2026,
+          "youTubeTrailerId": "OFaJzL83y0Q"
+        },
+        "movieId": 246,
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "modifier": "none",
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "webdl"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "Hope.Hopeu.2026.1080p.AMZN.WEB-DL-Ben.The.Men"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 19,
+            "name": "AMZN"
+          },
+          {
+            "id": 50,
+            "name": "DD+"
+          },
+          {
+            "id": 58,
+            "name": "Language not Italian"
+          },
+          {
+            "id": 5,
+            "name": "WEB Tier 02"
+          }
+        ],
+        "date": "2026-10-13T08:45:00Z",
+        "id": 102,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 21,
+            "name": "Korean"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-07-19T21:57:27Z",
+          "alternateTitles": [],
+          "certification": "R",
+          "cleanTitle": "hope",
+          "digitalRelease": "2026-10-13T00:00:00Z",
+          "folderName": "/movies/Hope (2026) {tmdb-1058424}",
+          "genres": [
+            "Science Fiction",
+            "Mystery",
+            "Action"
+          ],
+          "id": 246,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/6VY1ZKgpsc8CfGsQcCGiYEgHdH0.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/j96rurZqmBjyY37Fncl3IB0qJNe.jpg"
+            }
+          ],
+          "imdbId": "tt27369017",
+          "inCinemas": "2026-07-15T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "20th century",
+            "aliens",
+            "chasing",
+            "dinosaurs",
+            "duringcreditsstinger",
+            "fight for survival",
+            "horror",
+            "horse",
+            "hunted",
+            "police officer",
+            "police shootout",
+            "remote village",
+            "shootout",
+            "supernatural",
+            "unknown entity"
+          ],
+          "lastSearchTime": "2026-10-13T09:51:48Z",
+          "minimumAvailability": "released",
+          "monitored": true,
+          "movieFileId": 0,
+          "originalLanguage": {
+            "id": 21,
+            "name": "Korean"
+          },
+          "originalTitle": "호프",
+          "overview": "In the remote South Korean village of Hope Harbor, police chief Bum-seok and officer Sung-ae are called to investigate a mysterious creature wreaking havoc on the community. But all is not as it seems, and perceptions can be misleading. What begins as ignorance plants the seed of disaster, escalating through human conflict into a tragedy of cosmic proportions.",
+          "path": "/movies/Hope (2026) {tmdb-1058424}",
+          "physicalRelease": "2026-12-09T00:00:00Z",
+          "popularity": 396.0525,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.6,
+              "votes": 29523
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 66,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.688,
+              "votes": 544
+            },
+            "trakt": {
+              "type": "user",
+              "value": 1,
+              "votes": 2
+            }
+          },
+          "releaseDate": "2026-10-13T00:00:00Z",
+          "runtime": 157,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "hope",
+          "status": "released",
+          "studio": "Forged Films",
+          "tags": [
+            1
+          ],
+          "title": "Hope",
+          "titleSlug": "1058424",
+          "tmdbId": 1058424,
+          "website": "https://www.neonrated.com/film/hope",
+          "year": 2026,
+          "youTubeTrailerId": "OFaJzL83y0Q"
+        },
+        "movieId": 246,
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 3,
+            "modifier": "none",
+            "name": "WEBDL-1080p",
+            "resolution": 1080,
+            "source": "webdl"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "Hopeu.2026.1080p.AMZN.WEB-DL.DD+5.1.H.264-playWEB"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 54,
+            "name": "DD"
+          },
+          {
+            "id": 18,
+            "name": "x265 (HD)"
+          },
+          {
+            "id": 56,
+            "name": "x265 (no HDR/DV)"
+          }
+        ],
+        "date": "2026-08-07T10:34:25Z",
+        "id": 80,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-08-06T19:56:06Z",
+          "alternateTitles": [],
+          "certification": "PG-13",
+          "cleanTitle": "bumblebee",
+          "digitalRelease": "2019-03-23T00:00:00Z",
+          "folderName": "/movies/Bumblebee (2018) {tmdb-424783}",
+          "genres": [
+            "Action",
+            "Adventure",
+            "Science Fiction"
+          ],
+          "id": 257,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/fw02ONlDhrYjTSZV8XO6hhU3ds3.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/hMANgfPHR1tRObNp2oPiOi9mMlz.jpg"
+            }
+          ],
+          "imdbId": "tt4701182",
+          "inCinemas": "2018-11-22T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "1980s",
+            "adoring",
+            "based on toy",
+            "duringcreditsstinger",
+            "giant robot",
+            "robot",
+            "spin off",
+            "technology"
+          ],
+          "lastSearchTime": "2026-08-07T10:34:12Z",
+          "minimumAvailability": "released",
+          "monitored": false,
+          "movieFileId": 298,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Bumblebee",
+          "overview": "On the run in the year 1987, Bumblebee finds refuge in a junkyard in a small Californian beach town. Charlie, on the cusp of turning 18 and trying to find her place in the world, discovers Bumblebee, battle-scarred and broken.  When Charlie revives him, she quickly learns this is no ordinary yellow VW bug.",
+          "path": "/movies/Bumblebee (2018) {tmdb-424783}",
+          "physicalRelease": "2019-04-02T00:00:00Z",
+          "popularity": 8.1441,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.7,
+              "votes": 213295
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 66,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 91,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.73,
+              "votes": 6941
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.06154,
+              "votes": 13000
+            }
+          },
+          "releaseDate": "2019-03-23T00:00:00Z",
+          "runtime": 114,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "bumblebee",
+          "status": "released",
+          "studio": "Paramount Pictures",
+          "tags": [
+            1
+          ],
+          "title": "Bumblebee",
+          "titleSlug": "424783",
+          "tmdbId": 424783,
+          "website": "https://www.paramountmovies.com/movies/bumblebee",
+          "year": 2018,
+          "youTubeTrailerId": "lcwmDAYt22k"
+        },
+        "movieId": 257,
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 9,
+            "modifier": "none",
+            "name": "HDTV-1080p",
+            "resolution": 1080,
+            "source": "tv"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "Bumblebee.2018.1080p.H265.ita.eng.AC3.5.1.sub.ita.eng.Licdom"
+      }
+    ],
+    "sortDirection": "descending",
+    "sortKey": "date",
+    "totalRecords": 34
+  },
+  "recordedAt": "2026-11-13T07:42:47Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/blocklist?page=1&pageSize=5&sortKey=date&sortDirection=descending&protocols=1"
+  },
+  "status": 200
+}

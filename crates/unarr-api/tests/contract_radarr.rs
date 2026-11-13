@@ -66,6 +66,10 @@ fn mode(name: &str) -> Mode {
         // exception escape as a 500 that carries its type and its stack.
         "notification-testall" | "notification-test-webhook-unreachable" => Mode::Shape,
         "notification-update-missing" => Mode::Exact(&["traceId"]),
+        "blocklist-protocol-invalid"
+        | "blocklist-protocol-comma"
+        | "blocklist-protocol-empty"
+        | "blocklist-movie-ids-invalid" => Mode::Exact(&["traceId"]),
         // What the notification targets received. The Discord test message
         // names the local time it was posted at.
         "notifications-after-test" | "notifications-after-testall" => Mode::Exact(&["content"]),
@@ -318,7 +322,12 @@ struct ReplayDirs {
 
 impl ReplayDirs {
     fn create() -> ReplayDirs {
-        let root = std::env::temp_dir().join(format!("unarr_contract_radarr_{}_replay", std::process::id()));
+        ReplayDirs::create_named("replay")
+    }
+
+    /// Tests run side by side in one process: each takes its own name.
+    fn create_named(name: &str) -> ReplayDirs {
+        let root = std::env::temp_dir().join(format!("unarr_contract_radarr_{}_{name}", std::process::id()));
         let _ = std::fs::remove_dir_all(&root);
         let movies = root.join("movies");
         let downloads = root.join("downloads");
@@ -845,6 +854,145 @@ async fn radarr_golden_responses_match() {
         checked,
         failures.join("\n")
     );
+}
+
+/// Radarr's hub and command list around what the long list does not show,
+/// against a recording of its own (`tests/fixtures/radarr/golden-hub`):
+/// a scan that imports a file asks for the downloads to be refreshed, as
+/// a grab does, and `command` sync follows the clean-up of the old
+/// commands.
+#[tokio::test]
+async fn the_hub_and_the_refresh_after_a_scan_are_the_originals() {
+    let golden_dir = fixture_dir().join("golden-hub");
+    let dirs = ReplayDirs::create_named("hub");
+    let mappings = dirs.mappings();
+    // A mock of its own on a free port: the long list's holds the port
+    // the fixture's providers name, which are pointed here instead.
+    let mock = unarr_mock::Mock::start_with(
+        unarr_mock::fixtures_dir(),
+        0,
+        unarr_mock::MockDirs {
+            downloads: Some(dirs.downloads.clone()),
+            tv: None,
+            movies: Some(dirs.movies.clone()),
+        },
+    )
+    .await
+    .expect("a mock on a free port");
+    let state = build_state(&dirs);
+    let port = mock.port().to_string();
+    state
+        .db()
+        .call(move |conn| {
+            conn.execute(
+                "UPDATE providers SET settings = replace(settings, ':18989', ':' || ?1)",
+                [&port],
+            )?;
+            Ok(())
+        })
+        .await
+        .expect("the providers pointed at this test's mock");
+    let goldens = load_goldens(&golden_dir);
+    let start = goldens
+        .iter()
+        .filter_map(|g| g.recorded_at)
+        .min()
+        .expect("a recording time");
+    state
+        .db()
+        .call(move |conn| {
+            let ids: Vec<i64> = conn
+                .prepare("SELECT id FROM scheduled_tasks")?
+                .query_map([], |r| r.get(0))?
+                .collect::<Result<_, _>>()?;
+            for id in ids {
+                unarr_core::store::providers::set_scheduled_task_execution(conn, id, start, start)?;
+            }
+            Ok(())
+        })
+        .await
+        .expect("freeze the scheduled tasks");
+    state.set_now(Some(start));
+    state.start_runtime().await.expect("the runtime");
+    let mut hub = state.hub().subscribe();
+    let app = unarr_api::router(state.clone());
+    let session = login_cookie(&app).await;
+    let mut stretches: Vec<Vec<Value>> = vec![Vec::new()];
+    let mut ids: std::collections::HashMap<String, i64> = std::collections::HashMap::new();
+    let mut answers: std::collections::HashMap<String, Value> = std::collections::HashMap::new();
+    for g in &goldens {
+        if g.method == "sleep" {
+            let seconds: i64 = g.path.parse().expect("sleep seconds");
+            state.set_now(Some(state.now() + chrono::Duration::seconds(seconds)));
+            tokio::time::timeout(
+                std::time::Duration::from_secs(60),
+                state.commands().expect("the runtime").wait_idle(),
+            )
+            .await
+            .expect("commands finish within a minute");
+            let heard = drain_hub(&mut hub).await;
+            stretches.last_mut().unwrap().extend(heard);
+            stretches.push(Vec::new());
+            continue;
+        }
+        let path = substitute_ids(&g.path, &ids);
+        if g.to_mock {
+            let mut path = path;
+            for (replay, recorded) in &mappings {
+                path = path.replace(&format!("path={recorded}"), &format!("path={replay}"));
+            }
+            let (status, _) = mock.call(&g.method, &path, &[]);
+            assert!(status.is_success(), "mock {} {path}: {status}", g.method);
+            continue;
+        }
+        let sent = Golden { path, ..g.clone() };
+        let (status, body) = send(&app, &sent, &session, &mappings).await;
+        assert_eq!(status.as_u16(), g.status, "{}", g.name);
+        if let Some(id) = body.get("id").and_then(Value::as_i64) {
+            ids.insert(g.name.clone(), id);
+        }
+        answers.insert(g.name.clone(), body);
+    }
+
+    // Each scan imported the file dropped for it, and the import asked for
+    // the downloads to be refreshed: in the original's list of commands
+    // and in Unarr's, after the scan and queued by nobody (`unspecified`,
+    // where the scheduler's own refresh would say `scheduled`).
+    for (list_name, scan) in [
+        ("command-after-rescan", "RescanMovie"),
+        ("command-after-scan", "DownloadedMoviesScan"),
+    ] {
+        let recorded = goldens
+            .iter()
+            .find(|g| g.name == list_name)
+            .unwrap_or_else(|| panic!("{list_name} is recorded"));
+        for (who, list) in [("the original", &recorded.body), ("Unarr", &answers[list_name])] {
+            let commands: Vec<&Value> = list.as_array().into_iter().flatten().collect();
+            let scanned = commands
+                .iter()
+                .find(|c| c["name"] == scan)
+                .unwrap_or_else(|| panic!("{who} lists no {scan}: {list}"));
+            let refreshed = commands.iter().any(|c| {
+                c["name"] == "RefreshMonitoredDownloads"
+                    && c["trigger"] == "unspecified"
+                    && c["queued"].as_str() >= scanned["queued"].as_str()
+            });
+            assert!(
+                refreshed,
+                "{who} queued no refresh of the downloads after {scan}: {list}"
+            );
+        }
+    }
+
+    // The hub, as the long list's is compared.
+    let problems = signalr_differences(&golden_dir, &goldens, &stretches);
+    assert!(
+        problems.is_empty(),
+        "the hub differs from the original's (golden-hub/signalr.json):\n  {}",
+        problems.join("\n  ")
+    );
+    drop(mock);
+    drop(dirs);
 }
 
 #[tokio::test]

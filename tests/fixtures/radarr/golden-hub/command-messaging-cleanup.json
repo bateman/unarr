@@ -1,0 +1,32 @@
+{
+  "body": {
+    "body": {
+      "isExclusive": false,
+      "isLongRunning": false,
+      "isTypeExclusive": false,
+      "name": "MessagingCleanup",
+      "requiresDiskAccess": false,
+      "sendUpdatesToClient": true,
+      "suppressMessages": true,
+      "trigger": "manual",
+      "updateScheduledTask": true
+    },
+    "commandName": "Messaging Cleanup",
+    "id": 472961,
+    "name": "MessagingCleanup",
+    "priority": "normal",
+    "queued": "2026-11-13T07:48:02Z",
+    "result": "unknown",
+    "sendUpdatesToClient": true,
+    "status": "queued",
+    "trigger": "manual",
+    "updateScheduledTask": true
+  },
+  "recordedAt": "2026-11-13T07:48:02Z",
+  "request": {
+    "body": "bodies/command-messaging-cleanup.json",
+    "method": "POST",
+    "path": "/api/v3/command"
+  },
+  "status": 201
+}

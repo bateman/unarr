@@ -296,11 +296,12 @@ impl AppState {
                             json!({"action": "updated", "resource": crate::routes::command::command_resource(&c)}),
                         );
                         // `CommandController`: once the old commands are
-                        // gone the UI reads the list again. Sonarr's hub
-                        // alone was recorded doing it.
+                        // gone the UI reads the list again. Recorded from
+                        // both hubs, for a clean-up the API asked for: the
+                        // scheduler's own sends no updates, so none comes
+                        // here.
                         if c.name() == "MessagingCleanup"
                             && c.status == unarr_core::commands::CommandStatus::Completed
-                            && state.personality() != Personality::Radarr
                         {
                             state.hub().broadcast("command", json!({"action": "sync"}));
                         }
@@ -313,8 +314,10 @@ impl AppState {
                     Ok(Event::CommandExecuted { name }) => {
                         state.hub().broadcast("system/task", json!({"action": "sync"}));
                         // `QualityDefinitionController`: the list as the
-                        // reset left it. Sonarr's alone was recorded.
-                        if name == "ResetQualityDefinitions" && state.personality() != Personality::Radarr {
+                        // reset left it. Recorded from Sonarr's hub and
+                        // seen on Radarr's, for which the command is not
+                        // there yet.
+                        if name == "ResetQualityDefinitions" {
                             state
                                 .hub()
                                 .broadcast("qualitydefinition", json!({"action": "sync"}));

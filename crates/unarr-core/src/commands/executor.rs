@@ -131,6 +131,14 @@ pub struct Runtime {
 /// `HealthCheckService`'s startup grace: fifteen minutes.
 const HEALTH_GRACE: chrono::Duration = chrono::Duration::minutes(15);
 
+/// Whether a movie file came in among these events
+/// (`MovieFileImportedEvent`).
+fn imports_a_movie(events: &[crate::movies::import::events::MovieImportEvent]) -> bool {
+    events
+        .iter()
+        .any(|e| matches!(e, crate::movies::import::events::MovieImportEvent::Imported(_)))
+}
+
 /// Whether an episode file came in among these events
 /// (`EpisodeImportedEvent`).
 fn imports_an_episode(events: &[ImportEvent]) -> bool {
@@ -1282,6 +1290,7 @@ impl Runtime {
                 Ok((MovieEnvironment::load(conn, now)?, movies))
             })
             .await?;
+        let mut imported = false;
         for movie in movies {
             let (db, env2) = (self.db.clone(), env.clone());
             let (messages, events) = tokio::task::spawn_blocking(move || {
@@ -1300,7 +1309,12 @@ impl Runtime {
             for m in messages {
                 self.progress(id, m);
             }
-            self.emit_movie_import_events(side, events?.into_vec()).await;
+            let events = events?.into_vec();
+            imported |= imports_a_movie(&events);
+            self.emit_movie_import_events(side, events).await;
+        }
+        if imported {
+            self.refresh_downloads_after_import().await;
         }
         Ok(())
     }
@@ -1436,7 +1450,12 @@ impl Runtime {
             results = imported.results;
             let mut events = imported.events;
             events.extend(verify_events);
-            self.emit_movie_import_events(side, events.into_vec()).await;
+            let events = events.into_vec();
+            let imported = imports_a_movie(&events);
+            self.emit_movie_import_events(side, events).await;
+            if imported {
+                self.refresh_downloads_after_import().await;
+            }
         }
         if results
             .iter()
@@ -2298,7 +2317,8 @@ impl Runtime {
         Ok(())
     }
 
-    /// `DownloadMonitoringService.Handle(EpisodeImportedEvent)`: an import
+    /// `DownloadMonitoringService.Handle(EpisodeImportedEvent)`, and
+    /// Radarr's for `MovieFileImportedEvent`: an import
     /// that did not come out of the queue's own processing asks the
     /// clients again, so that a download whose file a scan picked up
     /// leaves the queue now and not with the next minute's refresh. The

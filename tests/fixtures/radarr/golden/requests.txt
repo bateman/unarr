@@ -132,6 +132,19 @@ blocklist GET /api/v3/blocklist?page=1&pageSize=20&sortKey=date&sortDirection=de
 blocklist-page-2 GET /api/v3/blocklist?page=2&pageSize=50&sortKey=sourceTitle&sortDirection=ascending
 blocklist-by-title GET /api/v3/blocklist?page=1&pageSize=10&sortKey=movieMetadata.sortTitle&sortDirection=ascending
 blocklist-movie GET /api/v3/blocklist/movie?movieId=4
+# The UI's filters on the blocklist: the movies, and the protocols as names
+# in any case or numbers, repeated; a value the framework cannot bind is a
+# 400 that names it.
+blocklist-protocol-torrent GET /api/v3/blocklist?page=1&pageSize=5&sortKey=date&sortDirection=descending&protocols=torrent
+blocklist-protocol-number GET /api/v3/blocklist?page=1&pageSize=5&sortKey=date&sortDirection=descending&protocols=1
+blocklist-protocol-both GET /api/v3/blocklist?page=1&pageSize=5&sortKey=date&sortDirection=descending&protocols=usenet&protocols=torrent
+blocklist-protocol-unknown GET /api/v3/blocklist?page=1&pageSize=5&sortKey=date&sortDirection=descending&protocols=unknown
+blocklist-movie-ids GET /api/v3/blocklist?page=1&pageSize=5&sortKey=date&sortDirection=descending&movieIds=4&movieIds=257
+blocklist-protocol-movie GET /api/v3/blocklist?page=1&pageSize=5&sortKey=date&sortDirection=descending&protocols=Torrent&movieIds=105
+blocklist-protocol-invalid GET /api/v3/blocklist?page=1&pageSize=5&sortKey=date&sortDirection=descending&protocols=bogus
+blocklist-protocol-comma GET /api/v3/blocklist?page=1&pageSize=5&sortKey=date&sortDirection=descending&protocols=1,2
+blocklist-protocol-empty GET /api/v3/blocklist?page=1&pageSize=5&sortKey=date&sortDirection=descending&protocols=
+blocklist-movie-ids-invalid GET /api/v3/blocklist?page=1&pageSize=5&sortKey=date&sortDirection=descending&movieIds=x
 calendar GET /api/v3/calendar?start=2026-10-01T00:00:00Z&end=2026-10-31T00:00:00Z&unmonitored=true
 calendar-monitored GET /api/v3/calendar?start=2026-09-01T00:00:00Z&end=2026-09-30T00:00:00Z
 calendar-next GET /api/v3/calendar?start=2026-11-01T00:00:00Z&end=2026-12-31T00:00:00Z&unmonitored=true

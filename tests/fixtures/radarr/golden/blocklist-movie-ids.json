@@ -1,0 +1,705 @@
+{
+  "body": {
+    "page": 1,
+    "pageSize": 5,
+    "records": [
+      {
+        "customFormats": [
+          {
+            "id": 54,
+            "name": "DD"
+          },
+          {
+            "id": 18,
+            "name": "x265 (HD)"
+          },
+          {
+            "id": 56,
+            "name": "x265 (no HDR/DV)"
+          }
+        ],
+        "date": "2026-08-07T10:34:25Z",
+        "id": 80,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-08-06T19:56:06Z",
+          "alternateTitles": [],
+          "certification": "PG-13",
+          "cleanTitle": "bumblebee",
+          "digitalRelease": "2019-03-23T00:00:00Z",
+          "folderName": "/movies/Bumblebee (2018) {tmdb-424783}",
+          "genres": [
+            "Action",
+            "Adventure",
+            "Science Fiction"
+          ],
+          "id": 257,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/fw02ONlDhrYjTSZV8XO6hhU3ds3.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/hMANgfPHR1tRObNp2oPiOi9mMlz.jpg"
+            }
+          ],
+          "imdbId": "tt4701182",
+          "inCinemas": "2018-11-22T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "1980s",
+            "adoring",
+            "based on toy",
+            "duringcreditsstinger",
+            "giant robot",
+            "robot",
+            "spin off",
+            "technology"
+          ],
+          "lastSearchTime": "2026-08-07T10:34:12Z",
+          "minimumAvailability": "released",
+          "monitored": false,
+          "movieFileId": 298,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Bumblebee",
+          "overview": "On the run in the year 1987, Bumblebee finds refuge in a junkyard in a small Californian beach town. Charlie, on the cusp of turning 18 and trying to find her place in the world, discovers Bumblebee, battle-scarred and broken.  When Charlie revives him, she quickly learns this is no ordinary yellow VW bug.",
+          "path": "/movies/Bumblebee (2018) {tmdb-424783}",
+          "physicalRelease": "2019-04-02T00:00:00Z",
+          "popularity": 8.1441,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.7,
+              "votes": 213295
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 66,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 91,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.73,
+              "votes": 6941
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.06154,
+              "votes": 13000
+            }
+          },
+          "releaseDate": "2019-03-23T00:00:00Z",
+          "runtime": 114,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "bumblebee",
+          "status": "released",
+          "studio": "Paramount Pictures",
+          "tags": [
+            1
+          ],
+          "title": "Bumblebee",
+          "titleSlug": "424783",
+          "tmdbId": 424783,
+          "website": "https://www.paramountmovies.com/movies/bumblebee",
+          "year": 2018,
+          "youTubeTrailerId": "lcwmDAYt22k"
+        },
+        "movieId": 257,
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 9,
+            "modifier": "none",
+            "name": "HDTV-1080p",
+            "resolution": 1080,
+            "source": "tv"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "Bumblebee.2018.1080p.H265.ita.eng.AC3.5.1.sub.ita.eng.Licdom"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 54,
+            "name": "DD"
+          },
+          {
+            "id": 55,
+            "name": "HDR"
+          }
+        ],
+        "date": "2026-08-07T10:34:00Z",
+        "id": 79,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-08-06T19:56:06Z",
+          "alternateTitles": [],
+          "certification": "PG-13",
+          "cleanTitle": "bumblebee",
+          "digitalRelease": "2019-03-23T00:00:00Z",
+          "folderName": "/movies/Bumblebee (2018) {tmdb-424783}",
+          "genres": [
+            "Action",
+            "Adventure",
+            "Science Fiction"
+          ],
+          "id": 257,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/fw02ONlDhrYjTSZV8XO6hhU3ds3.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/hMANgfPHR1tRObNp2oPiOi9mMlz.jpg"
+            }
+          ],
+          "imdbId": "tt4701182",
+          "inCinemas": "2018-11-22T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "1980s",
+            "adoring",
+            "based on toy",
+            "duringcreditsstinger",
+            "giant robot",
+            "robot",
+            "spin off",
+            "technology"
+          ],
+          "lastSearchTime": "2026-08-07T10:34:12Z",
+          "minimumAvailability": "released",
+          "monitored": false,
+          "movieFileId": 298,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Bumblebee",
+          "overview": "On the run in the year 1987, Bumblebee finds refuge in a junkyard in a small Californian beach town. Charlie, on the cusp of turning 18 and trying to find her place in the world, discovers Bumblebee, battle-scarred and broken.  When Charlie revives him, she quickly learns this is no ordinary yellow VW bug.",
+          "path": "/movies/Bumblebee (2018) {tmdb-424783}",
+          "physicalRelease": "2019-04-02T00:00:00Z",
+          "popularity": 8.1441,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.7,
+              "votes": 213295
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 66,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 91,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.73,
+              "votes": 6941
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.06154,
+              "votes": 13000
+            }
+          },
+          "releaseDate": "2019-03-23T00:00:00Z",
+          "runtime": 114,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "bumblebee",
+          "status": "released",
+          "studio": "Paramount Pictures",
+          "tags": [
+            1
+          ],
+          "title": "Bumblebee",
+          "titleSlug": "424783",
+          "tmdbId": 424783,
+          "website": "https://www.paramountmovies.com/movies/bumblebee",
+          "year": 2018,
+          "youTubeTrailerId": "lcwmDAYt22k"
+        },
+        "movieId": 257,
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 16,
+            "modifier": "none",
+            "name": "HDTV-2160p",
+            "resolution": 2160,
+            "source": "tv"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "Bumblebee.2018.2160p.H265.10.bit.DV.HDR10ita.eng.AC3.5.1.sub.ita.eng.Licdom"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 54,
+            "name": "DD"
+          }
+        ],
+        "date": "2026-08-07T10:31:50Z",
+        "id": 78,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-08-06T19:56:06Z",
+          "alternateTitles": [],
+          "certification": "PG-13",
+          "cleanTitle": "bumblebee",
+          "digitalRelease": "2019-03-23T00:00:00Z",
+          "folderName": "/movies/Bumblebee (2018) {tmdb-424783}",
+          "genres": [
+            "Action",
+            "Adventure",
+            "Science Fiction"
+          ],
+          "id": 257,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/fw02ONlDhrYjTSZV8XO6hhU3ds3.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/hMANgfPHR1tRObNp2oPiOi9mMlz.jpg"
+            }
+          ],
+          "imdbId": "tt4701182",
+          "inCinemas": "2018-11-22T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "1980s",
+            "adoring",
+            "based on toy",
+            "duringcreditsstinger",
+            "giant robot",
+            "robot",
+            "spin off",
+            "technology"
+          ],
+          "lastSearchTime": "2026-08-07T10:34:12Z",
+          "minimumAvailability": "released",
+          "monitored": false,
+          "movieFileId": 298,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Bumblebee",
+          "overview": "On the run in the year 1987, Bumblebee finds refuge in a junkyard in a small Californian beach town. Charlie, on the cusp of turning 18 and trying to find her place in the world, discovers Bumblebee, battle-scarred and broken.  When Charlie revives him, she quickly learns this is no ordinary yellow VW bug.",
+          "path": "/movies/Bumblebee (2018) {tmdb-424783}",
+          "physicalRelease": "2019-04-02T00:00:00Z",
+          "popularity": 8.1441,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.7,
+              "votes": 213295
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 66,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 91,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.73,
+              "votes": 6941
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.06154,
+              "votes": 13000
+            }
+          },
+          "releaseDate": "2019-03-23T00:00:00Z",
+          "runtime": 114,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "bumblebee",
+          "status": "released",
+          "studio": "Paramount Pictures",
+          "tags": [
+            1
+          ],
+          "title": "Bumblebee",
+          "titleSlug": "424783",
+          "tmdbId": 424783,
+          "website": "https://www.paramountmovies.com/movies/bumblebee",
+          "year": 2018,
+          "youTubeTrailerId": "lcwmDAYt22k"
+        },
+        "movieId": 257,
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "Bumblebee.2018.iTA.ENG.AC3.SUB.iTA.ENG.BluRay.1080p.x264.jeddak-MIRCrew"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 54,
+            "name": "DD"
+          }
+        ],
+        "date": "2026-08-07T10:31:30Z",
+        "id": 77,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-08-06T19:56:06Z",
+          "alternateTitles": [],
+          "certification": "PG-13",
+          "cleanTitle": "bumblebee",
+          "digitalRelease": "2019-03-23T00:00:00Z",
+          "folderName": "/movies/Bumblebee (2018) {tmdb-424783}",
+          "genres": [
+            "Action",
+            "Adventure",
+            "Science Fiction"
+          ],
+          "id": 257,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/fw02ONlDhrYjTSZV8XO6hhU3ds3.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/hMANgfPHR1tRObNp2oPiOi9mMlz.jpg"
+            }
+          ],
+          "imdbId": "tt4701182",
+          "inCinemas": "2018-11-22T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "1980s",
+            "adoring",
+            "based on toy",
+            "duringcreditsstinger",
+            "giant robot",
+            "robot",
+            "spin off",
+            "technology"
+          ],
+          "lastSearchTime": "2026-08-07T10:34:12Z",
+          "minimumAvailability": "released",
+          "monitored": false,
+          "movieFileId": 298,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Bumblebee",
+          "overview": "On the run in the year 1987, Bumblebee finds refuge in a junkyard in a small Californian beach town. Charlie, on the cusp of turning 18 and trying to find her place in the world, discovers Bumblebee, battle-scarred and broken.  When Charlie revives him, she quickly learns this is no ordinary yellow VW bug.",
+          "path": "/movies/Bumblebee (2018) {tmdb-424783}",
+          "physicalRelease": "2019-04-02T00:00:00Z",
+          "popularity": 8.1441,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.7,
+              "votes": 213295
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 66,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 91,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.73,
+              "votes": 6941
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.06154,
+              "votes": 13000
+            }
+          },
+          "releaseDate": "2019-03-23T00:00:00Z",
+          "runtime": 114,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "bumblebee",
+          "status": "released",
+          "studio": "Paramount Pictures",
+          "tags": [
+            1
+          ],
+          "title": "Bumblebee",
+          "titleSlug": "424783",
+          "tmdbId": 424783,
+          "website": "https://www.paramountmovies.com/movies/bumblebee",
+          "year": 2018,
+          "youTubeTrailerId": "lcwmDAYt22k"
+        },
+        "movieId": 257,
+        "protocol": "usenet",
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "Bumblebee.2018.iTA.ENG.AC3.SUB.iTA.ENG.BluRay.1080p.x264.jeddak-MIRCrew"
+      },
+      {
+        "customFormats": [
+          {
+            "id": 54,
+            "name": "DD"
+          },
+          {
+            "id": 13,
+            "name": "LQ (Release Title)"
+          }
+        ],
+        "date": "2026-08-07T10:24:13Z",
+        "id": 76,
+        "indexer": "Indexer",
+        "languages": [
+          {
+            "id": 26,
+            "name": "Hindi"
+          },
+          {
+            "id": 37,
+            "name": "Spanish (Latino)"
+          },
+          {
+            "id": 1,
+            "name": "English"
+          },
+          {
+            "id": 5,
+            "name": "Italian"
+          },
+          {
+            "id": 2,
+            "name": "French"
+          }
+        ],
+        "message": "redacted",
+        "movie": {
+          "added": "2026-08-06T19:56:06Z",
+          "alternateTitles": [],
+          "certification": "PG-13",
+          "cleanTitle": "bumblebee",
+          "digitalRelease": "2019-03-23T00:00:00Z",
+          "folderName": "/movies/Bumblebee (2018) {tmdb-424783}",
+          "genres": [
+            "Action",
+            "Adventure",
+            "Science Fiction"
+          ],
+          "id": 257,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/fw02ONlDhrYjTSZV8XO6hhU3ds3.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/hMANgfPHR1tRObNp2oPiOi9mMlz.jpg"
+            }
+          ],
+          "imdbId": "tt4701182",
+          "inCinemas": "2018-11-22T00:00:00Z",
+          "isAvailable": true,
+          "keywords": [
+            "1980s",
+            "adoring",
+            "based on toy",
+            "duringcreditsstinger",
+            "giant robot",
+            "robot",
+            "spin off",
+            "technology"
+          ],
+          "lastSearchTime": "2026-08-07T10:34:12Z",
+          "minimumAvailability": "released",
+          "monitored": false,
+          "movieFileId": 298,
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "originalTitle": "Bumblebee",
+          "overview": "On the run in the year 1987, Bumblebee finds refuge in a junkyard in a small Californian beach town. Charlie, on the cusp of turning 18 and trying to find her place in the world, discovers Bumblebee, battle-scarred and broken.  When Charlie revives him, she quickly learns this is no ordinary yellow VW bug.",
+          "path": "/movies/Bumblebee (2018) {tmdb-424783}",
+          "physicalRelease": "2019-04-02T00:00:00Z",
+          "popularity": 8.1441,
+          "qualityProfileId": 11,
+          "ratings": {
+            "imdb": {
+              "type": "user",
+              "value": 6.7,
+              "votes": 213295
+            },
+            "metacritic": {
+              "type": "user",
+              "value": 66,
+              "votes": 0
+            },
+            "rottenTomatoes": {
+              "type": "user",
+              "value": 91,
+              "votes": 0
+            },
+            "tmdb": {
+              "type": "user",
+              "value": 6.73,
+              "votes": 6941
+            },
+            "trakt": {
+              "type": "user",
+              "value": 7.06154,
+              "votes": 13000
+            }
+          },
+          "releaseDate": "2019-03-23T00:00:00Z",
+          "runtime": 114,
+          "secondaryYearSourceId": 0,
+          "sortTitle": "bumblebee",
+          "status": "released",
+          "studio": "Paramount Pictures",
+          "tags": [
+            1
+          ],
+          "title": "Bumblebee",
+          "titleSlug": "424783",
+          "tmdbId": 424783,
+          "website": "https://www.paramountmovies.com/movies/bumblebee",
+          "year": 2018,
+          "youTubeTrailerId": "lcwmDAYt22k"
+        },
+        "movieId": 257,
+        "protocol": "torrent",
+        "quality": {
+          "quality": {
+            "id": 7,
+            "modifier": "none",
+            "name": "Bluray-1080p",
+            "resolution": 1080,
+            "source": "bluray"
+          },
+          "revision": {
+            "isRepack": false,
+            "real": 0,
+            "version": 1
+          }
+        },
+        "sourceTitle": "Bumblebee.2018.1080p.BluRay.ENG.LATINO.HINDI.ITA.FRE.DD.5.1.H264-BEN.THE.MEN"
+      }
+    ],
+    "sortDirection": "descending",
+    "sortKey": "date",
+    "totalRecords": 14
+  },
+  "recordedAt": "2026-11-13T07:42:47Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/blocklist?page=1&pageSize=5&sortKey=date&sortDirection=descending&movieIds=4&movieIds=257"
+  },
+  "status": 200
+}
