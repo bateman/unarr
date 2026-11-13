@@ -1830,6 +1830,21 @@ the same libraries were not measured.
   script's ICU check that can pass without ICU and its port variable
   that does not move the copy, and its queue status over SignalR, which
   leaves the pending releases out.
+- Radarr, from 4d. The settings pages were not driven with a browser in
+  this milestone: what each page writes is a golden, the page itself is
+  not. The Discover page's recommendations, trending and popular lists
+  are not fetched, and a paging parameter that is not a number is
+  ignored where the originals refuse the request
+  (`docs/audit/8-radarr.md`). A full `RefreshMovie` of every movie is not
+  in the goldens, and the metadata row of a movie the library holds is
+  deliberately kept when its collection drops it. Auto tagging does not
+  apply its tags on a refresh or an edit, as the original's
+  `UpdateTags` does; the recycling bin and system folder validators are
+  not ported for movie paths; `ProxyCheck` uses the process-wide client,
+  which is Sonarr's. The metadata consumers write no files, as the phase
+  says. Of the Discover page only the listing and the add are served.
+  The homelab run is the maintainer's, after this milestone; the panic
+  decision (`docs/audit/7-triage.md`, row 1.13) waits for it.
 - Radarr, from 4c. The memory target is met idle and exceeded at work;
   by the maintainer's decision it is a recorded miss, deferred with the
   others (section 9). The eviction
@@ -1838,18 +1853,21 @@ the same libraries were not measured.
   place of the metadata
   consumers among the extras, inferred from the source. The image was not
   built, so its figure is the static musl binary's. `RefreshMovie`
-  does nothing. The homelab run for Radarr is left to the end of 4d.
-- The maintainer's Recyclarr configuration for Radarr is in the tree
-  (`tests/fixtures/recyclarr/radarr.yml`) and nothing runs with it yet:
-  4d records the exchange between the real Recyclarr and the real Radarr
-  from it, as phase 3b did for Sonarr. It syncs two guide profiles, six
-  named ones, the MULTi format, the `plex-tmdb` naming and the propers
-  setting, all of which the fixture already shows as synced; the
-  "UHD Bluray + WEB - ITA" profile and the "Language not Italian" format
-  are the maintainer's own, made in the UI, so `delete_old_custom_formats`
-  must leave the latter alone, as the real Recyclarr does for formats it
-  did not create. The import list in use is the IMDb watchlist
-  (`IMDbListImport`), the one 4d drives.
+  does nothing (it does since 4d). The homelab run for Radarr is left to
+  the end of 4d.
+- The maintainer's Recyclarr configuration for Radarr
+  (`tests/fixtures/recyclarr/radarr.yml`) runs since 4d: the exchange
+  between Recyclarr 8.8.1 and the real Radarr is recorded
+  (`radarr-exchange.json`) and the real Recyclarr, run against Unarr,
+  sends the same requests and prints the same output. It syncs two guide
+  profiles, six named ones, the MULTi format, the `plex-tmdb` naming and
+  the propers setting; the "UHD Bluray + WEB - ITA" profile and the
+  "Language not Italian" format are the maintainer's own, made in the UI,
+  and `delete_old_custom_formats` leaves the latter alone, as the
+  recording shows the original doing. The import list in use is the IMDb
+  watchlist (`IMDbListImport`), which 4d drives against a mock; the
+  recordings say nothing about the real watchlist, whose id the fixture
+  redacts.
 - Media info schema revisions. The probe is one for both applications
   and stamps Sonarr's revision (11); Radarr's is 14, and the rows that
   come from its database say so. A file Unarr probed for Radarr would be
