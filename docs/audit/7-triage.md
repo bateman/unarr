@@ -9,10 +9,11 @@ than present or same, read against `main` at `0a61101`, Sonarr personality
 and the layer both personalities share. Report 5 (the UI in a browser) had
 no finding.
 
-Updated the same day, after fifteen of the open and partial rows were
-settled (items 1, 2, 4, 5, 7 and 11 of the list below; fourteen closed,
-one a decision to differ): the rows say so with the code, and the golden
-or the test, that settled them, and the counts are the new ones. Each was recorded from Sonarr 4.0.20, or
+Updated twice since, after twenty of the open and partial rows were
+settled (items 1 to 5, 7 and 11 of the list below; eighteen closed, one a
+decision to differ, one that turned out to describe nothing the original
+does): the rows say so with the code, and the golden or the test, that
+settled them, and the counts are the new ones. Each was recorded from Sonarr 4.0.20, or
 tried on it, first; "What was closed afterwards" says how.
 
 ## Result
@@ -21,13 +22,13 @@ tried on it, first; "What was closed afterwards" says how.
 |--------|------|--------|------|---------|------------|----------------|
 | 1. Settings | 18 | 11 | 4 | 1 | 0 | 2 |
 | 2. HTTP | 58 | 21 | 27 | 6 | 3 | 1 |
-| 3 and 4. Routes and UI calls | 78 | 36 | 29 | 2 | 2 | 9 |
-| 6. Events, commands, housekeeping | 39 | 29 | 6 | 1 | 2 | 1 |
-| Together | 193 | 97 | 66 | 10 | 7 | 13 |
+| 3 and 4. Routes and UI calls | 78 | 39 | 25 | 2 | 2 | 10 |
+| 6. Events, commands, housekeeping | 39 | 30 | 5 | 1 | 2 | 1 |
+| Together | 193 | 101 | 61 | 10 | 7 | 14 |
 
 Before the update: 83 closed, 78 open, 13 partial, 6 deliberate. Some gaps
 are counted in two reports (the SignalR transports, the file dates), so the
-distinct open items are about seventy. States: **closed**, does what the report says the original
+distinct open items are some sixty-five. States: **closed**, does what the report says the original
 does; **open**; **partial**; **deliberate**, a recorded decision to differ;
 **not applicable**, nothing to port.
 
@@ -51,15 +52,9 @@ Would show in ordinary use:
    `CheckOn`). Closed.
 2. ~~The web app manifest is served with its placeholders~~ (4.5, 4.6).
    Closed.
-3. **Open pages do not repaint on a grab**: SignalR `calendar`,
-   `wanted/missing`, `wanted/cutoff`, and `episode` with `grabbed=true`.
-   Small in code; `docs/DESIGN.md` section 18 ties any change to Sonarr's
-   hub to recording it from the original first. That no longer means
-   recording the long list again: `tests/fixtures/sonarr/golden-hub` is a
-   list of its own with the hub listened to, and a grab added to it
-   records these. The same recording shows two more the hub sends and
-   Unarr does not: `health` after every run of the checks, and `command`
-   sync after a `MessagingCleanup`.
+3. ~~Open pages do not repaint on a grab~~: `episode` with
+   `grabbed=true`, `wanted/missing`, `wanted/cutoff`. Closed; there is no
+   `calendar` message to send.
 4. ~~The blocklist's Protocol filter shows every row~~. Closed.
 5. ~~A queue item imported by a rescan or a drop-folder scan lingers~~.
    Closed.
@@ -145,16 +140,56 @@ how), which the long list did not have to be recorded again for.
   the original sends `tag` sync and no resource; `rootfolder` only when
   one is added; `qualitydefinition` only after the reset, not after a
   save of the definitions.
+- **The pages that list episodes.** `<hub>/signalr.json`, with a grab,
+  an import and an episode file deleted in the list. An episode goes out
+  under three names, `episode`, `wanted/missing` and `wanted/cutoff`:
+  bare and marked as grabbed after a grab, with its series, file and
+  images after an import or a deletion. Against the row: the original has
+  no `calendar` message; the calendar's controller names its resource
+  `episode`, so the original sends that one twice, and Unarr once. The
+  recording also showed that a release sent through the API queues a
+  refresh of the downloads, as one sent by a command does; Unarr's did
+  not.
+- **`health` and `command` on the hub.** Same recording: `health` sync
+  after every run of the checks, changed verdict or not, and `command`
+  sync once a `MessagingCleanup` the API asked for has completed.
 - **The body limit.** Sonarr answered 202 to a `PUT` of 120 MiB. Unarr
   takes 64 MiB once the key is good, the ceiling it already had on what it
   reads from indexers and clients; no limit at all would let one request
   end the process every personality runs in.
 
-Found on the way and left, with no row of their own: with a proxy whose
-name does not resolve the original's `ProxyCheck` throws and the whole run
-ends without a verdict, where Unarr reports "Failed to resolve the IP
-Address"; a check that throws (`UpdateCheck` without a network, for one)
-silently ends the original's run with it.
+Found on the way, with no row of their own. With a proxy whose name
+does not resolve the original's `ProxyCheck` throws, and the whole run of
+the checks ends with it, without a verdict and without a word on the hub
+(so does any check that throws: `UpdateCheck` without a network, for one).
+Unarr reports "Failed to resolve the IP Address for the Configured Proxy
+Host", the message the original has for the case and never reaches: kept,
+as a decision (`docs/DESIGN.md` section 18). And `GET /blocklist` takes
+`seriesIds=x` for no filter where the framework would answer 400: not
+recorded for Sonarr, left.
+
+The same gaps on Radarr's side, which the triage did not cover, closed
+with them where there was something to close
+(`tests/fixtures/radarr/golden`, and a `golden-hub` of Radarr's own):
+
+- `GET /blocklist` read neither `movieIds` nor `protocols`: both are read
+  now (`api/routes/radarr/activity.rs:211`, `core/movies/store.rs:1092`;
+  ten goldens `blocklist-protocol-*`, `blocklist-movie-ids*`).
+- `RescanMovie` and `DownloadedMoviesScan` queue the refresh of the
+  downloads when they import (`core/commands/executor.rs:136`; test
+  `api/tests/contract_radarr.rs:865`).
+- `command` sync after a `MessagingCleanup`; `health` and `system/task`
+  were already as recorded.
+- The manifest and the body limit are the shared layer's and were closed
+  for both.
+- Nothing to close yet: Radarr has no writes of settings, root folders,
+  remote path mappings, import lists, tags or quality definitions, no
+  movie delete or move, and no `ResetQualityDefinitions`, so the health
+  checks after a save and the hub's `tag`, `rootfolder` and
+  `qualitydefinition` wait for the milestone that adds them. The original
+  does there what Sonarr does: its `CheckOn` attributes are the same but
+  for the events' names, and its hub was seen to say `qualitydefinition`
+  sync after the reset.
 
 ## Documentation the triage found stale
 
@@ -252,8 +287,8 @@ What the triage found against the report and the README:
 
 ## Routes and UI calls (`3-4-routes.md`)
 
-78 rows were MISSING, PARTIAL, IGNORED or UNSURE: 36 closed, 29 open, 2
-partial, 2 deliberate, 9 not applicable. Static: nothing was run. `mod.rs`
+78 rows were MISSING, PARTIAL, IGNORED or UNSURE: 39 closed, 25 open, 2
+partial, 2 deliberate, 10 not applicable. Static: nothing was run. `mod.rs`
 is `crates/unarr-api/src/routes/mod.rs` (Sonarr's list is
 `sonarr_api_router`); the other files are under `crates/unarr-api/src/` and
 its `routes/`; `core/` is `crates/unarr-core/src/`; golden names are lines of
@@ -297,11 +332,12 @@ declared, 404 and 405 are what the router gives by construction.
 | B | restart, shutdown, `series/import`, `history/failed/{id}`, blocklist delete and bulk, exclusions bulk, `PUT metadata/{id}` | CLOSED (8) | as Table A | UI |
 | B | `GET /delayprofile/schema` | NOT APPLICABLE | dead UI code; the original has no such route | nobody |
 | B | the iCal link's parameters | CLOSED | `feed.rs:159` reads `unmonitored`, `premieresOnly`, `asAllDay`, `tags`, `pastDays`, `futureDays` | UI, calendar apps |
-| B | SignalR `calendar`, `wanted/missing`, `wanted/cutoff` updated | OPEN (3) | `relay.rs` sends `episodefile`, `episode`, `series` only | UI: the open page does not repaint on a grab |
+| B | SignalR `wanted/missing`, `wanted/cutoff` updated | CLOSED (2) | `relay.rs:75`, `:79`: after a grab, an import and a file deleted, as `episode`; `golden-hub/signalr.json`, test `tests/contract.rs:1650` | UI, Wanted |
+| B | SignalR `calendar` updated | NOT APPLICABLE | the original sends no such message: the calendar's controller names its resource `episode` (same recording) | nothing |
 | B | SignalR `tag` sync | CLOSED | `settings_writes.rs:1073`, after a tag or an auto tagging rule is added, changed or removed; `golden-hub/signalr.json`, test `tests/contract.rs:1616` | UI, second tab |
 | B | SignalR `rootfolder`, `qualitydefinition` | CLOSED (2) | `settings_writes.rs:1237` (`created`; the original sends nothing for a removal), `state.rs:302` (`sync` after `ResetQualityDefinitions`; the original sends nothing after a save); same recording and test | UI, second tab |
 | B | SignalR `system/task` sync | CLOSED | `core/commands/executor.rs:760`, `state.rs:302`: after every command, for Sonarr as for Radarr; same recording and test | UI, System > Tasks |
-| B | SignalR `command` sync | OPEN | `state.rs:293` sends `updated` only; the recording shows `sync` after `MessagingCleanup` | nothing visible |
+| B | SignalR `command` sync | CLOSED | `state.rs:306`, once a `MessagingCleanup` the API asked for has completed; same recording and test | nothing visible |
 | B | SignalR `metadata` updated | CLOSED | `providers.rs:408` | UI, second tab |
 | B | commands `ClearLog`, `DeleteLogFiles`, `ResetQualityDefinitions`, `ResetApiKey` | CLOSED (4) | `core/commands/mod.rs:712-718`, `executor.rs:911-934`, `state.rs:535-553`; goldens for the first three, none for `ResetApiKey` | UI buttons |
 | B | `GET /config/naming/examples` with the pending form | CLOSED | `settings.rs:155`; goldens `config-naming-examples-form`, `-invalid`, `-no-id` | UI, naming examples while typing |
@@ -324,7 +360,7 @@ What the triage found against the report and the README:
 
 ## Events, commands, housekeeping (`6-events.md`)
 
-39 rows were MISSING, PARTIAL or UNSURE: 29 closed, 6 open, 1 partial, 2
+39 rows were MISSING, PARTIAL or UNSURE: 30 closed, 5 open, 1 partial, 2
 deliberate, 1 not applicable. Static. `core/` is `crates/unarr-core/src/`,
 `api/` is `crates/unarr-api/src/`, `import/` is `crates/unarr-import/src/`.
 The line numbers inside the report itself are stale; these are current.
@@ -340,7 +376,7 @@ The line numbers inside the report itself are stale; these are current.
 | (a) config file saved: logging | saved log level not applied | low | CLOSED | `settings_writes.rs:1004`, `unarrd/src/main.rs:765`; `RUST_LOG`, when set, still decides | |
 | (a) config saved: authorisation | re-read not traced | unsure | CLOSED | `api/ui.rs:476` reads the settings on every request | |
 | (a) custom format deleted | scores not reset | medium | CLOSED | `settings_writes.rs:2052` | |
-| (a) episode grabbed | no `episode` with `grabbed=true` | low | OPEN | no `grabbed` in Sonarr's routes; deferred with the hub recording | the row flips to "downloading" when the queue details arrive |
+| (a) episode grabbed | no `episode` with `grabbed=true` | low | CLOSED | `core/downloads/grab.rs:161`, `api/relay.rs:79`; `golden-hub/signalr.json`, test `api/tests/contract.rs:1650` | |
 | (a) episode imported: client refresh | an import outside the queue asks no client | low | CLOSED | `executor.rs:2301`, after a rescan (`:2290`) and a drop-folder import (`:2385`) that brought a file in; `golden-hub/command-after-rescan`, `command-after-downloaded-scan`, test `api/tests/contract.rs:1616` | |
 | (a) health `CheckOn` triggers | checks re-run on some events only | low-medium | CLOSED | `core/health.rs:250` (the sets), `api/state.rs:347`, `settings_writes.rs:159`, `:1233`, `:1313`, `:1332`, `importlist_writes.rs:290`, `executor.rs:2156`, `:2216`; tests `core/health.rs:1276`, `api/tests/contract.rs:1397` | the checks Unarr does not have are not run: `RemovedSeriesCheck`, `ImportListStatusCheck`, `ApiKeyValidationCheck` |
 | (a) root folder changed | no SignalR `rootfolder` | low | CLOSED | `settings_writes.rs:1237`: `created`; the original sends nothing for a removal; `golden-hub/signalr.json`, same test | |

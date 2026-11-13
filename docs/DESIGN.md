@@ -1804,15 +1804,23 @@ the same libraries were not measured.
 - SignalR. Radarr's hub is recorded from the original and compared
   (section 17). Sonarr's is recorded for a list of its own
   (`tests/fixtures/sonarr/golden-hub`, with `GOLDEN_SIGNALR=1`), not for
-  the long one: the tags, the root folders, the quality definitions and
-  the tasks after a command follow that recording and are compared with
-  it. What the Radarr recording corrected and is still as it was for
-  Sonarr: an episode grabbed is not announced, the health is announced
-  only when a verdict changes (the recording shows it after every run).
-  A change to either starts from a step added to that list and recorded,
-  which no longer means recording the long list again. `series` and
-  `episode` messages follow the refresh, the adds and the edits since 3b. The UI's pages were driven in a browser; no client
-  other than the UI listens.
+  the long one: the tags, the root folders, the quality definitions, the
+  tasks and the commands, the health after every run, and an episode
+  grabbed, imported or left without its file follow that recording and
+  are compared with it. Radarr has such a list too
+  (`tests/fixtures/radarr/golden-hub`), for what its long list does not
+  show. A change to either hub starts from a step added to one of these
+  and recorded, which does not mean recording a long list again. Known
+  and left: the originals send an episode's message twice under `episode`
+  (the calendar's controller shares the name), Unarr once. The UI's pages
+  were driven in a browser; no client other than the UI listens.
+- `ProxyCheck` and a proxy whose name does not resolve. The original's
+  check throws on it and the run of the checks ends there, with no
+  verdict for any of them; the message it has for the case ("Failed to
+  resolve the IP Address for the Configured Proxy Host") is never
+  reached. Unarr gives that message and lets the other checks finish: a
+  decision to differ, found while the health checks after a save were
+  tried on the original.
 - The collation approximates ICU for ASCII names. Titles with accented or
   non-Latin characters may sort differently from the originals; a full UCA
   implementation is not worth its size until a golden shows the difference.

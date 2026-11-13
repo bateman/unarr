@@ -17,7 +17,7 @@ that source.
 | 4. Requests the web UI makes | [3-4-routes.md](3-4-routes.md), table B | 242 calls | 23 missing, 3 parameters ignored |
 | 5. The UI at several screen densities | [5-browser.md](5-browser.md) | 36 pages on 5 screens | none |
 | 6. Event handlers, commands, housekeeping | [6-events.md](6-events.md) | 214 entries | 29 missing, 6 partial, none high |
-| 7. Where each row stands now | [7-triage.md](7-triage.md) | 193 rows of reports 1, 2, 3, 4 and 6 | 66 open, 10 partial |
+| 7. Where each row stands now | [7-triage.md](7-triage.md) | 193 rows of reports 1, 2, 3, 4 and 6 | 61 open, 10 partial |
 
 The search, grab, import and delete chains are complete. The gaps are at
 the edges.
@@ -142,11 +142,13 @@ closed, 78 open and 13 partial. "The low ones" was not the whole of it: nine
 findings the reports rated medium were never in the numbered list above and
 were open or partial.
 
-Six of the items the triage put first were closed after it, each against
-the original (goldens, and a second request list recorded with the hub
-listened to, `tests/fixtures/sonarr/golden-hub`): the health checks after
-a save, the web app manifest, the blocklist's Protocol filter, the refresh
-of the downloads after a scan imports, the SignalR messages for tags, root
-folders, quality definitions and tasks, and the body limit. The rows now
-stand at 97 closed, 66 open, 10 partial, 7 deliberate and 13 not
-applicable; the triage says which and how.
+Seven of the items the triage put first were closed after it, each
+against the original (goldens, and a second request list recorded with the
+hub listened to, `tests/fixtures/sonarr/golden-hub`): the health checks
+after a save, the web app manifest, the pages that list episodes told of a
+grab, the blocklist's Protocol filter, the refresh of the downloads after
+a scan imports, the SignalR messages for tags, root folders, quality
+definitions, tasks, commands and health, and the body limit. The rows now
+stand at 101 closed, 61 open, 10 partial, 7 deliberate and 14 not
+applicable; the triage says which and how, and what of the same was
+closed on Radarr's side.
