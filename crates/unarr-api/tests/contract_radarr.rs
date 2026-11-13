@@ -1339,6 +1339,9 @@ fn library_mode(name: &str) -> Mode {
         | "qualityprofile-delete-used"
         | "exclusion-update-missing"
         | "collection-put-missing" => Mode::Exact(&["description"]),
+        // The message names the user the process runs as: root where the
+        // recording was taken, another on a CI runner.
+        "config-mediamanagement-put-bin-missing" => Mode::Exact(&["errorMessage", "user"]),
         // A model binding error names the request it refused.
         "config-metadata-put-country" => Mode::Exact(&["traceId"]),
         // The disk the recording ran on.
