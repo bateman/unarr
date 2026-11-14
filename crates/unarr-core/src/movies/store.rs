@@ -184,6 +184,16 @@ pub fn list_movies(conn: &Connection) -> anyhow::Result<Vec<Movie>> {
     query_movies(conn, "1 = 1", &[])
 }
 
+/// A bound for a text comparison with the stored dates: `format_utc`
+/// writes a year past 9999 as `+10000`, which sorts before `0000`, so the
+/// bound is first brought within the four-digit years. No stored date lies
+/// outside them, so the comparison keeps the same movies.
+fn sql_bound(t: DateTime<Utc>) -> String {
+    let lowest = DateTime::<Utc>::from_timestamp(-62_167_219_200, 0).unwrap_or(t); // 0000-01-01T00:00:00Z
+    let highest = DateTime::<Utc>::from_timestamp(253_402_300_799, 0).unwrap_or(t); // 9999-12-31T23:59:59Z
+    crate::time::format_utc(t.clamp(lowest, highest))
+}
+
 /// `MovieRepository.MoviesBetweenDates`: the movies with a cinema,
 /// physical or digital release in `[start, end]`, in id order, only the
 /// monitored ones unless `include_unmonitored`. The dates are stored in
@@ -195,8 +205,12 @@ pub fn movies_released_between(
     end: DateTime<Utc>,
     include_unmonitored: bool,
 ) -> anyhow::Result<Vec<Movie>> {
-    let (start, end) = (crate::time::format_utc(start), crate::time::format_utc(end));
-    let monitored = if include_unmonitored { "" } else { " AND m.monitored = 1" };
+    let (start, end) = (sql_bound(start), sql_bound(end));
+    let monitored = if include_unmonitored {
+        ""
+    } else {
+        " AND m.monitored = 1"
+    };
     query_movies(
         conn,
         &format!(
@@ -206,6 +220,59 @@ pub fn movies_released_between(
         ),
         &[&start, &end],
     )
+}
+
+/// What the wanted lists filter and sort on, read without the rest of a
+/// movie (the metadata's JSON columns, the file's media info).
+#[derive(Debug, Clone, PartialEq)]
+pub struct WantedRow {
+    pub id: i64,
+    pub quality_profile_id: i64,
+    /// The quality of the movie's file, when the file it names exists.
+    pub file_quality_id: Option<i64>,
+    pub year: i64,
+    pub sort_title: Option<String>,
+    pub in_cinemas: Option<DateTime<Utc>>,
+    pub digital_release: Option<DateTime<Utc>>,
+    pub physical_release: Option<DateTime<Utc>>,
+    pub added: Option<DateTime<Utc>>,
+    pub last_search_time: Option<DateTime<Utc>>,
+}
+
+/// The candidates of the wanted lists, monitored or not as asked, in id
+/// order: without `with_file`, those of `GET /wanted/missing` (no file and
+/// a year); with it, those of `GET /wanted/cutoff` (a file that exists),
+/// whose cutoff the caller checks against the profiles.
+pub fn wanted_rows(conn: &Connection, monitored: bool, with_file: bool) -> anyhow::Result<Vec<WantedRow>> {
+    let filter = if with_file {
+        "mf.id IS NOT NULL"
+    } else {
+        "m.movie_file_id = 0 AND md.year > 0"
+    };
+    let mut stmt = conn.prepare(&format!(
+        "SELECT m.id, m.quality_profile_id, mf.quality_id, md.year, md.sort_title, md.in_cinemas,
+                md.digital_release, md.physical_release, m.added, m.last_search_time
+         FROM movies m JOIN movie_metadata md ON md.id = m.movie_metadata_id
+         LEFT JOIN movie_files mf ON mf.id = m.movie_file_id
+         WHERE m.monitored = ?1 AND {filter} ORDER BY m.id"
+    ))?;
+    let mut rows = stmt.query([monitored])?;
+    let mut out = Vec::new();
+    while let Some(r) = rows.next()? {
+        out.push(WantedRow {
+            id: r.get(0)?,
+            quality_profile_id: r.get(1)?,
+            file_quality_id: r.get(2)?,
+            year: r.get(3)?,
+            sort_title: r.get(4)?,
+            in_cinemas: parse_ts(r.get(5)?)?,
+            digital_release: parse_ts(r.get(6)?)?,
+            physical_release: parse_ts(r.get(7)?)?,
+            added: parse_ts(r.get(8)?)?,
+            last_search_time: parse_ts(r.get(9)?)?,
+        });
+    }
+    Ok(out)
 }
 
 pub fn get_movie(conn: &Connection, id: i64) -> anyhow::Result<Option<Movie>> {
@@ -635,7 +702,10 @@ pub fn list_alternative_titles(conn: &Connection) -> anyhow::Result<Vec<Alternat
 }
 
 /// The alternative titles of these metadata rows, in id order.
-pub fn alternative_titles_for(conn: &Connection, movie_metadata_ids: &[i64]) -> anyhow::Result<Vec<AlternativeTitle>> {
+pub fn alternative_titles_for(
+    conn: &Connection,
+    movie_metadata_ids: &[i64],
+) -> anyhow::Result<Vec<AlternativeTitle>> {
     let ids = serde_json::to_string(movie_metadata_ids)?;
     query_alternative_titles(
         conn,
@@ -1926,4 +1996,97 @@ pub fn delete_movie_cascade(conn: &Connection, movie: &Movie) -> anyhow::Result<
 pub fn add_import_exclusion(conn: &Connection, e: &mut ImportExclusion) -> anyhow::Result<()> {
     e.id = crate::store::sequence::next_id(conn, "import_exclusions")?;
     insert_import_exclusion(conn, e)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::db::Db;
+    use crate::movies::decision::testing;
+    use crate::Personality;
+
+    fn at(s: &str) -> DateTime<Utc> {
+        crate::time::parse_utc(s).unwrap()
+    }
+
+    fn add(conn: &Connection, movie: &Movie) {
+        insert_metadata(conn, &movie.metadata).unwrap();
+        insert_movie(conn, movie).unwrap();
+    }
+
+    fn ids(movies: &[Movie]) -> Vec<i64> {
+        movies.iter().map(|m| m.id).collect()
+    }
+
+    #[test]
+    fn movies_released_between_reads_each_date_with_both_bounds_included() {
+        let db = Db::open_in_memory_for(Personality::Radarr).unwrap();
+        db.call_blocking(|conn| {
+            let mut cinema = testing::movie(1, "Cinema", 2026);
+            cinema.metadata.in_cinemas = Some(at("2026-11-10T00:00:00Z"));
+            let mut digital = testing::movie(2, "Digital On The End", 2026);
+            digital.metadata.digital_release = Some(at("2026-11-30T00:00:00Z"));
+            let mut physical = testing::movie(3, "Physical Before", 2026);
+            physical.metadata.physical_release = Some(at("2026-10-31T23:59:59Z"));
+            let undated = testing::movie(4, "Undated", 2026);
+            let mut unmonitored = testing::movie(5, "Unmonitored", 2026);
+            unmonitored.metadata.physical_release = Some(at("2026-11-01T00:00:00Z"));
+            unmonitored.monitored = false;
+            for m in [&cinema, &digital, &physical, &undated, &unmonitored] {
+                add(conn, m);
+            }
+            let (start, end) = (at("2026-11-01T00:00:00Z"), at("2026-11-30T00:00:00Z"));
+            assert_eq!(ids(&movies_released_between(conn, start, end, false)?), [1, 2]);
+            assert_eq!(ids(&movies_released_between(conn, start, end, true)?), [1, 2, 5]);
+            // Bounds past the four-digit years still compare as times.
+            let far = start + chrono::Duration::days(3_000_000);
+            let before = start - chrono::Duration::days(3_000_000);
+            assert_eq!(ids(&movies_released_between(conn, start, far, true)?), [1, 2, 5]);
+            assert_eq!(
+                ids(&movies_released_between(conn, before, far, true)?),
+                [1, 2, 3, 5]
+            );
+            assert!(movies_released_between(conn, end, start, true)?.is_empty());
+            Ok(())
+        })
+        .unwrap();
+    }
+
+    #[test]
+    fn wanted_rows_split_missing_from_cutoff_candidates() {
+        let db = Db::open_in_memory_for(Personality::Radarr).unwrap();
+        db.call_blocking(|conn| {
+            let missing = testing::movie(1, "Missing", 2020);
+            let no_year = testing::movie(2, "No Year", 0);
+            let mut with_file = testing::movie(3, "With File", 2021);
+            with_file.movie_file_id = 7;
+            with_file.metadata.sort_title = Some("with file".into());
+            with_file.metadata.in_cinemas = Some(at("2021-05-01T00:00:00Z"));
+            let mut dangling = testing::movie(4, "Dangling File", 2022);
+            dangling.movie_file_id = 9;
+            let mut unmonitored = testing::movie(5, "Unmonitored", 2023);
+            unmonitored.monitored = false;
+            for m in [&missing, &no_year, &with_file, &dangling, &unmonitored] {
+                add(conn, m);
+            }
+            conn.execute_batch(
+                "INSERT INTO movie_files (id, movie_id, relative_path, date_added, quality_id)
+                 VALUES (7, 3, 'with.file.mkv', '2026-01-01T00:00:00Z', 4)",
+            )?;
+            let row_ids = |rows: Vec<WantedRow>| rows.iter().map(|w| w.id).collect::<Vec<_>>();
+            assert_eq!(row_ids(wanted_rows(conn, true, false)?), [1]);
+            assert_eq!(row_ids(wanted_rows(conn, false, false)?), [5]);
+            let cutoff = wanted_rows(conn, true, true)?;
+            assert_eq!(row_ids(cutoff.clone()), [3]);
+            let row = &cutoff[0];
+            assert_eq!(row.file_quality_id, Some(4));
+            assert_eq!(row.quality_profile_id, with_file.quality_profile_id);
+            assert_eq!(row.year, 2021);
+            assert_eq!(row.sort_title.as_deref(), Some("with file"));
+            assert_eq!(row.in_cinemas, Some(at("2021-05-01T00:00:00Z")));
+            assert_eq!(row.added, with_file.added);
+            Ok(())
+        })
+        .unwrap();
+    }
 }
