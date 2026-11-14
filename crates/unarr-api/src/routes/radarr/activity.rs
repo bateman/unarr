@@ -13,7 +13,9 @@ use unarr_core::movies::formats as movie_formats;
 use unarr_core::movies::model::{
     AlternativeTitle, Movie, MovieBlocklistEntry, MovieFile, MovieHistoryEntry, MovieHistoryEvent,
 };
-use unarr_core::movies::store::{self as movies, HistoryFilter, BLOCKLIST_SORT_KEYS, HISTORY_SORT_KEYS};
+use unarr_core::movies::store::{
+    self as movies, HistoryFilter, WantedRow, BLOCKLIST_SORT_KEYS, HISTORY_SORT_KEYS,
+};
 use unarr_core::store::paging::Paging;
 use unarr_core::time;
 
@@ -272,26 +274,6 @@ struct Shelf {
     titles: HashMap<i64, Vec<AlternativeTitle>>,
 }
 
-async fn load_shelf(state: &AppState) -> anyhow::Result<Shelf> {
-    state
-        .db()
-        .call(|conn| {
-            let mut titles: HashMap<i64, Vec<AlternativeTitle>> = HashMap::new();
-            for t in movies::list_alternative_titles(conn)? {
-                titles.entry(t.movie_metadata_id).or_default().push(t);
-            }
-            Ok(Shelf {
-                movies: movies::list_movies(conn)?,
-                files: movies::list_movie_files(conn)?
-                    .into_iter()
-                    .map(|f| (f.id, f))
-                    .collect(),
-                titles,
-            })
-        })
-        .await
-}
-
 /// `GET /calendar?start=&end=`: the movies with a cinema, digital or
 /// physical release in the range (today and the two days after it when
 /// none is given), by cinema date; `unmonitored` adds those not monitored,
@@ -318,9 +300,13 @@ pub async fn calendar(State(state): State<AppState>, uri: Uri) -> ApiResult<Json
     let shelf = state
         .db()
         .call(move |conn| {
-            let movies = movies::movies_released_between(conn, start, end, unmonitored)?;
-            let file_ids: Vec<i64> = movies.iter().map(|m| m.movie_file_id).filter(|&id| id > 0).collect();
-            let metadata_ids: Vec<i64> = movies.iter().map(|m| m.metadata.id).collect();
+            let found = movies::movies_released_between(conn, start, end, unmonitored)?;
+            let file_ids: Vec<i64> = found
+                .iter()
+                .map(|m| m.movie_file_id)
+                .filter(|&id| id > 0)
+                .collect();
+            let metadata_ids: Vec<i64> = found.iter().map(|m| m.metadata.id).collect();
             let mut titles: HashMap<i64, Vec<AlternativeTitle>> = HashMap::new();
             for t in movies::alternative_titles_for(conn, &metadata_ids)? {
                 titles.entry(t.movie_metadata_id).or_default().push(t);
@@ -330,7 +316,7 @@ pub async fn calendar(State(state): State<AppState>, uri: Uri) -> ApiResult<Json
                     .into_iter()
                     .map(|f| (f.id, f))
                     .collect(),
-                movies,
+                movies: found,
                 titles,
             })
         })
@@ -392,24 +378,25 @@ const WANTED_SORT_KEYS: &[&str] = &[
 
 /// One page of `wanted`: the movies sorted as the originals' query sorts
 /// them (text as SQLite compares it, a missing date before any date, ties
-/// in id order whatever the direction).
-fn wanted_page(
+/// in id order whatever the direction). The sort runs on the light rows;
+/// only the page's movies and files are then read in full.
+async fn wanted_page(
+    state: &AppState,
     ctx: &MovieContext,
-    shelf: &Shelf,
-    mut wanted: Vec<&Movie>,
+    mut wanted: Vec<WantedRow>,
     paging: &Paging,
-) -> PagingResource<Value> {
+) -> ApiResult<PagingResource<Value>> {
     let date = |d: Option<DateTime<Utc>>| d.map(|d| d.timestamp()).unwrap_or(i64::MIN);
-    let key = |m: &Movie| -> (i64, String) {
+    let key = |w: &WantedRow| -> (i64, String) {
         match paging.sort_key.as_str() {
-            "movieMetadata.year" => (m.metadata.year, String::new()),
-            "movieMetadata.inCinemas" => (date(m.metadata.in_cinemas), String::new()),
-            "movieMetadata.digitalRelease" => (date(m.metadata.digital_release), String::new()),
-            "movieMetadata.physicalRelease" => (date(m.metadata.physical_release), String::new()),
-            "movies.added" => (date(m.added), String::new()),
-            "movies.lastSearchTime" => (date(m.last_search_time), String::new()),
-            "movies.id" => (m.id, String::new()),
-            _ => (0, m.metadata.sort_title.clone().unwrap_or_default()),
+            "movieMetadata.year" => (w.year, String::new()),
+            "movieMetadata.inCinemas" => (date(w.in_cinemas), String::new()),
+            "movieMetadata.digitalRelease" => (date(w.digital_release), String::new()),
+            "movieMetadata.physicalRelease" => (date(w.physical_release), String::new()),
+            "movies.added" => (date(w.added), String::new()),
+            "movies.lastSearchTime" => (date(w.last_search_time), String::new()),
+            "movies.id" => (w.id, String::new()),
+            _ => (0, w.sort_title.clone().unwrap_or_default()),
         }
     };
     wanted.sort_by(|a, b| {
@@ -418,8 +405,29 @@ fn wanted_page(
         order.then_with(|| a.id.cmp(&b.id))
     });
     let total = wanted.len() as i64;
-    let records = paging
-        .slice(&wanted)
+    let ids: Vec<i64> = paging.slice(&wanted).iter().map(|w| w.id).collect();
+    let (page, files) = state
+        .db()
+        .call(move |conn| {
+            let page = movies::movies_by_ids(conn, &ids)?;
+            let file_ids: Vec<i64> = page
+                .iter()
+                .map(|m| m.movie_file_id)
+                .filter(|&id| id > 0)
+                .collect();
+            let files: HashMap<i64, MovieFile> = movies::movie_files_by_ids(conn, &file_ids)?
+                .into_iter()
+                .map(|f| (f.id, f))
+                .collect();
+            // `movies_by_ids` reads in id order: back to the page's order.
+            let mut by_id: HashMap<i64, Movie> = page.into_iter().map(|m| (m.id, m)).collect();
+            Ok((
+                ids.iter().filter_map(|id| by_id.remove(id)).collect::<Vec<_>>(),
+                files,
+            ))
+        })
+        .await?;
+    let records = page
         .iter()
         .map(|m| {
             movie_resource(
@@ -427,7 +435,7 @@ fn wanted_page(
                 m,
                 &MovieParts {
                     alternative_titles: &[],
-                    file: shelf.files.get(&m.movie_file_id),
+                    file: files.get(&m.movie_file_id),
                     covers: Covers::Local,
                     root_folder: false,
                     statistics: true,
@@ -436,7 +444,7 @@ fn wanted_page(
             )
         })
         .collect();
-    PagingResource::new(paging, total, records)
+    Ok(PagingResource::new(paging, total, records))
 }
 
 fn wanted_paging(p: &Params) -> Paging {
@@ -458,13 +466,11 @@ pub async fn missing(State(state): State<AppState>, uri: Uri) -> ApiResult<Json<
     let p = Params::from_uri(&uri);
     let monitored = p.bool("monitored", true);
     let ctx = MovieContext::load(&state).await?;
-    let shelf = load_shelf(&state).await?;
-    let wanted = shelf
-        .movies
-        .iter()
-        .filter(|m| m.movie_file_id == 0 && m.monitored == monitored && m.metadata.year > 0)
-        .collect();
-    Ok(Json(wanted_page(&ctx, &shelf, wanted, &wanted_paging(&p))))
+    let wanted = state
+        .db()
+        .call(move |conn| movies::wanted_rows(conn, monitored, false))
+        .await?;
+    Ok(Json(wanted_page(&state, &ctx, wanted, &wanted_paging(&p)).await?))
 }
 
 /// `POST /history/failed/{id}`: "Mark as failed" on a history row.
@@ -493,20 +499,18 @@ pub async fn cutoff(State(state): State<AppState>, uri: Uri) -> ApiResult<Json<P
     let p = Params::from_uri(&uri);
     let monitored = p.bool("monitored", true);
     let ctx = MovieContext::load(&state).await?;
-    let shelf = load_shelf(&state).await?;
-    let wanted = shelf
-        .movies
-        .iter()
-        .filter(|m| m.monitored == monitored)
-        .filter(|m| {
-            let (Some(file), Some(profile)) = (
-                shelf.files.get(&m.movie_file_id),
-                ctx.profile(m.quality_profile_id),
-            ) else {
+    let wanted = state
+        .db()
+        .call(move |conn| movies::wanted_rows(conn, monitored, true))
+        .await?
+        .into_iter()
+        .filter(|w| {
+            let (Some(quality_id), Some(profile)) = (w.file_quality_id, ctx.profile(w.quality_profile_id))
+            else {
                 return false;
             };
-            unarr_core::profile::quality_cutoff_not_met(profile, file.quality.quality_id)
+            unarr_core::profile::quality_cutoff_not_met(profile, quality_id)
         })
         .collect();
-    Ok(Json(wanted_page(&ctx, &shelf, wanted, &wanted_paging(&p))))
+    Ok(Json(wanted_page(&state, &ctx, wanted, &wanted_paging(&p)).await?))
 }
