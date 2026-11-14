@@ -145,7 +145,7 @@ pub async fn calendar(State(state): State<AppState>, uri: Uri) -> ApiResult<Resp
                 })
                 .collect();
             let within = |d: Option<DateTime<Utc>>| d.is_some_and(|d| d >= start && d <= end);
-            let mut found: Vec<Movie> = movies::list_movies(conn)?
+            let mut found: Vec<Movie> = movies::movies_released_between(conn, start, end, unmonitored)?
                 .into_iter()
                 .filter(|m| {
                     let md = &m.metadata;

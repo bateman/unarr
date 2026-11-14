@@ -312,7 +312,29 @@ pub async fn calendar(State(state): State<AppState>, uri: Uri) -> ApiResult<Json
         .map(|t| t.split(',').filter_map(|s| s.trim().parse().ok()).collect())
         .unwrap_or_default();
     let ctx = MovieContext::load(&state).await?;
-    let shelf = load_shelf(&state).await?;
+    // Only the movies released in the range are read, with their files and
+    // alternative titles: the filters below then keep what they kept when
+    // the whole library was read.
+    let shelf = state
+        .db()
+        .call(move |conn| {
+            let movies = movies::movies_released_between(conn, start, end, unmonitored)?;
+            let file_ids: Vec<i64> = movies.iter().map(|m| m.movie_file_id).filter(|&id| id > 0).collect();
+            let metadata_ids: Vec<i64> = movies.iter().map(|m| m.metadata.id).collect();
+            let mut titles: HashMap<i64, Vec<AlternativeTitle>> = HashMap::new();
+            for t in movies::alternative_titles_for(conn, &metadata_ids)? {
+                titles.entry(t.movie_metadata_id).or_default().push(t);
+            }
+            Ok(Shelf {
+                files: movies::movie_files_by_ids(conn, &file_ids)?
+                    .into_iter()
+                    .map(|f| (f.id, f))
+                    .collect(),
+                movies,
+                titles,
+            })
+        })
+        .await?;
     let within = |d: Option<DateTime<Utc>>| d.is_some_and(|d| d >= start && d <= end);
     let mut found: Vec<&Movie> = shelf
         .movies

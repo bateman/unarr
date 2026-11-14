@@ -184,6 +184,30 @@ pub fn list_movies(conn: &Connection) -> anyhow::Result<Vec<Movie>> {
     query_movies(conn, "1 = 1", &[])
 }
 
+/// `MovieRepository.MoviesBetweenDates`: the movies with a cinema,
+/// physical or digital release in `[start, end]`, in id order, only the
+/// monitored ones unless `include_unmonitored`. The dates are stored in
+/// one spelling (`format_utc`), so the text comparison is the time order,
+/// as for `episodes_between`.
+pub fn movies_released_between(
+    conn: &Connection,
+    start: DateTime<Utc>,
+    end: DateTime<Utc>,
+    include_unmonitored: bool,
+) -> anyhow::Result<Vec<Movie>> {
+    let (start, end) = (crate::time::format_utc(start), crate::time::format_utc(end));
+    let monitored = if include_unmonitored { "" } else { " AND m.monitored = 1" };
+    query_movies(
+        conn,
+        &format!(
+            "((md.in_cinemas >= ?1 AND md.in_cinemas <= ?2)
+              OR (md.physical_release >= ?1 AND md.physical_release <= ?2)
+              OR (md.digital_release >= ?1 AND md.digital_release <= ?2)){monitored}"
+        ),
+        &[&start, &end],
+    )
+}
+
 pub fn get_movie(conn: &Connection, id: i64) -> anyhow::Result<Option<Movie>> {
     Ok(query_movies(conn, "m.id = ?1", &[&id])?.into_iter().next())
 }
@@ -608,6 +632,16 @@ fn query_alternative_titles(
 
 pub fn list_alternative_titles(conn: &Connection) -> anyhow::Result<Vec<AlternativeTitle>> {
     query_alternative_titles(conn, "1 = 1", &[])
+}
+
+/// The alternative titles of these metadata rows, in id order.
+pub fn alternative_titles_for(conn: &Connection, movie_metadata_ids: &[i64]) -> anyhow::Result<Vec<AlternativeTitle>> {
+    let ids = serde_json::to_string(movie_metadata_ids)?;
+    query_alternative_titles(
+        conn,
+        "movie_metadata_id IN (SELECT value FROM json_each(?1))",
+        &[&ids],
+    )
 }
 
 pub fn alternative_titles_of(
