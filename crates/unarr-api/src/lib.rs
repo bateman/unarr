@@ -204,16 +204,7 @@ async fn put_resource_id(
         Ok(bytes) => bytes,
         Err(_) => return axum::http::StatusCode::PAYLOAD_TOO_LARGE.into_response(),
     };
-    // Only the id is read: the rest of the body is the handler's to parse.
-    #[derive(serde::Deserialize)]
-    struct IdOnly {
-        id: Option<serde_json::Value>,
-    }
-    let body_id = serde_json::from_slice::<IdOnly>(&bytes)
-        .ok()
-        .and_then(|body| body.id.as_ref().and_then(serde_json::Value::as_i64))
-        .filter(|id| *id > 0);
-    let id = match (body_id, route_id) {
+    let id = match (body_resource_id(&bytes), route_id) {
         (Some(id), _) => id.to_string(),
         (None, Some(id)) => id.to_owned(),
         (None, None) => "0".to_owned(),
@@ -230,6 +221,23 @@ async fn put_resource_id(
         axum::body::Body::from(bytes),
     ))
     .await
+}
+
+/// The resource id a `PUT` body names: an object's positive `id`, read
+/// alone (the rest of the body is the handler's to parse). Only an object:
+/// a struct would also take `[7]` as `{"id": 7}`.
+fn body_resource_id(bytes: &[u8]) -> Option<i64> {
+    #[derive(serde::Deserialize)]
+    struct IdOnly {
+        id: Option<i64>,
+    }
+    if bytes.iter().find(|b| !b.is_ascii_whitespace()) != Some(&b'{') {
+        return None;
+    }
+    serde_json::from_slice::<IdOnly>(bytes)
+        .ok()
+        .and_then(|body| body.id)
+        .filter(|id| *id > 0)
 }
 
 /// What the body of an API request may weigh. The originals set no limit
@@ -415,4 +423,21 @@ pub fn router(state: AppState) -> Router {
             state.clone(),
             hosts::require_allowed_host,
         ))
+}
+
+#[cfg(test)]
+mod tests {
+    use super::body_resource_id;
+
+    #[test]
+    fn only_an_objects_id_names_the_resource() {
+        assert_eq!(body_resource_id(br#"{"id": 7, "label": "x"}"#), Some(7));
+        assert_eq!(body_resource_id(b"  {\"id\":3}"), Some(3));
+        assert_eq!(body_resource_id(b"[7]"), None);
+        assert_eq!(body_resource_id(b"7"), None);
+        assert_eq!(body_resource_id(br#"{"id": 0}"#), None);
+        assert_eq!(body_resource_id(br#"{"id": "7"}"#), None);
+        assert_eq!(body_resource_id(br#"{"label": "x"}"#), None);
+        assert_eq!(body_resource_id(b"not json"), None);
+    }
 }

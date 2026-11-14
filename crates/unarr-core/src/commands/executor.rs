@@ -1329,18 +1329,8 @@ impl Runtime {
             }
             _ => anyhow::bail!("{} is not a command of this application", model.name()),
         };
-        // The queue refreshed after a grab, as the original's debounced
-        // refresh does.
-        if outcome.grabbed > 0 {
-            self.queue
-                .push(
-                    CommandBody::RefreshMonitoredDownloads,
-                    CommandPriority::High,
-                    CommandTrigger::Unspecified,
-                    now,
-                )
-                .await?;
-        }
+        // The grab itself queues the refresh of the downloads
+        // (`movies::downloads::grab`).
         if outcome.pending_changed {
             self.emit(Event::QueueUpdated);
         }

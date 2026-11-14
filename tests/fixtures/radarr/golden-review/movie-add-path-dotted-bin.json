@@ -1,0 +1,37 @@
+{
+  "body": [
+    {
+      "attemptedValue": "/downloads//bin/./Interstellar (2014)",
+      "errorCode": "RecycleBinValidator",
+      "errorMessage": "Path '/downloads//bin/./Interstellar (2014)' is child of configured recycle bin folder",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "path": "/downloads//bin/./Interstellar (2014)",
+        "propertyName": "Path",
+        "propertyValue": "/downloads//bin/./Interstellar (2014)",
+        "relationship": "child of"
+      },
+      "propertyName": "Path",
+      "severity": "error"
+    },
+    {
+      "attemptedValue": 157336,
+      "errorCode": "MovieExistsValidator",
+      "errorMessage": "This movie has already been added",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Tmdb Id",
+        "propertyValue": 157336
+      },
+      "propertyName": "TmdbId",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-14T06:29:39Z",
+  "request": {
+    "body": "bodies/movie-add-path-dotted-bin.json",
+    "method": "POST",
+    "path": "/api/v3/movie"
+  },
+  "status": 400
+}

@@ -518,12 +518,17 @@ pub enum HubMovieEvent {
 /// drops a hundred files raises a hundred of them, which must not hold up
 /// the command and queue messages. The context every resource is built
 /// with (profiles, formats, the translations of the whole library) is
-/// read once for a run of events and let go when the run ends.
+/// read once for a run of events, again every two seconds of a long one,
+/// and let go when the run ends.
 pub async fn relay_movie_events(
     state: AppState,
     mut events: tokio::sync::mpsc::UnboundedReceiver<HubMovieEvent>,
 ) {
-    let mut ctx: Option<MovieContext> = None;
+    // The context and when it was read. A run of events that goes on
+    // reads it again after a while, so that what changed meanwhile (a
+    // translation a refresh brought, a profile renamed) reaches the UI.
+    const CONTEXT_LIFETIME: std::time::Duration = std::time::Duration::from_secs(2);
+    let mut ctx: Option<(MovieContext, std::time::Instant)> = None;
     while let Some(event) = events.recv().await {
         // `MovieController`'s own handler names the movie by its id and
         // reads nothing: it is told even when the context cannot be read.
@@ -537,10 +542,16 @@ pub async fn relay_movie_events(
             }
             continue;
         }
-        if ctx.is_none() {
-            ctx = MovieContext::load(&state).await.ok();
+        if ctx
+            .as_ref()
+            .is_none_or(|(_, read)| read.elapsed() > CONTEXT_LIFETIME)
+        {
+            ctx = MovieContext::load(&state)
+                .await
+                .ok()
+                .map(|loaded| (loaded, std::time::Instant::now()));
         }
-        if let Some(ctx) = &ctx {
+        if let Some((ctx, _)) = &ctx {
             match event {
                 HubMovieEvent::Grabbed(movie_id) => broadcast_movie_change(&state, ctx, movie_id, true).await,
                 HubMovieEvent::Import(e) => relay_import(&state, ctx, &e).await,

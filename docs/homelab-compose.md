@@ -93,27 +93,42 @@ it is what the maintainer's run tries first.
       - traefik.http.routers.sonarr.service=sonarr
 ```
 
-Radarr's database is imported from a copy, made with Radarr stopped:
+Radarr's database is imported from a copy, made with Radarr stopped and
+before the Unarr container is started with Radarr:
 
 ```sh
 docker compose stop radarr
-sudo cp -a config/radarr config/radarr-import
+sudo mkdir -p config/radarr-import
+sudo cp -a config/radarr/. config/radarr-import/
+ls -la config/radarr-import/radarr.db
 ```
 
-Not from `config/radarr` mounted read-only, as Sonarr's is: Radarr keeps its
-database in WAL mode, and SQLite opens such a file, even to read it, only
-when it can create the `-shm` file next to it. On a read-only mount the
-first start fails with `unable to open database file` (error 14) and the
-container restarts in a loop, taking Sonarr down with it. The copy is read
-once, at the first start; it can be deleted once the import is done, and
-`config/radarr` itself is never touched, so going back to Radarr stays
-possible.
+The `/.` matters: if `config/radarr-import` already exists (Docker creates
+a missing bind-mount source, empty, when the container starts before the
+copy), `cp -a config/radarr config/radarr-import` copies into
+`config/radarr-import/radarr/` and the database is not where Unarr looks.
+Unarr refuses to start a personality whose database it finds nowhere and
+that it never imported, so a copy in the wrong place stops the start
+rather than bringing Radarr up blank.
 
-Then the `radarr` service is commented out, not deleted, and its
-`container_name` freed: Prowlarr, Bazarr, Recyclarr and the Uptime Kuma
-monitor address Radarr by name, so either the Unarr container takes an
-alias on the media network, or those files are pointed at `sonarr:7878`.
-Aliases keep the rest of the repository unchanged:
+Not from `config/radarr` mounted read-only: Radarr and Sonarr both keep
+their databases in WAL mode, and SQLite opens such a file, even to read
+it, only when it can create the `-shm` file next to it. On a read-only
+mount the first start fails with `unable to open database file` (error 14)
+and the container restarts in a loop, taking the other personality down
+with it. Sonarr's read-only mount above works only while Sonarr left a
+`-shm` file behind; a copy made the same way is the safer source for it
+too. The copy is read once, at the first start; it can be deleted once
+the import is done, and the original's folder is never touched, so going
+back stays possible.
+
+Then the `radarr` service is disabled, not deleted (see below:
+`profiles: ["disabled"]`, and `radarr` taken out of the `depends_on` of
+the four services that name it), and its `container_name` freed:
+Prowlarr, Bazarr, Recyclarr and the Uptime Kuma monitor address Radarr by
+name, so either the Unarr container takes an alias on the media network,
+or those files are pointed at `sonarr:7878`. Aliases keep the rest of the
+repository unchanged:
 
 ```yaml
     networks:
@@ -135,7 +150,7 @@ the original Radarr without anything saying so. So either:
   next runs, with the `radarr` service given `profiles: ["disabled"]`
   rather than commented out (the block stays, for going back). Four
   services have `radarr` in their `depends_on` (`unpackerr`,
-  `cleanuparr`, `recyclarr` and one more, each next to `sonarr`): it is
+  `cleanuparr`, `recyclarr` and `bazarr`, each next to `sonarr`): it is
   removed there, or compose refuses the whole file with `depends on
   undefined service "radarr"`, and with it every later `make` target and
   the script's own reconcile. Validate the edited file with
@@ -161,8 +176,11 @@ Before, on the NAS:
 - [ ] A backup of `config/radarr` beside `config/sonarr` (the restore
       steps of the runbook name both). Some files under `asp/` belong to
       the containers' user: `sudo tar`.
-- [ ] The writable copy `config/radarr-import`, taken with Radarr stopped.
+- [ ] The writable copy `config/radarr-import`, taken with Radarr stopped,
+      with `radarr.db` directly inside it.
 - [ ] `auto-recover-cron.sh` either knows of the change or is paused.
+- [ ] The `radarr` service has `profiles: ["disabled"]` and no service
+      lists it in `depends_on`; `docker compose config --quiet` passes.
 - [ ] `make_dir "${CONFIG_ROOT}/unarr"` already exists from the Sonarr
       step; nothing to add for Radarr, which lands under
       `config/unarr/radarr/`.

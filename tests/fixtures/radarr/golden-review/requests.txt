@@ -6,7 +6,12 @@
 #       GOLDEN_OUT=tests/fixtures/radarr/golden-review make golden-radarr
 #
 # The original reaches api.radarr.video through scripts/mock-servarr.py,
-# as golden-library's recording does, for the movie the import names.
+# which becomes its HTTP proxy here, as in golden-library's recording: the
+# movies the requests name are answered from tests/fixtures/metadata, not
+# by the real server.
+config-host GET /api/v3/config/host
+config-host-put-proxy PUT /api/v3/config/host/1 bodies/config-host-proxy.json
+sleep 8
 
 # A recycling bin that exists, set for what follows.
 mock - POST /mock/fs/write?path=/downloads/bin/kept/Some.Movie.2020.1080p.WEB-DL.x264-GRP.mkv&clip=episode
@@ -19,6 +24,9 @@ movie-add-path-is-bin POST /api/v3/movie bodies/movie-add-path-is-bin.json
 movie-add-path-in-bin POST /api/v3/movie bodies/movie-add-path-in-bin.json
 movie-add-path-in-system-folder POST /api/v3/movie bodies/movie-add-path-in-system-folder.json
 movie-add-path-is-system-folder POST /api/v3/movie bodies/movie-add-path-is-system-folder.json
+# The same folders spelled with `..`, `.` and repeated slashes.
+movie-add-path-dotted-system-folder POST /api/v3/movie bodies/movie-add-path-dotted-system-folder.json
+movie-add-path-dotted-bin POST /api/v3/movie bodies/movie-add-path-dotted-bin.json
 movie-6 GET /api/v3/movie/6
 movie-put-path-in-bin PUT /api/v3/movie/6 bodies/movie-put-path-in-bin.json
 movie-put-path-in-system-folder PUT /api/v3/movie/6 bodies/movie-put-path-in-system-folder.json
@@ -28,6 +36,8 @@ movie-put-path-in-system-folder PUT /api/v3/movie/6 bodies/movie-put-path-in-sys
 movie-import-path-in-bin POST /api/v3/movie/import bodies/movie-import-path-in-bin.json
 movie-import-blank-root POST /api/v3/movie/import bodies/movie-import-blank-root.json
 movie-import-no-root POST /api/v3/movie/import bodies/movie-import-no-root.json
+# A root folder sent with a space in front: Path.Combine keeps it.
+movie-import-spaced-root POST /api/v3/movie/import bodies/movie-import-spaced-root.json
 movie-after-imports GET /api/v3/movie?tmdbId=157336
 
 # `RootFolderController`: a root folder is not the bin, nor inside it,
@@ -35,9 +45,20 @@ movie-after-imports GET /api/v3/movie?tmdbId=157336
 rootfolder-create-is-bin POST /api/v3/rootfolder bodies/rootfolder-create-is-bin.json
 rootfolder-create-in-bin POST /api/v3/rootfolder bodies/rootfolder-create-in-bin.json
 rootfolder-create-system-folder POST /api/v3/rootfolder bodies/rootfolder-create-system-folder.json
+rootfolder-create-double-slash POST /api/v3/rootfolder bodies/rootfolder-create-double-slash.json
+# A folder the bin is inside of is no concern of the bin's rule.
+rootfolder-create-above-bin POST /api/v3/rootfolder bodies/rootfolder-create-above-bin.json
 rootfolder-after GET /api/v3/rootfolder
 
 # A filter with no value.
 blocklist-movie-ids-empty GET /api/v3/blocklist?page=1&pageSize=5&movieIds=
+blocklist-movie-ids-space GET /api/v3/blocklist?page=1&pageSize=5&movieIds=%20
+blocklist-protocols-space GET /api/v3/blocklist?page=1&pageSize=5&protocols=%20
+
+# Discover adds what validates and leaves out a movie TMDB does not know
+# (`AddMovies(movies, true)`).
+importlist-movie-add-one-unknown POST /api/v3/importlist/movie bodies/importlist-movie-add-one-unknown.json
+sleep 10
+movie-added-from-discover GET /api/v3/movie?tmdbId=157336
 
 config-mediamanagement-restore PUT /api/v3/config/mediamanagement/1 bodies/config-mediamanagement-restore.json

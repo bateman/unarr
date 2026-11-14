@@ -1,0 +1,131 @@
+{
+  "body": {
+    "added": "2026-11-14T06:29:39Z",
+    "alternateTitles": [],
+    "certification": "PG-13",
+    "cleanTitle": "interstellar",
+    "digitalRelease": "2014-11-07T00:00:00Z",
+    "folderName": "/downloads/../lib/Interstellar (2014)",
+    "genres": [
+      "Adventure",
+      "Drama",
+      "Science Fiction"
+    ],
+    "hasFile": false,
+    "id": 328,
+    "images": [
+      {
+        "coverType": "poster",
+        "remoteUrl": "https://image.tmdb.org/t/p/original/yQvGrMoipbRoddT0ZR8tPoR7NfX.jpg",
+        "url": "/MediaCover/328/poster.jpg?h=6ea857fa1664e710ba38"
+      },
+      {
+        "coverType": "fanart",
+        "remoteUrl": "https://image.tmdb.org/t/p/original/8sNiAPPYU14PUepFNeSNGUTiHW.jpg",
+        "url": "/MediaCover/328/fanart.jpg?h=09050d90b1d43db56511"
+      }
+    ],
+    "imdbId": "tt0816692",
+    "inCinemas": "2014-11-05T00:00:00Z",
+    "isAvailable": true,
+    "keywords": [
+      "2060s",
+      "artificial intelligence (a.i.)",
+      "astronaut",
+      "audacious",
+      "black hole",
+      "cryonics",
+      "dystopia",
+      "enthusiastic",
+      "expedition",
+      "family relationships",
+      "famine",
+      "father daughter relationship",
+      "gravity",
+      "hibernation",
+      "nasa",
+      "planet",
+      "quantum mechanics",
+      "race against time",
+      "scientist",
+      "single father",
+      "space",
+      "space adventure",
+      "space station",
+      "space travel",
+      "spacecraft",
+      "time travel",
+      "time warp",
+      "time-manipulation",
+      "wormhole"
+    ],
+    "minimumAvailability": "released",
+    "monitored": true,
+    "movieFileId": 0,
+    "originalLanguage": {
+      "id": 1,
+      "name": "English"
+    },
+    "originalTitle": "Interstellar",
+    "overview": "The adventures of a group of explorers who make use of a newly discovered wormhole to surpass the limitations on human space travel and conquer the vast distances involved in an interstellar voyage.",
+    "path": "/downloads/../lib/Interstellar (2014)",
+    "physicalRelease": "2015-03-31T00:00:00Z",
+    "popularity": 53.1428,
+    "qualityProfileId": 4,
+    "ratings": {
+      "imdb": {
+        "type": "user",
+        "value": 8.7,
+        "votes": 2631937
+      },
+      "metacritic": {
+        "type": "user",
+        "value": 74,
+        "votes": 0
+      },
+      "rottenTomatoes": {
+        "type": "user",
+        "value": 73,
+        "votes": 0
+      },
+      "tmdb": {
+        "type": "user",
+        "value": 8.5,
+        "votes": 41867
+      },
+      "trakt": {
+        "type": "user",
+        "value": 8.83471,
+        "votes": 74602
+      }
+    },
+    "releaseDate": "2014-11-07T00:00:00Z",
+    "rootFolderPath": "/downloads/../lib",
+    "runtime": 169,
+    "secondaryYearSourceId": 0,
+    "sizeOnDisk": 0,
+    "sortTitle": "interstellar",
+    "statistics": {
+      "movieFileCount": 0,
+      "movieFileQualities": [],
+      "releaseGroups": [],
+      "sizeOnDisk": 0
+    },
+    "status": "released",
+    "studio": "Legendary Pictures",
+    "tags": [],
+    "title": "Interstellar",
+    "titleSlug": "157336",
+    "tmdbId": 157336,
+    "website": "http://www.interstellarmovie.net/",
+    "year": 2014,
+    "youTubeTrailerId": "LY19rHKAaAg"
+  },
+  "recordedAt": "2026-11-14T06:29:39Z",
+  "request": {
+    "body": "bodies/movie-add-path-dotted-system-folder.json",
+    "method": "POST",
+    "path": "/api/v3/movie"
+  },
+  "status": 201
+}

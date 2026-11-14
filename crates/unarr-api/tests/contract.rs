@@ -1901,47 +1901,65 @@ async fn the_hub_tells_other_tabs_what_the_original_tells_them() {
     assert!(original.iter().flatten().count() > 10, "the recording is read");
     for (at, (want, got)) in original.iter_mut().zip(stretches.iter_mut()).enumerate() {
         // Which messages and how many of each. Where the original says
-        // one thing several times over and Unarr says it once (or, for
-        // one command, the reverse), the step and the message are named
-        // here and only their presence is compared: a difference that is
-        // known, not one a new change could hide behind.
-        const COUNT_NOT_COMPARED: &[(&str, &[&str])] = &[
+        // one thing several times over and Unarr says it a known number of
+        // times (or, for one command, once more), the step, the message and
+        // Unarr's count are named here: the original's lines are compared
+        // by presence, Unarr's by that exact count, so a change that makes
+        // Unarr say it fifty times does not pass.
+        const COUNTS: &[(&str, &[(&str, usize)])] = &[
             (
                 "command-rescan-1",
                 &[
-                    "episode updated",
-                    "wanted/cutoff updated",
-                    "wanted/missing updated",
+                    ("episode updated", 1),
+                    ("wanted/cutoff updated", 1),
+                    ("wanted/missing updated", 1),
                 ],
             ),
             (
                 "command-after-rescan",
                 &[
-                    "episode updated",
-                    "wanted/cutoff updated",
-                    "wanted/missing updated",
+                    ("episode updated", 1),
+                    ("wanted/cutoff updated", 1),
+                    ("wanted/missing updated", 1),
                 ],
             ),
             (
                 "episodefile-delete",
                 &[
-                    "episode updated",
-                    "wanted/cutoff updated",
-                    "wanted/missing updated",
+                    ("episode updated", 1),
+                    ("wanted/cutoff updated", 1),
+                    ("wanted/missing updated", 1),
                 ],
             ),
-            ("release-episode", &["episode updated"]),
-            ("command-messaging-cleanup", &["command updated MessagingCleanup"]),
+            ("release-episode", &[("episode updated", 1)]),
+            (
+                "command-messaging-cleanup",
+                &[("command updated MessagingCleanup", 2)],
+            ),
         ];
         let step = first_step(at);
-        let once: &[&str] = COUNT_NOT_COMPARED
+        let counted: &[(&str, usize)] = COUNTS
             .iter()
             .find(|(name, _)| *name == step)
             .map(|(_, lines)| *lines)
             .unwrap_or(&[]);
+        let rule = |line: &str| counted.iter().find(|(prefix, _)| line.starts_with(prefix));
+        want.sort();
+        got.sort();
+        let mut distinct = got.clone();
+        distinct.dedup();
+        for line in &distinct {
+            if let Some((_, expected)) = rule(line) {
+                let sent = got.iter().filter(|l| *l == line).count();
+                if sent != *expected {
+                    problems.push(format!(
+                        "stretch {at} ({step}): Unarr sent `{line}` {sent} times, {expected} expected"
+                    ));
+                }
+            }
+        }
         for lines in [&mut *want, &mut *got] {
-            lines.sort();
-            lines.dedup_by(|a, b| a == b && once.iter().any(|prefix| a.starts_with(prefix)));
+            lines.dedup_by(|a, b| a == b && rule(a).is_some());
         }
         if want != got {
             problems.push(format!(

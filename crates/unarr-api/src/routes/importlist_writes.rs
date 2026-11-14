@@ -201,10 +201,13 @@ fn to_model(
     };
     if movies {
         attributes.insert("monitor".into(), text("monitor", "movieOnly"));
-        attributes.insert(
-            "minimumAvailability".into(),
-            text("minimumAvailability", "released"),
-        );
+        // The enumeration by name in any case or by number, stored by its
+        // name as the bulk edit stores it.
+        let availability = match &body["minimumAvailability"] {
+            Value::Null => json!("released"),
+            sent => json!(super::radarr::movie_writes::minimum_availability(sent).as_str()),
+        };
+        attributes.insert("minimumAvailability".into(), availability);
     } else {
         attributes.insert("shouldMonitor".into(), text("shouldMonitor", "unknown"));
         attributes.insert("monitorNewItems".into(), text("monitorNewItems", "all"));

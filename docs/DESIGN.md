@@ -1798,6 +1798,28 @@ the same libraries were not measured.
   import that names no root folder at all is the original's 500
   (`ArgumentNullException`); one whose root folder is blank is a 400 on
   the folder's bare name. All recorded (`golden-review`).
+- **Paths are compared against the bin and the system folders as the
+  original compares them, measured on it.** Equality goes through
+  `CleanFilePath`, which resolves `.`, `..` and repeated slashes, so
+  `/data/../lib` is `/lib` and is refused; a child goes through `OsPath`,
+  which drops `.` and repeated slashes but walks `..` as a name, so
+  `//lib/./x` is inside `/lib` and `/data/../lib/x` is not, and Radarr
+  adds a movie there. Unarr does the same: the folder that could be
+  deleted whole, the system folder itself, is refused however it is
+  spelled.
+- **A movie the library has is refused by the insert, after every movie
+  of the request validated**, as the original's unique index refuses it
+  (409): a path rule a movie breaks is reported first, whether or not the
+  movie exists. The Discover page adds with `ignore_errors`, so a movie
+  TMDB does not know is left out and the others are added; a movie the
+  library has still refuses them all, as recorded. Only the syncs (lists
+  and collections), which leave out what the library has before they
+  add, skip a movie a request added meanwhile.
+- **A selected personality that was never imported and whose original's
+  database is in none of the `--import-from` folders stops the start.**
+  One personality imported earlier does not vouch for another: a folder
+  still empty (Docker creates a missing bind-mount source) would
+  otherwise start Radarr blank, with a new API key and no login.
 
 ## 19. Open questions
 
@@ -1864,9 +1886,12 @@ the same libraries were not measured.
   in the goldens, and the metadata row of a movie the library holds is
   deliberately kept when its collection drops it. Auto tagging does not
   apply its tags on a refresh or an edit, as the original's
-  `UpdateTags` does; the recycling bin and system folder validators are
-  not ported for movie paths; `ProxyCheck` uses the process-wide client,
-  which is Sonarr's. The metadata consumers write no files, as the phase
+  `UpdateTags` does; `ProxyCheck` uses the process-wide client, which is
+  Sonarr's. A proxy saved in Settings > General applies to the
+  connections opened after the save: one already open to a host stays
+  direct, or on the old proxy, until it has been idle for 90 seconds and
+  the pool lets it go (the clients read the proxy when they connect, not
+  for every request on a connection kept alive). The metadata consumers write no files, as the phase
   says. Of the Discover page only the listing and the add are served.
   The homelab run is the maintainer's, after this milestone; the panic
   decision (`docs/audit/7-triage.md`, row 1.13) waits for it.

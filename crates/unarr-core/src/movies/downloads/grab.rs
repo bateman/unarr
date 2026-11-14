@@ -169,6 +169,23 @@ pub async fn download_report(
         tracing::error!(title = %release.title, error = %format!("{e:#}"), "the pending releases of the grabbed movie could not be dropped");
     }
     downloads.mark_dirty();
+    // `DownloadMonitoringService.Handle(MovieGrabbedEvent)`: the clients
+    // are asked again, whoever sent the release (a command, the
+    // interactive search, a push, the queue). One refresh waiting is
+    // enough for any number of grabs.
+    if let Some(queue) = downloads.commands() {
+        if let Err(e) = queue
+            .push(
+                crate::commands::CommandBody::RefreshMonitoredDownloads,
+                crate::commands::CommandPriority::High,
+                crate::commands::CommandTrigger::Unspecified,
+                now,
+            )
+            .await
+        {
+            tracing::warn!(error = %e, "failed to queue the refresh of the downloads");
+        }
+    }
     Ok(Grabbed {
         download_id,
         client: definition,

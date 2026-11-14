@@ -308,6 +308,9 @@ fn write_error(e: WriteError) -> ApiError {
             message: "Value cannot be null. (Parameter 'path1')".into(),
             exception: "System.ArgumentNullException".into(),
         },
+        WriteError::AlreadyAdded => ApiError::ConflictMessage(
+            "constraint failed\nUNIQUE constraint failed: Movies.MovieMetadataId".into(),
+        ),
         WriteError::Other(e) => ApiError::Internal(e),
     }
 }
@@ -624,49 +627,35 @@ pub async fn editor_delete(State(state): State<AppState>, Json(body): Json<Value
 /// `POST /movie/import`: Library Import. The movies are added together,
 /// or none is; what the answer shows of each is the movie alone.
 pub async fn import(State(state): State<AppState>, Json(body): Json<Value>) -> ApiResult<Json<Value>> {
+    add_movies(state, body, false).await
+}
+
+/// `POST /importlist/movie`: the movies the Discover page adds.
+/// `ImportListMoviesController` calls `AddMovies(movies, true)`: a movie
+/// that does not validate is left out and the others are added.
+pub async fn import_from_lists(
+    State(state): State<AppState>,
+    Json(body): Json<Value>,
+) -> ApiResult<Json<Value>> {
+    add_movies(state, body, true).await
+}
+
+/// `AddMovieService.AddMovies`, with `ignore_errors` as the controller
+/// passes it.
+async fn add_movies(state: AppState, body: Value, ignore_errors: bool) -> ApiResult<Json<Value>> {
     let Some(items) = body.as_array() else {
         return Err(ApiError::BadRequest(
             "The request body must be a JSON array".into(),
         ));
     };
     let new: Vec<NewMovie> = items.iter().map(|item| new_movie(item, "manual")).collect();
-    // A movie the library has is the database's own refusal: the
-    // original inserts and the unique index says no.
-    let wanted: Vec<i64> = new.iter().map(|m| m.tmdb_id).collect();
-    let taken = state
-        .db()
-        .call(move |conn| {
-            let existing = store::all_movie_tmdb_ids(conn)?;
-            let mut seen = std::collections::HashSet::new();
-            Ok(wanted.iter().any(|id| existing.contains(id) || !seen.insert(*id)))
-        })
-        .await?;
+    // A movie the library has, or one named twice, is the database's own
+    // refusal: every movie is validated first, then the insert meets the
+    // unique index (`WriteError::AlreadyAdded`).
     let runtime = state.commands()?;
     let provider = runtime.movie_provider();
     let map = refresh::map_context(state.db(), state.now()).await?;
-    if taken {
-        // The provider is asked first, as in the original, so that a
-        // movie it does not know is refused before the insert is tried.
-        for movie in &new {
-            if let Err(MovieMetadataError::MovieNotFound(_)) = provider.movie_info(movie.tmdb_id, &map).await
-            {
-                return Err(write_error(WriteError::InvalidPlain(vec![
-                    unarr_core::validation::ValidationFailure::setting(
-                        "TmdbId",
-                        &format!(
-                            "A movie with this ID was not found. Path: {}",
-                            movie.path.as_deref().unwrap_or("")
-                        ),
-                        json!(movie.tmdb_id),
-                    ),
-                ])));
-            }
-        }
-        return Err(ApiError::ConflictMessage(
-            "constraint failed\nUNIQUE constraint failed: Movies.MovieMetadataId".into(),
-        ));
-    }
-    let added = library::add_many(state.db(), provider.as_ref(), &map, new, false)
+    let added = library::add_many(state.db(), provider.as_ref(), &map, new, ignore_errors, false)
         .await
         .map_err(write_error)?;
     // `MoviesImportedEvent`.
@@ -677,8 +666,14 @@ pub async fn import(State(state): State<AppState>, Json(body): Json<Value>) -> A
     // titles, which are no rows yet.
     let resources: Vec<Value> = added
         .iter()
-        .zip(items.iter())
-        .map(|(one, sent)| {
+        .map(|one| {
+            // The request's own entry: with `ignore_errors` some may have
+            // been left out, so the two lists no longer pair by position.
+            let tmdb_id = one.movie.metadata.tmdb_id;
+            let sent = items
+                .iter()
+                .find(|item| item["tmdbId"].as_i64() == Some(tmdb_id))
+                .unwrap_or(&Value::Null);
             let mut resource = movie_resource(
                 &ctx,
                 &one.movie,

@@ -61,8 +61,10 @@ pub fn relative_path<'a>(parent: &str, child: &'a str) -> &'a str {
 /// A path with its `.` and `..` segments resolved by name alone, as
 /// `Path.GetFullPath` does: no link is followed, and `..` at the root
 /// stays at the root. Borrowed when there is nothing to resolve.
+/// Repeated slashes collapse too (`//lib` is `/lib`), as they do there.
 fn resolve_dots(path: &str) -> std::borrow::Cow<'_, str> {
-    if !path.split('/').any(|segment| segment == "." || segment == "..") {
+    let collapses = path.trim_end_matches('/').contains("//");
+    if !collapses && !path.split('/').any(|segment| segment == "." || segment == "..") {
         return std::borrow::Cow::Borrowed(path);
     }
     let absolute = path.starts_with('/');
@@ -90,10 +92,16 @@ pub const SYSTEM_FOLDERS: [&str; 6] = ["/bin", "/boot", "/lib", "/sbin", "/proc"
 /// How `path` stands to `folder`, in the words the originals' validators
 /// put in their messages: `set to` when the two are one, `child of` when
 /// `path` is inside it, `None` when it is neither.
+///
+/// As the originals compare, measured against Radarr: equality on the
+/// paths `CleanFilePath` gives, with `.`, `..` and repeated slashes
+/// resolved (`/data/../lib` and `//lib` are `/lib`); the parent through
+/// `OsPath`, which drops `.` and repeated slashes but walks `..` as a
+/// name (`/data/../lib/x` is not inside `/lib`, `//lib/./x` is).
 pub fn relationship_to(folder: &str, path: &str) -> Option<&'static str> {
-    if path_equals(folder, path) {
+    if path_equals(&resolve_dots(folder), &resolve_dots(path)) {
         Some("set to")
-    } else if is_parent_path(folder, path) {
+    } else if is_parent_os_path(folder, path) {
         Some("child of")
     } else {
         None
@@ -106,6 +114,32 @@ pub fn system_folder_of(path: &str) -> Option<(&'static str, &'static str)> {
     SYSTEM_FOLDERS
         .iter()
         .find_map(|system| relationship_to(system, path).map(|relationship| (relationship, *system)))
+}
+
+/// `OsPath`'s own form of a path: `.` segments and repeated slashes gone,
+/// `..` kept as a name.
+fn os_path(path: &str) -> String {
+    let kept: Vec<&str> = path.split('/').filter(|s| !s.is_empty() && *s != ".").collect();
+    let joined = kept.join("/");
+    if path.starts_with('/') {
+        format!("/{joined}")
+    } else {
+        joined
+    }
+}
+
+/// `PathExtensions.IsParentPath` as the validators use it: `OsPath`'s
+/// directories of `child` walked up, compared case-insensitively.
+fn is_parent_os_path(parent: &str, child: &str) -> bool {
+    let (parent, child) = (os_path(parent), os_path(child));
+    let (parent, child) = (parent.as_bytes(), child.as_bytes());
+    if parent.is_empty() || parent.len() >= child.len() {
+        return false;
+    }
+    if parent == b"/" {
+        return true;
+    }
+    child[..parent.len()].eq_ignore_ascii_case(parent) && child[parent.len()] == b'/'
 }
 
 /// `IsParentPath`: whether `child` is inside `parent` (not equal to it),
@@ -328,6 +362,34 @@ pub fn language_from_iso(code: &str) -> Option<i64> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// The bin and the system folders are matched however the path is
+    /// spelled, as the originals match them: equality with `..`, `.` and
+    /// repeated slashes resolved, so `/data/../lib` is `/lib` and cannot be
+    /// a movie's folder; the parent with `.` and repeated slashes dropped.
+    #[test]
+    fn a_folder_is_recognised_however_the_path_is_spelled() {
+        for path in ["/data/../lib", "/lib/.", "//lib", "/lib//", "/usr/./bin"] {
+            assert!(
+                system_folder_of(path).is_some_and(|(r, _)| r == "set to"),
+                "{path}"
+            );
+        }
+        for path in ["//lib/x", "/proc/./1", "/usr//bin/./x"] {
+            assert!(
+                system_folder_of(path).is_some_and(|(r, _)| r == "child of"),
+                "{path}"
+            );
+        }
+        // Recorded from Radarr: `..` inside a longer path is walked as a name.
+        assert_eq!(system_folder_of("/downloads/../lib/Interstellar (2014)"), None);
+        assert_eq!(relationship_to("/data/bin", "/data/./bin"), Some("set to"));
+        assert_eq!(
+            relationship_to("/data/bin", "/data//bin/Movie (2001)"),
+            Some("child of")
+        );
+        assert_eq!(system_folder_of("/library"), None);
+    }
 
     #[test]
     fn parent_paths_are_compared_at_any_byte() {

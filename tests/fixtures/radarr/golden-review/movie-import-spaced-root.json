@@ -1,0 +1,24 @@
+{
+  "body": [
+    {
+      "attemptedValue": " /movies/Interstellar (2014) {tmdb-157336}",
+      "errorCode": "PathValidator",
+      "errorMessage": "Invalid Path: ' /movies/Interstellar (2014) {tmdb-157336}'",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "path": " /movies/Interstellar (2014) {tmdb-157336}",
+        "propertyName": "Path",
+        "propertyValue": " /movies/Interstellar (2014) {tmdb-157336}"
+      },
+      "propertyName": "Path",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-14T06:29:39Z",
+  "request": {
+    "body": "bodies/movie-import-spaced-root.json",
+    "method": "POST",
+    "path": "/api/v3/movie/import"
+  },
+  "status": 400
+}

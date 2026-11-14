@@ -333,7 +333,7 @@ pub fn api_router() -> Router<AppState> {
         // `ImportListMoviesController` adds as the library import does.
         .route(
             "/importlist/movie",
-            get(discover::list).post(movie_writes::import),
+            get(discover::list).post(movie_writes::import_from_lists),
         )
         .route(
             "/movie/editor",

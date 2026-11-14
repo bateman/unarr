@@ -213,15 +213,35 @@ fn already_imported(personality: Personality, own_dir: &Path) -> anyhow::Result<
         .is_some())
 }
 
-/// `--import-from` names a directory that must hold the database of at least
-/// one selected personality, unless that personality was imported already.
-/// Otherwise a typo in the path would start a blank installation with a new
-/// API key and no login, and silently at that.
+/// With `--import-from`, every selected personality was imported already or
+/// finds its original's database in one of the folders given, and every
+/// folder given holds the database of a selected personality unless that
+/// one was imported already. Otherwise a typo in a path, or a folder still
+/// empty (Docker creates a missing bind-mount source), would start a blank
+/// installation with a new API key and no login, and silently at that:
+/// one personality imported earlier does not vouch for another.
 fn check_import_source(
     import_from: &[PathBuf],
     personalities: &[Personality],
     data: &Path,
 ) -> anyhow::Result<()> {
+    for p in personalities {
+        let present = import_from
+            .iter()
+            .any(|dir| dir.join(p.legacy_db_file()).is_file());
+        anyhow::ensure!(
+            present || already_imported(*p, &data.join(personality_dir(*p)))?,
+            "{}: no {} in {} and nothing imported yet; check the path, or leave {} out of the personalities",
+            p.app_name(),
+            p.legacy_db_file(),
+            import_from
+                .iter()
+                .map(|d| d.display().to_string())
+                .collect::<Vec<_>>()
+                .join(", "),
+            p.app_name().to_lowercase()
+        );
+    }
     let expected: Vec<&str> = personalities.iter().map(|p| p.legacy_db_file()).collect();
     for dir in import_from {
         let mut found = false;
@@ -897,11 +917,16 @@ mod tests {
         let err = check_import_source(std::slice::from_ref(&source), &all, &data)
             .unwrap_err()
             .to_string();
-        assert!(err.contains("sonarr.db or radarr.db"), "{err}");
+        assert!(err.contains("Sonarr: no sonarr.db"), "{err}");
 
-        // The original database is there for one of the personalities.
+        // The original database is there for one of the personalities: the
+        // other would start blank, so the start stops, naming it.
         std::fs::write(source.join("radarr.db"), b"").unwrap();
-        check_import_source(std::slice::from_ref(&source), &all, &data).unwrap();
+        let err = check_import_source(std::slice::from_ref(&source), &all, &data)
+            .unwrap_err()
+            .to_string();
+        assert!(err.contains("Sonarr: no sonarr.db"), "{err}");
+        check_import_source(std::slice::from_ref(&source), &[Personality::Radarr], &data).unwrap();
 
         // A database left by a blank first start is not an import.
         std::fs::remove_file(source.join("radarr.db")).unwrap();
@@ -916,7 +941,13 @@ mod tests {
             db.call_blocking(|conn| unarr_core::store::config::set_meta(conn, "source.app", "sonarr"))
                 .unwrap();
         }
-        check_import_source(std::slice::from_ref(&source), &all, &data).unwrap();
+        check_import_source(std::slice::from_ref(&source), &[Personality::Sonarr], &data).unwrap();
+        // Sonarr imported does not vouch for a Radarr folder still empty:
+        // the start that would bring Radarr up blank and open stops.
+        let err = check_import_source(std::slice::from_ref(&source), &all, &data)
+            .unwrap_err()
+            .to_string();
+        assert!(err.contains("Radarr: no radarr.db"), "{err}");
         assert!(check_import_source(std::slice::from_ref(&source), &[Personality::Radarr], &data).is_err());
 
         let _ = std::fs::remove_dir_all(&dir);

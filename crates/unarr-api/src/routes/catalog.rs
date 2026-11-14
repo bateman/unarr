@@ -88,8 +88,30 @@ async fn tag_details_all(state: &AppState) -> anyhow::Result<Vec<Value>> {
 
 // --- root folders
 
-/// Radarr's resource has no `totalSpace`.
-fn root_folder_resource(r: &RootFolder, series_paths: &[String], total_space: bool) -> Value {
+/// `RootFolderService.SpecialFolders`: folders a file system or a NAS
+/// keeps for itself, never offered as unmapped.
+const SPECIAL_FOLDERS: [&str; 9] = [
+    "$recycle.bin",
+    "system volume information",
+    "recycler",
+    "lost+found",
+    ".appledb",
+    ".appledesktop",
+    ".appledouble",
+    "@eadir",
+    ".grab",
+];
+
+/// Radarr's resource has no `totalSpace`. The unmapped folders are
+/// `GetUnmappedFolders`'s: the library's own folders, hidden ones (a name
+/// starting with a dot, as .NET reads it on Linux), the recycling bin and
+/// the special folders left out, sorted by name in any case.
+fn root_folder_resource(
+    r: &RootFolder,
+    series_paths: &[String],
+    total_space: bool,
+    recycle_bin: &str,
+) -> Value {
     let path = FsPath::new(&r.path);
     let mut out =
         json!({"id": r.id, "path": r.path.trim_end_matches('/'), "accessible": false, "unmappedFolders": []});
@@ -107,10 +129,19 @@ fn root_folder_resource(r: &RootFolder, series_paths: &[String], total_space: bo
                 .flatten()
                 .filter(|e| e.file_type().map(|t| t.is_dir()).unwrap_or(false))
                 .collect();
-            dirs.sort_by_key(|e| e.file_name());
+            dirs.sort_by_key(|e| e.file_name().to_string_lossy().to_lowercase());
             for e in dirs {
                 let full = e.path().display().to_string();
-                if !series_paths.iter().any(|p| p.trim_end_matches('/') == full) {
+                let name = e.file_name().to_string_lossy().to_lowercase();
+                let excluded = name.starts_with('.')
+                    || SPECIAL_FOLDERS.contains(&name.as_str())
+                    || (!recycle_bin.trim().is_empty()
+                        && unarr_core::mediafiles::path_equals(&full, recycle_bin));
+                if !excluded
+                    && !series_paths
+                        .iter()
+                        .any(|p| unarr_core::mediafiles::path_equals(p, &full))
+                {
                     unmapped.push(json!({
                         "name": e.file_name().to_string_lossy(),
                         "path": full,
@@ -139,12 +170,13 @@ fn library_paths(conn: &rusqlite::Connection, personality: Personality) -> anyho
 
 async fn root_folders_all(state: &AppState) -> anyhow::Result<Vec<Value>> {
     let personality = state.personality();
-    let (roots, paths) = state
+    let (roots, paths, bin) = state
         .db()
         .call(move |conn| {
             let roots = store::catalog::list_root_folders(conn)?;
             let paths = library_paths(conn, personality)?;
-            Ok((roots, paths))
+            let bin = store::config::config(conn, "recyclebin")?.unwrap_or_default();
+            Ok((roots, paths, bin))
         })
         .await?;
     // Free space and directory listings touch the disks: a hung network
@@ -153,7 +185,7 @@ async fn root_folders_all(state: &AppState) -> anyhow::Result<Vec<Value>> {
     crate::blocking::run(move || {
         roots
             .iter()
-            .map(|r| root_folder_resource(r, &paths, total_space))
+            .map(|r| root_folder_resource(r, &paths, total_space, &bin))
             .collect()
     })
     .await

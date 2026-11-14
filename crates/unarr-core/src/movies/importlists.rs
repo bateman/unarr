@@ -595,7 +595,7 @@ impl MovieImportLists {
             to_add.len()
         ));
         // `AddMovieService.AddMovies(movies, ignoreErrors: true)`.
-        let added = match library::add_many(&self.db, provider, ctx, to_add, true).await {
+        let added = match library::add_many(&self.db, provider, ctx, to_add, true, true).await {
             Ok(added) => added,
             Err(WriteError::Other(e)) => return Err(e),
             Err(_) => Vec::new(),

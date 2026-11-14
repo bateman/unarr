@@ -399,7 +399,9 @@ pub(crate) fn protocols_filter(p: &Params) -> Result<Option<Vec<unarr_core::mode
                 "torrent" => 2,
                 _ => match part.parse::<i64>() {
                     Ok(n) if !part.is_empty() => n,
-                    _ if value.is_empty() => return Err(format!("The value '{value}' is invalid.")),
+                    // Blank, spaces included, is a value missing, not one
+                    // that does not parse: ASP.NET's binder says it otherwise.
+                    _ if value.trim().is_empty() => return Err(format!("The value '{value}' is invalid.")),
                     _ => return Err(format!("The value '{value}' is not valid.")),
                 },
             };

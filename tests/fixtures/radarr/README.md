@@ -17,7 +17,7 @@ against it.
 | `golden-list/` | Milestone 4d's import lists: the IMDb watchlist written, tested and synced, and what an exclusion does to the next sync. Replayed by `the_import_list_goldens_match`. The watchlist is served by the mock from the hand-made `tests/fixtures/metadata/api.radarr.video/v1/list/imdb/ur0000001.json`. |
 | `golden-backup/` | Milestone 4d's backups and log files. Replayed by `the_backup_goldens_match`. The contents of a log file are not recorded: a log names the paths of the machine that wrote it. |
 | `golden-audit/` | Milestone 4d's audit (`docs/audit/8-radarr.md`): the routes and commands the original has and Unarr lacked. Replayed by `the_audit_goldens_match`. |
-| `golden-review/` | What the reviews of milestone 4d found: a movie's path and a root folder against the recycling bin and the system folders, a library import that names no root folder, a filter with no value. Replayed by `the_review_goldens_match`. |
+| `golden-review/` | What the reviews of milestone 4d found: a movie's path and a root folder against the recycling bin and the system folders, however the path is spelled; a library import that names no root folder or a spaced one; a filter with no value or with spaces; a Discover add with a movie TMDB does not know. Taken through the mock as golden-library is. Replayed by `the_review_goldens_match`. |
 
 Each list is recorded in one run of its own, so the long list next door is
 never re-recorded for a step a milestone adds:

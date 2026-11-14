@@ -230,6 +230,10 @@ pub enum WriteError {
     /// `Path.Combine` given no root folder at all: the
     /// `ArgumentNullException` the original lets escape, a 500.
     NoRootFolder,
+    /// A movie the library has, refused by the unique index when the
+    /// movies are inserted, after every one of them validated: the
+    /// `SQLiteException` the original answers 409 for.
+    AlreadyAdded,
     Other(anyhow::Error),
 }
 
@@ -609,7 +613,9 @@ async fn prepare(
                 // `Path.Combine(RootFolderPath, folder)`: with no root
                 // folder the folder's name is all there is, a relative
                 // path the validation below refuses.
-                match new.root_folder_path.as_deref().map(str::trim) {
+                // `Path.Combine` takes the root as sent, spaces and all: a
+                // root with a space in front makes a path the rules refuse.
+                match new.root_folder_path.as_deref() {
                     Some(root) if !root.is_empty() => {
                         format!("{}/{folder}", root.trim_end_matches('/'))
                     }
@@ -697,24 +703,32 @@ pub async fn add(
 
 /// `AddMovieService.AddMovies`: several movies, added together at one
 /// moment. With `ignore_errors` a movie that does not validate is left
-/// out; without, the first one refuses them all. The caller publishes
-/// `MoviesImportedEvent`.
+/// out; without, the first one refuses them all. A movie the library has
+/// already is no validation failure: the insert meets the unique index
+/// and refuses them all ([`WriteError::AlreadyAdded`]), unless
+/// `skip_existing`, for the syncs (lists, collections) that left out what
+/// the library had and only lose a race to a request. The caller
+/// publishes `MoviesImportedEvent`.
 pub async fn add_many(
     db: &Db,
     provider: &dyn MovieMetadataProvider,
     ctx: &MapContext,
     new: Vec<NewMovie>,
     ignore_errors: bool,
+    skip_existing: bool,
 ) -> Result<Vec<Added>, WriteError> {
     let mut prepared: Vec<Added> = Vec::new();
     for movie in new {
         let tmdb_id = movie.tmdb_id;
         match prepare(db, provider, ctx, movie).await {
-            // A path two of them would share is the second one's failure.
+            // A path two of them would share is the second one's failure;
+            // the same movie named twice goes on to the insert, which
+            // refuses it as the library's own.
             Ok(one)
-                if prepared
-                    .iter()
-                    .any(|p| crate::mediafiles::path_equals(&p.movie.path, &one.movie.path)) =>
+                if prepared.iter().any(|p| {
+                    p.movie.metadata.tmdb_id != one.movie.metadata.tmdb_id
+                        && crate::mediafiles::path_equals(&p.movie.path, &one.movie.path)
+                }) =>
             {
                 let path = &one.movie.path;
                 let mut failure = ValidationFailure::rule(
@@ -742,28 +756,30 @@ pub async fn add_many(
             Err(e) => return Err(e),
         }
     }
-    Ok(db
-        .call(move |conn| {
-            let tx = conn.unchecked_transaction()?;
-            let mut added = Vec::with_capacity(prepared.len());
-            for one in prepared {
-                // The provider was asked since the caller looked: a
-                // movie a request added meanwhile is left out of a
-                // list's sync, as the ones that do not validate are.
-                let tmdb_id = one.movie.metadata.tmdb_id;
-                if ignore_errors && !store::movies_by_tmdb_id(&tx, tmdb_id)?.is_empty() {
-                    tracing::debug!("TmdbId {tmdb_id} was not added: it is in the library already");
-                    continue;
+    db.call(move |conn| {
+        let tx = conn.unchecked_transaction()?;
+        let mut added = Vec::with_capacity(prepared.len());
+        for one in prepared {
+            let tmdb_id = one.movie.metadata.tmdb_id;
+            if !store::movies_by_tmdb_id(&tx, tmdb_id)?.is_empty() {
+                if !skip_existing {
+                    // Dropped, the transaction takes back what it inserted.
+                    return Ok(Err(WriteError::AlreadyAdded));
                 }
-                added.push(Added {
-                    movie: insert(&tx, one.movie)?,
-                    alternative_titles: one.alternative_titles,
-                });
+                // The provider was asked since the sync looked: a movie a
+                // request added meanwhile is left out.
+                tracing::debug!("TmdbId {tmdb_id} was not added: it is in the library already");
+                continue;
             }
-            tx.commit()?;
-            Ok(added)
-        })
-        .await?)
+            added.push(Added {
+                movie: insert(&tx, one.movie)?,
+                alternative_titles: one.alternative_titles,
+            });
+        }
+        tx.commit()?;
+        Ok(Ok(added))
+    })
+    .await?
 }
 
 /// What `PUT /movie/{id}` changes: the fields `ApplyChanges` takes.

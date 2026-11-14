@@ -1057,9 +1057,15 @@ fn review_mode(name: &str) -> Mode {
         // An exception the original lets escape carries its stack.
         "movie-import-no-root" => Mode::Exact(&["description"]),
         // A model binding error names the request it refused.
-        "blocklist-movie-ids-empty" => Mode::Exact(&["traceId"]),
+        "blocklist-movie-ids-empty" | "blocklist-movie-ids-space" | "blocklist-protocols-space" => {
+            Mode::Exact(&["traceId"])
+        }
+        // The insert the unique index refused, with the SQLite stack.
+        "importlist-movie-add-one-unknown" => Mode::Exact(&["description"]),
+        // The movie added, with the moment it was.
+        "movie-add-path-dotted-system-folder" | "movie-added-from-discover" => Mode::Exact(&["added"]),
         // The disk the recording ran on.
-        "rootfolder-after" => Mode::Exact(&["freeSpace"]),
+        n if n.starts_with("rootfolder-") => Mode::Exact(&["freeSpace"]),
         _ => Mode::Exact(&[]),
     }
 }
@@ -1089,19 +1095,11 @@ async fn the_import_list_goldens_match() {
     replay_list("golden-list", list_mode, &["queue sync", "queue/details sync"]).await;
 }
 
-/// One recorded list replayed: the fixture restored into a directory of
-/// its own, the mock on a free port, the clock moved by the recording.
 /// A recorded answer with the user the recording ran as (`root`) replaced
-/// by the one this process runs as, where a message names it.
+/// by the one this process runs as, found the way the server finds it, so
+/// that both say the same name wherever the tests run.
 fn as_current_user(recorded: &Value) -> Value {
-    let user = std::env::var("USER")
-        .ok()
-        .filter(|u| !u.is_empty())
-        .or_else(|| {
-            let out = std::process::Command::new("id").arg("-un").output().ok()?;
-            Some(String::from_utf8_lossy(&out.stdout).trim().to_string())
-        })
-        .unwrap_or_else(|| "root".into());
+    let user = unarr_api::routes::settings_writes::current_user();
     let text = recorded
         .to_string()
         .replace("by user 'root'", &format!("by user '{user}'"))
@@ -1109,6 +1107,8 @@ fn as_current_user(recorded: &Value) -> Value {
     serde_json::from_str(&text).expect("the answer is still JSON")
 }
 
+/// One recorded list replayed: the fixture restored into a directory of
+/// its own, the mock on a free port, the clock moved by the recording.
 async fn replay_list(list: &'static str, mode: fn(&str) -> Mode, excused_hub: &[&str]) {
     let golden_dir = fixture_dir().join(list);
     let dirs = ReplayDirs::create_named(list);

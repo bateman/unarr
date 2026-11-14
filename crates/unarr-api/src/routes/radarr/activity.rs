@@ -224,9 +224,9 @@ pub async fn blocklist(State(state): State<AppState>, uri: Uri) -> ApiResult<Res
     for value in p.all("movieIds") {
         match value.trim().parse::<i32>() {
             Ok(id) => movie_ids.push(i64::from(id)),
-            // An empty value is refused in other words than one that is
-            // not a number, as the shared routes' filters are.
-            Err(_) if value.is_empty() => {
+            // An empty value, or one of spaces, is refused in other words
+            // than one that is not a number, as the shared routes' filters are.
+            Err(_) if value.trim().is_empty() => {
                 return Ok(refused("movieIds", format!("The value '{value}' is invalid.")))
             }
             Err(_) => return Ok(refused("movieIds", format!("The value '{value}' is not valid."))),

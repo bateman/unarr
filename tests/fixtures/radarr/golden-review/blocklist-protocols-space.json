@@ -1,0 +1,19 @@
+{
+  "body": {
+    "errors": {
+      "protocols": [
+        "The value ' ' is invalid."
+      ]
+    },
+    "status": 400,
+    "title": "One or more validation errors occurred.",
+    "traceId": "00-de956097dcb355acd3dff023d11859fb-abac50f1ca664008-00",
+    "type": "https://tools.ietf.org/html/rfc9110#section-15.5.1"
+  },
+  "recordedAt": "2026-11-14T06:29:39Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/blocklist?page=1&pageSize=5&protocols=%20"
+  },
+  "status": 400
+}

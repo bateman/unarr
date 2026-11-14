@@ -162,8 +162,10 @@ pub(crate) async fn save_config(state: &AppState, body: &Value, fields: &[(&str,
 
 // --- config pages
 
-/// The name the process runs under (`Environment.UserName`).
-fn current_user() -> String {
+/// The name the process runs under (`Environment.UserName`), as the
+/// message of a recycling bin that cannot be written names it. Public for
+/// the replay, which puts the same name in the recorded message.
+pub fn current_user() -> String {
     std::env::var("USER")
         .ok()
         .filter(|u| !u.is_empty())

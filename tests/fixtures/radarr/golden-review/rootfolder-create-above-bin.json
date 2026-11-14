@@ -1,0 +1,16 @@
+{
+  "body": {
+    "accessible": true,
+    "freeSpace": 9954615296,
+    "id": 2,
+    "path": "/downloads",
+    "unmappedFolders": []
+  },
+  "recordedAt": "2026-11-14T06:29:39Z",
+  "request": {
+    "body": "bodies/rootfolder-create-above-bin.json",
+    "method": "POST",
+    "path": "/api/v3/rootfolder"
+  },
+  "status": 201
+}

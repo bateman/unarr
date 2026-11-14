@@ -492,7 +492,8 @@ impl Runtime {
                 })
                 .await?;
             if !to_add.is_empty() {
-                match crate::movies::library::add_many(&self.db, provider.as_ref(), &ctx, to_add, true).await
+                match crate::movies::library::add_many(&self.db, provider.as_ref(), &ctx, to_add, true, true)
+                    .await
                 {
                     Ok(added) => {
                         let ids: Vec<i64> = added.iter().map(|a| a.movie.id).collect();

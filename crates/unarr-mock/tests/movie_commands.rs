@@ -577,3 +577,74 @@ async fn cleaning_the_library_says_whether_the_folders_go() {
         );
     }
 }
+
+/// `ImportListSync` of every list, the one that cleans (the sync of one
+/// list does not, in the original either), with Clean Library removing
+/// what the watchlist does not name, against the recorded list: the
+/// folders go with `removeAndDelete` and stay with `removeAndKeep`, and a
+/// folder a kept movie shares is never deleted.
+#[tokio::test]
+async fn the_list_sync_deletes_folders_only_when_the_level_says_so() {
+    use unarr_core::metadata::Upstreams;
+
+    for (level, deleted) in [("removeAndDelete", true), ("removeAndKeep", false)] {
+        let mock = Mock::start(fixtures_dir(), 0).await.unwrap();
+        let db = fixture_db(&mock).await;
+        let root = std::env::temp_dir().join(format!("unarr_list_clean_{level}_{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&root);
+        let (gone, shared) = (root.join("Nightmare Alley (2021)"), root.join("Shared"));
+        for dir in [&gone, &shared] {
+            std::fs::create_dir_all(dir).unwrap();
+            std::fs::write(dir.join("movie.mkv"), b"video").unwrap();
+        }
+        let (gone_path, shared_path) = (
+            gone.to_string_lossy().into_owned(),
+            shared.to_string_lossy().into_owned(),
+        );
+        db.call(move |conn| {
+            // The fixture's watchlist, pointed at the recorded one, adding
+            // nothing so that only the clean runs.
+            let mut list = store::providers::get_provider(conn, ProviderKind::ImportList, 1)?.unwrap();
+            list.settings = json!({"listId": "ur0000001"});
+            list.attributes["enabled"] = json!(true);
+            list.attributes["enableAuto"] = json!(false);
+            store::providers::update_provider(conn, &list)?;
+            store::config::set_config(conn, "listsynclevel", level)?;
+            store::config::set_config(conn, "recyclebin", "")?;
+            // Due now: the sync of every list is the one that cleans.
+            conn.execute("DELETE FROM import_list_status", [])?;
+            // Nightmare Alley (70) and The Holdovers (116) are not on the
+            // list; Alien: Romulus (6) is, and shares The Holdovers' folder.
+            conn.execute("UPDATE movies SET path = ?1 WHERE id = 70", [&gone_path])?;
+            conn.execute("UPDATE movies SET path = ?1 WHERE id IN (6, 116)", [&shared_path])?;
+            Ok(())
+        })
+        .await
+        .unwrap();
+        let (runtime, _) = runtime(&db).await;
+        runtime.set_upstreams(Upstreams::mock(&mock.url()));
+
+        let sync = run(
+            &runtime,
+            CommandBody::ImportListSync { definition_id: None },
+            CommandTrigger::Manual,
+        )
+        .await;
+        assert_eq!(
+            sync.status,
+            CommandStatus::Completed,
+            "{level}: {:?}",
+            sync.exception
+        );
+        for (movie_id, kept) in [(70, false), (116, false), (6, true)] {
+            let left = count(&db, "SELECT count(*) FROM movies WHERE id = ?1", movie_id).await;
+            assert_eq!(left, i64::from(kept), "{level}: movie {movie_id}");
+        }
+        assert_eq!(gone.is_dir(), !deleted, "{level}: the folder of a removed movie");
+        assert!(
+            shared.join("movie.mkv").is_file(),
+            "{level}: a folder a kept movie shares"
+        );
+        let _ = std::fs::remove_dir_all(&root);
+    }
+}
