@@ -660,7 +660,7 @@ Discover add that names a movie TMDB does not know.
 
 | Exit criterion | Status |
 |----------------|--------|
-| `make ui && make check` green | Yes: fmt, clippy `-D warnings`, 683 tests in 31 test binaries. Sonarr's replay is unchanged: the same 644 goldens, none re-recorded. |
+| `make ui && make check` green | Yes: fmt, clippy `-D warnings`, 685 tests in 31 test binaries. Sonarr's replay is unchanged: the same 644 goldens, none re-recorded. |
 | The UI adds a movie and saves every settings page | The writes each page sends are goldens, recorded from the original and replayed: the seven `config/*` pages, tags, root folders, remote path mappings, delay and release profiles, custom filters, auto tagging, custom formats, quality profiles and definitions with their reset, the lists' exclusions, the collections, the import lists, the metadata consumers. The pages themselves were not driven with a browser in this milestone, as 4a and 4c did. |
 | The watchlist sync adds movies against the mock | Yes: `the_import_list_goldens_match`. The IMDb list the maintainer uses is served by the mock from a hand-made fixture; the sync adds the two movies the library lacks, rejects the one it has and the one the exclusions name, and a movie deleted with an exclusion does not come back. |
 | Recyclarr's exchange replays | Yes, both ways: the recording was taken between Recyclarr 8.8.1 and the real Radarr, and the real Recyclarr run against Unarr sends the same requests, gets the same answers and prints the same output (`make recyclarr-radarr`, `tests/fixtures/recyclarr/radarr-exchange.json`). `delete_old_custom_formats` leaves the format the maintainer made by hand alone. |
