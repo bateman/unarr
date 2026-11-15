@@ -406,11 +406,21 @@ def run_side(side: Side, first_seconds: int, idle_seconds: int, tail_seconds: in
     # What actually runs, as each application reports it.
     versions = {port: json.loads(get(port, "/api/v3/system/status")).get("version", "?") for port in side.ports}
     samples = idle(side, idle_seconds)
-    # One unmeasured pass over the same reads: the first call of a route on a
-    # fresh .NET process pays its JIT and query compilation (about 3 s of
-    # the originals' 8 on the real library), which a running install pays
-    # once. The reads measured are then the work, not the warm-up.
-    reads()
+    # Unmeasured passes over the same reads first. The first call of a route
+    # on a fresh .NET process pays its JIT compilation, and a route called
+    # often is compiled again, in the background, a pass or two later
+    # (tiered compilation): 9.9, 4.4, 3.1, 3.4, 2.9 s of CPU for the
+    # originals' first five passes on the real library, 1.9 to 1.6 for
+    # Unarr. A running install pays that once. So: at least two passes, and
+    # more until one costs within 10 % of the one before, at most six; the
+    # same rule for both sides.
+    warmup = []
+    while len(warmup) < 6:
+        c0 = side.sample()["cpu"]
+        reads()
+        warmup.append(side.sample()["cpu"] - c0)
+        if len(warmup) >= 2 and warmup[-1] >= 0.9 * warmup[-2]:
+            break
     before = side.sample()
     peak = dict(before)
     done = threading.Event()
@@ -459,6 +469,7 @@ def run_side(side: Side, first_seconds: int, idle_seconds: int, tail_seconds: in
     side.stop()
     return {
         "versions": versions,
+        "warmup_cpu": warmup,
         "first": first,
         "idle": samples,
         "reads": {"seconds": t1 - t0, "cpu": after["cpu"] - before["cpu"],

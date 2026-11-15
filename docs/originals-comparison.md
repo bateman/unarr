@@ -34,9 +34,12 @@ run the comparison again and update this file in the same branch.
   - fifteen idle minutes, sampled every five seconds;
   - the same reads over both APIs: about 220 requests, the list of each
     app, history, wanted, calendar, queue and twenty series' episodes,
-    after one unmeasured pass over them: the first call of a route on a
-    fresh .NET process pays its JIT compilation, which a running install
-    pays once;
+    after unmeasured passes over them: the first call of a route on a
+    fresh .NET process pays its JIT compilation, and a route called often
+    is compiled again a pass or two later, which a running install pays
+    once. At least two passes, then more until one costs within 10 % of
+    the one before, at most six, on both sides; `results.json` keeps each
+    pass's CPU (`warmup_cpu`);
   - five more idle minutes.
 - **No network.** The script runs itself again in a network namespace of
   its own (`unshare -rn`, no privilege needed) where only the loopback is
@@ -128,8 +131,8 @@ writes them. Measured on 2026-11-14 in the cloud session (x86-64, four
 cores, 16 GB) with the script's prototype, and **not comparable with the
 runs to come**: both libraries logged at debug level, which costs the
 originals a line per API request and Unarr none, the reads were measured
-cold (the originals' JIT included, about 3 s of their 8 on the real
-library), Radarr's `wanted/missing` was not read, and the scaled originals ran without the
+cold (the originals' JIT included, about 5 to 6 s of CPU of their 8 on
+the real library), Radarr's `wanted/missing` was not read, and the scaled originals ran without the
 heap limit.
 
 ### Real library (38 series, 193 movies)
