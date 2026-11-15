@@ -54,3 +54,17 @@ make sure the repository is configured accordingly:
 git config user.name "Fabio Calefato"
 git config user.email "fcalefato@gmail.com"
 ```
+
+## Comparison with the originals
+
+`docs/originals-comparison.md` keeps what Unarr saves against the original
+Sonarr and Radarr: RAM, CPU and latency on the same machine and library.
+After each substantial change, update it in the same branch:
+
+- what counts: a milestone, a change made for speed or memory, a new
+  pinned version of an original in `scripts/*-fixture.sh`;
+- how: `make ui`, then `make compare-originals` (the real library). For a
+  change to the speed or the memory of routes, also run
+  `make scale-fixture` and `make compare-originals LIBRARY=scaled`;
+- what to write: replace the tables from `.cache/compare/<library>/report.md`,
+  and add a row to its History table.

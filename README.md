@@ -23,7 +23,9 @@ and the settings writes for movies are the next milestone.
 `--personalities lidarr` starts but is not usable. See
 [docs/DESIGN.md](docs/DESIGN.md), the work orders of each phase under `docs/`,
 [docs/audit/README.md](docs/audit/README.md) and, for running it in place of
-Sonarr, [docs/homelab-compose.md](docs/homelab-compose.md).
+Sonarr, [docs/homelab-compose.md](docs/homelab-compose.md). What it saves
+against the originals, in RAM, CPU and latency, is measured in
+[docs/originals-comparison.md](docs/originals-comparison.md).
 
 ## Goals
 
