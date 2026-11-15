@@ -6,7 +6,8 @@ The same machine and the same library for both sides, one side at a time:
 - the originals: the official Sonarr and Radarr that ``make ui`` downloads
   into ``.cache/`` (the versions pinned in ``scripts/sonarr-fixture.sh`` and
   ``scripts/radarr-fixture.sh``), two processes;
-- Unarr: ``target/release/unarrd`` (``make build``) with both personalities,
+- Unarr: ``target/release/unarrd``, which the script has cargo build from the
+  checkout first (``--unarrd`` names a prebuilt one instead), with both personalities,
   one process.
 
 Each side starts once on a fresh copy of the library and runs ``--first``
@@ -25,7 +26,7 @@ Libraries: ``real`` is the anonymised fixtures (``tests/fixtures``), the
 maintainer's own library; ``scaled`` is ``.cache/scaled`` from
 ``make scale-fixture`` (950 series, 2,123 movies)::
 
-    make ui build
+    make ui
     python3 -I scripts/compare-originals.py --library real
     make compare-originals LIBRARY=scaled
 
@@ -92,10 +93,15 @@ OPENER = urllib.request.build_opener(urllib.request.ProxyHandler({}))
 def leftovers(unarrd: Path) -> list[str]:
     """Running processes of the binaries this script starts."""
     cache = os.environ.get("UNARR_CACHE")
+    # Resolved: /proc/<pid>/exe names the file itself, past any symlink in
+    # the way (a .cache linked from a worktree, a relative UNARR_CACHE).
     wanted = {
-        str(unarrd.resolve()),
-        str((Path(cache) / "Sonarr/Sonarr") if cache else REPO / ".cache/sonarr/Sonarr/Sonarr"),
-        str((Path(cache) / "Radarr/Radarr") if cache else REPO / ".cache/radarr/Radarr/Radarr"),
+        str(p.resolve())
+        for p in (
+            unarrd,
+            (Path(cache) / "Sonarr/Sonarr") if cache else REPO / ".cache/sonarr/Sonarr/Sonarr",
+            (Path(cache) / "Radarr/Radarr") if cache else REPO / ".cache/radarr/Radarr/Radarr",
+        )
     }
     found = []
     for entry in Path("/proc").iterdir():
@@ -373,38 +379,14 @@ def pinned(script: str, var: str) -> str:
     return m.group(1) if m else "?"
 
 
-def linked_crates(name: str = "unarrd", seen: set | None = None) -> set:
-    """The workspace crates unarrd is built from: its [dependencies] and
-    theirs, read from each crate's Cargo.toml. Dev-dependencies (unarr-mock)
-    and the tests are not part of the binary."""
-    seen = set() if seen is None else seen
-    seen.add(name)
-    section = ""
-    for line in (REPO / "crates" / name / "Cargo.toml").read_text().splitlines():
-        line = line.strip()
-        if line.startswith("["):
-            section = line
-        elif section == "[dependencies]":
-            m = re.match(r"(unarr-[a-z]+)\b", line)
-            if m and m.group(1) not in seen and (REPO / "crates" / m.group(1)).is_dir():
-                linked_crates(m.group(1), seen)
-    return seen
-
-
-def stale(binary: Path) -> str:
-    """A note when the binary is older than a source it is built from: then
-    the commit the report names is not what runs. File times, not commit
-    times: committing what was built does not make the binary stale, while
-    an edit or a checkout of other code does."""
-    paths = ["Cargo.toml", "Cargo.lock"] + [f"crates/{c}" for c in sorted(linked_crates())]
-    files = subprocess.run(["git", "-C", str(REPO), "ls-files", "--", *paths],
-                           capture_output=True, text=True).stdout.split()
-    inputs = [f for f in files if not re.search(r"/(tests|benches|examples)/", f)]
-    newest = max((int((REPO / f).stat().st_mtime) for f in inputs if (REPO / f).exists()), default=0)
-    if binary.stat().st_mtime < newest:
-        log(f"warning: {binary} is older than the sources; make build first")
-        return ", binary older than the sources"
-    return ""
+def build() -> Path:
+    """target/release/unarrd as the checkout builds it: cargo rebuilds what
+    changed and does nothing otherwise, so the binary is the checkout's."""
+    log("cargo build --release --bin unarrd")
+    done = subprocess.run(["cargo", "build", "--release", "--bin", "unarrd"], cwd=REPO)
+    if done.returncode != 0:
+        raise SystemExit("cargo build failed")
+    return REPO / "target/release/unarrd"
 
 
 def at(rows: list[dict], seconds: float) -> dict:
@@ -552,8 +534,9 @@ def main():
     ap.add_argument("--out", type=Path, help="default .cache/compare/<library>")
     ap.add_argument("--repeat", type=int, default=1,
                     help="runs per side, the order alternating between runs (default 1)")
-    ap.add_argument("--unarrd", type=Path, default=REPO / "target/release/unarrd",
-                    help="the Unarr binary (default target/release/unarrd, built by make build)")
+    ap.add_argument("--unarrd", type=Path,
+                    help="a prebuilt Unarr binary, named in the report by its path "
+                         "(default: target/release/unarrd, built from the checkout first)")
     ap.add_argument("--network", action="store_true",
                     help="do not isolate the network: both sides reach it, and the figures are not comparable")
     a = ap.parse_args()
@@ -562,13 +545,16 @@ def main():
     # The port check still catches a service of the host on 8989 or 7878,
     # which a --network run would collide with.
     if os.environ.get("COMPARE_NETNS") != "1":
-        left = leftovers(a.unarrd)
+        left = leftovers(a.unarrd or REPO / "target/release/unarrd")
         if left:
             raise SystemExit(f"a side is still running ({', '.join(left)}): stop it first")
         if a.network:
             for port in (SONARR_PORT, RADARR_PORT):
                 if listening(port):
                     raise SystemExit(f"something already listens on {port}: stop it first")
+        # Before the namespace, where cargo could not fetch a crate it lacks.
+        if a.unarrd is None:
+            build()
     if not a.network:
         isolate()
     # A SIGTERM or SIGHUP ends the run through measure()'s finally, as
@@ -582,18 +568,21 @@ def main():
     cache = os.environ.get("UNARR_CACHE")
     sonarr = Path(cache) / "Sonarr/Sonarr" if cache else REPO / ".cache/sonarr/Sonarr/Sonarr"
     radarr = Path(cache) / "Radarr/Radarr" if cache else REPO / ".cache/radarr/Radarr/Radarr"
-    unarrd = a.unarrd
-    for binary, how in ((sonarr, "make ui"), (radarr, "make ui"), (unarrd, "make build")):
+    for binary in (sonarr, radarr):
         if not binary.exists():
-            raise SystemExit(f"{binary} missing: run {how} first")
+            raise SystemExit(f"{binary} missing: run make ui first")
+    if a.unarrd is not None and not a.unarrd.exists():
+        raise SystemExit(f"{a.unarrd} missing")
+    # Built by build() above, before the namespace, when not given.
+    unarrd = a.unarrd.resolve() if a.unarrd is not None else REPO / "target/release/unarrd"
     meta = {
         "library": a.library,
-        # The checkout's commit: true of the binary when make built it.
-        "unarr": subprocess.run(["git", "-C", str(REPO), "describe", "--always", "--dirty"],
-                                capture_output=True, text=True).stdout.strip()
-        # A binary given with --unarrd is named by its path: its code is not
-        # the checkout's, so its age says nothing.
-        + (stale(unarrd) if a.unarrd == REPO / "target/release/unarrd" else f" ({a.unarrd})"),
+        # The checkout's commit for the binary built from it; a binary given
+        # with --unarrd was built from code this script cannot know, so it
+        # is named by its path only.
+        "unarr": str(unarrd) if a.unarrd is not None else subprocess.run(
+            ["git", "-C", str(REPO), "describe", "--always", "--dirty"], capture_output=True, text=True
+        ).stdout.strip(),
         "sonarr": pinned("sonarr-fixture.sh", "SONARR_VERSION"),
         "radarr": pinned("radarr-fixture.sh", "RADARR_VERSION"),
         "first": a.first, "idle": a.idle, "tail": a.tail, "cap": not a.no_cap,

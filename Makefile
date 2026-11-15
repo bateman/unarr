@@ -76,7 +76,7 @@ scale-fixture: ## Grow the fixtures to 950 series and 2,123 movies with 50,000 h
 	@python3 -I scripts/scale-fixture.py --out .cache/scaled/sonarr
 	@python3 -I scripts/scale-fixture.py --app radarr --out .cache/scaled/radarr
 
-compare-originals: build ## Measure RAM, CPU and latency of the original Sonarr and Radarr beside Unarr (LIBRARY=real|scaled, REPEAT=n; about an hour a run; needs make ui, and make scale-fixture for scaled)
+compare-originals: ## Measure RAM, CPU and latency of the original Sonarr and Radarr beside Unarr (LIBRARY=real|scaled, REPEAT=n; about an hour a run; needs make ui, and make scale-fixture for scaled)
 	@python3 -I scripts/compare-originals.py --library $(or $(LIBRARY),real) --repeat $(or $(REPEAT),1)
 
 bazarr: ## Replay Bazarr's requests against a running unarrd (UNARR_URL, UNARR_API_KEY)

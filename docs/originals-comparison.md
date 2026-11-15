@@ -18,11 +18,11 @@ run the comparison again and update this file in the same branch.
 
 - **The sides.** The originals are the official Sonarr and Radarr from
   their release tarballs, two processes. Unarr is `target/release/unarrd`
-  (or `--unarrd`) with both personalities in one process. The two sides
-  run one at a time, each on a fresh copy of the library. The report names
-  the checkout's commit, and says so when the binary is older than a source
-  it is built from (the crates unarrd links, their tests aside); a binary
-  given with `--unarrd` is named by its path.
+  with both personalities in one process; the script has cargo build it
+  from the checkout first (nothing to do when it is current), so the
+  commit the report names is what runs. A prebuilt binary given with
+  `--unarrd` is named by its path only. The two sides run one at a time,
+  each on a fresh copy of the library.
 - **The two starts.** Each side starts once and runs five minutes, not
   measured: migrations, Unarr's import, the overdue scheduled tasks. Then
   it starts again and is measured:
