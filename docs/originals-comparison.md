@@ -11,10 +11,10 @@ run the comparison again and update this file in the same branch.
 `scripts/compare-originals.py`, through `make compare-originals`:
 
     make ui                                  # the originals, pinned in scripts/*-fixture.sh
-    make compare-originals                   # the real library, about an hour
+    make compare-originals                   # the real library, about an hour and a half
     make scale-fixture
     make compare-originals LIBRARY=scaled    # 950 series and 2,123 movies
-    make compare-originals REPEAT=3          # three runs per side, about three hours
+    make compare-originals REPEAT=3          # three runs per side, about four and a half hours
 
 - **The sides.** The originals are the official Sonarr and Radarr from
   their release tarballs, two processes. Unarr is `unarrd` with both
@@ -28,7 +28,7 @@ run the comparison again and update this file in the same branch.
   measured: migrations, Unarr's import, the overdue scheduled tasks. Then
   it starts again and is measured:
   - the time to the first answer on both ports;
-  - fifteen idle minutes, sampled every five seconds;
+  - thirty-five idle minutes, sampled every five seconds;
   - the same reads over both APIs: about 220 requests, the list of each
     app, history, wanted, calendar, queue and twenty series' episodes;
   - five more idle minutes.
@@ -58,7 +58,9 @@ run the comparison again and update this file in the same branch.
   a process has waited for: Unarr's `ffprobe` runs count. Their memory
   does not: it is sampled on the side's own processes only. Idle CPU is
   counted from the fifth minute of the window, once the start-up work is
-  done. Idle CPU in the tail is counted from its first minute, past the
+  done, over thirty minutes: two whole periods of the 15-minute RSS sync
+  both sides run, so that a run does not catch one sync or none by chance.
+  Idle CPU in the tail is counted from its first minute, past the
   clean-up right after the reads. With `--idle` under six minutes, or a
   tail under two, the report gives n/a.
 - **Log level.** Each copy of the library is set to `LogLevel` `info`,
@@ -96,45 +98,76 @@ run the comparison again and update this file in the same branch.
 
 ## Results
 
-Measured on 2026-11-14 in the cloud session (x86-64, four cores, 16 GB),
-Unarr at `ae1283b`, Sonarr 4.0.20.3014, Radarr 6.4.4.10685. This first run
-used the prototype of `compare-originals.py`. Its reads were the same
-except Radarr's `wanted/missing`, and the scaled originals ran without the
-heap limit, so their peak is what an unbounded .NET heap keeps.
+Each library has the tables of its latest `report.md`, as the script
+writes them. Measured on 2026-11-14 in the cloud session (x86-64, four
+cores, 16 GB) with the script's prototype, and **not comparable with the
+runs to come**: both libraries logged at debug level, which costs the
+originals a line per API request and Unarr none, the idle window was 15
+minutes, Radarr's `wanted/missing` was not read, and the scaled originals
+ran without the heap limit and a first start of only 60 seconds.
 
-| | Originals, real | Unarr, real | Originals, scaled | Unarr, scaled |
-|---|--:|--:|--:|--:|
-| First answer on both ports | 1.5 s | 0.21 s | 1.7 s | 0.21 s |
-| Idle after 15 minutes, RSS | 496 MiB | 28 MiB | 837 MiB | 45 MiB |
-| Same, anonymous memory | 276 MiB | 10 MiB | 609 MiB | 24 MiB |
-| Idle CPU, minutes 5 to 15 | 18 s/h | 1.6 s/h | 16 s/h | 2 s/h |
-| The reads: CPU | 8.0 s | 1.6 s | 24.8 s | 10.3 s |
-| The reads: time | 6.3 s | 1.8 s | 20.7 s | 10.7 s |
-| Peak anonymous memory during the reads | 370 MiB | 39 MiB | 1,842 MiB | 124 MiB |
-| Anonymous memory five minutes later | 395 MiB | 36 MiB | 1,835 MiB | 47 MiB |
+### Real library (38 series, 193 movies)
 
-On the real library Unarr takes 94 % less RAM at rest (468 MiB less RSS)
-and 91 % less idle CPU.
+Library `real`; Unarr `ae1283b`; Sonarr 4.0.20.3014, Radarr 6.4.4.10685; first start 300 s, idle 900 s, tail 300 s; .NET heap limit 768 MiB; 2026-11-14.
 
-Latency, p50 in ms (20 calls each; `episode` is twenty series, one call each):
+| | Sonarr + Radarr | Unarr | Less |
+|---|--:|--:|--:|
+| First answer on both ports | 1.54 s | 0.21 s | 7.5× sooner |
+| Idle, at the end of the idle window: RSS | 496 MiB | 28 MiB | 94 % |
+| Same, anonymous memory | 276 MiB | 10 MiB | 96 % |
+| Idle CPU, from minute 5 of the window | 18.4 s/h | 1.6 s/h | 91 % |
+| The reads: CPU | 8.03 s | 1.62 s | 80 % |
+| The reads: time | 6.33 s | 1.82 s | 71 % |
+| Peak anonymous memory during the reads | 370 MiB | 39 MiB | 89 % |
+| Anonymous memory at the end of the tail | 395 MiB | 36 MiB | 91 % |
+| Idle CPU in the tail, from its first minute | 8.5 s/h | 1.0 s/h | 88 % |
 
-| Route | Originals, real | Unarr, real | Originals, scaled | Unarr, scaled |
-|---|--:|--:|--:|--:|
-| Sonarr `/series` | 12.5 | 3.1 | 241 | 52 |
-| Sonarr `/episode?seriesId=` | 11.0 | 2.9 | 11.5 | 4.8 |
-| Sonarr `/history`, a page | 34.9 | 6.2 | 73.5 | 23.2 |
-| Sonarr `/wanted/missing`, a page | 4.5 | 3.2 | 13.1 | 24.0 |
-| Sonarr `/calendar`, a month | 4.5 | 3.2 | 64.3 | 20.9 |
-| Sonarr `/queue` | 2.0 | 1.8 | 1.5 | 1.5 |
-| Radarr `/movie` | 30.9 | 17.3 | 284 | 215 |
-| Radarr `/history`, a page | 33.8 | 22.1 | 44.0 | 38.6 |
-| Radarr `/calendar`, a month | 12.0 | 13.7 | 105 | 117 |
-| Radarr `/queue` | 1.9 | 3.8 | 1.8 | 17.8 |
+| p50 / max, ms | Originals | Unarr |
+|---|--:|--:|
+| Sonarr /api/v3/series | 12.5 / 17.6 | 3.1 / 3.7 |
+| Sonarr /api/v3/episode | 9.7 / 389.3 | 2.9 / 38.1 |
+| Sonarr /api/v3/history | 34.7 / 802.7 | 6.2 / 28.2 |
+| Sonarr /api/v3/wanted/missing | 4.5 / 17.1 | 3.2 / 4.3 |
+| Sonarr /api/v3/calendar | 4.5 / 11.1 | 3.1 / 3.6 |
+| Sonarr /api/v3/queue | 2.0 / 27.2 | 1.7 / 2.2 |
+| Radarr /api/v3/movie | 30.7 / 224.8 | 17.2 / 25.6 |
+| Radarr /api/v3/history | 33.5 / 1129.9 | 22.1 / 96.5 |
+| Radarr /api/v3/calendar | 11.9 / 41.8 | 13.7 / 19.5 |
+| Radarr /api/v3/queue | 1.9 / 46.3 | 3.8 / 4.3 |
+
+### Scaled library (950 series, 2,123 movies)
+
+Library `scaled`; Unarr `ae1283b`; Sonarr 4.0.20.3014, Radarr 6.4.4.10685; first start 60 s, idle 900 s, tail 300 s; .NET heap limit none; 2026-11-14.
+
+| | Sonarr + Radarr | Unarr | Less |
+|---|--:|--:|--:|
+| First answer on both ports | 1.69 s | 0.21 s | 8.3× sooner |
+| Idle, at the end of the idle window: RSS | 849 MiB | 45 MiB | 95 % |
+| Same, anonymous memory | 621 MiB | 24 MiB | 96 % |
+| Idle CPU, from minute 5 of the window | 28.5 s/h | 1.8 s/h | 94 % |
+| The reads: CPU | 24.82 s | 10.29 s | 59 % |
+| The reads: time | 20.66 s | 10.74 s | 48 % |
+| Peak anonymous memory during the reads | 1842 MiB | 124 MiB | 93 % |
+| Anonymous memory at the end of the tail | 1835 MiB | 47 MiB | 97 % |
+| Idle CPU in the tail, from its first minute | 10.3 s/h | 1.3 s/h | 87 % |
+
+| p50 / max, ms | Originals | Unarr |
+|---|--:|--:|
+| Sonarr /api/v3/series | 240.0 / 635.2 | 51.5 / 60.8 |
+| Sonarr /api/v3/episode | 10.9 / 424.4 | 4.4 / 31.3 |
+| Sonarr /api/v3/history | 72.5 / 858.7 | 23.1 / 87.0 |
+| Sonarr /api/v3/wanted/missing | 13.1 / 43.9 | 23.8 / 28.3 |
+| Sonarr /api/v3/calendar | 64.2 / 102.1 | 20.9 / 23.0 |
+| Sonarr /api/v3/queue | 1.5 / 48.1 | 1.5 / 1.9 |
+| Radarr /api/v3/movie | 280.8 / 529.2 | 214.5 / 325.4 |
+| Radarr /api/v3/history | 43.9 / 1175.2 | 38.5 / 118.3 |
+| Radarr /api/v3/calendar | 104.5 / 158.8 | 113.5 / 141.8 |
+| Radarr /api/v3/queue | 1.8 / 54.3 | 17.4 / 21.2 |
 
 Where Unarr is slower than the original:
 
 - Sonarr `/wanted/missing` on the scaled library: 24 ms against 13.
-- Radarr `/calendar`: 13.7 ms against 12.0 on the real library, 117
+- Radarr `/calendar`: 13.7 ms against 11.9 on the real library, 114
   against 105 on the scaled one.
 - Radarr `/queue`: twice the original on the real library, ten times on
   the scaled one, with an empty queue.
@@ -166,5 +199,5 @@ idle CPU of each side.
 
 | Date | Library | Unarr | Runs | Originals: idle RSS / CPU | Unarr: idle RSS / CPU | Note |
 |---|---|---|--:|--:|--:|---|
-| 2026-11-14 | real | `ae1283b` | 1 | 496 MiB / 18 s/h | 28 MiB / 1.6 s/h | prototype of the script |
-| 2026-11-14 | scaled | `ae1283b` | 1 | 837 MiB / 16 s/h | 45 MiB / 2 s/h | prototype; originals without heap limit |
+| 2026-11-14 | real | `ae1283b` | 1 | 496 MiB / 18.4 s/h | 28 MiB / 1.6 s/h | prototype; debug logs, 15-minute idle |
+| 2026-11-14 | scaled | `ae1283b` | 1 | 849 MiB / 28.5 s/h | 45 MiB / 1.8 s/h | prototype; debug logs, 15-minute idle, no heap limit |

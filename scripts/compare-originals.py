@@ -6,9 +6,9 @@ The same machine and the same library for both sides, one side at a time:
 - the originals: the official Sonarr and Radarr that ``make ui`` downloads
   into ``.cache/`` (the versions pinned in ``scripts/sonarr-fixture.sh`` and
   ``scripts/radarr-fixture.sh``), two processes;
-- Unarr: ``target/release/unarrd``, which the script has cargo build from the
-  checkout first (``--unarrd`` names a prebuilt one instead), with both personalities,
-  one process.
+- Unarr: ``unarrd``, which the script has cargo build from the checkout first
+  and runs where cargo reports it (``--unarrd`` names a prebuilt one instead),
+  with both personalities, one process.
 
 Each side starts once on a fresh copy of the library and runs ``--first``
 seconds (migrations, Unarr's import, the overdue scheduled tasks); that run
@@ -92,7 +92,7 @@ OPENER = urllib.request.build_opener(urllib.request.ProxyHandler({}))
 
 def leftovers(unarrds: list[Path]) -> list[str]:
     """Running processes of the originals and of the unarrd binaries given
-    (the one a run would use and target/release/unarrd)."""
+    (the one this run will start and target/release/unarrd)."""
     cache = os.environ.get("UNARR_CACHE")
     # Resolved: /proc/<pid>/exe names the file itself, past any symlink in
     # the way (a .cache linked from a worktree, a relative UNARR_CACHE).
@@ -114,6 +114,32 @@ def leftovers(unarrds: list[Path]) -> list[str]:
             continue
         if exe in wanted:
             found.append(f"pid {entry.name} {Path(exe).name}")
+    return found
+
+
+def other_comparisons() -> list[str]:
+    """Running instances of this script other than this one and the shells
+    or makes that started it (whose command lines may name it too)."""
+    mine, pid = set(), os.getpid()
+    while pid > 1:
+        mine.add(pid)
+        try:
+            pid = int(open(f"/proc/{pid}/stat").read().rsplit(")", 1)[1].split()[1])
+        except (OSError, ValueError, IndexError):
+            break
+    found = []
+    for entry in Path("/proc").iterdir():
+        if not entry.name.isdigit() or int(entry.name) in mine:
+            continue
+        try:
+            argv = (entry / "cmdline").read_bytes().split(b"\0")
+        except OSError:
+            continue
+        # The interpreter running the script, not a shell or an editor
+        # whose arguments happen to mention it.
+        if any(Path(x.decode(errors="replace")).name == "compare-originals.py" for x in argv[1:3]) \
+                and Path(argv[0].decode(errors="replace")).name.startswith(("python", "unshare")):
+            found.append(f"pid {entry.name}")
     return found
 
 
@@ -544,7 +570,10 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("--library", choices=("real", "scaled"), default="real")
     ap.add_argument("--first", type=int, default=300, help="seconds of the first, unmeasured run")
-    ap.add_argument("--idle", type=int, default=900, help="idle seconds sampled after the measured start")
+    # 35 minutes: idle CPU is counted from minute 5, over 30 minutes, two
+    # whole periods of the 15-minute RSS sync both sides run; a window of
+    # 10 caught one sync or none, by chance.
+    ap.add_argument("--idle", type=int, default=2100, help="idle seconds sampled after the measured start")
     ap.add_argument("--tail", type=int, default=300, help="idle seconds sampled after the reads")
     ap.add_argument("--no-cap", action="store_true", help="no .NET heap limit for the originals")
     ap.add_argument("--out", type=Path, help="default .cache/compare/<library>")
@@ -552,7 +581,7 @@ def main():
                     help="runs per side, the order alternating between runs (default 1)")
     ap.add_argument("--unarrd", type=Path,
                     help="a prebuilt Unarr binary, named in the report by its path "
-                         "(default: target/release/unarrd, built from the checkout first)")
+                         "(default: unarrd built from the checkout first, where cargo puts it)")
     ap.add_argument("--network", action="store_true",
                     help="do not isolate the network: both sides reach it, and the figures are not comparable")
     a = ap.parse_args()
@@ -561,17 +590,24 @@ def main():
     # The port check still catches a service of the host on 8989 or 7878,
     # which a --network run would collide with.
     if os.environ.get("COMPARE_NETNS") != "1":
-        left = leftovers([p for p in (a.unarrd, REPO / "target/release/unarrd") if p is not None])
+        # Another comparison would load the machine during this one and, with
+        # the same --out, delete the copies it measures.
+        others = other_comparisons()
+        if others:
+            raise SystemExit(f"another comparison runs ({', '.join(others)}): wait for it or stop it")
+        # Before the namespace, where cargo could not fetch a crate it lacks;
+        # the path reaches the run in the namespace through the environment.
+        if a.unarrd is None:
+            os.environ["COMPARE_BUILT"] = str(build())
+        # After the build: the binary this run will start is known.
+        mine = a.unarrd or Path(os.environ["COMPARE_BUILT"])
+        left = leftovers([mine, REPO / "target/release/unarrd"])
         if left:
             raise SystemExit(f"a side is still running ({', '.join(left)}): stop it first")
         if a.network:
             for port in (SONARR_PORT, RADARR_PORT):
                 if listening(port):
                     raise SystemExit(f"something already listens on {port}: stop it first")
-        # Before the namespace, where cargo could not fetch a crate it lacks;
-        # the path reaches the run in the namespace through the environment.
-        if a.unarrd is None:
-            os.environ["COMPARE_BUILT"] = str(build())
     if not a.network:
         isolate()
     # A SIGTERM or SIGHUP ends the run through measure()'s finally, as
@@ -581,6 +617,10 @@ def main():
 
     # Absolute: the originals refuse a relative -data.
     out = (a.out or REPO / ".cache/compare" / a.library).resolve()
+    # unarrd splits every --import-from value on commas, repeated or not:
+    # refused now rather than after the originals' half hour.
+    if "," in str(out):
+        raise SystemExit(f"--out {out}: unarrd cannot import from a path with a comma")
     # Where make ui put them: UNARR_CACHE moves .cache/<app> as in the
     # fixture scripts.
     cache = os.environ.get("UNARR_CACHE")
@@ -631,8 +671,10 @@ def main():
         shutil.rmtree(data, ignore_errors=True)
         data.mkdir(parents=True)
         return Side("unarr", [
+            # One --import-from per folder; a comma in --out is refused above,
+            # since unarrd splits each value on commas.
             ("unarr", [str(unarrd), "--data", str(data), "--personalities", "sonarr,radarr",
-                       "--import-from", f"{lib / 'sonarr'},{lib / 'radarr'}"], data),
+                       "--import-from", str(lib / "sonarr"), "--import-from", str(lib / "radarr")], data),
         ], [SONARR_PORT, RADARR_PORT], ENV)
 
     res: dict = {"meta": meta, "originals": [], "unarr": []}

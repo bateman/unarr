@@ -70,6 +70,7 @@ After each substantial change, update it in the same branch:
   `make scale-fixture` and `make compare-originals LIBRARY=scaled`. Use
   `REPEAT=3` or more when the numbers will be cited outside the repository;
   a single run is enough otherwise;
-- what to write: the numbers of `.cache/compare/<library>/report.md` in
-  the tables of that library, a row in the History table, and what changed
-  in the list of routes where Unarr is slower than the original.
+- what to write: replace that library's tables with the tables of
+  `.cache/compare/<library>/report.md`, as the script writes them; add a
+  row to the History table; and update the list of routes where Unarr is
+  slower than the original.
