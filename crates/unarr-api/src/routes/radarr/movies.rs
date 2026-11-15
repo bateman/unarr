@@ -25,10 +25,10 @@ use crate::state::AppState;
 // --- movies
 
 /// Movies with what their resources show: titles by metadata id, files by id.
-struct Library {
-    movies: Vec<Movie>,
-    titles: HashMap<i64, Vec<AlternativeTitle>>,
-    files: HashMap<i64, MovieFile>,
+pub(super) struct Library {
+    pub(super) movies: Vec<Movie>,
+    pub(super) titles: HashMap<i64, Vec<AlternativeTitle>>,
+    pub(super) files: HashMap<i64, MovieFile>,
 }
 
 async fn load_library(state: &AppState, tmdb_id: Option<i64>, id: Option<i64>) -> anyhow::Result<Library> {
@@ -40,30 +40,43 @@ async fn load_library(state: &AppState, tmdb_id: Option<i64>, id: Option<i64>) -
                 (None, Some(tmdb_id)) => movies::movies_by_tmdb_id(conn, tmdb_id)?,
                 (None, None) => movies::list_movies(conn)?,
             };
-            let mut titles: HashMap<i64, Vec<AlternativeTitle>> = HashMap::new();
-            let wanted: HashSet<i64> = all.iter().map(|m| m.metadata.id).collect();
-            let found = if all.len() == 1 {
-                movies::alternative_titles_of(conn, all[0].metadata.id)?
-            } else {
-                movies::list_alternative_titles(conn)?
-            };
-            for t in found {
-                if wanted.contains(&t.movie_metadata_id) {
-                    titles.entry(t.movie_metadata_id).or_default().push(t);
-                }
-            }
-            let file_ids: Vec<i64> = all.iter().map(|m| m.movie_file_id).filter(|id| *id > 0).collect();
-            let files = movies::movie_files_by_ids(conn, &file_ids)?
-                .into_iter()
-                .map(|f| (f.id, f))
-                .collect();
-            Ok(Library {
-                movies: all,
-                titles,
-                files,
-            })
+            library_of(conn, all, id.is_none() && tmdb_id.is_none())
         })
         .await
+}
+
+/// These movies with their alternative titles and files. The whole library
+/// reads every title at once; a part of it, only its own.
+pub(super) fn library_of(
+    conn: &rusqlite::Connection,
+    all: Vec<Movie>,
+    whole_library: bool,
+) -> anyhow::Result<Library> {
+    let mut titles: HashMap<i64, Vec<AlternativeTitle>> = HashMap::new();
+    let wanted: HashSet<i64> = all.iter().map(|m| m.metadata.id).collect();
+    let found = if all.len() == 1 {
+        movies::alternative_titles_of(conn, all[0].metadata.id)?
+    } else if whole_library {
+        movies::list_alternative_titles(conn)?
+    } else {
+        let ids: Vec<i64> = wanted.iter().copied().collect();
+        movies::alternative_titles_for(conn, &ids)?
+    };
+    for t in found {
+        if wanted.contains(&t.movie_metadata_id) {
+            titles.entry(t.movie_metadata_id).or_default().push(t);
+        }
+    }
+    let file_ids: Vec<i64> = all.iter().map(|m| m.movie_file_id).filter(|id| *id > 0).collect();
+    let files = movies::movie_files_by_ids(conn, &file_ids)?
+        .into_iter()
+        .map(|f| (f.id, f))
+        .collect();
+    Ok(Library {
+        movies: all,
+        titles,
+        files,
+    })
 }
 
 fn library_resources(ctx: &MovieContext, library: &Library, covers: Covers) -> Vec<Value> {

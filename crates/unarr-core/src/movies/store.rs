@@ -184,16 +184,6 @@ pub fn list_movies(conn: &Connection) -> anyhow::Result<Vec<Movie>> {
     query_movies(conn, "1 = 1", &[])
 }
 
-/// A bound for a text comparison with the stored dates: `format_utc`
-/// writes a year past 9999 as `+10000`, which sorts before `0000`, so the
-/// bound is first brought within the four-digit years. No stored date lies
-/// outside them, so the comparison keeps the same movies.
-fn sql_bound(t: DateTime<Utc>) -> String {
-    let lowest = DateTime::<Utc>::from_timestamp(-62_167_219_200, 0).unwrap_or(t); // 0000-01-01T00:00:00Z
-    let highest = DateTime::<Utc>::from_timestamp(253_402_300_799, 0).unwrap_or(t); // 9999-12-31T23:59:59Z
-    crate::time::format_utc(t.clamp(lowest, highest))
-}
-
 /// `MovieRepository.MoviesBetweenDates`: the movies with a cinema,
 /// physical or digital release in `[start, end]`, in id order, only the
 /// monitored ones unless `include_unmonitored`. The dates are stored in
@@ -205,7 +195,7 @@ pub fn movies_released_between(
     end: DateTime<Utc>,
     include_unmonitored: bool,
 ) -> anyhow::Result<Vec<Movie>> {
-    let (start, end) = (sql_bound(start), sql_bound(end));
+    let (start, end) = (crate::time::sql_bound(start), crate::time::sql_bound(end));
     let monitored = if include_unmonitored {
         ""
     } else {

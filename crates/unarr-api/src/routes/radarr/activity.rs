@@ -11,7 +11,7 @@ use chrono::{DateTime, Duration, Utc};
 use serde_json::{json, Value};
 use unarr_core::movies::formats as movie_formats;
 use unarr_core::movies::model::{
-    AlternativeTitle, Movie, MovieBlocklistEntry, MovieFile, MovieHistoryEntry, MovieHistoryEvent,
+    Movie, MovieBlocklistEntry, MovieFile, MovieHistoryEntry, MovieHistoryEvent,
 };
 use unarr_core::movies::store::{
     self as movies, HistoryFilter, WantedRow, BLOCKLIST_SORT_KEYS, HISTORY_SORT_KEYS,
@@ -267,13 +267,6 @@ pub async fn blocklist_movie(State(state): State<AppState>, uri: Uri) -> ApiResu
 
 // --- calendar and wanted
 
-/// The library with each movie's file and alternative titles.
-struct Shelf {
-    movies: Vec<Movie>,
-    files: HashMap<i64, MovieFile>,
-    titles: HashMap<i64, Vec<AlternativeTitle>>,
-}
-
 /// `GET /calendar?start=&end=`: the movies with a cinema, digital or
 /// physical release in the range (today and the two days after it when
 /// none is given), by cinema date; `unmonitored` adds those not monitored,
@@ -294,42 +287,20 @@ pub async fn calendar(State(state): State<AppState>, uri: Uri) -> ApiResult<Json
         .map(|t| t.split(',').filter_map(|s| s.trim().parse().ok()).collect())
         .unwrap_or_default();
     let ctx = MovieContext::load(&state).await?;
-    // Only the movies released in the range are read, with their files and
-    // alternative titles: the filters below then keep what they kept when
-    // the whole library was read.
+    // Only the movies released in the range, monitored unless asked
+    // otherwise, are read, with their files and alternative titles: the
+    // query applies the original's conditions, at the seconds the dates
+    // are stored and parsed with.
     let shelf = state
         .db()
         .call(move |conn| {
             let found = movies::movies_released_between(conn, start, end, unmonitored)?;
-            let file_ids: Vec<i64> = found
-                .iter()
-                .map(|m| m.movie_file_id)
-                .filter(|&id| id > 0)
-                .collect();
-            let metadata_ids: Vec<i64> = found.iter().map(|m| m.metadata.id).collect();
-            let mut titles: HashMap<i64, Vec<AlternativeTitle>> = HashMap::new();
-            for t in movies::alternative_titles_for(conn, &metadata_ids)? {
-                titles.entry(t.movie_metadata_id).or_default().push(t);
-            }
-            Ok(Shelf {
-                files: movies::movie_files_by_ids(conn, &file_ids)?
-                    .into_iter()
-                    .map(|f| (f.id, f))
-                    .collect(),
-                movies: found,
-                titles,
-            })
+            super::movies::library_of(conn, found, false)
         })
         .await?;
-    let within = |d: Option<DateTime<Utc>>| d.is_some_and(|d| d >= start && d <= end);
     let mut found: Vec<&Movie> = shelf
         .movies
         .iter()
-        .filter(|m| {
-            let md = &m.metadata;
-            within(md.in_cinemas) || within(md.physical_release) || within(md.digital_release)
-        })
-        .filter(|m| unmonitored || m.monitored)
         .filter(|m| tags.is_empty() || m.tags.iter().any(|t| tags.contains(t)))
         .collect();
     // `OrderBy(InCinemas).ThenBy(DigitalRelease).ThenBy(PhysicalRelease)`:

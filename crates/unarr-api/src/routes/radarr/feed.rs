@@ -144,14 +144,9 @@ pub async fn calendar(State(state): State<AppState>, uri: Uri) -> ApiResult<Resp
                     })
                 })
                 .collect();
-            let within = |d: Option<DateTime<Utc>>| d.is_some_and(|d| d >= start && d <= end);
+            // The range and the monitored flag are the query's.
             let mut found: Vec<Movie> = movies::movies_released_between(conn, start, end, unmonitored)?
                 .into_iter()
-                .filter(|m| {
-                    let md = &m.metadata;
-                    within(md.in_cinemas) || within(md.physical_release) || within(md.digital_release)
-                })
-                .filter(|m| unmonitored || m.monitored)
                 .filter(|m| tag_ids.is_empty() || tag_ids.iter().any(|t| m.tags.contains(t)))
                 .collect();
             // As they were added.
