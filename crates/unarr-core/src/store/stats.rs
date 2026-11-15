@@ -50,7 +50,15 @@ pub fn season_statistics(
     let now = time::format_utc(now);
     let mut out: HashMap<i64, Vec<SeasonStats>> = HashMap::new();
 
-    let mut stmt = conn.prepare(
+    // One series is read through the `series_id` index: an
+    // `?2 IS NULL OR series_id = ?2` filter would scan every episode of the
+    // library for it.
+    let only = if series_id.is_some() {
+        "WHERE series_id = ?2"
+    } else {
+        ""
+    };
+    let mut stmt = conn.prepare(&format!(
         "SELECT series_id, season_number, COUNT(*),
             SUM(CASE WHEN air_date_utc <= ?1 OR episode_file_id > 0 THEN 1 ELSE 0 END),
             SUM(CASE WHEN (monitored = 1 AND air_date_utc <= ?1) OR episode_file_id > 0 THEN 1 ELSE 0 END),
@@ -60,11 +68,14 @@ pub fn season_statistics(
             MAX(CASE WHEN air_date_utc >= ?1 OR monitored = 0 THEN NULL ELSE air_date_utc END),
             MAX(air_date)
          FROM episodes
-         WHERE ?2 IS NULL OR series_id = ?2
+         {only}
          GROUP BY series_id, season_number
-         ORDER BY series_id, season_number",
-    )?;
-    let mut rows = stmt.query(params![now, series_id])?;
+         ORDER BY series_id, season_number"
+    ))?;
+    let mut rows = match series_id {
+        Some(id) => stmt.query(params![now, id])?,
+        None => stmt.query(params![now])?,
+    };
     while let Some(r) = rows.next()? {
         let stats = SeasonStats {
             series_id: r.get(0)?,
@@ -83,12 +94,20 @@ pub fn season_statistics(
         out.entry(stats.series_id).or_default().push(stats);
     }
 
-    let mut stmt = conn.prepare(
+    let only = if series_id.is_some() {
+        "WHERE series_id = ?1"
+    } else {
+        ""
+    };
+    let mut stmt = conn.prepare(&format!(
         "SELECT series_id, season_number, SUM(COALESCE(size, 0)), GROUP_CONCAT(release_group, '|')
-         FROM (SELECT * FROM episode_files WHERE ?1 IS NULL OR series_id = ?1 ORDER BY id)
-         GROUP BY series_id, season_number",
-    )?;
-    let mut rows = stmt.query(params![series_id])?;
+         FROM (SELECT * FROM episode_files {only} ORDER BY id)
+         GROUP BY series_id, season_number"
+    ))?;
+    let mut rows = match series_id {
+        Some(id) => stmt.query(params![id])?,
+        None => stmt.query([])?,
+    };
     while let Some(r) = rows.next()? {
         let (sid, season): (i64, i64) = (r.get(0)?, r.get(1)?);
         let size: i64 = r.get(2)?;
