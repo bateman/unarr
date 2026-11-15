@@ -103,7 +103,10 @@ run the comparison again and update this file in the same branch.
   the highest single call after the slash. One run is enough for a
   routine update; numbers meant for a paper or a release note want three
   or more.
-- **Output.** `.cache/compare/<library>/report.md` holds the tables below,
+- **Output.** `--out` must be a new or empty folder, or one an earlier
+  run marked (`.compare-originals`): the script deletes and rewrites names
+  inside it, so it refuses any other. `.cache/compare/<library>/report.md`
+  holds the tables below,
   `results.json` every sample. A run first removes the previous series'
   two files; `results.json` is written after each side of each run, so an
   interrupted series keeps what it measured, and `report.md` only at the

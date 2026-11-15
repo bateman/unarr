@@ -148,6 +148,24 @@ def other_comparisons() -> list[str]:
     return found
 
 
+MARKER = ".compare-originals"
+
+
+def claim(out: Path):
+    """Make --out this script's own folder, or refuse it: it must be new,
+    empty, or marked by an earlier run. Not a folder that merely holds names
+    a run writes: a ~/work holding a clone named unarr would pass that."""
+    if out.exists() and not out.is_dir():
+        raise SystemExit(f"--out {out} is not a folder")
+    if out.is_dir() and any(out.iterdir()) and not (out / MARKER).exists():
+        raise SystemExit(
+            f"--out {out} holds files this script did not write; "
+            "give a new or empty folder (the script deletes and rewrites names inside it)"
+        )
+    out.mkdir(parents=True, exist_ok=True)
+    (out / MARKER).write_text("Results of scripts/compare-originals.py; the next run rewrites this folder.\n")
+
+
 def isolate():
     """Run this script again in a network namespace of its own where only
     the loopback is up (`unshare -rn`, no privilege needed): neither side
@@ -376,6 +394,10 @@ def run_side(side: Side, first_seconds: int, idle_seconds: int, tail_seconds: in
         done.set()
         watcher.join()
     after = side.sample()
+    # The sample right after the reads counts too: the watcher may have
+    # slept through the last moments of them.
+    for k in ("rss", "anon"):
+        peak[k] = max(peak[k], after[k])
     tail = idle(side, tail_seconds)
     side.stop()
     return {
@@ -638,6 +660,10 @@ def main():
     # refused now rather than after the originals' half hour.
     if "," in str(out):
         raise SystemExit(f"--out {out}: unarrd cannot import from a path with a comma")
+    # The script deletes and rewrites fixed names under --out (unarr,
+    # originals, bin/unarrd...): only in a folder it made itself, or an
+    # empty one. --out ~ would otherwise delete a clone named ~/unarr.
+    claim(out)
     # Where make ui put them: UNARR_CACHE moves .cache/<app> as in the
     # fixture scripts.
     cache = os.environ.get("UNARR_CACHE")
