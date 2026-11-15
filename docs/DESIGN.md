@@ -665,48 +665,15 @@ of twenty of the wanted list or a month of the calendar costs a tenth of
 a second, which says they read all the movies to return a few. `GET
 /movie/{id}` at 20 ms for one movie says the same of the single read.
 None of these has a target; they are recorded with the misses and left,
-by the decision at the head of this section. The original's times on
-the same libraries were not measured then; they are below.
-
-**Against the originals** (November 2026, after 4d; release build,
-x86-64, in the cloud session, no network for either side). Sonarr
-4.0.20 and Radarr 6.4.4 from their official tarballs, then Unarr with
-both personalities, one side at a time on the same machine and data.
-Each side starts once and runs five minutes (migrations, the import,
-the overdue tasks), then starts again and is measured: fifteen idle
-minutes sampled every five seconds, the same 250 reads over both APIs,
-five idle minutes. RAM is the anonymous memory and the RSS of
-`/proc/<pid>/smaps_rollup` summed over the side's processes; CPU is
-`utime + stime` of `/proc/<pid>/stat`. The originals ran with
-`DOTNET_GCHeapHardLimit` at 768 MiB, what the homelab's 1G containers
-give them.
-
-| | Originals, real library (38 series, 193 movies) | Unarr | Originals, scaled (950 series, 2,123 movies) | Unarr |
-|---|--:|--:|--:|--:|
-| First answer | 1.3 to 1.5 s | 0.21 s | 1.4 to 1.7 s | 0.20 s |
-| Idle, 15 min: anonymous / RSS | 276 / 496 MB | 10 / 28 MB | 609 / 837 MB | 24 / 45 MB |
-| Idle CPU, minutes 5 to 15 | 18 s/h | 1.6 s/h | 16 s/h | 2 s/h |
-| The 250 reads: CPU / time | 8.0 s / 6.3 s | 1.6 s / 1.8 s | 24.8 s / 20.7 s | 10.3 s / 10.7 s |
-| Peak anonymous during the reads | 370 MB | 39 MB | 1,842 MB | 124 MB |
-| Anonymous 5 min after them | 395 MB | 36 MB | 1,835 MB | 47 MB |
-
-The scaled originals ran before the heap limit was set, so their peak is
-what an unbounded .NET heap keeps; in the homelab's containers it would
-stop near 768 MiB each. The homelab measured the originals in
-production before the switch: on 2026-10-01, two hours after the
-power-on, `docker stats` gave 214 MiB for Sonarr and 260 MiB for Radarr
-(cache excluded), the same order as the real library's 496 MB of RSS
-for both here.
-
-At p50 on the scaled library, Unarr's Sonarr answers `/series` in 52 ms
-(the original 241), `/history` in 23 (74), `/calendar` in 21 (64); its
-Radarr answered `/movie` in 215 ms (284), `/history` in 39 (44),
-`/calendar` in 117 (105), `/queue` in 18 (1.8). The movie routes read
-the whole library to return a few rows. Since then `/calendar` and the
-iCal feed ask SQLite for the movies released in the range, and the two
-wanted lists sort light rows and read only the page's movies in full,
-with the same answers byte for byte. Main against that change, p50 / p99
-over 30 calls on the scaled library:
+by the decision at the head of this section. The originals' times on
+the same libraries are in `docs/originals-comparison.md`: on the scaled
+library Unarr's Radarr answered `/movie` in 215 ms at p50 (the original
+284), `/history` in 39 (44), `/calendar` in 117 (105), `/queue` in 18
+(1.8), far less ahead than its Sonarr on the series routes. Since then
+`/calendar` and the iCal feed ask SQLite for the movies released in the
+range, and the two wanted lists sort light rows and read only the
+page's movies in full, with the same answers byte for byte. Main against
+that change, p50 / p99 over 30 calls on the scaled library:
 
 | Route | Before | After |
 |---|--:|--:|
