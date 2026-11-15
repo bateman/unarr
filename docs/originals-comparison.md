@@ -62,7 +62,8 @@ run the comparison again and update this file in the same branch.
   does not: it is sampled on the side's own processes only. Idle CPU is
   counted from the fifth minute of the window, once the start-up work is
   done, to the end of the window: the tasks both sides run every minute
-  (the monitored downloads). The RSS sync, every 60 minutes for Sonarr and
+  (the monitored downloads) and every five (the import list sync, the
+  messaging clean-up). The RSS sync, every 60 minutes for Sonarr and
   100 for Radarr in these libraries, runs during the first start and falls
   in neither side's window; with no network it would fail at once anyway.
   Idle CPU in the tail is counted from its first minute, past the
@@ -184,6 +185,9 @@ Where Unarr is slower than the original:
   against 105 on the scaled one.
 - Radarr `/queue`: twice the original on the real library, ten times on
   the scaled one, with an empty queue.
+- Radarr `/wanted/missing` on the scaled library: not read by the
+  prototype; a short run of the script at `ae1283b` gave about 90 ms
+  against 30.
 
 The movie routes gain far less over Radarr than the series routes gain
 over Sonarr. They read the whole library to answer a few rows.

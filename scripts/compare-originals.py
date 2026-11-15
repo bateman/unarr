@@ -534,7 +534,8 @@ def report(res: dict, meta: dict) -> str:
         keeps a binary it already has, so a new pin needs .cache/<app>
         removed first."""
         v = reported.get(str(port), reported.get(port, meta[app]))
-        return v if v == meta[app] else f"{v} (**pinned {meta[app]}**: remove .cache/{app} and run make ui)"
+        where = meta.get("dirs", {}).get(app, f".cache/{app}")
+        return v if v == meta[app] else f"{v} (**pinned {meta[app]}**: remove {where} and run make ui)"
 
     sonarr_v = ran(SONARR_PORT, "sonarr")
     radarr_v = ran(RADARR_PORT, "radarr")
@@ -544,6 +545,8 @@ def report(res: dict, meta: dict) -> str:
         f".NET heap limit {'768 MiB' if meta['cap'] else 'none'}; "
         + ("**with the network, not comparable**; " if meta.get("network") else "")
         + ("**originals without ICU (invariant globalization)**; " if meta.get("invariant") else "")
+        + ("**first start under 60 s, start-up tasks may be in the measured start**; "
+           if meta["first"] < 60 else "")
         + (f"{n} runs per side, median (lowest–highest); " if n > 1 else "")
         + f"{meta['date']}.",
         "",
@@ -579,7 +582,8 @@ def main():
     ap.add_argument("--library", choices=("real", "scaled"), default="real")
     ap.add_argument("--first", type=int, default=300, help="seconds of the first, unmeasured run")
     # Idle CPU is counted from minute 5 to the end: the tasks that run every
-    # minute (monitored downloads) on both sides. The RSS sync, every 60 and
+    # minute (monitored downloads) and every five (import list sync,
+    # messaging clean-up) on both sides. The RSS sync, every 60 and
     # 100 minutes in these libraries, runs during the first start and not
     # in the window, on either side.
     ap.add_argument("--idle", type=int, default=900, help="idle seconds sampled after the measured start")
@@ -662,6 +666,9 @@ def main():
         "unarr": (str(built) if a.unarrd is not None else subprocess.run(
             ["git", "-C", str(REPO), "describe", "--always", "--dirty"], capture_output=True, text=True
         ).stdout.strip()) + f", sha256 {digest}",
+        # Where make ui put each original, for the hint when its version is
+        # not the pinned one (UNARR_CACHE moves it).
+        "dirs": {"sonarr": str(sonarr.parent.parent), "radarr": str(radarr.parent.parent)},
         "sonarr": pinned("sonarr-fixture.sh", "SONARR_VERSION"),
         "radarr": pinned("radarr-fixture.sh", "RADARR_VERSION"),
         "first": a.first, "idle": a.idle, "tail": a.tail, "cap": not a.no_cap,
@@ -681,6 +688,10 @@ def main():
     if a.repeat < 1:
         raise SystemExit("--repeat must be at least 1")
     meta["repeat"] = a.repeat
+    # Both schedulers run their overdue tasks about 30 s after a start: a
+    # shorter first start leaves them, or their remains, to the measured one.
+    if a.first < 60:
+        log(f"warning: --first {a.first} is under 60 s; the overdue tasks may run in the measured start")
 
     def originals() -> Side:
         lib = stage(a.library, out / "originals")
