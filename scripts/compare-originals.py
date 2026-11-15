@@ -119,7 +119,10 @@ def leftovers(unarrds: list[Path]) -> list[str]:
         # A binary replaced on disk (a rebuild, make ui after a new pin)
         # still runs under its old path, which the link marks as deleted.
         exe = exe.removesuffix(" (deleted)")
-        if exe in wanted:
+        # Any run's own copy, whatever its --out: <out>/bin/unarrd beside
+        # the marker of a folder the script claimed.
+        copy = Path(exe).name == "unarrd" and (Path(exe).parent.parent / MARKER).exists()
+        if exe in wanted or copy:
             found.append(f"pid {entry.name} {Path(exe).name}")
     return found
 
@@ -587,7 +590,7 @@ def report(res: dict, meta: dict) -> str:
         keeps a binary it already has, so a new pin needs .cache/<app>
         removed first."""
         v = reported.get(str(port), reported.get(port, meta[app]))
-        where = meta.get("dirs", {}).get(app, f".cache/{app}")
+        where = meta.get("dirs", {}).get(app, f".cache/{app}/{app.capitalize()}")
         return v if v == meta[app] else f"{v} (**pinned {meta[app]}**: remove {where} and run make ui)"
 
     sonarr_v = ran(SONARR_PORT, "sonarr")
@@ -725,7 +728,9 @@ def main():
         ).stdout.strip()) + f", sha256 {digest}",
         # Where make ui put each original, for the hint when its version is
         # not the pinned one (UNARR_CACHE moves it).
-        "dirs": {"sonarr": str(sonarr.parent.parent), "radarr": str(radarr.parent.parent)},
+        # The extracted folder only (make ui extracts again when it is
+        # missing), not the cache that also holds the other original.
+        "dirs": {"sonarr": str(sonarr.parent), "radarr": str(radarr.parent)},
         "sonarr": pinned("sonarr-fixture.sh", "SONARR_VERSION"),
         "radarr": pinned("radarr-fixture.sh", "RADARR_VERSION"),
         "first": a.first, "idle": a.idle, "tail": a.tail, "cap": not a.no_cap,

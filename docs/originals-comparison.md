@@ -53,8 +53,9 @@ run the comparison again and update this file in the same branch.
   under `UNARR_CACHE` when it is set. The report gives the versions the
   applications themselves report, and marks one that differs from the
   version pinned in `scripts/*-fixture.sh`: `make ui` keeps a binary it
-  already has, so after a new pin remove `.cache/sonarr` or `.cache/radarr`
-  first.
+  already has, so after a new pin remove the folder it extracted the
+  original into first (`.cache/sonarr/Sonarr` or `.cache/radarr/Radarr`,
+  under `UNARR_CACHE` when it is set), as the report says.
 - **RAM** is the RSS and the anonymous memory (the heaps) of
   `/proc/<pid>/smaps_rollup`, summed over a side's processes.
 - **CPU** is `utime + stime` from `/proc/<pid>/stat`, plus the children
@@ -83,8 +84,9 @@ run the comparison again and update this file in the same branch.
   another comparison runs, or while a process of the originals, of
   `target/release/unarrd` or of the binary it is about to run (or its copy
   under `--out`) is alive,
-  even one whose file has since been replaced (a side left over in an
-  earlier run's namespace); with `--network` it also refuses when
+  even one whose file has since been replaced, or the copy of Unarr any
+  earlier run left under its `--out` (a side left over in an earlier run's
+  namespace); with `--network` it also refuses when
   anything listens on 8989 or 7878.
 - **Heap limit.** The originals run with `DOTNET_GCHeapHardLimit` at
   768 MiB: that is what .NET takes from a 1 GiB container such as the
@@ -123,7 +125,7 @@ cores, 16 GB) with the script's prototype, and **not comparable with the
 runs to come**: both libraries logged at debug level, which costs the
 originals a line per API request and Unarr none, Radarr's
 `wanted/missing` was not read, and the scaled originals ran without the
-heap limit and a first start of only 60 seconds.
+heap limit.
 
 ### Real library (38 series, 193 movies)
 
@@ -183,8 +185,8 @@ Library `scaled`; Unarr `ae1283b`; Sonarr 4.0.20.3014, Radarr 6.4.4.10685; first
 | Radarr /api/v3/queue | 1.8 / 54.3 | 17.4 / 21.2 |
 | Sonarr /api/v3/episode | 10.9 / 424.4 | 4.4 / 31.3 |
 
-Where Unarr is slower than the original, in these prototype tables (the
-next run of the script replaces this list with what it measures):
+Where Unarr is slower than the original, in these prototype tables (whoever
+updates the tables updates this list from them, as CLAUDE.md says):
 
 - Sonarr `/wanted/missing` on the scaled library: 24 ms against 13.
 - Radarr `/calendar`: 13.7 ms against 11.9 on the real library, 114

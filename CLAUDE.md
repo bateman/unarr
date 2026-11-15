@@ -63,8 +63,9 @@ After each substantial change, update it in the same branch:
 
 - what counts: a milestone, a change made for speed or memory, a new
   pinned version of an original in `scripts/*-fixture.sh`;
-- how: `make ui` (after a new pin, remove `.cache/<app>`, or the folder
-  `UNARR_CACHE` names, first: `make ui` keeps a binary it already has),
+- how: `make ui` (after a new pin, remove `.cache/sonarr/Sonarr` or
+  `.cache/radarr/Radarr`, under `UNARR_CACHE` when it is set, first:
+  `make ui` keeps a binary it already has),
   then `make compare-originals` (the real library). For a change to the
   speed or the memory of routes, also run `make scale-fixture` and
   `make compare-originals LIBRARY=scaled`. Use `REPEAT=3` or more when the
