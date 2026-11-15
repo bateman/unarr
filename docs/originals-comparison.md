@@ -19,8 +19,7 @@ run the comparison again and update this file in the same branch.
 - **The sides.** The originals are the official Sonarr and Radarr from
   their release tarballs, two processes. Unarr is `target/release/unarrd`
   (or `--unarrd`) with both personalities in one process. The two sides
-  run one at a time, each on a fresh copy of the library. Neither reaches
-  the network. The report names the checkout's commit, and says so when
+  run one at a time, each on a fresh copy of the library. The report names the checkout's commit, and says so when
   the binary is older than the last change to the code.
 - **The two starts.** Each side starts once and runs five minutes, not
   measured: migrations, Unarr's import, the overdue scheduled tasks. Then
@@ -30,12 +29,22 @@ run the comparison again and update this file in the same branch.
   - the same reads over both APIs: about 220 requests, the list of each
     app, history, wanted, calendar, queue and twenty series' episodes;
   - five more idle minutes.
+- **No network.** The script runs itself again in a network namespace of
+  its own (`unshare -rn`, no privilege needed) where only the loopback is
+  up, so neither side reaches the network, whatever the machine can: RSS
+  sync, metadata refreshes and update checks fail at once on both. Where
+  user namespaces are off, the script stops. `--network` measures with
+  the network; the report then says the figures are not comparable.
 - **Latency** is measured by the script's own client, Python's `urllib`,
   with a new connection for each request, the same for both sides.
 - **Environment.** The caller's proxy variables, `RUST_LOG` and the
   `DOTNET_*` and `COMPlus_*` knobs are not passed to the processes
-  measured. The report gives the versions the applications themselves
-  report.
+  measured, except `DOTNET_SYSTEM_GLOBALIZATION_INVARIANT`: the script
+  sets it itself where libicu is missing, as the fixture scripts do,
+  since .NET does not start otherwise. The script's own requests ignore
+  the caller's proxy. The originals are found where `make ui` put them,
+  under `UNARR_CACHE` when it is set. The report gives the versions the
+  applications themselves report.
 - **RAM** is the RSS and the anonymous memory (the heaps) of
   `/proc/<pid>/smaps_rollup`, summed over a side's processes.
 - **CPU** is `utime + stime` from `/proc/<pid>/stat`, plus the children
@@ -56,13 +65,14 @@ run the comparison again and update this file in the same branch.
   The order alternates between runs, originals first in odd runs and Unarr
   first in even ones, so a drift of the machine favours neither side. A
   cell then reads median (lowest–highest), and *Less* compares the
-  medians; where Unarr takes more, it reads "N % more". For latency, the cell is the median of the runs' p50s, with
+  medians; where Unarr takes more, it reads "N % more", and a later first
+  answer reads "N× slower". For latency, the cell is the median of the runs' p50s, with
   the highest single call after the slash. One run is enough for a
   routine update; numbers meant for a paper or a release note want three
   or more.
 - **Output.** `.cache/compare/<library>/report.md` holds the tables below,
-  `results.json` every sample. `results.json` is written after each run,
-  so an interrupted series keeps what it measured.
+  `results.json` every sample. `results.json` is written after each side
+  of each run, so an interrupted series keeps what it measured.
 
 ## Results
 

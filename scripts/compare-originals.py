@@ -16,8 +16,9 @@ answer on each port, ``--idle`` seconds sampled every five, the same reads
 over both APIs, ``--tail`` idle seconds. RAM is the anonymous memory and the
 RSS of ``/proc/<pid>/smaps_rollup`` summed over the side's processes; CPU is
 ``utime + stime`` (and the children's) of ``/proc/<pid>/stat``. Neither side
-reaches the network: the proxy variables are removed, as the fixture scripts
-do. The originals run with ``DOTNET_GCHeapHardLimit`` at 768 MiB, what .NET
+reaches the network: the script runs itself in a network namespace where only
+the loopback is up (``unshare -rn``; ``--network`` measures with the network,
+not comparably). The originals run with ``DOTNET_GCHeapHardLimit`` at 768 MiB, what .NET
 takes from a 1 GiB container such as the homelab's (``--no-cap`` lifts it).
 
 Libraries: ``real`` is the anonymised fixtures (``tests/fixtures``), the
@@ -42,6 +43,7 @@ import re
 import shutil
 import signal
 import socket
+import struct
 import subprocess
 import sys
 import threading
@@ -55,15 +57,57 @@ SONARR_PORT, RADARR_PORT = 8989, 7878
 TICK = os.sysconf("SC_CLK_TCK")
 MIB = 1 << 20
 # The caller's environment, without what would make one side work
-# differently from a plain start: the proxy (neither side reaches the
-# network), Unarr's log filter and the .NET runtime's knobs (the heap
-# limit is set on purpose below).
+# differently from a plain start: the proxy, Unarr's log filter and the
+# .NET runtime's knobs (the heap limit is set on purpose below; the
+# globalization switch is what lets .NET start without libicu).
 ENV = {
     k: v
     for k, v in os.environ.items()
     if k.lower() not in ("https_proxy", "http_proxy", "all_proxy", "no_proxy", "rust_log")
-    and not k.startswith(("DOTNET_", "COMPlus_"))
+    and (not k.startswith(("DOTNET_", "COMPlus_")) or k == "DOTNET_SYSTEM_GLOBALIZATION_INVARIANT")
 }
+
+
+def without_icu() -> bool:
+    """.NET does not start without ICU unless told to do without it, as the
+    fixture scripts tell it when `ldconfig -p` lists no libicuuc."""
+    try:
+        listed = subprocess.run(["ldconfig", "-p"], capture_output=True, text=True).stdout
+    except OSError:
+        return False
+    return "libicuuc" not in listed
+
+
+# The script's own requests go straight to the loopback, whatever proxy the
+# caller's environment names.
+OPENER = urllib.request.build_opener(urllib.request.ProxyHandler({}))
+
+
+def isolate():
+    """Run this script again in a network namespace of its own where only
+    the loopback is up (`unshare -rn`, no privilege needed): neither side
+    can reach the network, whatever the machine can. The child brings the
+    loopback up itself; `ip` is not needed."""
+    if os.environ.get("COMPARE_NETNS") == "1":
+        import fcntl
+
+        siocgifflags, siocsifflags, iff_up = 0x8913, 0x8914, 0x1
+        with socket.socket(socket.AF_INET, socket.SOCK_DGRAM) as s:
+            ifr = struct.pack("16sH14x", b"lo", 0)
+            flags = struct.unpack("16sH14x", fcntl.ioctl(s, siocgifflags, ifr))[1]
+            fcntl.ioctl(s, siocsifflags, struct.pack("16sH14x", b"lo", flags | iff_up))
+        return
+    unshare = shutil.which("unshare")
+    if unshare is None:
+        raise SystemExit("unshare not found: install util-linux, or pass --network (not comparable)")
+    probe = subprocess.run([unshare, "-rn", "true"], capture_output=True, text=True)
+    if probe.returncode != 0:
+        raise SystemExit(
+            f"unshare -rn failed ({probe.stderr.strip()}): user namespaces are off here; "
+            "pass --network to measure with the network (not comparable)"
+        )
+    os.environ["COMPARE_NETNS"] = "1"
+    os.execv(unshare, [unshare, "-rn", sys.executable, "-I", *sys.argv])
 
 
 def log(*a):
@@ -72,7 +116,7 @@ def log(*a):
 
 def get(port: int, path: str, timeout: float = 600) -> bytes:
     req = urllib.request.Request(f"http://127.0.0.1:{port}{path}", headers={"X-Api-Key": KEY})
-    with urllib.request.urlopen(req, timeout=timeout) as r:
+    with OPENER.open(req, timeout=timeout) as r:
         return r.read()
 
 
@@ -240,6 +284,7 @@ def run_side(side: Side, first_seconds: int, idle_seconds: int, tail_seconds: in
     watcher.start()
     t0 = time.time()
     latencies = reads()
+    t1 = time.time()
     done.set()
     watcher.join()
     after = side.sample()
@@ -249,7 +294,7 @@ def run_side(side: Side, first_seconds: int, idle_seconds: int, tail_seconds: in
         "versions": versions,
         "first": first,
         "idle": samples,
-        "reads": {"seconds": after["t"] - t0, "cpu": after["cpu"] - before["cpu"],
+        "reads": {"seconds": t1 - t0, "cpu": after["cpu"] - before["cpu"],
                   "peak": peak, "after": after},
         "latency": latencies,
         "tail": tail,
@@ -371,7 +416,9 @@ def report(res: dict, meta: dict) -> str:
 
     def sooner(key: str) -> str:
         a, b = mid(o_runs, key), mid(u_runs, key)
-        return f"{a / b:.0f}× sooner" if a and b else "n/a"
+        if not a or not b:
+            return "n/a"
+        return f"{a / b:.1f}× sooner" if a >= b else f"{b / a:.1f}× slower"
 
     rows = [
         ("First answer on both ports", "first", ".2f", "s", sooner),
@@ -392,6 +439,7 @@ def report(res: dict, meta: dict) -> str:
         f"Library `{meta['library']}`; Unarr `{meta['unarr']}`; Sonarr {sonarr_v}, Radarr {radarr_v}; "
         f"first start {meta['first']} s, idle {meta['idle']} s, tail {meta['tail']} s; "
         f".NET heap limit {'768 MiB' if meta['cap'] else 'none'}; "
+        + ("**with the network, not comparable**; " if meta.get("network") else "")
         + (f"{n} runs per side, median (lowest–highest); " if n > 1 else "")
         + f"{meta['date']}.",
         "",
@@ -434,11 +482,18 @@ def main():
                     help="runs per side, the order alternating between runs (default 1)")
     ap.add_argument("--unarrd", type=Path, default=REPO / "target/release/unarrd",
                     help="the Unarr binary (default target/release/unarrd, built by make build)")
+    ap.add_argument("--network", action="store_true",
+                    help="do not isolate the network: both sides reach it, and the figures are not comparable")
     a = ap.parse_args()
+    if not a.network:
+        isolate()
 
     out = a.out or REPO / ".cache/compare" / a.library
-    sonarr = REPO / ".cache/sonarr/Sonarr/Sonarr"
-    radarr = REPO / ".cache/radarr/Radarr/Radarr"
+    # Where make ui put them: UNARR_CACHE moves .cache/<app> as in the
+    # fixture scripts.
+    cache = os.environ.get("UNARR_CACHE")
+    sonarr = Path(cache) / "Sonarr/Sonarr" if cache else REPO / ".cache/sonarr/Sonarr/Sonarr"
+    radarr = Path(cache) / "Radarr/Radarr" if cache else REPO / ".cache/radarr/Radarr/Radarr"
     unarrd = a.unarrd
     for binary, how in ((sonarr, "make ui"), (radarr, "make ui"), (unarrd, "make build")):
         if not binary.exists():
@@ -457,9 +512,13 @@ def main():
         "sonarr": pinned("sonarr-fixture.sh", "SONARR_VERSION"),
         "radarr": pinned("radarr-fixture.sh", "RADARR_VERSION"),
         "first": a.first, "idle": a.idle, "tail": a.tail, "cap": not a.no_cap,
+        "network": a.network,
         "date": time.strftime("%Y-%m-%d"),
     }
     env = dict(ENV)
+    if without_icu():
+        env.setdefault("DOTNET_SYSTEM_GLOBALIZATION_INVARIANT", "1")
+        log("libicu not found: the originals run with invariant globalization")
     if not a.no_cap:
         env["DOTNET_GCHeapHardLimit"] = "0x30000000"
 
@@ -494,8 +553,8 @@ def main():
         for name, make in order:
             log(f"run {run + 1} of {a.repeat}")
             res[name].append(measure(make(), a.first, a.idle, a.tail))
-        # Kept after every run: an interrupted series still has its results.
-        (out / "results.json").write_text(json.dumps(res, indent=1))
+            # Kept after every side: an interrupted series keeps what it measured.
+            (out / "results.json").write_text(json.dumps(res, indent=1))
 
     (out / "results.json").write_text(json.dumps(res, indent=1))
     text = report(res, meta)
