@@ -2050,15 +2050,14 @@ mod tests {
             ] {
                 add(conn, &m);
             }
-            let mut id = 0;
-            for (metadata, language, title) in [
+            let rows = [
                 (1, 1, "One"),
                 (1, 2, "Uno"),
                 (2, 2, "Due"),
                 (3, 1, "Three"),
                 (3, 1, "Three again"),
-            ] {
-                id += 1;
+            ];
+            for (id, (metadata, language, title)) in (1..).zip(rows) {
                 insert_translation(
                     conn,
                     &MovieTranslation {
