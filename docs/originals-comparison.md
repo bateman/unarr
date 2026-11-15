@@ -21,7 +21,8 @@ run the comparison again and update this file in the same branch.
   (or `--unarrd`) with both personalities in one process. The two sides
   run one at a time, each on a fresh copy of the library. The report names
   the checkout's commit, and says so when the binary is older than a source
-  file of the code; a binary given with `--unarrd` is named by its path.
+  it is built from (the crates unarrd links, their tests aside); a binary
+  given with `--unarrd` is named by its path.
 - **The two starts.** Each side starts once and runs five minutes, not
   measured: migrations, Unarr's import, the overdue scheduled tasks. Then
   it starts again and is measured:
@@ -38,8 +39,8 @@ run the comparison again and update this file in the same branch.
   the network; the report then says the figures are not comparable.
 - **Latency** is measured by the script's own client, Python's `urllib`,
   with a new connection for each request, the same for both sides.
-- **Environment.** The caller's proxy variables, `RUST_LOG` and the
-  `DOTNET_*` and `COMPlus_*` knobs are not passed to the processes
+- **Environment.** The caller's proxy variables, `RUST_LOG`, the
+  `UNARR_*` settings and the `DOTNET_*` and `COMPlus_*` knobs are not passed to the processes
   measured, except `DOTNET_SYSTEM_GLOBALIZATION_INVARIANT`: the script
   sets it itself where libicu is missing, as the fixture scripts do,
   since .NET does not start otherwise. The script's own requests ignore
@@ -58,13 +59,17 @@ run the comparison again and update this file in the same branch.
   done. Idle CPU in the tail is counted from its first minute, past the
   clean-up right after the reads. With `--idle` under six minutes, or a
   tail under two, the report gives n/a.
-- **Log level.** Both libraries' `config.xml` set `LogLevel` to `debug`,
-  so both sides log every request at debug, unlike a default install.
-  The idle and read figures include that logging on both sides.
-- **Stopping.** A run stopped by Ctrl-C, SIGTERM or SIGHUP stops the
-  side it was measuring. The sides also get SIGTERM if the script dies by
-  SIGKILL, so none keeps running in the namespace. Before entering it,
-  the script refuses to start when anything listens on 8989 or 7878.
+- **Log level.** Each copy of the library is set to `LogLevel` `info`,
+  the default of an install. The fixtures ask for `debug`, at which the
+  originals write a line for every API request and Unarr writes none, so
+  the reads would cost the originals logging that Unarr does not do.
+- **Stopping.** A run stopped by Ctrl-C, SIGTERM or SIGHUP, or by a
+  read that fails, stops the side it was measuring and exits. The sides
+  also get SIGTERM if the script dies by SIGKILL. A side process that dies
+  during the measurement stops the run. The script refuses to start while
+  a process of the three binaries runs (a side left over in another run's
+  namespace, or another comparison); with `--network` it also refuses
+  when anything listens on 8989 or 7878.
 - **Heap limit.** The originals run with `DOTNET_GCHeapHardLimit` at
   768 MiB: that is what .NET takes from a 1 GiB container such as the
   homelab's.

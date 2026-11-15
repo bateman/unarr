@@ -57,7 +57,8 @@ SONARR_PORT, RADARR_PORT = 8989, 7878
 TICK = os.sysconf("SC_CLK_TCK")
 MIB = 1 << 20
 # The caller's environment, without what would make one side work
-# differently from a plain start: the proxy, Unarr's log filter and the
+# differently from a plain start: the proxy, Unarr's log filter and its
+# UNARR_* settings (a bind address, an ffprobe, a metadata upstream), the
 # .NET runtime's knobs (the heap limit is set on purpose below; the
 # globalization switch is what lets .NET start without libicu).
 ENV = {
@@ -65,6 +66,7 @@ ENV = {
     for k, v in os.environ.items()
     if k.lower() not in ("https_proxy", "http_proxy", "all_proxy", "no_proxy", "rust_log")
     and (not k.startswith(("DOTNET_", "COMPlus_")) or k == "DOTNET_SYSTEM_GLOBALIZATION_INVARIANT")
+    and not k.startswith("UNARR_")
 }
 
 
@@ -85,6 +87,27 @@ def without_icu() -> bool:
 # The script's own requests go straight to the loopback, whatever proxy the
 # caller's environment names.
 OPENER = urllib.request.build_opener(urllib.request.ProxyHandler({}))
+
+
+def leftovers(unarrd: Path) -> list[str]:
+    """Running processes of the binaries this script starts."""
+    cache = os.environ.get("UNARR_CACHE")
+    wanted = {
+        str(unarrd.resolve()),
+        str((Path(cache) / "Sonarr/Sonarr") if cache else REPO / ".cache/sonarr/Sonarr/Sonarr"),
+        str((Path(cache) / "Radarr/Radarr") if cache else REPO / ".cache/radarr/Radarr/Radarr"),
+    }
+    found = []
+    for entry in Path("/proc").iterdir():
+        if not entry.name.isdigit():
+            continue
+        try:
+            exe = os.readlink(entry / "exe")
+        except OSError:
+            continue
+        if exe in wanted:
+            found.append(f"pid {entry.name} {Path(exe).name}")
+    return found
 
 
 def isolate():
@@ -148,7 +171,7 @@ def memory(pid: int) -> dict:
                 out["rss"] = int(rest.split()[0]) * 1024
             elif key == "Anonymous":
                 out["anon"] = int(rest.split()[0]) * 1024
-    except FileNotFoundError:
+    except (FileNotFoundError, ProcessLookupError):
         pass
     return out
 
@@ -156,7 +179,7 @@ def memory(pid: int) -> dict:
 def cpu_seconds(pid: int) -> float:
     try:
         fields = open(f"/proc/{pid}/stat").read().rsplit(")", 1)[1].split()
-    except FileNotFoundError:
+    except (FileNotFoundError, ProcessLookupError):
         return 0.0
     # After the command: state is fields[0]; utime, stime, cutime, cstime are 11 to 14.
     return sum(int(x) for x in fields[11:15]) / TICK
@@ -217,7 +240,9 @@ class Side:
 
     def sample(self) -> dict:
         s = {"t": time.time(), "rss": 0, "anon": 0, "cpu": 0.0}
-        for proc in self.procs.values():
+        for label, proc in self.procs.items():
+            if proc.poll() is not None:
+                raise SystemExit(f"{label} exited during the measurement, see its stdout.log")
             m = memory(proc.pid)
             s["rss"] += m["rss"]
             s["anon"] += m["anon"]
@@ -296,13 +321,17 @@ def run_side(side: Side, first_seconds: int, idle_seconds: int, tail_seconds: in
                 peak[k] = max(peak[k], s[k])
             time.sleep(0.2)
 
-    watcher = threading.Thread(target=watch)
+    watcher = threading.Thread(target=watch, daemon=True)
     watcher.start()
     t0 = time.time()
-    latencies = reads()
-    t1 = time.time()
-    done.set()
-    watcher.join()
+    try:
+        latencies = reads()
+        t1 = time.time()
+    finally:
+        # Also when a read fails: the watcher would otherwise sample a
+        # stopped side forever and keep the interpreter from exiting.
+        done.set()
+        watcher.join()
     after = side.sample()
     tail = idle(side, tail_seconds)
     side.stop()
@@ -318,7 +347,10 @@ def run_side(side: Side, first_seconds: int, idle_seconds: int, tail_seconds: in
 
 
 def stage(library: str, root: Path) -> Path:
-    """A fresh copy of the library for one side."""
+    """A fresh copy of the library for one side, at the log level of a
+    default install. The fixtures' config.xml asks for debug, at which the
+    originals write a line for every API request and Unarr writes none:
+    the reads would cost the originals logging that Unarr does not do."""
     shutil.rmtree(root, ignore_errors=True)
     for app in ("sonarr", "radarr"):
         dst = root / app
@@ -331,6 +363,8 @@ def stage(library: str, root: Path) -> Path:
             if not (src / f"{app}.db").exists():
                 raise SystemExit(f"no {src}/{app}.db: run make scale-fixture first")
             shutil.copytree(src, dst)
+        config = dst / "config.xml"
+        config.write_text(re.sub(r"<LogLevel>[^<]*</LogLevel>", "<LogLevel>info</LogLevel>", config.read_text()))
     return root
 
 
@@ -339,14 +373,34 @@ def pinned(script: str, var: str) -> str:
     return m.group(1) if m else "?"
 
 
+def linked_crates(name: str = "unarrd", seen: set | None = None) -> set:
+    """The workspace crates unarrd is built from: its [dependencies] and
+    theirs, read from each crate's Cargo.toml. Dev-dependencies (unarr-mock)
+    and the tests are not part of the binary."""
+    seen = set() if seen is None else seen
+    seen.add(name)
+    section = ""
+    for line in (REPO / "crates" / name / "Cargo.toml").read_text().splitlines():
+        line = line.strip()
+        if line.startswith("["):
+            section = line
+        elif section == "[dependencies]":
+            m = re.match(r"(unarr-[a-z]+)\b", line)
+            if m and m.group(1) not in seen and (REPO / "crates" / m.group(1)).is_dir():
+                linked_crates(m.group(1), seen)
+    return seen
+
+
 def stale(binary: Path) -> str:
-    """A note when the binary is older than a source file of the code: then
+    """A note when the binary is older than a source it is built from: then
     the commit the report names is not what runs. File times, not commit
     times: committing what was built does not make the binary stale, while
     an edit or a checkout of other code does."""
-    files = subprocess.run(["git", "-C", str(REPO), "ls-files", "--", "crates", "Cargo.toml", "Cargo.lock"],
+    paths = ["Cargo.toml", "Cargo.lock"] + [f"crates/{c}" for c in sorted(linked_crates())]
+    files = subprocess.run(["git", "-C", str(REPO), "ls-files", "--", *paths],
                            capture_output=True, text=True).stdout.split()
-    newest = max((int((REPO / f).stat().st_mtime) for f in files if (REPO / f).exists()), default=0)
+    inputs = [f for f in files if not re.search(r"/(tests|benches|examples)/", f)]
+    newest = max((int((REPO / f).stat().st_mtime) for f in inputs if (REPO / f).exists()), default=0)
     if binary.stat().st_mtime < newest:
         log(f"warning: {binary} is older than the sources; make build first")
         return ", binary older than the sources"
@@ -503,12 +557,18 @@ def main():
     ap.add_argument("--network", action="store_true",
                     help="do not isolate the network: both sides reach it, and the figures are not comparable")
     a = ap.parse_args()
-    # Before the namespace, which would hide them: something already on the
-    # ports is most likely a side left over by an earlier run.
+    # A side left over by an earlier run lives in that run's namespace, out
+    # of reach of a port check: look for the binaries among the processes.
+    # The port check still catches a service of the host on 8989 or 7878,
+    # which a --network run would collide with.
     if os.environ.get("COMPARE_NETNS") != "1":
-        for port in (SONARR_PORT, RADARR_PORT):
-            if listening(port):
-                raise SystemExit(f"something already listens on {port}: stop it first")
+        left = leftovers(a.unarrd)
+        if left:
+            raise SystemExit(f"a side is still running ({', '.join(left)}): stop it first")
+        if a.network:
+            for port in (SONARR_PORT, RADARR_PORT):
+                if listening(port):
+                    raise SystemExit(f"something already listens on {port}: stop it first")
     if not a.network:
         isolate()
     # A SIGTERM or SIGHUP ends the run through measure()'s finally, as
