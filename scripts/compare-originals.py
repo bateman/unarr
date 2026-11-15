@@ -278,7 +278,9 @@ class Side:
             self.logs.append(out)
             self.procs[label] = subprocess.Popen(
                 # No terminal to read: an original that fails at start-up asks
-                # to "press enter" and would wait for it instead of exiting.
+                # to "press enter" and would wait for it instead of exiting
+                # (with -exitimmediately, below, for the failures it does not
+                # ask about).
                 argv, stdin=subprocess.DEVNULL, stdout=out, stderr=subprocess.STDOUT, env=self.env,
                 preexec_fn=die_with_parent,
             )
@@ -654,6 +656,9 @@ def main():
     ap.add_argument("--network", action="store_true",
                     help="do not isolate the network: both sides reach it, and the figures are not comparable")
     a = ap.parse_args()
+    # Before the build, the claim and the namespace.
+    if a.repeat < 1:
+        raise SystemExit("--repeat must be at least 1")
     # A side left over by an earlier run lives in that run's namespace, out
     # of reach of a port check: look for the binaries among the processes.
     # The port check still catches a service of the host on 8989 or 7878,
@@ -748,8 +753,6 @@ def main():
     if not a.no_cap:
         env["DOTNET_GCHeapHardLimit"] = "0x30000000"
 
-    if a.repeat < 1:
-        raise SystemExit("--repeat must be at least 1")
     meta["repeat"] = a.repeat
     # Both schedulers run their overdue tasks about 30 s after a start: a
     # shorter first start leaves them, or their remains, to the measured one.
@@ -759,8 +762,11 @@ def main():
     def originals() -> Side:
         lib = stage(a.library, out / "originals")
         return Side("originals", [
-            ("sonarr", [str(sonarr), "-nobrowser", f"-data={lib / 'sonarr'}"], lib / "sonarr"),
-            ("radarr", [str(radarr), "-nobrowser", f"-data={lib / 'radarr'}"], lib / "radarr"),
+            # -exitimmediately: on a non-recoverable failure (a corrupt
+            # database, a failed migration) the originals otherwise wait an
+            # hour "for user intervention", stdin or not.
+            ("sonarr", [str(sonarr), "-nobrowser", "-exitimmediately", f"-data={lib / 'sonarr'}"], lib / "sonarr"),
+            ("radarr", [str(radarr), "-nobrowser", "-exitimmediately", f"-data={lib / 'radarr'}"], lib / "radarr"),
         ], [SONARR_PORT, RADARR_PORT], env)
 
     def unarr() -> Side:
