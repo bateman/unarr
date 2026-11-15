@@ -1052,6 +1052,108 @@ async fn the_review_goldens_match() {
     .await;
 }
 
+/// The fixture library served with the mock's metadata, for the cases no
+/// golden covers: the dirs and the mock live as long as the app.
+async fn live_app(name: &str) -> (ReplayDirs, unarr_mock::Mock, AppState, axum::Router) {
+    let dirs = ReplayDirs::create_named(name);
+    let mock = unarr_mock::Mock::start_with(
+        unarr_mock::fixtures_dir(),
+        0,
+        unarr_mock::MockDirs {
+            downloads: Some(dirs.downloads.clone()),
+            tv: None,
+            movies: Some(dirs.movies.clone()),
+        },
+    )
+    .await
+    .expect("a mock on a free port");
+    let state = build_state(&dirs);
+    state.set_metadata_upstreams(unarr_core::metadata::Upstreams::mock(&mock.url()));
+    state.start_runtime().await.expect("the runtime");
+    let app = unarr_api::router(state.clone());
+    (dirs, mock, state, app)
+}
+
+async fn call(app: &axum::Router, method: &str, path: &str, body: Option<Value>) -> (StatusCode, Value) {
+    let mut req = Request::builder()
+        .method(method)
+        .uri(path)
+        .header("X-Api-Key", API_KEY);
+    let body = match body {
+        Some(json) => {
+            req = req.header("content-type", "application/json");
+            Body::from(json.to_string())
+        }
+        None => Body::empty(),
+    };
+    let response = app.clone().oneshot(req.body(body).unwrap()).await.unwrap();
+    let status = response.status();
+    let bytes = response.into_body().collect().await.unwrap().to_bytes();
+    (status, serde_json::from_slice(&bytes).unwrap_or(Value::Null))
+}
+
+/// The Discover add leaves out a movie that does not validate, so the
+/// movies it answers with no longer pair with the request by position:
+/// each takes its own entry's root folder, found by its TMDB id.
+#[tokio::test]
+async fn the_discover_add_answers_each_movie_with_its_own_entry() {
+    let (dirs, _mock, _state, app) = live_app("discover_pairs").await;
+    let movies = dirs.movies.to_string_lossy().into_owned();
+    let entry = |tmdb: i64, title: &str, root: &str| {
+        serde_json::json!({
+            "tmdbId": tmdb, "title": title, "year": 2014, "qualityProfileId": 4,
+            "monitored": true, "minimumAvailability": "released", "rootFolderPath": root,
+            "addOptions": {"monitor": "movieOnly", "searchForMovie": false}
+        })
+    };
+    // The metadata server knows no movie 999999999.
+    let body = serde_json::json!([
+        entry(999999999, "Nothing", "/nowhere"),
+        entry(157336, "Interstellar", &movies),
+    ]);
+    let (status, answer) = call(&app, "POST", "/api/v3/importlist/movie", Some(body)).await;
+    assert_eq!(status, StatusCode::OK, "{answer}");
+    let added = answer.as_array().expect("an array");
+    assert_eq!(added.len(), 1, "{answer}");
+    assert_eq!(added[0]["tmdbId"], 157336);
+    assert_eq!(added[0]["rootFolderPath"], serde_json::json!(movies));
+}
+
+/// The single list edit stores `minimumAvailability` as the movies take
+/// it: a number is the enum's value, a name is matched however it is
+/// written.
+#[tokio::test]
+async fn a_list_edit_stores_the_minimum_availability_it_was_sent() {
+    let (_dirs, _mock, _state, app) = live_app("list_availability").await;
+    let (status, lists) = call(&app, "GET", "/api/v3/importlist", None).await;
+    assert_eq!(status, StatusCode::OK);
+    let list = lists.as_array().and_then(|l| l.first()).cloned().expect("a list");
+    let id = list["id"].as_i64().unwrap();
+    for (sent, stored) in [
+        (serde_json::json!(1), "announced"),
+        (serde_json::json!("InCinemas"), "inCinemas"),
+    ] {
+        let mut edit = list.clone();
+        edit["minimumAvailability"] = sent.clone();
+        // The fixture's list id was redacted; the edit needs one that validates.
+        for field in edit["fields"].as_array_mut().into_iter().flatten() {
+            if field["name"] == "listId" {
+                field["value"] = serde_json::json!("ur12345678");
+            }
+        }
+        let (status, answer) = call(
+            &app,
+            "PUT",
+            &format!("/api/v3/importlist/{id}?forceSave=true"),
+            Some(edit),
+        )
+        .await;
+        assert_eq!(status, StatusCode::ACCEPTED, "{sent}: {answer}");
+        let (_, read) = call(&app, "GET", &format!("/api/v3/importlist/{id}"), None).await;
+        assert_eq!(read["minimumAvailability"], stored, "{sent}");
+    }
+}
+
 fn review_mode(name: &str) -> Mode {
     match name {
         // An exception the original lets escape carries its stack.

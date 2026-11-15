@@ -198,6 +198,17 @@ async fn a_missing_movies_search_grabs_what_is_wanted_and_leaves_the_queue_alone
         .await
         .unwrap();
     assert_eq!(grabbed, vec![70, 116]);
+    // The grabs asked for a queue refresh themselves, at high priority, as
+    // the episodes' grab does (the queue's lazy reload would hide it).
+    let refreshes: Vec<CommandModel> = runtime
+        .queue()
+        .all()
+        .into_iter()
+        .filter(|c| c.body == CommandBody::RefreshMonitoredDownloads)
+        .collect();
+    assert_eq!(refreshes.len(), 1, "{refreshes:?}");
+    assert_eq!(refreshes[0].priority, CommandPriority::High);
+    assert_eq!(refreshes[0].status, CommandStatus::Completed);
     let queued: Vec<i64> = {
         let mut ids: Vec<i64> = downloads
             .queue()
