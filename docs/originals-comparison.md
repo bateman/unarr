@@ -14,6 +14,7 @@ run the comparison again and update this file in the same branch.
     make compare-originals                   # the real library, about an hour
     make scale-fixture
     make compare-originals LIBRARY=scaled    # 950 series and 2,123 movies
+    make compare-originals REPEAT=3          # three runs per side, about three hours
 
 - **The sides.** The originals are the official Sonarr and Radarr from
   their release tarballs, two processes. Unarr is `target/release/unarrd`
@@ -27,6 +28,12 @@ run the comparison again and update this file in the same branch.
   - the same reads over both APIs: about 220 requests, the list of each
     app, history, wanted, calendar, queue and twenty series' episodes;
   - five more idle minutes.
+- **Latency** is measured by the script's own client, Python's `urllib`,
+  with a new connection for each request, the same for both sides.
+- **Environment.** The caller's proxy variables, `RUST_LOG` and the
+  `DOTNET_*` and `COMPlus_*` knobs are not passed to the processes
+  measured. The report gives the versions the applications themselves
+  report.
 - **RAM** is the RSS and the anonymous memory (the heaps) of
   `/proc/<pid>/smaps_rollup`, summed over a side's processes.
 - **CPU** is `utime + stime` from `/proc/<pid>/stat`, plus the children
@@ -42,8 +49,17 @@ run the comparison again and update this file in the same branch.
     series, 193 movies.
   - `scaled` is `make scale-fixture`: 950 series, 25,300 episodes, 2,123
     movies, 50,000 history rows each.
+- **Repetitions.** `--repeat N` (`REPEAT=N`) measures each side N times.
+  The order alternates between runs, originals first in odd runs and Unarr
+  first in even ones, so a drift of the machine favours neither side. A
+  cell then reads median (lowest–highest), and *Less* compares the
+  medians. For latency, the cell is the median of the runs' p50s, with
+  the highest single call after the slash. One run is enough for a
+  routine update; numbers meant for a paper or a release note want three
+  or more.
 - **Output.** `.cache/compare/<library>/report.md` holds the tables below,
-  `results.json` every sample.
+  `results.json` every sample. `results.json` is written after each run,
+  so an interrupted series keeps what it measured.
 
 ## Results
 
@@ -115,7 +131,7 @@ of RAM.
 One row per run, newest first: the library, the Unarr commit, idle RSS and
 idle CPU of each side.
 
-| Date | Library | Unarr | Originals: idle RSS / CPU | Unarr: idle RSS / CPU | Note |
-|---|---|---|--:|--:|---|
-| 2026-11-14 | real | `ae1283b` | 496 MiB / 18 s/h | 28 MiB / 1.6 s/h | prototype of the script |
-| 2026-11-14 | scaled | `ae1283b` | 837 MiB / 16 s/h | 45 MiB / 2 s/h | prototype; originals without heap limit |
+| Date | Library | Unarr | Runs | Originals: idle RSS / CPU | Unarr: idle RSS / CPU | Note |
+|---|---|---|--:|--:|--:|---|
+| 2026-11-14 | real | `ae1283b` | 1 | 496 MiB / 18 s/h | 28 MiB / 1.6 s/h | prototype of the script |
+| 2026-11-14 | scaled | `ae1283b` | 1 | 837 MiB / 16 s/h | 45 MiB / 2 s/h | prototype; originals without heap limit |

@@ -65,7 +65,9 @@ After each substantial change, update it in the same branch:
   pinned version of an original in `scripts/*-fixture.sh`;
 - how: `make ui`, then `make compare-originals` (the real library). For a
   change to the speed or the memory of routes, also run
-  `make scale-fixture` and `make compare-originals LIBRARY=scaled`;
+  `make scale-fixture` and `make compare-originals LIBRARY=scaled`. Use
+  `REPEAT=3` or more when the numbers will be cited outside the repository;
+  a single run is enough otherwise;
 - what to write: the numbers of `.cache/compare/<library>/report.md` in
   the tables of that library, a row in the History table, and what changed
   in the list of routes where Unarr is slower than the original.

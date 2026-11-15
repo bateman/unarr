@@ -54,7 +54,16 @@ KEY = "0123456789abcdef0123456789abcdef"
 SONARR_PORT, RADARR_PORT = 8989, 7878
 TICK = os.sysconf("SC_CLK_TCK")
 MIB = 1 << 20
-ENV = {k: v for k, v in os.environ.items() if k.lower() not in ("https_proxy", "http_proxy", "all_proxy", "no_proxy")}
+# The caller's environment, without what would make one side work
+# differently from a plain start: the proxy (neither side reaches the
+# network), Unarr's log filter and the .NET runtime's knobs (the heap
+# limit is set on purpose below).
+ENV = {
+    k: v
+    for k, v in os.environ.items()
+    if k.lower() not in ("https_proxy", "http_proxy", "all_proxy", "no_proxy", "rust_log")
+    and not k.startswith(("DOTNET_", "COMPlus_"))
+}
 
 
 def log(*a):
@@ -207,6 +216,8 @@ def run_side(side: Side, first_seconds: int, idle_seconds: int, tail_seconds: in
     side.stop()
     log(side.name, "measured start")
     first = side.start()
+    # What actually runs, as each application reports it.
+    versions = {port: json.loads(get(port, "/api/v3/system/status")).get("version", "?") for port in side.ports}
     samples = idle(side, idle_seconds)
     before = side.sample()
     peak = dict(before)
@@ -229,6 +240,7 @@ def run_side(side: Side, first_seconds: int, idle_seconds: int, tail_seconds: in
     tail = idle(side, tail_seconds)
     side.stop()
     return {
+        "versions": versions,
         "first": first,
         "idle": samples,
         "reads": {"seconds": after["t"] - t0, "cpu": after["cpu"] - before["cpu"],
@@ -287,40 +299,95 @@ def summary(r: dict) -> dict:
     }
 
 
-def report(res: dict, meta: dict) -> str:
-    o, u = summary(res["originals"]), summary(res["unarr"])
+def runs(res: dict, side: str) -> list[dict]:
+    """A side's runs: a list since --repeat, one run in older results."""
+    r = res[side]
+    return r if isinstance(r, list) else [r]
 
-    def less(a, b) -> str:
+
+def median(xs: list[float]) -> float:
+    xs = sorted(xs)
+    n = len(xs)
+    return xs[n // 2] if n % 2 else (xs[n // 2 - 1] + xs[n // 2]) / 2
+
+
+def report(res: dict, meta: dict) -> str:
+    """The tables of report.md. With several runs a cell is the median and,
+    in brackets, the lowest and the highest run; Less compares the medians."""
+    o_runs = [summary(r) for r in runs(res, "originals")]
+    u_runs = [summary(r) for r in runs(res, "unarr")]
+
+    def values(rs: list[dict], key: str) -> list[float] | None:
+        xs = [r[key] for r in rs]
+        return None if any(x is None for x in xs) else xs
+
+    def cell(rs: list[dict], key: str, fmt: str, unit: str) -> str:
+        xs = values(rs, key)
+        if xs is None:
+            return "n/a"
+        text = f"{median(xs):{fmt}} {unit}"
+        if len(xs) > 1:
+            text += f" ({min(xs):{fmt}}–{max(xs):{fmt}})"
+        return text
+
+    def mid(rs: list[dict], key: str) -> float | None:
+        xs = values(rs, key)
+        return None if xs is None else median(xs)
+
+    def less(key: str) -> str:
+        a, b = mid(o_runs, key), mid(u_runs, key)
         return f"{(a - b) / a * 100:.0f} %" if a and b is not None else "n/a"
 
-    def per_hour(x) -> str:
-        return "n/a" if x is None else f"{x:.1f} s/h"
+    def sooner(key: str) -> str:
+        a, b = mid(o_runs, key), mid(u_runs, key)
+        return f"{a / b:.0f}× sooner" if a and b else "n/a"
 
     rows = [
-        ("First answer on both ports", f"{o['first']:.2f} s", f"{u['first']:.2f} s", f"{o['first'] / u['first']:.0f}× sooner"),
-        ("Idle, at the end of the idle window: RSS", f"{o['idle_rss']:.0f} MiB", f"{u['idle_rss']:.0f} MiB", less(o["idle_rss"], u["idle_rss"])),
-        ("Same, anonymous memory", f"{o['idle_anon']:.0f} MiB", f"{u['idle_anon']:.0f} MiB", less(o["idle_anon"], u["idle_anon"])),
-        ("Idle CPU, from minute 5 of the window", per_hour(o["idle_cpu_h"]), per_hour(u["idle_cpu_h"]), less(o["idle_cpu_h"], u["idle_cpu_h"])),
-        ("The reads: CPU", f"{o['reads_cpu']:.2f} s", f"{u['reads_cpu']:.2f} s", less(o["reads_cpu"], u["reads_cpu"])),
-        ("The reads: time", f"{o['reads_s']:.2f} s", f"{u['reads_s']:.2f} s", less(o["reads_s"], u["reads_s"])),
-        ("Peak anonymous memory during the reads", f"{o['peak_anon']:.0f} MiB", f"{u['peak_anon']:.0f} MiB", less(o["peak_anon"], u["peak_anon"])),
-        ("Anonymous memory at the end of the tail", f"{o['tail_anon']:.0f} MiB", f"{u['tail_anon']:.0f} MiB", less(o["tail_anon"], u["tail_anon"])),
-        ("Idle CPU in the tail", f"{o['tail_cpu_h']:.1f} s/h", f"{u['tail_cpu_h']:.1f} s/h", less(o["tail_cpu_h"], u["tail_cpu_h"])),
+        ("First answer on both ports", "first", ".2f", "s", sooner),
+        ("Idle, at the end of the idle window: RSS", "idle_rss", ".0f", "MiB", less),
+        ("Same, anonymous memory", "idle_anon", ".0f", "MiB", less),
+        ("Idle CPU, from minute 5 of the window", "idle_cpu_h", ".1f", "s/h", less),
+        ("The reads: CPU", "reads_cpu", ".2f", "s", less),
+        ("The reads: time", "reads_s", ".2f", "s", less),
+        ("Peak anonymous memory during the reads", "peak_anon", ".0f", "MiB", less),
+        ("Anonymous memory at the end of the tail", "tail_anon", ".0f", "MiB", less),
+        ("Idle CPU in the tail", "tail_cpu_h", ".1f", "s/h", less),
     ]
+    n = len(o_runs)
+    reported = runs(res, "originals")[0].get("versions", {})
+    sonarr_v = reported.get(str(SONARR_PORT), reported.get(SONARR_PORT, meta["sonarr"]))
+    radarr_v = reported.get(str(RADARR_PORT), reported.get(RADARR_PORT, meta["radarr"]))
     out = [
-        f"Library `{meta['library']}`; Unarr `{meta['unarr']}`; Sonarr {meta['sonarr']}, Radarr {meta['radarr']}; "
+        f"Library `{meta['library']}`; Unarr `{meta['unarr']}`; Sonarr {sonarr_v}, Radarr {radarr_v}; "
         f"first start {meta['first']} s, idle {meta['idle']} s, tail {meta['tail']} s; "
-        f".NET heap limit {'768 MiB' if meta['cap'] else 'none'}; {meta['date']}.",
+        f".NET heap limit {'768 MiB' if meta['cap'] else 'none'}; "
+        + (f"{n} runs per side, median (lowest–highest); " if n > 1 else "")
+        + f"{meta['date']}.",
         "",
         "| | Sonarr + Radarr | Unarr | Less |",
         "|---|--:|--:|--:|",
     ]
-    out += [f"| {a} | {b} | {c} | {d} |" for a, b, c, d in rows]
+    out += [f"| {label} | {cell(o_runs, k, f, u)} | {cell(u_runs, k, f, u)} | {how(k)} |" for label, k, f, u, how in rows]
+
+    # Latency: each run's p50, then their median; the highest call of all runs.
+    def p50s(side: str, key: str) -> list[float]:
+        return [median(r["latency"][key]) for r in runs(res, side) if key in r["latency"]]
+
+    def tops(side: str, key: str) -> float:
+        return max((max(r["latency"][key]) for r in runs(res, side) if key in r["latency"]), default=0.0)
+
+    def lat(side: str, key: str) -> str:
+        xs = p50s(side, key)
+        if not xs:
+            return "n/a"
+        text = f"{median(xs):.1f}"
+        if len(xs) > 1:
+            text += f" ({min(xs):.1f}–{max(xs):.1f})"
+        return f"{text} / {tops(side, key):.1f}"
+
     out += ["", "| p50 / max, ms | Originals | Unarr |", "|---|--:|--:|"]
-    for key in res["originals"]["latency"]:
-        a = sorted(res["originals"]["latency"][key])
-        b = sorted(res["unarr"]["latency"].get(key, [0.0]))
-        out.append(f"| {key} | {a[len(a) // 2]:.1f} / {a[-1]:.1f} | {b[len(b) // 2]:.1f} / {b[-1]:.1f} |")
+    for key in runs(res, "originals")[0]["latency"]:
+        out.append(f"| {key} | {lat('originals', key)} | {lat('unarr', key)} |")
     return "\n".join(out) + "\n"
 
 
@@ -332,6 +399,8 @@ def main():
     ap.add_argument("--tail", type=int, default=300, help="idle seconds sampled after the reads")
     ap.add_argument("--no-cap", action="store_true", help="no .NET heap limit for the originals")
     ap.add_argument("--out", type=Path, help="default .cache/compare/<library>")
+    ap.add_argument("--repeat", type=int, default=1,
+                    help="runs per side, the order alternating between runs (default 1)")
     ap.add_argument("--unarrd", type=Path, default=REPO / "target/release/unarrd",
                     help="the Unarr binary (default target/release/unarrd, built by make build)")
     a = ap.parse_args()
@@ -362,22 +431,39 @@ def main():
     if not a.no_cap:
         env["DOTNET_GCHeapHardLimit"] = "0x30000000"
 
-    lib = stage(a.library, out / "originals")
-    originals = Side("originals", [
-        ("sonarr", [str(sonarr), "-nobrowser", f"-data={lib / 'sonarr'}"], lib / "sonarr"),
-        ("radarr", [str(radarr), "-nobrowser", f"-data={lib / 'radarr'}"], lib / "radarr"),
-    ], [SONARR_PORT, RADARR_PORT], env)
-    res = {"meta": meta, "originals": measure(originals, a.first, a.idle, a.tail)}
+    if a.repeat < 1:
+        raise SystemExit("--repeat must be at least 1")
+    meta["repeat"] = a.repeat
 
-    lib = stage(a.library, out / "unarr-library")
-    data = out / "unarr"
-    shutil.rmtree(data, ignore_errors=True)
-    data.mkdir(parents=True)
-    unarr = Side("unarr", [
-        ("unarr", [str(unarrd), "--data", str(data), "--personalities", "sonarr,radarr",
-                   "--import-from", f"{lib / 'sonarr'},{lib / 'radarr'}"], data),
-    ], [SONARR_PORT, RADARR_PORT], ENV)
-    res["unarr"] = measure(unarr, a.first, a.idle, a.tail)
+    def originals() -> Side:
+        lib = stage(a.library, out / "originals")
+        return Side("originals", [
+            ("sonarr", [str(sonarr), "-nobrowser", f"-data={lib / 'sonarr'}"], lib / "sonarr"),
+            ("radarr", [str(radarr), "-nobrowser", f"-data={lib / 'radarr'}"], lib / "radarr"),
+        ], [SONARR_PORT, RADARR_PORT], env)
+
+    def unarr() -> Side:
+        lib = stage(a.library, out / "unarr-library")
+        data = out / "unarr"
+        shutil.rmtree(data, ignore_errors=True)
+        data.mkdir(parents=True)
+        return Side("unarr", [
+            ("unarr", [str(unarrd), "--data", str(data), "--personalities", "sonarr,radarr",
+                       "--import-from", f"{lib / 'sonarr'},{lib / 'radarr'}"], data),
+        ], [SONARR_PORT, RADARR_PORT], ENV)
+
+    res: dict = {"meta": meta, "originals": [], "unarr": []}
+    for run in range(a.repeat):
+        # The originals first in odd runs, Unarr first in even ones: a drift
+        # of the machine over the hours favours neither side.
+        order = [("originals", originals), ("unarr", unarr)]
+        if run % 2:
+            order.reverse()
+        for name, make in order:
+            log(f"run {run + 1} of {a.repeat}")
+            res[name].append(measure(make(), a.first, a.idle, a.tail))
+        # Kept after every run: an interrupted series still has its results.
+        (out / "results.json").write_text(json.dumps(res, indent=1))
 
     (out / "results.json").write_text(json.dumps(res, indent=1))
     text = report(res, meta)
