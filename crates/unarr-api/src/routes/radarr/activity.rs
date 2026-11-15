@@ -383,32 +383,52 @@ const WANTED_SORT_KEYS: &[&str] = &[
 async fn wanted_page(
     state: &AppState,
     ctx: &MovieContext,
-    mut wanted: Vec<WantedRow>,
+    with_file: bool,
+    monitored: bool,
     paging: &Paging,
 ) -> ApiResult<PagingResource<Value>> {
-    let date = |d: Option<DateTime<Utc>>| d.map(|d| d.timestamp()).unwrap_or(i64::MIN);
-    let key = |w: &WantedRow| -> (i64, String) {
-        match paging.sort_key.as_str() {
-            "movieMetadata.year" => (w.year, String::new()),
-            "movieMetadata.inCinemas" => (date(w.in_cinemas), String::new()),
-            "movieMetadata.digitalRelease" => (date(w.digital_release), String::new()),
-            "movieMetadata.physicalRelease" => (date(w.physical_release), String::new()),
-            "movies.added" => (date(w.added), String::new()),
-            "movies.lastSearchTime" => (date(w.last_search_time), String::new()),
-            "movies.id" => (w.id, String::new()),
-            _ => (0, w.sort_title.clone().unwrap_or_default()),
-        }
-    };
-    wanted.sort_by(|a, b| {
-        let order = key(a).cmp(&key(b));
-        let order = if paging.descending { order.reverse() } else { order };
-        order.then_with(|| a.id.cmp(&b.id))
-    });
-    let total = wanted.len() as i64;
-    let ids: Vec<i64> = paging.slice(&wanted).iter().map(|w| w.id).collect();
-    let (page, files) = state
+    // One call, so no write lands between the rows sorted and the movies
+    // read for the page (the database runs one call at a time).
+    let profiles = ctx.profiles.clone();
+    let sorting = paging.clone();
+    let (total, page, files) = state
         .db()
         .call(move |conn| {
+            let mut wanted: Vec<WantedRow> = movies::wanted_rows(conn, monitored, with_file)?;
+            if with_file {
+                // `/wanted/cutoff`: a file below the cutoff of its profile.
+                wanted.retain(|w| {
+                    let profile = profiles.iter().find(|p| p.id == w.quality_profile_id);
+                    let (Some(quality_id), Some(profile)) = (w.file_quality_id, profile) else {
+                        return false;
+                    };
+                    unarr_core::profile::quality_cutoff_not_met(profile, quality_id)
+                });
+            }
+            let date = |d: Option<DateTime<Utc>>| d.map(|d| d.timestamp()).unwrap_or(i64::MIN);
+            let key = |w: &WantedRow| -> (i64, String) {
+                match sorting.sort_key.as_str() {
+                    "movieMetadata.year" => (w.year, String::new()),
+                    "movieMetadata.inCinemas" => (date(w.in_cinemas), String::new()),
+                    "movieMetadata.digitalRelease" => (date(w.digital_release), String::new()),
+                    "movieMetadata.physicalRelease" => (date(w.physical_release), String::new()),
+                    "movies.added" => (date(w.added), String::new()),
+                    "movies.lastSearchTime" => (date(w.last_search_time), String::new()),
+                    "movies.id" => (w.id, String::new()),
+                    _ => (0, w.sort_title.clone().unwrap_or_default()),
+                }
+            };
+            wanted.sort_by(|a, b| {
+                let order = key(a).cmp(&key(b));
+                let order = if sorting.descending {
+                    order.reverse()
+                } else {
+                    order
+                };
+                order.then_with(|| a.id.cmp(&b.id))
+            });
+            let total = wanted.len() as i64;
+            let ids: Vec<i64> = sorting.slice(&wanted).iter().map(|w| w.id).collect();
             let page = movies::movies_by_ids(conn, &ids)?;
             let file_ids: Vec<i64> = page
                 .iter()
@@ -421,10 +441,8 @@ async fn wanted_page(
                 .collect();
             // `movies_by_ids` reads in id order: back to the page's order.
             let mut by_id: HashMap<i64, Movie> = page.into_iter().map(|m| (m.id, m)).collect();
-            Ok((
-                ids.iter().filter_map(|id| by_id.remove(id)).collect::<Vec<_>>(),
-                files,
-            ))
+            let page: Vec<Movie> = ids.iter().filter_map(|id| by_id.remove(id)).collect();
+            Ok((total, page, files))
         })
         .await?;
     let records = page
@@ -466,11 +484,9 @@ pub async fn missing(State(state): State<AppState>, uri: Uri) -> ApiResult<Json<
     let p = Params::from_uri(&uri);
     let monitored = p.bool("monitored", true);
     let ctx = MovieContext::load(&state).await?;
-    let wanted = state
-        .db()
-        .call(move |conn| movies::wanted_rows(conn, monitored, false))
-        .await?;
-    Ok(Json(wanted_page(&state, &ctx, wanted, &wanted_paging(&p)).await?))
+    Ok(Json(
+        wanted_page(&state, &ctx, false, monitored, &wanted_paging(&p)).await?,
+    ))
 }
 
 /// `POST /history/failed/{id}`: "Mark as failed" on a history row.
@@ -499,18 +515,7 @@ pub async fn cutoff(State(state): State<AppState>, uri: Uri) -> ApiResult<Json<P
     let p = Params::from_uri(&uri);
     let monitored = p.bool("monitored", true);
     let ctx = MovieContext::load(&state).await?;
-    let wanted = state
-        .db()
-        .call(move |conn| movies::wanted_rows(conn, monitored, true))
-        .await?
-        .into_iter()
-        .filter(|w| {
-            let (Some(quality_id), Some(profile)) = (w.file_quality_id, ctx.profile(w.quality_profile_id))
-            else {
-                return false;
-            };
-            unarr_core::profile::quality_cutoff_not_met(profile, quality_id)
-        })
-        .collect();
-    Ok(Json(wanted_page(&state, &ctx, wanted, &wanted_paging(&p)).await?))
+    Ok(Json(
+        wanted_page(&state, &ctx, true, monitored, &wanted_paging(&p)).await?,
+    ))
 }
