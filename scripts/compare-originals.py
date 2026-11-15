@@ -94,20 +94,21 @@ def without_icu() -> bool:
 OPENER = urllib.request.build_opener(urllib.request.ProxyHandler({}))
 
 
+def original_binaries() -> tuple[Path, Path]:
+    """Where make ui put the originals: UNARR_CACHE moves .cache/<app> as
+    in the fixture scripts."""
+    cache = os.environ.get("UNARR_CACHE")
+    if cache:
+        return Path(cache) / "Sonarr/Sonarr", Path(cache) / "Radarr/Radarr"
+    return REPO / ".cache/sonarr/Sonarr/Sonarr", REPO / ".cache/radarr/Radarr/Radarr"
+
+
 def leftovers(unarrds: list[Path]) -> list[str]:
     """Running processes of the originals and of the unarrd binaries given
     (the one this run will start and target/release/unarrd)."""
-    cache = os.environ.get("UNARR_CACHE")
     # Resolved: /proc/<pid>/exe names the file itself, past any symlink in
     # the way (a .cache linked from a worktree, a relative UNARR_CACHE).
-    wanted = {
-        str(p.resolve())
-        for p in (
-            *unarrds,
-            (Path(cache) / "Sonarr/Sonarr") if cache else REPO / ".cache/sonarr/Sonarr/Sonarr",
-            (Path(cache) / "Radarr/Radarr") if cache else REPO / ".cache/radarr/Radarr/Radarr",
-        )
-    }
+    wanted = {str(p.resolve()) for p in (*unarrds, *original_binaries())}
     found = []
     for entry in Path("/proc").iterdir():
         if not entry.name.isdigit():
@@ -272,7 +273,7 @@ class Side:
         self.logs: list = []
 
     def start(self) -> dict[int, float]:
-        t0 = time.time()
+        t0 = time.monotonic()
         for label, argv, data in self.commands:
             out = open(data / f"{label}.stdout.log", "ab")
             self.logs.append(out)
@@ -294,7 +295,7 @@ class Side:
             # next to nothing, fine enough for Unarr's tenths of a second.
             while not stop.is_set():
                 if answers(port):
-                    first[port] = round(time.time() - t0, 3)
+                    first[port] = round(time.monotonic() - t0, 3)
                     return
                 time.sleep(0.005)
 
@@ -306,7 +307,7 @@ class Side:
                 for label, proc in self.procs.items():
                     if proc.poll() is not None:
                         raise SystemExit(f"{label} exited early, see its stdout.log")
-                if time.time() - t0 > 900:
+                if time.monotonic() - t0 > 900:
                     raise SystemExit(f"{self.name} did not answer within 15 minutes")
                 time.sleep(0.05)
         finally:
@@ -330,7 +331,7 @@ class Side:
         self.logs = []
 
     def sample(self) -> dict:
-        s = {"t": time.time(), "rss": 0, "anon": 0, "cpu": 0.0}
+        s = {"t": time.monotonic(), "rss": 0, "anon": 0, "cpu": 0.0}
         for label, proc in self.procs.items():
             if proc.poll() is not None:
                 raise SystemExit(f"{label} exited during the measurement, see its stdout.log")
@@ -342,10 +343,10 @@ class Side:
 
 
 def idle(side: Side, seconds: int) -> list[dict]:
-    rows, end = [], time.time() + seconds
+    rows, end = [], time.monotonic() + seconds
     while True:
         rows.append(side.sample())
-        if time.time() >= end:
+        if time.monotonic() >= end:
             return rows
         time.sleep(5)
 
@@ -440,10 +441,10 @@ def run_side(side: Side, first_seconds: int, idle_seconds: int, tail_seconds: in
 
     watcher = threading.Thread(target=watch, daemon=True)
     watcher.start()
-    t0 = time.time()
+    t0 = time.monotonic()
     try:
         latencies = reads()
-        t1 = time.time()
+        t1 = time.monotonic()
     except Exception:
         # A read that failed because a side died says so, not with the
         # request's traceback.
@@ -557,12 +558,6 @@ def summary(r: dict) -> dict:
     }
 
 
-def runs(res: dict, side: str) -> list[dict]:
-    """A side's runs: a list since --repeat, one run in older results."""
-    r = res[side]
-    return r if isinstance(r, list) else [r]
-
-
 def median(xs: list[float]) -> float:
     xs = sorted(xs)
     n = len(xs)
@@ -572,8 +567,8 @@ def median(xs: list[float]) -> float:
 def report(res: dict, meta: dict) -> str:
     """The tables of report.md. With several runs a cell is the median and,
     in brackets, the lowest and the highest run; Less compares the medians."""
-    o_runs = [summary(r) for r in runs(res, "originals")]
-    u_runs = [summary(r) for r in runs(res, "unarr")]
+    o_runs = [summary(r) for r in res["originals"]]
+    u_runs = [summary(r) for r in res["unarr"]]
 
     def values(rs: list[dict], key: str) -> list[float] | None:
         xs = [r[key] for r in rs]
@@ -622,7 +617,7 @@ def report(res: dict, meta: dict) -> str:
         """Sides whose last two warm-up passes differ by more than 10 %."""
         out = []
         for side in ("originals", "unarr"):
-            for r in runs(res, side):
+            for r in res[side]:
                 w = r.get("warmup_cpu", [])
                 if len(w) >= 2 and w[-2] > 0 and abs(w[-1] - w[-2]) > 0.1 * w[-2]:
                     out.append(side)
@@ -630,7 +625,7 @@ def report(res: dict, meta: dict) -> str:
         return out
 
     shaky = unsettled()
-    reported = runs(res, "originals")[0].get("versions", {})
+    reported = res["originals"][0].get("versions", {})
     def ran(port: int, app: str) -> str:
         """The version that ran, and the pinned one when they differ: make ui
         keeps a binary it already has, so a new pin needs .cache/<app>
@@ -661,10 +656,10 @@ def report(res: dict, meta: dict) -> str:
 
     # Latency: each run's p50, then their median; the highest call of all runs.
     def p50s(side: str, key: str) -> list[float]:
-        return [median(r["latency"][key]) for r in runs(res, side) if key in r["latency"]]
+        return [median(r["latency"][key]) for r in res[side] if key in r["latency"]]
 
     def tops(side: str, key: str) -> float:
-        return max((max(r["latency"][key]) for r in runs(res, side) if key in r["latency"]), default=0.0)
+        return max((max(r["latency"][key]) for r in res[side] if key in r["latency"]), default=0.0)
 
     def lat(side: str, key: str) -> str:
         xs = p50s(side, key)
@@ -676,7 +671,7 @@ def report(res: dict, meta: dict) -> str:
         return f"{text} / {tops(side, key):.1f}"
 
     out += ["", "| p50 / max, ms | Originals | Unarr |", "|---|--:|--:|"]
-    for key in runs(res, "originals")[0]["latency"]:
+    for key in res["originals"][0]["latency"]:
         out.append(f"| {key} | {lat('originals', key)} | {lat('unarr', key)} |")
     return "\n".join(out) + "\n"
 
@@ -710,6 +705,12 @@ def main():
         raise SystemExit("--repeat must be at least 1")
     if a.warmup < 2:
         raise SystemExit("--warmup must be at least 2: one pass leaves the recompilation to the measured one")
+    # Before the build too: on a fresh clone cargo would run for minutes
+    # before the run found it had nothing to compare with.
+    sonarr, radarr = original_binaries()
+    for binary in (sonarr, radarr):
+        if not binary.exists():
+            raise SystemExit(f"{binary} missing: run make ui first")
     # A side left over by an earlier run lives in that run's namespace, out
     # of reach of a port check: look for the binaries among the processes.
     # The port check still catches a service of the host on 8989 or 7878,
@@ -754,14 +755,6 @@ def main():
     # originals, bin/unarrd...): only in a folder it made itself, or an
     # empty one. --out ~ would otherwise delete a clone named ~/unarr.
     claim(out, default=a.out is None)
-    # Where make ui put them: UNARR_CACHE moves .cache/<app> as in the
-    # fixture scripts.
-    cache = os.environ.get("UNARR_CACHE")
-    sonarr = Path(cache) / "Sonarr/Sonarr" if cache else REPO / ".cache/sonarr/Sonarr/Sonarr"
-    radarr = Path(cache) / "Radarr/Radarr" if cache else REPO / ".cache/radarr/Radarr/Radarr"
-    for binary in (sonarr, radarr):
-        if not binary.exists():
-            raise SystemExit(f"{binary} missing: run make ui first")
     if a.unarrd is not None and not a.unarrd.exists():
         raise SystemExit(f"{a.unarrd} missing")
     # Built by build() above, before the namespace, when not given. Copied
@@ -849,7 +842,6 @@ def main():
             # Kept after every side: an interrupted series keeps what it measured.
             (out / "results.json").write_text(json.dumps(res, indent=1))
 
-    (out / "results.json").write_text(json.dumps(res, indent=1))
     text = report(res, meta)
     (out / "report.md").write_text(text)
     print(text)
