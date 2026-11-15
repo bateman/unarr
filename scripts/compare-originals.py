@@ -71,10 +71,14 @@ ENV = {
 def without_icu() -> bool:
     """.NET does not start without ICU unless told to do without it, as the
     fixture scripts tell it when `ldconfig -p` lists no libicuuc."""
-    try:
-        listed = subprocess.run(["ldconfig", "-p"], capture_output=True, text=True).stdout
-    except OSError:
-        return False
+    ldconfig = shutil.which("ldconfig") or next(
+        (p for p in ("/sbin/ldconfig", "/usr/sbin/ldconfig") if os.path.exists(p)), None
+    )
+    listed = ""
+    if ldconfig:
+        listed = subprocess.run([ldconfig, "-p"], capture_output=True, text=True).stdout
+    # No list at all reads as no libicu, as `ldconfig -p 2>/dev/null || true`
+    # does in the fixture scripts.
     return "libicuuc" not in listed
 
 
@@ -158,6 +162,16 @@ def cpu_seconds(pid: int) -> float:
     return sum(int(x) for x in fields[11:15]) / TICK
 
 
+def die_with_parent():
+    """In the child, before exec: SIGTERM when the script dies, even by
+    SIGKILL, so no side keeps running in the namespace and loads the next
+    comparison."""
+    import ctypes
+
+    pr_set_pdeathsig = 1
+    ctypes.CDLL(None, use_errno=True).prctl(pr_set_pdeathsig, signal.SIGTERM)
+
+
 class Side:
     """One side: the processes it starts and the ports it answers on."""
 
@@ -171,7 +185,9 @@ class Side:
         for label, argv, data in self.commands:
             out = open(data / f"{label}.stdout.log", "ab")
             self.logs.append(out)
-            self.procs[label] = subprocess.Popen(argv, stdout=out, stderr=subprocess.STDOUT, env=self.env)
+            self.procs[label] = subprocess.Popen(
+                argv, stdout=out, stderr=subprocess.STDOUT, env=self.env, preexec_fn=die_with_parent
+            )
         first: dict[int, float] = {}
         while len(first) < len(self.ports):
             for port in self.ports:
@@ -324,23 +340,16 @@ def pinned(script: str, var: str) -> str:
 
 
 def stale(binary: Path) -> str:
-    """A note when the binary predates the last commit of the checkout that
-    touched the code, or one of its uncommitted changes to it: then the
-    commit named is not what runs. A binary built from another branch after
-    those goes unnoticed; make compare-originals builds first."""
-    code = ["crates", "Cargo.toml", "Cargo.lock"]
-    last = subprocess.run(["git", "-C", str(REPO), "log", "-1", "--format=%ct", "--", *code],
-                          capture_output=True, text=True).stdout.strip()
-    newest = int(last) if last.isdigit() else 0
-    changed = subprocess.run(["git", "-C", str(REPO), "diff", "--name-only", "HEAD", "--", *code],
-                             capture_output=True, text=True).stdout.split()
-    for name in changed:
-        f = REPO / name
-        if f.exists():
-            newest = max(newest, int(f.stat().st_mtime))
+    """A note when the binary is older than a source file of the code: then
+    the commit the report names is not what runs. File times, not commit
+    times: committing what was built does not make the binary stale, while
+    an edit or a checkout of other code does."""
+    files = subprocess.run(["git", "-C", str(REPO), "ls-files", "--", "crates", "Cargo.toml", "Cargo.lock"],
+                           capture_output=True, text=True).stdout.split()
+    newest = max((int((REPO / f).stat().st_mtime) for f in files if (REPO / f).exists()), default=0)
     if binary.stat().st_mtime < newest:
-        log(f"warning: {binary} is older than the checkout; make build first")
-        return ", binary older than the checkout"
+        log(f"warning: {binary} is older than the sources; make build first")
+        return ", binary older than the sources"
     return ""
 
 
@@ -356,8 +365,10 @@ def summary(r: dict) -> dict:
     # Counted from minute 5, once the start-up work is done: a shorter
     # window has nothing to count.
     idle_cpu = (end["cpu"] - five["cpu"]) / (end["t"] - five["t"]) * 3600 if end["t"] - five["t"] >= 60 else None
-    span = tail[-1]["t"] - tail[0]["t"]
-    tail_cpu = (tail[-1]["cpu"] - tail[0]["cpu"]) / span * 3600 if span >= 60 else None
+    # From the tail's first minute on, past the clean-up right after the reads.
+    one = at(tail, 60)
+    span = tail[-1]["t"] - one["t"]
+    tail_cpu = (tail[-1]["cpu"] - one["cpu"]) / span * 3600 if one["t"] - tail[0]["t"] >= 55 and span >= 60 else None
     return {
         "first": max(r["first"].values()),
         "idle_anon": end["anon"] / MIB,
@@ -433,8 +444,15 @@ def report(res: dict, meta: dict) -> str:
     ]
     n = len(o_runs)
     reported = runs(res, "originals")[0].get("versions", {})
-    sonarr_v = reported.get(str(SONARR_PORT), reported.get(SONARR_PORT, meta["sonarr"]))
-    radarr_v = reported.get(str(RADARR_PORT), reported.get(RADARR_PORT, meta["radarr"]))
+    def ran(port: int, app: str) -> str:
+        """The version that ran, and the pinned one when they differ: make ui
+        keeps a binary it already has, so a new pin needs .cache/<app>
+        removed first."""
+        v = reported.get(str(port), reported.get(port, meta[app]))
+        return v if v == meta[app] else f"{v} (**pinned {meta[app]}**: remove .cache/{app} and run make ui)"
+
+    sonarr_v = ran(SONARR_PORT, "sonarr")
+    radarr_v = ran(RADARR_PORT, "radarr")
     out = [
         f"Library `{meta['library']}`; Unarr `{meta['unarr']}`; Sonarr {sonarr_v}, Radarr {radarr_v}; "
         f"first start {meta['first']} s, idle {meta['idle']} s, tail {meta['tail']} s; "
@@ -485,8 +503,18 @@ def main():
     ap.add_argument("--network", action="store_true",
                     help="do not isolate the network: both sides reach it, and the figures are not comparable")
     a = ap.parse_args()
+    # Before the namespace, which would hide them: something already on the
+    # ports is most likely a side left over by an earlier run.
+    if os.environ.get("COMPARE_NETNS") != "1":
+        for port in (SONARR_PORT, RADARR_PORT):
+            if listening(port):
+                raise SystemExit(f"something already listens on {port}: stop it first")
     if not a.network:
         isolate()
+    # A SIGTERM or SIGHUP ends the run through measure()'s finally, as
+    # Ctrl-C does, so the side's processes are stopped.
+    for sig in (signal.SIGTERM, signal.SIGHUP):
+        signal.signal(sig, lambda signum, _frame: sys.exit(128 + signum))
 
     out = a.out or REPO / ".cache/compare" / a.library
     # Where make ui put them: UNARR_CACHE moves .cache/<app> as in the
@@ -498,17 +526,14 @@ def main():
     for binary, how in ((sonarr, "make ui"), (radarr, "make ui"), (unarrd, "make build")):
         if not binary.exists():
             raise SystemExit(f"{binary} missing: run {how} first")
-    for port in (SONARR_PORT, RADARR_PORT):
-        if listening(port):
-            raise SystemExit(f"something already listens on {port}: stop it first")
-
     meta = {
         "library": a.library,
         # The checkout's commit: true of the binary when make built it.
         "unarr": subprocess.run(["git", "-C", str(REPO), "describe", "--always", "--dirty"],
                                 capture_output=True, text=True).stdout.strip()
-        + ("" if a.unarrd == REPO / "target/release/unarrd" else f" ({a.unarrd})")
-        + stale(unarrd),
+        # A binary given with --unarrd is named by its path: its code is not
+        # the checkout's, so its age says nothing.
+        + (stale(unarrd) if a.unarrd == REPO / "target/release/unarrd" else f" ({a.unarrd})"),
         "sonarr": pinned("sonarr-fixture.sh", "SONARR_VERSION"),
         "radarr": pinned("radarr-fixture.sh", "RADARR_VERSION"),
         "first": a.first, "idle": a.idle, "tail": a.tail, "cap": not a.no_cap,
