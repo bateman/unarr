@@ -7,8 +7,8 @@ The same machine and the same library for both sides, one side at a time:
   into ``.cache/`` (the versions pinned in ``scripts/sonarr-fixture.sh`` and
   ``scripts/radarr-fixture.sh``), two processes;
 - Unarr: ``unarrd``, which the script has cargo build from the checkout first
-  and runs where cargo reports it (``--unarrd`` names a prebuilt one instead),
-  with both personalities, one process.
+  (``--unarrd`` names a prebuilt one instead) and copies into ``--out``, where
+  the copy runs, with both personalities, one process.
 
 Each side starts once on a fresh copy of the library and runs ``--first``
 seconds (migrations, Unarr's import, the overdue scheduled tasks); that run
@@ -68,8 +68,10 @@ ENV = {
     k: v
     for k, v in os.environ.items()
     if k.lower() not in ("https_proxy", "http_proxy", "all_proxy", "no_proxy", "rust_log")
-    and (not k.startswith(("DOTNET_", "COMPlus_")) or k == "DOTNET_SYSTEM_GLOBALIZATION_INVARIANT")
-    and not k.startswith(("UNARR_", "SONARR__", "RADARR__", "LIDARR__"))
+    # Prefixes compared ignoring case, as .NET's configuration and Unarr
+    # read them (Sonarr__Log__Level counts as SONARR__LOG__LEVEL).
+    and (not k.upper().startswith(("DOTNET_", "COMPLUS_")) or k.upper() == "DOTNET_SYSTEM_GLOBALIZATION_INVARIANT")
+    and not k.upper().startswith(("UNARR_", "SONARR__", "RADARR__", "LIDARR__"))
 }
 
 
@@ -151,13 +153,20 @@ def other_comparisons() -> list[str]:
 MARKER = ".compare-originals"
 
 
-def claim(out: Path):
+# What a run writes under --out, marker aside.
+OWN = {"results.json", "report.md", "bin", "originals", "unarr", "unarr-library"}
+
+
+def claim(out: Path, default: bool):
     """Make --out this script's own folder, or refuse it: it must be new,
-    empty, or marked by an earlier run. Not a folder that merely holds names
-    a run writes: a ~/work holding a clone named unarr would pass that."""
+    empty, or marked by an earlier run. The default folder under .cache,
+    which only this script writes, is also taken when it holds nothing but
+    what a run writes (versions before the marker left it unmarked). Not a
+    folder given by hand: a ~/work holding a clone named unarr would pass."""
     if out.exists() and not out.is_dir():
         raise SystemExit(f"--out {out} is not a folder")
-    if out.is_dir() and any(out.iterdir()) and not (out / MARKER).exists():
+    unmarked_own = default and {p.name for p in out.iterdir()} <= OWN if out.is_dir() else False
+    if out.is_dir() and any(out.iterdir()) and not (out / MARKER).exists() and not unmarked_own:
         raise SystemExit(
             f"--out {out} holds files this script did not write; "
             "give a new or empty folder (the script deletes and rewrites names inside it)"
@@ -375,12 +384,19 @@ def run_side(side: Side, first_seconds: int, idle_seconds: int, tail_seconds: in
     peak = dict(before)
     done = threading.Event()
 
+    died: list[BaseException] = []
+
     def watch():
-        while not done.is_set():
-            s = side.sample()
-            for k in ("rss", "anon"):
-                peak[k] = max(peak[k], s[k])
-            time.sleep(0.2)
+        try:
+            while not done.is_set():
+                s = side.sample()
+                for k in ("rss", "anon"):
+                    peak[k] = max(peak[k], s[k])
+                time.sleep(0.2)
+        except SystemExit as e:
+            # A side that died: kept for the main thread, which a thread's
+            # SystemExit would not reach.
+            died.append(e)
 
     watcher = threading.Thread(target=watch, daemon=True)
     watcher.start()
@@ -388,11 +404,21 @@ def run_side(side: Side, first_seconds: int, idle_seconds: int, tail_seconds: in
     try:
         latencies = reads()
         t1 = time.time()
+    except Exception:
+        # A read that failed because a side died says so, not with the
+        # request's traceback.
+        done.set()
+        watcher.join()
+        if died:
+            raise died[0] from None
+        raise
     finally:
         # Also when a read fails: the watcher would otherwise sample a
         # stopped side forever and keep the interpreter from exiting.
         done.set()
         watcher.join()
+    if died:
+        raise died[0]
     after = side.sample()
     # The sample right after the reads counts too: the watcher may have
     # slept through the last moments of them.
@@ -663,7 +689,7 @@ def main():
     # The script deletes and rewrites fixed names under --out (unarr,
     # originals, bin/unarrd...): only in a folder it made itself, or an
     # empty one. --out ~ would otherwise delete a clone named ~/unarr.
-    claim(out)
+    claim(out, default=a.out is None)
     # Where make ui put them: UNARR_CACHE moves .cache/<app> as in the
     # fixture scripts.
     cache = os.environ.get("UNARR_CACHE")

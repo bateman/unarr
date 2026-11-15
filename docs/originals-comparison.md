@@ -105,7 +105,9 @@ run the comparison again and update this file in the same branch.
   or more.
 - **Output.** `--out` must be a new or empty folder, or one an earlier
   run marked (`.compare-originals`): the script deletes and rewrites names
-  inside it, so it refuses any other. `.cache/compare/<library>/report.md`
+  inside it, so it refuses any other. The default folder under `.cache`,
+  which only the script writes, is taken unmarked too when it holds
+  nothing but what a run writes. `.cache/compare/<library>/report.md`
   holds the tables below,
   `results.json` every sample. A run first removes the previous series'
   two files; `results.json` is written after each side of each run, so an
@@ -181,7 +183,8 @@ Library `scaled`; Unarr `ae1283b`; Sonarr 4.0.20.3014, Radarr 6.4.4.10685; first
 | Radarr /api/v3/queue | 1.8 / 54.3 | 17.4 / 21.2 |
 | Sonarr /api/v3/episode | 10.9 / 424.4 | 4.4 / 31.3 |
 
-Where Unarr is slower than the original:
+Where Unarr is slower than the original, in these prototype tables (the
+next run of the script replaces this list with what it measures):
 
 - Sonarr `/wanted/missing` on the scaled library: 24 ms against 13.
 - Radarr `/calendar`: 13.7 ms against 11.9 on the real library, 114
