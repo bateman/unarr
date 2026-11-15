@@ -38,6 +38,7 @@ keeps.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import re
@@ -389,10 +390,10 @@ def run_side(side: Side, first_seconds: int, idle_seconds: int, tail_seconds: in
 
 
 def stage(library: str, root: Path) -> Path:
-    """A fresh copy of the library for one side, at the log level of a
-    default install. The fixtures' config.xml asks for debug, at which the
-    originals write a line for every API request and Unarr writes none:
-    the reads would cost the originals logging that Unarr does not do."""
+    """A fresh copy of the library for one side, at log level info. The
+    originals default to debug, as the maintainer's install (the fixtures)
+    does, and at debug they write a line for every API request while Unarr
+    writes none: the reads would compare logging, not work."""
     shutil.rmtree(root, ignore_errors=True)
     for app in ("sonarr", "radarr"):
         dst = root / app
@@ -542,6 +543,7 @@ def report(res: dict, meta: dict) -> str:
         f"first start {meta['first']} s, idle {meta['idle']} s, tail {meta['tail']} s; "
         f".NET heap limit {'768 MiB' if meta['cap'] else 'none'}; "
         + ("**with the network, not comparable**; " if meta.get("network") else "")
+        + ("**originals without ICU (invariant globalization)**; " if meta.get("invariant") else "")
         + (f"{n} runs per side, median (lowest–highest); " if n > 1 else "")
         + f"{meta['date']}.",
         "",
@@ -576,10 +578,11 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("--library", choices=("real", "scaled"), default="real")
     ap.add_argument("--first", type=int, default=300, help="seconds of the first, unmeasured run")
-    # 35 minutes: idle CPU is counted from minute 5, over 30 minutes, two
-    # whole periods of the 15-minute RSS sync both sides run; a window of
-    # 10 caught one sync or none, by chance.
-    ap.add_argument("--idle", type=int, default=2100, help="idle seconds sampled after the measured start")
+    # Idle CPU is counted from minute 5 to the end: the tasks that run every
+    # minute (monitored downloads) on both sides. The RSS sync, every 60 and
+    # 100 minutes in these libraries, runs during the first start and not
+    # in the window, on either side.
+    ap.add_argument("--idle", type=int, default=900, help="idle seconds sampled after the measured start")
     ap.add_argument("--tail", type=int, default=300, help="idle seconds sampled after the reads")
     ap.add_argument("--no-cap", action="store_true", help="no .NET heap limit for the originals")
     ap.add_argument("--out", type=Path, help="default .cache/compare/<library>")
@@ -607,7 +610,8 @@ def main():
             os.environ["COMPARE_BUILT"] = str(build())
         # After the build: the binary this run will start is known.
         mine = a.unarrd or Path(os.environ["COMPARE_BUILT"])
-        left = leftovers([mine, REPO / "target/release/unarrd"])
+        copy = (a.out or REPO / ".cache/compare" / a.library).resolve() / "bin" / "unarrd"
+        left = leftovers([mine, REPO / "target/release/unarrd", copy])
         if left:
             raise SystemExit(f"a side is still running ({', '.join(left)}): stop it first")
         if a.network:
@@ -640,16 +644,22 @@ def main():
             raise SystemExit(f"{binary} missing: run make ui first")
     if a.unarrd is not None and not a.unarrd.exists():
         raise SystemExit(f"{a.unarrd} missing")
-    # Built by build() above, before the namespace, when not given.
-    unarrd = a.unarrd.resolve() if a.unarrd is not None else Path(os.environ["COMPARE_BUILT"])
+    # Built by build() above, before the namespace, when not given. Copied
+    # into --out: a rebuild or a checkout during the hours of a run would
+    # otherwise change the binary under the commit the report names.
+    built = a.unarrd.resolve() if a.unarrd is not None else Path(os.environ["COMPARE_BUILT"])
+    unarrd = out / "bin" / "unarrd"
+    unarrd.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(built, unarrd)
+    digest = hashlib.sha256(unarrd.read_bytes()).hexdigest()[:12]
     meta = {
         "library": a.library,
         # The checkout's commit for the binary built from it; a binary given
         # with --unarrd was built from code this script cannot know, so it
-        # is named by its path only.
-        "unarr": str(unarrd) if a.unarrd is not None else subprocess.run(
+        # is named by its path. Either way the hash of the copy that runs.
+        "unarr": (str(built) if a.unarrd is not None else subprocess.run(
             ["git", "-C", str(REPO), "describe", "--always", "--dirty"], capture_output=True, text=True
-        ).stdout.strip(),
+        ).stdout.strip()) + f", sha256 {digest}",
         "sonarr": pinned("sonarr-fixture.sh", "SONARR_VERSION"),
         "radarr": pinned("radarr-fixture.sh", "RADARR_VERSION"),
         "first": a.first, "idle": a.idle, "tail": a.tail, "cap": not a.no_cap,
@@ -660,6 +670,9 @@ def main():
     if without_icu():
         env.setdefault("DOTNET_SYSTEM_GLOBALIZATION_INVARIANT", "1")
         log("libicu not found: the originals run with invariant globalization")
+    # Without ICU data mapped the originals take less memory: a report from
+    # such a run says so, not comparable with one made with ICU.
+    meta["invariant"] = env.get("DOTNET_SYSTEM_GLOBALIZATION_INVARIANT", "") not in ("", "0", "false")
     if not a.no_cap:
         env["DOTNET_GCHeapHardLimit"] = "0x30000000"
 
@@ -686,6 +699,10 @@ def main():
                        "--import-from", str(lib / "sonarr"), "--import-from", str(lib / "radarr")], data),
         ], [SONARR_PORT, RADARR_PORT], ENV)
 
+    # A previous series' files would otherwise sit beside this one's until
+    # it ends, and an interrupted run would leave the old report.md.
+    for name in ("results.json", "report.md"):
+        (out / name).unlink(missing_ok=True)
     res: dict = {"meta": meta, "originals": [], "unarr": []}
     for run in range(a.repeat):
         # The originals first in odd runs, Unarr first in even ones: a drift

@@ -11,24 +11,26 @@ run the comparison again and update this file in the same branch.
 `scripts/compare-originals.py`, through `make compare-originals`:
 
     make ui                                  # the originals, pinned in scripts/*-fixture.sh
-    make compare-originals                   # the real library, about an hour and a half
+    make compare-originals                   # the real library, about an hour
     make scale-fixture
     make compare-originals LIBRARY=scaled    # 950 series and 2,123 movies
-    make compare-originals REPEAT=3          # three runs per side, about four and a half hours
+    make compare-originals REPEAT=3          # three runs per side, about three hours
 
 - **The sides.** The originals are the official Sonarr and Radarr from
   their release tarballs, two processes. Unarr is `unarrd` with both
   personalities in one process; the script has cargo build it from the
-  checkout first (nothing to do when it is current) and runs the binary
-  cargo reports, wherever `CARGO_TARGET_DIR` puts it, so the commit the
-  report names is what runs. A prebuilt binary given with
-  `--unarrd` is named by its path only. The two sides run one at a time,
-  each on a fresh copy of the library.
+  checkout first (nothing to do when it is current), takes the binary
+  cargo reports, wherever `CARGO_TARGET_DIR` puts it, and copies it into
+  `--out` before the run: a rebuild during the hours of a run cannot
+  change what runs. The report names the commit and the hash of that
+  copy. A prebuilt binary given with `--unarrd` is named by its path and
+  hash. The two sides run one at a time, each on a fresh copy of the
+  library.
 - **The two starts.** Each side starts once and runs five minutes, not
   measured: migrations, Unarr's import, the overdue scheduled tasks. Then
   it starts again and is measured:
   - the time to the first answer on both ports, polled every 5 ms;
-  - thirty-five idle minutes, sampled every five seconds;
+  - fifteen idle minutes, sampled every five seconds;
   - the same reads over both APIs: about 220 requests, the list of each
     app, history, wanted, calendar, queue and twenty series' episodes;
   - five more idle minutes.
@@ -59,22 +61,27 @@ run the comparison again and update this file in the same branch.
   a process has waited for: Unarr's `ffprobe` runs count. Their memory
   does not: it is sampled on the side's own processes only. Idle CPU is
   counted from the fifth minute of the window, once the start-up work is
-  done, over thirty minutes: two whole periods of the 15-minute RSS sync
-  both sides run, so that a run does not catch one sync or none by chance.
+  done, to the end of the window: the tasks both sides run every minute
+  (the monitored downloads). The RSS sync, every 60 minutes for Sonarr and
+  100 for Radarr in these libraries, runs during the first start and falls
+  in neither side's window; with no network it would fail at once anyway.
   Idle CPU in the tail is counted from its first minute, past the
   clean-up right after the reads. With `--idle` under six minutes, or a
   tail under two, the report gives n/a.
-- **Log level.** Each copy of the library is set to `LogLevel` `info`,
-  the default of an install. The fixtures ask for `debug`, at which the
-  originals write a line for every API request and Unarr writes none, so
-  the reads would cost the originals logging that Unarr does not do.
+- **Log level.** Each copy of the library is set to `LogLevel` `info`.
+  The originals default to `debug`, and the maintainer's install, where
+  the fixtures come from, runs at `debug` too; at that level the originals
+  write a line for every API request and Unarr writes none, so the reads
+  would compare logging rather than work. An install left at `debug`
+  therefore saves more than these figures say.
 - **Stopping.** A run stopped by Ctrl-C, SIGTERM or SIGHUP, or by a
   read that fails, stops the side it was measuring and exits; under
   `nohup` SIGHUP stays ignored and the run goes on. The sides also get
   SIGTERM if the script dies by SIGKILL. A side process that dies during
   the measurement stops the run. The script refuses to start while
   another comparison runs, or while a process of the originals, of
-  `target/release/unarrd` or of the binary it is about to run is alive,
+  `target/release/unarrd` or of the binary it is about to run (or its copy
+  under `--out`) is alive,
   even one whose file has since been replaced (a side left over in an
   earlier run's namespace); with `--network` it also refuses when
   anything listens on 8989 or 7878.
@@ -96,8 +103,11 @@ run the comparison again and update this file in the same branch.
   routine update; numbers meant for a paper or a release note want three
   or more.
 - **Output.** `.cache/compare/<library>/report.md` holds the tables below,
-  `results.json` every sample. `results.json` is written after each side
-  of each run, so an interrupted series keeps what it measured.
+  `results.json` every sample. A run first removes the previous series'
+  two files; `results.json` is written after each side of each run, so an
+  interrupted series keeps what it measured, and `report.md` only at the
+  end. A run where the originals had no libicu says so in the report: they
+  take less memory without ICU data.
 
 ## Results
 
