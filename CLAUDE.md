@@ -63,7 +63,9 @@ After each substantial change, update it in the same branch:
 
 - what counts: a milestone, a change made for speed or memory, a new
   pinned version of an original in `scripts/*-fixture.sh`;
-- how: `make ui`, then `make compare-originals` (the real library). For a
+- how: `make ui` (after a new pin, remove `.cache/<app>` first: `make ui`
+  keeps a binary it already has), then `make compare-originals` (the real
+  library). For a
   change to the speed or the memory of routes, also run
   `make scale-fixture` and `make compare-originals LIBRARY=scaled`. Use
   `REPEAT=3` or more when the numbers will be cited outside the repository;

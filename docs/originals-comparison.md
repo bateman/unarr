@@ -19,8 +19,9 @@ run the comparison again and update this file in the same branch.
 - **The sides.** The originals are the official Sonarr and Radarr from
   their release tarballs, two processes. Unarr is `target/release/unarrd`
   (or `--unarrd`) with both personalities in one process. The two sides
-  run one at a time, each on a fresh copy of the library. The report names the checkout's commit, and says so when
-  the binary is older than the last change to the code.
+  run one at a time, each on a fresh copy of the library. The report names
+  the checkout's commit, and says so when the binary is older than a source
+  file of the code; a binary given with `--unarrd` is named by its path.
 - **The two starts.** Each side starts once and runs five minutes, not
   measured: migrations, Unarr's import, the overdue scheduled tasks. Then
   it starts again and is measured:
@@ -44,15 +45,26 @@ run the comparison again and update this file in the same branch.
   since .NET does not start otherwise. The script's own requests ignore
   the caller's proxy. The originals are found where `make ui` put them,
   under `UNARR_CACHE` when it is set. The report gives the versions the
-  applications themselves report.
+  applications themselves report, and marks one that differs from the
+  version pinned in `scripts/*-fixture.sh`: `make ui` keeps a binary it
+  already has, so after a new pin remove `.cache/sonarr` or `.cache/radarr`
+  first.
 - **RAM** is the RSS and the anonymous memory (the heaps) of
   `/proc/<pid>/smaps_rollup`, summed over a side's processes.
 - **CPU** is `utime + stime` from `/proc/<pid>/stat`, plus the children
   a process has waited for: Unarr's `ffprobe` runs count. Their memory
   does not: it is sampled on the side's own processes only. Idle CPU is
   counted from the fifth minute of the window, once the start-up work is
-  done; with `--idle` under six minutes, or a tail under one, the report
-  gives n/a.
+  done. Idle CPU in the tail is counted from its first minute, past the
+  clean-up right after the reads. With `--idle` under six minutes, or a
+  tail under two, the report gives n/a.
+- **Log level.** Both libraries' `config.xml` set `LogLevel` to `debug`,
+  so both sides log every request at debug, unlike a default install.
+  The idle and read figures include that logging on both sides.
+- **Stopping.** A run stopped by Ctrl-C, SIGTERM or SIGHUP stops the
+  side it was measuring. The sides also get SIGTERM if the script dies by
+  SIGKILL, so none keeps running in the namespace. Before entering it,
+  the script refuses to start when anything listens on 8989 or 7878.
 - **Heap limit.** The originals run with `DOTNET_GCHeapHardLimit` at
   768 MiB: that is what .NET takes from a 1 GiB container such as the
   homelab's.
