@@ -17,10 +17,11 @@ run the comparison again and update this file in the same branch.
     make compare-originals REPEAT=3          # three runs per side, about three hours
 
 - **The sides.** The originals are the official Sonarr and Radarr from
-  their release tarballs, two processes. Unarr is `target/release/unarrd`
-  with both personalities in one process; the script has cargo build it
-  from the checkout first (nothing to do when it is current), so the
-  commit the report names is what runs. A prebuilt binary given with
+  their release tarballs, two processes. Unarr is `unarrd` with both
+  personalities in one process; the script has cargo build it from the
+  checkout first (nothing to do when it is current) and runs the binary
+  cargo reports, wherever `CARGO_TARGET_DIR` puts it, so the commit the
+  report names is what runs. A prebuilt binary given with
   `--unarrd` is named by its path only. The two sides run one at a time,
   each on a fresh copy of the library.
 - **The two starts.** Each side starts once and runs five minutes, not
@@ -41,9 +42,10 @@ run the comparison again and update this file in the same branch.
   with a new connection for each request, the same for both sides.
 - **Environment.** The caller's proxy variables, `RUST_LOG`, the
   `UNARR_*` settings and the `DOTNET_*` and `COMPlus_*` knobs are not passed to the processes
-  measured, except `DOTNET_SYSTEM_GLOBALIZATION_INVARIANT`: the script
-  sets it itself where libicu is missing, as the fixture scripts do,
-  since .NET does not start otherwise. The script's own requests ignore
+  measured, except `DOTNET_SYSTEM_GLOBALIZATION_INVARIANT`, which passes
+  on as the caller set it, and which the script sets itself where libicu
+  is missing, as the fixture scripts do, since .NET does not start
+  otherwise. The script's own requests ignore
   the caller's proxy. The originals are found where `make ui` put them,
   under `UNARR_CACHE` when it is set. The report gives the versions the
   applications themselves report, and marks one that differs from the
@@ -67,8 +69,9 @@ run the comparison again and update this file in the same branch.
   read that fails, stops the side it was measuring and exits. The sides
   also get SIGTERM if the script dies by SIGKILL. A side process that dies
   during the measurement stops the run. The script refuses to start while
-  a process of the three binaries runs (a side left over in another run's
-  namespace, or another comparison); with `--network` it also refuses
+  a process of the originals, of `target/release/unarrd` or of the
+  `--unarrd` binary runs (a side left over in another run's namespace, or
+  another comparison); with `--network` it also refuses
   when anything listens on 8989 or 7878.
 - **Heap limit.** The originals run with `DOTNET_GCHeapHardLimit` at
   768 MiB: that is what .NET takes from a 1 GiB container such as the

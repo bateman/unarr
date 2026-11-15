@@ -90,15 +90,16 @@ def without_icu() -> bool:
 OPENER = urllib.request.build_opener(urllib.request.ProxyHandler({}))
 
 
-def leftovers(unarrd: Path) -> list[str]:
-    """Running processes of the binaries this script starts."""
+def leftovers(unarrds: list[Path]) -> list[str]:
+    """Running processes of the originals and of the unarrd binaries given
+    (the one a run would use and target/release/unarrd)."""
     cache = os.environ.get("UNARR_CACHE")
     # Resolved: /proc/<pid>/exe names the file itself, past any symlink in
     # the way (a .cache linked from a worktree, a relative UNARR_CACHE).
     wanted = {
         str(p.resolve())
         for p in (
-            unarrd,
+            *unarrds,
             (Path(cache) / "Sonarr/Sonarr") if cache else REPO / ".cache/sonarr/Sonarr/Sonarr",
             (Path(cache) / "Radarr/Radarr") if cache else REPO / ".cache/radarr/Radarr/Radarr",
         )
@@ -215,7 +216,10 @@ class Side:
             out = open(data / f"{label}.stdout.log", "ab")
             self.logs.append(out)
             self.procs[label] = subprocess.Popen(
-                argv, stdout=out, stderr=subprocess.STDOUT, env=self.env, preexec_fn=die_with_parent
+                # No terminal to read: an original that fails at start-up asks
+                # to "press enter" and would wait for it instead of exiting.
+                argv, stdin=subprocess.DEVNULL, stdout=out, stderr=subprocess.STDOUT, env=self.env,
+                preexec_fn=die_with_parent,
             )
         first: dict[int, float] = {}
         while len(first) < len(self.ports):
@@ -380,13 +384,25 @@ def pinned(script: str, var: str) -> str:
 
 
 def build() -> Path:
-    """target/release/unarrd as the checkout builds it: cargo rebuilds what
-    changed and does nothing otherwise, so the binary is the checkout's."""
+    """unarrd as the checkout builds it: cargo rebuilds what changed and does
+    nothing otherwise, so the binary is the checkout's. Its path is the one
+    cargo reports, wherever CARGO_TARGET_DIR or a cargo config put it."""
     log("cargo build --release --bin unarrd")
-    done = subprocess.run(["cargo", "build", "--release", "--bin", "unarrd"], cwd=REPO)
+    done = subprocess.run(
+        ["cargo", "build", "--release", "--bin", "unarrd", "--message-format=json-render-diagnostics"],
+        cwd=REPO, stdout=subprocess.PIPE, text=True,
+    )
     if done.returncode != 0:
         raise SystemExit("cargo build failed")
-    return REPO / "target/release/unarrd"
+    for line in done.stdout.splitlines():
+        try:
+            msg = json.loads(line)
+        except ValueError:
+            continue
+        if msg.get("reason") == "compiler-artifact" and msg.get("target", {}).get("name") == "unarrd" \
+                and msg.get("executable"):
+            return Path(msg["executable"])
+    raise SystemExit("cargo build named no unarrd executable")
 
 
 def at(rows: list[dict], seconds: float) -> dict:
@@ -545,16 +561,17 @@ def main():
     # The port check still catches a service of the host on 8989 or 7878,
     # which a --network run would collide with.
     if os.environ.get("COMPARE_NETNS") != "1":
-        left = leftovers(a.unarrd or REPO / "target/release/unarrd")
+        left = leftovers([p for p in (a.unarrd, REPO / "target/release/unarrd") if p is not None])
         if left:
             raise SystemExit(f"a side is still running ({', '.join(left)}): stop it first")
         if a.network:
             for port in (SONARR_PORT, RADARR_PORT):
                 if listening(port):
                     raise SystemExit(f"something already listens on {port}: stop it first")
-        # Before the namespace, where cargo could not fetch a crate it lacks.
+        # Before the namespace, where cargo could not fetch a crate it lacks;
+        # the path reaches the run in the namespace through the environment.
         if a.unarrd is None:
-            build()
+            os.environ["COMPARE_BUILT"] = str(build())
     if not a.network:
         isolate()
     # A SIGTERM or SIGHUP ends the run through measure()'s finally, as
@@ -562,7 +579,8 @@ def main():
     for sig in (signal.SIGTERM, signal.SIGHUP):
         signal.signal(sig, lambda signum, _frame: sys.exit(128 + signum))
 
-    out = a.out or REPO / ".cache/compare" / a.library
+    # Absolute: the originals refuse a relative -data.
+    out = (a.out or REPO / ".cache/compare" / a.library).resolve()
     # Where make ui put them: UNARR_CACHE moves .cache/<app> as in the
     # fixture scripts.
     cache = os.environ.get("UNARR_CACHE")
@@ -574,7 +592,7 @@ def main():
     if a.unarrd is not None and not a.unarrd.exists():
         raise SystemExit(f"{a.unarrd} missing")
     # Built by build() above, before the namespace, when not given.
-    unarrd = a.unarrd.resolve() if a.unarrd is not None else REPO / "target/release/unarrd"
+    unarrd = a.unarrd.resolve() if a.unarrd is not None else Path(os.environ["COMPARE_BUILT"])
     meta = {
         "library": a.library,
         # The checkout's commit for the binary built from it; a binary given
