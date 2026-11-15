@@ -115,9 +115,9 @@ Each library has the tables of its latest `report.md`, as the script
 writes them. Measured on 2026-11-14 in the cloud session (x86-64, four
 cores, 16 GB) with the script's prototype, and **not comparable with the
 runs to come**: both libraries logged at debug level, which costs the
-originals a line per API request and Unarr none, the idle window was 15
-minutes, Radarr's `wanted/missing` was not read, and the scaled originals
-ran without the heap limit and a first start of only 60 seconds.
+originals a line per API request and Unarr none, Radarr's
+`wanted/missing` was not read, and the scaled originals ran without the
+heap limit and a first start of only 60 seconds.
 
 ### Real library (38 series, 193 movies)
 
@@ -212,5 +212,5 @@ idle CPU of each side.
 
 | Date | Library | Unarr | Runs | Originals: idle RSS / CPU | Unarr: idle RSS / CPU | Note |
 |---|---|---|--:|--:|--:|---|
-| 2026-11-14 | real | `ae1283b` | 1 | 496 MiB / 18.4 s/h | 28 MiB / 1.6 s/h | prototype; debug logs, 15-minute idle |
-| 2026-11-14 | scaled | `ae1283b` | 1 | 849 MiB / 28.5 s/h | 45 MiB / 1.8 s/h | prototype; debug logs, 15-minute idle, no heap limit |
+| 2026-11-14 | real | `ae1283b` | 1 | 496 MiB / 18.4 s/h | 28 MiB / 1.6 s/h | prototype; debug logs |
+| 2026-11-14 | scaled | `ae1283b` | 1 | 849 MiB / 28.5 s/h | 45 MiB / 1.8 s/h | prototype; debug logs, no heap limit |

@@ -650,7 +650,9 @@ def main():
     built = a.unarrd.resolve() if a.unarrd is not None else Path(os.environ["COMPARE_BUILT"])
     unarrd = out / "bin" / "unarrd"
     unarrd.parent.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(built, unarrd)
+    # --unarrd may name the copy an earlier run left here, to measure it again.
+    if built != unarrd.resolve():
+        shutil.copy2(built, unarrd)
     digest = hashlib.sha256(unarrd.read_bytes()).hexdigest()[:12]
     meta = {
         "library": a.library,

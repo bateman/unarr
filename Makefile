@@ -4,7 +4,7 @@ NAME  ?= unarr
 IMAGE ?= ghcr.io/bateman/unarr
 TAG   ?= dev
 
-.PHONY: help build run run-both test fmt lint check clean docker check-name golden golden-radarr sonarr radarr ui ui-sonarr ui-radarr ui-present bazarr bazarr-radarr prowlarr prowlarr-radarr recyclarr recyclarr-radarr http-audit anonymize scale-fixture
+.PHONY: help build run run-both test fmt lint check clean docker check-name golden golden-radarr sonarr radarr ui ui-sonarr ui-radarr ui-present bazarr bazarr-radarr prowlarr prowlarr-radarr recyclarr recyclarr-radarr http-audit anonymize scale-fixture compare-originals
 UNARR_URL ?= http://127.0.0.1:8989
 RADARR_URL ?= http://127.0.0.1:7878
 UNARR_API_KEY ?= 0123456789abcdef0123456789abcdef
