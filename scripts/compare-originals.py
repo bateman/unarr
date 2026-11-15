@@ -60,14 +60,15 @@ MIB = 1 << 20
 # The caller's environment, without what would make one side work
 # differently from a plain start: the proxy, Unarr's log filter and its
 # UNARR_* settings (a bind address, an ffprobe, a metadata upstream), the
-# .NET runtime's knobs (the heap limit is set on purpose below; the
+# originals' own SONARR__* and RADARR__* settings (a log level, a key, a
+# port), the .NET runtime's knobs (the heap limit is set on purpose below; the
 # globalization switch is what lets .NET start without libicu).
 ENV = {
     k: v
     for k, v in os.environ.items()
     if k.lower() not in ("https_proxy", "http_proxy", "all_proxy", "no_proxy", "rust_log")
     and (not k.startswith(("DOTNET_", "COMPlus_")) or k == "DOTNET_SYSTEM_GLOBALIZATION_INVARIANT")
-    and not k.startswith("UNARR_")
+    and not k.startswith(("UNARR_", "SONARR__", "RADARR__", "LIDARR__"))
 }
 
 
@@ -112,6 +113,9 @@ def leftovers(unarrds: list[Path]) -> list[str]:
             exe = os.readlink(entry / "exe")
         except OSError:
             continue
+        # A binary replaced on disk (a rebuild, make ui after a new pin)
+        # still runs under its old path, which the link marks as deleted.
+        exe = exe.removesuffix(" (deleted)")
         if exe in wanted:
             found.append(f"pid {entry.name} {Path(exe).name}")
     return found
@@ -257,7 +261,9 @@ class Side:
                     raise SystemExit(f"{label} exited early, see its stdout.log")
             if time.time() - t0 > 900:
                 raise SystemExit(f"{self.name} did not answer within 15 minutes")
-            time.sleep(0.05)
+            # Fine enough for Unarr's tenths of a second: a closed port
+            # refuses at once, so a probe costs next to nothing.
+            time.sleep(0.005)
         return first
 
     def stop(self):
@@ -612,8 +618,11 @@ def main():
         isolate()
     # A SIGTERM or SIGHUP ends the run through measure()'s finally, as
     # Ctrl-C does, so the side's processes are stopped.
+    # A SIGHUP ignored by the caller (nohup) stays ignored, for the run and
+    # for the sides it starts: a long run survives the end of the session.
     for sig in (signal.SIGTERM, signal.SIGHUP):
-        signal.signal(sig, lambda signum, _frame: sys.exit(128 + signum))
+        if signal.getsignal(sig) is not signal.SIG_IGN:
+            signal.signal(sig, lambda signum, _frame: sys.exit(128 + signum))
 
     # Absolute: the originals refuse a relative -data.
     out = (a.out or REPO / ".cache/compare" / a.library).resolve()

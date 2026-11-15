@@ -27,7 +27,7 @@ run the comparison again and update this file in the same branch.
 - **The two starts.** Each side starts once and runs five minutes, not
   measured: migrations, Unarr's import, the overdue scheduled tasks. Then
   it starts again and is measured:
-  - the time to the first answer on both ports;
+  - the time to the first answer on both ports, polled every 5 ms;
   - thirty-five idle minutes, sampled every five seconds;
   - the same reads over both APIs: about 220 requests, the list of each
     app, history, wanted, calendar, queue and twenty series' episodes;
@@ -41,8 +41,9 @@ run the comparison again and update this file in the same branch.
 - **Latency** is measured by the script's own client, Python's `urllib`,
   with a new connection for each request, the same for both sides.
 - **Environment.** The caller's proxy variables, `RUST_LOG`, the
-  `UNARR_*` settings and the `DOTNET_*` and `COMPlus_*` knobs are not passed to the processes
-  measured, except `DOTNET_SYSTEM_GLOBALIZATION_INVARIANT`, which passes
+  `UNARR_*` settings, the originals' own `SONARR__*` and `RADARR__*`
+  settings (a log level, a key, a port) and the `DOTNET_*` and `COMPlus_*`
+  knobs are not passed to the processes measured, except `DOTNET_SYSTEM_GLOBALIZATION_INVARIANT`, which passes
   on as the caller set it, and which the script sets itself where libicu
   is missing, as the fixture scripts do, since .NET does not start
   otherwise. The script's own requests ignore
@@ -68,13 +69,15 @@ run the comparison again and update this file in the same branch.
   originals write a line for every API request and Unarr writes none, so
   the reads would cost the originals logging that Unarr does not do.
 - **Stopping.** A run stopped by Ctrl-C, SIGTERM or SIGHUP, or by a
-  read that fails, stops the side it was measuring and exits. The sides
-  also get SIGTERM if the script dies by SIGKILL. A side process that dies
-  during the measurement stops the run. The script refuses to start while
-  a process of the originals, of `target/release/unarrd` or of the
-  `--unarrd` binary runs (a side left over in another run's namespace, or
-  another comparison); with `--network` it also refuses
-  when anything listens on 8989 or 7878.
+  read that fails, stops the side it was measuring and exits; under
+  `nohup` SIGHUP stays ignored and the run goes on. The sides also get
+  SIGTERM if the script dies by SIGKILL. A side process that dies during
+  the measurement stops the run. The script refuses to start while
+  another comparison runs, or while a process of the originals, of
+  `target/release/unarrd` or of the binary it is about to run is alive,
+  even one whose file has since been replaced (a side left over in an
+  earlier run's namespace); with `--network` it also refuses when
+  anything listens on 8989 or 7878.
 - **Heap limit.** The originals run with `DOTNET_GCHeapHardLimit` at
   768 MiB: that is what .NET takes from a 1 GiB container such as the
   homelab's.
@@ -125,7 +128,6 @@ Library `real`; Unarr `ae1283b`; Sonarr 4.0.20.3014, Radarr 6.4.4.10685; first s
 | p50 / max, ms | Originals | Unarr |
 |---|--:|--:|
 | Sonarr /api/v3/series | 12.5 / 17.6 | 3.1 / 3.7 |
-| Sonarr /api/v3/episode | 9.7 / 389.3 | 2.9 / 38.1 |
 | Sonarr /api/v3/history | 34.7 / 802.7 | 6.2 / 28.2 |
 | Sonarr /api/v3/wanted/missing | 4.5 / 17.1 | 3.2 / 4.3 |
 | Sonarr /api/v3/calendar | 4.5 / 11.1 | 3.1 / 3.6 |
@@ -134,6 +136,7 @@ Library `real`; Unarr `ae1283b`; Sonarr 4.0.20.3014, Radarr 6.4.4.10685; first s
 | Radarr /api/v3/history | 33.5 / 1129.9 | 22.1 / 96.5 |
 | Radarr /api/v3/calendar | 11.9 / 41.8 | 13.7 / 19.5 |
 | Radarr /api/v3/queue | 1.9 / 46.3 | 3.8 / 4.3 |
+| Sonarr /api/v3/episode | 9.7 / 389.3 | 2.9 / 38.1 |
 
 ### Scaled library (950 series, 2,123 movies)
 
@@ -154,7 +157,6 @@ Library `scaled`; Unarr `ae1283b`; Sonarr 4.0.20.3014, Radarr 6.4.4.10685; first
 | p50 / max, ms | Originals | Unarr |
 |---|--:|--:|
 | Sonarr /api/v3/series | 240.0 / 635.2 | 51.5 / 60.8 |
-| Sonarr /api/v3/episode | 10.9 / 424.4 | 4.4 / 31.3 |
 | Sonarr /api/v3/history | 72.5 / 858.7 | 23.1 / 87.0 |
 | Sonarr /api/v3/wanted/missing | 13.1 / 43.9 | 23.8 / 28.3 |
 | Sonarr /api/v3/calendar | 64.2 / 102.1 | 20.9 / 23.0 |
@@ -163,6 +165,7 @@ Library `scaled`; Unarr `ae1283b`; Sonarr 4.0.20.3014, Radarr 6.4.4.10685; first
 | Radarr /api/v3/history | 43.9 / 1175.2 | 38.5 / 118.3 |
 | Radarr /api/v3/calendar | 104.5 / 158.8 | 113.5 / 141.8 |
 | Radarr /api/v3/queue | 1.8 / 54.3 | 17.4 / 21.2 |
+| Sonarr /api/v3/episode | 10.9 / 424.4 | 4.4 / 31.3 |
 
 Where Unarr is slower than the original:
 
