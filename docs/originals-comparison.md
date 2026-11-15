@@ -129,88 +129,88 @@ run the comparison again and update this file in the same branch.
 ## Results
 
 Each library has the tables of its latest `report.md`, as the script
-writes them. Measured on 2026-11-14 in the cloud session (x86-64, four
-cores, 16 GB) with the script's prototype, and **not comparable with the
-runs to come**: both libraries logged at debug level, which costs the
-originals a line per API request and Unarr none, the reads were measured
-cold (the originals' JIT included, about 5 to 6 s of CPU of their 8 on
-the real library), Radarr's `wanted/missing` was not read, and the scaled originals ran without the
-heap limit.
+writes them. Measured on 2026-11-15 in the cloud session (x86-64, four
+cores, 16 GB), one run per library, at `3e51a78`: main with the
+calendar and wanted-list reads of `radarr/calendar-date-range-query`.
+The real library's report flags Unarr's warm-up as not settled: its last
+two passes took 1.60 and 2.01 s of CPU, a difference of a few tenths of
+a second that is noise at that size (Unarr compiles nothing at run time);
+the originals' passes settled at 3.24 and 3.31 s.
 
 ### Real library (38 series, 193 movies)
 
-Library `real`; Unarr `ae1283b`; Sonarr 4.0.20.3014, Radarr 6.4.4.10685; first start 300 s, idle 900 s, tail 300 s; .NET heap limit 768 MiB; 2026-11-14.
+Library `real`; Unarr `3e51a78, sha256 c143c71589ad`; Sonarr 4.0.20.3014, Radarr 6.4.4.10685; first start 300 s, idle 900 s, tail 300 s; .NET heap limit 768 MiB; **warm-up not settled for unarr: raise --warmup**; 5 warm-up passes; 2026-11-15.
 
 | | Sonarr + Radarr | Unarr | Less |
 |---|--:|--:|--:|
-| First answer on both ports | 1.54 s | 0.21 s | 7.5× sooner |
-| Idle, at the end of the idle window: RSS | 496 MiB | 28 MiB | 94 % |
-| Same, anonymous memory | 276 MiB | 10 MiB | 96 % |
-| Idle CPU, from minute 5 of the window | 18.4 s/h | 1.6 s/h | 91 % |
-| The reads: CPU | 8.03 s | 1.62 s | 80 % |
-| The reads: time | 6.33 s | 1.82 s | 71 % |
-| Peak anonymous memory during the reads | 370 MiB | 39 MiB | 89 % |
-| Anonymous memory at the end of the tail | 395 MiB | 36 MiB | 91 % |
-| Idle CPU in the tail, from its first minute | 8.5 s/h | 1.0 s/h | 88 % |
+| First answer on both ports | 1.92 s | 0.21 s | 9.1× sooner |
+| Idle, at the end of the idle window: RSS | 483 MiB | 28 MiB | 94 % |
+| Same, anonymous memory | 268 MiB | 11 MiB | 96 % |
+| Idle CPU, from minute 5 of the window | 19.2 s/h | 1.6 s/h | 92 % |
+| The reads: CPU | 3.21 s | 1.48 s | 54 % |
+| The reads: time | 3.16 s | 1.64 s | 48 % |
+| Peak anonymous memory during the reads | 373 MiB | 44 MiB | 88 % |
+| Anonymous memory at the end of the tail | 373 MiB | 37 MiB | 90 % |
+| Idle CPU in the tail, from its first minute | 8.5 s/h | 0.7 s/h | 91 % |
 
 | p50 / max, ms | Originals | Unarr |
 |---|--:|--:|
-| Sonarr /api/v3/series | 12.5 / 17.6 | 3.1 / 3.7 |
-| Sonarr /api/v3/history | 34.7 / 802.7 | 6.2 / 28.2 |
-| Sonarr /api/v3/wanted/missing | 4.5 / 17.1 | 3.2 / 4.3 |
-| Sonarr /api/v3/calendar | 4.5 / 11.1 | 3.1 / 3.6 |
-| Sonarr /api/v3/queue | 2.0 / 27.2 | 1.7 / 2.2 |
-| Radarr /api/v3/movie | 30.7 / 224.8 | 17.2 / 25.6 |
-| Radarr /api/v3/history | 33.5 / 1129.9 | 22.1 / 96.5 |
-| Radarr /api/v3/calendar | 11.9 / 41.8 | 13.7 / 19.5 |
-| Radarr /api/v3/queue | 1.9 / 46.3 | 3.8 / 4.3 |
-| Sonarr /api/v3/episode | 9.7 / 389.3 | 2.9 / 38.1 |
+| Sonarr /api/v3/series | 9.7 / 10.8 | 3.1 / 3.6 |
+| Sonarr /api/v3/history | 33.5 / 36.9 | 6.2 / 7.5 |
+| Sonarr /api/v3/wanted/missing | 4.3 / 12.3 | 3.2 / 3.4 |
+| Sonarr /api/v3/calendar | 4.4 / 7.4 | 2.5 / 2.9 |
+| Sonarr /api/v3/queue | 1.5 / 2.0 | 1.4 / 1.8 |
+| Radarr /api/v3/movie | 25.4 / 56.6 | 21.8 / 37.3 |
+| Radarr /api/v3/history | 24.9 / 29.4 | 22.0 / 26.8 |
+| Radarr /api/v3/wanted/missing | 21.5 / 28.2 | 5.1 / 5.6 |
+| Radarr /api/v3/calendar | 14.9 / 24.0 | 6.7 / 8.0 |
+| Radarr /api/v3/queue | 1.9 / 2.4 | 3.3 / 4.5 |
+| Sonarr /api/v3/episode | 6.0 / 59.7 | 3.6 / 17.0 |
 
 ### Scaled library (950 series, 2,123 movies)
 
-Library `scaled`; Unarr `ae1283b`; Sonarr 4.0.20.3014, Radarr 6.4.4.10685; first start 60 s, idle 900 s, tail 300 s; .NET heap limit none; 2026-11-14.
+Library `scaled`; Unarr `3e51a78, sha256 c143c71589ad`; Sonarr 4.0.20.3014, Radarr 6.4.4.10685; first start 300 s, idle 900 s, tail 300 s; .NET heap limit 768 MiB; 5 warm-up passes; 2026-11-15.
 
 | | Sonarr + Radarr | Unarr | Less |
 |---|--:|--:|--:|
-| First answer on both ports | 1.69 s | 0.21 s | 8.3× sooner |
-| Idle, at the end of the idle window: RSS | 849 MiB | 45 MiB | 95 % |
-| Same, anonymous memory | 621 MiB | 24 MiB | 96 % |
-| Idle CPU, from minute 5 of the window | 28.5 s/h | 1.8 s/h | 94 % |
-| The reads: CPU | 24.82 s | 10.29 s | 59 % |
-| The reads: time | 20.66 s | 10.74 s | 48 % |
-| Peak anonymous memory during the reads | 1842 MiB | 124 MiB | 93 % |
-| Anonymous memory at the end of the tail | 1835 MiB | 47 MiB | 97 % |
-| Idle CPU in the tail, from its first minute | 10.3 s/h | 1.3 s/h | 87 % |
+| First answer on both ports | 2.06 s | 0.33 s | 6.2× sooner |
+| Idle, at the end of the idle window: RSS | 532 MiB | 43 MiB | 92 % |
+| Same, anonymous memory | 316 MiB | 26 MiB | 92 % |
+| Idle CPU, from minute 5 of the window | 17.9 s/h | 2.6 s/h | 86 % |
+| The reads: CPU | 20.17 s | 9.97 s | 51 % |
+| The reads: time | 18.62 s | 10.30 s | 45 % |
+| Peak anonymous memory during the reads | 561 MiB | 186 MiB | 67 % |
+| Anonymous memory at the end of the tail | 497 MiB | 46 MiB | 91 % |
+| Idle CPU in the tail, from its first minute | 9.9 s/h | 2.2 s/h | 77 % |
 
 | p50 / max, ms | Originals | Unarr |
 |---|--:|--:|
-| Sonarr /api/v3/series | 240.0 / 635.2 | 51.5 / 60.8 |
-| Sonarr /api/v3/history | 72.5 / 858.7 | 23.1 / 87.0 |
-| Sonarr /api/v3/wanted/missing | 13.1 / 43.9 | 23.8 / 28.3 |
-| Sonarr /api/v3/calendar | 64.2 / 102.1 | 20.9 / 23.0 |
-| Sonarr /api/v3/queue | 1.5 / 48.1 | 1.5 / 1.9 |
-| Radarr /api/v3/movie | 280.8 / 529.2 | 214.5 / 325.4 |
-| Radarr /api/v3/history | 43.9 / 1175.2 | 38.5 / 118.3 |
-| Radarr /api/v3/calendar | 104.5 / 158.8 | 113.5 / 141.8 |
-| Radarr /api/v3/queue | 1.8 / 54.3 | 17.4 / 21.2 |
-| Sonarr /api/v3/episode | 10.9 / 424.4 | 4.4 / 31.3 |
+| Sonarr /api/v3/series | 210.7 / 292.0 | 49.2 / 62.1 |
+| Sonarr /api/v3/history | 60.2 / 78.9 | 25.6 / 28.8 |
+| Sonarr /api/v3/wanted/missing | 20.8 / 23.4 | 29.6 / 31.0 |
+| Sonarr /api/v3/calendar | 78.9 / 107.9 | 23.9 / 28.1 |
+| Sonarr /api/v3/queue | 1.5 / 2.7 | 2.0 / 2.4 |
+| Radarr /api/v3/movie | 311.7 / 419.0 | 226.8 / 275.9 |
+| Radarr /api/v3/history | 42.8 / 92.6 | 45.4 / 61.2 |
+| Radarr /api/v3/wanted/missing | 33.9 / 42.2 | 22.9 / 32.4 |
+| Radarr /api/v3/calendar | 132.8 / 170.4 | 53.6 / 68.5 |
+| Radarr /api/v3/queue | 1.6 / 2.4 | 17.2 / 20.6 |
+| Sonarr /api/v3/episode | 5.7 / 53.9 | 3.3 / 13.9 |
 
-Where Unarr is slower than the original, in these prototype tables (whoever
-updates the tables updates this list from them, as CLAUDE.md says):
+Where Unarr is slower than the original, in these tables (whoever updates
+the tables updates this list from them, as CLAUDE.md says):
 
-- Sonarr `/wanted/missing` on the scaled library: 24 ms against 13.
-- Radarr `/calendar`: 13.7 ms against 11.9 on the real library, 114
-  against 105 on the scaled one.
-- Radarr `/queue`: twice the original on the real library, ten times on
-  the scaled one, with an empty queue.
-- Radarr `/wanted/missing` on the scaled library: not read by the
-  prototype; short runs of the script at `ae1283b` gave 80 to 100 ms
-  against 18 to 30.
+- Radarr `/queue`: 3.3 ms against 1.9 on the real library, 17.2 against
+  1.6 on the scaled one, with an empty queue.
+- Sonarr `/wanted/missing` on the scaled library: 29.6 ms against 20.8.
+- Radarr `/history` on the scaled library: 45.4 ms against 42.8.
+- Sonarr `/queue` on the scaled library: 2.0 ms against 1.5.
 
-The movie routes gain far less over Radarr than the series routes gain
-over Sonarr. They read the whole library to answer a few rows.
-`/calendar`, the iCal feed and the wanted lists stop doing so in
-`radarr/calendar-date-range-query`.
+Radarr's `/calendar` and `/wanted/missing`, slower than the original
+before `radarr/calendar-date-range-query`, now ask SQLite for the movies
+they show: 6.7 ms against 14.9 and 5.1 against 21.5 on the real library,
+53.6 against 132.8 and 22.9 against 33.9 on the scaled one. `/movie`
+still reads and encodes the whole library, as the original does.
 
 ### In production, before the switch
 
@@ -223,7 +223,7 @@ their 1 GiB containers before Unarr replaced them:
 - **2026-10-01, `docker stats`** (cache excluded), two hours after the
   power-on: Sonarr 214 MiB, Radarr 260 MiB.
 
-Those 474 MiB for both are the same order as the 496 MiB of RSS the real
+Those 474 MiB for both are the same order as the 483 MiB of RSS the real
 library gives the originals here. The saving on the NAS is about 450 MiB
 of RAM.
 
@@ -234,5 +234,7 @@ idle CPU of each side.
 
 | Date | Library | Unarr | Runs | Originals: idle RSS / CPU | Unarr: idle RSS / CPU | Note |
 |---|---|---|--:|--:|--:|---|
+| 2026-11-15 | scaled | `3e51a78` | 1 | 532 MiB / 17.9 s/h | 43 MiB / 2.6 s/h | calendar and wanted lists read in SQL |
+| 2026-11-15 | real | `3e51a78` | 1 | 483 MiB / 19.2 s/h | 28 MiB / 1.6 s/h | calendar and wanted lists read in SQL; Unarr's warm-up flagged, noise |
 | 2026-11-14 | real | `ae1283b` | 1 | 496 MiB / 18.4 s/h | 28 MiB / 1.6 s/h | prototype; debug logs |
 | 2026-11-14 | scaled | `ae1283b` | 1 | 849 MiB / 28.5 s/h | 45 MiB / 1.8 s/h | prototype; debug logs, no heap limit |

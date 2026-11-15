@@ -665,15 +665,11 @@ of twenty of the wanted list or a month of the calendar costs a tenth of
 a second, which says they read all the movies to return a few. `GET
 /movie/{id}` at 20 ms for one movie says the same of the single read.
 None of these has a target; they are recorded with the misses and left,
-by the decision at the head of this section. The originals' times on
-the same libraries are in `docs/originals-comparison.md`: on the scaled
-library Unarr's Radarr answered `/movie` in 215 ms at p50 (the original
-281), `/history` in 39 (44), `/calendar` in 114 (105), `/queue` in 17
-(1.8), far less ahead than its Sonarr on the series routes. Since then
-`/calendar` and the iCal feed ask SQLite for the movies released in the
-range, and the two wanted lists sort light rows and read only the
-page's movies in full, with the same answers byte for byte. Main against
-that change, p50 / p99 over 30 calls on the scaled library:
+by the decision at the head of this section. Since then `/calendar` and
+the iCal feed ask SQLite for the movies released in the range, and the
+two wanted lists sort light rows and read only the page's movies in
+full, with the same answers byte for byte. Main against that change,
+p50 / p99 over 30 calls on the scaled library:
 
 | Route | Before | After |
 |---|--:|--:|
@@ -683,7 +679,12 @@ that change, p50 / p99 over 30 calls on the scaled library:
 | `GET /wanted/cutoff`, a page of 20 | 78 to 82 / 96 to 105 ms | 16 / 17 to 20 ms |
 | `GET /calendar` over thirty years (every movie) | 1,008 ms | 895 ms |
 
-`/queue` and `/movie/{id}` are not changed yet.
+`/queue` and `/movie/{id}` are not changed yet. The originals' times on
+the same libraries, with this change, are in
+`docs/originals-comparison.md`: on the scaled library Unarr's Radarr
+answered `/movie` in 227 ms at p50 (the original 312), `/calendar` in 54
+(133), `/wanted/missing` in 23 (34), `/history` in 45 (43) and `/queue`
+in 17 (1.6), far less ahead than its Sonarr on the series routes.
 
 ## 10. Naming and distribution
 
