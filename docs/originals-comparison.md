@@ -29,10 +29,14 @@ run the comparison again and update this file in the same branch.
 - **The two starts.** Each side starts once and runs five minutes, not
   measured: migrations, Unarr's import, the overdue scheduled tasks. Then
   it starts again and is measured:
-  - the time to the first answer on both ports, polled every 5 ms;
+  - the time to the first answer on both ports, each polled every 5 ms in
+    a thread of its own;
   - fifteen idle minutes, sampled every five seconds;
   - the same reads over both APIs: about 220 requests, the list of each
-    app, history, wanted, calendar, queue and twenty series' episodes;
+    app, history, wanted, calendar, queue and twenty series' episodes,
+    after one unmeasured pass over them: the first call of a route on a
+    fresh .NET process pays its JIT compilation, which a running install
+    pays once;
   - five more idle minutes.
 - **No network.** The script runs itself again in a network namespace of
   its own (`unshare -rn`, no privilege needed) where only the loopback is
@@ -123,8 +127,9 @@ Each library has the tables of its latest `report.md`, as the script
 writes them. Measured on 2026-11-14 in the cloud session (x86-64, four
 cores, 16 GB) with the script's prototype, and **not comparable with the
 runs to come**: both libraries logged at debug level, which costs the
-originals a line per API request and Unarr none, Radarr's
-`wanted/missing` was not read, and the scaled originals ran without the
+originals a line per API request and Unarr none, the reads were measured
+cold (the originals' JIT included, about 3 s of their 8 on the real
+library), Radarr's `wanted/missing` was not read, and the scaled originals ran without the
 heap limit.
 
 ### Real library (38 series, 193 movies)

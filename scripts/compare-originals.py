@@ -285,18 +285,34 @@ class Side:
                 preexec_fn=die_with_parent,
             )
         first: dict[int, float] = {}
-        while len(first) < len(self.ports):
-            for port in self.ports:
-                if port not in first and answers(port):
+        stop = threading.Event()
+
+        def probe(port: int):
+            # One thread per port: a request in flight on one port (a
+            # fifth of a second on .NET) does not delay noticing the other.
+            # Every 5 ms: a closed port refuses at once, so a probe costs
+            # next to nothing, fine enough for Unarr's tenths of a second.
+            while not stop.is_set():
+                if answers(port):
                     first[port] = round(time.time() - t0, 3)
-            for label, proc in self.procs.items():
-                if proc.poll() is not None:
-                    raise SystemExit(f"{label} exited early, see its stdout.log")
-            if time.time() - t0 > 900:
-                raise SystemExit(f"{self.name} did not answer within 15 minutes")
-            # Fine enough for Unarr's tenths of a second: a closed port
-            # refuses at once, so a probe costs next to nothing.
-            time.sleep(0.005)
+                    return
+                time.sleep(0.005)
+
+        probes = [threading.Thread(target=probe, args=(port,), daemon=True) for port in self.ports]
+        for t in probes:
+            t.start()
+        try:
+            while len(first) < len(self.ports):
+                for label, proc in self.procs.items():
+                    if proc.poll() is not None:
+                        raise SystemExit(f"{label} exited early, see its stdout.log")
+                if time.time() - t0 > 900:
+                    raise SystemExit(f"{self.name} did not answer within 15 minutes")
+                time.sleep(0.05)
+        finally:
+            stop.set()
+            for t in probes:
+                t.join()
         return first
 
     def stop(self):
@@ -390,6 +406,11 @@ def run_side(side: Side, first_seconds: int, idle_seconds: int, tail_seconds: in
     # What actually runs, as each application reports it.
     versions = {port: json.loads(get(port, "/api/v3/system/status")).get("version", "?") for port in side.ports}
     samples = idle(side, idle_seconds)
+    # One unmeasured pass over the same reads: the first call of a route on a
+    # fresh .NET process pays its JIT and query compilation (about 3 s of
+    # the originals' 8 on the real library), which a running install pays
+    # once. The reads measured are then the work, not the warm-up.
+    reads()
     before = side.sample()
     peak = dict(before)
     done = threading.Event()
