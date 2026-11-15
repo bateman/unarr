@@ -123,8 +123,8 @@ pub async fn list(State(state): State<AppState>, uri: Uri) -> ApiResult<Json<Vec
 }
 
 pub async fn get(State(state): State<AppState>, Path(id): Path<i64>) -> ApiResult<Json<Value>> {
-    let ctx = MovieContext::load(&state).await?;
     let library = load_library(&state, None, Some(id)).await?;
+    let ctx = MovieContext::load_for(&state, &library.movies).await?;
     Ok(Json(found(
         library_resources(&ctx, &library, Covers::Local)
             .into_iter()
@@ -180,14 +180,14 @@ pub async fn files(State(state): State<AppState>, uri: Uri) -> ApiResult<Json<Ve
             "movieId or movieFileIds must be provided".into(),
         ));
     }
-    let ctx = MovieContext::load(&state).await?;
     let files = files_with_movies(&state, movie_ids, file_ids).await?;
+    let ctx = MovieContext::load_for(&state, files.iter().filter_map(|(_, m)| m.as_ref())).await?;
     Ok(Json(file_resources(&ctx, &files)))
 }
 
 pub async fn file(State(state): State<AppState>, Path(id): Path<i64>) -> ApiResult<Json<Value>> {
-    let ctx = MovieContext::load(&state).await?;
     let files = files_with_movies(&state, Vec::new(), vec![id]).await?;
+    let ctx = MovieContext::load_for(&state, files.iter().filter_map(|(_, m)| m.as_ref())).await?;
     Ok(Json(found(file_resources(&ctx, &files).into_iter().next())?))
 }
 
@@ -795,8 +795,8 @@ fn apply_edits(file: &mut MovieFile, edits: &Value) {
 }
 
 async fn file_resources_by_ids(state: &AppState, ids: Vec<i64>) -> ApiResult<Vec<Value>> {
-    let ctx = MovieContext::load(state).await?;
     let files = files_with_movies(state, Vec::new(), ids).await?;
+    let ctx = MovieContext::load_for(state, files.iter().filter_map(|(_, m)| m.as_ref())).await?;
     Ok(file_resources(&ctx, &files))
 }
 

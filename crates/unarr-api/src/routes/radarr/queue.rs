@@ -90,7 +90,7 @@ struct Embedding {
 
 impl Embedding {
     async fn load(state: &AppState, items: &[&MovieQueueItem], include_movie: bool) -> ApiResult<Embedding> {
-        let ctx = MovieContext::load(state).await?;
+        let ctx = MovieContext::load_for(state, items.iter().filter_map(|q| q.movie.as_ref())).await?;
         // Only the embedded movie shows them.
         let mut metadata_ids: Vec<i64> = items
             .iter()

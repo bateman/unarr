@@ -124,7 +124,25 @@ pub struct MovieContext {
 }
 
 impl MovieContext {
+    /// With the translations of the whole library: for an answer that may
+    /// show any movie.
     pub async fn load(state: &AppState) -> anyhow::Result<MovieContext> {
+        Self::load_with(state, None).await
+    }
+
+    /// With the translations of these movies only: for an answer that shows
+    /// a page of them. The whole library's would be read for nothing.
+    pub async fn load_for<'a>(
+        state: &AppState,
+        movies: impl IntoIterator<Item = &'a Movie>,
+    ) -> anyhow::Result<MovieContext> {
+        let mut ids: Vec<i64> = movies.into_iter().map(|m| m.metadata.id).collect();
+        ids.sort_unstable();
+        ids.dedup();
+        Self::load_with(state, Some(ids)).await
+    }
+
+    async fn load_with(state: &AppState, metadata_ids: Option<Vec<i64>>) -> anyhow::Result<MovieContext> {
         let url_base = state.settings().url_base.clone();
         let now = state.now();
         state
@@ -143,7 +161,13 @@ impl MovieContext {
                         .collect(),
                     profiles: store::catalog::list_quality_profiles(conn)?,
                     formats: store::catalog::list_custom_formats(conn)?,
-                    translations: movies::translations_in(conn, config("movieinfolanguage", 1)?)?,
+                    translations: {
+                        let language = config("movieinfolanguage", 1)?;
+                        match &metadata_ids {
+                            Some(ids) => movies::translations_in_for(conn, language, ids)?,
+                            None => movies::translations_in(conn, language)?,
+                        }
+                    },
                     now,
                     availability_delay: config("availabilitydelay", 0)?,
                 })

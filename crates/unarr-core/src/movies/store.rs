@@ -738,23 +738,54 @@ pub fn translations_in(
     conn: &Connection,
     language_id: i64,
 ) -> anyhow::Result<HashMap<i64, MovieTranslation>> {
-    let mut stmt = conn.prepare(
+    translations_where(conn, language_id, None)
+}
+
+/// [`translations_in`] for the given movie metadata only: what a page of
+/// movies shows. It reads through the `(movie_metadata_id, language_id)`
+/// index; the whole language means reading every translation of every
+/// movie, a library's worth of overviews.
+pub fn translations_in_for(
+    conn: &Connection,
+    language_id: i64,
+    metadata_ids: &[i64],
+) -> anyhow::Result<HashMap<i64, MovieTranslation>> {
+    if metadata_ids.is_empty() {
+        return Ok(HashMap::new());
+    }
+    translations_where(conn, language_id, Some(metadata_ids))
+}
+
+fn translations_where(
+    conn: &Connection,
+    language_id: i64,
+    metadata_ids: Option<&[i64]>,
+) -> anyhow::Result<HashMap<i64, MovieTranslation>> {
+    let only = if metadata_ids.is_some() {
+        "movie_metadata_id IN (SELECT value FROM json_each(?2)) AND "
+    } else {
+        ""
+    };
+    let mut stmt = conn.prepare(&format!(
         "SELECT id, movie_metadata_id, language_id, title, clean_title, overview FROM movie_translations
-         WHERE language_id = ?1 ORDER BY id",
-    )?;
-    let rows = stmt.query_map([language_id], |r| {
-        Ok(MovieTranslation {
+         WHERE {only}language_id = ?1 ORDER BY id"
+    ))?;
+    let ids = serde_json::to_string(metadata_ids.unwrap_or(&[]))?;
+    let mut rows = if metadata_ids.is_some() {
+        stmt.query(params![language_id, ids])?
+    } else {
+        stmt.query(params![language_id])?
+    };
+    let mut out = HashMap::new();
+    while let Some(r) = rows.next()? {
+        let t = MovieTranslation {
             id: r.get(0)?,
             movie_metadata_id: r.get(1)?,
             language_id: r.get(2)?,
             title: r.get(3)?,
             clean_title: r.get(4)?,
             overview: r.get(5)?,
-        })
-    })?;
-    let mut out = HashMap::new();
-    for t in rows {
-        let t = t?;
+        };
         out.entry(t.movie_metadata_id).or_insert(t);
     }
     Ok(out)
@@ -2006,6 +2037,61 @@ mod tests {
 
     fn ids(movies: &[Movie]) -> Vec<i64> {
         movies.iter().map(|m| m.id).collect()
+    }
+
+    #[test]
+    fn translations_in_for_some_movies_match_the_whole_language() {
+        let db = Db::open_in_memory_for(Personality::Radarr).unwrap();
+        db.call_blocking(|conn| {
+            for m in [
+                testing::movie(1, "One", 2026),
+                testing::movie(2, "Two", 2026),
+                testing::movie(3, "Three", 2026),
+            ] {
+                add(conn, &m);
+            }
+            let mut id = 0;
+            for (metadata, language, title) in [
+                (1, 1, "One"),
+                (1, 2, "Uno"),
+                (2, 2, "Due"),
+                (3, 1, "Three"),
+                (3, 1, "Three again"),
+            ] {
+                id += 1;
+                insert_translation(
+                    conn,
+                    &MovieTranslation {
+                        id,
+                        movie_metadata_id: metadata,
+                        language_id: language,
+                        title: Some(title.into()),
+                        clean_title: Some(title.to_lowercase()),
+                        overview: None,
+                    },
+                )?;
+            }
+            let all = translations_in(conn, 1)?;
+            let some = translations_in_for(conn, 1, &[1, 2, 3])?;
+            let titles = |t: &HashMap<i64, MovieTranslation>| {
+                let mut v: Vec<(i64, Option<String>)> = t
+                    .values()
+                    .map(|t| (t.movie_metadata_id, t.title.clone()))
+                    .collect();
+                v.sort();
+                v
+            };
+            assert_eq!(titles(&all), titles(&some));
+            // The first row of a movie wins, as in the whole language.
+            assert_eq!(some[&3].title.as_deref(), Some("Three"));
+            assert_eq!(
+                titles(&translations_in_for(conn, 1, &[2, 3])?),
+                [(3, Some("Three".to_string()))]
+            );
+            assert!(translations_in_for(conn, 1, &[])?.is_empty());
+            Ok(())
+        })
+        .unwrap();
     }
 
     #[test]

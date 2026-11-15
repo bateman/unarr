@@ -87,11 +87,11 @@ async fn history_resources(
     rows: Vec<MovieHistoryEntry>,
     include_movie: bool,
 ) -> anyhow::Result<Vec<Value>> {
-    let ctx = MovieContext::load(state).await?;
     let mut ids: Vec<i64> = rows.iter().map(|h| h.movie_id).collect();
     ids.sort_unstable();
     ids.dedup();
     let owners = movies_of(state, ids).await?;
+    let ctx = MovieContext::load_for(state, owners.values()).await?;
     // Every row is matched against every custom format: off the async workers.
     crate::blocking::run(move || {
         rows.iter()
@@ -194,11 +194,11 @@ fn blocklist_resource(ctx: &MovieContext, b: &MovieBlocklistEntry, movie: Option
 }
 
 async fn blocklist_resources(state: &AppState, rows: Vec<MovieBlocklistEntry>) -> anyhow::Result<Vec<Value>> {
-    let ctx = MovieContext::load(state).await?;
     let mut ids: Vec<i64> = rows.iter().map(|b| b.movie_id).collect();
     ids.sort_unstable();
     ids.dedup();
     let owners = movies_of(state, ids).await?;
+    let ctx = MovieContext::load_for(state, owners.values()).await?;
     crate::blocking::run(move || {
         rows.iter()
             .map(|b| blocklist_resource(&ctx, b, owners.get(&b.movie_id)))
@@ -286,7 +286,6 @@ pub async fn calendar(State(state): State<AppState>, uri: Uri) -> ApiResult<Json
         .get("tags")
         .map(|t| t.split(',').filter_map(|s| s.trim().parse().ok()).collect())
         .unwrap_or_default();
-    let ctx = MovieContext::load(&state).await?;
     // Only the movies released in the range, monitored unless asked
     // otherwise, are read, with their files and alternative titles: the
     // query applies the original's conditions, at the seconds the dates
@@ -310,6 +309,7 @@ pub async fn calendar(State(state): State<AppState>, uri: Uri) -> ApiResult<Json
         let md = &m.metadata;
         (md.in_cinemas, md.digital_release, md.physical_release)
     });
+    let ctx = MovieContext::load_for(&state, found.iter().copied()).await?;
     Ok(Json(
         found
             .iter()
@@ -353,20 +353,19 @@ const WANTED_SORT_KEYS: &[&str] = &[
 /// only the page's movies and files are then read in full.
 async fn wanted_page(
     state: &AppState,
-    ctx: &MovieContext,
     with_file: bool,
     monitored: bool,
     paging: &Paging,
 ) -> ApiResult<PagingResource<Value>> {
     // One call, so no write lands between the rows sorted and the movies
     // read for the page (the database runs one call at a time).
-    let profiles = ctx.profiles.clone();
     let sorting = paging.clone();
     let (total, page, files) = state
         .db()
         .call(move |conn| {
             let mut wanted: Vec<WantedRow> = movies::wanted_rows(conn, monitored, with_file)?;
             if with_file {
+                let profiles = unarr_core::store::catalog::list_quality_profiles(conn)?;
                 // `/wanted/cutoff`: a file below the cutoff of its profile.
                 wanted.retain(|w| {
                     let profile = profiles.iter().find(|p| p.id == w.quality_profile_id);
@@ -416,6 +415,7 @@ async fn wanted_page(
             Ok((total, page, files))
         })
         .await?;
+    let ctx = &MovieContext::load_for(state, &page).await?;
     let records = page
         .iter()
         .map(|m| {
@@ -454,9 +454,8 @@ fn wanted_paging(p: &Params) -> Paging {
 pub async fn missing(State(state): State<AppState>, uri: Uri) -> ApiResult<Json<PagingResource<Value>>> {
     let p = Params::from_uri(&uri);
     let monitored = p.bool("monitored", true);
-    let ctx = MovieContext::load(&state).await?;
     Ok(Json(
-        wanted_page(&state, &ctx, false, monitored, &wanted_paging(&p)).await?,
+        wanted_page(&state, false, monitored, &wanted_paging(&p)).await?,
     ))
 }
 
@@ -485,8 +484,7 @@ pub async fn history_mark_failed(
 pub async fn cutoff(State(state): State<AppState>, uri: Uri) -> ApiResult<Json<PagingResource<Value>>> {
     let p = Params::from_uri(&uri);
     let monitored = p.bool("monitored", true);
-    let ctx = MovieContext::load(&state).await?;
     Ok(Json(
-        wanted_page(&state, &ctx, true, monitored, &wanted_paging(&p)).await?,
+        wanted_page(&state, true, monitored, &wanted_paging(&p)).await?,
     ))
 }
