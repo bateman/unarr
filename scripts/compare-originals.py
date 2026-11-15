@@ -41,7 +41,7 @@ import os
 import re
 import shutil
 import signal
-import statistics
+import socket
 import subprocess
 import sys
 import threading
@@ -65,6 +65,13 @@ def get(port: int, path: str, timeout: float = 600) -> bytes:
     req = urllib.request.Request(f"http://127.0.0.1:{port}{path}", headers={"X-Api-Key": KEY})
     with urllib.request.urlopen(req, timeout=timeout) as r:
         return r.read()
+
+
+def listening(port: int) -> bool:
+    """Something accepts connections on the port, whatever it is."""
+    with socket.socket() as s:
+        s.settimeout(1)
+        return s.connect_ex(("127.0.0.1", port)) == 0
 
 
 def answers(port: int) -> bool:
@@ -186,6 +193,14 @@ def reads() -> dict[str, list[float]]:
 
 
 def measure(side: Side, first_seconds: int, idle_seconds: int, tail_seconds: int) -> dict:
+    """Both starts of one side; its processes are stopped however it ends."""
+    try:
+        return run_side(side, first_seconds, idle_seconds, tail_seconds)
+    finally:
+        side.stop()
+
+
+def run_side(side: Side, first_seconds: int, idle_seconds: int, tail_seconds: int) -> dict:
     log(side.name, f"first start, {first_seconds} s, not measured")
     side.start()
     time.sleep(first_seconds)
@@ -252,16 +267,16 @@ def at(rows: list[dict], seconds: float) -> dict:
 
 def summary(r: dict) -> dict:
     i, tail = r["idle"], r["tail"]
-    late = [x for x in i if x["t"] - i[0]["t"] >= 300] or i
     end = i[-1]
     five = at(i, 300)
-    idle_cpu = (end["cpu"] - five["cpu"]) / max(end["t"] - five["t"], 1) * 3600
+    # Counted from minute 5, once the start-up work is done: a shorter
+    # window has nothing to count.
+    idle_cpu = (end["cpu"] - five["cpu"]) / (end["t"] - five["t"]) * 3600 if end["t"] - five["t"] >= 60 else None
     tail_cpu = (tail[-1]["cpu"] - tail[0]["cpu"]) / max(tail[-1]["t"] - tail[0]["t"], 1) * 3600
     return {
         "first": max(r["first"].values()),
         "idle_anon": end["anon"] / MIB,
         "idle_rss": end["rss"] / MIB,
-        "idle_anon_mean": statistics.mean(x["anon"] for x in late) / MIB,
         "idle_cpu_h": idle_cpu,
         "tail_cpu_h": tail_cpu,
         "reads_cpu": r["reads"]["cpu"],
@@ -275,14 +290,17 @@ def summary(r: dict) -> dict:
 def report(res: dict, meta: dict) -> str:
     o, u = summary(res["originals"]), summary(res["unarr"])
 
-    def less(a: float, b: float) -> str:
-        return f"{(a - b) / a * 100:.0f} %" if a > 0 else "n/a"
+    def less(a, b) -> str:
+        return f"{(a - b) / a * 100:.0f} %" if a and b is not None else "n/a"
+
+    def per_hour(x) -> str:
+        return "n/a" if x is None else f"{x:.1f} s/h"
 
     rows = [
         ("First answer on both ports", f"{o['first']:.2f} s", f"{u['first']:.2f} s", f"{o['first'] / u['first']:.0f}× sooner"),
         ("Idle, at the end of the idle window: RSS", f"{o['idle_rss']:.0f} MiB", f"{u['idle_rss']:.0f} MiB", less(o["idle_rss"], u["idle_rss"])),
         ("Same, anonymous memory", f"{o['idle_anon']:.0f} MiB", f"{u['idle_anon']:.0f} MiB", less(o["idle_anon"], u["idle_anon"])),
-        ("Idle CPU, from minute 5 of the window", f"{o['idle_cpu_h']:.1f} s/h", f"{u['idle_cpu_h']:.1f} s/h", less(o["idle_cpu_h"], u["idle_cpu_h"])),
+        ("Idle CPU, from minute 5 of the window", per_hour(o["idle_cpu_h"]), per_hour(u["idle_cpu_h"]), less(o["idle_cpu_h"], u["idle_cpu_h"])),
         ("The reads: CPU", f"{o['reads_cpu']:.2f} s", f"{u['reads_cpu']:.2f} s", less(o["reads_cpu"], u["reads_cpu"])),
         ("The reads: time", f"{o['reads_s']:.2f} s", f"{u['reads_s']:.2f} s", less(o["reads_s"], u["reads_s"])),
         ("Peak anonymous memory during the reads", f"{o['peak_anon']:.0f} MiB", f"{u['peak_anon']:.0f} MiB", less(o["peak_anon"], u["peak_anon"])),
@@ -326,8 +344,8 @@ def main():
         if not binary.exists():
             raise SystemExit(f"{binary} missing: run {how} first")
     for port in (SONARR_PORT, RADARR_PORT):
-        if answers(port):
-            raise SystemExit(f"something already answers on {port}: stop it first")
+        if listening(port):
+            raise SystemExit(f"something already listens on {port}: stop it first")
 
     meta = {
         "library": a.library,

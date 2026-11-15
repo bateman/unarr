@@ -29,8 +29,11 @@ run the comparison again and update this file in the same branch.
   - five more idle minutes.
 - **RAM** is the RSS and the anonymous memory (the heaps) of
   `/proc/<pid>/smaps_rollup`, summed over a side's processes.
-- **CPU** is `utime + stime` from `/proc/<pid>/stat`. Idle CPU is counted
-  from the fifth minute of the window, once the start-up work is done.
+- **CPU** is `utime + stime` from `/proc/<pid>/stat`, plus the children
+  a process has waited for: Unarr's `ffprobe` runs count. Their memory
+  does not: it is sampled on the side's own processes only. Idle CPU is
+  counted from the fifth minute of the window, once the start-up work is
+  done; with `--idle` under six minutes the report gives n/a.
 - **Heap limit.** The originals run with `DOTNET_GCHeapHardLimit` at
   768 MiB: that is what .NET takes from a 1 GiB container such as the
   homelab's.
@@ -79,9 +82,17 @@ Latency, p50 in ms (20 calls each; `episode` is twenty series, one call each):
 | Radarr `/calendar`, a month | 12.0 | 13.7 | 105 | 117 |
 | Radarr `/queue` | 1.9 | 3.8 | 1.8 | 17.8 |
 
-On the movie routes the Radarr personality gains far less than the Sonarr
-one gains on the series routes. It reads the whole library to answer a
-few rows; `/calendar`, the iCal feed and the wanted lists stop doing so in
+Where Unarr is slower than the original:
+
+- Sonarr `/wanted/missing` on the scaled library: 24 ms against 13.
+- Radarr `/calendar`: 13.7 ms against 12.0 on the real library, 117
+  against 105 on the scaled one.
+- Radarr `/queue`: twice the original on the real library, ten times on
+  the scaled one, with an empty queue.
+
+The movie routes gain far less over Radarr than the series routes gain
+over Sonarr. They read the whole library to answer a few rows.
+`/calendar`, the iCal feed and the wanted lists stop doing so in
 `radarr/calendar-date-range-query`.
 
 ### In production, before the switch
