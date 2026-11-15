@@ -374,6 +374,11 @@ def run_side(side: Side, first_seconds: int, idle_seconds: int, tail_seconds: in
     log(side.name, f"first start, {first_seconds} s, not measured")
     side.start()
     time.sleep(first_seconds)
+    # A side that crashed during its first start would leave the measured
+    # one a half-prepared copy and the start-up work to do.
+    for label, proc in side.procs.items():
+        if proc.poll() is not None:
+            raise SystemExit(f"{label} exited during its first start, see its stdout.log")
     side.stop()
     log(side.name, "measured start")
     first = side.start()
@@ -733,7 +738,8 @@ def main():
         log("libicu not found: the originals run with invariant globalization")
     # Without ICU data mapped the originals take less memory: a report from
     # such a run says so, not comparable with one made with ICU.
-    meta["invariant"] = env.get("DOTNET_SYSTEM_GLOBALIZATION_INVARIANT", "") not in ("", "0", "false")
+    # As .NET reads the switch: only 1 and true, in any case, turn it on.
+    meta["invariant"] = env.get("DOTNET_SYSTEM_GLOBALIZATION_INVARIANT", "").strip().lower() in ("1", "true")
     if not a.no_cap:
         env["DOTNET_GCHeapHardLimit"] = "0x30000000"
 
