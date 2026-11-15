@@ -146,17 +146,25 @@ impl<'a> QBittorrent<'a> {
         format!("{}{}", self.base_url().trim_end_matches('/'), resource)
     }
 
-    /// The original's message over its inner `HttpException`.
+    /// The original's message over its inner `HttpException`, whose URL
+    /// has the query the request was sent with.
     fn http_error(
         &self,
         message: &str,
         status: reqwest::StatusCode,
         method: &str,
         resource: &str,
+        query: &[(&str, String)],
     ) -> ClientError {
+        let mut url = self.url(resource);
+        if !query.is_empty() {
+            if let Ok(with) = reqwest::Url::parse_with_params(&url, query) {
+                url = with.to_string();
+            }
+        }
         ClientError::Http {
             message: message.to_string(),
-            cause: http_error_message(status, method, &self.url(resource)),
+            cause: http_error_message(status, method, &url),
         }
     }
 
@@ -238,6 +246,7 @@ impl<'a> QBittorrent<'a> {
                 status,
                 "POST",
                 "/api/v2/auth/login",
+                &[],
             ));
         }
         let cookies: Vec<String> = response
@@ -329,6 +338,7 @@ impl<'a> QBittorrent<'a> {
                 status,
                 method.as_str(),
                 resource,
+                query,
             ));
         }
         Ok(content)
@@ -367,12 +377,14 @@ impl<'a> QBittorrent<'a> {
                 s,
                 "GET",
                 resource,
+                &[],
             )),
             s if !s.is_success() => Err(self.http_error(
                 &format!("Failed to connect to {NAME}, check your settings."),
                 s,
                 "GET",
                 resource,
+                &[],
             )),
             _ => Ok(true),
         }
@@ -557,6 +569,7 @@ impl<'a> QBittorrent<'a> {
             status,
             "POST",
             "/api/v2/torrents/setShareLimits",
+            &[],
         ))
     }
 
@@ -578,6 +591,7 @@ impl<'a> QBittorrent<'a> {
             status,
             "POST",
             "/api/v2/torrents/topPrio",
+            &[],
         ))
     }
 
@@ -822,7 +836,7 @@ impl<'a> QBittorrent<'a> {
                 .set_label(&item.download_id.to_ascii_lowercase(), imported)
                 .await
             {
-                tracing::warn!(label = imported, title = %item.title, error = %e, "failed to set post-import torrent label; does the label exist?");
+                tracing::warn!(label = imported, title = %item.title, error = %e.exception(), "failed to set post-import torrent label; does the label exist?");
             }
         }
         Ok(())
@@ -920,7 +934,7 @@ impl<'a> QBittorrent<'a> {
                 )
             }
             Err(e) => {
-                tracing::error!(error = %e, "unable to test qBittorrent");
+                tracing::error!(error = %e.exception(), "unable to test qBittorrent");
                 Some(
                     ValidationFailure::error("Host", &format!("Unable to connect to {NAME}"))
                         .with_detail(e.message()),
@@ -980,7 +994,7 @@ impl<'a> QBittorrent<'a> {
             }
             Ok(_) => None,
             Err(e) => {
-                tracing::error!(error = %e, "failed to test qBittorrent");
+                tracing::error!(error = %e.exception(), "failed to test qBittorrent");
                 Some(ValidationFailure::error(
                     "",
                     &format!("Unknown exception: {}", e.message()),
@@ -993,7 +1007,7 @@ impl<'a> QBittorrent<'a> {
         match self.torrents().await {
             Ok(_) => None,
             Err(e) => {
-                tracing::error!(error = %e, "failed to get torrents");
+                tracing::error!(error = %e.exception(), "failed to get torrents");
                 Some(ValidationFailure::error(
                     "",
                     &format!("Failed to get the list of torrents: {}", e.message()),
@@ -1110,6 +1124,10 @@ mod tests {
             .route(
                 "/api/v2/torrents/add",
                 post(|| async { (axum::http::StatusCode::CONFLICT, "") }),
+            )
+            .route(
+                "/api/v2/torrents/info",
+                get(|| async { (axum::http::StatusCode::INTERNAL_SERVER_ERROR, "") }),
             );
         let listener = tokio::net::TcpListener::bind("127.0.0.1:0").await.unwrap();
         let addr = listener.local_addr().unwrap();
@@ -1159,5 +1177,20 @@ mod tests {
             "Failed to connect to qBittorrent, check your settings."
         );
         assert!(format!("{api:#}").ends_with(&cause), "{api:#}");
+
+        // The cause names the URL with its query, as the originals log it.
+        let e = QBittorrent::new(&client, &settings)
+            .get("/api/v2/torrents/info", &[("category", "radarr".to_string())])
+            .await
+            .unwrap_err();
+        assert_eq!(
+            e.cause(),
+            Some(
+                format!(
+                    "HTTP request failed: [500:InternalServerError] [GET] at [http://{addr}/api/v2/torrents/info?category=radarr]"
+                )
+                .as_str()
+            )
+        );
     }
 }

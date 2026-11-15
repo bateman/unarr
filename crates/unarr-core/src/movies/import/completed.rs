@@ -301,7 +301,7 @@ pub async fn download_completed(
         t.item.client.name
     );
     if let Err(e) = client.mark_imported(&t.item).await {
-        tracing::debug!(error = %e, "couldn't mark the item as imported");
+        tracing::debug!(error = %e.exception(), "couldn't mark the item as imported");
     }
     if t.item.removed || !t.item.can_be_removed || t.item.status == DownloadItemStatus::Downloading {
         return;
@@ -343,7 +343,7 @@ async fn remove_from_client(client: &Client<'_>, t: &mut TrackedMovieDownload) {
     match client.remove(&t.item, true).await {
         Ok(()) => t.item.removed = true,
         Err(e) => {
-            tracing::error!(error = %e, "Couldn't remove item {} from client {}", t.item.title, t.item.client.name)
+            tracing::error!(error = %e.exception(), "Couldn't remove item {} from client {}", t.item.title, t.item.client.name)
         }
     }
 }
