@@ -668,7 +668,7 @@ None of these has a target; they are recorded with the misses and left,
 by the decision at the head of this section. The originals' times on
 the same libraries are in `docs/originals-comparison.md`: on the scaled
 library Unarr's Radarr answered `/movie` in 215 ms at p50 (the original
-284), `/history` in 39 (44), `/calendar` in 117 (105), `/queue` in 18
+281), `/history` in 39 (44), `/calendar` in 114 (105), `/queue` in 17
 (1.8), far less ahead than its Sonarr on the series routes. Since then
 `/calendar` and the iCal feed ask SQLite for the movies released in the
 range, and the two wanted lists sort light rows and read only the
