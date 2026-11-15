@@ -383,15 +383,15 @@ def reads() -> dict[str, list[float]]:
     return lat
 
 
-def measure(side: Side, first_seconds: int, idle_seconds: int, tail_seconds: int) -> dict:
+def measure(side: Side, first_seconds: int, idle_seconds: int, tail_seconds: int, warmup_passes: int = 5) -> dict:
     """Both starts of one side; its processes are stopped however it ends."""
     try:
-        return run_side(side, first_seconds, idle_seconds, tail_seconds)
+        return run_side(side, first_seconds, idle_seconds, tail_seconds, warmup_passes)
     finally:
         side.stop()
 
 
-def run_side(side: Side, first_seconds: int, idle_seconds: int, tail_seconds: int) -> dict:
+def run_side(side: Side, first_seconds: int, idle_seconds: int, tail_seconds: int, warmup_passes: int) -> dict:
     log(side.name, f"first start, {first_seconds} s, not measured")
     side.start()
     time.sleep(first_seconds)
@@ -411,16 +411,15 @@ def run_side(side: Side, first_seconds: int, idle_seconds: int, tail_seconds: in
     # often is compiled again, in the background, a pass or two later
     # (tiered compilation): 9.9, 4.4, 3.1, 3.4, 2.9 s of CPU for the
     # originals' first five passes on the real library, 1.9 to 1.6 for
-    # Unarr. A running install pays that once. So: at least two passes, and
-    # more until one costs within 10 % of the one before, at most six; the
-    # same rule for both sides.
+    # Unarr. A running install pays that once. The same number of passes on
+    # both sides (--warmup), so that the heaps compared after the reads have
+    # served the same requests; the report says when a side's last two
+    # passes still differ by more than 10 %.
     warmup = []
-    while len(warmup) < 6:
+    for _ in range(warmup_passes):
         c0 = side.sample()["cpu"]
         reads()
         warmup.append(side.sample()["cpu"] - c0)
-        if len(warmup) >= 2 and warmup[-1] >= 0.9 * warmup[-2]:
-            break
     before = side.sample()
     peak = dict(before)
     done = threading.Event()
@@ -618,6 +617,19 @@ def report(res: dict, meta: dict) -> str:
         ("Idle CPU in the tail, from its first minute", "tail_cpu_h", ".1f", "s/h", less),
     ]
     n = len(o_runs)
+
+    def unsettled() -> list[str]:
+        """Sides whose last two warm-up passes differ by more than 10 %."""
+        out = []
+        for side in ("originals", "unarr"):
+            for r in runs(res, side):
+                w = r.get("warmup_cpu", [])
+                if len(w) >= 2 and w[-2] > 0 and abs(w[-1] - w[-2]) > 0.1 * w[-2]:
+                    out.append(side)
+                    break
+        return out
+
+    shaky = unsettled()
     reported = runs(res, "originals")[0].get("versions", {})
     def ran(port: int, app: str) -> str:
         """The version that ran, and the pinned one when they differ: make ui
@@ -635,6 +647,8 @@ def report(res: dict, meta: dict) -> str:
         f".NET heap limit {'768 MiB' if meta['cap'] else 'none'}; "
         + ("**with the network, not comparable**; " if meta.get("network") else "")
         + ("**originals without ICU (invariant globalization)**; " if meta.get("invariant") else "")
+        + (f"**warm-up not settled for {' and '.join(shaky)}: raise --warmup**; " if shaky else "")
+        + (f"{meta['warmup']} warm-up passes; " if "warmup" in meta else "")
         + ("**first start under 60 s, start-up tasks may be in the measured start**; "
            if meta["first"] < 60 else "")
         + (f"{n} runs per side, median (lowest–highest); " if n > 1 else "")
@@ -679,6 +693,9 @@ def main():
     ap.add_argument("--idle", type=int, default=900, help="idle seconds sampled after the measured start")
     ap.add_argument("--tail", type=int, default=300, help="idle seconds sampled after the reads")
     ap.add_argument("--no-cap", action="store_true", help="no .NET heap limit for the originals")
+    ap.add_argument("--warmup", type=int, default=5,
+                    help="unmeasured passes over the reads before the measured one, the same on both sides "
+                         "(default 5: the originals' CPU per pass settles by the fourth or fifth)")
     ap.add_argument("--out", type=Path, help="default .cache/compare/<library>")
     ap.add_argument("--repeat", type=int, default=1,
                     help="runs per side, the order alternating between runs (default 1)")
@@ -691,6 +708,8 @@ def main():
     # Before the build, the claim and the namespace.
     if a.repeat < 1:
         raise SystemExit("--repeat must be at least 1")
+    if a.warmup < 2:
+        raise SystemExit("--warmup must be at least 2: one pass leaves the recompilation to the measured one")
     # A side left over by an earlier run lives in that run's namespace, out
     # of reach of a port check: look for the binaries among the processes.
     # The port check still catches a service of the host on 8989 or 7878,
@@ -770,7 +789,7 @@ def main():
         "dirs": {"sonarr": str(sonarr.parent), "radarr": str(radarr.parent)},
         "sonarr": pinned("sonarr-fixture.sh", "SONARR_VERSION"),
         "radarr": pinned("radarr-fixture.sh", "RADARR_VERSION"),
-        "first": a.first, "idle": a.idle, "tail": a.tail, "cap": not a.no_cap,
+        "first": a.first, "idle": a.idle, "tail": a.tail, "cap": not a.no_cap, "warmup": a.warmup,
         "network": a.network,
         "date": time.strftime("%Y-%m-%d"),
     }
@@ -826,7 +845,7 @@ def main():
             order.reverse()
         for name, make in order:
             log(f"run {run + 1} of {a.repeat}")
-            res[name].append(measure(make(), a.first, a.idle, a.tail))
+            res[name].append(measure(make(), a.first, a.idle, a.tail, a.warmup))
             # Kept after every side: an interrupted series keeps what it measured.
             (out / "results.json").write_text(json.dumps(res, indent=1))
 

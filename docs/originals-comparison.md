@@ -37,9 +37,11 @@ run the comparison again and update this file in the same branch.
     after unmeasured passes over them: the first call of a route on a
     fresh .NET process pays its JIT compilation, and a route called often
     is compiled again a pass or two later, which a running install pays
-    once. At least two passes, then more until one costs within 10 % of
-    the one before, at most six, on both sides; `results.json` keeps each
-    pass's CPU (`warmup_cpu`);
+    once. The same number of passes on both sides (`--warmup`, default 5:
+    the originals' CPU per pass settles by the fourth or fifth), so the
+    heaps compared afterwards have served the same requests; the report
+    says when a side's last two passes still differ by more than 10 %, and
+    `results.json` keeps each pass's CPU (`warmup_cpu`);
   - five more idle minutes.
 - **No network.** The script runs itself again in a network namespace of
   its own (`unshare -rn`, no privilege needed) where only the loopback is
@@ -202,8 +204,8 @@ updates the tables updates this list from them, as CLAUDE.md says):
 - Radarr `/queue`: twice the original on the real library, ten times on
   the scaled one, with an empty queue.
 - Radarr `/wanted/missing` on the scaled library: not read by the
-  prototype; a short run of the script at `ae1283b` gave about 90 ms
-  against 30.
+  prototype; short runs of the script at `ae1283b` gave 80 to 100 ms
+  against 18 to 30.
 
 The movie routes gain far less over Radarr than the series routes gain
 over Sonarr. They read the whole library to answer a few rows.
