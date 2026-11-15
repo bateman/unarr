@@ -42,6 +42,16 @@ impl From<anyhow::Error> for GrabError {
     }
 }
 
+impl GrabError {
+    /// What a log line shows: a client's error with its cause.
+    pub fn exception(&self) -> String {
+        match self {
+            GrabError::Client(e) => e.exception(),
+            e => e.to_string(),
+        }
+    }
+}
+
 impl std::fmt::Display for GrabError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {

@@ -566,7 +566,7 @@ async fn grab_pending(state: &AppState, id: i64) -> ApiResult<()> {
             Err(ApiError::ConflictMessage(m))
         }
         Err(GrabError::NoClient(m)) => Err(ApiError::Internal(anyhow::anyhow!("{m}"))),
-        Err(GrabError::Client(e)) => Err(ApiError::Internal(anyhow::anyhow!("{}", e.message()))),
+        Err(GrabError::Client(e)) => Err(ApiError::Internal(e.into_anyhow())),
         Err(GrabError::Other(e)) => Err(ApiError::Internal(e)),
     }
 }

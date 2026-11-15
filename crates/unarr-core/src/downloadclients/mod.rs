@@ -303,6 +303,11 @@ pub enum ClientError {
     NotSupported(String),
     /// Any other `DownloadClientException`.
     Other(String),
+    /// A `DownloadClientException` thrown over the client's HTTP error:
+    /// `message` is the original's, which names no status, and `cause` is
+    /// its inner `HttpException` (`HTTP request failed: [409:Conflict]
+    /// ...`), which the originals log and answer as the description.
+    Http { message: String, cause: String },
 }
 
 impl ClientError {
@@ -312,7 +317,34 @@ impl ClientError {
             | ClientError::Unavailable(m)
             | ClientError::Rejected(m)
             | ClientError::NotSupported(m)
-            | ClientError::Other(m) => m,
+            | ClientError::Other(m)
+            | ClientError::Http { message: m, .. } => m,
+        }
+    }
+
+    /// The inner exception's message, when there is one.
+    pub fn cause(&self) -> Option<&str> {
+        match self {
+            ClientError::Http { cause, .. } => Some(cause),
+            _ => None,
+        }
+    }
+
+    /// What a log line shows: the message, then the cause the originals'
+    /// exception carries inside it.
+    pub fn exception(&self) -> String {
+        match self.cause() {
+            Some(cause) => format!("{} ---> {cause}", self.message()),
+            None => self.message().to_string(),
+        }
+    }
+
+    /// As an API error: the message is the answer's, and the cause comes
+    /// along for the log and the description.
+    pub fn into_anyhow(self) -> anyhow::Error {
+        match self.cause() {
+            Some(cause) => anyhow::Error::msg(cause.to_string()).context(self.message().to_string()),
+            None => anyhow::Error::msg(self.message().to_string()),
         }
     }
 }

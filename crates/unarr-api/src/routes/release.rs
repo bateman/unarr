@@ -125,7 +125,7 @@ pub async fn grab(State(state): State<AppState>, Json(body): Json<Value>) -> Api
             return Err(ApiError::Internal(anyhow::anyhow!("{message}")));
         }
         Err(GrabError::Client(e)) => {
-            return Err(ApiError::Internal(anyhow::anyhow!("{}", e.message())));
+            return Err(ApiError::Internal(e.into_anyhow()));
         }
         Err(GrabError::Other(e)) => return Err(ApiError::Internal(e)),
     }

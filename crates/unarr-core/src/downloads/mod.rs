@@ -444,7 +444,7 @@ impl Downloads {
                 client
                     .remove(&tracked.item, true)
                     .await
-                    .map_err(|e| RemoveError::Other(anyhow::anyhow!("{e}")))?;
+                    .map_err(|e| RemoveError::Other(e.into_anyhow()))?;
             } else if let Err(e) = client.mark_imported(&tracked.item).await {
                 tracing::warn!(error = %e, "failed to change the category of the download");
             }

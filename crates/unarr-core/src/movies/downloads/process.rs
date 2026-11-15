@@ -215,7 +215,7 @@ async fn process_internal(
             Ok(ProcessedResult::Skipped)
         }
         Err(e) => {
-            tracing::warn!(title = remote.release.title, indexer = remote.release.indexer, error = %e, "couldn't add release to download queue");
+            tracing::warn!(title = remote.release.title, indexer = remote.release.indexer, error = %e.exception(), "couldn't add release to download queue");
             Ok(ProcessedResult::Skipped)
         }
     }

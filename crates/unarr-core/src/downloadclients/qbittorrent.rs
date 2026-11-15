@@ -15,8 +15,8 @@ use super::settings::{
 use super::version::Version;
 use super::GrabRequest;
 use super::{
-    build_base_url, is_localhost, remote_path, transport_message, Client, ClientError, ClientResult,
-    DownloadClientInfo, DownloadClientItem, DownloadItemStatus,
+    build_base_url, http_error_message, is_localhost, remote_path, transport_message, Client, ClientError,
+    ClientResult, DownloadClientInfo, DownloadClientItem, DownloadItemStatus,
 };
 use crate::decision::SeedConfiguration;
 use crate::validation::ValidationFailure;
@@ -142,10 +142,27 @@ impl<'a> QBittorrent<'a> {
 
     // --- proxy
 
+    fn url(&self, resource: &str) -> String {
+        format!("{}{}", self.base_url().trim_end_matches('/'), resource)
+    }
+
+    /// The original's message over its inner `HttpException`.
+    fn http_error(
+        &self,
+        message: &str,
+        status: reqwest::StatusCode,
+        method: &str,
+        resource: &str,
+    ) -> ClientError {
+        ClientError::Http {
+            message: message.to_string(),
+            cause: http_error_message(status, method, &self.url(resource)),
+        }
+    }
+
     /// `BuildRequest`: the request with the API key or the credentials.
     fn request(&self, method: reqwest::Method, resource: &str) -> reqwest::RequestBuilder {
-        let url = format!("{}{}", self.base_url().trim_end_matches('/'), resource);
-        let mut builder = self.client.context.http.request(method, url);
+        let mut builder = self.client.context.http.request(method, self.url(resource));
         let s = self.settings;
         if self.uses_api_key() {
             builder = builder.header(reqwest::header::AUTHORIZATION, format!("Bearer {}", s.api_key));
@@ -216,9 +233,12 @@ impl<'a> QBittorrent<'a> {
             )));
         }
         if !status.is_success() {
-            return Err(ClientError::Other(format!(
-                "Failed to connect to {NAME}, please check your settings."
-            )));
+            return Err(self.http_error(
+                &format!("Failed to connect to {NAME}, please check your settings."),
+                status,
+                "POST",
+                "/api/v2/auth/login",
+            ));
         }
         let cookies: Vec<String> = response
             .headers()
@@ -302,11 +322,14 @@ impl<'a> QBittorrent<'a> {
         query: &[(&str, String)],
         body: Body,
     ) -> ClientResult<String> {
-        let (status, content) = self.raw(method, resource, query, body).await?;
+        let (status, content) = self.raw(method.clone(), resource, query, body).await?;
         if !status.is_success() {
-            return Err(ClientError::Other(format!(
-                "Failed to connect to {NAME}, check your settings."
-            )));
+            return Err(self.http_error(
+                &format!("Failed to connect to {NAME}, check your settings."),
+                status,
+                method.as_str(),
+                resource,
+            ));
         }
         Ok(content)
     }
@@ -335,15 +358,22 @@ impl<'a> QBittorrent<'a> {
             .await
             // The originals let the socket error through as is.
             .map_err(|e| ClientError::Other(transport_message(&e)))?;
+        let resource = "/api/v2/app/webapiVersion";
         match response.status() {
             reqwest::StatusCode::NOT_FOUND => Ok(false),
             reqwest::StatusCode::FORBIDDEN => Ok(true),
-            reqwest::StatusCode::UNAUTHORIZED => Err(ClientError::Other(format!(
-                "Failed to connect to {NAME}. Check your settings and {NAME} configuration."
-            ))),
-            s if !s.is_success() => Err(ClientError::Other(format!(
-                "Failed to connect to {NAME}, check your settings."
-            ))),
+            s @ reqwest::StatusCode::UNAUTHORIZED => Err(self.http_error(
+                &format!("Failed to connect to {NAME}. Check your settings and {NAME} configuration."),
+                s,
+                "GET",
+                resource,
+            )),
+            s if !s.is_success() => Err(self.http_error(
+                &format!("Failed to connect to {NAME}, check your settings."),
+                s,
+                "GET",
+                resource,
+            )),
             _ => Ok(true),
         }
     }
@@ -522,9 +552,12 @@ impl<'a> QBittorrent<'a> {
         if status.is_success() || status == reqwest::StatusCode::NOT_FOUND {
             return Ok(());
         }
-        Err(ClientError::Other(format!(
-            "Failed to connect to {NAME}, check your settings."
-        )))
+        Err(self.http_error(
+            &format!("Failed to connect to {NAME}, check your settings."),
+            status,
+            "POST",
+            "/api/v2/torrents/setShareLimits",
+        ))
     }
 
     /// `MoveTorrentToTopInQueue`; a 409 (queueing disabled) is ignored.
@@ -540,9 +573,12 @@ impl<'a> QBittorrent<'a> {
         if status.is_success() || status == reqwest::StatusCode::CONFLICT {
             return Ok(());
         }
-        Err(ClientError::Other(format!(
-            "Failed to connect to {NAME}, check your settings."
-        )))
+        Err(self.http_error(
+            &format!("Failed to connect to {NAME}, check your settings."),
+            status,
+            "POST",
+            "/api/v2/torrents/topPrio",
+        ))
     }
 
     pub async fn set_force_start(&self, hash: &str, enabled: bool) -> ClientResult<()> {
@@ -593,17 +629,17 @@ impl<'a> QBittorrent<'a> {
         }
         if let (true, Some(seed)) = (set_share_limits, seed) {
             if let Err(e) = self.set_seeding(&hash, seed).await {
-                tracing::warn!(hash, error = %e, "failed to set the torrent seed criteria");
+                tracing::warn!(hash, error = %e.exception(), "failed to set the torrent seed criteria");
             }
         }
         if move_to_top {
             if let Err(e) = self.move_to_top(&hash).await {
-                tracing::warn!(hash, error = %e, "failed to set the torrent priority");
+                tracing::warn!(hash, error = %e.exception(), "failed to set the torrent priority");
             }
         }
         if force_start {
             if let Err(e) = self.set_force_start(&hash, true).await {
-                tracing::warn!(hash, error = %e, "failed to set ForceStart");
+                tracing::warn!(hash, error = %e.exception(), "failed to set ForceStart");
             }
         }
         Ok(())
@@ -1061,5 +1097,67 @@ mod tests {
         let t: Torrent = serde_json::from_str(r#"{"hash": "ab", "eta": 99999999999999999999}"#).unwrap();
         assert_eq!(t.ratio_limit, -2.0);
         assert_eq!(remaining_time(&t), None);
+    }
+
+    /// qBittorrent answers 409 when nothing it was sent was added (the
+    /// torrent is there already): the message stays the original's, and
+    /// the status reaches the log and the description.
+    #[tokio::test]
+    async fn an_error_status_keeps_its_code_for_the_log() {
+        use axum::routing::{get, post};
+        let app = axum::Router::new()
+            .route("/api/v2/app/webapiVersion", get(|| async { "2.11.4" }))
+            .route(
+                "/api/v2/torrents/add",
+                post(|| async { (axum::http::StatusCode::CONFLICT, "") }),
+            );
+        let listener = tokio::net::TcpListener::bind("127.0.0.1:0").await.unwrap();
+        let addr = listener.local_addr().unwrap();
+        tokio::spawn(async move { axum::serve(listener, app).await.unwrap() });
+
+        let mut settings = QBittorrentSettings::defaults(super::super::RADARR);
+        settings.host = addr.ip().to_string();
+        settings.port = addr.port() as i64;
+        let definition = super::super::DownloadClientDefinition {
+            id: 1,
+            name: "qBittorrent".into(),
+            kind: super::super::ClientKind::QBittorrent,
+            enable: true,
+            priority: 1,
+            remove_completed_downloads: true,
+            remove_failed_downloads: true,
+            tags: vec![],
+            settings: super::super::ClientSettings::QBittorrent(settings.clone()),
+        };
+        let context = super::super::ClientContext::new(
+            crate::http::build(std::time::Duration::from_secs(5)),
+            chrono::Utc::now(),
+        );
+        let client = Client::new(&definition, &context);
+        let e = QBittorrent::new(&client, &settings)
+            .add_from_url(
+                "magnet:?xt=urn:btih:0123456789abcdef0123456789abcdef01234567",
+                None,
+            )
+            .await
+            .unwrap_err();
+        assert_eq!(
+            e.message(),
+            "Failed to connect to qBittorrent, check your settings."
+        );
+        assert_eq!(e.to_string(), e.message());
+        let cause =
+            format!("HTTP request failed: [409:Conflict] [POST] at [http://{addr}/api/v2/torrents/add]");
+        assert_eq!(e.cause(), Some(cause.as_str()));
+        assert_eq!(
+            e.exception(),
+            format!("Failed to connect to qBittorrent, check your settings. ---> {cause}")
+        );
+        let api = e.into_anyhow();
+        assert_eq!(
+            api.to_string(),
+            "Failed to connect to qBittorrent, check your settings."
+        );
+        assert!(format!("{api:#}").ends_with(&cause), "{api:#}");
     }
 }

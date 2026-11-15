@@ -623,7 +623,7 @@ async fn download_client_reach(ctx: &Context<'_>) -> anyhow::Result<HealthCheck>
     for definition in &clients {
         let client = Client::new(definition, &context);
         if let Err(e) = client.items().await {
-            tracing::debug!(client = definition.name, error = %e, "unable to communicate with the download client");
+            tracing::debug!(client = definition.name, error = %e.exception(), "unable to communicate with the download client");
             return Ok(HealthCheck::new(
                 SOURCE,
                 HealthType::Error,
@@ -686,10 +686,11 @@ async fn client_statuses(
                 e @ (ClientError::Unavailable(_)
                 | ClientError::Authentication(_)
                 | ClientError::Other(_)
+                | ClientError::Http { .. }
                 | ClientError::Rejected(_)
                 | ClientError::NotSupported(_)),
             ) => {
-                tracing::debug!(client = definition.name, error = %e, "unable to communicate with the download client");
+                tracing::debug!(client = definition.name, error = %e.exception(), "unable to communicate with the download client");
             }
         }
     }

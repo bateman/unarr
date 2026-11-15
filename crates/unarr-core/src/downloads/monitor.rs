@@ -43,7 +43,7 @@ pub async fn refresh(downloads: &Downloads, now: DateTime<Utc>) -> anyhow::Resul
             }
             Err(e) => {
                 clients.record_failure(definition.id, now).await;
-                tracing::warn!(client = %definition.name, error = %e, "unable to retrieve queue and history items");
+                tracing::warn!(client = %definition.name, error = %e.exception(), "unable to retrieve queue and history items");
             }
         }
     }

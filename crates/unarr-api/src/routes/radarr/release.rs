@@ -155,7 +155,7 @@ pub(crate) fn grab_error(e: GrabError) -> ApiError {
             ApiError::ConflictMessage("Getting release from indexer failed".into())
         }
         GrabError::NoClient(message) => ApiError::Internal(anyhow::anyhow!("{message}")),
-        GrabError::Client(e) => ApiError::Internal(anyhow::anyhow!("{}", e.message())),
+        GrabError::Client(e) => ApiError::Internal(e.into_anyhow()),
         GrabError::Other(e) => ApiError::Internal(e),
     }
 }
