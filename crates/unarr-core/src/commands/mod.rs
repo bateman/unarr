@@ -1541,6 +1541,17 @@ impl CommandQueue {
         let disk_busy = started.iter().any(|b| b.requires_disk_access());
         let long_running = started.iter().any(|b| b.is_long_running());
         let exclusive_running = started.iter().any(|b| b.is_exclusive());
+        // `IsTypeExclusive`: Radarr starts no command of a type one of
+        // which is running (its import list sync); Sonarr has no such flag.
+        let busy_types: Vec<&'static str> = if self.personality == crate::Personality::Radarr {
+            started
+                .iter()
+                .filter(|b| b.type_exclusive())
+                .map(|b| b.name())
+                .collect()
+        } else {
+            Vec::new()
+        };
         let mut awaited = self.awaited.lock().unwrap();
         awaited.retain(|id| {
             items
@@ -1552,6 +1563,7 @@ impl CommandQueue {
             .enumerate()
             .filter(|(_, c)| c.status == CommandStatus::Queued)
             .filter(|(_, c)| !(disk_busy && c.body.requires_disk_access()))
+            .filter(|(_, c)| !busy_types.contains(&c.body.name()))
             .filter(|(_, c)| !(long_running && c.body.is_exclusive()))
             .max_by(|(ia, a), (ib, b)| {
                 // What a running command waits for, then the highest
@@ -1822,6 +1834,72 @@ mod tests {
         assert_eq!(first.priority, CommandPriority::Normal);
         // The others follow in the order they were queued.
         assert_eq!(queue.try_start(now).map(|c| c.id), Some(refreshes[0]));
+    }
+
+    /// Radarr's import list sync is type exclusive: a second one, for
+    /// another list, waits for the first, and anything else may start
+    /// beside it. Sonarr's runs both.
+    #[tokio::test]
+    async fn radarr_runs_one_import_list_sync_at_a_time() {
+        let now = Utc::now();
+        for (personality, side_by_side) in [
+            (crate::Personality::Radarr, false),
+            (crate::Personality::Sonarr, true),
+        ] {
+            let db = Db::open_in_memory_for(personality).unwrap();
+            let queue = CommandQueue::open_for(db, personality).await.unwrap();
+            for id in [1, 2] {
+                queue
+                    .push(
+                        CommandBody::ImportListSync {
+                            definition_id: Some(id),
+                        },
+                        CommandPriority::Normal,
+                        CommandTrigger::Unspecified,
+                        now + Duration::seconds(id),
+                    )
+                    .await
+                    .unwrap();
+            }
+            queue
+                .push(
+                    CommandBody::MessagingCleanup,
+                    CommandPriority::Normal,
+                    CommandTrigger::Scheduled,
+                    now + Duration::seconds(3),
+                )
+                .await
+                .unwrap();
+            let first = queue.try_start(now).unwrap();
+            assert_eq!(
+                first.body,
+                CommandBody::ImportListSync {
+                    definition_id: Some(1)
+                }
+            );
+            let next = queue.try_start(now).map(|c| c.body);
+            if side_by_side {
+                assert_eq!(
+                    next,
+                    Some(CommandBody::ImportListSync {
+                        definition_id: Some(2)
+                    })
+                );
+                continue;
+            }
+            assert_eq!(next, Some(CommandBody::MessagingCleanup), "{personality:?}");
+            assert_eq!(queue.try_start(now), None, "the second sync waits");
+            queue
+                .end(first.id, CommandStatus::Completed, None, None, now)
+                .await
+                .unwrap();
+            assert_eq!(
+                queue.try_start(now).map(|c| c.body),
+                Some(CommandBody::ImportListSync {
+                    definition_id: Some(2)
+                })
+            );
+        }
     }
 
     #[tokio::test]

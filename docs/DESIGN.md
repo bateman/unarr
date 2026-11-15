@@ -1428,8 +1428,9 @@ the same libraries were not measured.
   Radarr, as in the original, and the other way round), and the runtime
   hands Radarr's commands to `movies::commands`. The series-side fields
   of the runtime are built for Radarr and never asked. Radarr's commands
-  carry `isTypeExclusive`, which Sonarr's do not; an imported database
-  continues the original's command ids.
+  carry `isTypeExclusive`, which Sonarr's do not, and the queue honours
+  it as Radarr's does: no import list sync starts while another runs; an
+  imported database continues the original's command ids.
 - **Radarr schedules its own list and runs what the milestone brought.**
   The eleven tasks are the original's. `RssSync`,
   `RefreshMonitoredDownloads`, `MessagingCleanup` and `CheckHealth` run;
