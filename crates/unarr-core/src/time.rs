@@ -15,6 +15,16 @@ pub fn format_utc(t: DateTime<Utc>) -> String {
     t.format("%Y-%m-%dT%H:%M:%SZ").to_string()
 }
 
+/// A bound for a text comparison with the dates the database stores:
+/// `format_utc` writes a year past 9999 as `+10000`, which sorts before
+/// `0000`, so the bound is first brought within the four-digit years. No
+/// stored date lies outside them, so the comparison keeps the same rows.
+pub fn sql_bound(t: DateTime<Utc>) -> String {
+    let lowest = DateTime::<Utc>::from_timestamp(-62_167_219_200, 0).unwrap_or(t); // 0000-01-01T00:00:00Z
+    let highest = DateTime::<Utc>::from_timestamp(253_402_300_799, 0).unwrap_or(t); // 9999-12-31T23:59:59Z
+    format_utc(t.clamp(lowest, highest))
+}
+
 /// Parse a timestamp in any of the spellings met in the wild: ours
 /// (`2002-09-20T04:00:00Z`), the originals' database (`2002-09-20 04:00:00Z`,
 /// `2026-11-06 23:23:16.6186009Z`), or RFC 3339 with an offset. Fractional
@@ -63,5 +73,17 @@ mod tests {
         assert_eq!(format_utc(t), "0001-01-01T00:00:00Z");
         assert!(parse_utc("yesterday").is_none());
         assert_eq!(parse_date("2002-09-20").unwrap().to_string(), "2002-09-20");
+    }
+
+    #[test]
+    fn a_bound_stays_within_the_years_the_database_spells() {
+        use chrono::TimeZone;
+        let far = Utc.with_ymd_and_hms(12000, 1, 1, 0, 0, 0).unwrap();
+        assert_eq!(format_utc(far), "+12000-01-01T00:00:00Z");
+        assert_eq!(sql_bound(far), "9999-12-31T23:59:59Z");
+        let early = Utc.with_ymd_and_hms(-50, 1, 1, 0, 0, 0).unwrap();
+        assert_eq!(sql_bound(early), "0000-01-01T00:00:00Z");
+        let now = Utc.with_ymd_and_hms(2026, 11, 15, 10, 0, 0).unwrap();
+        assert_eq!(sql_bound(now), format_utc(now));
     }
 }

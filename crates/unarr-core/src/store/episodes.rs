@@ -170,14 +170,16 @@ pub fn list_episodes_by_file(conn: &Connection, file_id: i64) -> anyhow::Result<
 }
 
 /// Episodes airing in `[start, end]`. Without `include_unmonitored` only
-/// monitored episodes of monitored series qualify.
+/// monitored episodes of monitored series qualify. The dates are stored in
+/// one spelling, so the text comparison is the time order, once the bounds
+/// are within the years that spelling covers.
 pub fn episodes_between(
     conn: &Connection,
     start: DateTime<Utc>,
     end: DateTime<Utc>,
     include_unmonitored: bool,
 ) -> anyhow::Result<Vec<Episode>> {
-    let (start, end) = (time::format_utc(start), time::format_utc(end));
+    let (start, end) = (time::sql_bound(start), time::sql_bound(end));
     if include_unmonitored {
         query_episodes(
             conn,
@@ -650,6 +652,13 @@ mod tests {
             assert_eq!(get_episode(conn, 7)?, Some(ep));
             assert_eq!(list_files(conn, 1)?, vec![file.clone()]);
             assert_eq!(get_file(conn, 2)?, Some(file));
+            // A range that ends past year 9999 (a huge `futureDays` on the
+            // feed) still holds the episode.
+            let since = chrono::Utc.with_ymd_and_hms(2002, 1, 1, 0, 0, 0).unwrap();
+            let far = chrono::Utc.with_ymd_and_hms(12000, 1, 1, 0, 0, 0).unwrap();
+            let ids = |v: Vec<Episode>| v.into_iter().map(|e| e.id).collect::<Vec<_>>();
+            assert_eq!(ids(episodes_between(conn, since, far, true)?), vec![7]);
+            assert_eq!(ids(episodes_between(conn, since, far, false)?), vec![7]);
             Ok(())
         })
         .unwrap();
