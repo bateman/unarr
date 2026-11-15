@@ -120,11 +120,13 @@ class Side:
     def __init__(self, name: str, commands: list[tuple[str, list[str], Path]], ports: list[int], env: dict):
         self.name, self.commands, self.ports, self.env = name, commands, ports, env
         self.procs: dict[str, subprocess.Popen] = {}
+        self.logs: list = []
 
     def start(self) -> dict[int, float]:
         t0 = time.time()
         for label, argv, data in self.commands:
             out = open(data / f"{label}.stdout.log", "ab")
+            self.logs.append(out)
             self.procs[label] = subprocess.Popen(argv, stdout=out, stderr=subprocess.STDOUT, env=self.env)
         first: dict[int, float] = {}
         while len(first) < len(self.ports):
@@ -147,7 +149,11 @@ class Side:
                 proc.wait(60)
             except subprocess.TimeoutExpired:
                 proc.kill()
+                proc.wait()
         self.procs = {}
+        for f in self.logs:
+            f.close()
+        self.logs = []
 
     def sample(self) -> dict:
         s = {"t": time.time(), "rss": 0, "anon": 0, "cpu": 0.0}
@@ -272,6 +278,27 @@ def pinned(script: str, var: str) -> str:
     return m.group(1) if m else "?"
 
 
+def stale(binary: Path) -> str:
+    """A note when the binary predates the last commit of the checkout that
+    touched the code, or one of its uncommitted changes to it: then the
+    commit named is not what runs. A binary built from another branch after
+    those goes unnoticed; make compare-originals builds first."""
+    code = ["crates", "Cargo.toml", "Cargo.lock"]
+    last = subprocess.run(["git", "-C", str(REPO), "log", "-1", "--format=%ct", "--", *code],
+                          capture_output=True, text=True).stdout.strip()
+    newest = int(last) if last.isdigit() else 0
+    changed = subprocess.run(["git", "-C", str(REPO), "diff", "--name-only", "HEAD", "--", *code],
+                             capture_output=True, text=True).stdout.split()
+    for name in changed:
+        f = REPO / name
+        if f.exists():
+            newest = max(newest, int(f.stat().st_mtime))
+    if binary.stat().st_mtime < newest:
+        log(f"warning: {binary} is older than the checkout; make build first")
+        return ", binary older than the checkout"
+    return ""
+
+
 def at(rows: list[dict], seconds: float) -> dict:
     t0 = rows[0]["t"]
     return min(rows, key=lambda r: abs(r["t"] - t0 - seconds))
@@ -284,7 +311,8 @@ def summary(r: dict) -> dict:
     # Counted from minute 5, once the start-up work is done: a shorter
     # window has nothing to count.
     idle_cpu = (end["cpu"] - five["cpu"]) / (end["t"] - five["t"]) * 3600 if end["t"] - five["t"] >= 60 else None
-    tail_cpu = (tail[-1]["cpu"] - tail[0]["cpu"]) / max(tail[-1]["t"] - tail[0]["t"], 1) * 3600
+    span = tail[-1]["t"] - tail[0]["t"]
+    tail_cpu = (tail[-1]["cpu"] - tail[0]["cpu"]) / span * 3600 if span >= 60 else None
     return {
         "first": max(r["first"].values()),
         "idle_anon": end["anon"] / MIB,
@@ -336,7 +364,10 @@ def report(res: dict, meta: dict) -> str:
 
     def less(key: str) -> str:
         a, b = mid(o_runs, key), mid(u_runs, key)
-        return f"{(a - b) / a * 100:.0f} %" if a and b is not None else "n/a"
+        if not a or b is None:
+            return "n/a"
+        d = (a - b) / a * 100
+        return f"{d:.0f} %" if d >= 0 else f"{-d:.0f} % more"
 
     def sooner(key: str) -> str:
         a, b = mid(o_runs, key), mid(u_runs, key)
@@ -351,7 +382,7 @@ def report(res: dict, meta: dict) -> str:
         ("The reads: time", "reads_s", ".2f", "s", less),
         ("Peak anonymous memory during the reads", "peak_anon", ".0f", "MiB", less),
         ("Anonymous memory at the end of the tail", "tail_anon", ".0f", "MiB", less),
-        ("Idle CPU in the tail", "tail_cpu_h", ".1f", "s/h", less),
+        ("Idle CPU in the tail, from its first minute", "tail_cpu_h", ".1f", "s/h", less),
     ]
     n = len(o_runs)
     reported = runs(res, "originals")[0].get("versions", {})
@@ -421,7 +452,8 @@ def main():
         # The checkout's commit: true of the binary when make built it.
         "unarr": subprocess.run(["git", "-C", str(REPO), "describe", "--always", "--dirty"],
                                 capture_output=True, text=True).stdout.strip()
-        + ("" if a.unarrd == REPO / "target/release/unarrd" else f" ({a.unarrd})"),
+        + ("" if a.unarrd == REPO / "target/release/unarrd" else f" ({a.unarrd})")
+        + stale(unarrd),
         "sonarr": pinned("sonarr-fixture.sh", "SONARR_VERSION"),
         "radarr": pinned("radarr-fixture.sh", "RADARR_VERSION"),
         "first": a.first, "idle": a.idle, "tail": a.tail, "cap": not a.no_cap,

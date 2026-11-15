@@ -18,8 +18,10 @@ run the comparison again and update this file in the same branch.
 
 - **The sides.** The originals are the official Sonarr and Radarr from
   their release tarballs, two processes. Unarr is `target/release/unarrd`
-  with both personalities in one process. The two sides run one at a time,
-  each on a fresh copy of the library. Neither reaches the network.
+  (or `--unarrd`) with both personalities in one process. The two sides
+  run one at a time, each on a fresh copy of the library. Neither reaches
+  the network. The report names the checkout's commit, and says so when
+  the binary is older than the last change to the code.
 - **The two starts.** Each side starts once and runs five minutes, not
   measured: migrations, Unarr's import, the overdue scheduled tasks. Then
   it starts again and is measured:
@@ -40,7 +42,8 @@ run the comparison again and update this file in the same branch.
   a process has waited for: Unarr's `ffprobe` runs count. Their memory
   does not: it is sampled on the side's own processes only. Idle CPU is
   counted from the fifth minute of the window, once the start-up work is
-  done; with `--idle` under six minutes the report gives n/a.
+  done; with `--idle` under six minutes, or a tail under one, the report
+  gives n/a.
 - **Heap limit.** The originals run with `DOTNET_GCHeapHardLimit` at
   768 MiB: that is what .NET takes from a 1 GiB container such as the
   homelab's.
@@ -53,7 +56,7 @@ run the comparison again and update this file in the same branch.
   The order alternates between runs, originals first in odd runs and Unarr
   first in even ones, so a drift of the machine favours neither side. A
   cell then reads median (lowest–highest), and *Less* compares the
-  medians. For latency, the cell is the median of the runs' p50s, with
+  medians; where Unarr takes more, it reads "N % more". For latency, the cell is the median of the runs' p50s, with
   the highest single call after the slash. One run is enough for a
   routine update; numbers meant for a paper or a release note want three
   or more.
