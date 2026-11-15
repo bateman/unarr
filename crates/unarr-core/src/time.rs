@@ -25,6 +25,18 @@ pub fn sql_bound(t: DateTime<Utc>) -> String {
     format_utc(t.clamp(lowest, highest))
 }
 
+/// A timestamp with its microseconds, for the times whose fraction of a
+/// second changes behaviour: a scheduled task's last run, which the
+/// originals keep to the tick (see [`crate::commands::scheduler`]).
+pub fn format_utc_precise(t: DateTime<Utc>) -> String {
+    t.format("%Y-%m-%dT%H:%M:%S%.6fZ").to_string()
+}
+
+/// [`parse_utc`] keeping the fraction of a second.
+pub fn parse_utc_precise(s: &str) -> Option<DateTime<Utc>> {
+    parse_utc_exact(s)
+}
+
 /// Parse a timestamp in any of the spellings met in the wild: ours
 /// (`2002-09-20T04:00:00Z`), the originals' database (`2002-09-20 04:00:00Z`,
 /// `2026-11-06 23:23:16.6186009Z`), or RFC 3339 with an offset. Fractional
@@ -72,6 +84,13 @@ mod tests {
         let t = parse_utc("0001-01-01 00:00:00Z").unwrap();
         assert_eq!(format_utc(t), "0001-01-01T00:00:00Z");
         assert!(parse_utc("yesterday").is_none());
+        let t = parse_utc_precise("2026-11-06 23:23:16.6186009Z").unwrap();
+        assert_eq!(format_utc_precise(t), "2026-11-06T23:23:16.618600Z");
+        // Kept to the microsecond: what is written reads back the same.
+        let written = format_utc_precise(t);
+        assert_eq!(parse_utc_precise(&written).map(format_utc_precise), Some(written));
+        let t = parse_utc_precise("2026-11-06T23:23:16Z").unwrap();
+        assert_eq!(format_utc_precise(t), "2026-11-06T23:23:16.000000Z");
         assert_eq!(parse_date("2002-09-20").unwrap().to_string(), "2002-09-20");
     }
 

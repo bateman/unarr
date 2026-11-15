@@ -51,6 +51,21 @@ pub(crate) fn parse_ts(s: Option<String>) -> anyhow::Result<Option<DateTime<Utc>
     }
 }
 
+/// [`ts`] with the microseconds: a scheduled task's last run.
+pub(crate) fn ts_precise(t: Option<DateTime<Utc>>) -> Option<String> {
+    t.map(time::format_utc_precise)
+}
+
+/// [`parse_ts`] keeping the fraction of a second.
+pub(crate) fn parse_ts_precise(s: Option<String>) -> anyhow::Result<Option<DateTime<Utc>>> {
+    match s {
+        None => Ok(None),
+        Some(s) => time::parse_utc_precise(&s)
+            .map(Some)
+            .ok_or_else(|| anyhow::anyhow!("bad timestamp {s:?}")),
+    }
+}
+
 pub(crate) fn parse_ts_required(s: String) -> anyhow::Result<DateTime<Utc>> {
     time::parse_utc(&s).ok_or_else(|| anyhow::anyhow!("bad timestamp {s:?}"))
 }

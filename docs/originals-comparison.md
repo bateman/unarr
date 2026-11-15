@@ -71,9 +71,15 @@ run the comparison again and update this file in the same branch.
   a process has waited for: Unarr's `ffprobe` runs count. Their memory
   does not: it is sampled on the side's own processes only. Idle CPU is
   counted from the fifth minute of the window, once the start-up work is
-  done, to the end of the window: the tasks both sides run every minute
-  (the monitored downloads) and every five (the import list sync, the
-  messaging clean-up). The RSS sync, every 60 minutes for Sonarr and
+  done, to the end of the window: the tasks both sides run on a one-minute
+  interval (the monitored downloads, every 90 s in practice: a run ends
+  just after the scheduler tick that pushed it, so it is not yet due on
+  the tick a minute later) and on a five-minute one (the import list
+  sync, the messaging clean-up). The fixtures' download clients point at
+  hosts that do not exist: once the fifteen minutes of grace after a start
+  are over, which is when the idle window ends, both sides back them off
+  (five minutes, then fifteen) and stop asking them, so the tail idles on
+  less work than the window. The RSS sync, every 60 minutes for Sonarr and
   100 for Radarr in these libraries, runs during the first start and falls
   in neither side's window; with no network it would fail at once anyway.
   Idle CPU in the tail is counted from its first minute, past the

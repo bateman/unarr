@@ -9,7 +9,8 @@ use super::{CommandBody, CommandPriority};
 use crate::model::ScheduledTask;
 use crate::store;
 
-/// How often the scheduler looks for due tasks.
+/// How long the scheduler waits, after a tick ends, before it looks for
+/// due tasks again.
 pub const TICK: std::time::Duration = std::time::Duration::from_secs(30);
 
 /// `(command, interval in minutes, priority)` of every default task; the
@@ -335,6 +336,38 @@ mod tests {
                 priority_of(CommandBody::RefreshMonitoredDownloads.type_name()),
                 CommandPriority::High
             );
+            Ok(())
+        })
+        .unwrap();
+    }
+
+    #[test]
+    fn a_task_ended_after_its_tick_waits_for_the_next_one() {
+        // The originals keep a task's last run to the tick: a one-minute
+        // task that ended a few milliseconds after the tick that pushed it
+        // is not due on the tick a minute later, only on the one after.
+        let db = Db::open_in_memory().unwrap();
+        let tick = Utc.with_ymd_and_hms(2026, 11, 15, 7, 24, 34).unwrap() + Duration::milliseconds(580);
+        db.call_blocking(move |conn| {
+            ensure_defaults(conn, tick - Duration::hours(1))?;
+            let ended = tick + Duration::milliseconds(40);
+            assert!(record_execution(
+                conn,
+                &CommandBody::RefreshMonitoredDownloads,
+                ended,
+                tick + Duration::milliseconds(2)
+            )?);
+            let monitor = |due: Vec<ScheduledTask>| {
+                due.iter()
+                    .any(|t| t.type_name == CommandBody::RefreshMonitoredDownloads.type_name())
+            };
+            let stored = store::providers::list_scheduled_tasks(conn)?
+                .into_iter()
+                .find(|t| t.type_name == CommandBody::RefreshMonitoredDownloads.type_name())
+                .unwrap();
+            assert_eq!(stored.last_execution, Some(ended), "kept to the microsecond");
+            assert!(!monitor(pending_tasks(conn, tick + Duration::seconds(60))?));
+            assert!(monitor(pending_tasks(conn, tick + Duration::seconds(90))?));
             Ok(())
         })
         .unwrap();

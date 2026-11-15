@@ -696,13 +696,15 @@ impl Runtime {
         }
     }
 
+    /// `Scheduler`'s timer: each tick is armed a full period after the
+    /// previous one ended, not on a fixed beat, so the ticks drift by the
+    /// time each one takes, as the originals' do. With a task's last run
+    /// kept to the microsecond, a one-minute task whose run ended just
+    /// after its tick is not yet due a minute later and runs 90 s apart,
+    /// as the originals' download monitor does.
     async fn scheduler_loop(self: Arc<Self>) {
-        let mut interval = tokio::time::interval(scheduler::TICK);
-        interval.set_missed_tick_behavior(tokio::time::MissedTickBehavior::Delay);
-        // The first tick fires at once; the originals wait a full period.
-        interval.tick().await;
         loop {
-            interval.tick().await;
+            tokio::time::sleep(scheduler::TICK).await;
             if let Err(e) = self.tick_scheduler().await {
                 tracing::error!(error = %e, "scheduler tick failed");
             }

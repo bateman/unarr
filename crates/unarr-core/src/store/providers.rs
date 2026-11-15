@@ -4,7 +4,7 @@
 use chrono::{DateTime, Utc};
 use rusqlite::{named_params, params, Connection, Row};
 
-use super::{from_json, parse_enum, parse_ts, to_json, ts};
+use super::{from_json, parse_enum, parse_ts_precise, to_json, ts_precise};
 use crate::model::{
     AutoTagging, CustomFilter, DelayProfile, ImportListExclusion, Protocol, Provider, ProviderKind,
     ReleaseProfile, RemotePathMapping, ScheduledTask, User,
@@ -342,8 +342,8 @@ pub fn insert_scheduled_task(conn: &Connection, t: &ScheduledTask) -> anyhow::Re
             id,
             t.type_name,
             t.interval_minutes,
-            ts(t.last_execution),
-            ts(t.last_start_time)
+            ts_precise(t.last_execution),
+            ts_precise(t.last_start_time)
         ],
     )?;
     Ok(())
@@ -371,7 +371,11 @@ pub fn set_scheduled_task_execution(
 ) -> anyhow::Result<()> {
     conn.execute(
         "UPDATE scheduled_tasks SET last_execution = ?2, last_start_time = ?3 WHERE id = ?1",
-        params![id, ts(Some(last_execution)), ts(Some(last_start_time))],
+        params![
+            id,
+            ts_precise(Some(last_execution)),
+            ts_precise(Some(last_start_time))
+        ],
     )?;
     Ok(())
 }
@@ -387,8 +391,8 @@ pub fn list_scheduled_tasks(conn: &Connection) -> anyhow::Result<Vec<ScheduledTa
             id: r.get(0)?,
             type_name: r.get(1)?,
             interval_minutes: r.get(2)?,
-            last_execution: parse_ts(r.get(3)?)?,
-            last_start_time: parse_ts(r.get(4)?)?,
+            last_execution: parse_ts_precise(r.get(3)?)?,
+            last_start_time: parse_ts_precise(r.get(4)?)?,
         });
     }
     Ok(out)
