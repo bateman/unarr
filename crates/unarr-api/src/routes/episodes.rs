@@ -355,7 +355,6 @@ pub async fn calendar(State(state): State<AppState>, uri: Uri) -> ApiResult<Json
     let out = state
         .db()
         .call(move |conn| {
-            let catalog = Catalog::load(conn)?;
             let tag_ids: Vec<i64> = if tags.is_empty() {
                 Vec::new()
             } else {
@@ -368,7 +367,10 @@ pub async fn calendar(State(state): State<AppState>, uri: Uri) -> ApiResult<Json
                     })
                     .collect()
             };
-            let episodes: Vec<Episode> = store::episodes::episodes_between(conn, start, end, unmonitored)?
+            let in_range = store::episodes::episodes_between(conn, start, end, unmonitored)?;
+            // Only the series the range shows, not the whole library.
+            let catalog = Catalog::load_for(conn, &series_ids_of(&in_range))?;
+            let episodes: Vec<Episode> = in_range
                 .into_iter()
                 .filter(|e| match catalog.series.get(&e.series_id) {
                     None => false,
@@ -420,8 +422,9 @@ pub async fn missing(
     let out = state
         .db()
         .call(move |conn| {
-            let catalog = Catalog::load(conn)?;
             let (episodes, total) = store::episodes::missing_episodes(conn, &paging, monitored, now)?;
+            // Only the page's series, not the whole library.
+            let catalog = Catalog::load_for(conn, &series_ids_of(&episodes))?;
             let records = render(&catalog, &episodes, &HashMap::new(), include);
             Ok(PagingResource::new(&paging, total, records))
         })
@@ -440,9 +443,8 @@ pub async fn cutoff(
     let out = state
         .db()
         .call(move |conn| {
-            let catalog = Catalog::load(conn)?;
-            let below: HashMap<i64, Vec<i64>> = catalog
-                .profiles
+            let profiles = store::catalog::list_quality_profiles(conn)?;
+            let below: HashMap<i64, Vec<i64>> = profiles
                 .iter()
                 .map(|pr| (pr.id, profile::qualities_below_cutoff(pr)))
                 .collect();
@@ -477,8 +479,13 @@ pub async fn cutoff(
                 by_key.then(a.episode.id.cmp(&b.episode.id))
             });
             let total = candidates.len() as i64;
-            let page: Vec<Episode> =
-                paging.slice(&candidates.iter().map(|f| f.episode.clone()).collect::<Vec<_>>());
+            let page: Vec<Episode> = paging
+                .slice(&candidates.iter().collect::<Vec<_>>())
+                .into_iter()
+                .map(|f| f.episode.clone())
+                .collect();
+            // Only the page's series, not the whole library.
+            let catalog = Catalog::load_for(conn, &series_ids_of(&page))?;
             let files = files_for(conn, &page, include)?;
             let records = render(&catalog, &page, &files, include);
             Ok(PagingResource::new(&paging, total, records))
