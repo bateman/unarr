@@ -231,10 +231,67 @@ is about 140 MiB in some runs and about 195 in others (186, 140, 140 and
 a thread that allocates under contention an arena of its own, so a large
 answer (Radarr's `/movie`, 2,123 movies) built on a thread whose arena
 has not served one since the last trim makes that arena grow too; the
-scheduler's trim, every 30 s, gives the pages back. One process of the
-`efd0320` binary went from 140 MiB in one pass to 200 in the next; with
-`MALLOC_ARENA_MAX=1` it stayed at 125-126 MiB in every pass. The idle
-and tail rows are not affected: a trim has run by then.
+scheduler's trim, every 30 s, gives the pages back. The idle and tail
+rows are not affected: a trim has run by then.
+
+Capping the arenas would fix the swing, but it costs far more than it
+saves, so `unarrd` leaves glibc's default (8 per core). Measured on
+2026-11-16, in another 4-core x86-64 container than the tables above,
+with the `749a330` binary on the scaled library: three fresh processes
+per setting; per process three cycles of 5 warm-up passes and a measured
+pass of the reads (memory sampled every 0.2 s), then 4 and 8 parallel
+clients for 60 s each over the ten routes of the reads, as the web
+interface sends several requests at once.
+
+| `MALLOC_ARENA_MAX` | unset | 4 | 2 | 1 |
+|---|--:|--:|--:|--:|
+| Peak during a pass, min / median / max | 137 / 193 / 200 MiB | 133 / 143 / 192 MiB | 131 / 140 / 190 MiB | 124 / 127 / 129 MiB |
+| 4 clients: requests per second | 57.4 | 47.2 (−18 %) | 30.5 (−47 %) | 13.7 (−76 %) |
+| 4 clients: p50 / p95, all routes | 36 / 301 ms | 43 / 358 ms | 48 / 644 ms | 71 / 1,790 ms |
+| 4 clients: peak anonymous memory | 357-418 MiB | 349-373 MiB | 295-336 MiB | 230-251 MiB |
+| 8 clients: requests per second | 61.2 | 38.2 (−38 %) | 27.7 (−55 %) | 14.0 (−77 %) |
+| 8 clients: p50 / p95, all routes | 76 / 440 ms | 94 / 818 ms | 125 / 1,138 ms | 241 / 2,713 ms |
+| 8 clients: peak anonymous memory | 422-532 MiB | 408-459 MiB | 335-426 MiB | 268-288 MiB |
+| Idle after the load, anonymous / RSS | 61 / 80 MiB | 58 / 76 MiB | 59 / 78 MiB | 68 / 87 MiB |
+
+One request at a time, the latency is the same in every setting (Radarr
+`/movie` 215-224 ms at p50). Under concurrent requests the threads queue
+on the arena locks: even 4 arenas cost a fifth to two fifths of the
+throughput, and only one arena makes the sequential peak stable, at a
+quarter of the throughput. Two and four arenas still reach 190 MiB in
+some passes.
+
+Four or eight clients that never pause are more than Unarr meets: it has
+one user, whose browser sends a burst of requests when a page opens and
+nothing until the next click. The same binary, setup and container,
+loaded that way: bursts of 4 to 6 parallel requests, the app's main list
+(`/series` or `/movie`) and some of queue, history, wanted, calendar and
+`system/status`, then a pause of 2 to 5 s, for 5 minutes; three fresh
+processes per setting, the same seeded bursts for each, 246-247 bursts
+in all. A page load is the time to the last answer of its burst.
+
+| `MALLOC_ARENA_MAX` | unset | 4 | 2 | 1 |
+|---|--:|--:|--:|--:|
+| Sonarr page load, p50 / p95 | 76 / 100 ms | 78 / 108 ms | 81 / 106 ms | 88 / 131 ms |
+| Radarr page load, p50 / p95 | 252 / 311 ms | 260 / 315 ms | 280 / 347 ms | 294 / 346 ms |
+| Peak anonymous memory, per process | 205-207 MiB | 217-265 MiB | 186-192 MiB | 131 MiB |
+| Median anonymous memory, per process | 140-144 MiB | 143-158 MiB | 136-141 MiB | 127-130 MiB |
+
+For one user the cost is smaller, and so is the saving: one arena makes a
+page load 16-17 % slower at p50 (40 ms on Radarr's movie index) to keep
+the peak 75 MiB lower for the seconds before the next trim; four arenas
+cost 3 % and save nothing. On the NAS's 16 GB neither is worth a cap.
+The largest peaks come from concurrent requests, and what would lower
+them is answers that allocate less (`/movie` and `/series` built whole
+before they are sent), not fewer arenas. Not measured: the ARM64 NAS.
+
+All of this is about glibc, the allocator of a `cargo build` on Linux
+and of these tables. The Docker image is a static musl build, whose
+allocator has no per-thread arenas and no `malloc_trim`
+(`release_memory` does nothing there), so neither the swing nor a cap
+applies to it; its memory under the same load has not been measured
+here. Who runs a glibc build and prefers the lower peak can set
+`MALLOC_ARENA_MAX=1` in the environment, without a change to the code.
 
 ### In production, before the switch
 
