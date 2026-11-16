@@ -84,13 +84,27 @@ pub fn broadcast_queue(state: &AppState) {
 
 /// What the movies embedded in the items of one answer are built from.
 struct Embedding {
-    ctx: MovieContext,
+    /// None when no item has a movie: an empty queue, or one of unknown
+    /// items only, reads no context.
+    ctx: Option<MovieContext>,
     alternative_titles: Vec<AlternativeTitle>,
 }
 
 impl Embedding {
     async fn load(state: &AppState, items: &[&MovieQueueItem], include_movie: bool) -> ApiResult<Embedding> {
-        let ctx = MovieContext::load_for(state, items.iter().filter_map(|q| q.movie.as_ref())).await?;
+        if items.iter().all(|q| q.movie.is_none()) {
+            return Ok(Embedding {
+                ctx: None,
+                alternative_titles: Vec::new(),
+            });
+        }
+        // The translations only for the movies the answer embeds; without
+        // `includeMovie` the profiles give the score and nothing else is read.
+        let embedded = items
+            .iter()
+            .filter(|_| include_movie)
+            .filter_map(|q| q.movie.as_ref());
+        let ctx = Some(MovieContext::load_for(state, embedded).await?);
         // Only the embedded movie shows them.
         let mut metadata_ids: Vec<i64> = items
             .iter()
@@ -124,12 +138,13 @@ impl Embedding {
 
 /// `QueueResource`, with nulls left out as the original's serializer does.
 fn queue_resource(q: &MovieQueueItem, embedding: &Embedding, include_movie: bool) -> Value {
-    let ctx = &embedding.ctx;
+    let ctx = embedding.ctx.as_ref();
     let mut m = Map::new();
     m.insert("id".into(), json!(q.id));
     if let Some(movie) = &q.movie {
         m.insert("movieId".into(), json!(movie.id));
-        if include_movie {
+        // The context is there whenever an item has a movie.
+        if let (true, Some(ctx)) = (include_movie, ctx) {
             // The movie as the queue holds it, without its file or local
             // covers; with its alternative titles when it was read by id.
             let titles: Vec<AlternativeTitle> = embedding
@@ -161,7 +176,8 @@ fn queue_resource(q: &MovieQueueItem, embedding: &Embedding, include_movie: bool
     let score = q
         .movie
         .as_ref()
-        .and_then(|movie| ctx.profile(movie.quality_profile_id))
+        .zip(ctx)
+        .and_then(|(movie, ctx)| ctx.profile(movie.quality_profile_id))
         .map(|p| unarr_core::decision::upgradable::format_score(p, &q.custom_formats))
         .unwrap_or(0);
     m.insert("customFormatScore".into(), json!(score));
