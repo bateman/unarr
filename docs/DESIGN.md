@@ -31,8 +31,9 @@ Non-goals:
   packs, no file shared between libraries); accepting them is the price of
   compatibility. makearr/Solarr took the opposite road, deliberately.
 - Running as a multi-tenant service.
-- Replacing Bazarr. It stays, and talks to Unarr. (Prowlarr was a non-goal
-  too until 16 November 2026; it is now phase 5, section 8.)
+- Replacing Bazarr. It stays, and talks to Unarr: the maintainer's
+  decision, not to be proposed again. (Prowlarr was a non-goal too until
+  16 November 2026; it is now phase 5, section 8.)
 
 ## 3. Key observations
 
@@ -317,6 +318,13 @@ case.
    it syncs to, its own search, history and statistics. No work order yet.
 6. **Lidarr** last: MusicBrainz, per-track matching, Chromaprint fingerprints.
    Expected at phase 2's size or above; the most divergent personality.
+   The maintainer runs Lidarr, so the phase has what the others had: his
+   installation, anonymised, as the fixture, and a run on his NAS to close.
+
+Not phases, and not decided: doing inside Unarr what Recyclarr (the sync
+of guide profiles and custom formats) and Cleanuparr (cleaning the queue)
+do beside it today. To be weighed after the personalities, when the
+maintainer asks.
 
 ## 9. Non-functional targets
 
