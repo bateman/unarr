@@ -106,7 +106,12 @@ pub fn timespan(d: Duration) -> String {
 }
 
 /// `QueueResource`, with nulls left out as the originals' serializer does.
-fn queue_resource(q: &QueueItem, catalog: &Catalog, include_series: bool, include_episode: bool) -> Value {
+fn queue_resource(
+    q: &QueueItem,
+    catalog: Option<&Catalog>,
+    include_series: bool,
+    include_episode: bool,
+) -> Value {
     let mut m = Map::new();
     m.insert("id".into(), json!(q.id));
     if let Some(s) = &q.series {
@@ -125,7 +130,8 @@ fn queue_resource(q: &QueueItem, catalog: &Catalog, include_series: bool, includ
         }
     }
     if include_episode {
-        if let Some(e) = &q.episode {
+        // The catalog is there whenever an item of the answer has an episode.
+        if let (Some(e), Some(catalog)) = (&q.episode, catalog) {
             m.insert(
                 "episode".into(),
                 serde_json::to_value(episode_resource(catalog, e, None, Include::default()))
@@ -219,13 +225,27 @@ fn status_resource(queue: &[QueueItem]) -> Value {
     })
 }
 
-/// The reference data for the queue's items: only their series.
-async fn catalog(state: &AppState, queue: &[QueueItem]) -> ApiResult<Catalog> {
-    let ids: Vec<i64> = queue
+/// The reference data of the episodes one answer embeds: their series, the
+/// quality profiles and the custom formats. Only `episode_resource` reads
+/// it, so it is None, and nothing is read, when the answer embeds no
+/// episode: without `includeEpisode`, or with no item that has one, such as
+/// an empty queue.
+async fn catalog(
+    state: &AppState,
+    items: &[&QueueItem],
+    include_episode: bool,
+) -> ApiResult<Option<Catalog>> {
+    if !include_episode || items.iter().all(|q| q.episode.is_none()) {
+        return Ok(None);
+    }
+    let ids: Vec<i64> = items
         .iter()
+        .filter(|q| q.episode.is_some())
         .filter_map(|q| q.series.as_ref().map(|s| s.id))
         .collect();
-    Ok(state.db().call(move |conn| Catalog::load_for(conn, &ids)).await?)
+    Ok(Some(
+        state.db().call(move |conn| Catalog::load_for(conn, &ids)).await?,
+    ))
 }
 
 /// `QueueController.GetQueue`: filtered, sorted, paged.
@@ -286,10 +306,10 @@ pub async fn list(State(state): State<AppState>, uri: Uri) -> ApiResult<Json<Pag
         paging.page = (total / paging.page_size).max(1);
         records = paging.slice(&full);
     }
-    let catalog = catalog(&state, &records).await?;
+    let catalog = catalog(&state, &records.iter().collect::<Vec<_>>(), include_episode).await?;
     let out: Vec<Value> = records
         .iter()
-        .map(|q| queue_resource(q, &catalog, include_series, include_episode))
+        .map(|q| queue_resource(q, catalog.as_ref(), include_series, include_episode))
         .collect();
     Ok(Json(PagingResource::new(&paging, total, out)))
 }
@@ -418,7 +438,6 @@ pub async fn details(State(state): State<AppState>, uri: Uri) -> ApiResult<Json<
     let include_series = p.bool("includeSeries", false);
     let include_episode = p.bool("includeEpisode", false);
     let queue = fresh_queue(&state).await?;
-    let catalog = catalog(&state, &queue).await?;
     let selected: Vec<&QueueItem> = match (series_id, episode_ids.is_empty()) {
         (Some(id), _) => queue
             .iter()
@@ -430,10 +449,12 @@ pub async fn details(State(state): State<AppState>, uri: Uri) -> ApiResult<Json<
             .collect(),
         _ => queue.iter().collect(),
     };
+    // The catalog of the selected items only, not of the whole queue.
+    let catalog = catalog(&state, &selected, include_episode).await?;
     Ok(Json(
         selected
             .into_iter()
-            .map(|q| queue_resource(q, &catalog, include_series, include_episode))
+            .map(|q| queue_resource(q, catalog.as_ref(), include_series, include_episode))
             .collect(),
     ))
 }
