@@ -31,7 +31,8 @@ Non-goals:
   packs, no file shared between libraries); accepting them is the price of
   compatibility. makearr/Solarr took the opposite road, deliberately.
 - Running as a multi-tenant service.
-- Replacing Prowlarr or Bazarr. They stay, and talk to Unarr.
+- Replacing Bazarr. It stays, and talks to Unarr. (Prowlarr was a non-goal
+  too until 16 November 2026; it is now phase 5, section 8.)
 
 ## 3. Key observations
 
@@ -309,7 +310,12 @@ case.
    idle figure back under the target and leaves the working one above it,
    a miss recorded and deferred (section 9). Section 17 records the
    decisions.
-5. **Lidarr** last: MusicBrainz, per-track matching, Chromaprint fingerprints.
+5. **Prowlarr**, by the maintainer's decision of 16 November 2026, as a
+   fourth personality (port 9696, `/api/v1`, `prowlarr.db`): the indexer
+   manager the other personalities are fed by. New against the shared core:
+   the indexer definitions and the engine that runs them, the applications
+   it syncs to, its own search, history and statistics. No work order yet.
+6. **Lidarr** last: MusicBrainz, per-track matching, Chromaprint fingerprints.
    Expected at phase 2's size or above; the most divergent personality.
 
 ## 9. Non-functional targets
