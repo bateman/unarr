@@ -4,7 +4,7 @@ NAME  ?= unarr
 IMAGE ?= ghcr.io/bateman/unarr
 TAG   ?= dev
 
-.PHONY: help build run run-both test fmt lint check clean docker check-name golden golden-radarr sonarr radarr ui ui-sonarr ui-radarr ui-present bazarr bazarr-radarr prowlarr prowlarr-radarr recyclarr recyclarr-radarr http-audit anonymize scale-fixture compare-originals
+.PHONY: help build run run-both test panic-test fmt lint check clean docker check-name golden golden-radarr sonarr radarr ui ui-sonarr ui-radarr ui-present bazarr bazarr-radarr prowlarr prowlarr-radarr recyclarr recyclarr-radarr http-audit anonymize scale-fixture compare-originals
 UNARR_URL ?= http://127.0.0.1:8989
 RADARR_URL ?= http://127.0.0.1:7878
 UNARR_API_KEY ?= 0123456789abcdef0123456789abcdef
@@ -31,6 +31,9 @@ run-both: ## Run unarrd from source on both fixtures, Sonarr on 8989 and Radarr 
 
 test: ui-present ## Run all tests (needs the web UI: make ui)
 	cargo test --workspace
+
+panic-test: ui-present ## What a panic costs, on a release build with the test-only panic switch (in target/panic-switch: target/release/unarrd never has the switch)
+	cargo test --release --target-dir target/panic-switch -p unarrd --features panic-switch --test panic
 
 ui-present:
 	@for app in sonarr radarr; do test -f crates/unarr-api/ui/$$app/index.html || { echo "the $$app web UI is not embedded yet: run 'make ui' first (the login page tests need it)"; exit 1; }; done

@@ -789,7 +789,10 @@ impl Runtime {
         let name = model.name();
         tracing::trace!(name, id, "command started");
         #[cfg(any(test, feature = "panic-switch"))]
-        crate::panics::switch::fire(&format!("record:{name}"));
+        crate::panics::switch::fire(&format!(
+            "record:{}:{name}",
+            self.personality.app_name().to_lowercase()
+        ));
         self.arm_health_notifications().await;
         if let Err(e) = self.queue.record_started(&model).await {
             tracing::warn!(error = %e, "failed to record the command's start");
@@ -886,7 +889,11 @@ impl Runtime {
     async fn run(&self, model: &CommandModel) -> anyhow::Result<()> {
         let id = model.id;
         #[cfg(any(test, feature = "panic-switch"))]
-        crate::panics::switch::fire(&format!("command:{}", model.name()));
+        crate::panics::switch::fire(&format!(
+            "command:{}:{}",
+            self.personality.app_name().to_lowercase(),
+            model.name()
+        ));
         let trigger = Trigger {
             user_invoked: model.trigger == CommandTrigger::Manual,
             interactive: false,

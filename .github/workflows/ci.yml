@@ -37,6 +37,9 @@ jobs:
       # the runner has left after the build: drop toolchains nothing here uses.
       - run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL && df -h /
       - run: make check
+      # A panic costs one request or one command, on the binary as it is
+      # released: a release build of its own, with the test-only switch.
+      - run: make panic-test
 
   # One native build per architecture: no QEMU, so each takes minutes, not an hour.
   image:

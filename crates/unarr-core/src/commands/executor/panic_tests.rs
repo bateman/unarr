@@ -76,14 +76,14 @@ async fn a_command_that_panics_fails_and_the_next_one_runs() {
     // In the command's body, once for each worker and once more: none of
     // them is lost.
     for _ in 0..super::WORKERS + 1 {
-        switch::arm("command:MessagingCleanup");
+        switch::arm("command:sonarr:MessagingCleanup");
         let failed = run(&runtime, CommandBody::MessagingCleanup).await;
         assert_eq!(failed.status, CommandStatus::Failed);
         assert_eq!(failed.message.as_deref(), Some("Failed"));
         let exception = failed.exception.clone().unwrap();
         assert!(
             exception.starts_with("panicked at ")
-                && exception.ends_with("the panic switch was set for command:MessagingCleanup"),
+                && exception.ends_with("the panic switch was set for command:sonarr:MessagingCleanup"),
             "{exception}"
         );
         assert!(failed.ended_at.is_some());
@@ -113,7 +113,7 @@ async fn a_command_that_panics_fails_and_the_next_one_runs() {
     // Around the body, in the executor's own bookkeeping: the worker ends
     // the command it had started, and starts again.
     for _ in 0..super::WORKERS + 1 {
-        switch::arm("record:MessagingCleanup");
+        switch::arm("record:sonarr:MessagingCleanup");
         let failed = run(&runtime, CommandBody::MessagingCleanup).await;
         assert_eq!(failed.status, CommandStatus::Failed);
         assert!(

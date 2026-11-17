@@ -639,6 +639,14 @@ impl AppState {
         self.0.settings.read().recover().clone()
     }
 
+    /// For the panic switch: panic as a writer of the settings, which
+    /// every request reads, would.
+    #[cfg(feature = "panic-switch")]
+    pub fn panic_holding_the_settings(&self) -> ! {
+        let _held = self.0.settings.write().recover();
+        panic!("the panic switch was set for a holder of the settings")
+    }
+
     /// Install new host settings (a saved `config/host`).
     pub fn set_settings(&self, settings: Settings) {
         *self.0.settings.write().recover() = Arc::new(settings);
