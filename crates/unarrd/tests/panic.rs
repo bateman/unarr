@@ -332,6 +332,7 @@ fn a_panic_costs_one_request_or_one_command() {
         assert_eq!(next.json()["appName"], "Sonarr");
         let tags = get(sonarr, "/api/v3/tag");
         assert_eq!(tags.status, 200, "after a panic in {place}: {}", tags.body);
+        assert_eq!(get(radarr, "/ping").status, 200, "after a panic in {place}");
     }
     // Outside the API's pipeline, where the pages are.
     let answer = get_gzip(sonarr, "/panic");
@@ -366,6 +367,7 @@ fn a_panic_costs_one_request_or_one_command() {
                 )),
             "{exception}"
         );
+        assert_eq!(get(radarr, "/ping").status, 200, "after a panic in {place}");
     }
     let done = run_command(sonarr, "MessagingCleanup");
     assert_eq!(done["status"], "completed", "{done}");
@@ -380,10 +382,11 @@ fn a_panic_costs_one_request_or_one_command() {
     assert_eq!(status(radarr).json()["appName"], "Radarr");
     assert_eq!(status(sonarr).status, 200);
 
-    // Radarr answered `/ping` every time it was asked meanwhile, and the
-    // process is the one that was started.
+    // Radarr answered `/ping` after each panic above, and every time the
+    // thread asked meanwhile (a release build is through all of it in
+    // well under a second); the process is the one that was started.
     let (asked, failed) = pings.finish();
-    assert!(asked > 20, "only {asked} pings");
+    assert!(asked > 0, "Radarr was never pinged meanwhile");
     assert_eq!(failed, 0, "{failed} of {asked} pings of Radarr failed");
     assert!(daemon.alive());
 }
