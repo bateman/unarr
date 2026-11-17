@@ -135,86 +135,100 @@ run the comparison again and update this file in the same branch.
 ## Results
 
 Each library has the tables of its latest `report.md`, as the script
-writes them. Measured on 2026-11-16 in the cloud session (x86-64, four
-cores, 16 GB), one run per library, at `f251780`
-(`radarr/empty-queue-context`, on top of `main`): the scheduler on the
-originals' cadence, Sonarr's wanted lists and calendar reading only the
-series they show, Radarr's answers reading only the translations of the
-movies they show, and a Radarr queue page with no movie reading no movie
-context.
+writes them. Measured on 2026-11-16 and 17 in the cloud session (x86-64,
+four cores, 16 GB), one run per library, at `f57dd02`
+(`sonarr/empty-queue-catalog`, on top of `radarr/empty-queue-context` and
+`main`): the scheduler on the originals' cadence, Sonarr's wanted lists
+and calendar reading only the series they show, Radarr's answers reading
+only the translations of the movies they show, and a queue answer with
+nothing to embed reading no reference data in either app.
+
+The session's container was restarted between this run and the one
+before (`f251780`, in the History), and it is slower: Unarr's routes take
+10 to 70 % longer than in that run, the originals' about 20 % longer on
+the scaled library. The change is not the cause. The two binaries, run
+alternately in this container (`f251780`, `f57dd02`, `f57dd02`,
+`f251780`, each a fresh process with five warm-up passes of the reads
+and five measured ones), answer every route within 6 % of each other,
+except Sonarr's `/queue`, which the change is about.
 
 ### Real library (38 series, 193 movies)
 
-Library `real`; Unarr `f251780, sha256 ee1329069253`; Sonarr 4.0.20.3014, Radarr 6.4.4.10685; first start 300 s, idle 900 s, tail 300 s; .NET heap limit 768 MiB; 5 warm-up passes; 2026-11-16.
+Library `real`; Unarr `f57dd02, sha256 e95a51fb2e92`; Sonarr 4.0.20.3014, Radarr 6.4.4.10685; first start 300 s, idle 900 s, tail 300 s; .NET heap limit 768 MiB; **warm-up not settled for originals: raise --warmup**; 5 warm-up passes; 2026-11-16.
 
 | | Sonarr + Radarr | Unarr | Less |
 |---|--:|--:|--:|
-| First answer on both ports | 1.41 s | 0.17 s | 8.4× sooner |
-| Idle, at the end of the idle window: RSS | 479 MiB | 28 MiB | 94 % |
-| Same, anonymous memory | 264 MiB | 11 MiB | 96 % |
-| Idle CPU, from minute 5 of the window | 16.8 s/h | 1.0 s/h | 94 % |
-| The reads: CPU | 3.25 s | 1.05 s | 68 % |
-| The reads: time | 3.04 s | 1.12 s | 63 % |
-| Peak anonymous memory during the reads | 377 MiB | 44 MiB | 88 % |
-| Anonymous memory at the end of the tail | 387 MiB | 36 MiB | 91 % |
-| Idle CPU in the tail, from its first minute | 7.2 s/h | 1.0 s/h | 85 % |
+| First answer on both ports | 1.67 s | 0.25 s | 6.8× sooner |
+| Idle, at the end of the idle window: RSS | 489 MiB | 27 MiB | 94 % |
+| Same, anonymous memory | 274 MiB | 10 MiB | 96 % |
+| Idle CPU, from minute 5 of the window | 19.8 s/h | 1.1 s/h | 95 % |
+| The reads: CPU | 2.97 s | 1.37 s | 54 % |
+| The reads: time | 2.81 s | 1.49 s | 47 % |
+| Peak anonymous memory during the reads | 385 MiB | 44 MiB | 89 % |
+| Anonymous memory at the end of the tail | 384 MiB | 37 MiB | 90 % |
+| Idle CPU in the tail, from its first minute | 8.1 s/h | 0.9 s/h | 89 % |
 
 | p50 / max, ms | Originals | Unarr |
 |---|--:|--:|
-| Sonarr /api/v3/series | 8.6 / 14.6 | 2.6 / 4.5 |
-| Sonarr /api/v3/history | 33.7 / 38.0 | 4.7 / 5.3 |
-| Sonarr /api/v3/wanted/missing | 4.9 / 10.5 | 1.8 / 2.0 |
-| Sonarr /api/v3/calendar | 4.9 / 6.2 | 1.3 / 1.4 |
-| Sonarr /api/v3/queue | 1.8 / 2.0 | 1.1 / 1.6 |
-| Radarr /api/v3/movie | 22.8 / 61.3 | 16.1 / 18.3 |
-| Radarr /api/v3/history | 25.5 / 31.7 | 16.5 / 21.4 |
-| Radarr /api/v3/wanted/missing | 21.9 / 36.5 | 3.0 / 3.5 |
-| Radarr /api/v3/calendar | 11.9 / 14.7 | 3.9 / 4.7 |
-| Radarr /api/v3/queue | 1.5 / 1.8 | 0.3 / 0.5 |
-| Sonarr /api/v3/episode | 5.6 / 50.2 | 2.4 / 14.6 |
+| Sonarr /api/v3/series | 9.0 / 15.0 | 3.3 / 3.6 |
+| Sonarr /api/v3/history | 26.8 / 38.6 | 7.1 / 7.5 |
+| Sonarr /api/v3/wanted/missing | 4.5 / 9.3 | 2.9 / 3.4 |
+| Sonarr /api/v3/calendar | 4.8 / 6.9 | 2.0 / 2.6 |
+| Sonarr /api/v3/queue | 1.5 / 2.0 | 0.7 / 0.9 |
+| Radarr /api/v3/movie | 25.3 / 46.4 | 19.9 / 33.9 |
+| Radarr /api/v3/history | 20.5 / 27.2 | 18.5 / 20.6 |
+| Radarr /api/v3/wanted/missing | 16.5 / 26.6 | 4.3 / 5.2 |
+| Radarr /api/v3/calendar | 10.7 / 16.5 | 6.6 / 8.1 |
+| Radarr /api/v3/queue | 1.2 / 1.7 | 0.3 / 0.6 |
+| Sonarr /api/v3/episode | 4.9 / 36.6 | 3.5 / 19.2 |
 
 ### Scaled library (950 series, 2,123 movies)
 
-Library `scaled`; Unarr `f251780, sha256 b6494b2e7bd1`; Sonarr 4.0.20.3014, Radarr 6.4.4.10685; first start 300 s, idle 900 s, tail 300 s; .NET heap limit 768 MiB; **warm-up not settled for originals and unarr: raise --warmup**; 5 warm-up passes; 2026-11-16.
+Library `scaled`; Unarr `f57dd02, sha256 32153c056156`; Sonarr 4.0.20.3014, Radarr 6.4.4.10685; first start 300 s, idle 900 s, tail 300 s; .NET heap limit 768 MiB; 5 warm-up passes; 2026-11-17.
 
 | | Sonarr + Radarr | Unarr | Less |
 |---|--:|--:|--:|
-| First answer on both ports | 1.31 s | 0.21 s | 6.2× sooner |
-| Idle, at the end of the idle window: RSS | 540 MiB | 32 MiB | 94 % |
-| Same, anonymous memory | 324 MiB | 15 MiB | 96 % |
-| Idle CPU, from minute 5 of the window | 14.4 s/h | 0.9 s/h | 94 % |
-| The reads: CPU | 16.66 s | 6.27 s | 62 % |
-| The reads: time | 14.98 s | 6.48 s | 57 % |
-| Peak anonymous memory during the reads | 524 MiB | 257 MiB | 51 % |
-| Anonymous memory at the end of the tail | 499 MiB | 48 MiB | 90 % |
-| Idle CPU in the tail, from its first minute | 7.9 s/h | 1.9 s/h | 75 % |
+| First answer on both ports | 1.67 s | 0.30 s | 5.6× sooner |
+| Idle, at the end of the idle window: RSS | 538 MiB | 32 MiB | 94 % |
+| Same, anonymous memory | 322 MiB | 14 MiB | 96 % |
+| Idle CPU, from minute 5 of the window | 16.2 s/h | 1.1 s/h | 93 % |
+| The reads: CPU | 18.79 s | 7.93 s | 58 % |
+| The reads: time | 17.33 s | 8.17 s | 53 % |
+| Peak anonymous memory during the reads | 583 MiB | 261 MiB | 55 % |
+| Anonymous memory at the end of the tail | 487 MiB | 47 MiB | 90 % |
+| Idle CPU in the tail, from its first minute | 10.2 s/h | 2.7 s/h | 73 % |
 
 | p50 / max, ms | Originals | Unarr |
 |---|--:|--:|
-| Sonarr /api/v3/series | 178.1 / 230.6 | 40.2 / 51.9 |
-| Sonarr /api/v3/history | 54.1 / 110.5 | 23.7 / 31.2 |
-| Sonarr /api/v3/wanted/missing | 13.3 / 25.0 | 10.4 / 12.5 |
-| Sonarr /api/v3/calendar | 75.0 / 151.5 | 5.1 / 5.6 |
-| Sonarr /api/v3/queue | 1.7 / 2.7 | 1.6 / 2.4 |
-| Radarr /api/v3/movie | 243.0 / 334.2 | 183.6 / 206.2 |
-| Radarr /api/v3/history | 35.9 / 70.9 | 21.5 / 35.4 |
-| Radarr /api/v3/wanted/missing | 17.2 / 35.7 | 5.0 / 5.3 |
-| Radarr /api/v3/calendar | 76.4 / 118.7 | 22.5 / 34.5 |
-| Radarr /api/v3/queue | 1.4 / 2.0 | 0.3 / 0.9 |
-| Sonarr /api/v3/episode | 5.6 / 39.2 | 2.6 / 10.5 |
+| Sonarr /api/v3/series | 221.2 / 291.1 | 57.1 / 63.6 |
+| Sonarr /api/v3/history | 58.1 / 76.2 | 26.2 / 29.5 |
+| Sonarr /api/v3/wanted/missing | 17.2 / 24.4 | 12.1 / 17.4 |
+| Sonarr /api/v3/calendar | 74.9 / 102.4 | 6.5 / 9.8 |
+| Sonarr /api/v3/queue | 1.3 / 3.4 | 0.5 / 0.8 |
+| Radarr /api/v3/movie | 294.8 / 357.5 | 226.6 / 276.5 |
+| Radarr /api/v3/history | 33.7 / 80.2 | 24.8 / 31.2 |
+| Radarr /api/v3/wanted/missing | 21.7 / 34.9 | 6.2 / 6.9 |
+| Radarr /api/v3/calendar | 94.0 / 138.7 | 31.2 / 46.5 |
+| Radarr /api/v3/queue | 1.3 / 1.9 | 0.4 / 1.4 |
+| Sonarr /api/v3/episode | 5.7 / 41.9 | 3.3 / 13.8 |
 
 Where Unarr is slower than the original, in these tables (whoever updates
 the tables updates this list from them, as CLAUDE.md says):
 
-- None. The closest is Sonarr's `/queue` on the scaled library, 1.6 ms
-  against 1.7 with an empty queue (1.6 against 1.5 in the run before):
-  for a page with no episode it still reads the series catalog (quality
-  profiles, custom formats), as Radarr's queue did before
-  `radarr/empty-queue-context`.
+- None. The closest is Radarr's `/history` on the real library, 18.5 ms
+  against 20.5.
 
 Sonarr's `/wanted/missing`, slower than the original on the scaled
 library before `sonarr/scoped-series-reads` (29.6 ms against 20.8), now
-reads only the page's series: 10.4 ms against 13.3.
+reads only the page's series: 12.1 ms against 17.2.
+
+Sonarr's `/queue` read the series catalog (quality profiles, custom
+formats) for every answer, even an empty page. Since
+`sonarr/empty-queue-catalog` it reads it only for an answer that embeds
+an episode (`includeEpisode`, and an item that has one), as Radarr's
+queue does. On the empty queue of both fixtures, in the alternate runs
+above, it went from 1.42 ms to 0.57 on the real library and from 1.59 to
+0.39 on the scaled one (the originals, in the tables: 1.5 and 1.3).
 
 Radarr's `/calendar` and `/wanted/missing`, slower than the original
 before `radarr/calendar-date-range-query`, now ask SQLite for the movies
@@ -232,8 +246,8 @@ from 2.2 ms to 0.3 on the scaled library (the original: 1.4) and from
 2.1 to 0.3 on the real one (1.5).
 
 Unarr's peak anonymous memory during the reads on the scaled library
-goes from about 140 MiB to about 260 from one run to the next (186, 140,
-140, 196 and 257 in the last five), and the code is not what decides it.
+goes from about 140 MiB to about 260 from one run to the next (140, 140,
+196, 257 and 261 in the last five), and the code is not what decides it.
 glibc gives a thread that allocates under contention an arena of its
 own, so a large answer (Radarr's `/movie`, 2,123 movies) built on a
 thread whose arena has not served one since the last trim makes that
@@ -324,6 +338,8 @@ idle CPU of each side.
 
 | Date | Library | Unarr | Runs | Originals: idle RSS / CPU | Unarr: idle RSS / CPU | Note |
 |---|---|---|--:|--:|--:|---|
+| 2026-11-17 | scaled | `f57dd02` | 1 | 538 MiB / 16.2 s/h | 32 MiB / 1.1 s/h | a Sonarr queue answer with no episode reads no catalog; a slower container than the run before |
+| 2026-11-16 | real | `f57dd02` | 1 | 489 MiB / 19.8 s/h | 27 MiB / 1.1 s/h | a Sonarr queue answer with no episode reads no catalog; a slower container than the run before; the originals' warm-up flagged (last pass 12 % below the one before), noise |
 | 2026-11-16 | scaled | `f251780` | 1 | 540 MiB / 14.4 s/h | 32 MiB / 0.9 s/h | a Radarr queue page with no movie reads no movie context; both warm-ups flagged (last pass 15-18 % above the one before), noise |
 | 2026-11-16 | real | `f251780` | 1 | 479 MiB / 16.8 s/h | 28 MiB / 1.0 s/h | a Radarr queue page with no movie reads no movie context |
 | 2026-11-15 | scaled | `efd0320` | 1 | 546 MiB / 23.9 s/h | 32 MiB / 1.1 s/h | Radarr reads only the shown movies' translations, on top of the cadence and the Sonarr reads |
