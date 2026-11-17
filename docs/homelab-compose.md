@@ -1,21 +1,31 @@
-# Replacing Sonarr with Unarr in the homelab compose
+# Replacing the *arr services with Unarr in the homelab compose
 
 What to change in the `homelab` repository when Unarr reaches alpha and
 takes the place of the `sonarr` service for good. Until then the NAS runs it
 from a local, uncommitted edit of `docker/compose.media.yml`.
 
-The container keeps the name `sonarr`: Prowlarr, Bazarr, Recyclarr, the
-download clients, Traefik and the Uptime Kuma monitor all address it by
-that name and port, and Unarr keeps Sonarr's API key.
+**The container is named `unarr` and answers to the applications' names
+as network aliases** (`sonarr`, `radarr`, later `prowlarr` and `lidarr`):
+the maintainer's decision of 17 November 2026. The name says what runs, no
+personality is the "real" one, and Prowlarr, Bazarr, Recyclarr, the
+download clients, Traefik and the Uptime Kuma monitor keep addressing
+`sonarr:8989` and `radarr:7878` as before, with the API keys Unarr keeps.
+The first runs on the NAS used a container still called `sonarr` with a
+`radarr` alias; the examples below are the final form.
+
+What the name changes, once: whatever addresses the container and not the
+network (`docker exec`, `docker logs`, backup filters, tests that stub
+`container:sonarr`), and Traefik, where each router has to name its own
+service and port because one container now has several.
 
 ## The service
 
 ```yaml
-  sonarr:
+  unarr:
     # Unarr, in place of Sonarr. Pin a release tag once there is one:
     # `main` moves at every push and Watchtower follows it.
     image: ghcr.io/bateman/unarr:main
-    container_name: sonarr
+    container_name: unarr
     # The image runs as 65532 and ignores PUID/PGID: without this the
     # daemon cannot write its data directory nor hardlink into /data.
     user: "${PUID}:${PGID}"
@@ -32,8 +42,9 @@ that name and port, and Unarr keeps Sonarr's API key.
     dns: *common-dns
     dns_opt: *common-dns-opt
     networks:
-      - media_net
-      - proxy
+      media_net:
+        aliases: [sonarr]
+      proxy:
     restart: unless-stopped
     logging: *common-logging
     healthcheck:
@@ -42,13 +53,17 @@ that name and port, and Unarr keeps Sonarr's API key.
       <<: *common-healthcheck
     deploy:            # unchanged; lower the limit once measured on the NAS
     depends_on:        # unchanged
-    labels:            # unchanged: watchtower, Traefik router and port 8989
+    labels:            # watchtower; the Traefik router names its service:
+      - traefik.http.routers.sonarr.service=sonarr
+      - traefik.http.services.sonarr.loadbalancer.server.port=8989
 ```
 
 Differences from the Sonarr service, and why:
 
 | Key | Change | Reason |
 |-----|--------|--------|
+| service and `container_name` | `unarr` | one container for every personality |
+| `networks` | alias `sonarr` on `media_net` | what addressed `sonarr:8989` still resolves |
 | `image` | `ghcr.io/bateman/unarr:<tag>` | |
 | `user` | added | distroless image, no s6 init to honour `PUID`/`PGID` |
 | `command` | added | data directory and one-time import source |
@@ -56,8 +71,11 @@ Differences from the Sonarr service, and why:
 | `volumes` | `./config/unarr:/config`, Sonarr's config read-only | Unarr writes `<data>/sonarr/…`; the original files stay intact, so going back is restoring the old service |
 | `healthcheck.test` | `unarrd healthcheck` | `curl` does not exist in the image |
 
-Going back to Sonarr is the old service block again: its `config` directory
-was never written. What Unarr did in the meantime (history, imported files)
+The old `sonarr` service is disabled, not deleted (`profiles:
+["disabled"]`, and taken out of the `depends_on` of the services that name
+it, which then depend on `unarr`), so that its `container_name` and the
+alias do not collide and going back is one edit. Going back to Sonarr is
+the old service block again: its `config` directory was never written. What Unarr did in the meantime (history, imported files)
 is then unknown to Sonarr.
 
 ## The Radarr service, from milestone 4d
@@ -69,7 +87,7 @@ taken on (38 MB idle for both, against two containers' two runtimes), and
 it is what the maintainer's run tries first.
 
 ```yaml
-  sonarr:
+  unarr:
     # ... as above, with Radarr's data and port added
     command:
       ["--data", "/config",
@@ -124,24 +142,27 @@ back stays possible.
 
 Then the `radarr` service is disabled, not deleted (see below:
 `profiles: ["disabled"]`, and `radarr` taken out of the `depends_on` of
-the four services that name it), and its `container_name` freed:
+the four services that name it), and its name freed for the alias:
 Prowlarr, Bazarr, Recyclarr and the Uptime Kuma monitor address Radarr by
-name, so either the Unarr container takes an alias on the media network,
-or those files are pointed at `sonarr:7878`. Aliases keep the rest of the
-repository unchanged:
+name, and the alias keeps the rest of the repository unchanged:
 
 ```yaml
     networks:
       media_net:
-        aliases: [radarr]
+        aliases: [sonarr, radarr]   # later: prowlarr, lidarr
       proxy:
 ```
+
+When Prowlarr is a personality too, `prowlarr`, `sonarr` and `radarr`
+resolve to the same container and the indexer sync goes over the network
+to itself. It works; it is also why the panic decision below matters more
+with each personality added.
 
 The homelab's `scripts/auto-recover-cron.sh` runs every fifteen minutes
 and reconciles the stack with `docker compose up -d --remove-orphans` over
 a fixed list of files (`COMPOSE_FILES`, `compose.yml` and
 `compose.media.yml`). An override kept in a file of its own is undone at
-its next run: `sonarr` is recreated without Radarr and the `radarr`
+its next run: the container is recreated without Radarr and the `radarr`
 service, if it is only stopped, comes back. On the run of 2026-11-13 this
 happened twelve minutes in, and the checks that followed were answered by
 the original Radarr without anything saying so. So either:
@@ -231,15 +252,18 @@ change. Found on 2026-11-11:
 | File | What to do |
 |------|------------|
 | `scripts/setup-folders.sh` | add `make_dir "${CONFIG_ROOT}/unarr"`; keep `sonarr` while the import source is mounted |
-| `scripts/lib/report-common.sh` | **breaks**: `ARR_GET` runs `docker exec <container> sh -c …`, and the image has no shell. `make check-usenet` and `make check-seeders` lose their Sonarr rows until the request is made from another container or from the host. Their self-tests (`make test`) do not see it: they stub `docker` |
+| `scripts/lib/report-common.sh` | finding the container works as it is, as the maintainer reports: `arr_container` looks for an application by container name first and by network alias second, so a container `unarr` with the aliases is found for both. What **breaks** is the request: `ARR_GET` runs `docker exec <container> sh -c …`, and the image has no shell. `make check-usenet` and `make check-seeders` lose their Sonarr rows until the request is made from another container or from the host. Their self-tests (`make test`) do not see it: they stub `docker` |
 | `scripts/assess-logs.sh` | **breaks quietly**: `internal_log_paths` reads `/config/logs/sonarr.txt` through `docker exec … sh`. The file is now `/config/sonarr/logs/sonarr.txt` and there is no `sh` nor `tail`: read it from the host path `docker/config/unarr/sonarr/logs/` instead. `docker logs` keeps working |
-| `Makefile` `check_arr_health` | works as is for the `sonarr` container (reads `Health.Status`). Its `Failed to bind` restart-loop count never matches Unarr's log: harmless, but dead for this container. With Radarr served by the same container there is no `radarr` container, and `make check-health` says `Radarr: NOT RUNNING`: when the container is missing, ask Unarr instead (`docker exec <container> /usr/local/bin/unarrd healthcheck` prints `radarr: ok` per personality that answers) |
+| `Makefile` `check_arr_health` | finds the `unarr` container through the aliases, like `arr_container` (reads `Health.Status`). Its `Failed to bind` restart-loop count never matches Unarr's log: harmless, but dead for this container. If a personality is still reported as `NOT RUNNING`, ask Unarr itself (`docker exec <container> /usr/local/bin/unarrd healthcheck` prints `radarr: ok` per personality that answers) |
 | `scripts/auto-recover-cron.sh` | **undoes an override**: besides restarting unhealthy containers it runs `docker compose up -d --remove-orphans` over the fixed `COMPOSE_FILES` of its line 47, so a change kept in another compose file is reverted within fifteen minutes. Put the change in `compose.media.yml`, or add the file to that list |
-| `docker/duplicati-filters.conf`, `docs/operations/runbook-backup-restore.md` | back up `config/unarr`; the restore steps name Sonarr's files |
-| `docs/diagram/services.yaml` | `svc: sonarr` still exists, so the workflow passes; change the display name and the one-line role if the diagram should say Unarr |
-| `docs/network/rack-homelab-config.md` service table, `docs/setup/nas-setup.md`, `docs/setup/arr-tuning-guide.md` | say which application answers on 8989; the Trusted Networks step of the *arr checklist has no counterpart to set by hand if the import carried it over (check on the NAS) |
+| `docker/duplicati-filters.conf`, `docs/operations/runbook-backup-restore.md` | back up `config/unarr` (one sub-folder per personality); the restore steps name Sonarr's files |
+| `scripts/check-usenet.sh`, `scripts/test-check-usenet.sh`, the comments in `Makefile` and `UPGRADE.md` | name `sonarr` in comments and in tests; the test stubs Unarr as `container:sonarr`. It would keep passing, and should say `unarr` with the aliases once the compose does |
+| `docs/diagram/services.yaml` | the service is now `unarr`: rename `svc: sonarr` and `svc: radarr` or map them to it, with the display name and the one-line role |
+| `docs/network/rack-homelab-config.md` service table, `docs/setup/nas-setup.md`, `docs/setup/arr-tuning-guide.md` | one container `unarr` answers on 8989 and 7878 under the names `sonarr` and `radarr`; the Trusted Networks step of the *arr checklist has no counterpart to set by hand if the import carried it over (check on the NAS) |
 | `docs/operations/uptime-kuma-monitors.md` | nothing: `http://sonarr:8989/ping` answers the same |
-| `docker/recyclarr.yml`, Traefik labels, Authelia, Pi-hole records, firewall docs | nothing: same name, port and API key. With Radarr in the same container, its Traefik router points at the `sonarr` service on 7878 and the `radarr` alias keeps the rest addressable |
+| `docker/recyclarr.yml`, Authelia, Pi-hole records, firewall docs | nothing: same names through the aliases, same ports and API keys |
+| Traefik labels | on the `unarr` service: one router and one service per personality, each router naming its service (`traefik.http.routers.<app>.service=<app>`) with its port |
+| `docker/compose.media.yml` `depends_on` | services that waited for `sonarr` or `radarr` wait for `unarr` |
 | `UPGRADE.md` | the steps for an existing install: create `config/unarr` owned by `PUID:PGID`, `docker pull`, `make up`, wait for the import (start period), `make check-health` |
 
 ## To verify on the NAS before committing there
