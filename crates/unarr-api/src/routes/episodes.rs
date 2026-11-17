@@ -448,42 +448,39 @@ pub async fn cutoff(
                 .iter()
                 .map(|pr| (pr.id, profile::qualities_below_cutoff(pr)))
                 .collect();
-            let mut candidates: Vec<_> = store::episodes::episodes_with_files(conn)?
+            // The light rows are filtered and sorted; only the page's
+            // episodes are then read in full.
+            let mut rows: Vec<_> = store::episodes::cutoff_rows(conn, monitored)?
                 .into_iter()
-                .filter(|f| {
+                .filter(|r| {
                     below
-                        .get(&f.quality_profile_id)
-                        .is_some_and(|q| q.contains(&f.quality_id))
-                })
-                .filter(|f| {
-                    if monitored {
-                        f.episode.monitored && f.series_monitored
-                    } else {
-                        !f.episode.monitored || !f.series_monitored
-                    }
+                        .get(&r.quality_profile_id)
+                        .is_some_and(|q| q.contains(&r.quality_id))
                 })
                 .collect();
             // Ties keep id order whatever the direction, as SQLite's sorter
             // does for the originals' single-column ORDER BY.
-            candidates.sort_by(|a, b| {
+            rows.sort_by(|a, b| {
                 let by_key = match paging.sort_key.as_str() {
                     "series.sortTitle" => a.series_sort_title.cmp(&b.series_sort_title),
-                    "episodes.lastSearchTime" => a.episode.last_search_time.cmp(&b.episode.last_search_time),
-                    _ => a.episode.air_date_utc.cmp(&b.episode.air_date_utc),
+                    "episodes.lastSearchTime" => a.last_search_time.cmp(&b.last_search_time),
+                    _ => a.air_date_utc.cmp(&b.air_date_utc),
                 };
                 let by_key = if paging.descending {
                     by_key.reverse()
                 } else {
                     by_key
                 };
-                by_key.then(a.episode.id.cmp(&b.episode.id))
+                by_key.then(a.id.cmp(&b.id))
             });
-            let total = candidates.len() as i64;
-            let page: Vec<Episode> = paging
-                .slice(&candidates.iter().collect::<Vec<_>>())
+            let total = rows.len() as i64;
+            let ids: Vec<i64> = paging.slice(&rows).iter().map(|r| r.id).collect();
+            // `list_episodes_by_ids` reads in id order: back to the page's order.
+            let mut by_id: HashMap<i64, Episode> = store::episodes::list_episodes_by_ids(conn, &ids)?
                 .into_iter()
-                .map(|f| f.episode.clone())
+                .map(|e| (e.id, e))
                 .collect();
+            let page: Vec<Episode> = ids.iter().filter_map(|id| by_id.remove(id)).collect();
             // Only the page's series, not the whole library.
             let catalog = Catalog::load_for(conn, &series_ids_of(&page))?;
             let files = files_for(conn, &page, include)?;

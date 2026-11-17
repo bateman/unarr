@@ -2696,26 +2696,19 @@ impl Runtime {
             .db
             .call(move |conn| {
                 let profiles = store::catalog::list_quality_profiles(conn)?;
-                let mut out: Vec<Episode> = store::episodes::episodes_with_files(conn)?
+                let ids: Vec<i64> = store::episodes::cutoff_rows(conn, monitored)?
                     .into_iter()
-                    .filter(|f| series_id.is_none_or(|id| f.episode.series_id == id))
-                    .filter(|f| {
+                    .filter(|r| series_id.is_none_or(|id| r.series_id == id))
+                    .filter(|r| {
                         profiles
                             .iter()
-                            .find(|p| p.id == f.quality_profile_id)
-                            .is_some_and(|p| profile::qualities_below_cutoff(p).contains(&f.quality_id))
+                            .find(|p| p.id == r.quality_profile_id)
+                            .is_some_and(|p| profile::qualities_below_cutoff(p).contains(&r.quality_id))
                     })
-                    .filter(|f| {
-                        if monitored {
-                            f.episode.monitored && f.series_monitored
-                        } else {
-                            !f.episode.monitored || !f.series_monitored
-                        }
-                    })
-                    .map(|f| f.episode)
+                    .map(|r| r.id)
                     .collect();
-                out.sort_by_key(|e| e.id);
-                Ok(out)
+                // In id order; only the episodes below the cutoff are read in full.
+                store::episodes::list_episodes_by_ids(conn, &ids)
             })
             .await?;
         let queued = self.queued_episode_ids();

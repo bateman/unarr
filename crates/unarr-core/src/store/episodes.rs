@@ -237,36 +237,46 @@ pub fn missing_episodes(
     Ok((records, total))
 }
 
-/// Episodes with a file, with the file's quality and the series' profile and
-/// monitoring state, for the cutoff-unmet computation (done by the caller,
-/// since cutoffs depend on each profile's item order). Specials excluded.
-pub struct FiledEpisode {
-    pub episode: Episode,
+/// What the cutoff-unmet lists filter and sort on, read without the rest of
+/// an episode (overview, images, ratings): the file's quality, the series'
+/// profile and the sort keys. The caller checks the cutoff, which depends on
+/// each profile's item order, and reads the episodes it keeps in full.
+#[derive(Debug, Clone, PartialEq)]
+pub struct CutoffRow {
+    pub id: i64,
+    pub series_id: i64,
     pub quality_id: i64,
     pub quality_profile_id: i64,
-    pub series_monitored: bool,
+    pub air_date_utc: Option<DateTime<Utc>>,
+    pub last_search_time: Option<DateTime<Utc>>,
     pub series_sort_title: Option<String>,
 }
 
-pub fn episodes_with_files(conn: &Connection) -> anyhow::Result<Vec<FiledEpisode>> {
+/// The episodes with a file, specials excluded, in id order: with
+/// `monitored`, those whose episode and series are both monitored; without
+/// it, every other one.
+pub fn cutoff_rows(conn: &Connection, monitored: bool) -> anyhow::Result<Vec<CutoffRow>> {
     let mut stmt = conn.prepare(
-        "SELECT e.*, f.quality_id AS file_quality_id, s.quality_profile_id AS series_profile_id,
-                s.monitored AS series_monitored, s.sort_title AS series_sort_title
+        "SELECT e.id, e.series_id, f.quality_id, s.quality_profile_id, e.air_date_utc, e.last_search_time,
+                s.sort_title
          FROM episodes e
          JOIN series s ON s.id = e.series_id
          JOIN episode_files f ON f.id = e.episode_file_id
          WHERE e.episode_file_id != 0 AND e.season_number >= 1
-         ORDER BY e.air_date_utc, e.id",
+           AND (e.monitored = 1 AND s.monitored = 1) = ?1
+         ORDER BY e.id",
     )?;
-    let mut rows = stmt.query([])?;
+    let mut rows = stmt.query([monitored])?;
     let mut out = Vec::new();
-    while let Some(row) = rows.next()? {
-        out.push(FiledEpisode {
-            episode: episode_from_row(row)?,
-            quality_id: row.get("file_quality_id")?,
-            quality_profile_id: row.get("series_profile_id")?,
-            series_monitored: row.get("series_monitored")?,
-            series_sort_title: row.get("series_sort_title")?,
+    while let Some(r) = rows.next()? {
+        out.push(CutoffRow {
+            id: r.get(0)?,
+            series_id: r.get(1)?,
+            quality_id: r.get(2)?,
+            quality_profile_id: r.get(3)?,
+            air_date_utc: parse_ts(r.get(4)?)?,
+            last_search_time: parse_ts(r.get(5)?)?,
+            series_sort_title: r.get(6)?,
         });
     }
     Ok(out)
@@ -659,6 +669,125 @@ mod tests {
             let ids = |v: Vec<Episode>| v.into_iter().map(|e| e.id).collect::<Vec<_>>();
             assert_eq!(ids(episodes_between(conn, since, far, true)?), vec![7]);
             assert_eq!(ids(episodes_between(conn, since, far, false)?), vec![7]);
+            Ok(())
+        })
+        .unwrap();
+    }
+
+    #[test]
+    fn cutoff_rows_split_monitored_from_the_rest() {
+        let db = Db::open_in_memory().unwrap();
+        db.call_blocking(|conn| {
+            crate::store::catalog::insert_tag(
+                conn,
+                &crate::model::Tag {
+                    id: 1,
+                    label: "drama".into(),
+                },
+            )?;
+            crate::store::catalog::insert_quality_profile(
+                conn,
+                &crate::model::QualityProfile {
+                    id: 1,
+                    name: "Any".into(),
+                    cutoff: 1,
+                    upgrade_allowed: false,
+                    items: vec![],
+                    format_items: vec![],
+                    min_format_score: 0,
+                    cutoff_format_score: 0,
+                    min_upgrade_format_score: 1,
+                },
+            )?;
+            crate::store::series::insert(conn, &crate::store::series::tests::sample(1))?;
+            let mut other = crate::store::series::tests::sample(2);
+            other.monitored = false;
+            other.title_slug = "serenity".into();
+            other.path = "/data/tv/Serenity".into();
+            other.sort_title = Some("serenity".into());
+            crate::store::series::insert(conn, &other)?;
+            for (id, series_id, quality_id) in [(10, 1, 4), (11, 1, 4), (12, 1, 7), (13, 2, 9)] {
+                insert_file(
+                    conn,
+                    &EpisodeFile {
+                        id,
+                        series_id,
+                        season_number: 1,
+                        relative_path: format!("S01E{id}.mkv"),
+                        original_file_path: None,
+                        size: 1,
+                        date_added: chrono::Utc.with_ymd_and_hms(2026, 11, 6, 0, 0, 0).unwrap(),
+                        scene_name: None,
+                        release_group: None,
+                        release_hash: None,
+                        quality: QualityModel {
+                            quality_id,
+                            version: 1,
+                            real: 0,
+                            is_repack: false,
+                        },
+                        languages: vec![1],
+                        media_info: None,
+                        indexer_flags: 0,
+                        release_type: ReleaseType::SingleEpisode,
+                    },
+                )?;
+            }
+            let aired = chrono::Utc.with_ymd_and_hms(2002, 9, 20, 4, 0, 0).unwrap();
+            // (id, series, season, file, monitored)
+            for (id, series_id, season_number, episode_file_id, monitored) in [
+                (1, 1, 1, 10, true),  // monitored, with a file
+                (2, 1, 1, 0, true),   // no file
+                (3, 1, 0, 11, true),  // a special
+                (4, 1, 1, 12, false), // the episode unmonitored
+                (5, 2, 1, 13, true),  // the series unmonitored
+                (6, 1, 1, 99, true),  // a file that is gone
+            ] {
+                insert_episode(
+                    conn,
+                    &Episode {
+                        id,
+                        series_id,
+                        tvdb_id: 100 + id,
+                        season_number,
+                        episode_number: id,
+                        title: None,
+                        overview: None,
+                        episode_file_id,
+                        absolute_episode_number: None,
+                        scene_absolute_episode_number: None,
+                        scene_season_number: None,
+                        scene_episode_number: None,
+                        unverified_scene_numbering: false,
+                        monitored,
+                        air_date: None,
+                        air_date_utc: Some(aired),
+                        runtime: 44,
+                        finale_type: None,
+                        images: vec![],
+                        ratings: Ratings::default(),
+                        last_search_time: None,
+                        aired_after_season_number: None,
+                        aired_before_season_number: None,
+                        aired_before_episode_number: None,
+                    },
+                )?;
+            }
+            let row = |id, series_id, quality_id, sort_title: &str| CutoffRow {
+                id,
+                series_id,
+                quality_id,
+                quality_profile_id: 1,
+                air_date_utc: Some(aired),
+                last_search_time: None,
+                series_sort_title: Some(sort_title.into()),
+            };
+            let firefly = crate::store::series::tests::sample(1).sort_title.unwrap();
+            assert_eq!(cutoff_rows(conn, true)?, vec![row(1, 1, 4, &firefly)]);
+            assert_eq!(
+                cutoff_rows(conn, false)?,
+                vec![row(4, 1, 7, &firefly), row(5, 2, 9, "serenity")]
+            );
             Ok(())
         })
         .unwrap();
