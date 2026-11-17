@@ -16,15 +16,19 @@ does): the rows say so with the code, and the golden or the test, that
 settled them, and the counts are the new ones. Each was recorded from Sonarr 4.0.20, or
 tried on it, first; "What was closed afterwards" says how.
 
+Updated a third time on 17 November 2026: row 1.13 of `2-http.md`, item 18
+of the list below, is closed. A panic costs the request or the command it
+happened in (`docs/DESIGN.md`, section 20).
+
 ## Result
 
 | Report | Rows | Closed | Open | Partial | Deliberate | Not applicable |
 |--------|------|--------|------|---------|------------|----------------|
 | 1. Settings | 18 | 11 | 4 | 1 | 0 | 2 |
-| 2. HTTP | 58 | 21 | 27 | 6 | 3 | 1 |
+| 2. HTTP | 58 | 22 | 26 | 6 | 3 | 1 |
 | 3 and 4. Routes and UI calls | 78 | 39 | 25 | 2 | 2 | 10 |
 | 6. Events, commands, housekeeping | 39 | 30 | 5 | 1 | 2 | 1 |
-| Together | 193 | 101 | 61 | 10 | 7 | 14 |
+| Together | 193 | 102 | 60 | 10 | 7 | 14 |
 
 Before the update: 83 closed, 78 open, 13 partial, 6 deliberate. Some gaps
 are counted in two reports (the SignalR transports, the file dates), so the
@@ -90,9 +94,9 @@ Would show in a particular set-up:
 
 Worth a decision rather than a fix:
 
-18. **A panic ends the process** (1.13): the release profile aborts, and one
-    process holds every personality. A catch layer does nothing until the
-    profile changes, at some binary size.
+18. ~~A panic ends the process~~ (1.13): the release profile aborted, and
+    one process holds every personality. Decided and closed: the profile
+    unwinds, and a panic costs one request or one command.
 19. **Paths under `/api` that are not v3** (1.24) reach the page fallback,
     and wrong-case paths outside the API (1.15) reach the UI guard, which
     redirects a wrong-case SignalR negotiation with its token in
@@ -117,6 +121,20 @@ Each on the original first. `<golden>` is
 hub listened to (`GOLDEN_SIGNALR=1` with `make golden`, its header says
 how), which the long list did not have to be recorded again for.
 
+- **A panic costs one request or one command** (1.13). What the originals
+  answer for an exception nothing caught was recorded raw from Sonarr
+  4.0.20 and Radarr 6.4.4 (`POST /command` with a name neither knows, an
+  `InvalidOperationException` in the controller): 500, `Content-Type:
+  application/json` with no charset, `Cache-Control: no-cache,no-store`,
+  `Expires: -1`, `Pragma: no-cache`, no `X-Application-Version`, not
+  compressed for a client that takes gzip, a body of `message` and
+  `description`. It is the answer Unarr already gave for the exceptions
+  it knew (`<golden>/command-unknown.json`,
+  `customformat-create-badregex.json`), now also given for a panic, whose
+  description is the place of the panic where theirs is the .NET stack.
+  A command that panics ends `failed`, as the originals' does for an
+  exception in its handler. `docs/DESIGN.md`, section 20, has what is
+  caught where and what is left fatal.
 - **Health checks after a save.** The sets are the `CheckOn` attributes of
   Sonarr 4.0.20's checks, read from `Sonarr.Core.dll`, and its trace log
   shows the same checks starting five seconds after each save: every
@@ -203,7 +221,7 @@ with them where there was something to close
 
 ## The server outside the API bodies (`2-http.md`)
 
-58 rows were DIFFERENT, MISSING or UNSURE: 21 closed, 27 open, 6 partial, 3
+58 rows were DIFFERENT, MISSING or UNSURE: 22 closed, 26 open, 6 partial, 3
 deliberate, 1 not applicable. Read, and where reading did not settle it tried
 on a debug build of `unarrd` on the Sonarr fixture ("live"). The original's
 side of rows 1.6, 1.11, 1.15, 1.18, 1.30, 1.34, 2.12, 4.11 and 4.20 was never
@@ -221,7 +239,7 @@ is `crates/unarr-api/src/`.
 | 1.8 | `Auth-Failure`, `Auth-Success`, `Auth-Logout` log lines | medium | OPEN | no log call in `api/ui.rs`; live: a failed login logs nothing | fail2ban and the like see nothing |
 | 1.10 | a request outside the URL base | medium | OPEN | `tests/http.rs:360` asserts 404; live | no 307 into the base: a browser on `host:8989/`, a probe on `/ping` without the base |
 | 1.11 | URL base matched without case | low | OPEN | `api/lib.rs:366`; live | a bookmark or proxy rule in another case |
-| 1.13 | a failure in a handler becomes a 500 | low | OPEN | no catch layer, and `Cargo.toml` sets `panic = "abort"` | a panic ends the process and every personality in it, not the connection; only when Unarr has a bug |
+| 1.13 | a failure in a handler becomes a 500 | low | CLOSED | `Cargo.toml` sets `panic = "unwind"`; `api/http.rs` `catch_panic` inside the API's pipeline and `catch_panic_anywhere` around the router (`api/lib.rs`) answer the 500 recorded from both originals; `core/panics.rs`; `make panic-test` on a release build | |
 | 1.15 | routing without case outside the API | low | OPEN | `api/lib.rs:325`; live. A wrong-case SignalR negotiation under Forms is redirected with its `access_token` copied into `Location` | nobody known |
 | 1.16 | one trailing slash ignored | medium | CLOSED | `api/lib.rs:41`, `api/http.rs:330`; tests | |
 | 1.17 | CORS on the API | medium | CLOSED | `api/http.rs:246`; test | |
@@ -280,7 +298,7 @@ What the triage found against the report and the README:
 - Row 1.35 was unsure and is a real difference: a URL base saved from the
   UI is half applied until the restart.
 - Row 1.13 understates: the release profile aborts on a panic, so the
-  process ends.
+  process ends. (Closed since, see above.)
 - `docs/DESIGN.md` section 14 said `X-Forwarded-Proto` and
   `X-Forwarded-Host` are not read; both are, except by the host filter.
 - Row 12 of the live-run table ("same") holds without a URL base only.

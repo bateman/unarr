@@ -133,8 +133,10 @@ Not from `config/radarr` mounted read-only: Radarr and Sonarr both keep
 their databases in WAL mode, and SQLite opens such a file, even to read
 it, only when it can create the `-shm` file next to it. On a read-only
 mount the first start fails with `unable to open database file` (error 14)
-and the container restarts in a loop, taking the other personality down
-with it. Sonarr's read-only mount above works only while Sonarr left a
+and that personality is left down, reported by the log and by the health
+check, while the other one starts (before the panic decision of
+`docs/DESIGN.md`, section 20, the container restarted in a loop with both
+down). Sonarr's read-only mount above works only while Sonarr left a
 `-shm` file behind; a copy made the same way is the safer source for it
 too. The copy is read once, at the first start; it can be deleted once
 the import is done, and the original's folder is never touched, so going
@@ -236,9 +238,19 @@ The run itself, one movie from search to Plex:
 
 What to watch, from what this milestone left open:
 
-- A panic in one personality ends the process and so the other one too
-  (`docs/audit/7-triage.md`, row 1.13): the maintainer decides after this
-  run whether the release profile keeps `panic = "abort"`.
+- A panic in one personality no longer ends the process: it costs the
+  request or the command it happened in, and the other personality keeps
+  answering (`docs/DESIGN.md`, section 20). What to look for instead is
+  the same line again and again in `logs/*.txt`: `Request Failed. ...
+  panicked at` for a request, a command that ends `failed` with
+  `panicked at` for its exception. Each is a bug to report.
+- A personality that cannot start (its database does not open, its
+  import or a migration fails, its port is taken) is left down and the
+  other one starts. `unarrd healthcheck` then says `radarr: did not
+  start` and the container is unhealthy, so `auto-recover-cron.sh`
+  restarts it at its next run: the personality that works is away for
+  the second the restart takes, once per run, instead of being down with
+  the other.
 - `GET /movie` costs 289 ms at p99 on 2,123 movies (section 9): the movie
   index may feel slower than Radarr's.
 - The Discover page's recommendations, trending and popular lists are not

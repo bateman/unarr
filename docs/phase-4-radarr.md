@@ -642,7 +642,9 @@ Added on 13 November 2026, after the audit's rows were triaged
 - **One process, two personalities, and a panic ends both**: the release
   profile aborts on a panic (`docs/audit/7-triage.md`, row 1.13). It is the
   maintainer's decision, open, and worth having before the homelab run
-  puts Radarr and Sonarr in one container.
+  puts Radarr and Sonarr in one container. Decided and done since: the
+  profile unwinds and a panic costs one request or one command
+  (`docs/DESIGN.md`, section 20).
 
 ## Status of 4d, November 2026
 
