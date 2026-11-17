@@ -136,6 +136,35 @@ where
     })
 }
 
+/// Panics on purpose, for the tests of all the above. It exists in the
+/// crate's own tests and in a build with the `panic-switch` feature, which
+/// no published binary has: without the feature there is no such code, no
+/// route to it and nothing to set that would bring it back.
+#[cfg(any(test, feature = "panic-switch"))]
+pub mod switch {
+    use crate::sync::Recover;
+    use std::sync::Mutex;
+
+    /// The places armed to panic, each for its next visit.
+    static ARMED: Mutex<Vec<String>> = Mutex::new(Vec::new());
+
+    /// The next [`fire`] named `place` panics.
+    pub fn arm(place: &str) {
+        ARMED.lock().recover().push(place.to_owned());
+    }
+
+    /// Panic if `place` was armed; once for each time it was.
+    pub fn fire(place: &str) {
+        let armed = {
+            let mut armed = ARMED.lock().recover();
+            armed.iter().position(|p| p == place).map(|at| armed.remove(at))
+        };
+        if armed.is_some() {
+            panic!("the panic switch was set for {place}");
+        }
+    }
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;

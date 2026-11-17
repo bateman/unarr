@@ -28,6 +28,8 @@ use crate::search::{SearchService, Trigger};
 use crate::store;
 
 mod movie_library;
+#[cfg(test)]
+mod panic_tests;
 
 /// The source of the current time: the daemon's clock, or a pinned one
 /// in tests.
@@ -532,7 +534,9 @@ impl Runtime {
         let Some(runtime) = self.me.lock().unwrap().upgrade() else {
             return;
         };
-        let handle = tokio::spawn(async move {
+        // A run that panics is lost, and the sets it took with it: the
+        // next request starts another.
+        let handle = crate::panics::spawn_logged("health check run", async move {
             tokio::time::sleep(HEALTH_DELAY).await;
             let sets: Vec<(CheckSet, Option<ImportFailure>)> =
                 std::mem::take(&mut *runtime.health_pending.lock().unwrap());
@@ -647,15 +651,21 @@ impl Runtime {
     }
 
     /// Spawn the workers and the scheduler. The tasks end with the Tokio
-    /// runtime.
+    /// runtime. Each starts again if it panics: a command's own panic is
+    /// caught where the command runs and never reaches them, so this is
+    /// for a panic in the bookkeeping around it.
     pub fn start(self: &Arc<Self>) -> Vec<tokio::task::JoinHandle<()>> {
         let mut handles = Vec::with_capacity(WORKERS + 1);
         for _ in 0..WORKERS {
             let runtime = self.clone();
-            handles.push(tokio::spawn(async move { runtime.worker().await }));
+            handles.push(crate::panics::supervised("command worker", move || {
+                runtime.clone().worker()
+            }));
         }
         let runtime = self.clone();
-        handles.push(tokio::spawn(async move { runtime.scheduler_loop().await }));
+        handles.push(crate::panics::supervised("scheduler", move || {
+            runtime.clone().scheduler_loop()
+        }));
         // `Handle(ApplicationStartedEvent)`: the startup checks.
         self.check_health_later(CheckSet::All);
         handles
@@ -668,7 +678,26 @@ impl Runtime {
                 let Some(model) = self.queue.try_start(self.now()) else {
                     break;
                 };
-                self.execute(model).await;
+                let (id, name) = (model.id, model.name());
+                if let Err(panic) = crate::panics::catch(self.execute(model)).await {
+                    // Not in the command's body, which `execute` catches,
+                    // but around it. The command is not left started: an
+                    // exclusive one would hold every other back.
+                    tracing::error!(name, "recording the command {panic}");
+                    let ended = self.queue.end(
+                        id,
+                        CommandStatus::Failed,
+                        Some("Failed".into()),
+                        Some(panic.to_string()),
+                        self.now(),
+                    );
+                    match crate::panics::catch(ended).await {
+                        Ok(Ok(Some(ended))) => self.broadcast(&ended),
+                        Ok(Ok(None)) => {}
+                        Ok(Err(e)) => tracing::warn!(error = %e, "failed to record the command's end"),
+                        Err(panic) => tracing::error!(name, "ending the command {panic}"),
+                    }
+                }
             }
             if self.is_stopping() {
                 return;
@@ -758,12 +787,20 @@ impl Runtime {
         let id = model.id;
         let name = model.name();
         tracing::trace!(name, id, "command started");
+        #[cfg(any(test, feature = "panic-switch"))]
+        crate::panics::switch::fire(&format!("record:{name}"));
         self.arm_health_notifications().await;
         if let Err(e) = self.queue.record_started(&model).await {
             tracing::warn!(error = %e, "failed to record the command's start");
         }
         self.broadcast(&model);
-        let outcome = self.run(&model).await;
+        // `CommandExecutor.ExecuteCommand` catches whatever the handler
+        // throws and fails the command with it; a panic is Unarr's
+        // unhandled exception.
+        let outcome = match crate::panics::catch(self.run(&model)).await {
+            Ok(outcome) => outcome,
+            Err(panic) => Err(anyhow::anyhow!("{panic}")),
+        };
         // `ProviderStatusChangedEvent` is published while the command runs:
         // the checks it asks for are done by the time the command ends.
         if matches!(
@@ -847,6 +884,8 @@ impl Runtime {
 
     async fn run(&self, model: &CommandModel) -> anyhow::Result<()> {
         let id = model.id;
+        #[cfg(any(test, feature = "panic-switch"))]
+        crate::panics::switch::fire(&format!("command:{}", model.name()));
         let trigger = Trigger {
             user_invoked: model.trigger == CommandTrigger::Manual,
             interactive: false,
@@ -1731,7 +1770,7 @@ impl Runtime {
         for e in events {
             if let MovieImportEvent::RescanRequested { movie_id } = &e {
                 let (queue, movie_id, now) = (self.queue.clone(), *movie_id, self.now());
-                tokio::spawn(async move {
+                crate::panics::spawn_logged("rescan request", async move {
                     if let Err(err) = queue
                         .push(
                             CommandBody::RescanMovie {
