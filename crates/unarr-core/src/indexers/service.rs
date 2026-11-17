@@ -54,7 +54,18 @@ async fn in_indexer_order(
 ) -> anyhow::Result<Vec<ReleaseInfo>> {
     let mut answers = Vec::new();
     while let Some(result) = tasks.join_next().await {
-        answers.push(result?);
+        match result {
+            Ok(answer) => answers.push(answer),
+            // Reading one indexer's answer panicked: that indexer brings
+            // nothing this time, as when it cannot be reached, and the
+            // others' releases are still decided on. Failing the whole
+            // sync would stop every grab for as long as the release that
+            // cannot be read stays in that one feed.
+            Err(e) if e.is_panic() => {
+                tracing::error!(error = %e, "An indexer's answer could not be read; its releases are left out");
+            }
+            Err(e) => return Err(e.into()),
+        }
     }
     answers.sort_by_key(|(position, _)| *position);
     Ok(answers.into_iter().flat_map(|(_, releases)| releases).collect())
@@ -391,6 +402,28 @@ impl IndexerService {
 
 #[cfg(test)]
 mod tests {
+    /// One indexer whose answer panics while it is read brings nothing;
+    /// the others' releases come out, in the indexers' order.
+    #[tokio::test]
+    async fn an_indexer_whose_answer_panics_is_left_out() {
+        crate::panics::install_hook();
+        let release = |title: &str| super::ReleaseInfo {
+            title: title.to_owned(),
+            ..Default::default()
+        };
+        let mut tasks = tokio::task::JoinSet::new();
+        let (second, first) = (release("second"), release("first"));
+        tasks.spawn(async move { (2, vec![second]) });
+        tasks.spawn(async {
+            let nothing: Vec<super::ReleaseInfo> = Vec::new();
+            (1, vec![nothing[0].clone()])
+        });
+        tasks.spawn(async move { (0, vec![first]) });
+        let releases = super::in_indexer_order(&mut tasks).await.unwrap();
+        let titles: Vec<&str> = releases.iter().map(|r| r.title.as_str()).collect();
+        assert_eq!(titles, ["first", "second"]);
+    }
+
     use super::*;
     use crate::indexers::settings::NewznabSettings;
     use crate::model::Provider;

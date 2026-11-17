@@ -101,7 +101,13 @@ pub async fn connect(
     if !authorized(&state, &uri, &headers) {
         return StatusCode::UNAUTHORIZED.into_response();
     }
-    ws.on_upgrade(move |socket| serve(socket, state))
+    // A connection is a task of its own: a panic in it ends that
+    // connection, which the UI opens again, and is logged with the rest.
+    ws.on_upgrade(move |socket| async move {
+        if let Err(panic) = unarr_core::panics::catch(serve(socket, state)).await {
+            tracing::error!("A SignalR connection {panic}; the client connects again");
+        }
+    })
 }
 
 fn frame(v: &Value) -> Message {
