@@ -170,6 +170,25 @@ impl ApiError {
     }
 }
 
+/// The answer to a request whose handling panicked: what the originals'
+/// exception handler writes for an exception nothing caught, a 500 with the
+/// message and a description that says what was raised and where
+/// (recorded from Sonarr 4.0.20 and Radarr 6.4.4 for an
+/// `InvalidOperationException` in a controller; theirs holds the .NET
+/// stack, this one the place of the panic).
+pub fn panicked(panic: &unarr_core::panics::Panicked) -> Response {
+    let mut response = (
+        StatusCode::INTERNAL_SERVER_ERROR,
+        Json(json!({
+            "message": panic.message,
+            "description": panic.to_string(),
+        })),
+    )
+        .into_response();
+    response.extensions_mut().insert(Thrown);
+    response
+}
+
 /// Marks an answer the originals' exception handler writes: it starts from
 /// an empty response, so what the pipeline had set is gone (`http.rs`).
 #[derive(Debug, Clone, Copy)]

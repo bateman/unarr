@@ -305,6 +305,9 @@ pub fn router(state: AppState) -> Router {
         // A route with a limit of its own (the backup upload) keeps it.
         .layer(axum::extract::DefaultBodyLimit::max(API_BODY_LIMIT))
         .route_layer(axum::middleware::from_fn(reject_put_without_id))
+        // A panic in an action is the exception handler's 500, which
+        // `finish` then sends as the originals send theirs.
+        .layer(axum::middleware::from_fn(http::catch_panic))
         .layer(axum::middleware::from_fn_with_state(state.clone(), http::finish))
         .layer(axum::middleware::from_fn_with_state(
             state.clone(),
@@ -375,6 +378,7 @@ pub fn router(state: AppState) -> Router {
 
     // The calendar feed: opened with the API key, as the API is.
     let feed = routes::feed_router(&state)
+        .route_layer(axum::middleware::from_fn(http::catch_panic))
         .route_layer(axum::middleware::from_fn_with_state(state.clone(), http::finish))
         .route_layer(axum::middleware::from_fn_with_state(
             state.clone(),
@@ -423,6 +427,9 @@ pub fn router(state: AppState) -> Router {
             state.clone(),
             hosts::require_allowed_host,
         ))
+        // Outermost, as the originals' exception handler is: a panic in a
+        // page, in `/ping` or in a layer above costs that request only.
+        .layer(axum::middleware::from_fn(http::catch_panic_anywhere))
 }
 
 #[cfg(test)]

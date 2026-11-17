@@ -230,6 +230,44 @@ pub async fn finish(State(state): State<AppState>, request: Request, next: Next)
     response
 }
 
+/// `SonarrErrorPipeline` for what Unarr has in place of an unhandled
+/// exception: a panic while a request is handled costs that request. It is
+/// logged as the originals log theirs ("Request Failed", with the message
+/// and the place of the panic) and answered with their 500.
+///
+/// This one sits inside [`finish`], around the API's and the feed's
+/// actions, so the answer leaves as the exception handler's does there: no
+/// `X-Application-Version`, no charset, `no-cache,no-store`.
+pub async fn catch_panic(request: Request, next: Next) -> Response {
+    let method = request.method().clone();
+    let path = request.uri().path().to_owned();
+    match unarr_core::panics::catch(next.run(request)).await {
+        Ok(response) => response,
+        Err(panic) => {
+            tracing::error!("Request Failed. {method} {path}: {panic}");
+            crate::error::panicked(&panic)
+        }
+    }
+}
+
+/// The same around the whole router, for what [`catch_panic`] is not
+/// around: the pages, `/ping`, the login, SignalR's negotiation and the
+/// layers themselves. The originals' handler is the outermost middleware
+/// too and writes the same answer whatever the path.
+pub async fn catch_panic_anywhere(request: Request, next: Next) -> Response {
+    let method = request.method().clone();
+    let path = request.uri().path().to_owned();
+    match unarr_core::panics::catch(next.run(request)).await {
+        Ok(response) => response,
+        Err(panic) => {
+            tracing::error!("Request Failed. {method} {path}: {panic}");
+            let mut response = crate::error::panicked(&panic);
+            forbid_caching(response.headers_mut(), NO_CACHE_THROWN);
+            response
+        }
+    }
+}
+
 /// No caching, for what is neither a page nor the API: SignalR's negotiation.
 pub async fn no_cache(mut response: Response) -> Response {
     if response.status() != StatusCode::SWITCHING_PROTOCOLS && response.status() != StatusCode::UNAUTHORIZED {
@@ -365,6 +403,85 @@ pub fn acceptable_encodings(value: &str) -> Option<String> {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// What a panicking action answers behind `layer`.
+    async fn answer_of_a_panic(layer: axum::Router) -> (StatusCode, HeaderMap, serde_json::Value) {
+        use tower::ServiceExt;
+        unarr_core::panics::install_hook();
+        let response = layer
+            .oneshot(
+                Request::builder()
+                    .uri("/boom")
+                    .body(axum::body::Body::empty())
+                    .unwrap(),
+            )
+            .await
+            .unwrap();
+        let (parts, body) = response.into_parts();
+        let bytes = axum::body::to_bytes(body, 64 * 1024).await.unwrap();
+        (
+            parts.status,
+            parts.headers,
+            serde_json::from_slice(&bytes).unwrap(),
+        )
+    }
+
+    async fn boom() -> &'static str {
+        let nothing: Vec<u8> = Vec::new();
+        tokio::task::yield_now().await;
+        if nothing.is_empty() {
+            panic!("the handler went wrong");
+        }
+        "never"
+    }
+
+    #[tokio::test]
+    async fn a_panic_in_an_action_is_the_originals_500() {
+        let router = axum::Router::new()
+            .route("/boom", axum::routing::get(boom))
+            .route("/fine", axum::routing::get(|| async { "fine" }));
+        // As recorded from both originals for an exception no one caught:
+        // 500, JSON without a charset, never cached.
+        let (status, headers, body) = answer_of_a_panic(
+            router
+                .clone()
+                .layer(axum::middleware::from_fn(catch_panic_anywhere)),
+        )
+        .await;
+        assert_eq!(status, StatusCode::INTERNAL_SERVER_ERROR);
+        assert_eq!(headers[header::CONTENT_TYPE], "application/json");
+        assert_eq!(headers[header::CACHE_CONTROL], "no-cache,no-store");
+        assert_eq!(headers[header::PRAGMA], "no-cache");
+        assert_eq!(headers[header::EXPIRES], "-1");
+        assert_eq!(body["message"], "the handler went wrong");
+        let description = body["description"].as_str().unwrap();
+        assert!(
+            description.starts_with("panicked at ") && description.ends_with(": the handler went wrong"),
+            "{description}"
+        );
+        assert!(description.contains("http.rs:"), "{description}");
+
+        // The inner one leaves the headers to `finish`, and marks the
+        // answer as the exception handler's for it.
+        let (status, headers, _) =
+            answer_of_a_panic(router.clone().layer(axum::middleware::from_fn(catch_panic))).await;
+        assert_eq!(status, StatusCode::INTERNAL_SERVER_ERROR);
+        assert!(!headers.contains_key(header::CACHE_CONTROL));
+
+        // The router answers the next request.
+        use tower::ServiceExt;
+        let next = router
+            .layer(axum::middleware::from_fn(catch_panic_anywhere))
+            .oneshot(
+                Request::builder()
+                    .uri("/fine")
+                    .body(axum::body::Body::empty())
+                    .unwrap(),
+            )
+            .await
+            .unwrap();
+        assert_eq!(next.status(), StatusCode::OK);
+    }
 
     #[test]
     fn one_trailing_slash_is_dropped() {
