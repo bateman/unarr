@@ -18,6 +18,7 @@ pub mod discord;
 pub mod plex;
 pub mod webhook;
 
+use crate::sync::Recover;
 use std::collections::HashMap;
 use std::sync::Mutex;
 
@@ -926,7 +927,7 @@ impl Notifier {
             return;
         }
         tracing::debug!(series = %series.title, "scheduling library update");
-        let mut pending = self.plex_pending.lock().unwrap();
+        let mut pending = self.plex_pending.lock().recover();
         let queue = pending.entry(settings.host.clone()).or_default();
         if let Some(existing) = queue.iter_mut().find(|s| s.id == series.id) {
             *existing = series.clone();
@@ -944,7 +945,7 @@ impl Notifier {
             }
             let settings = plex::Settings::from_value(&def.settings);
             let items: Vec<Series> = {
-                let mut pending = self.plex_pending.lock().unwrap();
+                let mut pending = self.plex_pending.lock().recover();
                 pending.remove(&settings.host).unwrap_or_default()
             };
             if items.is_empty() || !settings.update_library {

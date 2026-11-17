@@ -11,6 +11,7 @@
 //! tag; the tests use that build when `make ui` left it in `.cache/sonarr`,
 //! so that file names and media info compare equal to the goldens.
 
+use crate::sync::Recover;
 use std::path::{Path, PathBuf};
 use std::process::Command;
 use std::sync::{Mutex, OnceLock};
@@ -119,13 +120,13 @@ pub fn ffprobe_path() -> PathBuf {
 static OVERRIDE: Mutex<Option<PathBuf>> = Mutex::new(None);
 
 fn override_path() -> Option<PathBuf> {
-    OVERRIDE.lock().unwrap().clone()
+    OVERRIDE.lock().recover().clone()
 }
 
 /// Point every probe at `path` (the daemon's `--ffprobe`, the tests'
 /// bundled build).
 pub fn set_ffprobe_path(path: Option<PathBuf>) {
-    *OVERRIDE.lock().unwrap() = path;
+    *OVERRIDE.lock().recover() = path;
 }
 
 /// Whether ffprobe answers at all.

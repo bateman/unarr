@@ -33,8 +33,8 @@ mod tests {
         let lock = Arc::new(RwLock::new(2));
         let (m, l) = (mutex.clone(), lock.clone());
         let _ = std::thread::spawn(move || {
-            let _m = m.lock().unwrap();
-            let _l = l.write().unwrap();
+            let _m = m.lock().recover();
+            let _l = l.write().recover();
             panic!("while holding both");
         })
         .join();

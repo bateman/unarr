@@ -4,6 +4,7 @@
 //! folder. The plex.tv side (sign-in, server list, the ping on each
 //! update) is not reproduced: it needs the user's plex.tv account.
 
+use crate::sync::Recover;
 use chrono::{DateTime, Duration, Utc};
 use serde_json::{json, Value};
 
@@ -437,7 +438,7 @@ pub(crate) async fn cached_version(
     now: DateTime<Utc>,
 ) -> Result<String, PlexError> {
     let cached = {
-        let versions = notifier.plex_versions().lock().unwrap();
+        let versions = notifier.plex_versions().lock().recover();
         versions
             .get(&settings.host)
             .filter(|(_, at)| *at + Duration::hours(2) > now)
@@ -450,7 +451,7 @@ pub(crate) async fn cached_version(
             notifier
                 .plex_versions()
                 .lock()
-                .unwrap()
+                .recover()
                 .insert(settings.host.clone(), (v.clone(), now));
             Ok(v)
         }
@@ -494,7 +495,7 @@ pub(crate) async fn test_for(
     section_type: &str,
     no_library: &str,
 ) -> TestOutcome {
-    notifier.plex_versions().lock().unwrap().remove(&settings.host);
+    notifier.plex_versions().lock().recover().remove(&settings.host);
     match sections_of(notifier, settings, section_type).await {
         Ok(sections) if sections.is_empty() => {
             TestOutcome::Failures(vec![ValidationFailure::error("Host", no_library)])

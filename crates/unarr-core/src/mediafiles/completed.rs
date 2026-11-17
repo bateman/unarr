@@ -367,12 +367,23 @@ pub async fn process_monitored_downloads(
     for mut t in tracked {
         if enabled && t.state == TrackedDownloadState::ImportPending {
             let (db2, env2) = (db.clone(), env.clone());
-            let (updated, ev) = tokio::task::spawn_blocking(move || {
+            let title = t.item.title.clone();
+            let imported = tokio::task::spawn_blocking(move || {
                 let mut t = t;
                 let ev = import(&db2, &env2, &mut t, now);
                 (t, ev)
             })
-            .await?;
+            .await;
+            // An import that panics costs this download, which stays as
+            // it was and is tried again at the next run; the ones after
+            // it are still looked at, at every run.
+            let (updated, ev) = match imported {
+                Ok(imported) => imported,
+                Err(e) => {
+                    tracing::error!(error = %e, "Couldn't import the download '{title}'");
+                    continue;
+                }
+            };
             t = updated;
             for e in &ev.0 {
                 if matches!(e, ImportEvent::DownloadCompleted(_)) {

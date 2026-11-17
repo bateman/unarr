@@ -22,6 +22,7 @@ pub mod discord;
 pub mod plex;
 pub mod webhook;
 
+use crate::sync::Recover;
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
 
@@ -759,7 +760,7 @@ impl MovieNotifier {
             return;
         }
         tracing::debug!(id = movie.id, title = %movie.metadata.title, "scheduling library update for movie");
-        let mut pending = self.plex_pending.lock().unwrap();
+        let mut pending = self.plex_pending.lock().recover();
         let queue = pending.entry(settings.host.clone()).or_default();
         // `queue.Pending[movie.Id] = item`: a movie already waiting keeps
         // its place and the object first queued for it.
@@ -772,7 +773,7 @@ impl MovieNotifier {
     pub fn plex_pending(&self, host: &str) -> Vec<Movie> {
         self.plex_pending
             .lock()
-            .unwrap()
+            .recover()
             .get(host)
             .cloned()
             .unwrap_or_default()
@@ -791,7 +792,7 @@ impl MovieNotifier {
             }
             let settings = base_plex::Settings::from_value(&def.settings);
             let items: Vec<Movie> = {
-                let mut pending = self.plex_pending.lock().unwrap();
+                let mut pending = self.plex_pending.lock().recover();
                 pending.remove(&settings.host).unwrap_or_default()
             };
             if items.is_empty() || !settings.update_library {

@@ -3,6 +3,7 @@
 //! `DownloadClientStatusService`: which client takes a release, which are
 //! healthy, and the back-off a failing one earns.
 
+use crate::sync::Recover;
 use std::collections::{HashMap, HashSet};
 use std::fmt;
 use std::sync::Mutex;
@@ -262,7 +263,7 @@ impl DownloadClientService {
         let last = self
             .last_used
             .lock()
-            .unwrap()
+            .recover()
             .get(&protocol)
             .copied()
             .unwrap_or(0);
@@ -272,7 +273,7 @@ impl DownloadClientService {
             .or_else(|| group.first())
             .cloned()
             .expect("a non-empty group");
-        self.last_used.lock().unwrap().insert(protocol, chosen.id);
+        self.last_used.lock().recover().insert(protocol, chosen.id);
         Ok(Ok(Some(chosen)))
     }
 

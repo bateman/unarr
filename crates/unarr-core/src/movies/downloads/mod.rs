@@ -14,6 +14,7 @@ pub mod queue;
 pub mod redownload;
 pub mod tracked;
 
+use crate::sync::Recover;
 use std::collections::HashMap;
 use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::{Arc, Mutex, OnceLock};
@@ -78,7 +79,7 @@ impl MovieDownloads {
 
     /// The events the refreshes raised since they were last taken.
     pub fn take_raised_events(&self) -> Vec<crate::movies::import::events::MovieImportEvent> {
-        std::mem::take(&mut *self.raised.lock().unwrap())
+        std::mem::take(&mut *self.raised.lock().recover())
     }
 
     /// Hand over the notifications; the first call wins.
@@ -108,7 +109,7 @@ impl MovieDownloads {
     /// queue and the manual import of the download show them from then
     /// on, until the download is matched to its movie afresh.
     pub fn convert_covers_of(&self, download_id: &str, url_base: &str) {
-        let mut tracked = self.tracked.lock().unwrap();
+        let mut tracked = self.tracked.lock().recover();
         if let Some(movie) = tracked
             .get_mut(download_id)
             .and_then(|t| t.remote.as_mut())
@@ -182,12 +183,12 @@ impl MovieDownloads {
 
     /// The queue as last built.
     pub fn queue(&self) -> Vec<MovieQueueItem> {
-        self.queue.lock().unwrap().clone()
+        self.queue.lock().recover().clone()
     }
 
     /// The queue for the decision engine's `QueueSpecification`.
     pub fn queued_movies(&self) -> Vec<QueuedMovie> {
-        queue::queued_movies(&self.queue.lock().unwrap())
+        queue::queued_movies(&self.queue.lock().recover())
     }
 
     /// A handle the searches read the queue through.
@@ -197,21 +198,21 @@ impl MovieDownloads {
     }
 
     pub fn find_queue_item(&self, id: i64) -> Option<MovieQueueItem> {
-        self.queue.lock().unwrap().iter().find(|q| q.id == id).cloned()
+        self.queue.lock().recover().iter().find(|q| q.id == id).cloned()
     }
 
     pub fn tracked(&self, download_id: &str) -> Option<TrackedMovieDownload> {
-        self.tracked.lock().unwrap().get(download_id).cloned()
+        self.tracked.lock().recover().get(download_id).cloned()
     }
 
     pub fn tracked_downloads(&self) -> Vec<TrackedMovieDownload> {
-        self.tracked.lock().unwrap().values().cloned().collect()
+        self.tracked.lock().recover().values().cloned().collect()
     }
 
     /// `StopTracking`: forget downloads and rebuild the queue from the rest.
     pub fn stop_tracking(&self, download_ids: &[String], now: DateTime<Utc>) {
         {
-            let mut tracked = self.tracked.lock().unwrap();
+            let mut tracked = self.tracked.lock().recover();
             for id in download_ids {
                 tracked.remove(id);
             }
@@ -230,7 +231,7 @@ impl MovieDownloads {
         ) {
             t.is_trackable = false;
         }
-        let mut tracked = self.tracked.lock().unwrap();
+        let mut tracked = self.tracked.lock().recover();
         if tracked.contains_key(&t.item.download_id) {
             tracked.insert(t.item.download_id.clone(), t);
         }
@@ -244,12 +245,12 @@ impl MovieDownloads {
     /// `QueueService.Handle(TrackedDownloadRefreshedEvent)`.
     fn rebuild_queue(&self, now: DateTime<Utc>) {
         let items = {
-            let tracked = self.tracked.lock().unwrap();
+            let tracked = self.tracked.lock().recover();
             let mut all: Vec<&TrackedMovieDownload> = tracked.values().collect();
             all.sort_by_key(|t| t.item.download_id.clone());
             queue::build(&all, now)
         };
-        *self.queue.lock().unwrap() = items;
+        *self.queue.lock().recover() = items;
     }
 
     /// `DownloadService.DownloadReport`: hand a release to a client and

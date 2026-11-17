@@ -2,6 +2,7 @@
 //! `jsonrpc` with basic authentication; downloads are tagged with a `drone`
 //! parameter so their ids survive NZBGet renumbering them.
 
+use crate::sync::Recover;
 use std::collections::BTreeMap;
 
 use base64::Engine;
@@ -556,7 +557,7 @@ impl<'a> Nzbget<'a> {
 /// `Guid.NewGuid().ToString().Replace("-", "")`: 32 hex characters, or
 /// the next pinned id when a replay set some.
 fn random_hex() -> String {
-    if let Some(pinned) = PINNED_IDS.lock().unwrap().pop_front() {
+    if let Some(pinned) = PINNED_IDS.lock().recover().pop_front() {
         return pinned;
     }
     use ring::rand::SecureRandom;
@@ -571,7 +572,7 @@ static PINNED_IDS: std::sync::Mutex<std::collections::VecDeque<String>> =
 /// Pin the drone ids the next grabs get, in order, so that a replay of a
 /// recording sees the ids the recording did (like its pinned clock).
 pub fn pin_drone_ids(ids: &[&str]) {
-    let mut pinned = PINNED_IDS.lock().unwrap();
+    let mut pinned = PINNED_IDS.lock().recover();
     pinned.clear();
     pinned.extend(ids.iter().map(|s| s.to_string()));
 }

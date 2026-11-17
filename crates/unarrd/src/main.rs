@@ -1,4 +1,3 @@
-use std::future::IntoFuture;
 use std::net::SocketAddr;
 use std::path::{Path, PathBuf};
 
@@ -710,7 +709,7 @@ async fn serve(
     // tick; a personality that runs none yet (Radarr, until it has its
     // commands) would keep what its largest answer needed.
     if state.commands().is_err() {
-        tokio::spawn(async {
+        unarr_core::panics::supervised("memory release timer", || async {
             let mut tick = tokio::time::interval(std::time::Duration::from_secs(30));
             loop {
                 tick.tick().await;
@@ -724,13 +723,34 @@ async fn serve(
         .with_context(|| format!("binding {bind}:{port}"))?;
     let addr = listener.local_addr()?;
     tracing::info!(%addr, ?personality, "listening");
-    tokio::spawn(
-        axum::serve(
-            listener,
-            unarr_api::router(state).into_make_service_with_connect_info::<SocketAddr>(),
-        )
-        .into_future(),
-    );
+    // Each connection is a task of its own, and a request that panics is
+    // answered by the router. The accept loop is the one task without
+    // which the personality is deaf: should it ever end, by a panic or
+    // an error, it is started again on the same address.
+    let app = unarr_api::router(state).into_make_service_with_connect_info::<SocketAddr>();
+    let mut bound = Some(listener);
+    unarr_core::panics::supervised("HTTP server", move || {
+        let (app, mut listener) = (app.clone(), bound.take());
+        async move {
+            loop {
+                let listener = match listener.take() {
+                    Some(listener) => listener,
+                    None => match tokio::net::TcpListener::bind(addr).await {
+                        Ok(listener) => listener,
+                        Err(e) => {
+                            tracing::error!(error = %e, %addr, "The HTTP server could not listen again");
+                            tokio::time::sleep(std::time::Duration::from_secs(5)).await;
+                            continue;
+                        }
+                    },
+                };
+                if let Err(e) = axum::serve(listener, app.clone()).await {
+                    tracing::error!(error = %e, %addr, "The HTTP server stopped; it starts again");
+                }
+                tokio::time::sleep(std::time::Duration::from_secs(1)).await;
+            }
+        }
+    });
     Ok(addr)
 }
 

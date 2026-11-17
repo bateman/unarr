@@ -2,6 +2,7 @@
 //! (Web API v2, qBittorrent 4.1+): a login cookie or, on 5.1+, an API key,
 //! form posts, torrents listed per category.
 
+use crate::sync::Recover;
 use std::collections::{BTreeMap, HashMap};
 use std::sync::{Mutex, OnceLock};
 
@@ -216,11 +217,11 @@ impl<'a> QBittorrent<'a> {
         }
         let key = self.cookie_key();
         if !reauthenticate {
-            if let Some(cookie) = cookie_cache().lock().unwrap().get(&key) {
+            if let Some(cookie) = cookie_cache().lock().recover().get(&key) {
                 return Ok(Some(cookie.clone()));
             }
         }
-        cookie_cache().lock().unwrap().remove(&key);
+        cookie_cache().lock().recover().remove(&key);
         let response = self
             .request(reqwest::Method::POST, "/api/v2/auth/login")
             .form(&[
@@ -266,7 +267,7 @@ impl<'a> QBittorrent<'a> {
             )));
         }
         let cookie = cookies.join("; ");
-        cookie_cache().lock().unwrap().insert(key, cookie.clone());
+        cookie_cache().lock().recover().insert(key, cookie.clone());
         Ok(Some(cookie))
     }
 

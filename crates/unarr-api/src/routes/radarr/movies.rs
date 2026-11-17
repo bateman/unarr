@@ -543,45 +543,58 @@ pub async fn relay_movie_events(
     const CONTEXT_LIFETIME: std::time::Duration = std::time::Duration::from_secs(2);
     let mut ctx: Option<(MovieContext, std::time::Instant)> = None;
     while let Some(event) = events.recv().await {
-        // `MovieController`'s own handler names the movie by its id and
-        // reads nothing: it is told even when the context cannot be read.
-        if let HubMovieEvent::Deleted(movie_id) = event {
-            state.hub().broadcast(
-                "movie",
-                json!({"action": "deleted", "resource": {"id": movie_id}}),
-            );
-            if events.is_empty() {
-                ctx = None;
-            }
-            continue;
-        }
-        if ctx
-            .as_ref()
-            .is_none_or(|(_, read)| read.elapsed() > CONTEXT_LIFETIME)
-        {
-            ctx = MovieContext::load(&state)
-                .await
-                .ok()
-                .map(|loaded| (loaded, std::time::Instant::now()));
-        }
-        if let Some((ctx, _)) = &ctx {
-            match event {
-                HubMovieEvent::Grabbed(movie_id) => broadcast_movie_change(&state, ctx, movie_id, true).await,
-                HubMovieEvent::Import(e) => relay_import(&state, ctx, &e).await,
-                HubMovieEvent::Deleted(_) => {}
-                // `MovieController`'s own handler: the movie as it reads,
-                // root folder included, under its own name alone.
-                HubMovieEvent::Updated(movie_id) => {
-                    if let Some(resource) = movie_for_hub(&state, ctx, movie_id).await {
-                        state
-                            .hub()
-                            .broadcast("movie", json!({"action": "updated", "resource": resource}));
-                    }
-                }
-            }
+        // A panic while one event is told costs that event, as in the
+        // relay this one is fed by.
+        let told = unarr_core::panics::catch(relay_movie_event(&state, &mut ctx, event, CONTEXT_LIFETIME));
+        if let Err(panic) = told.await {
+            tracing::error!("The movie hub relay {panic}; the event is not sent");
+            ctx = None;
         }
         if events.is_empty() {
             ctx = None;
+        }
+    }
+}
+
+/// One event of [`relay_movie_events`], with the context it keeps.
+async fn relay_movie_event(
+    state: &AppState,
+    ctx: &mut Option<(MovieContext, std::time::Instant)>,
+    event: HubMovieEvent,
+    context_lifetime: std::time::Duration,
+) {
+    // `MovieController`'s own handler names the movie by its id and
+    // reads nothing: it is told even when the context cannot be read.
+    if let HubMovieEvent::Deleted(movie_id) = event {
+        state.hub().broadcast(
+            "movie",
+            json!({"action": "deleted", "resource": {"id": movie_id}}),
+        );
+        return;
+    }
+    if ctx
+        .as_ref()
+        .is_none_or(|(_, read)| read.elapsed() > context_lifetime)
+    {
+        *ctx = MovieContext::load(state)
+            .await
+            .ok()
+            .map(|loaded| (loaded, std::time::Instant::now()));
+    }
+    if let Some((ctx, _)) = ctx.as_ref() {
+        match event {
+            HubMovieEvent::Grabbed(movie_id) => broadcast_movie_change(state, ctx, movie_id, true).await,
+            HubMovieEvent::Import(e) => relay_import(state, ctx, &e).await,
+            HubMovieEvent::Deleted(_) => {}
+            // `MovieController`'s own handler: the movie as it reads,
+            // root folder included, under its own name alone.
+            HubMovieEvent::Updated(movie_id) => {
+                if let Some(resource) = movie_for_hub(state, ctx, movie_id).await {
+                    state
+                        .hub()
+                        .broadcast("movie", json!({"action": "updated", "resource": resource}));
+                }
+            }
         }
     }
 }

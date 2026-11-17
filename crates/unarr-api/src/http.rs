@@ -230,6 +230,15 @@ pub async fn finish(State(state): State<AppState>, request: Request, next: Next)
     response
 }
 
+/// The path as the client asked it: a nested router sees its own part.
+fn whole_path(request: &Request) -> String {
+    request
+        .extensions()
+        .get::<OriginalUri>()
+        .map_or_else(|| request.uri().path(), |original| original.0.path())
+        .to_owned()
+}
+
 /// `SonarrErrorPipeline` for what Unarr has in place of an unhandled
 /// exception: a panic while a request is handled costs that request. It is
 /// logged as the originals log theirs ("Request Failed", with the message
@@ -240,7 +249,7 @@ pub async fn finish(State(state): State<AppState>, request: Request, next: Next)
 /// `X-Application-Version`, no charset, `no-cache,no-store`.
 pub async fn catch_panic(request: Request, next: Next) -> Response {
     let method = request.method().clone();
-    let path = request.uri().path().to_owned();
+    let path = whole_path(&request);
     match unarr_core::panics::catch(next.run(request)).await {
         Ok(response) => response,
         Err(panic) => {
@@ -256,7 +265,7 @@ pub async fn catch_panic(request: Request, next: Next) -> Response {
 /// too and writes the same answer whatever the path.
 pub async fn catch_panic_anywhere(request: Request, next: Next) -> Response {
     let method = request.method().clone();
-    let path = request.uri().path().to_owned();
+    let path = whole_path(&request);
     match unarr_core::panics::catch(next.run(request)).await {
         Ok(response) => response,
         Err(panic) => {
