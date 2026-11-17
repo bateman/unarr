@@ -105,10 +105,12 @@ pub async fn series_resource_by_id(state: &AppState, id: i64) -> anyhow::Result<
 
 pub async fn list(State(state): State<AppState>, uri: Uri) -> ApiResult<Json<Vec<SeriesResource>>> {
     let p = Params::from_uri(&uri);
+    let include_season_images = p.bool("includeSeasonImages", false);
     let started = std::time::Instant::now();
     let loaded = load(&state, None, p.i64("tvdbId")).await?;
     let read = started.elapsed();
-    let resources = render(&state, &loaded, p.bool("includeSeasonImages", false));
+    // A whole library is a megabyte of JSON: built off the async workers.
+    let resources = crate::blocking::run(move || render(&state, &loaded, include_season_images)).await?;
     tracing::debug!(
         series = resources.len(),
         "series list: {:.1} ms in the database, {:.1} ms building the resources",
