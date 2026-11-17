@@ -37,11 +37,15 @@ fancy-regex = "0.20"
 chrono = { version = "0.4", default-features = false, features = ["std", "clock", "serde"] }
 
 # Small, fast, lean: the non-functional requirements live here too.
+# A panic unwinds: one process holds every personality, and a bug in one
+# costs the request or the command it happened in, not the others
+# (`unarr_core::panics`). `abort` made a smaller binary: docs/DESIGN.md,
+# section 9, has the measure.
 [profile.release]
 opt-level = 3
 lto = "fat"
 codegen-units = 1
-panic = "abort"
+panic = "unwind"
 strip = true
 
 # Cover thumbnails are pixel loops: unoptimised, a refresh of the fixture

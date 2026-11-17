@@ -740,6 +740,8 @@ fn main() -> anyhow::Result<()> {
         std::process::exit(if healthcheck(&args.data) { 0 } else { 1 });
     }
     unarr_core::fs::tune_allocator();
+    // A panic unwinds to whoever started the work it happened in.
+    unarr_core::panics::install_hook();
     // What is logged outside any personality goes to the console and, through
     // `process_log`, to every personality's recent lines and files.
     let process_log = ProcessLog::new();
