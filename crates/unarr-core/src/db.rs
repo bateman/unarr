@@ -107,7 +107,21 @@ impl Db {
         thread::Builder::new().name("unarr-db".into()).spawn(move || {
             let _log = tracing::dispatcher::set_default(&log);
             for job in rx {
-                job(&mut conn);
+                // A call that panics is caught where it runs (`answer`),
+                // which tells its caller. The catch here is not for the
+                // call but for what a job does around it: the line
+                // `answer` logs, the release of a result no caller waits
+                // for any more. None of these is known to panic, and one
+                // that did would otherwise end this thread: it owns the
+                // only connection, and without it the personality has no
+                // database until the process starts again.
+                let served = crate::panics::catch_sync(|| job(&mut conn));
+                let closed = crate::panics::catch_sync(|| roll_back_what_was_left_open(&conn));
+                for panic in [served, closed].into_iter().filter_map(Result::err) {
+                    // Not through `tracing`: a log layer that panicked is
+                    // one of the ways here.
+                    eprintln!("unarr-db: {panic}, outside a database call; the thread goes on");
+                }
             }
         })?;
         Ok(Db { tx })
@@ -122,7 +136,7 @@ impl Db {
         let (reply_tx, reply_rx) = tokio::sync::oneshot::channel();
         self.tx
             .send(Box::new(move |conn| {
-                let _ = reply_tx.send(f(conn));
+                let _ = reply_tx.send(answer(f, conn));
             }))
             .map_err(|_| anyhow::anyhow!("database thread is gone"))?;
         reply_rx
@@ -140,13 +154,37 @@ impl Db {
         let (reply_tx, reply_rx) = mpsc::sync_channel(1);
         self.tx
             .send(Box::new(move |conn| {
-                let _ = reply_tx.send(f(conn));
+                let _ = reply_tx.send(answer(f, conn));
             }))
             .map_err(|_| anyhow::anyhow!("database thread is gone"))?;
         reply_rx
             .recv()
             .map_err(|_| anyhow::anyhow!("database thread dropped the request"))?
     }
+}
+
+/// A `Transaction` rolls back as it is dropped, unwinding included. One
+/// begun by hand would still be open after its call, and every later call
+/// would join it.
+fn roll_back_what_was_left_open(conn: &Connection) {
+    if !conn.is_autocommit() {
+        tracing::error!("A database call left a transaction open: rolled back");
+        if let Err(e) = conn.execute_batch("ROLLBACK") {
+            tracing::error!(error = %e, "The open transaction could not be rolled back");
+        }
+    }
+}
+
+/// What a call answers: its result, or the panic it ended with as an
+/// error, so that the caller gets an answer either way.
+fn answer<T>(
+    f: impl FnOnce(&mut Connection) -> anyhow::Result<T>,
+    conn: &mut Connection,
+) -> anyhow::Result<T> {
+    crate::panics::catch_sync(|| f(conn)).unwrap_or_else(|panic| {
+        tracing::error!("A database call {panic}");
+        Err(anyhow::Error::new(panic))
+    })
 }
 
 /// Before the migration sets were split, `--personalities radarr` gave
@@ -219,6 +257,96 @@ mod tests {
             )
             .unwrap();
         assert_eq!(tables, 1);
+    }
+
+    #[test]
+    fn a_call_that_panics_is_an_error_and_the_thread_goes_on() {
+        crate::panics::install_hook();
+        let db = Db::open_in_memory().unwrap();
+        let tags = |db: &Db| -> i64 {
+            db.call_blocking(|conn| Ok(conn.query_row("SELECT COUNT(*) FROM tags", [], |r| r.get(0))?))
+                .unwrap()
+        };
+        let before = tags(&db);
+
+        // Inside a transaction, after a write: the caller is told, and the
+        // write is not there.
+        let failed = db.call_blocking(|conn| -> anyhow::Result<()> {
+            let tx = conn.transaction()?;
+            tx.execute("INSERT INTO tags (label) VALUES ('half')", [])?;
+            let rows: Vec<i64> = Vec::new();
+            let _ = rows[3];
+            tx.commit()?;
+            Ok(())
+        });
+        let error = failed.unwrap_err();
+        let panic = error.downcast_ref::<crate::panics::Panicked>().unwrap();
+        assert!(panic.message.contains("index out of bounds"), "{panic}");
+        assert!(panic.location.as_deref().unwrap().contains("db.rs:"), "{panic}");
+        assert_eq!(tags(&db), before);
+
+        // A transaction begun by hand and left open is rolled back too.
+        let failed = db.call_blocking(|conn| -> anyhow::Result<()> {
+            conn.execute_batch("BEGIN; INSERT INTO tags (label) VALUES ('open')")?;
+            panic!("with a transaction open");
+        });
+        assert!(failed.is_err());
+        assert_eq!(tags(&db), before);
+
+        // The same from an async caller, and the thread still writes.
+        let runtime = tokio::runtime::Builder::new_current_thread().build().unwrap();
+        let failed: anyhow::Result<()> = runtime.block_on(db.call(|_| panic!("asked from a task")));
+        assert!(failed.unwrap_err().to_string().ends_with("asked from a task"));
+        db.call_blocking(|conn| Ok(conn.execute("INSERT INTO tags (label) VALUES ('kept')", [])?))
+            .unwrap();
+        assert_eq!(tags(&db), before + 1);
+    }
+
+    /// A panic in a job outside its call does not end the thread: here
+    /// the release of a result whose caller stopped waiting.
+    #[test]
+    fn a_panic_around_a_call_leaves_the_thread_serving() {
+        struct Unsent;
+        impl Drop for Unsent {
+            fn drop(&mut self) {
+                panic!("released without a caller");
+            }
+        }
+
+        crate::panics::install_hook();
+        let db = Db::open_in_memory().unwrap();
+        // The thread is held on a first call, and known to be in it,
+        // while a second one is sent and its caller leaves: the second
+        // call's result is then released on the database thread, never
+        // here.
+        let (hold, held) = mpsc::channel::<()>();
+        let (holding, is_held) = mpsc::channel::<()>();
+        let waiting = {
+            let db = db.clone();
+            thread::spawn(move || {
+                db.call_blocking(move |_| {
+                    holding.send(())?;
+                    Ok(held.recv()?)
+                })
+            })
+        };
+        is_held.recv().unwrap();
+        let runtime = tokio::runtime::Builder::new_current_thread().build().unwrap();
+        runtime.block_on(async {
+            tokio::select! {
+                biased;
+                _ = db.call(|_| Ok(Unsent)) => unreachable!("the thread is held"),
+                _ = std::future::ready(()) => {}
+            }
+        });
+        hold.send(()).unwrap();
+        waiting.join().unwrap().unwrap();
+        // The second call ran, its result was released on the thread with
+        // a panic, and the thread still answers.
+        let tags: i64 = db
+            .call_blocking(|conn| Ok(conn.query_row("SELECT COUNT(*) FROM tags", [], |r| r.get(0))?))
+            .unwrap();
+        assert_eq!(tags, 0);
     }
 
     #[test]

@@ -7,6 +7,7 @@
 pub mod executor;
 pub mod scheduler;
 
+use crate::sync::Recover;
 use std::sync::atomic::{AtomicI64, Ordering};
 use std::sync::Mutex;
 
@@ -1434,7 +1435,7 @@ impl CommandQueue {
         adjust: impl FnOnce(&mut CommandModel),
     ) -> anyhow::Result<CommandModel> {
         let model = {
-            let mut items = self.items.lock().unwrap();
+            let mut items = self.items.lock().recover();
             if let Some(existing) = items.iter().find(|c| c.is_active() && c.body == body) {
                 tracing::trace!(name = body.name(), "command is already in progress");
                 return Ok(existing.clone());
@@ -1476,11 +1477,11 @@ impl CommandQueue {
 
     /// Every command still in the queue, oldest first.
     pub fn all(&self) -> Vec<CommandModel> {
-        self.items.lock().unwrap().clone()
+        self.items.lock().recover().clone()
     }
 
     pub fn find(&self, id: i64) -> Option<CommandModel> {
-        self.items.lock().unwrap().iter().find(|c| c.id == id).cloned()
+        self.items.lock().recover().iter().find(|c| c.id == id).cloned()
     }
 
     /// `Get`: from the queue, or from the table once cleaned up.
@@ -1498,7 +1499,7 @@ impl CommandQueue {
     /// running, done, or unknown).
     pub fn cancel(&self, id: i64) -> bool {
         let removed = {
-            let mut items = self.items.lock().unwrap();
+            let mut items = self.items.lock().recover();
             match items
                 .iter()
                 .position(|c| c.id == id && c.status == CommandStatus::Queued)
@@ -1520,7 +1521,7 @@ impl CommandQueue {
     /// minutes ago and from the table what ended more than a day ago.
     pub async fn clean(&self, now: DateTime<Utc>) -> anyhow::Result<()> {
         {
-            let mut items = self.items.lock().unwrap();
+            let mut items = self.items.lock().recover();
             items.retain(|c| !c.ended_at.is_some_and(|t| t < now - Duration::minutes(5)));
         }
         self.db.call(move |conn| store::commands::trim(conn, now)).await?;
@@ -1532,7 +1533,7 @@ impl CommandQueue {
     /// nothing may start now (nothing queued, or an exclusive or
     /// long-running command holds the others back).
     pub fn try_start(&self, now: DateTime<Utc>) -> Option<CommandModel> {
-        let mut items = self.items.lock().unwrap();
+        let mut items = self.items.lock().recover();
         let started: Vec<CommandBody> = items
             .iter()
             .filter(|c| c.status == CommandStatus::Started)
@@ -1552,7 +1553,7 @@ impl CommandQueue {
         } else {
             Vec::new()
         };
-        let mut awaited = self.awaited.lock().unwrap();
+        let mut awaited = self.awaited.lock().recover();
         awaited.retain(|id| {
             items
                 .iter()
@@ -1597,20 +1598,20 @@ impl CommandQueue {
     /// A running command waits for this one: it starts before whatever
     /// else is queued, as soon as a worker is free.
     pub fn expedite(&self, id: i64) {
-        self.awaited.lock().unwrap().insert(id);
+        self.awaited.lock().recover().insert(id);
         self.changed.notify_waiters();
     }
 
     /// Any command queued or started.
     pub fn is_busy(&self) -> bool {
-        self.items.lock().unwrap().iter().any(|c| c.is_active())
+        self.items.lock().recover().iter().any(|c| c.is_active())
     }
 
     /// Any command started and not yet ended.
     pub fn has_running(&self) -> bool {
         self.items
             .lock()
-            .unwrap()
+            .recover()
             .iter()
             .any(|c| c.status == CommandStatus::Started)
     }
@@ -1636,7 +1637,7 @@ impl CommandQueue {
 
     /// Change a command in the queue; `None` when it is not there.
     fn update(&self, id: i64, f: impl FnOnce(&mut CommandModel)) -> Option<CommandModel> {
-        let mut items = self.items.lock().unwrap();
+        let mut items = self.items.lock().recover();
         let c = items.iter_mut().find(|c| c.id == id)?;
         f(c);
         Some(c.clone())

@@ -1,6 +1,7 @@
 //! `SkyHookProxy`: the Servarr team's TVDB proxy, and the daily-series list
 //! from the Servarr services that its mapping consults.
 
+use crate::sync::Recover;
 use std::collections::HashSet;
 use std::sync::Mutex;
 use std::time::{Duration, Instant};
@@ -65,7 +66,7 @@ impl Skyhook {
     /// read as no daily series, and the empty answer is cached like a good
     /// one.
     async fn daily_series(&self) -> HashSet<i64> {
-        if let Some((at, ids)) = &*self.daily.lock().unwrap() {
+        if let Some((at, ids)) = &*self.daily.lock().recover() {
             if at.elapsed() < DAILY_SERIES_TTL {
                 return ids.clone();
             }
@@ -89,7 +90,7 @@ impl Skyhook {
                 HashSet::new()
             }
         };
-        *self.daily.lock().unwrap() = Some((Instant::now(), ids.clone()));
+        *self.daily.lock().recover() = Some((Instant::now(), ids.clone()));
         ids
     }
 }

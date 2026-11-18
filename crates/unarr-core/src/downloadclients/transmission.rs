@@ -3,6 +3,7 @@
 //! the session id it hands out in a 409, torrents told apart by label
 //! (4.0+), directory or category folder.
 
+use crate::sync::Recover;
 use std::collections::{BTreeSet, HashMap};
 use std::sync::{Mutex, OnceLock};
 
@@ -142,11 +143,11 @@ impl<'a> Transmission<'a> {
         let app = self.settings.app.name;
         let key = format!("{}:{}", self.base_url(), self.settings.password);
         if !reauthenticate {
-            if let Some(id) = session_cache().lock().unwrap().get(&key) {
+            if let Some(id) = session_cache().lock().recover().get(&key) {
                 return Ok(id.clone());
             }
         }
-        session_cache().lock().unwrap().remove(&key);
+        session_cache().lock().recover().remove(&key);
         let response = self
             .request(reqwest::Method::GET)
             .send()
@@ -175,7 +176,7 @@ impl<'a> Transmission<'a> {
             _ => return Err(ClientError::Authentication(format!("Failed to authenticate with {NAME}."))),
         };
         tracing::debug!("Transmission authentication succeeded");
-        session_cache().lock().unwrap().insert(key, session.clone());
+        session_cache().lock().recover().insert(key, session.clone());
         Ok(session)
     }
 

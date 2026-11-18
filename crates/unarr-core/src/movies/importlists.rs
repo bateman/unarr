@@ -7,6 +7,7 @@
 //! maintainer syncs). The other implementations keep their settings and
 //! are skipped by the sync.
 
+use crate::sync::Recover;
 use std::collections::HashSet;
 
 use chrono::{DateTime, Duration, Utc};
@@ -177,7 +178,7 @@ impl MovieMetadataProvider for Remembering<'_> {
         ctx: &'a MapContext,
     ) -> BoxFuture<'a, Result<MovieInfo, MovieMetadataError>> {
         Box::pin(async move {
-            if let Some(known) = self.movies.lock().unwrap().get(&tmdb_id).cloned() {
+            if let Some(known) = self.movies.lock().recover().get(&tmdb_id).cloned() {
                 return Ok(known);
             }
             let info = self.inner.movie_info(tmdb_id, ctx).await?;
@@ -186,7 +187,7 @@ impl MovieMetadataProvider for Remembering<'_> {
             // refresh that follows an add asks for the movie again).
             let mut kept = info.clone();
             kept.credits = Vec::new();
-            self.movies.lock().unwrap().insert(tmdb_id, kept);
+            self.movies.lock().recover().insert(tmdb_id, kept);
             Ok(info)
         })
     }

@@ -18,6 +18,7 @@ pub mod queue;
 pub mod redownload;
 pub mod tracked;
 
+use crate::sync::Recover;
 use std::collections::HashMap;
 use std::sync::atomic::{AtomicBool, Ordering};
 use std::sync::{Mutex, OnceLock};
@@ -153,7 +154,7 @@ impl Downloads {
     }
 
     pub fn last_refresh(&self) -> Option<DateTime<Utc>> {
-        *self.last_refresh.lock().unwrap()
+        *self.last_refresh.lock().recover()
     }
 
     /// `RefreshMonitoredDownloads`: every enabled client asked, every item
@@ -190,7 +191,7 @@ impl Downloads {
 
     /// The queue for the decision engine's `QueueSpecification`.
     pub fn queued_releases(&self) -> Vec<QueuedRelease> {
-        self.published.lock().unwrap().clone()
+        self.published.lock().recover().clone()
     }
 
     /// A handle the searches read the queue through.
@@ -201,25 +202,25 @@ impl Downloads {
 
     /// The queue as last built.
     pub fn queue(&self) -> Vec<QueueItem> {
-        self.queue.lock().unwrap().clone()
+        self.queue.lock().recover().clone()
     }
 
     pub fn find_queue_item(&self, id: i64) -> Option<QueueItem> {
-        self.queue.lock().unwrap().iter().find(|q| q.id == id).cloned()
+        self.queue.lock().recover().iter().find(|q| q.id == id).cloned()
     }
 
     pub fn tracked(&self, download_id: &str) -> Option<TrackedDownload> {
-        self.tracked.lock().unwrap().get(download_id).cloned()
+        self.tracked.lock().recover().get(download_id).cloned()
     }
 
     pub fn tracked_downloads(&self) -> Vec<TrackedDownload> {
-        self.tracked.lock().unwrap().values().cloned().collect()
+        self.tracked.lock().recover().values().cloned().collect()
     }
 
     /// `StopTracking`: forget downloads and rebuild the queue from the rest.
     pub fn stop_tracking(&self, download_ids: &[String], now: DateTime<Utc>) {
         {
-            let mut tracked = self.tracked.lock().unwrap();
+            let mut tracked = self.tracked.lock().recover();
             for id in download_ids {
                 tracked.remove(id);
             }
@@ -238,7 +239,7 @@ impl Downloads {
         let stale: Vec<TrackedDownload> = self
             .tracked
             .lock()
-            .unwrap()
+            .recover()
             .values()
             .filter(|t| affected(t))
             .cloned()
@@ -263,7 +264,7 @@ impl Downloads {
             })
             .await?;
         {
-            let mut tracked = self.tracked.lock().unwrap();
+            let mut tracked = self.tracked.lock().recover();
             for (download_id, remote) in remapped {
                 if let Some(t) = tracked.get_mut(&download_id) {
                     t.remote = remote;
@@ -337,7 +338,7 @@ impl Downloads {
         ) {
             t.is_trackable = false;
         }
-        let mut tracked = self.tracked.lock().unwrap();
+        let mut tracked = self.tracked.lock().recover();
         if tracked.contains_key(&t.item.download_id) {
             tracked.insert(t.item.download_id.clone(), t);
         }
@@ -352,13 +353,13 @@ impl Downloads {
     /// `QueueService.Handle(TrackedDownloadRefreshedEvent)`.
     fn rebuild_queue(&self, now: DateTime<Utc>) {
         let items = {
-            let tracked = self.tracked.lock().unwrap();
+            let tracked = self.tracked.lock().recover();
             let mut all: Vec<&TrackedDownload> = tracked.values().collect();
             all.sort_by_key(|t| t.item.download_id.clone());
             queue::build(&all, now)
         };
-        *self.published.lock().unwrap() = queue::queued_releases(&items);
-        *self.queue.lock().unwrap() = items;
+        *self.published.lock().recover() = queue::queued_releases(&items);
+        *self.queue.lock().recover() = items;
     }
 
     /// `DownloadService.DownloadReport`: hand a release to a client and

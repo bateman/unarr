@@ -2344,6 +2344,7 @@ dependencies = [
  "anyhow",
  "axum",
  "clap",
+ "serde_json",
  "tokio",
  "tracing",
  "tracing-subscriber",

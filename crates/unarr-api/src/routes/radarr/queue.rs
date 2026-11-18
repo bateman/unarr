@@ -64,7 +64,8 @@ pub fn broadcast_queue(state: &AppState) {
     hub.broadcast("queue", json!({"action": "sync"}));
     hub.broadcast("queue/details", json!({"action": "sync"}));
     let state = state.clone();
-    tokio::spawn(async move {
+    // Lost if it panics: the next change of the queue sends the status.
+    unarr_core::panics::spawn_logged("queue status broadcast", async move {
         let downloads = state.movie_downloads();
         let now = state.now();
         if let Err(e) = downloads.refresh_if_dirty(now).await {

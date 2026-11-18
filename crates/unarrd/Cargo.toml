@@ -11,6 +11,16 @@ rust-version.workspace = true
 name = "unarrd"
 path = "src/main.rs"
 
+[features]
+# A build that panics where a test asks it to, for `make panic-test`.
+# Never part of a published binary: `make build` and the image build
+# without it.
+panic-switch = ["unarr-api/panic-switch", "unarr-core/panic-switch"]
+
+[[test]]
+name = "panic"
+required-features = ["panic-switch"]
+
 [dependencies]
 unarr-core.workspace = true
 unarr-api.workspace = true
@@ -21,3 +31,6 @@ axum.workspace = true
 clap.workspace = true
 tracing.workspace = true
 tracing-subscriber.workspace = true
+
+[dev-dependencies]
+serde_json.workspace = true

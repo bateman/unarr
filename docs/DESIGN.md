@@ -82,6 +82,11 @@ ecosystem configures each app by host, port and API key, so separate ports keep
 compatibility, while one process shares the HTTP client, the scheduler, the
 indexer cache and the parser tables.
 
+What one process costs is that a fault in one personality can reach the
+others. A panic does not: it ends the request or the command it happened
+in, and a personality that cannot start is left down while the others
+serve (section 20).
+
 ## 5. Storage
 
 SQLite, write-ahead logging, accessed through `rusqlite` (bundled) from a
@@ -356,6 +361,8 @@ maintainer's daily driver.
 | Idle RSS under 60 MB, measured again at the end of 4d | Both personalities on 950 series and 2,123 movies, started on the databases they had already imported: 0.23 s to the first answer, 23.6 MB at start, 36.0 MB after a minute idle, 38.2 MB after five. Radarr alone: 27.3 MB idle, 89.2 MB while it reads its 2,123 movies, 28.5 MB two minutes later. The run that imports both databases peaks at 197 MB and settles at 72 MB after a minute, 91 MB after the libraries have been read | 4d | Met idle, in the steady state the homelab runs; the import is the peak |
 | `GET /api/v3/series` p99 under 10 ms, measured again at the end of 4d | 70 ms on 950 series, with Radarr beside it. No target for the movie routes: `GET /api/v3/movie` 289 ms on 2,123 movies, `GET /api/v3/collection` 123 ms, a page of `GET /api/v3/history` 150 ms | 4d | Missed; deferred, as in 4c |
 | Container image under 15 MB compressed, measured again at the end of 4d | The binary with both UIs embedded is 30.6 MiB, 12.3 MiB under `gzip -9` | 4d | Unknown as an image; the binary alone is close to the limit |
+| Container image under 15 MB compressed, once the release profile unwinds | The binary is 34.9 MiB, 14.4 MiB under `gzip -9` (15.07 MB): 4.1 MiB and 2.0 MiB more than aborting | #14 | Unknown as an image; the binary alone is at the limit, and over it if the target is read in decimal megabytes |
+| Idle RSS under 60 MB, once the release profile unwinds | Both personalities on the real library (38 series, 193 movies), fifteen minutes idle: 30 MiB, 11 MiB of it anonymous; 28 and 10 aborting, in the same container | #14 | Met idle |
 
 First measurement, skeleton only (one `system/status` route per personality):
 1.7 MiB binary, 4.3 MB idle RSS, unchanged after 500 requests.
@@ -699,6 +706,43 @@ the same libraries, with this change, are in
 answered `/movie` in 227 ms at p50 (the original 312), `/calendar` in 54
 (133), `/wanted/missing` in 23 (34), `/history` in 45 (43) and `/queue`
 in 17 (1.6), far less ahead than its Sonarr on the series routes.
+
+### Unwinding instead of aborting
+
+The release profile aborted on a panic since the first commit, for a
+smaller binary. It unwinds since issue #14 (section 20 has the decision
+and what catches what). Measured on 17 November 2026 in the cloud session
+(x86-64, glibc), `main` at `d6c61de` against the branch at `57ca42c`,
+both built with the same profile but for `panic`, both personalities on
+the real library, with `make compare-originals` (one run each;
+`docs/originals-comparison.md` keeps the comparison and its History
+row):
+
+| | Aborting | Unwinding | More |
+|---|--:|--:|--:|
+| Binary, stripped, both UIs embedded | 32,228,728 bytes (30.7 MiB) | 36,558,840 bytes (34.9 MiB) | 4.1 MiB, 13 % |
+| The same under `gzip -9` | 12,929,294 bytes (12.3 MiB) | 15,066,465 bytes (14.4 MiB) | 2.0 MiB, 17 % |
+| Idle RSS after fifteen idle minutes | 28 MiB | 30 MiB | 2 MiB |
+| Anonymous memory, same moment | 10 MiB | 11 MiB | 1 MiB |
+| Peak anonymous memory during the reads | 43 MiB | 44 MiB | 1 MiB |
+| Anonymous memory five minutes after the reads | 36 MiB | 37 MiB | 1 MiB |
+| First answer on both ports | 0.26 s | 0.17 s | within the runs' noise |
+
+The 4.1 MiB are code and tables, not Unarr's own catchers (a few hundred
+lines): the clean-up code each function now carries for the values it
+would drop while unwinding (`.text` 2.7 MiB larger), the tables that say
+where that code is (`.gcc_except_table`, 9 KiB before, 1.0 MiB now) and
+the frame descriptions (`.eh_frame`, 0.4 MiB more). At rest it is 2 MiB
+of RSS, half of it pages of the larger file. No route is slower for it:
+the two binaries alternated in the same container answer within 14 % of
+each other in both directions (`docs/originals-comparison.md`).
+
+The image target (15 MB compressed) was "close to the limit" at 12.3 MiB
+for the binary alone and is now at it: 14.4 MiB, which is 15.07 MB. The
+image itself has still not been built with both UIs, so the row stays
+"unknown", and by the decision at the head of this section a miss here
+is recorded and left. The alternatives to unwinding that would have kept
+the size are in section 20, with why they were not taken.
 
 ## 10. Naming and distribution
 
@@ -1927,7 +1971,8 @@ in 17 (1.6), far less ahead than its Sonarr on the series routes.
   for every request on a connection kept alive). The metadata consumers write no files, as the phase
   says. Of the Discover page only the listing and the add are served.
   The homelab run is the maintainer's, after this milestone; the panic
-  decision (`docs/audit/7-triage.md`, row 1.13) waits for it.
+  decision (`docs/audit/7-triage.md`, row 1.13) was taken before it, on
+  17 November 2026, and is section 20.
 - Radarr, from 4c. The memory target is met idle and exceeded at work;
   by the maintainer's decision it is a recorded miss, deferred with the
   others (section 9). The eviction
@@ -2081,3 +2126,190 @@ in 17 (1.6), far less ahead than its Sonarr on the series routes.
   25,000 episodes on every call. The design keeps every answer built from
   SQLite on request; a per-series cache invalidated by the writes would be
   the next step if the UI's refresh rate makes it matter.
+
+## 20. Surviving a panic
+
+Decided by the maintainer on 17 November 2026 (issue #14, the panic
+decision of issue #10 and row 1.13 of `docs/audit/7-triage.md`): **a panic
+in Unarr's code costs the request or the command it happened in, and
+nothing else.** The release profile unwinds (`panic = "unwind"`; it
+aborted since the first commit, for a smaller binary), and the places
+where a unit of work starts catch what unwinds to them
+(`unarr_core::panics`).
+
+Why: one process holds every personality, and the homelab runs them in one
+container. With `abort`, a bug in one stopped all of them, and a panic
+that repeats (the same release name at every RSS sync, the same row at
+every start) was a restart loop with every personality down until someone
+stepped in. The originals are separate processes, and inside each an
+exception in a controller is a 500 and one in a command marks that command
+failed.
+
+Not chosen, with the reason (the issue has them in full): keeping `abort`
+and relying on the restart policy, because the cost of one bug grows with
+each personality added; one process per personality in one image, because
+it gives up the shared runtime and memory and needs a supervisor the
+image does not have (it stays available as two containers); unwinding
+around requests only, because the commands are where the parsers, the
+import and the indexers' answers run; removing the panics instead, which
+is worth doing where cheap and cannot be made complete.
+
+What it costs is in section 9 ("Unwinding instead of aborting").
+
+### What catches what
+
+| Where the panic is | Caught by | What it costs |
+|---|---|---|
+| An API action, or the calendar feed | `http::catch_panic`, inside the pipeline (`finish`) | That request: the 500 the originals give for an exception nothing caught, logged as `Request Failed. <method> <path>: panicked at <file:line:col>: <message>` |
+| A page, `/ping`, the login, SignalR's negotiation, a layer (the key, the host filter, the path rewrite) | `http::catch_panic_anywhere`, the outermost layer, as the originals' exception handler is | That request, with the same answer |
+| Work a request hands to the blocking pool (`blocking::run`: rendering, file work) | the helper, which returns the panic as its error | That request: a 500 with the panic for its message, not a request that waits |
+| A call on the database thread (`Db::call`, `call_blocking`) | `db::answer`, around each call | That call: its caller gets the panic as an error. The thread and its connection go on; a transaction the call had open is rolled back |
+| The body of a command | `Runtime::execute` | That command: it ends `failed`, message `Failed`, the panic as its exception, the hub is told. The worker takes the next one |
+| The executor's steps around a command's body (arming the health notifications, recording the start, the checks the body asked for) | the same catch in `Runtime::execute`, which covers all that comes before the end is recorded | That command, failed the same way. Its end and its run are recorded as for any other: a scheduled task whose run was not recorded would be due again at every tick, thirty seconds apart |
+| The import of one completed download | the import loop (`mediafiles::completed`, `movies::import::completed`) | That download for that run: it stays as it was and is tried again at the next; the downloads after it are still imported |
+| Reading one indexer's answer | `indexers::service::in_indexer_order` | That indexer's releases for that sync or search; the others' are decided on |
+| A SignalR connection | the connection's task | That connection; the UI opens another |
+
+The 500 was recorded raw from Sonarr 4.0.20 and Radarr 6.4.4 (`make
+sonarr`, `make radarr`; `POST /command` with a name neither knows, which
+is an `InvalidOperationException` in the controller): status 500,
+`Content-Type: application/json` with no charset, `Cache-Control:
+no-cache,no-store`, `Expires: -1`, `Pragma: no-cache`, no
+`X-Application-Version`, not compressed for a client that takes gzip,
+body `{"message": ..., "description": ...}`. Unarr already answered so for
+the exceptions it knew (`ApiError::ServerException`, the `Thrown` marker
+of `http::finish`); the panic takes the same path. `message` is the
+panic's message and `description` is `panicked at <place>: <message>`,
+where the originals' holds the exception's type and its .NET stack. For a
+path outside the API the originals' answer was not recorded (no request
+is known to make a page throw); their handler is the outermost middleware
+and writes one answer whatever the path, which the recorded stack shows,
+so Unarr gives the same one there.
+
+### The tasks that are not commands
+
+Each either goes on or starts again after a panic, or its loss is
+accepted, or its loss ends the process on purpose.
+
+| Task | Where | After a panic |
+|---|---|---|
+| Command workers (three per personality) | `Runtime::start` | **Start again** (`panics::supervised`), after one second. A command's own panic never reaches them |
+| Scheduler tick, which is also the eviction timer of the compiled patterns and the allocator trim | `Runtime::scheduler_loop` | **Starts again**; the tick that panicked is skipped, the next comes thirty seconds later |
+| Memory release timer of a personality without commands | `unarrd::serve` | **Starts again** |
+| HTTP server (the accept loop) | `unarrd::serve` | **Not started again**, and no way for it to end is known: the loop holds none of Unarr's code, every request runs in its connection's task, and axum (0.8) retries a failed accept itself and never returns. Should it panic all the same, the panic is logged (`panics::spawn_logged`) and that personality accepts no connection until the restart |
+| A connection, and the requests on it | axum, one task each | Lost with its connection, if the panic is outside both catch layers (hyper itself); the client connects again |
+| Relay of the runtime's events to the hub | `AppState::start_runtime` | **Goes on**: the event that panicked is not sent, the next is |
+| Radarr's movie relay | `routes::radarr::movies::relay_movie_events` | **Goes on**, the same way, with its context read again |
+| The download monitor | a scheduled command (`RefreshMonitoredDownloads`, `ProcessMonitoredDownloads`) | A command like the others: failed, and run again at its next turn |
+| Health check run after the debounce | `Runtime::check_health_later_with` | **Lost** and logged (`panics::spawn_logged`); the next request for a check starts another |
+| Queue status broadcast | `routes::queue::broadcast_queue`, and Radarr's | **Lost** and logged; the next change of the queue sends the status |
+| Rescan request after a movie import | `Runtime::emit_movie_events` | **Lost** and logged; the movie is rescanned by the next scheduled or manual scan |
+| The log writer | no task: the lines are written by the thread that logs, under a lock that is recovered | |
+| The database thread | `Db::start` | **Goes on**: each call is caught where it runs (`db::answer`). A second catch in the thread's loop is for what a job does around its call (the line `answer` logs, the release of a result no caller waits for): none of it is known to panic, but the thread owns the only connection, so nothing in a job may end it. That catch reports on the standard error, since a log layer that panicked is one way to reach it |
+| The main thread: the start, then the wait for a signal or for a shutdown or restart asked through the API | `unarrd::main` | **Fatal on purpose.** A panic here is not in any personality's work, and without this thread nothing would stop the process cleanly |
+| The `healthcheck` command | a process of its own | Its own exit code |
+
+### What a panic leaves behind
+
+- **Locks.** A `std::sync` lock whose holder panicked is poisoned, and
+  `lock().unwrap()` would then panic in every later request. Every such
+  lock is **recovered** (`unarr_core::sync::Recover`, `lock().recover()`),
+  none is treated as fatal. Decided lock by lock, by what the critical
+  section does:
+
+  | Locks | What they guard | Why the value is good after a panic |
+  |---|---|---|
+  | `AppState`: `settings`, `fixed_now`, `metadata`; `Runtime`: `metadata`, `augment`, `media_cover_dir`, `backup`, `host`, `me`; the outgoing settings (`outbound::Shared::settings`) and their TLS session cache | A value replaced whole, or cloned out | The section is one assignment or one clone |
+  | `AppState`: `releases`, `movie_releases`; `series_writes::proxied`; the download clients' session and cookie caches, `PINNED_IDS`, `DownloadClientService::last_used`; `IndexerClient::caps`; `Skyhook::daily`; the scene mappings' timestamps; `Notifier::plex_versions`, `plex_pending`; `MovieNotifier::plex_pending`; `customformat` pattern cache; `covers::LAST_WRITES`; `mediainfo::OVERRIDE` | Caches and small maps | An entry is inserted, read or removed; a missing entry is fetched again |
+  | `netregex`: a pattern's slot and the registry | Compiled patterns and when each was used | A slot holds a pattern or nothing, and nothing is compiled again |
+  | `CommandQueue`: `items`, `awaited` | The commands in memory | Sections change one command's fields or push or remove one; the table has the same |
+  | `Runtime`: `health`, `health_runs`, `health_pending`, `health_statuses`, `refreshed_search`; `NewCollection::command` | The health results, what waits for the debounce, the episodes a refresh wants searched | Replaced or drained whole; the next run fills them again |
+  | `Downloads` and `MovieDownloads`: `tracked`, `queue`, `published`, `raised`, `last_refresh` | The tracked downloads and the queue built from them | Built again from the clients at each refresh, at most ninety seconds later |
+  | `LogFiles`, `LogBuffer`, `ProcessLog` | The log files and the recent lines | Already recovered before this decision: a log line must never fail |
+
+  The `tokio::sync` locks (`push_lock`, the downloads' `refresh_lock`, the
+  notifiers' `flushing`) do not poison: unwinding releases them. A
+  `OnceLock` whose initialiser panics stays empty and is tried again; a
+  `LazyLock` (compiled patterns of fixed text) would panic again at each
+  use, which is the same bug costing each request that meets it.
+- **Transactions.** Every transaction is a `rusqlite::Transaction`, which
+  rolls back when it is dropped, unwinding included
+  (`db::tests::a_call_that_panics_is_an_error_and_the_thread_goes_on`).
+  One begun by hand and left open would be joined by every later call, so
+  the database thread rolls back whatever a call left open, after each
+  call that leaves one.
+- **Command rows.** A command that panics is ended `failed` in the queue
+  and in the table, so no row is left `started`; the clean-up at the start
+  (`store::commands::orphan_started`) is still what handles the rows a
+  crash, a kill or an abort leaves.
+- **Tracked downloads.** An import works on a copy of the tracked
+  download and stores it back when it is done: a panic leaves the stored
+  one as it was (`importPending`), not `importing`.
+- **Files.** A panic between the move of a file and its row leaves what a
+  crash at that point always left: a file on disk without a row, which
+  the next scan of the series or the movie picks up.
+
+### The start
+
+A personality that cannot start is **logged, left down, and the others
+start**: an error or a panic while its database is opened, restored,
+migrated or imported, or while its listener is bound
+(`unarrd::start`). The line is in the daemon's output and in every
+personality's log; `unarrd healthcheck` says `<name>: did not start` and
+fails, so whatever watches the container knows (the data directory has
+the names in `down`, beside `listening`). The daemon ends only when no
+personality started. Before, the first failure ended it, and under a
+restart policy it came back to fail again with every personality down.
+
+That the health check fails is a decision (18 November 2026), not a side
+effect. The other choice was a container that stays healthy and says so
+in its log only: the personality left down would then be found by its
+clients failing to connect. The cost is taken with it: a watcher that
+restarts unhealthy containers, like the homelab's `auto-recover-cron.sh`,
+restarts this one at each of its runs, and the personality that works is
+away for the second that takes. That restart is also the only time the
+one left down is tried again.
+
+Left as it was, and fatal on purpose: a mistake in the arguments (an
+unknown personality, an `--import-from` folder that holds nothing for any
+personality selected, a selected personality with nothing to import and
+nothing imported). These are the operator's to fix and say so at once;
+starting without the personality asked for would hide them. A database
+that is there and cannot be read is no longer one of them.
+
+### What still ends the process
+
+- Out of memory and a stack overflow: unwinding catches neither.
+- A panic while another unwinds (in a `Drop`), and a panic in a function
+  that may not unwind (an `extern "C"` callback): Rust aborts.
+- A panic on the main thread (above).
+- A fault in C code: SQLite, the allocator.
+- `POST /system/shutdown` and `/system/restart`, and a signal, as before.
+
+### The tests, and the switch they use
+
+`make check` runs the unit tests of each catcher: `panics` and `sync`
+(`unarr-core`), the two layers (`http`), the blocking helper, the database
+thread, the executor (`commands::executor::panic_tests`: a command that
+panics in its body and in the steps around it, more times than there are
+workers, ends failed with its run recorded for the scheduler), the indexer
+isolation.
+
+`make panic-test` runs `crates/unarrd/tests/panic.rs` on a **release
+build** of the daemon, in a target directory of its own
+(`target/panic-switch`), with Sonarr and Radarr on the fixtures: a panic
+in a handler, on the database thread, on the blocking pool, while holding
+the settings' lock and in a page each answer the recorded 500 and the
+next request is answered; a command armed to panic ends `failed` five
+times running and then completes; Radarr's `/ping`, asked every ten
+milliseconds by a thread of its own, answers every time; a personality
+whose database is not one, or whose start panics, is left down and
+reported while the other serves. CI runs it after `make check`.
+
+The switch that makes the daemon panic **does not exist in a published
+binary**: it is the Cargo feature `panic-switch` (`unarrd`, `unarr-api`,
+`unarr-core`), off by default, which `make build`, the `Dockerfile` and
+the image job of CI never enable. Without it there is no
+`/api/v3/system/panic`, no `/panic`, no `UNARR_PANIC_AT_START` and no
+code that reads any of them; no variable brings them back. A binary
+built with it says so on its first line of output.

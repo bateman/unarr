@@ -3,6 +3,7 @@
 //! handlers need; `start` spawns the workers and the scheduler on the
 //! current Tokio runtime.
 
+use crate::sync::Recover;
 use std::sync::{Arc, Mutex};
 
 use chrono::{DateTime, Utc};
@@ -28,6 +29,8 @@ use crate::search::{SearchService, Trigger};
 use crate::store;
 
 mod movie_library;
+#[cfg(test)]
+mod panic_tests;
 
 /// The source of the current time: the daemon's clock, or a pinned one
 /// in tests.
@@ -301,19 +304,19 @@ impl Runtime {
             host: std::sync::RwLock::new(None),
             refreshed_search: Mutex::new(std::collections::HashMap::new()),
         });
-        *runtime.me.lock().unwrap() = Arc::downgrade(&runtime);
+        *runtime.me.lock().recover() = Arc::downgrade(&runtime);
         Ok(runtime)
     }
 
     /// The metadata provider series are looked up, added and refreshed
     /// from.
     pub fn metadata(&self) -> crate::metadata::SharedProvider {
-        self.metadata.read().unwrap().clone()
+        self.metadata.read().recover().clone()
     }
 
     /// Replace the metadata provider.
     pub fn set_metadata(&self, provider: crate::metadata::SharedProvider) {
-        *self.metadata.write().unwrap() = provider;
+        *self.metadata.write().recover() = provider;
     }
 
     /// Ask every metadata host through `upstreams`: Skyhook as the
@@ -328,22 +331,22 @@ impl Runtime {
             .as_ref()
             .and_then(|side| side.http.clone())
             .unwrap_or_else(|| crate::http::shared().clone());
-        *self.augment.write().unwrap() = crate::metadata::augment::Augment::new(client, upstreams);
+        *self.augment.write().recover() = crate::metadata::augment::Augment::new(client, upstreams);
     }
 
     /// Where the series covers live (`<app data>/MediaCover`).
     pub fn set_media_cover_dir(&self, dir: std::path::PathBuf) {
-        *self.media_cover_dir.write().unwrap() = Some(dir);
+        *self.media_cover_dir.write().recover() = Some(dir);
     }
 
     /// How the commands that act on the host (its log, its API key) do it.
     pub fn set_host_hooks(&self, hooks: HostHooks) {
-        *self.host.write().unwrap() = Some(hooks);
+        *self.host.write().recover() = Some(hooks);
     }
 
     /// Where the Backup command finds the app data, and Unarr's version.
     pub fn set_backup(&self, context: crate::backup::BackupContext) {
-        *self.backup.write().unwrap() = Some(context);
+        *self.backup.write().recover() = Some(context);
     }
 
     /// The client the covers and the cover proxy fetch through.
@@ -379,7 +382,7 @@ impl Runtime {
     }
 
     fn augment(&self) -> crate::metadata::augment::Augment {
-        self.augment.read().unwrap().clone()
+        self.augment.read().recover().clone()
     }
 
     pub fn notifier(&self) -> &Arc<Notifier> {
@@ -418,7 +421,7 @@ impl Runtime {
 
     /// The health verdicts that stand.
     pub fn health(&self) -> Vec<HealthCheck> {
-        self.health.lock().unwrap().clone()
+        self.health.lock().recover().clone()
     }
 
     /// Run a set of health checks now and keep what they found; `true`
@@ -453,7 +456,7 @@ impl Runtime {
         let names: Vec<CheckSet> = sets.iter().map(|(s, _)| *s).collect();
         let run = health::run(&ctx, &names, &standing).await;
         let (changed, failed, restored) = {
-            let mut results = self.health.lock().unwrap();
+            let mut results = self.health.lock().recover();
             let before = results.clone();
             let changed = health::merge(&mut results, run.clone());
             // `HealthCheckFailedEvent` for a source that had no verdict,
@@ -511,7 +514,7 @@ impl Runtime {
     /// For tests, which read from it what a write asked for without
     /// running the checks.
     pub fn take_pending_health_checks(&self) -> Vec<CheckSet> {
-        std::mem::take(&mut *self.health_pending.lock().unwrap())
+        std::mem::take(&mut *self.health_pending.lock().recover())
             .into_iter()
             .map(|(set, _)| set)
             .collect()
@@ -522,23 +525,25 @@ impl Runtime {
     /// request, covers them all.
     fn check_health_later_with(&self, set: CheckSet, failure: Option<ImportFailure>) {
         let first = {
-            let mut pending = self.health_pending.lock().unwrap();
+            let mut pending = self.health_pending.lock().recover();
             pending.push((set, failure));
             pending.len() == 1
         };
         if !first {
             return;
         }
-        let Some(runtime) = self.me.lock().unwrap().upgrade() else {
+        let Some(runtime) = self.me.lock().recover().upgrade() else {
             return;
         };
-        let handle = tokio::spawn(async move {
+        // A run that panics is lost, and the sets it took with it: the
+        // next request starts another.
+        let handle = crate::panics::spawn_logged("health check run", async move {
             tokio::time::sleep(HEALTH_DELAY).await;
             let sets: Vec<(CheckSet, Option<ImportFailure>)> =
-                std::mem::take(&mut *runtime.health_pending.lock().unwrap());
+                std::mem::take(&mut *runtime.health_pending.lock().recover());
             runtime.check_health_sets(&sets).await;
         });
-        let mut runs = self.health_runs.lock().unwrap();
+        let mut runs = self.health_runs.lock().recover();
         runs.retain(|h| !h.is_finished());
         runs.push(handle);
     }
@@ -600,7 +605,7 @@ impl Runtime {
             .await
             .unwrap_or_default();
         let changed = {
-            let mut last = self.health_statuses.lock().unwrap();
+            let mut last = self.health_statuses.lock().recover();
             let changed = last.as_deref() != Some(snapshot.as_str());
             *last = Some(snapshot);
             changed
@@ -616,7 +621,7 @@ impl Runtime {
         loop {
             self.queue.wait_idle().await;
             let runs: Vec<tokio::task::JoinHandle<()>> =
-                std::mem::take(&mut *self.health_runs.lock().unwrap());
+                std::mem::take(&mut *self.health_runs.lock().recover());
             if runs.is_empty() {
                 return;
             }
@@ -647,15 +652,22 @@ impl Runtime {
     }
 
     /// Spawn the workers and the scheduler. The tasks end with the Tokio
-    /// runtime.
+    /// runtime. Each starts again if it panics: a panic in a command, or
+    /// in the steps around its body, is caught where the command runs and
+    /// never reaches them, so this is for one in the queue itself or in
+    /// what follows a command's recorded end.
     pub fn start(self: &Arc<Self>) -> Vec<tokio::task::JoinHandle<()>> {
         let mut handles = Vec::with_capacity(WORKERS + 1);
         for _ in 0..WORKERS {
             let runtime = self.clone();
-            handles.push(tokio::spawn(async move { runtime.worker().await }));
+            handles.push(crate::panics::supervised("command worker", move || {
+                runtime.clone().worker()
+            }));
         }
         let runtime = self.clone();
-        handles.push(tokio::spawn(async move { runtime.scheduler_loop().await }));
+        handles.push(crate::panics::supervised("scheduler", move || {
+            runtime.clone().scheduler_loop()
+        }));
         // `Handle(ApplicationStartedEvent)`: the startup checks.
         self.check_health_later(CheckSet::All);
         handles
@@ -758,29 +770,17 @@ impl Runtime {
         let id = model.id;
         let name = model.name();
         tracing::trace!(name, id, "command started");
-        self.arm_health_notifications().await;
-        if let Err(e) = self.queue.record_started(&model).await {
-            tracing::warn!(error = %e, "failed to record the command's start");
-        }
-        self.broadcast(&model);
-        let outcome = self.run(&model).await;
-        // `ProviderStatusChangedEvent` is published while the command runs:
-        // the checks it asks for are done by the time the command ends.
-        if matches!(
-            model.body,
-            CommandBody::RssSync
-                | CommandBody::RefreshMonitoredDownloads
-                | CommandBody::EpisodeSearch { .. }
-                | CommandBody::SeasonSearch { .. }
-                | CommandBody::SeriesSearch { .. }
-                | CommandBody::MissingEpisodeSearch { .. }
-                | CommandBody::CutoffUnmetEpisodeSearch { .. }
-                | CommandBody::MoviesSearch { .. }
-                | CommandBody::MissingMoviesSearch { .. }
-                | CommandBody::CutoffUnmetMoviesSearch { .. }
-        ) {
-            self.check_health_on_status_change().await;
-        }
+        // `CommandExecutor.ExecuteCommand` catches whatever the handler
+        // throws and fails the command with it; a panic is Unarr's
+        // unhandled exception. One catch, for all that comes before the
+        // end is recorded: the steps around the body as well as the body.
+        // Whatever panicked, what follows always runs: the command is
+        // ended, the hub told, and the scheduled task's run recorded. A
+        // run left unrecorded is due again at every tick of the scheduler.
+        let outcome = match crate::panics::catch(self.run_started(&model)).await {
+            Ok(outcome) => outcome,
+            Err(panic) => Err(anyhow::anyhow!("{panic}")),
+        };
         let now = self.now();
         let ended = match outcome {
             Ok(()) => {
@@ -832,6 +832,41 @@ impl Runtime {
         tracing::trace!(name, id, duration = ?ended.duration, "command ended");
     }
 
+    /// A started command up to its outcome: its start recorded and told,
+    /// its body, and the checks its body asked for.
+    async fn run_started(&self, model: &CommandModel) -> anyhow::Result<()> {
+        #[cfg(any(test, feature = "panic-switch"))]
+        crate::panics::switch::fire(&format!(
+            "record:{}:{}",
+            self.personality.app_name().to_lowercase(),
+            model.name()
+        ));
+        self.arm_health_notifications().await;
+        if let Err(e) = self.queue.record_started(model).await {
+            tracing::warn!(error = %e, "failed to record the command's start");
+        }
+        self.broadcast(model);
+        let outcome = self.run(model).await;
+        // `ProviderStatusChangedEvent` is published while the command runs:
+        // the checks it asks for are done by the time the command ends.
+        if matches!(
+            model.body,
+            CommandBody::RssSync
+                | CommandBody::RefreshMonitoredDownloads
+                | CommandBody::EpisodeSearch { .. }
+                | CommandBody::SeasonSearch { .. }
+                | CommandBody::SeriesSearch { .. }
+                | CommandBody::MissingEpisodeSearch { .. }
+                | CommandBody::CutoffUnmetEpisodeSearch { .. }
+                | CommandBody::MoviesSearch { .. }
+                | CommandBody::MissingMoviesSearch { .. }
+                | CommandBody::CutoffUnmetMoviesSearch { .. }
+        ) {
+            self.check_health_on_status_change().await;
+        }
+        outcome
+    }
+
     fn broadcast(&self, model: &CommandModel) {
         if model.send_updates_to_client {
             self.emit(Event::CommandUpdated(Box::new(model.clone())));
@@ -847,6 +882,12 @@ impl Runtime {
 
     async fn run(&self, model: &CommandModel) -> anyhow::Result<()> {
         let id = model.id;
+        #[cfg(any(test, feature = "panic-switch"))]
+        crate::panics::switch::fire(&format!(
+            "command:{}:{}",
+            self.personality.app_name().to_lowercase(),
+            model.name()
+        ));
         let trigger = Trigger {
             user_invoked: model.trigger == CommandTrigger::Manual,
             interactive: false,
@@ -975,7 +1016,7 @@ impl Runtime {
                 Ok(())
             }
             CommandBody::Backup { kind } => {
-                let context = self.backup.read().unwrap().clone();
+                let context = self.backup.read().recover().clone();
                 let Some(context) = context else {
                     tracing::debug!("no app data directory set, nothing to back up");
                     return Ok(());
@@ -994,7 +1035,7 @@ impl Runtime {
                 Ok(())
             }
             CommandBody::ClearLog | CommandBody::DeleteLogFiles | CommandBody::ResetApiKey => {
-                let hooks = self.host.read().unwrap().clone();
+                let hooks = self.host.read().recover().clone();
                 let Some(hooks) = hooks else {
                     anyhow::bail!("{} needs a host, and none is attached", model.body.name());
                 };
@@ -1017,7 +1058,7 @@ impl Runtime {
                 let folder = self
                     .backup
                     .read()
-                    .unwrap()
+                    .recover()
                     .as_ref()
                     .map(|c| c.app_data.join("logs").join("update"));
                 match folder {
@@ -1250,7 +1291,7 @@ impl Runtime {
                 return self.bulk_move_movies(id, destination_root_folder, movies).await;
             }
             CommandBody::Backup { kind } => {
-                let context = self.backup.read().unwrap().clone();
+                let context = self.backup.read().recover().clone();
                 let Some(context) = context else {
                     tracing::debug!("no app data directory set, nothing to back up");
                     return Ok(());
@@ -1731,7 +1772,7 @@ impl Runtime {
         for e in events {
             if let MovieImportEvent::RescanRequested { movie_id } = &e {
                 let (queue, movie_id, now) = (self.queue.clone(), *movie_id, self.now());
-                tokio::spawn(async move {
+                crate::panics::spawn_logged("rescan request", async move {
                     if let Err(err) = queue
                         .push(
                             CommandBody::RescanMovie {
@@ -2104,14 +2145,14 @@ impl Runtime {
         let mut seen = std::collections::HashSet::new();
         ids.retain(|i| seen.insert(*i));
         if !ids.is_empty() {
-            self.refreshed_search.lock().unwrap().insert(series.id, ids);
+            self.refreshed_search.lock().recover().insert(series.id, ids);
         }
     }
 
     /// `EpisodeRefreshedService.Search`, after the series was scanned: the
     /// kept episodes still without a file are searched for.
     async fn search_refreshed(&self, series_id: i64) {
-        let Some(ids) = self.refreshed_search.lock().unwrap().remove(&series_id) else {
+        let Some(ids) = self.refreshed_search.lock().recover().remove(&series_id) else {
             return;
         };
         let missing = self
@@ -2147,7 +2188,7 @@ impl Runtime {
         self.emit(Event::SeriesUpdated { series_id: series.id });
         let augment = self.augment();
         crate::tv::scene::series_updated(&self.db, &augment, &self.scene, series).await;
-        let root = self.media_cover_dir.read().unwrap().clone();
+        let root = self.media_cover_dir.read().recover().clone();
         if let Some(root) = root {
             if crate::tv::covers::ensure_covers(&root, &augment, series).await {
                 self.emit(Event::SeriesUpdated { series_id: series.id });
@@ -2321,7 +2362,7 @@ impl Runtime {
         // The originals delete the covers in a background handler, after
         // the notifications have read their URLs.
         self.notifier.on_series_delete(&series, delete_files, now).await;
-        let root = self.media_cover_dir.read().unwrap().clone();
+        let root = self.media_cover_dir.read().recover().clone();
         if let Some(root) = root {
             for s in &series {
                 crate::tv::covers::delete_covers(&root, s.id).await;

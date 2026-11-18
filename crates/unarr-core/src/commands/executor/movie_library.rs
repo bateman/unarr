@@ -3,6 +3,7 @@
 //! the same ground is in the parent module; the two share the cover code
 //! and nothing else.
 
+use crate::sync::Recover;
 use chrono::{DateTime, Utc};
 
 use super::{CollectionAction, CommandBody, CommandPriority, CommandTrigger, Event, Runtime};
@@ -32,13 +33,13 @@ impl refresh::CollectionEvents for NewCollection<'_> {
     fn added(&self, collection: crate::movies::model::Collection) -> crate::metadata::BoxFuture<'_, ()> {
         Box::pin(async move {
             let command = self.runtime.collection_created(collection.id).await;
-            *self.command.lock().unwrap() = command;
+            *self.command.lock().recover() = command;
         })
     }
 
     fn settled(&self) -> crate::metadata::BoxFuture<'_, ()> {
         Box::pin(async move {
-            let command = *self.command.lock().unwrap();
+            let command = *self.command.lock().recover();
             if let Some(command_id) = command {
                 // The wait holds a worker. When every other worker is
                 // already waiting like this one (a library import of
@@ -242,7 +243,7 @@ impl Runtime {
     /// `MediaCoversUpdatedEvent`).
     pub(super) async fn movie_updated(&self, movie: &Movie) {
         self.emit(Event::MovieUpdated { movie_id: movie.id });
-        let root = self.media_cover_dir.read().unwrap().clone();
+        let root = self.media_cover_dir.read().recover().clone();
         if let Some(root) = root {
             let augment = self.augment();
             if crate::tv::covers::ensure_covers_of(
@@ -687,7 +688,7 @@ impl Runtime {
             })
             .await;
         }
-        let root = self.media_cover_dir.read().unwrap().clone();
+        let root = self.media_cover_dir.read().recover().clone();
         for movie in &deleted.movies {
             self.emit(Event::MovieDeleted { movie_id: movie.id });
             if let Some(root) = &root {

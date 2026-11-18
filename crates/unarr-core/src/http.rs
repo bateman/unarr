@@ -261,6 +261,7 @@ fn install_crypto_provider() {
 #[cfg(test)]
 mod tests {
     use super::*;
+    use crate::sync::Recover;
 
     #[test]
     fn redacts_secret_query_values_only() {
@@ -310,7 +311,7 @@ mod tests {
                         .filter(|l| l.to_ascii_lowercase().starts_with("proxy-authorization:"))
                         .map(str::to_string),
                 );
-                log.lock().unwrap().extend(lines);
+                log.lock().recover().extend(lines);
                 let _ = stream
                     .write_all(b"HTTP/1.1 200 OK\r\ncontent-length: 7\r\nconnection: close\r\n\r\nproxied");
             }
@@ -350,7 +351,7 @@ mod tests {
             .unwrap();
         assert_eq!(body, "proxied");
         {
-            let seen = seen.lock().unwrap();
+            let seen = seen.lock().recover();
             assert_eq!(seen[0], "GET http://indexer.invalid/api?t=caps HTTP/1.1");
             // "me:secret".
             assert!(seen[1].ends_with("Basic bWU6c2VjcmV0"), "{seen:?}");
@@ -371,7 +372,7 @@ mod tests {
             .send()
             .await
             .is_err());
-        assert_eq!(seen.lock().unwrap().len(), 2);
+        assert_eq!(seen.lock().recover().len(), 2);
     }
 
     /// An HTTPS server with the self-signed certificate of the fixtures.

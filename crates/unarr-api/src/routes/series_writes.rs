@@ -6,6 +6,7 @@
 
 use std::collections::HashMap;
 use std::sync::{Mutex, OnceLock};
+use unarr_core::sync::Recover;
 
 use axum::extract::{Path, State};
 use axum::http::{header, StatusCode, Uri};
@@ -47,7 +48,7 @@ const PROXY_TTL: std::time::Duration = std::time::Duration::from_secs(24 * 3600)
 pub(crate) fn register_proxy(url_base: &str, remote: &str) -> String {
     let url = unarr_core::tv::covers::proxy_url(url_base, remote);
     let hash = url.rsplit('/').nth(1).unwrap_or("").to_string();
-    let mut cache = proxied().lock().unwrap();
+    let mut cache = proxied().lock().recover();
     cache.retain(|_, (_, at)| at.elapsed() < PROXY_TTL);
     cache.insert(hash, (remote.to_string(), std::time::Instant::now()));
     url
@@ -60,7 +61,7 @@ pub async fn media_cover_proxy(
 ) -> Response {
     let remote = proxied()
         .lock()
-        .unwrap()
+        .recover()
         .get(&hash)
         .filter(|(_, at)| at.elapsed() < PROXY_TTL)
         .map(|(u, _)| u.clone());

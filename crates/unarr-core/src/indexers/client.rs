@@ -2,6 +2,7 @@
 //! connection test with the originals' validation messages, RSS and
 //! searches with their paging rules.
 
+use crate::sync::Recover;
 use std::collections::HashMap;
 use std::sync::{Mutex, OnceLock};
 use std::time::{Duration, Instant};
@@ -112,7 +113,7 @@ impl IndexerClient {
     /// `NewznabCapabilitiesProvider.GetCapabilities`.
     pub async fn capabilities(&self, settings: &NewznabSettings) -> Result<Capabilities, IndexerError> {
         let key = settings.to_value().to_string();
-        if let Some((caps, at)) = self.caps.lock().unwrap().get(&key) {
+        if let Some((caps, at)) = self.caps.lock().recover().get(&key) {
             if at.elapsed() < CAPS_TTL {
                 return Ok(caps.clone());
             }
@@ -139,14 +140,14 @@ impl IndexerClient {
         };
         self.caps
             .lock()
-            .unwrap()
+            .recover()
             .insert(key, (caps.clone(), Instant::now()));
         Ok(caps)
     }
 
     /// Forget cached capabilities (tests, settings changes).
     pub fn clear_capabilities(&self) {
-        self.caps.lock().unwrap().clear();
+        self.caps.lock().recover().clear();
     }
 
     /// One feed page.

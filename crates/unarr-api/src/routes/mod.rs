@@ -13,6 +13,8 @@ pub mod importlist_writes;
 pub mod indexer_writes;
 pub mod mediafiles;
 pub mod notification_writes;
+#[cfg(feature = "panic-switch")]
+pub mod panic_switch;
 pub mod providers;
 pub mod queue;
 pub mod radarr;
@@ -35,10 +37,13 @@ use crate::state::AppState;
 /// personality has its own table. Lidarr has none yet and shows Sonarr's,
 /// as every personality did before there were two.
 pub fn api_router(state: &AppState) -> Router<AppState> {
-    match state.personality() {
+    let api = match state.personality() {
         Personality::Sonarr | Personality::Lidarr => sonarr_api_router(),
         Personality::Radarr => radarr::api_router(),
-    }
+    };
+    #[cfg(feature = "panic-switch")]
+    let api = api.route("/system/panic", get(panic_switch::api));
+    api
 }
 
 /// What is opened with the API key outside the API prefix. The calendar feed:
@@ -387,9 +392,12 @@ fn sonarr_api_router() -> Router<AppState> {
 /// Routes outside the API prefix. SignalR is the same hub protocol for
 /// every personality.
 pub fn ui_router(_state: &AppState) -> Router<AppState> {
-    Router::new()
+    let ui = Router::new()
         .route("/signalr/messages/negotiate", post(signalr::negotiate))
-        .route("/signalr/messages", get(signalr::connect))
+        .route("/signalr/messages", get(signalr::connect));
+    #[cfg(feature = "panic-switch")]
+    let ui = ui.route("/panic", get(panic_switch::page));
+    ui
 }
 
 /// The originals answer an unknown API path with an empty 404.

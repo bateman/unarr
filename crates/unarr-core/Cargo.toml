@@ -7,6 +7,11 @@ license.workspace = true
 repository.workspace = true
 rust-version.workspace = true
 
+[features]
+# Places that panic when a test arms them (`panics::switch`). For
+# `make panic-test`; never part of a published binary.
+panic-switch = []
+
 [dependencies]
 anyhow.workspace = true
 thiserror.workspace = true

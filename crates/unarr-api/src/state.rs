@@ -8,6 +8,7 @@ use unarr_core::decision::RemoteEpisode;
 use unarr_core::downloadclients::DownloadClientService;
 use unarr_core::downloads::Downloads;
 use unarr_core::indexers::IndexerClient;
+use unarr_core::sync::Recover;
 
 use chrono::{DateTime, Utc};
 use serde_json::json;
@@ -244,7 +245,7 @@ impl AppState {
         self.apply_network_settings().await?;
         let fixed = self.0.fixed_now.clone();
         let clock: unarr_core::commands::executor::Clock =
-            Arc::new(move || fixed.lock().unwrap().unwrap_or_else(Utc::now));
+            Arc::new(move || fixed.lock().recover().unwrap_or_else(Utc::now));
         let identity = unarr_core::notifications::Identity {
             instance_name: self.settings().instance_name.clone(),
             url_base: self.settings().url_base.clone(),
@@ -267,7 +268,7 @@ impl AppState {
             }
             _ => Runtime::new(self.db().clone(), self.downloads().clone(), clock, identity).await?,
         };
-        if let Some(upstreams) = self.0.metadata.lock().unwrap().clone() {
+        if let Some(upstreams) = self.0.metadata.lock().recover().clone() {
             runtime.set_upstreams(upstreams);
         }
         runtime.set_backup(self.backup_context());
@@ -287,68 +288,81 @@ impl AppState {
         tokio::spawn(async move {
             use crate::routes::radarr::movies::HubMovieEvent;
             loop {
-                match events.recv().await {
-                    Ok(Event::CommandUpdated(c)) => {
-                        state.hub().broadcast(
+                let received = events.recv().await;
+                if matches!(received, Err(tokio::sync::broadcast::error::RecvError::Closed)) {
+                    break;
+                }
+                // A panic while one event is told costs that event: the
+                // relay goes on with the next, or the UI would hear of
+                // nothing until the restart.
+                let told = unarr_core::panics::catch(async {
+                    match received {
+                        Ok(Event::CommandUpdated(c)) => {
+                            state.hub().broadcast(
                             "command",
                             json!({"action": "updated", "resource": crate::routes::command::command_resource(state.personality(), &c)}),
                         );
-                        // `CommandController`: once the old commands are
-                        // gone the UI reads the list again. Recorded from
-                        // both hubs, for a clean-up the API asked for: the
-                        // scheduler's own sends no updates, so none comes
-                        // here.
-                        if c.name() == "MessagingCleanup"
-                            && c.status == unarr_core::commands::CommandStatus::Completed
-                        {
-                            state.hub().broadcast("command", json!({"action": "sync"}));
+                            // `CommandController`: once the old commands are
+                            // gone the UI reads the list again. Recorded from
+                            // both hubs, for a clean-up the API asked for: the
+                            // scheduler's own sends no updates, so none comes
+                            // here.
+                            if c.name() == "MessagingCleanup"
+                                && c.status == unarr_core::commands::CommandStatus::Completed
+                            {
+                                state.hub().broadcast("command", json!({"action": "sync"}));
+                            }
                         }
-                    }
-                    Ok(Event::QueueUpdated) => match state.personality() {
-                        Personality::Radarr => crate::routes::radarr::queue::broadcast_queue(&state),
-                        _ => crate::routes::queue::broadcast_queue(&state),
-                    },
-                    Ok(Event::HealthChanged) => state.hub().broadcast("health", json!({"action": "sync"})),
-                    Ok(Event::CommandExecuted { name }) => {
-                        state.hub().broadcast("system/task", json!({"action": "sync"}));
-                        // `QualityDefinitionController`: the list as the
-                        // reset left it. Recorded from Sonarr's hub and
-                        // seen on Radarr's, for which the command is not
-                        // there yet.
-                        if name == "ResetQualityDefinitions" {
-                            state
-                                .hub()
-                                .broadcast("qualitydefinition", json!({"action": "sync"}));
+                        Ok(Event::QueueUpdated) => match state.personality() {
+                            Personality::Radarr => crate::routes::radarr::queue::broadcast_queue(&state),
+                            _ => crate::routes::queue::broadcast_queue(&state),
+                        },
+                        Ok(Event::HealthChanged) => {
+                            state.hub().broadcast("health", json!({"action": "sync"}))
                         }
+                        Ok(Event::CommandExecuted { name }) => {
+                            state.hub().broadcast("system/task", json!({"action": "sync"}));
+                            // `QualityDefinitionController`: the list as the
+                            // reset left it. Recorded from Sonarr's hub and
+                            // seen on Radarr's, for which the command is not
+                            // there yet.
+                            if name == "ResetQualityDefinitions" {
+                                state
+                                    .hub()
+                                    .broadcast("qualitydefinition", json!({"action": "sync"}));
+                            }
+                        }
+                        Ok(Event::EpisodesGrabbed { episode_ids }) => {
+                            crate::relay::relay_grab(&state, &episode_ids).await
+                        }
+                        Ok(Event::MovieGrabbed { movie_id }) => {
+                            let _ = movie_events.send(HubMovieEvent::Grabbed(movie_id));
+                        }
+                        Ok(Event::Import(e)) => crate::relay::relay_import(&state, &e).await,
+                        Ok(Event::MovieImport(e)) => {
+                            let _ = movie_events.send(HubMovieEvent::Import(e));
+                        }
+                        Ok(Event::SeriesUpdated { series_id }) => {
+                            crate::relay::broadcast_series(&state, series_id).await
+                        }
+                        Ok(Event::MovieUpdated { movie_id }) | Ok(Event::MovieCoversUpdated { movie_id }) => {
+                            let _ = movie_events.send(HubMovieEvent::Updated(movie_id));
+                        }
+                        Ok(Event::MovieDeleted { movie_id }) => {
+                            let _ = movie_events.send(HubMovieEvent::Deleted(movie_id));
+                        }
+                        Ok(Event::CollectionChanged {
+                            collection_id,
+                            action,
+                        }) => {
+                            crate::routes::radarr::movies::broadcast_collection(&state, collection_id, action)
+                                .await
+                        }
+                        Err(_) => {}
                     }
-                    Ok(Event::EpisodesGrabbed { episode_ids }) => {
-                        crate::relay::relay_grab(&state, &episode_ids).await
-                    }
-                    Ok(Event::MovieGrabbed { movie_id }) => {
-                        let _ = movie_events.send(HubMovieEvent::Grabbed(movie_id));
-                    }
-                    Ok(Event::Import(e)) => crate::relay::relay_import(&state, &e).await,
-                    Ok(Event::MovieImport(e)) => {
-                        let _ = movie_events.send(HubMovieEvent::Import(e));
-                    }
-                    Ok(Event::SeriesUpdated { series_id }) => {
-                        crate::relay::broadcast_series(&state, series_id).await
-                    }
-                    Ok(Event::MovieUpdated { movie_id }) | Ok(Event::MovieCoversUpdated { movie_id }) => {
-                        let _ = movie_events.send(HubMovieEvent::Updated(movie_id));
-                    }
-                    Ok(Event::MovieDeleted { movie_id }) => {
-                        let _ = movie_events.send(HubMovieEvent::Deleted(movie_id));
-                    }
-                    Ok(Event::CollectionChanged {
-                        collection_id,
-                        action,
-                    }) => {
-                        crate::routes::radarr::movies::broadcast_collection(&state, collection_id, action)
-                            .await
-                    }
-                    Err(tokio::sync::broadcast::error::RecvError::Lagged(_)) => continue,
-                    Err(tokio::sync::broadcast::error::RecvError::Closed) => break,
+                });
+                if let Err(panic) = told.await {
+                    tracing::error!("The hub relay {panic}; the event is not sent");
                 }
             }
         });
@@ -362,7 +376,7 @@ impl AppState {
         if let Some(runtime) = self.0.commands.get() {
             runtime.set_upstreams(upstreams.clone());
         }
-        *self.0.metadata.lock().unwrap() = Some(upstreams);
+        *self.0.metadata.lock().recover() = Some(upstreams);
     }
 
     /// A provider changed: the health checks that follow one, in the
@@ -391,7 +405,7 @@ impl AppState {
     /// Remember a release a search listed.
     pub fn cache_release(&self, key: String, remote: RemoteEpisode) {
         let now = self.now();
-        let mut cache = self.0.releases.lock().unwrap();
+        let mut cache = self.0.releases.lock().recover();
         cache.retain(|_, (_, at)| now - *at < RELEASE_CACHE_TTL);
         cache.insert(key, (remote, now));
     }
@@ -399,7 +413,7 @@ impl AppState {
     /// A release a recent search listed.
     pub fn cached_release(&self, key: &str) -> Option<RemoteEpisode> {
         let now = self.now();
-        let cache = self.0.releases.lock().unwrap();
+        let cache = self.0.releases.lock().recover();
         cache
             .get(key)
             .filter(|(_, at)| now - *at < RELEASE_CACHE_TTL)
@@ -457,7 +471,7 @@ impl AppState {
         self.0
             .metadata
             .lock()
-            .unwrap()
+            .recover()
             .clone()
             .unwrap_or_else(unarr_core::metadata::Upstreams::real)
     }
@@ -518,14 +532,14 @@ impl AppState {
     /// kept half an hour for the grab that may follow.
     pub fn cache_movie_release(&self, key: String, remote: unarr_core::movies::decision::RemoteMovie) {
         let now = self.now();
-        let mut cache = self.0.movie_releases.lock().unwrap();
+        let mut cache = self.0.movie_releases.lock().recover();
         cache.retain(|_, (_, at)| now - *at < chrono::Duration::minutes(30));
         cache.insert(key, (remote, now));
     }
 
     pub fn cached_movie_release(&self, key: &str) -> Option<unarr_core::movies::decision::RemoteMovie> {
         let now = self.now();
-        let cache = self.0.movie_releases.lock().unwrap();
+        let cache = self.0.movie_releases.lock().recover();
         cache
             .get(key)
             .filter(|(_, at)| now - *at < chrono::Duration::minutes(30))
@@ -559,12 +573,12 @@ impl AppState {
 
     /// The current time, or the pinned one.
     pub fn now(&self) -> DateTime<Utc> {
-        self.0.fixed_now.lock().unwrap().unwrap_or_else(Utc::now)
+        self.0.fixed_now.lock().recover().unwrap_or_else(Utc::now)
     }
 
     /// Pin (or unpin) the clock. For tests.
     pub fn set_now(&self, at: Option<DateTime<Utc>>) {
-        *self.0.fixed_now.lock().unwrap() = at;
+        *self.0.fixed_now.lock().recover() = at;
     }
 
     /// The SignalR fan-out to connected UIs.
@@ -622,12 +636,20 @@ impl AppState {
     }
 
     pub fn settings(&self) -> Arc<Settings> {
-        self.0.settings.read().unwrap().clone()
+        self.0.settings.read().recover().clone()
+    }
+
+    /// For the panic switch: panic as a writer of the settings, which
+    /// every request reads, would.
+    #[cfg(feature = "panic-switch")]
+    pub fn panic_holding_the_settings(&self) -> ! {
+        let _held = self.0.settings.write().recover();
+        panic!("the panic switch was set for a holder of the settings")
     }
 
     /// Install new host settings (a saved `config/host`).
     pub fn set_settings(&self, settings: Settings) {
-        *self.0.settings.write().unwrap() = Arc::new(settings);
+        *self.0.settings.write().recover() = Arc::new(settings);
     }
 
     pub fn runtime(&self) -> &RuntimeInfo {

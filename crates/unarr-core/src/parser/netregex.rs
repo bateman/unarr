@@ -19,6 +19,7 @@
 //! (unnamed groups first, then named), so `$1` in a replacement means what
 //! it meant.
 
+use crate::sync::Recover;
 use std::collections::HashMap;
 use std::sync::atomic::{AtomicU64, Ordering};
 use std::sync::{Arc, Mutex, OnceLock, Weak};
@@ -67,14 +68,14 @@ fn uptime() -> u64 {
 pub fn release_idle(max_idle: Duration) -> usize {
     let now = uptime();
     let mut released = 0;
-    let mut slots = registry().lock().unwrap();
+    let mut slots = registry().lock().recover();
     slots.retain(|weak| {
         let Some(slot) = weak.upgrade() else {
             return false;
         };
         if now.saturating_sub(slot.last_used.load(Ordering::Relaxed)) >= max_idle.as_secs() {
             // Dropped from the registry too: compiling again adds it back.
-            if slot.re.lock().unwrap().take().is_some() {
+            if slot.re.lock().recover().take().is_some() {
                 released += 1;
             }
             return false;
@@ -565,7 +566,7 @@ impl NetRegex {
             re: Mutex::new(Some(Arc::new(re))),
             last_used: AtomicU64::new(uptime()),
         });
-        registry().lock().unwrap().push(Arc::downgrade(&slot));
+        registry().lock().recover().push(Arc::downgrade(&slot));
         Ok(NetRegex {
             full,
             names,
@@ -577,7 +578,7 @@ impl NetRegex {
     /// The compiled automaton, built again if it was let go.
     fn re(&self) -> Arc<fancy_regex::Regex> {
         self.slot.last_used.store(uptime(), Ordering::Relaxed);
-        let mut held = self.slot.re.lock().unwrap();
+        let mut held = self.slot.re.lock().recover();
         if let Some(re) = held.as_ref() {
             return re.clone();
         }
@@ -586,7 +587,7 @@ impl NetRegex {
         // The slot's lock is let go before the registry's is taken: the
         // release of idle patterns takes them the other way round.
         drop(held);
-        registry().lock().unwrap().push(Arc::downgrade(&self.slot));
+        registry().lock().recover().push(Arc::downgrade(&self.slot));
         re
     }
 
@@ -769,7 +770,7 @@ mod tests {
         // Other tests compile patterns of their own meanwhile: only this
         // one's state is looked at.
         release_idle(Duration::ZERO);
-        assert!(re.slot.re.lock().unwrap().is_none(), "the automaton was let go");
+        assert!(re.slot.re.lock().recover().is_none(), "the automaton was let go");
         let after = re.captures("The.Movie.2019.1080p").map(|c| {
             (
                 c.value("title").map(str::to_string),
@@ -777,11 +778,11 @@ mod tests {
             )
         });
         assert_eq!(after, before);
-        assert!(re.slot.re.lock().unwrap().is_some(), "and built again on use");
+        assert!(re.slot.re.lock().recover().is_some(), "and built again on use");
         // A pattern in use is kept.
         assert!(re.is_match("A.Movie.2001"));
         release_idle(Duration::from_secs(3600));
-        assert!(re.slot.re.lock().unwrap().is_some());
+        assert!(re.slot.re.lock().recover().is_some());
     }
 
     /// A release profile term can hold any text; an unfinished group must

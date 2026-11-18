@@ -3,6 +3,7 @@
 //! type of a format must have at least one match, and no `required`
 //! specification may fail.
 
+use crate::sync::Recover;
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex, OnceLock};
 
@@ -272,12 +273,12 @@ fn last_used() -> &'static Mutex<Option<std::time::Instant>> {
 pub fn release_idle(max_idle: std::time::Duration) -> usize {
     let idle = last_used()
         .lock()
-        .unwrap()
+        .recover()
         .is_none_or(|at| at.elapsed() >= max_idle);
     if !idle {
         return 0;
     }
-    let mut cache = pattern_cache().lock().unwrap();
+    let mut cache = pattern_cache().lock().recover();
     let released = cache.len();
     cache.clear();
     cache.shrink_to_fit();
@@ -286,8 +287,8 @@ pub fn release_idle(max_idle: std::time::Duration) -> usize {
 
 fn compiled(pattern: &str) -> Option<Arc<fancy_regex::Regex>> {
     let cache = pattern_cache();
-    *last_used().lock().unwrap() = Some(std::time::Instant::now());
-    if let Some(hit) = cache.lock().unwrap().get(pattern) {
+    *last_used().lock().recover() = Some(std::time::Instant::now());
+    if let Some(hit) = cache.lock().recover().get(pattern) {
         return hit.clone();
     }
     // Seek, as for the parser's patterns (`parser::netregex`): the
@@ -304,7 +305,7 @@ fn compiled(pattern: &str) -> Option<Arc<fancy_regex::Regex>> {
             None
         }
     };
-    cache.lock().unwrap().insert(pattern.to_string(), built.clone());
+    cache.lock().recover().insert(pattern.to_string(), built.clone());
     built
 }
 

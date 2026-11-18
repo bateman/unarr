@@ -2,6 +2,7 @@
 //! titles from the Servarr services and XEM, and XEM's scene numbering of a
 //! series' episodes.
 
+use crate::sync::Recover;
 use std::collections::{HashMap, HashSet};
 use std::sync::Mutex;
 use std::time::{Duration, Instant};
@@ -31,7 +32,7 @@ impl SceneState {
     /// manual refresh updates the mappings when none happened since the
     /// start, or the last is more than a minute old.
     pub fn mappings_due(&self) -> bool {
-        match *self.mappings_updated.lock().unwrap() {
+        match *self.mappings_updated.lock().recover() {
             None => true,
             Some(at) => at.elapsed() > Duration::from_secs(60),
         }
@@ -39,11 +40,11 @@ impl SceneState {
 
     /// `Handle(SeriesAddedEvent)`: only when none happened since the start.
     pub fn mappings_never_updated(&self) -> bool {
-        self.mappings_updated.lock().unwrap().is_none()
+        self.mappings_updated.lock().recover().is_none()
     }
 
     fn xem_expired(&self, ttl: Duration) -> bool {
-        match &*self.xem_series.lock().unwrap() {
+        match &*self.xem_series.lock().recover() {
             None => true,
             Some((at, _)) => at.elapsed() > ttl,
         }
@@ -54,7 +55,7 @@ impl SceneState {
 /// empty; a provider that fails or answers nothing leaves its rows.
 pub async fn update_mappings(db: &Db, augment: &Augment, state: &SceneState) {
     tracing::info!("Updating Scene mappings");
-    *state.mappings_updated.lock().unwrap() = Some(Instant::now());
+    *state.mappings_updated.lock().recover() = Some(Instant::now());
     let providers: [(&str, anyhow::Result<Vec<RemoteSceneMapping>>); 2] = [
         (SERVICES_PROVIDER, augment.scene_mappings().await),
         (XEM_SERVICE, augment.xem_names().await),
@@ -129,13 +130,13 @@ fn to_row(m: RemoteSceneMapping, kind: &str) -> SceneMapping {
 /// list there was (`ExtendTTL`).
 async fn update_xem_series_ids(augment: &Augment, state: &SceneState) {
     let keep = |state: &SceneState| {
-        let mut cached = state.xem_series.lock().unwrap();
+        let mut cached = state.xem_series.lock().recover();
         let ids = cached.take().map(|(_, ids)| ids).unwrap_or_default();
         *cached = Some((Instant::now(), ids));
     };
     match augment.xem_series_ids().await {
         Ok(ids) if !ids.is_empty() => {
-            *state.xem_series.lock().unwrap() = Some((Instant::now(), ids.into_iter().collect()));
+            *state.xem_series.lock().recover() = Some((Instant::now(), ids.into_iter().collect()));
         }
         Ok(_) => {
             keep(state);
@@ -162,7 +163,7 @@ pub async fn series_updated(db: &Db, augment: &Augment, state: &SceneState, seri
         update_xem_series_ids(augment, state).await;
     }
     let known = {
-        let cached = state.xem_series.lock().unwrap();
+        let cached = state.xem_series.lock().recover();
         match &*cached {
             Some((_, ids)) if !ids.is_empty() => Some(ids.contains(&series.tvdb_id)),
             _ => None,

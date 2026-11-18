@@ -1,4 +1,3 @@
-use std::future::IntoFuture;
 use std::net::SocketAddr;
 use std::path::{Path, PathBuf};
 
@@ -61,8 +60,33 @@ enum Command {
 /// base saved in the interface applies at the next start).
 const LISTENING_FILE: &str = "listening";
 
+/// Next to it, the personalities that did not start, one name per line;
+/// absent when all did. The health check reports each as unhealthy: the
+/// others serve, and whoever watches the container is told one does not.
+const DOWN_FILE: &str = "down";
+
 /// A personality as the daemon serves it.
 type Listening = (String, SocketAddr, String);
+
+fn write_down(data: &Path, names: &[String]) -> std::io::Result<()> {
+    if names.is_empty() {
+        return Ok(());
+    }
+    std::fs::write(data.join(DOWN_FILE), names.join("\n") + "\n")
+}
+
+/// The personalities the daemon said it could not start.
+fn down(data: &Path) -> Vec<String> {
+    std::fs::read_to_string(data.join(DOWN_FILE))
+        .map(|text| {
+            text.lines()
+                .map(str::trim)
+                .filter(|l| !l.is_empty())
+                .map(String::from)
+                .collect()
+        })
+        .unwrap_or_default()
+}
 
 fn write_listening(data: &Path, personalities: &[Listening]) -> std::io::Result<()> {
     let text: String = personalities
@@ -143,6 +167,10 @@ fn healthcheck(data: &Path) -> bool {
         }
     };
     let mut healthy = true;
+    for name in down(data) {
+        eprintln!("{name}: did not start; its log and the daemon's say why");
+        healthy = false;
+    }
     for (name, addr, url_base) in personalities {
         // Short enough for several personalities to be asked within the
         // time a container's health check is given.
@@ -213,6 +241,13 @@ fn already_imported(personality: Personality, own_dir: &Path) -> anyhow::Result<
         .is_some())
 }
 
+/// For the check of `--import-from`, which is about the folders given: a
+/// database that cannot be opened is not that check's to report. The start
+/// of its personality does, and leaves the others to start.
+fn imported_or_unreadable(personality: Personality, data: &Path) -> bool {
+    already_imported(personality, &data.join(personality_dir(personality))).unwrap_or(true)
+}
+
 /// With `--import-from`, every selected personality was imported already or
 /// finds its original's database in one of the folders given, and every
 /// folder given holds the database of a selected personality unless that
@@ -230,7 +265,7 @@ fn check_import_source(
             .iter()
             .any(|dir| dir.join(p.legacy_db_file()).is_file());
         anyhow::ensure!(
-            present || already_imported(*p, &data.join(personality_dir(*p)))?,
+            present || imported_or_unreadable(*p, data),
             "{}: no {} in {} and nothing imported yet; check the path, or leave {} out of the personalities",
             p.app_name(),
             p.legacy_db_file(),
@@ -246,9 +281,7 @@ fn check_import_source(
     for dir in import_from {
         let mut found = false;
         for p in personalities {
-            if dir.join(p.legacy_db_file()).is_file()
-                || already_imported(*p, &data.join(personality_dir(*p)))?
-            {
+            if dir.join(p.legacy_db_file()).is_file() || imported_or_unreadable(*p, data) {
                 found = true;
             }
         }
@@ -685,6 +718,62 @@ fn personality_runtime(name: &str, dispatch: &tracing::Dispatch) -> std::io::Res
         .build()
 }
 
+/// Open a personality and start serving it: its runtime, its state and
+/// where it listens.
+fn start(
+    personality: Personality,
+    args: &Args,
+    name: &str,
+    logs: &LogBuffer,
+    files: &LogFiles,
+    dispatch: &tracing::Dispatch,
+    filter: FilterHandle,
+) -> anyhow::Result<(tokio::runtime::Runtime, AppState, Listening)> {
+    let runtime = personality_runtime(name, dispatch)
+        .with_context(|| format!("starting the runtime for {personality:?}"))?;
+    // This thread opens the personality and logs as it while it does;
+    // the database thread started here does the same from then on.
+    let started = tracing::dispatcher::with_default(dispatch, || -> anyhow::Result<(AppState, Listening)> {
+        #[cfg(feature = "panic-switch")]
+        unarr_core::panics::switch::fire(&format!("start:{name}"));
+        let opened = open_personality(personality, args, logs)?;
+        let state = opened.state;
+        // `ReconfigureLogging`: the level of Settings > General, now and
+        // whenever it is saved. `RUST_LOG`, when set, is the operator's
+        // word and stays in force.
+        if std::env::var_os("RUST_LOG").is_some() {
+            tracing::info!("RUST_LOG is set: it decides what is logged, not the Log Level of the settings");
+        } else {
+            let files = files.clone();
+            state.set_log_level_hook(move |level| {
+                files.set_level(settings_level(level));
+                if let Err(e) = filter.reload(settings_filter(level)) {
+                    tracing::warn!("The log level could not be changed: {e}");
+                }
+            });
+            state.apply_log_level();
+        }
+        // A mock serving every metadata host under `<url>/<host>/`, for
+        // replays against `scripts/mock-servarr.py`; unset in real use.
+        if let Ok(url) = std::env::var("UNARR_METADATA_UPSTREAM") {
+            tracing::warn!(%url, "metadata hosts redirected (UNARR_METADATA_UPSTREAM)");
+            state.set_metadata_upstreams(unarr_core::metadata::Upstreams::mock(&url));
+        }
+        let addr = runtime.block_on(serve(personality, state.clone(), opened.bind, opened.port))?;
+        let url_base = state.settings().url_base.clone();
+        Ok((state, (name.to_owned(), addr, url_base)))
+    });
+    match started {
+        Ok((state, served)) => Ok((runtime, state, served)),
+        Err(e) => {
+            // What it had begun (the workers, a listener) ends with its
+            // runtime, without waiting for work that may never end.
+            runtime.shutdown_background();
+            Err(e)
+        }
+    }
+}
+
 /// A personality being served.
 struct Running {
     dispatch: tracing::Dispatch,
@@ -710,7 +799,7 @@ async fn serve(
     // tick; a personality that runs none yet (Radarr, until it has its
     // commands) would keep what its largest answer needed.
     if state.commands().is_err() {
-        tokio::spawn(async {
+        unarr_core::panics::supervised("memory release timer", || async {
             let mut tick = tokio::time::interval(std::time::Duration::from_secs(30));
             loop {
                 tick.tick().await;
@@ -724,13 +813,16 @@ async fn serve(
         .with_context(|| format!("binding {bind}:{port}"))?;
     let addr = listener.local_addr()?;
     tracing::info!(%addr, ?personality, "listening");
-    tokio::spawn(
-        axum::serve(
-            listener,
-            unarr_api::router(state).into_make_service_with_connect_info::<SocketAddr>(),
-        )
-        .into_future(),
-    );
+    // Each connection is a task of its own, and a request that panics is
+    // answered by the router. The accept loop holds none of Unarr's code
+    // and never ends (axum retries a failed accept itself), so it is not
+    // started again: should it ever panic, the log says so.
+    let app = unarr_api::router(state).into_make_service_with_connect_info::<SocketAddr>();
+    unarr_core::panics::spawn_logged("HTTP server", async move {
+        if let Err(e) = axum::serve(listener, app).await {
+            tracing::error!(error = %e, %addr, "The HTTP server stopped");
+        }
+    });
     Ok(addr)
 }
 
@@ -740,6 +832,21 @@ fn main() -> anyhow::Result<()> {
         std::process::exit(if healthcheck(&args.data) { 0 } else { 1 });
     }
     unarr_core::fs::tune_allocator();
+    // A panic unwinds to whoever started the work it happened in.
+    unarr_core::panics::install_hook();
+    #[cfg(feature = "panic-switch")]
+    {
+        eprintln!("unarrd: built with the panic switch, for tests only: it panics where asked to");
+        // The start of the personalities named here panics.
+        for name in std::env::var("UNARR_PANIC_AT_START")
+            .unwrap_or_default()
+            .split(',')
+        {
+            if !name.is_empty() {
+                unarr_core::panics::switch::arm(&format!("start:{name}"));
+            }
+        }
+    }
     // What is logged outside any personality goes to the console and, through
     // `process_log`, to every personality's recent lines and files.
     let process_log = ProcessLog::new();
@@ -768,8 +875,10 @@ fn main() -> anyhow::Result<()> {
 
     // Whatever an earlier run said: nothing listens yet.
     let _ = std::fs::remove_file(args.data.join(LISTENING_FILE));
+    let _ = std::fs::remove_file(args.data.join(DOWN_FILE));
     let mut listening: Vec<Listening> = Vec::new();
     let mut running = Vec::new();
+    let mut down: Vec<String> = Vec::new();
     for personality in personalities {
         // The log files live with the personality's data, where the
         // originals keep theirs and under their names (`sonarr.txt`).
@@ -778,45 +887,36 @@ fn main() -> anyhow::Result<()> {
         let files = LogFiles::open(&args.data.join(personality_dir(personality)).join("logs"), &name);
         process_log.add(logs.clone(), files.clone());
         let (dispatch, filter) = personality_dispatch(&logs, &files, log_filter());
-        let runtime = personality_runtime(&name, &dispatch)
-            .with_context(|| format!("starting the runtime for {personality:?}"))?;
-        // This thread opens the personality and logs as it while it does;
-        // the database thread started here does the same from then on.
-        let state = tracing::dispatcher::with_default(&dispatch, || -> anyhow::Result<AppState> {
-            let opened = open_personality(personality, &args, &logs)?;
-            let state = opened.state;
-            // `ReconfigureLogging`: the level of Settings > General, now and
-            // whenever it is saved. `RUST_LOG`, when set, is the operator's
-            // word and stays in force.
-            if std::env::var_os("RUST_LOG").is_some() {
-                tracing::info!(
-                    "RUST_LOG is set: it decides what is logged, not the Log Level of the settings"
-                );
-            } else {
-                let files = files.clone();
-                state.set_log_level_hook(move |level| {
-                    files.set_level(settings_level(level));
-                    if let Err(e) = filter.reload(settings_filter(level)) {
-                        tracing::warn!("The log level could not be changed: {e}");
-                    }
+        // A personality that cannot start, by an error or by a panic (a
+        // database that does not open, an import or a migration that
+        // fails, a port already taken), is reported and left down, and the
+        // others start: stopping here would have the container restart in
+        // a loop with every one of them down.
+        let started = unarr_core::panics::catch_sync(|| {
+            start(personality, &args, &name, &logs, &files, &dispatch, filter)
+        })
+        .unwrap_or_else(|panic| Err(anyhow::Error::new(panic)));
+        match started {
+            Ok((runtime, state, served)) => {
+                listening.push(served);
+                running.push(Running {
+                    dispatch,
+                    runtime,
+                    state,
                 });
-                state.apply_log_level();
             }
-            // A mock serving every metadata host under `<url>/<host>/`, for
-            // replays against `scripts/mock-servarr.py`; unset in real use.
-            if let Ok(url) = std::env::var("UNARR_METADATA_UPSTREAM") {
-                tracing::warn!(%url, "metadata hosts redirected (UNARR_METADATA_UPSTREAM)");
-                state.set_metadata_upstreams(unarr_core::metadata::Upstreams::mock(&url));
+            Err(e) => {
+                tracing::error!(
+                    "{} did not start and is left down until the next start: {e:#}",
+                    personality.app_name()
+                );
+                down.push(name);
             }
-            let addr = runtime.block_on(serve(personality, state.clone(), opened.bind, opened.port))?;
-            listening.push((name.clone(), addr, state.settings().url_base.clone()));
-            Ok(state)
-        })?;
-        running.push(Running {
-            dispatch,
-            runtime,
-            state,
-        });
+        }
+    }
+    anyhow::ensure!(!running.is_empty(), "no personality could be started");
+    if let Err(e) = write_down(&args.data, &down) {
+        tracing::warn!(error = %e, "could not record what did not start in {}", args.data.display());
     }
     // For `unarrd healthcheck`: every personality listens. Not being able
     // to say so stops nothing but the health check, which then reports it.

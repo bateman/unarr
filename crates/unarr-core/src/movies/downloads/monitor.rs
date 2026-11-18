@@ -3,6 +3,7 @@
 //! an import: every client asked, every item tracked, failures processed,
 //! the queue rebuilt.
 
+use crate::sync::Recover;
 use chrono::{DateTime, Utc};
 
 use super::failed;
@@ -111,7 +112,7 @@ pub async fn refresh(downloads: &MovieDownloads, now: DateTime<Utc>) -> anyhow::
     };
     let before = downloads.queue();
     {
-        let mut cache = downloads.tracked.lock().unwrap();
+        let mut cache = downloads.tracked.lock().recover();
         // Downloads no client reports any more are dropped rather than kept
         // as not trackable, so the cache does not grow for the life of the
         // process; a finished state comes back from the history.
@@ -123,7 +124,7 @@ pub async fn refresh(downloads: &MovieDownloads, now: DateTime<Utc>) -> anyhow::
         }
     }
     downloads.rebuild_queue(now);
-    downloads.raised.lock().unwrap().extend(raised);
+    downloads.raised.lock().recover().extend(raised);
     Ok(downloads.queue() != before)
 }
 

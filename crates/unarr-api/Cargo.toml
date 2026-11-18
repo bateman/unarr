@@ -7,6 +7,11 @@ license.workspace = true
 repository.workspace = true
 rust-version.workspace = true
 
+[features]
+# Routes that panic on purpose (`routes::panic_switch`). For
+# `make panic-test`; never part of a published binary.
+panic-switch = ["unarr-core/panic-switch"]
+
 [dependencies]
 fancy-regex.workspace = true
 unarr-core.workspace = true
