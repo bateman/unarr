@@ -315,13 +315,22 @@ mod tests {
 
         crate::panics::install_hook();
         let db = Db::open_in_memory().unwrap();
-        // The thread is held on a first call while a second one is sent
-        // and its caller leaves.
+        // The thread is held on a first call, and known to be in it,
+        // while a second one is sent and its caller leaves: the second
+        // call's result is then released on the database thread, never
+        // here.
         let (hold, held) = mpsc::channel::<()>();
+        let (holding, is_held) = mpsc::channel::<()>();
         let waiting = {
             let db = db.clone();
-            thread::spawn(move || db.call_blocking(move |_| Ok(held.recv()?)))
+            thread::spawn(move || {
+                db.call_blocking(move |_| {
+                    holding.send(())?;
+                    Ok(held.recv()?)
+                })
+            })
         };
+        is_held.recv().unwrap();
         let runtime = tokio::runtime::Builder::new_current_thread().build().unwrap();
         runtime.block_on(async {
             tokio::select! {

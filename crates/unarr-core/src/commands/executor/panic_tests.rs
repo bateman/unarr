@@ -93,6 +93,7 @@ async fn a_command_that_panics_fails_and_the_next_one_runs() {
     // them is lost.
     for _ in 0..super::WORKERS + 1 {
         switch::arm("command:sonarr:MessagingCleanup");
+        let recorded = last_run(&runtime).await;
         let failed = run(&runtime, CommandBody::MessagingCleanup).await;
         assert_eq!(failed.status, CommandStatus::Failed);
         assert_eq!(failed.message.as_deref(), Some("Failed"));
@@ -122,10 +123,7 @@ async fn a_command_that_panics_fails_and_the_next_one_runs() {
             .await
             .unwrap();
         assert_eq!(stored, CommandStatus::Failed.as_i64());
-        assert!(
-            last_run(&runtime).await >= failed.started_at,
-            "the run is recorded"
-        );
+        assert!(last_run(&runtime).await > recorded, "the run is recorded");
     }
     let done = run(&runtime, CommandBody::MessagingCleanup).await;
     assert_eq!(done.status, CommandStatus::Completed);
@@ -134,6 +132,7 @@ async fn a_command_that_panics_fails_and_the_next_one_runs() {
     // the command fails the same way.
     for _ in 0..super::WORKERS + 1 {
         switch::arm("record:sonarr:MessagingCleanup");
+        let recorded = last_run(&runtime).await;
         let failed = run(&runtime, CommandBody::MessagingCleanup).await;
         assert_eq!(failed.status, CommandStatus::Failed);
         assert!(
@@ -143,8 +142,11 @@ async fn a_command_that_panics_fails_and_the_next_one_runs() {
         assert_eq!(told(&mut events, failed.id).await, [CommandStatus::Failed]);
         // The run counts for the scheduler all the same: a task whose run
         // is not recorded is due again at every tick, thirty seconds apart.
+        // Compared with the run recorded before, not with the command's
+        // own start: the time is stored to the microsecond, and a command
+        // that panics at once ends within the one it started in.
         assert!(
-            last_run(&runtime).await >= failed.started_at,
+            last_run(&runtime).await > recorded,
             "the run of a command that panicked around its body is recorded"
         );
     }
