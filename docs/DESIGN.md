@@ -714,8 +714,9 @@ smaller binary. It unwinds since issue #14 (section 20 has the decision
 and what catches what). Measured on 17 November 2026 in the cloud session
 (x86-64, glibc), `main` at `d6c61de` against the branch at `57ca42c`,
 both built with the same profile but for `panic`, both personalities on
-the real library, with `make compare-originals` (one run each; its
-tables are in `docs/originals-comparison.md`):
+the real library, with `make compare-originals` (one run each;
+`docs/originals-comparison.md` keeps the comparison and its History
+row):
 
 | | Aborting | Unwinding | More |
 |---|--:|--:|--:|

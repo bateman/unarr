@@ -11,7 +11,7 @@ use super::local::{ImportDecision, ImportRejection, LocalEpisode, RejectionReaso
 use super::mediainfo::{self, MediaInfo};
 use super::sample::{self, DetectSampleResult};
 use super::specs;
-use crate::customformat::{self, Input};
+use crate::customformat::Input;
 use crate::decision::lookup::{Catalog, Lookup, StoreLookup};
 use crate::decision::upgradable;
 use crate::downloadclients::DownloadClientItem;
@@ -85,10 +85,7 @@ pub fn local_formats(catalog: &Catalog, local: &LocalEpisode) -> Vec<CustomForma
         series_original_language: local.series.as_ref().map(|s| s.original_language_id).unwrap_or(0),
         movie: None,
     };
-    customformat::evaluate(&catalog.formats, &input)
-        .into_iter()
-        .cloned()
-        .collect()
+    catalog.formats.evaluate(&input).into_iter().cloned().collect()
 }
 
 /// The custom format score of a local episode under its series' profile.

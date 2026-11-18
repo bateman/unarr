@@ -9,7 +9,7 @@ use axum::response::{IntoResponse, Response};
 use axum::Json;
 use serde_json::{json, Map, Value};
 use unarr_core::commands::{language_ids_from_json, quality_model_from_json};
-use unarr_core::customformat::{self, Input, MovieFacts};
+use unarr_core::customformat::{Input, MovieFacts};
 use unarr_core::downloads::queue::hash_int31;
 use unarr_core::model::{QualityModel, ReleaseType};
 use unarr_core::movies::decision::engine::aggregate_languages;
@@ -421,7 +421,11 @@ pub async fn parse(State(state): State<AppState>, uri: Uri) -> ApiResult<Respons
                 .unwrap_or(parsed.year),
         }),
     };
-    let formats: Vec<_> = customformat::evaluate(&env.catalog.base.formats, &input)
+    let formats: Vec<_> = env
+        .catalog
+        .base
+        .formats
+        .evaluate(&input)
         .into_iter()
         .cloned()
         .collect();

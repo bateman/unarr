@@ -1242,7 +1242,7 @@ mod tests {
             include_when_renaming: false,
             specifications: json!([{"type": "ReleaseTitleSpecification", "body": {"value": value, "negate": false, "required": false}}]),
         };
-        h.catalog.base.formats = vec![format(1, "Name1", "GRP")];
+        h.catalog.base.formats = vec![format(1, "Name1", "GRP")].into();
         h.catalog.base.profiles[0].format_items = vec![ProfileFormatItem {
             format: 1,
             score: existing_score,

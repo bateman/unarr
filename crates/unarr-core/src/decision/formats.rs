@@ -3,17 +3,14 @@
 
 use serde_json::Value;
 
-use crate::customformat::{self, Input};
+use crate::customformat::Input;
 use crate::decision::lookup::{Catalog, QueuedRelease};
 use crate::decision::RemoteEpisode;
 use crate::model::{CustomFormat, EpisodeFile, HistoryEntry, ReleaseType, Series};
 use crate::parser;
 
 fn evaluate(catalog: &Catalog, input: &Input<'_>) -> Vec<CustomFormat> {
-    customformat::evaluate(&catalog.formats, input)
-        .into_iter()
-        .cloned()
-        .collect()
+    catalog.formats.evaluate(input).into_iter().cloned().collect()
 }
 
 /// `ParseCustomFormat(RemoteEpisode, size)`.
