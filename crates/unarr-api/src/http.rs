@@ -241,27 +241,25 @@ fn whole_path(request: &Request) -> String {
 
 /// `SonarrErrorPipeline` for what Unarr has in place of an unhandled
 /// exception: a panic while a request is handled costs that request. It is
-/// logged as the originals log theirs ("Request Failed", with the message
-/// and the place of the panic) and answered with their 500, here as the
-/// error of the two layers below.
-async fn answer_or_panic(request: Request, next: Next) -> Result<Response, Response> {
+/// logged here as the originals log theirs ("Request Failed", with the
+/// message and the place of the panic) and handed to the two layers
+/// below, which answer it with the originals' 500 (`error::panicked`).
+async fn answer_or_panic(request: Request, next: Next) -> Result<Response, unarr_core::panics::Panicked> {
     let method = request.method().clone();
     let path = whole_path(&request);
     unarr_core::panics::catch(next.run(request))
         .await
-        .map_err(|panic| {
-            tracing::error!("Request Failed. {method} {path}: {panic}");
-            crate::error::panicked(&panic)
-        })
+        .inspect_err(|panic| tracing::error!("Request Failed. {method} {path}: {panic}"))
 }
 
 /// Inside [`finish`], around the API's and the feed's actions, so that the
 /// answer to a panic leaves as the exception handler's does there: no
 /// `X-Application-Version`, no charset, `no-cache,no-store`.
 pub async fn catch_panic(request: Request, next: Next) -> Response {
-    answer_or_panic(request, next)
-        .await
-        .unwrap_or_else(|answer| answer)
+    match answer_or_panic(request, next).await {
+        Ok(response) => response,
+        Err(panic) => crate::error::panicked(&panic),
+    }
 }
 
 /// Around the whole router, for what [`catch_panic`] is not around: the
@@ -270,10 +268,14 @@ pub async fn catch_panic(request: Request, next: Next) -> Response {
 /// writes the same answer whatever the path; nothing after this layer
 /// forbids caching it, so it does.
 pub async fn catch_panic_anywhere(request: Request, next: Next) -> Response {
-    answer_or_panic(request, next).await.unwrap_or_else(|mut answer| {
-        forbid_caching(answer.headers_mut(), NO_CACHE_THROWN);
-        answer
-    })
+    match answer_or_panic(request, next).await {
+        Ok(response) => response,
+        Err(panic) => {
+            let mut answer = crate::error::panicked(&panic);
+            forbid_caching(answer.headers_mut(), NO_CACHE_THROWN);
+            answer
+        }
+    }
 }
 
 /// No caching, for what is neither a page nor the API: SignalR's negotiation.
