@@ -20,8 +20,8 @@ use unarr_core::store::paging::Paging;
 use unarr_core::time;
 
 use super::resources::{
-    embedded_movie_resource, formats_resource, languages_resource, movie_resource, quality_resource, Covers,
-    FileShown, MovieContext, MovieParts,
+    embedded_movie_resource, formats_resource, languages_resource, movie_resource, quality_resource,
+    ContextReader, Covers, FileShown, MovieContext, MovieParts,
 };
 use crate::error::ApiResult;
 use crate::query::Params;
@@ -72,33 +72,73 @@ fn history_resource(
     out
 }
 
-async fn movies_of(state: &AppState, ids: Vec<i64>) -> anyhow::Result<HashMap<i64, Movie>> {
-    Ok(state
-        .db()
-        .call(move |c| movies::movies_by_ids(c, &ids))
-        .await?
-        .into_iter()
-        .map(|m| (m.id, m))
-        .collect())
+/// The movies some history or blocklist rows belong to, with the context
+/// their resources need, read in the same database call as the rows: each
+/// call waits for its turn on the database thread.
+struct Owners {
+    movies: HashMap<i64, Movie>,
+    ctx: MovieContext,
 }
 
-async fn history_resources(
+impl Owners {
+    fn read(
+        conn: &rusqlite::Connection,
+        reader: &ContextReader,
+        movie_ids: impl IntoIterator<Item = i64>,
+    ) -> anyhow::Result<Owners> {
+        let mut ids: Vec<i64> = movie_ids.into_iter().collect();
+        ids.sort_unstable();
+        ids.dedup();
+        let movies: HashMap<i64, Movie> = movies::movies_by_ids(conn, &ids)?
+            .into_iter()
+            .map(|m| (m.id, m))
+            .collect();
+        let ctx = reader.read_for(conn, movies.values())?;
+        Ok(Owners { movies, ctx })
+    }
+
+    fn history(&self, h: &MovieHistoryEntry, include_movie: bool) -> Value {
+        history_resource(&self.ctx, h, self.movies.get(&h.movie_id), include_movie)
+    }
+}
+
+/// History or blocklist rows, what else the query returns (a total), and
+/// the movies they belong to with their context, in one database call.
+async fn read_with_owners<R, T>(
     state: &AppState,
+    movie_id: fn(&R) -> i64,
+    rows: impl FnOnce(&rusqlite::Connection) -> anyhow::Result<(Vec<R>, T)> + Send + 'static,
+) -> anyhow::Result<(Vec<R>, T, Owners)>
+where
+    R: Send + 'static,
+    T: Send + 'static,
+{
+    let reader = ContextReader::of(state);
+    state
+        .db()
+        .call(move |conn| {
+            let (rows, extra) = rows(conn)?;
+            let owners = Owners::read(conn, &reader, rows.iter().map(movie_id))?;
+            Ok((rows, extra, owners))
+        })
+        .await
+}
+
+fn history_movie_id(h: &MovieHistoryEntry) -> i64 {
+    h.movie_id
+}
+
+fn blocklist_movie_id(b: &MovieBlocklistEntry) -> i64 {
+    b.movie_id
+}
+
+/// Every row is matched against every custom format: off the async workers.
+async fn render_history(
     rows: Vec<MovieHistoryEntry>,
+    owners: Owners,
     include_movie: bool,
 ) -> anyhow::Result<Vec<Value>> {
-    let mut ids: Vec<i64> = rows.iter().map(|h| h.movie_id).collect();
-    ids.sort_unstable();
-    ids.dedup();
-    let owners = movies_of(state, ids).await?;
-    let ctx = MovieContext::load_for(state, owners.values()).await?;
-    // Every row is matched against every custom format: off the async workers.
-    crate::blocking::run(move || {
-        rows.iter()
-            .map(|h| history_resource(&ctx, h, owners.get(&h.movie_id), include_movie))
-            .collect()
-    })
-    .await
+    crate::blocking::run(move || rows.iter().map(|h| owners.history(h, include_movie)).collect()).await
 }
 
 /// The event types a request names, by number as the UI sends them.
@@ -128,26 +168,113 @@ pub async fn history(State(state): State<AppState>, uri: Uri) -> ApiResult<Json<
         qualities: p.ints("quality"),
     };
     let page = paging.clone();
-    let (rows, total) = state
-        .db()
-        .call(move |c| movies::history_page(c, &page, &filter))
-        .await?;
-    let records = history_resources(&state, rows, p.bool("includeMovie", false)).await?;
+    let (rows, total, owners) = read_with_owners(&state, history_movie_id, move |c| {
+        movies::history_page(c, &page, &filter)
+    })
+    .await?;
+    let records = render_history(rows, owners, p.bool("includeMovie", false)).await?;
     Ok(Json(PagingResource::new(&paging, total, records)))
 }
 
-/// `GET /history/since?date=`: what happened from a date on.
-pub async fn history_since(State(state): State<AppState>, uri: Uri) -> ApiResult<Json<Vec<Value>>> {
+/// Rows of `history/since` read, rendered and sent a page at a time, as
+/// Sonarr's are: the original builds the whole list, which on a large
+/// library is tens of megabytes held until the client is done.
+const SINCE_PAGE: usize = 1000;
+
+/// Where a streamed `history/since` is: the text before the first page,
+/// whether a row was written (the next one needs a comma), the pages left,
+/// and whether the array was closed or the stream stopped.
+struct Since {
+    head: Option<String>,
+    wrote: bool,
+    pages: std::collections::VecDeque<Vec<i64>>,
+    closed: bool,
+}
+
+/// `GET /history/since?date=`: what happened from a date on, oldest first,
+/// streamed as one JSON array.
+pub async fn history_since(State(state): State<AppState>, uri: Uri) -> ApiResult<Response> {
     let p = Params::from_uri(&uri);
     let date = p.time("date").unwrap_or(DateTime::<Utc>::MIN_UTC);
     let event = event_types(&p).into_iter().next();
-    let rows = state
+    let include_movie = p.bool("includeMovie", false);
+    // The rows' ids first, in the answer's order: the pages are cut from
+    // them, so a row written meanwhile neither shifts a page nor joins.
+    let ids = state
         .db()
-        .call(move |c| movies::history_since(c, date, event))
+        .call(move |c| movies::history_since_ids(c, date, event))
         .await?;
-    Ok(Json(
-        history_resources(&state, rows, p.bool("includeMovie", false)).await?,
-    ))
+    let mut pages: std::collections::VecDeque<Vec<i64>> =
+        ids.chunks(SINCE_PAGE).map(<[i64]>::to_vec).collect();
+    // One page rendered to JSON text, its resources joined by commas.
+    let page = move |ids: Vec<i64>| {
+        let state = state.clone();
+        async move {
+            let (rows, (), owners) = read_with_owners(&state, history_movie_id, move |c| {
+                Ok((movies::history_by_ids(c, &ids)?, ()))
+            })
+            .await?;
+            crate::blocking::run(move || -> anyhow::Result<String> {
+                let mut text = String::new();
+                for h in &rows {
+                    if !text.is_empty() {
+                        text.push(',');
+                    }
+                    text.push_str(&serde_json::to_string(&owners.history(h, include_movie))?);
+                }
+                Ok(text)
+            })
+            .await?
+        }
+    };
+    // The first page before answering, so an error is still a status code.
+    let first = match pages.pop_front() {
+        Some(ids) => page(ids).await?,
+        None => String::new(),
+    };
+    let since = Since {
+        head: Some(format!("[{first}")),
+        wrote: !first.is_empty(),
+        pages,
+        closed: false,
+    };
+    let stream = futures_util::stream::unfold((since, page), |(mut since, page)| async move {
+        if let Some(head) = since.head.take() {
+            return Some((Ok(axum::body::Bytes::from(head)), (since, page)));
+        }
+        if since.closed {
+            return None;
+        }
+        let Some(ids) = since.pages.pop_front() else {
+            since.closed = true;
+            return Some((Ok(axum::body::Bytes::from_static(b"]")), (since, page)));
+        };
+        match page(ids).await {
+            Ok(text) => {
+                // A page whose rows were all deleted meanwhile adds nothing.
+                let text = if since.wrote && !text.is_empty() {
+                    format!(",{text}")
+                } else {
+                    text
+                };
+                since.wrote |= !text.is_empty();
+                Some((Ok(axum::body::Bytes::from(text)), (since, page)))
+            }
+            Err(e) => {
+                tracing::error!(error = %e, "history/since stopped part way");
+                since.closed = true;
+                Some((Err(std::io::Error::other(e.to_string())), (since, page)))
+            }
+        }
+    });
+    Ok((
+        [(
+            axum::http::header::CONTENT_TYPE,
+            "application/json; charset=utf-8",
+        )],
+        axum::body::Body::from_stream(stream),
+    )
+        .into_response())
 }
 
 /// `GET /history/movie?movieId=`: a movie's history, newest first.
@@ -155,12 +282,12 @@ pub async fn history_movie(State(state): State<AppState>, uri: Uri) -> ApiResult
     let p = Params::from_uri(&uri);
     let movie_id = p.i64("movieId").unwrap_or(0);
     let event = event_types(&p).into_iter().next();
-    let rows = state
-        .db()
-        .call(move |c| movies::history_of_movie(c, movie_id, event))
-        .await?;
+    let (rows, (), owners) = read_with_owners(&state, history_movie_id, move |c| {
+        Ok((movies::history_of_movie(c, movie_id, event)?, ()))
+    })
+    .await?;
     Ok(Json(
-        history_resources(&state, rows, p.bool("includeMovie", false)).await?,
+        render_history(rows, owners, p.bool("includeMovie", false)).await?,
     ))
 }
 
@@ -193,15 +320,10 @@ fn blocklist_resource(ctx: &MovieContext, b: &MovieBlocklistEntry, movie: Option
     out
 }
 
-async fn blocklist_resources(state: &AppState, rows: Vec<MovieBlocklistEntry>) -> anyhow::Result<Vec<Value>> {
-    let mut ids: Vec<i64> = rows.iter().map(|b| b.movie_id).collect();
-    ids.sort_unstable();
-    ids.dedup();
-    let owners = movies_of(state, ids).await?;
-    let ctx = MovieContext::load_for(state, owners.values()).await?;
+async fn render_blocklist(rows: Vec<MovieBlocklistEntry>, owners: Owners) -> anyhow::Result<Vec<Value>> {
     crate::blocking::run(move || {
         rows.iter()
-            .map(|b| blocklist_resource(&ctx, b, owners.get(&b.movie_id)))
+            .map(|b| blocklist_resource(&owners.ctx, b, owners.movies.get(&b.movie_id)))
             .collect()
     })
     .await
@@ -247,22 +369,22 @@ pub async fn blocklist(State(state): State<AppState>, uri: Uri) -> ApiResult<Res
         "date",
     );
     let page = paging.clone();
-    let (rows, total) = state
-        .db()
-        .call(move |c| movies::blocklist_page(c, &page, &movie_ids, protocols.as_deref()))
-        .await?;
-    let records = blocklist_resources(&state, rows).await?;
+    let (rows, total, owners) = read_with_owners(&state, blocklist_movie_id, move |c| {
+        movies::blocklist_page(c, &page, &movie_ids, protocols.as_deref())
+    })
+    .await?;
+    let records = render_blocklist(rows, owners).await?;
     Ok(Json(PagingResource::new(&paging, total, records)).into_response())
 }
 
 /// `GET /blocklist/movie?movieId=`.
 pub async fn blocklist_movie(State(state): State<AppState>, uri: Uri) -> ApiResult<Json<Vec<Value>>> {
     let movie_id = Params::from_uri(&uri).i64("movieId").unwrap_or(0);
-    let rows = state
-        .db()
-        .call(move |c| movies::blocklist_of_movie(c, movie_id))
-        .await?;
-    Ok(Json(blocklist_resources(&state, rows).await?))
+    let (rows, (), owners) = read_with_owners(&state, blocklist_movie_id, move |c| {
+        Ok((movies::blocklist_of_movie(c, movie_id)?, ()))
+    })
+    .await?;
+    Ok(Json(render_blocklist(rows, owners).await?))
 }
 
 // --- calendar and wanted

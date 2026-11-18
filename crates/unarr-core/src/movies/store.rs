@@ -1204,24 +1204,39 @@ pub fn history_of_movie(
 }
 
 /// `Since`: what happened from `date` on, oldest first.
-pub fn history_since(
+/// The ids of the history rows from `date` on (of one event type, when
+/// given), oldest first: `history/since` reads and sends them a page at a
+/// time.
+pub fn history_since_ids(
     conn: &Connection,
     date: DateTime<Utc>,
     event_type: Option<MovieHistoryEvent>,
-) -> anyhow::Result<Vec<MovieHistoryEntry>> {
-    let date = ts(Some(date));
-    match event_type {
-        Some(event) => query_history(
-            conn,
-            "SELECT h.* FROM history h WHERE h.date >= ?1 AND h.event_type = ?2 ORDER BY h.date ASC, h.id ASC",
-            &[&date, &event.as_str()],
-        ),
-        None => query_history(
-            conn,
-            "SELECT h.* FROM history h WHERE h.date >= ?1 ORDER BY h.date ASC, h.id ASC",
-            &[&date],
-        ),
-    }
+) -> anyhow::Result<Vec<i64>> {
+    let mut stmt = conn.prepare(
+        "SELECT h.id FROM history h WHERE h.date >= ?1 AND (?2 IS NULL OR h.event_type = ?2)
+         ORDER BY h.date ASC, h.id ASC",
+    )?;
+    let ids = stmt
+        .query_map(params![ts(Some(date)), event_type.map(|e| e.as_str())], |r| {
+            r.get(0)
+        })?
+        .collect::<Result<_, _>>()?;
+    Ok(ids)
+}
+
+/// History rows by id, in the order of `ids`; an id no longer there is
+/// left out.
+pub fn history_by_ids(conn: &Connection, ids: &[i64]) -> anyhow::Result<Vec<MovieHistoryEntry>> {
+    let list = serde_json::to_string(ids)?;
+    let mut by_id: HashMap<i64, MovieHistoryEntry> = query_history(
+        conn,
+        "SELECT h.* FROM history h WHERE h.id IN (SELECT value FROM json_each(?1))",
+        &[&list],
+    )?
+    .into_iter()
+    .map(|h| (h.id, h))
+    .collect();
+    Ok(ids.iter().filter_map(|id| by_id.remove(id)).collect())
 }
 
 pub fn insert_blocklist(conn: &Connection, b: &MovieBlocklistEntry) -> anyhow::Result<()> {
@@ -2037,6 +2052,53 @@ mod tests {
 
     fn ids(movies: &[Movie]) -> Vec<i64> {
         movies.iter().map(|m| m.id).collect()
+    }
+
+    #[test]
+    fn history_since_lists_ids_oldest_first_and_reads_them_back_in_that_order() {
+        let db = Db::open_in_memory_for(Personality::Radarr).unwrap();
+        db.call_blocking(|conn| {
+            add(conn, &testing::movie(1, "One", 2026));
+            let row = |id: i64, date: &str, event: MovieHistoryEvent| MovieHistoryEntry {
+                id,
+                movie_id: 1,
+                source_title: Some(format!("One.2026.1080p.WEB-DL-G{id}")),
+                date: at(date),
+                event_type: event,
+                quality: crate::model::QualityModel::default(),
+                languages: vec![1],
+                data: serde_json::json!({}),
+                download_id: None,
+            };
+            // Ids out of date order, and two rows at the same instant.
+            for h in [
+                row(1, "2026-03-01T00:00:00Z", MovieHistoryEvent::Grabbed),
+                row(2, "2026-01-01T00:00:00Z", MovieHistoryEvent::Grabbed),
+                row(
+                    3,
+                    "2026-02-01T00:00:00Z",
+                    MovieHistoryEvent::DownloadFolderImported,
+                ),
+                row(4, "2026-02-01T00:00:00Z", MovieHistoryEvent::Grabbed),
+                row(5, "2025-12-01T00:00:00Z", MovieHistoryEvent::Grabbed),
+            ] {
+                insert_history(conn, &h)?;
+            }
+            let from = at("2026-01-01T00:00:00Z");
+            assert_eq!(history_since_ids(conn, from, None)?, vec![2, 3, 4, 1]);
+            assert_eq!(
+                history_since_ids(conn, from, Some(MovieHistoryEvent::Grabbed))?,
+                vec![2, 4, 1]
+            );
+            // Read back in the order asked, without the id that is gone.
+            let read: Vec<i64> = history_by_ids(conn, &[4, 99, 2, 1])?
+                .iter()
+                .map(|h| h.id)
+                .collect();
+            assert_eq!(read, vec![4, 2, 1]);
+            Ok(())
+        })
+        .unwrap();
     }
 
     #[test]

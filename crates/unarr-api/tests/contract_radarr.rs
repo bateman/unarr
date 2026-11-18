@@ -1092,6 +1092,70 @@ async fn call(app: &axum::Router, method: &str, path: &str, body: Option<Value>)
     (status, serde_json::from_slice(&bytes).unwrap_or(Value::Null))
 }
 
+/// `history/since` is read and sent a thousand rows at a time: across
+/// pages it is still one JSON array, of every row from the date on, oldest
+/// first, as the original answers in one piece.
+#[tokio::test]
+async fn history_since_is_one_array_across_pages() {
+    let (_dirs, _mock, state, app) = live_app("history_since_pages").await;
+    let expected: Vec<i64> = state
+        .db()
+        .call(|conn| {
+            let movie: i64 = conn.query_row("SELECT id FROM movies ORDER BY id LIMIT 1", [], |r| r.get(0))?;
+            let first: i64 =
+                conn.query_row("SELECT coalesce(max(id), 0) + 1 FROM history", [], |r| r.get(0))?;
+            let start = unarr_core::time::parse_utc("2030-01-01T00:00:00Z").unwrap();
+            // Two and a half pages, some sharing an instant.
+            for n in 0..2500 {
+                unarr_core::movies::store::insert_history(
+                    conn,
+                    &unarr_core::movies::model::MovieHistoryEntry {
+                        id: first + n,
+                        movie_id: movie,
+                        source_title: Some(format!("Some.Movie.2030.1080p.WEB-DL.x264-G{n}")),
+                        date: start + chrono::Duration::seconds(n / 3),
+                        event_type: unarr_core::movies::model::MovieHistoryEvent::Grabbed,
+                        quality: unarr_core::model::QualityModel {
+                            quality_id: 3,
+                            ..Default::default()
+                        },
+                        languages: vec![1],
+                        data: serde_json::json!({}),
+                        download_id: None,
+                    },
+                )?;
+            }
+            unarr_core::movies::store::history_since_ids(conn, chrono::DateTime::<chrono::Utc>::MIN_UTC, None)
+        })
+        .await
+        .unwrap();
+    assert!(expected.len() > 2500, "{} rows", expected.len());
+    let (status, body) = call(
+        &app,
+        "GET",
+        "/api/v3/history/since?date=1900-01-01T00:00:00Z",
+        None,
+    )
+    .await;
+    assert_eq!(status, StatusCode::OK);
+    let got: Vec<i64> = body
+        .as_array()
+        .expect("one JSON array")
+        .iter()
+        .map(|h| h["id"].as_i64().unwrap())
+        .collect();
+    assert_eq!(got, expected);
+    // Nothing from the date on: an empty array.
+    let (status, body) = call(
+        &app,
+        "GET",
+        "/api/v3/history/since?date=2100-01-01T00:00:00Z",
+        None,
+    )
+    .await;
+    assert_eq!((status, body), (StatusCode::OK, serde_json::json!([])));
+}
+
 /// The Discover add leaves out a movie that does not validate, so the
 /// movies it answers with no longer pair with the request by position:
 /// each takes its own entry's root folder, found by its TMDB id.

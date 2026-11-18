@@ -144,40 +144,75 @@ impl MovieContext {
     }
 
     async fn load_with(state: &AppState, metadata_ids: Option<Vec<i64>>) -> anyhow::Result<MovieContext> {
-        let url_base = state.settings().url_base.clone();
-        let now = state.now();
+        let reader = ContextReader::of(state);
         state
             .db()
-            .call(move |conn| {
-                let config = |key: &str, default: i64| -> anyhow::Result<i64> {
-                    Ok(store::config::config(conn, key)?
-                        .and_then(|v| v.parse().ok())
-                        .unwrap_or(default))
-                };
-                Ok(MovieContext {
-                    url_base,
-                    roots: store::catalog::list_root_folders(conn)?
-                        .into_iter()
-                        .map(|r| r.path)
-                        .collect(),
-                    profiles: store::catalog::list_quality_profiles(conn)?,
-                    formats: store::catalog::list_custom_formats(conn)?.into(),
-                    translations: {
-                        let language = config("movieinfolanguage", 1)?;
-                        match &metadata_ids {
-                            Some(ids) => movies::translations_in_for(conn, language, ids)?,
-                            None => movies::translations_in(conn, language)?,
-                        }
-                    },
-                    now,
-                    availability_delay: config("availabilitydelay", 0)?,
-                })
-            })
+            .call(move |conn| reader.read(conn, metadata_ids.as_deref()))
             .await
     }
 
     pub fn profile(&self, id: i64) -> Option<&QualityProfile> {
         self.profiles.iter().find(|p| p.id == id)
+    }
+}
+
+/// What a movie context takes from the state, so that an answer can read
+/// the context in the same database call as its rows: each call waits for
+/// its turn on the database thread.
+#[derive(Clone)]
+pub struct ContextReader {
+    url_base: String,
+    now: DateTime<Utc>,
+}
+
+impl ContextReader {
+    pub fn of(state: &AppState) -> ContextReader {
+        ContextReader {
+            url_base: state.settings().url_base.clone(),
+            now: state.now(),
+        }
+    }
+
+    /// As [`MovieContext::load_for`], on the caller's connection.
+    pub fn read_for<'a>(
+        &self,
+        conn: &rusqlite::Connection,
+        movies: impl IntoIterator<Item = &'a Movie>,
+    ) -> anyhow::Result<MovieContext> {
+        let mut ids: Vec<i64> = movies.into_iter().map(|m| m.metadata.id).collect();
+        ids.sort_unstable();
+        ids.dedup();
+        self.read(conn, Some(&ids))
+    }
+
+    fn read(
+        &self,
+        conn: &rusqlite::Connection,
+        metadata_ids: Option<&[i64]>,
+    ) -> anyhow::Result<MovieContext> {
+        let config = |key: &str, default: i64| -> anyhow::Result<i64> {
+            Ok(store::config::config(conn, key)?
+                .and_then(|v| v.parse().ok())
+                .unwrap_or(default))
+        };
+        Ok(MovieContext {
+            url_base: self.url_base.clone(),
+            roots: store::catalog::list_root_folders(conn)?
+                .into_iter()
+                .map(|r| r.path)
+                .collect(),
+            profiles: store::catalog::list_quality_profiles(conn)?,
+            formats: store::catalog::list_custom_formats(conn)?.into(),
+            translations: {
+                let language = config("movieinfolanguage", 1)?;
+                match metadata_ids {
+                    Some(ids) => movies::translations_in_for(conn, language, ids)?,
+                    None => movies::translations_in(conn, language)?,
+                }
+            },
+            now: self.now,
+            availability_delay: config("availabilitydelay", 0)?,
+        })
     }
 }
 
