@@ -132,8 +132,12 @@ fn compiled(pattern: &str) -> Option<Arc<fancy_regex::Regex>> {
     if let Some(hit) = cache.lock().unwrap().get(pattern) {
         return hit.clone();
     }
+    // Seek, as for the parser's patterns (`parser::netregex`): the
+    // conditions with lookarounds, a tenth of a library's, took two thirds
+    // of the matching time, mostly to reject titles they cannot match.
     let built = match fancy_regex::RegexBuilder::new(pattern)
         .case_insensitive(true)
+        .seek(true)
         .build()
     {
         Ok(re) => Some(Arc::new(re)),
