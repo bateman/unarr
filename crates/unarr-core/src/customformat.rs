@@ -3,7 +3,7 @@
 //! type of a format must have at least one match, and no `required`
 //! specification may fail.
 
-use std::collections::{BTreeMap, HashMap};
+use std::collections::HashMap;
 use std::sync::{Arc, Mutex, OnceLock};
 
 use serde_json::Value;
@@ -63,33 +63,191 @@ impl Default for Input<'_> {
     }
 }
 
-/// One decoded specification: `{type, body}` as stored.
-struct Spec<'a> {
-    kind: &'a str,
-    negate: bool,
-    required: bool,
-    body: &'a Value,
+/// What one condition tests, decoded from its stored `{type, body}`.
+#[derive(Debug, Clone)]
+enum Test {
+    /// `ReleaseTitleSpecification`: the release title, or the file name.
+    Title(Option<Arc<fancy_regex::Regex>>),
+    Group(Option<Arc<fancy_regex::Regex>>),
+    Language {
+        value: i64,
+        except: bool,
+    },
+    /// In bytes.
+    Size {
+        min: f64,
+        max: f64,
+    },
+    Source(i64),
+    Resolution(i64),
+    QualityModifier(i64),
+    Edition(Option<Arc<fancy_regex::Regex>>),
+    Year {
+        min: i64,
+        max: i64,
+    },
+    IndexerFlag(i64),
+    ReleaseType(i64),
+    Unknown,
 }
 
-fn specs(format: &CustomFormat) -> Vec<Spec<'_>> {
-    format
-        .specifications
-        .as_array()
-        .map(|list| {
-            list.iter()
-                .filter_map(|s| {
-                    let kind = s["type"].as_str()?;
-                    let body = &s["body"];
-                    Some(Spec {
-                        kind,
-                        negate: body["negate"].as_bool().unwrap_or(false),
-                        required: body["required"].as_bool().unwrap_or(false),
-                        body,
-                    })
-                })
-                .collect()
-        })
-        .unwrap_or_default()
+#[derive(Debug, Clone)]
+struct Condition {
+    test: Test,
+    negate: bool,
+    required: bool,
+}
+
+/// One format's conditions, grouped by specification type: within a group
+/// at least one must match, and every `required` one must.
+#[derive(Debug, Clone)]
+struct Decoded {
+    groups: Vec<Vec<Condition>>,
+}
+
+fn decode(format: &CustomFormat) -> Decoded {
+    let mut kinds: Vec<&str> = Vec::new();
+    let mut groups: Vec<Vec<Condition>> = Vec::new();
+    for spec in format.specifications.as_array().into_iter().flatten() {
+        let Some(kind) = spec["type"].as_str() else {
+            continue;
+        };
+        let body = &spec["body"];
+        let condition = Condition {
+            test: decode_test(kind, body),
+            negate: body["negate"].as_bool().unwrap_or(false),
+            required: body["required"].as_bool().unwrap_or(false),
+        };
+        match kinds.iter().position(|k| *k == kind) {
+            Some(i) => groups[i].push(condition),
+            None => {
+                kinds.push(kind);
+                groups.push(vec![condition]);
+            }
+        }
+    }
+    // A format fails at its first failing group: the groups without a
+    // regex, which cost next to nothing, are tried first.
+    groups.sort_by_key(|group| group.iter().any(Condition::has_regex));
+    Decoded { groups }
+}
+
+fn decode_test(kind: &str, body: &Value) -> Test {
+    let value = &body["value"];
+    let int = value.as_i64().unwrap_or(0);
+    let regex = || {
+        value
+            .as_str()
+            .filter(|pattern| !pattern.trim().is_empty())
+            .and_then(compiled)
+    };
+    match kind {
+        "ReleaseTitleSpecification" => Test::Title(regex()),
+        "ReleaseGroupSpecification" => Test::Group(regex()),
+        "LanguageSpecification" => Test::Language {
+            value: int,
+            except: body["exceptLanguage"].as_bool().unwrap_or(false),
+        },
+        "SizeSpecification" => {
+            let gib = 1024.0 * 1024.0 * 1024.0;
+            Test::Size {
+                min: body["min"].as_f64().unwrap_or(0.0) * gib,
+                max: body["max"].as_f64().unwrap_or(0.0) * gib,
+            }
+        }
+        "SourceSpecification" => Test::Source(int),
+        "ResolutionSpecification" => Test::Resolution(int),
+        // Radarr's own conditions; a series has none of the three.
+        "QualityModifierSpecification" => Test::QualityModifier(int),
+        "EditionSpecification" => Test::Edition(regex()),
+        "YearSpecification" => Test::Year {
+            min: body["min"].as_i64().unwrap_or(0),
+            max: body["max"].as_i64().unwrap_or(0),
+        },
+        "IndexerFlagSpecification" => Test::IndexerFlag(int),
+        "ReleaseTypeSpecification" => Test::ReleaseType(int),
+        other => {
+            tracing::warn!(specification = other, "unknown custom format specification");
+            Test::Unknown
+        }
+    }
+}
+
+fn regex_matches(re: &Option<Arc<fancy_regex::Regex>>, text: Option<&str>) -> bool {
+    match (re, text) {
+        (Some(re), Some(text)) => re.is_match(text).unwrap_or(false),
+        _ => false,
+    }
+}
+
+impl Test {
+    fn passes(&self, input: &Input) -> bool {
+        match self {
+            Test::Title(re) => {
+                regex_matches(re, Some(input.release_title)) || regex_matches(re, input.filename)
+            }
+            Test::Group(re) => regex_matches(re, input.release_group),
+            Test::Language { value, except } => {
+                let compared = if *value == -2 && input.series_original_language != 0 {
+                    input.series_original_language
+                } else {
+                    *value
+                };
+                if *except {
+                    input.languages.iter().any(|l| *l != compared)
+                } else {
+                    input.languages.contains(&compared)
+                }
+            }
+            Test::Size { min, max } => {
+                let size = input.size as f64;
+                size > *min && size <= *max
+            }
+            Test::Source(value) => match input.movie {
+                Some(movie) => movie.source == *value,
+                None => source_ordinal(Quality::by_id(input.quality.quality_id).source) == *value,
+            },
+            Test::Resolution(value) => match input.movie {
+                Some(movie) => movie.resolution == *value,
+                None => Quality::by_id(input.quality.quality_id).resolution == *value,
+            },
+            Test::QualityModifier(value) => input.movie.is_some_and(|m| m.modifier == *value),
+            Test::Edition(re) => input
+                .movie
+                .is_some_and(|m| regex_matches(re, Some(m.edition.unwrap_or("")))),
+            Test::Year { min, max } => input.movie.is_some_and(|m| m.year >= *min && m.year <= *max),
+            Test::IndexerFlag(value) => input.indexer_flags & value == *value && *value != 0,
+            Test::ReleaseType(value) => release_type_ordinal(input.release_type) == *value,
+            Test::Unknown => false,
+        }
+    }
+}
+
+impl Condition {
+    fn has_regex(&self) -> bool {
+        matches!(self.test, Test::Title(_) | Test::Group(_) | Test::Edition(_))
+    }
+
+    fn satisfied(&self, input: &Input) -> bool {
+        self.test.passes(input) != self.negate
+    }
+}
+
+impl Decoded {
+    fn matches(&self, input: &Input) -> bool {
+        !self.groups.is_empty()
+            && self.groups.iter().all(|group| {
+                let mut any = false;
+                for condition in group {
+                    let ok = condition.satisfied(input);
+                    if condition.required && !ok {
+                        return false;
+                    }
+                    any |= ok;
+                }
+                any
+            })
+    }
 }
 
 /// Compiled specification regexes, by pattern. A library has a few hundred
@@ -150,70 +308,6 @@ fn compiled(pattern: &str) -> Option<Arc<fancy_regex::Regex>> {
     built
 }
 
-fn regex_matches(pattern: &str, text: Option<&str>) -> bool {
-    let Some(text) = text else {
-        return false;
-    };
-    if pattern.trim().is_empty() {
-        return false;
-    }
-    compiled(pattern).is_some_and(|re| re.is_match(text).unwrap_or(false))
-}
-
-fn satisfied_without_negate(spec: &Spec, input: &Input) -> bool {
-    let value_str = spec.body["value"].as_str().unwrap_or("");
-    let value_int = spec.body["value"].as_i64().unwrap_or(0);
-    match spec.kind {
-        "ReleaseTitleSpecification" => {
-            regex_matches(value_str, Some(input.release_title)) || regex_matches(value_str, input.filename)
-        }
-        "ReleaseGroupSpecification" => regex_matches(value_str, input.release_group),
-        "LanguageSpecification" => {
-            let compared = if value_int == -2 && input.series_original_language != 0 {
-                input.series_original_language
-            } else {
-                value_int
-            };
-            if spec.body["exceptLanguage"].as_bool().unwrap_or(false) {
-                input.languages.iter().any(|l| *l != compared)
-            } else {
-                input.languages.contains(&compared)
-            }
-        }
-        "SizeSpecification" => {
-            let gib = 1024.0 * 1024.0 * 1024.0;
-            let min = spec.body["min"].as_f64().unwrap_or(0.0) * gib;
-            let max = spec.body["max"].as_f64().unwrap_or(0.0) * gib;
-            let size = input.size as f64;
-            size > min && size <= max
-        }
-        "SourceSpecification" => match input.movie {
-            Some(movie) => movie.source == value_int,
-            None => source_ordinal(Quality::by_id(input.quality.quality_id).source) == value_int,
-        },
-        "ResolutionSpecification" => match input.movie {
-            Some(movie) => movie.resolution == value_int,
-            None => Quality::by_id(input.quality.quality_id).resolution == value_int,
-        },
-        // Radarr's own conditions; a series has none of the three.
-        "QualityModifierSpecification" => input.movie.is_some_and(|m| m.modifier == value_int),
-        "EditionSpecification" => input
-            .movie
-            .is_some_and(|m| regex_matches(value_str, Some(m.edition.unwrap_or("")))),
-        "YearSpecification" => input.movie.is_some_and(|m| {
-            let min = spec.body["min"].as_i64().unwrap_or(0);
-            let max = spec.body["max"].as_i64().unwrap_or(0);
-            m.year >= min && m.year <= max
-        }),
-        "IndexerFlagSpecification" => input.indexer_flags & value_int == value_int && value_int != 0,
-        "ReleaseTypeSpecification" => release_type_ordinal(input.release_type) == value_int,
-        other => {
-            tracing::warn!(specification = other, "unknown custom format specification");
-            false
-        }
-    }
-}
-
 /// `QualitySource` as the originals number it.
 fn source_ordinal(s: QualitySource) -> i64 {
     match s {
@@ -238,42 +332,93 @@ fn release_type_ordinal(r: ReleaseType) -> i64 {
     }
 }
 
-fn satisfied(spec: &Spec, input: &Input) -> bool {
-    let m = satisfied_without_negate(spec, input);
-    if spec.negate {
-        !m
-    } else {
-        m
-    }
-}
-
 /// Whether one format matches the input.
 pub fn matches(format: &CustomFormat, input: &Input) -> bool {
-    let specs = specs(format);
-    if specs.is_empty() {
-        return false;
-    }
-    // Group by specification type: within a group at least one must match,
-    // and every `required` one must.
-    let mut groups: BTreeMap<&str, Vec<(bool, bool)>> = BTreeMap::new();
-    for spec in &specs {
-        groups
-            .entry(spec.kind)
-            .or_default()
-            .push((spec.required, satisfied(spec, input)));
-    }
-    groups.values().all(|results| {
-        let required_failed = results.iter().any(|(required, ok)| *required && !ok);
-        let none_matched = results.iter().all(|(_, ok)| !ok);
-        !(required_failed || none_matched)
-    })
+    decode(format).matches(input)
 }
 
 /// The formats that match, ordered by name as the API lists them.
 pub fn evaluate<'f>(formats: &'f [CustomFormat], input: &Input) -> Vec<&'f CustomFormat> {
-    let mut out: Vec<&CustomFormat> = formats.iter().filter(|f| matches(f, input)).collect();
-    out.sort_by(|a, b| crate::collation::compare(&a.name, &b.name));
-    out
+    by_name(formats.iter().filter(|f| matches(f, input)).collect())
+}
+
+fn by_name(mut formats: Vec<&CustomFormat>) -> Vec<&CustomFormat> {
+    formats.sort_by(|a, b| crate::collation::compare(&a.name, &b.name));
+    formats
+}
+
+/// A library's custom formats, with their conditions decoded the first
+/// time they are matched. What matches many releases, files or history
+/// rows in one go holds one, so that each is matched without reading the
+/// conditions' JSON or looking their regexes up again: a library has a few
+/// hundred conditions, and reading them took most of a history page's
+/// time. It reads as the list of formats.
+#[derive(Default)]
+pub struct FormatSet {
+    formats: Vec<CustomFormat>,
+    decoded: OnceLock<Vec<Decoded>>,
+}
+
+impl FormatSet {
+    pub fn new(formats: Vec<CustomFormat>) -> FormatSet {
+        FormatSet {
+            formats,
+            decoded: OnceLock::new(),
+        }
+    }
+
+    /// The formats that match, ordered by name as the API lists them.
+    pub fn evaluate(&self, input: &Input) -> Vec<&CustomFormat> {
+        let decoded = self
+            .decoded
+            .get_or_init(|| self.formats.iter().map(decode).collect());
+        by_name(
+            self.formats
+                .iter()
+                .zip(decoded)
+                .filter(|(_, d)| d.matches(input))
+                .map(|(f, _)| f)
+                .collect(),
+        )
+    }
+
+    pub fn into_vec(self) -> Vec<CustomFormat> {
+        self.formats
+    }
+}
+
+impl From<Vec<CustomFormat>> for FormatSet {
+    fn from(formats: Vec<CustomFormat>) -> FormatSet {
+        FormatSet::new(formats)
+    }
+}
+
+impl std::ops::Deref for FormatSet {
+    type Target = [CustomFormat];
+    fn deref(&self) -> &[CustomFormat] {
+        &self.formats
+    }
+}
+
+impl Clone for FormatSet {
+    fn clone(&self) -> FormatSet {
+        FormatSet {
+            formats: self.formats.clone(),
+            decoded: self.decoded.clone(),
+        }
+    }
+}
+
+impl PartialEq for FormatSet {
+    fn eq(&self, other: &FormatSet) -> bool {
+        self.formats == other.formats
+    }
+}
+
+impl std::fmt::Debug for FormatSet {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_list().entries(&self.formats).finish()
+    }
 }
 
 /// A release title without its media extension, as the parser sees it.
@@ -298,6 +443,64 @@ mod tests {
             include_when_renaming: false,
             specifications: specs,
         }
+    }
+
+    #[test]
+    fn a_format_set_matches_as_each_format_does() {
+        let formats = vec![
+            format(
+                "x265",
+                json!([{"type": "ReleaseTitleSpecification", "body": {"value": "[xh]\\.?265|HEVC", "negate": false, "required": false}}]),
+            ),
+            format(
+                "Bluray not remux",
+                json!([
+                    {"type": "ReleaseTitleSpecification", "body": {"value": "remux", "negate": true, "required": true}},
+                    {"type": "SourceSpecification", "body": {"value": 6, "negate": false, "required": false}},
+                ]),
+            ),
+            format(
+                "Anime group",
+                json!([{"type": "ReleaseGroupSpecification", "body": {"value": "^(SubsPlease)$", "negate": false, "required": false}}]),
+            ),
+            format("Empty", json!([])),
+            format(
+                "Unknown",
+                json!([{"type": "NoSuchSpecification", "body": {"value": 1}}]),
+            ),
+        ];
+        let set = FormatSet::from(formats.clone());
+        let titles = [
+            ("Show.S01E01.1080p.BluRay.x265-GRP", Some("GRP"), 7),
+            ("Show.S01E01.1080p.BluRay.REMUX.HEVC-GRP", Some("GRP"), 7),
+            ("[SubsPlease] Show - 01 (1080p)", Some("SubsPlease"), 3),
+            ("Show.S01E01.720p.WEB.H264-GRP", None, 5),
+        ];
+        for (title, group, quality_id) in titles {
+            let input = Input {
+                release_title: title,
+                release_group: group,
+                quality: QualityModel {
+                    quality_id,
+                    ..QualityModel::default()
+                },
+                ..Input::default()
+            };
+            let names =
+                |list: Vec<&CustomFormat>| list.into_iter().map(|f| f.name.clone()).collect::<Vec<_>>();
+            // Twice: decoded on the first call, reused on the second.
+            assert_eq!(
+                names(set.evaluate(&input)),
+                names(evaluate(&formats, &input)),
+                "{title}"
+            );
+            assert_eq!(
+                names(set.evaluate(&input)),
+                names(evaluate(&formats, &input)),
+                "{title}"
+            );
+        }
+        assert_eq!(&*set, &formats[..]);
     }
 
     #[test]

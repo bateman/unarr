@@ -7,6 +7,7 @@ use std::collections::HashMap;
 use chrono::{DateTime, Utc};
 use serde_json::{json, Map, Value};
 use sha2::{Digest, Sha256};
+use unarr_core::customformat::FormatSet;
 use unarr_core::model::{CustomFormat, Image, QualityModel, QualityProfile};
 use unarr_core::movies::availability;
 use unarr_core::movies::model::{AlternativeTitle, Movie, MovieFile, MovieTranslation};
@@ -115,7 +116,7 @@ pub struct MovieContext {
     pub url_base: String,
     pub roots: Vec<String>,
     pub profiles: Vec<QualityProfile>,
-    pub formats: Vec<CustomFormat>,
+    pub formats: FormatSet,
     /// Titles and overviews in the language Settings > UI asks for.
     pub translations: HashMap<i64, MovieTranslation>,
     pub now: DateTime<Utc>,
@@ -160,7 +161,7 @@ impl MovieContext {
                         .map(|r| r.path)
                         .collect(),
                     profiles: store::catalog::list_quality_profiles(conn)?,
-                    formats: store::catalog::list_custom_formats(conn)?,
+                    formats: store::catalog::list_custom_formats(conn)?.into(),
                     translations: {
                         let language = config("movieinfolanguage", 1)?;
                         match &metadata_ids {

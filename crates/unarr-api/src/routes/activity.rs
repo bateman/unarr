@@ -56,7 +56,7 @@ fn release_formats(
         release_group: group.as_deref(),
         ..input
     };
-    let matched = customformat::evaluate(&catalog.formats, &input);
+    let matched = catalog.formats.evaluate(&input);
     let ids: Vec<i64> = matched.iter().map(|f| f.id).collect();
     let score = catalog
         .profile(series.quality_profile_id)

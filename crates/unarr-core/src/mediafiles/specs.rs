@@ -1259,7 +1259,7 @@ mod tests {
             name: "Group".into(),
             include_when_renaming: false,
             specifications: json!([{"type": "ReleaseTitleSpecification", "body": {"value": "GRP", "negate": false, "required": false}}]),
-        }];
+        }].into();
         h.catalog.profiles[0].format_items = vec![ProfileFormatItem {
             format: 1,
             score: existing_score,

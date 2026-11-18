@@ -6,8 +6,8 @@ use axum::extract::{Path, State};
 use axum::http::Uri;
 use axum::Json;
 use chrono::Duration;
-use unarr_core::customformat::{self, Input};
-use unarr_core::model::{CustomFormat, Episode, EpisodeFile, QualityProfile, Series};
+use unarr_core::customformat::{FormatSet, Input};
+use unarr_core::model::{Episode, EpisodeFile, QualityProfile, Series};
 use unarr_core::profile;
 use unarr_core::store;
 use unarr_core::store::paging::Paging;
@@ -25,7 +25,7 @@ use crate::state::AppState;
 pub struct Catalog {
     pub series: HashMap<i64, Series>,
     pub profiles: Vec<QualityProfile>,
-    pub formats: Vec<CustomFormat>,
+    pub formats: FormatSet,
 }
 
 impl Catalog {
@@ -36,7 +36,7 @@ impl Catalog {
                 .map(|s| (s.id, s))
                 .collect(),
             profiles: store::catalog::list_quality_profiles(conn)?,
-            formats: store::catalog::list_custom_formats(conn)?,
+            formats: store::catalog::list_custom_formats(conn)?.into(),
         })
     }
 
@@ -51,7 +51,7 @@ impl Catalog {
                 .map(|s| (s.id, s))
                 .collect(),
             profiles: store::catalog::list_quality_profiles(conn)?,
-            formats: store::catalog::list_custom_formats(conn)?,
+            formats: store::catalog::list_custom_formats(conn)?.into(),
         })
     }
 
@@ -95,7 +95,7 @@ pub fn file_formats(catalog: &Catalog, file: &EpisodeFile, series: &Series) -> (
         series_original_language: series.original_language_id,
         movie: None,
     };
-    let matched = customformat::evaluate(&catalog.formats, &input);
+    let matched = catalog.formats.evaluate(&input);
     let ids: Vec<i64> = matched.iter().map(|f| f.id).collect();
     let score = catalog
         .profile(series.quality_profile_id)

@@ -7,7 +7,7 @@ use rusqlite::Connection;
 use super::aggregate;
 use super::local::{LocalMovie, MovieImportDecision, MovieImportRejection, MovieRejectionReason as R};
 use super::specs::{self, ImportSources, StoreImportSources};
-use crate::customformat::{self, Input};
+use crate::customformat::Input;
 use crate::decision::upgradable;
 use crate::downloadclients::DownloadClientItem;
 use crate::mediafiles::decide::Probes;
@@ -64,7 +64,10 @@ pub fn local_formats(catalog: &MovieCatalog, local: &LocalMovie) -> Vec<CustomFo
         series_original_language: movie.metadata.original_language_id,
         movie: Some(facts(&local.quality, local.edition.as_deref(), movie)),
     };
-    customformat::evaluate(&catalog.base.formats, &input)
+    catalog
+        .base
+        .formats
+        .evaluate(&input)
         .into_iter()
         .cloned()
         .collect()
@@ -568,7 +571,7 @@ mod tests {
             name: "Group".into(),
             include_when_renaming: false,
             specifications: json!([{"type": "ReleaseTitleSpecification", "body": {"value": "GRP", "negate": false, "required": false}}]),
-        }];
+        }].into();
         let mut local = LocalMovie {
             path: "/C/Test/Unsorted/abc.mkv".into(),
             movie: Some(movie()),

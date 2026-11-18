@@ -1388,7 +1388,7 @@ mod tests {
                 "Group",
                 json!({"type": "ReleaseTitleSpecification", "body": {"value": "GRP", "negate": false, "required": false}}),
             ),
-        ];
+        ].into();
         let local = LocalMovie {
             path: format!("/downloads/{NAME}.mkv"),
             movie: Some(testing::movie(1, "The Movie", 2018)),

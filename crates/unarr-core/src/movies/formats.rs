@@ -2,7 +2,7 @@
 //! the originals' `CustomFormatCalculationService` works them out: the
 //! shared matcher of [`crate::customformat`], fed what a movie has.
 
-use crate::customformat::{evaluate, Input, MovieFacts};
+use crate::customformat::{FormatSet, Input, MovieFacts};
 use crate::model::{CustomFormat, QualityModel, ReleaseType};
 use crate::movies::model::{Movie, MovieBlocklistEntry, MovieFile, MovieHistoryEntry};
 use crate::movies::parser::{parse_movie_title, simplify_release_title};
@@ -31,7 +31,7 @@ fn names(formats: Vec<&CustomFormat>) -> Vec<CustomFormat> {
 /// the file it came from (not its folders, which would lend the file what
 /// the release's folder says), else the file's own name, with what the
 /// file row holds.
-pub fn file_formats(formats: &[CustomFormat], file: &MovieFile, movie: &Movie) -> Vec<CustomFormat> {
+pub fn file_formats(formats: &FormatSet, file: &MovieFile, movie: &Movie) -> Vec<CustomFormat> {
     let filename = file_name(&file.relative_path);
     let present = |s: &Option<String>| s.as_deref().filter(|s| !s.trim().is_empty()).map(str::to_string);
     let scene = present(&file.scene_name)
@@ -50,13 +50,13 @@ pub fn file_formats(formats: &[CustomFormat], file: &MovieFile, movie: &Movie) -
         series_original_language: movie.metadata.original_language_id,
         movie: Some(facts(&file.quality, file.edition.as_deref(), movie)),
     };
-    names(evaluate(formats, &input))
+    names(formats.evaluate(&input))
 }
 
 /// `ParseCustomFormat(RemoteMovie, size)`: a release the engine mapped to
 /// a movie, with what its name parsed to and the languages worked out.
 pub fn remote_formats(
-    formats: &[CustomFormat],
+    formats: &FormatSet,
     parsed: &crate::movies::parser::ParsedMovieInfo,
     languages: &[i64],
     size: i64,
@@ -76,7 +76,7 @@ pub fn remote_formats(
         series_original_language: movie.metadata.original_language_id,
         movie: Some(facts(&quality, Some(parsed.edition.as_str()), movie)),
     };
-    names(evaluate(formats, &input))
+    names(formats.evaluate(&input))
 }
 
 /// What the title parser makes of a source title, as both rows use it:
@@ -95,11 +95,7 @@ fn parsed_source(source: &str) -> (String, Option<String>, Option<String>) {
 
 /// `ParseCustomFormat(MovieHistory, Movie)`: the source title parsed
 /// again, with the quality, languages, size and flags the row recorded.
-pub fn history_formats(
-    formats: &[CustomFormat],
-    history: &MovieHistoryEntry,
-    movie: &Movie,
-) -> Vec<CustomFormat> {
+pub fn history_formats(formats: &FormatSet, history: &MovieHistoryEntry, movie: &Movie) -> Vec<CustomFormat> {
     let (title, group, edition) = parsed_source(history.source_title.as_deref().unwrap_or(""));
     let data = |key: &str| history.data.get(key).and_then(|v| v.as_str());
     let input = Input {
@@ -117,12 +113,12 @@ pub fn history_formats(
         series_original_language: movie.metadata.original_language_id,
         movie: Some(facts(&history.quality, edition.as_deref(), movie)),
     };
-    names(evaluate(formats, &input))
+    names(formats.evaluate(&input))
 }
 
 /// `ParseCustomFormat(Blocklist, Movie)`.
 pub fn blocklist_formats(
-    formats: &[CustomFormat],
+    formats: &FormatSet,
     blocklist: &MovieBlocklistEntry,
     movie: &Movie,
 ) -> Vec<CustomFormat> {
@@ -139,7 +135,7 @@ pub fn blocklist_formats(
         series_original_language: movie.metadata.original_language_id,
         movie: Some(facts(&blocklist.quality, edition.as_deref(), movie)),
     };
-    names(evaluate(formats, &input))
+    names(formats.evaluate(&input))
 }
 
 #[cfg(test)]
@@ -197,8 +193,8 @@ mod tests {
             indexer_flags: 0,
         };
         // The folder's name is not the file's.
-        assert!(file_formats(std::slice::from_ref(&remux), &file, &movie).is_empty());
+        assert!(file_formats(&vec![remux.clone()].into(), &file, &movie).is_empty());
         file.original_file_path = Some("downloads/Movie.2020.2160p.BluRay.REMUX-GRP.mkv".into());
-        assert_eq!(file_formats(&[remux], &file, &movie).len(), 1);
+        assert_eq!(file_formats(&vec![remux].into(), &file, &movie).len(), 1);
     }
 }

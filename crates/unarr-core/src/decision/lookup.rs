@@ -9,9 +9,10 @@ use std::collections::HashMap;
 use chrono::{DateTime, Utc};
 use rusqlite::Connection;
 
+use crate::customformat::FormatSet;
 use crate::indexers::settings::NewznabSettings;
 use crate::model::{
-    BlocklistEntry, CustomFormat, DelayProfile, Episode, EpisodeFile, HistoryEntry, Provider, ProviderKind,
+    BlocklistEntry, DelayProfile, Episode, EpisodeFile, HistoryEntry, Provider, ProviderKind,
     QualityDefinition, QualityProfile, ReleaseProfile, SceneMapping, Series,
 };
 use crate::store;
@@ -163,7 +164,7 @@ pub struct Catalog {
     pub now: DateTime<Utc>,
     pub profiles: Vec<QualityProfile>,
     pub definitions: Vec<QualityDefinition>,
-    pub formats: Vec<CustomFormat>,
+    pub formats: FormatSet,
     pub delay_profiles: Vec<DelayProfile>,
     pub release_profiles: Vec<ReleaseProfile>,
     pub indexers: Vec<IndexerInfo>,
@@ -183,7 +184,7 @@ impl Catalog {
             now,
             profiles: store::catalog::list_quality_profiles(conn)?,
             definitions: store::catalog::list_quality_definitions(conn)?,
-            formats: store::catalog::list_custom_formats(conn)?,
+            formats: store::catalog::list_custom_formats(conn)?.into(),
             delay_profiles: store::providers::list_delay_profiles(conn)?,
             release_profiles: store::providers::list_release_profiles(conn)?,
             indexers: store::providers::list_providers(conn, ProviderKind::Indexer)?
