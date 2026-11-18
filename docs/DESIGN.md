@@ -2261,6 +2261,15 @@ the names in `down`, beside `listening`). The daemon ends only when no
 personality started. Before, the first failure ended it, and under a
 restart policy it came back to fail again with every personality down.
 
+That the health check fails is a decision (18 November 2026), not a side
+effect. The other choice was a container that stays healthy and says so
+in its log only: the personality left down would then be found by its
+clients failing to connect. The cost is taken with it: a watcher that
+restarts unhealthy containers, like the homelab's `auto-recover-cron.sh`,
+restarts this one at each of its runs, and the personality that works is
+away for the second that takes. That restart is also the only time the
+one left down is tried again.
+
 Left as it was, and fatal on purpose: a mistake in the arguments (an
 unknown personality, an `--import-from` folder that holds nothing for any
 personality selected, a selected personality with nothing to import and
