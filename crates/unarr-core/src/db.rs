@@ -108,18 +108,19 @@ impl Db {
             let _log = tracing::dispatcher::set_default(&log);
             for job in rx {
                 // A call that panics is caught where it runs (`answer`),
-                // which tells its caller, so the thread goes on: it owns
-                // the only connection, and without it the personality has
-                // no database until the process starts again.
-                job(&mut conn);
-                // A `Transaction` rolls back as it is dropped, unwinding
-                // included. One begun by hand would still be open, and
-                // every later call would join it.
-                if !conn.is_autocommit() {
-                    tracing::error!("A database call left a transaction open: rolled back");
-                    if let Err(e) = conn.execute_batch("ROLLBACK") {
-                        tracing::error!(error = %e, "The open transaction could not be rolled back");
-                    }
+                // which tells its caller. The catch here is not for the
+                // call but for what a job does around it: the line
+                // `answer` logs, the release of a result no caller waits
+                // for any more. None of these is known to panic, and one
+                // that did would otherwise end this thread: it owns the
+                // only connection, and without it the personality has no
+                // database until the process starts again.
+                let served = crate::panics::catch_sync(|| job(&mut conn));
+                let closed = crate::panics::catch_sync(|| roll_back_what_was_left_open(&conn));
+                for panic in [served, closed].into_iter().filter_map(Result::err) {
+                    // Not through `tracing`: a log layer that panicked is
+                    // one of the ways here.
+                    eprintln!("unarr-db: {panic}, outside a database call; the thread goes on");
                 }
             }
         })?;
@@ -159,6 +160,18 @@ impl Db {
         reply_rx
             .recv()
             .map_err(|_| anyhow::anyhow!("database thread dropped the request"))?
+    }
+}
+
+/// A `Transaction` rolls back as it is dropped, unwinding included. One
+/// begun by hand would still be open after its call, and every later call
+/// would join it.
+fn roll_back_what_was_left_open(conn: &Connection) {
+    if !conn.is_autocommit() {
+        tracing::error!("A database call left a transaction open: rolled back");
+        if let Err(e) = conn.execute_batch("ROLLBACK") {
+            tracing::error!(error = %e, "The open transaction could not be rolled back");
+        }
     }
 }
 
@@ -287,6 +300,44 @@ mod tests {
         db.call_blocking(|conn| Ok(conn.execute("INSERT INTO tags (label) VALUES ('kept')", [])?))
             .unwrap();
         assert_eq!(tags(&db), before + 1);
+    }
+
+    /// A panic in a job outside its call does not end the thread: here
+    /// the release of a result whose caller stopped waiting.
+    #[test]
+    fn a_panic_around_a_call_leaves_the_thread_serving() {
+        struct Unsent;
+        impl Drop for Unsent {
+            fn drop(&mut self) {
+                panic!("released without a caller");
+            }
+        }
+
+        crate::panics::install_hook();
+        let db = Db::open_in_memory().unwrap();
+        // The thread is held on a first call while a second one is sent
+        // and its caller leaves.
+        let (hold, held) = mpsc::channel::<()>();
+        let waiting = {
+            let db = db.clone();
+            thread::spawn(move || db.call_blocking(move |_| Ok(held.recv()?)))
+        };
+        let runtime = tokio::runtime::Builder::new_current_thread().build().unwrap();
+        runtime.block_on(async {
+            tokio::select! {
+                biased;
+                _ = db.call(|_| Ok(Unsent)) => unreachable!("the thread is held"),
+                _ = std::future::ready(()) => {}
+            }
+        });
+        hold.send(()).unwrap();
+        waiting.join().unwrap().unwrap();
+        // The second call ran, its result was released on the thread with
+        // a panic, and the thread still answers.
+        let tags: i64 = db
+            .call_blocking(|conn| Ok(conn.query_row("SELECT COUNT(*) FROM tags", [], |r| r.get(0))?))
+            .unwrap();
+        assert_eq!(tags, 0);
     }
 
     #[test]

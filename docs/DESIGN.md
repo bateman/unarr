@@ -2205,7 +2205,7 @@ accepted, or its loss ends the process on purpose.
 | Queue status broadcast | `routes::queue::broadcast_queue`, and Radarr's | **Lost** and logged; the next change of the queue sends the status |
 | Rescan request after a movie import | `Runtime::emit_movie_events` | **Lost** and logged; the movie is rescanned by the next scheduled or manual scan |
 | The log writer | no task: the lines are written by the thread that logs, under a lock that is recovered | |
-| The database thread | `Db::start` | **Goes on**: each call is caught. It is not restarted because it cannot end by a panic of a call |
+| The database thread | `Db::start` | **Goes on**: each call is caught where it runs (`db::answer`). A second catch in the thread's loop is for what a job does around its call (the line `answer` logs, the release of a result no caller waits for): none of it is known to panic, but the thread owns the only connection, so nothing in a job may end it. That catch reports on the standard error, since a log layer that panicked is one way to reach it |
 | The main thread: the start, then the wait for a signal or for a shutdown or restart asked through the API | `unarrd::main` | **Fatal on purpose.** A panic here is not in any personality's work, and without this thread nothing would stop the process cleanly |
 | The `healthcheck` command | a process of its own | Its own exit code |
 
