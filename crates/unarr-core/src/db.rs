@@ -107,13 +107,11 @@ impl Db {
         thread::Builder::new().name("unarr-db".into()).spawn(move || {
             let _log = tracing::dispatcher::set_default(&log);
             for job in rx {
-                // A call that panics answers its caller with the panic
-                // (`answer`) and the thread goes on: it owns the only
-                // connection, and without it the personality has no
-                // database until the process starts again.
-                if let Err(panic) = crate::panics::catch_sync(|| job(&mut conn)) {
-                    tracing::error!("A database call {panic}");
-                }
+                // A call that panics is caught where it runs (`answer`),
+                // which tells its caller, so the thread goes on: it owns
+                // the only connection, and without it the personality has
+                // no database until the process starts again.
+                job(&mut conn);
                 // A `Transaction` rolls back as it is dropped, unwinding
                 // included. One begun by hand would still be open, and
                 // every later call would join it.

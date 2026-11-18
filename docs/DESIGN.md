@@ -2164,7 +2164,7 @@ What it costs is in section 9 ("Unwinding instead of aborting").
 | Work a request hands to the blocking pool (`blocking::run`: rendering, file work) | the helper, which returns the panic as its error | That request: a 500 with the panic for its message, not a request that waits |
 | A call on the database thread (`Db::call`, `call_blocking`) | `db::answer`, around each call | That call: its caller gets the panic as an error. The thread and its connection go on; a transaction the call had open is rolled back |
 | The body of a command | `Runtime::execute` | That command: it ends `failed`, message `Failed`, the panic as its exception, the hub is told. The worker takes the next one |
-| The executor's bookkeeping around a command | the worker loop | That command, ended `failed` so that an exclusive one does not hold the others back |
+| The executor's steps around a command's body (arming the health notifications, recording the start, the checks the body asked for) | the same catch in `Runtime::execute`, which covers all that comes before the end is recorded | That command, failed the same way. Its end and its run are recorded as for any other: a scheduled task whose run was not recorded would be due again at every tick, thirty seconds apart |
 | The import of one completed download | the import loop (`mediafiles::completed`, `movies::import::completed`) | That download for that run: it stays as it was and is tried again at the next; the downloads after it are still imported |
 | Reading one indexer's answer | `indexers::service::in_indexer_order` | That indexer's releases for that sync or search; the others' are decided on |
 | A SignalR connection | the connection's task | That connection; the UI opens another |
@@ -2195,7 +2195,7 @@ accepted, or its loss ends the process on purpose.
 | Command workers (three per personality) | `Runtime::start` | **Start again** (`panics::supervised`), after one second. A command's own panic never reaches them |
 | Scheduler tick, which is also the eviction timer of the compiled patterns and the allocator trim | `Runtime::scheduler_loop` | **Starts again**; the tick that panicked is skipped, the next comes thirty seconds later |
 | Memory release timer of a personality without commands | `unarrd::serve` | **Starts again** |
-| HTTP server (the accept loop) | `unarrd::serve` | **Starts again** on the same address, also when it ends with an error: without it the personality is deaf |
+| HTTP server (the accept loop) | `unarrd::serve` | **Not started again**, and no way for it to end is known: the loop holds none of Unarr's code, every request runs in its connection's task, and axum (0.8) retries a failed accept itself and never returns. Should it panic all the same, the panic is logged (`panics::spawn_logged`) and that personality accepts no connection until the restart |
 | A connection, and the requests on it | axum, one task each | Lost with its connection, if the panic is outside both catch layers (hyper itself); the client connects again |
 | Relay of the runtime's events to the hub | `AppState::start_runtime` | **Goes on**: the event that panicked is not sent, the next is |
 | Radarr's movie relay | `routes::radarr::movies::relay_movie_events` | **Goes on**, the same way, with its context read again |
@@ -2281,8 +2281,9 @@ that is there and cannot be read is no longer one of them.
 `make check` runs the unit tests of each catcher: `panics` and `sync`
 (`unarr-core`), the two layers (`http`), the blocking helper, the database
 thread, the executor (`commands::executor::panic_tests`: a command that
-panics in its body and in the bookkeeping, more times than there are
-workers), the indexer isolation.
+panics in its body and in the steps around it, more times than there are
+workers, ends failed with its run recorded for the scheduler), the indexer
+isolation.
 
 `make panic-test` runs `crates/unarrd/tests/panic.rs` on a **release
 build** of the daemon, in a target directory of its own

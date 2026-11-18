@@ -66,6 +66,22 @@ async fn told(events: &mut tokio::sync::broadcast::Receiver<Event>, id: i64) -> 
     states
 }
 
+/// When the scheduled task of `MessagingCleanup` last ran, as the scheduler
+/// reads it to decide whether the task is due.
+async fn last_run(runtime: &Runtime) -> Option<chrono::DateTime<Utc>> {
+    runtime
+        .queue()
+        .db()
+        .call(|conn| {
+            Ok(crate::store::providers::list_scheduled_tasks(conn)?
+                .into_iter()
+                .find(|t| CommandBody::from_type_name(&t.type_name) == Some(CommandBody::MessagingCleanup))
+                .and_then(|t| t.last_execution))
+        })
+        .await
+        .unwrap()
+}
+
 // One test: the switch is the process's, and two tests arming the same
 // command would take each other's panic.
 #[tokio::test]
@@ -106,12 +122,16 @@ async fn a_command_that_panics_fails_and_the_next_one_runs() {
             .await
             .unwrap();
         assert_eq!(stored, CommandStatus::Failed.as_i64());
+        assert!(
+            last_run(&runtime).await >= failed.started_at,
+            "the run is recorded"
+        );
     }
     let done = run(&runtime, CommandBody::MessagingCleanup).await;
     assert_eq!(done.status, CommandStatus::Completed);
 
-    // Around the body, in the executor's own bookkeeping: the worker ends
-    // the command it had started, and starts again.
+    // Around the body, in the executor's own steps before and after it:
+    // the command fails the same way.
     for _ in 0..super::WORKERS + 1 {
         switch::arm("record:sonarr:MessagingCleanup");
         let failed = run(&runtime, CommandBody::MessagingCleanup).await;
@@ -121,6 +141,12 @@ async fn a_command_that_panics_fails_and_the_next_one_runs() {
             "{failed:?}"
         );
         assert_eq!(told(&mut events, failed.id).await, [CommandStatus::Failed]);
+        // The run counts for the scheduler all the same: a task whose run
+        // is not recorded is due again at every tick, thirty seconds apart.
+        assert!(
+            last_run(&runtime).await >= failed.started_at,
+            "the run of a command that panicked around its body is recorded"
+        );
     }
     let done = run(&runtime, CommandBody::MessagingCleanup).await;
     assert_eq!(done.status, CommandStatus::Completed);

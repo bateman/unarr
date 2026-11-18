@@ -652,9 +652,10 @@ impl Runtime {
     }
 
     /// Spawn the workers and the scheduler. The tasks end with the Tokio
-    /// runtime. Each starts again if it panics: a command's own panic is
-    /// caught where the command runs and never reaches them, so this is
-    /// for a panic in the bookkeeping around it.
+    /// runtime. Each starts again if it panics: a panic in a command, or
+    /// in the steps around its body, is caught where the command runs and
+    /// never reaches them, so this is for one in the queue itself or in
+    /// what follows a command's recorded end.
     pub fn start(self: &Arc<Self>) -> Vec<tokio::task::JoinHandle<()>> {
         let mut handles = Vec::with_capacity(WORKERS + 1);
         for _ in 0..WORKERS {
@@ -679,26 +680,7 @@ impl Runtime {
                 let Some(model) = self.queue.try_start(self.now()) else {
                     break;
                 };
-                let (id, name) = (model.id, model.name());
-                if let Err(panic) = crate::panics::catch(self.execute(model)).await {
-                    // Not in the command's body, which `execute` catches,
-                    // but around it. The command is not left started: an
-                    // exclusive one would hold every other back.
-                    tracing::error!(name, "recording the command {panic}");
-                    let ended = self.queue.end(
-                        id,
-                        CommandStatus::Failed,
-                        Some("Failed".into()),
-                        Some(panic.to_string()),
-                        self.now(),
-                    );
-                    match crate::panics::catch(ended).await {
-                        Ok(Ok(Some(ended))) => self.broadcast(&ended),
-                        Ok(Ok(None)) => {}
-                        Ok(Err(e)) => tracing::warn!(error = %e, "failed to record the command's end"),
-                        Err(panic) => tracing::error!(name, "ending the command {panic}"),
-                    }
-                }
+                self.execute(model).await;
             }
             if self.is_stopping() {
                 return;
@@ -788,40 +770,17 @@ impl Runtime {
         let id = model.id;
         let name = model.name();
         tracing::trace!(name, id, "command started");
-        #[cfg(any(test, feature = "panic-switch"))]
-        crate::panics::switch::fire(&format!(
-            "record:{}:{name}",
-            self.personality.app_name().to_lowercase()
-        ));
-        self.arm_health_notifications().await;
-        if let Err(e) = self.queue.record_started(&model).await {
-            tracing::warn!(error = %e, "failed to record the command's start");
-        }
-        self.broadcast(&model);
         // `CommandExecutor.ExecuteCommand` catches whatever the handler
         // throws and fails the command with it; a panic is Unarr's
-        // unhandled exception.
-        let outcome = match crate::panics::catch(self.run(&model)).await {
+        // unhandled exception. One catch, for all that comes before the
+        // end is recorded: the steps around the body as well as the body.
+        // Whatever panicked, what follows always runs: the command is
+        // ended, the hub told, and the scheduled task's run recorded. A
+        // run left unrecorded is due again at every tick of the scheduler.
+        let outcome = match crate::panics::catch(self.run_started(&model)).await {
             Ok(outcome) => outcome,
             Err(panic) => Err(anyhow::anyhow!("{panic}")),
         };
-        // `ProviderStatusChangedEvent` is published while the command runs:
-        // the checks it asks for are done by the time the command ends.
-        if matches!(
-            model.body,
-            CommandBody::RssSync
-                | CommandBody::RefreshMonitoredDownloads
-                | CommandBody::EpisodeSearch { .. }
-                | CommandBody::SeasonSearch { .. }
-                | CommandBody::SeriesSearch { .. }
-                | CommandBody::MissingEpisodeSearch { .. }
-                | CommandBody::CutoffUnmetEpisodeSearch { .. }
-                | CommandBody::MoviesSearch { .. }
-                | CommandBody::MissingMoviesSearch { .. }
-                | CommandBody::CutoffUnmetMoviesSearch { .. }
-        ) {
-            self.check_health_on_status_change().await;
-        }
         let now = self.now();
         let ended = match outcome {
             Ok(()) => {
@@ -871,6 +830,41 @@ impl Runtime {
             tracing::warn!(error = %e, "failed to record the scheduled task's run");
         }
         tracing::trace!(name, id, duration = ?ended.duration, "command ended");
+    }
+
+    /// A started command up to its outcome: its start recorded and told,
+    /// its body, and the checks its body asked for.
+    async fn run_started(&self, model: &CommandModel) -> anyhow::Result<()> {
+        #[cfg(any(test, feature = "panic-switch"))]
+        crate::panics::switch::fire(&format!(
+            "record:{}:{}",
+            self.personality.app_name().to_lowercase(),
+            model.name()
+        ));
+        self.arm_health_notifications().await;
+        if let Err(e) = self.queue.record_started(model).await {
+            tracing::warn!(error = %e, "failed to record the command's start");
+        }
+        self.broadcast(model);
+        let outcome = self.run(model).await;
+        // `ProviderStatusChangedEvent` is published while the command runs:
+        // the checks it asks for are done by the time the command ends.
+        if matches!(
+            model.body,
+            CommandBody::RssSync
+                | CommandBody::RefreshMonitoredDownloads
+                | CommandBody::EpisodeSearch { .. }
+                | CommandBody::SeasonSearch { .. }
+                | CommandBody::SeriesSearch { .. }
+                | CommandBody::MissingEpisodeSearch { .. }
+                | CommandBody::CutoffUnmetEpisodeSearch { .. }
+                | CommandBody::MoviesSearch { .. }
+                | CommandBody::MissingMoviesSearch { .. }
+                | CommandBody::CutoffUnmetMoviesSearch { .. }
+        ) {
+            self.check_health_on_status_change().await;
+        }
+        outcome
     }
 
     fn broadcast(&self, model: &CommandModel) {

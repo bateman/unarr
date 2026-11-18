@@ -242,39 +242,38 @@ fn whole_path(request: &Request) -> String {
 /// `SonarrErrorPipeline` for what Unarr has in place of an unhandled
 /// exception: a panic while a request is handled costs that request. It is
 /// logged as the originals log theirs ("Request Failed", with the message
-/// and the place of the panic) and answered with their 500.
-///
-/// This one sits inside [`finish`], around the API's and the feed's
-/// actions, so the answer leaves as the exception handler's does there: no
-/// `X-Application-Version`, no charset, `no-cache,no-store`.
-pub async fn catch_panic(request: Request, next: Next) -> Response {
+/// and the place of the panic) and answered with their 500, here as the
+/// error of the two layers below.
+async fn answer_or_panic(request: Request, next: Next) -> Result<Response, Response> {
     let method = request.method().clone();
     let path = whole_path(&request);
-    match unarr_core::panics::catch(next.run(request)).await {
-        Ok(response) => response,
-        Err(panic) => {
+    unarr_core::panics::catch(next.run(request))
+        .await
+        .map_err(|panic| {
             tracing::error!("Request Failed. {method} {path}: {panic}");
             crate::error::panicked(&panic)
-        }
-    }
+        })
 }
 
-/// The same around the whole router, for what [`catch_panic`] is not
-/// around: the pages, `/ping`, the login, SignalR's negotiation and the
-/// layers themselves. The originals' handler is the outermost middleware
-/// too and writes the same answer whatever the path.
+/// Inside [`finish`], around the API's and the feed's actions, so that the
+/// answer to a panic leaves as the exception handler's does there: no
+/// `X-Application-Version`, no charset, `no-cache,no-store`.
+pub async fn catch_panic(request: Request, next: Next) -> Response {
+    answer_or_panic(request, next)
+        .await
+        .unwrap_or_else(|answer| answer)
+}
+
+/// Around the whole router, for what [`catch_panic`] is not around: the
+/// pages, `/ping`, the login, SignalR's negotiation and the layers
+/// themselves. The originals' handler is the outermost middleware too and
+/// writes the same answer whatever the path; nothing after this layer
+/// forbids caching it, so it does.
 pub async fn catch_panic_anywhere(request: Request, next: Next) -> Response {
-    let method = request.method().clone();
-    let path = whole_path(&request);
-    match unarr_core::panics::catch(next.run(request)).await {
-        Ok(response) => response,
-        Err(panic) => {
-            tracing::error!("Request Failed. {method} {path}: {panic}");
-            let mut response = crate::error::panicked(&panic);
-            forbid_caching(response.headers_mut(), NO_CACHE_THROWN);
-            response
-        }
-    }
+    answer_or_panic(request, next).await.unwrap_or_else(|mut answer| {
+        forbid_caching(answer.headers_mut(), NO_CACHE_THROWN);
+        answer
+    })
 }
 
 /// No caching, for what is neither a page nor the API: SignalR's negotiation.
