@@ -1,0 +1,32 @@
+# Events, commands and settings of docs/audit/7-triage.md the long list
+# does not show: the console's level saved with the host settings, the
+# deprecated CheckForFinishedDownload command and what it logs, and the
+# Import Complete notification of a manual import without a download.
+# A recording of its own; same format as ../golden/requests.txt.
+#
+#   GOLDEN_REQUESTS=tests/fixtures/sonarr/golden-events/requests.txt \
+#       GOLDEN_OUT=tests/fixtures/sonarr/golden-events make golden
+
+# ConsoleLogLevel: stored as sent, read back, then blank again. The
+# fixture's AllowedHosts, `*`, is refused by the form: blank it is.
+config-host GET /api/v3/config/host
+config-host-put-console PUT /api/v3/config/host bodies/config-host-put-console.json
+config-host-console GET /api/v3/config/host
+config-host-put-console-blank PUT /api/v3/config/host bodies/config-host-put-console-blank.json
+
+# The command third-party callers used before RefreshMonitoredDownloads:
+# run, as the refresh, and a warning in the log.
+command-check-finished POST /api/v3/command bodies/command-check-finished.json
+sleep 6
+command-check-finished-get GET /api/v3/command/{id:command-check-finished}
+log-warnings GET /api/v3/log?page=1&pageSize=50&sortKey=time&sortDirection=descending&level=warn
+
+# A file no download client knows, imported by hand: the webhook that
+# takes Import Complete only is told, with no download id.
+mock - POST /mock/notifications/clear
+notification-create-import-complete POST /api/v3/notification bodies/notification-create-import-complete.json
+mock - POST /mock/fs/write?path=/downloads/manual/The.Pitt.S01E05.1080p.WEB.H264-Fixture/The.Pitt.S01E05.1080p.WEB.H264-Fixture.mkv&clip=episode
+command-manual-import-untracked POST /api/v3/command bodies/command-manual-import-untracked.json
+sleep 12
+command-manual-import-untracked-get GET /api/v3/command/{id:command-manual-import-untracked}
+mock manualimport-untracked-notifications GET /mock/notifications

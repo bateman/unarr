@@ -2077,3 +2077,189 @@ async fn the_queue_status_on_the_hub_counts_pending_releases() {
     assert_eq!(last["resource"]["totalCount"], 1, "{announced:?}");
     assert_eq!(last["resource"]["count"], 1, "{announced:?}");
 }
+
+/// What `tests/fixtures/sonarr/golden-events` recorded on the original:
+/// the console's level saved with the host settings and handed to the
+/// logging; the deprecated `CheckForFinishedDownload` run as the refresh
+/// of the downloads, with the original's warning in the log; and the
+/// Import Complete notification a manual import of a file no download
+/// client knows sends (`UntrackedDownloadCompletedEvent`).
+#[tokio::test]
+async fn the_events_and_settings_of_the_audit_match_the_original() {
+    use tracing_subscriber::layer::SubscriberExt;
+    let golden_dir = fixture_dir().join("golden-events");
+    let dirs = ReplayDirs::create_named("events");
+    let mappings = dirs.mappings();
+    let mock = unarr_mock::Mock::start_with(
+        unarr_mock::fixtures_dir(),
+        0,
+        unarr_mock::MockDirs {
+            downloads: Some(dirs.downloads.clone()),
+            tv: Some(dirs.tv.clone()),
+            movies: None,
+        },
+    )
+    .await
+    .expect("a mock on a free port");
+    unarr_core::notifications::pin_machine_name("vm");
+    let state = build_state_in(Some(&dirs), |_| {});
+    let port = mock.port().to_string();
+    let p = port.clone();
+    state
+        .db()
+        .call(move |conn| {
+            conn.execute(
+                "UPDATE providers SET settings = replace(settings, ':18989', ':' || ?1)",
+                [&p],
+            )?;
+            Ok(())
+        })
+        .await
+        .expect("the providers pointed at this test's mock");
+    state.set_metadata_upstreams(unarr_core::metadata::Upstreams::mock(&mock.url()));
+    let goldens = load_goldens(&golden_dir);
+    let start = goldens
+        .iter()
+        .filter_map(|g| g.recorded_at)
+        .min()
+        .expect("a recording time");
+    state
+        .db()
+        .call(move |conn| {
+            let ids: Vec<i64> = conn
+                .prepare("SELECT id FROM scheduled_tasks")?
+                .query_map([], |r| r.get(0))?
+                .collect::<Result<_, _>>()?;
+            for id in ids {
+                unarr_core::store::providers::set_scheduled_task_execution(conn, id, start, start)?;
+            }
+            Ok(())
+        })
+        .await
+        .expect("freeze the scheduled tasks");
+    state.set_now(Some(start));
+    // What the daemon's logging is told after each save of the settings.
+    let told = std::sync::Arc::new(std::sync::Mutex::new(Vec::<(String, String)>::new()));
+    let t = told.clone();
+    state.set_log_level_hook(move |host| {
+        t.lock().unwrap().push((
+            host.console_log_level.clone(),
+            format!("{:?}", host.console_level()),
+        ))
+    });
+    // The recent lines, as the daemon's logging fills them.
+    let _logging =
+        tracing::subscriber::set_default(tracing_subscriber::registry().with(state.logs().clone()));
+    state.start_runtime().await.expect("the command runtime");
+    let app = unarr_api::router(state.clone());
+    let session = login_cookie(&app).await;
+    let mut ids: std::collections::HashMap<String, i64> = std::collections::HashMap::new();
+    let mut answers: std::collections::HashMap<String, Value> = std::collections::HashMap::new();
+    let mut host_password: Option<String> = None;
+    let mut failures = Vec::new();
+    for g in &goldens {
+        if g.method == "sleep" {
+            let seconds: i64 = g.path.parse().expect("sleep seconds");
+            state.set_now(Some(state.now() + chrono::Duration::seconds(seconds)));
+            tokio::time::timeout(
+                std::time::Duration::from_secs(60),
+                state.commands().unwrap().wait_idle(),
+            )
+            .await
+            .expect("commands finish within a minute");
+            continue;
+        }
+        let path = substitute_ids(&g.path, &ids);
+        if g.to_mock {
+            let mut path = path;
+            for (replay, recorded) in &mappings {
+                path = path.replace(&format!("path={recorded}"), &format!("path={replay}"));
+            }
+            let (status, bytes) = mock.call(&g.method, &path, &[]);
+            assert!(status.is_success(), "mock {} {path}: {status}", g.method);
+            if g.name != "-" {
+                let body: Value = serde_json::from_slice(&bytes).unwrap_or(Value::Null);
+                answers.insert(g.name.clone(), unmap_paths(&body, &mappings));
+            }
+            continue;
+        }
+        let mut sent = g.clone();
+        sent.request_body = g.request_body.as_ref().map(|body| {
+            let mut body = body.replace("18989", &port);
+            // The stored hash goes back as the client read it: Unarr's.
+            if let (Some(hash), true) = (&host_password, g.path.ends_with("/config/host")) {
+                let mut v: Value = serde_json::from_str(&body).unwrap();
+                v["password"] = Value::String(hash.clone());
+                body = v.to_string();
+            }
+            body
+        });
+        state.set_now(g.recorded_at);
+        let (status, body) = send(&app, &sent, &session, &path, &mappings).await;
+        let body = unmap_paths(&body, &mappings);
+        if g.path.ends_with("/config/host") && g.method == "GET" {
+            host_password = body["password"].as_str().map(str::to_string);
+        }
+        if let Some(id) = body.get("id").and_then(Value::as_i64) {
+            ids.insert(g.name.clone(), id);
+        }
+        if status.as_u16() != g.status {
+            failures.push(format!(
+                "{}: status {} expected, {status} got: {body}",
+                g.name, g.status
+            ));
+        }
+        answers.insert(g.name.clone(), body);
+    }
+    // The console's level, as stored and read back.
+    for name in [
+        "config-host-put-console",
+        "config-host-console",
+        "config-host-put-console-blank",
+    ] {
+        let want = &goldens.iter().find(|g| g.name == name).unwrap().body["consoleLogLevel"];
+        let got = &answers[name]["consoleLogLevel"];
+        if want != got {
+            failures.push(format!("{name}: consoleLogLevel {want} expected, {got} got"));
+        }
+    }
+    // The commands, as the long list compares them.
+    for name in [
+        "command-check-finished",
+        "command-check-finished-get",
+        "command-manual-import-untracked-get",
+        "manualimport-untracked-notifications",
+    ] {
+        let want = &goldens.iter().find(|g| g.name == name).unwrap().body;
+        let problems = compare(mode(name), want, &answers[name]);
+        if !problems.is_empty() {
+            failures.push(format!("{name}:\n    {}", problems.join("\n    ")));
+        }
+    }
+    // The warning, among the recent lines at warn.
+    let warning = |v: &Value| {
+        v["records"].as_array().into_iter().flatten().any(|r| {
+            r["level"] == "warn"
+                && r["message"].as_str().is_some_and(|m| {
+                    m.starts_with("A third party app used the deprecated CheckForFinishedDownload command")
+                })
+        })
+    };
+    let recorded = &goldens.iter().find(|g| g.name == "log-warnings").unwrap().body;
+    assert!(warning(recorded), "the recording has the warning");
+    if !warning(&answers["log-warnings"]) {
+        failures.push(format!(
+            "log-warnings: no warning about the command in {}",
+            answers["log-warnings"]
+        ));
+    }
+    assert!(failures.is_empty(), "{}", failures.join("\n"));
+    // Each save handed the logging the console's level.
+    assert_eq!(
+        told.lock().unwrap().as_slice(),
+        [
+            ("Warn".to_string(), "Warn".to_string()),
+            (String::new(), "Info".to_string())
+        ]
+    );
+}
