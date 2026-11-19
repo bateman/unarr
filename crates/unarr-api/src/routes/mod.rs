@@ -400,7 +400,18 @@ pub fn ui_router(_state: &AppState) -> Router<AppState> {
     ui
 }
 
-/// The originals answer an unknown API path with an empty 404.
-pub(crate) async fn unknown_api_route() -> axum::http::StatusCode {
-    axum::http::StatusCode::NOT_FOUND
+/// The originals answer an unknown API path with an empty 404, and any
+/// other method on it with 405 `Allow: GET`: their catch-all route takes
+/// `GET` alone (recorded on Sonarr 4.0.20 and Radarr 6.4.4, under `/api/v3`
+/// and under `/api/v1` alike).
+pub(crate) async fn unknown_api_route(method: axum::http::Method) -> axum::response::Response {
+    use axum::response::IntoResponse;
+    if method == axum::http::Method::GET {
+        return axum::http::StatusCode::NOT_FOUND.into_response();
+    }
+    (
+        axum::http::StatusCode::METHOD_NOT_ALLOWED,
+        [(axum::http::header::ALLOW, "GET")],
+    )
+        .into_response()
 }

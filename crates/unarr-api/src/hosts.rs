@@ -11,7 +11,7 @@
 //! subdomains of `example.com`, ports are ignored, and anything else is
 //! answered with 400.
 
-use axum::extract::{Request, State};
+use axum::extract::{ConnectInfo, Request, State};
 use axum::http::{header, StatusCode};
 use axum::middleware::Next;
 use axum::response::{IntoResponse, Response};
@@ -110,14 +110,46 @@ fn machine_host_names() -> Vec<String> {
     }
 }
 
-/// Reject requests for a host the configuration does not list.
+/// What ASP.NET's host filtering answers a host it refuses, recorded on
+/// Sonarr 4.0.20 and Radarr 6.4.4 (`Content-Type: text/html`, no charset).
+const INVALID_HOSTNAME: &str = "<!DOCTYPE HTML PUBLIC \"-//W3C//DTD HTML 4.01//EN\"\"http://www.w3.org/TR/html4/strict.dtd\">\r\n<HTML><HEAD><TITLE>Bad Request</TITLE>\r\n<META HTTP-EQUIV=\"Content-Type\" Content=\"text/html; charset=us-ascii\"></ HEAD >\r\n<BODY><h2>Bad Request - Invalid Hostname</h2>\r\n<hr><p>HTTP Error 400. The request hostname is invalid.</p>\r\n</BODY></HTML>";
+
+/// Reject requests for a host the configuration does not list. The host
+/// checked is the one a proxy `TrustedNetworks` believes says the client
+/// asked for (`X-Forwarded-Host`), when there is one: the originals run
+/// the forwarded headers before the host filter, so a proxy that rewrites
+/// `Host` still reaches them under the name the client used.
 pub async fn require_allowed_host(State(state): State<AppState>, request: Request, next: Next) -> Response {
-    let host = request.headers().get(header::HOST).and_then(|v| v.to_str().ok());
-    if state.settings().allowed_hosts.allows(host) {
-        next.run(request).await
-    } else {
-        StatusCode::BAD_REQUEST.into_response()
+    let settings = state.settings();
+    if settings.allowed_hosts.allows_everything() {
+        return next.run(request).await;
     }
+    let remote = request
+        .extensions()
+        .get::<ConnectInfo<std::net::SocketAddr>>()
+        .map(|c| c.0.ip());
+    let forwarded = crate::forwarded::walk(remote, request.headers(), &settings.trusted_networks);
+    let host = forwarded.host.or_else(|| {
+        request
+            .headers()
+            .get(header::HOST)
+            .and_then(|v| v.to_str().ok())
+            .map(str::to_owned)
+    });
+    if settings.allowed_hosts.allows(host.as_deref()) {
+        return next.run(request).await;
+    }
+    tracing::info!(
+        target: "Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware",
+        "The host '{}' does not match an allowed host.",
+        host.unwrap_or_default()
+    );
+    (
+        StatusCode::BAD_REQUEST,
+        [(header::CONTENT_TYPE, "text/html")],
+        INVALID_HOSTNAME,
+    )
+        .into_response()
 }
 
 #[cfg(test)]

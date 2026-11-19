@@ -1321,8 +1321,11 @@ the size are in section 20, with why they were not taken.
   asked to log in. A saved setting applies at once, where the originals
   ask for a restart. `X-Forwarded-Proto` and `X-Forwarded-Host` were not
   read then; since the live HTTP run they are, from a trusted proxy, for
-  the cookie's `Secure` and the login redirect's absolute address. The
-  host filter still reads `Host` alone (`docs/audit/7-triage.md`, row 1.3). The setting is not validated on
+  the cookie's `Secure` and the login redirect's absolute address, and
+  since `core/http-audit-medium-rows` for the host filter too: the three
+  headers are walked together, as the framework walks them, and the host a
+  trusted proxy names is the one Allowed Hosts checks
+  (`docs/audit/7-triage.md`, row 1.3). The setting is not validated on
   save yet (the originals refuse a list that does not parse).
 - **Each personality logs on its own.** One process serves several
   personalities and a log line does not say whose it is. Rather than mark

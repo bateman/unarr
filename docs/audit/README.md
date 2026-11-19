@@ -154,7 +154,11 @@ hub listened to, `tests/fixtures/sonarr/golden-hub`): the health checks
 after a save, the web app manifest, the pages that list episodes told of a
 grab, the blocklist's Protocol filter, the refresh of the downloads after
 a scan imports, the SignalR messages for tags, root folders, quality
-definitions, tasks, commands and health, and the body limit. The rows now
-stand at 102 closed, 60 open, 10 partial, 7 deliberate and 14 not
-applicable; the triage says which and how, and what of the same was
-closed on Radarr's side.
+definitions, tasks, commands and health, and the body limit. Then four of
+the medium rows, with four low ones in the same code: Allowed Hosts behind
+a proxy that rewrites `Host`, the login lines fail2ban reads, a request
+outside the URL base, and paths under `/api` that are not v3, each recorded
+on both originals under a changed `config.xml` first. The rows now stand at
+110 closed, 54 open, 8 partial, 7 deliberate and 14 not applicable; the
+triage says which and how, and what of the same was closed on Radarr's
+side.

@@ -908,14 +908,19 @@ async fn login_return_url_is_kept_local() {
     );
 }
 
-/// A URL base with capitals keeps them; only the API part is case-insensitive.
+/// The URL base is matched in any case, as the API part is (recorded on
+/// Sonarr 4.0.20 and Radarr 6.4.4: `/TV/ping` under the base `/tv` is
+/// answered); a path that only starts with its letters is outside it.
 #[tokio::test]
-async fn url_base_keeps_its_case() {
+async fn url_base_is_matched_in_any_case() {
     let app = unarr_api::router(build_state_with(|h| h.url_base = "/Sonarr".into()));
     for (uri, expected) in [
         ("/Sonarr/api/v3/health", StatusCode::OK),
         ("/Sonarr/api/v3/episodeFile?seriesId=22", StatusCode::OK),
-        ("/sonarr/api/v3/health", StatusCode::NOT_FOUND),
+        ("/sonarr/api/v3/health", StatusCode::OK),
+        ("/SONARR/API/V3/health", StatusCode::OK),
+        // Outside, it is a page: the login first.
+        ("/sonarrx/api/v3/health", StatusCode::FOUND),
     ] {
         let req = get(uri).header("X-Api-Key", API_KEY).body(Body::empty()).unwrap();
         assert_eq!(status_of(&app, req).await, expected, "{uri}");

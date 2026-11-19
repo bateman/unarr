@@ -58,7 +58,7 @@ impl Hub {
 }
 
 /// `access_token` query parameter, or the usual header.
-fn authorized(state: &AppState, uri: &Uri, headers: &HeaderMap) -> bool {
+pub(crate) fn authorized(state: &AppState, uri: &Uri, headers: &HeaderMap) -> bool {
     let settings = state.settings();
     let expected = &settings.host.api_key;
     let params = Params::from_uri(uri);

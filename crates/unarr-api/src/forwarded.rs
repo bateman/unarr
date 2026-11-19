@@ -128,41 +128,144 @@ fn parse_entry(text: &str) -> Option<IpAddr> {
     text.strip_prefix('[')?.strip_suffix(']')?.parse().ok()
 }
 
-/// The forwarded-headers middleware's walk over `X-Forwarded-For`, from the
-/// last entry back: while the address held so far belongs to a trusted
-/// network, the entry before it replaces it and is consumed. The walk
-/// stops at the first address that is not trusted, or at an entry that is
-/// not an address.
-pub fn client(remote: Option<IpAddr>, headers: &HeaderMap, trusted: &TrustedNetworks) -> Client {
-    let entries: Vec<&str> = headers
-        .get_all("x-forwarded-for")
+/// What a request says of itself once the proxies that are believed have
+/// spoken: the client, and the host and the scheme the client asked for.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct Forwarded {
+    pub client: Client,
+    /// `X-Forwarded-Host` as the walk left it; `None` when no believed
+    /// proxy named one, and the request's own `Host` stands.
+    pub host: Option<String>,
+    /// `X-Forwarded-Proto` likewise.
+    pub scheme: Option<String>,
+}
+
+/// The values of a header, over all its lines, split on commas and trimmed.
+fn values<'a>(headers: &'a HeaderMap, name: &str) -> Vec<&'a str> {
+    headers
+        .get_all(name)
         .iter()
         .filter_map(|v| v.to_str().ok())
         .flat_map(|v| v.split(','))
         .map(str::trim)
-        .collect();
+        .collect()
+}
+
+/// ASP.NET's forwarded-headers middleware, with `X-Forwarded-For`,
+/// `X-Forwarded-Proto` and `X-Forwarded-Host` switched on and no limit on
+/// the entries, as the originals set it. The three headers are read
+/// together from their last entries back: while the address held so far
+/// belongs to a trusted network, the entry before it in each header is
+/// applied and consumed. The walk stops at the first address that is not
+/// trusted, or at an entry of `X-Forwarded-For` that is not an address.
+/// A scheme or a host that is not one undoes the whole walk: the request
+/// stays as it came.
+///
+/// So with no `X-Forwarded-For` at all a trusted proxy's hosts are all
+/// applied in turn, and the leftmost one stands (recorded on Sonarr 4.0.20
+/// and Radarr 6.4.4: `evil.example, tv.example.com` is checked against
+/// Allowed Hosts as `evil.example`).
+pub fn walk(remote: Option<IpAddr>, headers: &HeaderMap, trusted: &TrustedNetworks) -> Forwarded {
+    let fors = values(headers, "x-forwarded-for");
+    let protos = values(headers, "x-forwarded-proto");
+    let hosts = values(headers, "x-forwarded-host");
+    let untouched = Forwarded {
+        client: Client {
+            address: remote.map(unmapped),
+            forwarded_left: !fors.is_empty(),
+        },
+        host: None,
+        scheme: None,
+    };
     let mut address = remote.map(unmapped);
+    let mut host = None;
+    let mut scheme = None;
     let mut consumed = 0;
-    for entry in entries.iter().rev() {
+    for i in 0..fors.len().max(protos.len()).max(hosts.len()) {
         if !address.is_some_and(|a| trusted.contains(a)) {
             break;
         }
-        if entry.is_empty() {
-            // Nothing named: consumed, the address stays.
-            consumed += 1;
-            continue;
-        }
-        match parse_entry(entry) {
-            Some(named) => {
-                address = Some(unmapped(named));
-                consumed += 1;
+        // Nothing named: consumed, the address stays.
+        if let Some(named) = nth_back(&fors, i).filter(|e| !e.is_empty()) {
+            match parse_entry(named) {
+                Some(named) => address = Some(unmapped(named)),
+                None => break,
             }
-            None => break,
         }
+        if let Some(proto) = nth_back(&protos, i).filter(|e| !e.is_empty()) {
+            if !valid_scheme(proto) {
+                return untouched;
+            }
+            scheme = Some(proto.to_string());
+        }
+        if let Some(named) = nth_back(&hosts, i).filter(|e| !e.is_empty()) {
+            if !valid_host(named) {
+                return untouched;
+            }
+            host = Some(named.to_string());
+        }
+        consumed += 1;
     }
-    Client {
-        address,
-        forwarded_left: consumed < entries.len(),
+    Forwarded {
+        client: Client {
+            address,
+            forwarded_left: consumed < fors.len(),
+        },
+        host,
+        scheme,
+    }
+}
+
+/// The `i`-th value from the end.
+fn nth_back<'a>(list: &[&'a str], i: usize) -> Option<&'a str> {
+    list.len().checked_sub(i + 1).map(|at| list[at])
+}
+
+/// The client alone: [`walk`]'s.
+pub fn client(remote: Option<IpAddr>, headers: &HeaderMap, trusted: &TrustedNetworks) -> Client {
+    walk(remote, headers, trusted).client
+}
+
+/// `TryValidateScheme`: letters, digits, `+`, `-` and `.`.
+fn valid_scheme(scheme: &str) -> bool {
+    scheme
+        .bytes()
+        .all(|b| b.is_ascii_alphanumeric() || matches!(b, b'+' | b'-' | b'.'))
+}
+
+/// `TryValidateHost`: a name of the characters RFC 3986 allows in one, or
+/// an IPv6 address in brackets, and a port of digits after a colon.
+fn valid_host(host: &str) -> bool {
+    let name_end = if let Some(rest) = host.strip_prefix('[') {
+        let Some(close) = rest.find(']') else {
+            return false;
+        };
+        // `[::1]` is the shortest.
+        if close < 3
+            || !rest[..close]
+                .bytes()
+                .all(|b| b.is_ascii_hexdigit() || matches!(b, b':' | b'.'))
+        {
+            return false;
+        }
+        close + 2
+    } else {
+        host.bytes()
+            .position(|b| {
+                !(b.is_ascii_alphanumeric()
+                    || matches!(
+                        b,
+                        b'!' | b'$' | b'&' | b'\'' | b'(' | b')' | b'-' | b'.' | b'_' | b'~'
+                    ))
+            })
+            .unwrap_or(host.len())
+    };
+    if name_end == 0 {
+        return false;
+    }
+    match host[name_end..].strip_prefix(':') {
+        None => name_end == host.len(),
+        Some(port) => !port.is_empty() && port.bytes().all(|b| b.is_ascii_digit()),
     }
 }
 
@@ -296,5 +399,106 @@ mod tests {
                 forwarded_left: true
             }
         );
+    }
+
+    fn forwarded(pairs: &[(&'static str, &str)]) -> HeaderMap {
+        let mut h = HeaderMap::new();
+        for (name, value) in pairs {
+            h.append(*name, value.parse().unwrap());
+        }
+        h
+    }
+
+    /// The cases recorded on Sonarr 4.0.20 and Radarr 6.4.4 with Allowed
+    /// Hosts `tv.example.com`, from the loopback and from another address.
+    #[test]
+    fn hosts_and_schemes_walk_with_the_addresses() {
+        let trusted = TrustedNetworks::parse("");
+        let lo = Some(ip("127.0.0.1"));
+        let host = |remote, pairs: &[(&'static str, &str)]| walk(remote, &forwarded(pairs), &trusted).host;
+        assert_eq!(
+            host(lo, &[("x-forwarded-host", "tv.example.com")]).as_deref(),
+            Some("tv.example.com")
+        );
+        assert_eq!(
+            host(lo, &[("x-forwarded-host", "tv.example.com:443")]).as_deref(),
+            Some("tv.example.com:443")
+        );
+        // No address to walk with: every host is applied, the first stands.
+        assert_eq!(
+            host(lo, &[("x-forwarded-host", "evil.example, tv.example.com")]).as_deref(),
+            Some("evil.example")
+        );
+        assert_eq!(
+            host(lo, &[("x-forwarded-host", "tv.example.com, evil.example")]).as_deref(),
+            Some("tv.example.com")
+        );
+        // With addresses, each host goes with its address.
+        let pairs = [
+            ("x-forwarded-host", "evil.example, tv.example.com"),
+            ("x-forwarded-for", "10.1.2.3, 127.0.0.1"),
+        ];
+        assert_eq!(host(lo, &pairs).as_deref(), Some("evil.example"));
+        let pairs = [
+            ("x-forwarded-host", "evil.example, tv.example.com"),
+            ("x-forwarded-for", "10.1.2.3"),
+        ];
+        assert_eq!(host(lo, &pairs).as_deref(), Some("tv.example.com"));
+        // Nobody vouches for the sender, or the header is empty.
+        assert_eq!(
+            host(Some(ip("192.0.2.2")), &[("x-forwarded-host", "tv.example.com")]),
+            None
+        );
+        assert_eq!(host(lo, &[("x-forwarded-host", "")]), None);
+        let w = walk(
+            lo,
+            &forwarded(&[("x-forwarded-proto", "https"), ("x-forwarded-for", "10.9.8.7")]),
+            &trusted,
+        );
+        assert_eq!(
+            (w.scheme.as_deref(), w.client.address),
+            (Some("https"), Some(ip("10.9.8.7")))
+        );
+    }
+
+    #[test]
+    fn a_host_or_a_scheme_that_is_not_one_undoes_the_walk() {
+        let trusted = TrustedNetworks::parse("");
+        let lo = Some(ip("127.0.0.1"));
+        for pairs in [
+            [
+                ("x-forwarded-host", "tv example.com"),
+                ("x-forwarded-for", "10.9.8.7"),
+            ],
+            [
+                ("x-forwarded-host", "tv.example.com:"),
+                ("x-forwarded-for", "10.9.8.7"),
+            ],
+            [("x-forwarded-host", "[::1"), ("x-forwarded-for", "10.9.8.7")],
+            [("x-forwarded-proto", "ht tp"), ("x-forwarded-for", "10.9.8.7")],
+        ] {
+            let w = walk(lo, &forwarded(&pairs), &trusted);
+            assert_eq!(w.host, None, "{pairs:?}");
+            assert_eq!(
+                w.client,
+                Client {
+                    address: lo,
+                    forwarded_left: true
+                },
+                "{pairs:?}"
+            );
+        }
+        for good in [
+            "[::1]",
+            "[fd00::5]:8989",
+            "tv.example.com",
+            "a_b-c.d~e:1",
+            "10.0.0.1:80",
+        ] {
+            assert!(valid_host(good), "{good}");
+        }
+        for bad in ["", ":80", "[::]", "a b", "a:b", "a/b", "a,b"] {
+            assert!(!valid_host(bad), "{bad}");
+        }
     }
 }

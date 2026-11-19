@@ -35,20 +35,82 @@ pub use logbuf::LogBuffer;
 pub use logfile::{LogFiles, ProcessLog};
 pub use state::{AppState, Lifecycle, RuntimeInfo, Settings};
 
+/// The request as the client sent it, before [`normalize_path`] and the
+/// router rewrote its path: what a redirect hands back.
+#[derive(Clone)]
+pub struct ReceivedUri(pub axum::http::Uri);
+
+/// Marks a request for a path outside the URL base. The originals route
+/// it as if the base were not there and authenticate it so, then
+/// `UrlBaseMiddleware` sends it into the base with a 307.
+#[derive(Clone)]
+struct OutsideUrlBase;
+
+/// The URI the client asked for.
+pub(crate) fn asked_uri(request: &axum::extract::Request) -> axum::http::Uri {
+    request
+        .extensions()
+        .get::<ReceivedUri>()
+        .map(|r| r.0.clone())
+        .or_else(|| {
+            request
+                .extensions()
+                .get::<axum::extract::OriginalUri>()
+                .map(|o| o.0.clone())
+        })
+        .unwrap_or_else(|| request.uri().clone())
+}
+
+/// Where the URL base is in the length of `base` at the start of `path`,
+/// in any case, as a whole segment.
+fn url_base_len(path: &str, base: &str) -> Option<usize> {
+    let n = base.len();
+    (!base.is_empty()
+        && path.len() >= n
+        && path.is_char_boundary(n)
+        && path[..n].eq_ignore_ascii_case(base)
+        && (path.len() == n || path.as_bytes()[n] == b'/'))
+        .then_some(n)
+}
+
+/// The URL base as the client wrote it: the originals' `PathBase`, which
+/// the login redirect starts from. Empty outside the base.
+pub(crate) fn url_base_as_asked(state: &AppState, request: &axum::extract::Request) -> String {
+    if request.extensions().get::<OutsideUrlBase>().is_some() {
+        return String::new();
+    }
+    let base = state.settings().url_base.clone();
+    let asked = asked_uri(request);
+    match url_base_len(asked.path(), &base) {
+        Some(n) => asked.path()[..n].to_owned(),
+        None => base,
+    }
+}
+
 /// The originals route API paths case-insensitively (Bazarr asks for
-/// `episodeFile`) and take a path with one slash after it for the same
-/// path: lower-case the API part and drop that slash before matching.
+/// `episodeFile`), the URL base too, and take a path with one slash after
+/// it for the same path: lower-case the base and the API part and drop
+/// that slash before matching.
 async fn normalize_path(
+    axum::extract::State(state): axum::extract::State<AppState>,
     mut request: axum::extract::Request,
     next: axum::middleware::Next,
 ) -> axum::response::Response {
     let uri = request.uri().clone();
+    request.extensions_mut().insert(ReceivedUri(uri.clone()));
+    let base = state.settings().url_base.clone();
     let path = http::without_trailing_slash(uri.path());
+    let (path, after_base) = match url_base_len(path, &base) {
+        Some(n) => (format!("{base}{}", &path[n..]), n),
+        None => (path.to_owned(), 0),
+    };
     let lower = path.to_ascii_lowercase();
-    // Only the API part: a URL base such as /Sonarr keeps its case.
-    let new_path = match lower.find("/api/v") {
-        Some(i) => format!("{}{}", &path[..i], &lower[i..]),
-        None => path.to_owned(),
+    // The API part, under `/api` in any case: what precedes it keeps its case.
+    let rest = &lower[after_base..];
+    let new_path = if rest == "/api" || rest.starts_with("/api/") {
+        format!("{}{}", &path[..after_base], rest)
+    } else {
+        path
     };
     // A coding the client refuses is not the compression layer's to act on.
     let asked = request
@@ -81,6 +143,115 @@ async fn normalize_path(
         }
     }
     next.run(request).await
+}
+
+/// `UrlBaseMiddleware`: a request outside the URL base, once authenticated
+/// as the route asks, goes into the base with a 307, its query kept and its
+/// method too. Placed in each group after the authentication and before
+/// anything else, as in the originals' pipeline; an API path carries the
+/// version header, which runs before it there.
+async fn into_url_base(
+    axum::extract::State(state): axum::extract::State<AppState>,
+    request: axum::extract::Request,
+    next: axum::middleware::Next,
+) -> axum::response::Response {
+    if request.extensions().get::<OutsideUrlBase>().is_none() {
+        return next.run(request).await;
+    }
+    let asked = asked_uri(&request);
+    let mut location = format!("{}{}", state.settings().url_base, asked.path());
+    if let Some(query) = asked.query() {
+        location.push('?');
+        location.push_str(query);
+    }
+    let mut response = axum::http::StatusCode::TEMPORARY_REDIRECT.into_response();
+    if let Ok(value) = axum::http::HeaderValue::from_str(&location) {
+        response.headers_mut().insert(axum::http::header::LOCATION, value);
+    }
+    let path = asked.path().to_ascii_lowercase();
+    if path == "/api" || path.starts_with("/api/") {
+        if let Ok(value) = axum::http::HeaderValue::from_str(compat::emulated_version(state.personality())) {
+            response.headers_mut().insert("X-Application-Version", value);
+        }
+    }
+    response
+}
+
+/// SignalR checks its own token in the handler; outside the URL base the
+/// originals ask for it before they redirect.
+async fn signalr_into_url_base(
+    axum::extract::State(state): axum::extract::State<AppState>,
+    request: axum::extract::Request,
+    next: axum::middleware::Next,
+) -> axum::response::Response {
+    if request.extensions().get::<OutsideUrlBase>().is_some()
+        && !routes::signalr::authorized(&state, request.uri(), request.headers())
+    {
+        return axum::http::StatusCode::UNAUTHORIZED.into_response();
+    }
+    into_url_base(axum::extract::State(state), request, next).await
+}
+
+/// A method the route does not take finds the originals' "405" endpoint,
+/// which no policy names, so the fallback policy asks for the API key:
+/// 401 without it, then 405 inside the URL base and the 307 into it
+/// outside (recorded on Sonarr 4.0.20 and Radarr 6.4.4; a cookie does not
+/// do). `None` when the method is the route's.
+async fn method_not_taken(
+    state: &AppState,
+    request: axum::extract::Request,
+    next: axum::middleware::Next,
+    allow: &'static str,
+) -> axum::response::Response {
+    let key = auth::presented_key(request.uri(), request.headers());
+    if !key.is_some_and(|key| auth::key_matches(&state.settings().host.api_key, &key)) {
+        return axum::http::StatusCode::UNAUTHORIZED.into_response();
+    }
+    if request.extensions().get::<OutsideUrlBase>().is_some() {
+        return into_url_base(axum::extract::State(state.clone()), request, next).await;
+    }
+    (
+        axum::http::StatusCode::METHOD_NOT_ALLOWED,
+        [(axum::http::header::ALLOW, allow)],
+    )
+        .into_response()
+}
+
+/// A page's action takes `GET` alone, `HEAD` not included. The covers are
+/// left as they were: not recorded.
+async fn pages_take_get_only(
+    axum::extract::State(state): axum::extract::State<AppState>,
+    request: axum::extract::Request,
+    next: axum::middleware::Next,
+) -> axum::response::Response {
+    if request.method() == axum::http::Method::GET
+        || asked_uri(&request)
+            .path()
+            .to_ascii_lowercase()
+            .contains("/mediacover/")
+    {
+        return next.run(request).await;
+    }
+    method_not_taken(&state, request, next, "GET").await
+}
+
+/// The open routes: `GET`, `HEAD` (which `/ping` declares, and the static
+/// files are left answering: not recorded) and the login form's `POST`.
+async fn open_takes_its_methods(
+    axum::extract::State(state): axum::extract::State<AppState>,
+    request: axum::extract::Request,
+    next: axum::middleware::Next,
+) -> axum::response::Response {
+    let method = request.method();
+    let login = request.uri().path().ends_with("/login");
+    if method == axum::http::Method::GET
+        || method == axum::http::Method::HEAD
+        || (method == axum::http::Method::POST && login)
+    {
+        return next.run(request).await;
+    }
+    let allow = if login { "GET, POST" } else { "GET" };
+    method_not_taken(&state, request, next, allow).await
 }
 
 /// Resources whose `PUT` takes an id: `[RestPutById]` in the originals,
@@ -309,6 +480,7 @@ pub fn router(state: AppState) -> Router {
         // `finish` then sends as the originals send theirs.
         .layer(axum::middleware::from_fn(http::catch_panic))
         .layer(axum::middleware::from_fn_with_state(state.clone(), http::finish))
+        .layer(axum::middleware::from_fn_with_state(state.clone(), into_url_base))
         .layer(axum::middleware::from_fn_with_state(
             state.clone(),
             auth::require_api_key,
@@ -319,6 +491,8 @@ pub fn router(state: AppState) -> Router {
     // Pages and bootstrap the browser loads: behind the UI policy.
     let pages = Router::new()
         .route("/", axum::routing::get(ui::spa))
+        // Behind the login, as in the originals.
+        .route("/favicon.ico", axum::routing::get(ui::favicon))
         .route(
             "/initialize.json",
             axum::routing::get(routes::system::initialize_json),
@@ -351,18 +525,22 @@ pub fn router(state: AppState) -> Router {
                 ))
         })
         .fallback(axum::routing::get(ui::spa))
+        .layer(axum::middleware::from_fn_with_state(state.clone(), into_url_base))
         // `layer`, not `route_layer`: the guard must cover the fallback too,
         // or deep links such as /settings would skip the login.
         .layer(axum::middleware::from_fn_with_state(
             state.clone(),
             ui::require_ui_auth,
         ))
+        .layer(axum::middleware::from_fn_with_state(
+            state.clone(),
+            pages_take_get_only,
+        ))
         .layer(http::compression());
 
     // Open to anonymous browsers: static content, the login form, SignalR
     // (which checks its own token).
     let open = Router::new()
-        .route("/favicon.ico", axum::routing::get(ui::favicon))
         .route(
             "/ping",
             axum::routing::get(routes::system::ping)
@@ -372,14 +550,31 @@ pub fn router(state: AppState) -> Router {
         .route("/content/{*path}", axum::routing::get(ui::content))
         .route("/login", axum::routing::get(ui::login_page).post(ui::login))
         .route("/logout", axum::routing::get(ui::logout))
+        .route_layer(axum::middleware::from_fn_with_state(state.clone(), into_url_base))
+        .route_layer(axum::middleware::from_fn_with_state(
+            state.clone(),
+            open_takes_its_methods,
+        ))
         .layer(http::compression())
         // SignalR's negotiation is not compressed, and not to be kept.
-        .merge(routes::ui_router(&state).layer(axum::middleware::map_response(http::no_cache)));
+        .merge(
+            routes::ui_router(&state)
+                .layer(axum::middleware::map_response(http::no_cache))
+                // Outside it: the originals' 307 carries no cache headers.
+                .route_layer(axum::middleware::from_fn_with_state(
+                    state.clone(),
+                    signalr_into_url_base,
+                )),
+        );
 
     // The calendar feed: opened with the API key, as the API is.
+    // With the rest of `/api`, which no action takes: the key is asked
+    // for, then 404 for `GET` and 405 for the rest, as in the originals.
     let feed = routes::feed_router(&state)
+        .route("/api/{*rest}", axum::routing::any(routes::unknown_api_route))
         .route_layer(axum::middleware::from_fn(http::catch_panic))
         .route_layer(axum::middleware::from_fn_with_state(state.clone(), http::finish))
+        .route_layer(axum::middleware::from_fn_with_state(state.clone(), into_url_base))
         .route_layer(axum::middleware::from_fn_with_state(
             state.clone(),
             auth::require_api_key,
@@ -408,7 +603,16 @@ pub fn router(state: AppState) -> Router {
     let app = if url_base.is_empty() {
         app
     } else {
-        Router::new().nest(&url_base, app)
+        // Outside the base, the same routes under the mark that makes each
+        // group send the request into the base once it is authenticated.
+        Router::new()
+            .nest(&url_base, app.clone())
+            .fallback_service(app.layer(axum::middleware::map_request(
+                |mut request: axum::extract::Request| async move {
+                    request.extensions_mut().insert(OutsideUrlBase);
+                    request
+                },
+            )))
     };
     // A router's layers run after it has matched, so the path rewrite and the
     // host check sit on an outer router whose only route is the real one.

@@ -24,6 +24,19 @@ fn app_for(personality: Personality, url_base: &str) -> axum::Router {
 
 /// The same under another instance name, when one is given.
 fn app_named(personality: Personality, url_base: &str, instance_name: Option<&str>) -> axum::Router {
+    app_edited(personality, url_base, |host| {
+        if let Some(name) = instance_name {
+            host.instance_name = Some(name.to_string());
+        }
+    })
+}
+
+/// The same with the settings `edit` changes.
+fn app_edited(
+    personality: Personality,
+    url_base: &str,
+    edit: impl FnOnce(&mut unarr_core::config::HostConfig),
+) -> axum::Router {
     let name = personality.app_name().to_lowercase();
     let dir = fixtures_dir().join(&name);
     let db = Db::open_in_memory_for(personality).unwrap();
@@ -36,9 +49,7 @@ fn app_named(personality: Personality, url_base: &str, instance_name: Option<&st
     let mut host = unarr_import::config_xml::read(&dir.join("config.xml"), personality.default_port())
         .expect("config.xml");
     host.url_base = url_base.to_string();
-    if let Some(name) = instance_name {
-        host.instance_name = Some(name.to_string());
-    }
+    edit(&mut host);
     let mut runtime = RuntimeInfo::detect(dir);
     runtime.media_cover_dir = covers_dir(personality);
     let state = AppState::new(
@@ -350,23 +361,527 @@ async fn the_login_redirect_names_the_whole_url_and_escapes_where_to_return() {
 
 /// Under a URL base the root answers with or without its slash: the path
 /// a `location /sonarr/` proxy forwards, and where the login form returns.
+/// The login redirect names the path as it was asked, base and slash
+/// included (recorded: `/tv/` gives `returnUrl=%2Ftv%2F`).
 #[tokio::test]
 async fn the_root_under_a_url_base_takes_a_trailing_slash() {
     let app = app_for(Personality::Sonarr, "/sonarr");
-    for path in ["/sonarr", "/sonarr/"] {
+    for (path, back) in [("/sonarr", "%2Fsonarr"), ("/sonarr/", "%2Fsonarr%2F")] {
         let (status, headers, _) = ask(&app, "GET", path, &[], "").await;
         assert_eq!(status, StatusCode::FOUND, "{path}");
         assert_eq!(
             header(&headers, "location"),
-            Some("/sonarr/login?returnUrl=%2F"),
+            Some(format!("/sonarr/login?returnUrl={back}").as_str()),
             "{path}"
         );
     }
     for path in ["/sonarr/login", "/sonarr/login/"] {
         assert_eq!(ask(&app, "GET", path, &[], "").await.0, StatusCode::OK, "{path}");
     }
-    // Outside the base there is nothing.
-    assert_eq!(ask(&app, "GET", "/", &[], "").await.0, StatusCode::NOT_FOUND);
+}
+
+/// Outside the URL base the originals route a request as if the base were
+/// not there, authenticate it so, then send it into the base with a 307
+/// (`UrlBaseMiddleware`). Every case is one recorded on Sonarr 4.0.20 and
+/// Radarr 6.4.4 under the base `/tv`, Forms authentication, no login.
+#[tokio::test]
+async fn a_request_outside_the_url_base_is_sent_into_it_once_authenticated() {
+    for personality in [Personality::Sonarr, Personality::Radarr] {
+        let app = app_for(personality, "/tv");
+        let version = unarr_api::compat::emulated_version(personality);
+        let feed = format!("/feed/v3/calendar/{}.ics?apikey={KEY}", personality.app_name());
+        let key = [("X-Api-Key", KEY)];
+        let bearer = format!("Bearer {KEY}");
+        let negotiate = format!("/signalr/messages/negotiate?access_token={KEY}");
+        let status = format!("/api/v3/system/status?apikey={KEY}&x=1");
+        for (method, path, headers, expected, location) in [
+            // Anonymous routes go in at once.
+            ("GET", "/ping", &[][..], 307, Some("/tv/ping".to_string())),
+            ("HEAD", "/ping", &[][..], 307, Some("/tv/ping".to_string())),
+            (
+                "GET",
+                "/login?returnUrl=%2F",
+                &[][..],
+                307,
+                Some("/tv/login?returnUrl=%2F".to_string()),
+            ),
+            ("GET", "/logout", &[][..], 307, Some("/tv/logout".to_string())),
+            (
+                "GET",
+                "/Content/manifest.json",
+                &[][..],
+                307,
+                Some("/tv/Content/manifest.json".to_string()),
+            ),
+            // The API and the feed, with the key.
+            (
+                "GET",
+                "/api/v3/system/status",
+                &key[..],
+                307,
+                Some("/tv/api/v3/system/status".to_string()),
+            ),
+            ("GET", status.as_str(), &[][..], 307, Some(format!("/tv{status}"))),
+            (
+                "GET",
+                "/api/v3/system/status",
+                &[("Authorization", bearer.as_str())][..],
+                307,
+                Some("/tv/api/v3/system/status".to_string()),
+            ),
+            (
+                "POST",
+                "/api/v3/command",
+                &key[..],
+                307,
+                Some("/tv/api/v3/command".to_string()),
+            ),
+            ("GET", "/api", &key[..], 307, Some("/tv/api".to_string())),
+            (
+                "GET",
+                "/api/v1/foo",
+                &key[..],
+                307,
+                Some("/tv/api/v1/foo".to_string()),
+            ),
+            ("GET", feed.as_str(), &[][..], 307, Some(format!("/tv{feed}"))),
+            (
+                "POST",
+                negotiate.as_str(),
+                &[][..],
+                307,
+                Some(format!("/tv{negotiate}")),
+            ),
+            // Without it, or with a wrong one: 401, a cookie would not do.
+            ("GET", "/api/v3/system/status", &[][..], 401, None),
+            (
+                "GET",
+                "/api/v3/system/status",
+                &[("X-Api-Key", "nope")][..],
+                401,
+                None,
+            ),
+            ("POST", "/signalr/messages/negotiate", &[][..], 401, None),
+            // A method no route takes asks for the key too.
+            ("POST", "/ping", &[][..], 401, None),
+            ("POST", "/foo", &[][..], 401, None),
+            ("POST", "/foo", &key[..], 307, Some("/tv/foo".to_string())),
+            // Pages ask for the login, outside the base.
+            ("GET", "/", &[][..], 302, Some("/login?returnUrl=%2F".to_string())),
+            (
+                "GET",
+                "/series?x=1",
+                &[][..],
+                302,
+                Some("/login?returnUrl=%2Fseries%3Fx%3D1".to_string()),
+            ),
+            (
+                "GET",
+                "/foo",
+                &key[..],
+                302,
+                Some("/login?returnUrl=%2Ffoo".to_string()),
+            ),
+            (
+                "GET",
+                "/initialize.json",
+                &[][..],
+                302,
+                Some("/login?returnUrl=%2Finitialize.json".to_string()),
+            ),
+            (
+                "GET",
+                "/favicon.ico",
+                &[][..],
+                302,
+                Some("/login?returnUrl=%2Ffavicon.ico".to_string()),
+            ),
+            (
+                "GET",
+                "/tvx/ping",
+                &[][..],
+                302,
+                Some("/login?returnUrl=%2Ftvx%2Fping".to_string()),
+            ),
+            // Inside, in any case: the login redirect in the case asked.
+            ("GET", "/TV/ping", &[][..], 200, None),
+            (
+                "GET",
+                "/tv/series?x=1",
+                &[][..],
+                302,
+                Some("/tv/login?returnUrl=%2Ftv%2Fseries%3Fx%3D1".to_string()),
+            ),
+            (
+                "GET",
+                "/TV/series",
+                &[][..],
+                302,
+                Some("/TV/login?returnUrl=%2FTV%2Fseries".to_string()),
+            ),
+        ] {
+            let (got, answer, _) = ask(&app, method, path, headers, "").await;
+            assert_eq!(got.as_u16(), expected, "{personality:?} {method} {path}");
+            assert_eq!(
+                header(&answer, "location"),
+                location.as_deref(),
+                "{personality:?} {method} {path}"
+            );
+            let versioned = got == StatusCode::TEMPORARY_REDIRECT && path.starts_with("/api");
+            assert_eq!(
+                header(&answer, "x-application-version"),
+                versioned.then_some(version),
+                "{personality:?} {method} {path}"
+            );
+            if got == StatusCode::TEMPORARY_REDIRECT {
+                assert_eq!(
+                    header(&answer, "cache-control"),
+                    None,
+                    "{personality:?} {method} {path}"
+                );
+            }
+        }
+    }
+}
+
+/// Under `/api` the originals answer what no action takes behind the key:
+/// 401 without it, then an empty 404 for `GET` and 405 `Allow: GET` for any
+/// other method, `/api/v3` and the other versions alike, with the API's
+/// headers. A page's path takes `GET` only: another method asks for the
+/// key (a cookie does not do) and gets 405. Recorded on Sonarr 4.0.20 and
+/// Radarr 6.4.4.
+#[tokio::test]
+async fn what_no_action_takes_is_refused_as_the_originals_refuse_it() {
+    for personality in [Personality::Sonarr, Personality::Radarr] {
+        let app = app_for(personality, "");
+        let version = unarr_api::compat::emulated_version(personality);
+        let key = [("X-Api-Key", KEY)];
+        for path in [
+            "/api/v1/foo",
+            "/api/v1/system/status",
+            "/api/v2/system/status",
+            "/api/foo",
+            "/API/V1/foo",
+            "/api/v3/nosuchthing",
+        ] {
+            for (method, expected) in [
+                ("GET", 404),
+                ("POST", 405),
+                ("PUT", 405),
+                ("DELETE", 405),
+                ("HEAD", 405),
+                ("OPTIONS", 405),
+            ] {
+                let (got, headers, body) = ask(&app, method, path, &key, "").await;
+                assert_eq!(got.as_u16(), expected, "{personality:?} {method} {path}");
+                assert!(body.is_empty(), "{personality:?} {method} {path}");
+                assert_eq!(
+                    header(&headers, "allow"),
+                    (expected == 405).then_some("GET"),
+                    "{personality:?} {method} {path}"
+                );
+                assert_eq!(
+                    header(&headers, "x-application-version"),
+                    Some(version),
+                    "{personality:?} {method} {path}"
+                );
+                // Not on an answer to `OPTIONS`, as recorded.
+                let cached = (method != "OPTIONS").then_some("no-cache, no-store");
+                assert_eq!(
+                    header(&headers, "cache-control"),
+                    cached,
+                    "{personality:?} {method} {path}"
+                );
+            }
+            for method in ["GET", "POST"] {
+                let (got, headers, _) = ask(&app, method, path, &[], "").await;
+                assert_eq!(got, StatusCode::UNAUTHORIZED, "{personality:?} {method} {path}");
+                assert_eq!(header(&headers, "location"), None);
+            }
+        }
+        let (got, _, body) = ask(&app, "GET", "/API", &key, "").await;
+        assert_eq!(got, StatusCode::OK);
+        let body: serde_json::Value = serde_json::from_slice(&body).unwrap();
+        assert_eq!(body, serde_json::json!({"current": "v3", "deprecated": []}));
+        // `/apix` is a page, behind the login.
+        let (got, headers, _) = ask(&app, "GET", "/apix/foo", &key, "").await;
+        assert_eq!(got, StatusCode::FOUND);
+        assert_eq!(
+            header(&headers, "location"),
+            Some("/login?returnUrl=%2Fapix%2Ffoo")
+        );
+        for method in ["POST", "PUT", "DELETE", "HEAD", "OPTIONS"] {
+            assert_eq!(
+                ask(&app, method, "/foo", &[], "").await.0,
+                StatusCode::UNAUTHORIZED,
+                "{method}"
+            );
+            let (got, headers, _) = ask(&app, method, "/foo", &key, "").await;
+            assert_eq!(got, StatusCode::METHOD_NOT_ALLOWED, "{method}");
+            assert_eq!(header(&headers, "allow"), Some("GET"), "{method}");
+        }
+        // The key does not open a page.
+        let (got, headers, _) = ask(&app, "GET", "/foo", &key, "").await;
+        assert_eq!(got, StatusCode::FOUND);
+        assert_eq!(header(&headers, "location"), Some("/login?returnUrl=%2Ffoo"));
+    }
+}
+
+/// With Allowed Hosts set, the host checked is the one a proxy the
+/// installation trusts says the client asked for: the originals run the
+/// forwarded headers before the host filter. Refused, the request gets the
+/// framework's page and a line in the log. Recorded on Sonarr 4.0.20 and
+/// Radarr 6.4.4 with `AllowedHosts` `tv.example.com`, the loopback trusted
+/// by default, `192.0.2.2` not.
+#[tokio::test]
+async fn a_trusted_proxys_forwarded_host_is_what_allowed_hosts_checks() {
+    use tracing_subscriber::layer::SubscriberExt;
+    let logs = LogBuffer::new();
+    let _guard = tracing::subscriber::set_default(tracing_subscriber::registry().with(logs.clone()));
+    let app = app_edited(Personality::Sonarr, "", |host| {
+        host.allowed_hosts = "tv.example.com".into()
+    });
+    let lo: std::net::SocketAddr = "127.0.0.1:40000".parse().unwrap();
+    let other: std::net::SocketAddr = "192.0.2.2:40000".parse().unwrap();
+    for (peer, host, forwarded, expected) in [
+        (lo, Some("tv.example.com"), &[][..], 200),
+        (lo, Some("unarr:8989"), &[][..], 400),
+        (
+            lo,
+            Some("unarr:8989"),
+            &[("X-Forwarded-Host", "tv.example.com")][..],
+            200,
+        ),
+        (
+            lo,
+            Some("unarr:8989"),
+            &[("X-Forwarded-Host", "tv.example.com:443")][..],
+            200,
+        ),
+        (
+            lo,
+            Some("tv.example.com"),
+            &[("X-Forwarded-Host", "evil.example")][..],
+            400,
+        ),
+        (
+            lo,
+            Some("unarr:8989"),
+            &[("X-Forwarded-Host", "evil.example, tv.example.com")][..],
+            400,
+        ),
+        (
+            lo,
+            Some("unarr:8989"),
+            &[("X-Forwarded-Host", "tv.example.com, evil.example")][..],
+            200,
+        ),
+        (
+            lo,
+            Some("unarr:8989"),
+            &[
+                ("X-Forwarded-Host", "tv.example.com"),
+                ("X-Forwarded-For", "10.1.2.3"),
+            ][..],
+            200,
+        ),
+        (
+            lo,
+            Some("unarr:8989"),
+            &[
+                ("X-Forwarded-Host", "evil.example, tv.example.com"),
+                ("X-Forwarded-For", "10.1.2.3, 127.0.0.1"),
+            ][..],
+            400,
+        ),
+        (
+            other,
+            Some("unarr:8989"),
+            &[("X-Forwarded-Host", "tv.example.com")][..],
+            400,
+        ),
+        (
+            other,
+            Some("tv.example.com"),
+            &[("X-Forwarded-Host", "evil.example")][..],
+            200,
+        ),
+        (lo, Some("unarr:8989"), &[("X-Forwarded-Host", "")][..], 400),
+        (lo, None, &[][..], 200),
+    ] {
+        let mut request = Request::builder()
+            .uri("/api/v3/system/status")
+            .header("X-Api-Key", KEY)
+            .extension(axum::extract::ConnectInfo(peer));
+        if let Some(host) = host {
+            request = request.header("Host", host);
+        }
+        for (name, value) in forwarded {
+            request = request.header(*name, *value);
+        }
+        let response = app
+            .clone()
+            .oneshot(request.body(Body::empty()).unwrap())
+            .await
+            .unwrap();
+        assert_eq!(
+            response.status().as_u16(),
+            expected,
+            "{peer} {host:?} {forwarded:?}"
+        );
+        if expected == 400 {
+            assert_eq!(header(response.headers(), "content-type"), Some("text/html"));
+            let body = axum::body::to_bytes(response.into_body(), usize::MAX)
+                .await
+                .unwrap();
+            assert!(body.starts_with(b"<!DOCTYPE HTML PUBLIC"));
+            assert!(
+                body.ends_with(b"<p>HTTP Error 400. The request hostname is invalid.</p>\r\n</BODY></HTML>")
+            );
+        }
+    }
+    let refused: Vec<String> = logs
+        .entries()
+        .into_iter()
+        .rev()
+        .filter(|e| e.logger == "Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware")
+        .map(|e| format!("{}|{}", e.level, e.message))
+        .collect();
+    assert_eq!(
+        refused,
+        [
+            "info|The host 'unarr:8989' does not match an allowed host.",
+            "info|The host 'evil.example' does not match an allowed host.",
+            "info|The host 'evil.example' does not match an allowed host.",
+            "info|The host 'evil.example' does not match an allowed host.",
+            "info|The host 'unarr:8989' does not match an allowed host.",
+            "info|The host 'unarr:8989' does not match an allowed host.",
+        ]
+    );
+}
+
+/// A login, a failed one, a logout, and Basic credentials on every
+/// request leave the lines log-based intrusion detection reads, as the
+/// originals write them (recorded on Sonarr 4.0.20 and Radarr 6.4.4):
+/// the client's address once the trusted proxies have spoken, the user
+/// name as given. Radarr does not log a success.
+#[tokio::test]
+async fn logins_and_logouts_are_logged_for_intrusion_detection() {
+    use tracing_subscriber::layer::SubscriberExt;
+    let lo: std::net::SocketAddr = "127.0.0.1:40000".parse().unwrap();
+    let other: std::net::SocketAddr = "192.0.2.2:40000".parse().unwrap();
+    let send =
+        |app: axum::Router, method: &str, path: &str, peer, headers: &[(&str, &str)], body: &'static str| {
+            let mut request = Request::builder()
+                .method(method)
+                .uri(path)
+                .extension(axum::extract::ConnectInfo(peer));
+            for (name, value) in headers {
+                request = request.header(*name, *value);
+            }
+            app.oneshot(request.body(Body::from(body)).unwrap())
+        };
+    let form = [("Content-Type", "application/x-www-form-urlencoded")];
+    let forwarded = [
+        ("Content-Type", "application/x-www-form-urlencoded"),
+        ("X-Forwarded-For", "10.9.8.7"),
+    ];
+    for personality in [Personality::Sonarr, Personality::Radarr] {
+        let logs = LogBuffer::new();
+        let _guard = tracing::subscriber::set_default(tracing_subscriber::registry().with(logs.clone()));
+        let app = app_for(personality, "");
+        for (peer, headers, body) in [
+            (lo, &form[..], "username=unarr&password=nope"),
+            (lo, &form[..], "username=nobody&password=nope"),
+            (other, &form[..], "username=unarr&password=nope"),
+            (lo, &forwarded[..], "username=unarr&password=nope"),
+            (lo, &form[..], "username=unarr&password=fixture"),
+        ] {
+            assert_eq!(
+                send(app.clone(), "POST", "/login", peer, headers, body)
+                    .await
+                    .unwrap()
+                    .status(),
+                StatusCode::FOUND
+            );
+        }
+        assert_eq!(
+            send(app.clone(), "GET", "/logout", lo, &[], "")
+                .await
+                .unwrap()
+                .status(),
+            StatusCode::FOUND
+        );
+        let mut expected = vec![
+            "warn|Auth-Failure ip 127.0.0.1 username 'unarr'",
+            "warn|Auth-Failure ip 127.0.0.1 username 'nobody'",
+            "warn|Auth-Failure ip 192.0.2.2 username 'unarr'",
+            "warn|Auth-Failure ip 10.9.8.7 username 'unarr'",
+            "info|Auth-Success ip 127.0.0.1 username 'unarr'",
+            "info|Auth-Logout ip 127.0.0.1 username ''",
+        ];
+        if personality == Personality::Radarr {
+            expected.remove(4);
+        }
+        let lines: Vec<String> = logs
+            .entries()
+            .into_iter()
+            .rev()
+            .filter(|e| e.logger == "Auth")
+            .map(|e| format!("{}|{}", e.level, e.message))
+            .collect();
+        assert_eq!(lines, expected, "{personality:?}");
+    }
+
+    // Basic, Sonarr's: each request with credentials, none without.
+    let logs = LogBuffer::new();
+    let _guard = tracing::subscriber::set_default(tracing_subscriber::registry().with(logs.clone()));
+    let app = app_edited(Personality::Sonarr, "", |host| {
+        host.authentication_method = unarr_core::config::AuthenticationMethod::Basic
+    });
+    use base64::Engine;
+    let basic = |user: &str, password: &str| {
+        format!(
+            "Basic {}",
+            base64::engine::general_purpose::STANDARD.encode(format!("{user}:{password}"))
+        )
+    };
+    for (peer, credentials, expected) in [
+        (lo, Some(basic("unarr", "nope")), 401),
+        (lo, Some(basic("nobody", "nope")), 401),
+        (lo, Some(basic("unarr", "fixture")), 200),
+        (lo, None, 401),
+        (other, Some(basic("unarr", "nope")), 401),
+    ] {
+        let headers: Vec<(&str, &str)> = credentials
+            .iter()
+            .map(|c| ("Authorization", c.as_str()))
+            .collect();
+        let response = send(app.clone(), "GET", "/", peer, &headers, "").await.unwrap();
+        assert_eq!(response.status().as_u16(), expected, "{peer} {credentials:?}");
+        if expected == 401 {
+            assert_eq!(
+                header(response.headers(), "www-authenticate"),
+                Some("Basic realm=\"Sonarr\"")
+            );
+        }
+    }
+    let lines: Vec<String> = logs
+        .entries()
+        .into_iter()
+        .rev()
+        .filter(|e| e.logger == "Auth")
+        .map(|e| format!("{}|{}", e.level, e.message))
+        .collect();
+    assert_eq!(
+        lines,
+        [
+            "warn|Auth-Failure ip 127.0.0.1 username 'unarr'",
+            "warn|Auth-Failure ip 127.0.0.1 username 'nobody'",
+            "info|Auth-Success ip 127.0.0.1 username 'unarr'",
+            "warn|Auth-Failure ip 192.0.2.2 username 'unarr'",
+        ]
+    );
 }
 
 /// The web app manifest and the tile description are filled in as they

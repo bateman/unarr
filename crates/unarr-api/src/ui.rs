@@ -247,6 +247,7 @@ pub async fn login(
         .get("returnUrl")
         .map(str::to_string)
         .unwrap_or_default();
+    let remote = remote.map(|c| c.0 .0.ip());
     let username = form.username.to_lowercase();
     let password = form.password.clone();
     let user = state
@@ -268,13 +269,15 @@ pub async fn login(
         None => None,
     };
     let Some(user) = user else {
+        log_auth(&state, remote, &headers, AuthOutcome::Failure, &form.username);
         return found(&format!(
             "{url_base}/login?returnUrl={}&loginFailed=true",
             percent_encode(&return_url)
         ));
     };
+    log_auth(&state, remote, &headers, AuthOutcome::Success, &form.username);
     let persistent = form.remember_me == "on";
-    let secure = over_https(&state, remote.map(|c| c.0 .0.ip()), &headers);
+    let secure = over_https(&state, remote, &headers);
     let cookie = issue_cookie(&state, &user.identifier, persistent, secure);
     // Only a local path: not another host (`//host`), no backslash, which
     // browsers read as a slash (`/\host`), and no control character, which
@@ -297,7 +300,19 @@ pub async fn login(
     response
 }
 
-pub async fn logout(State(state): State<AppState>) -> Response {
+pub async fn logout(
+    State(state): State<AppState>,
+    remote: Option<axum::Extension<ConnectInfo<std::net::SocketAddr>>>,
+    headers: HeaderMap,
+) -> Response {
+    // The originals name nobody here, signed in or not.
+    log_auth(
+        &state,
+        remote.map(|c| c.0 .0.ip()),
+        &headers,
+        AuthOutcome::Logout,
+        "",
+    );
     let name = cookie_name(&state);
     let expired = format!(
         "{name}=; Path={}; Max-Age=0; HttpOnly; SameSite=Lax",
@@ -429,43 +444,36 @@ fn session(state: &AppState, headers: &HeaderMap) -> Option<Session> {
     })
 }
 
-/// Whether the request reached the proxy in front over HTTPS: the peer is
-/// one `TrustedNetworks` believes and it says so.
+/// Whether the request reached the proxy in front over HTTPS: a proxy
+/// `TrustedNetworks` believes says so (`X-Forwarded-Proto`).
 fn over_https(state: &AppState, remote: Option<std::net::IpAddr>, headers: &HeaderMap) -> bool {
-    remote.is_some_and(|peer| state.settings().trusted_networks.contains(peer))
-        && headers
-            .get_all("x-forwarded-proto")
-            .iter()
-            .filter_map(|v| v.to_str().ok())
-            .flat_map(|v| v.split(','))
-            .next_back()
-            .is_some_and(|proto| proto.trim().eq_ignore_ascii_case("https"))
+    crate::forwarded::walk(remote, headers, &state.settings().trusted_networks)
+        .scheme
+        .is_some_and(|scheme| scheme.eq_ignore_ascii_case("https"))
 }
 
 /// `scheme://host` as the client names this server: the `Host` header, or
 /// what a proxy `TrustedNetworks` believes says it was asked for. `None`
 /// for a request that names no host (HTTP/1.0).
 fn origin(state: &AppState, remote: Option<std::net::IpAddr>, headers: &HeaderMap) -> Option<String> {
-    let trusted = remote.is_some_and(|peer| state.settings().trusted_networks.contains(peer));
-    let forwarded = headers
-        .get_all("x-forwarded-host")
-        .iter()
-        .filter_map(|v| v.to_str().ok())
-        .flat_map(|v| v.split(','))
-        .next_back()
-        .filter(|_| trusted);
-    let host = forwarded
-        .or_else(|| headers.get(header::HOST).and_then(|v| v.to_str().ok()))
-        .map(str::trim)
-        // A host name, with a port or without: nothing that could start
-        // another header or another URL.
-        .filter(|h| {
-            !h.is_empty()
-                && h.bytes().all(|b| {
-                    b.is_ascii_alphanumeric() || matches!(b, b'.' | b'-' | b':' | b'[' | b']' | b'_')
-                })
-        })?;
-    let scheme = if over_https(state, remote, headers) {
+    let forwarded = crate::forwarded::walk(remote, headers, &state.settings().trusted_networks);
+    let host = forwarded.host.or_else(|| {
+        headers
+            .get(header::HOST)
+            .and_then(|v| v.to_str().ok())
+            .map(str::to_owned)
+    })?;
+    let host = host.trim();
+    // A host name, with a port or without: nothing that could start
+    // another header or another URL.
+    let plain = !host.is_empty()
+        && host
+            .bytes()
+            .all(|b| b.is_ascii_alphanumeric() || matches!(b, b'.' | b'-' | b':' | b'[' | b']' | b'_'));
+    if !plain {
+        return None;
+    }
+    let scheme = if forwarded.scheme.is_some_and(|s| s.eq_ignore_ascii_case("https")) {
         "https"
     } else {
         "http"
@@ -473,24 +481,51 @@ fn origin(state: &AppState, remote: Option<std::net::IpAddr>, headers: &HeaderMa
     Some(format!("{scheme}://{host}"))
 }
 
+/// `AuthenticationService`'s lines, which log-based intrusion detection
+/// (fail2ban's `Auth-Failure ip <HOST>`) reads: under the `Auth` logger,
+/// failures as warnings, with the client's address once the proxies that
+/// are believed have spoken and the user name as it was given. Sonarr
+/// 4.0.20 also logs each success, at info; Radarr 6.4.4 does not.
+pub(crate) fn log_auth(
+    state: &AppState,
+    remote: Option<std::net::IpAddr>,
+    headers: &HeaderMap,
+    outcome: AuthOutcome,
+    username: &str,
+) {
+    let client = crate::forwarded::client(remote, headers, &state.settings().trusted_networks);
+    let ip = client.address.map(|a| a.to_string()).unwrap_or_default();
+    match outcome {
+        AuthOutcome::Failure => tracing::warn!(target: "Auth", "Auth-Failure ip {ip} username '{username}'"),
+        AuthOutcome::Success if state.personality() != Personality::Radarr => {
+            tracing::info!(target: "Auth", "Auth-Success ip {ip} username '{username}'")
+        }
+        AuthOutcome::Success => {}
+        AuthOutcome::Logout => tracing::info!(target: "Auth", "Auth-Logout ip {ip} username '{username}'"),
+    }
+}
+
+/// What [`log_auth`] reports.
+#[derive(Clone, Copy)]
+pub(crate) enum AuthOutcome {
+    Failure,
+    Success,
+    Logout,
+}
+
 /// Basic authentication sends the password on every request, posters
 /// included: the user is read on the database thread and the slow hash runs
 /// on a blocking worker, never on the async ones.
-async fn basic_auth_valid(state: &AppState, headers: &HeaderMap) -> bool {
-    let Some(value) = headers.get(header::AUTHORIZATION).and_then(|v| v.to_str().ok()) else {
-        return false;
-    };
-    let Some(encoded) = value.strip_prefix("Basic ") else {
-        return false;
-    };
-    let Ok(decoded) = base64::engine::general_purpose::STANDARD.decode(encoded.trim()) else {
-        return false;
-    };
+async fn basic_auth(state: &AppState, headers: &HeaderMap) -> Option<(String, bool)> {
+    let value = headers.get(header::AUTHORIZATION).and_then(|v| v.to_str().ok())?;
+    let encoded = value.strip_prefix("Basic ")?;
+    let decoded = base64::engine::general_purpose::STANDARD
+        .decode(encoded.trim())
+        .ok()?;
     let decoded = String::from_utf8_lossy(&decoded).into_owned();
-    let Some((username, password)) = decoded.split_once(':') else {
-        return false;
-    };
-    let username = username.to_lowercase();
+    let (given, password) = decoded.split_once(':')?;
+    let given = given.to_string();
+    let username = given.to_lowercase();
     let password = password.to_string();
     let user = state
         .db()
@@ -502,12 +537,13 @@ async fn basic_auth_valid(state: &AppState, headers: &HeaderMap) -> bool {
         .await
         .ok()
         .flatten();
-    match user {
+    let valid = match user {
         Some(u) => crate::blocking::run(move || verify_password(&u, &password))
             .await
             .unwrap_or(false),
         None => false,
-    }
+    };
+    Some((given, valid))
 }
 
 use unarr_core::outbound::{is_cgnat_address, is_local_address};
@@ -571,7 +607,20 @@ pub async fn require_ui_auth(State(state): State<AppState>, request: Request, ne
             }
             None => false,
         },
-        AuthenticationMethod::Basic => basic_auth_valid(&state, headers).await,
+        // Each request that carries credentials is logged, as the
+        // originals log it.
+        AuthenticationMethod::Basic => match basic_auth(&state, headers).await {
+            Some((username, valid)) => {
+                let outcome = if valid {
+                    AuthOutcome::Success
+                } else {
+                    AuthOutcome::Failure
+                };
+                log_auth(&state, remote, headers, outcome, &username);
+                valid
+            }
+            None => false,
+        },
         _ => true,
     };
     if session_ok {
@@ -584,22 +633,26 @@ pub async fn require_ui_auth(State(state): State<AppState>, request: Request, ne
     match host.authentication_method {
         AuthenticationMethod::Basic => (
             StatusCode::UNAUTHORIZED,
-            [(header::WWW_AUTHENTICATE, "Basic realm=\"Unarr\"")],
+            [(
+                header::WWW_AUTHENTICATE,
+                HeaderValue::from_str(&format!("Basic realm=\"{}\"", state.personality().app_name()))
+                    .unwrap_or(HeaderValue::from_static("Basic")),
+            )],
         )
             .into_response(),
         _ => {
-            let return_url = request
-                .uri()
-                .path_and_query()
-                .map(|p| p.to_string())
-                .unwrap_or_default();
             // As ASP.NET's cookie authentication challenges: the whole
             // URL of the login page, and where to come back to as one
-            // escaped value.
+            // escaped value, both as the client asked: the URL base in
+            // its case, a slash after it kept, and no base at all for a
+            // path outside it (the originals send it to the login page
+            // outside the base, which sends it in).
+            let asked = crate::asked_uri(&request);
+            let return_url = asked.path_and_query().map(|p| p.to_string()).unwrap_or_default();
             found(&format!(
                 "{}{}/login?returnUrl={}",
                 origin(&state, remote, headers).unwrap_or_default(),
-                state.settings().url_base,
+                crate::url_base_as_asked(&state, &request),
                 escape_data(&return_url)
             ))
         }

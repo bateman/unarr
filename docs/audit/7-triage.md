@@ -20,27 +20,35 @@ Updated a third time on 17 November 2026: row 1.13 of `2-http.md`, item 18
 of the list below, is closed. A panic costs the request or the command it
 happened in (`docs/DESIGN.md`, section 20).
 
+Updated a fourth time on 19 November 2026: four of the rows the reports
+rated medium (1.3, 1.8, 1.10 and 1.24 of `2-http.md`, items 8, 9, 12 and 19
+below) are closed, and with them four low rows of the same code (1.6, 1.11,
+3.11, 3.17). Each was recorded first on Sonarr 4.0.20 and Radarr 6.4.4
+under a changed `config.xml`; "What was closed afterwards" says how.
+
 ## Result
 
 | Report | Rows | Closed | Open | Partial | Deliberate | Not applicable |
 |--------|------|--------|------|---------|------------|----------------|
 | 1. Settings | 18 | 11 | 4 | 1 | 0 | 2 |
-| 2. HTTP | 58 | 22 | 26 | 6 | 3 | 1 |
+| 2. HTTP | 58 | 30 | 20 | 4 | 3 | 1 |
 | 3 and 4. Routes and UI calls | 78 | 39 | 25 | 2 | 2 | 10 |
 | 6. Events, commands, housekeeping | 39 | 30 | 5 | 1 | 2 | 1 |
-| Together | 193 | 102 | 60 | 10 | 7 | 14 |
+| Together | 193 | 110 | 54 | 8 | 7 | 14 |
 
-Before the update: 83 closed, 78 open, 13 partial, 6 deliberate. Some gaps
+Before the first update: 83 closed, 78 open, 13 partial, 6 deliberate;
+before the fourth, 102 closed, 60 open, 10 partial. Some gaps
 are counted in two reports (the SignalR transports, the file dates), so the
 distinct open items are some sixty-five. States: **closed**, does what the report says the original
 does; **open**; **partial**; **deliberate**, a recorded decision to differ;
 **not applicable**, nothing to port.
 
 "Still open: the low ones" was wrong on two counts. Nine findings the
-reports rated medium were never in the README's numbered list and are open
+reports rated medium were never in the README's numbered list and were open
 or partial: script import and file dates after a series scan
 (`1-settings.md`), and rows 1.3, 1.8, 1.10, 1.24, 1.29, 2.11 and 4.5 of
-`2-http.md`. And well over half of the low rows are closed.
+`2-http.md`; all of `2-http.md`'s but 2.11 are closed since. And well over
+half of the low rows are closed.
 
 How far to trust it: reports 1, 3, 4 and 6 were read against the code, not
 run; report 2 was read and, where that did not settle it, tried on a running
@@ -69,18 +77,18 @@ Would show in ordinary use:
 
 Would show in a particular set-up:
 
-8. **A URL base**: a request outside it is a 404, `/ping` included, where
-   the original redirects into it (1.10); one saved from the UI is half
-   applied until the restart (1.35); it is matched with its case (1.11).
-   Small.
-9. **A reverse proxy that rewrites `Host`, with Allowed Hosts set** (1.3):
-   every request is refused. Small.
+8. **A URL base**: ~~a request outside it is a 404, `/ping` included, where
+   the original redirects into it (1.10)~~, ~~it is matched with its case
+   (1.11)~~, both closed; one saved from the UI is half applied until the
+   restart (1.35). Small.
+9. ~~**A reverse proxy that rewrites `Host`, with Allowed Hosts set** (1.3):
+   every request is refused~~. Closed.
 10. **A proxy that does not pass WebSocket upgrades** (2.11): no live
     updates. Larger.
 11. ~~A body over 2 MiB~~ (1.29). Closed: the limit is 64 MiB, a decision
     to differ from the original, which has none.
-12. **Log-based intrusion detection** (1.8): no line for a failed or
-    successful login. Small.
+12. ~~**Log-based intrusion detection** (1.8): no line for a failed or
+    successful login~~. Closed.
 13. **Change File Date switched on** (`FileDate`): nothing after a series
     scan; the movie side does it. Small.
 14. **Import Using Script** (`UseScriptImport`): stored and ignored, the
@@ -97,15 +105,15 @@ Worth a decision rather than a fix:
 18. ~~A panic ends the process~~ (1.13): the release profile aborted, and
     one process holds every personality. Decided and closed: the profile
     unwinds, and a panic costs one request or one command.
-19. **Paths under `/api` that are not v3** (1.24) reach the page fallback,
-    and wrong-case paths outside the API (1.15) reach the UI guard, which
-    redirects a wrong-case SignalR negotiation with its token in
-    `Location`. No client is known to do either.
+19. ~~**Paths under `/api` that are not v3** (1.24) reach the page
+    fallback~~ (closed), and wrong-case paths outside the API (1.15) reach
+    the UI guard, which redirects a wrong-case SignalR negotiation with its
+    token in `Location`. No client is known to do it.
 
 The rest is routes nobody is known to call (`GET` by id on the `config/*`
 resources, the metadata and `languageprofile` writes,
-`qualitydefinition/limits`), headers nobody is known to read (`Server`, the
-Basic realm, three static content types, the backup's type), `robots.txt`,
+`qualitydefinition/limits`), headers nobody is known to read (`Server`,
+three static content types, the backup's type), `robots.txt`,
 Brotli, the 503 while starting, the console log settings, the deprecated
 `CheckForFinishedDownload`, the legacy `config.xml` user.
 
@@ -175,6 +183,54 @@ how), which the long list did not have to be recorded again for.
   takes 64 MiB once the key is good, the ceiling it already had on what it
   reads from indexers and clients; no limit at all would let one request
   end the process every personality runs in.
+- **Allowed Hosts behind a proxy, the login lines, the URL base, `/api`
+  outside v3** (1.3, 1.6, 1.8, 1.10, 1.11, 1.24, 3.11, 3.17). Each original
+  was run on its fixture with `config.xml` changed for the case
+  (`AllowedHosts` `tv.example.com`; `UrlBase` `/tv`; Basic; Disabled for
+  Local Addresses), and asked from the loopback, which the framework
+  trusts, and from another address of the machine, which it does not;
+  then Unarr the same way, until nothing differed but what Radarr's Basic
+  does (below). What the recording showed:
+  - The forwarded headers run before the host filter, all three in one
+    walk from their last entries back, with no limit on the entries: a
+    trusted proxy's `X-Forwarded-Host` is the host checked, and with no
+    `X-Forwarded-For` beside it every host it lists is applied in turn,
+    so the leftmost stands. A refused host gets the framework's HTML page
+    (`text/html`, no charset) and an info line of
+    `Microsoft.AspNetCore.HostFiltering.HostFilteringMiddleware`.
+  - `Auth-Failure ip <address> username '<as typed>'` at warn under the
+    logger `Auth`, the address the trusted proxies name; `Auth-Logout`
+    with an empty name, signed in or not. Sonarr logs `Auth-Success` at
+    info, for the form and for every request with Basic credentials;
+    Radarr 6.4.4 logs no success. A wrong API key logs nothing. The Basic
+    realm is the application's name whatever the instance is called.
+  - Outside the URL base the request is routed as if the base were not
+    there and authenticated so (the key for the API, the feed and SignalR,
+    the login for a page, nothing for `/ping`, `/login`, `/logout` and
+    `/Content`), then sent into the base with a 307 that keeps the method
+    and the query and carries the version header on an API path. A
+    page's login redirect leaves the base out; inside it, the redirect
+    and its `returnUrl` keep the base as asked, its case and a slash
+    after it included, which closes that part of 3.9. The base is matched
+    in any case; `/favicon.ico` is behind the login.
+  - Under `/api`, whatever the version, a path no action takes asks for
+    the key (401, a cookie does not do), then answers an empty 404 to
+    `GET` and 405 `Allow: GET` to any other method, with the API's
+    headers (no cache headers on `OPTIONS`); `GET /API` is the API's
+    root. `/api/v3` had answered 404 to every method. A page's path
+    takes `GET` alone: another method, `HEAD` included, asks for the key
+    and gets 405; the covers and the static files were left as they were,
+    not recorded.
+
+  Tests `tests/http.rs` (`a_request_outside_the_url_base_is_sent_into_it_once_authenticated`,
+  `what_no_action_takes_is_refused_as_the_originals_refuse_it`,
+  `a_trusted_proxys_forwarded_host_is_what_allowed_hosts_checks`,
+  `logins_and_logouts_are_logged_for_intrusion_detection`), `contract.rs`
+  (`url_base_is_matched_in_any_case`), `forwarded.rs` for the walk.
+  Found on the way: Radarr 6.4.4 has no Basic authentication any more. It
+  writes `forms` over `Basic` in `config.xml` at start and sends the
+  browser to its login page, where Unarr's Radarr still challenged for
+  Basic credentials: fixed on Radarr's side, see `8-radarr.md`.
 
 Found on the way, with no row of their own. With a proxy whose name
 does not resolve the original's `ProxyCheck` throws, and the whole run of
@@ -221,7 +277,7 @@ with them where there was something to close
 
 ## The server outside the API bodies (`2-http.md`)
 
-58 rows were DIFFERENT, MISSING or UNSURE: 22 closed, 26 open, 6 partial, 3
+58 rows were DIFFERENT, MISSING or UNSURE: 30 closed, 20 open, 4 partial, 3
 deliberate, 1 not applicable. Read, and where reading did not settle it tried
 on a debug build of `unarrd` on the Sonarr fixture ("live"). The original's
 side of rows 1.6, 1.11, 1.15, 1.18, 1.30, 1.34, 2.12, 4.11 and 4.20 was never
@@ -232,13 +288,13 @@ is `crates/unarr-api/src/`.
 | Row | Finding | Severity then | State | Evidence | What is left, who notices |
 |---|---|---|---|---|---|
 | 1.2 | `X-Forwarded-Proto` gives the scheme | low | CLOSED | `api/ui.rs:390`; tests `tests/http.rs:491`; live | |
-| 1.3 | `X-Forwarded-Host` before the host filter | medium | PARTIAL | `api/hosts.rs:114` reads `Host` only; the header serves the login redirect alone; live: 400 | a reverse proxy that rewrites `Host`, with Allowed Hosts set: every request is refused |
+| 1.3 | `X-Forwarded-Host` before the host filter | medium | CLOSED | `api/forwarded.rs` (`walk`), `api/hosts.rs` (`require_allowed_host`); test `tests/http.rs` (`a_trusted_proxys_forwarded_host_is_what_allowed_hosts_checks`); recorded | |
 | 1.5 | `0.0.0.0` and `[::]` in Allowed Hosts dropped | low | DELIBERATE | `docs/DESIGN.md` section 11, `api/hosts.rs:33`. The report disputes that the original drops them; reading its `AllowedHostsParser.cs` would settle it | nobody in practice |
-| 1.6 | body of the 400 for a refused host | low | OPEN | `api/hosts.rs:119`: empty | nobody |
+| 1.6 | body of the 400 for a refused host | low | CLOSED | `api/hosts.rs`: the framework's page as recorded, `text/html`, and the host filter's log line; same test | |
 | 1.7 | request log | low | OPEN | `api/lib.rs:354`: a debug span, no line per request | whoever reads the logs |
-| 1.8 | `Auth-Failure`, `Auth-Success`, `Auth-Logout` log lines | medium | OPEN | no log call in `api/ui.rs`; live: a failed login logs nothing | fail2ban and the like see nothing |
-| 1.10 | a request outside the URL base | medium | OPEN | `tests/http.rs:360` asserts 404; live | no 307 into the base: a browser on `host:8989/`, a probe on `/ping` without the base |
-| 1.11 | URL base matched without case | low | OPEN | `api/lib.rs:366`; live | a bookmark or proxy rule in another case |
+| 1.8 | `Auth-Failure`, `Auth-Success`, `Auth-Logout` log lines | medium | CLOSED | `api/ui.rs` (`log_auth`): the form, Basic, the logout; Radarr logs no success, as recorded; test `tests/http.rs` (`logins_and_logouts_are_logged_for_intrusion_detection`) | |
+| 1.10 | a request outside the URL base | medium | CLOSED | `api/lib.rs` (`into_url_base` in each group, after its authentication); test `tests/http.rs` (`a_request_outside_the_url_base_is_sent_into_it_once_authenticated`); recorded | |
+| 1.11 | URL base matched without case | low | CLOSED | `api/lib.rs` (`normalize_path`); test `tests/contract.rs` (`url_base_is_matched_in_any_case`); recorded | |
 | 1.13 | a failure in a handler becomes a 500 | low | CLOSED | `Cargo.toml` sets `panic = "unwind"`; `api/http.rs` `catch_panic` inside the API's pipeline and `catch_panic_anywhere` around the router (`api/lib.rs`) answer the 500 recorded from both originals; `core/panics.rs`; `make panic-test` on a release build | |
 | 1.15 | routing without case outside the API | low | OPEN | `api/lib.rs:325`; live. A wrong-case SignalR negotiation under Forms is redirected with its `access_token` copied into `Location` | nobody known |
 | 1.16 | one trailing slash ignored | medium | CLOSED | `api/lib.rs:41`, `api/http.rs:330`; tests | |
@@ -249,13 +305,13 @@ is `crates/unarr-api/src/`.
 | 1.21 | 503 while starting | low | OPEN | `unarrd/src/main.rs:683` binds after the runtime started; live: connection refused | a proxy shows 502 where the original shows 503 |
 | 1.22 | no-cache headers on the API | low | CLOSED | `api/http.rs:207`; test | |
 | 1.23 | `/initialize.json` with `no-store` | medium | CLOSED | `api/routes/system.rs:144` | |
-| 1.24 | `/api`, `/api/v1/…`, other paths that are not v3 | medium | PARTIAL | `GET /api` answers; live: `/api/v1/foo` and `/api/foo` reach the page fallback, a 302 to the login under Forms, key or not | a client that probes versions or mistypes a path gets a redirect, not 401 or 404 |
+| 1.24 | `/api`, `/api/v1/…`, other paths that are not v3 | medium | CLOSED | `api/lib.rs` (`/api/{*rest}` behind the key), `api/routes/mod.rs` (`unknown_api_route`: 404 for `GET`, 405 `Allow: GET` for the rest, `/api/v3` too); test `tests/http.rs` (`what_no_action_takes_is_refused_as_the_originals_refuse_it`); recorded | |
 | 1.25 | unknown v3 route without a key: 401 | low | CLOSED | `api/lib.rs:269`; test | |
 | 1.27 | `If-Modified-Since` | low | NOT APPLICABLE | the original's never fires | |
 | 1.29 | request body limit | medium | DELIBERATE | 64 MiB once the key is good (`api/lib.rs:231`, `:285`), where the original has none (202 to a `PUT` of 120 MiB); the login form keeps 2 MiB; test `tests/http.rs:427` | a body over 64 MiB: 413 |
 | 1.30 | 406 for an `Accept` without JSON | low | OPEN | live: 200 JSON | nobody |
 | 1.31 | `application/json; charset=utf-8` | low | CLOSED | `api/http.rs:89` | |
-| 1.32 | `HEAD` | low | PARTIAL | API and feed 405, `/ping` 200 (`api/http.rs:63`); pages and static files still answer | nobody |
+| 1.32 | `HEAD` | low | PARTIAL | API and feed 405, `/ping` 200 (`api/http.rs:63`); a page 405 behind the key, as recorded (`api/lib.rs`, `pages_take_get_only`); static files and covers still answer | nobody |
 | 1.34 | `Server` header | low | OPEN | none sent | nobody |
 | 1.35 | what applies without a restart | unsure | PARTIAL | settled live: a saved URL base changes `/initialize.json`, the page links, the login redirect and the cookie path at once while the routes stay where they were; allowed hosts and trusted networks apply at once where the original waits | changing the URL base from the UI: broken until the restart |
 | 2.1 | `/ping` | high | CLOSED | `api/lib.rs:326` | |
@@ -272,11 +328,11 @@ is `crates/unarr-api/src/`.
 | 3.5 | cookie name with a non-ASCII instance name | low | OPEN | `api/state.rs:366` drops the letters, no folding | nobody |
 | 3.6 | session seven days, sliding | medium | CLOSED | `api/ui.rs:317`; test | |
 | 3.8 | forms login when the method is None | low | OPEN | `api/ui.rs:194` never looks at the method; live | nobody |
-| 3.9 | challenge under Forms | low | PARTIAL | absolute address and escaped `returnUrl` done; no 401 for `X-Requested-With`, and under a URL base `returnUrl` lacks the base | nobody known |
-| 3.11 | Basic realm | low | OPEN | `realm="Unarr"` (`api/ui.rs:543`) | a browser asks once more for credentials saved under "Sonarr" |
+| 3.9 | challenge under Forms | low | PARTIAL | absolute address, escaped `returnUrl`, and under a URL base the base as asked in both (recorded); no 401 for `X-Requested-With` | nobody known |
+| 3.11 | Basic realm | low | CLOSED | `realm="Sonarr"`, the application's name whatever the instance's, as recorded (`api/ui.rs`); same test as 1.8 | |
 | 3.15 | `TrustCgnatIpAddresses` | medium | CLOSED | `api/ui.rs:497`; test | |
 | 3.16 | IPv6 site-local counts as local | low | CLOSED | `core/outbound.rs:208`; test | |
-| 3.17 | `/favicon.ico` behind the login | low | OPEN | anonymous (`api/lib.rs:325`) | nobody |
+| 3.17 | `/favicon.ico` behind the login | low | CLOSED | in the pages' group (`api/lib.rs`); recorded outside a URL base, test as 1.10 | |
 | 4.3 | `?h=` cache breaker on asset links | low | OPEN | `api/ui.rs:92` adds the base only | stands in the way of 4.9 |
 | 4.5 | `manifest.json` placeholders | medium | CLOSED | `api/ui.rs:177`; golden `noauth-content-manifest`; test `tests/http.rs:379`, both personalities | its cache lifetime is row 4.9 |
 | 4.6 | `browserconfig.xml` placeholder | low | CLOSED | same handler; golden `noauth-content-browserconfig`; same test | |
@@ -294,7 +350,7 @@ What the triage found against the report and the README:
 
 - Seven medium rows of this report were never in the README's numbered
   list and were open or partial: 1.3, 1.8, 1.10, 1.24, 1.29, 2.11, 4.5
-  (1.29 and 4.5 since closed).
+  (all but 2.11 since closed).
 - Row 1.35 was unsure and is a real difference: a URL base saved from the
   UI is half applied until the restart.
 - Row 1.13 understates: the release profile aborts on a panic, so the
