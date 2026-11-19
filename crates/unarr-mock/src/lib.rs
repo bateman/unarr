@@ -41,6 +41,10 @@ pub struct Recorded {
     pub user_agent: String,
     /// The fixture file served, or a note.
     pub served: String,
+    /// The request's headers (names in lower case) and body, for the tests
+    /// that compare what Unarr sent with what an original sent.
+    pub headers: BTreeMap<String, String>,
+    pub body: Vec<u8>,
 }
 
 #[derive(Clone)]
@@ -363,7 +367,7 @@ async fn handle(
         if let Some(reply) = metadata::handle(&shared.fixtures, &path, uri.query().unwrap_or("")) {
             break 'route reply;
         }
-        if let Some(reply) = capture::handle(&shared.fixtures, &method, &path, &query, &body) {
+        if let Some(reply) = capture::handle(&shared.fixtures, &method, &path, &query, &headers, &body) {
             break 'route reply;
         }
         // `/big/<n>`: n bytes, for the tests of the response size ceiling.
@@ -388,6 +392,11 @@ async fn handle(
         query,
         user_agent,
         served: reply.served.clone(),
+        headers: headers
+            .iter()
+            .filter_map(|(k, v)| v.to_str().ok().map(|v| (k.as_str().to_string(), v.to_string())))
+            .collect(),
+        body: body.to_vec(),
     });
     let mut response = (
         reply.status,
