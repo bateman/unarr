@@ -1,8 +1,12 @@
 # Replacing the *arr services with Unarr in the homelab compose
 
-What to change in the `homelab` repository when Unarr reaches alpha and
-takes the place of the `sonarr` service for good. Until then the NAS runs it
-from a local, uncommitted edit of `docker/compose.media.yml`.
+What to change in the `homelab` repository when Unarr takes the place of
+the `sonarr` and `radarr` services for good. That is done: the homelab
+repository has the `unarr` service since its pull requests #571 and #572
+(19 November 2026), where the two originals' services are removed and
+`UPGRADE.md` says how to go back. Before, the NAS ran Unarr from a local,
+uncommitted edit of `docker/compose.media.yml`. What follows is kept as the
+record of what the change had to cover, and for the next personalities.
 
 **The container is named `unarr` and answers to the applications' names
 as network aliases** (`sonarr`, `radarr`, later `prowlarr` and `lidarr`):
@@ -71,11 +75,13 @@ Differences from the Sonarr service, and why:
 | `volumes` | `./config/unarr:/config`, Sonarr's config read-only | Unarr writes `<data>/sonarr/…`; the original files stay intact, so going back is restoring the old service |
 | `healthcheck.test` | `unarrd healthcheck` | `curl` does not exist in the image |
 
-The old `sonarr` service is disabled, not deleted (`profiles:
+The plan was to disable the old `sonarr` service, not delete it (`profiles:
 ["disabled"]`, and taken out of the `depends_on` of the services that name
 it, which then depend on `unarr`), so that its `container_name` and the
-alias do not collide and going back is one edit. Going back to Sonarr is
-the old service block again: its `config` directory was never written. What Unarr did in the meantime (history, imported files)
+alias do not collide and going back is one edit. The homelab's pull
+request #571 removed the service instead: going back is described in that
+repository's `UPGRADE.md`, from a revert of the change. Either way the
+original's `config` directory was never written. What Unarr did in the meantime (history, imported files)
 is then unknown to Sonarr.
 
 ## The Radarr service, from milestone 4d
@@ -142,9 +148,10 @@ too. The copy is read once, at the first start; it can be deleted once
 the import is done, and the original's folder is never touched, so going
 back stays possible.
 
-Then the `radarr` service is disabled, not deleted (see below:
+Then the `radarr` service was to be disabled, not deleted (see below:
 `profiles: ["disabled"]`, and `radarr` taken out of the `depends_on` of
-the four services that name it), and its name freed for the alias:
+the four services that name it; pull request #571 removed it, as it did
+`sonarr`), and its name freed for the alias:
 Prowlarr, Bazarr, Recyclarr and the Uptime Kuma monitor address Radarr by
 name, and the alias keeps the rest of the repository unchanged:
 
