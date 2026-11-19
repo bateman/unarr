@@ -46,6 +46,24 @@ pub struct ReceivedUri(pub axum::http::Uri);
 #[derive(Clone)]
 struct OutsideUrlBase;
 
+/// The URL base the router was built with. A base saved from the UI
+/// changes the settings at once, but the routes stay where they were until
+/// the restart (`docs/audit/7-triage.md`, row 1.35): what decides whether a
+/// path is inside the base, and where a 307 sends it, is this one, or a
+/// request inside the new base would be sent into it again and again.
+#[derive(Clone)]
+pub(crate) struct RoutedUrlBase(pub String);
+
+/// [`RoutedUrlBase`], or the settings' for a request that did not come
+/// through the router (a handler called on its own in a test).
+pub(crate) fn routed_url_base(state: &AppState, request: &axum::extract::Request) -> String {
+    request
+        .extensions()
+        .get::<RoutedUrlBase>()
+        .map(|b| b.0.clone())
+        .unwrap_or_else(|| state.settings().url_base.clone())
+}
+
 /// The URI the client asked for.
 pub(crate) fn asked_uri(request: &axum::extract::Request) -> axum::http::Uri {
     request
@@ -79,7 +97,7 @@ pub(crate) fn url_base_as_asked(state: &AppState, request: &axum::extract::Reque
     if request.extensions().get::<OutsideUrlBase>().is_some() {
         return String::new();
     }
-    let base = state.settings().url_base.clone();
+    let base = routed_url_base(state, request);
     let asked = asked_uri(request);
     match url_base_len(asked.path(), &base) {
         Some(n) => asked.path()[..n].to_owned(),
@@ -98,7 +116,7 @@ async fn normalize_path(
 ) -> axum::response::Response {
     let uri = request.uri().clone();
     request.extensions_mut().insert(ReceivedUri(uri.clone()));
-    let base = state.settings().url_base.clone();
+    let base = routed_url_base(&state, &request);
     let path = http::without_trailing_slash(uri.path());
     let (path, after_base) = match url_base_len(path, &base) {
         Some(n) => (format!("{base}{}", &path[n..]), n),
@@ -159,7 +177,7 @@ async fn into_url_base(
         return next.run(request).await;
     }
     let asked = asked_uri(&request);
-    let mut location = format!("{}{}", state.settings().url_base, asked.path());
+    let mut location = format!("{}{}", routed_url_base(&state, &request), asked.path());
     if let Some(query) = asked.query() {
         location.push('?');
         location.push_str(query);
@@ -630,6 +648,16 @@ pub fn router(state: AppState) -> Router {
         .layer(axum::middleware::from_fn_with_state(
             state.clone(),
             hosts::require_allowed_host,
+        ))
+        // Before anything reads it.
+        .layer(axum::middleware::map_request(
+            move |mut request: axum::extract::Request| {
+                let base = RoutedUrlBase(url_base.clone());
+                async move {
+                    request.extensions_mut().insert(base);
+                    request
+                }
+            },
         ))
         // Outermost, as the originals' exception handler is: a panic in a
         // page, in `/ping` or in a layer above costs that request only.

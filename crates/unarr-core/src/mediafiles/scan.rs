@@ -379,39 +379,34 @@ pub fn update_file_dates(db: &Db, config: &MediaManagementConfig, series: &Serie
         return Ok(0);
     }
     let series_id = series.id;
-    // `EpisodesWithFiles`, in the order of their ids, grouped by file in
-    // the order the files first appear.
-    let episodes = db.call_blocking(move |conn| store::episodes::list_episodes(conn, series_id, None))?;
-    let mut files: Vec<i64> = Vec::new();
-    for e in &episodes {
-        if e.episode_file_id > 0 && !files.contains(&e.episode_file_id) {
-            files.push(e.episode_file_id);
-        }
+    let (files, episodes) = db.call_blocking(move |conn| {
+        Ok((
+            store::episodes::list_files(conn, series_id)?,
+            store::episodes::list_episodes(conn, series_id, None)?,
+        ))
+    })?;
+    // `EpisodesWithFiles` grouped by file, in one pass: the episodes in the
+    // order of their ids, so that the first of each file is the one the
+    // original's `First()` takes.
+    let mut by_file: std::collections::HashMap<i64, Vec<Episode>> = std::collections::HashMap::new();
+    for e in episodes.into_iter().filter(|e| e.episode_file_id > 0) {
+        by_file.entry(e.episode_file_id).or_default().push(e);
     }
-    let ids = files.clone();
-    let paths: std::collections::HashMap<i64, String> = db
-        .call_blocking(move |conn| store::episodes::list_files_by_ids(conn, &ids))?
-        .into_iter()
-        .map(|f| (f.id, super::join(&series.path, &f.relative_path)))
-        .collect();
     let mut changed = 0;
-    for file_id in &files {
-        let Some(path) = paths.get(file_id) else {
+    let mut dated = 0;
+    for file in &files {
+        let Some(in_file) = by_file.get(&file.id) else {
             continue;
         };
-        let in_file: Vec<Episode> = episodes
-            .iter()
-            .filter(|e| e.episode_file_id == *file_id)
-            .cloned()
-            .collect();
-        if approve::change_file_date(config, path, series, &in_file) {
+        dated += 1;
+        let path = super::join(&series.path, &file.relative_path);
+        if approve::change_file_date(config, &path, series, in_file) {
             changed += 1;
         }
     }
     if changed > 0 {
         tracing::debug!(
-            "Changed file date for {changed} files of {} in {}",
-            files.len(),
+            "Changed file date for {changed} files of {dated} in {}",
             series.title
         );
     } else {

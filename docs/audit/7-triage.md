@@ -311,7 +311,7 @@ is `crates/unarr-api/src/`.
 | Row | Finding | Severity then | State | Evidence | What is left, who notices |
 |---|---|---|---|---|---|
 | 1.2 | `X-Forwarded-Proto` gives the scheme | low | CLOSED | `api/ui.rs:390`; tests `tests/http.rs:491`; live | |
-| 1.3 | `X-Forwarded-Host` before the host filter | medium | CLOSED | `api/forwarded.rs` (`walk`), `api/hosts.rs` (`require_allowed_host`); test `tests/http.rs` (`a_trusted_proxys_forwarded_host_is_what_allowed_hosts_checks`); recorded | |
+| 1.3 | `X-Forwarded-Host` before the host filter | medium | CLOSED | `api/forwarded.rs` (`walk`), `api/hosts.rs` (`require_allowed_host`); test `tests/http.rs` (`a_trusted_proxys_forwarded_host_is_what_allowed_hosts_checks`); recorded | as in the originals, a page rebound to Unarr can name a listed host in `X-Forwarded-Host` from the loopback or through a proxy that passes the header on (nginx by default): Allowed Hosts does not stop that DNS rebinding (`docs/DESIGN.md`, section 14) |
 | 1.5 | `0.0.0.0` and `[::]` in Allowed Hosts dropped | low | DELIBERATE | `docs/DESIGN.md` section 11, `api/hosts.rs:33`. The report disputes that the original drops them; reading its `AllowedHostsParser.cs` would settle it | nobody in practice |
 | 1.6 | body of the 400 for a refused host | low | CLOSED | `api/hosts.rs`: the framework's page as recorded, `text/html`, and the host filter's log line; same test | |
 | 1.7 | request log | low | OPEN | `api/lib.rs:354`: a debug span, no line per request | whoever reads the logs |
