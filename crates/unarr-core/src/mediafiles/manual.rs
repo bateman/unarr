@@ -855,7 +855,8 @@ fn untracked_downloads_completed(
         .filter(|(i, r)| r.result() == ImportResultType::Imported && tracked_at.iter().all(|t| t == i))
         .filter_map(|(_, r)| Some((r.decision.local_episode.as_ref()?, r.episode_file.as_ref()?)));
     // `GroupBy(SeriesId, SeasonNumber)`, in the order the groups appear.
-    let mut groups: Vec<((i64, i64), Vec<(&LocalEpisode, &EpisodeFile)>)> = Vec::new();
+    type Group<'a> = ((i64, i64), Vec<(&'a LocalEpisode, &'a EpisodeFile)>);
+    let mut groups: Vec<Group> = Vec::new();
     for (local, file) in untracked {
         let key = (file.series_id, file.season_number);
         match groups.iter_mut().find(|(k, _)| *k == key) {
