@@ -76,20 +76,39 @@ fn connection_id() -> String {
     format!("{n:022x}")
 }
 
+/// The negotiation. A client that asks for version 1 (`negotiateVersion`)
+/// gets it, with a `connectionToken` beside the `connectionId`, which it
+/// connects with; any other gets version 0 and the id alone, as ASP.NET
+/// SignalR answers.
 pub async fn negotiate(State(state): State<AppState>, uri: Uri, headers: HeaderMap) -> Response {
     if !authorized(&state, &uri, &headers) {
         return StatusCode::UNAUTHORIZED.into_response();
     }
-    Json(json!({
-        "negotiateVersion": 0,
-        "connectionId": connection_id(),
-        "availableTransports": [
-            {"transport": "WebSockets", "transferFormats": ["Text", "Binary"]},
-            {"transport": "ServerSentEvents", "transferFormats": ["Text"]},
-            {"transport": "LongPolling", "transferFormats": ["Text", "Binary"]},
-        ],
-    }))
-    .into_response()
+    let version = Params::from_uri(&uri)
+        .get("negotiateVersion")
+        .and_then(|v| v.trim().parse::<i64>().ok())
+        .filter(|v| *v >= 1)
+        .map_or(0, |_| 1);
+    let transports = json!([
+        {"transport": "WebSockets", "transferFormats": ["Text", "Binary"]},
+        {"transport": "ServerSentEvents", "transferFormats": ["Text"]},
+        {"transport": "LongPolling", "transferFormats": ["Text", "Binary"]},
+    ]);
+    let answer = if version == 1 {
+        json!({
+            "negotiateVersion": 1,
+            "connectionId": connection_id(),
+            "connectionToken": connection_id(),
+            "availableTransports": transports,
+        })
+    } else {
+        json!({
+            "negotiateVersion": 0,
+            "connectionId": connection_id(),
+            "availableTransports": transports,
+        })
+    };
+    Json(answer).into_response()
 }
 
 pub async fn connect(
@@ -151,20 +170,13 @@ async fn serve(mut socket: WebSocket, state: AppState) {
     }
     tracing::debug!("signalr client connected");
 
+    // `OnConnectedAsync`: the version goes to every client connected, this
+    // one among them, which hears it from the hub as the others do.
     let mut rx = state.hub().subscribe();
-    let version = json!({
-        "name": "version",
-        "body": {"version": compat::emulated_version(state.personality())},
-    });
-    if socket
-        .send(frame(
-            &json!({"type": 1, "target": "receiveMessage", "arguments": [version]}),
-        ))
-        .await
-        .is_err()
-    {
-        return;
-    }
+    state.hub().broadcast(
+        "version",
+        json!({"version": compat::emulated_version(state.personality())}),
+    );
 
     let mut ping = tokio::time::interval(Duration::from_secs(15));
     ping.tick().await;
