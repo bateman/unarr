@@ -2,8 +2,8 @@
 //! `PlexServerService` and `PlexServerProxy`: the movie sections whose
 //! location holds the movie's root folder are asked to refresh the movie's
 //! folder. The settings, the requests and the path mapping are the series
-//! side's; the plex.tv side (sign-in, server list, the daily ping) is not
-//! reproduced there, nor here.
+//! side's, the daily ping to plex.tv included (the sign-in and the server
+//! list are not reproduced there, nor here).
 
 use chrono::{DateTime, Utc};
 

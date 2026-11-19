@@ -534,6 +534,12 @@ pub fn handle(
     if path == "/identity" || path.starts_with("/library/") {
         return Some(plex(&mut state, method, path, query, headers, body));
     }
+    // plex.tv's ping, through `Upstreams::mock`: kept apart from the
+    // notifications the goldens list, which never saw it (the originals
+    // pinged the real plex.tv while they were recorded).
+    if path == "/plex.tv/api/v2/ping" {
+        return Some(json_reply(StatusCode::OK, json!({"pong": true}), "plex.tv/ping"));
+    }
     if path.starts_with("/discord/") {
         return Some(discord(&mut state, method, path, query, headers, body));
     }

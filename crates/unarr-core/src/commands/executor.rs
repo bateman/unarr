@@ -320,10 +320,11 @@ impl Runtime {
     }
 
     /// Ask every metadata host through `upstreams`: Skyhook as the
-    /// provider, the services, XEM and the artwork. Tests and the replay
-    /// point them at a mock.
+    /// provider, the services, XEM and the artwork, and plex.tv. Tests and
+    /// the replay point them at a mock.
     pub fn set_upstreams(&self, upstreams: crate::metadata::Upstreams) {
         self.set_metadata(Arc::new(crate::metadata::Skyhook::new(upstreams.clone())));
+        self.notifier.set_upstreams(upstreams.clone());
         // Radarr's covers and metadata go out through its own client,
         // that is through its own proxy and certificate settings.
         let client = self
