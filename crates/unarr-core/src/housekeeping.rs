@@ -2,11 +2,12 @@
 //! more, then a `VACUUM`. One housekeeper failing does not stop the others.
 //!
 //! Ported from `NzbDrone.Core/Housekeeping/Housekeepers`, those that have a
-//! table here: the orphaned blocklist, episode files, episodes, history and
-//! pending releases, the subtitles and other extras, the provider
-//! statuses of providers that went, the pending releases a client or a
-//! fallback left for two weeks, status times in the future, and the tags
-//! nothing uses. Not ported: the metadata file cleaners (no such files),
+//! table here: the users beyond the first, the orphaned blocklist, episode
+//! files, episodes, history and pending releases, the subtitles and other
+//! extras, the provider statuses of providers that went, the pending
+//! releases a client or a fallback left for two weeks, status times and
+//! scheduled tasks' last runs in the future, and the tags nothing uses.
+//! Not ported: the metadata file cleaners (no such files),
 //! the update's
 //! temporary files, the log database (the log is in memory), the repair of
 //! profiles' format items and of clean titles (both are written whole by
@@ -23,7 +24,8 @@ pub type Report = Vec<(&'static str, usize)>;
 
 type Housekeeper = fn(&Connection, DateTime<Utc>) -> anyhow::Result<usize>;
 
-const HOUSEKEEPERS: [(&str, Housekeeper); 10] = [
+const HOUSEKEEPERS: [(&str, Housekeeper); 12] = [
+    ("CleanupAdditionalUsers", additional_users),
     ("CleanupOrphanedBlocklist", orphaned_blocklist),
     ("CleanupOrphanedEpisodeFiles", orphaned_episode_files),
     ("CleanupOrphanedEpisodes", orphaned_episodes),
@@ -36,6 +38,7 @@ const HOUSEKEEPERS: [(&str, Housekeeper); 10] = [
     ),
     ("CleanupOrphanedProviderStatus", orphaned_provider_status),
     ("FixFutureProviderStatusTimes", future_status_times),
+    ("FixFutureRunScheduledTasks", future_task_runs),
     ("CleanupUnusedTags", unused_tags),
 ];
 
@@ -174,6 +177,31 @@ pub(crate) fn future_status_times(conn: &Connection, now: DateTime<Utc>) -> anyh
     Ok(fixed)
 }
 
+/// `CleanupAdditionalUsers`: one user, the first the table gives.
+pub(crate) fn additional_users(conn: &Connection, _: DateTime<Utc>) -> anyhow::Result<usize> {
+    Ok(conn.execute(
+        "DELETE FROM users WHERE id NOT IN (SELECT id FROM users LIMIT 1)",
+        [],
+    )?)
+}
+
+/// `FixFutureRunScheduledTasks`: a clock that went back leaves tasks whose
+/// last run is still to come, and which the scheduler would not run
+/// before then; their last run becomes now. The originals' scheduler
+/// reads its tasks from a cache filled at start, so there it takes effect
+/// at the next start; Unarr's reads the table, and the next tick runs
+/// what is due.
+pub(crate) fn future_task_runs(conn: &Connection, now: DateTime<Utc>) -> anyhow::Result<usize> {
+    let mut fixed = 0;
+    for task in crate::store::providers::list_scheduled_tasks(conn)? {
+        if task.last_execution.is_some_and(|last| last > now) {
+            crate::store::providers::set_scheduled_task_last_execution(conn, task.id, now)?;
+            fixed += 1;
+        }
+    }
+    Ok(fixed)
+}
+
 /// Tags no series, provider, delay or release profile or auto tagging
 /// rule carries, and no rule names in a condition.
 fn unused_tags(conn: &Connection, _: DateTime<Utc>) -> anyhow::Result<usize> {
@@ -257,6 +285,70 @@ mod tests {
             );
             // A second run finds nothing.
             assert!(run(conn, now).iter().all(|(_, rows)| *rows == 0));
+            Ok(())
+        })
+        .unwrap();
+    }
+
+    #[test]
+    fn one_user_is_kept() {
+        let db = crate::db::Db::open_in_memory().unwrap();
+        let now = Utc.with_ymd_and_hms(2026, 11, 10, 12, 0, 0).unwrap();
+        db.call_blocking(move |conn| {
+            conn.execute_batch(
+                "INSERT INTO users (id, identifier, username, password) VALUES
+                    (3, 'c', 'first', 'x'), (5, 'e', 'second', 'y'), (9, 'i', 'third', 'z');",
+            )?;
+            let report = run(conn, now);
+            assert_eq!(
+                report.iter().find(|(n, _)| *n == "CleanupAdditionalUsers"),
+                Some(&("CleanupAdditionalUsers", 2))
+            );
+            let users: Vec<String> = crate::store::providers::list_users(conn)?
+                .into_iter()
+                .map(|u| u.username)
+                .collect();
+            assert_eq!(users, ["first"]);
+            assert_eq!(additional_users(conn, now)?, 0);
+            Ok(())
+        })
+        .unwrap();
+    }
+
+    /// The clock went back a day: the tasks that ran "tomorrow" ran now,
+    /// and are due again after their interval, not after tomorrow's run.
+    #[test]
+    fn task_runs_in_the_future_come_back() {
+        use crate::commands::scheduler;
+        use crate::store::providers;
+        let db = crate::db::Db::open_in_memory().unwrap();
+        let now = Utc.with_ymd_and_hms(2026, 11, 10, 12, 0, 0).unwrap();
+        let tomorrow = now + Duration::days(1);
+        let an_hour_ago = now - Duration::hours(1);
+        db.call_blocking(move |conn| {
+            scheduler::ensure_defaults(conn, now)?;
+            let tasks = providers::list_scheduled_tasks(conn)?;
+            let (ahead, behind) = (&tasks[0], &tasks[1]);
+            providers::set_scheduled_task_execution(conn, ahead.id, tomorrow, tomorrow)?;
+            providers::set_scheduled_task_execution(conn, behind.id, an_hour_ago, an_hour_ago)?;
+            let due_later = now + Duration::minutes(ahead.interval_minutes) + Duration::seconds(1);
+            assert!(
+                !scheduler::pending_tasks(conn, due_later)?
+                    .iter()
+                    .any(|t| t.id == ahead.id),
+                "a run in the future keeps the task waiting"
+            );
+            assert_eq!(future_task_runs(conn, now)?, 1);
+            let after = providers::list_scheduled_tasks(conn)?;
+            let find = |id: i64| after.iter().find(|t| t.id == id).unwrap().clone();
+            assert_eq!(find(ahead.id).last_execution, Some(now));
+            // The start of the run is left as it was, as the original does.
+            assert_eq!(find(ahead.id).last_start_time, Some(tomorrow));
+            assert_eq!(find(behind.id).last_execution, Some(an_hour_ago));
+            assert!(scheduler::pending_tasks(conn, due_later)?
+                .iter()
+                .any(|t| t.id == ahead.id));
+            assert_eq!(future_task_runs(conn, now)?, 0);
             Ok(())
         })
         .unwrap();

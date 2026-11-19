@@ -4,7 +4,9 @@
 //!
 //! Ported from Radarr's `NzbDrone.Core/Housekeeping/Housekeepers`, those
 //! that have a table here, in the order of their names as the original
-//! runs them. The ones with no media in them are the series side's. Not
+//! runs them. The ones with no media in them are the series side's: the
+//! users beyond the first, the provider statuses, the status times and the
+//! scheduled tasks' last runs in the future. Not
 //! ported, as there: the metadata file cleaners, the update's temporary
 //! files, the log database, the repair of profiles' format items and of
 //! clean titles, the removal of bad covers.
@@ -12,11 +14,15 @@
 use chrono::{DateTime, Utc};
 use rusqlite::Connection;
 
-use crate::housekeeping::{future_status_times, orphaned_provider_status, stale_pending_releases, Report};
+use crate::housekeeping::{
+    additional_users, future_status_times, future_task_runs, orphaned_provider_status,
+    stale_pending_releases, Report,
+};
 
 type Housekeeper = fn(&Connection, DateTime<Utc>) -> anyhow::Result<usize>;
 
-const HOUSEKEEPERS: [(&str, Housekeeper); 17] = [
+const HOUSEKEEPERS: [(&str, Housekeeper); 19] = [
+    ("CleanupAdditionalUsers", additional_users),
     (
         "CleanupDownloadClientUnavailablePendingReleases",
         stale_pending_releases,
@@ -37,6 +43,7 @@ const HOUSEKEEPERS: [(&str, Housekeeper); 17] = [
     ("CleanupOrphanedProviderStatus", orphaned_provider_status),
     ("CleanupUnusedTags", unused_tags),
     ("FixFutureProviderStatusTimes", future_status_times),
+    ("FixFutureRunScheduledTasks", future_task_runs),
 ];
 
 /// Run every housekeeper, then compact the database.
