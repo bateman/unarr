@@ -106,11 +106,12 @@ Would show in a particular set-up:
     and since 19 November 2026 a health warning says so while the setting
     is on (`ScriptImportCheck`, Unarr's own).
 15. **A UI language other than English** (`UILanguage`): only the English
-    dictionary is in the tree. Larger, by the 39 dictionaries.
-16. **A clock that jumps back** (`FixFutureRunScheduledTasks`): scheduled
-    tasks wait for the old time. Trivial.
-17. **A manual import of an untracked file**: no Import Complete
-    notification. Small.
+    dictionary is in the tree. Larger, by the 44 dictionaries an
+    application, and the server-side text they translate.
+16. ~~**A clock that jumps back** (`FixFutureRunScheduledTasks`): scheduled
+    tasks wait for the old time~~. Closed.
+17. ~~**A manual import of an untracked file**: no Import Complete
+    notification~~. Closed.
 
 Worth a decision rather than a fix:
 
@@ -466,7 +467,7 @@ The line numbers inside the report itself are stale; these are current.
 |---|---|---|---|---|---|
 | (a) start: quality definitions | missing ones not inserted | medium | CLOSED | `core/defaults.rs:30`, called at every start (`unarrd/src/main.rs:476`) | |
 | (a) start: default profiles | none on a blank start | medium | CLOSED | `core/defaults.rs:137`, `:184` | |
-| (a) start: legacy user | `config.xml` user and password moved into Users | low | OPEN | `import/config_xml.rs:52` parses neither element; no start-up step | only a `config.xml` never started on Sonarr v3 or later: the login would have no user |
+| (a) start: legacy user | `config.xml` user and password moved into Users | low | CLOSED | `import/config_xml.rs:94` reads `<Username>` and `<Password>`, never written back; `unarrd/src/main.rs:540` adds the user at start when there is none (`api/ui.rs:388`: name in lower case, PBKDF2 as the originals); tests `unarrd/src/main.rs:1275` (both personalities, against the recordings), `import/config_xml.rs:280`; recorded on both originals, `golden-legacy-user` (the fixture made by its `setup.sh` through the scripts' new `GOLDEN_SETUP`): the login works, `config/host` names `unarr`, the elements are gone from `config.xml` after | |
 | (a) tags, auto tags changed | no SignalR `tag` sync | low | CLOSED | `api/routes/settings_writes.rs:1073`; `golden-hub/signalr.json`, test `api/tests/contract.rs:1616` | |
 | (a) command executed: `system/task` | Tasks page not told to sync | low | CLOSED | `core/commands/executor.rs:760`, `api/state.rs:302`; same recording and test | |
 | (a) command executed: `qualitydefinition` | no sync after a reset | low | CLOSED | `api/state.rs:302`; same recording and test | |
@@ -483,19 +484,19 @@ The line numbers inside the report itself are stale; these are current.
 | (a) scan skipped | no event when the root folder is missing or empty | medium | CLOSED | `core/mediafiles/scan.rs:233`; test `:509` | |
 | (a) series scanned: media info | files without it never probed again | medium | CLOSED | `scan.rs:147`, `:344`; test `:407` | |
 | (a) series scanned: file dates | not applied after a scan | low | CLOSED | `core/mediafiles/scan.rs` (`update_file_dates`, after each scan that ran); test `a_scan_dates_the_files_by_their_episodes`; recorded | |
-| (a) untracked download completed | not raised by a manual import | low | OPEN | `core/mediafiles/manual.rs:735` raises nothing for an untracked file | no Import Complete notification after a manual import without a download id |
-| (b) `CheckForFinishedDownload` | deprecated alias unknown | low | OPEN | not among the names (`core/commands/mod.rs:690`); 500 | old third-party callers |
+| (a) untracked download completed | not raised by a manual import | low | CLOSED | `core/mediafiles/manual.rs:848`: one `UntrackedDownloadCompleted` per series and season, the original's reading of "untracked" kept (with exactly one tracked download, that download's own file counts as untracked); `core/notifications/mod.rs:618` sends Import Complete; tests `manual.rs:956`, `:984`, `api/tests/contract.rs:2088` against `golden-events` (the webhook payload of the original, exactly). Sonarr only: Radarr has no such event | |
+| (b) `CheckForFinishedDownload` | deprecated alias unknown | low | CLOSED | `core/commands/mod.rs:202`, `:763`, a command of its own name in both applications; run as the refresh with the original's warning (`core/commands/executor.rs:900`); tests `commands/mod.rs:1760`, `api/tests/contract.rs:2088` (the command and the warning in `GET /log`), `api/tests/contract_radarr.rs:1257`; recorded on both, `golden-events` | |
 | (b) `Housekeeping`, `CleanUpRecycleBin` | did nothing | medium | CLOSED (2) | `executor.rs:904`, `:936`; `core/housekeeping.rs:43`, `core/mediafiles/transfer.rs:204` | |
 | (b) `ResetQualityDefinitions`, `ResetApiKey`, `ClearLog`, `DeleteLogFiles`, `DeleteUpdateLogFiles` | unknown | low | CLOSED (5 names, 4 rows) | `commands/mod.rs:712-718`, `api/state.rs:535-553`; `DeleteUpdateLogFiles` has nothing to delete | |
 | (b) restart, shutdown | no routes | low | CLOSED | `api/routes/mod.rs:365` | |
 | (c) orphaned history, episode files | partial | low | CLOSED (2) | `housekeeping.rs:71`, `:87` | |
 | (c) pending releases older than fourteen days | missing | low-medium | CLOSED | `housekeeping.rs:123`; tests | |
 | (c) provider status times in the future | missing | low | CLOSED | `housekeeping.rs:156`; tests | |
-| (c) scheduled tasks last run in the future | missing | low | OPEN | not among the housekeepers; `core/commands/scheduler.rs:188` treats a future last run as not due | after the clock jumps back, tasks wait until the old time |
+| (c) scheduled tasks last run in the future | missing | low | CLOSED | `FixFutureRunScheduledTasks`, `core/housekeeping.rs:198`, in both lists (`:41`, `movies/housekeeping.rs:46`); tests `housekeeping.rs:326`, `api/tests/contract.rs:2271`, `contract_radarr.rs:1923` against `golden-housekeeping` (both originals' database after the run) | as in the original, the Housekeeping task waits too, so the repair comes with its next run or a manual one; the originals' scheduler reads a cache filled at start and keeps waiting until the next start (recorded: the tasks page still shows the day ahead), Unarr's reads the table and runs what is due at the next tick |
 | (c) profile format items repair | no repair pass | low | DELIBERATE | the score reset is done; the pass is declared not ported in `housekeeping.rs:9` | a hand-edited database only |
 | (c) unused tags | missing | low | CLOSED | `housekeeping.rs:179`; tests | |
 | (c) clean titles | no pass | low | DELIBERATE | `housekeeping.rs:9`; the refresh rewrites it (`core/tv/refresh.rs:165`) | a stale clean title lasts until the next refresh |
-| (c) additional naming rows, users | keep one | low | PARTIAL | naming is one row by schema; users are not trimmed | nobody expected |
+| (c) additional naming rows, users | keep one | low | CLOSED | naming is one row by schema; `CleanupAdditionalUsers`, `core/housekeeping.rs:185`, in both lists (`:28`, `movies/housekeeping.rs:25`), keeps the user whose name sorts first, as the originals' query does through their index on the name (recorded, `golden-housekeeping`); tests `housekeeping.rs:298`, `api/tests/contract.rs:2271`, `contract_radarr.rs:1923` | |
 | (c) `VACUUM`, recycle bin | missing | low, medium | CLOSED (2) | `housekeeping.rs:56`; as `CleanUpRecycleBin` | |
 
 ## Settings (`1-settings.md`)
@@ -509,8 +510,8 @@ open, 1 deliberate, 2 not applicable.
 | API key through `PUT config/host` | not changed on save | high | CLOSED | the finding was wrong about the original (golden `config-host-put-apikey`); `ResetApiKey` changes it | |
 | authentication method and requirement, user name, password through PUT | not stored | high | CLOSED (2) | `settings_writes.rs:745`, `:985` | |
 | `LogLevel` | not applied | medium | CLOSED | `settings_writes.rs:1004`; test `unarrd/src/main.rs:1278` | `RUST_LOG` overrides it when set |
-| `ConsoleLogLevel` | not applied, not stored | low | OPEN | `api/routes/config.rs:93` answers a constant | a console quieter or louder than the files |
-| `ConsoleLogFormat` | not parsed | low | OPEN | no occurrence | a log shipper expecting CLEF |
+| `ConsoleLogLevel` | not applied, not stored | low | CLOSED | read from `config.xml` (`import/config_xml.rs:86`) and `<App>__Log__ConsoleLevel` (`core/config.rs:255`); stored by `PUT config/host` (`settings_writes.rs:699`, `:943`), answered (`api/routes/config.rs:93`); the console logs at it, else at info whatever `LogLevel` says (`core/config.rs:280`), while the files and the recent lines keep `LogLevel` (`unarrd/src/main.rs:744`); tests `core/config.rs:353`, `:379`, `unarrd/src/main.rs:1648`, `api/tests/contract.rs:2088` and `contract_radarr.rs:1257` against `golden-events` | a level that names none: the original fails to configure its logging, Unarr warns and logs as if it were blank; `RUST_LOG`, when set, still decides the levels |
+| `ConsoleLogFormat` | not parsed | low | CLOSED | read from `config.xml` (`import/config_xml.rs`, without regard to case) and `<APP>__LOG__CONSOLEFORMAT` (with it, as `Enum.TryParse`); `Clef` writes one JSON object a line, `@t` `@l` `@x` `@m` as the original's `CompactJsonLayout` (`unarrd/src/console.rs:150`, recorded on Sonarr with `SONARR__LOG__CONSOLEFORMAT=Clef`); the lines before a personality has read its settings follow the environment (`unarrd/src/main.rs:716`); tests `console.rs:211`, `:248`, `import/config_xml.rs:257` | the standard format is Unarr's own line, not the original's `[Info] Logger: message` |
 | `LogDbEnabled`, `LogSql` | not parsed | low | NOT APPLICABLE | no log database exists | |
 | `Sonarr__*` environment overrides | not read | medium | CLOSED | `core/config.rs:101`; test `:231` | |
 | `RecycleBinCleanupDays` | never read | high | CLOSED | `core/mediafiles/transfer.rs:204` | |
@@ -518,7 +519,7 @@ open, 1 deliberate, 2 not applicable.
 | `EnableMediaInfo` | no backfill on rescan | low | CLOSED | `core/mediafiles/scan.rs:147` | |
 | `UseScriptImport`, `ScriptImportPath` | not applied | medium | DELIBERATE | stored and shown (`settings_writes.rs:349`), not applied by decision (`docs/DESIGN.md` section 21.3); `ScriptImportCheck` warns while it is on (`core/health.rs`, test `script_import_on_is_said_to_be_ignored`) | whoever imports through a script gets Unarr's own move or hardlink, and a health warning that says so |
 | `ImportExtraFiles`, `ExtraFileExtensions` | not applied | medium | CLOSED | `core/mediafiles/extras.rs:334` | |
-| `UILanguage` | not applied | low | OPEN | `api/routes/system.rs:364` always serves the English dictionary, the only one in the tree | whoever picks another language: the interface stays English |
+| `UILanguage` | not applied | low | OPEN | `api/routes/system.rs:364` always serves the English dictionary, the only one in the tree; the originals ship 44 more an application in `Localization/Core` (Sonarr 1.8 MB, 8 of them at least 90 % translated; Radarr 4.4 MB, 17), and translate server-side text too (health checks, provider field labels) | whoever picks another language: the interface stays English. A decision for the maintainer |
 | proxy (8 settings) | not applied | high | CLOSED | `core/http.rs:71`, `core/outbound.rs:308`; test `core/http.rs:325` | `ProxyCheck` runs again five seconds after a save of the settings (`core/health.rs:250`) |
 | `CertificateValidation` | not applied | medium | CLOSED | `core/outbound.rs:317`; test `:604` | |
 | `TrustCgnatIpAddresses` | not applied | medium | CLOSED | `api/ui.rs:500`, `core/outbound.rs:227` | |
