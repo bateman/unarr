@@ -362,6 +362,7 @@ maintainer's daily driver.
 | `GET /api/v3/series` p99 under 10 ms, measured again at the end of 4d | 70 ms on 950 series, with Radarr beside it. No target for the movie routes: `GET /api/v3/movie` 289 ms on 2,123 movies, `GET /api/v3/collection` 123 ms, a page of `GET /api/v3/history` 150 ms | 4d | Missed; deferred, as in 4c |
 | Container image under 15 MB compressed, measured again at the end of 4d | The binary with both UIs embedded is 30.6 MiB, 12.3 MiB under `gzip -9` | 4d | Unknown as an image; the binary alone is close to the limit |
 | Container image under 15 MB compressed, once the release profile unwinds | The binary is 34.9 MiB, 14.4 MiB under `gzip -9` (15.07 MB): 4.1 MiB and 2.0 MiB more than aborting | #14 | Unknown as an image; the binary alone is at the limit, and over it if the target is read in decimal megabytes |
+| Container image under 15 MB compressed, once Brotli answers (`docs/audit/2-http.md`, row 1.19) | The binary is 35.9 MiB, 14.9 MiB under `gzip -9` (15.61 MB), from 35.0 and 14.4 (15.14 MB): Brotli's encoder is 1.07 MiB of it, 0.50 MiB under `gzip -9`; the rest of the change saves 0.2 MiB (`mime-guess` gone) | HTTP low rows | Unknown as an image; the binary alone is under the limit in binary megabytes and over it in decimal ones |
 | Idle RSS under 60 MB, once the release profile unwinds | Both personalities on the real library (38 series, 193 movies), fifteen minutes idle: 30 MiB, 11 MiB of it anonymous; 28 and 10 aborting, in the same container | #14 | Met idle |
 
 First measurement, skeleton only (one `system/status` route per personality):
@@ -1967,7 +1968,8 @@ the size are in section 20, with why they were not taken.
   differences the live audit measured were brought into line afterwards
   (section 16, and `docs/audit/2-http.md`, "Live run, and what was
   changed"); what that table leaves is Brotli, `HEAD` on pages, the cache
-  lifetime of static files and of `/ping`.
+  lifetime of static files and of `/ping`. All but `/ping` were brought
+  into line since (section 22).
   Three things found on the way concern Sonarr and were left to tasks of
   their own: the same look-behind defect in its release group pattern
   (fixed on `main` while this milestone was under way), the fixture
@@ -2471,3 +2473,92 @@ below, the recommended one; for a row the audit rated medium
   and is refused, where with WebSockets alone listed it would stop sooner;
   it gets no live updates either way, and the answer stays the original's.
 - **To revisit** if a user's proxy cannot pass WebSockets.
+
+## 22. The server outside the API, as the originals' pipeline
+
+The low rows of `docs/audit/2-http.md` left open or partial by the triage
+(`docs/audit/7-triage.md`), recorded on Sonarr 4.0.20 and Radarr 6.4.4 with
+`scripts/http-probe.py` (scenarios `lowhttp*`) and compared with
+`scripts/http-probe-diff.py`; the original's sources read where a recording
+could not settle it. What changed, and what was decided on the way:
+
+- **The pipeline's order is the originals'.** In each group of routes, from
+  the outside in: the authentication, the URL base's redirect, the answer
+  while starting, the cache headers, the action (`api/lib.rs`). The request
+  log sits after the host filter and before the path rewrite, as
+  `LoggingMiddleware` sits after `UseHostFiltering`.
+- **Static files are kept a year.** `CacheableSpecification` is applied as
+  written (`http::cacheable`): every answer outside the API is
+  `max-age=31536000, public` with `Last-Modified`, except the bootstrap,
+  `index.js`, SignalR, the feed and the log files; under the API only the
+  covers, and anything asked with `?h=`. An action that sets its own
+  headers keeps them: pages (`no-cache, no-store`), a sign-in or sign-out
+  (the cookie handler's `no-cache,no-store` and an `Expires` of 1970) and
+  the exception handler's answers. `Last-Modified` is the build time of the
+  release Unarr emulates (`compat::emulated_build_time`), as the originals
+  send theirs: the embedded UI is that release's, so the date changes when
+  the UI does. `/ping` as health checks ask it stays uncached, as decided
+  in phase 4 (section 16); `/Ping` is kept as the originals keep it.
+- **The pages carry cache breakers.** `HtmlMapperBase`'s pattern adds the
+  URL base and `?h=` with the MD5 of the file to each asset link of the
+  index and login pages, and drops `data-no-hash`; both pages are now the
+  originals' byte for byte. With them a changed file is fetched again even
+  though the old one was to be kept a year.
+- **What is served is what the originals' mappers take.** A file of the
+  bundle only where `StaticResourceMapper` would serve it, `/robots.txt`
+  from `Content/`, the login page for a path that starts with `/login`,
+  the single-page application for a path without a dot; anything else is
+  the static controller's 404 in problem details (`ui::static_not_found`),
+  kept a year like the rest. Types come from ASP.NET's table
+  (`http::content_type`), which says `text/javascript` on Radarr's newer
+  runtime and `application/javascript` on Sonarr's. The covers are served
+  by `ui::media_cover` rather than tower-http's file server: no `ETag`, no
+  ranges, as `MediaCoverMapper` serves them; the `fs` feature of tower-http
+  and the `mime-guess` feature of rust-embed are gone with it.
+- **`HEAD` is taken by `/ping` alone.** Elsewhere it finds the framework's
+  405 endpoint, which the fallback policy guards with the key: 401 without
+  it under every authentication method, a session cookie not taken.
+- **Routes outside the API are matched without case** (`literal_route`):
+  `/LOGIN`, `/Ping`, `/SIGNALR/messages/negotiate`, the feed, `/CONTENT/`.
+  The covers, backups, log files and `/favicon.ico` are found by the
+  originals' mappers with their own case rules, and are left to them.
+- **Content negotiation.** A JSON result whose `Accept` takes no JSON is an
+  empty 406 once the action has run (`ReturnHttpNotAcceptable`): a write is
+  done all the same, as in the originals. `*/*` anywhere in `Accept` makes
+  it irrelevant (`RespectBrowserAcceptHeader` is off). This joins the
+  string actions of Radarr (section 16), which negotiate on their own.
+- **Brotli.** `AddResponseCompression()` prefers Brotli when the client
+  weighs it as gzip; both at level 1. `Vary: Accept-Encoding` goes only to a
+  client that sent `Accept-Encoding`, and nothing is compressed for a
+  request a trusted proxy says came over HTTPS (`EnableForHttps` is off),
+  so behind a TLS-terminating proxy the answers leave uncompressed, as the
+  originals' do. The encoder costs the release binary 1,126,528 bytes,
+  522,738 under `gzip -9` (two release builds of this branch, with and
+  without it), on a binary already at the image target (section 9).
+  Dropping it is one feature of tower-http (`compression-br`) and two
+  assertions of a test.
+- **503 while starting.** The daemon binds the listener and serves before
+  the command runtime starts, and `StartingUpMiddleware`'s answer stands
+  for every authenticated request until it has: a proxy shows a 503 rather
+  than a refused connection. The database is still opened, and an import
+  done, before the listener.
+- **The URL base is read once where the originals read it once**: the
+  routes, the generated pages, the manifest and the tile description, the
+  session cookie's path (`AppState::url_base`). `/initialize.json` and the
+  login's redirects read the settings on each request, as the originals'
+  controllers do. A base saved from the UI is applied by the restart, as in
+  the originals; allowed hosts and trusted networks still apply at once
+  (`docs/audit/7-triage.md`, row 1.35).
+- **Smaller ones.** The request log under `Http` and `Api` (`unarrd` lets
+  them through at trace and debug); the login form signs nobody in when the
+  method is None; an XHR is told 401 with the login page's address; the
+  session cookie's name sheds the instance name's diacritics before
+  anything that is not an ASCII letter or digit; SignalR's negotiation
+  version 1 with a connection token, and the `version` message of a new
+  connection to every client; the backup download as a static file
+  (`application/x-zip-compressed`, no `Content-Disposition`); the cover
+  proxy's type from the name, a name that is not an image's a 404 before
+  the hash is looked at.
+- **Not done: the `Server` header.** The originals send `Server: Kestrel`
+  on every answer; Unarr sends none. No client is known to read it; the
+  maintainer decides (`docs/audit/7-triage.md`, row 1.34).
