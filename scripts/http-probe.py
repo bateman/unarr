@@ -30,6 +30,11 @@ BIN = REPO / f".cache/{APP}/{APP.capitalize()}/{APP.capitalize()}"
 FIX = REPO / f"tests/fixtures/{APP}"
 WORK = Path(os.environ.get("PROBE_WORK", REPO / ".cache/http-probe")) / f"{TARGET}-{APP}"
 OTHER = "192.0.2.2"
+# The hashed names of the bundle `make ui` unpacked, which differ between the two apps.
+_UI = REPO / f"crates/unarr-api/ui/{APP}"
+INDEX_JS = "/" + next(p.name for p in _UI.glob("index-*.js"))
+CSS = "/Content/" + next(p.name for p in (_UI / "Content").glob("*-*.css"))
+LICENCE = "/" + next(p.name for p in _UI.glob("*.LICENSE.txt"))
 
 
 def setconf(cfg: Path, values: dict):
@@ -233,7 +238,7 @@ SCEN = {
         ("1.32-head-content", "HEAD", "/Content/manifest.json", {}, None, "127.0.0.1", None),
         ("1.32-head-content-css", "HEAD", "/Content/styles.css", {}, None, "127.0.0.1", None),
         ("1.32-head-login", "HEAD", "/login", {}, None, "127.0.0.1", None),
-        ("1.32-head-bundle", "HEAD", "/index-cf02e6f1e5a4c0f40ef2.js", {}, None, "127.0.0.1", None),
+        ("1.32-head-bundle", "HEAD", INDEX_JS, {}, None, "127.0.0.1", None),
         ("3.9-xrw", "GET", "/", {"X-Requested-With": "XMLHttpRequest"}, None, "127.0.0.1", None),
         ("3.9-xrw-page", "GET", "/series", {"X-Requested-With": "XMLHttpRequest"}, None, "127.0.0.1", None),
         ("4.3-index", "GET", "/", "COOKIE", None, "127.0.0.1", None),
@@ -242,13 +247,13 @@ SCEN = {
         ("4.9-styles", "GET", "/Content/styles.css", {}, None, "127.0.0.1", None),
         ("4.9-icon", "GET", "/Content/Images/Icons/favicon-32x32.png", {}, None, "127.0.0.1", None),
         ("4.9-svg", "GET", "/Content/Images/Icons/safari-pinned-tab.svg", {}, None, "127.0.0.1", None),
-        ("4.9-bundle-js", "GET", "/index-cf02e6f1e5a4c0f40ef2.js", "COOKIE", None, "127.0.0.1", None),
-        ("4.9-bundle-css", "GET", "/Content/928-0671f4055f8ea4b52b8c.css", {}, None, "127.0.0.1", None),
-        ("4.9-bundle-js-nocookie", "GET", "/index-cf02e6f1e5a4c0f40ef2.js", {}, None, "127.0.0.1", None),
+        ("4.9-bundle-js", "GET", INDEX_JS, "COOKIE", None, "127.0.0.1", None),
+        ("4.9-bundle-css", "GET", CSS, {}, None, "127.0.0.1", None),
+        ("4.9-bundle-js-nocookie", "GET", INDEX_JS, {}, None, "127.0.0.1", None),
         ("4.7-robots", "GET", "/robots.txt", {}, None, "127.0.0.1", None),
         ("4.7-robots-content", "GET", "/Content/robots.txt", {}, None, "127.0.0.1", None),
         ("4.16-index-html", "GET", "/index.html", "COOKIE", None, "127.0.0.1", None),
-        ("4.16-licence", "GET", "/931-cf52af1896516b46dbfc.js.LICENSE.txt", "COOKIE", None, "127.0.0.1", None),
+        ("4.16-licence", "GET", LICENCE, "COOKIE", None, "127.0.0.1", None),
         ("4.16-version", "GET", "/VERSION", "COOKIE", None, "127.0.0.1", None),
         ("4.16-login-html", "GET", "/login.html", {}, None, "127.0.0.1", None),
         ("4.16-oauth-html", "GET", "/oauth.html", "COOKIE", None, "127.0.0.1", None),
@@ -264,7 +269,7 @@ SCEN = {
         ("3.8-login-get", "GET", "/login", {}, None, "127.0.0.1", None),
         ("3.8-index", "GET", "/", {}, None, "127.0.0.1", None),
     ]),
-    "lowhttp-unicode": ({"InstanceName": "Sónarr Ünï"}, lambda b: [
+    "lowhttp-unicode": ({"InstanceName": f"{APP.capitalize()} Ünï Çafé"}, lambda b: [
         ("3.5-login-page", "GET", "/login", {}, None, "127.0.0.1", None),
     ]),
     # Second pass on the low rows: what the first left open.
@@ -331,6 +336,29 @@ SCEN = {
         ("4.19-xml", "GET", "/Content/browserconfig.xml", {}, None, "127.0.0.1", None),
         ("4.19-webmanifest", "GET", "/Content/Images/Icons/manifest.json", {}, None, "127.0.0.1", None),
     ]),
+    # Third pass: types, request log, downloads, the cover proxy.
+    "lowhttp3": ({}, lambda b: [
+        ("4.19-ttf", "GET", "/Content/Fonts/Roboto-Light.ttf", {}, None, "127.0.0.1", None),
+        ("4.19-woff", "GET", "/Content/Fonts/Roboto-Light.woff", {}, None, "127.0.0.1", None),
+        ("4.19-eot", "GET", "/Content/Fonts/UbuntuMono-Regular.eot", {}, None, "127.0.0.1", None),
+        ("4.19-licence", "GET", LICENCE, "COOKIE", None, "127.0.0.1", None),
+        ("4.19-robots", "GET", "/Content/robots.txt", {}, None, "127.0.0.1", None),
+        ("4.19-manifest", "GET", "/Content/manifest.json", {}, None, "127.0.0.1", None),
+        ("4.19-index-js", "GET", INDEX_JS, "COOKIE", None, "127.0.0.1", None),
+        ("4.19-png", "GET", "/Content/Images/Icons/favicon-32x32.png", {}, None, "127.0.0.1", None),
+        ("4.9-favicon", "GET", "/favicon.ico", "COOKIE", None, "127.0.0.1", None),
+        ("4.9-oauth", "GET", "/oauth.html", "COOKIE", None, "127.0.0.1", None),
+        ("4.9-initialize-js", "GET", "/initialize.js", "COOKIE", None, "127.0.0.1", None),
+        ("4.9-login-fail", "POST", "/login", {"Content-Type": "application/x-www-form-urlencoded"}, b"username=unarr&password=nope", "127.0.0.1", None),
+        ("4.9-feed", "GET", f"/feed/v3/calendar/{APP.capitalize()}.ics?apikey={KEY}", {}, None, "127.0.0.1", None),
+        ("4.9-signalr", "POST", f"/signalr/messages/negotiate?access_token={KEY}", {}, b"", "127.0.0.1", None),
+        ("2.8-backup-missing", "GET", "/backup/manual/nope.zip", "COOKIE", None, "127.0.0.1", None),
+        ("2.9-proxy-bad-hash", "GET", "/MediaCoverProxy/0123456789abcdef/poster.jpg", "COOKIE", None, "127.0.0.1", None),
+        ("2.9-proxy-bad-name", "GET", "/MediaCoverProxy/0123456789abcdef/poster.txt", "COOKIE", None, "127.0.0.1", None),
+        ("1.7-marker-query", "GET", f"/api/v3/system/status?marker=unarrprobe&apikey={KEY}", {"User-Agent": "unarrprobe-agent/1.0"}, None, "127.0.0.1", None),
+        ("1.7-marker-page", "GET", "/unarrprobe-page", {}, None, "127.0.0.1", None),
+        ("1.7-marker-404", "GET", "/api/v3/series/999999?marker=unarrprobe", K, None, "127.0.0.1", None),
+    ]),
     "lowhttp2-none": ({"AuthenticationMethod": "None"}, lambda b: [
         ("1.32-head-content", "HEAD", "/Content/manifest.json", {}, None, "127.0.0.1", None),
         ("1.32-head-login", "HEAD", "/login", {}, None, "127.0.0.1", None),
@@ -344,7 +372,7 @@ SCEN = {
         ("4.20-missing", "GET", "/nope.png", {}, None, "127.0.0.1", None),
         ("3.9-xrw", "GET", "/", {"X-Requested-With": "XMLHttpRequest"}, None, "127.0.0.1", None),
     ]),
-    "lowhttp2-unicode": ({"InstanceName": "Sónarr Ünï"}, lambda b: [
+    "lowhttp2-unicode": ({"InstanceName": f"{APP.capitalize()} Ünï Çafé"}, lambda b: [
         ("3.5-login-post", "POST", "/login", {"Content-Type": "application/x-www-form-urlencoded"}, b"username=unarr&password=fixture&rememberMe=on", "127.0.0.1", None),
     ]),
     # The realm, the returnUrl under a URL base, SignalR without a token outside it.
@@ -453,7 +481,7 @@ for scen in WANTED or list(SCEN):
         with open(logfile, "rb") as f:
             f.seek(before)
             lines = [l for l in f.read().decode("utf-8", "replace").splitlines()
-                     if re.search(r"\|(Auth|Authentication|UrlBase|HostFiltering|ForwardedHeaders|Microsoft[^|]*)\|", l) or "Auth-" in l or "unarrprobe" in l]
+                     if re.search(r"\|(Auth|Authentication|UrlBase|HostFiltering|ForwardedHeaders|Microsoft[^|]*)\|", l) or (scen == "lowhttp3" and re.search(r"\|(Http|Api)\|", l)) or "Auth-" in l or "unarrprobe" in l]
     results[scen] = {"config": conf, "answers": rows, "log": lines[:200]}
     print(f"[probe] {APP} {scen}: {len(rows)} answers, {len(lines)} log lines", file=sys.stderr)
 
