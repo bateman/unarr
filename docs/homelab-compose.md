@@ -1,8 +1,12 @@
 # Replacing the *arr services with Unarr in the homelab compose
 
-What to change in the `homelab` repository when Unarr reaches alpha and
-takes the place of the `sonarr` service for good. Until then the NAS runs it
-from a local, uncommitted edit of `docker/compose.media.yml`.
+What to change in the `homelab` repository when Unarr takes the place of
+the `sonarr` and `radarr` services for good. That is done: the homelab
+repository has the `unarr` service since its pull requests #571 and #572
+(19 November 2026), where the two originals' services are removed and
+`UPGRADE.md` says how to go back. Before, the NAS ran Unarr from a local,
+uncommitted edit of `docker/compose.media.yml`. What follows is kept as the
+record of what the change had to cover, and for the next personalities.
 
 **The container is named `unarr` and answers to the applications' names
 as network aliases** (`sonarr`, `radarr`, later `prowlarr` and `lidarr`):
