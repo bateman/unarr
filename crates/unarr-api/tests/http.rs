@@ -627,6 +627,35 @@ async fn what_no_action_takes_is_refused_as_the_originals_refuse_it() {
     }
 }
 
+/// Radarr 6.4.4 has no Basic authentication: with `Basic` in `config.xml`
+/// it shows its login page, says `forms` in `config/host`, and credentials
+/// sent the Basic way open nothing and are not logged.
+#[tokio::test]
+async fn radarr_takes_basic_for_forms() {
+    use base64::Engine;
+    use tracing_subscriber::layer::SubscriberExt;
+    let logs = LogBuffer::new();
+    let _guard = tracing::subscriber::set_default(tracing_subscriber::registry().with(logs.clone()));
+    let app = app_edited(Personality::Radarr, "", |host| {
+        host.authentication_method = unarr_core::config::AuthenticationMethod::Basic
+    });
+    let credentials = format!(
+        "Basic {}",
+        base64::engine::general_purpose::STANDARD.encode("unarr:fixture")
+    );
+    for headers in [&[][..], &[("Authorization", credentials.as_str())][..]] {
+        let (status, answer, _) = ask(&app, "GET", "/", headers, "").await;
+        assert_eq!(status, StatusCode::FOUND);
+        assert_eq!(header(&answer, "location"), Some("/login?returnUrl=%2F"));
+        assert_eq!(header(&answer, "www-authenticate"), None);
+    }
+    let (status, _, body) = ask(&app, "GET", "/api/v3/config/host", &[("X-Api-Key", KEY)], "").await;
+    assert_eq!(status, StatusCode::OK);
+    let body: serde_json::Value = serde_json::from_slice(&body).unwrap();
+    assert_eq!(body["authenticationMethod"], "forms");
+    assert!(logs.entries().iter().all(|e| e.logger != "Auth"));
+}
+
 /// With Allowed Hosts set, the host checked is the one a proxy the
 /// installation trusts says the client asked for: the originals run the
 /// forwarded headers before the host filter. Refused, the request gets the

@@ -38,6 +38,15 @@ impl Settings {
         // The environment wins over the file and over what was saved, at
         // start and after every save.
         host.apply_environment(personality.app_name(), std::env::vars());
+        // Radarr 6 has no Basic authentication any more: it writes `forms`
+        // over `Basic` in `config.xml` at start and shows its login page
+        // (recorded on Radarr 6.4.4).
+        if personality == Personality::Radarr
+            && host.authentication_method == unarr_core::config::AuthenticationMethod::Basic
+        {
+            tracing::info!("Basic authentication is not offered by Radarr, using Forms");
+            host.authentication_method = unarr_core::config::AuthenticationMethod::Forms;
+        }
         let allowed_hosts = crate::hosts::AllowedHosts::parse(&host.allowed_hosts);
         if allowed_hosts.allows_everything() {
             tracing::info!("AllowedHosts is not configured, accepting requests for any host");

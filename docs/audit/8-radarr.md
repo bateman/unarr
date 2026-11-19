@@ -65,6 +65,15 @@ Every fix below was recorded from the real Radarr first, into
    where Radarr answers plain JSON. Low. Fixed, measured against the
    running original: the body of a paged list's filter error is the same,
    the content type is not.
+10. **Basic authentication was still served.** Radarr 6.4.4 has none: it
+    writes `forms` over `Basic` in `config.xml` at start, says `forms` in
+    `config/host` and sends the browser to its login page, where Unarr's
+    Radarr challenged for Basic credentials. Medium: an installation
+    moved from an older Radarr would have kept a login the original no
+    longer offers. Found on 19 November 2026, while the HTTP rows of
+    `7-triage.md` were recorded on both originals; fixed (`Basic` is
+    taken for Forms, at start and after a save), test
+    `tests/http.rs` `radarr_takes_basic_for_forms`.
 
 ## Open, and why
 
