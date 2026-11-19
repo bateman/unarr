@@ -158,7 +158,7 @@ definitions, tasks, commands and health, and the body limit. Then four of
 the medium rows, with four low ones in the same code: Allowed Hosts behind
 a proxy that rewrites `Host`, the login lines fail2ban reads, a request
 outside the URL base, and paths under `/api` that are not v3, each recorded
-on both originals under a changed `config.xml` first. The rows now stand at
-110 closed, 54 open, 8 partial, 7 deliberate and 14 not applicable; the
-triage says which and how, and what of the same was closed on Radarr's
-side.
+on both originals under a changed `config.xml` first, and the file dates
+after a series scan, recorded on Sonarr. The rows now stand at 112 closed,
+53 open, 7 partial, 7 deliberate and 14 not applicable; the triage says
+which and how, and what of the same was closed on Radarr's side.

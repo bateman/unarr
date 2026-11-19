@@ -23,18 +23,19 @@ happened in (`docs/DESIGN.md`, section 20).
 Updated a fourth time on 19 November 2026: four of the rows the reports
 rated medium (1.3, 1.8, 1.10 and 1.24 of `2-http.md`, items 8, 9, 12 and 19
 below) are closed, and with them four low rows of the same code (1.6, 1.11,
-3.11, 3.17). Each was recorded first on Sonarr 4.0.20 and Radarr 6.4.4
+3.11, 3.17); so is a fifth, the file dates after a series scan (`FileDate`
+of `1-settings.md`, item 13, with its row of `6-events.md`). Each was recorded first on Sonarr 4.0.20 and Radarr 6.4.4
 under a changed `config.xml`; "What was closed afterwards" says how.
 
 ## Result
 
 | Report | Rows | Closed | Open | Partial | Deliberate | Not applicable |
 |--------|------|--------|------|---------|------------|----------------|
-| 1. Settings | 18 | 11 | 4 | 1 | 0 | 2 |
+| 1. Settings | 18 | 12 | 4 | 0 | 0 | 2 |
 | 2. HTTP | 58 | 30 | 20 | 4 | 3 | 1 |
 | 3 and 4. Routes and UI calls | 78 | 39 | 25 | 2 | 2 | 10 |
-| 6. Events, commands, housekeeping | 39 | 30 | 5 | 1 | 2 | 1 |
-| Together | 193 | 110 | 54 | 8 | 7 | 14 |
+| 6. Events, commands, housekeeping | 39 | 31 | 4 | 1 | 2 | 1 |
+| Together | 193 | 112 | 53 | 7 | 7 | 14 |
 
 Before the first update: 83 closed, 78 open, 13 partial, 6 deliberate;
 before the fourth, 102 closed, 60 open, 10 partial. Some gaps
@@ -89,8 +90,8 @@ Would show in a particular set-up:
     to differ from the original, which has none.
 12. ~~**Log-based intrusion detection** (1.8): no line for a failed or
     successful login~~. Closed.
-13. **Change File Date switched on** (`FileDate`): nothing after a series
-    scan; the movie side does it. Small.
+13. ~~**Change File Date switched on** (`FileDate`): nothing after a series
+    scan; the movie side does it~~. Closed.
 14. **Import Using Script** (`UseScriptImport`): stored and ignored, the
     import goes Unarr's own way without a warning. Larger.
 15. **A UI language other than English** (`UILanguage`): only the English
@@ -231,6 +232,17 @@ how), which the long list did not have to be recorded again for.
   writes `forms` over `Basic` in `config.xml` at start and sends the
   browser to its login page, where Unarr's Radarr still challenged for
   Basic credentials: fixed on Radarr's side, see `8-radarr.md`.
+
+- **Change File Date after a series scan** (`FileDate`). Sonarr 4.0.20
+  on its fixture, five files of a series (air time 22:00) put on disk
+  with a date of now and a quarter of a second, the setting saved through
+  `config/mediamanagement`, then `RescanSeries`, under `TZ=Europe/Rome`:
+  `localAirDate` dates each file 22:00 local (21:00 UTC in February) by
+  the first episode in it, to the second; `utcAirDate` dates it 22:00 UTC
+  and keeps the quarter of a second the file had; `none` leaves it. Unarr
+  did nothing after a scan; it now does the same, and compares the date
+  it wants with the file's to the tick, as the original does, where it
+  compared seconds (the import and the rename share that function).
 
 Found on the way, with no row of their own. With a proxy whose name
 does not resolve the original's `ProxyCheck` throws, and the whole run of
@@ -434,7 +446,7 @@ What the triage found against the report and the README:
 
 ## Events, commands, housekeeping (`6-events.md`)
 
-39 rows were MISSING, PARTIAL or UNSURE: 30 closed, 5 open, 1 partial, 2
+39 rows were MISSING, PARTIAL or UNSURE: 31 closed, 4 open, 1 partial, 2
 deliberate, 1 not applicable. Static. `core/` is `crates/unarr-core/src/`,
 `api/` is `crates/unarr-api/src/`, `import/` is `crates/unarr-import/src/`.
 The line numbers inside the report itself are stale; these are current.
@@ -459,7 +471,7 @@ The line numbers inside the report itself are stale; these are current.
 | (a) series imported | no `POST /series/import` | medium | CLOSED | `api/routes/mod.rs:79` | |
 | (a) scan skipped | no event when the root folder is missing or empty | medium | CLOSED | `core/mediafiles/scan.rs:233`; test `:509` | |
 | (a) series scanned: media info | files without it never probed again | medium | CLOSED | `scan.rs:147`, `:344`; test `:407` | |
-| (a) series scanned: file dates | not applied after a scan | low | OPEN | `change_file_date` is reached from the import and the rename only (`core/mediafiles/approve.rs:321`, `:361`, `:410`); the movie twin does it after a scan | with Change File Date on, the existing library keeps its dates |
+| (a) series scanned: file dates | not applied after a scan | low | CLOSED | `core/mediafiles/scan.rs` (`update_file_dates`, after each scan that ran); test `a_scan_dates_the_files_by_their_episodes`; recorded | |
 | (a) untracked download completed | not raised by a manual import | low | OPEN | `core/mediafiles/manual.rs:735` raises nothing for an untracked file | no Import Complete notification after a manual import without a download id |
 | (b) `CheckForFinishedDownload` | deprecated alias unknown | low | OPEN | not among the names (`core/commands/mod.rs:690`); 500 | old third-party callers |
 | (b) `Housekeeping`, `CleanUpRecycleBin` | did nothing | medium | CLOSED (2) | `executor.rs:904`, `:936`; `core/housekeeping.rs:43`, `core/mediafiles/transfer.rs:204` | |
@@ -477,8 +489,8 @@ The line numbers inside the report itself are stale; these are current.
 
 ## Settings (`1-settings.md`)
 
-18 rows were NOT APPLIED or PARTIAL in the detailed tables: 11 closed, 4
-open, 1 partial, 2 not applicable.
+18 rows were NOT APPLIED or PARTIAL in the detailed tables: 12 closed, 4
+open, 2 not applicable.
 
 | Setting | Finding | Severity then | State | Evidence | What is left, who notices |
 |---|---|---|---|---|---|
@@ -491,7 +503,7 @@ open, 1 partial, 2 not applicable.
 | `LogDbEnabled`, `LogSql` | not parsed | low | NOT APPLICABLE | no log database exists | |
 | `Sonarr__*` environment overrides | not read | medium | CLOSED | `core/config.rs:101`; test `:231` | |
 | `RecycleBinCleanupDays` | never read | high | CLOSED | `core/mediafiles/transfer.rs:204` | |
-| `FileDate` | import and rename only | medium | PARTIAL | the events row above: nothing after a series scan | with Change File Date on, the existing library and corrected air dates |
+| `FileDate` | import and rename only | medium | CLOSED | the events row above, and the dates compared and set as recorded (`core/mediafiles/approve.rs`, `change_file_date`) | |
 | `EnableMediaInfo` | no backfill on rescan | low | CLOSED | `core/mediafiles/scan.rs:147` | |
 | `UseScriptImport`, `ScriptImportPath` | not applied | medium | OPEN | stored and shown (`settings_writes.rs:349`), no occurrence in `unarr-core` | whoever imports through a script gets Unarr's own move or hardlink, with no warning |
 | `ImportExtraFiles`, `ExtraFileExtensions` | not applied | medium | CLOSED | `core/mediafiles/extras.rs:334` | |
@@ -503,8 +515,8 @@ open, 1 partial, 2 not applicable.
 What the triage found against the reports and the README:
 
 - Two medium findings of `1-settings.md` were never in the README's
-  numbered list and are not closed: script import, and file dates after a
-  series scan (the fix of `e0a81e4` was for movies). The `CheckOn` row,
+  numbered list and were not closed: script import, and file dates after a
+  series scan (the fix of `e0a81e4` was for movies; the series' since). The `CheckOn` row,
   low-medium, was unchanged at the triage and is closed since.
 - `docs/DESIGN.md` section 14, "Logs", said the debug and trace files
   follow `RUST_LOG` alone, while the saved Log Level applies at once.

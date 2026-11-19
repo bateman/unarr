@@ -7,7 +7,7 @@
 
 use std::path::Path;
 
-use chrono::{DateTime, NaiveDate, Utc};
+use chrono::{DateTime, NaiveDate, Timelike, Utc};
 use rusqlite::Connection;
 
 use super::decide::Environment;
@@ -255,10 +255,21 @@ pub fn change_file_date(
     let Some(first) = episodes.first() else {
         return false;
     };
+    let current = transfer::last_write_time(Path::new(path));
     let target: Option<DateTime<Utc>> = match config.file_date {
         // The movie dates are Radarr's values of the setting.
         FileDateType::None | FileDateType::Cinemas | FileDateType::Release => None,
-        FileDateType::UtcAirDate => first.air_date_utc,
+        // The original keeps the fraction of a second the file's date had
+        // (recorded on Sonarr 4.0.20: a file dated `…:00.250` is dated
+        // `22:00:00.250` after the scan), which the local date does not.
+        FileDateType::UtcAirDate => first.air_date_utc.map(|utc| {
+            let utc = utc.max(DateTime::<Utc>::UNIX_EPOCH);
+            if current == Some(utc) {
+                return utc;
+            }
+            let fraction = current.map_or(0, |c| c.timestamp_subsec_nanos());
+            utc.with_nanosecond(fraction).unwrap_or(utc)
+        }),
         FileDateType::LocalAirDate => {
             let (Some(date), Some(time)) = (
                 first.air_date,
@@ -285,8 +296,8 @@ pub fn change_file_date(
     let Some(target) = target else {
         return false;
     };
-    let current = transfer::last_write_time(Path::new(path));
-    if current.is_some_and(|c| c.timestamp() == target.timestamp()) {
+    // `DateTime.Equals`: to the tick, not to the second.
+    if current == Some(target) {
         return false;
     }
     if let Err(e) = transfer::try_set_last_write_time(Path::new(path), target) {
