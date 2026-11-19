@@ -1237,6 +1237,15 @@ the size are in section 20, with why they were not taken.
   Unarr's own code logs at it and the libraries stay at info; the debug
   and trace files are written only at their levels. `RUST_LOG`, when
   set, is the operator's word: it decides, and the setting is ignored.
+- **The console has a level and a format of its own.** `ConsoleLogLevel`
+  (`config.xml`, `<App>__Log__ConsoleLevel`, `PUT config/host`) when
+  set, else info, or the Log Level when that is quieter, as
+  `ReconfigureLogging` has it: debug and trace go to the files, not to
+  `docker logs`. The filter in front of everything lets through the more
+  verbose of the two levels; the console, the files and the recent lines
+  of `GET /log` each keep their own. `ConsoleLogFormat` `Clef` writes the
+  console as the originals' `CompactJsonLayout` does (`@t`, `@l`, `@x`,
+  `@m`, one object a line). `RUST_LOG` leaves the format to the settings.
 - **Secrets are taken out of every log line.** `CleanseLogMessage`'s
   rules, one for one (API keys, passkeys and tokens in URLs, Plex's
   token, user names in paths, download clients' and webhooks' secrets,
