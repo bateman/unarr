@@ -17,7 +17,7 @@ that source.
 | 4. Requests the web UI makes | [3-4-routes.md](3-4-routes.md), table B | 242 calls | 23 missing, 3 parameters ignored |
 | 5. The UI at several screen densities | [5-browser.md](5-browser.md) | 36 pages on 5 screens | none |
 | 6. Event handlers, commands, housekeeping | [6-events.md](6-events.md) | 214 entries | 29 missing, 6 partial, none high |
-| 7. Where each row stands now | [7-triage.md](7-triage.md) | 193 rows of reports 1, 2, 3, 4 and 6 | 60 open, 10 partial |
+| 7. Where each row stands now | [7-triage.md](7-triage.md) | 193 rows of reports 1, 2, 3, 4 and 6 | 51 open, 5 partial |
 | 8. The same method on Radarr | [8-radarr.md](8-radarr.md) | 259 routes, 79 UI paths, 15 settings, 35 commands, 324 requests | 9 found, 9 closed; a tenth found later, closed |
 
 The search, grab, import and delete chains are complete. The gaps are at
@@ -158,7 +158,9 @@ definitions, tasks, commands and health, and the body limit. Then four of
 the medium rows, with four low ones in the same code: Allowed Hosts behind
 a proxy that rewrites `Host`, the login lines fail2ban reads, a request
 outside the URL base, and paths under `/api` that are not v3, each recorded
-on both originals under a changed `config.xml` first. The rows now stand at
-110 closed, 54 open, 8 partial, 7 deliberate and 14 not applicable; the
-triage says which and how, and what of the same was closed on Radarr's
-side.
+on both originals under a changed `config.xml` first, and the file dates
+after a series scan, recorded on Sonarr; the last two medium rows, script
+import and SignalR without WebSockets, are decisions to differ
+(`docs/DESIGN.md`, sections 21.3 and 21.4). The rows now stand at 112 closed, 51 open,
+5 partial, 11 deliberate and 14 not applicable; the triage says which and
+how, and what of the same was closed on Radarr's side.

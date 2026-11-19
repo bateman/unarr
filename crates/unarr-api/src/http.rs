@@ -28,10 +28,10 @@ const CACHE_FOREVER: &str = "max-age=31536000, public";
 /// name and the router says which methods the route does take.
 const NOT_HEAD: &[u8] = b"HEAD-AS-ASKED";
 
-/// A path lower-cased and without the URL base.
-fn app_path(state: &AppState, path: &str) -> String {
+/// A path lower-cased and without the URL base the router was built with.
+fn app_path(state: &AppState, request: &Request, path: &str) -> String {
     let path = path.to_ascii_lowercase();
-    let base = state.settings().url_base.to_ascii_lowercase();
+    let base = crate::routed_url_base(state, request).to_ascii_lowercase();
     match path.strip_prefix(&base) {
         Some(rest) if !base.is_empty() && (rest.is_empty() || rest.starts_with('/')) => rest.to_owned(),
         _ => path,
@@ -46,7 +46,7 @@ fn asked_path(state: &AppState, request: &Request) -> String {
         .get::<OriginalUri>()
         .map(|uri| uri.0.path())
         .unwrap_or(request.uri().path());
-    app_path(state, path)
+    app_path(state, request, path)
 }
 
 fn is_api(path: &str) -> bool {
@@ -62,7 +62,7 @@ fn is_api(path: &str) -> bool {
 /// - `Allow` goes with a 405 only, and lists what was declared.
 pub async fn methods(State(state): State<AppState>, mut request: Request, next: Next) -> Response {
     if request.method() == Method::HEAD {
-        let path = app_path(&state, request.uri().path());
+        let path = app_path(&state, &request, request.uri().path());
         if is_api(&path) || path.starts_with("/feed/") {
             if let Ok(asked) = Method::from_bytes(NOT_HEAD) {
                 *request.method_mut() = asked;

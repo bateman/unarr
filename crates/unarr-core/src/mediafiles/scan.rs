@@ -15,10 +15,10 @@ use super::local::{DeleteReason, ImportMode};
 use super::mediainfo;
 use super::transfer;
 use crate::db::Db;
-use crate::model::{EpisodeFile, Series};
+use crate::model::{Episode, EpisodeFile, Series};
 use crate::parser::media_extensions::is_media_extension;
 use crate::store;
-use crate::store::config::MediaManagementConfig;
+use crate::store::config::{FileDateType, MediaManagementConfig};
 
 use fancy_regex::Regex;
 use std::sync::OnceLock;
@@ -342,6 +342,7 @@ pub fn scan(
         })?;
     }
     backfill_media_info(db, &env.config, series)?;
+    update_file_dates(db, &env.config, series)?;
     if env.config.delete_empty_folders {
         transfer::remove_empty_subfolders(Path::new(&series.path));
         if transfer::folder_empty(Path::new(&series.path)) {
@@ -365,6 +366,53 @@ pub fn scan(
     unmonitor_missing(db, &env.config, &events)?;
     events.push(ImportEvent::SeriesScanned { series_id: series.id });
     Ok(events)
+}
+
+/// `UpdateEpisodeFileService.Handle(SeriesScannedEvent)`: with Change File
+/// Date set, the files of the series are dated as an import dates them,
+/// each by the first of its episodes. Returns how many were changed.
+/// Recorded on Sonarr 4.0.20, which the import alone did not match: a
+/// library whose files were brought in before the setting was turned on,
+/// or whose air dates were corrected since, is dated by the next scan.
+pub fn update_file_dates(db: &Db, config: &MediaManagementConfig, series: &Series) -> anyhow::Result<usize> {
+    if config.file_date == FileDateType::None {
+        return Ok(0);
+    }
+    let series_id = series.id;
+    let (files, episodes) = db.call_blocking(move |conn| {
+        Ok((
+            store::episodes::list_files(conn, series_id)?,
+            store::episodes::list_episodes(conn, series_id, None)?,
+        ))
+    })?;
+    // `EpisodesWithFiles` grouped by file, in one pass: the episodes in the
+    // order of their ids, so that the first of each file is the one the
+    // original's `First()` takes.
+    let mut by_file: std::collections::HashMap<i64, Vec<Episode>> = std::collections::HashMap::new();
+    for e in episodes.into_iter().filter(|e| e.episode_file_id > 0) {
+        by_file.entry(e.episode_file_id).or_default().push(e);
+    }
+    let mut changed = 0;
+    let mut dated = 0;
+    for file in &files {
+        let Some(in_file) = by_file.get(&file.id) else {
+            continue;
+        };
+        dated += 1;
+        let path = super::join(&series.path, &file.relative_path);
+        if approve::change_file_date(config, &path, series, in_file) {
+            changed += 1;
+        }
+    }
+    if changed > 0 {
+        tracing::debug!(
+            "Changed file date for {changed} files of {dated} in {}",
+            series.title
+        );
+    } else {
+        tracing::debug!("No file dates changed for {}", series.title);
+    }
+    Ok(changed)
 }
 
 /// `EpisodeService.HandleAsync(SeriesScannedEvent)`: with "unmonitor
@@ -400,6 +448,160 @@ fn unmonitor_missing(db: &Db, config: &MediaManagementConfig, events: &Events) -
 #[cfg(test)]
 mod tests {
     use super::*;
+    use chrono::NaiveDate;
+
+    fn episode(id: i64, file: i64, air_date: &str) -> Episode {
+        let date = NaiveDate::parse_from_str(air_date, "%Y-%m-%d").unwrap();
+        Episode {
+            id,
+            series_id: 1,
+            tvdb_id: id,
+            season_number: 1,
+            episode_number: id,
+            title: None,
+            overview: None,
+            episode_file_id: file,
+            absolute_episode_number: None,
+            scene_absolute_episode_number: None,
+            scene_season_number: None,
+            scene_episode_number: None,
+            unverified_scene_numbering: false,
+            monitored: true,
+            air_date: Some(date),
+            air_date_utc: Some(date.and_hms_opt(22, 0, 0).unwrap().and_utc()),
+            runtime: 60,
+            finale_type: None,
+            images: Vec::new(),
+            ratings: Default::default(),
+            last_search_time: None,
+            aired_after_season_number: None,
+            aired_before_season_number: None,
+            aired_before_episode_number: None,
+        }
+    }
+
+    /// With Change File Date set, a scan dates the series' files by the
+    /// first episode of each, as Sonarr 4.0.20 was recorded doing: the air
+    /// date and time in the machine's zone, or the UTC air date with the
+    /// fraction of a second the file had. Off, nothing changes.
+    #[test]
+    fn a_scan_dates_the_files_by_their_episodes() {
+        use crate::model::{QualityModel, ReleaseType};
+        use crate::store::config::FileDateType;
+        let folder = std::env::temp_dir().join(format!("unarr_filedates_{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&folder);
+        std::fs::create_dir_all(&folder).unwrap();
+        let db = Db::open_in_memory().unwrap();
+        let mut series = crate::store::series::tests::sample(1);
+        series.path = folder.to_string_lossy().into_owned();
+        series.air_time = Some("22:00".into());
+        let stored = series.clone();
+        db.call_blocking(move |conn| {
+            conn.execute_batch(
+                "INSERT INTO quality_profiles (id, name, cutoff, items) VALUES (1, 'Any', 1, '[]');
+                 INSERT INTO tags (id, label) VALUES (1, 'drama');",
+            )?;
+            crate::store::series::insert(conn, &stored)?;
+            for (id, name) in [(1, "e01-02.mkv"), (2, "e03.mkv")] {
+                store::episodes::insert_file(
+                    conn,
+                    &EpisodeFile {
+                        id,
+                        series_id: 1,
+                        season_number: 1,
+                        relative_path: name.into(),
+                        original_file_path: None,
+                        size: 1,
+                        date_added: Utc::now(),
+                        scene_name: None,
+                        release_group: None,
+                        release_hash: None,
+                        quality: QualityModel {
+                            quality_id: 7,
+                            version: 1,
+                            real: 0,
+                            is_repack: false,
+                        },
+                        languages: vec![1],
+                        media_info: None,
+                        indexer_flags: 0,
+                        release_type: ReleaseType::SingleEpisode,
+                    },
+                )?;
+            }
+            // A double episode in the first file: the first of the two names its date.
+            for e in [
+                episode(1, 1, "2026-02-09"),
+                episode(2, 1, "2026-02-16"),
+                episode(3, 2, "2026-02-23"),
+                episode(4, 0, "2026-03-02"),
+            ] {
+                store::episodes::insert_episode(conn, &e)?;
+            }
+            Ok(())
+        })
+        .unwrap();
+        let files = [folder.join("e01-02.mkv"), folder.join("e03.mkv")];
+        let written = DateTime::parse_from_rfc3339("2026-11-19T08:58:00.25Z")
+            .unwrap()
+            .to_utc();
+        let reset = || {
+            for f in &files {
+                std::fs::write(f, b"x").unwrap();
+                transfer::set_last_write_time(f, written);
+            }
+        };
+        let dated = || {
+            files
+                .iter()
+                .map(|f| transfer::last_write_time(f).unwrap())
+                .collect::<Vec<_>>()
+        };
+        let config = |file_date| MediaManagementConfig {
+            file_date,
+            ..Default::default()
+        };
+
+        reset();
+        assert_eq!(
+            update_file_dates(&db, &config(FileDateType::None), &series).unwrap(),
+            0
+        );
+        assert_eq!(dated(), [written, written]);
+
+        assert_eq!(
+            update_file_dates(&db, &config(FileDateType::UtcAirDate), &series).unwrap(),
+            2
+        );
+        let utc = |s: &str| DateTime::parse_from_rfc3339(s).unwrap().to_utc();
+        assert_eq!(
+            dated(),
+            [utc("2026-02-09T22:00:00.25Z"), utc("2026-02-23T22:00:00.25Z")]
+        );
+
+        reset();
+        assert_eq!(
+            update_file_dates(&db, &config(FileDateType::LocalAirDate), &series).unwrap(),
+            2
+        );
+        let local = |d: &str| {
+            NaiveDate::parse_from_str(d, "%Y-%m-%d")
+                .unwrap()
+                .and_hms_opt(22, 0, 0)
+                .unwrap()
+                .and_local_timezone(chrono::Local)
+                .single()
+                .unwrap()
+                .to_utc()
+        };
+        assert_eq!(dated(), [local("2026-02-09"), local("2026-02-23")]);
+        // Already dated to the tick: nothing to change.
+        assert_eq!(
+            update_file_dates(&db, &config(FileDateType::LocalAirDate), &series).unwrap(),
+            0
+        );
+        let _ = std::fs::remove_dir_all(&folder);
+    }
 
     /// Files that came without media info, or with one too old to read,
     /// get it; those that have it are left alone.
