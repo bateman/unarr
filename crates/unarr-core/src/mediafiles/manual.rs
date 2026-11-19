@@ -875,10 +875,13 @@ fn untracked_downloads_completed(
                     series,
                     episodes: members.iter().flat_map(|(l, _)| l.episodes.clone()).collect(),
                     files: members.iter().map(|(_, f)| (*f).clone()).collect(),
+                    // A file whose path does not parse has the empty
+                    // `ParsedEpisodeInfo` here, which is none.
                     parsed: first
                         .folder_episode_info
                         .clone()
-                        .or_else(|| first.file_episode_info.clone()),
+                        .or_else(|| first.file_episode_info.clone())
+                        .filter(|p| *p != crate::parser::ParsedEpisodeInfo::default()),
                     source_path: super::longest_common_path(&paths),
                 },
             )))
@@ -995,5 +998,22 @@ mod tests {
             [vec![2]]
         );
         assert!(untracked_downloads_completed(&imported, &[0, 2]).is_empty());
+    }
+
+    /// A hash-named file in a hash-named folder parses as nothing: the
+    /// event is raised with no release, and no notification follows it.
+    #[test]
+    fn a_file_that_parses_as_nothing_names_no_release() {
+        let mut r = result(1, 1, None, true);
+        if let Some(local) = r.decision.local_episode.as_mut() {
+            local.file_episode_info =
+                Some(parser::parse_path("/downloads/tv/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2.mkv").unwrap_or_default());
+            local.folder_episode_info = parser::parse_title("07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2");
+        }
+        let events = untracked_downloads_completed(&[r], &[]);
+        match events.as_slice() {
+            [ImportEvent::UntrackedDownloadCompleted(ev)] => assert!(ev.parsed.is_none()),
+            other => panic!("{other:?}"),
+        }
     }
 }

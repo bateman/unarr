@@ -616,7 +616,16 @@ impl Notifier {
                     self.on_import_complete(&message, now).await;
                 }
                 ImportEvent::UntrackedDownloadCompleted(ev) => {
-                    let parsed = ev.parsed.clone().unwrap_or_default();
+                    // The original's handler reads the release's quality,
+                    // which a path that did not parse leaves null: it
+                    // throws and nothing is sent (the long list's manual
+                    // import of a hash-named file, recorded).
+                    let Some(parsed) = ev.parsed.clone() else {
+                        tracing::debug!(
+                            "no Import Complete notification: the imported files name no release"
+                        );
+                        continue;
+                    };
                     let paths: Vec<String> = ev
                         .files
                         .iter()

@@ -64,7 +64,7 @@ pub struct UntrackedDownloadCompleted {
     pub series: Series,
     pub episodes: Vec<Episode>,
     pub files: Vec<EpisodeFile>,
-    /// The folder's release, else the file's.
+    /// The folder's release, else the file's; none when neither parsed.
     pub parsed: Option<crate::parser::ParsedEpisodeInfo>,
     /// The longest path the imported files share.
     pub source_path: String,
