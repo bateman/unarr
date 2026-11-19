@@ -495,6 +495,10 @@ pub(crate) fn log_auth(
 ) {
     let client = crate::forwarded::client(remote, headers, &state.settings().trusted_networks);
     let ip = client.address.map(|a| a.to_string()).unwrap_or_default();
+    // The name is the client's to choose: a line break in it would end this
+    // line and start one of the caller's making, an `Auth-Failure` for an
+    // address the intrusion detection would then block.
+    let username: String = username.chars().filter(|c| !c.is_control()).collect();
     match outcome {
         AuthOutcome::Failure => tracing::warn!(target: "Auth", "Auth-Failure ip {ip} username '{username}'"),
         AuthOutcome::Success if state.personality() != Personality::Radarr => {
