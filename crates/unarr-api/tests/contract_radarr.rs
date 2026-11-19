@@ -1915,3 +1915,13 @@ fn the_order_check_sees_a_file_announced_out_of_turn() {
         1
     );
 }
+
+/// `CleanupAdditionalUsers` and `FixFutureRunScheduledTasks`, against
+/// what the original's database held after the same housekeeping
+/// (`tests/fixtures/radarr/golden-housekeeping`).
+#[tokio::test]
+async fn housekeeping_repairs_users_and_task_runs_as_the_original() {
+    let dirs = ReplayDirs::create_named("housekeeping");
+    let state = build_state(&dirs);
+    housekeeping_repairs_as_the_original(&state, &fixture_dir().join("golden-housekeeping"), API_KEY).await;
+}

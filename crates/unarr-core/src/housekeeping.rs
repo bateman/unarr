@@ -177,10 +177,14 @@ pub(crate) fn future_status_times(conn: &Connection, now: DateTime<Utc>) -> anyh
     Ok(fixed)
 }
 
-/// `CleanupAdditionalUsers`: one user, the first the table gives.
+/// `CleanupAdditionalUsers`: one user. The original keeps "the first"
+/// the table gives, with no order asked for; SQLite answers that from the
+/// smallest index that covers it, the unique index on the user name, so
+/// the user kept is the one whose name sorts first (recorded on both
+/// originals, `golden-housekeeping`).
 pub(crate) fn additional_users(conn: &Connection, _: DateTime<Utc>) -> anyhow::Result<usize> {
     Ok(conn.execute(
-        "DELETE FROM users WHERE id NOT IN (SELECT id FROM users LIMIT 1)",
+        "DELETE FROM users WHERE id NOT IN (SELECT id FROM users ORDER BY username LIMIT 1)",
         [],
     )?)
 }
@@ -297,7 +301,7 @@ mod tests {
         db.call_blocking(move |conn| {
             conn.execute_batch(
                 "INSERT INTO users (id, identifier, username, password) VALUES
-                    (3, 'c', 'first', 'x'), (5, 'e', 'second', 'y'), (9, 'i', 'third', 'z');",
+                    (2, 'c', 'unarr', 'x'), (3, 'e', 'second', 'y'), (9, 'i', 'third', 'z');",
             )?;
             let report = run(conn, now);
             assert_eq!(
@@ -308,7 +312,8 @@ mod tests {
                 .into_iter()
                 .map(|u| u.username)
                 .collect();
-            assert_eq!(users, ["first"]);
+            // As the original's covering index on the name orders them.
+            assert_eq!(users, ["second"]);
             assert_eq!(additional_users(conn, now)?, 0);
             Ok(())
         })

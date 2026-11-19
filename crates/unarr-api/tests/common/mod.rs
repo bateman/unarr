@@ -535,3 +535,84 @@ pub fn map_paths(text: &str, mappings: &[(String, &str)]) -> String {
     }
     out
 }
+
+/// `golden-housekeeping`: the database as its `setup.sh` leaves the
+/// original's (a second user, the health check's last run a day ahead),
+/// the `Housekeeping` command posted, and what is left compared with the
+/// `db-after.json` written from the original's database: the user it
+/// kept, and no task's last run still ahead.
+pub async fn housekeeping_repairs_as_the_original(
+    state: &unarr_api::AppState,
+    golden_dir: &std::path::Path,
+    api_key: &str,
+) {
+    let after: Value =
+        serde_json::from_str(&std::fs::read_to_string(golden_dir.join("db-after.json")).unwrap()).unwrap();
+    let ahead = state.now() + chrono::Duration::days(1);
+    state
+        .db()
+        .call(move |conn| {
+            conn.execute(
+                "INSERT INTO users (identifier, username, password) VALUES ('5f0c6a3e-0000-4000-8000-000000000002', 'second', 'x')",
+                [],
+            )?;
+            let task = unarr_core::store::providers::list_scheduled_tasks(conn)?
+                .into_iter()
+                .find(|t| t.type_name.ends_with(".CheckHealthCommand"))
+                .expect("the health check's task");
+            unarr_core::store::providers::set_scheduled_task_execution(conn, task.id, ahead, ahead)?;
+            Ok(())
+        })
+        .await
+        .unwrap();
+    state.start_runtime().await.expect("the command runtime");
+    let app = unarr_api::router(state.clone());
+    let response = app
+        .oneshot(
+            Request::builder()
+                .method("POST")
+                .uri("/api/v3/command")
+                .header("X-Api-Key", api_key)
+                .header("content-type", "application/json")
+                .body(Body::from(r#"{"name": "Housekeeping"}"#))
+                .unwrap(),
+        )
+        .await
+        .unwrap();
+    assert_eq!(response.status(), StatusCode::CREATED);
+    tokio::time::timeout(
+        std::time::Duration::from_secs(60),
+        state.commands().unwrap().wait_idle(),
+    )
+    .await
+    .expect("the housekeeping finishes within a minute");
+    let now = state.now();
+    let (users, ahead): (Vec<String>, Vec<String>) = state
+        .db()
+        .call(move |conn| {
+            let users = unarr_core::store::providers::list_users(conn)?
+                .into_iter()
+                .map(|u| u.username)
+                .collect();
+            let ahead = unarr_core::store::providers::list_scheduled_tasks(conn)?
+                .into_iter()
+                .filter(|t| t.last_execution.is_some_and(|last| last > now))
+                .map(|t| t.type_name)
+                .collect();
+            Ok((users, ahead))
+        })
+        .await
+        .unwrap();
+    assert_eq!(serde_json::json!(users), after["users"]);
+    let recorded_ahead: Vec<&Value> = after["tasks"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .filter(|t| t["inTheFuture"] == true)
+        .collect();
+    assert!(
+        recorded_ahead.is_empty(),
+        "the recording left {recorded_ahead:?} ahead"
+    );
+    assert!(ahead.is_empty(), "still ahead after the housekeeping: {ahead:?}");
+}

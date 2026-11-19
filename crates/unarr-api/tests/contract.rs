@@ -2263,3 +2263,12 @@ async fn the_events_and_settings_of_the_audit_match_the_original() {
         ]
     );
 }
+
+/// `CleanupAdditionalUsers` and `FixFutureRunScheduledTasks`, against
+/// what the original's database held after the same housekeeping
+/// (`tests/fixtures/sonarr/golden-housekeeping`).
+#[tokio::test]
+async fn housekeeping_repairs_users_and_task_runs_as_the_original() {
+    let state = build_state();
+    housekeeping_repairs_as_the_original(&state, &fixture_dir().join("golden-housekeeping"), API_KEY).await;
+}

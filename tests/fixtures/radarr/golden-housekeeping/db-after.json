@@ -1,0 +1,62 @@
+{
+ "tasks": [
+  {
+   "inTheFuture": false,
+   "interval": 10080,
+   "typeName": "NzbDrone.Core.Backup.BackupCommand"
+  },
+  {
+   "inTheFuture": false,
+   "interval": 1,
+   "typeName": "NzbDrone.Core.Download.RefreshMonitoredDownloadsCommand"
+  },
+  {
+   "inTheFuture": false,
+   "interval": 360,
+   "typeName": "NzbDrone.Core.HealthCheck.CheckHealthCommand"
+  },
+  {
+   "inTheFuture": false,
+   "interval": 1440,
+   "typeName": "NzbDrone.Core.Housekeeping.HousekeepingCommand"
+  },
+  {
+   "inTheFuture": false,
+   "interval": 5,
+   "typeName": "NzbDrone.Core.ImportLists.ImportListSyncCommand"
+  },
+  {
+   "inTheFuture": false,
+   "interval": 100,
+   "typeName": "NzbDrone.Core.Indexers.RssSyncCommand"
+  },
+  {
+   "inTheFuture": false,
+   "interval": 1440,
+   "typeName": "NzbDrone.Core.MediaFiles.Commands.CleanUpRecycleBinCommand"
+  },
+  {
+   "inTheFuture": false,
+   "interval": 5,
+   "typeName": "NzbDrone.Core.Messaging.Commands.MessagingCleanupCommand"
+  },
+  {
+   "inTheFuture": false,
+   "interval": 1440,
+   "typeName": "NzbDrone.Core.Movies.Commands.RefreshCollectionsCommand"
+  },
+  {
+   "inTheFuture": false,
+   "interval": 1440,
+   "typeName": "NzbDrone.Core.Movies.Commands.RefreshMovieCommand"
+  },
+  {
+   "inTheFuture": false,
+   "interval": 360,
+   "typeName": "NzbDrone.Core.Update.Commands.ApplicationCheckUpdateCommand"
+  }
+ ],
+ "users": [
+  "second"
+ ]
+}
