@@ -408,7 +408,7 @@ def cmd_from_log(args) -> None:
 
 # Matched anywhere in the key name (`web_ui_username`, `nzbget_password`).
 SECRET_JSON_KEY = re.compile(
-    r"(apikey|api_key|^key$|password|passwd|^pass$|username|user_name|^user$|login|token|cookie|^sid$|"
+    r"(apikey|api_key|nzb_key|^key$|password|passwd|^pass$|username|user_name|^user$|login|token|cookie|^sid$|"
     r"session|secret|email|mail|host|hostname|^ip$|address|^server|servers)",
     re.IGNORECASE,
 )
