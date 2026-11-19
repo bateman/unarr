@@ -2317,31 +2317,140 @@ the image job of CI never enable. Without it there is no
 code that reads any of them; no variable brings them back. A binary
 built with it says so on its first line of output.
 
-## 21. Differences kept on purpose, from the audit
+## 21. Decisions taken for issue #10
 
-Decided by the maintainer on 19 November 2026, for the last two rows the
-audit rated medium (`docs/audit/7-triage.md`), which a fix would have
-made larger than what they serve.
+The decisions the maintainer took while Unarr was made the daily driver
+(issue #10), each with the question, the options weighed, the choice, why,
+what it costs and where the evidence is. The estimates of effort were
+given with the question and are estimates.
 
-- **Import Using Script is not applied.** Sonarr and Radarr can hand each
-  import to a user's script (`UseScriptImport`, `ScriptImportPath`),
-  which decides how the file reaches the library. Unarr keeps the two
-  settings, shows them and saves them, and imports as the other media
-  management settings say (move, copy or hardlink). Running a script the
-  settings name is a new way for whoever can save settings to run code on
-  the host, and nobody known uses it with Unarr; the maintainer's
-  installation does not. What changed is that it no longer happens
-  silently: `ScriptImportCheck`, a health check of Unarr's own that the
-  originals do not have, warns while the setting is on, at start, on the
-  schedule and five seconds after a save of the settings, as
-  `ImportMechanismCheck` runs.
-- **The hub is served over WebSockets only.** SignalR's negotiation
-  lists server-sent events and long polling beside WebSockets, as the
-  originals' does, and the recorded answer is kept (golden
-  `signalr-negotiate`); Unarr serves the first transport only. A browser
-  behind a reverse proxy that does not pass WebSocket upgrades gets no
-  live updates, and its pages refresh only when reloaded. Every proxy in
-  use passes them (Traefik on its own, nginx with the two upgrade
-  headers, Caddy on its own); a proxy that does not is configured to.
-  Serving the two fallbacks would be a second hub protocol to keep in
-  step with the first.
+### 21.1 The scheduled tasks on the originals' cadence
+
+Proposed when the comparison with the originals found the difference, and
+decided by the maintainer on 15 November 2026.
+
+- **The question.** Unarr's download monitor (`RefreshMonitoredDownloads`)
+  asked the download clients every 60 s where the originals ask every
+  90 s, as their logs showed on the fixtures. The likely cause, read from
+  Unarr's code and inferred for the originals, not checked in their
+  source: they keep a task's last run to the tick and arm their timer 30 s
+  after a tick ends, so a one-minute task that ends a few milliseconds
+  after the tick that pushed it is due only on the tick after next; Unarr
+  stored the last run to the second, so the same task was due a minute
+  later.
+- **Options.**
+  - *Run on the originals' cadence* (chosen): task times stored to the
+    microsecond, the scheduler sleeping a full period after each tick.
+  - *Keep 60 s*: a finished download would leave the queue up to 30 s
+    sooner, for half as many requests again to qBittorrent and NZBGet, and
+    the comparison's idle work would no longer be the same on both sides.
+- **Why.** Unarr mirrors the originals' behaviour rather than improving on
+  it (section 6); the clients see the load they saw before the switch, and
+  `docs/originals-comparison.md` compares the same work.
+- **Cost.** None found: the 30 s of extra wait are the originals' too.
+- **Evidence.** Commit `3e81473`; the idle work in the method of
+  `docs/originals-comparison.md`.
+
+### 21.2 glibc's malloc arenas left at their default
+
+The maintainer asked for the measurements before any change; the
+recommendation that followed them was accepted, and its record merged by
+the maintainer, on 16 November 2026.
+
+- **The question.** Unarr's peak anonymous memory during the comparison's
+  reads on the scaled library swings between about 140 and 260 MiB from
+  one run to the next: glibc gives a thread that allocates under
+  contention an arena of its own, and the more arenas a large answer
+  (`/movie`, 2,123 movies) has grown, the higher the peak. Capping
+  `MALLOC_ARENA_MAX` at start would steady it.
+- **Options, all measured** (three fresh processes per setting, 4-core
+  x86-64, scaled library):
+  - *The default, 8 per core* (chosen).
+  - *4 arenas*: the peak 133-192 MiB; 18 % and 38 % of the throughput lost
+    with 4 and 8 clients without pause; one user's page loads 3 % slower,
+    and no lower peak in that use.
+  - *2 arenas*: 131-190 MiB; 47 % and 55 % lost.
+  - *1 arena*: the only stable peak, 124-129 MiB; 76 % and 77 % lost, one
+    user's page load 16-17 % slower at p50 (40 ms on Radarr's movie index)
+    to keep the peak 75 MiB lower for the seconds before the next trim.
+- **Why.** Every cap costs more speed than the memory it saves, and the
+  highest peaks come from concurrent requests, which no cap below one
+  arena removes. What would lower them is answers that allocate less
+  (`/movie` and `/series` built whole before they are sent).
+- **Cost.** The peak keeps swinging between runs, which the comparison's
+  history notes on each run. Whoever runs a glibc build and prefers the
+  steady peak sets `MALLOC_ARENA_MAX=1` without a change to the code. The
+  published image is a static musl build, with no per-thread arenas: the
+  question does not arise there, and its memory under load is not
+  measured yet. The ARM64 NAS was not measured either.
+- **Evidence.** `docs/originals-comparison.md`, the two `MALLOC_ARENA_MAX`
+  tables; commit `c79f6df`.
+
+### 21.3 Import Using Script is not applied, and a warning says so
+
+Decided by the maintainer on 19 November 2026, among the three options
+below, the recommended one; for a row the audit rated medium
+(`docs/audit/7-triage.md`, `UseScriptImport`).
+
+- **The question.** Sonarr and Radarr can hand each import to a user's
+  script (`UseScriptImport`, `ScriptImportPath`), which decides how the
+  file reaches the library. Unarr kept and showed the two settings and
+  imported its own way (move, copy or hardlink, as the other media
+  management settings say), without a word.
+- **Options.**
+  - *Implement it*: port the original's script import (the script run with
+    the import's environment variables, its answer read back), recorded
+    on the original with a test script first. Estimated at several hours,
+    on a branch of its own.
+  - *Deliberate, with a warning* (chosen): estimated at an hour.
+  - *Deliberate, with no warning*: the decision and its reason recorded
+    and nothing else; whoever turns the setting on still learns nothing.
+- **Why.** Nobody known imports through a script with Unarr, and the
+  maintainer's installation has it off: the port would cost several hours
+  for no one. What made the row a defect was that the difference was
+  silent, and the warning removes that for an hour's work. Noted when the
+  decision was written down, not weighed in the question: running a
+  program the settings name gives whoever can save settings a way to run
+  code on the host, which Unarr does not offer today; the originals offer
+  it, and a port would bring it along.
+- **Cost.** An installation moved from an original that imports through
+  a script loses what the script did; the health page says so from the
+  first start.
+- **How it is done** (the implementer's choices, not asked): a check of
+  Unarr's own, `ScriptImportCheck`, rather than a message added to the
+  original's `ImportMechanismCheck`, whose verdicts are compared with the
+  originals'; no wiki link, the Servarr wiki not being about Unarr; it
+  runs at start, on the schedule and five seconds after a save of the
+  settings, as `ImportMechanismCheck` runs (`core/health.rs`).
+- **To revisit** when someone needs script import: then the first option.
+
+### 21.4 The hub is served over WebSockets only
+
+Decided by the maintainer on 19 November 2026, between the two options
+below, the recommended one; for a row the audit rated medium
+(`docs/audit/7-triage.md`, row 2.11 of `2-http.md`).
+
+- **The question.** SignalR's client falls back to server-sent events and
+  then to long polling when a WebSocket cannot be opened. Unarr serves
+  WebSockets only, so a browser behind a reverse proxy that does not pass
+  WebSocket upgrades gets no live updates: its pages change only when
+  reloaded.
+- **Options.**
+  - *Serve the two fallbacks*, recorded on the original first: estimated
+    at several hours, and a second and third transport of the hub
+    protocol to keep in step with the first from then on.
+  - *Deliberate* (chosen).
+- **Why.** The maintainer's Traefik passes WebSocket upgrades, so the
+  fallbacks would serve no one known, for several hours and a protocol to
+  maintain. The common reverse proxies pass them too (Traefik and Caddy on
+  their own, nginx with the `Upgrade` and `Connection` headers); a proxy
+  that does not is configured to, which costs its owner less than the
+  fallbacks cost Unarr.
+- **Cost.** Behind such a proxy, no live updates until it is configured.
+- **How it is done** (the implementer's choice, not asked): the
+  negotiation still lists the three transports, as the original's
+  recorded answer does (golden `signalr-negotiate`), rather than
+  WebSockets alone. A client that cannot upgrade then tries the two others
+  and is refused, where with WebSockets alone listed it would stop sooner;
+  it gets no live updates either way, and the answer stays the original's.
+- **To revisit** if a user's proxy cannot pass WebSockets.

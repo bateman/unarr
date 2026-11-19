@@ -1008,7 +1008,7 @@ async fn import_list_root_folder(ctx: &Context<'_>) -> anyhow::Result<HealthChec
 /// client that cannot be asked leaves the verdict for later.
 /// Unarr's own check, which the originals do not have. Import Using
 /// Script is a setting Unarr keeps and does not apply, by decision
-/// (`docs/audit/7-triage.md`, `UseScriptImport`): while it is on, the
+/// (`docs/DESIGN.md`, section 21.3): while it is on, the
 /// files are moved, copied or hardlinked as the other media management
 /// settings say, and this says so, where nothing did.
 async fn script_import(ctx: &Context<'_>) -> anyhow::Result<HealthCheck> {

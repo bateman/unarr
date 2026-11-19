@@ -445,7 +445,8 @@ the more arenas have grown, the higher the peak. One process of the
 has run by then.
 
 Capping the arenas would fix the swing, but it costs far more than it
-saves, so `unarrd` leaves glibc's default (8 per core). Measured on
+saves, so `unarrd` leaves glibc's default (8 per core): the maintainer's
+decision, with the options weighed, is `docs/DESIGN.md` section 21.2. Measured on
 2026-11-16, in another 4-core x86-64 container than the tables above,
 with the `749a330` binary on the scaled library: three fresh processes
 per setting; per process three cycles of 5 warm-up passes and a measured

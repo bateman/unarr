@@ -27,7 +27,8 @@ below) are closed, and with them four low rows of the same code (1.6, 1.11,
 of `1-settings.md`, item 13, with its row of `6-events.md`). The last two,
 script import and SignalR without WebSockets (items 14 and 10), are
 **deliberate** by the maintainer's decision of the same day
-(`docs/DESIGN.md`, section 21): Import Using Script stays unapplied and a
+(`docs/DESIGN.md`, sections 21.3 and 21.4, with the options weighed):
+Import Using Script stays unapplied and a
 health check says so while it is on; the hub is served over WebSockets
 only. Each was recorded first on Sonarr 4.0.20 and Radarr 6.4.4
 under a changed `config.xml`; "What was closed afterwards" says how.
@@ -342,7 +343,7 @@ is `crates/unarr-api/src/`.
 | 2.4 | covers with the key | high | CLOSED | `api/routes/mod.rs:80`; live | |
 | 2.8 | backup download headers | low | OPEN | `application/zip` and a disposition (`api/routes/backup.rs:137`) | nobody; the file downloads |
 | 2.9 | `/MediaCoverProxy/{hash}/{file}` | low | OPEN | the file name is ignored, the type guessed from the remote address (`api/routes/series_writes.rs:57`); a wrong name is a 500 | a GIF poster labelled JPEG on Add Series; browsers sniff |
-| 2.11 | SignalR over server-sent events and long polling | medium | DELIBERATE | WebSockets only (`api/routes/signalr.rs`); the negotiation still lists the three transports, as the original's does (golden `signalr-negotiate`). `docs/DESIGN.md` section 21 | a browser behind a proxy that does not pass WebSocket upgrades: no live updates, the proxy is to be configured to pass them |
+| 2.11 | SignalR over server-sent events and long polling | medium | DELIBERATE | WebSockets only (`api/routes/signalr.rs`); the negotiation still lists the three transports, as the original's does (golden `signalr-negotiate`). `docs/DESIGN.md` section 21.4 | a browser behind a proxy that does not pass WebSocket upgrades: no live updates, the proxy is to be configured to pass them |
 | 2.12 | negotiate version | low | OPEN | always version 0 (`signalr.rs:84`) | nobody; the client takes either |
 | 2.13 | `version` message to all clients | low | OPEN | to the new socket only (`signalr.rs:149`) | nobody |
 | 3.2 | the key as a bearer token | medium | CLOSED | `api/auth.rs:26`; test | |
@@ -424,7 +425,7 @@ declared, 404 and 405 are what the router gives by construction.
 | A | `GET /ping`, `HEAD /ping` | CLOSED (2) | `lib.rs:326`, `system.rs:163`; golden `noauth-ping`, test `tests/http.rs:211` | health checks, monitors |
 | A | `GET /api` | CLOSED | `mod.rs:55`, `system.rs:157`; test `tests/http.rs:99` | nobody known |
 | A | `GET /feed/v3/calendar/Sonarr.ics` | CLOSED | `mod.rs:56`, `feed.rs:145`; goldens `feed-calendar*` | UI iCal link, calendar apps |
-| A | `/signalr/messages` over server-sent events and long polling | DELIBERATE | advertised (`signalr.rs:86`), only WebSocket served, by decision (`docs/DESIGN.md` section 21) | UI behind a proxy that blocks WebSockets |
+| A | `/signalr/messages` over server-sent events and long polling | DELIBERATE | advertised (`signalr.rs:86`), only WebSocket served, by decision (`docs/DESIGN.md` section 21.4) | UI behind a proxy that blocks WebSockets |
 | B | restart, shutdown, `series/import`, `history/failed/{id}`, blocklist delete and bulk, exclusions bulk, `PUT metadata/{id}` | CLOSED (8) | as Table A | UI |
 | B | `GET /delayprofile/schema` | NOT APPLICABLE | dead UI code; the original has no such route | nobody |
 | B | the iCal link's parameters | CLOSED | `feed.rs:159` reads `unmonitored`, `premieresOnly`, `asAllDay`, `tags`, `pastDays`, `futureDays` | UI, calendar apps |
@@ -515,7 +516,7 @@ open, 1 deliberate, 2 not applicable.
 | `RecycleBinCleanupDays` | never read | high | CLOSED | `core/mediafiles/transfer.rs:204` | |
 | `FileDate` | import and rename only | medium | CLOSED | the events row above, and the dates compared and set as recorded (`core/mediafiles/approve.rs`, `change_file_date`) | |
 | `EnableMediaInfo` | no backfill on rescan | low | CLOSED | `core/mediafiles/scan.rs:147` | |
-| `UseScriptImport`, `ScriptImportPath` | not applied | medium | DELIBERATE | stored and shown (`settings_writes.rs:349`), not applied by decision (`docs/DESIGN.md` section 21); `ScriptImportCheck` warns while it is on (`core/health.rs`, test `script_import_on_is_said_to_be_ignored`) | whoever imports through a script gets Unarr's own move or hardlink, and a health warning that says so |
+| `UseScriptImport`, `ScriptImportPath` | not applied | medium | DELIBERATE | stored and shown (`settings_writes.rs:349`), not applied by decision (`docs/DESIGN.md` section 21.3); `ScriptImportCheck` warns while it is on (`core/health.rs`, test `script_import_on_is_said_to_be_ignored`) | whoever imports through a script gets Unarr's own move or hardlink, and a health warning that says so |
 | `ImportExtraFiles`, `ExtraFileExtensions` | not applied | medium | CLOSED | `core/mediafiles/extras.rs:334` | |
 | `UILanguage` | not applied | low | OPEN | `api/routes/system.rs:364` always serves the English dictionary, the only one in the tree | whoever picks another language: the interface stays English |
 | proxy (8 settings) | not applied | high | CLOSED | `core/http.rs:71`, `core/outbound.rs:308`; test `core/http.rs:325` | `ProxyCheck` runs again five seconds after a save of the settings (`core/health.rs:250`) |
