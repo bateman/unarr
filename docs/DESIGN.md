@@ -1327,6 +1327,23 @@ the size are in section 20, with why they were not taken.
   trusted proxy names is the one Allowed Hosts checks
   (`docs/audit/7-triage.md`, row 1.3). The setting is not validated on
   save yet (the originals refuse a list that does not parse).
+  - What that costs, kept for parity with the originals (recorded on
+    Sonarr 4.0.20 and Radarr 6.4.4), found by the review of the branch:
+    Allowed Hosts no longer stops DNS rebinding for a browser whose
+    request reaches Unarr from the loopback or a trusted network with an
+    `X-Forwarded-Host` of the page's choosing. A page rebound to Unarr's
+    address is of the same origin as its requests and may add that header,
+    and a listed host in it lets `Host: evil.example` through. That
+    happens to a browser on the machine Unarr runs on, or behind a proxy
+    that passes the client's `X-Forwarded-Host` on: nginx does unless
+    configured to set it, Traefik and Caddy replace it with the host the
+    client asked for. The homelab's Traefik does.
+  - The alternatives weighed: read `X-Forwarded-Host` for the redirects
+    only, as Unarr did before, which refuses what the originals let
+    through behind a proxy that rewrites `Host`; or read it from the
+    networks of `TrustedNetworks` but not from the loopback, which the
+    framework trusts on its own. Both differ from the originals, and the
+    first brings back the 400 of row 1.3 to whoever runs such a proxy.
 - **Each personality logs on its own.** One process serves several
   personalities and a log line does not say whose it is. Rather than mark
   every task (a span on each spawn, and a line lost to the wrong file

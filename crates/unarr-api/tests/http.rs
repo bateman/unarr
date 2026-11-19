@@ -37,6 +37,16 @@ fn app_edited(
     url_base: &str,
     edit: impl FnOnce(&mut unarr_core::config::HostConfig),
 ) -> axum::Router {
+    app_and_state(personality, url_base, edit).0
+}
+
+/// The same, with the state, for a test that changes the settings after the
+/// router was built, as a save from the UI does.
+fn app_and_state(
+    personality: Personality,
+    url_base: &str,
+    edit: impl FnOnce(&mut unarr_core::config::HostConfig),
+) -> (axum::Router, AppState) {
     let name = personality.app_name().to_lowercase();
     let dir = fixtures_dir().join(&name);
     let db = Db::open_in_memory_for(personality).unwrap();
@@ -59,7 +69,7 @@ fn app_edited(
         runtime,
         LogBuffer::new(),
     );
-    unarr_api::router(state)
+    (unarr_api::router(state.clone()), state)
 }
 
 /// A cover folder of this test run's own, with one poster in it.
@@ -790,12 +800,15 @@ async fn logins_and_logouts_are_logged_for_intrusion_detection() {
         let logs = LogBuffer::new();
         let _guard = tracing::subscriber::set_default(tracing_subscriber::registry().with(logs.clone()));
         let app = app_for(personality, "");
+        // The last name carries a line break and the rest of a forged line.
+        let forged = "username=x%27%0A2026-11-19+10%3A00%3A00.0%7CWarn%7CAuth%7CAuth-Failure+ip+192.168.1.10+username+%27y&password=nope";
         for (peer, headers, body) in [
             (lo, &form[..], "username=unarr&password=nope"),
             (lo, &form[..], "username=nobody&password=nope"),
             (other, &form[..], "username=unarr&password=nope"),
             (lo, &forwarded[..], "username=unarr&password=nope"),
             (lo, &form[..], "username=unarr&password=fixture"),
+            (lo, &form[..], forged),
         ] {
             assert_eq!(
                 send(app.clone(), "POST", "/login", peer, headers, body)
@@ -818,6 +831,8 @@ async fn logins_and_logouts_are_logged_for_intrusion_detection() {
             "warn|Auth-Failure ip 192.0.2.2 username 'unarr'",
             "warn|Auth-Failure ip 10.9.8.7 username 'unarr'",
             "info|Auth-Success ip 127.0.0.1 username 'unarr'",
+            // One line, its address the client's: the line break is gone.
+            "warn|Auth-Failure ip 127.0.0.1 username 'x'2026-11-19 10:00:00.0|Warn|Auth|Auth-Failure ip 192.168.1.10 username 'y'",
             "info|Auth-Logout ip 127.0.0.1 username ''",
         ];
         if personality == Personality::Radarr {
@@ -852,6 +867,7 @@ async fn logins_and_logouts_are_logged_for_intrusion_detection() {
         (lo, Some(basic("unarr", "fixture")), 200),
         (lo, None, 401),
         (other, Some(basic("unarr", "nope")), 401),
+        (lo, Some(basic("a\r\nb", "nope")), 401),
     ] {
         let headers: Vec<(&str, &str)> = credentials
             .iter()
@@ -880,8 +896,46 @@ async fn logins_and_logouts_are_logged_for_intrusion_detection() {
             "warn|Auth-Failure ip 127.0.0.1 username 'nobody'",
             "info|Auth-Success ip 127.0.0.1 username 'unarr'",
             "warn|Auth-Failure ip 192.0.2.2 username 'unarr'",
+            "warn|Auth-Failure ip 127.0.0.1 username 'ab'",
         ]
     );
+}
+
+/// A URL base saved from the UI changes the settings at once, while the
+/// routes stay under the base they were built with until the restart. The
+/// 307 into the base and what counts as inside it follow the routes: a
+/// request under the new base is not sent into it again and again, and an
+/// empty base saved does not send a request to itself.
+#[tokio::test]
+async fn a_url_base_saved_from_the_ui_sends_no_request_round_in_circles() {
+    let (app, state) = app_and_state(Personality::Sonarr, "/sonarr", |_| {});
+    for saved in ["/tv", ""] {
+        let mut host = state.settings().host.clone();
+        host.url_base = saved.to_string();
+        state.set_settings(unarr_api::Settings::from_host_config(host, Personality::Sonarr));
+        let (status, headers, _) = ask(&app, "GET", "/ping", &[], "").await;
+        assert_eq!(status, StatusCode::TEMPORARY_REDIRECT, "{saved:?}");
+        assert_eq!(header(&headers, "location"), Some("/sonarr/ping"), "{saved:?}");
+        assert_eq!(
+            ask(&app, "GET", "/sonarr/ping", &[], "").await.0,
+            StatusCode::OK,
+            "{saved:?}"
+        );
+        let (status, headers, _) = ask(&app, "GET", "/tv/x", &[], "").await;
+        assert_eq!(status, StatusCode::FOUND, "{saved:?}");
+        assert_eq!(
+            header(&headers, "location"),
+            Some("/login?returnUrl=%2Ftv%2Fx"),
+            "{saved:?}"
+        );
+        let (status, headers, _) = ask(&app, "GET", "/api/v3/system/status", &[("X-Api-Key", KEY)], "").await;
+        assert_eq!(status, StatusCode::TEMPORARY_REDIRECT, "{saved:?}");
+        assert_eq!(
+            header(&headers, "location"),
+            Some("/sonarr/api/v3/system/status"),
+            "{saved:?}"
+        );
+    }
 }
 
 /// The web app manifest and the tile description are filled in as they
