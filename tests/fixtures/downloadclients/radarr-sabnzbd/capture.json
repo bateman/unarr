@@ -1,0 +1,1560 @@
+[
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "traceparent": "00-f4939be360ccf339eaa91790b8e4589f-7310a9cfe8ee8fa5-00"
+   },
+   "method": "GET",
+   "path": "/api?mode=version&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"version\": \"4.2.2\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:01 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 1,
+  "time": "2026-11-19T20:16:01Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "traceparent": "00-f4939be360ccf339eaa91790b8e4589f-a78abef66f8e27c9-00"
+   },
+   "method": "GET",
+   "path": "/api?mode=get_config&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"config\": {\"misc\": {\"helpful_warnings\": 1, \"queue_complete\": \"\", \"queue_complete_pers\": 0, \"bandwidth_perc\": 100, \"refresh_rate\": 0, \"interface_settings\": \"\", \"queue_limit\": 20, \"config_lock\": 0, \"notified_new_skin\": 0, \"check_new_rel\": 1, \"auto_browser\": 0, \"language\": \"en\", \"enable_https_verification\": 1, \"host\": \"downloadclient.invalid\", \"port\": \"19080\", \"https_port\": \"\", \"username\": \"\", \"password\": \"\", \"bandwidth_max\": \"\", \"cache_limit\": \"1G\", \"web_dir\": \"Glitter\", \"web_color\": \"Auto\", \"https_cert\": \"server.cert\", \"https_key\": \"server.key\", \"https_chain\": \"\", \"enable_https\": 0, \"inet_exposure\": 0, \"api_key\": \"0123456789abcdef0123456789abcdef\", \"nzb_key\": \"b8aa087f0f724a97b4c867b2a9ee1792\", \"socks5_proxy_url\": \"\", \"permissions\": \"\", \"download_dir\": \"/downloads/incomplete\", \"download_free\": \"\", \"complete_dir\": \"/downloads/complete\", \"complete_free\": \"\", \"fulldisk_autoresume\": 0, \"script_dir\": \"\", \"nzb_backup_dir\": \"\", \"admin_dir\": \"admin\", \"backup_dir\": \"\", \"dirscan_dir\": \"\", \"dirscan_speed\": 5, \"password_file\": \"\", \"log_dir\": \"logs\", \"max_art_tries\": 3, \"top_only\": 0, \"sfv_check\": 1, \"script_can_fail\": 0, \"enable_recursive\": 1, \"flat_unpack\": 0, \"par_option\": \"\", \"pre_check\": 0, \"nice\": \"\", \"win_process_prio\": 3, \"ionice\": \"\", \"fail_hopeless_jobs\": 1, \"fast_fail\": 1, \"auto_disconnect\": 1, \"pre_script\": \"None\", \"end_queue_script\": \"None\", \"no_dupes\": 0, \"no_series_dupes\": 0, \"no_smart_dupes\": 0, \"dupes_propercheck\": 1, \"pause_on_pwrar\": 1, \"ignore_samples\": 0, \"deobfuscate_final_filenames\": 1, \"auto_sort\": \"\", \"direct_unpack\": 0, \"propagation_delay\": 0, \"folder_rename\": 1, \"replace_spaces\": 0, \"replace_underscores\": 0, \"replace_dots\": 0, \"safe_postproc\": 1, \"pause_on_post_processing\": 0, \"enable_all_par\": 0, \"sanitize_safe\": 0, \"cleanup_list\": [], \"unwanted_extensions\": [], \"action_on_unwanted_extensions\": 0, \"unwanted_extensions_mode\": 0, \"new_nzb_on_failure\": 0, \"history_retention\": \"0\", \"quota_size\": \"\", \"quota_day\": \"\", \"quota_resume\": 0, \"quota_period\": \"m\", \"schedlines\": [], \"rss_rate\": 60, \"ampm\": 0, \"start_paused\": 0, \"preserve_paused_state\": 0, \"enable_par_cleanup\": 1, \"process_unpacked_par2\": 1, \"enable_multipar\": 1, \"enable_unrar\": 1, \"enable_7zip\": 1, \"enable_filejoin\": 1, \"enable_tsjoin\": 1, \"overwrite_files\": 0, \"ignore_unrar_dates\": 0, \"backup_for_duplicates\": 1, \"empty_postproc\": 0, \"wait_for_dfolder\": 0, \"rss_filenames\": 0, \"api_logging\": 1, \"html_login\": 1, \"warn_dupl_jobs\": 0, \"keep_awake\": 1, \"tray_icon\": 1, \"allow_incomplete_nzb\": 0, \"enable_broadcast\": 1, \"ipv6_hosting\": 0, \"api_warnings\": 1, \"no_penalties\": 0, \"x_frame_options\": 1, \"allow_old_ssl_tls\": 0, \"enable_season_sorting\": 1, \"verify_xff_header\": 0, \"rss_odd_titles\": [\"nzbindex.nl/\", \"nzbindex.com/\", \"nzbclub.com/\"], \"quick_check_ext_ignore\": [\"nfo\", \"sfv\", \"srr\"], \"req_completion_rate\": 100.2, \"selftest_host\": \"downloadclient.invalid\", \"movie_rename_limit\": \"100M\", \"episode_rename_limit\": \"20M\", \"size_limit\": \"0\", \"direct_unpack_threads\": 3, \"history_limit\": 10, \"wait_ext_drive\": 5, \"max_foldername_length\": 246, \"nomedia_marker\": \"\", \"ipv6_servers\": 1, \"url_base\": \"/sabnzbd\", \"host_whitelist\": [\"downloadclient.invalid\"], \"local_ranges\": [], \"max_url_retries\": 10, \"downloader_sleep_time\": 10, \"receive_threads\": 2, \"switchinterval\": 0.005, \"ssdp_broadcast_interval\": 15, \"ext_rename_ignore\": [], \"email_server\": \"\", \"email_to\": [], \"email_from\": \"\", \"email_account\": \"\", \"email_pwd\": \"\", \"email_endjob\": 0, \"email_full\": 0, \"email_dir\": \"\", \"email_rss\": 0, \"email_cats\": [\"0123456789abcdef0123456789abcdef\"]}, \"logging\": {\"log_level\": 1, \"max_log_size\": 5242880, \"log_backups\": 5}, \"ncenter\": {\"ncenter_enable\": 0, \"ncenter_cats\": [\"*\"], \"ncenter_prio_startup\": 0, \"ncenter_prio_download\": 0, \"ncenter_prio_pause_resume\": 0, \"ncenter_prio_pp\": 0, \"ncenter_prio_complete\": 1, \"ncenter_prio_failed\": 1, \"ncenter_prio_disk_full\": 1, \"ncenter_prio_new_login\": 0, \"ncenter_prio_warning\": 0, \"ncenter_prio_error\": 0, \"ncenter_prio_queue_done\": 0, \"ncenter_prio_other\": 1}, \"acenter\": {\"acenter_enable\": 0, \"acenter_cats\": [\"*\"], \"acenter_prio_startup\": 0, \"acenter_prio_download\": 0, \"acenter_prio_pause_resume\": 0, \"acenter_prio_pp\": 0, \"acenter_prio_complete\": 1, \"acenter_prio_failed\": 1, \"acenter_prio_disk_full\": 1, \"acenter_prio_new_login\": 0, \"acenter_prio_warning\": 0, \"acenter_prio_error\": 0, \"acenter_prio_queue_done\": 0, \"acenter_prio_other\": 1}, \"ntfosd\": {\"ntfosd_enable\": 1, \"ntfosd_cats\": [\"*\"], \"ntfosd_prio_startup\": 0, \"ntfosd_prio_download\": 0, \"ntfosd_prio_pause_resume\": 0, \"ntfosd_prio_pp\": 0, \"ntfosd_prio_complete\": 1, \"ntfosd_prio_failed\": 1, \"ntfosd_prio_disk_full\": 1, \"ntfosd_prio_new_login\": 0, \"ntfosd_prio_warning\": 0, \"ntfosd_prio_error\": 0, \"ntfosd_prio_queue_done\": 0, \"ntfosd_prio_other\": 1}, \"prowl\": {\"prowl_enable\": 0, \"prowl_cats\": [\"*\"], \"prowl_apikey\": \"\", \"prowl_prio_startup\": -3, \"prowl_prio_download\": -3, \"prowl_prio_pause_resume\": -3, \"prowl_prio_pp\": -3, \"prowl_prio_complete\": 0, \"prowl_prio_failed\": 1, \"prowl_prio_disk_full\": 1, \"prowl_prio_new_login\": -3, \"prowl_prio_warning\": -3, \"prowl_prio_error\": -3, \"prowl_prio_queue_done\": -3, \"prowl_prio_other\": 0}, \"pushover\": {\"pushover_token\": \"\", \"pushover_userkey\": \"\", \"pushover_device\": \"\", \"pushover_emergency_expire\": 3600, \"pushover_emergency_retry\": 60, \"pushover_enable\": 0, \"pushover_cats\": [\"*\"], \"pushover_prio_startup\": -3, \"pushover_prio_download\": -2, \"pushover_prio_pause_resume\": -2, \"pushover_prio_pp\": -3, \"pushover_prio_complete\": -1, \"pushover_prio_failed\": -1, \"pushover_prio_disk_full\": 1, \"pushover_prio_new_login\": -3, \"pushover_prio_warning\": 1, \"pushover_prio_error\": 1, \"pushover_prio_queue_done\": -3, \"pushover_prio_other\": -1}, \"pushbullet\": {\"pushbullet_enable\": 0, \"pushbullet_cats\": [\"*\"], \"pushbullet_apikey\": \"\", \"pushbullet_device\": \"\", \"pushbullet_prio_startup\": 0, \"pushbullet_prio_download\": 0, \"pushbullet_prio_pause_resume\": 0, \"pushbullet_prio_pp\": 0, \"pushbullet_prio_complete\": 1, \"pushbullet_prio_failed\": 1, \"pushbullet_prio_disk_full\": 1, \"pushbullet_prio_new_login\": 0, \"pushbullet_prio_warning\": 0, \"pushbullet_prio_error\": 0, \"pushbullet_prio_queue_done\": 0, \"pushbullet_prio_other\": 1}, \"nscript\": {\"nscript_enable\": 0, \"nscript_cats\": [\"*\"], \"nscript_script\": \"\", \"nscript_parameters\": \"\", \"nscript_prio_startup\": 0, \"nscript_prio_download\": 0, \"nscript_prio_pause_resume\": 0, \"nscript_prio_pp\": 0, \"nscript_prio_complete\": 1, \"nscript_prio_failed\": 1, \"nscript_prio_disk_full\": 1, \"nscript_prio_new_login\": 0, \"nscript_prio_warning\": 0, \"nscript_prio_error\": 0, \"nscript_prio_queue_done\": 0, \"nscript_prio_other\": 1}, \"categories\": [{\"name\": \"*\", \"order\": 0, \"pp\": \"3\", \"script\": \"None\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": 0}, {\"name\": \"movies\", \"order\": 1, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"tv\", \"order\": 2, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"audio\", \"order\": 3, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"software\", \"order\": 4, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}], \"servers\": [{\"name\": \"stub\", \"displayname\": \"stub\", \"host\": \"downloadclient.invalid\", \"port\": 11119, \"timeout\": 20, \"username\": \"\", \"password\": \"\", \"connections\": 2, \"ssl\": 0, \"ssl_verify\": 2, \"ssl_ciphers\": \"\", \"enable\": 1, \"required\": 0, \"optional\": 0, \"retention\": 0, \"expire_date\": \"\", \"quota\": \"\", \"usage_at_start\": 0, \"send_group\": 0, \"priority\": 0, \"notes\": \"\"}]}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:01 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 2,
+  "time": "2026-11-19T20:16:01Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "traceparent": "00-f4939be360ccf339eaa91790b8e4589f-ac885d35c4a8b28f-00"
+   },
+   "method": "GET",
+   "path": "/api?mode=get_config&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"config\": {\"misc\": {\"helpful_warnings\": 1, \"queue_complete\": \"\", \"queue_complete_pers\": 0, \"bandwidth_perc\": 100, \"refresh_rate\": 0, \"interface_settings\": \"\", \"queue_limit\": 20, \"config_lock\": 0, \"notified_new_skin\": 0, \"check_new_rel\": 1, \"auto_browser\": 0, \"language\": \"en\", \"enable_https_verification\": 1, \"host\": \"downloadclient.invalid\", \"port\": \"19080\", \"https_port\": \"\", \"username\": \"\", \"password\": \"\", \"bandwidth_max\": \"\", \"cache_limit\": \"1G\", \"web_dir\": \"Glitter\", \"web_color\": \"Auto\", \"https_cert\": \"server.cert\", \"https_key\": \"server.key\", \"https_chain\": \"\", \"enable_https\": 0, \"inet_exposure\": 0, \"api_key\": \"0123456789abcdef0123456789abcdef\", \"nzb_key\": \"b8aa087f0f724a97b4c867b2a9ee1792\", \"socks5_proxy_url\": \"\", \"permissions\": \"\", \"download_dir\": \"/downloads/incomplete\", \"download_free\": \"\", \"complete_dir\": \"/downloads/complete\", \"complete_free\": \"\", \"fulldisk_autoresume\": 0, \"script_dir\": \"\", \"nzb_backup_dir\": \"\", \"admin_dir\": \"admin\", \"backup_dir\": \"\", \"dirscan_dir\": \"\", \"dirscan_speed\": 5, \"password_file\": \"\", \"log_dir\": \"logs\", \"max_art_tries\": 3, \"top_only\": 0, \"sfv_check\": 1, \"script_can_fail\": 0, \"enable_recursive\": 1, \"flat_unpack\": 0, \"par_option\": \"\", \"pre_check\": 0, \"nice\": \"\", \"win_process_prio\": 3, \"ionice\": \"\", \"fail_hopeless_jobs\": 1, \"fast_fail\": 1, \"auto_disconnect\": 1, \"pre_script\": \"None\", \"end_queue_script\": \"None\", \"no_dupes\": 0, \"no_series_dupes\": 0, \"no_smart_dupes\": 0, \"dupes_propercheck\": 1, \"pause_on_pwrar\": 1, \"ignore_samples\": 0, \"deobfuscate_final_filenames\": 1, \"auto_sort\": \"\", \"direct_unpack\": 0, \"propagation_delay\": 0, \"folder_rename\": 1, \"replace_spaces\": 0, \"replace_underscores\": 0, \"replace_dots\": 0, \"safe_postproc\": 1, \"pause_on_post_processing\": 0, \"enable_all_par\": 0, \"sanitize_safe\": 0, \"cleanup_list\": [], \"unwanted_extensions\": [], \"action_on_unwanted_extensions\": 0, \"unwanted_extensions_mode\": 0, \"new_nzb_on_failure\": 0, \"history_retention\": \"0\", \"quota_size\": \"\", \"quota_day\": \"\", \"quota_resume\": 0, \"quota_period\": \"m\", \"schedlines\": [], \"rss_rate\": 60, \"ampm\": 0, \"start_paused\": 0, \"preserve_paused_state\": 0, \"enable_par_cleanup\": 1, \"process_unpacked_par2\": 1, \"enable_multipar\": 1, \"enable_unrar\": 1, \"enable_7zip\": 1, \"enable_filejoin\": 1, \"enable_tsjoin\": 1, \"overwrite_files\": 0, \"ignore_unrar_dates\": 0, \"backup_for_duplicates\": 1, \"empty_postproc\": 0, \"wait_for_dfolder\": 0, \"rss_filenames\": 0, \"api_logging\": 1, \"html_login\": 1, \"warn_dupl_jobs\": 0, \"keep_awake\": 1, \"tray_icon\": 1, \"allow_incomplete_nzb\": 0, \"enable_broadcast\": 1, \"ipv6_hosting\": 0, \"api_warnings\": 1, \"no_penalties\": 0, \"x_frame_options\": 1, \"allow_old_ssl_tls\": 0, \"enable_season_sorting\": 1, \"verify_xff_header\": 0, \"rss_odd_titles\": [\"nzbindex.nl/\", \"nzbindex.com/\", \"nzbclub.com/\"], \"quick_check_ext_ignore\": [\"nfo\", \"sfv\", \"srr\"], \"req_completion_rate\": 100.2, \"selftest_host\": \"downloadclient.invalid\", \"movie_rename_limit\": \"100M\", \"episode_rename_limit\": \"20M\", \"size_limit\": \"0\", \"direct_unpack_threads\": 3, \"history_limit\": 10, \"wait_ext_drive\": 5, \"max_foldername_length\": 246, \"nomedia_marker\": \"\", \"ipv6_servers\": 1, \"url_base\": \"/sabnzbd\", \"host_whitelist\": [\"downloadclient.invalid\"], \"local_ranges\": [], \"max_url_retries\": 10, \"downloader_sleep_time\": 10, \"receive_threads\": 2, \"switchinterval\": 0.005, \"ssdp_broadcast_interval\": 15, \"ext_rename_ignore\": [], \"email_server\": \"\", \"email_to\": [], \"email_from\": \"\", \"email_account\": \"\", \"email_pwd\": \"\", \"email_endjob\": 0, \"email_full\": 0, \"email_dir\": \"\", \"email_rss\": 0, \"email_cats\": [\"0123456789abcdef0123456789abcdef\"]}, \"logging\": {\"log_level\": 1, \"max_log_size\": 5242880, \"log_backups\": 5}, \"ncenter\": {\"ncenter_enable\": 0, \"ncenter_cats\": [\"*\"], \"ncenter_prio_startup\": 0, \"ncenter_prio_download\": 0, \"ncenter_prio_pause_resume\": 0, \"ncenter_prio_pp\": 0, \"ncenter_prio_complete\": 1, \"ncenter_prio_failed\": 1, \"ncenter_prio_disk_full\": 1, \"ncenter_prio_new_login\": 0, \"ncenter_prio_warning\": 0, \"ncenter_prio_error\": 0, \"ncenter_prio_queue_done\": 0, \"ncenter_prio_other\": 1}, \"acenter\": {\"acenter_enable\": 0, \"acenter_cats\": [\"*\"], \"acenter_prio_startup\": 0, \"acenter_prio_download\": 0, \"acenter_prio_pause_resume\": 0, \"acenter_prio_pp\": 0, \"acenter_prio_complete\": 1, \"acenter_prio_failed\": 1, \"acenter_prio_disk_full\": 1, \"acenter_prio_new_login\": 0, \"acenter_prio_warning\": 0, \"acenter_prio_error\": 0, \"acenter_prio_queue_done\": 0, \"acenter_prio_other\": 1}, \"ntfosd\": {\"ntfosd_enable\": 1, \"ntfosd_cats\": [\"*\"], \"ntfosd_prio_startup\": 0, \"ntfosd_prio_download\": 0, \"ntfosd_prio_pause_resume\": 0, \"ntfosd_prio_pp\": 0, \"ntfosd_prio_complete\": 1, \"ntfosd_prio_failed\": 1, \"ntfosd_prio_disk_full\": 1, \"ntfosd_prio_new_login\": 0, \"ntfosd_prio_warning\": 0, \"ntfosd_prio_error\": 0, \"ntfosd_prio_queue_done\": 0, \"ntfosd_prio_other\": 1}, \"prowl\": {\"prowl_enable\": 0, \"prowl_cats\": [\"*\"], \"prowl_apikey\": \"\", \"prowl_prio_startup\": -3, \"prowl_prio_download\": -3, \"prowl_prio_pause_resume\": -3, \"prowl_prio_pp\": -3, \"prowl_prio_complete\": 0, \"prowl_prio_failed\": 1, \"prowl_prio_disk_full\": 1, \"prowl_prio_new_login\": -3, \"prowl_prio_warning\": -3, \"prowl_prio_error\": -3, \"prowl_prio_queue_done\": -3, \"prowl_prio_other\": 0}, \"pushover\": {\"pushover_token\": \"\", \"pushover_userkey\": \"\", \"pushover_device\": \"\", \"pushover_emergency_expire\": 3600, \"pushover_emergency_retry\": 60, \"pushover_enable\": 0, \"pushover_cats\": [\"*\"], \"pushover_prio_startup\": -3, \"pushover_prio_download\": -2, \"pushover_prio_pause_resume\": -2, \"pushover_prio_pp\": -3, \"pushover_prio_complete\": -1, \"pushover_prio_failed\": -1, \"pushover_prio_disk_full\": 1, \"pushover_prio_new_login\": -3, \"pushover_prio_warning\": 1, \"pushover_prio_error\": 1, \"pushover_prio_queue_done\": -3, \"pushover_prio_other\": -1}, \"pushbullet\": {\"pushbullet_enable\": 0, \"pushbullet_cats\": [\"*\"], \"pushbullet_apikey\": \"\", \"pushbullet_device\": \"\", \"pushbullet_prio_startup\": 0, \"pushbullet_prio_download\": 0, \"pushbullet_prio_pause_resume\": 0, \"pushbullet_prio_pp\": 0, \"pushbullet_prio_complete\": 1, \"pushbullet_prio_failed\": 1, \"pushbullet_prio_disk_full\": 1, \"pushbullet_prio_new_login\": 0, \"pushbullet_prio_warning\": 0, \"pushbullet_prio_error\": 0, \"pushbullet_prio_queue_done\": 0, \"pushbullet_prio_other\": 1}, \"nscript\": {\"nscript_enable\": 0, \"nscript_cats\": [\"*\"], \"nscript_script\": \"\", \"nscript_parameters\": \"\", \"nscript_prio_startup\": 0, \"nscript_prio_download\": 0, \"nscript_prio_pause_resume\": 0, \"nscript_prio_pp\": 0, \"nscript_prio_complete\": 1, \"nscript_prio_failed\": 1, \"nscript_prio_disk_full\": 1, \"nscript_prio_new_login\": 0, \"nscript_prio_warning\": 0, \"nscript_prio_error\": 0, \"nscript_prio_queue_done\": 0, \"nscript_prio_other\": 1}, \"categories\": [{\"name\": \"*\", \"order\": 0, \"pp\": \"3\", \"script\": \"None\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": 0}, {\"name\": \"movies\", \"order\": 1, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"tv\", \"order\": 2, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"audio\", \"order\": 3, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"software\", \"order\": 4, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}], \"servers\": [{\"name\": \"stub\", \"displayname\": \"stub\", \"host\": \"downloadclient.invalid\", \"port\": 11119, \"timeout\": 20, \"username\": \"\", \"password\": \"\", \"connections\": 2, \"ssl\": 0, \"ssl_verify\": 2, \"ssl_ciphers\": \"\", \"enable\": 1, \"required\": 0, \"optional\": 0, \"retention\": 0, \"expire_date\": \"\", \"quota\": \"\", \"usage_at_start\": 0, \"send_group\": 0, \"priority\": 0, \"notes\": \"\"}]}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:01 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 3,
+  "time": "2026-11-19T20:16:01Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "traceparent": "00-f4939be360ccf339eaa91790b8e4589f-a93a89222b7014ea-00"
+   },
+   "method": "GET",
+   "path": "/api?mode=get_config&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"config\": {\"misc\": {\"helpful_warnings\": 1, \"queue_complete\": \"\", \"queue_complete_pers\": 0, \"bandwidth_perc\": 100, \"refresh_rate\": 0, \"interface_settings\": \"\", \"queue_limit\": 20, \"config_lock\": 0, \"notified_new_skin\": 0, \"check_new_rel\": 1, \"auto_browser\": 0, \"language\": \"en\", \"enable_https_verification\": 1, \"host\": \"downloadclient.invalid\", \"port\": \"19080\", \"https_port\": \"\", \"username\": \"\", \"password\": \"\", \"bandwidth_max\": \"\", \"cache_limit\": \"1G\", \"web_dir\": \"Glitter\", \"web_color\": \"Auto\", \"https_cert\": \"server.cert\", \"https_key\": \"server.key\", \"https_chain\": \"\", \"enable_https\": 0, \"inet_exposure\": 0, \"api_key\": \"0123456789abcdef0123456789abcdef\", \"nzb_key\": \"b8aa087f0f724a97b4c867b2a9ee1792\", \"socks5_proxy_url\": \"\", \"permissions\": \"\", \"download_dir\": \"/downloads/incomplete\", \"download_free\": \"\", \"complete_dir\": \"/downloads/complete\", \"complete_free\": \"\", \"fulldisk_autoresume\": 0, \"script_dir\": \"\", \"nzb_backup_dir\": \"\", \"admin_dir\": \"admin\", \"backup_dir\": \"\", \"dirscan_dir\": \"\", \"dirscan_speed\": 5, \"password_file\": \"\", \"log_dir\": \"logs\", \"max_art_tries\": 3, \"top_only\": 0, \"sfv_check\": 1, \"script_can_fail\": 0, \"enable_recursive\": 1, \"flat_unpack\": 0, \"par_option\": \"\", \"pre_check\": 0, \"nice\": \"\", \"win_process_prio\": 3, \"ionice\": \"\", \"fail_hopeless_jobs\": 1, \"fast_fail\": 1, \"auto_disconnect\": 1, \"pre_script\": \"None\", \"end_queue_script\": \"None\", \"no_dupes\": 0, \"no_series_dupes\": 0, \"no_smart_dupes\": 0, \"dupes_propercheck\": 1, \"pause_on_pwrar\": 1, \"ignore_samples\": 0, \"deobfuscate_final_filenames\": 1, \"auto_sort\": \"\", \"direct_unpack\": 0, \"propagation_delay\": 0, \"folder_rename\": 1, \"replace_spaces\": 0, \"replace_underscores\": 0, \"replace_dots\": 0, \"safe_postproc\": 1, \"pause_on_post_processing\": 0, \"enable_all_par\": 0, \"sanitize_safe\": 0, \"cleanup_list\": [], \"unwanted_extensions\": [], \"action_on_unwanted_extensions\": 0, \"unwanted_extensions_mode\": 0, \"new_nzb_on_failure\": 0, \"history_retention\": \"0\", \"quota_size\": \"\", \"quota_day\": \"\", \"quota_resume\": 0, \"quota_period\": \"m\", \"schedlines\": [], \"rss_rate\": 60, \"ampm\": 0, \"start_paused\": 0, \"preserve_paused_state\": 0, \"enable_par_cleanup\": 1, \"process_unpacked_par2\": 1, \"enable_multipar\": 1, \"enable_unrar\": 1, \"enable_7zip\": 1, \"enable_filejoin\": 1, \"enable_tsjoin\": 1, \"overwrite_files\": 0, \"ignore_unrar_dates\": 0, \"backup_for_duplicates\": 1, \"empty_postproc\": 0, \"wait_for_dfolder\": 0, \"rss_filenames\": 0, \"api_logging\": 1, \"html_login\": 1, \"warn_dupl_jobs\": 0, \"keep_awake\": 1, \"tray_icon\": 1, \"allow_incomplete_nzb\": 0, \"enable_broadcast\": 1, \"ipv6_hosting\": 0, \"api_warnings\": 1, \"no_penalties\": 0, \"x_frame_options\": 1, \"allow_old_ssl_tls\": 0, \"enable_season_sorting\": 1, \"verify_xff_header\": 0, \"rss_odd_titles\": [\"nzbindex.nl/\", \"nzbindex.com/\", \"nzbclub.com/\"], \"quick_check_ext_ignore\": [\"nfo\", \"sfv\", \"srr\"], \"req_completion_rate\": 100.2, \"selftest_host\": \"downloadclient.invalid\", \"movie_rename_limit\": \"100M\", \"episode_rename_limit\": \"20M\", \"size_limit\": \"0\", \"direct_unpack_threads\": 3, \"history_limit\": 10, \"wait_ext_drive\": 5, \"max_foldername_length\": 246, \"nomedia_marker\": \"\", \"ipv6_servers\": 1, \"url_base\": \"/sabnzbd\", \"host_whitelist\": [\"downloadclient.invalid\"], \"local_ranges\": [], \"max_url_retries\": 10, \"downloader_sleep_time\": 10, \"receive_threads\": 2, \"switchinterval\": 0.005, \"ssdp_broadcast_interval\": 15, \"ext_rename_ignore\": [], \"email_server\": \"\", \"email_to\": [], \"email_from\": \"\", \"email_account\": \"\", \"email_pwd\": \"\", \"email_endjob\": 0, \"email_full\": 0, \"email_dir\": \"\", \"email_rss\": 0, \"email_cats\": [\"0123456789abcdef0123456789abcdef\"]}, \"logging\": {\"log_level\": 1, \"max_log_size\": 5242880, \"log_backups\": 5}, \"ncenter\": {\"ncenter_enable\": 0, \"ncenter_cats\": [\"*\"], \"ncenter_prio_startup\": 0, \"ncenter_prio_download\": 0, \"ncenter_prio_pause_resume\": 0, \"ncenter_prio_pp\": 0, \"ncenter_prio_complete\": 1, \"ncenter_prio_failed\": 1, \"ncenter_prio_disk_full\": 1, \"ncenter_prio_new_login\": 0, \"ncenter_prio_warning\": 0, \"ncenter_prio_error\": 0, \"ncenter_prio_queue_done\": 0, \"ncenter_prio_other\": 1}, \"acenter\": {\"acenter_enable\": 0, \"acenter_cats\": [\"*\"], \"acenter_prio_startup\": 0, \"acenter_prio_download\": 0, \"acenter_prio_pause_resume\": 0, \"acenter_prio_pp\": 0, \"acenter_prio_complete\": 1, \"acenter_prio_failed\": 1, \"acenter_prio_disk_full\": 1, \"acenter_prio_new_login\": 0, \"acenter_prio_warning\": 0, \"acenter_prio_error\": 0, \"acenter_prio_queue_done\": 0, \"acenter_prio_other\": 1}, \"ntfosd\": {\"ntfosd_enable\": 1, \"ntfosd_cats\": [\"*\"], \"ntfosd_prio_startup\": 0, \"ntfosd_prio_download\": 0, \"ntfosd_prio_pause_resume\": 0, \"ntfosd_prio_pp\": 0, \"ntfosd_prio_complete\": 1, \"ntfosd_prio_failed\": 1, \"ntfosd_prio_disk_full\": 1, \"ntfosd_prio_new_login\": 0, \"ntfosd_prio_warning\": 0, \"ntfosd_prio_error\": 0, \"ntfosd_prio_queue_done\": 0, \"ntfosd_prio_other\": 1}, \"prowl\": {\"prowl_enable\": 0, \"prowl_cats\": [\"*\"], \"prowl_apikey\": \"\", \"prowl_prio_startup\": -3, \"prowl_prio_download\": -3, \"prowl_prio_pause_resume\": -3, \"prowl_prio_pp\": -3, \"prowl_prio_complete\": 0, \"prowl_prio_failed\": 1, \"prowl_prio_disk_full\": 1, \"prowl_prio_new_login\": -3, \"prowl_prio_warning\": -3, \"prowl_prio_error\": -3, \"prowl_prio_queue_done\": -3, \"prowl_prio_other\": 0}, \"pushover\": {\"pushover_token\": \"\", \"pushover_userkey\": \"\", \"pushover_device\": \"\", \"pushover_emergency_expire\": 3600, \"pushover_emergency_retry\": 60, \"pushover_enable\": 0, \"pushover_cats\": [\"*\"], \"pushover_prio_startup\": -3, \"pushover_prio_download\": -2, \"pushover_prio_pause_resume\": -2, \"pushover_prio_pp\": -3, \"pushover_prio_complete\": -1, \"pushover_prio_failed\": -1, \"pushover_prio_disk_full\": 1, \"pushover_prio_new_login\": -3, \"pushover_prio_warning\": 1, \"pushover_prio_error\": 1, \"pushover_prio_queue_done\": -3, \"pushover_prio_other\": -1}, \"pushbullet\": {\"pushbullet_enable\": 0, \"pushbullet_cats\": [\"*\"], \"pushbullet_apikey\": \"\", \"pushbullet_device\": \"\", \"pushbullet_prio_startup\": 0, \"pushbullet_prio_download\": 0, \"pushbullet_prio_pause_resume\": 0, \"pushbullet_prio_pp\": 0, \"pushbullet_prio_complete\": 1, \"pushbullet_prio_failed\": 1, \"pushbullet_prio_disk_full\": 1, \"pushbullet_prio_new_login\": 0, \"pushbullet_prio_warning\": 0, \"pushbullet_prio_error\": 0, \"pushbullet_prio_queue_done\": 0, \"pushbullet_prio_other\": 1}, \"nscript\": {\"nscript_enable\": 0, \"nscript_cats\": [\"*\"], \"nscript_script\": \"\", \"nscript_parameters\": \"\", \"nscript_prio_startup\": 0, \"nscript_prio_download\": 0, \"nscript_prio_pause_resume\": 0, \"nscript_prio_pp\": 0, \"nscript_prio_complete\": 1, \"nscript_prio_failed\": 1, \"nscript_prio_disk_full\": 1, \"nscript_prio_new_login\": 0, \"nscript_prio_warning\": 0, \"nscript_prio_error\": 0, \"nscript_prio_queue_done\": 0, \"nscript_prio_other\": 1}, \"categories\": [{\"name\": \"*\", \"order\": 0, \"pp\": \"3\", \"script\": \"None\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": 0}, {\"name\": \"movies\", \"order\": 1, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"tv\", \"order\": 2, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"audio\", \"order\": 3, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"software\", \"order\": 4, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}], \"servers\": [{\"name\": \"stub\", \"displayname\": \"stub\", \"host\": \"downloadclient.invalid\", \"port\": 11119, \"timeout\": 20, \"username\": \"\", \"password\": \"\", \"connections\": 2, \"ssl\": 0, \"ssl_verify\": 2, \"ssl_ciphers\": \"\", \"enable\": 1, \"required\": 0, \"optional\": 0, \"retention\": 0, \"expire_date\": \"\", \"quota\": \"\", \"usage_at_start\": 0, \"send_group\": 0, \"priority\": 0, \"notes\": \"\"}]}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:01 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 4,
+  "time": "2026-11-19T20:16:01Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "traceparent": "00-2b62fc92961d35bf0f7b0d43d85b87e7-74aa599cbbd162ed-00"
+   },
+   "method": "GET",
+   "path": "/api?mode=version&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"version\": \"4.2.2\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:01 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 5,
+  "time": "2026-11-19T20:16:01Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "traceparent": "00-2b62fc92961d35bf0f7b0d43d85b87e7-b1598a19c4b45375-00"
+   },
+   "method": "GET",
+   "path": "/api?mode=get_config&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"config\": {\"misc\": {\"helpful_warnings\": 1, \"queue_complete\": \"\", \"queue_complete_pers\": 0, \"bandwidth_perc\": 100, \"refresh_rate\": 0, \"interface_settings\": \"\", \"queue_limit\": 20, \"config_lock\": 0, \"notified_new_skin\": 0, \"check_new_rel\": 1, \"auto_browser\": 0, \"language\": \"en\", \"enable_https_verification\": 1, \"host\": \"downloadclient.invalid\", \"port\": \"19080\", \"https_port\": \"\", \"username\": \"\", \"password\": \"\", \"bandwidth_max\": \"\", \"cache_limit\": \"1G\", \"web_dir\": \"Glitter\", \"web_color\": \"Auto\", \"https_cert\": \"server.cert\", \"https_key\": \"server.key\", \"https_chain\": \"\", \"enable_https\": 0, \"inet_exposure\": 0, \"api_key\": \"0123456789abcdef0123456789abcdef\", \"nzb_key\": \"b8aa087f0f724a97b4c867b2a9ee1792\", \"socks5_proxy_url\": \"\", \"permissions\": \"\", \"download_dir\": \"/downloads/incomplete\", \"download_free\": \"\", \"complete_dir\": \"/downloads/complete\", \"complete_free\": \"\", \"fulldisk_autoresume\": 0, \"script_dir\": \"\", \"nzb_backup_dir\": \"\", \"admin_dir\": \"admin\", \"backup_dir\": \"\", \"dirscan_dir\": \"\", \"dirscan_speed\": 5, \"password_file\": \"\", \"log_dir\": \"logs\", \"max_art_tries\": 3, \"top_only\": 0, \"sfv_check\": 1, \"script_can_fail\": 0, \"enable_recursive\": 1, \"flat_unpack\": 0, \"par_option\": \"\", \"pre_check\": 0, \"nice\": \"\", \"win_process_prio\": 3, \"ionice\": \"\", \"fail_hopeless_jobs\": 1, \"fast_fail\": 1, \"auto_disconnect\": 1, \"pre_script\": \"None\", \"end_queue_script\": \"None\", \"no_dupes\": 0, \"no_series_dupes\": 0, \"no_smart_dupes\": 0, \"dupes_propercheck\": 1, \"pause_on_pwrar\": 1, \"ignore_samples\": 0, \"deobfuscate_final_filenames\": 1, \"auto_sort\": \"\", \"direct_unpack\": 0, \"propagation_delay\": 0, \"folder_rename\": 1, \"replace_spaces\": 0, \"replace_underscores\": 0, \"replace_dots\": 0, \"safe_postproc\": 1, \"pause_on_post_processing\": 0, \"enable_all_par\": 0, \"sanitize_safe\": 0, \"cleanup_list\": [], \"unwanted_extensions\": [], \"action_on_unwanted_extensions\": 0, \"unwanted_extensions_mode\": 0, \"new_nzb_on_failure\": 0, \"history_retention\": \"0\", \"quota_size\": \"\", \"quota_day\": \"\", \"quota_resume\": 0, \"quota_period\": \"m\", \"schedlines\": [], \"rss_rate\": 60, \"ampm\": 0, \"start_paused\": 0, \"preserve_paused_state\": 0, \"enable_par_cleanup\": 1, \"process_unpacked_par2\": 1, \"enable_multipar\": 1, \"enable_unrar\": 1, \"enable_7zip\": 1, \"enable_filejoin\": 1, \"enable_tsjoin\": 1, \"overwrite_files\": 0, \"ignore_unrar_dates\": 0, \"backup_for_duplicates\": 1, \"empty_postproc\": 0, \"wait_for_dfolder\": 0, \"rss_filenames\": 0, \"api_logging\": 1, \"html_login\": 1, \"warn_dupl_jobs\": 0, \"keep_awake\": 1, \"tray_icon\": 1, \"allow_incomplete_nzb\": 0, \"enable_broadcast\": 1, \"ipv6_hosting\": 0, \"api_warnings\": 1, \"no_penalties\": 0, \"x_frame_options\": 1, \"allow_old_ssl_tls\": 0, \"enable_season_sorting\": 1, \"verify_xff_header\": 0, \"rss_odd_titles\": [\"nzbindex.nl/\", \"nzbindex.com/\", \"nzbclub.com/\"], \"quick_check_ext_ignore\": [\"nfo\", \"sfv\", \"srr\"], \"req_completion_rate\": 100.2, \"selftest_host\": \"downloadclient.invalid\", \"movie_rename_limit\": \"100M\", \"episode_rename_limit\": \"20M\", \"size_limit\": \"0\", \"direct_unpack_threads\": 3, \"history_limit\": 10, \"wait_ext_drive\": 5, \"max_foldername_length\": 246, \"nomedia_marker\": \"\", \"ipv6_servers\": 1, \"url_base\": \"/sabnzbd\", \"host_whitelist\": [\"downloadclient.invalid\"], \"local_ranges\": [], \"max_url_retries\": 10, \"downloader_sleep_time\": 10, \"receive_threads\": 2, \"switchinterval\": 0.005, \"ssdp_broadcast_interval\": 15, \"ext_rename_ignore\": [], \"email_server\": \"\", \"email_to\": [], \"email_from\": \"\", \"email_account\": \"\", \"email_pwd\": \"\", \"email_endjob\": 0, \"email_full\": 0, \"email_dir\": \"\", \"email_rss\": 0, \"email_cats\": [\"0123456789abcdef0123456789abcdef\"]}, \"logging\": {\"log_level\": 1, \"max_log_size\": 5242880, \"log_backups\": 5}, \"ncenter\": {\"ncenter_enable\": 0, \"ncenter_cats\": [\"*\"], \"ncenter_prio_startup\": 0, \"ncenter_prio_download\": 0, \"ncenter_prio_pause_resume\": 0, \"ncenter_prio_pp\": 0, \"ncenter_prio_complete\": 1, \"ncenter_prio_failed\": 1, \"ncenter_prio_disk_full\": 1, \"ncenter_prio_new_login\": 0, \"ncenter_prio_warning\": 0, \"ncenter_prio_error\": 0, \"ncenter_prio_queue_done\": 0, \"ncenter_prio_other\": 1}, \"acenter\": {\"acenter_enable\": 0, \"acenter_cats\": [\"*\"], \"acenter_prio_startup\": 0, \"acenter_prio_download\": 0, \"acenter_prio_pause_resume\": 0, \"acenter_prio_pp\": 0, \"acenter_prio_complete\": 1, \"acenter_prio_failed\": 1, \"acenter_prio_disk_full\": 1, \"acenter_prio_new_login\": 0, \"acenter_prio_warning\": 0, \"acenter_prio_error\": 0, \"acenter_prio_queue_done\": 0, \"acenter_prio_other\": 1}, \"ntfosd\": {\"ntfosd_enable\": 1, \"ntfosd_cats\": [\"*\"], \"ntfosd_prio_startup\": 0, \"ntfosd_prio_download\": 0, \"ntfosd_prio_pause_resume\": 0, \"ntfosd_prio_pp\": 0, \"ntfosd_prio_complete\": 1, \"ntfosd_prio_failed\": 1, \"ntfosd_prio_disk_full\": 1, \"ntfosd_prio_new_login\": 0, \"ntfosd_prio_warning\": 0, \"ntfosd_prio_error\": 0, \"ntfosd_prio_queue_done\": 0, \"ntfosd_prio_other\": 1}, \"prowl\": {\"prowl_enable\": 0, \"prowl_cats\": [\"*\"], \"prowl_apikey\": \"\", \"prowl_prio_startup\": -3, \"prowl_prio_download\": -3, \"prowl_prio_pause_resume\": -3, \"prowl_prio_pp\": -3, \"prowl_prio_complete\": 0, \"prowl_prio_failed\": 1, \"prowl_prio_disk_full\": 1, \"prowl_prio_new_login\": -3, \"prowl_prio_warning\": -3, \"prowl_prio_error\": -3, \"prowl_prio_queue_done\": -3, \"prowl_prio_other\": 0}, \"pushover\": {\"pushover_token\": \"\", \"pushover_userkey\": \"\", \"pushover_device\": \"\", \"pushover_emergency_expire\": 3600, \"pushover_emergency_retry\": 60, \"pushover_enable\": 0, \"pushover_cats\": [\"*\"], \"pushover_prio_startup\": -3, \"pushover_prio_download\": -2, \"pushover_prio_pause_resume\": -2, \"pushover_prio_pp\": -3, \"pushover_prio_complete\": -1, \"pushover_prio_failed\": -1, \"pushover_prio_disk_full\": 1, \"pushover_prio_new_login\": -3, \"pushover_prio_warning\": 1, \"pushover_prio_error\": 1, \"pushover_prio_queue_done\": -3, \"pushover_prio_other\": -1}, \"pushbullet\": {\"pushbullet_enable\": 0, \"pushbullet_cats\": [\"*\"], \"pushbullet_apikey\": \"\", \"pushbullet_device\": \"\", \"pushbullet_prio_startup\": 0, \"pushbullet_prio_download\": 0, \"pushbullet_prio_pause_resume\": 0, \"pushbullet_prio_pp\": 0, \"pushbullet_prio_complete\": 1, \"pushbullet_prio_failed\": 1, \"pushbullet_prio_disk_full\": 1, \"pushbullet_prio_new_login\": 0, \"pushbullet_prio_warning\": 0, \"pushbullet_prio_error\": 0, \"pushbullet_prio_queue_done\": 0, \"pushbullet_prio_other\": 1}, \"nscript\": {\"nscript_enable\": 0, \"nscript_cats\": [\"*\"], \"nscript_script\": \"\", \"nscript_parameters\": \"\", \"nscript_prio_startup\": 0, \"nscript_prio_download\": 0, \"nscript_prio_pause_resume\": 0, \"nscript_prio_pp\": 0, \"nscript_prio_complete\": 1, \"nscript_prio_failed\": 1, \"nscript_prio_disk_full\": 1, \"nscript_prio_new_login\": 0, \"nscript_prio_warning\": 0, \"nscript_prio_error\": 0, \"nscript_prio_queue_done\": 0, \"nscript_prio_other\": 1}, \"categories\": [{\"name\": \"*\", \"order\": 0, \"pp\": \"3\", \"script\": \"None\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": 0}, {\"name\": \"movies\", \"order\": 1, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"tv\", \"order\": 2, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"audio\", \"order\": 3, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"software\", \"order\": 4, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}], \"servers\": [{\"name\": \"stub\", \"displayname\": \"stub\", \"host\": \"downloadclient.invalid\", \"port\": 11119, \"timeout\": 20, \"username\": \"\", \"password\": \"\", \"connections\": 2, \"ssl\": 0, \"ssl_verify\": 2, \"ssl_ciphers\": \"\", \"enable\": 1, \"required\": 0, \"optional\": 0, \"retention\": 0, \"expire_date\": \"\", \"quota\": \"\", \"usage_at_start\": 0, \"send_group\": 0, \"priority\": 0, \"notes\": \"\"}]}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:01 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 6,
+  "time": "2026-11-19T20:16:01Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "traceparent": "00-2b62fc92961d35bf0f7b0d43d85b87e7-61114a7ca9e623c7-00"
+   },
+   "method": "GET",
+   "path": "/api?mode=get_config&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"config\": {\"misc\": {\"helpful_warnings\": 1, \"queue_complete\": \"\", \"queue_complete_pers\": 0, \"bandwidth_perc\": 100, \"refresh_rate\": 0, \"interface_settings\": \"\", \"queue_limit\": 20, \"config_lock\": 0, \"notified_new_skin\": 0, \"check_new_rel\": 1, \"auto_browser\": 0, \"language\": \"en\", \"enable_https_verification\": 1, \"host\": \"downloadclient.invalid\", \"port\": \"19080\", \"https_port\": \"\", \"username\": \"\", \"password\": \"\", \"bandwidth_max\": \"\", \"cache_limit\": \"1G\", \"web_dir\": \"Glitter\", \"web_color\": \"Auto\", \"https_cert\": \"server.cert\", \"https_key\": \"server.key\", \"https_chain\": \"\", \"enable_https\": 0, \"inet_exposure\": 0, \"api_key\": \"0123456789abcdef0123456789abcdef\", \"nzb_key\": \"b8aa087f0f724a97b4c867b2a9ee1792\", \"socks5_proxy_url\": \"\", \"permissions\": \"\", \"download_dir\": \"/downloads/incomplete\", \"download_free\": \"\", \"complete_dir\": \"/downloads/complete\", \"complete_free\": \"\", \"fulldisk_autoresume\": 0, \"script_dir\": \"\", \"nzb_backup_dir\": \"\", \"admin_dir\": \"admin\", \"backup_dir\": \"\", \"dirscan_dir\": \"\", \"dirscan_speed\": 5, \"password_file\": \"\", \"log_dir\": \"logs\", \"max_art_tries\": 3, \"top_only\": 0, \"sfv_check\": 1, \"script_can_fail\": 0, \"enable_recursive\": 1, \"flat_unpack\": 0, \"par_option\": \"\", \"pre_check\": 0, \"nice\": \"\", \"win_process_prio\": 3, \"ionice\": \"\", \"fail_hopeless_jobs\": 1, \"fast_fail\": 1, \"auto_disconnect\": 1, \"pre_script\": \"None\", \"end_queue_script\": \"None\", \"no_dupes\": 0, \"no_series_dupes\": 0, \"no_smart_dupes\": 0, \"dupes_propercheck\": 1, \"pause_on_pwrar\": 1, \"ignore_samples\": 0, \"deobfuscate_final_filenames\": 1, \"auto_sort\": \"\", \"direct_unpack\": 0, \"propagation_delay\": 0, \"folder_rename\": 1, \"replace_spaces\": 0, \"replace_underscores\": 0, \"replace_dots\": 0, \"safe_postproc\": 1, \"pause_on_post_processing\": 0, \"enable_all_par\": 0, \"sanitize_safe\": 0, \"cleanup_list\": [], \"unwanted_extensions\": [], \"action_on_unwanted_extensions\": 0, \"unwanted_extensions_mode\": 0, \"new_nzb_on_failure\": 0, \"history_retention\": \"0\", \"quota_size\": \"\", \"quota_day\": \"\", \"quota_resume\": 0, \"quota_period\": \"m\", \"schedlines\": [], \"rss_rate\": 60, \"ampm\": 0, \"start_paused\": 0, \"preserve_paused_state\": 0, \"enable_par_cleanup\": 1, \"process_unpacked_par2\": 1, \"enable_multipar\": 1, \"enable_unrar\": 1, \"enable_7zip\": 1, \"enable_filejoin\": 1, \"enable_tsjoin\": 1, \"overwrite_files\": 0, \"ignore_unrar_dates\": 0, \"backup_for_duplicates\": 1, \"empty_postproc\": 0, \"wait_for_dfolder\": 0, \"rss_filenames\": 0, \"api_logging\": 1, \"html_login\": 1, \"warn_dupl_jobs\": 0, \"keep_awake\": 1, \"tray_icon\": 1, \"allow_incomplete_nzb\": 0, \"enable_broadcast\": 1, \"ipv6_hosting\": 0, \"api_warnings\": 1, \"no_penalties\": 0, \"x_frame_options\": 1, \"allow_old_ssl_tls\": 0, \"enable_season_sorting\": 1, \"verify_xff_header\": 0, \"rss_odd_titles\": [\"nzbindex.nl/\", \"nzbindex.com/\", \"nzbclub.com/\"], \"quick_check_ext_ignore\": [\"nfo\", \"sfv\", \"srr\"], \"req_completion_rate\": 100.2, \"selftest_host\": \"downloadclient.invalid\", \"movie_rename_limit\": \"100M\", \"episode_rename_limit\": \"20M\", \"size_limit\": \"0\", \"direct_unpack_threads\": 3, \"history_limit\": 10, \"wait_ext_drive\": 5, \"max_foldername_length\": 246, \"nomedia_marker\": \"\", \"ipv6_servers\": 1, \"url_base\": \"/sabnzbd\", \"host_whitelist\": [\"downloadclient.invalid\"], \"local_ranges\": [], \"max_url_retries\": 10, \"downloader_sleep_time\": 10, \"receive_threads\": 2, \"switchinterval\": 0.005, \"ssdp_broadcast_interval\": 15, \"ext_rename_ignore\": [], \"email_server\": \"\", \"email_to\": [], \"email_from\": \"\", \"email_account\": \"\", \"email_pwd\": \"\", \"email_endjob\": 0, \"email_full\": 0, \"email_dir\": \"\", \"email_rss\": 0, \"email_cats\": [\"0123456789abcdef0123456789abcdef\"]}, \"logging\": {\"log_level\": 1, \"max_log_size\": 5242880, \"log_backups\": 5}, \"ncenter\": {\"ncenter_enable\": 0, \"ncenter_cats\": [\"*\"], \"ncenter_prio_startup\": 0, \"ncenter_prio_download\": 0, \"ncenter_prio_pause_resume\": 0, \"ncenter_prio_pp\": 0, \"ncenter_prio_complete\": 1, \"ncenter_prio_failed\": 1, \"ncenter_prio_disk_full\": 1, \"ncenter_prio_new_login\": 0, \"ncenter_prio_warning\": 0, \"ncenter_prio_error\": 0, \"ncenter_prio_queue_done\": 0, \"ncenter_prio_other\": 1}, \"acenter\": {\"acenter_enable\": 0, \"acenter_cats\": [\"*\"], \"acenter_prio_startup\": 0, \"acenter_prio_download\": 0, \"acenter_prio_pause_resume\": 0, \"acenter_prio_pp\": 0, \"acenter_prio_complete\": 1, \"acenter_prio_failed\": 1, \"acenter_prio_disk_full\": 1, \"acenter_prio_new_login\": 0, \"acenter_prio_warning\": 0, \"acenter_prio_error\": 0, \"acenter_prio_queue_done\": 0, \"acenter_prio_other\": 1}, \"ntfosd\": {\"ntfosd_enable\": 1, \"ntfosd_cats\": [\"*\"], \"ntfosd_prio_startup\": 0, \"ntfosd_prio_download\": 0, \"ntfosd_prio_pause_resume\": 0, \"ntfosd_prio_pp\": 0, \"ntfosd_prio_complete\": 1, \"ntfosd_prio_failed\": 1, \"ntfosd_prio_disk_full\": 1, \"ntfosd_prio_new_login\": 0, \"ntfosd_prio_warning\": 0, \"ntfosd_prio_error\": 0, \"ntfosd_prio_queue_done\": 0, \"ntfosd_prio_other\": 1}, \"prowl\": {\"prowl_enable\": 0, \"prowl_cats\": [\"*\"], \"prowl_apikey\": \"\", \"prowl_prio_startup\": -3, \"prowl_prio_download\": -3, \"prowl_prio_pause_resume\": -3, \"prowl_prio_pp\": -3, \"prowl_prio_complete\": 0, \"prowl_prio_failed\": 1, \"prowl_prio_disk_full\": 1, \"prowl_prio_new_login\": -3, \"prowl_prio_warning\": -3, \"prowl_prio_error\": -3, \"prowl_prio_queue_done\": -3, \"prowl_prio_other\": 0}, \"pushover\": {\"pushover_token\": \"\", \"pushover_userkey\": \"\", \"pushover_device\": \"\", \"pushover_emergency_expire\": 3600, \"pushover_emergency_retry\": 60, \"pushover_enable\": 0, \"pushover_cats\": [\"*\"], \"pushover_prio_startup\": -3, \"pushover_prio_download\": -2, \"pushover_prio_pause_resume\": -2, \"pushover_prio_pp\": -3, \"pushover_prio_complete\": -1, \"pushover_prio_failed\": -1, \"pushover_prio_disk_full\": 1, \"pushover_prio_new_login\": -3, \"pushover_prio_warning\": 1, \"pushover_prio_error\": 1, \"pushover_prio_queue_done\": -3, \"pushover_prio_other\": -1}, \"pushbullet\": {\"pushbullet_enable\": 0, \"pushbullet_cats\": [\"*\"], \"pushbullet_apikey\": \"\", \"pushbullet_device\": \"\", \"pushbullet_prio_startup\": 0, \"pushbullet_prio_download\": 0, \"pushbullet_prio_pause_resume\": 0, \"pushbullet_prio_pp\": 0, \"pushbullet_prio_complete\": 1, \"pushbullet_prio_failed\": 1, \"pushbullet_prio_disk_full\": 1, \"pushbullet_prio_new_login\": 0, \"pushbullet_prio_warning\": 0, \"pushbullet_prio_error\": 0, \"pushbullet_prio_queue_done\": 0, \"pushbullet_prio_other\": 1}, \"nscript\": {\"nscript_enable\": 0, \"nscript_cats\": [\"*\"], \"nscript_script\": \"\", \"nscript_parameters\": \"\", \"nscript_prio_startup\": 0, \"nscript_prio_download\": 0, \"nscript_prio_pause_resume\": 0, \"nscript_prio_pp\": 0, \"nscript_prio_complete\": 1, \"nscript_prio_failed\": 1, \"nscript_prio_disk_full\": 1, \"nscript_prio_new_login\": 0, \"nscript_prio_warning\": 0, \"nscript_prio_error\": 0, \"nscript_prio_queue_done\": 0, \"nscript_prio_other\": 1}, \"categories\": [{\"name\": \"*\", \"order\": 0, \"pp\": \"3\", \"script\": \"None\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": 0}, {\"name\": \"movies\", \"order\": 1, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"tv\", \"order\": 2, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"audio\", \"order\": 3, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"software\", \"order\": 4, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}], \"servers\": [{\"name\": \"stub\", \"displayname\": \"stub\", \"host\": \"downloadclient.invalid\", \"port\": 11119, \"timeout\": 20, \"username\": \"\", \"password\": \"\", \"connections\": 2, \"ssl\": 0, \"ssl_verify\": 2, \"ssl_ciphers\": \"\", \"enable\": 1, \"required\": 0, \"optional\": 0, \"retention\": 0, \"expire_date\": \"\", \"quota\": \"\", \"usage_at_start\": 0, \"send_group\": 0, \"priority\": 0, \"notes\": \"\"}]}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:01 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 7,
+  "time": "2026-11-19T20:16:01Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "traceparent": "00-2b62fc92961d35bf0f7b0d43d85b87e7-7b71cfc604244b42-00"
+   },
+   "method": "GET",
+   "path": "/api?mode=get_config&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"config\": {\"misc\": {\"helpful_warnings\": 1, \"queue_complete\": \"\", \"queue_complete_pers\": 0, \"bandwidth_perc\": 100, \"refresh_rate\": 0, \"interface_settings\": \"\", \"queue_limit\": 20, \"config_lock\": 0, \"notified_new_skin\": 0, \"check_new_rel\": 1, \"auto_browser\": 0, \"language\": \"en\", \"enable_https_verification\": 1, \"host\": \"downloadclient.invalid\", \"port\": \"19080\", \"https_port\": \"\", \"username\": \"\", \"password\": \"\", \"bandwidth_max\": \"\", \"cache_limit\": \"1G\", \"web_dir\": \"Glitter\", \"web_color\": \"Auto\", \"https_cert\": \"server.cert\", \"https_key\": \"server.key\", \"https_chain\": \"\", \"enable_https\": 0, \"inet_exposure\": 0, \"api_key\": \"0123456789abcdef0123456789abcdef\", \"nzb_key\": \"b8aa087f0f724a97b4c867b2a9ee1792\", \"socks5_proxy_url\": \"\", \"permissions\": \"\", \"download_dir\": \"/downloads/incomplete\", \"download_free\": \"\", \"complete_dir\": \"/downloads/complete\", \"complete_free\": \"\", \"fulldisk_autoresume\": 0, \"script_dir\": \"\", \"nzb_backup_dir\": \"\", \"admin_dir\": \"admin\", \"backup_dir\": \"\", \"dirscan_dir\": \"\", \"dirscan_speed\": 5, \"password_file\": \"\", \"log_dir\": \"logs\", \"max_art_tries\": 3, \"top_only\": 0, \"sfv_check\": 1, \"script_can_fail\": 0, \"enable_recursive\": 1, \"flat_unpack\": 0, \"par_option\": \"\", \"pre_check\": 0, \"nice\": \"\", \"win_process_prio\": 3, \"ionice\": \"\", \"fail_hopeless_jobs\": 1, \"fast_fail\": 1, \"auto_disconnect\": 1, \"pre_script\": \"None\", \"end_queue_script\": \"None\", \"no_dupes\": 0, \"no_series_dupes\": 0, \"no_smart_dupes\": 0, \"dupes_propercheck\": 1, \"pause_on_pwrar\": 1, \"ignore_samples\": 0, \"deobfuscate_final_filenames\": 1, \"auto_sort\": \"\", \"direct_unpack\": 0, \"propagation_delay\": 0, \"folder_rename\": 1, \"replace_spaces\": 0, \"replace_underscores\": 0, \"replace_dots\": 0, \"safe_postproc\": 1, \"pause_on_post_processing\": 0, \"enable_all_par\": 0, \"sanitize_safe\": 0, \"cleanup_list\": [], \"unwanted_extensions\": [], \"action_on_unwanted_extensions\": 0, \"unwanted_extensions_mode\": 0, \"new_nzb_on_failure\": 0, \"history_retention\": \"0\", \"quota_size\": \"\", \"quota_day\": \"\", \"quota_resume\": 0, \"quota_period\": \"m\", \"schedlines\": [], \"rss_rate\": 60, \"ampm\": 0, \"start_paused\": 0, \"preserve_paused_state\": 0, \"enable_par_cleanup\": 1, \"process_unpacked_par2\": 1, \"enable_multipar\": 1, \"enable_unrar\": 1, \"enable_7zip\": 1, \"enable_filejoin\": 1, \"enable_tsjoin\": 1, \"overwrite_files\": 0, \"ignore_unrar_dates\": 0, \"backup_for_duplicates\": 1, \"empty_postproc\": 0, \"wait_for_dfolder\": 0, \"rss_filenames\": 0, \"api_logging\": 1, \"html_login\": 1, \"warn_dupl_jobs\": 0, \"keep_awake\": 1, \"tray_icon\": 1, \"allow_incomplete_nzb\": 0, \"enable_broadcast\": 1, \"ipv6_hosting\": 0, \"api_warnings\": 1, \"no_penalties\": 0, \"x_frame_options\": 1, \"allow_old_ssl_tls\": 0, \"enable_season_sorting\": 1, \"verify_xff_header\": 0, \"rss_odd_titles\": [\"nzbindex.nl/\", \"nzbindex.com/\", \"nzbclub.com/\"], \"quick_check_ext_ignore\": [\"nfo\", \"sfv\", \"srr\"], \"req_completion_rate\": 100.2, \"selftest_host\": \"downloadclient.invalid\", \"movie_rename_limit\": \"100M\", \"episode_rename_limit\": \"20M\", \"size_limit\": \"0\", \"direct_unpack_threads\": 3, \"history_limit\": 10, \"wait_ext_drive\": 5, \"max_foldername_length\": 246, \"nomedia_marker\": \"\", \"ipv6_servers\": 1, \"url_base\": \"/sabnzbd\", \"host_whitelist\": [\"downloadclient.invalid\"], \"local_ranges\": [], \"max_url_retries\": 10, \"downloader_sleep_time\": 10, \"receive_threads\": 2, \"switchinterval\": 0.005, \"ssdp_broadcast_interval\": 15, \"ext_rename_ignore\": [], \"email_server\": \"\", \"email_to\": [], \"email_from\": \"\", \"email_account\": \"\", \"email_pwd\": \"\", \"email_endjob\": 0, \"email_full\": 0, \"email_dir\": \"\", \"email_rss\": 0, \"email_cats\": [\"0123456789abcdef0123456789abcdef\"]}, \"logging\": {\"log_level\": 1, \"max_log_size\": 5242880, \"log_backups\": 5}, \"ncenter\": {\"ncenter_enable\": 0, \"ncenter_cats\": [\"*\"], \"ncenter_prio_startup\": 0, \"ncenter_prio_download\": 0, \"ncenter_prio_pause_resume\": 0, \"ncenter_prio_pp\": 0, \"ncenter_prio_complete\": 1, \"ncenter_prio_failed\": 1, \"ncenter_prio_disk_full\": 1, \"ncenter_prio_new_login\": 0, \"ncenter_prio_warning\": 0, \"ncenter_prio_error\": 0, \"ncenter_prio_queue_done\": 0, \"ncenter_prio_other\": 1}, \"acenter\": {\"acenter_enable\": 0, \"acenter_cats\": [\"*\"], \"acenter_prio_startup\": 0, \"acenter_prio_download\": 0, \"acenter_prio_pause_resume\": 0, \"acenter_prio_pp\": 0, \"acenter_prio_complete\": 1, \"acenter_prio_failed\": 1, \"acenter_prio_disk_full\": 1, \"acenter_prio_new_login\": 0, \"acenter_prio_warning\": 0, \"acenter_prio_error\": 0, \"acenter_prio_queue_done\": 0, \"acenter_prio_other\": 1}, \"ntfosd\": {\"ntfosd_enable\": 1, \"ntfosd_cats\": [\"*\"], \"ntfosd_prio_startup\": 0, \"ntfosd_prio_download\": 0, \"ntfosd_prio_pause_resume\": 0, \"ntfosd_prio_pp\": 0, \"ntfosd_prio_complete\": 1, \"ntfosd_prio_failed\": 1, \"ntfosd_prio_disk_full\": 1, \"ntfosd_prio_new_login\": 0, \"ntfosd_prio_warning\": 0, \"ntfosd_prio_error\": 0, \"ntfosd_prio_queue_done\": 0, \"ntfosd_prio_other\": 1}, \"prowl\": {\"prowl_enable\": 0, \"prowl_cats\": [\"*\"], \"prowl_apikey\": \"\", \"prowl_prio_startup\": -3, \"prowl_prio_download\": -3, \"prowl_prio_pause_resume\": -3, \"prowl_prio_pp\": -3, \"prowl_prio_complete\": 0, \"prowl_prio_failed\": 1, \"prowl_prio_disk_full\": 1, \"prowl_prio_new_login\": -3, \"prowl_prio_warning\": -3, \"prowl_prio_error\": -3, \"prowl_prio_queue_done\": -3, \"prowl_prio_other\": 0}, \"pushover\": {\"pushover_token\": \"\", \"pushover_userkey\": \"\", \"pushover_device\": \"\", \"pushover_emergency_expire\": 3600, \"pushover_emergency_retry\": 60, \"pushover_enable\": 0, \"pushover_cats\": [\"*\"], \"pushover_prio_startup\": -3, \"pushover_prio_download\": -2, \"pushover_prio_pause_resume\": -2, \"pushover_prio_pp\": -3, \"pushover_prio_complete\": -1, \"pushover_prio_failed\": -1, \"pushover_prio_disk_full\": 1, \"pushover_prio_new_login\": -3, \"pushover_prio_warning\": 1, \"pushover_prio_error\": 1, \"pushover_prio_queue_done\": -3, \"pushover_prio_other\": -1}, \"pushbullet\": {\"pushbullet_enable\": 0, \"pushbullet_cats\": [\"*\"], \"pushbullet_apikey\": \"\", \"pushbullet_device\": \"\", \"pushbullet_prio_startup\": 0, \"pushbullet_prio_download\": 0, \"pushbullet_prio_pause_resume\": 0, \"pushbullet_prio_pp\": 0, \"pushbullet_prio_complete\": 1, \"pushbullet_prio_failed\": 1, \"pushbullet_prio_disk_full\": 1, \"pushbullet_prio_new_login\": 0, \"pushbullet_prio_warning\": 0, \"pushbullet_prio_error\": 0, \"pushbullet_prio_queue_done\": 0, \"pushbullet_prio_other\": 1}, \"nscript\": {\"nscript_enable\": 0, \"nscript_cats\": [\"*\"], \"nscript_script\": \"\", \"nscript_parameters\": \"\", \"nscript_prio_startup\": 0, \"nscript_prio_download\": 0, \"nscript_prio_pause_resume\": 0, \"nscript_prio_pp\": 0, \"nscript_prio_complete\": 1, \"nscript_prio_failed\": 1, \"nscript_prio_disk_full\": 1, \"nscript_prio_new_login\": 0, \"nscript_prio_warning\": 0, \"nscript_prio_error\": 0, \"nscript_prio_queue_done\": 0, \"nscript_prio_other\": 1}, \"categories\": [{\"name\": \"*\", \"order\": 0, \"pp\": \"3\", \"script\": \"None\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": 0}, {\"name\": \"movies\", \"order\": 1, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"tv\", \"order\": 2, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"audio\", \"order\": 3, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"software\", \"order\": 4, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}], \"servers\": [{\"name\": \"stub\", \"displayname\": \"stub\", \"host\": \"downloadclient.invalid\", \"port\": 11119, \"timeout\": 20, \"username\": \"\", \"password\": \"\", \"connections\": 2, \"ssl\": 0, \"ssl_verify\": 2, \"ssl_ciphers\": \"\", \"enable\": 1, \"required\": 0, \"optional\": 0, \"retention\": 0, \"expire_date\": \"\", \"quota\": \"\", \"usage_at_start\": 0, \"send_group\": 0, \"priority\": 0, \"notes\": \"\"}]}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:01 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 8,
+  "time": "2026-11-19T20:16:01Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "traceparent": "00-208e376d1e6395e0a509636afa6dd65f-619f47a39983593a-00"
+   },
+   "method": "GET",
+   "path": "/api?mode=get_config&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"config\": {\"misc\": {\"helpful_warnings\": 1, \"queue_complete\": \"\", \"queue_complete_pers\": 0, \"bandwidth_perc\": 100, \"refresh_rate\": 0, \"interface_settings\": \"\", \"queue_limit\": 20, \"config_lock\": 0, \"notified_new_skin\": 0, \"check_new_rel\": 1, \"auto_browser\": 0, \"language\": \"en\", \"enable_https_verification\": 1, \"host\": \"downloadclient.invalid\", \"port\": \"19080\", \"https_port\": \"\", \"username\": \"\", \"password\": \"\", \"bandwidth_max\": \"\", \"cache_limit\": \"1G\", \"web_dir\": \"Glitter\", \"web_color\": \"Auto\", \"https_cert\": \"server.cert\", \"https_key\": \"server.key\", \"https_chain\": \"\", \"enable_https\": 0, \"inet_exposure\": 0, \"api_key\": \"0123456789abcdef0123456789abcdef\", \"nzb_key\": \"b8aa087f0f724a97b4c867b2a9ee1792\", \"socks5_proxy_url\": \"\", \"permissions\": \"\", \"download_dir\": \"/downloads/incomplete\", \"download_free\": \"\", \"complete_dir\": \"/downloads/complete\", \"complete_free\": \"\", \"fulldisk_autoresume\": 0, \"script_dir\": \"\", \"nzb_backup_dir\": \"\", \"admin_dir\": \"admin\", \"backup_dir\": \"\", \"dirscan_dir\": \"\", \"dirscan_speed\": 5, \"password_file\": \"\", \"log_dir\": \"logs\", \"max_art_tries\": 3, \"top_only\": 0, \"sfv_check\": 1, \"script_can_fail\": 0, \"enable_recursive\": 1, \"flat_unpack\": 0, \"par_option\": \"\", \"pre_check\": 0, \"nice\": \"\", \"win_process_prio\": 3, \"ionice\": \"\", \"fail_hopeless_jobs\": 1, \"fast_fail\": 1, \"auto_disconnect\": 1, \"pre_script\": \"None\", \"end_queue_script\": \"None\", \"no_dupes\": 0, \"no_series_dupes\": 0, \"no_smart_dupes\": 0, \"dupes_propercheck\": 1, \"pause_on_pwrar\": 1, \"ignore_samples\": 0, \"deobfuscate_final_filenames\": 1, \"auto_sort\": \"\", \"direct_unpack\": 0, \"propagation_delay\": 0, \"folder_rename\": 1, \"replace_spaces\": 0, \"replace_underscores\": 0, \"replace_dots\": 0, \"safe_postproc\": 1, \"pause_on_post_processing\": 0, \"enable_all_par\": 0, \"sanitize_safe\": 0, \"cleanup_list\": [], \"unwanted_extensions\": [], \"action_on_unwanted_extensions\": 0, \"unwanted_extensions_mode\": 0, \"new_nzb_on_failure\": 0, \"history_retention\": \"0\", \"quota_size\": \"\", \"quota_day\": \"\", \"quota_resume\": 0, \"quota_period\": \"m\", \"schedlines\": [], \"rss_rate\": 60, \"ampm\": 0, \"start_paused\": 0, \"preserve_paused_state\": 0, \"enable_par_cleanup\": 1, \"process_unpacked_par2\": 1, \"enable_multipar\": 1, \"enable_unrar\": 1, \"enable_7zip\": 1, \"enable_filejoin\": 1, \"enable_tsjoin\": 1, \"overwrite_files\": 0, \"ignore_unrar_dates\": 0, \"backup_for_duplicates\": 1, \"empty_postproc\": 0, \"wait_for_dfolder\": 0, \"rss_filenames\": 0, \"api_logging\": 1, \"html_login\": 1, \"warn_dupl_jobs\": 0, \"keep_awake\": 1, \"tray_icon\": 1, \"allow_incomplete_nzb\": 0, \"enable_broadcast\": 1, \"ipv6_hosting\": 0, \"api_warnings\": 1, \"no_penalties\": 0, \"x_frame_options\": 1, \"allow_old_ssl_tls\": 0, \"enable_season_sorting\": 1, \"verify_xff_header\": 0, \"rss_odd_titles\": [\"nzbindex.nl/\", \"nzbindex.com/\", \"nzbclub.com/\"], \"quick_check_ext_ignore\": [\"nfo\", \"sfv\", \"srr\"], \"req_completion_rate\": 100.2, \"selftest_host\": \"downloadclient.invalid\", \"movie_rename_limit\": \"100M\", \"episode_rename_limit\": \"20M\", \"size_limit\": \"0\", \"direct_unpack_threads\": 3, \"history_limit\": 10, \"wait_ext_drive\": 5, \"max_foldername_length\": 246, \"nomedia_marker\": \"\", \"ipv6_servers\": 1, \"url_base\": \"/sabnzbd\", \"host_whitelist\": [\"downloadclient.invalid\"], \"local_ranges\": [], \"max_url_retries\": 10, \"downloader_sleep_time\": 10, \"receive_threads\": 2, \"switchinterval\": 0.005, \"ssdp_broadcast_interval\": 15, \"ext_rename_ignore\": [], \"email_server\": \"\", \"email_to\": [], \"email_from\": \"\", \"email_account\": \"\", \"email_pwd\": \"\", \"email_endjob\": 0, \"email_full\": 0, \"email_dir\": \"\", \"email_rss\": 0, \"email_cats\": [\"0123456789abcdef0123456789abcdef\"]}, \"logging\": {\"log_level\": 1, \"max_log_size\": 5242880, \"log_backups\": 5}, \"ncenter\": {\"ncenter_enable\": 0, \"ncenter_cats\": [\"*\"], \"ncenter_prio_startup\": 0, \"ncenter_prio_download\": 0, \"ncenter_prio_pause_resume\": 0, \"ncenter_prio_pp\": 0, \"ncenter_prio_complete\": 1, \"ncenter_prio_failed\": 1, \"ncenter_prio_disk_full\": 1, \"ncenter_prio_new_login\": 0, \"ncenter_prio_warning\": 0, \"ncenter_prio_error\": 0, \"ncenter_prio_queue_done\": 0, \"ncenter_prio_other\": 1}, \"acenter\": {\"acenter_enable\": 0, \"acenter_cats\": [\"*\"], \"acenter_prio_startup\": 0, \"acenter_prio_download\": 0, \"acenter_prio_pause_resume\": 0, \"acenter_prio_pp\": 0, \"acenter_prio_complete\": 1, \"acenter_prio_failed\": 1, \"acenter_prio_disk_full\": 1, \"acenter_prio_new_login\": 0, \"acenter_prio_warning\": 0, \"acenter_prio_error\": 0, \"acenter_prio_queue_done\": 0, \"acenter_prio_other\": 1}, \"ntfosd\": {\"ntfosd_enable\": 1, \"ntfosd_cats\": [\"*\"], \"ntfosd_prio_startup\": 0, \"ntfosd_prio_download\": 0, \"ntfosd_prio_pause_resume\": 0, \"ntfosd_prio_pp\": 0, \"ntfosd_prio_complete\": 1, \"ntfosd_prio_failed\": 1, \"ntfosd_prio_disk_full\": 1, \"ntfosd_prio_new_login\": 0, \"ntfosd_prio_warning\": 0, \"ntfosd_prio_error\": 0, \"ntfosd_prio_queue_done\": 0, \"ntfosd_prio_other\": 1}, \"prowl\": {\"prowl_enable\": 0, \"prowl_cats\": [\"*\"], \"prowl_apikey\": \"\", \"prowl_prio_startup\": -3, \"prowl_prio_download\": -3, \"prowl_prio_pause_resume\": -3, \"prowl_prio_pp\": -3, \"prowl_prio_complete\": 0, \"prowl_prio_failed\": 1, \"prowl_prio_disk_full\": 1, \"prowl_prio_new_login\": -3, \"prowl_prio_warning\": -3, \"prowl_prio_error\": -3, \"prowl_prio_queue_done\": -3, \"prowl_prio_other\": 0}, \"pushover\": {\"pushover_token\": \"\", \"pushover_userkey\": \"\", \"pushover_device\": \"\", \"pushover_emergency_expire\": 3600, \"pushover_emergency_retry\": 60, \"pushover_enable\": 0, \"pushover_cats\": [\"*\"], \"pushover_prio_startup\": -3, \"pushover_prio_download\": -2, \"pushover_prio_pause_resume\": -2, \"pushover_prio_pp\": -3, \"pushover_prio_complete\": -1, \"pushover_prio_failed\": -1, \"pushover_prio_disk_full\": 1, \"pushover_prio_new_login\": -3, \"pushover_prio_warning\": 1, \"pushover_prio_error\": 1, \"pushover_prio_queue_done\": -3, \"pushover_prio_other\": -1}, \"pushbullet\": {\"pushbullet_enable\": 0, \"pushbullet_cats\": [\"*\"], \"pushbullet_apikey\": \"\", \"pushbullet_device\": \"\", \"pushbullet_prio_startup\": 0, \"pushbullet_prio_download\": 0, \"pushbullet_prio_pause_resume\": 0, \"pushbullet_prio_pp\": 0, \"pushbullet_prio_complete\": 1, \"pushbullet_prio_failed\": 1, \"pushbullet_prio_disk_full\": 1, \"pushbullet_prio_new_login\": 0, \"pushbullet_prio_warning\": 0, \"pushbullet_prio_error\": 0, \"pushbullet_prio_queue_done\": 0, \"pushbullet_prio_other\": 1}, \"nscript\": {\"nscript_enable\": 0, \"nscript_cats\": [\"*\"], \"nscript_script\": \"\", \"nscript_parameters\": \"\", \"nscript_prio_startup\": 0, \"nscript_prio_download\": 0, \"nscript_prio_pause_resume\": 0, \"nscript_prio_pp\": 0, \"nscript_prio_complete\": 1, \"nscript_prio_failed\": 1, \"nscript_prio_disk_full\": 1, \"nscript_prio_new_login\": 0, \"nscript_prio_warning\": 0, \"nscript_prio_error\": 0, \"nscript_prio_queue_done\": 0, \"nscript_prio_other\": 1}, \"categories\": [{\"name\": \"*\", \"order\": 0, \"pp\": \"3\", \"script\": \"None\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": 0}, {\"name\": \"movies\", \"order\": 1, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"tv\", \"order\": 2, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"audio\", \"order\": 3, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"software\", \"order\": 4, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}], \"servers\": [{\"name\": \"stub\", \"displayname\": \"stub\", \"host\": \"downloadclient.invalid\", \"port\": 11119, \"timeout\": 20, \"username\": \"\", \"password\": \"\", \"connections\": 2, \"ssl\": 0, \"ssl_verify\": 2, \"ssl_ciphers\": \"\", \"enable\": 1, \"required\": 0, \"optional\": 0, \"retention\": 0, \"expire_date\": \"\", \"quota\": \"\", \"usage_at_start\": 0, \"send_group\": 0, \"priority\": 0, \"notes\": \"\"}]}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:06 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 9,
+  "time": "2026-11-19T20:16:06Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "traceparent": "00-208e376d1e6395e0a509636afa6dd65f-a3561092007ccfc4-00"
+   },
+   "method": "GET",
+   "path": "/api?mode=get_config&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"config\": {\"misc\": {\"helpful_warnings\": 1, \"queue_complete\": \"\", \"queue_complete_pers\": 0, \"bandwidth_perc\": 100, \"refresh_rate\": 0, \"interface_settings\": \"\", \"queue_limit\": 20, \"config_lock\": 0, \"notified_new_skin\": 0, \"check_new_rel\": 1, \"auto_browser\": 0, \"language\": \"en\", \"enable_https_verification\": 1, \"host\": \"downloadclient.invalid\", \"port\": \"19080\", \"https_port\": \"\", \"username\": \"\", \"password\": \"\", \"bandwidth_max\": \"\", \"cache_limit\": \"1G\", \"web_dir\": \"Glitter\", \"web_color\": \"Auto\", \"https_cert\": \"server.cert\", \"https_key\": \"server.key\", \"https_chain\": \"\", \"enable_https\": 0, \"inet_exposure\": 0, \"api_key\": \"0123456789abcdef0123456789abcdef\", \"nzb_key\": \"b8aa087f0f724a97b4c867b2a9ee1792\", \"socks5_proxy_url\": \"\", \"permissions\": \"\", \"download_dir\": \"/downloads/incomplete\", \"download_free\": \"\", \"complete_dir\": \"/downloads/complete\", \"complete_free\": \"\", \"fulldisk_autoresume\": 0, \"script_dir\": \"\", \"nzb_backup_dir\": \"\", \"admin_dir\": \"admin\", \"backup_dir\": \"\", \"dirscan_dir\": \"\", \"dirscan_speed\": 5, \"password_file\": \"\", \"log_dir\": \"logs\", \"max_art_tries\": 3, \"top_only\": 0, \"sfv_check\": 1, \"script_can_fail\": 0, \"enable_recursive\": 1, \"flat_unpack\": 0, \"par_option\": \"\", \"pre_check\": 0, \"nice\": \"\", \"win_process_prio\": 3, \"ionice\": \"\", \"fail_hopeless_jobs\": 1, \"fast_fail\": 1, \"auto_disconnect\": 1, \"pre_script\": \"None\", \"end_queue_script\": \"None\", \"no_dupes\": 0, \"no_series_dupes\": 0, \"no_smart_dupes\": 0, \"dupes_propercheck\": 1, \"pause_on_pwrar\": 1, \"ignore_samples\": 0, \"deobfuscate_final_filenames\": 1, \"auto_sort\": \"\", \"direct_unpack\": 0, \"propagation_delay\": 0, \"folder_rename\": 1, \"replace_spaces\": 0, \"replace_underscores\": 0, \"replace_dots\": 0, \"safe_postproc\": 1, \"pause_on_post_processing\": 0, \"enable_all_par\": 0, \"sanitize_safe\": 0, \"cleanup_list\": [], \"unwanted_extensions\": [], \"action_on_unwanted_extensions\": 0, \"unwanted_extensions_mode\": 0, \"new_nzb_on_failure\": 0, \"history_retention\": \"0\", \"quota_size\": \"\", \"quota_day\": \"\", \"quota_resume\": 0, \"quota_period\": \"m\", \"schedlines\": [], \"rss_rate\": 60, \"ampm\": 0, \"start_paused\": 0, \"preserve_paused_state\": 0, \"enable_par_cleanup\": 1, \"process_unpacked_par2\": 1, \"enable_multipar\": 1, \"enable_unrar\": 1, \"enable_7zip\": 1, \"enable_filejoin\": 1, \"enable_tsjoin\": 1, \"overwrite_files\": 0, \"ignore_unrar_dates\": 0, \"backup_for_duplicates\": 1, \"empty_postproc\": 0, \"wait_for_dfolder\": 0, \"rss_filenames\": 0, \"api_logging\": 1, \"html_login\": 1, \"warn_dupl_jobs\": 0, \"keep_awake\": 1, \"tray_icon\": 1, \"allow_incomplete_nzb\": 0, \"enable_broadcast\": 1, \"ipv6_hosting\": 0, \"api_warnings\": 1, \"no_penalties\": 0, \"x_frame_options\": 1, \"allow_old_ssl_tls\": 0, \"enable_season_sorting\": 1, \"verify_xff_header\": 0, \"rss_odd_titles\": [\"nzbindex.nl/\", \"nzbindex.com/\", \"nzbclub.com/\"], \"quick_check_ext_ignore\": [\"nfo\", \"sfv\", \"srr\"], \"req_completion_rate\": 100.2, \"selftest_host\": \"downloadclient.invalid\", \"movie_rename_limit\": \"100M\", \"episode_rename_limit\": \"20M\", \"size_limit\": \"0\", \"direct_unpack_threads\": 3, \"history_limit\": 10, \"wait_ext_drive\": 5, \"max_foldername_length\": 246, \"nomedia_marker\": \"\", \"ipv6_servers\": 1, \"url_base\": \"/sabnzbd\", \"host_whitelist\": [\"downloadclient.invalid\"], \"local_ranges\": [], \"max_url_retries\": 10, \"downloader_sleep_time\": 10, \"receive_threads\": 2, \"switchinterval\": 0.005, \"ssdp_broadcast_interval\": 15, \"ext_rename_ignore\": [], \"email_server\": \"\", \"email_to\": [], \"email_from\": \"\", \"email_account\": \"\", \"email_pwd\": \"\", \"email_endjob\": 0, \"email_full\": 0, \"email_dir\": \"\", \"email_rss\": 0, \"email_cats\": [\"0123456789abcdef0123456789abcdef\"]}, \"logging\": {\"log_level\": 1, \"max_log_size\": 5242880, \"log_backups\": 5}, \"ncenter\": {\"ncenter_enable\": 0, \"ncenter_cats\": [\"*\"], \"ncenter_prio_startup\": 0, \"ncenter_prio_download\": 0, \"ncenter_prio_pause_resume\": 0, \"ncenter_prio_pp\": 0, \"ncenter_prio_complete\": 1, \"ncenter_prio_failed\": 1, \"ncenter_prio_disk_full\": 1, \"ncenter_prio_new_login\": 0, \"ncenter_prio_warning\": 0, \"ncenter_prio_error\": 0, \"ncenter_prio_queue_done\": 0, \"ncenter_prio_other\": 1}, \"acenter\": {\"acenter_enable\": 0, \"acenter_cats\": [\"*\"], \"acenter_prio_startup\": 0, \"acenter_prio_download\": 0, \"acenter_prio_pause_resume\": 0, \"acenter_prio_pp\": 0, \"acenter_prio_complete\": 1, \"acenter_prio_failed\": 1, \"acenter_prio_disk_full\": 1, \"acenter_prio_new_login\": 0, \"acenter_prio_warning\": 0, \"acenter_prio_error\": 0, \"acenter_prio_queue_done\": 0, \"acenter_prio_other\": 1}, \"ntfosd\": {\"ntfosd_enable\": 1, \"ntfosd_cats\": [\"*\"], \"ntfosd_prio_startup\": 0, \"ntfosd_prio_download\": 0, \"ntfosd_prio_pause_resume\": 0, \"ntfosd_prio_pp\": 0, \"ntfosd_prio_complete\": 1, \"ntfosd_prio_failed\": 1, \"ntfosd_prio_disk_full\": 1, \"ntfosd_prio_new_login\": 0, \"ntfosd_prio_warning\": 0, \"ntfosd_prio_error\": 0, \"ntfosd_prio_queue_done\": 0, \"ntfosd_prio_other\": 1}, \"prowl\": {\"prowl_enable\": 0, \"prowl_cats\": [\"*\"], \"prowl_apikey\": \"\", \"prowl_prio_startup\": -3, \"prowl_prio_download\": -3, \"prowl_prio_pause_resume\": -3, \"prowl_prio_pp\": -3, \"prowl_prio_complete\": 0, \"prowl_prio_failed\": 1, \"prowl_prio_disk_full\": 1, \"prowl_prio_new_login\": -3, \"prowl_prio_warning\": -3, \"prowl_prio_error\": -3, \"prowl_prio_queue_done\": -3, \"prowl_prio_other\": 0}, \"pushover\": {\"pushover_token\": \"\", \"pushover_userkey\": \"\", \"pushover_device\": \"\", \"pushover_emergency_expire\": 3600, \"pushover_emergency_retry\": 60, \"pushover_enable\": 0, \"pushover_cats\": [\"*\"], \"pushover_prio_startup\": -3, \"pushover_prio_download\": -2, \"pushover_prio_pause_resume\": -2, \"pushover_prio_pp\": -3, \"pushover_prio_complete\": -1, \"pushover_prio_failed\": -1, \"pushover_prio_disk_full\": 1, \"pushover_prio_new_login\": -3, \"pushover_prio_warning\": 1, \"pushover_prio_error\": 1, \"pushover_prio_queue_done\": -3, \"pushover_prio_other\": -1}, \"pushbullet\": {\"pushbullet_enable\": 0, \"pushbullet_cats\": [\"*\"], \"pushbullet_apikey\": \"\", \"pushbullet_device\": \"\", \"pushbullet_prio_startup\": 0, \"pushbullet_prio_download\": 0, \"pushbullet_prio_pause_resume\": 0, \"pushbullet_prio_pp\": 0, \"pushbullet_prio_complete\": 1, \"pushbullet_prio_failed\": 1, \"pushbullet_prio_disk_full\": 1, \"pushbullet_prio_new_login\": 0, \"pushbullet_prio_warning\": 0, \"pushbullet_prio_error\": 0, \"pushbullet_prio_queue_done\": 0, \"pushbullet_prio_other\": 1}, \"nscript\": {\"nscript_enable\": 0, \"nscript_cats\": [\"*\"], \"nscript_script\": \"\", \"nscript_parameters\": \"\", \"nscript_prio_startup\": 0, \"nscript_prio_download\": 0, \"nscript_prio_pause_resume\": 0, \"nscript_prio_pp\": 0, \"nscript_prio_complete\": 1, \"nscript_prio_failed\": 1, \"nscript_prio_disk_full\": 1, \"nscript_prio_new_login\": 0, \"nscript_prio_warning\": 0, \"nscript_prio_error\": 0, \"nscript_prio_queue_done\": 0, \"nscript_prio_other\": 1}, \"categories\": [{\"name\": \"*\", \"order\": 0, \"pp\": \"3\", \"script\": \"None\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": 0}, {\"name\": \"movies\", \"order\": 1, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"tv\", \"order\": 2, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"audio\", \"order\": 3, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"software\", \"order\": 4, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}], \"servers\": [{\"name\": \"stub\", \"displayname\": \"stub\", \"host\": \"downloadclient.invalid\", \"port\": 11119, \"timeout\": 20, \"username\": \"\", \"password\": \"\", \"connections\": 2, \"ssl\": 0, \"ssl_verify\": 2, \"ssl_ciphers\": \"\", \"enable\": 1, \"required\": 0, \"optional\": 0, \"retention\": 0, \"expire_date\": \"\", \"quota\": \"\", \"usage_at_start\": 0, \"send_group\": 0, \"priority\": 0, \"notes\": \"\"}]}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:06 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 10,
+  "time": "2026-11-19T20:16:06Z"
+ },
+ {
+  "request": {
+   "body": "-------------------------------8df4679f7ba18b9\r\nContent-Disposition: form-data; name=\"name\"; filename=\"Braindead.1992.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.nzb\"\r\nContent-Type: application/x-nzb\r\n\r\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<nzb xmlns=\"http://www.newzbin.com/DTD/2003/nzb\"><file poster=\"unarr@fixture.invalid\" date=\"0\" subject=\"fixture\"><groups><group>alt.binaries.fixture</group></groups><segments><segment bytes=\"1\" number=\"1\">fixture@fixture.invalid</segment></segments></file></nzb>\n\r\n-------------------------------8df4679f7ba18b9--\r\n",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Content-Length": "1018",
+    "Content-Type": "multipart/form-data; boundary=-----------------------------8df4679f7ba18b9",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "traceparent": "00-a89d1f7b125d3f47133506905303dc91-c1fe71355ff227d8-00"
+   },
+   "method": "POST",
+   "path": "/api?mode=addfile&cat=movies&priority=-100&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"status\": true, \"nzo_ids\": [\"SABnzbd_nzo_4f1bcb71\"]}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:17 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 11,
+  "time": "2026-11-19T20:16:17Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=queue&start=0&limit=0&category=movies&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"queue\": {\"version\": \"4.2.2\", \"paused\": false, \"pause_int\": \"0\", \"paused_all\": false, \"diskspace1\": \"59.07\", \"diskspace2\": \"59.07\", \"diskspace1_norm\": \"59.1 G\", \"diskspace2_norm\": \"59.1 G\", \"diskspacetotal1\": \"251.97\", \"diskspacetotal2\": \"251.97\", \"speedlimit\": \"0\", \"speedlimit_abs\": \"0\", \"have_warnings\": \"0\", \"finishaction\": null, \"quota\": \"0 \", \"have_quota\": false, \"left_quota\": \"0 \", \"cache_art\": \"0\", \"cache_size\": \"0 B\", \"kbpersec\": \"0.00\", \"speed\": \"0 \", \"mbleft\": \"0.00\", \"mb\": \"0.00\", \"sizeleft\": \"0 B\", \"size\": \"0 B\", \"noofslots_total\": 0, \"noofslots\": 0, \"start\": 0, \"limit\": 0, \"finish\": 0, \"status\": \"Idle\", \"timeleft\": \"0:00:00\", \"slots\": []}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:18 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 12,
+  "time": "2026-11-19T20:16:18Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=history&start=0&limit=60&category=movies&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"history\": {\"total_size\": \"2.7 M\", \"month_size\": \"2.7 M\", \"week_size\": \"2.7 M\", \"day_size\": \"2.7 M\", \"slots\": [{\"completed\": 1795119377, \"name\": \"Braindead.1992.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR\", \"nzb_name\": \"Braindead.1992.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.nzb\", \"category\": \"movies\", \"pp\": \"D\", \"script\": \"None\", \"report\": \"\", \"url\": null, \"status\": \"Completed\", \"nzo_id\": \"SABnzbd_nzo_4f1bcb71\", \"storage\": \"/downloads/Braindead.1992.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR/Braindead.1992.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"path\": \"/downloads/incomplete/Braindead.1992.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR\", \"script_line\": \"\", \"download_time\": 1246, \"postproc_time\": 0, \"stage_log\": [{\"name\": \"Source\", \"actions\": [\"Braindead.1992.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.nzb\"]}, {\"name\": \"Download\", \"actions\": [\"Downloaded in 20 mins 46 seconds at an average of 887 B/s<br/>Age: 365d\"]}, {\"name\": \"Servers\", \"actions\": [\"stub=1.1 MB\"]}, {\"name\": \"Repair\", \"actions\": [\"Trying RAR renamer\", \"[Braindead.1992.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR] No par2 sets\"]}], \"downloaded\": 1106640, \"completeness\": null, \"fail_message\": \"\", \"url_info\": \"\", \"bytes\": 1106640, \"meta\": null, \"series\": null, \"md5sum\": \"b15c1f4120e29e282872e74d64badf26\", \"password\": null, \"duplicate_key\": \"braindead\", \"size\": \"1.1 MB\", \"action_line\": \"\", \"loaded\": false, \"retry\": 0}], \"ppslots\": 0, \"noofslots\": 1, \"last_history_update\": 25, \"version\": \"4.2.2\"}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:18 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 13,
+  "time": "2026-11-19T20:16:18Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=queue&start=0&limit=0&category=movies&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"queue\": {\"version\": \"4.2.2\", \"paused\": false, \"pause_int\": \"0\", \"paused_all\": false, \"diskspace1\": \"59.07\", \"diskspace2\": \"59.07\", \"diskspace1_norm\": \"59.1 G\", \"diskspace2_norm\": \"59.1 G\", \"diskspacetotal1\": \"251.97\", \"diskspacetotal2\": \"251.97\", \"speedlimit\": \"0\", \"speedlimit_abs\": \"0\", \"have_warnings\": \"0\", \"finishaction\": null, \"quota\": \"0 \", \"have_quota\": false, \"left_quota\": \"0 \", \"cache_art\": \"0\", \"cache_size\": \"0 B\", \"kbpersec\": \"0.00\", \"speed\": \"0 \", \"mbleft\": \"0.00\", \"mb\": \"0.00\", \"sizeleft\": \"0 B\", \"size\": \"0 B\", \"noofslots_total\": 0, \"noofslots\": 0, \"start\": 0, \"limit\": 0, \"finish\": 0, \"status\": \"Idle\", \"timeleft\": \"0:00:00\", \"slots\": []}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:18 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 14,
+  "time": "2026-11-19T20:16:18Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=history&name=delete&del_files=1&value=SABnzbd_nzo_4f1bcb71&archive=1&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"status\": true}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:18 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 15,
+  "time": "2026-11-19T20:16:18Z"
+ },
+ {
+  "request": {
+   "body": "-------------------------------8df4679f8eb1aa1\r\nContent-Disposition: form-data; name=\"name\"; filename=\"Candyman.1992.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.nzb\"\r\nContent-Type: application/x-nzb\r\n\r\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<nzb xmlns=\"http://www.newzbin.com/DTD/2003/nzb\"><file poster=\"unarr@fixture.invalid\" date=\"0\" subject=\"fixture\"><groups><group>alt.binaries.fixture</group></groups><segments><segment bytes=\"1\" number=\"1\">fixture@fixture.invalid</segment></segments></file></nzb>\n\r\n-------------------------------8df4679f8eb1aa1--\r\n",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Content-Length": "936",
+    "Content-Type": "multipart/form-data; boundary=-----------------------------8df4679f8eb1aa1",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "traceparent": "00-460160c8728a77379e603b17074e10b5-ace5561fc96418f8-00"
+   },
+   "method": "POST",
+   "path": "/api?mode=addfile&cat=movies&priority=-100&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"status\": true, \"nzo_ids\": [\"SABnzbd_nzo_6e3ee363\"]}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:19 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 16,
+  "time": "2026-11-19T20:16:19Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=queue&start=0&limit=0&category=movies&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"queue\": {\"version\": \"4.2.2\", \"paused\": false, \"pause_int\": \"0\", \"paused_all\": false, \"diskspace1\": \"59.07\", \"diskspace2\": \"59.07\", \"diskspace1_norm\": \"59.1 G\", \"diskspace2_norm\": \"59.1 G\", \"diskspacetotal1\": \"251.97\", \"diskspacetotal2\": \"251.97\", \"speedlimit\": \"0\", \"speedlimit_abs\": \"0\", \"have_warnings\": \"0\", \"finishaction\": null, \"quota\": \"0 \", \"have_quota\": false, \"left_quota\": \"0 \", \"cache_art\": \"0\", \"cache_size\": \"0 B\", \"kbpersec\": \"0.00\", \"speed\": \"0 \", \"mbleft\": \"0.00\", \"mb\": \"0.00\", \"sizeleft\": \"0 B\", \"size\": \"0 B\", \"noofslots_total\": 0, \"noofslots\": 0, \"start\": 0, \"limit\": 0, \"finish\": 0, \"status\": \"Idle\", \"timeleft\": \"0:00:00\", \"slots\": []}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:23 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 17,
+  "time": "2026-11-19T20:16:23Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=history&start=0&limit=60&category=movies&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"history\": {\"total_size\": \"2.7 M\", \"month_size\": \"2.7 M\", \"week_size\": \"2.7 M\", \"day_size\": \"2.7 M\", \"slots\": [{\"completed\": 1795119383, \"name\": \"Candyman.1992.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR\", \"nzb_name\": \"Candyman.1992.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.nzb\", \"category\": \"movies\", \"pp\": \"D\", \"script\": \"None\", \"report\": \"\", \"url\": null, \"status\": \"Failed\", \"nzo_id\": \"SABnzbd_nzo_6e3ee363\", \"storage\": \"/downloads/incomplete/Candyman.1992.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR\", \"path\": \"/downloads/incomplete/Candyman.1992.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR\", \"script_line\": \"\", \"download_time\": 0, \"postproc_time\": 0, \"stage_log\": [{\"name\": \"Source\", \"actions\": [\"Candyman.1992.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.nzb\"]}, {\"name\": \"Download\", \"actions\": [\"1 articles were missing\", \"Download failed - Not on your server(s) - http://host.invalid/c5a3ecb8ce1f\"]}], \"downloaded\": 0, \"completeness\": null, \"fail_message\": \"Download failed - Not on your server(s) - http://host.invalid/c5a3ecb8ce1f\", \"url_info\": \"\", \"bytes\": 0, \"meta\": null, \"series\": null, \"md5sum\": \"902b3d7d5cf59799fa4f94f764ad67e6\", \"password\": null, \"duplicate_key\": \"candyman\", \"size\": \"0 B\", \"action_line\": \"\", \"loaded\": false, \"retry\": 1}], \"ppslots\": 0, \"noofslots\": 1, \"last_history_update\": 29, \"version\": \"4.2.2\"}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:23 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 18,
+  "time": "2026-11-19T20:16:23Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=queue&start=0&limit=0&category=movies&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"queue\": {\"version\": \"4.2.2\", \"paused\": false, \"pause_int\": \"0\", \"paused_all\": false, \"diskspace1\": \"59.07\", \"diskspace2\": \"59.07\", \"diskspace1_norm\": \"59.1 G\", \"diskspace2_norm\": \"59.1 G\", \"diskspacetotal1\": \"251.97\", \"diskspacetotal2\": \"251.97\", \"speedlimit\": \"0\", \"speedlimit_abs\": \"0\", \"have_warnings\": \"0\", \"finishaction\": null, \"quota\": \"0 \", \"have_quota\": false, \"left_quota\": \"0 \", \"cache_art\": \"0\", \"cache_size\": \"0 B\", \"kbpersec\": \"0.00\", \"speed\": \"0 \", \"mbleft\": \"0.00\", \"mb\": \"0.00\", \"sizeleft\": \"0 B\", \"size\": \"0 B\", \"noofslots_total\": 0, \"noofslots\": 0, \"start\": 0, \"limit\": 0, \"finish\": 0, \"status\": \"Idle\", \"timeleft\": \"0:00:00\", \"slots\": []}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:23 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 19,
+  "time": "2026-11-19T20:16:23Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=history&name=delete&del_files=1&value=SABnzbd_nzo_6e3ee363&archive=0&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"status\": true}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:23 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 20,
+  "time": "2026-11-19T20:16:23Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=queue&start=0&limit=0&category=movies&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"queue\": {\"version\": \"4.2.2\", \"paused\": false, \"pause_int\": \"0\", \"paused_all\": false, \"diskspace1\": \"59.07\", \"diskspace2\": \"59.07\", \"diskspace1_norm\": \"59.1 G\", \"diskspace2_norm\": \"59.1 G\", \"diskspacetotal1\": \"251.97\", \"diskspacetotal2\": \"251.97\", \"speedlimit\": \"0\", \"speedlimit_abs\": \"0\", \"have_warnings\": \"0\", \"finishaction\": null, \"quota\": \"0 \", \"have_quota\": false, \"left_quota\": \"0 \", \"cache_art\": \"0\", \"cache_size\": \"0 B\", \"kbpersec\": \"0.00\", \"speed\": \"0 \", \"mbleft\": \"0.00\", \"mb\": \"0.00\", \"sizeleft\": \"0 B\", \"size\": \"0 B\", \"noofslots_total\": 0, \"noofslots\": 0, \"start\": 0, \"limit\": 0, \"finish\": 0, \"status\": \"Idle\", \"timeleft\": \"0:00:00\", \"slots\": []}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:38 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 21,
+  "time": "2026-11-19T20:16:38Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=history&start=0&limit=60&category=movies&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"history\": {\"total_size\": \"2.7 M\", \"month_size\": \"2.7 M\", \"week_size\": \"2.7 M\", \"day_size\": \"2.7 M\", \"slots\": [], \"ppslots\": 0, \"noofslots\": 0, \"last_history_update\": 30, \"version\": \"4.2.2\"}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:38 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 22,
+  "time": "2026-11-19T20:16:38Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=queue&start=0&limit=0&category=movies&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"queue\": {\"version\": \"4.2.2\", \"paused\": false, \"pause_int\": \"0\", \"paused_all\": false, \"diskspace1\": \"59.07\", \"diskspace2\": \"59.07\", \"diskspace1_norm\": \"59.1 G\", \"diskspace2_norm\": \"59.1 G\", \"diskspacetotal1\": \"251.97\", \"diskspacetotal2\": \"251.97\", \"speedlimit\": \"0\", \"speedlimit_abs\": \"0\", \"have_warnings\": \"0\", \"finishaction\": null, \"quota\": \"0 \", \"have_quota\": false, \"left_quota\": \"0 \", \"cache_art\": \"0\", \"cache_size\": \"0 B\", \"kbpersec\": \"0.00\", \"speed\": \"0 \", \"mbleft\": \"0.00\", \"mb\": \"0.00\", \"sizeleft\": \"0 B\", \"size\": \"0 B\", \"noofslots_total\": 0, \"noofslots\": 0, \"start\": 0, \"limit\": 0, \"finish\": 0, \"status\": \"Idle\", \"timeleft\": \"0:00:00\", \"slots\": []}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:53 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 23,
+  "time": "2026-11-19T20:16:53Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=history&start=0&limit=60&category=movies&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"history\": {\"total_size\": \"2.7 M\", \"month_size\": \"2.7 M\", \"week_size\": \"2.7 M\", \"day_size\": \"2.7 M\", \"slots\": [], \"ppslots\": 0, \"noofslots\": 0, \"last_history_update\": 30, \"version\": \"4.2.2\"}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:53 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 24,
+  "time": "2026-11-19T20:16:53Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=queue&start=0&limit=0&category=movies&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"queue\": {\"version\": \"4.2.2\", \"paused\": false, \"pause_int\": \"0\", \"paused_all\": false, \"diskspace1\": \"59.07\", \"diskspace2\": \"59.07\", \"diskspace1_norm\": \"59.1 G\", \"diskspace2_norm\": \"59.1 G\", \"diskspacetotal1\": \"251.97\", \"diskspacetotal2\": \"251.97\", \"speedlimit\": \"0\", \"speedlimit_abs\": \"0\", \"have_warnings\": \"0\", \"finishaction\": null, \"quota\": \"0 \", \"have_quota\": false, \"left_quota\": \"0 \", \"cache_art\": \"0\", \"cache_size\": \"0 B\", \"kbpersec\": \"0.00\", \"speed\": \"0 \", \"mbleft\": \"0.00\", \"mb\": \"0.00\", \"sizeleft\": \"0 B\", \"size\": \"0 B\", \"noofslots_total\": 0, \"noofslots\": 0, \"start\": 0, \"limit\": 0, \"finish\": 0, \"status\": \"Idle\", \"timeleft\": \"0:00:00\", \"slots\": []}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:17:08 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 25,
+  "time": "2026-11-19T20:17:08Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=history&start=0&limit=60&category=movies&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"history\": {\"total_size\": \"2.7 M\", \"month_size\": \"2.7 M\", \"week_size\": \"2.7 M\", \"day_size\": \"2.7 M\", \"slots\": [], \"ppslots\": 0, \"noofslots\": 0, \"last_history_update\": 30, \"version\": \"4.2.2\"}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:17:08 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 26,
+  "time": "2026-11-19T20:17:08Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=queue&start=0&limit=0&category=movies&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"queue\": {\"version\": \"4.2.2\", \"paused\": false, \"pause_int\": \"0\", \"paused_all\": false, \"diskspace1\": \"59.07\", \"diskspace2\": \"59.07\", \"diskspace1_norm\": \"59.1 G\", \"diskspace2_norm\": \"59.1 G\", \"diskspacetotal1\": \"251.97\", \"diskspacetotal2\": \"251.97\", \"speedlimit\": \"0\", \"speedlimit_abs\": \"0\", \"have_warnings\": \"0\", \"finishaction\": null, \"quota\": \"0 \", \"have_quota\": false, \"left_quota\": \"0 \", \"cache_art\": \"0\", \"cache_size\": \"0 B\", \"kbpersec\": \"0.00\", \"speed\": \"0 \", \"mbleft\": \"0.00\", \"mb\": \"0.00\", \"sizeleft\": \"0 B\", \"size\": \"0 B\", \"noofslots_total\": 0, \"noofslots\": 0, \"start\": 0, \"limit\": 0, \"finish\": 0, \"status\": \"Idle\", \"timeleft\": \"0:00:00\", \"slots\": []}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:17:24 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 27,
+  "time": "2026-11-19T20:17:24Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=history&start=0&limit=60&category=movies&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"history\": {\"total_size\": \"2.7 M\", \"month_size\": \"2.7 M\", \"week_size\": \"2.7 M\", \"day_size\": \"2.7 M\", \"slots\": [], \"ppslots\": 0, \"noofslots\": 0, \"last_history_update\": 30, \"version\": \"4.2.2\"}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:17:24 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 28,
+  "time": "2026-11-19T20:17:24Z"
+ },
+ {
+  "request": {
+   "body": "-------------------------------8df467a2b6fb966\r\nContent-Disposition: form-data; name=\"name\"; filename=\"Candy.Land.2023.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.nzb\"\r\nContent-Type: application/x-nzb\r\n\r\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<nzb xmlns=\"http://www.newzbin.com/DTD/2003/nzb\"><file poster=\"unarr@fixture.invalid\" date=\"0\" subject=\"fixture\"><groups><group>alt.binaries.fixture</group></groups><segments><segment bytes=\"1\" number=\"1\">fixture@fixture.invalid</segment></segments></file></nzb>\n\r\n-------------------------------8df467a2b6fb966--\r\n",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Content-Length": "942",
+    "Content-Type": "multipart/form-data; boundary=-----------------------------8df467a2b6fb966",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "traceparent": "00-7cf9fa3c245bef469d059bf5cab9c645-bf3388cdbe3f5f52-00"
+   },
+   "method": "POST",
+   "path": "/api?mode=addfile&cat=movies&priority=-100&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"status\": true, \"nzo_ids\": [\"SABnzbd_nzo_3b79f061\"]}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:17:43 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 29,
+  "time": "2026-11-19T20:17:43Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=queue&start=0&limit=0&category=movies&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"queue\": {\"version\": \"4.2.2\", \"paused\": true, \"pause_int\": \"0\", \"paused_all\": false, \"diskspace1\": \"59.07\", \"diskspace2\": \"59.07\", \"diskspace1_norm\": \"59.1 G\", \"diskspace2_norm\": \"59.1 G\", \"diskspacetotal1\": \"251.97\", \"diskspacetotal2\": \"251.97\", \"speedlimit\": \"0\", \"speedlimit_abs\": \"0\", \"have_warnings\": \"0\", \"finishaction\": null, \"quota\": \"0 \", \"have_quota\": false, \"left_quota\": \"0 \", \"cache_art\": \"0\", \"cache_size\": \"0 B\", \"kbpersec\": \"0.00\", \"speed\": \"0 \", \"mbleft\": \"0.57\", \"mb\": \"0.57\", \"sizeleft\": \"586 KB\", \"size\": \"586 KB\", \"noofslots_total\": 1, \"noofslots\": 1, \"start\": 0, \"limit\": 0, \"finish\": 0, \"status\": \"Paused\", \"timeleft\": \"0:00:00\", \"slots\": [{\"index\": 0, \"nzo_id\": \"SABnzbd_nzo_3b79f061\", \"unpackopts\": \"3\", \"priority\": \"Normal\", \"script\": \"None\", \"filename\": \"Candy.Land.2023.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR\", \"labels\": [], \"password\": \"\", \"cat\": \"movies\", \"mbleft\": \"0.57\", \"mb\": \"0.57\", \"size\": \"586 KB\", \"sizeleft\": \"586 KB\", \"percentage\": \"0\", \"mbmissing\": \"0.00\", \"direct_unpack\": null, \"status\": \"Queued\", \"timeleft\": \"0:00:00\", \"avg_age\": \"365d\"}]}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:17:48 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 30,
+  "time": "2026-11-19T20:17:48Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=history&start=0&limit=60&category=movies&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"history\": {\"total_size\": \"2.7 M\", \"month_size\": \"2.7 M\", \"week_size\": \"2.7 M\", \"day_size\": \"2.7 M\", \"slots\": [], \"ppslots\": 0, \"noofslots\": 0, \"last_history_update\": 30, \"version\": \"4.2.2\"}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:17:48 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 31,
+  "time": "2026-11-19T20:17:48Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=queue&start=0&limit=0&category=movies&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"queue\": {\"version\": \"4.2.2\", \"paused\": true, \"pause_int\": \"0\", \"paused_all\": false, \"diskspace1\": \"59.07\", \"diskspace2\": \"59.07\", \"diskspace1_norm\": \"59.1 G\", \"diskspace2_norm\": \"59.1 G\", \"diskspacetotal1\": \"251.97\", \"diskspacetotal2\": \"251.97\", \"speedlimit\": \"0\", \"speedlimit_abs\": \"0\", \"have_warnings\": \"0\", \"finishaction\": null, \"quota\": \"0 \", \"have_quota\": false, \"left_quota\": \"0 \", \"cache_art\": \"0\", \"cache_size\": \"0 B\", \"kbpersec\": \"0.00\", \"speed\": \"0 \", \"mbleft\": \"0.57\", \"mb\": \"0.57\", \"sizeleft\": \"586 KB\", \"size\": \"586 KB\", \"noofslots_total\": 1, \"noofslots\": 1, \"start\": 0, \"limit\": 0, \"finish\": 0, \"status\": \"Paused\", \"timeleft\": \"0:00:00\", \"slots\": [{\"index\": 0, \"nzo_id\": \"SABnzbd_nzo_3b79f061\", \"unpackopts\": \"3\", \"priority\": \"Normal\", \"script\": \"None\", \"filename\": \"Candy.Land.2023.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR\", \"labels\": [], \"password\": \"\", \"cat\": \"movies\", \"mbleft\": \"0.57\", \"mb\": \"0.57\", \"size\": \"586 KB\", \"sizeleft\": \"586 KB\", \"percentage\": \"0\", \"mbmissing\": \"0.00\", \"direct_unpack\": null, \"status\": \"Queued\", \"timeleft\": \"0:00:00\", \"avg_age\": \"365d\"}]}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:17:55 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 32,
+  "time": "2026-11-19T20:17:55Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=history&start=0&limit=60&category=movies&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"history\": {\"total_size\": \"2.7 M\", \"month_size\": \"2.7 M\", \"week_size\": \"2.7 M\", \"day_size\": \"2.7 M\", \"slots\": [], \"ppslots\": 0, \"noofslots\": 0, \"last_history_update\": 30, \"version\": \"4.2.2\"}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:17:55 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 33,
+  "time": "2026-11-19T20:17:55Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=queue&start=0&limit=0&category=movies&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"queue\": {\"version\": \"4.2.2\", \"paused\": true, \"pause_int\": \"0\", \"paused_all\": false, \"diskspace1\": \"59.07\", \"diskspace2\": \"59.07\", \"diskspace1_norm\": \"59.1 G\", \"diskspace2_norm\": \"59.1 G\", \"diskspacetotal1\": \"251.97\", \"diskspacetotal2\": \"251.97\", \"speedlimit\": \"0\", \"speedlimit_abs\": \"0\", \"have_warnings\": \"0\", \"finishaction\": null, \"quota\": \"0 \", \"have_quota\": false, \"left_quota\": \"0 \", \"cache_art\": \"0\", \"cache_size\": \"0 B\", \"kbpersec\": \"0.00\", \"speed\": \"0 \", \"mbleft\": \"0.57\", \"mb\": \"0.57\", \"sizeleft\": \"586 KB\", \"size\": \"586 KB\", \"noofslots_total\": 1, \"noofslots\": 1, \"start\": 0, \"limit\": 0, \"finish\": 0, \"status\": \"Paused\", \"timeleft\": \"0:00:00\", \"slots\": [{\"index\": 0, \"nzo_id\": \"SABnzbd_nzo_3b79f061\", \"unpackopts\": \"3\", \"priority\": \"Normal\", \"script\": \"None\", \"filename\": \"Candy.Land.2023.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR\", \"labels\": [], \"password\": \"\", \"cat\": \"movies\", \"mbleft\": \"0.57\", \"mb\": \"0.57\", \"size\": \"586 KB\", \"sizeleft\": \"586 KB\", \"percentage\": \"0\", \"mbmissing\": \"0.00\", \"direct_unpack\": null, \"status\": \"Queued\", \"timeleft\": \"0:00:00\", \"avg_age\": \"365d\"}]}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:18:08 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 34,
+  "time": "2026-11-19T20:18:08Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=history&start=0&limit=60&category=movies&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"history\": {\"total_size\": \"2.7 M\", \"month_size\": \"2.7 M\", \"week_size\": \"2.7 M\", \"day_size\": \"2.7 M\", \"slots\": [], \"ppslots\": 0, \"noofslots\": 0, \"last_history_update\": 30, \"version\": \"4.2.2\"}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:18:08 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 35,
+  "time": "2026-11-19T20:18:08Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "traceparent": "00-0dcadcb3b0c0b65377efc8608b80f832-a129444514e702b4-00"
+   },
+   "method": "GET",
+   "path": "/api?mode=queue&start=0&limit=0&category=movies&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"queue\": {\"version\": \"4.2.2\", \"paused\": true, \"pause_int\": \"0\", \"paused_all\": false, \"diskspace1\": \"59.07\", \"diskspace2\": \"59.07\", \"diskspace1_norm\": \"59.1 G\", \"diskspace2_norm\": \"59.1 G\", \"diskspacetotal1\": \"251.97\", \"diskspacetotal2\": \"251.97\", \"speedlimit\": \"0\", \"speedlimit_abs\": \"0\", \"have_warnings\": \"0\", \"finishaction\": null, \"quota\": \"0 \", \"have_quota\": false, \"left_quota\": \"0 \", \"cache_art\": \"0\", \"cache_size\": \"0 B\", \"kbpersec\": \"0.00\", \"speed\": \"0 \", \"mbleft\": \"0.57\", \"mb\": \"0.57\", \"sizeleft\": \"586 KB\", \"size\": \"586 KB\", \"noofslots_total\": 1, \"noofslots\": 1, \"start\": 0, \"limit\": 0, \"finish\": 0, \"status\": \"Paused\", \"timeleft\": \"0:00:00\", \"slots\": [{\"index\": 0, \"nzo_id\": \"SABnzbd_nzo_3b79f061\", \"unpackopts\": \"3\", \"priority\": \"Normal\", \"script\": \"None\", \"filename\": \"Candy.Land.2023.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR\", \"labels\": [], \"password\": \"\", \"cat\": \"movies\", \"mbleft\": \"0.57\", \"mb\": \"0.57\", \"size\": \"586 KB\", \"sizeleft\": \"586 KB\", \"percentage\": \"0\", \"mbmissing\": \"0.00\", \"direct_unpack\": null, \"status\": \"Queued\", \"timeleft\": \"0:00:00\", \"avg_age\": \"365d\"}]}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:18:13 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 36,
+  "time": "2026-11-19T20:18:13Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "traceparent": "00-0dcadcb3b0c0b65377efc8608b80f832-16c8e8595d001035-00"
+   },
+   "method": "GET",
+   "path": "/api?mode=queue&name=delete&del_files=1&value=SABnzbd_nzo_3b79f061&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"status\": true, \"nzo_ids\": [\"SABnzbd_nzo_3b79f061\"]}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:18:13 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 37,
+  "time": "2026-11-19T20:18:13Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=queue&start=0&limit=0&category=movies&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"queue\": {\"version\": \"4.2.2\", \"paused\": true, \"pause_int\": \"0\", \"paused_all\": false, \"diskspace1\": \"59.07\", \"diskspace2\": \"59.07\", \"diskspace1_norm\": \"59.1 G\", \"diskspace2_norm\": \"59.1 G\", \"diskspacetotal1\": \"251.97\", \"diskspacetotal2\": \"251.97\", \"speedlimit\": \"0\", \"speedlimit_abs\": \"0\", \"have_warnings\": \"0\", \"finishaction\": null, \"quota\": \"0 \", \"have_quota\": false, \"left_quota\": \"0 \", \"cache_art\": \"0\", \"cache_size\": \"0 B\", \"kbpersec\": \"0.00\", \"speed\": \"0 \", \"mbleft\": \"0.00\", \"mb\": \"0.00\", \"sizeleft\": \"0 B\", \"size\": \"0 B\", \"noofslots_total\": 0, \"noofslots\": 0, \"start\": 0, \"limit\": 0, \"finish\": 0, \"status\": \"Paused\", \"timeleft\": \"0:00:00\", \"slots\": []}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:18:16 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 38,
+  "time": "2026-11-19T20:18:16Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=history&start=0&limit=60&category=movies&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"history\": {\"total_size\": \"2.7 M\", \"month_size\": \"2.7 M\", \"week_size\": \"2.7 M\", \"day_size\": \"2.7 M\", \"slots\": [], \"ppslots\": 0, \"noofslots\": 0, \"last_history_update\": 30, \"version\": \"4.2.2\"}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:18:16 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 39,
+  "time": "2026-11-19T20:18:16Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=queue&start=0&limit=0&category=movies&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"queue\": {\"version\": \"4.2.2\", \"paused\": false, \"pause_int\": \"0\", \"paused_all\": false, \"diskspace1\": \"59.07\", \"diskspace2\": \"59.07\", \"diskspace1_norm\": \"59.1 G\", \"diskspace2_norm\": \"59.1 G\", \"diskspacetotal1\": \"251.97\", \"diskspacetotal2\": \"251.97\", \"speedlimit\": \"0\", \"speedlimit_abs\": \"0\", \"have_warnings\": \"0\", \"finishaction\": null, \"quota\": \"0 \", \"have_quota\": false, \"left_quota\": \"0 \", \"cache_art\": \"0\", \"cache_size\": \"0 B\", \"kbpersec\": \"0.00\", \"speed\": \"0 \", \"mbleft\": \"0.00\", \"mb\": \"0.00\", \"sizeleft\": \"0 B\", \"size\": \"0 B\", \"noofslots_total\": 0, \"noofslots\": 0, \"start\": 0, \"limit\": 0, \"finish\": 0, \"status\": \"Idle\", \"timeleft\": \"0:00:00\", \"slots\": []}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:18:44 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 40,
+  "time": "2026-11-19T20:18:44Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=history&start=0&limit=60&category=movies&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"history\": {\"total_size\": \"2.7 M\", \"month_size\": \"2.7 M\", \"week_size\": \"2.7 M\", \"day_size\": \"2.7 M\", \"slots\": [], \"ppslots\": 0, \"noofslots\": 0, \"last_history_update\": 30, \"version\": \"4.2.2\"}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:18:44 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 41,
+  "time": "2026-11-19T20:18:44Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=queue&start=0&limit=0&category=movies&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"queue\": {\"version\": \"4.2.2\", \"paused\": false, \"pause_int\": \"0\", \"paused_all\": false, \"diskspace1\": \"59.07\", \"diskspace2\": \"59.07\", \"diskspace1_norm\": \"59.1 G\", \"diskspace2_norm\": \"59.1 G\", \"diskspacetotal1\": \"251.97\", \"diskspacetotal2\": \"251.97\", \"speedlimit\": \"0\", \"speedlimit_abs\": \"0\", \"have_warnings\": \"0\", \"finishaction\": null, \"quota\": \"0 \", \"have_quota\": false, \"left_quota\": \"0 \", \"cache_art\": \"0\", \"cache_size\": \"0 B\", \"kbpersec\": \"0.00\", \"speed\": \"0 \", \"mbleft\": \"0.00\", \"mb\": \"0.00\", \"sizeleft\": \"0 B\", \"size\": \"0 B\", \"noofslots_total\": 0, \"noofslots\": 0, \"start\": 0, \"limit\": 0, \"finish\": 0, \"status\": \"Idle\", \"timeleft\": \"0:00:00\", \"slots\": []}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:18:59 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 42,
+  "time": "2026-11-19T20:18:59Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=history&start=0&limit=60&category=movies&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"history\": {\"total_size\": \"2.7 M\", \"month_size\": \"2.7 M\", \"week_size\": \"2.7 M\", \"day_size\": \"2.7 M\", \"slots\": [], \"ppslots\": 0, \"noofslots\": 0, \"last_history_update\": 30, \"version\": \"4.2.2\"}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:18:59 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 43,
+  "time": "2026-11-19T20:18:59Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=queue&start=0&limit=0&category=movies&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"queue\": {\"version\": \"4.2.2\", \"paused\": false, \"pause_int\": \"0\", \"paused_all\": false, \"diskspace1\": \"59.07\", \"diskspace2\": \"59.07\", \"diskspace1_norm\": \"59.1 G\", \"diskspace2_norm\": \"59.1 G\", \"diskspacetotal1\": \"251.97\", \"diskspacetotal2\": \"251.97\", \"speedlimit\": \"0\", \"speedlimit_abs\": \"0\", \"have_warnings\": \"0\", \"finishaction\": null, \"quota\": \"0 \", \"have_quota\": false, \"left_quota\": \"0 \", \"cache_art\": \"0\", \"cache_size\": \"0 B\", \"kbpersec\": \"0.00\", \"speed\": \"0 \", \"mbleft\": \"0.00\", \"mb\": \"0.00\", \"sizeleft\": \"0 B\", \"size\": \"0 B\", \"noofslots_total\": 0, \"noofslots\": 0, \"start\": 0, \"limit\": 0, \"finish\": 0, \"status\": \"Idle\", \"timeleft\": \"0:00:00\", \"slots\": []}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:19:14 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 44,
+  "time": "2026-11-19T20:19:14Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=history&start=0&limit=60&category=movies&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"history\": {\"total_size\": \"2.7 M\", \"month_size\": \"2.7 M\", \"week_size\": \"2.7 M\", \"day_size\": \"2.7 M\", \"slots\": [], \"ppslots\": 0, \"noofslots\": 0, \"last_history_update\": 30, \"version\": \"4.2.2\"}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:19:14 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 45,
+  "time": "2026-11-19T20:19:14Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=queue&start=0&limit=0&category=movies&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"queue\": {\"version\": \"4.2.2\", \"paused\": false, \"pause_int\": \"0\", \"paused_all\": false, \"diskspace1\": \"59.07\", \"diskspace2\": \"59.07\", \"diskspace1_norm\": \"59.1 G\", \"diskspace2_norm\": \"59.1 G\", \"diskspacetotal1\": \"251.97\", \"diskspacetotal2\": \"251.97\", \"speedlimit\": \"0\", \"speedlimit_abs\": \"0\", \"have_warnings\": \"0\", \"finishaction\": null, \"quota\": \"0 \", \"have_quota\": false, \"left_quota\": \"0 \", \"cache_art\": \"0\", \"cache_size\": \"0 B\", \"kbpersec\": \"0.00\", \"speed\": \"0 \", \"mbleft\": \"0.00\", \"mb\": \"0.00\", \"sizeleft\": \"0 B\", \"size\": \"0 B\", \"noofslots_total\": 0, \"noofslots\": 0, \"start\": 0, \"limit\": 0, \"finish\": 0, \"status\": \"Idle\", \"timeleft\": \"0:00:00\", \"slots\": []}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:19:29 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 46,
+  "time": "2026-11-19T20:19:29Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=history&start=0&limit=60&category=movies&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"history\": {\"total_size\": \"2.7 M\", \"month_size\": \"2.7 M\", \"week_size\": \"2.7 M\", \"day_size\": \"2.7 M\", \"slots\": [], \"ppslots\": 0, \"noofslots\": 0, \"last_history_update\": 30, \"version\": \"4.2.2\"}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:19:29 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 47,
+  "time": "2026-11-19T20:19:29Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=queue&start=0&limit=0&category=movies&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"queue\": {\"version\": \"4.2.2\", \"paused\": false, \"pause_int\": \"0\", \"paused_all\": false, \"diskspace1\": \"59.07\", \"diskspace2\": \"59.07\", \"diskspace1_norm\": \"59.1 G\", \"diskspace2_norm\": \"59.1 G\", \"diskspacetotal1\": \"251.97\", \"diskspacetotal2\": \"251.97\", \"speedlimit\": \"0\", \"speedlimit_abs\": \"0\", \"have_warnings\": \"0\", \"finishaction\": null, \"quota\": \"0 \", \"have_quota\": false, \"left_quota\": \"0 \", \"cache_art\": \"0\", \"cache_size\": \"0 B\", \"kbpersec\": \"0.00\", \"speed\": \"0 \", \"mbleft\": \"0.00\", \"mb\": \"0.00\", \"sizeleft\": \"0 B\", \"size\": \"0 B\", \"noofslots_total\": 0, \"noofslots\": 0, \"start\": 0, \"limit\": 0, \"finish\": 0, \"status\": \"Idle\", \"timeleft\": \"0:00:00\", \"slots\": []}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:19:57 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 48,
+  "time": "2026-11-19T20:19:57Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=history&start=0&limit=60&category=movies&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"history\": {\"total_size\": \"2.7 M\", \"month_size\": \"2.7 M\", \"week_size\": \"2.7 M\", \"day_size\": \"2.7 M\", \"slots\": [], \"ppslots\": 0, \"noofslots\": 0, \"last_history_update\": 30, \"version\": \"4.2.2\"}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:19:57 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 49,
+  "time": "2026-11-19T20:19:57Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=queue&start=0&limit=0&category=movies&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"queue\": {\"version\": \"4.2.2\", \"paused\": false, \"pause_int\": \"0\", \"paused_all\": false, \"diskspace1\": \"59.07\", \"diskspace2\": \"59.07\", \"diskspace1_norm\": \"59.1 G\", \"diskspace2_norm\": \"59.1 G\", \"diskspacetotal1\": \"251.97\", \"diskspacetotal2\": \"251.97\", \"speedlimit\": \"0\", \"speedlimit_abs\": \"0\", \"have_warnings\": \"0\", \"finishaction\": null, \"quota\": \"0 \", \"have_quota\": false, \"left_quota\": \"0 \", \"cache_art\": \"0\", \"cache_size\": \"0 B\", \"kbpersec\": \"0.00\", \"speed\": \"0 \", \"mbleft\": \"0.00\", \"mb\": \"0.00\", \"sizeleft\": \"0 B\", \"size\": \"0 B\", \"noofslots_total\": 0, \"noofslots\": 0, \"start\": 0, \"limit\": 0, \"finish\": 0, \"status\": \"Idle\", \"timeleft\": \"0:00:00\", \"slots\": []}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:20:12 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 50,
+  "time": "2026-11-19T20:20:12Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=history&start=0&limit=60&category=movies&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"history\": {\"total_size\": \"2.7 M\", \"month_size\": \"2.7 M\", \"week_size\": \"2.7 M\", \"day_size\": \"2.7 M\", \"slots\": [], \"ppslots\": 0, \"noofslots\": 0, \"last_history_update\": 30, \"version\": \"4.2.2\"}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:20:12 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 51,
+  "time": "2026-11-19T20:20:12Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=queue&start=0&limit=0&category=movies&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"queue\": {\"version\": \"4.2.2\", \"paused\": false, \"pause_int\": \"0\", \"paused_all\": false, \"diskspace1\": \"59.07\", \"diskspace2\": \"59.07\", \"diskspace1_norm\": \"59.1 G\", \"diskspace2_norm\": \"59.1 G\", \"diskspacetotal1\": \"251.97\", \"diskspacetotal2\": \"251.97\", \"speedlimit\": \"0\", \"speedlimit_abs\": \"0\", \"have_warnings\": \"0\", \"finishaction\": null, \"quota\": \"0 \", \"have_quota\": false, \"left_quota\": \"0 \", \"cache_art\": \"0\", \"cache_size\": \"0 B\", \"kbpersec\": \"0.00\", \"speed\": \"0 \", \"mbleft\": \"0.00\", \"mb\": \"0.00\", \"sizeleft\": \"0 B\", \"size\": \"0 B\", \"noofslots_total\": 0, \"noofslots\": 0, \"start\": 0, \"limit\": 0, \"finish\": 0, \"status\": \"Idle\", \"timeleft\": \"0:00:00\", \"slots\": []}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:20:27 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 52,
+  "time": "2026-11-19T20:20:27Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=history&start=0&limit=60&category=movies&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"history\": {\"total_size\": \"2.7 M\", \"month_size\": \"2.7 M\", \"week_size\": \"2.7 M\", \"day_size\": \"2.7 M\", \"slots\": [], \"ppslots\": 0, \"noofslots\": 0, \"last_history_update\": 30, \"version\": \"4.2.2\"}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:20:27 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 53,
+  "time": "2026-11-19T20:20:27Z"
+ }
+]

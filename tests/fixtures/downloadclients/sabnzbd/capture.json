@@ -1,0 +1,1124 @@
+[
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "traceparent": "00-149911e73b3c4185c0ad92eb8a9ac74c-e1a3d3d6451d6036-00"
+   },
+   "method": "GET",
+   "path": "/api?mode=version&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"version\": \"4.2.2\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:12:28 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 1,
+  "time": "2026-11-19T20:12:28Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "traceparent": "00-149911e73b3c4185c0ad92eb8a9ac74c-a685da88eb96d909-00"
+   },
+   "method": "GET",
+   "path": "/api?mode=get_config&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"config\": {\"misc\": {\"helpful_warnings\": 1, \"queue_complete\": \"\", \"queue_complete_pers\": 0, \"bandwidth_perc\": 100, \"refresh_rate\": 0, \"interface_settings\": \"\", \"queue_limit\": 20, \"config_lock\": 0, \"notified_new_skin\": 0, \"check_new_rel\": 1, \"auto_browser\": 0, \"language\": \"en\", \"enable_https_verification\": 1, \"host\": \"downloadclient.invalid\", \"port\": \"19080\", \"https_port\": \"\", \"username\": \"\", \"password\": \"\", \"bandwidth_max\": \"\", \"cache_limit\": \"1G\", \"web_dir\": \"Glitter\", \"web_color\": \"Auto\", \"https_cert\": \"server.cert\", \"https_key\": \"server.key\", \"https_chain\": \"\", \"enable_https\": 0, \"inet_exposure\": 0, \"api_key\": \"0123456789abcdef0123456789abcdef\", \"nzb_key\": \"b8aa087f0f724a97b4c867b2a9ee1792\", \"socks5_proxy_url\": \"\", \"permissions\": \"\", \"download_dir\": \"/downloads/incomplete\", \"download_free\": \"\", \"complete_dir\": \"/downloads/complete\", \"complete_free\": \"\", \"fulldisk_autoresume\": 0, \"script_dir\": \"\", \"nzb_backup_dir\": \"\", \"admin_dir\": \"admin\", \"backup_dir\": \"\", \"dirscan_dir\": \"\", \"dirscan_speed\": 5, \"password_file\": \"\", \"log_dir\": \"logs\", \"max_art_tries\": 3, \"top_only\": 0, \"sfv_check\": 1, \"script_can_fail\": 0, \"enable_recursive\": 1, \"flat_unpack\": 0, \"par_option\": \"\", \"pre_check\": 0, \"nice\": \"\", \"win_process_prio\": 3, \"ionice\": \"\", \"fail_hopeless_jobs\": 1, \"fast_fail\": 1, \"auto_disconnect\": 1, \"pre_script\": \"None\", \"end_queue_script\": \"None\", \"no_dupes\": 0, \"no_series_dupes\": 0, \"no_smart_dupes\": 0, \"dupes_propercheck\": 1, \"pause_on_pwrar\": 1, \"ignore_samples\": 0, \"deobfuscate_final_filenames\": 1, \"auto_sort\": \"\", \"direct_unpack\": 0, \"propagation_delay\": 0, \"folder_rename\": 1, \"replace_spaces\": 0, \"replace_underscores\": 0, \"replace_dots\": 0, \"safe_postproc\": 1, \"pause_on_post_processing\": 0, \"enable_all_par\": 0, \"sanitize_safe\": 0, \"cleanup_list\": [], \"unwanted_extensions\": [], \"action_on_unwanted_extensions\": 0, \"unwanted_extensions_mode\": 0, \"new_nzb_on_failure\": 0, \"history_retention\": \"0\", \"quota_size\": \"\", \"quota_day\": \"\", \"quota_resume\": 0, \"quota_period\": \"m\", \"schedlines\": [], \"rss_rate\": 60, \"ampm\": 0, \"start_paused\": 0, \"preserve_paused_state\": 0, \"enable_par_cleanup\": 1, \"process_unpacked_par2\": 1, \"enable_multipar\": 1, \"enable_unrar\": 1, \"enable_7zip\": 1, \"enable_filejoin\": 1, \"enable_tsjoin\": 1, \"overwrite_files\": 0, \"ignore_unrar_dates\": 0, \"backup_for_duplicates\": 1, \"empty_postproc\": 0, \"wait_for_dfolder\": 0, \"rss_filenames\": 0, \"api_logging\": 1, \"html_login\": 1, \"warn_dupl_jobs\": 0, \"keep_awake\": 1, \"tray_icon\": 1, \"allow_incomplete_nzb\": 0, \"enable_broadcast\": 1, \"ipv6_hosting\": 0, \"api_warnings\": 1, \"no_penalties\": 0, \"x_frame_options\": 1, \"allow_old_ssl_tls\": 0, \"enable_season_sorting\": 1, \"verify_xff_header\": 0, \"rss_odd_titles\": [\"nzbindex.nl/\", \"nzbindex.com/\", \"nzbclub.com/\"], \"quick_check_ext_ignore\": [\"nfo\", \"sfv\", \"srr\"], \"req_completion_rate\": 100.2, \"selftest_host\": \"downloadclient.invalid\", \"movie_rename_limit\": \"100M\", \"episode_rename_limit\": \"20M\", \"size_limit\": \"0\", \"direct_unpack_threads\": 3, \"history_limit\": 10, \"wait_ext_drive\": 5, \"max_foldername_length\": 246, \"nomedia_marker\": \"\", \"ipv6_servers\": 1, \"url_base\": \"/sabnzbd\", \"host_whitelist\": [\"downloadclient.invalid\"], \"local_ranges\": [], \"max_url_retries\": 10, \"downloader_sleep_time\": 10, \"receive_threads\": 2, \"switchinterval\": 0.005, \"ssdp_broadcast_interval\": 15, \"ext_rename_ignore\": [], \"email_server\": \"\", \"email_to\": [], \"email_from\": \"\", \"email_account\": \"\", \"email_pwd\": \"\", \"email_endjob\": 0, \"email_full\": 0, \"email_dir\": \"\", \"email_rss\": 0, \"email_cats\": [\"0123456789abcdef0123456789abcdef\"]}, \"logging\": {\"log_level\": 1, \"max_log_size\": 5242880, \"log_backups\": 5}, \"ncenter\": {\"ncenter_enable\": 0, \"ncenter_cats\": [\"*\"], \"ncenter_prio_startup\": 0, \"ncenter_prio_download\": 0, \"ncenter_prio_pause_resume\": 0, \"ncenter_prio_pp\": 0, \"ncenter_prio_complete\": 1, \"ncenter_prio_failed\": 1, \"ncenter_prio_disk_full\": 1, \"ncenter_prio_new_login\": 0, \"ncenter_prio_warning\": 0, \"ncenter_prio_error\": 0, \"ncenter_prio_queue_done\": 0, \"ncenter_prio_other\": 1}, \"acenter\": {\"acenter_enable\": 0, \"acenter_cats\": [\"*\"], \"acenter_prio_startup\": 0, \"acenter_prio_download\": 0, \"acenter_prio_pause_resume\": 0, \"acenter_prio_pp\": 0, \"acenter_prio_complete\": 1, \"acenter_prio_failed\": 1, \"acenter_prio_disk_full\": 1, \"acenter_prio_new_login\": 0, \"acenter_prio_warning\": 0, \"acenter_prio_error\": 0, \"acenter_prio_queue_done\": 0, \"acenter_prio_other\": 1}, \"ntfosd\": {\"ntfosd_enable\": 1, \"ntfosd_cats\": [\"*\"], \"ntfosd_prio_startup\": 0, \"ntfosd_prio_download\": 0, \"ntfosd_prio_pause_resume\": 0, \"ntfosd_prio_pp\": 0, \"ntfosd_prio_complete\": 1, \"ntfosd_prio_failed\": 1, \"ntfosd_prio_disk_full\": 1, \"ntfosd_prio_new_login\": 0, \"ntfosd_prio_warning\": 0, \"ntfosd_prio_error\": 0, \"ntfosd_prio_queue_done\": 0, \"ntfosd_prio_other\": 1}, \"prowl\": {\"prowl_enable\": 0, \"prowl_cats\": [\"*\"], \"prowl_apikey\": \"\", \"prowl_prio_startup\": -3, \"prowl_prio_download\": -3, \"prowl_prio_pause_resume\": -3, \"prowl_prio_pp\": -3, \"prowl_prio_complete\": 0, \"prowl_prio_failed\": 1, \"prowl_prio_disk_full\": 1, \"prowl_prio_new_login\": -3, \"prowl_prio_warning\": -3, \"prowl_prio_error\": -3, \"prowl_prio_queue_done\": -3, \"prowl_prio_other\": 0}, \"pushover\": {\"pushover_token\": \"\", \"pushover_userkey\": \"\", \"pushover_device\": \"\", \"pushover_emergency_expire\": 3600, \"pushover_emergency_retry\": 60, \"pushover_enable\": 0, \"pushover_cats\": [\"*\"], \"pushover_prio_startup\": -3, \"pushover_prio_download\": -2, \"pushover_prio_pause_resume\": -2, \"pushover_prio_pp\": -3, \"pushover_prio_complete\": -1, \"pushover_prio_failed\": -1, \"pushover_prio_disk_full\": 1, \"pushover_prio_new_login\": -3, \"pushover_prio_warning\": 1, \"pushover_prio_error\": 1, \"pushover_prio_queue_done\": -3, \"pushover_prio_other\": -1}, \"pushbullet\": {\"pushbullet_enable\": 0, \"pushbullet_cats\": [\"*\"], \"pushbullet_apikey\": \"\", \"pushbullet_device\": \"\", \"pushbullet_prio_startup\": 0, \"pushbullet_prio_download\": 0, \"pushbullet_prio_pause_resume\": 0, \"pushbullet_prio_pp\": 0, \"pushbullet_prio_complete\": 1, \"pushbullet_prio_failed\": 1, \"pushbullet_prio_disk_full\": 1, \"pushbullet_prio_new_login\": 0, \"pushbullet_prio_warning\": 0, \"pushbullet_prio_error\": 0, \"pushbullet_prio_queue_done\": 0, \"pushbullet_prio_other\": 1}, \"nscript\": {\"nscript_enable\": 0, \"nscript_cats\": [\"*\"], \"nscript_script\": \"\", \"nscript_parameters\": \"\", \"nscript_prio_startup\": 0, \"nscript_prio_download\": 0, \"nscript_prio_pause_resume\": 0, \"nscript_prio_pp\": 0, \"nscript_prio_complete\": 1, \"nscript_prio_failed\": 1, \"nscript_prio_disk_full\": 1, \"nscript_prio_new_login\": 0, \"nscript_prio_warning\": 0, \"nscript_prio_error\": 0, \"nscript_prio_queue_done\": 0, \"nscript_prio_other\": 1}, \"categories\": [{\"name\": \"*\", \"order\": 0, \"pp\": \"3\", \"script\": \"None\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": 0}, {\"name\": \"movies\", \"order\": 1, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"tv\", \"order\": 2, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"audio\", \"order\": 3, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"software\", \"order\": 4, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}], \"servers\": [{\"name\": \"stub\", \"displayname\": \"stub\", \"host\": \"downloadclient.invalid\", \"port\": 11119, \"timeout\": 20, \"username\": \"\", \"password\": \"\", \"connections\": 2, \"ssl\": 0, \"ssl_verify\": 2, \"ssl_ciphers\": \"\", \"enable\": 1, \"required\": 0, \"optional\": 0, \"retention\": 0, \"expire_date\": \"\", \"quota\": \"\", \"usage_at_start\": 0, \"send_group\": 0, \"priority\": 0, \"notes\": \"\"}]}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:12:28 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 2,
+  "time": "2026-11-19T20:12:28Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "traceparent": "00-149911e73b3c4185c0ad92eb8a9ac74c-9566c38895967700-00"
+   },
+   "method": "GET",
+   "path": "/api?mode=get_config&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"config\": {\"misc\": {\"helpful_warnings\": 1, \"queue_complete\": \"\", \"queue_complete_pers\": 0, \"bandwidth_perc\": 100, \"refresh_rate\": 0, \"interface_settings\": \"\", \"queue_limit\": 20, \"config_lock\": 0, \"notified_new_skin\": 0, \"check_new_rel\": 1, \"auto_browser\": 0, \"language\": \"en\", \"enable_https_verification\": 1, \"host\": \"downloadclient.invalid\", \"port\": \"19080\", \"https_port\": \"\", \"username\": \"\", \"password\": \"\", \"bandwidth_max\": \"\", \"cache_limit\": \"1G\", \"web_dir\": \"Glitter\", \"web_color\": \"Auto\", \"https_cert\": \"server.cert\", \"https_key\": \"server.key\", \"https_chain\": \"\", \"enable_https\": 0, \"inet_exposure\": 0, \"api_key\": \"0123456789abcdef0123456789abcdef\", \"nzb_key\": \"b8aa087f0f724a97b4c867b2a9ee1792\", \"socks5_proxy_url\": \"\", \"permissions\": \"\", \"download_dir\": \"/downloads/incomplete\", \"download_free\": \"\", \"complete_dir\": \"/downloads/complete\", \"complete_free\": \"\", \"fulldisk_autoresume\": 0, \"script_dir\": \"\", \"nzb_backup_dir\": \"\", \"admin_dir\": \"admin\", \"backup_dir\": \"\", \"dirscan_dir\": \"\", \"dirscan_speed\": 5, \"password_file\": \"\", \"log_dir\": \"logs\", \"max_art_tries\": 3, \"top_only\": 0, \"sfv_check\": 1, \"script_can_fail\": 0, \"enable_recursive\": 1, \"flat_unpack\": 0, \"par_option\": \"\", \"pre_check\": 0, \"nice\": \"\", \"win_process_prio\": 3, \"ionice\": \"\", \"fail_hopeless_jobs\": 1, \"fast_fail\": 1, \"auto_disconnect\": 1, \"pre_script\": \"None\", \"end_queue_script\": \"None\", \"no_dupes\": 0, \"no_series_dupes\": 0, \"no_smart_dupes\": 0, \"dupes_propercheck\": 1, \"pause_on_pwrar\": 1, \"ignore_samples\": 0, \"deobfuscate_final_filenames\": 1, \"auto_sort\": \"\", \"direct_unpack\": 0, \"propagation_delay\": 0, \"folder_rename\": 1, \"replace_spaces\": 0, \"replace_underscores\": 0, \"replace_dots\": 0, \"safe_postproc\": 1, \"pause_on_post_processing\": 0, \"enable_all_par\": 0, \"sanitize_safe\": 0, \"cleanup_list\": [], \"unwanted_extensions\": [], \"action_on_unwanted_extensions\": 0, \"unwanted_extensions_mode\": 0, \"new_nzb_on_failure\": 0, \"history_retention\": \"0\", \"quota_size\": \"\", \"quota_day\": \"\", \"quota_resume\": 0, \"quota_period\": \"m\", \"schedlines\": [], \"rss_rate\": 60, \"ampm\": 0, \"start_paused\": 0, \"preserve_paused_state\": 0, \"enable_par_cleanup\": 1, \"process_unpacked_par2\": 1, \"enable_multipar\": 1, \"enable_unrar\": 1, \"enable_7zip\": 1, \"enable_filejoin\": 1, \"enable_tsjoin\": 1, \"overwrite_files\": 0, \"ignore_unrar_dates\": 0, \"backup_for_duplicates\": 1, \"empty_postproc\": 0, \"wait_for_dfolder\": 0, \"rss_filenames\": 0, \"api_logging\": 1, \"html_login\": 1, \"warn_dupl_jobs\": 0, \"keep_awake\": 1, \"tray_icon\": 1, \"allow_incomplete_nzb\": 0, \"enable_broadcast\": 1, \"ipv6_hosting\": 0, \"api_warnings\": 1, \"no_penalties\": 0, \"x_frame_options\": 1, \"allow_old_ssl_tls\": 0, \"enable_season_sorting\": 1, \"verify_xff_header\": 0, \"rss_odd_titles\": [\"nzbindex.nl/\", \"nzbindex.com/\", \"nzbclub.com/\"], \"quick_check_ext_ignore\": [\"nfo\", \"sfv\", \"srr\"], \"req_completion_rate\": 100.2, \"selftest_host\": \"downloadclient.invalid\", \"movie_rename_limit\": \"100M\", \"episode_rename_limit\": \"20M\", \"size_limit\": \"0\", \"direct_unpack_threads\": 3, \"history_limit\": 10, \"wait_ext_drive\": 5, \"max_foldername_length\": 246, \"nomedia_marker\": \"\", \"ipv6_servers\": 1, \"url_base\": \"/sabnzbd\", \"host_whitelist\": [\"downloadclient.invalid\"], \"local_ranges\": [], \"max_url_retries\": 10, \"downloader_sleep_time\": 10, \"receive_threads\": 2, \"switchinterval\": 0.005, \"ssdp_broadcast_interval\": 15, \"ext_rename_ignore\": [], \"email_server\": \"\", \"email_to\": [], \"email_from\": \"\", \"email_account\": \"\", \"email_pwd\": \"\", \"email_endjob\": 0, \"email_full\": 0, \"email_dir\": \"\", \"email_rss\": 0, \"email_cats\": [\"0123456789abcdef0123456789abcdef\"]}, \"logging\": {\"log_level\": 1, \"max_log_size\": 5242880, \"log_backups\": 5}, \"ncenter\": {\"ncenter_enable\": 0, \"ncenter_cats\": [\"*\"], \"ncenter_prio_startup\": 0, \"ncenter_prio_download\": 0, \"ncenter_prio_pause_resume\": 0, \"ncenter_prio_pp\": 0, \"ncenter_prio_complete\": 1, \"ncenter_prio_failed\": 1, \"ncenter_prio_disk_full\": 1, \"ncenter_prio_new_login\": 0, \"ncenter_prio_warning\": 0, \"ncenter_prio_error\": 0, \"ncenter_prio_queue_done\": 0, \"ncenter_prio_other\": 1}, \"acenter\": {\"acenter_enable\": 0, \"acenter_cats\": [\"*\"], \"acenter_prio_startup\": 0, \"acenter_prio_download\": 0, \"acenter_prio_pause_resume\": 0, \"acenter_prio_pp\": 0, \"acenter_prio_complete\": 1, \"acenter_prio_failed\": 1, \"acenter_prio_disk_full\": 1, \"acenter_prio_new_login\": 0, \"acenter_prio_warning\": 0, \"acenter_prio_error\": 0, \"acenter_prio_queue_done\": 0, \"acenter_prio_other\": 1}, \"ntfosd\": {\"ntfosd_enable\": 1, \"ntfosd_cats\": [\"*\"], \"ntfosd_prio_startup\": 0, \"ntfosd_prio_download\": 0, \"ntfosd_prio_pause_resume\": 0, \"ntfosd_prio_pp\": 0, \"ntfosd_prio_complete\": 1, \"ntfosd_prio_failed\": 1, \"ntfosd_prio_disk_full\": 1, \"ntfosd_prio_new_login\": 0, \"ntfosd_prio_warning\": 0, \"ntfosd_prio_error\": 0, \"ntfosd_prio_queue_done\": 0, \"ntfosd_prio_other\": 1}, \"prowl\": {\"prowl_enable\": 0, \"prowl_cats\": [\"*\"], \"prowl_apikey\": \"\", \"prowl_prio_startup\": -3, \"prowl_prio_download\": -3, \"prowl_prio_pause_resume\": -3, \"prowl_prio_pp\": -3, \"prowl_prio_complete\": 0, \"prowl_prio_failed\": 1, \"prowl_prio_disk_full\": 1, \"prowl_prio_new_login\": -3, \"prowl_prio_warning\": -3, \"prowl_prio_error\": -3, \"prowl_prio_queue_done\": -3, \"prowl_prio_other\": 0}, \"pushover\": {\"pushover_token\": \"\", \"pushover_userkey\": \"\", \"pushover_device\": \"\", \"pushover_emergency_expire\": 3600, \"pushover_emergency_retry\": 60, \"pushover_enable\": 0, \"pushover_cats\": [\"*\"], \"pushover_prio_startup\": -3, \"pushover_prio_download\": -2, \"pushover_prio_pause_resume\": -2, \"pushover_prio_pp\": -3, \"pushover_prio_complete\": -1, \"pushover_prio_failed\": -1, \"pushover_prio_disk_full\": 1, \"pushover_prio_new_login\": -3, \"pushover_prio_warning\": 1, \"pushover_prio_error\": 1, \"pushover_prio_queue_done\": -3, \"pushover_prio_other\": -1}, \"pushbullet\": {\"pushbullet_enable\": 0, \"pushbullet_cats\": [\"*\"], \"pushbullet_apikey\": \"\", \"pushbullet_device\": \"\", \"pushbullet_prio_startup\": 0, \"pushbullet_prio_download\": 0, \"pushbullet_prio_pause_resume\": 0, \"pushbullet_prio_pp\": 0, \"pushbullet_prio_complete\": 1, \"pushbullet_prio_failed\": 1, \"pushbullet_prio_disk_full\": 1, \"pushbullet_prio_new_login\": 0, \"pushbullet_prio_warning\": 0, \"pushbullet_prio_error\": 0, \"pushbullet_prio_queue_done\": 0, \"pushbullet_prio_other\": 1}, \"nscript\": {\"nscript_enable\": 0, \"nscript_cats\": [\"*\"], \"nscript_script\": \"\", \"nscript_parameters\": \"\", \"nscript_prio_startup\": 0, \"nscript_prio_download\": 0, \"nscript_prio_pause_resume\": 0, \"nscript_prio_pp\": 0, \"nscript_prio_complete\": 1, \"nscript_prio_failed\": 1, \"nscript_prio_disk_full\": 1, \"nscript_prio_new_login\": 0, \"nscript_prio_warning\": 0, \"nscript_prio_error\": 0, \"nscript_prio_queue_done\": 0, \"nscript_prio_other\": 1}, \"categories\": [{\"name\": \"*\", \"order\": 0, \"pp\": \"3\", \"script\": \"None\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": 0}, {\"name\": \"movies\", \"order\": 1, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"tv\", \"order\": 2, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"audio\", \"order\": 3, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"software\", \"order\": 4, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}], \"servers\": [{\"name\": \"stub\", \"displayname\": \"stub\", \"host\": \"downloadclient.invalid\", \"port\": 11119, \"timeout\": 20, \"username\": \"\", \"password\": \"\", \"connections\": 2, \"ssl\": 0, \"ssl_verify\": 2, \"ssl_ciphers\": \"\", \"enable\": 1, \"required\": 0, \"optional\": 0, \"retention\": 0, \"expire_date\": \"\", \"quota\": \"\", \"usage_at_start\": 0, \"send_group\": 0, \"priority\": 0, \"notes\": \"\"}]}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:12:28 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 3,
+  "time": "2026-11-19T20:12:28Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "traceparent": "00-149911e73b3c4185c0ad92eb8a9ac74c-f76304908cafe94c-00"
+   },
+   "method": "GET",
+   "path": "/api?mode=get_config&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"config\": {\"misc\": {\"helpful_warnings\": 1, \"queue_complete\": \"\", \"queue_complete_pers\": 0, \"bandwidth_perc\": 100, \"refresh_rate\": 0, \"interface_settings\": \"\", \"queue_limit\": 20, \"config_lock\": 0, \"notified_new_skin\": 0, \"check_new_rel\": 1, \"auto_browser\": 0, \"language\": \"en\", \"enable_https_verification\": 1, \"host\": \"downloadclient.invalid\", \"port\": \"19080\", \"https_port\": \"\", \"username\": \"\", \"password\": \"\", \"bandwidth_max\": \"\", \"cache_limit\": \"1G\", \"web_dir\": \"Glitter\", \"web_color\": \"Auto\", \"https_cert\": \"server.cert\", \"https_key\": \"server.key\", \"https_chain\": \"\", \"enable_https\": 0, \"inet_exposure\": 0, \"api_key\": \"0123456789abcdef0123456789abcdef\", \"nzb_key\": \"b8aa087f0f724a97b4c867b2a9ee1792\", \"socks5_proxy_url\": \"\", \"permissions\": \"\", \"download_dir\": \"/downloads/incomplete\", \"download_free\": \"\", \"complete_dir\": \"/downloads/complete\", \"complete_free\": \"\", \"fulldisk_autoresume\": 0, \"script_dir\": \"\", \"nzb_backup_dir\": \"\", \"admin_dir\": \"admin\", \"backup_dir\": \"\", \"dirscan_dir\": \"\", \"dirscan_speed\": 5, \"password_file\": \"\", \"log_dir\": \"logs\", \"max_art_tries\": 3, \"top_only\": 0, \"sfv_check\": 1, \"script_can_fail\": 0, \"enable_recursive\": 1, \"flat_unpack\": 0, \"par_option\": \"\", \"pre_check\": 0, \"nice\": \"\", \"win_process_prio\": 3, \"ionice\": \"\", \"fail_hopeless_jobs\": 1, \"fast_fail\": 1, \"auto_disconnect\": 1, \"pre_script\": \"None\", \"end_queue_script\": \"None\", \"no_dupes\": 0, \"no_series_dupes\": 0, \"no_smart_dupes\": 0, \"dupes_propercheck\": 1, \"pause_on_pwrar\": 1, \"ignore_samples\": 0, \"deobfuscate_final_filenames\": 1, \"auto_sort\": \"\", \"direct_unpack\": 0, \"propagation_delay\": 0, \"folder_rename\": 1, \"replace_spaces\": 0, \"replace_underscores\": 0, \"replace_dots\": 0, \"safe_postproc\": 1, \"pause_on_post_processing\": 0, \"enable_all_par\": 0, \"sanitize_safe\": 0, \"cleanup_list\": [], \"unwanted_extensions\": [], \"action_on_unwanted_extensions\": 0, \"unwanted_extensions_mode\": 0, \"new_nzb_on_failure\": 0, \"history_retention\": \"0\", \"quota_size\": \"\", \"quota_day\": \"\", \"quota_resume\": 0, \"quota_period\": \"m\", \"schedlines\": [], \"rss_rate\": 60, \"ampm\": 0, \"start_paused\": 0, \"preserve_paused_state\": 0, \"enable_par_cleanup\": 1, \"process_unpacked_par2\": 1, \"enable_multipar\": 1, \"enable_unrar\": 1, \"enable_7zip\": 1, \"enable_filejoin\": 1, \"enable_tsjoin\": 1, \"overwrite_files\": 0, \"ignore_unrar_dates\": 0, \"backup_for_duplicates\": 1, \"empty_postproc\": 0, \"wait_for_dfolder\": 0, \"rss_filenames\": 0, \"api_logging\": 1, \"html_login\": 1, \"warn_dupl_jobs\": 0, \"keep_awake\": 1, \"tray_icon\": 1, \"allow_incomplete_nzb\": 0, \"enable_broadcast\": 1, \"ipv6_hosting\": 0, \"api_warnings\": 1, \"no_penalties\": 0, \"x_frame_options\": 1, \"allow_old_ssl_tls\": 0, \"enable_season_sorting\": 1, \"verify_xff_header\": 0, \"rss_odd_titles\": [\"nzbindex.nl/\", \"nzbindex.com/\", \"nzbclub.com/\"], \"quick_check_ext_ignore\": [\"nfo\", \"sfv\", \"srr\"], \"req_completion_rate\": 100.2, \"selftest_host\": \"downloadclient.invalid\", \"movie_rename_limit\": \"100M\", \"episode_rename_limit\": \"20M\", \"size_limit\": \"0\", \"direct_unpack_threads\": 3, \"history_limit\": 10, \"wait_ext_drive\": 5, \"max_foldername_length\": 246, \"nomedia_marker\": \"\", \"ipv6_servers\": 1, \"url_base\": \"/sabnzbd\", \"host_whitelist\": [\"downloadclient.invalid\"], \"local_ranges\": [], \"max_url_retries\": 10, \"downloader_sleep_time\": 10, \"receive_threads\": 2, \"switchinterval\": 0.005, \"ssdp_broadcast_interval\": 15, \"ext_rename_ignore\": [], \"email_server\": \"\", \"email_to\": [], \"email_from\": \"\", \"email_account\": \"\", \"email_pwd\": \"\", \"email_endjob\": 0, \"email_full\": 0, \"email_dir\": \"\", \"email_rss\": 0, \"email_cats\": [\"0123456789abcdef0123456789abcdef\"]}, \"logging\": {\"log_level\": 1, \"max_log_size\": 5242880, \"log_backups\": 5}, \"ncenter\": {\"ncenter_enable\": 0, \"ncenter_cats\": [\"*\"], \"ncenter_prio_startup\": 0, \"ncenter_prio_download\": 0, \"ncenter_prio_pause_resume\": 0, \"ncenter_prio_pp\": 0, \"ncenter_prio_complete\": 1, \"ncenter_prio_failed\": 1, \"ncenter_prio_disk_full\": 1, \"ncenter_prio_new_login\": 0, \"ncenter_prio_warning\": 0, \"ncenter_prio_error\": 0, \"ncenter_prio_queue_done\": 0, \"ncenter_prio_other\": 1}, \"acenter\": {\"acenter_enable\": 0, \"acenter_cats\": [\"*\"], \"acenter_prio_startup\": 0, \"acenter_prio_download\": 0, \"acenter_prio_pause_resume\": 0, \"acenter_prio_pp\": 0, \"acenter_prio_complete\": 1, \"acenter_prio_failed\": 1, \"acenter_prio_disk_full\": 1, \"acenter_prio_new_login\": 0, \"acenter_prio_warning\": 0, \"acenter_prio_error\": 0, \"acenter_prio_queue_done\": 0, \"acenter_prio_other\": 1}, \"ntfosd\": {\"ntfosd_enable\": 1, \"ntfosd_cats\": [\"*\"], \"ntfosd_prio_startup\": 0, \"ntfosd_prio_download\": 0, \"ntfosd_prio_pause_resume\": 0, \"ntfosd_prio_pp\": 0, \"ntfosd_prio_complete\": 1, \"ntfosd_prio_failed\": 1, \"ntfosd_prio_disk_full\": 1, \"ntfosd_prio_new_login\": 0, \"ntfosd_prio_warning\": 0, \"ntfosd_prio_error\": 0, \"ntfosd_prio_queue_done\": 0, \"ntfosd_prio_other\": 1}, \"prowl\": {\"prowl_enable\": 0, \"prowl_cats\": [\"*\"], \"prowl_apikey\": \"\", \"prowl_prio_startup\": -3, \"prowl_prio_download\": -3, \"prowl_prio_pause_resume\": -3, \"prowl_prio_pp\": -3, \"prowl_prio_complete\": 0, \"prowl_prio_failed\": 1, \"prowl_prio_disk_full\": 1, \"prowl_prio_new_login\": -3, \"prowl_prio_warning\": -3, \"prowl_prio_error\": -3, \"prowl_prio_queue_done\": -3, \"prowl_prio_other\": 0}, \"pushover\": {\"pushover_token\": \"\", \"pushover_userkey\": \"\", \"pushover_device\": \"\", \"pushover_emergency_expire\": 3600, \"pushover_emergency_retry\": 60, \"pushover_enable\": 0, \"pushover_cats\": [\"*\"], \"pushover_prio_startup\": -3, \"pushover_prio_download\": -2, \"pushover_prio_pause_resume\": -2, \"pushover_prio_pp\": -3, \"pushover_prio_complete\": -1, \"pushover_prio_failed\": -1, \"pushover_prio_disk_full\": 1, \"pushover_prio_new_login\": -3, \"pushover_prio_warning\": 1, \"pushover_prio_error\": 1, \"pushover_prio_queue_done\": -3, \"pushover_prio_other\": -1}, \"pushbullet\": {\"pushbullet_enable\": 0, \"pushbullet_cats\": [\"*\"], \"pushbullet_apikey\": \"\", \"pushbullet_device\": \"\", \"pushbullet_prio_startup\": 0, \"pushbullet_prio_download\": 0, \"pushbullet_prio_pause_resume\": 0, \"pushbullet_prio_pp\": 0, \"pushbullet_prio_complete\": 1, \"pushbullet_prio_failed\": 1, \"pushbullet_prio_disk_full\": 1, \"pushbullet_prio_new_login\": 0, \"pushbullet_prio_warning\": 0, \"pushbullet_prio_error\": 0, \"pushbullet_prio_queue_done\": 0, \"pushbullet_prio_other\": 1}, \"nscript\": {\"nscript_enable\": 0, \"nscript_cats\": [\"*\"], \"nscript_script\": \"\", \"nscript_parameters\": \"\", \"nscript_prio_startup\": 0, \"nscript_prio_download\": 0, \"nscript_prio_pause_resume\": 0, \"nscript_prio_pp\": 0, \"nscript_prio_complete\": 1, \"nscript_prio_failed\": 1, \"nscript_prio_disk_full\": 1, \"nscript_prio_new_login\": 0, \"nscript_prio_warning\": 0, \"nscript_prio_error\": 0, \"nscript_prio_queue_done\": 0, \"nscript_prio_other\": 1}, \"categories\": [{\"name\": \"*\", \"order\": 0, \"pp\": \"3\", \"script\": \"None\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": 0}, {\"name\": \"movies\", \"order\": 1, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"tv\", \"order\": 2, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"audio\", \"order\": 3, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"software\", \"order\": 4, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}], \"servers\": [{\"name\": \"stub\", \"displayname\": \"stub\", \"host\": \"downloadclient.invalid\", \"port\": 11119, \"timeout\": 20, \"username\": \"\", \"password\": \"\", \"connections\": 2, \"ssl\": 0, \"ssl_verify\": 2, \"ssl_ciphers\": \"\", \"enable\": 1, \"required\": 0, \"optional\": 0, \"retention\": 0, \"expire_date\": \"\", \"quota\": \"\", \"usage_at_start\": 0, \"send_group\": 0, \"priority\": 0, \"notes\": \"\"}]}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:12:28 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 4,
+  "time": "2026-11-19T20:12:28Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "traceparent": "00-6803465c48372bfe0391504028f19387-7f177b37a7fbea1b-00"
+   },
+   "method": "GET",
+   "path": "/api?mode=version&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"version\": \"4.2.2\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:12:28 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 5,
+  "time": "2026-11-19T20:12:28Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "traceparent": "00-6803465c48372bfe0391504028f19387-b2035e193b33e6cf-00"
+   },
+   "method": "GET",
+   "path": "/api?mode=get_config&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"config\": {\"misc\": {\"helpful_warnings\": 1, \"queue_complete\": \"\", \"queue_complete_pers\": 0, \"bandwidth_perc\": 100, \"refresh_rate\": 0, \"interface_settings\": \"\", \"queue_limit\": 20, \"config_lock\": 0, \"notified_new_skin\": 0, \"check_new_rel\": 1, \"auto_browser\": 0, \"language\": \"en\", \"enable_https_verification\": 1, \"host\": \"downloadclient.invalid\", \"port\": \"19080\", \"https_port\": \"\", \"username\": \"\", \"password\": \"\", \"bandwidth_max\": \"\", \"cache_limit\": \"1G\", \"web_dir\": \"Glitter\", \"web_color\": \"Auto\", \"https_cert\": \"server.cert\", \"https_key\": \"server.key\", \"https_chain\": \"\", \"enable_https\": 0, \"inet_exposure\": 0, \"api_key\": \"0123456789abcdef0123456789abcdef\", \"nzb_key\": \"b8aa087f0f724a97b4c867b2a9ee1792\", \"socks5_proxy_url\": \"\", \"permissions\": \"\", \"download_dir\": \"/downloads/incomplete\", \"download_free\": \"\", \"complete_dir\": \"/downloads/complete\", \"complete_free\": \"\", \"fulldisk_autoresume\": 0, \"script_dir\": \"\", \"nzb_backup_dir\": \"\", \"admin_dir\": \"admin\", \"backup_dir\": \"\", \"dirscan_dir\": \"\", \"dirscan_speed\": 5, \"password_file\": \"\", \"log_dir\": \"logs\", \"max_art_tries\": 3, \"top_only\": 0, \"sfv_check\": 1, \"script_can_fail\": 0, \"enable_recursive\": 1, \"flat_unpack\": 0, \"par_option\": \"\", \"pre_check\": 0, \"nice\": \"\", \"win_process_prio\": 3, \"ionice\": \"\", \"fail_hopeless_jobs\": 1, \"fast_fail\": 1, \"auto_disconnect\": 1, \"pre_script\": \"None\", \"end_queue_script\": \"None\", \"no_dupes\": 0, \"no_series_dupes\": 0, \"no_smart_dupes\": 0, \"dupes_propercheck\": 1, \"pause_on_pwrar\": 1, \"ignore_samples\": 0, \"deobfuscate_final_filenames\": 1, \"auto_sort\": \"\", \"direct_unpack\": 0, \"propagation_delay\": 0, \"folder_rename\": 1, \"replace_spaces\": 0, \"replace_underscores\": 0, \"replace_dots\": 0, \"safe_postproc\": 1, \"pause_on_post_processing\": 0, \"enable_all_par\": 0, \"sanitize_safe\": 0, \"cleanup_list\": [], \"unwanted_extensions\": [], \"action_on_unwanted_extensions\": 0, \"unwanted_extensions_mode\": 0, \"new_nzb_on_failure\": 0, \"history_retention\": \"0\", \"quota_size\": \"\", \"quota_day\": \"\", \"quota_resume\": 0, \"quota_period\": \"m\", \"schedlines\": [], \"rss_rate\": 60, \"ampm\": 0, \"start_paused\": 0, \"preserve_paused_state\": 0, \"enable_par_cleanup\": 1, \"process_unpacked_par2\": 1, \"enable_multipar\": 1, \"enable_unrar\": 1, \"enable_7zip\": 1, \"enable_filejoin\": 1, \"enable_tsjoin\": 1, \"overwrite_files\": 0, \"ignore_unrar_dates\": 0, \"backup_for_duplicates\": 1, \"empty_postproc\": 0, \"wait_for_dfolder\": 0, \"rss_filenames\": 0, \"api_logging\": 1, \"html_login\": 1, \"warn_dupl_jobs\": 0, \"keep_awake\": 1, \"tray_icon\": 1, \"allow_incomplete_nzb\": 0, \"enable_broadcast\": 1, \"ipv6_hosting\": 0, \"api_warnings\": 1, \"no_penalties\": 0, \"x_frame_options\": 1, \"allow_old_ssl_tls\": 0, \"enable_season_sorting\": 1, \"verify_xff_header\": 0, \"rss_odd_titles\": [\"nzbindex.nl/\", \"nzbindex.com/\", \"nzbclub.com/\"], \"quick_check_ext_ignore\": [\"nfo\", \"sfv\", \"srr\"], \"req_completion_rate\": 100.2, \"selftest_host\": \"downloadclient.invalid\", \"movie_rename_limit\": \"100M\", \"episode_rename_limit\": \"20M\", \"size_limit\": \"0\", \"direct_unpack_threads\": 3, \"history_limit\": 10, \"wait_ext_drive\": 5, \"max_foldername_length\": 246, \"nomedia_marker\": \"\", \"ipv6_servers\": 1, \"url_base\": \"/sabnzbd\", \"host_whitelist\": [\"downloadclient.invalid\"], \"local_ranges\": [], \"max_url_retries\": 10, \"downloader_sleep_time\": 10, \"receive_threads\": 2, \"switchinterval\": 0.005, \"ssdp_broadcast_interval\": 15, \"ext_rename_ignore\": [], \"email_server\": \"\", \"email_to\": [], \"email_from\": \"\", \"email_account\": \"\", \"email_pwd\": \"\", \"email_endjob\": 0, \"email_full\": 0, \"email_dir\": \"\", \"email_rss\": 0, \"email_cats\": [\"0123456789abcdef0123456789abcdef\"]}, \"logging\": {\"log_level\": 1, \"max_log_size\": 5242880, \"log_backups\": 5}, \"ncenter\": {\"ncenter_enable\": 0, \"ncenter_cats\": [\"*\"], \"ncenter_prio_startup\": 0, \"ncenter_prio_download\": 0, \"ncenter_prio_pause_resume\": 0, \"ncenter_prio_pp\": 0, \"ncenter_prio_complete\": 1, \"ncenter_prio_failed\": 1, \"ncenter_prio_disk_full\": 1, \"ncenter_prio_new_login\": 0, \"ncenter_prio_warning\": 0, \"ncenter_prio_error\": 0, \"ncenter_prio_queue_done\": 0, \"ncenter_prio_other\": 1}, \"acenter\": {\"acenter_enable\": 0, \"acenter_cats\": [\"*\"], \"acenter_prio_startup\": 0, \"acenter_prio_download\": 0, \"acenter_prio_pause_resume\": 0, \"acenter_prio_pp\": 0, \"acenter_prio_complete\": 1, \"acenter_prio_failed\": 1, \"acenter_prio_disk_full\": 1, \"acenter_prio_new_login\": 0, \"acenter_prio_warning\": 0, \"acenter_prio_error\": 0, \"acenter_prio_queue_done\": 0, \"acenter_prio_other\": 1}, \"ntfosd\": {\"ntfosd_enable\": 1, \"ntfosd_cats\": [\"*\"], \"ntfosd_prio_startup\": 0, \"ntfosd_prio_download\": 0, \"ntfosd_prio_pause_resume\": 0, \"ntfosd_prio_pp\": 0, \"ntfosd_prio_complete\": 1, \"ntfosd_prio_failed\": 1, \"ntfosd_prio_disk_full\": 1, \"ntfosd_prio_new_login\": 0, \"ntfosd_prio_warning\": 0, \"ntfosd_prio_error\": 0, \"ntfosd_prio_queue_done\": 0, \"ntfosd_prio_other\": 1}, \"prowl\": {\"prowl_enable\": 0, \"prowl_cats\": [\"*\"], \"prowl_apikey\": \"\", \"prowl_prio_startup\": -3, \"prowl_prio_download\": -3, \"prowl_prio_pause_resume\": -3, \"prowl_prio_pp\": -3, \"prowl_prio_complete\": 0, \"prowl_prio_failed\": 1, \"prowl_prio_disk_full\": 1, \"prowl_prio_new_login\": -3, \"prowl_prio_warning\": -3, \"prowl_prio_error\": -3, \"prowl_prio_queue_done\": -3, \"prowl_prio_other\": 0}, \"pushover\": {\"pushover_token\": \"\", \"pushover_userkey\": \"\", \"pushover_device\": \"\", \"pushover_emergency_expire\": 3600, \"pushover_emergency_retry\": 60, \"pushover_enable\": 0, \"pushover_cats\": [\"*\"], \"pushover_prio_startup\": -3, \"pushover_prio_download\": -2, \"pushover_prio_pause_resume\": -2, \"pushover_prio_pp\": -3, \"pushover_prio_complete\": -1, \"pushover_prio_failed\": -1, \"pushover_prio_disk_full\": 1, \"pushover_prio_new_login\": -3, \"pushover_prio_warning\": 1, \"pushover_prio_error\": 1, \"pushover_prio_queue_done\": -3, \"pushover_prio_other\": -1}, \"pushbullet\": {\"pushbullet_enable\": 0, \"pushbullet_cats\": [\"*\"], \"pushbullet_apikey\": \"\", \"pushbullet_device\": \"\", \"pushbullet_prio_startup\": 0, \"pushbullet_prio_download\": 0, \"pushbullet_prio_pause_resume\": 0, \"pushbullet_prio_pp\": 0, \"pushbullet_prio_complete\": 1, \"pushbullet_prio_failed\": 1, \"pushbullet_prio_disk_full\": 1, \"pushbullet_prio_new_login\": 0, \"pushbullet_prio_warning\": 0, \"pushbullet_prio_error\": 0, \"pushbullet_prio_queue_done\": 0, \"pushbullet_prio_other\": 1}, \"nscript\": {\"nscript_enable\": 0, \"nscript_cats\": [\"*\"], \"nscript_script\": \"\", \"nscript_parameters\": \"\", \"nscript_prio_startup\": 0, \"nscript_prio_download\": 0, \"nscript_prio_pause_resume\": 0, \"nscript_prio_pp\": 0, \"nscript_prio_complete\": 1, \"nscript_prio_failed\": 1, \"nscript_prio_disk_full\": 1, \"nscript_prio_new_login\": 0, \"nscript_prio_warning\": 0, \"nscript_prio_error\": 0, \"nscript_prio_queue_done\": 0, \"nscript_prio_other\": 1}, \"categories\": [{\"name\": \"*\", \"order\": 0, \"pp\": \"3\", \"script\": \"None\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": 0}, {\"name\": \"movies\", \"order\": 1, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"tv\", \"order\": 2, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"audio\", \"order\": 3, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"software\", \"order\": 4, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}], \"servers\": [{\"name\": \"stub\", \"displayname\": \"stub\", \"host\": \"downloadclient.invalid\", \"port\": 11119, \"timeout\": 20, \"username\": \"\", \"password\": \"\", \"connections\": 2, \"ssl\": 0, \"ssl_verify\": 2, \"ssl_ciphers\": \"\", \"enable\": 1, \"required\": 0, \"optional\": 0, \"retention\": 0, \"expire_date\": \"\", \"quota\": \"\", \"usage_at_start\": 0, \"send_group\": 0, \"priority\": 0, \"notes\": \"\"}]}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:12:28 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 6,
+  "time": "2026-11-19T20:12:28Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "traceparent": "00-6803465c48372bfe0391504028f19387-d5084ee7986bf83d-00"
+   },
+   "method": "GET",
+   "path": "/api?mode=get_config&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"config\": {\"misc\": {\"helpful_warnings\": 1, \"queue_complete\": \"\", \"queue_complete_pers\": 0, \"bandwidth_perc\": 100, \"refresh_rate\": 0, \"interface_settings\": \"\", \"queue_limit\": 20, \"config_lock\": 0, \"notified_new_skin\": 0, \"check_new_rel\": 1, \"auto_browser\": 0, \"language\": \"en\", \"enable_https_verification\": 1, \"host\": \"downloadclient.invalid\", \"port\": \"19080\", \"https_port\": \"\", \"username\": \"\", \"password\": \"\", \"bandwidth_max\": \"\", \"cache_limit\": \"1G\", \"web_dir\": \"Glitter\", \"web_color\": \"Auto\", \"https_cert\": \"server.cert\", \"https_key\": \"server.key\", \"https_chain\": \"\", \"enable_https\": 0, \"inet_exposure\": 0, \"api_key\": \"0123456789abcdef0123456789abcdef\", \"nzb_key\": \"b8aa087f0f724a97b4c867b2a9ee1792\", \"socks5_proxy_url\": \"\", \"permissions\": \"\", \"download_dir\": \"/downloads/incomplete\", \"download_free\": \"\", \"complete_dir\": \"/downloads/complete\", \"complete_free\": \"\", \"fulldisk_autoresume\": 0, \"script_dir\": \"\", \"nzb_backup_dir\": \"\", \"admin_dir\": \"admin\", \"backup_dir\": \"\", \"dirscan_dir\": \"\", \"dirscan_speed\": 5, \"password_file\": \"\", \"log_dir\": \"logs\", \"max_art_tries\": 3, \"top_only\": 0, \"sfv_check\": 1, \"script_can_fail\": 0, \"enable_recursive\": 1, \"flat_unpack\": 0, \"par_option\": \"\", \"pre_check\": 0, \"nice\": \"\", \"win_process_prio\": 3, \"ionice\": \"\", \"fail_hopeless_jobs\": 1, \"fast_fail\": 1, \"auto_disconnect\": 1, \"pre_script\": \"None\", \"end_queue_script\": \"None\", \"no_dupes\": 0, \"no_series_dupes\": 0, \"no_smart_dupes\": 0, \"dupes_propercheck\": 1, \"pause_on_pwrar\": 1, \"ignore_samples\": 0, \"deobfuscate_final_filenames\": 1, \"auto_sort\": \"\", \"direct_unpack\": 0, \"propagation_delay\": 0, \"folder_rename\": 1, \"replace_spaces\": 0, \"replace_underscores\": 0, \"replace_dots\": 0, \"safe_postproc\": 1, \"pause_on_post_processing\": 0, \"enable_all_par\": 0, \"sanitize_safe\": 0, \"cleanup_list\": [], \"unwanted_extensions\": [], \"action_on_unwanted_extensions\": 0, \"unwanted_extensions_mode\": 0, \"new_nzb_on_failure\": 0, \"history_retention\": \"0\", \"quota_size\": \"\", \"quota_day\": \"\", \"quota_resume\": 0, \"quota_period\": \"m\", \"schedlines\": [], \"rss_rate\": 60, \"ampm\": 0, \"start_paused\": 0, \"preserve_paused_state\": 0, \"enable_par_cleanup\": 1, \"process_unpacked_par2\": 1, \"enable_multipar\": 1, \"enable_unrar\": 1, \"enable_7zip\": 1, \"enable_filejoin\": 1, \"enable_tsjoin\": 1, \"overwrite_files\": 0, \"ignore_unrar_dates\": 0, \"backup_for_duplicates\": 1, \"empty_postproc\": 0, \"wait_for_dfolder\": 0, \"rss_filenames\": 0, \"api_logging\": 1, \"html_login\": 1, \"warn_dupl_jobs\": 0, \"keep_awake\": 1, \"tray_icon\": 1, \"allow_incomplete_nzb\": 0, \"enable_broadcast\": 1, \"ipv6_hosting\": 0, \"api_warnings\": 1, \"no_penalties\": 0, \"x_frame_options\": 1, \"allow_old_ssl_tls\": 0, \"enable_season_sorting\": 1, \"verify_xff_header\": 0, \"rss_odd_titles\": [\"nzbindex.nl/\", \"nzbindex.com/\", \"nzbclub.com/\"], \"quick_check_ext_ignore\": [\"nfo\", \"sfv\", \"srr\"], \"req_completion_rate\": 100.2, \"selftest_host\": \"downloadclient.invalid\", \"movie_rename_limit\": \"100M\", \"episode_rename_limit\": \"20M\", \"size_limit\": \"0\", \"direct_unpack_threads\": 3, \"history_limit\": 10, \"wait_ext_drive\": 5, \"max_foldername_length\": 246, \"nomedia_marker\": \"\", \"ipv6_servers\": 1, \"url_base\": \"/sabnzbd\", \"host_whitelist\": [\"downloadclient.invalid\"], \"local_ranges\": [], \"max_url_retries\": 10, \"downloader_sleep_time\": 10, \"receive_threads\": 2, \"switchinterval\": 0.005, \"ssdp_broadcast_interval\": 15, \"ext_rename_ignore\": [], \"email_server\": \"\", \"email_to\": [], \"email_from\": \"\", \"email_account\": \"\", \"email_pwd\": \"\", \"email_endjob\": 0, \"email_full\": 0, \"email_dir\": \"\", \"email_rss\": 0, \"email_cats\": [\"0123456789abcdef0123456789abcdef\"]}, \"logging\": {\"log_level\": 1, \"max_log_size\": 5242880, \"log_backups\": 5}, \"ncenter\": {\"ncenter_enable\": 0, \"ncenter_cats\": [\"*\"], \"ncenter_prio_startup\": 0, \"ncenter_prio_download\": 0, \"ncenter_prio_pause_resume\": 0, \"ncenter_prio_pp\": 0, \"ncenter_prio_complete\": 1, \"ncenter_prio_failed\": 1, \"ncenter_prio_disk_full\": 1, \"ncenter_prio_new_login\": 0, \"ncenter_prio_warning\": 0, \"ncenter_prio_error\": 0, \"ncenter_prio_queue_done\": 0, \"ncenter_prio_other\": 1}, \"acenter\": {\"acenter_enable\": 0, \"acenter_cats\": [\"*\"], \"acenter_prio_startup\": 0, \"acenter_prio_download\": 0, \"acenter_prio_pause_resume\": 0, \"acenter_prio_pp\": 0, \"acenter_prio_complete\": 1, \"acenter_prio_failed\": 1, \"acenter_prio_disk_full\": 1, \"acenter_prio_new_login\": 0, \"acenter_prio_warning\": 0, \"acenter_prio_error\": 0, \"acenter_prio_queue_done\": 0, \"acenter_prio_other\": 1}, \"ntfosd\": {\"ntfosd_enable\": 1, \"ntfosd_cats\": [\"*\"], \"ntfosd_prio_startup\": 0, \"ntfosd_prio_download\": 0, \"ntfosd_prio_pause_resume\": 0, \"ntfosd_prio_pp\": 0, \"ntfosd_prio_complete\": 1, \"ntfosd_prio_failed\": 1, \"ntfosd_prio_disk_full\": 1, \"ntfosd_prio_new_login\": 0, \"ntfosd_prio_warning\": 0, \"ntfosd_prio_error\": 0, \"ntfosd_prio_queue_done\": 0, \"ntfosd_prio_other\": 1}, \"prowl\": {\"prowl_enable\": 0, \"prowl_cats\": [\"*\"], \"prowl_apikey\": \"\", \"prowl_prio_startup\": -3, \"prowl_prio_download\": -3, \"prowl_prio_pause_resume\": -3, \"prowl_prio_pp\": -3, \"prowl_prio_complete\": 0, \"prowl_prio_failed\": 1, \"prowl_prio_disk_full\": 1, \"prowl_prio_new_login\": -3, \"prowl_prio_warning\": -3, \"prowl_prio_error\": -3, \"prowl_prio_queue_done\": -3, \"prowl_prio_other\": 0}, \"pushover\": {\"pushover_token\": \"\", \"pushover_userkey\": \"\", \"pushover_device\": \"\", \"pushover_emergency_expire\": 3600, \"pushover_emergency_retry\": 60, \"pushover_enable\": 0, \"pushover_cats\": [\"*\"], \"pushover_prio_startup\": -3, \"pushover_prio_download\": -2, \"pushover_prio_pause_resume\": -2, \"pushover_prio_pp\": -3, \"pushover_prio_complete\": -1, \"pushover_prio_failed\": -1, \"pushover_prio_disk_full\": 1, \"pushover_prio_new_login\": -3, \"pushover_prio_warning\": 1, \"pushover_prio_error\": 1, \"pushover_prio_queue_done\": -3, \"pushover_prio_other\": -1}, \"pushbullet\": {\"pushbullet_enable\": 0, \"pushbullet_cats\": [\"*\"], \"pushbullet_apikey\": \"\", \"pushbullet_device\": \"\", \"pushbullet_prio_startup\": 0, \"pushbullet_prio_download\": 0, \"pushbullet_prio_pause_resume\": 0, \"pushbullet_prio_pp\": 0, \"pushbullet_prio_complete\": 1, \"pushbullet_prio_failed\": 1, \"pushbullet_prio_disk_full\": 1, \"pushbullet_prio_new_login\": 0, \"pushbullet_prio_warning\": 0, \"pushbullet_prio_error\": 0, \"pushbullet_prio_queue_done\": 0, \"pushbullet_prio_other\": 1}, \"nscript\": {\"nscript_enable\": 0, \"nscript_cats\": [\"*\"], \"nscript_script\": \"\", \"nscript_parameters\": \"\", \"nscript_prio_startup\": 0, \"nscript_prio_download\": 0, \"nscript_prio_pause_resume\": 0, \"nscript_prio_pp\": 0, \"nscript_prio_complete\": 1, \"nscript_prio_failed\": 1, \"nscript_prio_disk_full\": 1, \"nscript_prio_new_login\": 0, \"nscript_prio_warning\": 0, \"nscript_prio_error\": 0, \"nscript_prio_queue_done\": 0, \"nscript_prio_other\": 1}, \"categories\": [{\"name\": \"*\", \"order\": 0, \"pp\": \"3\", \"script\": \"None\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": 0}, {\"name\": \"movies\", \"order\": 1, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"tv\", \"order\": 2, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"audio\", \"order\": 3, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"software\", \"order\": 4, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}], \"servers\": [{\"name\": \"stub\", \"displayname\": \"stub\", \"host\": \"downloadclient.invalid\", \"port\": 11119, \"timeout\": 20, \"username\": \"\", \"password\": \"\", \"connections\": 2, \"ssl\": 0, \"ssl_verify\": 2, \"ssl_ciphers\": \"\", \"enable\": 1, \"required\": 0, \"optional\": 0, \"retention\": 0, \"expire_date\": \"\", \"quota\": \"\", \"usage_at_start\": 0, \"send_group\": 0, \"priority\": 0, \"notes\": \"\"}]}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:12:28 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 7,
+  "time": "2026-11-19T20:12:28Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "traceparent": "00-6803465c48372bfe0391504028f19387-55dc59cfb0907d63-00"
+   },
+   "method": "GET",
+   "path": "/api?mode=get_config&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"config\": {\"misc\": {\"helpful_warnings\": 1, \"queue_complete\": \"\", \"queue_complete_pers\": 0, \"bandwidth_perc\": 100, \"refresh_rate\": 0, \"interface_settings\": \"\", \"queue_limit\": 20, \"config_lock\": 0, \"notified_new_skin\": 0, \"check_new_rel\": 1, \"auto_browser\": 0, \"language\": \"en\", \"enable_https_verification\": 1, \"host\": \"downloadclient.invalid\", \"port\": \"19080\", \"https_port\": \"\", \"username\": \"\", \"password\": \"\", \"bandwidth_max\": \"\", \"cache_limit\": \"1G\", \"web_dir\": \"Glitter\", \"web_color\": \"Auto\", \"https_cert\": \"server.cert\", \"https_key\": \"server.key\", \"https_chain\": \"\", \"enable_https\": 0, \"inet_exposure\": 0, \"api_key\": \"0123456789abcdef0123456789abcdef\", \"nzb_key\": \"b8aa087f0f724a97b4c867b2a9ee1792\", \"socks5_proxy_url\": \"\", \"permissions\": \"\", \"download_dir\": \"/downloads/incomplete\", \"download_free\": \"\", \"complete_dir\": \"/downloads/complete\", \"complete_free\": \"\", \"fulldisk_autoresume\": 0, \"script_dir\": \"\", \"nzb_backup_dir\": \"\", \"admin_dir\": \"admin\", \"backup_dir\": \"\", \"dirscan_dir\": \"\", \"dirscan_speed\": 5, \"password_file\": \"\", \"log_dir\": \"logs\", \"max_art_tries\": 3, \"top_only\": 0, \"sfv_check\": 1, \"script_can_fail\": 0, \"enable_recursive\": 1, \"flat_unpack\": 0, \"par_option\": \"\", \"pre_check\": 0, \"nice\": \"\", \"win_process_prio\": 3, \"ionice\": \"\", \"fail_hopeless_jobs\": 1, \"fast_fail\": 1, \"auto_disconnect\": 1, \"pre_script\": \"None\", \"end_queue_script\": \"None\", \"no_dupes\": 0, \"no_series_dupes\": 0, \"no_smart_dupes\": 0, \"dupes_propercheck\": 1, \"pause_on_pwrar\": 1, \"ignore_samples\": 0, \"deobfuscate_final_filenames\": 1, \"auto_sort\": \"\", \"direct_unpack\": 0, \"propagation_delay\": 0, \"folder_rename\": 1, \"replace_spaces\": 0, \"replace_underscores\": 0, \"replace_dots\": 0, \"safe_postproc\": 1, \"pause_on_post_processing\": 0, \"enable_all_par\": 0, \"sanitize_safe\": 0, \"cleanup_list\": [], \"unwanted_extensions\": [], \"action_on_unwanted_extensions\": 0, \"unwanted_extensions_mode\": 0, \"new_nzb_on_failure\": 0, \"history_retention\": \"0\", \"quota_size\": \"\", \"quota_day\": \"\", \"quota_resume\": 0, \"quota_period\": \"m\", \"schedlines\": [], \"rss_rate\": 60, \"ampm\": 0, \"start_paused\": 0, \"preserve_paused_state\": 0, \"enable_par_cleanup\": 1, \"process_unpacked_par2\": 1, \"enable_multipar\": 1, \"enable_unrar\": 1, \"enable_7zip\": 1, \"enable_filejoin\": 1, \"enable_tsjoin\": 1, \"overwrite_files\": 0, \"ignore_unrar_dates\": 0, \"backup_for_duplicates\": 1, \"empty_postproc\": 0, \"wait_for_dfolder\": 0, \"rss_filenames\": 0, \"api_logging\": 1, \"html_login\": 1, \"warn_dupl_jobs\": 0, \"keep_awake\": 1, \"tray_icon\": 1, \"allow_incomplete_nzb\": 0, \"enable_broadcast\": 1, \"ipv6_hosting\": 0, \"api_warnings\": 1, \"no_penalties\": 0, \"x_frame_options\": 1, \"allow_old_ssl_tls\": 0, \"enable_season_sorting\": 1, \"verify_xff_header\": 0, \"rss_odd_titles\": [\"nzbindex.nl/\", \"nzbindex.com/\", \"nzbclub.com/\"], \"quick_check_ext_ignore\": [\"nfo\", \"sfv\", \"srr\"], \"req_completion_rate\": 100.2, \"selftest_host\": \"downloadclient.invalid\", \"movie_rename_limit\": \"100M\", \"episode_rename_limit\": \"20M\", \"size_limit\": \"0\", \"direct_unpack_threads\": 3, \"history_limit\": 10, \"wait_ext_drive\": 5, \"max_foldername_length\": 246, \"nomedia_marker\": \"\", \"ipv6_servers\": 1, \"url_base\": \"/sabnzbd\", \"host_whitelist\": [\"downloadclient.invalid\"], \"local_ranges\": [], \"max_url_retries\": 10, \"downloader_sleep_time\": 10, \"receive_threads\": 2, \"switchinterval\": 0.005, \"ssdp_broadcast_interval\": 15, \"ext_rename_ignore\": [], \"email_server\": \"\", \"email_to\": [], \"email_from\": \"\", \"email_account\": \"\", \"email_pwd\": \"\", \"email_endjob\": 0, \"email_full\": 0, \"email_dir\": \"\", \"email_rss\": 0, \"email_cats\": [\"0123456789abcdef0123456789abcdef\"]}, \"logging\": {\"log_level\": 1, \"max_log_size\": 5242880, \"log_backups\": 5}, \"ncenter\": {\"ncenter_enable\": 0, \"ncenter_cats\": [\"*\"], \"ncenter_prio_startup\": 0, \"ncenter_prio_download\": 0, \"ncenter_prio_pause_resume\": 0, \"ncenter_prio_pp\": 0, \"ncenter_prio_complete\": 1, \"ncenter_prio_failed\": 1, \"ncenter_prio_disk_full\": 1, \"ncenter_prio_new_login\": 0, \"ncenter_prio_warning\": 0, \"ncenter_prio_error\": 0, \"ncenter_prio_queue_done\": 0, \"ncenter_prio_other\": 1}, \"acenter\": {\"acenter_enable\": 0, \"acenter_cats\": [\"*\"], \"acenter_prio_startup\": 0, \"acenter_prio_download\": 0, \"acenter_prio_pause_resume\": 0, \"acenter_prio_pp\": 0, \"acenter_prio_complete\": 1, \"acenter_prio_failed\": 1, \"acenter_prio_disk_full\": 1, \"acenter_prio_new_login\": 0, \"acenter_prio_warning\": 0, \"acenter_prio_error\": 0, \"acenter_prio_queue_done\": 0, \"acenter_prio_other\": 1}, \"ntfosd\": {\"ntfosd_enable\": 1, \"ntfosd_cats\": [\"*\"], \"ntfosd_prio_startup\": 0, \"ntfosd_prio_download\": 0, \"ntfosd_prio_pause_resume\": 0, \"ntfosd_prio_pp\": 0, \"ntfosd_prio_complete\": 1, \"ntfosd_prio_failed\": 1, \"ntfosd_prio_disk_full\": 1, \"ntfosd_prio_new_login\": 0, \"ntfosd_prio_warning\": 0, \"ntfosd_prio_error\": 0, \"ntfosd_prio_queue_done\": 0, \"ntfosd_prio_other\": 1}, \"prowl\": {\"prowl_enable\": 0, \"prowl_cats\": [\"*\"], \"prowl_apikey\": \"\", \"prowl_prio_startup\": -3, \"prowl_prio_download\": -3, \"prowl_prio_pause_resume\": -3, \"prowl_prio_pp\": -3, \"prowl_prio_complete\": 0, \"prowl_prio_failed\": 1, \"prowl_prio_disk_full\": 1, \"prowl_prio_new_login\": -3, \"prowl_prio_warning\": -3, \"prowl_prio_error\": -3, \"prowl_prio_queue_done\": -3, \"prowl_prio_other\": 0}, \"pushover\": {\"pushover_token\": \"\", \"pushover_userkey\": \"\", \"pushover_device\": \"\", \"pushover_emergency_expire\": 3600, \"pushover_emergency_retry\": 60, \"pushover_enable\": 0, \"pushover_cats\": [\"*\"], \"pushover_prio_startup\": -3, \"pushover_prio_download\": -2, \"pushover_prio_pause_resume\": -2, \"pushover_prio_pp\": -3, \"pushover_prio_complete\": -1, \"pushover_prio_failed\": -1, \"pushover_prio_disk_full\": 1, \"pushover_prio_new_login\": -3, \"pushover_prio_warning\": 1, \"pushover_prio_error\": 1, \"pushover_prio_queue_done\": -3, \"pushover_prio_other\": -1}, \"pushbullet\": {\"pushbullet_enable\": 0, \"pushbullet_cats\": [\"*\"], \"pushbullet_apikey\": \"\", \"pushbullet_device\": \"\", \"pushbullet_prio_startup\": 0, \"pushbullet_prio_download\": 0, \"pushbullet_prio_pause_resume\": 0, \"pushbullet_prio_pp\": 0, \"pushbullet_prio_complete\": 1, \"pushbullet_prio_failed\": 1, \"pushbullet_prio_disk_full\": 1, \"pushbullet_prio_new_login\": 0, \"pushbullet_prio_warning\": 0, \"pushbullet_prio_error\": 0, \"pushbullet_prio_queue_done\": 0, \"pushbullet_prio_other\": 1}, \"nscript\": {\"nscript_enable\": 0, \"nscript_cats\": [\"*\"], \"nscript_script\": \"\", \"nscript_parameters\": \"\", \"nscript_prio_startup\": 0, \"nscript_prio_download\": 0, \"nscript_prio_pause_resume\": 0, \"nscript_prio_pp\": 0, \"nscript_prio_complete\": 1, \"nscript_prio_failed\": 1, \"nscript_prio_disk_full\": 1, \"nscript_prio_new_login\": 0, \"nscript_prio_warning\": 0, \"nscript_prio_error\": 0, \"nscript_prio_queue_done\": 0, \"nscript_prio_other\": 1}, \"categories\": [{\"name\": \"*\", \"order\": 0, \"pp\": \"3\", \"script\": \"None\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": 0}, {\"name\": \"movies\", \"order\": 1, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"tv\", \"order\": 2, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"audio\", \"order\": 3, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"software\", \"order\": 4, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}], \"servers\": [{\"name\": \"stub\", \"displayname\": \"stub\", \"host\": \"downloadclient.invalid\", \"port\": 11119, \"timeout\": 20, \"username\": \"\", \"password\": \"\", \"connections\": 2, \"ssl\": 0, \"ssl_verify\": 2, \"ssl_ciphers\": \"\", \"enable\": 1, \"required\": 0, \"optional\": 0, \"retention\": 0, \"expire_date\": \"\", \"quota\": \"\", \"usage_at_start\": 0, \"send_group\": 0, \"priority\": 0, \"notes\": \"\"}]}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:12:28 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 8,
+  "time": "2026-11-19T20:12:28Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "traceparent": "00-ff38ff265b49741714b6d7c1b3949c8f-6287fcb8be80c115-00"
+   },
+   "method": "GET",
+   "path": "/api?mode=get_config&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"config\": {\"misc\": {\"helpful_warnings\": 1, \"queue_complete\": \"\", \"queue_complete_pers\": 0, \"bandwidth_perc\": 100, \"refresh_rate\": 0, \"interface_settings\": \"\", \"queue_limit\": 20, \"config_lock\": 0, \"notified_new_skin\": 0, \"check_new_rel\": 1, \"auto_browser\": 0, \"language\": \"en\", \"enable_https_verification\": 1, \"host\": \"downloadclient.invalid\", \"port\": \"19080\", \"https_port\": \"\", \"username\": \"\", \"password\": \"\", \"bandwidth_max\": \"\", \"cache_limit\": \"1G\", \"web_dir\": \"Glitter\", \"web_color\": \"Auto\", \"https_cert\": \"server.cert\", \"https_key\": \"server.key\", \"https_chain\": \"\", \"enable_https\": 0, \"inet_exposure\": 0, \"api_key\": \"0123456789abcdef0123456789abcdef\", \"nzb_key\": \"b8aa087f0f724a97b4c867b2a9ee1792\", \"socks5_proxy_url\": \"\", \"permissions\": \"\", \"download_dir\": \"/downloads/incomplete\", \"download_free\": \"\", \"complete_dir\": \"/downloads/complete\", \"complete_free\": \"\", \"fulldisk_autoresume\": 0, \"script_dir\": \"\", \"nzb_backup_dir\": \"\", \"admin_dir\": \"admin\", \"backup_dir\": \"\", \"dirscan_dir\": \"\", \"dirscan_speed\": 5, \"password_file\": \"\", \"log_dir\": \"logs\", \"max_art_tries\": 3, \"top_only\": 0, \"sfv_check\": 1, \"script_can_fail\": 0, \"enable_recursive\": 1, \"flat_unpack\": 0, \"par_option\": \"\", \"pre_check\": 0, \"nice\": \"\", \"win_process_prio\": 3, \"ionice\": \"\", \"fail_hopeless_jobs\": 1, \"fast_fail\": 1, \"auto_disconnect\": 1, \"pre_script\": \"None\", \"end_queue_script\": \"None\", \"no_dupes\": 0, \"no_series_dupes\": 0, \"no_smart_dupes\": 0, \"dupes_propercheck\": 1, \"pause_on_pwrar\": 1, \"ignore_samples\": 0, \"deobfuscate_final_filenames\": 1, \"auto_sort\": \"\", \"direct_unpack\": 0, \"propagation_delay\": 0, \"folder_rename\": 1, \"replace_spaces\": 0, \"replace_underscores\": 0, \"replace_dots\": 0, \"safe_postproc\": 1, \"pause_on_post_processing\": 0, \"enable_all_par\": 0, \"sanitize_safe\": 0, \"cleanup_list\": [], \"unwanted_extensions\": [], \"action_on_unwanted_extensions\": 0, \"unwanted_extensions_mode\": 0, \"new_nzb_on_failure\": 0, \"history_retention\": \"0\", \"quota_size\": \"\", \"quota_day\": \"\", \"quota_resume\": 0, \"quota_period\": \"m\", \"schedlines\": [], \"rss_rate\": 60, \"ampm\": 0, \"start_paused\": 0, \"preserve_paused_state\": 0, \"enable_par_cleanup\": 1, \"process_unpacked_par2\": 1, \"enable_multipar\": 1, \"enable_unrar\": 1, \"enable_7zip\": 1, \"enable_filejoin\": 1, \"enable_tsjoin\": 1, \"overwrite_files\": 0, \"ignore_unrar_dates\": 0, \"backup_for_duplicates\": 1, \"empty_postproc\": 0, \"wait_for_dfolder\": 0, \"rss_filenames\": 0, \"api_logging\": 1, \"html_login\": 1, \"warn_dupl_jobs\": 0, \"keep_awake\": 1, \"tray_icon\": 1, \"allow_incomplete_nzb\": 0, \"enable_broadcast\": 1, \"ipv6_hosting\": 0, \"api_warnings\": 1, \"no_penalties\": 0, \"x_frame_options\": 1, \"allow_old_ssl_tls\": 0, \"enable_season_sorting\": 1, \"verify_xff_header\": 0, \"rss_odd_titles\": [\"nzbindex.nl/\", \"nzbindex.com/\", \"nzbclub.com/\"], \"quick_check_ext_ignore\": [\"nfo\", \"sfv\", \"srr\"], \"req_completion_rate\": 100.2, \"selftest_host\": \"downloadclient.invalid\", \"movie_rename_limit\": \"100M\", \"episode_rename_limit\": \"20M\", \"size_limit\": \"0\", \"direct_unpack_threads\": 3, \"history_limit\": 10, \"wait_ext_drive\": 5, \"max_foldername_length\": 246, \"nomedia_marker\": \"\", \"ipv6_servers\": 1, \"url_base\": \"/sabnzbd\", \"host_whitelist\": [\"downloadclient.invalid\"], \"local_ranges\": [], \"max_url_retries\": 10, \"downloader_sleep_time\": 10, \"receive_threads\": 2, \"switchinterval\": 0.005, \"ssdp_broadcast_interval\": 15, \"ext_rename_ignore\": [], \"email_server\": \"\", \"email_to\": [], \"email_from\": \"\", \"email_account\": \"\", \"email_pwd\": \"\", \"email_endjob\": 0, \"email_full\": 0, \"email_dir\": \"\", \"email_rss\": 0, \"email_cats\": [\"0123456789abcdef0123456789abcdef\"]}, \"logging\": {\"log_level\": 1, \"max_log_size\": 5242880, \"log_backups\": 5}, \"ncenter\": {\"ncenter_enable\": 0, \"ncenter_cats\": [\"*\"], \"ncenter_prio_startup\": 0, \"ncenter_prio_download\": 0, \"ncenter_prio_pause_resume\": 0, \"ncenter_prio_pp\": 0, \"ncenter_prio_complete\": 1, \"ncenter_prio_failed\": 1, \"ncenter_prio_disk_full\": 1, \"ncenter_prio_new_login\": 0, \"ncenter_prio_warning\": 0, \"ncenter_prio_error\": 0, \"ncenter_prio_queue_done\": 0, \"ncenter_prio_other\": 1}, \"acenter\": {\"acenter_enable\": 0, \"acenter_cats\": [\"*\"], \"acenter_prio_startup\": 0, \"acenter_prio_download\": 0, \"acenter_prio_pause_resume\": 0, \"acenter_prio_pp\": 0, \"acenter_prio_complete\": 1, \"acenter_prio_failed\": 1, \"acenter_prio_disk_full\": 1, \"acenter_prio_new_login\": 0, \"acenter_prio_warning\": 0, \"acenter_prio_error\": 0, \"acenter_prio_queue_done\": 0, \"acenter_prio_other\": 1}, \"ntfosd\": {\"ntfosd_enable\": 1, \"ntfosd_cats\": [\"*\"], \"ntfosd_prio_startup\": 0, \"ntfosd_prio_download\": 0, \"ntfosd_prio_pause_resume\": 0, \"ntfosd_prio_pp\": 0, \"ntfosd_prio_complete\": 1, \"ntfosd_prio_failed\": 1, \"ntfosd_prio_disk_full\": 1, \"ntfosd_prio_new_login\": 0, \"ntfosd_prio_warning\": 0, \"ntfosd_prio_error\": 0, \"ntfosd_prio_queue_done\": 0, \"ntfosd_prio_other\": 1}, \"prowl\": {\"prowl_enable\": 0, \"prowl_cats\": [\"*\"], \"prowl_apikey\": \"\", \"prowl_prio_startup\": -3, \"prowl_prio_download\": -3, \"prowl_prio_pause_resume\": -3, \"prowl_prio_pp\": -3, \"prowl_prio_complete\": 0, \"prowl_prio_failed\": 1, \"prowl_prio_disk_full\": 1, \"prowl_prio_new_login\": -3, \"prowl_prio_warning\": -3, \"prowl_prio_error\": -3, \"prowl_prio_queue_done\": -3, \"prowl_prio_other\": 0}, \"pushover\": {\"pushover_token\": \"\", \"pushover_userkey\": \"\", \"pushover_device\": \"\", \"pushover_emergency_expire\": 3600, \"pushover_emergency_retry\": 60, \"pushover_enable\": 0, \"pushover_cats\": [\"*\"], \"pushover_prio_startup\": -3, \"pushover_prio_download\": -2, \"pushover_prio_pause_resume\": -2, \"pushover_prio_pp\": -3, \"pushover_prio_complete\": -1, \"pushover_prio_failed\": -1, \"pushover_prio_disk_full\": 1, \"pushover_prio_new_login\": -3, \"pushover_prio_warning\": 1, \"pushover_prio_error\": 1, \"pushover_prio_queue_done\": -3, \"pushover_prio_other\": -1}, \"pushbullet\": {\"pushbullet_enable\": 0, \"pushbullet_cats\": [\"*\"], \"pushbullet_apikey\": \"\", \"pushbullet_device\": \"\", \"pushbullet_prio_startup\": 0, \"pushbullet_prio_download\": 0, \"pushbullet_prio_pause_resume\": 0, \"pushbullet_prio_pp\": 0, \"pushbullet_prio_complete\": 1, \"pushbullet_prio_failed\": 1, \"pushbullet_prio_disk_full\": 1, \"pushbullet_prio_new_login\": 0, \"pushbullet_prio_warning\": 0, \"pushbullet_prio_error\": 0, \"pushbullet_prio_queue_done\": 0, \"pushbullet_prio_other\": 1}, \"nscript\": {\"nscript_enable\": 0, \"nscript_cats\": [\"*\"], \"nscript_script\": \"\", \"nscript_parameters\": \"\", \"nscript_prio_startup\": 0, \"nscript_prio_download\": 0, \"nscript_prio_pause_resume\": 0, \"nscript_prio_pp\": 0, \"nscript_prio_complete\": 1, \"nscript_prio_failed\": 1, \"nscript_prio_disk_full\": 1, \"nscript_prio_new_login\": 0, \"nscript_prio_warning\": 0, \"nscript_prio_error\": 0, \"nscript_prio_queue_done\": 0, \"nscript_prio_other\": 1}, \"categories\": [{\"name\": \"*\", \"order\": 0, \"pp\": \"3\", \"script\": \"None\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": 0}, {\"name\": \"movies\", \"order\": 1, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"tv\", \"order\": 2, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"audio\", \"order\": 3, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}, {\"name\": \"software\", \"order\": 4, \"pp\": \"\", \"script\": \"Default\", \"dir\": \"\", \"newzbin\": \"\", \"priority\": -100}], \"servers\": [{\"name\": \"stub\", \"displayname\": \"stub\", \"host\": \"downloadclient.invalid\", \"port\": 11119, \"timeout\": 20, \"username\": \"\", \"password\": \"\", \"connections\": 2, \"ssl\": 0, \"ssl_verify\": 2, \"ssl_ciphers\": \"\", \"enable\": 1, \"required\": 0, \"optional\": 0, \"retention\": 0, \"expire_date\": \"\", \"quota\": \"\", \"usage_at_start\": 0, \"send_group\": 0, \"priority\": 0, \"notes\": \"\"}]}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:12:33 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 9,
+  "time": "2026-11-19T20:12:33Z"
+ },
+ {
+  "request": {
+   "body": "-------------------------------8df4679733b25d7\r\nContent-Disposition: form-data; name=\"name\"; filename=\"The.Pitt.S01E03.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.nzb\"\r\nContent-Type: application/x-nzb\r\n\r\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<nzb xmlns=\"http://www.newzbin.com/DTD/2003/nzb\"><file poster=\"unarr@fixture.invalid\" date=\"0\" subject=\"fixture\"><groups><group>alt.binaries.fixture</group></groups><segments><segment bytes=\"1\" number=\"1\">fixture@fixture.invalid</segment></segments></file></nzb>\n\r\n-------------------------------8df4679733b25d7--\r\n",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Content-Length": "1021",
+    "Content-Type": "multipart/form-data; boundary=-----------------------------8df4679733b25d7",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "traceparent": "00-01cab5d5a9c87f35becb68ec44f78ad3-53c6aebf334fe0c2-00"
+   },
+   "method": "POST",
+   "path": "/api?mode=addfile&cat=tv&priority=-100&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"status\": true, \"nzo_ids\": [\"SABnzbd_nzo_3ceb1eaa\"]}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:12:34 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 10,
+  "time": "2026-11-19T20:12:34Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=queue&start=0&limit=0&category=tv&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"queue\": {\"version\": \"4.2.2\", \"paused\": false, \"pause_int\": \"0\", \"paused_all\": false, \"diskspace1\": \"59.09\", \"diskspace2\": \"59.09\", \"diskspace1_norm\": \"59.1 G\", \"diskspace2_norm\": \"59.1 G\", \"diskspacetotal1\": \"251.97\", \"diskspacetotal2\": \"251.97\", \"speedlimit\": \"0\", \"speedlimit_abs\": \"0\", \"have_warnings\": \"0\", \"finishaction\": null, \"quota\": \"0 \", \"have_quota\": false, \"left_quota\": \"0 \", \"cache_art\": \"0\", \"cache_size\": \"0 B\", \"kbpersec\": \"0.00\", \"speed\": \"0 \", \"mbleft\": \"0.00\", \"mb\": \"0.00\", \"sizeleft\": \"0 B\", \"size\": \"0 B\", \"noofslots_total\": 0, \"noofslots\": 0, \"start\": 0, \"limit\": 0, \"finish\": 0, \"status\": \"Idle\", \"timeleft\": \"0:00:00\", \"slots\": []}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:12:35 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 11,
+  "time": "2026-11-19T20:12:35Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=history&start=0&limit=60&category=tv&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"history\": {\"total_size\": \"1.3 M\", \"month_size\": \"1.3 M\", \"week_size\": \"1.3 M\", \"day_size\": \"1.3 M\", \"slots\": [{\"completed\": 1795119155, \"name\": \"The.Pitt.S01E03.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR\", \"nzb_name\": \"The.Pitt.S01E03.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.nzb\", \"category\": \"tv\", \"pp\": \"D\", \"script\": \"None\", \"report\": \"\", \"url\": null, \"status\": \"Queued\", \"nzo_id\": \"SABnzbd_nzo_3ceb1eaa\", \"storage\": \"\", \"path\": \"/downloads/incomplete/The.Pitt.S01E03.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR\", \"script_line\": \"\", \"download_time\": 0, \"postproc_time\": 0, \"stage_log\": [{\"name\": \"Source\", \"actions\": [\"The.Pitt.S01E03.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.nzb\"]}, {\"name\": \"Download\", \"actions\": [\"Downloaded in 0 seconds at an average of 1.5 MB/s<br/>Age: 365d\"]}, {\"name\": \"Servers\", \"actions\": [\"stub=1.1 MB\"]}], \"downloaded\": 1106640, \"completeness\": null, \"fail_message\": \"\", \"url_info\": \"\", \"bytes\": 1106640, \"size\": \"1.1 MB\", \"meta\": null, \"series\": \"\", \"duplicate_key\": null, \"md5sum\": \"\", \"password\": null, \"action_line\": \"\", \"loaded\": false, \"retry\": false}], \"ppslots\": 1, \"noofslots\": 1, \"last_history_update\": 9, \"version\": \"4.2.2\"}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:12:35 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 12,
+  "time": "2026-11-19T20:12:35Z"
+ },
+ {
+  "request": {
+   "body": "-------------------------------8df4679746b9ebe\r\nContent-Disposition: form-data; name=\"name\"; filename=\"The.Pitt.S01E04.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.nzb\"\r\nContent-Type: application/x-nzb\r\n\r\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<nzb xmlns=\"http://www.newzbin.com/DTD/2003/nzb\"><file poster=\"unarr@fixture.invalid\" date=\"0\" subject=\"fixture\"><groups><group>alt.binaries.fixture</group></groups><segments><segment bytes=\"1\" number=\"1\">fixture@fixture.invalid</segment></segments></file></nzb>\n\r\n-------------------------------8df4679746b9ebe--\r\n",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Content-Length": "1021",
+    "Content-Type": "multipart/form-data; boundary=-----------------------------8df4679746b9ebe",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "traceparent": "00-7b7f17438937a378ebafee48f89889f8-b97fd3a49901533f-00"
+   },
+   "method": "POST",
+   "path": "/api?mode=addfile&cat=tv&priority=-100&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"status\": true, \"nzo_ids\": [\"SABnzbd_nzo_155b4a0d\"]}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:12:36 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 13,
+  "time": "2026-11-19T20:12:36Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=queue&start=0&limit=0&category=tv&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"queue\": {\"version\": \"4.2.2\", \"paused\": false, \"pause_int\": \"0\", \"paused_all\": false, \"diskspace1\": \"59.09\", \"diskspace2\": \"59.09\", \"diskspace1_norm\": \"59.1 G\", \"diskspace2_norm\": \"59.1 G\", \"diskspacetotal1\": \"251.97\", \"diskspacetotal2\": \"251.97\", \"speedlimit\": \"0\", \"speedlimit_abs\": \"0\", \"have_warnings\": \"0\", \"finishaction\": null, \"quota\": \"0 \", \"have_quota\": false, \"left_quota\": \"0 \", \"cache_art\": \"0\", \"cache_size\": \"0 B\", \"kbpersec\": \"0.00\", \"speed\": \"0 \", \"mbleft\": \"0.86\", \"mb\": \"0.86\", \"sizeleft\": \"879 KB\", \"size\": \"879 KB\", \"noofslots_total\": 1, \"noofslots\": 1, \"start\": 0, \"limit\": 0, \"finish\": 0, \"status\": \"Idle\", \"timeleft\": \"0:00:00\", \"slots\": [{\"index\": 0, \"nzo_id\": \"SABnzbd_nzo_155b4a0d\", \"unpackopts\": \"3\", \"priority\": \"Normal\", \"script\": \"None\", \"filename\": \"The.Pitt.S01E04.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR\", \"labels\": [], \"password\": \"\", \"cat\": \"tv\", \"mbleft\": \"0.86\", \"mb\": \"0.86\", \"size\": \"879 KB\", \"sizeleft\": \"879 KB\", \"percentage\": \"0\", \"mbmissing\": \"0.00\", \"direct_unpack\": null, \"status\": \"Downloading\", \"timeleft\": \"0:00:00\", \"avg_age\": \"365d\"}]}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:12:40 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 14,
+  "time": "2026-11-19T20:12:40Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=history&start=0&limit=60&category=tv&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"history\": {\"total_size\": \"1.6 M\", \"month_size\": \"1.6 M\", \"week_size\": \"1.6 M\", \"day_size\": \"1.6 M\", \"slots\": [{\"completed\": 1795119156, \"name\": \"The.Pitt.S01E03.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR\", \"nzb_name\": \"The.Pitt.S01E03.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.nzb\", \"category\": \"tv\", \"pp\": \"D\", \"script\": \"None\", \"report\": \"\", \"url\": null, \"status\": \"Completed\", \"nzo_id\": \"SABnzbd_nzo_3ceb1eaa\", \"storage\": \"/downloads/The.Pitt.S01E03.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR/The.Pitt.S01E03.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"path\": \"/downloads/incomplete/The.Pitt.S01E03.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR\", \"script_line\": \"\", \"download_time\": 0, \"postproc_time\": 0, \"stage_log\": [{\"name\": \"Source\", \"actions\": [\"The.Pitt.S01E03.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.nzb\"]}, {\"name\": \"Download\", \"actions\": [\"Downloaded in 0 seconds at an average of 1.5 MB/s<br/>Age: 365d\"]}, {\"name\": \"Servers\", \"actions\": [\"stub=1.1 MB\"]}, {\"name\": \"Repair\", \"actions\": [\"Trying RAR renamer\", \"[The.Pitt.S01E03.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR] No par2 sets\"]}], \"downloaded\": 1106640, \"completeness\": null, \"fail_message\": \"\", \"url_info\": \"\", \"bytes\": 1106640, \"meta\": null, \"series\": null, \"md5sum\": \"fe930d34dcce05fcf3ff144f7ad651c0\", \"password\": null, \"duplicate_key\": \"the pitt/1/3\", \"size\": \"1.1 MB\", \"action_line\": \"\", \"loaded\": false, \"retry\": 0}], \"ppslots\": 0, \"noofslots\": 1, \"last_history_update\": 14, \"version\": \"4.2.2\"}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:12:40 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 15,
+  "time": "2026-11-19T20:12:40Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=queue&start=0&limit=0&category=tv&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"queue\": {\"version\": \"4.2.2\", \"paused\": false, \"pause_int\": \"0\", \"paused_all\": false, \"diskspace1\": \"59.09\", \"diskspace2\": \"59.09\", \"diskspace1_norm\": \"59.1 G\", \"diskspace2_norm\": \"59.1 G\", \"diskspacetotal1\": \"251.97\", \"diskspacetotal2\": \"251.97\", \"speedlimit\": \"0\", \"speedlimit_abs\": \"0\", \"have_warnings\": \"0\", \"finishaction\": null, \"quota\": \"0 \", \"have_quota\": false, \"left_quota\": \"0 \", \"cache_art\": \"0\", \"cache_size\": \"0 B\", \"kbpersec\": \"0.00\", \"speed\": \"0 \", \"mbleft\": \"0.86\", \"mb\": \"0.86\", \"sizeleft\": \"879 KB\", \"size\": \"879 KB\", \"noofslots_total\": 1, \"noofslots\": 1, \"start\": 0, \"limit\": 0, \"finish\": 0, \"status\": \"Idle\", \"timeleft\": \"0:00:00\", \"slots\": [{\"index\": 0, \"nzo_id\": \"SABnzbd_nzo_155b4a0d\", \"unpackopts\": \"3\", \"priority\": \"Normal\", \"script\": \"None\", \"filename\": \"The.Pitt.S01E04.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR\", \"labels\": [], \"password\": \"\", \"cat\": \"tv\", \"mbleft\": \"0.86\", \"mb\": \"0.86\", \"size\": \"879 KB\", \"sizeleft\": \"879 KB\", \"percentage\": \"0\", \"mbmissing\": \"0.00\", \"direct_unpack\": null, \"status\": \"Downloading\", \"timeleft\": \"0:00:00\", \"avg_age\": \"365d\"}]}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:12:40 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 16,
+  "time": "2026-11-19T20:12:40Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=history&name=delete&del_files=1&value=SABnzbd_nzo_3ceb1eaa&archive=1&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"status\": true}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:12:40 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 17,
+  "time": "2026-11-19T20:12:40Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=queue&start=0&limit=0&category=tv&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"queue\": {\"version\": \"4.2.2\", \"paused\": false, \"pause_int\": \"0\", \"paused_all\": false, \"diskspace1\": \"59.09\", \"diskspace2\": \"59.09\", \"diskspace1_norm\": \"59.1 G\", \"diskspace2_norm\": \"59.1 G\", \"diskspacetotal1\": \"251.97\", \"diskspacetotal2\": \"251.97\", \"speedlimit\": \"0\", \"speedlimit_abs\": \"0\", \"have_warnings\": \"0\", \"finishaction\": null, \"quota\": \"0 \", \"have_quota\": false, \"left_quota\": \"0 \", \"cache_art\": \"0\", \"cache_size\": \"0 B\", \"kbpersec\": \"0.00\", \"speed\": \"0 \", \"mbleft\": \"0.00\", \"mb\": \"0.00\", \"sizeleft\": \"0 B\", \"size\": \"0 B\", \"noofslots_total\": 0, \"noofslots\": 0, \"start\": 0, \"limit\": 0, \"finish\": 0, \"status\": \"Idle\", \"timeleft\": \"0:00:00\", \"slots\": []}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:12:45 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 18,
+  "time": "2026-11-19T20:12:45Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=history&start=0&limit=60&category=tv&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"history\": {\"total_size\": \"1.6 M\", \"month_size\": \"1.6 M\", \"week_size\": \"1.6 M\", \"day_size\": \"1.6 M\", \"slots\": [{\"completed\": 1795119162, \"name\": \"The.Pitt.S01E04.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR\", \"nzb_name\": \"The.Pitt.S01E04.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.nzb\", \"category\": \"tv\", \"pp\": \"D\", \"script\": \"None\", \"report\": \"\", \"url\": null, \"status\": \"Failed\", \"nzo_id\": \"SABnzbd_nzo_155b4a0d\", \"storage\": \"/downloads/incomplete/The.Pitt.S01E04.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR\", \"path\": \"/downloads/incomplete/The.Pitt.S01E04.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR\", \"script_line\": \"\", \"download_time\": 0, \"postproc_time\": 0, \"stage_log\": [{\"name\": \"Source\", \"actions\": [\"The.Pitt.S01E04.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.nzb\"]}, {\"name\": \"Download\", \"actions\": [\"2 articles were missing\", \"Download failed - Not on your server(s) - http://host.invalid/c5a3ecb8ce1f\"]}], \"downloaded\": 0, \"completeness\": null, \"fail_message\": \"Download failed - Not on your server(s) - http://host.invalid/c5a3ecb8ce1f\", \"url_info\": \"\", \"bytes\": 0, \"meta\": null, \"series\": null, \"md5sum\": \"b86500a16102b94963c5579aee56181b\", \"password\": null, \"duplicate_key\": \"the pitt/1/4\", \"size\": \"0 B\", \"action_line\": \"\", \"loaded\": false, \"retry\": 1}], \"ppslots\": 0, \"noofslots\": 1, \"last_history_update\": 18, \"version\": \"4.2.2\"}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:12:45 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 19,
+  "time": "2026-11-19T20:12:45Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=queue&start=0&limit=0&category=tv&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"queue\": {\"version\": \"4.2.2\", \"paused\": false, \"pause_int\": \"0\", \"paused_all\": false, \"diskspace1\": \"59.09\", \"diskspace2\": \"59.09\", \"diskspace1_norm\": \"59.1 G\", \"diskspace2_norm\": \"59.1 G\", \"diskspacetotal1\": \"251.97\", \"diskspacetotal2\": \"251.97\", \"speedlimit\": \"0\", \"speedlimit_abs\": \"0\", \"have_warnings\": \"0\", \"finishaction\": null, \"quota\": \"0 \", \"have_quota\": false, \"left_quota\": \"0 \", \"cache_art\": \"0\", \"cache_size\": \"0 B\", \"kbpersec\": \"0.00\", \"speed\": \"0 \", \"mbleft\": \"0.00\", \"mb\": \"0.00\", \"sizeleft\": \"0 B\", \"size\": \"0 B\", \"noofslots_total\": 0, \"noofslots\": 0, \"start\": 0, \"limit\": 0, \"finish\": 0, \"status\": \"Idle\", \"timeleft\": \"0:00:00\", \"slots\": []}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:12:45 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 20,
+  "time": "2026-11-19T20:12:45Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=history&name=delete&del_files=1&value=SABnzbd_nzo_155b4a0d&archive=0&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"status\": true}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:12:45 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 21,
+  "time": "2026-11-19T20:12:45Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=queue&start=0&limit=0&category=tv&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"queue\": {\"version\": \"4.2.2\", \"paused\": false, \"pause_int\": \"0\", \"paused_all\": false, \"diskspace1\": \"59.09\", \"diskspace2\": \"59.09\", \"diskspace1_norm\": \"59.1 G\", \"diskspace2_norm\": \"59.1 G\", \"diskspacetotal1\": \"251.97\", \"diskspacetotal2\": \"251.97\", \"speedlimit\": \"0\", \"speedlimit_abs\": \"0\", \"have_warnings\": \"0\", \"finishaction\": null, \"quota\": \"0 \", \"have_quota\": false, \"left_quota\": \"0 \", \"cache_art\": \"0\", \"cache_size\": \"0 B\", \"kbpersec\": \"0.00\", \"speed\": \"0 \", \"mbleft\": \"0.00\", \"mb\": \"0.00\", \"sizeleft\": \"0 B\", \"size\": \"0 B\", \"noofslots_total\": 0, \"noofslots\": 0, \"start\": 0, \"limit\": 0, \"finish\": 0, \"status\": \"Idle\", \"timeleft\": \"0:00:00\", \"slots\": []}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:12:51 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 22,
+  "time": "2026-11-19T20:12:51Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=history&start=0&limit=60&category=tv&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"history\": {\"total_size\": \"1.6 M\", \"month_size\": \"1.6 M\", \"week_size\": \"1.6 M\", \"day_size\": \"1.6 M\", \"slots\": [], \"ppslots\": 0, \"noofslots\": 0, \"last_history_update\": 19, \"version\": \"4.2.2\"}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:12:51 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 23,
+  "time": "2026-11-19T20:12:51Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=queue&start=0&limit=0&category=tv&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"queue\": {\"version\": \"4.2.2\", \"paused\": false, \"pause_int\": \"0\", \"paused_all\": false, \"diskspace1\": \"59.09\", \"diskspace2\": \"59.09\", \"diskspace1_norm\": \"59.1 G\", \"diskspace2_norm\": \"59.1 G\", \"diskspacetotal1\": \"251.97\", \"diskspacetotal2\": \"251.97\", \"speedlimit\": \"0\", \"speedlimit_abs\": \"0\", \"have_warnings\": \"0\", \"finishaction\": null, \"quota\": \"0 \", \"have_quota\": false, \"left_quota\": \"0 \", \"cache_art\": \"0\", \"cache_size\": \"0 B\", \"kbpersec\": \"0.00\", \"speed\": \"0 \", \"mbleft\": \"0.00\", \"mb\": \"0.00\", \"sizeleft\": \"0 B\", \"size\": \"0 B\", \"noofslots_total\": 0, \"noofslots\": 0, \"start\": 0, \"limit\": 0, \"finish\": 0, \"status\": \"Idle\", \"timeleft\": \"0:00:00\", \"slots\": []}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:13:06 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 24,
+  "time": "2026-11-19T20:13:06Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=history&start=0&limit=60&category=tv&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"history\": {\"total_size\": \"1.6 M\", \"month_size\": \"1.6 M\", \"week_size\": \"1.6 M\", \"day_size\": \"1.6 M\", \"slots\": [], \"ppslots\": 0, \"noofslots\": 0, \"last_history_update\": 19, \"version\": \"4.2.2\"}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:13:06 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 25,
+  "time": "2026-11-19T20:13:06Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=queue&start=0&limit=0&category=tv&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"queue\": {\"version\": \"4.2.2\", \"paused\": false, \"pause_int\": \"0\", \"paused_all\": false, \"diskspace1\": \"59.09\", \"diskspace2\": \"59.09\", \"diskspace1_norm\": \"59.1 G\", \"diskspace2_norm\": \"59.1 G\", \"diskspacetotal1\": \"251.97\", \"diskspacetotal2\": \"251.97\", \"speedlimit\": \"0\", \"speedlimit_abs\": \"0\", \"have_warnings\": \"0\", \"finishaction\": null, \"quota\": \"0 \", \"have_quota\": false, \"left_quota\": \"0 \", \"cache_art\": \"0\", \"cache_size\": \"0 B\", \"kbpersec\": \"0.00\", \"speed\": \"0 \", \"mbleft\": \"0.00\", \"mb\": \"0.00\", \"sizeleft\": \"0 B\", \"size\": \"0 B\", \"noofslots_total\": 0, \"noofslots\": 0, \"start\": 0, \"limit\": 0, \"finish\": 0, \"status\": \"Idle\", \"timeleft\": \"0:00:00\", \"slots\": []}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:13:22 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 26,
+  "time": "2026-11-19T20:13:22Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=history&start=0&limit=60&category=tv&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"history\": {\"total_size\": \"1.6 M\", \"month_size\": \"1.6 M\", \"week_size\": \"1.6 M\", \"day_size\": \"1.6 M\", \"slots\": [], \"ppslots\": 0, \"noofslots\": 0, \"last_history_update\": 19, \"version\": \"4.2.2\"}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:13:22 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 27,
+  "time": "2026-11-19T20:13:22Z"
+ },
+ {
+  "request": {
+   "body": "-------------------------------8df46799a236b43\r\nContent-Disposition: form-data; name=\"name\"; filename=\"The.Pitt.S01E05.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.nzb\"\r\nContent-Type: application/x-nzb\r\n\r\n<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n<nzb xmlns=\"http://www.newzbin.com/DTD/2003/nzb\"><file poster=\"unarr@fixture.invalid\" date=\"0\" subject=\"fixture\"><groups><group>alt.binaries.fixture</group></groups><segments><segment bytes=\"1\" number=\"1\">fixture@fixture.invalid</segment></segments></file></nzb>\n\r\n-------------------------------8df46799a236b43--\r\n",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Content-Length": "942",
+    "Content-Type": "multipart/form-data; boundary=-----------------------------8df46799a236b43",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "traceparent": "00-6289e4911c21aa59131fa825cd826a61-9766fa7d98f07ffb-00"
+   },
+   "method": "POST",
+   "path": "/api?mode=addfile&cat=tv&priority=-100&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"status\": true, \"nzo_ids\": [\"SABnzbd_nzo_6fc45041\"]}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:13:40 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 28,
+  "time": "2026-11-19T20:13:40Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=queue&start=0&limit=0&category=tv&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"queue\": {\"version\": \"4.2.2\", \"paused\": true, \"pause_int\": \"0\", \"paused_all\": false, \"diskspace1\": \"59.09\", \"diskspace2\": \"59.09\", \"diskspace1_norm\": \"59.1 G\", \"diskspace2_norm\": \"59.1 G\", \"diskspacetotal1\": \"251.97\", \"diskspacetotal2\": \"251.97\", \"speedlimit\": \"0\", \"speedlimit_abs\": \"0\", \"have_warnings\": \"0\", \"finishaction\": null, \"quota\": \"0 \", \"have_quota\": false, \"left_quota\": \"0 \", \"cache_art\": \"0\", \"cache_size\": \"0 B\", \"kbpersec\": \"0.00\", \"speed\": \"0 \", \"mbleft\": \"0.67\", \"mb\": \"0.67\", \"sizeleft\": \"684 KB\", \"size\": \"684 KB\", \"noofslots_total\": 1, \"noofslots\": 1, \"start\": 0, \"limit\": 0, \"finish\": 0, \"status\": \"Paused\", \"timeleft\": \"0:00:00\", \"slots\": [{\"index\": 0, \"nzo_id\": \"SABnzbd_nzo_6fc45041\", \"unpackopts\": \"3\", \"priority\": \"Normal\", \"script\": \"None\", \"filename\": \"The.Pitt.S01E05.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR\", \"labels\": [], \"password\": \"\", \"cat\": \"tv\", \"mbleft\": \"0.67\", \"mb\": \"0.67\", \"size\": \"684 KB\", \"sizeleft\": \"684 KB\", \"percentage\": \"0\", \"mbmissing\": \"0.00\", \"direct_unpack\": null, \"status\": \"Queued\", \"timeleft\": \"0:00:00\", \"avg_age\": \"365d\"}]}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:13:45 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 29,
+  "time": "2026-11-19T20:13:45Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=history&start=0&limit=60&category=tv&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"history\": {\"total_size\": \"1.6 M\", \"month_size\": \"1.6 M\", \"week_size\": \"1.6 M\", \"day_size\": \"1.6 M\", \"slots\": [], \"ppslots\": 0, \"noofslots\": 0, \"last_history_update\": 19, \"version\": \"4.2.2\"}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:13:45 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 30,
+  "time": "2026-11-19T20:13:45Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=queue&start=0&limit=0&category=tv&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"queue\": {\"version\": \"4.2.2\", \"paused\": true, \"pause_int\": \"0\", \"paused_all\": false, \"diskspace1\": \"59.09\", \"diskspace2\": \"59.09\", \"diskspace1_norm\": \"59.1 G\", \"diskspace2_norm\": \"59.1 G\", \"diskspacetotal1\": \"251.97\", \"diskspacetotal2\": \"251.97\", \"speedlimit\": \"0\", \"speedlimit_abs\": \"0\", \"have_warnings\": \"0\", \"finishaction\": null, \"quota\": \"0 \", \"have_quota\": false, \"left_quota\": \"0 \", \"cache_art\": \"0\", \"cache_size\": \"0 B\", \"kbpersec\": \"0.00\", \"speed\": \"0 \", \"mbleft\": \"0.67\", \"mb\": \"0.67\", \"sizeleft\": \"684 KB\", \"size\": \"684 KB\", \"noofslots_total\": 1, \"noofslots\": 1, \"start\": 0, \"limit\": 0, \"finish\": 0, \"status\": \"Paused\", \"timeleft\": \"0:00:00\", \"slots\": [{\"index\": 0, \"nzo_id\": \"SABnzbd_nzo_6fc45041\", \"unpackopts\": \"3\", \"priority\": \"Normal\", \"script\": \"None\", \"filename\": \"The.Pitt.S01E05.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR\", \"labels\": [], \"password\": \"\", \"cat\": \"tv\", \"mbleft\": \"0.67\", \"mb\": \"0.67\", \"size\": \"684 KB\", \"sizeleft\": \"684 KB\", \"percentage\": \"0\", \"mbmissing\": \"0.00\", \"direct_unpack\": null, \"status\": \"Queued\", \"timeleft\": \"0:00:00\", \"avg_age\": \"365d\"}]}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:13:50 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 31,
+  "time": "2026-11-19T20:13:50Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=history&start=0&limit=60&category=tv&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"history\": {\"total_size\": \"1.6 M\", \"month_size\": \"1.6 M\", \"week_size\": \"1.6 M\", \"day_size\": \"1.6 M\", \"slots\": [], \"ppslots\": 0, \"noofslots\": 0, \"last_history_update\": 19, \"version\": \"4.2.2\"}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:13:50 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 32,
+  "time": "2026-11-19T20:13:50Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=queue&start=0&limit=0&category=tv&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"queue\": {\"version\": \"4.2.2\", \"paused\": true, \"pause_int\": \"0\", \"paused_all\": false, \"diskspace1\": \"59.09\", \"diskspace2\": \"59.09\", \"diskspace1_norm\": \"59.1 G\", \"diskspace2_norm\": \"59.1 G\", \"diskspacetotal1\": \"251.97\", \"diskspacetotal2\": \"251.97\", \"speedlimit\": \"0\", \"speedlimit_abs\": \"0\", \"have_warnings\": \"0\", \"finishaction\": null, \"quota\": \"0 \", \"have_quota\": false, \"left_quota\": \"0 \", \"cache_art\": \"0\", \"cache_size\": \"0 B\", \"kbpersec\": \"0.00\", \"speed\": \"0 \", \"mbleft\": \"0.67\", \"mb\": \"0.67\", \"sizeleft\": \"684 KB\", \"size\": \"684 KB\", \"noofslots_total\": 1, \"noofslots\": 1, \"start\": 0, \"limit\": 0, \"finish\": 0, \"status\": \"Paused\", \"timeleft\": \"0:00:00\", \"slots\": [{\"index\": 0, \"nzo_id\": \"SABnzbd_nzo_6fc45041\", \"unpackopts\": \"3\", \"priority\": \"Normal\", \"script\": \"None\", \"filename\": \"The.Pitt.S01E05.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR\", \"labels\": [], \"password\": \"\", \"cat\": \"tv\", \"mbleft\": \"0.67\", \"mb\": \"0.67\", \"size\": \"684 KB\", \"sizeleft\": \"684 KB\", \"percentage\": \"0\", \"mbmissing\": \"0.00\", \"direct_unpack\": null, \"status\": \"Queued\", \"timeleft\": \"0:00:00\", \"avg_age\": \"365d\"}]}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:14:00 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 33,
+  "time": "2026-11-19T20:14:00Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=history&start=0&limit=60&category=tv&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"history\": {\"total_size\": \"1.6 M\", \"month_size\": \"1.6 M\", \"week_size\": \"1.6 M\", \"day_size\": \"1.6 M\", \"slots\": [], \"ppslots\": 0, \"noofslots\": 0, \"last_history_update\": 19, \"version\": \"4.2.2\"}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:14:00 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 34,
+  "time": "2026-11-19T20:14:00Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "traceparent": "00-9d1034a4f81401cc2c3c90214b74cd65-5ba95dfe6f638aaa-00"
+   },
+   "method": "GET",
+   "path": "/api?mode=queue&start=0&limit=0&category=tv&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"queue\": {\"version\": \"4.2.2\", \"paused\": true, \"pause_int\": \"0\", \"paused_all\": false, \"diskspace1\": \"59.09\", \"diskspace2\": \"59.09\", \"diskspace1_norm\": \"59.1 G\", \"diskspace2_norm\": \"59.1 G\", \"diskspacetotal1\": \"251.97\", \"diskspacetotal2\": \"251.97\", \"speedlimit\": \"0\", \"speedlimit_abs\": \"0\", \"have_warnings\": \"0\", \"finishaction\": null, \"quota\": \"0 \", \"have_quota\": false, \"left_quota\": \"0 \", \"cache_art\": \"0\", \"cache_size\": \"0 B\", \"kbpersec\": \"0.00\", \"speed\": \"0 \", \"mbleft\": \"0.67\", \"mb\": \"0.67\", \"sizeleft\": \"684 KB\", \"size\": \"684 KB\", \"noofslots_total\": 1, \"noofslots\": 1, \"start\": 0, \"limit\": 0, \"finish\": 0, \"status\": \"Paused\", \"timeleft\": \"0:00:00\", \"slots\": [{\"index\": 0, \"nzo_id\": \"SABnzbd_nzo_6fc45041\", \"unpackopts\": \"3\", \"priority\": \"Normal\", \"script\": \"None\", \"filename\": \"The.Pitt.S01E05.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR\", \"labels\": [], \"password\": \"\", \"cat\": \"tv\", \"mbleft\": \"0.67\", \"mb\": \"0.67\", \"size\": \"684 KB\", \"sizeleft\": \"684 KB\", \"percentage\": \"0\", \"mbmissing\": \"0.00\", \"direct_unpack\": null, \"status\": \"Queued\", \"timeleft\": \"0:00:00\", \"avg_age\": \"365d\"}]}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:14:10 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 35,
+  "time": "2026-11-19T20:14:10Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "traceparent": "00-9d1034a4f81401cc2c3c90214b74cd65-a8f4c1acce37ea5c-00"
+   },
+   "method": "GET",
+   "path": "/api?mode=queue&name=delete&del_files=1&value=SABnzbd_nzo_6fc45041&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"status\": true, \"nzo_ids\": [\"SABnzbd_nzo_6fc45041\"]}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:14:10 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 36,
+  "time": "2026-11-19T20:14:10Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=queue&start=0&limit=0&category=tv&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"queue\": {\"version\": \"4.2.2\", \"paused\": true, \"pause_int\": \"0\", \"paused_all\": false, \"diskspace1\": \"59.09\", \"diskspace2\": \"59.09\", \"diskspace1_norm\": \"59.1 G\", \"diskspace2_norm\": \"59.1 G\", \"diskspacetotal1\": \"251.97\", \"diskspacetotal2\": \"251.97\", \"speedlimit\": \"0\", \"speedlimit_abs\": \"0\", \"have_warnings\": \"0\", \"finishaction\": null, \"quota\": \"0 \", \"have_quota\": false, \"left_quota\": \"0 \", \"cache_art\": \"0\", \"cache_size\": \"0 B\", \"kbpersec\": \"0.00\", \"speed\": \"0 \", \"mbleft\": \"0.00\", \"mb\": \"0.00\", \"sizeleft\": \"0 B\", \"size\": \"0 B\", \"noofslots_total\": 0, \"noofslots\": 0, \"start\": 0, \"limit\": 0, \"finish\": 0, \"status\": \"Paused\", \"timeleft\": \"0:00:00\", \"slots\": []}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:14:13 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 37,
+  "time": "2026-11-19T20:14:13Z"
+ },
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)"
+   },
+   "method": "GET",
+   "path": "/api?mode=history&start=0&limit=60&category=tv&apikey=0123456789abcdef0123456789abcdef&output=json"
+  },
+  "response": {
+   "body": "{\"history\": {\"total_size\": \"1.6 M\", \"month_size\": \"1.6 M\", \"week_size\": \"1.6 M\", \"day_size\": \"1.6 M\", \"slots\": [], \"ppslots\": 0, \"noofslots\": 0, \"last_history_update\": 19, \"version\": \"4.2.2\"}}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Type": "application/json;charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:14:13 GMT",
+    "Pragma": "no-cache",
+    "Server": "CherryPy/18.9.0",
+    "Vary": "Accept-Encoding",
+    "X-Frame-Options": "SameOrigin"
+   },
+   "status": 200
+  },
+  "seq": 38,
+  "time": "2026-11-19T20:14:13Z"
+ }
+]

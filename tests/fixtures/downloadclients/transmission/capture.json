@@ -1,0 +1,1166 @@
+[
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "traceparent": "00-431ee6fa13ad895b0ee52ac8cddfa29a-0052db7694fdb260-00"
+   },
+   "method": "GET",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "<h1>409: Conflict</h1><p>Your request had an invalid session-id header.</p><p>To fix this, follow these steps:<ol><li> When reading a response, get its X-Transmission-Session-Id header and remember it<li> Add the updated header to your outgoing requests<li> When you get this 409 error message, resend your request with the updated header</ol></p><p>This requirement has been added to help prevent <a href=\"http://host.invalid/073927287694\">CSRF</a> attacks.</p><p><code>X-Transmission-Session-Id: REDACTED</code></p>",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Expose-Headers": "X-Transmission-Session-Id",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "text/html; charset=ISO-8859-1",
+    "Date": "Thu, 19 Nov 2026 20:06:28 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "status": 409
+  },
+  "seq": 1,
+  "time": "2026-11-19T20:06:28Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"session-get\"}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "29",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef",
+    "traceparent": "00-431ee6fa13ad895b0ee52ac8cddfa29a-27d6b479df16a9d8-00"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"alt-speed-down\": 50, \"alt-speed-enabled\": false, \"alt-speed-time-begin\": 540, \"alt-speed-time-day\": 127, \"alt-speed-time-enabled\": false, \"alt-speed-time-end\": 1020, \"alt-speed-up\": 50, \"anti-brute-force-enabled\": false, \"anti-brute-force-threshold\": 100, \"blocklist-enabled\": false, \"blocklist-size\": 0, \"blocklist-url\": \"http://host.invalid/935cfbdbd784\", \"cache-size-mb\": 4, \"config-dir\": \"/downloads/config\", \"default-trackers\": \"\", \"dht-enabled\": false, \"download-dir\": \"/downloads/\", \"download-dir-free-space\": 63454912512, \"download-queue-enabled\": true, \"download-queue-size\": 5, \"encryption\": \"preferred\", \"idle-seeding-limit\": 30, \"idle-seeding-limit-enabled\": false, \"incomplete-dir\": \"/downloads/Downloads\", \"incomplete-dir-enabled\": false, \"lpd-enabled\": true, \"peer-limit-global\": 200, \"peer-limit-per-torrent\": 50, \"peer-port\": 51499, \"peer-port-random-on-start\": false, \"pex-enabled\": true, \"port-forwarding-enabled\": false, \"queue-stalled-enabled\": true, \"queue-stalled-minutes\": 30, \"rename-partial-files\": false, \"rpc-version\": 17, \"rpc-version-minimum\": 14, \"rpc-version-semver\": \"5.3.0\", \"script-torrent-added-enabled\": false, \"script-torrent-added-filename\": \"\", \"script-torrent-done-enabled\": false, \"script-torrent-done-filename\": \"\", \"script-torrent-done-seeding-enabled\": false, \"script-torrent-done-seeding-filename\": \"\", \"seed-queue-enabled\": false, \"seed-queue-size\": 10, \"seedRatioLimit\": 2, \"seedRatioLimited\": false, \"session-id\": \"0123456789abcdef0123456789abcdef\", \"speed-limit-down\": 100, \"speed-limit-down-enabled\": false, \"speed-limit-up\": 100, \"speed-limit-up-enabled\": false, \"start-added-torrents\": true, \"tcp-enabled\": true, \"trash-original-torrent-files\": false, \"units\": {\"memory-bytes\": 1024, \"memory-units\": [\"KiB\", \"MiB\", \"GiB\", \"TiB\"], \"size-bytes\": 1000, \"size-units\": [\"kB\", \"MB\", \"GB\", \"TB\"], \"speed-bytes\": 1000, \"speed-units\": [\"kB/s\", \"MB/s\", \"GB/s\", \"TB/s\"]}, \"utp-enabled\": true, \"version\": \"4.0.5 (a6fe2a64aa)\"}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:06:28 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 2,
+  "time": "2026-11-19T20:06:28Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef",
+    "traceparent": "00-431ee6fa13ad895b0ee52ac8cddfa29a-8941b4d683d937dc-00"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": []}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:06:28 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 3,
+  "time": "2026-11-19T20:06:28Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"session-get\"}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "29",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef",
+    "traceparent": "00-8d8e9cd69555bdffbac734479d5d3e07-1862e7278c7ef0fe-00"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"alt-speed-down\": 50, \"alt-speed-enabled\": false, \"alt-speed-time-begin\": 540, \"alt-speed-time-day\": 127, \"alt-speed-time-enabled\": false, \"alt-speed-time-end\": 1020, \"alt-speed-up\": 50, \"anti-brute-force-enabled\": false, \"anti-brute-force-threshold\": 100, \"blocklist-enabled\": false, \"blocklist-size\": 0, \"blocklist-url\": \"http://host.invalid/935cfbdbd784\", \"cache-size-mb\": 4, \"config-dir\": \"/downloads/config\", \"default-trackers\": \"\", \"dht-enabled\": false, \"download-dir\": \"/downloads/\", \"download-dir-free-space\": 63454908416, \"download-queue-enabled\": true, \"download-queue-size\": 5, \"encryption\": \"preferred\", \"idle-seeding-limit\": 30, \"idle-seeding-limit-enabled\": false, \"incomplete-dir\": \"/downloads/Downloads\", \"incomplete-dir-enabled\": false, \"lpd-enabled\": true, \"peer-limit-global\": 200, \"peer-limit-per-torrent\": 50, \"peer-port\": 51499, \"peer-port-random-on-start\": false, \"pex-enabled\": true, \"port-forwarding-enabled\": false, \"queue-stalled-enabled\": true, \"queue-stalled-minutes\": 30, \"rename-partial-files\": false, \"rpc-version\": 17, \"rpc-version-minimum\": 14, \"rpc-version-semver\": \"5.3.0\", \"script-torrent-added-enabled\": false, \"script-torrent-added-filename\": \"\", \"script-torrent-done-enabled\": false, \"script-torrent-done-filename\": \"\", \"script-torrent-done-seeding-enabled\": false, \"script-torrent-done-seeding-filename\": \"\", \"seed-queue-enabled\": false, \"seed-queue-size\": 10, \"seedRatioLimit\": 2, \"seedRatioLimited\": false, \"session-id\": \"0123456789abcdef0123456789abcdef\", \"speed-limit-down\": 100, \"speed-limit-down-enabled\": false, \"speed-limit-up\": 100, \"speed-limit-up-enabled\": false, \"start-added-torrents\": true, \"tcp-enabled\": true, \"trash-original-torrent-files\": false, \"units\": {\"memory-bytes\": 1024, \"memory-units\": [\"KiB\", \"MiB\", \"GiB\", \"TiB\"], \"size-bytes\": 1000, \"size-units\": [\"kB\", \"MB\", \"GB\", \"TB\"], \"speed-bytes\": 1000, \"speed-units\": [\"kB/s\", \"MB/s\", \"GB/s\", \"TB/s\"]}, \"utp-enabled\": true, \"version\": \"4.0.5 (a6fe2a64aa)\"}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:06:28 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 4,
+  "time": "2026-11-19T20:06:28Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef",
+    "traceparent": "00-8d8e9cd69555bdffbac734479d5d3e07-4ef82060d01917d6-00"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": []}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:06:28 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 5,
+  "time": "2026-11-19T20:06:28Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef",
+    "traceparent": "00-8d8e9cd69555bdffbac734479d5d3e07-a1ff046fa491accf-00"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": []}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:06:33 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 6,
+  "time": "2026-11-19T20:06:33Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"session-get\"}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "29",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef",
+    "traceparent": "00-c8608a9b8f788e64cecdb18fe000026a-f60349bb624e5f2f-00"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"alt-speed-down\": 50, \"alt-speed-enabled\": false, \"alt-speed-time-begin\": 540, \"alt-speed-time-day\": 127, \"alt-speed-time-enabled\": false, \"alt-speed-time-end\": 1020, \"alt-speed-up\": 50, \"anti-brute-force-enabled\": false, \"anti-brute-force-threshold\": 100, \"blocklist-enabled\": false, \"blocklist-size\": 0, \"blocklist-url\": \"http://host.invalid/935cfbdbd784\", \"cache-size-mb\": 4, \"config-dir\": \"/downloads/config\", \"default-trackers\": \"\", \"dht-enabled\": false, \"download-dir\": \"/downloads/\", \"download-dir-free-space\": 63457116160, \"download-queue-enabled\": true, \"download-queue-size\": 5, \"encryption\": \"preferred\", \"idle-seeding-limit\": 30, \"idle-seeding-limit-enabled\": false, \"incomplete-dir\": \"/downloads/Downloads\", \"incomplete-dir-enabled\": false, \"lpd-enabled\": true, \"peer-limit-global\": 200, \"peer-limit-per-torrent\": 50, \"peer-port\": 51499, \"peer-port-random-on-start\": false, \"pex-enabled\": true, \"port-forwarding-enabled\": false, \"queue-stalled-enabled\": true, \"queue-stalled-minutes\": 30, \"rename-partial-files\": false, \"rpc-version\": 17, \"rpc-version-minimum\": 14, \"rpc-version-semver\": \"5.3.0\", \"script-torrent-added-enabled\": false, \"script-torrent-added-filename\": \"\", \"script-torrent-done-enabled\": false, \"script-torrent-done-filename\": \"\", \"script-torrent-done-seeding-enabled\": false, \"script-torrent-done-seeding-filename\": \"\", \"seed-queue-enabled\": false, \"seed-queue-size\": 10, \"seedRatioLimit\": 2, \"seedRatioLimited\": false, \"session-id\": \"0123456789abcdef0123456789abcdef\", \"speed-limit-down\": 100, \"speed-limit-down-enabled\": false, \"speed-limit-up\": 100, \"speed-limit-up-enabled\": false, \"start-added-torrents\": true, \"tcp-enabled\": true, \"trash-original-torrent-files\": false, \"units\": {\"memory-bytes\": 1024, \"memory-units\": [\"KiB\", \"MiB\", \"GiB\", \"TiB\"], \"size-bytes\": 1000, \"size-units\": [\"kB\", \"MB\", \"GB\", \"TB\"], \"speed-bytes\": 1000, \"speed-units\": [\"kB/s\", \"MB/s\", \"GB/s\", \"TB/s\"]}, \"utp-enabled\": true, \"version\": \"4.0.5 (a6fe2a64aa)\"}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:06:53 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 7,
+  "time": "2026-11-19T20:06:53Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-add\", \"arguments\": {\"metainfo\": \"ZDg6YW5ub3VuY2UzMDp1ZHA6Ly90cmFja2VyLmludmFsaWQ6Njk2OS9hbm5vdW5jZTQ6aW5mb2Q2Omxlbmd0aGkxZTQ6bmFtZTc6Zml4dHVyZTEyOnBpZWNlIGxlbmd0aGkxNjM4NGU2OnBpZWNlczIwOgAAAAAAAAAAAAAAAAAAAAAAAAAAZWU=\", \"paused\": false, \"download-dir\": \"/downloads/tv-sonarr\", \"labels\": [\"tv-sonarr\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "1465",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef",
+    "traceparent": "00-c8608a9b8f788e64cecdb18fe000026a-7ae3f77fc30b7bb7-00"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrent-added\": {\"hashString\": \"fc64326ecdef82324922c5bcc51596aa536284a8\", \"id\": 1, \"name\": \"The.Pitt.S01E01.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\"}}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:06:53 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 8,
+  "time": "2026-11-19T20:06:53Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"session-get\"}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "29",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef",
+    "traceparent": "00-908ad438616d08724e0f435511e9989b-6c782c47ca976d76-00"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"alt-speed-down\": 50, \"alt-speed-enabled\": false, \"alt-speed-time-begin\": 540, \"alt-speed-time-day\": 127, \"alt-speed-time-enabled\": false, \"alt-speed-time-end\": 1020, \"alt-speed-up\": 50, \"anti-brute-force-enabled\": false, \"anti-brute-force-threshold\": 100, \"blocklist-enabled\": false, \"blocklist-size\": 0, \"blocklist-url\": \"http://host.invalid/935cfbdbd784\", \"cache-size-mb\": 4, \"config-dir\": \"/downloads/config\", \"default-trackers\": \"\", \"dht-enabled\": false, \"download-dir\": \"/downloads/\", \"download-dir-free-space\": 63456813056, \"download-queue-enabled\": true, \"download-queue-size\": 5, \"encryption\": \"preferred\", \"idle-seeding-limit\": 30, \"idle-seeding-limit-enabled\": false, \"incomplete-dir\": \"/downloads/Downloads\", \"incomplete-dir-enabled\": false, \"lpd-enabled\": true, \"peer-limit-global\": 200, \"peer-limit-per-torrent\": 50, \"peer-port\": 51499, \"peer-port-random-on-start\": false, \"pex-enabled\": true, \"port-forwarding-enabled\": false, \"queue-stalled-enabled\": true, \"queue-stalled-minutes\": 30, \"rename-partial-files\": false, \"rpc-version\": 17, \"rpc-version-minimum\": 14, \"rpc-version-semver\": \"5.3.0\", \"script-torrent-added-enabled\": false, \"script-torrent-added-filename\": \"\", \"script-torrent-done-enabled\": false, \"script-torrent-done-filename\": \"\", \"script-torrent-done-seeding-enabled\": false, \"script-torrent-done-seeding-filename\": \"\", \"seed-queue-enabled\": false, \"seed-queue-size\": 10, \"seedRatioLimit\": 2, \"seedRatioLimited\": false, \"session-id\": \"0123456789abcdef0123456789abcdef\", \"speed-limit-down\": 100, \"speed-limit-down-enabled\": false, \"speed-limit-up\": 100, \"speed-limit-up-enabled\": false, \"start-added-torrents\": true, \"tcp-enabled\": true, \"trash-original-torrent-files\": false, \"units\": {\"memory-bytes\": 1024, \"memory-units\": [\"KiB\", \"MiB\", \"GiB\", \"TiB\"], \"size-bytes\": 1000, \"size-units\": [\"kB\", \"MB\", \"GB\", \"TB\"], \"speed-bytes\": 1000, \"speed-units\": [\"kB/s\", \"MB/s\", \"GB/s\", \"TB/s\"]}, \"utp-enabled\": true, \"version\": \"4.0.5 (a6fe2a64aa)\"}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:06:55 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 9,
+  "time": "2026-11-19T20:06:55Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-add\", \"arguments\": {\"metainfo\": \"ZDg6YW5ub3VuY2UzMDp1ZHA6Ly90cmFja2VyLmludmFsaWQ6Njk2OS9hbm5vdW5jZTQ6aW5mb2Q2Omxlbmd0aGkxZTQ6bmFtZTc6Zml4dHVyZTEyOnBpZWNlIGxlbmd0aGkxNjM4NGU2OnBpZWNlczIwOgAAAAAAAAAAAAAAAAAAAAAAAAAAZWU=\", \"paused\": false, \"download-dir\": \"/downloads/tv-sonarr\", \"labels\": [\"tv-sonarr\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "3013",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef",
+    "traceparent": "00-908ad438616d08724e0f435511e9989b-e3ee09c447024046-00"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrent-added\": {\"hashString\": \"b37d05878bb8a7e3772e2c3585d90328e4ed7455\", \"id\": 2, \"name\": \"The.Pitt.S01E02.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\"}}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:06:55 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 10,
+  "time": "2026-11-19T20:06:55Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": [{\"downloadDir\": \"/downloads/tv-sonarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"fc64326ecdef82324922c5bcc51596aa536284a8\", \"id\": 1, \"isFinished\": false, \"labels\": [\"tv-sonarr\"], \"leftUntilDone\": 0, \"name\": \"The.Pitt.S01E01.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 5, \"secondsSeeding\": 0, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 2, \"seedRatioMode\": 0, \"status\": 6, \"totalSize\": 1106640, \"uploadedEver\": 0}, {\"downloadDir\": \"/downloads/tv-sonarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"b37d05878bb8a7e3772e2c3585d90328e4ed7455\", \"id\": 2, \"isFinished\": false, \"labels\": [\"tv-sonarr\"], \"leftUntilDone\": 3000000, \"name\": \"The.Pitt.S01E02.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 3, \"secondsSeeding\": 0, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 2, \"seedRatioMode\": 0, \"status\": 4, \"totalSize\": 3000000, \"uploadedEver\": 0}]}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:06:58 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 11,
+  "time": "2026-11-19T20:06:58Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": [{\"downloadDir\": \"/downloads/tv-sonarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"fc64326ecdef82324922c5bcc51596aa536284a8\", \"id\": 1, \"isFinished\": false, \"labels\": [\"tv-sonarr\"], \"leftUntilDone\": 0, \"name\": \"The.Pitt.S01E01.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 11, \"secondsSeeding\": 0, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 2, \"seedRatioMode\": 0, \"status\": 6, \"totalSize\": 1106640, \"uploadedEver\": 0}, {\"downloadDir\": \"/downloads/tv-sonarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"b37d05878bb8a7e3772e2c3585d90328e4ed7455\", \"id\": 2, \"isFinished\": false, \"labels\": [\"tv-sonarr\"], \"leftUntilDone\": 3000000, \"name\": \"The.Pitt.S01E02.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 9, \"secondsSeeding\": 0, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 2, \"seedRatioMode\": 0, \"status\": 4, \"totalSize\": 3000000, \"uploadedEver\": 0}]}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:07:04 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 12,
+  "time": "2026-11-19T20:07:04Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": [{\"downloadDir\": \"/downloads/tv-sonarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"fc64326ecdef82324922c5bcc51596aa536284a8\", \"id\": 1, \"isFinished\": false, \"labels\": [\"tv-sonarr\"], \"leftUntilDone\": 0, \"name\": \"The.Pitt.S01E01.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 12, \"secondsSeeding\": 0, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 2, \"seedRatioMode\": 0, \"status\": 6, \"totalSize\": 1106640, \"uploadedEver\": 0}, {\"downloadDir\": \"/downloads/tv-sonarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"b37d05878bb8a7e3772e2c3585d90328e4ed7455\", \"id\": 2, \"isFinished\": false, \"labels\": [\"tv-sonarr\"], \"leftUntilDone\": 3000000, \"name\": \"The.Pitt.S01E02.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 10, \"secondsSeeding\": 0, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 2, \"seedRatioMode\": 0, \"status\": 4, \"totalSize\": 3000000, \"uploadedEver\": 0}]}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:07:05 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 13,
+  "time": "2026-11-19T20:07:05Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": [{\"downloadDir\": \"/downloads/tv-sonarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"fc64326ecdef82324922c5bcc51596aa536284a8\", \"id\": 1, \"isFinished\": false, \"labels\": [\"tv-sonarr\"], \"leftUntilDone\": 0, \"name\": \"The.Pitt.S01E01.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 27, \"secondsSeeding\": 0, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 2, \"seedRatioMode\": 0, \"status\": 6, \"totalSize\": 1106640, \"uploadedEver\": 0}, {\"downloadDir\": \"/downloads/tv-sonarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"b37d05878bb8a7e3772e2c3585d90328e4ed7455\", \"id\": 2, \"isFinished\": false, \"labels\": [\"tv-sonarr\"], \"leftUntilDone\": 3000000, \"name\": \"The.Pitt.S01E02.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 25, \"secondsSeeding\": 0, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 2, \"seedRatioMode\": 0, \"status\": 4, \"totalSize\": 3000000, \"uploadedEver\": 0}]}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:07:20 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 14,
+  "time": "2026-11-19T20:07:20Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": [{\"downloadDir\": \"/downloads/tv-sonarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"fc64326ecdef82324922c5bcc51596aa536284a8\", \"id\": 1, \"isFinished\": false, \"labels\": [\"tv-sonarr\"], \"leftUntilDone\": 0, \"name\": \"The.Pitt.S01E01.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 42, \"secondsSeeding\": 0, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 2, \"seedRatioMode\": 0, \"status\": 6, \"totalSize\": 1106640, \"uploadedEver\": 0}, {\"downloadDir\": \"/downloads/tv-sonarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"b37d05878bb8a7e3772e2c3585d90328e4ed7455\", \"id\": 2, \"isFinished\": false, \"labels\": [\"tv-sonarr\"], \"leftUntilDone\": 3000000, \"name\": \"The.Pitt.S01E02.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 40, \"secondsSeeding\": 0, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 2, \"seedRatioMode\": 0, \"status\": 4, \"totalSize\": 3000000, \"uploadedEver\": 0}]}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:07:35 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 15,
+  "time": "2026-11-19T20:07:35Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": [{\"downloadDir\": \"/downloads/tv-sonarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"fc64326ecdef82324922c5bcc51596aa536284a8\", \"id\": 1, \"isFinished\": false, \"labels\": [\"tv-sonarr\"], \"leftUntilDone\": 0, \"name\": \"The.Pitt.S01E01.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 75, \"secondsSeeding\": 0, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 2, \"seedRatioMode\": 0, \"status\": 6, \"totalSize\": 1106640, \"uploadedEver\": 0}, {\"downloadDir\": \"/downloads/tv-sonarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"b37d05878bb8a7e3772e2c3585d90328e4ed7455\", \"id\": 2, \"isFinished\": false, \"labels\": [\"tv-sonarr\"], \"leftUntilDone\": 3000000, \"name\": \"The.Pitt.S01E02.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 73, \"secondsSeeding\": 0, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 2, \"seedRatioMode\": 0, \"status\": 4, \"totalSize\": 3000000, \"uploadedEver\": 0}]}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:08:08 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 16,
+  "time": "2026-11-19T20:08:08Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": [{\"downloadDir\": \"/downloads/tv-sonarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"fc64326ecdef82324922c5bcc51596aa536284a8\", \"id\": 1, \"isFinished\": false, \"labels\": [\"tv-sonarr\"], \"leftUntilDone\": 0, \"name\": \"The.Pitt.S01E01.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 90, \"secondsSeeding\": 0, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 2, \"seedRatioMode\": 0, \"status\": 6, \"totalSize\": 1106640, \"uploadedEver\": 0}, {\"downloadDir\": \"/downloads/tv-sonarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"b37d05878bb8a7e3772e2c3585d90328e4ed7455\", \"id\": 2, \"isFinished\": false, \"labels\": [\"tv-sonarr\"], \"leftUntilDone\": 3000000, \"name\": \"The.Pitt.S01E02.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 88, \"secondsSeeding\": 0, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 2, \"seedRatioMode\": 0, \"status\": 4, \"totalSize\": 3000000, \"uploadedEver\": 0}]}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:08:23 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 17,
+  "time": "2026-11-19T20:08:23Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": [{\"downloadDir\": \"/downloads/tv-sonarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"fc64326ecdef82324922c5bcc51596aa536284a8\", \"id\": 1, \"isFinished\": true, \"labels\": [\"tv-sonarr\"], \"leftUntilDone\": 0, \"name\": \"The.Pitt.S01E01.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 0, \"secondsSeeding\": 0, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 2, \"seedRatioMode\": 0, \"status\": 0, \"totalSize\": 1106640, \"uploadedEver\": 0}, {\"downloadDir\": \"/downloads/tv-sonarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"b37d05878bb8a7e3772e2c3585d90328e4ed7455\", \"id\": 2, \"isFinished\": false, \"labels\": [\"tv-sonarr\"], \"leftUntilDone\": 3000000, \"name\": \"The.Pitt.S01E02.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 146, \"secondsSeeding\": 0, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 2, \"seedRatioMode\": 0, \"status\": 4, \"totalSize\": 3000000, \"uploadedEver\": 0}]}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:09:21 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 18,
+  "time": "2026-11-19T20:09:21Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"session-get\"}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "29",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"alt-speed-down\": 50, \"alt-speed-enabled\": false, \"alt-speed-time-begin\": 540, \"alt-speed-time-day\": 127, \"alt-speed-time-enabled\": false, \"alt-speed-time-end\": 1020, \"alt-speed-up\": 50, \"anti-brute-force-enabled\": false, \"anti-brute-force-threshold\": 100, \"blocklist-enabled\": false, \"blocklist-size\": 0, \"blocklist-url\": \"http://host.invalid/935cfbdbd784\", \"cache-size-mb\": 4, \"config-dir\": \"/downloads/config\", \"default-trackers\": \"\", \"dht-enabled\": false, \"download-dir\": \"/downloads/\", \"download-dir-free-space\": 63455961088, \"download-queue-enabled\": true, \"download-queue-size\": 5, \"encryption\": \"preferred\", \"idle-seeding-limit\": 30, \"idle-seeding-limit-enabled\": false, \"incomplete-dir\": \"/downloads/Downloads\", \"incomplete-dir-enabled\": false, \"lpd-enabled\": true, \"peer-limit-global\": 200, \"peer-limit-per-torrent\": 50, \"peer-port\": 51499, \"peer-port-random-on-start\": false, \"pex-enabled\": true, \"port-forwarding-enabled\": false, \"queue-stalled-enabled\": true, \"queue-stalled-minutes\": 30, \"rename-partial-files\": false, \"rpc-version\": 17, \"rpc-version-minimum\": 14, \"rpc-version-semver\": \"5.3.0\", \"script-torrent-added-enabled\": false, \"script-torrent-added-filename\": \"\", \"script-torrent-done-enabled\": false, \"script-torrent-done-filename\": \"\", \"script-torrent-done-seeding-enabled\": false, \"script-torrent-done-seeding-filename\": \"\", \"seed-queue-enabled\": false, \"seed-queue-size\": 10, \"seedRatioLimit\": 0, \"seedRatioLimited\": true, \"session-id\": \"0123456789abcdef0123456789abcdef\", \"speed-limit-down\": 100, \"speed-limit-down-enabled\": false, \"speed-limit-up\": 100, \"speed-limit-up-enabled\": false, \"start-added-torrents\": true, \"tcp-enabled\": true, \"trash-original-torrent-files\": false, \"units\": {\"memory-bytes\": 1024, \"memory-units\": [\"KiB\", \"MiB\", \"GiB\", \"TiB\"], \"size-bytes\": 1000, \"size-units\": [\"kB\", \"MB\", \"GB\", \"TB\"], \"speed-bytes\": 1000, \"speed-units\": [\"kB/s\", \"MB/s\", \"GB/s\", \"TB/s\"]}, \"utp-enabled\": true, \"version\": \"4.0.5 (a6fe2a64aa)\"}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:09:21 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 19,
+  "time": "2026-11-19T20:09:21Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-remove\", \"arguments\": {\"ids\": [\"fc64326ecdef82324922c5bcc51596aa536284a8\"], \"delete-local-data\": true}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "153",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:09:21 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 20,
+  "time": "2026-11-19T20:09:21Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": [{\"downloadDir\": \"/downloads/tv-sonarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"b37d05878bb8a7e3772e2c3585d90328e4ed7455\", \"id\": 2, \"isFinished\": false, \"labels\": [\"tv-sonarr\"], \"leftUntilDone\": 3000000, \"name\": \"The.Pitt.S01E02.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 161, \"secondsSeeding\": 0, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 2, \"seedRatioMode\": 0, \"status\": 4, \"totalSize\": 3000000, \"uploadedEver\": 0}]}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:09:36 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 21,
+  "time": "2026-11-19T20:09:36Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-remove\", \"arguments\": {\"ids\": [\"b37d05878bb8a7e3772e2c3585d90328e4ed7455\"], \"delete-local-data\": true}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "153",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef",
+    "traceparent": "00-4ae63756852a3127bc5af3c6602bbaa0-8235f2399d6d4721-00"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:09:56 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 22,
+  "time": "2026-11-19T20:09:56Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": []}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:09:59 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 23,
+  "time": "2026-11-19T20:09:59Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": []}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:11:05 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 24,
+  "time": "2026-11-19T20:11:05Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"session-get\"}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "29",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef",
+    "traceparent": "00-ff38ff265b49741714b6d7c1b3949c8f-c7b34f83b4704574-00"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"alt-speed-down\": 50, \"alt-speed-enabled\": false, \"alt-speed-time-begin\": 540, \"alt-speed-time-day\": 127, \"alt-speed-time-enabled\": false, \"alt-speed-time-end\": 1020, \"alt-speed-up\": 50, \"anti-brute-force-enabled\": false, \"anti-brute-force-threshold\": 100, \"blocklist-enabled\": false, \"blocklist-size\": 0, \"blocklist-url\": \"http://host.invalid/935cfbdbd784\", \"cache-size-mb\": 4, \"config-dir\": \"/downloads/config\", \"default-trackers\": \"\", \"dht-enabled\": false, \"download-dir\": \"/downloads/\", \"download-dir-free-space\": 63452327936, \"download-queue-enabled\": true, \"download-queue-size\": 5, \"encryption\": \"preferred\", \"idle-seeding-limit\": 30, \"idle-seeding-limit-enabled\": false, \"incomplete-dir\": \"/downloads/Downloads\", \"incomplete-dir-enabled\": false, \"lpd-enabled\": true, \"peer-limit-global\": 200, \"peer-limit-per-torrent\": 50, \"peer-port\": 51499, \"peer-port-random-on-start\": false, \"pex-enabled\": true, \"port-forwarding-enabled\": false, \"queue-stalled-enabled\": true, \"queue-stalled-minutes\": 30, \"rename-partial-files\": false, \"rpc-version\": 17, \"rpc-version-minimum\": 14, \"rpc-version-semver\": \"5.3.0\", \"script-torrent-added-enabled\": false, \"script-torrent-added-filename\": \"\", \"script-torrent-done-enabled\": false, \"script-torrent-done-filename\": \"\", \"script-torrent-done-seeding-enabled\": false, \"script-torrent-done-seeding-filename\": \"\", \"seed-queue-enabled\": false, \"seed-queue-size\": 10, \"seedRatioLimit\": 0, \"seedRatioLimited\": true, \"session-id\": \"0123456789abcdef0123456789abcdef\", \"speed-limit-down\": 100, \"speed-limit-down-enabled\": false, \"speed-limit-up\": 100, \"speed-limit-up-enabled\": false, \"start-added-torrents\": true, \"tcp-enabled\": true, \"trash-original-torrent-files\": false, \"units\": {\"memory-bytes\": 1024, \"memory-units\": [\"KiB\", \"MiB\", \"GiB\", \"TiB\"], \"size-bytes\": 1000, \"size-units\": [\"kB\", \"MB\", \"GB\", \"TB\"], \"speed-bytes\": 1000, \"speed-units\": [\"kB/s\", \"MB/s\", \"GB/s\", \"TB/s\"]}, \"utp-enabled\": true, \"version\": \"4.0.5 (a6fe2a64aa)\"}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:12:33 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 25,
+  "time": "2026-11-19T20:12:33Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef",
+    "traceparent": "00-ff38ff265b49741714b6d7c1b3949c8f-fdb11f761cb4bcf1-00"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": []}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:12:33 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 26,
+  "time": "2026-11-19T20:12:33Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": []}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:12:35 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 27,
+  "time": "2026-11-19T20:12:35Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": []}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:12:40 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 28,
+  "time": "2026-11-19T20:12:40Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": []}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:12:45 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 29,
+  "time": "2026-11-19T20:12:45Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": []}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:12:51 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 30,
+  "time": "2026-11-19T20:12:51Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": []}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:13:06 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 31,
+  "time": "2026-11-19T20:13:06Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": []}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:13:22 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 32,
+  "time": "2026-11-19T20:13:22Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": []}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:13:45 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 33,
+  "time": "2026-11-19T20:13:45Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": []}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:13:50 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 34,
+  "time": "2026-11-19T20:13:50Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": []}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:14:00 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 35,
+  "time": "2026-11-19T20:14:00Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Sonarr/4.0.20.3014 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": []}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:14:13 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 36,
+  "time": "2026-11-19T20:14:13Z"
+ }
+]
