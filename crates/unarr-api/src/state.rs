@@ -163,7 +163,7 @@ struct Inner {
 }
 
 /// How the program applies a log level.
-type LogLevelHook = Box<dyn Fn(&str) + Send + Sync>;
+type LogLevelHook = Box<dyn Fn(&unarr_core::config::HostConfig) + Send + Sync>;
 
 /// What `POST /system/shutdown` and `/system/restart` ask of the process.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -446,14 +446,18 @@ impl AppState {
 
     /// `ReconfigureLogging`: how the program changes what it logs when the
     /// level of Settings > General is saved. Set once, by the daemon.
-    pub fn set_log_level_hook(&self, apply: impl Fn(&str) + Send + Sync + 'static) {
+    pub fn set_log_level_hook(
+        &self,
+        apply: impl Fn(&unarr_core::config::HostConfig) + Send + Sync + 'static,
+    ) {
         let _ = self.0.log_level.set(Box::new(apply));
     }
 
-    /// Log at the level the settings now say.
+    /// Log at the levels and in the console format the settings now say
+    /// (`LogLevel`, `ConsoleLogLevel`, `ConsoleLogFormat`).
     pub fn apply_log_level(&self) {
         if let Some(apply) = self.0.log_level.get() {
-            apply(&self.settings().host.log_level);
+            apply(&self.settings().host);
         }
     }
 

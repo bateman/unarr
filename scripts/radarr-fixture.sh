@@ -192,6 +192,14 @@ start_on_fixture_copy() {
     # import lists, or clean house while we record: the goldens must
     # describe the fixture as committed.
     python3 -I -c "import sqlite3,sys,datetime; c=sqlite3.connect(sys.argv[1]); c.execute('update ScheduledTasks set LastExecution=?', (datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M:%SZ'),)); c.commit(); c.close()" "$data/radarr.db"
+    # GOLDEN_SETUP names a script that changes the copy before Radarr
+    # starts, for a recording of what the original does at start with
+    # another installation (one with no user yet, say). It is run with
+    # bash and gets the data directory and the database's file name.
+    if [ -n "${GOLDEN_SETUP:-}" ]; then
+        log "preparing the copy with $GOLDEN_SETUP"
+        bash "$GOLDEN_SETUP" "$data" radarr.db
+    fi
     start_radarr "$data"
 }
 

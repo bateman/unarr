@@ -64,6 +64,93 @@ impl AuthenticationRequired {
     }
 }
 
+/// `ConsoleLogFormat`: how the console writes its lines.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Default)]
+pub enum ConsoleLogFormat {
+    /// `[Info] Logger: message`, Unarr's own layout here.
+    #[default]
+    Standard,
+    /// Compact log event format: one JSON object a line, for log shippers.
+    Clef,
+}
+
+impl ConsoleLogFormat {
+    /// The value as .NET's `Enum.Parse` reads it: a name, or its number.
+    /// `config.xml` is read without regard to case, the environment with
+    /// it (`Enum.TryParse`).
+    pub fn parse(s: &str, ignore_case: bool) -> Option<Self> {
+        let s = s.trim();
+        let is = |name: &str| {
+            if ignore_case {
+                s.eq_ignore_ascii_case(name)
+            } else {
+                s == name
+            }
+        };
+        if is("Standard") || s == "0" {
+            Some(ConsoleLogFormat::Standard)
+        } else if is("Clef") || s == "1" {
+            Some(ConsoleLogFormat::Clef)
+        } else {
+            None
+        }
+    }
+
+    pub const fn name(self) -> &'static str {
+        match self {
+            ConsoleLogFormat::Standard => "Standard",
+            ConsoleLogFormat::Clef => "Clef",
+        }
+    }
+}
+
+/// NLog's levels, which `LogLevel` and `ConsoleLogLevel` name, from the
+/// most verbose.
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
+pub enum LogLevel {
+    Trace,
+    Debug,
+    Info,
+    Warn,
+    Error,
+    Fatal,
+    Off,
+}
+
+impl LogLevel {
+    /// `LogLevel.FromString`: the name, without regard to case.
+    pub fn parse(s: &str) -> Option<Self> {
+        Some(match s.trim().to_ascii_lowercase().as_str() {
+            "trace" => LogLevel::Trace,
+            "debug" => LogLevel::Debug,
+            "info" => LogLevel::Info,
+            "warn" => LogLevel::Warn,
+            "error" => LogLevel::Error,
+            "fatal" => LogLevel::Fatal,
+            "off" => LogLevel::Off,
+            _ => return None,
+        })
+    }
+}
+
+/// The user name and password a `config.xml` from before Sonarr v3 holds
+/// (`<Username>`, `<Password>`, the password in clear). The originals move
+/// them into the Users table at start when it is empty.
+#[derive(Clone, PartialEq, Eq)]
+pub struct LegacyUser {
+    pub username: String,
+    pub password: String,
+}
+
+impl std::fmt::Debug for LegacyUser {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        f.debug_struct("LegacyUser")
+            .field("username", &self.username)
+            .field("password", &"(removed)")
+            .finish()
+    }
+}
+
 /// The host settings the originals keep in `config.xml`, with their defaults.
 #[derive(Debug, Clone, PartialEq, Eq)]
 pub struct HostConfig {
@@ -88,6 +175,14 @@ pub struct HostConfig {
     pub theme: String,
     /// `TrustCgnatIpAddresses`: `100.64.0.0/10` counts as local.
     pub trust_cgnat_ip_addresses: bool,
+    /// `ConsoleLogLevel`: the console's own level; blank follows `LogLevel`
+    /// (see [`HostConfig::console_level`]).
+    pub console_log_level: String,
+    /// `ConsoleLogFormat`.
+    pub console_log_format: ConsoleLogFormat,
+    /// `<Username>` and `<Password>` of a file from before Sonarr v3, read
+    /// and never written back.
+    pub legacy_user: Option<LegacyUser>,
 }
 
 impl HostConfig {
@@ -157,6 +252,13 @@ impl HostConfig {
                     None => unusable = true,
                 },
                 "log__level" => self.log_level = value.trim().to_ascii_lowercase(),
+                "log__consolelevel" => self.console_log_level = value.clone(),
+                // `Enum.TryParse`: with regard to case; a value it does
+                // not read leaves the file's.
+                "log__consoleformat" => match ConsoleLogFormat::parse(&value, false) {
+                    Some(format) => self.console_log_format = format,
+                    None => unusable = true,
+                },
                 "log__analyticsenabled" => match flag() {
                     Some(on) => self.analytics_enabled = on,
                     None => unusable = true,
@@ -168,6 +270,28 @@ impl HostConfig {
                 tracing::warn!("Environment variable {name} has a value that cannot be used; ignored");
             }
         }
+    }
+
+    /// `ReconfigureLogging`: the console's level. `ConsoleLogLevel` when
+    /// set; else `LogLevel` when it is quieter than info; else info, so
+    /// that the debug and trace levels of Settings > General reach the
+    /// files and not the console. A `ConsoleLogLevel` that names no level
+    /// counts as blank (see [`HostConfig::unreadable_console_level`]).
+    pub fn console_level(&self) -> LogLevel {
+        if let Some(level) = LogLevel::parse(&self.console_log_level) {
+            return level;
+        }
+        LogLevel::parse(&self.log_level)
+            .unwrap_or(LogLevel::Info)
+            .max(LogLevel::Info)
+    }
+
+    /// A `ConsoleLogLevel` that is not blank and names no level: the
+    /// original fails to configure its logging over it; Unarr says so and
+    /// logs as if it were blank.
+    pub fn unreadable_console_level(&self) -> Option<&str> {
+        let value = self.console_log_level.trim();
+        (!value.is_empty() && LogLevel::parse(value).is_none()).then_some(value)
     }
 
     /// The instance name the original would report. Sonarr only honours a
@@ -217,7 +341,68 @@ mod environment_tests {
             analytics_enabled: true,
             theme: "auto".into(),
             trust_cgnat_ip_addresses: false,
+            console_log_level: String::new(),
+            console_log_format: ConsoleLogFormat::Standard,
+            legacy_user: None,
         }
+    }
+
+    /// `ReconfigureLogging`'s console level: its own when set, else the
+    /// files' when that is quieter than info, else info.
+    #[test]
+    fn the_console_has_a_level_of_its_own() {
+        let mut h = host();
+        for (log, console, expected) in [
+            ("debug", "", LogLevel::Info),
+            ("trace", "", LogLevel::Info),
+            ("info", "", LogLevel::Info),
+            ("warn", "", LogLevel::Warn),
+            ("info", "Trace", LogLevel::Trace),
+            ("trace", "warn", LogLevel::Warn),
+            ("debug", "off", LogLevel::Off),
+            ("debug", "loud", LogLevel::Info),
+        ] {
+            h.log_level = log.into();
+            h.console_log_level = console.into();
+            assert_eq!(
+                h.console_level(),
+                expected,
+                "LogLevel {log}, ConsoleLogLevel {console:?}"
+            );
+        }
+        assert_eq!(h.unreadable_console_level(), Some("loud"));
+        h.console_log_level = " ".into();
+        assert_eq!(h.unreadable_console_level(), None);
+    }
+
+    #[test]
+    fn the_console_takes_its_level_and_format_from_the_environment() {
+        let mut h = host();
+        h.apply_environment(
+            "Sonarr",
+            vars(&[
+                ("SONARR__LOG__CONSOLELEVEL", "Debug"),
+                ("Sonarr__Log__ConsoleFormat", "Clef"),
+            ]),
+        );
+        assert_eq!(h.console_log_level, "Debug");
+        assert_eq!(h.console_level(), LogLevel::Debug);
+        assert_eq!(h.console_log_format, ConsoleLogFormat::Clef);
+        // `Enum.TryParse` minds the case: the file's format stays.
+        h.apply_environment("Sonarr", vars(&[("Sonarr__Log__ConsoleFormat", "standard")]));
+        assert_eq!(h.console_log_format, ConsoleLogFormat::Clef);
+        h.apply_environment("Sonarr", vars(&[("Sonarr__Log__ConsoleFormat", "0")]));
+        assert_eq!(h.console_log_format, ConsoleLogFormat::Standard);
+        assert_eq!(
+            format!(
+                "{:?}",
+                LegacyUser {
+                    username: "a".into(),
+                    password: "secret".into()
+                }
+            ),
+            "LegacyUser { username: \"a\", password: \"(removed)\" }"
+        );
     }
 
     fn vars(pairs: &[(&str, &str)]) -> Vec<(String, String)> {

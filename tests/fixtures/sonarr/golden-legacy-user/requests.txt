@@ -1,0 +1,16 @@
+# What Sonarr does at start with a config.xml from before Sonarr v3: the
+# user and its password in <Username> and <Password>, in clear, and no
+# user in the database (setup.sh makes the fixture so). A recording of
+# its own; same format as ../golden/requests.txt.
+#
+#   GOLDEN_SETUP=tests/fixtures/sonarr/golden-legacy-user/setup.sh \
+#       GOLDEN_REQUESTS=tests/fixtures/sonarr/golden-legacy-user/requests.txt \
+#       GOLDEN_OUT=tests/fixtures/sonarr/golden-legacy-user make golden
+#
+# The recorder logs in as unarr/fixture before the first request: the
+# session requests below answer as they do only if that user exists,
+# which only config.xml named. config-after.xml is the data directory's
+# config.xml as Sonarr left it, copied by hand after the recording.
+session-initialize GET /initialize.json
+config-host GET /api/v3/config/host
+noauth-initialize GET /initialize.json

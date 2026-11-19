@@ -90,7 +90,7 @@ pub async fn host(State(state): State<AppState>) -> ApiResult<Json<serde_json::V
         "passwordConfirmation": "",
         "logLevel": h.log_level,
         "logSizeLimit": 1,
-        "consoleLogLevel": "",
+        "consoleLogLevel": h.console_log_level,
         "branch": h.branch,
         "apiKey": h.api_key,
         "sslCertPath": h.ssl_cert_path,
