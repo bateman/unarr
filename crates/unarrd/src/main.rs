@@ -652,8 +652,9 @@ fn log_filter() -> tracing_subscriber::EnvFilter {
 /// logged: Unarr's own code at that level, the libraries under it at info.
 fn settings_filter(level: &str) -> tracing_subscriber::EnvFilter {
     match level.trim().to_ascii_lowercase().as_str() {
-        "trace" => "info,unarr=trace".into(),
-        "debug" => "info,unarr=debug".into(),
+        // The request log goes under the originals' logger names.
+        "trace" => "info,unarr=trace,Http=trace,Api=trace".into(),
+        "debug" => "info,unarr=debug,Api=debug".into(),
         _ => "info".into(),
     }
 }
@@ -788,10 +789,31 @@ async fn serve(
     bind: String,
     port: u16,
 ) -> anyhow::Result<SocketAddr> {
+    // The listener comes up first and answers 503 until the command
+    // runtime has started, as the originals' `StartingUpMiddleware` does: a
+    // proxy in front shows that rather than a refused connection.
+    state.set_starting(true);
+    // A (host, port) pair resolves names and IPv6 literals such as `::`.
+    let listener = tokio::net::TcpListener::bind((bind.as_str(), port))
+        .await
+        .with_context(|| format!("binding {bind}:{port}"))?;
+    let addr = listener.local_addr()?;
+    tracing::info!(%addr, ?personality, "listening");
+    // Each connection is a task of its own, and a request that panics is
+    // answered by the router. The accept loop holds none of Unarr's code
+    // and never ends (axum retries a failed accept itself), so it is not
+    // started again: should it ever panic, the log says so.
+    let app = unarr_api::router(state.clone()).into_make_service_with_connect_info::<SocketAddr>();
+    unarr_core::panics::spawn_logged("HTTP server", async move {
+        if let Err(e) = axum::serve(listener, app).await {
+            tracing::error!(error = %e, %addr, "The HTTP server stopped");
+        }
+    });
     state
         .start_runtime()
         .await
         .with_context(|| format!("starting the command runtime for {personality:?}"))?;
+    state.set_starting(false);
     // The import read whole tables into memory; the allocator keeps the
     // pages unless told otherwise.
     unarr_core::fs::release_memory();
@@ -807,22 +829,6 @@ async fn serve(
             }
         });
     }
-    // A (host, port) pair resolves names and IPv6 literals such as `::`.
-    let listener = tokio::net::TcpListener::bind((bind.as_str(), port))
-        .await
-        .with_context(|| format!("binding {bind}:{port}"))?;
-    let addr = listener.local_addr()?;
-    tracing::info!(%addr, ?personality, "listening");
-    // Each connection is a task of its own, and a request that panics is
-    // answered by the router. The accept loop holds none of Unarr's code
-    // and never ends (axum retries a failed accept itself), so it is not
-    // started again: should it ever panic, the log says so.
-    let app = unarr_api::router(state).into_make_service_with_connect_info::<SocketAddr>();
-    unarr_core::panics::spawn_logged("HTTP server", async move {
-        if let Err(e) = axum::serve(listener, app).await {
-            tracing::error!(error = %e, %addr, "The HTTP server stopped");
-        }
-    });
     Ok(addr)
 }
 

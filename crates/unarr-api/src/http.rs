@@ -98,12 +98,6 @@ pub fn json_charset(headers: &mut HeaderMap) {
     }
 }
 
-/// [`json_charset`] for a route outside the API (`/ping`).
-pub async fn with_json_charset(mut response: Response) -> Response {
-    json_charset(response.headers_mut());
-    response
-}
-
 /// `Allow` as ASP.NET writes it: no `HEAD` that nobody declared, the
 /// methods in alphabetical order, a comma and a space between them.
 fn allow_as_the_originals(headers: &mut HeaderMap) {
@@ -184,10 +178,22 @@ async fn framework_answer(response: Response, personality: Personality, command:
 pub async fn finish(State(state): State<AppState>, request: Request, next: Next) -> Response {
     let method = request.method().clone();
     let path = asked_path(&state, &request);
+    let (as_asked, query) = path_in_app(&state, &request);
+    let accept = request
+        .headers()
+        .get(header::ACCEPT)
+        .and_then(|v| v.to_str().ok())
+        .map(str::to_owned);
     let response = next.run(request).await;
     // The path as asked: a slash after it is the same action.
     let to_command = without_trailing_slash(&path).ends_with("/command");
-    let mut response = framework_answer(response, state.personality(), to_command).await;
+    let response = framework_answer(response, state.personality(), to_command).await;
+    // Content negotiation: the API's JSON, not the feed's calendar.
+    let mut response = if is_api(&path) {
+        negotiate(response, accept.as_deref(), state.personality())
+    } else {
+        response
+    };
     let thrown = response.extensions().get::<Thrown>().is_some();
     let not_found = response
         .extensions()
@@ -205,19 +211,17 @@ pub async fn finish(State(state): State<AppState>, request: Request, next: Next)
         }
     }
     if method != Method::OPTIONS {
-        if api && path.contains("/mediacover") {
+        if cacheable(&as_asked, query.as_deref()) {
             // A cover is a static file to the originals, found or not: kept
-            // for a year, dated (theirs with the build, ours with the
-            // start), and a missing one is said in `problem+json` by
-            // Sonarr too.
+            // for a year, dated (the file's, or the build's), and a missing
+            // one is said in `problem+json` by Sonarr too. A cache breaker
+            // in the query (`?h=`) makes any answer here one to keep, the
+            // feed's too.
             headers.insert(header::CACHE_CONTROL, HeaderValue::from_static(CACHE_FOREVER));
             if !headers.contains_key(header::LAST_MODIFIED) {
-                let started = state.runtime().start_time.format("%a, %d %b %Y %H:%M:%S GMT");
-                if let Ok(value) = HeaderValue::from_str(&started.to_string()) {
-                    headers.insert(header::LAST_MODIFIED, value);
-                }
+                headers.insert(header::LAST_MODIFIED, build_date(state.personality()));
             }
-            if not_found {
+            if not_found && path.contains("/mediacover") {
                 headers.insert(
                     header::CONTENT_TYPE,
                     HeaderValue::from_static("application/problem+json; charset=utf-8"),
@@ -303,18 +307,8 @@ pub async fn cors(request: Request, next: Next) -> Response {
             let answer = response.headers_mut();
             answer.insert(header::ACCESS_CONTROL_ALLOW_ORIGIN, any_origin);
             answer.insert(header::ACCESS_CONTROL_ALLOW_METHODS, method.clone());
-            let asked: Vec<&str> = headers
-                .get_all(header::ACCESS_CONTROL_REQUEST_HEADERS)
-                .iter()
-                .filter_map(|v| v.to_str().ok())
-                .flat_map(|v| v.split(','))
-                .map(str::trim)
-                .filter(|h| !h.is_empty())
-                .collect();
-            if let Ok(value) = HeaderValue::from_str(&asked.join(",")) {
-                if !asked.is_empty() {
-                    answer.insert(header::ACCESS_CONTROL_ALLOW_HEADERS, value);
-                }
+            if let Some(value) = requested_headers(headers) {
+                answer.insert(header::ACCESS_CONTROL_ALLOW_HEADERS, value);
             }
             return response;
         }
@@ -324,6 +318,452 @@ pub async fn cors(request: Request, next: Next) -> Response {
         .headers_mut()
         .insert(header::ACCESS_CONTROL_ALLOW_ORIGIN, any_origin);
     response
+}
+
+// --- CacheHeaderMiddleware
+
+/// `BuildInfo.BuildDateTime.ToString("r")`: when the release whose UI is
+/// embedded was built, which the originals give as `Last-Modified` to
+/// whatever they let a client keep.
+pub fn build_date(personality: Personality) -> HeaderValue {
+    let date = chrono::DateTime::parse_from_rfc3339(crate::compat::emulated_build_time(personality))
+        .map(|at| {
+            at.with_timezone(&chrono::Utc)
+                .format("%a, %d %b %Y %H:%M:%S GMT")
+                .to_string()
+        })
+        .unwrap_or_default();
+    HeaderValue::from_str(&date).unwrap_or(HeaderValue::from_static("Thu, 01 Jan 1970 00:00:00 GMT"))
+}
+
+/// `StartsWithSegments`, without case.
+fn starts_with_segment(path: &str, segment: &str) -> bool {
+    let n = segment.len();
+    path.len() >= n
+        && path.is_char_boundary(n)
+        && path[..n].eq_ignore_ascii_case(segment)
+        && (path.len() == n || path.as_bytes()[n] == b'/')
+}
+
+/// `CacheableSpecification`: what a client may keep for a year. `path` is
+/// the request's without the URL base, in the case it was asked;
+/// the comparisons are the original's, some of them with case.
+/// `/ping` is not among its exceptions: Unarr leaves its lower-case
+/// spelling uncached by choice (`docs/DESIGN.md`, section 11).
+pub fn cacheable(path: &str, query: Option<&str>) -> bool {
+    // A cache breaker in the query: any path, the API's too.
+    let breaker = query.is_some_and(|q| {
+        q.split('&').any(|pair| {
+            pair.split('=')
+                .next()
+                .is_some_and(|k| k.eq_ignore_ascii_case("h"))
+        })
+    });
+    if breaker {
+        return true;
+    }
+    let lower = path.to_ascii_lowercase();
+    if starts_with_segment(path, "/api") {
+        return lower.contains("/mediacover");
+    }
+    if starts_with_segment(path, "/signalr") {
+        return false;
+    }
+    if path.ends_with("/index.js") || path.ends_with("/initialize.json") {
+        return false;
+    }
+    if lower.starts_with("/feed") {
+        return false;
+    }
+    if (lower.starts_with("/logfile") || lower.starts_with("/updatelogfile")) && lower.ends_with(".txt") {
+        return false;
+    }
+    true
+}
+
+/// Marks an answer that signed a session in or out: ASP.NET's cookie
+/// handler then forbids caching in its own spelling, and leaves the
+/// `Last-Modified` the cache headers had set.
+#[derive(Debug, Clone, Copy)]
+pub struct SignedInOrOut;
+
+/// The headers the cookie handler writes when it signs in or out.
+pub fn signed_in_or_out(response: &mut Response) {
+    let headers = response.headers_mut();
+    headers.insert(header::CACHE_CONTROL, HeaderValue::from_static(NO_CACHE_THROWN));
+    headers.insert(header::PRAGMA, HeaderValue::from_static("no-cache"));
+    headers.insert(
+        header::EXPIRES,
+        HeaderValue::from_static("Thu, 01 Jan 1970 00:00:00 GMT"),
+    );
+    response.extensions_mut().insert(SignedInOrOut);
+}
+
+/// What `CacheHeaderMiddleware` leaves on an answer once the action has
+/// written its own: it sets its headers first, so an action that set
+/// `Cache-Control` (a page, the bootstrap, a sign-in) keeps it. An answer of
+/// the exception handler starts from nothing and forbids caching.
+pub fn apply_cache_headers(mut response: Response, cacheable: bool, personality: Personality) -> Response {
+    if response.extensions().get::<Thrown>().is_some() {
+        let headers = response.headers_mut();
+        headers.remove(header::LAST_MODIFIED);
+        forbid_caching(headers, NO_CACHE_THROWN);
+        return response;
+    }
+    let signed = response.extensions().get::<SignedInOrOut>().is_some();
+    let headers = response.headers_mut();
+    if headers.contains_key(header::CACHE_CONTROL) {
+        if signed && cacheable && !headers.contains_key(header::LAST_MODIFIED) {
+            headers.insert(header::LAST_MODIFIED, build_date(personality));
+        }
+        return response;
+    }
+    if cacheable {
+        headers.insert(header::CACHE_CONTROL, HeaderValue::from_static(CACHE_FOREVER));
+        headers.insert(header::LAST_MODIFIED, build_date(personality));
+    } else {
+        headers.remove(header::LAST_MODIFIED);
+        forbid_caching(headers, NO_CACHE);
+    }
+    response
+}
+
+/// The path of the request without the URL base, as the client asked it,
+/// and its query: what the original's `HttpRequest.Path` is past
+/// `UsePathBase`.
+pub(crate) fn path_in_app(state: &AppState, request: &Request) -> (String, Option<String>) {
+    let asked = crate::asked_uri(request);
+    let base = crate::routed_url_base(state, request);
+    let path = asked.path();
+    let n = base.len();
+    let inside = !base.is_empty()
+        && path.len() >= n
+        && path.is_char_boundary(n)
+        && path[..n].eq_ignore_ascii_case(&base)
+        && (path.len() == n || path.as_bytes()[n] == b'/');
+    let path = if inside { &path[n..] } else { path };
+    (path.to_owned(), asked.query().map(str::to_owned))
+}
+
+/// `CacheHeaderMiddleware` outside the API, which [`finish`] covers: placed
+/// after the authentication, so a 401 carries none of this.
+pub async fn cache_headers(State(state): State<AppState>, request: Request, next: Next) -> Response {
+    let (path, query) = path_in_app(&state, &request);
+    // Unarr's one exception: `/ping` as health checks ask it.
+    if request.method() == Method::OPTIONS || path == "/ping" {
+        return next.run(request).await;
+    }
+    let cacheable = cacheable(&path, query.as_deref());
+    let response = next.run(request).await;
+    apply_cache_headers(response, cacheable, state.personality())
+}
+
+// --- FileExtensionContentTypeProvider
+
+/// The type ASP.NET's `FileExtensionContentTypeProvider` gives a file by its
+/// extension, for the extensions the bundled UI, the covers and the backups
+/// have; `application/octet-stream` for the rest. Radarr runs on a newer
+/// runtime, whose table says `text/javascript` for scripts.
+pub fn content_type(personality: Personality, path: &str) -> &'static str {
+    let name = path.rsplit('/').next().unwrap_or(path);
+    let Some((_, extension)) = name.rsplit_once('.') else {
+        return "application/octet-stream";
+    };
+    match extension.to_ascii_lowercase().as_str() {
+        "js" if personality == Personality::Radarr => "text/javascript",
+        "js" => "application/javascript",
+        "css" => "text/css",
+        "html" | "htm" => "text/html",
+        "json" => "application/json",
+        "xml" => "text/xml",
+        // `StaticResourceMapperBase` names the charset of plain text.
+        "txt" => "text/plain; charset=utf-8",
+        "png" => "image/png",
+        "jpg" | "jpeg" | "jpe" => "image/jpeg",
+        "gif" => "image/gif",
+        "webp" => "image/webp",
+        "svg" => "image/svg+xml",
+        "ico" => "image/x-icon",
+        "woff" => "application/font-woff",
+        "woff2" => "font/woff2",
+        "ttf" => "application/x-font-ttf",
+        "eot" => "application/vnd.ms-fontobject",
+        "zip" => "application/x-zip-compressed",
+        "webmanifest" => "application/manifest+json",
+        _ => "application/octet-stream",
+    }
+}
+
+// --- ReturnHttpNotAcceptable
+
+const JSON_UTF8: &str = "application/json; charset=utf-8";
+const TEXT_JSON_UTF8: &str = "text/json; charset=utf-8";
+
+/// MVC's content negotiation for a JSON result, with
+/// `ReturnHttpNotAcceptable`: the type it is written as for the request's
+/// `Accept`, or `None` for the 406. An `Accept` with `*/*` in it is not
+/// heeded at all (`RespectBrowserAcceptHeader` is off). Sonarr's formatter
+/// writes `application/json` alone; Radarr's, `text/json` too.
+pub fn negotiated_json(accept: Option<&str>, personality: Personality) -> Option<&'static str> {
+    let Some(accept) = accept.map(str::trim).filter(|a| !a.is_empty()) else {
+        return Some(JSON_UTF8);
+    };
+    let mut ranges: Vec<(f32, String)> = accept
+        .split(',')
+        .filter_map(|part| {
+            let mut pieces = part.split(';');
+            let media = pieces.next()?.trim().to_ascii_lowercase();
+            let q = pieces
+                .filter_map(|p| {
+                    let p = p.trim();
+                    p.strip_prefix("q=").or_else(|| p.strip_prefix("Q="))
+                })
+                .find_map(|q| q.trim().parse::<f32>().ok())
+                .unwrap_or(1.0);
+            (!media.is_empty()).then_some((q, media))
+        })
+        .collect();
+    if ranges.iter().any(|(_, media)| media == "*/*") {
+        return Some(JSON_UTF8);
+    }
+    ranges.sort_by(|a, b| b.0.partial_cmp(&a.0).unwrap_or(std::cmp::Ordering::Equal));
+    let text_json = personality == Personality::Radarr;
+    ranges.iter().find_map(|(_, media)| match media.as_str() {
+        "application/json" | "application/*" => Some(JSON_UTF8),
+        "text/json" | "text/*" if text_json => Some(TEXT_JSON_UTF8),
+        _ => None,
+    })
+}
+
+/// [`negotiated_json`] applied to what an action answered: a JSON result
+/// the client does not take becomes an empty 406, its other headers kept.
+/// The action has run: a write is done all the same. What the exception
+/// handler writes is not negotiated.
+pub fn negotiate(mut response: Response, accept: Option<&str>, personality: Personality) -> Response {
+    if response.extensions().get::<Thrown>().is_some() {
+        return response;
+    }
+    let essence = response
+        .headers()
+        .get(header::CONTENT_TYPE)
+        .and_then(|v| v.to_str().ok())
+        .map(|v| v.split(';').next().unwrap_or(v).trim().to_ascii_lowercase());
+    let json = essence.as_deref() == Some("application/json");
+    if !json && essence.as_deref() != Some("application/problem+json") {
+        return response;
+    }
+    match negotiated_json(accept, personality) {
+        Some(written_as) => {
+            if json && written_as != JSON_UTF8 {
+                response
+                    .headers_mut()
+                    .insert(header::CONTENT_TYPE, HeaderValue::from_static(written_as));
+            }
+            response
+        }
+        None => {
+            let (mut parts, _) = response.into_parts();
+            parts.status = StatusCode::NOT_ACCEPTABLE;
+            parts.headers.remove(header::CONTENT_TYPE);
+            parts.headers.remove(header::CONTENT_LENGTH);
+            // `CreatedAtAction` names the new resource as it is formatted.
+            parts.headers.remove(header::LOCATION);
+            Response::from_parts(parts, axum::body::Body::empty())
+        }
+    }
+}
+
+/// `/ping`, which `PingController` answers through MVC: its JSON charset,
+/// and the 406 for an `Accept` without JSON.
+pub async fn ping_answer(State(state): State<AppState>, request: Request, next: Next) -> Response {
+    let accept = request
+        .headers()
+        .get(header::ACCEPT)
+        .and_then(|v| v.to_str().ok())
+        .map(str::to_owned);
+    let mut response = next.run(request).await;
+    json_charset(response.headers_mut());
+    negotiate(response, accept.as_deref(), state.personality())
+}
+
+// --- LoggingMiddleware
+
+/// .NET's name for a status (`HttpStatusCode`), as the request log writes
+/// it after the number; the number alone for one it has no name for.
+fn status_name(status: StatusCode) -> String {
+    let name = match status.as_u16() {
+        100 => "Continue",
+        101 => "SwitchingProtocols",
+        200 => "OK",
+        201 => "Created",
+        202 => "Accepted",
+        204 => "NoContent",
+        206 => "PartialContent",
+        301 => "MovedPermanently",
+        302 => "Found",
+        303 => "SeeOther",
+        304 => "NotModified",
+        307 => "TemporaryRedirect",
+        308 => "PermanentRedirect",
+        400 => "BadRequest",
+        401 => "Unauthorized",
+        403 => "Forbidden",
+        404 => "NotFound",
+        405 => "MethodNotAllowed",
+        406 => "NotAcceptable",
+        408 => "RequestTimeout",
+        409 => "Conflict",
+        411 => "LengthRequired",
+        413 => "RequestEntityTooLarge",
+        415 => "UnsupportedMediaType",
+        422 => "UnprocessableEntity",
+        429 => "TooManyRequests",
+        500 => "InternalServerError",
+        501 => "NotImplemented",
+        502 => "BadGateway",
+        503 => "ServiceUnavailable",
+        _ => return status.as_u16().to_string(),
+    };
+    name.to_owned()
+}
+
+/// `LoggingMiddleware`: each request and its answer under the `Http`
+/// logger at trace, with a number that pairs them, the path and query as
+/// sent (the URL base included), the client's address and its user agent;
+/// a request under `/api` again under the `Api` logger at debug. The log
+/// files and the console cleanse the key from the query, as the originals'
+/// targets do. Placed after the host filter, as theirs is.
+pub async fn log_requests(State(state): State<AppState>, request: Request, next: Next) -> Response {
+    static SEQUENCE: std::sync::atomic::AtomicU64 = std::sync::atomic::AtomicU64::new(0);
+    let id = SEQUENCE.fetch_add(1, std::sync::atomic::Ordering::Relaxed) + 1;
+    let method = request.method().clone();
+    let uri = request.uri();
+    let path = match uri.query() {
+        Some(query) if !query.is_empty() => format!("{}?{query}", uri.path()),
+        _ => uri.path().to_owned(),
+    };
+    let api = starts_with_segment(uri.path(), "/api");
+    let remote = request
+        .extensions()
+        .get::<axum::extract::ConnectInfo<std::net::SocketAddr>>()
+        .map(|c| c.0.ip());
+    let headers = request.headers();
+    let address = crate::forwarded::client(remote, headers, &state.settings().trusted_networks)
+        .address
+        .or(remote)
+        .map(|a| a.to_string())
+        .unwrap_or_default();
+    let agent = headers
+        .get(header::USER_AGENT)
+        .map(|v| String::from_utf8_lossy(v.as_bytes()).into_owned())
+        .unwrap_or_default();
+    let origin = if agent.trim().is_empty() {
+        address
+    } else {
+        format!("{address} {agent}")
+    };
+    tracing::trace!(target: "Http", "Req: {id} [{method}] {path} (from {origin})");
+    let started = std::time::Instant::now();
+    let response = next.run(request).await;
+    let ms = started.elapsed().as_millis();
+    let status = response.status();
+    let name = status_name(status);
+    let code = status.as_u16();
+    tracing::trace!(target: "Http", "Res: {id} [{method}] {path}: {code}.{name} ({ms} ms)");
+    if api {
+        tracing::debug!(target: "Api", "[{method}] {path}: {code}.{name} ({ms} ms)");
+    }
+    response
+}
+
+// --- StartingUpMiddleware
+
+/// `StartingUpMiddleware`: until the command runtime has started, an
+/// authenticated request is answered 503, in JSON under `/api` and in
+/// plain text elsewhere. It sits after the authentication and the URL
+/// base's redirect, as in the originals.
+pub async fn starting_up(State(state): State<AppState>, request: Request, next: Next) -> Response {
+    if !state.is_starting() {
+        return next.run(request).await;
+    }
+    let (path, _) = path_in_app(&state, &request);
+    let message = format!(
+        "{} is starting up, please try again later",
+        state.personality().app_name()
+    );
+    if starts_with_segment(&path, "/api") {
+        let body = serde_json::to_string_pretty(&json!({"errorMessage": message})).unwrap_or_default();
+        let mut response = (
+            StatusCode::SERVICE_UNAVAILABLE,
+            [(header::CONTENT_TYPE, "application/json")],
+            body,
+        )
+            .into_response();
+        // `VersionMiddleware` runs before it.
+        if let Ok(value) = HeaderValue::from_str(crate::compat::emulated_version(state.personality())) {
+            response.headers_mut().insert("X-Application-Version", value);
+        }
+        return response;
+    }
+    (
+        StatusCode::SERVICE_UNAVAILABLE,
+        [(header::CONTENT_TYPE, "text/plain")],
+        message,
+    )
+        .into_response()
+}
+
+// --- CORS for static content
+
+/// The `AllowGet` policy on `/content`: any origin, `GET` and `OPTIONS`,
+/// any header. A preflight for another method is not the policy's to
+/// answer and goes on to the router, which takes no `OPTIONS` there.
+pub async fn cors_allow_get(request: Request, next: Next) -> Response {
+    let headers = request.headers();
+    if !headers.contains_key(header::ORIGIN) {
+        return next.run(request).await;
+    }
+    let any_origin = HeaderValue::from_static("*");
+    if request.method() == Method::OPTIONS {
+        if let Some(method) = headers.get(header::ACCESS_CONTROL_REQUEST_METHOD) {
+            if method == "GET" || method == "OPTIONS" {
+                let mut response = StatusCode::NO_CONTENT.into_response();
+                let answer = response.headers_mut();
+                answer.insert(header::ACCESS_CONTROL_ALLOW_ORIGIN, any_origin);
+                answer.insert(
+                    header::ACCESS_CONTROL_ALLOW_METHODS,
+                    HeaderValue::from_static("GET,OPTIONS"),
+                );
+                if let Some(value) = requested_headers(headers) {
+                    answer.insert(header::ACCESS_CONTROL_ALLOW_HEADERS, value);
+                }
+                return response;
+            }
+            return next.run(request).await;
+        }
+    }
+    let mut response = next.run(request).await;
+    response
+        .headers_mut()
+        .insert(header::ACCESS_CONTROL_ALLOW_ORIGIN, any_origin);
+    response
+}
+
+/// The headers a preflight asks for, as a policy that allows any header
+/// echoes them: one comma between them, no space.
+fn requested_headers(headers: &HeaderMap) -> Option<HeaderValue> {
+    let asked: Vec<&str> = headers
+        .get_all(header::ACCESS_CONTROL_REQUEST_HEADERS)
+        .iter()
+        .filter_map(|v| v.to_str().ok())
+        .flat_map(|v| v.split(','))
+        .map(str::trim)
+        .filter(|h| !h.is_empty())
+        .collect();
+    if asked.is_empty() {
+        return None;
+    }
+    HeaderValue::from_str(&asked.join(",")).ok()
 }
 
 /// The content types ASP.NET's response compression takes by default.
@@ -360,14 +800,60 @@ impl tower_http::compression::Predicate for Compressible {
     }
 }
 
-/// `AddResponseCompression()`: gzip for a client that accepts it, at the
-/// speed ASP.NET compresses, and `Vary: Accept-Encoding` on everything of
-/// a type that could have been compressed. The originals prefer Brotli
-/// when the client takes both; a client that takes Brotli takes gzip.
+/// `AddResponseCompression()`: Brotli or gzip, whichever the client
+/// weighs more, Brotli when it weighs both alike, at the speed ASP.NET
+/// compresses. `Vary: Accept-Encoding` goes on everything of a type that
+/// could have been compressed, to a client that named the codings it
+/// takes; [`compression_as_requested`] sees to the rest.
 pub fn compression() -> tower_http::compression::CompressionLayer<Compressible> {
     tower_http::compression::CompressionLayer::new()
-        .quality(tower_http::CompressionLevel::Fastest)
+        // `CompressionLevel.Fastest`: gzip's level 1 and Brotli's quality 1.
+        .quality(tower_http::CompressionLevel::Precise(1))
         .compress_when(Compressible)
+}
+
+/// What ASP.NET's response compression does that tower-http's does not,
+/// around the whole router: no compression at all, so no `Vary`, for a
+/// request without `Accept-Encoding` or one that reached the proxy in
+/// front over HTTPS (`EnableForHttps` is off); `Accept-Encoding` spelled as
+/// ASP.NET spells it in `Vary`.
+pub async fn compression_as_requested(
+    State(state): State<AppState>,
+    mut request: Request,
+    next: Next,
+) -> Response {
+    let named = request
+        .headers()
+        .get(header::ACCEPT_ENCODING)
+        .is_some_and(|v| !v.as_bytes().iter().all(u8::is_ascii_whitespace));
+    let remote = request
+        .extensions()
+        .get::<axum::extract::ConnectInfo<std::net::SocketAddr>>()
+        .map(|c| c.0.ip());
+    let https = crate::forwarded::walk(remote, request.headers(), &state.settings().trusted_networks)
+        .scheme
+        .is_some_and(|scheme| scheme.eq_ignore_ascii_case("https"));
+    let compressed = named && !https;
+    if !compressed {
+        request.headers_mut().remove(header::ACCEPT_ENCODING);
+    }
+    let mut response = next.run(request).await;
+    let headers = response.headers_mut();
+    let vary: Vec<HeaderValue> = headers.get_all(header::VARY).iter().cloned().collect();
+    if vary.is_empty() {
+        return response;
+    }
+    headers.remove(header::VARY);
+    for value in vary {
+        if value.as_bytes().eq_ignore_ascii_case(b"accept-encoding") {
+            if compressed {
+                headers.append(header::VARY, HeaderValue::from_static("Accept-Encoding"));
+            }
+        } else {
+            headers.append(header::VARY, value);
+        }
+    }
+    response
 }
 
 /// One slash at the end of a path is no part of it for ASP.NET's routes:
@@ -510,6 +996,96 @@ mod tests {
             acceptable_encodings("gzip;q=0, identity"),
             Some("gzip;q=0, identity".into())
         );
+    }
+
+    #[test]
+    fn what_may_be_kept_is_what_cacheable_specification_says() {
+        for (path, query) in [
+            ("/Content/styles.css", None),
+            ("/Ping", None),
+            ("/login", None),
+            ("/MediaCover/1/poster.jpg", None),
+            ("/api/v3/MediaCover/1/poster.jpg", None),
+            ("/api/v3/system/status", Some("h=1")),
+            ("/Initialize.json", None),
+            ("/Index.js", None),
+            ("/logfile/sonarr.log", None),
+            ("/feed", Some("H")),
+        ] {
+            assert!(cacheable(path, query), "{path} {query:?}");
+        }
+        for (path, query) in [
+            ("/api/v3/system/status", None),
+            ("/API", None),
+            ("/SignalR/messages", None),
+            ("/x/index.js", None),
+            ("/initialize.json", None),
+            ("/Feed/v3/calendar/Sonarr.ics", None),
+            ("/feedx", None),
+            ("/LogFile/sonarr.TXT", None),
+            ("/updatelogfile/x.txt", Some("hx=1")),
+        ] {
+            assert!(!cacheable(path, query), "{path} {query:?}");
+        }
+        assert_eq!(build_date(Personality::Sonarr), "Wed, 16 Sep 2026 16:37:42 GMT");
+        assert_eq!(build_date(Personality::Radarr), "Mon, 14 Sep 2026 15:54:37 GMT");
+    }
+
+    #[test]
+    fn types_are_aspnets_by_extension() {
+        assert_eq!(
+            content_type(Personality::Sonarr, "/index-1.js"),
+            "application/javascript"
+        );
+        assert_eq!(
+            content_type(Personality::Radarr, "/index-1.JS"),
+            "text/javascript"
+        );
+        assert_eq!(
+            content_type(Personality::Sonarr, "a.LICENSE.txt"),
+            "text/plain; charset=utf-8"
+        );
+        assert_eq!(
+            content_type(Personality::Sonarr, "backup.zip"),
+            "application/x-zip-compressed"
+        );
+        assert_eq!(
+            content_type(Personality::Sonarr, "x.woff"),
+            "application/font-woff"
+        );
+        assert_eq!(
+            content_type(Personality::Sonarr, "VERSION"),
+            "application/octet-stream"
+        );
+        assert_eq!(
+            content_type(Personality::Sonarr, "a.map"),
+            "application/octet-stream"
+        );
+        assert_eq!(
+            content_type(Personality::Sonarr, "dir.d/file"),
+            "application/octet-stream"
+        );
+    }
+
+    #[test]
+    fn json_is_written_for_what_accept_takes() {
+        let sonarr = |accept| negotiated_json(accept, Personality::Sonarr);
+        let radarr = |accept| negotiated_json(accept, Personality::Radarr);
+        assert_eq!(sonarr(None), Some(JSON_UTF8));
+        assert_eq!(sonarr(Some(" ")), Some(JSON_UTF8));
+        assert_eq!(sonarr(Some("text/html, */*;q=0.1")), Some(JSON_UTF8));
+        assert_eq!(sonarr(Some("Application/*")), Some(JSON_UTF8));
+        assert_eq!(
+            sonarr(Some("text/html;q=0.9, application/json;q=0.2")),
+            Some(JSON_UTF8)
+        );
+        assert_eq!(sonarr(Some("text/json")), None);
+        assert_eq!(sonarr(Some("application/problem+json")), None);
+        assert_eq!(radarr(Some("text/*")), Some(TEXT_JSON_UTF8));
+        assert_eq!(radarr(Some("text/json;q=0.5, application/json")), Some(JSON_UTF8));
+        assert_eq!(radarr(Some("text/html")), None);
+        assert_eq!(status_name(StatusCode::FOUND), "Found");
+        assert_eq!(status_name(StatusCode::IM_A_TEAPOT), "418");
     }
 
     #[test]

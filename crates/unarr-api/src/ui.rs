@@ -52,63 +52,110 @@ pub fn available(personality: Personality) -> bool {
     asset(personality, "index.html").is_some()
 }
 
+/// A file of the bundle as `StaticResourceMapperBase` serves it: its type
+/// by its extension, as ASP.NET's table has it. The cache headers are the
+/// cache layer's (`http::cache_headers`).
 fn serve_asset(personality: Personality, path: &str) -> Option<Response> {
     let file = asset(personality, path)?;
-    let mime = file.metadata.mimetype();
-    let mut headers = HeaderMap::new();
-    headers.insert(
-        header::CONTENT_TYPE,
-        HeaderValue::from_str(mime).unwrap_or(HeaderValue::from_static("application/octet-stream")),
-    );
-    // Hashed bundle names never change content; everything else may.
-    let cache = if path.contains('-') && (path.ends_with(".js") || path.ends_with(".css")) {
-        "max-age=31536000, public"
-    } else {
-        "no-cache"
-    };
-    headers.insert(header::CACHE_CONTROL, HeaderValue::from_static(cache));
-    Some((headers, Body::from(file.data.into_owned())).into_response())
+    let content_type = crate::http::content_type(personality, path);
+    // The controller forbids caching any page it serves (`oauth.html`).
+    if content_type == "text/html" {
+        return Some(html(String::from_utf8_lossy(&file.data).into_owned()));
+    }
+    Some(
+        (
+            [(header::CONTENT_TYPE, content_type)],
+            Body::from(file.data.into_owned()),
+        )
+            .into_response(),
+    )
 }
 
-/// `index.html` with the URL base applied to asset links and to the
-/// `window.Sonarr` bootstrap, as the originals' `IndexHtmlMapper` does.
+/// `NotFound()` of the static resource controller, which `[ApiController]`
+/// turns into problem details, `problem+json` in both originals.
+pub fn static_not_found(personality: Personality) -> Response {
+    let document = match personality {
+        Personality::Radarr => crate::error::NOT_FOUND_TYPE_RFC9110,
+        Personality::Sonarr | Personality::Lidarr => crate::error::NOT_FOUND_TYPE_RFC7231,
+    };
+    crate::error::not_found_problem(document, "application/problem+json; charset=utf-8")
+}
+
+/// `index.html` as the originals' `IndexHtmlMapper` writes it: cache
+/// breakers and the URL base on the asset links, and the URL base in the
+/// `window.Sonarr` bootstrap.
 fn index_html(personality: Personality, url_base: &str) -> Option<String> {
     let file = asset(personality, "index.html")?;
     let text = String::from_utf8_lossy(&file.data).into_owned();
-    Some(rewrite_html(&text, url_base).replace("__URL_BASE__", url_base))
+    Some(rewrite_html(personality, &text, url_base).replace("__URL_BASE__", url_base))
 }
 
 fn login_html(personality: Personality, url_base: &str, theme: &str) -> Option<String> {
     let file = asset(personality, "login.html")?;
     let text = String::from_utf8_lossy(&file.data).into_owned();
     Some(
-        rewrite_html(&text, url_base)
-            .replace("_THEME_", theme)
-            .replace("__URL_BASE__", url_base),
+        rewrite_html(personality, &text, url_base)
+            .replace("__URL_BASE__", url_base)
+            .replace("_THEME_", theme),
     )
 }
 
-/// Prefix root-relative `href`/`src` attributes with the URL base.
-fn rewrite_html(html: &str, url_base: &str) -> String {
-    if url_base.is_empty() {
-        return html.to_string();
+/// `HtmlMapperBase`'s pattern: an `href` or `src` whose value ends in one
+/// of these extensions, and the `data-no-hash` attribute after it.
+fn asset_link() -> &'static fancy_regex::Regex {
+    static LINK: std::sync::OnceLock<fancy_regex::Regex> = std::sync::OnceLock::new();
+    LINK.get_or_init(|| {
+        fancy_regex::Regex::new(
+            r#"(?i)(?:(?<attribute>href|src)=")(?<path>.*?(?<extension>css|js|png|ico|ics|svg|json))(?:")(?:\s(?<nohash>data-no-hash))?"#,
+        )
+        .expect("the asset link pattern compiles")
+    })
+}
+
+/// `HtmlMapperBase.GetHtmlText`: each asset link gets the URL base in
+/// front and, unless it says `data-no-hash` (which goes), a cache breaker
+/// after it.
+fn rewrite_html(personality: Personality, html: &str, url_base: &str) -> String {
+    let mut out = String::with_capacity(html.len() + 512);
+    let mut last = 0;
+    for found in asset_link().captures_iter(html) {
+        let Ok(found) = found else { break };
+        let Some(whole) = found.get(0) else { continue };
+        let attribute = found.name("attribute").map_or("", |m| m.as_str());
+        let path = found.name("path").map_or("", |m| m.as_str());
+        let url = if found.name("nohash").is_some() {
+            path.to_owned()
+        } else {
+            with_cache_breaker(personality, path)
+        };
+        out.push_str(&html[last..whole.start()]);
+        out.push_str(&format!("{attribute}=\"{url_base}{url}\""));
+        last = whole.end();
     }
-    let mut out = String::with_capacity(html.len() + 256);
-    let mut rest = html;
-    while let Some(pos) = rest.find("=\"/") {
-        let attr_start = rest[..pos]
-            .rfind(|c: char| c.is_whitespace())
-            .map(|i| i + 1)
-            .unwrap_or(0);
-        let attr = &rest[attr_start..pos];
-        out.push_str(&rest[..pos + 2]);
-        if attr == "href" || attr == "src" {
-            out.push_str(url_base);
-        }
-        rest = &rest[pos + 2..];
-    }
-    out.push_str(rest);
+    out.push_str(&html[last..]);
     out
+}
+
+/// `CacheBreakerProvider.AddCacheBreakerToPath`: `?h=` and the MD5 of the
+/// file, in base64 without its padding. Not for a calendar feed, nor for a
+/// path that ends in `main`; a link to no file of the bundle is left as
+/// it is.
+fn with_cache_breaker(personality: Personality, path: &str) -> String {
+    if path.ends_with(".ics") || path.ends_with("main") {
+        return path.to_owned();
+    }
+    // The file the mapper of that path would serve.
+    let file = match path {
+        "/favicon.ico" => "Content/Images/Icons/favicon.ico",
+        "/robots.txt" => "Content/robots.txt",
+        other => other.trim_start_matches('/'),
+    };
+    let Some(file) = asset(personality, file) else {
+        return path.to_owned();
+    };
+    use md5::Digest;
+    let hash = base64::engine::general_purpose::STANDARD.encode(md5::Md5::digest(&file.data));
+    format!("{path}?h={}", hash.trim_end_matches('='))
 }
 
 /// A page, as `StaticResourceController` sends it: no charset on the
@@ -137,37 +184,80 @@ fn no_ui_page() -> Response {
 
 // --- pages
 
-/// Everything under `/` that is not an API, content, cover or SignalR path:
-/// the single-page application, or one of the bundle files at the root.
-pub async fn spa(State(state): State<AppState>, uri: Uri) -> Response {
-    let path = uri.path().trim_start_matches('/');
-    if !path.is_empty() && path.contains('.') && !path.contains("..") {
-        if let Some(r) = serve_asset(state.personality(), path) {
-            return r;
-        }
-        return StatusCode::NOT_FOUND.into_response();
+/// `StaticResourceController`'s pattern of what never reaches a file: a
+/// `..` next to a slash, a backslash or their escapes.
+fn invalid_path(path: &str) -> bool {
+    let lower = path.to_ascii_lowercase();
+    ["/..", "\\..", "%2f..", "%5c..", "../", "..\\", "..%2f", "..%5c"]
+        .iter()
+        .any(|pattern| lower.contains(pattern))
+}
+
+/// `StaticResourceMapper.CanHandle`: what is served from the bundle as it
+/// is. `path` is lower-cased.
+fn bundle_file(path: &str) -> bool {
+    if path.starts_with("/content/manifest") || path.starts_with("/content/browserconfig") {
+        return false;
     }
-    match index_html(state.personality(), &state.settings().url_base) {
+    path.starts_with("/content")
+        || path.ends_with(".js")
+        || path.ends_with(".map")
+        || path.ends_with(".css")
+        || (path.ends_with(".ico") && path != "/favicon.ico")
+        || path.ends_with(".swf")
+        || path.ends_with("oauth.html")
+}
+
+/// Everything under `/` that no route takes, as the originals' catch-all
+/// action hands it to the one mapper that says it can: the login page for
+/// a path that starts with `/login` (`/login.html`), `robots.txt` (from
+/// `Content/`), a file of the bundle, or the single-page application for a
+/// path with no dot. What none of them takes, or a file that is not there,
+/// is the controller's 404 (`/index.html`, a licence file).
+pub async fn spa(State(state): State<AppState>, uri: Uri) -> Response {
+    let personality = state.personality();
+    let path = uri.path();
+    if invalid_path(path) {
+        return static_not_found(personality);
+    }
+    if path.starts_with("/login") {
+        return login_page(State(state)).await;
+    }
+    if path == "/robots.txt" {
+        return serve_asset(personality, "Content/robots.txt")
+            .unwrap_or_else(|| static_not_found(personality));
+    }
+    let lower = path.to_ascii_lowercase();
+    if bundle_file(&lower) {
+        return serve_asset(personality, path.trim_start_matches('/'))
+            .unwrap_or_else(|| static_not_found(personality));
+    }
+    if lower.contains('.') || lower.starts_with("/content") || lower.starts_with("/mediacover") {
+        return static_not_found(personality);
+    }
+    match index_html(personality, state.url_base()) {
         Some(page) => html(page),
         None => no_ui_page(),
     }
 }
 
+/// `/content/{**path}`: the manifest and the tile description filled in,
+/// or the file of the bundle under `Content/`.
 pub async fn content(State(state): State<AppState>, uri: Uri) -> Response {
+    let personality = state.personality();
     let path = uri.path().trim_start_matches('/');
-    // Case-insensitive prefix, as the originals route it.
+    // The route is matched in any case; what follows it keeps its own.
     let rel = path.get("content/".len()..).unwrap_or("");
-    if rel.contains("..") {
-        return StatusCode::NOT_FOUND.into_response();
+    if invalid_path(&format!("/{rel}")) {
+        return static_not_found(personality);
     }
     if let Some(name) = FILLED_IN.iter().find(|name| rel.eq_ignore_ascii_case(name)) {
         let s = state.settings();
-        if let Some(r) = filled_in_asset(state.personality(), name, &s.url_base, &s.instance_name) {
+        if let Some(r) = filled_in_asset(personality, name, state.url_base(), &s.instance_name) {
             return r;
         }
     }
-    serve_asset(state.personality(), &format!("Content/{rel}"))
-        .unwrap_or_else(|| StatusCode::NOT_FOUND.into_response())
+    serve_asset(personality, &format!("Content/{rel}")).unwrap_or_else(|| static_not_found(personality))
 }
 
 /// The files under `/Content` the originals fill in as they serve them
@@ -194,14 +284,9 @@ fn filled_in_asset(
     let text = String::from_utf8_lossy(&file.data)
         .replace("__URL_BASE__", url_base)
         .replace("__INSTANCE_NAME__", &instance_name);
-    let mime = HeaderValue::from_str(file.metadata.mimetype())
-        .unwrap_or(HeaderValue::from_static("application/octet-stream"));
     Some(
         (
-            [
-                (header::CONTENT_TYPE, mime),
-                (header::CACHE_CONTROL, HeaderValue::from_static("no-cache")),
-            ],
+            [(header::CONTENT_TYPE, crate::http::content_type(personality, name))],
             text,
         )
             .into_response(),
@@ -212,7 +297,71 @@ pub async fn favicon(State(state): State<AppState>) -> Response {
     let personality = state.personality();
     serve_asset(personality, "Content/Images/Icons/favicon.ico")
         .or_else(|| serve_asset(personality, "Content/Images/Icons/favicon-32x32.png"))
-        .unwrap_or_else(|| StatusCode::NOT_FOUND.into_response())
+        .unwrap_or_else(|| static_not_found(personality))
+}
+
+/// `/MediaCover/{**path}`, which `MediaCoverMapper` serves from the cover
+/// folder: a path in any case finds the mapper, but the folder is named
+/// in its own case; a resized cover that is not there, or is empty, is
+/// the full one (`full_cover_when_resized_is_missing`, applied before);
+/// its type by its extension; no range, and no validator but the cache
+/// layer's.
+pub async fn media_cover(State(state): State<AppState>, request: Request) -> Response {
+    let personality = state.personality();
+    let (asked, _) = crate::http::path_in_app(&state, &request);
+    if !asked.starts_with("/MediaCover/") {
+        return static_not_found(personality);
+    }
+    let relative = request.uri().path().trim_start_matches('/');
+    let Some(relative) = percent_decoded(relative) else {
+        return static_not_found(personality);
+    };
+    let unsafe_part =
+        relative.split('/').any(|part| part.is_empty() || part == "..") || relative.contains('\\');
+    if unsafe_part {
+        return static_not_found(personality);
+    }
+    let file = state.runtime().media_cover_dir.join(&relative);
+    match tokio::fs::read(&file).await {
+        Ok(bytes) => (
+            [(
+                header::CONTENT_TYPE,
+                crate::http::content_type(personality, &relative),
+            )],
+            bytes,
+        )
+            .into_response(),
+        Err(_) => static_not_found(personality),
+    }
+}
+
+/// A path with its `%XX` escapes decoded; `None` when they do not make
+/// UTF-8 or a byte is nul.
+fn percent_decoded(path: &str) -> Option<String> {
+    let bytes = path.as_bytes();
+    let mut out = Vec::with_capacity(bytes.len());
+    let mut i = 0;
+    while i < bytes.len() {
+        let escaped = (bytes[i] == b'%')
+            .then(|| bytes.get(i + 1..i + 3))
+            .flatten()
+            .and_then(|hex| std::str::from_utf8(hex).ok())
+            .and_then(|hex| u8::from_str_radix(hex, 16).ok());
+        match escaped {
+            Some(byte) => {
+                out.push(byte);
+                i += 3;
+            }
+            None => {
+                out.push(bytes[i]);
+                i += 1;
+            }
+        }
+    }
+    if out.contains(&0) {
+        return None;
+    }
+    String::from_utf8(out).ok()
 }
 
 // --- login
@@ -229,7 +378,7 @@ pub struct LoginForm {
 
 pub async fn login_page(State(state): State<AppState>) -> Response {
     let s = state.settings();
-    match login_html(state.personality(), &s.url_base, &s.host.theme) {
+    match login_html(state.personality(), state.url_base(), &s.host.theme) {
         Some(page) => html(page),
         None => no_ui_page(),
     }
@@ -247,6 +396,14 @@ pub async fn login(
         .get("returnUrl")
         .map(str::to_string)
         .unwrap_or_default();
+    // `AuthenticationService.Login` finds no user when nothing is to be
+    // signed into, and logs nothing.
+    if state.settings().host.authentication_method == AuthenticationMethod::None {
+        return found(&format!(
+            "{url_base}/login?returnUrl={}&loginFailed=true",
+            percent_encode(&return_url)
+        ));
+    }
     let remote = remote.map(|c| c.0 .0.ip());
     let username = form.username.to_lowercase();
     let password = form.password.clone();
@@ -297,6 +454,7 @@ pub async fn login(
     response
         .headers_mut()
         .insert(header::SET_COOKIE, HeaderValue::from_str(&cookie).unwrap());
+    crate::http::signed_in_or_out(&mut response);
     response
 }
 
@@ -305,14 +463,17 @@ pub async fn logout(
     remote: Option<axum::Extension<ConnectInfo<std::net::SocketAddr>>>,
     headers: HeaderMap,
 ) -> Response {
-    // The originals name nobody here, signed in or not.
-    log_auth(
-        &state,
-        remote.map(|c| c.0 .0.ip()),
-        &headers,
-        AuthOutcome::Logout,
-        "",
-    );
+    // The originals name nobody here, signed in or not, and log nothing
+    // when nothing is signed into.
+    if state.settings().host.authentication_method != AuthenticationMethod::None {
+        log_auth(
+            &state,
+            remote.map(|c| c.0 .0.ip()),
+            &headers,
+            AuthOutcome::Logout,
+            "",
+        );
+    }
     let name = cookie_name(&state);
     let expired = format!(
         "{name}=; Path={}; Max-Age=0; HttpOnly; SameSite=Lax",
@@ -322,6 +483,7 @@ pub async fn logout(
     response
         .headers_mut()
         .insert(header::SET_COOKIE, HeaderValue::from_str(&expired).unwrap());
+    crate::http::signed_in_or_out(&mut response);
     response
 }
 
@@ -385,13 +547,13 @@ struct Session {
     expires: i64,
 }
 
-/// The cookie's path: the URL base, or the root.
+/// The cookie's path: the URL base the routes are under, or the root.
 fn cookie_path(state: &AppState) -> String {
-    let base = state.settings().url_base.clone();
+    let base = state.url_base();
     if base.is_empty() {
         "/".to_string()
     } else {
-        base
+        base.to_owned()
     }
 }
 
@@ -653,12 +815,17 @@ pub async fn require_ui_auth(State(state): State<AppState>, request: Request, ne
             // outside the base, which sends it in).
             let asked = crate::asked_uri(&request);
             let return_url = asked.path_and_query().map(|p| p.to_string()).unwrap_or_default();
-            found(&format!(
+            let mut challenge = found(&format!(
                 "{}{}/login?returnUrl={}",
                 origin(&state, remote, headers).unwrap_or_default(),
                 crate::url_base_as_asked(&state, &request),
                 escape_data(&return_url)
-            ))
+            ));
+            // An XHR is told 401, the login page's address still given.
+            if is_ajax_request(&asked, headers) {
+                *challenge.status_mut() = StatusCode::UNAUTHORIZED;
+            }
+            challenge
         }
     }
 }
@@ -709,6 +876,14 @@ pub fn full_cover_when_resized_is_missing<B>(
     request
 }
 
+/// `IsAjaxRequest` of ASP.NET's cookie authentication: `X-Requested-With`
+/// says `XMLHttpRequest`, in this case, as a header or in the query.
+fn is_ajax_request(uri: &Uri, headers: &HeaderMap) -> bool {
+    const AJAX: &str = "XMLHttpRequest";
+    headers.get("X-Requested-With").is_some_and(|v| v == AJAX)
+        || crate::query::Params::from_uri(uri).get("X-Requested-With") == Some(AJAX)
+}
+
 /// A 302 to `location`, as ASP.NET's cookie authentication answers.
 fn found(location: &str) -> Response {
     (
@@ -757,13 +932,70 @@ mod tests {
     }
 
     #[test]
-    fn rewrites_root_links_with_the_url_base() {
-        let html = r#"<link href="/Content/styles.css"><script src="/index-1.js"></script><a href="https://x/y">x</a>"#;
-        assert_eq!(rewrite_html(html, ""), html);
-        let out = rewrite_html(html, "/sonarr");
-        assert!(out.contains(r#"href="/sonarr/Content/styles.css""#));
-        assert!(out.contains(r#"src="/sonarr/index-1.js""#));
-        assert!(out.contains(r#"href="https://x/y""#));
+    fn asset_links_get_the_url_base_and_a_cache_breaker() {
+        // A file the bundle does not have keeps no breaker; `data-no-hash`
+        // keeps none and goes; a link that ends in no listed extension is
+        // left alone.
+        let html = r#"<link href="/Content/missing.css"><script src="/index-1.js" data-no-hash></script><a href="https://x/y">x</a>"#;
+        let out = rewrite_html(Personality::Lidarr, html, "");
+        assert_eq!(
+            out,
+            r#"<link href="/Content/missing.css"><script src="/index-1.js"></script><a href="https://x/y">x</a>"#
+        );
+        let out = rewrite_html(Personality::Lidarr, html, "/sonarr");
+        assert!(out.contains(r#"href="/sonarr/Content/missing.css""#), "{out}");
+        assert!(out.contains(r#"src="/sonarr/index-1.js">"#), "{out}");
+        assert!(out.contains(r#"href="https://x/y""#), "{out}");
+        assert_eq!(
+            with_cache_breaker(Personality::Sonarr, "/feed/x.ics"),
+            "/feed/x.ics"
+        );
+    }
+
+    #[test]
+    fn only_the_mappers_paths_reach_a_file() {
+        for path in [
+            "/content/styles.css",
+            "/index-1.js",
+            "/x.map",
+            "/oauth.html",
+            "/a.ico",
+            "/content",
+        ] {
+            assert!(bundle_file(path), "{path}");
+        }
+        for path in [
+            "/favicon.ico",
+            "/index.html",
+            "/a.js.license.txt",
+            "/content/manifest.json",
+            "/content/browserconfig.xml",
+            "/robots.txt",
+        ] {
+            assert!(!bundle_file(path), "{path}");
+        }
+        assert!(invalid_path("/Content/../x"));
+        assert!(invalid_path("/Content/..%2Fx"));
+        assert!(!invalid_path("/Content/a..b"));
+        assert_eq!(
+            percent_decoded("1/poster%20x.jpg").as_deref(),
+            Some("1/poster x.jpg")
+        );
+        assert_eq!(percent_decoded("1/%00.jpg"), None);
+        assert_eq!(percent_decoded("1/%zz%4").as_deref(), Some("1/%zz%4"));
+    }
+
+    #[test]
+    fn an_xhr_is_one_by_its_header_or_its_query_in_this_case() {
+        let uri: Uri = "/series".parse().unwrap();
+        let mut headers = HeaderMap::new();
+        assert!(!is_ajax_request(&uri, &headers));
+        headers.insert("X-Requested-With", HeaderValue::from_static("xmlhttprequest"));
+        assert!(!is_ajax_request(&uri, &headers));
+        headers.insert("X-Requested-With", HeaderValue::from_static("XMLHttpRequest"));
+        assert!(is_ajax_request(&uri, &headers));
+        let uri: Uri = "/?x-requested-with=XMLHttpRequest".parse().unwrap();
+        assert!(is_ajax_request(&uri, &HeaderMap::new()));
     }
 
     #[test]
