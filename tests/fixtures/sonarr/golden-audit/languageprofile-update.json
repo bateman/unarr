@@ -1,0 +1,27 @@
+{
+  "body": {
+    "cutoff": {
+      "id": 2,
+      "name": "French"
+    },
+    "id": 1,
+    "languages": [
+      {
+        "allowed": true,
+        "language": {
+          "id": 2,
+          "name": "French"
+        }
+      }
+    ],
+    "name": "Mine",
+    "upgradeAllowed": false
+  },
+  "recordedAt": "2026-11-19T21:33:09Z",
+  "request": {
+    "body": "bodies/languageprofile.json",
+    "method": "PUT",
+    "path": "/api/v3/languageprofile/1"
+  },
+  "status": 202
+}

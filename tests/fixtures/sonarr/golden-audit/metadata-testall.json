@@ -1,0 +1,15 @@
+{
+  "body": [
+    {
+      "id": 6,
+      "isValid": true,
+      "validationFailures": []
+    }
+  ],
+  "recordedAt": "2026-11-19T21:33:09Z",
+  "request": {
+    "method": "POST",
+    "path": "/api/v3/metadata/testall"
+  },
+  "status": 200
+}

@@ -1,0 +1,77 @@
+# The audit's open routes (`docs/audit/7-triage.md`, "Routes and UI
+# calls"): what Sonarr declares and Unarr did not, or only in part. A
+# recording of its own, so the long list next door is not recorded again
+# for them; same format as ../golden/requests.txt.
+#
+#   GOLDEN_REQUESTS=tests/fixtures/sonarr/golden-audit/requests.txt \
+#       GOLDEN_OUT=tests/fixtures/sonarr/golden-audit make golden
+
+# An episode by id under the calendar and the wanted lists: the episode's
+# own resource, whatever list it is on. 1 has no file, 643 has one.
+calendar-1 GET /api/v3/calendar/1
+calendar-643 GET /api/v3/calendar/643
+calendar-missing GET /api/v3/calendar/999999
+wanted-missing-1 GET /api/v3/wanted/missing/1
+wanted-missing-643 GET /api/v3/wanted/missing/643
+wanted-missing-missing GET /api/v3/wanted/missing/999999
+wanted-cutoff-1 GET /api/v3/wanted/cutoff/1
+wanted-cutoff-643 GET /api/v3/wanted/cutoff/643
+wanted-cutoff-missing GET /api/v3/wanted/cutoff/999999
+
+# The settings pages by id: the one resource, whatever the id; an id that
+# is not a number matches no route.
+config-host-by-id GET /api/v3/config/host/1
+config-ui-by-id GET /api/v3/config/ui/1
+config-downloadclient-by-id GET /api/v3/config/downloadclient/1
+config-downloadclient-other-id GET /api/v3/config/downloadclient/99
+config-importlist-by-id GET /api/v3/config/importlist/1
+config-indexer-by-id GET /api/v3/config/indexer/1
+config-mediamanagement-by-id GET /api/v3/config/mediamanagement/1
+config-naming-by-id GET /api/v3/config/naming/1
+config-ui-not-a-number GET /api/v3/config/ui/abc
+
+# The dictionary by id: the same dictionary.
+localization-1 GET /api/v3/localization/1
+localization-999 GET /api/v3/localization/999
+
+# The size limits of the quality definitions, not a definition.
+qualitydefinition-limits GET /api/v3/qualitydefinition/limits
+
+# Language profiles are gone since v4: one deprecated profile for any id,
+# writes answered with what was sent and nothing stored.
+languageprofile-999 GET /api/v3/languageprofile/999
+languageprofile-schema GET /api/v3/languageprofile/schema
+languageprofile-create POST /api/v3/languageprofile bodies/languageprofile.json
+languageprofile-create-empty POST /api/v3/languageprofile bodies/empty-object.json
+languageprofile-update PUT /api/v3/languageprofile/1 bodies/languageprofile.json
+languageprofile-update-other-id PUT /api/v3/languageprofile/7 bodies/languageprofile-with-id.json
+languageprofile-update-body-id PUT /api/v3/languageprofile bodies/languageprofile-with-id.json
+languageprofile-update-no-id PUT /api/v3/languageprofile bodies/languageprofile.json
+languageprofile-delete DELETE /api/v3/languageprofile/1
+languageprofile-delete-other-id DELETE /api/v3/languageprofile/9
+languageprofile-after-writes GET /api/v3/languageprofile
+
+# An import list exclusion by id.
+importlistexclusion-get-missing GET /api/v3/importlistexclusion/1
+importlistexclusion-create POST /api/v3/importlistexclusion bodies/importlistexclusion-create.json
+importlistexclusion-get GET /api/v3/importlistexclusion/{id:importlistexclusion-create}
+
+# Settings > Metadata: a consumer added, tested, deleted. The bulk routes
+# are declared by the base controller and hidden by Sonarr's: a 404.
+metadata-1 GET /api/v3/metadata/1
+metadata-create POST /api/v3/metadata bodies/metadata-create.json
+metadata-created GET /api/v3/metadata/{id:metadata-create}
+metadata-create-duplicate POST /api/v3/metadata bodies/metadata-create.json
+metadata-create-noname POST /api/v3/metadata bodies/metadata-create-noname.json
+metadata-create-unknown POST /api/v3/metadata bodies/metadata-create-unknown.json
+metadata-test POST /api/v3/metadata/test bodies/metadata-test.json
+metadata-test-duplicate POST /api/v3/metadata/test bodies/metadata-create.json
+metadata-test-noname POST /api/v3/metadata/test bodies/metadata-create-noname.json
+metadata-testall POST /api/v3/metadata/testall
+metadata-action POST /api/v3/metadata/action/nothing bodies/metadata-create.json
+metadata-bulk-update PUT /api/v3/metadata/bulk bodies/metadata-bulk.json
+metadata-bulk-delete DELETE /api/v3/metadata/bulk bodies/metadata-bulk.json
+metadata-delete DELETE /api/v3/metadata/{id:metadata-create}
+metadata-delete-missing DELETE /api/v3/metadata/999999
+metadata-after-delete GET /api/v3/metadata
+metadata-testall-after-delete POST /api/v3/metadata/testall

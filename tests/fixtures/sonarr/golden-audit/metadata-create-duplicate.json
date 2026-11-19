@@ -1,0 +1,23 @@
+{
+  "body": [
+    {
+      "attemptedValue": "Kodi Extra",
+      "errorCode": "PredicateValidator",
+      "errorMessage": "Should be unique",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Name",
+        "propertyValue": "Kodi Extra"
+      },
+      "propertyName": "Name",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-19T21:33:09Z",
+  "request": {
+    "body": "bodies/metadata-create.json",
+    "method": "POST",
+    "path": "/api/v3/metadata"
+  },
+  "status": 400
+}

@@ -257,6 +257,19 @@ pub async fn import_list_exclusions(State(state): State<AppState>) -> ApiResult<
     ))
 }
 
+/// `GET /importlistexclusion/{id}`.
+pub async fn import_list_exclusion(
+    State(state): State<AppState>,
+    Path(id): Path<i64>,
+) -> ApiResult<Json<Value>> {
+    let all = state
+        .db()
+        .call(|c| store::providers::list_import_list_exclusions(c))
+        .await?;
+    let e = found(all.into_iter().find(|e| e.id == id))?;
+    Ok(Json(json!({"id": e.id, "tvdbId": e.tvdb_id, "title": e.title})))
+}
+
 /// `GET /importlistexclusion/paged`: what the settings page lists.
 pub async fn import_list_exclusions_paged(
     State(state): State<AppState>,
