@@ -11,7 +11,7 @@ use super::aggregate;
 use super::approve;
 use super::decide::{self, Environment, Probes};
 use super::downloaded;
-use super::events::{self, DownloadCompleted, Events, ImportEvent};
+use super::events::{self, DownloadCompleted, Events, ImportEvent, UntrackedDownloadCompleted};
 use super::local::{
     ImportDecision, ImportMode, ImportRejection, ImportResultType, LocalEpisode, RejectionReason,
 };
@@ -676,6 +676,8 @@ pub fn execute(
     let mut imported: Vec<super::local::ImportResult> = Vec::new();
     // `(tracked download, result)` for the files of a tracked download.
     let mut tracked_results: Vec<(TrackedDownload, super::local::ImportResult)> = Vec::new();
+    // Where in `imported` each of those results is.
+    let mut tracked_at: Vec<usize> = Vec::new();
     for (i, file) in files.iter().enumerate() {
         progress(format!("Processing file {} of {}", i + 1, files.len()));
         let (series_id, ids) = (file.series_id, file.episode_ids.clone());
@@ -742,6 +744,7 @@ pub fn execute(
                 let result = approve::import(db, env, vec![decision], true, Some(&t.item), mode, now);
                 outcome.events.extend(result.events);
                 if let Some(r) = result.results.into_iter().next() {
+                    tracked_at.push(imported.len());
                     imported.push(r.clone());
                     tracked_results.push((t, r));
                 }
@@ -750,6 +753,9 @@ pub fn execute(
     }
     if !imported.is_empty() {
         progress(format!("Manually imported {} files", imported.len()));
+    }
+    for e in untracked_downloads_completed(&imported, &tracked_at) {
+        outcome.events.push(e);
     }
     // `importedTrackedDownload.GroupBy(DownloadId)`: a download whose
     // episodes are all in is complete, its folder removed when only
@@ -833,7 +839,160 @@ pub fn execute(
     Ok(outcome)
 }
 
+/// `UntrackedDownloadCompletedEvent`, one per series and season of the
+/// files imported. The original counts as untracked a result for which
+/// no tracked download's result differs from it: with no tracked download
+/// that is every file imported, with one it is that download's own file,
+/// with more it is none. Kept as it is: it decides which Import Complete
+/// notifications go out.
+fn untracked_downloads_completed(
+    imported: &[super::local::ImportResult],
+    tracked_at: &[usize],
+) -> Vec<ImportEvent> {
+    let untracked = imported
+        .iter()
+        .enumerate()
+        .filter(|(i, r)| r.result() == ImportResultType::Imported && tracked_at.iter().all(|t| t == i))
+        .filter_map(|(_, r)| Some((r.decision.local_episode.as_ref()?, r.episode_file.as_ref()?)));
+    // `GroupBy(SeriesId, SeasonNumber)`, in the order the groups appear.
+    let mut groups: Vec<((i64, i64), Vec<(&LocalEpisode, &EpisodeFile)>)> = Vec::new();
+    for (local, file) in untracked {
+        let key = (file.series_id, file.season_number);
+        match groups.iter_mut().find(|(k, _)| *k == key) {
+            Some((_, members)) => members.push((local, file)),
+            None => groups.push((key, vec![(local, file)])),
+        }
+    }
+    groups
+        .into_iter()
+        .filter_map(|(_, members)| {
+            let (first, _) = members.first()?;
+            let series = first.series.clone()?;
+            let paths: Vec<String> = members.iter().map(|(l, _)| l.path.clone()).collect();
+            Some(ImportEvent::UntrackedDownloadCompleted(Box::new(
+                UntrackedDownloadCompleted {
+                    series,
+                    episodes: members.iter().flat_map(|(l, _)| l.episodes.clone()).collect(),
+                    files: members.iter().map(|(_, f)| (*f).clone()).collect(),
+                    parsed: first
+                        .folder_episode_info
+                        .clone()
+                        .or_else(|| first.file_episode_info.clone()),
+                    source_path: super::longest_common_path(&paths),
+                },
+            )))
+        })
+        .collect()
+}
+
 /// A connection-level helper for the API: the series a manual import names.
 pub fn series_exists(conn: &Connection, id: i64) -> anyhow::Result<bool> {
     Ok(store::series::get(conn, id)?.is_some())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use crate::mediafiles::local::ImportResult;
+
+    fn file(id: i64, season: i64) -> EpisodeFile {
+        EpisodeFile {
+            id,
+            series_id: 1,
+            season_number: season,
+            relative_path: format!("Season {season:02}/{id}.mkv"),
+            original_file_path: None,
+            size: 1,
+            date_added: chrono::Utc::now(),
+            scene_name: None,
+            release_group: None,
+            release_hash: None,
+            quality: QualityModel::default(),
+            languages: Vec::new(),
+            media_info: None,
+            indexer_flags: 0,
+            release_type: ReleaseType::default(),
+        }
+    }
+
+    /// An imported file of season `season`, or one that was not imported.
+    fn result(id: i64, season: i64, folder: Option<&str>, imported: bool) -> ImportResult {
+        let local = LocalEpisode {
+            series: Some(store::series::tests::sample(1)),
+            path: format!("/downloads/manual/{id}/{id}.mkv"),
+            file_episode_info: parser::parse_path(&format!(
+                "/downloads/manual/{id}/Show.S{season:02}E{id:02}.mkv"
+            )),
+            folder_episode_info: folder.and_then(parser::parse_title),
+            ..Default::default()
+        };
+        let decision = ImportDecision::new(local, Vec::new());
+        if imported {
+            ImportResult::imported(decision, file(id, season))
+        } else {
+            ImportResult::failed(decision, vec!["no".into()])
+        }
+    }
+
+    fn untracked(events: &[ImportEvent]) -> Vec<(Vec<i64>, String, Option<String>)> {
+        events
+            .iter()
+            .map(|e| match e {
+                ImportEvent::UntrackedDownloadCompleted(ev) => (
+                    ev.files.iter().map(|f| f.id).collect(),
+                    ev.source_path.clone(),
+                    ev.parsed.as_ref().map(|p| p.release_title.clone()),
+                ),
+                other => panic!("not an untracked download: {other:?}"),
+            })
+            .collect()
+    }
+
+    /// `UntrackedDownloadCompletedEvent` after a manual import: one per
+    /// series and season of the files imported with no download, the
+    /// folder's release named over the file's.
+    #[test]
+    fn files_without_a_download_complete_untracked_downloads() {
+        let imported = [
+            result(1, 1, Some("Show.S01.1080p.WEB-GRP"), true),
+            result(2, 2, None, true),
+            result(3, 1, None, true),
+            result(4, 1, None, false),
+        ];
+        assert_eq!(
+            untracked(&untracked_downloads_completed(&imported, &[])),
+            [
+                (
+                    vec![1, 3],
+                    "/downloads/manual".to_string(),
+                    Some("Show.S01.1080p.WEB-GRP".to_string())
+                ),
+                (
+                    vec![2],
+                    "/downloads/manual/2".to_string(),
+                    Some("Show.S02E02".to_string())
+                ),
+            ]
+        );
+    }
+
+    /// The original's test for "untracked" lets a tracked download's own
+    /// file through when it is the only one, and nothing when there are
+    /// two: kept, since it decides the notifications.
+    #[test]
+    fn the_originals_reading_of_untracked_is_kept() {
+        let imported = [
+            result(1, 1, None, true),
+            result(2, 1, None, true),
+            result(3, 1, None, true),
+        ];
+        assert_eq!(
+            untracked(&untracked_downloads_completed(&imported, &[1]))
+                .into_iter()
+                .map(|(ids, _, _)| ids)
+                .collect::<Vec<_>>(),
+            [vec![2]]
+        );
+        assert!(untracked_downloads_completed(&imported, &[0, 2]).is_empty());
+    }
 }

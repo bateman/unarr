@@ -615,6 +615,28 @@ impl Notifier {
                     };
                     self.on_import_complete(&message, now).await;
                 }
+                ImportEvent::UntrackedDownloadCompleted(ev) => {
+                    let parsed = ev.parsed.clone().unwrap_or_default();
+                    let paths: Vec<String> = ev
+                        .files
+                        .iter()
+                        .map(|f| crate::mediafiles::join(&ev.series.path, &f.relative_path))
+                        .collect();
+                    let message = ImportCompleteMessage {
+                        series: &ev.series,
+                        episodes: &ev.episodes,
+                        files: &ev.files,
+                        client: None,
+                        download_id: None,
+                        release: None,
+                        source_path: &ev.source_path,
+                        source_title: Some(&parsed.release_title),
+                        destination_path: crate::mediafiles::longest_common_path(&paths),
+                        release_group: parsed.release_group.as_deref(),
+                        release_quality: parsed.quality.quality,
+                    };
+                    self.on_import_complete(&message, now).await;
+                }
                 ImportEvent::EpisodeFileDeleted(ev) => {
                     if ev.episodes.is_empty() {
                         tracing::trace!("skipping notification for deleted file without an episode");

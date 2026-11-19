@@ -41,6 +41,7 @@ pub async fn relay_import(state: &AppState, e: &ImportEvent) {
         }
         ImportEvent::SeriesRenamed { series_id, .. } => broadcast_series(state, *series_id).await,
         ImportEvent::DownloadCompleted(_)
+        | ImportEvent::UntrackedDownloadCompleted(_)
         | ImportEvent::ManualInteractionRequired(_)
         | ImportEvent::EpisodeImportFailed(_)
         | ImportEvent::SeriesScanned { .. }
