@@ -229,6 +229,8 @@ fn checks(set: CheckSet) -> Vec<(&'static str, Condition, Check)> {
                     ("MountCheck", Always, check!(mount)),
                     ("ProxyCheck", Always, check!(proxy)),
                     ("RemovedMovieCheck", Always, check!(removed_movie)),
+                    // Unarr's own, last.
+                    ("ScriptImportCheck", Always, check!(script_import)),
                 ]);
             }
             out
@@ -259,6 +261,7 @@ fn checks(set: CheckSet) -> Vec<(&'static str, Condition, Check)> {
         CheckSet::ConfigSaved => vec![
             ("ImportMechanismCheck", Always, check!(import_mechanism)),
             ("ProxyCheck", Always, check!(proxy)),
+            ("ScriptImportCheck", Always, check!(script_import)),
         ],
         CheckSet::RootFolders => vec![
             (
@@ -1003,6 +1006,32 @@ async fn import_list_root_folder(ctx: &Context<'_>) -> anyhow::Result<HealthChec
 
 /// `ImportMechanismCheck`: completed download handling must be on; a
 /// client that cannot be asked leaves the verdict for later.
+/// Unarr's own check, which the originals do not have. Import Using
+/// Script is a setting Unarr keeps and does not apply, by decision
+/// (`docs/audit/7-triage.md`, `UseScriptImport`): while it is on, the
+/// files are moved, copied or hardlinked as the other media management
+/// settings say, and this says so, where nothing did.
+async fn script_import(ctx: &Context<'_>) -> anyhow::Result<HealthCheck> {
+    ctx.db.call(|conn| script_import_verdict(conn)).await
+}
+
+fn script_import_verdict(conn: &rusqlite::Connection) -> anyhow::Result<HealthCheck> {
+    const SOURCE: &str = "ScriptImportCheck";
+    let on = store::config::config(conn, "UseScriptImport")?
+        .is_some_and(|v| v.trim().eq_ignore_ascii_case("true"));
+    if !on {
+        return Ok(HealthCheck::ok(SOURCE));
+    }
+    Ok(HealthCheck {
+        source: SOURCE,
+        kind: HealthType::Warning,
+        message: "Import Using Script is on, and Unarr does not run import scripts: \
+                  files are moved, copied or hardlinked as the other media management settings say"
+            .to_string(),
+        wiki_url: String::new(),
+    })
+}
+
 async fn import_mechanism(ctx: &Context<'_>) -> anyhow::Result<HealthCheck> {
     const SOURCE: &str = "ImportMechanismCheck";
     let clients = ctx.clients.enabled().await?;
@@ -1331,6 +1360,26 @@ async fn remote_path_mapping_after_failure(ctx: &Context<'_>) -> anyhow::Result<
 mod tests {
     use super::*;
 
+    /// Import Using Script on is a warning, off is nothing to say.
+    #[test]
+    fn script_import_on_is_said_to_be_ignored() {
+        let db = crate::db::Db::open_in_memory().unwrap();
+        db.call_blocking(|conn| {
+            assert!(script_import_verdict(conn)?.is_ok());
+            store::config::set_config(conn, "UseScriptImport", "True")?;
+            let verdict = script_import_verdict(conn)?;
+            assert_eq!(
+                (verdict.source, verdict.kind),
+                ("ScriptImportCheck", HealthType::Warning)
+            );
+            assert!(verdict.message.starts_with("Import Using Script is on"));
+            store::config::set_config(conn, "UseScriptImport", "False")?;
+            assert!(script_import_verdict(conn)?.is_ok());
+            Ok(())
+        })
+        .unwrap();
+    }
+
     /// The `CheckOn` attributes of Sonarr 4.0.20's checks for the events
     /// of a save, as its assembly declares them.
     #[test]
@@ -1346,9 +1395,10 @@ mod tests {
             names.sort_unstable();
             names
         };
+        // And Unarr's own, which says that Import Using Script is not applied.
         assert_eq!(
             sources(CheckSet::ConfigSaved),
-            ["ImportMechanismCheck", "ProxyCheck"]
+            ["ImportMechanismCheck", "ProxyCheck", "ScriptImportCheck"]
         );
         assert_eq!(
             sources(CheckSet::RootFolders),

@@ -24,18 +24,23 @@ Updated a fourth time on 19 November 2026: four of the rows the reports
 rated medium (1.3, 1.8, 1.10 and 1.24 of `2-http.md`, items 8, 9, 12 and 19
 below) are closed, and with them four low rows of the same code (1.6, 1.11,
 3.11, 3.17); so is a fifth, the file dates after a series scan (`FileDate`
-of `1-settings.md`, item 13, with its row of `6-events.md`). Each was recorded first on Sonarr 4.0.20 and Radarr 6.4.4
+of `1-settings.md`, item 13, with its row of `6-events.md`). The last two,
+script import and SignalR without WebSockets (items 14 and 10), are
+**deliberate** by the maintainer's decision of the same day
+(`docs/DESIGN.md`, section 21): Import Using Script stays unapplied and a
+health check says so while it is on; the hub is served over WebSockets
+only. Each was recorded first on Sonarr 4.0.20 and Radarr 6.4.4
 under a changed `config.xml`; "What was closed afterwards" says how.
 
 ## Result
 
 | Report | Rows | Closed | Open | Partial | Deliberate | Not applicable |
 |--------|------|--------|------|---------|------------|----------------|
-| 1. Settings | 18 | 12 | 4 | 0 | 0 | 2 |
-| 2. HTTP | 58 | 30 | 20 | 4 | 3 | 1 |
-| 3 and 4. Routes and UI calls | 78 | 39 | 25 | 2 | 2 | 10 |
+| 1. Settings | 18 | 12 | 3 | 0 | 1 | 2 |
+| 2. HTTP | 58 | 30 | 19 | 4 | 4 | 1 |
+| 3 and 4. Routes and UI calls | 78 | 39 | 25 | 0 | 4 | 10 |
 | 6. Events, commands, housekeeping | 39 | 31 | 4 | 1 | 2 | 1 |
-| Together | 193 | 112 | 53 | 7 | 7 | 14 |
+| Together | 193 | 112 | 51 | 5 | 11 | 14 |
 
 Before the first update: 83 closed, 78 open, 13 partial, 6 deliberate;
 before the fourth, 102 closed, 60 open, 10 partial. Some gaps
@@ -48,7 +53,8 @@ does; **open**; **partial**; **deliberate**, a recorded decision to differ;
 reports rated medium were never in the README's numbered list and were open
 or partial: script import and file dates after a series scan
 (`1-settings.md`), and rows 1.3, 1.8, 1.10, 1.24, 1.29, 2.11 and 4.5 of
-`2-http.md`; all of `2-http.md`'s but 2.11 are closed since. And well over
+`2-http.md`; all of `2-http.md`'s but 2.11 are closed since, 2.11 is a
+decision, and so is script import. And well over
 half of the low rows are closed.
 
 How far to trust it: reports 1, 3, 4 and 6 were read against the code, not
@@ -85,7 +91,9 @@ Would show in a particular set-up:
 9. ~~**A reverse proxy that rewrites `Host`, with Allowed Hosts set** (1.3):
    every request is refused~~. Closed.
 10. **A proxy that does not pass WebSocket upgrades** (2.11): no live
-    updates. Larger.
+    updates. Deliberate: the hub is served over WebSockets only, which
+    every current reverse proxy passes (Traefik, nginx with the upgrade
+    headers, Caddy); a proxy that does not is to be configured to.
 11. ~~A body over 2 MiB~~ (1.29). Closed: the limit is 64 MiB, a decision
     to differ from the original, which has none.
 12. ~~**Log-based intrusion detection** (1.8): no line for a failed or
@@ -93,7 +101,9 @@ Would show in a particular set-up:
 13. ~~**Change File Date switched on** (`FileDate`): nothing after a series
     scan; the movie side does it~~. Closed.
 14. **Import Using Script** (`UseScriptImport`): stored and ignored, the
-    import goes Unarr's own way without a warning. Larger.
+    import goes Unarr's own way. Deliberate: Unarr runs no import script,
+    and since 19 November 2026 a health warning says so while the setting
+    is on (`ScriptImportCheck`, Unarr's own).
 15. **A UI language other than English** (`UILanguage`): only the English
     dictionary is in the tree. Larger, by the 39 dictionaries.
 16. **A clock that jumps back** (`FixFutureRunScheduledTasks`): scheduled
@@ -289,7 +299,7 @@ with them where there was something to close
 
 ## The server outside the API bodies (`2-http.md`)
 
-58 rows were DIFFERENT, MISSING or UNSURE: 30 closed, 20 open, 4 partial, 3
+58 rows were DIFFERENT, MISSING or UNSURE: 30 closed, 19 open, 4 partial, 4
 deliberate, 1 not applicable. Read, and where reading did not settle it tried
 on a debug build of `unarrd` on the Sonarr fixture ("live"). The original's
 side of rows 1.6, 1.11, 1.15, 1.18, 1.30, 1.34, 2.12, 4.11 and 4.20 was never
@@ -332,7 +342,7 @@ is `crates/unarr-api/src/`.
 | 2.4 | covers with the key | high | CLOSED | `api/routes/mod.rs:80`; live | |
 | 2.8 | backup download headers | low | OPEN | `application/zip` and a disposition (`api/routes/backup.rs:137`) | nobody; the file downloads |
 | 2.9 | `/MediaCoverProxy/{hash}/{file}` | low | OPEN | the file name is ignored, the type guessed from the remote address (`api/routes/series_writes.rs:57`); a wrong name is a 500 | a GIF poster labelled JPEG on Add Series; browsers sniff |
-| 2.11 | SignalR over server-sent events and long polling | medium | OPEN | advertised, not served (`api/routes/signalr.rs:83`) | a browser behind a proxy that does not pass WebSocket upgrades: no live updates |
+| 2.11 | SignalR over server-sent events and long polling | medium | DELIBERATE | WebSockets only (`api/routes/signalr.rs`); the negotiation still lists the three transports, as the original's does (golden `signalr-negotiate`). `docs/DESIGN.md` section 21 | a browser behind a proxy that does not pass WebSocket upgrades: no live updates, the proxy is to be configured to pass them |
 | 2.12 | negotiate version | low | OPEN | always version 0 (`signalr.rs:84`) | nobody; the client takes either |
 | 2.13 | `version` message to all clients | low | OPEN | to the new socket only (`signalr.rs:149`) | nobody |
 | 3.2 | the key as a bearer token | medium | CLOSED | `api/auth.rs:26`; test | |
@@ -362,7 +372,7 @@ What the triage found against the report and the README:
 
 - Seven medium rows of this report were never in the README's numbered
   list and were open or partial: 1.3, 1.8, 1.10, 1.24, 1.29, 2.11, 4.5
-  (all but 2.11 since closed).
+  (all but 2.11 since closed; 2.11 deliberate).
 - Row 1.35 was unsure and is a real difference: a URL base saved from the
   UI is half applied until the restart.
 - Row 1.13 understates: the release profile aborts on a panic, so the
@@ -373,8 +383,8 @@ What the triage found against the report and the README:
 
 ## Routes and UI calls (`3-4-routes.md`)
 
-78 rows were MISSING, PARTIAL, IGNORED or UNSURE: 39 closed, 25 open, 2
-partial, 2 deliberate, 10 not applicable. Static: nothing was run. `mod.rs`
+78 rows were MISSING, PARTIAL, IGNORED or UNSURE: 39 closed, 25 open, 4
+deliberate, 10 not applicable. Static: nothing was run. `mod.rs`
 is `crates/unarr-api/src/routes/mod.rs` (Sonarr's list is
 `sonarr_api_router`); the other files are under `crates/unarr-api/src/` and
 its `routes/`; `core/` is `crates/unarr-core/src/`; golden names are lines of
@@ -414,7 +424,7 @@ declared, 404 and 405 are what the router gives by construction.
 | A | `GET /ping`, `HEAD /ping` | CLOSED (2) | `lib.rs:326`, `system.rs:163`; golden `noauth-ping`, test `tests/http.rs:211` | health checks, monitors |
 | A | `GET /api` | CLOSED | `mod.rs:55`, `system.rs:157`; test `tests/http.rs:99` | nobody known |
 | A | `GET /feed/v3/calendar/Sonarr.ics` | CLOSED | `mod.rs:56`, `feed.rs:145`; goldens `feed-calendar*` | UI iCal link, calendar apps |
-| A | `/signalr/messages` over server-sent events and long polling | PARTIAL | advertised (`signalr.rs:86`), only WebSocket served; WebSocket-only is the stated scope | UI behind a proxy that blocks WebSockets |
+| A | `/signalr/messages` over server-sent events and long polling | DELIBERATE | advertised (`signalr.rs:86`), only WebSocket served, by decision (`docs/DESIGN.md` section 21) | UI behind a proxy that blocks WebSockets |
 | B | restart, shutdown, `series/import`, `history/failed/{id}`, blocklist delete and bulk, exclusions bulk, `PUT metadata/{id}` | CLOSED (8) | as Table A | UI |
 | B | `GET /delayprofile/schema` | NOT APPLICABLE | dead UI code; the original has no such route | nobody |
 | B | the iCal link's parameters | CLOSED | `feed.rs:159` reads `unmonitored`, `premieresOnly`, `asAllDay`, `tags`, `pastDays`, `futureDays` | UI, calendar apps |
@@ -429,7 +439,7 @@ declared, 404 and 405 are what the router gives by construction.
 | B | `GET /config/naming/examples` with the pending form | CLOSED | `settings.rs:155`; goldens `config-naming-examples-form`, `-invalid`, `-no-id` | UI, naming examples while typing |
 | B | `GET /blocklist?protocols=` | CLOSED | `activity.rs:385`, `core/store/history.rs:237`; goldens `blocklist-protocol-*` (8) | UI, custom filter on Protocol |
 | B | `PUT /series/{id}?moveFolder=true` | NOT APPLICABLE | parity: the original reads `moveFiles`, and so does `series_writes.rs:375` | nothing |
-| B | SignalR transport fallback | PARTIAL | the Table A row | as above |
+| B | SignalR transport fallback | DELIBERATE | the Table A row | as above |
 | B | `/Content/manifest.json`, `/Content/browserconfig.xml` | CLOSED | `ui.rs:177`; goldens `noauth-content-manifest`, `noauth-content-browserconfig`; test `tests/http.rs:379` | a browser installing the UI as an app |
 | B | `GET /oauth.html` | CLOSED | in the embedded bundle, served by the page fallback (`lib.rs:313`) behind the login | UI: the OAuth pop-up of an import list |
 
@@ -489,8 +499,8 @@ The line numbers inside the report itself are stale; these are current.
 
 ## Settings (`1-settings.md`)
 
-18 rows were NOT APPLIED or PARTIAL in the detailed tables: 12 closed, 4
-open, 2 not applicable.
+18 rows were NOT APPLIED or PARTIAL in the detailed tables: 12 closed, 3
+open, 1 deliberate, 2 not applicable.
 
 | Setting | Finding | Severity then | State | Evidence | What is left, who notices |
 |---|---|---|---|---|---|
@@ -505,7 +515,7 @@ open, 2 not applicable.
 | `RecycleBinCleanupDays` | never read | high | CLOSED | `core/mediafiles/transfer.rs:204` | |
 | `FileDate` | import and rename only | medium | CLOSED | the events row above, and the dates compared and set as recorded (`core/mediafiles/approve.rs`, `change_file_date`) | |
 | `EnableMediaInfo` | no backfill on rescan | low | CLOSED | `core/mediafiles/scan.rs:147` | |
-| `UseScriptImport`, `ScriptImportPath` | not applied | medium | OPEN | stored and shown (`settings_writes.rs:349`), no occurrence in `unarr-core` | whoever imports through a script gets Unarr's own move or hardlink, with no warning |
+| `UseScriptImport`, `ScriptImportPath` | not applied | medium | DELIBERATE | stored and shown (`settings_writes.rs:349`), not applied by decision (`docs/DESIGN.md` section 21); `ScriptImportCheck` warns while it is on (`core/health.rs`, test `script_import_on_is_said_to_be_ignored`) | whoever imports through a script gets Unarr's own move or hardlink, and a health warning that says so |
 | `ImportExtraFiles`, `ExtraFileExtensions` | not applied | medium | CLOSED | `core/mediafiles/extras.rs:334` | |
 | `UILanguage` | not applied | low | OPEN | `api/routes/system.rs:364` always serves the English dictionary, the only one in the tree | whoever picks another language: the interface stays English |
 | proxy (8 settings) | not applied | high | CLOSED | `core/http.rs:71`, `core/outbound.rs:308`; test `core/http.rs:325` | `ProxyCheck` runs again five seconds after a save of the settings (`core/health.rs:250`) |
@@ -516,7 +526,8 @@ What the triage found against the reports and the README:
 
 - Two medium findings of `1-settings.md` were never in the README's
   numbered list and were not closed: script import, and file dates after a
-  series scan (the fix of `e0a81e4` was for movies; the series' since). The `CheckOn` row,
+  series scan (the fix of `e0a81e4` was for movies; the series' since);
+  script import is deliberate since. The `CheckOn` row,
   low-medium, was unchanged at the triage and is closed since.
 - `docs/DESIGN.md` section 14, "Logs", said the debug and trace files
   follow `RUST_LOG` alone, while the saved Log Level applies at once.

@@ -2316,3 +2316,32 @@ the image job of CI never enable. Without it there is no
 `/api/v3/system/panic`, no `/panic`, no `UNARR_PANIC_AT_START` and no
 code that reads any of them; no variable brings them back. A binary
 built with it says so on its first line of output.
+
+## 21. Differences kept on purpose, from the audit
+
+Decided by the maintainer on 19 November 2026, for the last two rows the
+audit rated medium (`docs/audit/7-triage.md`), which a fix would have
+made larger than what they serve.
+
+- **Import Using Script is not applied.** Sonarr and Radarr can hand each
+  import to a user's script (`UseScriptImport`, `ScriptImportPath`),
+  which decides how the file reaches the library. Unarr keeps the two
+  settings, shows them and saves them, and imports as the other media
+  management settings say (move, copy or hardlink). Running a script the
+  settings name is a new way for whoever can save settings to run code on
+  the host, and nobody known uses it with Unarr; the maintainer's
+  installation does not. What changed is that it no longer happens
+  silently: `ScriptImportCheck`, a health check of Unarr's own that the
+  originals do not have, warns while the setting is on, at start, on the
+  schedule and five seconds after a save of the settings, as
+  `ImportMechanismCheck` runs.
+- **The hub is served over WebSockets only.** SignalR's negotiation
+  lists server-sent events and long polling beside WebSockets, as the
+  originals' does, and the recorded answer is kept (golden
+  `signalr-negotiate`); Unarr serves the first transport only. A browser
+  behind a reverse proxy that does not pass WebSocket upgrades gets no
+  live updates, and its pages refresh only when reloaded. Every proxy in
+  use passes them (Traefik on its own, nginx with the two upgrade
+  headers, Caddy on its own); a proxy that does not is configured to.
+  Serving the two fallbacks would be a second hub protocol to keep in
+  step with the first.

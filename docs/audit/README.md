@@ -159,6 +159,8 @@ the medium rows, with four low ones in the same code: Allowed Hosts behind
 a proxy that rewrites `Host`, the login lines fail2ban reads, a request
 outside the URL base, and paths under `/api` that are not v3, each recorded
 on both originals under a changed `config.xml` first, and the file dates
-after a series scan, recorded on Sonarr. The rows now stand at 112 closed,
-53 open, 7 partial, 7 deliberate and 14 not applicable; the triage says
-which and how, and what of the same was closed on Radarr's side.
+after a series scan, recorded on Sonarr; the last two medium rows, script
+import and SignalR without WebSockets, are decisions to differ
+(`docs/DESIGN.md`, section 21). The rows now stand at 112 closed, 51 open,
+5 partial, 11 deliberate and 14 not applicable; the triage says which and
+how, and what of the same was closed on Radarr's side.
