@@ -1006,8 +1006,12 @@ mod tests {
     fn a_file_that_parses_as_nothing_names_no_release() {
         let mut r = result(1, 1, None, true);
         if let Some(local) = r.decision.local_episode.as_mut() {
-            local.file_episode_info =
-                Some(parser::parse_path("/downloads/tv/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2.mkv").unwrap_or_default());
+            local.file_episode_info = Some(
+                parser::parse_path(
+                    "/downloads/tv/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2/07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2.mkv",
+                )
+                .unwrap_or_default(),
+            );
             local.folder_episode_info = parser::parse_title("07f9c8d0e1b2a3c4d5e6f7a8b9c0d1e2");
         }
         let events = untracked_downloads_completed(&[r], &[]);
