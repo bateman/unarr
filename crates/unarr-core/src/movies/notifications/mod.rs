@@ -552,7 +552,7 @@ impl MovieNotifier {
                     webhook::on_download(self.base.http(), &def, message, &ctx).await
                 }
                 Some(Kind::PlexServer) => {
-                    self.plex_update_if_enabled(&def, message.movie);
+                    self.plex_update_if_enabled(&def, message.movie).await;
                     Ok(())
                 }
                 None => Ok(()),
@@ -589,7 +589,7 @@ impl MovieNotifier {
                     webhook::on_movie_file_delete(self.base.http(), &def, message, &ctx).await
                 }
                 Some(Kind::PlexServer) => {
-                    self.plex_update_if_enabled(&def, message.movie);
+                    self.plex_update_if_enabled(&def, message.movie).await;
                     Ok(())
                 }
                 None => Ok(()),
@@ -615,7 +615,7 @@ impl MovieNotifier {
                 Some(Kind::Discord) => discord::on_rename(self.base.http(), &def, movie, renamed).await,
                 Some(Kind::Webhook) => webhook::on_rename(self.base.http(), &def, movie, renamed, &ctx).await,
                 Some(Kind::PlexServer) => {
-                    self.plex_update_if_enabled(&def, movie);
+                    self.plex_update_if_enabled(&def, movie).await;
                     Ok(())
                 }
                 None => Ok(()),
@@ -750,12 +750,12 @@ impl MovieNotifier {
         }
     }
 
-    /// `PlexServer.UpdateIfEnabled`: the movie joins the server's queue,
-    /// once per movie. The original pings plex.tv first, once a day per
-    /// token, so that the token does not expire; Unarr does not call
-    /// plex.tv, as on the series side.
-    fn plex_update_if_enabled(&self, def: &MovieNotificationDefinition, movie: &Movie) {
+    /// `PlexServer.UpdateIfEnabled`: plex.tv is pinged with the token, once
+    /// a day so that the token does not expire, then the movie joins the
+    /// server's queue, once per movie.
+    async fn plex_update_if_enabled(&self, def: &MovieNotificationDefinition, movie: &Movie) {
         let settings = base_plex::Settings::from_value(&def.settings);
+        base_plex::ping_plex_tv(&self.base, &settings.auth_token).await;
         if !settings.update_library {
             return;
         }

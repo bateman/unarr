@@ -6,6 +6,7 @@
 use crate::sync::Recover;
 use std::collections::{BTreeSet, HashMap};
 use std::sync::{Mutex, OnceLock};
+use std::time::{Duration, Instant};
 
 use base64::Engine;
 use serde::Deserialize;
@@ -79,6 +80,15 @@ fn session_cache() -> &'static Mutex<HashMap<String, String>> {
     CACHE.get_or_init(|| Mutex::new(HashMap::new()))
 }
 
+/// `_versionCache`: the version Transmission reported, per (base URL,
+/// password), for six hours. Only the connection test asks again.
+fn version_cache() -> &'static Mutex<HashMap<String, (String, Instant)>> {
+    static CACHE: OnceLock<Mutex<HashMap<String, (String, Instant)>>> = OnceLock::new();
+    CACHE.get_or_init(|| Mutex::new(HashMap::new()))
+}
+
+const VERSION_TTL: Duration = Duration::from_secs(6 * 3600);
+
 /// The version number in "4.0.6 (38c164933e)": the first run of digits and
 /// dots outside the parentheses.
 fn version_number(raw: &str) -> Option<Version> {
@@ -118,9 +128,9 @@ impl<'a> Transmission<'a> {
             .http
             .request(method, self.rpc_url())
             .header(reqwest::header::ACCEPT, "application/json");
-        if !s.username.is_empty() || !s.password.is_empty() {
-            builder = builder.basic_auth(&s.username, Some(&s.password));
-        }
+        // `BuildRequest` sets the credentials whatever they are: without a
+        // username the originals send `Basic Og==` (":").
+        builder = builder.basic_auth(&s.username, Some(&s.password));
         builder
     }
 
@@ -224,8 +234,22 @@ impl<'a> Transmission<'a> {
             .map_err(|e| ClientError::Other(format!("Unexpected {NAME} session: {e}")))
     }
 
-    pub async fn client_version(&self) -> ClientResult<String> {
-        Ok(self.config().await?.version)
+    /// `GetClientVersion`: from the cache unless `force`, else `session-get`.
+    pub async fn client_version(&self, force: bool) -> ClientResult<String> {
+        let key = format!("version:{}:{}", self.base_url(), self.settings.password);
+        if force {
+            version_cache().lock().recover().remove(&key);
+        } else if let Some((version, at)) = version_cache().lock().recover().get(&key) {
+            if at.elapsed() < VERSION_TTL {
+                return Ok(version.clone());
+            }
+        }
+        let version = self.config().await?.version;
+        version_cache()
+            .lock()
+            .recover()
+            .insert(key, (version.clone(), Instant::now()));
+        Ok(version)
     }
 
     pub async fn torrents(&self, hashes: Option<&[String]>) -> ClientResult<Vec<Torrent>> {
@@ -325,7 +349,7 @@ impl<'a> Transmission<'a> {
     // --- client
 
     async fn supports_labels(&self) -> ClientResult<bool> {
-        let raw = self.client_version().await?;
+        let raw = self.client_version(false).await?;
         Ok(version_number(&raw).is_some_and(|v| v >= Version::new(4, 0)))
     }
 
@@ -378,15 +402,22 @@ impl<'a> Transmission<'a> {
     }
 
     pub async fn items(&self) -> ClientResult<Vec<DownloadClientItem>> {
-        let supports_labels = self.supports_labels().await?;
+        // `GetItems` lists the torrents first; the version (behind
+        // `SupportsLabels`) and the session's limits are asked only when a
+        // torrent needs them, the version from its cache.
         let torrents = self.torrents(None).await?;
         let mut config: Option<Config> = None;
+        let mut labels_supported: Option<bool> = None;
         let s = self.settings;
-        let has_post_import = !s.imported_category.trim().is_empty() && supports_labels;
         let mut out = Vec::new();
         for t in torrents {
             let output_dir = t.download_dir.clone();
-            if !s.category.trim().is_empty() && supports_labels && !t.labels.is_empty() {
+            let has_category = !s.category.trim().is_empty();
+            if has_category && labels_supported.is_none() {
+                labels_supported = Some(self.supports_labels().await?);
+            }
+            let supports_labels = labels_supported.unwrap_or(false);
+            if has_category && supports_labels && !t.labels.is_empty() {
                 if !t.labels.iter().any(|l| l.eq_ignore_ascii_case(&s.category)) {
                     continue;
                 }
@@ -399,6 +430,10 @@ impl<'a> Transmission<'a> {
                 continue;
             }
             let output_dir = self.client.context.remap(&s.host, &output_dir);
+            if !s.imported_category.trim().is_empty() && labels_supported.is_none() {
+                labels_supported = Some(self.supports_labels().await?);
+            }
+            let has_post_import = !s.imported_category.trim().is_empty() && labels_supported.unwrap_or(false);
             let mut item = DownloadClientItem::new(
                 self.client.definition.item_client_info(has_post_import),
                 t.hash_string.to_ascii_uppercase(),
@@ -433,10 +468,15 @@ impl<'a> Transmission<'a> {
                 DownloadItemStatus::Downloading
             };
             let reached = if item.client.remove_completed_downloads {
-                if config.is_none() && (t.seed_ratio_mode == 0 || t.seed_idle_mode == 0) {
-                    config = Some(self.config().await?);
+                match seed_limit(&t, ratio, config.as_ref()) {
+                    Some(reached) => reached,
+                    None => {
+                        let c = self.config().await?;
+                        let reached = seed_limit(&t, ratio, Some(&c)).unwrap_or(false);
+                        config = Some(c);
+                        reached
+                    }
                 }
-                has_reached_seed_limit(&t, ratio, config.as_ref())
             } else {
                 false
             };
@@ -495,7 +535,9 @@ impl<'a> Transmission<'a> {
             if s.category.trim().is_empty() {
                 config.download_dir
             } else {
-                format!("{}/{}", config.download_dir, s.category)
+                // `new OsPath($"{destDir}/{category}")`: OsPath folds the
+                // doubled separator a download-dir ending in `/` leaves.
+                remote_path::join(&config.download_dir, &s.category)
             }
         };
         Ok(DownloadClientInfo {
@@ -516,7 +558,7 @@ impl<'a> Transmission<'a> {
 
     async fn test_connection(&self) -> Option<ValidationFailure> {
         let app = self.settings.app.name;
-        match self.client_version().await {
+        match self.client_version(true).await {
             Ok(raw) => {
                 tracing::debug!(version = %raw, "Transmission version information");
                 match version_number(&raw) {
@@ -572,33 +614,31 @@ impl<'a> Transmission<'a> {
 }
 
 /// `HasReachedSeedLimit`: per-torrent limits (mode 1) or the global ones
-/// (mode 0); the global idle limit counts once the torrent stopped.
-fn has_reached_seed_limit(t: &Torrent, ratio: f64, config: Option<&Config>) -> bool {
+/// (mode 0); the global idle limit counts once the torrent stopped. `None`
+/// when the answer needs the session's limits and `config` is not there:
+/// the originals read them (lazily, once per refresh) only for a stopped
+/// torrent that has not already reached its own ratio.
+fn seed_limit(t: &Torrent, ratio: f64, config: Option<&Config>) -> Option<bool> {
     let stopped = t.status == STATUS_STOPPED;
     let seeding = t.status == STATUS_SEEDING;
     if t.seed_ratio_mode == 1 {
         if stopped && ratio >= t.seed_ratio_limit {
-            return true;
+            return Some(true);
         }
-    } else if t.seed_ratio_mode == 0 {
-        if let Some(c) = config {
-            if stopped && c.seed_ratio_limited && ratio >= c.seed_ratio_limit {
-                return true;
-            }
+    } else if t.seed_ratio_mode == 0 && stopped {
+        let c = config?;
+        if c.seed_ratio_limited && ratio >= c.seed_ratio_limit {
+            return Some(true);
         }
     }
     if t.seed_idle_mode == 1 {
         if (stopped || seeding) && t.seconds_seeding > t.seed_idle_limit * 60 {
-            return true;
+            return Some(true);
         }
-    } else if t.seed_idle_mode == 0 {
-        if let Some(c) = config {
-            if stopped && c.idle_seeding_limit_enabled {
-                return true;
-            }
-        }
+    } else if t.seed_idle_mode == 0 && stopped && config?.idle_seeding_limit_enabled {
+        return Some(true);
     }
-    false
+    Some(false)
 }
 
 #[cfg(test)]
@@ -630,8 +670,9 @@ mod tests {
             seed_ratio_limit: 1.0,
             ..Default::default()
         };
-        assert!(has_reached_seed_limit(&t, 1.2, None));
-        assert!(!has_reached_seed_limit(&t, 0.5, None));
+        assert_eq!(seed_limit(&t, 1.2, None), Some(true));
+        // Below its own ratio, stopped: the global idle limit decides.
+        assert_eq!(seed_limit(&t, 0.5, None), None);
         let global = Config {
             seed_ratio_limited: true,
             seed_ratio_limit: 2.0,
@@ -641,7 +682,13 @@ mod tests {
             status: STATUS_STOPPED,
             ..Default::default()
         };
-        assert!(has_reached_seed_limit(&t, 2.0, Some(&global)));
-        assert!(!has_reached_seed_limit(&t, 2.0, None));
+        assert_eq!(seed_limit(&t, 2.0, Some(&global)), Some(true));
+        assert_eq!(seed_limit(&t, 2.0, None), None);
+        // Seeding: no global limit is read.
+        let t = Torrent {
+            status: STATUS_SEEDING,
+            ..Default::default()
+        };
+        assert_eq!(seed_limit(&t, 0.0, None), Some(false));
     }
 }

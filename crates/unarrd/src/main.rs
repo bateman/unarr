@@ -9,6 +9,35 @@ use unarr_api::{AppState, Lifecycle, LogBuffer, LogFiles, ProcessLog, RuntimeInf
 use unarr_core::config::{AuthenticationMethod, AuthenticationRequired, HostConfig};
 use unarr_core::{Db, Personality};
 
+/// The allocator of the static musl build, the one the image ships. musl's
+/// own takes one lock for every allocation, so the threads that serve
+/// requests at the same time wait on each other; jemalloc's do not
+/// (docs/DESIGN.md, section 21.6). A glibc build keeps glibc's, whose arenas
+/// are measured in `docs/originals-comparison.md`.
+#[cfg(target_env = "musl")]
+#[global_allocator]
+static ALLOCATOR: tikv_jemallocator::Jemalloc = tikv_jemallocator::Jemalloc;
+
+/// jemalloc's settings, which it reads before `main`: a background thread
+/// returns the freed pages, four arenas rather than four per core, and pages
+/// are returned a second after they were freed rather than ten. Against
+/// jemalloc's defaults, measured: the same speed, the peak under load a
+/// third lower. `_RJEM_MALLOC_CONF` in the environment still overrides
+/// any of them.
+#[cfg(target_env = "musl")]
+#[export_name = "_rjem_malloc_conf"]
+static JEMALLOC_CONF: JemallocConf =
+    JemallocConf(c"background_thread:true,narenas:4,dirty_decay_ms:1000,muzzy_decay_ms:0".as_ptr());
+
+/// `const char *malloc_conf`, which a static cannot hold as a raw pointer.
+#[cfg(target_env = "musl")]
+#[repr(transparent)]
+struct JemallocConf(*const std::ffi::c_char);
+
+// The pointer is to a literal, never written.
+#[cfg(target_env = "musl")]
+unsafe impl Sync for JemallocConf {}
+
 /// Unarr daemon: a lightweight, API-compatible replacement for Sonarr, Radarr and Lidarr.
 #[derive(Parser, Debug)]
 #[command(name = "unarrd", version, about)]

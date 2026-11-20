@@ -190,7 +190,7 @@ Scheduled tasks (`Jobs/TaskManager.cs:65-135`): all eleven are registered with t
 
 ## Documented, not re-reported
 
-- Notifications other than Discord/Webhook/Plex send nothing; plex.tv ping not called (DESIGN §13, §15).
+- Notifications other than Discord/Webhook/Plex send nothing (DESIGN §13, §15). The plex.tv ping is sent since 19 November 2026, except for a blank token (DESIGN §21.5).
 - Import lists other than Simkl not driven (DESIGN §14, §15).
 - Kodi/Plex metadata writers and extras not driven (phase-3b "Out of scope", DESIGN §15).
 - Health checks are a subset: acquisition (DESIGN §12) plus import (§13). Absent and not individually listed in the docs: RemovedSeriesCheck, ImportListStatusCheck, NotificationStatusCheck, ProxyCheck, ApiKeyValidationCheck, AllowedHostsCheck, SystemTimeCheck, AppDataLocationCheck, IndexerJackettAllCheck, PackageGlobalMessageCheck.

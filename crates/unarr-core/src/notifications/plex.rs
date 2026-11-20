@@ -1,8 +1,9 @@
 //! Plex Media Server, after the originals' `PlexServer`,
 //! `PlexServerService` and `PlexServerProxy`: the TV sections whose
 //! location holds the series' root folder are asked to refresh the series'
-//! folder. The plex.tv side (sign-in, server list, the ping on each
-//! update) is not reproduced: it needs the user's plex.tv account.
+//! folder. Of the plex.tv side, only the daily ping that keeps the token
+//! alive (`PlexTvService.Ping`) is reproduced; the sign-in and the server
+//! list are not, the token is entered by hand.
 
 use crate::sync::Recover;
 use chrono::{DateTime, Duration, Utc};
@@ -121,6 +122,54 @@ async fn client_identifier(notifier: &Notifier) -> String {
         })
         .await
         .unwrap_or_else(|_| new_identifier())
+}
+
+/// `PlexTvService.Ping` and `PlexTvProxy.Ping`: tell plex.tv that the
+/// token is still in use, so that it does not expire, at most once a day per
+/// token. The originals call it before every library update and connection
+/// test. What plex.tv answers changes nothing: a failure is logged at
+/// trace, and the day counts as pinged all the same.
+///
+/// A blank token is not pinged. The originals' cache refuses a blank key
+/// (`Ensure.That(key).IsNotNullOrWhiteSpace()`), so there the exception
+/// fails the connection test and every Plex update before it is queued;
+/// Unarr goes on to the server, which decides whether it needs a token
+/// (docs/DESIGN.md, section 21).
+pub(crate) async fn ping_plex_tv(notifier: &Notifier, token: &str) {
+    if token.trim().is_empty() || !notifier.plex_tv_ping_due(token) {
+        return;
+    }
+    let identity = notifier.identity();
+    let client_id = client_identifier(notifier).await;
+    let query = [
+        ("X-Plex-Client-Identifier", client_id.as_str()),
+        ("X-Plex-Product", identity.app_name.as_str()),
+        ("X-Plex-Platform", "Windows"),
+        ("X-Plex-Platform-Version", "7"),
+        ("X-Plex-Device-Name", identity.app_name.as_str()),
+        ("X-Plex-Version", identity.app_version.as_str()),
+        ("X-Plex-Token", token),
+    ];
+    let Ok(url) =
+        reqwest::Url::parse_with_params(&notifier.upstream_url("https://plex.tv/api/v2/ping"), query)
+    else {
+        return;
+    };
+    tracing::debug!(url = %crate::http::redact(url.as_str()), "pinging plex.tv");
+    let outcome = notifier
+        .http()
+        .get(url)
+        .header(reqwest::header::ACCEPT, "application/json")
+        .send()
+        .await
+        .map_err(|e| e.without_url().to_string())
+        .and_then(|r| match r.status() {
+            s if s.is_success() => Ok(()),
+            s => Err(format!("status {}", s.as_u16())),
+        });
+    if let Err(e) = outcome {
+        tracing::trace!(error = %e, "Unable to ping plex.tv");
+    }
 }
 
 /// A GUID-shaped identifier from the system's randomness.
@@ -495,6 +544,8 @@ pub(crate) async fn test_for(
     section_type: &str,
     no_library: &str,
 ) -> TestOutcome {
+    // `PlexServer.Test` pings plex.tv first, the same daily ping.
+    ping_plex_tv(notifier, &settings.auth_token).await;
     notifier.plex_versions().lock().recover().remove(&settings.host);
     match sections_of(notifier, settings, section_type).await {
         Ok(sections) if sections.is_empty() => {
