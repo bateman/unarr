@@ -4,7 +4,7 @@ NAME  ?= unarr
 IMAGE ?= ghcr.io/bateman/unarr
 TAG   ?= dev
 
-.PHONY: help build run run-both test panic-test fmt lint check deny release-notes clean docker check-name golden golden-radarr sonarr radarr ui ui-sonarr ui-radarr ui-present bazarr bazarr-radarr prowlarr prowlarr-radarr recyclarr recyclarr-radarr http-audit anonymize scale-fixture compare-originals
+.PHONY: help build run run-both test panic-test fmt lint check deny release-notes clean docker check-name golden golden-radarr sonarr radarr ui ui-sonarr ui-radarr ui-present bazarr bazarr-radarr prowlarr prowlarr-radarr recyclarr recyclarr-radarr http-audit anonymize scale-fixture compare-originals route-percentiles
 UNARR_URL ?= http://127.0.0.1:8989
 RADARR_URL ?= http://127.0.0.1:7878
 UNARR_API_KEY ?= 0123456789abcdef0123456789abcdef
@@ -88,6 +88,10 @@ scale-fixture: ## Grow the fixtures to 950 series and 2,123 movies with 50,000 h
 
 compare-originals: ## Measure RAM, CPU and latency of the original Sonarr and Radarr beside Unarr (LIBRARY=real|scaled, REPEAT=n; about an hour a run; needs make ui, and make scale-fixture for scaled)
 	@python3 -I scripts/compare-originals.py --library $(or $(LIBRARY),real) --repeat $(or $(REPEAT),1)
+
+route-percentiles: ## p50, p95, p99 of the routes with a target in docs/DESIGN.md section 9, originals beside Unarr (LIBRARY=real|scaled; builds unarrd first; needs make ui, and make scale-fixture for scaled)
+	cargo build --release --bin unarrd
+	@python3 -I scripts/route-percentiles.py --library $(or $(LIBRARY),real)
 
 bazarr: ## Replay Bazarr's requests against a running unarrd (UNARR_URL, UNARR_API_KEY)
 	@python3 -I scripts/bazarr-replay.py --base-url $(UNARR_URL) --api-key $(UNARR_API_KEY)

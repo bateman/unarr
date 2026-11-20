@@ -335,12 +335,27 @@ maintainer asks.
 
 Self-set, to be measured in CI against a fixed fixture database:
 
-| Metric | Target |
-|--------|--------|
-| Idle RSS, three personalities, 1,000 series + 2,000 movies | under 60 MB |
-| Container image, compressed | under 20 MB (15 MB until 20 November 2026, section 21.11) |
-| `GET /api/v3/series` on the fixture, p99 | under 10 ms |
-| Cold start to first response | under 1 s |
+| Metric | Library | Target |
+|--------|---------|--------|
+| Idle RSS, three personalities | 1,000 series + 2,000 movies | under 60 MB |
+| Container image, compressed | | under 20 MB (15 MB until 20 November 2026, section 21.11) |
+| `GET /api/v3/series`, p99 | the fixture (38 series) | under 10 ms |
+| `GET /api/v3/series`, p99 | 1,000 series | under 130 ms |
+| `GET /api/v3/movie`, p99 | the fixture (193 movies) | under 30 ms |
+| `GET /api/v3/movie`, p99 | 2,000 movies | under 160 ms |
+| `GET /api/v3/collection`, p99 | the fixture | under 20 ms |
+| `GET /api/v3/collection`, p99 | 2,000 movies | under 45 ms |
+| A page of `GET /api/v3/history`, 20 rows with their movies, p99 | the fixture | under 25 ms |
+| A page of `GET /api/v3/history`, 20 rows with their movies, p99 | 2,000 movies | under 40 ms |
+| Cold start to first response | both, the databases already imported | under 1 s |
+
+The fixture is `tests/fixtures`, the maintainer's library anonymised; 1,000
+series and 2,000 movies are measured on `.cache/scaled` (`make
+scale-fixture`: 950 series, 2,123 movies). The route targets are measured
+with `make route-percentiles` (200 calls a route, interleaved, after five
+warm-up passes, the originals beside Unarr); the movie routes' targets and
+the second one of `/series` were set on 20 November 2026, as section 21.12
+says.
 
 **Make it run, then make it fast** (the maintainer's decision, November
 2026, at the end of phase 4c). The targets stay as written. Until Unarr
@@ -366,6 +381,7 @@ maintainer's daily driver.
 | Container image under 15 MB compressed, built as CI builds it | `docker build` of the Dockerfile at `521ea75` (amd64): 61.4 MB unpacked, 16.8 MB of layers under `gzip -9`. The static musl binary (jemalloc, Brotli, both UIs) is 38.6 MB, 16.06 MB compressed; distroless's base 0.71 MB | #10, 20 November 2026 | Missed: 1.8 MB over (1.0 MiB over 15 MiB) |
 | Container image under 20 MB compressed (section 21.11) | The same build: 16.8 MB of layers under `gzip -9` | 20 November 2026 | Met: 3.2 MB under |
 | Idle RSS under 60 MB, once the release profile unwinds | Both personalities on the real library (38 series, 193 movies), fifteen minutes idle: 30 MiB, 11 MiB of it anonymous; 28 and 10 aborting, in the same container | #14 | Met idle |
+| The route targets of section 21.12, p99: `/series`, `/movie`, `/collection`, a page of `/history` | `make route-percentiles` at `5c50daf`, one run per library. The fixture: 6.6, 32.6, 16.1 and 17.8 ms (the originals 22.6, 60.0, 40.3, 51.3). 950 series and 2,123 movies: 84.2, 310.5, 58.7 and 25.1 ms (the originals 274.7, 336.1, 99.5, 87.0). At p50 `/collection` on the scaled library is slower than the original's: 36.2 ms against 29.0 | 20 November 2026 | `/movie` missed on both libraries (32.6 against 30, 310.5 against 160), `/collection` missed at 2,000 movies (58.7 against 45); the rest met |
 
 First measurement, skeleton only (one `system/status` route per personality):
 1.7 MiB binary, 4.3 MB idle RSS, unchanged after 500 requests.
@@ -2136,12 +2152,15 @@ been 20 MB since 20 November 2026 (section 21.11).
   the fixture": the real fixture's 38 series meet it (5.8 ms). Since the
   phase 1 review it has also been read against the 950-series fixture,
   where it stands at 53 to 59 ms and is out of reach without keeping the
-  answer. It is a recorded miss, deferred (section 9); which library
-  size the target is for is settled when the misses are taken up. The
-  original's time on the same library has not been measured.
-- Phase 3b has not run on the homelab: a series added from the UI or by
-  the Simkl list, searched, grabbed and imported end to end, against the
-  real Skyhook and the real Simkl.
+  answer. Settled on 20 November 2026 (section 21.12): the 10 ms are for
+  the fixture, and 1,000 series have a target of their own, 130 ms, half
+  the original's p99 on the 950-series library (274.7 ms; 84.2 ms for
+  Unarr then).
+- Phase 3b ran on the homelab on 11 and 12 November 2026: two series
+  added from the UI, searched, grabbed and imported end to end against the
+  real Skyhook, and the Simkl list fetched from the real Simkl (issue #10,
+  from the NAS's logs of 20 November). No series has come from the list
+  yet: its one item was already in the library.
 - The import was verified against the mocks and the recorded oracle. The
   maintainer's trace logs of an evening of real use (a real NZBGet
   downloading a season, Sonarr importing each episode as it finished, two
@@ -2733,6 +2752,47 @@ first built as CI builds it.
   grows by a few megabytes still meets it.
 - **To revisit** when Lidarr's interface is embedded, or when the image
   nears 20 MB: Brotli's half MiB first (section 21.8).
+
+### 21.12 The movie routes' targets, and the library of each target
+
+Set by the implementer on 20 November 2026, at the maintainer's request
+(issue #10, section 4); for the maintainer to confirm or change.
+
+- **The question.** Section 9 had one route target, `GET /api/v3/series`
+  under 10 ms at p99 on the fixture, and none for the movie routes: the
+  movie index (`/movie`), the collections page (`/collection`), a page of
+  the history. Nor did it say for which library each target holds: the
+  series target was read against 950 series too, where nobody had set it.
+- **Options.**
+  - *Half the original's p99 on the same library, fixed as numbers on
+    20 November* (taken): the rule the series target already follows
+    (10 ms against the original's 22.6 on the fixture), the same for every
+    route at both sizes, and numbers that do not move when an original is
+    pinned again.
+  - *The original's p99* (parity): Unarr no slower than what it replaces.
+    Every route meets it today, so it asks for nothing.
+  - *One number for every route, from what feels immediate* (under
+    100 ms): everything meets it on the fixture; at 2,000 movies it asks
+    nothing of the history page and the collections, and asks the movie
+    index for a third of its time.
+- **Why.** Half the original is a promise checked against the original
+  itself, at every size, and the one the series target already made.
+- **The targets**, half the originals' p99 rounded down to 5 ms (to 10 ms
+  above 100), in the table of section 9. On the fixture: `/movie` 30 ms,
+  `/collection` 20, a page of the history 25. At 1,000 series and 2,000
+  movies: `/series` 130, `/movie` 160, `/collection` 45, the history page
+  40. The originals' p99 they come from (`make route-percentiles`, one run
+  per library, 20 November): 60.0, 40.3 and 51.3 ms on the fixture; 274.7,
+  336.1, 99.5 and 87.0 at scale.
+- **Cost.** One run per side: the originals' p99 moves from run to run
+  (on the fixture their `/collection` p99, 40.3 ms, is more than twice
+  their p95), so a target can be easier or harder than half of a typical
+  run. `/movie` misses at both sizes: it does what the original does, the
+  whole library read and encoded into one answer, and what would lower it
+  is an answer that allocates less (`docs/originals-comparison.md`, on the
+  arenas).
+- **To revisit** when an original is pinned again (issue #9), or when
+  `/movie` is taken up.
 
 ## 22. The server outside the API, as the originals' pipeline
 
