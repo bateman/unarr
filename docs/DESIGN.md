@@ -2764,6 +2764,7 @@ could not settle it. What changed, and what was decided on the way:
   (`application/x-zip-compressed`, no `Content-Disposition`); the cover
   proxy's type from the name, a name that is not an image's a 404 before
   the hash is looked at.
-- **Not done: the `Server` header.** The originals send `Server: Kestrel`
-  on every answer; Unarr sends none. No client is known to read it; the
-  maintainer decides (`docs/audit/7-triage.md`, row 1.34).
+- **`Server: Kestrel`.** The originals' web server names itself on every
+  answer; Unarr sends the same name, by the maintainer's decision
+  (20 November 2026), from the outermost layer, so the host filter's 400
+  and a panic's 500 carry it as well (`docs/audit/7-triage.md`, row 1.34).

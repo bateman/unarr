@@ -1962,3 +1962,26 @@ async fn the_cover_proxy_reads_the_name_first() {
         );
     }
 }
+
+/// Row 1.34: `Server: Kestrel` on every answer, as both originals send it:
+/// the API, a page, a static file, a refused key, a refused host.
+#[tokio::test]
+async fn every_answer_names_kestrel_as_the_originals_do() {
+    let app = app();
+    for (path, headers) in [
+        ("/api/v3/system/status", vec![("X-Api-Key", KEY)]),
+        ("/api/v3/system/status", vec![]),
+        ("/series", vec![]),
+        ("/Content/styles.css", vec![]),
+        ("/ping", vec![]),
+    ] {
+        let (_, answer, _) = ask(&app, "GET", path, &headers, "").await;
+        assert_eq!(header(&answer, "server"), Some("Kestrel"), "{path}");
+    }
+    let app = app_edited(Personality::Sonarr, "", |host| {
+        host.allowed_hosts = "tv.example.com".into()
+    });
+    let (status, answer, _) = ask(&app, "GET", "/ping", &[("Host", "evil.example")], "").await;
+    assert_eq!(status, StatusCode::BAD_REQUEST);
+    assert_eq!(header(&answer, "server"), Some("Kestrel"));
+}

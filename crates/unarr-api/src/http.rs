@@ -320,6 +320,18 @@ pub async fn cors(request: Request, next: Next) -> Response {
     response
 }
 
+// --- Kestrel
+
+/// `Server: Kestrel`, which the originals' web server puts on every answer
+/// (recorded on both): kept as theirs by the maintainer's decision
+/// (`docs/audit/7-triage.md`, row 1.34).
+pub async fn server_header(mut response: Response) -> Response {
+    response
+        .headers_mut()
+        .insert(header::SERVER, HeaderValue::from_static("Kestrel"));
+    response
+}
+
 // --- CacheHeaderMiddleware
 
 /// `BuildInfo.BuildDateTime.ToString("r")`: when the release whose UI is
