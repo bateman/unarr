@@ -2086,131 +2086,12 @@ async fn the_queue_status_on_the_hub_counts_pending_releases() {
 /// client knows sends (`UntrackedDownloadCompletedEvent`).
 #[tokio::test]
 async fn the_events_and_settings_of_the_audit_match_the_original() {
-    use tracing_subscriber::layer::SubscriberExt;
-    let golden_dir = fixture_dir().join("golden-events");
-    let dirs = ReplayDirs::create_named("events");
-    let mappings = dirs.mappings();
-    let mock = unarr_mock::Mock::start_with(
-        unarr_mock::fixtures_dir(),
-        0,
-        unarr_mock::MockDirs {
-            downloads: Some(dirs.downloads.clone()),
-            tv: Some(dirs.tv.clone()),
-            movies: None,
-        },
-    )
-    .await
-    .expect("a mock on a free port");
-    unarr_core::notifications::pin_machine_name("vm");
-    let state = build_state_in(Some(&dirs), |_| {});
-    let port = mock.port().to_string();
-    let p = port.clone();
-    state
-        .db()
-        .call(move |conn| {
-            conn.execute(
-                "UPDATE providers SET settings = replace(settings, ':18989', ':' || ?1)",
-                [&p],
-            )?;
-            Ok(())
-        })
-        .await
-        .expect("the providers pointed at this test's mock");
-    state.set_metadata_upstreams(unarr_core::metadata::Upstreams::mock(&mock.url()));
-    let goldens = load_goldens(&golden_dir);
-    let start = goldens
-        .iter()
-        .filter_map(|g| g.recorded_at)
-        .min()
-        .expect("a recording time");
-    state
-        .db()
-        .call(move |conn| {
-            let ids: Vec<i64> = conn
-                .prepare("SELECT id FROM scheduled_tasks")?
-                .query_map([], |r| r.get(0))?
-                .collect::<Result<_, _>>()?;
-            for id in ids {
-                unarr_core::store::providers::set_scheduled_task_execution(conn, id, start, start)?;
-            }
-            Ok(())
-        })
-        .await
-        .expect("freeze the scheduled tasks");
-    state.set_now(Some(start));
-    // What the daemon's logging is told after each save of the settings.
-    let told = std::sync::Arc::new(std::sync::Mutex::new(Vec::<(String, String)>::new()));
-    let t = told.clone();
-    state.set_log_level_hook(move |host| {
-        t.lock().unwrap().push((
-            host.console_log_level.clone(),
-            format!("{:?}", host.console_level()),
-        ))
-    });
-    // The recent lines, as the daemon's logging fills them.
-    let _logging =
-        tracing::subscriber::set_default(tracing_subscriber::registry().with(state.logs().clone()));
-    state.start_runtime().await.expect("the command runtime");
-    let app = unarr_api::router(state.clone());
-    let session = login_cookie(&app).await;
-    let mut ids: std::collections::HashMap<String, i64> = std::collections::HashMap::new();
-    let mut answers: std::collections::HashMap<String, Value> = std::collections::HashMap::new();
-    let mut host_password: Option<String> = None;
-    let mut failures = Vec::new();
-    for g in &goldens {
-        if g.method == "sleep" {
-            let seconds: i64 = g.path.parse().expect("sleep seconds");
-            state.set_now(Some(state.now() + chrono::Duration::seconds(seconds)));
-            tokio::time::timeout(
-                std::time::Duration::from_secs(60),
-                state.commands().unwrap().wait_idle(),
-            )
-            .await
-            .expect("commands finish within a minute");
-            continue;
-        }
-        let path = substitute_ids(&g.path, &ids);
-        if g.to_mock {
-            let mut path = path;
-            for (replay, recorded) in &mappings {
-                path = path.replace(&format!("path={recorded}"), &format!("path={replay}"));
-            }
-            let (status, bytes) = mock.call(&g.method, &path, &[]);
-            assert!(status.is_success(), "mock {} {path}: {status}", g.method);
-            if g.name != "-" {
-                let body: Value = serde_json::from_slice(&bytes).unwrap_or(Value::Null);
-                answers.insert(g.name.clone(), unmap_paths(&body, &mappings));
-            }
-            continue;
-        }
-        let mut sent = g.clone();
-        sent.request_body = g.request_body.as_ref().map(|body| {
-            let mut body = body.replace("18989", &port);
-            // The stored hash goes back as the client read it: Unarr's.
-            if let (Some(hash), true) = (&host_password, g.path.ends_with("/config/host")) {
-                let mut v: Value = serde_json::from_str(&body).unwrap();
-                v["password"] = Value::String(hash.clone());
-                body = v.to_string();
-            }
-            body
-        });
-        state.set_now(g.recorded_at);
-        let (status, body) = send(&app, &sent, &session, &path, &mappings).await;
-        let body = unmap_paths(&body, &mappings);
-        if g.path.ends_with("/config/host") && g.method == "GET" {
-            host_password = body["password"].as_str().map(str::to_string);
-        }
-        if let Some(id) = body.get("id").and_then(Value::as_i64) {
-            ids.insert(g.name.clone(), id);
-        }
-        if status.as_u16() != g.status {
-            failures.push(format!(
-                "{}: status {} expected, {status} got: {body}",
-                g.name, g.status
-            ));
-        }
-        answers.insert(g.name.clone(), body);
-    }
+    let Replayed {
+        goldens,
+        answers,
+        mut failures,
+        told,
+    } = replay_with_own_mock("golden-events").await;
     // The console's level, as stored and read back.
     for name in [
         "config-host-put-console",
@@ -2421,4 +2302,183 @@ async fn a_blank_user_from_an_old_config_xml_opens_nothing() {
             );
         }
     }
+}
+
+/// What the hook of the settings and the replay of a list with its own
+/// mock gave: the goldens, Unarr's answers by name, the statuses that
+/// differed, and what the logging was told after each save.
+struct Replayed {
+    goldens: Vec<Golden>,
+    answers: std::collections::HashMap<String, Value>,
+    failures: Vec<String>,
+    told: std::sync::Arc<std::sync::Mutex<Vec<(String, String)>>>,
+}
+
+/// One list of `tests/fixtures/sonarr` replayed with a mock of its own on a
+/// free port, the providers pointed at it, the scheduler frozen at the
+/// recording's start and the recent lines of the log kept.
+async fn replay_with_own_mock(list: &str) -> Replayed {
+    use tracing_subscriber::layer::SubscriberExt;
+    let golden_dir = fixture_dir().join(list);
+    let dirs = ReplayDirs::create_named(list);
+    let mappings = dirs.mappings();
+    let mock = unarr_mock::Mock::start_with(
+        unarr_mock::fixtures_dir(),
+        0,
+        unarr_mock::MockDirs {
+            downloads: Some(dirs.downloads.clone()),
+            tv: Some(dirs.tv.clone()),
+            movies: None,
+        },
+    )
+    .await
+    .expect("a mock on a free port");
+    unarr_core::notifications::pin_machine_name("vm");
+    let state = build_state_in(Some(&dirs), |_| {});
+    let port = mock.port().to_string();
+    let p = port.clone();
+    state
+        .db()
+        .call(move |conn| {
+            conn.execute(
+                "UPDATE providers SET settings = replace(settings, ':18989', ':' || ?1)",
+                [&p],
+            )?;
+            Ok(())
+        })
+        .await
+        .expect("the providers pointed at this test's mock");
+    state.set_metadata_upstreams(unarr_core::metadata::Upstreams::mock(&mock.url()));
+    let goldens = load_goldens(&golden_dir);
+    let start = goldens
+        .iter()
+        .filter_map(|g| g.recorded_at)
+        .min()
+        .expect("a recording time");
+    state
+        .db()
+        .call(move |conn| {
+            let ids: Vec<i64> = conn
+                .prepare("SELECT id FROM scheduled_tasks")?
+                .query_map([], |r| r.get(0))?
+                .collect::<Result<_, _>>()?;
+            for id in ids {
+                unarr_core::store::providers::set_scheduled_task_execution(conn, id, start, start)?;
+            }
+            Ok(())
+        })
+        .await
+        .expect("freeze the scheduled tasks");
+    state.set_now(Some(start));
+    // What the daemon's logging is told after each save of the settings.
+    let told = std::sync::Arc::new(std::sync::Mutex::new(Vec::<(String, String)>::new()));
+    let t = told.clone();
+    state.set_log_level_hook(move |host| {
+        t.lock().unwrap().push((
+            host.console_log_level.clone(),
+            format!("{:?}", host.console_level()),
+        ))
+    });
+    // The recent lines, as the daemon's logging fills them.
+    let _logging =
+        tracing::subscriber::set_default(tracing_subscriber::registry().with(state.logs().clone()));
+    state.start_runtime().await.expect("the command runtime");
+    let app = unarr_api::router(state.clone());
+    let session = login_cookie(&app).await;
+    let mut ids: std::collections::HashMap<String, i64> = std::collections::HashMap::new();
+    let mut answers: std::collections::HashMap<String, Value> = std::collections::HashMap::new();
+    let mut host_password: Option<String> = None;
+    let mut failures = Vec::new();
+    for g in &goldens {
+        if g.method == "sleep" {
+            let seconds: i64 = g.path.parse().expect("sleep seconds");
+            state.set_now(Some(state.now() + chrono::Duration::seconds(seconds)));
+            tokio::time::timeout(
+                std::time::Duration::from_secs(60),
+                state.commands().unwrap().wait_idle(),
+            )
+            .await
+            .expect("commands finish within a minute");
+            continue;
+        }
+        let path = substitute_ids(&g.path, &ids);
+        if g.to_mock {
+            let mut path = path;
+            for (replay, recorded) in &mappings {
+                path = path.replace(&format!("path={recorded}"), &format!("path={replay}"));
+            }
+            let (status, bytes) = mock.call(&g.method, &path, &[]);
+            assert!(status.is_success(), "mock {} {path}: {status}", g.method);
+            if g.name != "-" {
+                let body: Value = serde_json::from_slice(&bytes).unwrap_or(Value::Null);
+                answers.insert(g.name.clone(), unmap_paths(&body, &mappings));
+            }
+            continue;
+        }
+        let mut sent = g.clone();
+        sent.request_body = g.request_body.as_ref().map(|body| {
+            let mut body = body.replace("18989", &port);
+            // The stored hash goes back as the client read it: Unarr's.
+            if let (Some(hash), true) = (&host_password, g.path.ends_with("/config/host")) {
+                let mut v: Value = serde_json::from_str(&body).unwrap();
+                v["password"] = Value::String(hash.clone());
+                body = v.to_string();
+            }
+            body
+        });
+        state.set_now(g.recorded_at);
+        let (status, body) = send(&app, &sent, &session, &path, &mappings).await;
+        let body = unmap_paths(&body, &mappings);
+        if g.path.ends_with("/config/host") && g.method == "GET" {
+            host_password = body["password"].as_str().map(str::to_string);
+        }
+        if let Some(id) = body.get("id").and_then(Value::as_i64) {
+            ids.insert(g.name.clone(), id);
+        }
+        if status.as_u16() != g.status {
+            failures.push(format!(
+                "{}: status {} expected, {status} got: {body}",
+                g.name, g.status
+            ));
+        }
+        answers.insert(g.name.clone(), body);
+    }
+    Replayed {
+        goldens,
+        answers,
+        failures,
+        told,
+    }
+}
+
+/// What `tests/fixtures/sonarr/golden-manual-tracked` recorded: the one
+/// file of a tracked download imported by hand sends Import Complete
+/// twice, untracked (no download id) and for the download, as Unarr does.
+#[tokio::test]
+async fn a_tracked_download_imported_by_hand_notifies_as_the_original() {
+    let Replayed {
+        goldens,
+        answers,
+        mut failures,
+        ..
+    } = replay_with_own_mock("golden-manual-tracked").await;
+    for name in [
+        "command-manual-import-tracked-get",
+        "manualimport-tracked-notifications",
+    ] {
+        let want = &goldens.iter().find(|g| g.name == name).unwrap().body;
+        let problems = compare(mode(name), want, &answers[name]);
+        if !problems.is_empty() {
+            failures.push(format!("{name}:\n    {}", problems.join("\n    ")));
+        }
+    }
+    let ids: Vec<&Value> = answers["manualimport-tracked-notifications"]
+        .as_array()
+        .unwrap()
+        .iter()
+        .filter(|n| n["body"]["eventType"] == "Download")
+        .map(|n| &n["body"]["downloadId"])
+        .collect();
+    assert_eq!(ids, [&Value::Null, &Value::String("SABnzbd_nzo_mock1".into())]);
+    assert!(failures.is_empty(), "{}", failures.join("\n"));
 }

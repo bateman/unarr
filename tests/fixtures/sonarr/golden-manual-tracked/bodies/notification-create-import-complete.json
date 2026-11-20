@@ -1,0 +1,47 @@
+{
+  "onGrab": false,
+  "onDownload": false,
+  "onUpgrade": false,
+  "onRename": false,
+  "onSeriesAdd": false,
+  "onSeriesDelete": false,
+  "onEpisodeFileDelete": false,
+  "onEpisodeFileDeleteForUpgrade": false,
+  "onHealthIssue": false,
+  "onHealthRestored": false,
+  "onApplicationUpdate": false,
+  "onManualInteractionRequired": false,
+  "onImportComplete": true,
+  "includeHealthWarnings": false,
+  "tags": [],
+  "name": "Mock Import Complete",
+  "implementation": "Webhook",
+  "configContract": "WebhookSettings",
+  "fields": [
+    {
+      "name": "url",
+      "value": "http://127.0.0.1:18989/webhook"
+    },
+    {
+      "name": "method",
+      "value": 1
+    },
+    {
+      "name": "username",
+      "value": "hook"
+    },
+    {
+      "name": "password",
+      "value": "secret"
+    },
+    {
+      "name": "headers",
+      "value": [
+        {
+          "key": "X-Fixture",
+          "value": "yes"
+        }
+      ]
+    }
+  ]
+}

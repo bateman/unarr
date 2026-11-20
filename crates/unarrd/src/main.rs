@@ -763,6 +763,10 @@ struct LogControl {
     console: console::Console,
     recent: console::SharedLevel,
     files: LogFiles,
+    /// The console of the lines outside any personality: it takes the
+    /// format of whichever personality applied its settings last, so a
+    /// format set only in `config.xml` reaches those lines too.
+    process: Option<console::Console>,
 }
 
 impl LogControl {
@@ -772,6 +776,9 @@ impl LogControl {
     /// settings.
     fn apply_host(&self, host: &HostConfig, rust_log: bool) {
         self.console.set_format(host.console_log_format);
+        if let Some(process) = &self.process {
+            process.set_format(host.console_log_format);
+        }
         if rust_log {
             return;
         }
@@ -824,6 +831,7 @@ fn personality_dispatch(
             console,
             recent,
             files: files.clone(),
+            process: None,
         },
     )
 }
@@ -1007,12 +1015,13 @@ fn main() -> anyhow::Result<()> {
         let logs = LogBuffer::new();
         let files = LogFiles::open(&args.data.join(personality_dir(personality)).join("logs"), &name);
         process_log.add(logs.clone(), files.clone());
-        let (dispatch, control) = personality_dispatch(
+        let (dispatch, mut control) = personality_dispatch(
             &logs,
             &files,
             log_filter(),
             process_console_format(&args.personalities),
         );
+        control.process = Some(process_console.clone());
         // A personality that cannot start, by an error or by a panic (a
         // database that does not open, an import or a migration that
         // fails, a port already taken), is reported and left down, and the
@@ -1717,6 +1726,38 @@ mod tests {
             combined_filter("debug", LogLevel::Warn).to_string(),
             settings_filter("debug").to_string()
         );
+        let _ = std::fs::remove_dir_all(&dir);
+    }
+
+    /// `ConsoleLogFormat` set only in `config.xml` reaches the lines logged
+    /// outside any personality as well, once a personality has read it.
+    #[test]
+    fn the_settings_format_reaches_the_process_console() {
+        let dir = std::env::temp_dir().join(format!("unarr-process-console-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&dir);
+        let logs = LogBuffer::new();
+        let files = LogFiles::open(&dir, "sonarr");
+        let (_, mut control) = personality_dispatch(
+            &logs,
+            &files,
+            "info".into(),
+            unarr_core::config::ConsoleLogFormat::Standard,
+        );
+        let process = console::Console::new(unarr_core::config::ConsoleLogFormat::Standard);
+        control.process = Some(process.clone());
+        let mut host = unarr_import::config_xml::parse(
+            "<Config><ApiKey>k</ApiKey><ConsoleLogFormat>Clef</ConsoleLogFormat></Config>",
+            8989,
+        )
+        .unwrap();
+        for rust_log in [false, true] {
+            control.apply_host(&host, rust_log);
+            assert_eq!(process.format(), unarr_core::config::ConsoleLogFormat::Clef);
+            host.console_log_format = unarr_core::config::ConsoleLogFormat::Standard;
+            control.apply_host(&host, rust_log);
+            assert_eq!(process.format(), unarr_core::config::ConsoleLogFormat::Standard);
+            host.console_log_format = unarr_core::config::ConsoleLogFormat::Clef;
+        }
         let _ = std::fs::remove_dir_all(&dir);
     }
 

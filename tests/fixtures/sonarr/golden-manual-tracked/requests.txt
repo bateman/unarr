@@ -1,0 +1,31 @@
+# A manual import of the one file of a download the queue tracks: which
+# Import Complete notifications go out. Completed Download Handling is
+# off, so the download waits (the queue page hides it) until it is
+# imported by hand with its download id. A recording of its own; same
+# format as ../golden/requests.txt. The original sends two, one with no
+# download id (UntrackedDownloadCompletedEvent: its test of "untracked"
+# lets a lone tracked file through) and one with it
+# (DownloadCompletedEvent).
+#
+#   GOLDEN_REQUESTS=tests/fixtures/sonarr/golden-manual-tracked/requests.txt \
+#       GOLDEN_OUT=tests/fixtures/sonarr/golden-manual-tracked make golden
+
+config-downloadclient GET /api/v3/config/downloadclient
+config-downloadclient-no-cdh PUT /api/v3/config/downloadclient bodies/config-downloadclient-no-cdh.json
+indexer-create POST /api/v3/indexer bodies/indexer-create.json
+downloadclient-create-sabnzbd POST /api/v3/downloadclient bodies/downloadclient-create-sabnzbd.json
+mock - POST /mock/notifications/clear
+notification-create-import-complete POST /api/v3/notification bodies/notification-create-import-complete.json
+release-episode GET /api/v3/release?episodeId=1
+import-grab-720 POST /api/v3/release bodies/import-grab-720.json
+sleep 12
+mock - POST /mock/sabnzbd/complete?title=The.Pitt.S01E01.720p.WEB.h264-ETHEL&clip=episode
+command-refresh POST /api/v3/command bodies/command-refresh-downloads.json
+sleep 20
+queue-completed GET /api/v3/queue?page=1&pageSize=20&sortKey=timeleft&sortDirection=ascending&includeUnknownSeriesItems=true&includeSeries=true&includeEpisode=true
+manualimport-download GET /api/v3/manualimport?downloadId=SABnzbd_nzo_mock1&filterExistingFiles=true
+command-manual-import-tracked POST /api/v3/command bodies/command-manual-import-tracked.json
+sleep 12
+command-manual-import-tracked-get GET /api/v3/command/{id:command-manual-import-tracked}
+history-after GET /api/v3/history?page=1&pageSize=5&sortKey=date&sortDirection=descending
+mock manualimport-tracked-notifications GET /mock/notifications
