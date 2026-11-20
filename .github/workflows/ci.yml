@@ -50,8 +50,8 @@ jobs:
       - run: make panic-test
 
   # Advisories, licences and sources of the dependencies (deny.toml): a
-  # release waits for it; an image of main does not, a new advisory being
-  # no reason to stop the build of a fix.
+  # tag's images and release wait for it; an image of main does not, a new
+  # advisory being no reason to stop the build of a fix.
   deny:
     runs-on: ubuntu-latest
     steps:
@@ -109,9 +109,13 @@ jobs:
           if-no-files-found: error
           retention-days: 1
 
-  # Stitch the per-architecture images into one multi-arch tag.
+  # Stitch the per-architecture images into one multi-arch tag. A tag waits
+  # for `deny` too: its version tags and `latest` are never published over
+  # an advisory, since `0.1.0` is not moved afterwards (docs/releasing.md).
+  # `main` goes ahead whatever `deny` says.
   manifest:
-    needs: image
+    needs: [image, deny]
+    if: ${{ !cancelled() && needs.image.result == 'success' && (github.ref_type != 'tag' || needs.deny.result == 'success') }}
     runs-on: ubuntu-latest
     permissions: { contents: read, packages: write }
     steps:
@@ -159,6 +163,10 @@ jobs:
             docker cp "$id:/usr/local/bin/unarrd" "dist/unarrd-linux-$arch"
             docker rm "$id"
           done
+          # `docker create --platform` must not hand back the variant
+          # already pulled: each binary is checked for its architecture.
+          file dist/unarrd-linux-amd64 | grep -q 'x86-64'
+          file dist/unarrd-linux-arm64 | grep -q 'aarch64'
           (cd dist && sha256sum unarrd-linux-* > SHA256SUMS && cat SHA256SUMS)
       - name: The release
         env: { GH_TOKEN: "${{ github.token }}" }

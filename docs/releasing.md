@@ -38,13 +38,15 @@ The workflow is `.github/workflows/ci.yml`, the same as for `main`:
    `deny`: `make deny`.
 2. `image`: the image for linux/amd64 and linux/arm64, each built natively,
    with the OCI labels (source, licence, version, revision).
-3. `manifest`: one multi-architecture image under the tags below.
+3. `manifest`: one multi-architecture image under the tags below. For a
+   tag it waits for `deny`: a version's tags and `latest` are not
+   published over an advisory, a build of `main` is.
 4. `release`, for a tag only: the two static binaries are copied out of the
    images just published (`unarrd-linux-amd64`, `unarrd-linux-arm64`, the
    same bytes as in the image), with a `SHA256SUMS` file, and a GitHub
    Release named after the tag is created with them and the
-   `CHANGELOG.md` entry as its notes. It waits for `deny` too: a release
-   is not published over an advisory, where a build of `main` is.
+   `CHANGELOG.md` entry as its notes. Each binary is checked to be of
+   its architecture before it is published.
 
 ## Image tags
 

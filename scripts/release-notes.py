@@ -31,11 +31,10 @@ def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("version", help="the version, without the v of its tag")
     ap.add_argument("--check", action="store_true", help="only say whether the entry exists")
-    ap.add_argument("--changelog", type=Path, default=CHANGELOG)
     args = ap.parse_args()
-    body = entry(args.changelog.read_text(), args.version.removeprefix("v"))
+    body = entry(CHANGELOG.read_text(), args.version.removeprefix("v"))
     if body is None or not body.strip():
-        print(f"no entry for {args.version} in {args.changelog}", file=sys.stderr)
+        print(f"no entry for {args.version} in {CHANGELOG}", file=sys.stderr)
         return 1
     if not args.check:
         sys.stdout.write(body)
