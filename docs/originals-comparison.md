@@ -174,6 +174,36 @@ Radarr's `/history` and `/wanted/missing` 27 % more, Sonarr's
 real library (last pass 11 % below the one before), Unarr's on the
 scaled one (12 % above).
 
+The two binaries alternated in this container after the runs do not
+repeat those 27-29 %: `4bba6eb`, `bcd11fb`, `bcd11fb`, `4bba6eb`, each a
+fresh process of both personalities settled for a minute, five warm-up
+passes of the reads and a measured one, then 4 clients without pause
+for 60 s (`scripts/allocator-probe.py`; both built by `cargo build
+--release`, with the web interface). The cell is the median of the two
+processes'.
+
+| | Scaled: `4bba6eb` | `bcd11fb` | Real: `4bba6eb` | `bcd11fb` |
+|---|--:|--:|--:|--:|
+| Idle after the start: RSS / anonymous, MiB | 53.8 / 31.1 | 57.9 / 31.8 | 38.3 / 16.0 | 42.3 / 16.4 |
+| The reads: time, s | 7.64 | 7.73 | 1.21 | 1.21 |
+| The reads: peak anonymous, MiB | 137 | 140 | 47 | 48 |
+| 4 clients: requests per second | 55.8 | 57.3 | 337 | 322 |
+| 4 clients: p50 / p95, ms | 29.1 / 364 | 29.0 / 349 | 6.2 / 42.9 | 6.5 / 45.1 |
+| Radarr `/history`, p50 ms | 12.9 | 11.6 | 7.6 | 8.1 |
+| Radarr `/wanted/missing`, p50 ms | 6.9 | 6.2 | 3.6 | 3.8 |
+| Sonarr `/episode`, p50 ms | 3.0 | 3.0 | 2.7 | 2.6 |
+| Sonarr `/wanted/missing`, p50 ms | 11.3 | 13.3 | 2.8 | 3.0 |
+
+On the scaled library the medians of the routes, queues aside, are from
+10 % lower to 18 % higher at `bcd11fb`, and the 18 % (Sonarr's
+`/wanted/missing`) is one process: 15.3 and 11.4 ms, against 11.2 and
+11.5. On the real library, where the routes take a few milliseconds,
+`bcd11fb` is 3 to 12 % slower on seven of the nine and gets 4 % fewer
+requests per second under 4 clients, in both its processes (320 and
+324, against 335 and 338); not looked into. At rest it holds 4 MiB more
+on both libraries, nearly all of it not anonymous: the binary is 38.0 MB
+against 32.3, the unwinding and the code since.
+
 Since the `4bba6eb` runs the release profile unwinds on a panic instead of
 aborting, and a panic is caught where a request or a command starts
 (`core/survive-a-panic`, issue #14). What that costs was measured on
@@ -608,8 +638,8 @@ idle CPU of each side.
 
 | Date | Library | Unarr | Runs | Originals: idle RSS / CPU | Unarr: idle RSS / CPU | Note |
 |---|---|---|--:|--:|--:|---|
-| 2026-11-20 | scaled | `bcd11fb` | 1 | 542 MiB / 16.5 s/h | 34 MiB / 1.2 s/h | the audit's routes, events, settings and server behaviour, the plex.tv ping, the unwinding of #14; the originals' routes up to 22 % faster than in the `4bba6eb` run; Unarr's warm-up flagged (last pass 12 % above the one before) and its routes up to 29 % slower |
-| 2026-11-20 | real | `bcd11fb` | 1 | 488 MiB / 17.7 s/h | 30 MiB / 1.1 s/h | the same; the originals' warm-up flagged (last pass 11 % below the one before), noise |
+| 2026-11-20 | scaled | `bcd11fb` | 1 | 542 MiB / 16.5 s/h | 34 MiB / 1.2 s/h | the audit's routes, events, settings and server behaviour, the plex.tv ping, the unwinding of #14; the originals' routes up to 22 % faster than in the `4bba6eb` run; Unarr's warm-up flagged (last pass 12 % above the one before) and its routes up to 29 % slower, noise: the binaries alternated are from 10 % faster to 18 % slower, the 18 % one process |
+| 2026-11-20 | real | `bcd11fb` | 1 | 488 MiB / 17.7 s/h | 30 MiB / 1.1 s/h | the same; the originals' warm-up flagged (last pass 11 % below the one before), noise; the binaries alternated: `bcd11fb` 3-12 % slower on seven routes of nine, 4 % fewer requests per second under 4 clients |
 | 2026-11-20 | scaled | `376a687` | 1 | 541 MiB / 14.9 s/h | 34 MiB / 1.0 s/h | another container than the `bcd11fb` runs; the server outside the API as the originals' pipeline (the low rows of the HTTP audit), before the routes, events and settings of the audit; the reads not compressed on either side; no route slower than the original's |
 | 2026-11-20 | real | `376a687` | 1 | 483 MiB / 17.6 s/h | 30 MiB / 1.0 s/h | the same; Radarr's `/movie` 23.0 ms against 29.9 |
 | 2026-11-18 | scaled | `4bba6eb` | 1 | 541 MiB / 17.0 s/h | 32 MiB / 1.2 s/h | Radarr's history read in one database call, its `/history/since` (not in the reads) streamed; the originals' routes 12-63 % slower than in the `c53a302` run; Unarr's warm-up flagged (last pass 11 % above the one before), noise |
