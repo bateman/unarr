@@ -2792,7 +2792,8 @@ could not settle it. What changed, and what was decided on the way:
   so behind a TLS-terminating proxy the answers leave uncompressed, as the
   originals' do. The encoder costs the release binary 1,126,528 bytes,
   522,738 under `gzip -9` (two release builds of this branch, with and
-  without it), to an image already over its target (section 9).
+  without it), to an image then over its target of 15 MB (section 9; 20
+  MB since, section 21.11).
   Dropping it is one feature of tower-http (`compression-br`) and two
   assertions of a test; it is kept, by decision (section 21.8).
 - **503 while starting.** The daemon binds the listener and serves before
