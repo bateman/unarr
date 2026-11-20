@@ -276,7 +276,7 @@ pub async fn quality_definition(
     )?))
 }
 
-fn profile_item_resource(item: &ProfileItem) -> Value {
+pub(crate) fn profile_item_resource(item: &ProfileItem) -> Value {
     let mut out = json!({
         "items": item.items.iter().map(profile_item_resource).collect::<Vec<_>>(),
         "allowed": item.allowed,

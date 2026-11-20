@@ -2557,30 +2557,13 @@ pub async fn quality_profile_delete(
 /// `GET /qualityprofile/schema`: `QualityProfileService.GetDefaultProfile("")`,
 /// the qualities grouped by weight and every custom format at 0.
 pub async fn quality_profile_schema(State(state): State<AppState>) -> ApiResult<Json<Value>> {
-    use unarr_core::quality::{Quality, SONARR_QUALITIES};
-    let mut items = Vec::new();
-    let mut group_id = 1000;
-    let mut weights: Vec<i64> = Vec::new();
-    for d in SONARR_QUALITIES {
-        if !weights.contains(&d.weight) {
-            weights.push(d.weight);
-        }
-    }
-    for w in weights {
-        let group: Vec<_> = SONARR_QUALITIES.iter().filter(|d| d.weight == w).collect();
-        let quality = |id: i64| json!({"allowed": false, "items": [], "quality": Quality::by_id(id)});
-        if group.len() == 1 {
-            items.push(quality(group[0].quality.id));
-            continue;
-        }
-        items.push(json!({
-            "allowed": false,
-            "id": group_id,
-            "items": group.iter().map(|d| quality(d.quality.id)).collect::<Vec<_>>(),
-            "name": format!("WEB {}p", group[0].quality.resolution),
-        }));
-        group_id += 1;
-    }
+    // The default profiles' rule, with nothing allowed: one place says
+    // which qualities are grouped and how the group is named.
+    let items: Vec<Value> = unarr_core::defaults::default_profile("", 0, &[], &[])
+        .items
+        .iter()
+        .map(crate::routes::catalog::profile_item_resource)
+        .collect();
     let formats = state
         .db()
         .call(|c| store::catalog::list_custom_formats(c))
