@@ -1,6 +1,6 @@
 {
   "body": [],
-  "recordedAt": "2026-11-13T15:38:04Z",
+  "recordedAt": "2026-11-20T07:24:10Z",
   "request": {
     "method": "POST",
     "path": "/api/v3/metadata/testall"

@@ -41,7 +41,7 @@
     "urlBase": "",
     "username": "unarr"
   },
-  "recordedAt": "2026-11-13T15:38:04Z",
+  "recordedAt": "2026-11-20T07:24:09Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/config/host/1"

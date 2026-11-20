@@ -12,21 +12,21 @@
       "updateScheduledTask": true
     },
     "commandName": "Clear Blocklist",
-    "duration": "00:00:00.0032127",
-    "ended": "2026-11-13T15:38:16Z",
+    "duration": "00:00:00.0026097",
+    "ended": "2026-11-20T07:24:21Z",
     "id": 472959,
     "name": "ClearBlocklist",
     "priority": "normal",
-    "queued": "2026-11-13T15:38:16Z",
+    "queued": "2026-11-20T07:24:21Z",
     "result": "successful",
     "sendUpdatesToClient": true,
-    "started": "2026-11-13T15:38:16Z",
-    "stateChangeTime": "2026-11-13T15:38:16Z",
+    "started": "2026-11-20T07:24:21Z",
+    "stateChangeTime": "2026-11-20T07:24:21Z",
     "status": "completed",
     "trigger": "manual",
     "updateScheduledTask": true
   },
-  "recordedAt": "2026-11-13T15:38:26Z",
+  "recordedAt": "2026-11-20T07:24:31Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/command/472959"

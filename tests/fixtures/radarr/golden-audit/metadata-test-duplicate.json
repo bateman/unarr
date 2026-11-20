@@ -1,0 +1,23 @@
+{
+  "body": [
+    {
+      "attemptedValue": "XbmcMetadata 1",
+      "errorCode": "PredicateValidator",
+      "errorMessage": "Should be unique",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Name",
+        "propertyValue": "XbmcMetadata 1"
+      },
+      "propertyName": "Name",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-20T07:24:10Z",
+  "request": {
+    "body": "bodies/metadata-test-duplicate.json",
+    "method": "POST",
+    "path": "/api/v3/metadata/test"
+  },
+  "status": 400
+}
