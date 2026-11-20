@@ -48,6 +48,20 @@ jobs:
       # A panic costs one request or one command, on the binary as it is
       # released: a release build of its own, with the test-only switch.
       - run: make panic-test
+      # The image is a musl build with jemalloc (crates/unarrd/src/main.rs),
+      # code that no other build compiles: only the image job, after a
+      # merge. Built here too, and started: a settings string jemalloc does
+      # not take is no compile error, only a line on stderr and its defaults.
+      # Without debug information: half the disk, at the end of a job short of it.
+      - name: The musl build, with jemalloc
+        env: { CARGO_PROFILE_DEV_DEBUG: "0" }
+        run: |
+          sudo apt-get install -y musl-tools
+          rustup target add x86_64-unknown-linux-musl
+          cargo build -p unarrd --target x86_64-unknown-linux-musl
+          out=$(target/x86_64-unknown-linux-musl/debug/unarrd --version 2>&1)
+          echo "$out"
+          ! grep -q '<jemalloc>' <<<"$out"
 
   # Advisories, licences and sources of the dependencies (deny.toml): a
   # release waits for it; an image of main does not, a new advisory being
