@@ -118,16 +118,19 @@ pub enum LogLevel {
 }
 
 impl LogLevel {
-    /// `LogLevel.FromString`: the name, without regard to case.
+    /// `LogLevel.FromString`: the name, without regard to case, and the
+    /// three other names the originals' NLog reads, as recorded on Sonarr
+    /// with `Sonarr__Log__ConsoleLevel`: `Information`, `Warning`, `None`.
+    /// `Critical` it does not read (the original then fails to start).
     pub fn parse(s: &str) -> Option<Self> {
         Some(match s.trim().to_ascii_lowercase().as_str() {
             "trace" => LogLevel::Trace,
             "debug" => LogLevel::Debug,
-            "info" => LogLevel::Info,
-            "warn" => LogLevel::Warn,
+            "info" | "information" => LogLevel::Info,
+            "warn" | "warning" => LogLevel::Warn,
             "error" => LogLevel::Error,
             "fatal" => LogLevel::Fatal,
-            "off" => LogLevel::Off,
+            "off" | "none" => LogLevel::Off,
             _ => return None,
         })
     }
@@ -361,6 +364,10 @@ mod environment_tests {
             ("trace", "warn", LogLevel::Warn),
             ("debug", "off", LogLevel::Off),
             ("debug", "loud", LogLevel::Info),
+            ("debug", "Warning", LogLevel::Warn),
+            ("trace", "Information", LogLevel::Info),
+            ("debug", "None", LogLevel::Off),
+            ("debug", "Critical", LogLevel::Info),
         ] {
             h.log_level = log.into();
             h.console_log_level = console.into();

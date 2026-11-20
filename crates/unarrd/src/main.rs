@@ -783,7 +783,7 @@ impl LogControl {
             return;
         }
         if let Some(value) = host.unreadable_console_level() {
-            tracing::warn!("ConsoleLogLevel {value:?} names no level (Trace, Debug, Info, Warn, Error, Fatal, Off); the console logs as if it were blank");
+            tracing::warn!("ConsoleLogLevel {value:?} names no level (Trace, Debug, Info, Warn, Error, Fatal, Off, or Information, Warning, None); the console logs as if it were blank");
         }
         self.apply(&host.log_level, host.console_level());
     }
