@@ -1,0 +1,20 @@
+# The housekeeping of a database a clock that went back and a second
+# user left (setup.sh): CleanupAdditionalUsers and
+# FixFutureRunScheduledTasks. A recording of its own; same format as
+# ../golden/requests.txt.
+#
+#   GOLDEN_SETUP=tests/fixtures/radarr/golden-housekeeping/setup.sh \
+#       GOLDEN_REQUESTS=tests/fixtures/radarr/golden-housekeeping/requests.txt \
+#       GOLDEN_OUT=tests/fixtures/radarr/golden-housekeeping make golden-radarr
+#
+# Neither repair shows in an answer: the tasks page reads the scheduler's
+# cache, filled at start, and the users are not listed. db-after.json is
+# what the database held after the recording, written by hand with
+#
+#   python3 -I scripts/housekeeping-snapshot.py .cache/radarr/golden-data/radarr.db \
+#       tests/fixtures/radarr/golden-housekeeping/db-after.json
+system-task-before GET /api/v3/system/task
+command-housekeeping POST /api/v3/command bodies/command-housekeeping.json
+sleep 10
+command-housekeeping-get GET /api/v3/command/{id:command-housekeeping}
+system-task-after GET /api/v3/system/task

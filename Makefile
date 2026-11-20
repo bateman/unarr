@@ -4,7 +4,7 @@ NAME  ?= unarr
 IMAGE ?= ghcr.io/bateman/unarr
 TAG   ?= dev
 
-.PHONY: help build run run-both test panic-test fmt lint check clean docker check-name golden golden-radarr sonarr radarr ui ui-sonarr ui-radarr ui-present bazarr bazarr-radarr prowlarr prowlarr-radarr recyclarr recyclarr-radarr http-audit anonymize scale-fixture compare-originals
+.PHONY: help build run run-both test panic-test fmt lint check deny release-notes clean docker check-name golden golden-radarr sonarr radarr ui ui-sonarr ui-radarr ui-present bazarr bazarr-radarr prowlarr prowlarr-radarr recyclarr recyclarr-radarr http-audit anonymize scale-fixture compare-originals
 UNARR_URL ?= http://127.0.0.1:8989
 RADARR_URL ?= http://127.0.0.1:7878
 UNARR_API_KEY ?= 0123456789abcdef0123456789abcdef
@@ -48,6 +48,13 @@ check: ## fmt check + lint + test, what CI runs
 	cargo fmt --all -- --check
 	$(MAKE) lint
 	$(MAKE) test
+
+deny: ## Advisories, licences and sources of the dependencies (cargo install cargo-deny; deny.toml)
+	cargo deny check
+
+release-notes: ## The CHANGELOG.md entry of a version, as its GitHub Release says it (VERSION=0.1.0)
+	@test -n "$(VERSION)" || { echo "usage: make release-notes VERSION=0.1.0"; exit 2; }
+	@python3 -I scripts/release-notes.py $(VERSION)
 
 clean: ## Remove build artifacts
 	cargo clean

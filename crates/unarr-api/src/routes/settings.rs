@@ -334,10 +334,123 @@ pub async fn language_profiles() -> Json<Vec<Value>> {
     Json(vec![language_profile_resource()])
 }
 
-pub async fn language_profile(axum::extract::Path(id): axum::extract::Path<i64>) -> ApiResult<Json<Value>> {
-    if id == 1 {
-        Ok(Json(language_profile_resource()))
-    } else {
-        Err(crate::error::ApiError::NotFound)
+/// `GET /languageprofile/{id}` and `/languageprofile/schema`: the one
+/// profile, whatever the id.
+pub async fn language_profile(axum::extract::Path(_id): axum::extract::Path<i64>) -> Json<Value> {
+    Json(language_profile_resource())
+}
+
+pub async fn language_profile_schema() -> Json<Value> {
+    Json(language_profile_resource())
+}
+
+/// What `LanguageProfileController` answers a write with: the resource it
+/// read from the body, written back as it serializes one (nothing unknown,
+/// nothing null, no id of 0). Nothing is stored.
+fn language_profile_echo(body: &Value, id: i64) -> Value {
+    fn language(v: &Value) -> Option<Value> {
+        let v = v.as_object()?;
+        let mut out = serde_json::Map::new();
+        for key in ["id", "name"] {
+            if let Some(value) = v.get(key).filter(|value| !value.is_null()) {
+                out.insert(key.into(), value.clone());
+            }
+        }
+        Some(Value::Object(out))
     }
+    let mut out = serde_json::Map::new();
+    if let Some(name) = body.get("name").filter(|v| !v.is_null()) {
+        out.insert("name".into(), name.clone());
+    }
+    out.insert(
+        "upgradeAllowed".into(),
+        json!(body["upgradeAllowed"].as_bool().unwrap_or(false)),
+    );
+    if let Some(cutoff) = language(&body["cutoff"]) {
+        out.insert("cutoff".into(), cutoff);
+    }
+    if let Some(items) = body["languages"].as_array() {
+        let items: Vec<Value> = items
+            .iter()
+            .map(|item| {
+                let mut entry = serde_json::Map::new();
+                if let Some(language) = language(&item["language"]) {
+                    entry.insert("language".into(), language);
+                }
+                entry.insert(
+                    "allowed".into(),
+                    json!(item["allowed"].as_bool().unwrap_or(false)),
+                );
+                Value::Object(entry)
+            })
+            .collect();
+        out.insert("languages".into(), Value::Array(items));
+    }
+    if id != 0 {
+        out.insert("id".into(), json!(id));
+    }
+    Value::Object(out)
+}
+
+fn object_body(body: &Value) -> ApiResult<()> {
+    if body.is_object() {
+        Ok(())
+    } else {
+        Err(crate::error::ApiError::BadRequest(
+            "The request body must be a JSON object".into(),
+        ))
+    }
+}
+
+/// `POST /languageprofile`: 202 with the body read back.
+pub async fn language_profile_create(
+    Json(body): Json<Value>,
+) -> ApiResult<(axum::http::StatusCode, Json<Value>)> {
+    object_body(&body)?;
+    let id = body["id"].as_i64().unwrap_or(0);
+    Ok((
+        axum::http::StatusCode::ACCEPTED,
+        Json(language_profile_echo(&body, id)),
+    ))
+}
+
+/// `PUT /languageprofile`: the id the body names, which must be one.
+pub async fn language_profile_update(
+    Json(body): Json<Value>,
+) -> ApiResult<(axum::http::StatusCode, Json<Value>)> {
+    object_body(&body)?;
+    let id = body["id"].as_i64().unwrap_or(0);
+    if id <= 0 {
+        return Err(crate::error::ApiError::Validation(vec![
+            unarr_core::validation::ValidationFailure::greater_than("Id", json!(id), 0),
+        ]));
+    }
+    Ok((
+        axum::http::StatusCode::ACCEPTED,
+        Json(language_profile_echo(&body, id)),
+    ))
+}
+
+/// `PUT /languageprofile/{id}`: the body's id, or the route's when the
+/// body has none.
+pub async fn language_profile_update_id(
+    axum::extract::Path(route_id): axum::extract::Path<i64>,
+    Json(body): Json<Value>,
+) -> ApiResult<(axum::http::StatusCode, Json<Value>)> {
+    object_body(&body)?;
+    let id = match body["id"].as_i64().unwrap_or(0) {
+        0 => route_id,
+        id => id,
+    };
+    Ok((
+        axum::http::StatusCode::ACCEPTED,
+        Json(language_profile_echo(&body, id)),
+    ))
+}
+
+/// `DELETE /languageprofile/{id}`: an empty 200, and the profile stays.
+pub async fn language_profile_delete(
+    axum::extract::Path(_id): axum::extract::Path<i64>,
+) -> axum::http::StatusCode {
+    axum::http::StatusCode::OK
 }

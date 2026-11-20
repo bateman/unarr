@@ -1,0 +1,19 @@
+{
+  "body": {
+    "cutoff": {
+      "id": 1,
+      "name": "English"
+    },
+    "id": 3,
+    "languages": [],
+    "name": "Mine",
+    "upgradeAllowed": true
+  },
+  "recordedAt": "2026-11-19T21:33:09Z",
+  "request": {
+    "body": "bodies/languageprofile-with-id.json",
+    "method": "PUT",
+    "path": "/api/v3/languageprofile"
+  },
+  "status": 202
+}

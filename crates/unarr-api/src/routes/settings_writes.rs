@@ -696,6 +696,9 @@ pub fn apply_host_overrides(h: &mut unarr_core::config::HostConfig, o: &Map<Stri
     if let Some(v) = s("logLevel") {
         h.log_level = v;
     }
+    if let Some(v) = s("consoleLogLevel") {
+        h.console_log_level = v;
+    }
     if let Some(v) = s("sslCertPath") {
         h.ssl_cert_path = v;
     }
@@ -738,49 +741,18 @@ pub fn apply_host_overrides(h: &mut unarr_core::config::HostConfig, o: &Map<Stri
 async fn upsert_user(state: &AppState, username: String, password: String) -> ApiResult<()> {
     state
         .db()
-        .call(move |conn| {
-            use unarr_core::model::User;
-            let existing = store::providers::list_users(conn)?.into_iter().next();
-            let random = unarr_core::random::bytes::<32>()?;
-            let hash = |user: &mut User| {
-                let salt = &random[..16];
-                user.salt = Some(base64::Engine::encode(
-                    &base64::engine::general_purpose::STANDARD,
-                    salt,
-                ));
-                user.iterations = Some(10_000);
-                let mut key = [0u8; 32];
-                pbkdf2::pbkdf2_hmac::<sha2::Sha512>(password.as_bytes(), salt, 10_000, &mut key);
-                user.password = base64::Engine::encode(&base64::engine::general_purpose::STANDARD, key);
-            };
-            match existing {
+        .call(
+            move |conn| match store::providers::list_users(conn)?.into_iter().next() {
                 Some(mut user) => {
                     if user.password != password {
-                        hash(&mut user);
+                        crate::ui::set_hashed_password(&mut user, &password)?;
                     }
                     user.username = username.to_lowercase();
                     store::providers::update_user(conn, &user)
                 }
-                None => {
-                    let g = &random[16..];
-                    let mut user = User {
-                        id: 1,
-                        // A version 4 GUID, as `Guid.NewGuid` gives.
-                        identifier: format!(
-                            "{:02x}{:02x}{:02x}{:02x}-{:02x}{:02x}-4{:01x}{:02x}-{:02x}{:02x}-{:02x}{:02x}{:02x}{:02x}{:02x}{:02x}",
-                            g[0], g[1], g[2], g[3], g[4], g[5], g[6] & 0x0f, g[7],
-                            (g[8] & 0x3f) | 0x80, g[9], g[10], g[11], g[12], g[13], g[14], g[15]
-                        ),
-                        username: username.to_lowercase(),
-                        password: String::new(),
-                        salt: None,
-                        iterations: None,
-                    };
-                    hash(&mut user);
-                    store::providers::insert_user(conn, &user)
-                }
-            }
-        })
+                None => store::providers::insert_user(conn, &crate::ui::new_user(1, &username, &password)?),
+            },
+        )
         .await?;
     Ok(())
 }
@@ -968,6 +940,7 @@ pub async fn host(State(state): State<AppState>, Json(body): Json<Value>) -> Api
         "trustedNetworks",
         "branch",
         "logLevel",
+        "consoleLogLevel",
         "sslCertPath",
         "sslCertPassword",
         "urlBase",

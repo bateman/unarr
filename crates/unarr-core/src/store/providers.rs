@@ -362,6 +362,19 @@ pub fn set_scheduled_task_interval(conn: &Connection, id: i64, interval_minutes:
     Ok(())
 }
 
+/// The last run alone, as `FixFutureRunScheduledTasks` sets it.
+pub fn set_scheduled_task_last_execution(
+    conn: &Connection,
+    id: i64,
+    last_execution: DateTime<Utc>,
+) -> anyhow::Result<()> {
+    conn.execute(
+        "UPDATE scheduled_tasks SET last_execution = ?2 WHERE id = ?1",
+        params![id, ts_precise(Some(last_execution))],
+    )?;
+    Ok(())
+}
+
 /// `SetLastExecutionTime`.
 pub fn set_scheduled_task_execution(
     conn: &Connection,

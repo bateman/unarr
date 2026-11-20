@@ -1,0 +1,14 @@
+{
+  "body": {
+    "status": 404,
+    "title": "Not Found",
+    "traceId": "00-37a7c69716bd27df6e7daa3b01dc1250-e4624478eb4d36e9-00",
+    "type": "https://tools.ietf.org/html/rfc7231#section-6.5.4"
+  },
+  "recordedAt": "2026-11-19T21:33:09Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/calendar/999999"
+  },
+  "status": 404
+}

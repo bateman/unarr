@@ -1,0 +1,62 @@
+{
+ "tasks": [
+  {
+   "inTheFuture": false,
+   "interval": 10080,
+   "typeName": "NzbDrone.Core.Backup.BackupCommand"
+  },
+  {
+   "inTheFuture": false,
+   "interval": 180,
+   "typeName": "NzbDrone.Core.DataAugmentation.Scene.UpdateSceneMappingCommand"
+  },
+  {
+   "inTheFuture": false,
+   "interval": 1,
+   "typeName": "NzbDrone.Core.Download.RefreshMonitoredDownloadsCommand"
+  },
+  {
+   "inTheFuture": false,
+   "interval": 360,
+   "typeName": "NzbDrone.Core.HealthCheck.CheckHealthCommand"
+  },
+  {
+   "inTheFuture": false,
+   "interval": 1440,
+   "typeName": "NzbDrone.Core.Housekeeping.HousekeepingCommand"
+  },
+  {
+   "inTheFuture": false,
+   "interval": 5,
+   "typeName": "NzbDrone.Core.ImportLists.ImportListSyncCommand"
+  },
+  {
+   "inTheFuture": false,
+   "interval": 60,
+   "typeName": "NzbDrone.Core.Indexers.RssSyncCommand"
+  },
+  {
+   "inTheFuture": false,
+   "interval": 1440,
+   "typeName": "NzbDrone.Core.MediaFiles.Commands.CleanUpRecycleBinCommand"
+  },
+  {
+   "inTheFuture": false,
+   "interval": 5,
+   "typeName": "NzbDrone.Core.Messaging.Commands.MessagingCleanupCommand"
+  },
+  {
+   "inTheFuture": false,
+   "interval": 720,
+   "typeName": "NzbDrone.Core.Tv.Commands.RefreshSeriesCommand"
+  },
+  {
+   "inTheFuture": false,
+   "interval": 360,
+   "typeName": "NzbDrone.Core.Update.Commands.ApplicationUpdateCheckCommand"
+  }
+ ],
+ "users": [
+  "second"
+ ]
+}

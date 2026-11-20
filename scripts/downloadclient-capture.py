@@ -80,7 +80,12 @@ through a proxy) and the anonymisation.
    under its own directory with `--name`.
 
    The unarr-mock crate replays a capture under `/capture/<name>/`, and
-   `crates/unarr-mock/tests/captures.rs` runs Unarr's clients against it.
+   `crates/unarr-mock/tests/captures.rs` runs Unarr's clients against it;
+   `/capture/<name>@<seqs>/` replays only the exchanges with those `seq`
+   numbers (`1,18-22`), one moment of a long proxy recording, which
+   `crates/unarr-mock/tests/proxy_captures.rs` compares request by request
+   with what Unarr sends. SABnzbd only finishes a job with a news server:
+   `scripts/nntp-stub.py` stands in for one.
 """
 
 from __future__ import annotations
@@ -403,7 +408,7 @@ def cmd_from_log(args) -> None:
 
 # Matched anywhere in the key name (`web_ui_username`, `nzbget_password`).
 SECRET_JSON_KEY = re.compile(
-    r"(apikey|api_key|^key$|password|passwd|^pass$|username|user_name|^user$|login|token|cookie|^sid$|"
+    r"(apikey|api_key|nzb_key|^key$|password|passwd|^pass$|username|user_name|^user$|login|token|cookie|^sid$|"
     r"session|secret|email|mail|host|hostname|^ip$|address|^server|servers)",
     re.IGNORECASE,
 )

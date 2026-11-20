@@ -1,0 +1,23 @@
+# Events, commands and settings of docs/audit/7-triage.md the other
+# recordings do not show: the console's level saved with the host
+# settings, and the deprecated CheckForFinishedDownload command and what
+# it logs. A recording of its own; same format as ../golden/requests.txt.
+# Radarr has no UntrackedDownloadCompletedEvent: a manual import without a
+# download raises nothing more than the import's own.
+#
+#   GOLDEN_REQUESTS=tests/fixtures/radarr/golden-events/requests.txt \
+#       GOLDEN_OUT=tests/fixtures/radarr/golden-events make golden-radarr
+
+# ConsoleLogLevel: stored as sent, read back, then blank again. The
+# fixture's AllowedHosts, `*`, is refused by the form: blank it is.
+config-host GET /api/v3/config/host
+config-host-put-console PUT /api/v3/config/host bodies/config-host-put-console.json
+config-host-console GET /api/v3/config/host
+config-host-put-console-blank PUT /api/v3/config/host bodies/config-host-put-console-blank.json
+
+# The command third-party callers used before RefreshMonitoredDownloads:
+# run, as the refresh, and a warning in the log.
+command-check-finished POST /api/v3/command bodies/command-check-finished.json
+sleep 6
+command-check-finished-get GET /api/v3/command/{id:command-check-finished}
+log-warnings GET /api/v3/log?page=1&pageSize=50&sortKey=time&sortDirection=descending&level=warn

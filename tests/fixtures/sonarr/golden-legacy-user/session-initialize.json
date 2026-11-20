@@ -1,0 +1,21 @@
+{
+  "body": {
+    "analytics": false,
+    "apiKey": "0123456789abcdef0123456789abcdef",
+    "apiRoot": "/api/v3",
+    "branch": "main",
+    "instanceName": "Sonarr",
+    "isProduction": true,
+    "release": "4.0.20.3014-main",
+    "theme": "auto",
+    "urlBase": "",
+    "userHash": "53984e57",
+    "version": "4.0.20.3014"
+  },
+  "recordedAt": "2026-11-19T21:46:43Z",
+  "request": {
+    "method": "GET",
+    "path": "/initialize.json"
+  },
+  "status": 200
+}

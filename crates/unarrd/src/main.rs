@@ -6,8 +6,39 @@ use clap::Parser;
 use tracing_subscriber::layer::SubscriberExt;
 use tracing_subscriber::util::SubscriberInitExt;
 use unarr_api::{AppState, Lifecycle, LogBuffer, LogFiles, ProcessLog, RuntimeInfo, Settings};
-use unarr_core::config::{AuthenticationMethod, AuthenticationRequired, HostConfig};
+use unarr_core::config::{AuthenticationMethod, AuthenticationRequired, HostConfig, LogLevel};
 use unarr_core::{Db, Personality};
+
+mod console;
+
+/// The allocator of the static musl build, the one the image ships. musl's
+/// own takes one lock for every allocation, so the threads that serve
+/// requests at the same time wait on each other; jemalloc's do not
+/// (docs/DESIGN.md, section 21.6). A glibc build keeps glibc's, whose arenas
+/// are measured in `docs/originals-comparison.md`.
+#[cfg(target_env = "musl")]
+#[global_allocator]
+static ALLOCATOR: tikv_jemallocator::Jemalloc = tikv_jemallocator::Jemalloc;
+
+/// jemalloc's settings, which it reads before `main`: a background thread
+/// returns the freed pages, four arenas rather than four per core, and pages
+/// are returned a second after they were freed rather than ten. Against
+/// jemalloc's defaults, measured: the same speed, the peak under load a
+/// third lower. `_RJEM_MALLOC_CONF` in the environment still overrides
+/// any of them.
+#[cfg(target_env = "musl")]
+#[export_name = "_rjem_malloc_conf"]
+static JEMALLOC_CONF: JemallocConf =
+    JemallocConf(c"background_thread:true,narenas:4,dirty_decay_ms:1000,muzzy_decay_ms:0".as_ptr());
+
+/// `const char *malloc_conf`, which a static cannot hold as a raw pointer.
+#[cfg(target_env = "musl")]
+#[repr(transparent)]
+struct JemallocConf(*const std::ffi::c_char);
+
+// The pointer is to a literal, never written.
+#[cfg(target_env = "musl")]
+unsafe impl Sync for JemallocConf {}
 
 /// Unarr daemon: a lightweight, API-compatible replacement for Sonarr, Radarr and Lidarr.
 #[derive(Parser, Debug)]
@@ -364,6 +395,9 @@ fn load_or_create_config(
         analytics_enabled: false,
         theme: "auto".into(),
         trust_cgnat_ip_addresses: false,
+        console_log_level: String::new(),
+        console_log_format: unarr_core::config::ConsoleLogFormat::Standard,
+        legacy_user: None,
     };
     tracing::info!(path = %own.display(), "no config.xml found, writing a new one");
     std::fs::write(&own, unarr_import::config_xml::render(&cfg))?;
@@ -529,6 +563,14 @@ fn open_database(
     if personality == Personality::Sonarr {
         db.call_blocking(|conn| unarr_core::defaults::ensure(conn))?;
     }
+    // `UserService.Handle(ApplicationStartedEvent)`: the user and password
+    // of a `config.xml` from before Sonarr v3, when there is no user yet.
+    let mut host = host;
+    if let Some(legacy) = host.legacy_user.take() {
+        if db.call_blocking(move |conn| unarr_api::ui::add_legacy_user(conn, &legacy))? {
+            tracing::info!("the user named in config.xml (Username, Password) is now the user");
+        }
+    }
     Ok((db, host))
 }
 
@@ -659,6 +701,17 @@ fn settings_filter(level: &str) -> tracing_subscriber::EnvFilter {
     }
 }
 
+/// What the console and the files together need: the more verbose of the
+/// two levels, as [`settings_filter`] spells it.
+fn combined_filter(log_level: &str, console: LogLevel) -> tracing_subscriber::EnvFilter {
+    let files = LogLevel::parse(log_level).unwrap_or(LogLevel::Info);
+    match files.min(console) {
+        LogLevel::Trace => settings_filter("trace"),
+        LogLevel::Debug => settings_filter("debug"),
+        _ => settings_filter("info"),
+    }
+}
+
 /// The level of Settings > General as the log files know it.
 fn settings_level(level: &str) -> tracing::level_filters::LevelFilter {
     match level.trim().to_ascii_lowercase().as_str() {
@@ -672,35 +725,108 @@ fn settings_level(level: &str) -> tracing::level_filters::LevelFilter {
 type FilterHandle =
     tracing_subscriber::reload::Handle<tracing_subscriber::EnvFilter, tracing_subscriber::Registry>;
 
-/// The console: `tracing`'s own lines, cleansed of secrets like every
-/// other place a line goes to, and coloured only on a terminal (`docker
-/// logs` and a redirected output get plain text).
-fn console_layer<S>() -> impl tracing_subscriber::Layer<S>
+/// The console: `tracing`'s own lines or CLEF (see [`console`]), cleansed
+/// of secrets like every other place a line goes to, and coloured only on
+/// a terminal (`docker logs` and a redirected output get plain text).
+fn console_layer<S>(console: &console::Console) -> impl tracing_subscriber::Layer<S>
 where
     S: tracing::Subscriber + for<'a> tracing_subscriber::registry::LookupSpan<'a>,
 {
     use std::io::IsTerminal;
-    tracing_subscriber::fmt::layer()
-        .with_ansi(std::io::stdout().is_terminal())
-        .with_writer(|| unarr_api::cleanse::Cleansing(std::io::stdout()))
+    console.layer(
+        || unarr_api::cleanse::Cleansing(std::io::stdout()),
+        std::io::stdout().is_terminal(),
+    )
+}
+
+/// The console's format before any personality has read its settings:
+/// the first `<APP>__LOG__CONSOLEFORMAT` of the personalities started
+/// that names one, as the originals read `SONARR__LOG__CONSOLEFORMAT`
+/// when they open their console.
+fn process_console_format(personalities: &[String]) -> unarr_core::config::ConsoleLogFormat {
+    personalities
+        .iter()
+        .filter_map(|name| parse_personality(name).ok())
+        .find_map(|p| {
+            let var = format!("{}__LOG__CONSOLEFORMAT", p.app_name().to_uppercase());
+            std::env::var(var)
+                .ok()
+                .and_then(|v| unarr_core::config::ConsoleLogFormat::parse(&v, false))
+        })
+        .unwrap_or_default()
+}
+
+/// What changes what a personality logs while it runs: the filter in
+/// front of everything, the console's level and format, the level of its
+/// recent lines, and its files.
+struct LogControl {
+    filter: FilterHandle,
+    console: console::Console,
+    recent: console::SharedLevel,
+    files: LogFiles,
+}
+
+impl LogControl {
+    /// `ReconfigureLogging.Reconfigure`: the files and the recent lines at
+    /// `LogLevel`, the console at its own level, in its format. With
+    /// `RUST_LOG` set, the operator's word, only the format follows the
+    /// settings.
+    fn apply_host(&self, host: &HostConfig, rust_log: bool) {
+        self.console.set_format(host.console_log_format);
+        if rust_log {
+            return;
+        }
+        if let Some(value) = host.unreadable_console_level() {
+            tracing::warn!("ConsoleLogLevel {value:?} names no level (Trace, Debug, Info, Warn, Error, Fatal, Off); the console logs as if it were blank");
+        }
+        self.apply(&host.log_level, host.console_level());
+    }
+
+    fn apply(&self, log_level: &str, console_level: LogLevel) {
+        self.files.set_level(settings_level(log_level));
+        self.recent.set(settings_level(log_level));
+        self.console.set_level(console::level_filter(console_level));
+        if let Err(e) = self.filter.reload(combined_filter(log_level, console_level)) {
+            tracing::warn!("The log level could not be changed: {e}");
+        }
+    }
 }
 
 /// Where a personality logs: the console, its recent lines (`GET /log`)
-/// and its files; and the handle that changes the level it logs at.
+/// and its files; and what changes the level they log at.
 fn personality_dispatch(
     logs: &LogBuffer,
     files: &LogFiles,
     filter: tracing_subscriber::EnvFilter,
-) -> (tracing::Dispatch, FilterHandle) {
+    format: unarr_core::config::ConsoleLogFormat,
+) -> (tracing::Dispatch, LogControl) {
+    use tracing_subscriber::Layer;
     let (filter, handle) = tracing_subscriber::reload::Layer::new(filter);
+    let console = console::Console::new(format);
+    // Until the settings are read, what the filter in front lets through.
+    let recent = console::SharedLevel::new(tracing::level_filters::LevelFilter::TRACE);
+    let level = recent.clone();
     let dispatch = tracing::Dispatch::new(
         tracing_subscriber::registry()
             .with(filter)
-            .with(console_layer())
-            .with(logs.clone())
+            .with(console_layer(&console))
+            .with(
+                logs.clone()
+                    .with_filter(tracing_subscriber::filter::filter_fn(move |m| {
+                        level.enabled(m.level())
+                    })),
+            )
             .with(files.clone()),
     );
-    (dispatch, handle)
+    (
+        dispatch,
+        LogControl {
+            filter: handle,
+            console,
+            recent,
+            files: files.clone(),
+        },
+    )
 }
 
 /// The runtime a personality runs on. Every thread it starts, workers and
@@ -726,9 +852,8 @@ fn start(
     args: &Args,
     name: &str,
     logs: &LogBuffer,
-    files: &LogFiles,
     dispatch: &tracing::Dispatch,
-    filter: FilterHandle,
+    control: LogControl,
 ) -> anyhow::Result<(tokio::runtime::Runtime, AppState, Listening)> {
     let runtime = personality_runtime(name, dispatch)
         .with_context(|| format!("starting the runtime for {personality:?}"))?;
@@ -739,21 +864,16 @@ fn start(
         unarr_core::panics::switch::fire(&format!("start:{name}"));
         let opened = open_personality(personality, args, logs)?;
         let state = opened.state;
-        // `ReconfigureLogging`: the level of Settings > General, now and
-        // whenever it is saved. `RUST_LOG`, when set, is the operator's
-        // word and stays in force.
-        if std::env::var_os("RUST_LOG").is_some() {
+        // `ReconfigureLogging`: the levels of the files and of the console
+        // and the console's format, now and whenever the settings are
+        // saved. `RUST_LOG`, when set, is the operator's word on what is
+        // logged and stays in force.
+        let rust_log = std::env::var_os("RUST_LOG").is_some();
+        if rust_log {
             tracing::info!("RUST_LOG is set: it decides what is logged, not the Log Level of the settings");
-        } else {
-            let files = files.clone();
-            state.set_log_level_hook(move |level| {
-                files.set_level(settings_level(level));
-                if let Err(e) = filter.reload(settings_filter(level)) {
-                    tracing::warn!("The log level could not be changed: {e}");
-                }
-            });
-            state.apply_log_level();
         }
+        state.set_log_level_hook(move |host| control.apply_host(host, rust_log));
+        state.apply_log_level();
         // A mock serving every metadata host under `<url>/<host>/`, for
         // replays against `scripts/mock-servarr.py`; unset in real use.
         if let Ok(url) = std::env::var("UNARR_METADATA_UPSTREAM") {
@@ -856,9 +976,10 @@ fn main() -> anyhow::Result<()> {
     // What is logged outside any personality goes to the console and, through
     // `process_log`, to every personality's recent lines and files.
     let process_log = ProcessLog::new();
+    let process_console = console::Console::new(process_console_format(&args.personalities));
     tracing_subscriber::registry()
         .with(log_filter())
-        .with(console_layer())
+        .with(console_layer(&process_console))
         .with(process_log.clone())
         .init();
 
@@ -892,16 +1013,20 @@ fn main() -> anyhow::Result<()> {
         let logs = LogBuffer::new();
         let files = LogFiles::open(&args.data.join(personality_dir(personality)).join("logs"), &name);
         process_log.add(logs.clone(), files.clone());
-        let (dispatch, filter) = personality_dispatch(&logs, &files, log_filter());
+        let (dispatch, control) = personality_dispatch(
+            &logs,
+            &files,
+            log_filter(),
+            process_console_format(&args.personalities),
+        );
         // A personality that cannot start, by an error or by a panic (a
         // database that does not open, an import or a migration that
         // fails, a port already taken), is reported and left down, and the
         // others start: stopping here would have the container restart in
         // a loop with every one of them down.
-        let started = unarr_core::panics::catch_sync(|| {
-            start(personality, &args, &name, &logs, &files, &dispatch, filter)
-        })
-        .unwrap_or_else(|panic| Err(anyhow::Error::new(panic)));
+        let started =
+            unarr_core::panics::catch_sync(|| start(personality, &args, &name, &logs, &dispatch, control))
+                .unwrap_or_else(|panic| Err(anyhow::Error::new(panic)));
         match started {
             Ok((runtime, state, served)) => {
                 listening.push(served);
@@ -1174,6 +1299,84 @@ mod tests {
         let _ = std::fs::remove_dir_all(&dir);
     }
 
+    /// A `config.xml` from before the user moved into the database holds
+    /// the user and its password in clear: with no user in the database,
+    /// it becomes the user, under its name in lower case; once there is
+    /// one, nothing changes. Recorded on both originals in
+    /// `tests/fixtures/*/golden-legacy-user`, with the fixture made by its
+    /// `setup.sh`: the login as unarr/fixture worked, `config/host` named
+    /// `unarr`, and the elements were gone from `config.xml` after.
+    #[test]
+    fn the_user_of_an_old_config_xml_becomes_the_user() {
+        for p in [Personality::Sonarr, Personality::Radarr] {
+            let fixture = Path::new(concat!(env!("CARGO_MANIFEST_DIR"), "/../../tests/fixtures"))
+                .join(personality_dir(p));
+            let golden = fixture.join("golden-legacy-user");
+            let recorded: serde_json::Value =
+                serde_json::from_str(&std::fs::read_to_string(golden.join("config-host.json")).unwrap())
+                    .unwrap();
+            assert_eq!(recorded["status"], 200);
+            let after = std::fs::read_to_string(golden.join("config-after.xml")).unwrap();
+            assert!(
+                !after.contains("<Username>") && !after.contains("<Password>"),
+                "{after}"
+            );
+
+            let dir = std::env::temp_dir().join(format!(
+                "unarr-legacy-user-{}-{}",
+                p.app_name(),
+                std::process::id()
+            ));
+            let _ = std::fs::remove_dir_all(&dir);
+            let (legacy, own_dir) = (dir.join("original"), dir.join("unarr"));
+            std::fs::create_dir_all(&legacy).unwrap();
+            std::fs::create_dir_all(&own_dir).unwrap();
+            std::fs::copy(fixture.join(p.legacy_db_file()), legacy.join(p.legacy_db_file())).unwrap();
+            let xml = std::fs::read_to_string(fixture.join("config.xml")).unwrap();
+            // As `setup.sh` leaves it.
+            std::fs::write(
+                legacy.join("config.xml"),
+                xml.replace(
+                    "</Config>",
+                    "  <Username>Unarr</Username>\n  <Password>fixture</Password>\n</Config>",
+                ),
+            )
+            .unwrap();
+            let users = |db: &Db| {
+                db.call_blocking(|conn| unarr_core::store::providers::list_users(conn))
+                    .unwrap()
+            };
+            // The fixture has its user: the file's is not taken.
+            let (db, host) = open_database(p, &own_dir, Some(&legacy)).unwrap();
+            assert_eq!(host.legacy_user, None);
+            let before = users(&db);
+            assert_eq!(before.len(), 1);
+            // An installation with no user yet.
+            db.call_blocking(|conn| Ok(conn.execute("DELETE FROM users", [])?))
+                .unwrap();
+            drop(db);
+            let _ = std::fs::remove_file(own_dir.join("config.xml"));
+            let (db, _) = open_database(p, &own_dir, Some(&legacy)).unwrap();
+            let after = users(&db);
+            assert_eq!(after.len(), 1);
+            assert_eq!(serde_json::json!(after[0].username), recorded["body"]["username"]);
+            assert_eq!(after[0].iterations, Some(10_000));
+            assert!(unarr_api::ui::verify_password(&after[0], "fixture"));
+            assert!(!unarr_api::ui::verify_password(&after[0], "Fixture"));
+            // Unarr's own copy of the file does not keep them.
+            assert!(!std::fs::read_to_string(own_dir.join("config.xml"))
+                .unwrap()
+                .contains("Username"));
+            drop(db);
+            // A later start, the original's file read in place, finds a user.
+            std::fs::copy(legacy.join("config.xml"), own_dir.join("config.xml")).unwrap();
+            let (db, _) = open_database(p, &own_dir, Some(&legacy)).unwrap();
+            assert_eq!(users(&db), after);
+            drop(db);
+            let _ = std::fs::remove_dir_all(&dir);
+        }
+    }
+
     fn meta(db: &Db, key: &'static str) -> Option<String> {
         db.call_blocking(move |conn| unarr_core::store::config::meta(conn, key))
             .unwrap()
@@ -1417,11 +1620,13 @@ mod tests {
         let _ = std::fs::remove_dir_all(&dir);
         let logs = LogBuffer::new();
         let files = LogFiles::open(&dir, "sonarr");
-        let (dispatch, filter) = personality_dispatch(&logs, &files, "info".into());
-        let apply = |level: &str| {
-            files.set_level(settings_level(level));
-            filter.reload(settings_filter(level)).unwrap();
-        };
+        let (dispatch, control) = personality_dispatch(
+            &logs,
+            &files,
+            "info".into(),
+            unarr_core::config::ConsoleLogFormat::Standard,
+        );
+        let apply = |level: &str| control.apply(level, LogLevel::Info);
         let read = |name: &str| std::fs::read_to_string(dir.join(name)).unwrap_or_default();
         tracing::dispatcher::with_default(&dispatch, || {
             apply("info");
@@ -1471,6 +1676,56 @@ mod tests {
         let _ = std::fs::remove_dir_all(&dir);
     }
 
+    /// The console has a level of its own (`ConsoleLogLevel`): a louder
+    /// console lets nothing more into the files or the recent lines, a
+    /// quieter one takes nothing from them.
+    #[test]
+    fn the_console_level_leaves_the_files_and_recent_lines_alone() {
+        let dir = std::env::temp_dir().join(format!("unarr-console-level-{}", std::process::id()));
+        let _ = std::fs::remove_dir_all(&dir);
+        let logs = LogBuffer::new();
+        let files = LogFiles::open(&dir, "sonarr");
+        let (dispatch, control) = personality_dispatch(
+            &logs,
+            &files,
+            "info".into(),
+            unarr_core::config::ConsoleLogFormat::Standard,
+        );
+        tracing::dispatcher::with_default(&dispatch, || {
+            control.apply("info", LogLevel::Trace);
+            tracing::debug!("for the console only");
+            tracing::info!("everywhere at info");
+            control.apply("debug", LogLevel::Warn);
+            tracing::debug!("for the files at debug");
+        });
+        let recent: Vec<String> = logs.entries().into_iter().map(|e| e.message).collect();
+        assert!(recent.contains(&"everywhere at info".to_string()), "{recent:?}");
+        assert!(
+            recent.contains(&"for the files at debug".to_string()),
+            "{recent:?}"
+        );
+        assert!(
+            !recent.contains(&"for the console only".to_string()),
+            "{recent:?}"
+        );
+        let info = std::fs::read_to_string(dir.join("sonarr.txt")).unwrap_or_default();
+        let debug = std::fs::read_to_string(dir.join("sonarr.debug.txt")).unwrap_or_default();
+        assert!(info.contains("everywhere at info"), "{info}");
+        assert!(
+            debug.contains("for the files at debug") && !debug.contains("for the console only"),
+            "{debug}"
+        );
+        assert_eq!(
+            combined_filter("info", LogLevel::Trace).to_string(),
+            settings_filter("trace").to_string()
+        );
+        assert_eq!(
+            combined_filter("debug", LogLevel::Warn).to_string(),
+            settings_filter("debug").to_string()
+        );
+        let _ = std::fs::remove_dir_all(&dir);
+    }
+
     /// One process, two personalities: whatever a personality's threads
     /// log (its tasks, the tasks they spawn, blocking work, its database
     /// thread) lands in its own files and recent lines, and nowhere else.
@@ -1483,7 +1738,12 @@ mod tests {
             let files = LogFiles::open(&root.join(name).join("logs"), name);
             // Not the environment's level: the test asserts on info lines
             // whatever `RUST_LOG` the shell exports.
-            let (dispatch, _) = personality_dispatch(&logs, &files, "info".into());
+            let (dispatch, _) = personality_dispatch(
+                &logs,
+                &files,
+                "info".into(),
+                unarr_core::config::ConsoleLogFormat::Standard,
+            );
             let runtime = personality_runtime(name, &dispatch).unwrap();
             // As `main` does: opened, and its database started, as itself.
             let db = tracing::dispatcher::with_default(&dispatch, || {

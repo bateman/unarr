@@ -1,0 +1,8 @@
+{
+ "$from": "metadata-1",
+ "$set": {
+  "id": 0,
+  "name": "Kodi Test",
+  "enable": true
+ }
+}

@@ -1248,6 +1248,34 @@ async fn the_backup_goldens_match() {
     .await;
 }
 
+/// What `tests/fixtures/radarr/golden-events` recorded on the original:
+/// the console's level saved with the host settings and read back, and
+/// the deprecated `CheckForFinishedDownload` run as the refresh of the
+/// downloads. The warning it logs is the series side's code, whose test
+/// reads it back from the log.
+#[tokio::test]
+async fn the_events_goldens_match() {
+    replay_list(
+        "golden-events",
+        events_mode,
+        &["queue sync", "queue/details sync"],
+    )
+    .await;
+}
+
+/// How each answer of the events recording is compared.
+fn events_mode(name: &str) -> Mode {
+    match name {
+        n if n.starts_with("config-host") => Mode::Exact(&["logLevel"]),
+        n if n.starts_with("command-") => Mode::Exact(COMMAND_STARTING),
+        // The page; its lines are what each program logged since it
+        // started, and this replay keeps none (the series side's test
+        // reads the warning back).
+        "log-warnings" => Mode::Exact(&["records", "totalRecords"]),
+        _ => Mode::Exact(&[]),
+    }
+}
+
 /// Milestone 4d, the import lists: the IMDb watchlist written, tested and
 /// synced, against `tests/fixtures/radarr/golden-list`.
 #[tokio::test]
@@ -1886,4 +1914,14 @@ fn the_order_check_sees_a_file_announced_out_of_turn() {
         movie_file_order_problems(&wrong.iter().collect::<Vec<_>>()).len(),
         1
     );
+}
+
+/// `CleanupAdditionalUsers` and `FixFutureRunScheduledTasks`, against
+/// what the original's database held after the same housekeeping
+/// (`tests/fixtures/radarr/golden-housekeeping`).
+#[tokio::test]
+async fn housekeeping_repairs_users_and_task_runs_as_the_original() {
+    let dirs = ReplayDirs::create_named("housekeeping");
+    let state = build_state(&dirs);
+    housekeeping_repairs_as_the_original(&state, &fixture_dir().join("golden-housekeeping"), API_KEY).await;
 }

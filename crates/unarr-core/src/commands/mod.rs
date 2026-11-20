@@ -196,6 +196,10 @@ pub enum BackupType {
 pub enum CommandBody {
     RssSync,
     RefreshMonitoredDownloads,
+    /// `CheckForFinishedDownloadCommand`: the name third-party callers
+    /// used before `RefreshMonitoredDownloads`. The originals still run
+    /// it, as the refresh, with a warning in the log.
+    CheckForFinishedDownload,
     ProcessMonitoredDownloads,
     EpisodeSearch {
         episode_ids: Vec<i64>,
@@ -365,6 +369,10 @@ const NAMES: &[(&str, &str)] = &[
     (
         "ProcessMonitoredDownloads",
         "NzbDrone.Core.Download.ProcessMonitoredDownloadsCommand",
+    ),
+    (
+        "CheckForFinishedDownload",
+        "NzbDrone.Core.Download.CheckForFinishedDownloadCommand",
     ),
     (
         "EpisodeSearch",
@@ -709,6 +717,7 @@ impl CommandBody {
                         self,
                         CommandBody::RssSync
                             | CommandBody::RefreshMonitoredDownloads
+                            | CommandBody::CheckForFinishedDownload
                             | CommandBody::ProcessMonitoredDownloads
                             | CommandBody::MessagingCleanup
                             | CommandBody::CheckHealth
@@ -751,6 +760,7 @@ impl CommandBody {
         match name {
             "RssSync" => CommandBody::RssSync,
             "RefreshMonitoredDownloads" => CommandBody::RefreshMonitoredDownloads,
+            "CheckForFinishedDownload" => CommandBody::CheckForFinishedDownload,
             "ProcessMonitoredDownloads" => CommandBody::ProcessMonitoredDownloads,
             "EpisodeSearch" => CommandBody::EpisodeSearch {
                 episode_ids: ints(&body["episodeIds"]),
@@ -930,6 +940,7 @@ impl CommandBody {
         match self {
             CommandBody::RssSync => "RssSync",
             CommandBody::RefreshMonitoredDownloads => "RefreshMonitoredDownloads",
+            CommandBody::CheckForFinishedDownload => "CheckForFinishedDownload",
             CommandBody::ProcessMonitoredDownloads => "ProcessMonitoredDownloads",
             CommandBody::EpisodeSearch { .. } => "EpisodeSearch",
             CommandBody::SeasonSearch { .. } => "SeasonSearch",
@@ -1009,6 +1020,7 @@ impl CommandBody {
         !matches!(
             self,
             CommandBody::RefreshMonitoredDownloads
+                | CommandBody::CheckForFinishedDownload
                 | CommandBody::ProcessMonitoredDownloads
                 | CommandBody::DownloadedEpisodesScan { .. }
                 | CommandBody::DownloadedMoviesScan { .. }
@@ -1739,6 +1751,26 @@ mod tests {
             split_camel_case("RefreshMonitoredDownloads"),
             "Refresh Monitored Downloads"
         );
+    }
+
+    /// `CheckForFinishedDownloadCommand`, the name before
+    /// `RefreshMonitoredDownloads`: both applications still take it, as a
+    /// command of its own name that the scheduler never queues.
+    #[test]
+    fn the_deprecated_download_check_is_still_a_command() {
+        for personality in [crate::Personality::Sonarr, crate::Personality::Radarr] {
+            let body = CommandBody::parse_for(personality, "checkForFinishedDownload", &json!({})).unwrap();
+            assert_eq!(body, CommandBody::CheckForFinishedDownload);
+            assert_eq!(body.name_in(personality), "CheckForFinishedDownload");
+        }
+        let body = CommandBody::CheckForFinishedDownload;
+        assert_eq!(
+            body.type_name(),
+            "NzbDrone.Core.Download.CheckForFinishedDownloadCommand"
+        );
+        assert!(!body.sends_updates() && !body.is_long_running() && !body.requires_disk_access());
+        assert!(body.updates_scheduled_task());
+        assert_eq!(split_camel_case(body.name()), "Check For Finished Download");
     }
 
     #[tokio::test]

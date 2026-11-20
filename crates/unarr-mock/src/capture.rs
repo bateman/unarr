@@ -13,7 +13,7 @@
 use std::collections::BTreeMap;
 use std::path::Path;
 
-use axum::http::{Method, StatusCode};
+use axum::http::{HeaderMap, Method, StatusCode};
 use serde_json::Value;
 
 use crate::clients::{percent_decode, Reply};
@@ -37,10 +37,15 @@ pub fn handle(
     method: &Method,
     path: &str,
     query: &BTreeMap<String, String>,
+    headers: &HeaderMap,
     body: &[u8],
 ) -> Option<Reply> {
     let rest = path.strip_prefix("/capture/")?;
     let (name, rest) = rest.split_once('/').map_or((rest, ""), |(n, r)| (n, r));
+    let (name, window) = match name.split_once('@') {
+        Some((n, seqs)) => (n, Some(parse_seqs(seqs))),
+        None => (name, None),
+    };
     let wanted = format!("/{rest}");
     let file = fixtures.join("downloadclients").join(name).join("capture.json");
     let miss = |note: &str| Reply {
@@ -54,14 +59,31 @@ pub fn handle(
         return Some(miss(&format!("no capture named {name}")));
     };
     let exchanges: Vec<Value> = serde_json::from_str(&text).unwrap_or_default();
-    // A JSON-RPC call names its method in the body; the capture keeps
-    // Sonarr's summary of it, `method(params)`.
+    // A JSON-RPC call names its method in the body; a capture from the
+    // trace log keeps Sonarr's summary of it, `method(params)`, one from
+    // the proxy the whole body.
     let rpc_method = serde_json::from_slice::<Value>(body)
         .ok()
         .and_then(|v| v["method"].as_str().map(String::from));
+    // Transmission's handshake: only a capture that recorded the header
+    // tells the two kinds of request apart.
+    let session = |h: &Value| {
+        h.as_object()
+            .is_some_and(|h| h.keys().any(|k| k.eq_ignore_ascii_case(SESSION_HEADER)))
+    };
+    let tracks_session = exchanges.iter().any(|x| session(&x["request"]["headers"]));
+    let sends_session = headers.contains_key(SESSION_HEADER);
     let found = exchanges.iter().find(|x| {
         let request = &x["request"];
+        if let Some(window) = &window {
+            if !x["seq"].as_u64().is_some_and(|n| window.contains(&n)) {
+                return false;
+            }
+        }
         if request["method"].as_str() != Some(method.as_str()) {
+            return false;
+        }
+        if tracks_session && session(&request["headers"]) != sends_session {
             return false;
         }
         let (recorded_path, recorded_query) = split_query(request["path"].as_str().unwrap_or(""));
@@ -69,7 +91,11 @@ pub fn handle(
             return false;
         }
         match (&rpc_method, request["body"].as_str()) {
-            (Some(m), Some(summary)) => summary == m || summary.starts_with(&format!("{m}(")),
+            (Some(m), Some(recorded)) => {
+                recorded == m
+                    || recorded.starts_with(&format!("{m}("))
+                    || recorded_method(recorded).as_deref() == Some(m.as_str())
+            }
             _ => true,
         }
     });
@@ -108,20 +134,65 @@ pub fn handle(
         _ => Vec::new(),
     };
     // The note names the JSON-RPC method when the recorded body is Sonarr's
-    // `method(params)` summary, else the path (a form body is not a name).
-    let what = exchange["request"]["body"]
-        .as_str()
-        .and_then(|s| s.split_once('('))
-        .map(|(method, _)| method.to_string())
-        .filter(|m| !m.is_empty() && m.chars().all(|c| c.is_ascii_alphanumeric() || c == '_'))
+    // `method(params)` summary or a whole JSON-RPC body, SABnzbd's `mode`
+    // (and `name`, the action) for its single `/api`, else the path (a form
+    // body is not a name).
+    let recorded_body = exchange["request"]["body"].as_str();
+    let what = recorded_body
+        .and_then(recorded_method)
+        .or_else(|| {
+            recorded_body
+                .and_then(|s| s.split_once('('))
+                .map(|(method, _)| method.to_string())
+                .filter(|m| !m.is_empty() && m.chars().all(|c| c.is_ascii_alphanumeric() || c == '_'))
+        })
+        .or_else(|| {
+            query.get("mode").map(|mode| match query.get("name") {
+                Some(name) => format!("{mode}/{name}"),
+                None => mode.clone(),
+            })
+        })
         .unwrap_or_else(|| wanted.trim_start_matches('/').to_string());
+    // The session id Transmission hands out with its 409 (anonymised).
+    let headers = response["headers"]
+        .as_object()
+        .into_iter()
+        .flatten()
+        .filter(|(k, _)| k.eq_ignore_ascii_case(SESSION_HEADER))
+        .filter_map(|(k, v)| v.as_str().map(|v| (k.clone(), v.to_string())))
+        .collect();
     Some(Reply {
         status,
         body,
         content_type,
-        headers: Vec::new(),
+        headers,
         served: format!("capture/{name}/{what}"),
     })
+}
+
+const SESSION_HEADER: &str = "X-Transmission-Session-Id";
+
+/// The `method` of a whole JSON-RPC body, as the proxy records it.
+fn recorded_method(body: &str) -> Option<String> {
+    serde_json::from_str::<Value>(body)
+        .ok()
+        .and_then(|v| v["method"].as_str().map(String::from))
+}
+
+/// `1,18-22` as the `seq` numbers it names.
+fn parse_seqs(list: &str) -> Vec<u64> {
+    let mut out = Vec::new();
+    for part in list.split(',').filter(|p| !p.is_empty()) {
+        match part.split_once('-') {
+            Some((a, b)) => {
+                if let (Ok(a), Ok(b)) = (a.parse::<u64>(), b.parse::<u64>()) {
+                    out.extend(a..=b);
+                }
+            }
+            None => out.extend(part.parse::<u64>().ok()),
+        }
+    }
+    out
 }
 
 fn split_query(path: &str) -> (String, BTreeMap<String, String>) {
@@ -151,12 +222,19 @@ mod tests {
     }
 
     #[test]
+    fn parses_sequence_windows() {
+        assert_eq!(parse_seqs("1,18-20"), [1, 18, 19, 20]);
+        assert_eq!(parse_seqs(""), Vec::<u64>::new());
+    }
+
+    #[test]
     fn unknown_capture_is_a_miss() {
         let reply = handle(
             Path::new("/nonexistent"),
             &Method::GET,
             "/capture/none/api",
             &BTreeMap::new(),
+            &HeaderMap::new(),
             b"",
         )
         .unwrap();

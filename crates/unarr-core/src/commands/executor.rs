@@ -320,10 +320,11 @@ impl Runtime {
     }
 
     /// Ask every metadata host through `upstreams`: Skyhook as the
-    /// provider, the services, XEM and the artwork. Tests and the replay
-    /// point them at a mock.
+    /// provider, the services, XEM and the artwork, and plex.tv. Tests and
+    /// the replay point them at a mock.
     pub fn set_upstreams(&self, upstreams: crate::metadata::Upstreams) {
         self.set_metadata(Arc::new(crate::metadata::Skyhook::new(upstreams.clone())));
+        self.notifier.set_upstreams(upstreams.clone());
         // Radarr's covers and metadata go out through its own client,
         // that is through its own proxy and certificate settings.
         let client = self
@@ -853,6 +854,7 @@ impl Runtime {
             model.body,
             CommandBody::RssSync
                 | CommandBody::RefreshMonitoredDownloads
+                | CommandBody::CheckForFinishedDownload
                 | CommandBody::EpisodeSearch { .. }
                 | CommandBody::SeasonSearch { .. }
                 | CommandBody::SeriesSearch { .. }
@@ -892,6 +894,22 @@ impl Runtime {
             user_invoked: model.trigger == CommandTrigger::Manual,
             interactive: false,
         };
+        // `DownloadMonitoringService.Execute(CheckForFinishedDownloadCommand)`:
+        // the refresh, under the old name, with a word for whoever still
+        // sends it.
+        let refresh;
+        let model = if model.body == CommandBody::CheckForFinishedDownload {
+            tracing::warn!(
+                "A third party app used the deprecated CheckForFinishedDownload command, it should be updated RefreshMonitoredDownloads instead"
+            );
+            refresh = CommandModel {
+                body: CommandBody::RefreshMonitoredDownloads,
+                ..model.clone()
+            };
+            &refresh
+        } else {
+            model
+        };
         if let Some(side) = &self.movies {
             return self.run_radarr(side, model, trigger).await;
         }
@@ -903,7 +921,10 @@ impl Runtime {
     async fn run_shared(&self, model: &CommandModel, id: i64, trigger: Trigger) -> anyhow::Result<()> {
         match &model.body {
             CommandBody::RssSync => self.rss_sync(id).await,
-            CommandBody::RefreshMonitoredDownloads => self.refresh_monitored_downloads().await,
+            // Run as the refresh by `run`: never seen here.
+            CommandBody::RefreshMonitoredDownloads | CommandBody::CheckForFinishedDownload => {
+                self.refresh_monitored_downloads().await
+            }
             CommandBody::ProcessMonitoredDownloads => self.process_monitored_downloads().await,
             CommandBody::RescanSeries { series_id } => self.rescan_series(id, *series_id).await,
             CommandBody::ManualImport { files, import_mode } => {

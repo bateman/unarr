@@ -512,6 +512,52 @@ pub fn verify_password(user: &User, password: &str) -> bool {
     }
 }
 
+/// `SetUserHashedPassword`: a new salt, 10,000 iterations of
+/// PBKDF2-HMAC-SHA512, 32 bytes, both in base64.
+pub fn set_hashed_password(user: &mut User, password: &str) -> anyhow::Result<()> {
+    let salt = unarr_core::random::bytes::<16>()?;
+    let mut key = [0u8; 32];
+    pbkdf2::pbkdf2_hmac::<sha2::Sha512>(password.as_bytes(), &salt, 10_000, &mut key);
+    user.salt = Some(base64::engine::general_purpose::STANDARD.encode(salt));
+    user.iterations = Some(10_000);
+    user.password = base64::engine::general_purpose::STANDARD.encode(key);
+    Ok(())
+}
+
+/// `UserService.Add`: a user with a new identifier (a version 4 GUID, as
+/// `Guid.NewGuid` gives), the name in lower case, the password hashed.
+pub fn new_user(id: i64, username: &str, password: &str) -> anyhow::Result<User> {
+    let g = unarr_core::random::bytes::<16>()?;
+    let mut user = User {
+        id,
+        identifier: format!(
+            "{:02x}{:02x}{:02x}{:02x}-{:02x}{:02x}-4{:01x}{:02x}-{:02x}{:02x}-{:02x}{:02x}{:02x}{:02x}{:02x}{:02x}",
+            g[0], g[1], g[2], g[3], g[4], g[5], g[6] & 0x0f, g[7],
+            (g[8] & 0x3f) | 0x80, g[9], g[10], g[11], g[12], g[13], g[14], g[15]
+        ),
+        username: username.to_lowercase(),
+        password: String::new(),
+        salt: None,
+        iterations: None,
+    };
+    set_hashed_password(&mut user, password)?;
+    Ok(user)
+}
+
+/// `UserService.Handle(ApplicationStartedEvent)`: with no user yet, the
+/// one a `config.xml` from before Sonarr v3 names becomes the user. Whether
+/// it was added.
+pub fn add_legacy_user(
+    conn: &rusqlite::Connection,
+    legacy: &unarr_core::config::LegacyUser,
+) -> anyhow::Result<bool> {
+    if !store::providers::list_users(conn)?.is_empty() {
+        return Ok(false);
+    }
+    store::providers::insert_user(conn, &new_user(1, &legacy.username, &legacy.password)?)?;
+    Ok(true)
+}
+
 fn hex(bytes: &[u8]) -> String {
     bytes.iter().map(|b| format!("{b:02x}")).collect()
 }

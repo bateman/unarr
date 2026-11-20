@@ -106,11 +106,13 @@ Would show in a particular set-up:
     and since 19 November 2026 a health warning says so while the setting
     is on (`ScriptImportCheck`, Unarr's own).
 15. **A UI language other than English** (`UILanguage`): only the English
-    dictionary is in the tree. Larger, by the 39 dictionaries.
-16. **A clock that jumps back** (`FixFutureRunScheduledTasks`): scheduled
-    tasks wait for the old time. Trivial.
-17. **A manual import of an untracked file**: no Import Complete
-    notification. Small.
+    dictionary is in the tree. Deliberate since 20 November 2026: the
+    interface stays English whatever the setting says (`docs/DESIGN.md`
+    section 21.7).
+16. ~~**A clock that jumps back** (`FixFutureRunScheduledTasks`): scheduled
+    tasks wait for the old time~~. Closed.
+17. ~~**A manual import of an untracked file**: no Import Complete
+    notification~~. Closed.
 
 Worth a decision rather than a fix:
 
@@ -396,32 +398,32 @@ declared, 404 and 405 are what the router gives by construction.
 |---|---|---|---|---|
 | A | `DELETE /blocklist/{id}` | CLOSED | `mod.rs:199`, `activity.rs:411`; goldens `blocklist-delete`, `blocklist-delete-missing` | UI, Blocklist |
 | A | `DELETE /blocklist/bulk` | CLOSED | `mod.rs:198`, `activity.rs:420`; goldens `blocklist-bulk-delete`, `blocklist-after-removal` | UI, Remove Selected |
-| A | `GET /calendar/{id}` | OPEN | only `/calendar` is declared (`mod.rs:184`); 404 | nobody known |
-| A | `GET /config/downloadclient/{id}` | OPEN | PUT only (`mod.rs:71`); 405 | nobody known |
-| A | `GET /config/host/{id}` | OPEN | PUT only (`mod.rs:67`); 405 | nobody known |
-| A | `GET /config/importlist/{id}` | OPEN | PUT only (`mod.rs:76`); 405 | nobody known |
-| A | `GET /config/indexer/{id}` | OPEN | PUT only (`mod.rs:209`); 405 | nobody known |
-| A | `GET /config/mediamanagement/{id}` | OPEN | PUT only (`mod.rs:204`); 405 | nobody known |
-| A | `GET /config/naming/{id}` | OPEN | PUT only (`mod.rs:202`); 405 | nobody known |
-| A | `GET /config/ui/{id}` | OPEN | PUT only (`mod.rs:69`); 405 | nobody known |
+| A | `GET /calendar/{id}` | CLOSED | `mod.rs:215`, `episodes.rs:263`: the episode's own resource; goldens `golden-audit/calendar-1`, `-643`, `-missing` | nobody known |
+| A | `GET /config/downloadclient/{id}` | CLOSED | `mod.rs:89`: the GET of `/config/downloadclient`, any number, a non-number the empty 404 (`mod.rs:462`); golden `golden-audit/config-downloadclient-by-id`, `-other-id`, `golden-audit/config-ui-not-a-number` | nobody known |
+| A | `GET /config/host/{id}` | CLOSED | `mod.rs:75`: the GET of `/config/host`, any number, a non-number the empty 404 (`mod.rs:462`); golden `golden-audit/config-host-by-id` | nobody known |
+| A | `GET /config/importlist/{id}` | CLOSED | `mod.rs:96`: the GET of `/config/importlist`, any number, a non-number the empty 404 (`mod.rs:462`); golden `golden-audit/config-importlist-by-id` | nobody known |
+| A | `GET /config/indexer/{id}` | CLOSED | `mod.rs:250`: the GET of `/config/indexer`, any number, a non-number the empty 404 (`mod.rs:462`); golden `golden-audit/config-indexer-by-id` | nobody known |
+| A | `GET /config/mediamanagement/{id}` | CLOSED | `mod.rs:243`: the GET of `/config/mediamanagement`, any number, a non-number the empty 404 (`mod.rs:462`); golden `golden-audit/config-mediamanagement-by-id` | nobody known |
+| A | `GET /config/naming/{id}` | CLOSED | `mod.rs:236`: the GET of `/config/naming`, any number, a non-number the empty 404 (`mod.rs:462`); golden `golden-audit/config-naming-by-id` | nobody known |
+| A | `GET /config/ui/{id}` | CLOSED | `mod.rs:82`: the GET of `/config/ui`, any number, a non-number the empty 404 (`mod.rs:462`); golden `golden-audit/config-ui-by-id`, `golden-audit/config-ui-not-a-number` | nobody known |
 | A | `GET /health/{id}` | NOT APPLICABLE | the original's action throws | nobody |
 | A | `POST /history/failed/{id}` | CLOSED | `mod.rs:200`, `activity.rs:436`, `core/downloads/failed.rs:120`; goldens `history-mark-failed*` | UI, Mark as failed |
 | A | `DELETE /importlistexclusion/bulk` | CLOSED | `mod.rs:299`, `settings_writes.rs:1756`; golden `importlistexclusion-bulk-delete` | UI, exclusions |
-| A | `GET /importlistexclusion/{id}` | OPEN | PUT and DELETE only (`mod.rs:303`); 405 | nobody known |
+| A | `GET /importlistexclusion/{id}` | CLOSED | `mod.rs:370`, `providers.rs:261`; goldens `golden-audit/importlistexclusion-get`, `-get-missing` | nobody known |
 | A | `GET /release/{id}`, `GET /release/push/{id}` | NOT APPLICABLE | the original's actions throw | nobody |
-| A | `GET /localization/{id}` | OPEN | not declared (`mod.rs:383`); 404 | nobody known |
+| A | `GET /localization/{id}` | CLOSED | `mod.rs:453`, `system.rs:369`: the same dictionary, any number; goldens `golden-audit/localization-1`, `-999` | nobody known |
 | A | `GET /mediacover/{seriesId}/{filename}` | CLOSED | `mod.rs:80`, `series_writes.rs:95`; goldens for the failures, the served cover in `tests/contract.rs:1277` | Bazarr, mobile apps |
-| A | `POST /metadata` | OPEN | GET only (`mod.rs:285`); 405 | nobody; the UI never creates a consumer |
+| A | `POST /metadata` | CLOSED | `mod.rs:342`, `metadata_writes.rs:121`; goldens `golden-audit/metadata-create`, `-created`, `-create-duplicate`, `-create-noname`, `-create-unknown` (the original's 500). Stored, not driven: no metadata file is written | nobody; the UI never creates a consumer |
 | A | `PUT /metadata`, `PUT /metadata/{id}` | CLOSED | `lib.rs:106`, `mod.rs:287`, `providers.rs:364`; goldens `metadata-update`, `-after-update`, `-restore`. No metadata file is written: documented | UI, Settings > Metadata |
-| A | `PUT /metadata/bulk`, `DELETE /metadata/{id}`, `DELETE /metadata/bulk`, `POST /metadata/test`, `/testall`, `/action/{name}` | OPEN (6) | not declared | nobody known |
-| A | `POST`, `PUT`, `PUT /{id}`, `DELETE /{id}` on `languageprofile`, `GET languageprofile/schema` | OPEN (5) | GET only (`mod.rs:211`) | nobody known; Bazarr only reads |
+| A | `PUT /metadata/bulk`, `DELETE /metadata/{id}`, `DELETE /metadata/bulk`, `POST /metadata/test`, `/testall`, `/action/{name}` | CLOSED (6) | `mod.rs:346`-`352`, `metadata_writes.rs:144`, `:154`, `:166`, `providers.rs:468`. The bulk routes are hidden by the original (`[NonAction]`): the empty 404, by construction (`metadata_writes.rs:6`); goldens `golden-audit/metadata-bulk-update`, `-bulk-delete`, `-delete`, `-delete-missing`, `-after-delete`, `-test`, `-test-duplicate`, `-test-noname`, `-testall`, `-testall-after-delete`, `-action` | nobody known |
+| A | `POST`, `PUT`, `PUT /{id}`, `DELETE /{id}` on `languageprofile`, `GET languageprofile/schema` | CLOSED (5) | `mod.rs:257`-`264`, `settings.rs:343`-`452`: the deprecated profile, writes answered with the body read back and nothing stored, as the original; `GET /languageprofile/{id}` now answers any id as the original (was 404 but for 1); goldens `golden-audit/languageprofile-*` | nobody known; Bazarr only reads |
 | A | `GET /languageprofile/schema/{id}` | NOT APPLICABLE | the original's action throws | nobody |
-| A | `GET /qualitydefinition/limits` | OPEN | falls to `/qualitydefinition/{id}` (`mod.rs:127`) | nobody known; the 4.0.20 UI does not ask |
+| A | `GET /qualitydefinition/limits` | CLOSED | `mod.rs:148`, `catalog.rs:262`; golden `golden-audit/qualitydefinition-limits` | nobody known; the 4.0.20 UI does not ask |
 | A | `GET /queue/{id}`, `/queue/details/{id}`, `/queue/status/{id}` | NOT APPLICABLE (3) | the original's actions throw | nobody |
 | A | `POST /series/import` | CLOSED | `mod.rs:79`, `series_writes.rs:312`; goldens `series-import*` | UI, Library Import |
 | A | `GET /system/routes`, `/system/routes/duplicate` | DELIBERATE (2) | `docs/DESIGN.md` section 14, `docs/phase-3b-library.md`: the UI does not ask | nobody known |
 | A | `POST /system/shutdown`, `POST /system/restart` | CLOSED (2) | `mod.rs:365`, `system.rs:180`, `unarrd/src/main.rs:816`; test `contract.rs:1169`. The restart re-executes the program, on Unix | UI, header menu and after a restore |
-| A | `GET /wanted/cutoff/{id}`, `GET /wanted/missing/{id}` | OPEN (2) | not declared; 404 | nobody known |
+| A | `GET /wanted/cutoff/{id}`, `GET /wanted/missing/{id}` | CLOSED (2) | `mod.rs:217`, `:219`, `episodes.rs:263`: the episode's own resource, on the list or not; goldens `golden-audit/wanted-cutoff-*`, `golden-audit/wanted-missing-*` | nobody known |
 | A | `GET /ping`, `HEAD /ping` | CLOSED (2) | `lib.rs:326`, `system.rs:163`; golden `noauth-ping`, test `tests/http.rs:211` | health checks, monitors |
 | A | `GET /api` | CLOSED | `mod.rs:55`, `system.rs:157`; test `tests/http.rs:99` | nobody known |
 | A | `GET /feed/v3/calendar/Sonarr.ics` | CLOSED | `mod.rs:56`, `feed.rs:145`; goldens `feed-calendar*` | UI iCal link, calendar apps |
@@ -466,7 +468,7 @@ The line numbers inside the report itself are stale; these are current.
 |---|---|---|---|---|---|
 | (a) start: quality definitions | missing ones not inserted | medium | CLOSED | `core/defaults.rs:30`, called at every start (`unarrd/src/main.rs:476`) | |
 | (a) start: default profiles | none on a blank start | medium | CLOSED | `core/defaults.rs:137`, `:184` | |
-| (a) start: legacy user | `config.xml` user and password moved into Users | low | OPEN | `import/config_xml.rs:52` parses neither element; no start-up step | only a `config.xml` never started on Sonarr v3 or later: the login would have no user |
+| (a) start: legacy user | `config.xml` user and password moved into Users | low | CLOSED | `import/config_xml.rs:94` reads `<Username>` and `<Password>`, never written back; `unarrd/src/main.rs:540` adds the user at start when there is none (`api/ui.rs:388`: name in lower case, PBKDF2 as the originals); tests `unarrd/src/main.rs:1275` (both personalities, against the recordings), `import/config_xml.rs:280`; recorded on both originals, `golden-legacy-user` (the fixture made by its `setup.sh` through the scripts' new `GOLDEN_SETUP`): the login works, `config/host` names `unarr`, the elements are gone from `config.xml` after | |
 | (a) tags, auto tags changed | no SignalR `tag` sync | low | CLOSED | `api/routes/settings_writes.rs:1073`; `golden-hub/signalr.json`, test `api/tests/contract.rs:1616` | |
 | (a) command executed: `system/task` | Tasks page not told to sync | low | CLOSED | `core/commands/executor.rs:760`, `api/state.rs:302`; same recording and test | |
 | (a) command executed: `qualitydefinition` | no sync after a reset | low | CLOSED | `api/state.rs:302`; same recording and test | |
@@ -483,19 +485,19 @@ The line numbers inside the report itself are stale; these are current.
 | (a) scan skipped | no event when the root folder is missing or empty | medium | CLOSED | `core/mediafiles/scan.rs:233`; test `:509` | |
 | (a) series scanned: media info | files without it never probed again | medium | CLOSED | `scan.rs:147`, `:344`; test `:407` | |
 | (a) series scanned: file dates | not applied after a scan | low | CLOSED | `core/mediafiles/scan.rs` (`update_file_dates`, after each scan that ran); test `a_scan_dates_the_files_by_their_episodes`; recorded | |
-| (a) untracked download completed | not raised by a manual import | low | OPEN | `core/mediafiles/manual.rs:735` raises nothing for an untracked file | no Import Complete notification after a manual import without a download id |
-| (b) `CheckForFinishedDownload` | deprecated alias unknown | low | OPEN | not among the names (`core/commands/mod.rs:690`); 500 | old third-party callers |
+| (a) untracked download completed | not raised by a manual import | low | CLOSED | `core/mediafiles/manual.rs:848`: one `UntrackedDownloadCompleted` per series and season, the original's reading of "untracked" kept (with exactly one tracked download, that download's own file counts as untracked); `core/notifications/mod.rs:618` sends Import Complete, unless no release parsed from the folder or the file, where the original's handler fails on the missing quality and sends nothing (the long list's hash-named manual import, recorded); tests `manual.rs:959`, `:987`, `:1006`, `api/tests/contract.rs:2088` against `golden-events` (the webhook payload of the original, exactly). Sonarr only: Radarr has no such event | |
+| (b) `CheckForFinishedDownload` | deprecated alias unknown | low | CLOSED | `core/commands/mod.rs:202`, `:763`, a command of its own name in both applications; run as the refresh with the original's warning (`core/commands/executor.rs:900`); tests `commands/mod.rs:1760`, `api/tests/contract.rs:2088` (the command and the warning in `GET /log`), `api/tests/contract_radarr.rs:1257`; recorded on both, `golden-events` | |
 | (b) `Housekeeping`, `CleanUpRecycleBin` | did nothing | medium | CLOSED (2) | `executor.rs:904`, `:936`; `core/housekeeping.rs:43`, `core/mediafiles/transfer.rs:204` | |
 | (b) `ResetQualityDefinitions`, `ResetApiKey`, `ClearLog`, `DeleteLogFiles`, `DeleteUpdateLogFiles` | unknown | low | CLOSED (5 names, 4 rows) | `commands/mod.rs:712-718`, `api/state.rs:535-553`; `DeleteUpdateLogFiles` has nothing to delete | |
 | (b) restart, shutdown | no routes | low | CLOSED | `api/routes/mod.rs:365` | |
 | (c) orphaned history, episode files | partial | low | CLOSED (2) | `housekeeping.rs:71`, `:87` | |
 | (c) pending releases older than fourteen days | missing | low-medium | CLOSED | `housekeeping.rs:123`; tests | |
 | (c) provider status times in the future | missing | low | CLOSED | `housekeeping.rs:156`; tests | |
-| (c) scheduled tasks last run in the future | missing | low | OPEN | not among the housekeepers; `core/commands/scheduler.rs:188` treats a future last run as not due | after the clock jumps back, tasks wait until the old time |
+| (c) scheduled tasks last run in the future | missing | low | CLOSED | `FixFutureRunScheduledTasks`, `core/housekeeping.rs:198`, in both lists (`:41`, `movies/housekeeping.rs:46`); tests `housekeeping.rs:326`, `api/tests/contract.rs:2271`, `contract_radarr.rs:1923` against `golden-housekeeping` (both originals' database after the run) | as in the original, the Housekeeping task waits too, so the repair comes with its next run or a manual one; the originals' scheduler reads a cache filled at start and keeps waiting until the next start (recorded: the tasks page still shows the day ahead), Unarr's reads the table and runs what is due at the next tick |
 | (c) profile format items repair | no repair pass | low | DELIBERATE | the score reset is done; the pass is declared not ported in `housekeeping.rs:9` | a hand-edited database only |
 | (c) unused tags | missing | low | CLOSED | `housekeeping.rs:179`; tests | |
 | (c) clean titles | no pass | low | DELIBERATE | `housekeeping.rs:9`; the refresh rewrites it (`core/tv/refresh.rs:165`) | a stale clean title lasts until the next refresh |
-| (c) additional naming rows, users | keep one | low | PARTIAL | naming is one row by schema; users are not trimmed | nobody expected |
+| (c) additional naming rows, users | keep one | low | CLOSED | naming is one row by schema; `CleanupAdditionalUsers`, `core/housekeeping.rs:185`, in both lists (`:28`, `movies/housekeeping.rs:25`), keeps the user whose name sorts first, as the originals' query does through their index on the name (recorded, `golden-housekeeping`); tests `housekeeping.rs:298`, `api/tests/contract.rs:2271`, `contract_radarr.rs:1923` | |
 | (c) `VACUUM`, recycle bin | missing | low, medium | CLOSED (2) | `housekeeping.rs:56`; as `CleanUpRecycleBin` | |
 
 ## Settings (`1-settings.md`)
@@ -509,8 +511,8 @@ open, 1 deliberate, 2 not applicable.
 | API key through `PUT config/host` | not changed on save | high | CLOSED | the finding was wrong about the original (golden `config-host-put-apikey`); `ResetApiKey` changes it | |
 | authentication method and requirement, user name, password through PUT | not stored | high | CLOSED (2) | `settings_writes.rs:745`, `:985` | |
 | `LogLevel` | not applied | medium | CLOSED | `settings_writes.rs:1004`; test `unarrd/src/main.rs:1278` | `RUST_LOG` overrides it when set |
-| `ConsoleLogLevel` | not applied, not stored | low | OPEN | `api/routes/config.rs:93` answers a constant | a console quieter or louder than the files |
-| `ConsoleLogFormat` | not parsed | low | OPEN | no occurrence | a log shipper expecting CLEF |
+| `ConsoleLogLevel` | not applied, not stored | low | CLOSED | read from `config.xml` (`import/config_xml.rs:86`) and `<App>__Log__ConsoleLevel` (`core/config.rs:255`); stored by `PUT config/host` (`settings_writes.rs:699`, `:943`), answered (`api/routes/config.rs:93`); the console logs at it, else at info whatever `LogLevel` says (`core/config.rs:280`), while the files and the recent lines keep `LogLevel` (`unarrd/src/main.rs:744`); tests `core/config.rs:353`, `:379`, `unarrd/src/main.rs:1648`, `api/tests/contract.rs:2088` and `contract_radarr.rs:1257` against `golden-events` | a level that names none: the original fails to configure its logging, Unarr warns and logs as if it were blank; `RUST_LOG`, when set, still decides the levels |
+| `ConsoleLogFormat` | not parsed | low | CLOSED | read from `config.xml` (`import/config_xml.rs`, without regard to case) and `<APP>__LOG__CONSOLEFORMAT` (with it, as `Enum.TryParse`); `Clef` writes one JSON object a line, `@t` `@l` `@x` `@m` as the original's `CompactJsonLayout` (`unarrd/src/console.rs:150`, recorded on Sonarr with `SONARR__LOG__CONSOLEFORMAT=Clef`); the lines before a personality has read its settings follow the environment (`unarrd/src/main.rs:716`); tests `console.rs:211`, `:248`, `import/config_xml.rs:257` | the standard format is Unarr's own line, not the original's `[Info] Logger: message` |
 | `LogDbEnabled`, `LogSql` | not parsed | low | NOT APPLICABLE | no log database exists | |
 | `Sonarr__*` environment overrides | not read | medium | CLOSED | `core/config.rs:101`; test `:231` | |
 | `RecycleBinCleanupDays` | never read | high | CLOSED | `core/mediafiles/transfer.rs:204` | |
@@ -518,7 +520,7 @@ open, 1 deliberate, 2 not applicable.
 | `EnableMediaInfo` | no backfill on rescan | low | CLOSED | `core/mediafiles/scan.rs:147` | |
 | `UseScriptImport`, `ScriptImportPath` | not applied | medium | DELIBERATE | stored and shown (`settings_writes.rs:349`), not applied by decision (`docs/DESIGN.md` section 21.3); `ScriptImportCheck` warns while it is on (`core/health.rs`, test `script_import_on_is_said_to_be_ignored`) | whoever imports through a script gets Unarr's own move or hardlink, and a health warning that says so |
 | `ImportExtraFiles`, `ExtraFileExtensions` | not applied | medium | CLOSED | `core/mediafiles/extras.rs:334` | |
-| `UILanguage` | not applied | low | OPEN | `api/routes/system.rs:364` always serves the English dictionary, the only one in the tree | whoever picks another language: the interface stays English |
+| `UILanguage` | not applied | low | DELIBERATE | by decision (`docs/DESIGN.md` section 21.7): `api/routes/system.rs:364` serves the English dictionary, the only one in the tree; the originals ship 44 more an application in `Localization/Core` (Sonarr 1.8 MB, 8 of them at least 90 % translated; Radarr 4.4 MB, 17), and translate server-side text too (health checks, provider field labels) | whoever picks another language: the interface stays English |
 | proxy (8 settings) | not applied | high | CLOSED | `core/http.rs:71`, `core/outbound.rs:308`; test `core/http.rs:325` | `ProxyCheck` runs again five seconds after a save of the settings (`core/health.rs:250`) |
 | `CertificateValidation` | not applied | medium | CLOSED | `core/outbound.rs:317`; test `:604` | |
 | `TrustCgnatIpAddresses` | not applied | medium | CLOSED | `api/ui.rs:500`, `core/outbound.rs:227` | |

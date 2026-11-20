@@ -1,0 +1,14 @@
+{
+  "body": {
+    "id": 1,
+    "title": "Breaking Bad",
+    "tvdbId": 81189
+  },
+  "recordedAt": "2026-11-19T21:33:09Z",
+  "request": {
+    "body": "bodies/importlistexclusion-create.json",
+    "method": "POST",
+    "path": "/api/v3/importlistexclusion"
+  },
+  "status": 201
+}

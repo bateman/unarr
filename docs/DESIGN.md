@@ -638,7 +638,8 @@ title needs most of one parser's patterns. On musl the "at rest" figure
 does not fall on its own, as expected of an allocator without
 `malloc_trim`; the release of the patterns returns the memory all the
 same, since the automata are large allocations that go back to the
-system when freed.
+system when freed. The musl column is musl's own allocator: the image's
+is jemalloc since section 21.6, measured there.
 
 The 60 MB target therefore holds for a process left alone for five
 minutes, and not for one that searches every few minutes. With the RSS
@@ -1077,9 +1078,12 @@ the size are in section 20, with why they were not taken.
   parameters, the section whose location holds the series' root folder,
   the two-hour version cache). The remaining implementations keep their
   settings and flags and answer a test with a validation error saying
-  Unarr does not drive them. The plex.tv side (sign-in, server list, the
-  ping on every update) is not called: it needs the user's account, and
-  the `action` endpoint answers the originals' empty object. A notification
+  Unarr does not drive them. Of the plex.tv side, the daily ping that
+  keeps the token alive is sent as the originals send it (before each
+  library update and connection test, once a day per token, its answer
+  ignored); the sign-in and the server list are not offered, since they
+  need the user's account, and the `action` endpoint answers the
+  originals' empty object. A notification
   that keeps failing backs off with the originals' periods (five levels,
   no block within five minutes of the first failure) in the shared
   `provider_status` table; a test whose target never answers escapes as a
@@ -1238,6 +1242,15 @@ the size are in section 20, with why they were not taken.
   Unarr's own code logs at it and the libraries stay at info; the debug
   and trace files are written only at their levels. `RUST_LOG`, when
   set, is the operator's word: it decides, and the setting is ignored.
+- **The console has a level and a format of its own.** `ConsoleLogLevel`
+  (`config.xml`, `<App>__Log__ConsoleLevel`, `PUT config/host`) when
+  set, else info, or the Log Level when that is quieter, as
+  `ReconfigureLogging` has it: debug and trace go to the files, not to
+  `docker logs`. The filter in front of everything lets through the more
+  verbose of the two levels; the console, the files and the recent lines
+  of `GET /log` each keep their own. `ConsoleLogFormat` `Clef` writes the
+  console as the originals' `CompactJsonLayout` does (`@t`, `@l`, `@x`,
+  `@m`, one object a line). `RUST_LOG` leaves the format to the settings.
 - **Secrets are taken out of every log line.** `CleanseLogMessage`'s
   rules, one for one (API keys, passkeys and tokens in URLs, Plex's
   token, user names in paths, download clients' and webhooks' secrets,
@@ -1737,8 +1750,9 @@ the size are in section 20, with why they were not taken.
   compilation, under a second, once per sync.
 - **What is stored and not applied, or not sent**, each because nothing
   on the fixture exercises it: the notifications for a movie added, movies
-  deleted and an application update, the ping to plex.tv before a library
-  update. The file date setting and the 3D token were on this list when
+  deleted and an application update. The ping to plex.tv before a library
+  update was on this list too, until it was sent (section 13). The file
+  date setting and the 3D token were on this list when
   the milestone closed and were done right after. The file date is
   compared as the original compares it, the UTC day the file was written
   against the wanted date, so a file already dated is left alone at the
@@ -2076,13 +2090,40 @@ the size are in section 20, with why they were not taken.
   queue of nineteen groups that are all Sonarr's, of which Radarr shows
   none. Unarr's clients, configured as Radarr configures them, passed
   against all four as they were, with no request the real Radarr had not
-  made. Any exchange with SABnzbd or Transmission would extend the
-  replays.
+  made. SABnzbd and Transmission, never seen in the maintainer's
+  installations, were recorded in a container instead: the real SABnzbd
+  4.2.2 and Transmission 4.0.5 on loopback, the original Sonarr 4.0.20 and
+  Radarr 6.4.4 on the fixtures (`scripts/sonarr-fixture.sh shell`,
+  `radarr-fixture.sh shell`) talking to them through
+  `scripts/downloadclient-capture.py proxy`, which keeps whole requests
+  (`sabnzbd`, `transmission`, `radarr-sabnzbd`, `radarr-transmission`).
+  Each recording covers the test, two or three grabs pushed with
+  `/release/push`, queue refreshes, and the removals: for Transmission a
+  torrent whose data was in place before the add, verified at 100 %,
+  imported, then removed once stopped at the global ratio, and one left at
+  0 % removed from the queue with "remove from client"; for SABnzbd a job
+  completed and imported, one failed ("Not on your server(s)"), both
+  removed from the history, and one removed from a paused queue. The news
+  server SABnzbd downloaded from is `scripts/nntp-stub.py`, a stand-in
+  that serves yEnc articles cut from a local file and answers 430 for the
+  others: the jobs are real SABnzbd jobs, the Usenet side is not.
+  `crates/unarr-mock/tests/proxy_captures.rs` drives Unarr's clients
+  through each moment of the recordings (`/capture/<name>@<seqs>`) and
+  compares every request with the original's: method, path, query,
+  JSON-RPC body or multipart parts, credentials and session headers. The
+  SABnzbd client needed no change; the Transmission one did, four
+  times: the originals always send basic credentials (empty ones as
+  `Basic Og==`), keep the version six hours instead of asking
+  `session-get` before each `torrent-get`, read the session's seed limits
+  only for a stopped torrent, and fold the doubled separator of a
+  download-dir ending in `/`. Not recorded: a completed SABnzbd job with
+  par2 repair or unpacking, an authenticated Transmission, a magnet
+  added to Transmission, and Transmission before 4.0 (without labels).
 - The memory figures in section 9 come from a glibc build, where
   `malloc_trim` returns freed pages. The published image is a static musl
-  build: musl's allocator has no `malloc_trim` (the call is compiled out)
-  and behaves differently, so the image's idle footprint after an import
-  is not measured yet.
+  build, where the call is compiled out; its allocator is jemalloc since
+  20 November 2026, which returns pages on its own, and its footprint
+  after an import and under load was measured then (section 21.6).
 - Listing series skips the `actors` column, the largest JSON one. Every
   series write of 3b updates columns, so nothing writes back a series read
   from a list; a new write must keep to that.
@@ -2120,9 +2161,10 @@ the size are in section 20, with why they were not taken.
   download and removes the torrent from the client a second time; a
   torrent is removed right after its import when qBittorrent has stopped
   it (`stoppedUP`) at a global inactive-seeding limit; and Sonarr's
-  `PlexServer` pings plex.tv (`/api/v2/ping`) with the token on every
-  import before scheduling the library update, which Unarr does not do
-  (see the next point). The real Plex server was off during those logs
+  `PlexServer` pings plex.tv (`/api/v2/ping`) with the token before
+  scheduling the library update, which Unarr has done the same way since
+  19 November 2026 (section 13; the source caches the ping a day per
+  token). The real Plex server was off during those logs
   (it follows the television), so Sonarr's refreshes failed. On 9 November
   2026 Unarr itself replaced Sonarr on the maintainer's NAS for one
   episode, from search to the real Plex, which is the homelab run of
@@ -2399,9 +2441,9 @@ the maintainer, on 16 November 2026.
 - **Cost.** The peak keeps swinging between runs, which the comparison's
   history notes on each run. Whoever runs a glibc build and prefers the
   steady peak sets `MALLOC_ARENA_MAX=1` without a change to the code. The
-  published image is a static musl build, with no per-thread arenas: the
-  question does not arise there, and its memory under load is not
-  measured yet. The ARM64 NAS was not measured either.
+  published image is a static musl build, where the question does not
+  arise: its allocator is jemalloc, with four arenas, since section 21.6.
+  The ARM64 NAS was not measured.
 - **Evidence.** `docs/originals-comparison.md`, the two `MALLOC_ARENA_MAX`
   tables; commit `c79f6df`.
 
@@ -2473,6 +2515,122 @@ below, the recommended one; for a row the audit rated medium
   and is refused, where with WebSockets alone listed it would stop sooner;
   it gets no live updates either way, and the answer stays the original's.
 - **To revisit** if a user's proxy cannot pass WebSockets.
+
+### 21.5 A blank Plex token is not pinged, and does not fail
+
+Taken by the implementer on 19 November 2026, when the ping to plex.tv
+was added; for the maintainer to confirm or overturn.
+
+- **The question.** The originals ping plex.tv through a cache keyed by
+  the token, and their cache refuses a blank key
+  (`Ensure.That(key).IsNotNullOrWhiteSpace()` in `Cached.Get`). With no
+  token, the exception escapes `PlexServer.Test` (the connection test
+  fails with an error) and `UpdateIfEnabled` (every import's Plex
+  notification fails before the library update is queued). A Plex server
+  that lets the local network in without a token is never refreshed.
+- **Options.**
+  - *As the originals*: throw where they throw, the test answering an
+    error and the updates failing. Not recorded on the originals, so the
+    error's exact answer would be the source's reading.
+  - *Skip the ping* (taken): no ping for a blank token, and the test and
+    the update go on to the server, which says whether it needs a token,
+    as Unarr did before the ping was added.
+- **Why.** The originals' failure is a side effect of a cache, not a
+  check of the settings: their validator accepts a blank token, and their
+  server requests leave it out when blank. Reproducing it would break a
+  setup that works with the server, for no client that depends on it.
+- **Cost.** An installation with a blank token sees its Plex refreshed by
+  Unarr where the original failed: a difference, in the direction of what
+  the settings ask for.
+- **To revisit** if the maintainer prefers the originals' behaviour.
+
+### 21.6 The image's allocator: jemalloc, tuned
+
+Decided by the maintainer on 20 November 2026, among the options below,
+the recommended one, on the measurements of
+`docs/originals-comparison.md` ("The image's allocator").
+
+- **The question.** The published image is a static musl build, and
+  musl's own allocator takes one lock for every allocation. On the scaled
+  library, with four clients without pause, it served 13 requests a
+  second where glibc's served 59, with a p95 of 1.9 s against 0.34 s; one
+  request at a time, Radarr's `/movie` took 361 ms against 232 ms. Its
+  memory is the lowest of all.
+- **Options, all measured** (`scripts/allocator-probe.py`, 4-core x86-64,
+  scaled library):
+  - *Keep musl's own*: 38-40 MiB at rest after the start, 78-80 MiB after
+    the load, a peak of 220-228 MiB under four clients; the speed above.
+  - *jemalloc with three settings* (chosen): a background thread, four
+    arenas, freed pages returned after a second. 46 / 90 MiB, a peak of
+    295-326 MiB, 59-60 requests a second, a p95 of 0.31 s; Radarr's
+    `/movie` 275 ms.
+  - *jemalloc with its defaults*: the same speed, 52 / 123 MiB, a peak of
+    552 MiB.
+  - *mimalloc*: the same speed, 90 / 234 MiB in version 3 (182 MiB after
+    the load told to purge at once, and slower), 406 / 387 MiB in
+    version 2.
+  - *A glibc image* (distroless's `cc` base instead of `static`): glibc's
+    figures, 56 / 75 MiB and 59 requests a second, but the binary is no
+    longer static, and the binaries of a release would need glibc on the
+    host.
+- **Why.** Four times the throughput and a sixth of the p95 under
+  concurrent requests, which the web interface sends when a page opens,
+  and a quarter off the heaviest page for one user, for 8 MiB at rest and
+  12 MiB after the load. Of the allocators that bring the speed back,
+  jemalloc so set keeps the least, and the binary stays static.
+- **Cost.** Against musl's own: 8 MiB at rest after the start, 12 MiB
+  after the load, 75 MiB more at the peak under four clients; 611,200
+  bytes more of binary; jemalloc is C, built from source with the image
+  (`make` added to the build stage). One request at a time the
+  comparison's reads still take 18 to 21 % longer than with glibc.
+- **How it is done** (the implementer's choices, not asked):
+  `tikv-jemallocator` for the musl target only, so that a glibc build and
+  the comparison with the originals keep glibc's allocator; the settings
+  compiled in through `_rjem_malloc_conf`, which `_RJEM_MALLOC_CONF` in
+  the environment still overrides, setting by setting; the background
+  thread and the decay take the place of `release_memory`, which does
+  nothing on musl.
+- **To revisit** on the ARM64 NAS, which was not measured, or if the
+  memory at rest matters more than the speed: then musl's own.
+- **Evidence.** Commit `e73c586`; the two tables of
+  `docs/originals-comparison.md`, "The image's allocator".
+
+### 21.7 The interface stays in English
+
+Decided by the maintainer on 20 November 2026, among the four options
+below; for a row the audit rated low (`docs/audit/7-triage.md`,
+`UILanguage`).
+
+- **The question.** Settings > UI > Interface Language is stored and
+  shown, but Unarr serves only the English dictionary, so another choice
+  changes nothing. The originals ship 44 more dictionaries an application
+  in their release (`Localization/Core/*.json`, which `make ui` already
+  downloads): Sonarr's 1.8 MB, of which 8 languages are at least 90 %
+  translated, Radarr's 4.4 MB, with 17. They also translate text the
+  server writes: some 26 health-check messages of Sonarr and 7 of Radarr,
+  and the labels of the providers' fields.
+- **Options** (measured on the pinned releases; the web interface needs
+  nothing else, it reads `/localization` and `/localization/language` and
+  takes the list of languages from `/api/v3/language`):
+  - *Everything*: the dictionaries, the health-check messages and the
+    field labels; about 1.6 MB of binary stored compressed, and
+    recordings per language or translation keys for the schemas. The
+    largest.
+  - *The interface only*: all the dictionaries and the language
+    identifier, the server's text left English; the same size, a few
+    hundred lines and a recording in another language.
+  - *The well-translated languages only*: the same for the languages at
+    least 90 % translated, the rest falling back to English key by key as
+    in the originals; about 1.06 MB compressed.
+  - *English only* (chosen): nothing.
+- **Why.** No reason was given with the choice. What speaks for it: nobody
+  known uses another language with Unarr, and the binary is already at the
+  image's size target (section 9), which the dictionaries would cross.
+- **Cost.** Whoever picks another language keeps an English interface,
+  and nothing says why. The setting is kept, saved and returned as the
+  originals do, so a database moved back to an original keeps the choice.
+- **To revisit** when a user asks for another language: then the third
+  option, the cheapest that makes the setting work.
 
 ## 22. The server outside the API, as the originals' pipeline
 

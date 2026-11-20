@@ -1,0 +1,25 @@
+{
+  "body": [
+    {
+      "attemptedValue": 0,
+      "errorCode": "GreaterThanValidator",
+      "errorMessage": "'Id' must be greater than '0'.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "comparisonProperty": "",
+        "comparisonValue": 0,
+        "propertyName": "Id",
+        "propertyValue": 0
+      },
+      "propertyName": "Id",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-19T21:33:09Z",
+  "request": {
+    "body": "bodies/languageprofile.json",
+    "method": "PUT",
+    "path": "/api/v3/languageprofile"
+  },
+  "status": 400
+}
