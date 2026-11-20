@@ -57,8 +57,20 @@ pub(crate) fn register_proxy(url_base: &str, remote: &str) -> String {
 /// `GET /MediaCoverProxy/{hash}/{file}`: the remote image, fetched now.
 pub async fn media_cover_proxy(
     State(state): State<AppState>,
-    Path((hash, _file)): Path<(String, String)>,
+    Path((hash, file)): Path<(String, String)>,
 ) -> Response {
+    // `MediaCoverProxyMapper`: a name that is not a JPEG, PNG or GIF (with
+    // case) is a 404 before the hash is looked at; the name, not the
+    // remote address, says the type.
+    let image = file
+        .rsplit_once('.')
+        .filter(|(stem, extension)| !stem.is_empty() && matches!(*extension, "jpg" | "png" | "gif"))
+        .is_some();
+    let hash_ok = !hash.is_empty() && hash.chars().all(|c| c.is_alphanumeric() || c == '_');
+    if !image || !hash_ok {
+        return crate::ui::static_not_found(state.personality());
+    }
+    let content_type = crate::http::content_type(state.personality(), &file);
     let remote = proxied()
         .lock()
         .recover()
@@ -78,14 +90,7 @@ pub async fn media_cover_proxy(
         ),
     };
     match augment.download(&remote).await {
-        Ok(bytes) => {
-            let content_type = if remote.to_ascii_lowercase().ends_with(".png") {
-                "image/png"
-            } else {
-                "image/jpeg"
-            };
-            ([(header::CONTENT_TYPE, content_type)], bytes).into_response()
-        }
+        Ok(bytes) => ([(header::CONTENT_TYPE, content_type)], bytes).into_response(),
         Err(e) => ApiError::Internal(e).into_response(),
     }
 }
@@ -131,8 +136,23 @@ pub async fn media_cover_api(
     } else {
         "image/jpeg"
     };
+    // `PhysicalFile`: dated with the file.
+    let modified = std::fs::metadata(&path)
+        .and_then(|m| m.modified())
+        .ok()
+        .map(|at| {
+            chrono::DateTime::<chrono::Utc>::from(at)
+                .format("%a, %d %b %Y %H:%M:%S GMT")
+                .to_string()
+        });
     match tokio::fs::read(&path).await {
-        Ok(bytes) => ([(header::CONTENT_TYPE, content_type)], bytes).into_response(),
+        Ok(bytes) => {
+            let mut response = ([(header::CONTENT_TYPE, content_type)], bytes).into_response();
+            if let Some(value) = modified.and_then(|m| axum::http::HeaderValue::from_str(&m).ok()) {
+                response.headers_mut().insert(header::LAST_MODIFIED, value);
+            }
+            response
+        }
         Err(_) => ApiError::NotFound.into_response(),
     }
 }

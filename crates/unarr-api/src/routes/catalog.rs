@@ -257,6 +257,12 @@ pub async fn quality_definitions(State(state): State<AppState>) -> ApiResult<Jso
     Ok(Json(defs.iter().map(quality_definition_resource).collect()))
 }
 
+/// `GET /qualitydefinition/limits`: the bounds of the size sliders, in
+/// megabytes a minute (Sonarr's `QualityDefinitionLimits`).
+pub async fn quality_definition_limits() -> Json<Value> {
+    Json(json!({"min": 0, "max": 1000}))
+}
+
 pub async fn quality_definition(
     State(state): State<AppState>,
     Path(id): Path<i64>,

@@ -1,0 +1,163 @@
+{
+  "body": [
+    {
+      "body": {
+        "applicationUrl": "",
+        "episodes": [
+          {
+            "episodeNumber": 1,
+            "id": 123,
+            "seasonNumber": 1,
+            "seriesId": 0,
+            "title": "Test title",
+            "tvdbId": 0
+          }
+        ],
+        "eventType": "Test",
+        "instanceName": "Sonarr",
+        "series": {
+          "id": 1,
+          "path": "C:\\testpath",
+          "tags": [
+            "test-tag"
+          ],
+          "title": "Test Title",
+          "tmdbId": 0,
+          "tvMazeId": 0,
+          "tvdbId": 1234,
+          "type": "standard",
+          "year": 0
+        }
+      },
+      "headers": {
+        "authorization": "Basic aG9vazpzZWNyZXQ=",
+        "content-type": "application/json",
+        "x-fixture": "yes"
+      },
+      "method": "POST",
+      "path": "/webhook",
+      "query": {},
+      "service": "webhook"
+    },
+    {
+      "body": {
+        "applicationUrl": "",
+        "destinationPath": "/tv/The Pitt/Season 01",
+        "episodeFiles": [
+          {
+            "dateAdded": "2026-11-19T21:48:14.330478Z",
+            "id": 1073,
+            "languages": [
+              {
+                "id": 1,
+                "name": "English"
+              }
+            ],
+            "mediaInfo": {
+              "audioChannels": 1.0,
+              "audioCodec": "AAC",
+              "audioLanguages": [
+                "eng"
+              ],
+              "height": 64,
+              "subtitles": [
+                "eng"
+              ],
+              "videoCodec": "x264",
+              "videoDynamicRange": "",
+              "videoDynamicRangeType": "",
+              "width": 64
+            },
+            "path": "/tv/The Pitt/Season 01/The Pitt (2025) - S01E05 - 11-00 A.M [WEBDL-1080p][AAC 1.0][x264]-Fixture.mkv",
+            "quality": "WEBDL-1080p",
+            "qualityVersion": 1,
+            "relativePath": "Season 01/The Pitt (2025) - S01E05 - 11-00 A.M [WEBDL-1080p][AAC 1.0][x264]-Fixture.mkv",
+            "releaseGroup": "Fixture",
+            "sceneName": "The.Pitt.S01E05.1080p.WEB.H264-Fixture",
+            "size": 119980
+          }
+        ],
+        "episodes": [
+          {
+            "airDate": "2025-01-30",
+            "airDateUtc": "2025-01-31T02:00:00Z",
+            "episodeNumber": 5,
+            "id": 5,
+            "overview": "Santos and Collins each deal with moral quandaries. Samira’s careful approach earns praise from patients – and reproach from Robby.",
+            "seasonNumber": 1,
+            "seriesId": 1,
+            "title": "11:00 A.M.",
+            "tvdbId": 10851520
+          }
+        ],
+        "eventType": "Download",
+        "fileCount": 1,
+        "instanceName": "Sonarr",
+        "release": {
+          "releaseType": "singleEpisode"
+        },
+        "series": {
+          "genres": [
+            "Drama"
+          ],
+          "id": 1,
+          "images": [
+            {
+              "coverType": "banner",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/banners/6972a4aba4c5d.jpg",
+              "url": "/MediaCover/1/banner.jpg"
+            },
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/posters/6941c7b719bbb.jpg",
+              "url": "/MediaCover/1/poster.jpg"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/backgrounds/675c4f787cfc4.jpg",
+              "url": "/MediaCover/1/fanart.jpg"
+            },
+            {
+              "coverType": "clearlogo",
+              "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/448176/clearlogo/675d049994d06.png",
+              "url": "/MediaCover/1/clearlogo.png"
+            }
+          ],
+          "imdbId": "tt31938062",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "path": "/tv/The Pitt",
+          "tags": [
+            "ita"
+          ],
+          "title": "The Pitt",
+          "titleSlug": "the-pitt",
+          "tmdbId": 250307,
+          "tvMazeId": 75632,
+          "tvdbId": 448176,
+          "type": "standard",
+          "year": 2025
+        },
+        "sourcePath": "/downloads/manual/The.Pitt.S01E05.1080p.WEB.H264-Fixture"
+      },
+      "headers": {
+        "authorization": "Basic aG9vazpzZWNyZXQ=",
+        "content-type": "application/json",
+        "x-fixture": "yes"
+      },
+      "method": "POST",
+      "path": "/webhook",
+      "query": {},
+      "service": "webhook"
+    }
+  ],
+  "recordedAt": "2026-11-19T21:48:25Z",
+  "request": {
+    "method": "GET",
+    "path": "/mock/notifications",
+    "target": "mock"
+  },
+  "status": 200
+}

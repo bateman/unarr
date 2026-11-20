@@ -1,0 +1,9 @@
+{
+  "body": {},
+  "recordedAt": "2026-11-19T21:33:09Z",
+  "request": {
+    "method": "DELETE",
+    "path": "/api/v3/metadata/6"
+  },
+  "status": 200
+}

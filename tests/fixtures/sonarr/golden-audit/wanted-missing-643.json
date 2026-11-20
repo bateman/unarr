@@ -1,0 +1,181 @@
+{
+  "body": {
+    "absoluteEpisodeNumber": 1,
+    "airDate": "2014-04-06",
+    "airDateUtc": "2014-04-07T02:00:00Z",
+    "episodeFile": {
+      "customFormatScore": 0,
+      "customFormats": [
+        {
+          "id": 36,
+          "name": "Language not Italian"
+        }
+      ],
+      "dateAdded": "2026-09-30T15:54:47Z",
+      "id": 970,
+      "indexerFlags": 0,
+      "languages": [
+        {
+          "id": 1,
+          "name": "English"
+        }
+      ],
+      "mediaInfo": {
+        "audioBitrate": 0,
+        "audioChannels": 5.1,
+        "audioCodec": "DTS-HD MA",
+        "audioLanguages": "eng/eng",
+        "audioStreamCount": 2,
+        "resolution": "1920x1080",
+        "runTime": "29:21",
+        "scanType": "Progressive",
+        "subtitles": "eng/eng/eng/dan/fin/fre/ger/nor/spa/swe",
+        "videoBitDepth": 8,
+        "videoBitrate": 0,
+        "videoCodec": "h264",
+        "videoDynamicRange": "",
+        "videoDynamicRangeType": "",
+        "videoFps": 23.976
+      },
+      "path": "/tv/Silicon Valley/Season 01/Silicon.Valley.S01E01.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+      "quality": {
+        "quality": {
+          "id": 20,
+          "name": "Bluray-1080p Remux",
+          "resolution": 1080,
+          "source": "blurayRaw"
+        },
+        "revision": {
+          "isRepack": false,
+          "real": 0,
+          "version": 1
+        }
+      },
+      "qualityCutoffNotMet": true,
+      "relativePath": "Season 01/Silicon.Valley.S01E01.1080p.BluRay.REMUX.AVC.DTS-HD.MA.5.1-NOGRP.mkv",
+      "releaseGroup": "NOGRP",
+      "releaseType": "singleEpisode",
+      "seasonNumber": 1,
+      "seriesId": 22,
+      "size": 8177501633
+    },
+    "episodeFileId": 970,
+    "episodeNumber": 1,
+    "hasFile": true,
+    "id": 643,
+    "images": [
+      {
+        "coverType": "screenshot",
+        "remoteUrl": "https://artworks.thetvdb.com/banners/episodes/277165/65e9a55036ae6.jpg"
+      }
+    ],
+    "monitored": true,
+    "overview": "Attending an elaborate launch party, Richard and his computer programmer friends - Big Head, Dinesh and Gilfoyle - dream of making it big. Instead, they're living in the communal Hacker Hostel owned by former programmer Erlich, who gets to claim ten percent of anything they invent there. When it becomes clear that Richard has developed a powerful compression algorithm for his website, Pied Piper, he finds himself courted by Gavin Belson, his egomaniacal corporate boss, who offers a $10 million buyout by his firm, Hooli. But Richard holds back when well-known investor Peter Gregory makes a counteroffer.",
+    "runtime": 29,
+    "seasonNumber": 1,
+    "series": {
+      "added": "2026-03-07T11:22:23Z",
+      "airTime": "22:00",
+      "certification": "TV-MA",
+      "cleanTitle": "siliconvalley",
+      "ended": true,
+      "firstAired": "2014-04-06T00:00:00Z",
+      "genres": [
+        "Comedy",
+        "Drama"
+      ],
+      "id": 22,
+      "images": [
+        {
+          "coverType": "banner",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/graphical/277165-g9.jpg"
+        },
+        {
+          "coverType": "poster",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/posters/277165-5.jpg"
+        },
+        {
+          "coverType": "fanart",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/fanart/original/277165-2.jpg"
+        },
+        {
+          "coverType": "clearlogo",
+          "remoteUrl": "https://artworks.thetvdb.com/banners/v4/series/277165/clearlogo/611b714d85107.png"
+        }
+      ],
+      "imdbId": "tt2575988",
+      "languageProfileId": 1,
+      "lastAired": "2019-12-08T00:00:00Z",
+      "monitorNewItems": "all",
+      "monitored": false,
+      "network": "HBO",
+      "originalLanguage": {
+        "id": 1,
+        "name": "English"
+      },
+      "overview": "In the high-tech gold rush of modern Silicon Valley, the people most qualified to succeed are the least capable of handling success. A comedy partially inspired by Mike Judge's own experiences as a Silicon Valley engineer in the late 1980s.",
+      "path": "/tv/Silicon Valley",
+      "qualityProfileId": 7,
+      "ratings": {
+        "value": 8.5,
+        "votes": 185107
+      },
+      "runtime": 29,
+      "seasonFolder": true,
+      "seasons": [
+        {
+          "monitored": false,
+          "seasonNumber": 0
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 1
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 2
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 3
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 4
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 5
+        },
+        {
+          "monitored": true,
+          "seasonNumber": 6
+        }
+      ],
+      "seriesType": "standard",
+      "sortTitle": "silicon valley",
+      "status": "ended",
+      "tags": [
+        1
+      ],
+      "title": "Silicon Valley",
+      "titleSlug": "silicon-valley",
+      "tmdbId": 60573,
+      "tvMazeId": 143,
+      "tvRageId": 33759,
+      "tvdbId": 277165,
+      "useSceneNumbering": false,
+      "year": 2014
+    },
+    "seriesId": 22,
+    "title": "Minimum Viable Product",
+    "tvdbId": 4765079,
+    "unverifiedSceneNumbering": false
+  },
+  "recordedAt": "2026-11-19T21:33:09Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/wanted/missing/643"
+  },
+  "status": 200
+}

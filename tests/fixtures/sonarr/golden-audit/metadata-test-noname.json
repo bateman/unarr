@@ -1,0 +1,23 @@
+{
+  "body": [
+    {
+      "attemptedValue": "",
+      "errorCode": "NotEmptyValidator",
+      "errorMessage": "'Name' must not be empty.",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Name",
+        "propertyValue": ""
+      },
+      "propertyName": "Name",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-19T21:33:09Z",
+  "request": {
+    "body": "bodies/metadata-create-noname.json",
+    "method": "POST",
+    "path": "/api/v3/metadata/test"
+  },
+  "status": 400
+}

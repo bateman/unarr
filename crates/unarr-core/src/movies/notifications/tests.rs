@@ -69,7 +69,11 @@ fn notifier(providers: Vec<Provider>) -> MovieNotifier {
         Ok(())
     })
     .unwrap();
-    MovieNotifier::new(Arc::new(Notifier::new(db, Identity::default(), now())))
+    let base = Notifier::new(db, Identity::default(), now());
+    // plex.tv is pinged before each library update: here a port that
+    // refuses, never the real host.
+    base.set_upstreams(crate::metadata::Upstreams::mock("http://127.0.0.1:9"));
+    MovieNotifier::new(Arc::new(base))
 }
 
 fn imported(m: &Movie, old_files: Vec<DeletedMovieFile>) -> MovieImportEvent {

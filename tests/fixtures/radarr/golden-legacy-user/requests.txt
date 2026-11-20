@@ -1,0 +1,17 @@
+# What Radarr does at start with an old config.xml, from before the user
+# moved into the database: the user and its password in <Username> and
+# <Password>, in clear, and no user in the database (setup.sh makes the
+# fixture so). A recording of its own; same format as
+# ../golden/requests.txt.
+#
+#   GOLDEN_SETUP=tests/fixtures/radarr/golden-legacy-user/setup.sh \
+#       GOLDEN_REQUESTS=tests/fixtures/radarr/golden-legacy-user/requests.txt \
+#       GOLDEN_OUT=tests/fixtures/radarr/golden-legacy-user make golden-radarr
+#
+# The recorder logs in as unarr/fixture before the first request: the
+# session requests below answer as they do only if that user exists,
+# which only config.xml named. config-after.xml is the data directory's
+# config.xml as Radarr left it, copied by hand after the recording.
+session-initialize GET /initialize.json
+config-host GET /api/v3/config/host
+noauth-initialize GET /initialize.json

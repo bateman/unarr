@@ -130,22 +130,23 @@ pub async fn download(State(state): State<AppState>, Path((kind, name)): Path<(S
             .find(|b| b.kind.as_str() == kind.to_ascii_lowercase() && b.name == name),
         Err(e) => return ApiError::Internal(e).into_response(),
     };
+    let not_found = || crate::ui::static_not_found(state.personality());
     let Some(file) = file else {
-        return StatusCode::NOT_FOUND.into_response();
+        return not_found();
     };
+    // As `BackupFileMapper` serves it, a static file: the type ASP.NET's
+    // table gives `.zip`, and no `Content-Disposition` (the browser saves
+    // a zip all the same).
     match tokio::fs::read(&file.path).await {
         Ok(bytes) => (
-            [
-                (header::CONTENT_TYPE, "application/zip".to_string()),
-                (
-                    header::CONTENT_DISPOSITION,
-                    format!("attachment; filename=\"{}\"", file.name),
-                ),
-            ],
+            [(
+                header::CONTENT_TYPE,
+                crate::http::content_type(state.personality(), &file.name),
+            )],
             bytes,
         )
             .into_response(),
-        Err(_) => StatusCode::NOT_FOUND.into_response(),
+        Err(_) => not_found(),
     }
 }
 

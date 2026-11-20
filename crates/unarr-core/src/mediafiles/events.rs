@@ -56,6 +56,20 @@ pub struct DownloadCompleted {
     pub release: Option<GrabbedRelease>,
 }
 
+/// `UntrackedDownloadCompletedEvent`: files a manual import brought in
+/// without a download the queue tracked, one event per series and season.
+/// Sonarr raises it; Radarr has no such event.
+#[derive(Debug, Clone)]
+pub struct UntrackedDownloadCompleted {
+    pub series: Series,
+    pub episodes: Vec<Episode>,
+    pub files: Vec<EpisodeFile>,
+    /// The folder's release, else the file's; none when neither parsed.
+    pub parsed: Option<crate::parser::ParsedEpisodeInfo>,
+    /// The longest path the imported files share.
+    pub source_path: String,
+}
+
 /// `ManualInteractionRequiredEvent`.
 #[derive(Debug, Clone)]
 pub struct ManualInteractionRequired {
@@ -89,6 +103,7 @@ pub enum ImportEvent {
     EpisodeImportFailed(Box<EpisodeImportFailed>),
     EpisodeFileDeleted(Box<EpisodeFileDeleted>),
     DownloadCompleted(Box<DownloadCompleted>),
+    UntrackedDownloadCompleted(Box<UntrackedDownloadCompleted>),
     ManualInteractionRequired(Box<ManualInteractionRequired>),
     /// `SeriesScannedEvent`.
     SeriesScanned {

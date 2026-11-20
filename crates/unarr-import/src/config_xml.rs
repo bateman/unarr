@@ -9,7 +9,9 @@
 use std::path::Path;
 
 use anyhow::Context;
-pub use unarr_core::config::{AuthenticationMethod, AuthenticationRequired, HostConfig};
+pub use unarr_core::config::{
+    AuthenticationMethod, AuthenticationRequired, ConsoleLogFormat, HostConfig, LegacyUser,
+};
 
 /// Parse the text of a `config.xml`. `default_port` is the personality's
 /// port, used when `<Port>` is absent.
@@ -81,6 +83,25 @@ pub fn parse(xml: &str, default_port: u16) -> anyhow::Result<HostConfig> {
         analytics_enabled: boolean("AnalyticsEnabled", true)?,
         theme: string("Theme", "auto"),
         trust_cgnat_ip_addresses: boolean("TrustCgnatIpAddresses", false)?,
+        console_log_level: string("ConsoleLogLevel", ""),
+        console_log_format: match text("ConsoleLogFormat") {
+            Some(v) if !v.is_empty() => ConsoleLogFormat::parse(&v, true)
+                .ok_or_else(|| anyhow::anyhow!("unknown ConsoleLogFormat {v:?}"))?,
+            _ => ConsoleLogFormat::Standard,
+        },
+        // `UserService.Handle(ApplicationStartedEvent)`: both elements, or
+        // nothing; their text as it is, the password in clear.
+        legacy_user: {
+            let raw = |name: &str| {
+                root.children()
+                    .find(|n| n.is_element() && n.has_tag_name(name))
+                    .map(|n| n.text().unwrap_or("").to_string())
+            };
+            match (raw("Username"), raw("Password")) {
+                (Some(username), Some(password)) => Some(LegacyUser { username, password }),
+                _ => None,
+            }
+        },
     })
 }
 
@@ -113,7 +134,7 @@ pub fn render(cfg: &HostConfig) -> String {
         AuthenticationRequired::DisabledForLocalhost => "DisabledForLocalhost",
     };
     format!(
-        "<Config>\n  <BindAddress>{}</BindAddress>\n  <Port>{}</Port>\n  <SslPort>{}</SslPort>\n  <EnableSsl>{}</EnableSsl>\n  <LaunchBrowser>{}</LaunchBrowser>\n  <ApiKey>{}</ApiKey>\n  <AuthenticationMethod>{}</AuthenticationMethod>\n  <AuthenticationRequired>{}</AuthenticationRequired>\n  <Branch>{}</Branch>\n  <LogLevel>{}</LogLevel>\n  <SslCertPath>{}</SslCertPath>\n  <SslCertPassword>{}</SslCertPassword>\n  <UrlBase>{}</UrlBase>\n  <InstanceName>{}</InstanceName>\n  <AllowedHosts>{}</AllowedHosts>\n  <TrustedNetworks>{}</TrustedNetworks>\n  <AnalyticsEnabled>{}</AnalyticsEnabled>\n  <Theme>{}</Theme>\n</Config>\n",
+        "<Config>\n  <BindAddress>{}</BindAddress>\n  <Port>{}</Port>\n  <SslPort>{}</SslPort>\n  <EnableSsl>{}</EnableSsl>\n  <LaunchBrowser>{}</LaunchBrowser>\n  <ApiKey>{}</ApiKey>\n  <AuthenticationMethod>{}</AuthenticationMethod>\n  <AuthenticationRequired>{}</AuthenticationRequired>\n  <Branch>{}</Branch>\n  <LogLevel>{}</LogLevel>\n  <SslCertPath>{}</SslCertPath>\n  <SslCertPassword>{}</SslCertPassword>\n  <UrlBase>{}</UrlBase>\n  <InstanceName>{}</InstanceName>\n  <AllowedHosts>{}</AllowedHosts>\n  <TrustedNetworks>{}</TrustedNetworks>\n  <AnalyticsEnabled>{}</AnalyticsEnabled>\n  <Theme>{}</Theme>\n{}</Config>\n",
         escape(&cfg.bind_address),
         cfg.port,
         cfg.ssl_port,
@@ -132,7 +153,28 @@ pub fn render(cfg: &HostConfig) -> String {
         escape(&cfg.trusted_networks),
         bool_text(cfg.analytics_enabled),
         escape(&cfg.theme),
+        console_elements(cfg, &escape),
     )
+}
+
+/// `ConsoleLogLevel` and `ConsoleLogFormat`, which the originals do not
+/// write until they are set (`persist: false`). The legacy user is never
+/// written: the originals drop elements they do not know at start.
+fn console_elements(cfg: &HostConfig, escape: &dyn Fn(&str) -> String) -> String {
+    let mut out = String::new();
+    if !cfg.console_log_level.is_empty() {
+        out.push_str(&format!(
+            "  <ConsoleLogLevel>{}</ConsoleLogLevel>\n",
+            escape(&cfg.console_log_level)
+        ));
+    }
+    if cfg.console_log_format != ConsoleLogFormat::Standard {
+        out.push_str(&format!(
+            "  <ConsoleLogFormat>{}</ConsoleLogFormat>\n",
+            cfg.console_log_format.name()
+        ));
+    }
+    out
 }
 
 #[cfg(test)]
@@ -199,5 +241,62 @@ mod tests {
         let cfg = read(Path::new(FIXTURE), 8989).unwrap();
         let again = parse(&render(&cfg), 8989).unwrap();
         assert_eq!(again, cfg);
+        let mut console = cfg.clone();
+        console.console_log_level = "warn".into();
+        console.console_log_format = ConsoleLogFormat::Clef;
+        let text = render(&console);
+        assert!(text.contains("<ConsoleLogLevel>warn</ConsoleLogLevel>"), "{text}");
+        assert_eq!(parse(&text, 8989).unwrap(), console);
+        // Unset, as the originals leave them, they are not written.
+        assert!(!render(&cfg).contains("ConsoleLog"));
+    }
+
+    /// The console's level and format, as the originals read them: the
+    /// level as it is written, the format without regard to case.
+    #[test]
+    fn reads_the_console_settings() {
+        let cfg = parse(
+            "<Config><ApiKey>k</ApiKey><ConsoleLogLevel>Warn</ConsoleLogLevel><ConsoleLogFormat>clef</ConsoleLogFormat></Config>",
+            8989,
+        )
+        .unwrap();
+        assert_eq!(cfg.console_log_level, "Warn");
+        assert_eq!(cfg.console_log_format, ConsoleLogFormat::Clef);
+        let cfg = parse("<Config><ApiKey>k</ApiKey></Config>", 8989).unwrap();
+        assert_eq!(
+            (cfg.console_log_level.as_str(), cfg.console_log_format),
+            ("", ConsoleLogFormat::Standard)
+        );
+        assert!(parse(
+            "<Config><ApiKey>k</ApiKey><ConsoleLogFormat>Json</ConsoleLogFormat></Config>",
+            8989
+        )
+        .is_err());
+    }
+
+    /// A file from before Sonarr v3: the user and the password in clear,
+    /// both or nothing, and never written back.
+    #[test]
+    fn reads_the_user_of_a_file_from_before_v3() {
+        let cfg = parse(
+            "<Config><ApiKey>k</ApiKey><Username>Unarr</Username><Password> fixture </Password></Config>",
+            8989,
+        )
+        .unwrap();
+        assert_eq!(
+            cfg.legacy_user,
+            Some(LegacyUser {
+                username: "Unarr".into(),
+                password: " fixture ".into()
+            })
+        );
+        assert!(!render(&cfg).contains("Username") && !render(&cfg).contains("fixture"));
+        let half = parse(
+            "<Config><ApiKey>k</ApiKey><Username>Unarr</Username></Config>",
+            8989,
+        )
+        .unwrap();
+        assert_eq!(half.legacy_user, None);
+        assert_eq!(read(Path::new(FIXTURE), 8989).unwrap().legacy_user, None);
     }
 }

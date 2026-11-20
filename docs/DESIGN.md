@@ -362,6 +362,8 @@ maintainer's daily driver.
 | `GET /api/v3/series` p99 under 10 ms, measured again at the end of 4d | 70 ms on 950 series, with Radarr beside it. No target for the movie routes: `GET /api/v3/movie` 289 ms on 2,123 movies, `GET /api/v3/collection` 123 ms, a page of `GET /api/v3/history` 150 ms | 4d | Missed; deferred, as in 4c |
 | Container image under 15 MB compressed, measured again at the end of 4d | The binary with both UIs embedded is 30.6 MiB, 12.3 MiB under `gzip -9` | 4d | Unknown as an image; the binary alone is close to the limit |
 | Container image under 15 MB compressed, once the release profile unwinds | The binary is 34.9 MiB, 14.4 MiB under `gzip -9` (15.07 MB): 4.1 MiB and 2.0 MiB more than aborting | #14 | Unknown as an image; the binary alone is at the limit, and over it if the target is read in decimal megabytes |
+| Container image under 15 MB compressed, once Brotli answers (`docs/audit/2-http.md`, row 1.19) | The binary is 35.9 MiB, 14.9 MiB under `gzip -9` (15.61 MB), from 35.0 and 14.4 (15.14 MB): Brotli's encoder is 1.07 MiB of it, 0.50 MiB under `gzip -9`; the rest of the change saves 0.2 MiB (`mime-guess` gone) | HTTP low rows | Unknown as an image; the binary alone is under the limit in binary megabytes and over it in decimal ones |
+| Container image under 15 MB compressed, built as CI builds it | `docker build` of the Dockerfile at `521ea75` (amd64): 61.4 MB unpacked, 16.8 MB of layers under `gzip -9`. The static musl binary (jemalloc, Brotli, both UIs) is 38.6 MB, 16.06 MB compressed; distroless's base 0.71 MB | #10, 20 November 2026 | Missed: 1.8 MB over (1.0 MiB over 15 MiB) |
 | Idle RSS under 60 MB, once the release profile unwinds | Both personalities on the real library (38 series, 193 movies), fifteen minutes idle: 30 MiB, 11 MiB of it anonymous; 28 and 10 aborting, in the same container | #14 | Met idle |
 
 First measurement, skeleton only (one `system/status` route per personality):
@@ -637,7 +639,8 @@ title needs most of one parser's patterns. On musl the "at rest" figure
 does not fall on its own, as expected of an allocator without
 `malloc_trim`; the release of the patterns returns the memory all the
 same, since the automata are large allocations that go back to the
-system when freed.
+system when freed. The musl column is musl's own allocator: the image's
+is jemalloc since section 21.6, measured there.
 
 The 60 MB target therefore holds for a process left alone for five
 minutes, and not for one that searches every few minutes. With the RSS
@@ -1076,9 +1079,12 @@ the size are in section 20, with why they were not taken.
   parameters, the section whose location holds the series' root folder,
   the two-hour version cache). The remaining implementations keep their
   settings and flags and answer a test with a validation error saying
-  Unarr does not drive them. The plex.tv side (sign-in, server list, the
-  ping on every update) is not called: it needs the user's account, and
-  the `action` endpoint answers the originals' empty object. A notification
+  Unarr does not drive them. Of the plex.tv side, the daily ping that
+  keeps the token alive is sent as the originals send it (before each
+  library update and connection test, once a day per token, its answer
+  ignored); the sign-in and the server list are not offered, since they
+  need the user's account, and the `action` endpoint answers the
+  originals' empty object. A notification
   that keeps failing backs off with the originals' periods (five levels,
   no block within five minutes of the first failure) in the shared
   `provider_status` table; a test whose target never answers escapes as a
@@ -1237,6 +1243,15 @@ the size are in section 20, with why they were not taken.
   Unarr's own code logs at it and the libraries stay at info; the debug
   and trace files are written only at their levels. `RUST_LOG`, when
   set, is the operator's word: it decides, and the setting is ignored.
+- **The console has a level and a format of its own.** `ConsoleLogLevel`
+  (`config.xml`, `<App>__Log__ConsoleLevel`, `PUT config/host`) when
+  set, else info, or the Log Level when that is quieter, as
+  `ReconfigureLogging` has it: debug and trace go to the files, not to
+  `docker logs`. The filter in front of everything lets through the more
+  verbose of the two levels; the console, the files and the recent lines
+  of `GET /log` each keep their own. `ConsoleLogFormat` `Clef` writes the
+  console as the originals' `CompactJsonLayout` does (`@t`, `@l`, `@x`,
+  `@m`, one object a line). `RUST_LOG` leaves the format to the settings.
 - **Secrets are taken out of every log line.** `CleanseLogMessage`'s
   rules, one for one (API keys, passkeys and tokens in URLs, Plex's
   token, user names in paths, download clients' and webhooks' secrets,
@@ -1736,8 +1751,9 @@ the size are in section 20, with why they were not taken.
   compilation, under a second, once per sync.
 - **What is stored and not applied, or not sent**, each because nothing
   on the fixture exercises it: the notifications for a movie added, movies
-  deleted and an application update, the ping to plex.tv before a library
-  update. The file date setting and the 3D token were on this list when
+  deleted and an application update. The ping to plex.tv before a library
+  update was on this list too, until it was sent (section 13). The file
+  date setting and the 3D token were on this list when
   the milestone closed and were done right after. The file date is
   compared as the original compares it, the UTC day the file was written
   against the wanted date, so a file already dated is left alone at the
@@ -1967,7 +1983,8 @@ the size are in section 20, with why they were not taken.
   differences the live audit measured were brought into line afterwards
   (section 16, and `docs/audit/2-http.md`, "Live run, and what was
   changed"); what that table leaves is Brotli, `HEAD` on pages, the cache
-  lifetime of static files and of `/ping`.
+  lifetime of static files and of `/ping`. All but `/ping` were brought
+  into line since (section 22).
   Three things found on the way concern Sonarr and were left to tasks of
   their own: the same look-behind defect in its release group pattern
   (fixed on `main` while this milestone was under way), the fixture
@@ -2105,9 +2122,9 @@ the size are in section 20, with why they were not taken.
   added to Transmission, and Transmission before 4.0 (without labels).
 - The memory figures in section 9 come from a glibc build, where
   `malloc_trim` returns freed pages. The published image is a static musl
-  build: musl's allocator has no `malloc_trim` (the call is compiled out)
-  and behaves differently, so the image's idle footprint after an import
-  is not measured yet.
+  build, where the call is compiled out; its allocator is jemalloc since
+  20 November 2026, which returns pages on its own, and its footprint
+  after an import and under load was measured then (section 21.6).
 - Listing series skips the `actors` column, the largest JSON one. Every
   series write of 3b updates columns, so nothing writes back a series read
   from a list; a new write must keep to that.
@@ -2145,9 +2162,10 @@ the size are in section 20, with why they were not taken.
   download and removes the torrent from the client a second time; a
   torrent is removed right after its import when qBittorrent has stopped
   it (`stoppedUP`) at a global inactive-seeding limit; and Sonarr's
-  `PlexServer` pings plex.tv (`/api/v2/ping`) with the token on every
-  import before scheduling the library update, which Unarr does not do
-  (see the next point). The real Plex server was off during those logs
+  `PlexServer` pings plex.tv (`/api/v2/ping`) with the token before
+  scheduling the library update, which Unarr has done the same way since
+  19 November 2026 (section 13; the source caches the ping a day per
+  token). The real Plex server was off during those logs
   (it follows the television), so Sonarr's refreshes failed. On 9 November
   2026 Unarr itself replaced Sonarr on the maintainer's NAS for one
   episode, from search to the real Plex, which is the homelab run of
@@ -2424,9 +2442,9 @@ the maintainer, on 16 November 2026.
 - **Cost.** The peak keeps swinging between runs, which the comparison's
   history notes on each run. Whoever runs a glibc build and prefers the
   steady peak sets `MALLOC_ARENA_MAX=1` without a change to the code. The
-  published image is a static musl build, with no per-thread arenas: the
-  question does not arise there, and its memory under load is not
-  measured yet. The ARM64 NAS was not measured either.
+  published image is a static musl build, where the question does not
+  arise: its allocator is jemalloc, with four arenas, since section 21.6.
+  The ARM64 NAS was not measured.
 - **Evidence.** `docs/originals-comparison.md`, the two `MALLOC_ARENA_MAX`
   tables; commit `c79f6df`.
 
@@ -2498,3 +2516,286 @@ below, the recommended one; for a row the audit rated medium
   and is refused, where with WebSockets alone listed it would stop sooner;
   it gets no live updates either way, and the answer stays the original's.
 - **To revisit** if a user's proxy cannot pass WebSockets.
+
+### 21.5 A blank Plex token is not pinged, and does not fail
+
+Taken by the implementer on 19 November 2026, when the ping to plex.tv
+was added; for the maintainer to confirm or overturn.
+
+- **The question.** The originals ping plex.tv through a cache keyed by
+  the token, and their cache refuses a blank key
+  (`Ensure.That(key).IsNotNullOrWhiteSpace()` in `Cached.Get`). With no
+  token, the exception escapes `PlexServer.Test` (the connection test
+  fails with an error) and `UpdateIfEnabled` (every import's Plex
+  notification fails before the library update is queued). A Plex server
+  that lets the local network in without a token is never refreshed.
+- **Options.**
+  - *As the originals*: throw where they throw, the test answering an
+    error and the updates failing. Not recorded on the originals, so the
+    error's exact answer would be the source's reading.
+  - *Skip the ping* (taken): no ping for a blank token, and the test and
+    the update go on to the server, which says whether it needs a token,
+    as Unarr did before the ping was added.
+- **Why.** The originals' failure is a side effect of a cache, not a
+  check of the settings: their validator accepts a blank token, and their
+  server requests leave it out when blank. Reproducing it would break a
+  setup that works with the server, for no client that depends on it.
+- **Cost.** An installation with a blank token sees its Plex refreshed by
+  Unarr where the original failed: a difference, in the direction of what
+  the settings ask for.
+- **To revisit** if the maintainer prefers the originals' behaviour.
+
+### 21.6 The image's allocator: jemalloc, tuned
+
+Decided by the maintainer on 20 November 2026, among the options below,
+the recommended one, on the measurements of
+`docs/originals-comparison.md` ("The image's allocator").
+
+- **The question.** The published image is a static musl build, and
+  musl's own allocator takes one lock for every allocation. On the scaled
+  library, with four clients without pause, it served 13 requests a
+  second where glibc's served 59, with a p95 of 1.9 s against 0.34 s; one
+  request at a time, Radarr's `/movie` took 361 ms against 232 ms. Its
+  memory is the lowest of all.
+- **Options, all measured** (`scripts/allocator-probe.py`, 4-core x86-64,
+  scaled library):
+  - *Keep musl's own*: 38-40 MiB at rest after the start, 78-80 MiB after
+    the load, a peak of 220-228 MiB under four clients; the speed above.
+  - *jemalloc with three settings* (chosen): a background thread, four
+    arenas, freed pages returned after a second. 46 / 90 MiB, a peak of
+    295-326 MiB, 59-60 requests a second, a p95 of 0.31 s; Radarr's
+    `/movie` 275 ms.
+  - *jemalloc with its defaults*: the same speed, 52 / 123 MiB, a peak of
+    552 MiB.
+  - *mimalloc*: the same speed, 90 / 234 MiB in version 3 (182 MiB after
+    the load told to purge at once, and slower), 406 / 387 MiB in
+    version 2.
+  - *A glibc image* (distroless's `cc` base instead of `static`): glibc's
+    figures, 56 / 75 MiB and 59 requests a second, but the binary is no
+    longer static, and the binaries of a release would need glibc on the
+    host.
+- **Why.** Four times the throughput and a sixth of the p95 under
+  concurrent requests, which the web interface sends when a page opens,
+  and a quarter off the heaviest page for one user, for 8 MiB at rest and
+  12 MiB after the load. Of the allocators that bring the speed back,
+  jemalloc so set keeps the least, and the binary stays static.
+- **Cost.** Against musl's own: 8 MiB at rest after the start, 12 MiB
+  after the load, 75 MiB more at the peak under four clients; 611,200
+  bytes more of binary; jemalloc is C, built from source with the image
+  (`make` added to the build stage). One request at a time the
+  comparison's reads still take 18 to 21 % longer than with glibc.
+- **How it is done** (the implementer's choices, not asked):
+  `tikv-jemallocator` for the musl target only, so that a glibc build and
+  the comparison with the originals keep glibc's allocator; the settings
+  compiled in through `_rjem_malloc_conf`, which `_RJEM_MALLOC_CONF` in
+  the environment still overrides, setting by setting; the background
+  thread and the decay take the place of `release_memory`, which does
+  nothing on musl.
+- **To revisit** on the ARM64 NAS, which was not measured, or if the
+  memory at rest matters more than the speed: then musl's own.
+- **Evidence.** Commit `e73c586`; the two tables of
+  `docs/originals-comparison.md`, "The image's allocator".
+
+### 21.7 The interface stays in English
+
+Decided by the maintainer on 20 November 2026, among the four options
+below; for a row the audit rated low (`docs/audit/7-triage.md`,
+`UILanguage`).
+
+- **The question.** Settings > UI > Interface Language is stored and
+  shown, but Unarr serves only the English dictionary, so another choice
+  changes nothing. The originals ship 44 more dictionaries an application
+  in their release (`Localization/Core/*.json`, which `make ui` already
+  downloads): Sonarr's 1.8 MB, of which 8 languages are at least 90 %
+  translated, Radarr's 4.4 MB, with 17. They also translate text the
+  server writes: some 26 health-check messages of Sonarr and 7 of Radarr,
+  and the labels of the providers' fields.
+- **Options** (measured on the pinned releases; the web interface needs
+  nothing else, it reads `/localization` and `/localization/language` and
+  takes the list of languages from `/api/v3/language`):
+  - *Everything*: the dictionaries, the health-check messages and the
+    field labels; about 1.6 MB of binary stored compressed, and
+    recordings per language or translation keys for the schemas. The
+    largest.
+  - *The interface only*: all the dictionaries and the language
+    identifier, the server's text left English; the same size, a few
+    hundred lines and a recording in another language.
+  - *The well-translated languages only*: the same for the languages at
+    least 90 % translated, the rest falling back to English key by key as
+    in the originals; about 1.06 MB compressed.
+  - *English only* (chosen): nothing.
+- **Why.** No reason was given with the choice. What speaks for it: nobody
+  known uses another language with Unarr, and the image is already over
+  its size target (section 9), which the dictionaries would push further.
+- **Cost.** Whoever picks another language keeps an English interface,
+  and nothing says why. The setting is kept, saved and returned as the
+  originals do, so a database moved back to an original keeps the choice.
+- **To revisit** when a user asks for another language: then the third
+  option, the cheapest that makes the setting work.
+
+### 21.8 Brotli is kept
+
+Decided by the maintainer on 20 November 2026, between the two options
+below, the recommended one; for row 1.19 of `docs/audit/2-http.md`, which
+section 22 closes.
+
+- **The question.** The originals compress with `AddResponseCompression()`,
+  which prefers Brotli when a client weighs it as gzip; Unarr compressed
+  with gzip only. Doing as they do needs tower-http's Brotli encoder, which
+  adds 1,126,528 bytes to the release binary, 522,738 under `gzip -9`, to
+  an image already over its size target (16.8 MB compressed against 15,
+  section 9).
+- **Options.**
+  - *Keep it* (chosen): the answers are the originals' (Brotli to a
+    browser, gzip to a client that asks for gzip only), and smaller on the
+    wire.
+  - *Drop it*: gzip only, as before; half a MiB less of image, and a
+    browser gets gzip where the originals send Brotli. One feature of
+    tower-http (`compression-br`) and two assertions of a test.
+- **Why.** The answers match the originals'.
+- **Cost.** Half a MiB more of an image already 1.8 MB over its target.
+- **To revisit** when the image is to come back under its target: this
+  is the first half MiB to give back.
+
+### 21.9 Allowed hosts and trusted networks apply as soon as they are saved
+
+Decided by the maintainer on 20 November 2026, between the two options
+below, the recommended one; for row 1.35 of `docs/audit/2-http.md`, which
+section 22 settles for the URL base.
+
+- **The question.** The originals read the allowed hosts and the trusted
+  networks once, at start: a list saved from Settings > General applies
+  after the restart. Unarr applies them at once.
+- **Options.**
+  - *At once, as today* (chosen): a difference from the originals, kept.
+  - *At the restart, as the originals*: little work, and the originals'
+    behaviour.
+- **Why.** A list that leaves the browser out (a host that is not the one
+  in its address bar) locks its author out either way, and either way the
+  way back is `config.xml` and a restart. Applied at once, the author
+  finds out with the change still in mind and the page that made it just
+  saved; applied at the restart, maybe days later, from another address.
+- **Cost.** A difference no client is known to depend on: an
+  installation moved back to an original applies the same list from its
+  next start.
+- **To revisit** if a client is found to rely on the restart.
+
+### 21.10 `Server: Kestrel`, as the originals
+
+Decided by the maintainer on 20 November 2026, among the three options
+below; for row 1.34 of `docs/audit/2-http.md`.
+
+- **The question.** Both originals answer every request with
+  `Server: Kestrel`, the name of their framework's web server (recorded
+  with `scripts/http-probe.py`); Unarr sent no `Server` header.
+- **Options.**
+  - *No header*, as before.
+  - *`Server: Kestrel`* (chosen): the originals' header, on every answer.
+  - *`Server: Unarr`*: a name of its own.
+- **Why.** No reason came with the choice. What speaks for it: the
+  answers are the originals' to the header too, and a client or a script
+  that looks at it, none known, sees what it saw before.
+- **Cost.** The header names a server that is not the one running, which
+  a scanner reading it takes at its word.
+- **How it is done** (the implementer's choice): from the outermost layer
+  of the router, so the host filter's 400 and a panic's 500 carry it as the
+  originals' do (`http::server_header`).
+
+## 22. The server outside the API, as the originals' pipeline
+
+The low rows of `docs/audit/2-http.md` left open or partial by the triage
+(`docs/audit/7-triage.md`), recorded on Sonarr 4.0.20 and Radarr 6.4.4 with
+`scripts/http-probe.py` (scenarios `lowhttp*`) and compared with
+`scripts/http-probe-diff.py`; the original's sources read where a recording
+could not settle it. What changed, and what was decided on the way:
+
+- **The pipeline's order is the originals'.** In each group of routes, from
+  the outside in: the authentication, the URL base's redirect, the answer
+  while starting, the cache headers, the action (`api/lib.rs`). The request
+  log sits after the host filter and before the path rewrite, as
+  `LoggingMiddleware` sits after `UseHostFiltering`.
+- **Static files are kept a year.** `CacheableSpecification` is applied as
+  written (`http::cacheable`): every answer outside the API is
+  `max-age=31536000, public` with `Last-Modified`, except the bootstrap,
+  `index.js`, SignalR, the feed and the log files; under the API only the
+  covers, and anything asked with `?h=`. An action that sets its own
+  headers keeps them: pages (`no-cache, no-store`), a sign-in or sign-out
+  (the cookie handler's `no-cache,no-store` and an `Expires` of 1970) and
+  the exception handler's answers. `Last-Modified` is the build time of the
+  release Unarr emulates (`compat::emulated_build_time`), as the originals
+  send theirs: the embedded UI is that release's, so the date changes when
+  the UI does. `/ping` as health checks ask it stays uncached, as decided
+  in phase 4 (section 16); `/Ping` is kept as the originals keep it.
+  Unarr adds one exception of its own: a backup (`/backup/...`) is never
+  kept. It holds the database and the API key, and a shared cache in front
+  that keeps what is `public` (Cloudflare keeps a `.zip` by default, as
+  does an nginx with `proxy_cache`) would hand it to whoever asks for its
+  predictable name; the originals expose that, Unarr does not. Nor is an
+  answer of the exception handler kept, `?h=` in its query or not.
+- **The pages carry cache breakers.** `HtmlMapperBase`'s pattern adds the
+  URL base and `?h=` with the MD5 of the file to each asset link of the
+  index and login pages, and drops `data-no-hash`; both pages are now the
+  originals' byte for byte. With them a changed file is fetched again even
+  though the old one was to be kept a year.
+- **What is served is what the originals' mappers take.** A file of the
+  bundle only where `StaticResourceMapper` would serve it, `/robots.txt`
+  from `Content/`, the login page for a path that starts with `/login`,
+  the single-page application for a path without a dot; anything else is
+  the static controller's 404 in problem details (`ui::static_not_found`),
+  kept a year like the rest. Types come from ASP.NET's table
+  (`http::content_type`), which says `text/javascript` on Radarr's newer
+  runtime and `application/javascript` on Sonarr's. The covers are served
+  by `ui::media_cover` rather than tower-http's file server: no `ETag`, no
+  ranges, as `MediaCoverMapper` serves them; the `fs` feature of tower-http
+  and the `mime-guess` feature of rust-embed are gone with it.
+- **`HEAD` is taken by `/ping` alone.** Elsewhere it finds the framework's
+  405 endpoint, which the fallback policy guards with the key: 401 without
+  it under every authentication method, a session cookie not taken.
+- **Routes outside the API are matched without case** (`literal_route`):
+  `/LOGIN`, `/Ping`, `/SIGNALR/messages/negotiate`, the feed, `/CONTENT/`.
+  The covers, backups, log files and `/favicon.ico` are found by the
+  originals' mappers with their own case rules, and are left to them.
+- **Content negotiation.** A JSON result whose `Accept` takes no JSON is an
+  empty 406 once the action has run (`ReturnHttpNotAcceptable`): a write is
+  done all the same, as in the originals. `*/*` anywhere in `Accept` makes
+  it irrelevant (`RespectBrowserAcceptHeader` is off). This joins the
+  string actions of Radarr (section 16), which negotiate on their own.
+- **Brotli.** `AddResponseCompression()` prefers Brotli when the client
+  weighs it as gzip; both at level 1. `Vary: Accept-Encoding` goes only to a
+  client that sent `Accept-Encoding`, and nothing is compressed for a
+  request a trusted proxy says came over HTTPS (`EnableForHttps` is off),
+  so behind a TLS-terminating proxy the answers leave uncompressed, as the
+  originals' do. The encoder costs the release binary 1,126,528 bytes,
+  522,738 under `gzip -9` (two release builds of this branch, with and
+  without it), to an image already over its target (section 9).
+  Dropping it is one feature of tower-http (`compression-br`) and two
+  assertions of a test; it is kept, by decision (section 21.8).
+- **503 while starting.** The daemon binds the listener and serves before
+  the command runtime starts, and `StartingUpMiddleware`'s answer stands
+  for every authenticated request until it has: a proxy shows a 503 rather
+  than a refused connection. The database is still opened, and an import
+  done, before the listener.
+- **The URL base is read once where the originals read it once**: the
+  routes, the generated pages, the manifest and the tile description, the
+  session cookie's path (`AppState::url_base`). `/initialize.json` and the
+  login's redirects read the settings on each request, as the originals'
+  controllers do. A base saved from the UI is applied by the restart, as in
+  the originals; allowed hosts and trusted networks apply at once, by
+  decision (section 21.9).
+- **Smaller ones.** The request log under `Http` and `Api` (`unarrd` lets
+  them through at trace and debug); the login form signs nobody in when the
+  method is None; an XHR is told 401 with the login page's address; the
+  session cookie's name sheds the instance name's diacritics before
+  anything that is not an ASCII letter or digit; SignalR's negotiation
+  version 1 with a connection token, and the `version` message of a new
+  connection to every client; the backup download as the originals send
+  it (`application/x-zip-compressed`, no `Content-Disposition`) but never
+  kept by a cache; a blank user name or password signs nobody in, as
+  `UserService.FindUser` refuses it, and a `config.xml` with both
+  elements empty adds no user; the cover
+  proxy's type from the name, a name that is not an image's a 404 before
+  the hash is looked at.
+- **`Server: Kestrel`.** The originals' web server names itself on every
+  answer; Unarr sends the same name, by the maintainer's decision
+  (section 21.10), from the outermost layer, so the host filter's 400 and
+  a panic's 500 carry it as well (`docs/audit/7-triage.md`, row 1.34).

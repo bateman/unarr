@@ -148,6 +148,10 @@ struct Inner {
     push_lock: tokio::sync::Mutex<()>,
     /// The session cookie's name, fixed the first time it is needed.
     auth_cookie: std::sync::OnceLock<String>,
+    /// The URL base the routes and the generated pages were made with.
+    url_base: std::sync::OnceLock<String>,
+    /// Until the command runtime has started (`StartingUpMiddleware`).
+    starting: std::sync::atomic::AtomicBool,
     /// Where the metadata hosts are asked, when not the real ones (a mock,
     /// in the tests and the replay); applied when the runtime starts.
     metadata: Mutex<Option<unarr_core::metadata::Upstreams>>,
@@ -163,7 +167,7 @@ struct Inner {
 }
 
 /// How the program applies a log level.
-type LogLevelHook = Box<dyn Fn(&str) + Send + Sync>;
+type LogLevelHook = Box<dyn Fn(&unarr_core::config::HostConfig) + Send + Sync>;
 
 /// What `POST /system/shutdown` and `/system/restart` ask of the process.
 #[derive(Debug, Clone, Copy, PartialEq, Eq)]
@@ -235,6 +239,8 @@ impl AppState {
             commands: OnceLock::new(),
             push_lock: tokio::sync::Mutex::new(()),
             auth_cookie: std::sync::OnceLock::new(),
+            url_base: std::sync::OnceLock::new(),
+            starting: std::sync::atomic::AtomicBool::new(false),
             metadata: Mutex::new(None),
             session_secret: OnceLock::new(),
             lifecycle: tokio::sync::watch::channel(None).0,
@@ -429,31 +435,54 @@ impl AppState {
             .map(|(r, _)| r.clone())
     }
 
-    /// The name of the session cookie: `<InstanceName>Auth`, letters and
-    /// digits only. The originals build it once, so a renamed instance keeps
-    /// its sessions until the next start.
+    /// The name of the session cookie: `<InstanceName>Auth`, its letters
+    /// stripped of their diacritics (`é` is `e`) and then anything but an
+    /// ASCII letter or digit dropped. The originals build it once, so a
+    /// renamed instance keeps its sessions until the next start.
     pub fn auth_cookie(&self) -> &str {
-        self.0.auth_cookie.get_or_init(|| {
-            let name: String = self
-                .settings()
-                .instance_name
-                .chars()
-                .filter(|c| c.is_ascii_alphanumeric())
-                .collect();
-            format!("{name}Auth")
-        })
+        self.0
+            .auth_cookie
+            .get_or_init(|| format!("{}Auth", cookie_name_part(&self.settings().instance_name)))
+    }
+
+    /// The URL base as it was when the router was made: where the routes
+    /// are, and what the generated pages, the manifest and the session
+    /// cookie name until the restart, as in the originals, whose mappers
+    /// and `UsePathBase` read it once. What the originals read on each
+    /// request (`/initialize.json`, the login's redirects) reads the
+    /// settings.
+    pub fn url_base(&self) -> &str {
+        self.0.url_base.get_or_init(|| self.settings().url_base.clone())
+    }
+
+    /// Whether requests are still answered 503: from [`Self::set_starting`]
+    /// until the command runtime has started.
+    pub fn is_starting(&self) -> bool {
+        self.0.starting.load(std::sync::atomic::Ordering::Acquire)
+    }
+
+    /// Answer 503 until the runtime has started (`IsStarting`); the daemon
+    /// sets it before it listens, [`Self::start_runtime`] clears it.
+    pub fn set_starting(&self, starting: bool) {
+        self.0
+            .starting
+            .store(starting, std::sync::atomic::Ordering::Release);
     }
 
     /// `ReconfigureLogging`: how the program changes what it logs when the
     /// level of Settings > General is saved. Set once, by the daemon.
-    pub fn set_log_level_hook(&self, apply: impl Fn(&str) + Send + Sync + 'static) {
+    pub fn set_log_level_hook(
+        &self,
+        apply: impl Fn(&unarr_core::config::HostConfig) + Send + Sync + 'static,
+    ) {
         let _ = self.0.log_level.set(Box::new(apply));
     }
 
-    /// Log at the level the settings now say.
+    /// Log at the levels and in the console format the settings now say
+    /// (`LogLevel`, `ConsoleLogLevel`, `ConsoleLogFormat`).
     pub fn apply_log_level(&self) {
         if let Some(apply) = self.0.log_level.get() {
-            apply(&self.settings().host.log_level);
+            apply(&self.settings().host);
         }
     }
 
@@ -663,5 +692,27 @@ impl AppState {
 
     pub fn runtime(&self) -> &RuntimeInfo {
         &self.0.runtime
+    }
+}
+
+/// `RemoveDiacritics`, then `[^a-z0-9]+` removed without case: what of an
+/// instance name goes into the cookie's.
+fn cookie_name_part(instance_name: &str) -> String {
+    use unicode_normalization::char::is_combining_mark;
+    use unicode_normalization::UnicodeNormalization;
+    instance_name
+        .nfd()
+        .filter(|c| !is_combining_mark(*c))
+        .filter(char::is_ascii_alphanumeric)
+        .collect()
+}
+
+#[cfg(test)]
+mod tests {
+    #[test]
+    fn the_cookie_name_keeps_the_letters_under_the_diacritics() {
+        assert_eq!(super::cookie_name_part("Sonarr Ünï Çafé"), "SonarrUniCafe");
+        assert_eq!(super::cookie_name_part("Sonarr 4K (Salotto)"), "Sonarr4KSalotto");
+        assert_eq!(super::cookie_name_part("Radarr ñ-日本"), "Radarrn");
     }
 }

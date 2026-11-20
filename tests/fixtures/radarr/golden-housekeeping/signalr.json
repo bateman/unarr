@@ -1,0 +1,100 @@
+[
+  {
+    "after": "system-task-before",
+    "messages": [
+      {
+        "body": {
+          "version": "6.4.4.10685"
+        },
+        "name": "version"
+      }
+    ]
+  },
+  {
+    "after": "command-housekeeping",
+    "messages": [
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "body": {
+              "isExclusive": false,
+              "isLongRunning": false,
+              "isTypeExclusive": false,
+              "name": "Housekeeping",
+              "requiresDiskAccess": false,
+              "sendUpdatesToClient": true,
+              "suppressMessages": true,
+              "trigger": "manual",
+              "updateScheduledTask": true
+            },
+            "commandName": "Housekeeping",
+            "id": 472955,
+            "name": "Housekeeping",
+            "priority": "normal",
+            "queued": "2026-11-19T21:54:43Z",
+            "result": "unknown",
+            "sendUpdatesToClient": true,
+            "started": "2026-11-19T21:54:43Z",
+            "stateChangeTime": "2026-11-19T21:54:43Z",
+            "status": "started",
+            "trigger": "manual",
+            "updateScheduledTask": true
+          }
+        },
+        "name": "command"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "system/task"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "body": {
+              "isExclusive": false,
+              "isLongRunning": false,
+              "isTypeExclusive": false,
+              "name": "Housekeeping",
+              "requiresDiskAccess": false,
+              "sendUpdatesToClient": true,
+              "suppressMessages": true,
+              "trigger": "manual",
+              "updateScheduledTask": true
+            },
+            "commandName": "Housekeeping",
+            "duration": "00:00:00.1829407",
+            "ended": "2026-11-19T21:54:43Z",
+            "id": 472955,
+            "name": "Housekeeping",
+            "priority": "normal",
+            "queued": "2026-11-19T21:54:43Z",
+            "result": "successful",
+            "sendUpdatesToClient": true,
+            "started": "2026-11-19T21:54:43Z",
+            "stateChangeTime": "2026-11-19T21:54:43Z",
+            "status": "completed",
+            "trigger": "manual",
+            "updateScheduledTask": true
+          }
+        },
+        "name": "command"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "health"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "health"
+      }
+    ]
+  }
+]

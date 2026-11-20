@@ -1,0 +1,12 @@
+{
+  "body": {
+    "max": 1000,
+    "min": 0
+  },
+  "recordedAt": "2026-11-19T21:33:09Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/qualitydefinition/limits"
+  },
+  "status": 200
+}

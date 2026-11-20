@@ -88,3 +88,69 @@ async fn ui_client_handshake_and_version_message() {
     .await;
     assert!(closed.is_ok(), "server should close after a type 7 message");
 }
+
+/// One message from the hub, past the handshake.
+async fn next_message<S>(ws: &mut S) -> serde_json::Value
+where
+    S: futures_util::Stream<Item = Result<Message, tokio_tungstenite::tungstenite::Error>> + Unpin,
+{
+    let frame = tokio::time::timeout(std::time::Duration::from_secs(5), ws.next())
+        .await
+        .expect("a message in time")
+        .expect("frame")
+        .unwrap();
+    serde_json::from_str(frame.into_text().unwrap().trim_end_matches('\u{1e}')).unwrap()
+}
+
+/// Rows 2.12 and 2.13 of `docs/audit/2-http.md`: a client asking for
+/// version 1 gets it with a connection token; a new connection's `version`
+/// message goes to every client, as `MessageHub.OnConnectedAsync` sends it.
+#[tokio::test]
+async fn negotiate_version_one_and_version_to_every_client() {
+    let app = unarr_api::router(build_state());
+    let listener = tokio::net::TcpListener::bind("127.0.0.1:0").await.unwrap();
+    let addr = listener.local_addr().unwrap();
+    tokio::spawn(async move { axum::serve(listener, app).await.unwrap() });
+
+    let negotiate = |query: &'static str| async move {
+        let mut stream = tokio::net::TcpStream::connect(addr).await.unwrap();
+        use tokio::io::{AsyncReadExt, AsyncWriteExt};
+        let request = format!(
+            "POST /signalr/messages/negotiate?{query}access_token={API_KEY} HTTP/1.1\r\nHost: x\r\nContent-Length: 0\r\nConnection: close\r\n\r\n"
+        );
+        stream.write_all(request.as_bytes()).await.unwrap();
+        let mut answer = String::new();
+        stream.read_to_string(&mut answer).await.unwrap();
+        let body = answer.split("\r\n\r\n").nth(1).unwrap().to_owned();
+        serde_json::from_str::<serde_json::Value>(&body).unwrap()
+    };
+    let v1 = negotiate("negotiateVersion=1&").await;
+    assert_eq!(v1["negotiateVersion"], 1);
+    let token = v1["connectionToken"].as_str().unwrap();
+    assert_ne!(token, v1["connectionId"].as_str().unwrap());
+    let v0 = negotiate("").await;
+    assert_eq!(v0["negotiateVersion"], 0);
+    assert!(v0.get("connectionToken").is_none());
+
+    let connect = || async {
+        let (mut ws, _) = tokio_tungstenite::connect_async(format!(
+            "ws://{addr}/signalr/messages?id=x&access_token={API_KEY}"
+        ))
+        .await
+        .expect("websocket upgrade");
+        ws.send(Message::Text(
+            "{\"protocol\":\"json\",\"version\":1}\u{1e}".into(),
+        ))
+        .await
+        .unwrap();
+        assert_eq!(next_message(&mut ws).await, serde_json::json!({}));
+        assert_eq!(next_message(&mut ws).await["arguments"][0]["name"], "version");
+        ws
+    };
+    let mut first = connect().await;
+    let _second = connect().await;
+    // The first client hears of the second.
+    let heard = next_message(&mut first).await;
+    assert_eq!(heard["arguments"][0]["name"], "version");
+    assert_eq!(heard["arguments"][0]["body"]["version"], "4.0.20.3014");
+}

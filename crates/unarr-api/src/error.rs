@@ -210,13 +210,12 @@ pub fn not_found_problem(document: &str, content_type: &'static str) -> Response
     (
         StatusCode::NOT_FOUND,
         [(axum::http::header::CONTENT_TYPE, content_type)],
-        json!({
-            "type": document,
-            "title": "Not Found",
-            "status": 404,
-            "traceId": trace_id(),
-        })
-        .to_string(),
+        // Indented, its members in ASP.NET's order.
+        format!(
+            "{{\n  \"type\": {},\n  \"title\": \"Not Found\",\n  \"status\": 404,\n  \"traceId\": {}\n}}",
+            json!(document),
+            json!(trace_id()),
+        ),
     )
         .into_response()
 }

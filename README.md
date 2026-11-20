@@ -55,7 +55,12 @@ its owner, or the daemon cannot create its files there.
 The log level is the Log Level of Settings > General (info by default), and
 changes as soon as it is saved. Setting `RUST_LOG` on the container
 overrides it: leave it unset unless a level per crate is needed, such as
-`RUST_LOG=info,unarr=trace`.
+`RUST_LOG=info,unarr=trace`. As in the originals, the console (what
+`docker logs` shows) stays at info whatever that level is, unless
+`ConsoleLogLevel` in `config.xml` or `Sonarr__Log__ConsoleLevel` names
+another; `ConsoleLogFormat` `Clef`, or `SONARR__LOG__CONSOLEFORMAT=Clef`,
+writes it as one JSON object a line for a log shipper (`RADARR__` for
+Radarr).
 
 ### Health check
 

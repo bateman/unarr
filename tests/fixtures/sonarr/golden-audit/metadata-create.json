@@ -1,0 +1,117 @@
+{
+  "body": {
+    "configContract": "XbmcMetadataSettings",
+    "enable": true,
+    "fields": [
+      {
+        "advanced": false,
+        "helpText": "tvshow.nfo with full series metadata",
+        "isFloat": false,
+        "label": "Series Metadata",
+        "name": "seriesMetadata",
+        "order": 0,
+        "privacy": "normal",
+        "section": "metadata",
+        "type": "checkbox",
+        "value": true
+      },
+      {
+        "advanced": true,
+        "helpText": "Include JSON formatted episode guide element in tvshow.nfo (Requires 'Series Metadata')",
+        "isFloat": false,
+        "label": "Series Metadata Episode Guide",
+        "name": "seriesMetadataEpisodeGuide",
+        "order": 1,
+        "privacy": "normal",
+        "section": "metadata",
+        "type": "checkbox",
+        "value": false
+      },
+      {
+        "advanced": true,
+        "helpText": "Include TheTVDB show URL in tvshow.nfo (can be combined with 'Series Metadata')",
+        "isFloat": false,
+        "label": "Series Metadata URL",
+        "name": "seriesMetadataUrl",
+        "order": 2,
+        "privacy": "normal",
+        "section": "metadata",
+        "type": "checkbox",
+        "value": false
+      },
+      {
+        "advanced": false,
+        "helpText": "<filename>.nfo",
+        "isFloat": false,
+        "label": "Episode Metadata",
+        "name": "episodeMetadata",
+        "order": 3,
+        "privacy": "normal",
+        "section": "metadata",
+        "type": "checkbox",
+        "value": true
+      },
+      {
+        "advanced": true,
+        "helpText": "Include image thumb tags in <filename>.nfo (Requires 'Episode Metadata')",
+        "isFloat": false,
+        "label": "Episode Metadata Image Thumbs",
+        "name": "episodeImageThumb",
+        "order": 4,
+        "privacy": "normal",
+        "section": "image",
+        "type": "checkbox",
+        "value": false
+      },
+      {
+        "advanced": false,
+        "helpText": "fanart.jpg, poster.jpg, banner.jpg",
+        "isFloat": false,
+        "label": "Series Images",
+        "name": "seriesImages",
+        "order": 5,
+        "privacy": "normal",
+        "section": "image",
+        "type": "checkbox",
+        "value": true
+      },
+      {
+        "advanced": false,
+        "helpText": "season##-poster.jpg, season##-banner.jpg, season-specials-poster.jpg, season-specials-banner.jpg",
+        "isFloat": false,
+        "label": "Season Images",
+        "name": "seasonImages",
+        "order": 6,
+        "privacy": "normal",
+        "section": "image",
+        "type": "checkbox",
+        "value": true
+      },
+      {
+        "advanced": false,
+        "helpText": "<filename>-thumb.jpg",
+        "isFloat": false,
+        "label": "Episode Images",
+        "name": "episodeImages",
+        "order": 7,
+        "privacy": "normal",
+        "section": "image",
+        "type": "checkbox",
+        "value": true
+      }
+    ],
+    "id": 6,
+    "implementation": "XbmcMetadata",
+    "implementationName": "Kodi (XBMC) / Emby",
+    "infoLink": "https://wiki.servarr.com/sonarr/supported#xbmcmetadata",
+    "name": "Kodi Extra",
+    "tags": []
+  },
+  "recordedAt": "2026-11-19T21:33:09Z",
+  "request": {
+    "body": "bodies/metadata-create.json",
+    "method": "POST",
+    "path": "/api/v3/metadata"
+  },
+  "status": 201
+}

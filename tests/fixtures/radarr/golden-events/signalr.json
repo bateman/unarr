@@ -1,0 +1,145 @@
+[
+  {
+    "after": "config-host",
+    "messages": [
+      {
+        "body": {
+          "version": "6.4.4.10685"
+        },
+        "name": "version"
+      }
+    ]
+  },
+  {
+    "after": "command-check-finished",
+    "messages": [
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "queue"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "body": {
+              "isExclusive": false,
+              "isLongRunning": false,
+              "isTypeExclusive": false,
+              "name": "CheckForFinishedDownload",
+              "requiresDiskAccess": false,
+              "sendUpdatesToClient": true,
+              "suppressMessages": true,
+              "trigger": "manual",
+              "updateScheduledTask": true
+            },
+            "commandName": "Check For Finished Download",
+            "id": 472955,
+            "name": "CheckForFinishedDownload",
+            "priority": "normal",
+            "queued": "2026-11-19T21:48:40Z",
+            "result": "unknown",
+            "sendUpdatesToClient": true,
+            "started": "2026-11-19T21:48:40Z",
+            "stateChangeTime": "2026-11-19T21:48:40Z",
+            "status": "started",
+            "trigger": "manual",
+            "updateScheduledTask": true
+          }
+        },
+        "name": "command"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "queue/details"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "system/task"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "queue"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "queue/details"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "system/task"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "body": {
+              "isExclusive": false,
+              "isLongRunning": false,
+              "isTypeExclusive": false,
+              "name": "CheckForFinishedDownload",
+              "requiresDiskAccess": false,
+              "sendUpdatesToClient": true,
+              "suppressMessages": true,
+              "trigger": "manual",
+              "updateScheduledTask": true
+            },
+            "commandName": "Check For Finished Download",
+            "duration": "00:00:00.1723872",
+            "ended": "2026-11-19T21:48:40Z",
+            "id": 472955,
+            "name": "CheckForFinishedDownload",
+            "priority": "normal",
+            "queued": "2026-11-19T21:48:40Z",
+            "result": "successful",
+            "sendUpdatesToClient": true,
+            "started": "2026-11-19T21:48:40Z",
+            "stateChangeTime": "2026-11-19T21:48:40Z",
+            "status": "completed",
+            "trigger": "manual",
+            "updateScheduledTask": true
+          }
+        },
+        "name": "command"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "health"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "count": 0,
+            "errors": false,
+            "totalCount": 0,
+            "unknownCount": 0,
+            "unknownErrors": false,
+            "unknownWarnings": false,
+            "warnings": false
+          }
+        },
+        "name": "queue/status"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "health"
+      }
+    ]
+  }
+]

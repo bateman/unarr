@@ -94,6 +94,9 @@ prepare_dirs() {
 # recording; their requests are logged for the request builders to mirror.
 start_mock() {
     local logfile="$CACHE/mock-requests.jsonl"
+    # The mock's log and certificate go to the cache, which the download
+    # makes only later on a fresh clone.
+    mkdir -p "$CACHE"
     rm -f "$logfile"
     # A stale mock from an earlier run would answer the health check below
     # and swallow the request log.
@@ -178,6 +181,14 @@ start_on_fixture_copy() {
     # series from Skyhook, sync RSS or clean house while we record: the
     # goldens must describe the fixture as committed.
     python3 -I -c "import sqlite3,sys,datetime; c=sqlite3.connect(sys.argv[1]); c.execute('update ScheduledTasks set LastExecution=?', (datetime.datetime.now(datetime.timezone.utc).strftime('%Y-%m-%d %H:%M:%SZ'),)); c.commit(); c.close()" "$data/sonarr.db"
+    # GOLDEN_SETUP names a script that changes the copy before Sonarr
+    # starts, for a recording of what the original does at start with
+    # another installation (one with no user yet, say). It is run with
+    # bash and gets the data directory and the database's file name.
+    if [ -n "${GOLDEN_SETUP:-}" ]; then
+        log "preparing the copy with $GOLDEN_SETUP"
+        bash "$GOLDEN_SETUP" "$data" sonarr.db
+    fi
     start_sonarr "$data"
 }
 

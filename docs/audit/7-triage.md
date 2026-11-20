@@ -33,20 +33,34 @@ health check says so while it is on; the hub is served over WebSockets
 only. Each was recorded first on Sonarr 4.0.20 and Radarr 6.4.4
 under a changed `config.xml`; "What was closed afterwards" says how.
 
+Updated a fifth time on 20 November 2026: every open and partial row but
+one is settled. The routes Sonarr declares and Unarr did not answer now as
+recorded on the original (`tests/fixtures/sonarr/golden-audit`); the
+events, housekeeping and settings rows likewise (`golden-events`,
+`golden-legacy-user`, `golden-housekeeping`, on both originals); the low
+rows of `2-http.md` were recorded on both with `scripts/http-probe.py`
+and closed (`docs/DESIGN.md`, section 22). The maintainer decided the
+rest the same day: the interface stays English (`UILanguage`, section
+21.7) and allowed hosts and trusted networks apply as soon as they are
+saved (row 1.35, section 21.9), both deliberate; Brotli, which closing
+row 1.19 brought in, is kept (section 21.8); and Unarr sends
+`Server: Kestrel`, as the originals do (row 1.34, section 21.10). No row
+is open.
+
 ## Result
 
 | Report | Rows | Closed | Open | Partial | Deliberate | Not applicable |
 |--------|------|--------|------|---------|------------|----------------|
-| 1. Settings | 18 | 12 | 3 | 0 | 1 | 2 |
-| 2. HTTP | 58 | 30 | 19 | 4 | 4 | 1 |
-| 3 and 4. Routes and UI calls | 78 | 39 | 25 | 0 | 4 | 10 |
-| 6. Events, commands, housekeeping | 39 | 31 | 4 | 1 | 2 | 1 |
-| Together | 193 | 112 | 51 | 5 | 11 | 14 |
+| 1. Settings | 18 | 14 | 0 | 0 | 2 | 2 |
+| 2. HTTP | 58 | 52 | 0 | 0 | 5 | 1 |
+| 3 and 4. Routes and UI calls | 78 | 64 | 0 | 0 | 4 | 10 |
+| 6. Events, commands, housekeeping | 39 | 36 | 0 | 0 | 2 | 1 |
+| Together | 193 | 166 | 0 | 0 | 13 | 14 |
 
 Before the first update: 83 closed, 78 open, 13 partial, 6 deliberate;
-before the fourth, 102 closed, 60 open, 10 partial. Some gaps
-are counted in two reports (the SignalR transports, the file dates), so the
-distinct open items are some sixty-five. States: **closed**, does what the report says the original
+before the fourth, 102 closed, 60 open, 10 partial; before the fifth, 112
+closed, 51 open, 5 partial, 11 deliberate. Some gaps are counted in two
+reports (the SignalR transports, the file dates). States: **closed**, does what the report says the original
 does; **open**; **partial**; **deliberate**, a recorded decision to differ;
 **not applicable**, nothing to port.
 
@@ -78,8 +92,8 @@ Would show in ordinary use:
 4. ~~The blocklist's Protocol filter shows every row~~. Closed.
 5. ~~A queue item imported by a rescan or a drop-folder scan lingers~~.
    Closed.
-6. **Static files are fetched again on each page load** (4.9 with 4.3): the
-   links carry no hash, so only the hashed bundles are cached. Small.
+6. ~~**Static files are fetched again on each page load** (4.9 with 4.3): the
+   links carry no hash, so only the hashed bundles are cached~~. Closed.
 7. ~~Lists in a second tab are stale~~: SignalR `tag`, `rootfolder`,
    `qualitydefinition`, `system/task`. Closed.
 
@@ -87,8 +101,8 @@ Would show in a particular set-up:
 
 8. **A URL base**: ~~a request outside it is a 404, `/ping` included, where
    the original redirects into it (1.10)~~, ~~it is matched with its case
-   (1.11)~~, both closed; one saved from the UI is half applied until the
-   restart (1.35). Small.
+   (1.11)~~, both closed; ~~one saved from the UI is half applied until the
+   restart (1.35)~~, closed: applied at the restart, as in the originals.
 9. ~~**A reverse proxy that rewrites `Host`, with Allowed Hosts set** (1.3):
    every request is refused~~. Closed.
 10. **A proxy that does not pass WebSocket upgrades** (2.11): no live
@@ -106,11 +120,13 @@ Would show in a particular set-up:
     and since 19 November 2026 a health warning says so while the setting
     is on (`ScriptImportCheck`, Unarr's own).
 15. **A UI language other than English** (`UILanguage`): only the English
-    dictionary is in the tree. Larger, by the 39 dictionaries.
-16. **A clock that jumps back** (`FixFutureRunScheduledTasks`): scheduled
-    tasks wait for the old time. Trivial.
-17. **A manual import of an untracked file**: no Import Complete
-    notification. Small.
+    dictionary is in the tree. Deliberate since 20 November 2026: the
+    interface stays English whatever the setting says (`docs/DESIGN.md`
+    section 21.7).
+16. ~~**A clock that jumps back** (`FixFutureRunScheduledTasks`): scheduled
+    tasks wait for the old time~~. Closed.
+17. ~~**A manual import of an untracked file**: no Import Complete
+    notification~~. Closed.
 
 Worth a decision rather than a fix:
 
@@ -118,16 +134,17 @@ Worth a decision rather than a fix:
     one process holds every personality. Decided and closed: the profile
     unwinds, and a panic costs one request or one command.
 19. ~~**Paths under `/api` that are not v3** (1.24) reach the page
-    fallback~~ (closed), and wrong-case paths outside the API (1.15) reach
+    fallback~~ (closed), and ~~wrong-case paths outside the API (1.15) reach
     the UI guard, which redirects a wrong-case SignalR negotiation with its
-    token in `Location`. No client is known to do it.
+    token in `Location`~~ (closed: matched in any case, as the originals do).
 
-The rest is routes nobody is known to call (`GET` by id on the `config/*`
-resources, the metadata and `languageprofile` writes,
-`qualitydefinition/limits`), headers nobody is known to read (`Server`,
-three static content types, the backup's type), `robots.txt`,
-Brotli, the 503 while starting, the console log settings, the deprecated
-`CheckForFinishedDownload`, the legacy `config.xml` user.
+The rest was routes nobody is known to call (`GET` by id on the
+`config/*` resources, the metadata and `languageprofile` writes,
+`qualitydefinition/limits`), headers nobody is known to read (three static
+content types, the backup's type), `robots.txt`, Brotli, the 503 while
+starting, the console log settings, the deprecated
+`CheckForFinishedDownload`, the legacy `config.xml` user, the `Server`
+header: all closed on 20 November 2026.
 
 The maintainer's installation, by the fixtures: no URL base, no script
 import, Change File Date off, English UI, Traefik in front (which passes
@@ -300,12 +317,13 @@ with them where there was something to close
 
 ## The server outside the API bodies (`2-http.md`)
 
-58 rows were DIFFERENT, MISSING or UNSURE: 30 closed, 19 open, 4 partial, 4
-deliberate, 1 not applicable. Read, and where reading did not settle it tried
+58 rows were DIFFERENT, MISSING or UNSURE: 52 closed, 5 deliberate, 1
+not applicable. Read, and where reading did not settle it tried
 on a debug build of `unarrd` on the Sonarr fixture ("live"). The original's
-side of rows 1.6, 1.11, 1.15, 1.18, 1.30, 1.34, 2.12, 4.11 and 4.20 was never
-measured: `scripts/http-audit.py` probes no static file, no wrong-case path
-outside the API, no `Accept` header, no refused host and no URL base. `api/`
+side of rows 1.6, 1.11, 1.15, 1.18, 1.30, 1.34, 2.12, 4.11 and 4.20, which
+`scripts/http-audit.py` does not probe (no static file, no wrong-case path
+outside the API, no `Accept` header, no refused host, no URL base), was
+recorded since with `scripts/http-probe.py` on both originals. `api/`
 is `crates/unarr-api/src/`.
 
 | Row | Finding | Severity then | State | Evidence | What is left, who notices |
@@ -314,60 +332,60 @@ is `crates/unarr-api/src/`.
 | 1.3 | `X-Forwarded-Host` before the host filter | medium | CLOSED | `api/forwarded.rs` (`walk`), `api/hosts.rs` (`require_allowed_host`); test `tests/http.rs` (`a_trusted_proxys_forwarded_host_is_what_allowed_hosts_checks`); recorded | as in the originals, a page rebound to Unarr can name a listed host in `X-Forwarded-Host` from the loopback or through a proxy that passes the header on (nginx by default): Allowed Hosts does not stop that DNS rebinding (`docs/DESIGN.md`, section 14) |
 | 1.5 | `0.0.0.0` and `[::]` in Allowed Hosts dropped | low | DELIBERATE | `docs/DESIGN.md` section 11, `api/hosts.rs:33`. The report disputes that the original drops them; reading its `AllowedHostsParser.cs` would settle it | nobody in practice |
 | 1.6 | body of the 400 for a refused host | low | CLOSED | `api/hosts.rs`: the framework's page as recorded, `text/html`, and the host filter's log line; same test | |
-| 1.7 | request log | low | OPEN | `api/lib.rs:354`: a debug span, no line per request | whoever reads the logs |
+| 1.7 | request log | low | CLOSED | `api/http.rs` (`log_requests`), placed after the host filter (`api/lib.rs`), as `LoggingMiddleware.cs`: `Req:`/`Res:` with a sequence number, path and query, client address and user agent under `Http` at trace, `[GET] path: 404.NotFound (n ms)` under `Api` at debug; the key cleansed as in the originals' files; `unarrd` lets the two loggers through at the levels of the settings; test `tests/http.rs` (`each_request_is_logged_as_the_originals_log_it`); recorded on both (`scripts/http-probe.py`, `lowhttp*`), lines compared in `sonarr.trace.txt` | the duration ends with the headers, not with the body |
 | 1.8 | `Auth-Failure`, `Auth-Success`, `Auth-Logout` log lines | medium | CLOSED | `api/ui.rs` (`log_auth`): the form, Basic, the logout; Radarr logs no success, as recorded; test `tests/http.rs` (`logins_and_logouts_are_logged_for_intrusion_detection`) | |
 | 1.10 | a request outside the URL base | medium | CLOSED | `api/lib.rs` (`into_url_base` in each group, after its authentication); test `tests/http.rs` (`a_request_outside_the_url_base_is_sent_into_it_once_authenticated`); recorded | |
 | 1.11 | URL base matched without case | low | CLOSED | `api/lib.rs` (`normalize_path`); test `tests/contract.rs` (`url_base_is_matched_in_any_case`); recorded | |
 | 1.13 | a failure in a handler becomes a 500 | low | CLOSED | `Cargo.toml` sets `panic = "unwind"`; `api/http.rs` `catch_panic` inside the API's pipeline and `catch_panic_anywhere` around the router (`api/lib.rs`) answer the 500 recorded from both originals; `core/panics.rs`; `make panic-test` on a release build | |
-| 1.15 | routing without case outside the API | low | OPEN | `api/lib.rs:325`; live. A wrong-case SignalR negotiation under Forms is redirected with its `access_token` copied into `Location` | nobody known |
+| 1.15 | routing without case outside the API | low | CLOSED | `api/lib.rs` (`literal_route`, in `normalize_path`): `/login`, `/logout`, `/ping`, `/initialize.json`, the SignalR pair, the feed and the `/content/` prefix in any case; what the originals' catch-all hands to a mapper (`/favicon.ico`, covers, backups) keeps the mapper's own case rule; test `tests/http.rs` (`routes_outside_the_api_are_matched_without_case`); recorded on both (`scripts/http-probe.py`, `lowhttp*`) | |
 | 1.16 | one trailing slash ignored | medium | CLOSED | `api/lib.rs:41`, `api/http.rs:330`; tests | |
 | 1.17 | CORS on the API | medium | CLOSED | `api/http.rs:246`; test | |
-| 1.18 | CORS on `/Content` | low | OPEN | `api/ui.rs:156`; live | another origin loading icons or fonts |
-| 1.19 | compression | low | PARTIAL | `api/http.rs:286`: gzip only | no Brotli; `Vary` also to a client that sent no `Accept-Encoding` |
+| 1.18 | CORS on `/Content` | low | CLOSED | `api/http.rs` (`cors_allow_get`) on the content route (`api/lib.rs`, `content_cors`): `Access-Control-Allow-Origin: *` to a request with an origin, a 404 included; a preflight for `GET` or `OPTIONS` answered 204 with `GET,OPTIONS` and the asked headers echoed, in any case of the path; a preflight for another method, or an `OPTIONS` without one, goes on to the 401; test `content_may_be_read_from_any_origin`; recorded on both (`scripts/http-probe.py`, `lowhttp*`) | |
+| 1.19 | compression | low | CLOSED | `api/http.rs` (`compression`, `compression_as_requested`): Brotli and gzip at level 1 (`CompressionLevel.Fastest`), Brotli when the client weighs the two alike, deflate not offered; `Vary: Accept-Encoding` only to a client that sent `Accept-Encoding`; nothing compressed over HTTPS a trusted proxy names (`EnableForHttps` off); test `json_and_pages_are_compressed_as_the_originals_compress`; recorded on both (`scripts/http-probe.py`, `lowhttp*`) | Brotli adds 1,126,528 bytes to the release binary, 522,738 under `gzip -9` (`docs/DESIGN.md`, section 22); kept by decision (`docs/DESIGN.md` section 21.8); the encoders' bytes differ from .NET's by a few |
 | 1.20 | version header once the key is accepted | low | CLOSED | `api/http.rs:201`; tests | |
-| 1.21 | 503 while starting | low | OPEN | `unarrd/src/main.rs:683` binds after the runtime started; live: connection refused | a proxy shows 502 where the original shows 503 |
+| 1.21 | 503 while starting | low | CLOSED | `unarrd/src/main.rs` (`serve`): the listener is bound and the router serves before the command runtime starts; `api/http.rs` (`starting_up`) answers 503 until it has, after the authentication and the URL base's redirect in each group, as `StartingUpMiddleware.cs:24-35` (JSON `errorMessage` with the version header under `/api`, plain text elsewhere); test `while_starting_an_authenticated_request_is_503`. From the source: the original's window is too short to record | opening the database, and an import, still come before the listener |
 | 1.22 | no-cache headers on the API | low | CLOSED | `api/http.rs:207`; test | |
 | 1.23 | `/initialize.json` with `no-store` | medium | CLOSED | `api/routes/system.rs:144` | |
 | 1.24 | `/api`, `/api/v1/…`, other paths that are not v3 | medium | CLOSED | `api/lib.rs` (`/api/{*rest}` behind the key), `api/routes/mod.rs` (`unknown_api_route`: 404 for `GET`, 405 `Allow: GET` for the rest, `/api/v3` too); test `tests/http.rs` (`what_no_action_takes_is_refused_as_the_originals_refuse_it`); recorded | |
 | 1.25 | unknown v3 route without a key: 401 | low | CLOSED | `api/lib.rs:269`; test | |
 | 1.27 | `If-Modified-Since` | low | NOT APPLICABLE | the original's never fires | |
 | 1.29 | request body limit | medium | DELIBERATE | 64 MiB once the key is good (`api/lib.rs:231`, `:285`), where the original has none (202 to a `PUT` of 120 MiB); the login form keeps 2 MiB; test `tests/http.rs:427` | a body over 64 MiB: 413 |
-| 1.30 | 406 for an `Accept` without JSON | low | OPEN | live: 200 JSON | nobody |
+| 1.30 | 406 for an `Accept` without JSON | low | CLOSED | `api/http.rs` (`negotiate`, in `finish` and `ping_answer`): once the action has run (a write is done), a JSON result `Accept` does not take is an empty 406 with the other headers, no `Location`; `*/*` anywhere, or no `Accept`, takes it; Radarr's formatter writes `text/json` for `text/json` and `text/*`; the exception handler's answers are not negotiated; test `an_accept_without_json_is_406_once_the_action_has_run`; recorded on both (`scripts/http-probe.py`, `lowhttp*`) | `/ping`'s 406 carries no cache headers, `/ping` being uncached by choice |
 | 1.31 | `application/json; charset=utf-8` | low | CLOSED | `api/http.rs:89` | |
-| 1.32 | `HEAD` | low | PARTIAL | API and feed 405, `/ping` 200 (`api/http.rs:63`); a page 405 behind the key, as recorded (`api/lib.rs`, `pages_take_get_only`); static files and covers still answer | nobody |
-| 1.34 | `Server` header | low | OPEN | none sent | nobody |
-| 1.35 | what applies without a restart | unsure | PARTIAL | settled live: a saved URL base changes `/initialize.json`, the page links, the login redirect and the cookie path at once while the routes stay where they were; allowed hosts and trusted networks apply at once where the original waits | changing the URL base from the UI: broken until the restart |
+| 1.32 | `HEAD` | low | CLOSED | `api/lib.rs` (`open_takes_its_methods`, `pages_take_get_only`): `HEAD` finds an action on `/ping` alone; elsewhere, covers and content included, it is the 405 endpoint: 401 without the key under every method, a cookie not taken, 405 `Allow: GET` with it, kept a year outside the API; test `head_finds_no_action_but_on_ping`; recorded on both (`scripts/http-probe.py`, `lowhttp*`) | |
+| 1.34 | `Server` header | low | CLOSED | `Server: Kestrel` on every answer, as recorded on both originals, by the maintainer's decision (`docs/DESIGN.md` section 21.10): `api/http.rs` (`server_header`), the outermost layer (`api/lib.rs`), so the host filter's 400 and a panic's 500 carry it too; test `tests/http.rs` (`every_answer_names_kestrel_as_the_originals_do`) | |
+| 1.35 | what applies without a restart | unsure | DELIBERATE | the URL base is read once where the originals read it once (`AppState::url_base`): the routes, the pages' links, the manifest and the tile description, the session cookie's path; `/initialize.json` and the login's two redirects read it on each request in both (`InitializeJsonController.cs`, `AuthenticationController.cs`); test `a_url_base_saved_from_the_ui_sends_no_request_round_in_circles` | allowed hosts and trusted networks apply at once, where the original waits for the restart, by decision (`docs/DESIGN.md` section 21.9) |
 | 2.1 | `/ping` | high | CLOSED | `api/lib.rs:326` | |
 | 2.2 | the calendar feed | high | CLOSED | `api/routes/mod.rs:47` | |
 | 2.3 | `GET /api` | low | CLOSED | `api/routes/system.rs:157` | |
 | 2.4 | covers with the key | high | CLOSED | `api/routes/mod.rs:80`; live | |
-| 2.8 | backup download headers | low | OPEN | `application/zip` and a disposition (`api/routes/backup.rs:137`) | nobody; the file downloads |
-| 2.9 | `/MediaCoverProxy/{hash}/{file}` | low | OPEN | the file name is ignored, the type guessed from the remote address (`api/routes/series_writes.rs:57`); a wrong name is a 500 | a GIF poster labelled JPEG on Add Series; browsers sniff |
+| 2.8 | backup download headers | low | CLOSED | `api/routes/backup.rs` (`download`): `application/x-zip-compressed`, no `Content-Disposition`, a missing one the 404 in problem details (recorded); `BackupFileMapper.cs`; never kept by a cache, where the originals keep it a year (`http::cacheable`; `docs/DESIGN.md`, section 22): a shared cache in front would hand out the database and the key; tests `types_are_aspnets_by_extension`, `backups_and_failures_are_never_kept` | only a backup the list names is served, where the original serves any name its pattern takes in the folder |
+| 2.9 | `/MediaCoverProxy/{hash}/{file}` | low | CLOSED | `api/routes/series_writes.rs` (`media_cover_proxy`): a name that does not end in `.jpg`, `.png` or `.gif` (with case) is the 404 in problem details before the hash is looked at, and the type is the name's (`MediaCoverProxyMapper.cs`); test `the_cover_proxy_reads_the_name_first`; recorded on both (`scripts/http-probe.py`, `lowhttp*`) | a name with a slash in it is no route here |
 | 2.11 | SignalR over server-sent events and long polling | medium | DELIBERATE | WebSockets only (`api/routes/signalr.rs`); the negotiation still lists the three transports, as the original's does (golden `signalr-negotiate`). `docs/DESIGN.md` section 21.4 | a browser behind a proxy that does not pass WebSocket upgrades: no live updates, the proxy is to be configured to pass them |
-| 2.12 | negotiate version | low | OPEN | always version 0 (`signalr.rs:84`) | nobody; the client takes either |
-| 2.13 | `version` message to all clients | low | OPEN | to the new socket only (`signalr.rs:149`) | nobody |
+| 2.12 | negotiate version | low | CLOSED | `api/routes/signalr.rs` (`negotiate`): `negotiateVersion=1` gets version 1 and a `connectionToken` beside the `connectionId`; test `tests/signalr.rs` (`negotiate_version_one_and_version_to_every_client`); recorded on both (`scripts/http-probe.py`, `lowhttp*`) | |
+| 2.13 | `version` message to all clients | low | CLOSED | `api/routes/signalr.rs` (`serve`): the new connection's `version` goes out through the hub, to every client (`MessageHub.cs:57`); same test | |
 | 3.2 | the key as a bearer token | medium | CLOSED | `api/auth.rs:26`; test | |
 | 3.4 | cookie `Secure` and `Path` | medium | CLOSED | `api/ui.rs:330`; tests | |
-| 3.5 | cookie name with a non-ASCII instance name | low | OPEN | `api/state.rs:366` drops the letters, no folding | nobody |
+| 3.5 | cookie name with a non-ASCII instance name | low | CLOSED | `api/state.rs` (`cookie_name_part`): decomposed, its combining marks dropped, then all but ASCII letters and digits; tests; recorded on both (`<App> Ünï Çafé` gives `<App>UniCafeAuth`) | a letter that does not decompose (`ß`, `ø`) is dropped; the original's table (Diacritical.Net) may map it: not recorded |
 | 3.6 | session seven days, sliding | medium | CLOSED | `api/ui.rs:317`; test | |
-| 3.8 | forms login when the method is None | low | OPEN | `api/ui.rs:194` never looks at the method; live | nobody |
-| 3.9 | challenge under Forms | low | PARTIAL | absolute address, escaped `returnUrl`, and under a URL base the base as asked in both (recorded); no 401 for `X-Requested-With` | nobody known |
+| 3.8 | forms login when the method is None | low | CLOSED | `api/ui.rs` (`login`, `logout`): under None the form's redirect says `loginFailed=true`, sets no cookie and logs nothing; a logout logs nothing; test `the_login_form_fails_when_nothing_is_to_be_signed_into`; recorded on both (`scripts/http-probe.py`, `lowhttp*`) | |
+| 3.9 | challenge under Forms | low | CLOSED | absolute address, escaped `returnUrl`, the base as asked (as before); `api/ui.rs` (`is_ajax_request`): `X-Requested-With: XMLHttpRequest`, header or query parameter, value with case, gets 401 with the same `Location`; test `an_xhr_is_told_401_instead_of_the_login_redirect`; recorded on both (`scripts/http-probe.py`, `lowhttp*`) | |
 | 3.11 | Basic realm | low | CLOSED | `realm="Sonarr"`, the application's name whatever the instance's, as recorded (`api/ui.rs`); same test as 1.8 | |
 | 3.15 | `TrustCgnatIpAddresses` | medium | CLOSED | `api/ui.rs:497`; test | |
 | 3.16 | IPv6 site-local counts as local | low | CLOSED | `core/outbound.rs:208`; test | |
 | 3.17 | `/favicon.ico` behind the login | low | CLOSED | in the pages' group (`api/lib.rs`); recorded outside a URL base, test as 1.10 | |
-| 4.3 | `?h=` cache breaker on asset links | low | OPEN | `api/ui.rs:92` adds the base only | stands in the way of 4.9 |
+| 4.3 | `?h=` cache breaker on asset links | low | CLOSED | `api/ui.rs` (`rewrite_html`, `with_cache_breaker`): `HtmlMapperBase`'s pattern, the URL base and `?h=` with the file's MD5 in base64, `data-no-hash` honoured and removed; the index and login pages equal the recorded ones byte for byte; test `the_pages_asset_links_carry_cache_breakers` | |
 | 4.5 | `manifest.json` placeholders | medium | CLOSED | `api/ui.rs:177`; golden `noauth-content-manifest`; test `tests/http.rs:379`, both personalities | its cache lifetime is row 4.9 |
 | 4.6 | `browserconfig.xml` placeholder | low | CLOSED | same handler; golden `noauth-content-browserconfig`; same test | |
-| 4.7 | `/robots.txt` | low | OPEN | no route; `/Content/robots.txt` is served | crawlers, on an instance exposed without a login |
-| 4.9 | cache headers on static files | low | OPEN | `api/ui.rs:63`: hashed bundles one year, the rest `no-cache`. `/ping` uncached is deliberate | fonts, icons and styles are fetched again on each page load |
+| 4.7 | `/robots.txt` | low | CLOSED | `api/ui.rs` (`spa`): `/robots.txt`, in this case, is `Content/robots.txt`, behind the login under Forms and Basic as recorded; test `what_no_mapper_takes_is_a_404_in_problem_details`; recorded on both (`scripts/http-probe.py`, `lowhttp*`) | crawlers of an instance behind a login meet the redirect, as with the original |
+| 4.9 | cache headers on static files | low | CLOSED | `api/http.rs` (`cacheable`, `cache_headers`, `apply_cache_headers`): `CacheableSpecification` and `CacheHeaderMiddleware` after the authentication in each group, `?h=` on the API too; `Last-Modified` the emulated release's build time (`compat::emulated_build_time`); pages, sign-ins and the exception handler's answers keep theirs; test `static_files_are_kept_a_year_and_typed_as_aspnet_types_them`; recorded on both (`scripts/http-probe.py`, `lowhttp*`) | `/ping` as health checks ask it stays uncached by choice; a file is kept a year whatever Unarr's own release (the bundle follows the emulated one) |
 | 4.10 | cache headers on HTML | low | CLOSED | `api/ui.rs:116` | |
-| 4.11 | cache headers on `/MediaCover` | low | OPEN | no `Cache-Control`, the file's own `Last-Modified` and an `ETag` (`api/lib.rs:302`) | the browser revalidates more often |
+| 4.11 | cache headers on `/MediaCover` | low | CLOSED | `api/ui.rs` (`media_cover`) in place of the file server: kept a year with the build's date, no `ETag`, no ranges, the folder in its own case, a missing cover the 404 in problem details; test `covers_are_static_files`; recorded on both (`scripts/http-probe.py`, `lowhttp*`) | the UI changes `?lastWrite=` when a cover changes, as with the original |
 | 4.15 | source maps | low | DELIBERATE | dropped (`docs/DESIGN.md` section 11) | browser developer tools |
-| 4.16 | files the original refuses | low | OPEN | `/index.html` raw, licence files (`api/ui.rs:142`) | nobody |
+| 4.16 | files the original refuses | low | CLOSED | `api/ui.rs` (`spa`, `bundle_file`): only what `StaticResourceMapper` takes comes from the bundle; `/index.html`, the licence files, `/Content/index.html`: the 404 in problem details; `/login.html` the login page, behind the login; test `what_no_mapper_takes_is_a_404_in_problem_details`; recorded on both (`scripts/http-probe.py`, `lowhttp*`) | |
 | 4.18 | `text/html` without charset | low | CLOSED | `api/ui.rs:119` | |
-| 4.19 | type of other static files | unsure | OPEN | settled against the framework's table in the release: `.js`, `.ttf` and the charset of `.txt` differ | nobody; browsers take both |
-| 4.20 | 404 for a file-like path | low | OPEN | empty (`api/ui.rs:148`) | nobody |
+| 4.19 | type of other static files | unsure | CLOSED | `api/http.rs` (`content_type`): ASP.NET's table for the extensions of the bundles, covers and backups, `charset=utf-8` on plain text, `text/javascript` on Radarr's newer runtime; each extension the UIs have recorded on both; test `static_files_are_kept_a_year_and_typed_as_aspnet_types_them` | |
+| 4.20 | 404 for a file-like path | low | CLOSED | `api/ui.rs` (`static_not_found`): problem details as recorded, indented in ASP.NET's order (RFC 7231 for Sonarr, 9110 for Radarr), `problem+json`, kept a year; same test | |
 
 What the triage found against the report and the README:
 
@@ -384,44 +402,47 @@ What the triage found against the report and the README:
 
 ## Routes and UI calls (`3-4-routes.md`)
 
-78 rows were MISSING, PARTIAL, IGNORED or UNSURE: 39 closed, 25 open, 4
-deliberate, 10 not applicable. Static: nothing was run. `mod.rs`
+78 rows were MISSING, PARTIAL, IGNORED or UNSURE: 64 closed, 4 deliberate,
+10 not applicable. Static: nothing was run, until the open rows were
+recorded on the original and closed on 20 November 2026. `mod.rs`
 is `crates/unarr-api/src/routes/mod.rs` (Sonarr's list is
 `sonarr_api_router`); the other files are under `crates/unarr-api/src/` and
 its `routes/`; `core/` is `crates/unarr-core/src/`; golden names are lines of
-`tests/fixtures/sonarr/golden/requests.txt`. For a route that is not
+`tests/fixtures/sonarr/golden/requests.txt`, or of
+`tests/fixtures/sonarr/golden-audit/requests.txt` when written
+`golden-audit/<name>`. For a route that is not
 declared, 404 and 405 are what the router gives by construction.
 
 | Table | Method and path, or UI call | State | Evidence | Who calls it, what fails without it |
 |---|---|---|---|---|
 | A | `DELETE /blocklist/{id}` | CLOSED | `mod.rs:199`, `activity.rs:411`; goldens `blocklist-delete`, `blocklist-delete-missing` | UI, Blocklist |
 | A | `DELETE /blocklist/bulk` | CLOSED | `mod.rs:198`, `activity.rs:420`; goldens `blocklist-bulk-delete`, `blocklist-after-removal` | UI, Remove Selected |
-| A | `GET /calendar/{id}` | OPEN | only `/calendar` is declared (`mod.rs:184`); 404 | nobody known |
-| A | `GET /config/downloadclient/{id}` | OPEN | PUT only (`mod.rs:71`); 405 | nobody known |
-| A | `GET /config/host/{id}` | OPEN | PUT only (`mod.rs:67`); 405 | nobody known |
-| A | `GET /config/importlist/{id}` | OPEN | PUT only (`mod.rs:76`); 405 | nobody known |
-| A | `GET /config/indexer/{id}` | OPEN | PUT only (`mod.rs:209`); 405 | nobody known |
-| A | `GET /config/mediamanagement/{id}` | OPEN | PUT only (`mod.rs:204`); 405 | nobody known |
-| A | `GET /config/naming/{id}` | OPEN | PUT only (`mod.rs:202`); 405 | nobody known |
-| A | `GET /config/ui/{id}` | OPEN | PUT only (`mod.rs:69`); 405 | nobody known |
+| A | `GET /calendar/{id}` | CLOSED | `mod.rs:215`, `episodes.rs:263`: the episode's own resource; goldens `golden-audit/calendar-1`, `-643`, `-missing` | nobody known |
+| A | `GET /config/downloadclient/{id}` | CLOSED | `mod.rs:89`: the GET of `/config/downloadclient`, any number, a non-number the empty 404 (`mod.rs:462`); golden `golden-audit/config-downloadclient-by-id`, `-other-id`, `golden-audit/config-ui-not-a-number` | nobody known |
+| A | `GET /config/host/{id}` | CLOSED | `mod.rs:75`: the GET of `/config/host`, any number, a non-number the empty 404 (`mod.rs:462`); golden `golden-audit/config-host-by-id` | nobody known |
+| A | `GET /config/importlist/{id}` | CLOSED | `mod.rs:96`: the GET of `/config/importlist`, any number, a non-number the empty 404 (`mod.rs:462`); golden `golden-audit/config-importlist-by-id` | nobody known |
+| A | `GET /config/indexer/{id}` | CLOSED | `mod.rs:250`: the GET of `/config/indexer`, any number, a non-number the empty 404 (`mod.rs:462`); golden `golden-audit/config-indexer-by-id` | nobody known |
+| A | `GET /config/mediamanagement/{id}` | CLOSED | `mod.rs:243`: the GET of `/config/mediamanagement`, any number, a non-number the empty 404 (`mod.rs:462`); golden `golden-audit/config-mediamanagement-by-id` | nobody known |
+| A | `GET /config/naming/{id}` | CLOSED | `mod.rs:236`: the GET of `/config/naming`, any number, a non-number the empty 404 (`mod.rs:462`); golden `golden-audit/config-naming-by-id` | nobody known |
+| A | `GET /config/ui/{id}` | CLOSED | `mod.rs:82`: the GET of `/config/ui`, any number, a non-number the empty 404 (`mod.rs:462`); golden `golden-audit/config-ui-by-id`, `golden-audit/config-ui-not-a-number` | nobody known |
 | A | `GET /health/{id}` | NOT APPLICABLE | the original's action throws | nobody |
 | A | `POST /history/failed/{id}` | CLOSED | `mod.rs:200`, `activity.rs:436`, `core/downloads/failed.rs:120`; goldens `history-mark-failed*` | UI, Mark as failed |
 | A | `DELETE /importlistexclusion/bulk` | CLOSED | `mod.rs:299`, `settings_writes.rs:1756`; golden `importlistexclusion-bulk-delete` | UI, exclusions |
-| A | `GET /importlistexclusion/{id}` | OPEN | PUT and DELETE only (`mod.rs:303`); 405 | nobody known |
+| A | `GET /importlistexclusion/{id}` | CLOSED | `mod.rs:370`, `providers.rs:261`; goldens `golden-audit/importlistexclusion-get`, `-get-missing` | nobody known |
 | A | `GET /release/{id}`, `GET /release/push/{id}` | NOT APPLICABLE | the original's actions throw | nobody |
-| A | `GET /localization/{id}` | OPEN | not declared (`mod.rs:383`); 404 | nobody known |
+| A | `GET /localization/{id}` | CLOSED | `mod.rs:453`, `system.rs:369`: the same dictionary, any number; goldens `golden-audit/localization-1`, `-999` | nobody known |
 | A | `GET /mediacover/{seriesId}/{filename}` | CLOSED | `mod.rs:80`, `series_writes.rs:95`; goldens for the failures, the served cover in `tests/contract.rs:1277` | Bazarr, mobile apps |
-| A | `POST /metadata` | OPEN | GET only (`mod.rs:285`); 405 | nobody; the UI never creates a consumer |
+| A | `POST /metadata` | CLOSED | `mod.rs:342`, `metadata_writes.rs:121`; goldens `golden-audit/metadata-create`, `-created`, `-create-duplicate`, `-create-noname`, `-create-unknown` (the original's 500). Stored, not driven: no metadata file is written | nobody; the UI never creates a consumer |
 | A | `PUT /metadata`, `PUT /metadata/{id}` | CLOSED | `lib.rs:106`, `mod.rs:287`, `providers.rs:364`; goldens `metadata-update`, `-after-update`, `-restore`. No metadata file is written: documented | UI, Settings > Metadata |
-| A | `PUT /metadata/bulk`, `DELETE /metadata/{id}`, `DELETE /metadata/bulk`, `POST /metadata/test`, `/testall`, `/action/{name}` | OPEN (6) | not declared | nobody known |
-| A | `POST`, `PUT`, `PUT /{id}`, `DELETE /{id}` on `languageprofile`, `GET languageprofile/schema` | OPEN (5) | GET only (`mod.rs:211`) | nobody known; Bazarr only reads |
+| A | `PUT /metadata/bulk`, `DELETE /metadata/{id}`, `DELETE /metadata/bulk`, `POST /metadata/test`, `/testall`, `/action/{name}` | CLOSED (6) | `mod.rs:346`-`352`, `metadata_writes.rs:144`, `:154`, `:166`, `providers.rs:468`. The bulk routes are hidden by the original (`[NonAction]`): the empty 404, by construction (`metadata_writes.rs:6`); goldens `golden-audit/metadata-bulk-update`, `-bulk-delete`, `-delete`, `-delete-missing`, `-after-delete`, `-test`, `-test-duplicate`, `-test-noname`, `-testall`, `-testall-after-delete`, `-action` | nobody known |
+| A | `POST`, `PUT`, `PUT /{id}`, `DELETE /{id}` on `languageprofile`, `GET languageprofile/schema` | CLOSED (5) | `mod.rs:257`-`264`, `settings.rs:343`-`452`: the deprecated profile, writes answered with the body read back and nothing stored, as the original; `GET /languageprofile/{id}` now answers any id as the original (was 404 but for 1); goldens `golden-audit/languageprofile-*` | nobody known; Bazarr only reads |
 | A | `GET /languageprofile/schema/{id}` | NOT APPLICABLE | the original's action throws | nobody |
-| A | `GET /qualitydefinition/limits` | OPEN | falls to `/qualitydefinition/{id}` (`mod.rs:127`) | nobody known; the 4.0.20 UI does not ask |
+| A | `GET /qualitydefinition/limits` | CLOSED | `mod.rs:148`, `catalog.rs:262`; golden `golden-audit/qualitydefinition-limits` | nobody known; the 4.0.20 UI does not ask |
 | A | `GET /queue/{id}`, `/queue/details/{id}`, `/queue/status/{id}` | NOT APPLICABLE (3) | the original's actions throw | nobody |
 | A | `POST /series/import` | CLOSED | `mod.rs:79`, `series_writes.rs:312`; goldens `series-import*` | UI, Library Import |
 | A | `GET /system/routes`, `/system/routes/duplicate` | DELIBERATE (2) | `docs/DESIGN.md` section 14, `docs/phase-3b-library.md`: the UI does not ask | nobody known |
 | A | `POST /system/shutdown`, `POST /system/restart` | CLOSED (2) | `mod.rs:365`, `system.rs:180`, `unarrd/src/main.rs:816`; test `contract.rs:1169`. The restart re-executes the program, on Unix | UI, header menu and after a restore |
-| A | `GET /wanted/cutoff/{id}`, `GET /wanted/missing/{id}` | OPEN (2) | not declared; 404 | nobody known |
+| A | `GET /wanted/cutoff/{id}`, `GET /wanted/missing/{id}` | CLOSED (2) | `mod.rs:217`, `:219`, `episodes.rs:263`: the episode's own resource, on the list or not; goldens `golden-audit/wanted-cutoff-*`, `golden-audit/wanted-missing-*` | nobody known |
 | A | `GET /ping`, `HEAD /ping` | CLOSED (2) | `lib.rs:326`, `system.rs:163`; golden `noauth-ping`, test `tests/http.rs:211` | health checks, monitors |
 | A | `GET /api` | CLOSED | `mod.rs:55`, `system.rs:157`; test `tests/http.rs:99` | nobody known |
 | A | `GET /feed/v3/calendar/Sonarr.ics` | CLOSED | `mod.rs:56`, `feed.rs:145`; goldens `feed-calendar*` | UI iCal link, calendar apps |
@@ -457,8 +478,9 @@ What the triage found against the report and the README:
 
 ## Events, commands, housekeeping (`6-events.md`)
 
-39 rows were MISSING, PARTIAL or UNSURE: 31 closed, 4 open, 1 partial, 2
-deliberate, 1 not applicable. Static. `core/` is `crates/unarr-core/src/`,
+39 rows were MISSING, PARTIAL or UNSURE: 36 closed, 2 deliberate, 1 not
+applicable. Static, until the last open rows were recorded on both
+originals and closed on 20 November 2026. `core/` is `crates/unarr-core/src/`,
 `api/` is `crates/unarr-api/src/`, `import/` is `crates/unarr-import/src/`.
 The line numbers inside the report itself are stale; these are current.
 
@@ -466,7 +488,7 @@ The line numbers inside the report itself are stale; these are current.
 |---|---|---|---|---|---|
 | (a) start: quality definitions | missing ones not inserted | medium | CLOSED | `core/defaults.rs:30`, called at every start (`unarrd/src/main.rs:476`) | |
 | (a) start: default profiles | none on a blank start | medium | CLOSED | `core/defaults.rs:137`, `:184` | |
-| (a) start: legacy user | `config.xml` user and password moved into Users | low | OPEN | `import/config_xml.rs:52` parses neither element; no start-up step | only a `config.xml` never started on Sonarr v3 or later: the login would have no user |
+| (a) start: legacy user | `config.xml` user and password moved into Users | low | CLOSED | `import/config_xml.rs:94` reads `<Username>` and `<Password>`, never written back; `unarrd/src/main.rs:540` adds the user at start when there is none (`api/ui.rs:388`: name in lower case, PBKDF2 as the originals); tests `unarrd/src/main.rs:1275` (both personalities, against the recordings), `import/config_xml.rs:280`; recorded on both originals, `golden-legacy-user` (the fixture made by its `setup.sh` through the scripts' new `GOLDEN_SETUP`): the login works, `config/host` names `unarr`, the elements are gone from `config.xml` after; both elements empty add no user, and a blank name or password signs nobody in, by form or Basic, as `UserService.FindUser` refuses it (`api/ui.rs`, `blank_credentials`; test `tests/http.rs`, `blank_credentials_let_nobody_in`) | |
 | (a) tags, auto tags changed | no SignalR `tag` sync | low | CLOSED | `api/routes/settings_writes.rs:1073`; `golden-hub/signalr.json`, test `api/tests/contract.rs:1616` | |
 | (a) command executed: `system/task` | Tasks page not told to sync | low | CLOSED | `core/commands/executor.rs:760`, `api/state.rs:302`; same recording and test | |
 | (a) command executed: `qualitydefinition` | no sync after a reset | low | CLOSED | `api/state.rs:302`; same recording and test | |
@@ -483,25 +505,25 @@ The line numbers inside the report itself are stale; these are current.
 | (a) scan skipped | no event when the root folder is missing or empty | medium | CLOSED | `core/mediafiles/scan.rs:233`; test `:509` | |
 | (a) series scanned: media info | files without it never probed again | medium | CLOSED | `scan.rs:147`, `:344`; test `:407` | |
 | (a) series scanned: file dates | not applied after a scan | low | CLOSED | `core/mediafiles/scan.rs` (`update_file_dates`, after each scan that ran); test `a_scan_dates_the_files_by_their_episodes`; recorded | |
-| (a) untracked download completed | not raised by a manual import | low | OPEN | `core/mediafiles/manual.rs:735` raises nothing for an untracked file | no Import Complete notification after a manual import without a download id |
-| (b) `CheckForFinishedDownload` | deprecated alias unknown | low | OPEN | not among the names (`core/commands/mod.rs:690`); 500 | old third-party callers |
+| (a) untracked download completed | not raised by a manual import | low | CLOSED | `core/mediafiles/manual.rs:848`: one `UntrackedDownloadCompleted` per series and season, the original's reading of "untracked" kept (with exactly one tracked download, that download's own file counts as untracked); `core/notifications/mod.rs:618` sends Import Complete, unless no release parsed from the folder or the file, where the original's handler fails on the missing quality and sends nothing (the long list's hash-named manual import, recorded); tests `manual.rs:959`, `:987`, `:1006`, `api/tests/contract.rs:2088` against `golden-events` (the webhook payload of the original, exactly). Sonarr only: Radarr has no such event | |
+| (b) `CheckForFinishedDownload` | deprecated alias unknown | low | CLOSED | `core/commands/mod.rs:202`, `:763`, a command of its own name in both applications; run as the refresh with the original's warning (`core/commands/executor.rs:900`); tests `commands/mod.rs:1760`, `api/tests/contract.rs:2088` (the command and the warning in `GET /log`), `api/tests/contract_radarr.rs:1257`; recorded on both, `golden-events` | |
 | (b) `Housekeeping`, `CleanUpRecycleBin` | did nothing | medium | CLOSED (2) | `executor.rs:904`, `:936`; `core/housekeeping.rs:43`, `core/mediafiles/transfer.rs:204` | |
 | (b) `ResetQualityDefinitions`, `ResetApiKey`, `ClearLog`, `DeleteLogFiles`, `DeleteUpdateLogFiles` | unknown | low | CLOSED (5 names, 4 rows) | `commands/mod.rs:712-718`, `api/state.rs:535-553`; `DeleteUpdateLogFiles` has nothing to delete | |
 | (b) restart, shutdown | no routes | low | CLOSED | `api/routes/mod.rs:365` | |
 | (c) orphaned history, episode files | partial | low | CLOSED (2) | `housekeeping.rs:71`, `:87` | |
 | (c) pending releases older than fourteen days | missing | low-medium | CLOSED | `housekeeping.rs:123`; tests | |
 | (c) provider status times in the future | missing | low | CLOSED | `housekeeping.rs:156`; tests | |
-| (c) scheduled tasks last run in the future | missing | low | OPEN | not among the housekeepers; `core/commands/scheduler.rs:188` treats a future last run as not due | after the clock jumps back, tasks wait until the old time |
+| (c) scheduled tasks last run in the future | missing | low | CLOSED | `FixFutureRunScheduledTasks`, `core/housekeeping.rs:198`, in both lists (`:41`, `movies/housekeeping.rs:46`); tests `housekeeping.rs:326`, `api/tests/contract.rs:2271`, `contract_radarr.rs:1923` against `golden-housekeeping` (both originals' database after the run) | as in the original, the Housekeeping task waits too, so the repair comes with its next run or a manual one; the originals' scheduler reads a cache filled at start and keeps waiting until the next start (recorded: the tasks page still shows the day ahead), Unarr's reads the table and runs what is due at the next tick |
 | (c) profile format items repair | no repair pass | low | DELIBERATE | the score reset is done; the pass is declared not ported in `housekeeping.rs:9` | a hand-edited database only |
 | (c) unused tags | missing | low | CLOSED | `housekeeping.rs:179`; tests | |
 | (c) clean titles | no pass | low | DELIBERATE | `housekeeping.rs:9`; the refresh rewrites it (`core/tv/refresh.rs:165`) | a stale clean title lasts until the next refresh |
-| (c) additional naming rows, users | keep one | low | PARTIAL | naming is one row by schema; users are not trimmed | nobody expected |
+| (c) additional naming rows, users | keep one | low | CLOSED | naming is one row by schema; `CleanupAdditionalUsers`, `core/housekeeping.rs:185`, in both lists (`:28`, `movies/housekeeping.rs:25`), keeps the user whose name sorts first, as the originals' query does through their index on the name (recorded, `golden-housekeeping`); tests `housekeeping.rs:298`, `api/tests/contract.rs:2271`, `contract_radarr.rs:1923` | |
 | (c) `VACUUM`, recycle bin | missing | low, medium | CLOSED (2) | `housekeeping.rs:56`; as `CleanUpRecycleBin` | |
 
 ## Settings (`1-settings.md`)
 
-18 rows were NOT APPLIED or PARTIAL in the detailed tables: 12 closed, 3
-open, 1 deliberate, 2 not applicable.
+18 rows were NOT APPLIED or PARTIAL in the detailed tables: 14 closed, 2
+deliberate, 2 not applicable.
 
 | Setting | Finding | Severity then | State | Evidence | What is left, who notices |
 |---|---|---|---|---|---|
@@ -509,8 +531,8 @@ open, 1 deliberate, 2 not applicable.
 | API key through `PUT config/host` | not changed on save | high | CLOSED | the finding was wrong about the original (golden `config-host-put-apikey`); `ResetApiKey` changes it | |
 | authentication method and requirement, user name, password through PUT | not stored | high | CLOSED (2) | `settings_writes.rs:745`, `:985` | |
 | `LogLevel` | not applied | medium | CLOSED | `settings_writes.rs:1004`; test `unarrd/src/main.rs:1278` | `RUST_LOG` overrides it when set |
-| `ConsoleLogLevel` | not applied, not stored | low | OPEN | `api/routes/config.rs:93` answers a constant | a console quieter or louder than the files |
-| `ConsoleLogFormat` | not parsed | low | OPEN | no occurrence | a log shipper expecting CLEF |
+| `ConsoleLogLevel` | not applied, not stored | low | CLOSED | read from `config.xml` (`import/config_xml.rs:86`) and `<App>__Log__ConsoleLevel` (`core/config.rs:255`); stored by `PUT config/host` (`settings_writes.rs:699`, `:943`), answered (`api/routes/config.rs:93`); the console logs at it, else at info whatever `LogLevel` says (`core/config.rs:280`), while the files and the recent lines keep `LogLevel` (`unarrd/src/main.rs:744`); tests `core/config.rs:353`, `:379`, `unarrd/src/main.rs:1648`, `api/tests/contract.rs:2088` and `contract_radarr.rs:1257` against `golden-events` | a level that names none: the original fails to configure its logging, Unarr warns and logs as if it were blank; `RUST_LOG`, when set, still decides the levels |
+| `ConsoleLogFormat` | not parsed | low | CLOSED | read from `config.xml` (`import/config_xml.rs`, without regard to case) and `<APP>__LOG__CONSOLEFORMAT` (with it, as `Enum.TryParse`); `Clef` writes one JSON object a line, `@t` `@l` `@x` `@m` as the original's `CompactJsonLayout` (`unarrd/src/console.rs:150`, recorded on Sonarr with `SONARR__LOG__CONSOLEFORMAT=Clef`); the lines before a personality has read its settings follow the environment (`unarrd/src/main.rs:716`); tests `console.rs:211`, `:248`, `import/config_xml.rs:257` | the standard format is Unarr's own line, not the original's `[Info] Logger: message` |
 | `LogDbEnabled`, `LogSql` | not parsed | low | NOT APPLICABLE | no log database exists | |
 | `Sonarr__*` environment overrides | not read | medium | CLOSED | `core/config.rs:101`; test `:231` | |
 | `RecycleBinCleanupDays` | never read | high | CLOSED | `core/mediafiles/transfer.rs:204` | |
@@ -518,7 +540,7 @@ open, 1 deliberate, 2 not applicable.
 | `EnableMediaInfo` | no backfill on rescan | low | CLOSED | `core/mediafiles/scan.rs:147` | |
 | `UseScriptImport`, `ScriptImportPath` | not applied | medium | DELIBERATE | stored and shown (`settings_writes.rs:349`), not applied by decision (`docs/DESIGN.md` section 21.3); `ScriptImportCheck` warns while it is on (`core/health.rs`, test `script_import_on_is_said_to_be_ignored`) | whoever imports through a script gets Unarr's own move or hardlink, and a health warning that says so |
 | `ImportExtraFiles`, `ExtraFileExtensions` | not applied | medium | CLOSED | `core/mediafiles/extras.rs:334` | |
-| `UILanguage` | not applied | low | OPEN | `api/routes/system.rs:364` always serves the English dictionary, the only one in the tree | whoever picks another language: the interface stays English |
+| `UILanguage` | not applied | low | DELIBERATE | by decision (`docs/DESIGN.md` section 21.7): `api/routes/system.rs:364` serves the English dictionary, the only one in the tree; the originals ship 44 more an application in `Localization/Core` (Sonarr 1.8 MB, 8 of them at least 90 % translated; Radarr 4.4 MB, 17), and translate server-side text too (health checks, provider field labels) | whoever picks another language: the interface stays English |
 | proxy (8 settings) | not applied | high | CLOSED | `core/http.rs:71`, `core/outbound.rs:308`; test `core/http.rs:325` | `ProxyCheck` runs again five seconds after a save of the settings (`core/health.rs:250`) |
 | `CertificateValidation` | not applied | medium | CLOSED | `core/outbound.rs:317`; test `:604` | |
 | `TrustCgnatIpAddresses` | not applied | medium | CLOSED | `api/ui.rs:500`, `core/outbound.rs:227` | |

@@ -61,7 +61,7 @@ pub(crate) fn routed_url_base(state: &AppState, request: &axum::extract::Request
         .extensions()
         .get::<RoutedUrlBase>()
         .map(|b| b.0.clone())
-        .unwrap_or_else(|| state.settings().url_base.clone())
+        .unwrap_or_else(|| state.url_base().to_owned())
 }
 
 /// The URI the client asked for.
@@ -127,6 +127,8 @@ async fn normalize_path(
     let rest = &lower[after_base..];
     let new_path = if rest == "/api" || rest.starts_with("/api/") {
         format!("{}{}", &path[..after_base], rest)
+    } else if let Some((matched, route)) = literal_route(state.personality(), rest) {
+        format!("{}{route}{}", &path[..after_base], &path[after_base + matched..])
     } else {
         path
     };
@@ -161,6 +163,35 @@ async fn normalize_path(
         }
     }
     next.run(request).await
+}
+
+/// The originals' routes outside the API, which ASP.NET matches without
+/// case, in the case they are declared here: how much of `rest` (the
+/// lower-cased path without the URL base) is the route's, and its
+/// spelling. What their catch-all route hands to a mapper (`/favicon.ico`,
+/// the covers, the backups) is matched by the mapper, with case or
+/// without, and is left alone; `/content/` keeps the case of what follows.
+fn literal_route(personality: unarr_core::Personality, rest: &str) -> Option<(usize, String)> {
+    const EXACT: &[&str] = &[
+        "/login",
+        "/logout",
+        "/ping",
+        "/initialize.json",
+        "/signalr/messages",
+        "/signalr/messages/negotiate",
+    ];
+    if let Some(route) = EXACT.iter().find(|route| rest == **route) {
+        return Some((rest.len(), (*route).to_owned()));
+    }
+    let feed = format!("/feed/v3/calendar/{}.ics", personality.app_name());
+    if rest == feed.to_ascii_lowercase() {
+        return Some((rest.len(), feed));
+    }
+    // `/content/{**path}`: the prefix alone.
+    if rest.starts_with("/content/") {
+        return Some(("/content".len(), "/Content".to_owned()));
+    }
+    None
 }
 
 /// `UrlBaseMiddleware`: a request outside the URL base, once authenticated
@@ -228,48 +259,66 @@ async fn method_not_taken(
     if request.extensions().get::<OutsideUrlBase>().is_some() {
         return into_url_base(axum::extract::State(state.clone()), request, next).await;
     }
-    (
+    let (path, query) = http::path_in_app(state, &request);
+    let refused = (
         axum::http::StatusCode::METHOD_NOT_ALLOWED,
         [(axum::http::header::ALLOW, allow)],
     )
-        .into_response()
+        .into_response();
+    // The cache headers come after the authentication in the originals.
+    http::apply_cache_headers(
+        refused,
+        http::cacheable(&path, query.as_deref()),
+        state.personality(),
+    )
 }
 
-/// A page's action takes `GET` alone, `HEAD` not included. The covers are
-/// left as they were: not recorded.
+/// A page's action takes `GET` alone, `HEAD` not included: the covers,
+/// the bundle's files and the rest, as recorded.
 async fn pages_take_get_only(
     axum::extract::State(state): axum::extract::State<AppState>,
     request: axum::extract::Request,
     next: axum::middleware::Next,
 ) -> axum::response::Response {
-    if request.method() == axum::http::Method::GET
-        || asked_uri(&request)
-            .path()
-            .to_ascii_lowercase()
-            .contains("/mediacover/")
-    {
+    if request.method() == axum::http::Method::GET {
         return next.run(request).await;
     }
     method_not_taken(&state, request, next, "GET").await
 }
 
-/// The open routes: `GET`, `HEAD` (which `/ping` declares, and the static
-/// files are left answering: not recorded) and the login form's `POST`.
+/// The open routes: `GET`, `HEAD` where `/ping` declares it, and the login
+/// form's `POST`. `HEAD` on the login page or on `/Content` finds no
+/// action, as recorded. An `OPTIONS` preflight `/Content`'s CORS policy
+/// takes is answered before this.
 async fn open_takes_its_methods(
     axum::extract::State(state): axum::extract::State<AppState>,
     request: axum::extract::Request,
     next: axum::middleware::Next,
 ) -> axum::response::Response {
     let method = request.method();
-    let login = request.uri().path().ends_with("/login");
+    let path = request.uri().path();
+    let login = path.ends_with("/login");
+    let ping = path.ends_with("/ping");
     if method == axum::http::Method::GET
-        || method == axum::http::Method::HEAD
+        || (method == axum::http::Method::HEAD && ping)
         || (method == axum::http::Method::POST && login)
     {
         return next.run(request).await;
     }
     let allow = if login { "GET, POST" } else { "GET" };
     method_not_taken(&state, request, next, allow).await
+}
+
+/// `[EnableCors("AllowGet")]` on the `/content` action alone.
+async fn content_cors(
+    request: axum::extract::Request,
+    next: axum::middleware::Next,
+) -> axum::response::Response {
+    let path = request.uri().path().to_ascii_lowercase();
+    if path.contains("/content/") {
+        return http::cors_allow_get(request, next).await;
+    }
+    next.run(request).await
 }
 
 /// Resources whose `PUT` takes an id: `[RestPutById]` in the originals,
@@ -498,6 +547,10 @@ pub fn router(state: AppState) -> Router {
         // `finish` then sends as the originals send theirs.
         .layer(axum::middleware::from_fn(http::catch_panic))
         .layer(axum::middleware::from_fn_with_state(state.clone(), http::finish))
+        .layer(axum::middleware::from_fn_with_state(
+            state.clone(),
+            http::starting_up,
+        ))
         .layer(axum::middleware::from_fn_with_state(state.clone(), into_url_base))
         .layer(axum::middleware::from_fn_with_state(
             state.clone(),
@@ -507,77 +560,102 @@ pub fn router(state: AppState) -> Router {
         .route_layer(axum::middleware::from_fn(http::cors));
 
     // Pages and bootstrap the browser loads: behind the UI policy.
-    let pages = Router::new()
-        .route("/", axum::routing::get(ui::spa))
-        // Behind the login, as in the originals.
-        .route("/favicon.ico", axum::routing::get(ui::favicon))
-        .route(
-            "/initialize.json",
-            axum::routing::get(routes::system::initialize_json),
-        )
-        .route(
-            "/MediaCoverProxy/{hash}/{file}",
-            axum::routing::get(routes::series_writes::media_cover_proxy),
-        )
-        .route(
-            "/backup/{kind}/{name}",
-            axum::routing::get(routes::backup::download),
-        )
-        .route(
-            "/logfile/{filename}",
-            axum::routing::get(routes::backup::log_file_download),
-        )
-        .route(
-            "/updatelogfile/{filename}",
-            axum::routing::get(routes::backup::update_log_file_download),
-        )
-        .nest("/MediaCover", {
-            let covers = state.runtime().media_cover_dir.clone();
-            Router::new()
-                .fallback_service(tower_http::services::ServeDir::new(covers.clone()))
-                .layer(axum::middleware::map_request(
-                    move |request: axum::extract::Request| {
+    let pages =
+        Router::new()
+            .route("/", axum::routing::get(ui::spa))
+            // Behind the login, as in the originals.
+            .route("/favicon.ico", axum::routing::get(ui::favicon))
+            .route(
+                "/initialize.json",
+                axum::routing::get(routes::system::initialize_json),
+            )
+            .route(
+                "/MediaCoverProxy/{hash}/{file}",
+                axum::routing::get(routes::series_writes::media_cover_proxy),
+            )
+            .route(
+                "/backup/{kind}/{name}",
+                axum::routing::get(routes::backup::download),
+            )
+            .route(
+                "/logfile/{filename}",
+                axum::routing::get(routes::backup::log_file_download),
+            )
+            .route(
+                "/updatelogfile/{filename}",
+                axum::routing::get(routes::backup::update_log_file_download),
+            )
+            .nest("/MediaCover", {
+                let covers = state.runtime().media_cover_dir.clone();
+                Router::new().fallback(axum::routing::get(ui::media_cover)).layer(
+                    axum::middleware::map_request(move |request: axum::extract::Request| {
                         let covers = covers.clone();
                         async move { ui::full_cover_when_resized_is_missing(&covers, request) }
-                    },
-                ))
-        })
-        .fallback(axum::routing::get(ui::spa))
-        .layer(axum::middleware::from_fn_with_state(state.clone(), into_url_base))
-        // `layer`, not `route_layer`: the guard must cover the fallback too,
-        // or deep links such as /settings would skip the login.
-        .layer(axum::middleware::from_fn_with_state(
-            state.clone(),
-            ui::require_ui_auth,
-        ))
-        .layer(axum::middleware::from_fn_with_state(
-            state.clone(),
-            pages_take_get_only,
-        ))
-        .layer(http::compression());
+                    }),
+                )
+            })
+            .fallback(axum::routing::get(ui::spa))
+            // From the inside out, as in the originals' pipeline: the cache
+            // headers, the answer while starting, the URL base's redirect, the
+            // authentication.
+            .layer(axum::middleware::from_fn_with_state(
+                state.clone(),
+                http::cache_headers,
+            ))
+            .layer(axum::middleware::from_fn_with_state(
+                state.clone(),
+                http::starting_up,
+            ))
+            .layer(axum::middleware::from_fn_with_state(state.clone(), into_url_base))
+            // `layer`, not `route_layer`: the guard must cover the fallback too,
+            // or deep links such as /settings would skip the login.
+            .layer(axum::middleware::from_fn_with_state(
+                state.clone(),
+                ui::require_ui_auth,
+            ))
+            .layer(axum::middleware::from_fn_with_state(
+                state.clone(),
+                pages_take_get_only,
+            ))
+            .layer(http::compression());
 
     // Open to anonymous browsers: static content, the login form, SignalR
     // (which checks its own token).
     let open = Router::new()
         .route(
             "/ping",
-            axum::routing::get(routes::system::ping)
-                .layer(axum::middleware::map_response(http::with_json_charset)),
+            axum::routing::get(routes::system::ping).layer(axum::middleware::from_fn_with_state(
+                state.clone(),
+                http::ping_answer,
+            )),
         )
         .route("/Content/{*path}", axum::routing::get(ui::content))
-        .route("/content/{*path}", axum::routing::get(ui::content))
         .route("/login", axum::routing::get(ui::login_page).post(ui::login))
         .route("/logout", axum::routing::get(ui::logout))
+        .route_layer(axum::middleware::from_fn_with_state(
+            state.clone(),
+            http::cache_headers,
+        ))
+        .route_layer(axum::middleware::from_fn_with_state(
+            state.clone(),
+            http::starting_up,
+        ))
         .route_layer(axum::middleware::from_fn_with_state(state.clone(), into_url_base))
         .route_layer(axum::middleware::from_fn_with_state(
             state.clone(),
             open_takes_its_methods,
         ))
+        // `/content`'s `AllowGet` policy, before the methods are looked at.
+        .route_layer(axum::middleware::from_fn(content_cors))
         .layer(http::compression())
         // SignalR's negotiation is not compressed, and not to be kept.
         .merge(
             routes::ui_router(&state)
                 .layer(axum::middleware::map_response(http::no_cache))
+                .route_layer(axum::middleware::from_fn_with_state(
+                    state.clone(),
+                    http::starting_up,
+                ))
                 // Outside it: the originals' 307 carries no cache headers.
                 .route_layer(axum::middleware::from_fn_with_state(
                     state.clone(),
@@ -592,6 +670,10 @@ pub fn router(state: AppState) -> Router {
         .route("/api/{*rest}", axum::routing::any(routes::unknown_api_route))
         .route_layer(axum::middleware::from_fn(http::catch_panic))
         .route_layer(axum::middleware::from_fn_with_state(state.clone(), http::finish))
+        .route_layer(axum::middleware::from_fn_with_state(
+            state.clone(),
+            http::starting_up,
+        ))
         .route_layer(axum::middleware::from_fn_with_state(state.clone(), into_url_base))
         .route_layer(axum::middleware::from_fn_with_state(
             state.clone(),
@@ -617,7 +699,7 @@ pub fn router(state: AppState) -> Router {
             },
         ));
 
-    let url_base = state.settings().url_base.clone();
+    let url_base = state.url_base().to_owned();
     let app = if url_base.is_empty() {
         app
     } else {
@@ -643,7 +725,16 @@ pub fn router(state: AppState) -> Router {
         .layer(axum::middleware::from_fn_with_state(state.clone(), http::methods))
         .layer(axum::middleware::from_fn_with_state(
             state.clone(),
+            http::compression_as_requested,
+        ))
+        .layer(axum::middleware::from_fn_with_state(
+            state.clone(),
             normalize_path,
+        ))
+        // `LoggingMiddleware`, after the host filter as in the originals.
+        .layer(axum::middleware::from_fn_with_state(
+            state.clone(),
+            http::log_requests,
         ))
         .layer(axum::middleware::from_fn_with_state(
             state.clone(),
@@ -662,6 +753,8 @@ pub fn router(state: AppState) -> Router {
         // Outermost, as the originals' exception handler is: a panic in a
         // page, in `/ping` or in a layer above costs that request only.
         .layer(axum::middleware::from_fn(http::catch_panic_anywhere))
+        // Kestrel's name on every answer, the host filter's and a panic's too.
+        .layer(axum::middleware::map_response(http::server_header))
 }
 
 #[cfg(test)]
