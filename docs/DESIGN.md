@@ -2592,3 +2592,40 @@ the recommended one, on the measurements of
   memory at rest matters more than the speed: then musl's own.
 - **Evidence.** Commit `e73c586`; the two tables of
   `docs/originals-comparison.md`, "The image's allocator".
+
+### 21.7 The interface stays in English
+
+Decided by the maintainer on 20 November 2026, among the four options
+below; for a row the audit rated low (`docs/audit/7-triage.md`,
+`UILanguage`).
+
+- **The question.** Settings > UI > Interface Language is stored and
+  shown, but Unarr serves only the English dictionary, so another choice
+  changes nothing. The originals ship 44 more dictionaries an application
+  in their release (`Localization/Core/*.json`, which `make ui` already
+  downloads): Sonarr's 1.8 MB, of which 8 languages are at least 90 %
+  translated, Radarr's 4.4 MB, with 17. They also translate text the
+  server writes: some 26 health-check messages of Sonarr and 7 of Radarr,
+  and the labels of the providers' fields.
+- **Options** (measured on the pinned releases; the web interface needs
+  nothing else, it reads `/localization` and `/localization/language` and
+  takes the list of languages from `/api/v3/language`):
+  - *Everything*: the dictionaries, the health-check messages and the
+    field labels; about 1.6 MB of binary stored compressed, and
+    recordings per language or translation keys for the schemas. The
+    largest.
+  - *The interface only*: all the dictionaries and the language
+    identifier, the server's text left English; the same size, a few
+    hundred lines and a recording in another language.
+  - *The well-translated languages only*: the same for the languages at
+    least 90 % translated, the rest falling back to English key by key as
+    in the originals; about 1.06 MB compressed.
+  - *English only* (chosen): nothing.
+- **Why.** No reason was given with the choice. What speaks for it: nobody
+  known uses another language with Unarr, and the binary is already at the
+  image's size target (section 9), which the dictionaries would cross.
+- **Cost.** Whoever picks another language keeps an English interface,
+  and nothing says why. The setting is kept, saved and returned as the
+  originals do, so a database moved back to an original keeps the choice.
+- **To revisit** when a user asks for another language: then the third
+  option, the cheapest that makes the setting work.

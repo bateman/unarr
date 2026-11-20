@@ -106,8 +106,9 @@ Would show in a particular set-up:
     and since 19 November 2026 a health warning says so while the setting
     is on (`ScriptImportCheck`, Unarr's own).
 15. **A UI language other than English** (`UILanguage`): only the English
-    dictionary is in the tree. Larger, by the 44 dictionaries an
-    application, and the server-side text they translate.
+    dictionary is in the tree. Deliberate since 20 November 2026: the
+    interface stays English whatever the setting says (`docs/DESIGN.md`
+    section 21.7).
 16. ~~**A clock that jumps back** (`FixFutureRunScheduledTasks`): scheduled
     tasks wait for the old time~~. Closed.
 17. ~~**A manual import of an untracked file**: no Import Complete
@@ -519,7 +520,7 @@ open, 1 deliberate, 2 not applicable.
 | `EnableMediaInfo` | no backfill on rescan | low | CLOSED | `core/mediafiles/scan.rs:147` | |
 | `UseScriptImport`, `ScriptImportPath` | not applied | medium | DELIBERATE | stored and shown (`settings_writes.rs:349`), not applied by decision (`docs/DESIGN.md` section 21.3); `ScriptImportCheck` warns while it is on (`core/health.rs`, test `script_import_on_is_said_to_be_ignored`) | whoever imports through a script gets Unarr's own move or hardlink, and a health warning that says so |
 | `ImportExtraFiles`, `ExtraFileExtensions` | not applied | medium | CLOSED | `core/mediafiles/extras.rs:334` | |
-| `UILanguage` | not applied | low | OPEN | `api/routes/system.rs:364` always serves the English dictionary, the only one in the tree; the originals ship 44 more an application in `Localization/Core` (Sonarr 1.8 MB, 8 of them at least 90 % translated; Radarr 4.4 MB, 17), and translate server-side text too (health checks, provider field labels) | whoever picks another language: the interface stays English. A decision for the maintainer |
+| `UILanguage` | not applied | low | DELIBERATE | by decision (`docs/DESIGN.md` section 21.7): `api/routes/system.rs:364` serves the English dictionary, the only one in the tree; the originals ship 44 more an application in `Localization/Core` (Sonarr 1.8 MB, 8 of them at least 90 % translated; Radarr 4.4 MB, 17), and translate server-side text too (health checks, provider field labels) | whoever picks another language: the interface stays English |
 | proxy (8 settings) | not applied | high | CLOSED | `core/http.rs:71`, `core/outbound.rs:308`; test `core/http.rs:325` | `ProxyCheck` runs again five seconds after a save of the settings (`core/health.rs:250`) |
 | `CertificateValidation` | not applied | medium | CLOSED | `core/outbound.rs:317`; test `:604` | |
 | `TrustCgnatIpAddresses` | not applied | medium | CLOSED | `api/ui.rs:500`, `core/outbound.rs:227` | |
