@@ -18,23 +18,23 @@
         "updateScheduledTask": false
       },
       "commandName": "Refresh Movie",
-      "duration": "00:00:00.1666700",
-      "ended": "2026-11-13T15:38:05Z",
+      "duration": "00:00:00.1558200",
+      "ended": "2026-11-20T07:24:10Z",
       "id": 472955,
       "message": "Completed",
       "name": "RefreshMovie",
       "priority": "normal",
-      "queued": "2026-11-13T15:38:05Z",
+      "queued": "2026-11-20T07:24:10Z",
       "result": "successful",
       "sendUpdatesToClient": true,
-      "started": "2026-11-13T15:38:05Z",
-      "stateChangeTime": "2026-11-13T15:38:05Z",
+      "started": "2026-11-20T07:24:10Z",
+      "stateChangeTime": "2026-11-20T07:24:10Z",
       "status": "completed",
       "trigger": "unspecified",
       "updateScheduledTask": false
     }
   ],
-  "recordedAt": "2026-11-13T15:38:15Z",
+  "recordedAt": "2026-11-20T07:24:20Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/command"

@@ -1487,6 +1487,8 @@ fn audit_mode(name: &str) -> Mode {
         // The movie the Discover page added, with the moment it was.
         "importlist-movie-add" | "movie-added-from-discover" => Mode::Exact(&["added"]),
         "movie-folder-missing" => Mode::Exact(&["description"]),
+        // The exception the original's schema builder throws, with its stack.
+        "metadata-test-unknown" => Mode::Exact(&["description"]),
         // The blocklist's own rows.
         n if n.starts_with("blocklist") => Mode::Exact(&["ageHours", "ageMinutes", "date", "id"]),
         _ => Mode::Exact(&[]),
