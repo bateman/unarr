@@ -18,6 +18,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      # A tag is a release: its version must be Cargo.toml's and have an
+      # entry in CHANGELOG.md, or nothing is built and nothing published.
+      - name: The tag's version
+        if: github.ref_type == 'tag'
+        run: |
+          version="${GITHUB_REF_NAME#v}"
+          grep -qx "version = \"$version\"" Cargo.toml || { echo "Cargo.toml is not at $version"; exit 1; }
+          python3 -I scripts/release-notes.py "$version" --check
       - uses: dtolnay/rust-toolchain@stable
         with: { components: "rustfmt, clippy" }
       - uses: Swatinem/rust-cache@v2
@@ -40,6 +48,16 @@ jobs:
       # A panic costs one request or one command, on the binary as it is
       # released: a release build of its own, with the test-only switch.
       - run: make panic-test
+
+  # Advisories, licences and sources of the dependencies (deny.toml): a
+  # tag's images and release wait for it; an image of main does not, a new
+  # advisory being no reason to stop the build of a fix.
+  deny:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: EmbarkStudios/cargo-deny-action@v2
+        with: { command: check }
 
   # One native build per architecture: no QEMU, so each takes minutes, not an hour.
   image:
@@ -75,6 +93,10 @@ jobs:
           outputs: type=image,name=${{ env.IMAGE }},push-by-digest=true,name-canonical=true,push=true
           cache-from: type=gha,scope=${{ matrix.platform }}
           cache-to: type=gha,scope=${{ matrix.platform }},mode=max
+          # The OCI labels' version and revision; the layers stay cached.
+          build-args: |
+            VERSION=${{ github.ref_name }}
+            REVISION=${{ github.sha }}
       - name: Export digest
         run: |
           mkdir -p /tmp/digests
@@ -87,9 +109,13 @@ jobs:
           if-no-files-found: error
           retention-days: 1
 
-  # Stitch the per-architecture images into one multi-arch tag.
+  # Stitch the per-architecture images into one multi-arch tag. A tag waits
+  # for `deny` too: its version tags and `latest` are never published over
+  # an advisory, since `0.1.0` is not moved afterwards (docs/releasing.md).
+  # `main` goes ahead whatever `deny` says.
   manifest:
-    needs: image
+    needs: [image, deny]
+    if: ${{ !cancelled() && needs.image.result == 'success' && (github.ref_type != 'tag' || needs.deny.result == 'success') }}
     runs-on: ubuntu-latest
     permissions: { contents: read, packages: write }
     steps:
@@ -102,13 +128,48 @@ jobs:
         id: meta
         with:
           images: ${{ env.IMAGE }}
+          # `main` follows the branch; a tag v0.1.0 gives `0.1.0`, `0.1` and
+          # `latest` (docs/releasing.md).
           tags: |
             type=ref,event=branch
             type=semver,pattern={{version}}
-            type=raw,value=latest,enable={{is_default_branch}}
+            type=semver,pattern={{major}}.{{minor}}
+          flavor: latest=auto
       - name: Create and push manifest
         working-directory: /tmp/digests
         run: |
           docker buildx imagetools create $(jq -cr '.tags | map("-t " + .) | join(" ")' <<< "$DOCKER_METADATA_OUTPUT_JSON") \
             $(printf "$IMAGE@sha256:%s " *)
           docker buildx imagetools inspect "$IMAGE:${{ steps.meta.outputs.version }}"
+
+  # A tag's GitHub Release: the static binaries copied out of the images just
+  # published, the same bytes, with their checksums, and the version's
+  # CHANGELOG.md entry as its notes.
+  release:
+    needs: [manifest, deny]
+    if: github.ref_type == 'tag'
+    runs-on: ubuntu-latest
+    permissions: { contents: write, packages: read }
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 -I scripts/release-notes.py "${GITHUB_REF_NAME#v}" > /tmp/notes.md
+      - uses: docker/login-action@v3
+        with: { registry: ghcr.io, username: "${{ github.actor }}", password: "${{ secrets.GITHUB_TOKEN }}" }
+      - name: The binaries, out of the images
+        run: |
+          mkdir dist
+          for arch in amd64 arm64; do
+            id=$(docker create --platform "linux/$arch" "$IMAGE:${GITHUB_REF_NAME#v}")
+            docker cp "$id:/usr/local/bin/unarrd" "dist/unarrd-linux-$arch"
+            docker rm "$id"
+          done
+          # `docker create --platform` must not hand back the variant
+          # already pulled: each binary is checked for its architecture.
+          file dist/unarrd-linux-amd64 | grep -q 'x86-64'
+          file dist/unarrd-linux-arm64 | grep -q 'aarch64'
+          (cd dist && sha256sum unarrd-linux-* > SHA256SUMS && cat SHA256SUMS)
+      - name: The release
+        env: { GH_TOKEN: "${{ github.token }}" }
+        run: |
+          gh release create "$GITHUB_REF_NAME" dist/* --verify-tag \
+            --title "Unarr ${GITHUB_REF_NAME#v}" --notes-file /tmp/notes.md
