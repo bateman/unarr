@@ -1,11 +1,12 @@
 # syntax=docker/dockerfile:1
-# Static musl build, shipped on distroless. Image published as ghcr.io/bateman/unarr.
+# Static musl build with jemalloc as its allocator, shipped on distroless. Image published as ghcr.io/bateman/unarr.
 #
 # The official web UIs are embedded at compile time from crates/unarr-api/ui/sonarr
 # and ui/radarr, which `make ui` fills in before the build (CI does this); without
 # them the image serves the API and a placeholder page.
 FROM rust:1-alpine AS build
-RUN apk add --no-cache musl-dev
+# make builds jemalloc, the allocator of the musl build (crates/unarrd/Cargo.toml).
+RUN apk add --no-cache musl-dev make
 WORKDIR /src
 COPY . .
 RUN cargo build --release --locked --bin unarrd \
