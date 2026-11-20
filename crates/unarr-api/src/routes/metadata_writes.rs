@@ -167,11 +167,9 @@ pub async fn action(
 
 /// `DELETE /metadata/{id}`: `{}`, whether there was such a consumer or not.
 ///
-/// A difference: a built-in consumer deleted here (Kodi, Plex, Roksbox,
-/// WDTV, Kometa) stays gone. The originals insert any of theirs missing
-/// from the table at every start, disabled and with default settings
-/// (`MetadataFactory.InitializeProviders`); Unarr does not. The UI has no
-/// button for this request.
+/// A built-in consumer deleted here comes back at the next start, disabled
+/// and with its default settings, as in the originals
+/// ([`insert_missing_consumers`]).
 pub async fn delete(State(state): State<AppState>, Path(id): Path<i64>) -> ApiResult<Json<Value>> {
     let removed = state
         .db()
@@ -181,4 +179,94 @@ pub async fn delete(State(state): State<AppState>, Path(id): Path<i64>) -> ApiRe
         broadcast(&state, "deleted", json!({"id": id}));
     }
     Ok(Json(json!({})))
+}
+
+/// The order the originals insert their consumers in, which gives the ids
+/// (recorded on both started without a database: `golden-blank`). Plex is
+/// Sonarr's, Emby (Legacy) Radarr's.
+const START_ORDER: &[&str] = &[
+    "XbmcMetadata",
+    "WdtvMetadata",
+    "RoksboxMetadata",
+    "PlexMetadata",
+    "MediaBrowserMetadata",
+    "KometaMetadata",
+];
+
+/// `MetadataFactory.InitializeProviders`, at every start: each consumer the
+/// application knows and the table lacks is inserted, disabled, named as
+/// its implementation and with its default settings. A database started
+/// from nothing gets all of them; one where a consumer was deleted gets it
+/// back. Returns how many were added.
+pub fn insert_missing_consumers(
+    conn: &rusqlite::Connection,
+    personality: unarr_core::Personality,
+) -> anyhow::Result<usize> {
+    let existing = store::providers::list_providers(conn, KIND)?;
+    let mut known: Vec<&'static Value> = schemas::all(personality, SchemaKind::Provider(KIND))
+        .iter()
+        .collect();
+    let place = |schema: &Value| {
+        let implementation = schema["implementation"].as_str().unwrap_or("");
+        START_ORDER
+            .iter()
+            .position(|i| *i == implementation)
+            .unwrap_or(START_ORDER.len())
+    };
+    known.sort_by_key(|schema| place(schema));
+    let mut added = 0;
+    for schema in known {
+        let implementation = schema["implementation"].as_str().unwrap_or("");
+        if implementation.is_empty() || existing.iter().any(|p| p.implementation == implementation) {
+            continue;
+        }
+        let provider = Provider {
+            kind: KIND,
+            id: store::providers::next_provider_id(conn, KIND)?,
+            name: schema["implementationName"]
+                .as_str()
+                .unwrap_or(implementation)
+                .to_string(),
+            implementation: implementation.to_string(),
+            config_contract: schema["configContract"].as_str().unwrap_or("").to_string(),
+            settings: schemas::read_fields(schema, &Value::Null, None),
+            tags: Vec::new(),
+            attributes: json!({"enable": false}),
+        };
+        store::providers::insert_provider(conn, &provider)?;
+        added += 1;
+    }
+    Ok(added)
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use unarr_core::{Db, Personality};
+
+    #[test]
+    fn a_deleted_consumer_comes_back_disabled_at_the_next_start() {
+        let db = Db::open_in_memory().unwrap();
+        db.call_blocking(|conn| {
+            assert_eq!(insert_missing_consumers(conn, Personality::Sonarr)?, 5);
+            assert_eq!(insert_missing_consumers(conn, Personality::Sonarr)?, 0);
+            let kodi = store::providers::get_provider(conn, KIND, 1)?.expect("Kodi first");
+            assert_eq!(kodi.implementation, "XbmcMetadata");
+            // Enabled, changed, then deleted: back as it was at first.
+            store::providers::delete_provider(conn, KIND, 1)?;
+            assert_eq!(insert_missing_consumers(conn, Personality::Sonarr)?, 1);
+            let back = store::providers::list_providers(conn, KIND)?
+                .into_iter()
+                .find(|p| p.implementation == "XbmcMetadata")
+                .expect("Kodi back");
+            assert_eq!(back.id, 6);
+            assert_eq!(
+                (back.name.as_str(), back.attributes["enable"].clone()),
+                ("Kodi (XBMC) / Emby", json!(false))
+            );
+            assert_eq!(back.settings, kodi.settings);
+            Ok(())
+        })
+        .unwrap();
+    }
 }

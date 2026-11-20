@@ -565,6 +565,13 @@ fn open_database(
         Personality::Radarr => db.call_blocking(|conn| unarr_core::defaults::ensure_movies(conn))?,
         Personality::Lidarr => {}
     }
+    // `MetadataFactory.InitializeProviders`: the metadata consumers the
+    // table lacks, disabled.
+    if matches!(personality, Personality::Sonarr | Personality::Radarr) {
+        db.call_blocking(move |conn| {
+            unarr_api::routes::metadata_writes::insert_missing_consumers(conn, personality)
+        })?;
+    }
     // `UserService.Handle(ApplicationStartedEvent)`: the user and password
     // of a `config.xml` from before Sonarr v3, when there is no user yet.
     let mut host = host;

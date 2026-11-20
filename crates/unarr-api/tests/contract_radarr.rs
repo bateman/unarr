@@ -1931,14 +1931,19 @@ async fn housekeeping_repairs_users_and_task_runs_as_the_original() {
 /// What Radarr puts in a database it creates at its first start, against a
 /// recording of the original started without one
 /// (`tests/fixtures/radarr/golden-blank`): Unarr on a blank database, with
-/// what its start ensures (`unarrd`'s `defaults::ensure_movies`). The hub
+/// what its start ensures (`unarrd`'s `defaults::ensure_movies` and
+/// `metadata_writes::insert_missing_consumers`). The hub
 /// is not compared: it told the UI the version and a health sync only.
 #[tokio::test]
 async fn a_blank_start_has_the_originals_defaults() {
     let dir = fixture_dir();
     let db = Db::open_in_memory_for(Personality::Radarr).expect("in-memory db");
-    db.call_blocking(|conn| unarr_core::defaults::ensure_movies(conn))
-        .expect("the defaults");
+    db.call_blocking(|conn| {
+        unarr_core::defaults::ensure_movies(conn)?;
+        unarr_api::routes::metadata_writes::insert_missing_consumers(conn, Personality::Radarr)?;
+        Ok(())
+    })
+    .expect("the defaults");
     let host = unarr_import::config_xml::read(&dir.join("config.xml"), Personality::Radarr.default_port())
         .expect("config.xml");
     let settings = Settings::from_host_config(host, Personality::Radarr);
@@ -1954,10 +1959,7 @@ async fn a_blank_start_has_the_originals_defaults() {
     let app = unarr_api::router(state);
     let mut failures = Vec::new();
     let goldens = load_goldens(&dir.join("golden-blank"));
-    // The metadata consumers the original inserts at start are not yet
-    // inserted by Unarr's.
-    let pending = ["metadata"];
-    for g in goldens.iter().filter(|g| !pending.contains(&g.name.as_str())) {
+    for g in &goldens {
         let (status, body) = send(&app, g, "", &[]).await;
         if status.as_u16() != g.status {
             failures.push(format!("{}: status {} expected, {status} got", g.name, g.status));
