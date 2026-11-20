@@ -43,8 +43,8 @@ original again, which does not know what Unarr did meanwhile.
   an import, a failure and the removals; SABnzbd's news server a stand-in).
   Not recorded: SABnzbd's repair and unpacking, Transmission with a
   password, a magnet link, Transmission before 4.0.
-- Notifications: Discord, the webhook and Plex (a library update; plex.tv
-  is not asked).
+- Notifications: Discord, the webhook and Plex (a library update, and the
+  daily ping to plex.tv that keeps the token alive).
 
 **Differs from the originals**, by decision or not yet done:
 `docs/audit/7-triage.md` lists every row, and `docs/DESIGN.md` section 21
