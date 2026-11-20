@@ -2357,6 +2357,7 @@ dependencies = [
  "flate2",
  "image",
  "libc",
+ "regex-syntax",
  "reqwest",
  "ring",
  "roxmltree",

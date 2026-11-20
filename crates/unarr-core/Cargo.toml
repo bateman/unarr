@@ -22,6 +22,7 @@ rusqlite.workspace = true
 tracing.workspace = true
 chrono.workspace = true
 fancy-regex.workspace = true
+regex-syntax.workspace = true
 roxmltree.workspace = true
 tokio = { workspace = true, features = ["sync", "rt", "time"] }
 reqwest = { version = "0.13", default-features = false, features = ["rustls-no-provider", "socks", "json", "gzip", "multipart", "form", "query", "charset"] }

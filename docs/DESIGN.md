@@ -659,6 +659,45 @@ same, since the automata are large allocations that go back to the
 system when freed. The musl column is musl's own allocator: the image's
 is jemalloc since section 21.6, measured there.
 
+Measured again on 20 November 2026, pattern by pattern, with a counting
+allocator: the series parser builds 159 patterns and the movie parser 61;
+compiled they hold 40 MiB, and 50 MiB once matched (the engine's lazy
+DFA caches). A pattern of a hundred characters held some 450 KiB: the
+weight is not in the patterns' length but in their Unicode classes.
+With `\w`, `\W`, `\d`, `\D`, `\s` and `\S` written as their ASCII sets
+the same patterns hold 12 MiB compiled and 14 once matched. The
+automata the two parsers have in common were counted at last: 26
+duplicates of 220, all short, a few hundred KiB.
+
+So every pattern with Unicode classes has a twin
+(`parser::netregex::narrow_classes`, `core/parser-twin-automata`): the
+same pattern with each class cut down to the first 2,048 code points
+(Latin with its accents, Greek, Cyrillic, Armenian, Hebrew, Arabic...)
+and General Punctuation (typographic quotes and dashes, the ellipsis,
+the typesetting spaces), the cut taken from the Unicode tables the
+engine itself compiles the classes with (`regex-syntax`). On a text made
+of those code points a class and its cut agree on every character, so
+the twin matches exactly as the pattern does, groups included; the
+twin is used for such a text and the pattern for any other (a name in
+Japanese), which is compiled when such a text comes and released with
+the idle ones. Both forms are compiled when a pattern is built, so that
+a pattern the engine refuses is still refused then and never later; the
+pattern's own automaton is kept only when there is no twin.
+`tests/regex_twins.rs` matches the 157 twins of the 197 patterns the
+fixtures' names reach against 3,412 texts (the fixtures' release
+names, scene names and file paths, what the movie parser simplifies
+them to, and names in Greek, Cyrillic, with accents, typographic
+punctuation and spaces): no span differs, and a twin cut to ASCII
+letters on purpose gives 13 differences. A twin cut to ASCII alone was
+tried first and dropped: 18 of the 1,744 history names have a
+non-ASCII character (an accent, a typographic apostrophe, Cyrillic), and
+one is enough to compile the Unicode forms, which then held 66 MB beside
+the twins. `parser_memory` on the 1,744 names, both parsers, five
+rounds, the binaries before and after alternated: 55.9 MB after the
+first pass before, 23.3 after; 7.5 MB in both once the patterns are
+released; a round of parsing 3 % slower, and the first parse after the
+start 0.4 s longer, the Unicode forms being compiled once to be checked.
+
 The 60 MB target therefore holds for a process left alone for five
 minutes, and not for one that searches every few minutes. With the RSS
 sync at the fixture's interval (100 minutes) the process spends most of
@@ -1764,9 +1803,13 @@ been 20 MB since 20 November 2026 (section 21.11).
   personalities and in the same code. Rejected after measuring: a lower
   cache limit on the engine (10 MB for a quarter of the speed) and less
   unrolling of counted repetitions (10 MB, and a different behaviour).
-  Not tried: one set of automata shared by the two parsers, and a leaner
-  matcher for the patterns without look-around, which would be a second
-  engine to keep equal to the originals' one. Five minutes is below the
+  Counted on 20 November 2026 and not worth it: one set of automata
+  shared by the two parsers (26 duplicates of 220, all short). Not
+  tried: a leaner matcher for the patterns without look-around, which
+  would be a second engine to keep equal to the originals' one. Done
+  instead: the twins of section 9, the same patterns with their Unicode
+  classes cut down to the code points the release names are made of,
+  a third of the memory. Five minutes is below the
   RSS interval, so a sync finds the patterns gone and pays the
   compilation, under a second, once per sync.
 - **What is stored and not applied, or not sent**, each because nothing

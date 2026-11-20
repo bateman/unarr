@@ -39,6 +39,9 @@ tracing-subscriber = { version = "0.3", features = ["env-filter"] }
 clap = { version = "4", features = ["derive", "env"] }
 roxmltree = "0.21"
 fancy-regex = "0.20"
+# The Unicode tables fancy-regex compiles with, read for the parser's twins
+# (crates/unarr-core/src/parser/netregex.rs).
+regex-syntax = "0.8"
 chrono = { version = "0.4", default-features = false, features = ["std", "clock", "serde"] }
 
 # Small, fast, lean: the non-functional requirements live here too.
