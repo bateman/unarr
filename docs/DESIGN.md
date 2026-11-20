@@ -338,7 +338,7 @@ Self-set, to be measured in CI against a fixed fixture database:
 | Metric | Target |
 |--------|--------|
 | Idle RSS, three personalities, 1,000 series + 2,000 movies | under 60 MB |
-| Container image, compressed | under 15 MB |
+| Container image, compressed | under 20 MB (15 MB until 20 November 2026, section 21.11) |
 | `GET /api/v3/series` on the fixture, p99 | under 10 ms |
 | Cold start to first response | under 1 s |
 
@@ -364,6 +364,7 @@ maintainer's daily driver.
 | Container image under 15 MB compressed, once the release profile unwinds | The binary is 34.9 MiB, 14.4 MiB under `gzip -9` (15.07 MB): 4.1 MiB and 2.0 MiB more than aborting | #14 | Unknown as an image; the binary alone is at the limit, and over it if the target is read in decimal megabytes |
 | Container image under 15 MB compressed, once Brotli answers (`docs/audit/2-http.md`, row 1.19) | The binary is 35.9 MiB, 14.9 MiB under `gzip -9` (15.61 MB), from 35.0 and 14.4 (15.14 MB): Brotli's encoder is 1.07 MiB of it, 0.50 MiB under `gzip -9`; the rest of the change saves 0.2 MiB (`mime-guess` gone) | HTTP low rows | Unknown as an image; the binary alone is under the limit in binary megabytes and over it in decimal ones |
 | Container image under 15 MB compressed, built as CI builds it | `docker build` of the Dockerfile at `521ea75` (amd64): 61.4 MB unpacked, 16.8 MB of layers under `gzip -9`. The static musl binary (jemalloc, Brotli, both UIs) is 38.6 MB, 16.06 MB compressed; distroless's base 0.71 MB | #10, 20 November 2026 | Missed: 1.8 MB over (1.0 MiB over 15 MiB) |
+| Container image under 20 MB compressed (section 21.11) | The same build: 16.8 MB of layers under `gzip -9` | 20 November 2026 | Met: 3.2 MB under |
 | Idle RSS under 60 MB, once the release profile unwinds | Both personalities on the real library (38 series, 193 movies), fifteen minutes idle: 30 MiB, 11 MiB of it anonymous; 28 and 10 aborting, in the same container | #14 | Met idle |
 
 First measurement, skeleton only (one `system/status` route per personality):
@@ -745,7 +746,8 @@ for the binary alone and is now at it: 14.4 MiB, which is 15.07 MB. The
 image itself has still not been built with both UIs, so the row stays
 "unknown", and by the decision at the head of this section a miss here
 is recorded and left. The alternatives to unwinding that would have kept
-the size are in section 20, with why they were not taken.
+the size are in section 20, with why they were not taken. The target has
+been 20 MB since 20 November 2026 (section 21.11).
 
 ## 10. Naming and distribution
 
@@ -2625,8 +2627,9 @@ below; for a row the audit rated low (`docs/audit/7-triage.md`,
     in the originals; about 1.06 MB compressed.
   - *English only* (chosen): nothing.
 - **Why.** No reason was given with the choice. What speaks for it: nobody
-  known uses another language with Unarr, and the image is already over
-  its size target (section 9), which the dictionaries would push further.
+  known uses another language with Unarr, and the image was then over
+  its size target of 15 MB (section 9; 20 MB since, section 21.11), which
+  the dictionaries would push further.
 - **Cost.** Whoever picks another language keeps an English interface,
   and nothing says why. The setting is kept, saved and returned as the
   originals do, so a database moved back to an original keeps the choice.
@@ -2643,8 +2646,8 @@ section 22 closes.
   which prefers Brotli when a client weighs it as gzip; Unarr compressed
   with gzip only. Doing as they do needs tower-http's Brotli encoder, which
   adds 1,126,528 bytes to the release binary, 522,738 under `gzip -9`, to
-  an image already over its size target (16.8 MB compressed against 15,
-  section 9).
+  an image then over its size target (16.8 MB compressed against 15,
+  section 9; the target is 20 MB since, section 21.11).
 - **Options.**
   - *Keep it* (chosen): the answers are the originals' (Brotli to a
     browser, gzip to a client that asks for gzip only), and smaller on the
@@ -2653,9 +2656,10 @@ section 22 closes.
     browser gets gzip where the originals send Brotli. One feature of
     tower-http (`compression-br`) and two assertions of a test.
 - **Why.** The answers match the originals'.
-- **Cost.** Half a MiB more of an image already 1.8 MB over its target.
-- **To revisit** when the image is to come back under its target: this
-  is the first half MiB to give back.
+- **Cost.** Half a MiB more of the image: 1.8 MB over the target of then,
+  3.2 MB under the present one (section 21.11).
+- **To revisit** when the image nears its target: this is the first half
+  MiB to give back.
 
 ### 21.9 Allowed hosts and trusted networks apply as soon as they are saved
 
@@ -2700,6 +2704,33 @@ below; for row 1.34 of `docs/audit/2-http.md`.
 - **How it is done** (the implementer's choice): from the outermost layer
   of the router, so the host filter's 400 and a panic's 500 carry it as the
   originals' do (`http::server_header`).
+
+### 21.11 The image's size target raised to 20 MB
+
+Decided by the maintainer on 20 November 2026, after the image was
+first built as CI builds it.
+
+- **The question.** Section 9 set the compressed image under 15 MB. Built
+  from the Dockerfile at `521ea75` (amd64) it is 16.8 MB of layers under
+  `gzip -9`: the static musl binary 16.06 MB, distroless's base 0.71 MB.
+  Bring the image back under the target, or move the target?
+- **Options.**
+  - *Raise the target to 20 MB* (chosen): the image meets it with 3.2 MB
+    to spare. Each personality's embedded web interface is about 1.75 MB
+    under `gzip -9` (Sonarr's 1.75, Radarr's 1.80, source maps left out),
+    so Lidarr's would fit, with a little room for the code around it.
+  - *Bring the image under 15 MB*: the known parts are decisions already
+    taken the other way. Unwinding on a panic costs 2.0 MiB compressed
+    (section 20, issue #14), Brotli 0.5 MiB (section 21.8), jemalloc
+    611,200 bytes of binary before compression (section 21.6); dropping
+    them gives up a panic contained to its request, the originals'
+    compression, or the throughput under load.
+- **Why.** None of those is worth 1.8 MB on the maintainer's NAS, where
+  the originals' images are hundreds of megabytes.
+- **Cost.** A target that no longer pushes the size down: an image that
+  grows by a few megabytes still meets it.
+- **To revisit** when Lidarr's interface is embedded, or when the image
+  nears 20 MB: Brotli's half MiB first (section 21.8).
 
 ## 22. The server outside the API, as the originals' pipeline
 
