@@ -391,6 +391,43 @@ fn a_panic_costs_one_request_or_one_command() {
     assert!(daemon.alive());
 }
 
+/// Asks `check` every 50 ms until it holds, for up to 30 s, and fails
+/// with what it last said. The personalities start one after the other,
+/// so one already answers while the next is still starting; and what a
+/// start leaves behind (its line in the others' logs, the files `unarrd
+/// healthcheck` reads) is written after it, by the daemon, on its own
+/// time.
+fn eventually(mut check: impl FnMut() -> Result<(), String>) {
+    let deadline = Instant::now() + Duration::from_secs(30);
+    loop {
+        match check() {
+            Ok(()) => return,
+            Err(said) if Instant::now() >= deadline => panic!("{said}"),
+            Err(_) => std::thread::sleep(Duration::from_millis(50)),
+        }
+    }
+}
+
+/// Holds once `app`'s log has `line`.
+fn logged(daemon: &Daemon, app: &str, line: &str) -> Result<(), String> {
+    let log = daemon.log(app);
+    if log.contains(line) {
+        Ok(())
+    } else {
+        Err(log)
+    }
+}
+
+/// Holds once `unarrd healthcheck` says `healthy`, and each of `lines`.
+fn checked(daemon: &Daemon, healthy: bool, lines: &[&str]) -> Result<(), String> {
+    let (was, said) = healthcheck(&daemon.data);
+    if was == healthy && lines.iter().all(|l| said.contains(l)) {
+        Ok(())
+    } else {
+        Err(format!("healthy: {was}\n{said}"))
+    }
+}
+
 /// `unarrd healthcheck` on `data`: whether healthy, and what it said.
 fn healthcheck(data: &Path) -> (bool, String) {
     let out = Command::new(env!("CARGO_BIN_EXE_unarrd"))
@@ -420,17 +457,14 @@ fn a_personality_that_cannot_start_is_left_down_and_the_others_start() {
     assert!(request(radarr, "GET", "/ping", None).is_err());
     assert!(daemon.alive());
     // Reported: in the log each personality keeps, and by the health check.
-    let log = daemon.log("sonarr");
-    assert!(
-        log.contains("Radarr did not start and is left down until the next start"),
-        "{log}"
-    );
-    let (healthy, said) = healthcheck(&daemon.data);
-    assert!(!healthy, "{said}");
-    assert!(
-        said.contains("sonarr: ok") && said.contains("radarr: did not start"),
-        "{said}"
-    );
+    eventually(|| {
+        logged(
+            &daemon,
+            "sonarr",
+            "Radarr did not start and is left down until the next start",
+        )
+    });
+    eventually(|| checked(&daemon, false, &["sonarr: ok", "radarr: did not start"]));
     drop(daemon);
 
     // The same for a panic at the start, of the first of the two this
@@ -444,17 +478,14 @@ fn a_personality_that_cannot_start_is_left_down_and_the_others_start() {
     daemon.wait_for(radarr);
     assert_eq!(get(radarr, "/api/v3/system/status").status, 200);
     assert!(request(sonarr, "GET", "/ping", None).is_err());
-    let log = daemon.log("radarr");
-    assert!(
-        log.contains("Sonarr did not start and is left down until the next start: panicked at "),
-        "{log}"
-    );
-    let (healthy, said) = healthcheck(&daemon.data);
-    assert!(!healthy, "{said}");
-    assert!(
-        said.contains("radarr: ok") && said.contains("sonarr: did not start"),
-        "{said}"
-    );
+    eventually(|| {
+        logged(
+            &daemon,
+            "radarr",
+            "Sonarr did not start and is left down until the next start: panicked at ",
+        )
+    });
+    eventually(|| checked(&daemon, false, &["radarr: ok", "sonarr: did not start"]));
     drop(daemon);
 
     // Started again without the fault, both serve and the check is clean.
@@ -466,8 +497,7 @@ fn a_personality_that_cannot_start_is_left_down_and_the_others_start() {
     let (sonarr, radarr) = (daemon.sonarr, daemon.radarr);
     daemon.wait_for(sonarr);
     daemon.wait_for(radarr);
-    let (healthy, said) = healthcheck(&daemon.data);
-    assert!(healthy, "{said}");
+    eventually(|| checked(&daemon, true, &[]));
     drop(daemon);
 
     // With no personality left to serve, the daemon ends and says so.
