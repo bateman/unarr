@@ -155,6 +155,15 @@ The tables measure a `cargo build`, with glibc's allocator; the image's
 static musl build, with jemalloc, is measured apart (The image's
 allocator, below).
 
+The same day, in another container, the libraries were also measured at
+`376a687`, with the server outside the API as the originals' pipeline
+(cache headers, Brotli, content negotiation, the request log, the answer
+while starting) but before the routes, events and settings of the audit;
+its rows are in the History. The script's client sends no
+`Accept-Encoding`, so neither side compresses the reads, and the request
+log writes nothing at `info`, the level the script sets on both sides.
+There too every route answered sooner than the original's.
+
 The machine is noisy from one run to the next. Against the `4bba6eb`
 runs (in the History), the originals' routes, queues aside, took from
 22 % less to 1 % more time on the scaled library, and from 29 % less to
@@ -601,6 +610,8 @@ idle CPU of each side.
 |---|---|---|--:|--:|--:|---|
 | 2026-11-20 | scaled | `bcd11fb` | 1 | 542 MiB / 16.5 s/h | 34 MiB / 1.2 s/h | the audit's routes, events, settings and server behaviour, the plex.tv ping, the unwinding of #14; the originals' routes up to 22 % faster than in the `4bba6eb` run; Unarr's warm-up flagged (last pass 12 % above the one before) and its routes up to 29 % slower |
 | 2026-11-20 | real | `bcd11fb` | 1 | 488 MiB / 17.7 s/h | 30 MiB / 1.1 s/h | the same; the originals' warm-up flagged (last pass 11 % below the one before), noise |
+| 2026-11-20 | scaled | `376a687` | 1 | 541 MiB / 14.9 s/h | 34 MiB / 1.0 s/h | another container than the `bcd11fb` runs; the server outside the API as the originals' pipeline (the low rows of the HTTP audit), before the routes, events and settings of the audit; the reads not compressed on either side; no route slower than the original's |
+| 2026-11-20 | real | `376a687` | 1 | 483 MiB / 17.6 s/h | 30 MiB / 1.0 s/h | the same; Radarr's `/movie` 23.0 ms against 29.9 |
 | 2026-11-18 | scaled | `4bba6eb` | 1 | 541 MiB / 17.0 s/h | 32 MiB / 1.2 s/h | Radarr's history read in one database call, its `/history/since` (not in the reads) streamed; the originals' routes 12-63 % slower than in the `c53a302` run; Unarr's warm-up flagged (last pass 11 % above the one before), noise |
 | 2026-11-18 | real | `4bba6eb` | 1 | 486 MiB / 18.5 s/h | 27 MiB / 1.1 s/h | Radarr's history read in one database call, its `/history/since` (not in the reads) streamed; Unarr's warm-up flagged (last pass 10 % above the one before) and its Radarr routes 12-46 % slower than in the `c53a302` run, noise: the binaries alternated are within 7 % |
 | 2026-11-18 | real | `a402d7c` | 1 | 481 MiB / 14.4 s/h | 30 MiB / 1.1 s/h | the unwinding of #14 merged with the seek change; the binary 34.8 MiB; a faster container than the `c53a302` run; Unarr's warm-up flagged (last pass 14 % below the one before); the scaled library not measured |
