@@ -988,7 +988,9 @@ async fn allowed_hosts_are_enforced() {
 }
 
 /// A backup is listed, downloads as the list's `path` says (a page, behind
-/// the login), and restores from an upload of the same zip.
+/// the login), and restores from an upload of the same zip. Posted as the
+/// UI's "Backup Now" posts it, with no type: the original makes it a
+/// manual one from the trigger.
 #[tokio::test]
 async fn backup_downloads_and_restores_from_an_upload() {
     let dirs = ReplayDirs::create_named("backup");
@@ -1010,7 +1012,7 @@ async fn backup_downloads_and_restores_from_an_upload() {
 
     let post = api("POST", "/api/v3/command")
         .header("Content-Type", "application/json")
-        .body(Body::from(r#"{"name":"Backup","type":"manual"}"#))
+        .body(Body::from(r#"{"name":"Backup"}"#))
         .unwrap();
     assert_eq!(status_of(&app, post).await, StatusCode::CREATED);
     tokio::time::timeout(

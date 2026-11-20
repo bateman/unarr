@@ -90,7 +90,8 @@ pub async fn start(
         ]));
     }
     let command = CommandBody::parse_for(state.personality(), name, &body)
-        .ok_or_else(|| ApiError::Internal(anyhow::anyhow!("Sequence contains no matching element")))?;
+        .ok_or_else(|| ApiError::Internal(anyhow::anyhow!("Sequence contains no matching element")))?
+        .for_trigger(CommandTrigger::Manual);
     let runtime = state.commands()?;
     let sends = body["sendUpdatesToClient"].as_bool().unwrap_or(false) || command.sends_updates();
     // The API turns the updates on for every command but Radarr's

@@ -680,15 +680,24 @@ impl CommandBody {
                     .unwrap_or_default(),
             });
         }
-        let command = Self::parse(name, body).filter(|command| command.runs_in(personality))?;
-        Some(match (personality, command) {
-            // Radarr's `BackupCommand.Type` is read from the trigger, not
-            // from the body: anything posted is a manual backup.
-            (crate::Personality::Radarr, CommandBody::Backup { .. }) => CommandBody::Backup {
-                kind: BackupType::Manual,
+        Self::parse(name, body).filter(|command| command.runs_in(personality))
+    }
+
+    /// The command as its trigger makes it. Both originals' `BackupCommand`
+    /// read `Type` from the trigger, not from the body: the scheduler's run
+    /// is a scheduled backup and any other one, the UI's "Backup Now"
+    /// (`{"name":"Backup"}`) included, a manual one.
+    pub fn for_trigger(self, trigger: CommandTrigger) -> CommandBody {
+        match self {
+            CommandBody::Backup { .. } => CommandBody::Backup {
+                kind: if trigger == CommandTrigger::Scheduled {
+                    BackupType::Scheduled
+                } else {
+                    BackupType::Manual
+                },
             },
-            (_, command) => command,
-        })
+            command => command,
+        }
     }
 
     /// Whether the application has this command. Radarr has what its

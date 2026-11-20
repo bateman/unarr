@@ -72,8 +72,10 @@ fn from_row(personality: crate::Personality, row: &Row) -> anyhow::Result<Comman
     let name: String = row.get(1)?;
     let body_text: String = row.get(2)?;
     let body_json: serde_json::Value = serde_json::from_str(&body_text).unwrap_or_default();
+    let trigger = CommandTrigger::from_i64(row.get(11)?);
     let body = CommandBody::parse_for(personality, &name, &body_json)
-        .ok_or_else(|| anyhow::anyhow!("unknown command {name:?} in the commands table"))?;
+        .ok_or_else(|| anyhow::anyhow!("unknown command {name:?} in the commands table"))?
+        .for_trigger(trigger);
     let duration_ms: Option<i64> = row.get(9)?;
     Ok(CommandModel {
         id: row.get(0)?,
@@ -98,7 +100,7 @@ fn from_row(personality: crate::Personality, row: &Row) -> anyhow::Result<Comman
         ended_at: parse_ts(row.get(8)?)?,
         duration: duration_ms.map(Duration::milliseconds),
         exception: row.get(10)?,
-        trigger: CommandTrigger::from_i64(row.get(11)?),
+        trigger,
         message: row.get(12)?,
     })
 }

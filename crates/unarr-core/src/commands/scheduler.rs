@@ -434,16 +434,27 @@ mod tests {
         // The import lists' sync runs in both, and names what each
         // application's lists name.
         assert!(CommandBody::ImportListSync { definition_id: None }.runs_in(Personality::Radarr));
-        // Whatever the body says, a backup posted to Radarr is a manual one.
-        assert_eq!(
-            CommandBody::parse_for(
-                Personality::Radarr,
-                "Backup",
-                &serde_json::json!({"type": "scheduled"})
-            ),
-            Some(CommandBody::Backup {
-                kind: super::super::BackupType::Manual
-            })
-        );
+        // Whatever the body says, the trigger makes the backup's type, in
+        // both originals: posted, it is a manual one; the scheduler's run, a
+        // scheduled one.
+        for personality in [Personality::Sonarr, Personality::Radarr] {
+            for body in [serde_json::json!({}), serde_json::json!({"type": "scheduled"})] {
+                let posted = CommandBody::parse_for(personality, "Backup", &body).unwrap();
+                assert_eq!(
+                    posted.clone().for_trigger(super::super::CommandTrigger::Manual),
+                    CommandBody::Backup {
+                        kind: super::super::BackupType::Manual
+                    },
+                    "{personality:?} {body}"
+                );
+                assert_eq!(
+                    posted.for_trigger(super::super::CommandTrigger::Scheduled),
+                    CommandBody::Backup {
+                        kind: super::super::BackupType::Scheduled
+                    },
+                    "{personality:?} {body}"
+                );
+            }
+        }
     }
 }
