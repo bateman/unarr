@@ -156,10 +156,15 @@ pub(crate) async fn ping_plex_tv(notifier: &Notifier, token: &str) {
         return;
     };
     tracing::debug!(url = %crate::http::redact(url.as_str()), "pinging plex.tv");
+    // Ten seconds, not the client's hundred: the update waits for the
+    // ping, and a plex.tv that takes the connection and never answers
+    // would hold the day's first import (or Test) that long. The originals
+    // wait the hundred; nothing a client reads depends on it.
     let outcome = notifier
         .http()
         .get(url)
         .header(reqwest::header::ACCEPT, "application/json")
+        .timeout(std::time::Duration::from_secs(10))
         .send()
         .await
         .map_err(|e| e.without_url().to_string())
