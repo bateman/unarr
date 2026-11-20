@@ -2,6 +2,8 @@
 //! besides the save of a consumer (`providers::metadata_update`): add,
 //! test, action, delete. A consumer is stored and shown; nothing drives it,
 //! so no metadata file is written and a test has nothing to reach.
+//! Radarr's `/metadata/test` is this one too: its controller shares the
+//! rules, and the schemas are looked up by the running personality.
 //!
 //! The bulk routes the base controller declares are hidden by Sonarr's
 //! (`[NonAction]`): `/metadata/bulk` matches only `{id:int}`, which it is
@@ -140,7 +142,8 @@ pub async fn create(State(state): State<AppState>, Json(body): Json<Value>) -> A
         .into_response())
 }
 
-/// `POST /metadata/test`: `{}` for whatever the resource rules accept.
+/// `POST /metadata/test`, for Sonarr and Radarr: `{}` for whatever the
+/// resource rules accept.
 pub async fn test(State(state): State<AppState>, Json(body): Json<Value>) -> ApiResult<Json<Value>> {
     let id = body["id"].as_i64().unwrap_or(0);
     validate_resource(&state, &body, id, true).await?;

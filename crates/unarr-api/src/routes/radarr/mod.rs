@@ -258,7 +258,7 @@ pub fn api_router() -> Router<AppState> {
         )
         .route("/metadata", get(shared_providers::metadata_list))
         .route("/metadata/schema", get(shared_providers::metadata_schema))
-        .route("/metadata/test", post(shared_providers::metadata_test))
+        .route("/metadata/test", post(crate::routes::metadata_writes::test))
         .route("/metadata/testall", post(shared_providers::metadata_test_all))
         .route(
             "/metadata/{id}",
