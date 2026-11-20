@@ -2632,6 +2632,53 @@ below; for a row the audit rated low (`docs/audit/7-triage.md`,
 - **To revisit** when a user asks for another language: then the third
   option, the cheapest that makes the setting work.
 
+### 21.8 Brotli is kept
+
+Decided by the maintainer on 20 November 2026, between the two options
+below, the recommended one; for row 1.19 of `docs/audit/2-http.md`, which
+section 22 closes.
+
+- **The question.** The originals compress with `AddResponseCompression()`,
+  which prefers Brotli when a client weighs it as gzip; Unarr compressed
+  with gzip only. Doing as they do needs tower-http's Brotli encoder, which
+  adds 1,126,528 bytes to the release binary, 522,738 under `gzip -9`, on a
+  binary already at the image's size target (section 9).
+- **Options.**
+  - *Keep it* (chosen): the answers are the originals' (Brotli to a
+    browser, gzip to a client that asks for gzip only), and smaller on the
+    wire.
+  - *Drop it*: gzip only, as before; half a MiB less of image, and a
+    browser gets gzip where the originals send Brotli. One feature of
+    tower-http (`compression-br`) and two assertions of a test.
+- **Why.** The answers match the originals', and the image stays under
+  15 MB, if by little.
+- **Cost.** Half a MiB of the image's margin, which was small already.
+- **To revisit** if the image crosses its target: this is the first half
+  MiB to give back.
+
+### 21.9 Allowed hosts and trusted networks apply as soon as they are saved
+
+Decided by the maintainer on 20 November 2026, between the two options
+below, the recommended one; for row 1.35 of `docs/audit/2-http.md`, which
+section 22 settles for the URL base.
+
+- **The question.** The originals read the allowed hosts and the trusted
+  networks once, at start: a list saved from Settings > General applies
+  after the restart. Unarr applies them at once.
+- **Options.**
+  - *At once, as today* (chosen): a difference from the originals, kept.
+  - *At the restart, as the originals*: little work, and the originals'
+    behaviour.
+- **Why.** A list that leaves the browser out (a host that is not the one
+  in its address bar) locks its author out either way, and either way the
+  way back is `config.xml` and a restart. Applied at once, the author
+  finds out with the change still in mind and the page that made it just
+  saved; applied at the restart, maybe days later, from another address.
+- **Cost.** A difference no client is known to depend on: an
+  installation moved back to an original applies the same list from its
+  next start.
+- **To revisit** if a client is found to rely on the restart.
+
 ## 22. The server outside the API, as the originals' pipeline
 
 The low rows of `docs/audit/2-http.md` left open or partial by the triage
@@ -2694,7 +2741,7 @@ could not settle it. What changed, and what was decided on the way:
   522,738 under `gzip -9` (two release builds of this branch, with and
   without it), on a binary already at the image target (section 9).
   Dropping it is one feature of tower-http (`compression-br`) and two
-  assertions of a test.
+  assertions of a test; it is kept, by decision (section 21.8).
 - **503 while starting.** The daemon binds the listener and serves before
   the command runtime starts, and `StartingUpMiddleware`'s answer stands
   for every authenticated request until it has: a proxy shows a 503 rather
@@ -2705,8 +2752,8 @@ could not settle it. What changed, and what was decided on the way:
   session cookie's path (`AppState::url_base`). `/initialize.json` and the
   login's redirects read the settings on each request, as the originals'
   controllers do. A base saved from the UI is applied by the restart, as in
-  the originals; allowed hosts and trusted networks still apply at once
-  (`docs/audit/7-triage.md`, row 1.35).
+  the originals; allowed hosts and trusted networks apply at once, by
+  decision (section 21.9).
 - **Smaller ones.** The request log under `Http` and `Api` (`unarrd` lets
   them through at trace and debug); the login form signs nobody in when the
   method is None; an XHR is told 401 with the login page's address; the

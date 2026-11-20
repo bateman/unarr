@@ -33,20 +33,33 @@ health check says so while it is on; the hub is served over WebSockets
 only. Each was recorded first on Sonarr 4.0.20 and Radarr 6.4.4
 under a changed `config.xml`; "What was closed afterwards" says how.
 
+Updated a fifth time on 20 November 2026: every open and partial row but
+one is settled. The routes Sonarr declares and Unarr did not answer now as
+recorded on the original (`tests/fixtures/sonarr/golden-audit`); the
+events, housekeeping and settings rows likewise (`golden-events`,
+`golden-legacy-user`, `golden-housekeeping`, on both originals); the low
+rows of `2-http.md` were recorded on both with `scripts/http-probe.py`
+and closed (`docs/DESIGN.md`, section 22). Three are deliberate by the
+maintainer's decision of the same day: the interface stays English
+(`UILanguage`, section 21.7), and allowed hosts and trusted networks apply
+as soon as they are saved (row 1.35, section 21.9); Brotli, which closing
+row 1.19 brought in, is kept (section 21.8). The one row open is 1.34, the
+`Server` header, which waits for the maintainer.
+
 ## Result
 
 | Report | Rows | Closed | Open | Partial | Deliberate | Not applicable |
 |--------|------|--------|------|---------|------------|----------------|
-| 1. Settings | 18 | 12 | 3 | 0 | 1 | 2 |
-| 2. HTTP | 58 | 30 | 19 | 4 | 4 | 1 |
-| 3 and 4. Routes and UI calls | 78 | 39 | 25 | 0 | 4 | 10 |
-| 6. Events, commands, housekeeping | 39 | 31 | 4 | 1 | 2 | 1 |
-| Together | 193 | 112 | 51 | 5 | 11 | 14 |
+| 1. Settings | 18 | 14 | 0 | 0 | 2 | 2 |
+| 2. HTTP | 58 | 51 | 1 | 0 | 5 | 1 |
+| 3 and 4. Routes and UI calls | 78 | 64 | 0 | 0 | 4 | 10 |
+| 6. Events, commands, housekeeping | 39 | 36 | 0 | 0 | 2 | 1 |
+| Together | 193 | 165 | 1 | 0 | 13 | 14 |
 
 Before the first update: 83 closed, 78 open, 13 partial, 6 deliberate;
-before the fourth, 102 closed, 60 open, 10 partial. Some gaps
-are counted in two reports (the SignalR transports, the file dates), so the
-distinct open items are some sixty-five. States: **closed**, does what the report says the original
+before the fourth, 102 closed, 60 open, 10 partial; before the fifth, 112
+closed, 51 open, 5 partial, 11 deliberate. Some gaps are counted in two
+reports (the SignalR transports, the file dates). States: **closed**, does what the report says the original
 does; **open**; **partial**; **deliberate**, a recorded decision to differ;
 **not applicable**, nothing to port.
 
@@ -78,8 +91,8 @@ Would show in ordinary use:
 4. ~~The blocklist's Protocol filter shows every row~~. Closed.
 5. ~~A queue item imported by a rescan or a drop-folder scan lingers~~.
    Closed.
-6. **Static files are fetched again on each page load** (4.9 with 4.3): the
-   links carry no hash, so only the hashed bundles are cached. Small.
+6. ~~**Static files are fetched again on each page load** (4.9 with 4.3): the
+   links carry no hash, so only the hashed bundles are cached~~. Closed.
 7. ~~Lists in a second tab are stale~~: SignalR `tag`, `rootfolder`,
    `qualitydefinition`, `system/task`. Closed.
 
@@ -87,8 +100,8 @@ Would show in a particular set-up:
 
 8. **A URL base**: ~~a request outside it is a 404, `/ping` included, where
    the original redirects into it (1.10)~~, ~~it is matched with its case
-   (1.11)~~, both closed; one saved from the UI is half applied until the
-   restart (1.35). Small.
+   (1.11)~~, both closed; ~~one saved from the UI is half applied until the
+   restart (1.35)~~, closed: applied at the restart, as in the originals.
 9. ~~**A reverse proxy that rewrites `Host`, with Allowed Hosts set** (1.3):
    every request is refused~~. Closed.
 10. **A proxy that does not pass WebSocket upgrades** (2.11): no live
@@ -120,16 +133,17 @@ Worth a decision rather than a fix:
     one process holds every personality. Decided and closed: the profile
     unwinds, and a panic costs one request or one command.
 19. ~~**Paths under `/api` that are not v3** (1.24) reach the page
-    fallback~~ (closed), and wrong-case paths outside the API (1.15) reach
+    fallback~~ (closed), and ~~wrong-case paths outside the API (1.15) reach
     the UI guard, which redirects a wrong-case SignalR negotiation with its
-    token in `Location`. No client is known to do it.
+    token in `Location`~~ (closed: matched in any case, as the originals do).
 
-The rest is routes nobody is known to call (`GET` by id on the `config/*`
-resources, the metadata and `languageprofile` writes,
-`qualitydefinition/limits`), headers nobody is known to read (`Server`,
-three static content types, the backup's type), `robots.txt`,
-Brotli, the 503 while starting, the console log settings, the deprecated
-`CheckForFinishedDownload`, the legacy `config.xml` user.
+The rest was routes nobody is known to call (`GET` by id on the
+`config/*` resources, the metadata and `languageprofile` writes,
+`qualitydefinition/limits`), headers nobody is known to read (three static
+content types, the backup's type), `robots.txt`, Brotli, the 503 while
+starting, the console log settings, the deprecated
+`CheckForFinishedDownload`, the legacy `config.xml` user: all closed on
+20 November 2026. Left: the `Server` header (1.34), for the maintainer.
 
 The maintainer's installation, by the fixtures: no URL base, no script
 import, Change File Date off, English UI, Traefik in front (which passes
@@ -302,12 +316,13 @@ with them where there was something to close
 
 ## The server outside the API bodies (`2-http.md`)
 
-58 rows were DIFFERENT, MISSING or UNSURE: 30 closed, 19 open, 4 partial, 4
+58 rows were DIFFERENT, MISSING or UNSURE: 51 closed, 1 open, 5
 deliberate, 1 not applicable. Read, and where reading did not settle it tried
 on a debug build of `unarrd` on the Sonarr fixture ("live"). The original's
-side of rows 1.6, 1.11, 1.15, 1.18, 1.30, 1.34, 2.12, 4.11 and 4.20 was never
-measured: `scripts/http-audit.py` probes no static file, no wrong-case path
-outside the API, no `Accept` header, no refused host and no URL base. `api/`
+side of rows 1.6, 1.11, 1.15, 1.18, 1.30, 1.34, 2.12, 4.11 and 4.20, which
+`scripts/http-audit.py` does not probe (no static file, no wrong-case path
+outside the API, no `Accept` header, no refused host, no URL base), was
+recorded since with `scripts/http-probe.py` on both originals. `api/`
 is `crates/unarr-api/src/`.
 
 | Row | Finding | Severity then | State | Evidence | What is left, who notices |
@@ -325,7 +340,7 @@ is `crates/unarr-api/src/`.
 | 1.16 | one trailing slash ignored | medium | CLOSED | `api/lib.rs:41`, `api/http.rs:330`; tests | |
 | 1.17 | CORS on the API | medium | CLOSED | `api/http.rs:246`; test | |
 | 1.18 | CORS on `/Content` | low | CLOSED | `api/http.rs` (`cors_allow_get`) on the content route (`api/lib.rs`, `content_cors`): `Access-Control-Allow-Origin: *` to a request with an origin, a 404 included; a preflight for `GET` or `OPTIONS` answered 204 with `GET,OPTIONS` and the asked headers echoed, in any case of the path; a preflight for another method, or an `OPTIONS` without one, goes on to the 401; test `content_may_be_read_from_any_origin`; recorded on both (`scripts/http-probe.py`, `lowhttp*`) | |
-| 1.19 | compression | low | CLOSED | `api/http.rs` (`compression`, `compression_as_requested`): Brotli and gzip at level 1 (`CompressionLevel.Fastest`), Brotli when the client weighs the two alike, deflate not offered; `Vary: Accept-Encoding` only to a client that sent `Accept-Encoding`; nothing compressed over HTTPS a trusted proxy names (`EnableForHttps` off); test `json_and_pages_are_compressed_as_the_originals_compress`; recorded on both (`scripts/http-probe.py`, `lowhttp*`) | Brotli adds 1,126,528 bytes to the release binary, 522,738 under `gzip -9` (`docs/DESIGN.md`, section 22); the encoders' bytes differ from .NET's by a few |
+| 1.19 | compression | low | CLOSED | `api/http.rs` (`compression`, `compression_as_requested`): Brotli and gzip at level 1 (`CompressionLevel.Fastest`), Brotli when the client weighs the two alike, deflate not offered; `Vary: Accept-Encoding` only to a client that sent `Accept-Encoding`; nothing compressed over HTTPS a trusted proxy names (`EnableForHttps` off); test `json_and_pages_are_compressed_as_the_originals_compress`; recorded on both (`scripts/http-probe.py`, `lowhttp*`) | Brotli adds 1,126,528 bytes to the release binary, 522,738 under `gzip -9` (`docs/DESIGN.md`, section 22); kept by decision (`docs/DESIGN.md` section 21.8); the encoders' bytes differ from .NET's by a few |
 | 1.20 | version header once the key is accepted | low | CLOSED | `api/http.rs:201`; tests | |
 | 1.21 | 503 while starting | low | CLOSED | `unarrd/src/main.rs` (`serve`): the listener is bound and the router serves before the command runtime starts; `api/http.rs` (`starting_up`) answers 503 until it has, after the authentication and the URL base's redirect in each group, as `StartingUpMiddleware.cs:24-35` (JSON `errorMessage` with the version header under `/api`, plain text elsewhere); test `while_starting_an_authenticated_request_is_503`. From the source: the original's window is too short to record | opening the database, and an import, still come before the listener |
 | 1.22 | no-cache headers on the API | low | CLOSED | `api/http.rs:207`; test | |
@@ -338,7 +353,7 @@ is `crates/unarr-api/src/`.
 | 1.31 | `application/json; charset=utf-8` | low | CLOSED | `api/http.rs:89` | |
 | 1.32 | `HEAD` | low | CLOSED | `api/lib.rs` (`open_takes_its_methods`, `pages_take_get_only`): `HEAD` finds an action on `/ping` alone; elsewhere, covers and content included, it is the 405 endpoint: 401 without the key under every method, a cookie not taken, 405 `Allow: GET` with it, kept a year outside the API; test `head_finds_no_action_but_on_ping`; recorded on both (`scripts/http-probe.py`, `lowhttp*`) | |
 | 1.34 | `Server` header | low | OPEN | none sent; recorded `Server: Kestrel` on every answer of both originals | nobody known. Left to the maintainer: leave it (no client is known to read it), send `Server: Kestrel` as the originals' framework does (one header), or send `Server: Unarr` |
-| 1.35 | what applies without a restart | unsure | PARTIAL | the URL base is read once where the originals read it once (`AppState::url_base`): the routes, the pages' links, the manifest and the tile description, the session cookie's path; `/initialize.json` and the login's two redirects read it on each request in both (`InitializeJsonController.cs`, `AuthenticationController.cs`); test `a_url_base_saved_from_the_ui_sends_no_request_round_in_circles` | allowed hosts and trusted networks still apply at once, where the original waits for the restart: left to the maintainer |
+| 1.35 | what applies without a restart | unsure | DELIBERATE | the URL base is read once where the originals read it once (`AppState::url_base`): the routes, the pages' links, the manifest and the tile description, the session cookie's path; `/initialize.json` and the login's two redirects read it on each request in both (`InitializeJsonController.cs`, `AuthenticationController.cs`); test `a_url_base_saved_from_the_ui_sends_no_request_round_in_circles` | allowed hosts and trusted networks apply at once, where the original waits for the restart, by decision (`docs/DESIGN.md` section 21.9) |
 | 2.1 | `/ping` | high | CLOSED | `api/lib.rs:326` | |
 | 2.2 | the calendar feed | high | CLOSED | `api/routes/mod.rs:47` | |
 | 2.3 | `GET /api` | low | CLOSED | `api/routes/system.rs:157` | |
@@ -386,12 +401,15 @@ What the triage found against the report and the README:
 
 ## Routes and UI calls (`3-4-routes.md`)
 
-78 rows were MISSING, PARTIAL, IGNORED or UNSURE: 39 closed, 25 open, 4
-deliberate, 10 not applicable. Static: nothing was run. `mod.rs`
+78 rows were MISSING, PARTIAL, IGNORED or UNSURE: 64 closed, 4 deliberate,
+10 not applicable. Static: nothing was run, until the open rows were
+recorded on the original and closed on 20 November 2026. `mod.rs`
 is `crates/unarr-api/src/routes/mod.rs` (Sonarr's list is
 `sonarr_api_router`); the other files are under `crates/unarr-api/src/` and
 its `routes/`; `core/` is `crates/unarr-core/src/`; golden names are lines of
-`tests/fixtures/sonarr/golden/requests.txt`. For a route that is not
+`tests/fixtures/sonarr/golden/requests.txt`, or of
+`tests/fixtures/sonarr/golden-audit/requests.txt` when written
+`golden-audit/<name>`. For a route that is not
 declared, 404 and 405 are what the router gives by construction.
 
 | Table | Method and path, or UI call | State | Evidence | Who calls it, what fails without it |
@@ -459,8 +477,9 @@ What the triage found against the report and the README:
 
 ## Events, commands, housekeeping (`6-events.md`)
 
-39 rows were MISSING, PARTIAL or UNSURE: 31 closed, 4 open, 1 partial, 2
-deliberate, 1 not applicable. Static. `core/` is `crates/unarr-core/src/`,
+39 rows were MISSING, PARTIAL or UNSURE: 36 closed, 2 deliberate, 1 not
+applicable. Static, until the last open rows were recorded on both
+originals and closed on 20 November 2026. `core/` is `crates/unarr-core/src/`,
 `api/` is `crates/unarr-api/src/`, `import/` is `crates/unarr-import/src/`.
 The line numbers inside the report itself are stale; these are current.
 
@@ -502,8 +521,8 @@ The line numbers inside the report itself are stale; these are current.
 
 ## Settings (`1-settings.md`)
 
-18 rows were NOT APPLIED or PARTIAL in the detailed tables: 12 closed, 3
-open, 1 deliberate, 2 not applicable.
+18 rows were NOT APPLIED or PARTIAL in the detailed tables: 14 closed, 2
+deliberate, 2 not applicable.
 
 | Setting | Finding | Severity then | State | Evidence | What is left, who notices |
 |---|---|---|---|---|---|
