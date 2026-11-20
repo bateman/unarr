@@ -497,12 +497,86 @@ them is answers that allocate less (`/movie` and `/series` built whole
 before they are sent), not fewer arenas. Not measured: the ARM64 NAS.
 
 All of this is about glibc, the allocator of a `cargo build` on Linux
-and of these tables. The Docker image is a static musl build, whose
-allocator has no per-thread arenas and no `malloc_trim`
-(`release_memory` does nothing there), so neither the swing nor a cap
-applies to it; its memory under the same load has not been measured
-here. Who runs a glibc build and prefers the lower peak can set
-`MALLOC_ARENA_MAX=1` in the environment, without a change to the code.
+and of these tables. Who runs a glibc build and prefers the lower peak can
+set `MALLOC_ARENA_MAX=1` in the environment, without a change to the code.
+The Docker image holds a static musl build, whose allocator is jemalloc:
+the next section.
+
+### The image's allocator
+
+The image holds a static musl build. musl's own allocator takes one lock
+for every allocation, on which the threads that serve requests at the
+same time queue, and it has no `malloc_trim` (`release_memory` does
+nothing there). Since 20 November 2026 the musl build uses jemalloc
+instead, with three settings of its own, compiled in
+(`crates/unarrd/src/main.rs`, overridden by `_RJEM_MALLOC_CONF` when it
+is set): a background thread that returns freed pages, 4 arenas instead of
+4 per core, and freed pages returned after a second instead of ten. The
+choice is the maintainer's, among the options below, with its reasons in
+`docs/DESIGN.md` section 21.6. A glibc build keeps glibc's allocator.
+
+Measured with `scripts/allocator-probe.py` in a 4-core x86-64 container,
+on the scaled library, Unarr alone. Each build runs in fresh processes,
+alternated A B B A (A B C C B A for three builds) so that a drift of the
+machine falls on each alike; per process: 60 s idle after the start, the
+comparison's reads (5 warm-up passes and one measured, memory sampled
+every 0.2 s), 60 s of 4 clients without pause over the routes of the
+reads, 60 s idle after the load. Each cell is the median of two
+processes. The image's binary against musl's own, on 20 November:
+
+| Scaled library | musl's own allocator | jemalloc, as the image builds it |
+|---|--:|--:|
+| Idle after the start: RSS / anonymous | 37.7 / 16.8 MiB | 45.9 / 22.8 MiB |
+| The reads: time / CPU | 10.94 / 10.42 s | 8.76 / 8.44 s |
+| The reads: peak anonymous | 124 MiB | 208 MiB |
+| 4 clients: requests per second | 13.3 | 59.2 |
+| 4 clients: p50 / p95 | 68 / 1,882 ms | 28 / 308 ms |
+| 4 clients: peak anonymous | 220 MiB | 295 MiB |
+| Idle after the load: RSS / anonymous | 78.1 / 56.4 MiB | 90.0 / 66.3 MiB |
+| Sonarr `/series`, p50 | 81 ms | 70 ms |
+| Radarr `/movie`, p50 | 361 ms | 275 ms |
+
+The musl binary is `bc038a4`, the jemalloc one `e73c586` (the same code
+with the allocator, and the branches merged before it). Every build that
+was weighed, in six runs on 19 and 20 November, the settings of runs 3 to
+5 given in the environment; between runs the figures of one build moved
+by up to 6 %:
+
+| Build | Run | Idle: RSS / anon, MiB | The reads | 4 clients: req/s | p95 | Peak, MiB | After the load: RSS / anon, MiB |
+|---|--:|--:|--:|--:|--:|--:|--:|
+| glibc, default arenas | 1 | 56.5 / 31.2 | 7.22 s | 59.1 | 345 ms | 308 | 75.2 / 49.6 |
+| musl's own | 1 | 39.9 / 17.6 | 11.34 s | 13.0 | 1,954 ms | 228 | 80.5 / 57.5 |
+| musl's own | 2 | 39.0 / 16.7 | 11.65 s | 13.2 | 1,925 ms | 221 | 79.1 / 56.1 |
+| mimalloc 3, its defaults | 2 | 90.3 / 67.7 | 9.05 s | 57.9 | 329 ms | 440 | 234.3 / 211.3 |
+| mimalloc 3, `MIMALLOC_PURGE_DELAY=0` | 3 | 77.0 / 54.4 | 10.13 s | 47.6 | 411 ms | 297 | 181.5 / 158.4 |
+| mimalloc 2, its defaults | 3 | 406.2 / 383.6 | 9.80 s | 54.6 | 336 ms | 649 | 387.3 / 364.3 |
+| jemalloc, its defaults | 3 | 52.4 / 29.5 | 9.04 s | 58.6 | 308 ms | 552 | 122.6 / 99.0 |
+| jemalloc, background thread | 3 | 50.1 / 27.3 | 8.78 s | 59.8 | 299 ms | 570 | 99.3 / 75.8 |
+| jemalloc, background thread | 4 | 50.3 / 27.5 | 8.90 s | 60.0 | 304 ms | 559 | 99.1 / 75.6 |
+| jemalloc, background thread, 1 s decay | 4 | 47.6 / 24.8 | 9.18 s | 58.8 | 320 ms | 381 | 97.6 / 74.1 |
+| jemalloc, background thread, 4 arenas | 4 | 48.5 / 25.7 | 8.71 s | 60.9 | 301 ms | 406 | 91.2 / 67.6 |
+| jemalloc, background thread, 4 arenas | 5 | 48.0 / 25.2 | 8.64 s | 61.8 | 295 ms | 442 | 91.7 / 68.2 |
+| jemalloc, all three | 5 | 45.7 / 22.9 | 8.54 s | 60.0 | 306 ms | 326 | 90.9 / 67.3 |
+| jemalloc, all three, compiled in | 6 | 45.9 / 22.8 | 8.76 s | 59.2 | 308 ms | 295 | 90.0 / 66.3 |
+| musl's own | 6 | 37.7 / 16.8 | 10.94 s | 13.3 | 1,882 ms | 220 | 78.1 / 56.4 |
+
+Under concurrent requests musl's own allocator serves 22 % of what glibc's
+or jemalloc serve, with a p95 six times as long. One
+request at a time it is slower too: Radarr's `/movie` at 361 ms against
+275 ms with jemalloc and 232 ms with glibc (run 1). Every other allocator
+brings the speed back; they differ in what they keep. mimalloc keeps what
+it took (234 MiB after the load), even told to purge at once, and its
+version 2 starts at 406 MiB. jemalloc's defaults keep 123 MiB; its
+background thread brings that to 99 MiB, four arenas to 91 MiB, and the
+shorter decay lowers the peak of the reads from 440 to about 230 MiB. All
+three together cost, against musl's own, 8 MiB at rest after the start,
+12 MiB after the load and 75 MiB at the peak under four clients, for
+4.4 times the requests. One request at a time the reads take 18 to 21 %
+longer than with glibc (8.54-8.76 s against 7.22 s in run 1, a run of its
+own).
+The binary grows by 611,200 bytes. Not measured: the ARM64 NAS, and one
+user's bursts of page loads, which the glibc arenas were also measured
+with (above).
 
 ### In production, before the switch
 
