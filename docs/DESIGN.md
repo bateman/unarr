@@ -2679,6 +2679,27 @@ section 22 settles for the URL base.
   next start.
 - **To revisit** if a client is found to rely on the restart.
 
+### 21.10 `Server: Kestrel`, as the originals
+
+Decided by the maintainer on 20 November 2026, among the three options
+below; for row 1.34 of `docs/audit/2-http.md`.
+
+- **The question.** Both originals answer every request with
+  `Server: Kestrel`, the name of their framework's web server (recorded
+  with `scripts/http-probe.py`); Unarr sent no `Server` header.
+- **Options.**
+  - *No header*, as before.
+  - *`Server: Kestrel`* (chosen): the originals' header, on every answer.
+  - *`Server: Unarr`*: a name of its own.
+- **Why.** No reason came with the choice. What speaks for it: the
+  answers are the originals' to the header too, and a client or a script
+  that looks at it, none known, sees what it saw before.
+- **Cost.** The header names a server that is not the one running, which
+  a scanner reading it takes at its word.
+- **How it is done** (the implementer's choice): from the outermost layer
+  of the router, so the host filter's 400 and a panic's 500 carry it as the
+  originals' do (`http::server_header`).
+
 ## 22. The server outside the API, as the originals' pipeline
 
 The low rows of `docs/audit/2-http.md` left open or partial by the triage
@@ -2766,5 +2787,5 @@ could not settle it. What changed, and what was decided on the way:
   the hash is looked at.
 - **`Server: Kestrel`.** The originals' web server names itself on every
   answer; Unarr sends the same name, by the maintainer's decision
-  (20 November 2026), from the outermost layer, so the host filter's 400
-  and a panic's 500 carry it as well (`docs/audit/7-triage.md`, row 1.34).
+  (section 21.10), from the outermost layer, so the host filter's 400 and
+  a panic's 500 carry it as well (`docs/audit/7-triage.md`, row 1.34).

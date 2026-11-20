@@ -17,7 +17,7 @@ that source.
 | 4. Requests the web UI makes | [3-4-routes.md](3-4-routes.md), table B | 242 calls | 23 missing, 3 parameters ignored |
 | 5. The UI at several screen densities | [5-browser.md](5-browser.md) | 36 pages on 5 screens | none |
 | 6. Event handlers, commands, housekeeping | [6-events.md](6-events.md) | 214 entries | 29 missing, 6 partial, none high |
-| 7. Where each row stands now | [7-triage.md](7-triage.md) | 193 rows of reports 1, 2, 3, 4 and 6 | 1 open |
+| 7. Where each row stands now | [7-triage.md](7-triage.md) | 193 rows of reports 1, 2, 3, 4 and 6 | none open |
 | 8. The same method on Radarr | [8-radarr.md](8-radarr.md) | 259 routes, 79 UI paths, 15 settings, 35 commands, 324 requests | 9 found, 9 closed; a tenth found later, closed |
 
 The search, grab, import and delete chains are complete. The gaps are at
@@ -166,6 +166,6 @@ followed, each recorded on the original first: the routes Sonarr declares
 and Unarr did not, the events, housekeeping and settings rows, and the low
 rows of the server outside the API; the interface language and the moment
 allowed hosts apply are decisions to differ (sections 21.7 and 21.9). The
-rows now stand at 165 closed, 1 open (the `Server` header, for the
-maintainer), 13 deliberate and 14 not applicable; the triage says which
-and how, and what of the same was closed on Radarr's side.
+rows now stand at 166 closed, 13 deliberate and 14 not applicable, none
+open; the triage says which and how, and what of the same was closed on
+Radarr's side.

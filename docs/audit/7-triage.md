@@ -39,22 +39,23 @@ recorded on the original (`tests/fixtures/sonarr/golden-audit`); the
 events, housekeeping and settings rows likewise (`golden-events`,
 `golden-legacy-user`, `golden-housekeeping`, on both originals); the low
 rows of `2-http.md` were recorded on both with `scripts/http-probe.py`
-and closed (`docs/DESIGN.md`, section 22). Three are deliberate by the
-maintainer's decision of the same day: the interface stays English
-(`UILanguage`, section 21.7), and allowed hosts and trusted networks apply
-as soon as they are saved (row 1.35, section 21.9); Brotli, which closing
-row 1.19 brought in, is kept (section 21.8). The one row open is 1.34, the
-`Server` header, which waits for the maintainer.
+and closed (`docs/DESIGN.md`, section 22). The maintainer decided the
+rest the same day: the interface stays English (`UILanguage`, section
+21.7) and allowed hosts and trusted networks apply as soon as they are
+saved (row 1.35, section 21.9), both deliberate; Brotli, which closing
+row 1.19 brought in, is kept (section 21.8); and Unarr sends
+`Server: Kestrel`, as the originals do (row 1.34, section 21.10). No row
+is open.
 
 ## Result
 
 | Report | Rows | Closed | Open | Partial | Deliberate | Not applicable |
 |--------|------|--------|------|---------|------------|----------------|
 | 1. Settings | 18 | 14 | 0 | 0 | 2 | 2 |
-| 2. HTTP | 58 | 51 | 1 | 0 | 5 | 1 |
+| 2. HTTP | 58 | 52 | 0 | 0 | 5 | 1 |
 | 3 and 4. Routes and UI calls | 78 | 64 | 0 | 0 | 4 | 10 |
 | 6. Events, commands, housekeeping | 39 | 36 | 0 | 0 | 2 | 1 |
-| Together | 193 | 165 | 1 | 0 | 13 | 14 |
+| Together | 193 | 166 | 0 | 0 | 13 | 14 |
 
 Before the first update: 83 closed, 78 open, 13 partial, 6 deliberate;
 before the fourth, 102 closed, 60 open, 10 partial; before the fifth, 112
@@ -142,8 +143,8 @@ The rest was routes nobody is known to call (`GET` by id on the
 `qualitydefinition/limits`), headers nobody is known to read (three static
 content types, the backup's type), `robots.txt`, Brotli, the 503 while
 starting, the console log settings, the deprecated
-`CheckForFinishedDownload`, the legacy `config.xml` user: all closed on
-20 November 2026. Left: the `Server` header (1.34), for the maintainer.
+`CheckForFinishedDownload`, the legacy `config.xml` user, the `Server`
+header: all closed on 20 November 2026.
 
 The maintainer's installation, by the fixtures: no URL base, no script
 import, Change File Date off, English UI, Traefik in front (which passes
@@ -316,8 +317,8 @@ with them where there was something to close
 
 ## The server outside the API bodies (`2-http.md`)
 
-58 rows were DIFFERENT, MISSING or UNSURE: 51 closed, 1 open, 5
-deliberate, 1 not applicable. Read, and where reading did not settle it tried
+58 rows were DIFFERENT, MISSING or UNSURE: 52 closed, 5 deliberate, 1
+not applicable. Read, and where reading did not settle it tried
 on a debug build of `unarrd` on the Sonarr fixture ("live"). The original's
 side of rows 1.6, 1.11, 1.15, 1.18, 1.30, 1.34, 2.12, 4.11 and 4.20, which
 `scripts/http-audit.py` does not probe (no static file, no wrong-case path
@@ -352,7 +353,7 @@ is `crates/unarr-api/src/`.
 | 1.30 | 406 for an `Accept` without JSON | low | CLOSED | `api/http.rs` (`negotiate`, in `finish` and `ping_answer`): once the action has run (a write is done), a JSON result `Accept` does not take is an empty 406 with the other headers, no `Location`; `*/*` anywhere, or no `Accept`, takes it; Radarr's formatter writes `text/json` for `text/json` and `text/*`; the exception handler's answers are not negotiated; test `an_accept_without_json_is_406_once_the_action_has_run`; recorded on both (`scripts/http-probe.py`, `lowhttp*`) | `/ping`'s 406 carries no cache headers, `/ping` being uncached by choice |
 | 1.31 | `application/json; charset=utf-8` | low | CLOSED | `api/http.rs:89` | |
 | 1.32 | `HEAD` | low | CLOSED | `api/lib.rs` (`open_takes_its_methods`, `pages_take_get_only`): `HEAD` finds an action on `/ping` alone; elsewhere, covers and content included, it is the 405 endpoint: 401 without the key under every method, a cookie not taken, 405 `Allow: GET` with it, kept a year outside the API; test `head_finds_no_action_but_on_ping`; recorded on both (`scripts/http-probe.py`, `lowhttp*`) | |
-| 1.34 | `Server` header | low | CLOSED | `Server: Kestrel` on every answer, as recorded on both originals, by the maintainer's decision (20 November 2026): `api/http.rs` (`server_header`), the outermost layer (`api/lib.rs`), so the host filter's 400 and a panic's 500 carry it too; test `tests/http.rs` (`every_answer_names_kestrel_as_the_originals_do`) | |
+| 1.34 | `Server` header | low | CLOSED | `Server: Kestrel` on every answer, as recorded on both originals, by the maintainer's decision (`docs/DESIGN.md` section 21.10): `api/http.rs` (`server_header`), the outermost layer (`api/lib.rs`), so the host filter's 400 and a panic's 500 carry it too; test `tests/http.rs` (`every_answer_names_kestrel_as_the_originals_do`) | |
 | 1.35 | what applies without a restart | unsure | DELIBERATE | the URL base is read once where the originals read it once (`AppState::url_base`): the routes, the pages' links, the manifest and the tile description, the session cookie's path; `/initialize.json` and the login's two redirects read it on each request in both (`InitializeJsonController.cs`, `AuthenticationController.cs`); test `a_url_base_saved_from_the_ui_sends_no_request_round_in_circles` | allowed hosts and trusted networks apply at once, where the original waits for the restart, by decision (`docs/DESIGN.md` section 21.9) |
 | 2.1 | `/ping` | high | CLOSED | `api/lib.rs:326` | |
 | 2.2 | the calendar feed | high | CLOSED | `api/routes/mod.rs:47` | |
