@@ -166,6 +166,12 @@ pub async fn action(
 }
 
 /// `DELETE /metadata/{id}`: `{}`, whether there was such a consumer or not.
+///
+/// A difference: a built-in consumer deleted here (Kodi, Plex, Roksbox,
+/// WDTV, Kometa) stays gone. The originals insert any of theirs missing
+/// from the table at every start, disabled and with default settings
+/// (`MetadataFactory.InitializeProviders`); Unarr does not. The UI has no
+/// button for this request.
 pub async fn delete(State(state): State<AppState>, Path(id): Path<i64>) -> ApiResult<Json<Value>> {
     let removed = state
         .db()
