@@ -34,12 +34,38 @@ fn group_name(weight: i64) -> &'static str {
 /// application knows, none for one it does not. Returns how many were
 /// added.
 pub fn insert_missing_definitions(conn: &Connection) -> anyhow::Result<usize> {
-    let existing = store::catalog::list_quality_definitions(conn)?;
-    let mut added = 0;
     let mut by_weight: Vec<&crate::quality::QualityDefault> = SONARR_QUALITIES.iter().collect();
     by_weight.sort_by_key(|d| d.weight);
-    for default in by_weight {
-        if existing.iter().any(|d| d.quality_id == default.quality.id) {
+    let rows: Vec<DefinitionRow> = by_weight
+        .iter()
+        .map(|d| DefinitionRow {
+            quality_id: d.quality.id,
+            title: d.quality.name,
+            min_size: d.min_size,
+            max_size: d.max_size,
+            preferred_size: Some(d.preferred_size),
+        })
+        .collect();
+    insert_definitions(conn, &rows)
+}
+
+/// A quality definition as an application's defaults give it.
+struct DefinitionRow {
+    quality_id: i64,
+    title: &'static str,
+    min_size: f64,
+    max_size: Option<f64>,
+    preferred_size: Option<f64>,
+}
+
+/// The rule both applications share: `rows`, in weight order, inserted
+/// where the table lacks their quality; a definition of a quality not
+/// among them deleted.
+fn insert_definitions(conn: &Connection, rows: &[DefinitionRow]) -> anyhow::Result<usize> {
+    let existing = store::catalog::list_quality_definitions(conn)?;
+    let mut added = 0;
+    for row in rows {
+        if existing.iter().any(|d| d.quality_id == row.quality_id) {
             continue;
         }
         let id = store::sequence::next_id(conn, "quality_definitions")?;
@@ -47,18 +73,18 @@ pub fn insert_missing_definitions(conn: &Connection) -> anyhow::Result<usize> {
             conn,
             &QualityDefinition {
                 id,
-                quality_id: default.quality.id,
-                title: default.quality.name.to_string(),
-                min_size: Some(default.min_size),
-                max_size: default.max_size,
-                preferred_size: Some(default.preferred_size),
+                quality_id: row.quality_id,
+                title: row.title.to_string(),
+                min_size: Some(row.min_size),
+                max_size: row.max_size,
+                preferred_size: row.preferred_size,
             },
         )?;
         added += 1;
     }
     for unknown in existing
         .iter()
-        .filter(|d| !SONARR_QUALITIES.iter().any(|q| q.quality.id == d.quality_id))
+        .filter(|d| !rows.iter().any(|r| r.quality_id == d.quality_id))
     {
         conn.execute(
             "DELETE FROM quality_definitions WHERE id = ?1",
@@ -230,42 +256,26 @@ fn insert_delay_profile(conn: &Connection, bypass_if_highest_quality: bool) -> a
     Ok(true)
 }
 
-/// Radarr's `InsertMissingDefinitions`: a definition for every quality it
-/// knows, in weight order, with the sizes a reset goes back to; none for
-/// one it does not. Returns how many were added.
+/// Radarr's `InsertMissingDefinitions`: the same rule over its own
+/// qualities, with the sizes a reset goes back to. Returns how many were
+/// added.
 pub fn insert_missing_movie_definitions(conn: &Connection) -> anyhow::Result<usize> {
-    let existing = store::catalog::list_quality_definitions(conn)?;
-    let mut added = 0;
-    // The table is in weight order already, ties as Radarr lists them.
-    for default in RADARR_QUALITIES {
-        if existing.iter().any(|d| d.quality_id == default.quality.id) {
-            continue;
-        }
-        let (min_size, max_size, preferred_size) = crate::movies::quality::default_sizes(default.quality.id);
-        let id = store::sequence::next_id(conn, "quality_definitions")?;
-        store::catalog::insert_quality_definition(
-            conn,
-            &QualityDefinition {
-                id,
-                quality_id: default.quality.id,
-                title: default.quality.name.to_string(),
-                min_size: Some(min_size),
+    let mut by_weight: Vec<&crate::movies::quality::MovieQualityDefault> = RADARR_QUALITIES.iter().collect();
+    by_weight.sort_by_key(|d| d.weight);
+    let rows: Vec<DefinitionRow> = by_weight
+        .iter()
+        .map(|d| {
+            let (min_size, max_size, preferred_size) = crate::movies::quality::default_sizes(d.quality.id);
+            DefinitionRow {
+                quality_id: d.quality.id,
+                title: d.quality.name,
+                min_size,
                 max_size,
                 preferred_size,
-            },
-        )?;
-        added += 1;
-    }
-    for unknown in existing
-        .iter()
-        .filter(|d| !RADARR_QUALITIES.iter().any(|q| q.quality.id == d.quality_id))
-    {
-        conn.execute(
-            "DELETE FROM quality_definitions WHERE id = ?1",
-            params![unknown.id],
-        )?;
-    }
-    Ok(added)
+            }
+        })
+        .collect();
+    insert_definitions(conn, &rows)
 }
 
 /// Radarr's profiles of a new installation, when there is none: Any, SD,
