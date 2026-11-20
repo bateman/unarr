@@ -102,6 +102,9 @@ prepare_dirs() {
 # builders to mirror. The indexers are the ones under /movies.
 start_mock() {
     local logfile="$CACHE/mock-requests.jsonl"
+    # The mock's log and certificate go to the cache, which the download
+    # makes only later on a fresh clone.
+    mkdir -p "$CACHE"
     rm -f "$logfile"
     # A stale mock from an earlier run would answer the health check below
     # and swallow the request log.
