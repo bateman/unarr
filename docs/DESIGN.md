@@ -2078,8 +2078,35 @@ the size are in section 20, with why they were not taken.
   queue of nineteen groups that are all Sonarr's, of which Radarr shows
   none. Unarr's clients, configured as Radarr configures them, passed
   against all four as they were, with no request the real Radarr had not
-  made. Any exchange with SABnzbd or Transmission would extend the
-  replays.
+  made. SABnzbd and Transmission, never seen in the maintainer's
+  installations, were recorded in a container instead: the real SABnzbd
+  4.2.2 and Transmission 4.0.5 on loopback, the original Sonarr 4.0.20 and
+  Radarr 6.4.4 on the fixtures (`scripts/sonarr-fixture.sh shell`,
+  `radarr-fixture.sh shell`) talking to them through
+  `scripts/downloadclient-capture.py proxy`, which keeps whole requests
+  (`sabnzbd`, `transmission`, `radarr-sabnzbd`, `radarr-transmission`).
+  Each recording covers the test, two or three grabs pushed with
+  `/release/push`, queue refreshes, and the removals: for Transmission a
+  torrent whose data was in place before the add, verified at 100 %,
+  imported, then removed once stopped at the global ratio, and one left at
+  0 % removed from the queue with "remove from client"; for SABnzbd a job
+  completed and imported, one failed ("Not on your server(s)"), both
+  removed from the history, and one removed from a paused queue. The news
+  server SABnzbd downloaded from is `scripts/nntp-stub.py`, a stand-in
+  that serves yEnc articles cut from a local file and answers 430 for the
+  others: the jobs are real SABnzbd jobs, the Usenet side is not.
+  `crates/unarr-mock/tests/proxy_captures.rs` drives Unarr's clients
+  through each moment of the recordings (`/capture/<name>@<seqs>`) and
+  compares every request with the original's: method, path, query,
+  JSON-RPC body or multipart parts, credentials and session headers. The
+  SABnzbd client needed no change; the Transmission one did, four
+  times: the originals always send basic credentials (empty ones as
+  `Basic Og==`), keep the version six hours instead of asking
+  `session-get` before each `torrent-get`, read the session's seed limits
+  only for a stopped torrent, and fold the doubled separator of a
+  download-dir ending in `/`. Not recorded: a completed SABnzbd job with
+  par2 repair or unpacking, an authenticated Transmission, a magnet
+  added to Transmission, and Transmission before 4.0 (without labels).
 - The memory figures in section 9 come from a glibc build, where
   `malloc_trim` returns freed pages. The published image is a static musl
   build: musl's allocator has no `malloc_trim` (the call is compiled out)

@@ -12,6 +12,16 @@ RUN cargo build --release --locked --bin unarrd \
  && mkdir -p /out/config && cp target/release/unarrd /out/
 
 FROM gcr.io/distroless/static-debian12:nonroot
+# What the image is, for registries and scanners. CI passes the tag (or the
+# branch) and the commit; a local build says dev.
+ARG VERSION=dev
+ARG REVISION=unknown
+LABEL org.opencontainers.image.title="Unarr" \
+      org.opencontainers.image.description="Sonarr and Radarr, reimplemented in Rust, with their own web UIs and APIs" \
+      org.opencontainers.image.source="https://github.com/bateman/unarr" \
+      org.opencontainers.image.licenses="GPL-3.0-or-later" \
+      org.opencontainers.image.version="${VERSION}" \
+      org.opencontainers.image.revision="${REVISION}"
 COPY --from=build /out/unarrd /usr/local/bin/unarrd
 # The daemon runs as the nonroot user (65532) and creates /config/<personality>
 # at start, so the volume's mount point must belong to it. A host directory

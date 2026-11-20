@@ -13,7 +13,12 @@ version = "0.0.1"
 edition = "2021"
 license = "GPL-3.0-or-later"
 repository = "https://github.com/bateman/unarr"
-rust-version = "1.85"
+# The highest of the dependencies' own floors (rusqlite 0.41 today): check
+# it again when a dependency moves, with `cargo metadata`.
+rust-version = "1.89"
+# Unarr ships as an image and as binaries, never on crates.io; this also
+# lets `cargo deny` accept the path dependencies between the crates.
+publish = false
 
 [workspace.dependencies]
 unarr-core = { path = "crates/unarr-core" }
