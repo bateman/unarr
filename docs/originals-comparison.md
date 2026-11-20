@@ -135,10 +135,11 @@ run the comparison again and update this file in the same branch.
 ## Results
 
 Each library has the tables of its latest `report.md`, as the script
-writes them. Measured on 2026-11-18 in the cloud session (x86-64, four
-cores, 16 GB), one run per library, at `4bba6eb`
-(`radarr/history-one-call-streamed-since`, on top of `main` at
-`e1f238e`, before the unwinding below): the
+writes them. Measured on 2026-11-20 in the cloud session (x86-64, four
+cores, 16 GB), one run per library, at `bcd11fb`
+(`core/audit-http-low-rows`, the last of the branches waiting to be
+merged into `main` at `bc038a4`). It holds the code the runs of
+2026-11-18 measured at `4bba6eb`: the
 scheduler on the originals' cadence, Sonarr's wanted lists and calendar
 reading only the series they show, Radarr's answers reading only the
 translations of the movies they show, a queue answer with nothing to
@@ -147,21 +148,24 @@ sorting light rows before it reads the page, Sonarr's series list built
 off the async workers, the parser's and the custom formats' regexes
 built with seek, the custom formats' conditions decoded once per
 request, and Radarr's history read in one database call, its
-`/history/since` streamed.
+`/history/since` streamed. Since then: the unwinding on a panic (issue
+#14, below), the routes, events, settings and server behaviour the audit
+had left open (`docs/audit/7-triage.md`), and the daily ping to plex.tv.
+The tables measure a `cargo build`, with glibc's allocator; the image's
+static musl build, with jemalloc, is measured apart (The image's
+allocator, below).
 
-The machine is noisy from one run to the next. Against the `c53a302`
-runs of the same day (in the History), the originals' routes, queues
-aside, took 12 to 63 % more time on the scaled library, and from 23 %
-less to 23 % more on the real one. On the real library Unarr's Radarr
-routes took 12 to 46 % more time than in the `c53a302` run, and its
-Sonarr routes from 14 % less to 14 % more, though the change does not
-slow them: the binaries before and after, alternated in this container
-after the runs, are within 7 % of each other on every route of the
-reads, queues aside (below the list of slower routes). Unarr's warm-up
-is flagged on both libraries: its last pass took 10 % more CPU than the
-one before on the real library, 11 % on the scaled one.
+The machine is noisy from one run to the next. Against the `4bba6eb`
+runs (in the History), the originals' routes, queues aside, took from
+22 % less to 1 % more time on the scaled library, and from 29 % less to
+17 % more on the real one. Unarr's took from 29 % less to 20 % more on
+the real library, and from 2 % less to 29 % more on the scaled one:
+Radarr's `/history` and `/wanted/missing` 27 % more, Sonarr's
+`/episode` 29 % more. The warm-ups are flagged: the originals' on the
+real library (last pass 11 % below the one before), Unarr's on the
+scaled one (12 % above).
 
-Since those runs the release profile unwinds on a panic instead of
+Since the `4bba6eb` runs the release profile unwinds on a panic instead of
 aborting, and a panic is caught where a request or a command starts
 (`core/survive-a-panic`, issue #14). What that costs was measured on
 2026-11-17 against `main` at `d6c61de`, before the seek change, in one
@@ -186,90 +190,85 @@ route that takes more than a millisecond: `/series` 3.7 and 3.8 ms,
 `/wanted/missing` 4.1 and 4.2 (`d6c61de` first). The catch around a
 request costs nothing that shows.
 
-The tables below are without the unwinding, which came into `main` after
-the commit they measure: it is not a change to the speed or the memory
-of the routes.
-The real library was measured with it on 2026-11-18 at `a402d7c`, that
-branch merged with `main` at `e1f238e` (the code of the `c53a302` run
-with the unwinding), in a container faster than this one (the
-originals' `/series` 6.4 ms, their `/history` 22.4). Unarr held 30 MiB
-at rest there, where it holds 27 here, about what the table above gives
-for the unwinding (28 to 30); its row is in the History.
+The tables below are with the unwinding. The real library was first
+measured with it on 2026-11-18 at `a402d7c`, that branch merged with
+`main` at `e1f238e` (the code of the `c53a302` run with the unwinding);
+its row is in the History. At rest Unarr holds 30 MiB on the real
+library and 34 on the scaled one, where it held 27 and 32 at `4bba6eb`,
+without it: about what the table above gives for the unwinding (28 to
+30).
 
 ### Real library (38 series, 193 movies)
 
-Library `real`; Unarr `4bba6eb, sha256 fc79e577a7cd`; Sonarr 4.0.20.3014, Radarr 6.4.4.10685; first start 300 s, idle 900 s, tail 300 s; .NET heap limit 768 MiB; **warm-up not settled for unarr: raise --warmup**; 5 warm-up passes; 2026-11-18.
+Library `real`; Unarr `bcd11fb, sha256 ee51341040be`; Sonarr 4.0.20.3014, Radarr 6.4.4.10685; first start 300 s, idle 900 s, tail 300 s; .NET heap limit 768 MiB; **warm-up not settled for originals: raise --warmup**; 5 warm-up passes; 2026-11-20.
 
 | | Sonarr + Radarr | Unarr | Less |
 |---|--:|--:|--:|
-| First answer on both ports | 1.58 s | 0.20 s | 8.0× sooner |
-| Idle, at the end of the idle window: RSS | 486 MiB | 27 MiB | 94 % |
-| Same, anonymous memory | 270 MiB | 10 MiB | 96 % |
-| Idle CPU, from minute 5 of the window | 18.5 s/h | 1.1 s/h | 94 % |
-| The reads: CPU | 3.06 s | 1.07 s | 65 % |
-| The reads: time | 2.97 s | 1.23 s | 58 % |
-| Peak anonymous memory during the reads | 379 MiB | 45 MiB | 88 % |
-| Anonymous memory at the end of the tail | 377 MiB | 38 MiB | 90 % |
-| Idle CPU in the tail, from its first minute | 8.8 s/h | 0.6 s/h | 93 % |
+| First answer on both ports | 1.67 s | 0.21 s | 7.9× sooner |
+| Idle, at the end of the idle window: RSS | 488 MiB | 30 MiB | 94 % |
+| Same, anonymous memory | 273 MiB | 10 MiB | 96 % |
+| Idle CPU, from minute 5 of the window | 17.7 s/h | 1.1 s/h | 94 % |
+| The reads: CPU | 3.00 s | 1.02 s | 66 % |
+| The reads: time | 2.86 s | 1.19 s | 59 % |
+| Peak anonymous memory during the reads | 375 MiB | 46 MiB | 88 % |
+| Anonymous memory at the end of the tail | 390 MiB | 39 MiB | 90 % |
+| Idle CPU in the tail, from its first minute | 9.0 s/h | 0.7 s/h | 92 % |
 
 | p50 / max, ms | Originals | Unarr |
 |---|--:|--:|
-| Sonarr /api/v3/series | 7.8 / 13.5 | 3.9 / 5.9 |
-| Sonarr /api/v3/history | 28.2 / 39.3 | 4.4 / 7.2 |
-| Sonarr /api/v3/wanted/missing | 4.5 / 32.0 | 2.5 / 2.8 |
-| Sonarr /api/v3/calendar | 4.1 / 5.4 | 1.9 / 2.2 |
-| Sonarr /api/v3/queue | 1.6 / 2.0 | 0.6 / 0.9 |
-| Radarr /api/v3/movie | 23.4 / 72.4 | 24.8 / 44.9 |
-| Radarr /api/v3/history | 25.2 / 28.9 | 8.3 / 15.1 |
-| Radarr /api/v3/wanted/missing | 21.8 / 38.7 | 4.4 / 5.0 |
-| Radarr /api/v3/calendar | 14.4 / 16.0 | 5.1 / 6.7 |
-| Radarr /api/v3/queue | 1.6 / 2.0 | 0.6 / 1.3 |
-| Sonarr /api/v3/episode | 6.0 / 48.4 | 2.5 / 4.9 |
+| Sonarr /api/v3/series | 8.4 / 13.0 | 4.0 / 21.8 |
+| Sonarr /api/v3/history | 27.1 / 36.1 | 4.6 / 7.2 |
+| Sonarr /api/v3/wanted/missing | 4.7 / 8.4 | 3.0 / 5.4 |
+| Sonarr /api/v3/calendar | 4.8 / 5.4 | 1.9 / 2.4 |
+| Sonarr /api/v3/queue | 1.6 / 1.9 | 0.9 / 1.1 |
+| Radarr /api/v3/movie | 23.8 / 53.1 | 20.1 / 27.9 |
+| Radarr /api/v3/history | 25.3 / 36.4 | 8.9 / 14.3 |
+| Radarr /api/v3/wanted/missing | 17.9 / 35.3 | 3.9 / 6.8 |
+| Radarr /api/v3/calendar | 10.2 / 15.5 | 3.6 / 4.0 |
+| Radarr /api/v3/queue | 1.6 / 1.8 | 0.6 / 1.0 |
+| Sonarr /api/v3/episode | 5.3 / 40.8 | 2.4 / 5.2 |
 
 ### Scaled library (950 series, 2,123 movies)
 
-Library `scaled`; Unarr `4bba6eb, sha256 fc79e577a7cd`; Sonarr 4.0.20.3014, Radarr 6.4.4.10685; first start 300 s, idle 900 s, tail 300 s; .NET heap limit 768 MiB; **warm-up not settled for unarr: raise --warmup**; 5 warm-up passes; 2026-11-18.
+Library `scaled`; Unarr `bcd11fb, sha256 ee51341040be`; Sonarr 4.0.20.3014, Radarr 6.4.4.10685; first start 300 s, idle 900 s, tail 300 s; .NET heap limit 768 MiB; **warm-up not settled for unarr: raise --warmup**; 5 warm-up passes; 2026-11-20.
 
 | | Sonarr + Radarr | Unarr | Less |
 |---|--:|--:|--:|
-| First answer on both ports | 1.67 s | 0.28 s | 6.1× sooner |
-| Idle, at the end of the idle window: RSS | 541 MiB | 32 MiB | 94 % |
-| Same, anonymous memory | 325 MiB | 15 MiB | 96 % |
-| Idle CPU, from minute 5 of the window | 17.0 s/h | 1.2 s/h | 93 % |
-| The reads: CPU | 19.04 s | 6.85 s | 64 % |
-| The reads: time | 17.72 s | 7.13 s | 60 % |
-| Peak anonymous memory during the reads | 576 MiB | 249 MiB | 57 % |
-| Anonymous memory at the end of the tail | 510 MiB | 45 MiB | 91 % |
-| Idle CPU in the tail, from its first minute | 9.6 s/h | 2.4 s/h | 75 % |
+| First answer on both ports | 1.60 s | 0.29 s | 5.5× sooner |
+| Idle, at the end of the idle window: RSS | 542 MiB | 34 MiB | 94 % |
+| Same, anonymous memory | 326 MiB | 15 MiB | 95 % |
+| Idle CPU, from minute 5 of the window | 16.5 s/h | 1.2 s/h | 93 % |
+| The reads: CPU | 17.29 s | 7.24 s | 58 % |
+| The reads: time | 16.06 s | 7.53 s | 53 % |
+| Peak anonymous memory during the reads | 558 MiB | 195 MiB | 65 % |
+| Anonymous memory at the end of the tail | 537 MiB | 46 MiB | 91 % |
+| Idle CPU in the tail, from its first minute | 8.2 s/h | 1.2 s/h | 85 % |
 
 | p50 / max, ms | Originals | Unarr |
 |---|--:|--:|
-| Sonarr /api/v3/series | 217.8 / 245.1 | 50.5 / 69.9 |
-| Sonarr /api/v3/history | 58.4 / 99.3 | 23.3 / 25.3 |
-| Sonarr /api/v3/wanted/missing | 16.6 / 32.5 | 11.6 / 13.8 |
-| Sonarr /api/v3/calendar | 75.3 / 124.1 | 5.8 / 7.1 |
-| Sonarr /api/v3/queue | 1.7 / 2.6 | 0.4 / 0.7 |
-| Radarr /api/v3/movie | 294.5 / 434.9 | 222.7 / 262.5 |
-| Radarr /api/v3/history | 43.1 / 57.4 | 10.5 / 17.6 |
-| Radarr /api/v3/wanted/missing | 32.9 / 37.7 | 6.2 / 7.9 |
-| Radarr /api/v3/calendar | 113.2 / 200.5 | 9.4 / 17.9 |
-| Radarr /api/v3/queue | 1.6 / 3.1 | 0.5 / 1.0 |
-| Sonarr /api/v3/episode | 6.1 / 39.6 | 2.4 / 4.3 |
+| Sonarr /api/v3/series | 185.9 / 244.4 | 54.5 / 67.8 |
+| Sonarr /api/v3/history | 55.6 / 70.7 | 23.0 / 27.3 |
+| Sonarr /api/v3/wanted/missing | 12.9 / 21.2 | 11.4 / 12.5 |
+| Sonarr /api/v3/calendar | 75.8 / 115.0 | 6.6 / 12.8 |
+| Sonarr /api/v3/queue | 1.5 / 2.6 | 0.7 / 0.9 |
+| Radarr /api/v3/movie | 265.0 / 319.1 | 233.6 / 280.8 |
+| Radarr /api/v3/history | 41.5 / 95.4 | 13.3 / 16.6 |
+| Radarr /api/v3/wanted/missing | 25.6 / 57.8 | 7.9 / 9.0 |
+| Radarr /api/v3/calendar | 90.3 / 134.5 | 10.2 / 13.1 |
+| Radarr /api/v3/queue | 1.6 / 2.0 | 0.5 / 1.1 |
+| Sonarr /api/v3/episode | 5.3 / 45.6 | 3.1 / 6.3 |
 
 Where Unarr is slower than the original, in these tables (whoever updates
 the tables updates this list from them, as CLAUDE.md says):
 
-- Radarr's `/movie` on the real library, 24.8 ms against 23.4, in this
-  run only. The change leaves its work as it was (its movie context is
-  read by the same queries, moved into `ContextReader`), and the binaries
-  before and after, alternated in this container after the runs, take
-  19.9 and 21.0 ms. In the `c53a302` run it took 18.7 ms against 27.7,
-  in the `a402d7c` run 18.0 against 17.8; on the scaled library it takes
-  222.7 ms against 294.5.
+On the real library, none at p50. Radarr's `/movie`, the one route of
+this list in the `4bba6eb` run (24.8 ms against 23.4 there), takes 20.1
+ms against 23.8. One maximum is above the original's: Sonarr's
+`/series`, 21.8 ms against 13.0, where its p50 is 4.0 against 8.4.
 
 On the scaled library, none.
 
-The binaries before (`main`) and after the change of these runs,
+The binaries before (`main`) and after the change of the `4bba6eb` runs,
 alternated in this container after the runs (before, after, after,
 before, each a fresh process with five warm-up passes of the reads and
 five measured ones), p50 in ms:
@@ -433,7 +432,7 @@ from 2.2 ms to 0.3 on the scaled library (the original: 1.4) and from
 
 Unarr's peak anonymous memory during the reads on the scaled library
 goes from about 140 MiB to about 260 from one run to the next (140, 196,
-257, 261, 205, 196, 202 and 249 in the last eight), and the code is not
+257, 261, 205, 196, 202, 249 and 195 in the last nine), and the code is not
 what decides it.
 glibc gives a thread that allocates under contention an arena of its
 own, so a large answer (Radarr's `/movie`, 2,123 movies) built on a
@@ -600,6 +599,8 @@ idle CPU of each side.
 
 | Date | Library | Unarr | Runs | Originals: idle RSS / CPU | Unarr: idle RSS / CPU | Note |
 |---|---|---|--:|--:|--:|---|
+| 2026-11-20 | scaled | `bcd11fb` | 1 | 542 MiB / 16.5 s/h | 34 MiB / 1.2 s/h | the audit's routes, events, settings and server behaviour, the plex.tv ping, the unwinding of #14; the originals' routes up to 22 % faster than in the `4bba6eb` run; Unarr's warm-up flagged (last pass 12 % above the one before) and its routes up to 29 % slower |
+| 2026-11-20 | real | `bcd11fb` | 1 | 488 MiB / 17.7 s/h | 30 MiB / 1.1 s/h | the same; the originals' warm-up flagged (last pass 11 % below the one before), noise |
 | 2026-11-18 | scaled | `4bba6eb` | 1 | 541 MiB / 17.0 s/h | 32 MiB / 1.2 s/h | Radarr's history read in one database call, its `/history/since` (not in the reads) streamed; the originals' routes 12-63 % slower than in the `c53a302` run; Unarr's warm-up flagged (last pass 11 % above the one before), noise |
 | 2026-11-18 | real | `4bba6eb` | 1 | 486 MiB / 18.5 s/h | 27 MiB / 1.1 s/h | Radarr's history read in one database call, its `/history/since` (not in the reads) streamed; Unarr's warm-up flagged (last pass 10 % above the one before) and its Radarr routes 12-46 % slower than in the `c53a302` run, noise: the binaries alternated are within 7 % |
 | 2026-11-18 | real | `a402d7c` | 1 | 481 MiB / 14.4 s/h | 30 MiB / 1.1 s/h | the unwinding of #14 merged with the seek change; the binary 34.8 MiB; a faster container than the `c53a302` run; Unarr's warm-up flagged (last pass 14 % below the one before); the scaled library not measured |
