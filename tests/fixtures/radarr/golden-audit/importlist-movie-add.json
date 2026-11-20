@@ -8,7 +8,7 @@
         "monitor": "movieOnly",
         "searchForMovie": false
       },
-      "added": "2026-11-13T15:38:04Z",
+      "added": "2026-11-20T07:24:10Z",
       "alternateTitles": [
         {
           "movieMetadataId": 0,
@@ -361,7 +361,7 @@
       "youTubeTrailerId": "LY19rHKAaAg"
     }
   ],
-  "recordedAt": "2026-11-13T15:38:05Z",
+  "recordedAt": "2026-11-20T07:24:10Z",
   "request": {
     "body": "bodies/importlist-movie-add.json",
     "method": "POST",

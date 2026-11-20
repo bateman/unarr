@@ -454,12 +454,62 @@ pub async fn metadata_update(
 }
 
 /// `POST /metadata/test`: a metadata consumer has nothing to connect to,
-/// so the test passes on anything the resource rules accept.
-pub async fn metadata_test(Json(body): Json<Value>) -> ApiResult<Json<Value>> {
+/// so the test passes on anything the resource rules accept: those of
+/// `ProviderControllerBase` (a name, one no other consumer has, an
+/// implementation and a contract), then the mapping to a definition, which
+/// throws for an implementation the original does not know.
+pub async fn metadata_test(State(state): State<AppState>, Json(body): Json<Value>) -> ApiResult<Json<Value>> {
+    use crate::error::ApiError;
+    use unarr_core::validation::ValidationFailure;
     if !body.is_object() {
-        return Err(crate::error::ApiError::BadRequest(
+        return Err(ApiError::BadRequest(
             "The request body must be a JSON object".into(),
         ));
+    }
+    let id = body["id"].as_i64().unwrap_or(0);
+    let all = state
+        .db()
+        .call(|conn| store::providers::list_providers(conn, ProviderKind::Metadata))
+        .await?;
+    let name = body["name"].as_str().unwrap_or("");
+    let mut failures = Vec::new();
+    if name.trim().is_empty() {
+        failures.push(ValidationFailure::not_empty("Name", body["name"].clone()));
+    }
+    if all
+        .iter()
+        .any(|p| p.name.eq_ignore_ascii_case(name) && p.id != id)
+    {
+        failures.push(ValidationFailure::rule(
+            "Name",
+            "PredicateValidator",
+            "Should be unique",
+            body["name"].clone(),
+        ));
+    }
+    for (property, key) in [
+        ("Implementation", "implementation"),
+        ("ConfigContract", "configContract"),
+    ] {
+        if body[key].as_str().unwrap_or("").trim().is_empty() {
+            failures.push(ValidationFailure::not_empty(property, body[key].clone()));
+        }
+    }
+    if !failures.is_empty() {
+        return Err(ApiError::Validation(failures));
+    }
+    let implementation = body["implementation"].as_str().unwrap_or("");
+    if schemas::lookup(
+        state.personality(),
+        SchemaKind::Provider(ProviderKind::Metadata),
+        implementation,
+    )
+    .is_none()
+    {
+        return Err(ApiError::ServerException {
+            message: "Value can not be null. (Parameter 'targetType')".into(),
+            exception: "System.ArgumentNullException".into(),
+        });
     }
     Ok(Json(json!({})))
 }

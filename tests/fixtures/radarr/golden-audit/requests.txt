@@ -26,6 +26,11 @@ metadata-after-update GET /api/v3/metadata/1
 metadata-restore PUT /api/v3/metadata/1 bodies/metadata-restore.json
 metadata-update-missing PUT /api/v3/metadata/999 bodies/metadata-update-missing.json
 metadata-test POST /api/v3/metadata/test bodies/metadata-test.json
+# A test checks the name as a save does: another consumer's, or none,
+# is a 400; an implementation nobody knows, the original's 500.
+metadata-test-duplicate POST /api/v3/metadata/test bodies/metadata-test-duplicate.json
+metadata-test-noname POST /api/v3/metadata/test bodies/metadata-test-noname.json
+metadata-test-unknown POST /api/v3/metadata/test bodies/metadata-test-unknown.json
 metadata-testall POST /api/v3/metadata/testall
 
 # The folder a movie would have under the naming settings, which the

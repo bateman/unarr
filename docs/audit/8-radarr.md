@@ -34,7 +34,11 @@ Every fix below was recorded from the real Radarr first, into
    not routed for Radarr, nor `POST /metadata/test` and `/testall`.
    Medium, the same finding Sonarr's audit numbered 11. Fixed; a name
    another consumer has is the 400 the original's shared rules answer,
-   before it reads the provider.
+   before it reads the provider. The test answered `{}` to anything until
+   a later review found the original checks it as it checks a save: a
+   name another consumer has, or none, is a 400, and an implementation it
+   does not know a 500 (goldens `metadata-test-duplicate`, `-noname`,
+   `-unknown`). Fixed.
 3. **Six commands the UI posts were refused** (`ClearLog`,
    `DeleteLogFiles`, `DeleteUpdateLogFiles`, `ResetApiKey`,
    `ClearBlocklist`, `ApplicationCheckUpdate`): Radarr's personality took

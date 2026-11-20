@@ -16,14 +16,14 @@
     "id": 472960,
     "name": "ApplicationCheckUpdate",
     "priority": "normal",
-    "queued": "2026-11-13T15:38:16Z",
+    "queued": "2026-11-20T07:24:21Z",
     "result": "unknown",
     "sendUpdatesToClient": true,
     "status": "queued",
     "trigger": "manual",
     "updateScheduledTask": true
   },
-  "recordedAt": "2026-11-13T15:38:16Z",
+  "recordedAt": "2026-11-20T07:24:21Z",
   "request": {
     "body": "bodies/command-check-update.json",
     "method": "POST",

@@ -1,0 +1,9 @@
+{
+ "$from": "metadata-1",
+ "$set": {
+  "id": 0,
+  "name": "Nothing Known",
+  "implementation": "NothingKnownMetadata",
+  "configContract": "NothingKnownSettings"
+ }
+}

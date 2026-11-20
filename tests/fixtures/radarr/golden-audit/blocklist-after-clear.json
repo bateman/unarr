@@ -7,7 +7,7 @@
     "sortKey": "date",
     "totalRecords": 0
   },
-  "recordedAt": "2026-11-13T15:38:26Z",
+  "recordedAt": "2026-11-20T07:24:31Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/blocklist?page=1&pageSize=5"
