@@ -50,8 +50,10 @@ original again, which does not know what Unarr did meanwhile.
 `docs/audit/7-triage.md` lists every row, and `docs/DESIGN.md` section 21
 the decisions with their options. In short: import scripts are not run
 (a health warning says so), the hub is served over WebSockets only, the UI
-is in English only, notifications other than Discord, the webhook and Plex
-keep their settings and send nothing.
+is in English only, allowed hosts and trusted networks apply without a
+restart, no `Server` header is sent (a decision still to take),
+notifications other than Discord, the webhook and Plex keep their settings
+and send nothing.
 
 **The image**: `ghcr.io/bateman/unarr`, a static musl build on distroless,
 for amd64 and arm64, with jemalloc as its allocator (musl's own served a
