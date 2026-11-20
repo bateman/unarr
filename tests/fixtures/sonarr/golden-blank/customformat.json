@@ -1,0 +1,9 @@
+{
+  "body": [],
+  "recordedAt": "2026-11-20T15:12:25Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/customformat"
+  },
+  "status": 200
+}

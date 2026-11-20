@@ -1,0 +1,14 @@
+# What Sonarr puts in a database it creates at its first start: the
+# quality definitions, the quality profiles, the delay profile and the
+# metadata consumers. A recording of its own; same format as
+# ../golden/requests.txt. setup.sh removes the fixture's database, so the
+# recorder's login finds no user: only the API key is used.
+#
+#   GOLDEN_SETUP=tests/fixtures/sonarr/golden-blank/setup.sh \
+#       GOLDEN_REQUESTS=tests/fixtures/sonarr/golden-blank/requests.txt \
+#       GOLDEN_OUT=tests/fixtures/sonarr/golden-blank make golden
+qualitydefinition GET /api/v3/qualitydefinition
+qualityprofile GET /api/v3/qualityprofile
+delayprofile GET /api/v3/delayprofile
+metadata GET /api/v3/metadata
+customformat GET /api/v3/customformat
