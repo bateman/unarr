@@ -753,6 +753,8 @@ pub fn router(state: AppState) -> Router {
         // Outermost, as the originals' exception handler is: a panic in a
         // page, in `/ping` or in a layer above costs that request only.
         .layer(axum::middleware::from_fn(http::catch_panic_anywhere))
+        // Kestrel's name on every answer, the host filter's and a panic's too.
+        .layer(axum::middleware::map_response(http::server_header))
 }
 
 #[cfg(test)]

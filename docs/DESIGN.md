@@ -2535,8 +2535,9 @@ could not settle it. What changed, and what was decided on the way:
   originals' do. The encoder costs the release binary 1,126,528 bytes,
   522,738 under `gzip -9` (two release builds of this branch, with and
   without it), on a binary already at the image target (section 9).
-  Dropping it is one feature of tower-http (`compression-br`) and two
-  assertions of a test.
+  Kept by the maintainer's decision (20 November 2026): what clients save
+  on the wire is worth the half megabyte. Dropping it would be one feature
+  of tower-http (`compression-br`) and two assertions of a test.
 - **503 while starting.** The daemon binds the listener and serves before
   the command runtime starts, and `StartingUpMiddleware`'s answer stands
   for every authenticated request until it has: a proxy shows a 503 rather
@@ -2547,7 +2548,10 @@ could not settle it. What changed, and what was decided on the way:
   session cookie's path (`AppState::url_base`). `/initialize.json` and the
   login's redirects read the settings on each request, as the originals'
   controllers do. A base saved from the UI is applied by the restart, as in
-  the originals; allowed hosts and trusted networks still apply at once
+  the originals. Allowed hosts and trusted networks apply as soon as they
+  are saved, where the originals wait for the restart: the maintainer's
+  decision (20 November 2026), so that a list saved wrong is corrected
+  from the UI without a restart, and one saved right protects at once
   (`docs/audit/7-triage.md`, row 1.35).
 - **Smaller ones.** The request log under `Http` and `Api` (`unarrd` lets
   them through at trace and debug); the login form signs nobody in when the
@@ -2559,6 +2563,7 @@ could not settle it. What changed, and what was decided on the way:
   (`application/x-zip-compressed`, no `Content-Disposition`); the cover
   proxy's type from the name, a name that is not an image's a 404 before
   the hash is looked at.
-- **Not done: the `Server` header.** The originals send `Server: Kestrel`
-  on every answer; Unarr sends none. No client is known to read it; the
-  maintainer decides (`docs/audit/7-triage.md`, row 1.34).
+- **`Server: Kestrel`.** The originals' web server names itself on every
+  answer; Unarr sends the same name, by the maintainer's decision
+  (20 November 2026), from the outermost layer, so the host filter's 400
+  and a panic's 500 carry it as well (`docs/audit/7-triage.md`, row 1.34).
