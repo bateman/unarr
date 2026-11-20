@@ -100,6 +100,15 @@ impl Console {
         self.level.set(level);
     }
 
+    #[cfg(test)]
+    pub fn format(&self) -> ConsoleLogFormat {
+        if self.clef.load(Ordering::Relaxed) {
+            ConsoleLogFormat::Clef
+        } else {
+            ConsoleLogFormat::Standard
+        }
+    }
+
     pub fn set_format(&self, format: ConsoleLogFormat) {
         self.clef
             .store(format == ConsoleLogFormat::Clef, Ordering::Relaxed);

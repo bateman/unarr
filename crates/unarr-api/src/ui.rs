@@ -429,6 +429,9 @@ pub async fn login(
     let user = state
         .db()
         .call(move |conn| {
+            if blank {
+                return Ok(None);
+            }
             Ok(store::providers::list_users(conn)?
                 .into_iter()
                 .find(|u| u.username.to_lowercase() == username))
@@ -771,6 +774,9 @@ async fn basic_auth(state: &AppState, headers: &HeaderMap) -> Option<(String, bo
     let user = state
         .db()
         .call(move |conn| {
+            if blank {
+                return Ok(None);
+            }
             Ok(store::providers::list_users(conn)?
                 .into_iter()
                 .find(|u| u.username.to_lowercase() == username))
