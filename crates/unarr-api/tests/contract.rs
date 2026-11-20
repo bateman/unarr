@@ -2430,3 +2430,49 @@ async fn a_tracked_download_imported_by_hand_notifies_as_the_original() {
     assert_eq!(ids, [&Value::Null, &Value::String("SABnzbd_nzo_mock1".into())]);
     assert!(failures.is_empty(), "{}", failures.join("\n"));
 }
+
+/// What Sonarr puts in a database it creates at its first start, against a
+/// recording of the original started without one
+/// (`tests/fixtures/sonarr/golden-blank`): Unarr on a blank database, with
+/// what its start ensures (`unarrd`'s `defaults::ensure` and
+/// `metadata_writes::insert_missing_consumers`).
+#[tokio::test]
+async fn a_blank_start_has_the_originals_defaults() {
+    let dir = fixture_dir();
+    let db = Db::open_in_memory().expect("in-memory db");
+    db.call_blocking(|conn| {
+        unarr_core::defaults::ensure(conn)?;
+        unarr_api::routes::metadata_writes::insert_missing_consumers(conn, Personality::Sonarr)?;
+        Ok(())
+    })
+    .expect("the defaults");
+    let host = unarr_import::config_xml::read(&dir.join("config.xml"), Personality::Sonarr.default_port())
+        .expect("config.xml");
+    let settings = Settings::from_host_config(host, Personality::Sonarr);
+    let app_data = std::env::temp_dir().join(format!("unarr_contract_{}_blank", std::process::id()));
+    std::fs::create_dir_all(&app_data).expect("app data");
+    let state = AppState::new(
+        Personality::Sonarr,
+        db,
+        settings,
+        RuntimeInfo::detect(app_data.clone()),
+        LogBuffer::new(),
+    );
+    let app = unarr_api::router(state);
+    let mut failures = Vec::new();
+    let goldens = load_goldens(&dir.join("golden-blank"));
+    for g in &goldens {
+        let (status, body) = send(&app, g, "", &g.path, &[]).await;
+        if status.as_u16() != g.status {
+            failures.push(format!("{}: status {} expected, {status} got", g.name, g.status));
+            continue;
+        }
+        let problems = compare(Mode::Exact(&[]), &g.body, &body);
+        if !problems.is_empty() {
+            failures.push(format!("{}:\n    {}", g.name, problems.join("\n    ")));
+        }
+    }
+    let _ = std::fs::remove_dir_all(&app_data);
+    assert_eq!(goldens.len(), 5, "every answer of the recording");
+    assert!(failures.is_empty(), "{}", failures.join("\n"));
+}

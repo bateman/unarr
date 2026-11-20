@@ -9,7 +9,9 @@
 //! Radarr does the same with its own qualities ([`ensure_movies`]): its
 //! definitions, six profiles of its own and the same delay profile,
 //! recorded on Radarr 6.4.4 started from nothing
-//! (`tests/fixtures/radarr/golden-blank`).
+//! (`tests/fixtures/radarr/golden-blank`). The metadata consumers both
+//! insert at start come from the API's schemas:
+//! `unarr_api::routes::metadata_writes::insert_missing_consumers`.
 
 use rusqlite::{params, Connection};
 
@@ -234,14 +236,10 @@ pub fn insert_default_profiles(conn: &Connection) -> anyhow::Result<usize> {
     Ok(defaults.len())
 }
 
-/// The delay profile that applies to every series, when there is none.
+/// The delay profile every installation has, last in the order, when
+/// there is none. It skips the delay for the profile's highest quality, as
+/// both originals' does (recorded started from nothing: `golden-blank`).
 pub fn insert_default_delay_profile(conn: &Connection) -> anyhow::Result<bool> {
-    insert_delay_profile(conn, false)
-}
-
-/// The delay profile every installation has, last in the order; Radarr's
-/// skips the delay for the profile's highest quality.
-fn insert_delay_profile(conn: &Connection, bypass_if_highest_quality: bool) -> anyhow::Result<bool> {
     let any: bool = conn.query_row("SELECT EXISTS(SELECT 1 FROM delay_profiles)", [], |r| r.get(0))?;
     if any {
         return Ok(false);
@@ -250,8 +248,8 @@ fn insert_delay_profile(conn: &Connection, bypass_if_highest_quality: bool) -> a
     conn.execute(
         "INSERT INTO delay_profiles (id, enable_usenet, enable_torrent, preferred_protocol, usenet_delay,
             torrent_delay, sort_order, tags, bypass_if_highest_quality)
-         VALUES (?1, 1, 1, 'usenet', 0, 0, ?2, '[]', ?3)",
-        params![id, i32::MAX, bypass_if_highest_quality],
+         VALUES (?1, 1, 1, 'usenet', 0, 0, ?2, '[]', 1)",
+        params![id, i32::MAX],
     )?;
     Ok(true)
 }
@@ -328,7 +326,7 @@ pub fn ensure_movies(conn: &Connection) -> anyhow::Result<()> {
     let tx = conn.unchecked_transaction()?;
     insert_missing_movie_definitions(&tx)?;
     insert_default_movie_profiles(&tx)?;
-    insert_delay_profile(&tx, true)?;
+    insert_default_delay_profile(&tx)?;
     tx.commit()?;
     Ok(())
 }
