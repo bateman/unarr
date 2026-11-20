@@ -2726,6 +2726,12 @@ could not settle it. What changed, and what was decided on the way:
   send theirs: the embedded UI is that release's, so the date changes when
   the UI does. `/ping` as health checks ask it stays uncached, as decided
   in phase 4 (section 16); `/Ping` is kept as the originals keep it.
+  Unarr adds one exception of its own: a backup (`/backup/...`) is never
+  kept. It holds the database and the API key, and a shared cache in front
+  that keeps what is `public` (Cloudflare keeps a `.zip` by default, as
+  does an nginx with `proxy_cache`) would hand it to whoever asks for its
+  predictable name; the originals expose that, Unarr does not. Nor is an
+  answer of the exception handler kept, `?h=` in its query or not.
 - **The pages carry cache breakers.** `HtmlMapperBase`'s pattern adds the
   URL base and `?h=` with the MD5 of the file to each asset link of the
   index and login pages, and drops `data-no-hash`; both pages are now the
@@ -2782,8 +2788,11 @@ could not settle it. What changed, and what was decided on the way:
   session cookie's name sheds the instance name's diacritics before
   anything that is not an ASCII letter or digit; SignalR's negotiation
   version 1 with a connection token, and the `version` message of a new
-  connection to every client; the backup download as a static file
-  (`application/x-zip-compressed`, no `Content-Disposition`); the cover
+  connection to every client; the backup download as the originals send
+  it (`application/x-zip-compressed`, no `Content-Disposition`) but never
+  kept by a cache; a blank user name or password signs nobody in, as
+  `UserService.FindUser` refuses it, and a `config.xml` with both
+  elements empty adds no user; the cover
   proxy's type from the name, a name that is not an image's a 404 before
   the hash is looked at.
 - **`Server: Kestrel`.** The originals' web server names itself on every

@@ -211,7 +211,8 @@ pub async fn finish(State(state): State<AppState>, request: Request, next: Next)
         }
     }
     if method != Method::OPTIONS {
-        if cacheable(&as_asked, query.as_deref()) {
+        // The exception handler's answer is never one to keep.
+        if !thrown && cacheable(&as_asked, query.as_deref()) {
             // A cover is a static file to the originals, found or not: kept
             // for a year, dated (the file's, or the build's), and a missing
             // one is said in `problem+json` by Sonarr too. A cache breaker
@@ -390,6 +391,12 @@ pub fn cacheable(path: &str, query: Option<&str>) -> bool {
     if (lower.starts_with("/logfile") || lower.starts_with("/updatelogfile")) && lower.ends_with(".txt") {
         return false;
     }
+    // Unarr's one addition: a backup holds the database and the API key,
+    // and a shared cache in front that keeps what is `public` would hand
+    // it to anyone who asks for its name (`docs/DESIGN.md`, section 22).
+    if starts_with_segment(path, "/backup") {
+        return false;
+    }
     true
 }
 
@@ -538,7 +545,8 @@ pub fn negotiated_json(accept: Option<&str>, personality: Personality) -> Option
     if ranges.iter().any(|(_, media)| media == "*/*") {
         return Some(JSON_UTF8);
     }
-    ranges.sort_by(|a, b| b.0.partial_cmp(&a.0).unwrap_or(std::cmp::Ordering::Equal));
+    // A total order, `q=nan` included: `sort_by` may panic on one that is not.
+    ranges.sort_by(|a, b| b.0.total_cmp(&a.0));
     let text_json = personality == Personality::Radarr;
     ranges.iter().find_map(|(_, media)| match media.as_str() {
         "application/json" | "application/*" => Some(JSON_UTF8),
@@ -647,6 +655,12 @@ fn status_name(status: StatusCode) -> String {
 /// targets do. Placed after the host filter, as theirs is.
 pub async fn log_requests(State(state): State<AppState>, request: Request, next: Next) -> Response {
     static SEQUENCE: std::sync::atomic::AtomicU64 = std::sync::atomic::AtomicU64::new(0);
+    // Nothing is prepared for a log that is off, as it is at `info`.
+    let api = starts_with_segment(request.uri().path(), "/api");
+    let traced = tracing::enabled!(target: "Http", tracing::Level::TRACE);
+    if !traced && !(api && tracing::enabled!(target: "Api", tracing::Level::DEBUG)) {
+        return next.run(request).await;
+    }
     let id = SEQUENCE.fetch_add(1, std::sync::atomic::Ordering::Relaxed) + 1;
     let method = request.method().clone();
     let uri = request.uri();
@@ -654,7 +668,6 @@ pub async fn log_requests(State(state): State<AppState>, request: Request, next:
         Some(query) if !query.is_empty() => format!("{}?{query}", uri.path()),
         _ => uri.path().to_owned(),
     };
-    let api = starts_with_segment(uri.path(), "/api");
     let remote = request
         .extensions()
         .get::<axum::extract::ConnectInfo<std::net::SocketAddr>>()
@@ -1036,6 +1049,11 @@ mod tests {
             ("/feedx", None),
             ("/LogFile/sonarr.TXT", None),
             ("/updatelogfile/x.txt", Some("hx=1")),
+            (
+                "/backup/manual/sonarr_backup_v4.0.20.3014_2026.11.20_10.00.00.zip",
+                None,
+            ),
+            ("/Backup/scheduled/x.zip", None),
         ] {
             assert!(!cacheable(path, query), "{path} {query:?}");
         }
@@ -1096,6 +1114,11 @@ mod tests {
         assert_eq!(radarr(Some("text/*")), Some(TEXT_JSON_UTF8));
         assert_eq!(radarr(Some("text/json;q=0.5, application/json")), Some(JSON_UTF8));
         assert_eq!(radarr(Some("text/html")), None);
+        // `q=nan` on many types: a total order, no panic.
+        let nans = vec!["text/html;q=nan"; 64].join(", ");
+        assert_eq!(sonarr(Some(nans.as_str())), None);
+        let with_json = format!("{nans}, application/json;q=nan, text/plain;q=0.3");
+        assert_eq!(sonarr(Some(with_json.as_str())), Some(JSON_UTF8));
         assert_eq!(status_name(StatusCode::FOUND), "Found");
         assert_eq!(status_name(StatusCode::IM_A_TEAPOT), "418");
     }

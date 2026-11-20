@@ -1450,7 +1450,6 @@ async fn what_no_mapper_takes_is_a_404_in_problem_details() {
             "/Content/../index.html",
             "/MediaCover/6/fanart.jpg",
             "/mediacover/6/poster.jpg",
-            "/backup/manual/nope.zip",
             "/MediaCoverProxy/0123456789abcdef/poster.txt",
         ] {
             let (status, headers, body) = ask(&app, "GET", path, &[], "").await;
@@ -1984,4 +1983,88 @@ async fn every_answer_names_kestrel_as_the_originals_do() {
     let (status, answer, _) = ask(&app, "GET", "/ping", &[("Host", "evil.example")], "").await;
     assert_eq!(status, StatusCode::BAD_REQUEST);
     assert_eq!(header(&answer, "server"), Some("Kestrel"));
+}
+
+/// A cover is read from the cover folder and nowhere else, however the
+/// path escapes its way out.
+#[tokio::test]
+async fn covers_never_leave_their_folder() {
+    let app = without_auth(Personality::Sonarr, "");
+    let secret = format!("unarr_cover_escape_{}.txt", std::process::id());
+    let outside = covers_dir(Personality::Sonarr).parent().unwrap().join(&secret);
+    std::fs::write(&outside, b"secret").unwrap();
+    for path in [
+        format!("/MediaCover/%2e%2e/{secret}"),
+        format!("/MediaCover/%2E%2E%2F{secret}"),
+        format!("/MediaCover/6/..%2f..%2f{secret}"),
+        format!("/MediaCover/6/%2e%2e/%2e%2e/{secret}"),
+        format!("/MediaCover/6%5c..%5c..%5c{secret}"),
+        "/MediaCover/%2fetc%2fpasswd".to_owned(),
+        "/MediaCover/%252e%252e/x".to_owned(),
+        "/MediaCover/6/poster.jpg%00.png".to_owned(),
+    ] {
+        let (status, _, body) = ask(&app, "GET", &path, &[], "").await;
+        assert_eq!(status, StatusCode::NOT_FOUND, "{path}");
+        assert!(!body.windows(6).any(|w| w == b"secret"), "{path}");
+    }
+    std::fs::remove_file(outside).unwrap();
+}
+
+/// `UserService.FindUser`: a blank name or password finds nobody, even a
+/// user stored blank; a `config.xml` with both elements empty adds none.
+#[tokio::test]
+async fn blank_credentials_let_nobody_in() {
+    let (app, state) = app_and_state(Personality::Sonarr, "", |_| {});
+    let blank = unarr_core::config::LegacyUser {
+        username: " ".into(),
+        password: String::new(),
+    };
+    let added = state
+        .db()
+        .call(move |conn| unarr_api::ui::add_legacy_user(conn, &blank))
+        .await
+        .unwrap();
+    assert!(!added);
+    // A user stored blank, as an imported database could hold one: the
+    // legacy hash of an empty password.
+    state
+        .db()
+        .call(|conn| {
+            conn.execute(
+                "INSERT INTO users (id, identifier, username, password) VALUES (99, 'blank', '', ?1)",
+                ["e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"],
+            )?;
+            Ok(())
+        })
+        .await
+        .unwrap();
+    let form = [("Content-Type", "application/x-www-form-urlencoded")];
+    let (status, headers, _) = ask(&app, "POST", "/login", &form, "username=&password=").await;
+    assert_eq!(status, StatusCode::FOUND);
+    assert!(header(&headers, "location")
+        .unwrap()
+        .ends_with("loginFailed=true"));
+    assert_eq!(header(&headers, "set-cookie"), None);
+
+    let basic = app_edited(Personality::Sonarr, "", |host| {
+        host.authentication_method = unarr_core::config::AuthenticationMethod::Basic;
+    });
+    let (status, _, _) = ask(&basic, "GET", "/", &[("Authorization", "Basic Og==")], "").await;
+    assert_eq!(status, StatusCode::UNAUTHORIZED);
+}
+
+/// A backup is never kept by a cache, unlike the originals' (it holds the
+/// database and the key); nor is an answer of the exception handler, a
+/// cache breaker in its query or not.
+#[tokio::test]
+async fn backups_and_failures_are_never_kept() {
+    let app = without_auth(Personality::Sonarr, "");
+    let (status, headers, _) = ask(&app, "GET", "/backup/manual/nope.zip", &[], "").await;
+    assert_eq!(status, StatusCode::NOT_FOUND);
+    assert_eq!(header(&headers, "cache-control"), Some("no-cache, no-store"));
+    // The fixture's tag 1 is in use: its removal is refused with an exception.
+    let (status, headers, _) = ask(&app, "DELETE", "/api/v3/tag/1?h=1", &[("X-Api-Key", KEY)], "").await;
+    assert_eq!(status, StatusCode::CONFLICT);
+    assert_eq!(header(&headers, "cache-control"), Some("no-cache,no-store"));
+    assert_eq!(header(&headers, "last-modified"), None);
 }

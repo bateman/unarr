@@ -51,8 +51,9 @@ original again, which does not know what Unarr did meanwhile.
 the decisions with their options. In short: import scripts are not run
 (a health warning says so), the hub is served over WebSockets only, the UI
 is in English only, allowed hosts and trusted networks apply without a
-restart, notifications other than Discord, the webhook and Plex keep their
-settings and send nothing.
+restart, a backup download is never kept by a cache (the originals let one
+keep it a year), notifications other than Discord, the webhook and Plex keep
+their settings and send nothing.
 
 **The image**: `ghcr.io/bateman/unarr`, a static musl build on distroless,
 for amd64 and arm64, with jemalloc as its allocator (musl's own served a

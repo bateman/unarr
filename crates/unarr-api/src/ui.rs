@@ -116,6 +116,23 @@ fn asset_link() -> &'static fancy_regex::Regex {
 /// front and, unless it says `data-no-hash` (which goes), a cache breaker
 /// after it.
 fn rewrite_html(personality: Personality, html: &str, url_base: &str) -> String {
+    // The pages and the base are fixed once the router is made: each is
+    // rewritten once, as `HtmlMapperBase` keeps its `_generatedContent`.
+    type Rewritten = std::collections::HashMap<(Personality, String, String), String>;
+    static DONE: std::sync::OnceLock<std::sync::Mutex<Rewritten>> = std::sync::OnceLock::new();
+    let key = (personality, url_base.to_owned(), html.to_owned());
+    let done = DONE.get_or_init(Default::default);
+    if let Some(page) = done.lock().unwrap_or_else(|e| e.into_inner()).get(&key) {
+        return page.clone();
+    }
+    let page = rewrite_html_now(personality, html, url_base);
+    done.lock()
+        .unwrap_or_else(|e| e.into_inner())
+        .insert(key, page.clone());
+    page
+}
+
+fn rewrite_html_now(personality: Personality, html: &str, url_base: &str) -> String {
     let mut out = String::with_capacity(html.len() + 512);
     let mut last = 0;
     for found in asset_link().captures_iter(html) {
@@ -407,6 +424,8 @@ pub async fn login(
     let remote = remote.map(|c| c.0 .0.ip());
     let username = form.username.to_lowercase();
     let password = form.password.clone();
+    // `UserService.FindUser`: a blank name or password finds nobody.
+    let blank = blank_credentials(&username, &password);
     let user = state
         .db()
         .call(move |conn| {
@@ -418,7 +437,7 @@ pub async fn login(
         .ok()
         .flatten();
     // PBKDF2 is slow by design: not on an async worker.
-    let user = match user {
+    let user = match user.filter(|_| !blank) {
         Some(u) => crate::blocking::run(move || verify_password(&u, &password).then_some(u))
             .await
             .ok()
@@ -551,11 +570,20 @@ pub fn add_legacy_user(
     conn: &rusqlite::Connection,
     legacy: &unarr_core::config::LegacyUser,
 ) -> anyhow::Result<bool> {
-    if !store::providers::list_users(conn)?.is_empty() {
+    // A `config.xml` with the two elements left empty names nobody: a
+    // user made of it would let in a blank login form.
+    if blank_credentials(&legacy.username, &legacy.password)
+        || !store::providers::list_users(conn)?.is_empty()
+    {
         return Ok(false);
     }
     store::providers::insert_user(conn, &new_user(1, &legacy.username, &legacy.password)?)?;
     Ok(true)
+}
+
+/// `IsNullOrWhiteSpace` on either: credentials no user is found with.
+fn blank_credentials(username: &str, password: &str) -> bool {
+    username.trim().is_empty() || password.trim().is_empty()
 }
 
 fn hex(bytes: &[u8]) -> String {
@@ -739,6 +767,7 @@ async fn basic_auth(state: &AppState, headers: &HeaderMap) -> Option<(String, bo
     let given = given.to_string();
     let username = given.to_lowercase();
     let password = password.to_string();
+    let blank = blank_credentials(&username, &password);
     let user = state
         .db()
         .call(move |conn| {
@@ -749,7 +778,7 @@ async fn basic_auth(state: &AppState, headers: &HeaderMap) -> Option<(String, bo
         .await
         .ok()
         .flatten();
-    let valid = match user {
+    let valid = match user.filter(|_| !blank) {
         Some(u) => crate::blocking::run(move || verify_password(&u, &password))
             .await
             .unwrap_or(false),

@@ -61,7 +61,11 @@ def start(conf: dict):
     c.execute("update ScheduledTasks set LastExecution=?", (datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%d %H:%M:%SZ"),))
     c.commit(); c.close()
     env = {k: v for k, v in os.environ.items() if k.lower() not in ("https_proxy", "http_proxy", "all_proxy") and not k.startswith("UNARR_") and k != "RUST_LOG"}
-    if not any("libicuuc" in l for l in subprocess.run(["ldconfig", "-p"], capture_output=True, text=True).stdout.splitlines()):
+    try:
+        libs = subprocess.run(["ldconfig", "-p"], capture_output=True, text=True).stdout
+    except FileNotFoundError:  # no ldconfig (macOS): ICU is not looked for
+        libs = ""
+    if sys.platform.startswith("linux") and "libicuuc" not in libs:
         env["DOTNET_SYSTEM_GLOBALIZATION_INVARIANT"] = "1"
     log = open(data.parent / f"stdout-{APP}.log", "wb")
     if TARGET == "unarr":
@@ -78,7 +82,7 @@ def start(conf: dict):
         except OSError:
             pass
         if p.poll() is not None:
-            sys.exit(f"{APP} exited, see {data}/stdout.log")
+            sys.exit(f"{APP} exited, see {data.parent}/stdout-{APP}.log")
         time.sleep(1)
     else:
         sys.exit("no ping")
