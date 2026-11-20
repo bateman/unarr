@@ -100,6 +100,7 @@ impl Console {
         self.level.set(level);
     }
 
+    #[cfg(test)]
     pub fn format(&self) -> ConsoleLogFormat {
         if self.clef.load(Ordering::Relaxed) {
             ConsoleLogFormat::Clef
