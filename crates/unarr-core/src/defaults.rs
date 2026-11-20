@@ -5,15 +5,21 @@
 //! `QualityProfileService.Handle(ApplicationStartedEvent)`, migration 70).
 //! An imported database already has them all; one started from nothing
 //! could otherwise add no series, for want of a profile to give it.
+//!
+//! Radarr does the same with its own qualities ([`ensure_movies`]): its
+//! definitions, six profiles of its own and the same delay profile,
+//! recorded on Radarr 6.4.4 started from nothing
+//! (`tests/fixtures/radarr/golden-blank`).
 
 use rusqlite::{params, Connection};
 
 use crate::model::{ProfileFormatItem, ProfileItem, QualityDefinition, QualityProfile};
+use crate::movies::quality::RADARR_QUALITIES;
 use crate::quality::SONARR_QUALITIES;
 use crate::store;
 
-/// The group a quality shares its weight with, as the default profiles
-/// name it.
+/// The group a quality shares its weight with, as Sonarr's default
+/// profiles name it.
 fn group_name(weight: i64) -> &'static str {
     match weight {
         3 => "WEB 480p",
@@ -28,12 +34,38 @@ fn group_name(weight: i64) -> &'static str {
 /// application knows, none for one it does not. Returns how many were
 /// added.
 pub fn insert_missing_definitions(conn: &Connection) -> anyhow::Result<usize> {
-    let existing = store::catalog::list_quality_definitions(conn)?;
-    let mut added = 0;
     let mut by_weight: Vec<&crate::quality::QualityDefault> = SONARR_QUALITIES.iter().collect();
     by_weight.sort_by_key(|d| d.weight);
-    for default in by_weight {
-        if existing.iter().any(|d| d.quality_id == default.quality.id) {
+    let rows: Vec<DefinitionRow> = by_weight
+        .iter()
+        .map(|d| DefinitionRow {
+            quality_id: d.quality.id,
+            title: d.quality.name,
+            min_size: d.min_size,
+            max_size: d.max_size,
+            preferred_size: Some(d.preferred_size),
+        })
+        .collect();
+    insert_definitions(conn, &rows)
+}
+
+/// A quality definition as an application's defaults give it.
+struct DefinitionRow {
+    quality_id: i64,
+    title: &'static str,
+    min_size: f64,
+    max_size: Option<f64>,
+    preferred_size: Option<f64>,
+}
+
+/// The rule both applications share: `rows`, in weight order, inserted
+/// where the table lacks their quality; a definition of a quality not
+/// among them deleted.
+fn insert_definitions(conn: &Connection, rows: &[DefinitionRow]) -> anyhow::Result<usize> {
+    let existing = store::catalog::list_quality_definitions(conn)?;
+    let mut added = 0;
+    for row in rows {
+        if existing.iter().any(|d| d.quality_id == row.quality_id) {
             continue;
         }
         let id = store::sequence::next_id(conn, "quality_definitions")?;
@@ -41,18 +73,18 @@ pub fn insert_missing_definitions(conn: &Connection) -> anyhow::Result<usize> {
             conn,
             &QualityDefinition {
                 id,
-                quality_id: default.quality.id,
-                title: default.quality.name.to_string(),
-                min_size: Some(default.min_size),
-                max_size: default.max_size,
-                preferred_size: Some(default.preferred_size),
+                quality_id: row.quality_id,
+                title: row.title.to_string(),
+                min_size: Some(row.min_size),
+                max_size: row.max_size,
+                preferred_size: row.preferred_size,
             },
         )?;
         added += 1;
     }
     for unknown in existing
         .iter()
-        .filter(|d| !SONARR_QUALITIES.iter().any(|q| q.quality.id == d.quality_id))
+        .filter(|d| !rows.iter().any(|r| r.quality_id == d.quality_id))
     {
         conn.execute(
             "DELETE FROM quality_definitions WHERE id = ?1",
@@ -65,20 +97,58 @@ pub fn insert_missing_definitions(conn: &Connection) -> anyhow::Result<usize> {
 /// `GetDefaultProfile`: every quality in definition order, those that
 /// share a weight as a group, the allowed ones switched on.
 pub fn default_profile(name: &str, cutoff: i64, allowed: &[i64], formats: &[i64]) -> QualityProfile {
+    let order: Vec<(i64, i64)> = SONARR_QUALITIES
+        .iter()
+        .map(|d| (d.quality.id, d.weight))
+        .collect();
+    grouped_profile(&order, group_name, name, cutoff, allowed, formats)
+}
+
+/// Radarr's `GetDefaultProfile`, over its own qualities: the same rule,
+/// its groups named as Radarr names them.
+pub fn default_movie_profile(name: &str, cutoff: i64, allowed: &[i64], formats: &[i64]) -> QualityProfile {
+    let order: Vec<(i64, i64)> = RADARR_QUALITIES
+        .iter()
+        .map(|d| (d.quality.id, d.weight))
+        .collect();
+    grouped_profile(&order, movie_group_name, name, cutoff, allowed, formats)
+}
+
+/// The group a movie quality shares its weight with: WEBDL and WEBRip of
+/// one resolution.
+fn movie_group_name(weight: i64) -> &'static str {
+    match weight {
+        11 => "WEB 480p",
+        15 => "WEB 720p",
+        18 => "WEB 1080p",
+        22 => "WEB 2160p",
+        _ => "",
+    }
+}
+
+/// A profile over `order` (quality id, weight, in definition order).
+fn grouped_profile(
+    order: &[(i64, i64)],
+    group_name: fn(i64) -> &'static str,
+    name: &str,
+    cutoff: i64,
+    allowed: &[i64],
+    formats: &[i64],
+) -> QualityProfile {
     let mut weights: Vec<i64> = Vec::new();
-    for d in SONARR_QUALITIES {
-        if !weights.contains(&d.weight) {
-            weights.push(d.weight);
+    for (_, weight) in order {
+        if !weights.contains(weight) {
+            weights.push(*weight);
         }
     }
     let mut items = Vec::new();
     let mut group_id = 1000;
     let mut profile_cutoff = cutoff;
     for weight in weights {
-        let group: Vec<i64> = SONARR_QUALITIES
+        let group: Vec<i64> = order
             .iter()
-            .filter(|d| d.weight == weight)
-            .map(|d| d.quality.id)
+            .filter(|(_, w)| *w == weight)
+            .map(|(quality, _)| *quality)
             .collect();
         if let [quality] = group[..] {
             items.push(ProfileItem {
@@ -166,6 +236,12 @@ pub fn insert_default_profiles(conn: &Connection) -> anyhow::Result<usize> {
 
 /// The delay profile that applies to every series, when there is none.
 pub fn insert_default_delay_profile(conn: &Connection) -> anyhow::Result<bool> {
+    insert_delay_profile(conn, false)
+}
+
+/// The delay profile every installation has, last in the order; Radarr's
+/// skips the delay for the profile's highest quality.
+fn insert_delay_profile(conn: &Connection, bypass_if_highest_quality: bool) -> anyhow::Result<bool> {
     let any: bool = conn.query_row("SELECT EXISTS(SELECT 1 FROM delay_profiles)", [], |r| r.get(0))?;
     if any {
         return Ok(false);
@@ -173,11 +249,88 @@ pub fn insert_default_delay_profile(conn: &Connection) -> anyhow::Result<bool> {
     let id = store::sequence::next_id(conn, "delay_profiles")?;
     conn.execute(
         "INSERT INTO delay_profiles (id, enable_usenet, enable_torrent, preferred_protocol, usenet_delay,
-            torrent_delay, sort_order, tags)
-         VALUES (?1, 1, 1, 'usenet', 0, 0, ?2, '[]')",
-        params![id, i32::MAX],
+            torrent_delay, sort_order, tags, bypass_if_highest_quality)
+         VALUES (?1, 1, 1, 'usenet', 0, 0, ?2, '[]', ?3)",
+        params![id, i32::MAX, bypass_if_highest_quality],
     )?;
     Ok(true)
+}
+
+/// Radarr's `InsertMissingDefinitions`: the same rule over its own
+/// qualities, with the sizes a reset goes back to. Returns how many were
+/// added.
+pub fn insert_missing_movie_definitions(conn: &Connection) -> anyhow::Result<usize> {
+    let mut by_weight: Vec<&crate::movies::quality::MovieQualityDefault> = RADARR_QUALITIES.iter().collect();
+    by_weight.sort_by_key(|d| d.weight);
+    let rows: Vec<DefinitionRow> = by_weight
+        .iter()
+        .map(|d| {
+            let (min_size, max_size, preferred_size) = crate::movies::quality::default_sizes(d.quality.id);
+            DefinitionRow {
+                quality_id: d.quality.id,
+                title: d.quality.name,
+                min_size,
+                max_size,
+                preferred_size,
+            }
+        })
+        .collect();
+    insert_definitions(conn, &rows)
+}
+
+/// Radarr's profiles of a new installation, when there is none: Any, SD,
+/// HD-720p, HD-1080p, Ultra-HD, HD - 720p/1080p, each wanting the movie's
+/// original language. Returns how many were added.
+pub fn insert_default_movie_profiles(conn: &Connection) -> anyhow::Result<usize> {
+    if !store::catalog::list_quality_profiles(conn)?.is_empty() {
+        return Ok(0);
+    }
+    tracing::info!("Setting up default quality profiles");
+    // Quality ids: SDTV 1, WEBDL-1080p 3, HDTV-720p 4, WEBDL-720p 5,
+    // Bluray-720p 6, Bluray-1080p 7, WEBDL-480p 8, HDTV-1080p 9, Raw-HD 10,
+    // WEBRip-480p 12, WEBRip-720p 14, WEBRip-1080p 15, HDTV-2160p 16,
+    // WEBRip-2160p 17, WEBDL-2160p 18, Bluray-2160p 19, Bluray-480p 20,
+    // Bluray-576p 21, BR-DISK 22, DVD-R 23, WORKPRINT 24, CAM 25,
+    // TELESYNC 26, TELECINE 27, DVDSCR 28, REGIONAL 29, Remux-1080p 30,
+    // Remux-2160p 31.
+    let defaults: [(&str, i64, &[i64]); 6] = [
+        (
+            "Any",
+            20,
+            &[
+                24, 25, 26, 27, 29, 28, 1, 2, 23, 8, 12, 20, 21, 4, 5, 14, 6, 9, 3, 15, 7, 30, 16, 18, 17,
+                19, 31, 22,
+            ],
+        ),
+        ("SD", 20, &[24, 25, 26, 27, 29, 28, 1, 2, 8, 12, 20, 21]),
+        ("HD-720p", 6, &[4, 5, 14, 6]),
+        ("HD-1080p", 7, &[9, 3, 15, 7, 30]),
+        ("Ultra-HD", 31, &[16, 18, 17, 19, 31]),
+        ("HD - 720p/1080p", 6, &[4, 5, 14, 6, 9, 3, 15, 7, 30]),
+    ];
+    let formats: Vec<i64> = store::catalog::list_custom_formats(conn)?
+        .iter()
+        .map(|f| f.id)
+        .collect();
+    for (name, cutoff, allowed) in defaults {
+        let mut profile = default_movie_profile(name, cutoff, allowed, &formats);
+        profile.id = store::sequence::next_id(conn, "quality_profiles")?;
+        store::catalog::insert_quality_profile(conn, &profile)?;
+        // `Language.Original`.
+        crate::movies::store::set_profile_language(conn, profile.id, -2)?;
+    }
+    Ok(defaults.len())
+}
+
+/// Radarr's defaults, at start: the same as [`ensure`], all or none.
+pub fn ensure_movies(conn: &Connection) -> anyhow::Result<()> {
+    tracing::debug!("Setting up default quality config");
+    let tx = conn.unchecked_transaction()?;
+    insert_missing_movie_definitions(&tx)?;
+    insert_default_movie_profiles(&tx)?;
+    insert_delay_profile(&tx, true)?;
+    tx.commit()?;
+    Ok(())
 }
 
 /// Everything above, at start.
@@ -234,6 +387,34 @@ mod tests {
             assert!(definitions.iter().any(|d| d.quality_id == 7));
             assert!(definitions.iter().all(|d| d.quality_id != 999));
             assert_eq!(store::catalog::list_quality_profiles(conn)?.len(), 6);
+            Ok(())
+        })
+        .unwrap();
+    }
+
+    #[test]
+    fn a_movie_database_started_from_nothing_gets_radarrs_defaults_once() {
+        let db = Db::open_in_memory_for(crate::Personality::Radarr).unwrap();
+        db.call_blocking(|conn| {
+            ensure_movies(conn)?;
+            ensure_movies(conn)?;
+            assert_eq!(
+                store::catalog::list_quality_definitions(conn)?.len(),
+                RADARR_QUALITIES.len()
+            );
+            let profiles = store::catalog::list_quality_profiles(conn)?;
+            assert_eq!(profiles.len(), 6);
+            assert!(crate::movies::store::profile_languages(conn)?
+                .values()
+                .all(|l| *l == -2));
+            assert_eq!(
+                conn.query_row(
+                    "SELECT count(*), max(bypass_if_highest_quality) FROM delay_profiles",
+                    [],
+                    |r| Ok((r.get::<_, i64>(0)?, r.get::<_, bool>(1)?))
+                )?,
+                (1, true)
+            );
             Ok(())
         })
         .unwrap();

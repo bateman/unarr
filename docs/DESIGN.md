@@ -1504,7 +1504,9 @@ been 20 MB since 20 November 2026 (section 21.11).
   `movie/lookup`, `importlist/movie`, `release`, `rename`, `manualimport`,
   `parse`, `filesystem` (the UI asks for them on pages 4b and 4c make
   work); Radarr's defaults on a blank start (an imported installation has
-  them; they come with the settings writes); the edition of a history
+  them; written on 20 November 2026 as `defaults::ensure_movies`, against
+  a recording of Radarr started without a database,
+  `tests/fixtures/radarr/golden-blank`); the edition of a history
   row's release, which the title parser of 4b finds.
 
 ## 16. Decisions taken in phase 4b

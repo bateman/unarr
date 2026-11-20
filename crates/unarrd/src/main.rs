@@ -557,11 +557,13 @@ fn open_database(
             }
         }
     }
-    // What the originals make sure is there at every start. Radarr's
-    // defaults (its qualities, its profiles) come with the milestone that
-    // writes settings; an imported installation has them already.
-    if personality == Personality::Sonarr {
-        db.call_blocking(|conn| unarr_core::defaults::ensure(conn))?;
+    // What the originals make sure is there at every start: the quality
+    // definitions, the default profiles of a database started from nothing,
+    // the delay profile.
+    match personality {
+        Personality::Sonarr => db.call_blocking(|conn| unarr_core::defaults::ensure(conn))?,
+        Personality::Radarr => db.call_blocking(|conn| unarr_core::defaults::ensure_movies(conn))?,
+        Personality::Lidarr => {}
     }
     // `UserService.Handle(ApplicationStartedEvent)`: the user and password
     // of a `config.xml` from before Sonarr v3, when there is no user yet.
