@@ -363,6 +363,7 @@ maintainer's daily driver.
 | Container image under 15 MB compressed, measured again at the end of 4d | The binary with both UIs embedded is 30.6 MiB, 12.3 MiB under `gzip -9` | 4d | Unknown as an image; the binary alone is close to the limit |
 | Container image under 15 MB compressed, once the release profile unwinds | The binary is 34.9 MiB, 14.4 MiB under `gzip -9` (15.07 MB): 4.1 MiB and 2.0 MiB more than aborting | #14 | Unknown as an image; the binary alone is at the limit, and over it if the target is read in decimal megabytes |
 | Container image under 15 MB compressed, once Brotli answers (`docs/audit/2-http.md`, row 1.19) | The binary is 35.9 MiB, 14.9 MiB under `gzip -9` (15.61 MB), from 35.0 and 14.4 (15.14 MB): Brotli's encoder is 1.07 MiB of it, 0.50 MiB under `gzip -9`; the rest of the change saves 0.2 MiB (`mime-guess` gone) | HTTP low rows | Unknown as an image; the binary alone is under the limit in binary megabytes and over it in decimal ones |
+| Container image under 15 MB compressed, built as CI builds it | `docker build` of the Dockerfile at `521ea75` (amd64): 61.4 MB unpacked, 16.8 MB of layers under `gzip -9`. The static musl binary (jemalloc, Brotli, both UIs) is 38.6 MB, 16.06 MB compressed; distroless's base 0.71 MB | #10, 20 November 2026 | Missed: 1.8 MB over (1.0 MiB over 15 MiB) |
 | Idle RSS under 60 MB, once the release profile unwinds | Both personalities on the real library (38 series, 193 movies), fifteen minutes idle: 30 MiB, 11 MiB of it anonymous; 28 and 10 aborting, in the same container | #14 | Met idle |
 
 First measurement, skeleton only (one `system/status` route per personality):
@@ -2624,8 +2625,8 @@ below; for a row the audit rated low (`docs/audit/7-triage.md`,
     in the originals; about 1.06 MB compressed.
   - *English only* (chosen): nothing.
 - **Why.** No reason was given with the choice. What speaks for it: nobody
-  known uses another language with Unarr, and the binary is already at the
-  image's size target (section 9), which the dictionaries would cross.
+  known uses another language with Unarr, and the image is already over
+  its size target (section 9), which the dictionaries would push further.
 - **Cost.** Whoever picks another language keeps an English interface,
   and nothing says why. The setting is kept, saved and returned as the
   originals do, so a database moved back to an original keeps the choice.
@@ -2641,8 +2642,9 @@ section 22 closes.
 - **The question.** The originals compress with `AddResponseCompression()`,
   which prefers Brotli when a client weighs it as gzip; Unarr compressed
   with gzip only. Doing as they do needs tower-http's Brotli encoder, which
-  adds 1,126,528 bytes to the release binary, 522,738 under `gzip -9`, on a
-  binary already at the image's size target (section 9).
+  adds 1,126,528 bytes to the release binary, 522,738 under `gzip -9`, to
+  an image already over its size target (16.8 MB compressed against 15,
+  section 9).
 - **Options.**
   - *Keep it* (chosen): the answers are the originals' (Brotli to a
     browser, gzip to a client that asks for gzip only), and smaller on the
@@ -2650,11 +2652,10 @@ section 22 closes.
   - *Drop it*: gzip only, as before; half a MiB less of image, and a
     browser gets gzip where the originals send Brotli. One feature of
     tower-http (`compression-br`) and two assertions of a test.
-- **Why.** The answers match the originals', and the image stays under
-  15 MB, if by little.
-- **Cost.** Half a MiB of the image's margin, which was small already.
-- **To revisit** if the image crosses its target: this is the first half
-  MiB to give back.
+- **Why.** The answers match the originals'.
+- **Cost.** Half a MiB more of an image already 1.8 MB over its target.
+- **To revisit** when the image is to come back under its target: this
+  is the first half MiB to give back.
 
 ### 21.9 Allowed hosts and trusted networks apply as soon as they are saved
 
@@ -2760,7 +2761,7 @@ could not settle it. What changed, and what was decided on the way:
   so behind a TLS-terminating proxy the answers leave uncompressed, as the
   originals' do. The encoder costs the release binary 1,126,528 bytes,
   522,738 under `gzip -9` (two release builds of this branch, with and
-  without it), on a binary already at the image target (section 9).
+  without it), to an image already over its target (section 9).
   Dropping it is one feature of tower-http (`compression-br`) and two
   assertions of a test; it is kept, by decision (section 21.8).
 - **503 while starting.** The daemon binds the listener and serves before
