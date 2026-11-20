@@ -637,7 +637,8 @@ title needs most of one parser's patterns. On musl the "at rest" figure
 does not fall on its own, as expected of an allocator without
 `malloc_trim`; the release of the patterns returns the memory all the
 same, since the automata are large allocations that go back to the
-system when freed.
+system when freed. The musl column is musl's own allocator: the image's
+is jemalloc since section 21.6, measured there.
 
 The 60 MB target therefore holds for a process left alone for five
 minutes, and not for one that searches every few minutes. With the RSS
@@ -2118,9 +2119,9 @@ the size are in section 20, with why they were not taken.
   added to Transmission, and Transmission before 4.0 (without labels).
 - The memory figures in section 9 come from a glibc build, where
   `malloc_trim` returns freed pages. The published image is a static musl
-  build: musl's allocator has no `malloc_trim` (the call is compiled out)
-  and behaves differently, so the image's idle footprint after an import
-  is not measured yet.
+  build, where the call is compiled out; its allocator is jemalloc since
+  20 November 2026, which returns pages on its own, and its footprint
+  after an import and under load was measured then (section 21.6).
 - Listing series skips the `actors` column, the largest JSON one. Every
   series write of 3b updates columns, so nothing writes back a series read
   from a list; a new write must keep to that.
@@ -2438,9 +2439,9 @@ the maintainer, on 16 November 2026.
 - **Cost.** The peak keeps swinging between runs, which the comparison's
   history notes on each run. Whoever runs a glibc build and prefers the
   steady peak sets `MALLOC_ARENA_MAX=1` without a change to the code. The
-  published image is a static musl build, with no per-thread arenas: the
-  question does not arise there, and its memory under load is not
-  measured yet. The ARM64 NAS was not measured either.
+  published image is a static musl build, where the question does not
+  arise: its allocator is jemalloc, with four arenas, since section 21.6.
+  The ARM64 NAS was not measured.
 - **Evidence.** `docs/originals-comparison.md`, the two `MALLOC_ARENA_MAX`
   tables; commit `c79f6df`.
 
@@ -2540,3 +2541,54 @@ was added; for the maintainer to confirm or overturn.
   Unarr where the original failed: a difference, in the direction of what
   the settings ask for.
 - **To revisit** if the maintainer prefers the originals' behaviour.
+
+### 21.6 The image's allocator: jemalloc, tuned
+
+Decided by the maintainer on 20 November 2026, among the options below,
+the recommended one, on the measurements of
+`docs/originals-comparison.md` ("The image's allocator").
+
+- **The question.** The published image is a static musl build, and
+  musl's own allocator takes one lock for every allocation. On the scaled
+  library, with four clients without pause, it served 13 requests a
+  second where glibc's served 59, with a p95 of 1.9 s against 0.34 s; one
+  request at a time, Radarr's `/movie` took 361 ms against 232 ms. Its
+  memory is the lowest of all.
+- **Options, all measured** (`scripts/allocator-probe.py`, 4-core x86-64,
+  scaled library):
+  - *Keep musl's own*: 38-40 MiB at rest after the start, 78-80 MiB after
+    the load, a peak of 220-228 MiB under four clients; the speed above.
+  - *jemalloc with three settings* (chosen): a background thread, four
+    arenas, freed pages returned after a second. 46 / 90 MiB, a peak of
+    295-326 MiB, 59-60 requests a second, a p95 of 0.31 s; Radarr's
+    `/movie` 275 ms.
+  - *jemalloc with its defaults*: the same speed, 52 / 123 MiB, a peak of
+    552 MiB.
+  - *mimalloc*: the same speed, 90 / 234 MiB in version 3 (182 MiB after
+    the load told to purge at once, and slower), 406 / 387 MiB in
+    version 2.
+  - *A glibc image* (distroless's `cc` base instead of `static`): glibc's
+    figures, 56 / 75 MiB and 59 requests a second, but the binary is no
+    longer static, and the binaries of a release would need glibc on the
+    host.
+- **Why.** Four times the throughput and a sixth of the p95 under
+  concurrent requests, which the web interface sends when a page opens,
+  and a quarter off the heaviest page for one user, for 8 MiB at rest and
+  12 MiB after the load. Of the allocators that bring the speed back,
+  jemalloc so set keeps the least, and the binary stays static.
+- **Cost.** Against musl's own: 8 MiB at rest after the start, 12 MiB
+  after the load, 75 MiB more at the peak under four clients; 611,200
+  bytes more of binary; jemalloc is C, built from source with the image
+  (`make` added to the build stage). One request at a time the
+  comparison's reads still take 18 to 21 % longer than with glibc.
+- **How it is done** (the implementer's choices, not asked):
+  `tikv-jemallocator` for the musl target only, so that a glibc build and
+  the comparison with the originals keep glibc's allocator; the settings
+  compiled in through `_rjem_malloc_conf`, which `_RJEM_MALLOC_CONF` in
+  the environment still overrides, setting by setting; the background
+  thread and the decay take the place of `release_memory`, which does
+  nothing on musl.
+- **To revisit** on the ARM64 NAS, which was not measured, or if the
+  memory at rest matters more than the speed: then musl's own.
+- **Evidence.** Commit `e73c586`; the two tables of
+  `docs/originals-comparison.md`, "The image's allocator".
