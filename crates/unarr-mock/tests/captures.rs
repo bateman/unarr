@@ -21,6 +21,10 @@
 //! `radarr-qbittorrent-import` the grab, the refresh that found it stopped
 //! and the removal), the same on the qBittorrent-compatible program, and
 //! NZBGet while it downloaded a season for Sonarr and nothing for Radarr.
+//!
+//! `sabnzbd`, `transmission` and their `radarr-*` twins were recorded
+//! through the capture proxy, whole requests included, and are replayed
+//! in `proxy_captures.rs`.
 
 use chrono::{TimeZone, Utc};
 use serde_json::json;
@@ -117,6 +121,10 @@ fn the_captures_are_present() {
         "radarr-qbittorrent-compat-import",
         "radarr-qbittorrent-downloading",
         "radarr-qbittorrent-import",
+        "radarr-sabnzbd",
+        "radarr-transmission",
+        "sabnzbd",
+        "transmission",
     ] {
         assert!(
             names.iter().any(|n| n == expected),

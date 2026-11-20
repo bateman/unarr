@@ -2272,3 +2272,101 @@ async fn housekeeping_repairs_users_and_task_runs_as_the_original() {
     let state = build_state();
     housekeeping_repairs_as_the_original(&state, &fixture_dir().join("golden-housekeeping"), API_KEY).await;
 }
+
+/// How each answer of the audit's recording is compared.
+fn audit_mode(name: &str) -> Mode {
+    match name {
+        // The exception the original's schema builder throws, with its stack.
+        "metadata-create-unknown" => Mode::Exact(&["description"]),
+        // As `config-host` of the long list.
+        "config-host-by-id" => Mode::Exact(&["logLevel"]),
+        n if n.ends_with("-missing") => Mode::Exact(&["traceId"]),
+        _ => Mode::Exact(&[]),
+    }
+}
+
+/// The routes the audit found Sonarr declaring and Unarr not, or only in
+/// part (`docs/audit/7-triage.md`, "Routes and UI calls"), against a
+/// recording of their own (`tests/fixtures/sonarr/golden-audit`): an
+/// episode by id under the calendar and the wanted lists, the settings
+/// pages and the dictionary by id, the quality size limits, the deprecated
+/// language profile's writes, an exclusion by id, and the metadata
+/// consumers added, tested and deleted.
+#[tokio::test]
+async fn the_audit_goldens_match() {
+    let golden_dir = fixture_dir().join("golden-audit");
+    let dirs = ReplayDirs::create_named("audit");
+    let mappings = dirs.mappings();
+    let state = build_state_in(Some(&dirs), |_| {});
+    let goldens = load_goldens(&golden_dir);
+    let start = goldens
+        .iter()
+        .filter_map(|g| g.recorded_at)
+        .min()
+        .expect("a recording time");
+    state
+        .db()
+        .call(move |conn| {
+            let ids: Vec<i64> = conn
+                .prepare("SELECT id FROM scheduled_tasks")?
+                .query_map([], |r| r.get(0))?
+                .collect::<Result<_, _>>()?;
+            for id in ids {
+                unarr_core::store::providers::set_scheduled_task_execution(conn, id, start, start)?;
+            }
+            Ok(())
+        })
+        .await
+        .expect("freeze the scheduled tasks");
+    state.set_now(Some(start));
+    state.start_runtime().await.expect("the command runtime");
+    let app = unarr_api::router(state.clone());
+    let session = login_cookie(&app).await;
+    let mut ids: std::collections::HashMap<String, i64> = std::collections::HashMap::new();
+    let mut failures = Vec::new();
+    let mut checked = 0;
+    for g in &goldens {
+        assert!(
+            g.method != "sleep" && !g.to_mock,
+            "the audit list has no pauses and no mock"
+        );
+        state.set_now(g.recorded_at);
+        let path = substitute_ids(&g.path, &ids);
+        let (status, body) = send(&app, g, &session, &path, &mappings).await;
+        let body = unmap_paths(&body, &mappings);
+        if let Some(id) = body
+            .get("id")
+            .or_else(|| body.get(0).and_then(|first| first.get("id")))
+            .and_then(Value::as_i64)
+        {
+            ids.insert(g.name.clone(), id);
+        }
+        checked += 1;
+        if status.as_u16() != g.status {
+            failures.push(format!(
+                "{}: status {} expected, {status} got: {}",
+                g.name,
+                g.status,
+                short(&body)
+            ));
+            continue;
+        }
+        let problems = compare(audit_mode(&g.name), &g.body, &body);
+        if !problems.is_empty() {
+            failures.push(format!(
+                "{} ({} {}):\n    {}",
+                g.name,
+                g.method,
+                g.path,
+                problems.join("\n    ")
+            ));
+        }
+    }
+    assert_eq!(checked, 52, "every answer of the audit's recording");
+    assert!(
+        failures.is_empty(),
+        "{} of {checked} audit goldens differ:\n{}",
+        failures.len(),
+        failures.join("\n")
+    );
+}

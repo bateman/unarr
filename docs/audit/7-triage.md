@@ -397,32 +397,32 @@ declared, 404 and 405 are what the router gives by construction.
 |---|---|---|---|---|
 | A | `DELETE /blocklist/{id}` | CLOSED | `mod.rs:199`, `activity.rs:411`; goldens `blocklist-delete`, `blocklist-delete-missing` | UI, Blocklist |
 | A | `DELETE /blocklist/bulk` | CLOSED | `mod.rs:198`, `activity.rs:420`; goldens `blocklist-bulk-delete`, `blocklist-after-removal` | UI, Remove Selected |
-| A | `GET /calendar/{id}` | OPEN | only `/calendar` is declared (`mod.rs:184`); 404 | nobody known |
-| A | `GET /config/downloadclient/{id}` | OPEN | PUT only (`mod.rs:71`); 405 | nobody known |
-| A | `GET /config/host/{id}` | OPEN | PUT only (`mod.rs:67`); 405 | nobody known |
-| A | `GET /config/importlist/{id}` | OPEN | PUT only (`mod.rs:76`); 405 | nobody known |
-| A | `GET /config/indexer/{id}` | OPEN | PUT only (`mod.rs:209`); 405 | nobody known |
-| A | `GET /config/mediamanagement/{id}` | OPEN | PUT only (`mod.rs:204`); 405 | nobody known |
-| A | `GET /config/naming/{id}` | OPEN | PUT only (`mod.rs:202`); 405 | nobody known |
-| A | `GET /config/ui/{id}` | OPEN | PUT only (`mod.rs:69`); 405 | nobody known |
+| A | `GET /calendar/{id}` | CLOSED | `mod.rs:215`, `episodes.rs:263`: the episode's own resource; goldens `golden-audit/calendar-1`, `-643`, `-missing` | nobody known |
+| A | `GET /config/downloadclient/{id}` | CLOSED | `mod.rs:89`: the GET of `/config/downloadclient`, any number, a non-number the empty 404 (`mod.rs:462`); golden `golden-audit/config-downloadclient-by-id`, `-other-id`, `golden-audit/config-ui-not-a-number` | nobody known |
+| A | `GET /config/host/{id}` | CLOSED | `mod.rs:75`: the GET of `/config/host`, any number, a non-number the empty 404 (`mod.rs:462`); golden `golden-audit/config-host-by-id` | nobody known |
+| A | `GET /config/importlist/{id}` | CLOSED | `mod.rs:96`: the GET of `/config/importlist`, any number, a non-number the empty 404 (`mod.rs:462`); golden `golden-audit/config-importlist-by-id` | nobody known |
+| A | `GET /config/indexer/{id}` | CLOSED | `mod.rs:250`: the GET of `/config/indexer`, any number, a non-number the empty 404 (`mod.rs:462`); golden `golden-audit/config-indexer-by-id` | nobody known |
+| A | `GET /config/mediamanagement/{id}` | CLOSED | `mod.rs:243`: the GET of `/config/mediamanagement`, any number, a non-number the empty 404 (`mod.rs:462`); golden `golden-audit/config-mediamanagement-by-id` | nobody known |
+| A | `GET /config/naming/{id}` | CLOSED | `mod.rs:236`: the GET of `/config/naming`, any number, a non-number the empty 404 (`mod.rs:462`); golden `golden-audit/config-naming-by-id` | nobody known |
+| A | `GET /config/ui/{id}` | CLOSED | `mod.rs:82`: the GET of `/config/ui`, any number, a non-number the empty 404 (`mod.rs:462`); golden `golden-audit/config-ui-by-id`, `golden-audit/config-ui-not-a-number` | nobody known |
 | A | `GET /health/{id}` | NOT APPLICABLE | the original's action throws | nobody |
 | A | `POST /history/failed/{id}` | CLOSED | `mod.rs:200`, `activity.rs:436`, `core/downloads/failed.rs:120`; goldens `history-mark-failed*` | UI, Mark as failed |
 | A | `DELETE /importlistexclusion/bulk` | CLOSED | `mod.rs:299`, `settings_writes.rs:1756`; golden `importlistexclusion-bulk-delete` | UI, exclusions |
-| A | `GET /importlistexclusion/{id}` | OPEN | PUT and DELETE only (`mod.rs:303`); 405 | nobody known |
+| A | `GET /importlistexclusion/{id}` | CLOSED | `mod.rs:370`, `providers.rs:261`; goldens `golden-audit/importlistexclusion-get`, `-get-missing` | nobody known |
 | A | `GET /release/{id}`, `GET /release/push/{id}` | NOT APPLICABLE | the original's actions throw | nobody |
-| A | `GET /localization/{id}` | OPEN | not declared (`mod.rs:383`); 404 | nobody known |
+| A | `GET /localization/{id}` | CLOSED | `mod.rs:453`, `system.rs:369`: the same dictionary, any number; goldens `golden-audit/localization-1`, `-999` | nobody known |
 | A | `GET /mediacover/{seriesId}/{filename}` | CLOSED | `mod.rs:80`, `series_writes.rs:95`; goldens for the failures, the served cover in `tests/contract.rs:1277` | Bazarr, mobile apps |
-| A | `POST /metadata` | OPEN | GET only (`mod.rs:285`); 405 | nobody; the UI never creates a consumer |
+| A | `POST /metadata` | CLOSED | `mod.rs:342`, `metadata_writes.rs:121`; goldens `golden-audit/metadata-create`, `-created`, `-create-duplicate`, `-create-noname`, `-create-unknown` (the original's 500). Stored, not driven: no metadata file is written | nobody; the UI never creates a consumer |
 | A | `PUT /metadata`, `PUT /metadata/{id}` | CLOSED | `lib.rs:106`, `mod.rs:287`, `providers.rs:364`; goldens `metadata-update`, `-after-update`, `-restore`. No metadata file is written: documented | UI, Settings > Metadata |
-| A | `PUT /metadata/bulk`, `DELETE /metadata/{id}`, `DELETE /metadata/bulk`, `POST /metadata/test`, `/testall`, `/action/{name}` | OPEN (6) | not declared | nobody known |
-| A | `POST`, `PUT`, `PUT /{id}`, `DELETE /{id}` on `languageprofile`, `GET languageprofile/schema` | OPEN (5) | GET only (`mod.rs:211`) | nobody known; Bazarr only reads |
+| A | `PUT /metadata/bulk`, `DELETE /metadata/{id}`, `DELETE /metadata/bulk`, `POST /metadata/test`, `/testall`, `/action/{name}` | CLOSED (6) | `mod.rs:346`-`352`, `metadata_writes.rs:144`, `:154`, `:166`, `providers.rs:468`. The bulk routes are hidden by the original (`[NonAction]`): the empty 404, by construction (`metadata_writes.rs:6`); goldens `golden-audit/metadata-bulk-update`, `-bulk-delete`, `-delete`, `-delete-missing`, `-after-delete`, `-test`, `-test-duplicate`, `-test-noname`, `-testall`, `-testall-after-delete`, `-action` | nobody known |
+| A | `POST`, `PUT`, `PUT /{id}`, `DELETE /{id}` on `languageprofile`, `GET languageprofile/schema` | CLOSED (5) | `mod.rs:257`-`264`, `settings.rs:343`-`452`: the deprecated profile, writes answered with the body read back and nothing stored, as the original; `GET /languageprofile/{id}` now answers any id as the original (was 404 but for 1); goldens `golden-audit/languageprofile-*` | nobody known; Bazarr only reads |
 | A | `GET /languageprofile/schema/{id}` | NOT APPLICABLE | the original's action throws | nobody |
-| A | `GET /qualitydefinition/limits` | OPEN | falls to `/qualitydefinition/{id}` (`mod.rs:127`) | nobody known; the 4.0.20 UI does not ask |
+| A | `GET /qualitydefinition/limits` | CLOSED | `mod.rs:148`, `catalog.rs:262`; golden `golden-audit/qualitydefinition-limits` | nobody known; the 4.0.20 UI does not ask |
 | A | `GET /queue/{id}`, `/queue/details/{id}`, `/queue/status/{id}` | NOT APPLICABLE (3) | the original's actions throw | nobody |
 | A | `POST /series/import` | CLOSED | `mod.rs:79`, `series_writes.rs:312`; goldens `series-import*` | UI, Library Import |
 | A | `GET /system/routes`, `/system/routes/duplicate` | DELIBERATE (2) | `docs/DESIGN.md` section 14, `docs/phase-3b-library.md`: the UI does not ask | nobody known |
 | A | `POST /system/shutdown`, `POST /system/restart` | CLOSED (2) | `mod.rs:365`, `system.rs:180`, `unarrd/src/main.rs:816`; test `contract.rs:1169`. The restart re-executes the program, on Unix | UI, header menu and after a restore |
-| A | `GET /wanted/cutoff/{id}`, `GET /wanted/missing/{id}` | OPEN (2) | not declared; 404 | nobody known |
+| A | `GET /wanted/cutoff/{id}`, `GET /wanted/missing/{id}` | CLOSED (2) | `mod.rs:217`, `:219`, `episodes.rs:263`: the episode's own resource, on the list or not; goldens `golden-audit/wanted-cutoff-*`, `golden-audit/wanted-missing-*` | nobody known |
 | A | `GET /ping`, `HEAD /ping` | CLOSED (2) | `lib.rs:326`, `system.rs:163`; golden `noauth-ping`, test `tests/http.rs:211` | health checks, monitors |
 | A | `GET /api` | CLOSED | `mod.rs:55`, `system.rs:157`; test `tests/http.rs:99` | nobody known |
 | A | `GET /feed/v3/calendar/Sonarr.ics` | CLOSED | `mod.rs:56`, `feed.rs:145`; goldens `feed-calendar*` | UI iCal link, calendar apps |

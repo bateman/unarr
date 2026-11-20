@@ -327,6 +327,12 @@ pub struct Notifier {
     /// `MediaServerUpdateQueue`: the series whose Plex section awaits a
     /// refresh, per host, in the order they came.
     plex_pending: Mutex<HashMap<String, Vec<Series>>>,
+    /// `PlexTvService._cache`: when plex.tv was last pinged with each
+    /// token; a day passes before the next ping.
+    plex_tv_pings: Mutex<HashMap<String, std::time::Instant>>,
+    /// Where plex.tv is asked: the real host, or the mock of the tests and
+    /// the replay (`set_upstreams`).
+    upstreams: std::sync::RwLock<crate::metadata::Upstreams>,
     /// The process start the status service's grace period counts from.
     started_at: DateTime<Utc>,
 }
@@ -358,7 +364,34 @@ impl Notifier {
             identity,
             plex_versions: Mutex::new(HashMap::new()),
             plex_pending: Mutex::new(HashMap::new()),
+            plex_tv_pings: Mutex::new(HashMap::new()),
+            upstreams: std::sync::RwLock::new(crate::metadata::Upstreams::real()),
             started_at,
+        }
+    }
+
+    /// Ask plex.tv through `upstreams`, as the metadata hosts are.
+    pub fn set_upstreams(&self, upstreams: crate::metadata::Upstreams) {
+        *self.upstreams.write().recover() = upstreams;
+    }
+
+    /// The URL to ask for `url`, an absolute plex.tv one.
+    pub(crate) fn upstream_url(&self, url: &str) -> String {
+        self.upstreams.read().recover().url(url)
+    }
+
+    /// Whether plex.tv is due a ping with `token`, which then counts as
+    /// pinged for a day, whatever plex.tv answers: the original caches the
+    /// result of the ping, a failure included.
+    pub(crate) fn plex_tv_ping_due(&self, token: &str) -> bool {
+        let mut pings = self.plex_tv_pings.lock().recover();
+        let now = std::time::Instant::now();
+        match pings.get(token) {
+            Some(at) if now.duration_since(*at) < std::time::Duration::from_secs(24 * 3600) => false,
+            _ => {
+                pings.insert(token.to_string(), now);
+                true
+            }
         }
     }
 
@@ -736,7 +769,7 @@ impl Notifier {
                     }
                     Some(Kind::PlexServer) => {
                         if deleted_files {
-                            self.plex_update_if_enabled(&def, one);
+                            self.plex_update_if_enabled(&def, one).await;
                         }
                         Ok(())
                     }
@@ -767,7 +800,7 @@ impl Notifier {
                 Some(Kind::Discord) => discord::on_download(&self.http, &def, message, &ctx).await,
                 Some(Kind::Webhook) => webhook::on_download(&self.http, &def, message, &ctx).await,
                 Some(Kind::PlexServer) => {
-                    self.plex_update_if_enabled(&def, message.series);
+                    self.plex_update_if_enabled(&def, message.series).await;
                     Ok(())
                 }
                 None => Ok(()),
@@ -794,7 +827,7 @@ impl Notifier {
                 Some(Kind::Discord) => discord::on_import_complete(&self.http, &def, message, &ctx).await,
                 Some(Kind::Webhook) => webhook::on_import_complete(&self.http, &def, message, &ctx).await,
                 Some(Kind::PlexServer) => {
-                    self.plex_update_if_enabled(&def, message.series);
+                    self.plex_update_if_enabled(&def, message.series).await;
                     Ok(())
                 }
                 None => Ok(()),
@@ -826,7 +859,7 @@ impl Notifier {
                 Some(Kind::Discord) => discord::on_episode_file_delete(&self.http, &def, message, &ctx).await,
                 Some(Kind::Webhook) => webhook::on_episode_file_delete(&self.http, &def, message, &ctx).await,
                 Some(Kind::PlexServer) => {
-                    self.plex_update_if_enabled(&def, message.series);
+                    self.plex_update_if_enabled(&def, message.series).await;
                     Ok(())
                 }
                 None => Ok(()),
@@ -852,7 +885,7 @@ impl Notifier {
                 Some(Kind::Discord) => discord::on_rename(&self.http, &def, series).await,
                 Some(Kind::Webhook) => webhook::on_rename(&self.http, &def, series, renamed, &ctx).await,
                 Some(Kind::PlexServer) => {
-                    self.plex_update_if_enabled(&def, series);
+                    self.plex_update_if_enabled(&def, series).await;
                     Ok(())
                 }
                 None => Ok(()),
@@ -951,9 +984,11 @@ impl Notifier {
         }
     }
 
-    /// `PlexServer.UpdateIfEnabled`: the series joins the server's queue.
-    fn plex_update_if_enabled(&self, def: &NotificationDefinition, series: &Series) {
+    /// `PlexServer.UpdateIfEnabled`: plex.tv is pinged with the token (once
+    /// a day), then the series joins the server's queue.
+    async fn plex_update_if_enabled(&self, def: &NotificationDefinition, series: &Series) {
         let settings = plex::Settings::from_value(&def.settings);
+        plex::ping_plex_tv(self, &settings.auth_token).await;
         if !settings.update_library {
             return;
         }

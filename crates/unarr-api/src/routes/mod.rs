@@ -12,6 +12,7 @@ pub mod feed;
 pub mod importlist_writes;
 pub mod indexer_writes;
 pub mod mediafiles;
+pub mod metadata_writes;
 pub mod notification_writes;
 #[cfg(feature = "panic-switch")]
 pub mod panic_switch;
@@ -26,6 +27,7 @@ pub mod settings_writes;
 pub mod signalr;
 pub mod system;
 
+use axum::middleware::from_fn;
 use axum::routing::{delete, get, post, put};
 use axum::Router;
 
@@ -69,16 +71,33 @@ fn sonarr_api_router() -> Router<AppState> {
         .route("/system/status", get(system::status))
         .route("/health", get(system::health))
         .route("/config/host", get(config::host))
-        .route("/config/host/{id}", put(settings_writes::host))
+        .route(
+            "/config/host/{id}",
+            get(config::host)
+                .put(settings_writes::host)
+                .route_layer(from_fn(int_id)),
+        )
         .route("/config/ui", get(config::ui))
-        .route("/config/ui/{id}", put(settings_writes::ui))
+        .route(
+            "/config/ui/{id}",
+            get(config::ui)
+                .put(settings_writes::ui)
+                .route_layer(from_fn(int_id)),
+        )
         .route("/config/downloadclient", get(config::download_client))
         .route(
             "/config/downloadclient/{id}",
-            put(settings_writes::download_client),
+            get(config::download_client)
+                .put(settings_writes::download_client)
+                .route_layer(from_fn(int_id)),
         )
         .route("/config/importlist", get(config::import_list))
-        .route("/config/importlist/{id}", put(settings_writes::import_list))
+        .route(
+            "/config/importlist/{id}",
+            get(config::import_list)
+                .put(settings_writes::import_list)
+                .route_layer(from_fn(int_id)),
+        )
         .route("/series", get(series::list).post(series_writes::add))
         .route("/series/lookup", get(series_writes::lookup))
         .route("/series/import", post(series_writes::import))
@@ -125,6 +144,10 @@ fn sonarr_api_router() -> Router<AppState> {
         .route("/language", get(catalog::languages))
         .route("/language/{id}", get(catalog::language))
         .route("/qualitydefinition", get(catalog::quality_definitions))
+        .route(
+            "/qualitydefinition/limits",
+            get(catalog::quality_definition_limits),
+        )
         .route(
             "/qualitydefinition/update",
             put(settings_writes::quality_definition_update_many),
@@ -187,8 +210,13 @@ fn sonarr_api_router() -> Router<AppState> {
         )
         .route("/rename", get(mediafiles::rename_preview))
         .route("/calendar", get(episodes::calendar))
+        // An episode by id under the calendar and the wanted lists is the
+        // episode's own resource, on any list or none.
+        .route("/calendar/{id}", get(episodes::episode))
         .route("/wanted/missing", get(episodes::missing))
+        .route("/wanted/missing/{id}", get(episodes::episode))
         .route("/wanted/cutoff", get(episodes::cutoff))
+        .route("/wanted/cutoff/{id}", get(episodes::episode))
         .route("/history", get(activity::history))
         .route("/history/since", get(activity::history_since))
         .route("/history/series", get(activity::history_series))
@@ -204,17 +232,40 @@ fn sonarr_api_router() -> Router<AppState> {
         .route("/blocklist/{id}", delete(activity::blocklist_delete))
         .route("/history/failed/{id}", post(activity::history_mark_failed))
         .route("/config/naming", get(settings::naming))
-        .route("/config/naming/{id}", put(settings_writes::naming))
+        .route(
+            "/config/naming/{id}",
+            get(settings::naming)
+                .put(settings_writes::naming)
+                .route_layer(from_fn(int_id)),
+        )
         .route("/config/mediamanagement", get(settings::media_management))
         .route(
             "/config/mediamanagement/{id}",
-            put(settings_writes::media_management),
+            get(settings::media_management)
+                .put(settings_writes::media_management)
+                .route_layer(from_fn(int_id)),
         )
         .route("/config/indexer", get(settings::indexer_config))
-        .route("/config/indexer/{id}", put(settings_writes::indexer))
+        .route(
+            "/config/indexer/{id}",
+            get(settings::indexer_config)
+                .put(settings_writes::indexer)
+                .route_layer(from_fn(int_id)),
+        )
         .route("/config/naming/examples", get(settings::naming_examples))
-        .route("/languageprofile", get(settings::language_profiles))
-        .route("/languageprofile/{id}", get(settings::language_profile))
+        .route(
+            "/languageprofile",
+            get(settings::language_profiles)
+                .post(settings::language_profile_create)
+                .put(settings::language_profile_update),
+        )
+        .route("/languageprofile/schema", get(settings::language_profile_schema))
+        .route(
+            "/languageprofile/{id}",
+            get(settings::language_profile)
+                .put(settings::language_profile_update_id)
+                .delete(settings::language_profile_delete),
+        )
         .route("/indexer", get(providers::indexers).post(indexer_writes::create))
         .route("/indexer/schema", get(providers::indexer_schema))
         .route("/indexer/test", post(indexer_writes::test))
@@ -287,11 +338,21 @@ fn sonarr_api_router() -> Router<AppState> {
                 .put(importlist_writes::update)
                 .delete(importlist_writes::delete),
         )
-        .route("/metadata", get(providers::metadata_list))
+        .route(
+            "/metadata",
+            get(providers::metadata_list).post(metadata_writes::create),
+        )
         .route("/metadata/schema", get(providers::metadata_schema))
+        .route("/metadata/test", post(metadata_writes::test))
+        .route("/metadata/testall", post(providers::metadata_test_all))
+        .route("/metadata/action/{name}", post(metadata_writes::action))
+        // No `/metadata/bulk`: Sonarr hides the base controller's bulk
+        // actions, and "bulk" is no `{id}` (see `metadata_writes`).
         .route(
             "/metadata/{id}",
-            get(providers::metadata).put(providers::metadata_update),
+            get(providers::metadata)
+                .put(providers::metadata_update)
+                .delete(metadata_writes::delete),
         )
         .route(
             "/importlistexclusion",
@@ -307,7 +368,9 @@ fn sonarr_api_router() -> Router<AppState> {
         )
         .route(
             "/importlistexclusion/{id}",
-            put(settings_writes::exclusion_update).delete(settings_writes::exclusion_delete),
+            get(providers::import_list_exclusion)
+                .put(settings_writes::exclusion_update)
+                .delete(settings_writes::exclusion_delete),
         )
         .route(
             "/autotagging",
@@ -386,7 +449,22 @@ fn sonarr_api_router() -> Router<AppState> {
         .route("/system/backup/restore/{id}", post(backup::restore))
         .route("/update", get(system::update))
         .route("/localization", get(system::localization))
+        .route(
+            "/localization/{id}",
+            get(system::localization).route_layer(from_fn(int_id)),
+        )
         .route("/localization/language", get(system::localization_language))
+}
+
+/// The originals' `{id:int}` on a route whose action reads no id (the
+/// settings pages, the dictionary): an id that is not a number matches no
+/// route, which the framework's answer turns into the empty 404.
+async fn int_id(
+    _: axum::extract::Path<i64>,
+    request: axum::extract::Request,
+    next: axum::middleware::Next,
+) -> axum::response::Response {
+    next.run(request).await
 }
 
 /// Routes outside the API prefix. SignalR is the same hub protocol for

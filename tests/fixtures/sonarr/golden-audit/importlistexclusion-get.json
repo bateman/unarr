@@ -1,0 +1,13 @@
+{
+  "body": {
+    "id": 1,
+    "title": "Breaking Bad",
+    "tvdbId": 81189
+  },
+  "recordedAt": "2026-11-19T21:33:09Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/importlistexclusion/1"
+  },
+  "status": 200
+}

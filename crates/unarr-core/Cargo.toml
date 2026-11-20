@@ -6,6 +6,7 @@ edition.workspace = true
 license.workspace = true
 repository.workspace = true
 rust-version.workspace = true
+publish.workspace = true
 
 [features]
 # Places that panic when a test arms them (`panics::switch`). For
@@ -31,8 +32,10 @@ libc = "0.2"
 ring = "0.17"
 base64 = "0.22"
 # Backups, in the originals' zip layout.
-# zip's own `deflate` feature drags in zopfli; flate2 on miniz is enough.
-zip = { version = "2", default-features = false, features = ["deflate-flate2", "flate2"] }
+# zip's own `deflate` feature drags in zopfli and zlib-rs; flate2 on miniz
+# is enough. Version 9: 2.x has advisories (RUSTSEC-2026-0367 and others) on
+# `extract()`, which Unarr never calls; the upgrade spares an ignore for each.
+zip = { version = "9", default-features = false, features = ["deflate-flate2"] }
 flate2 = { version = "1", default-features = false, features = ["rust_backend"] }
 # Cover thumbnails, as the originals' ImageSharp resizes them: JPEG and PNG only.
 image = { version = "0.25", default-features = false, features = ["jpeg", "png"] }

@@ -1,0 +1,1038 @@
+[
+ {
+  "request": {
+   "body": null,
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "traceparent": "00-b793a48399142d467ffec00115022bb4-42a486f475d7549a-00"
+   },
+   "method": "GET",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "<h1>409: Conflict</h1><p>Your request had an invalid session-id header.</p><p>To fix this, follow these steps:<ol><li> When reading a response, get its X-Transmission-Session-Id header and remember it<li> Add the updated header to your outgoing requests<li> When you get this 409 error message, resend your request with the updated header</ol></p><p>This requirement has been added to help prevent <a href=\"http://host.invalid/073927287694\">CSRF</a> attacks.</p><p><code>X-Transmission-Session-Id: REDACTED</code></p>",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Expose-Headers": "X-Transmission-Session-Id",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "text/html; charset=ISO-8859-1",
+    "Date": "Thu, 19 Nov 2026 20:16:01 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "status": 409
+  },
+  "seq": 1,
+  "time": "2026-11-19T20:16:01Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"session-get\"}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "29",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef",
+    "traceparent": "00-b793a48399142d467ffec00115022bb4-730476b791126175-00"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"alt-speed-down\": 50, \"alt-speed-enabled\": false, \"alt-speed-time-begin\": 540, \"alt-speed-time-day\": 127, \"alt-speed-time-enabled\": false, \"alt-speed-time-end\": 1020, \"alt-speed-up\": 50, \"anti-brute-force-enabled\": false, \"anti-brute-force-threshold\": 100, \"blocklist-enabled\": false, \"blocklist-size\": 0, \"blocklist-url\": \"http://host.invalid/935cfbdbd784\", \"cache-size-mb\": 4, \"config-dir\": \"/downloads/config\", \"default-trackers\": \"\", \"dht-enabled\": false, \"download-dir\": \"/downloads/\", \"download-dir-free-space\": 63437402112, \"download-queue-enabled\": true, \"download-queue-size\": 5, \"encryption\": \"preferred\", \"idle-seeding-limit\": 30, \"idle-seeding-limit-enabled\": false, \"incomplete-dir\": \"/downloads/Downloads\", \"incomplete-dir-enabled\": false, \"lpd-enabled\": true, \"peer-limit-global\": 200, \"peer-limit-per-torrent\": 50, \"peer-port\": 51499, \"peer-port-random-on-start\": false, \"pex-enabled\": true, \"port-forwarding-enabled\": false, \"queue-stalled-enabled\": true, \"queue-stalled-minutes\": 30, \"rename-partial-files\": false, \"rpc-version\": 17, \"rpc-version-minimum\": 14, \"rpc-version-semver\": \"5.3.0\", \"script-torrent-added-enabled\": false, \"script-torrent-added-filename\": \"\", \"script-torrent-done-enabled\": false, \"script-torrent-done-filename\": \"\", \"script-torrent-done-seeding-enabled\": false, \"script-torrent-done-seeding-filename\": \"\", \"seed-queue-enabled\": false, \"seed-queue-size\": 10, \"seedRatioLimit\": 0, \"seedRatioLimited\": true, \"session-id\": \"0123456789abcdef0123456789abcdef\", \"speed-limit-down\": 100, \"speed-limit-down-enabled\": false, \"speed-limit-up\": 100, \"speed-limit-up-enabled\": false, \"start-added-torrents\": true, \"tcp-enabled\": true, \"trash-original-torrent-files\": false, \"units\": {\"memory-bytes\": 1024, \"memory-units\": [\"KiB\", \"MiB\", \"GiB\", \"TiB\"], \"size-bytes\": 1000, \"size-units\": [\"kB\", \"MB\", \"GB\", \"TB\"], \"speed-bytes\": 1000, \"speed-units\": [\"kB/s\", \"MB/s\", \"GB/s\", \"TB/s\"]}, \"utp-enabled\": true, \"version\": \"4.0.5 (a6fe2a64aa)\"}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:01 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 2,
+  "time": "2026-11-19T20:16:01Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef",
+    "traceparent": "00-b793a48399142d467ffec00115022bb4-41ee85dd29ac778d-00"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": []}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:01 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 3,
+  "time": "2026-11-19T20:16:01Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"session-get\"}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "29",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef",
+    "traceparent": "00-6b7c1e568576bbf542a07eb56e57fb9c-3bd518227e3de1d0-00"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"alt-speed-down\": 50, \"alt-speed-enabled\": false, \"alt-speed-time-begin\": 540, \"alt-speed-time-day\": 127, \"alt-speed-time-enabled\": false, \"alt-speed-time-end\": 1020, \"alt-speed-up\": 50, \"anti-brute-force-enabled\": false, \"anti-brute-force-threshold\": 100, \"blocklist-enabled\": false, \"blocklist-size\": 0, \"blocklist-url\": \"http://host.invalid/935cfbdbd784\", \"cache-size-mb\": 4, \"config-dir\": \"/downloads/config\", \"default-trackers\": \"\", \"dht-enabled\": false, \"download-dir\": \"/downloads/\", \"download-dir-free-space\": 63437398016, \"download-queue-enabled\": true, \"download-queue-size\": 5, \"encryption\": \"preferred\", \"idle-seeding-limit\": 30, \"idle-seeding-limit-enabled\": false, \"incomplete-dir\": \"/downloads/Downloads\", \"incomplete-dir-enabled\": false, \"lpd-enabled\": true, \"peer-limit-global\": 200, \"peer-limit-per-torrent\": 50, \"peer-port\": 51499, \"peer-port-random-on-start\": false, \"pex-enabled\": true, \"port-forwarding-enabled\": false, \"queue-stalled-enabled\": true, \"queue-stalled-minutes\": 30, \"rename-partial-files\": false, \"rpc-version\": 17, \"rpc-version-minimum\": 14, \"rpc-version-semver\": \"5.3.0\", \"script-torrent-added-enabled\": false, \"script-torrent-added-filename\": \"\", \"script-torrent-done-enabled\": false, \"script-torrent-done-filename\": \"\", \"script-torrent-done-seeding-enabled\": false, \"script-torrent-done-seeding-filename\": \"\", \"seed-queue-enabled\": false, \"seed-queue-size\": 10, \"seedRatioLimit\": 0, \"seedRatioLimited\": true, \"session-id\": \"0123456789abcdef0123456789abcdef\", \"speed-limit-down\": 100, \"speed-limit-down-enabled\": false, \"speed-limit-up\": 100, \"speed-limit-up-enabled\": false, \"start-added-torrents\": true, \"tcp-enabled\": true, \"trash-original-torrent-files\": false, \"units\": {\"memory-bytes\": 1024, \"memory-units\": [\"KiB\", \"MiB\", \"GiB\", \"TiB\"], \"size-bytes\": 1000, \"size-units\": [\"kB\", \"MB\", \"GB\", \"TB\"], \"speed-bytes\": 1000, \"speed-units\": [\"kB/s\", \"MB/s\", \"GB/s\", \"TB/s\"]}, \"utp-enabled\": true, \"version\": \"4.0.5 (a6fe2a64aa)\"}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:01 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 4,
+  "time": "2026-11-19T20:16:01Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef",
+    "traceparent": "00-6b7c1e568576bbf542a07eb56e57fb9c-5e723d601bdb4333-00"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": []}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:01 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 5,
+  "time": "2026-11-19T20:16:01Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef",
+    "traceparent": "00-208e376d1e6395e0a509636afa6dd65f-cc0554ffea4e36f9-00"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": []}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:06 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 6,
+  "time": "2026-11-19T20:16:06Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"session-get\"}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "29",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef",
+    "traceparent": "00-208e376d1e6395e0a509636afa6dd65f-61a8aa174e46aacc-00"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"alt-speed-down\": 50, \"alt-speed-enabled\": false, \"alt-speed-time-begin\": 540, \"alt-speed-time-day\": 127, \"alt-speed-time-enabled\": false, \"alt-speed-time-end\": 1020, \"alt-speed-up\": 50, \"anti-brute-force-enabled\": false, \"anti-brute-force-threshold\": 100, \"blocklist-enabled\": false, \"blocklist-size\": 0, \"blocklist-url\": \"http://host.invalid/935cfbdbd784\", \"cache-size-mb\": 4, \"config-dir\": \"/downloads/config\", \"default-trackers\": \"\", \"dht-enabled\": false, \"download-dir\": \"/downloads/\", \"download-dir-free-space\": 63430565888, \"download-queue-enabled\": true, \"download-queue-size\": 5, \"encryption\": \"preferred\", \"idle-seeding-limit\": 30, \"idle-seeding-limit-enabled\": false, \"incomplete-dir\": \"/downloads/Downloads\", \"incomplete-dir-enabled\": false, \"lpd-enabled\": true, \"peer-limit-global\": 200, \"peer-limit-per-torrent\": 50, \"peer-port\": 51499, \"peer-port-random-on-start\": false, \"pex-enabled\": true, \"port-forwarding-enabled\": false, \"queue-stalled-enabled\": true, \"queue-stalled-minutes\": 30, \"rename-partial-files\": false, \"rpc-version\": 17, \"rpc-version-minimum\": 14, \"rpc-version-semver\": \"5.3.0\", \"script-torrent-added-enabled\": false, \"script-torrent-added-filename\": \"\", \"script-torrent-done-enabled\": false, \"script-torrent-done-filename\": \"\", \"script-torrent-done-seeding-enabled\": false, \"script-torrent-done-seeding-filename\": \"\", \"seed-queue-enabled\": false, \"seed-queue-size\": 10, \"seedRatioLimit\": 0, \"seedRatioLimited\": true, \"session-id\": \"0123456789abcdef0123456789abcdef\", \"speed-limit-down\": 100, \"speed-limit-down-enabled\": false, \"speed-limit-up\": 100, \"speed-limit-up-enabled\": false, \"start-added-torrents\": true, \"tcp-enabled\": true, \"trash-original-torrent-files\": false, \"units\": {\"memory-bytes\": 1024, \"memory-units\": [\"KiB\", \"MiB\", \"GiB\", \"TiB\"], \"size-bytes\": 1000, \"size-units\": [\"kB\", \"MB\", \"GB\", \"TB\"], \"speed-bytes\": 1000, \"speed-units\": [\"kB/s\", \"MB/s\", \"GB/s\", \"TB/s\"]}, \"utp-enabled\": true, \"version\": \"4.0.5 (a6fe2a64aa)\"}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:06 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 7,
+  "time": "2026-11-19T20:16:06Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"session-get\"}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "29",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef",
+    "traceparent": "00-208e376d1e6395e0a509636afa6dd65f-5b484eeb9afc7fbd-00"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"alt-speed-down\": 50, \"alt-speed-enabled\": false, \"alt-speed-time-begin\": 540, \"alt-speed-time-day\": 127, \"alt-speed-time-enabled\": false, \"alt-speed-time-end\": 1020, \"alt-speed-up\": 50, \"anti-brute-force-enabled\": false, \"anti-brute-force-threshold\": 100, \"blocklist-enabled\": false, \"blocklist-size\": 0, \"blocklist-url\": \"http://host.invalid/935cfbdbd784\", \"cache-size-mb\": 4, \"config-dir\": \"/downloads/config\", \"default-trackers\": \"\", \"dht-enabled\": false, \"download-dir\": \"/downloads/\", \"download-dir-free-space\": 63430549504, \"download-queue-enabled\": true, \"download-queue-size\": 5, \"encryption\": \"preferred\", \"idle-seeding-limit\": 30, \"idle-seeding-limit-enabled\": false, \"incomplete-dir\": \"/downloads/Downloads\", \"incomplete-dir-enabled\": false, \"lpd-enabled\": true, \"peer-limit-global\": 200, \"peer-limit-per-torrent\": 50, \"peer-port\": 51499, \"peer-port-random-on-start\": false, \"pex-enabled\": true, \"port-forwarding-enabled\": false, \"queue-stalled-enabled\": true, \"queue-stalled-minutes\": 30, \"rename-partial-files\": false, \"rpc-version\": 17, \"rpc-version-minimum\": 14, \"rpc-version-semver\": \"5.3.0\", \"script-torrent-added-enabled\": false, \"script-torrent-added-filename\": \"\", \"script-torrent-done-enabled\": false, \"script-torrent-done-filename\": \"\", \"script-torrent-done-seeding-enabled\": false, \"script-torrent-done-seeding-filename\": \"\", \"seed-queue-enabled\": false, \"seed-queue-size\": 10, \"seedRatioLimit\": 0, \"seedRatioLimited\": true, \"session-id\": \"0123456789abcdef0123456789abcdef\", \"speed-limit-down\": 100, \"speed-limit-down-enabled\": false, \"speed-limit-up\": 100, \"speed-limit-up-enabled\": false, \"start-added-torrents\": true, \"tcp-enabled\": true, \"trash-original-torrent-files\": false, \"units\": {\"memory-bytes\": 1024, \"memory-units\": [\"KiB\", \"MiB\", \"GiB\", \"TiB\"], \"size-bytes\": 1000, \"size-units\": [\"kB\", \"MB\", \"GB\", \"TB\"], \"speed-bytes\": 1000, \"speed-units\": [\"kB/s\", \"MB/s\", \"GB/s\", \"TB/s\"]}, \"utp-enabled\": true, \"version\": \"4.0.5 (a6fe2a64aa)\"}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:06 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 8,
+  "time": "2026-11-19T20:16:06Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"session-get\"}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "29",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef",
+    "traceparent": "00-bf13f6cd930706af39ab19a1cb75a0c5-9f7a1cf4f988c659-00"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"alt-speed-down\": 50, \"alt-speed-enabled\": false, \"alt-speed-time-begin\": 540, \"alt-speed-time-day\": 127, \"alt-speed-time-enabled\": false, \"alt-speed-time-end\": 1020, \"alt-speed-up\": 50, \"anti-brute-force-enabled\": false, \"anti-brute-force-threshold\": 100, \"blocklist-enabled\": false, \"blocklist-size\": 0, \"blocklist-url\": \"http://host.invalid/935cfbdbd784\", \"cache-size-mb\": 4, \"config-dir\": \"/downloads/config\", \"default-trackers\": \"\", \"dht-enabled\": false, \"download-dir\": \"/downloads/\", \"download-dir-free-space\": 63432179712, \"download-queue-enabled\": true, \"download-queue-size\": 5, \"encryption\": \"preferred\", \"idle-seeding-limit\": 30, \"idle-seeding-limit-enabled\": false, \"incomplete-dir\": \"/downloads/Downloads\", \"incomplete-dir-enabled\": false, \"lpd-enabled\": true, \"peer-limit-global\": 200, \"peer-limit-per-torrent\": 50, \"peer-port\": 51499, \"peer-port-random-on-start\": false, \"pex-enabled\": true, \"port-forwarding-enabled\": false, \"queue-stalled-enabled\": true, \"queue-stalled-minutes\": 30, \"rename-partial-files\": false, \"rpc-version\": 17, \"rpc-version-minimum\": 14, \"rpc-version-semver\": \"5.3.0\", \"script-torrent-added-enabled\": false, \"script-torrent-added-filename\": \"\", \"script-torrent-done-enabled\": false, \"script-torrent-done-filename\": \"\", \"script-torrent-done-seeding-enabled\": false, \"script-torrent-done-seeding-filename\": \"\", \"seed-queue-enabled\": false, \"seed-queue-size\": 10, \"seedRatioLimit\": 0, \"seedRatioLimited\": true, \"session-id\": \"0123456789abcdef0123456789abcdef\", \"speed-limit-down\": 100, \"speed-limit-down-enabled\": false, \"speed-limit-up\": 100, \"speed-limit-up-enabled\": false, \"start-added-torrents\": true, \"tcp-enabled\": true, \"trash-original-torrent-files\": false, \"units\": {\"memory-bytes\": 1024, \"memory-units\": [\"KiB\", \"MiB\", \"GiB\", \"TiB\"], \"size-bytes\": 1000, \"size-units\": [\"kB\", \"MB\", \"GB\", \"TB\"], \"speed-bytes\": 1000, \"speed-units\": [\"kB/s\", \"MB/s\", \"GB/s\", \"TB/s\"]}, \"utp-enabled\": true, \"version\": \"4.0.5 (a6fe2a64aa)\"}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:13 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 9,
+  "time": "2026-11-19T20:16:13Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-add\", \"arguments\": {\"metainfo\": \"ZDg6YW5ub3VuY2UzMDp1ZHA6Ly90cmFja2VyLmludmFsaWQ6Njk2OS9hbm5vdW5jZTQ6aW5mb2Q2Omxlbmd0aGkxZTQ6bmFtZTc6Zml4dHVyZTEyOnBpZWNlIGxlbmd0aGkxNjM4NGU2OnBpZWNlczIwOgAAAAAAAAAAAAAAAAAAAAAAAAAAZWU=\", \"paused\": false, \"download-dir\": \"/downloads/radarr\", \"labels\": [\"radarr\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "1459",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef",
+    "traceparent": "00-bf13f6cd930706af39ab19a1cb75a0c5-0e6a062bbc677bcb-00"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrent-added\": {\"hashString\": \"f672aefdc079f84acc589280ab1e95316cdff48d\", \"id\": 3, \"name\": \"Backcountry.2015.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\"}}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:13 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 10,
+  "time": "2026-11-19T20:16:13Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"session-get\"}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "29",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef",
+    "traceparent": "00-a828695aebebc493e0cd09793aeac2b0-d97d8b24fb369f3e-00"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"alt-speed-down\": 50, \"alt-speed-enabled\": false, \"alt-speed-time-begin\": 540, \"alt-speed-time-day\": 127, \"alt-speed-time-enabled\": false, \"alt-speed-time-end\": 1020, \"alt-speed-up\": 50, \"anti-brute-force-enabled\": false, \"anti-brute-force-threshold\": 100, \"blocklist-enabled\": false, \"blocklist-size\": 0, \"blocklist-url\": \"http://host.invalid/935cfbdbd784\", \"cache-size-mb\": 4, \"config-dir\": \"/downloads/config\", \"default-trackers\": \"\", \"dht-enabled\": false, \"download-dir\": \"/downloads/\", \"download-dir-free-space\": 63431938048, \"download-queue-enabled\": true, \"download-queue-size\": 5, \"encryption\": \"preferred\", \"idle-seeding-limit\": 30, \"idle-seeding-limit-enabled\": false, \"incomplete-dir\": \"/downloads/Downloads\", \"incomplete-dir-enabled\": false, \"lpd-enabled\": true, \"peer-limit-global\": 200, \"peer-limit-per-torrent\": 50, \"peer-port\": 51499, \"peer-port-random-on-start\": false, \"pex-enabled\": true, \"port-forwarding-enabled\": false, \"queue-stalled-enabled\": true, \"queue-stalled-minutes\": 30, \"rename-partial-files\": false, \"rpc-version\": 17, \"rpc-version-minimum\": 14, \"rpc-version-semver\": \"5.3.0\", \"script-torrent-added-enabled\": false, \"script-torrent-added-filename\": \"\", \"script-torrent-done-enabled\": false, \"script-torrent-done-filename\": \"\", \"script-torrent-done-seeding-enabled\": false, \"script-torrent-done-seeding-filename\": \"\", \"seed-queue-enabled\": false, \"seed-queue-size\": 10, \"seedRatioLimit\": 0, \"seedRatioLimited\": true, \"session-id\": \"0123456789abcdef0123456789abcdef\", \"speed-limit-down\": 100, \"speed-limit-down-enabled\": false, \"speed-limit-up\": 100, \"speed-limit-up-enabled\": false, \"start-added-torrents\": true, \"tcp-enabled\": true, \"trash-original-torrent-files\": false, \"units\": {\"memory-bytes\": 1024, \"memory-units\": [\"KiB\", \"MiB\", \"GiB\", \"TiB\"], \"size-bytes\": 1000, \"size-units\": [\"kB\", \"MB\", \"GB\", \"TB\"], \"speed-bytes\": 1000, \"speed-units\": [\"kB/s\", \"MB/s\", \"GB/s\", \"TB/s\"]}, \"utp-enabled\": true, \"version\": \"4.0.5 (a6fe2a64aa)\"}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:15 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 11,
+  "time": "2026-11-19T20:16:15Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-add\", \"arguments\": {\"metainfo\": \"ZDg6YW5ub3VuY2UzMDp1ZHA6Ly90cmFja2VyLmludmFsaWQ6Njk2OS9hbm5vdW5jZTQ6aW5mb2Q2Omxlbmd0aGkxZTQ6bmFtZTc6Zml4dHVyZTEyOnBpZWNlIGxlbmd0aGkxNjM4NGU2OnBpZWNlczIwOgAAAAAAAAAAAAAAAAAAAAAAAAAAZWU=\", \"paused\": false, \"download-dir\": \"/downloads/radarr\", \"labels\": [\"radarr\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "2211",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef",
+    "traceparent": "00-a828695aebebc493e0cd09793aeac2b0-5459a824a050c0f3-00"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrent-added\": {\"hashString\": \"7cbe967bfea1f469d2f49bb381e2d41e30e3493c\", \"id\": 4, \"name\": \"Blindspotting.2018.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\"}}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:15 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 12,
+  "time": "2026-11-19T20:16:15Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": [{\"downloadDir\": \"/downloads/radarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"f672aefdc079f84acc589280ab1e95316cdff48d\", \"id\": 3, \"isFinished\": false, \"labels\": [\"radarr\"], \"leftUntilDone\": 0, \"name\": \"Backcountry.2015.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 0, \"secondsSeeding\": 5, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 0, \"seedRatioMode\": 2, \"status\": 6, \"totalSize\": 1106640, \"uploadedEver\": 0}, {\"downloadDir\": \"/downloads/radarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"7cbe967bfea1f469d2f49bb381e2d41e30e3493c\", \"id\": 4, \"isFinished\": false, \"labels\": [\"radarr\"], \"leftUntilDone\": 2000000, \"name\": \"Blindspotting.2018.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 3, \"secondsSeeding\": 0, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 0, \"seedRatioMode\": 0, \"status\": 4, \"totalSize\": 2000000, \"uploadedEver\": 0}]}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:18 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 13,
+  "time": "2026-11-19T20:16:18Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": [{\"downloadDir\": \"/downloads/radarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"f672aefdc079f84acc589280ab1e95316cdff48d\", \"id\": 3, \"isFinished\": false, \"labels\": [\"radarr\"], \"leftUntilDone\": 0, \"name\": \"Backcountry.2015.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 0, \"secondsSeeding\": 10, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 0, \"seedRatioMode\": 2, \"status\": 6, \"totalSize\": 1106640, \"uploadedEver\": 0}, {\"downloadDir\": \"/downloads/radarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"7cbe967bfea1f469d2f49bb381e2d41e30e3493c\", \"id\": 4, \"isFinished\": false, \"labels\": [\"radarr\"], \"leftUntilDone\": 2000000, \"name\": \"Blindspotting.2018.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 8, \"secondsSeeding\": 0, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 0, \"seedRatioMode\": 0, \"status\": 4, \"totalSize\": 2000000, \"uploadedEver\": 0}]}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:23 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 14,
+  "time": "2026-11-19T20:16:23Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": [{\"downloadDir\": \"/downloads/radarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"f672aefdc079f84acc589280ab1e95316cdff48d\", \"id\": 3, \"isFinished\": false, \"labels\": [\"radarr\"], \"leftUntilDone\": 0, \"name\": \"Backcountry.2015.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 0, \"secondsSeeding\": 25, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 0, \"seedRatioMode\": 2, \"status\": 6, \"totalSize\": 1106640, \"uploadedEver\": 0}, {\"downloadDir\": \"/downloads/radarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"7cbe967bfea1f469d2f49bb381e2d41e30e3493c\", \"id\": 4, \"isFinished\": false, \"labels\": [\"radarr\"], \"leftUntilDone\": 2000000, \"name\": \"Blindspotting.2018.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 23, \"secondsSeeding\": 0, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 0, \"seedRatioMode\": 0, \"status\": 4, \"totalSize\": 2000000, \"uploadedEver\": 0}]}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:38 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 15,
+  "time": "2026-11-19T20:16:38Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": [{\"downloadDir\": \"/downloads/radarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"f672aefdc079f84acc589280ab1e95316cdff48d\", \"id\": 3, \"isFinished\": false, \"labels\": [\"radarr\"], \"leftUntilDone\": 0, \"name\": \"Backcountry.2015.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 0, \"secondsSeeding\": 40, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 0, \"seedRatioMode\": 2, \"status\": 6, \"totalSize\": 1106640, \"uploadedEver\": 0}, {\"downloadDir\": \"/downloads/radarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"7cbe967bfea1f469d2f49bb381e2d41e30e3493c\", \"id\": 4, \"isFinished\": false, \"labels\": [\"radarr\"], \"leftUntilDone\": 2000000, \"name\": \"Blindspotting.2018.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 38, \"secondsSeeding\": 0, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 0, \"seedRatioMode\": 0, \"status\": 4, \"totalSize\": 2000000, \"uploadedEver\": 0}]}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:16:53 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 16,
+  "time": "2026-11-19T20:16:53Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": [{\"downloadDir\": \"/downloads/radarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"f672aefdc079f84acc589280ab1e95316cdff48d\", \"id\": 3, \"isFinished\": false, \"labels\": [\"radarr\"], \"leftUntilDone\": 0, \"name\": \"Backcountry.2015.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 0, \"secondsSeeding\": 55, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 0, \"seedRatioMode\": 2, \"status\": 6, \"totalSize\": 1106640, \"uploadedEver\": 0}, {\"downloadDir\": \"/downloads/radarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"7cbe967bfea1f469d2f49bb381e2d41e30e3493c\", \"id\": 4, \"isFinished\": false, \"labels\": [\"radarr\"], \"leftUntilDone\": 2000000, \"name\": \"Blindspotting.2018.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 53, \"secondsSeeding\": 0, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 0, \"seedRatioMode\": 0, \"status\": 4, \"totalSize\": 2000000, \"uploadedEver\": 0}]}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:17:08 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 17,
+  "time": "2026-11-19T20:17:08Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": [{\"downloadDir\": \"/downloads/radarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"f672aefdc079f84acc589280ab1e95316cdff48d\", \"id\": 3, \"isFinished\": false, \"labels\": [\"radarr\"], \"leftUntilDone\": 0, \"name\": \"Backcountry.2015.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 0, \"secondsSeeding\": 71, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 0, \"seedRatioMode\": 2, \"status\": 6, \"totalSize\": 1106640, \"uploadedEver\": 0}, {\"downloadDir\": \"/downloads/radarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"7cbe967bfea1f469d2f49bb381e2d41e30e3493c\", \"id\": 4, \"isFinished\": false, \"labels\": [\"radarr\"], \"leftUntilDone\": 2000000, \"name\": \"Blindspotting.2018.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 69, \"secondsSeeding\": 0, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 0, \"seedRatioMode\": 0, \"status\": 4, \"totalSize\": 2000000, \"uploadedEver\": 0}]}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:17:24 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 18,
+  "time": "2026-11-19T20:17:24Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": [{\"downloadDir\": \"/downloads/radarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"f672aefdc079f84acc589280ab1e95316cdff48d\", \"id\": 3, \"isFinished\": false, \"labels\": [\"radarr\"], \"leftUntilDone\": 0, \"name\": \"Backcountry.2015.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 0, \"secondsSeeding\": 95, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 0, \"seedRatioMode\": 2, \"status\": 6, \"totalSize\": 1106640, \"uploadedEver\": 0}, {\"downloadDir\": \"/downloads/radarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"7cbe967bfea1f469d2f49bb381e2d41e30e3493c\", \"id\": 4, \"isFinished\": false, \"labels\": [\"radarr\"], \"leftUntilDone\": 2000000, \"name\": \"Blindspotting.2018.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 93, \"secondsSeeding\": 0, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 0, \"seedRatioMode\": 0, \"status\": 4, \"totalSize\": 2000000, \"uploadedEver\": 0}]}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:17:48 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 19,
+  "time": "2026-11-19T20:17:48Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": [{\"downloadDir\": \"/downloads/radarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"f672aefdc079f84acc589280ab1e95316cdff48d\", \"id\": 3, \"isFinished\": false, \"labels\": [\"radarr\"], \"leftUntilDone\": 0, \"name\": \"Backcountry.2015.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 0, \"secondsSeeding\": 102, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 0, \"seedRatioMode\": 2, \"status\": 6, \"totalSize\": 1106640, \"uploadedEver\": 0}, {\"downloadDir\": \"/downloads/radarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"7cbe967bfea1f469d2f49bb381e2d41e30e3493c\", \"id\": 4, \"isFinished\": false, \"labels\": [\"radarr\"], \"leftUntilDone\": 2000000, \"name\": \"Blindspotting.2018.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 100, \"secondsSeeding\": 0, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 0, \"seedRatioMode\": 0, \"status\": 4, \"totalSize\": 2000000, \"uploadedEver\": 0}]}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:17:55 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 20,
+  "time": "2026-11-19T20:17:55Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": [{\"downloadDir\": \"/downloads/radarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"f672aefdc079f84acc589280ab1e95316cdff48d\", \"id\": 3, \"isFinished\": false, \"labels\": [\"radarr\"], \"leftUntilDone\": 0, \"name\": \"Backcountry.2015.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 0, \"secondsSeeding\": 115, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 0, \"seedRatioMode\": 2, \"status\": 6, \"totalSize\": 1106640, \"uploadedEver\": 0}, {\"downloadDir\": \"/downloads/radarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"7cbe967bfea1f469d2f49bb381e2d41e30e3493c\", \"id\": 4, \"isFinished\": false, \"labels\": [\"radarr\"], \"leftUntilDone\": 2000000, \"name\": \"Blindspotting.2018.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 113, \"secondsSeeding\": 0, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 0, \"seedRatioMode\": 0, \"status\": 4, \"totalSize\": 2000000, \"uploadedEver\": 0}]}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:18:08 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 21,
+  "time": "2026-11-19T20:18:08Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-remove\", \"arguments\": {\"ids\": [\"7cbe967bfea1f469d2f49bb381e2d41e30e3493c\"], \"delete-local-data\": true}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "153",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef",
+    "traceparent": "00-51445159eb374b0081e604bcbf4621bf-6a3dc93203e367ce-00"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:18:13 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 22,
+  "time": "2026-11-19T20:18:13Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": [{\"downloadDir\": \"/downloads/radarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"f672aefdc079f84acc589280ab1e95316cdff48d\", \"id\": 3, \"isFinished\": false, \"labels\": [\"radarr\"], \"leftUntilDone\": 0, \"name\": \"Backcountry.2015.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 0, \"secondsSeeding\": 123, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 0, \"seedRatioMode\": 2, \"status\": 6, \"totalSize\": 1106640, \"uploadedEver\": 0}]}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:18:16 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 23,
+  "time": "2026-11-19T20:18:16Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": [{\"downloadDir\": \"/downloads/radarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"f672aefdc079f84acc589280ab1e95316cdff48d\", \"id\": 3, \"isFinished\": false, \"labels\": [\"radarr\"], \"leftUntilDone\": 0, \"name\": \"Backcountry.2015.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 0, \"secondsSeeding\": 151, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 0, \"seedRatioMode\": 2, \"status\": 6, \"totalSize\": 1106640, \"uploadedEver\": 0}]}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:18:44 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 24,
+  "time": "2026-11-19T20:18:44Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": [{\"downloadDir\": \"/downloads/radarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"f672aefdc079f84acc589280ab1e95316cdff48d\", \"id\": 3, \"isFinished\": false, \"labels\": [\"radarr\"], \"leftUntilDone\": 0, \"name\": \"Backcountry.2015.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 0, \"secondsSeeding\": 166, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 0, \"seedRatioMode\": 2, \"status\": 6, \"totalSize\": 1106640, \"uploadedEver\": 0}]}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:18:59 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 25,
+  "time": "2026-11-19T20:18:59Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": [{\"downloadDir\": \"/downloads/radarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"f672aefdc079f84acc589280ab1e95316cdff48d\", \"id\": 3, \"isFinished\": false, \"labels\": [\"radarr\"], \"leftUntilDone\": 0, \"name\": \"Backcountry.2015.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 0, \"secondsSeeding\": 181, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 0, \"seedRatioMode\": 2, \"status\": 6, \"totalSize\": 1106640, \"uploadedEver\": 0}]}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:19:14 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 26,
+  "time": "2026-11-19T20:19:14Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": [{\"downloadDir\": \"/downloads/radarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"f672aefdc079f84acc589280ab1e95316cdff48d\", \"id\": 3, \"isFinished\": false, \"labels\": [\"radarr\"], \"leftUntilDone\": 0, \"name\": \"Backcountry.2015.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 0, \"secondsSeeding\": 196, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 0, \"seedRatioMode\": 2, \"status\": 6, \"totalSize\": 1106640, \"uploadedEver\": 0}]}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:19:29 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 27,
+  "time": "2026-11-19T20:19:29Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": [{\"downloadDir\": \"/downloads/radarr\", \"downloadedEver\": 0, \"errorString\": \"\", \"eta\": -1, \"file-count\": 1, \"hashString\": \"f672aefdc079f84acc589280ab1e95316cdff48d\", \"id\": 3, \"isFinished\": true, \"labels\": [\"radarr\"], \"leftUntilDone\": 0, \"name\": \"Backcountry.2015.ITA.ENG.1080p.WEB-DL.DDP5.1.H.264-UNARR.mkv\", \"secondsDownloading\": 0, \"secondsSeeding\": 0, \"seedIdleLimit\": 30, \"seedIdleMode\": 0, \"seedRatioLimit\": 0, \"seedRatioMode\": 0, \"status\": 0, \"totalSize\": 1106640, \"uploadedEver\": 0}]}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:19:56 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 28,
+  "time": "2026-11-19T20:19:57Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"session-get\"}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "29",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"alt-speed-down\": 50, \"alt-speed-enabled\": false, \"alt-speed-time-begin\": 540, \"alt-speed-time-day\": 127, \"alt-speed-time-enabled\": false, \"alt-speed-time-end\": 1020, \"alt-speed-up\": 50, \"anti-brute-force-enabled\": false, \"anti-brute-force-threshold\": 100, \"blocklist-enabled\": false, \"blocklist-size\": 0, \"blocklist-url\": \"http://host.invalid/935cfbdbd784\", \"cache-size-mb\": 4, \"config-dir\": \"/downloads/config\", \"default-trackers\": \"\", \"dht-enabled\": false, \"download-dir\": \"/downloads/\", \"download-dir-free-space\": 63428624384, \"download-queue-enabled\": true, \"download-queue-size\": 5, \"encryption\": \"preferred\", \"idle-seeding-limit\": 30, \"idle-seeding-limit-enabled\": false, \"incomplete-dir\": \"/downloads/Downloads\", \"incomplete-dir-enabled\": false, \"lpd-enabled\": true, \"peer-limit-global\": 200, \"peer-limit-per-torrent\": 50, \"peer-port\": 51499, \"peer-port-random-on-start\": false, \"pex-enabled\": true, \"port-forwarding-enabled\": false, \"queue-stalled-enabled\": true, \"queue-stalled-minutes\": 30, \"rename-partial-files\": false, \"rpc-version\": 17, \"rpc-version-minimum\": 14, \"rpc-version-semver\": \"5.3.0\", \"script-torrent-added-enabled\": false, \"script-torrent-added-filename\": \"\", \"script-torrent-done-enabled\": false, \"script-torrent-done-filename\": \"\", \"script-torrent-done-seeding-enabled\": false, \"script-torrent-done-seeding-filename\": \"\", \"seed-queue-enabled\": false, \"seed-queue-size\": 10, \"seedRatioLimit\": 0, \"seedRatioLimited\": true, \"session-id\": \"0123456789abcdef0123456789abcdef\", \"speed-limit-down\": 100, \"speed-limit-down-enabled\": false, \"speed-limit-up\": 100, \"speed-limit-up-enabled\": false, \"start-added-torrents\": true, \"tcp-enabled\": true, \"trash-original-torrent-files\": false, \"units\": {\"memory-bytes\": 1024, \"memory-units\": [\"KiB\", \"MiB\", \"GiB\", \"TiB\"], \"size-bytes\": 1000, \"size-units\": [\"kB\", \"MB\", \"GB\", \"TB\"], \"speed-bytes\": 1000, \"speed-units\": [\"kB/s\", \"MB/s\", \"GB/s\", \"TB/s\"]}, \"utp-enabled\": true, \"version\": \"4.0.5 (a6fe2a64aa)\"}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:19:57 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 29,
+  "time": "2026-11-19T20:19:57Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-remove\", \"arguments\": {\"ids\": [\"f672aefdc079f84acc589280ab1e95316cdff48d\"], \"delete-local-data\": true}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "153",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:19:57 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 30,
+  "time": "2026-11-19T20:19:57Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": []}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:20:12 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 31,
+  "time": "2026-11-19T20:20:12Z"
+ },
+ {
+  "request": {
+   "body": "{\"method\": \"torrent-get\", \"arguments\": {\"fields\": [\"id\", \"hashString\", \"name\", \"downloadDir\", \"totalSize\", \"leftUntilDone\", \"isFinished\", \"eta\", \"status\", \"secondsDownloading\", \"secondsSeeding\", \"errorString\", \"uploadedEver\", \"downloadedEver\", \"seedRatioLimit\", \"seedRatioMode\", \"seedIdleLimit\", \"seedIdleMode\", \"fileCount\", \"file-count\", \"labels\"]}}",
+   "headers": {
+    "Accept": "application/json",
+    "Accept-Encoding": "gzip, br",
+    "Authorization": "Basic dW5hcnI6Zml4dHVyZQ==",
+    "Connection": "close",
+    "Content-Length": "496",
+    "Content-Type": "application/json",
+    "Host": "downloadclient.invalid",
+    "User-Agent": "Radarr/6.4.4.10685 (ubuntu 24.04)",
+    "X-Transmission-Session-Id": "0123456789abcdef0123456789abcdef"
+   },
+   "method": "POST",
+   "path": "/transmission/rpc"
+  },
+  "response": {
+   "body": "{\"arguments\": {\"torrents\": []}, \"result\": \"success\"}",
+   "headers": {
+    "Access-Control-Allow-Origin": "*",
+    "Content-Security-Policy": "frame-ancestors 'self'",
+    "Content-Type": "application/json; charset=UTF-8",
+    "Date": "Thu, 19 Nov 2026 20:20:27 GMT",
+    "Server": "Transmission",
+    "X-Frame-Options": "SAMEORIGIN"
+   },
+   "status": 200
+  },
+  "seq": 32,
+  "time": "2026-11-19T20:20:27Z"
+ }
+]

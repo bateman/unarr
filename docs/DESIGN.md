@@ -1076,9 +1076,12 @@ the size are in section 20, with why they were not taken.
   parameters, the section whose location holds the series' root folder,
   the two-hour version cache). The remaining implementations keep their
   settings and flags and answer a test with a validation error saying
-  Unarr does not drive them. The plex.tv side (sign-in, server list, the
-  ping on every update) is not called: it needs the user's account, and
-  the `action` endpoint answers the originals' empty object. A notification
+  Unarr does not drive them. Of the plex.tv side, the daily ping that
+  keeps the token alive is sent as the originals send it (before each
+  library update and connection test, once a day per token, its answer
+  ignored); the sign-in and the server list are not offered, since they
+  need the user's account, and the `action` endpoint answers the
+  originals' empty object. A notification
   that keeps failing backs off with the originals' periods (five levels,
   no block within five minutes of the first failure) in the shared
   `provider_status` table; a test whose target never answers escapes as a
@@ -1745,8 +1748,9 @@ the size are in section 20, with why they were not taken.
   compilation, under a second, once per sync.
 - **What is stored and not applied, or not sent**, each because nothing
   on the fixture exercises it: the notifications for a movie added, movies
-  deleted and an application update, the ping to plex.tv before a library
-  update. The file date setting and the 3D token were on this list when
+  deleted and an application update. The ping to plex.tv before a library
+  update was on this list too, until it was sent (section 13). The file
+  date setting and the 3D token were on this list when
   the milestone closed and were done right after. The file date is
   compared as the original compares it, the UTC day the file was written
   against the wanted date, so a file already dated is left alone at the
@@ -2083,8 +2087,35 @@ the size are in section 20, with why they were not taken.
   queue of nineteen groups that are all Sonarr's, of which Radarr shows
   none. Unarr's clients, configured as Radarr configures them, passed
   against all four as they were, with no request the real Radarr had not
-  made. Any exchange with SABnzbd or Transmission would extend the
-  replays.
+  made. SABnzbd and Transmission, never seen in the maintainer's
+  installations, were recorded in a container instead: the real SABnzbd
+  4.2.2 and Transmission 4.0.5 on loopback, the original Sonarr 4.0.20 and
+  Radarr 6.4.4 on the fixtures (`scripts/sonarr-fixture.sh shell`,
+  `radarr-fixture.sh shell`) talking to them through
+  `scripts/downloadclient-capture.py proxy`, which keeps whole requests
+  (`sabnzbd`, `transmission`, `radarr-sabnzbd`, `radarr-transmission`).
+  Each recording covers the test, two or three grabs pushed with
+  `/release/push`, queue refreshes, and the removals: for Transmission a
+  torrent whose data was in place before the add, verified at 100 %,
+  imported, then removed once stopped at the global ratio, and one left at
+  0 % removed from the queue with "remove from client"; for SABnzbd a job
+  completed and imported, one failed ("Not on your server(s)"), both
+  removed from the history, and one removed from a paused queue. The news
+  server SABnzbd downloaded from is `scripts/nntp-stub.py`, a stand-in
+  that serves yEnc articles cut from a local file and answers 430 for the
+  others: the jobs are real SABnzbd jobs, the Usenet side is not.
+  `crates/unarr-mock/tests/proxy_captures.rs` drives Unarr's clients
+  through each moment of the recordings (`/capture/<name>@<seqs>`) and
+  compares every request with the original's: method, path, query,
+  JSON-RPC body or multipart parts, credentials and session headers. The
+  SABnzbd client needed no change; the Transmission one did, four
+  times: the originals always send basic credentials (empty ones as
+  `Basic Og==`), keep the version six hours instead of asking
+  `session-get` before each `torrent-get`, read the session's seed limits
+  only for a stopped torrent, and fold the doubled separator of a
+  download-dir ending in `/`. Not recorded: a completed SABnzbd job with
+  par2 repair or unpacking, an authenticated Transmission, a magnet
+  added to Transmission, and Transmission before 4.0 (without labels).
 - The memory figures in section 9 come from a glibc build, where
   `malloc_trim` returns freed pages. The published image is a static musl
   build: musl's allocator has no `malloc_trim` (the call is compiled out)
@@ -2127,9 +2158,10 @@ the size are in section 20, with why they were not taken.
   download and removes the torrent from the client a second time; a
   torrent is removed right after its import when qBittorrent has stopped
   it (`stoppedUP`) at a global inactive-seeding limit; and Sonarr's
-  `PlexServer` pings plex.tv (`/api/v2/ping`) with the token on every
-  import before scheduling the library update, which Unarr does not do
-  (see the next point). The real Plex server was off during those logs
+  `PlexServer` pings plex.tv (`/api/v2/ping`) with the token before
+  scheduling the library update, which Unarr has done the same way since
+  19 November 2026 (section 13; the source caches the ping a day per
+  token). The real Plex server was off during those logs
   (it follows the television), so Sonarr's refreshes failed. On 9 November
   2026 Unarr itself replaced Sonarr on the maintainer's NAS for one
   episode, from search to the real Plex, which is the homelab run of
@@ -2480,3 +2512,31 @@ below, the recommended one; for a row the audit rated medium
   and is refused, where with WebSockets alone listed it would stop sooner;
   it gets no live updates either way, and the answer stays the original's.
 - **To revisit** if a user's proxy cannot pass WebSockets.
+
+### 21.5 A blank Plex token is not pinged, and does not fail
+
+Taken by the implementer on 19 November 2026, when the ping to plex.tv
+was added; for the maintainer to confirm or overturn.
+
+- **The question.** The originals ping plex.tv through a cache keyed by
+  the token, and their cache refuses a blank key
+  (`Ensure.That(key).IsNotNullOrWhiteSpace()` in `Cached.Get`). With no
+  token, the exception escapes `PlexServer.Test` (the connection test
+  fails with an error) and `UpdateIfEnabled` (every import's Plex
+  notification fails before the library update is queued). A Plex server
+  that lets the local network in without a token is never refreshed.
+- **Options.**
+  - *As the originals*: throw where they throw, the test answering an
+    error and the updates failing. Not recorded on the originals, so the
+    error's exact answer would be the source's reading.
+  - *Skip the ping* (taken): no ping for a blank token, and the test and
+    the update go on to the server, which says whether it needs a token,
+    as Unarr did before the ping was added.
+- **Why.** The originals' failure is a side effect of a cache, not a
+  check of the settings: their validator accepts a blank token, and their
+  server requests leave it out when blank. Reproducing it would break a
+  setup that works with the server, for no client that depends on it.
+- **Cost.** An installation with a blank token sees its Plex refreshed by
+  Unarr where the original failed: a difference, in the direction of what
+  the settings ask for.
+- **To revisit** if the maintainer prefers the originals' behaviour.
