@@ -363,11 +363,11 @@ mod environment_tests {
             ("info", "Trace", LogLevel::Trace),
             ("trace", "warn", LogLevel::Warn),
             ("debug", "off", LogLevel::Off),
+            ("debug", "Critical", LogLevel::Info),
             ("debug", "loud", LogLevel::Info),
             ("debug", "Warning", LogLevel::Warn),
             ("trace", "Information", LogLevel::Info),
             ("debug", "None", LogLevel::Off),
-            ("debug", "Critical", LogLevel::Info),
         ] {
             h.log_level = log.into();
             h.console_log_level = console.into();
@@ -377,6 +377,7 @@ mod environment_tests {
                 "LogLevel {log}, ConsoleLogLevel {console:?}"
             );
         }
+        h.console_log_level = "loud".into();
         assert_eq!(h.unreadable_console_level(), Some("loud"));
         h.console_log_level = " ".into();
         assert_eq!(h.unreadable_console_level(), None);
