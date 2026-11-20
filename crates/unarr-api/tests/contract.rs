@@ -2370,3 +2370,55 @@ async fn the_audit_goldens_match() {
         failures.join("\n")
     );
 }
+
+/// A `config.xml` with empty `<Username>` and `<Password>` makes a user of
+/// them at start, as the originals do; their `FindUser` finds no one for
+/// a blank name or password, so the form and Basic refuse an empty login.
+#[tokio::test]
+async fn a_blank_user_from_an_old_config_xml_opens_nothing() {
+    for method in [
+        unarr_core::config::AuthenticationMethod::Forms,
+        unarr_core::config::AuthenticationMethod::Basic,
+    ] {
+        let state = build_state_with(|h| h.authentication_method = method);
+        state
+            .db()
+            .call(|conn| {
+                conn.execute("DELETE FROM users", [])?;
+                let blank = unarr_core::config::LegacyUser {
+                    username: String::new(),
+                    password: String::new(),
+                };
+                assert!(unarr_api::ui::add_legacy_user(conn, &blank)?);
+                Ok(())
+            })
+            .await
+            .unwrap();
+        let app = unarr_api::router(state.clone());
+        let login = Request::builder()
+            .method("POST")
+            .uri("/login")
+            .header("content-type", "application/x-www-form-urlencoded")
+            .body(Body::from("username=&password=&rememberMe=on"))
+            .unwrap();
+        let response = app.clone().oneshot(login).await.unwrap();
+        let location = response
+            .headers()
+            .get("location")
+            .map(|v| v.to_str().unwrap().to_string())
+            .unwrap_or_default();
+        assert!(location.contains("loginFailed=true"), "{method:?}: {location}");
+        assert!(response.headers().get("set-cookie").is_none(), "{method:?}");
+        for basic in ["Basic Og==", "Basic IDog"] {
+            let page = get("/initialize.json")
+                .header("authorization", basic)
+                .body(Body::empty())
+                .unwrap();
+            let status = status_of(&app, page).await;
+            assert!(
+                status == StatusCode::UNAUTHORIZED || status == StatusCode::FOUND,
+                "{method:?} {basic}: {status}"
+            );
+        }
+    }
+}

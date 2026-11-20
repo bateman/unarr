@@ -250,9 +250,13 @@ pub async fn login(
     let remote = remote.map(|c| c.0 .0.ip());
     let username = form.username.to_lowercase();
     let password = form.password.clone();
+    let blank = blank_credentials(&username, &password);
     let user = state
         .db()
         .call(move |conn| {
+            if blank {
+                return Ok(None);
+            }
             Ok(store::providers::list_users(conn)?
                 .into_iter()
                 .find(|u| u.username.to_lowercase() == username))
@@ -326,6 +330,14 @@ pub async fn logout(
 }
 
 // --- password verification, as the originals store it
+
+/// `UserService.FindUser(username, password)`: a blank name or password
+/// finds no user, whatever the table holds. A `config.xml` with empty
+/// `<Username>` and `<Password>` makes a user of them at start, as the
+/// originals do; this is what keeps that user from opening the door.
+pub fn blank_credentials(username: &str, password: &str) -> bool {
+    username.trim().is_empty() || password.trim().is_empty()
+}
 
 /// PBKDF2-HMAC-SHA512 with the stored salt and iteration count (32 bytes,
 /// base64), or the legacy unsalted SHA-256 hex digest.
@@ -577,9 +589,13 @@ async fn basic_auth(state: &AppState, headers: &HeaderMap) -> Option<(String, bo
     let given = given.to_string();
     let username = given.to_lowercase();
     let password = password.to_string();
+    let blank = blank_credentials(&username, &password);
     let user = state
         .db()
         .call(move |conn| {
+            if blank {
+                return Ok(None);
+            }
             Ok(store::providers::list_users(conn)?
                 .into_iter()
                 .find(|u| u.username.to_lowercase() == username))
