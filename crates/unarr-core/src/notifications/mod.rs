@@ -172,6 +172,26 @@ impl NotificationDefinition {
     }
 }
 
+/// The originals' `ApplicationUpdateMessage`, built by their
+/// `Handle(UpdateInstalledEvent)`: the application's name and the two
+/// versions, Unarr's own (see `store::update_history`).
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct ApplicationUpdateMessage {
+    pub message: String,
+    pub previous_version: String,
+    pub new_version: String,
+}
+
+impl ApplicationUpdateMessage {
+    pub fn new(app_name: &str, previous_version: &str, new_version: &str) -> ApplicationUpdateMessage {
+        ApplicationUpdateMessage {
+            message: format!("{app_name} updated from {previous_version} to {new_version}"),
+            previous_version: previous_version.to_string(),
+            new_version: new_version.to_string(),
+        }
+    }
+}
+
 /// What a test can end in: failures the API lists, or an error the
 /// originals let escape (a connection that was refused, a name that does
 /// not resolve), answered with a 500.
@@ -984,6 +1004,27 @@ impl Notifier {
         }
     }
 
+    /// `Handle(UpdateInstalledEvent)`: every connection that asks, whatever
+    /// its tags. Plex does not override `OnApplicationUpdate`: the base's
+    /// no-op counts as sent.
+    pub async fn on_application_update(&self, update: &ApplicationUpdateMessage, now: DateTime<Utc>) {
+        for def in self.available(now, true).await {
+            if !def.on_application_update {
+                continue;
+            }
+            let result = match def.kind() {
+                Some(Kind::Discord) => {
+                    discord::on_application_update(&self.http, &def, update, &self.identity, now).await
+                }
+                Some(Kind::Webhook) => {
+                    webhook::on_application_update(&self.http, &def, update, &self.identity).await
+                }
+                _ => Ok(()),
+            };
+            self.deliver(&def, "OnApplicationUpdate", now, result).await;
+        }
+    }
+
     /// `PlexServer.UpdateIfEnabled`: plex.tv is pinged with the token (once
     /// a day), then the series joins the server's queue.
     async fn plex_update_if_enabled(&self, def: &NotificationDefinition, series: &Series) {
@@ -1243,6 +1284,45 @@ mod tests {
         assert_eq!(bytes_to_string(1536), "1.5 KB");
         // 2.25 rounds to even: 2.2.
         assert_eq!(bytes_to_string(2304), "2.2 KB");
+    }
+
+    #[test]
+    fn sonarr_tells_an_update_as_the_original() {
+        let identity = Identity {
+            instance_name: "Sonarr".into(),
+            machine_name: "nas".into(),
+            ..Identity::default()
+        };
+        let update = ApplicationUpdateMessage::new("Sonarr", "0.1.0", "0.2.0");
+        // No application URL in Sonarr's payload.
+        assert_eq!(
+            webhook::application_update_payload(&update, &identity),
+            serde_json::json!({
+                "eventType": "ApplicationUpdate",
+                "instanceName": "Sonarr",
+                "message": "Sonarr updated from 0.1.0 to 0.2.0",
+                "previousVersion": "0.1.0",
+                "newVersion": "0.2.0",
+            })
+        );
+        let settings =
+            discord::Settings::from_value(&serde_json::json!({"webHookUrl": "http://discord.test/hook"}));
+        let now = chrono::TimeZone::with_ymd_and_hms(&Utc, 2026, 11, 21, 10, 0, 0).unwrap();
+        let payload = discord::application_update_payload(&settings, &update, &identity, now);
+        assert_eq!(
+            payload["embeds"][0],
+            serde_json::json!({
+                // Sonarr signs with the machine's name.
+                "author": {"name": "nas", "icon_url": "https://raw.githubusercontent.com/Sonarr/Sonarr/develop/Logo/256.png"},
+                "timestamp": "2026-11-21T10:00:00.0000000Z",
+                "title": "Application Updated",
+                "color": 16761392,
+                "fields": [
+                    {"name": "Previous Version", "value": "0.1.0", "inline": false},
+                    {"name": "New Version", "value": "0.2.0", "inline": false},
+                ],
+            })
+        );
     }
 
     #[test]

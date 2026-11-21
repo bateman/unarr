@@ -126,7 +126,7 @@ Enumeration basis: 139 `IHandle<>`/`IHandleAsync<>` declarations, 36 `IExecute<>
 | TrackedDownloadRefreshedEvent | `Queue/QueueService.cs:97` | PRESENT `downloads/mod.rs:319-326` | — | — |
 | TrackedDownloadsRemovedEvent | `DownloadMonitoringService.cs:191` | PRESENT `downloads/mod.rs:202-209`; broadcasts `unarr-api/src/routes/queue.rs:451-544` | — | — |
 | UntrackedDownloadCompletedEvent | `NotificationService.cs:256` | PRESENT handler `notifications/mod.rs:723`; the manual-import emission for an untracked download was not traced (UNSURE) | — | low |
-| UpdateInstalledEvent | `NotificationService.cs:318` | OOS | — | — |
+| UpdateInstalledEvent | `NotificationService.cs:318` | OOS when audited; PRESENT since 21 November 2026: `Runtime::application_started` (`commands/executor.rs`) records Unarr's version in `update_history` (`store/update_history.rs`) at each start and, when it differs from the last one, sends Application Update on both personalities | — | — |
 
 ## (b) Commands (`IExecute<>`)
 

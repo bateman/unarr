@@ -36,18 +36,23 @@ const SONARR_MIGRATIONS: &[&str] = &[
     ),
     include_str!("../migrations/sonarr/0008_episode_statistics.sql"),
     include_str!("../migrations/sonarr/0009_extra_files.sql"),
+    include_str!("../migrations/shared/0010_update_history.sql"),
 ];
 
-/// Radarr's: the same shared tables as they stand today, then the movie
-/// side.
-const RADARR_MIGRATIONS: &[&str] = &[concat!(
-    include_str!("../migrations/shared/0001_core.sql"),
-    include_str!("../migrations/shared/0002_provider_status.sql"),
-    include_str!("../migrations/shared/0004_commands.sql"),
-    include_str!("../migrations/shared/0006_sequences.sql"),
-    include_str!("../migrations/shared/0007_import_list_status.sql"),
-    include_str!("../migrations/radarr/0001_movies.sql")
-)];
+/// Radarr's: the shared tables as they stood when the movie side was
+/// written, with the movie side; then the shared tables added since, in
+/// the order `unarr-radarr.db` files go through them.
+const RADARR_MIGRATIONS: &[&str] = &[
+    concat!(
+        include_str!("../migrations/shared/0001_core.sql"),
+        include_str!("../migrations/shared/0002_provider_status.sql"),
+        include_str!("../migrations/shared/0004_commands.sql"),
+        include_str!("../migrations/shared/0006_sequences.sql"),
+        include_str!("../migrations/shared/0007_import_list_status.sql"),
+        include_str!("../migrations/radarr/0001_movies.sql")
+    ),
+    include_str!("../migrations/shared/0010_update_history.sql"),
+];
 
 /// The migration set of a personality's database. Lidarr has none yet and
 /// gets Sonarr's, as it did before the sets were split: it serves nothing
@@ -248,7 +253,7 @@ mod tests {
             .pragma_query_value(None, "user_version", |r| r.get(0))
             .unwrap();
         // The sequence existing unarr-sonarr.db files went through.
-        assert_eq!(v, 9);
+        assert_eq!(v, 10);
         let tables: i64 = conn
             .query_row(
                 "SELECT count(*) FROM sqlite_master WHERE type = 'table' AND name = 'series'",
@@ -377,6 +382,7 @@ mod tests {
             "providers",
             "commands",
             "sequences",
+            "update_history",
         ] {
             assert!(has(table), "{table}");
         }

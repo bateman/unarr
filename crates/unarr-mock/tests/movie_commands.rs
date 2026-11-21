@@ -659,3 +659,119 @@ async fn the_list_sync_deletes_folders_only_when_the_level_says_so() {
         let _ = std::fs::remove_dir_all(&root);
     }
 }
+
+/// `UpdateHistoryService`: the first start records its version and tells
+/// nobody; a start on the same version neither; a start on another one
+/// tells every connection that asks, Discord and the webhook as Radarr
+/// builds them, whatever the connection's tags.
+#[tokio::test]
+async fn a_start_on_another_version_tells_the_connections() {
+    let mock = Mock::start(fixtures_dir(), 0).await.unwrap();
+    let db = fixture_db(&mock).await;
+    let url = mock.url();
+    db.call(move |conn| {
+        conn.execute("DELETE FROM providers WHERE kind = 'notification'", [])?;
+        let notification =
+            |id: i64, implementation: &str, settings: serde_json::Value, tags: Vec<i64>| Provider {
+                kind: ProviderKind::Notification,
+                id,
+                name: format!("Mock {implementation}"),
+                implementation: implementation.into(),
+                config_contract: format!("{implementation}Settings"),
+                settings,
+                tags,
+                attributes: json!({"onApplicationUpdate": true}),
+            };
+        store::providers::insert_provider(
+            conn,
+            &notification(
+                1,
+                "Discord",
+                json!({"webHookUrl": format!("{url}/discord/api/webhooks/100/fixturetoken")}),
+                vec![],
+            ),
+        )?;
+        store::providers::insert_provider(
+            conn,
+            &notification(
+                2,
+                "Webhook",
+                json!({"url": format!("{url}/webhook"), "method": 1}),
+                vec![7],
+            ),
+        )?;
+        let mut renames_only = notification(
+            3,
+            "Webhook",
+            json!({"url": format!("{url}/webhook/renames"), "method": 1}),
+            vec![],
+        );
+        renames_only.attributes = json!({"onRename": true});
+        store::providers::insert_provider(conn, &renames_only)?;
+        store::config::set_config(conn, "ApplicationUrl", "http://radarr.test")?;
+        Ok(())
+    })
+    .await
+    .unwrap();
+    let http = unarr_core::http::build(std::time::Duration::from_secs(10));
+    let indexers: &'static IndexerClient = Box::leak(Box::new(IndexerClient::for_personality(
+        http.clone(),
+        Personality::Radarr,
+    )));
+    let downloads = Arc::new(MovieDownloads::new(
+        db.clone(),
+        DownloadClientService::with_client(db.clone(), http, RADARR),
+    ));
+    let service = IndexerService::with_client(db.clone(), indexers);
+    let side = MovieSide {
+        downloads: downloads.clone(),
+        search: MovieSearchService::new(db.clone(), service.clone()).with_queue(downloads.queue_source()),
+        indexers: service,
+        http: None,
+    };
+    let identity = unarr_core::notifications::Identity {
+        instance_name: "Radarr".into(),
+        app_name: "Radarr".into(),
+        ..Default::default()
+    };
+    let runtime = Runtime::new_radarr(db.clone(), side, Arc::new(now), identity)
+        .await
+        .unwrap();
+
+    runtime.application_started("0.1.0").await;
+    runtime.application_started("0.1.0").await;
+    assert!(mock.clients().notifications.is_empty());
+
+    runtime.application_started("0.2.0").await;
+    let sent = mock.clients().notifications.clone();
+    assert_eq!(sent.len(), 2, "{sent:#?}");
+    let webhook = sent.iter().find(|n| n["service"] == "webhook").unwrap();
+    assert_eq!(
+        webhook["body"],
+        json!({
+            "eventType": "ApplicationUpdate",
+            "instanceName": "Radarr",
+            "applicationUrl": "http://radarr.test",
+            "message": "Radarr updated from 0.1.0 to 0.2.0",
+            "previousVersion": "0.1.0",
+            "newVersion": "0.2.0",
+        })
+    );
+    let discord = sent.iter().find(|n| n["service"] == "discord").unwrap();
+    let embed = &discord["body"]["embeds"][0];
+    assert_eq!(embed["author"]["name"], "Radarr");
+    assert_eq!(embed["title"], "Application Updated");
+    assert_eq!(embed["color"], 16761392);
+    assert!(embed["timestamp"].is_string());
+    assert_eq!(
+        embed["fields"],
+        json!([
+            {"name": "Previous Version", "value": "0.1.0", "inline": false},
+            {"name": "New Version", "value": "0.2.0", "inline": false},
+        ])
+    );
+    // The update is recorded: the next start on it tells nobody again.
+    mock.clients().notifications.clear();
+    runtime.application_started("0.2.0").await;
+    assert!(mock.clients().notifications.is_empty());
+}
