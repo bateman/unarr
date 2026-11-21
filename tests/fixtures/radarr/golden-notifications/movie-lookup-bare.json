@@ -1,0 +1,163 @@
+{
+  "body": {
+    "added": "0001-01-01T00:00:00Z",
+    "alternateTitles": [
+      {
+        "movieMetadataId": 0,
+        "sourceType": "tmdb",
+        "title": "Blade Runner 2"
+      },
+      {
+        "movieMetadataId": 0,
+        "sourceType": "tmdb",
+        "title": "Blejd Raner 2049"
+      },
+      {
+        "movieMetadataId": 0,
+        "sourceType": "tmdb",
+        "title": "Бегущий по лезвию 2"
+      },
+      {
+        "movieMetadataId": 0,
+        "sourceType": "tmdb",
+        "title": "Blade Runner 2049 3D"
+      },
+      {
+        "movieMetadataId": 0,
+        "sourceType": "tmdb",
+        "title": "ブレードランナー 2049"
+      },
+      {
+        "movieMetadataId": 0,
+        "sourceType": "tmdb",
+        "title": "블레이드 러너 2049"
+      },
+      {
+        "movieMetadataId": 0,
+        "sourceType": "tmdb",
+        "title": "블레이드러너 2049"
+      },
+      {
+        "movieMetadataId": 0,
+        "sourceType": "tmdb",
+        "title": "Blade Runner 2049: Bıçak Sırtı"
+      },
+      {
+        "movieMetadataId": 0,
+        "sourceType": "tmdb",
+        "title": "银翼杀手2049"
+      },
+      {
+        "movieMetadataId": 0,
+        "sourceType": "tmdb",
+        "title": "Շեղբի վրայով վազողը 2049"
+      },
+      {
+        "movieMetadataId": 0,
+        "sourceType": "tmdb",
+        "title": "Bıçak Sırtı 2049"
+      }
+    ],
+    "certification": "R",
+    "cleanTitle": "bladerunner2049",
+    "collection": {
+      "title": "Blade Runner Collection",
+      "tmdbId": 422837
+    },
+    "digitalRelease": "2017-12-26T00:00:00Z",
+    "folderName": "",
+    "genres": [
+      "Science Fiction",
+      "Drama"
+    ],
+    "images": [
+      {
+        "coverType": "poster",
+        "remoteUrl": "https://image.tmdb.org/t/p/original/gajva2L0rPYkEWjzgFlBXCAVBE5.jpg"
+      },
+      {
+        "coverType": "fanart",
+        "remoteUrl": "https://image.tmdb.org/t/p/original/gNdLJU9TxrpGx4dkZidjys3fyy0.jpg"
+      }
+    ],
+    "imdbId": "tt1856101",
+    "inCinemas": "2017-10-04T00:00:00Z",
+    "isAvailable": true,
+    "keywords": [
+      "2040s",
+      "android",
+      "artificial intelligence (a.i.)",
+      "blade runner",
+      "bounty hunter",
+      "cyber thriller",
+      "cyberpunk",
+      "dystopia",
+      "future",
+      "humanoid robot",
+      "las vegas",
+      "los angeles, california",
+      "sequel",
+      "slow burn",
+      "tech noir",
+      "transhumanism"
+    ],
+    "minimumAvailability": "tba",
+    "monitored": false,
+    "movieFileId": 0,
+    "originalLanguage": {
+      "id": 1,
+      "name": "English"
+    },
+    "originalTitle": "Blade Runner 2049",
+    "overview": "Thirty years after the events of the first film, a new blade runner, LAPD Officer K, unearths a long-buried secret that has the potential to plunge what's left of society into chaos. K's discovery leads him on a quest to find Rick Deckard, a former LAPD blade runner who has been missing for 30 years.",
+    "physicalRelease": "2018-01-16T00:00:00Z",
+    "popularity": 28.9999,
+    "qualityProfileId": 0,
+    "ratings": {
+      "imdb": {
+        "type": "user",
+        "value": 8,
+        "votes": 775743
+      },
+      "metacritic": {
+        "type": "user",
+        "value": 81,
+        "votes": 0
+      },
+      "rottenTomatoes": {
+        "type": "user",
+        "value": 88,
+        "votes": 0
+      },
+      "tmdb": {
+        "type": "user",
+        "value": 7.614,
+        "votes": 16009
+      },
+      "trakt": {
+        "type": "user",
+        "value": 7.89062,
+        "votes": 33371
+      }
+    },
+    "releaseDate": "2017-10-04T00:00:00Z",
+    "runtime": 164,
+    "secondaryYearSourceId": 0,
+    "sortTitle": "blade runner 2049",
+    "status": "released",
+    "studio": "Alcon Entertainment",
+    "tags": [],
+    "title": "Blade Runner 2049",
+    "titleSlug": "335984",
+    "tmdbId": 335984,
+    "website": "http://bladerunnermovie.com/",
+    "year": 2017,
+    "youTubeTrailerId": "geFtxCSz8xI"
+  },
+  "recordedAt": "2026-11-21T16:24:50Z",
+  "request": {
+    "method": "GET",
+    "path": "/api/v3/movie/lookup/tmdb?tmdbId=335984"
+  },
+  "status": 200
+}

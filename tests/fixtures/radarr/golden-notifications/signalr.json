@@ -1,0 +1,2068 @@
+[
+  {
+    "after": "config-host",
+    "messages": [
+      {
+        "body": {
+          "version": "6.4.4.10685"
+        },
+        "name": "version"
+      }
+    ]
+  },
+  {
+    "after": "config-host-put-proxy",
+    "messages": [
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "health"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "health"
+      }
+    ]
+  },
+  {
+    "after": "notification-create-webhook",
+    "messages": [
+      {
+        "body": {
+          "action": "created",
+          "resource": {
+            "configContract": "WebhookSettings",
+            "fields": [
+              {
+                "advanced": false,
+                "isFloat": false,
+                "label": "Webhook URL",
+                "name": "url",
+                "order": 0,
+                "privacy": "normal",
+                "type": "url",
+                "value": "http://127.0.0.1:18989/webhook"
+              },
+              {
+                "advanced": false,
+                "helpText": "Which HTTP method to use submit to the Webservice",
+                "isFloat": false,
+                "label": "Method",
+                "name": "method",
+                "order": 1,
+                "privacy": "normal",
+                "selectOptions": [
+                  {
+                    "dividerAfter": false,
+                    "name": "POST",
+                    "order": 1,
+                    "value": 1
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "PUT",
+                    "order": 2,
+                    "value": 2
+                  }
+                ],
+                "type": "select",
+                "value": 1
+              },
+              {
+                "advanced": false,
+                "isFloat": false,
+                "label": "Username",
+                "name": "username",
+                "order": 2,
+                "privacy": "userName",
+                "type": "textbox",
+                "value": "hook"
+              },
+              {
+                "advanced": false,
+                "isFloat": false,
+                "label": "Password",
+                "name": "password",
+                "order": 3,
+                "privacy": "password",
+                "type": "password",
+                "value": "********"
+              },
+              {
+                "advanced": true,
+                "isFloat": false,
+                "label": "Headers",
+                "name": "headers",
+                "order": 4,
+                "privacy": "normal",
+                "type": "keyValueList",
+                "value": [
+                  {
+                    "key": "X-Fixture",
+                    "value": "yes"
+                  }
+                ]
+              }
+            ],
+            "id": 4,
+            "implementation": "Webhook",
+            "implementationName": "Webhook",
+            "includeHealthWarnings": false,
+            "infoLink": "https://wiki.servarr.com/radarr/supported#webhook",
+            "name": "Mock Webhook",
+            "onApplicationUpdate": true,
+            "onDownload": true,
+            "onGrab": true,
+            "onHealthIssue": true,
+            "onHealthRestored": true,
+            "onManualInteractionRequired": true,
+            "onMovieAdded": true,
+            "onMovieDelete": true,
+            "onMovieFileDelete": true,
+            "onMovieFileDeleteForUpgrade": true,
+            "onRename": true,
+            "onUpgrade": true,
+            "supportsOnApplicationUpdate": true,
+            "supportsOnDownload": true,
+            "supportsOnGrab": true,
+            "supportsOnHealthIssue": true,
+            "supportsOnHealthRestored": true,
+            "supportsOnManualInteractionRequired": true,
+            "supportsOnMovieAdded": true,
+            "supportsOnMovieDelete": true,
+            "supportsOnMovieFileDelete": true,
+            "supportsOnMovieFileDeleteForUpgrade": true,
+            "supportsOnRename": true,
+            "supportsOnUpgrade": true,
+            "tags": []
+          }
+        },
+        "name": "notification"
+      }
+    ]
+  },
+  {
+    "after": "notification-create-discord",
+    "messages": [
+      {
+        "body": {
+          "action": "created",
+          "resource": {
+            "configContract": "DiscordSettings",
+            "fields": [
+              {
+                "advanced": false,
+                "helpText": "Discord channel webhook url",
+                "isFloat": false,
+                "label": "Webhook URL",
+                "name": "webHookUrl",
+                "order": 0,
+                "privacy": "normal",
+                "type": "textbox",
+                "value": "http://127.0.0.1:18989/discord/api/webhooks/100/fixturetoken"
+              },
+              {
+                "advanced": false,
+                "helpText": "The username to post as, defaults to Discord webhook default",
+                "isFloat": false,
+                "label": "Username",
+                "name": "username",
+                "order": 1,
+                "privacy": "userName",
+                "type": "textbox",
+                "value": "Unarr fixture"
+              },
+              {
+                "advanced": false,
+                "helpText": "Change the avatar that is used for messages from this integration",
+                "isFloat": false,
+                "label": "Avatar",
+                "name": "avatar",
+                "order": 2,
+                "privacy": "normal",
+                "type": "textbox",
+                "value": ""
+              },
+              {
+                "advanced": true,
+                "helpText": "Override the embed author that shows for this notification. Blank is instance name",
+                "isFloat": false,
+                "label": "Author",
+                "name": "author",
+                "order": 3,
+                "privacy": "normal",
+                "type": "textbox",
+                "value": ""
+              },
+              {
+                "advanced": true,
+                "helpText": "Change the fields that are passed in for this 'on grab' notification",
+                "isFloat": false,
+                "label": "On Grab Fields",
+                "name": "grabFields",
+                "order": 4,
+                "privacy": "normal",
+                "selectOptions": [
+                  {
+                    "dividerAfter": false,
+                    "name": "Overview",
+                    "order": 0,
+                    "value": 0
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Rating",
+                    "order": 1,
+                    "value": 1
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Genres",
+                    "order": 2,
+                    "value": 2
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Quality",
+                    "order": 3,
+                    "value": 3
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Group",
+                    "order": 4,
+                    "value": 4
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Size",
+                    "order": 5,
+                    "value": 5
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Links",
+                    "order": 6,
+                    "value": 6
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Release",
+                    "order": 7,
+                    "value": 7
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Poster",
+                    "order": 8,
+                    "value": 8
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Fanart",
+                    "order": 9,
+                    "value": 9
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Indexer",
+                    "order": 10,
+                    "value": 10
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "CustomFormats",
+                    "order": 11,
+                    "value": 11
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "CustomFormatScore",
+                    "order": 12,
+                    "value": 12
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Tags",
+                    "order": 13,
+                    "value": 13
+                  }
+                ],
+                "type": "select",
+                "value": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13
+                ]
+              },
+              {
+                "advanced": true,
+                "helpText": "Change the fields that are passed in for this 'on import' notification",
+                "isFloat": false,
+                "label": "On Import Fields",
+                "name": "importFields",
+                "order": 5,
+                "privacy": "normal",
+                "selectOptions": [
+                  {
+                    "dividerAfter": false,
+                    "name": "Overview",
+                    "order": 0,
+                    "value": 0
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Rating",
+                    "order": 1,
+                    "value": 1
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Genres",
+                    "order": 2,
+                    "value": 2
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Quality",
+                    "order": 3,
+                    "value": 3
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Codecs",
+                    "order": 4,
+                    "value": 4
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Group",
+                    "order": 5,
+                    "value": 5
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Size",
+                    "order": 6,
+                    "value": 6
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Languages",
+                    "order": 7,
+                    "value": 7
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Subtitles",
+                    "order": 8,
+                    "value": 8
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Links",
+                    "order": 9,
+                    "value": 9
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Release",
+                    "order": 10,
+                    "value": 10
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Poster",
+                    "order": 11,
+                    "value": 11
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Fanart",
+                    "order": 12,
+                    "value": 12
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Tags",
+                    "order": 13,
+                    "value": 13
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "CustomFormats",
+                    "order": 14,
+                    "value": 14
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "CustomFormatScore",
+                    "order": 15,
+                    "value": 15
+                  }
+                ],
+                "type": "select",
+                "value": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13
+                ]
+              },
+              {
+                "advanced": true,
+                "helpText": "Change the fields that are passed in for this 'on manual interation' notification",
+                "isFloat": false,
+                "label": "On Manual Interaction Fields",
+                "name": "manualInteractionFields",
+                "order": 6,
+                "privacy": "normal",
+                "selectOptions": [
+                  {
+                    "dividerAfter": false,
+                    "name": "Overview",
+                    "order": 0,
+                    "value": 0
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Rating",
+                    "order": 1,
+                    "value": 1
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Genres",
+                    "order": 2,
+                    "value": 2
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Quality",
+                    "order": 3,
+                    "value": 3
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Group",
+                    "order": 4,
+                    "value": 4
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Size",
+                    "order": 5,
+                    "value": 5
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Links",
+                    "order": 6,
+                    "value": 6
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "DownloadTitle",
+                    "order": 7,
+                    "value": 7
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Poster",
+                    "order": 8,
+                    "value": 8
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Fanart",
+                    "order": 9,
+                    "value": 9
+                  },
+                  {
+                    "dividerAfter": false,
+                    "name": "Tags",
+                    "order": 10,
+                    "value": 10
+                  }
+                ],
+                "type": "select",
+                "value": [
+                  0,
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10
+                ]
+              }
+            ],
+            "id": 5,
+            "implementation": "Discord",
+            "implementationName": "Discord",
+            "includeHealthWarnings": false,
+            "infoLink": "https://wiki.servarr.com/radarr/supported#discord",
+            "name": "Mock Discord",
+            "onApplicationUpdate": true,
+            "onDownload": true,
+            "onGrab": true,
+            "onHealthIssue": true,
+            "onHealthRestored": true,
+            "onManualInteractionRequired": true,
+            "onMovieAdded": true,
+            "onMovieDelete": true,
+            "onMovieFileDelete": true,
+            "onMovieFileDeleteForUpgrade": true,
+            "onRename": true,
+            "onUpgrade": true,
+            "supportsOnApplicationUpdate": true,
+            "supportsOnDownload": true,
+            "supportsOnGrab": true,
+            "supportsOnHealthIssue": true,
+            "supportsOnHealthRestored": true,
+            "supportsOnManualInteractionRequired": true,
+            "supportsOnMovieAdded": true,
+            "supportsOnMovieDelete": true,
+            "supportsOnMovieFileDelete": true,
+            "supportsOnMovieFileDeleteForUpgrade": true,
+            "supportsOnRename": true,
+            "supportsOnUpgrade": true,
+            "tags": []
+          }
+        },
+        "name": "notification"
+      }
+    ]
+  },
+  {
+    "after": "notification-create-plex",
+    "messages": [
+      {
+        "body": {
+          "action": "created",
+          "resource": {
+            "configContract": "PlexServerSettings",
+            "fields": [
+              {
+                "advanced": false,
+                "helpText": "Select server from plex.tv account after authenticating",
+                "isFloat": false,
+                "label": "Server",
+                "name": "server",
+                "order": 0,
+                "privacy": "normal",
+                "selectOptionsProviderAction": "servers",
+                "type": "select"
+              },
+              {
+                "advanced": false,
+                "isFloat": false,
+                "label": "Host",
+                "name": "host",
+                "order": 1,
+                "privacy": "normal",
+                "type": "textbox",
+                "value": "127.0.0.1"
+              },
+              {
+                "advanced": false,
+                "isFloat": false,
+                "label": "Port",
+                "name": "port",
+                "order": 2,
+                "privacy": "normal",
+                "type": "textbox",
+                "value": 18989
+              },
+              {
+                "advanced": false,
+                "helpText": "Connect to Plex over HTTPS instead of HTTP",
+                "isFloat": false,
+                "label": "Use SSL",
+                "name": "useSsl",
+                "order": 3,
+                "privacy": "normal",
+                "type": "checkbox",
+                "value": false
+              },
+              {
+                "advanced": true,
+                "helpText": "Adds a prefix to the Plex url, such as http://[host]:[port]/[urlBase]/plex",
+                "isFloat": false,
+                "label": "URL Base",
+                "name": "urlBase",
+                "order": 4,
+                "privacy": "normal",
+                "type": "textbox",
+                "value": ""
+              },
+              {
+                "advanced": true,
+                "isFloat": false,
+                "label": "Auth Token",
+                "name": "authToken",
+                "order": 5,
+                "privacy": "apiKey",
+                "type": "textbox",
+                "value": "********"
+              },
+              {
+                "advanced": false,
+                "isFloat": false,
+                "label": "Authenticate with Plex.tv",
+                "name": "signIn",
+                "order": 6,
+                "privacy": "normal",
+                "type": "oAuth",
+                "value": "startOAuth"
+              },
+              {
+                "advanced": false,
+                "isFloat": false,
+                "label": "Update Library",
+                "name": "updateLibrary",
+                "order": 7,
+                "privacy": "normal",
+                "type": "checkbox",
+                "value": true
+              },
+              {
+                "advanced": true,
+                "helpText": "Radarr path, used to modify movie paths when Plex sees library path location differently from Radarr (Requires 'Update Library')",
+                "isFloat": false,
+                "label": "Map Paths From",
+                "name": "mapFrom",
+                "order": 8,
+                "privacy": "normal",
+                "type": "textbox",
+                "value": ""
+              },
+              {
+                "advanced": true,
+                "helpText": "Plex path, used to modify movie paths when Plex sees library path location differently from Radarr (Requires 'Update Library')",
+                "isFloat": false,
+                "label": "Map Paths To",
+                "name": "mapTo",
+                "order": 9,
+                "privacy": "normal",
+                "type": "textbox",
+                "value": ""
+              }
+            ],
+            "id": 6,
+            "implementation": "PlexServer",
+            "implementationName": "Plex Media Server",
+            "includeHealthWarnings": false,
+            "infoLink": "https://wiki.servarr.com/radarr/supported#plexserver",
+            "name": "Mock Plex",
+            "onApplicationUpdate": false,
+            "onDownload": true,
+            "onGrab": false,
+            "onHealthIssue": false,
+            "onHealthRestored": false,
+            "onManualInteractionRequired": false,
+            "onMovieAdded": true,
+            "onMovieDelete": true,
+            "onMovieFileDelete": true,
+            "onMovieFileDeleteForUpgrade": true,
+            "onRename": true,
+            "onUpgrade": true,
+            "supportsOnApplicationUpdate": false,
+            "supportsOnDownload": true,
+            "supportsOnGrab": false,
+            "supportsOnHealthIssue": false,
+            "supportsOnHealthRestored": false,
+            "supportsOnManualInteractionRequired": false,
+            "supportsOnMovieAdded": false,
+            "supportsOnMovieDelete": true,
+            "supportsOnMovieFileDelete": true,
+            "supportsOnMovieFileDeleteForUpgrade": true,
+            "supportsOnRename": true,
+            "supportsOnUpgrade": true,
+            "tags": []
+          }
+        },
+        "name": "notification"
+      }
+    ]
+  },
+  {
+    "after": "movie-add",
+    "messages": [
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "body": {
+              "completionMessage": "Completed",
+              "isExclusive": false,
+              "isLongRunning": true,
+              "isNewMovie": true,
+              "isTypeExclusive": false,
+              "movieIds": [
+                328
+              ],
+              "name": "RefreshMovie",
+              "requiresDiskAccess": false,
+              "sendUpdatesToClient": true,
+              "suppressMessages": false,
+              "trigger": "unspecified",
+              "updateScheduledTask": false
+            },
+            "commandName": "Refresh Movie",
+            "id": 472955,
+            "message": "Updating info for Dune",
+            "name": "RefreshMovie",
+            "priority": "normal",
+            "queued": "2026-11-21T16:24:46Z",
+            "result": "unknown",
+            "sendUpdatesToClient": true,
+            "started": "2026-11-21T16:24:47Z",
+            "stateChangeTime": "2026-11-21T16:24:47Z",
+            "status": "started",
+            "trigger": "unspecified",
+            "updateScheduledTask": false
+          }
+        },
+        "name": "command"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "addOptions": {
+              "addMethod": "manual",
+              "ignoreEpisodesWithFiles": false,
+              "ignoreEpisodesWithoutFiles": false,
+              "monitor": "movieOnly",
+              "searchForMovie": false
+            },
+            "added": "2026-11-21T16:24:46Z",
+            "alternateTitles": [
+              {
+                "id": 2804,
+                "movieMetadataId": 298,
+                "sourceType": "tmdb",
+                "title": "デューン"
+              },
+              {
+                "id": 2805,
+                "movieMetadataId": 298,
+                "sourceType": "tmdb",
+                "title": "Dune: Part One"
+              },
+              {
+                "id": 2806,
+                "movieMetadataId": 298,
+                "sourceType": "tmdb",
+                "title": "חולית: חלק ראשון"
+              },
+              {
+                "id": 2807,
+                "movieMetadataId": 298,
+                "sourceType": "tmdb",
+                "title": "デューン 砂の惑星"
+              },
+              {
+                "id": 2808,
+                "movieMetadataId": 298,
+                "sourceType": "tmdb",
+                "title": "DUNE デューン 砂の惑星"
+              },
+              {
+                "id": 2809,
+                "movieMetadataId": 298,
+                "sourceType": "tmdb",
+                "title": "Duna: Parte Um"
+              },
+              {
+                "id": 2810,
+                "movieMetadataId": 298,
+                "sourceType": "tmdb",
+                "title": "Duna: Primeira Part"
+              },
+              {
+                "id": 2811,
+                "movieMetadataId": 298,
+                "sourceType": "tmdb",
+                "title": "Dune - Première partie"
+              },
+              {
+                "id": 2812,
+                "movieMetadataId": 298,
+                "sourceType": "tmdb",
+                "title": "Duna: Pjesa e Parë"
+              },
+              {
+                "id": 2813,
+                "movieMetadataId": 298,
+                "sourceType": "tmdb",
+                "title": "Dune: Parte uno"
+              },
+              {
+                "id": 2814,
+                "movieMetadataId": 298,
+                "sourceType": "tmdb",
+                "title": "Duna: Parte 1"
+              },
+              {
+                "id": 2815,
+                "movieMetadataId": 298,
+                "sourceType": "tmdb",
+                "title": "沙丘瀚戰：第一章"
+              },
+              {
+                "id": 2816,
+                "movieMetadataId": 298,
+                "sourceType": "tmdb",
+                "title": "Դյունա"
+              },
+              {
+                "id": 2817,
+                "movieMetadataId": 298,
+                "sourceType": "tmdb",
+                "title": "デューン 砂の惑星PART1"
+              },
+              {
+                "id": 2818,
+                "movieMetadataId": 298,
+                "sourceType": "tmdb",
+                "title": "სილახვავი"
+              },
+              {
+                "id": 2819,
+                "movieMetadataId": 298,
+                "sourceType": "tmdb",
+                "title": "Dyun"
+              },
+              {
+                "id": 2820,
+                "movieMetadataId": 298,
+                "sourceType": "tmdb",
+                "title": "Dyuna : 1-ci Hissə"
+              },
+              {
+                "id": 2821,
+                "movieMetadataId": 298,
+                "sourceType": "tmdb",
+                "title": "Дюна: Часть первая"
+              }
+            ],
+            "certification": "PG-13",
+            "cleanTitle": "dune",
+            "collection": {
+              "title": "Dune Collection",
+              "tmdbId": 726871
+            },
+            "digitalRelease": "2021-10-21T00:00:00Z",
+            "folderName": "/movies/Dune (2021) {tmdb-438631}",
+            "genres": [
+              "Science Fiction",
+              "Adventure"
+            ],
+            "hasFile": false,
+            "id": 328,
+            "images": [
+              {
+                "coverType": "poster",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/v1tRXZ4JtD2Iv6fjkPvT4GiwslV.jpg",
+                "url": "/MediaCover/328/poster.jpg?h=bd15f9a27331fc78d4df"
+              },
+              {
+                "coverType": "fanart",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/qVgZu5BTx6pu4owCvVOm4zjTfOi.jpg",
+                "url": "/MediaCover/328/fanart.jpg?h=251f444906d2ce7ea00b"
+              }
+            ],
+            "imdbId": "tt1160419",
+            "inCinemas": "2021-09-15T00:00:00Z",
+            "isAvailable": true,
+            "keywords": [
+              "army",
+              "baron",
+              "based on novel or book",
+              "betrayal",
+              "chosen one",
+              "complex",
+              "creature",
+              "desert",
+              "destiny",
+              "dystopia",
+              "emperor",
+              "empire",
+              "future",
+              "giant creature",
+              "giant worm",
+              "hallucinogen",
+              "knife fight",
+              "messiah",
+              "mother son relationship",
+              "premonition",
+              "prophecy",
+              "revenge",
+              "sand",
+              "sand dune",
+              "space",
+              "space opera",
+              "spice",
+              "treason",
+              "water shortage"
+            ],
+            "minimumAvailability": "released",
+            "monitored": true,
+            "movieFileId": 0,
+            "originalLanguage": {
+              "id": 1,
+              "name": "English"
+            },
+            "originalTitle": "Dune",
+            "overview": "Paul Atreides, a brilliant and gifted young man born into a great destiny beyond his understanding, must travel to the most dangerous planet in the universe to ensure the future of his family and his people. As malevolent forces explode into conflict over the planet's exclusive supply of the most precious resource in existence - a commodity capable of unlocking humanity's greatest potential - only those who can conquer their fear will survive.",
+            "path": "/movies/Dune (2021) {tmdb-438631}",
+            "physicalRelease": "2021-12-22T00:00:00Z",
+            "popularity": 40.3549,
+            "qualityProfileId": 4,
+            "ratings": {
+              "imdb": {
+                "type": "user",
+                "value": 8,
+                "votes": 1101251
+              },
+              "metacritic": {
+                "type": "user",
+                "value": 74,
+                "votes": 0
+              },
+              "rottenTomatoes": {
+                "type": "user",
+                "value": 83,
+                "votes": 0
+              },
+              "tmdb": {
+                "type": "user",
+                "value": 7.8,
+                "votes": 15942
+              },
+              "trakt": {
+                "type": "user",
+                "value": 8.14492,
+                "votes": 57693
+              }
+            },
+            "releaseDate": "2021-10-21T00:00:00Z",
+            "rootFolderPath": "/movies",
+            "runtime": 155,
+            "secondaryYearSourceId": 0,
+            "sizeOnDisk": 0,
+            "sortTitle": "dune",
+            "statistics": {
+              "movieFileCount": 0,
+              "movieFileQualities": [],
+              "releaseGroups": [],
+              "sizeOnDisk": 0
+            },
+            "status": "released",
+            "studio": "Legendary Pictures",
+            "tags": [
+              1
+            ],
+            "title": "Dune",
+            "titleSlug": "438631",
+            "tmdbId": 438631,
+            "website": "https://www.warnerbros.com/movies/dune",
+            "year": 2021,
+            "youTubeTrailerId": "w0HgHet0sxg"
+          }
+        },
+        "name": "movie"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "system/task"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "body": {
+              "completionMessage": "Completed",
+              "isExclusive": false,
+              "isLongRunning": true,
+              "isNewMovie": true,
+              "isTypeExclusive": false,
+              "movieIds": [
+                328
+              ],
+              "name": "RefreshMovie",
+              "requiresDiskAccess": false,
+              "sendUpdatesToClient": true,
+              "suppressMessages": false,
+              "trigger": "unspecified",
+              "updateScheduledTask": false
+            },
+            "commandName": "Refresh Movie",
+            "duration": "00:00:00.2207786",
+            "ended": "2026-11-21T16:24:47Z",
+            "id": 472955,
+            "message": "Completed",
+            "name": "RefreshMovie",
+            "priority": "normal",
+            "queued": "2026-11-21T16:24:46Z",
+            "result": "successful",
+            "sendUpdatesToClient": true,
+            "started": "2026-11-21T16:24:47Z",
+            "stateChangeTime": "2026-11-21T16:24:47Z",
+            "status": "completed",
+            "trigger": "unspecified",
+            "updateScheduledTask": false
+          }
+        },
+        "name": "command"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "added": "2026-11-21T16:24:46Z",
+            "alternateTitles": [
+              {
+                "id": 2804,
+                "movieMetadataId": 298,
+                "sourceType": "tmdb",
+                "title": "デューン"
+              },
+              {
+                "id": 2805,
+                "movieMetadataId": 298,
+                "sourceType": "tmdb",
+                "title": "Dune: Part One"
+              },
+              {
+                "id": 2806,
+                "movieMetadataId": 298,
+                "sourceType": "tmdb",
+                "title": "חולית: חלק ראשון"
+              },
+              {
+                "id": 2807,
+                "movieMetadataId": 298,
+                "sourceType": "tmdb",
+                "title": "デューン 砂の惑星"
+              },
+              {
+                "id": 2808,
+                "movieMetadataId": 298,
+                "sourceType": "tmdb",
+                "title": "DUNE デューン 砂の惑星"
+              },
+              {
+                "id": 2809,
+                "movieMetadataId": 298,
+                "sourceType": "tmdb",
+                "title": "Duna: Parte Um"
+              },
+              {
+                "id": 2810,
+                "movieMetadataId": 298,
+                "sourceType": "tmdb",
+                "title": "Duna: Primeira Part"
+              },
+              {
+                "id": 2811,
+                "movieMetadataId": 298,
+                "sourceType": "tmdb",
+                "title": "Dune - Première partie"
+              },
+              {
+                "id": 2812,
+                "movieMetadataId": 298,
+                "sourceType": "tmdb",
+                "title": "Duna: Pjesa e Parë"
+              },
+              {
+                "id": 2813,
+                "movieMetadataId": 298,
+                "sourceType": "tmdb",
+                "title": "Dune: Parte uno"
+              },
+              {
+                "id": 2814,
+                "movieMetadataId": 298,
+                "sourceType": "tmdb",
+                "title": "Duna: Parte 1"
+              },
+              {
+                "id": 2815,
+                "movieMetadataId": 298,
+                "sourceType": "tmdb",
+                "title": "沙丘瀚戰：第一章"
+              },
+              {
+                "id": 2816,
+                "movieMetadataId": 298,
+                "sourceType": "tmdb",
+                "title": "Դյունա"
+              },
+              {
+                "id": 2817,
+                "movieMetadataId": 298,
+                "sourceType": "tmdb",
+                "title": "デューン 砂の惑星PART1"
+              },
+              {
+                "id": 2818,
+                "movieMetadataId": 298,
+                "sourceType": "tmdb",
+                "title": "სილახვავი"
+              },
+              {
+                "id": 2819,
+                "movieMetadataId": 298,
+                "sourceType": "tmdb",
+                "title": "Dyun"
+              },
+              {
+                "id": 2820,
+                "movieMetadataId": 298,
+                "sourceType": "tmdb",
+                "title": "Dyuna : 1-ci Hissə"
+              },
+              {
+                "id": 2821,
+                "movieMetadataId": 298,
+                "sourceType": "tmdb",
+                "title": "Дюна: Часть первая"
+              }
+            ],
+            "certification": "PG-13",
+            "cleanTitle": "dune",
+            "collection": {
+              "title": "Dune Collection",
+              "tmdbId": 726871
+            },
+            "digitalRelease": "2021-10-21T00:00:00Z",
+            "folderName": "/movies/Dune (2021) {tmdb-438631}",
+            "genres": [
+              "Science Fiction",
+              "Adventure"
+            ],
+            "hasFile": false,
+            "id": 328,
+            "images": [
+              {
+                "coverType": "poster",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/v1tRXZ4JtD2Iv6fjkPvT4GiwslV.jpg",
+                "url": "/MediaCover/328/poster.jpg?h=bd15f9a27331fc78d4df"
+              },
+              {
+                "coverType": "fanart",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/qVgZu5BTx6pu4owCvVOm4zjTfOi.jpg",
+                "url": "/MediaCover/328/fanart.jpg?h=251f444906d2ce7ea00b"
+              }
+            ],
+            "imdbId": "tt1160419",
+            "inCinemas": "2021-09-15T00:00:00Z",
+            "isAvailable": true,
+            "keywords": [
+              "army",
+              "baron",
+              "based on novel or book",
+              "betrayal",
+              "chosen one",
+              "complex",
+              "creature",
+              "desert",
+              "destiny",
+              "dystopia",
+              "emperor",
+              "empire",
+              "future",
+              "giant creature",
+              "giant worm",
+              "hallucinogen",
+              "knife fight",
+              "messiah",
+              "mother son relationship",
+              "premonition",
+              "prophecy",
+              "revenge",
+              "sand",
+              "sand dune",
+              "space",
+              "space opera",
+              "spice",
+              "treason",
+              "water shortage"
+            ],
+            "minimumAvailability": "released",
+            "monitored": true,
+            "movieFileId": 0,
+            "originalLanguage": {
+              "id": 1,
+              "name": "English"
+            },
+            "originalTitle": "Dune",
+            "overview": "Paul Atreides, a brilliant and gifted young man born into a great destiny beyond his understanding, must travel to the most dangerous planet in the universe to ensure the future of his family and his people. As malevolent forces explode into conflict over the planet's exclusive supply of the most precious resource in existence - a commodity capable of unlocking humanity's greatest potential - only those who can conquer their fear will survive.",
+            "path": "/movies/Dune (2021) {tmdb-438631}",
+            "physicalRelease": "2021-12-22T00:00:00Z",
+            "popularity": 40.3549,
+            "qualityProfileId": 4,
+            "ratings": {
+              "imdb": {
+                "type": "user",
+                "value": 8,
+                "votes": 1101251
+              },
+              "metacritic": {
+                "type": "user",
+                "value": 74,
+                "votes": 0
+              },
+              "rottenTomatoes": {
+                "type": "user",
+                "value": 83,
+                "votes": 0
+              },
+              "tmdb": {
+                "type": "user",
+                "value": 7.8,
+                "votes": 15942
+              },
+              "trakt": {
+                "type": "user",
+                "value": 8.14492,
+                "votes": 57693
+              }
+            },
+            "releaseDate": "2021-10-21T00:00:00Z",
+            "rootFolderPath": "/movies",
+            "runtime": 155,
+            "secondaryYearSourceId": 0,
+            "sizeOnDisk": 0,
+            "sortTitle": "dune",
+            "statistics": {
+              "movieFileCount": 0,
+              "movieFileQualities": [],
+              "releaseGroups": [],
+              "sizeOnDisk": 0
+            },
+            "status": "released",
+            "studio": "Legendary Pictures",
+            "tags": [
+              1
+            ],
+            "title": "Dune",
+            "titleSlug": "438631",
+            "tmdbId": 438631,
+            "website": "https://www.warnerbros.com/movies/dune",
+            "year": 2021,
+            "youTubeTrailerId": "w0HgHet0sxg"
+          }
+        },
+        "name": "movie"
+      }
+    ]
+  },
+  {
+    "after": "movie-add-bare",
+    "messages": [
+      {
+        "body": {
+          "action": "created",
+          "resource": {
+            "id": 77,
+            "images": [
+              {
+                "coverType": "poster",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/qTcATCpiFDcgY8snQIfS2j0bFP7.jpg"
+              },
+              {
+                "coverType": "fanart",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/li3buIx57ph3RX5XlbpMzJPewZ0.jpg"
+              }
+            ],
+            "minimumAvailability": "released",
+            "missingMovies": 0,
+            "monitored": false,
+            "movies": [
+              {
+                "cleanTitle": "bladerunner2049",
+                "folder": "Blade Runner 2049 (2017) {tmdb-335984}",
+                "genres": [
+                  "Science Fiction",
+                  "Drama"
+                ],
+                "images": [
+                  {
+                    "coverType": "poster",
+                    "remoteUrl": "https://image.tmdb.org/t/p/original/gajva2L0rPYkEWjzgFlBXCAVBE5.jpg"
+                  },
+                  {
+                    "coverType": "fanart",
+                    "remoteUrl": "https://image.tmdb.org/t/p/original/gNdLJU9TxrpGx4dkZidjys3fyy0.jpg"
+                  }
+                ],
+                "imdbId": "tt1856101",
+                "isExcluded": false,
+                "isExisting": true,
+                "overview": "Thirty years after the events of the first film, a new blade runner, LAPD Officer K, unearths a long-buried secret that has the potential to plunge what's left of society into chaos. K's discovery leads him on a quest to find Rick Deckard, a former LAPD blade runner who has been missing for 30 years.",
+                "ratings": {
+                  "imdb": {
+                    "type": "user",
+                    "value": 8,
+                    "votes": 775743
+                  },
+                  "metacritic": {
+                    "type": "user",
+                    "value": 81,
+                    "votes": 0
+                  },
+                  "rottenTomatoes": {
+                    "type": "user",
+                    "value": 88,
+                    "votes": 0
+                  },
+                  "tmdb": {
+                    "type": "user",
+                    "value": 7.614,
+                    "votes": 16009
+                  },
+                  "trakt": {
+                    "type": "user",
+                    "value": 7.89062,
+                    "votes": 33371
+                  }
+                },
+                "runtime": 164,
+                "sortTitle": "blade runner 2049",
+                "status": "released",
+                "title": "Blade Runner 2049",
+                "tmdbId": 335984,
+                "year": 2017
+              }
+            ],
+            "overview": "An American neo-noir science-fiction film series set in a dystopian Los Angeles, depicting a future in which synthetic humans known as \"replicants\" are bio-engineered by the powerful Tyrell Corporation, to work on off-world colonies. Based on the novel ‘Do Androids Dream of Electric Sheep?’",
+            "qualityProfileId": 4,
+            "rootFolderPath": "/movies",
+            "searchOnAdd": false,
+            "sortTitle": "blade runner collection",
+            "tags": [],
+            "title": "Blade Runner Collection",
+            "tmdbId": 422837
+          }
+        },
+        "name": "collection"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "id": 77,
+            "images": [
+              {
+                "coverType": "poster",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/qTcATCpiFDcgY8snQIfS2j0bFP7.jpg"
+              },
+              {
+                "coverType": "fanart",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/li3buIx57ph3RX5XlbpMzJPewZ0.jpg"
+              }
+            ],
+            "minimumAvailability": "released",
+            "missingMovies": 1,
+            "monitored": false,
+            "movies": [
+              {
+                "cleanTitle": "bladerunner2049",
+                "folder": "Blade Runner 2049 (2017) {tmdb-335984}",
+                "genres": [
+                  "Science Fiction",
+                  "Drama"
+                ],
+                "images": [
+                  {
+                    "coverType": "poster",
+                    "remoteUrl": "https://image.tmdb.org/t/p/original/gajva2L0rPYkEWjzgFlBXCAVBE5.jpg"
+                  },
+                  {
+                    "coverType": "fanart",
+                    "remoteUrl": "https://image.tmdb.org/t/p/original/gNdLJU9TxrpGx4dkZidjys3fyy0.jpg"
+                  }
+                ],
+                "imdbId": "tt1856101",
+                "isExcluded": false,
+                "isExisting": true,
+                "overview": "Thirty years after the events of the first film, a new blade runner, LAPD Officer K, unearths a long-buried secret that has the potential to plunge what's left of society into chaos. K's discovery leads him on a quest to find Rick Deckard, a former LAPD blade runner who has been missing for 30 years.",
+                "ratings": {
+                  "imdb": {
+                    "type": "user",
+                    "value": 8,
+                    "votes": 774962
+                  },
+                  "metacritic": {
+                    "type": "user",
+                    "value": 81,
+                    "votes": 0
+                  },
+                  "rottenTomatoes": {
+                    "type": "user",
+                    "value": 88,
+                    "votes": 0
+                  },
+                  "tmdb": {
+                    "type": "user",
+                    "value": 7.613,
+                    "votes": 15957
+                  },
+                  "trakt": {
+                    "type": "user",
+                    "value": 7.89062,
+                    "votes": 33371
+                  }
+                },
+                "runtime": 164,
+                "sortTitle": "blade runner 2049",
+                "status": "released",
+                "title": "Blade Runner 2049",
+                "tmdbId": 335984,
+                "year": 2017
+              },
+              {
+                "cleanTitle": "bladerunner",
+                "folder": "Blade Runner (1982) {tmdb-78}",
+                "genres": [
+                  "Science Fiction",
+                  "Drama",
+                  "Thriller"
+                ],
+                "images": [
+                  {
+                    "coverType": "poster",
+                    "remoteUrl": "https://image.tmdb.org/t/p/original/63N9uy8nd9j7Eog2axPQ8lbr3Wj.jpg"
+                  },
+                  {
+                    "coverType": "fanart",
+                    "remoteUrl": "https://image.tmdb.org/t/p/original/2spEHYDcyE9r9mS7AFEscfKVDzO.jpg"
+                  }
+                ],
+                "imdbId": "tt0083658",
+                "isExcluded": false,
+                "isExisting": false,
+                "overview": "In the smog-choked dystopian Los Angeles of 2019, blade runner Rick Deckard is called out of retirement to terminate a quartet of replicants who have escaped to Earth seeking their creator for a way to extend their short life spans.",
+                "ratings": {
+                  "imdb": {
+                    "type": "user",
+                    "value": 8.1,
+                    "votes": 895937
+                  },
+                  "metacritic": {
+                    "type": "user",
+                    "value": 84,
+                    "votes": 0
+                  },
+                  "rottenTomatoes": {
+                    "type": "user",
+                    "value": 89,
+                    "votes": 0
+                  },
+                  "tmdb": {
+                    "type": "user",
+                    "value": 7.9,
+                    "votes": 15590
+                  },
+                  "trakt": {
+                    "type": "user",
+                    "value": 7.97593,
+                    "votes": 25757
+                  }
+                },
+                "runtime": 118,
+                "sortTitle": "blade runner",
+                "status": "released",
+                "title": "Blade Runner",
+                "tmdbId": 78,
+                "year": 1982
+              }
+            ],
+            "overview": "An American neo-noir science-fiction film series set in a dystopian Los Angeles, depicting a future in which synthetic humans known as \"replicants\" are bio-engineered by the powerful Tyrell Corporation, to work on off-world colonies. Based on the novel ‘Do Androids Dream of Electric Sheep?’",
+            "qualityProfileId": 4,
+            "rootFolderPath": "/movies",
+            "searchOnAdd": false,
+            "sortTitle": "blade runner collection",
+            "tags": [],
+            "title": "Blade Runner Collection",
+            "tmdbId": 422837
+          }
+        },
+        "name": "collection"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "system/task"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "added": "2026-11-21T16:24:50Z",
+            "alternateTitles": [
+              {
+                "id": 2822,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Blade Runner 2"
+              },
+              {
+                "id": 2823,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Blejd Raner 2049"
+              },
+              {
+                "id": 2824,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Бегущий по лезвию 2"
+              },
+              {
+                "id": 2825,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Blade Runner 2049 3D"
+              },
+              {
+                "id": 2826,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "ブレードランナー 2049"
+              },
+              {
+                "id": 2827,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "블레이드 러너 2049"
+              },
+              {
+                "id": 2828,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Blade Runner 2049: Bıçak Sırtı"
+              },
+              {
+                "id": 2829,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "银翼杀手2049"
+              },
+              {
+                "id": 2830,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Շեղբի վրայով վազողը 2049"
+              },
+              {
+                "id": 2831,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Bıçak Sırtı 2049"
+              }
+            ],
+            "certification": "R",
+            "cleanTitle": "bladerunner2049",
+            "collection": {
+              "title": "Blade Runner Collection",
+              "tmdbId": 422837
+            },
+            "digitalRelease": "2017-12-26T00:00:00Z",
+            "folderName": "/movies/Blade Runner 2049 (2017) {tmdb-335984}",
+            "genres": [
+              "Science Fiction",
+              "Drama"
+            ],
+            "hasFile": false,
+            "id": 329,
+            "images": [
+              {
+                "coverType": "poster",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/gajva2L0rPYkEWjzgFlBXCAVBE5.jpg",
+                "url": "/MediaCover/329/poster.jpg?h=ad244719f1b6472728d2"
+              },
+              {
+                "coverType": "fanart",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/gNdLJU9TxrpGx4dkZidjys3fyy0.jpg",
+                "url": "/MediaCover/329/fanart.jpg?h=d6597a53a04564e4d049"
+              }
+            ],
+            "imdbId": "tt1856101",
+            "inCinemas": "2017-10-04T00:00:00Z",
+            "isAvailable": true,
+            "keywords": [
+              "2040s",
+              "android",
+              "artificial intelligence (a.i.)",
+              "blade runner",
+              "bounty hunter",
+              "cyber thriller",
+              "cyberpunk",
+              "dystopia",
+              "future",
+              "humanoid robot",
+              "las vegas",
+              "los angeles, california",
+              "sequel",
+              "slow burn",
+              "tech noir",
+              "transhumanism"
+            ],
+            "minimumAvailability": "released",
+            "monitored": true,
+            "movieFileId": 0,
+            "originalLanguage": {
+              "id": 1,
+              "name": "English"
+            },
+            "originalTitle": "Blade Runner 2049",
+            "overview": "Thirty years after the events of the first film, a new blade runner, LAPD Officer K, unearths a long-buried secret that has the potential to plunge what's left of society into chaos. K's discovery leads him on a quest to find Rick Deckard, a former LAPD blade runner who has been missing for 30 years.",
+            "path": "/movies/Blade Runner 2049 (2017) {tmdb-335984}",
+            "physicalRelease": "2018-01-16T00:00:00Z",
+            "popularity": 28.9999,
+            "qualityProfileId": 4,
+            "ratings": {
+              "imdb": {
+                "type": "user",
+                "value": 8,
+                "votes": 775743
+              },
+              "metacritic": {
+                "type": "user",
+                "value": 81,
+                "votes": 0
+              },
+              "rottenTomatoes": {
+                "type": "user",
+                "value": 88,
+                "votes": 0
+              },
+              "tmdb": {
+                "type": "user",
+                "value": 7.614,
+                "votes": 16009
+              },
+              "trakt": {
+                "type": "user",
+                "value": 7.89062,
+                "votes": 33371
+              }
+            },
+            "releaseDate": "2017-12-26T00:00:00Z",
+            "rootFolderPath": "/movies",
+            "runtime": 164,
+            "secondaryYearSourceId": 0,
+            "sizeOnDisk": 0,
+            "sortTitle": "blade runner 2049",
+            "statistics": {
+              "movieFileCount": 0,
+              "movieFileQualities": [],
+              "releaseGroups": [],
+              "sizeOnDisk": 0
+            },
+            "status": "released",
+            "studio": "Alcon Entertainment",
+            "tags": [],
+            "title": "Blade Runner 2049",
+            "titleSlug": "335984",
+            "tmdbId": 335984,
+            "website": "http://bladerunnermovie.com/",
+            "year": 2017,
+            "youTubeTrailerId": "geFtxCSz8xI"
+          }
+        },
+        "name": "movie"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "system/task"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "body": {
+              "completionMessage": "Completed",
+              "isExclusive": false,
+              "isLongRunning": true,
+              "isNewMovie": true,
+              "isTypeExclusive": false,
+              "movieIds": [
+                329
+              ],
+              "name": "RefreshMovie",
+              "requiresDiskAccess": false,
+              "sendUpdatesToClient": true,
+              "suppressMessages": false,
+              "trigger": "unspecified",
+              "updateScheduledTask": false
+            },
+            "commandName": "Refresh Movie",
+            "duration": "00:00:00.0825149",
+            "ended": "2026-11-21T16:24:50Z",
+            "id": 472956,
+            "message": "Completed",
+            "name": "RefreshMovie",
+            "priority": "normal",
+            "queued": "2026-11-21T16:24:50Z",
+            "result": "successful",
+            "sendUpdatesToClient": true,
+            "started": "2026-11-21T16:24:50Z",
+            "stateChangeTime": "2026-11-21T16:24:50Z",
+            "status": "completed",
+            "trigger": "unspecified",
+            "updateScheduledTask": false
+          }
+        },
+        "name": "command"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "body": {
+              "collectionIds": [
+                77
+              ],
+              "completionMessage": "Completed",
+              "isExclusive": false,
+              "isLongRunning": true,
+              "isTypeExclusive": false,
+              "name": "RefreshCollections",
+              "requiresDiskAccess": false,
+              "sendUpdatesToClient": true,
+              "suppressMessages": false,
+              "trigger": "unspecified",
+              "updateScheduledTask": false
+            },
+            "commandName": "Refresh Collections",
+            "duration": "00:00:00.0323558",
+            "ended": "2026-11-21T16:24:50Z",
+            "id": 472957,
+            "message": "Completed",
+            "name": "RefreshCollections",
+            "priority": "normal",
+            "queued": "2026-11-21T16:24:50Z",
+            "result": "successful",
+            "sendUpdatesToClient": true,
+            "started": "2026-11-21T16:24:50Z",
+            "stateChangeTime": "2026-11-21T16:24:50Z",
+            "status": "completed",
+            "trigger": "unspecified",
+            "updateScheduledTask": false
+          }
+        },
+        "name": "command"
+      },
+      {
+        "body": {
+          "action": "updated",
+          "resource": {
+            "added": "2026-11-21T16:24:50Z",
+            "alternateTitles": [
+              {
+                "id": 2822,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Blade Runner 2"
+              },
+              {
+                "id": 2823,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Blejd Raner 2049"
+              },
+              {
+                "id": 2824,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Бегущий по лезвию 2"
+              },
+              {
+                "id": 2825,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Blade Runner 2049 3D"
+              },
+              {
+                "id": 2826,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "ブレードランナー 2049"
+              },
+              {
+                "id": 2827,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "블레이드 러너 2049"
+              },
+              {
+                "id": 2828,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Blade Runner 2049: Bıçak Sırtı"
+              },
+              {
+                "id": 2829,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "银翼杀手2049"
+              },
+              {
+                "id": 2830,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Շեղբի վրայով վազողը 2049"
+              },
+              {
+                "id": 2831,
+                "movieMetadataId": 519,
+                "sourceType": "tmdb",
+                "title": "Bıçak Sırtı 2049"
+              }
+            ],
+            "certification": "R",
+            "cleanTitle": "bladerunner2049",
+            "collection": {
+              "title": "Blade Runner Collection",
+              "tmdbId": 422837
+            },
+            "digitalRelease": "2017-12-26T00:00:00Z",
+            "folderName": "/movies/Blade Runner 2049 (2017) {tmdb-335984}",
+            "genres": [
+              "Science Fiction",
+              "Drama"
+            ],
+            "hasFile": false,
+            "id": 329,
+            "images": [
+              {
+                "coverType": "poster",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/gajva2L0rPYkEWjzgFlBXCAVBE5.jpg",
+                "url": "/MediaCover/329/poster.jpg?h=ad244719f1b6472728d2"
+              },
+              {
+                "coverType": "fanart",
+                "remoteUrl": "https://image.tmdb.org/t/p/original/gNdLJU9TxrpGx4dkZidjys3fyy0.jpg",
+                "url": "/MediaCover/329/fanart.jpg?h=d6597a53a04564e4d049"
+              }
+            ],
+            "imdbId": "tt1856101",
+            "inCinemas": "2017-10-04T00:00:00Z",
+            "isAvailable": true,
+            "keywords": [
+              "2040s",
+              "android",
+              "artificial intelligence (a.i.)",
+              "blade runner",
+              "bounty hunter",
+              "cyber thriller",
+              "cyberpunk",
+              "dystopia",
+              "future",
+              "humanoid robot",
+              "las vegas",
+              "los angeles, california",
+              "sequel",
+              "slow burn",
+              "tech noir",
+              "transhumanism"
+            ],
+            "minimumAvailability": "released",
+            "monitored": true,
+            "movieFileId": 0,
+            "originalLanguage": {
+              "id": 1,
+              "name": "English"
+            },
+            "originalTitle": "Blade Runner 2049",
+            "overview": "Thirty years after the events of the first film, a new blade runner, LAPD Officer K, unearths a long-buried secret that has the potential to plunge what's left of society into chaos. K's discovery leads him on a quest to find Rick Deckard, a former LAPD blade runner who has been missing for 30 years.",
+            "path": "/movies/Blade Runner 2049 (2017) {tmdb-335984}",
+            "physicalRelease": "2018-01-16T00:00:00Z",
+            "popularity": 28.9999,
+            "qualityProfileId": 4,
+            "ratings": {
+              "imdb": {
+                "type": "user",
+                "value": 8,
+                "votes": 775743
+              },
+              "metacritic": {
+                "type": "user",
+                "value": 81,
+                "votes": 0
+              },
+              "rottenTomatoes": {
+                "type": "user",
+                "value": 88,
+                "votes": 0
+              },
+              "tmdb": {
+                "type": "user",
+                "value": 7.614,
+                "votes": 16009
+              },
+              "trakt": {
+                "type": "user",
+                "value": 7.89062,
+                "votes": 33371
+              }
+            },
+            "releaseDate": "2017-12-26T00:00:00Z",
+            "rootFolderPath": "/movies",
+            "runtime": 164,
+            "secondaryYearSourceId": 0,
+            "sizeOnDisk": 0,
+            "sortTitle": "blade runner 2049",
+            "statistics": {
+              "movieFileCount": 0,
+              "movieFileQualities": [],
+              "releaseGroups": [],
+              "sizeOnDisk": 0
+            },
+            "status": "released",
+            "studio": "Alcon Entertainment",
+            "tags": [],
+            "title": "Blade Runner 2049",
+            "titleSlug": "335984",
+            "tmdbId": 335984,
+            "website": "http://bladerunnermovie.com/",
+            "year": 2017,
+            "youTubeTrailerId": "geFtxCSz8xI"
+          }
+        },
+        "name": "movie"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "health"
+      }
+    ]
+  },
+  {
+    "after": "movie-delete",
+    "messages": [
+      {
+        "body": {
+          "action": "deleted",
+          "resource": {
+            "added": "0001-01-01T00:00:00Z",
+            "id": 328,
+            "isAvailable": false,
+            "minimumAvailability": "released",
+            "monitored": true,
+            "movieFileId": 0,
+            "popularity": 0,
+            "qualityProfileId": 0,
+            "runtime": 0,
+            "secondaryYearSourceId": 0,
+            "status": "tba",
+            "tmdbId": 0,
+            "year": 0
+          }
+        },
+        "name": "movie"
+      },
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "health"
+      }
+    ]
+  },
+  {
+    "after": "movie-delete-kept",
+    "messages": [
+      {
+        "body": {
+          "action": "deleted",
+          "resource": {
+            "added": "0001-01-01T00:00:00Z",
+            "id": 329,
+            "isAvailable": false,
+            "minimumAvailability": "released",
+            "monitored": true,
+            "movieFileId": 0,
+            "popularity": 0,
+            "qualityProfileId": 0,
+            "runtime": 0,
+            "secondaryYearSourceId": 0,
+            "status": "tba",
+            "tmdbId": 0,
+            "year": 0
+          }
+        },
+        "name": "movie"
+      },
+      {
+        "body": {
+          "action": "deleted",
+          "resource": {
+            "id": 77,
+            "minimumAvailability": "tba",
+            "missingMovies": 0,
+            "monitored": false,
+            "movies": [],
+            "qualityProfileId": 0,
+            "searchOnAdd": false,
+            "tmdbId": 0
+          }
+        },
+        "name": "collection"
+      }
+    ]
+  },
+  {
+    "after": "delete-kept-notifications",
+    "messages": [
+      {
+        "body": {
+          "action": "sync"
+        },
+        "name": "health"
+      }
+    ]
+  }
+]

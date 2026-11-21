@@ -1,0 +1,23 @@
+{
+  "body": [
+    {
+      "attemptedValue": "*",
+      "errorCode": "PredicateValidator",
+      "errorMessage": "Must be a comma separated list of host names or IP addresses only, without a protocol or port",
+      "formattedMessageArguments": [],
+      "formattedMessagePlaceholderValues": {
+        "propertyName": "Allowed Hosts",
+        "propertyValue": "*"
+      },
+      "propertyName": "AllowedHosts",
+      "severity": "error"
+    }
+  ],
+  "recordedAt": "2026-11-21T16:24:36Z",
+  "request": {
+    "body": "bodies/config-host-proxy-star.json",
+    "method": "PUT",
+    "path": "/api/v3/config/host/1"
+  },
+  "status": 400
+}

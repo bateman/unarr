@@ -24,6 +24,12 @@ use common::*;
 
 const API_KEY: &str = "0123456789abcdef0123456789abcdef";
 
+/// The port of the mock services the recordings name (the provider
+/// settings and the connections' URLs): a replay that needs them there
+/// takes it, one at a time.
+const RECORDED_MOCK_PORT: u16 = 18989;
+static RECORDED_PORT: tokio::sync::Mutex<()> = tokio::sync::Mutex::const_new(());
+
 /// Goldens recorded and not implemented yet, taken out of this list as the
 /// work lands.
 const PENDING: &[&str] = &[];
@@ -481,11 +487,12 @@ async fn send(
 async fn radarr_golden_responses_match() {
     // The mock indexers and clients the write goldens were recorded
     // against, on the port the recorded provider settings carry.
+    let _port = RECORDED_PORT.lock().await;
     let dirs = ReplayDirs::create();
     let mappings = dirs.mappings();
     let mock = unarr_mock::Mock::start_with(
         unarr_mock::fixtures_dir(),
-        18989,
+        RECORDED_MOCK_PORT,
         unarr_mock::MockDirs {
             downloads: Some(dirs.downloads.clone()),
             tv: None,
@@ -627,44 +634,7 @@ async fn radarr_golden_responses_match() {
                 checked -= 1;
                 continue;
             }
-            let body: Value = serde_json::from_slice(&bytes).unwrap_or(Value::Null);
-            let body = unmap_paths(&body, &mappings);
-            if std::env::var("UNARR_CONTRACT_DUMP")
-                .map(|v| v.split(',').any(|n| n == g.name))
-                .unwrap_or(false)
-            {
-                eprintln!(
-                    "--- {} (mock) answered {status}:\n{}",
-                    g.name,
-                    serde_json::to_string_pretty(&body).unwrap_or_default()
-                );
-            }
-            if status.as_u16() != g.status {
-                failures.push(format!(
-                    "{}: status {} expected, {} got",
-                    g.name, g.status, status
-                ));
-                continue;
-            }
-            let mut problems = Vec::new();
-            let (want, got) = match mode(&g.name) {
-                Mode::Exact(ignore) => (normalize(&g.body, ignore), normalize(&body, ignore)),
-                Mode::Multiset(ignore) => (
-                    sorted_list(normalize(&g.body, ignore)),
-                    sorted_list(normalize(&body, ignore)),
-                ),
-                _ => panic!("mock goldens compare exactly"),
-            };
-            diff("", &want, &got, &mut problems);
-            if !problems.is_empty() {
-                failures.push(format!(
-                    "{} (mock {} {}):\n    {}",
-                    g.name,
-                    g.method,
-                    g.path,
-                    problems.join("\n    ")
-                ));
-            }
+            failures.extend(mock_differences(mode(&g.name), g, status, &bytes, &mappings));
             continue;
         }
         let (status, body) = send(&app, g, &session, &mappings).await;
@@ -1289,6 +1259,37 @@ async fn the_import_list_goldens_match() {
     replay_list("golden-list", list_mode, &["queue sync", "queue/details sync"]).await;
 }
 
+/// What a movie added or deleted tells Discord, the webhook and Plex,
+/// against `tests/fixtures/radarr/golden-notifications`: a movie added
+/// with and without its options (the webhook fails on the second, as the
+/// original's does), one deleted with its files (Plex refreshes its
+/// folder) and one without.
+#[tokio::test]
+async fn the_notification_goldens_match() {
+    replay_list_on(
+        "golden-notifications",
+        notifications_mode,
+        &["queue sync", "queue/details sync"],
+        RECORDED_MOCK_PORT,
+    )
+    .await;
+}
+
+/// How each answer of the notifications recording is compared.
+fn notifications_mode(name: &str) -> Mode {
+    match name {
+        // The original's Plex update runs on a background handler, after
+        // the deletion, wherever that lands among the other posts.
+        "delete-notifications" => Mode::Multiset(&[]),
+        n if n.ends_with("-notifications") => Mode::Exact(&[]),
+        // The movie added, with the moment it was: the original stamps it
+        // before the lookup of its metadata, the recording when it
+        // answered.
+        "movie-add" | "movie-add-bare" => Mode::Exact(&["added"]),
+        other => library_mode(other),
+    }
+}
+
 /// A recorded answer with the user the recording ran as (`root`) replaced
 /// by the one this process runs as, found the way the server finds it, so
 /// that both say the same name wherever the tests run.
@@ -1303,13 +1304,73 @@ fn as_current_user(recorded: &Value) -> Value {
 
 /// One recorded list replayed: the fixture restored into a directory of
 /// its own, the mock on a free port, the clock moved by the recording.
+/// A golden the mock answered under a name: what the notification targets
+/// received, compared as `mode` says (exactly, or in any order).
+fn mock_differences(
+    mode: Mode,
+    g: &Golden,
+    status: StatusCode,
+    bytes: &[u8],
+    mappings: &[(String, &str)],
+) -> Option<String> {
+    let body: Value = serde_json::from_slice(bytes).unwrap_or(Value::Null);
+    let body = unmap_paths(&body, mappings);
+    if std::env::var("UNARR_CONTRACT_DUMP")
+        .map(|v| v.split(',').any(|n| n == g.name))
+        .unwrap_or(false)
+    {
+        eprintln!(
+            "--- {} (mock) answered {status}:\n{}",
+            g.name,
+            serde_json::to_string_pretty(&body).unwrap_or_default()
+        );
+    }
+    if status.as_u16() != g.status {
+        return Some(format!(
+            "{}: status {} expected, {} got",
+            g.name, g.status, status
+        ));
+    }
+    let mut problems = Vec::new();
+    let (want, got) = match mode {
+        Mode::Exact(ignore) => (normalize(&g.body, ignore), normalize(&body, ignore)),
+        Mode::Multiset(ignore) => (
+            sorted_list(normalize(&g.body, ignore)),
+            sorted_list(normalize(&body, ignore)),
+        ),
+        _ => panic!("mock goldens compare exactly"),
+    };
+    diff("", &want, &got, &mut problems);
+    (!problems.is_empty()).then(|| {
+        format!(
+            "{} (mock {} {}):\n    {}",
+            g.name,
+            g.method,
+            g.path,
+            problems.join("\n    ")
+        )
+    })
+}
+
+/// A short list, with the mock on a port of its own.
 async fn replay_list(list: &'static str, mode: fn(&str) -> Mode, excused_hub: &[&str]) {
+    replay_list_on(list, mode, excused_hub, 0).await;
+}
+
+/// A short list, with the mock on `port`: `RECORDED_MOCK_PORT` for a list
+/// whose requests name the mock's address, as connections do.
+async fn replay_list_on(list: &'static str, mode: fn(&str) -> Mode, excused_hub: &[&str], port: u16) {
+    let _port = if port == RECORDED_MOCK_PORT {
+        Some(RECORDED_PORT.lock().await)
+    } else {
+        None
+    };
     let golden_dir = fixture_dir().join(list);
     let dirs = ReplayDirs::create_named(list);
     let mappings = dirs.mappings();
     let mock = unarr_mock::Mock::start_with(
         unarr_mock::fixtures_dir(),
-        0,
+        port,
         unarr_mock::MockDirs {
             downloads: Some(dirs.downloads.clone()),
             tv: None,
@@ -1410,8 +1471,17 @@ async fn replay_list(list: &'static str, mode: fn(&str) -> Mode, excused_hub: &[
                 path = path.replace(&format!("path={recorded}"), &format!("path={replay}"));
             }
             let body = sent.request_body.as_deref().unwrap_or("").as_bytes();
-            let (status, _) = mock.call(&g.method, &path, body);
-            assert!(status.is_success(), "mock {} {path}: {status}", g.method);
+            let (status, bytes) = mock.call(&g.method, &path, body);
+            if g.name == "-" {
+                assert!(status.is_success(), "mock {} {path}: {status}", g.method);
+                continue;
+            }
+            // Under a name, what the mock holds is a golden too.
+            if !only.is_empty() && !only.iter().any(|p| g.name.starts_with(p.as_str())) {
+                continue;
+            }
+            checked += 1;
+            failures.extend(mock_differences(mode(&g.name), g, status, &bytes, &mappings));
             continue;
         }
         let (status, body) = send(&app, &sent, &session, &mappings).await;
