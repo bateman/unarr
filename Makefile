@@ -4,7 +4,7 @@ NAME  ?= unarr
 IMAGE ?= ghcr.io/bateman/unarr
 TAG   ?= dev
 
-.PHONY: help build run run-both test panic-test fmt lint check deny release-notes clean docker check-name golden golden-radarr sonarr radarr ui ui-sonarr ui-radarr ui-present bazarr bazarr-radarr prowlarr prowlarr-radarr recyclarr recyclarr-radarr http-audit anonymize scale-fixture compare-originals route-percentiles test-scripts upstream-sonarr upstream-radarr
+.PHONY: help build run run-both test panic-test fmt lint check deny release-notes clean docker check-name golden golden-radarr sonarr radarr ui ui-sonarr ui-radarr ui-present bazarr bazarr-radarr prowlarr prowlarr-radarr recyclarr recyclarr-radarr http-audit anonymize scale-fixture compare-originals route-percentiles test-scripts upstream-sonarr upstream-radarr ui-smoke
 UNARR_URL ?= http://127.0.0.1:8989
 RADARR_URL ?= http://127.0.0.1:7878
 UNARR_API_KEY ?= 0123456789abcdef0123456789abcdef
@@ -14,6 +14,9 @@ APP ?= sonarr
 AUDIT_APP ?= radarr
 AUDIT_URL = $(if $(filter sonarr,$(AUDIT_APP)),$(UNARR_URL),$(RADARR_URL))
 AUDIT_REQUESTS = $(or $(REQUESTS),tests/fixtures/$(AUDIT_APP)/golden/requests.txt)
+# ui-smoke: the personalities to open, and where its Python packages live.
+SMOKE_APP ?= sonarr,radarr
+UI_SMOKE_VENV ?= $(or $(UNARR_CACHE),.cache)/ui-smoke-venv
 
 help: ## Show this help
 	@grep -E '^[a-zA-Z_-]+:.*?## ' $(MAKEFILE_LIST) | awk 'BEGIN{FS=":.*?## "}{printf "  %-14s %s\n", $$1, $$2}'
@@ -49,6 +52,15 @@ check: ## fmt check + lint + test + the scripts' tests, what CI runs
 	cargo fmt --all -- --check
 	$(MAKE) lint
 	$(MAKE) test
+
+ui-smoke: ui-present $(UI_SMOKE_VENV)/.installed ## Open every page of the embedded UIs in a headless browser over unarrd on a copy of the fixtures; fails on console errors, 4xx/5xx, pages left loading (SMOKE_APP=sonarr|radarr, UI_SMOKE_CHANNEL=chrome; report in .cache/ui-smoke)
+	cargo build --bin unarrd
+	@$(UI_SMOKE_VENV)/bin/python -I scripts/ui-smoke.py --app $(SMOKE_APP)
+
+$(UI_SMOKE_VENV)/.installed: scripts/ui-smoke-requirements.txt
+	python3 -m venv $(UI_SMOKE_VENV)
+	$(UI_SMOKE_VENV)/bin/pip install -q -r $<
+	@touch $@
 
 test-scripts: ## Unit tests of the Python scripts (scripts/tests; no network)
 	@python3 -I -m unittest discover -s scripts/tests -t scripts/tests
