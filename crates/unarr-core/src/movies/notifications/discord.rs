@@ -7,8 +7,8 @@ use chrono::{DateTime, Utc};
 use serde_json::{json, Map, Value};
 
 use super::{
-    quality_name, tag_labels, DownloadMessage, GrabMessage, ManualInteractionMessage, MovieFileDeleteMessage,
-    MovieNotificationDefinition,
+    quality_name, tag_labels, DownloadMessage, GrabMessage, ManualInteractionMessage, MovieDeleteMessage,
+    MovieFileDeleteMessage, MovieNotificationDefinition,
 };
 use crate::health::{HealthCheck, HealthType};
 use crate::mediafiles::format;
@@ -437,6 +437,76 @@ pub(crate) fn rename_payload(settings: &Settings, movie: &Movie, renamed: &[Movi
         })
         .collect();
     payload(settings, Some("Renamed"), Some(embeds))
+}
+
+/// The embed `OnMovieAdded` and `OnMovieDelete` share: the movie's title
+/// as it is (no year, no escaping), its links as the one field, and the
+/// poster and fanart when the import fields ask for them; no timestamp.
+fn library_embed(
+    settings: &Settings,
+    identity: &Identity,
+    movie: &Movie,
+    description: &str,
+    color: i64,
+) -> Value {
+    let mut embed = Embed::new(settings, identity);
+    embed.movie_url(movie);
+    embed.set("title", json!(movie.metadata.title));
+    embed.set("description", json!(description));
+    embed.set("color", json!(color));
+    // Added as it is: the original sends it even blank.
+    embed
+        .fields
+        .push(json!({"name": "Links", "value": links(movie), "inline": false}));
+    if settings.import_fields.contains(&import_field::POSTER) {
+        embed.set("thumbnail", image(Some(movie), "poster"));
+    }
+    if settings.import_fields.contains(&import_field::FANART) {
+        embed.set("image", image(Some(movie), "fanart"));
+    }
+    embed.finish(true)
+}
+
+/// `OnMovieAdded`.
+pub async fn on_movie_added(
+    http: &reqwest::Client,
+    def: &MovieNotificationDefinition,
+    movie: &Movie,
+    ctx: &Context<'_>,
+) -> Result<(), String> {
+    let settings = Settings::from_value(&def.settings);
+    post(http, &settings, &movie_added_payload(&settings, movie, ctx)).await
+}
+
+pub(crate) fn movie_added_payload(settings: &Settings, movie: &Movie, ctx: &Context<'_>) -> Value {
+    let embed = library_embed(settings, ctx.identity, movie, "Movie Added", COLOR_SUCCESS);
+    payload(settings, None, Some(vec![embed]))
+}
+
+/// `OnMovieDelete`.
+pub async fn on_movie_delete(
+    http: &reqwest::Client,
+    def: &MovieNotificationDefinition,
+    m: &MovieDeleteMessage<'_>,
+    ctx: &Context<'_>,
+) -> Result<(), String> {
+    let settings = Settings::from_value(&def.settings);
+    post(http, &settings, &movie_delete_payload(&settings, m, ctx)).await
+}
+
+pub(crate) fn movie_delete_payload(
+    settings: &Settings,
+    m: &MovieDeleteMessage<'_>,
+    ctx: &Context<'_>,
+) -> Value {
+    let embed = library_embed(
+        settings,
+        ctx.identity,
+        m.movie,
+        m.deleted_files_message(),
+        COLOR_DANGER,
+    );
+    payload(settings, None, Some(vec![embed]))
 }
 
 /// `OnMovieFileDelete`.

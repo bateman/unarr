@@ -619,3 +619,254 @@ fn the_grab_embed_lists_the_fields_the_settings_name() {
     let payload = discord::grab_payload(&named, &message, &context(&identity, &tags));
     assert_eq!(payload["embeds"][0]["author"]["name"], "Films");
 }
+
+/// A webhook connection posting to `url` with the flags of `attributes`.
+fn webhook_provider(id: i64, url: &str, attributes: Value) -> Provider {
+    Provider {
+        kind: ProviderKind::Notification,
+        id,
+        name: format!("Webhook {id}"),
+        implementation: "Webhook".into(),
+        config_contract: "WebhookSettings".into(),
+        settings: json!({"url": url, "method": 1}),
+        tags: Vec::new(),
+        attributes,
+    }
+}
+
+/// A local receiver of webhooks: every body posted, by path, in order. A
+/// payload whose movie is titled `refused` gets a 500.
+async fn receiver(refused: &'static str) -> (String, Arc<std::sync::Mutex<Vec<(String, Value)>>>) {
+    use axum::extract::{Path, State};
+    use axum::http::StatusCode;
+    type Seen = Arc<std::sync::Mutex<Vec<(String, Value)>>>;
+    async fn hook(
+        State((seen, refused)): State<(Seen, &'static str)>,
+        Path(path): Path<String>,
+        axum::Json(body): axum::Json<Value>,
+    ) -> StatusCode {
+        let refuse = body["movie"]["title"] == refused;
+        seen.lock().unwrap().push((path, body));
+        if refuse {
+            StatusCode::INTERNAL_SERVER_ERROR
+        } else {
+            StatusCode::OK
+        }
+    }
+    let seen: Seen = Arc::default();
+    let app = axum::Router::new()
+        .route("/{*path}", axum::routing::post(hook))
+        .with_state((seen.clone(), refused));
+    let listener = tokio::net::TcpListener::bind("127.0.0.1:0").await.unwrap();
+    let addr = listener.local_addr().unwrap();
+    tokio::spawn(async move { axum::serve(listener, app).await.unwrap() });
+    (format!("http://{addr}"), seen)
+}
+
+fn added(id: i64, title: &str, year: i64, method: &str) -> Movie {
+    let mut m = movie(id, title, year);
+    m.add_options = Some(crate::movies::library::add_options(None, method));
+    m
+}
+
+#[tokio::test]
+async fn a_list_of_added_movies_stops_a_connection_at_its_first_failure() {
+    let (url, seen) = receiver("Candyman").await;
+    let n = notifier(vec![
+        webhook_provider(1, &format!("{url}/one"), json!({"onMovieAdded": true})),
+        webhook_provider(2, &format!("{url}/two"), json!({"onMovieAdded": true})),
+        // Not for additions.
+        webhook_provider(3, &format!("{url}/three"), json!({"onMovieDelete": true})),
+        // Plex has nothing to do for an addition.
+        plex(4, "plex.test", &[], json!({"onMovieAdded": true})),
+    ]);
+    let movies = [added(1, "Candyman", 1992, "list"), added(2, "Lamb", 2021, "list")];
+    n.on_movies_added(&movies, now()).await;
+    let seen = seen.lock().unwrap().clone();
+    let titles = |path: &str| -> Vec<String> {
+        seen.iter()
+            .filter(|(p, _)| p == path)
+            .map(|(_, b)| b["movie"]["title"].as_str().unwrap().to_string())
+            .collect()
+    };
+    // `MoviesImportedEvent` wraps each connection's list in one `try`:
+    // every connection meets the refused movie first, and stops there.
+    assert_eq!(titles("one"), ["Candyman"]);
+    assert_eq!(titles("two"), ["Candyman"]);
+    assert!(titles("three").is_empty());
+    assert!(queued(&n, "plex.test").is_empty());
+    assert!(seen
+        .iter()
+        .all(|(_, b)| b["eventType"] == "MovieAdded" && b["addMethod"] == "list"));
+
+    // A movie the others do not refuse goes through to both.
+    let (url, seen) = receiver("nothing").await;
+    let n = notifier(vec![
+        webhook_provider(1, &format!("{url}/one"), json!({"onMovieAdded": true})),
+        webhook_provider(2, &format!("{url}/two"), json!({"onMovieAdded": true})),
+    ]);
+    n.on_movies_added(&movies, now()).await;
+    assert_eq!(seen.lock().unwrap().len(), 4);
+}
+
+#[tokio::test]
+async fn a_deleted_movie_reaches_every_connection_and_plex_only_with_its_files() {
+    let (url, seen) = receiver("nothing").await;
+    let on = json!({"onMovieDelete": true});
+    let n = notifier(vec![
+        webhook_provider(1, &format!("{url}/hook"), on.clone()),
+        plex(2, "plex.test", &[], on.clone()),
+        plex(3, "tagged.test", &[7], on.clone()),
+        // Enabled, but for file deletions only.
+        plex(4, "files.test", &[], json!({"onMovieFileDelete": true})),
+    ]);
+    let kept = movie(1, "Candyman", 1992);
+    n.on_movies_deleted(std::slice::from_ref(&kept), &HashMap::new(), false, now())
+        .await;
+    // The files stayed: Plex has nothing to refresh.
+    assert!(queued(&n, "plex.test").is_empty());
+    let gone = [movie(2, "Lamb", 2021), movie(3, "Pearl", 2022)];
+    let sizes = HashMap::from([(2, 7_979_321_856_i64)]);
+    n.on_movies_deleted(&gone, &sizes, true, now()).await;
+    assert_eq!(queued(&n, "plex.test"), [2, 3]);
+    assert!(queued(&n, "tagged.test").is_empty());
+    assert!(queued(&n, "files.test").is_empty());
+    let seen = seen.lock().unwrap().clone();
+    let told: Vec<(String, bool, i64)> = seen
+        .iter()
+        .map(|(_, b)| {
+            (
+                b["movie"]["title"].as_str().unwrap().to_string(),
+                b["deletedFiles"].as_bool().unwrap(),
+                b["movieFolderSize"].as_i64().unwrap(),
+            )
+        })
+        .collect();
+    assert_eq!(
+        told,
+        [
+            ("Candyman".to_string(), false, 0),
+            ("Lamb".to_string(), true, 7_979_321_856),
+            // No file: nothing to measure.
+            ("Pearl".to_string(), true, 0),
+        ]
+    );
+}
+
+#[test]
+fn the_library_payloads_are_the_originals() {
+    let identity = Identity {
+        instance_name: "Radarr".into(),
+        ..Identity::default()
+    };
+    let tags = [Tag {
+        id: 5,
+        label: "ita".into(),
+    }];
+    let mut m = added(1, "The `Burbs", 1989, "Collection");
+    m.tags = vec![5];
+    m.metadata.images = vec![Image {
+        cover_type: "poster".into(),
+        remote_url: Some("https://image.tmdb.org/t/p/original/poster.jpg".into()),
+        url: None,
+    }];
+    let ctx = context(&identity, &tags);
+    // The cover's local address, hashed as `covers_get_the_address_they_are_served_at` checks.
+    let local = {
+        let mut images = m.metadata.images.clone();
+        convert_to_local_urls("", 1, &mut images);
+        images[0].url.clone().unwrap()
+    };
+    let expected_movie = json!({
+        "id": 1,
+        "title": "The `Burbs",
+        "year": 1989,
+        "releaseDate": "9999-12-31",
+        "folderPath": "/movies/The `Burbs (1989)",
+        "tmdbId": 1001,
+        "imdbId": "tt0001001",
+        "genres": [],
+        "images": [{
+            "coverType": "poster",
+            "url": local,
+            "remoteUrl": "https://image.tmdb.org/t/p/original/poster.jpg",
+        }],
+        "tags": ["ita"],
+        "originalLanguage": {"id": 1, "name": "English"},
+    });
+
+    // `BuildOnMovieAdded`: the add method as the enum serialises.
+    assert_eq!(
+        webhook::movie_added_payload(&m, &ctx).unwrap(),
+        json!({
+            "eventType": "MovieAdded",
+            "instanceName": "Radarr",
+            "applicationUrl": "http://radarr.test",
+            "movie": expected_movie,
+            "addMethod": "collection",
+        })
+    );
+    // Without options the original dereferences a null.
+    let mut bare = m.clone();
+    bare.add_options = None;
+    assert!(webhook::movie_added_payload(&bare, &ctx).is_err());
+
+    // `BuildOnMovieDelete`: the size only when the files went.
+    let message = MovieDeleteMessage {
+        movie: &m,
+        deleted_files: true,
+        file_size: Some(1106640),
+    };
+    assert_eq!(
+        webhook::movie_delete_payload(&message, &ctx),
+        json!({
+            "eventType": "MovieDelete",
+            "instanceName": "Radarr",
+            "applicationUrl": "http://radarr.test",
+            "movie": expected_movie,
+            "deletedFiles": true,
+            "movieFolderSize": 1106640,
+        })
+    );
+    let kept = MovieDeleteMessage {
+        deleted_files: false,
+        ..message
+    };
+    assert_eq!(webhook::movie_delete_payload(&kept, &ctx)["movieFolderSize"], 0);
+
+    // Discord: the title as it is, the links, the poster the import
+    // fields ask for, no timestamp.
+    let settings = crate::notifications::discord::Settings::from_value(&json!({
+        "webHookUrl": "http://discord.test/hook",
+        "importFields": [11],
+    }));
+    let embed = |payload: Value| payload["embeds"][0].clone();
+    assert_eq!(
+        embed(discord::movie_added_payload(&settings, &m, &ctx)),
+        json!({
+            "author": {
+                "name": "Radarr",
+                "icon_url": "https://raw.githubusercontent.com/Radarr/Radarr/develop/Logo/256.png",
+            },
+            "url": "https://www.themoviedb.org/movie/1001",
+            "title": "The `Burbs",
+            "description": "Movie Added",
+            "color": 2605644,
+            "fields": [{
+                "name": "Links",
+                "value": "[TMDb](https://themoviedb.org/movie/1001) / [Trakt](https://trakt.tv/movies/tt0001001) / \
+                          [IMDb](https://imdb.com/title/tt0001001/)",
+                "inline": false,
+            }],
+            "thumbnail": {"url": "https://image.tmdb.org/t/p/original/poster.jpg"},
+        })
+    );
+    let deleted = embed(discord::movie_delete_payload(&settings, &message, &ctx));
+    assert_eq!(deleted["description"], "Movie removed and all files were deleted");
+    assert_eq!(deleted["color"], 15749200);
+    assert_eq!(deleted["title"], "The `Burbs");
+    assert_eq!(deleted.get("timestamp"), None);
+    assert_eq!(deleted.get("image"), None);
+    let kept_embed = embed(discord::movie_delete_payload(&settings, &kept, &ctx));
+    assert_eq!(kept_embed["description"], "Movie removed, files were not deleted");
+}

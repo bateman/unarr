@@ -64,6 +64,12 @@ with Plex.tv* gave no token and its *Server* menu stayed empty, every
 action answering `{}` (#16). Both work as in the originals now; a token
 imported from them was never affected.
 
+Radarr's *On Movie Added* and *On Movie Delete* sent nothing: Discord and
+the webhook were not told, and Plex was not asked to refresh the folder of
+a movie deleted with its files, so the movie stayed in Plex (On Deck
+included) until Plex's own next scan. Both are sent as the original sends
+them now, the webhook's `addMethod` and `movieFolderSize` included.
+
 **From a `main` build before `4600d61`**: Sonarr's "Backup Now" wrote its
 backups under `Backups/scheduled`: listed as scheduled, and deleted by
 the next scheduled backup once older than the retention (28 days unless

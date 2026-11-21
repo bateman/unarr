@@ -296,9 +296,23 @@ impl Runtime {
         }
     }
 
-    /// `MovieAddedHandler`: a movie that just came in is refreshed, as a
-    /// new one, which scans its folder whatever the settings say.
+    /// `MovieAddedEvent` (one movie) or `MoviesImportedEvent` (a list):
+    /// the connections are told, then `MovieAddedHandler` refreshes each
+    /// movie as a new one, which scans its folder whatever the settings
+    /// say. The notifications go first: the scan clears the options the
+    /// webhook reads the add method from.
     pub async fn movies_added(&self, movie_ids: &[i64]) {
+        if let (Some(notifier), false) = (&self.movie_notifier, movie_ids.is_empty()) {
+            let ids = movie_ids.to_vec();
+            match self.db.call(move |conn| store::movies_by_ids(conn, &ids)).await {
+                Ok(mut movies) => {
+                    // In the order they were added.
+                    movies.sort_by_key(|m| movie_ids.iter().position(|id| *id == m.id));
+                    notifier.on_movies_added(&movies, self.now()).await;
+                }
+                Err(e) => tracing::error!(error = %e, "Couldn't load the movies just added"),
+            }
+        }
         for &movie_id in movie_ids {
             if let Err(e) = self
                 .queue
@@ -664,7 +678,7 @@ impl Runtime {
 
     /// The handlers of `MoviesDeletedEvent` outside the database: the
     /// downloads that were for the movies, their folders when asked for,
-    /// their covers, the UI, the health checks.
+    /// the connections, their covers, the UI, the health checks.
     pub async fn movies_deleted(&self, deleted: crate::movies::library::Deleted, delete_files: bool) {
         let now = self.now();
         if let Some(side) = &self.movies {
@@ -687,6 +701,14 @@ impl Runtime {
                 anyhow::Ok(())
             })
             .await;
+        }
+        // The originals delete the covers in a background handler, after
+        // the notifications have read their URLs; a Plex update queued
+        // here goes out with `DeleteCompletedEvent` below.
+        if let Some(notifier) = &self.movie_notifier {
+            notifier
+                .on_movies_deleted(&deleted.movies, &deleted.file_sizes, delete_files, now)
+                .await;
         }
         let root = self.media_cover_dir.read().recover().clone();
         for movie in &deleted.movies {

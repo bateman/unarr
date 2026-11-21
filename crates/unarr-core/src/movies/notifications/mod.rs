@@ -9,14 +9,15 @@
 //! The runtime hands the events over as they happen: a grab
 //! (`MovieGrabbedEvent`), the import pipeline's (`MovieFileImportedEvent`,
 //! `MovieFileDeletedEvent`, `MovieRenamedEvent`,
-//! `ManualInteractionRequiredEvent`) and the health verdicts. A Plex
-//! update is queued per server and performed on `ProcessQueue`, which the
-//! original runs on `DownloadsProcessedEvent`, `DeleteCompletedEvent`,
-//! `RenameCompletedEvent` and `HealthCheckCompleteEvent`.
+//! `ManualInteractionRequiredEvent`), the library's (`MovieAddedEvent`,
+//! `MoviesImportedEvent`, `MoviesDeletedEvent`) and the health verdicts.
+//! A Plex update is queued per server and performed on `ProcessQueue`,
+//! which the original runs on `DownloadsProcessedEvent`,
+//! `DeleteCompletedEvent`, `RenameCompletedEvent` and
+//! `HealthCheckCompleteEvent`.
 //!
-//! `MovieAddedEvent`, `MoviesDeletedEvent` and `UpdateInstalledEvent` have
-//! no publisher in Unarr yet: their flags are stored and shown, and nothing
-//! is sent for them.
+//! `UpdateInstalledEvent` has no publisher in Unarr yet: its flag is stored
+//! and shown, and nothing is sent for it.
 
 pub mod discord;
 pub mod plex;
@@ -261,6 +262,26 @@ pub struct MovieFileDeleteMessage<'a> {
     pub movie: &'a Movie,
     pub file: &'a MovieFile,
     pub reason: DeleteReason,
+}
+
+/// Radarr's `MovieDeleteMessage`, with the size of the file the movie had,
+/// which the original reads off the movie (`Movie.MovieFile`, joined when
+/// the movie was loaded for its deletion).
+pub struct MovieDeleteMessage<'a> {
+    pub movie: &'a Movie,
+    pub deleted_files: bool,
+    pub file_size: Option<i64>,
+}
+
+impl MovieDeleteMessage<'_> {
+    /// `DeletedFilesMessage`.
+    pub fn deleted_files_message(&self) -> &'static str {
+        if self.deleted_files {
+            "Movie removed and all files were deleted"
+        } else {
+            "Movie removed, files were not deleted"
+        }
+    }
 }
 
 /// Radarr's `ManualInteractionRequiredMessage`.
@@ -595,6 +616,96 @@ impl MovieNotifier {
                 None => Ok(()),
             };
             self.deliver(&def, "OnMovieFileDelete", now, result).await;
+        }
+    }
+
+    /// `Handle(MovieAddedEvent)` and `Handle(MoviesImportedEvent)`: the
+    /// first for a movie added alone, the second for a list of them (a
+    /// bulk add, a library import, an import list, a collection). The
+    /// second wraps a connection's whole list in one `try`, so a
+    /// connection stops at its first failure; with one movie the two are
+    /// the same. Plex does not override `OnMovieAdded`: the base's no-op
+    /// counts as sent.
+    pub async fn on_movies_added(&self, movies: &[Movie], now: DateTime<Utc>) {
+        if movies.is_empty() {
+            return;
+        }
+        let (application_url, tags) = self.base.context_parts().await;
+        let ctx = Context {
+            identity: self.base.identity(),
+            application_url: &application_url,
+            tags: &tags,
+            now,
+        };
+        for def in self.available(now, true).await {
+            if !def.on_movie_added {
+                continue;
+            }
+            for movie in movies {
+                if !def.handles(movie) {
+                    continue;
+                }
+                let result = match def.kind() {
+                    Some(Kind::Discord) => discord::on_movie_added(self.base.http(), &def, movie, &ctx).await,
+                    Some(Kind::Webhook) => webhook::on_movie_added(self.base.http(), &def, movie, &ctx).await,
+                    _ => Ok(()),
+                };
+                let failed = result.is_err();
+                self.deliver(&def, "OnMovieAdded", now, result).await;
+                if failed {
+                    break;
+                }
+            }
+        }
+    }
+
+    /// `Handle(MoviesDeletedEvent)`: one message per movie; Plex updates
+    /// its library when the files went. `file_sizes` holds the size of
+    /// each deleted movie's file, by movie id.
+    pub async fn on_movies_deleted(
+        &self,
+        movies: &[Movie],
+        file_sizes: &HashMap<i64, i64>,
+        deleted_files: bool,
+        now: DateTime<Utc>,
+    ) {
+        if movies.is_empty() {
+            return;
+        }
+        let (application_url, tags) = self.base.context_parts().await;
+        let ctx = Context {
+            identity: self.base.identity(),
+            application_url: &application_url,
+            tags: &tags,
+            now,
+        };
+        for movie in movies {
+            let message = MovieDeleteMessage {
+                movie,
+                deleted_files,
+                file_size: file_sizes.get(&movie.id).copied(),
+            };
+            for def in self.available(now, true).await {
+                if !def.on_movie_delete || !def.handles(movie) {
+                    continue;
+                }
+                let result = match def.kind() {
+                    Some(Kind::Discord) => {
+                        discord::on_movie_delete(self.base.http(), &def, &message, &ctx).await
+                    }
+                    Some(Kind::Webhook) => {
+                        webhook::on_movie_delete(self.base.http(), &def, &message, &ctx).await
+                    }
+                    Some(Kind::PlexServer) => {
+                        if deleted_files {
+                            self.plex_update_if_enabled(&def, movie).await;
+                        }
+                        Ok(())
+                    }
+                    None => Ok(()),
+                };
+                self.deliver(&def, "OnMovieDelete", now, result).await;
+            }
         }
     }
 
