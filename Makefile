@@ -4,7 +4,7 @@ NAME  ?= unarr
 IMAGE ?= ghcr.io/bateman/unarr
 TAG   ?= dev
 
-.PHONY: help build run run-both test panic-test fmt lint check deny release-notes clean docker check-name golden golden-radarr sonarr radarr ui ui-sonarr ui-radarr ui-present bazarr bazarr-radarr prowlarr prowlarr-radarr recyclarr recyclarr-radarr http-audit anonymize scale-fixture compare-originals route-percentiles
+.PHONY: help build run run-both test panic-test fmt lint check deny release-notes clean docker check-name golden golden-radarr sonarr radarr ui ui-sonarr ui-radarr ui-present bazarr bazarr-radarr prowlarr prowlarr-radarr recyclarr recyclarr-radarr http-audit anonymize scale-fixture compare-originals route-percentiles test-scripts upstream-sonarr upstream-radarr
 UNARR_URL ?= http://127.0.0.1:8989
 RADARR_URL ?= http://127.0.0.1:7878
 UNARR_API_KEY ?= 0123456789abcdef0123456789abcdef
@@ -44,10 +44,14 @@ fmt: ## Format the code
 lint: ## Clippy with warnings as errors
 	cargo clippy --workspace --all-targets -- -D warnings
 
-check: ## fmt check + lint + test, what CI runs
+check: ## fmt check + lint + test + the scripts' tests, what CI runs
+	$(MAKE) test-scripts
 	cargo fmt --all -- --check
 	$(MAKE) lint
 	$(MAKE) test
+
+test-scripts: ## Unit tests of the Python scripts (scripts/tests; no network)
+	@python3 -I -m unittest discover -s scripts/tests -t scripts/tests
 
 deny: ## Advisories, licences and sources of the dependencies (cargo install cargo-deny; deny.toml)
 	cargo deny check
@@ -92,6 +96,12 @@ compare-originals: ## Measure RAM, CPU and latency of the original Sonarr and Ra
 route-percentiles: ## p50, p95, p99 of the routes with a target in docs/DESIGN.md section 9, originals beside Unarr (LIBRARY=real|scaled; builds unarrd first; needs make ui, and make scale-fixture for scaled)
 	cargo build --release --bin unarrd
 	@python3 -I scripts/route-percentiles.py --library $(or $(LIBRARY),real)
+
+upstream-sonarr: ## Fetch upstream Sonarr, triage its commits since upstream/sonarr.lock up to the target release (TARGET=4.0.21.3020, FORMAT=json)
+	@python3 -I scripts/upstream-triage.py --app sonarr --fetch $(if $(TARGET),--target $(TARGET)) $(if $(FORMAT),--format $(FORMAT))
+
+upstream-radarr: ## Fetch upstream Radarr, triage its commits since upstream/radarr.lock up to the target release (TARGET=7.0.0.10815, FORMAT=json)
+	@python3 -I scripts/upstream-triage.py --app radarr --fetch $(if $(TARGET),--target $(TARGET)) $(if $(FORMAT),--format $(FORMAT))
 
 bazarr: ## Replay Bazarr's requests against a running unarrd (UNARR_URL, UNARR_API_KEY)
 	@python3 -I scripts/bazarr-replay.py --base-url $(UNARR_URL) --api-key $(UNARR_API_KEY)

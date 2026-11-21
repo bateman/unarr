@@ -1,0 +1,8 @@
+# The last upstream Radarr commit Unarr has handled (issue #9).
+# scripts/upstream-triage.py reads it; the PR that ports up to a release moves
+# it forward, so it advances only when that PR merges. `release` is the
+# release `commit` belongs to, the pin of scripts/radarr-fixture.sh.
+repo = https://github.com/Radarr/Radarr.git
+branch = master
+release = 6.4.4.10685
+commit = a96bf7c3ecb23cb76993770727285dc17a613fbc
