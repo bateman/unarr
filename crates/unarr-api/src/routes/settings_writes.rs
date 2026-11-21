@@ -1075,7 +1075,8 @@ async fn radarr_label_taken(state: &AppState, label: &str, id: i64) -> ApiResult
         })
         .await?;
     if taken {
-        return Err(ApiError::ConflictMessage(
+        return Err(ApiError::ClientMessage(
+            axum::http::StatusCode::CONFLICT,
             "constraint failed\nUNIQUE constraint failed: Tags.Label".into(),
         ));
     }
@@ -1171,10 +1172,13 @@ pub async fn tag_delete(State(state): State<AppState>, Path(id): Path<i64>) -> A
         .iter()
         .any(|k| d[*k].as_array().is_some_and(|a| !a.is_empty()));
         if in_use {
-            return Err(ApiError::ConflictMessage(format!(
-                "'{}' cannot be deleted since it's still in use",
-                d["label"].as_str().unwrap_or("")
-            )));
+            return Err(ApiError::ClientMessage(
+                axum::http::StatusCode::CONFLICT,
+                format!(
+                    "'{}' cannot be deleted since it's still in use",
+                    d["label"].as_str().unwrap_or("")
+                ),
+            ));
         }
     }
     if delete_from(&state, "tags", id).await? {

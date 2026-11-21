@@ -15,9 +15,8 @@ pub enum ApiError {
     NotFoundMessage(String),
     /// `NzbDroneClientException(InternalServerError, message)`.
     ServerMessage(String),
-    /// `NzbDroneClientException(Conflict, message)`.
-    ConflictMessage(String),
-    /// `NzbDroneClientException(status, message)` with any other status.
+    /// `NzbDroneClientException(status, message)` with another status
+    /// (409 for a conflict, plex.tv's own for the Plex actions).
     ClientMessage(StatusCode, String),
     /// `ModelNotFoundException`: a 404 with the message and a description.
     ModelNotFound(String),
@@ -98,9 +97,6 @@ impl ApiError {
                 Json(client_exception(&message)),
             )
                 .into_response(),
-            ApiError::ConflictMessage(message) => {
-                (StatusCode::CONFLICT, Json(client_exception(&message))).into_response()
-            }
             ApiError::ClientMessage(status, message) => {
                 (status, Json(client_exception(&message))).into_response()
             }

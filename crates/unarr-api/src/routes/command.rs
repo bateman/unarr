@@ -163,6 +163,9 @@ pub async fn cancel(State(state): State<AppState>, Path(id): Path<i64>) -> ApiRe
     if state.commands()?.queue().cancel(id) {
         Ok(Json(Value::Null))
     } else {
-        Err(ApiError::ConflictMessage("Unable to cancel task".into()))
+        Err(ApiError::ClientMessage(
+            axum::http::StatusCode::CONFLICT,
+            "Unable to cancel task".into(),
+        ))
     }
 }
