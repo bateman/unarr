@@ -5,8 +5,9 @@
 use serde_json::{json, Map, Value};
 
 use super::{
-    quality_name, send_json, Context, DeleteMessage, DownloadMessage, GrabMessage, Identity,
-    ImportCompleteMessage, ManualInteractionMessage, NotificationDefinition, SendError, TestOutcome,
+    quality_name, send_json, ApplicationUpdateMessage, Context, DeleteMessage, DownloadMessage, GrabMessage,
+    Identity, ImportCompleteMessage, ManualInteractionMessage, NotificationDefinition, SendError,
+    TestOutcome,
 };
 use crate::health::HealthCheck;
 use crate::mediafiles::events::EpisodeFileRenamed;
@@ -541,6 +542,29 @@ pub async fn on_health(
     o.set("type", json!(check.source));
     o.set("wikiUrl", json!(check.wiki_url));
     send(http, &settings, &o.done()).await.map_err(send_error_message)
+}
+
+/// `BuildApplicationUpdatePayload`: Sonarr's carries no application URL.
+pub(crate) fn application_update_payload(update: &ApplicationUpdateMessage, identity: &Identity) -> Value {
+    let mut o = Object::new();
+    o.set("eventType", json!("ApplicationUpdate"));
+    o.set("instanceName", json!(identity.instance_name));
+    o.set("message", json!(update.message));
+    o.set("previousVersion", json!(update.previous_version));
+    o.set("newVersion", json!(update.new_version));
+    o.done()
+}
+
+pub async fn on_application_update(
+    http: &reqwest::Client,
+    def: &NotificationDefinition,
+    update: &ApplicationUpdateMessage,
+    identity: &Identity,
+) -> Result<(), String> {
+    let settings = Settings::from_value(&def.settings);
+    send(http, &settings, &application_update_payload(update, identity))
+        .await
+        .map_err(send_error_message)
 }
 
 /// `Webhook.Test`: the fixed test payload; a failed call names the URL.

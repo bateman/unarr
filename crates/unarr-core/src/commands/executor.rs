@@ -669,9 +669,48 @@ impl Runtime {
         handles.push(crate::panics::supervised("scheduler", move || {
             runtime.clone().scheduler_loop()
         }));
-        // `Handle(ApplicationStartedEvent)`: the startup checks.
+        // `Handle(ApplicationStartedEvent)`: the startup checks, and the
+        // version this start runs.
         self.check_health_later(CheckSet::All);
+        let runtime = self.clone();
+        tokio::spawn(async move {
+            runtime.application_started(env!("CARGO_PKG_VERSION")).await;
+        });
         handles
+    }
+
+    /// `UpdateHistoryService`: `Handle(ApplicationStartedEvent)` records
+    /// `version` when the last start ran another one, and `HandleAsync`
+    /// then tells the connections (`UpdateInstalledEvent`). The very first
+    /// start has nothing to tell. The version is Unarr's own: the one the
+    /// originals answer as moves only with a new pin.
+    pub async fn application_started(&self, version: &str) {
+        let now = self.now();
+        let current = version.to_string();
+        let previous = match self
+            .db
+            .call(move |conn| store::update_history::record_start(conn, &current, now))
+            .await
+        {
+            Ok(previous) => previous,
+            Err(e) => {
+                tracing::warn!(error = %e, "Failed to record the installed version");
+                return;
+            }
+        };
+        let Some(previous) = previous else {
+            return;
+        };
+        let update = crate::notifications::ApplicationUpdateMessage::new(
+            &self.notifier.identity().app_name,
+            &previous,
+            version,
+        );
+        tracing::info!("{}", update.message);
+        match &self.movie_notifier {
+            Some(movies) => movies.on_application_update(&update, now).await,
+            None => self.notifier.on_application_update(&update, now).await,
+        }
     }
 
     /// `ExecuteCommands`: take the next command whenever the queue changes.

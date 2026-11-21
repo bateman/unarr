@@ -16,6 +16,7 @@ pub mod scene;
 pub mod sequence;
 pub mod series;
 pub mod stats;
+pub mod update_history;
 
 use chrono::{DateTime, NaiveDate, Utc};
 use rusqlite::Row;

@@ -16,8 +16,8 @@
 //! `DeleteCompletedEvent`, `RenameCompletedEvent` and
 //! `HealthCheckCompleteEvent`.
 //!
-//! `UpdateInstalledEvent` has no publisher in Unarr yet: its flag is stored
-//! and shown, and nothing is sent for it.
+//! `UpdateInstalledEvent` comes from the start that finds another version
+//! than the last one recorded (`store::update_history`).
 
 pub mod discord;
 pub mod plex;
@@ -40,7 +40,8 @@ use crate::movies::import::events::{MovieFileRenamed, MovieImportEvent};
 use crate::movies::import::local::{DeletedMovieFile, GrabbedMovieRelease};
 use crate::movies::model::{Movie, MovieFile};
 use crate::notifications::{
-    discord as base_discord, plex as base_plex, webhook as base_webhook, Context, Kind, Notifier, TestOutcome,
+    discord as base_discord, plex as base_plex, webhook as base_webhook, ApplicationUpdateMessage, Context,
+    Kind, Notifier, TestOutcome,
 };
 use crate::validation::ValidationFailure;
 
@@ -858,6 +859,35 @@ impl MovieNotifier {
                 _ => Ok(()),
             };
             self.deliver(&def, "OnHealthRestored", now, result).await;
+        }
+    }
+
+    /// `Handle(UpdateInstalledEvent)`: every connection that asks, whatever
+    /// its tags. Plex does not override `OnApplicationUpdate`: the base's
+    /// no-op counts as sent.
+    pub async fn on_application_update(&self, update: &ApplicationUpdateMessage, now: DateTime<Utc>) {
+        let (application_url, tags) = self.base.context_parts().await;
+        let ctx = Context {
+            identity: self.base.identity(),
+            application_url: &application_url,
+            tags: &tags,
+            now,
+        };
+        for def in self.available(now, true).await {
+            if !def.on_application_update {
+                continue;
+            }
+            let result = match def.kind() {
+                Some(Kind::Discord) => {
+                    discord::on_application_update(self.base.http(), &def, update, self.base.identity(), now)
+                        .await
+                }
+                Some(Kind::Webhook) => {
+                    webhook::on_application_update(self.base.http(), &def, update, &ctx).await
+                }
+                _ => Ok(()),
+            };
+            self.deliver(&def, "OnApplicationUpdate", now, result).await;
         }
     }
 

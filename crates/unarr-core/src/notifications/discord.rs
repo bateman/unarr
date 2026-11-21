@@ -6,9 +6,9 @@ use chrono::{DateTime, Utc};
 use serde_json::{json, Map, Value};
 
 use super::{
-    bytes_to_string, format_number, quality_name, send_json, timestamp, title, Context, DeleteMessage,
-    DownloadMessage, GrabMessage, Identity, ImportCompleteMessage, ManualInteractionMessage,
-    NotificationDefinition, SendError, TestOutcome,
+    bytes_to_string, format_number, quality_name, send_json, timestamp, title, ApplicationUpdateMessage,
+    Context, DeleteMessage, DownloadMessage, GrabMessage, Identity, ImportCompleteMessage,
+    ManualInteractionMessage, NotificationDefinition, SendError, TestOutcome,
 };
 use crate::health::{HealthCheck, HealthType};
 use crate::mediafiles::format;
@@ -666,6 +666,44 @@ pub async fn on_manual_interaction_required(
     }
     let payload = payload(&settings, None, Some(vec![embed.finish(true)]));
     send(http, &settings, &payload).await.map_err(send_error_message)
+}
+
+/// `OnApplicationUpdate`: the two versions as fields, signed and dated as
+/// the health embeds are.
+pub async fn on_application_update(
+    http: &reqwest::Client,
+    def: &NotificationDefinition,
+    update: &ApplicationUpdateMessage,
+    identity: &Identity,
+    now: DateTime<Utc>,
+) -> Result<(), String> {
+    let settings = Settings::from_value(&def.settings);
+    let payload = application_update_payload(&settings, update, identity, now);
+    send(http, &settings, &payload).await.map_err(send_error_message)
+}
+
+pub(crate) fn application_update_payload(
+    settings: &Settings,
+    update: &ApplicationUpdateMessage,
+    identity: &Identity,
+    now: DateTime<Utc>,
+) -> Value {
+    let mut embed = Embed::new(settings, identity, now);
+    embed.set("title", json!(APPLICATION_UPDATE_TITLE));
+    embed.set("color", json!(COLOR_STANDARD));
+    embed.fields.extend(version_fields(update));
+    payload(settings, None, Some(vec![embed.finish(true)]))
+}
+
+/// `NotificationBase.APPLICATION_UPDATE_TITLE`.
+pub(crate) const APPLICATION_UPDATE_TITLE: &str = "Application Updated";
+
+/// The two fields of an update's embed, sent as they are.
+pub(crate) fn version_fields(update: &ApplicationUpdateMessage) -> [Value; 2] {
+    [
+        json!({"name": "Previous Version", "value": update.previous_version, "inline": false}),
+        json!({"name": "New Version", "value": update.new_version, "inline": false}),
+    ]
 }
 
 pub async fn on_health_issue(

@@ -17,7 +17,7 @@ use crate::movies::import::local::GrabbedMovieRelease;
 use crate::movies::model::{Movie, MovieFile};
 use crate::movies::quality::{indexer_flag_names, indexer_flags_text, MovieLanguage};
 use crate::notifications::webhook::{send, send_error_message, Object, Settings};
-use crate::notifications::{timestamp, Context, Identity, SendError, TestOutcome};
+use crate::notifications::{timestamp, ApplicationUpdateMessage, Context, Identity, SendError, TestOutcome};
 use crate::validation::ValidationFailure;
 
 fn base(event_type: &str, ctx: &Context<'_>) -> Object {
@@ -457,6 +457,25 @@ pub async fn on_manual_interaction_required(
 ) -> Result<(), String> {
     let settings = Settings::from_value(&def.settings);
     post(http, &settings, &manual_interaction_payload(m, ctx)).await
+}
+
+/// `BuildApplicationUpdatePayload`: Radarr's carries the application URL.
+pub(crate) fn application_update_payload(update: &ApplicationUpdateMessage, ctx: &Context<'_>) -> Value {
+    let mut o = base("ApplicationUpdate", ctx);
+    o.set("message", json!(update.message));
+    o.set("previousVersion", json!(update.previous_version));
+    o.set("newVersion", json!(update.new_version));
+    o.done()
+}
+
+pub async fn on_application_update(
+    http: &reqwest::Client,
+    def: &MovieNotificationDefinition,
+    update: &ApplicationUpdateMessage,
+    ctx: &Context<'_>,
+) -> Result<(), String> {
+    let settings = Settings::from_value(&def.settings);
+    post(http, &settings, &application_update_payload(update, ctx)).await
 }
 
 /// `BuildHealthPayload`: with the application URL.

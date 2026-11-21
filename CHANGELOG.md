@@ -70,6 +70,16 @@ a movie deleted with its files, so the movie stayed in Plex (On Deck
 included) until Plex's own next scan. Both are sent as the original sends
 them now, the webhook's `addMethod` and `movieFolderSize` included.
 
+*On Application Update* sent nothing on either personality: Unarr is not
+updated by the originals' updater, and nothing recorded the version a start
+ran. Each database now keeps the versions it was started with
+(`update_history`, schema 10 for `unarr-sonarr.db`, 2 for
+`unarr-radarr.db`), and a start on another version than the last one tells
+Discord and the webhook as the originals do ("Radarr updated from 0.1.0 to
+0.2.0"). The versions are Unarr's own: the one the originals answer as
+moves only with a new pin. The first start after this change records its
+version and tells nobody.
+
 **From a `main` build before `4600d61`**: Sonarr's "Backup Now" wrote its
 backups under `Backups/scheduled`: listed as scheduled, and deleted by
 the next scheduled backup once older than the retention (28 days unless

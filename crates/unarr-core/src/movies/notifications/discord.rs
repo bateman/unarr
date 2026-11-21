@@ -15,11 +15,12 @@ use crate::mediafiles::format;
 use crate::movies::import::events::MovieFileRenamed;
 use crate::movies::model::Movie;
 use crate::notifications::discord::{
-    overview, payload, send, send_error_message, Settings, COLOR_DANGER, COLOR_STANDARD, COLOR_SUCCESS,
-    COLOR_UPGRADE, COLOR_WARNING,
+    overview, payload, send, send_error_message, version_fields, Settings, APPLICATION_UPDATE_TITLE,
+    COLOR_DANGER, COLOR_STANDARD, COLOR_SUCCESS, COLOR_UPGRADE, COLOR_WARNING,
 };
 use crate::notifications::{
-    bytes_to_string, format_number, timestamp, Context, Identity, SendError, TestOutcome,
+    bytes_to_string, format_number, timestamp, ApplicationUpdateMessage, Context, Identity, SendError,
+    TestOutcome,
 };
 use crate::validation::ValidationFailure;
 
@@ -601,6 +602,37 @@ pub(crate) fn manual_interaction_payload(
             _ => {}
         }
     }
+    payload(settings, None, Some(vec![embed.finish(true)]))
+}
+
+/// `OnApplicationUpdate`: the series side's embed, signed as Radarr signs.
+pub async fn on_application_update(
+    http: &reqwest::Client,
+    def: &MovieNotificationDefinition,
+    update: &ApplicationUpdateMessage,
+    identity: &Identity,
+    now: DateTime<Utc>,
+) -> Result<(), String> {
+    let settings = Settings::from_value(&def.settings);
+    post(
+        http,
+        &settings,
+        &application_update_payload(&settings, update, identity, now),
+    )
+    .await
+}
+
+pub(crate) fn application_update_payload(
+    settings: &Settings,
+    update: &ApplicationUpdateMessage,
+    identity: &Identity,
+    now: DateTime<Utc>,
+) -> Value {
+    let mut embed = Embed::new(settings, identity);
+    embed.set("title", json!(APPLICATION_UPDATE_TITLE));
+    embed.timestamp(now);
+    embed.set("color", json!(COLOR_STANDARD));
+    embed.fields.extend(version_fields(update));
     payload(settings, None, Some(vec![embed.finish(true)]))
 }
 
