@@ -1,11 +1,11 @@
 //! Field schemas of pluggable implementations (indexers, download clients,
 //! notifications, import lists, metadata, custom format and auto-tagging
 //! specifications), recorded from the real Sonarr's and Radarr's `*/schema`
-//! endpoints by `make golden` and `make golden-radarr` and embedded here, one
-//! catalogue per application. They supply the labels, help texts and
-//! select options the API returns next to every stored `settings` value.
+//! endpoints by `make golden` and `make golden-radarr` and embedded here,
+//! seven documents per application, each parsed when first asked for. They
+//! supply the labels, help texts and select options the API returns next to
+//! every stored `settings` value.
 
-use std::collections::HashMap;
 use std::sync::OnceLock;
 
 use serde_json::{json, Map, Value};
@@ -53,64 +53,49 @@ pub enum SchemaKind {
     AutoTaggingSpecification,
 }
 
-struct Catalogue {
-    by_kind: HashMap<SchemaKind, Vec<Value>>,
-}
-
-impl Catalogue {
-    fn parse(sources: &Sources) -> Catalogue {
-        let parse =
-            |s: &str| -> Vec<Value> { serde_json::from_str(s).expect("embedded schema is valid JSON") };
-        let mut by_kind = HashMap::new();
-        by_kind.insert(
-            SchemaKind::Provider(ProviderKind::Indexer),
-            parse(sources.indexer),
-        );
-        by_kind.insert(
-            SchemaKind::Provider(ProviderKind::DownloadClient),
-            parse(sources.download_client),
-        );
-        by_kind.insert(
-            SchemaKind::Provider(ProviderKind::Notification),
-            parse(sources.notification),
-        );
-        by_kind.insert(
-            SchemaKind::Provider(ProviderKind::ImportList),
-            parse(sources.import_list),
-        );
-        by_kind.insert(
-            SchemaKind::Provider(ProviderKind::Metadata),
-            parse(sources.metadata),
-        );
-        by_kind.insert(
-            SchemaKind::CustomFormatSpecification,
-            parse(sources.custom_format),
-        );
-        by_kind.insert(SchemaKind::AutoTaggingSpecification, parse(sources.auto_tagging));
-        Catalogue { by_kind }
+/// The recorded document of one kind of schema.
+fn source(sources: &Sources, kind: SchemaKind) -> &'static str {
+    match kind {
+        SchemaKind::Provider(ProviderKind::Indexer) => sources.indexer,
+        SchemaKind::Provider(ProviderKind::DownloadClient) => sources.download_client,
+        SchemaKind::Provider(ProviderKind::Notification) => sources.notification,
+        SchemaKind::Provider(ProviderKind::ImportList) => sources.import_list,
+        SchemaKind::Provider(ProviderKind::Metadata) => sources.metadata,
+        SchemaKind::CustomFormatSpecification => sources.custom_format,
+        SchemaKind::AutoTaggingSpecification => sources.auto_tagging,
     }
 }
 
-/// The catalogue of the application a personality stands for, parsed on
-/// first use. Lidarr has none recorded yet and shows Sonarr's.
-fn catalogue(personality: Personality) -> &'static Catalogue {
-    static SONARR_CATALOGUE: OnceLock<Catalogue> = OnceLock::new();
-    static RADARR_CATALOGUE: OnceLock<Catalogue> = OnceLock::new();
-    match personality {
-        Personality::Sonarr | Personality::Lidarr => {
-            SONARR_CATALOGUE.get_or_init(|| Catalogue::parse(&SONARR))
-        }
-        Personality::Radarr => RADARR_CATALOGUE.get_or_init(|| Catalogue::parse(&RADARR)),
+/// Where a kind's parsed schemas are kept.
+fn slot(kind: SchemaKind) -> usize {
+    match kind {
+        SchemaKind::Provider(ProviderKind::Indexer) => 0,
+        SchemaKind::Provider(ProviderKind::DownloadClient) => 1,
+        SchemaKind::Provider(ProviderKind::Notification) => 2,
+        SchemaKind::Provider(ProviderKind::ImportList) => 3,
+        SchemaKind::Provider(ProviderKind::Metadata) => 4,
+        SchemaKind::CustomFormatSpecification => 5,
+        SchemaKind::AutoTaggingSpecification => 6,
     }
 }
 
-/// All schema entries of a kind, as the `*/schema` endpoints return them.
+/// All schema entries of a kind, as the `*/schema` endpoints return them,
+/// for the application a personality stands for (Lidarr has none recorded
+/// yet and shows Sonarr's). Each kind is parsed on its first use and kept,
+/// on its own: parsed, the seven documents of the two applications weigh
+/// some 7 MiB, most of it the indexers' and the custom formats', and the
+/// start, which asks for the metadata schemas only (the consumers a
+/// database lacks), would otherwise keep them all.
 pub fn all(personality: Personality, kind: SchemaKind) -> &'static [Value] {
-    catalogue(personality)
-        .by_kind
-        .get(&kind)
-        .map(Vec::as_slice)
-        .unwrap_or(&[])
+    type Parsed = [OnceLock<Vec<Value>>; 7];
+    static SONARR_PARSED: Parsed = [const { OnceLock::new() }; 7];
+    static RADARR_PARSED: Parsed = [const { OnceLock::new() }; 7];
+    let (parsed, sources) = match personality {
+        Personality::Sonarr | Personality::Lidarr => (&SONARR_PARSED, &SONARR),
+        Personality::Radarr => (&RADARR_PARSED, &RADARR),
+    };
+    parsed[slot(kind)]
+        .get_or_init(|| serde_json::from_str(source(sources, kind)).expect("embedded schema is valid JSON"))
 }
 
 /// The schema entry for one implementation.
