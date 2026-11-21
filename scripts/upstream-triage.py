@@ -8,23 +8,34 @@ one by the paths it touches, so a port starts from a table and not from a
 raw diff::
 
     scripts/upstream-triage.py --app radarr --fetch
-    scripts/upstream-triage.py --app radarr --target 7.0.0.10815 --format json
+    scripts/upstream-triage.py --app radarr --target 7.0.3.10918 --format json
 
 The target release (``choose_target``):
 
 - the releases are the version tags (``vX.Y.Z.B``) reachable from the stable
   branch, ``git tag --merged``, never the tags by name alone: a clone also
-  holds tags of other branches and of older projects;
+  holds tags of other branches and of older projects; and of those, the
+  ones GitHub publishes as stable;
 - within the pin's major, the newest of them (a patch or minor jump);
-- when the newest is in a later major, the first release of the next major,
-  ``x.0.0`` (a major jump); the releases after it come with the next runs;
+- when the newest is in a later major, the first stable release of the next
+  major (a major jump): ``x.0.0`` when that one is stable, a later one when
+  it was a pre-release (Radarr published 7.0.0 to 7.0.3.10912 as
+  pre-releases on ``master``: 6.4.4 goes to 7.0.3.10918); the releases
+  after it come with the next runs;
 - none newer than the pin: nothing to do.
 
-Git cannot tell a stable release from a pre-release. ``--releases`` takes
-the JSON of the GitHub API (``gh api --paginate --slurp
-repos/<owner>/<repo>/releases``), where it is available, and keeps only the
-tags it marks neither draft nor prerelease; without it every tag on the
-stable branch counts as stable. ``--target`` names the release outright.
+Git cannot tell a stable release from a pre-release, and the stable branch
+carries both. ``--releases`` says where the difference comes from:
+
+- ``api`` (the default): the GitHub API, read anonymously or with
+  ``GITHUB_TOKEN`` / ``GH_TOKEN`` when set; the answer is saved beside the
+  clone, ``<cache>/upstream/<app>-releases.json``. A run that cannot read it
+  stops, rather than take a pre-release as the target;
+- a file: that JSON, as the API gives it (a page, or ``--slurp`` pages);
+- ``tags``: every version tag on the branch counts as stable, pre-releases
+  included. Only for when the API is out of reach, knowingly.
+
+Drafts and pre-releases are dropped. ``--target`` names the release outright.
 
 The classes (``CLASSES``, by priority: a commit takes the highest class of
 its paths and lists the others after it):
@@ -58,6 +69,8 @@ import re
 import subprocess
 import sys
 import unicodedata
+import urllib.error
+import urllib.request
 from dataclasses import dataclass, field
 from pathlib import Path
 
@@ -188,6 +201,43 @@ def stable_from_api(path: Path) -> set[str]:
             if isinstance(tag, str):
                 tags.add(tag)
     return tags
+
+
+def github_slug(repo_url: str) -> str:
+    """owner/name of a github.com repository URL."""
+    match = re.fullmatch(r"https://github\.com/([A-Za-z0-9_.-]+)/([A-Za-z0-9_.-]+?)(\.git)?/?", repo_url)
+    if not match:
+        raise ValueError(f"not a github.com repository: {repo_url!r}")
+    return f"{match.group(1)}/{match.group(2)}"
+
+
+def fetch_releases(repo_url: str, dest: Path, pages: int = 10) -> Path:
+    """The repository's releases from the GitHub API, newest first, saved
+    to `dest` as a list of pages (the shape of `gh api --slurp`)."""
+    slug = github_slug(repo_url)
+    headers = {"Accept": "application/vnd.github+json", "User-Agent": "unarr-upstream-triage"}
+    token = os.environ.get("GITHUB_TOKEN") or os.environ.get("GH_TOKEN")
+    if token:
+        headers["Authorization"] = f"Bearer {token}"
+    out = []
+    for page in range(1, pages + 1):
+        url = f"https://api.github.com/repos/{slug}/releases?per_page=100&page={page}"
+        try:
+            with urllib.request.urlopen(urllib.request.Request(url, headers=headers), timeout=30) as resp:
+                data = json.load(resp)
+        except (urllib.error.URLError, OSError, ValueError) as err:
+            raise SystemExit(
+                f"cannot read the releases of {slug} from the GitHub API ({err}): without them a pre-release "
+                "can be taken for a release. Give RELEASES=<the API's JSON> or, knowingly, RELEASES=tags"
+            )
+        if not isinstance(data, list):
+            raise SystemExit(f"unexpected answer from the GitHub API for {slug}: {str(data)[:200]}")
+        out.append(data)
+        if len(data) < 100:
+            break
+    dest.parent.mkdir(parents=True, exist_ok=True)
+    dest.write_text(json.dumps(out))
+    return dest
 
 
 # --- the cursor and the wontport list -----------------------------------------
@@ -357,16 +407,6 @@ def is_bare(repo: Path) -> bool:
     return git(repo, "rev-parse", "--is-bare-repository").strip() == "true"
 
 
-def branch_ref(repo: Path, branch: str) -> str:
-    """Where the upstream branch is: the branch itself in the bare cache
-    clone; origin's copy in a working clone, whose local branch can lag."""
-    if not is_bare(repo):
-        remote = f"refs/remotes/origin/{branch}"
-        if run_git(repo, "rev-parse", "--verify", "--quiet", remote).returncode == 0:
-            return remote
-    return f"refs/heads/{branch}"
-
-
 def fetch(repo_dir: Path, lock: Lock) -> None:
     """A bare, blobless clone of the stable branch, and its tags (followed
     from the branch's history). Trees are enough to list the paths."""
@@ -377,10 +417,8 @@ def fetch(repo_dir: Path, lock: Lock) -> None:
             "--branch", lock.branch, lock.repo, str(repo_dir))
         return
     print(f"fetching {lock.branch} into {repo_dir}", file=sys.stderr)
-    # A working clone keeps origin's branch apart: git refuses to fetch into
-    # the branch checked out, and the local one may carry other commits.
-    dest = f"refs/heads/{lock.branch}" if is_bare(repo_dir) else f"refs/remotes/origin/{lock.branch}"
-    git(repo_dir, "fetch", "--quiet", "--filter=blob:none", "origin", f"+refs/heads/{lock.branch}:{dest}")
+    git(repo_dir, "fetch", "--quiet", "--filter=blob:none", "origin",
+        f"+refs/heads/{lock.branch}:refs/heads/{lock.branch}")
 
 
 def releases_on_branch(repo_dir: Path, ref: str) -> dict[Version, str]:
@@ -458,7 +496,9 @@ def render_markdown(report: dict, commits: list[Commit]) -> str:
     lines.append(f"Branch `{report['branch']}`, cursor `{report['cursor'][:12]}`; "
                  f"newest stable release on the branch: {report['newest'] or 'none'}.")
     if report["releases_from"] == "tags":
-        lines.append("Stable releases read from the tags on the branch (no API data given).")
+        lines.append("Stable releases taken from the tags alone: a pre-release counts as a release.")
+    else:
+        lines.append(f"Stable releases as GitHub publishes them ({report['releases_from']}).")
     if report["target"] is None:
         lines.append("")
         lines.append("Nothing to do: no stable release newer than the cursor.")
@@ -509,14 +549,16 @@ def cache_dir() -> Path:
 
 
 def triage(app: str, repo_dir: Path, lock: Lock, wontport: Wontport, target_arg: str | None,
-           api_releases: Path | None) -> tuple[dict, list[Commit]]:
+           releases: str) -> tuple[dict, list[Commit]]:
+    """`releases`: "api", "tags" or the path of the API's JSON (see the
+    module's docstring)."""
     warnings = []
     pin = pinned_version(app)
     if pin is not None and pin != lock.release:
         warnings.append(f"the cursor's release {lock.release} is not the pin {pin} of scripts/{app}-fixture.sh")
     if run_git(repo_dir, "cat-file", "-e", f"{lock.commit}^{{commit}}").returncode != 0:
         raise SystemExit(f"the cursor {lock.commit} is not in {repo_dir}: run with --fetch")
-    tags = releases_on_branch(repo_dir, branch_ref(repo_dir, lock.branch))
+    tags = releases_on_branch(repo_dir, f"refs/heads/{lock.branch}")
     # The cursor's two fields must agree, or the range and the target
     # would be computed from different places.
     if lock.release not in tags:
@@ -532,16 +574,22 @@ def triage(app: str, repo_dir: Path, lock: Lock, wontport: Wontport, target_arg:
         if v <= lock.release or not is_ancestor(repo_dir, git(repo_dir, "rev-parse", f"{t}^{{commit}}").strip(),
                                                  lock.commit)
     }
-    releases_from = "tags"
-    if api_releases is not None:
-        stable = stable_from_api(api_releases)
+    if releases == "tags":
+        releases_from = "tags"
+        warnings.append("stable releases taken from the tags alone: a pre-release counts as a release")
+    else:
+        if releases == "api":
+            path = fetch_releases(lock.repo, cache_dir() / "upstream" / f"{app}-releases.json")
+            releases_from = "api"
+        else:
+            path, releases_from = Path(releases), "file"
+        stable = stable_from_api(path)
         tags = {v: t for v, t in tags.items() if t in stable}
-        releases_from = "api"
     newest = max(tags) if tags else None
     if target_arg:
         target = Version.parse(target_arg)
         if target not in tags:
-            raise SystemExit(f"{target} is not a {'stable ' if api_releases else ''}release on {lock.branch}")
+            raise SystemExit(f"{target} is not a {'' if releases == 'tags' else 'stable '}release on {lock.branch}")
         if target <= lock.release:
             raise SystemExit(f"{target} is not newer than the cursor's release {lock.release}")
         jump = jump_kind(lock.release, target)
@@ -585,22 +633,27 @@ def main(argv: list[str] | None = None) -> int:
                     "(default: <UNARR_CACHE or .cache>/upstream/<App>.git)")
     ap.add_argument("--fetch", action="store_true", help="clone or update the upstream repository first")
     ap.add_argument("--target", help="the release to go to, instead of the rule (e.g. 7.0.0.10815)")
-    ap.add_argument("--releases", type=Path, help="the GitHub API's releases JSON, to keep the stable ones only")
+    ap.add_argument("--releases", default="api", metavar="api|tags|FILE",
+                    help="where stable releases are told from pre-releases (default: api)")
     ap.add_argument("--lock", type=Path, help="the cursor (default: upstream/<app>.lock)")
     ap.add_argument("--wontport", type=Path, help="the list (default: upstream/<app>-wontport.md)")
     ap.add_argument("--format", choices=("markdown", "json"), default="markdown")
     args = ap.parse_args(argv)
 
-    lock = read_lock(args.lock or UPSTREAM / f"{args.app}.lock")
-    wontport = read_wontport(args.wontport or UPSTREAM / f"{args.app}-wontport.md")
     repo_dir = args.repo or cache_dir() / "upstream" / f"{APPS[args.app]}.git"
     if not args.fetch and not repo_dir.exists():
         raise SystemExit(f"no upstream clone in {repo_dir}: run with --fetch")
     try:
+        lock = read_lock(args.lock or UPSTREAM / f"{args.app}.lock")
+        wontport = read_wontport(args.wontport or UPSTREAM / f"{args.app}-wontport.md")
         if args.fetch:
             fetch(repo_dir, lock)
+        # The bare clone --fetch makes: a working clone's local branch can
+        # lag behind origin's, and nothing here would notice.
+        if not is_bare(repo_dir):
+            raise SystemExit(f"{repo_dir} is not a bare clone: leave out --repo to use the cache clone")
         report, commits = triage(args.app, repo_dir, lock, wontport, args.target, args.releases)
-    except GitError as err:
+    except (GitError, ValueError) as err:
         raise SystemExit(f"error: {err}")
     for warning in report["warnings"]:
         print(f"warning: {warning}", file=sys.stderr)
@@ -615,7 +668,9 @@ def main(argv: list[str] | None = None) -> int:
                 "migrations": c.migrations,
                 "migrations_changed": c.migrations_changed,
                 "migrations_removed": c.migrations_removed,
-                "paths": [{"status": s, "path": p, "class": classify_path(p)[0]} for s, p in c.changes],
+                "paths": [
+                    dict(zip(("status", "path", "class", "why"), (s, p, *classify_path(p)))) for s, p in c.changes
+                ],
             }
             for c in commits
         ]

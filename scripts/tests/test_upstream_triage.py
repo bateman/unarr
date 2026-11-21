@@ -13,7 +13,9 @@ import subprocess
 import sys
 import tempfile
 import unittest
+import urllib.error
 from pathlib import Path
+from unittest import mock
 
 SCRIPTS = Path(__file__).resolve().parent.parent
 REPO = SCRIPTS.parent
@@ -167,6 +169,39 @@ class ChooseTarget(unittest.TestCase):
             with self.assertRaises(ValueError):
                 V(bad)
 
+    def test_the_api_is_read_page_by_page_and_saved(self):
+        pages = [[{"tag_name": f"v7.0.{i}.1", "prerelease": i % 2 == 0} for i in range(100)],
+                 [{"tag_name": "v6.4.4.10685"}]]
+        calls = []
+
+        def urlopen(request, timeout):
+            calls.append(request.full_url)
+            return io.BytesIO(json.dumps(pages[len(calls) - 1]).encode())
+
+        with tempfile.TemporaryDirectory() as tmp, mock.patch.object(triage.urllib.request, "urlopen", urlopen):
+            path = triage.fetch_releases("https://github.com/Radarr/Radarr.git", Path(tmp) / "radarr-releases.json")
+            stable = triage.stable_from_api(path)
+        self.assertEqual(calls, [f"https://api.github.com/repos/Radarr/Radarr/releases?per_page=100&page={n}"
+                                 for n in (1, 2)])
+        self.assertEqual(len(stable), 51)
+        self.assertIn("v6.4.4.10685", stable)
+        self.assertNotIn("v7.0.0.1", stable)
+
+    def test_an_unreachable_api_stops_the_run(self):
+        def urlopen(request, timeout):
+            raise urllib.error.HTTPError(request.full_url, 403, "Forbidden", None, None)
+
+        with tempfile.TemporaryDirectory() as tmp, mock.patch.object(triage.urllib.request, "urlopen", urlopen):
+            with self.assertRaises(SystemExit) as err:
+                triage.fetch_releases("https://github.com/Radarr/Radarr", Path(tmp) / "x.json")
+        self.assertIn("RELEASES=tags", str(err.exception))
+
+    def test_github_slugs(self):
+        self.assertEqual(triage.github_slug("https://github.com/Sonarr/Sonarr.git"), "Sonarr/Sonarr")
+        self.assertEqual(triage.github_slug("https://github.com/Radarr/Radarr"), "Radarr/Radarr")
+        with self.assertRaises(ValueError):
+            triage.github_slug("https://example.com/Radarr/Radarr.git")
+
     def test_stable_releases_from_the_api(self):
         with tempfile.TemporaryDirectory() as tmp:
             path = Path(tmp) / "releases.json"
@@ -232,19 +267,22 @@ class AgainstAGitRepository(unittest.TestCase):
     def setUp(self):
         self.tmp = tempfile.TemporaryDirectory()
         self.dir = Path(self.tmp.name)
-        self.up = self.dir / "Radarr"
+        self.work = self.dir / "work"
+        self.up = self.dir / "Radarr.git"
         self.env = dict(os.environ, GIT_CONFIG_GLOBAL=os.devnull, GIT_CONFIG_SYSTEM=os.devnull,
                         GIT_AUTHOR_NAME="u", GIT_AUTHOR_EMAIL="u@example.invalid",
                         GIT_COMMITTER_NAME="u", GIT_COMMITTER_EMAIL="u@example.invalid")
-        self.git("init", "-q", "-b", "master", str(self.up), cwd=self.dir)
+        self.git("init", "-q", "-b", "master", str(self.work), cwd=self.dir)
         self.cursor = self.change("src/NzbDrone.Core/a.cs", "Bump version to 6.4.4", tag="v6.4.4.10685")
         self.fix = self.change("src/NzbDrone.Core/Parser/Parser.cs", "Fixed: a | b `c`")
         self.mig = self.change("src/NzbDrone.Core/Datastore/Migration/243_thing.cs", "New: thing")
         self.change("src/NzbDrone.Core/b.cs", "Release 7", tag="v7.0.0.10815")
         self.r701 = self.change("frontend/src/c.js", "After 7.0.0", tag="v7.0.1.10859")
-        self.git("checkout", "-q", "-b", "develop")
+        self.git("checkout", "-q", "-b", "develop", cwd=self.work)
         self.change("src/x.cs", "elsewhere", tag="v9.0.0.1")
-        self.git("checkout", "-q", "master")
+        self.git("checkout", "-q", "master", cwd=self.work)
+        # Bare, as the cache clone the script makes.
+        self.git("clone", "-q", "--bare", str(self.work), str(self.up), cwd=self.dir)
         self.lock = self.dir / "radarr.lock"
         self.lock.write_text(f"repo = https://example.invalid/Radarr.git\nbranch = master\n"
                              f"release = 6.4.4.10685\ncommit = {self.cursor}\n")
@@ -259,20 +297,22 @@ class AgainstAGitRepository(unittest.TestCase):
                               capture_output=True, text=True).stdout.strip()
 
     def change(self, path, subject, tag=None):
-        file = self.up / path
+        file = self.work / path
         file.parent.mkdir(parents=True, exist_ok=True)
         file.write_text(subject)
-        self.git("add", path)
-        self.git("commit", "-q", "-m", subject)
+        self.git("add", path, cwd=self.work)
+        self.git("commit", "-q", "-m", subject, cwd=self.work)
         if tag:
-            self.git("tag", tag)
-        return self.git("rev-parse", "HEAD")
+            self.git("tag", tag, cwd=self.work)
+        return self.git("rev-parse", "HEAD", cwd=self.work)
 
-    def run_triage(self, *extra):
+    def run_triage(self, *extra, repo=None):
+        # No network: the tags alone, unless a test gives the API's JSON.
+        releases = [] if "--releases" in extra else ["--releases", "tags"]
         out = io.StringIO()
         with contextlib.redirect_stdout(out), contextlib.redirect_stderr(io.StringIO()):
-            triage.main(["--app", "radarr", "--repo", str(self.up), "--lock", str(self.lock),
-                         "--wontport", str(self.wontport), *extra])
+            triage.main(["--app", "radarr", "--repo", str(repo or self.up), "--lock", str(self.lock),
+                         "--wontport", str(self.wontport), *releases, *extra])
         return out.getvalue()
 
     def test_a_major_stops_at_x_0_0_and_ignores_tags_off_the_branch(self):
@@ -282,6 +322,9 @@ class AgainstAGitRepository(unittest.TestCase):
         self.assertEqual([c["class"] for c in report["commits"]], ["backend", "schema", "backend"])
         self.assertEqual(report["migrations"], [243])
         self.assertEqual(report["commits"][0]["subject"], "Fixed: a | b `c`")
+        self.assertEqual(report["commits"][0]["paths"],
+                         [{"status": "A", "path": "src/NzbDrone.Core/Parser/Parser.cs", "class": "backend",
+                           "why": "core"}])
 
     def test_the_markdown_table(self):
         text = self.run_triage()
@@ -294,6 +337,16 @@ class AgainstAGitRepository(unittest.TestCase):
         self.assertEqual((report["target"], report["jump"], len(report["commits"])), ("7.0.1.10859", "major", 4))
         with self.assertRaises(SystemExit):
             self.run_triage("--target", "9.0.0.1")
+        # A typo is a one-line error, not a traceback.
+        with self.assertRaises(SystemExit) as err:
+            self.run_triage("--target", "7.0.x")
+        self.assertIn("not a version", str(err.exception))
+
+    def test_a_lock_without_a_full_sha_is_a_one_line_error(self):
+        self.lock.write_text(self.lock.read_text().replace(self.cursor, "abc123"))
+        with self.assertRaises(SystemExit) as err:
+            self.run_triage()
+        self.assertIn("not a full SHA", str(err.exception))
 
     def move_cursor(self, release, sha):
         self.lock.write_text(self.lock.read_text().replace("6.4.4.10685", release).replace(self.cursor, sha))
@@ -321,25 +374,31 @@ class AgainstAGitRepository(unittest.TestCase):
         with self.assertRaises(triage.GitError):
             triage.is_ancestor(self.up, "f" * 40, self.r701)
 
-    def test_a_working_clone_reads_origin_not_its_local_branch(self):
-        work = self.dir / "work"
-        self.git("clone", "-q", str(self.up), str(work), cwd=self.dir)
-        self.move_cursor("7.0.1.10859", self.r701)
-        self.change("src/NzbDrone.Core/d.cs", "Fixed: after the clone", tag="v7.0.2.10888")
-        self.up = work  # run_triage reads the working clone from here on
-        report = json.loads(self.run_triage("--format", "json"))
-        self.assertIsNone(report["target"])
-        report = json.loads(self.run_triage("--format", "json", "--fetch"))
-        self.assertEqual((report["target"], report["jump"], len(report["commits"])), ("7.0.2.10888", "patch", 1))
-        # The local branch was left alone: only origin's copy moved.
-        self.assertEqual(self.git("rev-parse", "master"), self.r701)
+    def test_a_working_clone_is_refused(self):
+        # Its local branch can lag behind origin's, silently.
+        with self.assertRaises(SystemExit) as err:
+            self.run_triage(repo=self.work)
+        self.assertIn("is not a bare clone", str(err.exception))
 
     def test_api_data_drops_a_prerelease(self):
         releases = self.dir / "releases.json"
         releases.write_text(json.dumps([{"tag_name": "v7.0.0.10815", "prerelease": True},
                                         {"tag_name": "v7.0.1.10859"}, {"tag_name": "v6.4.4.10685"}]))
         report = json.loads(self.run_triage("--format", "json", "--releases", str(releases)))
-        self.assertEqual((report["target"], report["releases_from"]), ("7.0.1.10859", "api"))
+        self.assertEqual((report["target"], report["releases_from"]), ("7.0.1.10859", "file"))
+
+    def test_the_first_stable_release_of_the_next_major(self):
+        # As Radarr on master: 7.0.0 and 7.0.1 published as pre-releases.
+        releases = self.dir / "releases.json"
+        releases.write_text(json.dumps([{"tag_name": "v7.0.0.10815", "prerelease": True},
+                                        {"tag_name": "v7.0.1.10859", "prerelease": True},
+                                        {"tag_name": "v6.4.4.10685"}]))
+        report = json.loads(self.run_triage("--format", "json", "--releases", str(releases)))
+        self.assertEqual((report["target"], report["newest"]), (None, "6.4.4.10685"))
+        self.git("tag", "v7.0.1.10860", self.r701)
+        releases.write_text(json.dumps(json.loads(releases.read_text()) + [{"tag_name": "v7.0.1.10860"}]))
+        report = json.loads(self.run_triage("--format", "json", "--releases", str(releases)))
+        self.assertEqual((report["target"], report["jump"], len(report["commits"])), ("7.0.1.10860", "major", 4))
 
 
 if __name__ == "__main__":
