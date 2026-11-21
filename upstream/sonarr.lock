@@ -1,0 +1,8 @@
+# The last upstream Sonarr commit Unarr has handled (issue #9).
+# scripts/upstream-triage.py reads it; the PR that ports up to a release moves
+# it forward, so it advances only when that PR merges. `release` is the
+# release `commit` belongs to, the pin of scripts/sonarr-fixture.sh.
+repo = https://github.com/Sonarr/Sonarr.git
+branch = main
+release = 4.0.20.3014
+commit = cab419ade8ac7fcab5bf80394ee492abd35d5f5a
