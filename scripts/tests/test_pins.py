@@ -6,8 +6,8 @@ is one file and nothing is left behind. What may hold such a value, and why:
 
 - upstream/<app>.pin, the source;
 - upstream/<app>.lock, the triage's cursor: its release is where the port
-  stands, not a copy of the pin, and test_upstream_triage.py checks the two
-  agree on the main branch;
+  stands, not a copy of the pin, and test_upstream_triage.py fails while
+  the two differ, as they do on a port branch that is not finished;
 - tests/fixtures/, the recordings: they hold what the original said when it
   was recorded and change only when recorded again;
 - Markdown (docs/, CHANGELOG.md, READMEs): prose and history, which says

@@ -29,6 +29,7 @@ REPO="$(cd "$(dirname "$0")/.." && pwd)"
 # The release is pinned in upstream/radarr.pin, the one place its version is
 # written (issue #9); RADARR_VERSION and RADARR_SHA256 still override it.
 PIN="$REPO/upstream/radarr.pin"
+[ -r "$PIN" ] || { echo "[fixture] cannot read $PIN, where the release is pinned" >&2; exit 1; }
 pinned() {
     sed -n "/^$1[[:space:]]*=/{s/^[^=]*=[[:space:]]*//;s/[[:space:]]*$//;p;q;}" "$PIN"
 }

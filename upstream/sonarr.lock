@@ -2,8 +2,9 @@
 # scripts/upstream-triage.py reads it; the PR that ports up to a release moves
 # it forward, so it advances only when that PR merges. `release` is the
 # release `commit` belongs to. It is the cursor, not a copy of the pin
-# (upstream/sonarr.pin): the two agree except on a port branch still under
-# way, and the triage says so when they do not.
+# (upstream/sonarr.pin): on a port branch still under way the pin moves
+# first, and make check fails until the cursor reaches it, so a port is
+# not finished (nor green) before it does.
 repo = https://github.com/Sonarr/Sonarr.git
 branch = main
 release = 4.0.20.3014

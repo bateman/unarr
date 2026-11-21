@@ -503,7 +503,7 @@ def stage(library: str, root: Path) -> Path:
 
 def pinned(app: str) -> str:
     """The version of upstream/<app>.pin, the release make ui fetches."""
-    m = re.search(r"^version\s*=\s*(\S+)\s*$", (REPO / "upstream" / f"{app}.pin").read_text(), re.M)
+    m = re.search(r"^version[ \t]*=[ \t]*(\S+)[ \t]*$", (REPO / "upstream" / f"{app}.pin").read_text(), re.M)
     return m.group(1) if m else "?"
 
 

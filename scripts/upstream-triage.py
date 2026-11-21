@@ -277,7 +277,7 @@ def pinned_version(app: str) -> Version | None:
     pin = UPSTREAM / f"{app}.pin"
     if not pin.exists():
         return None
-    match = re.search(r"^version\s*=\s*([0-9.]+)\s*$", pin.read_text(), re.M)
+    match = re.search(r"^version[ \t]*=[ \t]*([0-9.]+)[ \t]*$", pin.read_text(), re.M)
     return Version.parse(match.group(1)) if match else None
 
 

@@ -23,6 +23,7 @@ REPO="$(cd "$(dirname "$0")/.." && pwd)"
 # The release is pinned in upstream/sonarr.pin, the one place its version is
 # written (issue #9); SONARR_VERSION and SONARR_SHA256 still override it.
 PIN="$REPO/upstream/sonarr.pin"
+[ -r "$PIN" ] || { echo "[fixture] cannot read $PIN, where the release is pinned" >&2; exit 1; }
 pinned() {
     sed -n "/^$1[[:space:]]*=/{s/^[^=]*=[[:space:]]*//;s/[[:space:]]*$//;p;q;}" "$PIN"
 }
