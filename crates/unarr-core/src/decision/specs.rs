@@ -670,7 +670,7 @@ pub fn term_matches(term: &str, title: &str) -> bool {
         } else {
             format!("(?{flags}){pattern}")
         };
-        return NetRegex::new(&source, false)
+        return NetRegex::once(&source, false)
             .map(|re| re.is_match(title))
             .unwrap_or(false);
     }

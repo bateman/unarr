@@ -1,17 +1,19 @@
-//! A pattern's twin (`parser::netregex::narrow_classes`) must match every
-//! text it is used for (`twin_matches`) exactly as the pattern does: same
+//! A pattern's twin ([`narrow_classes`]) must match every text it is used
+//! for ([`twin_matches`]) exactly as the pattern does: same
 //! matches, same groups. Every pattern the two title parsers build while
 //! they parse the fixture libraries' release names, scene names and file
 //! paths is matched, in both forms, against each of those the twin is for,
 //! the ones the movie parser simplifies them to, and names written with
 //! the code points the fixtures have few of (accents, Greek, Cyrillic,
-//! typographic punctuation and spaces); every group of the first match and
-//! of every match must have the same span.
+//! typographic punctuation and spaces); every group of every match must
+//! have the same span. The patterns are the ones built so far in this test
+//! binary ([`recorded`]): the parsers', and those of the other tests.
 
 use std::collections::BTreeSet;
 use std::path::Path;
 
-use unarr_core::parser::netregex;
+use super::{compile, narrow_classes, recorded, twin_matches};
+use crate::sync::Recover;
 
 fn fixtures() -> std::path::PathBuf {
     Path::new(env!("CARGO_MANIFEST_DIR")).join("../../tests/fixtures")
@@ -52,7 +54,6 @@ const WIDER: &[&str] = &[
 
 #[test]
 fn twins_match_as_their_patterns_do() {
-    netregex::record_patterns();
     let mut texts = BTreeSet::new();
     let sonarr = fixtures().join("sonarr/sonarr.db");
     let radarr = fixtures().join("radarr/radarr.db");
@@ -69,31 +70,31 @@ fn twins_match_as_their_patterns_do() {
     let mut inputs: BTreeSet<String> = BTreeSet::new();
     for text in &texts {
         // Both parsers, so that their patterns are built (and recorded).
-        let _ = unarr_core::parser::parse_title(text);
-        if let Some(parsed) = unarr_core::movies::parser::parse_movie_title(text, false) {
+        let _ = crate::parser::parse_title(text);
+        if let Some(parsed) = crate::movies::parser::parse_movie_title(text, false) {
             inputs.insert(parsed.simple_release_title);
             inputs.extend(parsed.release_group);
         }
         inputs.insert(text.clone());
     }
     for name in WIDER {
-        let _ = unarr_core::parser::parse_title(name);
-        if let Some(parsed) = unarr_core::movies::parser::parse_movie_title(name, false) {
+        let _ = crate::parser::parse_title(name);
+        if let Some(parsed) = crate::movies::parser::parse_movie_title(name, false) {
             inputs.insert(parsed.simple_release_title);
         }
         inputs.insert(name.to_string());
     }
     let all = inputs.len();
-    inputs.retain(|t| netregex::twin_matches(t));
+    inputs.retain(|t| twin_matches(t));
     assert!(
         all - inputs.len() < 5,
         "{} of {all} inputs not for a twin",
         all - inputs.len()
     );
-    let patterns: BTreeSet<String> = netregex::recorded_patterns().into_iter().collect();
+    let patterns = recorded().lock().recover().clone();
     let twins: Vec<(&String, String)> = patterns
         .iter()
-        .filter_map(|p| netregex::narrow_classes(p).map(|twin| (p, twin)))
+        .filter_map(|p| narrow_classes(p).map(|twin| (p, twin)))
         .collect();
     assert!(
         patterns.len() > 150 && twins.len() > 100 && inputs.len() > 2000,
@@ -110,19 +111,18 @@ fn twins_match_as_their_patterns_do() {
     );
     let mut differences = Vec::new();
     for (pattern, twin) in &twins {
-        let unicode = netregex::compile_as_parsed(pattern).unwrap();
-        let narrow = netregex::compile_as_parsed(twin)
-            .unwrap_or_else(|e| panic!("the twin of {pattern:?} does not compile: {e}"));
+        let unicode = compile(pattern).unwrap();
+        let narrow =
+            compile(twin).unwrap_or_else(|e| panic!("the twin of {pattern:?} does not compile: {e}"));
+        // The first match is the first of every match, with its groups.
+        let every = |re: &fancy_regex::Regex, input: &str| -> Vec<Spans> {
+            re.captures_iter(input)
+                .filter_map(|c| c.ok())
+                .map(|c| spans(&c))
+                .collect()
+        };
         for input in &inputs {
-            let first =
-                |re: &fancy_regex::Regex| re.captures(input.as_str()).ok().flatten().map(|c| spans(&c));
-            let every = |re: &fancy_regex::Regex| -> Vec<Spans> {
-                re.captures_iter(input.as_str())
-                    .filter_map(|c| c.ok())
-                    .map(|c| spans(&c))
-                    .collect()
-            };
-            if first(&unicode) != first(&narrow) || every(&unicode) != every(&narrow) {
+            if every(&unicode, input) != every(&narrow, input) {
                 differences.push(format!("{pattern:?} on {input:?}"));
             }
         }
