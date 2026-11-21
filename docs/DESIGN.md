@@ -2617,7 +2617,7 @@ below, the recommended one; for a row the audit rated medium
 ### 21.5 A blank Plex token is not pinged, and does not fail
 
 Taken by the implementer on 19 November 2026, when the ping to plex.tv
-was added; for the maintainer to confirm or overturn.
+was added; confirmed by the maintainer on 21 November 2026.
 
 - **The question.** The originals ping plex.tv through a cache keyed by
   the token, and their cache refuses a blank key
@@ -2640,7 +2640,9 @@ was added; for the maintainer to confirm or overturn.
 - **Cost.** An installation with a blank token sees its Plex refreshed by
   Unarr where the original failed: a difference, in the direction of what
   the settings ask for.
-- **To revisit** if the maintainer prefers the originals' behaviour.
+- **Kept** by the sign-in of issue #16: a token the sign-in gives is
+  pinged as any other, and `servers` with a blank token answers `{}`
+  without asking plex.tv, as the originals do.
 
 ### 21.6 The image's allocator: jemalloc, tuned
 
