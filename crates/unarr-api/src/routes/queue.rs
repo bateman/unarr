@@ -585,7 +585,7 @@ async fn grab_pending(state: &AppState, id: i64) -> ApiResult<()> {
             Ok(())
         }
         Err(GrabError::ReleaseDownload(m)) | Err(GrabError::ReleaseUnavailable(m)) => {
-            Err(ApiError::ConflictMessage(m))
+            Err(ApiError::ClientMessage(axum::http::StatusCode::CONFLICT, m))
         }
         Err(GrabError::NoClient(m)) => Err(ApiError::Internal(anyhow::anyhow!("{m}"))),
         Err(GrabError::Client(e)) => Err(ApiError::Internal(e.into_anyhow())),

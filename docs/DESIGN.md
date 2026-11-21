@@ -1162,9 +1162,14 @@ been 20 MB since 20 November 2026 (section 21.11).
   Unarr does not drive them. Of the plex.tv side, the daily ping that
   keeps the token alive is sent as the originals send it (before each
   library update and connection test, once a day per token, its answer
-  ignored); the sign-in and the server list are not offered, since they
-  need the user's account, and the `action` endpoint answers the
-  originals' empty object. A notification
+  ignored). The connection's actions are the originals' too (issue #16,
+  since 21 November 2026; until then they answered `{}` and the token was
+  entered by hand): `startOAuth` hands the browser the plex.tv PIN
+  request to make, `continueOAuth` the sign-in page on `app.plex.tv`,
+  `getOAuthToken` reads the PIN's token from plex.tv, and `servers` reads
+  the account's resources and offers each connection of its own servers,
+  which fills host, port and SSL. Their errors are the originals' classes
+  and statuses, plex.tv's own status passed on as theirs is. A notification
   that keeps failing backs off with the originals' periods (five levels,
   no block within five minutes of the first failure) in the shared
   `provider_status` table; a test whose target never answers escapes as a
@@ -2266,8 +2271,9 @@ been 20 MB since 20 November 2026 (section 21.11).
   Filtering mounts that are files would be a departure from the original;
   it is left as is.
 - Notifications beyond Discord, the webhook and Plex keep their settings
-  and send nothing; Plex's sign-in through plex.tv is not offered, the
-  token is entered by hand. Health notifications arm fifteen minutes after
+  and send nothing. Plex's sign-in through plex.tv and its server list
+  are offered as the originals offer them (issue #16, 21 November 2026).
+  Health notifications arm fifteen minutes after
   the runtime's own clock started, so a long replay with a pinned clock
   never sends them.
 - An import costs about 100 ms per file against the Python mock, most of
@@ -2609,7 +2615,7 @@ below, the recommended one; for a row the audit rated medium
 ### 21.5 A blank Plex token is not pinged, and does not fail
 
 Taken by the implementer on 19 November 2026, when the ping to plex.tv
-was added; for the maintainer to confirm or overturn.
+was added; confirmed by the maintainer on 21 November 2026.
 
 - **The question.** The originals ping plex.tv through a cache keyed by
   the token, and their cache refuses a blank key
@@ -2632,7 +2638,9 @@ was added; for the maintainer to confirm or overturn.
 - **Cost.** An installation with a blank token sees its Plex refreshed by
   Unarr where the original failed: a difference, in the direction of what
   the settings ask for.
-- **To revisit** if the maintainer prefers the originals' behaviour.
+- **Kept** by the sign-in of issue #16: a token the sign-in gives is
+  pinged as any other, and `servers` with a blank token answers `{}`
+  without asking plex.tv, as the originals do.
 
 ### 21.6 The image's allocator: jemalloc, tuned
 

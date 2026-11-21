@@ -532,7 +532,9 @@ async fn grab_pending(state: &AppState, id: i64) -> ApiResult<()> {
         .await
         .map_err(|e| match e {
             unarr_core::downloads::GrabError::ReleaseDownload(m)
-            | unarr_core::downloads::GrabError::ReleaseUnavailable(m) => ApiError::ConflictMessage(m),
+            | unarr_core::downloads::GrabError::ReleaseUnavailable(m) => {
+                ApiError::ClientMessage(axum::http::StatusCode::CONFLICT, m)
+            }
             other => super::release::grab_error(other),
         })?;
     broadcast_queue(state);

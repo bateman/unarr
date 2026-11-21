@@ -305,6 +305,29 @@ with them where there was something to close
   for the events' names, and its hub was seen to say `qualitydefinition`
   sync after the reset.
 
+Found later, on the NAS. **The Plex connection's sign-in and server
+list answered `{}`** (#16). On 20 November 2026 at 23:41 Sonarr's UI
+called `POST /notification/action/servers` and got 200 with `{}`: every
+action of the route answered so, in both personalities, so *Authenticate
+with Plex.tv* gave no token and the *Server* menu stayed empty. The audit
+had the route PRESENT and the UI call HANDLED, which they were as routes;
+the gap was in what they answered, and `docs/DESIGN.md` did not name it.
+Medium for a connection set up again or a token that expires, nothing
+for the NAS, whose token was imported from the originals and works; the
+soak's count stands (the original was not needed). Found and closed on
+21 November 2026, recorded on Sonarr 4.0.20 and Radarr 6.4.4 first:
+`startOAuth`, `continueOAuth`, `getOAuthToken` against the real plex.tv
+(a PIN created, read unclaimed, a PIN plex.tv does not know), `servers`
+without a token and with one plex.tv refuses, and the query's mistakes
+(500 with `BadRequestException`, `KeyNotFoundException`,
+`FormatException`, `OverflowException`; plex.tv's 404 passed on). The
+action names are matched in their case, as the originals compare them,
+though the router lower-cases the path. Tests
+`api/tests/contract.rs` `the_plex_actions_answer_as_sonarrs`,
+`contract_radarr.rs` `the_plex_actions_answer_as_radarrs`, against the
+mock's plex.tv (`unarr-mock` `clients.rs`, PINs and resources), and the
+unit tests of `core/notifications/plex.rs`.
+
 ## Documentation the triage found stale
 
 - `docs/DESIGN.md` section 14 said `X-Forwarded-Proto` and

@@ -308,7 +308,8 @@ fn write_error(e: WriteError) -> ApiError {
             message: "Value cannot be null. (Parameter 'path1')".into(),
             exception: "System.ArgumentNullException".into(),
         },
-        WriteError::AlreadyAdded => ApiError::ConflictMessage(
+        WriteError::AlreadyAdded => ApiError::ClientMessage(
+            axum::http::StatusCode::CONFLICT,
             "constraint failed\nUNIQUE constraint failed: Movies.MovieMetadataId".into(),
         ),
         WriteError::Other(e) => ApiError::Internal(e),

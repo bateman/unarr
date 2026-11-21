@@ -12,7 +12,7 @@
 //! the personality's own notifications. Radarr's controller does not
 //! route the bulk actions (`[NonAction]`), so its router leaves them out.
 
-use axum::extract::{Path, State};
+use axum::extract::{Extension, Path, State};
 use axum::http::{header, StatusCode, Uri};
 use axum::response::{IntoResponse, Response};
 use axum::Json;
@@ -347,18 +347,51 @@ pub async fn test_all(State(state): State<AppState>) -> ApiResult<Response> {
     Ok((status, Json(Value::Array(results))).into_response())
 }
 
-/// `POST /notification/action/{name}`: the Plex sign-in and server list
-/// live on plex.tv, which Unarr does not call; the answer is the
-/// originals' default, an empty object.
+/// `POST /notification/action/{name}`: the Plex connection's sign-in
+/// through plex.tv and its server list (`PlexServer.RequestAction`, issue
+/// #16), given the query string as the originals' controller gives it.
+/// Every other connection answers the originals' default, an empty object.
 pub async fn action(
     State(state): State<AppState>,
-    Path(_name): Path<String>,
+    Path(name): Path<String>,
+    received: Option<Extension<crate::ReceivedUri>>,
+    uri: Uri,
     Json(body): Json<Value>,
 ) -> ApiResult<Json<Value>> {
     let id = body["id"].as_i64().unwrap_or(0);
     let existing = if id > 0 { find(&state, id).await? } else { None };
-    to_model(state.personality(), &body, id, existing.as_ref())?;
-    Ok(Json(json!({})))
+    let provider = to_model(state.personality(), &body, id, existing.as_ref())?;
+    // The router lower-cases the API's paths; the original compares the
+    // action's name as it was sent.
+    let name = received
+        .and_then(|Extension(r)| {
+            r.0.path()
+                .trim_end_matches('/')
+                .rsplit('/')
+                .next()
+                .map(crate::auth::percent_decode)
+        })
+        .unwrap_or(name);
+    if provider.implementation != "PlexServer" {
+        return Ok(Json(json!({})));
+    }
+    let settings = notifications::plex::Settings::from_value(&provider.settings);
+    let query = Params::from_uri(&uri);
+    // Radarr's notifications share the one notifier of the runtime.
+    let runtime = state.commands()?;
+    notifications::plex::action(runtime.notifier(), &settings, &name, query.pairs())
+        .await
+        .map(Json)
+        .map_err(|e| match e {
+            notifications::plex::ActionError::Server { exception, message } => ApiError::ServerException {
+                message,
+                exception: exception.to_string(),
+            },
+            notifications::plex::ActionError::PlexTv(status) => ApiError::ClientMessage(
+                StatusCode::from_u16(status).unwrap_or(StatusCode::BAD_REQUEST),
+                notifications::plex::ActionError::PLEX_TV_MESSAGE.to_string(),
+            ),
+        })
 }
 
 /// `PUT /notification/bulk`: tags only, as `NotificationBulkResource`.

@@ -2478,3 +2478,17 @@ async fn a_blank_start_has_the_originals_defaults() {
     assert_eq!(goldens.len(), 5, "every answer of the recording");
     assert!(failures.is_empty(), "{}", failures.join("\n"));
 }
+
+/// The Plex connection's sign-in and server list (issue #16), against the
+/// mock's plex.tv.
+#[tokio::test]
+async fn the_plex_actions_answer_as_sonarrs() {
+    let mock = unarr_mock::Mock::start(unarr_mock::fixtures_dir(), 0)
+        .await
+        .expect("a mock on a free port");
+    let state = build_state();
+    state.set_metadata_upstreams(unarr_core::metadata::Upstreams::mock(&mock.url()));
+    state.start_runtime().await.expect("the command runtime");
+    let app = unarr_api::router(state.clone());
+    plex_actions_answer_as_the_originals(&app, "Sonarr", "4.0.20.3014").await;
+}

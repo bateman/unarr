@@ -226,7 +226,7 @@ Present in Unarr but in no golden (23): `autotagging/schema`, `autotagging/{id}`
 | GET `/api/v3/notification/schema` | ProviderControllerBase.cs:197 (via NotificationController.cs) | PRESENT (routes/mod.rs:216) | no | UI: Add connection |
 | POST `/api/v3/notification/test` | ProviderControllerBase.cs:221 (via NotificationController.cs) | PRESENT (routes/mod.rs:217) | yes (6) | UI: Connection test |
 | POST `/api/v3/notification/testall` | ProviderControllerBase.cs:233 (via NotificationController.cs) | PRESENT (routes/mod.rs:218) | yes (1) | nobody known |
-| POST `/api/v3/notification/action/{name}` | ProviderControllerBase.cs:260 (via NotificationController.cs) | PRESENT (routes/mod.rs:219) | no | UI: Connection devices/OAuth |
+| POST `/api/v3/notification/action/{name}` | ProviderControllerBase.cs:260 (via NotificationController.cs) | PRESENT (routes/mod.rs:219; answered `{}` to every action until 21 November 2026, `7-triage.md`) | no | UI: Connection devices/OAuth |
 | GET `/api/v3/notification/{id}` | Sonarr.Http/REST/RestController.cs:49 (via NotificationController.cs) | PRESENT (routes/mod.rs:224) | yes (2) | nobody known |
 | GET `/api/v3/parse` | Parse/ParseController.cs:29 | PRESENT (routes/mod.rs:62) | yes (5) | UI: Settings > Media Management > Parse test (toolbar) |
 | POST `/api/v3/delayprofile` | Profiles/Delay/DelayProfileController.cs:36 | PRESENT (routes/mod.rs:275) | yes (3) | UI: Delay profile save (new) |
@@ -513,7 +513,7 @@ Present in Unarr but in no golden (23): `autotagging/schema`, `autotagging/{id}`
 | `POST /api/v3/indexer/action/{name}` | Utilities/requestAction.js:27 (providerOptionActions.js:72, captchaActions.js:49/:89) | HANDLED (routes/mod.rs:180) | — |
 | `POST /api/v3/downloadclient/action/{name}` | Utilities/requestAction.js:27 (providerOptionActions.js:72) | HANDLED (routes/mod.rs:198) | — |
 | `POST /api/v3/importlist/action/{name}` | Utilities/requestAction.js:27 (oAuthActions.js:94/:117/:144, providerOptionActions.js:72) | HANDLED (routes/mod.rs:237) | — |
-| `POST /api/v3/notification/action/{name}` | Utilities/requestAction.js:27 (Components/Form/Tag/DeviceInput.tsx:78, oAuthActions.js) | HANDLED (routes/mod.rs:219) | — |
+| `POST /api/v3/notification/action/{name}` | Utilities/requestAction.js:27 (Components/Form/Tag/DeviceInput.tsx:78, oAuthActions.js) | HANDLED (routes/mod.rs:219; routed, but Plex's sign-in and server list answered `{}` until 21 November 2026, `7-triage.md`) | — |
 | `GET /Content/... (icons, fonts.css, styles.css, logo.svg, thetvdb.png, error.png, 404.png)` | index.ejs:22-53; login.html:25-58,212; Components/Page/Header/PageHeader.js:61; Settings/MetadataSource/TheTvdb.js:11; Components/Error/ErrorBoundaryError.tsx:48; Components/NotFound.tsx:20 | HANDLED (lib.rs:253-254, ui.rs:134) | — |
 | `GET /Content/manifest.json, /Content/browserconfig.xml` | index.ejs:36,50; login.html:41,55 | UNSURE (served as plain assets by ui.rs:134; Sonarr's ManifestMapper/BrowserConfig rewrite the URL base inside them, and no such rewrite was found in ui.rs — only matters with a URL base) | PWA install icon paths under a URL base |
 | `GET /favicon.ico` | index.ejs:45 | HANDLED (lib.rs:252) | — |

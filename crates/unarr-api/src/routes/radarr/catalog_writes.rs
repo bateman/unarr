@@ -226,7 +226,8 @@ async fn name_clash(state: &AppState, name: String, id: i64) -> ApiResult<()> {
         })
         .await?;
     if taken {
-        return Err(ApiError::ConflictMessage(
+        return Err(ApiError::ClientMessage(
+            axum::http::StatusCode::CONFLICT,
             "constraint failed\nUNIQUE constraint failed: QualityProfiles.Name".into(),
         ));
     }

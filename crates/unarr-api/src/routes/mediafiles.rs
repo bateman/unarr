@@ -444,7 +444,7 @@ async fn delete_one(state: &AppState, id: i64) -> ApiResult<()> {
             Ok(())
         }
         Err(e) => Err(match e.status() {
-            409 => ApiError::ConflictMessage(e.to_string()),
+            409 => ApiError::ClientMessage(axum::http::StatusCode::CONFLICT, e.to_string()),
             _ => ApiError::ServerMessage(e.to_string()),
         }),
     }

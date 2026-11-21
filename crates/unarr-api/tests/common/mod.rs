@@ -616,3 +616,201 @@ pub async fn housekeeping_repairs_as_the_original(
     );
     assert!(ahead.is_empty(), "still ahead after the housekeeping: {ahead:?}");
 }
+
+/// The Plex connection's actions (`PlexServer.RequestAction`, issue #16)
+/// through the API, against the mock's plex.tv, as Sonarr 4.0.20 and
+/// Radarr 6.4.4 answered them on 21 November 2026: the sign-in's three
+/// steps, the server list, and the errors in their statuses.
+#[allow(dead_code)]
+pub async fn plex_actions_answer_as_the_originals(app: &axum::Router, product: &str, version: &str) {
+    use http_body_util::BodyExt;
+    use unarr_mock::clients::{PLEX_PIN_SIGNED_IN, PLEX_PIN_WAITING, PLEX_TOKEN};
+    let schema = {
+        let response = app
+            .clone()
+            .oneshot(
+                Request::builder()
+                    .uri("/api/v3/notification/schema")
+                    .header("X-Api-Key", unarr_mock::API_KEY)
+                    .body(Body::empty())
+                    .unwrap(),
+            )
+            .await
+            .unwrap();
+        let bytes = response.into_body().collect().await.unwrap().to_bytes();
+        let all: Value = serde_json::from_slice(&bytes).unwrap();
+        let mut plex = all
+            .as_array()
+            .unwrap()
+            .iter()
+            .find(|s| s["implementation"] == "PlexServer")
+            .cloned()
+            .expect("the Plex schema");
+        plex["name"] = Value::from("Plex");
+        plex
+    };
+    let with_token = |token: &str| {
+        let mut body = schema.clone();
+        for f in body["fields"].as_array_mut().unwrap() {
+            if f["name"] == "authToken" {
+                f["value"] = Value::from(token);
+            }
+        }
+        body
+    };
+    let act = |path: String, body: Value| async move {
+        let response = app
+            .clone()
+            .oneshot(
+                Request::builder()
+                    .method("POST")
+                    .uri(format!("/api/v3/notification/action/{path}"))
+                    .header("X-Api-Key", unarr_mock::API_KEY)
+                    .header("content-type", "application/json")
+                    .body(Body::from(body.to_string()))
+                    .unwrap(),
+            )
+            .await
+            .unwrap();
+        let status = response.status();
+        let bytes = response.into_body().collect().await.unwrap().to_bytes();
+        (
+            status,
+            serde_json::from_slice::<Value>(&bytes).unwrap_or(Value::Null),
+        )
+    };
+
+    // The PIN request, for the browser to make.
+    let (status, start) = act("startOAuth?callbackUrl=x".into(), schema.clone()).await;
+    assert_eq!(status, StatusCode::OK, "{start}");
+    let url = start["url"].as_str().unwrap();
+    let client_id = url
+        .split_once("X-Plex-Client-Identifier=")
+        .and_then(|(_, rest)| rest.split('&').next())
+        .unwrap()
+        .to_string();
+    assert_eq!(client_id.len(), 36, "{url}");
+    assert_eq!(
+        url,
+        format!(
+            "https://plex.tv/api/v2/pins?X-Plex-Client-Identifier={client_id}&X-Plex-Product={product}&X-Plex-Platform=Windows&X-Plex-Platform-Version=7&X-Plex-Device-Name={product}&X-Plex-Version={version}&strong=True"
+        )
+    );
+    assert_eq!(start["method"], "POST");
+    assert_eq!(
+        start["headers"],
+        serde_json::json!({"accept": "application/json"})
+    );
+
+    // The sign-in page, with the PIN the browser got.
+    let (status, page) = act(
+        format!("continueOAuth?callbackUrl=http%3A%2F%2Flocalhost%2Foauth.html&id={PLEX_PIN_SIGNED_IN}&code=abc&product={product}"),
+        schema.clone(),
+    )
+    .await;
+    assert_eq!(status, StatusCode::OK);
+    assert_eq!(
+        page,
+        serde_json::json!({
+            "oauthUrl": format!("https://app.plex.tv/auth/#!?clientID={client_id}&forwardUrl=http%3A%2F%2Flocalhost%2Foauth.html&code=abc&context%5Bdevice%5D%5Bproduct%5D={product}&context%5Bdevice%5D%5Bplatform%5D=Windows&context%5Bdevice%5D%5BplatformVersion%5D=7&context%5Bdevice%5D%5Bversion%5D={version}"),
+            "pinId": PLEX_PIN_SIGNED_IN,
+        })
+    );
+
+    // The token: none while the PIN waits, then the PIN's.
+    let token = |pin: String| act(format!("getOAuthToken?pinId={pin}&oauthUrl=x"), schema.clone());
+    assert_eq!(
+        token(PLEX_PIN_WAITING.to_string()).await,
+        (StatusCode::OK, serde_json::json!({}))
+    );
+    assert_eq!(
+        token(PLEX_PIN_SIGNED_IN.to_string()).await,
+        (StatusCode::OK, serde_json::json!({"authToken": PLEX_TOKEN}))
+    );
+    // A PIN plex.tv does not know: its 404, as a client exception.
+    let (status, body) = token("1".into()).await;
+    assert_eq!(status, StatusCode::NOT_FOUND);
+    assert_eq!(body["message"], "Unable to connect to plex.tv");
+    assert_eq!(
+        body["description"],
+        "NzbDrone.Core.Exceptions.NzbDroneClientException: Unable to connect to plex.tv"
+    );
+
+    // The query's mistakes, raised as the originals raise them.
+    for (path, message, exception) in [
+        (
+            "getOAuthToken?pinId=",
+            "QueryParam pinId invalid.",
+            "NzbDrone.Core.Exceptions.BadRequestException",
+        ),
+        (
+            "getOAuthToken",
+            "The given key 'pinId' was not present in the dictionary.",
+            "System.Collections.Generic.KeyNotFoundException",
+        ),
+        (
+            "continueOAuth?callbackUrl=&id=1&code=x",
+            "QueryParam callbackUrl invalid.",
+            "NzbDrone.Core.Exceptions.BadRequestException",
+        ),
+        (
+            "continueOAuth?callbackUrl=x&id=1&code=",
+            "QueryParam code invalid.",
+            "NzbDrone.Core.Exceptions.BadRequestException",
+        ),
+        (
+            "continueOAuth?id=1&code=x",
+            "The given key 'callbackUrl' was not present in the dictionary.",
+            "System.Collections.Generic.KeyNotFoundException",
+        ),
+        (
+            "continueOAuth?callbackUrl=x&id=abc&code=x",
+            "Input string was not in a correct format.",
+            "System.FormatException",
+        ),
+        (
+            "continueOAuth?callbackUrl=x&id=99999999999&code=x",
+            "Value was either too large or too small for an Int32.",
+            "System.OverflowException",
+        ),
+    ] {
+        let (status, body) = act(path.into(), schema.clone()).await;
+        assert_eq!(status, StatusCode::INTERNAL_SERVER_ERROR, "{path}");
+        assert_eq!(body["message"], message, "{path}");
+        assert_eq!(body["description"], format!("{exception}: {message}"), "{path}");
+    }
+
+    // The servers: none asked without a token, none for a token plex.tv
+    // refuses, and the account's own server's connections for its token.
+    assert_eq!(
+        act("servers".into(), schema.clone()).await,
+        (StatusCode::OK, serde_json::json!({}))
+    );
+    assert_eq!(
+        act("servers".into(), with_token("not-a-token")).await,
+        (StatusCode::OK, serde_json::json!({"options": []}))
+    );
+    let (status, servers) = act("servers".into(), with_token(PLEX_TOKEN)).await;
+    assert_eq!(status, StatusCode::OK);
+    assert_eq!(
+        servers,
+        serde_json::json!({"options": [
+            {"value": "https://192-168-1-10.0123456789abcdef.plex.direct:32400", "name": "Mock Plex (192-168-1-10.0123456789abcdef.plex.direct)",
+             "order": 0, "hint": "Local, Secure",
+             "additionalProperties": {"host": "192-168-1-10.0123456789abcdef.plex.direct", "port": 32400, "useSsl": true}},
+            {"value": "http://192.168.1.10:32400", "name": "Mock Plex (192.168.1.10)", "order": 0, "hint": "Local",
+             "additionalProperties": {"host": "192.168.1.10", "port": 32400, "useSsl": false}},
+            {"value": "http://203.0.113.7:32401", "name": "Mock Plex (203.0.113.7)", "order": 0, "hint": "Remote",
+             "additionalProperties": {"host": "203.0.113.7", "port": 32401, "useSsl": false}},
+        ]})
+    );
+
+    // The names are matched as written; any other is the default.
+    for name in ["Servers", "startoauth", "nothing"] {
+        assert_eq!(
+            act(name.into(), with_token(PLEX_TOKEN)).await,
+            (StatusCode::OK, serde_json::json!({})),
+            "{name}"
+        );
+    }
+}

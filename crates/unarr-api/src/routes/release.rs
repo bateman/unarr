@@ -117,7 +117,8 @@ pub async fn grab(State(state): State<AppState>, Json(body): Json<Value>) -> Api
         Ok(_) => {}
         Err(GrabError::ReleaseDownload(message)) | Err(GrabError::ReleaseUnavailable(message)) => {
             tracing::error!(error = %message, "getting the release from the indexer failed");
-            return Err(ApiError::ConflictMessage(
+            return Err(ApiError::ClientMessage(
+                axum::http::StatusCode::CONFLICT,
                 "Getting release from indexer failed".into(),
             ));
         }
