@@ -2059,9 +2059,20 @@ async fn blank_credentials_let_nobody_in() {
 #[tokio::test]
 async fn backups_and_failures_are_never_kept() {
     let app = without_auth(Personality::Sonarr, "");
-    let (status, headers, _) = ask(&app, "GET", "/backup/manual/nope.zip", &[], "").await;
-    assert_eq!(status, StatusCode::NOT_FOUND);
-    assert_eq!(header(&headers, "cache-control"), Some("no-cache, no-store"));
+    for path in [
+        "/backup/manual/nope.zip",
+        "/backup/manual/nope.zip?h=1",
+        "/Backup/scheduled/nope.zip?H=x",
+    ] {
+        let (status, headers, _) = ask(&app, "GET", path, &[], "").await;
+        assert_eq!(status, StatusCode::NOT_FOUND, "{path}");
+        assert_eq!(
+            header(&headers, "cache-control"),
+            Some("no-cache, no-store"),
+            "{path}"
+        );
+        assert_eq!(header(&headers, "last-modified"), None, "{path}");
+    }
     // The fixture's tag 1 is in use: its removal is refused with an exception.
     let (status, headers, _) = ask(&app, "DELETE", "/api/v3/tag/1?h=1", &[("X-Api-Key", KEY)], "").await;
     assert_eq!(status, StatusCode::CONFLICT);
