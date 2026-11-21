@@ -2490,5 +2490,5 @@ async fn the_plex_actions_answer_as_sonarrs() {
     state.set_metadata_upstreams(unarr_core::metadata::Upstreams::mock(&mock.url()));
     state.start_runtime().await.expect("the command runtime");
     let app = unarr_api::router(state.clone());
-    plex_actions_answer_as_the_originals(&app, "Sonarr", "4.0.20.3014").await;
+    plex_actions_answer_as_the_originals(&app, "Sonarr", unarr_core::pin::SONARR.version).await;
 }

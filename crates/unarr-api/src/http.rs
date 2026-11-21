@@ -339,14 +339,19 @@ pub async fn server_header(mut response: Response) -> Response {
 /// embedded was built, which the originals give as `Last-Modified` to
 /// whatever they let a client keep.
 pub fn build_date(personality: Personality) -> HeaderValue {
-    let date = chrono::DateTime::parse_from_rfc3339(crate::compat::emulated_build_time(personality))
+    let date = http_date(crate::compat::emulated_build_time(personality));
+    HeaderValue::from_str(&date).unwrap_or(HeaderValue::from_static("Thu, 01 Jan 1970 00:00:00 GMT"))
+}
+
+/// An RFC 3339 time as .NET's `"r"` format writes it; empty when unreadable.
+fn http_date(rfc3339: &str) -> String {
+    chrono::DateTime::parse_from_rfc3339(rfc3339)
         .map(|at| {
             at.with_timezone(&chrono::Utc)
                 .format("%a, %d %b %Y %H:%M:%S GMT")
                 .to_string()
         })
-        .unwrap_or_default();
-    HeaderValue::from_str(&date).unwrap_or(HeaderValue::from_static("Thu, 01 Jan 1970 00:00:00 GMT"))
+        .unwrap_or_default()
 }
 
 /// `StartsWithSegments`, without case.
@@ -1057,8 +1062,16 @@ mod tests {
         ] {
             assert!(!cacheable(path, query), "{path} {query:?}");
         }
-        assert_eq!(build_date(Personality::Sonarr), "Wed, 16 Sep 2026 16:37:42 GMT");
-        assert_eq!(build_date(Personality::Radarr), "Mon, 14 Sep 2026 15:54:37 GMT");
+        assert_eq!(http_date("2024-02-29T08:05:09Z"), "Thu, 29 Feb 2024 08:05:09 GMT");
+        assert_eq!(
+            http_date("2024-02-29T10:05:09+02:00"),
+            "Thu, 29 Feb 2024 08:05:09 GMT"
+        );
+        for personality in [Personality::Sonarr, Personality::Radarr] {
+            let pinned = unarr_core::pin::of(personality).unwrap().build_time;
+            assert_eq!(build_date(personality), http_date(pinned).as_str());
+            assert!(!http_date(pinned).is_empty(), "{pinned}");
+        }
     }
 
     #[test]

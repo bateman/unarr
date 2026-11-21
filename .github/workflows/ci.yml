@@ -31,15 +31,15 @@ jobs:
       - uses: Swatinem/rust-cache@v2
       # The embedded web UIs come from the pinned Sonarr and Radarr releases;
       # the tests need them (login pages, HTML goldens). Cache the tarballs
-      # between runs, each keyed by the script that pins its release.
+      # between runs, each keyed by its pin and the script that fetches it.
       - uses: actions/cache@v4
         with:
           path: .cache/sonarr/*.tar.gz
-          key: sonarr-release-${{ hashFiles('scripts/sonarr-fixture.sh') }}
+          key: sonarr-release-${{ hashFiles('scripts/sonarr-fixture.sh', 'upstream/sonarr.pin') }}
       - uses: actions/cache@v4
         with:
           path: .cache/radarr/*.tar.gz
-          key: radarr-release-${{ hashFiles('scripts/radarr-fixture.sh') }}
+          key: radarr-release-${{ hashFiles('scripts/radarr-fixture.sh', 'upstream/radarr.pin') }}
       - run: make ui
       # The Radarr goldens' FreeSpace rule needs ~9 GB free on /, more than
       # the runner has left after the build: drop toolchains nothing here uses.
@@ -90,11 +90,11 @@ jobs:
       - uses: actions/cache@v4
         with:
           path: .cache/sonarr/*.tar.gz
-          key: sonarr-release-${{ hashFiles('scripts/sonarr-fixture.sh') }}
+          key: sonarr-release-${{ hashFiles('scripts/sonarr-fixture.sh', 'upstream/sonarr.pin') }}
       - uses: actions/cache@v4
         with:
           path: .cache/radarr/*.tar.gz
-          key: radarr-release-${{ hashFiles('scripts/radarr-fixture.sh') }}
+          key: radarr-release-${{ hashFiles('scripts/radarr-fixture.sh', 'upstream/radarr.pin') }}
       - run: make ui
       - uses: docker/setup-buildx-action@v3
       - uses: docker/login-action@v3

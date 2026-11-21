@@ -4,8 +4,8 @@
 The same machine and the same library for both sides, one side at a time:
 
 - the originals: the official Sonarr and Radarr that ``make ui`` downloads
-  into ``.cache/`` (the versions pinned in ``scripts/sonarr-fixture.sh`` and
-  ``scripts/radarr-fixture.sh``), two processes;
+  into ``.cache/`` (the versions pinned in ``upstream/sonarr.pin`` and
+  ``upstream/radarr.pin``), two processes;
 - Unarr: ``unarrd``, which the script has cargo build from the checkout first
   (``--unarrd`` names a prebuilt one instead) and copies into ``--out``, where
   the copy runs, with both personalities, one process.
@@ -501,8 +501,9 @@ def stage(library: str, root: Path) -> Path:
     return root
 
 
-def pinned(script: str, var: str) -> str:
-    m = re.search(rf'{var}="\$\{{{var}:-([^}}]+)\}}"', (REPO / "scripts" / script).read_text())
+def pinned(app: str) -> str:
+    """The version of upstream/<app>.pin, the release make ui fetches."""
+    m = re.search(r"^version\s*=\s*(\S+)\s*$", (REPO / "upstream" / f"{app}.pin").read_text(), re.M)
     return m.group(1) if m else "?"
 
 
@@ -780,8 +781,8 @@ def main():
         # The extracted folder only (make ui extracts again when it is
         # missing), not the cache that also holds the other original.
         "dirs": {"sonarr": str(sonarr.parent), "radarr": str(radarr.parent)},
-        "sonarr": pinned("sonarr-fixture.sh", "SONARR_VERSION"),
-        "radarr": pinned("radarr-fixture.sh", "RADARR_VERSION"),
+        "sonarr": pinned("sonarr"),
+        "radarr": pinned("radarr"),
         "first": a.first, "idle": a.idle, "tail": a.tail, "cap": not a.no_cap, "warmup": a.warmup,
         "network": a.network,
         "date": time.strftime("%Y-%m-%d"),

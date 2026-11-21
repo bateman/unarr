@@ -955,15 +955,17 @@ mod tests {
     }
 
     /// What Sonarr 4.0.20 answered on 21 November 2026 to `startOAuth`
-    /// and to `continueOAuth`, with its client identifier.
+    /// and to `continueOAuth`, with its client identifier; the version in
+    /// them is the one the identity carries, the pin's.
     #[test]
     fn the_sign_in_addresses_are_the_originals() {
         let id = "06379e6c-b6a8-4dab-9ca2-d3c11680a12b";
+        let version = crate::pin::SONARR.version;
         let identity = crate::notifications::Identity::default();
         assert_eq!(
             pin_url(id, &identity),
             json!({
-                "url": "https://plex.tv/api/v2/pins?X-Plex-Client-Identifier=06379e6c-b6a8-4dab-9ca2-d3c11680a12b&X-Plex-Product=Sonarr&X-Plex-Platform=Windows&X-Plex-Platform-Version=7&X-Plex-Device-Name=Sonarr&X-Plex-Version=4.0.20.3014&strong=True",
+                "url": format!("https://plex.tv/api/v2/pins?X-Plex-Client-Identifier=06379e6c-b6a8-4dab-9ca2-d3c11680a12b&X-Plex-Product=Sonarr&X-Plex-Platform=Windows&X-Plex-Platform-Version=7&X-Plex-Device-Name=Sonarr&X-Plex-Version={version}&strong=True"),
                 "method": "POST",
                 "headers": {"accept": "application/json"},
             })
@@ -977,7 +979,7 @@ mod tests {
                 "kfh6p48ikyiaiziy3a3exxbtz"
             ),
             json!({
-                "oauthUrl": "https://app.plex.tv/auth/#!?clientID=06379e6c-b6a8-4dab-9ca2-d3c11680a12b&forwardUrl=http%3A%2F%2Flocalhost%3A8989%2Foauth.html&code=kfh6p48ikyiaiziy3a3exxbtz&context%5Bdevice%5D%5Bproduct%5D=Sonarr&context%5Bdevice%5D%5Bplatform%5D=Windows&context%5Bdevice%5D%5BplatformVersion%5D=7&context%5Bdevice%5D%5Bversion%5D=4.0.20.3014",
+                "oauthUrl": format!("https://app.plex.tv/auth/#!?clientID=06379e6c-b6a8-4dab-9ca2-d3c11680a12b&forwardUrl=http%3A%2F%2Flocalhost%3A8989%2Foauth.html&code=kfh6p48ikyiaiziy3a3exxbtz&context%5Bdevice%5D%5Bproduct%5D=Sonarr&context%5Bdevice%5D%5Bplatform%5D=Windows&context%5Bdevice%5D%5BplatformVersion%5D=7&context%5Bdevice%5D%5Bversion%5D={version}"),
                 "pinId": 883714515,
             })
         );

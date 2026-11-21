@@ -19,12 +19,19 @@
 # refuses to empty a directory it did not mark as its own.
 set -euo pipefail
 
-SONARR_VERSION="${SONARR_VERSION:-4.0.20.3014}"
-SONARR_SHA256="${SONARR_SHA256:-1fc48544b5a3401b2fc3df8d0642c1e6a73a28e41a351169edd9cd8f54770db5}"
+REPO="$(cd "$(dirname "$0")/.." && pwd)"
+# The release is pinned in upstream/sonarr.pin, the one place its version is
+# written (issue #9); SONARR_VERSION and SONARR_SHA256 still override it.
+PIN="$REPO/upstream/sonarr.pin"
+pinned() {
+    sed -n "/^$1[[:space:]]*=/{s/^[^=]*=[[:space:]]*//;s/[[:space:]]*$//;p;q;}" "$PIN"
+}
+SONARR_VERSION="${SONARR_VERSION:-$(pinned version)}"
+SONARR_SHA256="${SONARR_SHA256:-$(pinned sha256)}"
+[ -n "$SONARR_VERSION" ] && [ -n "$SONARR_SHA256" ] || { echo "[fixture] no version or sha256 in $PIN" >&2; exit 1; }
 SONARR_URL="https://github.com/Sonarr/Sonarr/releases/download/v${SONARR_VERSION}/Sonarr.main.${SONARR_VERSION}.linux-x64.tar.gz"
 SONARR_PORT="${SONARR_PORT:-8989}"
 
-REPO="$(cd "$(dirname "$0")/.." && pwd)"
 CACHE="${UNARR_CACHE:-$REPO/.cache/sonarr}"
 FIXTURE_DIR="$REPO/tests/fixtures/sonarr"
 GOLDEN_DIR="$FIXTURE_DIR/golden"

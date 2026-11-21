@@ -2070,5 +2070,5 @@ async fn a_blank_start_has_the_originals_defaults() {
 #[tokio::test]
 async fn the_plex_actions_answer_as_radarrs() {
     let (_dirs, _mock, _state, app) = live_app("plex_actions").await;
-    plex_actions_answer_as_the_originals(&app, "Radarr", "6.4.4.10685").await;
+    plex_actions_answer_as_the_originals(&app, "Radarr", unarr_core::pin::RADARR.version).await;
 }

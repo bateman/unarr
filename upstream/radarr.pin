@@ -1,0 +1,17 @@
+# The Radarr release Unarr emulates: the one place its version is written
+# (issue #9). Read by scripts/radarr-fixture.sh (the tarball `make ui`,
+# `make golden-radarr` and `make radarr` run), by the build of unarr-core
+# (crates/unarr-core/build.rs: the identity, the metadata user agent, Plex,
+# the tests), by scripts/compare-originals.py and scripts/upstream-triage.py.
+# A new version is written here alone, scripts/tests/test_pins.py checks it:
+# it fails if one of these values is written elsewhere (recordings, prose and
+# upstream/radarr.lock, the triage's cursor, aside; the test says why).
+#
+# version     the release, as `system/status` and `X-Application-Version` say it
+# build_time  its `buildTime`, also the `Last-Modified` of what clients keep
+# migration   its migration level, reported when nothing was imported
+# sha256      of Radarr.master.<version>.linux-core-x64.tar.gz, the tarball pinned
+version = 6.4.4.10685
+build_time = 2026-09-14T15:54:37Z
+migration = 242
+sha256 = a1d726129535e739d4efaf93b5fdd771bb1c78349f55ceac70e365e37b5a12a3

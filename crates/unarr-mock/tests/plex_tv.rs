@@ -47,7 +47,7 @@ async fn plex_tv_is_pinged_once_a_day_per_token() {
     assert_eq!(q["X-Plex-Device-Name"], "Sonarr");
     assert_eq!(q["X-Plex-Platform"], "Windows");
     assert_eq!(q["X-Plex-Platform-Version"], "7");
-    assert_eq!(q["X-Plex-Version"], "4.0.20.3014");
+    assert_eq!(q["X-Plex-Version"], unarr_core::pin::SONARR.version);
     assert_eq!(q["X-Plex-Token"], PLEX_TOKEN);
     // The identifier the server requests carry, stored once.
     let server = mock

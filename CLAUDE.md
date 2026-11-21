@@ -62,7 +62,7 @@ Sonarr and Radarr: RAM, CPU and latency on the same machine and library.
 After each substantial change, update it in the same branch:
 
 - what counts: a milestone, a change made for speed or memory, a new
-  pinned version of an original in `scripts/*-fixture.sh`;
+  pinned version of an original in `upstream/<app>.pin`;
 - how: `make ui` (after a new pin, remove `.cache/sonarr/Sonarr` or
   `.cache/radarr/Radarr`, under `UNARR_CACHE` when it is set, first:
   `make ui` keeps a binary it already has),
