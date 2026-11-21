@@ -129,6 +129,34 @@ class Stage(unittest.TestCase):
             self.assertIn("<Port>7878</Port>", (REPO / "tests/fixtures/radarr/config.xml").read_text())
 
 
+class Processes(unittest.TestCase):
+    def test_the_stand_in_stops_unstarted(self):
+        # unarrd may fail to start before the stand-in serves: stop() must not wait forever.
+        standin = smoke.StandIn()
+        standin.stop()
+
+    def test_the_stand_in_answers_503_and_keeps_the_request(self):
+        import urllib.error
+        import urllib.request
+
+        standin = smoke.StandIn()
+        standin.start()
+        try:
+            with self.assertRaises(urllib.error.HTTPError) as caught:
+                urllib.request.urlopen(standin.url + "/skyhook.sonarr.tv/v1/tvdb/shows/en/1", timeout=5)
+            self.assertEqual(caught.exception.code, 503)
+            self.assertEqual(standin.asked, ["GET /skyhook.sonarr.tv/v1/tvdb/shows/en/1"])
+        finally:
+            standin.stop()
+
+    def test_the_death_signal_is_ready_before_the_fork(self):
+        hook = smoke.death_signal()
+        if sys.platform == "linux":
+            self.assertTrue(callable(hook))
+        else:
+            self.assertIsNone(hook)
+
+
 def report(pages, problems=(), unused=()):
     return {
         "date": "2026-11-21 10:00:00", "unarrd": "target/debug/unarrd", "browser": "chromium 1", "seconds": 12.0,
@@ -172,6 +200,15 @@ class Report(unittest.TestCase):
         r = report([page("/")], problems=[{"kind": "signalr", "text": "no websocket"}])
         self.assertTrue(smoke.failed(r))
         self.assertIn("FAIL signalr: no websocket", smoke.summary(r, Path("/out")))
+
+    def test_a_failed_login_is_not_a_page(self):
+        login = page("/login", [{"kind": "login", "text": "cannot log in as unarr"}], source="login")
+        r = report([login, page("/"), page("/calendar")])
+        self.assertTrue(smoke.failed(r))
+        text = smoke.summary(r, Path("/out"))
+        self.assertIn("2 pages, 2 ok, 0 failed", text)
+        self.assertIn("FAIL login", text)
+        self.assertIn("cannot log in as unarr", text)
 
     def test_an_unused_exception_is_reported(self):
         unused = {"method": "GET", "path": "/x", "status": 404, "reason": "r"}

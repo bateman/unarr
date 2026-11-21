@@ -54,7 +54,6 @@ check: ## fmt check + lint + test + the scripts' tests, what CI runs
 	$(MAKE) test
 
 ui-smoke: ui-present $(UI_SMOKE_VENV)/.installed ## Open every page of the embedded UIs in a headless browser over unarrd on a copy of the fixtures; fails on console errors, 4xx/5xx, pages left loading (SMOKE_APP=sonarr|radarr, UI_SMOKE_CHANNEL=chrome; report in .cache/ui-smoke)
-	cargo build --bin unarrd
 	@$(UI_SMOKE_VENV)/bin/python -I scripts/ui-smoke.py --app $(SMOKE_APP)
 
 $(UI_SMOKE_VENV)/.installed: scripts/ui-smoke-requirements.txt

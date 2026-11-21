@@ -5,9 +5,11 @@ Unarr serves the official Sonarr and Radarr UIs, taken from the pinned
 releases' tarballs (``make ui``). When a pin moves, a new UI arrives over
 Unarr's backend; this script says whether it works. For each personality it:
 
-- starts ``unarrd`` on a fresh copy of the fixture (``tests/fixtures/<app>``,
-  never the fixture itself), both personalities in one process as
-  ``make run-both`` does, on free ports of 127.0.0.1;
+- builds ``unarrd`` (``cargo build``, the binary at the path cargo reports;
+  ``--unarrd`` names a prebuilt one) and starts it on a fresh copy of the
+  fixture (``tests/fixtures/<app>``, never the fixture itself), both
+  personalities in one process as ``make run-both`` does, on free ports of
+  127.0.0.1;
 - opens a headless Chromium (Playwright), logs in with the fixture's user
   when the UI asks, and opens every page of the UI's menu: the sidebar is
   read on each page, so a section's sub-pages are found once the section is
@@ -37,7 +39,7 @@ written beside it. An entry no page needed is reported as unused.
 
 Usage::
 
-    make ui-smoke                     # builds unarrd, installs Playwright, opens both UIs
+    make ui-smoke                     # installs Playwright, builds unarrd, opens both UIs
     make ui-smoke SMOKE_APP=radarr UI_SMOKE_CHANNEL=chrome
     .cache/ui-smoke-venv/bin/python -I scripts/ui-smoke.py --app sonarr --only '^/settings'
     .cache/ui-smoke-venv/bin/python -I scripts/ui-smoke.py --app radarr --only '^$' --page /system/logs/files/update
@@ -307,8 +309,19 @@ class StandIn(http.server.ThreadingHTTPServer):
             def log_message(self, *a):
                 pass
 
+        # Bound now, so its URL is known; served from start(), once unarrd
+        # is forked (no thread may run while the child is set up).
         super().__init__(("127.0.0.1", 0), Handler)
-        threading.Thread(target=self.serve_forever, daemon=True).start()
+
+    def start(self):
+        self.serving = threading.Thread(target=self.serve_forever, daemon=True)
+        self.serving.start()
+
+    def stop(self):
+        # shutdown() waits for serve_forever, which never ran if start() was not reached.
+        if getattr(self, "serving", None) is not None:
+            self.shutdown()
+        self.server_close()
 
     @property
     def url(self) -> str:
@@ -338,14 +351,19 @@ def stage(apps: list[str], data: Path) -> dict[str, int]:
     return ports
 
 
-def die_with_parent():
-    """In the child, before exec: SIGTERM when this script dies, even by SIGKILL (Linux)."""
+def death_signal():
+    """What the child runs before exec, on Linux: SIGTERM when this script
+    dies, even by SIGKILL. libc's prctl is looked up here, in the parent, so
+    the child imports and loads nothing between fork and exec."""
+    if sys.platform != "linux":
+        return None
     try:
         import ctypes
 
-        ctypes.CDLL(None, use_errno=True).prctl(1, signal.SIGTERM)  # PR_SET_PDEATHSIG
+        prctl = ctypes.CDLL(None, use_errno=True).prctl
     except (OSError, AttributeError):
-        pass
+        return None
+    return lambda: prctl(1, signal.SIGTERM)  # PR_SET_PDEATHSIG
 
 
 def start_unarrd(unarrd: Path, data: Path, apps: list[str], metadata: str, log_file: Path) -> subprocess.Popen:
@@ -355,7 +373,7 @@ def start_unarrd(unarrd: Path, data: Path, apps: list[str], metadata: str, log_f
     out = open(log_file, "wb")
     cmd = [str(unarrd), "--data", str(data), "--personalities", ",".join(apps), "--bind", "127.0.0.1"]
     return subprocess.Popen(cmd, stdout=out, stderr=subprocess.STDOUT, env=env, cwd=data,
-                            preexec_fn=die_with_parent if sys.platform == "linux" else None)
+                            preexec_fn=death_signal())
 
 
 def wait_until_up(proc: subprocess.Popen, ports: dict[str, int], log_file: Path, timeout: float = 180):
@@ -376,6 +394,25 @@ def wait_until_up(proc: subprocess.Popen, ports: dict[str, int], log_file: Path,
         if time.monotonic() > deadline:
             raise SystemExit(f"unarrd did not answer /ping within {timeout:.0f} s: {sorted(pending)} (see {log_file})")
         time.sleep(0.25)
+
+
+def build() -> Path:
+    """unarrd as the checkout builds it (debug), at the path cargo reports,
+    wherever CARGO_TARGET_DIR or a cargo config put it."""
+    log("cargo build --bin unarrd")
+    done = subprocess.run(["cargo", "build", "--bin", "unarrd", "--message-format=json-render-diagnostics"],
+                          cwd=REPO, stdout=subprocess.PIPE, text=True)
+    if done.returncode != 0:
+        raise SystemExit("cargo build failed")
+    for line in done.stdout.splitlines():
+        try:
+            msg = json.loads(line)
+        except ValueError:
+            continue
+        if msg.get("reason") == "compiler-artifact" and msg.get("target", {}).get("name") == "unarrd" \
+                and msg.get("executable"):
+            return Path(msg["executable"])
+    raise SystemExit("cargo build named no unarrd executable")
 
 
 def stop(proc: subprocess.Popen):
@@ -402,6 +439,7 @@ class Run:
         self.used: set[Allowed] = set()
         self.pending: list[tuple[Page, object]] = []
         self.sockets: list[str] = []
+        self.problems: list[dict] = []
         page.on("console", self.on_console)
         page.on("pageerror", self.on_pageerror)
         page.on("response", self.on_response)
@@ -525,6 +563,19 @@ class Run:
         except Exception:
             self.current.note = f"requests still running after {self.args.settle} s"
 
+    def look(self, path: str):
+        """Open a page only to read its menu (a page --only leaves out): what
+        it does is not judged, and it is not in the report."""
+        self.current = Page(path, "menu")
+        try:
+            self.page.goto(self.origin + path, wait_until="load", timeout=self.args.settle * 1000)
+            self.settle_network()
+            self.page.wait_for_function(JS_NOT_LOADING, arg=SELECTORS["loading"], timeout=self.args.settle * 1000)
+            self.found_classes.update(self.page.evaluate(JS_CLASSES, [p for ps in PREFIXES.values() for p in ps]))
+        except Exception:
+            pass
+        self.pending.clear()
+
     def visit(self, path: str, source: str) -> Page:
         self.current = record = Page(path, source)
         self.pages.append(record)
@@ -580,16 +631,21 @@ class Run:
 
     def crawl(self):
         """Every page of the menu, breadth first, with the library's first
-        item; then the fixed pages the menu did not show, then --page."""
+        item; then the fixed pages the menu did not show, then --page. With
+        --only the whole menu is still walked, to find the pages; only those
+        that match are judged."""
         wanted = (lambda path: re.search(self.args.only, path)) if self.args.only else (lambda path: True)
-        queue, seen, opened = ["/"], {"/"}, []
+        queue, seen, found = ["/"], {"/"}, []
         while queue:
             path = queue.pop(0)
-            if not wanted(path):
-                continue
             source = "library" if path.startswith(DETAIL[self.app]) else "menu"
-            record = self.visit(path, source)
-            opened.append(path)
+            if wanted(path):
+                self.visit(path, source)
+            elif source == "menu":
+                self.look(path)
+            else:
+                continue
+            found.append(path)
             for link in self.menu():
                 if link not in seen:
                     seen.add(link)
@@ -600,14 +656,12 @@ class Run:
                     seen.add(items[0])
                     queue.insert(0, items[0])
                 else:
-                    record.failures.append({"kind": "library",
-                                            "text": f"no link to a {DETAIL[self.app]}... page on the library page"})
-        if not self.args.only and not any(p.source == "menu" and p.path != "/" for p in self.pages):
-            first = next((p for p in self.pages if p.path == "/"), None)
-            if first is not None:
-                first.failures.append({"kind": "menu", "text": "the sidebar shows no page: "
-                                       "SELECTORS['sidebar'] in scripts/ui-smoke.py no longer matches the UI"})
-        for path, source in merge_pages(opened, MINIMUM[self.app]):
+                    self.problems.append({"kind": "library",
+                                          "text": f"the library page links to no {DETAIL[self.app]}... detail page"})
+        if len(found) <= 2:
+            self.problems.append({"kind": "menu", "text": "the sidebar shows no page: "
+                                  "SELECTORS['sidebar'] in scripts/ui-smoke.py no longer matches the UI"})
+        for path, source in merge_pages(found, MINIMUM[self.app]):
             if source == "minimum" and wanted(path):
                 record = self.visit(path, source)
                 record.note = "not in the menu: opened from MINIMUM in scripts/ui-smoke.py"
@@ -633,14 +687,16 @@ def run_app(browser, app: str, port: int, args, out: Path) -> dict:
                          + (str(e).strip().splitlines() or [""])[0]})
     finally:
         context.close()
+    problems += run.problems
+    logged_in = all(p.ok for p in run.pages if p.source == "login")
     missing = sorted({name for name, prefixes in PREFIXES.items() for p in prefixes if p not in run.found_classes})
-    if missing and not args.only:
+    if missing and logged_in:
         problems.append({"kind": "selectors", "text": "the UI's style sheets no longer define "
                          + ", ".join(f"{n} ({' / '.join(PREFIXES[n])})" for n in missing)
                          + ": the test cannot see that state; update SELECTORS and PREFIXES in scripts/ui-smoke.py"})
     # The UI's live updates (SignalR): a socket that never opens falls back
     # to long polling, or to nothing, without an error on the page.
-    if not run.sockets and not args.only and all(p.ok for p in run.pages if p.source == "login"):
+    if not run.sockets and logged_in:
         problems.append({"kind": "signalr", "text": "the UI opened no websocket to unarrd: its live updates do not work"})
     version = REPO / "crates/unarr-api/ui" / app / "VERSION"
     return {
@@ -652,7 +708,7 @@ def run_app(browser, app: str, port: int, args, out: Path) -> dict:
         "websockets": sorted(set(run.sockets)),
         "pages": [page_dict(p) for p in run.pages],
         "allowed_used": [allowed_dict(a) for a in ALLOWED if app in a.apps and a in run.used],
-        "allowed_unused": [allowed_dict(a) for a in ALLOWED if app in a.apps and a not in run.used and not args.only],
+        "allowed_unused": [allowed_dict(a) for a in ALLOWED if app in a.apps and a not in run.used and not args.only and logged_in],
     }
 
 
@@ -695,11 +751,13 @@ def summary(report: dict, out: Path) -> str:
     lines = []
     for r in report["apps"]:
         pages = [p for p in r["pages"] if p["source"] != "login"]
-        bad = [p for p in r["pages"] if not p["ok"]]
-        lines.append(f"{r['app']} {r['ui_version']}: {len(pages)} pages, {len(pages) - len([p for p in bad if p['source'] != 'login'])} ok, "
+        bad = [p for p in pages if not p["ok"]]
+        lines.append(f"{r['app']} {r['ui_version']}: {len(pages)} pages, {len(pages) - len(bad)} ok, "
                      f"{len(bad)} failed, {r['seconds']:.0f} s")
-        for p in bad:
-            lines.append(f"  FAIL {p['path']}" + (" (not in the menu)" if p["source"] == "minimum" else ""))
+        # The login first: when it fails, no page is opened.
+        for p in [p for p in r["pages"] if p["source"] == "login" and not p["ok"]] + bad:
+            label = "login" if p["source"] == "login" else p["path"]
+            lines.append(f"  FAIL {label}" + (" (not in the menu)" if p["source"] == "minimum" else ""))
             for f in p["failures"]:
                 lines.append(f"    {f['kind']:<9} {describe(f)}")
         for prob in r["problems"]:
@@ -779,15 +837,16 @@ def claim(out: Path):
 def main(argv=None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("--app", default="sonarr,radarr", help="personalities, comma separated (default both)")
-    ap.add_argument("--unarrd", type=Path, default=REPO / "target/debug/unarrd",
-                    help="the unarrd binary (default target/debug/unarrd: cargo build --bin unarrd)")
+    ap.add_argument("--unarrd", type=Path,
+                    help="a prebuilt unarrd (default: cargo build --bin unarrd, the binary cargo reports)")
     ap.add_argument("--out", type=Path, help="results folder (default <UNARR_CACHE or .cache>/ui-smoke)")
     ap.add_argument("--channel", default=os.environ.get("UI_SMOKE_CHANNEL") or None,
                     help="a browser installed on the machine, e.g. chrome (default: Playwright's Chromium; "
                          "env UI_SMOKE_CHANNEL)")
     ap.add_argument("--settle", type=float, default=20,
                     help="seconds a page may take to load and stop showing its loading indicator (default 20)")
-    ap.add_argument("--only", help="open only the pages whose path matches this regular expression (to debug one)")
+    ap.add_argument("--only", help="judge only the pages whose path matches this regular expression (to debug one); "
+                         "the menu is still walked to find them")
     ap.add_argument("--page", action="append", help="open this page too, after the others (repeatable)")
     args = ap.parse_args(argv)
 
@@ -798,8 +857,8 @@ def main(argv=None) -> int:
     for app in apps:
         if not (REPO / "crates/unarr-api/ui" / app / "index.html").exists():
             raise SystemExit(f"the {app} web UI is not embedded: run 'make ui' first")
-    if not args.unarrd.exists():
-        raise SystemExit(f"{args.unarrd} missing: cargo build --bin unarrd")
+    if args.unarrd is not None and not args.unarrd.exists():
+        raise SystemExit(f"--unarrd {args.unarrd} does not exist")
     try:
         from playwright.sync_api import sync_playwright
     except ImportError:
@@ -808,11 +867,13 @@ def main(argv=None) -> int:
 
     out = (args.out or cache_dir() / "ui-smoke").resolve()
     claim(out)
+    unarrd = args.unarrd or build()
     start = time.monotonic()
     standin = StandIn()
     ports = stage(apps, out / "data")
     log_file = out / "unarrd.log"
-    proc = start_unarrd(args.unarrd.resolve(), out / "data", apps, standin.url, log_file)
+    proc = start_unarrd(unarrd.resolve(), out / "data", apps, standin.url, log_file)
+    standin.start()
     results = []
     try:
         wait_until_up(proc, ports, log_file)
@@ -833,11 +894,11 @@ def main(argv=None) -> int:
                 browser.close()
     finally:
         stop(proc)
-        standin.shutdown()
+        standin.stop()
 
     report = {
         "date": time.strftime("%Y-%m-%d %H:%M:%S"),
-        "unarrd": str(args.unarrd),
+        "unarrd": str(unarrd),
         "browser": browser_name,
         "seconds": round(time.monotonic() - start, 1),
         "apps": results,
