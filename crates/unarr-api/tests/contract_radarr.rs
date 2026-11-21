@@ -1974,3 +1974,11 @@ async fn a_blank_start_has_the_originals_defaults() {
     assert_eq!(goldens.len(), 5, "every answer of the recording");
     assert!(failures.is_empty(), "{}", failures.join("\n"));
 }
+
+/// The Plex connection's sign-in and server list (issue #16), against the
+/// mock's plex.tv: Radarr's names and version.
+#[tokio::test]
+async fn the_plex_actions_answer_as_radarrs() {
+    let (_dirs, _mock, _state, app) = live_app("plex_actions").await;
+    plex_actions_answer_as_the_originals(&app, "Radarr", "6.4.4.10685").await;
+}

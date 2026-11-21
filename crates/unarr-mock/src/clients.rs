@@ -29,6 +29,10 @@ pub const TRANSMISSION_SESSION: &str = "mock-transmission-session-id";
 pub const ITEM_SIZE: i64 = 768_000;
 pub const PLEX_TOKEN: &str = "mock-plex-token";
 pub const PLEX_VERSION: &str = "1.41.0.8992-8e6b099a8";
+/// A plex.tv PIN the user has signed in: reading it gives [`PLEX_TOKEN`].
+pub const PLEX_PIN_SIGNED_IN: i64 = 4242;
+/// A plex.tv PIN created and not signed in yet: no token.
+pub const PLEX_PIN_WAITING: i64 = 4243;
 
 /// What a handler answers.
 pub struct Reply {
@@ -540,6 +544,12 @@ pub fn handle(
     if path == "/plex.tv/api/v2/ping" {
         return Some(json_reply(StatusCode::OK, json!({"pong": true}), "plex.tv/ping"));
     }
+    if let Some(id) = path.strip_prefix("/plex.tv/api/v2/pins/") {
+        return Some(plex_tv_pin(id, query));
+    }
+    if path == "/plex.tv/api/v2/resources" {
+        return Some(plex_tv_resources(query));
+    }
     if path.starts_with("/discord/") {
         return Some(discord(&mut state, method, path, query, headers, body));
     }
@@ -547,6 +557,76 @@ pub fn handle(
         return Some(webhook(&mut state, method, path, query, headers, body));
     }
     None
+}
+
+/// `GET plex.tv/api/v2/pins/{id}`, in the shapes plex.tv answered on
+/// 21 November 2026: the PIN (its `authToken` null until signed in), or
+/// 404 for a PIN it does not know.
+fn plex_tv_pin(id: &str, query: &BTreeMap<String, String>) -> Reply {
+    let token = match id.parse::<i64>() {
+        Ok(PLEX_PIN_SIGNED_IN) => Value::String(PLEX_TOKEN.into()),
+        Ok(PLEX_PIN_WAITING) => Value::Null,
+        _ => {
+            return json_reply(
+                StatusCode::NOT_FOUND,
+                json!({"errors": [{"code": 1020, "message": "Code not found or expired", "status": 404}]}),
+                "plex.tv/pin-404",
+            )
+        }
+    };
+    json_reply(
+        StatusCode::OK,
+        json!({
+            "id": id.parse::<i64>().unwrap_or(0),
+            "code": "kfh6p48ikyiaiziy3a3exxbtz",
+            "product": query.get("X-Plex-Product").cloned().unwrap_or_default(),
+            "trusted": false,
+            "qr": "https://plex.tv/api/v2/pins/qr/kfh6p48ikyiaiziy3a3exxbtz",
+            "clientIdentifier": query.get("X-Plex-Client-Identifier").cloned().unwrap_or_default(),
+            "expiresIn": 1788,
+            "createdAt": "2026-11-21T08:39:09Z",
+            "expiresAt": "2026-11-21T09:09:09Z",
+            "authToken": token,
+            "newRegistration": null,
+        }),
+        "plex.tv/pin",
+    )
+}
+
+/// `GET plex.tv/api/v2/resources`: for [`PLEX_TOKEN`] an account with its
+/// own server (a secure local connection and a remote one), a server
+/// shared with it and a player; any other token is refused as plex.tv
+/// refused one on 21 November 2026. The resources' shape is plex.tv's
+/// documented one: no account's list was recorded.
+fn plex_tv_resources(query: &BTreeMap<String, String>) -> Reply {
+    if query.get("X-Plex-Token").map(String::as_str) != Some(PLEX_TOKEN) {
+        return json_reply(
+            StatusCode::UNAUTHORIZED,
+            json!({"errors": [{"code": 1001, "message": "User could not be authenticated", "status": 401}]}),
+            "plex.tv/resources-401",
+        );
+    }
+    json_reply(
+        StatusCode::OK,
+        json!([
+            {"name": "Mock Plex", "product": "Plex Media Server", "productVersion": PLEX_VERSION, "platform": "Linux",
+             "clientIdentifier": "6d0f2a9c1b3e4d5f8a7b6c5d4e3f2a1b0c9d8e7f", "provides": "server", "owned": true,
+             "accessToken": "mock-server-token", "publicAddress": "203.0.113.7", "httpsRequired": false,
+             "relay": true, "presence": true, "connections": [
+                {"protocol": "https", "address": "192.168.1.10", "port": 32400,
+                 "uri": "https://192-168-1-10.0123456789abcdef.plex.direct:32400", "local": true, "relay": false, "IPv6": false},
+                {"protocol": "http", "address": "203.0.113.7", "port": 32401,
+                 "uri": "http://203.0.113.7:32401", "local": false, "relay": false, "IPv6": false}
+             ]},
+            {"name": "A friend's Plex", "product": "Plex Media Server", "provides": "server", "owned": false,
+             "connections": [{"protocol": "https", "address": "198.51.100.2", "port": 32400,
+                 "uri": "https://198-51-100-2.fedcba9876543210.plex.direct:32400", "local": false}]},
+            {"name": "Living room", "product": "Plex for Android (TV)", "provides": "client,player", "owned": true,
+             "connections": [{"protocol": "http", "address": "192.168.1.20", "port": 32500,
+                 "uri": "http://192.168.1.20:32500", "local": true}]}
+        ]),
+        "plex.tv/resources",
+    )
 }
 
 fn control(state: &mut ClientState, rest: &str, query: &BTreeMap<String, String>) -> Reply {

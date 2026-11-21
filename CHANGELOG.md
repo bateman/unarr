@@ -44,7 +44,11 @@ original again, which does not know what Unarr did meanwhile.
   Not recorded: SABnzbd's repair and unpacking, Transmission with a
   password, a magnet link, Transmission before 4.0.
 - Notifications: Discord, the webhook and Plex (a library update, and the
-  daily ping to plex.tv that keeps the token alive).
+  daily ping to plex.tv that keeps the token alive). Plex's *Authenticate
+  with Plex.tv* and its *Server* menu, recorded on both originals and
+  served against a mock plex.tv: the PIN, the sign-in page and the token
+  as theirs, the server list from a resources list built from plex.tv's
+  documented shape (no account's list recorded).
 
 **Differs from the originals**, by decision or not yet done:
 `docs/audit/7-triage.md` lists every row, and `docs/DESIGN.md` section 21
@@ -54,6 +58,11 @@ is in English only, allowed hosts and trusted networks apply without a
 restart, a backup download is never kept by a cache (the originals let one
 keep it a year), notifications other than Discord, the webhook and Plex keep
 their settings and send nothing.
+
+**Fixed before the first version**: the Plex connection's *Authenticate
+with Plex.tv* gave no token and its *Server* menu stayed empty, every
+action answering `{}` (#16). Both work as in the originals now; a token
+imported from them was never affected.
 
 **From a `main` build before `4600d61`**: Sonarr's "Backup Now" wrote its
 backups under `Backups/scheduled`: listed as scheduled, and deleted by

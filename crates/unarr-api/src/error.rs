@@ -17,6 +17,8 @@ pub enum ApiError {
     ServerMessage(String),
     /// `NzbDroneClientException(Conflict, message)`.
     ConflictMessage(String),
+    /// `NzbDroneClientException(status, message)` with any other status.
+    ClientMessage(StatusCode, String),
     /// `ModelNotFoundException`: a 404 with the message and a description.
     ModelNotFound(String),
     /// `ModelConflictException`: a 409 with the message and a description.
@@ -98,6 +100,9 @@ impl ApiError {
                 .into_response(),
             ApiError::ConflictMessage(message) => {
                 (StatusCode::CONFLICT, Json(client_exception(&message))).into_response()
+            }
+            ApiError::ClientMessage(status, message) => {
+                (status, Json(client_exception(&message))).into_response()
             }
             ApiError::ModelNotFound(message) => (
                 StatusCode::NOT_FOUND,
