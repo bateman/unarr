@@ -9,6 +9,7 @@
 //! 21 November 2026 they answered `{}` and the token was entered by hand).
 //! Radarr's connection is the same code.
 
+use crate::indexers::request::escape_data_string;
 use crate::sync::Recover;
 use chrono::{DateTime, Duration, Utc};
 use serde_json::{json, Value};
@@ -194,25 +195,11 @@ fn plex_tv_identity(client_id: &str, identity: &super::Identity) -> Vec<(&'stati
     ]
 }
 
-/// `Uri.EscapeDataString`: everything but the unreserved characters of
-/// RFC 3986 percent-encoded, in upper case.
-fn escape_data(text: &str) -> String {
-    let mut out = String::with_capacity(text.len());
-    for b in text.bytes() {
-        if b.is_ascii_alphanumeric() || matches!(b, b'-' | b'.' | b'_' | b'~') {
-            out.push(b as char);
-        } else {
-            out.push_str(&format!("%{b:02X}"));
-        }
-    }
-    out
-}
-
 /// `HttpUri.AddQueryParams`: `key=value` pairs, each side escaped.
 fn query_string(pairs: &[(&str, String)]) -> String {
     pairs
         .iter()
-        .map(|(k, v)| format!("{}={}", escape_data(k), escape_data(v)))
+        .map(|(k, v)| format!("{}={}", escape_data_string(k), escape_data_string(v)))
         .collect::<Vec<_>>()
         .join("&")
 }
