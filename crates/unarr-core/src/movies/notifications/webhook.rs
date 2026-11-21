@@ -7,7 +7,7 @@ use serde_json::{json, Value};
 
 use super::{
     convert_to_local_urls, quality_name, tag_labels, DownloadMessage, GrabMessage, ManualInteractionMessage,
-    MovieFileDeleteMessage, MovieNotificationDefinition,
+    MovieDeleteMessage, MovieFileDeleteMessage, MovieNotificationDefinition,
 };
 use crate::health::HealthCheck;
 use crate::mediafiles::format;
@@ -302,6 +302,71 @@ pub async fn on_download(
 ) -> Result<(), String> {
     let settings = Settings::from_value(&def.settings);
     post(http, &settings, &download_payload(m, ctx)).await
+}
+
+/// `AddMovieMethod` as the original's camel-case enum, whatever the case
+/// the client sent it in.
+fn add_method(sent: &str) -> String {
+    match sent.to_ascii_lowercase().as_str() {
+        "manual" => "manual".into(),
+        "list" => "list".into(),
+        "collection" => "collection".into(),
+        _ => sent.to_string(),
+    }
+}
+
+/// `BuildOnMovieAdded`. `movie.AddOptions.AddMethod`: a movie without
+/// options throws, which the handler records as a failure.
+pub(crate) fn movie_added_payload(movie: &Movie, ctx: &Context<'_>) -> Result<Value, String> {
+    let method = movie
+        .add_options
+        .as_ref()
+        .filter(|o| o.is_object())
+        .ok_or_else(|| "Object reference not set to an instance of an object.".to_string())?
+        .get("addMethod")
+        .and_then(Value::as_str)
+        .map(add_method)
+        .unwrap_or_else(|| "manual".to_string());
+    let mut o = base("MovieAdded", ctx);
+    o.set("movie", movie_json(movie, ctx));
+    o.set("addMethod", json!(method));
+    Ok(o.done())
+}
+
+pub async fn on_movie_added(
+    http: &reqwest::Client,
+    def: &MovieNotificationDefinition,
+    movie: &Movie,
+    ctx: &Context<'_>,
+) -> Result<(), String> {
+    let settings = Settings::from_value(&def.settings);
+    let payload = movie_added_payload(movie, ctx)?;
+    post(http, &settings, &payload).await
+}
+
+/// `BuildOnMovieDelete`: the folder's size is the size of the movie's
+/// file, when the files went and the movie had one.
+pub(crate) fn movie_delete_payload(m: &MovieDeleteMessage<'_>, ctx: &Context<'_>) -> Value {
+    let size = if m.deleted_files {
+        m.file_size.unwrap_or(0)
+    } else {
+        0
+    };
+    let mut o = base("MovieDelete", ctx);
+    o.set("movie", movie_json(m.movie, ctx));
+    o.set("deletedFiles", json!(m.deleted_files));
+    o.set("movieFolderSize", json!(size));
+    o.done()
+}
+
+pub async fn on_movie_delete(
+    http: &reqwest::Client,
+    def: &MovieNotificationDefinition,
+    m: &MovieDeleteMessage<'_>,
+    ctx: &Context<'_>,
+) -> Result<(), String> {
+    let settings = Settings::from_value(&def.settings);
+    post(http, &settings, &movie_delete_payload(m, ctx)).await
 }
 
 /// `BuildOnMovieFileDelete`.

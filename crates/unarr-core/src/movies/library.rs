@@ -999,6 +999,10 @@ pub fn update_many(conn: &Connection, edit: &BulkEdit) -> Result<BulkEdited, Wri
 #[derive(Debug, Clone)]
 pub struct Deleted {
     pub movies: Vec<Movie>,
+    /// The size of each movie's file, by movie id, as the original's
+    /// `Movie.MovieFile` held it when the movie was loaded for deletion
+    /// (the first file the join met). A movie without a file has none.
+    pub file_sizes: std::collections::HashMap<i64, i64>,
     /// The collections left without a movie of the library, removed.
     pub collections: Vec<i64>,
 }
@@ -1014,6 +1018,12 @@ pub fn delete(conn: &Connection, ids: &[i64], add_exclusion: bool) -> anyhow::Re
         match store::get_movie(conn, id)? {
             Some(movie) => movies.push(movie),
             None => return Ok(Err(id)),
+        }
+    }
+    let mut file_sizes = std::collections::HashMap::new();
+    for movie in &movies {
+        if let Some(file) = store::movie_files_of(conn, movie.id)?.into_iter().next() {
+            file_sizes.insert(movie.id, file.size);
         }
     }
     let tx = conn.unchecked_transaction()?;
@@ -1057,7 +1067,11 @@ pub fn delete(conn: &Connection, ids: &[i64], add_exclusion: bool) -> anyhow::Re
     for movie in &movies {
         tracing::info!("Deleted movie {}", movie.metadata.title);
     }
-    Ok(Ok(Deleted { movies, collections }))
+    Ok(Ok(Deleted {
+        movies,
+        file_sizes,
+        collections,
+    }))
 }
 
 /// `MediaFileDeletionService.HandleAsync(MoviesDeletedEvent)`: a deleted
