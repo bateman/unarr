@@ -748,21 +748,41 @@ where
     )
 }
 
-/// The console's format before any personality has read its settings:
-/// the first `<APP>__LOG__CONSOLEFORMAT` of the personalities started
-/// that names one, as the originals read `SONARR__LOG__CONSOLEFORMAT`
-/// when they open their console.
+/// The format of the lines outside any personality before one has read
+/// its settings: the first `<APP>__LOG__CONSOLEFORMAT` of the
+/// personalities started that names one.
 fn process_console_format(personalities: &[String]) -> unarr_core::config::ConsoleLogFormat {
+    process_console_format_with(personalities, |name| std::env::var(name).ok())
+}
+
+/// [`process_console_format`], reading the environment through `var`.
+fn process_console_format_with(
+    personalities: &[String],
+    var: impl Fn(&str) -> Option<String>,
+) -> unarr_core::config::ConsoleLogFormat {
     personalities
         .iter()
         .filter_map(|name| parse_personality(name).ok())
-        .find_map(|p| {
-            let var = format!("{}__LOG__CONSOLEFORMAT", p.app_name().to_uppercase());
-            std::env::var(var)
-                .ok()
-                .and_then(|v| unarr_core::config::ConsoleLogFormat::parse(&v, false))
-        })
+        .find_map(|p| env_console_format(p, &var))
         .unwrap_or_default()
+}
+
+/// A personality's console format before it has read its settings: its
+/// own `<APP>__LOG__CONSOLEFORMAT` alone, as the original reads
+/// `SONARR__LOG__CONSOLEFORMAT` when it opens its console; another
+/// personality's variable is not its own.
+fn personality_console_format(personality: Personality) -> unarr_core::config::ConsoleLogFormat {
+    env_console_format(personality, |name| std::env::var(name).ok()).unwrap_or_default()
+}
+
+/// `<APP>__LOG__CONSOLEFORMAT` of one personality, `Enum.TryParse` with
+/// regard to case; `None` when unset or not a format.
+fn env_console_format(
+    personality: Personality,
+    var: impl Fn(&str) -> Option<String>,
+) -> Option<unarr_core::config::ConsoleLogFormat> {
+    let name = format!("{}__LOG__CONSOLEFORMAT", personality.app_name().to_uppercase());
+    var(&name).and_then(|v| unarr_core::config::ConsoleLogFormat::parse(&v, false))
 }
 
 /// What changes what a personality logs while it runs: the filter in
@@ -1034,7 +1054,7 @@ fn main() -> anyhow::Result<()> {
             &logs,
             &files,
             log_filter(),
-            process_console_format(&args.personalities),
+            personality_console_format(personality),
         );
         control.process = Some(process_console.clone());
         // A personality that cannot start, by an error or by a panic (a
@@ -1774,6 +1794,32 @@ mod tests {
             host.console_log_format = unarr_core::config::ConsoleLogFormat::Clef;
         }
         let _ = std::fs::remove_dir_all(&dir);
+    }
+
+    /// Each personality's console starts in the format of its own
+    /// `<APP>__LOG__CONSOLEFORMAT`; the lines outside any personality take
+    /// the first one set.
+    #[test]
+    fn a_console_starts_in_its_own_personalitys_format() {
+        use unarr_core::config::ConsoleLogFormat;
+        let only_radarr = |name: &str| (name == "RADARR__LOG__CONSOLEFORMAT").then(|| "Clef".to_string());
+        assert_eq!(env_console_format(Personality::Sonarr, only_radarr), None);
+        assert_eq!(
+            env_console_format(Personality::Radarr, only_radarr),
+            Some(ConsoleLogFormat::Clef)
+        );
+        let both = ["sonarr".to_string(), "radarr".to_string()];
+        assert_eq!(
+            process_console_format_with(&both, only_radarr),
+            ConsoleLogFormat::Clef
+        );
+        assert_eq!(
+            process_console_format_with(&both[..1], only_radarr),
+            ConsoleLogFormat::Standard
+        );
+        // `Enum.TryParse` with regard to case: `clef` is no format.
+        let lower = |name: &str| (name == "SONARR__LOG__CONSOLEFORMAT").then(|| "clef".to_string());
+        assert_eq!(env_console_format(Personality::Sonarr, lower), None);
     }
 
     /// One process, two personalities: whatever a personality's threads
