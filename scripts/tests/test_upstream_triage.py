@@ -45,6 +45,8 @@ class ClassifyPath(unittest.TestCase):
             "src/NzbDrone.Integration.Test/ApiTests/MovieFixture.cs": "test",
             "src/NzbDrone.Test.Common/TestBase.cs": "test",
             "src/NzbDrone.Core/Localization/Core/en.json": "none",
+            # Code beside the strings is backend: it serves /localization.
+            "src/NzbDrone.Core/Localization/LocalizationService.cs": "backend",
             ".github/workflows/ci.yml": "none",
             "azure-pipelines.yml": "none",
             "build.sh": "none",
@@ -114,6 +116,21 @@ class ClassifyCommit(unittest.TestCase):
         wp = triage.Wontport(shas=["abcdef1"], globs=["src/*"])
         c = commit([("A", "src/NzbDrone.Core/Datastore/Migration/243_add_thing.cs")], sha="abcdef1" + "0" * 33)
         self.assertEqual(triage.classify_commit(c, wp).cls, "schema")
+
+    def test_a_renamed_migration_is_no_new_level_and_a_deleted_one_is_told(self):
+        c = triage.classify_commit(
+            commit([("D", "src/NzbDrone.Core/Datastore/Migration/204_foo.cs"),
+                    ("A", "src/NzbDrone.Core/Datastore/Migration/204_foo_fixed.cs"),
+                    ("D", "src/NzbDrone.Core/Datastore/Migration/205_gone.cs")]),
+            triage.Wontport(),
+        )
+        self.assertEqual((c.migrations, c.migrations_changed, c.migrations_removed), ([], [204], [205]))
+
+    def test_classifying_twice_gives_the_same_result(self):
+        c = commit([("A", "src/NzbDrone.Core/Datastore/Migration/243_add_thing.cs"), ("M", "odd/path.cs")])
+        for _ in range(2):
+            triage.classify_commit(c, triage.Wontport())
+        self.assertEqual((c.migrations, c.unknown_paths), ([243], ["odd/path.cs"]))
 
     def test_an_empty_commit_is_none(self):
         self.assertEqual(triage.classify_commit(commit([]), triage.Wontport()).cls, "none")
@@ -224,7 +241,7 @@ class AgainstAGitRepository(unittest.TestCase):
         self.fix = self.change("src/NzbDrone.Core/Parser/Parser.cs", "Fixed: a | b `c`")
         self.mig = self.change("src/NzbDrone.Core/Datastore/Migration/243_thing.cs", "New: thing")
         self.change("src/NzbDrone.Core/b.cs", "Release 7", tag="v7.0.0.10815")
-        self.change("frontend/src/c.js", "After 7.0.0", tag="v7.0.1.10859")
+        self.r701 = self.change("frontend/src/c.js", "After 7.0.0", tag="v7.0.1.10859")
         self.git("checkout", "-q", "-b", "develop")
         self.change("src/x.cs", "elsewhere", tag="v9.0.0.1")
         self.git("checkout", "-q", "master")
@@ -278,10 +295,44 @@ class AgainstAGitRepository(unittest.TestCase):
         with self.assertRaises(SystemExit):
             self.run_triage("--target", "9.0.0.1")
 
+    def move_cursor(self, release, sha):
+        self.lock.write_text(self.lock.read_text().replace("6.4.4.10685", release).replace(self.cursor, sha))
+
     def test_no_newer_release(self):
-        self.lock.write_text(self.lock.read_text().replace("6.4.4.10685", "7.0.1.10859"))
+        self.move_cursor("7.0.1.10859", self.r701)
         report = json.loads(self.run_triage("--format", "json"))
         self.assertEqual((report["target"], report["jump"], report["commits"]), (None, "none", []))
+
+    def test_a_rebuild_on_the_cursor_commit_is_no_new_release(self):
+        self.move_cursor("7.0.1.10859", self.r701)
+        self.git("tag", "v7.0.1.10860", self.r701)
+        report = json.loads(self.run_triage("--format", "json"))
+        self.assertEqual((report["target"], report["jump"]), (None, "none"))
+
+    def test_a_cursor_whose_commit_is_not_its_release_is_refused(self):
+        self.lock.write_text(self.lock.read_text().replace("6.4.4.10685", "7.0.0.10815"))
+        with self.assertRaises(SystemExit) as err:
+            self.run_triage()
+        self.assertIn("is not the commit of v7.0.0.10815", str(err.exception))
+
+    def test_a_git_failure_is_not_a_no(self):
+        self.assertFalse(triage.is_ancestor(self.up, self.r701, self.cursor))
+        self.assertTrue(triage.is_ancestor(self.up, self.cursor, self.r701))
+        with self.assertRaises(triage.GitError):
+            triage.is_ancestor(self.up, "f" * 40, self.r701)
+
+    def test_a_working_clone_reads_origin_not_its_local_branch(self):
+        work = self.dir / "work"
+        self.git("clone", "-q", str(self.up), str(work), cwd=self.dir)
+        self.move_cursor("7.0.1.10859", self.r701)
+        self.change("src/NzbDrone.Core/d.cs", "Fixed: after the clone", tag="v7.0.2.10888")
+        self.up = work  # run_triage reads the working clone from here on
+        report = json.loads(self.run_triage("--format", "json"))
+        self.assertIsNone(report["target"])
+        report = json.loads(self.run_triage("--format", "json", "--fetch"))
+        self.assertEqual((report["target"], report["jump"], len(report["commits"])), ("7.0.2.10888", "patch", 1))
+        # The local branch was left alone: only origin's copy moved.
+        self.assertEqual(self.git("rev-parse", "master"), self.r701)
 
     def test_api_data_drops_a_prerelease(self):
         releases = self.dir / "releases.json"

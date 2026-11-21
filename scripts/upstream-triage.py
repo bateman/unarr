@@ -36,7 +36,7 @@ its paths and lists the others after it):
 - ``ui``: ``frontend/``;
 - ``test``: the upstream test projects, ``*.Test/`` and ``*.Test.*/``;
 - ``unknown``: a path no rule covers, to be looked at;
-- ``none``: localisation, build, CI, docs, packaging and the platforms
+- ``none``: the localisation strings, build, CI, docs, packaging and the platforms
   Unarr does not run on (Windows, the updater, the console host);
 - ``wontport``: every path of the commit, or its SHA, is in
   ``upstream/<app>-wontport.md``. A commit with a migration stays
@@ -82,7 +82,8 @@ RULES: list[tuple[re.Pattern[str], str, str]] = [
         "none",
         "build (beyond #9: wins over the directory)",
     ),
-    (re.compile(r"^src/[^/]*\.Core/Localization/"), "none", "localisation"),
+    # The strings only: LocalizationService.cs and its friends are code.
+    (re.compile(r"^src/[^/]*\.Core/Localization/Core/"), "none", "localisation strings"),
     (re.compile(r"^frontend/"), "ui", "frontend"),
     (re.compile(r"^src/[^/]*\.Test(\.[^/]*)?/"), "test", "upstream test"),
     (re.compile(r"^src/[^/]*\.Api\.V3/"), "routes", "API v3"),
@@ -281,11 +282,18 @@ class Commit:
     also: list[str] = field(default_factory=list)
     migrations: list[int] = field(default_factory=list)
     migrations_changed: list[int] = field(default_factory=list)
+    migrations_removed: list[int] = field(default_factory=list)
     unknown_paths: list[str] = field(default_factory=list)
 
 
 def classify_commit(commit: Commit, wontport: Wontport) -> Commit:
+    """Fills the class and the migrations of `commit` from its changes; the
+    same result however many times it is called."""
     classes = set()
+    commit.unknown_paths = []
+    added: set[int] = set()
+    deleted: set[int] = set()
+    modified: set[int] = set()
     for status, path in commit.changes:
         cls, _ = classify_path(path)
         classes.add(cls)
@@ -293,7 +301,13 @@ def classify_commit(commit: Commit, wontport: Wontport) -> Commit:
             commit.unknown_paths.append(path)
         match = MIGRATION_FILE.match(path)
         if match:
-            (commit.migrations if status == "A" else commit.migrations_changed).append(int(match.group(1)))
+            {"A": added, "D": deleted}.get(status, modified).add(int(match.group(1)))
+    # Without rename detection a renamed file is a deletion and an addition:
+    # the same number on both sides is no new level, only a changed one.
+    renamed = added & deleted
+    commit.migrations = sorted(added - renamed)
+    commit.migrations_changed = sorted(modified | renamed)
+    commit.migrations_removed = sorted(deleted - renamed)
     ordered = [c for c in PATH_PRIORITY if c in classes] or ["none"]
     paths = [p for _, p in commit.changes]
     if wontport.matches(commit.sha, paths) and ordered[0] != "schema":
@@ -306,16 +320,51 @@ def classify_commit(commit: Commit, wontport: Wontport) -> Commit:
 # --- git ----------------------------------------------------------------------
 
 
-def git(repo: Path, *args: str) -> str:
+class GitError(RuntimeError):
+    def __init__(self, args: tuple[str, ...], returncode: int, stderr: str):
+        super().__init__(f"git {' '.join(args)} (exit {returncode}): {stderr}")
+        self.returncode = returncode
+
+
+def run_git(repo: Path | None, *args: str) -> subprocess.CompletedProcess[bytes]:
     env = dict(os.environ, GIT_TERMINAL_PROMPT="0", LC_ALL="C")
-    result = subprocess.run(
-        ["git", "-C", str(repo), "-c", "core.quotePath=false", "-c", "gc.auto=0", *args],
+    where = ["-C", str(repo)] if repo is not None else []
+    return subprocess.run(
+        ["git", *where, "-c", "core.quotePath=false", "-c", "gc.auto=0", *args],
         capture_output=True,
         env=env,
     )
+
+
+def git(repo: Path | None, *args: str) -> str:
+    result = run_git(repo, *args)
     if result.returncode != 0:
-        raise RuntimeError(f"git {' '.join(args)}: {result.stderr.decode(errors='replace').strip()}")
+        raise GitError(args, result.returncode, result.stderr.decode(errors="replace").strip())
     return result.stdout.decode("utf-8", errors="replace")
+
+
+def is_ancestor(repo: Path, ancestor: str, descendant: str) -> bool:
+    """git merge-base --is-ancestor: exit 1 is a plain no; anything else
+    (a missing object, a failed lazy fetch) is an error, not an answer."""
+    args = ("merge-base", "--is-ancestor", ancestor, descendant)
+    result = run_git(repo, *args)
+    if result.returncode in (0, 1):
+        return result.returncode == 0
+    raise GitError(args, result.returncode, result.stderr.decode(errors="replace").strip())
+
+
+def is_bare(repo: Path) -> bool:
+    return git(repo, "rev-parse", "--is-bare-repository").strip() == "true"
+
+
+def branch_ref(repo: Path, branch: str) -> str:
+    """Where the upstream branch is: the branch itself in the bare cache
+    clone; origin's copy in a working clone, whose local branch can lag."""
+    if not is_bare(repo):
+        remote = f"refs/remotes/origin/{branch}"
+        if run_git(repo, "rev-parse", "--verify", "--quiet", remote).returncode == 0:
+            return remote
+    return f"refs/heads/{branch}"
 
 
 def fetch(repo_dir: Path, lock: Lock) -> None:
@@ -324,23 +373,22 @@ def fetch(repo_dir: Path, lock: Lock) -> None:
     if not repo_dir.exists():
         repo_dir.parent.mkdir(parents=True, exist_ok=True)
         print(f"cloning {lock.repo} ({lock.branch}) into {repo_dir}", file=sys.stderr)
-        subprocess.run(
-            ["git", "-c", "gc.auto=0", "clone", "--quiet", "--bare", "--filter=blob:none", "--single-branch",
-             "--branch", lock.branch, lock.repo, str(repo_dir)],
-            check=True,
-            env=dict(os.environ, GIT_TERMINAL_PROMPT="0"),
-        )
+        git(None, "clone", "--quiet", "--bare", "--filter=blob:none", "--single-branch",
+            "--branch", lock.branch, lock.repo, str(repo_dir))
         return
     print(f"fetching {lock.branch} into {repo_dir}", file=sys.stderr)
-    git(repo_dir, "fetch", "--quiet", "--filter=blob:none", "origin",
-        f"+refs/heads/{lock.branch}:refs/heads/{lock.branch}")
+    # A working clone keeps origin's branch apart: git refuses to fetch into
+    # the branch checked out, and the local one may carry other commits.
+    dest = f"refs/heads/{lock.branch}" if is_bare(repo_dir) else f"refs/remotes/origin/{lock.branch}"
+    git(repo_dir, "fetch", "--quiet", "--filter=blob:none", "origin", f"+refs/heads/{lock.branch}:{dest}")
 
 
-def releases_on_branch(repo_dir: Path, branch: str) -> dict[Version, str]:
-    """Version -> tag, for the version tags reachable from the branch. Two
-    tags of one version (a rebuild) keep the higher build number anyway."""
+def releases_on_branch(repo_dir: Path, ref: str) -> dict[Version, str]:
+    """Version -> tag, for the version tags reachable from `ref`. A rebuild
+    (same X.Y.Z, another build number) is a release of its own here; the
+    caller drops those that bring no commit past the cursor."""
     out = {}
-    for tag in git(repo_dir, "tag", "--merged", f"refs/heads/{branch}").split():
+    for tag in git(repo_dir, "tag", "--merged", ref).split():
         if VERSION_TAG.match(tag):
             out[Version.parse(tag)] = tag
     return out
@@ -437,6 +485,9 @@ def render_markdown(report: dict, commits: list[Commit]) -> str:
     lines.append(f"Migrations added: {len(added)}" + (", " + ", ".join(added) if added else "") + ".")
     if changed:
         lines.append(f"Migrations changed: {', '.join(changed)}.")
+    removed = by_migration("migrations_removed")
+    if removed:
+        lines.append(f"Migrations removed (the importer still meets them): {', '.join(removed)}.")
     unknown = sorted({p for c in commits for p in c.unknown_paths})
     if unknown:
         lines.append("")
@@ -463,11 +514,24 @@ def triage(app: str, repo_dir: Path, lock: Lock, wontport: Wontport, target_arg:
     pin = pinned_version(app)
     if pin is not None and pin != lock.release:
         warnings.append(f"the cursor's release {lock.release} is not the pin {pin} of scripts/{app}-fixture.sh")
-    try:
-        git(repo_dir, "cat-file", "-e", f"{lock.commit}^{{commit}}")
-    except RuntimeError:
+    if run_git(repo_dir, "cat-file", "-e", f"{lock.commit}^{{commit}}").returncode != 0:
         raise SystemExit(f"the cursor {lock.commit} is not in {repo_dir}: run with --fetch")
-    tags = releases_on_branch(repo_dir, lock.branch)
+    tags = releases_on_branch(repo_dir, branch_ref(repo_dir, lock.branch))
+    # The cursor's two fields must agree, or the range and the target
+    # would be computed from different places.
+    if lock.release not in tags:
+        raise SystemExit(f"the cursor's release {lock.release} has no tag on {lock.branch}")
+    cursor_tag_commit = git(repo_dir, "rev-parse", f"{tags[lock.release]}^{{commit}}").strip()
+    if cursor_tag_commit != lock.commit:
+        raise SystemExit(f"the cursor's commit {lock.commit[:12]} is not the commit of "
+                         f"{tags[lock.release]} ({cursor_tag_commit[:12]}): fix upstream/{app}.lock")
+    # A newer tag on a commit the cursor already has (a rebuild of the
+    # cursor's release) brings nothing to port.
+    tags = {
+        v: t for v, t in tags.items()
+        if v <= lock.release or not is_ancestor(repo_dir, git(repo_dir, "rev-parse", f"{t}^{{commit}}").strip(),
+                                                 lock.commit)
+    }
     releases_from = "tags"
     if api_releases is not None:
         stable = stable_from_api(api_releases)
@@ -488,9 +552,7 @@ def triage(app: str, repo_dir: Path, lock: Lock, wontport: Wontport, target_arg:
     compare = ""
     if target is not None:
         tip = git(repo_dir, "rev-parse", f"{tags[target]}^{{commit}}").strip()
-        try:
-            git(repo_dir, "merge-base", "--is-ancestor", lock.commit, tip)
-        except RuntimeError:
+        if not is_ancestor(repo_dir, lock.commit, tip):
             raise SystemExit(f"the cursor {lock.commit[:12]} is not an ancestor of {tags[target]}")
         commits = [classify_commit(c, wontport) for c in commits_between(repo_dir, lock.commit, tip)]
         merges = int(git(repo_dir, "rev-list", "--count", "--merges", f"{lock.commit}..{tip}").strip())
@@ -510,6 +572,7 @@ def triage(app: str, repo_dir: Path, lock: Lock, wontport: Wontport, target_arg:
         "compare": compare,
         "summary": summary(commits),
         "migrations": sorted(m for c in commits for m in c.migrations),
+        "migrations_removed": sorted(m for c in commits for m in c.migrations_removed),
         "warnings": warnings,
     }
     return report, commits
@@ -531,12 +594,14 @@ def main(argv: list[str] | None = None) -> int:
     lock = read_lock(args.lock or UPSTREAM / f"{args.app}.lock")
     wontport = read_wontport(args.wontport or UPSTREAM / f"{args.app}-wontport.md")
     repo_dir = args.repo or cache_dir() / "upstream" / f"{APPS[args.app]}.git"
-    if args.fetch:
-        fetch(repo_dir, lock)
-    elif not repo_dir.exists():
+    if not args.fetch and not repo_dir.exists():
         raise SystemExit(f"no upstream clone in {repo_dir}: run with --fetch")
-
-    report, commits = triage(args.app, repo_dir, lock, wontport, args.target, args.releases)
+    try:
+        if args.fetch:
+            fetch(repo_dir, lock)
+        report, commits = triage(args.app, repo_dir, lock, wontport, args.target, args.releases)
+    except GitError as err:
+        raise SystemExit(f"error: {err}")
     for warning in report["warnings"]:
         print(f"warning: {warning}", file=sys.stderr)
     if args.format == "json":
@@ -549,6 +614,7 @@ def main(argv: list[str] | None = None) -> int:
                 "also": c.also,
                 "migrations": c.migrations,
                 "migrations_changed": c.migrations_changed,
+                "migrations_removed": c.migrations_removed,
                 "paths": [{"status": s, "path": p, "class": classify_path(p)[0]} for s, p in c.changes],
             }
             for c in commits
