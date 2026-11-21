@@ -53,17 +53,6 @@ pub enum SchemaKind {
     AutoTaggingSpecification,
 }
 
-/// Every kind of schema, in the order of their cells in [`all`].
-const KINDS: [SchemaKind; 7] = [
-    SchemaKind::Provider(ProviderKind::Indexer),
-    SchemaKind::Provider(ProviderKind::DownloadClient),
-    SchemaKind::Provider(ProviderKind::Notification),
-    SchemaKind::Provider(ProviderKind::ImportList),
-    SchemaKind::Provider(ProviderKind::Metadata),
-    SchemaKind::CustomFormatSpecification,
-    SchemaKind::AutoTaggingSpecification,
-];
-
 /// A kind's cell among the parsed schemas, and its recorded document: one
 /// match, so a kind cannot read another's cell.
 fn place(sources: &Sources, kind: SchemaKind) -> (usize, &'static str) {
@@ -246,6 +235,17 @@ fn lookup_path<'a>(settings: &'a Map<String, Value>, name: &str) -> Option<&'a V
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// Every kind of schema, in the order of their cells in [`all`].
+    const KINDS: [SchemaKind; 7] = [
+        SchemaKind::Provider(ProviderKind::Indexer),
+        SchemaKind::Provider(ProviderKind::DownloadClient),
+        SchemaKind::Provider(ProviderKind::Notification),
+        SchemaKind::Provider(ProviderKind::ImportList),
+        SchemaKind::Provider(ProviderKind::Metadata),
+        SchemaKind::CustomFormatSpecification,
+        SchemaKind::AutoTaggingSpecification,
+    ];
 
     /// Each document is parsed only when first asked for, so a broken one
     /// would otherwise first show in the request that needs it: all
