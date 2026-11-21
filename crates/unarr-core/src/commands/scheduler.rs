@@ -438,7 +438,11 @@ mod tests {
         // both originals: posted, it is a manual one; the scheduler's run, a
         // scheduled one.
         for personality in [Personality::Sonarr, Personality::Radarr] {
-            for body in [serde_json::json!({}), serde_json::json!({"type": "scheduled"})] {
+            for body in [
+                serde_json::json!({}),
+                serde_json::json!({"type": "scheduled"}),
+                serde_json::json!({"type": "update"}),
+            ] {
                 let posted = CommandBody::parse_for(personality, "Backup", &body).unwrap();
                 assert_eq!(
                     posted.clone().for_trigger(super::super::CommandTrigger::Manual),

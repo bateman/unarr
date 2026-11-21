@@ -231,7 +231,12 @@ real library, but for two routes with jemalloc: Sonarr's `/series` 15 %
 slower (4.1 and 4.7 ms) and Radarr's `/movie` 10 % faster (26.9 and
 24.2). In `examples/parser_memory`, on the fixtures' 1,744 history
 names, the two parsers hold 23.3 MB after a first pass, against 55.9
-without twins (`docs/DESIGN.md`, section 9).
+without twins (`docs/DESIGN.md`, section 9). With five names in Chinese
+and Japanese added, beyond the twins' code points, they hold 47.0 MB
+against 56.2: the Unicode forms those names reach are compiled and
+match every name until they are idle, their twins let go
+(`core/twin-yields-to-unicode-form`; 62.2 MB when both were held). Neither library has such a
+name, so the runs above do not see it.
 
 The runs before these, the same day and in the same session, one per
 library, were at `bcd11fb` (`core/audit-http-low-rows`, the last of the

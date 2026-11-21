@@ -55,6 +55,12 @@ restart, a backup download is never kept by a cache (the originals let one
 keep it a year), notifications other than Discord, the webhook and Plex keep
 their settings and send nothing.
 
+**From a `main` build before `4600d61`**: Sonarr's "Backup Now" wrote its
+backups under `Backups/scheduled`: listed as scheduled, and deleted by
+the next scheduled backup once older than the retention (28 days unless
+set). Move them to `Backups/manual`, where only a manual backup's
+clean-up reaches them; Radarr's were already there.
+
 **The image**: `ghcr.io/bateman/unarr`, a static musl build on distroless,
 for amd64 and arm64, with jemalloc as its allocator (musl's own served a
 fifth of the requests under load: `docs/DESIGN.md`, section 21.6).

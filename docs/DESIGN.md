@@ -675,8 +675,10 @@ So every pattern with Unicode classes has a twin
 same pattern with each class cut down to the first 2,048 code points
 (Latin with its accents, Greek, Cyrillic, Armenian, Hebrew, Arabic...)
 and General Punctuation (typographic quotes and dashes, the ellipsis,
-the typesetting spaces), the cut taken from the Unicode tables the
-engine itself compiles the classes with (`regex-syntax`). On a text made
+the typesetting spaces), the cut asked of the engine itself: each of
+those 2,160 code points matched once against `\w`, `\d` and `\s`, 1.3 ms
+at the first parse, so that the cut follows the Unicode tables the
+patterns are compiled with whatever their version. On a text made
 of those code points a class and its cut agree on every character, so
 the twin matches exactly as the pattern does, groups included; the
 twin is used for such a text and the pattern for any other (a name in
@@ -684,7 +686,7 @@ Japanese), which is compiled when such a text comes and released with
 the idle ones. Both forms are compiled when a pattern is built, so that
 a pattern the engine refuses is still refused then and never later; the
 pattern's own automaton is kept only when there is no twin.
-`tests/regex_twins.rs` matches the 157 twins of the 197 patterns the
+The test `parser::netregex::twins` matches the 157 twins of the 197 patterns the
 fixtures' names reach against 3,412 texts (the fixtures' release
 names, scene names and file paths, what the movie parser simplifies
 them to, and names in Greek, Cyrillic, with accents, typographic
@@ -698,6 +700,25 @@ rounds, the binaries before and after alternated: 55.9 MB after the
 first pass before, 23.3 after; 7.5 MB in both once the patterns are
 released; a round of parsing 3 % slower, and the first parse after the
 start 0.4 s longer, the Unicode forms being compiled once to be checked.
+
+A name with a character beyond those code points (Chinese or
+Japanese, `【喵萌奶茶屋】Show.S01E02`) compiles the Unicode form of each
+pattern it is matched with. That form then matches every text, of the
+twin's code points or not, until it is idle, and the twin is let go
+(`NetRegex::re`): holding both held more than the patterns without
+twins. `parser_memory` on the same 1,744 names and five such names, the
+binaries alternated (21 November 2026): 47.0 MB after the first pass,
+against 56.2 without twins, 62.2 with both forms held, and 22.5 without
+those names; 7.5 MB once the patterns are released, after which the
+twins are compiled again. A process that meets such names at every sync
+holds at most what it held without twins.
+
+A release profile's term written as a regex (`/.../`) is a pattern
+built for one match and dropped (`decision::specs::term_matches`): it
+has no twin (`NetRegex::once`), which would be compiled for nothing.
+With one, a match of three such terms cost 260 to 360 µs on a name in
+Latin and 620 on one in Chinese; without, 260 and 270, as before the
+twins.
 
 The 60 MB target therefore holds for a process left alone for five
 minutes, and not for one that searches every few minutes. With the RSS

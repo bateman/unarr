@@ -873,12 +873,10 @@ impl CommandBody {
             "ImportListSync" => CommandBody::ImportListSync {
                 definition_id: body["definitionId"].as_i64(),
             },
+            // The kind is the trigger's ([`CommandBody::for_trigger`]), never
+            // the body's: every caller sets it from there.
             "Backup" => CommandBody::Backup {
-                kind: match body["type"].as_str().map(str::to_ascii_lowercase).as_deref() {
-                    Some("manual") => BackupType::Manual,
-                    Some("update") => BackupType::Update,
-                    _ => BackupType::Scheduled,
-                },
+                kind: BackupType::Scheduled,
             },
             "RescanMovie" => CommandBody::RescanMovie {
                 movie_id: body["movieId"].as_i64(),

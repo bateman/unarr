@@ -83,6 +83,22 @@ impl Slot {
         })
     }
 
+    /// The compiled automaton, if it is held.
+    fn loaded(&self) -> Option<Arc<fancy_regex::Regex>> {
+        let held = self.re.lock().recover().clone();
+        if held.is_some() {
+            self.last_used.store(uptime(), Ordering::Relaxed);
+        }
+        held
+    }
+
+    /// Let go of the compiled automaton. The slot stays in the registry
+    /// until [`release_idle`] passes, which drops it as one with nothing
+    /// compiled.
+    fn unload(&self) {
+        self.re.lock().recover().take();
+    }
+
     /// The compiled automaton, built again from `pattern` if it was let go.
     fn load(self: &Arc<Slot>, pattern: impl FnOnce() -> String) -> Arc<fancy_regex::Regex> {
         self.last_used.store(uptime(), Ordering::Relaxed);
@@ -110,8 +126,8 @@ pub fn twin_matches(text: &str) -> bool {
 }
 
 /// `\w`, `\d` and `\s` cut down to the code points of [`twin_matches`], as
-/// class bodies (`\x{30}-\x{39}...`), from the Unicode tables the engine
-/// itself compiles the classes with.
+/// class bodies (`\x{30}-\x{39}...`), asked of the engine itself: its
+/// Unicode tables are the ones the patterns are compiled with.
 struct Narrow {
     word: String,
     digit: String,
@@ -127,25 +143,29 @@ fn narrow() -> &'static Narrow {
     })
 }
 
+/// The code points of [`twin_matches`] that `class` matches, as the
+/// engine itself compiles it, written as a class body. A few thousand
+/// one-character matches, once.
 fn within(class: &str) -> String {
-    use regex_syntax::hir::{Class, ClassUnicode, ClassUnicodeRange, HirKind};
     use std::fmt::Write;
-    let hir = regex_syntax::ParserBuilder::new()
-        .build()
-        .parse(class)
-        .expect("a Perl class");
-    let HirKind::Class(Class::Unicode(mut set)) = hir.into_kind() else {
-        unreachable!("{class} is a Unicode class")
-    };
-    set.intersect(&ClassUnicode::new([
-        ClassUnicodeRange::new('\0', '\u{7FF}'),
-        ClassUnicodeRange::new('\u{2000}', '\u{206F}'),
-    ]));
+    let re = compile(&format!(r"\A{class}\z")).expect("a Perl class");
+    let mut runs: Vec<(u32, u32)> = Vec::new();
+    let mut buf = [0u8; 4];
+    for point in (0..0x800).chain(0x2000..=0x206F) {
+        let c = char::from_u32(point).expect("no surrogates among them");
+        if !re.is_match(c.encode_utf8(&mut buf)).unwrap_or(false) {
+            continue;
+        }
+        match runs.last_mut() {
+            Some((_, end)) if *end + 1 == point => *end = point,
+            _ => runs.push((point, point)),
+        }
+    }
     let mut out = String::new();
-    for range in set.iter() {
-        let _ = write!(out, "\\x{{{:X}}}", range.start() as u32);
-        if range.end() != range.start() {
-            let _ = write!(out, "-\\x{{{:X}}}", range.end() as u32);
+    for (start, end) in runs {
+        let _ = write!(out, "\\x{{{start:X}}}");
+        if end != start {
+            let _ = write!(out, "-\\x{{{end:X}}}");
         }
     }
     out
@@ -159,7 +179,7 @@ fn within(class: &str) -> String {
 /// every code point of [`twin_matches`], so on a text made of them the
 /// two patterns match the same strings with the same groups (the parser's
 /// patterns are checked on the fixtures' release names in
-/// `tests/regex_twins.rs`). `\b` is left as it is: the engine cannot mix
+/// the `twins` tests). `\b` is left as it is: the engine cannot mix
 /// two kinds of boundary in one pattern, and the Unicode one is right for
 /// both. `None` when the pattern has none of these classes.
 pub fn narrow_classes(pattern: &str) -> Option<String> {
@@ -197,29 +217,12 @@ pub fn narrow_classes(pattern: &str) -> Option<String> {
     changed.then_some(out)
 }
 
-/// The patterns built while [`record_patterns`] is on, for the check that
-/// a twin matches as its pattern does (`tests/regex_ascii.rs`).
-fn recorded() -> &'static Mutex<Option<Vec<String>>> {
-    static RECORDED: OnceLock<Mutex<Option<Vec<String>>>> = OnceLock::new();
-    RECORDED.get_or_init(|| Mutex::new(None))
-}
-
-/// Start keeping the patterns built from now on (off unless asked).
-#[doc(hidden)]
-pub fn record_patterns() {
-    recorded().lock().recover().get_or_insert_with(Vec::new);
-}
-
-/// The patterns kept since [`record_patterns`], as the engine takes them.
-#[doc(hidden)]
-pub fn recorded_patterns() -> Vec<String> {
-    recorded().lock().recover().clone().unwrap_or_default()
-}
-
-/// [`compile`], for the same check.
-#[doc(hidden)]
-pub fn compile_as_parsed(pattern: &str) -> Result<fancy_regex::Regex, String> {
-    compile(pattern)
+/// Every pattern built with a twin, for the check that the twin matches
+/// as the pattern does (the `twins` tests).
+#[cfg(test)]
+fn recorded() -> &'static Mutex<std::collections::BTreeSet<String>> {
+    static RECORDED: OnceLock<Mutex<std::collections::BTreeSet<String>>> = OnceLock::new();
+    RECORDED.get_or_init(Default::default)
 }
 
 /// Every pattern compiled so far, for [`release_idle`] to walk.
@@ -245,6 +248,11 @@ pub fn release_idle(max_idle: Duration) -> usize {
         let Some(slot) = weak.upgrade() else {
             return false;
         };
+        // A twin let go for its pattern's own automaton: compiling it
+        // again adds it back.
+        if slot.re.lock().recover().is_none() {
+            return false;
+        }
         if now.saturating_sub(slot.last_used.load(Ordering::Relaxed)) >= max_idle.as_secs() {
             // Dropped from the registry too: compiling again adds it back.
             if slot.re.lock().recover().take().is_some() {
@@ -716,6 +724,55 @@ fn rename_groups(pattern: &str) -> (String, HashMap<String, Vec<usize>>, Vec<usi
 
 impl NetRegex {
     pub fn new(pattern: &str, ignore_case: bool) -> Result<NetRegex, String> {
+        let (full, names, numbered) = Self::prepare(pattern, ignore_case)?;
+        // Both forms are compiled here, so that a pattern the engine
+        // refuses is refused when it is built and never later; the Unicode
+        // one is kept only when there is no twin to stand in for it.
+        let re = compile(&full)?;
+        let twin = narrow_classes(&full).and_then(|twin| compile(&twin).ok().map(Slot::kept));
+        #[cfg(test)]
+        if twin.is_some() {
+            recorded().lock().recover().insert(full.clone());
+        }
+        let slot = match twin {
+            Some(_) => Slot::empty(),
+            None => Slot::kept(re),
+        };
+        Ok(NetRegex {
+            full,
+            names,
+            numbered,
+            slot,
+            twin,
+        })
+    }
+
+    /// [`NetRegex::new`] for a pattern matched once and dropped, such as
+    /// a release profile's term: no twin, whose compiling would cost more
+    /// than it saves, and the automaton held by this value alone, outside
+    /// the patterns [`release_idle`] walks.
+    pub fn once(pattern: &str, ignore_case: bool) -> Result<NetRegex, String> {
+        let (full, names, numbered) = Self::prepare(pattern, ignore_case)?;
+        let re = compile(&full)?;
+        Ok(NetRegex {
+            full,
+            names,
+            numbered,
+            slot: Arc::new(Slot {
+                re: Mutex::new(Some(Arc::new(re))),
+                last_used: AtomicU64::new(uptime()),
+            }),
+            twin: None,
+        })
+    }
+
+    /// The pattern as the engine takes it, its groups by .NET name and
+    /// its numbered groups.
+    #[allow(clippy::type_complexity)]
+    fn prepare(
+        pattern: &str,
+        ignore_case: bool,
+    ) -> Result<(String, HashMap<String, Vec<usize>>, Vec<usize>), String> {
         let converted = convert_unicode_escapes(pattern);
         let mut scanner = Scanner {
             chars: converted.chars().collect(),
@@ -731,36 +788,31 @@ impl NetRegex {
         } else {
             renamed
         };
-        // Both forms are compiled here, so that a pattern the engine
-        // refuses is refused when it is built and never later; the Unicode
-        // one is kept only when there is no twin to stand in for it.
-        let re = compile(&full)?;
-        if let Some(kept) = recorded().lock().recover().as_mut() {
-            kept.push(full.clone());
-        }
-        let twin = narrow_classes(&full).and_then(|twin| compile(&twin).ok().map(Slot::kept));
-        let slot = match twin {
-            Some(_) => Slot::empty(),
-            None => Slot::kept(re),
-        };
-        Ok(NetRegex {
-            full,
-            names,
-            numbered,
-            slot,
-            twin,
-        })
+        Ok((full, names, numbered))
     }
 
     /// The automaton that matches `text`: the twin for a text the twin
     /// is good for, when there is one, the pattern's own otherwise.
+    ///
+    /// Once a text beyond the twin has compiled the pattern's own
+    /// automaton, that one matches every text until it is idle, and the
+    /// twin is let go: holding both would weigh more than the pattern
+    /// without a twin. The twin is compiled again when the pattern's own
+    /// has been released.
     fn re(&self, text: &str) -> Arc<fancy_regex::Regex> {
-        match &self.twin {
-            Some(slot) if twin_matches(text) => {
-                slot.load(|| narrow_classes(&self.full).expect("a pattern with a twin has Unicode classes"))
+        let Some(twin) = &self.twin else {
+            return self.slot.load(|| self.full.clone());
+        };
+        if twin_matches(text) {
+            if let Some(re) = self.slot.loaded() {
+                return re;
             }
-            _ => self.slot.load(|| self.full.clone()),
+            return twin
+                .load(|| narrow_classes(&self.full).expect("a pattern with a twin has Unicode classes"));
         }
+        let re = self.slot.load(|| self.full.clone());
+        twin.unload();
+        re
     }
 
     pub fn as_str(&self) -> &str {
@@ -926,6 +978,9 @@ impl<'t> NetCaptures<'_, 't> {
 }
 
 #[cfg(test)]
+mod twins;
+
+#[cfg(test)]
 mod tests {
     use super::*;
 
@@ -994,6 +1049,21 @@ mod tests {
             re.slot.re.lock().recover().is_some(),
             "compiled for a text beyond the twin"
         );
+        let twin = re.twin.as_ref().unwrap();
+        assert!(twin.re.lock().recover().is_none(), "and the twin let go");
+        // Until it is idle, the pattern's own matches every text.
+        assert_eq!(
+            re.captures("Movie.2019")
+                .and_then(|c| c.value("title").map(str::to_string))
+                .as_deref(),
+            Some("Movie")
+        );
+        assert!(twin.re.lock().recover().is_none(), "the twin not compiled again");
+        // Released, it gives the place back to the twin.
+        re.slot.unload();
+        assert!(re.is_match("Movie.2019"));
+        assert!(twin.re.lock().recover().is_some(), "the twin compiled again");
+        assert!(re.slot.re.lock().recover().is_none());
         // No class, no twin.
         assert!(narrow_classes(r"^(?<group>[a-z]+)-(?<n>[0-9]+)$").is_none());
         assert!(NetRegex::new(r"^[a-z]+$", true).unwrap().twin.is_none());
