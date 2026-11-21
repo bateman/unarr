@@ -83,6 +83,22 @@ impl Slot {
         })
     }
 
+    /// The compiled automaton, if it is held.
+    fn loaded(&self) -> Option<Arc<fancy_regex::Regex>> {
+        let held = self.re.lock().recover().clone();
+        if held.is_some() {
+            self.last_used.store(uptime(), Ordering::Relaxed);
+        }
+        held
+    }
+
+    /// Let go of the compiled automaton. The slot stays in the registry
+    /// until [`release_idle`] passes, which drops it as one with nothing
+    /// compiled.
+    fn unload(&self) {
+        self.re.lock().recover().take();
+    }
+
     /// The compiled automaton, built again from `pattern` if it was let go.
     fn load(self: &Arc<Slot>, pattern: impl FnOnce() -> String) -> Arc<fancy_regex::Regex> {
         self.last_used.store(uptime(), Ordering::Relaxed);
@@ -232,6 +248,11 @@ pub fn release_idle(max_idle: Duration) -> usize {
         let Some(slot) = weak.upgrade() else {
             return false;
         };
+        // A twin let go for its pattern's own automaton: compiling it
+        // again adds it back.
+        if slot.re.lock().recover().is_none() {
+            return false;
+        }
         if now.saturating_sub(slot.last_used.load(Ordering::Relaxed)) >= max_idle.as_secs() {
             // Dropped from the registry too: compiling again adds it back.
             if slot.re.lock().recover().take().is_some() {
@@ -772,13 +793,26 @@ impl NetRegex {
 
     /// The automaton that matches `text`: the twin for a text the twin
     /// is good for, when there is one, the pattern's own otherwise.
+    ///
+    /// Once a text beyond the twin has compiled the pattern's own
+    /// automaton, that one matches every text until it is idle, and the
+    /// twin is let go: holding both would weigh more than the pattern
+    /// without a twin. The twin is compiled again when the pattern's own
+    /// has been released.
     fn re(&self, text: &str) -> Arc<fancy_regex::Regex> {
-        match &self.twin {
-            Some(slot) if twin_matches(text) => {
-                slot.load(|| narrow_classes(&self.full).expect("a pattern with a twin has Unicode classes"))
+        let Some(twin) = &self.twin else {
+            return self.slot.load(|| self.full.clone());
+        };
+        if twin_matches(text) {
+            if let Some(re) = self.slot.loaded() {
+                return re;
             }
-            _ => self.slot.load(|| self.full.clone()),
+            return twin
+                .load(|| narrow_classes(&self.full).expect("a pattern with a twin has Unicode classes"));
         }
+        let re = self.slot.load(|| self.full.clone());
+        twin.unload();
+        re
     }
 
     pub fn as_str(&self) -> &str {
@@ -1015,6 +1049,21 @@ mod tests {
             re.slot.re.lock().recover().is_some(),
             "compiled for a text beyond the twin"
         );
+        let twin = re.twin.as_ref().unwrap();
+        assert!(twin.re.lock().recover().is_none(), "and the twin let go");
+        // Until it is idle, the pattern's own matches every text.
+        assert_eq!(
+            re.captures("Movie.2019")
+                .and_then(|c| c.value("title").map(str::to_string))
+                .as_deref(),
+            Some("Movie")
+        );
+        assert!(twin.re.lock().recover().is_none(), "the twin not compiled again");
+        // Released, it gives the place back to the twin.
+        re.slot.unload();
+        assert!(re.is_match("Movie.2019"));
+        assert!(twin.re.lock().recover().is_some(), "the twin compiled again");
+        assert!(re.slot.re.lock().recover().is_none());
         // No class, no twin.
         assert!(narrow_classes(r"^(?<group>[a-z]+)-(?<n>[0-9]+)$").is_none());
         assert!(NetRegex::new(r"^[a-z]+$", true).unwrap().twin.is_none());

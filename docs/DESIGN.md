@@ -701,20 +701,17 @@ first pass before, 23.3 after; 7.5 MB in both once the patterns are
 released; a round of parsing 3 % slower, and the first parse after the
 start 0.4 s longer, the Unicode forms being compiled once to be checked.
 
-The limit: a name with a character beyond those code points (Chinese or
+A name with a character beyond those code points (Chinese or
 Japanese, `【喵萌奶茶屋】Show.S01E02`) compiles the Unicode form of each
-pattern it is matched with, beside the twin, until the two are idle.
-`parser_memory` on the same 1,744 names and five such names, the
-binaries alternated (21 November 2026): 62.2 MB after the first pass,
-against 56.2 without twins and 22.5 without those names; 7.7 MB in
-both once the patterns are released. The bound is the two forms
-together, some 78 MB, for a process that matches such names more often
-than every five minutes, the patterns' idle time; one that meets them
-now and then holds the 6 MB more until the patterns are released. Not
-mitigated yet: letting a twin go when its pattern's own form is
-compiled, and matching every text with that form until it is idle,
-would keep the peak at the 56 MB without twins, for a few lines in
-`NetRegex::re`.
+pattern it is matched with. That form then matches every text, of the
+twin's code points or not, until it is idle, and the twin is let go
+(`NetRegex::re`): holding both held more than the patterns without
+twins. `parser_memory` on the same 1,744 names and five such names, the
+binaries alternated (21 November 2026): 47.0 MB after the first pass,
+against 56.2 without twins, 62.2 with both forms held, and 22.5 without
+those names; 7.5 MB once the patterns are released, after which the
+twins are compiled again. A process that meets such names at every sync
+holds at most what it held without twins.
 
 A release profile's term written as a regex (`/.../`) is a pattern
 built for one match and dropped (`decision::specs::term_matches`): it
