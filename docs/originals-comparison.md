@@ -136,24 +136,118 @@ run the comparison again and update this file in the same branch.
 
 Each library has the tables of its latest `report.md`, as the script
 writes them. Measured on 2026-11-20 in the cloud session (x86-64, four
-cores, 16 GB), one run per library, at `bcd11fb`
-(`core/audit-http-low-rows`, the last of the branches waiting to be
-merged into `main` at `bc038a4`). It holds the code the runs of
-2026-11-18 measured at `4bba6eb`: the
-scheduler on the originals' cadence, Sonarr's wanted lists and calendar
-reading only the series they show, Radarr's answers reading only the
-translations of the movies they show, a queue answer with nothing to
-embed reading no reference data in either app, Sonarr's cutoff list
-sorting light rows before it reads the page, Sonarr's series list built
-off the async workers, the parser's and the custom formats' regexes
-built with seek, the custom formats' conditions decoded once per
-request, and Radarr's history read in one database call, its
-`/history/since` streamed. Since then: the unwinding on a panic (issue
-#14, below), the routes, events, settings and server behaviour the audit
-had left open (`docs/audit/7-triage.md`), and the daily ping to plex.tv.
-The tables measure a `cargo build`, with glibc's allocator; the image's
-static musl build, with jemalloc, is measured apart (The image's
-allocator, below).
+cores, 16 GB), one run per library, at `88313e7`
+(`core/parser-twin-automata`, on `main` at `4600d61`): the title
+parsers' patterns with Unicode classes matched by twins cut to the code
+points release names are made of (`docs/DESIGN.md`, section 9). Since
+the `bcd11fb` runs, `main` has also had Radarr's defaults on a blank
+start, the metadata consumers a database lacks inserted at every start,
+the default profiles' rule for the profile schema in both applications,
+and a posted backup made a manual one in Sonarr too. The tables measure
+a `cargo build`, with glibc's allocator; the image's static musl build,
+with jemalloc, is measured apart (The image's allocator, below).
+
+Against the `bcd11fb` runs the originals' routes, queues aside, took
+from 11 % less to 38 % more time on the real library (Radarr's
+`/calendar` the 38 %) and from 6 to 30 % less on the scaled one; Unarr's
+from 17 % less to 33 % more on the real library (Sonarr's `/episode`,
+2.4 to 3.2 ms, the 33 %) and from 10 to 27 % less on the scaled one. The
+machine, then: the twins do not change the routes (below).
+
+At rest Unarr holds 8 MiB more than in the `bcd11fb` runs on the real
+library (38 against 30) and 12 more on the scaled one (46 against 34),
+most of it anonymous memory (18 against 10, 25 against 15). The twins
+hold none of it. The binaries of `bcd11fb`, of three merges into `main`
+since (`3ca7fac`, `438b33c`, `6d110ee`), of `main` and of `88313e7`,
+built by `cargo build --release` and run on the comparison's protocol on
+the real library (Unarr alone, each on a fresh copy: a first start of 60
+s, then a measured one, idle, the five warm-up passes and the reads, a
+tail), anonymous memory in MiB:
+
+| | `bcd11fb` | `3ca7fac` | `438b33c` | `6d110ee` | `4600d61` | `88313e7` |
+|---|--:|--:|--:|--:|--:|--:|
+| Once each: at the end of 420 s idle | 10.1 | 10.2 | 10.2 | 17.4 | 17.4 | |
+| Twice each, alternated: at the end of 600 s idle | 10.4 | | | | 17.7 | 17.8 |
+| The same: peak during the reads | 46.5 | | | | 53.3 | 48.0 |
+| The same: at the end of a 120 s tail | 38.7 | | | | 45.7 | 40.4 |
+
+The 7 MiB come with `6d110ee` (`core/metadata-consumers-at-start`) and
+are there five seconds after the start. To insert the metadata consumers
+a database lacks, the start asks for the metadata schemas, and the
+schema catalogue parsed all seven recorded documents of the application
+at once (indexers, download clients, notifications, import lists,
+metadata, custom formats, auto-tagging: 1.3 MB of JSON for the two
+applications) and kept them. Before, the first request that showed a
+provider's or a custom format's fields parsed them: the comparison's
+reads never make one, the homelab's Prowlarr makes one when it syncs its
+indexers. `core/schema-catalogue-per-kind` parses each kind on its own,
+when first asked for.
+
+What the twins change: the binaries of `main` (`4600d61`) and `88313e7`,
+each built with glibc and as the image builds it (static musl, with
+jemalloc), alternated in this container after the runs (in the order A B
+C D D C B A), each a fresh process of both personalities on a fresh copy
+of the library, left 360 s after the start (long enough for the patterns
+the import used to be released), then five warm-up passes of the reads
+and a measured one, 4 clients without pause for 60 s and 60 s idle
+(`scripts/allocator-probe.py --settle 360`). The cell is the median of
+the two processes'. Real library:
+
+| | `main`, glibc | twins, glibc | `main`, jemalloc | twins, jemalloc |
+|---|--:|--:|--:|--:|
+| Idle after the start: RSS / anonymous, MiB | 47.2 / 22.1 | 45.2 / 21.9 | 45.6 / 23.7 | 46.0 / 23.7 |
+| The reads: time, s | 1.01 | 1.01 | 1.31 | 1.31 |
+| The reads: peak anonymous, MiB | 55.7 | 52.9 | 68.5 | 60.8 |
+| 4 clients: requests per second | 387 | 393 | 426 | 434 |
+| 4 clients: peak anonymous, MiB | 90.3 | 82.0 | 102.4 | 93.5 |
+| Idle after the load: RSS / anonymous, MiB | 85.3 / 59.9 | 75.7 / 51.8 | 87.0 / 64.5 | 77.5 / 54.8 |
+
+Scaled library:
+
+| | `main`, glibc | twins, glibc | `main`, jemalloc | twins, jemalloc |
+|---|--:|--:|--:|--:|
+| Idle after the start: RSS / anonymous, MiB | 48.2 / 24.7 | 48.2 / 24.6 | 52.9 / 30.8 | 53.3 / 30.8 |
+| The reads: time, s | 6.62 | 6.81 | 8.23 | 8.12 |
+| The reads: peak anonymous, MiB | 200.4 | 170.4 | 183.4 | 178.7 |
+| 4 clients: requests per second | 61.2 | 60.5 | 63.3 | 63.4 |
+| 4 clients: peak anonymous, MiB | 335.9 | 333.7 | 291.9 | 313.2 |
+| Idle after the load: RSS / anonymous, MiB | 83.1 / 59.1 | 76.7 / 52.5 | 94.7 / 72.0 | 86.9 / 63.9 |
+
+At rest the two hold the same: the patterns have been released, twins or
+not. While the parsers work (a history page parses each row's release
+name for its custom formats) the twins hold less: 3 to 8 MiB less at the
+reads' peak on the real library, 5 to 30 on the scaled one, and 7 to 10
+MiB less anonymous memory after the load on both libraries, with either
+allocator. None of the libraries' history names (1,998 and 669 in the
+real one, 50,000 each in the scaled one) has a character outside the
+twins' code points: the twins matched every one. Under 4 clients on the
+scaled library the peak is made by the `/movie` answers, not the
+patterns: within 2 MiB with glibc, 21 MiB above with jemalloc (304 and
+322 against 300 and 284, the four processes). The routes' medians are
+within the noise: from 8 % faster to 15 % slower with glibc on the
+scaled library, the 15 % Sonarr's `/calendar`, which parses nothing, and
+from 7 % faster to 3 % slower with jemalloc there; within 8 % on the
+real library, but for two routes with jemalloc: Sonarr's `/series` 15 %
+slower (4.1 and 4.7 ms) and Radarr's `/movie` 10 % faster (26.9 and
+24.2). In `examples/parser_memory`, on the fixtures' 1,744 history
+names, the two parsers hold 23.3 MB after a first pass, against 55.9
+without twins (`docs/DESIGN.md`, section 9).
+
+The runs before these, the same day and in the same session, one per
+library, were at `bcd11fb` (`core/audit-http-low-rows`, the last of the
+branches waiting to be merged into `main` at `bc038a4`). It holds the
+code the runs of 2026-11-18 measured at `4bba6eb`: the scheduler on the
+originals' cadence, Sonarr's wanted lists and calendar reading only the
+series they show, Radarr's answers reading only the translations of the
+movies they show, a queue answer with nothing to embed reading no
+reference data in either app, Sonarr's cutoff list sorting light rows
+before it reads the page, Sonarr's series list built off the async
+workers, the parser's and the custom formats' regexes built with seek,
+the custom formats' conditions decoded once per request, and Radarr's
+history read in one database call, its `/history/since` streamed. Since
+then: the unwinding on a panic (issue #14, below), the routes, events,
+settings and server behaviour the audit had left open
+(`docs/audit/7-triage.md`), and the daily ping to plex.tv.
 
 The same day, in another container, the libraries were also measured at
 `376a687`, with the server outside the API as the originals' pipeline
@@ -239,71 +333,72 @@ without it: about what the table above gives for the unwinding (28 to
 
 ### Real library (38 series, 193 movies)
 
-Library `real`; Unarr `bcd11fb, sha256 ee51341040be`; Sonarr 4.0.20.3014, Radarr 6.4.4.10685; first start 300 s, idle 900 s, tail 300 s; .NET heap limit 768 MiB; **warm-up not settled for originals: raise --warmup**; 5 warm-up passes; 2026-11-20.
+Library `real`; Unarr `88313e7, sha256 af391f3882d9`; Sonarr 4.0.20.3014, Radarr 6.4.4.10685; first start 300 s, idle 900 s, tail 300 s; .NET heap limit 768 MiB; 5 warm-up passes; 2026-11-20.
 
 | | Sonarr + Radarr | Unarr | Less |
 |---|--:|--:|--:|
-| First answer on both ports | 1.67 s | 0.21 s | 7.9× sooner |
-| Idle, at the end of the idle window: RSS | 488 MiB | 30 MiB | 94 % |
-| Same, anonymous memory | 273 MiB | 10 MiB | 96 % |
-| Idle CPU, from minute 5 of the window | 17.7 s/h | 1.1 s/h | 94 % |
-| The reads: CPU | 3.00 s | 1.02 s | 66 % |
-| The reads: time | 2.86 s | 1.19 s | 59 % |
-| Peak anonymous memory during the reads | 375 MiB | 46 MiB | 88 % |
-| Anonymous memory at the end of the tail | 390 MiB | 39 MiB | 90 % |
-| Idle CPU in the tail, from its first minute | 9.0 s/h | 0.7 s/h | 92 % |
+| First answer on both ports | 1.72 s | 0.25 s | 7.0× sooner |
+| Idle, at the end of the idle window: RSS | 482 MiB | 38 MiB | 92 % |
+| Same, anonymous memory | 267 MiB | 18 MiB | 93 % |
+| Idle CPU, from minute 5 of the window | 18.4 s/h | 1.1 s/h | 94 % |
+| The reads: CPU | 2.93 s | 0.98 s | 67 % |
+| The reads: time | 2.91 s | 1.25 s | 57 % |
+| Peak anonymous memory during the reads | 378 MiB | 48 MiB | 87 % |
+| Anonymous memory at the end of the tail | 375 MiB | 40 MiB | 89 % |
+| Idle CPU in the tail, from its first minute | 8.5 s/h | 0.6 s/h | 93 % |
 
 | p50 / max, ms | Originals | Unarr |
 |---|--:|--:|
-| Sonarr /api/v3/series | 8.4 / 13.0 | 4.0 / 21.8 |
-| Sonarr /api/v3/history | 27.1 / 36.1 | 4.6 / 7.2 |
-| Sonarr /api/v3/wanted/missing | 4.7 / 8.4 | 3.0 / 5.4 |
-| Sonarr /api/v3/calendar | 4.8 / 5.4 | 1.9 / 2.4 |
-| Sonarr /api/v3/queue | 1.6 / 1.9 | 0.9 / 1.1 |
-| Radarr /api/v3/movie | 23.8 / 53.1 | 20.1 / 27.9 |
-| Radarr /api/v3/history | 25.3 / 36.4 | 8.9 / 14.3 |
-| Radarr /api/v3/wanted/missing | 17.9 / 35.3 | 3.9 / 6.8 |
-| Radarr /api/v3/calendar | 10.2 / 15.5 | 3.6 / 4.0 |
-| Radarr /api/v3/queue | 1.6 / 1.8 | 0.6 / 1.0 |
-| Sonarr /api/v3/episode | 5.3 / 40.8 | 2.4 / 5.2 |
+| Sonarr /api/v3/series | 8.4 / 11.3 | 3.8 / 5.3 |
+| Sonarr /api/v3/history | 28.7 / 37.6 | 4.2 / 20.2 |
+| Sonarr /api/v3/wanted/missing | 4.2 / 9.2 | 2.5 / 27.0 |
+| Sonarr /api/v3/calendar | 4.3 / 15.4 | 2.0 / 2.8 |
+| Sonarr /api/v3/queue | 1.5 / 1.8 | 0.9 / 1.2 |
+| Radarr /api/v3/movie | 23.6 / 50.1 | 19.9 / 86.7 |
+| Radarr /api/v3/history | 22.4 / 36.5 | 7.6 / 9.9 |
+| Radarr /api/v3/wanted/missing | 17.2 / 30.9 | 4.4 / 30.0 |
+| Radarr /api/v3/calendar | 14.1 / 28.5 | 4.1 / 5.4 |
+| Radarr /api/v3/queue | 1.6 / 2.4 | 0.4 / 1.5 |
+| Sonarr /api/v3/episode | 5.9 / 40.9 | 3.2 / 6.4 |
 
 ### Scaled library (950 series, 2,123 movies)
 
-Library `scaled`; Unarr `bcd11fb, sha256 ee51341040be`; Sonarr 4.0.20.3014, Radarr 6.4.4.10685; first start 300 s, idle 900 s, tail 300 s; .NET heap limit 768 MiB; **warm-up not settled for unarr: raise --warmup**; 5 warm-up passes; 2026-11-20.
+Library `scaled`; Unarr `88313e7, sha256 af391f3882d9`; Sonarr 4.0.20.3014, Radarr 6.4.4.10685; first start 300 s, idle 900 s, tail 300 s; .NET heap limit 768 MiB; 5 warm-up passes; 2026-11-20.
 
 | | Sonarr + Radarr | Unarr | Less |
 |---|--:|--:|--:|
-| First answer on both ports | 1.60 s | 0.29 s | 5.5× sooner |
-| Idle, at the end of the idle window: RSS | 542 MiB | 34 MiB | 94 % |
-| Same, anonymous memory | 326 MiB | 15 MiB | 95 % |
-| Idle CPU, from minute 5 of the window | 16.5 s/h | 1.2 s/h | 93 % |
-| The reads: CPU | 17.29 s | 7.24 s | 58 % |
-| The reads: time | 16.06 s | 7.53 s | 53 % |
-| Peak anonymous memory during the reads | 558 MiB | 195 MiB | 65 % |
-| Anonymous memory at the end of the tail | 537 MiB | 46 MiB | 91 % |
-| Idle CPU in the tail, from its first minute | 8.2 s/h | 1.2 s/h | 85 % |
+| First answer on both ports | 1.48 s | 0.24 s | 6.1× sooner |
+| Idle, at the end of the idle window: RSS | 539 MiB | 46 MiB | 92 % |
+| Same, anonymous memory | 323 MiB | 25 MiB | 92 % |
+| Idle CPU, from minute 5 of the window | 14.7 s/h | 1.3 s/h | 91 % |
+| The reads: CPU | 15.29 s | 6.12 s | 60 % |
+| The reads: time | 13.86 s | 6.31 s | 54 % |
+| Peak anonymous memory during the reads | 498 MiB | 245 MiB | 51 % |
+| Anonymous memory at the end of the tail | 480 MiB | 47 MiB | 90 % |
+| Idle CPU in the tail, from its first minute | 7.6 s/h | 1.5 s/h | 80 % |
 
 | p50 / max, ms | Originals | Unarr |
 |---|--:|--:|
-| Sonarr /api/v3/series | 185.9 / 244.4 | 54.5 / 67.8 |
-| Sonarr /api/v3/history | 55.6 / 70.7 | 23.0 / 27.3 |
-| Sonarr /api/v3/wanted/missing | 12.9 / 21.2 | 11.4 / 12.5 |
-| Sonarr /api/v3/calendar | 75.8 / 115.0 | 6.6 / 12.8 |
-| Sonarr /api/v3/queue | 1.5 / 2.6 | 0.7 / 0.9 |
-| Radarr /api/v3/movie | 265.0 / 319.1 | 233.6 / 280.8 |
-| Radarr /api/v3/history | 41.5 / 95.4 | 13.3 / 16.6 |
-| Radarr /api/v3/wanted/missing | 25.6 / 57.8 | 7.9 / 9.0 |
-| Radarr /api/v3/calendar | 90.3 / 134.5 | 10.2 / 13.1 |
-| Radarr /api/v3/queue | 1.6 / 2.0 | 0.5 / 1.1 |
-| Sonarr /api/v3/episode | 5.3 / 45.6 | 3.1 / 6.3 |
+| Sonarr /api/v3/series | 173.3 / 236.9 | 41.9 / 45.2 |
+| Sonarr /api/v3/history | 52.5 / 62.4 | 20.2 / 21.8 |
+| Sonarr /api/v3/wanted/missing | 10.8 / 16.4 | 10.3 / 10.8 |
+| Sonarr /api/v3/calendar | 60.6 / 116.3 | 5.5 / 6.3 |
+| Sonarr /api/v3/queue | 1.4 / 2.4 | 0.4 / 0.9 |
+| Radarr /api/v3/movie | 229.6 / 272.5 | 205.8 / 230.3 |
+| Radarr /api/v3/history | 29.0 / 52.0 | 9.9 / 12.9 |
+| Radarr /api/v3/wanted/missing | 19.6 / 30.5 | 5.8 / 6.8 |
+| Radarr /api/v3/calendar | 77.6 / 144.1 | 8.9 / 12.4 |
+| Radarr /api/v3/queue | 1.3 / 1.7 | 0.4 / 0.8 |
+| Sonarr /api/v3/episode | 5.0 / 31.5 | 2.4 / 5.2 |
 
 Where Unarr is slower than the original, in these tables (whoever updates
 the tables updates this list from them, as CLAUDE.md says):
 
-On the real library, none at p50. Radarr's `/movie`, the one route of
-this list in the `4bba6eb` run (24.8 ms against 23.4 there), takes 20.1
-ms against 23.8. One maximum is above the original's: Sonarr's
-`/series`, 21.8 ms against 13.0, where its p50 is 4.0 against 8.4.
+On the real library, none at p50. Two maxima are above the originals':
+Radarr's `/movie`, 86.7 ms against 50.1, where its p50 is 19.9 against
+23.6, and Sonarr's `/wanted/missing`, 27.0 ms against 9.2, where its p50
+is 2.5 against 4.2. In the `bcd11fb` run it was Sonarr's `/series`,
+21.8 ms against 13.0; its maximum is 5.3 against 11.3 here.
 
 On the scaled library, none.
 
@@ -638,6 +733,8 @@ idle CPU of each side.
 
 | Date | Library | Unarr | Runs | Originals: idle RSS / CPU | Unarr: idle RSS / CPU | Note |
 |---|---|---|--:|--:|--:|---|
+| 2026-11-20 | scaled | `88313e7` | 1 | 539 MiB / 14.7 s/h | 46 MiB / 1.3 s/h | the parsers' twins, on `main` at `4600d61`; the routes of both sides 6-30 % faster than in the `bcd11fb` run, the machine; idle 12 MiB above it, 10 of it anonymous: 7 the schema catalogue parsed at every start since `6d110ee`, none the twins (alternated) |
+| 2026-11-20 | real | `88313e7` | 1 | 482 MiB / 18.4 s/h | 38 MiB / 1.1 s/h | the same; idle 8 MiB above the `bcd11fb` run: the 7 MiB of the schema catalogue, none of the twins (each merge since `bcd11fb`, and the binaries alternated) |
 | 2026-11-20 | scaled | `bcd11fb` | 1 | 542 MiB / 16.5 s/h | 34 MiB / 1.2 s/h | the audit's routes, events, settings and server behaviour, the plex.tv ping, the unwinding of #14; the originals' routes up to 22 % faster than in the `4bba6eb` run; Unarr's warm-up flagged (last pass 12 % above the one before) and its routes up to 29 % slower, noise: the binaries alternated are from 10 % faster to 18 % slower, the 18 % one process |
 | 2026-11-20 | real | `bcd11fb` | 1 | 488 MiB / 17.7 s/h | 30 MiB / 1.1 s/h | the same; the originals' warm-up flagged (last pass 11 % below the one before), noise; the binaries alternated: `bcd11fb` 3-12 % slower on seven routes of nine, 4 % fewer requests per second under 4 clients |
 | 2026-11-20 | scaled | `376a687` | 1 | 541 MiB / 14.9 s/h | 34 MiB / 1.0 s/h | another container than the `bcd11fb` runs; the server outside the API as the originals' pipeline (the low rows of the HTTP audit), before the routes, events and settings of the audit; the reads not compressed on either side; no route slower than the original's |
