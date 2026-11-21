@@ -24,12 +24,6 @@ use common::*;
 
 const API_KEY: &str = "0123456789abcdef0123456789abcdef";
 
-/// The port of the mock services the recordings name (the provider
-/// settings and the connections' URLs): a replay that needs them there
-/// takes it, one at a time.
-const RECORDED_MOCK_PORT: u16 = 18989;
-static RECORDED_PORT: tokio::sync::Mutex<()> = tokio::sync::Mutex::const_new(());
-
 /// Goldens recorded and not implemented yet, taken out of this list as the
 /// work lands.
 const PENDING: &[&str] = &[];
@@ -487,12 +481,11 @@ async fn send(
 async fn radarr_golden_responses_match() {
     // The mock indexers and clients the write goldens were recorded
     // against, on the port the recorded provider settings carry.
-    let _port = RECORDED_PORT.lock().await;
     let dirs = ReplayDirs::create();
     let mappings = dirs.mappings();
     let mock = unarr_mock::Mock::start_with(
         unarr_mock::fixtures_dir(),
-        RECORDED_MOCK_PORT,
+        18989,
         unarr_mock::MockDirs {
             downloads: Some(dirs.downloads.clone()),
             tv: None,
@@ -1266,11 +1259,10 @@ async fn the_import_list_goldens_match() {
 /// folder) and one without.
 #[tokio::test]
 async fn the_notification_goldens_match() {
-    replay_list_on(
+    replay_list(
         "golden-notifications",
         notifications_mode,
         &["queue sync", "queue/details sync"],
-        RECORDED_MOCK_PORT,
     )
     .await;
 }
@@ -1302,8 +1294,6 @@ fn as_current_user(recorded: &Value) -> Value {
     serde_json::from_str(&text).expect("the answer is still JSON")
 }
 
-/// One recorded list replayed: the fixture restored into a directory of
-/// its own, the mock on a free port, the clock moved by the recording.
 /// A golden the mock answered under a name: what the notification targets
 /// received, compared as `mode` says (exactly, or in any order).
 fn mock_differences(
@@ -1352,25 +1342,45 @@ fn mock_differences(
     })
 }
 
-/// A short list, with the mock on a port of its own.
-async fn replay_list(list: &'static str, mode: fn(&str) -> Mode, excused_hub: &[&str]) {
-    replay_list_on(list, mode, excused_hub, 0).await;
+/// The port the recordings name for the mock services: the Python mock's.
+const RECORDED_MOCK_PORT: u16 = 18989;
+
+/// Where a connection names the mock, the recording's port in place of
+/// `from` and `to` the other: an address (`127.0.0.1:<port>` in a URL)
+/// and a provider field called `port` (Plex's). The proxy's port is
+/// another setting and is left alone.
+fn swap_mock_port(v: &mut Value, from: u16, to: u16) {
+    match v {
+        Value::String(s) => {
+            let address = format!("127.0.0.1:{from}");
+            if s.contains(&address) {
+                *s = s.replace(&address, &format!("127.0.0.1:{to}"));
+            }
+        }
+        Value::Array(items) => items.iter_mut().for_each(|i| swap_mock_port(i, from, to)),
+        Value::Object(map) => {
+            if map.get("name").and_then(Value::as_str) == Some("port")
+                && map.get("value").and_then(Value::as_u64) == Some(u64::from(from))
+            {
+                map.insert("value".into(), Value::from(to));
+            }
+            map.values_mut().for_each(|x| swap_mock_port(x, from, to));
+        }
+        _ => {}
+    }
 }
 
-/// A short list, with the mock on `port`: `RECORDED_MOCK_PORT` for a list
-/// whose requests name the mock's address, as connections do.
-async fn replay_list_on(list: &'static str, mode: fn(&str) -> Mode, excused_hub: &[&str], port: u16) {
-    let _port = if port == RECORDED_MOCK_PORT {
-        Some(RECORDED_PORT.lock().await)
-    } else {
-        None
-    };
+/// One recorded list replayed: the fixture restored into a directory of
+/// its own, the mock on a free port, the clock moved by the recording.
+/// The connections a list creates name the recording's port: the replay
+/// sends its mock's instead, and compares the answers with it put back.
+async fn replay_list(list: &'static str, mode: fn(&str) -> Mode, excused_hub: &[&str]) {
     let golden_dir = fixture_dir().join(list);
     let dirs = ReplayDirs::create_named(list);
     let mappings = dirs.mappings();
     let mock = unarr_mock::Mock::start_with(
         unarr_mock::fixtures_dir(),
-        port,
+        0,
         unarr_mock::MockDirs {
             downloads: Some(dirs.downloads.clone()),
             tv: None,
@@ -1463,6 +1473,15 @@ async fn replay_list_on(list: &'static str, mode: fn(&str) -> Mode, excused_hub:
             for (name, id) in &ids {
                 body = body.replace(&format!("\"{{id:{name}}}\""), &id.to_string());
             }
+            // Written again only where the port was: a model binding
+            // error names the byte it stopped at.
+            if let Ok(mut json) = serde_json::from_str::<Value>(&body) {
+                let recorded = json.clone();
+                swap_mock_port(&mut json, RECORDED_MOCK_PORT, mock.port());
+                if json != recorded {
+                    body = json.to_string();
+                }
+            }
             sent.request_body = Some(body);
         }
         if g.to_mock {
@@ -1485,7 +1504,8 @@ async fn replay_list_on(list: &'static str, mode: fn(&str) -> Mode, excused_hub:
             continue;
         }
         let (status, body) = send(&app, &sent, &session, &mappings).await;
-        let body = unmap_paths(&body, &mappings);
+        let mut body = unmap_paths(&body, &mappings);
+        swap_mock_port(&mut body, mock.port(), RECORDED_MOCK_PORT);
         if let Some(id) = body
             .get("id")
             .or_else(|| body.get(0).and_then(|first| first.get("id")))

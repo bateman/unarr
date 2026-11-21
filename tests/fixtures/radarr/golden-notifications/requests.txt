@@ -8,7 +8,7 @@
 #
 # The original reaches api.radarr.video through scripts/mock-servarr.py, its
 # HTTP proxy here, as in golden-library. The connections post to the mock on
-# port 18989, which the replay listens on too.
+# port 18989; the replay sends its own mock's port in their place.
 config-host GET /api/v3/config/host
 config-host-put-allowedhosts-star PUT /api/v3/config/host/1 bodies/config-host-proxy-star.json
 config-host-put-proxy PUT /api/v3/config/host/1 bodies/config-host-proxy.json
