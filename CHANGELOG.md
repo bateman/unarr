@@ -68,7 +68,8 @@ Radarr's *On Movie Added* and *On Movie Delete* sent nothing: Discord and
 the webhook were not told, and Plex was not asked to refresh the folder of
 a movie deleted with its files, so the movie stayed in Plex (On Deck
 included) until Plex's own next scan. Both are sent as the original sends
-them now, the webhook's `addMethod` and `movieFolderSize` included.
+them now, the webhook's `addMethod` and `movieFolderSize` included, as
+recorded from Radarr 6.4.4 (`tests/fixtures/radarr/golden-notifications`).
 
 *On Application Update* sent nothing on either personality: Unarr is not
 updated by the originals' updater, and nothing recorded the version a start

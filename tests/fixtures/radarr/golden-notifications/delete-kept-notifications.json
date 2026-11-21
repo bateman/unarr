@@ -1,0 +1,97 @@
+{
+  "body": [
+    {
+      "body": {
+        "applicationUrl": "",
+        "deletedFiles": false,
+        "eventType": "MovieDelete",
+        "instanceName": "Radarr",
+        "movie": {
+          "folderPath": "/movies/Blade Runner 2049 (2017) {tmdb-335984}",
+          "genres": [
+            "Science Fiction",
+            "Drama"
+          ],
+          "id": 329,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/gajva2L0rPYkEWjzgFlBXCAVBE5.jpg",
+              "url": "/MediaCover/329/poster.jpg?h=ad244719f1b6472728d2"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/gNdLJU9TxrpGx4dkZidjys3fyy0.jpg",
+              "url": "/MediaCover/329/fanart.jpg?h=d6597a53a04564e4d049"
+            }
+          ],
+          "imdbId": "tt1856101",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Thirty years after the events of the first film, a new blade runner, LAPD Officer K, unearths a long-buried secret that has the potential to plunge what's left of society into chaos. K's discovery leads him on a quest to find Rick Deckard, a former LAPD blade runner who has been missing for 30 years.",
+          "releaseDate": "2018-01-16",
+          "tags": [],
+          "title": "Blade Runner 2049",
+          "tmdbId": 335984,
+          "year": 2017
+        },
+        "movieFolderSize": 0
+      },
+      "headers": {
+        "authorization": "Basic aG9vazpzZWNyZXQ=",
+        "content-type": "application/json",
+        "x-fixture": "yes"
+      },
+      "method": "POST",
+      "path": "/webhook",
+      "query": {},
+      "service": "webhook"
+    },
+    {
+      "body": {
+        "embeds": [
+          {
+            "author": {
+              "icon_url": "https://raw.githubusercontent.com/Radarr/Radarr/develop/Logo/256.png",
+              "name": "Radarr"
+            },
+            "color": 15749200,
+            "description": "Movie removed, files were not deleted",
+            "fields": [
+              {
+                "inline": false,
+                "name": "Links",
+                "value": "[TMDb](https://themoviedb.org/movie/335984) / [Trakt](https://trakt.tv/movies/tt1856101) / [IMDb](https://imdb.com/title/tt1856101/) / [YouTube](https://www.youtube.com/watch?v=geFtxCSz8xI) / [Website](http://bladerunnermovie.com/)"
+              }
+            ],
+            "image": {
+              "url": "https://image.tmdb.org/t/p/original/gNdLJU9TxrpGx4dkZidjys3fyy0.jpg"
+            },
+            "thumbnail": {
+              "url": "https://image.tmdb.org/t/p/original/gajva2L0rPYkEWjzgFlBXCAVBE5.jpg"
+            },
+            "title": "Blade Runner 2049",
+            "url": "https://www.themoviedb.org/movie/335984"
+          }
+        ],
+        "username": "Unarr fixture"
+      },
+      "headers": {
+        "content-type": "application/json"
+      },
+      "method": "POST",
+      "path": "/discord/api/webhooks/100/fixturetoken",
+      "query": {},
+      "service": "discord"
+    }
+  ],
+  "recordedAt": "2026-11-21T16:25:08Z",
+  "request": {
+    "method": "GET",
+    "path": "/mock/notifications",
+    "target": "mock"
+  },
+  "status": 200
+}

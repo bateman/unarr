@@ -627,44 +627,7 @@ async fn radarr_golden_responses_match() {
                 checked -= 1;
                 continue;
             }
-            let body: Value = serde_json::from_slice(&bytes).unwrap_or(Value::Null);
-            let body = unmap_paths(&body, &mappings);
-            if std::env::var("UNARR_CONTRACT_DUMP")
-                .map(|v| v.split(',').any(|n| n == g.name))
-                .unwrap_or(false)
-            {
-                eprintln!(
-                    "--- {} (mock) answered {status}:\n{}",
-                    g.name,
-                    serde_json::to_string_pretty(&body).unwrap_or_default()
-                );
-            }
-            if status.as_u16() != g.status {
-                failures.push(format!(
-                    "{}: status {} expected, {} got",
-                    g.name, g.status, status
-                ));
-                continue;
-            }
-            let mut problems = Vec::new();
-            let (want, got) = match mode(&g.name) {
-                Mode::Exact(ignore) => (normalize(&g.body, ignore), normalize(&body, ignore)),
-                Mode::Multiset(ignore) => (
-                    sorted_list(normalize(&g.body, ignore)),
-                    sorted_list(normalize(&body, ignore)),
-                ),
-                _ => panic!("mock goldens compare exactly"),
-            };
-            diff("", &want, &got, &mut problems);
-            if !problems.is_empty() {
-                failures.push(format!(
-                    "{} (mock {} {}):\n    {}",
-                    g.name,
-                    g.method,
-                    g.path,
-                    problems.join("\n    ")
-                ));
-            }
+            failures.extend(mock_differences(mode(&g.name), g, status, &bytes, &mappings));
             continue;
         }
         let (status, body) = send(&app, g, &session, &mappings).await;
@@ -1289,6 +1252,36 @@ async fn the_import_list_goldens_match() {
     replay_list("golden-list", list_mode, &["queue sync", "queue/details sync"]).await;
 }
 
+/// What a movie added or deleted tells Discord, the webhook and Plex,
+/// against `tests/fixtures/radarr/golden-notifications`: a movie added
+/// with and without its options (the webhook fails on the second, as the
+/// original's does), one deleted with its files (Plex refreshes its
+/// folder) and one without.
+#[tokio::test]
+async fn the_notification_goldens_match() {
+    replay_list(
+        "golden-notifications",
+        notifications_mode,
+        &["queue sync", "queue/details sync"],
+    )
+    .await;
+}
+
+/// How each answer of the notifications recording is compared.
+fn notifications_mode(name: &str) -> Mode {
+    match name {
+        // The original's Plex update runs on a background handler, after
+        // the deletion, wherever that lands among the other posts.
+        "delete-notifications" => Mode::Multiset(&[]),
+        n if n.ends_with("-notifications") => Mode::Exact(&[]),
+        // The movie added, with the moment it was: the original stamps it
+        // before the lookup of its metadata, the recording when it
+        // answered.
+        "movie-add" | "movie-add-bare" => Mode::Exact(&["added"]),
+        other => library_mode(other),
+    }
+}
+
 /// A recorded answer with the user the recording ran as (`root`) replaced
 /// by the one this process runs as, found the way the server finds it, so
 /// that both say the same name wherever the tests run.
@@ -1301,8 +1294,86 @@ fn as_current_user(recorded: &Value) -> Value {
     serde_json::from_str(&text).expect("the answer is still JSON")
 }
 
+/// A golden the mock answered under a name: what the notification targets
+/// received, compared as `mode` says (exactly, or in any order).
+fn mock_differences(
+    mode: Mode,
+    g: &Golden,
+    status: StatusCode,
+    bytes: &[u8],
+    mappings: &[(String, &str)],
+) -> Option<String> {
+    let body: Value = serde_json::from_slice(bytes).unwrap_or(Value::Null);
+    let body = unmap_paths(&body, mappings);
+    if std::env::var("UNARR_CONTRACT_DUMP")
+        .map(|v| v.split(',').any(|n| n == g.name))
+        .unwrap_or(false)
+    {
+        eprintln!(
+            "--- {} (mock) answered {status}:\n{}",
+            g.name,
+            serde_json::to_string_pretty(&body).unwrap_or_default()
+        );
+    }
+    if status.as_u16() != g.status {
+        return Some(format!(
+            "{}: status {} expected, {} got",
+            g.name, g.status, status
+        ));
+    }
+    let mut problems = Vec::new();
+    let (want, got) = match mode {
+        Mode::Exact(ignore) => (normalize(&g.body, ignore), normalize(&body, ignore)),
+        Mode::Multiset(ignore) => (
+            sorted_list(normalize(&g.body, ignore)),
+            sorted_list(normalize(&body, ignore)),
+        ),
+        _ => panic!("mock goldens compare exactly"),
+    };
+    diff("", &want, &got, &mut problems);
+    (!problems.is_empty()).then(|| {
+        format!(
+            "{} (mock {} {}):\n    {}",
+            g.name,
+            g.method,
+            g.path,
+            problems.join("\n    ")
+        )
+    })
+}
+
+/// The port the recordings name for the mock services: the Python mock's.
+const RECORDED_MOCK_PORT: u16 = 18989;
+
+/// Where a connection names the mock, the recording's port in place of
+/// `from` and `to` the other: an address (`127.0.0.1:<port>` in a URL)
+/// and a provider field called `port` (Plex's). The proxy's port is
+/// another setting and is left alone.
+fn swap_mock_port(v: &mut Value, from: u16, to: u16) {
+    match v {
+        Value::String(s) => {
+            let address = format!("127.0.0.1:{from}");
+            if s.contains(&address) {
+                *s = s.replace(&address, &format!("127.0.0.1:{to}"));
+            }
+        }
+        Value::Array(items) => items.iter_mut().for_each(|i| swap_mock_port(i, from, to)),
+        Value::Object(map) => {
+            if map.get("name").and_then(Value::as_str) == Some("port")
+                && map.get("value").and_then(Value::as_u64) == Some(u64::from(from))
+            {
+                map.insert("value".into(), Value::from(to));
+            }
+            map.values_mut().for_each(|x| swap_mock_port(x, from, to));
+        }
+        _ => {}
+    }
+}
+
 /// One recorded list replayed: the fixture restored into a directory of
 /// its own, the mock on a free port, the clock moved by the recording.
+/// The connections a list creates name the recording's port: the replay
+/// sends its mock's instead, and compares the answers with it put back.
 async fn replay_list(list: &'static str, mode: fn(&str) -> Mode, excused_hub: &[&str]) {
     let golden_dir = fixture_dir().join(list);
     let dirs = ReplayDirs::create_named(list);
@@ -1402,6 +1473,15 @@ async fn replay_list(list: &'static str, mode: fn(&str) -> Mode, excused_hub: &[
             for (name, id) in &ids {
                 body = body.replace(&format!("\"{{id:{name}}}\""), &id.to_string());
             }
+            // Written again only where the port was: a model binding
+            // error names the byte it stopped at.
+            if let Ok(mut json) = serde_json::from_str::<Value>(&body) {
+                let recorded = json.clone();
+                swap_mock_port(&mut json, RECORDED_MOCK_PORT, mock.port());
+                if json != recorded {
+                    body = json.to_string();
+                }
+            }
             sent.request_body = Some(body);
         }
         if g.to_mock {
@@ -1410,12 +1490,22 @@ async fn replay_list(list: &'static str, mode: fn(&str) -> Mode, excused_hub: &[
                 path = path.replace(&format!("path={recorded}"), &format!("path={replay}"));
             }
             let body = sent.request_body.as_deref().unwrap_or("").as_bytes();
-            let (status, _) = mock.call(&g.method, &path, body);
-            assert!(status.is_success(), "mock {} {path}: {status}", g.method);
+            let (status, bytes) = mock.call(&g.method, &path, body);
+            if g.name == "-" {
+                assert!(status.is_success(), "mock {} {path}: {status}", g.method);
+                continue;
+            }
+            // Under a name, what the mock holds is a golden too.
+            if !only.is_empty() && !only.iter().any(|p| g.name.starts_with(p.as_str())) {
+                continue;
+            }
+            checked += 1;
+            failures.extend(mock_differences(mode(&g.name), g, status, &bytes, &mappings));
             continue;
         }
         let (status, body) = send(&app, &sent, &session, &mappings).await;
-        let body = unmap_paths(&body, &mappings);
+        let mut body = unmap_paths(&body, &mappings);
+        swap_mock_port(&mut body, mock.port(), RECORDED_MOCK_PORT);
         if let Some(id) = body
             .get("id")
             .or_else(|| body.get(0).and_then(|first| first.get("id")))

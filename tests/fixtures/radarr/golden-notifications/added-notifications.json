@@ -1,0 +1,98 @@
+{
+  "body": [
+    {
+      "body": {
+        "addMethod": "manual",
+        "applicationUrl": "",
+        "eventType": "MovieAdded",
+        "instanceName": "Radarr",
+        "movie": {
+          "folderPath": "/movies/Dune (2021) {tmdb-438631}",
+          "genres": [
+            "Science Fiction",
+            "Adventure"
+          ],
+          "id": 328,
+          "images": [
+            {
+              "coverType": "poster",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/v1tRXZ4JtD2Iv6fjkPvT4GiwslV.jpg",
+              "url": "/MediaCover/328/poster.jpg?h=bd15f9a27331fc78d4df"
+            },
+            {
+              "coverType": "fanart",
+              "remoteUrl": "https://image.tmdb.org/t/p/original/qVgZu5BTx6pu4owCvVOm4zjTfOi.jpg",
+              "url": "/MediaCover/328/fanart.jpg?h=251f444906d2ce7ea00b"
+            }
+          ],
+          "imdbId": "tt1160419",
+          "originalLanguage": {
+            "id": 1,
+            "name": "English"
+          },
+          "overview": "Paul Atreides, a brilliant and gifted young man born into a great destiny beyond his understanding, must travel to the most dangerous planet in the universe to ensure the future of his family and his people. As malevolent forces explode into conflict over the planet's exclusive supply of the most precious resource in existence - a commodity capable of unlocking humanity's greatest potential - only those who can conquer their fear will survive.",
+          "releaseDate": "2021-12-22",
+          "tags": [
+            "ita"
+          ],
+          "title": "Dune",
+          "tmdbId": 438631,
+          "year": 2021
+        }
+      },
+      "headers": {
+        "authorization": "Basic aG9vazpzZWNyZXQ=",
+        "content-type": "application/json",
+        "x-fixture": "yes"
+      },
+      "method": "POST",
+      "path": "/webhook",
+      "query": {},
+      "service": "webhook"
+    },
+    {
+      "body": {
+        "embeds": [
+          {
+            "author": {
+              "icon_url": "https://raw.githubusercontent.com/Radarr/Radarr/develop/Logo/256.png",
+              "name": "Radarr"
+            },
+            "color": 2605644,
+            "description": "Movie Added",
+            "fields": [
+              {
+                "inline": false,
+                "name": "Links",
+                "value": "[TMDb](https://themoviedb.org/movie/438631) / [Trakt](https://trakt.tv/movies/tt1160419) / [IMDb](https://imdb.com/title/tt1160419/) / [YouTube](https://www.youtube.com/watch?v=w0HgHet0sxg) / [Website](https://www.warnerbros.com/movies/dune)"
+              }
+            ],
+            "image": {
+              "url": "https://image.tmdb.org/t/p/original/qVgZu5BTx6pu4owCvVOm4zjTfOi.jpg"
+            },
+            "thumbnail": {
+              "url": "https://image.tmdb.org/t/p/original/v1tRXZ4JtD2Iv6fjkPvT4GiwslV.jpg"
+            },
+            "title": "Dune",
+            "url": "https://www.themoviedb.org/movie/438631"
+          }
+        ],
+        "username": "Unarr fixture"
+      },
+      "headers": {
+        "content-type": "application/json"
+      },
+      "method": "POST",
+      "path": "/discord/api/webhooks/100/fixturetoken",
+      "query": {},
+      "service": "discord"
+    }
+  ],
+  "recordedAt": "2026-11-21T16:24:50Z",
+  "request": {
+    "method": "GET",
+    "path": "/mock/notifications",
+    "target": "mock"
+  },
+  "status": 200
+}

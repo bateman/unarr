@@ -1,0 +1,1 @@
+{"$from": "config-host", "$set": {"certificateValidation": "disabled", "proxyEnabled": true, "proxyType": "http", "proxyHostname": "127.0.0.1", "proxyPort": 18989, "proxyBypassFilter": "*.invalid", "proxyBypassLocalAddresses": true}}

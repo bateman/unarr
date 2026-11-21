@@ -1,0 +1,48 @@
+# What a movie added or deleted tells the connections: Discord, the
+# webhook and Plex, created as the long list creates them. A recording of
+# its own, so that the long list next door was not recorded again; same
+# format, and signalr.json holds what the hub sent after each step.
+#
+#   GOLDEN_REQUESTS=tests/fixtures/radarr/golden-notifications/requests.txt \
+#       GOLDEN_OUT=tests/fixtures/radarr/golden-notifications make golden-radarr
+#
+# The original reaches api.radarr.video through scripts/mock-servarr.py, its
+# HTTP proxy here, as in golden-library. The connections post to the mock on
+# port 18989; the replay sends its own mock's port in their place.
+config-host GET /api/v3/config/host
+config-host-put-allowedhosts-star PUT /api/v3/config/host/1 bodies/config-host-proxy-star.json
+config-host-put-proxy PUT /api/v3/config/host/1 bodies/config-host-proxy.json
+sleep 8
+notification-create-webhook POST /api/v3/notification bodies/notification-create-webhook.json
+notification-create-discord POST /api/v3/notification bodies/notification-create-discord.json
+notification-create-plex POST /api/v3/notification bodies/notification-create-plex.json
+sleep 2
+mock - POST /mock/notifications/clear
+
+# A movie added with its options: the webhook names how (`addMethod`).
+movie-lookup-route-tmdb GET /api/v3/movie/lookup/tmdb?tmdbId=438631
+movie-add POST /api/v3/movie bodies/movie-add.json
+sleep 3
+mock added-notifications GET /mock/notifications
+mock - POST /mock/notifications/clear
+
+# One added without them, as an API client may: the webhook's payload
+# reads the add method off a null and the original records the failure
+# (`Unable to send OnMovieAdded notification to: Mock Webhook`); Discord
+# is sent all the same. Plex has nothing to do for an addition.
+movie-lookup-bare GET /api/v3/movie/lookup/tmdb?tmdbId=335984
+movie-add-bare POST /api/v3/movie bodies/movie-add-bare.json
+sleep 3
+mock added-bare-notifications GET /mock/notifications
+mock - POST /mock/notifications/clear
+notifications-after-bare GET /api/v3/notification
+
+# Deleted with its files: Plex is asked to refresh the movie's folder,
+# once the deletion is done. Without them: Plex is not told.
+movie-delete DELETE /api/v3/movie/{id:movie-add}?deleteFiles=true&addImportExclusion=false
+sleep 12
+mock delete-notifications GET /mock/notifications
+mock - POST /mock/notifications/clear
+movie-delete-kept DELETE /api/v3/movie/{id:movie-add-bare}?deleteFiles=false&addImportExclusion=false
+sleep 3
+mock delete-kept-notifications GET /mock/notifications
