@@ -745,6 +745,7 @@ pub fn import(legacy_db: &std::path::Path, db: &Db) -> anyhow::Result<ImportRepo
 #[cfg(test)]
 mod tests {
     use super::*;
+    use unarr_core::Personality;
 
     /// The importer reads a database of the pinned Radarr (`upstream/radarr.pin`):
     /// a new pin with a higher migration level fails here until the mapping
@@ -757,7 +758,6 @@ mod tests {
             "Radarr pinned at migration {pinned}, the importer knows {MIN_MIGRATION}..={MAX_KNOWN_MIGRATION}"
         );
     }
-    use unarr_core::Personality;
 
     fn fixture() -> std::path::PathBuf {
         std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../tests/fixtures/radarr/radarr.db")

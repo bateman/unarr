@@ -33,15 +33,15 @@ pub const fn of(personality: Personality) -> Option<Pin> {
 mod tests {
     use super::*;
 
+    /// build.rs checks each value's shape and names the line it refuses;
+    /// a date such as month 13 has the right shape, and is caught here.
     #[test]
     fn the_pins_are_read() {
         for pin in [SONARR, RADARR] {
-            assert_eq!(pin.version.split('.').count(), 4, "{pin:?}");
             assert!(
                 chrono::DateTime::parse_from_rfc3339(pin.build_time).is_ok(),
                 "{pin:?}"
             );
-            assert!(pin.migration > 0, "{pin:?}");
         }
         assert_eq!(of(Personality::Sonarr), Some(SONARR));
         assert_eq!(of(Personality::Radarr), Some(RADARR));

@@ -8,7 +8,7 @@ one by the paths it touches, so a port starts from a table and not from a
 raw diff::
 
     scripts/upstream-triage.py --app radarr --fetch
-    scripts/upstream-triage.py --app radarr --target 7.0.3.10918 --format json
+    scripts/upstream-triage.py --app radarr --target X.Y.Z.BUILD --format json
 
 The target release (``choose_target``):
 
@@ -20,8 +20,9 @@ The target release (``choose_target``):
 - when the newest is in a later major, the first stable release of the next
   major (a major jump): ``x.0.0`` when that one is stable, a later one when
   it was a pre-release (Radarr published 7.0.0 to 7.0.3.10912 as
-  pre-releases on ``master``: 6.4.4 goes to 7.0.3.10918); the releases
-  after it come with the next runs;
+  pre-releases on ``master``: 6.4.4 goes to the build of 7.0.3 that came
+  after them, the first stable one); the releases after it come with the
+  next runs;
 - none newer than the pin: nothing to do.
 
 Git cannot tell a stable release from a pre-release, and the stable branch

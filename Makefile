@@ -45,10 +45,10 @@ lint: ## Clippy with warnings as errors
 	cargo clippy --workspace --all-targets -- -D warnings
 
 check: ## fmt check + lint + test + the scripts' tests, what CI runs
-	$(MAKE) test-scripts
 	cargo fmt --all -- --check
 	$(MAKE) lint
 	$(MAKE) test
+	$(MAKE) test-scripts
 
 test-scripts: ## Unit tests of the Python scripts (scripts/tests; no network)
 	@python3 -I -m unittest discover -s scripts/tests -t scripts/tests
@@ -97,10 +97,10 @@ route-percentiles: ## p50, p95, p99 of the routes with a target in docs/DESIGN.m
 	cargo build --release --bin unarrd
 	@python3 -I scripts/route-percentiles.py --library $(or $(LIBRARY),real)
 
-upstream-sonarr: ## Fetch upstream Sonarr, triage its commits since upstream/sonarr.lock up to the target release (TARGET=4.0.21.3020, FORMAT=json, RELEASES=api|tags|file)
+upstream-sonarr: ## Fetch upstream Sonarr, triage its commits since upstream/sonarr.lock up to the target release (TARGET=X.Y.Z.BUILD, FORMAT=json, RELEASES=api|tags|file)
 	@python3 -I scripts/upstream-triage.py --app sonarr --fetch --releases $(or $(RELEASES),api) $(if $(TARGET),--target $(TARGET)) $(if $(FORMAT),--format $(FORMAT))
 
-upstream-radarr: ## Fetch upstream Radarr, triage its commits since upstream/radarr.lock up to the target release (TARGET=7.0.3.10918, FORMAT=json, RELEASES=api|tags|file)
+upstream-radarr: ## Fetch upstream Radarr, triage its commits since upstream/radarr.lock up to the target release (TARGET=X.Y.Z.BUILD, FORMAT=json, RELEASES=api|tags|file)
 	@python3 -I scripts/upstream-triage.py --app radarr --fetch --releases $(or $(RELEASES),api) $(if $(TARGET),--target $(TARGET)) $(if $(FORMAT),--format $(FORMAT))
 
 bazarr: ## Replay Bazarr's requests against a running unarrd (UNARR_URL, UNARR_API_KEY)
