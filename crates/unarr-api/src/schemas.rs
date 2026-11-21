@@ -53,29 +53,28 @@ pub enum SchemaKind {
     AutoTaggingSpecification,
 }
 
-/// The recorded document of one kind of schema.
-fn source(sources: &Sources, kind: SchemaKind) -> &'static str {
-    match kind {
-        SchemaKind::Provider(ProviderKind::Indexer) => sources.indexer,
-        SchemaKind::Provider(ProviderKind::DownloadClient) => sources.download_client,
-        SchemaKind::Provider(ProviderKind::Notification) => sources.notification,
-        SchemaKind::Provider(ProviderKind::ImportList) => sources.import_list,
-        SchemaKind::Provider(ProviderKind::Metadata) => sources.metadata,
-        SchemaKind::CustomFormatSpecification => sources.custom_format,
-        SchemaKind::AutoTaggingSpecification => sources.auto_tagging,
-    }
-}
+/// Every kind of schema, in the order of their cells in [`all`].
+const KINDS: [SchemaKind; 7] = [
+    SchemaKind::Provider(ProviderKind::Indexer),
+    SchemaKind::Provider(ProviderKind::DownloadClient),
+    SchemaKind::Provider(ProviderKind::Notification),
+    SchemaKind::Provider(ProviderKind::ImportList),
+    SchemaKind::Provider(ProviderKind::Metadata),
+    SchemaKind::CustomFormatSpecification,
+    SchemaKind::AutoTaggingSpecification,
+];
 
-/// Where a kind's parsed schemas are kept.
-fn slot(kind: SchemaKind) -> usize {
+/// A kind's cell among the parsed schemas, and its recorded document: one
+/// match, so a kind cannot read another's cell.
+fn place(sources: &Sources, kind: SchemaKind) -> (usize, &'static str) {
     match kind {
-        SchemaKind::Provider(ProviderKind::Indexer) => 0,
-        SchemaKind::Provider(ProviderKind::DownloadClient) => 1,
-        SchemaKind::Provider(ProviderKind::Notification) => 2,
-        SchemaKind::Provider(ProviderKind::ImportList) => 3,
-        SchemaKind::Provider(ProviderKind::Metadata) => 4,
-        SchemaKind::CustomFormatSpecification => 5,
-        SchemaKind::AutoTaggingSpecification => 6,
+        SchemaKind::Provider(ProviderKind::Indexer) => (0, sources.indexer),
+        SchemaKind::Provider(ProviderKind::DownloadClient) => (1, sources.download_client),
+        SchemaKind::Provider(ProviderKind::Notification) => (2, sources.notification),
+        SchemaKind::Provider(ProviderKind::ImportList) => (3, sources.import_list),
+        SchemaKind::Provider(ProviderKind::Metadata) => (4, sources.metadata),
+        SchemaKind::CustomFormatSpecification => (5, sources.custom_format),
+        SchemaKind::AutoTaggingSpecification => (6, sources.auto_tagging),
     }
 }
 
@@ -94,8 +93,8 @@ pub fn all(personality: Personality, kind: SchemaKind) -> &'static [Value] {
         Personality::Sonarr | Personality::Lidarr => (&SONARR_PARSED, &SONARR),
         Personality::Radarr => (&RADARR_PARSED, &RADARR),
     };
-    parsed[slot(kind)]
-        .get_or_init(|| serde_json::from_str(source(sources, kind)).expect("embedded schema is valid JSON"))
+    let (cell, source) = place(sources, kind);
+    parsed[cell].get_or_init(|| serde_json::from_str(source).expect("embedded schema is valid JSON"))
 }
 
 /// The schema entry for one implementation.
@@ -247,6 +246,32 @@ fn lookup_path<'a>(settings: &'a Map<String, Value>, name: &str) -> Option<&'a V
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// Each document is parsed only when first asked for, so a broken one
+    /// would otherwise first show in the request that needs it: all
+    /// fourteen are read here, and each kind finds its own.
+    #[test]
+    fn every_recorded_schema_parses_into_its_own_cell() {
+        let expected = [
+            (ProviderKind::Indexer, "Newznab"),
+            (ProviderKind::DownloadClient, "Sabnzbd"),
+            (ProviderKind::Notification, "PlexServer"),
+            (ProviderKind::Metadata, "XbmcMetadata"),
+        ];
+        for personality in [Personality::Sonarr, Personality::Radarr] {
+            for kind in KINDS {
+                assert!(!all(personality, kind).is_empty(), "{personality:?} {kind:?}");
+            }
+            for (kind, implementation) in expected {
+                assert!(
+                    lookup(personality, SchemaKind::Provider(kind), implementation).is_some(),
+                    "{personality:?} {implementation}"
+                );
+            }
+        }
+        let cells: std::collections::BTreeSet<usize> = KINDS.iter().map(|k| place(&SONARR, *k).0).collect();
+        assert_eq!(cells.len(), KINDS.len());
+    }
 
     /// The `supportsOn*` the resource shows come from the schema the real
     /// Radarr printed; the notifications Unarr drives declare the same.
