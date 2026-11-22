@@ -39,16 +39,16 @@ ones left in the work directory, ``<UNARR_CACHE or .cache>/bump/<app>``
     pinned release the same way, to tell what any recording changes from
     what the new release changes.
 ``apply``
-    Writes the repository: ``upstream/<app>.pin`` (version, build time,
-    migration, SHA-256), not the cursor; the recordings, after comparing
-    them with the
-    committed ones; the old binary removed from the cache and ``make
-    ui-<app>`` run, which downloads the tarball again and checks it against
-    the new pin; the test vectors of the whole new tag
-    (``scripts/port-vectors.py``), in place of the old ones; the importer's
-    migration range checked. It never runs the original and reads the work
-    directory as untrusted: only the files a request list names are copied,
-    and each is checked first.
+    Checks first, then writes. The checks: the recordings compared with
+    HEAD's (only the files a request list names, each one checked: the work
+    directory is untrusted); the triage's clone of upstream fetched and the
+    test vectors of the whole new tag made apart (``scripts/port-vectors.py``);
+    the old binary removed from the cache and the web UI copied by the
+    fixture script (``ui``) from a tarball it downloads again and checks
+    against the fetched SHA-256. Only then the writes: the recordings,
+    ``upstream/<app>.pin`` (version, build time, migration, SHA-256), not
+    the cursor, and the vectors in place of the old ones. The importer's
+    migration range is read. It never runs the original.
 ``test``
     ``cargo test --workspace --no-fail-fast`` and the scripts' tests; each
     failure run once more (``--rerun``), to tell a flaky test from a broken
@@ -84,6 +84,7 @@ import importlib.util
 import io
 import json
 import os
+import posixpath
 import re
 import shutil
 import sqlite3
@@ -352,7 +353,7 @@ def parse_header(text: str, list_dir: str) -> dict[str, str]:
     for var, own in (("GOLDEN_REQUESTS", f"{list_dir}/requests.txt"), ("GOLDEN_OUT", list_dir)):
         if var in env and env[var].rstrip("/") != own:
             die(f"{list_dir}/requests.txt: the header's {var}={env[var]} is not the list's own ({own})")
-    if "GOLDEN_SETUP" in env and not env["GOLDEN_SETUP"].startswith(list_dir + "/"):
+    if "GOLDEN_SETUP" in env and not posixpath.normpath(env["GOLDEN_SETUP"]).startswith(list_dir + "/"):
         die(f"{list_dir}/requests.txt: GOLDEN_SETUP {env['GOLDEN_SETUP']} is outside the list's directory")
     return env
 
@@ -473,9 +474,12 @@ def compare_json(old, new) -> dict:
     if golden and old.get("status") != new.get("status"):
         return {"kind": "status", "status": [old.get("status"), new.get("status")],
                 "values": value_diff(normalise(old.get("body")), normalise(new.get("body")))}
+    if golden and old.get("request") != new.get("request"):
+        return {"kind": "values", "values": [f"request: {short(old.get('request'))} -> {short(new.get('request'))}"]
+                + value_diff(normalise(old.get("body")), normalise(new.get("body")), limit=7)}
     if golden:
         a, b = old.get("body"), new.get("body")
-        if a == b and old.get("request") == new.get("request"):
+        if a == b:
             return {"kind": "same"}
     else:
         a, b = old, new
@@ -770,9 +774,12 @@ def check_tarball(path: Path, app: App) -> int:
             if member.isdev() or member.isfifo():
                 die(f"{path.name}: device entry {name!r}")
             if member.issym() or member.islnk():
-                target = Path(name).parent / member.linkname
-                if member.linkname.startswith("/") or ".." in target.parts:
-                    die(f"{path.name}: link {name!r} points outside the archive")
+                # A symbolic link is read from its directory, a hard link
+                # from the archive's root.
+                base = posixpath.dirname(name) if member.issym() else ""
+                target = posixpath.normpath(posixpath.join(base, member.linkname))
+                if member.linkname.startswith("/") or not (target == app.name or target.startswith(app.name + "/")):
+                    die(f"{path.name}: link {name!r} points outside {app.name}/")
             if name == f"{app.name}/{app.name}" and member.isfile():
                 binary = True
     if not binary:
@@ -897,6 +904,11 @@ def record_with(ctx: Context, version: str, sha: str, cache: Path, out_root: Pat
     script = ["bash", str(app.fixture_script), "golden"]
     result: dict = {"version": version, "lists": []}
     data = cache / "golden-data"
+    # The logs of this recording only: what an earlier run left would be
+    # read as this one's (the metadata misses).
+    if logs.exists():
+        shutil.rmtree(logs)
+    logs.mkdir(parents=True)
     if migrate:
         empty = ctx.path("migrate", "requests.txt")
         empty.parent.mkdir(parents=True, exist_ok=True)
@@ -924,6 +936,9 @@ def record_with(ctx: Context, version: str, sha: str, cache: Path, out_root: Pat
         if g.key == "golden":
             env["SCHEMAS_OUT"] = str(out_root / "schemas")
         log(f"recording {g.key} ({len(g.names)} answers) with {app.name} {version}")
+        # The fixture script starts the mock's log afresh, but only once it
+        # gets that far: the previous list's log must not pass for this one's.
+        (cache / "mock-requests.jsonl").unlink(missing_ok=True)
         started = time.monotonic()
         code = run(script, logs / f"{g.key}.log", env)
         entry = {"list": g.key, "exit": code, "seconds": round(time.monotonic() - started, 1)}
@@ -1123,14 +1138,14 @@ def step_apply(ctx: Context) -> None:
     app = ctx.app
     pin_path, lock_path = UPSTREAM / f"{app.key}.pin", UPSTREAM / f"{app.key}.lock"
     if ctx.dry_run:
-        print(f"apply: writes {pin_path.relative_to(REPO)} (version, build_time, migration, sha256); "
+        print("apply: checks first, writes after")
+        print(f"  compares the recordings with HEAD's tests/fixtures/{app.key}/golden*/ and {app.schemas}/")
+        print("  fetches the triage's clone and makes the vectors of the tag apart (scripts/port-vectors.py)")
+        print(f"  removes {fixture_cache(app) / app.name}; {app.fixture_script.relative_to(REPO)} ui downloads the "
+              "tarball again, checks it against the fetched SHA-256 and copies the web UI")
+        print(f"  then writes the recordings, {pin_path.relative_to(REPO)} (version, build_time, migration, sha256) "
+              f"and {app.vectors}/{{{','.join(VECTOR_AREAS.values())}}} (files gone upstream removed); "
               f"{lock_path.relative_to(REPO)} stays where it is (STEPS=cursor when the port is done)")
-        print(f"  copies the recordings over tests/fixtures/{app.key}/golden*/ and {app.schemas}/, "
-              "after comparing them with HEAD")
-        print(f"  removes {fixture_cache(app) / app.name} and runs `make ui-{app.key}` (downloads the tarball again, "
-              "checked against the new pin)")
-        print(f"  regenerates {app.vectors}/{{{','.join(VECTOR_AREAS.values())}}} from the tag "
-              "(scripts/port-vectors.py), files gone upstream removed")
         print(f"  reads MAX_KNOWN_MIGRATION in {app.importer}; raises nothing")
         return
     bump = ctx.bump()
@@ -1147,12 +1162,33 @@ def step_apply(ctx: Context) -> None:
     if record.get("reported_version") != values["version"]:
         die(f"the recording's system/status says {record.get('reported_version')!r}, not {values['version']}")
     started = time.monotonic()
+    # The checks: no tracked file of the repository changes until they
+    # have all passed.
     changes = recorded_changes(ctx, record)
     schemas = schema_changes(ctx)
     baseline = None
     if record.get("baseline"):
         baseline = {"recorded": {k: v for k, v in recorded_changes(ctx, record, "baseline").items() if k != "copy"},
                     "schemas": {k: v for k, v in schema_changes(ctx, "baseline").items() if k != "copy"}}
+    lock = triage.read_lock(lock_path)
+    repo_dir = cache_dir() / "upstream" / f"{app.name}.git"
+    triage.fetch(repo_dir, lock)
+    tag_commit = triage.run_git(repo_dir, "rev-parse", "--verify", "--quiet", f"{bump['to']['tag']}^{{commit}}")
+    if tag_commit.returncode != 0 or tag_commit.stdout.decode().strip() != bump["to"]["commit"]:
+        die(f"{bump['to']['tag']} is not at {bump['to']['commit'][:12]} in {repo_dir}")
+    vectors = vector_changes(ctx, source_of_tag(ctx, bump["to"]["tag"]))
+    binary = fixture_cache(app) / app.name
+    if binary.exists():
+        shutil.rmtree(binary)
+        log(f"removed {binary}")
+    ui_started = time.monotonic()
+    env = dict(os.environ, **{app.version_env: values["version"], app.sha_env: values["sha256"]})
+    code = run(["bash", str(app.fixture_script), "ui"], ctx.path("logs", "ui.log"), env)
+    if code != 0:
+        die(f"the web UI of {values['version']} was not copied (exit {code}; a download that does not match the "
+            f"fetched SHA-256 stops here), see {ctx.path('logs', 'ui.log')}; no tracked file changed")
+    ui_seconds = round(time.monotonic() - ui_started, 1)
+    # The writes.
     for src, dest in changes["copy"] + schemas["copy"]:
         Path(dest).parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(src, dest)
@@ -1160,17 +1196,6 @@ def step_apply(ctx: Context) -> None:
     write_pin(pin_path, values)
     log(f"pinned {app.name} {values['version']} (build {values['build_time']}, migration {values['migration']}); "
         f"the cursor stays at {bump['from']['version']}")
-    binary = fixture_cache(app) / app.name
-    if binary.exists():
-        shutil.rmtree(binary)
-        log(f"removed {binary}")
-    ui_started = time.monotonic()
-    code = run(["make", f"ui-{app.key}"], ctx.path("logs", "make-ui.log"))
-    if code != 0:
-        die(f"make ui-{app.key} failed (exit {code}), see {ctx.path('logs', 'make-ui.log')}")
-    ui_seconds = round(time.monotonic() - ui_started, 1)
-    source = source_of_tag(ctx, bump["to"]["tag"])
-    vectors = vector_changes(ctx, source)
     for src, dest in vectors["write"]:
         Path(dest).parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(src, dest)
@@ -1287,7 +1312,8 @@ def render_summary(work: Path) -> tuple[str, dict]:
                      f"`make bump-{app.key} STEPS=cursor` moves it to `{bump['to']['version']}` "
                      f"(`{bump['to']['commit'][:12]}`), and `test_the_shipped_cursors_are_at_the_pins` "
                      "passes again")
-        lines.append(f"- the web UI of the new tarball (`make ui-{app.key}`, {applied.get('ui_seconds')}s)")
+        lines.append(f"- the web UI of the new tarball, downloaded again and checked against its SHA-256 "
+                     f"({applied.get('ui_seconds')}s)")
         lines.append("")
 
         rec = applied["recordings"]
@@ -1555,7 +1581,7 @@ STEP_FUNCTIONS = {"fetch": step_fetch, "record": step_record, "apply": step_appl
 
 
 def parse_steps(text: str | None) -> list[str]:
-    if not text or text == "all":
+    if not text:
         return list(DEFAULT_STEPS)
     wanted = [s.strip() for s in text.split(",") if s.strip()]
     unknown = [s for s in wanted if s not in STEPS]

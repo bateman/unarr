@@ -126,6 +126,7 @@ class RequestLists(Temp):
             f"#   NEW_KNOB=1 GOLDEN_OUT={d} make golden-radarr\n",
             f"#   GOLDEN_OUT=tests/fixtures/radarr/golden make golden-radarr\n",
             f"#   GOLDEN_SETUP=/tmp/setup.sh GOLDEN_OUT={d} make golden-radarr\n",
+            f"#   GOLDEN_SETUP={d}/../../../../scripts/x.sh GOLDEN_OUT={d} make golden-radarr\n",
         ):
             with self.subTest(header=header), self.assertRaises(SystemExit):
                 bump.parse_header(header, d)
@@ -160,6 +161,12 @@ class Comparing(unittest.TestCase):
         shape = bump.compare_json(old, cases["shape"])
         self.assertEqual(shape["added"], ["/streams", "/streams[]"])
         self.assertEqual(bump.compare_json(old, cases["values"])["values"], ['/title: "A" -> "B"'])
+
+    def test_a_request_that_changed_is_not_noise(self):
+        old = golden({"a": 1}, path="/api/v3/x")
+        change = bump.compare_json(old, golden({"a": 1}, path="/api/v3/x?all=true"))
+        self.assertEqual(change["kind"], "values")
+        self.assertIn("/api/v3/x?all=true", change["values"][0])
 
     def test_values_that_follow_the_clock(self):
         old = golden([{"id": 1, "duration": "00:00:01.2345", "ageMinutes": 3.5, "traceId": "a", "title": "x"}])
@@ -324,6 +331,8 @@ class TheTarball(Temp):
                     info.type = tarfile.DIRTYPE
                 elif kind == "sym":
                     info.type, info.linkname = tarfile.SYMTYPE, link
+                elif kind == "hard":
+                    info.type, info.linkname = tarfile.LNKTYPE, link
                 else:
                     info.size = 2
                 tar.addfile(info, io.BytesIO(b"hi") if kind == "file" else None)
@@ -331,8 +340,8 @@ class TheTarball(Temp):
 
     def test_a_release_archive(self):
         good = self.tarball([("Radarr", "dir", ""), ("Radarr/Radarr", "file", ""), ("Radarr/UI/index.html", "file", ""),
-                             ("Radarr/libx.so", "sym", "libx.so.1")])
-        self.assertEqual(bump.check_tarball(good, RADARR), 4)
+                             ("Radarr/libx.so", "sym", "libx.so.1"), ("Radarr/UI/up", "sym", "../libx.so")])
+        self.assertEqual(bump.check_tarball(good, RADARR), 5)
 
     def test_archives_that_would_write_elsewhere_or_lack_the_binary(self):
         for entries in (
@@ -340,6 +349,8 @@ class TheTarball(Temp):
             [("Radarr/Radarr", "file", ""), ("/etc/evil", "file", "")],
             [("Radarr/Radarr", "file", ""), ("Other/x", "file", "")],
             [("Radarr/Radarr", "file", ""), ("Radarr/link", "sym", "../../etc/passwd")],
+            [("Radarr/Radarr", "file", ""), ("Radarr/link", "sym", "../Other/x")],
+            [("Radarr/Radarr", "file", ""), ("Radarr/hard", "hard", "Other/x")],
             [("Radarr/UI/index.html", "file", "")],
         ):
             with self.subTest(entries=entries), self.assertRaises(SystemExit):
@@ -426,6 +437,9 @@ class Steps(Temp):
     def test_steps_run_in_their_order(self):
         self.assertEqual(bump.parse_steps(None), ["fetch", "record", "apply", "test", "summary"])
         self.assertEqual(bump.parse_steps("cursor"), ["cursor"])
+        # Not an alias of the default steps: those leave the cursor out.
+        with self.assertRaises(SystemExit):
+            bump.parse_steps("all")
         self.assertEqual(bump.parse_steps("summary,apply"), ["apply", "summary"])
         with self.assertRaises(SystemExit):
             bump.parse_steps("fetch,deploy")
@@ -438,7 +452,8 @@ class Steps(Temp):
         text = out.getvalue()
         self.assertFalse(work.exists())
         for expected in ("record: runs Radarr", "golden-library", "GOLDEN_SETUP=tests/fixtures/radarr/golden-blank",
-                         "apply: writes upstream/radarr.pin", "upstream/radarr.lock stays where it is", "make ui-radarr",
+                         "apply: checks first, writes after", "upstream/radarr.pin (version",
+                         "upstream/radarr.lock stays where it is", "scripts/radarr-fixture.sh ui downloads the tarball",
                          "tests/vectors/radarr/{parser,decisionengine}", "test: cargo test", "summary:"):
             self.assertIn(expected, text)
         self.assertNotIn("cursor:", text)
@@ -468,6 +483,75 @@ class Steps(Temp):
             self.assertEqual(bump.cache_dir(), Path("/c"))
         with mock.patch.dict(os.environ, {}, clear=True):
             self.assertEqual(bump.fixture_cache(RADARR), REPO / ".cache" / "radarr")
+
+
+class RecordLogs(Temp):
+    def test_a_recording_reads_no_log_an_earlier_run_left(self):
+        logs, cache = self.tmp / "logs", self.tmp / "cache"
+        logs.mkdir()
+        cache.mkdir()
+        stale = {"method": "GET", "served": "api.radarr.video/v1/movie/1 (missing)"}
+        (logs / "golden-library.mock-requests.jsonl").write_text(json.dumps(stale) + "\n")
+        (cache / "mock-requests.jsonl").write_text(json.dumps(stale) + "\n")
+        ctx = bump.Context(app=RADARR, work=self.tmp / "work")
+        hub = bump.golden_lists(RADARR, ["golden-hub"])
+        # The fixture script fails before it starts the mock.
+        with mock.patch.object(bump, "run", return_value=1), contextlib.redirect_stderr(io.StringIO()):
+            result = bump.record_with(ctx, "7.1.0.300", "1" * 64, cache, self.tmp / "out", logs, hub, migrate=False)
+        self.assertFalse(result["lists"][0]["ok"])
+        self.assertEqual(bump.metadata_misses(logs), {})
+
+
+class ApplyChecksBeforeWriting(Temp):
+    """A failed check leaves the pin, the cursor and the recordings as they were."""
+
+    def setUp(self):
+        super().setUp()
+        self.upstream = self.tmp / "upstream"
+        self.upstream.mkdir()
+        for name in ("radarr.pin", "radarr.lock"):
+            shutil.copy(REPO / "upstream" / name, self.upstream / name)
+        self.before = {p.name: p.read_text() for p in self.upstream.iterdir()}
+        work = self.tmp / "work"
+        bump.write_json(work / "bump.json", {
+            "app": "radarr", "from": {"version": "6.1.0.100", "commit": "a" * 40},
+            "to": {"version": "7.1.0.300", "tag": "v7.1.0.300", "commit": "b" * 40}, "sha256": "c" * 64})
+        bump.write_json(work / "record.json", {
+            "build_time": "2026-11-16T10:00:00Z", "migration": 243, "reported_version": "7.1.0.300",
+            "lists": [{"list": "golden", "ok": True}]})
+        out = work / "recorded" / "golden"
+        out.mkdir(parents=True)
+        (out / "system-status.json").write_text(json.dumps(golden({"version": "7.1.0.300"})))
+        self.ctx = bump.Context(app=RADARR, work=work)
+        for p in (mock.patch.object(bump, "UPSTREAM", self.upstream),
+                  mock.patch.object(bump.triage, "fetch"),
+                  mock.patch.object(bump.shutil, "copyfile", side_effect=AssertionError("a file was written"))):
+            p.start()
+            self.addCleanup(p.stop)
+
+    def assert_unchanged(self):
+        self.assertEqual({p.name: p.read_text() for p in self.upstream.iterdir()}, self.before)
+
+    def test_a_tag_the_clone_does_not_have(self):
+        failed = subprocess.CompletedProcess([], 1, b"", b"")
+        with mock.patch.object(bump.triage, "run_git", return_value=failed), self.assertRaises(SystemExit) as caught:
+            bump.step_apply(self.ctx)
+        self.assertIn("v7.1.0.300 is not at bbbbbbbbbbbb", str(caught.exception))
+        self.assert_unchanged()
+
+    def test_a_tarball_that_does_not_match(self):
+        found = subprocess.CompletedProcess([], 0, ("b" * 40 + "\n").encode(), b"")
+        empty = {"files": {}, "write": [], "delete": []}
+        with mock.patch.object(bump.triage, "run_git", return_value=found), \
+                mock.patch.object(bump, "source_of_tag", return_value=self.tmp), \
+                mock.patch.object(bump, "vector_changes", return_value=empty), \
+                mock.patch.object(bump, "fixture_cache", return_value=self.tmp / "fixture-cache"), \
+                mock.patch.object(bump, "run", return_value=1) as ran, self.assertRaises(SystemExit) as caught:
+            bump.step_apply(self.ctx)
+        self.assertIn("no tracked file changed", str(caught.exception))
+        env = ran.call_args.args[2]
+        self.assertEqual((env["RADARR_VERSION"], env["RADARR_SHA256"]), ("7.1.0.300", "c" * 64))
+        self.assert_unchanged()
 
 
 def write_work(work: Path, subject: str = "Fix `x` | y") -> None:

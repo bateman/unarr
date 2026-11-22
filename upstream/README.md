@@ -40,7 +40,7 @@ recording time), `LISTS` (record only these request lists). The work directory i
 |------|--------------|--------|---------|------------------------|
 | `fetch` | the target from the triage or `TARGET`; the tarball from `https://github.com/<owner>/<repo>/releases/download/v<version>/`, the final host checked to be GitHub's release storage, its entries checked (all under `<App>/`, no link out), its SHA-256 computed and, when the releases came from the API, compared with the digest GitHub publishes | the work directory | GitHub | no |
 | `record` | the fixture script (`scripts/<app>-fixture.sh golden`) on the tarball of the work directory: once with no request, for the migration level of the fixture the original migrates (that database is kept, for the importer's test); then every request list under `tests/fixtures/<app>/golden*/` with the variables of its header; the provider schemas and the localisation file; `db-after.json` and `config-after.xml`, which the headers say were copied by hand; the requests the mock got | the work directory, and the fixture script's `/movies`, `/tv`, `/downloads` | none | yes |
-| `apply` | the pin, not the cursor; the recordings, compared with `HEAD` first; the old binary removed from the cache and `make ui-<app>`, which downloads the tarball again and checks it against the new pin; the vectors of the whole new tag (`scripts/port-vectors.py`), files gone upstream removed; the importer's `MAX_KNOWN_MIGRATION` read | the repository | GitHub | no |
+| `apply` | checks first, writes after. Checks: the recordings compared with `HEAD`; the triage's clone fetched and the vectors of the whole new tag made apart (`scripts/port-vectors.py`); the old binary removed from the cache and the web UI copied by the fixture script from a tarball it downloads again and checks against the fetched SHA-256. Writes: the recordings, the pin (not the cursor), the vectors (files gone upstream removed). The importer's `MAX_KNOWN_MIGRATION` is read | the repository | GitHub | no |
 | `test` | `cargo test --workspace --no-fail-fast` and `make test-scripts`; each failing test run once more (20 at most), to tell a flaky one | the work directory | none | no |
 | `summary` | the release, which recordings changed and how (by list and by area), the schemas and strings, the vectors, the importer, the failing tests and what each printed first, what is left to check by hand, the time each step took | the work directory | none | no |
 | `cursor` | not a default step: once every upstream commit up to the pinned release is handled, the cursor moves to that release and the commit of its tag, read from the triage's clone | the repository | GitHub | no |
@@ -50,10 +50,10 @@ nothing in the repository: in the workflow it runs in a job without
 secrets, which hands the work directory on as an artifact. `apply` reads
 that directory as untrusted: it copies only the files the request lists
 name, refuses links, files over 64 MiB and JSON that does not parse, checks
-the values it pins, and never runs the original. The tarball the UI comes
-from is downloaded again by `apply` and checked against the checksum
-`fetch` computed, so a work directory changed by the original cannot change
-it either.
+the values it pins, and never runs the original. It downloads the tarball
+again and checks it against the checksum `fetch` computed before it writes
+any tracked file: a work directory changed by the original stops it there,
+with the repository as it was.
 
 What the bump leaves to the port, and lists in the summary:
 
