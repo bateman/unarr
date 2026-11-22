@@ -1352,18 +1352,29 @@ fn without_auth(personality: Personality, url_base: &str) -> axum::Router {
     })
 }
 
-const BUILT_SONARR: &str = "Wed, 16 Sep 2026 16:37:42 GMT";
-const BUILT_RADARR: &str = "Mon, 14 Sep 2026 15:54:37 GMT";
+/// The `Last-Modified` of what a client may keep: the build time of the
+/// pinned release (`upstream/<app>.pin`), as .NET's `"r"` format writes it.
+/// Read from the pin, so that a new pin needs no edit here; the format
+/// itself is checked by the unit tests of `src/http.rs`.
+fn built(personality: Personality) -> String {
+    let pin = unarr_core::pin::of(personality).expect("a pinned release");
+    chrono::DateTime::parse_from_rfc3339(pin.build_time)
+        .expect("the pin's build_time")
+        .with_timezone(&chrono::Utc)
+        .format("%a, %d %b %Y %H:%M:%S GMT")
+        .to_string()
+}
 
 /// Rows 4.9, 4.19: every file is kept a year and dated with the build of
 /// the release whose UI is embedded, unless `CacheableSpecification` says
 /// otherwise; its type is ASP.NET's for the extension.
 #[tokio::test]
 async fn static_files_are_kept_a_year_and_typed_as_aspnet_types_them() {
-    for (personality, built, script) in [
-        (Personality::Sonarr, BUILT_SONARR, "application/javascript"),
-        (Personality::Radarr, BUILT_RADARR, "text/javascript"),
+    for (personality, script) in [
+        (Personality::Sonarr, "application/javascript"),
+        (Personality::Radarr, "text/javascript"),
     ] {
+        let built = built(personality);
         let app = without_auth(personality, "");
         let index = format!("/{}", bundle_file(personality, "index-", ".js"));
         for (path, content_type) in [
@@ -1393,7 +1404,7 @@ async fn static_files_are_kept_a_year_and_typed_as_aspnet_types_them() {
                 Some("max-age=31536000, public"),
                 "{path}"
             );
-            assert_eq!(header(&headers, "last-modified"), Some(built), "{path}");
+            assert_eq!(header(&headers, "last-modified"), Some(built.as_str()), "{path}");
             assert_eq!(header(&headers, "pragma"), None, "{path}");
         }
         // Pages are never kept, `oauth.html` among them; `?h=` on the API
@@ -1421,7 +1432,7 @@ async fn static_files_are_kept_a_year_and_typed_as_aspnet_types_them() {
             header(&headers, "cache-control"),
             Some("max-age=31536000, public")
         );
-        assert_eq!(header(&headers, "last-modified"), Some(built));
+        assert_eq!(header(&headers, "last-modified"), Some(built.as_str()));
         // Health checks ask `/ping` in this case: left uncached by choice.
         let (_, headers, _) = ask(&app, "GET", "/ping", &[], "").await;
         assert_eq!(header(&headers, "cache-control"), None);
@@ -1512,7 +1523,10 @@ async fn covers_are_static_files() {
         header(&headers, "cache-control"),
         Some("max-age=31536000, public")
     );
-    assert_eq!(header(&headers, "last-modified"), Some(BUILT_SONARR));
+    assert_eq!(
+        header(&headers, "last-modified"),
+        Some(built(Personality::Sonarr).as_str())
+    );
     assert_eq!(header(&headers, "etag"), None);
     assert_eq!(header(&headers, "accept-ranges"), None);
     // A resized one that was not made is the full one.
@@ -1841,7 +1855,10 @@ async fn the_login_form_fails_when_nothing_is_to_be_signed_into() {
     assert_eq!(status, StatusCode::FOUND);
     assert_eq!(header(&headers, "cache-control"), Some("no-cache,no-store"));
     assert_eq!(header(&headers, "expires"), Some("Thu, 01 Jan 1970 00:00:00 GMT"));
-    assert_eq!(header(&headers, "last-modified"), Some(BUILT_SONARR));
+    assert_eq!(
+        header(&headers, "last-modified"),
+        Some(built(Personality::Sonarr).as_str())
+    );
     assert!(
         logs.entries().iter().all(|e| e.logger != "Auth"),
         "nothing about signing in"

@@ -1,8 +1,8 @@
 """The pinned originals are written in one place, upstream/<app>.pin (issue #9).
 
-Fails when a pinned value (the version, the build time, the tarball's
-SHA-256) is written in a tracked file that is not the pin, so that a new pin
-is one file and nothing is left behind. What may hold such a value, and why:
+Fails when a pinned value (the version, the build time, also as an HTTP
+date, the tarball's SHA-256) is written in a tracked file that is not the
+pin, so that a new pin is one file and nothing is left behind. What may hold such a value, and why:
 
 - upstream/<app>.pin, the source;
 - upstream/<app>.lock, the triage's cursor: its release is where the port
@@ -24,6 +24,8 @@ whose tracked files it reads.
 
 from __future__ import annotations
 
+import datetime
+import email.utils
 import re
 import subprocess
 import unittest
@@ -34,6 +36,13 @@ APPS = ("sonarr", "radarr")
 # The keys whose values are distinctive enough to search for: a migration
 # level is a small number found everywhere.
 SEARCHED = ("version", "build_time", "sha256")
+
+
+def http_date(build_time: str) -> str:
+    """The build time as an HTTP date (`Last-Modified`, .NET's "r"): the
+    other form a copy of it takes."""
+    at = datetime.datetime.strptime(build_time, "%Y-%m-%dT%H:%M:%SZ").replace(tzinfo=datetime.timezone.utc)
+    return email.utils.format_datetime(at, usegmt=True)
 
 EXEMPT_PATHS = {f"upstream/{app}.{ext}" for app in APPS for ext in ("pin", "lock")} | {
     "scripts/tests/test_upstream_triage.py",
@@ -93,6 +102,7 @@ class OneSourcePerPin(unittest.TestCase):
             for key in SEARCHED:
                 self.assertIn(key, pin, f"upstream/{app}.pin")
                 self.needles[f"{app} {key}"] = pin[key]
+            self.needles[f"{app} build_time as an HTTP date"] = http_date(pin["build_time"])
 
     def test_no_pinned_value_is_written_outside_its_pin(self):
         found = []
@@ -112,6 +122,11 @@ class OneSourcePerPin(unittest.TestCase):
         self.assertEqual(len(copies("crates/x/src/a.rs", f'const V: &str = "{version}";', self.needles)), 1)
         self.assertEqual(len(copies("scripts/x.sh", f'V="${{V:-{version}}}"', self.needles)), 1)
         self.assertEqual(len(copies("x.yml", f"key: v{version}", self.needles)), 1)
+
+    def test_the_build_time_as_an_http_date_is_a_copy(self):
+        self.assertEqual(http_date("2024-02-29T08:05:09Z"), "Thu, 29 Feb 2024 08:05:09 GMT")
+        built = self.needles["sonarr build_time as an HTTP date"]
+        self.assertEqual(len(copies("crates/x/tests/a.rs", f'const BUILT: &str = "{built}";', self.needles)), 1)
 
     def test_comments_and_backup_names_are_not_copies(self):
         version = self.needles["radarr version"]
