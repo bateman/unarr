@@ -461,8 +461,9 @@ impl AppState {
         self.0.starting.load(std::sync::atomic::Ordering::Acquire)
     }
 
-    /// Answer 503 until the runtime has started (`IsStarting`); the daemon
-    /// sets it before it listens, [`Self::start_runtime`] clears it.
+    /// Answer 503 until the runtime has started (`IsStarting`). The caller
+    /// does both ends: the daemon sets it before it listens and clears it
+    /// once [`Self::start_runtime`] has returned, which leaves it alone.
     pub fn set_starting(&self, starting: bool) {
         self.0
             .starting
