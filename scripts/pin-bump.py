@@ -7,7 +7,7 @@ new original what is tied to the pin, and writes a summary that is the
 starting material of the port::
 
     scripts/pin-bump.py --app radarr --dry-run
-    scripts/pin-bump.py --app radarr --target 7.0.3.10918 --releases tags
+    scripts/pin-bump.py --app radarr --target X.Y.Z.BUILD --releases tags
     scripts/pin-bump.py --app radarr --steps fetch,record      # the job without secrets
     scripts/pin-bump.py --app radarr --steps apply,test,summary --work DIR
 
@@ -1522,7 +1522,7 @@ def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("--app", required=True, choices=sorted(APPS))
     ap.add_argument("--steps", help=f"comma-separated, in any order; run in the order {','.join(STEPS)} (default: all)")
-    ap.add_argument("--target", help="the release to go to, instead of the triage's rule (e.g. 7.0.3.10918)")
+    ap.add_argument("--target", help="the release to go to, instead of the triage's rule (X.Y.Z.BUILD)")
     ap.add_argument("--releases", default="api", metavar="api|tags|FILE",
                     help="where the triage tells stable releases from pre-releases (default: api)")
     ap.add_argument("--work", type=Path, help="the work directory (default: <UNARR_CACHE or .cache>/bump/<app>)")
