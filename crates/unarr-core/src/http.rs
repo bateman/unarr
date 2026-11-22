@@ -12,54 +12,51 @@ use std::time::Duration;
 pub type HttpClient = reqwest::Client;
 
 /// `User-Agent` towards indexers, download clients and notification
-/// targets. The originals send `Sonarr/<version> (ubuntu 24.04)`; Unarr
-/// names itself and the personality the request is for,
-/// `UnarrSonarr/<version> (linux x86_64)`, since indexers and trackers keep
-/// statistics by it: Prowlarr counts the queries and the grabs of each
-/// application apart. Prowlarr's name for a client is the word of letters
-/// and digits that opens the agent, up to the `/` (`UserAgentParser`,
-/// `^(?<agent>[a-z0-9]+)(?:\/.+(?:\(.*\))?|$)`, case ignored):
-/// `Unarr/Sonarr` would be counted as `Unarr` again, and `Unarr (Sonarr)`
-/// or `Unarr-Sonarr` as `Other`.
+/// targets: the pinned original's, `Sonarr/<version> (ubuntu 24.04)` for
+/// the Sonarr personality, as Unarr replaces the original rather than runs
+/// beside it (`docs/DESIGN.md` section 21.13). Indexers, trackers and
+/// Prowlarr, which keep statistics by it, see the application they saw
+/// before, and Prowlarr counts each personality apart under the
+/// original's name. A personality with no pin yet (Lidarr) goes by
+/// Unarr's own name.
 pub fn user_agent(personality: crate::Personality) -> String {
+    original_user_agent(personality).unwrap_or_else(unarr_user_agent)
+}
+
+/// `User-Agent` towards the Servarr metadata proxies (Skyhook and the
+/// Servarr services, `api.radarr.video`): the pinned original's, as
+/// towards every other upstream, but for a reason of its own and with an
+/// exit condition of its own (`docs/DESIGN.md` section 7): the responses,
+/// rate limits and any user-agent-dependent behaviour are the ones the
+/// goldens were recorded with. When the maintainer says so, this becomes
+/// Unarr's own name, the Servarr team is told, and the goldens are
+/// recorded again; it is apart from [`user_agent`] so that the switch
+/// does not reach the indexers. Lidarr, which emulates nothing yet, goes
+/// by Unarr's own name.
+pub fn servarr_proxy_user_agent(personality: crate::Personality) -> String {
+    original_user_agent(personality).unwrap_or_else(unarr_user_agent)
+}
+
+/// The platform the originals report in their user agent on the
+/// maintainer's hosts; the version is the pin's (`upstream/<app>.pin`,
+/// [`crate::pin`]).
+const ORIGINAL_PLATFORM: &str = "ubuntu 24.04";
+
+/// The pinned original's own `User-Agent`, built here and nowhere else;
+/// none for a personality with no pin.
+fn original_user_agent(personality: crate::Personality) -> Option<String> {
+    crate::pin::of(personality)
+        .map(|pin| format!("{}/{} ({ORIGINAL_PLATFORM})", personality.app_name(), pin.version))
+}
+
+/// Unarr's own name, for a personality with no original pinned.
+fn unarr_user_agent() -> String {
     format!(
-        "Unarr{}/{} ({} {})",
-        personality.app_name(),
+        "Unarr/{} ({} {})",
         env!("CARGO_PKG_VERSION"),
         std::env::consts::OS,
         std::env::consts::ARCH
     )
-}
-
-/// `User-Agent` towards the Servarr metadata proxies (Skyhook and the
-/// Servarr services), and only towards them: the original's, exactly as
-/// the pinned Sonarr sends it. A deliberate, temporary exception to Unarr
-/// naming itself (`docs/DESIGN.md` section 7): the responses, rate limits
-/// and any user-agent-dependent behaviour are then the ones the goldens
-/// were recorded with. Once phase 3b's exit criteria are met this becomes
-/// [`user_agent`], the Servarr team is told, and the goldens are recorded
-/// again. Read by [`servarr_proxy_user_agent`] alone; nothing else may
-/// depend on which one is in use.
-///
-/// The same exception holds for the Radarr personality towards
-/// `api.radarr.video`, under the same exit condition: the pinned Radarr's
-/// user agent while the movie metadata path is being established. The
-/// version in each is the pin's (`upstream/<app>.pin`, [`crate::pin`]); the
-/// platform is the one the originals report on the maintainer's hosts.
-const SERVARR_PROXY_PLATFORM: &str = "ubuntu 24.04";
-
-/// The `User-Agent` a personality sends to the Servarr metadata proxies:
-/// the pinned original's, built here and nowhere else. Lidarr, which
-/// emulates nothing yet, goes by Unarr's own name.
-pub fn servarr_proxy_user_agent(personality: crate::Personality) -> String {
-    match crate::pin::of(personality) {
-        Some(pin) => format!(
-            "{}/{} ({SERVARR_PROXY_PLATFORM})",
-            personality.app_name(),
-            pin.version
-        ),
-        None => user_agent(personality),
-    }
 }
 
 /// Build a client with Unarr's defaults, following the process's proxy
@@ -304,25 +301,30 @@ mod tests {
         let _ = shared();
     }
 
-    /// Each personality goes by Unarr's name joined to its own, one word
-    /// before the `/`, as Prowlarr needs to count it apart.
+    /// Each personality goes by its pinned original's user agent, which
+    /// Prowlarr counts under the original's name; Lidarr, with no pin, by
+    /// Unarr's own.
     #[test]
-    fn the_user_agent_names_unarr_and_the_personality() {
+    fn the_user_agent_is_the_pinned_originals() {
         use crate::Personality;
-        let version = env!("CARGO_PKG_VERSION");
-        for (personality, name) in [
-            (Personality::Sonarr, "UnarrSonarr"),
-            (Personality::Radarr, "UnarrRadarr"),
-            (Personality::Lidarr, "UnarrLidarr"),
-        ] {
-            let agent = user_agent(personality);
-            assert!(agent.starts_with(&format!("{name}/{version} (")), "{agent}");
-            assert_eq!(prowlarr_source(&agent), name, "{agent}");
-        }
+        assert_eq!(
+            user_agent(Personality::Sonarr),
+            format!("Sonarr/{} (ubuntu 24.04)", crate::pin::SONARR.version)
+        );
+        assert_eq!(
+            user_agent(Personality::Radarr),
+            format!("Radarr/{} (ubuntu 24.04)", crate::pin::RADARR.version)
+        );
+        assert_eq!(prowlarr_source(&user_agent(Personality::Sonarr)), "Sonarr");
+        assert_eq!(prowlarr_source(&user_agent(Personality::Radarr)), "Radarr");
+        assert!(user_agent(Personality::Lidarr).starts_with("Unarr/"));
+        assert_eq!(prowlarr_source(&user_agent(Personality::Lidarr)), "Unarr");
     }
 
-    /// `UserAgentParser.ParseSource` of Prowlarr 2.x: the leading word of
-    /// letters and digits, followed by `/` and more or by the end;
+    /// `UserAgentParser.ParseSource` of Prowlarr 2.x, which names the
+    /// client in its statistics: the leading word of letters and digits,
+    /// followed by `/` and more or by the end
+    /// (`^(?<agent>[a-z0-9]+)(?:\/.+(?:\(.*\))?|$)`, case ignored);
     /// `Other` when there is none, or for a browser.
     fn prowlarr_source(agent: &str) -> &str {
         let agent = agent.trim();
@@ -338,16 +340,6 @@ mod tests {
         } else {
             "Other"
         }
-    }
-
-    /// The shapes that would not tell the personalities apart in Prowlarr.
-    #[test]
-    fn prowlarr_counts_other_shapes_together_or_as_other() {
-        assert_eq!(prowlarr_source("Unarr/Sonarr"), "Unarr");
-        assert_eq!(prowlarr_source("Unarr/0.1.0 (Radarr)"), "Unarr");
-        assert_eq!(prowlarr_source("Unarr (Sonarr)"), "Other");
-        assert_eq!(prowlarr_source("Unarr-Sonarr/0.1.0"), "Other");
-        assert_eq!(prowlarr_source("Sonarr/4.0.20.3014 (ubuntu 24.04)"), "Sonarr");
     }
 
     /// The clients of a personality go by its name, the plain and the one
@@ -402,7 +394,7 @@ mod tests {
             servarr_proxy_user_agent(Personality::Radarr),
             format!("Radarr/{} (ubuntu 24.04)", crate::pin::RADARR.version)
         );
-        assert!(servarr_proxy_user_agent(Personality::Lidarr).starts_with("UnarrLidarr/"));
+        assert!(servarr_proxy_user_agent(Personality::Lidarr).starts_with("Unarr/"));
     }
 
     use crate::outbound::{CertificateValidation, Handle, Outbound, Proxy, ProxyType};

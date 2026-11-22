@@ -58,9 +58,11 @@ is in English only, allowed hosts and trusted networks apply without a
 restart, a backup download is never kept by a cache (the originals let one
 keep it a year), notifications other than Discord, the webhook and Plex keep
 their settings and send nothing. Towards indexers, download clients and
-notification targets each personality goes by a name of its own,
-`UnarrSonarr/<version>` or `UnarrRadarr/<version>`, so that Prowlarr's
-statistics count them apart (`docs/DESIGN.md`, section 21.13).
+notification targets each personality sends the pinned original's user
+agent, `Sonarr/4.0.20.3014 (ubuntu 24.04)` or `Radarr/6.4.4.10685 (ubuntu
+24.04)`, as it already did towards the Servarr metadata servers: indexers
+and Prowlarr see the application Unarr replaces (`docs/DESIGN.md`, section
+21.13).
 
 **Fixed before the first version**: the Plex connection's *Authenticate
 with Plex.tv* gave no token and its *Server* menu stayed empty, every
