@@ -259,8 +259,10 @@ fn mode(name: &str) -> Mode {
         n if n.starts_with("downloadclient-unreachable") || n == "downloadclient-testall" => {
             Mode::Exact(&["detailedDescription"])
         }
-        "diskspace" | "system-task" | "system-task-after" | "log" | "update" | "command"
-        | "signalr-negotiate" => Mode::Shape,
+        "diskspace" | "system-task" | "system-task-after" | "log" | "command" | "signalr-negotiate" => {
+            Mode::Shape
+        }
+        "update" => Mode::InstalledUpdate,
         // The zip carries each application's name, version and clock.
         "system-backup" => Mode::Exact(&["id", "name", "path", "size", "time"]),
         // Sonarr builds `contentsUrl` from a route that no longer exists

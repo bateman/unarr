@@ -297,7 +297,8 @@ fn mode(name: &str) -> Mode {
         n if n.starts_with("downloadclient-unreachable") || n == "downloadclient-testall" => {
             Mode::Exact(&["detailedDescription"])
         }
-        "diskspace" | "system-task" | "system-task-1" | "log" | "update" | "signalr-negotiate" => Mode::Shape,
+        "diskspace" | "system-task" | "system-task-1" | "log" | "signalr-negotiate" => Mode::Shape,
+        "update" => Mode::InstalledUpdate,
         // Radarr builds `contentsUrl` from a route that no longer exists
         // (`/api/v1//radarr.txt`); Unarr's names the route that answers.
         // Its ids follow the order the directory lists the files in.
