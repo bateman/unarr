@@ -1437,13 +1437,17 @@ def render_summary(work: Path) -> tuple[str, dict]:
     lines += ["## Left to check by hand", ""]
     misses = record.get("metadata_misses", {}) if record else {}
     base_misses = (record.get("baseline") or {}).get("metadata_misses", {}) if record else {}
+    if record and record.get("baseline") is not None:
+        # What the pinned release missed too is no news of the new one.
+        misses = {k: [m for m in v if m not in base_misses.get(k, [])] for k, v in misses.items()}
+        misses = {k: v for k, v in misses.items() if v}
     if misses:
         lines.append("- Metadata (`tests/fixtures/metadata/`): the mock had no recorded answer for "
-                     + "; ".join(f"`{k}` " + ", ".join(md(m, 100) for m in v[:6]) for k, v in misses.items())
-                     + ". If the new original asks for something else, record it with `RECORD_METADATA=1`"
-                     + (" (the pinned release's own misses, for comparison: "
+                     + "; ".join(f"`{k}` " + ", ".join(md(m, 140) for m in v[:6])
+                                 + (f" and {len(v) - 6} more" if len(v) > 6 else "") for k, v in misses.items())
+                     + (" (the pinned release's own misses left out: "
                         + "; ".join(f"`{k}` {len(v)}" for k, v in base_misses.items()) + ")" if base_misses else "")
-                     + ".")
+                     + ". If the new original asks for something else, record it with `RECORD_METADATA=1`.")
     else:
         lines.append("- Metadata (`tests/fixtures/metadata/`): every request the new original made had a recorded "
                      "answer; a changed answer shape still shows only on the metadata servers' own check.")
