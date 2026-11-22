@@ -1,5 +1,5 @@
 {
- "source": "sonarr/src/NzbDrone.Core.Test/DecisionEngineTests/SingleEpisodeAgeDownloadDecisionFixture.cs",
+ "source": "src/NzbDrone.Core.Test/DecisionEngineTests/SingleEpisodeAgeDownloadDecisionFixture.cs",
  "methods": {
   "single_episode_release": {
    "params": [

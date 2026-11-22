@@ -1,5 +1,5 @@
 {
- "source": "NzbDrone.Core.Test/ParserTests/PathParserFixture.cs",
+ "source": "src/NzbDrone.Core.Test/ParserTests/PathParserFixture.cs",
  "methods": {
   "should_parse_from_path": {
    "params": [

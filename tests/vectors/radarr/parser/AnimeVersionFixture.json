@@ -1,5 +1,5 @@
 {
- "source": "radarr/src/NzbDrone.Core.Test/ParserTests/AnimeVersionFixture.cs",
+ "source": "src/NzbDrone.Core.Test/ParserTests/AnimeVersionFixture.cs",
  "methods": {
   "should_be_able_to_parse_repack": {
    "params": [

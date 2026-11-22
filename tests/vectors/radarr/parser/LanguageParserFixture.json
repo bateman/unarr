@@ -1,5 +1,5 @@
 {
- "source": "radarr/src/NzbDrone.Core.Test/ParserTests/LanguageParserFixture.cs",
+ "source": "src/NzbDrone.Core.Test/ParserTests/LanguageParserFixture.cs",
  "methods": {
   "should_parse_language_english": {
    "params": [

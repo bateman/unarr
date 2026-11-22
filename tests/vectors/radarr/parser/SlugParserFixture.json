@@ -1,5 +1,5 @@
 {
- "source": "radarr/src/NzbDrone.Core.Test/ParserTests/SlugParserFixture.cs",
+ "source": "src/NzbDrone.Core.Test/ParserTests/SlugParserFixture.cs",
  "methods": {
   "should_replace_accents": {
    "params": [

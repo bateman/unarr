@@ -1,5 +1,5 @@
 {
- "source": "radarr/src/NzbDrone.Core.Test/DecisionEngineTests/RawDiskSpecificationFixture.cs",
+ "source": "src/NzbDrone.Core.Test/DecisionEngineTests/RawDiskSpecificationFixture.cs",
  "methods": {
   "should_return_false_if_matches_disc_format": {
    "params": [

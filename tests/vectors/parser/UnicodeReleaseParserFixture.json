@@ -1,5 +1,5 @@
 {
- "source": "NzbDrone.Core.Test/ParserTests/UnicodeReleaseParserFixture.cs",
+ "source": "src/NzbDrone.Core.Test/ParserTests/UnicodeReleaseParserFixture.cs",
  "methods": {
   "should_parse_chinese_anime_releases": {
    "params": [

@@ -1,5 +1,5 @@
 {
- "source": "NzbDrone.Core.Test/ParserTests/MiniSeriesEpisodeParserFixture.cs",
+ "source": "src/NzbDrone.Core.Test/ParserTests/MiniSeriesEpisodeParserFixture.cs",
  "methods": {
   "should_parse_mini_series_episode": {
    "params": [

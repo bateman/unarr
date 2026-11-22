@@ -1,5 +1,5 @@
 {
- "source": "NzbDrone.Core.Test/ParserTests/ParsingServiceTests/GetEpisodesFixture.cs",
+ "source": "src/NzbDrone.Core.Test/ParserTests/ParsingServiceTests/GetEpisodesFixture.cs",
  "methods": {
   "should_use_scene_numbering_when_scene_season_number_has_value": {
    "params": [

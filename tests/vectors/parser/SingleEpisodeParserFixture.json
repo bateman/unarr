@@ -1,5 +1,5 @@
 {
- "source": "NzbDrone.Core.Test/ParserTests/SingleEpisodeParserFixture.cs",
+ "source": "src/NzbDrone.Core.Test/ParserTests/SingleEpisodeParserFixture.cs",
  "methods": {
   "should_parse_single_episode": {
    "params": [

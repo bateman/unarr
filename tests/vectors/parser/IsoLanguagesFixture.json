@@ -1,5 +1,5 @@
 {
- "source": "NzbDrone.Core.Test/ParserTests/IsoLanguagesFixture.cs",
+ "source": "src/NzbDrone.Core.Test/ParserTests/IsoLanguagesFixture.cs",
  "methods": {
   "should_return_iso_language_for_English": {
    "params": [

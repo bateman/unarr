@@ -1,5 +1,5 @@
 {
- "source": "radarr/src/NzbDrone.Core.Test/ParserTests/EditionParserFixture.cs",
+ "source": "src/NzbDrone.Core.Test/ParserTests/EditionParserFixture.cs",
  "methods": {
   "should_parse_edition": {
    "params": [
