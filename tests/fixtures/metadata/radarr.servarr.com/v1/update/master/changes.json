@@ -1,0 +1,144 @@
+[
+ {
+  "version": "7.0.3.10918",
+  "releaseDate": "2026-11-16T01:40:22",
+  "filename": "Radarr.master.7.0.3.10918.linux-core-x64.tar.gz",
+  "url": "https://github.com/Radarr/Radarr/releases/download/v7.0.3.10918/Radarr.master.7.0.3.10918.linux-core-x64.tar.gz",
+  "changes": {
+   "new": [
+    "Replace HTML Encoded values in release titles",
+    "Add custom headers to Ntfy.sh connection",
+    "Remove deprecated Kometa metadata",
+    "Full Transmission label support",
+    "Display multiple audio and subtitles streams in media info",
+    "Calculate custom score using renamed filename before importing",
+    "Add Irish language",
+    "Sorting movies index and discover by popularity",
+    "Trakt Smart List import list",
+    "OIDC authentication",
+    "Support PEM format for SSL certificates",
+    "Allow bypassing authentication for Localhost",
+    "Bump FFMpegCore to 5.4.0 and FFprobe to 8.0.1",
+    "Removed Special Handling of Reflinks for BTRFS and ZFS",
+    "Bump .NET to 10",
+    "Option to show Rotten Tomatoes rating in Discover overview view"
+   ],
+   "fixed": [
+    "Issue extracting subtitle information for unknown movies",
+    "Matching searched movie by IMDb ID from indexer results [ #12048 ]",
+    "Interactive search failing when a release couldn't be processed",
+    "Prevent upgrades for not yet scanned deleted files with unmonitor deleted movies on",
+    "Don't log Postgres password during database migration",
+    "Trakt audio channels formatted with host culture",
+    "Wildcard IP addresses in Allowed Hosts",
+    "Avoid marking grab as failed when qBittorrent already has that release",
+    "Parse DTS-HD MA + DTS:X as DTS-X in media info",
+    "NZBGet history message showing {scriptStatus} token",
+    "update every matching Plex section",
+    "Don't cache media covers that aren't downloaded",
+    "Manual Interaction - Required notifications failing for unknown movies (#11716)"
+   ]
+  },
+  "hash": "1737e72150ea991c8f224fcf529c419b7e6c567ba672cbf27a61f11c9a51fe8e",
+  "branch": "master"
+ },
+ {
+  "version": "6.4.4.10685",
+  "releaseDate": "2026-09-16T18:13:40",
+  "filename": "Radarr.master.6.4.4.10685.linux-core-x64.tar.gz",
+  "url": "https://github.com/Radarr/Radarr/releases/download/v6.4.4.10685/Radarr.master.6.4.4.10685.linux-core-x64.tar.gz",
+  "changes": {
+   "new": [
+    "Filter movies by movie file quality",
+    "Add Trusted Networks setting",
+    "Add hostname validation",
+    "Include External IDs for movies with links",
+    "Search movies by original title from page header",
+    "Use translations for days of week",
+    "RQBit download client [ #11180 ]"
+   ],
+   "fixed": [
+    "Improve logging for 'Allowed Hosts' and 'Trusted Networks'",
+    "Switch theme automatically on system change",
+    "Refactor showing grabbed/blocklisted releases in Interactive Search",
+    "Importing single files from Freebox",
+    "Re-grabbing a torrent that was already imported should re-import",
+    "Unexpected languages stored in DB will be treated as Unknown",
+    "Ignore invalid languages during Manual Import",
+    "Connecting to Jellyfin 12+ (#11663)",
+    "Format of timestamps for Discord notifications from some systems",
+    "Don't allow pushed releases to bypass pending releases that recently expired",
+    "Trakt OAuth URL",
+    "Parsing anime releases that contain year in the movie title",
+    "Broken Trakt links",
+    "Parsing quality and languages when manual importing item with multiple movies error",
+    "Parse Celdra as release group",
+    "Improve cache busting for covers using a hash instead of file modification time",
+    "Error when fetching non-existing tags in import script",
+    "Validate source, modifier and resolution specifications",
+    "Trakt import list crash on watchlist entry with null TMDB ID [ #11519 ]",
+    "Exclude streaming extensions for probing media info"
+   ]
+  },
+  "hash": "a1d726129535e739d4efaf93b5fdd771bb1c78349f55ceac70e365e37b5a12a3",
+  "branch": "master"
+ },
+ {
+  "version": "6.3.0.10514",
+  "releaseDate": "2026-07-12T16:54:55",
+  "filename": "Radarr.master.6.3.0.10514.linux-core-x64.tar.gz",
+  "url": "https://github.com/Radarr/Radarr/releases/download/v6.3.0.10514/Radarr.master.6.3.0.10514.linux-core-x64.tar.gz",
+  "changes": {
+   "new": [],
+   "fixed": [
+    "Importing new items from Simkl lists",
+    "Bump FFProbe to 5.1.10",
+    "Custom formats with year for imported files"
+   ]
+  },
+  "hash": "41d6455c037ff267c5ad5a0f0de4502cebe8f89ec3d051da97851933d48a4047",
+  "branch": "master"
+ },
+ {
+  "version": "6.2.1.10461",
+  "releaseDate": "2026-06-09T19:31:36",
+  "filename": "Radarr.master.6.2.1.10461.linux-core-x64.tar.gz",
+  "url": "https://github.com/Radarr/Radarr/releases/download/v6.2.1.10461/Radarr.master.6.2.1.10461.linux-core-x64.tar.gz",
+  "changes": {
+   "new": [
+    "Postgres Connection String option",
+    "Bump .NET to 8.0.27",
+    "Simkl Anime List integration (#11465)",
+    "API key support for qBittorrent"
+   ],
+   "fixed": [
+    "Basic auth for qBittorrent",
+    "Reduce data transfer when reading video stream from files (#11364)",
+    "Login with credentials on Qbittorrent 5.2",
+    "Testing qBittorrent after credentials change would always pass tests",
+    "Include quality modifier when augmenting quality from media info",
+    "Downloading backups when path contains a trailing slash"
+   ]
+  },
+  "hash": "4cae05c28b418d17d3f4cb9bc9ddc9d3f536122a9237d67aecd7afb751e52f7e",
+  "branch": "master"
+ },
+ {
+  "version": "6.1.1.10360",
+  "releaseDate": "2026-03-26T13:16:26",
+  "filename": "Radarr.master.6.1.1.10360.linux-core-x64.tar.gz",
+  "url": "https://github.com/Radarr/Radarr/releases/download/v6.1.1.10360/Radarr.master.6.1.1.10360.linux-core-x64.tar.gz",
+  "changes": {
+   "new": [
+    "Parse Group GiLG",
+    "add TTL setting for pushover notifications"
+   ],
+   "fixed": [
+    "Parsing URLs on some systems due to Locale",
+    "(#11303) collection API error when using `Movie CollectionThe` (#11304)"
+   ]
+  },
+  "hash": "3915f4f875206e650856999fe34308c64636a88de6dafccade2d1763264d77dd",
+  "branch": "master"
+ }
+]

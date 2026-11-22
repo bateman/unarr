@@ -1,0 +1,91 @@
+[
+ {
+  "version": "4.0.20.3014",
+  "releaseDate": "2026-09-16T16:40:21.222Z",
+  "filename": "Sonarr.main.4.0.20.3014.linux-x64.tar.gz",
+  "url": "https://github.com/Sonarr/Sonarr/releases/download/v4.0.20.3014/Sonarr.main.4.0.20.3014.linux-x64.tar.gz",
+  "changes": {
+   "new": [
+    "Add Trusted Networks setting",
+    "Add hostname validation"
+   ],
+   "fixed": [
+    "Update help text for Allowed Hosts",
+    "Improve logging for 'Allowed Hosts' and 'Trusted Networks'",
+    "Importing single files from Freebox",
+    "Re-run allowed hosts health check when config updated",
+    "Format of timestamps for Discord notifications from some systems",
+    "Avoid checking for free space if other specifications fail first",
+    "Connecting to Jellyfin 12+",
+    "Exclude streaming extensions for probing media info",
+    "Unexpected languages stored in DB will be treated as Unknown"
+   ]
+  },
+  "hash": "1fc48544b5a3401b2fc3df8d0642c1e6a73a28e41a351169edd9cd8f54770db5",
+  "branch": "main"
+ },
+ {
+  "version": "4.0.19.2979",
+  "releaseDate": "2026-06-26T17:24:52.524Z",
+  "filename": "Sonarr.main.4.0.19.2979.linux-x64.tar.gz",
+  "url": "https://github.com/Sonarr/Sonarr/releases/download/v4.0.19.2979/Sonarr.main.4.0.19.2979.linux-x64.tar.gz",
+  "changes": {
+   "new": [],
+   "fixed": [
+    "Basic auth for qBittorrent",
+    "Bump FFprobe to 5.1.10"
+   ]
+  },
+  "hash": "b691b3584c31c0b5514058dee81071c923f63d59a37d19e32f92fa13eaa153db",
+  "branch": "main"
+ },
+ {
+  "version": "4.0.18.2971",
+  "releaseDate": "2026-06-24T14:51:53.98Z",
+  "filename": "Sonarr.main.4.0.18.2971.linux-x64.tar.gz",
+  "url": "https://github.com/Sonarr/Sonarr/releases/download/v4.0.18.2971/Sonarr.main.4.0.18.2971.linux-x64.tar.gz",
+  "changes": {
+   "new": [
+    "API key support for qBittorrent"
+   ],
+   "fixed": [
+    "Login with credentials on Qbittorrent 5.2",
+    "Testing qBittorrent after credentials change would always pass tests",
+    "Downloading backups when path contains a trailing slash"
+   ]
+  },
+  "hash": "f7f0a6bd7761e9f4fd5bd9aa68989f0c8c2fdd25d0bac4c245d7d8f9201ecda7",
+  "branch": "main"
+ },
+ {
+  "version": "4.0.17.2952",
+  "releaseDate": "2026-03-19T14:56:49.442Z",
+  "filename": "Sonarr.main.4.0.17.2952.linux-x64.tar.gz",
+  "url": "https://github.com/Sonarr/Sonarr/releases/download/v4.0.17.2952/Sonarr.main.4.0.17.2952.linux-x64.tar.gz",
+  "changes": {
+   "new": [],
+   "fixed": [
+    "Plexmatch special episode numbers",
+    "Multiple XML declarations in kodi/xmbc episodes metadata"
+   ]
+  },
+  "hash": "d5142372067d727979421ca7b1d60601ceecd9758af3a7dafacc6ebba831777a",
+  "branch": "main"
+ },
+ {
+  "version": "4.0.16.2944",
+  "releaseDate": "2025-11-05T01:57:31.412Z",
+  "filename": "Sonarr.main.4.0.16.2944.linux-x64.tar.gz",
+  "url": "https://github.com/Sonarr/Sonarr/releases/download/v4.0.16.2944/Sonarr.main.4.0.16.2944.linux-x64.tar.gz",
+  "changes": {
+   "new": [],
+   "fixed": [
+    "qBittorrent /login API success check",
+    "Prevent modals from overflowing screen width",
+    "Default runtime to 45 minutes if unavailable when importing episode files"
+   ]
+  },
+  "hash": "1d4a74c763c5a236c0e6eb577534c5b1e53585e5d2ce189a3e901efb5b2adfcc",
+  "branch": "main"
+ }
+]

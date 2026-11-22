@@ -21,8 +21,12 @@
 # and emptied before each recording; the script refuses to empty a directory
 # it did not mark as its own. Both commands start scripts/mock-servarr.py,
 # whose movie indexers and download clients the requests of milestone 4b
-# register; Radarr runs without the environment's proxy and reaches nothing
-# else.
+# register. Radarr runs with the mock as its proxy, not the environment's,
+# from its first request: the mock answers for its metadata server, the
+# Servarr services (update check, recent releases, notifications, clock)
+# and TMDB's images from tests/fixtures/metadata, and refuses any other
+# host at once, so a recording waits on nothing outside the machine
+# (issue #9; the hosts refused are printed at the end).
 set -euo pipefail
 
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
@@ -125,11 +129,12 @@ start_mock() {
     # under this certificate. RECORD_METADATA=1 lets it fetch an answer it
     # does not have from the real host, once, and keep it.
     local cert="$CACHE/mock-tls.crt" key="$CACHE/mock-tls.key" record=()
-    if [ ! -f "$cert" ]; then
-        openssl req -x509 -newkey rsa:2048 -nodes -days 3650 -subj "/CN=unarr-mock" \
-            -addext "subjectAltName=DNS:api.radarr.video,DNS:radarr.servarr.com,DNS:image.tmdb.org" \
-            -keyout "$key" -out "$cert" 2>/dev/null || die "openssl could not make the mock's certificate"
-    fi
+    # Made anew at each start, so that a certificate left in the cache by
+    # an older script never lacks a host added since. The original trusts
+    # it alone (SSL_CERT_FILE, start_radarr below).
+    openssl req -x509 -newkey rsa:2048 -nodes -days 3650 -subj "/CN=unarr-mock" \
+        -addext "subjectAltName=DNS:api.radarr.video,DNS:radarr.servarr.com,DNS:image.tmdb.org" \
+        -keyout "$key" -out "$cert" 2>/dev/null || die "openssl could not make the mock's certificate"
     [ "${RECORD_METADATA:-0}" = 1 ] && record=(--record-metadata) && log "metadata fixtures missing from tests/fixtures/metadata are fetched from the real hosts"
     python3 -I "$REPO/scripts/mock-servarr.py" --listen "127.0.0.1:$MOCK_PORT" --fixtures "$REPO/tests/fixtures" --log "$logfile" --downloads "$DOWNLOADS_DIR" --movies "$MOVIES_DIR" \
         --tls-cert "$cert" --tls-key "$key" "${record[@]}" 2>"$CACHE/mock.stderr.log" &
@@ -142,6 +147,21 @@ start_mock() {
         sleep 0.5
     done
     die "the mock did not come up, see $CACHE/mock.stderr.log"
+}
+
+# The hosts outside the machine the original asked for and the mock
+# refused (each refusal is also in the mock's log): the recording did not
+# wait on them, and did not reach them either.
+report_refused() {
+    local logfile="$CACHE/mock-requests.jsonl" hosts
+    [ -f "$logfile" ] || return 0
+    hosts="$(python3 -I -c 'import json,re,sys
+seen=set()
+for line in open(sys.argv[1], encoding="utf-8"):
+    m=re.fullmatch(r"(?:connect|proxy) (\S+) refused", json.loads(line).get("served", ""))
+    if m: seen.add(m.group(1))
+print(" ".join(sorted(seen)))' "$logfile")"
+    [ -z "$hosts" ] || log "refused by the mock, so never reached: $hosts"
 }
 
 stop_mock() {
@@ -159,9 +179,20 @@ start_radarr() {
     # The fixture's config names the default port; RADARR_PORT moves the
     # copy, for a run beside an Unarr that serves the same fixture.
     sed -i "s|<Port>[0-9]*</Port>|<Port>$RADARR_PORT</Port>|" "$data/config.xml"
-    # Without the environment's proxy variables: .NET honours them, and the
-    # recording must reach nothing but the mock.
-    env -u HTTPS_PROXY -u https_proxy -u HTTP_PROXY -u http_proxy -u ALL_PROXY -u all_proxy \
+    # The mock is the original's only way out, from its first request: the
+    # update check, the notifications and the clock of the Servarr services
+    # come in the main request list, before any list turns the proxy on in
+    # the settings. .NET takes its default proxy from the environment, so
+    # HTTPS goes to the mock, which answers for the metadata hosts and
+    # refuses every other CONNECT at once; plain HTTP to another host gets
+    # the same refusal. NO_PROXY keeps the mock's own services and the
+    # fixture's dead *.invalid providers on the direct path, where they
+    # fail as before; SSL_CERT_FILE makes the mock's certificate the only
+    # one the original trusts, so its settings (certificate validation
+    # included) and the goldens that show them stay as recorded.
+    env -u ALL_PROXY -u all_proxy -u https_proxy -u http_proxy -u no_proxy -u SSL_CERT_DIR \
+        HTTPS_PROXY="http://127.0.0.1:$MOCK_PORT" HTTP_PROXY="http://127.0.0.1:$MOCK_PORT" \
+        NO_PROXY="localhost,127.0.0.1,::1,.invalid" SSL_CERT_FILE="$CACHE/mock-tls.crt" \
         "$CACHE/Radarr/Radarr" -nobrowser -data="$data" >"$data/radarr.stdout.log" 2>&1 &
     RADARR_PID=$!
     for _ in $(seq 1 120); do
@@ -236,6 +267,7 @@ cmd_golden() {
     fi
     stop_radarr
     stop_mock
+    report_refused
     log "golden files written to $out"
 }
 

@@ -1233,7 +1233,13 @@ been 20 MB since 20 November 2026 (section 21.11).
   mappings cut to those series; XEM's and Simkl's hand-made (XEM refuses
   data-centre networks, Simkl needs an account). The recording Sonarr
   reaches the same files through `scripts/mock-servarr.py` acting as its
-  HTTP proxy.
+  HTTP proxy. Since issue #9 the mock is the recording original's proxy
+  from its first request (`HTTPS_PROXY`, its certificate the only one
+  trusted), not only from the request that sets the proxy in its settings:
+  the Servarr services' update check, recent releases and notifications
+  are answered from recordings named without the original's version, and
+  every other host outside the machine is refused at once, so a recording
+  waits on no external host (`upstream/README.md`).
 - **Series are written by columns.** The refresh writes the provider's
   fields and the cast, never the user's settings; `PUT /series`, the
   editor, the season pass, the import lists' Clean Library and the move
@@ -1608,7 +1614,8 @@ been 20 MB since 20 November 2026 (section 21.11).
   `/movies` that serve made-up movie feeds
   (`tests/fixtures/indexers/movies`) and the four download clients. The
   original runs without the environment's proxy and the fixture's own
-  providers point at `.invalid` hosts, so it reaches nothing else. The
+  providers point at `.invalid` hosts, so it reaches nothing else (since
+  issue #9 its only way out is the mock: see section 14). The
   maintainer's installation contributed facts, not data: that Prowlarr
   manages the indexers (so its sync is what must work), that the delay
   profiles are at zero, and the two queue queries Unpackerr and Cleanuparr

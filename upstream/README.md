@@ -69,10 +69,50 @@ What the bump leaves to the port, and lists in the summary:
 - the Recyclarr exchanges (`tests/fixtures/recyclarr/`), recorded between
   the real Recyclarr and the real original;
 - the metadata answers (`tests/fixtures/metadata/`): the summary lists the
-  requests the mock had no answer for (`RECORD_METADATA=1` records them);
+  requests the mock had no answer for (`RECORD_METADATA=1` records them).
+  The Servarr services' answers (`services.sonarr.tv`,
+  `radarr.servarr.com`: the update check, the recent releases
+  `GET /api/v3/update` lists, the notifications) are named without the
+  query that carries the original's version, so the new original gets the
+  answers recorded once for the old one and the bump never waits on those
+  hosts; a refresh, when they change, is by hand (below);
 - the Bazarr and Prowlarr replays, written from those projects' source;
 - the prose that names the old release, and `docs/originals-comparison.md`
   as `CLAUDE.md` says.
+
+### The recording reaches no host outside the machine
+
+The fixture scripts start the original with `scripts/mock-servarr.py` as
+its proxy from its first request (`HTTPS_PROXY`, `HTTP_PROXY`; the
+loopback and `*.invalid` direct) and the mock's certificate as the only
+one it trusts (`SSL_CERT_FILE`). The mock answers for the metadata hosts
+and the Servarr services from `tests/fixtures/metadata/`, `v1/time` with
+its own clock, and refuses any other host at once (`plex.tv`, which the
+Plex connection asks, is one); the script prints the hosts it refused. So
+`record` needs no network, and a Servarr host that does not answer no
+longer stops a bump: on 2026-11-22 `radarr.servarr.com` did not, and
+`GET /api/v3/update` waited past the recorder's 60 seconds. The original's
+settings are not touched, so the goldens that show them stay as recorded.
+
+What the mock cannot see is a change in those hosts' answers: the metadata
+servers' check (issue #9, section 7) asks them. To refresh an answer of
+the Servarr services, by hand and with the hosts reachable, remove its
+file and record with `RECORD_METADATA=1`, which fetches only what is
+missing; for example, the recent releases of both originals, recorded
+aside so that only the answers land in the tree:
+
+```sh
+rm tests/fixtures/metadata/radarr.servarr.com/v1/update/master/changes.json \
+   tests/fixtures/metadata/services.sonarr.tv/v1/update/main/changes.json
+RECORD_METADATA=1 GOLDEN_OUT=.cache/refresh/radarr make golden-radarr
+RECORD_METADATA=1 GOLDEN_OUT=.cache/refresh/sonarr make golden
+```
+
+A refreshed answer can change goldens: `update.json` of the main lists
+shows those releases, so copy it from `.cache/refresh/<app>/` and commit
+it with the answer. When a host does not answer, the file stays missing,
+the mock answers 404 and the recording says so (`(missing)` in the mock's
+log): try again later, nothing is made up in its place.
 
 ### Choices, and the alternatives left aside
 
@@ -121,3 +161,18 @@ What the bump leaves to the port, and lists in the summary:
 - **Failing tests are run once more.** A test that passes then is reported
   as flaky, not as work for the port (`golden_responses_match` in
   `crates/unarr-api/tests/contract.rs` is one).
+- **The mock is the original's proxy through the environment.** .NET takes
+  its default proxy from `HTTPS_PROXY`, so the original goes through the
+  mock from its first request, with its settings as the fixture has them.
+  Left aside: writing the proxy into the copy's settings before it starts,
+  which changes `config/host` and every golden that shows it, and a
+  request at the head of each list that sets it, which comes after the
+  checks the original runs at start.
+- **One answer of the Servarr services for every version.** Their
+  answers are named without the query (version, OS, runtime), so a new
+  original finds what the old one recorded. Left aside: one recording per
+  version, which a bump never finds and would have to fetch, the very
+  dependency this removes. The cost: the list `GET /api/v3/update` shows
+  is the one recorded, not what the hosts would say to the new version,
+  and the contract tests compare only the installed release's shape
+  (`Mode::InstalledUpdate`).

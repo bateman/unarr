@@ -89,25 +89,37 @@ flows, under the downloads, TV or movies directory only:
 Metadata upstreams. The originals call Skyhook, the Servarr services, XEM
 and TheTVDB's artwork host (Sonarr), api.radarr.video, the Servarr services
 and TMDB's image host (Radarr) over HTTPS at fixed addresses, so the mock is
-also an HTTP proxy for them: the recording Sonarr is told to use it (its
-proxy settings, with certificate validation off), every `CONNECT` to one
-of METADATA_HOSTS is answered with TLS on `--tls-cert`/`--tls-key`, and
-the requests inside the tunnel are served as if they had come for
-`/<host><path>`. Unarr's tests ask for `/<host><path>` directly. A
-`CONNECT` to any other host is refused, so nothing leaves the machine
-while goldens are recorded.
+also an HTTP proxy for them. The fixture scripts start the recording
+original with the mock as its proxy from the first request
+(`HTTPS_PROXY`/`HTTP_PROXY`, the loopback and `*.invalid` left direct)
+and with the mock's certificate as the only one it trusts
+(`SSL_CERT_FILE`); a request list may also set the proxy in the
+original's settings, with certificate validation off, as the metadata
+lists do. Every `CONNECT` to one of METADATA_HOSTS is answered with TLS
+on `--tls-cert`/`--tls-key`, and the requests inside the tunnel are
+served as if they had come for `/<host><path>`. Unarr's tests ask for
+`/<host><path>` directly. A `CONNECT` to any other host, or a plain
+proxy request for one, is refused at once with a 403 and logged
+(`connect <host> refused`, `proxy <host> refused`): nothing leaves the
+machine while goldens are recorded, and nothing waits on a host outside
+it.
 
     /<host>/<path>?<query>   tests/fixtures/metadata/<host>/<path>[/<slug(query)>].json
                              (a `.status` file next to it holds a status other than 200)
     /artworks.thetvdb.com/…  an image from tests/fixtures/metadata/artwork/, by cover type
     /image.tmdb.org/…        the same; TMDB's paths name no cover type, so the poster
     /services.sonarr.tv/v1/time, /radarr.servarr.com/v1/time  the current time, not a recording
+    /services.sonarr.tv/…, /radarr.servarr.com/…  named without the query, which
+                             only says which original asks (version, OS,
+                             runtime): one recording for every version
     /api.radarr.video/v1/movie/changed?since=…  one recording whatever the moment
 
 A missing file answers 404, unless `--record-metadata` is given: then the
 request is sent to the real host with the client's own user agent and
-the answer is stored under that name before it is served. Images are
-never fetched: the stand-ins are small images of the originals' sizes.
+the answer is stored under that name before it is served; a host that
+does not answer, or answers with a server error, leaves the file missing
+and the request answered 404. Images are never fetched: the stand-ins are
+small images of the originals' sizes.
 
     scripts/mock-servarr.py --listen 127.0.0.1:18989 --fixtures tests/fixtures --log .cache/mock-requests.jsonl
 """
@@ -183,7 +195,8 @@ METADATA_HOSTS = (
 )
 # The hosts that serve images: answered with a stand-in, never fetched.
 ARTWORK_HOSTS = ("artworks.thetvdb.com", "image.tmdb.org")
-# The Servarr services, whose `v1/time` is answered with the clock.
+# The Servarr services, whose `v1/time` is answered with the clock and
+# whose other answers are named without the query.
 SERVICES_HOSTS = ("services.sonarr.tv", "radarr.servarr.com")
 # Hosts whose fixtures are hand-made: a request for a missing one is never
 # passed on, since it would carry an account's token.
@@ -582,6 +595,11 @@ class Handler(http.server.BaseHTTPRequestHandler):
             self.path = f"/{self.tunnel}{self.path}"
         elif self.path.startswith("http://"):
             absolute = urllib.parse.urlsplit(self.path)
+            # A plain proxy request for any other host is refused at once,
+            # as its CONNECT would be: nothing leaves the machine.
+            if absolute.hostname not in METADATA_HOSTS:
+                self.close_connection = True
+                return self.reply(403, b"", "text/plain", f"proxy {absolute.hostname} refused")
             self.path = f"/{absolute.hostname}{absolute.path or '/'}" + (f"?{absolute.query}" if absolute.query else "")
         parsed = urllib.parse.urlparse(self.path)
         q = dict(urllib.parse.parse_qsl(parsed.query, keep_blank_values=True))
@@ -1076,7 +1094,10 @@ class Handler(http.server.BaseHTTPRequestHandler):
             # clock; a recorded answer would be days off on the next run.
             now = datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%S.%f0Z")
             return self.json({"dateTimeUtc": now}, f"{host}/v1/time (now)")
-        name = metadata_name(path, query)
+        # The Servarr services are asked with the original's version, OS and
+        # runtime in the query: one recording answers every version, so a
+        # bump records from the new original with what the old one recorded.
+        name = metadata_name(path, "" if host in SERVICES_HOSTS else query)
         stored = self.fixtures / "metadata" / host / f"{name}.json"
         status_file = stored.with_suffix(".status")
         if not stored.is_file() and Handler.record_metadata and host not in NEVER_RECORDED:
@@ -1097,6 +1118,12 @@ class Handler(http.server.BaseHTTPRequestHandler):
             status, body = e.code, e.read()
         except (urllib.error.URLError, OSError) as e:
             log(f"upstream {url} failed: {e}")
+            return
+        # A server error is the host failing, not its answer (Cloudflare's
+        # 526 when radarr.servarr.com's origin is down): nothing is kept,
+        # the request is answered 404 as missing and can be recorded later.
+        if status >= 500:
+            log(f"upstream {url} answered {status}: not recorded")
             return
         stored.parent.mkdir(parents=True, exist_ok=True)
         try:
