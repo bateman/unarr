@@ -481,6 +481,8 @@ async fn start_mock(dirs: &ReplayDirs) -> unarr_mock::Mock {
 
 #[tokio::test]
 async fn golden_responses_match() {
+    use_bundled_ffprobe();
+    require_originals_ffprobe();
     let dirs = ReplayDirs::create();
     let mappings = dirs.mappings();
     let mock = start_mock(&dirs).await;
@@ -2088,6 +2090,8 @@ async fn the_queue_status_on_the_hub_counts_pending_releases() {
 /// client knows sends (`UntrackedDownloadCompletedEvent`).
 #[tokio::test]
 async fn the_events_and_settings_of_the_audit_match_the_original() {
+    use_bundled_ffprobe();
+    require_originals_ffprobe();
     let Replayed {
         goldens,
         answers,
@@ -2406,6 +2410,8 @@ async fn replay_with_own_mock(list: &str) -> Replayed {
 /// twice, untracked (no download id) and for the download, as Unarr does.
 #[tokio::test]
 async fn a_tracked_download_imported_by_hand_notifies_as_the_original() {
+    use_bundled_ffprobe();
+    require_originals_ffprobe();
     let Replayed {
         goldens,
         answers,
