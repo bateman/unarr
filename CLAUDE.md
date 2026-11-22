@@ -32,11 +32,13 @@ Examples:
 If a change touches more than one personality, prefer splitting it into one
 branch per flavor; if it cannot be split, use `core/`.
 
-## Branches after a merge
+## Merging a branch
 
-GitHub deletes a pull request's head branch when the pull request is
-merged. Do not ask whether to delete merged branches, and do not delete
-them yourself.
+To merge a branch means to open a pull request for it into `main` and
+merge that pull request on GitHub, with a merge commit. Never merge it
+locally and push `main`: GitHub deletes a pull request's head branch when
+the pull request is merged, and only then. Do not ask whether to delete
+merged branches, and do not delete them yourself.
 
 ## Commit authorship
 
