@@ -1129,7 +1129,13 @@ been 20 MB since 20 November 2026 (section 21.11).
   replay uses the ffprobe the pinned Sonarr ships with when `make golden`
   left it under `.cache`, so codec names and channel counts are the
   oracle's own. The image does not bundle it; the user installs it next to
-  Unarr or mounts it in.
+  Unarr or mounts it in. The originals' build tags an x264 stream `x264`
+  and an x265 one `x265` from the encoder's SEI, where a stock ffprobe
+  gives the container's tag and the file names said `[h264]`; Unarr finds
+  the same SEI itself (`mediainfo::encoder_tag`: the first packet's bytes,
+  or the HEVC extradata), so any ffprobe gives the originals' names. It
+  costs one more ffprobe run, without stream analysis (about 50 ms), for
+  an H.264 or HEVC file the ffprobe in use did not tag.
 - **The import pipeline is a port, step for step.** `mediafiles::{decide,
   specs, aggregate, approve, downloaded, completed, scan, deletion, rename,
   manual}` follow `MediaFiles/EpisodeImport` and its neighbours: the
