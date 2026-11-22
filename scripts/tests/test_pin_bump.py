@@ -400,33 +400,66 @@ class UntrustedWork(Temp):
     def ctx(self):
         return bump.Context(app=RADARR, work=self.tmp)
 
+    # What HEAD holds for golden-legacy-user, made up here: the test reads
+    # neither the tree's recordings nor HEAD's, which a bump applied and not
+    # yet committed sets apart (it would read as work for the port).
+    LEGACY_USER = {
+        "config-host.json": golden({"authenticationMethod": "forms", "port": 7878}, path="/api/v3/config/host"),
+        "noauth-initialize.json": golden({"apiRoot": "/api"}, status=401, path="/initialize.json"),
+        "session-initialize.json": golden({"apiRoot": "/api"}, path="/initialize.json"),
+        "signalr.json": {"messages": []},
+        "config-after.xml": "<Config>\n  <Port>7878</Port>\n</Config>\n",
+    }
+
     def test_a_recorded_list_is_compared_with_head_and_only_its_files_are_copied(self):
         ctx = self.ctx()
-        committed = REPO / "tests" / "fixtures" / "radarr" / "golden-legacy-user"
-        out = self.tmp / "recorded" / "golden-legacy-user"
+        legacy = next(g for g in bump.golden_lists(RADARR) if g.key == "golden-legacy-user")
+        self.assertEqual(sorted(legacy.outputs(RADARR)), sorted(self.LEGACY_USER))
+        prefix = RADARR.fixtures.relative_to(REPO).as_posix()
+        dir_rel = legacy.dir.relative_to(REPO).as_posix()
+        head, out = {}, self.tmp / "recorded" / "golden-legacy-user"
         out.mkdir(parents=True)
-        for name in ("config-host.json", "noauth-initialize.json", "session-initialize.json", "signalr.json",
-                     "config-after.xml"):
-            shutil.copy(committed / name, out / name)
-        changed = json.loads((out / "config-host.json").read_text())
-        changed["recordedAt"] = "2030-01-01T00:00:00Z"
-        changed["body"]["newSetting"] = True
+        for name, body in self.LEGACY_USER.items():
+            raw = body if isinstance(body, str) else json.dumps(body)
+            head[f"{dir_rel}/{name}"] = raw.encode()
+            (out / name).write_text(raw)
+        changed = dict(self.LEGACY_USER["config-host.json"], recordedAt="2030-01-01T00:00:00Z")
+        changed["body"] = dict(changed["body"], newSetting=True)
         (out / "config-host.json").write_text(json.dumps(changed))
         (out / "planted.json").write_text("{}")
         record = {"lists": [{"list": "golden-legacy-user", "ok": True}]}
-        result = bump.recorded_changes(ctx, record)
-        files = result["lists"]["golden-legacy-user"]
-        self.assertEqual(files["config-host.json"]["kind"], "shape")
-        self.assertEqual(files["config-host.json"]["added"], ["/newSetting"])
-        for name in ("noauth-initialize.json", "session-initialize.json", "signalr.json", "config-after.xml"):
-            self.assertEqual(files[name]["kind"], "same", name)
-        copied = {Path(dest).name for _, dest in result["copy"]}
-        self.assertNotIn("planted.json", copied)
-        self.assertEqual(len(copied), 5)
-        (out / "signalr.json").unlink()
-        (out / "signalr.json").symlink_to(committed / "signalr.json")
-        with self.assertRaises(SystemExit):
-            bump.recorded_changes(ctx, record)
+        with mock.patch.object(bump, "head_files", return_value=head) as read_head:
+            result = bump.recorded_changes(ctx, record)
+            read_head.assert_called_once_with(prefix)
+            files = result["lists"]["golden-legacy-user"]
+            self.assertEqual(files["config-host.json"]["kind"], "shape")
+            self.assertEqual(files["config-host.json"]["added"], ["/newSetting"])
+            for name in ("noauth-initialize.json", "session-initialize.json", "signalr.json", "config-after.xml"):
+                self.assertEqual(files[name]["kind"], "same", name)
+            copied = {Path(dest).name for _, dest in result["copy"]}
+            self.assertNotIn("planted.json", copied)
+            self.assertEqual(len(copied), 5)
+            (out / "signalr.json").unlink()
+            (out / "signalr.json").symlink_to(out / "planted.json")
+            with self.assertRaises(SystemExit):
+                bump.recorded_changes(ctx, record)
+
+    def test_head_is_read_from_the_last_commit_not_from_the_tree(self):
+        env = dict(os.environ, GIT_CONFIG_GLOBAL=os.devnull, GIT_CONFIG_SYSTEM=os.devnull,
+                   GIT_AUTHOR_NAME="u", GIT_AUTHOR_EMAIL="u@example.invalid",
+                   GIT_COMMITTER_NAME="u", GIT_COMMITTER_EMAIL="u@example.invalid")
+        repo = self.tmp / "repo"
+        listed = repo / "tests" / "fixtures" / "radarr" / "golden"
+        listed.mkdir(parents=True)
+        (listed / "config-host.json").write_text('{"committed": true}')
+        (repo / "elsewhere.json").write_text("{}")
+        for args in (["init", "-q"], ["add", "."], ["commit", "-q", "-m", "c"]):
+            subprocess.run(["git", *args], cwd=repo, env=env, check=True, capture_output=True)
+        (listed / "config-host.json").write_text('{"applied": true}')
+        (listed / "new.json").write_text("{}")
+        with mock.patch.object(bump, "REPO", repo):
+            self.assertEqual(bump.head_files("tests/fixtures/radarr"),
+                             {"tests/fixtures/radarr/golden/config-host.json": b'{"committed": true}'})
 
     def test_a_list_that_failed_is_not_copied(self):
         result = bump.recorded_changes(self.ctx(), {"lists": [{"list": "golden-hub", "ok": False}]})
