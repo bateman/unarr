@@ -672,6 +672,9 @@ def parse_cargo(output: str) -> dict:
         if line.strip() == "failures:" or line.startswith("successes:"):
             capture = None
             continue
+        if line.startswith("stack backtrace:") or line.startswith("note: run with `RUST_BACKTRACE"):
+            capture = None
+            continue
         if capture is not None and len(capture["output"]) < 60:
             capture["output"].append(line)
     # What cargo lists at the end of a --no-fail-fast run, one line per
@@ -1374,8 +1377,9 @@ def render_summary(work: Path) -> tuple[str, dict]:
         lines += ["## The importer", ""]
         if imp["raise"]:
             added = tri.get("migrations", [])
-            files = sorted({p["path"] for c in tri.get("commits", []) for p in c.get("paths", [])
-                            if re.search(r"/Datastore/Migration/\d+_", p["path"])})
+            touched = {p["path"] for c in tri.get("commits", []) for p in c.get("paths", [])}
+            files = sorted(p for p in touched if triage.MIGRATION_FILE.match(p))
+            tests_of = sorted(p for p in touched if re.match(r"^src/[^/]*\.Test/Datastore/Migration/\d+_", p))
             lines.append(f"`MAX_KNOWN_MIGRATION` is {imp['known']} at `{imp['file']}:{imp['line']}`, the new original "
                          f"migrates to {imp['migration']}: raise it to {imp['migration']} once the mapping is checked "
                          f"against the migrations added ({', '.join(map(str, added)) or 'none listed'}), and add a "
@@ -1385,8 +1389,12 @@ def render_summary(work: Path) -> tuple[str, dict]:
                          "test is the reminder.")
             if files:
                 lines.append("")
-                lines.append("Upstream migration files touched since the cursor:")
+                lines.append("Upstream migrations touched since the cursor (new ones and changed ones):")
                 lines += [f"- {md(f, 160)}" for f in files]
+            if tests_of:
+                lines.append("")
+                lines.append("Their upstream tests touched since the cursor: "
+                             + ", ".join(md(Path(f).name, 100) for f in tests_of) + ".")
         else:
             lines.append(f"`MAX_KNOWN_MIGRATION` ({imp['known']}, `{imp['file']}:{imp['line']}`) already covers "
                          f"migration {imp['migration']}: nothing to raise.")
@@ -1399,9 +1407,11 @@ def render_summary(work: Path) -> tuple[str, dict]:
         lines += ["## Tests", ""]
         lines.append(f"`cargo test --workspace`: {cargo['passed']} passed, {cargo['failed']} failed"
                      f" (exit {cargo['exit']}, {tests['seconds']}s in all).")
-        if cargo.get("failed_targets"):
-            lines.append("Targets that failed: " + ", ".join(md(x, 80) for x in cargo["failed_targets"])
-                         + " (one with no failing test listed below ended as a whole: a crash or a timeout).")
+        named = {" ".join(f["args"][-2:]) for f in cargo["failures"]}
+        whole = [x for x in cargo.get("failed_targets", []) if " ".join(x.split()[-2:]) not in named]
+        if whole:
+            lines.append("Targets that failed with no failing test named (a crash or a timeout): "
+                         + ", ".join(md(x, 80) for x in whole) + ".")
         if cargo.get("compile_errors"):
             lines.append("")
             lines.append("Did not compile:")
@@ -1425,7 +1435,7 @@ def render_summary(work: Path) -> tuple[str, dict]:
             lines.append("What each failure printed first:")
             lines.append("")
             for f in cargo["failures"]:
-                first = [ln for ln in f["output"] if ln.strip()][:6]
+                first = [ln for ln in f["output"] if ln.strip()][:12]
                 lines.append(f"- {md(f['name'], 100)} ({f['target']}):")
                 lines += [f"  - {md(ln, 200)}" for ln in first]
         for name, why in KNOWN_FLAKY.items():
