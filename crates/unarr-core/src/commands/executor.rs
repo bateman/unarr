@@ -327,12 +327,18 @@ impl Runtime {
         self.notifier.set_upstreams(upstreams.clone());
         // Radarr's covers and metadata go out through its own client,
         // that is through its own proxy and certificate settings.
-        let client = self
-            .movies
+        *self.augment.write().recover() =
+            crate::metadata::augment::Augment::new(self.http().clone(), upstreams);
+    }
+
+    /// The application's own HTTP client: Radarr's, over its own proxy
+    /// and certificate settings; for the series side, or a movie side
+    /// handed none, the process-wide one, which is Sonarr's.
+    fn http(&self) -> &reqwest::Client {
+        self.movies
             .as_ref()
-            .and_then(|side| side.http.clone())
-            .unwrap_or_else(|| crate::http::shared().clone());
-        *self.augment.write().recover() = crate::metadata::augment::Augment::new(client, upstreams);
+            .and_then(|side| side.http.as_ref())
+            .unwrap_or_else(|| crate::http::shared())
     }
 
     /// Where the series covers live (`<app data>/MediaCover`).
@@ -452,6 +458,7 @@ impl Runtime {
                 crate::Personality::Radarr => "https://radarr.servarr.com/v1/ping",
                 _ => "https://services.sonarr.tv/v1/ping",
             }),
+            http: self.http(),
         };
         let standing = self.health();
         let names: Vec<CheckSet> = sets.iter().map(|(s, _)| *s).collect();
