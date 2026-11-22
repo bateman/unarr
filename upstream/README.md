@@ -8,6 +8,8 @@ personality:
 | `<app>.pin` | the release Unarr emulates: version, build time, migration level, SHA-256 of the tarball; the one place a pinned value is written (`scripts/tests/test_pins.py`) | `make bump-<app>` |
 | `<app>.lock` | the cursor: the last upstream commit handled, and its release | `make bump-<app> STEPS=cursor`, the last step of a port |
 | `<app>-wontport.md` | upstream changes Unarr does not take, so the triage does not assess them again | by hand |
+| `<app>-log.csv` | one row per upstream commit a port handled: its class, the decision, the Unarr commits, what a human changed in review (`scripts/tests/test_port_log.py`) | the port, at its end |
+| `PORTING.md` | how a port is done, for both personalities: where it starts, the order, the decisions, the PR | by hand |
 
 Two commands, run in this order:
 
@@ -15,8 +17,11 @@ Two commands, run in this order:
   to go to, and a table of the upstream commits since the cursor, classified
   by the paths they touch. It changes nothing.
 - `make bump-<app>` (`scripts/pin-bump.py`): brings the tree to that release
-  and says what changed. Its summary, with the triage's table, is where a
-  port starts.
+  and says what changed. Its summary, with the triage's table, is the
+  port's material.
+
+Then the port: [`PORTING.md`](PORTING.md) is where it starts, and says how
+it goes from there to the PR.
 
 ## `make bump-<app>`
 
