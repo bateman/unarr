@@ -2894,7 +2894,7 @@ could not settle it. What changed, and what was decided on the way:
   the UI does. `/ping` as health checks ask it stays uncached, as decided
   in phase 4 (section 16); `/Ping` is kept as the originals keep it.
   Unarr adds one exception of its own: a backup (`/backup/...`) is never
-  kept. It holds the database and the API key, and a shared cache in front
+  kept, a cache breaker (`?h=`) in its query or not. It holds the database and the API key, and a shared cache in front
   that keeps what is `public` (Cloudflare keeps a `.zip` by default, as
   does an nginx with `proxy_cache`) would hand it to whoever asks for its
   predictable name; the originals expose that, Unarr does not. Nor is an
