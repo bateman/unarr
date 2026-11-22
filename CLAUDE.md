@@ -32,6 +32,12 @@ Examples:
 If a change touches more than one personality, prefer splitting it into one
 branch per flavor; if it cannot be split, use `core/`.
 
+## Branches after a merge
+
+GitHub deletes a pull request's head branch when the pull request is
+merged. Do not ask whether to delete merged branches, and do not delete
+them yourself.
+
 ## Commit authorship
 
 Every commit is authored and committed as

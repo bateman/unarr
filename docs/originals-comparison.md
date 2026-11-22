@@ -10,7 +10,7 @@ run the comparison again and update this file in the same branch.
 
 `scripts/compare-originals.py`, through `make compare-originals`:
 
-    make ui                                  # the originals, pinned in scripts/*-fixture.sh
+    make ui                                  # the originals, pinned in upstream/<app>.pin
     make compare-originals                   # the real library, about an hour
     make scale-fixture
     make compare-originals LIBRARY=scaled    # 950 series and 2,123 movies
@@ -61,7 +61,7 @@ run the comparison again and update this file in the same branch.
   the caller's proxy. The originals are found where `make ui` put them,
   under `UNARR_CACHE` when it is set. The report gives the versions the
   applications themselves report, and marks one that differs from the
-  version pinned in `scripts/*-fixture.sh`: `make ui` keeps a binary it
+  version pinned in `upstream/<app>.pin`: `make ui` keeps a binary it
   already has, so after a new pin remove the folder it extracted the
   original into first (`.cache/sonarr/Sonarr` or `.cache/radarr/Radarr`,
   under `UNARR_CACHE` when it is set), as the report says.
