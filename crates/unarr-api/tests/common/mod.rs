@@ -489,7 +489,12 @@ pub fn compare(mode: Mode, want_body: &Value, got_body: &Value) -> Vec<String> {
             };
             let want = installed(want_body);
             if want.as_array().is_none_or(Vec::is_empty) {
-                problems.push("the original's update list has no installed release".into());
+                problems.push(
+                    "the original's update list has no installed release: the recorded recent releases \
+                     (tests/fixtures/metadata/<host>/v1/update/<branch>/changes.json) do not list the pinned \
+                     version; refresh that answer and update.json as upstream/README.md says"
+                        .into(),
+                );
             }
             problems.extend(compare(Mode::Shape, &want, &installed(got_body)));
         }

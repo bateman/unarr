@@ -1576,6 +1576,9 @@ def render_summary(work: Path) -> tuple[str, dict]:
     else:
         lines.append("- Metadata (`tests/fixtures/metadata/`): every request the new original made had a recorded "
                      "answer; a changed answer shape still shows only on the metadata servers' own check.")
+    note = servarr_changes_note(app, bump["to"]["version"])
+    if note:
+        lines.append(note)
     lines.append(f"- Recyclarr: `tests/fixtures/recyclarr/{app.key}-exchange.json` was recorded between the real "
                  "Recyclarr and the pinned original; record it again with the new one "
                  "(`tests/fixtures/recyclarr/README.md`, Recording) and run "
@@ -1605,6 +1608,33 @@ def render_summary(work: Path) -> tuple[str, dict]:
     if timings:
         lines += ["## Time", "", "; ".join(timings) + ".", ""]
     return "\n".join(lines), data
+
+
+# The recent releases the mock answers for `GET /api/v3/update`, recorded
+# once for every version (scripts/mock-servarr.py).
+SERVARR_CHANGES = {
+    "sonarr": REPO / "tests/fixtures/metadata/services.sonarr.tv/v1/update/main/changes.json",
+    "radarr": REPO / "tests/fixtures/metadata/radarr.servarr.com/v1/update/master/changes.json",
+}
+
+
+def servarr_changes_note(app: App, version: str) -> str | None:
+    """What to do when the new release is not among the recorded recent
+    releases: the original then marks none of them installed, and the
+    contract tests' `update` comparison fails until the answer is refreshed."""
+    path = SERVARR_CHANGES[app.key]
+    try:
+        listed = {str(r.get("version")) for r in json.loads(path.read_text(encoding="utf-8"))}
+    except (OSError, ValueError, AttributeError):
+        listed = set()
+    if version in listed:
+        return None
+    rel = path.relative_to(REPO).as_posix()
+    target = "golden-radarr" if app.key == "radarr" else "golden"
+    return (f"- Servarr services: `{rel}` does not list {app.name} {version}, so the recorded `update.json` "
+            "has no installed release and its contract test fails. With the host reachable, remove that file, "
+            f"run `RECORD_METADATA=1 GOLDEN_OUT=.cache/refresh/{app.key} make {target}` and copy "
+            f"`update.json` from `.cache/refresh/{app.key}/` (`upstream/README.md`).")
 
 
 def step_summary(ctx: Context) -> None:

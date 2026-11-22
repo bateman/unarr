@@ -75,15 +75,21 @@ What the bump leaves to the port, and lists in the summary:
   `GET /api/v3/update` lists, the notifications) are named without the
   query that carries the original's version, so the new original gets the
   answers recorded once for the old one and the bump never waits on those
-  hosts; a refresh, when they change, is by hand (below);
+  hosts; a refresh, when they change, is by hand (below). One refresh is
+  due at every bump to a release newer than that recording: the original
+  marks installed only the release of the list with its own version, so
+  when `v1/update/<branch>/changes.json` does not list the new release,
+  the recorded `update.json` has no installed release and the contract
+  tests fail ("the original's update list has no installed release"); the
+  summary says so and gives the command;
 - the Bazarr and Prowlarr replays, written from those projects' source;
 - the prose that names the old release, and `docs/originals-comparison.md`
   as `CLAUDE.md` says.
 
 ### The recording reaches no host outside the machine
 
-The fixture scripts start the original with `scripts/mock-servarr.py` as
-its proxy from its first request (`HTTPS_PROXY`, `HTTP_PROXY`; the
+When they record (`golden`), the fixture scripts start the original with
+`scripts/mock-servarr.py` as its proxy from its first request (`HTTPS_PROXY`, `HTTP_PROXY`; the
 loopback and `*.invalid` direct) and the mock's certificate as the only
 one it trusts (`SSL_CERT_FILE`). The mock answers for the metadata hosts
 and the Servarr services from `tests/fixtures/metadata/`, `v1/time` with
@@ -93,6 +99,8 @@ Plex connection asks, is one); the script prints the hosts it refused. So
 longer stops a bump: on 2026-11-22 `radarr.servarr.com` did not, and
 `GET /api/v3/update` waited past the recorder's 60 seconds. The original's
 settings are not touched, so the goldens that show them stay as recorded.
+`make sonarr` and `make radarr`, for comparing by hand on real data, leave
+the original its direct way out, as before.
 
 What the mock cannot see is a change in those hosts' answers: the metadata
 servers' check (issue #9, section 7) asks them. To refresh an answer of

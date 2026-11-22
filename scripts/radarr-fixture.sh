@@ -21,12 +21,14 @@
 # and emptied before each recording; the script refuses to empty a directory
 # it did not mark as its own. Both commands start scripts/mock-servarr.py,
 # whose movie indexers and download clients the requests of milestone 4b
-# register. Radarr runs with the mock as its proxy, not the environment's,
-# from its first request: the mock answers for its metadata server, the
-# Servarr services (update check, recent releases, notifications, clock)
-# and TMDB's images from tests/fixtures/metadata, and refuses any other
-# host at once, so a recording waits on nothing outside the machine
-# (issue #9; the hosts refused are printed at the end).
+# register. While `golden` records, Radarr runs with the mock as its
+# proxy, not the environment's, from its first request: the mock answers
+# for its metadata server, the Servarr services (update check, recent
+# releases, notifications, clock) and TMDB's images from
+# tests/fixtures/metadata, and refuses any other host at once, so a
+# recording waits on nothing outside the machine (issue #9; the hosts
+# refused are printed at the end). `shell`, for comparing on real data,
+# leaves Radarr its direct way out, without the environment's proxy.
 set -euo pipefail
 
 REPO="$(cd "$(dirname "$0")/.." && pwd)"
@@ -173,27 +175,35 @@ stop_mock() {
 }
 
 RADARR_PID=""
+# Set by `golden`: the original goes out only through the mock.
+MOCK_IS_PROXY=0
 start_radarr() {
     local data="$1"
     log "starting Radarr on port $RADARR_PORT, data dir $data"
     # The fixture's config names the default port; RADARR_PORT moves the
     # copy, for a run beside an Unarr that serves the same fixture.
     sed -i "s|<Port>[0-9]*</Port>|<Port>$RADARR_PORT</Port>|" "$data/config.xml"
-    # The mock is the original's only way out, from its first request: the
-    # update check, the notifications and the clock of the Servarr services
-    # come in the main request list, before any list turns the proxy on in
-    # the settings. .NET takes its default proxy from the environment, so
-    # HTTPS goes to the mock, which answers for the metadata hosts and
-    # refuses every other CONNECT at once; plain HTTP to another host gets
-    # the same refusal. NO_PROXY keeps the mock's own services and the
-    # fixture's dead *.invalid providers on the direct path, where they
-    # fail as before; SSL_CERT_FILE makes the mock's certificate the only
-    # one the original trusts, so its settings (certificate validation
-    # included) and the goldens that show them stay as recorded.
-    env -u ALL_PROXY -u all_proxy -u https_proxy -u http_proxy -u no_proxy -u SSL_CERT_DIR \
-        HTTPS_PROXY="http://127.0.0.1:$MOCK_PORT" HTTP_PROXY="http://127.0.0.1:$MOCK_PORT" \
-        NO_PROXY="localhost,127.0.0.1,::1,.invalid" SSL_CERT_FILE="$CACHE/mock-tls.crt" \
-        "$CACHE/Radarr/Radarr" -nobrowser -data="$data" >"$data/radarr.stdout.log" 2>&1 &
+    # While recording, the mock is the original's only way out, from its
+    # first request: the update check, the notifications and the clock of
+    # the Servarr services come in the main request list, before any list
+    # turns the proxy on in the settings. .NET takes its default proxy from
+    # the environment, so HTTPS goes to the mock, which answers for the
+    # metadata hosts and refuses every other CONNECT at once; plain HTTP to
+    # another host gets the same refusal. NO_PROXY keeps the mock's own
+    # services and the fixture's dead *.invalid providers on the direct
+    # path, where they fail as before; SSL_CERT_FILE makes the mock's
+    # certificate the only one the original trusts, so its settings
+    # (certificate validation included) and the goldens that show them stay
+    # as recorded. `shell` is for comparing on real data: there the
+    # original goes out directly, without the environment's proxy
+    # variables, as before.
+    local network=(-u HTTPS_PROXY -u https_proxy -u HTTP_PROXY -u http_proxy -u ALL_PROXY -u all_proxy)
+    if [ "$MOCK_IS_PROXY" = 1 ]; then
+        network=(-u ALL_PROXY -u all_proxy -u https_proxy -u http_proxy -u no_proxy -u SSL_CERT_DIR
+            HTTPS_PROXY="http://127.0.0.1:$MOCK_PORT" HTTP_PROXY="http://127.0.0.1:$MOCK_PORT"
+            NO_PROXY="localhost,127.0.0.1,::1,.invalid" SSL_CERT_FILE="$CACHE/mock-tls.crt")
+    fi
+    env "${network[@]}" "$CACHE/Radarr/Radarr" -nobrowser -data="$data" >"$data/radarr.stdout.log" 2>&1 &
     RADARR_PID=$!
     for _ in $(seq 1 120); do
         if curl -fsS -o /dev/null -H "X-Api-Key: $API_KEY" "http://127.0.0.1:$RADARR_PORT/api/v3/system/status" 2>/dev/null; then
@@ -249,6 +259,7 @@ cmd_golden() {
     [ "$HAVE_ICU" = 1 ] || die "libicu is needed to record: without it Radarr sorts and names things differently"
     prepare_dirs
     start_mock
+    MOCK_IS_PROXY=1
     start_on_fixture_copy
     # GOLDEN_REQUESTS and GOLDEN_OUT record another request list somewhere
     # else: a probe of the original, or new requests tried on their own

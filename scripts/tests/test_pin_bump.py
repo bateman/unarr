@@ -733,6 +733,21 @@ class TheCursorStep(Temp):
         self.assertIn("release = 6.1.0.100", self.lock.read_text())
 
 
+class ServarrChanges(unittest.TestCase):
+    """The summary says when the recorded recent releases miss the new one."""
+
+    def test_a_listed_release_needs_no_refresh(self):
+        for app in (RADARR, SONARR):
+            listed = json.loads(bump.SERVARR_CHANGES[app.key].read_text())[0]["version"]
+            self.assertIsNone(bump.servarr_changes_note(app, listed))
+
+    def test_a_release_the_recording_does_not_list_asks_for_one(self):
+        note = bump.servarr_changes_note(RADARR, "99.0.0.1")
+        self.assertIn("radarr.servarr.com/v1/update/master/changes.json", note)
+        self.assertIn("RECORD_METADATA=1 GOLDEN_OUT=.cache/refresh/radarr make golden-radarr", note)
+        self.assertIn("make golden`", bump.servarr_changes_note(SONARR, "99.0.0.1"))
+
+
 class Recorder(unittest.TestCase):
     def test_the_login_sends_what_the_browser_sends(self):
         radarr6 = '<input\n  type="checkbox"\n  name="rememberMe"\n  id="rememberMe"\n  checked="checked"\n/>'
