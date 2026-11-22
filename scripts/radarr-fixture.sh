@@ -25,12 +25,20 @@
 # else.
 set -euo pipefail
 
-RADARR_VERSION="${RADARR_VERSION:-6.4.4.10685}"
-RADARR_SHA256="${RADARR_SHA256:-a1d726129535e739d4efaf93b5fdd771bb1c78349f55ceac70e365e37b5a12a3}"
+REPO="$(cd "$(dirname "$0")/.." && pwd)"
+# The release is pinned in upstream/radarr.pin, the one place its version is
+# written (issue #9); RADARR_VERSION and RADARR_SHA256 still override it.
+PIN="$REPO/upstream/radarr.pin"
+[ -r "$PIN" ] || { echo "[fixture] cannot read $PIN, where the release is pinned" >&2; exit 1; }
+pinned() {
+    sed -n "/^$1[[:space:]]*=/{s/^[^=]*=[[:space:]]*//;s/[[:space:]]*$//;p;q;}" "$PIN"
+}
+RADARR_VERSION="${RADARR_VERSION:-$(pinned version)}"
+RADARR_SHA256="${RADARR_SHA256:-$(pinned sha256)}"
+[ -n "$RADARR_VERSION" ] && [ -n "$RADARR_SHA256" ] || { echo "[fixture] no version or sha256 in $PIN" >&2; exit 1; }
 RADARR_URL="https://github.com/Radarr/Radarr/releases/download/v${RADARR_VERSION}/Radarr.master.${RADARR_VERSION}.linux-core-x64.tar.gz"
 RADARR_PORT="${RADARR_PORT:-7878}"
 
-REPO="$(cd "$(dirname "$0")/.." && pwd)"
 CACHE="${UNARR_CACHE:-$REPO/.cache/radarr}"
 FIXTURE_DIR="$REPO/tests/fixtures/radarr"
 GOLDEN_DIR="$FIXTURE_DIR/golden"

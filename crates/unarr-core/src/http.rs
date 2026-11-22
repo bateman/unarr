@@ -11,7 +11,7 @@ use std::time::Duration;
 /// The client type, for crates that do not depend on `reqwest` themselves.
 pub type HttpClient = reqwest::Client;
 
-/// `User-Agent` the originals send is `Sonarr/4.0.20.3014 (ubuntu 24.04)`;
+/// `User-Agent` the originals send is `Sonarr/<version> (ubuntu 24.04)`;
 /// Unarr names itself, since indexers and trackers keep statistics by it.
 pub fn user_agent() -> String {
     format!(
@@ -31,21 +31,25 @@ pub fn user_agent() -> String {
 /// [`user_agent`], the Servarr team is told, and the goldens are recorded
 /// again. Read by [`servarr_proxy_user_agent`] alone; nothing else may
 /// depend on which one is in use.
-const SONARR_SERVARR_PROXY_USER_AGENT: &str = "Sonarr/4.0.20.3014 (ubuntu 24.04)";
-
-/// The same exception for the Radarr personality towards
+///
+/// The same exception holds for the Radarr personality towards
 /// `api.radarr.video`, under the same exit condition: the pinned Radarr's
-/// user agent while the movie metadata path is being established.
-const RADARR_SERVARR_PROXY_USER_AGENT: &str = "Radarr/6.4.4.10685 (ubuntu 24.04)";
+/// user agent while the movie metadata path is being established. The
+/// version in each is the pin's (`upstream/<app>.pin`, [`crate::pin`]); the
+/// platform is the one the originals report on the maintainer's hosts.
+const SERVARR_PROXY_PLATFORM: &str = "ubuntu 24.04";
 
 /// The `User-Agent` a personality sends to the Servarr metadata proxies:
-/// one constant each, read here and nowhere else. Lidarr, which emulates
-/// nothing yet, goes by Unarr's own name.
+/// the pinned original's, built here and nowhere else. Lidarr, which
+/// emulates nothing yet, goes by Unarr's own name.
 pub fn servarr_proxy_user_agent(personality: crate::Personality) -> String {
-    match personality {
-        crate::Personality::Sonarr => SONARR_SERVARR_PROXY_USER_AGENT.to_string(),
-        crate::Personality::Radarr => RADARR_SERVARR_PROXY_USER_AGENT.to_string(),
-        crate::Personality::Lidarr => user_agent(),
+    match crate::pin::of(personality) {
+        Some(pin) => format!(
+            "{}/{} ({SERVARR_PROXY_PLATFORM})",
+            personality.app_name(),
+            pin.version
+        ),
+        None => user_agent(),
     }
 }
 
@@ -285,6 +289,21 @@ mod tests {
         assert!(user_agent().starts_with("Unarr/"));
         let _ = build(Duration::from_secs(1));
         let _ = shared();
+    }
+
+    /// The metadata proxies hear the pinned original's own user agent.
+    #[test]
+    fn the_servarr_proxies_hear_the_pinned_original() {
+        use crate::Personality;
+        assert_eq!(
+            servarr_proxy_user_agent(Personality::Sonarr),
+            format!("Sonarr/{} (ubuntu 24.04)", crate::pin::SONARR.version)
+        );
+        assert_eq!(
+            servarr_proxy_user_agent(Personality::Radarr),
+            format!("Radarr/{} (ubuntu 24.04)", crate::pin::RADARR.version)
+        );
+        assert!(servarr_proxy_user_agent(Personality::Lidarr).starts_with("Unarr/"));
     }
 
     use crate::outbound::{CertificateValidation, Handle, Outbound, Proxy, ProxyType};

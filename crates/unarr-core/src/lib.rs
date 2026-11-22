@@ -28,6 +28,7 @@ pub mod notifications;
 pub mod outbound;
 pub mod panics;
 pub mod parser;
+pub mod pin;
 pub mod profile;
 pub mod quality;
 pub mod random;

@@ -8,7 +8,7 @@ one by the paths it touches, so a port starts from a table and not from a
 raw diff::
 
     scripts/upstream-triage.py --app radarr --fetch
-    scripts/upstream-triage.py --app radarr --target 7.0.3.10918 --format json
+    scripts/upstream-triage.py --app radarr --target X.Y.Z.BUILD --format json
 
 The target release (``choose_target``):
 
@@ -20,8 +20,9 @@ The target release (``choose_target``):
 - when the newest is in a later major, the first stable release of the next
   major (a major jump): ``x.0.0`` when that one is stable, a later one when
   it was a pre-release (Radarr published 7.0.0 to 7.0.3.10912 as
-  pre-releases on ``master``: 6.4.4 goes to 7.0.3.10918); the releases
-  after it come with the next runs;
+  pre-releases on ``master``: 6.4.4 goes to the build of 7.0.3 that came
+  after them, the first stable one); the releases after it come with the
+  next runs;
 - none newer than the pin: nothing to do.
 
 Git cannot tell a stable release from a pre-release, and the stable branch
@@ -272,12 +273,12 @@ def read_lock(path: Path) -> Lock:
 
 
 def pinned_version(app: str) -> Version | None:
-    """The pin of scripts/<app>-fixture.sh, to check the cursor against."""
-    script = REPO / "scripts" / f"{app}-fixture.sh"
-    var = app.upper() + "_VERSION"
-    if not script.exists():
+    """The version of upstream/<app>.pin, the release Unarr emulates, to
+    check the cursor against."""
+    pin = UPSTREAM / f"{app}.pin"
+    if not pin.exists():
         return None
-    match = re.search(rf'^{var}="\$\{{{var}:-([0-9.]+)\}}"', script.read_text(), re.M)
+    match = re.search(r"^version[ \t]*=[ \t]*([0-9.]+)[ \t]*$", pin.read_text(), re.M)
     return Version.parse(match.group(1)) if match else None
 
 
@@ -555,7 +556,7 @@ def triage(app: str, repo_dir: Path, lock: Lock, wontport: Wontport, target_arg:
     warnings = []
     pin = pinned_version(app)
     if pin is not None and pin != lock.release:
-        warnings.append(f"the cursor's release {lock.release} is not the pin {pin} of scripts/{app}-fixture.sh")
+        warnings.append(f"the cursor's release {lock.release} is not the pin {pin} of upstream/{app}.pin")
     if run_git(repo_dir, "cat-file", "-e", f"{lock.commit}^{{commit}}").returncode != 0:
         raise SystemExit(f"the cursor {lock.commit} is not in {repo_dir}: run with --fetch")
     tags = releases_on_branch(repo_dir, f"refs/heads/{lock.branch}")

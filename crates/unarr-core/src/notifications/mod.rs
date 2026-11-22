@@ -223,7 +223,7 @@ impl Default for Identity {
             url_base: String::new(),
             machine_name: machine_name(),
             app_name: "Sonarr".into(),
-            app_version: "4.0.20.3014".into(),
+            app_version: crate::pin::SONARR.version.into(),
             media_cover_dir: None,
         }
     }

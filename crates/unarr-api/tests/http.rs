@@ -121,13 +121,19 @@ async fn an_api_answer_is_json_in_utf8_versioned_and_never_cached() {
     assert_eq!(header(&headers, "cache-control"), Some("no-cache, no-store"));
     assert_eq!(header(&headers, "pragma"), Some("no-cache"));
     assert_eq!(header(&headers, "expires"), Some("-1"));
-    assert_eq!(header(&headers, "x-application-version"), Some("4.0.20.3014"));
+    assert_eq!(
+        header(&headers, "x-application-version"),
+        Some(unarr_core::pin::SONARR.version)
+    );
     assert_eq!(header(&headers, "access-control-allow-origin"), None);
 
     // `GET /api` is under the same pipeline; the feed is not versioned.
     let (status, headers, _) = ask(&app, "GET", "/api", &[("X-Api-Key", KEY)], "").await;
     assert_eq!(status, StatusCode::OK);
-    assert_eq!(header(&headers, "x-application-version"), Some("4.0.20.3014"));
+    assert_eq!(
+        header(&headers, "x-application-version"),
+        Some(unarr_core::pin::SONARR.version)
+    );
     let feed = format!("/feed/v3/calendar/Sonarr.ics?apikey={KEY}");
     let (status, headers, _) = ask(&app, "GET", &feed, &[], "").await;
     assert_eq!(status, StatusCode::OK);
@@ -150,7 +156,10 @@ async fn a_refused_key_gets_a_bare_401_on_any_path() {
     let (status, headers, body) = ask(&app, "GET", "/api/v3/nosuchthing", &[("X-Api-Key", KEY)], "").await;
     assert_eq!(status, StatusCode::NOT_FOUND);
     assert!(body.is_empty());
-    assert_eq!(header(&headers, "x-application-version"), Some("4.0.20.3014"));
+    assert_eq!(
+        header(&headers, "x-application-version"),
+        Some(unarr_core::pin::SONARR.version)
+    );
 }
 
 #[tokio::test]
@@ -1231,7 +1240,10 @@ async fn radarr_answers_outside_the_body_as_measured() {
     let problem: serde_json::Value = serde_json::from_slice(&body).unwrap();
     assert_eq!(problem["status"], 404);
     assert_eq!(problem["title"], "Not Found");
-    assert_eq!(header(&headers, "x-application-version"), Some("6.4.4.10685"));
+    assert_eq!(
+        header(&headers, "x-application-version"),
+        Some(unarr_core::pin::RADARR.version)
+    );
 
     // No body where one is needed: the error is under the empty key.
     let json = [("X-Api-Key", KEY), ("Content-Type", "application/json")];
@@ -1668,7 +1680,10 @@ async fn an_accept_without_json_is_406_once_the_action_has_run() {
         assert!(body.is_empty());
         assert_eq!(header(&headers, "content-type"), None);
         assert_eq!(header(&headers, "cache-control"), Some("no-cache, no-store"));
-        assert_eq!(header(&headers, "x-application-version"), Some("4.0.20.3014"));
+        assert_eq!(
+            header(&headers, "x-application-version"),
+            Some(unarr_core::pin::SONARR.version)
+        );
     }
     for accept in [
         "*/*",
@@ -1851,7 +1866,10 @@ async fn while_starting_an_authenticated_request_is_503() {
     let (status, headers, body) = ask(&app, "GET", "/api/v3/system/status", &[("X-Api-Key", KEY)], "").await;
     assert_eq!(status, StatusCode::SERVICE_UNAVAILABLE);
     assert_eq!(header(&headers, "content-type"), Some("application/json"));
-    assert_eq!(header(&headers, "x-application-version"), Some("4.0.20.3014"));
+    assert_eq!(
+        header(&headers, "x-application-version"),
+        Some(unarr_core::pin::SONARR.version)
+    );
     assert_eq!(
         String::from_utf8(body).unwrap(),
         "{\n  \"errorMessage\": \"Sonarr is starting up, please try again later\"\n}"

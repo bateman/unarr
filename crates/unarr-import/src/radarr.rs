@@ -747,6 +747,18 @@ mod tests {
     use super::*;
     use unarr_core::Personality;
 
+    /// The importer reads a database of the pinned Radarr (`upstream/radarr.pin`):
+    /// a new pin with a higher migration level fails here until the mapping
+    /// is checked against it and [`MAX_KNOWN_MIGRATION`] rises (issue #9).
+    #[test]
+    fn the_pinned_release_is_within_the_known_migrations() {
+        let pinned = unarr_core::pin::RADARR.migration;
+        assert!(
+            (MIN_MIGRATION..=MAX_KNOWN_MIGRATION).contains(&pinned),
+            "Radarr pinned at migration {pinned}, the importer knows {MIN_MIGRATION}..={MAX_KNOWN_MIGRATION}"
+        );
+    }
+
     fn fixture() -> std::path::PathBuf {
         std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../tests/fixtures/radarr/radarr.db")
     }

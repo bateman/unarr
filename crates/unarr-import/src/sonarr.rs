@@ -806,6 +806,18 @@ pub fn import(legacy_db: &Path, db: &Db) -> anyhow::Result<ImportReport> {
 mod tests {
     use super::*;
 
+    /// The importer reads a database of the pinned Sonarr (`upstream/sonarr.pin`):
+    /// a new pin with a higher migration level fails here until the mapping
+    /// is checked against it and [`MAX_KNOWN_MIGRATION`] rises (issue #9).
+    #[test]
+    fn the_pinned_release_is_within_the_known_migrations() {
+        let pinned = unarr_core::pin::SONARR.migration;
+        assert!(
+            (MIN_MIGRATION..=MAX_KNOWN_MIGRATION).contains(&pinned),
+            "Sonarr pinned at migration {pinned}, the importer knows {MIN_MIGRATION}..={MAX_KNOWN_MIGRATION}"
+        );
+    }
+
     const FIXTURE: &str = concat!(
         env!("CARGO_MANIFEST_DIR"),
         "/../../tests/fixtures/sonarr/sonarr.db"

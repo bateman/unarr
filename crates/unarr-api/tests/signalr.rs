@@ -62,7 +62,10 @@ async fn ui_client_handshake_and_version_message() {
     assert_eq!(received[1]["type"], 1);
     assert_eq!(received[1]["target"], "receiveMessage");
     assert_eq!(received[1]["arguments"][0]["name"], "version");
-    assert_eq!(received[1]["arguments"][0]["body"]["version"], "4.0.20.3014");
+    assert_eq!(
+        received[1]["arguments"][0]["body"]["version"],
+        unarr_core::pin::SONARR.version
+    );
 
     // A broadcast reaches the client as another receiveMessage invocation.
     hub.broadcast(
@@ -152,5 +155,8 @@ async fn negotiate_version_one_and_version_to_every_client() {
     // The first client hears of the second.
     let heard = next_message(&mut first).await;
     assert_eq!(heard["arguments"][0]["name"], "version");
-    assert_eq!(heard["arguments"][0]["body"]["version"], "4.0.20.3014");
+    assert_eq!(
+        heard["arguments"][0]["body"]["version"],
+        unarr_core::pin::SONARR.version
+    );
 }

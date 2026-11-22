@@ -145,10 +145,12 @@ async fn each_personality_serves_its_own_routes_and_strings() {
 
     let (status, body) = get(&sonarr, "/api/v3/system/status").await;
     assert_eq!(status, StatusCode::OK);
-    assert!(body.contains("\"appName\":\"Sonarr\"") && body.contains("\"version\":\"4.0.20.3014\""));
+    assert!(body.contains("\"appName\":\"Sonarr\""));
+    assert!(body.contains(&format!("\"version\":\"{}\"", unarr_core::pin::SONARR.version)));
     let (status, body) = get(&radarr, "/api/v3/system/status").await;
     assert_eq!(status, StatusCode::OK);
-    assert!(body.contains("\"appName\":\"Radarr\"") && body.contains("\"version\":\"6.4.4.10685\""));
+    assert!(body.contains("\"appName\":\"Radarr\""));
+    assert!(body.contains(&format!("\"version\":\"{}\"", unarr_core::pin::RADARR.version)));
 
     // Series and episodes are Sonarr's, movies Radarr's: the other answers
     // the originals' empty 404 for a route it does not have.
