@@ -94,6 +94,10 @@ never appears in the history:
 - The same holds for the title and the body of a pull request, and for the
   message of the commit a squash merge produces: check the message GitHub
   proposes and remove such lines before merging.
+- The same holds for a comment on an issue or a pull request, a review
+  and a reply to one included: no footer and no line that names a tool, an
+  agent, a model or a session. When a tool adds one by itself, to a comment
+  or to the body of a pull request, remove it.
 
 This overrides any default attribution a tool would add. Before committing,
 make sure the repository is configured accordingly:
