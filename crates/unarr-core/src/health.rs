@@ -150,6 +150,10 @@ pub struct Context<'a> {
     /// The Servarr services' ping, which the proxy check asks through the
     /// proxy (a mock's, in the tests).
     pub services_ping: String,
+    /// The application's own HTTP client, over its own proxy and
+    /// certificate settings: the proxy check asks through it, as each
+    /// original's `ProxyCheck` asks through its own `IHttpClient`.
+    pub http: &'a reqwest::Client,
 }
 
 type Check = for<'a> fn(
@@ -1140,7 +1144,9 @@ async fn recycling_bin(ctx: &Context<'_>) -> anyhow::Result<HealthCheck> {
 
 /// `ProxyCheck`: with a proxy configured, its host resolves and a
 /// request through it is answered. Only a 400 counts against it; any
-/// other answer came through.
+/// other answer came through. The request goes out through the
+/// application's own client, so the proxy tested is the one of its own
+/// settings, not another personality's.
 async fn proxy(ctx: &Context<'_>) -> anyhow::Result<HealthCheck> {
     const SOURCE: &str = "ProxyCheck";
     let (enabled, host) = ctx
@@ -1172,13 +1178,19 @@ async fn proxy(ctx: &Context<'_>) -> anyhow::Result<HealthCheck> {
             "#proxy-failed-resolve-ip",
         ));
     }
-    match crate::http::shared().get(&ctx.services_ping).send().await {
+    match ctx.http.get(&ctx.services_ping).send().await {
         Ok(response) if response.status() == reqwest::StatusCode::BAD_REQUEST => {
             tracing::error!("Proxy Health Check failed: BadRequest");
+            // `ProxyBadRequestHealthCheckMessage` and Radarr's
+            // `ProxyCheckBadRequestMessage`, which spell it differently.
+            let message = match ctx.personality {
+                crate::Personality::Radarr => "Failed to test proxy. StatusCode: BadRequest",
+                _ => "Failed to test proxy. Status Code: BadRequest",
+            };
             Ok(HealthCheck::new(
                 SOURCE,
                 HealthType::Error,
-                "Failed to test proxy. Status Code: BadRequest".to_string(),
+                message.to_string(),
                 "#proxy-failed-test",
             ))
         }

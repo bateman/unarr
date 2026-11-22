@@ -538,6 +538,96 @@ async fn the_covers_go_out_through_radarrs_own_client_from_the_start() {
     );
 }
 
+/// Radarr's `ProxyCheck` tests the proxy of Radarr's settings: its ping
+/// goes out through Radarr's own client, as the original's goes through
+/// its own `IHttpClient`. The process-wide settings, Sonarr's, name no
+/// proxy here, as in a process that runs Radarr alone; asked through
+/// them, the ping would reach nobody.
+#[tokio::test]
+async fn radarrs_proxy_check_asks_through_radarrs_own_proxy() {
+    use tokio::io::{AsyncReadExt, AsyncWriteExt};
+    use unarr_core::health::{CheckSet, HealthType};
+    use unarr_core::outbound::{Handle, Outbound, Proxy, ProxyType};
+
+    // Radarr's settings name a proxy, here a listener of the test's that
+    // answers the first ping and refuses the second.
+    let listener = tokio::net::TcpListener::bind("127.0.0.1:0").await.unwrap();
+    let port = listener.local_addr().unwrap().port();
+    let settings = Handle::default();
+    settings.set(Outbound {
+        proxy: Some(Proxy::new(
+            ProxyType::Http,
+            "127.0.0.1",
+            i64::from(port),
+            "",
+            "",
+            "",
+            false,
+        )),
+        certificate_validation: Default::default(),
+    });
+    let own = unarr_core::http::build_with(
+        std::time::Duration::from_secs(10),
+        &settings,
+        unarr_core::Personality::Radarr,
+    );
+    let (asked, mut seen) = tokio::sync::mpsc::unbounded_channel();
+    tokio::spawn(async move {
+        for status in ["200 OK", "400 Bad Request"] {
+            let (mut socket, _) = listener.accept().await.unwrap();
+            let mut request = vec![0u8; 2048];
+            let read = socket.read(&mut request).await.unwrap();
+            let line = String::from_utf8_lossy(&request[..read])
+                .lines()
+                .next()
+                .unwrap_or_default()
+                .to_string();
+            let _ = asked.send(line);
+            socket
+                .write_all(
+                    format!("HTTP/1.1 {status}\r\nContent-Length: 0\r\nConnection: close\r\n\r\n").as_bytes(),
+                )
+                .await
+                .unwrap();
+        }
+    });
+
+    // The proxy as Settings > General keeps it; the check resolves its name.
+    let db = Db::open_in_memory_for(Personality::Radarr).unwrap();
+    db.call(|conn| {
+        store::config::set_config(conn, "ProxyEnabled", "True")?;
+        store::config::set_config(conn, "ProxyHostname", "127.0.0.1")
+    })
+    .await
+    .unwrap();
+    let (runtime, _) = runtime_with(&db, Some(own)).await;
+    // The services' ping on a host only the proxy answers for.
+    runtime.set_upstreams(unarr_core::metadata::Upstreams::mock("http://services.invalid"));
+    let ping = "GET http://services.invalid/radarr.servarr.com/v1/ping HTTP/1.1";
+
+    // Answered through the proxy: nothing to say.
+    runtime.check_health(CheckSet::ConfigSaved).await;
+    let health = runtime.health();
+    assert!(health.iter().all(|h| h.source != "ProxyCheck"), "{health:?}");
+    assert_eq!(seen.try_recv().as_deref(), Ok(ping));
+
+    // A 400 from the proxy is the one answer held against it, in
+    // Radarr's words.
+    assert!(runtime.check_health(CheckSet::ConfigSaved).await);
+    assert_eq!(seen.try_recv().as_deref(), Ok(ping));
+    let proxy = runtime
+        .health()
+        .into_iter()
+        .find(|h| h.source == "ProxyCheck")
+        .expect("the refusal is reported");
+    assert_eq!(proxy.kind, HealthType::Error);
+    assert_eq!(proxy.message, "Failed to test proxy. StatusCode: BadRequest");
+    assert_eq!(
+        proxy.wiki_url,
+        "https://wiki.servarr.com/radarr/system#proxy-failed-test"
+    );
+}
+
 /// `CleanLibrary` at the two levels that remove: the movie no list names
 /// goes from the library, and the outcome says whether its folder goes
 /// too, which is the caller's to do.

@@ -2100,8 +2100,7 @@ been 20 MB since 20 November 2026 (section 21.11).
   in the goldens, and the metadata row of a movie the library holds is
   deliberately kept when its collection drops it. Auto tagging does not
   apply its tags on a refresh or an edit, as the original's
-  `UpdateTags` does; `ProxyCheck` uses the process-wide client, which is
-  Sonarr's. A proxy saved in Settings > General applies to the
+  `UpdateTags` does. A proxy saved in Settings > General applies to the
   connections opened after the save: one already open to a host stays
   direct, or on the old proxy, until it has been idle for 90 seconds and
   the pool lets it go (the clients read the proxy when they connect, not
