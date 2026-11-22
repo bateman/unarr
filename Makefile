@@ -116,12 +116,12 @@ upstream-radarr: ## Fetch upstream Radarr, triage its commits since upstream/rad
 
 # bump-<app>: the arguments of scripts/pin-bump.py, from the variables the help names.
 BUMP_ARGS = --releases $(or $(RELEASES),api) $(if $(TARGET),--target $(TARGET)) $(if $(STEPS),--steps $(STEPS)) \
-	$(if $(DRY_RUN),--dry-run) $(if $(BASELINE),--baseline) $(if $(KEEP_CURSOR),--keep-cursor) $(if $(LISTS),--lists $(LISTS))
+	$(if $(DRY_RUN),--dry-run) $(if $(BASELINE),--baseline) $(if $(LISTS),--lists $(LISTS))
 
-bump-sonarr: ## Bump upstream/sonarr.pin to the triage's target and record again from it; summary in .cache/bump/sonarr (TARGET=, RELEASES=api|tags|file, STEPS=fetch,record,apply,test,summary, DRY_RUN=1, BASELINE=1, KEEP_CURSOR=1, LISTS=)
+bump-sonarr: ## Bump upstream/sonarr.pin to the triage's target and record again from it; summary in .cache/bump/sonarr (TARGET=, RELEASES=api|tags|file, STEPS=fetch,record,apply,test,summary or cursor at the end of the port, DRY_RUN=1, BASELINE=1, LISTS=)
 	@python3 -I scripts/pin-bump.py --app sonarr $(BUMP_ARGS)
 
-bump-radarr: ## Bump upstream/radarr.pin to the triage's target and record again from it; summary in .cache/bump/radarr (TARGET=, RELEASES=api|tags|file, STEPS=fetch,record,apply,test,summary, DRY_RUN=1, BASELINE=1, KEEP_CURSOR=1, LISTS=)
+bump-radarr: ## Bump upstream/radarr.pin to the triage's target and record again from it; summary in .cache/bump/radarr (TARGET=, RELEASES=api|tags|file, STEPS=fetch,record,apply,test,summary or cursor at the end of the port, DRY_RUN=1, BASELINE=1, LISTS=)
 	@python3 -I scripts/pin-bump.py --app radarr $(BUMP_ARGS)
 
 bazarr: ## Replay Bazarr's requests against a running unarrd (UNARR_URL, UNARR_API_KEY)

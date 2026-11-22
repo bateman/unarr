@@ -6,7 +6,7 @@ personality:
 | File | What | Written by |
 |------|------|------------|
 | `<app>.pin` | the release Unarr emulates: version, build time, migration level, SHA-256 of the tarball; the one place a pinned value is written (`scripts/tests/test_pins.py`) | `make bump-<app>` |
-| `<app>.lock` | the cursor: the last upstream commit handled, and its release | `make bump-<app>`, in the port's branch |
+| `<app>.lock` | the cursor: the last upstream commit handled, and its release | `make bump-<app> STEPS=cursor`, the last step of a port |
 | `<app>-wontport.md` | upstream changes Unarr does not take, so the triage does not assess them again | by hand |
 
 Two commands, run in this order:
@@ -26,13 +26,13 @@ make bump-radarr                                         # all the steps, target
 make bump-radarr TARGET=7.0.3.10918 RELEASES=tags        # a target given by hand, the API out of reach
 make bump-radarr STEPS=fetch,record                      # only the steps that run the new original
 make bump-radarr STEPS=apply,test,summary                # the rest, from the same work directory
+make bump-radarr STEPS=cursor                            # at the end of the port: the cursor to the pinned release
 ```
 
 Variables: `TARGET`, `RELEASES` (`api`, `tags` or a file, as for the
 triage), `STEPS`, `DRY_RUN=1`, `BASELINE=1` (also record the pinned release,
 to tell what any recording changes from what the release changes; twice the
-recording time), `KEEP_CURSOR=1` (leave `<app>.lock` alone), `LISTS` (record
-only these request lists). The work directory is `.cache/bump/<app>`
+recording time), `LISTS` (record only these request lists). The work directory is `.cache/bump/<app>`
 (`UNARR_CACHE/bump/<app>` when `UNARR_CACHE` is set); the summary is
 `summary.md` there, and `summary.json` for a program.
 
@@ -40,9 +40,10 @@ only these request lists). The work directory is `.cache/bump/<app>`
 |------|--------------|--------|---------|------------------------|
 | `fetch` | the target from the triage or `TARGET`; the tarball from `https://github.com/<owner>/<repo>/releases/download/v<version>/`, the final host checked to be GitHub's release storage, its entries checked (all under `<App>/`, no link out), its SHA-256 computed and, when the releases came from the API, compared with the digest GitHub publishes | the work directory | GitHub | no |
 | `record` | the fixture script (`scripts/<app>-fixture.sh golden`) on the tarball of the work directory: once with no request, for the migration level of the fixture the original migrates (that database is kept, for the importer's test); then every request list under `tests/fixtures/<app>/golden*/` with the variables of its header; the provider schemas and the localisation file; `db-after.json` and `config-after.xml`, which the headers say were copied by hand; the requests the mock got | the work directory, and the fixture script's `/movies`, `/tv`, `/downloads` | none | yes |
-| `apply` | the pin and the cursor; the recordings, compared with `HEAD` first; the old binary removed from the cache and `make ui-<app>`, which downloads the tarball again and checks it against the new pin; the vectors of the whole new tag (`scripts/port-vectors.py`), files gone upstream removed; the importer's `MAX_KNOWN_MIGRATION` read | the repository | GitHub | no |
+| `apply` | the pin, not the cursor; the recordings, compared with `HEAD` first; the old binary removed from the cache and `make ui-<app>`, which downloads the tarball again and checks it against the new pin; the vectors of the whole new tag (`scripts/port-vectors.py`), files gone upstream removed; the importer's `MAX_KNOWN_MIGRATION` read | the repository | GitHub | no |
 | `test` | `cargo test --workspace --no-fail-fast` and `make test-scripts`; each failing test run once more (20 at most), to tell a flaky one | the work directory | none | no |
 | `summary` | the release, which recordings changed and how (by list and by area), the schemas and strings, the vectors, the importer, the failing tests and what each printed first, what is left to check by hand, the time each step took | the work directory | none | no |
+| `cursor` | not a default step: once every upstream commit up to the pinned release is handled, the cursor moves to that release and the commit of its tag, read from the triage's clone | the repository | GitHub | no |
 
 `record` is the only step that runs a binary nobody vetted, and it writes
 nothing in the repository: in the workflow it runs in a job without
@@ -104,9 +105,15 @@ What the bump leaves to the port, and lists in the summary:
 - **The vectors are regenerated whole into the work directory**, then
   replace the committed ones: `port-vectors.py` alone never removes the
   file of a fixture gone upstream.
-- **The cursor moves with the pin** by default, as the PR moves both;
-  `KEEP_CURSOR=1` leaves it, for a port that stops before it is complete
-  (issue #9, section 6: such a run leaves the cursor where it was).
+- **The cursor moves at the end of the port, not with the pin.** The bump
+  writes the pin and leaves the cursor: the triage on the port's branch
+  still lists the commits to port, a run that stops halfway leaves the
+  cursor where it was and the next one starts from what is left (issue #9,
+  section 6), and `test_the_shipped_cursors_are_at_the_pins` fails until
+  `STEPS=cursor` moves it, so a port is not green before it is done. The
+  same PR still moves both. Left aside: moving the cursor with the pin,
+  which says every commit is handled before any is, and leaves a run that
+  stops halfway with nothing to continue from.
 - **Failing tests are run once more.** A test that passes then is reported
   as flaky, not as work for the port (`golden_responses_match` in
   `crates/unarr-api/tests/contract.rs` is one).

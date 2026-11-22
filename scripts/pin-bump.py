@@ -10,6 +10,7 @@ starting material of the port::
     scripts/pin-bump.py --app radarr --target X.Y.Z.BUILD --releases tags
     scripts/pin-bump.py --app radarr --steps fetch,record      # the job without secrets
     scripts/pin-bump.py --app radarr --steps apply,test,summary --work DIR
+    scripts/pin-bump.py --app radarr --steps cursor             # at the end of the port
 
 The steps, in order. ``--steps`` runs a subset; each reads what the earlier
 ones left in the work directory, ``<UNARR_CACHE or .cache>/bump/<app>``
@@ -39,8 +40,8 @@ ones left in the work directory, ``<UNARR_CACHE or .cache>/bump/<app>``
     what the new release changes.
 ``apply``
     Writes the repository: ``upstream/<app>.pin`` (version, build time,
-    migration, SHA-256) and the cursor ``upstream/<app>.lock`` (not with
-    ``--keep-cursor``); the recordings, after comparing them with the
+    migration, SHA-256), not the cursor; the recordings, after comparing
+    them with the
     committed ones; the old binary removed from the cache and ``make
     ui-<app>`` run, which downloads the tarball again and checks it against
     the new pin; the test vectors of the whole new tag
@@ -56,6 +57,15 @@ ones left in the work directory, ``<UNARR_CACHE or .cache>/bump/<app>``
     ``summary.md`` and ``summary.json`` in the work directory: the release,
     which recordings changed and how, the vectors, the importer, which
     tests fail, and what is left to check by hand.
+``cursor``
+    Not among the default steps: the last step of the port, run once every
+    upstream commit up to the pinned release is handled. Moves the cursor
+    ``upstream/<app>.lock`` to the release of ``upstream/<app>.pin`` and the
+    commit of its tag, read from the triage's clone (not from the work
+    directory, which can be gone by then). Until it runs, the triage on the
+    port's branch still lists the commits to port, a run that stops halfway
+    leaves the cursor where it was (issue #9, section 6), and
+    ``test_the_shipped_cursors_are_at_the_pins`` fails: the port is not done.
 
 The importer's ``MAX_KNOWN_MIGRATION`` is not raised here: the test that
 compares it with the pin (``the_pinned_release_is_within_the_known_migrations``)
@@ -94,7 +104,9 @@ triage = importlib.util.module_from_spec(_spec)
 sys.modules[_spec.name] = triage
 _spec.loader.exec_module(triage)
 
-STEPS = ("fetch", "record", "apply", "test", "summary")
+STEPS = ("fetch", "record", "apply", "test", "summary", "cursor")
+# What runs when --steps is not given: the cursor moves at the end of the port.
+DEFAULT_STEPS = STEPS[:-1]
 
 
 @dataclass(frozen=True)
@@ -707,7 +719,6 @@ class Context:
     dry_run: bool = False
     releases: str = "api"
     target: str | None = None
-    keep_cursor: bool = False
     baseline: bool = False
     rerun: int = 20
     lists: list[str] | None = None
@@ -1112,8 +1123,8 @@ def step_apply(ctx: Context) -> None:
     app = ctx.app
     pin_path, lock_path = UPSTREAM / f"{app.key}.pin", UPSTREAM / f"{app.key}.lock"
     if ctx.dry_run:
-        print(f"apply: writes {pin_path.relative_to(REPO)} (version, build_time, migration, sha256)"
-              + ("" if ctx.keep_cursor else f" and {lock_path.relative_to(REPO)} (release, commit)"))
+        print(f"apply: writes {pin_path.relative_to(REPO)} (version, build_time, migration, sha256); "
+              f"{lock_path.relative_to(REPO)} stays where it is (STEPS=cursor when the port is done)")
         print(f"  copies the recordings over tests/fixtures/{app.key}/golden*/ and {app.schemas}/, "
               "after comparing them with HEAD")
         print(f"  removes {fixture_cache(app) / app.name} and runs `make ui-{app.key}` (downloads the tarball again, "
@@ -1147,10 +1158,8 @@ def step_apply(ctx: Context) -> None:
         shutil.copyfile(src, dest)
     log(f"copied {len(changes['copy'])} recordings and {len(schemas['copy'])} schema files")
     write_pin(pin_path, values)
-    if not ctx.keep_cursor:
-        write_lock(lock_path, bump["to"]["version"], bump["to"]["commit"])
-    log(f"pinned {app.name} {values['version']} (build {values['build_time']}, migration {values['migration']})"
-        + ("" if ctx.keep_cursor else f"; cursor at {bump['to']['commit'][:12]}"))
+    log(f"pinned {app.name} {values['version']} (build {values['build_time']}, migration {values['migration']}); "
+        f"the cursor stays at {bump['from']['version']}")
     binary = fixture_cache(app) / app.name
     if binary.exists():
         shutil.rmtree(binary)
@@ -1170,7 +1179,7 @@ def step_apply(ctx: Context) -> None:
     importer = importer_range(app, values["migration"])
     applied = {
         "pin": values,
-        "cursor": None if ctx.keep_cursor else {"release": bump["to"]["version"], "commit": bump["to"]["commit"]},
+        "cursor": {"release": bump["from"]["version"], "commit": bump["from"]["commit"]},
         "recordings": changes["lists"],
         "schemas": schemas["files"],
         "baseline": baseline,
@@ -1273,11 +1282,11 @@ def render_summary(work: Path) -> tuple[str, dict]:
     if applied:
         lines += ["## Written", ""]
         lines.append(f"- `upstream/{app.key}.pin`: " + ", ".join(f"{k} `{v}`" for k, v in applied["pin"].items()))
-        if applied.get("cursor"):
-            lines.append(f"- `upstream/{app.key}.lock`: release `{applied['cursor']['release']}`, commit "
-                         f"`{applied['cursor']['commit']}`")
-        else:
-            lines.append(f"- `upstream/{app.key}.lock`: left where it was (--keep-cursor)")
+        lines.append(f"- `upstream/{app.key}.lock`: left at `{bump['from']['version']}`, so the triage on this "
+                     f"branch still lists the commits to port; when they are all handled, "
+                     f"`make bump-{app.key} STEPS=cursor` moves it to `{bump['to']['version']}` "
+                     f"(`{bump['to']['commit'][:12]}`), and `test_the_shipped_cursors_are_at_the_pins` "
+                     "passes again")
         lines.append(f"- the web UI of the new tarball (`make ui-{app.key}`, {applied.get('ui_seconds')}s)")
         lines.append("")
 
@@ -1514,13 +1523,40 @@ def step_summary(ctx: Context) -> None:
     log(f"summary in {ctx.path('summary.md')}")
 
 
+def step_cursor(ctx: Context) -> None:
+    app = ctx.app
+    lock_path = UPSTREAM / f"{app.key}.lock"
+    pin = read_pin(UPSTREAM / f"{app.key}.pin")
+    lock = triage.read_lock(lock_path)
+    version = triage.Version.parse(pin["version"])
+    if version == lock.release:
+        print(f"cursor: already at {version}, the pinned release")
+        return
+    if version < lock.release:
+        die(f"the pin ({version}) is older than the cursor ({lock.release})")
+    repo_dir = cache_dir() / "upstream" / f"{app.name}.git"
+    if ctx.dry_run:
+        print(f"cursor: moves upstream/{app.key}.lock from {lock.release} to {version} and the commit of "
+              f"{version.tag}, read from {repo_dir} (fetched first)")
+        return
+    triage.fetch(repo_dir, lock)
+    tags = triage.releases_on_branch(repo_dir, f"refs/heads/{lock.branch}")
+    if version not in tags:
+        die(f"{version.tag} is not a release on {lock.branch}")
+    commit = triage.git(repo_dir, "rev-parse", f"{tags[version]}^{{commit}}").strip()
+    if not triage.is_ancestor(repo_dir, lock.commit, commit):
+        die(f"the cursor {lock.commit[:12]} is not an ancestor of {tags[version]}")
+    write_lock(lock_path, str(version), commit)
+    log(f"cursor moved from {lock.release} to {version} ({commit[:12]})")
+
+
 STEP_FUNCTIONS = {"fetch": step_fetch, "record": step_record, "apply": step_apply, "test": step_test,
-                  "summary": step_summary}
+                  "summary": step_summary, "cursor": step_cursor}
 
 
 def parse_steps(text: str | None) -> list[str]:
     if not text or text == "all":
-        return list(STEPS)
+        return list(DEFAULT_STEPS)
     wanted = [s.strip() for s in text.split(",") if s.strip()]
     unknown = [s for s in wanted if s not in STEPS]
     if unknown:
@@ -1531,14 +1567,14 @@ def parse_steps(text: str | None) -> list[str]:
 def main(argv: list[str] | None = None) -> int:
     ap = argparse.ArgumentParser(description=__doc__.split("\n\n")[0])
     ap.add_argument("--app", required=True, choices=sorted(APPS))
-    ap.add_argument("--steps", help=f"comma-separated, in any order; run in the order {','.join(STEPS)} (default: all)")
+    ap.add_argument("--steps", help=f"comma-separated, in any order; run in the order {','.join(STEPS)} "
+                    f"(default: {','.join(DEFAULT_STEPS)}; cursor at the end of the port)")
     ap.add_argument("--target", help="the release to go to, instead of the triage's rule (X.Y.Z.BUILD)")
     ap.add_argument("--releases", default="api", metavar="api|tags|FILE",
                     help="where the triage tells stable releases from pre-releases (default: api)")
     ap.add_argument("--work", type=Path, help="the work directory (default: <UNARR_CACHE or .cache>/bump/<app>)")
     ap.add_argument("--dry-run", action="store_true", help="say what each step would do; download nothing, "
                     "write nothing (the triage still updates its clone of upstream)")
-    ap.add_argument("--keep-cursor", action="store_true", help="leave upstream/<app>.lock where it is")
     ap.add_argument("--baseline", action="store_true", help="also record the pinned release, to tell the noise of "
                     "any recording from what the new release changed (doubles the recording time)")
     ap.add_argument("--lists", help="record only these request lists (comma-separated directory names)")
@@ -1546,7 +1582,7 @@ def main(argv: list[str] | None = None) -> int:
     args = ap.parse_args(argv)
     app = APPS[args.app]
     ctx = Context(app=app, work=(args.work or cache_dir() / "bump" / app.key).resolve(), dry_run=args.dry_run,
-                  releases=args.releases, target=args.target, keep_cursor=args.keep_cursor, baseline=args.baseline,
+                  releases=args.releases, target=args.target, baseline=args.baseline,
                   rerun=args.rerun, lists=[s for s in (args.lists or "").split(",") if s] or None)
     steps = parse_steps(args.steps)
     if args.dry_run:

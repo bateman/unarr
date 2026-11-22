@@ -10,6 +10,7 @@ import io
 import json
 import os
 import shutil
+import subprocess
 import sys
 import tarfile
 import tempfile
@@ -423,7 +424,8 @@ class UntrustedWork(Temp):
 
 class Steps(Temp):
     def test_steps_run_in_their_order(self):
-        self.assertEqual(bump.parse_steps(None), list(bump.STEPS))
+        self.assertEqual(bump.parse_steps(None), ["fetch", "record", "apply", "test", "summary"])
+        self.assertEqual(bump.parse_steps("cursor"), ["cursor"])
         self.assertEqual(bump.parse_steps("summary,apply"), ["apply", "summary"])
         with self.assertRaises(SystemExit):
             bump.parse_steps("fetch,deploy")
@@ -436,13 +438,10 @@ class Steps(Temp):
         text = out.getvalue()
         self.assertFalse(work.exists())
         for expected in ("record: runs Radarr", "golden-library", "GOLDEN_SETUP=tests/fixtures/radarr/golden-blank",
-                         "apply: writes upstream/radarr.pin", "upstream/radarr.lock", "make ui-radarr",
+                         "apply: writes upstream/radarr.pin", "upstream/radarr.lock stays where it is", "make ui-radarr",
                          "tests/vectors/radarr/{parser,decisionengine}", "test: cargo test", "summary:"):
             self.assertIn(expected, text)
-        out = io.StringIO()
-        with contextlib.redirect_stdout(out):
-            bump.main(["--app", "sonarr", "--steps", "apply", "--dry-run", "--keep-cursor", "--work", str(work)])
-        self.assertNotIn("sonarr.lock", out.getvalue())
+        self.assertNotIn("cursor:", text)
 
     def test_a_step_needs_what_the_one_before_left(self):
         with self.assertRaises(SystemExit) as caught:
@@ -491,7 +490,7 @@ def write_work(work: Path, subject: str = "Fix `x` | y") -> None:
     bump.write_json(work / "apply.json", {
         "pin": {"version": "7.1.0.300", "build_time": "2026-11-16T10:00:00Z", "migration": 243,
                 "sha256": "c" * 64},
-        "cursor": {"release": "7.1.0.300", "commit": "b" * 40},
+        "cursor": {"release": "6.1.0.100", "commit": "a" * 40},
         "recordings": {"golden": {
             "system-status.json": {"kind": "values", "values": ['/version: "6.1.0.100" -> "7.1.0.300"']},
             "movie-1.json": {"kind": "shape", "added": ["/mediaInfo/audioStreams"], "removed": [], "values": []},
@@ -523,6 +522,8 @@ class Summary(Temp):
         for expected in (
             "# Radarr 6.1.0.100 → 7.1.0.300 (major)",
             "Build time `2026-11-16T10:00:00Z`, migration level 243",
+            "`upstream/radarr.lock`: left at `6.1.0.100`",
+            "`make bump-radarr STEPS=cursor` moves it to `7.1.0.300` (`bbbbbbbbbbbb`)",
             "5 files in 1 lists; 3 changed beyond the instants",
             "| `golden` | 5 | 1 | 1 | 2 | 1 | 0 | 0 | 0 | 0 |",
             "`golden/movie-1.json` shape: `+/mediaInfo/audioStreams`",
@@ -559,6 +560,69 @@ class Summary(Temp):
         self.assertIn("## The new original", text)
         self.assertNotIn("## Recordings", text)
         self.assertIn("## Left to check by hand", text)
+
+
+class TheCursorStep(Temp):
+    """`STEPS=cursor` on a small upstream, cloned the way the triage does."""
+
+    def setUp(self):
+        super().setUp()
+        env = dict(os.environ, GIT_CONFIG_GLOBAL=os.devnull, GIT_CONFIG_SYSTEM=os.devnull,
+                   GIT_AUTHOR_NAME="u", GIT_AUTHOR_EMAIL="u@example.invalid",
+                   GIT_COMMITTER_NAME="u", GIT_COMMITTER_EMAIL="u@example.invalid")
+
+        def git(*args, cwd):
+            return subprocess.run(["git", *args], cwd=cwd, env=env, check=True, capture_output=True,
+                                  text=True).stdout.strip()
+
+        work = self.tmp / "work"
+        git("init", "-q", "-b", "master", str(work), cwd=self.tmp)
+        self.commits = {}
+        for tag in ("v6.1.0.100", "v7.1.0.300"):
+            (work / "f").write_text(tag)
+            git("add", "f", cwd=work)
+            git("commit", "-q", "-m", tag, cwd=work)
+            git("tag", tag, cwd=work)
+            self.commits[tag] = git("rev-parse", "HEAD", cwd=work)
+        cache = self.tmp / "cache"
+        git("clone", "-q", "--bare", str(work), str(cache / "upstream" / "Radarr.git"), cwd=self.tmp)
+        self.upstream = self.tmp / "upstream"
+        self.upstream.mkdir()
+        self.lock = self.upstream / "radarr.lock"
+        self.lock.write_text(f"# the cursor\nrepo = {work}\nbranch = master\nrelease = 6.1.0.100\n"
+                             f"commit = {self.commits['v6.1.0.100']}\n")
+        self.pin = self.upstream / "radarr.pin"
+        self.pin.write_text("version = 7.1.0.300\nbuild_time = 2026-01-01T00:00:00Z\nmigration = 243\n"
+                            f"sha256 = {'1' * 64}\n")
+        patches = [mock.patch.object(bump, "UPSTREAM", self.upstream),
+                   mock.patch.dict(os.environ, {"UNARR_CACHE": str(cache)})]
+        for p in patches:
+            p.start()
+            self.addCleanup(p.stop)
+
+    def cursor(self, *extra):
+        out = io.StringIO()
+        with contextlib.redirect_stdout(out), contextlib.redirect_stderr(io.StringIO()):
+            bump.main(["--app", "radarr", "--steps", "cursor", "--work", str(self.tmp / "w"), *extra])
+        return out.getvalue()
+
+    def test_the_cursor_moves_to_the_pinned_release_and_its_tag(self):
+        self.assertIn("moves upstream/radarr.lock from 6.1.0.100 to 7.1.0.300", self.cursor("--dry-run"))
+        self.assertIn("release = 6.1.0.100", self.lock.read_text())
+        self.cursor()
+        lock = bump.triage.read_lock(self.lock)
+        self.assertEqual((str(lock.release), lock.commit), ("7.1.0.300", self.commits["v7.1.0.300"]))
+        self.assertTrue(self.lock.read_text().startswith("# the cursor\n"))
+        self.assertIn("already at 7.1.0.300", self.cursor())
+
+    def test_a_pin_behind_the_cursor_or_off_the_branch_is_refused(self):
+        self.pin.write_text(self.pin.read_text().replace("7.1.0.300", "6.0.0.1"))
+        with self.assertRaises(SystemExit):
+            self.cursor()
+        self.pin.write_text(self.pin.read_text().replace("6.0.0.1", "7.2.0.1"))
+        with self.assertRaises(SystemExit):
+            self.cursor()
+        self.assertIn("release = 6.1.0.100", self.lock.read_text())
 
 
 class Recorder(unittest.TestCase):
