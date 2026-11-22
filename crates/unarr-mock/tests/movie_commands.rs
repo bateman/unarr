@@ -566,7 +566,11 @@ async fn radarrs_proxy_check_asks_through_radarrs_own_proxy() {
         )),
         certificate_validation: Default::default(),
     });
-    let own = unarr_core::http::build_with(std::time::Duration::from_secs(10), &settings);
+    let own = unarr_core::http::build_with(
+        std::time::Duration::from_secs(10),
+        &settings,
+        unarr_core::Personality::Radarr,
+    );
     let (asked, mut seen) = tokio::sync::mpsc::unbounded_channel();
     tokio::spawn(async move {
         for status in ["200 OK", "400 Bad Request"] {
