@@ -40,10 +40,27 @@ struct RadarrAssets;
 /// A file of the frontend a personality serves. Lidarr's is not embedded
 /// yet.
 fn asset(personality: Personality, path: &str) -> Option<rust_embed::EmbeddedFile> {
-    match personality {
+    let file = match personality {
         Personality::Sonarr => SonarrAssets::get(path),
         Personality::Radarr => RadarrAssets::get(path),
         Personality::Lidarr => None,
+    }?;
+    // A debug build reads the files from the disk, where a file system
+    // that ignores case (macOS, Windows) finds `STYLES.CSS` for
+    // `styles.css`; the release build, the files embedded, does not, nor
+    // do the originals on Linux. The name must be the file's, case and all.
+    if cfg!(debug_assertions) && !exact_name(personality, path) {
+        return None;
+    }
+    Some(file)
+}
+
+/// Whether `path` is the name of a file of the bundle, case and all.
+fn exact_name(personality: Personality, path: &str) -> bool {
+    match personality {
+        Personality::Sonarr => SonarrAssets::iter().any(|name| name == path),
+        Personality::Radarr => RadarrAssets::iter().any(|name| name == path),
+        Personality::Lidarr => false,
     }
 }
 
@@ -1003,6 +1020,18 @@ fn escape_data(s: &str) -> String {
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// A bundle file is found under its own name only, whatever the file
+    /// system makes of case.
+    #[test]
+    fn a_bundle_file_is_found_by_its_exact_name() {
+        for personality in [Personality::Sonarr, Personality::Radarr] {
+            assert!(exact_name(personality, "index.html"), "make ui first");
+            assert!(!exact_name(personality, "INDEX.HTML"));
+            assert!(asset(personality, "Index.html").is_none());
+        }
+        assert!(!exact_name(Personality::Lidarr, "index.html"));
+    }
 
     #[test]
     fn the_return_url_is_one_escaped_value() {

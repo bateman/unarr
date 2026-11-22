@@ -479,6 +479,8 @@ async fn send(
 
 #[tokio::test]
 async fn radarr_golden_responses_match() {
+    use_bundled_ffprobe();
+    require_originals_ffprobe();
     // The mock indexers and clients the write goldens were recorded
     // against, on the port the recorded provider settings carry.
     let dirs = ReplayDirs::create();
