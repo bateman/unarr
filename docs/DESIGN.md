@@ -2873,8 +2873,7 @@ Set by the implementer on 20 November 2026, at the maintainer's request
 
 ### 21.13 The user agent towards indexers and clients is the original's
 
-Decided by the maintainer on 22 November 2026; the version, the pin's, is
-the implementer's choice, for the maintainer to confirm or change.
+Decided by the maintainer on 22 November 2026, the pin's version included.
 
 - **The question.** Every personality went by `Unarr/<version>
   (<os> <arch>)` towards indexers, download clients and notification
