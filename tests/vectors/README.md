@@ -20,7 +20,11 @@ fails on a method it does not know, so a fixture added upstream shows up as a
 failure rather than being ignored. Methods about components Unarr ports
 elsewhere, or not at all, are listed in the replay's `SKIPPED` tables.
 
-Regenerate after bumping the pinned Sonarr release:
+`make bump-sonarr` and `make bump-radarr` (`scripts/pin-bump.py`) regenerate
+them from the whole of the new tag, remove the files of fixtures gone
+upstream and list in their summary the methods and cases added or removed.
+`source` is the file's path in the original's tree, whatever directory the
+checkout was in. By hand, after bumping the pinned Sonarr release:
 
     git clone --depth 1 --branch v4.0.20.3014 https://github.com/Sonarr/Sonarr /tmp/sonarr
     scripts/port-vectors.py --sonarr /tmp/sonarr --out tests/vectors --area ParserTests

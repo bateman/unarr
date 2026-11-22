@@ -1,5 +1,5 @@
 {
- "source": "NzbDrone.Core.Test/ParserTests/AbsoluteEpisodeNumberParserFixture.cs",
+ "source": "src/NzbDrone.Core.Test/ParserTests/AbsoluteEpisodeNumberParserFixture.cs",
  "methods": {
   "should_parse_absolute_numbers": {
    "params": [

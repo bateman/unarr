@@ -1,5 +1,5 @@
 {
- "source": "sonarr/src/NzbDrone.Core.Test/DecisionEngineTests/Search/TorrentSeedingSpecificationFixture.cs",
+ "source": "src/NzbDrone.Core.Test/DecisionEngineTests/Search/TorrentSeedingSpecificationFixture.cs",
  "methods": {
   "should_return_true_if_seeds_above_or_equal_to_limit": {
    "params": [

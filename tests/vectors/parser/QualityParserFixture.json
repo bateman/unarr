@@ -1,5 +1,5 @@
 {
- "source": "NzbDrone.Core.Test/ParserTests/QualityParserFixture.cs",
+ "source": "src/NzbDrone.Core.Test/ParserTests/QualityParserFixture.cs",
  "methods": {
   "should_parse_sdtv_quality": {
    "params": [

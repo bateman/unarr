@@ -1,5 +1,5 @@
 {
- "source": "radarr/src/NzbDrone.Core.Test/ParserTests/ParsingServiceTests/ParseQualityDefinitionFixture.cs",
+ "source": "src/NzbDrone.Core.Test/ParserTests/ParsingServiceTests/ParseQualityDefinitionFixture.cs",
  "methods": {
   "should_correctly_identify_default_definition": {
    "params": [

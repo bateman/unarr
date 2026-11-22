@@ -1,5 +1,5 @@
 {
- "source": "radarr/src/NzbDrone.Core.Test/ParserTests/NormalizeTitleFixture.cs",
+ "source": "src/NzbDrone.Core.Test/ParserTests/NormalizeTitleFixture.cs",
  "methods": {
   "should_normalize_series_title": {
    "params": [

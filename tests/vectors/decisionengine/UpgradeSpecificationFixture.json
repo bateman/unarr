@@ -1,5 +1,5 @@
 {
- "source": "sonarr/src/NzbDrone.Core.Test/DecisionEngineTests/UpgradeSpecificationFixture.cs",
+ "source": "src/NzbDrone.Core.Test/DecisionEngineTests/UpgradeSpecificationFixture.cs",
  "methods": {
   "IsUpgradeTest": {
    "params": [

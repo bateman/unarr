@@ -223,7 +223,10 @@ STATIC_SOURCE_RE = re.compile(r"public\s+static\s+object\[\]\s+(?P<name>\w+)\s*=
 SOURCE_ATTR_RE = re.compile(r"\[Test,\s*TestCaseSource\(\s*(?:nameof\()?\"?(?P<field>\w+)\"?\)?\s*\)\]|\[TestCaseSource\(\s*(?:nameof\()?\"?(?P<field2>\w+)\"?\)?\s*\)\]")
 
 
-def extract(path: Path) -> dict:
+def extract(path: Path, root: Path | None = None) -> dict:
+    """The test methods of one fixture file. `source` is its path in the
+    original's tree, relative to `root` (the checkout): the same whatever
+    directory the checkout sits in."""
     text = path.read_text(encoding="utf-8-sig")
     # Strip line comments so commented-out cases are not read.
     text = re.sub(r"^\s*//.*$", "", text, flags=re.M)
@@ -254,7 +257,8 @@ def extract(path: Path) -> dict:
                     print(f"[vectors] {path.name}: cannot decode source row {row[:60]}: {e}", file=sys.stderr)
         if cases:
             methods[m.group("name")] = {"params": params, "cases": cases}
-    return {"source": str(path).split("/src/", 1)[-1], "methods": methods}
+    source = path.relative_to(root).as_posix() if root else path.name
+    return {"source": source, "methods": methods}
 
 
 def main() -> None:
@@ -277,7 +281,7 @@ def main() -> None:
         out_dir = args.out / area.removesuffix("Tests").lower()
         out_dir.mkdir(parents=True, exist_ok=True)
         for path in sorted(src.rglob("*Fixture.cs")) + sorted(src.rglob("*Regex.cs")):
-            data = extract(path)
+            data = extract(path, args.source)
             if not data["methods"]:
                 continue
             n = sum(len(m["cases"]) for m in data["methods"].values())

@@ -228,7 +228,12 @@ cmd_golden() {
         --base-url "http://127.0.0.1:$RADARR_PORT" --api-key "$API_KEY" --mock-url "http://127.0.0.1:$MOCK_PORT" \
         --requests "$requests" --out "$out" --login unarr:fixture --signalr \
         --data-dir "$CACHE/golden-data"
-    [ "$out" = "$GOLDEN_DIR" ] && record_schemas
+    # SCHEMAS_OUT records the schemas somewhere else too: the recording of
+    # a release not pinned yet (scripts/pin-bump.py), which writes nothing
+    # in the repository.
+    if [ -n "${SCHEMAS_OUT:-}" ] || [ "$out" = "$GOLDEN_DIR" ]; then
+        record_schemas
+    fi
     stop_radarr
     stop_mock
     log "golden files written to $out"
@@ -238,7 +243,7 @@ cmd_golden() {
 # select options) the API returns for each implementation. Unarr embeds them
 # to render the same `fields` the originals do. Also the UI strings.
 record_schemas() {
-    local out="$REPO/crates/unarr-api/schemas/radarr"
+    local out="${SCHEMAS_OUT:-$REPO/crates/unarr-api/schemas/radarr}"
     mkdir -p "$out"
     for r in indexer downloadclient notification importlist metadata customformat autotagging; do
         curl -fsS -H "X-Api-Key: $API_KEY" "http://127.0.0.1:$RADARR_PORT/api/v3/$r/schema" \

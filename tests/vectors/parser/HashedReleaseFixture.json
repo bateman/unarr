@@ -1,5 +1,5 @@
 {
- "source": "NzbDrone.Core.Test/ParserTests/HashedReleaseFixture.cs",
+ "source": "src/NzbDrone.Core.Test/ParserTests/HashedReleaseFixture.cs",
  "methods": {
   "should_properly_parse_hashed_releases": {
    "params": [

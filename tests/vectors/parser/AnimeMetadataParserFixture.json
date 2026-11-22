@@ -1,5 +1,5 @@
 {
- "source": "NzbDrone.Core.Test/ParserTests/AnimeMetadataParserFixture.cs",
+ "source": "src/NzbDrone.Core.Test/ParserTests/AnimeMetadataParserFixture.cs",
  "methods": {
   "should_parse_releasegroup_and_hash": {
    "params": [

@@ -1,5 +1,5 @@
 {
- "source": "radarr/src/NzbDrone.Core.Test/ParserTests/ParserFixture.cs",
+ "source": "src/NzbDrone.Core.Test/ParserTests/ParserFixture.cs",
  "methods": {
   "should_remove_accents_from_title": {
    "params": [],

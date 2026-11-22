@@ -1,5 +1,5 @@
 {
- "source": "NzbDrone.Core.Test/ParserTests/SceneCheckerFixture.cs",
+ "source": "src/NzbDrone.Core.Test/ParserTests/SceneCheckerFixture.cs",
  "methods": {
   "should_return_true_for_scene_names": {
    "params": [

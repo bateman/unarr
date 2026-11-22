@@ -4,7 +4,7 @@ NAME  ?= unarr
 IMAGE ?= ghcr.io/bateman/unarr
 TAG   ?= dev
 
-.PHONY: help build run run-both test panic-test fmt lint check deny release-notes clean docker check-name golden golden-radarr sonarr radarr ui ui-sonarr ui-radarr ui-present bazarr bazarr-radarr prowlarr prowlarr-radarr recyclarr recyclarr-radarr http-audit anonymize scale-fixture compare-originals route-percentiles test-scripts upstream-sonarr upstream-radarr ui-smoke
+.PHONY: help build run run-both test panic-test fmt lint check deny release-notes clean docker check-name golden golden-radarr sonarr radarr ui ui-sonarr ui-radarr ui-present bazarr bazarr-radarr prowlarr prowlarr-radarr recyclarr recyclarr-radarr http-audit anonymize scale-fixture compare-originals route-percentiles test-scripts upstream-sonarr upstream-radarr bump-sonarr bump-radarr ui-smoke
 UNARR_URL ?= http://127.0.0.1:8989
 RADARR_URL ?= http://127.0.0.1:7878
 UNARR_API_KEY ?= 0123456789abcdef0123456789abcdef
@@ -113,6 +113,16 @@ upstream-sonarr: ## Fetch upstream Sonarr, triage its commits since upstream/son
 
 upstream-radarr: ## Fetch upstream Radarr, triage its commits since upstream/radarr.lock up to the target release (TARGET=X.Y.Z.BUILD, FORMAT=json, RELEASES=api|tags|file)
 	@python3 -I scripts/upstream-triage.py --app radarr --fetch --releases $(or $(RELEASES),api) $(if $(TARGET),--target $(TARGET)) $(if $(FORMAT),--format $(FORMAT))
+
+# bump-<app>: the arguments of scripts/pin-bump.py, from the variables the help names.
+BUMP_ARGS = --releases $(or $(RELEASES),api) $(if $(TARGET),--target $(TARGET)) $(if $(STEPS),--steps $(STEPS)) \
+	$(if $(DRY_RUN),--dry-run) $(if $(BASELINE),--baseline) $(if $(LISTS),--lists $(LISTS))
+
+bump-sonarr: ## Bump upstream/sonarr.pin to the triage's target and record again from it; summary in .cache/bump/sonarr (TARGET=, RELEASES=api|tags|file, STEPS=fetch,record,apply,test,summary or cursor at the end of the port, DRY_RUN=1, BASELINE=1, LISTS=)
+	@python3 -I scripts/pin-bump.py --app sonarr $(BUMP_ARGS)
+
+bump-radarr: ## Bump upstream/radarr.pin to the triage's target and record again from it; summary in .cache/bump/radarr (TARGET=, RELEASES=api|tags|file, STEPS=fetch,record,apply,test,summary or cursor at the end of the port, DRY_RUN=1, BASELINE=1, LISTS=)
+	@python3 -I scripts/pin-bump.py --app radarr $(BUMP_ARGS)
 
 bazarr: ## Replay Bazarr's requests against a running unarrd (UNARR_URL, UNARR_API_KEY)
 	@python3 -I scripts/bazarr-replay.py --base-url $(UNARR_URL) --api-key $(UNARR_API_KEY)

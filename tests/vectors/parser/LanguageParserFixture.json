@@ -1,5 +1,5 @@
 {
- "source": "NzbDrone.Core.Test/ParserTests/LanguageParserFixture.cs",
+ "source": "src/NzbDrone.Core.Test/ParserTests/LanguageParserFixture.cs",
  "methods": {
   "should_parse_subtitle_language_unknown": {
    "params": [

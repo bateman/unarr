@@ -1,5 +1,5 @@
 {
- "source": "radarr/src/NzbDrone.Core.Test/ParserTests/ReleaseGroupParserFixture.cs",
+ "source": "src/NzbDrone.Core.Test/ParserTests/ReleaseGroupParserFixture.cs",
  "methods": {
   "should_parse_release_group": {
    "params": [

@@ -1,5 +1,5 @@
 {
- "source": "radarr/src/NzbDrone.Core.Test/ParserTests/CrapParserFixture.cs",
+ "source": "src/NzbDrone.Core.Test/ParserTests/CrapParserFixture.cs",
  "methods": {
   "should_not_parse_crap": {
    "params": [

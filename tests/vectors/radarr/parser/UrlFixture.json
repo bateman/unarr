@@ -1,5 +1,5 @@
 {
- "source": "radarr/src/NzbDrone.Core.Test/ParserTests/UrlFixture.cs",
+ "source": "src/NzbDrone.Core.Test/ParserTests/UrlFixture.cs",
  "methods": {
   "should_not_parse_url_in_name": {
    "params": [

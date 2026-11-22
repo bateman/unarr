@@ -1,5 +1,5 @@
 {
- "source": "radarr/src/NzbDrone.Core.Test/DecisionEngineTests/ReleaseRestrictionsSpecificationFixture.cs",
+ "source": "src/NzbDrone.Core.Test/DecisionEngineTests/ReleaseRestrictionsSpecificationFixture.cs",
  "methods": {
   "should_ignore_case_when_matching_required": {
    "params": [

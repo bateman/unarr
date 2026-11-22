@@ -1,5 +1,5 @@
 {
- "source": "sonarr/src/NzbDrone.Core.Test/DecisionEngineTests/AcceptableSizeSpecificationFixture.cs",
+ "source": "src/NzbDrone.Core.Test/DecisionEngineTests/AcceptableSizeSpecificationFixture.cs",
  "methods": {
   "single_episode": {
    "params": [

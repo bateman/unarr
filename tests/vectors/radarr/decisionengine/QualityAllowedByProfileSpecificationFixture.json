@@ -1,5 +1,5 @@
 {
- "source": "radarr/src/NzbDrone.Core.Test/DecisionEngineTests/QualityAllowedByProfileSpecificationFixture.cs",
+ "source": "src/NzbDrone.Core.Test/DecisionEngineTests/QualityAllowedByProfileSpecificationFixture.cs",
  "methods": {
   "should_allow_if_quality_is_defined_in_profile": {
    "params": [
