@@ -815,30 +815,24 @@ pub async fn plex_actions_answer_as_the_originals(app: &axum::Router, product: &
     }
 }
 
-/// The goldens with media info or a file name in them were recorded with
-/// the ffprobe build the originals ship, which reports an x264 stream's
-/// codec as `x264` where a stock ffprobe reports `h264`
-/// (`unarr_core::mediafiles::mediainfo`). With another build such a replay
-/// can only differ, file names and the steps that use them included, so it
-/// stops here and says why. Call it after the replay chose its ffprobe.
+/// The goldens with media info or a file name in them say `x264` where the
+/// originals' ffprobe tagged an x264 stream so; Unarr finds the same with
+/// any ffprobe (`unarr_core::mediafiles::mediainfo`). When it does not
+/// with the ffprobe in use, such a replay can only differ, file names and
+/// the steps that use them included, so it stops here and says why. Call
+/// it after the replay chose its ffprobe.
 #[allow(dead_code)]
 pub fn require_originals_ffprobe() {
-    use unarr_core::mediafiles::mediainfo::ffprobe_path;
+    use unarr_core::mediafiles::mediainfo::{ffprobe_path, probe};
     let clip =
         std::path::Path::new(env!("CARGO_MANIFEST_DIR")).join("../../tests/fixtures/media/episode.mkv");
-    let tag = std::process::Command::new(ffprobe_path())
-        .args(["-v", "error", "-select_streams", "v:0"])
-        .args(["-show_entries", "stream=codec_tag_string", "-of", "csv=p=0"])
-        .arg(&clip)
-        .output()
-        .map(|o| String::from_utf8_lossy(&o.stdout).trim().to_string())
-        .unwrap_or_else(|e| format!("no answer ({e})"));
+    let codec = probe(&clip).map(|info| info.model["videoCodecID"].clone());
     assert_eq!(
-        tag,
-        "x264",
-        "this replay needs the ffprobe the originals ship, which tags an x264 stream `x264`; {} says {tag:?} \
-         for {}. On Linux x86-64 `make ui` leaves it under .cache; elsewhere set UNARR_FFPROBE to the \
-         ffprobe of the original's release for this system",
+        codec.as_ref().and_then(|c| c.as_str()),
+        Some("x264"),
+        "this replay needs media info as the originals give it: with {} Unarr reads {codec:?} as the codec \
+         of the x264 stream of {}. Set UNARR_FFPROBE to another ffprobe, or the ffprobe of the original's \
+         release for this system",
         ffprobe_path().display(),
         clip.display()
     );
