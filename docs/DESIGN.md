@@ -2918,9 +2918,7 @@ Decided by the maintainer on 22 November 2026, the pin's version included.
   ones, Sonarr's), built by the same function as the agent towards the
   Servarr proxies but apart from it, so that section 7's switch, when the
   maintainer asks for it, does not reach the indexers. Lidarr, with no pin
-  yet, goes by `Unarr/<version>`. Radarr's proxy health check, which goes
-  out through the process-wide client, says Sonarr's, as it already
-  followed Sonarr's proxy settings rather than Radarr's.
+  yet, goes by `Unarr/<version>`.
 
 ## 22. The server outside the API, as the originals' pipeline
 
