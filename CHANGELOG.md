@@ -57,7 +57,10 @@ the decisions with their options. In short: import scripts are not run
 is in English only, allowed hosts and trusted networks apply without a
 restart, a backup download is never kept by a cache (the originals let one
 keep it a year), notifications other than Discord, the webhook and Plex keep
-their settings and send nothing.
+their settings and send nothing. Towards indexers, download clients and
+notification targets each personality goes by a name of its own,
+`UnarrSonarr/<version>` or `UnarrRadarr/<version>`, so that Prowlarr's
+statistics count them apart (`docs/DESIGN.md`, section 21.13).
 
 **Fixed before the first version**: the Plex connection's *Authenticate
 with Plex.tv* gave no token and its *Server* menu stayed empty, every

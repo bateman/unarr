@@ -196,7 +196,7 @@ impl AppState {
         // settings saved for one never reach another's requests.
         let http = match personality {
             Personality::Sonarr => unarr_core::http::Clients::process(),
-            Personality::Radarr | Personality::Lidarr => unarr_core::http::Clients::new(),
+            Personality::Radarr | Personality::Lidarr => unarr_core::http::Clients::new(personality),
         };
         let clients = DownloadClientService::with_client(
             db.clone(),

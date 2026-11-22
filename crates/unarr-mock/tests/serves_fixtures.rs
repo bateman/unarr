@@ -52,7 +52,7 @@ async fn caps_results_and_downloads_come_from_the_fixtures() {
     assert_eq!(requests.len(), 4);
     assert_eq!(requests[0].query["t"], "caps");
     assert!(
-        requests[0].user_agent.starts_with("Unarr/"),
+        requests[0].user_agent.starts_with("UnarrSonarr/"),
         "{}",
         requests[0].user_agent
     );

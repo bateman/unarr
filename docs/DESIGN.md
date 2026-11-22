@@ -214,7 +214,8 @@ they refuse. The user agent is one constant in the HTTP client, read from a
 single place, so the switch is a one-line change plus a golden re-record;
 nothing else in the code may depend on which one is in use. Towards every
 other upstream (indexers, download clients, notification targets) Unarr
-already uses its own user agent and keeps doing so.
+already uses its own user agent and keeps doing so, with the personality
+in it (`UnarrSonarr/<version> (<os> <arch>)`, section 21.13).
 
 **On hold, 12 November 2026.** The maintainer keeps the originals' user
 agents towards the Servarr proxies until he says otherwise: the exit
@@ -2867,6 +2868,48 @@ Set by the implementer on 20 November 2026, at the maintainer's request
   arenas).
 - **To revisit** when an original is pinned again (issue #9), or when
   `/movie` is taken up.
+
+### 21.13 The user agent names the personality
+
+Asked for by the maintainer on 22 November 2026; the form is the
+implementer's choice, for the maintainer to confirm or change.
+
+- **The question.** Every personality went by `Unarr/<version>
+  (<os> <arch>)` towards indexers, download clients and notification
+  targets, so Prowlarr's statistics (*Total User Agent Queries*, *Total
+  User Agent Grabs*) counted Sonarr's, Radarr's and, later, Lidarr's
+  requests as one client, `Unarr`, beside the originals counted apart.
+- **What Prowlarr reads.** `RequestExtensions.GetSource` passes the
+  `User-Agent` to `UserAgentParser.ParseSource` (Prowlarr 2.x, branch
+  `develop`): the client's name is the word of ASCII letters and digits
+  that opens the agent, followed by `/` and more or by the end
+  (`^(?<agent>[a-z0-9]+)(?:\/.+(?:\(.*\))?|$)`, case ignored); anything
+  else is `Other`.
+- **Options.**
+  - *`UnarrSonarr/<version> (<os> <arch>)`* (taken): one word before the
+    `/`, so Prowlarr shows `UnarrSonarr`, `UnarrRadarr` and `UnarrLidarr`,
+    each apart from the original it stands in for.
+  - *`Unarr/Sonarr`, or the personality in the comment
+    (`Unarr/<version> (Sonarr; ...)`)*: Prowlarr keeps the word before the
+    `/` and counts them all as `Unarr`, as before.
+  - *`Unarr (Sonarr)/<version>`, `Unarr-Sonarr/<version>`*: the word ends
+    before the `/`, and Prowlarr counts them as `Other`.
+  - *`Sonarr/<version> (Unarr)`*: counted with the original, so the two
+    cannot be told apart, and the name of an application that is not the
+    one running (the rule of section 7 towards every upstream but the
+    Servarr proxies).
+- **Why.** The only form Prowlarr reads apart that still begins with
+  Unarr's own name.
+- **Cost.** An indexer or tracker that keeps statistics by agent counts
+  three clients where it counted one, and the history of `Unarr` in
+  Prowlarr stops growing: the counts start again under the new names.
+- **How it is done.** `http::user_agent(personality)`, read by the
+  clients of each personality (`http::Clients::new`, and the process-wide
+  ones, Sonarr's). Radarr's proxy health check, which goes out through the
+  process-wide client, still says `UnarrSonarr`, as it already followed
+  Sonarr's proxy settings rather than Radarr's. The agent towards the Servarr
+  proxies is not this one (section 7), except Lidarr's, which emulates
+  nothing yet and goes by `UnarrLidarr`.
 
 ## 22. The server outside the API, as the originals' pipeline
 
