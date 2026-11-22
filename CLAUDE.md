@@ -40,6 +40,46 @@ locally and push `main`: GitHub deletes a pull request's head branch when
 the pull request is merged, and only then. Do not ask whether to delete
 merged branches, and do not delete them yourself.
 
+## Developing a plan in steps
+
+A plan in steps (a phase work order `docs/phase-*.md` with its milestones,
+or an issue with a checklist) is developed as follows, unless the user says
+otherwise for that plan.
+
+1. **The plan lives on GitHub.** One checklist item per step in the issue,
+   or in a `docs/phase-*.md` the issue links. A plan that exists only in a
+   chat is copied there first: a new session cannot read a claude.ai
+   conversation.
+2. **The main conversation runs on Fable and only coordinates.** It hands
+   each step off, reviews it, updates the issue and reports to the user. It
+   writes no step's code.
+3. **Each step is developed in a new session on Opus** (`create_session`,
+   this repository). Its handoff prompt is all it knows: the issue and the
+   step, the scope and exit criteria, the main session's id, and the branch
+   name as `outcome_branch`, named as above (without it the session gets a
+   branch this file forbids). A step split over several flavors gets one
+   session per branch. The session opens a PR into `main` for its branch
+   (this counts as the user asking for it), waits for CI to be green, never
+   merges, and ends by sending the main session a report: branch, PR, CI,
+   what it did not do.
+4. **Effort**: the model's default. Leave `effort` unset unless the user
+   names a level.
+5. **Review.** A step is done when its branches have `make ui && make check`
+   green, `docs/originals-comparison.md` updated when the step counts (see
+   below), the PR open and CI green. The main conversation then runs
+   `/ponytail-review` on each branch, once: no review loop.
+6. **Fixes.** The findings go back to the step's session, which handles
+   them under `/ponytail ultra`: each finding is questioned, the justified
+   ones are fixed on the same branch. Rejected findings, with the reason,
+   and findings outside the step or already on `main` go in the issue, not
+   in the branch. Then `make ui && make check` and CI green again.
+7. **The issue.** The main conversation ticks the step in the checklist and
+   comments: the PRs, what the step did, the findings fixed, those rejected
+   or deferred and why.
+8. **The user decides.** The main conversation tells the user what is left
+   to do, or that the PRs can be merged. The user merges (see above); the
+   next step starts from `main` only after the previous one is merged.
+
 ## Commit authorship
 
 Every commit is authored and committed as
