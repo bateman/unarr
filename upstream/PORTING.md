@@ -100,7 +100,7 @@ Not work for the port, and how to tell:
 - **Flaky tests.** The summary marks "(passed when run again: flaky)" and
   "(known flaky)". Run such a test once more on your branch; if it passes,
   it is noise, say so in the PR. If it fails again, it is work.
-- **`test_the_shipped_cursors_are_at_the_pins`** (`scripts/tests/test_pins.py`)
+- **`test_the_shipped_cursors_are_at_the_pins`** (`scripts/tests/test_upstream_triage.py`)
   fails on purpose until section 9 moves the cursor. Leave it.
 
 Everything else that fails is work, including
@@ -110,6 +110,21 @@ Unarr with the recordings.
 
 To read an upstream commit: `git -C .cache/upstream/<App>.git show <sha>`;
 a file at the target: `git -C .cache/upstream/<App>.git show v<target>:<path>`.
+
+The summary prints what a failure printed first, and for the contract
+tests that can be nothing. Run such a test alone:
+`cargo test -p unarr-api --test contract_radarr <test>` (Sonarr's target is
+`contract`). It lists each golden that differs and, per field, what was
+expected and what Unarr answered (`/oidcScopes: missing (expected "openid
+profile email")`). One test groups many goldens (Radarr's
+`the_review_goldens_match` had four that differ, for three upstream
+features), so a test turns green only when all its goldens match.
+
+The summary's "Left to check by hand" is not a list of failing tests. Its
+metadata line lists requests the mock had no answer for; those of
+`golden-library` to `api.radarr.video/v1/movie/collection/*` are older than
+the port (issue #9) and are not work. A miss the old release did not have
+is recorded by hand with `RECORD_METADATA=1` (section 8).
 
 To find the commits behind a failing test, start from the summary's
 "Changed files" lines (`+/oidcAuthority`, `status 200 → 204`) and look the
@@ -266,7 +281,9 @@ comment. Then:
 
 If the surface lands on shared code, as both of these do
 (`crates/unarr-api/src/routes/config.rs` answers `config/host` for both
-personalities), ask first ("Stop and ask").
+personalities), ask first ("Stop and ask"). A deferred commit whose
+surface waits on the answer still gets its issue now; its row reads
+**asked** until the answer, then `deferred`.
 
 ## 5. Complete, for the limit of fixed rule 5
 
@@ -340,7 +357,8 @@ In this order, in English, no tool names, no footer:
 2. **Commits.** A table, one row per upstream commit in the triage's order:
    SHA (10 digits, linked to `https://github.com/<App>/<App>/commit/<sha>`),
    class, decision (or **to do** / **asked**), the Unarr commit, the tests
-   that cover it. No upstream subject in the table: the link has it.
+   that cover it. No upstream subject in the table: the link has it, and
+   an upstream `(#11716)` would link an issue of this repository.
 3. **Deferred.** The issues opened, one line each.
 4. **Questions for the maintainer.** Section "Stop and ask"; "none" when
    there are none.
