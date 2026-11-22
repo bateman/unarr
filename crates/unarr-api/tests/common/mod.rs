@@ -31,6 +31,11 @@ pub enum Mode {
     Multiset(&'static [&'static str]),
     /// Key structure only.
     Shape,
+    /// `Shape` of the original's installed release in its update list.
+    /// The original lists what the Servarr update server answers, newest
+    /// first, and omits `installedOn` from the releases it does not run;
+    /// Unarr lists only itself, the installed one.
+    InstalledUpdate,
     /// An HTML page: status and the page title.
     Html,
     /// An iCalendar feed: every line but `DTSTAMP`, which is the instant
@@ -470,6 +475,28 @@ pub fn compare(mode: Mode, want_body: &Value, got_body: &Value) -> Vec<String> {
                     title(got_body)
                 ));
             }
+        }
+        Mode::InstalledUpdate => {
+            let installed = |v: &Value| -> Value {
+                let items = v.as_array().map(Vec::as_slice).unwrap_or_default();
+                Value::Array(
+                    items
+                        .iter()
+                        .filter(|i| i.get("installed") == Some(&Value::Bool(true)))
+                        .cloned()
+                        .collect(),
+                )
+            };
+            let want = installed(want_body);
+            if want.as_array().is_none_or(Vec::is_empty) {
+                problems.push(
+                    "the original's update list has no installed release: the recorded recent releases \
+                     (tests/fixtures/metadata/<host>/v1/update/<branch>/changes.json) do not list the pinned \
+                     version; refresh that answer and update.json as upstream/README.md says"
+                        .into(),
+                );
+            }
+            problems.extend(compare(Mode::Shape, &want, &installed(got_body)));
         }
         Mode::Shape => {
             let (mut want, mut got) = (BTreeSet::new(), BTreeSet::new());

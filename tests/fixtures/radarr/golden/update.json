@@ -4,6 +4,52 @@
       "branch": "master",
       "changes": {
         "fixed": [
+          "Issue extracting subtitle information for unknown movies",
+          "Matching searched movie by IMDb ID from indexer results [ #12048 ]",
+          "Interactive search failing when a release couldn't be processed",
+          "Prevent upgrades for not yet scanned deleted files with unmonitor deleted movies on",
+          "Don't log Postgres password during database migration",
+          "Trakt audio channels formatted with host culture",
+          "Wildcard IP addresses in Allowed Hosts",
+          "Avoid marking grab as failed when qBittorrent already has that release",
+          "Parse DTS-HD MA + DTS:X as DTS-X in media info",
+          "NZBGet history message showing {scriptStatus} token",
+          "update every matching Plex section",
+          "Don't cache media covers that aren't downloaded",
+          "Manual Interaction - Required notifications failing for unknown movies (#11716)"
+        ],
+        "new": [
+          "Replace HTML Encoded values in release titles",
+          "Add custom headers to Ntfy.sh connection",
+          "Remove deprecated Kometa metadata",
+          "Full Transmission label support",
+          "Display multiple audio and subtitles streams in media info",
+          "Calculate custom score using renamed filename before importing",
+          "Add Irish language",
+          "Sorting movies index and discover by popularity",
+          "Trakt Smart List import list",
+          "OIDC authentication",
+          "Support PEM format for SSL certificates",
+          "Allow bypassing authentication for Localhost",
+          "Bump FFMpegCore to 5.4.0 and FFprobe to 8.0.1",
+          "Removed Special Handling of Reflinks for BTRFS and ZFS",
+          "Bump .NET to 10",
+          "Option to show Rotten Tomatoes rating in Discover overview view"
+        ]
+      },
+      "fileName": "Radarr.master.7.0.3.10918.linux-core-x64.tar.gz",
+      "hash": "1737e72150ea991c8f224fcf529c419b7e6c567ba672cbf27a61f11c9a51fe8e",
+      "installable": true,
+      "installed": false,
+      "latest": true,
+      "releaseDate": "2026-11-16T01:40:22Z",
+      "url": "https://github.com/Radarr/Radarr/releases/download/v7.0.3.10918/Radarr.master.7.0.3.10918.linux-core-x64.tar.gz",
+      "version": "7.0.3.10918"
+    },
+    {
+      "branch": "master",
+      "changes": {
+        "fixed": [
           "Improve logging for 'Allowed Hosts' and 'Trusted Networks'",
           "Switch theme automatically on system change",
           "Refactor showing grabbed/blocklisted releases in Interactive Search",
@@ -39,8 +85,8 @@
       "hash": "a1d726129535e739d4efaf93b5fdd771bb1c78349f55ceac70e365e37b5a12a3",
       "installable": false,
       "installed": true,
-      "installedOn": "2026-11-12T14:19:06Z",
-      "latest": true,
+      "installedOn": "2026-11-22T18:16:02Z",
+      "latest": false,
       "releaseDate": "2026-09-16T18:13:40Z",
       "url": "https://github.com/Radarr/Radarr/releases/download/v6.4.4.10685/Radarr.master.6.4.4.10685.linux-core-x64.tar.gz",
       "version": "6.4.4.10685"
@@ -111,26 +157,9 @@
       "releaseDate": "2026-03-26T13:16:26Z",
       "url": "https://github.com/Radarr/Radarr/releases/download/v6.1.1.10360/Radarr.master.6.1.1.10360.linux-core-x64.tar.gz",
       "version": "6.1.1.10360"
-    },
-    {
-      "branch": "master",
-      "changes": {
-        "fixed": [
-          "qBittorrent /login API success check"
-        ],
-        "new": []
-      },
-      "fileName": "Radarr.master.6.0.4.10291.linux-core-x64.tar.gz",
-      "hash": "fa90dd9bfd060b96756739d7827b51d67d04849001aa5733c4e53c5f9a08b023",
-      "installable": false,
-      "installed": false,
-      "latest": false,
-      "releaseDate": "2025-11-16T22:39:01Z",
-      "url": "https://github.com/Radarr/Radarr/releases/download/v6.0.4.10291/Radarr.master.6.0.4.10291.linux-core-x64.tar.gz",
-      "version": "6.0.4.10291"
     }
   ],
-  "recordedAt": "2026-11-12T14:19:07Z",
+  "recordedAt": "2026-11-22T18:16:03Z",
   "request": {
     "method": "GET",
     "path": "/api/v3/update"

@@ -26,7 +26,8 @@ pub const HOSTS: &[&str] = &[
 
 /// The hosts that serve images, answered with a stand-in.
 const ARTWORK_HOSTS: &[&str] = &["artworks.thetvdb.com", "image.tmdb.org"];
-/// The Servarr services, whose `v1/time` is the clock.
+/// The Servarr services, whose `v1/time` is the clock and whose other
+/// answers are named without the query.
 const SERVICES_HOSTS: &[&str] = &["services.sonarr.tv", "radarr.servarr.com"];
 
 /// Which stand-in image an artwork path gets, by the folder its kind
@@ -100,7 +101,14 @@ pub fn handle(fixtures: &Path, full_path: &str, raw_query: &str) -> Option<Reply
                 .into(),
         );
     }
-    let name = fixture_name(&path, raw_query);
+    // The Servarr services are asked with the original's version, OS and
+    // runtime in the query: one recording answers every version.
+    let query = if SERVICES_HOSTS.contains(&host) {
+        ""
+    } else {
+        raw_query
+    };
+    let name = fixture_name(&path, query);
     let stored = fixtures.join("metadata").join(host).join(format!("{name}.json"));
     let Ok(body) = std::fs::read(&stored) else {
         let body = format!("{{\"message\":\"NotFound\",\"description\":\"no fixture {host}/{name}.json\"}}");
@@ -170,5 +178,37 @@ mod tests {
         assert_eq!(poster.content_type, "image/jpeg");
         assert!(poster.body.starts_with(&[0xFF, 0xD8]));
         assert!(handle(&fixtures, "/newznab/api", "").is_none());
+    }
+
+    #[test]
+    fn the_servarr_services_answer_whatever_version_asks() {
+        let fixtures = crate::fixtures_dir();
+        for (path, name) in [
+            (
+                "/radarr.servarr.com/v1/update/master",
+                "radarr.servarr.com/v1/update/master",
+            ),
+            (
+                "/services.sonarr.tv/v1/notification",
+                "services.sonarr.tv/v1/notification",
+            ),
+        ] {
+            for query in [
+                "version=1.0.0.1&os=linux",
+                "version=99.0.0.1&os=linux&runtimeVer=10.0.0",
+            ] {
+                let reply = handle(&fixtures, path, query).unwrap();
+                assert_eq!(reply.status, StatusCode::OK, "{path}?{query}");
+                assert_eq!(reply.served, name, "{path}?{query}");
+            }
+        }
+        // Elsewhere the query still names the recording.
+        let search = handle(
+            &fixtures,
+            "/skyhook.sonarr.tv/v1/tvdb/search/en/",
+            "term=the%20pitt",
+        )
+        .unwrap();
+        assert_eq!(search.served, "skyhook.sonarr.tv/v1/tvdb/search/en/term-the-pitt");
     }
 }

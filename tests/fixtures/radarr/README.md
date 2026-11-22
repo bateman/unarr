@@ -44,8 +44,12 @@ Unarr that serves the same fixture (`make http-audit`).
 Since milestone 4b the recording also starts `scripts/mock-servarr.py` on
 port 18989: two indexers that serve the movie feeds of
 `tests/fixtures/indexers/movies` and the four download clients. The original
-runs without the environment's proxy and reaches nothing else; the fixture's
-own indexers and clients point at `.invalid` hosts. The clients report their
+runs with the mock as its proxy instead of the environment's, from its first
+request: the mock answers for `api.radarr.video`, `radarr.servarr.com` (the
+update check, the recent releases, the notifications, the clock) and TMDB's
+images, and refuses any other host at once, so the original reaches nothing
+outside the machine (issue #9, `upstream/README.md`); the fixture's own
+indexers and clients point at `.invalid` hosts. The clients report their
 downloads under `/downloads` and the movies live under `/movies`: the script
 creates both when missing and empties `/downloads` only when it carries the
 marker `.unarr-fixture`, so a folder that is someone's is never touched.
