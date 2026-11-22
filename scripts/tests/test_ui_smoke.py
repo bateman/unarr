@@ -89,22 +89,20 @@ class AllowedEntries(unittest.TestCase):
 class Pages(unittest.TestCase):
     def test_menu_path(self):
         origin = "http://127.0.0.1:8989"
-        self.assertEqual(smoke.menu_path("/settings/ui", origin, ""), "/settings/ui")
-        self.assertEqual(smoke.menu_path("/settings/ui?x=1#y", origin, ""), "/settings/ui")
-        self.assertEqual(smoke.menu_path(origin + "/calendar", origin, ""), "/calendar")
-        self.assertEqual(smoke.menu_path("/sonarr/calendar", origin, "/sonarr"), "/calendar")
-        self.assertEqual(smoke.menu_path("/sonarr", origin, "/sonarr"), "/")
-        self.assertIsNone(smoke.menu_path("https://wiki.servarr.com/sonarr", origin, ""))
-        self.assertIsNone(smoke.menu_path("relative", origin, ""))
-        self.assertIsNone(smoke.menu_path(None, origin, ""))
+        self.assertEqual(smoke.menu_path("/settings/ui", origin), "/settings/ui")
+        self.assertEqual(smoke.menu_path("/settings/ui?x=1#y", origin), "/settings/ui")
+        self.assertEqual(smoke.menu_path(origin + "/calendar", origin), "/calendar")
+        self.assertIsNone(smoke.menu_path("https://wiki.servarr.com/sonarr", origin))
+        self.assertIsNone(smoke.menu_path("relative", origin))
+        self.assertIsNone(smoke.menu_path(None, origin))
 
     def test_the_fixed_list_after_the_menu(self):
         self.assertEqual(smoke.merge_pages(["/", "/calendar"], ["/", "/system/status", "/calendar"]),
                          [("/", "menu"), ("/calendar", "menu"), ("/system/status", "minimum")])
 
     def test_minimum_covers_what_the_issue_names(self):
+        pages = set(smoke.MINIMUM)
         for app in smoke.APPS:
-            pages = set(smoke.MINIMUM[app])
             for path in ("/", "/calendar", "/activity/queue", "/activity/history", "/activity/blocklist",
                          "/wanted/missing", "/settings", "/system/status", "/system/tasks", "/system/backup",
                          "/system/logs/files", "/system/events"):
@@ -148,6 +146,32 @@ class Processes(unittest.TestCase):
             self.assertEqual(standin.asked, ["GET /skyhook.sonarr.tv/v1/tvdb/shows/en/1"])
         finally:
             standin.stop()
+
+    def test_a_build_without_the_ui_stops_the_run(self):
+        import http.server
+        import threading
+
+        class NoUi(http.server.BaseHTTPRequestHandler):
+            def do_GET(self):
+                body = b"Unarr is running, but this build has no web UI embedded.\n"
+                self.send_response(503)
+                self.send_header("Content-Length", str(len(body)))
+                self.end_headers()
+                self.wfile.write(body)
+
+            def log_message(self, *a):
+                pass
+
+        server = http.server.ThreadingHTTPServer(("127.0.0.1", 0), NoUi)
+        threading.Thread(target=server.serve_forever, daemon=True).start()
+        try:
+            with self.assertRaises(SystemExit) as caught:
+                smoke.serves_ui({"radarr": server.server_address[1]})
+            self.assertIn("serves no radarr web UI: Unarr is running, but this build has no web UI embedded",
+                          str(caught.exception.code))
+        finally:
+            server.shutdown()
+            server.server_close()
 
     def test_the_death_signal_is_ready_before_the_fork(self):
         hook = smoke.death_signal()

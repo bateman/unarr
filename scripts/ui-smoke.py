@@ -134,27 +134,17 @@ ALLOWED: list[Allowed] = [
     ),
 ]
 
-# The pages opened even if the menu does not show them: one of each kind the
-# issue names. A page here that the UI no longer has fails as "not found",
-# which says to update this list.
-MINIMUM = {
-    "sonarr": [
-        "/", "/calendar", "/activity/queue", "/activity/history", "/activity/blocklist",
-        "/wanted/missing", "/wanted/cutoffunmet", "/settings", "/settings/mediamanagement",
-        "/settings/profiles", "/settings/quality", "/settings/customformats", "/settings/indexers",
-        "/settings/downloadclients", "/settings/importlists", "/settings/connect", "/settings/metadata",
-        "/settings/tags", "/settings/general", "/settings/ui", "/system/status", "/system/tasks",
-        "/system/backup", "/system/events", "/system/logs/files",
-    ],
-    "radarr": [
-        "/", "/calendar", "/activity/queue", "/activity/history", "/activity/blocklist",
-        "/wanted/missing", "/wanted/cutoffunmet", "/settings", "/settings/mediamanagement",
-        "/settings/profiles", "/settings/quality", "/settings/customformats", "/settings/indexers",
-        "/settings/downloadclients", "/settings/importlists", "/settings/connect", "/settings/metadata",
-        "/settings/tags", "/settings/general", "/settings/ui", "/system/status", "/system/tasks",
-        "/system/backup", "/system/events", "/system/logs/files",
-    ],
-}
+# The pages opened even if the menu does not show them, the same in both
+# personalities: one of each kind the issue names. A page here that the UI
+# no longer has fails as "not found", which says to update this list.
+MINIMUM = [
+    "/", "/calendar", "/activity/queue", "/activity/history", "/activity/blocklist",
+    "/wanted/missing", "/wanted/cutoffunmet", "/settings", "/settings/mediamanagement",
+    "/settings/profiles", "/settings/quality", "/settings/customformats", "/settings/indexers",
+    "/settings/downloadclients", "/settings/importlists", "/settings/connect", "/settings/metadata",
+    "/settings/tags", "/settings/general", "/settings/ui", "/system/status", "/system/tasks",
+    "/system/backup", "/system/events", "/system/logs/files",
+]
 
 # The detail page of an item, linked from the library page.
 DETAIL = {"sonarr": "/series/", "radarr": "/movie/"}
@@ -265,7 +255,7 @@ def merge_pages(discovered: list[str], minimum: list[str]) -> list[tuple[str, st
     return [(p, "menu") for p in discovered] + [(p, "minimum") for p in minimum if p not in seen]
 
 
-def menu_path(href: str | None, origin: str, url_base: str) -> str | None:
+def menu_path(href: str | None, origin: str) -> str | None:
     """A sidebar link as a page path, or None for a link out of the UI."""
     if not href:
         return None
@@ -276,8 +266,6 @@ def menu_path(href: str | None, origin: str, url_base: str) -> str | None:
     path = parts.path or "/"
     if not path.startswith("/"):
         return None
-    if url_base and path.startswith(url_base):
-        path = path[len(url_base):] or "/"
     return path
 
 
@@ -415,6 +403,19 @@ def build() -> Path:
     raise SystemExit("cargo build named no unarrd executable")
 
 
+def serves_ui(ports: dict[str, int]):
+    """unarrd answers 503 for every page when it was built without the UIs
+    (before make ui): the run cannot start, which is not a login failure."""
+    for app, port in ports.items():
+        try:
+            urllib.request.urlopen(f"http://127.0.0.1:{port}/", timeout=10).close()
+        except urllib.error.HTTPError as e:
+            if e.code == 503:
+                body = e.read().decode(errors="replace").strip()
+                raise SystemExit(f"unarrd serves no {app} web UI: {body}\n"
+                                 "Build it after make ui (without --unarrd, the script builds it).")
+
+
 def stop(proc: subprocess.Popen):
     if proc.poll() is None:
         proc.terminate()
@@ -440,11 +441,14 @@ class Run:
         self.pending: list[tuple[Page, object]] = []
         self.sockets: list[str] = []
         self.problems: list[dict] = []
+        # Requests to unarrd sent and not yet answered (or failed).
+        self.inflight: dict[int, object] = {}
         page.on("console", self.on_console)
         page.on("pageerror", self.on_pageerror)
         page.on("response", self.on_response)
         page.on("requestfailed", self.on_requestfailed)
         page.on("request", self.on_request)
+        page.on("requestfinished", self.on_requestfinished)
         page.on("websocket", self.on_websocket)
 
     # Events land on the page being opened.
@@ -455,6 +459,10 @@ class Run:
     def on_request(self, request):
         if self.mine(request.url):
             self.current.requests += 1
+            self.inflight[id(request)] = request
+
+    def on_requestfinished(self, request):
+        self.inflight.pop(id(request), None)
 
     def on_console(self, msg):
         if msg.type != "error":
@@ -476,6 +484,7 @@ class Run:
             self.pending.append((self.current, response))
 
     def on_requestfailed(self, request):
+        self.inflight.pop(id(request), None)
         if not self.mine(request.url):
             return
         failure = request.failure or ""
@@ -557,15 +566,30 @@ class Run:
         record.seconds = time.monotonic() - start
         return True
 
-    def settle_network(self):
+    def settle_network(self) -> bool:
+        """Wait until no request has been running for half a second. A
+        request to unarrd still unanswered after --settle seconds fails the
+        page: leaving it would cancel the request, and a cancel is not
+        reported. False when the wait ran out."""
         try:
             self.page.wait_for_load_state("networkidle", timeout=self.args.settle * 1000)
+            return True
         except Exception:
-            self.current.note = f"requests still running after {self.args.settle} s"
+            pass
+        hanging = list(self.inflight.values())
+        for request in hanging:
+            self.current.failures.append({"kind": "request", "method": request.method,
+                                          "url": request.url[len(self.origin):],
+                                          "error": f"no answer after {self.args.settle:.0f} s"})
+        if not hanging:
+            self.current.note = f"requests out of unarrd still running after {self.args.settle:.0f} s"
+        self.inflight.clear()
+        return False
 
     def look(self, path: str):
         """Open a page only to read its menu (a page --only leaves out): what
         it does is not judged, and it is not in the report."""
+        self.inflight.clear()
         self.current = Page(path, "menu")
         try:
             self.page.goto(self.origin + path, wait_until="load", timeout=self.args.settle * 1000)
@@ -577,6 +601,7 @@ class Run:
         self.pending.clear()
 
     def visit(self, path: str, source: str) -> Page:
+        self.inflight.clear()
         self.current = record = Page(path, source)
         self.pages.append(record)
         start = time.monotonic()
@@ -586,14 +611,16 @@ class Run:
         except Exception as e:
             record.failures.append({"kind": "navigation", "text": str(e).strip().splitlines()[0]})
         else:
-            self.settle_network()
+            settled = self.settle_network()
             try:
                 page.wait_for_function(JS_NOT_LOADING, arg=SELECTORS["loading"], timeout=self.args.settle * 1000)
             except Exception:
                 record.failures.append({"kind": "loading",
                                         "text": f"the loading indicator is still shown after {self.args.settle:.0f} s"})
-            # What the data, once loaded, asks for in turn (covers, a second round).
-            self.settle_network()
+            # What the data, once loaded, asks for in turn (covers, a second
+            # round); not waited for again when the first wait ran out.
+            if settled:
+                self.settle_network()
             states = page.evaluate(JS_VISIBLE, {k: SELECTORS[k] for k in ERROR_STATES})
             for name in ERROR_STATES:
                 for text in states.get(name, []):
@@ -624,7 +651,7 @@ class Run:
     def menu(self) -> list[str]:
         out = []
         for href in self.links(SELECTORS["sidebar"] + " a[href]"):
-            path = menu_path(href, self.origin, "")
+            path = menu_path(href, self.origin)
             if path and path not in out:
                 out.append(path)
         return out
@@ -651,7 +678,7 @@ class Run:
                     seen.add(link)
                     queue.append(link)
             if path == "/":
-                items = [h for h in self.links(f'a[href^="{DETAIL[self.app]}"]') if menu_path(h, self.origin, "")]
+                items = [h for h in self.links(f'a[href^="{DETAIL[self.app]}"]') if menu_path(h, self.origin)]
                 if items:
                     seen.add(items[0])
                     queue.insert(0, items[0])
@@ -661,7 +688,7 @@ class Run:
         if len(found) <= 2:
             self.problems.append({"kind": "menu", "text": "the sidebar shows no page: "
                                   "SELECTORS['sidebar'] in scripts/ui-smoke.py no longer matches the UI"})
-        for path, source in merge_pages(found, MINIMUM[self.app]):
+        for path, source in merge_pages(found, MINIMUM):
             if source == "minimum" and wanted(path):
                 record = self.visit(path, source)
                 record.note = "not in the menu: opened from MINIMUM in scripts/ui-smoke.py"
@@ -671,8 +698,7 @@ class Run:
 
 def run_app(browser, app: str, port: int, args, out: Path) -> dict:
     origin = f"http://127.0.0.1:{port}"
-    context = browser.new_context(viewport={"width": 1440, "height": 900},
-                                  http_credentials={"username": LOGIN[0], "password": LOGIN[1]})
+    context = browser.new_context(viewport={"width": 1440, "height": 900})
     page = context.new_page()
     run = Run(app, origin, page, args, out / "data", out / "screenshots")
     context.route("**/*", run.route)
@@ -874,9 +900,20 @@ def main(argv=None) -> int:
     log_file = out / "unarrd.log"
     proc = start_unarrd(unarrd.resolve(), out / "data", apps, standin.url, log_file)
     standin.start()
+    # A plain kill (SIGTERM) ends Python without its finally blocks, and on
+    # macOS there is no death signal: unarrd would be left running. Stop it
+    # here and leave at once; unwinding instead would wait on Playwright's
+    # half-done call forever. Playwright's driver and its browser end when
+    # this process does.
+    def on_term(*_):
+        stop(proc)
+        os._exit(128 + signal.SIGTERM)
+
+    signal.signal(signal.SIGTERM, on_term)
     results = []
     try:
         wait_until_up(proc, ports, log_file)
+        serves_ui(ports)
         log(f"unarrd up: " + ", ".join(f"{a} on {p}" for a, p in ports.items()))
         with sync_playwright() as pw:
             try:
