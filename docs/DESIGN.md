@@ -214,7 +214,9 @@ they refuse. The user agent is one constant in the HTTP client, read from a
 single place, so the switch is a one-line change plus a golden re-record;
 nothing else in the code may depend on which one is in use. Towards every
 other upstream (indexers, download clients, notification targets) Unarr
-already uses its own user agent and keeps doing so.
+went by its own name until 22 November 2026, and by the original's since,
+for a reason of its own (section 21.13): the exit condition above does not
+reach them.
 
 **On hold, 12 November 2026.** The maintainer keeps the originals' user
 agents towards the Servarr proxies until he says otherwise: the exit
@@ -979,7 +981,8 @@ been 20 MB since 20 November 2026 (section 21.11).
   the tree.
 - **One HTTP client, no OpenSSL.** `reqwest` with `rustls`, shared, with the
   originals' timeouts and a Unarr user agent towards indexers and clients.
-  The emulated Sonarr identity stops at the API surface.
+  The emulated Sonarr identity stops at the API surface. (The user agent
+  towards indexers and clients is the original's since section 21.13.)
 - **Commands as the unit of work.** A port of the originals' command queue,
   executor and scheduler rather than a Rust-native task system: the UI and
   the ecosystem drive `POST /command`, read the queue back, and expect the
@@ -2873,6 +2876,52 @@ Set by the implementer on 20 November 2026, at the maintainer's request
   arenas).
 - **To revisit** when an original is pinned again (issue #9), or when
   `/movie` is taken up.
+
+### 21.13 The user agent towards indexers and clients is the original's
+
+Decided by the maintainer on 22 November 2026, the pin's version included.
+
+- **The question.** Every personality went by `Unarr/<version>
+  (<os> <arch>)` towards indexers, download clients and notification
+  targets, so Prowlarr's statistics (*Total User Agent Queries*, *Total
+  User Agent Grabs*) counted Sonarr's and Radarr's requests as one client,
+  `Unarr`. What should each personality send?
+- **What Prowlarr reads.** `RequestExtensions.GetSource` passes the
+  `User-Agent` to `UserAgentParser.ParseSource` (Prowlarr 2.x, branch
+  `develop`): the client's name is the word of ASCII letters and digits
+  that opens the agent, followed by `/` and more or by the end
+  (`^(?<agent>[a-z0-9]+)(?:\/.+(?:\(.*\))?|$)`, case ignored); anything
+  else is `Other`. So `Unarr/Sonarr` or `Unarr/<version> (Sonarr)` are
+  still counted as `Unarr`, and `Unarr (Sonarr)` or `Unarr-Sonarr/...` as
+  `Other`.
+- **Options.**
+  - *The pinned original's, `Sonarr/4.0.20.3014 (ubuntu 24.04)`* (taken):
+    what the original sent from the maintainer's hosts, the version of
+    `upstream/<app>.pin`.
+  - *The original's name with Unarr's version, `Sonarr/0.1.0 (linux
+    x86_64)`*: a version no Sonarr sends, which reads as a very old one.
+  - *`UnarrSonarr/<version> (<os> <arch>)`*: one word before the `/`, so
+    Prowlarr counts each personality apart and apart from the originals;
+    the first form implemented, replaced the same day.
+  - *`Unarr/<version>`*, as before: one client for all personalities.
+- **Why.** Unarr replaces the originals and does not run beside them, so
+  there is no original to tell it from. Indexers, trackers and Prowlarr
+  see the application they saw before, counted apart per personality, and
+  the agent agrees with what Unarr answers as (`system/status.version`,
+  `Server: Kestrel` in section 21.10) and with what it already sends to the
+  Servarr proxies (section 7).
+- **Cost.** An indexer's or a tracker's staff cannot tell Unarr from the
+  original: a fault of Unarr's reads as Sonarr's or Radarr's. The platform
+  is the maintainer's hosts', not the one running. Prowlarr's `Unarr` row
+  stops growing.
+- **How it is done.** `http::user_agent(personality)`, read by the
+  clients of each personality (`http::Clients::new`, and the process-wide
+  ones, Sonarr's), built by the same function as the agent towards the
+  Servarr proxies but apart from it, so that section 7's switch, when the
+  maintainer asks for it, does not reach the indexers. Lidarr, with no pin
+  yet, goes by `Unarr/<version>`. Radarr's proxy health check, which goes
+  out through the process-wide client, says Sonarr's, as it already
+  followed Sonarr's proxy settings rather than Radarr's.
 
 ## 22. The server outside the API, as the originals' pipeline
 
