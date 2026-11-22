@@ -160,6 +160,13 @@ class Comparing(unittest.TestCase):
         self.assertEqual(shape["added"], ["/streams", "/streams[]"])
         self.assertEqual(bump.compare_json(old, cases["values"])["values"], ['/title: "A" -> "B"'])
 
+    def test_values_that_follow_the_clock(self):
+        old = golden([{"id": 1, "duration": "00:00:01.2345", "ageMinutes": 3.5, "traceId": "a", "title": "x"}])
+        new = golden([{"id": 1, "duration": "00:00:00.5", "ageMinutes": 9.1, "traceId": "b", "title": "x"}])
+        self.assertEqual(bump.compare_json(old, new)["kind"], "time")
+        gone = golden([{"id": 1, "duration": "00:00:00.5", "traceId": "b", "title": "x"}])
+        self.assertEqual(bump.compare_json(old, gone)["kind"], "shape")
+
     def test_list_items_and_covers(self):
         old = golden([{"id": 1, "remoteUrl": "/c/poster.jpg?lastWrite=638000"}])
         new = golden([{"id": 1, "remoteUrl": "/c/poster.jpg?lastWrite=639999"}, {"id": 2}])

@@ -367,22 +367,32 @@ def golden_lists(app: App, only: list[str] | None = None) -> list[GoldenList]:
 
 
 TIME = re.compile(r"^\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}:\d{2}(\.\d+)?(Z|[+-]\d{2}:?\d{2})?$")
+# A .NET TimeSpan: how long something took.
+DURATION = re.compile(r"^-?(\d+\.)?\d{2}:\d{2}:\d{2}(\.\d+)?$")
 # Keys whose value is the moment of the recording, not the original's answer.
 VOLATILE_KEYS = {"recordedAt"}
+# Keys whose value follows the clock or the machine, whichever release
+# answers: kept, so that one appearing or going is still seen, but their
+# values are not compared. Found by recording the pinned release again
+# (BASELINE=1); the contract tests ignore the same keys.
+CLOCK_KEYS = {"duration", "lastDuration", "age", "ageHours", "ageMinutes", "traceId", "freeSpace", "totalSpace",
+              "timeleft", "estimatedCompletionTime"}
 
 
 def normalise(value):
-    """What two recordings of one answer share: instants written as `<time>`,
-    whole floats as integers, covers' `?lastWrite=` cut, the recording's
-    own instant dropped."""
+    """What two recordings of one answer share: instants and durations
+    written as `<time>`, values that follow the clock as `<clock>`, whole
+    floats as integers, covers' `?lastWrite=` cut, the recording's own
+    instant dropped."""
     if isinstance(value, dict):
-        return {k: normalise(v) for k, v in value.items() if k not in VOLATILE_KEYS}
+        return {k: "<clock>" if k in CLOCK_KEYS else normalise(v) for k, v in value.items()
+                if k not in VOLATILE_KEYS}
     if isinstance(value, list):
         return [normalise(v) for v in value]
     if isinstance(value, float) and value.is_integer() and abs(value) < 1e15:
         return int(value)
     if isinstance(value, str):
-        if TIME.match(value):
+        if TIME.match(value) or DURATION.match(value):
             return "<time>"
         at = value.find("?lastWrite=")
         if at >= 0:
@@ -1275,7 +1285,7 @@ def render_summary(work: Path) -> tuple[str, dict]:
                    if c["kind"] not in ("same", "time")}
         lines += ["## Recordings", ""]
         lines.append(f"{total} files in {len(rec)} lists; {len(changed)} changed beyond the instants "
-                     "(`time`: only dates and times differ, as on any recording)"
+                     "(`time`: only instants, durations and values that follow the clock differ, as on any recording)"
                      + (", those that also change on a re-record of the pinned release marked *noisy*" if baseline
                         else "; no baseline recorded (BASELINE=1), so a change here can also be one any "
                              "recording makes") + ".")
