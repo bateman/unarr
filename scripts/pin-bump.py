@@ -726,7 +726,6 @@ class Context:
     baseline: bool = False
     rerun: int = 20
     lists: list[str] | None = None
-    timings: dict[str, float] = field(default_factory=dict)
 
     def path(self, *parts: str) -> Path:
         return self.work.joinpath(*parts)
@@ -948,9 +947,8 @@ def record_with(ctx: Context, version: str, sha: str, cache: Path, out_root: Pat
                      str(out / "db-after.json")], logs / f"{g.key}.log")
             if (g.dir / "config-after.xml").exists():
                 shutil.copyfile(data / "config.xml", out / "config-after.xml")
-        for name in ("mock-requests.jsonl",):
-            if (cache / name).exists():
-                shutil.copyfile(cache / name, logs / f"{g.key}.{name}")
+        if (cache / "mock-requests.jsonl").exists():
+            shutil.copyfile(cache / "mock-requests.jsonl", logs / f"{g.key}.mock-requests.jsonl")
         stdout_log = data / f"{app.key}.stdout.log"
         if stdout_log.exists():
             shutil.copyfile(stdout_log, logs / f"{g.key}.{app.key}.stdout.log")
@@ -1258,7 +1256,7 @@ def md(text: str, limit: int = 160) -> str:
     return triage.md_code(str(text), limit)
 
 
-def kinds_table(lists: dict, baseline: dict | None) -> list[str]:
+def kinds_table(lists: dict) -> list[str]:
     kinds = ("same", "time", "values", "shape", "status", "new", "gone", "not recorded")
     lines = ["| List | Files | " + " | ".join(kinds) + " |", "|---|---:|" + "---:|" * len(kinds)]
     for key, files in lists.items():
@@ -1277,10 +1275,82 @@ def noisy(baseline: dict | None, key: str, name: str) -> bool:
     return bool(change) and change["kind"] not in ("same", "time")
 
 
+TAG = re.compile(r"^v\d+\.\d+\.\d+\.\d+$")
+RELEASE_URL = re.compile(r"^https://github\.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+/releases/download/v[0-9.]+/[A-Za-z0-9_.-]+$")
+API_DIGESTS = {"matched", "not published by the API", "not read: RELEASES=tags"}
+
+
+def is_number(value) -> bool:
+    return isinstance(value, (int, float)) and not isinstance(value, bool)
+
+
+def check_work(bump: dict, record: dict, tri: dict) -> None:
+    """What the summary prints from the files of the job that ran the
+    original (bump.json, record.json, triage.json), checked first: that job
+    is untrusted, and a value it could have shaped as Markdown (a link, a
+    mention) must not reach a summary a pull request may quote. A value of
+    the wrong shape stops the summary; free text (paths, failure output)
+    is printed in code spans."""
+    problems = []
+
+    def need(ok: bool, what: str) -> None:
+        if not ok:
+            problems.append(what)
+
+    def version(value) -> bool:
+        try:
+            triage.Version.parse(str(value))
+            return isinstance(value, str)
+        except ValueError:
+            return False
+
+    def runs(entries, where: str) -> None:
+        for e in entries if isinstance(entries, list) else [None]:
+            need(isinstance(e, dict) and isinstance(e.get("list"), str) and bool(NAME.match(e["list"]))
+                 and isinstance(e.get("exit"), int) and is_number(e.get("seconds"))
+                 and isinstance(e.get("missing", []), list), f"{where}: {short(e)}")
+
+    need(bump.get("app") in APPS, "bump.json app")
+    for side in ("from", "to"):
+        need(isinstance(bump.get(side), dict) and version(bump[side].get("version"))
+             and bool(triage.SHA.match(str(bump[side].get("commit")))), f"bump.json {side}")
+    need(bool(TAG.match(str(bump.get("to", {}).get("tag")))), "bump.json to.tag")
+    need(bump.get("jump") in ("patch", "minor", "major"), "bump.json jump")
+    need(bump.get("releases_from") in ("api", "tags", "file"), "bump.json releases_from")
+    need(bool(RELEASE_URL.match(str(bump.get("url")))), "bump.json url")
+    need(bump.get("served_from") in ASSET_HOSTS, "bump.json served_from")
+    need(bool(SHA256.match(str(bump.get("sha256")))), "bump.json sha256")
+    need(isinstance(bump.get("size"), int) and isinstance(bump.get("entries"), int), "bump.json size, entries")
+    need(bump.get("api_digest") in API_DIGESTS, "bump.json api_digest")
+    if record:
+        need(record.get("build_time") is None or bool(BUILD_TIME.match(str(record["build_time"]))),
+             "record.json build_time")
+        need(record.get("migration") is None or isinstance(record["migration"], int), "record.json migration")
+        need(all(v is None or is_number(v) for v in (record.get("seconds"), record.get("migrate_seconds"))),
+             "record.json seconds")
+        runs(record.get("lists", []), "record.json lists")
+        baseline = record.get("baseline")
+        if baseline is not None:
+            need(isinstance(baseline, dict), "record.json baseline")
+            runs((baseline or {}).get("lists", []), "record.json baseline lists")
+        for misses in (record.get("metadata_misses", {}), (baseline or {}).get("metadata_misses", {})):
+            need(isinstance(misses, dict) and all(isinstance(k, str) and NAME.match(k) and isinstance(v, list)
+                                                  for k, v in misses.items()), "record.json metadata_misses")
+    if tri:
+        need(isinstance(tri.get("summary", {}), dict) and all(
+            c in triage.CLASSES and isinstance(n, int) for c, n in tri.get("summary", {}).items()),
+            "triage.json summary")
+        need(all(isinstance(m, int) for m in tri.get("migrations", [])), "triage.json migrations")
+        need(isinstance(tri.get("commits", []), list), "triage.json commits")
+    if problems:
+        die("the work directory holds values the summary will not print: " + "; ".join(problems))
+
+
 def render_summary(work: Path) -> tuple[str, dict]:
     bump = read_json(work / "bump.json")
     tri = read_json(work / "triage.json") if (work / "triage.json").exists() else {}
     record = read_json(work / "record.json") if (work / "record.json").exists() else {}
+    check_work(bump, record, tri)
     applied = read_json(work / "apply.json") if (work / "apply.json").exists() else {}
     tests = read_json(work / "tests.json") if (work / "tests.json").exists() else {}
     app = APPS[bump["app"]]
@@ -1328,7 +1398,7 @@ def render_summary(work: Path) -> tuple[str, dict]:
                         else "; no baseline recorded (BASELINE=1), so a change here can also be one any "
                              "recording makes") + ".")
         lines.append("")
-        lines += kinds_table(rec, baseline)
+        lines += kinds_table(rec)
         lines.append("")
         failed = [e for e in record.get("lists", []) if not e.get("ok")]
         if failed:

@@ -53,7 +53,11 @@ name, refuses links, files over 64 MiB and JSON that does not parse, checks
 the values it pins, and never runs the original. It downloads the tarball
 again and checks it against the checksum `fetch` computed before it writes
 any tracked file: a work directory changed by the original stops it there,
-with the repository as it was.
+with the repository as it was. `summary` checks the shape of every value it prints
+from the files of that job (the release URL, the host, versions, tags,
+checksums, numbers, list names) and stops on one that is not right, so a
+link or a mention the original wrote cannot reach a pull request that
+quotes the summary.
 
 What the bump leaves to the port, and lists in the summary:
 

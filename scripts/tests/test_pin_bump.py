@@ -636,6 +636,30 @@ class Summary(Temp):
         self.assertNotIn("`|`", queue)
         self.assertIn("\\|", queue)
 
+    def test_values_the_original_could_have_shaped_are_not_printed(self):
+        evil = "x) [approve this](https://evil.example) @someone"
+        cases = [
+            ("bump.json", lambda d: d.update(url=evil)),
+            ("bump.json", lambda d: d.update(served_from="evil.example")),
+            ("bump.json", lambda d: d.update(jump=evil)),
+            ("bump.json", lambda d: d.update(api_digest=evil)),
+            ("bump.json", lambda d: d["to"].update(tag=evil)),
+            ("record.json", lambda d: d.update(build_time=evil)),
+            ("record.json", lambda d: d["lists"][0].update(list=evil)),
+            ("record.json", lambda d: d["lists"][0].update(seconds=evil)),
+            ("record.json", lambda d: d["metadata_misses"].update({evil: []})),
+            ("triage.json", lambda d: d["summary"].update({evil: 1})),
+        ]
+        for name, change in cases:
+            with self.subTest(file=name):
+                write_work(self.tmp)
+                data = json.loads((self.tmp / name).read_text())
+                change(data)
+                (self.tmp / name).write_text(json.dumps(data))
+                with self.assertRaises(SystemExit) as caught:
+                    bump.render_summary(self.tmp)
+                self.assertIn("will not print", str(caught.exception))
+
     def test_a_summary_after_fetch_alone(self):
         write_work(self.tmp)
         for name in ("record.json", "apply.json", "tests.json"):
