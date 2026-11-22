@@ -503,7 +503,11 @@ async fn the_covers_go_out_through_radarrs_own_client_from_the_start() {
         )),
         certificate_validation: Default::default(),
     });
-    let own = unarr_core::http::build_with(std::time::Duration::from_secs(10), &settings);
+    let own = unarr_core::http::build_with(
+        std::time::Duration::from_secs(10),
+        &settings,
+        unarr_core::Personality::Radarr,
+    );
     let asked = tokio::spawn(async move {
         let (mut socket, _) = listener.accept().await.unwrap();
         let mut request = vec![0u8; 2048];

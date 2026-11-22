@@ -6,10 +6,13 @@
 //!
 //! ffprobe is not shipped: [`ffprobe_path`] takes `UNARR_FFPROBE`, then
 //! `ffprobe` on the `PATH`. The originals bundle a build of their own
-//! (ffprobe 5.1 "Openur"), which reports `x264` as the codec tag of streams
-//! that an x264 encoder wrote where a stock ffprobe reports the container's
-//! tag; the tests use that build when `make ui` left it in `.cache/sonarr`,
-//! so that file names and media info compare equal to the goldens.
+//! (ffprobe 5.1 "Openur"), which reports `x264` as the codec tag of an H.264
+//! stream whose first packets carry x264's SEI, and `x265` for an HEVC
+//! stream whose extradata carries x265's, where a stock ffprobe reports the
+//! container's tag. [`encoder_tag`] finds the same with any ffprobe, so that
+//! file names (`[x264]`) and media info are the originals' whichever build
+//! runs; the tests still use the originals' build when `make ui` left it in
+//! `.cache`.
 
 use crate::sync::Recover;
 use std::path::{Path, PathBuf};
@@ -243,6 +246,153 @@ fn pixel_format_bit_depth(name: &str) -> Option<i64> {
     formats.iter().find(|(n, _)| n == name).map(|(_, d)| *d)
 }
 
+/// The codec tag the originals' ffprobe gives an x264 or x265 stream,
+/// when the ffprobe running gave another: `x264` for an H.264 stream whose
+/// first packet holds x264's SEI (`x264 - core`) and that the analysis
+/// decoded, `x265` for an HEVC stream whose extradata holds x265's (read
+/// when the decoder opens; an HEVC stream without extradata, as in MPEG-TS,
+/// keeps its tag there too). Compared with that build on x264 and x265
+/// streams in Matroska, MP4, QuickTime, AVI, MPEG-TS and M2TS, with and
+/// without the encoder's SEI, and at 1 and 24 frames a second. One more
+/// short ffprobe run, for those two codecs only, and none when the tag
+/// already says so (the originals' build).
+fn encoder_tag(file: &Path, stream: &Value, video_position: i64) -> Option<&'static str> {
+    let tag = stream.get("codec_tag_string").and_then(Value::as_str);
+    let select = format!("v:{video_position}");
+    let (wanted, signature, bytes): (&'static str, &[u8], Vec<u8>) = match str_of(stream, "codec_name")? {
+        // The originals' build tags the stream once its first access unit
+        // (parameter sets, SEI, slice) went through the codec while the
+        // stream was analysed; a stream the analysis did not reach that far
+        // has no pixel format either, and keeps its tag there too (a 1080p
+        // clip at 1 frame a second, say).
+        "h264" if tag != Some("x264") && str_of(stream, "pix_fmt").is_some() => {
+            ("x264", b"x264 - core", first_packet_head(file, &select)?)
+        }
+        "hevc" if tag != Some("x265") => {
+            let dump = run_ffprobe(
+                &[
+                    "-loglevel",
+                    "error",
+                    "-print_format",
+                    "json",
+                    "-select_streams",
+                    &select,
+                    "-show_streams",
+                    "-show_data",
+                    "-show_entries",
+                    "stream=extradata",
+                ],
+                file,
+            )
+            .ok()?;
+            let extradata = dump["streams"].get(0).and_then(|s| s["extradata"].as_str())?;
+            ("x265", b"x265", hex_dump_bytes(extradata))
+        }
+        _ => return None,
+    };
+    bytes
+        .windows(signature.len())
+        .any(|w| w == signature)
+        .then_some(wanted)
+}
+
+/// How much of the first packet is read: the encoder's SEI comes before
+/// the first slice, a few hundred bytes in, and a key frame can weigh
+/// megabytes.
+const FIRST_PACKET_HEAD: usize = 64 * 1024;
+
+/// The first [`FIRST_PACKET_HEAD`] bytes of a stream's first packet, read
+/// from the file where ffprobe says the packet is: asking ffprobe for the
+/// data would dump the whole packet in hex. In MPEG-TS (and M2TS, with its
+/// four-byte prefix) the packet is spread over 188-byte transport packets,
+/// whose headers are taken out, so that the stream's bytes read on.
+fn first_packet_head(file: &Path, select: &str) -> Option<Vec<u8>> {
+    use std::io::{Read, Seek, SeekFrom};
+    let lookup = [
+        "-loglevel",
+        "error",
+        "-print_format",
+        "json",
+        "-select_streams",
+        select,
+        "-read_intervals",
+        "%+#1",
+        "-show_packets",
+        "-show_entries",
+        "packet=pos,size",
+    ];
+    // Where the packet is needs no analysis of the streams, which decodes
+    // a frame and costs as much as the probe itself on a 1080p file; an
+    // ffprobe without the option is asked the long way.
+    let quick: Vec<&str> = std::iter::once("-nofind_stream_info").chain(lookup).collect();
+    let found = run_ffprobe(&quick, file)
+        .or_else(|_| run_ffprobe(&lookup, file))
+        .ok()?;
+    let packet = found["packets"].get(0)?;
+    let number = |v: &Value| v.as_u64().or_else(|| v.as_str()?.parse().ok());
+    let pos = number(&packet["pos"])?;
+    let size = number(&packet["size"])? as usize;
+    let mut f = std::fs::File::open(file).ok()?;
+    f.seek(SeekFrom::Start(pos)).ok()?;
+    // Room for the transport packets' headers when the packet is spread.
+    let mut raw = Vec::new();
+    f.take((size.min(FIRST_PACKET_HEAD) * 2) as u64)
+        .read_to_end(&mut raw)
+        .ok()?;
+    let mut head = transport_payload(&raw).unwrap_or(raw);
+    head.truncate(size.min(FIRST_PACKET_HEAD));
+    Some(head)
+}
+
+/// The payload of one elementary stream in MPEG-TS bytes (188-byte packets,
+/// or 192 with M2TS's timestamp in front), starting at a packet of it;
+/// `None` when the bytes are not transport packets.
+fn transport_payload(raw: &[u8]) -> Option<Vec<u8>> {
+    let (prefix, stride) = [(0, 188), (4, 192)].into_iter().find(|&(prefix, stride)| {
+        raw.len() >= prefix + 2 * stride && raw[prefix] == 0x47 && raw[prefix + stride] == 0x47
+    })?;
+    let pid = |p: &[u8]| (u16::from(p[1] & 0x1f) << 8) | u16::from(p[2]);
+    let stream = pid(&raw[prefix..]);
+    let mut out = Vec::with_capacity(raw.len());
+    for chunk in raw.chunks_exact(stride) {
+        let p = &chunk[prefix..];
+        if p[0] != 0x47 || pid(p) != stream {
+            continue;
+        }
+        let start = match (p[3] >> 4) & 0x3 {
+            0b01 => 4,
+            0b11 => 5 + usize::from(p[4]),
+            _ => continue,
+        };
+        if let Some(payload) = p.get(start..) {
+            out.extend_from_slice(payload);
+        }
+    }
+    Some(out)
+}
+
+/// The bytes of ffprobe's `-show_data` dump: lines of an offset, eight
+/// groups of four hex digits and the same bytes as text.
+fn hex_dump_bytes(dump: &str) -> Vec<u8> {
+    let mut bytes = Vec::new();
+    for line in dump.lines() {
+        let Some((_, rest)) = line.split_once(": ") else {
+            continue;
+        };
+        let hex = rest.split("  ").next().unwrap_or("");
+        for group in hex.split(' ') {
+            let digits = group.as_bytes();
+            for pair in digits.chunks(2) {
+                let pair = std::str::from_utf8(pair).ok().filter(|p| p.len() == 2);
+                if let Some(b) = pair.and_then(|p| u8::from_str_radix(p, 16).ok()) {
+                    bytes.push(b);
+                }
+            }
+        }
+    }
+    bytes
+}
+
 fn str_of<'a>(v: &'a Value, key: &str) -> Option<&'a str> {
     v.get(key).and_then(Value::as_str).filter(|s| !s.is_empty())
 }
@@ -445,15 +595,15 @@ fn probe_inner(file: &Path) -> anyhow::Result<MediaInfo> {
     let transfer = video.and_then(|v| str_of(v, "color_transfer"));
     let mut side_data = video.map(side_data_types).unwrap_or_default();
     let mut dovi = video.and_then(dovi_record).cloned();
+    let index = video.and_then(|v| v["index"].as_i64()).unwrap_or(0);
+    // ffprobe counts `v:N` among video streams, not all streams.
+    let video_position = streams
+        .iter()
+        .filter(|s| s["codec_type"] == "video")
+        .position(|s| s["index"].as_i64() == Some(index))
+        .unwrap_or(0) as i64;
     // PQ10 or similar: the first frame says which flavour of HDR it is.
     if transfer.is_some_and(|t| PQ_TRANSFER_FUNCTIONS.contains(&t)) {
-        let index = video.and_then(|v| v["index"].as_i64()).unwrap_or(0);
-        // ffprobe counts `v:N` among video streams, not all streams.
-        let video_position = streams
-            .iter()
-            .filter(|s| s["codec_type"] == "video")
-            .position(|s| s["index"].as_i64() == Some(index))
-            .unwrap_or(0) as i64;
         if let Ok(frames) = frame_json(file, video_position) {
             if let Some(first) = frames["frames"].as_array().and_then(|f| f.first()) {
                 side_data.extend(side_data_types(first));
@@ -483,7 +633,8 @@ fn probe_inner(file: &Path) -> anyhow::Result<MediaInfo> {
     put("videoFormat", opt(video.and_then(|v| str_of(v, "codec_name"))));
     put(
         "videoCodecID",
-        opt(video.and_then(|v| str_of(v, "codec_tag_string"))),
+        opt(video
+            .and_then(|v| encoder_tag(file, v, video_position).or_else(|| str_of(v, "codec_tag_string")))),
     );
     put("videoProfile", opt(video.and_then(|v| str_of(v, "profile"))));
     put("videoBitrate", json!(video.map(bit_rate).unwrap_or(0)));
@@ -706,5 +857,63 @@ mod tests {
         );
         let short = probe(&clip("sample.mkv")).unwrap();
         assert_eq!(short.run_time_seconds(), 45.0);
+    }
+
+    /// Whichever ffprobe runs, an x264 stream is `x264`, as the originals'
+    /// build reports it (the clips were encoded with libx264).
+    #[test]
+    fn an_x264_stream_is_x264_with_any_ffprobe() {
+        if !ffprobe_available() {
+            eprintln!("ffprobe not available, skipping");
+            return;
+        }
+        for name in ["episode.mkv", "episode-dual.mkv", "sample.mkv"] {
+            let info = probe(&clip(name)).expect("a readable clip");
+            assert_eq!(info.model["videoCodecID"], "x264", "{name}");
+        }
+        // At one frame a second the analysis does not reach the first
+        // frame: the originals' build leaves the tag as it is.
+        let info = probe(&clip("episode-1080.mkv")).expect("a readable clip");
+        assert_eq!(info.model["videoCodecID"], "[0][0][0][0]");
+    }
+
+    /// A text split over two transport packets reads on once their
+    /// headers are out; another stream's packet in between is skipped.
+    #[test]
+    fn transport_packets_are_read_as_one_stream() {
+        let packet = |pid: u16, payload: &[u8]| {
+            let mut p = vec![0x47, (pid >> 8) as u8 & 0x1f, pid as u8, 0x10];
+            p.extend_from_slice(payload);
+            p.resize(188, 0xff);
+            p
+        };
+        let mut first = vec![0u8; 184 - 5];
+        first.extend_from_slice(b"x264 ");
+        let raw = [
+            packet(0x100, &first),
+            packet(0x101, b"audio"),
+            packet(0x100, b"- core 164"),
+        ]
+        .concat();
+        let payload = transport_payload(&raw).unwrap();
+        assert!(payload.windows(11).any(|w| w == b"x264 - core"));
+        assert!(!payload.windows(5).any(|w| w == b"audio"));
+        let m2ts: Vec<u8> = raw
+            .chunks(188)
+            .flat_map(|p| [&[0u8; 4][..], p].concat())
+            .collect();
+        assert_eq!(transport_payload(&m2ts), Some(payload));
+        assert_eq!(transport_payload(b"not transport packets"), None);
+    }
+
+    #[test]
+    fn the_data_dump_is_read_back_to_bytes() {
+        let dump = "\n00000000: 0000 02ae 0605 ffff aadc 45e9 bde6 d948  ..........E....H\n\
+                    00000010: b796 2cd8 20d9 23ee ef78 3236 3420 2d20  ..,. .#..x264 - \n\
+                    00000020: 636f 7265 20                             core \n";
+        let bytes = hex_dump_bytes(dump);
+        assert_eq!(bytes.len(), 37);
+        assert_eq!(&bytes[..4], &[0, 0, 2, 0xae]);
+        assert!(bytes.windows(11).any(|w| w == b"x264 - core"));
     }
 }

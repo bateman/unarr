@@ -369,7 +369,14 @@ fn starts_with_segment(path: &str, segment: &str) -> bool {
 /// `/ping` is not among its exceptions: Unarr leaves its lower-case
 /// spelling uncached by choice (`docs/DESIGN.md`, section 11).
 pub fn cacheable(path: &str, query: Option<&str>) -> bool {
-    // A cache breaker in the query: any path, the API's too.
+    // Unarr's one addition, before anything that would keep it, the cache
+    // breaker included: a backup holds the database and the API key, and
+    // a shared cache in front that keeps what is `public` would hand it to
+    // anyone who asks for its name (`docs/DESIGN.md`, section 22).
+    if starts_with_segment(path, "/backup") {
+        return false;
+    }
+    // A cache breaker in the query: any other path, the API's too.
     let breaker = query.is_some_and(|q| {
         q.split('&').any(|pair| {
             pair.split('=')
@@ -394,12 +401,6 @@ pub fn cacheable(path: &str, query: Option<&str>) -> bool {
         return false;
     }
     if (lower.starts_with("/logfile") || lower.starts_with("/updatelogfile")) && lower.ends_with(".txt") {
-        return false;
-    }
-    // Unarr's one addition: a backup holds the database and the API key,
-    // and a shared cache in front that keeps what is `public` would hand
-    // it to anyone who asks for its name (`docs/DESIGN.md`, section 22).
-    if starts_with_segment(path, "/backup") {
         return false;
     }
     true
@@ -1059,6 +1060,12 @@ mod tests {
                 None,
             ),
             ("/Backup/scheduled/x.zip", None),
+            // A cache breaker keeps anything else, never a backup.
+            (
+                "/backup/manual/sonarr_backup_v4.0.20.3014_2026.11.20_10.00.00.zip",
+                Some("h=1"),
+            ),
+            ("/BACKUP/scheduled/x.zip", Some("x=2&H=abc")),
         ] {
             assert!(!cacheable(path, query), "{path} {query:?}");
         }

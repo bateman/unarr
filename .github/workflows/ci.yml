@@ -45,6 +45,21 @@ jobs:
       # the runner has left after the build: drop toolchains nothing here uses.
       - run: sudo rm -rf /usr/share/dotnet /usr/local/lib/android /opt/ghc /opt/hostedtoolcache/CodeQL && df -h /
       - run: make check
+      # Every page of both embedded UIs in a headless browser, over the
+      # unarrd make check built (scripts/ui-smoke.py). The runner's Google
+      # Chrome: only the Python package is downloaded, no browser.
+      - run: make ui-smoke
+        env: { UI_SMOKE_CHANNEL: chrome }
+      - if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ui-smoke
+          path: |
+            .cache/ui-smoke/report.*
+            .cache/ui-smoke/unarrd.log
+            .cache/ui-smoke/screenshots/
+          if-no-files-found: ignore
+          retention-days: 7
       # A panic costs one request or one command, on the binary as it is
       # released: a release build of its own, with the test-only switch.
       - run: make panic-test

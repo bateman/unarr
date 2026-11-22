@@ -105,6 +105,7 @@ a placeholder page.
     make help          # list targets
     make check         # fmt check, clippy, tests (what CI runs)
     make panic-test    # what a panic costs, on a release build with the test-only switch (CI runs it too)
+    make ui-smoke      # every page of both embedded UIs in a headless browser, on the fixtures (CI runs it too)
     make run           # run unarrd from source on the Sonarr fixture
     make run-both      # Sonarr on 8989 and Radarr on 7878, on both fixtures
     make ui            # fetch the official Sonarr and Radarr UIs for embedding (needed by make check)

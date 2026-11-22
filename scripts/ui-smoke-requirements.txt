@@ -1,0 +1,5 @@
+# The Python packages of scripts/ui-smoke.py; `make ui-smoke` installs them
+# in a virtual environment of their own (<UNARR_CACHE or .cache>/ui-smoke-venv).
+# The browser is not here: Playwright's Chromium (python -m playwright install
+# chromium) or an installed Google Chrome (UI_SMOKE_CHANNEL=chrome).
+playwright==1.63.0
