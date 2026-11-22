@@ -74,6 +74,26 @@ def substitute_ids(path: str, ids: dict[str, str]) -> str:
     return path
 
 
+REMEMBER_ME = re.compile(r"<input\b[^>]*\bname=\"rememberMe\"[^>]*>", re.S)
+
+
+def checkbox_value(page: str) -> str:
+    """What a browser sends for the login page's checked `rememberMe` box:
+    its `value`, or `on` when it has none. Sonarr 4 and Radarr 6 have none;
+    Radarr 7 says `true` and refuses `on` (its form field became a bool)."""
+    tag = REMEMBER_ME.search(page)
+    value = re.search(r"\bvalue=\"([^\"]*)\"", tag.group(0)) if tag else None
+    return value.group(1) if value else "on"
+
+
+def remember_me_value(base: str) -> str:
+    try:
+        with urllib.request.urlopen(base + "/login", timeout=60) as resp:
+            return checkbox_value(resp.read().decode(errors="replace"))
+    except (urllib.error.URLError, OSError):
+        return "on"
+
+
 def derive_body(raw: bytes, out: Path) -> bytes:
     """A ``$from``/``$set`` body file resolved against the goldens recorded so far."""
     try:
@@ -277,7 +297,8 @@ def main():
     session = urllib.request.build_opener(urllib.request.HTTPCookieProcessor(http.cookiejar.CookieJar()))
     if args.login:
         user, _, password = args.login.partition(":")
-        form = urllib.parse.urlencode({"username": user, "password": password, "rememberMe": "on"}).encode()
+        form = urllib.parse.urlencode({"username": user, "password": password,
+                                       "rememberMe": remember_me_value(base)}).encode()
         with session.open(urllib.request.Request(base + "/login", data=form, method="POST"), timeout=60) as resp:
             print(f"[golden] login as {user!r}: {resp.status} {resp.geturl()}", file=sys.stderr)
     tap = None
