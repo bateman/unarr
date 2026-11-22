@@ -384,12 +384,20 @@ and go on with the others.
 1. **The version the clients see.** `system/status` reports the pinned
    version, and Bazarr, Prowlarr and Recyclarr branch on it. Whether the
    pin may move to the target before the clients the maintainer runs
-   support it is not decided. Ask it in every port PR: name the target and
-   which clients branch on the version. A `major` PR stays a draft until
-   the maintainer answers.
+   support it is not decided. How it holds the PR depends on the jump
+   (issue #9, section 6):
+   - **patch or minor:** a note in the PR body, under "Questions for the
+     maintainer": which clients read the version, and which version they
+     will see. It holds no row, keeps no draft and does not stop the
+     cursor: the PR is an ordinary one;
+   - **major:** a question. The PR stays a draft until the maintainer
+     answers it for that release.
 2. **Upstream changes to code Unarr shares between personalities.** A file
-   is shared when both personalities reach it: anything outside
-   `routes/<app>/` and the personality's own modules, e.g.
+   is shared when both personalities reach it. The path does not tell:
+   Radarr's own routes are under `routes/radarr/`, but Sonarr's
+   (`series.rs`, `series_writes.rs`, `episodes.rs`) sit at the top of
+   `routes/`, beside shared ones (`config.rs`, `system.rs`). What decides is
+   whether the other personality uses the file. Shared today, e.g.
    `crates/unarr-api/src/mediainfo.rs`, `crates/unarr-api/src/routes/config.rs`,
    the parser, the download clients, the notifications,
    `crates/unarr-core/migrations/shared/`. Check with
@@ -414,7 +422,10 @@ How to ask:
    it is only that.
 2. The rows of those commits read **asked** in the table; they are not in
    the log until decided.
-3. Leave the PR a draft. The cursor cannot move while a row is **asked**.
+3. Leave the PR a draft while a row is **asked**, or while a major waits
+   on the clients' versions. The cursor cannot move while a row is
+   **asked**. The note on the clients' versions of a patch or minor
+   (question 1) is not a question in this sense: it holds nothing.
 
 ## 8. Checks before you call it ready
 
@@ -449,5 +460,6 @@ and the checks of section 8 pass:
    subject `Move the <App> cursor to <target>`. Run `make check` once more:
    now all green.
 3. Push, update the PR body, and mark the PR ready for review, unless a
-   question is open or it is a `major` waiting on the clients' versions.
+   row is **asked** or it is a `major` waiting on the clients' versions. A
+   patch or minor is not held by its note on the clients' versions.
 4. Stop there. Review findings come back as comments; you never merge.
