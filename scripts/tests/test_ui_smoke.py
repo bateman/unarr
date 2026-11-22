@@ -185,7 +185,7 @@ def report(pages, problems=(), unused=()):
     return {
         "date": "2026-11-21 10:00:00", "unarrd": "target/debug/unarrd", "browser": "chromium 1", "seconds": 12.0,
         "metadata_asked": ["GET /skyhook.sonarr.tv/v1/tvdb/shows/en/1"],
-        "apps": [{"app": "sonarr", "ui_version": "4.0.20.3014", "seconds": 10.0, "problems": list(problems),
+        "apps": [{"app": "sonarr", "ui_version": "1.2.3.4", "seconds": 10.0, "problems": list(problems),
                   "websockets": ["/signalr/messages"], "pages": pages, "allowed_used": [],
                   "allowed_unused": list(unused)}],
     }
@@ -201,7 +201,7 @@ class Report(unittest.TestCase):
         r = report([page("/login", source="login"), page("/"), page("/calendar")])
         self.assertFalse(smoke.failed(r))
         text = smoke.summary(r, Path("/out"))
-        self.assertIn("sonarr 4.0.20.3014: 2 pages, 2 ok, 0 failed", text)
+        self.assertIn("sonarr 1.2.3.4: 2 pages, 2 ok, 0 failed", text)
         self.assertTrue(text.splitlines()[-1].startswith("ok;"))
 
     def test_a_failure_names_the_page_and_the_request(self):
