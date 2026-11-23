@@ -63,11 +63,16 @@ impl Failure {
     }
 
     /// The errors of the import's result: the message, and for a failure
-    /// of permissions the error itself (Radarr 7).
+    /// of permissions or any other the error itself (Radarr 7).
     pub fn errors(&self) -> Vec<String> {
         let mut errors = vec![self.message().to_string()];
-        if let Failure::PermissionDenied(detail) = self {
-            errors.push(detail.clone());
+        match self {
+            Failure::PermissionDenied(detail) | Failure::Other(detail) => errors.push(detail.clone()),
+            // `SameFileException`, which the original catches as any other.
+            Failure::SameFile(path) => errors.push(format!(
+                "File not moved, source and destination are the same: {path}"
+            )),
+            _ => {}
         }
         errors
     }
@@ -889,7 +894,15 @@ mod tests {
         );
         let failure = Failure::from(anyhow::Error::new(denied()).context("creating the movie's folder"));
         assert!(matches!(failure, Failure::PermissionDenied(_)), "{failure:?}");
+    }
+
+    /// Radarr 7: any other failure gives its error after the message too.
+    #[test]
+    fn another_failure_gives_its_error() {
         let other = Failure::from(TransferError::Io(std::io::Error::other("disk full")));
-        assert_eq!(other.errors(), vec!["Failed to import movie".to_string()]);
+        assert_eq!(
+            other.errors(),
+            vec!["Failed to import movie".to_string(), "disk full".to_string()]
+        );
     }
 }
