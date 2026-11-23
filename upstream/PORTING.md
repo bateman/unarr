@@ -9,7 +9,8 @@ You start after `make upstream-<app>` (the triage) and `make bump-<app>`
 (the new pin, the recordings, the summary) have run. Read first, in this
 order:
 
-1. `CLAUDE.md`: branch names, commit authorship, no tool names anywhere.
+1. `CLAUDE.md`: branch names, commit authorship, no tool names in commits
+   and pull requests.
 2. `upstream/README.md`: what the triage and the bump do, and what the bump
    leaves to the port.
 3. Issue #9, "Design": the rules this file turns into steps. Where this file
@@ -46,9 +47,10 @@ These hold for the whole run, whatever a step below says.
    when every upstream commit has a final decision (section 9).
 7. **Authorship and names** as `CLAUDE.md` says: every commit authored and
    committed as `Fabio Calefato <fcalefato@gmail.com>`; no trailer and no
-   line that names a tool, an agent, a model or a session, in commits, the
-   PR title and body, review comments, issues. Remove any footer a tool
-   adds by itself.
+   line that names a tool, an agent, a model or a session, in commits and
+   in the PR title and body: remove a footer a tool adds to the body by
+   itself. In a comment (a review comment, an issue's) write none
+   yourself; a footer the posting tool adds there is left as it is.
 8. **Two questions are the maintainer's** (issue #9, "Still to decide").
    When you meet one, stop that part and ask (section "Stop and ask"). Do
    not pick an answer, not even "for now".
