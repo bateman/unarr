@@ -2165,6 +2165,38 @@ async fn backup_errors_follow_each_original() {
     }
 }
 
+/// `DisabledForLocalhost` (Radarr 7): the UI asks no credentials of a
+/// client on the loopback, and asks them of one on the local network.
+#[tokio::test]
+async fn radarr_asks_no_credentials_of_localhost_when_so_set() {
+    let app = app_edited(Personality::Radarr, "", |host| {
+        host.authentication_method = unarr_core::config::AuthenticationMethod::Forms;
+        host.authentication_required = unarr_core::config::AuthenticationRequired::DisabledForLocalhost;
+    });
+    for (peer, expected) in [
+        (
+            std::net::SocketAddr::from(([127, 0, 0, 1], 50000)),
+            StatusCode::OK,
+        ),
+        (
+            std::net::SocketAddr::from(([0, 0, 0, 0, 0, 0, 0, 1], 50000)),
+            StatusCode::OK,
+        ),
+        (
+            std::net::SocketAddr::from(([192, 168, 1, 20], 50000)),
+            StatusCode::FOUND,
+        ),
+    ] {
+        let request = Request::builder()
+            .uri("/")
+            .extension(axum::extract::ConnectInfo(peer))
+            .body(Body::empty())
+            .unwrap();
+        let response = app.clone().oneshot(request).await.unwrap();
+        assert_eq!(response.status(), expected, "{peer}");
+    }
+}
+
 /// A key reset takes effect at once: the old key is refused and the new
 /// one accepted, without a restart (Radarr 7 reads the key at each
 /// request). The reset is what `ResetApiKey` stores.
