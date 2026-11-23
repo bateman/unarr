@@ -43,15 +43,15 @@ impl MovieEnvironment {
     }
 }
 
-/// `ParseCustomFormat(LocalMovie, fileName)`: the scene name, else
-/// `file_name_for_formats`, simplified, with what the aggregators settled
-/// on; the formats that look at a file's name read `file_name_for_formats`.
+/// `ParseCustomFormat(LocalMovie, fileName)`: the scene name, else the
+/// file's own name, simplified, with what the aggregators settled on; the
+/// formats that look at a file's name read `file_name_for_formats`.
 pub fn local_formats(catalog: &MovieCatalog, local: &LocalMovie, file_name_for_formats: &str) -> Vec<CustomFormat> {
     let Some(movie) = &local.movie else {
         return Vec::new();
     };
     let scene_name = local.scene_name.as_deref().filter(|s| !s.trim().is_empty());
-    let title = parser::simplify_release_title(scene_name.unwrap_or(file_name_for_formats));
+    let title = parser::simplify_release_title(scene_name.unwrap_or(file_name(&local.path)));
     let input = Input {
         release_title: &title,
         filename: Some(file_name_for_formats),
@@ -598,6 +598,29 @@ mod tests {
             filter_existing(&files, &[held], &movie),
             vec!["/C/Test/Movie/The Movie (2018) - extra.mkv".to_string()]
         );
+    }
+
+    /// Without a scene name, the release title is still the file's own
+    /// name: a format on the title matches it under either name.
+    #[test]
+    fn the_release_title_stays_the_files_own_name() {
+        let mut catalog = MovieCatalog::default();
+        let format = |id: i64, name: &str| CustomFormat {
+            id,
+            name: name.into(),
+            include_when_renaming: false,
+            specifications: json!([{"type": "ReleaseTitleSpecification", "body": {"value": name, "negate": false, "required": false}}]),
+        };
+        catalog.base.formats = vec![format(1, "English"), format(2, "Spanish")].into();
+        let mut local = LocalMovie {
+            path: "/C/Test/Unsorted/The.Movie.2026.DVDRip.Spanish.XviD-OSiTV.avi".into(),
+            movie: Some(movie()),
+            ..Default::default()
+        };
+        score_formats(&catalog, &mut local, "The Movie 2018 DVDRip English XviD-OSiTV");
+        let names = |formats: &[CustomFormat]| formats.iter().map(|f| f.name.clone()).collect::<Vec<_>>();
+        assert_eq!(names(&local.custom_formats), vec!["English", "Spanish"]);
+        assert_eq!(names(&local.original_file_name_custom_formats), vec!["Spanish"]);
     }
 
     /// `LocalMovieCustomFormatCalculationServiceFixture.should_update_custom_formats_on_local_movie`
