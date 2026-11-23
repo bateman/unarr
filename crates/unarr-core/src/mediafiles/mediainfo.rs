@@ -776,16 +776,19 @@ fn disposition(stream: &Value, flag: &str) -> Option<bool> {
         .map(|v| v != 0)
 }
 
-/// Radarr's `MediaInfoAudioStreamModel` list: the audio streams with a
-/// language, in the file's order.
+/// Radarr's `MediaInfoAudioStreamModel` list: every audio stream, in the
+/// file's order, `und` for one without a language.
 fn audio_stream_models(streams: &[&Value]) -> Vec<Value> {
-    let mut sorted: Vec<&&Value> = streams.iter().filter(|s| language(s).is_some()).collect();
+    let mut sorted: Vec<&&Value> = streams.iter().collect();
     sorted.sort_by_key(|s| s["index"].as_i64().unwrap_or(0));
     sorted
         .into_iter()
         .map(|s| {
             let mut m = Map::new();
-            m.insert("language".into(), opt(language(s).as_deref()));
+            m.insert(
+                "language".into(),
+                json!(language(s).unwrap_or_else(|| "und".into())),
+            );
             m.insert("format".into(), opt(str_of(s, "codec_name")));
             m.insert("codecId".into(), opt(str_of(s, "codec_tag_string")));
             m.insert("profile".into(), opt(str_of(s, "profile")));
@@ -1021,9 +1024,14 @@ mod tests {
             "channels": 6, "channel_layout": "5.1(side)", "tags": {"language": "eng", "title": " Main "}});
         let untagged = json!({"index": 1, "codec_type": "audio", "codec_name": "aac"});
         let models = audio_stream_models(&[&audio, &untagged]);
-        assert_eq!(models.len(), 1, "a stream without a language is left out");
-        assert_eq!(models[0]["title"], "Main");
-        assert!(models[0].get("profile").is_none(), "nulls are left out");
+        assert_eq!(models.len(), 2, "in the file's order");
+        assert_eq!(
+            models[0]["language"], "und",
+            "a stream without a language is `und`"
+        );
+        assert_eq!(models[0]["format"], "aac");
+        assert_eq!(models[1]["title"], "Main");
+        assert!(models[1].get("profile").is_none(), "nulls are left out");
         let sub = json!({"index": 3, "codec_type": "subtitle", "codec_name": "subrip",
             "tags": {"language": "ita"}, "disposition": {"forced": 1, "hearing_impaired": 0}});
         let models = subtitle_stream_models(&[&sub]);
