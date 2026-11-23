@@ -133,7 +133,7 @@ pub fn audio_stream_count(raw: &Value) -> i64 {
 
 /// `FormatAudioCodec` of `personality`'s original. Radarr 7 (FFprobe 8)
 /// also reads the profile: Atmos in a TrueHD or E-AC-3 profile, HE-AAC and
-/// xHE-AAC, and DTS:X behind DTS-HD MA (`DTS-HD MA + DTS:X IMAX`); Sonarr,
+/// xHE-AAC, and DTS:X behind DTS-HD MA (`DTS-HD MA + DTS:X`, also IMAX); Sonarr,
 /// at its pin, reads the codec id alone for those.
 pub fn audio_codec_for(
     personality: crate::Personality,
@@ -146,7 +146,9 @@ pub fn audio_codec_for(
             Some("truehd") if codec_id != "thd+" && profile == "Dolby TrueHD + Dolby Atmos" => {
                 Some("TrueHD Atmos")
             }
-            Some("dts") if profile == "DTS-HD MA + DTS:X IMAX" => Some("DTS-X"),
+            Some("dts") if profile == "DTS-HD MA + DTS:X" || profile == "DTS-HD MA + DTS:X IMAX" => {
+                Some("DTS-X")
+            }
             Some("eac3") if codec_id != "ec+3" && profile == "Dolby Digital Plus + Dolby Atmos" => {
                 Some("EAC3 Atmos")
             }
@@ -378,6 +380,7 @@ mod tests {
             ("truehd", "thd+", "", "TrueHD Atmos", "TrueHD Atmos"),
             ("truehd", "", "", "TrueHD", "TrueHD"),
             ("dts", "", "DTS-HD MA + DTS:X IMAX", "DTS-X", "DTS"),
+            ("dts", "", "DTS-HD MA + DTS:X", "DTS-X", "DTS"),
             ("dts", "", "DTS:X", "DTS-X", "DTS-X"),
             (
                 "eac3",
