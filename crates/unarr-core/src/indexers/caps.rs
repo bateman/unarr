@@ -81,9 +81,23 @@ impl Capabilities {
             .is_some_and(|v| v.iter().any(|x| x == p))
     }
 
-    /// `Newznab.GetProviderPageSize`.
+    /// `Newznab.GetProviderPageSize` (Sonarr, at its pin): the larger of
+    /// the two sizes, at most 100.
     pub fn page_size(&self) -> i64 {
         100.min(self.default_page_size.max(self.max_page_size))
+    }
+
+    /// `GetProviderPageSize` of a personality. Radarr 7 asks the indexer's
+    /// default size, held between 100 (or the maximum, when smaller) and
+    /// the maximum (`Math.Clamp`).
+    pub fn page_size_for(&self, personality: crate::Personality) -> i64 {
+        match personality {
+            crate::Personality::Radarr => {
+                let max = self.max_page_size;
+                self.default_page_size.clamp(100.min(max), max)
+            }
+            crate::Personality::Sonarr | crate::Personality::Lidarr => self.page_size(),
+        }
     }
 }
 
@@ -272,6 +286,31 @@ mod tests {
         assert!(caps.supports_tv_param("tvdbid"));
         assert!(caps.supports_aggregate_id_search);
         assert_eq!(caps.page_size(), 100);
+        // `should_use_pagesize_over_100_if_reported_in_caps` (200 of 250),
+        // Radarr 7: the default size is
+        // used when the maximum allows it; Sonarr keeps the larger, at most 100.
+        for (default, max, radarr, sonarr) in [
+            (100, 100, 100, 100),
+            (50, 100, 100, 100),
+            (200, 250, 200, 100),
+            (100, 50, 50, 100),
+        ] {
+            let caps = Capabilities {
+                default_page_size: default,
+                max_page_size: max,
+                ..Capabilities::default()
+            };
+            assert_eq!(
+                caps.page_size_for(crate::Personality::Radarr),
+                radarr,
+                "{default}/{max}"
+            );
+            assert_eq!(
+                caps.page_size_for(crate::Personality::Sonarr),
+                sonarr,
+                "{default}/{max}"
+            );
+        }
         assert_eq!(caps.categories[1].id, 5000);
         let options = category_options(Some(&caps.categories));
         assert_eq!(options[0]["value"], 5000); // Movies (2000) sorts after TV

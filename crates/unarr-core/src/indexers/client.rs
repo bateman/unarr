@@ -180,7 +180,7 @@ impl IndexerClient {
         RequestGenerator {
             settings,
             caps,
-            page_size: caps.page_size(),
+            page_size: caps.page_size_for(self.personality),
             max_pages: MAX_PAGES,
         }
     }
@@ -368,8 +368,14 @@ impl IndexerClient {
         let caps = self.capabilities(&definition.settings).await?;
         let generator = self.generator(&definition.settings, &caps);
         let chain = self.recent_requests(&generator);
-        self.fetch_chain(definition, &chain, caps.page_size(), last_rss, true)
-            .await
+        self.fetch_chain(
+            definition,
+            &chain,
+            caps.page_size_for(self.personality),
+            last_rss,
+            true,
+        )
+        .await
     }
 
     /// `Fetch(MovieSearchCriteria)`: Radarr's search.
@@ -382,7 +388,13 @@ impl IndexerClient {
         let generator = self.generator(&definition.settings, &caps);
         let chain = crate::movies::request::search_requests(&generator, criteria);
         Ok(self
-            .fetch_chain(definition, &chain, caps.page_size(), None, false)
+            .fetch_chain(
+                definition,
+                &chain,
+                caps.page_size_for(self.personality),
+                None,
+                false,
+            )
             .await?
             .releases)
     }
@@ -397,7 +409,13 @@ impl IndexerClient {
         let generator = self.generator(&definition.settings, &caps);
         let chain = generator.search_requests(criteria);
         Ok(self
-            .fetch_chain(definition, &chain, caps.page_size(), None, false)
+            .fetch_chain(
+                definition,
+                &chain,
+                caps.page_size_for(self.personality),
+                None,
+                false,
+            )
             .await?
             .releases)
     }
