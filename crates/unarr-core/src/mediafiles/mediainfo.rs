@@ -772,15 +772,19 @@ fn scan_type(personality: Personality, video: Option<&Value>) -> &'static str {
     }
 }
 
-/// A stream's `title` tag, trimmed, when it has one.
+/// A stream's `title` tag, trimmed, when it has one; else its `name` tag,
+/// which MP4 files carry instead (Radarr 7).
 fn stream_title(stream: &Value) -> Option<String> {
     let tags = stream.get("tags")?.as_object()?;
-    tags.iter()
-        .find(|(k, _)| k.eq_ignore_ascii_case("title"))
-        .and_then(|(_, v)| v.as_str())
-        .map(str::trim)
-        .filter(|t| !t.is_empty())
-        .map(String::from)
+    let tag = |name: &str| {
+        tags.iter()
+            .find(|(k, _)| k.eq_ignore_ascii_case(name))
+            .and_then(|(_, v)| v.as_str())
+            .map(str::trim)
+            .filter(|t| !t.is_empty())
+            .map(String::from)
+    };
+    tag("title").or_else(|| tag("name"))
 }
 
 /// A stream's disposition flag, when ffprobe reports it.
@@ -1078,6 +1082,21 @@ mod tests {
             models[0],
             json!({"language": "ita", "format": "subrip", "forced": true, "hearingImpaired": false})
         );
+    }
+
+    /// Radarr 7: an MP4's stream names itself in a `name` tag, taken when
+    /// it has no `title`.
+    #[test]
+    fn a_stream_without_a_title_takes_its_name() {
+        let audio = json!({"index": 1, "codec_type": "audio", "codec_name": "aac",
+            "tags": {"language": "eng", "name": " Commentary "}});
+        assert_eq!(audio_stream_models(&[&audio])[0]["title"], "Commentary");
+        let titled = json!({"index": 1, "codec_type": "audio", "codec_name": "aac",
+            "tags": {"title": "Main", "name": "Other"}});
+        assert_eq!(audio_stream_models(&[&titled])[0]["title"], "Main");
+        let sub = json!({"index": 2, "codec_type": "subtitle", "codec_name": "mov_text",
+            "tags": {"language": "ita", "name": "Forced"}});
+        assert_eq!(subtitle_stream_models(&[&sub])[0]["title"], "Forced");
     }
 
     /// Whichever ffprobe runs, an x264 stream is `x264`, as the originals'
