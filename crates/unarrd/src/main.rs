@@ -739,13 +739,16 @@ type FilterHandle =
 /// The console: `tracing`'s own lines or CLEF (see [`console`]), cleansed
 /// of secrets like every other place a line goes to, and coloured only on
 /// a terminal (`docker logs` and a redirected output get plain text).
-fn console_layer<S>(console: &console::Console) -> impl tracing_subscriber::Layer<S>
+fn console_layer<S>(
+    console: &console::Console,
+    personality: Option<Personality>,
+) -> impl tracing_subscriber::Layer<S>
 where
     S: tracing::Subscriber + for<'a> tracing_subscriber::registry::LookupSpan<'a>,
 {
     use std::io::IsTerminal;
     console.layer(
-        || unarr_api::cleanse::Cleansing(std::io::stdout()),
+        move || unarr_api::cleanse::Cleansing(std::io::stdout(), personality),
         std::io::stdout().is_terminal(),
     )
 }
@@ -847,7 +850,7 @@ fn personality_dispatch(
     let dispatch = tracing::Dispatch::new(
         tracing_subscriber::registry()
             .with(filter)
-            .with(console_layer(&console))
+            .with(console_layer(&console, logs.personality()))
             .with(
                 logs.clone()
                     .with_filter(tracing_subscriber::filter::filter_fn(move |m| {
@@ -1018,7 +1021,7 @@ fn main() -> anyhow::Result<()> {
     let process_console = console::Console::new(process_console_format(&args.personalities));
     tracing_subscriber::registry()
         .with(log_filter())
-        .with(console_layer(&process_console))
+        .with(console_layer(&process_console, None))
         .with(process_log.clone())
         .init();
 
@@ -1049,8 +1052,9 @@ fn main() -> anyhow::Result<()> {
         // The log files live with the personality's data, where the
         // originals keep theirs and under their names (`sonarr.txt`).
         let name = personality.app_name().to_lowercase();
-        let logs = LogBuffer::new();
-        let files = LogFiles::open(&args.data.join(personality_dir(personality)).join("logs"), &name);
+        let logs = LogBuffer::for_personality(personality);
+        let files = LogFiles::open(&args.data.join(personality_dir(personality)).join("logs"), &name)
+            .for_personality(personality);
         process_log.add(logs.clone(), files.clone());
         let (dispatch, mut control) = personality_dispatch(
             &logs,

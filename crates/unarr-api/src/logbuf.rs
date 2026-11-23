@@ -25,6 +25,8 @@ pub struct LogEntry {
 #[derive(Clone, Default)]
 pub struct LogBuffer {
     inner: Arc<Mutex<Inner>>,
+    /// Whose rules cleanse what is kept (`crate::cleanse::cleanse_for`).
+    personality: Option<unarr_core::Personality>,
 }
 
 #[derive(Default)]
@@ -38,6 +40,19 @@ const CAPACITY: usize = 2000;
 impl LogBuffer {
     pub fn new() -> LogBuffer {
         LogBuffer::default()
+    }
+
+    /// Whose rules cleanse what is kept; `None` for the shared ones alone.
+    pub fn personality(&self) -> Option<unarr_core::Personality> {
+        self.personality
+    }
+
+    /// The recent lines of `personality`, cleansed with its original's rules.
+    pub fn for_personality(personality: unarr_core::Personality) -> LogBuffer {
+        LogBuffer {
+            personality: Some(personality),
+            ..LogBuffer::default()
+        }
     }
 
     pub fn push(&self, level: &'static str, logger: &str, message: String, exception: Option<String>) {
@@ -130,7 +145,13 @@ pub struct Record {
 }
 
 impl Record {
+    /// The event, cleansed with the rules both originals have.
     pub fn from_event(event: &Event<'_>) -> Record {
+        Record::from_event_for(event, None)
+    }
+
+    /// The event, cleansed with the rules of `personality`'s original.
+    pub fn from_event_for(event: &Event<'_>, personality: Option<unarr_core::Personality>) -> Record {
         let meta = event.metadata();
         let mut visitor = MessageVisitor::default();
         event.record(&mut visitor);
@@ -140,8 +161,10 @@ impl Record {
             logger: meta.target().to_string(),
             // `CleanseLogMessage`: here, so that neither the recent lines nor
             // the files ever hold what it removes.
-            message: crate::cleanse::cleanse(&visitor.message).into_owned(),
-            error: visitor.error.map(|e| crate::cleanse::cleanse(&e).into_owned()),
+            message: crate::cleanse::cleanse_for(personality, &visitor.message).into_owned(),
+            error: visitor
+                .error
+                .map(|e| crate::cleanse::cleanse_for(personality, &e).into_owned()),
         }
     }
 }
@@ -168,13 +191,31 @@ impl LogBuffer {
 
 impl<S: Subscriber> Layer<S> for LogBuffer {
     fn on_event(&self, event: &Event<'_>, _ctx: Context<'_, S>) {
-        self.record(&Record::from_event(event));
+        self.record(&Record::from_event_for(event, self.personality));
     }
 }
 
 #[cfg(test)]
 mod tests {
     use super::*;
+
+    /// What is kept is cleansed with the rules of the personality the
+    /// buffer is for: Radarr 7 takes out an email address, Sonarr's pin
+    /// does not.
+    #[test]
+    fn the_recent_lines_are_cleansed_as_their_personality_does() {
+        use tracing_subscriber::layer::SubscriberExt;
+        for (buffer, kept) in [
+            (LogBuffer::for_personality(unarr_core::Personality::Radarr), "Sending email to (removed)@example.com failed"),
+            (LogBuffer::for_personality(unarr_core::Personality::Sonarr), "Sending email to me@example.com failed"),
+        ] {
+            let subscriber = tracing_subscriber::registry().with(buffer.clone());
+            tracing::subscriber::with_default(subscriber, || {
+                tracing::info!("Sending email to me@example.com failed");
+            });
+            assert_eq!(buffer.entries()[0].message, kept);
+        }
+    }
 
     #[test]
     fn keeps_newest_first_and_bounded() {

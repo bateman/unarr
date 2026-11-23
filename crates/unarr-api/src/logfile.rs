@@ -135,9 +135,17 @@ pub struct LogFiles {
     /// The level being logged at: the debug and trace files are written
     /// only at theirs.
     enabled: Arc<std::sync::RwLock<tracing::level_filters::LevelFilter>>,
+    /// Whose rules cleanse what is written (`crate::cleanse::cleanse_for`).
+    personality: Option<unarr_core::Personality>,
 }
 
 impl LogFiles {
+    /// The same files, cleansed with the rules of `personality`'s original.
+    pub fn for_personality(mut self, personality: unarr_core::Personality) -> LogFiles {
+        self.personality = Some(personality);
+        self
+    }
+
     /// The files under `dir`, named after `app` (the original
     /// application's name in lower case: `sonarr.txt`). The debug and
     /// trace files exist only when the process logs at those levels.
@@ -170,6 +178,7 @@ impl LogFiles {
         LogFiles {
             files: Arc::new(Mutex::new(files)),
             enabled: Arc::new(std::sync::RwLock::new(enabled)),
+            personality: None,
         }
     }
 
@@ -298,7 +307,7 @@ fn layout(
 
 impl<S: Subscriber> Layer<S> for LogFiles {
     fn on_event(&self, event: &Event<'_>, _ctx: Context<'_, S>) {
-        self.record(&Record::from_event(event));
+        self.record(&Record::from_event_for(event, self.personality));
     }
 }
 

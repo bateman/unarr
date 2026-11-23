@@ -12,6 +12,7 @@ use std::net::Ipv4Addr;
 use std::sync::LazyLock;
 
 use fancy_regex::Regex;
+use unarr_core::Personality;
 
 const REMOVED: &str = "(removed)";
 
@@ -24,6 +25,9 @@ struct Rule {
     needs: &'static [&'static str],
     pattern: Regex,
     within: Option<Regex>,
+    /// The one personality whose original has the rule at its pin; `None`
+    /// for a rule both have.
+    only: Option<Personality>,
 }
 
 fn rule(needs: &'static [&'static str], pattern: &str) -> Rule {
@@ -31,6 +35,7 @@ fn rule(needs: &'static [&'static str], pattern: &str) -> Rule {
         needs,
         pattern: Regex::new(pattern).expect("a cleansing rule"),
         within: None,
+        only: None,
     }
 }
 
@@ -62,6 +67,7 @@ static RULES: LazyLock<Vec<Rule>> = LazyLock::new(|| {
             needs: &["iptorrents"],
             pattern: Regex::new(r"(?i)iptorrents\.com/[/a-z0-9?&;=]*").expect("a cleansing rule"),
             within: Some(Regex::new(r"(?i)(?<=[?&;])(u|tp)=(?<secret>[^&=;]+)").expect("a cleansing rule")),
+            only: None,
         },
         rule(&["/fetch/"], r"/fetch/[a-z0-9]{32}/(?<secret>[a-z0-9]{32})"),
         rule(
@@ -87,6 +93,11 @@ static RULES: LazyLock<Vec<Rule>> = LazyLock::new(|| {
             &["/home/", "/users/"],
             r#"(?im)/(home|Users)/(?<secret>[^/"]+?)(/|$)"#,
         ),
+        // Email: Radarr 7's; Sonarr's pin does not have it.
+        Rule {
+            only: Some(Personality::Radarr),
+            ..rule(&["@"], r"(?i)\b(?<secret>[a-z0-9._%+-]+)@[a-z0-9.-]+\.[a-z]{2,}\b")
+        },
         // NzbGet
         rule(
             &["\"name\""],
@@ -231,14 +242,24 @@ fn remove_remote_ips(text: &str) -> Option<String> {
     changed.then_some(out)
 }
 
-/// `Cleanse`: `message` without the secrets the rules know.
+/// `Cleanse`: `message` without the secrets the rules both originals have
+/// know; what the process logs outside any personality.
 pub fn cleanse(message: &str) -> Cow<'_, str> {
+    cleanse_for(None, message)
+}
+
+/// `Cleanse` as `personality`'s original does it at its pin: the rules
+/// both have, and those of its own (`None`: the shared ones alone).
+pub fn cleanse_for(personality: Option<Personality>, message: &str) -> Cow<'_, str> {
     if message.trim().is_empty() {
         return Cow::Borrowed(message);
     }
     let lower = message.to_ascii_lowercase();
     let mut text = Cow::Borrowed(message);
     for rule in RULES.iter() {
+        if rule.only.is_some() && rule.only != personality {
+            continue;
+        }
         if !rule.needs.iter().any(|needed| lower.contains(needed)) {
             continue;
         }
@@ -258,14 +279,15 @@ pub fn cleanse(message: &str) -> Cow<'_, str> {
     text
 }
 
-/// A writer that cleanses what goes through it: for the console, whose
-/// lines `tracing` formats itself. Each event reaches it as one write.
-pub struct Cleansing<W>(pub W);
+/// A writer that cleanses what goes through it, with the rules of the
+/// personality given: for the console, whose lines `tracing` formats
+/// itself. Each event reaches it as one write.
+pub struct Cleansing<W>(pub W, pub Option<Personality>);
 
 impl<W: std::io::Write> std::io::Write for Cleansing<W> {
     fn write(&mut self, buf: &[u8]) -> std::io::Result<usize> {
         match std::str::from_utf8(buf) {
-            Ok(text) => self.0.write_all(cleanse(text).as_bytes())?,
+            Ok(text) => self.0.write_all(cleanse_for(self.1, text).as_bytes())?,
             Err(_) => self.0.write_all(buf)?,
         }
         Ok(buf.len())
@@ -367,6 +389,30 @@ mod tests {
     }
 
     /// `should_keep_message`.
+    /// `CleanseLogMessageFixture.should_clean_email` (Radarr 7), case for
+    /// case; Sonarr's original at its pin keeps the address.
+    #[test]
+    fn radarr_removes_email_addresses_and_sonarr_keeps_them() {
+        let cases = [
+            "User 'mySecret@example.com' is not authorized to access this application",
+            "Auth-Logout ip 127.0.0.1 username 'mySecret@example.com'",
+            "Sending email to mySecret@sub.example.co.uk failed",
+        ];
+        for message in cases {
+            let cleansed = cleanse_for(Some(Personality::Radarr), message);
+            assert!(!cleansed.contains("mySecret"), "{cleansed}");
+            assert!(cleansed.contains("(removed)@"), "{cleansed}");
+            assert_eq!(cleanse_for(Some(Personality::Sonarr), message), message);
+            assert_eq!(cleanse(message), message);
+        }
+        let mut out = Cleansing(Vec::new(), Some(Personality::Radarr));
+        std::io::Write::write_all(&mut out, cases[2].as_bytes()).unwrap();
+        assert_eq!(
+            String::from_utf8(out.0).unwrap(),
+            "Sending email to (removed)@sub.example.co.uk failed"
+        );
+    }
+
     #[test]
     fn what_only_looks_like_a_secret_stays() {
         let case = "[Info] MigrationController: *** Migrating Database=sonarr-main;Host=postgres14;Username=mySecret;Password=mySecret;Port=5432;token=mySecret;Enlist=False&username=mySecret;mypassword=mySecret;mypass=shouldkeep1;test_token=mySecret;password=123%@%_@!#^#@;use_password=mySecret;get_token=shouldkeep2;usetoken=shouldkeep3;passwrd=mySecret;";
@@ -432,7 +478,7 @@ mod tests {
     #[test]
     fn the_console_writer_cleanses_each_line() {
         use std::io::Write;
-        let mut out = Cleansing(Vec::new());
+        let mut out = Cleansing(Vec::new(), None);
         out.write_all(
             b"WARN indexer request failed url=http://indexer.test/api?t=tvsearch&apikey=mySecret&q=x\n",
         )
