@@ -256,6 +256,13 @@ async fn usenet_clients_take_an_nzb_and_report_it_through_the_queue() {
         assert_eq!(items[0].status, DownloadItemStatus::Completed, "{kind:?}");
         assert_eq!(items[0].output_path.as_deref(), Some(completed));
         assert_eq!(items[0].remaining_size, 0);
+        if kind == ClientKind::Nzbget {
+            // Each status fills its own token, the script's included: Radarr 7
+            // stopped leaving `{scriptStatus}` in the message.
+            let message = items[0].message.as_deref().unwrap_or_default();
+            assert!(message.contains("Script Status: NONE"), "{message}");
+            assert!(!message.contains('{'), "{message}");
+        }
         client.remove(&items[0], false).await.unwrap();
         assert!(client.items().await.unwrap().is_empty());
         // A failed download shows as failed.
