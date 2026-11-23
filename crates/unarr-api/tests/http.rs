@@ -2361,3 +2361,25 @@ async fn remember_me_is_read_as_each_original_reads_it() {
         }
     }
 }
+
+/// Radarr 7 no longer binds the `body` of a posted command (a resource
+/// read back and sent again carries one): the command is read from the
+/// request's raw body, its name first. Unarr reads it that way already.
+#[tokio::test]
+async fn radarr_starts_a_command_whatever_its_body_field_says() {
+    let (app, state) = app_and_state(Personality::Radarr, "", |_| {});
+    state.start_runtime().await.expect("the runtime");
+    let json = [("X-Api-Key", KEY), ("Content-Type", "application/json")];
+    let (status, _, answer) = ask(
+        &app,
+        "POST",
+        "/api/v3/command",
+        &json,
+        r#"{"name":"MessagingCleanup","body":{"sendUpdatesToClient":true,"name":"Other"}}"#,
+    )
+    .await;
+    assert_eq!(status, StatusCode::CREATED, "{}", String::from_utf8_lossy(&answer));
+    let answer: serde_json::Value = serde_json::from_slice(&answer).unwrap();
+    assert_eq!(answer["name"], "MessagingCleanup");
+    assert_eq!(answer["body"]["name"], "MessagingCleanup");
+}
