@@ -53,7 +53,10 @@ fn release_date(movie: &Movie) -> String {
 fn movie_json(movie: &Movie, ctx: &Context<'_>) -> Value {
     let md = &movie.metadata;
     let mut images = md.images.clone();
-    convert_to_local_urls(&ctx.identity.url_base, movie.id, &mut images);
+    let root = ctx.identity.media_cover_dir.as_deref();
+    convert_to_local_urls(&ctx.identity.url_base, movie.id, &mut images, &|cover_type| {
+        super::cover_exists(root, movie.id, cover_type, movie.added, ctx.now)
+    });
     let images: Vec<Value> = images
         .iter()
         .map(|i| {

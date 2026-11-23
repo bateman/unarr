@@ -108,17 +108,27 @@ impl MovieDownloads {
     /// movie object it is handed, the one the tracked download keeps). The
     /// queue and the manual import of the download show them from then
     /// on, until the download is matched to its movie afresh.
-    pub fn convert_covers_of(&self, download_id: &str, url_base: &str) {
+    pub fn convert_covers_of(
+        &self,
+        download_id: &str,
+        url_base: &str,
+        cover_dir: Option<&std::path::Path>,
+        now: chrono::DateTime<chrono::Utc>,
+    ) {
         let mut tracked = self.tracked.lock().recover();
         if let Some(movie) = tracked
             .get_mut(download_id)
             .and_then(|t| t.remote.as_mut())
             .and_then(|r| r.movie.as_mut())
         {
+            let (id, added) = (movie.id, movie.added);
             crate::movies::notifications::convert_to_local_urls(
                 url_base,
-                movie.id,
+                id,
                 &mut movie.metadata.images,
+                &|cover_type| {
+                    crate::movies::notifications::cover_exists(cover_dir, id, cover_type, added, now)
+                },
             );
         }
     }

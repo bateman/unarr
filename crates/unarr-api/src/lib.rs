@@ -268,7 +268,7 @@ async fn method_not_taken(
     // The cache headers come after the authentication in the originals.
     http::apply_cache_headers(
         refused,
-        http::cacheable(&path, query.as_deref()),
+        http::cacheable(&path, query.as_deref(), state.personality()),
         state.personality(),
     )
 }

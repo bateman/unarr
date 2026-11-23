@@ -285,7 +285,7 @@ fn collection_resource(all: &Collections, c: &Collection) -> Value {
                 "title": m.title,
                 "status": m.status.as_str(),
                 "runtime": m.runtime,
-                "images": images_resource(&m.images, 0, "", Covers::Remote),
+                "images": images_resource(&m.images, 0, "", Covers::Remote, &|_| true),
                 "year": m.year,
                 "ratings": m.ratings,
                 "genres": m.genres,
@@ -316,7 +316,7 @@ fn collection_resource(all: &Collections, c: &Collection) -> Value {
         "id": c.id,
         "title": c.title,
         "tmdbId": c.tmdb_id,
-        "images": images_resource(&c.images, 0, "", Covers::Remote),
+        "images": images_resource(&c.images, 0, "", Covers::Remote, &|_| true),
         "monitored": c.monitored,
         "qualityProfileId": c.quality_profile_id,
         "minimumAvailability": c.minimum_availability.as_str(),
@@ -427,7 +427,7 @@ pub async fn broadcast_collection(
 /// through the cover proxy (`proxied` holds the URL base); one credit, or
 /// all of them, as the metadata server names them.
 fn credit_resource(c: &Credit, proxied: Option<&str>) -> Value {
-    let mut images = images_resource(&c.images, 0, "", Covers::Remote);
+    let mut images = images_resource(&c.images, 0, "", Covers::Remote, &|_| true);
     if let Some(url_base) = proxied {
         for image in &mut images {
             if let Some(remote) = image["remoteUrl"].as_str().map(str::to_string) {

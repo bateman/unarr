@@ -212,7 +212,7 @@ pub async fn finish(State(state): State<AppState>, request: Request, next: Next)
     }
     if method != Method::OPTIONS {
         // The exception handler's answer is never one to keep.
-        if !thrown && cacheable(&as_asked, query.as_deref()) {
+        if !thrown && cacheable(&as_asked, query.as_deref(), state.personality()) {
             // A cover is a static file to the originals, found or not: kept
             // for a year, dated (the file's, or the build's), and a missing
             // one is said in `problem+json` by Sonarr too. A cache breaker
@@ -367,8 +367,10 @@ fn starts_with_segment(path: &str, segment: &str) -> bool {
 /// the request's without the URL base, in the case it was asked;
 /// the comparisons are the original's, some of them with case.
 /// `/ping` is not among its exceptions: Unarr leaves its lower-case
-/// spelling uncached by choice (`docs/DESIGN.md`, section 11).
-pub fn cacheable(path: &str, query: Option<&str>) -> bool {
+/// spelling uncached by choice (`docs/DESIGN.md`, section 11). Radarr 7
+/// keeps a cover only with its cache breaker, which it gives a cover once
+/// downloaded; Sonarr, at its pin, keeps any cover.
+pub fn cacheable(path: &str, query: Option<&str>, personality: Personality) -> bool {
     // Unarr's one addition, before anything that would keep it, the cache
     // breaker included: a backup holds the database and the API key, and
     // a shared cache in front that keeps what is `public` would hand it to
@@ -388,10 +390,14 @@ pub fn cacheable(path: &str, query: Option<&str>) -> bool {
         return true;
     }
     let lower = path.to_ascii_lowercase();
+    let covers_kept = personality != Personality::Radarr;
     if starts_with_segment(path, "/api") {
-        return lower.contains("/mediacover");
+        return covers_kept && lower.contains("/mediacover");
     }
     if starts_with_segment(path, "/signalr") {
+        return false;
+    }
+    if !covers_kept && starts_with_segment(path, "/mediacover") {
         return false;
     }
     if path.ends_with("/index.js") || path.ends_with("/initialize.json") {
@@ -478,7 +484,7 @@ pub async fn cache_headers(State(state): State<AppState>, request: Request, next
     if request.method() == Method::OPTIONS || path == "/ping" {
         return next.run(request).await;
     }
-    let cacheable = cacheable(&path, query.as_deref());
+    let cacheable = cacheable(&path, query.as_deref(), state.personality());
     let response = next.run(request).await;
     apply_cache_headers(response, cacheable, state.personality())
 }
@@ -1029,6 +1035,26 @@ mod tests {
         );
     }
 
+    /// Radarr 7 keeps a cover only with its cache breaker
+    /// (`CacheableSpecification`, Radarr 7.0); Sonarr keeps any.
+    #[test]
+    fn radarr_keeps_a_cover_only_with_its_cache_breaker() {
+        for path in [
+            "/MediaCover/1/poster.jpg",
+            "/mediacover/1/fanart.jpg",
+            "/api/v3/MediaCover/1/poster.jpg",
+        ] {
+            assert!(!cacheable(path, None, Personality::Radarr), "{path}");
+            assert!(
+                cacheable(path, Some("h=bd15f9a27331fc78d4df"), Personality::Radarr),
+                "{path}"
+            );
+            assert!(cacheable(path, None, Personality::Sonarr), "{path}");
+        }
+        assert!(cacheable("/Content/styles.css", None, Personality::Radarr));
+        assert!(!cacheable("/api/v3/system/status", None, Personality::Radarr));
+    }
+
     #[test]
     fn what_may_be_kept_is_what_cacheable_specification_says() {
         for (path, query) in [
@@ -1043,7 +1069,7 @@ mod tests {
             ("/logfile/sonarr.log", None),
             ("/feed", Some("H")),
         ] {
-            assert!(cacheable(path, query), "{path} {query:?}");
+            assert!(cacheable(path, query, Personality::Sonarr), "{path} {query:?}");
         }
         for (path, query) in [
             ("/api/v3/system/status", None),
@@ -1067,7 +1093,7 @@ mod tests {
             ),
             ("/BACKUP/scheduled/x.zip", Some("x=2&H=abc")),
         ] {
-            assert!(!cacheable(path, query), "{path} {query:?}");
+            assert!(!cacheable(path, query, Personality::Sonarr), "{path} {query:?}");
         }
         assert_eq!(http_date("2024-02-29T08:05:09Z"), "Thu, 29 Feb 2024 08:05:09 GMT");
         assert_eq!(

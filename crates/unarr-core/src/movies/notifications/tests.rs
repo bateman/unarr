@@ -394,7 +394,7 @@ fn covers_get_the_address_they_are_served_at() {
             url: None,
         },
     ];
-    convert_to_local_urls("/radarr", 20, &mut images);
+    convert_to_local_urls("/radarr", 20, &mut images, &|_| true);
     // The hash is the one the real Radarr sent for this cover.
     assert_eq!(
         images[0].url.as_deref(),
@@ -774,7 +774,7 @@ fn the_library_payloads_are_the_originals() {
     // The cover's local address, hashed as `covers_get_the_address_they_are_served_at` checks.
     let local = {
         let mut images = m.metadata.images.clone();
-        convert_to_local_urls("", 1, &mut images);
+        convert_to_local_urls("", 1, &mut images, &|_| true);
         images[0].url.clone().unwrap()
     };
     let expected_movie = json!({
@@ -869,4 +869,43 @@ fn the_library_payloads_are_the_originals() {
     assert_eq!(deleted.get("image"), None);
     let kept_embed = embed(discord::movie_delete_payload(&settings, &kept, &ctx));
     assert_eq!(kept_embed["description"], "Movie removed, files were not deleted");
+}
+
+/// `MediaCoverServiceFixture`, Radarr 7: a movie added within the day gets
+/// the cache breaker only once its cover is on disk; an older one always.
+#[test]
+fn a_recent_movie_gets_the_cache_breaker_once_its_cover_exists() {
+    use super::cover_exists;
+    let now = chrono::DateTime::parse_from_rfc3339("2026-11-23T12:00:00Z")
+        .unwrap()
+        .with_timezone(&chrono::Utc);
+    let root = std::env::temp_dir().join(format!("unarr-covers-{}", std::process::id()));
+    let _ = std::fs::remove_dir_all(&root);
+    let recent = Some(now - chrono::Duration::hours(2));
+    let old = Some(now - chrono::Duration::days(2));
+    let convert = |added| {
+        let mut images = vec![Image {
+            cover_type: "poster".into(),
+            remote_url: Some("https://image.tmdb.org/t/p/original/poster.jpg".into()),
+            url: None,
+        }];
+        convert_to_local_urls("", 7, &mut images, &|t| {
+            cover_exists(Some(&root), 7, t, added, now)
+        });
+        images[0].url.clone().unwrap()
+    };
+    // should_convert_cover_urls_to_local_without_hash_if_cover_has_not_been_downloaded
+    assert_eq!(convert(recent), "/MediaCover/7/poster.jpg");
+    // should_not_check_if_cover_exists_for_movie_added_more_than_a_day_ago
+    assert!(convert(old).starts_with("/MediaCover/7/poster.jpg?h="));
+    assert!(convert(None).starts_with("/MediaCover/7/poster.jpg?h="));
+    // should_add_hash_to_cover_url_once_cover_exists
+    std::fs::create_dir_all(root.join("7")).unwrap();
+    std::fs::write(root.join("7").join("poster.jpg"), b"jpg").unwrap();
+    assert_eq!(convert(recent), convert(old));
+    assert!(
+        !cover_exists(None, 7, "poster", recent, now),
+        "no folder, no cover"
+    );
+    std::fs::remove_dir_all(&root).ok();
 }

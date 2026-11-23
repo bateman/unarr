@@ -310,12 +310,43 @@ pub(crate) fn quality_name(q: &QualityModel) -> &'static str {
     crate::movies::quality::MovieQuality::by_id(q.quality_id).name
 }
 
-/// `MediaCoverService.ConvertToLocalUrls(movieId, covers)`: every cover
-/// gets the address it is served at, with the first twenty hex digits of
-/// its remote URL's SHA-256 when it has one. The original writes this into
-/// the movie object it is handed, which is why a movie a tracked download
-/// holds shows the addresses afterwards.
-pub fn convert_to_local_urls(url_base: &str, movie_id: i64, images: &mut [Image]) {
+/// `MediaCoverService.CoverExistsCheckWindow`: how long after a movie was
+/// added its covers are checked on disk before they get a cache breaker.
+pub const COVER_EXISTS_CHECK_WINDOW_DAYS: i64 = 1;
+
+/// `MediaCoverService.CoverExists`: a movie added more than a day ago is
+/// taken to have its covers; a more recent one has a cover when its file
+/// is under `root` (no folder: none is). The original remembers the
+/// answer; a look at the disk costs as little for a movie this recent.
+pub fn cover_exists(
+    root: Option<&std::path::Path>,
+    movie_id: i64,
+    cover_type: &str,
+    added: Option<chrono::DateTime<chrono::Utc>>,
+    now: chrono::DateTime<chrono::Utc>,
+) -> bool {
+    let recent = added.is_some_and(|a| a > now - chrono::Duration::days(COVER_EXISTS_CHECK_WINDOW_DAYS));
+    if !recent {
+        return true;
+    }
+    root.is_some_and(|root| {
+        crate::tv::covers::cover_path(root, movie_id, &cover_type.to_lowercase(), None).is_file()
+    })
+}
+
+/// `MediaCoverService.ConvertToLocalUrls(movieId, covers, added)`: every
+/// cover gets the address it is served at, with the first twenty hex
+/// digits of its remote URL's SHA-256 when it has one and its file exists
+/// (`exists`, from [`cover_exists`]): a cover not downloaded yet gets no
+/// cache breaker, so a client does not keep its absence for a year. The
+/// original writes this into the movie object it is handed, which is why
+/// a movie a tracked download holds shows the addresses afterwards.
+pub fn convert_to_local_urls(
+    url_base: &str,
+    movie_id: i64,
+    images: &mut [Image],
+    exists: &dyn Fn(&str) -> bool,
+) {
     for image in images {
         if image.cover_type.eq_ignore_ascii_case("unknown") {
             continue;
@@ -323,7 +354,11 @@ pub fn convert_to_local_urls(url_base: &str, movie_id: i64, images: &mut [Image]
         let cover_type = image.cover_type.to_lowercase();
         let extension = if cover_type == "clearlogo" { ".png" } else { ".jpg" };
         let mut url = format!("{url_base}/MediaCover/{movie_id}/{cover_type}{extension}");
-        if let Some(remote) = image.remote_url.as_deref().filter(|r| !r.trim().is_empty()) {
+        if let Some(remote) = image
+            .remote_url
+            .as_deref()
+            .filter(|r| !r.trim().is_empty() && exists(&cover_type))
+        {
             let digest = ring::digest::digest(&ring::digest::SHA256, remote.as_bytes());
             let hash: String = digest
                 .as_ref()

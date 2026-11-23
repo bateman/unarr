@@ -1256,10 +1256,15 @@ async fn radarr_answers_outside_the_body_as_measured() {
     let errors: serde_json::Value = serde_json::from_slice(&body).unwrap();
     assert_eq!(errors["errors"][""][0], "A non-empty request body is required.");
 
-    // A cover with the key: kept for a year, as the static files are.
+    // A cover with the key and no cache breaker: Radarr 7 no longer keeps
+    // it (Radarr 6 kept it for a year, as the static files are); with the
+    // breaker it does.
     let (status, headers, _) = ask(&app, "GET", "/api/v3/mediacover/6/poster.jpg", &key, "").await;
     assert_eq!(status, StatusCode::OK);
     assert_eq!(header(&headers, "content-type"), Some("image/jpeg"));
+    assert_eq!(header(&headers, "cache-control"), Some("no-cache, no-store"));
+    let (status, headers, _) = ask(&app, "GET", "/api/v3/mediacover/6/poster.jpg?h=0123", &key, "").await;
+    assert_eq!(status, StatusCode::OK);
     assert_eq!(
         header(&headers, "cache-control"),
         Some("max-age=31536000, public")
@@ -1482,9 +1487,16 @@ async fn what_no_mapper_takes_is_a_404_in_problem_details() {
                 Some("application/problem+json; charset=utf-8"),
                 "{path}"
             );
+            // Radarr 7 keeps a cover only with its cache breaker.
+            let kept = personality == Personality::Sonarr || !path.to_lowercase().starts_with("/mediacover/");
             assert_eq!(
                 header(&headers, "cache-control"),
-                Some("max-age=31536000, public")
+                Some(if kept {
+                    "max-age=31536000, public"
+                } else {
+                    "no-cache, no-store"
+                }),
+                "{personality:?} {path}"
             );
             let problem: serde_json::Value = serde_json::from_slice(&body).unwrap();
             assert_eq!(problem["type"], document);
