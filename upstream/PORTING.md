@@ -13,8 +13,9 @@ order:
    and pull requests.
 2. `upstream/README.md`: what the triage and the bump do, and what the bump
    leaves to the port.
-3. Issue #9, "Design": the rules this file turns into steps. Where this file
-   and the issue disagree, the issue wins: say so in the PR.
+3. Issue #9, "Decisions" and "Design": the rules this file turns into
+   steps. Where this file and the issue disagree, the issue wins: say so
+   in the PR.
 
 Words used below: the **work directory** is `.cache/bump/<app>`
 (`$UNARR_CACHE/bump/<app>` when `UNARR_CACHE` is set); the **upstream
@@ -51,9 +52,12 @@ These hold for the whole run, whatever a step below says.
    in the PR title and body: remove a footer a tool adds to the body by
    itself. In a comment (a review comment, an issue's) write none
    yourself; a footer the posting tool adds there is left as it is.
-8. **Two questions are the maintainer's** (issue #9, "Still to decide").
-   When you meet one, stop that part and ask (section "Stop and ask"). Do
-   not pick an answer, not even "for now".
+8. **What issue #9 decided is not asked.** The version the clients see
+   (section 8, check 8) and upstream changes to code both personalities
+   share (section 4, "Code both personalities share") are decided: apply
+   them. Stop and ask only for a case neither the issue nor this file
+   decides (section "Stop and ask"), and then do not pick an answer, not
+   even "for now".
 9. **Never hide a failure to get green.** No test skipped, ignored or
    deleted; no golden added to a `PENDING` list; no `MAX_KNOWN_MIGRATION`
    raised before its work is done; no `KNOWN_FLAKY` entry for a test that
@@ -187,13 +191,20 @@ For each migration the triage lists as added or changed:
    `the_pinned_release_is_within_the_known_migrations` must turn green by
    that work, not by the number alone. Raise it in the commit of the last
    migration commit you port, and name the migrations in its message.
-5. When the new data is read by shared code (Radarr 243 reshapes
-   `MovieFiles.MediaInfo`, which the importer copies and
-   `crates/unarr-api/src/mediainfo.rs` renders for both personalities), the
-   import and Unarr's own migration depend on how the shared code will read
-   it: that is a question ("Stop and ask"). The migration commit is
-   **asked**, `MAX_KNOWN_MIGRATION` stays where it is and its test stays
-   red until the answer: no shortcut.
+5. When the new data is read by shared code and the other original does
+   not have the change at its pin, the shared code takes the personality
+   (section 4, "Code both personalities share"), and the import and
+   Unarr's own migration change only this personality's data.
+   Radarr 243 reshapes `MovieFiles.MediaInfo`, which the importer copies
+   and `crates/unarr-api/src/mediainfo.rs` renders for both personalities
+   (`mediainfo::resource` is called from `routes/radarr/resources.rs` and
+   from `routes/episodes.rs`). When Sonarr's pin keeps the old shape:
+   Radarr's mapping reads both shapes (point 2); Unarr's own migration goes
+   under `crates/unarr-core/migrations/radarr/`, where `movie_files` is;
+   `mediainfo.rs` renders the stored info as Radarr's recordings at the
+   target show it for Radarr, and as before for Sonarr, with a test for
+   each; then point 4 raises `MAX_KNOWN_MIGRATION` in the commit of the
+   last migration commit ported, so its test turns green in this PR.
 
 ### Routes
 
@@ -202,7 +213,7 @@ For each migration the triage lists as added or changed:
 2. `python3 -I scripts/route-audit.py --app <app> --source .cache/src/<App>/src`
    lists the routes that differ. A route added upstream is added to Unarr;
    one gone upstream is removed (unless a client Unarr serves still calls
-   it: then ask, as a shared-behaviour question).
+   it: neither the issue nor this file decides that, so stop and ask).
 3. The failing contract tests show changed answers: new fields, statuses
    (e.g. 204 for 200), bodies gone. Make Unarr answer as the recording does.
 
@@ -283,9 +294,69 @@ comment. Then:
 
 If the surface lands on shared code, as both of these do
 (`crates/unarr-api/src/routes/config.rs` answers `config/host` for both
-personalities), ask first ("Stop and ask"). A deferred commit whose
-surface waits on the answer still gets its issue now; its row reads
-**asked** until the answer, then `deferred`.
+personalities), it goes behind the personality like any other change
+there (next subsection) when the other original does not have the fields
+at its pin: Radarr's `config/host` answers `oidc*` and `sslKeyPath`,
+Sonarr's answers as Sonarr's recordings have it. The decisions above stay
+as they are: the OIDC commit `deferred`, naming the surface commit and the
+issue; the `sslKeyPath` commit `ported`, "surface only".
+
+### Code both personalities share
+
+A file is shared when both personalities reach it. The path does not
+tell: Radarr's own routes are under `routes/radarr/`, but Sonarr's
+(`series.rs`, `series_writes.rs`, `episodes.rs`) sit at the top of
+`routes/`, beside shared ones (`config.rs`, `system.rs`). What decides is
+whether the other personality uses the file. Shared today, e.g.
+`crates/unarr-api/src/mediainfo.rs`, `crates/unarr-api/src/routes/config.rs`,
+the parser, the download clients, the notifications,
+`crates/unarr-core/migrations/shared/`. Check with `grep -rn <module>
+crates/` that the other personality uses it, and whether the file already
+branches on `Personality` for that very thing. Check whether the other
+original has the change at its pin (`make upstream-<other>` fetches its
+clone; then
+`git -C .cache/upstream/<Other>.git grep -n <Name> v<other pin> -- src`).
+
+When the commit you port would change what such a file does, or answers,
+for the other personality too (a field added to a shared answer counts):
+
+- **The other original has the change at its pin:** port it for both, with
+  two tests, one per personality. The other personality's test carries what
+  its original does at its pin (that original's upstream test, when there
+  is one), and the PR names the file at the other pin. When no test can
+  show it for the other personality, leave the other personality as it
+  is: the change goes behind the personality, as below.
+- **It does not:** the change goes behind the personality, in this PR and
+  on this branch (`<app>/upstream-<target>`, though it touches shared
+  crates), so that each personality still answers as its own pinned
+  original:
+  1. Branch where the behaviour differs, no wider: on `state.personality()`
+     in a route, on a `Personality` the callers pass to a function both
+     reach, or in this personality's own importer and migrations when the
+     difference is in the data. Where the file already branches for that
+     thing, extend that branch.
+  2. Two tests: one that this personality does what its new original
+     does, one that the other personality still does what its original
+     does at its pin.
+  3. A review comment on the branch (section 7): the upstream commit, the
+     other original's pin that lacks it, and that the other personality's
+     port removes the branch.
+  4. The log row of the commit (section 7) says which branch goes when:
+     its `reason` has `behind the personality: <file>, until <Other> has
+     <what>` (after the reason of the decision, for a deferred commit),
+     and the PR body lists it under "Behind the personality".
+
+**A branch the other personality's port left.** Before you port, list
+them: `grep -n 'behind the personality:' upstream/<other>-log.csv`. Skip
+those already removed: this personality's log says `removes the branch of
+<Other> #<pr>` for them, or the file no longer has the branch. For each
+other, check whether your target has that behaviour
+(`git -C .cache/upstream/<App>.git grep -n <Name> v<target> -- src`).
+When it has, the port of the upstream commit that brings it removes the
+branch: the shared code does the same for both personalities, the test
+that held yours to the old behaviour now expects the new one, and the
+log row's `reason` says `removes the branch of <Other> #<pr>`. When it has
+not, leave the branch as it is.
 
 ## 5. Complete, for the limit of fixed rule 5
 
@@ -362,11 +433,18 @@ In this order, in English, no tool names, no footer:
    that cover it. No upstream subject in the table: the link has it, and
    an upstream `(#11716)` would link an issue of this repository.
 3. **Deferred.** The issues opened, one line each.
-4. **Questions for the maintainer.** Section "Stop and ask"; "none" when
+4. **Behind the personality.** One line per shared piece that now
+   branches on the personality (section 4, "Code both personalities
+   share"): the file, the upstream commit, and what the other original
+   must have for its port to remove the branch. Also each branch of the
+   other personality this port removed. "none" when there are none.
+5. **The clients' version.** Section 8, check 8: the note for a patch or
+   minor, the check for a major.
+6. **Questions for the maintainer.** Section "Stop and ask"; "none" when
    there are none.
-5. **Checks.** Each check of section 8, with its result.
-6. **Left to check by hand.** What you could not do, and why.
-7. **Still to do** (only while the run limit cut the port short): the
+7. **Checks.** Each check of section 8, with its result.
+8. **Left to check by hand.** What you could not do, and why.
+9. **Still to do** (only while the run limit cut the port short): the
    commits without a decision.
 
 ### Review comments on your own PR
@@ -375,59 +453,26 @@ Where you made a choice, comment on the lines it concerns: what you chose,
 the alternative you discarded, why. One review of kind "comment" (never
 "approve", never "request changes"), one comment per choice. At least:
 each surface port of a deferred feature, each migration of Unarr's own,
-each `not applicable` that a reader might doubt, each wontport entry.
+each branch on the personality in shared code, each `not applicable` that
+a reader might doubt, each wontport entry.
 
 ## Stop and ask
 
-Two questions are still open in issue #9. When a commit leads to one of
-them, do not choose: stop that commit, and the commits that depend on it,
-and go on with the others.
-
-1. **The version the clients see.** `system/status` reports the pinned
-   version, and Bazarr, Prowlarr and Recyclarr branch on it. Whether the
-   pin may move to the target before the clients the maintainer runs
-   support it is not decided. How it holds the PR depends on the jump
-   (issue #9, section 6):
-   - **patch or minor:** a note in the PR body, under "Questions for the
-     maintainer": which clients read the version, and which version they
-     will see. It holds no row, keeps no draft and does not stop the
-     cursor: the PR is an ordinary one;
-   - **major:** a question. The PR stays a draft until the maintainer
-     answers it for that release.
-2. **Upstream changes to code Unarr shares between personalities.** A file
-   is shared when both personalities reach it. The path does not tell:
-   Radarr's own routes are under `routes/radarr/`, but Sonarr's
-   (`series.rs`, `series_writes.rs`, `episodes.rs`) sit at the top of
-   `routes/`, beside shared ones (`config.rs`, `system.rs`). What decides is
-   whether the other personality uses the file. Shared today, e.g.
-   `crates/unarr-api/src/mediainfo.rs`, `crates/unarr-api/src/routes/config.rs`,
-   the parser, the download clients, the notifications,
-   `crates/unarr-core/migrations/shared/`. Check with
-   `grep -rn <module> crates/` that the other personality uses it, and
-   whether the file already branches on `Personality` for that very thing
-   (say which in the question; it is not an answer by itself).
-   Check whether the other original has the change at its pin
-   (`make upstream-<other>` fetches its clone; then
-   `git -C .cache/upstream/<Other>.git grep -n <Name> v<other pin> -- src`).
-   When the commit you port would change what such a file does, or
-   answers, for the other personality too (a field added to a shared
-   answer counts), and the other original does not have the change, ask.
-   Whether the shared piece takes the personality as a parameter in this
-   PR, or the change waits until the other original has it, is the
-   maintainer's choice.
-
-How to ask:
+Only for a case that neither issue #9 nor this file decides. The version
+the clients see (section 8, check 8) and changes to shared code (section
+4) are decided: they are never asked. When a commit leads to such a case,
+do not choose: stop that commit, and the commits that depend on it, and
+go on with the others.
 
 1. In the PR body, under "Questions for the maintainer": the upstream
-   commits, the Unarr files, what each option would mean here, and what
-   waits on the answer. No recommendation is needed; if you give one, say
-   it is only that.
+   commits, the Unarr files, why neither the issue nor this file decides
+   the case, what each option would mean here, and what waits on the
+   answer. No recommendation is needed; if you give one, say it is only
+   that.
 2. The rows of those commits read **asked** in the table; they are not in
    the log until decided.
-3. Leave the PR a draft while a row is **asked**, or while a major waits
-   on the clients' versions. The cursor cannot move while a row is
-   **asked**. The note on the clients' versions of a patch or minor
-   (question 1) is not a question in this sense: it holds nothing.
+3. The PR stays a draft while a row is **asked**, and the cursor cannot
+   move.
 
 ## 8. Checks before you call it ready
 
@@ -445,12 +490,40 @@ All of these, on the branch, and their results in the PR:
    it goes to "Left to check by hand" (fixed rule 3).
 6. Every item of the summary's "Left to check by hand" (the Recyclarr
    exchange recorded again, the Servarr services' answers refreshed, the
-   clients' versions, the prose that names the old release): do the ones
+   clients' versions, which are check 8, the prose that names the old
+   release): do the ones
    that need neither the original nor a host outside the machine (the
    prose: `tests/vectors/README.md`, `tests/fixtures/<app>/README.md`,
    `tests/fixtures/recyclarr/README.md`), and list the rest in the PR.
 7. `docs/originals-comparison.md` is not yours: a job of its own in the
    workflow measures and commits it.
+8. **The clients' version.** `system/status` reports the pinned version,
+   and Bazarr, Prowlarr and Recyclarr branch on it (Prowlarr also reads
+   the `X-Application-Version` header). By the jump:
+   - **patch or minor:** a note in the PR body (section 7): which clients
+     read the version, and which version they will see. It holds nothing:
+     no row, no draft, not the cursor;
+   - **major:** both of these, for the new pin, written in the PR body;
+     until both hold, the PR stays a draft and says which does not, and
+     why:
+     1. the replays of check 4 pass against Unarr;
+     2. the source of each client has been read where it tells the
+        versions apart. Read each client's newest release and name it in
+        the PR. When it is newer than the release its replay was written
+        from (`scripts/prowlarr-replay.py` and
+        `tests/fixtures/recyclarr/README.md` name theirs;
+        `scripts/bazarr-replay.py` names none), say so: the replay may be
+        behind the client too. The repositories are `morpheus65535/bazarr`, `Prowlarr/Prowlarr` and
+        `recyclarr/recyclarr` on GitHub; clone each at the release's tag
+        into `.cache/clients/<client>` (`git clone --depth 1 --branch <tag>
+        https://github.com/<owner>/<repo> .cache/clients/<client>`), read it
+        as data (fixed rule 1), and never build or run it. Start where
+        it requests `system/status` (the replays' docstrings name the
+        files: `bazarr/<app>/`, `src/NzbDrone.Core/Applications/<App>`)
+        and follow the version:
+        where it is parsed, compared with a minimum, or picks a request or
+        a field. Write, per client: the release read, the files and lines,
+        what the new major does at each, and whether the client handles it.
 
 ## 9. The end
 
@@ -462,6 +535,9 @@ and the checks of section 8 pass:
    subject `Move the <App> cursor to <target>`. Run `make check` once more:
    now all green.
 3. Push, update the PR body, and mark the PR ready for review, unless a
-   row is **asked** or it is a `major` waiting on the clients' versions. A
-   patch or minor is not held by its note on the clients' versions.
+   row is **asked**, it is a `major` whose clients' check (section 8,
+   check 8) does not hold, or the maintainer wrote in issue #9 that this
+   PR stays a draft until something else (the Radarr trial waits on the
+   homelab run of #10): then leave it a draft and say why in the body. A
+   patch or minor is not held by its note on the clients' version.
 4. Stop there. Review findings come back as comments; you never merge.
