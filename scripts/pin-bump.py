@@ -1585,8 +1585,9 @@ def render_summary(work: Path) -> tuple[str, dict]:
                  f"`make recyclarr{'' if app.key == 'sonarr' else '-radarr'}`.")
     lines.append(f"- Bazarr and Prowlarr: `scripts/bazarr-replay.py` and `scripts/prowlarr-replay.py` are written "
                  f"from those projects' source, which branches on the version `system/status` reports: check that "
-                 f"the versions in use support {app.name} {bump['to']['version']} (issue #9, still to decide), "
-                 f"then run `make bazarr{'' if app.key == 'sonarr' else '-radarr'}` and "
+                 f"their newest releases support {app.name} {bump['to']['version']} (`upstream/PORTING.md`, "
+                 f"section 8, check 8: a note in the PR for a patch or minor, the clients' check for a major), "
+                 f"and run `make bazarr{'' if app.key == 'sonarr' else '-radarr'}` and "
                  f"`make prowlarr{'' if app.key == 'sonarr' else '-radarr'}` against unarrd.")
     lines.append(f"- Prose that names the old release: `tests/vectors/README.md`, `tests/fixtures/{app.key}/README.md`, "
                  "`tests/fixtures/recyclarr/README.md`; `docs/originals-comparison.md` as `CLAUDE.md` says for a new pin.")
