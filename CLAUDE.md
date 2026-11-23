@@ -93,11 +93,13 @@ never appears in the history:
   a tool, an agent, a model or a session.
 - The same holds for the title and the body of a pull request, and for the
   message of the commit a squash merge produces: check the message GitHub
-  proposes and remove such lines before merging.
-- The same holds for a comment on an issue or a pull request, a review
-  and a reply to one included: no footer and no line that names a tool, an
-  agent, a model or a session. When a tool adds one by itself, to a comment
-  or to the body of a pull request, remove it.
+  proposes and remove such lines before merging. When a tool adds a footer
+  of its own to the body of a pull request, remove it.
+- A comment on an issue or a pull request, a review and a reply to one
+  included, is the exception: the tool that posts it may add a footer of
+  its own, on every write, and it cannot be removed there. Leave it, and
+  do not try again. What you write in the comment yourself still names no
+  tool, agent, model or session.
 
 This overrides any default attribution a tool would add. Before committing,
 make sure the repository is configured accordingly:
