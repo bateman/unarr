@@ -1230,16 +1230,12 @@ async fn radarr_answers_outside_the_body_as_measured() {
     let app = app_for(Personality::Radarr, "");
     let key = [("X-Api-Key", KEY)];
 
-    // An id that names nothing: the framework's problem details.
+    // An id that names nothing: Radarr 7's `TypedResults.NotFound()`, a
+    // 404 with no body (Radarr 6 answered the framework's problem details).
     let (status, headers, body) = ask(&app, "GET", "/api/v3/movie/999999", &key, "").await;
     assert_eq!(status, StatusCode::NOT_FOUND);
-    assert_eq!(
-        header(&headers, "content-type"),
-        Some("application/problem+json; charset=utf-8")
-    );
-    let problem: serde_json::Value = serde_json::from_slice(&body).unwrap();
-    assert_eq!(problem["status"], 404);
-    assert_eq!(problem["title"], "Not Found");
+    assert_eq!(header(&headers, "content-type"), None);
+    assert!(body.is_empty());
     assert_eq!(
         header(&headers, "x-application-version"),
         Some(unarr_core::pin::RADARR.version)
@@ -2125,4 +2121,46 @@ async fn backups_and_failures_are_never_kept() {
     assert_eq!(status, StatusCode::CONFLICT);
     assert_eq!(header(&headers, "cache-control"), Some("no-cache,no-store"));
     assert_eq!(header(&headers, "last-modified"), None);
+}
+
+/// Radarr 7 (`TypedResults`): a missing backup is an empty 404, and an
+/// upload that is not a zip a 400 with `error`; Sonarr, at its pin, throws
+/// (`{"message": "NotFound"}`, and a 415 with `message`).
+#[tokio::test]
+async fn backup_errors_follow_each_original() {
+    let upload = "--XB\r\nContent-Disposition: form-data; name=\"restore\"; filename=\"backup.txt\"\r\n\
+                  Content-Type: text/plain\r\n\r\nnot a zip\r\n--XB--\r\n";
+    let form = [
+        ("X-Api-Key", KEY),
+        ("Content-Type", "multipart/form-data; boundary=XB"),
+    ];
+    let key = [("X-Api-Key", KEY)];
+    for (personality, missing, status, field) in [
+        (Personality::Radarr, "", StatusCode::BAD_REQUEST, "error"),
+        (
+            Personality::Sonarr,
+            r#"{"message":"NotFound"}"#,
+            StatusCode::UNSUPPORTED_MEDIA_TYPE,
+            "message",
+        ),
+    ] {
+        let app = app_edited(personality, "", |_| {});
+        let (got, _, body) = ask(&app, "DELETE", "/api/v3/system/backup/12345", &key, "").await;
+        assert_eq!(got, StatusCode::NOT_FOUND, "{personality:?}");
+        assert_eq!(String::from_utf8_lossy(&body), missing, "{personality:?}");
+        let (got, _, body) = ask(
+            &app,
+            "POST",
+            "/api/v3/system/backup/restore/upload",
+            &form,
+            upload,
+        )
+        .await;
+        assert_eq!(got, status, "{personality:?}");
+        let body: serde_json::Value = serde_json::from_slice(&body).unwrap();
+        assert_eq!(
+            body[field], "Invalid extension, must be one of: .zip",
+            "{personality:?}"
+        );
+    }
 }

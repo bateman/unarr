@@ -162,7 +162,7 @@ pub fn api_router() -> Router<AppState> {
         )
         .route(
             "/customformat/bulk",
-            put(crate::routes::settings_writes::custom_format_bulk_update)
+            put(providers::custom_format_bulk_update)
                 .delete(crate::routes::settings_writes::custom_format_bulk_delete),
         )
         .route(
@@ -186,7 +186,7 @@ pub fn api_router() -> Router<AppState> {
         .route("/indexer/action/{name}", post(indexer_writes::action))
         .route(
             "/indexer/bulk",
-            put(indexer_writes::bulk_update).delete(indexer_writes::bulk_delete),
+            put(providers::indexer_bulk_update).delete(indexer_writes::bulk_delete),
         )
         .route(
             "/indexer/{id}",
@@ -210,7 +210,7 @@ pub fn api_router() -> Router<AppState> {
         )
         .route(
             "/downloadclient/bulk",
-            put(downloadclient_writes::bulk_update).delete(downloadclient_writes::bulk_delete),
+            put(providers::download_client_bulk_update).delete(downloadclient_writes::bulk_delete),
         )
         .route(
             "/downloadclient/{id}",
@@ -223,7 +223,7 @@ pub fn api_router() -> Router<AppState> {
             get(shared_providers::notifications).post(notification_writes::create),
         )
         .route("/notification/schema", get(shared_providers::notification_schema))
-        .route("/notification/test", post(notification_writes::test))
+        .route("/notification/test", post(providers::notification_test))
         .route("/notification/testall", post(notification_writes::test_all))
         .route("/notification/action/{name}", post(notification_writes::action))
         // `NotificationController` takes the bulk actions off its routes
@@ -243,12 +243,12 @@ pub fn api_router() -> Router<AppState> {
             get(shared_providers::import_lists).post(importlist_writes::create),
         )
         .route("/importlist/schema", get(shared_providers::import_list_schema))
-        .route("/importlist/test", post(importlist_writes::test))
+        .route("/importlist/test", post(providers::import_list_test))
         .route("/importlist/testall", post(importlist_writes::test_all))
         .route("/importlist/action/{name}", post(importlist_writes::action))
         .route(
             "/importlist/bulk",
-            put(importlist_writes::bulk_update).delete(importlist_writes::bulk_delete),
+            put(providers::import_list_bulk_update).delete(importlist_writes::bulk_delete),
         )
         .route(
             "/importlist/{id}",
@@ -258,7 +258,7 @@ pub fn api_router() -> Router<AppState> {
         )
         .route("/metadata", get(shared_providers::metadata_list))
         .route("/metadata/schema", get(shared_providers::metadata_schema))
-        .route("/metadata/test", post(crate::routes::metadata_writes::test))
+        .route("/metadata/test", post(providers::metadata_test))
         .route("/metadata/testall", post(shared_providers::metadata_test_all))
         .route(
             "/metadata/{id}",
@@ -308,7 +308,7 @@ pub fn api_router() -> Router<AppState> {
         .route(
             "/remotepathmapping/{id}",
             get(shared_providers::remote_path_mapping)
-                .put(crate::routes::settings_writes::remote_path_mapping_update)
+                .put(providers::remote_path_mapping_update)
                 .delete(crate::routes::settings_writes::remote_path_mapping_delete),
         )
         .route(

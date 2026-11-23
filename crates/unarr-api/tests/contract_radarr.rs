@@ -801,23 +801,15 @@ async fn radarr_golden_responses_match() {
         assert_eq!(asked, expected, "the requests to the mock indexers");
     }
 
-    // Outside the goldens' bodies: a test that passes answers the string
-    // `{}`, as plain text, or as a JSON string to a client that asks for
-    // JSON (Prowlarr). Probed on the real Radarr; the recorder asks for
-    // neither and decodes both to the same golden.
+    // Outside the goldens' bodies: a test that passes answers Radarr 7's
+    // `TypedResults.NoContent()`, whatever the client accepts, with the
+    // version header Prowlarr reads (Radarr 6 answered the string `{}`).
     if only.is_empty() {
         let test = goldens
             .iter()
             .find(|g| g.name == "indexer-test")
             .expect("indexer-test");
-        for (accept, content_type, text) in [
-            (None, "text/plain; charset=utf-8", "{}"),
-            (
-                Some("application/json"),
-                "application/json; charset=utf-8",
-                "\"{}\"",
-            ),
-        ] {
+        for accept in [None, Some("application/json"), Some("text/plain")] {
             let mut request = Request::builder()
                 .method("POST")
                 .uri("/api/v3/indexer/test")
@@ -828,10 +820,17 @@ async fn radarr_golden_responses_match() {
             }
             let body = Body::from(test.request_body.clone().expect("a body"));
             let response = app.clone().oneshot(request.body(body).unwrap()).await.unwrap();
-            assert_eq!(response.status(), StatusCode::OK);
-            assert_eq!(response.headers()["content-type"], content_type);
+            assert_eq!(response.status(), StatusCode::NO_CONTENT, "Accept: {accept:?}");
+            assert!(
+                response.headers().get("content-type").is_none(),
+                "Accept: {accept:?}"
+            );
+            assert!(
+                response.headers().contains_key("x-application-version"),
+                "Prowlarr reads it"
+            );
             let bytes = response.into_body().collect().await.unwrap().to_bytes();
-            assert_eq!(bytes, text.as_bytes(), "Accept: {accept:?}");
+            assert!(bytes.is_empty(), "Accept: {accept:?}");
         }
     }
 

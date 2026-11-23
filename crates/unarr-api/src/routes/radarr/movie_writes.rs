@@ -433,6 +433,12 @@ pub async fn add(State(state): State<AppState>, Json(body): Json<Value>) -> ApiR
 
 // --- editing, moving and deleting
 
+/// `TypedResults.Ok`: what Radarr 7 answers where Radarr 6 said
+/// `Accepted` (a bulk update).
+fn ok(body: Value) -> Response {
+    (StatusCode::OK, Json(body)).into_response()
+}
+
 fn accepted(body: Value) -> Response {
     (StatusCode::ACCEPTED, Json(body)).into_response()
 }
@@ -610,7 +616,7 @@ pub async fn editor_update(State(state): State<AppState>, Json(body): Json<Value
             resource
         })
         .collect();
-    Ok(accepted(json!(resources)))
+    Ok(ok(json!(resources)))
 }
 
 /// `DELETE /movie/editor`.

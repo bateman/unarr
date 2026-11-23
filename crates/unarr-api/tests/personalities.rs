@@ -168,10 +168,11 @@ async fn each_personality_serves_its_own_routes_and_strings() {
         assert!(body.is_empty(), "{uri}: {body}");
     }
 
-    // A cover that is not on disk is a 404 naming each runtime's document.
+    // A cover that is not on disk: Radarr 7's empty 404, Sonarr's problem
+    // details naming its runtime's document.
     let (status, body) = get(&radarr, "/api/v3/mediacover/6/poster.jpg").await;
     assert_eq!(status, StatusCode::NOT_FOUND);
-    assert!(body.contains("rfc9110"), "{body}");
+    assert!(body.is_empty(), "{body}");
     let (status, body) = get(&sonarr, "/api/v3/mediacover/1/poster.jpg").await;
     assert_eq!(status, StatusCode::NOT_FOUND);
     assert!(body.contains("rfc7231"), "{body}");
