@@ -43,6 +43,9 @@ pub enum Failure {
     DestinationExists(String),
     SameFile(String),
     RecycleBin,
+    /// `UnauthorizedAccessException` (Radarr 7): the file or a folder could
+    /// not be written for want of permissions.
+    PermissionDenied(String),
     Other(String),
 }
 
@@ -53,9 +56,20 @@ impl Failure {
             Failure::RootFolderMissing(m)
             | Failure::Other(m)
             | Failure::DestinationExists(m)
+            | Failure::PermissionDenied(m)
             | Failure::SameFile(m) => m.clone(),
             other => other.message().to_string(),
         }
+    }
+
+    /// The errors of the import's result: the message, and for a failure
+    /// of permissions the error itself (Radarr 7).
+    pub fn errors(&self) -> Vec<String> {
+        let mut errors = vec![self.message().to_string()];
+        if let Failure::PermissionDenied(detail) = self {
+            errors.push(detail.clone());
+        }
+        errors
     }
 
     pub fn message(&self) -> &'static str {
@@ -63,6 +77,7 @@ impl Failure {
             Failure::RootFolderMissing(_) => "Failed to import movie, Root folder missing.",
             Failure::DestinationExists(_) => "Failed to import movie, Destination already exists.",
             Failure::RecycleBin => "Failed to import movie, unable to move existing file to the Recycle Bin.",
+            Failure::PermissionDenied(_) => "Failed to import movie due to permission issues.",
             Failure::Other(_) | Failure::SameFile(_) => "Failed to import movie",
         }
     }
@@ -75,6 +90,9 @@ impl From<TransferError> for Failure {
             TransferError::SameFile(p) => Failure::SameFile(p),
             TransferError::RootFolderMissing(m) => Failure::RootFolderMissing(m),
             TransferError::RecycleBin { .. } => Failure::RecycleBin,
+            TransferError::Io(e) if e.kind() == std::io::ErrorKind::PermissionDenied => {
+                Failure::PermissionDenied(e.to_string())
+            }
             other => Failure::Other(other.to_string()),
         }
     }
@@ -82,6 +100,12 @@ impl From<TransferError> for Failure {
 
 impl From<anyhow::Error> for Failure {
     fn from(e: anyhow::Error) -> Failure {
+        let denied = e
+            .chain()
+            .any(|c| c.downcast_ref::<std::io::Error>().is_some_and(|io| io.kind() == std::io::ErrorKind::PermissionDenied));
+        if denied {
+            return Failure::PermissionDenied(format!("{e:#}"));
+        }
         Failure::Other(format!("{e:#}"))
     }
 }
@@ -545,7 +569,7 @@ pub fn import(
             Err(failure) => {
                 tracing::warn!("Couldn't import movie {}: {}", local.path, failure.detail());
                 match &failure {
-                    Failure::RootFolderMissing(_) | Failure::RecycleBin => {
+                    Failure::RootFolderMissing(_) | Failure::RecycleBin | Failure::PermissionDenied(_) => {
                         imported
                             .events
                             .push(MovieImportEvent::ImportFailed(Box::new(MovieImportFailed {
@@ -564,10 +588,7 @@ pub fn import(
                     _ => {}
                 }
                 decision.local_movie = Some(local);
-                imported.results.push(MovieImportResult::new(
-                    decision,
-                    vec![failure.message().to_string()],
-                ));
+                imported.results.push(MovieImportResult::new(decision, failure.errors()));
             }
         }
     }
@@ -850,5 +871,25 @@ mod tests {
             .iter()
             .any(|e| matches!(e, MovieImportEvent::ImportFailed(_))));
         assert!(lib.files().is_empty());
+    }
+
+    /// Radarr 7: a failure for want of permissions has a message of its
+    /// own, and the result carries the error after it.
+    #[test]
+    fn a_permission_failure_says_so_and_gives_the_error() {
+        let denied = || std::io::Error::from(std::io::ErrorKind::PermissionDenied);
+        let failure = Failure::from(TransferError::Io(denied()));
+        assert!(matches!(failure, Failure::PermissionDenied(_)), "{failure:?}");
+        assert_eq!(
+            failure.errors(),
+            vec![
+                "Failed to import movie due to permission issues.".to_string(),
+                denied().to_string()
+            ]
+        );
+        let failure = Failure::from(anyhow::Error::new(denied()).context("creating the movie's folder"));
+        assert!(matches!(failure, Failure::PermissionDenied(_)), "{failure:?}");
+        let other = Failure::from(TransferError::Io(std::io::Error::other("disk full")));
+        assert_eq!(other.errors(), vec!["Failed to import movie".to_string()]);
     }
 }
