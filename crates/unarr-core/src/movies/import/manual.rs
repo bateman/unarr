@@ -199,11 +199,12 @@ fn movie_for_name(lookup: &dyn MovieLookup, title: &str) -> Result<Option<Movie>
     }
 }
 
-/// `ParseCustomFormat(LocalMovie)` for an item. A file nothing was read
-/// from has no languages at all, which no language condition, negated or
-/// not, is satisfied by.
-fn item_formats(catalog: &MovieCatalog, local: &LocalMovie, read: bool) -> Vec<CustomFormat> {
-    let mut formats = decide::local_formats(catalog, local);
+/// `ParseMovieCustomFormats(LocalMovie)` for an item, under the name the
+/// import would give the file (`renamed`). A file nothing was read from
+/// has no languages at all, which no language condition, negated or not,
+/// is satisfied by.
+fn item_formats(catalog: &MovieCatalog, local: &LocalMovie, read: bool, renamed: &str) -> Vec<CustomFormat> {
+    let mut formats = decide::local_formats(catalog, local, renamed);
     if !read {
         formats.retain(|f| !has_language_condition(f));
     }
@@ -245,7 +246,14 @@ fn map_decision(
     item.rejections = decision.rejections;
     item.indexer_flags = local.indexer_flags;
     if local.movie.is_some() {
-        item.custom_formats = item_formats(&env.catalog, &local, read);
+        // The name the decision worked its formats out from; a file
+        // rejected before that has its name built here, without the
+        // movie's translations, which only a translated title token reads.
+        let renamed = local
+            .file_name_used_for_custom_format_calculation
+            .clone()
+            .unwrap_or_else(|| decide::renamed_file_name(env, &[], &local));
+        item.custom_formats = item_formats(&env.catalog, &local, read, &renamed);
         item.movie = local.movie;
     }
     item
@@ -666,7 +674,10 @@ pub fn reprocess_item(
         indexer_flags: req.indexer_flags,
         ..Default::default()
     };
-    decide::score_formats(&env.catalog, &mut local);
+    let metadata_id = movie.metadata.id;
+    let translations = db.call_blocking(move |conn| store::translation_titles(conn, metadata_id))?;
+    let renamed = decide::renamed_file_name(env, &translations, &local);
+    decide::score_formats(&env.catalog, &mut local, &renamed);
     let media_info = (!existing_file || env.config.enable_media_info)
         .then(|| {
             Probes::probe_all_for(std::slice::from_ref(&req.path), crate::Personality::Radarr).get(&req.path)
@@ -772,7 +783,7 @@ pub fn execute(
             })
             .flatten();
         let item = tracked.as_ref().map(|t| t.item.clone());
-        let (file2, catalog, item2) = (file.clone(), env.catalog.clone(), item.clone());
+        let (file2, env2, item2) = (file.clone(), env.clone(), item.clone());
         let local = db.call_blocking(move |conn| {
             if let Err(e) = aggregate::augment(conn, &mut local, item2.as_ref(), media_info) {
                 return Ok(Err(e.0));
@@ -792,7 +803,7 @@ pub fn execute(
             {
                 local.languages = file2.languages;
             }
-            decide::score_formats(&catalog, &mut local);
+            decide::score_formats_renamed(conn, &env2, &mut local)?;
             Ok(Ok(local))
         })?;
         let local = local.map_err(ManualImportError::Augmenting)?;
@@ -1403,7 +1414,7 @@ mod tests {
             ..Default::default()
         };
         let names = |read: bool| -> Vec<String> {
-            item_formats(&catalog, &local, read)
+            item_formats(&catalog, &local, read, &format!("{NAME}.mkv"))
                 .into_iter()
                 .map(|f| f.name)
                 .collect()

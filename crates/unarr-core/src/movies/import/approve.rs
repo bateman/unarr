@@ -98,6 +98,20 @@ pub fn build_file_path(
     extension: &str,
     formats: &[CustomFormat],
 ) -> Result<String, naming::MovieNamingError> {
+    let name = build_file_name(env, movie, translations, file, current_path, formats)?;
+    Ok(join(&movie.path, &format!("{name}{extension}")))
+}
+
+/// `BuildFileName`: the name of `file` under the naming settings, without
+/// folder nor extension; `current_path` is the file as it is now.
+pub fn build_file_name(
+    env: &MovieEnvironment,
+    movie: &Movie,
+    translations: &[(i64, String)],
+    file: &MovieFile,
+    current_path: &str,
+    formats: &[CustomFormat],
+) -> Result<String, naming::MovieNamingError> {
     // `GetSceneOrFileName`: the scene name, else the file's own name.
     let scene_or_file_name = file
         .scene_name
@@ -127,8 +141,7 @@ pub fn build_file_path(
         metadata: &movie.metadata,
         translations,
     };
-    let name = naming::build_file_name(&naming_movie, &naming_file, &env.naming, &naming_formats(formats))?;
-    Ok(join(&movie.path, &format!("{name}{extension}")))
+    naming::build_file_name(&naming_movie, &naming_file, &env.naming, &naming_formats(formats))
 }
 
 /// `EnsureMovieFolder`: the movie's folder and the file's created as
@@ -315,46 +328,15 @@ fn upgrade(
     Ok(old_files)
 }
 
-/// `GetOriginalFilePath`: the file's path relative to the download's
-/// folder, to the folder its release is named after, or to its
-/// grandparent.
-fn original_file_path(item: Option<&DownloadClientItem>, local: &LocalMovie) -> String {
-    let path = local.path.as_str();
-    if let Some(output) = item
+/// The file's path relative to the download's folder, when the download
+/// holds it; `None` otherwise, the local movie's own path standing.
+fn path_in_download(item: Option<&DownloadClientItem>, local: &LocalMovie) -> Option<String> {
+    let output = item
         .and_then(|i| i.output_path.as_deref())
-        .filter(|o| !o.is_empty())
-    {
-        // `OutputPath.Directory`: the parent of what the client reports.
-        let output_dir = parent_path(output.trim_end_matches('/'))
-            .unwrap_or("")
-            .to_string();
-        if is_parent_path(&output_dir, path) {
-            return relative_path(&output_dir, path).to_string();
-        }
-    }
-    if let Some(folder_info) = &local.folder_movie_info {
-        if let Some(folder) = ancestor_path(path, &folder_info.original_title) {
-            if let Some(parent) = parent_path(folder) {
-                return relative_path(parent, path).to_string();
-            }
-        }
-    }
-    if let Some(grandparent) = parent_path(path).and_then(parent_path) {
-        return relative_path(grandparent, path).to_string();
-    }
-    file_name(path).to_string()
-}
-
-/// `GetAncestorPath`: the nearest folder above `path` named `folder_name`.
-fn ancestor_path<'a>(path: &'a str, folder_name: &str) -> Option<&'a str> {
-    let mut current = parent_path(path);
-    while let Some(folder) = current {
-        if file_name(folder).eq_ignore_ascii_case(folder_name) {
-            return Some(folder);
-        }
-        current = parent_path(folder);
-    }
-    None
+        .filter(|o| !o.is_empty())?;
+    // `OutputPath.Directory`: the parent of what the client reports.
+    let output_dir = parent_path(output.trim_end_matches('/')).unwrap_or("");
+    is_parent_path(output_dir, &local.path).then(|| relative_path(output_dir, &local.path).to_string())
 }
 
 /// One approved decision imported.
@@ -371,38 +353,25 @@ fn import_one(
     events: &mut MovieEvents,
 ) -> Result<(MovieFile, Vec<DeletedMovieFile>), Failure> {
     let movie = local.movie_ref().clone();
-    let mut file = MovieFile {
-        id: 0,
-        movie_id: movie.id,
-        relative_path: String::new(),
-        original_file_path: None,
-        size: std::fs::metadata(&local.path)
-            .map(|m| m.len() as i64)
-            .unwrap_or(0),
-        date_added: now,
-        scene_name: None,
-        release_group: local.release_group.clone(),
-        edition: local.edition.clone(),
-        quality: local.quality,
-        languages: local.languages.clone(),
-        media_info: local.media_info.as_ref().map(|m| m.model.clone()),
-        indexer_flags: 0,
-    };
-    match item.map(|i| i.download_id.trim()).filter(|d| !d.is_empty()) {
-        Some(download_id) => {
-            let id = download_id.to_string();
-            let flags = db.call_blocking(move |conn| {
-                Ok(store::history_by_download_id(conn, &id)?
-                    .into_iter()
-                    .filter(|h| h.event_type == MovieHistoryEvent::Grabbed)
-                    .max_by_key(|h| h.date)
-                    .and_then(|h| h.data["indexerFlags"].as_str().and_then(parse_indexer_flags)))
-            })?;
-            if let Some(flags) = flags {
-                file.indexer_flags = flags;
-            }
+    // Radarr 7 starts from the local movie's own file: its scene name, its
+    // original path and its indexer flags, whatever the kind of import.
+    let mut file = local.to_movie_file(now);
+    file.size = std::fs::metadata(&local.path)
+        .map(|m| m.len() as i64)
+        .unwrap_or(0);
+    // With a download id, the flags of its grab, when it has any.
+    if let Some(download_id) = item.map(|i| i.download_id.trim()).filter(|d| !d.is_empty()) {
+        let id = download_id.to_string();
+        let flags = db.call_blocking(move |conn| {
+            Ok(store::history_by_download_id(conn, &id)?
+                .into_iter()
+                .filter(|h| h.event_type == MovieHistoryEvent::Grabbed)
+                .max_by_key(|h| h.date)
+                .and_then(|h| h.data["indexerFlags"].as_str().and_then(parse_indexer_flags)))
+        })?;
+        if let Some(flags) = flags {
+            file.indexer_flags = flags;
         }
-        None => file.indexer_flags = local.indexer_flags,
     }
     let copy_only = match mode {
         ImportMode::Auto => item.is_some_and(|i| !i.can_move_files),
@@ -413,8 +382,9 @@ fn import_one(
     let translations = db.call_blocking(move |conn| store::translation_titles(conn, metadata_id))?;
     let mut old_files = Vec::new();
     if new_download {
-        file.scene_name = local.scene_name.clone();
-        file.original_file_path = Some(original_file_path(item, local));
+        if let Some(in_download) = path_in_download(item, local) {
+            file.original_file_path = Some(in_download);
+        }
         old_files = upgrade(
             db,
             env,
